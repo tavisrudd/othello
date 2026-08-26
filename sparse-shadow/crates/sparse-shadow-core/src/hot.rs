@@ -469,7 +469,7 @@ mod tests {
     static ALLOCATION_TEST_LOCK: Mutex<()> = Mutex::new(());
 
     #[test]
-    fn paper_i_ii_iv_and_v_search_loops_allocate_nothing() {
+    fn paper_i_through_v_search_loops_allocate_nothing() {
         let _guard = ALLOCATION_TEST_LOCK.lock().expect("allocation test lock");
         let input: InputArtifact = serde_json::from_str(include_str!(
             "../testdata/paper-i-icosahedral-orbitals.json"
@@ -506,8 +506,35 @@ mod tests {
         assert_eq!(search.stats.arena_grows, 0);
         assert_eq!(search.equal_permutations.len(), 120);
         paper_ii_search_loop_allocates_nothing();
+        paper_iii_search_loop_allocates_nothing();
         paper_iv_search_loop_allocates_nothing();
         paper_v_search_loop_allocates_nothing();
+    }
+
+    fn paper_iii_search_loop_allocates_nothing() {
+        let path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../papers/clebsch-passages/verification/sparse_shadow_export.json");
+        if !path.exists() {
+            return;
+        }
+        let input: InputArtifact =
+            serde_json::from_slice(&std::fs::read(path).expect("read Paper-III export"))
+                .expect("parse Paper-III export");
+        let crate::ProfileInput::PaperIiiFourShadow(paper) = input.profile else {
+            unreachable!()
+        };
+        let mut search = crate::paper_iii::prepare(&paper).expect("Paper-III search prepares");
+        let region = Region::new(GLOBAL);
+        crate::paper_iii::run_prepared(&mut search);
+        let change = region.change();
+        assert_eq!(change.allocations, 0);
+        assert_eq!(change.reallocations, 0);
+        assert_eq!(change.deallocations, 0);
+        assert_eq!(crate::paper_iii::prepared_stats(&search).search_nodes, 720);
+        assert_eq!(
+            crate::paper_iii::prepared_stats(&search).canonical_leaves,
+            720
+        );
     }
 
     fn paper_ii_search_loop_allocates_nothing() {

@@ -52,6 +52,18 @@ fn paper_ii_encoding_has_frozen_shape() {
 }
 
 #[test]
+fn paper_iii_encoding_has_frozen_shape() {
+    let path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../../papers/clebsch-passages/verification/sparse_shadow_export.json");
+    let input: InputArtifact =
+        serde_json::from_slice(&std::fs::read(path).expect("read export")).expect("parse export");
+    let graph = encode_colored_incidence(&input).expect("Paper-III export encodes");
+    assert_eq!(graph.colors, vec![0; 6]);
+    assert!(graph.edges.is_empty());
+    assert_eq!(graph.original_vertex_nodes, (0..6).collect::<Vec<_>>());
+}
+
+#[test]
 fn paper_v_encoding_has_frozen_shape() {
     let path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(
         "../../../papers/chordal-conference-reconstruction/verification/evidence/sparse_shadow_export.json",

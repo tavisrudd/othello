@@ -14,18 +14,19 @@ schema is `sparse-shadow/v1`; the expanded canonical wrapper is
 `sparse-shadow-canonical/v2`, while its unchanged exhaustive proof is
 `sparse-shadow-certificate/v1`.
 
-Paper-I reconstruction output is `sparse-shadow-reconstruction/v2`; Paper IV
-uses `sparse-shadow-paper-iv-reconstruction/v1`. Their typed carriers contain,
-respectively, the six antipodal axes and the full 183-point/line projective
-plane with its conic, polarity, six elliptic relations, and 78 passant rows.
+Paper-I reconstruction output is `sparse-shadow-reconstruction/v2`; Papers II
+through V use paper-specific reconstruction-v1 artifacts. Their typed carriers
+retain the exact matching trade, rational twist and calibrated conference
+two-graph, marked projective plane, and chordal/conference return respectively.
 Automorphism, orbit, and point-stabilizer fields use raw input coordinates;
 `input_to_canonical` is the explicit bridge between the two bases.
 
-Paper I and Paper IV are enabled. Paper IV consumes the paper-owned
-`papers/q13-passant-code/verification/sparse_shadow_export.json`, proves the
-full automorphism group by exhaustive weighted-scheme refinement, and recovers
-the marked `PG(2,13)` model with residual `PGL2(13)` marking torsor. Papers II,
-III, and V remain explicitly gated; diagnostics name their required exports.
+All five paper adapters are enabled from their paper-owned exports. Paper III
+consumes `papers/clebsch-passages/verification/sparse_shadow_export.json`,
+exhausts the full six-label action, independently replays its canonical proof,
+and returns the rational twist, golden fibre algebra, conference switching
+class, and calibrated orientation. The separate `gated-*` fixtures remain
+disabled fail-closed schema examples.
 
 `fixtures/paper-i-golden-contract.json` freezes the enabled adapter's canonical
 identities, group and point-stabilizer summaries, vertex orbits, exhaustive

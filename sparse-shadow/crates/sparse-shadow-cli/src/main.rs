@@ -4,12 +4,12 @@ use clap::{Parser, Subcommand};
 use serde::{Deserialize, Serialize};
 use sparse_shadow_core::{
     CanonicalArtifact, CanonicalCertificate, EquivalenceCertificate, InputArtifact,
-    PaperIiReconstructionArtifact, PaperIvReconstructionArtifact, PaperVReconstructionArtifact,
-    ProfileInput, ReconstructionArtifact, ShadowError, canonicalize, compare, reconstruct,
-    reconstruct_paper_ii, reconstruct_paper_iv, reconstruct_paper_v, validate,
-    verify_canonical_artifact, verify_certificate, verify_equivalence,
-    verify_paper_ii_reconstruction, verify_paper_iv_reconstruction, verify_paper_v_reconstruction,
-    verify_reconstruction,
+    PaperIiReconstructionArtifact, PaperIiiReconstructionArtifact, PaperIvReconstructionArtifact,
+    PaperVReconstructionArtifact, ProfileInput, ReconstructionArtifact, ShadowError, canonicalize,
+    compare, reconstruct, reconstruct_paper_ii, reconstruct_paper_iii, reconstruct_paper_iv,
+    reconstruct_paper_v, validate, verify_canonical_artifact, verify_certificate,
+    verify_equivalence, verify_paper_ii_reconstruction, verify_paper_iii_reconstruction,
+    verify_paper_iv_reconstruction, verify_paper_v_reconstruction, verify_reconstruction,
 };
 use thiserror::Error;
 
@@ -73,6 +73,7 @@ enum CanonicalProof {
 enum ReconstructionProof {
     PaperIv(Box<PaperIvReconstructionArtifact>),
     PaperV(Box<PaperVReconstructionArtifact>),
+    PaperIii(Box<PaperIiiReconstructionArtifact>),
     PaperIi(Box<PaperIiReconstructionArtifact>),
     PaperI(Box<ReconstructionArtifact>),
 }
@@ -101,13 +102,16 @@ fn run() -> Result<(), CliError> {
                 ProfileInput::PaperIiTrade(_) => {
                     print_json(&reconstruct_paper_ii(&input)?)?;
                 }
+                ProfileInput::PaperIiiFourShadow(_) => {
+                    print_json(&reconstruct_paper_iii(&input)?)?;
+                }
                 ProfileInput::PaperIvMinimumWords(_) => {
                     print_json(&reconstruct_paper_iv(&input)?)?;
                 }
                 ProfileInput::PaperVChordalConference(_) => {
                     print_json(&reconstruct_paper_v(&input)?)?;
                 }
-                _ => print_json(&reconstruct(&input)?)?,
+                ProfileInput::PaperIOrientation(_) => print_json(&reconstruct(&input)?)?,
             }
         }
         Command::VerifyCertificate { input, certificate } => {
@@ -141,6 +145,9 @@ fn run() -> Result<(), CliError> {
                 }
                 ReconstructionProof::PaperIi(certificate) => {
                     print_json(&verify_paper_ii_reconstruction(&input, &certificate)?)?;
+                }
+                ReconstructionProof::PaperIii(certificate) => {
+                    print_json(&verify_paper_iii_reconstruction(&input, &certificate)?)?;
                 }
                 ReconstructionProof::PaperV(certificate) => {
                     print_json(&verify_paper_v_reconstruction(&input, &certificate)?)?;

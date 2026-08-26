@@ -60,7 +60,7 @@ impl BackendComparison {
     }
 }
 
-/// Encode an enabled Paper-I, Paper-II, or Paper-IV shadow as a colored incidence graph.
+/// Encode an enabled paper shadow as a colored incidence graph.
 ///
 /// Original vertices retain their typed data as color classes. Every relation
 /// or weighted-pair edge becomes a vertex in a relation-specific color class
@@ -78,6 +78,9 @@ pub fn encode_colored_incidence(
     validate(input)?;
     if let ProfileInput::PaperIiTrade(value) = &input.profile {
         return encode_paper_ii(value);
+    }
+    if let ProfileInput::PaperIiiFourShadow(value) = &input.profile {
+        return encode_paper_iii(value);
     }
     if let ProfileInput::PaperVChordalConference(value) = &input.profile {
         return encode_paper_v(value);
@@ -157,6 +160,27 @@ pub fn encode_colored_incidence(
     }
     edges.sort_unstable();
 
+    Ok(ColoredIncidenceGraph {
+        schema: BACKEND_GRAPH_SCHEMA_VERSION.into(),
+        colors,
+        edges,
+        original_vertex_nodes,
+    })
+}
+
+fn encode_paper_iii(value: &crate::GatedPaperIii) -> Result<ColoredIncidenceGraph, ShadowError> {
+    let original_vertex_nodes = (0_u32..6).collect::<Vec<_>>();
+    let mut colors = vec![0_u32; 6];
+    let mut edges = Vec::with_capacity(4 * value.aligned_four_sets.len());
+    for four_set in &value.aligned_four_sets {
+        let four_set_node = u32::try_from(colors.len())
+            .map_err(|_| ShadowError::Invalid("Paper-III encoding exceeds u32".into()))?;
+        colors.push(1);
+        for &vertex in four_set {
+            edges.push([vertex.min(four_set_node), vertex.max(four_set_node)]);
+        }
+    }
+    edges.sort_unstable();
     Ok(ColoredIncidenceGraph {
         schema: BACKEND_GRAPH_SCHEMA_VERSION.into(),
         colors,
@@ -351,6 +375,9 @@ fn authoritative_backend(native: &CanonicalArtifact) -> Result<&'static str, Sha
     match native.certificate.proof_system.as_str() {
         "paper-i-ir-exhaustion/v1" => Ok("native-paper-i-ir/v1"),
         "paper-ii-declared-action-exhaustion/v1" => Ok("native-paper-ii-declared-action/v1"),
+        "paper-iii-four-shadow-action-exhaustion/v1" => {
+            Ok("native-paper-iii-four-shadow-action/v1")
+        }
         "paper-iv-weighted-scheme-ir-exhaustion/v1" => Ok("native-paper-iv-weighted-scheme-ir/v1"),
         "paper-v-marked-conference-action-exhaustion/v1" => {
             Ok("native-paper-v-marked-conference-action/v1")

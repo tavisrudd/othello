@@ -11,13 +11,15 @@ Paper-I reconstruction uses `sparse-shadow-reconstruction/v2`. Paper II uses
 `sparse-shadow-paper-ii-reconstruction/v1`; Paper IV uses
 `sparse-shadow-paper-iv-reconstruction/v1` with a typed full-plane carrier.
 Paper V uses `sparse-shadow-paper-v-reconstruction/v1` with the marked
-chordal/conference carrier and its finite-field verification reduction.
+chordal/conference carrier and its finite-field verification reduction. Paper
+III uses `sparse-shadow-paper-iii-reconstruction/v1` with the rational twist,
+golden fibre, four-shadow, and calibrated conference two-graph.
 
 | adapter | observed shadow | action | recovered carrier | residual ambiguity | v1 state |
 |---|---|---|---|---|---|
 | `paper_i_orientation` | two five-valent orbital relations, antipodes, optional calibrated triangle | color-preserving vertex permutations preserving named relations | six-axis/conference carrier | free orientation `C2` unless calibrated | enabled |
 | `paper_ii_trade` | 22 perfect matchings split into two signed 11-element sheets, with cubic odd calibration | declared `PGL2(11)` endpoint action | the H3 matching carrier and oriented sheet pair | orientation `C2`, killed by the cubic calibration | enabled |
-| `paper_iii_four_shadow` | reduced branch sextic plus one rational fibre, and the marked family of aligned four-sets | marked-vertex action | rational quadratic twist and two-graph/conference signing | rational square-class before the fibre; complement/global-negation `C2` before triangle calibration | gated |
+| `paper_iii_four_shadow` | reduced branch sextic plus one rational fibre, and the marked family of aligned four-sets | full six-label action | rational quadratic twist and conference switching class | rational square-class before the fibre; complement/global-negation `C2` killed by triangle calibration | enabled |
 | `paper_iv_minimum_words` | weighted pair section of the 78-coordinate minimum-support hypergraph | coordinate action preserving pair multiplicities | incidence/code, elliptic scheme, `PG(2,13)`, conic, polarity | ordered-frame/field-labeling `PGL2(13)` torsor | enabled |
 | `paper_v_chordal_conference` | signed six-axis residue, an order-four outer lift, and selected chordal line | full six-axis relabeling action | singular quartic, twelve points, six-axis carrier, chordal/conference companions | outer-coset `C2`, killed by the selected line | enabled |
 
@@ -27,6 +29,11 @@ The four source-gate fixtures have exact value-level parse/serialize round trips
 Paper IV's separate paper-owned export is enabled and fully replayed.
 Paper II's separate paper-owned export is likewise enabled; its disabled fixture
 remains the fail-closed schema example.
+Paper III's separate paper-owned export is enabled and records that the
+conference example has an empty aligned family; four-shadow proportionality
+recovers its switching class and the calibrated triangle product fixes the
+complement orientation. Its disabled fixture likewise remains a fail-closed
+schema example.
 Paper V's paper-owned export additionally distinguishes the rational conference
 matrix from its exact `F11` cubic and singular-locus verification data.
 Vertices are numbered `0..n-1`; each named

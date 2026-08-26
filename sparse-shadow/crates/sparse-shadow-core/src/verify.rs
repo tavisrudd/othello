@@ -4,8 +4,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     ActionKind, AmbiguitySpec, BinaryRelation, BranchDecision, CanonicalCertificate,
-    DeclaredAction, GatedPaperIi, GatedPaperIv, InputArtifact, PaperIOrientation, ProfileInput,
-    RelationalShadow, ShadowError,
+    DeclaredAction, GatedPaperIi, GatedPaperIii, GatedPaperIv, InputArtifact, PaperIOrientation,
+    ProfileInput, RelationalShadow, ShadowError,
 };
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -96,7 +96,7 @@ pub fn validate(input: &InputArtifact) -> Result<VerificationReport, ShadowError
         }
         ProfileInput::PaperIiTrade(value) => checked_automorphisms = validate_paper_ii(value)?,
         ProfileInput::PaperIiiFourShadow(value) => {
-            validate_gate("paper_iii_four_shadow", &value.gate)?;
+            checked_automorphisms = validate_paper_iii(value)?;
         }
         ProfileInput::PaperIvMinimumWords(value) => {
             checked_automorphisms = validate_paper_iv(value)?;
@@ -134,6 +134,7 @@ pub fn verify_certificate(
     let recomputed = match certificate.proof_system.as_str() {
         "paper-i-ir-exhaustion/v1" => reference_canonicalize(input)?,
         "paper-ii-declared-action-exhaustion/v1" => reference_canonicalize_paper_ii(input)?,
+        "paper-iii-four-shadow-action-exhaustion/v1" => reference_canonicalize_paper_iii(input)?,
         "paper-iv-weighted-scheme-ir-exhaustion/v1" => reference_canonicalize_paper_iv(input)?,
         "paper-v-marked-conference-action-exhaustion/v1" => reference_canonicalize_paper_v(input)?,
         _ => {
@@ -297,6 +298,77 @@ fn reference_canonicalize_paper_iv(input: &InputArtifact) -> Result<ReferenceRes
         winning_trace: search.winning_trace,
         automorphisms: search.automorphisms,
         search_stats: search.search_stats,
+    })
+}
+
+fn reference_canonicalize_paper_iii(input: &InputArtifact) -> Result<ReferenceResult, ShadowError> {
+    validate(input)?;
+    let ProfileInput::PaperIiiFourShadow(value) = &input.profile else {
+        return Err(ShadowError::Certificate(
+            "Paper-III checker received another profile".into(),
+        ));
+    };
+    let mut permutation = vec![0, 1, 2, 3, 4, 5];
+    let mut best_key = None;
+    let mut best = Vec::new();
+    let mut equal = Vec::new();
+    loop {
+        let key = value
+            .aligned_four_sets
+            .iter()
+            .map(|four_set| {
+                let mut image = four_set.map(|vertex| {
+                    u32::try_from(permutation[vertex as usize]).expect("Paper-III image fits u32")
+                });
+                image.sort_unstable();
+                image
+            })
+            .collect::<BTreeSet<_>>();
+        match best_key.as_ref().map(|old| key.cmp(old)) {
+            None | Some(std::cmp::Ordering::Less) => {
+                best_key = Some(key);
+                best.clone_from(&permutation);
+                equal = vec![permutation.clone()];
+            }
+            Some(std::cmp::Ordering::Equal) => equal.push(permutation.clone()),
+            Some(std::cmp::Ordering::Greater) => {}
+        }
+        if !next_permutation(&mut permutation) {
+            break;
+        }
+    }
+    let input_to_canonical = best
+        .iter()
+        .map(|&image| u32::try_from(image).expect("Paper-III image fits u32"))
+        .collect::<Vec<_>>();
+    let mut automorphisms = equal
+        .iter()
+        .map(|candidate| {
+            let mut inverse = [0; 6];
+            for (old, &new) in candidate.iter().enumerate() {
+                inverse[new] = old;
+            }
+            best.iter()
+                .map(|&canonical| {
+                    u32::try_from(inverse[canonical]).expect("Paper-III image fits u32")
+                })
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
+    automorphisms.sort_unstable();
+    let canonical = crate::canonical::relabel_paper_iii(input, value, &input_to_canonical)?;
+    Ok(ReferenceResult {
+        canonical_json: serde_json::to_string(&canonical)?,
+        input_to_canonical,
+        winning_trace: Vec::new(),
+        automorphisms,
+        search_stats: crate::SearchStats {
+            search_nodes: 720,
+            canonical_leaves: 720,
+            refinement_rounds: 0,
+            max_depth: 0,
+            arena_grows: 0,
+        },
     })
 }
 
@@ -657,6 +729,107 @@ fn validate_gate(profile: &'static str, gate: &crate::FixtureGate) -> Result<(),
             format!("{}; required export: {}", gate.reason, gate.required_export)
         },
     })
+}
+
+fn validate_paper_iii(value: &GatedPaperIii) -> Result<usize, ShadowError> {
+    if !value.gate.enabled {
+        validate_gate("paper_iii_four_shadow", &value.gate)?;
+        unreachable!();
+    }
+    if value.gate.required_export
+        != "papers/clebsch-passages/verification/sparse_shadow_export.json"
+        || value.source.paper != "III"
+        || value.source.theorem
+            != "arithmetic descent, four-shadow recognition, and calibrated two-graph return"
+        || value.source.artifact
+            != "papers/clebsch-passages/verification/evidence/orientation_source.json"
+        || value.source.sha256 != "37c38ff37a9235f94a772eb473e0d6484420978670027e990ee93e89bbad4193"
+        || value.branch_sextic != "J_0=0"
+        || value.fibre_quadratic_algebra != "Q[t]/(t^2-t-1)"
+        || value.vertex_count != 6
+        || value.recovered_twist != "z^2=5J_0"
+        || value.recovered_two_graph
+            != "the order-six conference switching class recovered by four-shadow proportionality"
+        || !matches!(
+            value.twist_ambiguity,
+            AmbiguitySpec::HomogeneousFibre { .. }
+        )
+        || !matches!(value.complement_ambiguity, AmbiguitySpec::OrientationC2 {})
+        || value.calibrated_triangle_product != Some(-1)
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-III source or recovery contract".into(),
+        ));
+    }
+    let AmbiguitySpec::HomogeneousFibre {
+        numerator,
+        denominator,
+    } = &value.twist_ambiguity
+    else {
+        unreachable!()
+    };
+    if numerator != "Q^times" || denominator != "(Q^times)^2" {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-III homogeneous-fibre ambiguity".into(),
+        ));
+    }
+    let expected_point = [(4, 5), (-1, 5), (-1, 5), (-1, 5), (-1, 5)];
+    if value.rational_fibre_point.len() != expected_point.len()
+        || value.rational_fibre_point.iter().zip(expected_point).any(
+            |(actual, (numerator, denominator))| {
+                actual.numerator != numerator || actual.denominator != denominator
+            },
+        )
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-III normalized rational fibre point".into(),
+        ));
+    }
+    let mut four_sets = BTreeSet::new();
+    for four_set in &value.aligned_four_sets {
+        if four_set.windows(2).any(|pair| pair[0] >= pair[1])
+            || four_set.iter().any(|&vertex| vertex >= 6)
+            || !four_sets.insert(*four_set)
+        {
+            return Err(ShadowError::Invalid(
+                "Paper-III aligned four-sets are not normalized".into(),
+            ));
+        }
+    }
+    if !value.aligned_four_sets.is_empty() {
+        return Err(ShadowError::Invalid(
+            "the frozen Paper-III conference has an empty aligned family".into(),
+        ));
+    }
+    if value.minimality_collisions.len() != 1
+        || value.minimality_collisions[0].boundary != "six_vertices_aligned_family"
+        || value.minimality_collisions[0].common_restricted_shadow_blake3
+            != "c7bcc87f15491ddc26ab3eb04aaca0dc4b2a6961aa6d15f0e1a2b75d24718a87"
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-III six-point minimality collision".into(),
+        ));
+    }
+    let DeclaredAction::VertexPermutations { degree, generators } = &value.action else {
+        return Err(ShadowError::Invalid(
+            "Paper-III action must use vertex permutations".into(),
+        ));
+    };
+    if *degree != 6 || generators.is_empty() {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-III action degree".into(),
+        ));
+    }
+    for generator in generators {
+        validate_permutation(generator, 6)?;
+    }
+    let order = generated_permutation_group_order(generators, 6, 720)?;
+    if order != 720 {
+        return Err(ShadowError::Invalid(
+            "Paper-III generators do not generate S6".into(),
+        ));
+    }
+    Ok(order)
 }
 
 #[allow(clippy::too_many_lines)] // One linear exact-contract audit is easier to review atomically.
@@ -1151,6 +1324,22 @@ fn validate_paper_i_partition(relations: &[BinaryRelation], n: usize) -> Result<
 
 #[allow(clippy::too_many_lines)]
 fn verify_automorphism(input: &InputArtifact, permutation: &[u32]) -> Result<(), ShadowError> {
+    if let ProfileInput::PaperIiiFourShadow(value) = &input.profile {
+        validate_permutation(permutation, 6)
+            .map_err(|error| ShadowError::Certificate(error.to_string()))?;
+        let permutation = permutation
+            .iter()
+            .map(|&image| image as usize)
+            .collect::<Vec<_>>();
+        if crate::paper_iii::relabel_four_sets(&value.aligned_four_sets, &permutation)
+            != value.aligned_four_sets
+        {
+            return Err(ShadowError::Certificate(
+                "automorphism does not preserve the Paper-III aligned family".into(),
+            ));
+        }
+        return Ok(());
+    }
     if let ProfileInput::PaperVChordalConference(value) = &input.profile {
         validate_permutation(permutation, 6)
             .map_err(|error| ShadowError::Certificate(error.to_string()))?;

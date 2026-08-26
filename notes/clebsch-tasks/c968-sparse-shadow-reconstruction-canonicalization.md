@@ -2,7 +2,7 @@
 
 **Lane:** clebsch
 
-**Status:** active at one external source gate; Papers I, II, IV, and V canonicalization, reconstruction, independent replay, hot-layout, golden/backend gates green; Paper III remains gated; standalone Rust tool; no manuscript or Lean edits
+**Status:** all five paper adapters enabled; canonicalization, typed reconstruction, independent replay, CLI certificates, and allocation-free hot loops green; standalone Rust tool
 
 ## Goal
 
@@ -294,9 +294,7 @@ the canonical shadow to the exact symmetric-square GF(13) model, and emits all
 relabeling, idempotence, zero-allocation hot-loop, golden-output, and nauty
 2.9.3 gates are green; see
 `../2026-08-25-c968-paper-iv-sparse-shadow-export.md` and
-`../../sparse-shadow/docs/performance-paper-iv.md`. Papers III and V still
-require the complete paper-owned export named in their gated fixtures; nearby
-evidence JSON and trust manifests remain insufficient.
+`../../sparse-shadow/docs/performance-paper-iv.md`.
 
 ## 2026-08-25 Paper-II integration
 
@@ -309,9 +307,6 @@ the 660-element stabilizer, and cross-checks it with nauty 2.9.3. The hot orbit
 loop is allocation-free. See
 `../2026-08-25-c968-paper-ii-sparse-shadow-export.md` and
 `../../sparse-shadow/docs/performance-paper-ii.md`.
-
-Paper III still requires its complete paper-owned export. No unblocked C968
-implementation frontier remains until it freezes.
 
 ## 2026-08-25 Paper-V integration
 
@@ -330,4 +325,14 @@ and nauty 2.9.3 gates are green; see
 `../2026-08-25-c968-paper-v-sparse-shadow-export.md` and
 `../../sparse-shadow/docs/performance-paper-v.md`.
 
-Paper III is now the only remaining exact export gate.
+## 2026-08-26 Paper-III integration
+
+The paper-owned export now freezes the normalized rational fibre point, golden
+quadratic algebra, empty aligned family of the order-six conference example,
+full `S6` relabelling action, calibrated `012` triangle product, and the sharp
+six-point aligned-family collision. C968 exhausts all 720 relabellings using a
+2-byte fixed-layout hot key, independently replays the canonical certificate
+with a separate set-based enumerator, and reconstructs both the rational twist
+and calibrated conference two-graph. Validation, corruption, arbitrary
+relabeling, idempotence, CLI certificate, and zero-allocation hot-loop gates are
+green. All five paper adapters are now enabled from paper-owned exports.

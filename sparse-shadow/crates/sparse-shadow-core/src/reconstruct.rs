@@ -13,6 +13,9 @@ pub const RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-reconstruction/v2
 pub const PAPER_I_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-i-carrier/v1";
 pub const PAPER_II_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-ii-carrier/v1";
 pub const PAPER_II_RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-paper-ii-reconstruction/v1";
+pub const PAPER_III_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-iii-carrier/v1";
+pub const PAPER_III_RECONSTRUCTION_SCHEMA_VERSION: &str =
+    "sparse-shadow-paper-iii-reconstruction/v1";
 pub const PAPER_IV_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-iv-carrier/v1";
 pub const PAPER_IV_RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-paper-iv-reconstruction/v1";
 pub const PAPER_V_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-v-carrier/v1";
@@ -63,6 +66,39 @@ pub struct PaperIiReconstructionArtifact {
     pub profile: String,
     pub carrier: PaperIiCarrier,
     pub ambiguity: Ambiguity,
+    pub exact_oriented_return: bool,
+    pub round_trip_shadow: InputArtifact,
+    pub canonical: CanonicalArtifact,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperIiiCarrier {
+    pub schema: String,
+    pub branch_sextic: String,
+    pub rational_fibre_point: Vec<crate::RationalCoefficient>,
+    pub fibre_quadratic_algebra: String,
+    pub aligned_four_sets: Vec<[u32; 4]>,
+    pub recovered_twist: String,
+    pub recovered_two_graph: String,
+    pub calibrated_triangle_product: i8,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperIiiAmbiguity {
+    pub twist_numerator: String,
+    pub twist_denominator: String,
+    pub complement_killed_by_calibration: bool,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperIiiReconstructionArtifact {
+    pub schema: String,
+    pub profile: String,
+    pub carrier: PaperIiiCarrier,
+    pub ambiguity: PaperIiiAmbiguity,
     pub exact_oriented_return: bool,
     pub round_trip_shadow: InputArtifact,
     pub canonical: CanonicalArtifact,
@@ -186,6 +222,106 @@ pub fn reconstruct_paper_ii(
         exact_oriented_return: true,
         round_trip_shadow: canonical.canonical.clone(),
         canonical,
+    })
+}
+
+/// Reconstruct Paper III's quadratic twist and calibrated conference two-graph.
+///
+/// # Errors
+///
+/// Returns an error if validation, canonicalization, or carrier recovery fails.
+pub fn reconstruct_paper_iii(
+    input: &InputArtifact,
+) -> Result<PaperIiiReconstructionArtifact, ShadowError> {
+    let canonical = canonicalize(input)?;
+    let carrier = recover_paper_iii_carrier(&canonical.canonical)?;
+    let ProfileInput::PaperIiiFourShadow(value) = &canonical.canonical.profile else {
+        unreachable!("Paper-III canonicalization preserves the profile")
+    };
+    let crate::AmbiguitySpec::HomogeneousFibre {
+        numerator,
+        denominator,
+    } = &value.twist_ambiguity
+    else {
+        unreachable!("validated Paper-III twist ambiguity")
+    };
+    Ok(PaperIiiReconstructionArtifact {
+        schema: PAPER_III_RECONSTRUCTION_SCHEMA_VERSION.into(),
+        profile: "paper_iii_four_shadow".into(),
+        carrier,
+        ambiguity: PaperIiiAmbiguity {
+            twist_numerator: numerator.clone(),
+            twist_denominator: denominator.clone(),
+            complement_killed_by_calibration: true,
+        },
+        exact_oriented_return: true,
+        round_trip_shadow: canonical.canonical.clone(),
+        canonical,
+    })
+}
+
+/// Independently replay a Paper-III carrier reconstruction.
+///
+/// # Errors
+///
+/// Returns an error if the canonical proof, carrier, round trip, or ambiguity is corrupt.
+pub fn verify_paper_iii_reconstruction(
+    input: &InputArtifact,
+    artifact: &PaperIiiReconstructionArtifact,
+) -> Result<VerificationReport, ShadowError> {
+    if artifact.schema != PAPER_III_RECONSTRUCTION_SCHEMA_VERSION
+        || artifact.profile != "paper_iii_four_shadow"
+        || !artifact.ambiguity.complement_killed_by_calibration
+        || !artifact.exact_oriented_return
+    {
+        return Err(ShadowError::Certificate(
+            "Paper-III reconstruction metadata is inconsistent".into(),
+        ));
+    }
+    let report = verify_canonical_artifact(input, &artifact.canonical)?;
+    let ProfileInput::PaperIiiFourShadow(value) = &artifact.canonical.canonical.profile else {
+        return Err(ShadowError::Certificate(
+            "Paper-III reconstruction contains another profile".into(),
+        ));
+    };
+    let crate::AmbiguitySpec::HomogeneousFibre {
+        numerator,
+        denominator,
+    } = &value.twist_ambiguity
+    else {
+        return Err(ShadowError::Certificate(
+            "Paper-III twist ambiguity is corrupt".into(),
+        ));
+    };
+    if artifact.ambiguity.twist_numerator != *numerator
+        || artifact.ambiguity.twist_denominator != *denominator
+        || artifact.carrier != recover_paper_iii_carrier(&artifact.canonical.canonical)?
+        || artifact.round_trip_shadow != artifact.canonical.canonical
+    {
+        return Err(ShadowError::Certificate(
+            "Paper-III carrier, ambiguity, or round trip is corrupt".into(),
+        ));
+    }
+    Ok(report)
+}
+
+fn recover_paper_iii_carrier(input: &InputArtifact) -> Result<PaperIiiCarrier, ShadowError> {
+    let ProfileInput::PaperIiiFourShadow(value) = &input.profile else {
+        return Err(ShadowError::Invalid(
+            "Paper-III reconstruction received another profile".into(),
+        ));
+    };
+    Ok(PaperIiiCarrier {
+        schema: PAPER_III_CARRIER_SCHEMA_VERSION.into(),
+        branch_sextic: value.branch_sextic.clone(),
+        rational_fibre_point: value.rational_fibre_point.clone(),
+        fibre_quadratic_algebra: value.fibre_quadratic_algebra.clone(),
+        aligned_four_sets: value.aligned_four_sets.clone(),
+        recovered_twist: value.recovered_twist.clone(),
+        recovered_two_graph: value.recovered_two_graph.clone(),
+        calibrated_triangle_product: value
+            .calibrated_triangle_product
+            .expect("validated Paper-III calibration"),
     })
 }
 
