@@ -1,7 +1,7 @@
 # C656 finite-field and algebraic-geometry blind review
 
 **Role:** internal specialist cold read; AI reviewer, not a publication-independent
-reader under `papers/beyond4_prs/supplement/FINAL-READER-SIGNOFF.md`
+reader under `notes/paper-administration/beyond4-prs/FINAL-READER-SIGNOFF.md`
 
 **Candidate:** commit
 `b410777db313aebe378257c3bf6c04ded7422d03`; canonical PDF SHA-256

@@ -46,7 +46,6 @@ PAPER_PATHS = (
     PAPER_PATH / "sections/10-verification.tex",
     PAPER_PATH / "sections/11-provenance-boundary.tex",
     PAPER_PATH / "appendices/r9-slice-data.tex",
-    PAPER_PATH / "submission",
     PAPER_PATH / "supplement",
 )
 LEAN_PATHS = (

@@ -63,6 +63,33 @@ never merged back.
 
 ## Paper export to `~/src/math-papers/`
 
+### Keep publication administration out of paper trees
+
+The authoritative paper root and every public paper export contain only the
+scholarly artifact and the public material needed to understand, verify,
+build, cite, or license it.  They must not contain publication-administration
+material, including cover letters, submission checklists, editor or referee
+correspondence, response letters, author-signoff worksheets, venue forms, or
+private packaging notes.  A directory named `submission/`, `referee/`,
+`correspondence/`, or an equivalent is therefore forbidden under a paper root
+and must never be added to a paper export allowlist.
+
+Keep such material under the appropriate private `notes/` subtree, outside
+the paper root and outside every exporter-owned path.  Moving it there is not
+mere filename hygiene: publication correspondence can reveal identities,
+workflow state, private comments, or claims that are not part of the reviewed
+scholarly record.
+
+Before the first export and before every refresh, inspect the proposed path
+set as an allowlist.  Do not export an entire paper directory merely because
+it is convenient.  The allowlist may include manuscript sources and PDFs,
+public appendices, reproducibility and verification material, software meant
+for release, and public citation/license/release metadata.  If a new path does
+not clearly serve one of those public functions, leave it out and relocate it
+before synchronization.  An explicit author decision to publish a piece of
+correspondence is a separate publication action; it does not make
+administrative material part of the default paper export.
+
 Tool: `papers/scripts/export-paper-repos.py` (plan / audit / materialize /
 sync / verify). Registry: `papers/repositories.toml` maps each paper root to
 its repository name, exclusions, rewrites, and disposition;

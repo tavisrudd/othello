@@ -92,6 +92,17 @@ PROCESS_PATH_RE = re.compile(
     r")\.md$",
     re.IGNORECASE,
 )
+ADMIN_PATH_RE = re.compile(
+    r"(?:^|/)(?:"
+    r"(?:submission|submissions|referee|referees|correspondence)(?:/|$)|"
+    r"(?:submission|submission-record|referee-dossier|rebuttal|"
+    r"response[-_]to[-_](?:editor|referee)|"
+    r"final-reader-signoff|release-checklist|"
+    r"[^/]*submission-checklist|[^/]*quantum-checklist|"
+    r"[^/]*cover-letter)\.md$"
+    r")",
+    re.IGNORECASE,
+)
 GENERATED_DIRECTORY_NAMES = ("__pycache__",)
 GENERATED_FILENAME_GLOBS = (
     "*.py[cod]",
@@ -433,11 +444,18 @@ def scan_references(
     findings: list[dict[str, Any]] = []
     for entry in entries:
         rel = relative_to_source(entry, source)
+        # Publication administration never belongs in a paper tree.  Check it
+        # before exclusions so registry configuration cannot mask a leak.
+        is_administration = bool(ADMIN_PATH_RE.search(rel))
+        if is_administration:
+            findings.append(
+                {"code": "publication-administration-file", "path": rel, "line": 0}
+            )
         if rel in excluded or entry.mode == "120000" or entry.kind != "blob":
             continue
         if TASK_PATH_RE.search(rel):
             findings.append({"code": "task-lane-path", "path": rel, "line": 0})
-        if PROCESS_PATH_RE.search(rel):
+        if not is_administration and PROCESS_PATH_RE.search(rel):
             findings.append({"code": "internal-process-file", "path": rel, "line": 0})
         size = entry.size or 0
         if not is_scannable(rel, size):

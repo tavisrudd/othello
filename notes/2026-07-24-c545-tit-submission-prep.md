@@ -38,7 +38,8 @@ upload, or public release was attempted.
   style, and a `make tit-check` gate that rejects warnings and more than 50
   pages.
 - Added a cover letter, submission checklist, submission manifest, and
-  IEEE-style supplement README under `papers/beyond4_prs/submission/`.
+  IEEE-style supplement README under
+  `notes/paper-administration/beyond4-prs/`.
 - Kept the canonical preprint and TIT review PDFs as separate builds over the
   same theorem sources.
 

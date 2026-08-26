@@ -3,13 +3,17 @@
 ## Description
 
 This supplement contains the canonical classification records, generators,
-certificates, deterministic replays, checksum manifests, toolchain locks, and
-the declaration-level trust map for “Projective Reed--Solomon Syndromes Beyond
-Redundancy Four: Deep Holes, Coherent Polar Flags, and Modular Carriers.”
+certificates, deterministic replays, checksum manifests, toolchain locks, the
+declaration-level trust map, and Projective Reed--Solomon Toolkit for “Deep
+Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Recursive
+Carriers and Exact Classifications Through Redundancy Ten.”
 
 ## Size
 
-[[AUTHOR INPUT: exact compressed archive filename, byte count, and SHA-256]]
+The review package is verified in its source-tree form by
+`supplement/EVIDENCE-MANIFEST.json`. The final compressed archive name, byte
+count, and SHA-256 are submission-time metadata and are not claimed by this
+local candidate.
 
 ## Platform and environment
 
@@ -28,6 +32,8 @@ paper-local checks.  See `supplement/REPRODUCING.md` and
   replays.
 - `LEAN-STATEMENTS.md` identifies the exact formal declarations and every
   nonformal hypothesis.
+- `software/projective-reed-solomon/` contains the self-contained Rust toolkit,
+  examples, registries, tests, and its own software manifest.
 
 ## Setup and execution
 
@@ -47,4 +53,5 @@ Expected success messages and per-certificate semantics are detailed in
 
 ## Contact
 
-[[AUTHOR INPUT: corresponding-author name and email]]
+Tavis Rudd. Private contact and account metadata are supplied through the
+journal submission system rather than stored in this public artifact.

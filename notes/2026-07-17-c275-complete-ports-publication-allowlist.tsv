@@ -23,7 +23,7 @@ copy	papers/complete-repair-ports/sections/08-conclusion.tex	sections/08-conclus
 copy	papers/complete-repair-ports/sections/README.md	sections/README.md	public section map
 exclude	papers/complete-repair-ports/proof_ledger.md	-	internal proof-development ledger
 exclude	papers/complete-repair-ports/adversarial_novelty_review.md	-	internal review record
-exclude	papers/complete-repair-ports/referee-dossier.md	-	internal cold-read context
+exclude	notes/paper-administration/complete-repair-ports/referee-dossier.md	-	internal cold-read context; outside the paper tree
 copy	papers/complete-repair-ports/verification/README.md	verification/README.md	public verification boundary
 copy	papers/complete-repair-ports/verification/distribution-files.txt	verification/distribution-files.txt	exact standalone tracked-file manifest
 copy	papers/complete-repair-ports/verification/formal-boundary.json	verification/formal-boundary.json	paper-local formal metadata

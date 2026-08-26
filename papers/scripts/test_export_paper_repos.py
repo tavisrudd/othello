@@ -222,8 +222,40 @@ class ExportPlannerTests(unittest.TestCase):
             findings,
             [
                 {
-                    "code": "internal-process-file",
+                    "code": "publication-administration-file",
                     "path": "FINAL-READER-SIGNOFF.md",
+                    "line": 0,
+                }
+            ],
+        )
+
+    def test_administrative_file_cannot_be_hidden_by_exclusion(self) -> None:
+        path = self.fx.root / "papers/demo/submission/cover-letter.md"
+        path.parent.mkdir()
+        path.write_text("Dear editor\n")
+        mapping = (self.fx.root / "papers/repositories.toml").read_text()
+        mapping += """\
+[[repository.exclude_path]]
+path = "submission/cover-letter.md"
+reason = "private correspondence"
+"""
+        (self.fx.root / "papers/repositories.toml").write_text(mapping)
+        run(
+            self.fx.root,
+            "git",
+            "add",
+            "papers/demo/submission/cover-letter.md",
+            "papers/repositories.toml",
+        )
+        run(self.fx.root, "git", "commit", "-qm", "excluded correspondence")
+        commit = self.fx.output("git", "rev-parse", "HEAD").strip()
+        findings = exporter.build_plan(commit)["repositories"][0]["reference_findings"]
+        self.assertEqual(
+            findings,
+            [
+                {
+                    "code": "publication-administration-file",
+                    "path": "submission/cover-letter.md",
                     "line": 0,
                 }
             ],
