@@ -2,12 +2,12 @@
 
 **Lane**: `complete-ports`
 
-**Date**: 2026-08-24
+**Date**: 2026-08-25
 **Status**: ACTIVE; C961 REPEATED-CONCATENATION COST COMPOSITION PROVED,
-PRIORITY-BOUNDED, HARD-RED-TEAMED, AND EXPORTED; 24-PAGE AUTHORITY AND 40-FILE
-STANDALONE GATES PASS; C962 ALGORITHM/BOUND DEVELOPMENT IS IN PROGRESS; C971
-ERGO-COMP PACKAGING AND MANUSCRIPT DRAFT, C325 APPENDIX VERIFIER, AND C953
-AGGREGATE REVIEW FOLLOW;
+PRIORITY-BOUNDED, HARD-RED-TEAMED, AND EXPORTED; C971 ERGO-COMP PACKAGING AND
+MANUSCRIPT UPDATE COMPLETE; 27-PAGE AUTHORITY AND 99-FILE STANDALONE GATES
+PASS; C962 ALGORITHM/BOUND DEVELOPMENT REMAINS IN PROGRESS; C325 APPENDIX
+VERIFIER AND C953 AGGREGATE REVIEW FOLLOW;
 C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
@@ -201,16 +201,11 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C961 is closed.  Run C962 paper-owned algorithm and bound development next,
-including the private Rust-native parity engine under
-`papers/complete-repair-ports/algorithms/rust/`.  Every Rust work session must
-read `notes/queens-othello-perf-playbook.md` and obey the nested Rust
-`AGENTS.md`; Python remains the exact differential oracle, and no Rust
-performance result is accepted before cost/witness/load parity.  Then run C971
-ERGO-Comp packaging, public-surface cleanup, fair benchmark evidence, product
-README, and manuscript-update drafting; exported code and comments must contain
-no internal process artifacts or identifiers.  Then C325 appendix-only
-verification, then C953
+C961 and C971 are closed.  Continue C962 only for additional paper-owned
+algorithm and bound development beyond the exported ERGO-Comp baseline.
+Python remains the exact differential oracle, and no Rust performance result is
+accepted before cost/witness/load parity.  Then run C325 appendix-only
+verification, followed by C953
 aggregate referee/export review.  C955 owns the later coefficient-presentation
 spectrum. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier
@@ -221,6 +216,6 @@ hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
 and is not evidence for or a release dependency of the paper-local companion.
 
-Local standalone synchronization is complete at `84e2175`. Publication, push,
+Local standalone synchronization is complete at `e7b9717`. Publication, push,
 and deposit remain gated on C325 and C953; the approved repository metadata
 does not authorize any of those external actions.

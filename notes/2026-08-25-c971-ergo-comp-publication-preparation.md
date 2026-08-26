@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 
-**Status**: QUEUED AFTER C962
+**Status**: COMPLETE
 
 ## Objective
 
@@ -226,3 +226,29 @@ as one editorial unit rather than appending an isolated software advertisement.
   history.
 - No manuscript theorem whose proof depends logically on a benchmark or trusted
   execution.
+
+## Completion record
+
+Completed on 25 August 2026.
+
+- Authority commit: `58c2be58e` (`recovery/C971: add ERGO-Comp companion`).
+- C949 mathematical baseline reviewed and committed separately as `d6677dcf1`;
+  the public GF(27) terminology and full-rank carrier boundary agree with that
+  committed result.
+- Rust validation: 74 library tests, two CLI tests, one Python-parity integration
+  test, strict all-target/all-feature Clippy, formatting, canonical fixtures,
+  and evidence replay pass.  The independent Python suite passes all 73 tests.
+- Public-surface scanning passes across 56 exported text files.  The local Rust
+  instruction file is excluded by Cargo packaging, the distribution manifest,
+  and the repository exporter.
+- The manuscript contains exact correctness and complexity propositions for
+  hierarchical min--sum recovery and capacity-aware scheduling, retained
+  witnesses, the graded-shell antichain bound, and direct plus equivalently
+  preprocessed CP-SAT comparisons.  The deterministic authority build is 27
+  pages, warning-free, with 25 claim-map entries and four Lean terminals.
+- Immutable exporter plan: 96 public source files, 2,492,565 bytes, zero coupling
+  findings.  The local standalone is committed at `e7b9717`, verifies with 99
+  tracked files and content digest
+  `3094aa3cd02810d044cee22d5c05fbcc6f4b9797d881be87fd14d714471a7687`, and
+  passes its own deterministic release gate.
+- No push, deposit, submission, tag, DOI update, or announcement was performed.
