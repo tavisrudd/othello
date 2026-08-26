@@ -2783,6 +2783,13 @@ mod tests {
             .starts_with("rootless binary form"));
         assert!(!canonicalization.complexity.starts_with("explicit PGL"));
         assert_eq!(canonicalization.transporters_examined, 4_960);
+        assert_eq!(
+            canonicalization.canonical_syndrome,
+            vec![0, 1, 0, 0, 1, 7, 29, 20, 27, 7, 11, 0, 0, 30, 30, 16, 13]
+        );
+        assert_eq!(canonicalization.transporter.frobenius_exponent, 2);
+        assert_eq!(canonicalization.transporter.matrix, [1, 21, 20, 25]);
+        assert_eq!(canonicalization.transporter.projective_output_scale, 25);
     }
 
     #[test]

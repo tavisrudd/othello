@@ -99,6 +99,17 @@ normalized matrices.
   `n=p^a` has no rootless divided-power stratum at redundancy `r=p^a+1`; its
   characteristic-two degenerate simple-root chart streams 4,960 transports.
 
+For the GF(32)/R17 input `s_i=i^2+3i+1` in polynomial-basis integer encoding,
+the golden canonical syndrome and transporter are
+
+```text
+[0,1,0,0,1,7,29,20,27,7,11,0,0,30,30,16,13]
+Frobenius exponent 2, matrix [1,21;20,25], output scale 25.
+```
+
+Applying that transporter reconstructs the displayed canonical syndrome, and
+the 4,959 candidate limit fails before the exact 4,960-candidate run succeeds.
+
 Run the slow full-orbit checks from `rust/prs_classifier` in release mode:
 
 ```text
