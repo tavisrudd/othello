@@ -303,3 +303,25 @@ rank-one projective transform is not a complete test family there.  The exact
 higher-rank contextual quotient is the family of minima over realizable
 `F_q`-linear maps into outer dual subspaces; finding a smaller intrinsic
 description is a distinct successor problem, not a gap in the rank-one result.
+
+## Mystery ledger
+
+- **Settled — raw-table minimality.**  The proposed unrestricted converse was
+  too strong.  Exact rank-one contexts observe the zero-truncated projective
+  line-probe profile, and the realizable-probe theorem proves this quotient is
+  both sufficient and coarsest.
+- **Settled — all-rank transfer from lines.**  Restriction of a nonconfined
+  system to a line preserves normalization and nonconfinement.  This proves the
+  exact equivalence and the full bounded-family consequences; no higher-rank
+  scalar assumption is missing.
+- **Settled — source of the finite separation.**  The two encoders have the
+  same binary image and dual.  Direct enumeration and the existing evidence
+  replay show that the fixed outer line sees only their different
+  extension-field functional labelling.
+- **Open — intrinsic higher-rank quotient.**  Projective lines cease to be a
+  complete test family when target maps can have image spanning several
+  `L`-lines.  No claim here needs that quotient.  A successor would need a
+  canonical compression of minima over realizable `F_q`-linear maps into
+  outer dual subspaces; no successor ID is allocated.
+- **No other genuine mystery remains** in the rank-one theorem, complete
+  bounded-transfer corollary, or fixed-code separation.
