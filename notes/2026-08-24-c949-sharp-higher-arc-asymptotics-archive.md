@@ -96,6 +96,25 @@ along the three moving pencil roots.
 
 Commit: `ae2ca690b` (`isolate reciprocal obstruction in C949 cubic`).
 
+## 2026-08-26 — exact transverse quotient core
+
+Restricting the globally split point product to each forced low-pencil root
+gave an exact `G^2` product with the two connector slopes as its extra roots.
+Applying the same restriction to both canonical Redei quotients, then
+dividing the companion quotient by the moving low cubic, produced a
+degree-six 18-coefficient remainder.  Its three connector fibers are fixed by
+three evaluations of `E`; removing their canonical interpolation leaves a
+second nine-coefficient cubic `U`:
+
+```text
+Q=B_0C_0+GE,
+H=B_0D+P_good I_E+GU.
+```
+
+This is the first genuine bounded `9+9` quotient state.  It remains a
+compression, not a contradiction or an identification with C962's carrier.
+Focused proof: `notes/2026-08-26-c949-redei-transverse-core.md`.
+
 ## 2026-08-26 — task-card reorganization
 
 The former 6,800-line C949 card was frozen as

@@ -31,6 +31,8 @@ remaining step is a global inverse/classification theorem.
 
 - Detailed theorem statements and derivations through 2026-08-26:
   `notes/2026-08-26-c949-structural-proof-snapshot.md`.
+- Focused bounded transverse-core proof:
+  `notes/2026-08-26-c949-redei-transverse-core.md`.
 - Chronological session log and links to focused snapshots:
   `notes/2026-08-24-c949-sharp-higher-arc-asymptotics-archive.md`.
 - C962 finite-carrier application memo:
@@ -135,6 +137,18 @@ deg_X E<3,  deg E<=3.                       (SR24a-Redei-cubic)
 All `q`-scale ambiguity is therefore confined to the **nine coefficients**
 of one cubic `E`.
 
+The split-product companion quotient compresses further.  If
+`R=(X^q-X)Q+(M^q-M)H`, canonical division of `H` by `B_0`, followed by the
+three connector interpolations, gives
+
+```text
+H=B_0D+P_good I_E+(M^q-M)U,
+deg_X U<3, deg U<=3.
+```
+
+Hence the two canonical quotient remainders form a genuine bounded
+**nine-plus-nine** state `(E,U)`.  See the focused transverse-core snapshot.
+
 The reciprocal transition is exact.  In a tangent-point-adapted flag chart,
 one may normalize
 
@@ -178,8 +192,8 @@ linking the tangent-product quotient to `C(x)-yA(x)=-y^2` is still missing.
 
 ### EV1 — bounded transverse-derivative theorem
 
-Compute or contradict the nine coefficients of `E`, preferably beginning
-with the three reciprocal obstructions `e_03,e_12,e_21`, from one of:
+Relate or contradict the bounded pair `(E,U)`, preferably beginning with the
+three reciprocal obstructions `e_03,e_12,e_21`, from one of:
 
 1. the globally split point product before specialization;
 2. the reciprocal norm as a polynomial identity rather than field fibers;
@@ -234,8 +248,8 @@ separate global trade obstruction or construction.
   zero-triangle vertices exhaust the weighted norm.
 - **Settled:** the weighted low lines are exactly three pencils, not merely a
   matching-like count.
-- **Settled:** the balanced field-uniform defect is bounded—one
-  nine-coefficient cubic `E`.
+- **Settled:** both canonical Redei quotient defects compress to the bounded
+  nine-plus-nine cubic state `(E,U)`.
 - **Settled:** reciprocal conversion fails on exactly three homogeneous
   coefficients.
 - **Settled/no-go:** finite slope fibers cannot constrain `E`; they are
@@ -249,7 +263,7 @@ separate global trade obstruction or construction.
 
 ## Next checkpoint
 
-Derive the exact restriction of the split point product along each of the
-three moving pencil roots and determine whether its double/triple-root
-structure computes any coefficient of `E`.  Red-team the coordinate flag and
-all connector multiplicities before promotion.
+Derive the reciprocal transition of the full quotient pair `(Q,H)` and test
+whether it gives a nontrivial linear relation between `E` and `U`.  Keep the
+high quotients `C_0,D` explicit so the finite-fiber gauge freedom is not
+mistaken for a contradiction.
