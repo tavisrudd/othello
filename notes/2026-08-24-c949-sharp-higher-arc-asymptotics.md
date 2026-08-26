@@ -378,6 +378,13 @@ labels.  Hence one exact evaluation per 714 carrier--mapping representative
 suffices; transporting the mapping without its carrier and boundary frame is
 not allowed.
 
+For the current Rust constructor, `columns=t` and `ratios=t/u`; the natural
+restored directions are therefore `[row:column:0]=[1:ratio:0]`, with normal
+covectors `(column,-row)`.  The API does not yet certify that these code
+directions are exactly the paper's `R_infinity` frame.  Keep the gate as a
+post-terminal diagnostic until that coordinate lemma and a replay fixture
+are landed; do not add an extra shear to the boundary normal.
+
 The whole binary form has the sharper normal form
 
 ```text
@@ -407,6 +414,8 @@ input must relate each labelled missing polynomial to `G_m`, or control the
 global cube-sector `B_0`.  Its degree nevertheless gives two exact compiler
 checksums, the unweighted and slope-weighted sums of the regular scalars plus
 the boundary/vertical quotient values `(TR46a)`.
+Cubing supplies no hidden restriction here: Frobenius is bijective over
+`F_(3^h)`, so these values do not glue to a common cube root.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
@@ -600,6 +609,8 @@ separate global trade obstruction or construction.
   the missing-label subset.
 - **Open:** determine whether this compiler rejects any surviving q=27
   terminal independently of fourth Witt, reciprocal norm, and mapping.
+- **Open:** certify the Rust code-ratio to paper-`R_infinity` adapter before
+  promoting the diagnostic to a terminal rejection reason.
 - **Open:** synchronize those residuals across slopes; fiberwise boundedness
   alone does not give a common carrier.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut
@@ -616,9 +627,10 @@ separate global trade obstruction or construction.
 
 ## Next checkpoint
 
-Implement the post-terminal `(TR43)` recurrence in the C962 normalization
-and compare its rejection cores with fourth Witt, reciprocal norm, and
-mapping, once per joint orbit.  On survivors, test the full `(TR45)`
+Certify the code-ratio to paper-`R_infinity` adapter, then implement the
+post-terminal `(TR43)` recurrence and compare its rejection cores with
+fourth Witt, reciprocal norm, and mapping, once per joint orbit.  On
+survivors, test the full `(TR45)`
 quadratic quotient.  For the field-uniform residual frontier, prove a bridge
 from the labelled missing polynomial `A_m` to the cube-sector `G_m` in
 `(TR46)`; coefficient descent alone has now been exhausted.

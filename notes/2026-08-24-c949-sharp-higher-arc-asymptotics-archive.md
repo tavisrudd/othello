@@ -365,3 +365,12 @@ last free interpolation step gives two exact q-scale checksums: the sum and
 slope-weighted sum of the regular `d_m([X]G_m)^3` values are fixed by the two
 finite-boundary and one vertical quotient values.  These are useful compiler
 consistency checks, not bounded label compression.
+
+The terminal-interface audit narrowed the last compiler ambiguity.  Rust's
+constructor stores `columns=t` and `ratios=t/u`, so the natural restored
+directions are `[row:column:0]` and their normals are `(column,-row)`.  The
+remaining task is to certify that these code directions are exactly the
+paper's `R_infinity` frame and add a replay fixture; no extra shear belongs
+in the normal.  Until then the gate remains a post-terminal diagnostic.  The
+closeout also blocks one last false inference: cubing is bijective in the
+ternary field, so TR46's cube values provide no common-root gluing.

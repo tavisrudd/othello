@@ -935,6 +935,16 @@ verdict is invariant.  The gate may therefore be evaluated once on each of
 the 714 **joint** carrier--mapping orbit representatives.  Transporting only
 the mapping while fixing an arbitrary carrier or boundary frame is invalid.
 
+For the current Rust terminal, run this only as a post-terminal C949 audit.
+The constructor has `columns=t` and `ratios=t/u`, so conditional on the paper
+frame the natural restored directions are `[row:column:0]=[1:ratio:0]` with
+normal covectors `(column,-row)`.  The current witness/API does not type or
+verify that these code ratio directions are exactly the paper's three
+`R_infinity` directions in the `(TR13)` frame.  That coordinate lemma and a
+replay fixture are the remaining implementation certificate.  Do not insert
+an extra shear into the boundary normal or silently promote this to a general
+C962 rejection reason before that check.
+
 There is a stronger exact global form.  In the boundary-vertical chart put
 
 ```text
@@ -983,6 +993,8 @@ binary form has the two vertex normal covectors as factors.  However
 derivative that produced the bounded quadratic `p` kills it.  The scalar
 `d_m([X]G_m)^3` is not determined by the labelled missing-root subset
 `A_m|B_6`, and it depends on the fixed intercept frame.
+Being a cube gives no additional restriction over `F_(3^h)`, because
+Frobenius is bijective; no common cube-root gluing follows.
 
 There are two q-scale checksums but no bounded compression.  Write
 `theta(m)=e_(q-2)({b(P)-ma(P)})` and let `theta(infinity)` be its homogeneous
@@ -1080,9 +1092,11 @@ must bridge the labelled missing polynomial `A_m` to the cube-sector data
 - **Settled/no-go:** `(TR46)` is the first richer coefficient, but it lands
   in the unrestricted q-scale cube-sector and is not determined by the
   missing-label subset.  Merely descending one coefficient is not another
-  bounded certificate.
+  bounded certificate, and cubing itself is bijective.
 - **Open:** determine whether this post-terminal filter rejects any surviving
   q=27 carrier states independently of fourth Witt, reciprocal norm, and the
   mapping gate; no symmetry of `D` may be assumed.
+- **Open:** certify and fixture the code-ratio to paper-`R_infinity` adapter
+  before making `(TR43)` an implementation rejection reason.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.
