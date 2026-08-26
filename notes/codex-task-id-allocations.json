@@ -3599,8 +3599,17 @@
       "last": 972,
       "purpose": "Characterize minimal labelled compositional state, promote rank-one transfer, and sharpen finite label separation",
       "sequence": 400
+    },
+    {
+      "count": 1,
+      "first": 973,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 973,
+      "purpose": "prove simultaneous-marker PRS escape, quantify witnesses, and determine the all-level Lucas-carrier discriminator; defer manuscript integration to a separate successor",
+      "sequence": 401
     }
   ],
-  "next_id": 973,
+  "next_id": 974,
   "schema": "codex-task-id-allocations-v1"
 }
