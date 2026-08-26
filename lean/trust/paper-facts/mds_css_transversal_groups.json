@@ -83,14 +83,14 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl",
-      "text": "Tavis Rudd. \\newblock Local-unitary rigidity and quantitative rounding for stabilizer {AME} states. \\newblock \\url{https://doi.org/10.5281/zenodo.21681856}, 2026. \\newblock Companion preprint; sources at \\url{https://github.com/tavisrudd/ame-lu}."
+      "text": "Tavis Ru{\\relax dd}. \\newblock Local-unitary rigidity and quantitative rounding for stabilizer {AME} states. \\newblock \\url{https://doi.org/10.5281/zenodo.21681856}, 2026. \\newblock Companion preprint; sources at \\url{https://github.com/tavisrudd/ame-lu}."
     },
     {
       "key": "RuddClebsch2026",
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/mds_css_transversal_groups/mds-css-transversal-groups.bbl",
-      "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code and its golden orientation from its deep-hole syndrome locus. \\newblock Preprint, \\url{https://github.com/tavisrudd/clebsch-rigidity}, 2026."
+      "text": "Tavis Ru{\\relax dd}. \\newblock Reconstructing the {Clebsch} code and its golden orientation from its deep-hole syndrome locus. \\newblock Preprint, \\url{https://github.com/tavisrudd/clebsch-rigidity}, 2026."
     },
     {
       "key": "SayginelEtAl2025",
@@ -469,14 +469,14 @@
     {
       "key": "RuddAMEStabilizerRigidity2026",
       "kind": "bibtex",
-      "self_authored": true,
+      "self_authored": false,
       "source": "papers/mds_css_transversal_groups/refs.bib",
       "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer {AME} States"
     },
     {
       "key": "RuddClebsch2026",
       "kind": "bibtex",
-      "self_authored": true,
+      "self_authored": false,
       "source": "papers/mds_css_transversal_groups/refs.bib",
       "title": "Reconstructing the {Clebsch} Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus"
     },
@@ -790,10 +790,10 @@
   "paper": "mds_css_transversal_groups",
   "pdfs": [
     {
-      "bytes": 210953,
+      "bytes": 210987,
       "pages": 23,
       "path": "papers/mds_css_transversal_groups/mds-css-transversal-groups.pdf",
-      "sha256": "ad97bc1747e3367ebb4ff91d58081336927d27c7db6b88fe51aa97a10b7b41ff"
+      "sha256": "4906d7a17f9a5266eae51cb7af106795b41536ee32420103ec61dc02e1d1f4c3"
     }
   ],
   "schema_version": 1,

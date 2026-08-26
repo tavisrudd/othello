@@ -1,0 +1,362 @@
+{
+  "bibliography": [
+    {
+      "key": "BeauvilleTheta",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+    },
+    {
+      "key": "Cipriani",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+    },
+    {
+      "key": "ClemensGriffiths",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+    },
+    {
+      "key": "FaulknerMiller",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+    },
+    {
+      "key": "GoreskyMacPherson",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+    },
+    {
+      "key": "GoreskyMacPhersonIHII",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+    },
+    {
+      "key": "JuteauMautnerWilliamson",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+    },
+    {
+      "key": "KraemerE6",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+    },
+    {
+      "key": "deCataldoMigliorini",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+    },
+    {
+      "key": "BeauvilleTheta",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/refs.bib",
+      "title": "Les singularit{\\'e}s du diviseur {Theta} de la jacobienne interm{\\'e}diaire de l'hypersurface cubique dans {P4}"
+    },
+    {
+      "key": "Cipriani",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/refs.bib",
+      "title": "Indecomposable extensions of perverse sheaves over a closed stratum"
+    },
+    {
+      "key": "ClemensGriffiths",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/refs.bib",
+      "title": "The intermediate {J}acobian of the cubic threefold"
+    },
+    {
+      "key": "FaulknerMiller",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/refs.bib",
+      "title": "A {L}efschetz decomposition over {Z}, and applications"
+    },
+    {
+      "key": "GoreskyMacPherson",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/refs.bib",
+      "title": "Stratified Morse Theory"
+    },
+    {
+      "key": "GoreskyMacPhersonIHII",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/refs.bib",
+      "title": "Intersection Homology {II}"
+    },
+    {
+      "key": "JuteauMautnerWilliamson",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/refs.bib",
+      "title": "Parity sheaves"
+    },
+    {
+      "key": "KraemerE6",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/refs.bib",
+      "title": "Cubic threefolds, {F}ano surfaces and the monodromy of the {G}auss map"
+    },
+    {
+      "key": "deCataldoMigliorini",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/blown-up-theta-lattice/refs.bib",
+      "title": "Intersection forms, topology of maps and motivic decomposition for maps of threefolds"
+    }
+  ],
+  "dir": "papers/blown-up-theta-lattice",
+  "environment_counts": {
+    "corollary": 2,
+    "lemma": 3,
+    "proposition": 2,
+    "remark": 1,
+    "theorem": 4
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:main-ih"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:modular-rhl"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:central-zigzag"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:clean-base-change"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:complete-graph-smith"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:cylinder-adjoint"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:degree-five-push"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:degree-four-fano-lift"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:degree-four-index-three"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:endpoint-lift"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:escape-definition"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:escape-dual"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:general-saturation"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:ih-smooth-locus"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:kraemer-decomposition"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:localized-decomposition"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:main-exact"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:main-fibre-product"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:main-saturation"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:mod-three-zigzag"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:ordinary-equals-intersection-above-middle"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pontryagin-endpoint"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:stalk-costalk"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:tau-isomorphism"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:theta-pair"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:three-intersection-blocks"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:up-incidence"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:weak-lefschetz"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:clean-base-change"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:link-cohomology"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:pontryagin-endpoint"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:endpoint-lifts"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:topological-exact"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:two-torsion-location"
+    },
+    {
+      "environment": "",
+      "label": "sec:duality"
+    },
+    {
+      "environment": "",
+      "label": "sec:geometric-glue"
+    },
+    {
+      "environment": "",
+      "label": "sec:integral-decomposition"
+    },
+    {
+      "environment": "",
+      "label": "sec:intersection"
+    },
+    {
+      "environment": "",
+      "label": "sec:introduction"
+    },
+    {
+      "environment": "",
+      "label": "sec:lattice"
+    },
+    {
+      "environment": "",
+      "label": "sec:topology"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:integral-decomposition"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main-escape"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main-lattice"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:symplectic-saturation"
+    }
+  ],
+  "main": "papers/blown-up-theta-lattice/blown_up_theta_lattice.tex",
+  "manifest_labels": null,
+  "paper": "blown_up_theta_lattice",
+  "pdfs": [
+    {
+      "bytes": 118208,
+      "pages": 11,
+      "path": "papers/blown-up-theta-lattice/blown_up_theta_lattice.pdf",
+      "sha256": "98b8669dce44baa12f5bf21235d32a6aa850a50b9daf622aa5790ea90288d655"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/blown-up-theta-lattice/blown_up_theta_lattice.tex",
+      "sha256": "9e6fe75f92d5a5a4348ce6a2fec94814b0231073bb8159460ef797e6f74a27e6"
+    },
+    {
+      "path": "papers/blown-up-theta-lattice/sections/01-introduction.tex",
+      "sha256": "8b21c7f17e8284aacd39a8d60ff04c9c6d32bc702f8df4d15de3e30a22fa7804"
+    },
+    {
+      "path": "papers/blown-up-theta-lattice/sections/02-topology.tex",
+      "sha256": "8f258ea34a1d4acc75c9e2087118ab4870da619b59d0082753c4a551b9690a01"
+    },
+    {
+      "path": "papers/blown-up-theta-lattice/sections/03-lattice.tex",
+      "sha256": "f292950ba34bd4cdbbfe4ea5bf5428188e0cf78430fe049a08acb78677d11554"
+    },
+    {
+      "path": "papers/blown-up-theta-lattice/sections/04-glue.tex",
+      "sha256": "2d90f59783506284f474110103c4f992f3f26ca424da141bf44aecada74ec27d"
+    },
+    {
+      "path": "papers/blown-up-theta-lattice/sections/05-duality.tex",
+      "sha256": "7ec969a529a4833b64a70168da7ea15a36e433e03a0355272e8a3510524c9652"
+    },
+    {
+      "path": "papers/blown-up-theta-lattice/sections/06-intersection.tex",
+      "sha256": "3c8f0f3c4c1e06896fdad79cfe4f43306c230eb7c4f962917fd05d2905c3f0ea"
+    },
+    {
+      "path": "papers/blown-up-theta-lattice/sections/07-integral-decomposition.tex",
+      "sha256": "11a6590ba29fc870b91556eab792cf0ef12af99ae9d20f63dc4648677f2302b3"
+    }
+  ],
+  "title": "Integral Cohomology and Modular Decomposition\\\\ for the Theta Divisor of a Cubic Threefold",
+  "title_normalized": "integral cohomology and modular decomposition for the theta divisor of a cubic threefold",
+  "untracked_bibliography": [
+    "papers/blown-up-theta-lattice/blown_up_theta_lattice.bbl"
+  ]
+}

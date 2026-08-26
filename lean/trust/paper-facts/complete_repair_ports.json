@@ -49,6 +49,12 @@
       "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
     },
     {
+      "key": "KurzYaakobi2021",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
       "key": "LasVergnas1999",
       "kind": "bibitem",
       "self_authored": false,
@@ -89,7 +95,13 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/complete-repair-ports/complete_repair_ports.bbl",
-      "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code from its deep-hole syndrome locus. \\newblock Working paper, 2026."
+      "text": "Tavis Rudd. \\newblock Reconstructing the {Clebsch} code and its golden orientation from its deep-hole syndrome locus. \\newblock Preprint, \\url{https://github.com/tavisrudd/clebsch-rigidity}, 2026."
+    },
+    {
+      "key": "ShahEtAl2010",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
     },
     {
       "key": "Singer1938",
@@ -111,6 +123,12 @@
     },
     {
       "key": "Tricot2024",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
+    },
+    {
+      "key": "YeBarg2016",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/complete-repair-ports/complete_repair_ports.bbl"
@@ -260,7 +278,7 @@
       "kind": "bibtex",
       "self_authored": true,
       "source": "papers/complete-repair-ports/refs.bib",
-      "title": "Reconstructing the {Clebsch} code from its deep-hole syndrome locus"
+      "title": "Reconstructing the {Clebsch} Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus"
     },
     {
       "key": "ShahEtAl2010",
@@ -314,11 +332,12 @@
   ],
   "dir": "papers/complete-repair-ports",
   "environment_counts": {
-    "corollary": 3,
-    "definition": 3,
+    "corollary": 5,
+    "definition": 4,
+    "lemma": 1,
     "proposition": 4,
     "remark": 2,
-    "theorem": 6
+    "theorem": 9
   },
   "labels": [
     {
@@ -330,6 +349,50 @@
       "label": "cor:mds-fingerprints"
     },
     {
+      "environment": "corollary",
+      "label": "cor:pointed-duality"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:strict-transfer"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:transfer-synthesis"
+    },
+    {
+      "environment": "definition",
+      "label": "def:coefficient-port"
+    },
+    {
+      "environment": "definition",
+      "label": "def:complete-port"
+    },
+    {
+      "environment": "definition",
+      "label": "def:probability-layer"
+    },
+    {
+      "environment": "definition",
+      "label": "def:reconstruction-radius"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:transfer-spine"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:sparse-paving-profile"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:basic-invariants"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:bounded-exit"
+    },
+    {
       "environment": "proposition",
       "label": "prop:concat-parameters"
     },
@@ -338,32 +401,52 @@
       "label": "prop:filtration-boundary"
     },
     {
-      "environment": "document",
+      "environment": "",
+      "label": "sec:finite-evidence"
+    },
+    {
+      "environment": "",
       "label": "sec:flagships"
     },
     {
-      "environment": "document",
+      "environment": "",
+      "label": "sec:matched-seed-evidence"
+    },
+    {
+      "environment": "",
       "label": "sec:ports"
     },
     {
-      "environment": "document",
+      "environment": "",
       "label": "sec:realization"
     },
     {
-      "environment": "document",
+      "environment": "",
       "label": "sec:reliability"
     },
     {
-      "environment": "document",
+      "environment": "",
+      "label": "sec:seed-evidence"
+    },
+    {
+      "environment": "",
       "label": "sec:transfer"
     },
     {
-      "environment": "document",
+      "environment": "",
       "label": "sec:tutte"
     },
     {
-      "environment": "document",
+      "environment": "",
       "label": "sec:verification"
+    },
+    {
+      "environment": "",
+      "label": "subsec:cubic-axis"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:asymptotic-separation"
     },
     {
       "environment": "theorem",
@@ -372,6 +455,14 @@
     {
       "environment": "theorem",
       "label": "thm:harmonic"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:mds-reconstruction"
     },
     {
       "environment": "theorem",
@@ -395,17 +486,53 @@
   "paper": "complete_repair_ports",
   "pdfs": [
     {
-      "bytes": 152308,
-      "pages": 16,
+      "bytes": 206809,
+      "pages": 23,
       "path": "papers/complete-repair-ports/complete_repair_ports.pdf",
-      "sha256": "a9f2165a30b271c0950ca140cde3557f920bf3d49df43499e92d2f770a2f691c"
+      "sha256": "c2611c12114492b47b1af5a8ac77f5550fb11ec9eba81c54acbf6c3523f6ccc9"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/complete-repair-ports/complete_repair_ports.tex",
-      "sha256": "08db2040acfb95da01a09b43188a69357a2d5647b46234790c20df8e90659791"
+      "sha256": "40748c8f9fc36701f665b855b1a1d12ad643eef295202a5f02d83a104e9f5311"
+    },
+    {
+      "path": "papers/complete-repair-ports/figures/transfer-spine.tex",
+      "sha256": "32b9f30ee838f9ce84060d00b8cd02f38f8ab149c0fd47e8d6a09583656b222a"
+    },
+    {
+      "path": "papers/complete-repair-ports/sections/01-complete-ports.tex",
+      "sha256": "f109f7de572da8dd713b8186cb398a37870d9c757578210c170662d288b55759"
+    },
+    {
+      "path": "papers/complete-repair-ports/sections/02-confinement-transfer.tex",
+      "sha256": "6b625a03ddd8e0662fd3ec3097229c247488225d2de0b8dce76448a681d9dfc6"
+    },
+    {
+      "path": "papers/complete-repair-ports/sections/03-positive-density.tex",
+      "sha256": "8ac90629209aea3fe5c8afa97b12ca22791c9f4df9b01b8ffd07e71e64293d7a"
+    },
+    {
+      "path": "papers/complete-repair-ports/sections/04-reliability-exit.tex",
+      "sha256": "7914804a56b9b37c59c82b00a3ebd548d952e96a6647673aa00e69f935fc37eb"
+    },
+    {
+      "path": "papers/complete-repair-ports/sections/05-pointed-tutte.tex",
+      "sha256": "a96472a454c380bfaba380fd99d1ec07f34861a2fcfd3c4b3e2412ef014cfa65"
+    },
+    {
+      "path": "papers/complete-repair-ports/sections/06-geometric-flagships.tex",
+      "sha256": "5cdd8bb5752ee9abbc827a0da69039345cc4ad265273b77e98588c71a9edb63a"
+    },
+    {
+      "path": "papers/complete-repair-ports/sections/08-conclusion.tex",
+      "sha256": "e5b74cb74e115671664d0cf4495c2aeac7aa95071475273720ce39192ffd7c56"
+    },
+    {
+      "path": "papers/complete-repair-ports/sections/07-verification-provenance.tex",
+      "sha256": "aaa4850e8d40180f2e0662d98aa3644a94ed5775634aa5c2bb37ba9973fa40b3"
     }
   ],
   "title": "Complete Bounded Repair Ports:\\\\ \\large Transfer, Reliability, and Geometric Structure",

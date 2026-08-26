@@ -298,10 +298,10 @@
   "paper": "equivariant_robust_completion",
   "pdfs": [
     {
-      "bytes": 139478,
+      "bytes": 139105,
       "pages": 17,
       "path": "papers/equivariant-robust-completion/equivariant-robust-completion.pdf",
-      "sha256": "a4f2de94a1969efc30218b158b1e76f29c27fb976238a33ae0c070a639b0e98d"
+      "sha256": "0937f0677ca3f0317dcd62b1fdfd0654d3c017b39a5167953812998f08192432"
     }
   ],
   "schema_version": 1,
@@ -340,7 +340,7 @@
     },
     {
       "path": "papers/equivariant-robust-completion/sections/07-formal-verification.tex",
-      "sha256": "419d4be7aa10efa727471065c97301c148d35c61833b32c1f83ac444b12bfb25"
+      "sha256": "4b9f7e65ce2782678d44e23c2388fcf1daed552eb84f45e3420af031d0d44275"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/08-conclusion.tex",

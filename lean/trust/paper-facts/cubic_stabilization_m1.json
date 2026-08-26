@@ -1,0 +1,302 @@
+{
+  "bibliography": [
+    {
+      "key": "AKMW",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "Beauville",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "BeauvilleSurfaces",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "Bittner",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "CG",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "CT",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "Cai",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "IritaniBlowup",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "IritaniKoto",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "KuznetsovV14",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "PutSinger",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "Voisin",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    },
+    {
+      "key": "YYZ",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex"
+    }
+  ],
+  "dir": "papers/cubic-stabilization-m1",
+  "environment_counts": {
+    "corollary": 5,
+    "lemma": 2,
+    "proposition": 6,
+    "theorem": 2
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:coprime-separation"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:fermat-separation"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:threefold-marker"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:v14-one-step"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:voisin-separation"
+    },
+    {
+      "environment": "equation",
+      "label": "diag:marker-descent"
+    },
+    {
+      "environment": "equation",
+      "label": "diag:marker-fold-additivity"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:Asharp"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:RX"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:atomic-block-expansion"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:atomic-fold"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:atomic-lax"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:atomic-modification"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:atomic-product-value"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:atomic-projective-value"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:beauville-cubic-products"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:center-novikov-map-atomic"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:cubic-delta"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:cubic-integral-block-gauge"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:cubic-integral-block-reduction"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:cubic-shared-block-data"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:cubic-small-even-connection"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:faithful-center-map"
+    },
+    {
+      "environment": "align",
+      "label": "eq:marker-blowup"
+    },
+    {
+      "environment": "align",
+      "label": "eq:marker-pbundle"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:res-disc"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:A0preserve"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:faithful-center-base-change"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:atomic-lowdim"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:cubic-block-data"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:generic-spectral-connection-splitting"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:qdm-operation-ledgers"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:rank2-rigidity"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:residue-discriminant-exponents"
+    },
+    {
+      "environment": "",
+      "label": "sec:applications"
+    },
+    {
+      "environment": "",
+      "label": "sec:atomic-one-step"
+    },
+    {
+      "environment": "",
+      "label": "subsec:shared-cubic-packet"
+    },
+    {
+      "environment": "table",
+      "label": "tab:marker-notation"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:every-cubic"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:marker-ledger"
+    }
+  ],
+  "main": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex",
+  "manifest_labels": null,
+  "paper": "cubic_stabilization_m1",
+  "pdfs": [
+    {
+      "bytes": 182655,
+      "pages": 20,
+      "path": "papers/cubic-stabilization-m1/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf",
+      "sha256": "3afa68e3c062beb3394860b94b322321853d8763eb833de83f7d89839ed42aed"
+    },
+    {
+      "bytes": 202516,
+      "pages": 21,
+      "path": "papers/cubic-stabilization-m1/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf",
+      "sha256": "87d05981a0ce0ddf98d99b1a0a0325721def786d484ad268034aa6672ef2c790"
+    },
+    {
+      "bytes": 132019,
+      "pages": 12,
+      "path": "papers/cubic-stabilization-m1/irrationality_after_one_stabilization.pdf",
+      "sha256": "246d254f7275111ba33b5b73ad344d31a89b749b28e37d76b306b919349b708a"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/cubic-stabilization-m1/cubic_stabilization_m1.tex",
+      "sha256": "3acfaf3400b27f24576faa6d8e7cb6a82f025d20af9f04ab720b99ffbc932c10"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/formal-annotations.tex",
+      "sha256": "9e1ec64c66ac4adde61d6ae9b21cb241773978e82500a58757f420f6ece31c54"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/sections/01-introduction.tex",
+      "sha256": "11b8adc6241f5393c6cd3513337ab9e121144e5857afd30b43aba332518d9aae"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/sections/02-qdm-marker.tex",
+      "sha256": "e888a2229968987b98599760a898943eaa59dc0aa61e8e7107dc0fc1ef32cb56"
+    },
+    {
+      "path": "papers/cubic-stabilization-m1/sections/03-applications.tex",
+      "sha256": "d85ec647bef677b28fa5585581e5042ff08e56fb08119afc7dc2ec237f2e665e"
+    }
+  ],
+  "title": "Irrationality of Cubic Threefolds after One Stabilization",
+  "title_normalized": "irrationality of cubic threefolds after one stabilization",
+  "untracked_bibliography": [
+    "papers/cubic-stabilization-m1/lean/.lake/packages/mathlib/docs/references.bib"
+  ]
+}

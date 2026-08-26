@@ -1,0 +1,185 @@
+{
+  "bibliography": [
+    {
+      "key": "AKMW",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/hodge-atom-marker-ledger/hodge_atom_marker_ledger.tex"
+    },
+    {
+      "key": "Epilogue",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/hodge-atom-marker-ledger/hodge_atom_marker_ledger.tex",
+      "text": "T.~Rudd, \\emph{Irrationality of cubic threefolds after one stabilization}, manuscript, 2026."
+    },
+    {
+      "key": "Iritani",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/hodge-atom-marker-ledger/hodge_atom_marker_ledger.tex"
+    },
+    {
+      "key": "IritaniKoto",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/hodge-atom-marker-ledger/hodge_atom_marker_ledger.tex"
+    },
+    {
+      "key": "KKPY",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/hodge-atom-marker-ledger/hodge_atom_marker_ledger.tex"
+    }
+  ],
+  "dir": "papers/hodge-atom-marker-ledger",
+  "environment_counts": {
+    "corollary": 1,
+    "definition": 1,
+    "remark": 1,
+    "theorem": 3
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:one-step"
+    },
+    {
+      "environment": "definition",
+      "label": "def:provider"
+    },
+    {
+      "environment": "equation",
+      "label": "diag:occurrence-descent"
+    },
+    {
+      "environment": "theorem",
+      "label": "eq:birational-ledger"
+    },
+    {
+      "environment": "",
+      "label": "eq:block-ledger"
+    },
+    {
+      "environment": "align",
+      "label": "eq:blowup"
+    },
+    {
+      "environment": "theorem",
+      "label": "eq:chemical-formula"
+    },
+    {
+      "environment": "",
+      "label": "eq:dimension-quotient"
+    },
+    {
+      "environment": "align",
+      "label": "eq:disjoint"
+    },
+    {
+      "environment": "",
+      "label": "eq:height"
+    },
+    {
+      "environment": "corollary",
+      "label": "eq:height-bound"
+    },
+    {
+      "environment": "",
+      "label": "eq:hodge-cover"
+    },
+    {
+      "environment": "",
+      "label": "eq:hodge-occurrences"
+    },
+    {
+      "environment": "",
+      "label": "eq:ledger"
+    },
+    {
+      "environment": "align",
+      "label": "eq:ledger-blowup"
+    },
+    {
+      "environment": "align",
+      "label": "eq:ledger-disjoint"
+    },
+    {
+      "environment": "align",
+      "label": "eq:ledger-projective"
+    },
+    {
+      "environment": "align",
+      "label": "eq:projective"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:two-quotients"
+    },
+    {
+      "environment": "",
+      "label": "sec:hodge"
+    },
+    {
+      "environment": "",
+      "label": "sec:ledger"
+    },
+    {
+      "environment": "",
+      "label": "sec:one-step"
+    },
+    {
+      "environment": "",
+      "label": "sec:overview"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:birational-quotient"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:hodge"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:ledger"
+    }
+  ],
+  "main": "papers/hodge-atom-marker-ledger/hodge_atom_marker_ledger.tex",
+  "manifest_labels": null,
+  "paper": "hodge_atom_marker_ledger",
+  "pdfs": [
+    {
+      "bytes": 77500,
+      "pages": 6,
+      "path": "papers/hodge-atom-marker-ledger/hodge_atom_marker_ledger.pdf",
+      "sha256": "507f9b5c0d466ba231c7302c9dce523d9bb0e15db2d04d4e2c87162623983459"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/hodge-atom-marker-ledger/hodge_atom_marker_ledger.tex",
+      "sha256": "fac555c02a25da3c9206aee988f4cd8fe26a985e7d5c4560d728ee6055a73e4c"
+    },
+    {
+      "path": "papers/hodge-atom-marker-ledger/sections/01-overview.tex",
+      "sha256": "2078b953543bd258348d18483dc979c176153baa6ba0f65676fd7ca9b7452dac"
+    },
+    {
+      "path": "papers/hodge-atom-marker-ledger/sections/02-ledger.tex",
+      "sha256": "a0abe2da867de8f076d4ff8750182ad8ff80a57d6b20bb78aee6d911fbde5e60"
+    },
+    {
+      "path": "papers/hodge-atom-marker-ledger/sections/03-hodge.tex",
+      "sha256": "67d1bfeb28310e65f64ab52b51446d240bbfb5fb4658a01e6fadf4625eb12443"
+    },
+    {
+      "path": "papers/hodge-atom-marker-ledger/sections/04-one-step.tex",
+      "sha256": "15a3958374b11406b8aa1d793cc7dc5fdd5ae5bdf97f037ec3d315a191892245"
+    }
+  ],
+  "title": "Hodge Atoms as Occurrence-Indexed Marker Ledgers",
+  "title_normalized": "hodge atoms as occurrence-indexed marker ledgers",
+  "untracked_bibliography": []
+}

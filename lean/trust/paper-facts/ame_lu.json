@@ -157,6 +157,12 @@
       "source": "papers/ame_lu/ame-lu.bbl"
     },
     {
+      "key": "RaissiGogolinRieraAcin2018",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
+    },
+    {
       "key": "RamadasLakshminarayan2025",
       "kind": "bibitem",
       "self_authored": false,
@@ -173,7 +179,13 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/ame_lu/ame-lu.bbl",
-      "text": "Tavis Rudd. \\newblock Diagonal isoduality and transversal {Clifford} groups of {MDS--CSS} codes. \\newblock \\url{https://doi.org/10.5281/zenodo.21766797}, 2026. \\newblock Companion preprint; sources at \\url{https://github.com/tavisrudd/mds-css-transversal-groups}."
+      "text": "Tavis Ru{\\relax dd}. \\newblock Diagonal isoduality and transversal {Clifford} groups of {MDS--CSS} codes. \\newblock \\url{https://doi.org/10.5281/zenodo.21766797}, 2026. \\newblock Companion preprint; sources at \\url{https://github.com/tavisrudd/mds-css-transversal-groups}."
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/ame_lu/ame-lu.bbl"
     },
     {
       "key": "SidiropoulosBro2000",
@@ -569,14 +581,14 @@
     {
       "key": "RuddClebsch2026",
       "kind": "bibtex",
-      "self_authored": true,
+      "self_authored": false,
       "source": "papers/ame_lu/refs.bib",
       "title": "Reconstructing the {Clebsch} Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus"
     },
     {
       "key": "RuddMDSCSSTransversalGroups2026",
       "kind": "bibtex",
-      "self_authored": true,
+      "self_authored": false,
       "source": "papers/ame_lu/refs.bib",
       "title": "Diagonal Isoduality and Transversal {Clifford} Groups of {MDS--CSS} Codes"
     },
@@ -593,6 +605,13 @@
       "self_authored": false,
       "source": "papers/ame_lu/refs.bib",
       "title": "Ovals in a Finite Projective Plane"
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/ame_lu/refs.bib",
+      "title": "On {MDS} Extensions of Generalized {Reed--Solomon} Codes"
     },
     {
       "key": "SidiropoulosBro2000",
@@ -688,7 +707,7 @@
   ],
   "dir": "papers/ame_lu",
   "environment_counts": {
-    "corollary": 9,
+    "corollary": 11,
     "lemma": 14,
     "proposition": 9,
     "remark": 5,
@@ -717,7 +736,15 @@
     },
     {
       "environment": "corollary",
+      "label": "cor:logical-clifford-rounding"
+    },
+    {
+      "environment": "corollary",
       "label": "cor:recognition-generation"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:relative-intertwiner-rounding"
     },
     {
       "environment": "corollary",
@@ -941,10 +968,10 @@
   "paper": "ame_lu",
   "pdfs": [
     {
-      "bytes": 304715,
-      "pages": 35,
+      "bytes": 314323,
+      "pages": 37,
       "path": "papers/ame_lu/ame-lu.pdf",
-      "sha256": "239d97a02d617354c07fd3ee4675916329ea1fc86a9ec26afab08fd432a353aa"
+      "sha256": "d7654488e065014be4e76eb97db8b3ae35d09805f4123ef92097f8d6ad305b8a"
     }
   ],
   "schema_version": 1,
@@ -975,7 +1002,7 @@
     },
     {
       "path": "papers/ame_lu/sections/01-introduction.tex",
-      "sha256": "ecabcf1e0d7a929a061a19b0d215d3ea76e5ca537c22f327c54fce2f4402f764"
+      "sha256": "59435c07cd769e9bcf8faab5d5a28f04d681d1c1091e5424c4fbf8531be2dd57"
     },
     {
       "path": "papers/ame_lu/sections/02-geometry-ame-dictionary.tex",
@@ -987,23 +1014,23 @@
     },
     {
       "path": "papers/ame_lu/sections/05-quantitative-rounding.tex",
-      "sha256": "2aac8f1979ab7a92517bd4e2349a7050374ac04618605cf2729fb94ff71ae16e"
+      "sha256": "e509dbc74a159a449edd0e9c1c162009172702699799e2f1ef63f6623d7a831f"
     },
     {
       "path": "papers/ame_lu/sections/08-verification-boundary.tex",
-      "sha256": "ca3ca136d69cff537e877a8af991c7b2d1daa0c250ce306b7e33fea276d6146c"
+      "sha256": "95d8708d5b00f0bf10d033474ec7ae916f1b366b5fc8b0428cf2fe057c9eec45"
     },
     {
       "path": "papers/ame_lu/sections/07-conclusion.tex",
-      "sha256": "c62d0ec83296ae09d59099810d6bedf333f8b56bf78332c7fb2a8324745ea8f7"
+      "sha256": "72bed1da38637a92f5090153291740a090a81f6d8ed2e4558f665a89e6524c0a"
     },
     {
       "path": "papers/ame_lu/sections/A-partial-weyl-recognition.tex",
-      "sha256": "6575b473197e63d1bfb535a6807f10cc07405baa09e7a2889f0bbefee824e71b"
+      "sha256": "ff0f54553472e5b1f62e00c32238ecaa60735e8dbdbc5e29d6c4dd00746e8d44"
     },
     {
       "path": "papers/ame_lu/sections/B-secondary-quantitative.tex",
-      "sha256": "51258d4ac34d2d09f76695df0672bee2bad7f5b93e6d608b372f73ed7e013d18"
+      "sha256": "70562a1d85a0c4164149b74f8d4152cc311e9cf41c14b188696503c2324ee2e9"
     }
   ],
   "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States",

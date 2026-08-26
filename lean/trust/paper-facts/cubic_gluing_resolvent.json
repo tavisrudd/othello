@@ -1,0 +1,178 @@
+{
+  "bibliography": [
+    {
+      "key": "ACT",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex"
+    },
+    {
+      "key": "CMGHL",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex"
+    },
+    {
+      "key": "Hartlieb",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex"
+    },
+    {
+      "key": "LZ",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex"
+    },
+    {
+      "key": "Paulhus",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex"
+    },
+    {
+      "key": "RebolledoWuthrich",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex"
+    },
+    {
+      "key": "Roulleau",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex"
+    },
+    {
+      "key": "RuddEpilogue",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex",
+      "text": "T.~Rudd, \\emph{Irrationality of cubic threefolds after one stabilization}, preprint, 2026."
+    },
+    {
+      "key": "VGY",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex"
+    }
+  ],
+  "dir": "papers/cubic-gluing-resolvent",
+  "environment_counts": {
+    "corollary": 3,
+    "lemma": 1,
+    "proposition": 3,
+    "remark": 1,
+    "theorem": 1
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:boundary-reconstruction"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:J"
+    },
+    {
+      "environment": "align",
+      "label": "eq:chosen-root"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:deck-sigma"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:disc"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:eta-t"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:j-t"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:kummer-cubic"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:packet"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:prym-pullback"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:resolvent-square"
+    },
+    {
+      "environment": "align",
+      "label": "eq:root"
+    },
+    {
+      "environment": "align",
+      "label": "eq:sign"
+    },
+    {
+      "environment": "align",
+      "label": "eq:split"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:tate"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:tate-invariants"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:torsor-class"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:sign"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:actual-axis"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:chordal-factor"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:programme-input"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main"
+    }
+  ],
+  "main": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex",
+  "manifest_labels": null,
+  "paper": "cubic_gluing_resolvent",
+  "pdfs": [
+    {
+      "bytes": 123897,
+      "pages": 11,
+      "path": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.pdf",
+      "sha256": "90fac5468adadb9510f60eb7b2c8083fe3a62dc85984212a9242c44ba6dd0e7c"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/cubic-gluing-resolvent/cubic_gluing_resolvent.tex",
+      "sha256": "1949be116089a836b6e409a8ee034b5e9afda55582d063a3959c8bba27f0a783"
+    }
+  ],
+  "title": "The Discriminant Resolvent of the \\(A_5\\)-Cubic Pencil",
+  "title_normalized": "the discriminant resolvent of the \\(a_5\\)-cubic pencil",
+  "untracked_bibliography": []
+}

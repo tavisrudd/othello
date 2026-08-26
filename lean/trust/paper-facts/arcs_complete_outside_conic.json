@@ -79,6 +79,12 @@
       "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
     },
     {
+      "key": "Mathon1981",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex"
+    },
+    {
       "key": "Nagy2018",
       "kind": "bibitem",
       "self_authored": false,
@@ -105,7 +111,7 @@
     "problem": 2,
     "proposition": 5,
     "remark": 3,
-    "theorem": 8
+    "theorem": 9
   },
   "labels": [
     {
@@ -398,6 +404,10 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:intro-small-orders"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:main"
     },
     {
@@ -426,17 +436,17 @@
   "paper": "arcs_complete_outside_conic",
   "pdfs": [
     {
-      "bytes": 189442,
-      "pages": 26,
+      "bytes": 195446,
+      "pages": 27,
       "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.pdf",
-      "sha256": "d538b5b79caafb175f5fa9f4d01aeec98d9921adf587930c2e6c65d436c881cf"
+      "sha256": "505d0c06b7f64384684d94c4699aa8731faf05f55cfb7de274fbd15f86f5f69f"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex",
-      "sha256": "36d6aa8fe6d905e8b6d155f3f84b6677d530050a70c7a60530e856b283bd3b64"
+      "sha256": "a19f7827a911de09f64e20ec2cf34d7b61fcf8c3f4ea666423ed92e01f6484c6"
     }
   ],
   "title": "Arcs complete outside a conic:\\\\ a prescribed-hole defect identity and matching-design rigidity",

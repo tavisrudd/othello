@@ -1,0 +1,269 @@
+{
+  "bibliography": [
+    {
+      "key": "BFR",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "Balser",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "Barnes",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "Brown",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "CoatesGivental",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "CoxKatz",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "GGI",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "Givental",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "Luke",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "Meijer",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "Orlov",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "Pandharipande",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    },
+    {
+      "key": "SS",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/discrepancy-one-flips/discrepancy_one_flips.tex"
+    }
+  ],
+  "dir": "papers/discrepancy-one-flips",
+  "environment_counts": {
+    "corollary": 3,
+    "lemma": 6,
+    "proposition": 2,
+    "remark": 5,
+    "theorem": 3
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:normalized"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:presentation"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:repaired"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:A1"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:barparam"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:center"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:common"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:jnorm"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:kappa"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:nu"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:ss35"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:ss37"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:ss64"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:ss78"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:ambient"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:center"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:cone"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:jslice"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:order"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:split-reduction"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:IJ"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:common"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:blowup"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:boundary"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:circularity"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:pbundle"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:uniqueness"
+    },
+    {
+      "environment": "",
+      "label": "sec:aperture"
+    },
+    {
+      "environment": "",
+      "label": "sec:hypotheses"
+    },
+    {
+      "environment": "",
+      "label": "sec:normalization"
+    },
+    {
+      "environment": "",
+      "label": "sec:scope"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:aperture"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:assembled"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:normalization"
+    }
+  ],
+  "main": "papers/discrepancy-one-flips/discrepancy_one_flips.tex",
+  "manifest_labels": null,
+  "paper": "discrepancy_one_flips",
+  "pdfs": [
+    {
+      "bytes": 144892,
+      "pages": 12,
+      "path": "papers/discrepancy-one-flips/discrepancy_one_flips.pdf",
+      "sha256": "9aa5a6b4894da0b32a44c9c733925bdcb86f02809002448acc0805ff887ff912"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/discrepancy-one-flips/discrepancy_one_flips.tex",
+      "sha256": "596cacd21846ecb98dbdc9036373f0e85343cb77dbda189c10a1715674114392"
+    },
+    {
+      "path": "papers/discrepancy-one-flips/sections/01-introduction.tex",
+      "sha256": "5d579b39844973a4de993910a2da65dbd5e4357bf5725e25661a5be0c8b95434"
+    },
+    {
+      "path": "papers/discrepancy-one-flips/sections/02-hypotheses.tex",
+      "sha256": "f39020db8de7df3ed4bf2e1875d64d3188a2777bf1375818dec6b94eab87748b"
+    },
+    {
+      "path": "papers/discrepancy-one-flips/sections/03-normalization.tex",
+      "sha256": "d84da14b73f589c97870a9bf451b0ba6d7027d3ec036fbdf18c90054ca6e9d10"
+    },
+    {
+      "path": "papers/discrepancy-one-flips/sections/04-aperture.tex",
+      "sha256": "45ad0faa9692778ad80503c44be032156774ab3e44062e7335621cf3b10f028f"
+    },
+    {
+      "path": "papers/discrepancy-one-flips/sections/05-scope.tex",
+      "sha256": "1dbb518ff392e37877eb7c6067449f0e799d9b746143a4b0c0a1ce76a275b321"
+    }
+  ],
+  "title": "Standard Flips of Discrepancy One: Extremal \\(J\\)-Normalization and the Meijer Aperture at \\(\\nu=1\\)",
+  "title_normalized": "standard flips of discrepancy one: extremal \\(j\\)-normalization and the meijer aperture at \\( =1\\)",
+  "untracked_bibliography": []
+}
