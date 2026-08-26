@@ -29,6 +29,7 @@ all: lint $(PDF)
 
 lint:
 	python3 supplement/lint_tex_spacing.py $(TEX_SOURCES)
+	python3 verification/check_abstract.py
 	python3 verification/check_annotations.py
 
 $(PDF): $(TEX_SOURCES) refs.bib

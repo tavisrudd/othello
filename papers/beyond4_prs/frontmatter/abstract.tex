@@ -1,57 +1,18 @@
-We classify projective Reed--Solomon split-free syndrome directions, in the
-stated field ranges, from the first previously open case, redundancy five,
-through redundancy ten, and obtain deep-hole classifications wherever the
-covering-radius gate is available.  A syndrome is split-free precisely when
-its two-row Hankel kernel contains no completely split squarefree form.  At
-redundancy five, this kernel is a pencil of cubics.  At higher redundancy,
-coherent polar contraction retains a removed root as a marker, allowing a
-lower split witness to lift without repetition.
+We classify deep holes of full-length projective Reed--Solomon codes beyond
+redundancy four. At redundancies five and six, the classifications are complete
+for every prime power \(q\geq7\). At redundancy seven, we classify all split-free
+syndrome directions for \(q\geq7\) and all deep holes for \(q\geq11\); at
+\(q=8\), exact distances leave precisely ten deep directions in two orbits. At
+redundancies eight, nine, and ten, exact deep-hole classifications hold for
+\(q\geq43,53,59\), respectively.
 
-The split members of the R5 pencil are counted exactly.  On the trivial-gcd
-separable stratum,
-\[
- \#Y_f(\F_q)=6N_f+3d_2+d_3,
-\]
-where \(N_f\) counts the completely split squarefree members, \(d_2\) those
-with a rational double root, \(d_3\) the perfect cubes, and \(Y_f\) is the
-off-diagonal fiber square.  The proof counts rational roots fiber by fiber
-and uses no discriminant, so it holds in every characteristic.  The identity
-class has splitting density \(1/6\), giving the Chebotarev main term
-\((q+1)/6\); the identity bounds \(N_f\) two-sidedly around that main term
-at Weil scale,
-lowers the geometric threshold for a split witness to \(q\geq20\), and in
-characteristic two leaves no split-free \(S_3\) pencil once \(q\geq16\).
-The finite bridge is therefore
-\(q\in\{7,8,9,11,13,17,19\}\).
-
-For every \(r\geq6\), the reduced recursively contained locus is exactly the
-union of the catalecticant rank-two scheme and one maximal adjacent-zero
-Lucas carrier.  Dense squarefree-marker contractions select one terminal
-component, while Pascal nesting merges all modular descendants into that
-carrier.  This component theorem is unconditional.  The finite-field escape
-statement is separate: if the explicit pointed lower packages exist at every
-intermediate redundancy, then
-\[
- q\geq6r-15+\lfloor2\sqrt{6r-17}\rfloor
-\]
-forces every split-free syndrome into this carrier.  Under the same
-hypothesis, when \(\operatorname{char}\F_q>r-1\), the Lucas carrier is empty;
-the radius theorem then leaves exactly the tangent and conjugate-secant
-deep-hole families, with \(q(q+1)^2/2\) projective directions.
-
-The required packages are discharged at the fixed levels.  Redundancies
-five and six are classified for every \(q\geq7\); redundancy seven has a
-complete split-free classification for every \(q\geq7\), which is a
-deep-hole classification for \(q\geq11\); at $q=8$, exact distance
-extraction leaves precisely ten deep directions in two orbits. Redundancies
-eight, nine, and
-ten have exact deep-hole classifications for \(q\geq43,53,59\),
-respectively.  Separately, on the even diagonal $r=q-1$, the known
-dimension-two radius is $r$; in the present syndrome coordinates the
-distinguished tangent direction $e_{r-2}$ has that exact distance, giving
-an explicit certified deep direction at arbitrary redundancy (for example
-R15 over $\F_{16}$).  Certificates close the bounded R5--R7 residues, the full
-degree-nine Lucas carrier at \(q=16,32\), and its invariant block at \(q=64\).
-A final-pair Artin--Schreier argument then proves that at redundancy ten the
-Hankel kernel of every point on the full degree-nine Lucas carrier contains a
-split squarefree form over \(\F_{2^m}\), \(m\geq4\).
+Beyond these fixed levels, we prove unconditionally that, for every redundancy
+\(r\geq6\), the reduced recursively contained locus consists exactly of the
+catalecticant rank-two scheme and one maximal adjacent-zero Lucas carrier.
+Under explicit stagewise hypotheses, this gives an arbitrary-redundancy
+classification in the stated field range and leaves only the tangent and
+conjugate-secant families in high characteristic wherever the covering-radius
+theorem applies. At redundancy ten, we also prove that the degree-nine Lucas
+carrier is shallow over every \(\mathbb F_{2^m}\), \(m\geq4\). Public software and
+replayable certificates support the classifications while recording their
+trust boundaries.
