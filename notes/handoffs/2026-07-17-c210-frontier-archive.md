@@ -382,3 +382,17 @@ Two independent audits checked the incidence inversion, connector
 multiplicities, filtered degree bounds, and cube-coefficient interpolation.
 The identity does not yet kill `E`; the remaining target is to couple it to
 the split point product, reciprocal chart, fourth-Witt, and mapping gates.
+
+The immediate reciprocal audit isolates, but does not eliminate, three of
+the nine coefficients.  Under `N=M^(-1),Y=-X/M`, the transformed identity has
+remainder `(N^(q-1)-1)E_tilde`; it becomes the standard
+`(N^q-N)E_rec` form iff the three homogeneous-cubic coefficients
+`e_03,e_12,e_21` vanish.  The reciprocal cubic is a transform of `E`, not a
+second independent cubic, so its apparent `9+9` match with C962's 18
+degree-eight carrier coefficients is only numerical.
+
+The red-team boundary is exact: adding `(M^q-M)E'` preserves every finite
+directional fiber.  The values of `E` are the transverse derivatives of `Q`
+along the three moving low-pencil roots.  Therefore only a globally split
+point-product identity, a reciprocal norm before field specialization, or a
+Witt lift that computes those derivatives can close the branch.

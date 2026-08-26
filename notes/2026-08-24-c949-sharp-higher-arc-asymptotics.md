@@ -3058,6 +3058,68 @@ has collapsed to the nine coefficients of one cubic `E`.  The identity does
 not force `E=0`; splitting of the original point product, the reciprocal
 chart, and the Witt/mapping gates are exactly the remaining global inputs.
 
+The reciprocal transition isolates the first genuine obstruction inside
+those nine coefficients.  Normalize the tangent chart so that the three
+affine pencil vertices are `(0,0),(1,0),(0,1)`; then
+
+```text
+B_0=X(X+M)(X-1),
+E=sum_(0<=i<3, i+j<=3)e_(ij)X^iM^j.               (SR24a-Redei-E-normal)
+```
+
+Put `N=M^(-1)` and `Y=-X/M`, and homogenize by
+
+```text
+Q^vee=N^(q+3)Q(-Y/N,N^(-1)),
+B_0^vee=product_i(Y-a_i+b_iN),
+C_0^vee=N^q C_0(-Y^3/N^3,N^(-1)),
+E_tilde=N^3 E(-Y/N,N^(-1)).
+```
+
+The degree bounds make all four expressions polynomial, and direct
+substitution in `(SR24a-Redei-cubic)` gives, up to a harmless common sign,
+
+```text
+-Q^vee=B_0^vee C_0^vee+(N^(q-1)-1)E_tilde.
+                                                        (SR24a-Redei-recip)
+```
+
+This has the standard `(N^q-N)E_rec` remainder form precisely when
+
+```text
+N divides E_tilde  iff  e_03=e_12=e_21=0.          (SR24a-Redei-recip-gate)
+```
+
+Thus the homogeneous cubic part of `E` is the exact three-scalar reciprocal
+obstruction.  The omitted tangent direction does not force this gate: it is
+the same large missing-fiber obstruction identified after
+`(SR24a-Redei-top)`.
+
+There is also a hard information boundary.  If
+`L_i=X-b_i+Ma_i`, then
+
+```text
+Q|_(L_i)=(M^q-M)E(b_i-Ma_i,M),
+(partial_M-a_i partial_X)Q|_(L_i,M=m)
+ =-E(b_i-ma_i,m).                                  (SR24a-Redei-transverse)
+```
+
+The field-fiber factorization only says that the left restriction vanishes
+at `m in F_q`; it does not say that `L_i` divides `Q` globally.  Indeed
+replacing `Q` by `Q+(M^q-M)E'` for any cubic `E'` in the displayed
+nine-dimensional space preserves every finite directional fiber and all
+incidence data derived only from them.  Consequently a valid closeout must
+compute these transverse derivatives from the globally split point product,
+a pre-specialization reciprocal norm, or a Witt lift.  More finite-fiber
+factorization cannot constrain `E`.
+
+Finally, the numerical `9+9=18` resemblance to the `q=27` rollback carrier
+is not yet an identification.  The reciprocal `E_tilde` is a linear transform
+of the same nine coefficients, whereas C962's 18 coordinates are the two
+independent degree-eight carrier polynomials `(A,C)`.  Bridging them requires
+an additional theorem relating the tangent-product quotient to
+`C(x)-yA(x)=-y^2`.
+
 There is a useful equivalent design compression.  Take the points of `D` as
 vertices, its `4`-secants as four-element blocks, and join two vertices in a
 leave graph `L` when their line is not a `4`-secant.  Every vertex belongs to
@@ -6260,10 +6322,13 @@ family is lower priority.
   Thus the full remaining field-uniform ambiguity is exactly nine bounded
   coefficients.  The certificate is offset-sensitive and avoids the
   local-jet no-go.  **Open:** eliminate `E` using the original split product,
-  reciprocal chart, fourth-Witt, and mapping gates.  A reciprocal cubic may
-  explain C962's 18-coefficient carrier basis, but that identification is not
-  yet proved.  The omitted tangent slope cannot remove `E` because its
-  missing-intercept factor has degree `Theta(q)`.
+  reciprocal chart, fourth-Witt, and mapping gates.  The reciprocal transform
+  isolates the three homogeneous-cubic coefficients of `E` as its exact
+  obstruction, but is a transform of the same nine variables, not a second
+  cubic.  The apparent match with C962's 18 carrier coefficients is therefore
+  only numerical until a carrier-to-tangent-product bridge is proved.  The
+  omitted tangent slope cannot remove `E` because its missing-intercept
+  factor has degree `Theta(q)`.
   **Settled by `ej`+`tt` — is Mason's large-root family a nearby construction
   of the small root?**  It is the correct characteristic-divisible neighbor,
   but not a cheap switch.  Complementing after one zero side produces a
