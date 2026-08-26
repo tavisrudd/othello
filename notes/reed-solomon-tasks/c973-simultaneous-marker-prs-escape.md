@@ -1,8 +1,9 @@
 # C973 — simultaneous-marker PRS escape and all-level Lucas discriminator
 
-**Lane:** `reed-solomon` · **Status:** active — second proof sprint started;
-standalone reconstruction of the row-space selector converse and terminal
-`S_3` open is in progress
+**Lane:** `reed-solomon` · **Status:** active — second proof sprint complete;
+both standalone seam reconstructions pass author-side review and deterministic
+fixed-`r` selector extraction is proved; external review and pointed R11
+abundance remain open
 
 **Current checkpoint:**
 `c973-2026-08-26-simultaneous-marker-theorem.md` proves direct composite
@@ -24,7 +25,17 @@ The author-side audit and explicit `ej`/`tt` mystery closeout are
 `c973-2026-08-26-hostile-proof-audit.md` and
 `c973-2026-08-26-sprint-closeout.md`.
 The user-requested second Tao pass and its action gates are recorded in
-`c973-2026-08-26-tao-second-pass.md`.
+`c973-2026-08-26-tao-second-pass.md`.  The two load-bearing arguments are
+reconstructed in `c973-2026-08-26-two-seam-reconstruction.md`: the elementary
+reductions pass, while five inherited geometric/counting inputs are explicitly
+left for external reconstruction.  Finally,
+`c973-2026-08-26-deterministic-selector.md` proves successive symbolic marker
+selection using at most `(r-5)q` partial-specialization tests at fixed
+redundancy.  `c973-2026-08-26-software-leverage.md` maps this into a certified
+fast negative locator path and a separately gated parameterized R11+
+classification route for the Projective Reed--Solomon Toolkit.  The
+second-sprint verdict and revised mystery ledger are in
+`c973-2026-08-26-second-sprint-closeout.md`.
 
 ## Objective
 

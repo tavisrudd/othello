@@ -78,6 +78,17 @@ Include the pointed version with `s` additional forbidden roots as a lemma,
 not another theorem: marker selection needs `q>d+m-1+s`, and the terminal
 count replaces `m` by `m+s`.
 
+After the existence proof, add at most one corollary or remark: successive
+specialization of the explicit nonzero selector finds the markers with at
+most `(r-5)q` symbolic partial-substitution/zero tests, followed by `q+1`
+terminal pencil tests.  State this only for fixed `r`, with explicit
+coefficient access; dense selector size is exponential in `r`, so this is not
+a uniform polynomial-time decoder theorem.  Software adoption belongs to the
+classifier successor and is not a prerequisite for the paper.  The concrete
+handoff is `c973-2026-08-26-software-leverage.md`: it separates a locator-
+certificate fast negative path from the new registry and verifier required for
+positive R11+ deep-hole verdicts.
+
 Suggested labels: `thm:simultaneous-marker-escape` and
 `lem:pointed-simultaneous-marker`.
 
@@ -222,6 +233,13 @@ Before manuscript adoption:
 6. statement-map, annotation, evidence, and formal-boundary reconciliation;
 7. both manuscript builds, complete verifier, and clean standalone export;
 8. cold specialist and generalist reads of the compressed architecture.
+
+The seam reconstruction sharpens Gate 1: the external reader must check
+C536's coherent-Fano identity, the projected-Veronese no-line property,
+C597's wild-cone ruling calculation, the terminal cyclic/inseparable
+classification, and the exact R5 count/branch budgets against their original
+proofs.  The remaining selector, density, positive-gcd, and monodromy
+reductions are now standalone in the C973 report.
 
 The manuscript successor requires a newly reserved C ID.  C973 does not edit
 the paper, mirror, release metadata, or software.
