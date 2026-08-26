@@ -33,6 +33,8 @@ remaining step is a global inverse/classification theorem.
   `notes/2026-08-26-c949-structural-proof-snapshot.md`.
 - Focused bounded transverse-core proof:
   `notes/2026-08-26-c949-redei-transverse-core.md`.
+- Minimal-blocker variance and Mason-attraction boundary:
+  `notes/2026-08-26-c949-minimal-blocker-variance.md`.
 - Chronological session log and links to focused snapshots:
   `notes/2026-08-24-c949-sharp-higher-arc-asymptotics-archive.md`.
 - C962 finite-carrier application memo:
@@ -207,9 +209,12 @@ three reciprocal obstructions `e_03,e_12,e_21`, from one of:
 4. a bounded symbolic rejection core extracted from the q=27 gates.
 
 The carrier-to-point-product map is explicit in `(TR14)--(TR16)`.  The
-highest-EV calculation is to transport the existing fourth-Witt top-carrier
-coefficient through that product and isolate a coefficient of `E,U`, or the
-quartic `L`.
+leading tangent-direction layer now extracts `E_3` and `L_4` exactly, but
+the original affine leading product is carrier-blind.  The highest-EV
+calculation is therefore to transport the existing fourth-Witt top-carrier
+coefficient through the actual tangent reflagging.  The required four
+carrier coefficients are now located explicitly and linearly in the first
+lower homogeneous Chow layer `(TR21)`; `C` starts only one layer later.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
@@ -225,6 +230,14 @@ Prove that a near-sharp minimal `q/3`-fold blocker either has
 for some Mason root `S`, contradicting the quadratic separation theorem, or
 directly incurs `eta>=c q`.  Scalar line moments and essentiality alone have
 formal countermodels and cannot establish this.
+
+The exact variance reinterpretation `(MV1)` supplies a sharper starting
+normal form: the `2q+O(1)` tight lines partition `B` and cover `A` fourfold
+outside an `O(q)` weighted point defect.  The missing theorem is now an
+embedded stability/classification theorem for that approximate design,
+coupled to the three-line residue core.  Off that core every exceptional
+degree costs nine units of the variance budget, but this alone still permits
+`O(q)` exceptional pencils.
 
 ### EV3 — concurrent cubic coupling
 
@@ -267,6 +280,15 @@ separate global trade obstruction or construction.
 - **Settled/no-go:** two-tangent transpose gives an exact bounded quartic
   transition, but coordinate covariance alone absorbs `(E,U)` into its high
   quotient and supplies no self-relation.
+- **Settled:** the leading tangent-direction Chow form extracts the three
+  reciprocal obstructions and the quartic top layer exactly.
+- **Settled/no-go:** the original affine leading carrier product is
+  universal, so fourth Witt must enter through lower layers and tangent
+  reflagging.
+- **Settled:** the first lower Chow layer contains all coefficients of `A`
+  lacunarily and linearly, including exactly the four used by fourth Witt.
+- **Settled:** the minimal-blocker variance identity makes every SR11
+  signature an `O(q)`-defect one/four tight-line design.
 - **Open:** compute the transverse pencil derivatives from split/Witt/norm
   data.
 - **Open:** connect any resulting bounded identity to C962's `(A,C)` carrier
@@ -277,7 +299,9 @@ separate global trade obstruction or construction.
 
 ## Next checkpoint
 
-Push the fourth-Witt top-carrier coefficient through the explicit product
-`(TR14)--(TR16)` and the canonical divisions.  Test first whether the
-homogeneous degree-four part of `L` depends only on the top four carrier
-coefficients; transpose covariance by itself is closed as tautological.
+Compute the actual tangent reflagging of `(TR16h)` and test whether the
+explicit four-coefficient polar `(TR21)` maps to a bounded functional of
+`E_3` or `L_4`.
+In parallel, combine `(MV1)` with the signed three-line residue support to
+classify the `O(q)` exceptional degree set of the approximate one/four
+design.

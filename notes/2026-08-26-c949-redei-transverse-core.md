@@ -287,8 +287,9 @@ R_(B_aff^Frob)(Zeta,m)
  =P_car(Zeta,m) product_(e in E_0)(Zeta-e).         (TR15)
 ```
 
-If the three restored infinity points are `[u:t:0]`, the homogeneous Chow
-product of `D^Frob` is, up to a nonzero scalar,
+If the three restored infinity points are `[u:t:0]`, the following is the
+`W=1` affine dehomogenization of the Chow product of `D^Frob`, up to a
+nonzero scalar:
 
 ```text
 widehat R_(D^Frob)(Zeta,m)
@@ -297,10 +298,24 @@ widehat R_(D^Frob)(Zeta,m)
   product_([u:t:0] in R_infty)(m u-t).             (TR16)
 ```
 
-The degree check is exact: `2q-2+3+3=2q+4=|D|`.
+The degree check is exact: `2q-2+3+3=2q+4=|D|`.  The rigorous homogeneous
+form uses line coordinates `(Z,M,W)`.  Put
 
-Any rational tangent chart is obtained from `(TR16)` by the contragredient
-projective substitution on line coordinates and division by the selected
+```text
+L_u=Z+Mu+wuW.
+```
+
+Then
+
+```text
+Chow_D(Z,M,W)
+ =product_(u!=0)[L_u^2-A(u^3)W L_u+C(u^3)W^2]
+  product_(e in E_0)(Z-eW)
+  product_([u:t:0] in R_infty)(Mu-tW).              (TR16h)
+```
+
+Any rational tangent chart is obtained by a contragredient linear projective
+substitution in `(TR16h)`, dehomogenization, and division by the selected
 tangent-point factor.  Canonical division by `X^q-X` and `M^q-M` then
 computes `Q,H`, hence the bounded cores `E,U` and the two-tangent quartic
 `L`.  Thus the carrier-to-Chow/Redei map is explicit and valid in both the
@@ -313,6 +328,120 @@ fourth-Witt gate controls selected top coefficients of `A`, but no proved
 coefficient extraction carries it through `(TR14)--(TR16)` to a linear
 functional of `E,U`, or `L`.  That extraction is now the precise algebraic
 frontier; the absence of a carrier-to-Redei map is no longer the obstruction.
+
+## Exact leading-layer extraction and its blind spot
+
+There is nevertheless a sharp top-layer formula.  Put `N=2q+3`, the degree
+of a tangent-chart point product, and let `R_N` be the total-homogeneous
+degree-`N` part of
+
+```text
+R=(X^q-X)Q+(M^q-M)H,       deg_X H<q.
+```
+
+The two leading quotient layers are obtained by disjoint `X`-degree cuts:
+
+```text
+Q_(q+3)=X^(-q) [R_N]_(deg_X>=q),
+H_(q+3)=M^(-q) [R_N]_(deg_X<q).                       (TR17)
+```
+
+Taking the top layer in `(TR12)` therefore gives the explicit homogeneous
+quartic
+
+```text
+L_4=X^(-q)(X Q_(D,q+3)(M,X)-lambda M H_(tau D,q+3)(X,M)).   (TR18)
+```
+
+Likewise let `B_(0,3)=product_i(X+a_iM)` be the homogeneous cubic part of
+`B_0`, and write
+
+```text
+E_3=e_03 M^3+e_12 XM^2+e_21 X^2M.
+```
+
+The degree-`q+3` part of `Q=B_0C_0+(M^q-M)E` yields
+
+```text
+M^q E_3=rem_X(Q_(q+3),B_(0,3)).                       (TR19)
+```
+
+Thus the reciprocal obstruction coefficients and `L_4` are computable
+from the leading tangent-direction Chow form.  This is an exact bounded
+extraction, but it does not yet connect them to fourth Witt.
+
+Indeed, in the original balanced-shear affine chart, the top homogeneous
+part of the zero-completed carrier product is universally
+
+```text
+(Zeta^(q-1)-m^(q-1))^2,
+```
+
+and the three affine-axis factors make the top affine-core layer
+
+```text
+Zeta^3 (Zeta^(q-1)-m^(q-1))^2.                        (TR20)
+```
+
+It is independent of `A,C,w`, whereas the fourth-Witt scalar uses the top
+four carrier coefficients.  Therefore the original leading layer cannot by
+itself transport the fourth-Witt gate.  This is a method boundary, not an
+absolute independence theorem: the contragredient change to an actual
+tangent flag can mix lower Chow layers into the new directional leading
+form, and the flag depends on `D`.  Any successful bridge must compute that
+reflagging from lower/full Chow data.
+
+The first lower layer is already completely explicit.  Write
+
+```text
+A(X)=sum_(h=0)^(r-1) a_h X^h,
+G=Z^(q-1)-M^(q-1).
+```
+
+For the homogeneous carrier bulk in `(TR16h)`, one has
+
+```text
+P_car(Z,M,W)=G^2+W P_1+O(W^2),
+
+P_1=G[ a_0 Z^(q-2)
+       +sum_(h=1)^(r-1)(-1)^h a_h Z^(3h-1)M^(q-1-3h)
+       -w M^(q-2)].                                  (TR21)
+```
+
+To prove `(TR21)`, take the `W` coefficient in each quadratic factor and
+use
+
+```text
+G sum_(u!=0) 1/(Z+Mu)=-Z^(q-2),
+G sum_(u!=0) u^k/(Z+Mu)
+ =(-1)^(k-1)Z^(k-1)M^(q-1-k),  1<=k<=q-2.
+```
+
+Thus every coefficient of `A` is linearly readable from the first normal
+Chow layer.  In particular, for `k=1,2,3,4`, the coefficient `a_(r-k)` is,
+up to the displayed sign, the coefficient of
+
+```text
+Z^(q-3k-1) M^(3k-1)
+```
+
+in `P_1/G`.  Hence the complete fourth-Witt input
+`a_(r-4),...,a_(r-1)` and `Delta_A` is already present one layer below
+`(TR20)`; `C` first enters at order `W^2`.
+
+For the full product the boundary correction is also explicit.  If
+`product_(e in E_0)(Z-eW)=Z^3-e_1(E_0)Z^2W+...` and
+`Phi=product_(R_infty)(Mu-tW)=Phi_0+W Phi_1+...`, its `W` coefficient is
+
+```text
+Phi_0[Z^3P_1-e_1(E_0)Z^2G^2]+Phi_1Z^3G^2.           (TR22)
+```
+
+One must not divide by `Phi_0` when it vanishes.  Equations `(TR21)--(TR22)`
+do not yet transport fourth Witt to `E_3` or `L_4`: a general tangent
+reflag restricts `(TR16h)` to a new infinity plane and can mix all original
+`W` layers.  They sharpen the live frontier to computing that restriction,
+not discovering where the carrier coefficients enter.
 
 ## Mystery ledger (`ej` + `tt`)
 
@@ -327,5 +456,12 @@ frontier; the absence of a carrier-to-Redei map is no longer the obstruction.
 - **Open:** decide whether a Witt or norm identity forces any nonzero linear
   functional of `E` or `U`.
 - **Settled:** `(TR14)--(TR16)` give an explicit carrier-to-Chow/Redei map.
-- **Open:** compress the `q-1`-fold product enough to transport the
+- **Settled:** `(TR17)--(TR19)` extract `E_3` and `L_4` from the leading
+  tangent-direction Chow form.
+- **Settled/no-go:** `(TR20)` proves that the original affine leading layer
+  is carrier-blind; fourth Witt must enter through lower layers and tangent
+  reflagging.
+- **Settled:** `(TR21)--(TR22)` locate the entire fourth-Witt carrier input
+  linearly in the first lower homogeneous Chow layer.
+- **Open:** compute the tangent reflagging well enough to transport the
   fourth-Witt/top-carrier coefficient gate to `E,U`, or `L`.

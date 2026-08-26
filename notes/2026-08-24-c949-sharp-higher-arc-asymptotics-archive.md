@@ -152,3 +152,24 @@ The former 6,800-line C949 card was frozen as
 now the short live router.  Future detailed proof batches should land in
 focused dated snapshots and be linked here; this archive records sessions,
 not full derivations.
+
+## 2026-08-26 — leading Chow extraction and blocker variance
+
+Two audited frontiers landed in focused snapshots.
+
+First, `(TR17)--(TR19)` in
+`notes/2026-08-26-c949-redei-transverse-core.md` extract the homogeneous
+quartic `L_4` and the three reciprocal-obstruction coefficients of `E`
+directly from the leading tangent-direction Chow form.  The original
+balanced-shear leading affine product is universal, so this layer cannot see
+the fourth-Witt carrier scalar.  The exact first lower layer `(TR21)` then
+locates every coefficient of `A` lacunarily and linearly; in particular the
+four fourth-Witt inputs are already present there and `C` begins only at the
+next layer.  The live algebraic task is now the actual tangent reflagging.
+
+Second, `notes/2026-08-26-c949-minimal-blocker-variance.md` identifies the
+published minimal-blocker variance with C949's defect norm.  Across every
+fixed SR11 signature the tight lines partition the blocking complement and
+cover the arc fourfold outside an exact `O(q)` weighted degree defect.  This
+is a global approximate-design normal form, but the equality theorem remains
+inapplicable and no Mason attraction is claimed.
