@@ -4607,6 +4607,124 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "the q=27 fourth Witt representative gates changed"
         )
 
+    def polynomial_trim(coefficients: list[int]) -> list[int]:
+        out = coefficients[:]
+        while len(out) > 1 and out[-1] == 0:
+            out.pop()
+        return out
+
+    def polynomial_cube(coefficients: list[int]) -> list[int]:
+        out = [0] * (3 * (len(coefficients) - 1) + 1)
+        for index, coefficient in enumerate(coefficients):
+            out[3 * index] = chart_field.pow(coefficient, 3)
+        return out
+
+    def polynomial_hasse(
+            coefficients: list[int], order: int) -> list[int]:
+        if order >= len(coefficients):
+            return [0]
+        return [
+            chart_field.mul(
+                math.comb(index + order, order) % 3,
+                coefficients[index + order],
+            )
+            for index in range(len(coefficients) - order)
+        ]
+
+    secant_hasse_peeling_checks = 0
+    for trial in range(chart_q):
+        leave_form = [
+            (trial + 2 * index + 1) % chart_q for index in range(5)
+        ]
+        rich_form = [
+            (3 * trial + 5 * index + 2) % chart_q for index in range(6)
+        ]
+        rich_cube = polynomial_cube(rich_form)
+        secant_form = polynomial_mul(leave_form, rich_cube)
+        direct_third = polynomial_hasse(secant_form, 3)
+        peeled_third = polynomial_add(
+            polynomial_mul(polynomial_hasse(leave_form, 3), rich_cube),
+            polynomial_mul(
+                leave_form,
+                polynomial_cube(polynomial_hasse(rich_form, 1)),
+            ),
+        )
+        if polynomial_trim(direct_third) != polynomial_trim(peeled_third):
+            raise AssertionError("the third-Hasse secant peeling changed")
+        secant_hasse_peeling_checks += 1
+
+    redei_witt_tangent_checks = 0
+    for trial in range(chart_q):
+        slope = chart_field.pow(primitive, trial % (chart_q - 1))
+        intercept_order = [
+            (trial + offset) % chart_q for offset in range(chart_q)
+        ]
+        high_intercepts = set(intercept_order[:chart_r])
+        double_intercept = intercept_order[chart_r]
+        singleton_intercepts = intercept_order[chart_r + 1:]
+        multiplicities = {
+            intercept: (
+                4 if intercept in high_intercepts
+                else 2 if intercept == double_intercept
+                else 1
+            )
+            for intercept in range(chart_q)
+        }
+        for singleton_index, intercept in enumerate(singleton_intercepts):
+            direct_derivative = 1
+            for other_intercept, multiplicity in multiplicities.items():
+                if other_intercept == intercept:
+                    continue
+                difference = chart_field.add(
+                    intercept, chart_field.neg(other_intercept)
+                )
+                direct_derivative = chart_field.mul(
+                    direct_derivative,
+                    chart_field.pow(difference, multiplicity),
+                )
+            high_value = 1
+            for high_intercept in high_intercepts:
+                high_value = chart_field.mul(
+                    high_value,
+                    chart_field.add(
+                        intercept, chart_field.neg(high_intercept)
+                    ),
+                )
+            expected_derivative = chart_field.neg(chart_field.mul(
+                chart_field.add(
+                    intercept, chart_field.neg(double_intercept)
+                ),
+                chart_field.pow(high_value, 3),
+            ))
+            if direct_derivative != expected_derivative:
+                raise AssertionError("the ordinary Redei derivative changed")
+            u_value = (trial + singleton_index + 1) % chart_q
+            t_value = chart_field.add(
+                intercept, chart_field.mul(slope, u_value)
+            )
+            carry = chart_field.pow(
+                chart_field.mul(
+                    chart_field.mul(slope, u_value),
+                    chart_field.mul(t_value, intercept),
+                ),
+                chart_r,
+            )
+            direct_tangent_digit = chart_field.neg(
+                chart_field.mul(carry, direct_derivative)
+            )
+            expected_tangent_digit = chart_field.mul(
+                carry,
+                chart_field.mul(
+                    chart_field.add(
+                        intercept, chart_field.neg(double_intercept)
+                    ),
+                    chart_field.pow(high_value, 3),
+                ),
+            )
+            if direct_tangent_digit != expected_tangent_digit:
+                raise AssertionError("the Redei-Witt tangent digit changed")
+            redei_witt_tangent_checks += 1
+
     global_leave_ledger_checks = []
     for ledger_q in (9, 27, 81, 243):
         line_two = 3 * ledger_q - 6
@@ -4627,6 +4745,191 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         if unmatched_incidence_defect != 15:
             raise AssertionError("the three-matching leave defect changed")
         line_one = 3 + (ledger_q - 4) * (2 * ledger_q // 3 - 1)
+        projective_line_zero = ledger_q - 2
+        six_line_residue_spectrum = {
+            "positive": line_two,
+            "negative": projective_line_zero + line_three,
+            "zero": line_one + line_four,
+        }
+        if (six_line_residue_spectrum != {
+                "positive": 3 * ledger_q - 6,
+                "negative": 3 * ledger_q,
+                "zero": ledger_q * ledger_q - 5 * ledger_q + 7}
+                or sum(six_line_residue_spectrum.values())
+                != ledger_q * ledger_q + ledger_q + 1):
+            raise AssertionError("the dual six-line residue spectrum changed")
+        high_line_count = line_four + 2 * ledger_q
+        high_core_degree = 2 * ledger_q // 3
+        external_point_count = ledger_q * ledger_q - ledger_q
+        external_high_degree_sum = ledger_q * ledger_q * (ledger_q - 1) // 3
+        external_high_degree_square_sum = (
+            ledger_q * ledger_q * (ledger_q * ledger_q - ledger_q + 6) // 9
+        )
+        external_high_centered_norm = 2 * ledger_q * ledger_q // 3
+        high_r = ledger_q // 3
+        dual_high_intersection_spectrum = {
+            "0": 3,
+            str(high_r): ledger_q * ledger_q - ledger_q - 6,
+            str(2 * high_r): 2 * ledger_q + 4,
+        }
+        reciprocal_arrangement_spectrum = {
+            "2": 3 * ledger_q - 3,
+            "3": 3,
+            "4": high_line_count,
+        }
+        reciprocal_arrangement_line_count = 2 * ledger_q + 4
+        blocking_four_arc_spectrum = {
+            "1": (2 * ledger_q * ledger_q - 8 * ledger_q + 3) // 3,
+            "2": 3 * ledger_q - 3,
+            "3": 3,
+            "4": high_line_count,
+        }
+        blocking_four_arc_local_types = [
+            {
+                "multiplicity": 2 * ledger_q - 5,
+                "degrees_1_2_3_4": [high_r - 2, 3, 0, 2 * high_r],
+            },
+            {
+                "multiplicity": 9,
+                "degrees_1_2_3_4": [high_r - 1, 1, 1, 2 * high_r],
+            },
+        ]
+        if (high_line_count != ledger_q * (ledger_q + 2) // 3
+                or (2 * ledger_q + 1) * high_core_degree
+                != 3 * (2 * ledger_q) + 4 * line_four
+                or (ledger_q + 1) * high_line_count
+                - (2 * ledger_q + 1) * high_core_degree
+                != external_high_degree_sum
+                or (ledger_q * high_line_count + high_line_count ** 2)
+                - (2 * ledger_q + 1) * high_core_degree ** 2
+                != external_high_degree_square_sum
+                or (external_high_degree_square_sum
+                    - (ledger_q // 3) ** 2 * external_point_count)
+                != external_high_centered_norm):
+            raise AssertionError("the global high-line shell changed")
+        if (sum(dual_high_intersection_spectrum.values())
+                != ledger_q * ledger_q + ledger_q + 1
+                or (high_r
+                    * dual_high_intersection_spectrum[str(high_r)]
+                    + 2 * high_r
+                    * dual_high_intersection_spectrum[str(2 * high_r)])
+                != (ledger_q + 1) * high_line_count
+                or dual_high_intersection_spectrum[str(2 * high_r)]
+                != reciprocal_arrangement_line_count):
+            raise AssertionError("the dual high-line intersection spectrum changed")
+        if (reciprocal_arrangement_spectrum["2"]
+                + 3 * reciprocal_arrangement_spectrum["3"]
+                + 6 * reciprocal_arrangement_spectrum["4"]
+                != math.comb(reciprocal_arrangement_line_count, 2)):
+            raise AssertionError("the reciprocal high-secant arrangement changed")
+        arrangement_characteristic_b2 = (
+            reciprocal_arrangement_spectrum["2"]
+            + 2 * reciprocal_arrangement_spectrum["3"]
+            + 3 * reciprocal_arrangement_spectrum["4"]
+        )
+        arrangement_combinatorial_tjurina_count = (
+            reciprocal_arrangement_spectrum["2"]
+            + 4 * reciprocal_arrangement_spectrum["3"]
+            + 9 * reciprocal_arrangement_spectrum["4"]
+        )
+        candidate_arrangement_exponents = [1, ledger_q, ledger_q + 3]
+        arrangement_saito_generator_degree = ledger_q + 3
+        if (arrangement_characteristic_b2
+                != ledger_q * ledger_q + 5 * ledger_q + 3
+                or arrangement_combinatorial_tjurina_count
+                != 3 * ledger_q * ledger_q + 9 * ledger_q + 9
+                or sum(candidate_arrangement_exponents)
+                != reciprocal_arrangement_line_count
+                or (candidate_arrangement_exponents[0]
+                    * candidate_arrangement_exponents[1]
+                    + candidate_arrangement_exponents[0]
+                    * candidate_arrangement_exponents[2]
+                    + candidate_arrangement_exponents[1]
+                    * candidate_arrangement_exponents[2])
+                != arrangement_characteristic_b2
+                or math.prod(candidate_arrangement_exponents)
+                != ledger_q * (ledger_q + 3)
+                or 1 + ledger_q + arrangement_saito_generator_degree
+                != reciprocal_arrangement_line_count
+                or arrangement_combinatorial_tjurina_count
+                != (reciprocal_arrangement_line_count - 1) ** 2
+                    - ledger_q * (ledger_q + 3)):
+            raise AssertionError("the reciprocal arrangement characteristic data changed")
+        if (sum(blocking_four_arc_spectrum.values())
+                != ledger_q * ledger_q + ledger_q + 1
+                or sum(index * blocking_four_arc_spectrum[str(index)]
+                    for index in range(1, 5))
+                != reciprocal_arrangement_line_count * (ledger_q + 1)
+                or sum(index * (index - 1) * blocking_four_arc_spectrum[str(index)]
+                    for index in range(1, 5))
+                != reciprocal_arrangement_line_count
+                    * (reciprocal_arrangement_line_count - 1)):
+            raise AssertionError("the blocking four-arc spectrum changed")
+        local_tangent_incidence = sum(
+            row["multiplicity"] * row["degrees_1_2_3_4"][0]
+            for row in blocking_four_arc_local_types
+        )
+        local_bisecant_incidence = sum(
+            row["multiplicity"] * row["degrees_1_2_3_4"][1]
+            for row in blocking_four_arc_local_types
+        )
+        local_trisecant_incidence = sum(
+            row["multiplicity"] * row["degrees_1_2_3_4"][2]
+            for row in blocking_four_arc_local_types
+        )
+        local_four_secant_incidence = sum(
+            row["multiplicity"] * row["degrees_1_2_3_4"][3]
+            for row in blocking_four_arc_local_types
+        )
+        if (local_tangent_incidence != blocking_four_arc_spectrum["1"]
+                or local_bisecant_incidence
+                != 2 * blocking_four_arc_spectrum["2"]
+                or local_trisecant_incidence
+                != 3 * blocking_four_arc_spectrum["3"]
+                or local_four_secant_incidence
+                != 4 * blocking_four_arc_spectrum["4"]):
+            raise AssertionError("the blocking four-arc local types changed")
+        high_pencil_counts = {
+            "member": 4,
+            "external_off_zero_triangle": 1,
+            "external_on_open_side": 2,
+            "zero_triangle_vertex": 3,
+        }
+        for member, zero_secants, expected in (
+                (1, 0, 4), (0, 0, 1), (0, 1, 2), (0, 2, 3)):
+            if 1 + zero_secants + 3 * member != expected:
+                raise AssertionError("the reciprocal high-secant pencil count changed")
+        arrangement_product_degree = 2 * ledger_q + 4
+        arrangement_torus_remainder_degree = arrangement_product_degree - 3
+        arrangement_torus_quotient_degree_cap = (
+            arrangement_torus_remainder_degree - (ledger_q - 1)
+        )
+        if (2 * (ledger_q - 1) + 2 * 3
+                != arrangement_product_degree
+                or 2 + 2 * (ledger_q + 1)
+                != arrangement_product_degree
+                or arrangement_torus_remainder_degree != 2 * ledger_q + 1
+                or arrangement_torus_quotient_degree_cap != ledger_q + 2):
+            raise AssertionError("the arrangement boundary normal form changed")
+        direction_discriminant_exponents = {
+            "vertex": ledger_q + 2,
+            "boundary": 2 * ledger_q,
+            "ordinary": 2 * ledger_q + 1,
+        }
+        direction_discriminant_degree = (
+            2 * direction_discriminant_exponents["vertex"]
+            + 3 * direction_discriminant_exponents["boundary"]
+            + (ledger_q - 4) * direction_discriminant_exponents["ordinary"]
+        )
+        cube_quotient_degree = 2 * ledger_q * ledger_q // 3
+        if direction_discriminant_degree != math.comb(point_count, 2):
+            raise AssertionError("the direction discriminant degree changed")
+        if (direction_discriminant_degree + 3
+                != 3 * cube_quotient_degree + 2 + (ledger_q + 1)):
+            raise AssertionError("the discriminant cube identity changed")
+        if [direction_discriminant_exponents[key] % 3
+                for key in ("vertex", "boundary", "ordinary")] != [2, 0, 1]:
+            raise AssertionError("the discriminant cube-free skeleton changed")
         local_types = [
             {
                 "name": "ordinary_three_colour",
@@ -4665,6 +4968,20 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                     for record in local_types) != (index + 1) * line_counts[index]
                 for index in range(4)):
             raise AssertionError("the local/global secant incidence ledger changed")
+        rich_secant_arrangement_degree = line_three + 2 * line_four
+        if (line_two + 3 * rich_secant_arrangement_degree
+                != math.comb(point_count, 2)):
+            raise AssertionError("the secant-line cube factorization changed")
+        rich_secant_local_multiplicities = [
+            record["profile_1_2_3_4"][2]
+            + 2 * record["profile_1_2_3_4"][3]
+            for record in local_types
+        ]
+        if rich_secant_local_multiplicities != [
+                4 * ledger_q // 3 - 3,
+                4 * ledger_q // 3 - 2,
+                4 * ledger_q // 3 - 2]:
+            raise AssertionError("the rich secant local multiplicities changed")
         cubic_exception_numerator = ledger_q * ledger_q - 4 * ledger_q - 18
         cubic_exception_denominator = 2 * ledger_q - 9
         cubic_exception_lower_bound = -(
@@ -4676,6 +4993,15 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         if (ledger_q >= 27
                 and cubic_exception_lower_bound != (ledger_q + 1) // 2):
             raise AssertionError("the cubic concentration gap changed")
+        if ledger_q >= 27 and line_one <= 3 * ledger_q + 3:
+            raise AssertionError("the two-conic singleton contradiction changed")
+        if (ledger_q >= 81
+                and not (ledger_q + 1 + 6 * math.sqrt(ledger_q)
+                    < 2 * ledger_q + 4
+                    and ledger_q + 1 + 2 * math.sqrt(ledger_q) + 4
+                    < 2 * ledger_q + 4
+                    and 2 * ledger_q + 2 < 2 * ledger_q + 4)):
+            raise AssertionError("the quartic Aubry-Perret gap changed")
         global_leave_ledger_checks.append({
             "field_order": ledger_q,
             "point_count": point_count,
@@ -4689,11 +5015,88 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "common_matching_domain_exact": 2 * ledger_q - 8,
             "trisecant_excess_budget": 6,
             "local_point_types": local_types,
+            "direction_discriminant_exponents": (
+                direction_discriminant_exponents
+            ),
+            "dual_six_line_residue_spectrum": six_line_residue_spectrum,
+            "dual_six_line_residue_weight": 6 * ledger_q - 6,
+            "global_high_line_count": high_line_count,
+            "global_high_core_degree": high_core_degree,
+            "global_high_external_point_count": external_point_count,
+            "global_high_external_degree_sum": external_high_degree_sum,
+            "global_high_external_degree_square_sum": (
+                external_high_degree_square_sum
+            ),
+            "global_high_external_centered_norm": (
+                external_high_centered_norm
+            ),
+            "dual_high_line_intersection_spectrum": (
+                dual_high_intersection_spectrum
+            ),
+            "dual_high_zero_secants_form_triangle": True,
+            "reciprocal_high_secant_line_count": (
+                reciprocal_arrangement_line_count
+            ),
+            "reciprocal_high_secant_pencil_counts": high_pencil_counts,
+            "reciprocal_high_secant_arrangement_spectrum": (
+                reciprocal_arrangement_spectrum
+            ),
+            "reciprocal_arrangement_characteristic_polynomial_roots": (
+                candidate_arrangement_exponents
+            ),
+            "reciprocal_arrangement_characteristic_b2": (
+                arrangement_characteristic_b2
+            ),
+            "reciprocal_arrangement_combinatorial_tjurina_count": (
+                arrangement_combinatorial_tjurina_count
+            ),
+            "reciprocal_arrangement_freeness_by_yoshinaga_finite_field": True,
+            "reciprocal_arrangement_free_exponents": (
+                candidate_arrangement_exponents
+            ),
+            "reciprocal_arrangement_frobenius_basis_degree": ledger_q,
+            "reciprocal_arrangement_saito_generator_degree": (
+                arrangement_saito_generator_degree
+            ),
+            "reciprocal_arrangement_saito_determinant_degree": (
+                reciprocal_arrangement_line_count
+            ),
+            "blocking_four_arc_point_count": reciprocal_arrangement_line_count,
+            "blocking_four_arc_line_spectrum": blocking_four_arc_spectrum,
+            "blocking_four_arc_local_types": blocking_four_arc_local_types,
+            "blocking_four_arc_three_trisecants_nonconcurrent": True,
+            "arrangement_product_degree": arrangement_product_degree,
+            "arrangement_triangle_open_point_multiplicity": 2,
+            "arrangement_triangle_vertex_multiplicity": 3,
+            "arrangement_torus_remainder_degree": (
+                arrangement_torus_remainder_degree
+            ),
+            "arrangement_torus_quotient_degree_cap": (
+                arrangement_torus_quotient_degree_cap
+            ),
+            "direction_discriminant_degree": direction_discriminant_degree,
+            "direction_discriminant_cube_quotient_degree": (
+                cube_quotient_degree
+            ),
+            "direction_discriminant_cube_free_remainders": [2, 0, 1],
+            "secant_line_cube_free_degree": line_two,
+            "secant_line_cube_root_degree": rich_secant_arrangement_degree,
+            "secant_line_cube_root_local_multiplicities": (
+                rich_secant_local_multiplicities
+            ),
             "degree_at_most_three_curve_exception_lower_bound": (
                 cubic_exception_lower_bound
             ),
             "degree_at_most_three_curve_core_upper_bound": (
                 point_count - cubic_exception_lower_bound
+            ),
+            "singleton_line_count": line_one,
+            "two_conic_singleton_line_upper_bound": 3 * ledger_q + 3,
+            "quartic_carrier_excluded_for_q_at_least_81": ledger_q >= 81,
+            "redei_zero_digit_boundary_slope_count": 3,
+            "redei_reduced_slope_quotient_degree": 2,
+            "redei_good_slope_tangent_count": (
+                (ledger_q - 4) * (2 * ledger_q // 3 - 1)
             ),
         })
 
@@ -4963,6 +5366,10 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         "balanced_global_three_matching_leave_checks": (
             global_leave_ledger_checks
         ),
+        "balanced_secant_third_hasse_peeling_checks": (
+            secant_hasse_peeling_checks
+        ),
+        "balanced_redei_witt_tangent_checks": redei_witt_tangent_checks,
         "balanced_grid_energy_ledger_row_counts": grid_energy_ledger_counts,
         "balanced_grid_shifted_quartic_gcd_checks": (
             grid_shifted_gcd_checks

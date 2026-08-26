@@ -9,7 +9,11 @@ now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 reduced to the almost-duplex/near-Rédei/moment conditions
 `(SR18)--(SR24z)`, `(SR24-Witt)--(SR24-WittK)`, and
 the absolute-defect global design `(SR24a-global)--(SR24a-local')` together
-with `(SR24-grid-energy)--(SR24-grid-gcd'')`; no
+with `(SR24a-secant-form)--(SR24a-quartic-gap)`,
+the exact dual `(0,q/3,2q/3)` set and minimal blocking `4`-arc
+`(SR24a-highincidence)--(SR24a-arrangement-torus)`,
+`(SR24-Redei)--(SR24-Redei-Witt)`, and
+`(SR24-grid-energy)--(SR24-grid-gcd'')`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -1836,6 +1840,367 @@ ell_2+3ell_3+6ell_4
  =q(2q+1)=binom(2q+1,2).              (SR24a-global')
 ```
 
+The line-degree residue has an exact six-line description in the dual plane.
+Let `O^*` be the dual line parametrizing primal lines through the external
+affine triangle vertex `(0,0)`.  For each projective direction `d`, let
+`D_d^*` be the dual line parametrizing the pencil through the corresponding
+point at infinity.  If `V_dir` is the two vertex directions and `R` the three
+infinity-boundary directions, then the function on primal lines
+
+```text
+z(ell)=|ell intersect B_aff|-1 mod 3
+```
+
+satisfies exactly
+
+```text
+z=1_(O^*)+sum_(v in V_dir)1_(D_v^*)
+          -sum_(m in R)1_(D_m^*).                  (SR24a-sixline)
+```
+
+Indeed, away from the five exceptional directions only the distinguished
+line through `(0,0)` has residue one.  In a boundary direction the `0/3`
+lines have residue `-1` and the singleton through `(0,0)` has residue zero.
+In a vertex direction the nonzero-intercept bisecants have residue one and
+the distinguished trisecant has residue `-1`.  At the dual point
+representing the line at infinity, the five direction-line coefficients sum
+to `2-3=-1`, which is its empty-line residue.  Thus
+
+```text
+z: (+1)^(3q-6) (-1)^(3q) 0^(q^2-5q+7),
+wt(z)=6q-6.                                      (SR24a-sixline')
+```
+
+This is not an appeal to a small-codeword theorem: the six generators and
+their signs are forced directly by `(SR24a)`.  It identifies the complete
+zeroth ternary digit of the line ledger.  The Witt/Rédei tangent digit below
+is exactly the next information needed to separate the degree-one and
+degree-four lines that both disappear from `z`.
+
+Keeping the displayed coefficients as the integers `+1,+1,+1,-1,-1,-1`,
+let `s(ell)` be their actual signed sum at the dual point representing
+`ell`.  The case-by-case proof of `(SR24a-sixline)` lifts without ambiguity:
+
+```text
+h(ell)=(|ell intersect B_aff|-1-s(ell))/3          (SR24a-highdigit)
+```
+
+is a `0/1` value.  It equals one exactly for
+
+```text
+all q(q-4)/3 four-secants, and
+all 2q boundary-direction trisecants,
+```
+
+and is zero on the empty lines, tangents, bisecants, and the two vertex
+trisecants.  Thus the global high-line set `K_lines={ell:h(ell)=1}` has
+
+```text
+|K_lines|=q(q+2)/3.                                (SR24a-highdigit')
+```
+
+It is exactly regular on the core.  An ordinary three-colour point lies on
+three boundary trisecants and `2q/3-3` four-secants; a boundary-singleton
+point lies on two and `2q/3-2`; a vertex-triple point lies on three and
+`2q/3-3`.  Hence in every case
+
+```text
+#{ell in K_lines:P in ell}=2q/3,       P in B_aff. (SR24a-highregular)
+```
+
+This also fixes the entire external second-moment shell without a model.  If
+`e(P)` is the number of high lines through an external projective point, the
+projective-plane incidence identity `M M^T=qI+J` gives
+
+```text
+sum_(P outside B_aff)e(P)=q^2(q-1)/3,
+sum_(P outside B_aff)e(P)^2=q^2(q^2-q+6)/9,
+sum_(P outside B_aff)(e(P)-q/3)=0,
+sum_(P outside B_aff)(e(P)-q/3)^2=2q^2/3.          (SR24a-highshell)
+```
+
+In fact the second-moment statement conceals a completely discrete spectrum.
+Let `M` be the point-line incidence matrix, let `b` be the point indicator of
+`B_aff`, and put
+
+```text
+a=1_O+sum_(v in V_dir)1_v-sum_(m in R)1_m.
+```
+
+Here the five direction symbols denote their points on the line at infinity,
+so `sum a=0`.  The integer lift in `(SR24a-sixline)` is `s=M^T a`, while the
+line-degree vector is `M^T b`.  Therefore `(SR24a-highdigit)`,
+`M M^T=qI+J`, `M1=(q+1)1`, and `q=3r` give the exact integer identity
+
+```text
+M h = r(b+1-a).                                  (SR24a-highincidence)
+```
+
+Consequently, when the high lines are regarded as a point set `K` in the
+dual plane, its complete line-intersection spectrum is
+
+```text
+|line intersect K|  number of lines
+        0                 3
+        r            q^2-q-6
+       2r               2q+4.                    (SR24a-highspectrum)
+```
+
+The three zero-secants are the duals of `O` and the two vertex points at
+infinity.  Those three primal points are noncollinear, so the zero-secants
+form a triangle.  Thus `K` avoids a triangle and every other line meets it in
+exactly `r` or `2r` points.  This proves `(SR24a-highshell)` pointwise rather
+than merely in norm: the external high degree is zero at those three special
+points, `2r` at the three boundary points at infinity, and `r` everywhere
+else outside `B_aff`; it is `2r` on `B_aff`.
+
+There is a useful reciprocal form.  For a point `X` of the dual plane, let
+`z(X)` be the number of zero-secants through it, let `k(X)=1_K(X)`, and let
+`A(X)` count the `2r`-secants through it.  Summing the intersections with `K`
+over the pencil at `X` gives
+
+```text
+r(q+1-z(X)+A(X))=|K|+q k(X),
+A(X)=1+z(X)+3k(X).                               (SR24a-highpencils)
+```
+
+Hence each point of `K` lies on four `2r`-secants; an external point off the
+zero triangle lies on one; a nonvertex point of a triangle side lies on two;
+and a triangle vertex lies on three.  The `2q+4` high secants therefore form
+a line arrangement whose only multiple points have the exact spectrum
+
+```text
+t_2=3q-3,       t_3=3,       t_4=q(q+2)/3,       t_i=0 (i>=5),
+                                                        (SR24a-higharrangement)
+```
+
+and
+
+```text
+t_2+3t_3+6t_4=binom(2q+4,2).
+```
+
+The intersection lattice has an unexpectedly sharp algebraic signature.  For
+the central rank-three arrangement, put `d=2q+4`.  Its second characteristic
+coefficient and combinatorial ordinary-point count are
+
+```text
+b_2=sum_P(m_P-1)=q^2+5q+3,
+tau_comb=sum_P(m_P-1)^2=3q^2+9q+9.
+```
+
+Since a central arrangement has `chi(1)=0`, its characteristic polynomial is
+
+```text
+chi_F(T)=T^3-dT^2+b_2T-q(q+3)
+        =(T-1)(T-q)(T-q-3).                       (SR24a-charpoly)
+```
+
+Moreover `tau_comb=(d-1)^2-q(q+3)`, the numerical free-arrangement identity
+for candidate exponents `(1,q,q+3)`.  In characteristic three this must not be
+silently identified with the scheme-theoretic Tjurina number: the triple
+points are wild for Euler's relation.  Factorization alone would not prove
+freeness.  Here, however, the arrangement covers every projective
+`F_q`-point, so its central complement is empty and `chi_F(q)=0`.
+[Yoshinaga's finite-field freeness theorem, Theorem 10(1)](https://arxiv.org/abs/math/0606005)
+therefore applies directly (and is explicitly valid over `F_q`): the
+arrangement is free with exponents
+
+```text
+(1,q,q+3).                                         (SR24a-free)
+```
+
+The degree-`q` basis element can be made completely explicit.  Every
+arrangement line is `F_q`-rational, so the three-variable Frobenius derivation
+
+```text
+Theta_q=X^q partial_X+Y^q partial_Y+Z^q partial_Z
+```
+
+is logarithmic.  It is not a polynomial multiple of the Euler derivation.
+The graded free-module decomposition in `(SR24a-free)` therefore lets us use
+`Theta_q` itself as the degree-`q` basis element.  Saito's determinant
+criterion supplies a homogeneous logarithmic derivation
+`Eta=A partial_X+B partial_Y+C partial_Z` of degree `q+3` such that, after one
+nonzero scalar normalization,
+
+```text
+F=det [ X    Y    Z
+        X^q  Y^q  Z^q
+        A    B    C ],       deg A=deg B=deg C=q+3. (SR24a-Saito)
+```
+
+The degrees add to `2q+4=deg F`, so there is no hidden factor.  Thus the
+logarithmic structure is a theorem, not a characteristic-zero analogy, and
+its only unknown global datum is one degree-`q+3` generator modulo the Euler
+and Frobenius summands.  What `(SR24a-Saito)` does not yet supply is a quartic
+through the *dual points* of the arrangement.  Extracting that adjoint from
+`Eta`, the exponent gap three, and the zero-triangle normalization is now one
+exact form of the carrier problem.
+
+The candidate exponents are not numerology on a restriction.  Restrict the
+arrangement to any one of its lines in the Ziegler sense.  There are `2r`
+quadruple points, hence `2r` restricted points of multiplicity three; the
+remaining restricted multiplicities are either `(1,1,1)` or `(2,1)`.  Their
+total is always `2q+3=d-1`.  On binary coordinates `(x,y)` the Frobenius
+derivation
+
+```text
+theta_q=x^q partial_x+y^q partial_y
+```
+
+is logarithmic for every `F_q`-rational restricted line, with any of these
+multiplicities, and has degree `q`.  No nonzero logarithmic derivation can
+have degree `e<q`: if `G` is the product of the `2r` multiplicity-three line
+forms and `theta=a partial_x+b partial_y`, then each such form cubically
+divides
+
+```text
+det(theta,theta_q)=a y^q-b x^q.
+```
+
+Thus `G^3` of degree `2q` divides a form of degree `e+q<2q`, forcing the
+determinant to vanish.  Coprimality of `x^q,y^q` then makes `theta` a
+polynomial multiple of `theta_q`, impossible in smaller degree.  Since the
+two exponents of a rank-two multiarrangement sum to `2q+3`, every Ziegler
+restriction therefore has exact exponents
+
+```text
+(q,q+3).                                           (SR24a-Ziegler)
+```
+
+This proof is internal and characteristic-three aware; it independently
+confirms the nontrivial exponents supplied by `(SR24a-free)`.  The remaining
+algebraic sublemma is no longer freeness or lifting: it is to show that the
+degree-`q+3` generator `Eta` in `(SR24a-Saito)`, together with
+`(SR24a-arrangement-order)`, has a degree-at-most-four Frobenius remainder
+vanishing at the arrangement's `2q+4` dual points.  That implication is not a
+general consequence of freeness and is not proved here.
+
+Its double points fill the three open sides of the zero triangle, its three
+triple points are the vertices, and its quadruple points are precisely `K`.
+This is a field-uniform structural compression, not a sampled pattern: the
+prescribed hypothetical extremizer forces a triangle-supported `(0,r,2r)`
+set with this reciprocal fourfold line arrangement.  A sufficient closeout
+theorem may therefore be stated solely for that arrangement.
+
+Dualizing the `2r`-secants gives an equally useful point formulation.  The
+resulting set is exactly
+
+```text
+D=B_aff union R,
+```
+
+where the three points of `R` are now restored on the line at infinity.  It
+has `2q+4` points, meets every line, and has no line longer than four.  (It is
+a one-fold blocking set, not a double blocking set: the off-triangle points
+in `(SR24a-highpencils)` give tangents.)  Its complete secant spectrum is
+
+```text
+t_1=(2q^2-8q+3)/3,  t_2=3q-3,  t_3=3,
+t_4=q(q+2)/3,       t_i=0 otherwise.              (SR24a-blocking4)
+```
+
+This recovers the earlier shell spectrum `(SR12)` from the global high-digit
+incidence identity, rather than taking that spectrum as an endpoint input.
+The three trisecants are nonconcurrent.  Nine points of `D` are dual to the
+arrangement lines through a vertex of the zero triangle; the other `2q-5`
+are not.  Restricting the arrangement to one of its own lines gives the exact
+local profiles
+
+```text
+number of points     (d_1,d_2,d_3,d_4)
+      2q-5              (r-2,3,0,2r)
+         9              (r-1,1,1,2r).             (SR24a-blocking4-local)
+```
+
+Indeed every arrangement line contains `2r` quadruple points.  If it avoids
+the triangle vertices, its remaining three intersections are the three open
+side double points.  If it passes through a vertex, the remaining pair count
+is one triple point and one open-side double point.  All unused points on the
+line dualize to tangents.  In particular `D` is a *minimal* blocking
+`(2q+4,4)`-arc for `q>=9`.  This is a substantially smaller inverse object
+than the original four-chart polynomial data.
+
+The arrangement also has an exact polynomial normal form.  Normalize its
+zero triangle to `XYZ=0`, put
+
+```text
+Phi_XY=X^qY-XY^q
+```
+
+and define `Phi_XZ,Phi_YZ` cyclically.  If `F` is the product of the
+`2q+4` arrangement-line equations, restriction to the triangle sides gives
+
+```text
+F(X,Y,0)=c_Z XY Phi_XY^2,
+F(X,0,Z)=c_Y XZ Phi_XZ^2,
+F(0,Y,Z)=c_X YZ Phi_YZ^2,                         (SR24a-arrangement-boundary)
+```
+
+with nonzero constants.  The powers are forced: every open-side point has
+multiplicity two and each vertex multiplicity three.  Globally,
+
+```text
+ord_P(F)=1+z(P)+3 1_K(P),       P in PG(2,q),     (SR24a-arrangement-order)
+```
+
+where `z(P)` counts zero-triangle sides through `P`.  Subtracting the three
+displayed boundary terms therefore yields
+
+```text
+F=c_Z XY Phi_XY^2+c_Y XZ Phi_XZ^2+c_X YZ Phi_YZ^2+XYZ E,
+deg E=2q+1.                                         (SR24a-arrangement-form)
+```
+
+On the torus `Z=1`, `E` vanishes at every point of `(F_q^*)^2`; division by
+the two grid polynomials gives
+
+```text
+E(x,y)=A(x,y)(x^(q-1)-1)+B(x,y)(y^(q-1)-1),
+deg A,deg B <= q+2.                                (SR24a-arrangement-torus)
+```
+
+No computation enters these identities.  They expose the precise remaining
+propagation problem: combine the order-four condition at every point of `K`
+with `(SR24a-arrangement-form)--(SR24a-arrangement-torus)` to force `D` (or
+`B_aff`) onto a curve of degree at most four.  Once that happens the
+contradiction is immediate.  In fact the quartic exclusion is even cleaner
+for `D`: an absolutely irreducible quartic has at most
+`q+1+6sqrt(q)<2q+4` rational points for `q>=81`; a cubic plus a line has at
+most `q+1+2sqrt(q)+4<2q+4`; two conics have at most `2q+2`; and the remaining
+reducible patterns are smaller because every line contains at most four
+points of `D`.  Thus
+
+```text
+D lies on no plane curve of degree at most four, q>=81.
+                                                        (SR24a-blocking4-gap)
+```
+
+Accordingly the minimal sufficient missing lemma along this carrier route is
+now a single, field-uniform statement about a minimal blocking `4`-arc
+(equivalently the displayed torus arrangement), rather than a compatibility
+theorem involving four separately chosen Witt supports:
+
+```text
+Carrier lemma.  A set D with (SR24a-blocking4)--
+(SR24a-blocking4-local) in PG(2,3^h), h>=4, is contained in a quartic.
+                                                        (SR24a-carrier-lemma)
+```
+
+Proving this lemma contradicts `(SR24a-blocking4-gap)` and closes the
+prescribed five-intersection inverse-construction branch.  It is not yet a
+theorem here, and the reduction does not classify arbitrary target-size
+extremizers; those scope limitations are essential.
+
+The same object has core degree `2q/3`, external mean `q/3`, and constant
+average external variance `2/3`.  This is the integral global counterpart of
+the four special lifted spectra: in a boundary direction its selected
+intercepts are the roots of `H_m`, while in an ordinary direction they are
+the roots of the corresponding degree-`r` four-support polynomial.  In
+particular `(SR24-WittK)` records four distinguished parallel-class slices
+of the single high-line set `(SR24a-highdigit)`, not four unrelated supports.
+
 Thus the intersections of size three and four form a pairwise-balanced
 packing on `B_aff`; its leave graph consists exactly of the ordinary
 bisecants.  That leave is not an arbitrary `O(q)`-edge graph.  Its edges are
@@ -1922,6 +2287,94 @@ set.  It still does not classify the embedding: the next inverse step must
 show that the three partial involutions and the unique `3/4`-secant completion
 of almost every pair force the fixed spectral carrier.
 
+The characteristic-three content of the full pair geometry has an exact
+discriminant form.  For homogeneous direction coordinates `(S,T)`, put
+
+```text
+Delta_B(S,T)=product_({P,Q} subset B_aff)
+ (S(u(P)-u(Q))+T(t(P)-t(Q))).
+```
+
+Let `V`, `P_R`, and `O` be the squarefree binary forms whose roots are the two
+vertex directions, the three infinity-boundary directions, and the remaining
+`q-4` directions.  Normalize them so that
+
+```text
+Phi(S,T)=S^qT-ST^q=V(S,T)P_R(S,T)O(S,T).
+```
+
+Each `i`-secant in a direction contributes `binom(i,2)` copies of its
+direction factor to `Delta_B`.  The three rows of `(SR24a)` therefore give,
+up to a nonzero scalar,
+
+```text
+Delta_B=V^(q+2) P_R^(2q) O^(2q+1).                (SR24a-disc)
+```
+
+Put `q=3r` and `Q=V^r P_R^(2r)O^(2r)`.  Because cubing is a bijection on
+`F_q^*`, the harmless scalar can be absorbed into `Q`, and `(SR24a-disc)` is
+equivalent to the exact polynomial identity
+
+```text
+Delta_B P_R=Q^3 V Phi,             deg Q=2q^2/3.  (SR24a-disc')
+```
+
+Thus the complete pair-difference form is a cube times the degree-`q`
+cube-free skeleton `V^2O=V Phi/P_R`.  Combinatorially, the cube contains the
+three copies contributed by every trisecant and the six copies contributed by
+every four-secant; the skeleton is exactly the three-matching leave modulo
+cubes.  Ordinary characteristic-three differentiation kills `Q^3` and sees
+only this skeleton.  The binary form deliberately remembers only directions,
+however, so its cube quotient is already fixed by the ledger and contains no
+line-offset information.  It is a diagnostic for the first-digit failure, not
+by itself an inverse theorem.
+
+The offset-sensitive refinement is the full secant-line form.  For an affine
+or projective line `ell`, use the same symbol for a normalized linear equation
+of `ell`, and put
+
+```text
+L_i(X,Y,Z)=product_(ell: |ell intersect B_aff|=i) ell(X,Y,Z),
+Lambda_B=product_({P,Q} subset B_aff) ell_(PQ)(X,Y,Z).
+```
+
+An `i`-secant occurs once for every pair of its `i` core points.  Hence in
+characteristic three
+
+```text
+Lambda_B=L_2 L_3^3 L_4^6
+        =L_2 R_B^3,
+R_B=L_3L_4^2,
+deg R_B=ell_3+2ell_4=(2q^2-2q+6)/3.       (SR24a-secant-form)
+```
+
+Unlike `(SR24a-disc')`, this identity retains every line intercept.  Its
+cube-free part `L_2` is exactly the three coloured matchings.  Its cube root
+`R_B` is the complete rich-line arrangement: boundary and vertex trisecants
+occur once, while every four-secant occurs twice.  In particular
+
+```text
+grad Lambda_B=R_B^3 grad L_2.                     (SR24a-secant-form')
+```
+
+First derivatives therefore discard the entire rich-line arrangement.  For
+any directional Hasse derivative `D_v^[j]`, the first nontrivial peeling is
+
+```text
+D_v^[3] Lambda_B
+ =R_B^3 D_v^[3]L_2+L_2(D_v^[1]R_B)^3.             (SR24a-secant-Hasse)
+```
+
+This is the precise characteristic-three mechanism behind the Witt strategy:
+order one recovers only the leave, while order three is the first layer that
+recovers derivatives of the offset-sensitive cube root.  The parallel-class
+factors of `R_B` are exactly the triple-support polynomials `H_m` and the
+four-support polynomials analogous to `G`; `(SR24-WittK)` packages the lifted
+spectra of four distinguished such classes.  The remaining inverse lemma must
+propagate those four offset slices, using `(SR24z')` coherence, to a
+degree-at-most-four adjoint or carrier for the full arrangement.  Merely
+factoring the direction-only quotient `Q` cannot do so.
+
 The four-secants also rule out the naive cubic conclusion from real
 few-ordinary-lines theory.  Let `C` be any nonzero plane curve of degree at
 most three and put `s=|B_aff minus C|`.  A four-secant avoiding those `s`
@@ -1960,6 +2413,59 @@ At `q=27` the compressed object has 55 points, `(ell_2,ell_3,ell_4)` equal to
 46 copies of `(7,3,3,15)`, three copies of `(8,2,2,16)`, and six copies of
 `(8,1,4,15)`; every cubic misses at least 14 points.  These are consequences
 of the direction ledger, not search observations.
+
+The quartic threshold itself can be eliminated once a carrier has been
+produced.  Suppose ternary `q>=81` and a degree-at-most-four plane curve `C`
+contains `B_aff`.  The cubic gap makes `deg C=4` after passing to the reduced
+support.  If `C` is absolutely irreducible, the Aubry--Perret Weil bound for
+[singular curves](https://www.i2m.univ-amu.fr/perso/yves.aubry/ManuscriptaMathematica1995.pdf)
+gives
+
+```text
+#C(F_q)<=q+1+6sqrt(q)<2q+1,
+```
+
+a contradiction.  If an `F_q`-irreducible component is not absolutely
+irreducible, every rational point lies on two conjugate components, so Bezout
+bounds its rational locus by four.  The remaining `F_q`-factorizations of a
+quartic have degree patterns `1+3`, `1+1+2`, `1+1+1+1`, or `2+2`.  A line
+component contains at most four core points; `(SR24a-cubic-gap)` and the
+`q+1`-point bound for a nonsingular conic eliminate the first three patterns.
+The only survivor is therefore
+
+```text
+C=C_1 union C_2
+```
+
+for two nonsingular `F_q`-conics.  Each has `q+1` rational points, so their
+rational loci meet in at most one point and `B_aff` omits at most one point
+from their union.  A singleton line of the full union must be tangent to one
+of the conics, giving at most `2(q+1)` such lines.  Deleting one point creates
+at most another `q+1` singleton lines.  Hence any such core would satisfy
+
+```text
+ell_1<=3q+3.
+```
+
+But `(SR24a)` gives
+
+```text
+ell_1=3+(q-4)(2q/3-1)>3q+3                 (q>=27).
+```
+
+This contradiction proves
+
+```text
+B_aff is on no plane curve of degree at most four, q>=81.
+                                                        (SR24a-quartic-gap)
+```
+
+The proof uses the published Aubry--Perret bound only for the absolutely
+irreducible quartic case; every reducible case is disposed of by the exact
+secant ledger.  Consequently the precise closeout lemma is now one-way:
+derive a degree-at-most-four carrier from `(SR24a-secant-Hasse)`, the coherent
+shifted quartics `(SR24-grid-gcd)`, and `(SR24-WittK)`.  Once that carrier exists,
+`(SR24a-quartic-gap)` supplies the contradiction.
 
 This is the appropriate finite-field analogue of the *input* to the
 [Green--Tao few-ordinary-lines theorem](https://arxiv.org/abs/1208.4714), but
@@ -2817,6 +3323,85 @@ Thus `G` is precisely the information discarded by all of `(SR24s')`--
 Hankel calculation cannot close the branch.  A proof must instead constrain
 this degree-`r` four-fiber polynomial through the second carrier, the
 three-cell transversal, or the integer line geometry.
+
+The global ledger gives an offset-sensitive two-digit formulation of that
+task.  For finite slope `M`, define the Rédei product
+
+```text
+mathcal R(C,M)=product_(P in B_aff)
+ (C-(t(P)-M u(P))).
+```
+
+Reduce it to its unique representative `bar R` of bidegree less than `q`
+modulo `(C^q-C,M^q-M)`.  Let
+
+```text
+B_R(M)=product_(m in R)(M-m),
+P_good(M)=(M^q-M)/B_R(M).
+```
+
+For each of the `q-3` finite nonboundary slopes, every intercept occurs in
+`B_aff`, so the corresponding column of `bar R` is identically zero.  Each
+coefficient in `C` therefore has those `q-3` roots as a reduced polynomial in
+`M`, and hence
+
+```text
+bar R(C,M)=P_good(M) T(C,M),
+deg_C T<q,                  deg_M T<=2.             (SR24-Redei)
+```
+
+This is an exact function-ring factorization, not a degree heuristic.  At a
+boundary root `m`, the singleton has intercept zero and the `2r` selected
+triple fibers have support polynomial `H_m`, so
+
+```text
+T(C,m)=P_good(m)^(-1)
+        rem_(C^q-C)(C H_m(C)^3).                   (SR24-Redei')
+```
+
+Thus the ordinary residue-field product sees only a rank-three boundary-hole
+defect; its quadratic quotient is fixed by the three boundary columns.
+
+The next Witt digit sees a different stratum.  For a finite good slope `m`
+and `c in F_q`, evaluate the Teichmüller product
+
+```text
+widetilde R_m(c)=product_(P in B_aff)
+ ([c]-[t(P)]+[m][u(P)]) in W_2(F_q).
+```
+
+Every such line is occupied, so this product is divisible by three.  Put
+`rho_m(c)=(widetilde R_m(c)/3) mod 3`.  If the line contains at least two core
+points, two factors are divisible by three and `rho_m(c)=0`.  If it is a
+singleton with unique point `P=(u,t)` and `c=t-mu`, `(SR24-Witt''')` gives
+
+```text
+[t]-[m][u]-[c]=3[gamma_m(P)],
+gamma_m(P)=(m u t c)^r.
+```
+
+Let `d_m` be the distinguished double intercept and `G_m` the monic support
+polynomial of the `r` four-fiber intercepts in an ordinary direction.  Since
+
+```text
+mathcal R(C,m)=(C^q-C)(C-d_m)G_m(C)^3,
+```
+
+differentiation at a singleton root gives the exact tangent digit
+
+```text
+rho_m(c)=gamma_m(P)(c-d_m)G_m(c)^3.                (SR24-Redei-Witt)
+```
+
+The finite vertex direction has no singleton lines and hence zero first
+digit.  Therefore the two digits have disjoint geometric jobs: `(SR24-Redei)`
+records the three columns of empty lines, while `(SR24-Redei-Witt)` records
+the tangent lines in every good direction and evaluates the otherwise hidden
+four-fiber polynomial on them.  A field-uniform closeout can now be stated
+without an analogy: prove that the slope dependence of these tangent digits,
+together with the four fixed spectra in `(SR24-WittK)` and coherence
+`(SR24z')`, forces a degree-at-most-four carrier.  The present work determines
+both digits pointwise but does not yet prove that propagation theorem.
 
 There is, however, an exact way to recover the information one
 characteristic-three digit higher.  Let `[x]` denote the Teichmüller lift of
@@ -4225,7 +4810,27 @@ family is lower priority.
   defective embedded `3/4`-block design compatibly with
   `(SR24-WittK)` is now the sharp global stability target.  The same local
   ledger proves `(SR24a-cubic-gap)`: every cubic misses at least `(q+1)/2`
-  core points, so the first viable bounded-degree carrier is quartic.
+  core points.  The offset-sensitive secant form then factors as
+  `Lambda_B=L_2(L_3L_4^2)^3`; first derivatives see only the three-matching
+  leave, while the third Hasse derivative is the first layer that recovers
+  the rich-line cube root.  The complementary Rédei formulation separates
+  the two relevant digits exactly: `(SR24-Redei)` is supported on the three
+  boundary-hole columns, and `(SR24-Redei-Witt)` is supported on good-slope
+  tangents with weight `gamma_m(P)(c-d_m)G_m(c)^3`.  Finally
+  `(SR24a-quartic-gap)` proves that a degree-at-most-four carrier cannot exist
+  for `q>=81`: the only reducible quartic survivor would be two conics, whose
+  `O(q)` singleton lines contradict the ledger's `Theta(q^2)` count.  Thus the
+  integer high digit compresses the entire issue further.  Its dual is an
+  exact `(0,q/3,2q/3)` set avoiding a triangle, and its high secants form the
+  reciprocal arrangement `(SR24a-higharrangement)`.  Dualizing once more
+  gives the minimal blocking `(2q+4,4)`-arc `D=B_aff union R`, with exact
+  global and local spectra `(SR24a-blocking4)--(SR24a-blocking4-local)`.
+  The arrangement product has the canonical triangle-boundary form
+  `(SR24a-arrangement-form)` and torus remainder
+  `(SR24a-arrangement-torus)`.  The minimal closeout implication is therefore
+  precisely `(SR24a-carrier-lemma)`: show that those order-four torus
+  conditions force a quartic.  The contradiction after that implication is
+  complete by `(SR24a-blocking4-gap)`.
   The other triangular row requires a linear
   high-secant trade and
   is therefore a less rigid first target.
@@ -4466,6 +5071,11 @@ is the source of `(LB3+)`; the finite searches play no role in that theorem.
   Cache key
   `arXiv:1901.09649`, SHA-256
   `4161216751349d453fc8e8fbf40df6132de24f8e83581e85eeeb33ec936c046f`.
+- Yoshinaga, *Free Arrangements over Finite Field*: **full text**, Sections
+  1--3, Theorem 10, and Corollary 14 read from the arXiv manuscript; Theorem
+  10(1) is used in `(SR24a-free)` after the reciprocal arrangement is shown to
+  cover every projective `F_q`-point.  Cache key `arXiv:math/0606005`; web
+  source only, with no local artifact hashed for this audit.
 - Bruen--Fisher, *Blocking sets and complete `k`-arcs*: **partial**, Lemmas
   7--11 and Theorem 12 with its full proof read from the version-of-record
   PDF; `(SR2)`--`(SR4)` rederive its line spectrum and ternary residue
