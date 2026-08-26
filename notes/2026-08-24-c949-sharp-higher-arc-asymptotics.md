@@ -1745,6 +1745,36 @@ lines have `(q/3-2,3,0,2q/3)`.  This converts the `+1` sharpness problem into
 a geometric realization of three compatible near-perfect matchings plus the
 off-core fourfold-intersection condition; no free degree sequence remains.
 
+The complementary blocker has an equally small tight-incidence graph.  Put
+`b_i=N_i-A_i`.  At `eta=1`, `(SR12)` and `(SR14)` give exactly
+
+```text
+(b_1,b_2,b_3,b_4)=(2q(q-4)/3,2q,0,0).             (SR17a)
+```
+
+Make the `2q+4` tight `r`-secants the vertices of a graph `G`, with one edge
+for each of the `2q` blocker points lying on two tight secants.  The local
+profiles and `(SR16)` give the exact degree sequence
+
+```text
+1^9, 2^(2q-6), 3^1:                               (SR17b)
+```
+
+the nine vertex lines have degree one, the distinguished tangent line has
+degree three, and every generic line has degree two.  All remaining blocker
+points are private to one vertex-line, and
+
+```text
+sum_(P in blocker)(deg_D(P)-1)=2q.
+```
+
+Thus the tight secants are an `O(q)`-defect partition, but that fact alone
+does not create a Mason root.  Retaining only `2q-2` tight lines would require
+the six deleted vertices to meet every edge in exactly one endpoint while
+simultaneously disposing of their private points.  Neither the moment ledger
+nor the degree sequence forces such a cut, and even a repaired partition
+would not by itself impose the missing `0/r/2r` line character.
+
 In coordinates this becomes an almost-duplex rather than an unstructured
 point set.  Take the support triangle as the coordinate triangle and write a
 generic line of `D` as
@@ -2792,6 +2822,90 @@ is one triple point and one open-side double point.  All unused points on the
 line dualize to tangents.  In particular `D` is a *minimal* blocking
 `(2q+4,4)`-arc for `q>=9`.  This is a substantially smaller inverse object
 than the original four-chart polynomial data.
+
+There is a global Redei dichotomy for this blocking arc.  For an external
+point `V`, let `a_i(V)` be the number of `i`-secants of `D` through `V` and
+put
+
+```text
+b(V)=a_2(V)+2a_3(V).
+```
+
+The pencil equations give `b(V) in 3 Z_(>=0)` and
+`b(V)+3a_4(V)=q+3`.  If `ell` is a tangent at `T in D`, the `q` other points
+of `ell` parameterize the affine directions after taking `ell` as infinity.
+The two local profiles give in either case
+
+```text
+sum_(V in ell minus {T}) b(V)
+ =(t_2-d_2(T))+2(t_3-d_3(T))=3q.                  (SR24a-Redei-sum)
+```
+
+Hence either `ell` contains a point with `b(V)=0`, or every one of its `q`
+other points has `b(V)=3`.  Call the latter a clean tangent.
+
+On a clean tangent, put `D_aff=D minus {T}` and form
+
+```text
+R(X,M)=product_((a,b) in D_aff)(X-b+Ma).
+```
+
+Every affine line of every finite slope meets `D_aff`, so polynomial division
+over `F_q[M]` gives
+
+```text
+R=(X^q-X)Q+(M^q-M)H,       deg_X H<q,
+deg Q<=q+3.                                      (SR24a-Redei-division)
+```
+
+For `m in F_q`, if `A_(i,m)` is the product of the intercept factors of the
+`i`-secants in that direction, then
+
+```text
+Q(X,m)=A_(2,m) A_(3,m)^2 A_(4,m)^3.
+```
+
+Cleanliness says that the cube-free first factor has degree three and
+`deg A_(4,m)=r`.  Therefore `F=partial_X Q` has, on every field fiber, the
+form `(alpha_m X+beta_m)C_m(X)^3`; the linear factor is nonzero because the
+three cube-free roots do not all coincide.  Write uniquely
+
+```text
+F(X,M)=A(X^3,M)+X B(X^3,M),
+A=sum_(j=0)^r a_j(M)Z^j,   B=sum_(j=0)^r b_j(M)Z^j.
+```
+
+The two coefficient vectors are proportional at every `m`, and their top
+pair is never simultaneously zero.  Total degree gives
+`deg a_j<=q+2-3j`, `deg b_j<=q+1-3j`.  Thus the top minors
+
+```text
+Delta_j=a_r b_j-b_r a_j
+```
+
+satisfy the field-uniform bounded-defect certificate
+
+```text
+Delta_j=0                         (j>=2),
+Delta_1=c(M^q-M),
+Delta_0=(M^q-M)C_3(M),       deg C_3<=3.           (SR24a-Redei-rankone)
+```
+
+This is the same rank-one/cubic shape suggested by the finite carrier cores,
+but it is not yet a Mobius theorem: `[a_r:b_r]` has degree bounds `(2,1)`,
+and another identity is needed to remove or control the quadratic term.
+
+The complementary dirty case is also rigid.  A point with `b(V)=0` lies on
+exactly `r+1` four-secants and `2r` tangents.  If every tangent is dirty,
+tangent--point incidence with `t_1` from `(SR24a-blocking4)` gives
+
+```text
+|{V notin D:b(V)=0}| >= ceil(t_1/(2r))=q-3.       (SR24a-Redei-dirty)
+```
+
+Neither this large zero-defect set nor the residual cubic has yet been
+excluded.  They are now the two exact arrangement-level branches; ordinary
+local jets, freeness, and scalar cocycles do not address either one.
 
 The cube-free part of every local joining-line product is also uniform.  Let
 `V_X,V_Y,V_Z` be the three points of the dual plane corresponding to the
@@ -6008,6 +6122,16 @@ family is lower priority.
   local spectrum nor Hilbert counting forces it, much less a quartic factor.
   The next valid computational test is the full conductor linear system, not
   a scalar cocycle.
+  **Settled by `ej`+`tt` — is there any global bounded residue before the
+  carrier?**  Yes.  The tangent-pencil defect is a multiple of three with
+  average three on every tangent.  A clean tangent gives the exact
+  field-uniform rank-one/cubic certificate `(SR24a-Redei-rankone)`; if no
+  tangent is clean, `(SR24a-Redei-dirty)` forces at least `q-3` external
+  zero-defect pencils.  The certificate is offset-sensitive and avoids the
+  local-jet no-go.  **Open:** eliminate the quadratic term in the top ratio
+  and the residual cubic, or exclude the dirty zero-defect set.  Calling the
+  current ratio Mobius would be premature: its numerator may still have
+  degree two.
   **Settled by `ej`+`tt` — is Mason's large-root family a nearby construction
   of the small root?**  It is the correct characteristic-divisible neighbor,
   but not a cheap switch.  Complementing after one zero side produces a

@@ -297,3 +297,40 @@ liminf e/q^2 >= c_*=0.0171413259... > 1/60,
 Thus the durable conclusion is quadratic separation from every Mason root;
 the intervening `q^(3/2)` bound is retained here only as the chronological
 route by which the stronger second-moment argument was found.
+
+## 2026-08-26 — balanced Redei rank-one/cubic certificate
+
+The balanced `(4,-3)`, `eta=1` blocker selection has exact tight-degree
+counts
+
+```text
+(b_1,b_2,b_3,b_4)=(2q(q-4)/3,2q,0,0).
+```
+
+Its `2q` double-tight points form a graph on the `2q+4` tight lines with
+degree sequence `1^9 2^(2q-6) 3^1`; the remaining blocker points are private.
+This makes the `O(q)` partition defect explicit, but also shows why a direct
+six-line Mason repair is not forced by the moment ledger.
+
+For the dual minimal blocking `(2q+4,4)`-arc, define at an external point
+`V` the cube-free pencil defect `b(V)=a_2(V)+2a_3(V)`.  It is a nonnegative
+multiple of three, and its sum along the external points of any tangent is
+`3q`.  Hence either every tangent meets a zero-defect point, in which case
+there are at least `q-3` such points globally, or there is a clean tangent on
+which every finite slope has defect three.
+
+In the clean branch, global Redei division and differentiation turn the
+degree-three cube-free slope residues into proportional coefficient vectors.
+Total-degree interpolation leaves only
+
+```text
+Delta_j=0 (j>=2),
+Delta_1=c(M^q-M),
+Delta_0=(M^q-M)C_3(M), deg C_3<=3.
+```
+
+This is an exact field-uniform rank-one/cubic defect certificate.  It is not
+yet a Mobius certificate because the top ratio has degree bounds `(2,1)`;
+the possible quadratic coefficient remains to be killed.  The complementary
+dirty branch and this residual cubic are now the two arrangement-level
+frontiers.
