@@ -90,22 +90,24 @@ expected hashes, toolchain locks, and a top-level verification command.
 This appendix assigns each computational or formal claim its exact trust
 route.
 
-The repository also contains Projective Reed--Solomon Toolkit under the
-\texttt{software/} directory. Its command-line interface separates structural
-computation from theorem-gated classification.  For every $r\geq5$ and
-$q\geq r$, \texttt{canonicalize} returns an exact semilinear canonical form
-without a coding verdict, while \texttt{distance} and \texttt{decode} return
-exact nearest-error data and a replayable locator certificate within the
-stated candidate budget.  The \texttt{classify} command applies the frozen
-R5--R10 theorem registry and returns \texttt{DEEP}, \texttt{NOT\_DEEP},
-\texttt{UNRESOLVED}, or \texttt{UNSUPPORTED}; \texttt{verify} independently
-replays emitted locator and positive deep certificates.
+The repository includes Projective Reed--Solomon Toolkit under
+\texttt{software/}.  This proof-carrying executable lets a reader move from a
+versioned syndrome request to an independently replayable result.  For every
+$r\geq5$ and $q\geq r$, \texttt{canonicalize} computes an exact semilinear
+canonical form without a coding verdict, while \texttt{distance} and
+\texttt{decode} return exact nearest-error data with a locator-and-magnitude
+certificate, subject to an explicit candidate budget.  The
+\texttt{classify} command consults the hash-pinned R5--R10 theorem registry and
+returns \texttt{DEEP}, \texttt{NOT\_DEEP}, \texttt{UNRESOLVED}, or
+\texttt{UNSUPPORTED}.  Only \texttt{DEEP} carries a positive certificate;
+\texttt{verify} recomputes its transporter, family route, and radius premise.
 
-Locator candidates are streamed, so the candidate budget bounds search time
-rather than allocated locator storage. The broader canonicalization and
-decoding domains do not promote an R11-or-higher syndrome to a deep hole
-without an independently proved covering radius and family exhaustion.  For
-the one enabled higher-redundancy family, even $q$ and $r=q-1$, the verifier
-replays the $e_{r-2}$ terminal-locator obstruction and imports the
-dimension-two radius theorem of \cite[Thm.~17(1)]{WuDingChen2023}.  This is a
-certified family, not a complete R11-or-higher classification.
+This interface makes the software's broader reach visible without enlarging
+the theorem.  Locator candidates are streamed, so the budget bounds search
+work rather than a stored candidate list.  Canonicalization and decoding above
+R10 do not promote a syndrome to a deep hole without a covering-radius theorem
+and family exhaustion.  The sole enabled higher-redundancy family has even
+$q$ and $r=q-1$; its verifier replays the $e_{r-2}$ terminal-locator
+obstruction and uses the dimension-two radius theorem of
+\cite[Thm.~17(1)]{WuDingChen2023}.  It is a certified family, not a complete
+R11-or-higher classification.

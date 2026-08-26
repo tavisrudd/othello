@@ -1,0 +1,12 @@
+{
+  "schema": "projective-reed-solomon-request-v1",
+  "field": {
+    "p": 7,
+    "degree": 1,
+    "modulus": [0, 1],
+    "encoding": "polynomial-basis-base-p-integer-v1"
+  },
+  "redundancy": 5,
+  "evaluation": "full-projective-nrc-v1",
+  "syndrome": [0, 0, 0, 1, 0]
+}

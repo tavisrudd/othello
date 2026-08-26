@@ -17,7 +17,7 @@ supplement/EVIDENCE-MANIFEST.json and checked by supplement/verify.py.
 | Certificate R10 | threshold, persistent orbit arithmetic, and carrier point-count synthesis | separate prime-power/orbit replay | does not prove first-carrier shallowness |
 | Certificate Lucas M9 | full q=16,32 carrier and q=64 invariant-block rank-two twists | independent finite-field/action/replay code | finite certificates do not prove the q=64 complement or the all-field genus-one theorem |
 
-**Withdrawn 2026-08-07.**  The paper no longer draws a quantum consequence from the balanced q=8 row: a split-free direction is not a one-column MDS extension, and at covering radius r-1 no such extension exists.  The formal modules below are retained as conditional developments whose extension hypothesis is unsatisfied at these parameters; nothing in the manuscript depends on them.  See `notes/reed-solomon-tasks/c882-mds-extension-boundary.md`.
+**Withdrawn 2026-08-07.**  The paper no longer draws a quantum consequence from the balanced q=8 row: a split-free direction is not a one-column MDS extension, and at covering radius r-1 no such extension exists.  The formal modules below are retained as conditional developments whose extension hypothesis is unsatisfied at these parameters; nothing in the manuscript depends on them.  See Remark `rem:q8-no-extension` and row R5-Q of `claim-proof-novelty-ledger.md`.
 
 The withdrawn balanced q=8 quantum development introduced no computation beyond
 the R5 row 1116=360+756, which stands as a deep-hole count. Its former coding

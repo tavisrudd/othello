@@ -1,64 +1,80 @@
 # Projective Reed--Solomon Toolkit
 
-This is the companion implementation for *Projective Reed--Solomon deep holes
-beyond redundancy four*. Its current executable slice provides:
+Exact, proof-carrying tools for full-length projective Reed--Solomon syndromes.
 
-- exact polynomial-basis arithmetic over explicitly represented finite fields;
-- projective syndrome normalization;
-- both affine and infinity locator charts;
-- increasing-degree Hankel-kernel search over projective locator space;
-- the proved 12-point terminal-hyperplane selector for R5--R7, with streaming
-  `O(q)`, `O(q^2)`, and `O(q^3)` prefix enumeration;
-- intrinsic uniform R5 adapters for the tame rational/conjugate osculating
-  families and the characteristic-three nucleus/wild families;
-- the uniform R6 odd-binary third-nucleus adapter, including its exact
-  extension-degree toggle;
-- the uniform R7 odd-binary central-nucleus adapter, with complete q=8 exact
-  distance extraction and the q=7,9 radius gap kept separate;
-- exact tangent-family canonicalization in `m*q*(q-1)` transports and
-  sigma canonicalization in `m*(q^2-1)` on the rootless-form stratum and
-  `O(m*r*q)` on the simple-root stratum; these exhaust persistent sigma, while
-  the same charts cover general forms in `O(m*r*q^2)` even at the
-  characteristic-two degenerate successor;
-- exact maximal-Hasse-root canonicalization in `O(m*r*q)` transports off the
-  simultaneous Lucas degeneration and `O(m*r*q^2)` on it, including pure
-  powers, with the full `m*(q^3-q)` path retained as a defensive fallback;
-- an intrinsic persistent-sigma `T/T^(r-1)` modulo inversion/Frobenius
-  extractor in `F_q[X]/Q`, using no discrete logarithm or torus enumeration;
-- distinct rational-root recovery, Vandermonde magnitude recovery, and an
-  independently replayed locator certificate;
-- positive deep certificates whose independent verifier replays the frozen
-  theorem-domain row, transporter, family route, and radius promotion;
-- explicit `PGL(2,q) x Gal(F_q/F_p)` canonicalization with the exact
-  `m(q^3-q)` cost exposed; and
-- a single `projective-reed-solomon` command with focused subcommands.
+The toolkit turns a syndrome over an explicitly represented finite field into
+one of three kinds of output: a semilinear canonical form, an exact nearest-error
+certificate, or a theorem-gated deep-hole verdict. These outputs deliberately
+have different mathematical scopes. Canonicalization and decoding work beyond
+the paper's classification range; a positive deep-hole verdict requires a
+matching theorem-domain entry and carries a certificate that can be replayed
+independently.
 
-## Command-line interface
+The software accompanies *Projective Reed--Solomon deep holes beyond redundancy
+four*. It is self-contained here so this directory can later be extracted as a
+standalone repository without repairing paths or recovering data files.
 
-Build the release executable and inspect its commands:
+## Choose the operation
+
+Write `q` for the field order and `r` for the redundancy.
+
+| Command | What it answers | Implemented domain |
+|---|---|---|
+| `canonicalize` | Which semilinear orbit contains this syndrome? | Every `r >= 5`, `q >= r` |
+| `distance` | What is its exact distance from the code? | Every `r >= 5`, `q >= r`, within the candidate budget |
+| `decode` | What nearest error pattern realizes that distance? | Same exact search as `distance` |
+| `classify` | Does the frozen theorem package prove it deep or not deep? | Registry-gated R5--R10, plus the certified even-field diagonal family at `r=q-1` |
+| `verify` | Does this locator or positive deep certificate replay? | Every emitted certificate schema |
+
+`canonicalize` never attaches a coding verdict. `classify` is fail-closed: it
+does not turn computational reach into a covering-radius theorem.
+
+## Quick start
+
+The committed Rust toolchain and dependency lock are sufficient to build the
+release executable:
 
 ```text
 cargo build --locked --release --bin projective-reed-solomon
 target/release/projective-reed-solomon --help
 ```
 
-The interface is organized by the mathematical question:
+Classify the included tangent syndrome over `F_7`:
 
 ```text
-projective-reed-solomon canonicalize request.json
-projective-reed-solomon distance request.json
-projective-reed-solomon decode request.json
-projective-reed-solomon classify request.json
-projective-reed-solomon verify certificate.json
+target/release/projective-reed-solomon classify examples/tangent-r5-f7.json
 ```
 
-All commands read JSON from standard input when the file is omitted and emit
-machine-readable JSON. `--compact` selects one-line output, and the global
-`--candidate-limit N` bounds locator or transporter enumeration. `classify`
-uses the fail-closed theorem registry; `canonicalize` does not attach a coding
-verdict.
+The result is `DEEP` and includes a
+`projective-reed-solomon-deep-certificate-v1` object. Save that nested object
+and replay it with:
 
-A prime-field request has this shape:
+```text
+target/release/projective-reed-solomon verify certificate.json
+```
+
+For a shallow example, compute and replay the nearest-error certificate:
+
+```text
+target/release/projective-reed-solomon distance examples/shallow-r5-f7.json \
+  > locator-certificate.json
+target/release/projective-reed-solomon verify locator-certificate.json
+```
+
+Every command reads JSON from standard input when `FILE` is omitted:
+
+```text
+cat request.json | target/release/projective-reed-solomon -c canonicalize
+```
+
+Use `--candidate-limit N` (or `--limit N`) to bound locator or transporter
+enumeration and `--compact` (or `-c`) for one-line JSON. Budget exhaustion is an
+error, never a partial mathematical verdict. See [the CLI guide](docs/cli.md)
+for outputs, exit behavior, and certificate pipelines.
+
+## Request format
+
+A prime-field request is versioned JSON:
 
 ```json
 {
@@ -75,93 +91,97 @@ A prime-field request has this shape:
 }
 ```
 
-Structural `canonicalize` is dimension-independent: it accepts every
-redundancy `r>=5` with `q>=r`. The exact tangent and binary-form lex-coset
-proofs apply unchanged. Exact coding operations (`distance` and `decode`) now
-accept the same range: exhaustive locator search through degree `r-1`, followed
-by an arbitrary `r`-column NRC basis, is dimension-independent and returns a
-replayable nearest-word certificate. General `classify` remains restricted to
-R5--R10, but one prior-art-backed diagonal family is enabled in every even
-field: when `r=q-1`, the exact orbit of the tangent normal form `e_(r-2)` has
-distance and covering radius `r`. Its version-2 positive certificate replays
-the terminal locator coefficient and two-element-complement obstruction. No
-other higher-dimensional canonical form or exact distance `r-1` is promoted
-without an independent covering-radius theorem-domain row. R11 tangent and
-sigma fixtures and R12--R13 multiple-root fixtures over
-`F_13` are checked against all 2,184 explicit PGL transports. A slow ignored
-regression checks GF(16)/R11 against all 16,320 semilinear transports, and a
-GF(16)/R16 fixture exercises the full-length `r=q` structural boundary. Slow
-release-mode coverage also checks all 4,681 projective GF(8)/R5 and all 7,381
-projective GF(9)/R5 forms against full semilinear enumeration.
-An R17/GF(32) fixture also freezes the dimension-independent Lucas consequence
-that degree `p^a` divided-power forms have no rootless stratum in
-characteristic `p`; canonicalization detects that pattern and skips the
-impossible rootless scan.
+Extension fields use the same base-`p` polynomial-basis encoding and provide an
+explicit monic irreducible modulus. The executable validates the characteristic,
+modulus, field elements, code parameters, and projective syndrome before any
+search begins.
 
-The four rational-root strata—rootless, simple, multiple, and pure power—give
-an exhaustive worst-case bound of `O(m*r*q^2)` exact transports for structural
-canonicalization, where `m` is the field extension degree. This is strictly
-below full `m*(q^3-q)` enumeration when `r` is treated as the fixed redundancy;
-the implementation retains that enumeration as its independent reference. The
-symmetric-power action uses adjacent exact-linear-factor rows in `O(r^2)` field
-operations per transport; see the [full accounting](docs/complexity.md).
+## What the certificates establish
 
-`classify` returns witness-backed `NOT_DEEP`, persistent-family `DEEP`, and
-frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. At GF(8)/R7 it is
-complete: the nine-direction diagonal tangent orbit and the fixed central
-nucleus are deep, while every other split-free orbit has distance six.
-`canonicalize` uses
-proved lex-coset charts on every binary form; the explicit group action remains
-as a defensive reference path. It additionally returns prior-art-backed
-`DEEP` for the even `r=q-1` diagonal tangent orbit, including GF(16)/R15.
-Further R8--R10 nonpersistent formula adapters
-remain open. `distance` and `decode` are exact for every `r>=5`, `q>=r`, within their explicit
-candidate budget: after degrees through `r-1` they use an arbitrary NRC basis
-at degree `r`, whose coefficients are forced nonzero by the failed lower
-search. Locator candidates are streamed, so peak search storage is one locator
-plus the Hankel-kernel basis rather than the candidate budget. Unsupported
-classification paths fail closed.
+A locator certificate records a completely split projective locator, its
+distinct support, and nonzero magnitudes. The verifier reconstructs the syndrome
+from that error pattern. It is an independently checkable witness of the stated
+distance upper bound; increasing-degree search supplies minimality.
 
-The locator enumeration has projective kernel dimension
-`2t+1-r` at degree `t`.  At terminal split-free testing `t=r-2`, this gives
-the field-scale exponents `q`, `q^2`, and `q^3` for
-redundancies five, six, and seven, before the `O(q)` exhaustive-root factor
-check used by this reference implementation.  A later factoring backend must
-separate locator selection cost from root-factorization cost.
+A positive deep certificate records the normalized syndrome, semilinear
+transporter, recognized structural family or frozen orbit, theorem-domain row,
+and covering-radius source. The verifier recomputes each link. No positive
+certificate is emitted for `UNRESOLVED` or `UNSUPPORTED`.
 
-The generic exact terminal fallback still enumerates the degree-`r-1` locator
-hyperplane.  For R5--R7 it is now reached only as the bounded-small-field and
-defensive correctness branch after the 12-point selector. The proof and
-degree count are summarized in
-[`docs/terminal-hyperplane-solver.md`](docs/terminal-hyperplane-solver.md).
-
-`verify-certificate` accepts both
-`projective-reed-solomon-locator-certificate-v1` negative witnesses and
-`projective-reed-solomon-deep-certificate-v1` positive certificates. A deep
-certificate is emitted only for `DEEP`, never for `UNRESOLVED` or
-`UNSUPPORTED`.
-
-The reproducible benchmark harness is built and run with:
+This separation is the central design rule:
 
 ```text
-cargo run --release --manifest-path software/projective-reed-solomon/Cargo.toml \
-  --bin projective-reed-solomon-benchmark -- --iterations 10 --extension-fields
+request -> exact arithmetic -> canonical form or nearest error
+                                  |
+                                  v
+                         frozen theorem lookup
+                                  |
+                                  v
+                    replayable positive certificate
 ```
 
-When run from this directory, omit `--manifest-path`. Its selector,
-projective-oracle, canonicalization, classification, and replay rows are
-documented in [`docs/benchmarks.md`](docs/benchmarks.md).
+## Mathematical and algorithmic scope
 
-## Repository boundary
+The implementation includes:
 
-This directory is deliberately self-contained. `data/theorem-domain-v1.json`
-is the fail-closed theorem registry used by positive deep certificates, while
-`data/frozen-orbits-v1.json` records the frozen finite exceptional orbits.
-Neither file silently promotes generic computation into a covering-radius
-theorem. See [`docs/theorem-boundary.md`](docs/theorem-boundary.md) and
-[`docs/certificate-schemas.md`](docs/certificate-schemas.md).
-The deterministic unit, property, CLI, and exhaustive layers are described in
-[`docs/testing.md`](docs/testing.md).
+- exact polynomial-basis arithmetic over prime and extension fields;
+- projective normalization, affine and infinity locator charts, distinct-root
+  recovery, and Vandermonde magnitude recovery;
+- increasing-degree Hankel-kernel search with streamed locator candidates;
+- exact semilinear canonicalization under `PGL(2,q) x Gal(F_q/F_p)`;
+- reduced tangent, rootless, simple-root, multiple-root, and pure-power charts,
+  with full group enumeration retained as a reference oracle;
+- the proved R5--R7 terminal-hyperplane selector and defensive exact fallback;
+- intrinsic persistent and fixed-family adapters plus frozen R5--R7 exceptional
+  orbit data; and
+- independent replay of both nearest-error and positive deep certificates.
 
-The software is licensed under the MIT License. The surrounding paper and its
-non-software material are licensed separately under CC BY 4.0.
+The reduced canonicalization charts retain at most `O(m*r*q^2)` transports for
+`q=p^m`; one transport costs `O(r^2 + r log q)` field operations. The explicit
+`m(q^3-q)` action remains an independent oracle. Locator candidates are streamed,
+so `--candidate-limit` bounds search work rather than a stored candidate list.
+The exact accounting is in [docs/complexity.md](docs/complexity.md), and the
+R5--R7 selector is described in
+[docs/terminal-hyperplane-solver.md](docs/terminal-hyperplane-solver.md).
+
+## Trust boundary
+
+Two versioned data files ship with the executable:
+
+- `data/theorem-domain-v1.json` is the fail-closed registry consulted before a
+  positive deep verdict;
+- `data/frozen-orbits-v1.json` records the audited finite exceptional orbits.
+
+Changing either mathematical domain is a release-level theorem change, not a
+routine implementation edit. Generic canonicalization or exact decoding beyond
+R10 does not imply a generic higher-redundancy deep-hole classification. The
+[theorem-boundary table](docs/theorem-boundary.md) states the exact distinction.
+
+## Reproduce and inspect
+
+The fast development gate is:
+
+```text
+cargo fmt --all -- --check
+cargo clippy --locked --all-targets -- -D warnings
+cargo test --locked
+```
+
+The unit, compiled-CLI, property, and exhaustive layers are described in
+[docs/testing.md](docs/testing.md). Reproducible timing and operation-count
+records are covered by [docs/benchmarks.md](docs/benchmarks.md).
+
+Further reference:
+
+- [CLI and JSON workflow](docs/cli.md)
+- [certificate schemas](docs/certificate-schemas.md)
+- [theorem boundary](docs/theorem-boundary.md)
+- [canonicalization complexity](docs/complexity.md)
+- [benchmark protocol](docs/benchmarks.md)
+- [testing layers](docs/testing.md)
+
+## Citation and license
+
+Citation metadata is in `CITATION.cff`. The software is licensed under the MIT
+License. The surrounding paper and its non-software material are licensed
+separately under CC BY 4.0.

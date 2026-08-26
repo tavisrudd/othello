@@ -11,10 +11,15 @@ dimensions from conclusions that require a covering-radius theorem.
 | even diagonal tangent | even `q`, `r=q-1` | Uses the imported covering radius of `PRS(2)` plus the intrinsic terminal-locator obstruction |
 | GF(8)/R7 | complete | Frozen exhaustive orbit data separate the two deep orbits from every distance-six orbit |
 
-Generic canonicalization or decoding beyond R10 is not a generic theorem that
-the resulting syndrome is deep. Unsupported classification routes fail closed
-as `UNSUPPORTED` or `UNRESOLVED`; neither state receives a positive deep
-certificate.
+The even diagonal tangent route is checked before the general R5--R10 input
+gate. Other R11-or-higher requests are rejected by `classify`; their structural
+and metric data remain available through `canonicalize`, `distance`, and
+`decode`.
+
+Generic canonicalization or decoding beyond R10 is not a theorem that the
+resulting syndrome is deep. Within the accepted classification domain,
+unsupported routes fail closed as `UNSUPPORTED` or `UNRESOLVED`; neither state
+receives a positive deep certificate.
 
 The theorem registry is versioned data shipped with the executable. Changing
 its domain is a mathematical release change, not an implementation convenience.

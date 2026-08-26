@@ -3,31 +3,8 @@ use std::io::Write;
 use std::process::{Command, Output, Stdio};
 use tempfile::NamedTempFile;
 
-const REQUEST: &str = r#"{
-  "schema": "projective-reed-solomon-request-v1",
-  "field": {
-    "p": 7,
-    "degree": 1,
-    "modulus": [0, 1],
-    "encoding": "polynomial-basis-base-p-integer-v1"
-  },
-  "redundancy": 5,
-  "evaluation": "full-projective-nrc-v1",
-  "syndrome": [0, 0, 0, 1, 0]
-}"#;
-
-const SHALLOW_REQUEST: &str = r#"{
-  "schema": "projective-reed-solomon-request-v1",
-  "field": {
-    "p": 7,
-    "degree": 1,
-    "modulus": [0, 1],
-    "encoding": "polynomial-basis-base-p-integer-v1"
-  },
-  "redundancy": 5,
-  "evaluation": "full-projective-nrc-v1",
-  "syndrome": [1, 0, 0, 0, 0]
-}"#;
+const REQUEST: &str = include_str!("../examples/tangent-r5-f7.json");
+const SHALLOW_REQUEST: &str = include_str!("../examples/shallow-r5-f7.json");
 
 const OUTSIDE_THEOREM_DOMAIN_REQUEST: &str = r#"{
   "schema": "projective-reed-solomon-request-v1",
@@ -71,6 +48,8 @@ fn help_exposes_the_mathematical_commands() {
     for command in ["canonicalize", "distance", "decode", "classify", "verify"] {
         assert!(help.contains(command), "missing command {command}");
     }
+    assert!(help.contains("Start here:"));
+    assert!(help.contains("Positive deep-hole verdicts remain fail-closed"));
 }
 
 #[test]
@@ -113,9 +92,11 @@ fn verify_rejects_a_corrupted_positive_certificate() {
         &serde_json::to_string(&certificate).expect("certificate must serialize"),
     );
     assert!(!verification.status.success());
+    assert_eq!(verification.status.code(), Some(2));
     assert!(verification.stdout.is_empty());
     assert!(
-        String::from_utf8_lossy(&verification.stderr).contains("BadDeepCertificate"),
+        String::from_utf8_lossy(&verification.stderr)
+            .contains("positive deep certificate failed independent replay"),
         "unexpected rejection: {}",
         String::from_utf8_lossy(&verification.stderr)
     );
@@ -128,7 +109,7 @@ fn canonicalize_accepts_a_json_file() {
         .write_all(REQUEST.as_bytes())
         .expect("request must be written");
     let output = binary()
-        .args(["--compact", "canonicalize"])
+        .args(["-c", "canonicalize"])
         .arg(request_file.path())
         .output()
         .expect("canonicalize must run");
@@ -171,14 +152,12 @@ fn distance_and_decode_emit_the_same_replayable_locator_certificate() {
 
 #[test]
 fn classify_fails_closed_when_the_candidate_budget_is_exhausted() {
-    let output = run_with_stdin(
-        &["--candidate-limit", "0", "--compact", "classify"],
-        REQUEST,
-    );
+    let output = run_with_stdin(&["--limit", "0", "--compact", "classify"], REQUEST);
     assert!(!output.status.success());
+    assert_eq!(output.status.code(), Some(2));
     assert!(output.stdout.is_empty());
     assert!(
-        String::from_utf8_lossy(&output.stderr).contains("CandidateLimit"),
+        String::from_utf8_lossy(&output.stderr).contains("candidate limit 0 exceeded"),
         "unexpected failure: {}",
         String::from_utf8_lossy(&output.stderr)
     );
@@ -188,9 +167,10 @@ fn classify_fails_closed_when_the_candidate_budget_is_exhausted() {
 fn classify_rejects_requests_beyond_the_theorem_domain() {
     let output = run_with_stdin(&["--compact", "classify"], OUTSIDE_THEOREM_DOMAIN_REQUEST);
     assert!(!output.status.success());
+    assert_eq!(output.status.code(), Some(2));
     assert!(output.stdout.is_empty());
     assert!(
-        String::from_utf8_lossy(&output.stderr).contains("BadRedundancy"),
+        String::from_utf8_lossy(&output.stderr).contains("redundancy must lie in 5..=10"),
         "unexpected rejection: {}",
         String::from_utf8_lossy(&output.stderr)
     );

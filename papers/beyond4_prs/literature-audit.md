@@ -369,10 +369,9 @@ deep-hole or covering-radius classification?". The geometry literature does not
 cite those seeds and has no coding content, so it could neither enter that
 screen nor pass that filter. The missing question was about the object in the
 proof rather than the wrapper of the theorem: does any work decide whether a
-pencil of binary cubics contains a totally split squarefree member? The full
-record, including the read depths, the coverage gaps, and two defects in the
-earlier audit records, is in
-`notes/2026-08-07-c881-r5-cubic-pencil-literature-audit.md`.
+pencil of binary cubics contains a totally split squarefree member? The source
+table above records the read depths, coverage gaps, and corrections to the
+earlier search boundary.
 
 **Not covered.** MathSciNet remains unreachable, so every "to our knowledge"
 qualification it would have gated stays in force. The published Designs, Codes

@@ -31,9 +31,9 @@
       "sha256": "4e0707ba71e80441ab251d8a520456723b8747e3929fc9df17d831e3ee282b15"
     },
     {
-      "bytes": 8519,
+      "bytes": 7338,
       "path": "software/projective-reed-solomon/README.md",
-      "sha256": "e36619f735e8e75d4f14983c12f9a91c342eb0478da6f75bbe75bbd31aded926"
+      "sha256": "58dfa82c59f383d36b2f6e1619f74f3c3a1984a9ed425753b4ef21056144aa3b"
     },
     {
       "bytes": 72442,
@@ -48,12 +48,17 @@
     {
       "bytes": 815,
       "path": "software/projective-reed-solomon/docs/benchmarks.md",
-      "sha256": "79e6311ccc60579a66514afb6efceb48b809111f5d505096887ede5b7a9a95c0"
+      "sha256": "e37845e5402f3aa9af64c3a30a4951e6bf377368f52976cd8763200fcbb804e6"
     },
     {
-      "bytes": 948,
+      "bytes": 1168,
       "path": "software/projective-reed-solomon/docs/certificate-schemas.md",
-      "sha256": "d047c16d4729dbeb1939a8290f1b68c1fcd04752ad53d2b544d54428dad6cc4f"
+      "sha256": "1a4bee227ecff2d9c5f984b8e9fa3664e423d43108d05e83d40391593f51f876"
+    },
+    {
+      "bytes": 3754,
+      "path": "software/projective-reed-solomon/docs/cli.md",
+      "sha256": "953919b4e11a7d6aa1fe136749481423167158156d61f98a57c7b27805a667b7"
     },
     {
       "bytes": 951,
@@ -66,14 +71,24 @@
       "sha256": "f9aa898b7c605dcd8f55834d3713529908095e1ab37877fc4ab43eb2b8f429f5"
     },
     {
-      "bytes": 1593,
+      "bytes": 1531,
       "path": "software/projective-reed-solomon/docs/testing.md",
-      "sha256": "384ad5d9b273233f20d30058946b8b455e0c3be526a987bdba2dc24e07e2d781"
+      "sha256": "683402f10a8a5612317c26056a50596281b80ca154228012b58fa2453ddd3bc5"
     },
     {
-      "bytes": 1272,
+      "bytes": 1532,
       "path": "software/projective-reed-solomon/docs/theorem-boundary.md",
-      "sha256": "b1ca9dac08a03cd0e26b8ae2c76a8c3207af0467a5bca16e7043526d2618f2c5"
+      "sha256": "715e2da351001a1273951264c81cc5e2fbb5e7edaad7886c448252a1f02dcdee"
+    },
+    {
+      "bytes": 268,
+      "path": "software/projective-reed-solomon/examples/shallow-r5-f7.json",
+      "sha256": "6b806b838c60ebc4a1b8fc236aa833c7f1c9dccd3073f21044cbd8be684aad64"
+    },
+    {
+      "bytes": 268,
+      "path": "software/projective-reed-solomon/examples/tangent-r5-f7.json",
+      "sha256": "b9dc17c41bc3b86fdda1ae35679f4d0e704fc05ca1cceb7a05e219fb53e10410"
     },
     {
       "bytes": 86,
@@ -91,14 +106,14 @@
       "sha256": "bab1c096625c6c23d26a4c8080165bed6b610531f8eccce3a9bf83e12e9b30b1"
     },
     {
-      "bytes": 4000,
+      "bytes": 5788,
       "path": "software/projective-reed-solomon/src/main.rs",
-      "sha256": "57437855a31cdecfe5b52da90f5e54cb54cfe987cfdfe2125dc81b3b8c777a91"
+      "sha256": "99a99e5912037fcd87bf5375b514c6a58bd3c4fac5cdc22603352a9964fe5de4"
     },
     {
-      "bytes": 6591,
+      "bytes": 6440,
       "path": "software/projective-reed-solomon/tests/cli.rs",
-      "sha256": "9ca4948eaade3ffc4f5153712a2f5fffe15ae0362b31e45063078d9884beeef8"
+      "sha256": "5722021011890d8a37c82fea458387b402d6246885099870c6527c78ef2c426f"
     },
     {
       "bytes": 5788,

@@ -75,8 +75,9 @@ over GF(8), GF(9), and GF(32). The separately named
 `make software-gf16-check` runs the full GF(16)/R11 semilinear census; the full
 `make release-check` requires both slow gates.
 The `projective-reed-solomon` executable exposes `canonicalize`, `distance`,
-`decode`, `classify`, and `verify`; its README records the JSON request and
-certificate boundary.
+`decode`, `classify`, and `verify`; its README provides runnable examples, and
+`software/projective-reed-solomon/docs/cli.md` records the JSON workflow, exit
+behavior, and certificate boundary.
 `supplement/SOFTWARE-MANIFEST.json` hashes every shipped file in the software
 subtree, excluding only build and Git directories.
 

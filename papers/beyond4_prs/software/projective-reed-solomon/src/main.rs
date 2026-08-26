@@ -7,20 +7,36 @@ use projective_reed_solomon::{
 use std::fs;
 use std::io::{self, Read};
 use std::path::PathBuf;
+use std::process::ExitCode;
 
 #[derive(Parser)]
 #[command(
     name = "projective-reed-solomon",
     version,
-    about = "Exact tools for full-length projective Reed--Solomon syndromes"
+    about = "Proof-carrying tools for full-length projective Reed--Solomon syndromes",
+    long_about = "Compute exact structural and coding data for full-length projective \
+Reed--Solomon syndromes over explicitly represented finite fields.\n\n\
+Structural canonicalization is available beyond the paper's classification range. \
+Positive deep-hole verdicts remain fail-closed: they require a matching theorem-domain \
+entry and carry a certificate that `verify` replays independently.",
+    after_help = "Start here:\n  \
+projective-reed-solomon classify examples/tangent-r5-f7.json\n  \
+projective-reed-solomon canonicalize request.json\n  \
+cat certificate.json | projective-reed-solomon verify\n\n\
+Input and output are versioned JSON. See README.md and docs/cli.md for the schema and trust boundary."
 )]
 struct Cli {
     /// Maximum locator or transporter candidates examined by a bounded search.
-    #[arg(long, global = true, default_value_t = 10_000_000)]
+    #[arg(
+        long,
+        visible_alias = "limit",
+        global = true,
+        default_value_t = 10_000_000
+    )]
     candidate_limit: u64,
 
     /// Emit compact rather than pretty-printed JSON.
-    #[arg(long, global = true)]
+    #[arg(short, long, global = true)]
     compact: bool,
 
     #[command(subcommand)]
@@ -29,15 +45,34 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
-    /// Compute exact distance and emit a replayable nearest-error certificate.
-    Distance(SearchArgs),
-    /// Recover a nearest error pattern and emit its replayable certificate.
-    Decode(SearchArgs),
-    /// Apply the fail-closed theorem registry and emit a structural verdict.
-    Classify(SearchArgs),
     /// Compute a semilinear canonical form and transporter without a coding verdict.
+    ///
+    /// This structural operation accepts every r >= 5 with q >= r. It never
+    /// promotes a canonical form to a deep-hole classification.
     Canonicalize(SearchArgs),
+
+    /// Compute exact distance and emit a replayable nearest-error certificate.
+    ///
+    /// Searches locator degrees in increasing order. The certificate records
+    /// its split support and nonzero magnitudes so `verify` can replay it.
+    Distance(SearchArgs),
+
+    /// Recover a nearest error pattern and emit its replayable certificate.
+    ///
+    /// Returns the same exact locator certificate as `distance`; its support
+    /// and magnitudes are the decoded nearest error pattern.
+    Decode(SearchArgs),
+
+    /// Apply the fail-closed theorem registry and emit a structural verdict.
+    ///
+    /// A DEEP result includes an independently replayable positive certificate.
+    /// Unsupported or unresolved routes never receive one.
+    Classify(SearchArgs),
+
     /// Replay a locator or positive deep certificate.
+    ///
+    /// Recomputes the arithmetic witness, transporter, family route, and frozen
+    /// theorem-domain lookup. Success prints {"status":"VALID"}.
     #[command(visible_alias = "verify-certificate")]
     Verify(InputArgs),
 }
@@ -74,7 +109,7 @@ fn print_json<T: serde::Serialize>(value: &T, compact: bool) -> Result<(), serde
     Ok(())
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn run() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
     match cli.command {
         Command::Verify(args) => {
@@ -111,4 +146,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
     Ok(())
+}
+
+fn main() -> ExitCode {
+    match run() {
+        Ok(()) => ExitCode::SUCCESS,
+        Err(error) => {
+            eprintln!("error: {error}");
+            ExitCode::from(2)
+        }
+    }
 }
