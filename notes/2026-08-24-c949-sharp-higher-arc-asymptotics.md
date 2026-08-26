@@ -310,11 +310,29 @@ A second bounded certificate now exists in the connector-at-infinity chart:
 partial_X Q=A(X^3,M)+X P_reg(M)p(M).
 ```
 
-Here `deg p<=3`, and the two vertex fibers prescribe its values at both
-vertex slopes.  Thus at most two scalar freedoms survive outside the large
-cube channels.  The remaining bridge is to identify this `p` with a marked
-functional of `(E,U)` or fourth Witt; the q-scale cube quotients and boundary
-remainder cannot be discarded.
+The two vertex fibers prescribe its values at both vertex slopes.  Homogeneous
+evaluation at the omitted vertical boundary forces `deg p<=2`, because its
+fiber product `(Y-s)C(Y)^3` has no `Y^(q+2)` coefficient.
+
+The two free values are now explicit.  In either finite boundary direction,
+with missing-root factor `A_b` and triple-root factor `C_b`,
+
+```text
+p(b)=-[X^2]quo(C_b^2,A_b)/P_reg(b).
+```
+
+Together with the two vertex values, these four values must lie on one
+quadratic.  Equivalently their cubic Lagrange coefficient vanishes.  This is
+the first overdetermining field-uniform quotient gate.  The sharpest current
+target is to identify that scalar relation with a marked functional of
+`(E,U)`, fourth Witt, or the mapping gate; the q-scale cube channels remain.
+
+In its sharpest form, subtract the linear interpolant through the two vertex
+values: both boundary quotients must then give the same coefficient of
+`(M-v_1)(M-v_2)`.  Equivalently the affine point coordinates satisfy
+`e_(q-1)(a)=0`; at q=27 this is the constant-time normalized filter
+`e_26(a)=0`.  Transporting that filter into the 714 carrier gauges is now a
+precise compiler task, not a search for an unspecified invariant.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
@@ -481,6 +499,12 @@ separate global trade obstruction or construction.
   residual, and their total collision-packing defect is only `O(q)`.
 - **Settled:** the global affine quotient derivative has only a cubic
   noncube defect with at most two scalar freedoms after the vertex fibers.
+- **Settled:** the vertical boundary forces `deg p<=2`; the two vertex and
+  two finite-boundary values satisfy an explicit Lagrange compatibility.
+- **Settled:** the same gate is `e_(q-1)(a)=0` in the boundary-normalized
+  affine flag (`e_26(a)=0` at q=27).
+- **Open:** determine whether this gate is independent of the existing
+  fourth-Witt, reciprocal-norm, and mapping gates after carrier transport.
 - **Open:** synchronize those residuals across slopes; fiberwise boundedness
   alone does not give a common carrier.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut
@@ -497,8 +521,10 @@ separate global trade obstruction or construction.
 
 ## Next checkpoint
 
-Find a marked-flag norm/Witt transition that controls the full tangent
-restriction `(TR25)`, rather than another origin gauge or one-polar
-calculation.  In parallel, attack the constant-repair construction directly
-through the bounded carrier gates; the safe-donor move is closed as an
-upward, wrong-direction normalization for the minimum problem.
+Transport the four-slope quadratic compatibility `(TR38)` into C962's
+carrier coordinates and compare it with the existing fourth-Witt scalar.
+This is now one explicit determinant, not an unspecified tangent reflag.
+In parallel, use the two-monomer matching gate and degree-five labelled
+residuals as q=27 prefilters before the carrier DFS.  Field-uniformly, prove
+cross-slope propagation for those residuals or construct a genuinely
+non-inverse core satisfying the off-core cap.

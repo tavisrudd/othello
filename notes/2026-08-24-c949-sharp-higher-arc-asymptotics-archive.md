@@ -275,3 +275,29 @@ derivative into `X P_reg(M)p(M)`; the two vertex fibers fix two values of the
 cubic `p`, leaving at most two scalar freedoms.  The hostile boundary is
 important: the two cube channels and division remainder remain q-scale, and
 no tangent reflag currently identifies `p` with `(E,U)` or fourth Witt.
+
+The two parameters were then localized exactly.  At each finite bad
+boundary slope, the global quotient is the Euclidean quotient of the square
+of the triple-root polynomial by the missing-root polynomial; its `X^2`
+coefficient gives the corresponding value of `p`.  Those two values plus
+the two vertex values determine the cubic.  A chart-compatible value at the
+omitted vertical boundary direction would be a fifth, genuinely
+overdetermining condition, but the needed homogeneous reciprocal transition
+is still absent.
+
+The final homogeneous calculation supplied that condition without a tangent
+reflag.  In the raw reciprocal direction coordinates the transformed
+remainder keeps degree below `q`, while the vertical product
+`(Y-s)C(Y)^3` has no `Y^(q+2)` term.  This kills the cubic coefficient of
+`p`.  Hence the two vertex values and two finite-boundary quotient values
+must satisfy one explicit quadratic-interpolation determinant.  This is a
+real overdetermining quotient gate; its identification with fourth Witt,
+the reciprocal norm, or C962's mapping coordinates remains open.
+
+The final `ej`+`tt` closeout extracted two free forms of the gate.  After
+subtracting the linear vertex interpolant, the two boundary quotients must
+produce one common scalar.  At the top-product level the same condition is
+the normalized elementary-symmetric identity `e_(q-1)(a)=0`, hence the
+constant-time q=27 filter `e_26(a)=0`.  Red-team confirmed the algebra and
+also the scope: the filter is flag-dependent, so it cannot be inserted into
+C962's 714 tasks until the explicit carrier-to-Redei gauge map is fixed.

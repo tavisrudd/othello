@@ -743,6 +743,76 @@ This is an exact pre-specialization bounded defect, not yet a carrier
 theorem: `A_0,B_0` and `J` remain q-scale, and no proved reflag identifies
 `p` with tangent-chart `(E,U)` or C962's carrier.
 
+The two parameters localize exactly at the two finite boundary slopes.  For
+such a slope `b`, write its profile as
+
+```text
+F=A_b(X)(X-s_b)C_b(X),  deg A_b=r-1, deg C_b=2r,
+S_b=(X-s_b)C_b(X)^3,
+```
+
+where `A_b` is the **missing-root** polynomial.  If
+`C_b^2=A_b Q_b+R_b`, `deg R_b<r-1`, then
+
+```text
+S_b=FQ_b+(X-s_b)C_bR_b,       deg((X-s_b)C_bR_b)<q.
+```
+
+Thus the global quotient specializes literally to `Q(X,b)=Q_b`, and
+
+```text
+p(b)=-[X^2]quo(C_b^2,A_b)/P_reg(b).                (TR36)
+```
+
+The vertical boundary direction supplies the missing condition directly.
+Under the homogeneous substitution `M=1/N`, `X=-Y/N`, the transformed
+remainder still has `Y`-degree below `q`.  At `N=0`, the vertical product is
+`(Y-s)C(Y)^3`, which has no `Y^(q+2)` coefficient because its exponents are
+only zero or one modulo three.  That coefficient is the leading coefficient
+of `p`; hence
+
+```text
+deg p<=2.                                             (TR37)
+```
+
+The two vertex and two finite-boundary values therefore obey one exact
+compatibility.  If `m_1,...,m_4` are those slopes and `y_i=p(m_i)` is given
+by `(TR35)--(TR36)`, then
+
+```text
+sum_i y_i / product_(j!=i)(m_i-m_j) = 0.             (TR38)
+```
+
+This is the first overdetermining field-uniform quotient gate.  It is not
+yet identified with fourth Witt or the reciprocal norm; those formulas use
+different carrier coordinates and still require an explicit bridge.
+
+Equivalently, let `L(M)` be the linear interpolant through the two vertex
+values.  Then
+
+```text
+p(M)=L(M)+lambda(M-v_1)(M-v_2),
+```
+
+and the two finite-boundary quotients must give the same scalar
+
+```text
+(p(b_1)-L(b_1))/((b_1-v_1)(b_1-v_2))
+ =(p(b_2)-L(b_2))/((b_2-v_1)(b_2-v_2)).             (TR39)
+```
+
+There is also a cheap top-coefficient form.  Since `deg p<=2`,
+`[X^2 M^(q-1)]Q=0`; taking the corresponding coefficient of
+`S=(X^q-X)Q+J` yields
+
+```text
+e_(q-1)({a(P):P in B_aff})=0.                       (TR40)
+```
+
+In the normalized q=27 flag this is the constant-time filter `e_26(a)=0`.
+It is coordinate-gauge dependent and cannot be applied to C962's 714 tasks
+until the carrier-to-this-Redei-flag map is made explicit.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -788,5 +858,13 @@ theorem: `A_0,B_0` and `J` remain q-scale, and no proved reflag identifies
   affine quotient derivative to a cubic with at most two scalar freedoms.
 - **Open:** relate that two-scalar defect to `(E,U)`, fourth Witt, or the two
   boundary fibers; the large cube channels cannot be discarded.
+- **Settled:** `(TR36)` identifies the two remaining parameters with low
+  Euclidean-quotient coefficients in the two finite boundary fibers.
+- **Settled:** the vertical boundary forces `deg p<=2`, and `(TR38)` is the
+  resulting overdetermining four-slope compatibility.
+- **Settled:** `(TR39)` is its one-scalar boundary form, and `(TR40)` is the
+  equivalent normalized elementary-symmetric compiler gate.
+- **Open:** identify `(TR38)` with a carrier/Witt/norm functional or use it
+  directly against the selector and mapping gates.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.
