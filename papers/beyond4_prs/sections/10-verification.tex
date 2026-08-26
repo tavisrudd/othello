@@ -106,3 +106,13 @@ certificate schemas, generators, independent replays where available,
 expected hashes, toolchain locks, and a top-level verification command.
 This appendix assigns each computational or formal claim its exact trust
 route.
+
+The repository also contains the companion implementation
+\texttt{rust/prs\_classifier}.  Independently of the fixed-redundancy
+covering-radius theorems, it computes exact semilinear canonical forms and
+replayable exact nearest-error certificates for every $r\geq5$ with
+$q\geq r$.  Its locator candidates are streamed, so the candidate budget
+bounds search time rather than allocated locator storage.  This broader
+algorithmic domain is not used to promote an R11-or-higher syndrome to a deep
+hole: such a promotion still requires an independently proved covering radius
+and family exhaustion.

@@ -70,9 +70,12 @@ wild orbit. GF(32)/R17 freezes the first beyond-R10 binary characteristic-power
 degree and its necessarily non-rootless chart. The full PGL enumerator remains
 as a
 defensive reference and regression oracle, not a reachable binary-form
-stratum. The exhaustive structural bound is `O(m r q^2)`. `classify`, `distance`,
-and `decode` deliberately remain R5--R10-only, so this scope extension makes no
-unsupported covering-radius or deep-hole assertion.
+stratum. The exhaustive structural bound is `O(m r q^2)`. Exact `distance` and
+`decode` now share the structural API's full range `r>=5`, `q>=r`: the locator
+kernel enumeration and final `r`-column NRC basis argument are independent of
+the frozen theorem registry. `classify` deliberately remains R5--R10-only, so
+this scope extension makes no unsupported covering-radius or deep-hole
+assertion; in particular exact distance `r-1` is not called deep at R11+.
 The implementation-level field-operation accounting and quadratic
 symmetric-power recurrence are recorded in
 `c969-canonicalization-complexity.md`.

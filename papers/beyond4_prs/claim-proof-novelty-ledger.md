@@ -50,6 +50,16 @@ is used to infer a covering radius or an unrestricted geometric statement.
 | Wang | Frobenius/factorization semantics on the étale locus | no Hankel carrier or marked recursion |
 | Wang--Wu--Hu | projective-subline endpoint criterion | no adjacent-zero union, recursive transport, or full M9 shallowness |
 
+## Companion algorithm ledger
+
+| ID | Adopted claim | Status | Exact proof/trust boundary |
+|---|---|---|---|
+| SW-CAN | exact semilinear lex canonical form and transporter for every nonzero binary form with `r>=5`, `q>=r` | IMPLEMENTED / DIFFERENTIAL-CERTIFIED / QUALIFIED-NOVELTY | all rational-root multiplicity strata, including characteristic-two and Lucas degeneracies; `O(m r q^2)` retained transports; fixed-degree quartic orbit classifications, smooth-form isomorphism algorithms, and irreducible-place enumeration are prior art and delimit the claim |
+| SW-DEC | exact syndrome distance and nearest-error certificate for every `r>=5`, `q>=r`, within the explicit candidate budget | IMPLEMENTED / CERTIFICATE-REPLAY | exhaustive locator degrees through `r-1`, then an `r`-column NRC basis; streamed locator enumeration; no radius theorem and no R11+ deep-hole promotion |
+
+The source-by-source comparison and the C949/C962 transfer boundary are in
+`notes/reed-solomon-tasks/c969-literature-and-paper-upgrade.md`.
+
 ## Formal boundary
 
 The 17-file paper-facing aggregate checks the shared Hankel interfaces,

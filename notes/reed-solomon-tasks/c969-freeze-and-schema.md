@@ -205,7 +205,10 @@ premise and therefore cannot promote the q=7,8,9 gap.
   table are the next compression gate.
 - **Settled:** an exact fallback decoder needs no radius theorem.  Exhaustive
   failure through degree `r-1` followed by one NRC basis gives distance `r`
-  and forces every basis magnitude nonzero.
+  and forces every basis magnitude nonzero. This proof and implementation now
+  apply for every `r>=5`, `q>=r`; locator candidates are streamed rather than
+  materialized, so the candidate limit bounds time rather than allocated
+  locator storage.
 - **Settled:** the R5--R7 terminal-hyperplane solver uses both infinity charts,
   the bilinear last-root equation, collision handling, and a fixed 12-point
   grid, with exact streamed `O(q)`, `O(q^2)`, and `O(q^3)` prefix counts and a

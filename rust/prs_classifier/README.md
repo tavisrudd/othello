@@ -34,10 +34,13 @@ This is the C969 implementation crate.  Its current executable slice provides:
 
 Structural `canonicalize` is dimension-independent: it accepts every
 redundancy `r>=5` with `q>=r`. The exact tangent and binary-form lex-coset
-proofs apply unchanged. Coding operations (`distance`, `decode`, and
-`classify`) remain restricted to R5--R10; in particular, no higher-dimensional
-canonical form is promoted to a deep-hole verdict without a theorem-domain
-row. R11 tangent and sigma fixtures and R12--R13 multiple-root fixtures over
+proofs apply unchanged. Exact coding operations (`distance` and `decode`) now
+accept the same range: exhaustive locator search through degree `r-1`, followed
+by an arbitrary `r`-column NRC basis, is dimension-independent and returns a
+replayable nearest-word certificate. `classify` remains restricted to
+R5--R10; in particular, no higher-dimensional canonical form or exact distance
+`r-1` is promoted to a deep-hole verdict without an independent covering-radius
+theorem-domain row. R11 tangent and sigma fixtures and R12--R13 multiple-root fixtures over
 `F_13` are checked against all 2,184 explicit PGL transports. A slow ignored
 regression checks GF(16)/R11 against all 16,320 semilinear transports, and a
 GF(16)/R16 fixture exercises the full-length `r=q` structural boundary. Slow
@@ -61,11 +64,12 @@ operations per transport; see the
 frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. `canonicalize` uses
 proved lex-coset charts on every binary form; the explicit group action remains
 as a defensive reference path. Further R8--R10 nonpersistent formula adapters
-remain open. `distance` and `decode` are
-exact within their explicit
+remain open. `distance` and `decode` are exact for every `r>=5`, `q>=r`, within their explicit
 candidate budget: after degrees through `r-1` they use an arbitrary NRC basis
 at degree `r`, whose coefficients are forced nonzero by the failed lower
-search.  Unsupported classification paths fail closed.
+search. Locator candidates are streamed, so peak search storage is one locator
+plus the Hankel-kernel basis rather than the candidate budget. Unsupported
+classification paths fail closed.
 
 The locator enumeration has projective kernel dimension
 `2t+1-r` at degree `t`.  At terminal split-free testing `t=r-2`, this gives

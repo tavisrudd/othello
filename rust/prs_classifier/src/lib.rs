@@ -1805,31 +1805,40 @@ pub fn search_locator(
     max_degree: usize,
     candidate_limit: u64,
 ) -> Result<LocatorCertificate, Error> {
-    let (field, syndrome) = validate_request(request)?;
+    let (field, syndrome) = validate_canonicalization_request(request)?;
     let stop = max_degree
         .min(request.redundancy)
         .min(field.order() as usize + 1);
     let mut examined = 0u64;
     for degree in 1..=stop {
         let basis = locator_kernel(&field, &syndrome, degree);
-        for locator in projective_span(&field, &basis, candidate_limit, &mut examined)? {
-            let Some(support) = split_support(&field, &locator) else {
-                continue;
-            };
-            let Some(magnitudes) = recover_magnitudes(&field, &syndrome, &support) else {
-                continue;
-            };
-            return Ok(LocatorCertificate {
-                schema: CERTIFICATE_SCHEMA.to_string(),
-                field: request.field.clone(),
-                redundancy: request.redundancy,
-                normalized_syndrome: syndrome,
-                distance: support.len(),
-                locator: normalize_projective(&field, &locator)?,
-                support,
-                magnitudes,
-                candidates_examined: examined,
-            });
+        let certificate = find_in_projective_span(
+            &field,
+            &basis,
+            candidate_limit,
+            &mut examined,
+            |locator, candidates_examined| {
+                let Some(support) = split_support(&field, &locator) else {
+                    return Ok(None);
+                };
+                let Some(magnitudes) = recover_magnitudes(&field, &syndrome, &support) else {
+                    return Ok(None);
+                };
+                Ok(Some(LocatorCertificate {
+                    schema: CERTIFICATE_SCHEMA.to_string(),
+                    field: request.field.clone(),
+                    redundancy: request.redundancy,
+                    normalized_syndrome: syndrome.clone(),
+                    distance: support.len(),
+                    locator: normalize_projective(&field, &locator)?,
+                    support,
+                    magnitudes,
+                    candidates_examined,
+                }))
+            },
+        )?;
+        if let Some(certificate) = certificate {
+            return Ok(certificate);
         }
     }
     Err(Error::NoLocator(stop))
@@ -2059,7 +2068,7 @@ pub fn search_exact_locator(
         Err(Error::NoLocator(_)) => {}
         Err(error) => return Err(error),
     }
-    let (field, syndrome) = validate_request(request)?;
+    let (field, syndrome) = validate_canonicalization_request(request)?;
     let support = (0..request.redundancy as u32)
         .map(Root::Finite)
         .collect::<Vec<_>>();
@@ -2127,18 +2136,33 @@ pub fn verify_certificate(certificate: &LocatorCertificate) -> Result<(), Error>
     Ok(())
 }
 
+#[cfg(test)]
 fn projective_span(
     field: &Field,
     basis: &[Vec<u32>],
     limit: u64,
     examined: &mut u64,
 ) -> Result<Vec<Vec<u32>>, Error> {
+    let mut out = Vec::new();
+    find_in_projective_span(field, basis, limit, examined, |vector, _| {
+        out.push(vector);
+        Ok(None::<()>)
+    })?;
+    Ok(out)
+}
+
+fn find_in_projective_span<T>(
+    field: &Field,
+    basis: &[Vec<u32>],
+    limit: u64,
+    examined: &mut u64,
+    mut accept: impl FnMut(Vec<u32>, u64) -> Result<Option<T>, Error>,
+) -> Result<Option<T>, Error> {
     if basis.is_empty() {
-        return Ok(Vec::new());
+        return Ok(None);
     }
     let dimension = basis.len();
     let width = basis[0].len();
-    let mut out = Vec::new();
     for pivot in 0..dimension {
         let free = dimension - pivot - 1;
         let count = u64::from(field.order()).pow(free as u32);
@@ -2160,10 +2184,12 @@ fn projective_span(
                     vector[j] = field.add(vector[j], field.mul(scalar, row[j]));
                 }
             }
-            out.push(vector);
+            if let Some(value) = accept(vector, *examined)? {
+                return Ok(Some(value));
+            }
         }
     }
-    Ok(out)
+    Ok(None)
 }
 
 fn normalized_pgl_matrices(field: &Field) -> Vec<[u32; 4]> {
@@ -2556,6 +2582,27 @@ mod tests {
             }
         }
         let certificate = search_locator(&request(prime_field(7), 5, syndrome), 3, 1_000).unwrap();
+        assert_eq!(certificate.distance, 2);
+        verify_certificate(&certificate).unwrap();
+    }
+
+    #[test]
+    fn exact_decoder_extends_to_r11() {
+        let field_spec = prime_field(13);
+        let field = Field::new(field_spec.clone()).unwrap();
+        let support = [Root::Finite(2), Root::Finite(7)];
+        let magnitudes = [3, 5];
+        let mut syndrome = vec![0u32; 11];
+        for (&magnitude, root) in magnitudes.iter().zip(support) {
+            for (i, out) in syndrome.iter_mut().enumerate() {
+                let Root::Finite(x) = root else {
+                    unreachable!()
+                };
+                *out = field.add(*out, field.mul(magnitude, field.pow(x, i as u64)));
+            }
+        }
+
+        let certificate = search_exact_locator(&request(field_spec, 11, syndrome), 10_000).unwrap();
         assert_eq!(certificate.distance, 2);
         verify_certificate(&certificate).unwrap();
     }
