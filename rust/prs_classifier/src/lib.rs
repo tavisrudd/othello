@@ -839,12 +839,20 @@ pub fn apply_semilinear(
         .map(|&x| field.frobenius(x, frobenius_exponent))
         .collect();
     let mut out = vec![0u32; syndrome.len()];
+    let top = [beta, alpha];
+    let bottom = [delta, gamma];
+    let mut row = polynomial_trim(polynomial_power(field, &bottom, n));
     for (i, output) in out.iter_mut().enumerate() {
-        let left = polynomial_power(field, &[beta, alpha], i);
-        let right = polynomial_power(field, &[delta, gamma], n - i);
-        let row = polynomial_mul(field, &left, &right);
-        for j in 0..=n {
-            *output = field.add(*output, field.mul(row[j], frobenius_syndrome[j]));
+        for (j, &coefficient) in row.iter().enumerate() {
+            *output = field.add(*output, field.mul(coefficient, frobenius_syndrome[j]));
+        }
+        if i != n {
+            row = polynomial_mul(
+                field,
+                &polynomial_divide_exact_linear(field, &row, bottom),
+                &top,
+            );
+            row = polynomial_trim(row);
         }
     }
     let pivot = out
@@ -2214,6 +2222,36 @@ fn polynomial_power(field: &Field, polynomial: &[u32], exponent: usize) -> Vec<u
     out
 }
 
+fn polynomial_divide_exact_linear(
+    field: &Field,
+    polynomial: &[u32],
+    [constant, linear]: [u32; 2],
+) -> Vec<u32> {
+    if linear == 0 {
+        let inverse = field
+            .inv(constant)
+            .expect("nonzero matrix row has a nonzero linear form");
+        return polynomial_trim(
+            polynomial
+                .iter()
+                .map(|&coefficient| field.mul(coefficient, inverse))
+                .collect(),
+        );
+    }
+
+    let inverse = field.inv(linear).expect("nonzero coefficient has inverse");
+    let mut remainder = polynomial.to_vec();
+    let mut quotient = vec![0; remainder.len().saturating_sub(1)];
+    for degree in (1..remainder.len()).rev() {
+        let coefficient = field.mul(remainder[degree], inverse);
+        quotient[degree - 1] = coefficient;
+        remainder[degree] = field.sub(remainder[degree], field.mul(coefficient, linear));
+        remainder[degree - 1] = field.sub(remainder[degree - 1], field.mul(coefficient, constant));
+    }
+    debug_assert!(remainder.iter().all(|&coefficient| coefficient == 0));
+    polynomial_trim(quotient)
+}
+
 fn polynomial_gcd(field: &Field, mut a: Vec<u32>, mut b: Vec<u32>) -> Vec<u32> {
     while !b.is_empty() {
         let remainder = polynomial_division_remainder(field, &a, &b);
@@ -2401,6 +2439,34 @@ mod tests {
         }
     }
 
+    fn apply_semilinear_direct(
+        field: &Field,
+        syndrome: &[u32],
+        frobenius_exponent: usize,
+        [alpha, beta, gamma, delta]: [u32; 4],
+    ) -> (Vec<u32>, u32) {
+        let n = syndrome.len() - 1;
+        let frobenius_syndrome = syndrome
+            .iter()
+            .map(|&x| field.frobenius(x, frobenius_exponent))
+            .collect::<Vec<_>>();
+        let mut out = vec![0; syndrome.len()];
+        for (i, output) in out.iter_mut().enumerate() {
+            let left = polynomial_power(field, &[beta, alpha], i);
+            let right = polynomial_power(field, &[delta, gamma], n - i);
+            let row = polynomial_mul(field, &left, &right);
+            for j in 0..=n {
+                *output = field.add(*output, field.mul(row[j], frobenius_syndrome[j]));
+            }
+        }
+        let pivot = out.iter().copied().find(|&x| x != 0).unwrap();
+        let scale = field.inv(pivot).unwrap();
+        for coordinate in &mut out {
+            *coordinate = field.mul(*coordinate, scale);
+        }
+        (out, scale)
+    }
+
     #[test]
     fn gf16_arithmetic_matches_x4_x_1() {
         let field = Field::new(FieldSpec {
@@ -2413,6 +2479,35 @@ mod tests {
         assert_eq!(field.mul(2, 8), 3);
         for a in 1..16 {
             assert_eq!(field.mul(a, field.inv(a).unwrap()), 1);
+        }
+    }
+
+    #[test]
+    fn quadratic_semilinear_action_matches_direct_power_rows() {
+        for (field, syndrome) in [
+            (
+                Field::new(prime_field(7)).unwrap(),
+                vec![1, 2, 3, 4, 5, 6, 0],
+            ),
+            (
+                Field::new(FieldSpec {
+                    p: 2,
+                    degree: 3,
+                    modulus: vec![1, 1, 0, 1],
+                    encoding: "polynomial-basis-base-p-integer-v1".into(),
+                })
+                .unwrap(),
+                vec![1, 2, 3, 4, 5, 6, 7],
+            ),
+        ] {
+            for exponent in 0..field.spec.degree {
+                for matrix in normalized_pgl_matrices(&field) {
+                    assert_eq!(
+                        apply_semilinear(&field, &syndrome, exponent, matrix).unwrap(),
+                        apply_semilinear_direct(&field, &syndrome, exponent, matrix)
+                    );
+                }
+            }
         }
     }
 

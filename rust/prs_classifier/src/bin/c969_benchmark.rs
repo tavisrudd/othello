@@ -155,6 +155,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     r11_tangent_syndrome[9] = 1;
     let r11_tangent = request(prime_field(13), 11, r11_tangent_syndrome);
     let r11_sigma = r11_sigma()?;
+    let mut r13_multiple_syndrome = vec![0; 13];
+    r13_multiple_syndrome[2] = 1;
+    r13_multiple_syndrome[12] = 2;
+    let r13_multiple = request(prime_field(13), 13, r13_multiple_syndrome);
     let mut rows = Vec::new();
     rows.extend(terminal_rows(
         &r5,
@@ -304,6 +308,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         elapsed_ns_per_iteration: r11_sigma_elapsed / u128::from(args.iterations),
         candidates_examined: Some(r11_sigma_canonicalization.transporters_examined),
         baseline: "dimension-independent binary-form chart; no R11 coding verdict",
+    });
+    let r13_multiple_canonicalization = canonicalize_syndrome(&r13_multiple, args.candidate_limit)?;
+    let r13_multiple_elapsed = elapsed(args.iterations, || {
+        canonicalize_syndrome(&r13_multiple, args.candidate_limit)
+    })?;
+    rows.push(BenchmarkRow {
+        operation: "r13_multiple_root_structural_canonicalization".into(),
+        field_order: 13,
+        redundancy: 13,
+        elapsed_ns_total: r13_multiple_elapsed,
+        elapsed_ns_per_iteration: r13_multiple_elapsed / u128::from(args.iterations),
+        candidates_examined: Some(r13_multiple_canonicalization.transporters_examined),
+        baseline: "dimension-independent maximal-root chart; no R13 coding verdict",
     });
 
     let classification = classify(&r6, args.candidate_limit, args.candidate_limit)?;

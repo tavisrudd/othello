@@ -65,6 +65,9 @@ defensive reference and regression oracle, not a reachable binary-form
 stratum. The exhaustive structural bound is `O(m r q^2)`. `classify`, `distance`,
 and `decode` deliberately remain R5--R10-only, so this scope extension makes no
 unsupported covering-radius or deep-hole assertion.
+The implementation-level field-operation accounting and quadratic
+symmetric-power recurrence are recorded in
+`c969-canonicalization-complexity.md`.
 
 ## Goal
 

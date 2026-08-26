@@ -45,7 +45,10 @@ The four rational-root strata—rootless, simple, multiple, and pure power—giv
 an exhaustive worst-case bound of `O(m*r*q^2)` exact transports for structural
 canonicalization, where `m` is the field extension degree. This is strictly
 below full `m*(q^3-q)` enumeration when `r` is treated as the fixed redundancy;
-the implementation retains that enumeration as its independent reference.
+the implementation retains that enumeration as its independent reference. The
+symmetric-power action uses adjacent exact-linear-factor rows in `O(r^2)` field
+operations per transport; see the
+[full accounting](../../notes/reed-solomon-tasks/c969-canonicalization-complexity.md).
 
 `classify` returns witness-backed `NOT_DEEP`, persistent-family `DEEP`, and
 frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. `canonicalize` uses

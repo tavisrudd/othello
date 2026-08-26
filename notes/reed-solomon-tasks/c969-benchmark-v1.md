@@ -32,35 +32,42 @@ not a codeword scan and not the optimized selector.
 
 | operation | q | redundancy | ns / iteration | locator candidates |
 |---|---:|---:|---:|---:|
-| 12-point terminal selector | 7 | 5 | 9,248 | 1 |
-| projective locator oracle | 7 | 5 | 76,073 | 409 |
-| 12-point terminal selector | 17 | 6 | 23,767 | 1 |
-| projective locator oracle | 17 | 6 | 10,508,051 | 89,067 |
-| 12-point terminal selector | 7 | 7 | 3,970 | 1 |
-| projective locator oracle | 7 | 7 | 6,034,364 | 20,017 |
-| tangent semilinear canonicalization | 17 | 6 | 397,000 | 272 transports |
-| rootless sigma semilinear canonicalization | 7 | 5 | 63,948 | 48 transports |
-| simple-root sigma semilinear canonicalization | 17 | 6 | 100,792 | 16 transports |
-| structural tangent canonicalization | 13 | 11 | 942,758 | 156 transports |
-| structural sigma canonicalization | 13 | 11 | 1,182,996 | 168 transports |
-| end-to-end tangent classification | 17 | 6 | 539,730 | -- |
-| positive tangent deep-certificate replay | 17 | 6 | 540,651 | -- |
+| 12-point terminal selector | 7 | 5 | 9,259 | 1 |
+| projective locator oracle | 7 | 5 | 74,476 | 409 |
+| 12-point terminal selector | 17 | 6 | 24,516 | 1 |
+| projective locator oracle | 17 | 6 | 10,866,454 | 89,067 |
+| 12-point terminal selector | 7 | 7 | 3,627 | 1 |
+| projective locator oracle | 7 | 7 | 5,444,118 | 20,017 |
+| tangent semilinear canonicalization | 17 | 6 | 149,895 | 272 transports |
+| rootless sigma semilinear canonicalization | 7 | 5 | 39,982 | 48 transports |
+| simple-root sigma semilinear canonicalization | 17 | 6 | 49,997 | 16 transports |
+| structural tangent canonicalization | 13 | 11 | 221,151 | 156 transports |
+| structural sigma canonicalization | 13 | 11 | 508,966 | 168 transports |
+| structural multiple-root canonicalization | 13 | 13 | 177,498 | 12 transports |
+| end-to-end tangent classification | 17 | 6 | 271,685 | -- |
+| positive tangent deep-certificate replay | 17 | 6 | 278,259 | -- |
 
 The optional polynomial-basis extension-field pass adds:
 
 | operation | q | redundancy | ns / iteration | candidates/transports |
 |---|---:|---:|---:|---:|
-| 12-point terminal selector | 8 | 5 | 111,781 | 1 |
-| projective locator oracle | 8 | 5 | 721,025 | 594 |
-| maximal-root semilinear canonicalization | 8 | 5 | 877,721 | 42 |
-| end-to-end classification | 8 | 5 | 1,054,199 | -- |
-| positive deep-certificate replay | 8 | 5 | 1,037,706 | -- |
-| Lucas-degenerate canonicalization | 9 | 5 | 1,930,036 | 144 |
+| 12-point terminal selector | 8 | 5 | 101,187 | 1 |
+| projective locator oracle | 8 | 5 | 673,196 | 594 |
+| maximal-root semilinear canonicalization | 8 | 5 | 653,862 | 42 |
+| end-to-end classification | 8 | 5 | 741,621 | -- |
+| positive deep-certificate replay | 8 | 5 | 717,238 | -- |
+| Lucas-degenerate canonicalization | 9 | 5 | 1,267,369 | 144 |
 
 The terminal fixtures are respectively the R5 tangent, R6 tangent, and frozen
 R7 sporadic representative. Their one-prefix selector outcomes are favorable
 instances, not worst-case claims. The proved operation bounds come from
 `c969-terminal-hyperplane-solver.md`, not these timings.
+
+Semilinear action rows are evaluated by the exact recurrence
+`R_(i+1)=(R_i/Y)X`, so one transport takes `O(r^2+r log q)` field operations
+rather than rebuilding all symmetric-power rows independently. The recurrence
+and full backend accounting are frozen in
+`c969-canonicalization-complexity.md`.
 
 ## Interpretation boundary
 
