@@ -70,6 +70,33 @@ The current formal manifests and note-local finite censuses are not a substitute
 for the missing paper-owned export.  No export or Rust Paper III implementation
 was emitted in this attempt.
 
+## One-hour extension
+
+The follow-on hour tested the paper-specific ARITH-1 continuation.  The chosen
+interface specialized the green trace-split core to `5 J0`, proved the chart
+coefficient identities
+
+```text
+5 J0 |chart = 80 sigma3^2 = (4 sqrt(5) sigma3)^2,
+```
+
+and reused the core split comparison at the final square.  An earlier,
+stronger experiment also constructed evaluation after an arbitrary ring-map
+base change.  That stronger presentation was discarded because its dependent
+pinching codomain elaborated poorly; a product-ring variant was tested as
+well.
+
+None of these experimental declarations landed.  Every prescribed guarded
+check ended with process exit `137` and no Lean diagnostic.  The serialized
+build-queue retry, run `20260826-062836-d2ba0876`, was likewise killed with
+exit `137` while reporting a peak of roughly 439 MB.  During these runs the
+host reported about 25 GiB used out of 26 GiB with no swap.  The unchecked
+source was removed rather than committed.  This is a transient validation
+resource failure, not a mathematical counterexample and not a claim that
+ARITH-1 is closed.
+
+The extension therefore did not change the exact remaining-gates list above.
+
 ## `ej` + `tt` closeout
 
 The harmonic failure exposed a reusable invariant-theory lemma: the computation
