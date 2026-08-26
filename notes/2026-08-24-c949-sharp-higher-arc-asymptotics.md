@@ -2161,6 +2161,28 @@ E(x,y)=A(x,y)(x^(q-1)-1)+B(x,y)(y^(q-1)-1),
 deg A,deg B <= q+2.                                (SR24a-arrangement-torus)
 ```
 
+The order-four condition has an immediate scheme-level consequence that is
+stronger than mere grid vanishing.  Put `U=x^(q-1)-1` and `V=y^(q-1)-1`.
+At a torus point both vanish simply and `dU,dV` are independent.  The three
+canonical boundary terms in `(SR24a-arrangement-form)` vanish to order at
+least two there.  Hence at every quadruple point `P in K`, differentiating
+`F` once gives
+
+```text
+0=dF(P)=xy dE(P)=xy(A(P)dU(P)+B(P)dV(P)),
+A(P)=B(P)=0.                                      (SR24a-torus-base)
+```
+
+This statement is independent of the chosen grid-ideal decomposition.  The
+only ambiguity in the displayed degree range is the Koszul change
+`(A,B)->(A+HV,B-HU)` with `deg H<=3`, which does not alter `A(P),B(P)` on
+the grid.  Thus the full fourfold locus `K` is contained in the common-zero
+scheme of the two degree-at-most-`q+2` torus quotients.  Plain Bezout remains
+too weak—`|K|~q^2/3` is below `(q+2)^2`—so this is not yet the quartic
+carrier.  The new exact target is to use the second and third jet equations,
+modulo their single cubic Koszul freedom, to extract a common factor of
+degree at most four.
+
 No computation enters these identities.  They expose the precise remaining
 propagation problem: combine the order-four condition at every point of `K`
 with `(SR24a-arrangement-form)--(SR24a-arrangement-torus)` to force `D` (or
@@ -4203,6 +4225,179 @@ being smuggled into the proposition: it is a necessary normal form.  Its
 unresolved content is exactly whether these three resultants can coexist with
 the remaining line caps and transversal constraints.
 
+At `q=27` this normal form now has a complete executable search interface,
+but not an exhaustive verdict.  The 2,120 normalized transversals reduce
+jointly with their carriers to 714 weighted semilinear tasks.  For each task,
+the exact Rust DFS streams the possible nine-value high sets, branches on the
+most constrained unprocessed row, and inserts every selected equation
+
+```text
+C(x)-yA(x)=-y^2
+```
+
+transactionally into the 384-byte rollback basis.  Rank 18 determines one
+carrier.  Rank 17 enumerates the full 27-point affine line; this is precisely
+the fractional-linear singleton defect from the terminal-nullity theorem.
+Each compatible carrier is then checked against the complete `y`-fiber
+ledger, the three completion-cell exclusions, both remaining projection
+norms, and the fourth-Witt coefficient identity.  A cutoff has the separate
+status `Incomplete` and cannot be emitted as a rejection.
+
+Failed terminals retain an inclusion-minimal high-cell core.  The mapping,
+high set, and core are canonicalized together under Frobenius, so a completed
+714-task run can quotient the rejection reasons and expose a bounded symbolic
+Möbius core if one exists.  This is the intended bridge back to the uniform
+problem: a core is relevant asymptotically only after its table values are
+rewritten as a bounded-degree identity over `F_(3^h)`.  The present bounded
+probes remain `Incomplete`; neither they nor the existence of the finite DFS
+proves the `q=27` branch empty, and neither implies the field-uniform C949
+upper bound.
+
+The first core type does have a field-uniform interpretation.  Let `q>=5` be
+odd and let a rank-one carrier family be
+
+```text
+(A_lambda,C_lambda)=(A_0,C_0)+lambda(P,Q).
+```
+
+At a fixed row `x`, all `lambda in F_q` fail to give two distinct roots if
+and only if
+
+```text
+D_x(lambda)=(A_0(x)+lambda P(x))^2
+             -(C_0(x)+lambda Q(x))
+```
+
+is never a nonzero square.  This forces
+
+```text
+P(x)=Q(x)=0,
+D_x=A_0(x)^2-C_0(x) is zero or a nonsquare.        (SR24z-Mobius)
+```
+
+Indeed, a nonconstant linear polynomial has quadratic-character sum zero.
+A quadratic with nonzero discriminant has character sum minus the character
+of its leading coefficient, hence cannot be nonpositive at all `q` inputs
+when `q>=5`.  If its discriminant is zero, its nonzero values have the
+character of its leading coefficient; here that coefficient is `P(x)^2`, a
+square.  Both quadratic cases are impossible, so `P(x)=0`; the remaining
+linear case then forces `Q(x)=0`.  Thus an empty 27-bit row mask is not merely
+finite table data: it certifies a common zero of the two kernel-direction
+polynomials.  The remaining uniform task is to combine that extra common zero
+with the seven-double-row factor and the singleton Möbius graph strongly
+enough to kill the rank-one family.
+
+For the exceptional `q=27` terminal, a *one-row* empty-mask core already does
+kill it.  Here `n_2=7,n_1=19`.  The kernel pair `(P,Q)` vanishes on the seven
+double-high rows.  The empty-mask row cannot be one of them, since at a
+double-high row every member contains the same two distinct roots and its
+mask is full.  By `(SR24z-Mobius)` it supplies an eighth common zero.  Since
+`deg P,deg Q<=8`, write
+
+```text
+P=pH,             Q=qH,              deg H=8.
+```
+
+Since `n_0=0`, the new row is one of the 19 singleton rows.  At each of the
+other 18 singleton rows, `H` is nonzero and the kernel equation is `Q=yP`.
+If `p=0`, it forces `q=0`; otherwise all 18 remaining singleton values equal
+`q/p`, contradicting the cubic/quartic fiber cap four.  Thus the
+kernel direction is zero, contrary to rank 17:
+
+```text
+one empty row mask excludes the q=27 Mobius terminal. (SR24z-Mobius')
+```
+
+In fact the apparently harder multirow alternative disappears once the
+completed incidence profile is retained.  In any rank-one family, a double
+row fixes two distinct roots for every parameter, so its split mask is full.
+At a singleton row with fixed root `y`, the kernel equation is `Q(x)=yP(x)`.
+If `P(x)!=0`, the other root is affine and nonconstant in `lambda`, so it
+collides with `y` for exactly one parameter.  If `P(x)=0`, then `Q(x)=0` and
+the mask is either full or already empty by itself.  Consequently, if no
+single row mask is empty, the intersection of all split masks has size at
+least
+
+```text
+q-n_1.                                                   (SR24z-Mobius'')
+```
+
+For the exceptional balanced profile over `q=27`, `n_2=7,n_1=19,n_0=0`,
+so at least eight parameters split on every row.  More generally the profile
+`q=3r`, `n_2=r-2,n_1=2r+1,n_0=0` leaves at least `r-1` split parameters.
+Thus a jointly empty multirow mask can occur only at an *unfinished* DFS
+node; it is an exact extension prune, not a new completed terminal
+obstruction.  At an unfinished rank-17 node, the nonempty split parameters
+are still candidate completions, and adding their remaining high cells can
+raise the rank to 18.
+
+There is a stronger completed-profile conclusion.  Let `H` be the product of
+the seven double-row factors.  Any kernel direction satisfies
+
+```text
+P=H L,             Q=H M,             deg L,deg M<=1.
+```
+
+At a singleton row outside a common zero of `L,M`, its fixed high value is
+`y=M(x)/L(x)`.  There is at most one additional common zero.  Hence this
+fractional-linear map is defined on at least 18 of the 19 singleton rows.  If
+it is nonconstant it is injective, requiring at least 18 distinct high values
+although the high set has size nine.  If it is constant, one high value occurs
+at least 18 times, contradicting the fiber cap four.  The cases `P=0` or
+`Q=0` reduce immediately to the zero direction.  Therefore
+
+```text
+the completed q=27 exceptional high-incidence matrix has rank 18.
+                                                     (SR24z-Mobius''')
+```
+
+This closes terminal nullity field-uniformly, not only in the exceptional
+case.  For `q=3r`, let `g<=3` be the number of high values having multiplicity
+three; the other `r-g` high values have multiplicity four.  The two incidence
+counts give
+
+```text
+2n_2+n_1=4r-g,       n_2+n_1+n_0=3r-1,
+n_2-n_0=r+1-g.                                      (SR24z-rank)
+```
+
+Hence `n_2>=r-2`.  If `n_2>=r`, the degree-at-most-`r-1` kernel pair vanishes
+identically.  If `n_2=r-1`, removing the double-row factor leaves two
+constants; all singleton values would be equal, but
+`n_1=2r+2-g>=2r-1>4`.  Finally `n_2=r-2` forces
+`g=3,n_0=0,n_1=2r+1`, and the preceding fractional-linear argument applies
+on at least `2r` singleton rows.  Thus for every `q=3^h>=9`,
+
+```text
+every completed balanced high-incidence carrier has full affine rank 2r.
+                                                  (SR24z-rank')
+```
+
+Rank `2r-1` is only a useful partial-DFS candidate generator; every carrier
+that passes the complete fiber gate is uniquely determined.  This removes
+the exceptional Möbius degree of freedom field-uniformly, but it does not
+yet prove that the unique carrier fails one of the remaining three-norm,
+mapping, or Witt gates.
+
+The resulting rank-18 branch has a finite structural compression, although not yet
+a field-uniform contradiction.  Any 18 independent high-cell equations
+reconstruct its unique `(A,C)`.  Every later rejection is then certified by
+those equations, the fixed mapping/high-value data, and one deterministic
+gate evaluation.  Greedy deletion therefore leaves at most 18 high cells; if
+it reaches 17, the stronger statement is that every member of that affine
+line fails the same gate:
+
+```text
+every q=27 terminal rejection has a carrier core of size at most 18.
+                                                            (SR24z-rank18)
+```
+
+This removes the remaining row-incidence combinatorics from a rank-18
+terminal.  It does **not** by itself give a bounded field-symbolic core as
+`q` varies, since the carrier dimension is `2q/3`; the next lift must rewrite
+the observed gate failure as a fixed-degree norm, Witt, or reciprocal
+identity.
+
 At `q=9` the proposition already gives a short structural exclusion.  The
 ordinary ledger requires three values whose `S`-fibers have size three or
 four, but every level `C-yA+y^2` has degree at most two.  Such a polynomial
@@ -4831,6 +5026,33 @@ family is lower priority.
   precisely `(SR24a-carrier-lemma)`: show that those order-four torus
   conditions force a quartic.  The contradiction after that implication is
   complete by `(SR24a-blocking4-gap)`.
+  The finite `q=27` carrier compiler is now executable as a 714-task
+  high-incidence DFS, but no task has been exhausted.  The `ej`+`tt` pass did
+  settle the right exceptional-coordinate cut.  On a rank-17 terminal write
+  `(A,C)=(A_0,C_0)+lambda(A_1,C_1)`.  Splitting at row `x` is exactly
+
+  ```text
+  A_lambda(x)^2-C_lambda(x) in (F_27^*)^2.
+  ```
+
+  Thus each row gives a 27-bit allowed-`lambda` mask.  Their intersection
+  replaces 27 root scans, and an empty intersection has an inclusion-minimal
+  row certificate.  In the bounded first task/high-set probe, this cut leaves
+  only a negligible terminal residue and produces a `17` carrier-equation plus
+  one discriminant-row core; the run is still explicitly `Incomplete`.
+  **Settled symbolically:** `(SR24z-Mobius)` proves over every odd `q>=5`
+  that an empty row mask forces the two kernel-direction polynomials to share
+  that row as a zero; `(SR24z-Mobius')` then combines it with the seven
+  double rows and 19 singleton cells to exclude the entire `q=27` rank-17
+  family.  `(SR24z-Mobius'')` proves that a completed profile cannot have a
+  genuinely multirow-empty mask, and `(SR24z-Mobius''')` is stronger still:
+  the residual linear-over-linear kernel ratio contradicts either the
+  nine-value support or the fiber cap four, so every completed carrier has
+  rank 18.  This is no longer finite table arithmetic.
+  **Open mystery:** classify how the unique rank-18 carriers fail the mapping,
+  two norm, or fourth-Witt gates and lift their at-most-18-cell finite cores
+  to a fixed-degree field-symbolic identity.  Their connection to
+  `(SR24a-carrier-lemma)` remains unproved.
   The other triangular row requires a linear
   high-secant trade and
   is therefore a less rigid first target.
