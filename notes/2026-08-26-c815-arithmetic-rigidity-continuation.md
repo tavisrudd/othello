@@ -56,6 +56,22 @@ limit.
   frozen may C815 emit `sparse_shadow_export.json`; C968's Paper III adapter
   remains downstream of that authority boundary.
 
+## `ej` + `tt` closeout
+
+The cheap extra value is a cleaner separation between normalized models and
+geometric existence.  The new algebra modules force all scalar, deck-sign, and
+square-class consequences once a geometric comparison is supplied, so the
+remaining interfaces should carry that comparison as an explicit field rather
+than silently identifying two constructions by notation.  This makes the final
+gate audit able to distinguish a proved transport consequence from the still
+missing existence theorem.
+
+The canonical square root in `GoldenResidueAlgebra` also gives the eventual
+Paper III export a choice-free arithmetic representative: after the geometric
+fibre comparison is proved, the adapter need not accept an arbitrary root or a
+floating normalization.  That is a downstream benefit, not permission to emit
+the export before the comparison and aggregate gates close.
+
 ## Mystery ledger
 
 - **Why the chart coefficient is eighty:** settled; it is the forced product
