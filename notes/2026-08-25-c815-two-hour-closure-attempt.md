@@ -86,14 +86,16 @@ base change.  That stronger presentation was discarded because its dependent
 pinching codomain elaborated poorly; a product-ring variant was tested as
 well.
 
-None of these experimental declarations landed.  Every prescribed guarded
-check ended with process exit `137` and no Lean diagnostic.  The serialized
+None of these experimental declarations landed.  Repeated prescribed guarded
+checks ended with process exit `137` and no Lean diagnostic.  The serialized
 build-queue retry, run `20260826-062836-d2ba0876`, was likewise killed with
-exit `137` while reporting a peak of roughly 439 MB.  During these runs the
-host reported about 25 GiB used out of 26 GiB with no swap.  The unchecked
-source was removed rather than committed.  This is a transient validation
-resource failure, not a mathematical counterexample and not a claim that
-ARITH-1 is closed.
+exit `137` while reporting a peak of roughly 439 MB.  After host memory partly
+recovered, a final guarded retry remained alive for more than twelve minutes
+without a diagnostic and was interrupted at the end of the requested window.
+During these runs the host reported about 25 GiB used out of 26 GiB with no
+swap.  The unchecked source was removed rather than committed.  This is a
+transient validation resource failure, not a mathematical counterexample and
+not a claim that ARITH-1 is closed.
 
 The extension therefore did not change the exact remaining-gates list above.
 
