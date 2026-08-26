@@ -50,7 +50,8 @@ failed comparison.
 
 Four ignored release regressions---the GF(8)/R7 distance audit, complete GF(8)
 and GF(9) R5 chart exhaustions, and the GF(32)/R17 characteristic-power
-boundary---pass together in 157.18 seconds. The GF(16)/R11 semilinear census is
+boundary---pass together on the expanded test build in 129.91 seconds. The
+GF(16)/R11 semilinear census is
 isolated as `make software-gf16-check`; `make release-check` still requires it,
 but it was not run without the separately required approval.
 
