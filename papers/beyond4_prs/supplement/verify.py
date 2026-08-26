@@ -21,6 +21,8 @@ LOCAL_MANIFEST_ARTIFACTS = (
     "package_evidence_bundle.py",
     "verify.py",
     "build_r6_paper_table.py",
+    "package_software.py",
+    "SOFTWARE-MANIFEST.json",
 )
 AGGREGATE = (
     LEAN_ROOT / "RelativeConicArcs/Gates/PRSBeyondRedundancyFour.lean"
@@ -319,6 +321,7 @@ def check_public_release_gate() -> None:
 
 def check_bundle() -> None:
     check_formal_scope()
+    run([sys.executable, "supplement/package_software.py", "--check"])
     run([sys.executable, "supplement/package_evidence_bundle.py", "--check"])
     run([sys.executable, "supplement/build_classification_records.py", "--check"])
     run([sys.executable, "supplement/build_r6_paper_table.py", "--check"])

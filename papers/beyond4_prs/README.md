@@ -38,12 +38,30 @@ From this directory:
 ```text
 make check
 make tit-check
+make software-check
+make supplement-check
 ```
 
 `make check` builds the canonical preprint
 `prs-beyond-redundancy-four.pdf`.  `make tit-check` builds the
 IEEEtran single-column review manuscript
 `prs-beyond-redundancy-four-tit-submission.pdf`.
+
+## Companion software
+
+Projective Reed--Solomon Toolkit is under
+`software/projective-reed-solomon/`. Its `projective-reed-solomon` executable
+provides `canonicalize`, `distance`, `decode`, `classify`, and `verify`
+subcommands.
+The crate carries its own lock, pinned Rust toolchain, MIT license, theorem
+registry, frozen orbit data, and extraction-ready documentation. Run the fast
+format, lint, and test gate with `make software-check`; exhaustive release-mode
+regressions are isolated under `make software-slow-check`.
+
+Generic canonicalization and exact budgeted decoding extend beyond the paper's
+fixed R5--R10 classification range. They do not create a higher-dimensional
+deep-hole theorem: `classify` fails closed outside its frozen mathematical
+registry.
 
 The canonical and IEEEtran drivers consume the same abstract, index terms,
 active sections, appendix, acknowledgment, and bibliography.  Their layout
@@ -67,8 +85,9 @@ Run
 python3 supplement/verify.py
 ```
 
-for the local bundle, classification-record, manuscript-label, and formal-scope
-checks.  Add `--replay` to execute every paper-local Python replay.
+for the local bundle, companion-software manifest, classification-record,
+manuscript-label, and formal-scope checks. Add `--replay` to execute every
+paper-local Python replay.
 `--release` is reserved for an immutable public candidate whose repository,
 revision, archive, DOI, PDF, and independent-reader fields are complete.
 

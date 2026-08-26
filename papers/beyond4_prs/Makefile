@@ -2,6 +2,8 @@ LATEXMK ?= nix shell nixpkgs\#texlive.combined.scheme-full -c latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 TIT_LATEXMK_FLAGS ?= -pdf -interaction=nonstopmode -halt-on-error
 PDFINFO ?= nix shell nixpkgs\#poppler-utils -c pdfinfo
+CARGO ?= cargo
+SOFTWARE_MANIFEST := software/projective-reed-solomon/Cargo.toml
 SOURCE_DATE_EPOCH ?= 1784886946
 export SOURCE_DATE_EPOCH
 export FORCE_SOURCE_DATE = 1
@@ -19,7 +21,8 @@ PDF := $(PDF_BASENAME).pdf
 TIT_PDF_BASENAME := prs-beyond-redundancy-four-tit-submission
 TIT_PDF := $(TIT_PDF_BASENAME).pdf
 
-.PHONY: all check lint tit-check clean
+.PHONY: all check lint tit-check software-check software-slow-check \
+	supplement-check release-check clean
 
 all: lint $(PDF)
 
@@ -42,6 +45,19 @@ tit-check: lint
 	@test -f $(TIT_PDF_BASENAME).log
 	@if grep -En 'Overfull|Underfull|LaTeX (Font )?Warning|Package .* Warning|undefined references|Citation .* undefined' $(TIT_PDF_BASENAME).log; then exit 1; fi
 	@pages=$$($(PDFINFO) $(TIT_PDF) | awk '/^Pages:/ {print $$2}'); test "$$pages" -le 50; echo "TIT single-column pages: $$pages / 50"
+
+software-check:
+	$(CARGO) fmt --manifest-path $(SOFTWARE_MANIFEST) --all -- --check
+	$(CARGO) clippy --locked --manifest-path $(SOFTWARE_MANIFEST) --all-targets -- -D warnings
+	$(CARGO) test --locked --manifest-path $(SOFTWARE_MANIFEST)
+
+software-slow-check:
+	$(CARGO) test --locked --release --manifest-path $(SOFTWARE_MANIFEST) -- --ignored
+
+supplement-check:
+	python3 supplement/verify.py
+
+release-check: check tit-check software-check software-slow-check supplement-check
 
 clean:
 	$(LATEXMK) -c -jobname=$(PDF_BASENAME) main.tex

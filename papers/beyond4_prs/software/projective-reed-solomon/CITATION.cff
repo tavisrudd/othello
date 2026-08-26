@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, cite the companion paper and archived software release."
-title: "PRS Classifier"
+title: "Projective Reed--Solomon Toolkit"
 type: software
 authors:
   - family-names: Rudd

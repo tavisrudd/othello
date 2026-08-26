@@ -449,12 +449,12 @@
       "sha256": "232849ccd9b502308075d1d50c396dc2c34a51d2858dcbdfc39172055f3b3606"
     },
     {
-      "bytes": 6168,
+      "bytes": 6390,
       "path": "CERTIFICATE-SCHEMA.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Certificate schema",
-      "sha256": "5591a52e03eb072ebf57e0c3475f8c8945d0019f175a15542699983c16f10f1f"
+      "sha256": "0a1e753be5f4f7beea7ea1f146530a3241bd7350a1e052bb4658cfc7c40e0560"
     },
     {
       "bytes": 545925,
@@ -481,20 +481,28 @@
       "sha256": "78d1e6150abe7e72292cf70bca6347780da4de22d8a9ac21245387c59c6dba12"
     },
     {
-      "bytes": 22077,
+      "bytes": 22218,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "64298d9de6ac985ae3d3fbb545df72bf7078319a9e383d6d2cfce99b64a76214"
+      "sha256": "6dffa43a49d0e5a71b81b0df3fecd1fd0849f0d149ecc5dfe521772f7973cce0"
     },
     {
-      "bytes": 9092,
+      "bytes": 9732,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "200c794324041403e710b87f4a9709a9668306fa8eb2b03334b6bf6a43f22916"
+      "sha256": "ad37aa0d23ebe9930f7e040494b0207c910891856bd27402b2c97f8fc0b5b332"
+    },
+    {
+      "bytes": 3462,
+      "path": "SOFTWARE-MANIFEST.json",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Companion-software manifest",
+      "sha256": "face06dfa0263f8a6ce65fb8c313f9318a50947e29ed83eaf850e4b6a9578b9a"
     },
     {
       "bytes": 12027,
@@ -521,20 +529,28 @@
       "sha256": "04ca5952db5f167a38dffe9b70d5e083dd024eab7c8b69f81763d50e099766c7"
     },
     {
-      "bytes": 15090,
+      "bytes": 15213,
       "path": "package_evidence_bundle.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Bundle verifier",
-      "sha256": "6d231b8b1d6c7384c482c6c408433400ae2f23305cf61514de17277e35574f79"
+      "sha256": "b5c59f2d79170abca1ce305d98acb35a71428d36ab257d9ecd06aa043981037f"
     },
     {
-      "bytes": 16721,
+      "bytes": 2057,
+      "path": "package_software.py",
+      "public_label": "Supplement",
+      "replay_class": "compare",
+      "role": "Companion-software packager",
+      "sha256": "f01c53a315c95ecafc96b4fb2402616cbb67322fd0ecd3adb512b16b60f7b8ef"
+    },
+    {
+      "bytes": 16849,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "85994615bee2ed33efd74ab102937fe8365113c4d71a6d2d92671fc5b7fb1aa4"
+      "sha256": "9730b4b5717d6d6b6a3d67045d7e76cc267802c54945eed50e673ab75a2b7544"
     },
     {
       "bytes": 17225,

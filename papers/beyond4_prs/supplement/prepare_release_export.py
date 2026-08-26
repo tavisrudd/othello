@@ -30,6 +30,7 @@ PAPER_PATHS = (
     PAPER_PATH / "formalization-ledger.md",
     PAPER_PATH / "literature-audit.md",
     PAPER_PATH / "verification-map.md",
+    PAPER_PATH / "software",
     PAPER_PATH / "frontmatter",
     PAPER_PATH / "sections/README.md",
     PAPER_PATH / "sections/01-introduction.tex",

@@ -62,6 +62,21 @@ Build the manuscript with `make check`.  The canonical output is
 `prs-beyond-redundancy-four.pdf`;
 `main.pdf` is not part of the export.
 
+The paper repository includes the self-contained Projective Reed--Solomon
+Toolkit under `software/projective-reed-solomon/`. Run its fast gate with:
+
+```text
+make software-check
+```
+
+The gate checks formatting, warning-free Clippy, and the locked test suite.
+`make software-slow-check` runs the ignored exhaustive release regressions.
+The `projective-reed-solomon` executable exposes `canonicalize`, `distance`,
+`decode`, `classify`, and `verify`; its README records the JSON request and
+certificate boundary.
+`supplement/SOFTWARE-MANIFEST.json` hashes every shipped file in the software
+subtree, excluding only build and Git directories.
+
 In the export layout, `lean/` is a separately initialized repository
 containing the exact paper-facing formal closure and its pinned build flake.
 Its eventual immutable public commit in

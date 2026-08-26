@@ -156,6 +156,8 @@ PUBLIC_SUPPLEMENT_FILES = (
     ("Reproduction guide", "REPRODUCING.md"),
     ("Lean statement-adequacy source", "LEAN-STATEMENTS.md"),
     ("TeX spacing linter", "lint_tex_spacing.py"),
+    ("Companion-software packager", "package_software.py"),
+    ("Companion-software manifest", "SOFTWARE-MANIFEST.json"),
 )
 
 AUXILIARY_COPIES = (

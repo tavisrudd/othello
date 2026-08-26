@@ -79,15 +79,17 @@ certificate verification, the general C607 complexity/factorization theorem,
 benchmarks, and independent reviews.  Checkpoint:
 `notes/reed-solomon-tasks/c969-freeze-and-schema.md`.
 
-C970 is queued as the Beyond Four PRS paper-facing packaging successor to
-C969.  It moves the classifier under
-`papers/beyond4_prs/software/prs-classifier/`, makes that subtree independently
-buildable and later extractable with its registries, lock, toolchain, license,
-citation, and documentation intact, then integrates the exact software/theorem
-boundary into the manuscript, supplement verifier, release manifests, and
-deterministic exporter.  Completion requires a disposable history-preserving
-subtree extraction to pass without path repair; publication, pushing, DOI minting,
-and broadening the proved classification domain remain out of scope.  Card:
+C970 is active as the Beyond Four PRS paper-facing packaging successor to C969.
+Projective Reed--Solomon Toolkit now lives under
+`papers/beyond4_prs/software/projective-reed-solomon/`; its unambiguous crate,
+library, executable, Clap interface, registries, lock, Rust pin, license,
+citation, and documentation are self-contained and expose no task identifiers.
+The paper and supplement now state and hash the exact software/theorem boundary,
+and the fast software, manuscript, and 74-artifact quick gates pass. Completion
+still requires a clean standalone paper export, a disposable history-filter
+extraction, disposition of the ignored slow regressions, and resolution or
+explicit disposition of the inherited TIT `51 / 50` page count. Publication,
+pushing, DOI minting, and theorem-domain broadening remain out of scope. Card:
 `notes/reed-solomon-tasks/c970-beyond4-prs-software-packaging.md`.
 
 C886 is complete.  The paper now has a layered two-track exposition: a mature

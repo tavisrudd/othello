@@ -1,5 +1,5 @@
 use clap::Parser;
-use prs_classifier::{
+use projective_reed_solomon::{
     canonicalize_syndrome, classify, search_fast_terminal_locator, search_locator,
     verify_deep_certificate, DeepCertificate, Field, FieldSpec, Request, REQUEST_SCHEMA,
 };
@@ -8,7 +8,7 @@ use std::hint::black_box;
 use std::time::Instant;
 
 #[derive(Parser)]
-#[command(name = "c969-benchmark")]
+#[command(name = "projective-reed-solomon-benchmark")]
 struct Args {
     #[arg(long, default_value_t = 1)]
     iterations: u32,
@@ -95,7 +95,7 @@ fn request(field: FieldSpec, redundancy: usize, syndrome: Vec<u32>) -> Request {
     }
 }
 
-fn r11_sigma() -> Result<Request, prs_classifier::Error> {
+fn r11_sigma() -> Result<Request, projective_reed_solomon::Error> {
     let field_spec = prime_field(13);
     let field = Field::new(field_spec.clone())?;
     let quadratic = (1..13)
@@ -115,7 +115,7 @@ fn r11_sigma() -> Result<Request, prs_classifier::Error> {
 
 fn elapsed<F, T>(iterations: u32, mut operation: F) -> Result<u128, Box<dyn std::error::Error>>
 where
-    F: FnMut() -> Result<T, prs_classifier::Error>,
+    F: FnMut() -> Result<T, projective_reed_solomon::Error>,
 {
     let start = Instant::now();
     for _ in 0..iterations {
@@ -409,7 +409,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!(
         "{}",
         serde_json::to_string_pretty(&BenchmarkReport {
-            schema: "c969-benchmark-report-v1",
+            schema: "prs-benchmark-report-v1",
             crate_version: env!("CARGO_PKG_VERSION"),
             build_profile: if cfg!(debug_assertions) {
                 "debug"

@@ -5,6 +5,9 @@ Copyright (c) 2026 Tavis Rudd
 Unless otherwise noted, the contents of this repository are licensed under the
 Creative Commons Attribution 4.0 International License (CC BY 4.0).
 
+The companion software under `software/projective-reed-solomon/` is separately licensed
+under the MIT License stated in that directory.
+
 You may share and adapt the material for any purpose, provided that appropriate
 credit is given, a link to the license is supplied, and changes are indicated.
 The full legal code controls:

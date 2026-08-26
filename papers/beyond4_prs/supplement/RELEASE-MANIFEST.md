@@ -48,11 +48,12 @@ undo the completed Version 1 publication record.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `fae8e8ae26a204d7a33971f7b3519d902a4e3acf79a1d368bd692f06aceb4e61` |
-| Local built PDF bytes | `471926` |
+| Local built PDF SHA-256 | `bfb05bd26e4672cfcf938d150f27fee7c30e77cc9402c93bddeaa1c82b1b7fe4` |
+| Local built PDF bytes | `475751` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
+| Companion software | `software/projective-reed-solomon/`; independently locked and hashed by `supplement/SOFTWARE-MANIFEST.json` |
 
 ## Artifact rows
 
@@ -64,11 +65,13 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `b2f063aecc881c77a2c8544195a40e8215a2d5196e7b074acef4ed71ec601c42` | 21513 |
-| `EVIDENCE-ROWS.md` | `f477c19d75e2eb27e5961b896257e4bc0f7bd8dac51dd421b2924da323b21bc9` | 14280 |
-| `package_evidence_bundle.py` | `6d231b8b1d6c7384c482c6c408433400ae2f23305cf61514de17277e35574f79` | 15090 |
-| `verify.py` | `85994615bee2ed33efd74ab102937fe8365113c4d71a6d2d92671fc5b7fb1aa4` | 16721 |
+| `EVIDENCE-MANIFEST.json` | `52b5c172a5de2358c3d452b2308084c6eb2a68107475053a63a08a5901cd7d42` | 22052 |
+| `EVIDENCE-ROWS.md` | `34c1680d619e25cd609da3d6f530ee32575d4151b3ac92a60286409a4cec5ada` | 14615 |
+| `package_evidence_bundle.py` | `b5c59f2d79170abca1ce305d98acb35a71428d36ab257d9ecd06aa043981037f` | 15213 |
+| `verify.py` | `9730b4b5717d6d6b6a3d67045d7e76cc267802c54945eed50e673ab75a2b7544` | 16849 |
 | `build_r6_paper_table.py` | `b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98` | 3878 |
+| `package_software.py` | `f01c53a315c95ecafc96b4fb2402616cbb67322fd0ecd3adb512b16b60f7b8ef` | 2057 |
+| `SOFTWARE-MANIFEST.json` | `face06dfa0263f8a6ce65fb8c313f9318a50947e29ed83eaf850e4b6a9578b9a` | 3462 |
 
 Verify the complete local bundle from the paper directory:
 

@@ -1,4 +1,4 @@
-# PRS structural classifier
+# Projective Reed--Solomon Toolkit
 
 This is the companion implementation for *Projective Reed--Solomon deep holes
 beyond redundancy four*. Its current executable slice provides:
@@ -31,7 +31,49 @@ beyond redundancy four*. Its current executable slice provides:
   theorem-domain row, transporter, family route, and radius promotion;
 - explicit `PGL(2,q) x Gal(F_q/F_p)` canonicalization with the exact
   `m(q^3-q)` cost exposed; and
-- the five required command names.
+- a single `projective-reed-solomon` command with focused subcommands.
+
+## Command-line interface
+
+Build the release executable and inspect its commands:
+
+```text
+cargo build --locked --release --bin projective-reed-solomon
+target/release/projective-reed-solomon --help
+```
+
+The interface is organized by the mathematical question:
+
+```text
+projective-reed-solomon canonicalize request.json
+projective-reed-solomon distance request.json
+projective-reed-solomon decode request.json
+projective-reed-solomon classify request.json
+projective-reed-solomon verify certificate.json
+```
+
+All commands read JSON from standard input when the file is omitted and emit
+machine-readable JSON. `--compact` selects one-line output, and the global
+`--candidate-limit N` bounds locator or transporter enumeration. `classify`
+uses the fail-closed theorem registry; `canonicalize` does not attach a coding
+verdict.
+
+A prime-field request has this shape:
+
+```json
+{
+  "schema": "prs-request-v1",
+  "field": {
+    "p": 7,
+    "degree": 1,
+    "modulus": [0, 1],
+    "encoding": "polynomial-basis-base-p-integer-v1"
+  },
+  "redundancy": 5,
+  "evaluation": "full-projective-nrc-v1",
+  "syndrome": [0, 0, 0, 1, 0]
+}
+```
 
 Structural `canonicalize` is dimension-independent: it accepts every
 redundancy `r>=5` with `q>=r`. The exact tangent and binary-form lex-coset
@@ -82,7 +124,7 @@ classification paths fail closed.
 
 The locator enumeration has projective kernel dimension
 `2t+1-r` at degree `t`.  At terminal split-free testing `t=r-2`, this gives
-the absorbed C608 field-scale exponents `q`, `q^2`, and `q^3` for
+the field-scale exponents `q`, `q^2`, and `q^3` for
 redundancies five, six, and seven, before the `O(q)` exhaustive-root factor
 check used by this reference implementation.  A later factoring backend must
 separate locator selection cost from root-factorization cost.
@@ -93,16 +135,16 @@ defensive correctness branch after the 12-point selector. The proof and
 degree count are summarized in
 [`docs/terminal-hyperplane-solver.md`](docs/terminal-hyperplane-solver.md).
 
-`verify-certificate` accepts both `c969-locator-certificate-v1` negative
-witnesses and `c969-deep-certificate-v1` positive certificates.  A deep
+`verify-certificate` accepts both `prs-locator-certificate-v1` negative
+witnesses and `prs-deep-certificate-v1` positive certificates. A deep
 certificate is emitted only for `DEEP`, never for `UNRESOLVED` or
 `UNSUPPORTED`.
 
 The reproducible benchmark harness is built and run with:
 
 ```text
-cargo run --release --manifest-path software/prs-classifier/Cargo.toml \
-  --bin c969_benchmark -- --iterations 10 --extension-fields
+cargo run --release --manifest-path software/projective-reed-solomon/Cargo.toml \
+  --bin projective-reed-solomon-benchmark -- --iterations 10 --extension-fields
 ```
 
 When run from this directory, omit `--manifest-path`. Its selector,

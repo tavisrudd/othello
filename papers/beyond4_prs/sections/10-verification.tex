@@ -66,37 +66,20 @@ hash-pinned public R6 and R6-NF records.  The top-level verifier
 regenerates it and checks byte-for-byte equality with the included
 source.
 
-The public labels are defined by
-\texttt{supplement/CERTIFICATE-SCHEMA.md}.  The paper-local bundle,
-literal replay commands, toolchain locks, hashes, byte counts, and
-working directories are recorded in
-\texttt{supplement/REPRODUCING.md},
-\texttt{supplement/EVIDENCE-MANIFEST.json}, and
-\texttt{supplement/RELEASE-MANIFEST.md}.  The single entry point
-\texttt{python3 supplement/verify.py} checks the bundle manifest,
-classification records and their expected hashes, and the local PDF
-and supplement-artifact rows printed in the release manifest; its
-\texttt{--replay} option runs the paper-local Python replays.
+The supplement's \texttt{CERTIFICATE-SCHEMA.md} defines the public labels and
+replay classes; its reproduction guide and two manifests record commands,
+locks, hashes, and byte counts. The entry point \texttt{supplement/verify.py}
+checks those records, the classification projections, and the local PDF;
+\texttt{--replay} runs the paper-local Python replays.
 
-The paper-facing Lean gate checks coordinate algebra and conditional
-synthesis, not the geometric classifications or rational-point
-arguments.  The exact declarations, hypotheses, axiom audit, and
-reproduction command are listed in
-\texttt{supplement/LEAN-STATEMENTS.md}.
-Lean checks the contraction algebra, R6/R7 budget arithmetic,
-finite-record arithmetic, uniform threshold arithmetic, squarefree-marker
-density, closure transport, finite-component selection, and the corresponding
-conditional synthesis interfaces.  It does not check the concrete terminal
-prime decomposition, the marker-to-rowspace identification, or the
-fixed-level R8--R10 carrier arithmetic.  The formal adapter keeps the dual-GRS identification,
-Seroussi--Roth nonextendability, Dür equivalence, and the concrete
-radius proposition as separate hypotheses.
-Lean checks the field-eight certificate arithmetic and the uniqueness
-of the balanced row within redundancies five through seven.  No quantum
-consequence is drawn from that row: the one-column MDS extension it
-would need does not exist at radius \(r-1\)
-(Remark~\ref{rem:q8-no-extension}), so the cross-paper closure is
-carried in the formal development without being claimed here.
+The exact Lean declarations, hypotheses, axiom audit, and replay command are
+listed in \texttt{LEAN-STATEMENTS.md}. They check the coordinate,
+budget, density, closure, component-selection, and conditional-synthesis
+interfaces. Concrete component geometry, fixed-level carrier arithmetic,
+classical radius inputs, and certificate semantics remain explicit inputs.
+The formal layer also checks the field-eight record but draws no quantum
+consequence from it, because the required one-column MDS extension does not
+exist at radius \(r-1\) (Remark~\ref{rem:q8-no-extension}).
 
 \subsection{Data, code, and disclosure}\label{sec:provenance}
 
@@ -107,16 +90,22 @@ expected hashes, toolchain locks, and a top-level verification command.
 This appendix assigns each computational or formal claim its exact trust
 route.
 
-The repository also contains the companion implementation
-\texttt{rust/prs\_classifier}.  Independently of the fixed-redundancy
-covering-radius theorems, it computes exact semilinear canonical forms and
-replayable exact nearest-error certificates for every $r\geq5$ with
-$q\geq r$.  Its locator candidates are streamed, so the candidate budget
-bounds search time rather than allocated locator storage.  This broader
-algorithmic domain is not used to promote an R11-or-higher syndrome to a deep
-hole without an independently proved covering radius and family exhaustion.
-The one enabled higher-redundancy exception is the even diagonal $r=q-1$:
-the implementation replays the $e_{r-2}$ terminal-locator obstruction and
-imports the dimension-two radius theorem of
-\cite[Thm.~17(1)]{WuDingChen2023}.  This is an explicit certified family, not
-a complete R11-or-higher classification.
+The repository also contains Projective Reed--Solomon Toolkit under the
+\texttt{software/} directory. Its command-line interface separates structural
+computation from theorem-gated classification.  For every $r\geq5$ and
+$q\geq r$, \texttt{canonicalize} returns an exact semilinear canonical form
+without a coding verdict, while \texttt{distance} and \texttt{decode} return
+exact nearest-error data and a replayable locator certificate within the
+stated candidate budget.  The \texttt{classify} command applies the frozen
+R5--R10 theorem registry and returns \texttt{DEEP}, \texttt{NOT\_DEEP},
+\texttt{UNRESOLVED}, or \texttt{UNSUPPORTED}; \texttt{verify} independently
+replays emitted locator and positive deep certificates.
+
+Locator candidates are streamed, so the candidate budget bounds search time
+rather than allocated locator storage. The broader canonicalization and
+decoding domains do not promote an R11-or-higher syndrome to a deep hole
+without an independently proved covering radius and family exhaustion.  For
+the one enabled higher-redundancy family, even $q$ and $r=q-1$, the verifier
+replays the $e_{r-2}$ terminal-locator obstruction and imports the
+dimension-two radius theorem of \cite[Thm.~17(1)]{WuDingChen2023}.  This is a
+certified family, not a complete R11-or-higher classification.

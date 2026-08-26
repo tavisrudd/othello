@@ -3,11 +3,11 @@
 Run the versioned benchmark harness from the crate root:
 
 ```text
-cargo run --locked --release --bin c969_benchmark -- \
+cargo run --locked --release --bin projective-reed-solomon-benchmark -- \
   --iterations 10 --extension-fields
 ```
 
-It emits `c969-benchmark-report-v1` JSON and separately times the terminal
+It emits `prs-benchmark-report-v1` JSON and separately times the terminal
 selector, exact projective-locator oracle, structural canonicalization,
 classification, and certificate replay. Candidate and transport counts are
 reported alongside timings so machine speed is not confused with the proved

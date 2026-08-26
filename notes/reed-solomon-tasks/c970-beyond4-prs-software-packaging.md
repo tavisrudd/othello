@@ -2,7 +2,36 @@
 
 **Lane**: `reed-solomon`
 
-**Status:** queued
+**Status:** active; self-contained paper subtree and fast paper/software gates green
+
+## Checkpoint: 2026-08-25
+
+The implementation now lives under
+`papers/beyond4_prs/software/projective-reed-solomon/` with the public name
+**Projective Reed--Solomon Toolkit**. The crate, library, and executable use the
+unambiguous `projective-reed-solomon` identity. Its Clap interface provides
+`canonicalize`, `distance`, `decode`, `classify`, and `verify`, with a global
+candidate limit, compact JSON output, stdin/file input, and descriptive help.
+
+Both runtime registries are subtree-local. Public schemas and provenance no
+longer expose internal task identifiers or development-note paths. The subtree
+now owns its Rust pin, lock, MIT license, citation metadata, changelog, theorem
+boundary, certificate documentation, complexity summary, benchmark protocol,
+and terminal-selector summary.
+
+The paper Makefile has fast and slow software targets. The supplement generates
+and verifies a complete 18-file software manifest, registers it in the 74-entry
+evidence bundle, and includes the whole software subtree in deterministic export
+ownership. The canonical and TIT manuscripts state the broader computational
+domain without broadening the deep-hole theorem domain. Formatting, warning-free
+Clippy, 31 fast tests, both manuscript builds, and the quick 74-artifact
+supplement gate pass.
+
+Open before completion: commit and test a fresh standalone paper export; run the
+disposable history-filter extraction gate; decide whether the five ignored slow
+regressions belong in this release window; and resolve or explicitly disposition
+the TIT build's reported `51 / 50` page count (the inherited Make recipe prints
+that count but does not fail on it).
 
 ## Goal
 
@@ -18,7 +47,7 @@ replayable, and release-pinned.
 The initial authoritative location is:
 
 ```text
-papers/beyond4_prs/software/prs-classifier/
+papers/beyond4_prs/software/projective-reed-solomon/
 ```
 
 That directory must be independently buildable and must behave as a prospective
@@ -38,7 +67,7 @@ checks those registries rather than maintaining a second authoritative copy.
 ## Deliverables
 
 1. Relocate `rust/prs_classifier` with history-preserving moves into
-   `papers/beyond4_prs/software/prs-classifier` and make it self-contained.
+`papers/beyond4_prs/software/projective-reed-solomon` and make it self-contained.
 2. Give the crate a small stable public interface for `canonicalize`, `distance`,
    `decode`, `classify`, and `verify_certificate`, with versioned request and
    certificate schemas.  Separate theorem-domain lookup from computational
@@ -105,8 +134,8 @@ a usable standalone repository without manual source or path repair:
 
 ```bash
 git filter-repo \
-  --path software/prs-classifier/ \
-  --path-rename software/prs-classifier/:
+  --path software/projective-reed-solomon/ \
+  --path-rename software/projective-reed-solomon/:
 ```
 
 The extracted root must build and test with its committed lock and toolchain, retain

@@ -1,27 +1,27 @@
 {
-  "schema": "c969-theorem-domain-v1",
+  "schema": "prs-theorem-domain-v1",
   "registry_version": 1,
   "frozen_at_authority_commit": "9da3651b5f1e0cd390f8fb40f74415e0fedc0b0e",
   "frozen_surface": {
     "theorem_map": {
-      "path": "papers/beyond4_prs/theorem-map.md",
-      "sha256": "e10bee52b38b0d6cf8198b22a20566be2dfede583690d9d80847dbc960c61605"
+      "path": "theorem-map.md",
+      "sha256": "281c4c07fd78ffc7fa89ca9659f83ba3831aaa13b664ac44f03ada9805ee2abe"
     },
     "r5_certificate": {
-      "path": "notes/2026-07-22-c491-prs-deep-hole-census.json",
-      "sha256": "7055b428ef0738921ddc472173e6d51da1c36660caa56d2e4dc1add156733283"
+      "path": "supplement/evidence/r5/2026-07-22-prs-deep-hole-census.json",
+      "sha256": "e360e7e60b5890ea8e46eb2cd513b860fc1e7c2d0d618fc597052c5901d3304c"
     },
     "r6_certificate": {
-      "path": "notes/2026-07-22-c498-prs-deep-hole-census.json",
-      "sha256": "b993fd7c1b8a5cd813e52aa54ce7c087465097730e9748c37d2ed043540672a3"
+      "path": "supplement/evidence/r6/2026-07-22-prs-deep-hole-census.json",
+      "sha256": "df74a3f2905e4cb75a0b4b544ef4039fe67320d1af5d076c9c203da7e83163ff"
     },
     "r7_certificate": {
-      "path": "notes/2026-07-23-c509-prs-deep-hole-calibration.json",
-      "sha256": "9034befae239a1d578556e78a06df1d04dccc828a7f6cb08f874533c84c50906"
+      "path": "supplement/evidence/r7/2026-07-23-prs-deep-hole-calibration.json",
+      "sha256": "e92afa19573f45be2000c2b31a6c216e116d34b0fb06671e7443f95e37e2ef00"
     },
     "r10_binary_q16_certificate": {
-      "path": "notes/2026-08-02-c620-higher-lucas-modular-carriers-q16.json",
-      "sha256": "70803c52fc11bbe2c465721651a1d73af5c1b1e9e79ecee79ecbfe3c2a26268e"
+      "path": "supplement/evidence/lucas-m9/2026-08-02-higher-lucas-modular-carriers-q16.json",
+      "sha256": "dca46bbe94cb46d78afc8a8ced2adc37bd9220f981bae9484f43bf54bad16b34"
     }
   },
   "code_convention": {
@@ -60,10 +60,9 @@
       ],
       "finite_exception_fields": [7, 8, 9, 11, 13, 17, 19],
       "source_locators": [
-        "papers/beyond4_prs theorem-map row R5",
-        "papers/beyond4_prs label thm:r5",
-        "notes/2026-07-22-c491-prs-redundancy-five.md",
-        "notes/2026-08-07-c881-r5-cubic-pencil-literature-audit.md"
+        "theorem-map row R5",
+        "manuscript label thm:r5",
+        "supplement label Certificate R5"
       ]
     },
     {
@@ -83,10 +82,9 @@
       ],
       "finite_exception_fields": [7, 8, 9, 11, 13],
       "source_locators": [
-        "papers/beyond4_prs theorem-map row R6",
-        "papers/beyond4_prs label thm:r6",
-        "notes/2026-07-22-c498-prs-redundancy-six.md",
-        "notes/2026-07-23-c498-small-exceptional-normal-forms.md"
+        "theorem-map row R6",
+        "manuscript label thm:r6",
+        "supplement labels Certificate R6 and Certificate R6-NF"
       ]
     },
     {
@@ -107,10 +105,9 @@
       ],
       "finite_exception_fields": [7, 8, 9, 11],
       "source_locators": [
-        "papers/beyond4_prs theorem-map row R7",
-        "papers/beyond4_prs label thm:r7",
-        "notes/2026-07-23-c509-prs-redundancy-seven.md",
-        "notes/2026-08-02-c660-r7-independent-completeness.md"
+        "theorem-map row R7",
+        "manuscript label thm:r7",
+        "supplement labels Certificate R7 and Certificate R7 direct locus"
       ]
     },
     {
@@ -129,9 +126,9 @@
       ],
       "finite_exception_fields": [],
       "source_locators": [
-        "papers/beyond4_prs theorem-map row R8",
-        "papers/beyond4_prs label thm:r8",
-        "notes/2026-07-23-c513-prs-redundancy-eight.md"
+        "theorem-map row R8",
+        "manuscript label thm:r8",
+        "supplement label Certificate R8"
       ]
     },
     {
@@ -157,9 +154,9 @@
       ],
       "finite_exception_fields": [],
       "source_locators": [
-        "papers/beyond4_prs theorem-map row R9",
-        "papers/beyond4_prs label thm:r9",
-        "notes/2026-07-23-c516-prs-redundancy-nine.md"
+        "theorem-map row R9",
+        "manuscript label thm:r9",
+        "supplement label Certificate R9"
       ]
     },
     {
@@ -179,15 +176,13 @@
       ],
       "local_geometric_rules": [
         "for q=2^m with m>=4 every point of P<e2,e3,e4,e5,e6,e7> is shallow",
-        "C620 supersedes C532's former rank-two and positive-moduli unresolved residues"
+        "the degree-nine Lucas theorem closes the former rank-two and positive-moduli residues"
       ],
       "finite_exception_fields": [],
       "source_locators": [
-        "papers/beyond4_prs theorem-map row R10",
-        "papers/beyond4_prs label cor:r10",
-        "papers/beyond4_prs label thm:m9-shallow",
-        "notes/2026-07-23-c532-prs-redundancy-ten-synthesis.md",
-        "notes/2026-08-02-c620-higher-lucas-modular-carriers.md"
+        "theorem-map row R10",
+        "manuscript labels cor:r10 and thm:m9-shallow",
+        "supplement labels Certificate R10 and Certificate Lucas M9"
       ]
     }
   ]

@@ -2,9 +2,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
 use thiserror::Error;
 
-pub const REQUEST_SCHEMA: &str = "c969-request-v1";
-pub const CERTIFICATE_SCHEMA: &str = "c969-locator-certificate-v1";
-pub const DEEP_CERTIFICATE_SCHEMA: &str = "c969-deep-certificate-v1";
+pub const REQUEST_SCHEMA: &str = "prs-request-v1";
+pub const CERTIFICATE_SCHEMA: &str = "prs-locator-certificate-v1";
+pub const DEEP_CERTIFICATE_SCHEMA: &str = "prs-deep-certificate-v1";
 
 #[derive(Debug, Error, PartialEq, Eq)]
 pub enum Error {
@@ -1422,7 +1422,7 @@ pub fn frozen_orbit_lookup(
     let registry: FrozenOrbitRegistry =
         serde_json::from_str(include_str!("../data/frozen-orbits-v1.json"))
             .expect("generated frozen orbit registry must parse");
-    assert_eq!(registry.schema, "c969-frozen-orbit-registry-v1");
+    assert_eq!(registry.schema, "prs-frozen-orbit-registry-v1");
     registry.records.into_iter().find(|record| {
         record.redundancy == redundancy
             && record.q == field.order()
@@ -1437,7 +1437,7 @@ fn theorem_domain_registry() -> TheoremDomainRegistry {
     let registry: TheoremDomainRegistry =
         serde_json::from_str(include_str!("../data/theorem-domain-v1.json"))
             .expect("frozen theorem-domain registry must parse");
-    assert_eq!(registry.schema, "c969-theorem-domain-v1");
+    assert_eq!(registry.schema, "prs-theorem-domain-v1");
     assert_eq!(registry.registry_version, 1);
     registry
 }
@@ -3061,7 +3061,7 @@ mod tests {
     }
 
     #[test]
-    fn c969_r10_q16_lucas_witness_replays() {
+    fn r10_q16_lucas_witness_replays() {
         let field_spec = FieldSpec {
             p: 2,
             degree: 4,
