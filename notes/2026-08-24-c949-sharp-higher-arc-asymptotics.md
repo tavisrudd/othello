@@ -2283,9 +2283,29 @@ e >= q-o(q),
 |B setminus S| >= 2q-o(q).                    (SR24a-Mason-essential-gap)
 ```
 
-At the boundary the union bound permits at most six converted
-`2r`-secants.  Classifying that bounded converted-line configuration together
-with a `2q+o(q)` addition set is the next Mason-specific construction gate.
+The equality boundary compresses further.  If `e/q -> 1`, then the union
+bound permits at most six converted `2r`-secants.  Write `f/q -> g` along a
+further subsequence.  The integer block bound and the orphan capacity become
+
+```text
+u >= ceil(2/g+2),
+|E| >= u+6-6g-o(1),                 |E|<=6.
+```
+
+Consequently `g>=5/6`: at least `5q/6-o(q)` of the additions are off the
+Mason zero triangle.  For every fixed `5/6<=g<1`, the same ceiling forces
+`|E|=6` eventually.  At the endpoint `g=1` the ceiling drops to four, so the
+argument proves only `4<=|E|<=6`; claiming six there would require a
+second-order estimate.  Thus
+
+```text
+e/q -> 1  implies
+f >= 5q/6-o(q),
+4 <= |E| <= 6, with |E|=6 if f/q stays below 1.       (SR24a-Mason-boundary)
+```
+
+Classifying these four-to-six converted-line configurations together with
+the nearly `2q` additions is the next Mason-specific construction gate.
 
 Thus even the smallest possible triangle fill is not the start of a
 near-sharp construction: any Mason-based witness needs a further linear-size
@@ -5839,9 +5859,13 @@ family is lower priority.
   side, essential-secants strengthen this across all `(SR11)` signatures:
   any `eta=o(q)` Mason trade needs at least `2q-o(q)` additions,
   since a smaller trade leaves quadratically many orphaned Mason points but
-  only constantly many old `2q/3`-secants can be converted to tight lines.  These
-  are stability/separation theorems; they do not classify arbitrary small
-  roots or minimal blocking sets.
+  only constantly many old `2q/3`-secants can be converted to tight lines.
+  At equality, `(SR24a-Mason-boundary)` forces at least `5q/6-o(q)` additions
+  off the zero triangle and only four to six converted lines (exactly six
+  away from the endpoint off-triangle density one).  The remaining mystery
+  is whether this bounded line arrangement can satisfy all old `2r`-line
+  balances and minimality.  These are stability/separation theorems; they do
+  not classify arbitrary small roots or minimal blocking sets.
   **Rejected shortcut — does the three-weight code lie close enough to the
   Griesmer bound to be rigid?**  The small root is exactly a projective
   `q`-ary `[q(q+2)/3,3,q^2/3]` code with nonzero weights
