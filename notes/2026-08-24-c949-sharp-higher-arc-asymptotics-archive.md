@@ -224,3 +224,17 @@ monomers.  Thus the q-scale selector search has matching deficiency at most
 two; what remains is one projective augmenting-path lemma through the other
 colours.  An abstract coloured countermodel with three isolated generic
 vertices shows that degree/colour data alone cannot prove the path.
+
+The pairwise unions sharpen this to a finite defect-wiring dichotomy.  A
+same-colour alternating path immediately supplies the missing matching;
+otherwise each colour pair induces a bijection between its nonoverlapping
+three-point defect sets, with common defects isolated.  Hostile review kept
+the scope narrow: third-colour chords still run through q-scale path and
+cycle interiors, so only direct two-colour failure is bounded.
+
+The natural marked rational Chow divisor was also compressed exactly.  Up
+to the fixed product of all open side pencils and the three vertex factors,
+it is the cube of the degree-`q-2` tangent-plus-matching product.  This
+recovers the selector but does not bound it; in characteristic three its
+ordinary logarithmic derivative vanishes.  Hence the desired bridge must be
+a genuinely mixed marked norm identity rather than an unweighted polar.

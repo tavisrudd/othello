@@ -243,6 +243,12 @@ therefore precisely a **two-monomer augmenting-path lemma** through the other
 two colours.  This gives a cheap exact preprocessing gate for q=27 and a
 clean field-uniform projective expansion target.
 
+Pairwise alternating-path analysis compresses failure of a direct
+two-colour augmentation to a bounded defect wiring: intersections among the
+three 3-sets and three cross-colour bijections.  The third-colour chords
+through the long paths remain q-scale, so this is a routing certificate, not
+a full bounded selector.
+
 ### 5. q=27 finite carrier boundary
 
 C962 supplies a 714-task high-incidence DFS interface.  Each high cell gives
@@ -292,8 +298,10 @@ An origin gauge cannot expose this normal polar, and every actual tangent
 restriction mixes all normal layers as in `(TR25)`.
 Moreover the current Chow/`(E,U)` state is unweighted: it omits the
 arc/blocker selector and non-tight slack required by a downward trade.
-The next carrier bridge must be marked, not merely another unweighted
-coefficient extraction.
+The exact marked rational divisor does compress to the cube of the
+degree-`q-2` tangent-plus-matching product, but `dlog` kills that cube in
+characteristic three.  The next carrier bridge must therefore be a mixed
+marked norm identity, not merely another unweighted coefficient extraction.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.

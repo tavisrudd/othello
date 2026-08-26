@@ -514,6 +514,30 @@ though the unweighted arrangement has many fourfold points.  At `eta=2`,
 current unweighted `E,U` or first polar can certify a downward construction
 without a new marked-selector carrier or norm identity.
 
+The exact marked rational Chow object is still available, but it is
+q-scale.  With `O=B union U` the `3q-3` open side points and
+
+```text
+Theta_u=ell_T^3 product_(b in B)ell_b^2 product_(v in V)ell_v
+        / product_(x in U)ell_x,
+P_sel=ell_T product_(b in B)ell_b,
+```
+
+one has the exact Frobenius compression
+
+```text
+Theta_u product_(o in O)ell_o / product_(v in V)ell_v = P_sel^3.
+                                                            (TR26-marked)
+```
+
+The cube map is bijective over `F_q`, so after the fixed three-side factor
+this determines the marked tangent-plus-matching selector exactly.  It does
+not make the selector bounded: `deg P_sel=q-2`.  Locally on a tight line its
+divisor order is just `(SR16)`'s regularity balance, and in characteristic
+three `dlog(P_sel^3)=0`.  Thus ordinary differential or unweighted Chow
+operations erase the marker; a new mixed-incidence/norm identity is needed
+to transport `(TR26-marked)` to `(E,U,L)`.
+
 At `eta=1` the marked low selector nevertheless has an exact graph normal
 form.  Join two vertices of `D` when their line is a bisecant.  The nine
 exceptional vertices have degree one and the `2q-5` generic vertices degree
@@ -560,6 +584,25 @@ perfect matchings on the rest, leaving three isolated generic vertices.
 That countermodel is not asserted projectively realizable; it proves that
 the next lemma must use the tri/four-secant completion geometry.
 
+There is a second bounded reduction for direct two-colour augmentation.
+For colours `i,j`, the union `M_i union M_j` consists of alternating cycles,
+alternating paths with endpoints in `D_i triangle D_j`, and isolated common
+defects `D_i intersect D_j`.  If a path joins two vertices of
+`D_i\D_j`, flipping it matches those two monomers; marking the third vertex
+of `D_i` completes the selector.  Otherwise every path pairs opposite
+colours and induces a bijection
+
+```text
+phi_ij:D_i\D_j -> D_j\D_i.                         (TR28)
+```
+
+Thus failure of every direct two-colour proof is encoded by at most nine
+defect vertices, their overlaps, and three cross-colour bijections.  This
+does **not** compress the full selector to nine symbols: the third colour
+has chords through the interiors of `Theta(q)` alternating paths/cycles and
+may change augmentation and the off-core cap.  The bounded object is the
+defect wiring; the path/cycle geometry remains q-scale.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -586,5 +629,8 @@ the next lemma must use the tri/four-secant completion geometry.
   polar, while changing tangents mixes every normal layer as in `(TR25)`.
 - **Settled/no-go:** unweighted Chow/Redei data omit the arc/blocker selector
   and non-tight slack; `(TR26)` shows this is decisive already at `eta=1`.
+- **Settled/no-go:** `(TR26-marked)` recovers the exact selector as a q-scale cube,
+  but characteristic-three logarithmic differentiation erases it and no
+  bounded marked bridge follows.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.
