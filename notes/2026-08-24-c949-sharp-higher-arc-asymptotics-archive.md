@@ -1,0 +1,105 @@
+# C949 session archive — sharp asymptotics for complete higher arcs
+
+This append-only companion records chronological C949 sessions and routes to
+their detailed snapshots.  The live task state is always
+`notes/2026-08-24-c949-sharp-higher-arc-asymptotics.md`.
+
+## 2026-08-24 to 2026-08-25 — inverse reduction and branch structure
+
+The exact `5/3` endpoint was excluded for sufficiently large ternary fields.
+Sublinear repair was reduced to nine SR11 signatures: seven concurrent rows
+and two triangular signatures.  The concurrent rows compressed to three
+ghost types; the balanced triangular branch acquired its Redei, Witt,
+reciprocal-norm, packing, and arrangement formulations.  The `(5,-1)` branch
+was separated as a linear-trade problem.
+
+Detailed authority through all subsequent refinements:
+`notes/2026-08-26-c949-structural-proof-snapshot.md`.
+
+## 2026-08-25 — C962 finite application interface
+
+The q=27 balanced branch was expressed as 714 fixed-mapping tasks.  Each high
+cell is an affine equation in the 18 coefficients of `(A,C)`.  Rollback rank,
+two-fiber reconstruction, terminal-nullity, and Möbius-defect handling were
+implemented in the owning C962 work.  This supplied an exact finite route but
+not a field-uniform C949 theorem.
+
+Focused sources:
+
+- `notes/2026-08-25-c962-application-opportunities-memo.md`
+- `notes/2026-08-25-c962-recovery-algorithms-and-bounds.md`
+
+## 2026-08-26 — carrier red team and global method boundaries
+
+Independent audits closed several attractive but invalid shortcuts:
+
+- all finite local torus jets are Koszul-formal;
+- cubing erases conductor compatibility at quadruple nodes;
+- Saito/freeness is universal for the covering arrangement;
+- scalar pencil cocycles contain no offset information;
+- a degree-`2q/3` root carrier is an overdetermined gluing condition, not an
+  automatic consequence of the cubed restrictions.
+
+The resulting valid target became a global offset/Hasse-Redei/conductor
+identity.  See the snapshot labels `(SR24a-arrangement-*)`,
+`(SR24a-torus-*)`, and `(SR24a-carrier-lemma)`.
+
+## 2026-08-26 — Mason separation upgraded to quadratic scale
+
+The deficient-block incidence inequality and exact second moment for
+converted lines yielded
+
+```text
+liminf e/q^2 >= c_*=0.0171413259... > 1/60.
+```
+
+This rules out every subquadratic Mason switch but remains relative to a
+chosen Mason root.  The absent bridge is the mixed correlation between an
+arbitrary near-sharp blocker and some Mason root.
+
+Commit: `f674edf98` (`prove quadratic Mason separation for C949`).
+
+## 2026-08-26 — Redei rank-one certificate
+
+Tangent-pencil averaging first produced a clean/dirty dichotomy and a
+field-uniform rank-one certificate with one possible quadratic top term and a
+cubic defect.
+
+Commit: `2dd65b5f4` (`derive field-uniform Redei defect for C949`).
+
+## 2026-08-26 — norm saturation and exact bounded cubic
+
+A weighted bisecant/trisecant second moment was saturated exactly by the
+three zero-triangle vertices.  This eliminated the dirty branch.  Incidence
+inversion then identified the weighted low-line family with the sum of the
+three full pencils.  Global monic division gave
+
+```text
+Q=B_0 C_0(X^3,M)+(M^q-M)E,
+deg_X E<3, deg E<=3.
+```
+
+The entire balanced field-uniform defect is therefore nine coefficients.
+
+Commit: `31d65d166` (`compress C949 Redei defect to bounded cubic`).
+
+## 2026-08-26 — reciprocal audit and exact no-go boundary
+
+The reciprocal transform has standard `(N^q-N)` remainder form exactly when
+the three homogeneous-cubic coefficients of `E` vanish.  It is a transform
+of the same cubic, not a second independent nine-dimensional object; the
+apparent numerical match with C962's 18 carrier coordinates was retracted.
+
+Adding `(M^q-M)E'` preserves every finite directional fiber.  Thus the live
+target is a pre-specialization identity computing transverse derivatives
+along the three moving pencil roots.
+
+Commit: `ae2ca690b` (`isolate reciprocal obstruction in C949 cubic`).
+
+## 2026-08-26 — task-card reorganization
+
+The former 6,800-line C949 card was frozen as
+`notes/2026-08-26-c949-structural-proof-snapshot.md`.  The original path is
+now the short live router.  Future detailed proof batches should land in
+focused dated snapshots and be linked here; this archive records sessions,
+not full derivations.
