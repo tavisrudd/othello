@@ -2,12 +2,24 @@
   "claims": {
     "cor:r10": {
       "coverage": "conditional_deduction",
+      "evidence": [
+        "certificate-r10"
+      ],
       "lean": [],
+      "proves": [
+        "redundancy-ten-classification"
+      ],
       "source": "sections/09-lucas-carriers.tex",
-      "status": "Derived manuscript corollary. The first-carrier arithmetic is supplied by 'thm:m9-shallow', not by Lean."
+      "status": "Derived manuscript corollary. The first-carrier arithmetic is supplied by 'thm:m9-shallow', not by Lean.",
+      "uses": [
+        "prop:r10-escape"
+      ]
     },
     "cor:r5-binary-shallow": {
       "coverage": "fragment",
+      "imports": [
+        "aubry-perret"
+      ],
       "lean": [
         "PRSRedundancyFive.splitMembers_pos_of_characteristicTwoBranchBudget",
         "fieldOrder_le_twelve_of_characteristicTwoSplitFree"
@@ -163,6 +175,9 @@
     },
     "lem:s3": {
       "coverage": "fragment",
+      "imports": [
+        "aubry-perret"
+      ],
       "lean": [
         "PRSRedundancyFive.fieldOrder_le_nineteen_of_splitFree"
       ],
@@ -207,6 +222,9 @@
     },
     "prop:linearized": {
       "coverage": "absent",
+      "imports": [
+        "wang-wu-hu"
+      ],
       "lean": [],
       "source": "sections/09-lucas-carriers.tex",
       "status": "Manuscript Kummer/additive monodromy proof; Wang--Wu--Hu Proposition 11 is cited only for the projective-subline endpoint criterion."
@@ -296,6 +314,10 @@
     },
     "prop:r5-radius": {
       "coverage": "fragment",
+      "imports": [
+        "duer",
+        "seroussi-roth"
+      ],
       "lean": [
         "PRSFoundation.CoveringRadiusInput.deep_iff_splitFree"
       ],
@@ -478,6 +500,10 @@
     },
     "prop:upper-radius": {
       "coverage": "fragment",
+      "imports": [
+        "duer",
+        "seroussi-roth"
+      ],
       "lean": [],
       "source": "sections/07-recursive-carriers.tex",
       "status": "The manuscript applies the cited Seroussi--Roth and D\u00fcr theorems; Lean keeps those coding inputs explicit."
@@ -500,15 +526,35 @@
     },
     "thm:m9-shallow": {
       "coverage": "fragment",
+      "evidence": [
+        "certificate-lucas-m9"
+      ],
       "lean": [],
+      "proves": [
+        "degree-nine-lucas-shallowness"
+      ],
       "source": "sections/09-lucas-carriers.tex",
-      "status": "The finite certificates check the full carrier at \\(q=16,32\\) and only the invariant block at \\(q=64\\); the genus-one argument proves the complement for \\(q\\ge64\\). Lean makes no carrier-exhaustion claim."
+      "status": "The finite certificates check the full carrier at \\(q=16,32\\) and only the invariant block at \\(q=64\\); the genus-one argument proves the complement for \\(q\\ge64\\). Lean makes no carrier-exhaustion claim.",
+      "uses": [
+        "prop:linearized"
+      ]
     },
     "thm:main": {
       "coverage": "fragment",
       "lean": [],
+      "proves": [
+        "main-fixed-level-classification-package"
+      ],
       "source": "sections/01-introduction.tex",
-      "status": "Manuscript aggregation. The recursive logical descent and threshold arithmetic are checked; the concrete reduced carrier and fixed-level arithmetic retain the routes listed below."
+      "status": "Manuscript aggregation. The recursive logical descent and threshold arithmetic are checked; the concrete reduced carrier and fixed-level arithmetic retain the routes listed below.",
+      "uses": [
+        "thm:r5",
+        "thm:r6",
+        "thm:r7",
+        "thm:r8",
+        "thm:r9",
+        "cor:r10"
+      ]
     },
     "thm:polar-construction": {
       "coverage": "conditional_deduction",
@@ -522,51 +568,102 @@
     },
     "thm:r5": {
       "coverage": "conditional_deduction",
+      "evidence": [
+        "certificate-r5"
+      ],
       "lean": [
         "PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate",
         "PRSRedundancyFive.FamilyData",
         "PRSRedundancyFiveCertificate"
+      ],
+      "proves": [
+        "redundancy-five-classification"
       ],
       "source": "sections/01-introduction.tex",
       "status": "Conditional synthesis plus kernel arithmetic. Covering radius, cubic-cover geometry, group actions, and certificate semantics remain inputs."
     },
     "thm:r6": {
       "coverage": "conditional_deduction",
+      "evidence": [
+        "certificate-r6"
+      ],
       "lean": [
         "PRSRedundancySixSeven.redundancySixAllFieldSynthesis",
         "PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion",
         "PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.seroussiRothDimensionRange_six_eight",
         "radiusRange_six_eight_of_externalSeroussiRothDuer"
       ],
+      "proves": [
+        "redundancy-six-classification"
+      ],
       "source": "sections/06-redundancies-six-seven.tex",
-      "status": "Conditional synthesis plus kernel-checked finite-row arithmetic and the exact \\(q=8,r=6\\) high-rate endpoint. The concrete coding identifications and cited radius implications remain explicit inputs."
+      "status": "Conditional synthesis plus kernel-checked finite-row arithmetic and the exact \\(q=8,r=6\\) high-rate endpoint. The concrete coding identifications and cited radius implications remain explicit inputs.",
+      "uses": [
+        "thm:r5"
+      ]
     },
     "thm:r7": {
       "coverage": "conditional_deduction",
+      "evidence": [
+        "certificate-r7"
+      ],
       "lean": [
         "PRSRedundancySixSeven.redundancySevenAllFieldSynthesis",
         "PRSRedundancySixSevenCertificate.redundancySeven_count_exhaustion"
       ],
+      "proves": [
+        "redundancy-seven-classification"
+      ],
       "source": "sections/06-redundancies-six-seven.tex",
-      "status": "Conditional synthesis and finite-row arithmetic. The paper-local `q=7,8,9` rows are not promoted by Lean; at `q=8` the separately imported radius and executable exact-distance extraction (diagonal tangent plus central nucleus) lie outside this formal aggregate."
+      "status": "Conditional synthesis and finite-row arithmetic. The paper-local `q=7,8,9` rows are not promoted by Lean; at `q=8` the separately imported radius and executable exact-distance extraction (diagonal tangent plus central nucleus) lie outside this formal aggregate.",
+      "uses": [
+        "thm:r6"
+      ]
     },
     "thm:r8": {
       "coverage": "conditional_deduction",
+      "evidence": [
+        "certificate-r8"
+      ],
       "lean": [],
+      "proves": [
+        "redundancy-eight-classification"
+      ],
       "source": "sections/07-fixed-level-eight-nine.tex",
-      "status": "Conditional formal synthesis exists; the present paper relies on the printed proof and Certificate R8, not on an expanded aggregate claim."
+      "status": "Conditional formal synthesis exists; the present paper relies on the printed proof and Certificate R8, not on an expanded aggregate claim.",
+      "uses": [
+        "thm:recursive-carrier"
+      ]
     },
     "thm:r9": {
       "coverage": "conditional_deduction",
+      "evidence": [
+        "certificate-r9"
+      ],
       "lean": [],
+      "proves": [
+        "redundancy-nine-classification"
+      ],
       "source": "sections/07-fixed-level-eight-nine.tex",
-      "status": "Conditional formal synthesis exists; concrete geometry, radius, and certificate semantics remain external."
+      "status": "Conditional formal synthesis exists; concrete geometry, radius, and certificate semantics remain external.",
+      "uses": [
+        "thm:r8"
+      ]
     },
     "thm:recursive-carrier": {
       "coverage": "conditional_deduction",
+      "evidence": [
+        "certificate-stable-components"
+      ],
       "lean": [],
+      "proves": [
+        "recursive-carrier-classification"
+      ],
       "source": "sections/07-recursive-carriers.tex",
-      "status": "Conditional synthesis and threshold arithmetic are checked. The reduced carrier theorem, persistent-family geometry, and cited coding implications remain manuscript or imported inputs."
+      "status": "Conditional synthesis and threshold arithmetic are checked. The reduced carrier theorem, persistent-family geometry, and cited coding implications remain manuscript or imported inputs.",
+      "uses": [
+        "thm:induction"
+      ]
     },
     "thm:spine": {
       "coverage": "conditional_deduction",

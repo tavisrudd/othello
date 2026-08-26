@@ -279,6 +279,9 @@ induction on the flag length.
 \begin{theorem}[Finite-depth recursive-carrier consequence]
 \label{thm:recursive-carrier}%
 \coverage{conditional_deduction}%
+\uses{thm:induction}%
+\evidence{certificate-stable-components}%
+\proves{recursive-carrier-classification}%
 Let \(r\geq6\), and let \(q\) be a prime power with
 \begin{equation}\label{eq:uniform-threshold}
  q\geq Q_r:=6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor.
@@ -326,6 +329,7 @@ the arithmetic of every point on that carrier.
 
 \begin{proposition}[Upper-level radius gate]\label{prop:upper-radius}%
 \coverage{fragment}%
+\imports{duer,seroussi-roth}%
 For the ranges used below,
 \[
 \begin{aligned}

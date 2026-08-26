@@ -79,7 +79,7 @@ normalization, locator support and magnitudes or the semilinear transporter,
 family evidence, and theorem-domain lookup. With `-c`, success emits:
 
 ```json
-{"status":"VALID"}
+{"schema":"projective-reed-solomon-verification-v1","status":"VALID"}
 ```
 
 Corrupted, inapplicable, or unknown-schema certificates fail with no valid

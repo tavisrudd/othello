@@ -435,6 +435,9 @@ directly at \(q=7\) and independently confirms \(q=8\).
 \begin{theorem}[Redundancy six]\label{thm:r6}%
 \coverage{conditional_deduction}%
 \lean{PRSRedundancySixSeven.redundancySixAllFieldSynthesis,PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion,PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.seroussiRothDimensionRange_six_eight,radiusRange_six_eight_of_externalSeroussiRothDuer}%
+\uses{thm:r5}%
+\evidence{certificate-r6}%
+\proves{redundancy-six-classification}%
 For every prime power $q\geq7$, the deep syndromes of $\PRS(q-5)$ are
 the persistent locus of size $q(q+1)^2/2$, together with:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -702,6 +705,9 @@ so the list is exhaustive.
 \label{thm:r7}%
 \coverage{conditional_deduction}%
 \lean{PRSRedundancySixSeven.redundancySevenAllFieldSynthesis,PRSRedundancySixSevenCertificate.redundancySeven_count_exhaustion}%
+\uses{thm:r6}%
+\evidence{certificate-r7}%
+\proves{redundancy-seven-classification}%
 Certificate R7 unconditionally classifies
 \[
 q\in\{7,8,9,11,13,16,17,19,23,25,27,29,31,32\}.

@@ -52,6 +52,8 @@ ten.
 \begin{theorem}[Recursive obstruction and fixed-level consequences]
 \label{thm:main}%
 \coverage{fragment}%
+\uses{thm:r5,thm:r6,thm:r7,thm:r8,thm:r9,cor:r10}%
+\proves{main-fixed-level-classification-package}%
 Let \(r\geq6\), and let
 \[
  q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
@@ -110,6 +112,8 @@ and Theorem~\ref{thm:r5} classifies it over every prime power \(q\geq7\).
 \begin{theorem}[Complete redundancy-five classification]\label{thm:r5}%
 \coverage{conditional_deduction}%
 \lean{PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate,PRSRedundancyFive.FamilyData,PRSRedundancyFiveCertificate}%
+\evidence{certificate-r5}%
+\proves{redundancy-five-classification}%
 Let $q\geq7$ be a prime power.  The covering radius of $\PRS(q-4)$ is
 $4$.  Its projective deep-hole syndromes are exactly the following
 disjoint families:

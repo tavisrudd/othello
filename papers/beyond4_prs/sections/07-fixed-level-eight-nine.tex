@@ -394,6 +394,9 @@ equations are proved separately above.
 
 \begin{theorem}[Redundancy eight]\label{thm:r8}%
 \coverage{conditional_deduction}%
+\uses{thm:recursive-carrier}%
+\evidence{certificate-r8}%
+\proves{redundancy-eight-classification}%
 For every prime power $q\geq43$, the deep
 syndromes of $\PRS(q-7)$ are
 exactly the persistent tangent and conjugate-secant families, of total
@@ -900,6 +903,9 @@ additional contained component.
 
 \begin{theorem}[Redundancy nine]\label{thm:r9}%
 \coverage{conditional_deduction}%
+\uses{thm:r8}%
+\evidence{certificate-r9}%
+\proves{redundancy-nine-classification}%
 For every prime power $q\geq53$, the
 deep syndromes of $\PRS(q-8)$ are
 exactly the persistent tangent and conjugate-secant families, of total

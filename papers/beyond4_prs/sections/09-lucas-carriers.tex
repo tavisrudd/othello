@@ -47,6 +47,7 @@ carrier leaves only $1,t^d$ in the intersection.
 
 \begin{proposition}[Linearized root cover]\label{prop:linearized}%
 \coverage{absent}%
+\imports{wang-wu-hu}%
 On the generic locus $BC\ne0$, the normalized ordered-root cover of
 $A+Bt+Ct^d$ has geometric
 monodromy $\operatorname{AGL}_1(\F_d)$, minimal constant field
@@ -815,6 +816,9 @@ quadratic in $x$, $q_1=Q'\neq0$, and $\rho\neq0$ gives $Q\nmid R$.
 
 \begin{theorem}[Empty first higher Lucas carrier]\label{thm:m9-shallow}%
 \coverage{fragment}%
+\uses{prop:linearized}%
+\evidence{certificate-lucas-m9}%
+\proves{degree-nine-lucas-shallowness}%
 For every $m\geq4$,
 \[
  \cM_9(\F_{2^m})\cap\{\textup{split-free syndromes}\}
@@ -1297,6 +1301,9 @@ makes this octic squarefree.
 
 \begin{corollary}[Redundancy ten]\label{cor:r10}%
 \coverage{conditional_deduction}%
+\uses{prop:r10-escape}%
+\evidence{certificate-r10}%
+\proves{redundancy-ten-classification}%
 For every prime power $q\geq59$, the projective deep-hole syndromes of
 $\PRS(q-9)$ are exactly the persistent tangent and conjugate-secant
 families.  Their cardinality is $q(q+1)^2/2$, and their orbit law is

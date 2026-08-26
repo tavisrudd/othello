@@ -17,6 +17,56 @@ ROW_RE = re.compile(
     re.MULTILINE,
 )
 IDENTIFIER_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_.]*$")
+LINKS: dict[str, dict[str, list[str]]] = {
+    "prop:r5-radius": {"imports": ["duer", "seroussi-roth"]},
+    "cor:r5-binary-shallow": {"imports": ["aubry-perret"]},
+    "lem:s3": {"imports": ["aubry-perret"]},
+    "prop:upper-radius": {"imports": ["duer", "seroussi-roth"]},
+    "prop:linearized": {"imports": ["wang-wu-hu"]},
+    "thm:r5": {
+        "evidence": ["certificate-r5"],
+        "proves": ["redundancy-five-classification"],
+    },
+    "thm:r6": {
+        "evidence": ["certificate-r6"],
+        "uses": ["thm:r5"],
+        "proves": ["redundancy-six-classification"],
+    },
+    "thm:r7": {
+        "evidence": ["certificate-r7"],
+        "uses": ["thm:r6"],
+        "proves": ["redundancy-seven-classification"],
+    },
+    "thm:r8": {
+        "evidence": ["certificate-r8"],
+        "uses": ["thm:recursive-carrier"],
+        "proves": ["redundancy-eight-classification"],
+    },
+    "thm:r9": {
+        "evidence": ["certificate-r9"],
+        "uses": ["thm:r8"],
+        "proves": ["redundancy-nine-classification"],
+    },
+    "cor:r10": {
+        "evidence": ["certificate-r10"],
+        "uses": ["prop:r10-escape"],
+        "proves": ["redundancy-ten-classification"],
+    },
+    "thm:recursive-carrier": {
+        "evidence": ["certificate-stable-components"],
+        "uses": ["thm:induction"],
+        "proves": ["recursive-carrier-classification"],
+    },
+    "thm:m9-shallow": {
+        "evidence": ["certificate-lucas-m9"],
+        "uses": ["prop:linearized"],
+        "proves": ["degree-nine-lucas-shallowness"],
+    },
+    "thm:main": {
+        "uses": ["thm:r5", "thm:r6", "thm:r7", "thm:r8", "thm:r9", "cor:r10"],
+        "proves": ["main-fixed-level-classification-package"],
+    },
+}
 
 
 def coverage(boundary: str, status: str) -> str:
@@ -60,6 +110,7 @@ def expected_map() -> dict[str, object]:
             "lean": lean_identifiers(boundary),
             "source": sources[label],
             "status": status,
+            **LINKS.get(label, {}),
         }
     return {"schema_version": 1, "claims": claims}
 
@@ -69,6 +120,10 @@ def annotation(label: str, claim: dict[str, object]) -> str:
     identifiers = claim["lean"]
     if identifiers:
         lines.append(f"\\lean{{{','.join(identifiers)}}}%")
+    for macro in ("uses", "imports", "evidence", "proves"):
+        values = claim.get(macro, [])
+        if values:
+            lines.append(f"\\{macro}{{{','.join(values)}}}%")
     return "\n".join(lines)
 
 
@@ -88,6 +143,10 @@ def refresh(expected: dict[str, object]) -> None:
                 rf"\\label\{{{re.escape(label)}\}}%?"
                 rf"(?:\n\\coverage\{{[^}}]+\}}%?)?"
                 rf"(?:\n\\lean\{{[^}}]+\}}%?)?"
+                rf"(?:\n\\uses\{{[^}}]+\}}%?)?"
+                rf"(?:\n\\imports\{{[^}}]+\}}%?)?"
+                rf"(?:\n\\evidence\{{[^}}]+\}}%?)?"
+                rf"(?:\n\\proves\{{[^}}]+\}}%?)?"
             )
             rendered = annotation(label, claim)
             text, count = pattern.subn(lambda _match: rendered, text, count=1)
@@ -122,16 +181,36 @@ def check(expected: dict[str, object]) -> None:
             raise SystemExit(f"unknown bibliography key for import {identifier}")
         if not row.get("pinpoint") or not row.get("conventions"):
             raise SystemExit(f"incomplete imported-source contract: {identifier}")
+    manifest_entries: dict[Path, list[str]] = {}
     for identifier, row in evidence.items():
         manifest = PAPER / row["checksum_manifest"]
         if not manifest.is_file() or not row.get("commands"):
             raise SystemExit(f"incomplete evidence contract: {identifier}")
+        paths = manifest_entries.setdefault(
+            manifest,
+            [item["path"] for item in json.loads(manifest.read_text(encoding="utf-8"))["entries"]],
+        )
+        prefixes = row.get("manifest_prefixes", [])
+        if not prefixes or any(not any(path.startswith(prefix) for path in paths) for prefix in prefixes):
+            raise SystemExit(f"evidence manifest rows do not resolve: {identifier}")
     joined = "\n".join(texts.values())
     for macro, registry in (("imports", imported), ("evidence", evidence)):
         for body in re.findall(rf"\\{macro}\{{([^}}]+)\}}", joined):
             for identifier in body.split(","):
                 if identifier not in registry:
                     raise SystemExit(f"unknown {macro} identifier: {identifier}")
+    for macro, registry in (("imports", imported), ("evidence", evidence)):
+        referenced = {
+            identifier
+            for body in re.findall(rf"\\{macro}\{{([^}}]+)\}}", joined)
+            for identifier in body.split(",")
+        }
+        if referenced != set(registry):
+            raise SystemExit(f"unwired {macro} registry entries: {sorted(set(registry) - referenced)}")
+    for body in re.findall(r"\\uses\{([^}]+)\}", joined):
+        for label in body.split(","):
+            if label not in claims:
+                raise SystemExit(f"unknown claim dependency: {label}")
     print(f"verified {len(claims)} formal-coverage annotations")
 
 

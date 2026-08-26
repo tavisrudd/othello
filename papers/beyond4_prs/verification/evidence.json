@@ -2,41 +2,49 @@
   "certificate-lucas-m9": {
     "role": "Finite full-carrier checks at q=16,32 and the invariant block at q=64.",
     "checksum_manifest": "supplement/EVIDENCE-MANIFEST.json",
+    "manifest_prefixes": ["evidence/lucas-m9/"],
     "commands": ["python3 supplement/verify.py --replay"]
   },
   "certificate-r10": {
     "role": "Redundancy-ten threshold and persistent-orbit arithmetic.",
     "checksum_manifest": "supplement/EVIDENCE-MANIFEST.json",
+    "manifest_prefixes": ["evidence/r10/"],
     "commands": ["python3 supplement/verify.py --replay"]
   },
   "certificate-r5": {
     "role": "Seven-field redundancy-five bridge and audited comparison rows.",
     "checksum_manifest": "supplement/EVIDENCE-MANIFEST.json",
+    "manifest_prefixes": ["evidence/r5/"],
     "commands": ["python3 supplement/verify.py --replay"]
   },
   "certificate-r6": {
     "role": "Redundancy-six finite rows and exceptional normal forms.",
     "checksum_manifest": "supplement/EVIDENCE-MANIFEST.json",
+    "manifest_prefixes": ["evidence/r6/", "evidence/r6-normal-forms/"],
     "commands": ["python3 supplement/verify.py --replay"]
   },
   "certificate-r7": {
     "role": "Redundancy-seven quotient and direct-locus records with exact q=8 distance extraction.",
     "checksum_manifest": "supplement/EVIDENCE-MANIFEST.json",
+    "manifest_prefixes": ["evidence/r7/", "evidence/r7-direct-locus-v2/"],
     "commands": ["python3 supplement/verify.py --replay"]
   },
   "certificate-r8": {
     "role": "Redundancy-eight thresholds, nuclei, witnesses, and budgets.",
     "checksum_manifest": "supplement/EVIDENCE-MANIFEST.json",
+    "manifest_prefixes": ["evidence/r8/"],
     "commands": ["python3 supplement/verify.py --replay"]
   },
   "certificate-r9": {
     "role": "Residual-quadratic arithmetic, slice data, and the characteristic-seven bridge.",
     "checksum_manifest": "supplement/EVIDENCE-MANIFEST.json",
+    "manifest_prefixes": ["evidence/r9/"],
     "commands": ["python3 supplement/verify.py --replay"]
   },
   "certificate-stable-components": {
     "role": "Terminal factorization, saturations, vertical reductions, and coherent-Fano elimination.",
     "checksum_manifest": "supplement/EVIDENCE-MANIFEST.json",
+    "manifest_prefixes": ["evidence/stable-components/"],
     "commands": ["python3 supplement/verify.py --replay"]
   }
 }

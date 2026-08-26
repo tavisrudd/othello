@@ -34,6 +34,7 @@ $W_f$, and which \emph{syndromes} are thereby split-free.
 \begin{proposition}[Radius gate]\label{prop:r5-radius}%
 \coverage{fragment}%
 \lean{PRSFoundation.CoveringRadiusInput.deep_iff_splitFree}%
+\imports{duer,seroussi-roth}%
 For every prime power $q\geq7$,
 \[
        \rho(\PRS(q-4))=4.
@@ -374,6 +375,7 @@ confines $\#Y_f(\F_q)$ to $q+1\pm2\sqrt q$
 \label{cor:r5-binary-shallow}%
 \coverage{fragment}%
 \lean{PRSRedundancyFive.splitMembers_pos_of_characteristicTwoBranchBudget,fieldOrder_le_twelve_of_characteristicTwoSplitFree}%
+\imports{aubry-perret}%
 If $\operatorname{char}\F_q=2$ and $\phi_f$ has geometric monodromy
 $S_3$, then $f$ is shallow for every $q\geq16$.
 \end{corollary}
@@ -407,6 +409,7 @@ counted here.
 \begin{lemma}[$S_3$ stratum]\label{lem:s3}%
 \coverage{fragment}%
 \lean{PRSRedundancyFive.fieldOrder_le_nineteen_of_splitFree}%
+\imports{aubry-perret}%
 If $\phi_f$ has geometric monodromy $S_3$ and $q\geq20$, then the pencil
 contains a completely split squarefree cubic.  For odd $q$ the same
 conclusion holds for every $q\geq20$ without the monodromy hypothesis
