@@ -84,8 +84,10 @@ coefficient, the aligned two-graph classification and query counts, and the
 chart correspondence transports.
 """
 
-readme_anchor = "  library state; the exact 24-module foundation is archived as `v0.1.0`."
+readme_anchor = "- `trust/manifests/q13_passant_code.json` content-addresses normalized projective coordinates, binary incidence semantics, rank transport, and low-weight geometric reductions."
 
-readme_bullet = """- `trust/manifests/clebsch_passages.json` content-addresses the three-module
-  symbolic state added after `v0.1.0`; in `v0.3.0` it records the superseding
-  13-module structural closure."""
+readme_bullet = """- `trust/manifests/clebsch_passages.json` content-addresses the structural
+  Clebsch-passages closure: the quadratic and split pinching models, golden
+  residue and Stein-chart algebra, conference and Petersen calculations,
+  marked incidence and invariant-cubic comparisons, spherical moments,
+  spinor square classes, and aligned two-graph reconstruction."""
