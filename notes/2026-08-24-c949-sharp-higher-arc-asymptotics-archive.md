@@ -261,3 +261,17 @@ all ordinary directions the `Theta(q^2)` collision mass is within only
 factors through a residual of degree at most five.  This does not contradict
 the full-core profiles, but it changes the remaining construction theorem
 into a precise cross-slope propagation problem for bounded residuals.
+
+Adding the six affine boundary labels makes the residual state finite: away
+from 15 collision directions, every missing polynomial is one of 64 labelled
+subproducts of a fixed degree-six boundary form.  Each label occurs linearly
+often, but its defining direction polynomial has degree `2q-5`; simple
+interpolation or pigeonhole cannot couple the labels.  Pairwise intersections
+of the six tangent-direction sets are the next exact data to control.
+
+Global division then supplied a sharper pre-specialization certificate.
+The q-4 regular fibers force every noncube term of the affine quotient
+derivative into `X P_reg(M)p(M)`; the two vertex fibers fix two values of the
+cubic `p`, leaving at most two scalar freedoms.  The hostile boundary is
+important: the two cube channels and division remainder remain q-scale, and
+no tangent reflag currently identifies `p` with `(E,U)` or fourth Witt.

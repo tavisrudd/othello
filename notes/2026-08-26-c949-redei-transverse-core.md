@@ -685,6 +685,64 @@ theorem is cross-directional: synchronize these varying degree-five
 residuals into a common carrier or contradiction.  Scalar saturation alone
 does not even force one defect-free direction.
 
+The six affine boundary points label those residuals more rigidly.  If
+`B_6(T,m)` is their intercept product and `A_m(T)` the squarefree polynomial
+of H-missing intercepts, then
+
+```text
+A_m(T) divides B_6(T,m).                              (TR33)
+```
+
+Away from the at most `binom(6,2)=15` directions where boundary intercepts
+collide, `A_m` is indexed by one of only 64 labelled boundary subsets.  For
+a boundary point `c_i`, membership is detected by the fixed product
+
+```text
+F_i(M)=product_(h in H)((y_i-y_h)-M(x_i-x_h));
+```
+
+the label is missing at slope `m` iff `F_i(m)!=0`.  In the intended balanced
+geometry each label occurs in at least `r-4` ordinary missing patterns, so
+`Z>=2q-24`.  These degree-`2q-5` functions are still below their
+interpolation threshold.  The next missing input is a pairwise-intersection
+or cap-four theorem for the six labelled tangent-direction sets, not a
+64-pattern pigeonhole argument.
+
+## A two-scalar global-division defect
+
+Choose one boundary direction as infinity and divide the full affine product
+monically:
+
+```text
+S(X,M)=(X^q-X)Q(X,M)+J(X,M),       deg_X J<q.
+```
+
+The `q-4` regular slopes have `Q=(X-d_m)G_m^3`, while either vertex slope
+has `Q=(X^q-X)(X-t_v)`.  Put
+`P_reg(M)=product_(m regular)(M-m)`.  Since `deg Q<=q+1`, regular-fiber
+divisibility and characteristic-three differentiation give
+
+```text
+partial_X Q=A(X^3,M)+P_reg(M)(X p(M)+cX^4),
+deg p<=3.                                             (TR34)
+```
+
+At a vertex, `partial_X Q=X^q+X+t_v`; hence `c=0` and
+
+```text
+p(v_i)=P_reg(v_i)^(-1),       i=1,2.                 (TR35)
+```
+
+Thus `p` has at most two remaining scalar parameters.  Equivalently,
+
+```text
+Q=X A_0(X^3,M)-X^2 P_reg(M)p(M)+B_0(X^3,M).
+```
+
+This is an exact pre-specialization bounded defect, not yet a carrier
+theorem: `A_0,B_0` and `J` remain q-scale, and no proved reflag identifies
+`p` with tangent-chart `(E,U)` or C962's carrier.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -721,5 +779,14 @@ does not even force one defect-free direction.
   Redei remainder has residual degree at most five.
 - **Open:** prove a cross-direction propagation theorem for those bounded
   residuals; separate fiber factorization does not supply a common carrier.
+- **Settled:** `(TR33)` reduces the generic residual support to 64 labelled
+  boundary-subset patterns, with each of the six labels occurring linearly
+  often.
+- **Open:** control pairwise intersections of those six tangent-direction
+  sets; their individual degree/count data remain below interpolation range.
+- **Settled:** `(TR34)--(TR35)` compress every noncube term in the global
+  affine quotient derivative to a cubic with at most two scalar freedoms.
+- **Open:** relate that two-scalar defect to `(E,U)`, fourth Witt, or the two
+  boundary fibers; the large cube channels cannot be discarded.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.

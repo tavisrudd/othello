@@ -304,6 +304,18 @@ degree-`q-2` tangent-plus-matching product, but `dlog` kills that cube in
 characteristic three.  The next carrier bridge must therefore be a mixed
 marked norm identity, not merely another unweighted coefficient extraction.
 
+A second bounded certificate now exists in the connector-at-infinity chart:
+
+```text
+partial_X Q=A(X^3,M)+X P_reg(M)p(M).
+```
+
+Here `deg p<=3`, and the two vertex fibers prescribe its values at both
+vertex slopes.  Thus at most two scalar freedoms survive outside the large
+cube channels.  The remaining bridge is to identify this `p` with a marked
+functional of `(E,U)` or fourth Witt; the q-scale cube quotients and boundary
+remainder cannot be discarded.
+
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
 
@@ -358,6 +370,13 @@ construction frontier is therefore a sharp tension: linear Fourier
 complexity in each chart, but degree-five directional residuals.  A
 cross-direction synchronization theorem for those residuals is now the
 highest-EV structural route.
+
+The residual roots are not arbitrary: each missing-intercept polynomial is
+a squarefree divisor of the fixed six-boundary intercept product.  Outside
+15 collision directions this leaves only 64 labelled patterns, and every
+boundary label occurs in `Omega(q)` ordinary directions.  The unresolved
+quantity is their pairwise intersection geometry; individual label counts
+and pigeonhole alone remain below the required interpolation threshold.
 
 At q=27, use the Tutte test as preprocessing, then route surviving marked
 cores into the parallel C962 carrier/mapping gates.  Field-uniformly, the
@@ -460,6 +479,8 @@ separate global trade obstruction or construction.
   but a forced fivefold boundary concurrence for every ternary `q>=27`.
 - **Settled:** every ordinary projection has a degree-at-most-five Redei
   residual, and their total collision-packing defect is only `O(q)`.
+- **Settled:** the global affine quotient derivative has only a cubic
+  noncube defect with at most two scalar freedoms after the vertex fibers.
 - **Open:** synchronize those residuals across slopes; fiberwise boundedness
   alone does not give a common carrier.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut
