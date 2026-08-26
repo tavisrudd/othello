@@ -48,27 +48,24 @@
 \maketitle
 
 \begin{abstract}
-Let $I\leq\mathbb F_q^E$, let $P\subseteq E$ be a target set, and put
-$J=E\setminus P$.  Shortening and puncturing $I^\perp$ onto $J$ give
-$K_P\subseteq D_P\leq\mathbb F_q^J$, whose relative generalized Hamming
-weight $M_t(D_P,K_P)$ is the minimum helper union recovering $t$ independent
-target combinations.  For a fixed nonzero target-message subspace, we express
-the exact least nonconfined helper union as an optimization of prescribed-coset
-support costs over the complete outer functional dual, without an
-outer-distance gate.  For an $L$-linear outer code $O\leq L^N$, $N\geq2$,
-the condition $d(O^\perp)>r+1$ reduces the exact criterion to
-\[
- r<M_t(D_P,K_P)+d(I^\perp).
-\]
-Below either exact threshold, zero-extension preserves normalized equations
-and supports.  The one-coordinate specialization recovers the weighted-coset
-formula and can transfer beyond the ordinary outer support-distance gate.
-Positive-density and bounded service-rate transfer follow, while equal
-relative-weight hierarchies need not determine bounded repair reliability.
-ERGO-Comp implements the constructive formulas as an exact hierarchical
-optimizer and capacity-aware scheduler with retained witnesses; on the
-recorded structured instances it is $2.5$--$377$ times faster than direct
-CP-SAT.
+Let $I\leq\F_q^E$ have target/helper split $E=P\sqcup J$.  Shortening and
+puncturing $I^\perp$ onto $J$ give $K_P\subseteq D_P$, whose $t$-th relative
+generalized Hamming weight is the exact minimum helper union for $t$
+independent target combinations.  For a fixed nonzero target-message subspace
+and outer code $O$ with at least two blocks and nonzero target-block projection,
+the first nonconfined helper cost is the minimum prescribed-coset support cost
+over the complete outer functional dual, with no distance hypothesis.  These
+labelled costs compose by min--sum substitution through compatible finite
+towers and retain coefficient witnesses.  Under $d(O^\perp)>r+1$, confinement
+through radius $r$ is equivalent to $r<M_t(D_P,K_P)+d(I^\perp)$; then
+zero-extension preserves normalized equations and supports.  ERGO-Comp (Exact
+Recovery and Generalized-weight Optimization Compiler) implements this
+recursion and exact capacity-aware scheduling via quotient states and graded
+load shells.  Recorded structured instances show $2.5$--$373$-fold speedups
+over equivalently preprocessed CP-SAT; general side constraints use it as a
+certified CP-SAT front end.  Positive-density and
+bounded service-rate transfer follow, while equal relative-weight hierarchies
+need not determine bounded repair reliability.
 \end{abstract}
 
 \section{Introduction}

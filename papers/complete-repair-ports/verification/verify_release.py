@@ -157,8 +157,8 @@ def check_public_surface() -> None:
         r"[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*", abstract.group(1)
     )
     require(
-        140 <= len(abstract_words) <= 220,
-        f"abstract length {len(abstract_words)} is outside 140--220 words",
+        140 <= len(abstract_words) <= 200,
+        f"abstract length {len(abstract_words)} is outside 140--200 words",
     )
 
 
