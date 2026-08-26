@@ -8,8 +8,11 @@ obligations of the audit checklist are closed, the recognition theorem is
 transported off the root gauge and the conference switching class is proved
 unique, the aligned-design strengths are formalized at the manuscript's quantifier
 range, the rank-14 weighted Jacobian now has a structural proof, and the
-remaining work is gap class B plus the reduced weighted-Jacobian Lean bridge
-before the API is handed to C823
+HARM-2 cubic coefficient collapse and reusable ARITH-1 trace-split quadratic
+algebra are now kernel-checked; the remaining work is the analytic sphere
+bridge, the paper-specific arithmetic/fibre/orientation interfaces, the reduced
+weighted-Jacobian Lean bridge, and aggregate closure before the API is handed
+to C823
 
 ## Objective
 
@@ -397,3 +400,25 @@ certificates, elaborations, gates and the paper-local release replay pass after
 repairing public docstrings and stale live-plan prose.  Before C815 freezes its
 API it must also kernel-check the reduced weighted-Jacobian rank argument, so
 C816 can promote that claim without creating a human-only manuscript assertion.
+
+## 2026-08-25 closure continuation
+
+The paused HARM-2 continuation is landed.  A new generic module,
+`RelativeConicArcs.CubicEqualityPattern`, replaces the rejected 125-term
+coordinate expansion by the universal power-sum identity for a symmetric cubic
+whose coefficients depend only on the equality pattern of three indices.
+`RelativeConicArcs.SphericalCubicRestriction.faceAxisCubic_eq_gauntCoefficient_mul_realSigmaThree`
+now completes the exact rational general-weight corollary without a raised
+heartbeat limit.
+
+The reusable ARITH-1 algebraic core is also landed in
+`RelativeConicArcs.TraceSplitQuadraticAlgebra`.  It defines `R[z]/(z²-d)`, proves
+the generator equation, constructs the exact comparison with the split
+pinching algebra when `d=a²`, and proves that comparison surjective when two is
+invertible.  The remaining ARITH-1 work is the paper-specific `d=5J0`
+instantiation and chart diagram; this generic result does not by itself assert
+the geometric Stein comparison.
+
+See `../2026-08-25-c815-two-hour-closure-attempt.md`.  The Paper III
+`sparse_shadow_export.json` remains forbidden until these remaining interfaces
+and the C815 aggregate gate are frozen.
