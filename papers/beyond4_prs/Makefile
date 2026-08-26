@@ -22,6 +22,7 @@ TIT_PDF_BASENAME := prs-beyond-redundancy-four-tit-submission
 TIT_PDF := $(TIT_PDF_BASENAME).pdf
 
 .PHONY: all check lint tit-check software-check software-slow-check \
+	software-gf16-check \
 	supplement-check release-check clean
 
 all: lint $(PDF)
@@ -52,12 +53,15 @@ software-check:
 	$(CARGO) test --locked --manifest-path $(SOFTWARE_MANIFEST)
 
 software-slow-check:
-	$(CARGO) test --locked --release --manifest-path $(SOFTWARE_MANIFEST) -- --ignored
+	$(CARGO) test --locked --release --manifest-path $(SOFTWARE_MANIFEST) -- --ignored --skip structural_canonicalization_extends_to_gf16_r11
+
+software-gf16-check:
+	$(CARGO) test --locked --release --manifest-path $(SOFTWARE_MANIFEST) tests::structural_canonicalization_extends_to_gf16_r11 -- --ignored --exact
 
 supplement-check:
 	python3 supplement/verify.py
 
-release-check: check tit-check software-check software-slow-check supplement-check
+release-check: check tit-check software-check software-slow-check software-gf16-check supplement-check
 
 clean:
 	$(LATEXMK) -c -jobname=$(PDF_BASENAME) main.tex

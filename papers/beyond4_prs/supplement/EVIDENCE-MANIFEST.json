@@ -489,12 +489,12 @@
       "sha256": "6dffa43a49d0e5a71b81b0df3fecd1fd0849f0d149ecc5dfe521772f7973cce0"
     },
     {
-      "bytes": 9732,
+      "bytes": 9915,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "ad37aa0d23ebe9930f7e040494b0207c910891856bd27402b2c97f8fc0b5b332"
+      "sha256": "ab90aea82259a0d0fdd71838aeefbdf67dd54b81142de8b462725c23046d1b51"
     },
     {
       "bytes": 3462,

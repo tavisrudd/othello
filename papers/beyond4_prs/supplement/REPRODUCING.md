@@ -70,7 +70,10 @@ make software-check
 ```
 
 The gate checks formatting, warning-free Clippy, and the locked test suite.
-`make software-slow-check` runs the ignored exhaustive release regressions.
+`make software-slow-check` runs the four ignored exhaustive release regressions
+over GF(8), GF(9), and GF(32). The separately named
+`make software-gf16-check` runs the full GF(16)/R11 semilinear census; the full
+`make release-check` requires both slow gates.
 The `projective-reed-solomon` executable exposes `canonicalize`, `distance`,
 `decode`, `classify`, and `verify`; its README records the JSON request and
 certificate boundary.

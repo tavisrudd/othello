@@ -44,8 +44,26 @@ IEEE theorem and bibliography typography restored, the TIT PDF is 49 pages. Its
 Make gate now enforces the strict target `< 50` instead of printing and masking a
 failed comparison.
 
-Open before completion: decide whether the five ignored slow regressions belong
-in this release window.
+Four ignored release regressions---the GF(8)/R7 distance audit, complete GF(8)
+and GF(9) R5 chart exhaustions, and the GF(32)/R17 characteristic-power
+boundary---pass together in 157.18 seconds. The GF(16)/R11 semilinear census is
+isolated as `make software-gf16-check`; `make release-check` still requires it,
+but it was not run without the separately required approval.
+
+## Closeout and mystery ledger
+
+- **Settled:** the public name is Projective Reed--Solomon Toolkit, with the
+  unambiguous `projective-reed-solomon` crate, library, and executable identity.
+- **Settled:** every shipped schema, path, registry locator, benchmark, and help
+  surface is free of internal task identifiers.
+- **Settled:** the fresh paper export and later software-only history filter both
+  work without path repair and pass their fast gates.
+- **Settled:** the stale TIT artifact is replaced by a warning-free 49-page
+  build whose strict page gate leaves one page of headroom; only raw coefficient
+  tables move to the canonical/supplement copy.
+- **Open:** the sole unrun evidence gate is the exact GF(16)/R11 semilinear
+  census. Its owning command is `make software-gf16-check`; no mathematical or
+  packaging inference is drawn from an unrun result.
 
 ## Goal
 

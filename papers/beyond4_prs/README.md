@@ -56,7 +56,8 @@ subcommands.
 The crate carries its own lock, pinned Rust toolchain, MIT license, theorem
 registry, frozen orbit data, and extraction-ready documentation. Run the fast
 format, lint, and test gate with `make software-check`; exhaustive release-mode
-regressions are isolated under `make software-slow-check`.
+regressions are isolated under `make software-slow-check`, with the explicit
+GF(16)/R11 semilinear census under `make software-gf16-check`.
 
 Generic canonicalization and exact budgeted decoding extend beyond the paper's
 fixed R5--R10 classification range. They do not create a higher-dimensional
