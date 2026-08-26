@@ -7,7 +7,7 @@
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 `5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
 reduced to the almost-duplex/near-Rédei/moment conditions
-`(SR18)--(SR24z)` and `(SR24-Witt)--(SR24-Witt4''''')`; no
+`(SR18)--(SR24z)` and `(SR24-Witt)--(SR24-WittK)`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -3081,6 +3081,45 @@ second.  The exact `q=27` audit checks
 every `(t,u)`, namely 2,916 states, and checks the two coefficient extractions
 on 27 deterministic arbitrary degree-eight pairs `(A,C)`.
 
+The four support sets can now be compressed into one polynomial without
+discarding these lifted constraints.  Let
+
+```text
+H_m(Z)=product_(c in T_m)(Z-c),
+K_*(Z)=G_(-1)(Z) product_(m in R)(H_m(Z)/J(Z)).
+```
+
+The divisibility by `J` is `(SR24-Witt1'')`, and `K_*` is monic of degree
+`7r-9`.  Its root multiset is precisely `G_(-1)` together with the three
+boundary supports after deleting their common `E`; hence its first, second,
+and fourth power sums are the left sides of `(SR24-Witt1''')`,
+`(SR24-Witt2''')`, and `(SR24-Witt4''''')`.  Write `epsilon_i` for its
+elementary symmetric functions.  Newton's identities in characteristic three
+therefore give
+
+```text
+epsilon_1=0,
+epsilon_2=H_2
+ =kappa^r(a_(r-2)^r+a_(r-1)^(2r)),
+epsilon_4=-H_4-H_2^2.                              (SR24-WittK)
+```
+
+The third coefficient remains free because the multiplier `3epsilon_3`
+vanishes; this identifies the next precise blind spot rather than hiding it.
+For the `q=27`, `kappa=-1` representative,
+
+```text
+epsilon_4=Delta_A-H_2^2,
+H_2=-(a_7^9+a_8^18).                               (SR24-WittK-q27)
+```
+
+Thus the four formerly separate high-support polynomials have a combined
+degree-`7r-9` spectral product whose first, second, and fourth leading data
+are fixed by the top trace coefficients.  A closeout may now attack the
+factorization `K_*=G product(H_m/J)` together with the linear four-partite
+incidence system `(SR24-grid)`, instead of carrying four unrelated Fourier
+spectra.
+
 The ratio moments give a second, slanted extraction of the same local Newton
 polynomials.  With `Q_k` as in `(SR24s''')`, one has simultaneously
 
@@ -3898,7 +3937,7 @@ family is lower priority.
   extending the moment/Hankel window is not a closeout strategy; the minimal
   open step is to rule out (or realize) that three-norm system using the
   transversal or the integral line geometry.  The length-two Witt lift
-  `(SR24-Witt)--(SR24-Witt4''''')` now supplies a field-uniform mechanism that
+  `(SR24-Witt)--(SR24-WittK)` now supplies a field-uniform mechanism that
   recovers the missing Fourier spectrum one ternary digit higher.  Its first
   digit is a two-scalar semilinear form across slopes, its second digit reaches
   the top two coefficients of `A`, and the all-`k` carry formula reduces the
@@ -3907,9 +3946,11 @@ family is lower priority.
   in all four special directions, producing a linear four-partite incidence
   system with only three defect incidences.  The independent `k=4` lift now
   collapses from its universal carrier polynomial to the top-four-coefficient
-  gate `(SR24-Witt4''''')`.  Coupling that recovered fourth spectrum to the
-  fourth-Newton product and reciprocal norm gates is the new structural
-  closeout target.
+  gate `(SR24-Witt4''''')`.  The combined support product `(SR24-WittK)`
+  packages the first, second, and fourth spectra as leading coefficients of
+  `G product(H_m/J)`, leaving its third coefficient as the exact next blind
+  spot.  Coupling this factorization to the four-partite incidence system and
+  reciprocal norm is the new structural closeout target.
   The other triangular row requires a linear
   high-secant trade and
   is therefore a less rigid first target.
