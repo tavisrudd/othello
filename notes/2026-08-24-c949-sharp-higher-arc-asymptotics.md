@@ -2312,6 +2312,28 @@ capacity gives `u<=26z`, and the deficit gives `u>=sqrt(q)/2`.  Hence
 `z>=sqrt(q)/52` and, once `z>=2`, `e/q=z-1>=sqrt(q)/104`.  The complementary
 case is stronger.
 
+The exponent-loss object has an exact design form.  Take the `2q-2` Mason
+`r`-secants as vertices.  Every off-triangle point gives a four-block and
+every open zero-side point gives a pair.  The pairs on each of the three zero
+sides form an edge-disjoint perfect matching, and every other vertex-pair
+lies in a unique four-block.  Thus the four-uniform linear hypergraph has
+
+```text
+v=2q-2,   b=(q-1)(q-3)/3,   d=2r-2,
+6b+3(q-1)=binom(v,2).                         (SR24a-Mason-hypergraph)
+```
+
+For `U` deficient blocks this gives exactly
+
+```text
+6F_0(U)<=binom(|U|,2)-e_leave(U).
+```
+
+The three matching leaves alone give no subquadratic improvement for
+`|U|<=v/2`; abstract linear-hypergraph counting permits the quadratic scale.
+Improving the `3/2` exponent therefore requires a genuine expansion or
+no-induced-subdesign theorem for this specific Mason hypergraph.
+
 Thus every near-sharp complement is at least order `q^(3/2)` in symmetric
 difference from every Mason large-root set.  This eliminates every Mason
 switch of size `o(q^(3/2))`.
@@ -5921,10 +5943,11 @@ family is lower priority.
   **Open quantitative mystery:** the exponent `3/2` enters only through the
   crude bound `F_0(U)<=binom(u,2)`, where `F_0(U)` counts external Mason
   points whose four `r`-secants all belong to the deficient block set `U`.
-  Any subquadratic induced-four-block bound for the dual Mason secant
-  hypergraph improves the separation exponent.  The exact next gate is to
-  determine or spectrally bound this induced-edge function, not to revisit
-  the scalar moments.
+  `(SR24a-Mason-hypergraph)` identifies it as a regular four-uniform linear
+  design whose pair leave is three perfect matchings.  These parameters alone
+  do not improve the quadratic bound; any subquadratic induced-four-block
+  bound must use specific Mason expansion or rule out induced subdesigns.
+  That is the exact next gate, not another scalar-moment calculation.
   **Rejected shortcut — does the three-weight code lie close enough to the
   Griesmer bound to be rigid?**  The small root is exactly a projective
   `q`-ary `[q(q+2)/3,3,q^2/3]` code with nonzero weights
