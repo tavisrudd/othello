@@ -8,7 +8,11 @@ improved threshold proved; independent review and Lucas discriminator open
 lifting, a degree-six Vandermonde selector, unconditional arbitrary-`r`
 containment at
 `6r-16+floor(2 sqrt(6r-18))`, its sharper binary refinement, and a fixed-`r`
-witness-abundance lower bound.
+witness-abundance lower bound.  The companion
+`c973-2026-08-26-first-lucas-boundary.md` computes the exact R11 carriers in
+characteristics `2,3,7`, closes the nonpersistent characteristic-three block
+for `q>=81`, and reduces the remaining two blocks to pointed versions of the
+already proved C620 and characteristic-seven R10 arithmetic.
 
 ## Objective
 

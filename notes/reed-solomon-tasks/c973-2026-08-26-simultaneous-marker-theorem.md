@@ -249,6 +249,36 @@ radius `r-1`.  The existing rank-two arithmetic then promotes (15) to the
 exact tangent/conjugate-secant projective deep-hole classification, with the
 same cardinality and orbit law as in the current conditional theorem.
 
+### Pointed simultaneous-marker variant
+
+The argument remains valid with a prescribed set `A` of `s` rational roots
+which the final locator must avoid.  Choose the affine marker chart so that
+any point of `A` at infinity is already avoided, and multiply `S_f Delta` by
+
+\[
+                     \prod_{i=1}^m\prod_{a\in A_{\rm aff}}(x_i-a).
+\]
+
+The degree in each marker is at most `d+m-1+s`, so a split squarefree marker
+form disjoint from `A` exists when
+
+\[
+                             q>d+m-1+s.                    \tag{16}
+\]
+
+At the terminal pencil, at most `m+s` split members meet a retained or new
+forbidden root.  Hence the pointed lift exists when
+
+\[
+ q+1-2\sqrt q>B_p+6(m+s).                                 \tag{17}
+\]
+
+This is a single global selection followed by one terminal count.  It is not
+the former sequence of intermediate lower packages.  In particular `s=1`
+is the exact interface for contracting a Lucas-carrier point once, applying
+the simultaneous theorem below, and lifting a lower witness while avoiding
+the contraction root.
+
 ## 5. Quantitative witness abundance
 
 The same proof gives a fixed-`r` quantitative theorem.  In an affine marker
@@ -256,7 +286,7 @@ chart, (9) has total degree at most `6m`.  Schwartz--Zippel and deletion of
 diagonals give the explicit lower bound
 
 \[
- G_f(q)\geq (q)_m-6m q^{m-1}                              \tag{16}
+ G_f(q)\geq (q)_m-6m q^{m-1}                              \tag{18}
 \]
 
 for good ordered marker tuples, where `(q)_m=q(q-1)...(q-m+1)`; replace the
@@ -269,7 +299,7 @@ is at least
 \[
  L_{m,p}(q)=\max\left(0,
  \left\lceil\frac{q+1-2\sqrt q-B_p}{6}\right\rceil-m
- \right).                                                  \tag{17}
+ \right).                                                  \tag{19}
 \]
 
 A projective split squarefree locator of degree `m+3` occurs in at most
@@ -278,18 +308,18 @@ A projective split squarefree locator of degree `m+3` occurs in at most
 \[
  \#\{\text{split squarefree members of }W_f\}
  \geq
- \frac{6G_f(q)L_{m,p}(q)}{(m+3)!}.                         \tag{18}
+ \frac{6G_f(q)L_{m,p}(q)}{(m+3)!}.                         \tag{20}
 \]
 
 In particular, for fixed `r` and `q -> infinity`,
 
 \[
  \#\{\text{split squarefree members of }W_f\}
- \geq \frac{q^{r-4}}{(r-2)!}-O_r(q^{r-9/2}).               \tag{19}
+ \geq \frac{q^{r-4}}{(r-2)!}-O_r(q^{r-9/2}).               \tag{21}
 \]
 
-The sign in (19) is understood as the explicit lower bound obtained from
-(16)--(18), not an asserted asymptotic equality.  The leading constant is the
+The sign in (21) is understood as the explicit lower bound obtained from
+(18)--(20), not an asserted asymptotic equality.  The leading constant is the
 natural permutation factor for `r-2` unordered roots.
 
 ## 6. Checks, boundaries, and next gate
