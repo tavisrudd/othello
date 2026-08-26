@@ -1,0 +1,50 @@
+{
+  "aubry-perret": {
+    "citation": "AubryPerret1995",
+    "pinpoint": "Theorem 2.3",
+    "used": "A rational-point bound for possibly singular absolutely irreducible curves.",
+    "conventions": [
+      {
+        "aspect": "domain",
+        "requirement": "The curve is absolutely irreducible over the stated finite field.",
+        "matched": "Absolute irreducibility is established in the cited manuscript proposition before the bound is applied."
+      }
+    ]
+  },
+  "duer": {
+    "citation": "Dur1994",
+    "pinpoint": "Theorem 2.4",
+    "used": "The equivalence between completeness of the normal-rational-curve arc and projective Reed--Solomon covering radius r-1.",
+    "conventions": [
+      {
+        "aspect": "normalization",
+        "requirement": "Length, dimension, redundancy, and projective-arc conventions must be translated consistently.",
+        "matched": "The manuscript fixes r=q+1-k and the degree-(r-1) normal rational curve before invoking the equivalence."
+      }
+    ]
+  },
+  "seroussi-roth": {
+    "citation": "SeroussiRoth1986",
+    "pinpoint": "Theorem 1",
+    "used": "High-rate generalized Reed--Solomon nonextendability in the stated dimension range.",
+    "conventions": [
+      {
+        "aspect": "hypothesis",
+        "requirement": "The code parameters lie in the theorem's high-rate range.",
+        "matched": "Each radius application records and checks the corresponding q and redundancy inequality separately."
+      }
+    ]
+  },
+  "wang-wu-hu": {
+    "citation": "WangWuHu2026",
+    "pinpoint": "Proposition 11",
+    "used": "The projective-subline endpoint criterion for the distinguished Lucas orbit.",
+    "conventions": [
+      {
+        "aspect": "framing",
+        "requirement": "Only the endpoint criterion, not the full carrier classification, is imported.",
+        "matched": "The manuscript proves the full-carrier shallowness separately by the final-pair argument."
+      }
+    ]
+  }
+}

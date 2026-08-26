@@ -61,6 +61,7 @@ fn classify_then_verify_replays_a_positive_certificate() {
         String::from_utf8_lossy(&classification.stderr)
     );
     let value: Value = serde_json::from_slice(&classification.stdout).expect("classification JSON");
+    assert_eq!(value["schema"], "projective-reed-solomon-classification-v1");
     assert_eq!(value["status"], "DEEP");
     let certificate =
         serde_json::to_string(&value["deep_certificate"]).expect("certificate must serialize");
@@ -76,6 +77,10 @@ fn classify_then_verify_replays_a_positive_certificate() {
         String::from_utf8_lossy(&verification.stderr)
     );
     let verified: Value = serde_json::from_slice(&verification.stdout).expect("verification JSON");
+    assert_eq!(
+        verified["schema"],
+        "projective-reed-solomon-verification-v1"
+    );
     assert_eq!(verified["status"], "VALID");
 }
 
@@ -120,6 +125,10 @@ fn canonicalize_accepts_a_json_file() {
     );
     let value: Value = serde_json::from_slice(&output.stdout).expect("canonicalization JSON");
     assert_eq!(
+        value["schema"],
+        "projective-reed-solomon-canonicalization-v1"
+    );
+    assert_eq!(
         value["canonical_syndrome"].as_array().map(Vec::len),
         Some(5)
     );
@@ -144,10 +153,11 @@ fn distance_and_decode_emit_the_same_replayable_locator_certificate() {
     );
 
     let verification = run_with_stdin(
-        &["--compact", "verify-certificate"],
+        &["verify-certificate"],
         &serde_json::to_string(&distance_value).expect("certificate must serialize"),
     );
     assert!(verification.status.success());
+    assert!(verification.stdout.starts_with(b"{\n"));
 }
 
 #[test]

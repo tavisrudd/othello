@@ -50,7 +50,8 @@ fixed-level theorems discharge those extra inputs only through redundancy
 ten.
 
 \begin{theorem}[Recursive obstruction and fixed-level consequences]
-\label{thm:main}
+\label{thm:main}%
+\coverage{fragment}%
 Let \(r\geq6\), and let
 \[
  q\geq6r-15+\left\lfloor2\sqrt{6r-17}\right\rfloor .
@@ -106,7 +107,9 @@ recursive mechanism.
 Thus redundancy five is the first previously open level in the sequence,
 and Theorem~\ref{thm:r5} classifies it over every prime power \(q\geq7\).
 
-\begin{theorem}[Complete redundancy-five classification]\label{thm:r5}
+\begin{theorem}[Complete redundancy-five classification]\label{thm:r5}%
+\coverage{conditional_deduction}%
+\lean{PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate,PRSRedundancyFive.FamilyData,PRSRedundancyFiveCertificate}%
 Let $q\geq7$ be a prime power.  The covering radius of $\PRS(q-4)$ is
 $4$.  Its projective deep-hole syndromes are exactly the following
 disjoint families:
@@ -149,7 +152,9 @@ transverse packages and Lucas-carrier arithmetic.  Section~\ref{sec:overview}
 gives the short proof route.
 
 \begin{theorem}[Redundancy-six deep holes and redundancy-seven split-free syndromes]
-\label{thm:spine}
+\label{thm:spine}%
+\coverage{conditional_deduction}%
+\lean{PRSRedundancySixSeven.redundancySixAllFieldSynthesis,redundancySevenAllFieldSynthesis,PRSPolarInduction.fifthPower_sigmaInversionOrbitCount}%
 The following statements hold.
 \begin{enumerate}[label=\textup{(\alph*)}]
 \item For every prime power $q\geq7$, the projective deep-hole

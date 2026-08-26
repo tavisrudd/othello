@@ -24,7 +24,8 @@ We use the standard linearized/subspace-polynomial terminology of
 root-cover calculations below are specific to the present Hankel
 system.
 
-\begin{proposition}[Lucas overlap kernel]\label{prop:lucas-kernel}
+\begin{proposition}[Lucas overlap kernel]\label{prop:lucas-kernel}%
+\coverage{absent}%
 For $d=2^s$, the lower nucleus and its coherent lift are exactly
 \[
 \PP\langle e_1,\ldots,e_{d-1}\rangle,\qquad
@@ -44,7 +45,8 @@ At $i=d-1$, the monomials $1,t,t^d$ survive.  Varying $i$ over the
 carrier leaves only $1,t^d$ in the intersection.
 \end{proof}
 
-\begin{proposition}[Linearized root cover]\label{prop:linearized}
+\begin{proposition}[Linearized root cover]\label{prop:linearized}%
+\coverage{absent}%
 On the generic locus $BC\ne0$, the normalized ordered-root cover of
 $A+Bt+Ct^d$ has geometric
 monodromy $\operatorname{AGL}_1(\F_d)$, minimal constant field
@@ -138,7 +140,8 @@ and seven.  The first fresh carrier is $s=3$, in syndrome degree nine.
 The $\F_8$-linear section has order-three component Frobenius, but its
 four quotient directions change the full answer.
 
-\begin{proposition}[The $e_7$ orbit]\label{prop:e7-orbit}
+\begin{proposition}[The $e_7$ orbit]\label{prop:e7-orbit}%
+\coverage{fragment}%
 The stabilizer of $e_7\in\PP(\Gamma^9E)$ is the upper Borel, so its
 $\PGL_2$-orbit is $\PP^1$.  At the distinguished point,
 \[
@@ -158,7 +161,8 @@ The displayed kernel follows from the two Hankel equations.
 \end{proof}
 
 \begin{proposition}[Framed Artin--Schreier quotient]
-\label{prop:e7-as}
+\label{prop:e7-as}%
+\coverage{absent}%
 Order roots $0,1,a,b,c,d,u,v$ and put
 \[
 S=a+b+c+d,\quad E=ab+ac+ad+bc+bd+cd,\quad
@@ -211,7 +215,8 @@ Artin--Schreier criterion gives a rational pair precisely when
 $\Tr_{\F_{2^m}/\F_2}(p/h^2)=0$.
 \end{proof}
 
-\begin{proposition}[Additive frame cover]\label{prop:e7-additive}
+\begin{proposition}[Additive frame cover]\label{prop:e7-additive}%
+\coverage{absent}%
 The family
 \[
 t^8+A_4t^4+A_2t^2+A_1t+A_0,\qquad A_1\ne0,
@@ -259,7 +264,8 @@ from rational three-dimensional subspaces.
 \end{remark}
 
 \begin{theorem}[Shallowness of the degree-nine $e_7$ orbit]
-\label{thm:e7}
+\label{thm:e7}%
+\coverage{fragment}%
 For every $m\geq3$, the entire $\PGL_2$-orbit of $e_7$ is shallow over
 $\F_{2^m}$.  The number of monic additive-affine witnesses is
 \[
@@ -332,7 +338,8 @@ The proof of \(\cM_9(\F_{2^m})\) shallowness has four distinct steps.
 Thus the rank and selector calculations carry the uniform theorem, while the
 certificates close exactly the stated finite residue.
 
-\begin{proposition}[Invariant-block arithmetic]\label{prop:m9-invariant-block}
+\begin{proposition}[Invariant-block arithmetic]\label{prop:m9-invariant-block}%
+\coverage{absent}%
 Every rational point of $\PP(U)$ is shallow over every
 $\F_{2^m}$ with $m\geq4$.
 \end{proposition}
@@ -418,7 +425,8 @@ the generator and separately written replay are the
 records their exact trust boundary.
 \end{proof}
 
-\begin{proposition}[Exact final-pair criterion]\label{prop:final-pair}
+\begin{proposition}[Exact final-pair criterion]\label{prop:final-pair}%
+\coverage{absent}%
 Let $z=(z_2,\ldots,z_7)\in\cM_9(\F_{2^m})$.  Choose six distinct
 finite roots with monic polynomial $h=\sum_{i=0}^6h_it^i$, and define
 \[
@@ -475,7 +483,8 @@ second makes the final-pair cover geometrically integral, and the third
 selects a rational base of five roots with an effective degree bound.
 
 \begin{lemma}[Rank of the coefficient map off the invariant block]
-\label{lem:m9-rank}
+\label{lem:m9-rank}%
+\coverage{absent}%
 Let $z=(z_2,\ldots,z_7)$ and let $h=(h_0,\ldots,h_5)^{\mathsf T}$ collect the
 free coefficients of the monic sextic of Proposition~\ref{prop:final-pair}.
 Then
@@ -551,7 +560,8 @@ right-hand side to $\kappa=\ell_2z_7+\ell_3z_6$.
 \end{proof}
 
 \begin{lemma}[Geometric nontriviality of the final-pair Artin--Schreier
-cover]\label{lem:m9-nonsquare}
+cover]\label{lem:m9-nonsquare}%
+\coverage{absent}%
 Let $k$ be algebraically closed of characteristic two, let $z\in\cM_9(k)$
 satisfy $z_4\neq0$ or $z_5\neq0$, and let $L\subseteq\mathbb A^4$ be the
 image of the coefficient map of Lemma~\ref{lem:m9-rank}.  Then the reduced
@@ -709,7 +719,8 @@ it cannot make $A_1/A_3$ a square either.  Hence the double pole survives and
 \eqref{eq:artin-schreier-cover} is geometrically integral.
 \end{proof}
 
-\begin{lemma}[Good-base selector and degree bound]\label{lem:m9-selector}
+\begin{lemma}[Good-base selector and degree bound]\label{lem:m9-selector}%
+\coverage{absent}%
 Let $z$ satisfy $z_4\neq0$ or $z_5\neq0$.  Fix five roots $r_1,\ldots,r_5$
 with $g(t)=\prod_{i=1}^5(t+r_i)=\sum_{i=0}^5g_it^i$, let $x$ be the sixth
 root, and put
@@ -802,7 +813,8 @@ Vandermonde factor makes the five roots distinct, $q_2\neq0$ makes $Q$
 quadratic in $x$, $q_1=Q'\neq0$, and $\rho\neq0$ gives $Q\nmid R$.
 \end{proof}
 
-\begin{theorem}[Empty first higher Lucas carrier]\label{thm:m9-shallow}
+\begin{theorem}[Empty first higher Lucas carrier]\label{thm:m9-shallow}%
+\coverage{fragment}%
 For every $m\geq4$,
 \[
  \cM_9(\F_{2^m})\cap\{\textup{split-free syndromes}\}
@@ -871,7 +883,8 @@ Wang--Wu--Hu and Proposition~\ref{prop:linearized} describe a proper section.
 The exact uniform replacement is
 \eqref{eq:final-pair-linear}--\eqref{eq:final-pair-quadratic}.
 
-\begin{proposition}[Pointed R10 stage budgets]\label{prop:r10-pointed-budgets}
+\begin{proposition}[Pointed R10 stage budgets]\label{prop:r10-pointed-budgets}%
+\coverage{absent}%
 Let \(f\notin\cP_{10}\cup\cM^{\max}_{10,p}\), and retain \(i\) distinct
 markers after \(i\) contractions, \(0\leq i\leq4\).  The unavailable
 choices for the next marker form a zero-dimensional scheme of degree at
@@ -911,7 +924,8 @@ $(AD_3+BC)^2$ and cannot separate a split cubic from a nonsplit one.  The
 replacement keeps an ordered residual root.
 
 \begin{lemma}[Characteristic-two ordered-Hessian slice and selector]
-\label{lem:r10-hessian}
+\label{lem:r10-hessian}%
+\coverage{absent}%
 Let $q$ be a power of two, let
 $f\in\PP(\Gamma^9E)(\F_q)$ with $f\notin\cP_{10}\cup\cM^{\max}_{10,2}$, and put
 $k=\overline{\F_q}$; the geometric assertions below are taken after base change
@@ -1202,7 +1216,8 @@ markers are distinct because $R$ is squarefree, $\lambda$ avoids them, and both
 residual roots avoid the markers and $\lambda$.
 \end{proof}
 
-\begin{proposition}[R10 fixed-depth escape]\label{prop:r10-escape}
+\begin{proposition}[R10 fixed-depth escape]\label{prop:r10-escape}%
+\coverage{conditional_deduction}%
 For odd \(q\geq59\), and for even \(q\geq64\), every split-free
 redundancy-ten syndrome belongs to
 \(\cP_{10}\cup\cM^{\max}_{10,p}\).
@@ -1247,7 +1262,8 @@ identifies the sole contained locus as the displayed carrier union.
 \end{proof}
 
 \begin{proposition}[Characteristic-seven coherent lift at R10]
-\label{prop:r10-char7-lift}
+\label{prop:r10-char7-lift}%
+\coverage{fragment}%
 Let \(q=7^m\geq343\).  Every point of
 \[
        \cM^{\max}_{10,7}\subseteq\PP\langle e_3,e_4,e_5,e_6\rangle
@@ -1279,7 +1295,8 @@ so both residual roots are finite.  The resulting split squarefree septic
 makes this octic squarefree.
 \end{proof}
 
-\begin{corollary}[Redundancy ten]\label{cor:r10}
+\begin{corollary}[Redundancy ten]\label{cor:r10}%
+\coverage{conditional_deduction}%
 For every prime power $q\geq59$, the projective deep-hole syndromes of
 $\PRS(q-9)$ are exactly the persistent tangent and conjugate-secant
 families.  Their cardinality is $q(q+1)^2/2$, and their orbit law is

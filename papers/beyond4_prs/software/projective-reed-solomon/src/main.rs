@@ -1,8 +1,8 @@
 use clap::{Parser, Subcommand};
 use projective_reed_solomon::{
     canonicalize_syndrome, classify, search_exact_locator, verify_certificate,
-    verify_deep_certificate, DeepCertificate, LocatorCertificate, Request, CERTIFICATE_SCHEMA,
-    DEEP_CERTIFICATE_SCHEMA,
+    verify_deep_certificate, DeepCertificate, LocatorCertificate, Request, CANONICALIZATION_SCHEMA,
+    CERTIFICATE_SCHEMA, CLASSIFICATION_SCHEMA, DEEP_CERTIFICATE_SCHEMA, VERIFICATION_SCHEMA,
 };
 use std::fs;
 use std::io::{self, Read};
@@ -23,7 +23,7 @@ entry and carry a certificate that `verify` replays independently.",
 projective-reed-solomon classify examples/tangent-r5-f7.json\n  \
 projective-reed-solomon canonicalize request.json\n  \
 cat certificate.json | projective-reed-solomon verify\n\n\
-Input and output are versioned JSON. See README.md and docs/cli.md for the schema and trust boundary."
+Requests, result envelopes, and certificates use versioned JSON schemas. See README.md and docs/cli.md for the trust boundary."
 )]
 struct Cli {
     /// Maximum locator or transporter candidates examined by a bounded search.
@@ -109,6 +109,20 @@ fn print_json<T: serde::Serialize>(value: &T, compact: bool) -> Result<(), serde
     Ok(())
 }
 
+fn print_versioned_json<T: serde::Serialize>(
+    schema: &str,
+    value: &T,
+    compact: bool,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let mut value = serde_json::to_value(value)?;
+    let object = value
+        .as_object_mut()
+        .ok_or("versioned JSON result must serialize as an object")?;
+    object.insert("schema".into(), serde_json::Value::String(schema.into()));
+    print_json(&value, compact)?;
+    Ok(())
+}
+
 fn run() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
     match cli.command {
@@ -127,7 +141,13 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 }
                 _ => return Err("unsupported certificate schema".into()),
             }
-            println!("{{\"status\":\"VALID\"}}");
+            print_json(
+                &serde_json::json!({
+                    "schema": VERIFICATION_SCHEMA,
+                    "status": "VALID"
+                }),
+                cli.compact,
+            )?;
         }
         Command::Distance(args) | Command::Decode(args) => {
             let request: Request = serde_json::from_str(&read_input(&args.input.input)?)?;
@@ -137,12 +157,12 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         Command::Classify(args) => {
             let request: Request = serde_json::from_str(&read_input(&args.input.input)?)?;
             let result = classify(&request, cli.candidate_limit, cli.candidate_limit)?;
-            print_json(&result, cli.compact)?;
+            print_versioned_json(CLASSIFICATION_SCHEMA, &result, cli.compact)?;
         }
         Command::Canonicalize(args) => {
             let request: Request = serde_json::from_str(&read_input(&args.input.input)?)?;
             let result = canonicalize_syndrome(&request, cli.candidate_limit)?;
-            print_json(&result, cli.compact)?;
+            print_versioned_json(CANONICALIZATION_SCHEMA, &result, cli.compact)?;
         }
     }
     Ok(())

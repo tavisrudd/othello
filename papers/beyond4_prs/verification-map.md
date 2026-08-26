@@ -16,6 +16,7 @@ supplement/EVIDENCE-MANIFEST.json and checked by supplement/verify.py.
 | Certificate R9 | residual-quadratic arithmetic, six-section slice data, and q=49 bridge | independent residual replay; Rust q=49 certificate | no unrestricted carrier theorem |
 | Certificate R10 | threshold, persistent orbit arithmetic, and carrier point-count synthesis | separate prime-power/orbit replay | does not prove first-carrier shallowness |
 | Certificate Lucas M9 | full q=16,32 carrier and q=64 invariant-block rank-two twists | independent finite-field/action/replay code | finite certificates do not prove the q=64 complement or the all-field genus-one theorem |
+| Projective Reed--Solomon Toolkit | exact structural canonicalization, trusted increasing-degree distance/decoding search, theorem-gated classification, and certificate replay | locked unit, compiled-CLI, property, and exhaustive regression layers; complete software manifest | locator replay proves the displayed upper-bound witness, not lower-degree exhaustion; generic computation beyond R10 is not a generic deep-hole theorem |
 
 **Withdrawn 2026-08-07.**  The paper no longer draws a quantum consequence from the balanced q=8 row: a split-free direction is not a one-column MDS extension, and at covering radius r-1 no such extension exists.  The formal modules below are retained as conditional developments whose extension hypothesis is unsatisfied at these parameters; nothing in the manuscript depends on them.  See Remark `rem:q8-no-extension` and row R5-Q of `claim-proof-novelty-ledger.md`.
 
@@ -58,5 +59,5 @@ Classical.choice, and Quot.sound.
 
 The public Version 1 commit, archive, tag, DOI, PDF hash, and source hash are
 immutable fields in supplement/RELEASE-MANIFEST.md. Local Version 2 candidate
-hashes and the expanded 69-artifact evidence map are separate mutable
+hashes and the expanded 74-artifact evidence map are separate mutable
 candidate fields until a new reviewed release is authorized.

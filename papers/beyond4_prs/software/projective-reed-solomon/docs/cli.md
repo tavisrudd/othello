@@ -1,8 +1,10 @@
 # Command-line and JSON workflow
 
-The executable accepts one versioned JSON object and emits one versioned JSON
-result. Pass a file as the final argument or omit it to read standard input.
-Pretty JSON is the default; `--compact` or `-c` selects one-line output.
+The executable accepts one versioned JSON request or certificate and emits one
+versioned JSON result. Every public request, result envelope, and certificate
+carries an explicit schema identifier. Pass a file as the final argument or
+omit it to read standard input. Pretty JSON is the default; `--compact` or
+`-c` selects one-line output.
 
 Global options may appear before or after the subcommand:
 
@@ -33,6 +35,9 @@ Both commands run the same increasing-degree exact locator search and emit a
 `projective-reed-solomon-locator-certificate-v1` object. Its `distance`,
 `support`, and `magnitudes` fields give the decoded nearest error pattern.
 `distance` emphasizes the metric answer; `decode` emphasizes the witness.
+The verifier reconstructs that error pattern and hence its distance upper
+bound. Minimality comes from the trusted increasing-degree search execution,
+not from the certificate alone.
 
 ```text
 projective-reed-solomon distance examples/shallow-r5-f7.json \
@@ -71,7 +76,7 @@ jq '.deep_certificate' classification.json \
 
 Accepts either public certificate schema. It recomputes field arithmetic,
 normalization, locator support and magnitudes or the semilinear transporter,
-family evidence, and theorem-domain lookup. Success emits:
+family evidence, and theorem-domain lookup. With `-c`, success emits:
 
 ```json
 {"status":"VALID"}

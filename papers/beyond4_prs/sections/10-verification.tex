@@ -96,11 +96,15 @@ versioned syndrome request to an independently replayable result.  For every
 $r\geq5$ and $q\geq r$, \texttt{canonicalize} computes an exact semilinear
 canonical form without a coding verdict, while \texttt{distance} and
 \texttt{decode} return exact nearest-error data with a locator-and-magnitude
-certificate, subject to an explicit candidate budget.  The
-\texttt{classify} command consults the hash-pinned R5--R10 theorem registry and
+witness, subject to an explicit candidate budget.  The witness independently
+reconstructs the displayed error pattern; minimality additionally trusts the
+increasing-degree search execution.  The
+\texttt{classify} command consults the packaged R5--R10 theorem registry and
 returns \texttt{DEEP}, \texttt{NOT\_DEEP}, \texttt{UNRESOLVED}, or
 \texttt{UNSUPPORTED}.  Only \texttt{DEEP} carries a positive certificate;
-\texttt{verify} recomputes its transporter, family route, and radius premise.
+\texttt{verify} recomputes its transporter, family route, and applicability of
+the registry row.  The covering-radius theorem named by that row remains a
+cited trusted input rather than a fact proved by certificate replay.
 
 This interface makes the software's broader reach visible without enlarging
 the theorem.  Locator candidates are streamed, so the budget bounds search

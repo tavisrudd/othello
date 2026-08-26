@@ -7,7 +7,7 @@ SOFTWARE_MANIFEST := software/projective-reed-solomon/Cargo.toml
 SOURCE_DATE_EPOCH ?= 1784886946
 export SOURCE_DATE_EPOCH
 export FORCE_SOURCE_DATE = 1
-TEX_SOURCES := main.tex main-tit.tex $(wildcard frontmatter/*.tex) \
+TEX_SOURCES := main.tex main-tit.tex formal-annotations.tex $(wildcard frontmatter/*.tex) \
 	sections/01-introduction.tex sections/02-overview.tex \
 	sections/03-dictionary.tex sections/04-redundancy-five.tex \
 	sections/05-polar-induction.tex sections/06-redundancies-six-seven.tex \
@@ -29,6 +29,7 @@ all: lint $(PDF)
 
 lint:
 	python3 supplement/lint_tex_spacing.py $(TEX_SOURCES)
+	python3 verification/check_annotations.py
 
 $(PDF): $(TEX_SOURCES) refs.bib
 	python3 supplement/lint_tex_spacing.py $(TEX_SOURCES)

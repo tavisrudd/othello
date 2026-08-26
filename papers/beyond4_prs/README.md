@@ -1,6 +1,6 @@
 # Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682069-blue.svg)](https://doi.org/10.5281/zenodo.21682069)
+[![Version 1 concept DOI](https://img.shields.io/badge/Version_1_concept_DOI-10.5281%2Fzenodo.21682069-blue.svg)](https://doi.org/10.5281/zenodo.21682069)
 
 ## Read the paper
 
@@ -53,9 +53,9 @@ Projective Reed--Solomon Toolkit is under
 `software/projective-reed-solomon/`. Its `projective-reed-solomon` executable
 provides `canonicalize`, `distance`, `decode`, `classify`, and `verify`
 subcommands. The toolkit starts from versioned syndrome JSON and returns exact
-canonical forms, nearest-error certificates, or theorem-gated verdicts whose
-positive certificates replay independently. Its README gives a runnable
-two-example quick start, and `docs/cli.md` records command outputs and exit
+canonical forms, nearest-error results with replayable locator witnesses, or
+theorem-gated verdicts whose positive certificates replay independently. Its
+README gives a runnable two-example quick start, and `docs/cli.md` records command outputs and exit
 behavior.
 The crate carries its own lock, pinned Rust toolchain, MIT license, theorem
 registry, frozen orbit data, and extraction-ready documentation. Run the fast
@@ -78,7 +78,7 @@ The electronic supplement contains public classification records, generators,
 independent replays, checksums, toolchain locks, and the declaration-level map
 of the conditional Lean formalization.
 
-The tree carries the reviewed Version 2 candidate. Its fixed-level results
+The tree carries the unrefereed Version 2 candidate. Its fixed-level results
 reach redundancies five through ten at the field ranges stated above; the
 arbitrary-redundancy theorem remains conditional on its explicit intermediate
 package hypotheses. Version 1 and its DOI remain immutable, while a public

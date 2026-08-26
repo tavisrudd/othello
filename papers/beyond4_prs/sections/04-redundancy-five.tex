@@ -31,7 +31,9 @@ not supply, and what this section adds, is the passage from a
 redundancy-five syndrome to its pencil: which lines arise as some
 $W_f$, and which \emph{syndromes} are thereby split-free.
 
-\begin{proposition}[Radius gate]\label{prop:r5-radius}
+\begin{proposition}[Radius gate]\label{prop:r5-radius}%
+\coverage{fragment}%
+\lean{PRSFoundation.CoveringRadiusInput.deep_iff_splitFree}%
 For every prime power $q\geq7$,
 \[
        \rho(\PRS(q-4))=4.
@@ -57,7 +59,9 @@ domain; it is not the all-field radius proof.
 
 \subsection{Gcd strata}
 
-\begin{proposition}[Quadratic gcd]\label{prop:r5-gcd2}
+\begin{proposition}[Quadratic gcd]\label{prop:r5-gcd2}%
+\coverage{fragment}%
+\lean{PRSRedundancyFive.FamilyData.family_arithmetic}%
 If $\deg\gcd(W_f)=2$, then
 \[
        W_f=Q\langle T,U\rangle.
@@ -84,7 +88,8 @@ classification
 \cite[Prop.~1]{Kaipa2017} and \cite[Thms.~I.4--I.6]{ZWK2020}.
 \end{proof}
 
-\begin{proposition}[Linear gcd]\label{prop:r5-gcd1}
+\begin{proposition}[Linear gcd]\label{prop:r5-gcd1}%
+\coverage{absent}%
 Suppose $\deg\gcd(W_f)=1$.  Then $f$ is shallow for $q\geq8$.  At
 $q=7$ the same conclusion is part of Certificate R5.
 \end{proposition}
@@ -118,7 +123,8 @@ Choose a basis $c_1,c_2$ of a trivial-gcd pencil and put
 \]
 
 \begin{proposition}[Cubic incidence and off-diagonal fiber square]
-\label{prop:r5-incidence}
+\label{prop:r5-incidence}%
+\coverage{absent}%
 The curve $X_f$ is geometrically integral of bidegree $(1,3)$ and
 arithmetic genus zero.  Projection to the root coordinate is
 birational, while projection to the pencil coordinate gives a
@@ -148,7 +154,8 @@ correspondence identifies its components with orbits on distinct
 ordered sheets.
 \end{proof}
 
-\begin{lemma}[Cyclic stratum]\label{lem:cyclic}
+\begin{lemma}[Cyclic stratum]\label{lem:cyclic}%
+\coverage{absent}%
 Suppose $\phi_f$ is geometrically cyclic.
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item In characteristic different from three there are two ramification
@@ -224,7 +231,9 @@ zero: it is determined exactly by the fiber square, and the following
 identity is what drives both the threshold and the shape of the
 exceptions.
 
-\begin{proposition}[Exact split-witness count]\label{prop:r5-count}
+\begin{proposition}[Exact split-witness count]\label{prop:r5-count}%
+\coverage{fragment}%
+\lean{PRSRedundancyFive.ExactSplitWitnessCount.countRelation}%
 Let $\deg\gcd(W_f)=0$ and let $\phi_f$ be separable; the characteristic
 is arbitrary.
 Write
@@ -266,7 +275,8 @@ The proof exhibits the fiber square as a double cover, and that is what
 identifies it with the genus-one curve of the incidence literature.
 
 \begin{proposition}[The fiber square is the incidence curve]
-\label{prop:r5-fibre-is-elliptic}
+\label{prop:r5-fibre-is-elliptic}%
+\coverage{absent}%
 Keep the hypotheses of Proposition~\ref{prop:r5-count}, assume
 $\operatorname{char}\F_q\neq2$, and let
 $D_f(x)=\operatorname{disc}(h_x)/4$.  The restriction is needed here and
@@ -314,7 +324,9 @@ Proposition~\ref{prop:r5-count} is stated for $\#Y_f(\F_q)$ rather than
 for the count on a normalization.
 \end{proof}
 
-\begin{lemma}[Branch budget]\label{lem:r5-branch}
+\begin{lemma}[Branch budget]\label{lem:r5-branch}%
+\coverage{fragment}%
+\lean{PRSRedundancyFive.ExactSplitWitnessCount.branchBudget,ExactSplitWitnessCount.fibreSquarePoints_le_twelve,nonSplitWeight_le_twelve,nonSplitWeight_le_six_of_characteristicTwoBranchBudget,fibreSquarePoints_le_six_of_characteristicTwoBranchBudget}%
 Under the hypotheses of Proposition~\ref{prop:r5-count},
 \[
        d_2+2d_3\leq4,
@@ -338,7 +350,9 @@ characteristic two gives the sharper $d_2+d_3\leq2$.  Substituting into
 that region gives $12$, attained only at $(d_2,d_3)=(4,0)$.
 \end{proof}
 
-\begin{corollary}[Split members of an $S_3$ pencil]\label{cor:r5-equidistribution}
+\begin{corollary}[Split members of an $S_3$ pencil]\label{cor:r5-equidistribution}%
+\coverage{fragment}%
+\lean{PRSRedundancyFive.ExactSplitWitnessCount.splitMembers_bounds}%
 If $\phi_f$ has geometric monodromy $S_3$, then
 \[
  \frac{q+1-2\sqrt q-B}{6}\;\leq\;N_f\;\leq\;\frac{q+1+2\sqrt q}{6},
@@ -357,7 +371,9 @@ confines $\#Y_f(\F_q)$ to $q+1\pm2\sqrt q$
 \end{proof}
 
 \begin{corollary}[Binary $S_3$ shallowness above $q=8$]
-\label{cor:r5-binary-shallow}
+\label{cor:r5-binary-shallow}%
+\coverage{fragment}%
+\lean{PRSRedundancyFive.splitMembers_pos_of_characteristicTwoBranchBudget,fieldOrder_le_twelve_of_characteristicTwoSplitFree}%
 If $\operatorname{char}\F_q=2$ and $\phi_f$ has geometric monodromy
 $S_3$, then $f$ is shallow for every $q\geq16$.
 \end{corollary}
@@ -388,7 +404,9 @@ records only the sign of this statement.  We claim the density only for
 the completely split class; the other factorization types are not
 counted here.
 
-\begin{lemma}[$S_3$ stratum]\label{lem:s3}
+\begin{lemma}[$S_3$ stratum]\label{lem:s3}%
+\coverage{fragment}%
+\lean{PRSRedundancyFive.fieldOrder_le_nineteen_of_splitFree}%
 If $\phi_f$ has geometric monodromy $S_3$ and $q\geq20$, then the pencil
 contains a completely split squarefree cubic.  For odd $q$ the same
 conclusion holds for every $q\geq20$ without the monodromy hypothesis
@@ -414,7 +432,9 @@ $q+1-2\sqrt q\leq12$, that is $(\sqrt q-1)^2\leq12$ and
 $q\leq(1+2\sqrt3)^2<20$.
 \end{proof}
 
-\begin{corollary}[Forced fiber-square invariants]\label{cor:r5-forced}
+\begin{corollary}[Forced fiber-square invariants]\label{cor:r5-forced}%
+\coverage{fragment}%
+\lean{PRSRedundancyFive.ExactSplitWitnessCount.fibreSquareInvariants_of_splitFree}%
 Let $q$ be odd with $17\leq q\leq19$ and let $f$ be split-free with
 $Y_f$ geometrically integral.  Then
 \[
@@ -463,7 +483,9 @@ Lemma~\ref{lem:r5-branch} over every point of $\mathrm{PG}(4,q)$ for the
 prime powers $4\leq q\leq32$, in every characteristic, is recorded in the
 supplement.
 
-\begin{proposition}[Exhaustion and finite bridge]\label{prop:r5-bridge}
+\begin{proposition}[Exhaustion and finite bridge]\label{prop:r5-bridge}%
+\coverage{fragment}%
+\lean{PRSRedundancyFive.requiredBridgeFieldOrders,PRSRedundancyFiveCertified.requiredBridgeFieldOrders_subset_certifiedBridgeFieldOrders,certifiedBridgeFieldOrders_exceed_required_only_at_sixteen,PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic,certified_orbit_summaries_agree_with_sporadic_records,CertificateValidation}%
 The preceding cases exhaust every redundancy-five pencil for
 $q\geq20$, and in characteristic two for $q\geq16$ by
 Corollary~\ref{cor:r5-binary-shallow}.  The finite residue is therefore

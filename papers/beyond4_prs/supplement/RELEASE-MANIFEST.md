@@ -48,8 +48,8 @@ undo the completed Version 1 publication record.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `3369ce97dd49842e63a133b2fd43fc1298084a53d30712f253b5e188828bae8b` |
-| Local built PDF bytes | `475874` |
+| Local built PDF SHA-256 | `83b99e91be6bf7b9d03860bf40f461585348038c4c17d34ca0f81bd01df48cc0` |
+| Local built PDF bytes | `476241` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
@@ -65,13 +65,13 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `f122f39273a5110d81691019c795ee15ded4e8ecc546533b2f934cc536af2146` | 22053 |
-| `EVIDENCE-ROWS.md` | `8782b72682ea83681c3116ddeb91478865bcbb29f988a4d625d6583ba23ac442` | 14616 |
+| `EVIDENCE-MANIFEST.json` | `90b637ff2378755a38fb05bb0aa7b08d44ddfa75cb6dea3ce000d4037ac30f01` | 22052 |
+| `EVIDENCE-ROWS.md` | `dbd3ef1309bb9494c8ee2cec9cb324de24cdebe7ac777a955280ffe2499f0368` | 14615 |
 | `package_evidence_bundle.py` | `b5c59f2d79170abca1ce305d98acb35a71428d36ab257d9ecd06aa043981037f` | 15213 |
-| `verify.py` | `9730b4b5717d6d6b6a3d67045d7e76cc267802c54945eed50e673ab75a2b7544` | 16849 |
+| `verify.py` | `b51bb68c53f3c7a13c5d53f582dc9b77cf6736d3eacb3c9d6c67f4a070b6019a` | 16218 |
 | `build_r6_paper_table.py` | `b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98` | 3878 |
 | `package_software.py` | `f01c53a315c95ecafc96b4fb2402616cbb67322fd0ecd3adb512b16b60f7b8ef` | 2057 |
-| `SOFTWARE-MANIFEST.json` | `2b5ddec0957041fb1221cbe8f6ce6c18dfa372861128c979884a28601b021a6d` | 4581 |
+| `SOFTWARE-MANIFEST.json` | `464aa6ef6a1e6b67a1b5228e6b468813529cbad49032c3b48fa8e23cf078f494` | 4581 |
 
 Verify the complete local bundle from the paper directory:
 
@@ -83,8 +83,9 @@ Add `--replay` to run every paper-local Python replay.  The two paper-local
 Singular checks are listed separately in `REPRODUCING.md`.
 
 Add `--release` to require the immutable repository, revision, archive, DOI,
-reviewed-PDF, and two-reader signoff fields.  It is expected to fail while any
-field remains an external publication step.
+and released-PDF fields.  It is expected to fail while any field remains an
+external publication step.  Private reader correspondence is deliberately
+outside both this manifest and the public release gate.
 
 Predecessor manifests are historical evidence and are not rewritten.  This
 release-level manifest supersedes their packaging defects by hashing the exact

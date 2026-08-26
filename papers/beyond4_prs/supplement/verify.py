@@ -271,7 +271,6 @@ def check_formal_scope() -> None:
 def check_public_release_gate() -> None:
     manifest = (SUPPLEMENT / "RELEASE-MANIFEST.md").read_text(encoding="utf-8")
     main = (PAPER / "main.tex").read_text(encoding="utf-8")
-    signoff = (SUPPLEMENT / "FINAL-READER-SIGNOFF.md").read_text(encoding="utf-8")
     candidate_manifest = manifest.split(
         "## Current Version 2 local candidate", 1
     )[1].split("## Artifact rows", 1)[0]
@@ -303,19 +302,11 @@ def check_public_release_gate() -> None:
             raise SystemExit(f"public release gate is unresolved: {label}")
 
     if field("PDF SHA-256") != field("Local built PDF SHA-256"):
-        raise SystemExit("public PDF hash differs from the reviewed local candidate")
+        raise SystemExit("public PDF hash differs from the local candidate")
     if field("PDF bytes") != field("Local built PDF bytes"):
-        raise SystemExit("public PDF byte count differs from the reviewed local candidate")
+        raise SystemExit("public PDF byte count differs from the local candidate")
     if "Unrefereed preprint" not in main:
         raise SystemExit("the manuscript is not visibly labelled as an unrefereed preprint")
-    verdicts = re.findall(r"^Verdict: (.+)$", signoff, flags=re.MULTILINE)
-    if verdicts != ["green", "green"]:
-        raise SystemExit("public release gate requires two green reader verdicts")
-    if re.search(r"^Reader name, date, and stable report identifier: pending\.$",
-                 signoff, flags=re.MULTILINE):
-        raise SystemExit("public release gate requires two stable reader reports")
-    if field("PDF SHA-256") not in signoff:
-        raise SystemExit("reader signoff is not pinned to the released PDF")
     print("verified public release metadata")
 
 

@@ -10,7 +10,7 @@ paper directory:
 python3 supplement/verify.py
 ```
 
-The quick check also verifies that the local PDF and the five
+The quick check also verifies that the local PDF and the seven
 supplement-artifact rows printed in `RELEASE-MANIFEST.md` match the
 current files.  It deliberately does not fill or validate the external
 repository, archive, DOI, or immutable-release fields.
@@ -20,20 +20,6 @@ Run every paper-local Python replay with:
 ```text
 python3 supplement/verify.py --replay
 ```
-
-Create the paper-only and exact 17-source-file Lean fresh-history candidates
-from a clean development revision with:
-
-```text
-python3 supplement/prepare_release_export.py /disk-backed/output/path
-```
-
-The command refuses an existing destination or dirty release-owned source,
-archives only the committed paper tree and exact 17-source-file Lean closure,
-and
-prints the source, paper, and Lean commit identifiers.  The output contains a
-paper repository at its root and a separately initialized Lean repository
-under `lean/`; the paper repository excludes that adjacent Lean checkout.
 
 ## Pinned environment
 
@@ -81,17 +67,16 @@ behavior, and certificate boundary.
 `supplement/SOFTWARE-MANIFEST.json` hashes every shipped file in the software
 subtree, excluding only build and Git directories.
 
-In the export layout, `lean/` is a separately initialized repository
-containing the exact paper-facing formal closure and its pinned build flake.
-Its eventual immutable public commit in
+This paper repository contains the frozen statement map and toolchain locks,
+but it does not bundle a `lean/` checkout. The paper-facing formal closure is
+maintained in a separate Lean repository. Its eventual immutable public commit in
 `https://github.com/tavisrudd/finitegeom` is release metadata in
 `RELEASE-MANIFEST.md`.  The version-independent archival locator for that
 repository is the Zenodo concept DOI
 [`10.5281/zenodo.21650878`](https://doi.org/10.5281/zenodo.21650878).
-The exported repository is not a path into the development monorepo.  Every
-certificate consumed by the adopted theorem set
+Every certificate consumed by the adopted theorem set
 is already paper-local; no separate certificate-package input belongs in the
-release flake.  Until the public Lean repository and revision are published,
+release workspace. Until the public Lean repository and revision are published,
 the local bundle checks the paper-local evidence and Lean interface described
 in the manuscript but does not claim an externally fetchable formal replay.
 

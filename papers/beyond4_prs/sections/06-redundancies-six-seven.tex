@@ -22,7 +22,9 @@ the system $W_f$ is a net of quartics off the quintic normal rational
 curve.  It is split-free exactly when it has no completely split
 squarefree quartic.
 
-\begin{proposition}[Persistent net and orbit law]\label{prop:r6-persistent}
+\begin{proposition}[Persistent net and orbit law]\label{prop:r6-persistent}%
+\coverage{fragment}%
+\lean{PRSRedundancySixSeven.PersistentModularFamilyData.classified_card_doubled,PRSPolarInduction.fifthPower_sigmaInversionOrbitCount}%
 If $\gcd(W_f)=Q$ has degree two, then
 \[
        W_f=Q\Sym^2E^\vee.
@@ -51,7 +53,8 @@ $T/T^5$ by the characteristic.  This proves the stated orbit law and
 the characteristic-five tangent splitting.
 \end{proof}
 
-\begin{lemma}[Exact linear gcd is shallow]\label{lem:r6-gcd1}
+\begin{lemma}[Exact linear gcd is shallow]\label{lem:r6-gcd1}%
+\coverage{absent}%
 Let \(q\geq7\).  If \(\gcd(W_f)\) has degree one, then \(W_f\)
 contains a split squarefree quartic.
 \end{lemma}
@@ -94,7 +97,9 @@ gives a split squarefree member of \(W_f\).
 \end{proof}
 
 \begin{proposition}[First-polar line and secant degree]
-\label{prop:r6-secant}
+\label{prop:r6-secant}%
+\coverage{fragment}%
+\lean{PRSPolarInduction.sequenceContraction_agrees_with_finite}%
 For $r\in\F_q$ put
 \[
  b(r)=(a_1-ra_0,\ldots,a_5-ra_4),\qquad
@@ -135,7 +140,8 @@ therefore has at most three zeros.
 \end{proof}
 
 \begin{proposition}[Complete lower trivial-gcd carrier]
-\label{prop:r6-lower-carrier}
+\label{prop:r6-lower-carrier}%
+\coverage{absent}%
 Let \(c\in\PP(\Gamma^4E)\) and suppose that the cubic pencil \(W_c\)
 has trivial gcd.  One of the following applies over an algebraic
 closure, and the last three alternatives exhaust the cases in which
@@ -192,7 +198,8 @@ Proposition~\ref{prop:r5-bridge}.  This proves (iv) and exhausts the
 inseparable case.  The three alternatives are therefore exhaustive.
 \end{proof}
 
-\begin{proposition}[Cyclic and collision degrees]\label{prop:r6-degrees}
+\begin{proposition}[Cyclic and collision degrees]\label{prop:r6-degrees}%
+\coverage{absent}%
 For a trivial-gcd net:
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item in characteristic different from two and three, the lower tame cyclic
@@ -238,7 +245,9 @@ giving $(g,\delta,\kappa)=(1,19,1)$ and
 Its first prime-power solution is $29$.
 \end{proof}
 
-\begin{proposition}[Modular contained components]\label{prop:r6-modular}
+\begin{proposition}[Modular contained components]\label{prop:r6-modular}%
+\coverage{fragment}%
+\lean{PRSPolarInduction.mem_modularContractionKernel_iff}%
 In characteristic three the lower wild carrier is the degree-four cone
 \[
        \operatorname{Join}(e_2,C_4),
@@ -282,7 +291,8 @@ namely when $f\in\PP\langle e_2,e_3\rangle$.  This proves both
 existence and uniqueness of the contained binary component.
 \end{proof}
 
-\begin{proposition}[Binary nucleus arithmetic]\label{prop:r6-nucleus}
+\begin{proposition}[Binary nucleus arithmetic]\label{prop:r6-nucleus}%
+\coverage{absent}%
 The scheme $\cN_3(\F_q)$ is one projective-semilinear orbit of $q+1$
 points.  It is split-free over $q=2^m$ exactly when $m$ is odd.
 \end{proposition}
@@ -304,7 +314,8 @@ $\cN_3(\F_q)$.
 \end{proof}
 
 \begin{proposition}[Exhaustive R6 contained-component classification]
-\label{prop:r6-contained}
+\label{prop:r6-contained}%
+\coverage{absent}%
 For a redundancy-six syndrome, the alternatives in
 Definition~\ref{def:contained} are exhausted as follows:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -343,7 +354,9 @@ indeterminacy, containment in each component of the lower bad scheme,
 and identical collision.  Hence the list is exhaustive.
 \end{proof}
 
-\begin{proposition}[R6 one-step exhaustion]\label{prop:r6-one-step}
+\begin{proposition}[R6 one-step exhaustion]\label{prop:r6-one-step}%
+\coverage{conditional_deduction}%
+\lean{PRSRedundancySixSeven.redundancySixHighFieldSynthesis}%
 Assume \(q\geq29\).
 Then every split-free redundancy-six syndrome lies in the persistent
 quadratic-gcd locus or, when \(q=2^m\) with odd \(m\), in
@@ -419,7 +432,9 @@ nonextendability and Dür's equivalence give
 \(\rho(\PRS(q-5))=5\) for \(q\geq8\), while Certificate R6 checks it
 directly at \(q=7\) and independently confirms \(q=8\).
 
-\begin{theorem}[Redundancy six]\label{thm:r6}
+\begin{theorem}[Redundancy six]\label{thm:r6}%
+\coverage{conditional_deduction}%
+\lean{PRSRedundancySixSeven.redundancySixAllFieldSynthesis,PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion,PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.seroussiRothDimensionRange_six_eight,radiusRange_six_eight_of_externalSeroussiRothDuer}%
 For every prime power $q\geq7$, the deep syndromes of $\PRS(q-5)$ are
 the persistent locus of size $q(q+1)^2/2$, together with:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -514,7 +529,9 @@ Proposition~\ref{prop:r6-secant}; the contained case is
 Corollary~\ref{cor:r7-contained}.
 
 \begin{proposition}[Complete two-marker lower package]
-\label{prop:r7-pointed}
+\label{prop:r7-pointed}%
+\coverage{conditional_deduction}%
+\lean{PRSPolarInduction.LowerCoverStratum,CoherentPolarInput.splitFree_implies_persistent_or_modular}%
 Let \(W_h\) be a trivial-gcd quartic net and let \(x\) be a prescribed
 forbidden root.  Assume in characteristic two that \(h\notin\cN_3\).
 For every prime power \(q\geq37\), the net contains a split squarefree
@@ -582,7 +599,8 @@ lifts through \(s\) to a split squarefree quartic in \(W_h\) avoiding
 \(x\).
 \end{proof}
 
-\begin{proposition}[Exact-gcd-one avoidance]\label{prop:r7-gcd1}
+\begin{proposition}[Exact-gcd-one avoidance]\label{prop:r7-gcd1}%
+\coverage{absent}%
 Suppose the lower net is $\ell_xU$, where
 $U=\ker\lambda\subset\Sym^3E^\vee$ has dimension three and
 \(\gcd(U)=1\), so that \(\ell_x\) is the exact gcd of the lower net.
@@ -614,7 +632,8 @@ $(a+b)(q+1)$ rational points.  Thus the bad pairs number at most
 $10(q+1)$, whereas $(q-1)(q-2)>10(q+1)$ for $q\geq16$.
 \end{proof}
 
-\begin{proposition}[Collision divisor]\label{prop:r7-collision}
+\begin{proposition}[Collision divisor]\label{prop:r7-collision}%
+\coverage{absent}%
 After fixed factors are removed, the collision divisor of the
 moving $g^3_5$ has degree at most eight.
 \end{proposition}
@@ -633,7 +652,8 @@ It is split-free for odd \(m\), and hence deep whenever the separate
 radius-six gate holds.  For even \(m\), the homogenization of
 \(t^4+t\) has the five roots \(\PP^1(\F_4)\).
 
-\begin{proposition}[Central binary lift]\label{prop:r7-central}
+\begin{proposition}[Central binary lift]\label{prop:r7-central}%
+\coverage{absent}%
 The complete inverse image of the R6 nucleus line under consecutive
 sextic contraction is $[e_3]$.  It is split-free over $\F_{2^m}$
 exactly when $m$ is odd.
@@ -651,7 +671,8 @@ four affine $\F_4$ roots and the simple root at infinity.
 \end{proof}
 
 \begin{corollary}[Exhaustive R7 contained-component classification]
-\label{cor:r7-contained}
+\label{cor:r7-contained}%
+\coverage{absent}%
 The assertion $\mathrm{CC}(6,1)$ is exhaustive in every
 characteristic.  A noninjective contraction is the shallow rank-one
 boundary.  Containment in the lower persistent locus gives upper
@@ -678,7 +699,9 @@ so the list is exhaustive.
 \end{proof}
 
 \begin{theorem}[Redundancy-seven classification]
-\label{thm:r7}
+\label{thm:r7}%
+\coverage{conditional_deduction}%
+\lean{PRSRedundancySixSeven.redundancySevenAllFieldSynthesis,PRSRedundancySixSevenCertificate.redundancySeven_count_exhaustion}%
 Certificate R7 unconditionally classifies
 \[
 q\in\{7,8,9,11,13,16,17,19,23,25,27,29,31,32\}.

@@ -5,6 +5,9 @@ use thiserror::Error;
 pub const REQUEST_SCHEMA: &str = "projective-reed-solomon-request-v1";
 pub const CERTIFICATE_SCHEMA: &str = "projective-reed-solomon-locator-certificate-v1";
 pub const DEEP_CERTIFICATE_SCHEMA: &str = "projective-reed-solomon-deep-certificate-v1";
+pub const CANONICALIZATION_SCHEMA: &str = "projective-reed-solomon-canonicalization-v1";
+pub const CLASSIFICATION_SCHEMA: &str = "projective-reed-solomon-classification-v1";
+pub const VERIFICATION_SCHEMA: &str = "projective-reed-solomon-verification-v1";
 
 #[derive(Debug, Error, PartialEq, Eq)]
 pub enum Error {

@@ -89,12 +89,16 @@ In the public Lean export, from its repository root, the aggregate gate is:
       RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit \
       RelativeConicArcs.Gates.PRSBeyondRedundancyFour)
 
-Inside the development monorepo, repository policy instead requires the guarded
-queue:
+## Companion software boundary
 
-    python3 lean/scripts/lean-build-queue.py build \
-      RelativeConicArcs.Gates.PRSBeyondRedundancyFourAxiomAudit \
-      RelativeConicArcs.Gates.PRSBeyondRedundancyFour --cores 20-23
+The Rust toolkit is not formalized in Lean. Its exact-arithmetic algorithms,
+Clap interface, registries, examples, and certificate replayers are covered by
+the locked Rust tests and `supplement/SOFTWARE-MANIFEST.json`. Locator
+certificates reconstruct a displayed error pattern and its weight; minimality
+also trusts the increasing-degree search execution. Positive deep certificates
+replay the transporter, family evidence, theorem-domain row, and radius source.
+Lean proves neither Rust execution semantics nor the mathematical truth of the
+versioned registry data.
 
 **Withdrawn.**  The paper draws no quantum consequence from the balanced
 `q=8` row.  A split-free direction avoids spans of `r-2` parity-check columns,

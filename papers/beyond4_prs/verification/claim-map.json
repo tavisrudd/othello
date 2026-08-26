@@ -1,0 +1,583 @@
+{
+  "claims": {
+    "cor:r10": {
+      "coverage": "conditional_deduction",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Derived manuscript corollary. The first-carrier arithmetic is supplied by 'thm:m9-shallow', not by Lean."
+    },
+    "cor:r5-binary-shallow": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSRedundancyFive.splitMembers_pos_of_characteristicTwoBranchBudget",
+        "fieldOrder_le_twelve_of_characteristicTwoSplitFree"
+      ],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "Kernel checked from the characteristic-two branch budget and the Aubry--Perret range in squared integer form; it removes `q=16` from `requiredBridgeFieldOrders`, and the monodromy geometry is a manuscript proof."
+    },
+    "cor:r5-equidistribution": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSRedundancyFive.ExactSplitWitnessCount.splitMembers_bounds"
+      ],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "Kernel checked over the reals from the exact count, a bound `B` on the non-split weight, and the two-sided point bound; `B` is instantiated by the two branch-budget theorems and the point bound is imported by citation."
+    },
+    "cor:r5-forced": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSRedundancyFive.ExactSplitWitnessCount.fibreSquareInvariants_of_splitFree"
+      ],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "Kernel checked from the branch budget and the point bound in squared integer form; the Lean statement needs only `17 <= q <= 19`, without the manuscript's oddness hypothesis."
+    },
+    "cor:r7-contained": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Manuscript rank--nullity and component proof; the R7 synthesis structure takes the result as an explicit input."
+    },
+    "cor:splitfree": {
+      "coverage": "conditional_deduction",
+      "lean": [
+        "PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member",
+        "PRSFoundation.CoveringRadiusInput.deep_iff_splitFree"
+      ],
+      "source": "sections/03-dictionary.tex",
+      "status": "Conditional terminal. The concrete dictionary and covering-radius premise are inputs."
+    },
+    "lem:cyclic": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "Manuscript proof of the cyclic stratum."
+    },
+    "lem:exact-linear-gcd-transport": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSUniformCoveringRadius.exactLinearFlagParameterBudget_lt_uniformParameterBudget",
+        "UniformIteratedPackageInput.packages_fit_uniform_threshold"
+      ],
+      "source": "sections/05-polar-induction.tex",
+      "status": "The factor-preserving flag\u2019s budget and simultaneous threshold use are kernel checked. Preservation of the concrete gcd under contraction is the displayed manuscript proof and an explicit formal input."
+    },
+    "lem:hankel": {
+      "coverage": "conditional_deduction",
+      "lean": [
+        "PRSFoundation.HankelKernelDictionary.not_splitFree_of_kernel_member"
+      ],
+      "source": "sections/03-dictionary.tex",
+      "status": "Conditional terminal. The concrete Hankel dictionary and its coding semantics are inputs."
+    },
+    "lem:identically-colliding": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/05-polar-induction.tex",
+      "status": "Manuscript reduction to the two inseparable fixed-level calculations."
+    },
+    "lem:linear-modular-pullback": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSPolarInduction.mem_modularContractionKernel_iff"
+      ],
+      "source": "sections/05-polar-induction.tex",
+      "status": "The abstract modular-kernel criterion is checked; the degree-specific linear pullback is a manuscript proof."
+    },
+    "lem:m9-nonsquare": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript divisor computation at rank four and derivative test with explicit elimination at rank three."
+    },
+    "lem:m9-rank": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript elimination on the six column relations of the coefficient matrix."
+    },
+    "lem:m9-selector": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript coefficient comparison, pseudo-remainder, and per-root degree bound with the grid argument."
+    },
+    "lem:marker-collision": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/05-polar-induction.tex",
+      "status": "Manuscript marker-collision proof."
+    },
+    "lem:old-marker-fixed-factor": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/05-polar-induction.tex",
+      "status": "Manuscript evaluation-minor and non-identical-vanishing proof; the degree bound enters the formal package as an explicit field."
+    },
+    "lem:r10-hessian": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript ordered-Hessian construction: degeneracy classification, selector nonvanishing and degree bound, integrality, deletion table, and the marker-avoiding lift."
+    },
+    "lem:r5-branch": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSRedundancyFive.ExactSplitWitnessCount.branchBudget",
+        "ExactSplitWitnessCount.fibreSquarePoints_le_twelve",
+        "nonSplitWeight_le_twelve",
+        "nonSplitWeight_le_six_of_characteristicTwoBranchBudget",
+        "fibreSquarePoints_le_six_of_characteristicTwoBranchBudget"
+      ],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "The tame Riemann--Hurwitz budget is a structure field, and the sharper characteristic-two budget is a hypothesis of the last two theorems; the twelve-point and six-point bounds on a split-free fibre square are kernel checked."
+    },
+    "lem:r6-gcd1": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Manuscript proof of exact-linear-gcd shallowness."
+    },
+    "lem:r8-bottom-strata": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript exhaustive bottom-stratum proof."
+    },
+    "lem:r8-monodromy": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript geometric-\\(S_3\\) integrality and deletion proof."
+    },
+    "lem:r8-outer-selection": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript parameter-divisor proof."
+    },
+    "lem:r8-two-marker": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript marker-avoidance proof."
+    },
+    "lem:s3": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSRedundancyFive.fieldOrder_le_nineteen_of_splitFree"
+      ],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "The step from the twelve-point bound and the Aubry--Perret range to the field bound is kernel checked; the point bound itself is imported by citation and the monodromy geometry is a manuscript proof."
+    },
+    "lem:uniform-collision": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/05-polar-induction.tex",
+      "status": "Manuscript separability and collision-degree proof."
+    },
+    "prop:contained-rank-two": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/05-polar-induction.tex",
+      "status": "Characteristic-free manuscript rank--nullity proof; degree-specific formal terminals consume its consequence as an input."
+    },
+    "prop:e7-additive": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript affine-frame monodromy proof."
+    },
+    "prop:e7-as": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript Artin--Schreier quotient proof."
+    },
+    "prop:e7-orbit": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "The manuscript prints the action and kernel calculation."
+    },
+    "prop:final-pair": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript expansion and Cramer's-rule proof."
+    },
+    "prop:linearized": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript Kummer/additive monodromy proof; Wang--Wu--Hu Proposition 11 is cited only for the projective-subline endpoint criterion."
+    },
+    "prop:lucas-kernel": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript Lucas-overlap proof."
+    },
+    "prop:m9-invariant-block": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript proof through the rank-one constructions and all-field rank-two Artin--Schreier argument; exact certificates close the invariant block at \\(q=16,32,64\\)."
+    },
+    "prop:maximal-lucas-union": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-recursive-carriers.tex",
+      "status": "Manuscript Lucas/Pascal proof. The degree-one pullback enters the formal recursive interface as an explicit geometric input."
+    },
+    "prop:r10-char7-lift": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Contraction algebra is kernel checked; the R9 finite-root witness and marker-avoidance argument are printed mathematics."
+    },
+    "prop:r10-escape": {
+      "coverage": "conditional_deduction",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "The fixed-depth package discharge and concrete R10 budgets are manuscript mathematics with Certificate R10 arithmetic replay."
+    },
+    "prop:r10-pointed-budgets": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript degree calculation for all five retained-marker stages; the abstract finite-depth synthesis remains conditional in Lean."
+    },
+    "prop:r5-bridge": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSRedundancyFive.requiredBridgeFieldOrders",
+        "PRSRedundancyFiveCertified.requiredBridgeFieldOrders_subset_certifiedBridgeFieldOrders",
+        "certifiedBridgeFieldOrders_exceed_required_only_at_sixteen",
+        "PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic",
+        "certified_orbit_summaries_agree_with_sporadic_records",
+        "CertificateValidation"
+      ],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "Transcription and arithmetic are kernel checked, as is the separation of the seven required bridge fields from the certificate's wider sub-threshold domain, which exceeds them only at `q=16`. Identification and exhaustive-search semantics remain explicit validation fields."
+    },
+    "prop:r5-count": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSRedundancyFive.ExactSplitWitnessCount.countRelation"
+      ],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "The exact split-witness relation is an explicit structure field; Lean checks its arithmetic consequences, and the member-by-member root count is a manuscript proof."
+    },
+    "prop:r5-fibre-is-elliptic": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "Manuscript proof identifying the fibre square with the residual-discriminant double cover and hence with the cited incidence curve."
+    },
+    "prop:r5-gcd1": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "Manuscript proof, with the finite `q=7` clause supplied by Certificate R5."
+    },
+    "prop:r5-gcd2": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSRedundancyFive.FamilyData.family_arithmetic"
+      ],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "Family/count arithmetic is kernel checked; the geometric gcd classification is a manuscript proof."
+    },
+    "prop:r5-incidence": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "Manuscript proof of the cubic incidence and residual-curve geometry."
+    },
+    "prop:r5-radius": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSFoundation.CoveringRadiusInput.deep_iff_splitFree"
+      ],
+      "source": "sections/04-redundancy-five.tex",
+      "status": "The logical use is checked; the Seroussi--Roth theorem is imported by citation."
+    },
+    "prop:r6-contained": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Manuscript exhaustion of contained alternatives."
+    },
+    "prop:r6-degrees": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Manuscript component and divisor-degree proof; its bounds enter the polar terminal as hypotheses."
+    },
+    "prop:r6-lower-carrier": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Manuscript monodromy trichotomy and characteristic-two/three specialization proving exhaustion of the lower trivial-gcd failure loci."
+    },
+    "prop:r6-modular": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSPolarInduction.mem_modularContractionKernel_iff"
+      ],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "The abstract modular kernel is checked; the concrete component classification is a manuscript proof."
+    },
+    "prop:r6-nucleus": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Manuscript binary-nucleus arithmetic and splitting proof, supported by Certificate R6."
+    },
+    "prop:r6-one-step": {
+      "coverage": "conditional_deduction",
+      "lean": [
+        "PRSRedundancySixSeven.redundancySixHighFieldSynthesis"
+      ],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Conditional specialization of the one-step budgets; the geometric inputs remain hypotheses."
+    },
+    "prop:r6-persistent": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSRedundancySixSeven.PersistentModularFamilyData.classified_card_doubled",
+        "PRSPolarInduction.fifthPower_sigmaInversionOrbitCount"
+      ],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Cardinality and quotient arithmetic are checked; genuine actions and geometric family identification are inputs."
+    },
+    "prop:r6-secant": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSPolarInduction.sequenceContraction_agrees_with_finite"
+      ],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Contraction algebra is checked; the secant-degree assertion is a manuscript proof."
+    },
+    "prop:r7-central": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Manuscript central-lift and inverse-image proof, supported by Certificate R7."
+    },
+    "prop:r7-collision": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Manuscript degree computation, supplied as a collision-budget input to Lean."
+    },
+    "prop:r7-gcd1": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Manuscript exact-gcd-one avoidance proof; the exactness hypothesis is explicit."
+    },
+    "prop:r7-pointed": {
+      "coverage": "conditional_deduction",
+      "lean": [
+        "PRSPolarInduction.LowerCoverStratum",
+        "CoherentPolarInput.splitFree_implies_persistent_or_modular"
+      ],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "The conditional interface and its witness use are checked. The two-marker cover, deletion degree `25`, and point-count derivation are manuscript mathematics, not Lean conclusions."
+    },
+    "prop:r8-bottom": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript point-count and ramification-degree proof; Certificate R8 checks the numerical data."
+    },
+    "prop:r8-contained": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript contained-component and collision proof."
+    },
+    "prop:r8-lp61": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript synthesis of the pointed lower package; its arithmetic is certificate checked."
+    },
+    "prop:r8-modular": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "The abstract kernel criterion is checked; the Lucas supports and split witnesses are manuscript mathematics with Certificate R8 replay."
+    },
+    "prop:r9-budgets": {
+      "coverage": "conditional_deduction",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Budget arithmetic has a conditional formal route; geometric packages are printed manuscript inputs."
+    },
+    "prop:r9-char7": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Exact finite carrier statement. No Lean claim of enumeration semantics is made."
+    },
+    "prop:r9-components": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript universal-slice and B\u00e9zout-cover proof; appendix data and replay check the six sections."
+    },
+    "prop:r9-contained": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript contained-component proof."
+    },
+    "prop:r9-deletion": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript divisor-degree proof."
+    },
+    "prop:r9-orbits": {
+      "coverage": "conditional_deduction",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Cyclic quotient arithmetic is checked conditionally; genuine actions remain manuscript input."
+    },
+    "prop:r9-other-modular": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Abstract kernel criterion only; concrete supports and witnesses are manuscript proof."
+    },
+    "prop:r9-residual": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Residual-quadratic Hankel and discriminant identities are kernel checked."
+    },
+    "prop:r9-slice": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Manuscript genus calculation."
+    },
+    "prop:recursive-component-selection": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/07-recursive-carriers.tex",
+      "status": "Polynomial density, closure transport, finite-component selection, and recursive logical composition are kernel checked. The marker-to-rowspace identification and concrete component classification are manuscript inputs."
+    },
+    "prop:reduced-terminal-carrier": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-recursive-carriers.tex",
+      "status": "Manuscript prime-decomposition proof plus the stable-component elimination certificates. Lean does not prove the concrete primary ideals or exceptional-fibre equations."
+    },
+    "prop:upper-radius": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/07-recursive-carriers.tex",
+      "status": "The manuscript applies the cited Seroussi--Roth and D\u00fcr theorems; Lean keeps those coding inputs explicit."
+    },
+    "thm:e7": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "Manuscript constructive proof and exact counting formula."
+    },
+    "thm:induction": {
+      "coverage": "fragment",
+      "lean": [
+        "PRSPolarInduction.iteratedProjectiveSequenceContraction_map",
+        "sequenceContraction_agrees_with_finite",
+        "CoherentPolarInput.splitFree_implies_persistent_or_modular"
+      ],
+      "source": "sections/05-polar-induction.tex",
+      "status": "Iterated contraction and lifting algebra are kernel checked. The finite-depth marker choices and terminal point-count argument are the printed manuscript proof; concrete stagewise carrier and lower-package hypotheses remain manuscript or certificate inputs."
+    },
+    "thm:m9-shallow": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/09-lucas-carriers.tex",
+      "status": "The finite certificates check the full carrier at \\(q=16,32\\) and only the invariant block at \\(q=64\\); the genus-one argument proves the complement for \\(q\\ge64\\). Lean makes no carrier-exhaustion claim."
+    },
+    "thm:main": {
+      "coverage": "fragment",
+      "lean": [],
+      "source": "sections/01-introduction.tex",
+      "status": "Manuscript aggregation. The recursive logical descent and threshold arithmetic are checked; the concrete reduced carrier and fixed-level arithmetic retain the routes listed below."
+    },
+    "thm:polar-construction": {
+      "coverage": "conditional_deduction",
+      "lean": [
+        "PRSPolarInduction.iteratedProjectiveSequenceContraction_map",
+        "sequenceContraction_agrees_with_finite",
+        "PointedKernelLift.lift_splitSquarefreeKernelMember"
+      ],
+      "source": "sections/05-polar-induction.tex",
+      "status": "Kernel algebra and a conditional squarefree-lift terminal. The polynomial/kernel identification is an input."
+    },
+    "thm:r5": {
+      "coverage": "conditional_deduction",
+      "lean": [
+        "PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate",
+        "PRSRedundancyFive.FamilyData",
+        "PRSRedundancyFiveCertificate"
+      ],
+      "source": "sections/01-introduction.tex",
+      "status": "Conditional synthesis plus kernel arithmetic. Covering radius, cubic-cover geometry, group actions, and certificate semantics remain inputs."
+    },
+    "thm:r6": {
+      "coverage": "conditional_deduction",
+      "lean": [
+        "PRSRedundancySixSeven.redundancySixAllFieldSynthesis",
+        "PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion",
+        "PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.seroussiRothDimensionRange_six_eight",
+        "radiusRange_six_eight_of_externalSeroussiRothDuer"
+      ],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Conditional synthesis plus kernel-checked finite-row arithmetic and the exact \\(q=8,r=6\\) high-rate endpoint. The concrete coding identifications and cited radius implications remain explicit inputs."
+    },
+    "thm:r7": {
+      "coverage": "conditional_deduction",
+      "lean": [
+        "PRSRedundancySixSeven.redundancySevenAllFieldSynthesis",
+        "PRSRedundancySixSevenCertificate.redundancySeven_count_exhaustion"
+      ],
+      "source": "sections/06-redundancies-six-seven.tex",
+      "status": "Conditional synthesis and finite-row arithmetic. The paper-local `q=7,8,9` rows are not promoted by Lean; at `q=8` the separately imported radius and executable exact-distance extraction (diagonal tangent plus central nucleus) lie outside this formal aggregate."
+    },
+    "thm:r8": {
+      "coverage": "conditional_deduction",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Conditional formal synthesis exists; the present paper relies on the printed proof and Certificate R8, not on an expanded aggregate claim."
+    },
+    "thm:r9": {
+      "coverage": "conditional_deduction",
+      "lean": [],
+      "source": "sections/07-fixed-level-eight-nine.tex",
+      "status": "Conditional formal synthesis exists; concrete geometry, radius, and certificate semantics remain external."
+    },
+    "thm:recursive-carrier": {
+      "coverage": "conditional_deduction",
+      "lean": [],
+      "source": "sections/07-recursive-carriers.tex",
+      "status": "Conditional synthesis and threshold arithmetic are checked. The reduced carrier theorem, persistent-family geometry, and cited coding implications remain manuscript or imported inputs."
+    },
+    "thm:spine": {
+      "coverage": "conditional_deduction",
+      "lean": [
+        "PRSRedundancySixSeven.redundancySixAllFieldSynthesis",
+        "redundancySevenAllFieldSynthesis",
+        "PRSPolarInduction.fifthPower_sigmaInversionOrbitCount"
+      ],
+      "source": "sections/01-introduction.tex",
+      "status": "Derived manuscript aggregation of the R6/R7 clauses and persistent orbit law; each clause retains its own boundary."
+    }
+  },
+  "schema_version": 1
+}

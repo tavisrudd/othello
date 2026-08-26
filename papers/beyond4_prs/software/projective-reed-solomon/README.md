@@ -4,9 +4,9 @@ Exact, proof-carrying tools for full-length projective Reed--Solomon syndromes.
 
 The toolkit turns a syndrome over an explicitly represented finite field into
 one of three kinds of output: a semilinear canonical form, an exact nearest-error
-certificate, or a theorem-gated deep-hole verdict. These outputs deliberately
-have different mathematical scopes. Canonicalization and decoding work beyond
-the paper's classification range; a positive deep-hole verdict requires a
+result with a locator witness, or a theorem-gated deep-hole verdict. These
+outputs deliberately have different mathematical scopes. Canonicalization and
+decoding work beyond the paper's classification range; a positive deep-hole verdict requires a
 matching theorem-domain entry and carries a certificate that can be replayed
 independently.
 
@@ -46,11 +46,13 @@ target/release/projective-reed-solomon classify examples/tangent-r5-f7.json
 ```
 
 The result is `DEEP` and includes a
-`projective-reed-solomon-deep-certificate-v1` object. Save that nested object
-and replay it with:
+`projective-reed-solomon-deep-certificate-v1` object. Replay that nested
+certificate directly:
 
 ```text
-target/release/projective-reed-solomon verify certificate.json
+target/release/projective-reed-solomon classify examples/tangent-r5-f7.json \
+  | jq '.deep_certificate' \
+  | target/release/projective-reed-solomon verify
 ```
 
 For a shallow example, compute and replay the nearest-error certificate:
@@ -101,12 +103,16 @@ search begins.
 A locator certificate records a completely split projective locator, its
 distinct support, and nonzero magnitudes. The verifier reconstructs the syndrome
 from that error pattern. It is an independently checkable witness of the stated
-distance upper bound; increasing-degree search supplies minimality.
+distance upper bound. Increasing-degree trusted execution supplies minimality;
+the locator certificate alone does not certify exhaustion of all lower degrees.
 
 A positive deep certificate records the normalized syndrome, semilinear
 transporter, recognized structural family or frozen orbit, theorem-domain row,
-and covering-radius source. The verifier recomputes each link. No positive
-certificate is emitted for `UNRESOLVED` or `UNSUPPORTED`.
+and covering-radius source. The verifier recomputes the field arithmetic,
+transporter, family membership, and applicability of the embedded registry
+row. The covering-radius theorem named by that row remains a cited trusted
+input; certificate replay does not prove it. No positive certificate is
+emitted for `UNRESOLVED` or `UNSUPPORTED`.
 
 This separation is the central design rule:
 
@@ -168,8 +174,8 @@ cargo test --locked
 ```
 
 The unit, compiled-CLI, property, and exhaustive layers are described in
-[docs/testing.md](docs/testing.md). Reproducible timing and operation-count
-records are covered by [docs/benchmarks.md](docs/benchmarks.md).
+[docs/testing.md](docs/testing.md). The reproducible timing and operation-count
+protocol is documented in [docs/benchmarks.md](docs/benchmarks.md).
 
 Further reference:
 
