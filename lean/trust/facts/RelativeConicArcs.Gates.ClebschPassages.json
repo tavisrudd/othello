@@ -1,31 +1,51 @@
 {
   "closure": [
     "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedQueryFaithfulness",
     "RelativeConicArcs.AlignedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenSteinChart",
     "RelativeConicArcs.ClebschInvariantCubic",
     "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschSteinChart",
     "RelativeConicArcs.ClebschTwoGraph",
     "RelativeConicArcs.Gates.ClebschPassages",
     "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenResidueAlgebra",
     "RelativeConicArcs.InvolutiveOddUnit",
     "RelativeConicArcs.KneserPairEigenspace",
     "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.NormalizedMarkedIncidence",
+    "RelativeConicArcs.NormalizedMarkedIncidenceData",
     "RelativeConicArcs.PetersenHarmonicKernel",
     "RelativeConicArcs.QuadraticPinching",
+    "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SpinorSquareClass",
     "RelativeConicArcs.SplitQuadraticPinching",
-    "RelativeConicArcs.TightFrameConference"
+    "RelativeConicArcs.TightFrameConference",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra"
   ],
   "declaration_module": {
     "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit.eq_1": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.Aligned": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.Aligned.eq_1": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.DistinctTriple": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.FourSetParity": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.casesOn": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.diag": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.mk": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.rec": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.recOn": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.sq": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.symm": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.casesOn": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.mk": "RelativeConicArcs.AlignedFamilyFaithfulness",
@@ -65,6 +85,7 @@
     "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2082\u2083": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.aligned_iff_triangleSign_eq": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.anchorCut": "RelativeConicArcs.AlignedFamilyFaithfulness",
@@ -79,6 +100,7 @@
     "RelativeConicArcs.AlignedTwoGraph.balancedCut13": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.balancedCut14": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.card_quadruple": "RelativeConicArcs.AlignedQueryFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily": "RelativeConicArcs.AlignedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph.complement": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.complementBit_unique": "RelativeConicArcs.AlignedTwoGraph",
@@ -90,21 +112,33 @@
     "RelativeConicArcs.AlignedTwoGraph.cutBit_three": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.cutOfBits": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq_neg_three_iff_aligned": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq_neg_three_or_five": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.edgeBit_eq_of_triangleXor_eq": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.edgeTriangle": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.edgeTriangle.eq_1": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.equalBit": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQueryFamily_eq": "RelativeConicArcs.AlignedQueryFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQuery_eq": "RelativeConicArcs.AlignedQueryFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven": "RelativeConicArcs.AlignedFamilyFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven_of_anchor": "RelativeConicArcs.AlignedQueryFaithfulness",
+    "RelativeConicArcs.AlignedTwoGraph.exists_distinct_alignedAnchor": "RelativeConicArcs.AlignedQueryFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.exists_switching_of_det_family_eq": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum.eq_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.fourSetParity_edgeTriangle": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.fourSetParity_seidelTriangleBit": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.fourSetParity_xorBit": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix.eq_1": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.instDecidableIsBalancedCut": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.instDecidableSameNormalizedSevenSignature": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.mem_selectedQueryFamily": "RelativeConicArcs.AlignedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature": "RelativeConicArcs.AlignedTwoGraph",
@@ -126,15 +160,29 @@
     "RelativeConicArcs.AlignedTwoGraph.pentagonColouring": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge.eq_1": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit.eq_1": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit_symm": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit.eq_1": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit_eq_decide": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign.eq_1": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign_eq_one_or_neg_one": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily": "RelativeConicArcs.AlignedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily.eq_1": "RelativeConicArcs.AlignedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation": "RelativeConicArcs.AlignedTwoGraph",
     "RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.submatrix_eq_fourSigningMatrix": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.triangleSign_prod_eq_one": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_edgeTriangle": "RelativeConicArcs.SeidelPrincipalMinors",
+    "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_seidelTriangleBit": "RelativeConicArcs.SeidelPrincipalMinors",
     "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_xorBit": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor": "RelativeConicArcs.AlignedTwoGraph",
+    "RelativeConicArcs.AlignedTwoGraph.two_le_card_inter_of_two_common": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.xorBit": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.xorBit.eq_1": "RelativeConicArcs.AlignedFamilyFaithfulness",
     "RelativeConicArcs.AlignedTwoGraph.xorBit_apply": "RelativeConicArcs.AlignedFamilyFaithfulness",
@@ -167,6 +215,9 @@
     "RelativeConicArcs.ClebschGoldenConference.triangleSign.eq_1": "RelativeConicArcs.ClebschGoldenConference",
     "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point": "RelativeConicArcs.ClebschGoldenConference",
     "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch": "RelativeConicArcs.ClebschGoldenConference",
+    "RelativeConicArcs.ClebschGoldenSteinChart.canonicalData": "RelativeConicArcs.ClebschGoldenSteinChart",
+    "RelativeConicArcs.ClebschGoldenSteinChart.canonicalData_root": "RelativeConicArcs.ClebschGoldenSteinChart",
+    "RelativeConicArcs.ClebschGoldenSteinChart.deck_canonicalData_root": "RelativeConicArcs.ClebschGoldenSteinChart",
     "RelativeConicArcs.ClebschInvariantCubic.IsMarkedStabilizerFixed": "RelativeConicArcs.ClebschInvariantCubic",
     "RelativeConicArcs.ClebschInvariantCubic.LiesOnSigmaThreeLine": "RelativeConicArcs.ClebschInvariantCubic",
     "RelativeConicArcs.ClebschInvariantCubic.chartFactor_at_normalizedMarkedVector": "RelativeConicArcs.ClebschInvariantCubic",
@@ -197,6 +248,29 @@
     "RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient": "RelativeConicArcs.ClebschPassagesCorrespondence",
     "RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value": "RelativeConicArcs.ClebschPassagesCorrespondence",
     "RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar": "RelativeConicArcs.ClebschPassagesCorrespondence",
+    "RelativeConicArcs.ClebschSteinChart.Data": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.J\u2080": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.branchCoefficient_eq_root_sq": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.casesOn": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.ctorIdx": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.inj": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.injEq": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.noConfusion": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.sizeOf_spec": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.noConfusion": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.noConfusionType": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.rec": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.recOn": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.root": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.root.eq_1": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.sextic_pullback": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.splitChartAlgebra": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.splitComparison": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive_sq": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.steinAlgebra": "RelativeConicArcs.ClebschSteinChart",
+    "RelativeConicArcs.ClebschSteinChart.Data.\u03c3\u2083": "RelativeConicArcs.ClebschSteinChart",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix": "RelativeConicArcs.ClebschTwoGraph",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix.eq_1": "RelativeConicArcs.ClebschTwoGraph",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix_transpose": "RelativeConicArcs.ClebschTwoGraph",
@@ -239,6 +313,23 @@
     "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector": "RelativeConicArcs.GoldenQuadraticCharacters",
     "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector.eq_1": "RelativeConicArcs.GoldenQuadraticCharacters",
     "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11": "RelativeConicArcs.GoldenQuadraticCharacters",
+    "RelativeConicArcs.GoldenResidueAlgebra.GoldenAlgebra": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck.eq_1": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.deckEquiv": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck_goldenRoot": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck_involutive": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck_sqrtFive": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot_eq_one_add_sqrtFive_div_two": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot_relation": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.relation": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.relationIrreducibleFact": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.relation_irreducible": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive.eq_1": "RelativeConicArcs.GoldenResidueAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive_sq": "RelativeConicArcs.GoldenResidueAlgebra",
     "RelativeConicArcs.InvolutiveOddUnit.AntiInvariant": "RelativeConicArcs.InvolutiveOddUnit",
     "RelativeConicArcs.InvolutiveOddUnit.Invariant": "RelativeConicArcs.InvolutiveOddUnit",
     "RelativeConicArcs.InvolutiveOddUnit.evenPart": "RelativeConicArcs.InvolutiveOddUnit",
@@ -337,6 +428,35 @@
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic.eq_1": "RelativeConicArcs.MarkedClebschBridge",
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not": "RelativeConicArcs.MarkedClebschBridge",
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_switch": "RelativeConicArcs.MarkedClebschBridge",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.casesOn": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.chartLift": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.chartLift_identification": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.conference": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.conference_identification": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.ctorIdx": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck_labels": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.marking": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.inj": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.injEq": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.noConfusion": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.sizeOf_spec": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.noConfusion": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.noConfusionType": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.oddValue": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.oddValue_identification": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.pairCoefficients": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.pairCoefficients_identification": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.rec": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.recOn": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.steinChart": "RelativeConicArcs.NormalizedMarkedIncidenceData",
+    "RelativeConicArcs.NormalizedMarkedIncidence.chartLift_deck": "RelativeConicArcs.NormalizedMarkedIncidence",
+    "RelativeConicArcs.NormalizedMarkedIncidence.conference_deck": "RelativeConicArcs.NormalizedMarkedIncidence",
+    "RelativeConicArcs.NormalizedMarkedIncidence.oddValue_deck": "RelativeConicArcs.NormalizedMarkedIncidence",
+    "RelativeConicArcs.NormalizedMarkedIncidence.pairCoefficients_deck": "RelativeConicArcs.NormalizedMarkedIncidence",
     "RelativeConicArcs.PetersenHarmonicKernel.gramOperator": "RelativeConicArcs.PetersenHarmonicKernel",
     "RelativeConicArcs.PetersenHarmonicKernel.gramOperator.eq_1": "RelativeConicArcs.PetersenHarmonicKernel",
     "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum": "RelativeConicArcs.PetersenHarmonicKernel",
@@ -373,6 +493,87 @@
     "RelativeConicArcs.SignedEquiangularGram.golden_ne_zero": "RelativeConicArcs.SignedEquiangularGram",
     "RelativeConicArcs.SignedEquiangularGram.signedGram": "RelativeConicArcs.SignedEquiangularGram",
     "RelativeConicArcs.SignedEquiangularGram.signedGram.eq_1": "RelativeConicArcs.SignedEquiangularGram",
+    "RelativeConicArcs.SphereIntegralMoments.Sphere3": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.continuous_evalOnSphere": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.evalOnSphere": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.evalOnSphere.eq_1": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.integrable_evalOnSphere": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral.eq_1": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral_eq_normalizedMean_even": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral_one": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMass": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMass.eq_1": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMass_pos": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure.eq_1": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure_isFinite": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure_neZero": "RelativeConicArcs.SphereIntegralMoments",
+    "RelativeConicArcs.SphericalMomentFunctional.eq_gaussianMoment_of_recursion": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment.eq_1": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C_mul": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_X_mul": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_comp_linearSubstitution": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_linearSubstitution": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_monomial": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_eq_zero_of_laplacian_eq_zero": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_linearForm_pow": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_of_isHomogeneous": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_one": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_quadric_mul": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_linearForm": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_pderiv": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_quadric": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian.eq_1": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian_apply": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian_pderiv": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.linearForm": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.linearForm.eq_1": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution.eq_1": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution_X": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_1": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_2": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_3": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_def": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.match_1": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_add_two": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_one": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_succ": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_zero": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentWeight": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentWeight.eq_1": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.momentWeight_zero": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean.eq_1": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean_C_mul": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean_quadric_mul": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean_sum": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.pderiv_linearForm": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.pderiv_linearSubstitution": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.pderiv_quadric": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.quadric": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.quadric.eq_1": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SphericalMomentFunctional.sum_gaussianMoment_X_mul_pderiv": "RelativeConicArcs.SphericalMomentFunctional",
+    "RelativeConicArcs.SpinorSquareClass.Nonisotropic": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.SquareClass": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.exchangerVectorData": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.exchangerVectorData.eq_1": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.exchanger_spinorClass": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.normUnit": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.normUnit.eq_1": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList.eq_1": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList_append": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList_pair": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.squareClassHom": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.squareClassHom.eq_1": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.swapVectorData": "RelativeConicArcs.SpinorSquareClass",
+    "RelativeConicArcs.SpinorSquareClass.swapVectorData.eq_1": "RelativeConicArcs.SpinorSquareClass",
     "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral": "RelativeConicArcs.SplitQuadraticPinching",
     "RelativeConicArcs.SplitQuadraticPinching.branchIdeal": "RelativeConicArcs.SplitQuadraticPinching",
     "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal": "RelativeConicArcs.SplitQuadraticPinching",
@@ -389,7 +590,23 @@
     "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit": "RelativeConicArcs.SplitQuadraticPinching",
     "RelativeConicArcs.SplitQuadraticPinching.subringConductor": "RelativeConicArcs.SplitQuadraticPinching",
     "RelativeConicArcs.TightFrameConference.conference_sq_of_gram": "RelativeConicArcs.TightFrameConference",
-    "RelativeConicArcs.TightFrameConference.gram_sq_of_frameOperator": "RelativeConicArcs.TightFrameConference"
+    "RelativeConicArcs.TightFrameConference.gram_sq_of_frameOperator": "RelativeConicArcs.TightFrameConference",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal.eq_1": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator.eq_1": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator_sq": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation.eq_1": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison.eq_1": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_generator": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_linear": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_of": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_surjective": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator": "RelativeConicArcs.TraceSplitQuadraticAlgebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator.eq_1": "RelativeConicArcs.TraceSplitQuadraticAlgebra"
   },
   "exporter_sha256": "ce3851267ab4afcd5e15271d36219efdee0ccecf0bf01a003352b73d1df07baa",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
@@ -401,10 +618,19 @@
     "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
     "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.Aligned",
+    "RelativeConicArcs.AlignedTwoGraph.Aligned.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple",
     "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
     "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
     "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.casesOn",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.diag",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.mk",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.rec",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.recOn",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.sq",
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.symm",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.casesOn",
     "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.mk",
@@ -444,6 +670,7 @@
     "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.swap\u2082\u2083",
     "RelativeConicArcs.AlignedTwoGraph.alignedAnchor_of_ramseyTriple",
     "RelativeConicArcs.AlignedTwoGraph.aligned_complement_iff",
+    "RelativeConicArcs.AlignedTwoGraph.aligned_iff_triangleSign_eq",
     "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle",
     "RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff",
     "RelativeConicArcs.AlignedTwoGraph.anchorCut",
@@ -458,6 +685,7 @@
     "RelativeConicArcs.AlignedTwoGraph.balancedCut13",
     "RelativeConicArcs.AlignedTwoGraph.balancedCut14",
     "RelativeConicArcs.AlignedTwoGraph.calibratedTriangle_forces_no_complement",
+    "RelativeConicArcs.AlignedTwoGraph.card_quadruple",
     "RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph.complement",
     "RelativeConicArcs.AlignedTwoGraph.complementBit_unique",
@@ -469,21 +697,33 @@
     "RelativeConicArcs.AlignedTwoGraph.cutBit_three",
     "RelativeConicArcs.AlignedTwoGraph.cutOfBits",
     "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum",
+    "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq",
+    "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq_neg_three_iff_aligned",
+    "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq_neg_three_or_five",
     "RelativeConicArcs.AlignedTwoGraph.edgeBit_eq_of_triangleXor_eq",
     "RelativeConicArcs.AlignedTwoGraph.edgeTriangle",
+    "RelativeConicArcs.AlignedTwoGraph.edgeTriangle.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.equalBit",
     "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor",
     "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQueryFamily_eq",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQuery_eq",
     "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven",
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven_of_anchor",
+    "RelativeConicArcs.AlignedTwoGraph.exists_distinct_alignedAnchor",
     "RelativeConicArcs.AlignedTwoGraph.exists_monochromatic_triple",
+    "RelativeConicArcs.AlignedTwoGraph.exists_switching_of_det_family_eq",
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum",
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.fourSetParity_edgeTriangle",
+    "RelativeConicArcs.AlignedTwoGraph.fourSetParity_seidelTriangleBit",
     "RelativeConicArcs.AlignedTwoGraph.fourSetParity_xorBit",
     "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix",
     "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions",
     "RelativeConicArcs.AlignedTwoGraph.instDecidableIsBalancedCut",
     "RelativeConicArcs.AlignedTwoGraph.instDecidableSameNormalizedSevenSignature",
+    "RelativeConicArcs.AlignedTwoGraph.mem_selectedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five",
     "RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned",
     "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature",
@@ -505,15 +745,29 @@
     "RelativeConicArcs.AlignedTwoGraph.pentagonColouring",
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge",
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit",
+    "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit_symm",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit_eq_decide",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign.eq_1",
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign_eq_one_or_neg_one",
     "RelativeConicArcs.AlignedTwoGraph.selectedQueryCount_eq",
     "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily",
     "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement",
     "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation",
     "RelativeConicArcs.AlignedTwoGraph.sixPointAnchor_testCount",
+    "RelativeConicArcs.AlignedTwoGraph.submatrix_eq_fourSigningMatrix",
     "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps",
+    "RelativeConicArcs.AlignedTwoGraph.triangleSign_prod_eq_one",
+    "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_edgeTriangle",
+    "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_seidelTriangleBit",
     "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_xorBit",
     "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor",
+    "RelativeConicArcs.AlignedTwoGraph.two_le_card_inter_of_two_common",
     "RelativeConicArcs.AlignedTwoGraph.xorBit",
     "RelativeConicArcs.AlignedTwoGraph.xorBit.eq_1",
     "RelativeConicArcs.AlignedTwoGraph.xorBit_apply",
@@ -546,6 +800,9 @@
     "RelativeConicArcs.ClebschGoldenConference.triangleSign.eq_1",
     "RelativeConicArcs.ClebschGoldenConference.triangleSign_four_point",
     "RelativeConicArcs.ClebschGoldenConference.triangleSign_switch",
+    "RelativeConicArcs.ClebschGoldenSteinChart.canonicalData",
+    "RelativeConicArcs.ClebschGoldenSteinChart.canonicalData_root",
+    "RelativeConicArcs.ClebschGoldenSteinChart.deck_canonicalData_root",
     "RelativeConicArcs.ClebschInvariantCubic.IsMarkedStabilizerFixed",
     "RelativeConicArcs.ClebschInvariantCubic.LiesOnSigmaThreeLine",
     "RelativeConicArcs.ClebschInvariantCubic.chartFactor_at_normalizedMarkedVector",
@@ -576,6 +833,29 @@
     "RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient",
     "RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value",
     "RelativeConicArcs.ClebschPassagesCorrespondence.petersenPullback_scalar",
+    "RelativeConicArcs.ClebschSteinChart.Data",
+    "RelativeConicArcs.ClebschSteinChart.Data.J\u2080",
+    "RelativeConicArcs.ClebschSteinChart.Data.branchCoefficient_eq_root_sq",
+    "RelativeConicArcs.ClebschSteinChart.Data.casesOn",
+    "RelativeConicArcs.ClebschSteinChart.Data.ctorIdx",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.inj",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.injEq",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.noConfusion",
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.sizeOf_spec",
+    "RelativeConicArcs.ClebschSteinChart.Data.noConfusion",
+    "RelativeConicArcs.ClebschSteinChart.Data.noConfusionType",
+    "RelativeConicArcs.ClebschSteinChart.Data.rec",
+    "RelativeConicArcs.ClebschSteinChart.Data.recOn",
+    "RelativeConicArcs.ClebschSteinChart.Data.root",
+    "RelativeConicArcs.ClebschSteinChart.Data.root.eq_1",
+    "RelativeConicArcs.ClebschSteinChart.Data.sextic_pullback",
+    "RelativeConicArcs.ClebschSteinChart.Data.splitChartAlgebra",
+    "RelativeConicArcs.ClebschSteinChart.Data.splitComparison",
+    "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive",
+    "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive_sq",
+    "RelativeConicArcs.ClebschSteinChart.Data.steinAlgebra",
+    "RelativeConicArcs.ClebschSteinChart.Data.\u03c3\u2083",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix.eq_1",
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix_transpose",
@@ -618,6 +898,23 @@
     "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector",
     "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector.eq_1",
     "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11",
+    "RelativeConicArcs.GoldenResidueAlgebra.GoldenAlgebra",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck.eq_1",
+    "RelativeConicArcs.GoldenResidueAlgebra.deckEquiv",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck_goldenRoot",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck_involutive",
+    "RelativeConicArcs.GoldenResidueAlgebra.deck_sqrtFive",
+    "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+    "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot_eq_one_add_sqrtFive_div_two",
+    "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot_relation",
+    "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+    "RelativeConicArcs.GoldenResidueAlgebra.relation",
+    "RelativeConicArcs.GoldenResidueAlgebra.relationIrreducibleFact",
+    "RelativeConicArcs.GoldenResidueAlgebra.relation_irreducible",
+    "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive",
+    "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive.eq_1",
+    "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive_sq",
     "RelativeConicArcs.InvolutiveOddUnit.AntiInvariant",
     "RelativeConicArcs.InvolutiveOddUnit.Invariant",
     "RelativeConicArcs.InvolutiveOddUnit.evenPart",
@@ -716,6 +1013,35 @@
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic.eq_1",
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_not",
     "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic_switch",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.casesOn",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.chartLift",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.chartLift_identification",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.conference",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.conference_identification",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.ctorIdx",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck_labels",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.marking",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.inj",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.injEq",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.noConfusion",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.sizeOf_spec",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.noConfusion",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.noConfusionType",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.oddValue",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.oddValue_identification",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.pairCoefficients",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.pairCoefficients_identification",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.rec",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.recOn",
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.steinChart",
+    "RelativeConicArcs.NormalizedMarkedIncidence.chartLift_deck",
+    "RelativeConicArcs.NormalizedMarkedIncidence.conference_deck",
+    "RelativeConicArcs.NormalizedMarkedIncidence.oddValue_deck",
+    "RelativeConicArcs.NormalizedMarkedIncidence.pairCoefficients_deck",
     "RelativeConicArcs.PetersenHarmonicKernel.gramOperator",
     "RelativeConicArcs.PetersenHarmonicKernel.gramOperator.eq_1",
     "RelativeConicArcs.PetersenHarmonicKernel.gramOperator_pairSum",
@@ -752,6 +1078,87 @@
     "RelativeConicArcs.SignedEquiangularGram.golden_ne_zero",
     "RelativeConicArcs.SignedEquiangularGram.signedGram",
     "RelativeConicArcs.SignedEquiangularGram.signedGram.eq_1",
+    "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+    "RelativeConicArcs.SphereIntegralMoments.continuous_evalOnSphere",
+    "RelativeConicArcs.SphereIntegralMoments.evalOnSphere",
+    "RelativeConicArcs.SphereIntegralMoments.evalOnSphere.eq_1",
+    "RelativeConicArcs.SphereIntegralMoments.integrable_evalOnSphere",
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral",
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral.eq_1",
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral_eq_normalizedMean_even",
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral_one",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMass",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMass.eq_1",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMass_pos",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure.eq_1",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure_isFinite",
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure_neZero",
+    "RelativeConicArcs.SphericalMomentFunctional.eq_gaussianMoment_of_recursion",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment.eq_1",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C_mul",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_X_mul",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_comp_linearSubstitution",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_linearSubstitution",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_monomial",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_eq_zero_of_laplacian_eq_zero",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_linearForm_pow",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_of_isHomogeneous",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_one",
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_quadric_mul",
+    "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_linearForm",
+    "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_pderiv",
+    "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_quadric",
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian",
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian.eq_1",
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian_apply",
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian_pderiv",
+    "RelativeConicArcs.SphericalMomentFunctional.linearForm",
+    "RelativeConicArcs.SphericalMomentFunctional.linearForm.eq_1",
+    "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution",
+    "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution.eq_1",
+    "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution_X",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_1",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_2",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_3",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_def",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.match_1",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_add_two",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_one",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_succ",
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_zero",
+    "RelativeConicArcs.SphericalMomentFunctional.momentWeight",
+    "RelativeConicArcs.SphericalMomentFunctional.momentWeight.eq_1",
+    "RelativeConicArcs.SphericalMomentFunctional.momentWeight_zero",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean.eq_1",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean_C_mul",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean_quadric_mul",
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean_sum",
+    "RelativeConicArcs.SphericalMomentFunctional.pderiv_linearForm",
+    "RelativeConicArcs.SphericalMomentFunctional.pderiv_linearSubstitution",
+    "RelativeConicArcs.SphericalMomentFunctional.pderiv_quadric",
+    "RelativeConicArcs.SphericalMomentFunctional.quadric",
+    "RelativeConicArcs.SphericalMomentFunctional.quadric.eq_1",
+    "RelativeConicArcs.SphericalMomentFunctional.sum_gaussianMoment_X_mul_pderiv",
+    "RelativeConicArcs.SpinorSquareClass.Nonisotropic",
+    "RelativeConicArcs.SpinorSquareClass.SquareClass",
+    "RelativeConicArcs.SpinorSquareClass.exchangerVectorData",
+    "RelativeConicArcs.SpinorSquareClass.exchangerVectorData.eq_1",
+    "RelativeConicArcs.SpinorSquareClass.exchanger_spinorClass",
+    "RelativeConicArcs.SpinorSquareClass.normUnit",
+    "RelativeConicArcs.SpinorSquareClass.normUnit.eq_1",
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList",
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList.eq_1",
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList_append",
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList_pair",
+    "RelativeConicArcs.SpinorSquareClass.squareClassHom",
+    "RelativeConicArcs.SpinorSquareClass.squareClassHom.eq_1",
+    "RelativeConicArcs.SpinorSquareClass.swapVectorData",
+    "RelativeConicArcs.SpinorSquareClass.swapVectorData.eq_1",
     "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral",
     "RelativeConicArcs.SplitQuadraticPinching.branchIdeal",
     "RelativeConicArcs.SplitQuadraticPinching.conductor_eq_branchIdeal",
@@ -768,7 +1175,23 @@
     "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit",
     "RelativeConicArcs.SplitQuadraticPinching.subringConductor",
     "RelativeConicArcs.TightFrameConference.conference_sq_of_gram",
-    "RelativeConicArcs.TightFrameConference.gram_sq_of_frameOperator"
+    "RelativeConicArcs.TightFrameConference.gram_sq_of_frameOperator",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal.eq_1",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator.eq_1",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator_sq",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation.eq_1",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison.eq_1",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_generator",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_linear",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_of",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_surjective",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator",
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator.eq_1"
   ],
   "schema_version": 1,
   "terminal_axioms": {
@@ -984,11 +1407,40 @@
     "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit.eq_1": [
       "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.Aligned.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.IsBalancedCut": [
       "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
       "RelativeConicArcs.AlignedTwoGraph.balancedCut12",
       "RelativeConicArcs.AlignedTwoGraph.balancedCut13",
       "RelativeConicArcs.AlignedTwoGraph.balancedCut14"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.casesOn": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.mk",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.rec"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.diag": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.mk": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.rec": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.mk"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.recOn": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.mk",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.rec"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.sq": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.symm": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix"
     ],
     "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor.casesOn": [
       "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
@@ -1145,6 +1597,14 @@
       "RelativeConicArcs.AlignedTwoGraph.Aligned",
       "RelativeConicArcs.AlignedTwoGraph.complement"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.aligned_iff_triangleSign_eq": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit_eq_decide",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign_eq_one_or_neg_one"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.aligned_of_rooted_monochromatic_triangle": [
       "RelativeConicArcs.AlignedTwoGraph.Aligned",
       "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
@@ -1213,6 +1673,9 @@
       "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
       "RelativeConicArcs.AlignedTwoGraph.complementBit_unique"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.card_quadruple": [
+      "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.card_selectedQueryFamily": [
       "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily"
     ],
@@ -1246,6 +1709,34 @@
       "RelativeConicArcs.AlignedTwoGraph.fourCycleSum",
       "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.sq",
+      "RelativeConicArcs.AlignedTwoGraph.det_fourSigningMatrix_eq_three_sub_two_cycleSum",
+      "RelativeConicArcs.AlignedTwoGraph.fourCycleSum",
+      "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign",
+      "RelativeConicArcs.AlignedTwoGraph.submatrix_eq_fourSigningMatrix"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq_neg_three_iff_aligned": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.aligned_iff_triangleSign_eq",
+      "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign_eq_one_or_neg_one"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq_neg_three_or_five": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign_eq_one_or_neg_one",
+      "RelativeConicArcs.AlignedTwoGraph.triangleSign_prod_eq_one"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.edgeTriangle.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.edgeTriangle"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor": [
       "RelativeConicArcs.AlignedTwoGraph.Aligned",
       "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
@@ -1263,6 +1754,27 @@
       "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven",
       "RelativeConicArcs.AlignedTwoGraph.global_agreement_of_common_seven_restrictions"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQueryFamily_eq": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.card_quadruple",
+      "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQuery_eq",
+      "RelativeConicArcs.AlignedTwoGraph.mem_selectedQueryFamily",
+      "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_selectedQuery_eq": [
+      "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.complementBit_unique",
+      "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven_of_anchor"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven": [
       "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
       "RelativeConicArcs.AlignedTwoGraph.Aligned",
@@ -1279,8 +1791,57 @@
       "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_xorBit",
       "RelativeConicArcs.AlignedTwoGraph.xorBit"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_on_seven_of_anchor": [
+      "RelativeConicArcs.AlignedTwoGraph.AgreesWithComplementBit",
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.NormalizedAnchor",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.aligned_xorBit_iff",
+      "RelativeConicArcs.AlignedTwoGraph.card_quadruple",
+      "RelativeConicArcs.AlignedTwoGraph.fourSetParity_xorBit",
+      "RelativeConicArcs.AlignedTwoGraph.normalizedAnchor_of_aligned",
+      "RelativeConicArcs.AlignedTwoGraph.sevenPoint_agreement",
+      "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_xorBit",
+      "RelativeConicArcs.AlignedTwoGraph.two_le_card_inter_of_two_common",
+      "RelativeConicArcs.AlignedTwoGraph.xorBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_distinct_alignedAnchor": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple",
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.exists_alignedAnchor"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.exists_switching_of_det_family_eq": [
+      "RelativeConicArcs.AlignedTwoGraph.Aligned",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctQuadruple",
+      "RelativeConicArcs.AlignedTwoGraph.DistinctTriple",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.sq",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.symm",
+      "RelativeConicArcs.AlignedTwoGraph.det_submatrix_eq_neg_three_iff_aligned",
+      "RelativeConicArcs.AlignedTwoGraph.exists_complementBit_of_alignedFamily_eq",
+      "RelativeConicArcs.AlignedTwoGraph.fourSetParity_seidelTriangleBit",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit_eq_decide",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign_eq_one_or_neg_one",
+      "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_seidelTriangleBit"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.fourCycleSum.eq_1": [
       "RelativeConicArcs.AlignedTwoGraph.fourCycleSum"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.fourSetParity_edgeTriangle": [
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.edgeTriangle"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.fourSetParity_seidelTriangleBit": [
+      "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
+      "RelativeConicArcs.AlignedTwoGraph.fourSetParity_edgeTriangle",
+      "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit"
     ],
     "RelativeConicArcs.AlignedTwoGraph.fourSetParity_xorBit": [
       "RelativeConicArcs.AlignedTwoGraph.FourSetParity",
@@ -1305,6 +1866,9 @@
       "RelativeConicArcs.AlignedTwoGraph.NormalizedSevenData",
       "RelativeConicArcs.AlignedTwoGraph.SameNormalizedSevenSignature",
       "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.mem_selectedQueryFamily": [
+      "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily"
     ],
     "RelativeConicArcs.AlignedTwoGraph.no_monochromatic_triple_five": [
       "RelativeConicArcs.AlignedTwoGraph.pentagonColouring"
@@ -1403,6 +1967,38 @@
     "RelativeConicArcs.AlignedTwoGraph.rootedEdge.eq_1": [
       "RelativeConicArcs.AlignedTwoGraph.rootedEdge"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit_symm": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.symm",
+      "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit": [
+      "RelativeConicArcs.AlignedTwoGraph.edgeTriangle",
+      "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.edgeTriangle",
+      "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit_eq_decide": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.sq",
+      "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign.eq_1": [
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign_eq_one_or_neg_one": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.sq",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily.eq_1": [
       "RelativeConicArcs.AlignedTwoGraph.selectedQueryFamily"
     ],
@@ -1435,16 +2031,41 @@
       "RelativeConicArcs.AlignedTwoGraph.normalizedSevenSignature_injective",
       "RelativeConicArcs.AlignedTwoGraph.pairSignature",
       "RelativeConicArcs.AlignedTwoGraph.rootedEdge",
-      "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor"
+      "RelativeConicArcs.AlignedTwoGraph.triangle_eq_rooted_xor",
+      "RelativeConicArcs.AlignedTwoGraph.two_le_card_inter_of_two_common"
     ],
     "RelativeConicArcs.AlignedTwoGraph.signing_eq_up_to_switching_and_negation": [
       "RelativeConicArcs.AlignedTwoGraph.SwitchingNegationEquivalent",
       "RelativeConicArcs.AlignedTwoGraph.edgeBit_eq_of_triangleXor_eq",
       "RelativeConicArcs.AlignedTwoGraph.edgeTriangle"
     ],
+    "RelativeConicArcs.AlignedTwoGraph.submatrix_eq_fourSigningMatrix": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.diag",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.symm",
+      "RelativeConicArcs.AlignedTwoGraph.fourSigningMatrix"
+    ],
     "RelativeConicArcs.AlignedTwoGraph.threePairOutcomes_eliminate_swaps": [
       "RelativeConicArcs.AlignedTwoGraph.NormalizedCut",
       "RelativeConicArcs.AlignedTwoGraph.PairOutcome"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.triangleSign_prod_eq_one": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix.sq",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleSign"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_edgeTriangle": [
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric.mk",
+      "RelativeConicArcs.AlignedTwoGraph.edgeTriangle"
+    ],
+    "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_seidelTriangleBit": [
+      "RelativeConicArcs.AlignedTwoGraph.IsSeidelMatrix",
+      "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
+      "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit",
+      "RelativeConicArcs.AlignedTwoGraph.seidelEdgeBit_symm",
+      "RelativeConicArcs.AlignedTwoGraph.seidelTriangleBit",
+      "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_edgeTriangle"
     ],
     "RelativeConicArcs.AlignedTwoGraph.triangleSymmetric_xorBit": [
       "RelativeConicArcs.AlignedTwoGraph.TriangleSymmetric",
@@ -1567,6 +2188,33 @@
       "RelativeConicArcs.ClebschGoldenConference.switchMatrix",
       "RelativeConicArcs.ClebschGoldenConference.triangleSign"
     ],
+    "RelativeConicArcs.ClebschGoldenSteinChart.canonicalData": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk",
+      "RelativeConicArcs.GoldenResidueAlgebra.GoldenAlgebra",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive",
+      "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive_sq"
+    ],
+    "RelativeConicArcs.ClebschGoldenSteinChart.canonicalData_root": [
+      "RelativeConicArcs.ClebschGoldenSteinChart.canonicalData",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.GoldenResidueAlgebra.GoldenAlgebra",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive"
+    ],
+    "RelativeConicArcs.ClebschGoldenSteinChart.deck_canonicalData_root": [
+      "RelativeConicArcs.ClebschGoldenSteinChart.canonicalData",
+      "RelativeConicArcs.ClebschGoldenSteinChart.canonicalData_root",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.GoldenResidueAlgebra.GoldenAlgebra",
+      "RelativeConicArcs.GoldenResidueAlgebra.deck",
+      "RelativeConicArcs.GoldenResidueAlgebra.deck_sqrtFive",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive"
+    ],
     "RelativeConicArcs.ClebschInvariantCubic.LiesOnSigmaThreeLine": [
       "RelativeConicArcs.ClebschInvariantCubic.sigmaThree"
     ],
@@ -1663,6 +2311,110 @@
       "RelativeConicArcs.ClebschInvariantCubic.chartFactor_at_normalizedMarkedVector",
       "RelativeConicArcs.ClebschInvariantCubic.normalizedMarkedVector",
       "RelativeConicArcs.ClebschInvariantCubic.sigmaThree"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.J\u2080": [
+      "RelativeConicArcs.ClebschSteinChart.Data"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.branchCoefficient_eq_root_sq": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.J\u2080",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.ClebschSteinChart.Data.sextic_pullback",
+      "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive",
+      "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive_sq",
+      "RelativeConicArcs.ClebschSteinChart.Data.\u03c3\u2083"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.casesOn": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk",
+      "RelativeConicArcs.ClebschSteinChart.Data.rec"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.ctorIdx": [
+      "RelativeConicArcs.ClebschSteinChart.Data"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.mk": [
+      "RelativeConicArcs.ClebschSteinChart.Data"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.inj": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk.noConfusion"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.injEq": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk.inj"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.noConfusion": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk",
+      "RelativeConicArcs.ClebschSteinChart.Data.noConfusion"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.mk.sizeOf_spec": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.noConfusion": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.casesOn",
+      "RelativeConicArcs.ClebschSteinChart.Data.noConfusionType"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.noConfusionType": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.casesOn"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.rec": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.recOn": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.mk",
+      "RelativeConicArcs.ClebschSteinChart.Data.rec"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.root": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive",
+      "RelativeConicArcs.ClebschSteinChart.Data.\u03c3\u2083"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.root.eq_1": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive",
+      "RelativeConicArcs.ClebschSteinChart.Data.\u03c3\u2083"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.sextic_pullback": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.J\u2080",
+      "RelativeConicArcs.ClebschSteinChart.Data.\u03c3\u2083"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.splitChartAlgebra": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.splitComparison": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.ClebschSteinChart.Data.splitChartAlgebra",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive": [
+      "RelativeConicArcs.ClebschSteinChart.Data"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive_sq": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.sqrtFive"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.steinAlgebra": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.J\u2080",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra"
+    ],
+    "RelativeConicArcs.ClebschSteinChart.Data.\u03c3\u2083": [
+      "RelativeConicArcs.ClebschSteinChart.Data"
     ],
     "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix.eq_1": [
       "RelativeConicArcs.ClebschTwoGraph.reconstructedMatrix"
@@ -1779,6 +2531,94 @@
     ],
     "RelativeConicArcs.GoldenQuadraticCharacters.two_not_square_zmod11": [
       "RelativeConicArcs.GoldenQuadraticCharacters.instFactPrimeOfNatNat_relativeConicArcs"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.GoldenAlgebra": [
+      "RelativeConicArcs.GoldenResidueAlgebra.relation"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.deck": [
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.deck.eq_1": [
+      "RelativeConicArcs.GoldenResidueAlgebra.deck",
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.deckEquiv": [
+      "RelativeConicArcs.GoldenResidueAlgebra.deck",
+      "RelativeConicArcs.GoldenResidueAlgebra.deck_involutive",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.deck_goldenRoot": [
+      "RelativeConicArcs.GoldenResidueAlgebra.deck",
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.deck_involutive": [
+      "RelativeConicArcs.GoldenResidueAlgebra.deck",
+      "RelativeConicArcs.GoldenResidueAlgebra.deck_goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relationIrreducibleFact"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.deck_sqrtFive": [
+      "RelativeConicArcs.GoldenResidueAlgebra.deck",
+      "RelativeConicArcs.GoldenResidueAlgebra.deck_goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relationIrreducibleFact",
+      "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot": [
+      "RelativeConicArcs.GoldenResidueAlgebra.relation"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot_eq_one_add_sqrtFive_div_two": [
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relationIrreducibleFact",
+      "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot_relation": [
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation": [
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relationIrreducibleFact"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.relationIrreducibleFact": [
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation_irreducible"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.relation_irreducible": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.golden_discriminant_square",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive": [
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive.eq_1": [
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive"
+    ],
+    "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive_sq": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.golden_discriminant_square",
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot",
+      "RelativeConicArcs.GoldenResidueAlgebra.goldenRoot_relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.instFieldAdjoinRootRatRelation",
+      "RelativeConicArcs.GoldenResidueAlgebra.relation",
+      "RelativeConicArcs.GoldenResidueAlgebra.sqrtFive"
     ],
     "RelativeConicArcs.InvolutiveOddUnit.evenPart.eq_1": [
       "RelativeConicArcs.InvolutiveOddUnit.evenPart"
@@ -2266,6 +3106,237 @@
       "RelativeConicArcs.MarkedClebschBridge.sheetConference",
       "RelativeConicArcs.MarkedClebschBridge.sheetTriangleCubic"
     ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.casesOn": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.rec"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.chartLift": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.chartLift_identification": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.chartLift",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.marking"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels": [
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.conference": [
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.conference_identification": [
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.conference"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.ctorIdx": [
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck": [
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck_labels": [
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.marking": [
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.inj": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.noConfusion"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.injEq": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.inj"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.noConfusion": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.noConfusion"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk.sizeOf_spec": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.noConfusion": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.casesOn",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.noConfusionType"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.noConfusionType": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.casesOn"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.oddValue": [
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.oddValue_identification": [
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.oddValue",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.steinChart"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.pairCoefficients": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.pairCoefficients_identification": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.pairCoefficients"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.rec": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.recOn": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.mk",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.rec"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.Datum.steinChart": [
+      "RelativeConicArcs.ClebschSteinChart.Data",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.chartLift_deck": [
+      "RelativeConicArcs.KneserPairEigenspace.standardSubmodule",
+      "RelativeConicArcs.MarkedClebschBridge.MarkedBridgeDatum.chartLift",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.chartLift",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.chartLift_identification",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck_labels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.marking"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.conference_deck": [
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference",
+      "RelativeConicArcs.MarkedClebschBridge.sheetConference_not",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.conference",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.conference_identification",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck_labels"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.oddValue_deck": [
+      "RelativeConicArcs.ClebschSteinChart.Data.root",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck_labels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.oddValue",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.oddValue_identification",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.steinChart"
+    ],
+    "RelativeConicArcs.NormalizedMarkedIncidence.pairCoefficients_deck": [
+      "RelativeConicArcs.KneserPairEigenspace.Pair",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum",
+      "RelativeConicArcs.MarkedClebschBridge.sheetPairSum_not",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.componentLabels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.deck_labels",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.pairCoefficients",
+      "RelativeConicArcs.NormalizedMarkedIncidence.Datum.pairCoefficients_identification"
+    ],
     "RelativeConicArcs.PetersenHarmonicKernel.gramOperator": [
       "RelativeConicArcs.KneserPairEigenspace.Pair",
       "RelativeConicArcs.PetersenHarmonicKernel.kernelOperator"
@@ -2387,6 +3458,367 @@
     "RelativeConicArcs.SignedEquiangularGram.signedGram.eq_1": [
       "RelativeConicArcs.SignedEquiangularGram.signedGram"
     ],
+    "RelativeConicArcs.SphereIntegralMoments.continuous_evalOnSphere": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.evalOnSphere"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.evalOnSphere": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.evalOnSphere.eq_1": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.evalOnSphere"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.integrable_evalOnSphere": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.continuous_evalOnSphere",
+      "RelativeConicArcs.SphereIntegralMoments.evalOnSphere",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure_isFinite"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.evalOnSphere",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMass",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral.eq_1": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.evalOnSphere",
+      "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMass",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral_eq_normalizedMean_even": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.evalOnSphere",
+      "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral",
+      "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral.eq_1",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMass",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMass_pos",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+      "RelativeConicArcs.SphericalMomentFunctional.normalizedMean",
+      "RelativeConicArcs.SphericalMomentFunctional.normalizedMean.eq_1"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral_one": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.evalOnSphere",
+      "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral",
+      "RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral.eq_1",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMass",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMass_pos",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.sphereMass": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.sphereMass.eq_1": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMass",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.sphereMass_pos": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMass",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure_isFinite",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure_neZero"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure.eq_1": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure_isFinite": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure"
+    ],
+    "RelativeConicArcs.SphereIntegralMoments.sphereMeasure_neZero": [
+      "RelativeConicArcs.SphereIntegralMoments.Sphere3",
+      "RelativeConicArcs.SphereIntegralMoments.sphereMeasure"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.eq_gaussianMoment_of_recursion": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_X_mul",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_monomial",
+      "RelativeConicArcs.SphericalMomentFunctional.momentWeight"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentWeight"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment.eq_1": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.momentWeight"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_monomial",
+      "RelativeConicArcs.SphericalMomentFunctional.momentWeight",
+      "RelativeConicArcs.SphericalMomentFunctional.momentWeight_zero"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C_mul": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_X_mul": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_monomial",
+      "RelativeConicArcs.SphericalMomentFunctional.momentWeight"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_comp_linearSubstitution": [
+      "RelativeConicArcs.SphericalMomentFunctional.eq_gaussianMoment_of_recursion",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C_mul",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_X_mul",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_one",
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm",
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm.eq_1",
+      "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution",
+      "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution_X",
+      "RelativeConicArcs.SphericalMomentFunctional.pderiv_linearSubstitution"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_linearSubstitution": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_comp_linearSubstitution",
+      "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_monomial": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.momentWeight"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_eq_zero_of_laplacian_eq_zero": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_of_isHomogeneous",
+      "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_pderiv",
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian",
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian_pderiv"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_linearForm_pow": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C_mul",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_of_isHomogeneous",
+      "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_pderiv",
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian",
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian_pderiv",
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm",
+      "RelativeConicArcs.SphericalMomentFunctional.pderiv_linearForm"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_mul_of_isHomogeneous": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_X_mul",
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian",
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian_apply"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_one": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_quadric_mul": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_X_mul",
+      "RelativeConicArcs.SphericalMomentFunctional.quadric",
+      "RelativeConicArcs.SphericalMomentFunctional.quadric.eq_1",
+      "RelativeConicArcs.SphericalMomentFunctional.sum_gaussianMoment_X_mul_pderiv"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_linearForm": [
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.isHomogeneous_quadric": [
+      "RelativeConicArcs.SphericalMomentFunctional.quadric"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian.eq_1": [
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian_apply": [
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.laplacian_pderiv": [
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian",
+      "RelativeConicArcs.SphericalMomentFunctional.laplacian_apply"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.linearForm.eq_1": [
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution": [
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution.eq_1": [
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm",
+      "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution_X": [
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm",
+      "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_1": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_2": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_3": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor.eq_def": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor.match_1"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_add_two": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_one": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_succ": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor_add_two",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor_one",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor_zero"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentFactor_zero": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentWeight": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentWeight.eq_1": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+      "RelativeConicArcs.SphericalMomentFunctional.momentWeight"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.momentWeight_zero": [
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor_zero",
+      "RelativeConicArcs.SphericalMomentFunctional.momentWeight"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean.eq_1": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+      "RelativeConicArcs.SphericalMomentFunctional.normalizedMean"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean_C_mul": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_C_mul",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+      "RelativeConicArcs.SphericalMomentFunctional.normalizedMean",
+      "RelativeConicArcs.SphericalMomentFunctional.normalizedMean.eq_1"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean_quadric_mul": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment_quadric_mul",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor_add_two",
+      "RelativeConicArcs.SphericalMomentFunctional.normalizedMean",
+      "RelativeConicArcs.SphericalMomentFunctional.normalizedMean.eq_1",
+      "RelativeConicArcs.SphericalMomentFunctional.quadric"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.normalizedMean_sum": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment",
+      "RelativeConicArcs.SphericalMomentFunctional.momentFactor",
+      "RelativeConicArcs.SphericalMomentFunctional.normalizedMean"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.pderiv_linearForm": [
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm",
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm.eq_1"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.pderiv_linearSubstitution": [
+      "RelativeConicArcs.SphericalMomentFunctional.linearForm",
+      "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution",
+      "RelativeConicArcs.SphericalMomentFunctional.linearSubstitution_X",
+      "RelativeConicArcs.SphericalMomentFunctional.pderiv_linearForm"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.pderiv_quadric": [
+      "RelativeConicArcs.SphericalMomentFunctional.quadric",
+      "RelativeConicArcs.SphericalMomentFunctional.quadric.eq_1"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.quadric.eq_1": [
+      "RelativeConicArcs.SphericalMomentFunctional.quadric"
+    ],
+    "RelativeConicArcs.SphericalMomentFunctional.sum_gaussianMoment_X_mul_pderiv": [
+      "RelativeConicArcs.SphericalMomentFunctional.gaussianMoment"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.exchangerVectorData": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.exchangerVectorData.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.exchangerReflectionVector",
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic",
+      "RelativeConicArcs.SpinorSquareClass.exchangerVectorData"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.exchanger_spinorClass": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic",
+      "RelativeConicArcs.SpinorSquareClass.SquareClass",
+      "RelativeConicArcs.SpinorSquareClass.exchangerVectorData",
+      "RelativeConicArcs.SpinorSquareClass.normUnit",
+      "RelativeConicArcs.SpinorSquareClass.ofReflectionList",
+      "RelativeConicArcs.SpinorSquareClass.ofReflectionList_pair",
+      "RelativeConicArcs.SpinorSquareClass.squareClassHom",
+      "RelativeConicArcs.SpinorSquareClass.swapVectorData"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.normUnit": [
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.normUnit.eq_1": [
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic",
+      "RelativeConicArcs.SpinorSquareClass.normUnit"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList": [
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic",
+      "RelativeConicArcs.SpinorSquareClass.SquareClass",
+      "RelativeConicArcs.SpinorSquareClass.normUnit",
+      "RelativeConicArcs.SpinorSquareClass.squareClassHom"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList.eq_1": [
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic",
+      "RelativeConicArcs.SpinorSquareClass.SquareClass",
+      "RelativeConicArcs.SpinorSquareClass.normUnit",
+      "RelativeConicArcs.SpinorSquareClass.ofReflectionList",
+      "RelativeConicArcs.SpinorSquareClass.squareClassHom"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList_append": [
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic",
+      "RelativeConicArcs.SpinorSquareClass.SquareClass",
+      "RelativeConicArcs.SpinorSquareClass.normUnit",
+      "RelativeConicArcs.SpinorSquareClass.ofReflectionList"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.ofReflectionList_pair": [
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic",
+      "RelativeConicArcs.SpinorSquareClass.SquareClass",
+      "RelativeConicArcs.SpinorSquareClass.normUnit",
+      "RelativeConicArcs.SpinorSquareClass.ofReflectionList",
+      "RelativeConicArcs.SpinorSquareClass.squareClassHom"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.squareClassHom": [
+      "RelativeConicArcs.SpinorSquareClass.SquareClass"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.squareClassHom.eq_1": [
+      "RelativeConicArcs.SpinorSquareClass.SquareClass",
+      "RelativeConicArcs.SpinorSquareClass.squareClassHom"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.swapVectorData": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector",
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic"
+    ],
+    "RelativeConicArcs.SpinorSquareClass.swapVectorData.eq_1": [
+      "RelativeConicArcs.GoldenQuadraticCharacters.standardNormSq",
+      "RelativeConicArcs.GoldenQuadraticCharacters.swapReflectionVector",
+      "RelativeConicArcs.SpinorSquareClass.Nonisotropic",
+      "RelativeConicArcs.SpinorSquareClass.swapVectorData"
+    ],
     "RelativeConicArcs.SplitQuadraticPinching.algebra_isIntegral": [
       "RelativeConicArcs.SplitQuadraticPinching.product_isIntegral",
       "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
@@ -2426,6 +3858,96 @@
     ],
     "RelativeConicArcs.SplitQuadraticPinching.splitPinching_eq_top_of_isUnit": [
       "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra": [
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal.eq_1": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator": [
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator.eq_1": [
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator_sq": [
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation.eq_1": [
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison.eq_1": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_generator": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_linear": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate",
+      "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate_mem",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_generator",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_of",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_of": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.diagonal",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_surjective": [
+      "RelativeConicArcs.SplitQuadraticPinching.exists_splitEvaluate",
+      "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate",
+      "RelativeConicArcs.SplitQuadraticPinching.splitEvaluate_mem",
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.Algebra",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.generator",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.relation",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_linear"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching"
+    ],
+    "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator.eq_1": [
+      "RelativeConicArcs.SplitQuadraticPinching.splitPinching",
+      "RelativeConicArcs.TraceSplitQuadraticAlgebra.splitGenerator"
     ]
   },
   "uses_included": true
