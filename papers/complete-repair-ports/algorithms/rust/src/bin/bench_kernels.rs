@@ -2,10 +2,11 @@ use std::hint::black_box;
 use std::time::Instant;
 
 use ergo_comp::{
-    ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
+    compile_binary_target_subspace, ternary_orbit_syndrome_meet_in_middle,
+    ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
-    ternary_orbit_syndrome_search_correlated, OrbitOption, WeightedRepairProblem,
-    WeightedRepairWorkspace, WeightedSchedulerBackend,
+    ternary_orbit_syndrome_search_correlated, CompositionTower, Gf4, Matrix, OrbitOption,
+    TowerLevel, WeightedRepairProblem, WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
 
 fn next_u32(state: &mut u64) -> u32 {
@@ -13,6 +14,16 @@ fn next_u32(state: &mut u64) -> u32 {
         .wrapping_mul(6_364_136_223_846_793_005)
         .wrapping_add(1);
     (*state >> 32) as u32
+}
+
+fn transfer_tower_spec(variant: &str) -> Option<(usize, usize)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "transfer-tower" || fields.next()? != "rust" {
+        return None;
+    }
+    let depth = fields.next()?.parse().ok()?;
+    let fanout = fields.next()?.parse().ok()?;
+    fields.next().is_none().then_some((depth, fanout))
 }
 
 fn scheduler_problem(small: bool) -> WeightedRepairProblem {
@@ -235,6 +246,40 @@ fn main() {
     let mut work = 0u64;
     let mut peak_states = 0u64;
     let mut checksum = 0u64;
+    if let Some((depth, fanout)) = transfer_tower_spec(&variant) {
+        let normalization = Matrix::new::<2>(2, 2, vec![1, 0, 0, 1]).unwrap();
+        let profile =
+            compile_binary_target_subspace::<Gf4>(&[1, 2, 1, 2], &[0, 1], &normalization, 256, 16)
+                .unwrap();
+        let (ordinary, target) = profile.cost_tables::<Gf4>().unwrap();
+        let levels = (0..depth)
+            .map(|_| TowerLevel {
+                outer_blocks: (0..fanout)
+                    .map(|_| Matrix::new_field::<Gf4>(1, 1, vec![1]).unwrap())
+                    .collect::<Vec<_>>()
+                    .into_boxed_slice(),
+                target_block: 0,
+            })
+            .collect::<Vec<_>>();
+        let tower = CompositionTower::compile_field::<Gf4>(&ordinary, &target, &levels).unwrap();
+        let label = Matrix::new_field::<Gf4>(1, 2, vec![0, 0]).unwrap();
+        for _ in 0..repetitions {
+            let answer = tower
+                .answer_target_field::<Gf4>(&label, 1 << 24)
+                .unwrap()
+                .unwrap();
+            work += answer.witness_nodes;
+            peak_states = peak_states.max(answer.witness_nodes);
+            checksum = checksum.wrapping_add(u64::from(answer.cost));
+            black_box(answer);
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
     if let Some((backend, resources, capacity, demands)) =
         heterogeneous_scheduler_grid_spec(&variant)
     {

@@ -1,0 +1,35 @@
+{
+  "field": {
+    "kind": "binary-extension",
+    "degree": 2,
+    "modulus": [1, 1, 1]
+  },
+  "base_prime": 2,
+  "columns": [1, 2, 1, 2],
+  "target_coordinates": [0, 1],
+  "target_normalization": {
+    "rows": 2,
+    "cols": 2,
+    "data": [1, 0, 0, 1]
+  },
+  "levels": [
+    {
+      "outer_blocks": [
+        {"rows": 1, "cols": 1, "data": [1]},
+        {"rows": 1, "cols": 1, "data": [1]}
+      ],
+      "target_block": 0
+    },
+    {
+      "outer_blocks": [
+        {"rows": 1, "cols": 1, "data": [1]},
+        {"rows": 1, "cols": 1, "data": [1]}
+      ],
+      "target_block": 0
+    }
+  ],
+  "final_label": {"rows": 1, "cols": 2, "data": [0, 0]},
+  "ordinary_candidate_budget": 256,
+  "target_candidate_budget": 16,
+  "witness_node_budget": 7
+}

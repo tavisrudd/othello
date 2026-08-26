@@ -1,6 +1,6 @@
 use crate::arena::{FlatMatrixArena, MatrixId};
 use crate::composition::{CompositionError, CostTable};
-use crate::field::Prime;
+use crate::field::{FiniteField, Prime};
 use crate::matrix::{Matrix, MatrixError};
 use rustc_hash::FxHashMap;
 use thiserror::Error;
@@ -26,6 +26,8 @@ pub enum ConfinementSector {
 #[derive(Debug)]
 pub struct ConfinementAnswer {
     pub cost: u32,
+    pub zero_cost: u32,
+    pub nonzero_cost: Option<u32>,
     pub sector: ConfinementSector,
     pub functional_coefficients: Option<Matrix>,
     pub block_labels: Box<[Matrix]>,
@@ -40,33 +42,51 @@ pub fn confinement_by_generators<const P: u8>(
     target_block: usize,
     inner_dual_distance: u32,
 ) -> Result<ConfinementAnswer, ConfinementError> {
-    Prime::<P>::validate().map_err(MatrixError::from)?;
+    confinement_by_generators_field::<Prime<P>>(
+        functional_dual_basis,
+        block_count,
+        inner,
+        target,
+        target_block,
+        inner_dual_distance,
+    )
+}
+
+pub fn confinement_by_generators_field<F: FiniteField>(
+    functional_dual_basis: &Matrix,
+    block_count: usize,
+    inner: &CostTable,
+    target: &CostTable,
+    target_block: usize,
+    inner_dual_distance: u32,
+) -> Result<ConfinementAnswer, ConfinementError> {
+    F::validate().map_err(MatrixError::from)?;
     let (label_rows, demand_cols) = inner.shape();
-    if inner.field_order() != P
-        || target.field_order() != P
+    if inner.field_order() != F::ORDER
+        || target.field_order() != F::ORDER
         || target.shape() != (label_rows, demand_cols)
         || functional_dual_basis.cols() != block_count * label_rows
         || target_block >= block_count
     {
         return Err(ConfinementError::Shape);
     }
-    let zero = Matrix::zeros::<P>(label_rows, demand_cols)?;
+    let zero = Matrix::zeros_field::<F>(label_rows, demand_cols)?;
     let zero_cost = target
         .cost(&zero)
         .ok_or(ConfinementError::Shape)?
         .checked_add(inner_dual_distance)
         .ok_or(ConfinementError::Overflow)?;
-    let mut best_cost = zero_cost;
-    let mut best_coefficients = None;
-    let mut best_labels = vec![zero.clone(); block_count];
+    let mut best_nonzero_cost = None;
+    let mut best_nonzero_coefficients = None;
+    let mut best_nonzero_labels = vec![zero.clone(); block_count];
     let coefficient_len = functional_dual_basis.rows() * demand_cols;
     let mut coefficients = vec![0u8; coefficient_len];
     let mut block_data = vec![0u8; block_count * label_rows * demand_cols];
     let mut transitions = 0u64;
 
-    while increment_base_p::<P>(&mut coefficients) {
+    while increment_base_field::<F>(&mut coefficients) {
         transitions += 1;
-        evaluate_functional::<P>(
+        evaluate_functional::<F>(
             functional_dual_basis,
             block_count,
             label_rows,
@@ -79,7 +99,8 @@ pub fn confinement_by_generators<const P: u8>(
         for block in 0..block_count {
             let start = block * label_rows * demand_cols;
             let end = start + label_rows * demand_cols;
-            let label = Matrix::new::<P>(label_rows, demand_cols, block_data[start..end].to_vec())?;
+            let label =
+                Matrix::new_field::<F>(label_rows, demand_cols, block_data[start..end].to_vec())?;
             let table = if block == target_block { target } else { inner };
             let Some(local_cost) = table.cost(&label) else {
                 feasible = false;
@@ -88,35 +109,48 @@ pub fn confinement_by_generators<const P: u8>(
             cost = cost
                 .checked_add(local_cost)
                 .ok_or(ConfinementError::Overflow)?;
-            if cost >= best_cost {
+            if best_nonzero_cost.is_some_and(|incumbent| cost >= incumbent) {
                 feasible = false;
                 break;
             }
         }
-        if feasible && cost < best_cost {
-            best_cost = cost;
-            best_coefficients = Some(Matrix::new::<P>(
+        if feasible && best_nonzero_cost.is_none_or(|incumbent| cost < incumbent) {
+            best_nonzero_cost = Some(cost);
+            best_nonzero_coefficients = Some(Matrix::new_field::<F>(
                 functional_dual_basis.rows(),
                 demand_cols,
                 coefficients.clone(),
             )?);
-            for (block, slot) in best_labels.iter_mut().enumerate() {
+            for (block, slot) in best_nonzero_labels.iter_mut().enumerate() {
                 let start = block * label_rows * demand_cols;
                 let end = start + label_rows * demand_cols;
-                *slot = Matrix::new::<P>(label_rows, demand_cols, block_data[start..end].to_vec())?;
+                *slot = Matrix::new_field::<F>(
+                    label_rows,
+                    demand_cols,
+                    block_data[start..end].to_vec(),
+                )?;
             }
         }
     }
 
+    let nonzero_wins = best_nonzero_cost.is_some_and(|cost| cost < zero_cost);
+    let best_cost = best_nonzero_cost.map_or(zero_cost, |cost| cost.min(zero_cost));
+
     Ok(ConfinementAnswer {
         cost: best_cost,
-        sector: if best_coefficients.is_some() {
+        zero_cost,
+        nonzero_cost: best_nonzero_cost,
+        sector: if nonzero_wins {
             ConfinementSector::Nonzero
         } else {
             ConfinementSector::Zero
         },
-        functional_coefficients: best_coefficients,
-        block_labels: best_labels.into_boxed_slice(),
+        functional_coefficients: nonzero_wins.then_some(best_nonzero_coefficients).flatten(),
+        block_labels: if nonzero_wins {
+            best_nonzero_labels.into_boxed_slice()
+        } else {
+            vec![zero; block_count].into_boxed_slice()
+        },
         transitions,
     })
 }
@@ -282,6 +316,8 @@ pub fn confinement_by_syndrome<const P: u8>(
         }
         return Ok(ConfinementAnswer {
             cost: state.cost,
+            zero_cost,
+            nonzero_cost: Some(state.cost),
             sector: ConfinementSector::Nonzero,
             functional_coefficients: None,
             block_labels: labels.into_boxed_slice(),
@@ -290,6 +326,8 @@ pub fn confinement_by_syndrome<const P: u8>(
     }
     Ok(ConfinementAnswer {
         cost: zero_cost,
+        zero_cost,
+        nonzero_cost: nonzero.map(|state| state.cost),
         sector: ConfinementSector::Zero,
         functional_coefficients: None,
         block_labels: vec![zero_label; constraint_blocks.len()].into_boxed_slice(),
@@ -297,7 +335,7 @@ pub fn confinement_by_syndrome<const P: u8>(
     })
 }
 
-fn evaluate_functional<const P: u8>(
+fn evaluate_functional<F: FiniteField>(
     basis: &Matrix,
     block_count: usize,
     label_rows: usize,
@@ -313,19 +351,18 @@ fn evaluate_functional<const P: u8>(
                 continue;
             }
             for demand in 0..demand_cols {
-                let product =
-                    Prime::<P>::mul(factor, coefficients[functional * demand_cols + demand]);
+                let product = F::mul(factor, coefficients[functional * demand_cols + demand]);
                 let index = block_coordinate * demand_cols + demand;
-                output[index] = Prime::<P>::add(output[index], product);
+                output[index] = F::add(output[index], product);
             }
         }
     }
 }
 
-fn increment_base_p<const P: u8>(digits: &mut [u8]) -> bool {
+fn increment_base_field<F: FiniteField>(digits: &mut [u8]) -> bool {
     for digit in digits.iter_mut().rev() {
         *digit += 1;
-        if *digit < P {
+        if *digit < F::ORDER {
             return true;
         }
         *digit = 0;
@@ -435,6 +472,10 @@ mod tests {
         let generated = confinement_by_generators::<2>(&basis, 2, &table, &table, 0, 2).unwrap();
         let syndrome = confinement_by_syndrome::<2>(&constraints, &table, &table, 0, 2).unwrap();
         assert_eq!(generated.cost, syndrome.cost);
+        assert_eq!(generated.zero_cost, 2);
+        assert_eq!(generated.nonzero_cost, Some(2));
+        assert_eq!(generated.zero_cost, syndrome.zero_cost);
+        assert_eq!(generated.nonzero_cost, syndrome.nonzero_cost);
         assert_eq!(generated.sector, syndrome.sector);
         assert_eq!(generated.block_labels, syndrome.block_labels);
     }

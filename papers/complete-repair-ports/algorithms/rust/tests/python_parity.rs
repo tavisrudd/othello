@@ -3,11 +3,11 @@ use ergo_comp::balanced::{
     HighFiberSpec,
 };
 use ergo_comp::{
-    compile_integer_affine_constraints, compile_ternary_affine_constraints,
-    confinement_by_generators, confinement_by_syndrome, maximum_parallel_repairs,
-    ternary_orbit_syndrome_search, CompositionTable, ConfinementSector, CostTable,
-    GeneratedSpanTable, IntegerAffineCompilation, Matrix, OrbitOption, TernaryAffineCompilation,
-    WeightedRepairProblem,
+    compile_binary_rank_one, compile_binary_target_subspace, compile_integer_affine_constraints,
+    compile_ternary_affine_constraints, confinement_by_generators, confinement_by_generators_field,
+    confinement_by_syndrome, maximum_parallel_repairs, ternary_orbit_syndrome_search,
+    CompositionTable, ConfinementSector, CostTable, GeneratedSpanTable, Gf4,
+    IntegerAffineCompilation, Matrix, OrbitOption, TernaryAffineCompilation, WeightedRepairProblem,
 };
 use serde::Deserialize;
 
@@ -18,9 +18,74 @@ struct Fixture {
     cases: Vec<Case>,
     compositions: Vec<CompositionCase>,
     confinements: Vec<ConfinementCase>,
+    gf4_transfers: Vec<Gf4TransferCase>,
+    gf4_target_subspaces: Vec<Gf4TargetSubspaceCase>,
+    target_towers: Vec<TargetTowerCase>,
     orbits: Vec<OrbitCase>,
     weighted_schedulers: Vec<WeightedSchedulerCase>,
     unit_schedulers: Vec<UnitSchedulerCase>,
+}
+
+#[derive(Deserialize)]
+struct TargetTowerCase {
+    ordinary: Vec<u32>,
+    target: Vec<u32>,
+    ordinary_level_one: Vec<(u32, Vec<u8>)>,
+    target_level_one: Vec<(u32, Vec<u8>)>,
+    ordinary_level_two: Vec<(u32, Vec<u8>)>,
+    target_level_two: Vec<(u32, Vec<u8>)>,
+}
+
+#[derive(Deserialize)]
+struct Gf4TargetSubspaceCase {
+    columns: Vec<u8>,
+    targets: Vec<usize>,
+    normalization: MatrixFixture,
+    functional_basis: Vec<u8>,
+    ordinary: Vec<MatrixCostFixture>,
+    target_normalized: Vec<MatrixCostFixture>,
+    target_union_cost: u32,
+    inner_dual_distance: u32,
+    zero_cost: u32,
+    nonzero_cost: u32,
+    gamma: u32,
+    winning_labels: Vec<Vec<u8>>,
+}
+
+#[derive(Deserialize, PartialEq, Eq, Debug)]
+struct MatrixCostFixture {
+    label: Vec<u8>,
+    cost: u32,
+    coefficients: Vec<u8>,
+}
+
+#[derive(Deserialize)]
+struct Gf4TransferCase {
+    target_coordinate: usize,
+    functional_basis: Vec<u8>,
+    profiles: Vec<Gf4TransferProfile>,
+}
+
+#[derive(Deserialize)]
+struct Gf4TransferProfile {
+    columns: Vec<u8>,
+    ordinary: Vec<Option<(u32, Vec<u8>)>>,
+    target_normalized: Vec<Option<(u32, Vec<u8>)>>,
+    inner_dual: (u32, Vec<u8>),
+    k_p: MatrixFixture,
+    d_p: MatrixFixture,
+    zero_cost: u32,
+    nonzero_cost: u32,
+    gamma: u32,
+    outer_coefficient: u8,
+    block_labels: Vec<u8>,
+}
+
+#[derive(Deserialize)]
+struct MatrixFixture {
+    rows: usize,
+    cols: usize,
+    data: Vec<u8>,
 }
 
 #[derive(Deserialize)]
@@ -394,6 +459,215 @@ fn check_unit_scheduler(case: &UnitSchedulerCase) {
     );
 }
 
+fn check_gf4_transfer(case: &Gf4TransferCase) {
+    let functional_basis = Matrix::new_field::<Gf4>(1, 2, case.functional_basis.clone()).unwrap();
+    for expected in &case.profiles {
+        let profile = compile_binary_rank_one::<Gf4>(
+            &expected.columns,
+            case.target_coordinate,
+            1 << expected.columns.len(),
+        )
+        .unwrap();
+        let ordinary = profile
+            .ordinary()
+            .iter()
+            .map(|entry| {
+                entry
+                    .as_ref()
+                    .map(|witness| (witness.cost, witness.coefficients.to_vec()))
+            })
+            .collect::<Vec<_>>();
+        let normalized = profile
+            .target_normalized()
+            .iter()
+            .map(|entry| {
+                entry
+                    .as_ref()
+                    .map(|witness| (witness.cost, witness.coefficients.to_vec()))
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(ordinary, expected.ordinary);
+        assert_eq!(normalized, expected.target_normalized);
+        let dual = profile.inner_dual().unwrap();
+        assert_eq!((dual.cost, dual.coefficients.to_vec()), expected.inner_dual);
+        assert_eq!(profile.k_p().rows(), expected.k_p.rows);
+        assert_eq!(profile.k_p().cols(), expected.k_p.cols);
+        assert_eq!(profile.k_p().as_slice(), expected.k_p.data);
+        assert_eq!(profile.d_p().rows(), expected.d_p.rows);
+        assert_eq!(profile.d_p().cols(), expected.d_p.cols);
+        assert_eq!(profile.d_p().as_slice(), expected.d_p.data);
+        let (ordinary_table, target_table) = profile.cost_tables::<Gf4>().unwrap();
+        let answer = confinement_by_generators_field::<Gf4>(
+            &functional_basis,
+            2,
+            &ordinary_table,
+            &target_table,
+            0,
+            dual.cost,
+        )
+        .unwrap();
+        assert_eq!(answer.zero_cost, expected.zero_cost);
+        assert_eq!(answer.nonzero_cost, Some(expected.nonzero_cost));
+        assert_eq!(answer.cost, expected.gamma);
+        assert_eq!(
+            answer.functional_coefficients.unwrap().as_slice(),
+            &[expected.outer_coefficient]
+        );
+        assert_eq!(
+            answer
+                .block_labels
+                .iter()
+                .map(|label| label.as_slice()[0])
+                .collect::<Vec<_>>(),
+            expected.block_labels
+        );
+    }
+}
+
+fn check_gf4_target_subspace(case: &Gf4TargetSubspaceCase) {
+    let normalization = Matrix::new::<2>(
+        case.normalization.rows,
+        case.normalization.cols,
+        case.normalization.data.clone(),
+    )
+    .unwrap();
+    let profile = compile_binary_target_subspace::<Gf4>(
+        &case.columns,
+        &case.targets,
+        &normalization,
+        1 << (case.columns.len() * normalization.cols()),
+        1 << ((case.columns.len() - case.targets.len()) * normalization.cols()),
+    )
+    .unwrap();
+    let ordinary = profile
+        .ordinary()
+        .iter()
+        .map(|entry| MatrixCostFixture {
+            label: entry.label.as_slice().to_vec(),
+            cost: entry.cost,
+            coefficients: entry.coefficients.as_slice().to_vec(),
+        })
+        .collect::<Vec<_>>();
+    let target = profile
+        .target_normalized()
+        .iter()
+        .map(|entry| MatrixCostFixture {
+            label: entry.label.as_slice().to_vec(),
+            cost: entry.cost,
+            coefficients: entry.coefficients.as_slice().to_vec(),
+        })
+        .collect::<Vec<_>>();
+    assert_eq!(ordinary, case.ordinary);
+    assert_eq!(target, case.target_normalized);
+    assert_eq!(profile.target_union_cost(), case.target_union_cost);
+    assert_eq!(profile.inner_dual().unwrap().cost, case.inner_dual_distance);
+    let functional_basis = Matrix::new_field::<Gf4>(1, 2, case.functional_basis.clone()).unwrap();
+    let (ordinary_table, target_table) = profile.cost_tables::<Gf4>().unwrap();
+    let answer = confinement_by_generators_field::<Gf4>(
+        &functional_basis,
+        2,
+        &ordinary_table,
+        &target_table,
+        0,
+        case.inner_dual_distance,
+    )
+    .unwrap();
+    assert_eq!(answer.zero_cost, case.zero_cost);
+    assert_eq!(answer.nonzero_cost, Some(case.nonzero_cost));
+    assert_eq!(answer.cost, case.gamma);
+    assert_eq!(
+        answer
+            .block_labels
+            .iter()
+            .map(|label| label.as_slice().to_vec())
+            .collect::<Vec<_>>(),
+        case.winning_labels
+    );
+}
+
+fn check_target_tower(case: &TargetTowerCase) {
+    let table = |costs: &[u32]| {
+        CostTable::from_entries::<2>(
+            1,
+            1,
+            costs
+                .iter()
+                .enumerate()
+                .map(|(label, &cost)| (Matrix::new::<2>(1, 1, vec![label as u8]).unwrap(), cost)),
+        )
+        .unwrap()
+    };
+    let blocks = [
+        Matrix::new::<2>(1, 1, vec![1]).unwrap(),
+        Matrix::new::<2>(1, 1, vec![1]).unwrap(),
+    ];
+    let ordinary = table(&case.ordinary);
+    let target = table(&case.target);
+    let ordinary_one = CompositionTable::compose::<2>(&blocks, &ordinary).unwrap();
+    let target_one =
+        CompositionTable::compose_with_target::<2>(&blocks, &ordinary, &target, 0).unwrap();
+    for label in 0..2 {
+        let matrix = Matrix::new::<2>(1, 1, vec![label]).unwrap();
+        let ordinary_answer = ordinary_one.answer::<2>(&matrix).unwrap().unwrap();
+        let target_answer = target_one.answer::<2>(&matrix).unwrap().unwrap();
+        assert_eq!(
+            (
+                ordinary_answer.cost,
+                ordinary_answer
+                    .local_labels
+                    .iter()
+                    .map(|label| label.as_slice()[0])
+                    .collect::<Vec<_>>()
+            ),
+            case.ordinary_level_one[label as usize]
+        );
+        assert_eq!(
+            (
+                target_answer.cost,
+                target_answer
+                    .local_labels
+                    .iter()
+                    .map(|label| label.as_slice()[0])
+                    .collect::<Vec<_>>()
+            ),
+            case.target_level_one[label as usize]
+        );
+    }
+    let ordinary_table = ordinary_one.cost_table::<2>().unwrap();
+    let target_table = target_one.cost_table::<2>().unwrap();
+    let ordinary_two = CompositionTable::compose::<2>(&blocks, &ordinary_table).unwrap();
+    let target_two =
+        CompositionTable::compose_with_target::<2>(&blocks, &ordinary_table, &target_table, 0)
+            .unwrap();
+    for label in 0..2 {
+        let matrix = Matrix::new::<2>(1, 1, vec![label]).unwrap();
+        let ordinary_answer = ordinary_two.answer::<2>(&matrix).unwrap().unwrap();
+        let target_answer = target_two.answer::<2>(&matrix).unwrap().unwrap();
+        assert_eq!(
+            (
+                ordinary_answer.cost,
+                ordinary_answer
+                    .local_labels
+                    .iter()
+                    .map(|label| label.as_slice()[0])
+                    .collect::<Vec<_>>()
+            ),
+            case.ordinary_level_two[label as usize]
+        );
+        assert_eq!(
+            (
+                target_answer.cost,
+                target_answer
+                    .local_labels
+                    .iter()
+                    .map(|label| label.as_slice()[0])
+                    .collect::<Vec<_>>()
+            ),
+            case.target_level_two[label as usize]
+        );
+    }
+}
+
 fn check_balanced_terminal(case: &BalancedTerminalCase) {
     let catalog = BalancedTransversalCatalog::q27();
     let mapping = catalog.mappings(0).unwrap()[0];
@@ -435,7 +709,7 @@ fn check_balanced_terminal(case: &BalancedTerminalCase) {
 fn generated_spans_match_python_costs_and_supports() {
     let fixture: Fixture =
         serde_json::from_str(include_str!("fixtures/python_span_cases.json")).unwrap();
-    assert_eq!(fixture.schema, "ergo-comp-rust-v5");
+    assert_eq!(fixture.schema, "ergo-comp-rust-v6");
     for case in &fixture.balanced_terminal_cases {
         check_balanced_terminal(case);
     }
@@ -459,6 +733,15 @@ fn generated_spans_match_python_costs_and_supports() {
             3 => check_confinement::<3>(case),
             other => panic!("unsupported fixture prime {other}"),
         }
+    }
+    for case in &fixture.gf4_transfers {
+        check_gf4_transfer(case);
+    }
+    for case in &fixture.gf4_target_subspaces {
+        check_gf4_target_subspace(case);
+    }
+    for case in &fixture.target_towers {
+        check_target_tower(case);
     }
     for case in &fixture.orbits {
         check_orbit(case);

@@ -13,9 +13,7 @@ constraint programming-satisfiability (CP-SAT).
 It computes hierarchical cost tables, helper and confinement thresholds,
 maximum feasible repair batches, and structured code-search optima. Each result
 retains the helper choices, intermediate labels, resource loads, coefficient
-data, or obstruction needed to replay it. On the recorded exact scheduler
-profiles, ERGO-comp is 2.5--373 times faster than CP-SAT given the same safe
-preprocessing.
+data, or obstruction needed to replay it.
 
 The paper proves the reductions that ERGO-comp uses. No theorem in the paper
 depends on this implementation or on its benchmark results.
@@ -29,6 +27,11 @@ experiments beyond generalized weights. Reliability
 polynomials, secret-sharing and represented-matroid interfaces, and broader
 algebraic preprocessing for generic solvers are research directions, not
 claims about the current command-line interface.
+
+As secondary implementation evidence, ERGO-comp is 2.5--373 times faster than
+CP-SAT receiving the same safe preprocessing on the recorded exact scheduler
+profiles. The bounded comparison and its controls appear below; the tool's
+scientific role is its exact algebraic compilation and replay semantics.
 
 ## What it does
 
@@ -106,9 +109,55 @@ and the local label chosen in each outer block:
 }
 ```
 
-Matrix data is row-major and reduced modulo the declared prime. The composition
-command currently dispatches prime fields of orders 2, 3, 5, 7, 11, and 13;
-the library API can instantiate other prime orders at compile time.
+Matrix data is row-major and reduced in the declared field. The composition
+command dispatches prime fields of orders 2, 3, 5, 7, 11, and 13, and the
+canonical polynomial-basis representation
+`GF(4) = GF(2)[a]/(a^2+a+1)`. Extension-field elements `0,1,2,3` encode
+`0,1,a,a+1`; the JSON field descriptor declares degree two and modulus
+`[1,1,1]`. The library API can instantiate other prime orders at compile time.
+
+```sh
+cargo run --release --bin ergo-comp -- \
+  compose --input examples/data/compose-gf4.json
+```
+
+The paper's functional-label separation is executable directly from its two
+represented binary encoders and fixed outer functional dual:
+
+```sh
+cargo run --release --bin ergo-comp -- \
+  transfer --input examples/data/f4-scalar-separation.json
+```
+
+The result derives the associated pair `K_P` inside `D_P`, its quotient
+dimension and rank-one relative weight, both ordinary and target-normalized
+labelled cost tables, and the common inner-dual distance. It then computes the
+zero and nonzero sectors and `Gamma`, identifies the selected outer label, and
+expands the winning labels to binary coefficient witnesses. Candidate and
+outer-functional counts are reported separately from timing.
+
+An explicit normalized target subspace uses the matrix-valued path:
+
+```sh
+cargo run --release --bin ergo-comp -- \
+  transfer-subspace --input examples/data/transfer-subspace.json
+```
+
+This compiles union support across all demand columns, retains matrix-valued
+labels and coefficient witnesses, and evaluates the arbitrary-rank functional
+dual formula. A represented tower can then be compiled and replayed end to end:
+
+```sh
+cargo run --release --bin ergo-comp --features parallel -- \
+  transfer-tower --input examples/data/transfer-tower.json --parallel
+```
+
+The output is a budgeted recursive witness tree: internal nodes record the
+minimizing intermediate labels and leaf nodes expand them to coefficient
+matrices for the original inner encoder. Sequential and parallel execution
+return the same canonical tree. The theorem-native front ends currently remain
+bounded to binary encoders represented in canonical GF(4); other extension
+fields remain staged extensions.
 
 Large composition frontiers and generic scheduler Pareto/lattice kernels can
 run in parallel without changing the exact result or canonical witness:
@@ -128,9 +177,9 @@ would exceed the available parallel work.
 
 ![Parallel speedup by worker count](docs/parallel-scaling.svg)
 
-| workers | 1 | 2 | 4 | 6 | 8 | 12 | 16 | 20 | 24 |
-|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| composition | 0.94x | 1.68x | 2.06x | 2.50x | 2.82x | 3.00x | 3.15x | 3.19x | 2.69x |
+| profile           |     1 |     2 |     4 |     6 |     8 |    12 |    16 |    20 |    24 |
+|:------------------|------:|------:|------:|------:|------:|------:|------:|------:|------:|
+| composition       | 0.94x | 1.68x | 2.06x | 2.50x | 2.82x | 3.00x | 3.15x | 3.19x | 2.69x |
 | generic scheduler | 1.01x | 1.49x | 2.24x | 2.11x | 2.34x | 2.44x | 2.15x | 2.24x | 2.13x |
 
 These Criterion point estimates compare each parallel path with its native
@@ -169,12 +218,12 @@ loads before timing is accepted.
 
 An interleaved 11-round comparison on the frozen scheduler profiles measured:
 
-| profile | ERGO-comp | raw CP-SAT | structured CP-SAT | vs. raw | vs. structured |
-|---|---:|---:|---:|---:|---:|
-| shell large-box | 71.881 us | 178.630 us | 177.221 us | 2.485x | 2.465x |
-| balanced | 3.710 us | 1.143 ms | 995.895 us | 308.036x | 268.441x |
-| small-state | 7.304 us | 2.753 ms | 2.723 ms | 376.977x | 372.846x |
-| large nonuniform | 52.849 us | 1.250 ms | 1.041 ms | 23.646x | 19.697x |
+| profile          | ERGO-comp | raw CP-SAT | structured CP-SAT | vs. raw  | vs. structured |
+|:-----------------|----------:|-----------:|------------------:|---------:|---------------:|
+| shell large-box  | 71.881 us | 178.630 us |        177.221 us |   2.485x |         2.465x |
+| balanced         |  3.710 us |   1.143 ms |        995.895 us | 308.036x |       268.441x |
+| small-state      |  7.304 us |   2.753 ms |          2.723 ms | 376.977x |       372.846x |
+| large nonuniform | 52.849 us |   1.250 ms |          1.041 ms |  23.646x |        19.697x |
 
 ![ERGO-comp speedup over structured CP-SAT](docs/cpsat-comparison.svg)
 

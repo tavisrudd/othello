@@ -28,6 +28,54 @@ class Generator:
         return self.state >> 32
 
 
+def transfer_tower_spec(variant: str):
+    fields = variant.split(":")
+    if (
+        len(fields) != 4
+        or fields[0] != "transfer-tower"
+        or fields[1] not in ("cpsat", "cpsat-direct")
+    ):
+        return None
+    return fields[1], int(fields[2]), int(fields[3])
+
+
+def gf4_target_tables():
+    columns = (1, 2, 1, 2)
+    ordinary = {}
+    for packed in range(1 << 8):
+        coefficients = tuple((packed >> bit) & 1 for bit in range(8))
+        label = tuple(
+            columns[0] * coefficients[demand]
+            ^ columns[1] * coefficients[2 + demand]
+            ^ columns[2] * coefficients[4 + demand]
+            ^ columns[3] * coefficients[6 + demand]
+            for demand in range(2)
+        )
+        cost = sum(
+            coefficients[2 * row] != 0 or coefficients[2 * row + 1] != 0
+            for row in range(4)
+        )
+        ordinary[label] = min(cost, ordinary.get(label, cost))
+    target = {}
+    for packed in range(1 << 4):
+        coefficients = (1, 0, 0, 1) + tuple(
+            (packed >> bit) & 1 for bit in range(4)
+        )
+        label = tuple(
+            columns[0] * coefficients[demand]
+            ^ columns[1] * coefficients[2 + demand]
+            ^ columns[2] * coefficients[4 + demand]
+            ^ columns[3] * coefficients[6 + demand]
+            for demand in range(2)
+        )
+        cost = sum(
+            coefficients[2 * row] != 0 or coefficients[2 * row + 1] != 0
+            for row in range(2, 4)
+        )
+        target[label] = min(cost, target.get(label, cost))
+    return ordinary, target
+
+
 def scheduler_problem(
     small: bool = False,
     spec: tuple[int, int, int, int, int] | None = None,
@@ -175,8 +223,9 @@ def main() -> None:
     grid = scheduler_grid_spec(variant)
     graded_grid = graded_scheduler_grid_spec(variant)
     heterogeneous_grid = heterogeneous_scheduler_grid_spec(variant)
+    transfer_tower = transfer_tower_spec(variant)
     cp_model = None
-    if variant in ("scheduler-cpsat", "scheduler-cpsat-small") or (
+    if transfer_tower is not None or variant in ("scheduler-cpsat", "scheduler-cpsat-small") or (
         grid is not None and grid[0] == "cpsat"
     ) or (
         graded_grid is not None and graded_grid[0].startswith("cpsat")
@@ -188,7 +237,80 @@ def main() -> None:
         cp_model = loaded_cp_model
     work = peak_states = checksum = 0
     started = perf_counter_ns()
-    if variant in ("scheduler-python", "scheduler-python-small"):
+    if transfer_tower is not None:
+        assert cp_model is not None
+        backend, depth, fanout = transfer_tower
+        leaves = fanout**depth
+        model = cp_model.CpModel()
+        if backend == "cpsat":
+            ordinary, target = gf4_target_tables()
+            choices = []
+            for leaf in range(leaves):
+                table = target if leaf == 0 else ordinary
+                choices.append(
+                    [
+                        (label, cost, model.new_bool_var(f"x_{leaf}_{option}"))
+                        for option, (label, cost) in enumerate(sorted(table.items()))
+                    ]
+                )
+                model.add_exactly_one(variable for _, _, variable in choices[-1])
+            for demand in range(2):
+                for bit in range(2):
+                    active = [
+                        variable
+                        for leaf in choices
+                        for label, _, variable in leaf
+                        if (label[demand] >> bit) & 1
+                    ]
+                    half = model.new_int_var(0, leaves // 2, f"half_{demand}_{bit}")
+                    model.add(sum(active) == 2 * half)
+            model.minimize(
+                sum(cost * variable for leaf in choices for _, cost, variable in leaf)
+            )
+        else:
+            columns = (1, 2, 1, 2)
+            coefficients = []
+            supports = []
+            for leaf in range(leaves):
+                leaf_coefficients = []
+                for row in range(4):
+                    row_coefficients = []
+                    for demand in range(2):
+                        fixed = leaf == 0 and row < 2
+                        value = int(fixed and row == demand)
+                        row_coefficients.append(
+                            model.new_constant(value)
+                            if fixed
+                            else model.new_bool_var(f"a_{leaf}_{row}_{demand}")
+                        )
+                    leaf_coefficients.append(row_coefficients)
+                    if not (leaf == 0 and row < 2):
+                        support = model.new_bool_var(f"s_{leaf}_{row}")
+                        model.add_max_equality(support, row_coefficients)
+                        supports.append(support)
+                coefficients.append(leaf_coefficients)
+            for demand in range(2):
+                for bit in range(2):
+                    active = [
+                        coefficients[leaf][row][demand]
+                        for leaf in range(leaves)
+                        for row, column in enumerate(columns)
+                        if (column >> bit) & 1
+                    ]
+                    half = model.new_int_var(0, len(active) // 2 + 1, f"half_{demand}_{bit}")
+                    model.add(sum(active) == 2 * half)
+            model.minimize(sum(supports))
+        solver = cp_model.CpSolver()
+        solver.parameters.num_workers = 1
+        solver.parameters.random_seed = 0
+        for _ in range(repetitions):
+            status = solver.solve(model)
+            if status != cp_model.OPTIMAL:
+                raise RuntimeError(f"CP-SAT did not prove optimality: {solver.status_name(status)}")
+            work += solver.num_branches
+            peak_states = max(peak_states, solver.num_conflicts)
+            checksum += round(solver.objective_value)
+    elif variant in ("scheduler-python", "scheduler-python-small"):
         families, capacities = scheduler_problem(variant.endswith("-small"))
         for _ in range(repetitions):
             answer = maximum_weighted_parallel_repairs(families, capacities)

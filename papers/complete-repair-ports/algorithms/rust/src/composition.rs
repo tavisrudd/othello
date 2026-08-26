@@ -1,5 +1,5 @@
 use crate::arena::{FlatMatrixArena, MatrixId};
-use crate::field::Prime;
+use crate::field::{FiniteField, Prime};
 use crate::matrix::{Matrix, MatrixError};
 use rustc_hash::FxHashMap;
 use thiserror::Error;
@@ -17,6 +17,10 @@ pub enum CompositionError {
     Shape,
     #[error("cost or state count exceeds its compact representation")]
     Overflow,
+    #[error("expanded tower witness needs {required} nodes but the budget is {budget}")]
+    WitnessBudget { required: u64, budget: u64 },
+    #[error("tower depth {depth} exceeds the replay-safe limit {limit}")]
+    TowerDepth { depth: usize, limit: usize },
 }
 
 #[repr(C)]
@@ -45,6 +49,7 @@ const _: () = assert!(std::mem::size_of::<CompositionWitnessNode>() == 16);
 const _: () = assert!(std::mem::align_of::<CompositionWitnessNode>() == 4);
 
 const ROOT_WITNESS: u32 = u32::MAX;
+const MAX_TOWER_DEPTH: usize = 256;
 
 #[derive(Clone, Debug)]
 pub struct CostTable {
@@ -62,7 +67,15 @@ impl CostTable {
         cols: usize,
         entries: impl IntoIterator<Item = (Matrix, u32)>,
     ) -> Result<Self, CompositionError> {
-        Prime::<P>::validate().map_err(MatrixError::from)?;
+        Self::from_entries_field::<Prime<P>>(rows, cols, entries)
+    }
+
+    pub fn from_entries_field<F: FiniteField>(
+        rows: usize,
+        cols: usize,
+        entries: impl IntoIterator<Item = (Matrix, u32)>,
+    ) -> Result<Self, CompositionError> {
+        F::validate().map_err(MatrixError::from)?;
         let mut best: FxHashMap<Box<[u8]>, u32> = FxHashMap::default();
         for (label, cost) in entries {
             if label.rows() != rows || label.cols() != cols {
@@ -92,7 +105,7 @@ impl CostTable {
             });
         }
         Ok(Self {
-            p: P,
+            p: F::ORDER,
             rows: u16::try_from(rows).map_err(|_| CompositionError::Overflow)?,
             cols: u16::try_from(cols).map_err(|_| CompositionError::Overflow)?,
             labels,
@@ -118,12 +131,19 @@ impl CostTable {
     }
 
     pub fn entries<const P: u8>(&self) -> Result<Vec<(Matrix, u32)>, CompositionError> {
+        self.entries_field::<Prime<P>>()
+    }
+
+    pub fn entries_field<F: FiniteField>(&self) -> Result<Vec<(Matrix, u32)>, CompositionError> {
+        if self.p != F::ORDER {
+            return Err(CompositionError::Shape);
+        }
         self.records
             .iter()
             .map(|record| {
                 let label = self.labels.get(record.label);
                 Ok((
-                    Matrix::new::<P>(label.rows, label.cols, label.data.to_vec())?,
+                    Matrix::new_field::<F>(label.rows, label.cols, label.data.to_vec())?,
                     record.cost,
                 ))
             })
@@ -154,14 +174,54 @@ pub struct CompositionAnswer {
     pub local_labels: Box<[Matrix]>,
 }
 
+#[derive(Clone, Debug)]
+pub struct TowerLevel {
+    pub outer_blocks: Box<[Matrix]>,
+    pub target_block: usize,
+}
+
+#[derive(Debug)]
+struct CompiledTowerLevel {
+    target_block: usize,
+    block_count: usize,
+    ordinary: CompositionTable,
+    target: CompositionTable,
+}
+
+#[derive(Debug)]
+pub struct CompositionTower {
+    ordinary_base: CostTable,
+    target_base: CostTable,
+    levels: Box<[CompiledTowerLevel]>,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+pub struct TowerWitness {
+    pub label: Matrix,
+    pub cost: u32,
+    pub target_normalized: bool,
+    pub children: Box<[TowerWitness]>,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+pub struct TowerAnswer {
+    pub cost: u32,
+    pub witness_nodes: u64,
+    pub witness: TowerWitness,
+}
+
 #[derive(Debug)]
 pub struct CompositionTable {
     rows: u16,
     cols: u16,
+    labels: FlatMatrixArena,
     records: Box<[CostRecord]>,
     index: FxHashMap<Box<[u8]>, u32>,
     witnesses: Box<[CompositionWitnessNode]>,
-    inner: CostTable,
+    ordinary: CostTable,
+    target: Option<CostTable>,
+    target_block: u16,
+    _pad: u16,
     transitions: u64,
 }
 
@@ -170,7 +230,59 @@ impl CompositionTable {
         outer_blocks: &[Matrix],
         inner: &CostTable,
     ) -> Result<Self, CompositionError> {
-        Self::compose_impl::<P>(outer_blocks, inner, false)
+        Self::compose_field::<Prime<P>>(outer_blocks, inner)
+    }
+
+    pub fn compose_field<F: FiniteField>(
+        outer_blocks: &[Matrix],
+        inner: &CostTable,
+    ) -> Result<Self, CompositionError> {
+        Self::compose_impl::<F>(outer_blocks, inner, None, false)
+    }
+
+    pub fn compose_with_target_field<F: FiniteField>(
+        outer_blocks: &[Matrix],
+        ordinary: &CostTable,
+        target: &CostTable,
+        target_block: usize,
+    ) -> Result<Self, CompositionError> {
+        Self::compose_impl::<F>(outer_blocks, ordinary, Some((target, target_block)), false)
+    }
+
+    pub fn compose_with_target<const P: u8>(
+        outer_blocks: &[Matrix],
+        ordinary: &CostTable,
+        target: &CostTable,
+        target_block: usize,
+    ) -> Result<Self, CompositionError> {
+        Self::compose_with_target_field::<Prime<P>>(outer_blocks, ordinary, target, target_block)
+    }
+
+    /// Composes ordinary and target-normalized tables with parallel frontier
+    /// transitions while preserving the sequential canonical witness.
+    #[cfg(feature = "parallel")]
+    pub fn compose_with_target_parallel_field<F: FiniteField>(
+        outer_blocks: &[Matrix],
+        ordinary: &CostTable,
+        target: &CostTable,
+        target_block: usize,
+    ) -> Result<Self, CompositionError> {
+        Self::compose_impl::<F>(outer_blocks, ordinary, Some((target, target_block)), true)
+    }
+
+    #[cfg(feature = "parallel")]
+    pub fn compose_with_target_parallel<const P: u8>(
+        outer_blocks: &[Matrix],
+        ordinary: &CostTable,
+        target: &CostTable,
+        target_block: usize,
+    ) -> Result<Self, CompositionError> {
+        Self::compose_with_target_parallel_field::<Prime<P>>(
+            outer_blocks,
+            ordinary,
+            target,
+            target_block,
+        )
     }
 
     /// Composes independent frontier transitions in parallel.
@@ -182,28 +294,45 @@ impl CompositionTable {
         outer_blocks: &[Matrix],
         inner: &CostTable,
     ) -> Result<Self, CompositionError> {
-        Self::compose_impl::<P>(outer_blocks, inner, true)
+        Self::compose_parallel_field::<Prime<P>>(outer_blocks, inner)
     }
 
-    fn compose_impl<const P: u8>(
+    #[cfg(feature = "parallel")]
+    pub fn compose_parallel_field<F: FiniteField>(
         outer_blocks: &[Matrix],
         inner: &CostTable,
+    ) -> Result<Self, CompositionError> {
+        Self::compose_impl::<F>(outer_blocks, inner, None, true)
+    }
+
+    fn compose_impl<F: FiniteField>(
+        outer_blocks: &[Matrix],
+        inner: &CostTable,
+        target_inner: Option<(&CostTable, usize)>,
         _parallel: bool,
     ) -> Result<Self, CompositionError> {
-        Prime::<P>::validate().map_err(MatrixError::from)?;
+        F::validate().map_err(MatrixError::from)?;
         let Some(first) = outer_blocks.first() else {
             return Err(CompositionError::Shape);
         };
         let output_rows = first.rows();
         let inner_rows = inner.rows as usize;
         let demand_cols = inner.cols as usize;
-        if inner.p != P
+        if inner.p != F::ORDER
             || first.cols() != inner_rows
             || outer_blocks
                 .iter()
                 .any(|block| block.rows() != output_rows || block.cols() != inner_rows)
         {
             return Err(CompositionError::Shape);
+        }
+        if let Some((target_table, target_block)) = target_inner {
+            if target_table.p != F::ORDER
+                || target_table.shape() != inner.shape()
+                || target_block >= outer_blocks.len()
+            {
+                return Err(CompositionError::Shape);
+            }
         }
 
         let output_len = output_rows * demand_cols;
@@ -218,14 +347,18 @@ impl CompositionTable {
         }];
         let mut witnesses = Vec::new();
         let mut transitions = 0u64;
-        let mut increments = vec![0u8; inner.records.len() * output_len];
+        let mut increments = Vec::new();
         let mut target = vec![0u8; output_len];
         let mut state_bytes = vec![0u8; output_len];
 
         for (block_index, block) in outer_blocks.iter().enumerate() {
-            for (choice, record) in inner.records.iter().enumerate() {
-                let local = inner.labels.get(record.label);
-                multiply_into::<P>(
+            let local_inner = target_inner
+                .filter(|(_, target_block)| *target_block == block_index)
+                .map_or(inner, |(target_table, _)| target_table);
+            increments.resize(local_inner.records.len() * output_len, 0);
+            for (choice, record) in local_inner.records.iter().enumerate() {
+                let local = local_inner.labels.get(record.label);
+                multiply_into::<F>(
                     block,
                     local.data,
                     local.cols,
@@ -234,13 +367,13 @@ impl CompositionTable {
             }
             #[cfg(feature = "parallel")]
             if _parallel
-                && states.len().saturating_mul(inner.records.len())
+                && states.len().saturating_mul(local_inner.records.len())
                     >= PARALLEL_COMPOSITION_TRANSITIONS
             {
                 let added = u64::try_from(states.len())
                     .ok()
                     .and_then(|states| {
-                        u64::try_from(inner.records.len())
+                        u64::try_from(local_inner.records.len())
                             .ok()
                             .and_then(|choices| states.checked_mul(choices))
                     })
@@ -248,14 +381,14 @@ impl CompositionTable {
                 transitions = transitions
                     .checked_add(added)
                     .ok_or(CompositionError::Overflow)?;
-                states = parallel_composition_step::<P>(
+                states = parallel_composition_step::<F>(
                     block_index,
                     output_rows,
                     demand_cols,
                     &states,
                     &mut labels,
                     &mut witnesses,
-                    inner,
+                    local_inner,
                     &increments,
                 )?;
                 continue;
@@ -266,10 +399,10 @@ impl CompositionTable {
             for state in &states {
                 let state_label = labels.get(state.label);
                 state_bytes.copy_from_slice(state_label.data);
-                for (choice, inner_record) in inner.records.iter().enumerate() {
+                for (choice, inner_record) in local_inner.records.iter().enumerate() {
                     transitions += 1;
                     let increment = &increments[choice * output_len..(choice + 1) * output_len];
-                    add_into::<P>(&state_bytes, increment, &mut target);
+                    add_into::<F>(&state_bytes, increment, &mut target);
                     let candidate_cost = state
                         .cost
                         .checked_add(inner_record.cost)
@@ -314,20 +447,32 @@ impl CompositionTable {
             states = next;
         }
 
+        let mut final_labels = FlatMatrixArena::default();
+        for record in &mut states {
+            let label = labels.get(record.label);
+            record.label = final_labels.push(label.rows, label.cols, label.data);
+        }
         let mut index = FxHashMap::default();
         for (position, record) in states.iter().enumerate() {
             index.insert(
-                labels.get(record.label).data.into(),
+                final_labels.get(record.label).data.into(),
                 u32::try_from(position).map_err(|_| CompositionError::Overflow)?,
             );
         }
         Ok(Self {
             rows: u16::try_from(output_rows).map_err(|_| CompositionError::Overflow)?,
             cols: inner.cols,
+            labels: final_labels,
             records: states.into_boxed_slice(),
             index,
             witnesses: witnesses.into_boxed_slice(),
-            inner: inner.clone(),
+            ordinary: inner.clone(),
+            target: target_inner.map(|(table, _)| table.clone()),
+            target_block: target_inner
+                .map(|(_, block)| u16::try_from(block).map_err(|_| CompositionError::Overflow))
+                .transpose()?
+                .unwrap_or(u16::MAX),
+            _pad: 0,
             transitions,
         })
     }
@@ -348,7 +493,17 @@ impl CompositionTable {
         &self,
         label: &Matrix,
     ) -> Result<Option<CompositionAnswer>, CompositionError> {
-        if label.rows() != self.rows as usize || label.cols() != self.cols as usize {
+        self.answer_field::<Prime<P>>(label)
+    }
+
+    pub fn answer_field<F: FiniteField>(
+        &self,
+        label: &Matrix,
+    ) -> Result<Option<CompositionAnswer>, CompositionError> {
+        if self.ordinary.p != F::ORDER
+            || label.rows() != self.rows as usize
+            || label.cols() != self.cols as usize
+        {
             return Err(CompositionError::Shape);
         }
         let Some(&position) = self.index.get(label.as_slice()) else {
@@ -357,10 +512,15 @@ impl CompositionTable {
         let record = self.records[position as usize];
         let mut choices = path_choices(&self.witnesses, record.witness);
         let mut local_labels = Vec::with_capacity(choices.len());
-        for choice in choices.drain(..) {
-            let inner_record = self.inner.records[choice as usize];
-            let local = self.inner.labels.get(inner_record.label);
-            local_labels.push(Matrix::new::<P>(
+        for (block, choice) in choices.drain(..).enumerate() {
+            let table = if block == self.target_block as usize {
+                self.target.as_ref().unwrap_or(&self.ordinary)
+            } else {
+                &self.ordinary
+            };
+            let inner_record = table.records[choice as usize];
+            let local = table.labels.get(inner_record.label);
+            local_labels.push(Matrix::new_field::<F>(
                 local.rows,
                 local.cols,
                 local.data.to_vec(),
@@ -369,6 +529,252 @@ impl CompositionTable {
         Ok(Some(CompositionAnswer {
             cost: record.cost,
             local_labels: local_labels.into_boxed_slice(),
+        }))
+    }
+
+    pub fn cost_table_field<F: FiniteField>(&self) -> Result<CostTable, CompositionError> {
+        if self.ordinary.p != F::ORDER {
+            return Err(CompositionError::Shape);
+        }
+        let entries = self
+            .records
+            .iter()
+            .map(|record| {
+                let label = self.labels.get(record.label);
+                Ok((
+                    Matrix::new_field::<F>(label.rows, label.cols, label.data.to_vec())?,
+                    record.cost,
+                ))
+            })
+            .collect::<Result<Vec<_>, MatrixError>>()?;
+        CostTable::from_entries_field::<F>(self.rows as usize, self.cols as usize, entries)
+    }
+
+    pub fn cost_table<const P: u8>(&self) -> Result<CostTable, CompositionError> {
+        self.cost_table_field::<Prime<P>>()
+    }
+}
+
+impl CompositionTower {
+    pub fn compile_field<F: FiniteField>(
+        ordinary_base: &CostTable,
+        target_base: &CostTable,
+        levels: &[TowerLevel],
+    ) -> Result<Self, CompositionError> {
+        Self::validate_bases::<F>(ordinary_base, target_base)?;
+        Self::validate_depth(levels)?;
+        let mut ordinary_table = ordinary_base.clone();
+        let mut target_table = target_base.clone();
+        let mut compiled = Vec::with_capacity(levels.len());
+        for level in levels {
+            let ordinary =
+                CompositionTable::compose_field::<F>(&level.outer_blocks, &ordinary_table)?;
+            let target = CompositionTable::compose_with_target_field::<F>(
+                &level.outer_blocks,
+                &ordinary_table,
+                &target_table,
+                level.target_block,
+            )?;
+            ordinary_table = ordinary.cost_table_field::<F>()?;
+            target_table = target.cost_table_field::<F>()?;
+            compiled.push(CompiledTowerLevel {
+                target_block: level.target_block,
+                block_count: level.outer_blocks.len(),
+                ordinary,
+                target,
+            });
+        }
+        Ok(Self {
+            ordinary_base: ordinary_base.clone(),
+            target_base: target_base.clone(),
+            levels: compiled.into_boxed_slice(),
+        })
+    }
+
+    pub fn compile<const P: u8>(
+        ordinary_base: &CostTable,
+        target_base: &CostTable,
+        levels: &[TowerLevel],
+    ) -> Result<Self, CompositionError> {
+        Self::compile_field::<Prime<P>>(ordinary_base, target_base, levels)
+    }
+
+    #[cfg(feature = "parallel")]
+    pub fn compile_parallel_field<F: FiniteField>(
+        ordinary_base: &CostTable,
+        target_base: &CostTable,
+        levels: &[TowerLevel],
+    ) -> Result<Self, CompositionError> {
+        Self::validate_bases::<F>(ordinary_base, target_base)?;
+        Self::validate_depth(levels)?;
+        let mut ordinary_table = ordinary_base.clone();
+        let mut target_table = target_base.clone();
+        let mut compiled = Vec::with_capacity(levels.len());
+        for level in levels {
+            let ordinary = CompositionTable::compose_parallel_field::<F>(
+                &level.outer_blocks,
+                &ordinary_table,
+            )?;
+            let target = CompositionTable::compose_with_target_parallel_field::<F>(
+                &level.outer_blocks,
+                &ordinary_table,
+                &target_table,
+                level.target_block,
+            )?;
+            ordinary_table = ordinary.cost_table_field::<F>()?;
+            target_table = target.cost_table_field::<F>()?;
+            compiled.push(CompiledTowerLevel {
+                target_block: level.target_block,
+                block_count: level.outer_blocks.len(),
+                ordinary,
+                target,
+            });
+        }
+        Ok(Self {
+            ordinary_base: ordinary_base.clone(),
+            target_base: target_base.clone(),
+            levels: compiled.into_boxed_slice(),
+        })
+    }
+
+    pub fn answer_target_field<F: FiniteField>(
+        &self,
+        label: &Matrix,
+        witness_node_budget: u64,
+    ) -> Result<Option<TowerAnswer>, CompositionError> {
+        self.answer_impl::<F>(label, true, witness_node_budget)
+    }
+
+    pub fn answer_target<const P: u8>(
+        &self,
+        label: &Matrix,
+        witness_node_budget: u64,
+    ) -> Result<Option<TowerAnswer>, CompositionError> {
+        self.answer_target_field::<Prime<P>>(label, witness_node_budget)
+    }
+
+    pub fn answer_ordinary_field<F: FiniteField>(
+        &self,
+        label: &Matrix,
+        witness_node_budget: u64,
+    ) -> Result<Option<TowerAnswer>, CompositionError> {
+        self.answer_impl::<F>(label, false, witness_node_budget)
+    }
+
+    pub fn answer_ordinary<const P: u8>(
+        &self,
+        label: &Matrix,
+        witness_node_budget: u64,
+    ) -> Result<Option<TowerAnswer>, CompositionError> {
+        self.answer_ordinary_field::<Prime<P>>(label, witness_node_budget)
+    }
+
+    fn validate_bases<F: FiniteField>(
+        ordinary_base: &CostTable,
+        target_base: &CostTable,
+    ) -> Result<(), CompositionError> {
+        F::validate().map_err(MatrixError::from)?;
+        if ordinary_base.p != F::ORDER
+            || target_base.p != F::ORDER
+            || ordinary_base.shape() != target_base.shape()
+        {
+            return Err(CompositionError::Shape);
+        }
+        Ok(())
+    }
+
+    fn validate_depth(levels: &[TowerLevel]) -> Result<(), CompositionError> {
+        if levels.len() > MAX_TOWER_DEPTH {
+            return Err(CompositionError::TowerDepth {
+                depth: levels.len(),
+                limit: MAX_TOWER_DEPTH,
+            });
+        }
+        Ok(())
+    }
+
+    fn answer_impl<F: FiniteField>(
+        &self,
+        label: &Matrix,
+        target_normalized: bool,
+        witness_node_budget: u64,
+    ) -> Result<Option<TowerAnswer>, CompositionError> {
+        let required = self.witness_node_count()?;
+        if required > witness_node_budget {
+            return Err(CompositionError::WitnessBudget {
+                required,
+                budget: witness_node_budget,
+            });
+        }
+        let Some(witness) =
+            self.expand::<F>(self.levels.len().checked_sub(1), label, target_normalized)?
+        else {
+            return Ok(None);
+        };
+        Ok(Some(TowerAnswer {
+            cost: witness.cost,
+            witness_nodes: required,
+            witness,
+        }))
+    }
+
+    fn witness_node_count(&self) -> Result<u64, CompositionError> {
+        let mut frontier = 1u64;
+        let mut total = 1u64;
+        for level in self.levels.iter().rev() {
+            frontier = frontier
+                .checked_mul(
+                    u64::try_from(level.block_count).map_err(|_| CompositionError::Overflow)?,
+                )
+                .ok_or(CompositionError::Overflow)?;
+            total = total
+                .checked_add(frontier)
+                .ok_or(CompositionError::Overflow)?;
+        }
+        Ok(total)
+    }
+
+    fn expand<F: FiniteField>(
+        &self,
+        level_index: Option<usize>,
+        label: &Matrix,
+        target_normalized: bool,
+    ) -> Result<Option<TowerWitness>, CompositionError> {
+        let Some(level_index) = level_index else {
+            let table = if target_normalized {
+                &self.target_base
+            } else {
+                &self.ordinary_base
+            };
+            return Ok(table.cost(label).map(|cost| TowerWitness {
+                label: label.clone(),
+                cost,
+                target_normalized,
+                children: Box::new([]),
+            }));
+        };
+        let level = &self.levels[level_index];
+        let table = if target_normalized {
+            &level.target
+        } else {
+            &level.ordinary
+        };
+        let Some(answer) = table.answer_field::<F>(label)? else {
+            return Ok(None);
+        };
+        let mut children = Vec::with_capacity(answer.local_labels.len());
+        for (block, local_label) in answer.local_labels.iter().enumerate() {
+            let child_target = target_normalized && block == level.target_block;
+            let child = self
+                .expand::<F>(level_index.checked_sub(1), local_label, child_target)?
+                .ok_or(CompositionError::Shape)?;
+            children.push(child);
+        }
+        Ok(Some(TowerWitness {
+            label: label.clone(),
+            cost: answer.cost,
+            target_normalized,
+            children: children.into_boxed_slice(),
         }))
     }
 }
@@ -386,7 +792,7 @@ struct PendingComposition {
 
 #[cfg(feature = "parallel")]
 #[allow(clippy::too_many_arguments)]
-fn parallel_composition_step<const P: u8>(
+fn parallel_composition_step<F: FiniteField>(
     block_index: usize,
     output_rows: usize,
     demand_cols: usize,
@@ -408,7 +814,7 @@ fn parallel_composition_step<const P: u8>(
                 let state_label = labels.get(state.label);
                 for (choice, inner_record) in inner.records.iter().enumerate() {
                     let increment = &increments[choice * output_len..(choice + 1) * output_len];
-                    add_into::<P>(state_label.data, increment, &mut target);
+                    add_into::<F>(state_label.data, increment, &mut target);
                     let candidate = PendingComposition {
                         cost: state
                             .cost
@@ -502,7 +908,12 @@ fn virtual_path(witnesses: &[CompositionWitnessNode], parent: u32, choice: u32) 
 }
 
 #[inline]
-fn multiply_into<const P: u8>(left: &Matrix, right: &[u8], right_cols: usize, output: &mut [u8]) {
+fn multiply_into<F: FiniteField>(
+    left: &Matrix,
+    right: &[u8],
+    right_cols: usize,
+    output: &mut [u8],
+) {
     let shared = left.cols();
     debug_assert_eq!(right.len(), shared * right_cols);
     debug_assert_eq!(output.len(), left.rows() * right_cols);
@@ -514,20 +925,20 @@ fn multiply_into<const P: u8>(left: &Matrix, right: &[u8], right_cols: usize, ou
                 continue;
             }
             for col in 0..right_cols {
-                let product = Prime::<P>::mul(factor, right[k * right_cols + col]);
+                let product = F::mul(factor, right[k * right_cols + col]);
                 let index = row * right_cols + col;
-                output[index] = Prime::<P>::add(output[index], product);
+                output[index] = F::add(output[index], product);
             }
         }
     }
 }
 
 #[inline]
-fn add_into<const P: u8>(left: &[u8], right: &[u8], output: &mut [u8]) {
+fn add_into<F: FiniteField>(left: &[u8], right: &[u8], output: &mut [u8]) {
     debug_assert_eq!(left.len(), right.len());
     debug_assert_eq!(left.len(), output.len());
     for ((output, &left), &right) in output.iter_mut().zip(left).zip(right) {
-        *output = Prime::<P>::add(left, right);
+        *output = F::add(left, right);
     }
 }
 
@@ -605,6 +1016,329 @@ mod tests {
         assert_eq!(answer.cost, 1);
         assert_eq!(answer.local_labels[0].as_slice(), &[0]);
         assert_eq!(answer.local_labels[1].as_slice(), &[1]);
+    }
+
+    #[test]
+    fn gf4_composition_retains_extension_field_labels() {
+        use crate::field::Gf4;
+
+        let inner = CostTable::from_entries_field::<Gf4>(
+            1,
+            1,
+            [
+                (Matrix::new_field::<Gf4>(1, 1, vec![0]).unwrap(), 0),
+                (Matrix::new_field::<Gf4>(1, 1, vec![1]).unwrap(), 1),
+                (Matrix::new_field::<Gf4>(1, 1, vec![2]).unwrap(), 2),
+                (Matrix::new_field::<Gf4>(1, 1, vec![3]).unwrap(), 3),
+            ],
+        )
+        .unwrap();
+        let blocks = [
+            Matrix::new_field::<Gf4>(1, 1, vec![2]).unwrap(),
+            Matrix::new_field::<Gf4>(1, 1, vec![1]).unwrap(),
+        ];
+        let table = CompositionTable::compose_field::<Gf4>(&blocks, &inner).unwrap();
+        let target = Matrix::new_field::<Gf4>(1, 1, vec![3]).unwrap();
+        let answer = table.answer_field::<Gf4>(&target).unwrap().unwrap();
+        assert_eq!(answer.cost, 2);
+        assert_eq!(answer.local_labels[0].as_slice(), &[1]);
+        assert_eq!(answer.local_labels[1].as_slice(), &[1]);
+    }
+
+    #[test]
+    fn gf4_scalar_composition_matches_exhaustive_two_block_oracle() {
+        use crate::field::{FiniteField, Gf4};
+
+        for costs in [[0, 3, 1, 2], [4, 0, 4, 1], [2, 2, 2, 2]] {
+            let inner = CostTable::from_entries_field::<Gf4>(
+                1,
+                1,
+                costs.into_iter().enumerate().map(|(label, cost)| {
+                    (
+                        Matrix::new_field::<Gf4>(1, 1, vec![label as u8]).unwrap(),
+                        cost,
+                    )
+                }),
+            )
+            .unwrap();
+            for left_factor in 0..4 {
+                for right_factor in 0..4 {
+                    let blocks = [
+                        Matrix::new_field::<Gf4>(1, 1, vec![left_factor]).unwrap(),
+                        Matrix::new_field::<Gf4>(1, 1, vec![right_factor]).unwrap(),
+                    ];
+                    let table = CompositionTable::compose_field::<Gf4>(&blocks, &inner).unwrap();
+                    for target_value in 0..4 {
+                        let target = Matrix::new_field::<Gf4>(1, 1, vec![target_value]).unwrap();
+                        let answer = table.answer_field::<Gf4>(&target).unwrap();
+                        let mut expected = None;
+                        for left_label in 0..4 {
+                            for right_label in 0..4 {
+                                let value = Gf4::add(
+                                    Gf4::mul(left_factor, left_label),
+                                    Gf4::mul(right_factor, right_label),
+                                );
+                                if value != target_value {
+                                    continue;
+                                }
+                                let candidate = (
+                                    costs[left_label as usize] + costs[right_label as usize],
+                                    left_label,
+                                    right_label,
+                                );
+                                if expected.is_none_or(|incumbent| candidate < incumbent) {
+                                    expected = Some(candidate);
+                                }
+                            }
+                        }
+                        match (answer, expected) {
+                            (None, None) => {}
+                            (Some(answer), Some((cost, left_label, right_label))) => {
+                                assert_eq!(answer.cost, cost);
+                                assert_eq!(answer.local_labels[0].as_slice(), &[left_label]);
+                                assert_eq!(answer.local_labels[1].as_slice(), &[right_label]);
+                            }
+                            mismatch => {
+                                panic!("composition/oracle feasibility mismatch: {mismatch:?}")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn gf4_parallel_composition_matches_sequential_witnesses() {
+        use crate::field::Gf4;
+
+        let entries = (0u16..256)
+            .map(|encoded| {
+                let data = (0..4)
+                    .map(|shift| ((encoded >> (2 * shift)) & 3) as u8)
+                    .collect::<Vec<_>>();
+                let cost = data.iter().map(|&entry| u32::from(entry != 0)).sum();
+                (Matrix::new_field::<Gf4>(4, 1, data).unwrap(), cost)
+            })
+            .collect::<Vec<_>>();
+        let inner = CostTable::from_entries_field::<Gf4>(4, 1, entries).unwrap();
+        let identity = Matrix::new_field::<Gf4>(
+            4,
+            4,
+            (0..16)
+                .map(|index| u8::from(index / 4 == index % 4))
+                .collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let blocks = [identity.clone(), identity];
+        let sequential = CompositionTable::compose_field::<Gf4>(&blocks, &inner).unwrap();
+        let parallel = CompositionTable::compose_parallel_field::<Gf4>(&blocks, &inner).unwrap();
+        assert_eq!(parallel.transitions(), sequential.transitions());
+        for encoded in [0u8, 1, 2, 3, 27, 108, 255] {
+            let target = Matrix::new_field::<Gf4>(
+                4,
+                1,
+                (0..4)
+                    .map(|shift| (encoded >> (2 * shift)) & 3)
+                    .collect::<Vec<_>>(),
+            )
+            .unwrap();
+            let sequential_answer = sequential.answer_field::<Gf4>(&target).unwrap().unwrap();
+            let parallel_answer = parallel.answer_field::<Gf4>(&target).unwrap().unwrap();
+            assert_eq!(parallel_answer.cost, sequential_answer.cost);
+            assert_eq!(parallel_answer.local_labels, sequential_answer.local_labels);
+        }
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn target_aware_parallel_composition_matches_sequential_witnesses() {
+        use crate::field::Gf4;
+
+        let entries = (0u16..256)
+            .map(|encoded| {
+                let data = (0..4)
+                    .map(|shift| ((encoded >> (2 * shift)) & 3) as u8)
+                    .collect::<Vec<_>>();
+                let cost = data.iter().map(|&entry| u32::from(entry != 0)).sum();
+                (Matrix::new_field::<Gf4>(4, 1, data).unwrap(), cost)
+            })
+            .collect::<Vec<_>>();
+        let ordinary = CostTable::from_entries_field::<Gf4>(4, 1, entries.clone()).unwrap();
+        let target = CostTable::from_entries_field::<Gf4>(
+            4,
+            1,
+            entries
+                .into_iter()
+                .map(|(label, cost)| (label, 4 - cost))
+                .collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let identity = Matrix::new_field::<Gf4>(
+            4,
+            4,
+            (0..16)
+                .map(|index| u8::from(index / 4 == index % 4))
+                .collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let blocks = [identity.clone(), identity];
+        let sequential =
+            CompositionTable::compose_with_target_field::<Gf4>(&blocks, &ordinary, &target, 0)
+                .unwrap();
+        let parallel = CompositionTable::compose_with_target_parallel_field::<Gf4>(
+            &blocks, &ordinary, &target, 0,
+        )
+        .unwrap();
+        assert_eq!(parallel.transitions(), sequential.transitions());
+        for encoded in [0u8, 1, 2, 3, 27, 108, 255] {
+            let label = Matrix::new_field::<Gf4>(
+                4,
+                1,
+                (0..4)
+                    .map(|shift| (encoded >> (2 * shift)) & 3)
+                    .collect::<Vec<_>>(),
+            )
+            .unwrap();
+            let sequential_answer = sequential.answer_field::<Gf4>(&label).unwrap().unwrap();
+            let parallel_answer = parallel.answer_field::<Gf4>(&label).unwrap().unwrap();
+            assert_eq!(parallel_answer.cost, sequential_answer.cost);
+            assert_eq!(parallel_answer.local_labels, sequential_answer.local_labels);
+        }
+    }
+
+    #[test]
+    fn target_aware_tables_compose_through_two_levels_with_witnesses() {
+        let ordinary = CostTable::from_entries::<2>(
+            1,
+            1,
+            [
+                (Matrix::new::<2>(1, 1, vec![0]).unwrap(), 0),
+                (Matrix::new::<2>(1, 1, vec![1]).unwrap(), 1),
+            ],
+        )
+        .unwrap();
+        let target = CostTable::from_entries::<2>(
+            1,
+            1,
+            [
+                (Matrix::new::<2>(1, 1, vec![0]).unwrap(), 2),
+                (Matrix::new::<2>(1, 1, vec![1]).unwrap(), 0),
+            ],
+        )
+        .unwrap();
+        let blocks = [
+            Matrix::new::<2>(1, 1, vec![1]).unwrap(),
+            Matrix::new::<2>(1, 1, vec![1]).unwrap(),
+        ];
+        let ordinary_level_one = CompositionTable::compose::<2>(&blocks, &ordinary).unwrap();
+        let target_level_one =
+            CompositionTable::compose_with_target_field::<Prime<2>>(&blocks, &ordinary, &target, 0)
+                .unwrap();
+        let ordinary_table = ordinary_level_one.cost_table_field::<Prime<2>>().unwrap();
+        let target_table = target_level_one.cost_table_field::<Prime<2>>().unwrap();
+        let target_label = Matrix::new::<2>(1, 1, vec![1]).unwrap();
+        assert_eq!(ordinary_table.cost(&target_label), Some(1));
+        assert_eq!(target_table.cost(&target_label), Some(0));
+        let level_two = CompositionTable::compose_with_target_field::<Prime<2>>(
+            &blocks,
+            &ordinary_table,
+            &target_table,
+            0,
+        )
+        .unwrap();
+        let answer = level_two.answer::<2>(&target_label).unwrap().unwrap();
+        assert_eq!(answer.cost, 0);
+        assert_eq!(answer.local_labels[0].as_slice(), &[1]);
+        assert_eq!(answer.local_labels[1].as_slice(), &[0]);
+        let expanded_target = target_level_one
+            .answer::<2>(&answer.local_labels[0])
+            .unwrap()
+            .unwrap();
+        assert_eq!(expanded_target.cost, 0);
+        assert_eq!(expanded_target.local_labels[0].as_slice(), &[1]);
+        assert_eq!(expanded_target.local_labels[1].as_slice(), &[0]);
+    }
+
+    #[test]
+    fn tower_expands_canonical_labels_to_a_budgeted_replay_tree() {
+        let ordinary = CostTable::from_entries::<2>(
+            1,
+            1,
+            [
+                (Matrix::new::<2>(1, 1, vec![0]).unwrap(), 0),
+                (Matrix::new::<2>(1, 1, vec![1]).unwrap(), 1),
+            ],
+        )
+        .unwrap();
+        let target = CostTable::from_entries::<2>(
+            1,
+            1,
+            [
+                (Matrix::new::<2>(1, 1, vec![0]).unwrap(), 2),
+                (Matrix::new::<2>(1, 1, vec![1]).unwrap(), 0),
+            ],
+        )
+        .unwrap();
+        let blocks = || {
+            vec![
+                Matrix::new::<2>(1, 1, vec![1]).unwrap(),
+                Matrix::new::<2>(1, 1, vec![1]).unwrap(),
+            ]
+            .into_boxed_slice()
+        };
+        let tower = CompositionTower::compile::<2>(
+            &ordinary,
+            &target,
+            &[
+                TowerLevel {
+                    outer_blocks: blocks(),
+                    target_block: 0,
+                },
+                TowerLevel {
+                    outer_blocks: blocks(),
+                    target_block: 0,
+                },
+            ],
+        )
+        .unwrap();
+        let label = Matrix::new::<2>(1, 1, vec![1]).unwrap();
+        let answer = tower.answer_target::<2>(&label, 7).unwrap().unwrap();
+        assert_eq!(answer.cost, 0);
+        assert_eq!(answer.witness_nodes, 7);
+        assert!(answer.witness.target_normalized);
+        assert!(answer.witness.children[0].target_normalized);
+        assert!(!answer.witness.children[1].target_normalized);
+        assert!(answer.witness.children[0].children[0].target_normalized);
+        assert!(!answer.witness.children[0].children[1].target_normalized);
+        assert!(matches!(
+            tower.answer_target::<2>(&label, 6),
+            Err(CompositionError::WitnessBudget {
+                required: 7,
+                budget: 6
+            })
+        ));
+    }
+
+    #[test]
+    fn tower_rejects_recursion_unsafe_depth() {
+        let table =
+            CostTable::from_entries::<2>(1, 1, [(Matrix::new::<2>(1, 1, vec![0]).unwrap(), 0)])
+                .unwrap();
+        let levels = (0..=MAX_TOWER_DEPTH)
+            .map(|_| TowerLevel {
+                outer_blocks: Box::new([]),
+                target_block: 0,
+            })
+            .collect::<Vec<_>>();
+        assert!(matches!(
+            CompositionTower::compile::<2>(&table, &table, &levels),
+            Err(CompositionError::TowerDepth {
+                depth: 257,
+                limit: 256
+            })
+        ));
     }
 
     #[cfg(feature = "parallel")]

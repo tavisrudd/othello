@@ -320,9 +320,229 @@ def unit_scheduler_case() -> dict[str, object]:
     }
 
 
+def gf4_mul(left: int, right: int) -> int:
+    """Independent polynomial reduction modulo a^2+a+1."""
+    product = 0
+    for left_degree in range(2):
+        for right_degree in range(2):
+            if ((left >> left_degree) & 1) and ((right >> right_degree) & 1):
+                product ^= 1 << (left_degree + right_degree)
+    if product & 4:
+        product ^= 0b111
+    return product
+
+
+def binary_row_basis(rows: list[tuple[int, ...]], width: int) -> dict[str, object]:
+    data = [list(row) for row in rows]
+    pivot = 0
+    for column in range(width):
+        found = next((row for row in range(pivot, len(data)) if data[row][column]), None)
+        if found is None:
+            continue
+        data[pivot], data[found] = data[found], data[pivot]
+        for row in range(len(data)):
+            if row != pivot and data[row][column]:
+                data[row] = [
+                    left ^ right
+                    for left, right in zip(data[row], data[pivot], strict=True)
+                ]
+        pivot += 1
+    data = data[:pivot]
+    return {
+        "rows": pivot,
+        "cols": width,
+        "data": [entry for row in data for entry in row],
+    }
+
+
+def gf4_rank_one_profile(columns: tuple[int, ...], target: int) -> dict[str, object]:
+    ordinary: list[tuple[int, tuple[int, ...]] | None] = [None] * 4
+    normalized: list[tuple[int, tuple[int, ...]] | None] = [None] * 4
+    dual: tuple[int, tuple[int, ...]] | None = None
+    dual_rows: list[tuple[int, ...]] = []
+    shortened_rows: list[tuple[int, ...]] = []
+    for mask in range(1 << len(columns)):
+        coefficients = tuple((mask >> coordinate) & 1 for coordinate in range(len(columns)))
+        label = 0
+        for coefficient, column in zip(coefficients, columns, strict=True):
+            if coefficient:
+                label ^= column
+        support = sum(coefficients)
+        candidate = (support, coefficients)
+        if ordinary[label] is None or candidate < ordinary[label]:
+            ordinary[label] = candidate
+        if mask and label == 0 and (dual is None or candidate < dual):
+            dual = candidate
+        if mask and label == 0:
+            helper_row = tuple(
+                coefficient
+                for coordinate, coefficient in enumerate(coefficients)
+                if coordinate != target
+            )
+            dual_rows.append(helper_row)
+            if not coefficients[target]:
+                shortened_rows.append(helper_row)
+        if coefficients[target]:
+            candidate = (support - 1, coefficients)
+            if normalized[label] is None or candidate < normalized[label]:
+                normalized[label] = candidate
+    if normalized[0] is None or dual is None:
+        raise AssertionError("paper separation profile must be recoverable with nontrivial dual")
+    zero_cost = normalized[0][0] + dual[0]
+    nonzero = min(
+        (
+            normalized[coefficient][0]
+            + ordinary[gf4_mul(2, coefficient)][0],
+            coefficient,
+            (coefficient, gf4_mul(2, coefficient)),
+        )
+        for coefficient in range(1, 4)
+    )
+    return {
+        "columns": columns,
+        "ordinary": ordinary,
+        "target_normalized": normalized,
+        "inner_dual": dual,
+        "k_p": binary_row_basis(shortened_rows, len(columns) - 1),
+        "d_p": binary_row_basis(dual_rows, len(columns) - 1),
+        "zero_cost": zero_cost,
+        "nonzero_cost": nonzero[0],
+        "gamma": min(zero_cost, nonzero[0]),
+        "outer_coefficient": nonzero[1],
+        "block_labels": nonzero[2],
+    }
+
+
+def gf4_transfer_case() -> dict[str, object]:
+    return {
+        "target_coordinate": 0,
+        "functional_basis": (1, 2),
+        "profiles": [
+            gf4_rank_one_profile((1, 1, 2), 0),
+            gf4_rank_one_profile((1, 1, 3), 0),
+        ],
+    }
+
+
+def gf4_target_subspace_case() -> dict[str, object]:
+    columns = (1, 2, 1, 2)
+    targets = (0, 1)
+    normalization = ((1, 0), (0, 1))
+    demand = 2
+
+    def canonical_label(coefficients: tuple[int, ...]) -> tuple[int, ...]:
+        label = [0] * demand
+        for coordinate, column in enumerate(columns):
+            for index in range(demand):
+                if coefficients[coordinate * demand + index]:
+                    label[index] ^= column
+        return tuple(label)
+
+    def union_cost(coefficients: tuple[int, ...], coordinates: tuple[int, ...]) -> int:
+        return sum(
+            any(coefficients[coordinate * demand + index] for index in range(demand))
+            for coordinate in coordinates
+        )
+
+    ordinary: dict[tuple[int, ...], tuple[int, tuple[int, ...]]] = {}
+    for packed in range(1 << (len(columns) * demand)):
+        coefficients = tuple(
+            (packed >> index) & 1 for index in range(len(columns) * demand)
+        )
+        label = canonical_label(coefficients)
+        candidate = (union_cost(coefficients, tuple(range(len(columns)))), coefficients)
+        if label not in ordinary or candidate < ordinary[label]:
+            ordinary[label] = candidate
+
+    helpers = tuple(coordinate for coordinate in range(len(columns)) if coordinate not in targets)
+    target_costs: dict[tuple[int, ...], tuple[int, tuple[int, ...]]] = {}
+    for packed in range(1 << (len(helpers) * demand)):
+        coefficients = [0] * (len(columns) * demand)
+        for target_row, coordinate in enumerate(targets):
+            coefficients[coordinate * demand : (coordinate + 1) * demand] = normalization[
+                target_row
+            ]
+        for helper_row, coordinate in enumerate(helpers):
+            for index in range(demand):
+                coefficients[coordinate * demand + index] = (
+                    packed >> (helper_row * demand + index)
+                ) & 1
+        coefficient_tuple = tuple(coefficients)
+        label = canonical_label(coefficient_tuple)
+        candidate = (union_cost(coefficient_tuple, helpers), coefficient_tuple)
+        if label not in target_costs or candidate < target_costs[label]:
+            target_costs[label] = candidate
+
+    zero_cost = target_costs[(0, 0)][0] + 2
+    nonzero = min(
+        (target_costs[label][0] + ordinary[label][0], label)
+        for label in ordinary
+        if label != (0, 0)
+    )
+    return {
+        "columns": columns,
+        "targets": targets,
+        "normalization": {"rows": 2, "cols": 2, "data": (1, 0, 0, 1)},
+        "functional_basis": (1, 1),
+        "ordinary": [
+            {"label": label, "cost": value[0], "coefficients": value[1]}
+            for label, value in sorted(ordinary.items())
+        ],
+        "target_normalized": [
+            {"label": label, "cost": value[0], "coefficients": value[1]}
+            for label, value in sorted(target_costs.items())
+        ],
+        "target_union_cost": target_costs[(0, 0)][0],
+        "inner_dual_distance": 2,
+        "zero_cost": zero_cost,
+        "nonzero_cost": nonzero[0],
+        "gamma": min(zero_cost, nonzero[0]),
+        "winning_labels": (nonzero[1], nonzero[1]),
+    }
+
+
+def target_tower_case() -> dict[str, object]:
+    ordinary = {0: (0, ()), 1: (1, ())}
+    target = {0: (2, ()), 1: (0, ())}
+
+    def compose(
+        ordinary_table: dict[int, tuple[int, tuple[int, ...]]],
+        target_table: dict[int, tuple[int, tuple[int, ...]]],
+        target_block: int | None,
+    ) -> dict[int, tuple[int, tuple[int, ...]]]:
+        result: dict[int, tuple[int, tuple[int, ...]]] = {}
+        for output in range(2):
+            candidates = []
+            for left in range(2):
+                right = output ^ left
+                left_table = target_table if target_block == 0 else ordinary_table
+                right_table = target_table if target_block == 1 else ordinary_table
+                candidates.append(
+                    (
+                        left_table[left][0] + right_table[right][0],
+                        (left, right),
+                    )
+                )
+            result[output] = min(candidates)
+        return result
+
+    ordinary_one = compose(ordinary, ordinary, None)
+    target_one = compose(ordinary, target, 0)
+    ordinary_two = compose(ordinary_one, ordinary_one, None)
+    target_two = compose(ordinary_one, target_one, 0)
+    return {
+        "ordinary": (0, 1),
+        "target": (2, 0),
+        "ordinary_level_one": [ordinary_one[label] for label in range(2)],
+        "target_level_one": [target_one[label] for label in range(2)],
+        "ordinary_level_two": [ordinary_two[label] for label in range(2)],
+        "target_level_two": [target_two[label] for label in range(2)],
+    }
+
+
 def payload() -> bytes:
     value = {
-        "schema": "ergo-comp-rust-v5",
+        "schema": "ergo-comp-rust-v6",
         "balanced_terminal_cases": balanced_terminal_cases(),
         "cases": family(2, 2, 3, 2) + family(3, 1, 3, 2),
         "compositions": [
@@ -340,6 +560,9 @@ def payload() -> bytes:
             ),
         ],
         "confinements": [confinement_case(1), confinement_case(2)],
+        "gf4_transfers": [gf4_transfer_case()],
+        "gf4_target_subspaces": [gf4_target_subspace_case()],
+        "target_towers": [target_tower_case()],
         "orbits": [
             orbit_case(
                 (

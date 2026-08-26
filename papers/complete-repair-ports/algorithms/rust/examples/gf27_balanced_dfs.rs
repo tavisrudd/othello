@@ -109,41 +109,44 @@ fn main() {
             max_terminal_carriers: max_terminals,
         },
     };
-    #[cfg(feature = "parallel")]
-    let threads = Some(requested_threads.unwrap_or_else(|| {
-        std::thread::available_parallelism()
-            .expect("available parallelism must be reported")
-            .get()
-    }));
-    #[cfg(not(feature = "parallel"))]
-    let threads = requested_threads;
-    let result = if let Some(threads) = threads {
+    let (result, mode, thread_count) = {
         #[cfg(feature = "parallel")]
         {
+            let threads = requested_threads.unwrap_or_else(|| {
+                std::thread::available_parallelism()
+                    .expect("available parallelism must be reported")
+                    .get()
+            });
             let pool = rayon::ThreadPoolBuilder::new()
                 .num_threads(threads)
                 .thread_name(|index| format!("balanced-{index}"))
                 .build()
                 .expect("Rayon pool construction must succeed");
-            pool.install(|| catalog.search_balanced_work_batch_parallel(limits))
-                .expect("bounded DFS input is valid")
+            let result = pool
+                .install(|| catalog.search_balanced_work_batch_parallel(limits))
+                .expect("bounded DFS input is valid");
+            (result, "batch", threads)
         }
         #[cfg(not(feature = "parallel"))]
         {
-            let _ = threads;
-            panic!("threads= requires --features parallel");
+            if requested_threads.is_some() {
+                panic!("threads= requires --features parallel");
+            }
+            (
+                catalog
+                    .search_balanced_work_queue(limits)
+                    .expect("bounded DFS input is valid"),
+                "prefix",
+                1,
+            )
         }
-    } else {
-        catalog
-            .search_balanced_work_queue(limits)
-            .expect("bounded DFS input is valid")
     };
     println!(
         "status={:?} tasks={} mode={} threads={}",
         result.status,
         result.tasks.len(),
-        if threads.is_some() { "batch" } else { "prefix" },
-        threads.unwrap_or(1)
+        mode,
+        thread_count
     );
     for task in &result.tasks {
         let core_sizes = task

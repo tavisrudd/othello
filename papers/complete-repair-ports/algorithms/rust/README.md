@@ -6,7 +6,9 @@ algorithms rather than mirroring the Python module tree.
 
 ## Architecture
 
-- prime-field arithmetic is const-generic and monomorphized;
+- prime-field arithmetic is const-generic and monomorphized; canonical
+  polynomial-basis GF(4) uses the same byte-valued, statically dispatched field
+  interface, with no runtime tag in matrix or composition loops;
 - cold input matrices are contiguous row-major `Box<[u8]>` values with an
   asserted 32-byte owning boundary;
 - generated bases live in one flat byte arena addressed by asserted 16-byte
@@ -15,6 +17,18 @@ algorithms rather than mirroring the Python module tree.
   range-sized IDs;
 - labelled cost tables keep matrix labels in the same byte arena and expose
   16-byte scalar records to literal-block min-plus composition;
+- the rank-one transfer front end derives ordinary and target-normalized
+  labelled costs from represented binary encoder columns, retains minimizing
+  coefficient vectors separately, and fails closed on an explicit candidate
+  budget;
+- the target-subspace compiler fixes an explicit normalized binary basis,
+  minimizes row-union support over matrix-valued coefficient lifts, and feeds
+  its matrix-valued labelled tables directly to arbitrary-rank confinement;
+- target-aware min-plus composition propagates distinct ordinary and
+  target-normalized tables through successive levels, optionally in parallel,
+  while retaining each level's minimizing labels for witness reconstruction;
+- `transfer-tower` expands those labels recursively to the original
+  coefficient matrices under an explicit witness-node budget;
 - composition and syndrome-trellis frontiers retain witnesses as 16-byte
   predecessor nodes; generator enumeration uses a base-`P` odometer without
   allocating coefficient matrices in its inner loop;
@@ -83,6 +97,10 @@ ternary `1 x 2` demands: 91 generators and 1,267 exact cost/support queries.
 The same fixture also checks binary and ternary two-block labelled composition,
 and checks both exact confinement backends on two binary instances, including
 the winning sector, functional coefficients, and block-label witnesses.
+An independently generated GF(4) fixture checks both encoder presentations in
+the paper's functional-label separation: associated-pair bases, every labelled
+cost and coefficient argmin, inner-dual witness, both sector costs, selected
+outer functional, block labels, and the resulting unequal exact costs.
 Seventeen orbit cases check choices and every pruning counter, including a
 25-coordinate packed-word boundary. Weighted and unit-capacity cases check
 assignments, aggregate helper loads, Pareto counters, and the unit capacity-cut
@@ -212,6 +230,28 @@ representation/dispatch comparison rather than a search-tree win.  The same
 protocol gives Rust wins of `336.514x`, `560.936x`, and `18.074x` on the
 balanced, small-state, and large-nonuniform profiles respectively.  These are
 bounded warm-solve results, not universal claims about CP-SAT.
+
+The represented-tower path has a separate 21-round, pinned-core end-to-end
+comparison. Direct CP-SAT receives binary coefficient variables, the exact
+row-support objective, and GF(4) parity constraints. The stronger-preprocessing
+control receives the same independently generated labelled cost tables as
+ERGO-comp, then uses one-hot leaf choices and the same parity constraints.
+Every solver proves the same optimum; ERGO-comp additionally expands its
+canonical coefficient witness tree.
+
+| depth / fanout | leaves | ERGO time | ERGO RSS | direct CP-SAT | direct RSS | labelled CP-SAT | labelled RSS | speedup: direct / labelled |
+|:---------------|-------:|----------:|---------:|--------------:|-----------:|----------------:|-------------:|--------------------------:|
+| 2 / 2          |      4 |     89 us |  1.3 MiB |      3.011 ms |   74.4 MiB |        4.917 ms |     74.9 MiB |                 34x / 55x |
+| 3 / 3          |     27 |    134 us |  1.3 MiB |     11.560 ms |   75.5 MiB |       27.479 ms |     77.0 MiB |                86x / 204x |
+| 4 / 3          |     81 |    166 us |  1.3 MiB |     43.160 ms |   78.5 MiB |      112.086 ms |     82.0 MiB |               260x / 676x |
+| 5 / 4          |  1,024 |    300 us |  1.4 MiB |        8.21 s |  126.4 MiB |          1.57 s |    157.8 MiB |          27,385x / 5,224x |
+
+These are bounded single-worker results for the identity-block GF(4) tower
+family, not a general claim about CP-SAT. The first three rows use 21 rounds;
+the expensive 1,024-leaf row uses seven. Raw samples, artifact hashes, work
+counters, and the exact protocol are in `evidence/benchmarks.json`; replay with
+`run_benchmarks.py --write --transfer-only --ab-rounds 21` after building the
+release benchmark binary with the documented architecture flags.
 
 A pinned-core `perf stat` diagnostic on the largest nonuniform profile records
 about 661,000 cycles, 2.01 million instructions, 341,000 branches, 454 branch

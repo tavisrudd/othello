@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
 import platform
 import statistics
 import subprocess
@@ -12,7 +14,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "evidence" / "benchmarks.json"
-BINARY = ROOT / "target" / "release" / "bench_kernels"
+BINARY = Path(
+    os.environ.get("ERGO_BENCH_BINARY", ROOT / "target" / "release" / "bench_kernels")
+)
 
 
 def command(variant: str, repetitions: int) -> list[str]:
@@ -123,6 +127,14 @@ def ratio(numerator: float, denominator: float) -> float:
     return round(numerator / denominator, 3)
 
 
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
@@ -137,6 +149,7 @@ def main() -> None:
     parser.add_argument("--workspace-only", action="store_true")
     parser.add_argument("--locality-only", action="store_true")
     parser.add_argument("--structured-cpsat-only", action="store_true")
+    parser.add_argument("--transfer-only", action="store_true")
     parser.add_argument("--baseline-binary", type=Path)
     parser.add_argument("--candidate-binary", type=Path, default=BINARY)
     parser.add_argument("--locality-key", default="scheduler_locality_ab")
@@ -145,6 +158,59 @@ def main() -> None:
         raise SystemExit("pass --write to record a fresh noncanonical benchmark")
     if not BINARY.exists():
         raise SystemExit("build target/release/bench_kernels first")
+
+    if args.transfer_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --transfer-only")
+        value = json.loads(OUTPUT.read_text())
+        profiles = {}
+        for name, depth, fanout, profile_rounds in (
+            ("two-by-two", 2, 2, args.ab_rounds),
+            ("three-by-three", 3, 3, args.ab_rounds),
+            ("four-by-three", 4, 3, args.ab_rounds),
+            ("five-by-four", 5, 4, min(args.ab_rounds, 7)),
+        ):
+            variants = (
+                f"transfer-tower:rust:{depth}:{fanout}",
+                f"transfer-tower:cpsat-direct:{depth}:{fanout}",
+                f"transfer-tower:cpsat:{depth}:{fanout}",
+            )
+            measured = run_group(variants, 1, profile_rounds)
+            if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"transfer CP-SAT checksum mismatch: {variants}")
+            profiles[name] = {
+                "depth": depth,
+                "fanout": fanout,
+                "leaf_blocks": fanout**depth,
+                "rounds": profile_rounds,
+                "rust_speedup_over_direct_cpsat": ratio(
+                    measured[variants[1]]["median_ns_per_solve"],
+                    measured[variants[0]]["median_ns_per_solve"],
+                ),
+                "rust_speedup_over_structured_cpsat": ratio(
+                    measured[variants[2]]["median_ns_per_solve"],
+                    measured[variants[0]]["median_ns_per_solve"],
+                ),
+                "measurements": measured,
+            }
+        value["transfer_tower_cpsat"] = {
+            "rounds": args.ab_rounds,
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "benchmark_python_sha256": sha256(ROOT / "benchmark_python.py"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": {
+                "common": "rotated interleave; deterministic single worker; one end-to-end solve",
+                "rust": "compile exact GF(4) labelled tables and tower; expand canonical witness",
+                "direct_cpsat": "binary coefficient variables; row-support objective; GF(4) parity constraints",
+                "structured_cpsat": "same exact labelled tables; one-hot leaf choices; GF(4) parity constraints",
+            },
+            "profiles": profiles,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
 
     if args.structured_cpsat_only:
         if not OUTPUT.exists():

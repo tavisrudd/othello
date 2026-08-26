@@ -1,0 +1,22 @@
+{
+  "field": {
+    "kind": "binary-extension",
+    "degree": 2,
+    "modulus": [1, 1, 1]
+  },
+  "inner": {
+    "rows": 1,
+    "cols": 1,
+    "entries": [
+      {"label": {"rows": 1, "cols": 1, "data": [0]}, "cost": 0},
+      {"label": {"rows": 1, "cols": 1, "data": [1]}, "cost": 1},
+      {"label": {"rows": 1, "cols": 1, "data": [2]}, "cost": 2},
+      {"label": {"rows": 1, "cols": 1, "data": [3]}, "cost": 3}
+    ]
+  },
+  "outer_blocks": [
+    {"rows": 1, "cols": 1, "data": [2]},
+    {"rows": 1, "cols": 1, "data": [1]}
+  ],
+  "target": {"rows": 1, "cols": 1, "data": [3]}
+}

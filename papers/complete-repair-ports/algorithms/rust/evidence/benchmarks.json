@@ -28097,5 +28097,2060 @@
     },
     "rounds": 21
   },
-  "schema": "ergo-comp-rust-benchmark-v1"
+  "schema": "ergo-comp-rust-benchmark-v1",
+  "transfer_tower_cpsat": {
+    "artifacts": {
+      "bench_kernels_binary_sha256": "98aa3b0303b4d4ee742a52c21fbcf59c4725473203f7ba0048d5fb52cf7b3011",
+      "bench_kernels_source_sha256": "b289b07c3a71ffc2b9e4394cd38c606764ea60c3a8ed6848e5830210e8cca638",
+      "benchmark_python_sha256": "eb17a6f05bdbad23d5881a56eadf9989529b31eefb96dc434e4587f4dee744fc",
+      "run_benchmarks_sha256": "75a6e7385a60fad2daa9ff6774a32e01014ea3506b5f25ec308a2173938ebb73"
+    },
+    "profiles": {
+      "five-by-four": {
+        "depth": 5,
+        "fanout": 4,
+        "leaf_blocks": 1024,
+        "measurements": {
+          "transfer-tower:cpsat-direct:5:4": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 8211127206.0,
+            "median_peak_rss_kib": 129392,
+            "peak_states": 4080,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 8213651794,
+                "peak_rss_kib": 129452,
+                "peak_states": 4080,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:5:4",
+                "work": 3877498
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 8211127206,
+                "peak_rss_kib": 129392,
+                "peak_states": 4080,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:5:4",
+                "work": 3877498
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 8212631371,
+                "peak_rss_kib": 129408,
+                "peak_states": 4080,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:5:4",
+                "work": 3877498
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 8249598475,
+                "peak_rss_kib": 129292,
+                "peak_states": 4080,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:5:4",
+                "work": 3877498
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 8166286201,
+                "peak_rss_kib": 129388,
+                "peak_states": 4080,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:5:4",
+                "work": 3877498
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 8192467047,
+                "peak_rss_kib": 129512,
+                "peak_states": 4080,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:5:4",
+                "work": 3877498
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 8049387401,
+                "peak_rss_kib": 129280,
+                "peak_states": 4080,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:5:4",
+                "work": 3877498
+              }
+            ],
+            "work_per_solve": 3877498
+          },
+          "transfer-tower:cpsat:5:4": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 1566356667.0,
+            "median_peak_rss_kib": 161580,
+            "peak_states": 1,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 1568837487,
+                "peak_rss_kib": 161648,
+                "peak_states": 1,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:5:4",
+                "work": 46076
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 1564101951,
+                "peak_rss_kib": 161580,
+                "peak_states": 1,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:5:4",
+                "work": 46076
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 1584459664,
+                "peak_rss_kib": 162112,
+                "peak_states": 1,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:5:4",
+                "work": 46076
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 1587398359,
+                "peak_rss_kib": 161444,
+                "peak_states": 1,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:5:4",
+                "work": 46076
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 1556226602,
+                "peak_rss_kib": 161468,
+                "peak_states": 1,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:5:4",
+                "work": 46076
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 1562447373,
+                "peak_rss_kib": 161452,
+                "peak_states": 1,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:5:4",
+                "work": 46076
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 1566356667,
+                "peak_rss_kib": 162960,
+                "peak_states": 1,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:5:4",
+                "work": 46076
+              }
+            ],
+            "work_per_solve": 46076
+          },
+          "transfer-tower:rust:5:4": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 299838.0,
+            "median_peak_rss_kib": 1468,
+            "peak_states": 1365,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 299838,
+                "peak_rss_kib": 1480,
+                "peak_states": 1365,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:5:4",
+                "work": 1365
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 333070,
+                "peak_rss_kib": 1456,
+                "peak_states": 1365,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:5:4",
+                "work": 1365
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 844723,
+                "peak_rss_kib": 1480,
+                "peak_states": 1365,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:5:4",
+                "work": 1365
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 418790,
+                "peak_rss_kib": 1452,
+                "peak_states": 1365,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:5:4",
+                "work": 1365
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 298876,
+                "peak_rss_kib": 1468,
+                "peak_states": 1365,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:5:4",
+                "work": 1365
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 298536,
+                "peak_rss_kib": 1468,
+                "peak_states": 1365,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:5:4",
+                "work": 1365
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 298366,
+                "peak_rss_kib": 1456,
+                "peak_states": 1365,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:5:4",
+                "work": 1365
+              }
+            ],
+            "work_per_solve": 1365
+          }
+        },
+        "rounds": 7,
+        "rust_speedup_over_direct_cpsat": 27385.212,
+        "rust_speedup_over_structured_cpsat": 5224.01
+      },
+      "four-by-three": {
+        "depth": 4,
+        "fanout": 3,
+        "leaf_blocks": 81,
+        "measurements": {
+          "transfer-tower:cpsat-direct:4:3": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 43159531.0,
+            "median_peak_rss_kib": 80376,
+            "peak_states": 320,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 44182855,
+                "peak_rss_kib": 80364,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43092105,
+                "peak_rss_kib": 80392,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43044546,
+                "peak_rss_kib": 80528,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43304661,
+                "peak_rss_kib": 80264,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43264336,
+                "peak_rss_kib": 80256,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43950784,
+                "peak_rss_kib": 80480,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 42945522,
+                "peak_rss_kib": 80500,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43066657,
+                "peak_rss_kib": 80552,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43038625,
+                "peak_rss_kib": 80368,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43159531,
+                "peak_rss_kib": 80340,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43034547,
+                "peak_rss_kib": 80288,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43138391,
+                "peak_rss_kib": 80280,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43163608,
+                "peak_rss_kib": 80376,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 42765557,
+                "peak_rss_kib": 80428,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 42822313,
+                "peak_rss_kib": 80372,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43713762,
+                "peak_rss_kib": 80332,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43203432,
+                "peak_rss_kib": 80272,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43115689,
+                "peak_rss_kib": 80380,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43356436,
+                "peak_rss_kib": 80528,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43218740,
+                "peak_rss_kib": 80380,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 43568011,
+                "peak_rss_kib": 80388,
+                "peak_states": 320,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:4:3",
+                "work": 2573
+              }
+            ],
+            "work_per_solve": 2573
+          },
+          "transfer-tower:cpsat:4:3": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 112086427.0,
+            "median_peak_rss_kib": 83948,
+            "peak_states": 247,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 120074572,
+                "peak_rss_kib": 83928,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 112730747,
+                "peak_rss_kib": 83944,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 113100846,
+                "peak_rss_kib": 84032,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111794104,
+                "peak_rss_kib": 83740,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111582650,
+                "peak_rss_kib": 83948,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 112086427,
+                "peak_rss_kib": 83960,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 113046716,
+                "peak_rss_kib": 83968,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111535362,
+                "peak_rss_kib": 83992,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111457095,
+                "peak_rss_kib": 83904,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 113796923,
+                "peak_rss_kib": 83752,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 113517482,
+                "peak_rss_kib": 83912,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 112910922,
+                "peak_rss_kib": 84068,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111911833,
+                "peak_rss_kib": 83948,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 113433936,
+                "peak_rss_kib": 83932,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 112679802,
+                "peak_rss_kib": 84000,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 112534622,
+                "peak_rss_kib": 83976,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111603418,
+                "peak_rss_kib": 84040,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111737878,
+                "peak_rss_kib": 83944,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111204946,
+                "peak_rss_kib": 84076,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111254529,
+                "peak_rss_kib": 83948,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 111278974,
+                "peak_rss_kib": 84060,
+                "peak_states": 247,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:4:3",
+                "work": 5143
+              }
+            ],
+            "work_per_solve": 5143
+          },
+          "transfer-tower:rust:4:3": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 165739.0,
+            "median_peak_rss_kib": 1344,
+            "peak_states": 121,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 163905,
+                "peak_rss_kib": 1348,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 164897,
+                "peak_rss_kib": 1320,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 166711,
+                "peak_rss_kib": 1352,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 166270,
+                "peak_rss_kib": 1348,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 164867,
+                "peak_rss_kib": 1336,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 163835,
+                "peak_rss_kib": 1344,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 165789,
+                "peak_rss_kib": 1344,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 466188,
+                "peak_rss_kib": 1332,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 165739,
+                "peak_rss_kib": 1336,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 164726,
+                "peak_rss_kib": 1352,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 165769,
+                "peak_rss_kib": 1324,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 166720,
+                "peak_rss_kib": 1352,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 163074,
+                "peak_rss_kib": 1340,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 163464,
+                "peak_rss_kib": 1336,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 167161,
+                "peak_rss_kib": 1356,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 163044,
+                "peak_rss_kib": 1344,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 163836,
+                "peak_rss_kib": 1316,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 164716,
+                "peak_rss_kib": 1352,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 169936,
+                "peak_rss_kib": 1348,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 295611,
+                "peak_rss_kib": 1336,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 455308,
+                "peak_rss_kib": 1332,
+                "peak_states": 121,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:4:3",
+                "work": 121
+              }
+            ],
+            "work_per_solve": 121
+          }
+        },
+        "rounds": 21,
+        "rust_speedup_over_direct_cpsat": 260.407,
+        "rust_speedup_over_structured_cpsat": 676.283
+      },
+      "three-by-three": {
+        "depth": 3,
+        "fanout": 3,
+        "leaf_blocks": 27,
+        "measurements": {
+          "transfer-tower:cpsat-direct:3:3": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 11559573.0,
+            "median_peak_rss_kib": 77300,
+            "peak_states": 104,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 11308886,
+                "peak_rss_kib": 77228,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11807245,
+                "peak_rss_kib": 77308,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11397571,
+                "peak_rss_kib": 77328,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11459387,
+                "peak_rss_kib": 77416,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11641075,
+                "peak_rss_kib": 77308,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11630195,
+                "peak_rss_kib": 77208,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11559573,
+                "peak_rss_kib": 77472,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11771037,
+                "peak_rss_kib": 77488,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11788610,
+                "peak_rss_kib": 77344,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 12011986,
+                "peak_rss_kib": 77300,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11647988,
+                "peak_rss_kib": 77184,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11501295,
+                "peak_rss_kib": 77300,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11486437,
+                "peak_rss_kib": 77220,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11581464,
+                "peak_rss_kib": 77192,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11495023,
+                "peak_rss_kib": 77244,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11474255,
+                "peak_rss_kib": 77340,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11846938,
+                "peak_rss_kib": 77328,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11556577,
+                "peak_rss_kib": 77124,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11632559,
+                "peak_rss_kib": 77452,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11507326,
+                "peak_rss_kib": 77284,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 11531481,
+                "peak_rss_kib": 77260,
+                "peak_states": 104,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:3:3",
+                "work": 845
+              }
+            ],
+            "work_per_solve": 845
+          },
+          "transfer-tower:cpsat:3:3": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 27478814.0,
+            "median_peak_rss_kib": 78868,
+            "peak_states": 84,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 27464167,
+                "peak_rss_kib": 78880,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27875042,
+                "peak_rss_kib": 78824,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27641327,
+                "peak_rss_kib": 78732,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27713862,
+                "peak_rss_kib": 79048,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27311171,
+                "peak_rss_kib": 78824,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27413222,
+                "peak_rss_kib": 78860,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27979236,
+                "peak_rss_kib": 78828,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27840438,
+                "peak_rss_kib": 78888,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27615769,
+                "peak_rss_kib": 78880,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27666033,
+                "peak_rss_kib": 78856,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27377916,
+                "peak_rss_kib": 79024,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27650363,
+                "peak_rss_kib": 78868,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27322472,
+                "peak_rss_kib": 78776,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27238186,
+                "peak_rss_kib": 78788,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27468965,
+                "peak_rss_kib": 78756,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27077005,
+                "peak_rss_kib": 78944,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27433209,
+                "peak_rss_kib": 78984,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27429603,
+                "peak_rss_kib": 78768,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27512467,
+                "peak_rss_kib": 78928,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27757934,
+                "peak_rss_kib": 79056,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 27478814,
+                "peak_rss_kib": 78884,
+                "peak_states": 84,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:3:3",
+                "work": 1697
+              }
+            ],
+            "work_per_solve": 1697
+          },
+          "transfer-tower:rust:3:3": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 134380.0,
+            "median_peak_rss_kib": 1320,
+            "peak_states": 40,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 142836,
+                "peak_rss_kib": 1316,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 135923,
+                "peak_rss_kib": 1328,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 135292,
+                "peak_rss_kib": 1336,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 136404,
+                "peak_rss_kib": 1320,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 190886,
+                "peak_rss_kib": 1336,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 130684,
+                "peak_rss_kib": 1320,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 136625,
+                "peak_rss_kib": 1316,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 134060,
+                "peak_rss_kib": 1320,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 134640,
+                "peak_rss_kib": 1332,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 134380,
+                "peak_rss_kib": 1312,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 133108,
+                "peak_rss_kib": 1304,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 132396,
+                "peak_rss_kib": 1316,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 335946,
+                "peak_rss_kib": 1336,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 133589,
+                "peak_rss_kib": 1336,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 406858,
+                "peak_rss_kib": 1332,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 133849,
+                "peak_rss_kib": 1304,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 132417,
+                "peak_rss_kib": 1332,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 136755,
+                "peak_rss_kib": 1332,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 133910,
+                "peak_rss_kib": 1316,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 133318,
+                "peak_rss_kib": 1320,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 132226,
+                "peak_rss_kib": 1336,
+                "peak_states": 40,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:3:3",
+                "work": 40
+              }
+            ],
+            "work_per_solve": 40
+          }
+        },
+        "rounds": 21,
+        "rust_speedup_over_direct_cpsat": 86.022,
+        "rust_speedup_over_structured_cpsat": 204.486
+      },
+      "two-by-two": {
+        "depth": 2,
+        "fanout": 2,
+        "leaf_blocks": 4,
+        "measurements": {
+          "transfer-tower:cpsat-direct:2:2": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 3010896.0,
+            "median_peak_rss_kib": 76152,
+            "peak_states": 12,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 3974941,
+                "peak_rss_kib": 76132,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 2894749,
+                "peak_rss_kib": 76180,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 2989326,
+                "peak_rss_kib": 76152,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 2958950,
+                "peak_rss_kib": 76156,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3004143,
+                "peak_rss_kib": 76132,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3037126,
+                "peak_rss_kib": 76344,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 2996980,
+                "peak_rss_kib": 76144,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3078241,
+                "peak_rss_kib": 76152,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 2989105,
+                "peak_rss_kib": 76112,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 2966293,
+                "peak_rss_kib": 76168,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 2995397,
+                "peak_rss_kib": 75968,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3087128,
+                "peak_rss_kib": 76208,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3145457,
+                "peak_rss_kib": 75992,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 2934143,
+                "peak_rss_kib": 76268,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3021305,
+                "peak_rss_kib": 76156,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3017549,
+                "peak_rss_kib": 75972,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 2979247,
+                "peak_rss_kib": 76208,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3098249,
+                "peak_rss_kib": 76336,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3010896,
+                "peak_rss_kib": 76144,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3238480,
+                "peak_rss_kib": 76052,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 3014713,
+                "peak_rss_kib": 76204,
+                "peak_states": 12,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat-direct:2:2",
+                "work": 109
+              }
+            ],
+            "work_per_solve": 109
+          },
+          "transfer-tower:cpsat:2:2": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 4917296.0,
+            "median_peak_rss_kib": 76712,
+            "peak_states": 0,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 6483051,
+                "peak_rss_kib": 76644,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4889744,
+                "peak_rss_kib": 76616,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4913869,
+                "peak_rss_kib": 76696,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4910784,
+                "peak_rss_kib": 76644,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4917296,
+                "peak_rss_kib": 76800,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 6111369,
+                "peak_rss_kib": 76796,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4897910,
+                "peak_rss_kib": 76708,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4899813,
+                "peak_rss_kib": 76704,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4827839,
+                "peak_rss_kib": 76816,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 5028302,
+                "peak_rss_kib": 76692,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4937824,
+                "peak_rss_kib": 76612,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4954746,
+                "peak_rss_kib": 76744,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4877612,
+                "peak_rss_kib": 76800,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 5320256,
+                "peak_rss_kib": 76612,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4915743,
+                "peak_rss_kib": 76728,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4915883,
+                "peak_rss_kib": 76760,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4930620,
+                "peak_rss_kib": 76716,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4956599,
+                "peak_rss_kib": 76712,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4971557,
+                "peak_rss_kib": 76900,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 4886428,
+                "peak_rss_kib": 76864,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 5004929,
+                "peak_rss_kib": 76608,
+                "peak_states": 0,
+                "repetitions": 1,
+                "variant": "transfer-tower:cpsat:2:2",
+                "work": 158
+              }
+            ],
+            "work_per_solve": 158
+          },
+          "transfer-tower:rust:2:2": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 89046.0,
+            "median_peak_rss_kib": 1304,
+            "peak_states": 7,
+            "samples": [
+              {
+                "checksum": 2,
+                "elapsed_ns": 124812,
+                "peak_rss_kib": 1304,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 87533,
+                "peak_rss_kib": 1300,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 197548,
+                "peak_rss_kib": 1304,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 87402,
+                "peak_rss_kib": 1308,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 199541,
+                "peak_rss_kib": 1312,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 86741,
+                "peak_rss_kib": 1300,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 91981,
+                "peak_rss_kib": 1288,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 198970,
+                "peak_rss_kib": 1308,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 87012,
+                "peak_rss_kib": 1288,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 196896,
+                "peak_rss_kib": 1304,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 88064,
+                "peak_rss_kib": 1316,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 87063,
+                "peak_rss_kib": 1308,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 200633,
+                "peak_rss_kib": 1316,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 85499,
+                "peak_rss_kib": 1292,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 86831,
+                "peak_rss_kib": 1284,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 89988,
+                "peak_rss_kib": 1316,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 88705,
+                "peak_rss_kib": 1296,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 232683,
+                "peak_rss_kib": 1312,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 89486,
+                "peak_rss_kib": 1288,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 89046,
+                "peak_rss_kib": 1296,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              },
+              {
+                "checksum": 2,
+                "elapsed_ns": 88344,
+                "peak_rss_kib": 1284,
+                "peak_states": 7,
+                "repetitions": 1,
+                "variant": "transfer-tower:rust:2:2",
+                "work": 7
+              }
+            ],
+            "work_per_solve": 7
+          }
+        },
+        "rounds": 21,
+        "rust_speedup_over_direct_cpsat": 33.813,
+        "rust_speedup_over_structured_cpsat": 55.222
+      }
+    },
+    "protocol": {
+      "common": "rotated interleave; deterministic single worker; one end-to-end solve",
+      "direct_cpsat": "binary coefficient variables; row-support objective; GF(4) parity constraints",
+      "rust": "compile exact GF(4) labelled tables and tower; expand canonical witness",
+      "structured_cpsat": "same exact labelled tables; one-hot leaf choices; GF(4) parity constraints"
+    },
+    "rounds": 21
+  }
 }

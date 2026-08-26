@@ -18,14 +18,18 @@ pub mod packed_ternary;
 pub mod projective;
 pub mod scheduler;
 pub mod span;
+pub mod transfer;
 pub mod witness;
 
-pub use composition::{CompositionAnswer, CompositionError, CompositionTable, CostTable};
-pub use confinement::{
-    confinement_by_generators, confinement_by_syndrome, ConfinementAnswer, ConfinementError,
-    ConfinementSector,
+pub use composition::{
+    CompositionAnswer, CompositionError, CompositionTable, CompositionTower, CostTable,
+    TowerAnswer, TowerLevel, TowerWitness,
 };
-pub use field::{FieldError, Prime};
+pub use confinement::{
+    confinement_by_generators, confinement_by_generators_field, confinement_by_syndrome,
+    ConfinementAnswer, ConfinementError, ConfinementSector,
+};
+pub use field::{FieldError, FiniteField, Gf4, Prime};
 pub use matrix::{Matrix, MatrixError};
 #[doc(hidden)]
 pub use orbit::ternary_orbit_syndrome_meet_in_middle_unreserved;
@@ -45,3 +49,8 @@ pub use scheduler::{
     WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
 pub use span::{GeneratedSpanTable, SpanAnswer, SpanError};
+pub use transfer::{
+    compile_binary_inner_dual, compile_binary_rank_one, compile_binary_target_subspace,
+    BinaryRankOneProfile, BinaryTargetProfile, CoefficientWitness, MatrixCoefficientWitness,
+    TransferError,
+};
