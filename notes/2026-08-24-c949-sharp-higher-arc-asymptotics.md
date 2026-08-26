@@ -621,16 +621,18 @@ separate global trade obstruction or construction.
   residual patterns occurs; residual synchronization needs a lower
   projection coefficient.
 - **Settled/no-go:** the immediately lower coefficient does see detailed
-  fibre data, but sits in the q-scale cube-sector and has no current map from
-  the missing-label subset.
+  fibre data, but its scalar alone sits in the q-scale cube-sector and does
+  not recover the missing-label subset.
+- **Settled:** the full six-boundary valuation `(TR47)` does recover the local
+  marked-root split, including collision multiplicities.
+- **Open:** synchronize those forced moving divisors across slopes; their
+  unmarked cofactors remain q-scale.
 - **Open:** determine whether this compiler rejects any surviving q=27
   terminal independently of fourth Witt, reciprocal norm, and mapping.
 - **Settled:** the Rust ratio directions are exactly the paper's
   `R_infinity` directions; the normals are `(column,-row)`.
 - **Open:** add the encoding/replay fixture and measure independent q=27
   rejection power before promoting the diagnostic to a terminal reason.
-- **Open:** synchronize those residuals across slopes; fiberwise boundedness
-  alone does not give a common carrier.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut
   condition; after a suitable marking it is exactly a two-monomer
   augmenting-path problem, and side-colour degrees alone do not solve it.
