@@ -24,8 +24,8 @@ and verifies a complete 21-file software manifest, registers it in the 74-entry
 evidence bundle, and includes the whole software subtree in deterministic export
 ownership. The canonical and TIT manuscripts state the broader computational
 domain without broadening the deep-hole theorem domain. Formatting, warning-free
-Clippy, 31 focused library tests, three compiled-CLI integration tests, four
-fixed-seed property tests (1,024 generated cases), both manuscript builds, and
+Clippy, 31 focused library tests, four compiled-CLI integration tests, five
+fixed-seed property tests (1,280 generated cases), both manuscript builds, and
 the quick 74-artifact supplement gate pass.
 
 The deterministic exporter then produced standalone paper commit

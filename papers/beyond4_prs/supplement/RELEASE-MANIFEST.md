@@ -65,13 +65,13 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `d1e81621b5f733ad94fad39f7f75df0b7d91fe3ba59438846e7b730a90248785` | 22052 |
-| `EVIDENCE-ROWS.md` | `2c98cf29502c355809844dbb557d2cd74f816332c37e634ca39c6b49b12eab02` | 14615 |
+| `EVIDENCE-MANIFEST.json` | `0446b493cd2dfaf03a0c37cb99791c8a28b7456131bcdaf284eb25629a88103e` | 22052 |
+| `EVIDENCE-ROWS.md` | `705da4f9cc15890cb4d0e5f37f7fe48b225b7a8923a77a2de9cf4fe3562ad12b` | 14615 |
 | `package_evidence_bundle.py` | `b5c59f2d79170abca1ce305d98acb35a71428d36ab257d9ecd06aa043981037f` | 15213 |
 | `verify.py` | `9730b4b5717d6d6b6a3d67045d7e76cc267802c54945eed50e673ab75a2b7544` | 16849 |
 | `build_r6_paper_table.py` | `b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98` | 3878 |
 | `package_software.py` | `f01c53a315c95ecafc96b4fb2402616cbb67322fd0ecd3adb512b16b60f7b8ef` | 2057 |
-| `SOFTWARE-MANIFEST.json` | `1bc43979a84b2c56f8eedd1e5dd0ab1012bc68fc7c208685f0b0af510d0aaeab` | 4013 |
+| `SOFTWARE-MANIFEST.json` | `f1317983c1f5ea3df7cad2e644f3c884f0a066ab0e0ea1bf80cfcef3b49db398` | 4013 |
 
 Verify the complete local bundle from the paper directory:
 

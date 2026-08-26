@@ -16,14 +16,14 @@
       "sha256": "0772021fc1e4ada77a61a5d00acab923666f8642b50c11d63af4d267e8b8ce47"
     },
     {
-      "bytes": 14669,
+      "bytes": 14682,
       "path": "software/projective-reed-solomon/Cargo.lock",
-      "sha256": "86c58cbc685518c227a599479b61a760882f7b0ec65a6ef7993c77e713820cae"
+      "sha256": "b9176f8180d4368212d7a2a54698956951367f9716459dc5302292610e2f16ed"
     },
     {
-      "bytes": 855,
+      "bytes": 870,
       "path": "software/projective-reed-solomon/Cargo.toml",
-      "sha256": "f588cfce8d241fb0064dc422b6a2646bb368af505837504cd34ed2c71c4eebc6"
+      "sha256": "19b3f282a450029f32b7fe762c2aa1ecd004935972b37ec21124ab28bd33bfa1"
     },
     {
       "bytes": 1067,
@@ -66,9 +66,9 @@
       "sha256": "f9aa898b7c605dcd8f55834d3713529908095e1ab37877fc4ab43eb2b8f429f5"
     },
     {
-      "bytes": 1356,
+      "bytes": 1409,
       "path": "software/projective-reed-solomon/docs/testing.md",
-      "sha256": "681d7a902090906632358a65e3d88477eb277c3f7e75d7880430f59725a21b27"
+      "sha256": "d0613be9284998a3799a2370e12ebe24e17b66cec3bdae28cc567e3f5f626187"
     },
     {
       "bytes": 1272,
@@ -96,14 +96,14 @@
       "sha256": "57437855a31cdecfe5b52da90f5e54cb54cfe987cfdfe2125dc81b3b8c777a91"
     },
     {
-      "bytes": 3322,
+      "bytes": 4132,
       "path": "software/projective-reed-solomon/tests/cli.rs",
-      "sha256": "277284a1926a5edde2e97f9ae99ea95778ab6e1dfdd216d1f23cc5b03e22f4fa"
+      "sha256": "e209ed206749c0d17bb45ad07d611aa966d9a881654c657c69e0748f68e9fe9d"
     },
     {
-      "bytes": 4333,
+      "bytes": 5788,
       "path": "software/projective-reed-solomon/tests/properties.rs",
-      "sha256": "88ebdf885950b24ec336a88c2684b1569bc071a29d6b1ebb08c35275e35b4604"
+      "sha256": "412788269195977d64479c08615c2a8f05698b0a457acaaf0f4fc4881f8bf7c1"
     }
   ],
   "hash": "sha256",

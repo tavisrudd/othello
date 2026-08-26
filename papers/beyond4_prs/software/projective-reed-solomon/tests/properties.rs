@@ -1,5 +1,6 @@
 use projective_reed_solomon::{
-    locator_from_support, normalize_projective, split_support, Field, FieldSpec, Root,
+    locator_from_support, normalize_projective, recover_magnitudes, split_support, Field,
+    FieldSpec, Root,
 };
 use proptest::prelude::*;
 use proptest::test_runner::{Config as ProptestConfig, RngSeed};
@@ -116,5 +117,38 @@ proptest! {
         prop_assume!(!support.is_empty() && support.len() <= 5);
         let locator = locator_from_support(&field, &support).expect("distinct support");
         prop_assert_eq!(split_support(&field, &locator), Some(support));
+    }
+
+    #[test]
+    fn magnitude_recovery_inverts_syndrome_synthesis(
+        bits in prop::collection::vec(any::<bool>(), 8),
+        raw_magnitudes in prop::collection::vec(1u32..7, 8),
+    ) {
+        let field = prime_field(7);
+        let selected: Vec<(Root, u32)> = bits
+            .into_iter()
+            .zip(raw_magnitudes)
+            .enumerate()
+            .filter_map(|(index, (include, magnitude))| {
+                include.then_some((
+                    if index == 7 { Root::Infinity } else { Root::Finite(index as u32) },
+                    magnitude,
+                ))
+            })
+            .collect();
+        prop_assume!(!selected.is_empty() && selected.len() <= 5);
+        let support: Vec<Root> = selected.iter().map(|(root, _)| *root).collect();
+        let magnitudes: Vec<u32> = selected.iter().map(|(_, magnitude)| *magnitude).collect();
+        let mut syndrome = vec![0u32; 5];
+        for (root, magnitude) in &selected {
+            for (index, coordinate) in syndrome.iter_mut().enumerate() {
+                let value = match root {
+                    Root::Finite(x) => field.pow(*x, index as u64),
+                    Root::Infinity => u32::from(index == 4),
+                };
+                *coordinate = field.add(*coordinate, field.mul(*magnitude, value));
+            }
+        }
+        prop_assert_eq!(recover_magnitudes(&field, &syndrome, &support), Some(magnitudes));
     }
 }

@@ -1,6 +1,7 @@
 use serde_json::Value;
 use std::io::Write;
 use std::process::{Command, Output, Stdio};
+use tempfile::NamedTempFile;
 
 const REQUEST: &str = r#"{
   "schema": "projective-reed-solomon-request-v1",
@@ -93,4 +94,28 @@ fn verify_rejects_a_corrupted_positive_certificate() {
         "unexpected rejection: {}",
         String::from_utf8_lossy(&verification.stderr)
     );
+}
+
+#[test]
+fn canonicalize_accepts_a_json_file() {
+    let mut request_file = NamedTempFile::new().expect("temporary request file");
+    request_file
+        .write_all(REQUEST.as_bytes())
+        .expect("request must be written");
+    let output = binary()
+        .args(["--compact", "canonicalize"])
+        .arg(request_file.path())
+        .output()
+        .expect("canonicalize must run");
+    assert!(
+        output.status.success(),
+        "canonicalization failed: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let value: Value = serde_json::from_slice(&output.stdout).expect("canonicalization JSON");
+    assert_eq!(
+        value["canonical_syndrome"].as_array().map(Vec::len),
+        Some(5)
+    );
+    assert!(value["transporter"].is_object());
 }
