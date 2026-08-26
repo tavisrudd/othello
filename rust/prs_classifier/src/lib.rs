@@ -841,6 +841,9 @@ pub fn apply_semilinear(
     let mut out = vec![0u32; syndrome.len()];
     let top = [beta, alpha];
     let bottom = [delta, gamma];
+    let bottom_inverse = field
+        .inv(if gamma == 0 { delta } else { gamma })
+        .expect("nonzero matrix row has a nonzero linear form");
     let mut row = polynomial_trim(polynomial_power(field, &bottom, n));
     for (i, output) in out.iter_mut().enumerate() {
         for (j, &coefficient) in row.iter().enumerate() {
@@ -849,7 +852,7 @@ pub fn apply_semilinear(
         if i != n {
             row = polynomial_mul(
                 field,
-                &polynomial_divide_exact_linear(field, &row, bottom),
+                &polynomial_divide_exact_linear(field, &row, bottom, bottom_inverse),
                 &top,
             );
             row = polynomial_trim(row);
@@ -2234,24 +2237,21 @@ fn polynomial_divide_exact_linear(
     field: &Field,
     polynomial: &[u32],
     [constant, linear]: [u32; 2],
+    divisor_inverse: u32,
 ) -> Vec<u32> {
     if linear == 0 {
-        let inverse = field
-            .inv(constant)
-            .expect("nonzero matrix row has a nonzero linear form");
         return polynomial_trim(
             polynomial
                 .iter()
-                .map(|&coefficient| field.mul(coefficient, inverse))
+                .map(|&coefficient| field.mul(coefficient, divisor_inverse))
                 .collect(),
         );
     }
 
-    let inverse = field.inv(linear).expect("nonzero coefficient has inverse");
     let mut remainder = polynomial.to_vec();
     let mut quotient = vec![0; remainder.len().saturating_sub(1)];
     for degree in (1..remainder.len()).rev() {
-        let coefficient = field.mul(remainder[degree], inverse);
+        let coefficient = field.mul(remainder[degree], divisor_inverse);
         quotient[degree - 1] = coefficient;
         remainder[degree] = field.sub(remainder[degree], field.mul(coefficient, linear));
         remainder[degree - 1] = field.sub(remainder[degree - 1], field.mul(coefficient, constant));

@@ -49,7 +49,8 @@ R_(i+1) = (R_i / Y) X.
 Division by the known nonzero linear factor and multiplication by `X` each
 take linear work in the current degree. Building all rows and pairing them
 with the syndrome therefore costs `O(r^2)` field operations, replacing the
-former independent-power `O(r^3)` evaluator. Frobenius and projective
+former independent-power `O(r^3)` evaluator. The divisor inverse is computed
+once per transport and reused across all adjacent rows. Frobenius and projective
 normalization add `O(r log q)` field multiplications in this reference backend.
 Thus one transport costs
 

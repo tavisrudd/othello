@@ -58,7 +58,7 @@ The optional polynomial-basis extension-field pass adds:
 | positive deep-certificate replay | 8 | 5 | 717,238 | -- |
 | Lucas-degenerate canonicalization | 9 | 5 | 1,267,369 | 144 |
 | full-length structural canonicalization | 16 | 16 | 13,072,870 | 60 |
-| characteristic-power structural canonicalization | 32 | 17 | 1,238,508,493 | 4,960 |
+| characteristic-power structural canonicalization | 32 | 17 | 1,180,758,448 | 4,960 |
 
 The terminal fixtures are respectively the R5 tangent, R6 tangent, and frozen
 R7 sporadic representative. Their one-prefix selector outcomes are favorable
