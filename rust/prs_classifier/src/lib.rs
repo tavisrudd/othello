@@ -2798,6 +2798,36 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "slow exhaustive GF(8) projective-space oracle"]
+    fn lex_charts_exhaust_all_r5_gf8_binary_forms() {
+        let field_spec = FieldSpec {
+            p: 2,
+            degree: 3,
+            modulus: vec![1, 1, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let field = Field::new(field_spec.clone()).unwrap();
+        let basis = (0..5)
+            .map(|i| {
+                let mut vector = vec![0; 5];
+                vector[i] = 1;
+                vector
+            })
+            .collect::<Vec<_>>();
+        let mut examined = 0;
+        let syndromes = projective_span(&field, &basis, 5_000, &mut examined).unwrap();
+        assert_eq!(syndromes.len(), 4_681);
+        for syndrome in syndromes {
+            let reduced =
+                canonicalize_syndrome(&request(field_spec.clone(), 5, syndrome.clone()), 2_000)
+                    .unwrap();
+            let explicit = canonicalize_explicit(&field, syndrome, 2_000).unwrap();
+            assert_eq!(reduced.canonical_syndrome, explicit.canonical_syndrome);
+            assert!(!reduced.complexity.starts_with("explicit PGL"));
+        }
+    }
+
+    #[test]
     fn r5_tame_formula_adapter_covers_fields_above_registry() {
         let rational_field = Field::new(prime_field(53)).unwrap();
         assert_eq!(

@@ -79,6 +79,9 @@ normalized matrices.
 
 - all 781 projective q=5/R5 binary forms agree with full PGL minima and replay
   their returned transporters;
+- a slow release-mode oracle checks all 4,681 projective GF(8)/R5 binary forms,
+  including characteristic-two successor degenerations, against full
+  semilinear minima without reaching the defensive fallback;
 - the GF(9)/R5 Lucas-degenerate wild form uses 144 transports and agrees with
   all 1,440 semilinear transports;
 - q=13/R11--R13 tangent, sigma, and multiple-root forms agree with full PGL;

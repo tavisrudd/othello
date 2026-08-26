@@ -40,7 +40,9 @@ canonical form is promoted to a deep-hole verdict without a theorem-domain
 row. R11 tangent and sigma fixtures and R12--R13 multiple-root fixtures over
 `F_13` are checked against all 2,184 explicit PGL transports. A slow ignored
 regression checks GF(16)/R11 against all 16,320 semilinear transports, and a
-GF(16)/R16 fixture exercises the full-length `r=q` structural boundary.
+GF(16)/R16 fixture exercises the full-length `r=q` structural boundary. Slow
+release-mode coverage also checks all 4,681 projective GF(8)/R5 forms against
+full semilinear enumeration.
 
 The four rational-root strata—rootless, simple, multiple, and pure power—give
 an exhaustive worst-case bound of `O(m*r*q^2)` exact transports for structural

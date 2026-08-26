@@ -61,7 +61,9 @@ semilinear canonical form and transporter using the dimension-independent
 binary-form charts. R11 tangent/sigma and R12--R13 multiple-root fixtures over
 `F_13` agree with full PGL enumeration; a slow GF(16)/R11 regression agrees
 with full semilinear enumeration, and GF(16)/R16 exercises the full-length
-`r=q` structural boundary. The full PGL enumerator remains as a
+`r=q` structural boundary. A slow oracle exhausts all 4,681 projective
+GF(8)/R5 forms, including the characteristic-two degenerate successor. The
+full PGL enumerator remains as a
 defensive reference and regression oracle, not a reachable binary-form
 stratum. The exhaustive structural bound is `O(m r q^2)`. `classify`, `distance`,
 and `decode` deliberately remain R5--R10-only, so this scope extension makes no
