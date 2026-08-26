@@ -206,8 +206,11 @@ In odd characteristic, lex order forces this coordinate to zero and uniquely
 sets `c=-hC/(2B)` for each of the `q-1` scales `h`. In characteristic two, if
 `C` is nonzero, lex order forces the third coordinate to one, uniquely setting
 `h=B/C` and leaving the `q` shifts `c`. There are at most `n` rational roots,
-so both cases use `O(m n q)` transports. The implementation checks the forced
-prefix and retains exact transporters.
+so both cases use `O(m n q)` transports. If characteristic two also has `C=0`,
+those roots have third coordinate zero and lexicographically precede every
+simple root with `C` nonzero. Retaining only them and enumerating their
+`q(q-1)` affine stabilizers gives the exact minimum in `O(m n q^2)`. The
+implementation checks the forced prefix and retains exact transporters.
 
 There is in fact no remaining degenerate persistent-sigma stratum. Write
 `mu=lambda L(v)^n` and `t=L(w)/L(v)` in `F_(q^2)`. A rational root says
@@ -228,10 +231,9 @@ R5--R10 without reaching the defensive fallback.
 
 The two lex-coset arguments depend only on the rational-root structure of
 `F_s`, not on persistence. The implementation therefore applies them to every
-non-tangent input before the explicit fallback. A nonpersistent q9/R5 sporadic
-fixture canonicalizes through the reduced charts and is checked against all
-1,440 explicit semilinear transports. Nonpersistent forms with a multiple
-rational root remain the next open lex stratum.
+non-tangent input before the multiple-root chart. Nonpersistent q8 and q9/R5
+fixtures exercise respectively the characteristic-two degenerate simple-root
+and other reduced charts, and are checked against full semilinear enumeration.
 
 ### Multiple-root successor
 
@@ -264,14 +266,21 @@ powers terminate at the normalized last coordinate and need one top row per
 maximal root. Thus the multiple-root chart is exhaustive; no persistent sigma
 input reaches its degenerate branch.
 
+Together these cases partition every nonzero degree-`n` binary form by maximal
+rational root multiplicity: zero, one, at least two, or the pure-power endpoint.
+Hence structural canonicalization never needs more than `O(m n q^2)` exact
+transports. The explicit group enumerator remains in the implementation as a
+defensive oracle and regression target.
+
 ## Dimension-independent structural scope
 
 The tangent, rootless, simple-root, and multiple-root coset arguments use only
 the degree `n=r-1` binary-form action. They do not use the R5--R10 covering
 radius or classification tables. The structural `canonicalize` operation
 therefore accepts every `r>=5` with `q>=r`, while coding verdicts remain frozen
-at R5--R10. At R11 over `F_13`, both a tangent fixture and a nontrivial sigma
-fixture (quotient order two) return the same minima as all 2,184 explicit PGL
-transports; the tangent path examines 156 transports. This is an exact
-higher-dimensional orbit/canonicalization result, not a higher-dimensional
-deep-hole claim.
+at R5--R10. Over `F_13`, an R11 tangent fixture, an R11 nontrivial sigma fixture
+(quotient order two), and R12--R13 multiple-root fixtures return the same minima
+as all 2,184 explicit PGL transports; the tangent path examines 156 transports.
+A slow oracle also checks GF(16)/R11 against all 16,320 semilinear transports.
+These are exact higher-dimensional orbit/canonicalization results, not
+higher-dimensional deep-hole claims.

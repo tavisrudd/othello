@@ -41,9 +41,10 @@ Persistent tangent canonicalization now uses the repeated quadratic-gcd root
 to restrict exact lexicographic minimization to `m q(q-1)` affine transports;
 `c969-tangent-canonicalizer.md` proves equivalence to the full orbit minimum.
 Rootless-form sigma inputs now canonicalize exactly in `m(q^2-1)` transports,
-and the simple-root stratum in `O(m r q)`. Trace-pairing nondegeneracy proves
+and its simple-root stratum in `O(m r q)`. Trace-pairing nondegeneracy proves
 these strata exhaust persistent sigma. The same exact lex charts now accelerate
-all nonpersistent inputs: maximal rational Hasse multiplicity handles the
+all nonpersistent inputs: a characteristic-two zero-successor simple root uses
+its `q(q-1)` affine stabilizer, while maximal rational Hasse multiplicity handles the
 multiple-root stratum in `O(m r q)` transports, or `O(m r q^2)` when its first
 successor is simultaneously Lucas-degenerate. A
 frozen R5 counterexample proves that centering an irreducible sigma gcd and
@@ -57,9 +58,11 @@ Frobenius, attached to positive sigma certificates, and independently replayed.
 The structural canonicalization API now extends beyond the classifier's
 R5--R10 theorem registry: for every `r>=5` with `q>=r`, it returns an exact
 semilinear canonical form and transporter using the dimension-independent
-binary-form charts. R11 tangent and sigma fixtures over `F_13` agree with full
-PGL enumeration. The full PGL enumerator remains as a defensive reference and
-regression oracle, not a reachable generic-form branch. `classify`, `distance`,
+binary-form charts. R11 tangent/sigma and R12--R13 multiple-root fixtures over
+`F_13` agree with full PGL enumeration; a slow GF(16)/R11 regression agrees
+with full semilinear enumeration. The full PGL enumerator remains as a
+defensive reference and regression oracle, not a reachable binary-form
+stratum. The exhaustive structural bound is `O(m r q^2)`. `classify`, `distance`,
 and `decode` deliberately remain R5--R10-only, so this scope extension makes no
 unsupported covering-radius or deep-hole assertion.
 

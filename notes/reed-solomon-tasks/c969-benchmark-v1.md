@@ -32,27 +32,30 @@ not a codeword scan and not the optimized selector.
 
 | operation | q | redundancy | ns / iteration | locator candidates |
 |---|---:|---:|---:|---:|
-| 12-point terminal selector | 7 | 5 | 6,429 | 1 |
-| projective locator oracle | 7 | 5 | 54,371 | 409 |
-| 12-point terminal selector | 17 | 6 | 16,632 | 1 |
-| projective locator oracle | 17 | 6 | 16,529,830 | 89,067 |
-| 12-point terminal selector | 7 | 7 | 4,567 | 1 |
-| projective locator oracle | 7 | 7 | 8,296,680 | 20,017 |
-| tangent semilinear canonicalization | 17 | 6 | 504,884 | 272 transports |
-| rootless sigma semilinear canonicalization | 7 | 5 | 56,005 | 48 transports |
-| simple-root sigma semilinear canonicalization | 17 | 6 | 89,065 | 16 transports |
-| end-to-end tangent classification | 17 | 6 | 719,086 | -- |
-| positive tangent deep-certificate replay | 17 | 6 | 717,723 | -- |
+| 12-point terminal selector | 7 | 5 | 9,248 | 1 |
+| projective locator oracle | 7 | 5 | 76,073 | 409 |
+| 12-point terminal selector | 17 | 6 | 23,767 | 1 |
+| projective locator oracle | 17 | 6 | 10,508,051 | 89,067 |
+| 12-point terminal selector | 7 | 7 | 3,970 | 1 |
+| projective locator oracle | 7 | 7 | 6,034,364 | 20,017 |
+| tangent semilinear canonicalization | 17 | 6 | 397,000 | 272 transports |
+| rootless sigma semilinear canonicalization | 7 | 5 | 63,948 | 48 transports |
+| simple-root sigma semilinear canonicalization | 17 | 6 | 100,792 | 16 transports |
+| structural tangent canonicalization | 13 | 11 | 942,758 | 156 transports |
+| structural sigma canonicalization | 13 | 11 | 1,182,996 | 168 transports |
+| end-to-end tangent classification | 17 | 6 | 539,730 | -- |
+| positive tangent deep-certificate replay | 17 | 6 | 540,651 | -- |
 
 The optional polynomial-basis extension-field pass adds:
 
 | operation | q | redundancy | ns / iteration | candidates/transports |
 |---|---:|---:|---:|---:|
-| 12-point terminal selector | 8 | 5 | 122,916 | 1 |
-| projective locator oracle | 8 | 5 | 789,781 | 594 |
-| explicit semilinear canonicalization | 8 | 5 | 19,275,349 | 1,512 |
-| end-to-end classification | 8 | 5 | 19,618,460 | -- |
-| positive deep-certificate replay | 8 | 5 | 19,085,015 | -- |
+| 12-point terminal selector | 8 | 5 | 111,781 | 1 |
+| projective locator oracle | 8 | 5 | 721,025 | 594 |
+| maximal-root semilinear canonicalization | 8 | 5 | 877,721 | 42 |
+| end-to-end classification | 8 | 5 | 1,054,199 | -- |
+| positive deep-certificate replay | 8 | 5 | 1,037,706 | -- |
+| Lucas-degenerate canonicalization | 9 | 5 | 1,930,036 | 144 |
 
 The terminal fixtures are respectively the R5 tangent, R6 tangent, and frozen
 R7 sporadic representative. Their one-prefix selector outcomes are favorable
@@ -65,16 +68,18 @@ The benchmark separates four costs which must not be conflated:
 
 1. fixed-grid terminal completion after streamed prefix selection;
 2. the generic exact projective-locator oracle;
-3. exact tangent `mq(q-1)`, rootless-sigma `m(q^2-1)`, and simple-root-sigma
-   `O(mrq)` semilinear canonicalization; the two sigma charts are exhaustive,
-   while the explicit `m(q^3-q)` fallback remains defensive and serves other
-   families; and
+3. exact tangent `mq(q-1)`, rootless `m(q^2-1)`, and simple-/multiple-root
+   `O(mrq^2)` semilinear canonicalization (usually `O(mrq)` off their degenerate
+   successor strata); the charts exhaust all
+   binary forms, while explicit `m(q^3-q)` enumeration remains a defensive
+   oracle; and
 4. independent certificate replay, which intentionally repeats canonical
    transport before checking family and radius evidence.
 
-No timing is a novelty or state-of-the-art claim. Multiple-root nonpersistent
-canonicalization still uses an honest group-scale fallback; rootless and
-simple-root nonpersistent forms share the reduced exact charts. The remaining
-multiple-root canonicalizer, a wider q/field/redundancy benchmark grid beyond
-the first GF(8) fixture, bit-operation accounting, and comparison with external
-decoder software remain open benchmark work.
+No timing is a novelty or state-of-the-art claim. The R11 rows exercise only
+dimension-independent structural canonicalization; they do not assert an R11
+covering radius or coding verdict. The q=8 maximal-root chart reduces the old
+explicit 1,512-transport path to 42 exact transports. A wider q/field/redundancy
+grid remains open, but the q=9 row separately exercises the simultaneous
+Lucas-degenerate `O(m r q^2)` branch. Bit-operation accounting and comparison
+with external decoder software also remain open benchmark work.

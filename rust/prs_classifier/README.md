@@ -17,7 +17,8 @@ This is the C969 implementation crate.  Its current executable slice provides:
 - exact tangent-family canonicalization in `m*q*(q-1)` transports and
   sigma canonicalization in `m*(q^2-1)` on the rootless-form stratum and
   `O(m*r*q)` on the simple-root stratum; these exhaust persistent sigma, while
-  the same charts also accelerate nonpersistent forms when applicable;
+  the same charts cover general forms in `O(m*r*q^2)` even at the
+  characteristic-two degenerate successor;
 - exact maximal-Hasse-root canonicalization in `O(m*r*q)` transports off the
   simultaneous Lucas degeneration and `O(m*r*q^2)` on it, including pure
   powers, with the full `m*(q^3-q)` path retained as a defensive fallback;
@@ -36,8 +37,15 @@ redundancy `r>=5` with `q>=r`. The exact tangent and binary-form lex-coset
 proofs apply unchanged. Coding operations (`distance`, `decode`, and
 `classify`) remain restricted to R5--R10; in particular, no higher-dimensional
 canonical form is promoted to a deep-hole verdict without a theorem-domain
-row. R11 tangent and sigma fixtures over `F_13` are checked against all 2,184
-explicit PGL transports.
+row. R11 tangent and sigma fixtures and R12--R13 multiple-root fixtures over
+`F_13` are checked against all 2,184 explicit PGL transports. A slow ignored
+regression checks GF(16)/R11 against all 16,320 semilinear transports.
+
+The four rational-root strata—rootless, simple, multiple, and pure power—give
+an exhaustive worst-case bound of `O(m*r*q^2)` exact transports for structural
+canonicalization, where `m` is the field extension degree. This is strictly
+below full `m*(q^3-q)` enumeration when `r` is treated as the fixed redundancy;
+the implementation retains that enumeration as its independent reference.
 
 `classify` returns witness-backed `NOT_DEEP`, persistent-family `DEEP`, and
 frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. `canonicalize` uses
