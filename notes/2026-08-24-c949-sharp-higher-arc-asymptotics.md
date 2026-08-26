@@ -2263,9 +2263,9 @@ The converted-line geometry gives a quantitative stability gap.  Put
 u(r-3) <= |E|r+4f,
 ```
 
-Let `J` count the incidences of the `f` off-triangle
-additions with the deficient Mason blocks.  Since each such block contains
-at most three open-side additions,
+and hence `u=O(|E|+z)`.  Let `J` count the incidences of the `f`
+off-triangle additions with the deficient Mason blocks.  Since each such
+block contains at most three open-side additions,
 
 ```text
 D <= sum_(T in U)x_T <= J+3u.
@@ -2286,7 +2286,7 @@ But the exact deficit and the zero-side filling inequality give
 D-3f=q-2+e-f-2v-eta >= q-8-eta,
 ```
 
-In particular this forces `u=Omega(sqrt(q))`.  If the claimed quantitative
+In particular, this forces `u=Omega(sqrt(q))`.  If the claimed quantitative
 bound failed, a subsequence would have `e=o(q^(3/2))`, hence
 `z=o(sqrt(q))`.  On that subsequence `|E|=O(z^2)=o(q)`, so eventually
 `|E|<=r`; the union inequality in `(SR24a-Mason-converted)` improves to
@@ -2306,8 +2306,8 @@ e=Omega(q^(3/2)),
 ```
 
 Thus every near-sharp complement is at least order `q^(3/2)` in symmetric
-difference from every Mason large-root set.  This eliminates every sub-
-`q^(3/2)` Mason switch.
+difference from every Mason large-root set.  This eliminates every Mason
+switch of size `o(q^(3/2))`.
 
 The exact missing bridge to a global contradiction is now visible.  If `M`
 is the point-line incidence matrix, `M^T M=qI+J` gives, for any Mason root
