@@ -12,11 +12,12 @@ It contains three complementary layers:
 
 - 31 focused library tests for exact examples, registry boundaries,
   certificate corruption, canonicalization oracles, and decoder behavior;
-- six integration tests that exercise every compiled Clap subcommand, including
+- seven integration tests that exercise every compiled Clap subcommand, including
   a classify-to-verify positive-certificate round trip and rejection of a
   corrupted certificate through standard input, file-input canonicalization,
   distance/decode agreement with locator-certificate replay, and fail-closed
-  candidate-budget exhaustion;
+  candidate-budget exhaustion, and rejection of classification requests beyond
+  the R5--R10 theorem domain;
 - five property tests, each with 256 cases and a committed fixed RNG seed,
   covering prime- and extension-field laws, projective scale invariance, and
   locator/support and syndrome/magnitude round trips.

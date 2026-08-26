@@ -66,9 +66,9 @@
       "sha256": "f9aa898b7c605dcd8f55834d3713529908095e1ab37877fc4ab43eb2b8f429f5"
     },
     {
-      "bytes": 1513,
+      "bytes": 1593,
       "path": "software/projective-reed-solomon/docs/testing.md",
-      "sha256": "fe87adce32e0f9f2038ad6086eafbc70b467ecaaa1726a2ff739d3a62362f8ba"
+      "sha256": "384ad5d9b273233f20d30058946b8b455e0c3be526a987bdba2dc24e07e2d781"
     },
     {
       "bytes": 1272,
@@ -96,9 +96,9 @@
       "sha256": "57437855a31cdecfe5b52da90f5e54cb54cfe987cfdfe2125dc81b3b8c777a91"
     },
     {
-      "bytes": 5868,
+      "bytes": 6628,
       "path": "software/projective-reed-solomon/tests/cli.rs",
-      "sha256": "07917fff62dfaaf03c33dcb4893283172fc0b373f4b6c267ae5a821b1bd604d0"
+      "sha256": "341fb4792b36b6144978b15778fb3f69ea188343828db32c5a8498d7df83bec0"
     },
     {
       "bytes": 5788,

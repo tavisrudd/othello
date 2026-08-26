@@ -29,6 +29,19 @@ const SHALLOW_REQUEST: &str = r#"{
   "syndrome": [1, 0, 0, 0, 0]
 }"#;
 
+const OUTSIDE_THEOREM_DOMAIN_REQUEST: &str = r#"{
+  "schema": "projective-reed-solomon-request-v1",
+  "field": {
+    "p": 11,
+    "degree": 1,
+    "modulus": [0, 1],
+    "encoding": "polynomial-basis-base-p-integer-v1"
+  },
+  "redundancy": 11,
+  "evaluation": "full-projective-nrc-v1",
+  "syndrome": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+}"#;
+
 fn binary() -> Command {
     Command::new(env!("CARGO_BIN_EXE_projective-reed-solomon"))
 }
@@ -168,6 +181,18 @@ fn classify_fails_closed_when_the_candidate_budget_is_exhausted() {
     assert!(
         String::from_utf8_lossy(&output.stderr).contains("CandidateLimit"),
         "unexpected failure: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+}
+
+#[test]
+fn classify_rejects_requests_beyond_the_theorem_domain() {
+    let output = run_with_stdin(&["--compact", "classify"], OUTSIDE_THEOREM_DOMAIN_REQUEST);
+    assert!(!output.status.success());
+    assert!(output.stdout.is_empty());
+    assert!(
+        String::from_utf8_lossy(&output.stderr).contains("BadRedundancy"),
+        "unexpected rejection: {}",
         String::from_utf8_lossy(&output.stderr)
     );
 }
