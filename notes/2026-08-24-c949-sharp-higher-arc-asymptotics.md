@@ -25,7 +25,8 @@ near-extremizers remain open.
 
 Current honest completion estimate: about **75% of the structural program**,
 but materially less than 75% of a finished asymptotic theorem because the
-remaining step is the global upper-bound inverse/classification theorem.
+remaining steps are a matching construction and the global inverse/stability
+classification.
 
 ## Read routing
 
