@@ -339,6 +339,13 @@ coefficient is `1`.  The full boundary reflag must mix lower Chow layers and
 completion factors to produce zero.  This `1 -> 0` cancellation is a sharp
 unit test for the missing carrier compiler, not a contradiction.
 
+Repeating the calculation in all three bad boundary directions gives three
+necessary `e_(q-1)=0` projection gates.  Equivalently the degree-`q-1`
+binary form `Psi(alpha,beta)=e_(q-1)(alpha u+beta t)` is divisible by the
+boundary-direction cubic.  At q=27 these are three `e_26` prefilters after
+the full 55-point affine core and its boundary directions are reconstructed;
+their independence is not yet proved.
+
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
 
@@ -510,6 +517,8 @@ separate global trade obstruction or construction.
   affine flag (`e_26(a)=0` at q=27).
 - **Open:** determine whether this gate is independent of the existing
   fourth-Witt, reciprocal-norm, and mapping gates after carrier transport.
+- **Settled:** all three boundary directions give such gates, packaged by a
+  boundary-cubic divisibility of one binary elementary-symmetric form.
 - **Open:** synchronize those residuals across slopes; fiberwise boundedness
   alone does not give a common carrier.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut

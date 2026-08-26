@@ -308,3 +308,9 @@ Independent red teams confirmed that the flags differ and the full
 projective reflag mixes lower Chow layers and completion factors.  The
 apparent `1 -> 0` change is therefore an exact compiler unit test, not a
 contradiction and not a gate on raw carrier coordinates.
+
+The cyclic closeout repeats the boundary calculation in all three bad
+directions.  The three `e_(q-1)=0` conditions assemble into divisibility of
+one degree-`q-1` binary elementary-symmetric form by the boundary-direction
+cubic.  For q=27 this gives three exact `e_26` post-reconstruction
+prefilters.  No independence or raw-carrier formulation is claimed.

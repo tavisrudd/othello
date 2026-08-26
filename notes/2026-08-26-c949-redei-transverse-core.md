@@ -825,6 +825,27 @@ factors mix the full Chow layers into the new coefficient.  Any proposed
 carrier compiler must reproduce the `1 -> 0` cancellation from the complete
 reflagged product; evaluating `(TR40)` on raw carrier variables is invalid.
 
+The construction has three bad boundary directions, and the entire argument
+repeats with each one chosen vertical.  Intrinsically, for affine coordinates
+`(u,t)` define the binary form
+
+```text
+Psi(alpha,beta)
+ =e_(q-1)({alpha u(P)+beta t(P):P in B_aff}).
+```
+
+It has degree `q-1` and vanishes at the three covectors whose kernels are the
+bad boundary directions.  Hence their squarefree boundary cubic divides it:
+
+```text
+B_R(alpha,beta) divides Psi(alpha,beta).             (TR41)
+```
+
+This packages three chartwise `(TR40)` gates; it does not prove that they are
+independent.  At q=27, after reconstructing all 55 affine-core points and
+the three boundary directions, test all three `e_26` values before the
+carrier/mapping gates.  Raw carrier rows do not yet carry the required flag.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -881,5 +902,9 @@ reflagged product; evaluating `(TR40)` on raw carrier variables is invalid.
 - **Settled/no-go:** the old carrier-top coefficient is one while `(TR40)`
   is zero in the boundary flag; this is a reflag compiler test, not a
   contradiction or a raw-carrier gate.
+- **Settled:** cyclically, the three boundary projection gates assemble as
+  the binary divisibility `(TR41)`.
+- **Open:** determine whether the three gates are independent after the full
+  carrier-to-boundary reflag; no symmetry of `D` may be assumed.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.
