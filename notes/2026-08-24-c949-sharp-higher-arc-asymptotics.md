@@ -2222,73 +2222,70 @@ D=sum_T(x_T-y_T)=sum_(x in P) tau(x)-|N|
  >=q+e-eta-8.                               (SR24a-Mason-deficit)
 ```
 
-The zero sides give `f<=e+v-3`.  Delete the at most `4f` Mason blocks
-incident with an off-triangle addition.  The Mason pencil formula
+The zero sides give `f<=e+v-3`.  The Mason pencil formula
 `tau(X)=4-2z(X)` shows that an `r`-secant avoids all three triangle vertices;
-it therefore meets the zero sides in three distinct open-side points.  The
-deleted blocks carry at most `4f` off-triangle and `12f` boundary incidences,
-even when several off-triangle points share a block.  On the remaining blocks
-the total deficit is
-at least
+it therefore meets the zero sides in three distinct open-side points.
+
+Let `U` be the deficient partition blocks `x_T-y_T>0`, let `u=|U|`, and let
+`O` count their surviving Mason points.  Every block has
+`x_T<=f+3`, while the total number of addition incidences on `U` is at most
+`4f+3u`.  Hence
 
 ```text
-q-13e-eta-8.                                  (SR24a-Mason-clean-deficit)
+u >= D/(f+3),
+O=sum_(T in U)(r-y_T)
+ >=u(r-3)+D-4f
+ >=D(r-3)/(f+3)+D-4f.                         (SR24a-Mason-orphans)
 ```
 
-Each remaining deficient block has `x_T<=3`, hence retains at least `r-2`
-points of `S`, none of which has a tight Mason `r`-secant in `B`.  Since `B`
-is minimal, every such point must instead lie on a former Mason `2r`-secant
-made tight by
+None of these survivors has a tight Mason `r`-secant in `B`: those blocks
+partition `S`, and its unique block is deficient.  It is not on a zero side.
+Since `B` is minimal, every orphan must instead lie on a former Mason
+`2r`-secant made tight by
 
 ```text
 |N intersect H|-|P intersect H|=r.
 ```
 
 If `E` is the set of these converted lines, pair counting on their at least
-`r` deleted points gives
+`r` deleted points first makes `|E|=O(1)`.  Since two distinct projective
+lines share at most one deleted point, inclusion--exclusion then gives
 
 ```text
-|E| binom(r,2)<=binom(|N|,2).                  (SR24a-Mason-converted)
+|E| binom(r,2)<=binom(|N|,2),
+|N|>=r|E|-binom(|E|,2),             O<=r|E|.   (SR24a-Mason-converted)
 ```
 
-When `eta=o(q)`, fix `epsilon>0` and suppose
-`e<=(1/13-epsilon)q`.  The right side makes `|E|=O(1)`, so these lines cover
-only `O(q)` Mason points.  But `(SR24a-Mason-clean-deficit)` supplies
-`Omega_epsilon(q)` deficient partition blocks, each with `r-2` surviving
-points, requiring `Omega_epsilon(q^2)` coverage.  Hence
+This system has a sharp asymptotic consequence.  Suppose `eta=o(q)` and,
+along a subsequence, `e/q -> c` and `f/q -> g`.  If `g=0`,
+`(SR24a-Mason-orphans)` grows faster than the `O(q)` capacity in
+`(SR24a-Mason-converted)`, a contradiction.  If `g>0`, those two displays give
 
 ```text
-eta=o(q)  implies  e>=q/13-o(q),
-|B setminus S|>=14q/13-o(q).                  (SR24a-Mason-essential-gap)
+u >= ceil((1+c)/g+2),
+u+3+3c-6g <= |E|+o(1).                        (SR24a-Mason-limit)
 ```
 
-Pair counting gives an explicit refinement.  In the only remaining regime
-`e<=q/13+o(q)`, one has `|N|/r -> 42/13`, so `(SR24a-Mason-converted)` gives
-`|E|<=10` for all sufficiently large `q`.  A converted line is a tight
-`B`-line and hence covers at most `r` of the orphaned survivors.  Therefore
+Since `g<=c`, the left side is at least
+`ceil(1/c+3)+3-3c-o(1)`.  If `c<1`, the union bound in
+`(SR24a-Mason-converted)` gives
 
 ```text
-(q-8-eta-13e)(r-2)/3 <= 10r,
-e >= (q-8-eta-30r/(r-2))/13
-   =q/13-eta/13-O(1).                          (SR24a-Mason-essential-gap')
+|N|/r -> 3(1+c)<6,             |E|<=5
 ```
 
-The equality regime is itself rigid.  If `eta=o(q)` and
-`e=q/13+o(q)`, the clean deficit above must be `o(q)`; otherwise its
-deficient blocks again create `Omega(q^2)` orphaned points.  Tracing equality
-back through the estimates gives
+for all sufficiently large `q`.  But the orphan lower bound is strictly
+larger than `8-3c>5`, a contradiction.  Therefore
 
 ```text
-f=q/13+o(q),                  |H|=4f-o(q),
-sum_(T in H) x_T=16f-o(q),   sum_(T in H) y_T=o(q).  (SR24a-Mason-equality)
+eta=o(q)  implies
+e >= q-o(q),
+|B setminus S| >= 2q-o(q).                    (SR24a-Mason-essential-gap)
 ```
 
-Consequently almost every contaminated Mason `r`-secant contains one
-off-triangle addition, all three of its triangle intersections are selected,
-and no point on it is deleted; almost every clean `r`-block is exactly
-balanced.  Thus a sharp Mason trade, if it exists, reduces to a sparse
-four-incidence design between `q/13` off-triangle points and three boundary
-sets, rather than an arbitrary `Theta(q)` switch.
+At the boundary the union bound permits at most six converted
+`2r`-secants.  Classifying that bounded converted-line configuration together
+with a `2q+o(q)` addition set is the next Mason-specific construction gate.
 
 Thus even the smallest possible triangle fill is not the start of a
 near-sharp construction: any Mason-based witness needs a further linear-size
@@ -5840,9 +5837,9 @@ family is lower priority.
   the bound improves to `2q-1+ceil((sqrt(q)-2)/3)`.  This closes the direct
   six-point and minimal-trade mechanisms.  On the complementary blocking-set
   side, essential-secants strengthen this across all `(SR11)` signatures:
-  any `eta=o(q)` Mason trade needs at least `14q/13-o(q)` additions, since a
-  smaller trade leaves quadratically many orphaned Mason points but only
-  constantly many old `2q/3`-secants can be converted to tight lines.  These
+  any `eta=o(q)` Mason trade needs at least `2q-o(q)` additions,
+  since a smaller trade leaves quadratically many orphaned Mason points but
+  only constantly many old `2q/3`-secants can be converted to tight lines.  These
   are stability/separation theorems; they do not classify arbitrary small
   roots or minimal blocking sets.
   **Rejected shortcut — does the three-weight code lie close enough to the
