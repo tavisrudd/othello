@@ -835,16 +835,44 @@ Psi(alpha,beta)
 ```
 
 It has degree `q-1` and vanishes at the three covectors whose kernels are the
-bad boundary directions.  Hence their squarefree boundary cubic divides it:
+bad boundary directions.  If a direction is represented by `[u_i:t_i]`, its
+root is `[alpha:beta]=[t_i:-u_i]`.  Hence the squarefree **dual** boundary
+cubic divides it:
 
 ```text
-B_R(alpha,beta) divides Psi(alpha,beta).             (TR41)
+B_R^vee(alpha,beta)
+ :=product_i(u_i alpha+t_i beta)
+ divides Psi(alpha,beta).                            (TR41)
 ```
 
 This packages three chartwise `(TR40)` gates; it does not prove that they are
 independent.  At q=27, after reconstructing all 55 affine-core points and
 the three boundary directions, test all three `e_26` values before the
 carrier/mapping gates.  Raw carrier rows do not yet carry the required flag.
+
+The full carrier-to-Chow map makes this an exact post-terminal compiler
+contract.  In one affine normalization put
+
+```text
+C_B(U,V,W)=product_(P=(u_P,t_P) in B_aff)
+            (Uu_P+Vt_P+W).
+```
+
+Since `deg C_B=2q+1`, coefficient extraction gives
+
+```text
+Psi(U,V)=[W^(q+2)]C_B(U,V,W),
+B_R^vee(U,V) divides [W^(q+2)]C_B(U,V,W).            (TR42)
+```
+
+At `q=27`, `C_B` has degree 55 and `Psi=[W^29]C_B` has binary degree 26.
+The product in `(TR14)--(TR16)` constructs this `C_B` after completion and
+boundary embedding.  If one starts from the degree-`2q+4` Chow form of `D`,
+the three known infinity-point factors must first be omitted or divided out;
+extracting the coefficient directly from `Chow_D` is wrong.  A completed
+carrier terminal plus its resolved mapping and the fixed homogeneous
+boundary convention therefore suffice for this cheap necessary filter.  A
+raw carrier or unresolved mapping task does not.
 
 ## Mystery ledger (`ej` + `tt`)
 
@@ -904,7 +932,11 @@ carrier/mapping gates.  Raw carrier rows do not yet carry the required flag.
   contradiction or a raw-carrier gate.
 - **Settled:** cyclically, the three boundary projection gates assemble as
   the binary divisibility `(TR41)`.
-- **Open:** determine whether the three gates are independent after the full
-  carrier-to-boundary reflag; no symmetry of `D` may be assumed.
+- **Settled:** `(TR42)` compiles that divisibility exactly from the completed
+  affine-core Chow product; the three infinity factors of `Chow_D` must be
+  removed first, and direction coordinates are dualized.
+- **Open:** determine whether this post-terminal filter rejects any surviving
+  q=27 carrier states independently of fourth Witt, reciprocal norm, and the
+  mapping gate; no symmetry of `D` may be assumed.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.

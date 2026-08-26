@@ -343,9 +343,19 @@ unit test for the missing carrier compiler, not a contradiction.
 Repeating the calculation in all three bad boundary directions gives three
 necessary `e_(q-1)=0` projection gates.  Equivalently the degree-`q-1`
 binary form `Psi(alpha,beta)=e_(q-1)(alpha u+beta t)` is divisible by the
-boundary-direction cubic.  At q=27 these are three `e_26` prefilters after
-the full 55-point affine core and its boundary directions are reconstructed;
-their independence is not yet proved.
+dual boundary-direction cubic.  More explicitly, for
+
+```text
+C_B(U,V,W)=product_(P in B_aff)(Uu_P+Vt_P+W),
+```
+
+one has `Psi=[W^(q+2)]C_B` and `B_R^vee divides Psi`.  At q=27 this extracts
+the binary degree-26 form `[W^29]C_B` from the full 55-point affine core.
+The carrier-to-Chow map `(TR14)--(TR16)` therefore makes this a valid cheap
+post-terminal compiler gate once the mapping and boundary frame are resolved.
+If starting from `Chow_D`, first remove its three known infinity factors;
+raw carrier rows remain insufficient.  Independence from the existing gates
+is not yet proved.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
@@ -520,6 +530,11 @@ separate global trade obstruction or construction.
   fourth-Witt, reciprocal-norm, and mapping gates after carrier transport.
 - **Settled:** all three boundary directions give such gates, packaged by a
   boundary-cubic divisibility of one binary elementary-symmetric form.
+- **Settled:** the affine-core Chow coefficient `[W^(q+2)]C_B` is exactly
+  that binary form, so the cyclic gate has a precise post-terminal compiler;
+  the direction cubic must be dualized and the three infinity factors removed.
+- **Open:** determine whether this compiler rejects any surviving q=27
+  terminal independently of fourth Witt, reciprocal norm, and mapping.
 - **Open:** synchronize those residuals across slopes; fiberwise boundedness
   alone does not give a common carrier.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut
@@ -536,9 +551,10 @@ separate global trade obstruction or construction.
 
 ## Next checkpoint
 
-Transport the four-slope quadratic compatibility `(TR38)` into C962's
-carrier coordinates and compare it with the existing fourth-Witt scalar.
-This is now one explicit determinant, not an unspecified tangent reflag.
+Implement the post-terminal `(TR42)` Chow-coefficient filter in the C962
+normalization and compare its rejection cores with fourth Witt, reciprocal
+norm, and mapping.  Then transport the stronger four-slope compatibility
+`(TR38)` if `(TR42)` is not already decisive.
 In parallel, use the two-monomer matching gate and degree-five labelled
 residuals as q=27 prefilters before the carrier DFS.  Field-uniformly, prove
 cross-slope propagation for those residuals or construct a genuinely

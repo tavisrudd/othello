@@ -314,3 +314,13 @@ directions.  The three `e_(q-1)=0` conditions assemble into divisibility of
 one degree-`q-1` binary elementary-symmetric form by the boundary-direction
 cubic.  For q=27 this gives three exact `e_26` post-reconstruction
 prefilters.  No independence or raw-carrier formulation is claimed.
+
+The final compiler audit removed the remaining coordinate ambiguity.  For
+the affine-core Chow product `C_B(U,V,W)`, the binary form is exactly
+`[W^(q+2)]C_B`; the three roots are the normal covectors to the boundary
+directions, so the divisor is the dual boundary cubic.  At q=27 this is the
+degree-26 coefficient `[W^29]C_B`.  The carrier-to-Chow construction already
+builds this product after a terminal's mapping and boundary frame are
+resolved.  If starting from `Chow_D`, its three known infinity factors must
+first be removed.  Thus the gate is now an exact post-terminal compiler
+filter, while its independence and rejection power remain open.
