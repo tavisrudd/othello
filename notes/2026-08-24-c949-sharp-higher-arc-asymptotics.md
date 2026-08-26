@@ -2213,21 +2213,26 @@ The `2q-2` Mason `r`-secants partition `S`.  If `x_T=|P intersect T|` and
 `y_T=|N intersect T|` on such a block, blocking gives `x_T-y_T>=0`.  An
 external point lies on `0,2,4` Mason `r`-secants according as it is a zero-
 triangle vertex, an open-side point, or an off-triangle point.  Therefore the
-total block deficit satisfies
+total block deficit satisfies, if `v` and `f` count the vertex and
+off-triangle additions,
 
 ```text
 D=sum_T(x_T-y_T)=sum_(x in P) tau(x)-|N|
+  =q-2+e+2f-2v-eta
  >=q+e-eta-8.                               (SR24a-Mason-deficit)
 ```
 
-Let `f` count the off-triangle points of `P`.  The zero sides force at least
-`q-3` boundary points, so `f<=e`.  Delete the at most `4f` Mason blocks
-incident with an off-triangle addition.  They carry at most `4f` off-triangle
-and `12f` boundary incidences.  On the remaining blocks the total deficit is
+The zero sides give `f<=e+v-3`.  Delete the at most `4f` Mason blocks
+incident with an off-triangle addition.  The Mason pencil formula
+`tau(X)=4-2z(X)` shows that an `r`-secant avoids all three triangle vertices;
+it therefore meets the zero sides in three distinct open-side points.  The
+deleted blocks carry at most `4f` off-triangle and `12f` boundary incidences,
+even when several off-triangle points share a block.  On the remaining blocks
+the total deficit is
 at least
 
 ```text
-q-15e-eta-8.                                  (SR24a-Mason-clean-deficit)
+q-13e-eta-8.                                  (SR24a-Mason-clean-deficit)
 ```
 
 Each remaining deficient block has `x_T<=3`, hence retains at least `r-2`
@@ -2247,26 +2252,43 @@ If `E` is the set of these converted lines, pair counting on their at least
 ```
 
 When `eta=o(q)`, fix `epsilon>0` and suppose
-`e<=(1/15-epsilon)q`.  The right side makes `|E|=O(1)`, so these lines cover
+`e<=(1/13-epsilon)q`.  The right side makes `|E|=O(1)`, so these lines cover
 only `O(q)` Mason points.  But `(SR24a-Mason-clean-deficit)` supplies
 `Omega_epsilon(q)` deficient partition blocks, each with `r-2` surviving
 points, requiring `Omega_epsilon(q^2)` coverage.  Hence
 
 ```text
-eta=o(q)  implies  e>=q/15-o(q),
-|B setminus S|>=16q/15-o(q).                  (SR24a-Mason-essential-gap)
+eta=o(q)  implies  e>=q/13-o(q),
+|B setminus S|>=14q/13-o(q).                  (SR24a-Mason-essential-gap)
 ```
 
 Pair counting gives an explicit refinement.  In the only remaining regime
-`e<=q/15+o(q)`, one has `|N|/r -> 16/5`, so `(SR24a-Mason-converted)` gives
+`e<=q/13+o(q)`, one has `|N|/r -> 42/13`, so `(SR24a-Mason-converted)` gives
 `|E|<=10` for all sufficiently large `q`.  A converted line is a tight
 `B`-line and hence covers at most `r` of the orphaned survivors.  Therefore
 
 ```text
-(q-8-eta-15e)(r-2)/3 <= 10r,
-e >= (q-8-eta-30r/(r-2))/15
-   =q/15-eta/15-O(1).                          (SR24a-Mason-essential-gap')
+(q-8-eta-13e)(r-2)/3 <= 10r,
+e >= (q-8-eta-30r/(r-2))/13
+   =q/13-eta/13-O(1).                          (SR24a-Mason-essential-gap')
 ```
+
+The equality regime is itself rigid.  If `eta=o(q)` and
+`e=q/13+o(q)`, the clean deficit above must be `o(q)`; otherwise its
+deficient blocks again create `Omega(q^2)` orphaned points.  Tracing equality
+back through the estimates gives
+
+```text
+f=q/13+o(q),                  |H|=4f-o(q),
+sum_(T in H) x_T=16f-o(q),   sum_(T in H) y_T=o(q).  (SR24a-Mason-equality)
+```
+
+Consequently almost every contaminated Mason `r`-secant contains one
+off-triangle addition, all three of its triangle intersections are selected,
+and no point on it is deleted; almost every clean `r`-block is exactly
+balanced.  Thus a sharp Mason trade, if it exists, reduces to a sparse
+four-incidence design between `q/13` off-triangle points and three boundary
+sets, rather than an arbitrary `Theta(q)` switch.
 
 Thus even the smallest possible triangle fill is not the start of a
 near-sharp construction: any Mason-based witness needs a further linear-size
@@ -5818,11 +5840,20 @@ family is lower priority.
   the bound improves to `2q-1+ceil((sqrt(q)-2)/3)`.  This closes the direct
   six-point and minimal-trade mechanisms.  On the complementary blocking-set
   side, essential-secants strengthen this across all `(SR11)` signatures:
-  any `eta=o(q)` Mason trade needs at least `16q/15-o(q)` additions, since a
+  any `eta=o(q)` Mason trade needs at least `14q/13-o(q)` additions, since a
   smaller trade leaves quadratically many orphaned Mason points but only
   constantly many old `2q/3`-secants can be converted to tight lines.  These
   are stability/separation theorems; they do not classify arbitrary small
   roots or minimal blocking sets.
+  **Rejected shortcut — does the three-weight code lie close enough to the
+  Griesmer bound to be rigid?**  The small root is exactly a projective
+  `q`-ary `[q(q+2)/3,3,q^2/3]` code with nonzero weights
+  `q^2/3,q(q+1)/3,q(q+2)/3`, and it exceeds the Griesmer bound by `q/3-1`.
+  Residualizing at either nonfull weight merely produces a dimension-two
+  projective code supported on an arbitrary `r`- or `2r`-subset of
+  `PG(1,q)`.  Thus the standard Griesmer/residual recursion recovers the
+  secant ledger but supplies no cross-line synchronization; it does not
+  replace the carrier or essential-secant problem.
   The other triangular row requires a linear
   high-secant trade and
   is therefore a less rigid first target.
