@@ -1,8 +1,7 @@
 # C973 checkpoint — first unresolved all-level Lucas block
 
 **Lane:** `reed-solomon` · **Date:** 2026-08-26 · **Status:** exact R11
-reduction proved; binary and characteristic-three blocks closed
-asymptotically; one characteristic-seven pointed gate remains
+reduction and all three asymptotic Lucas blocks proved
 
 ## Result
 
@@ -49,10 +48,10 @@ coordinate appears.
 
 Thus characteristic three is transverse after one contraction, whereas
 characteristics two and seven are genuinely coherent contained descendants.
-The first exact unresolved arithmetic object is not an unspecified higher
-Lucas union: after the binary argument below, it is the pointed-witness
-problem on the already known characteristic-seven lower carrier in the third
-row of (3).
+The three rows are all closed below.  Their different mechanisms identify the
+reusable all-level interface: transverse blocks use the pointed simultaneous
+theorem, while coherent descendants need a pointed version of the already
+proved lower-carrier arithmetic.
 
 ## 1. Characteristic-three transverse closure
 
@@ -119,35 +118,63 @@ chosen away from the prescribed upper marker, or producing a new compact
 pointed certificate.  This finite bridge does not affect the asymptotic R11
 theorem.
 
-## 3. The characteristic-seven pointed-R10 gate
+## 3. Characteristic-seven closure by a pointed R9 slice
 
-For `p=7`, every first contraction lands in the proved R10 carrier
-`P<e_3,...,e_6>`.  The current R10 proof makes it shallow by contracting at
-infinity to the R9 binary-quartic representation and lifting its seven finite
-roots with the infinity factor.  Reusing that witness blindly at R11 repeats
-the retained marker.
+For `p=7`, choose the upper contraction marker at infinity.  A syndrome in
+`P<e_4,e_5,e_6>` contracts into the proved R10 carrier.  Choose its internal
+R10 marker to be zero.  The second contraction lies in the characteristic-
+seven R9 binary-quartic carrier `P<e_2,...,e_6>`.
 
-The exact gate is therefore:
+The current R9 rational-base selector has total degree at most `102` in four
+ordered finite roots.  Multiplying it by the four factors which require those
+roots to avoid zero raises the total degree to at most `106`.  Hence a good
+distinct rational base avoiding zero exists for `q>106`.
 
-> choose the upper contraction marker and the lower R10 characteristic-seven
-> lift coherently so that the lower octic avoids the upper marker.
+On the resulting genus-at-most-one moving-root slice, the existing deletion
+degree is `32`.  Requiring the moving root to avoid zero removes at most two
+points of the double cover.  Requiring neither residual-quadratic root to be
+zero is the nonvanishing of
 
-This should be decidable on the existing binary-quartic normal slices by one
-fixed-root resultant.  Until that resultant is proved proper and its rational
-avoidance bound is recorded, the characteristic-seven block
-`P<e_4,e_5,e_6>` is one of the two first unresolved R11 blocks and is the
-exact odd-characteristic obstruction.
+\[
+                         N_u(x),                            \tag{8}
+\]
+
+after clearing the already deleted determinant; it has degree at most two in
+the moving parameter and removes at most four points of the cover.  Thus the
+pointed deletion is at most
+
+\[
+                              32+2+4=38.                   \tag{9}
+\]
+
+For the first characteristic-seven field above the selector bound,
+`q=343`,
+
+\[
+                         q+1-2\sqrt q>38.                  \tag{10}
+\]
+
+The R9 slice therefore gives a split squarefree septic with seven finite
+roots, none zero.  Multiplication first by the zero marker gives a finite
+split squarefree octic, which avoids the retained upper marker at infinity;
+multiplication by that upper marker gives a split squarefree nonic.  Hence
+
+\[
+ \mathcal M^{\max}_{11,7}(F_q)
+ \cap\operatorname{SplitFree}_{11}(F_q)=\varnothing
+ \qquad(q\geq343).                                        \tag{11}
+\]
 
 ## 4. Consequence for the all-level programme
 
-The R11 audit rules out a vague digit-pattern search.  The sole remaining
-asymptotic input is pointed propriety of the characteristic-seven R10 lift.
-Characteristics two and three close above `128` and `81`, respectively.  If
-the characteristic-seven gate closes, R11 contributes no new nonpersistent
-split-free family above the maximum of the three explicit field bounds.  The
-next Lucas level should then be computed only after this pointed recursion is
-packaged as a reusable lemma.
+The R11 audit rules out a vague digit-pattern search.  Characteristics two,
+three, and seven close above `128`, `81`, and `343`, respectively.  Thus R11
+contributes no new nonpersistent split-free family above those explicit
+characteristic-wise bounds.  The next Lucas level should be computed only
+after the two reusable operations exposed here are packaged: pointed
+simultaneous escape on a transverse contraction, and one-extra-root avoidance
+on a coherent lower-carrier slice.
 
 No claim is made here for the small binary fields, for characteristic-seven
-fields below the future bound, or for an all-digit-pattern theorem.  No
-computation or manuscript edit was used.
+fields below `343`, or for an all-digit-pattern theorem.  No computation or
+manuscript edit was used.
