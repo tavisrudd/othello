@@ -167,16 +167,45 @@ followed by ground specialization.  Report and replay:
 `notes/2026-08-25-c958-specialized-quintic-tangent-inverse.md` and its adjacent
 bundle.
 
-A second cold specialization `(a,b)=(3,5)` is now proved over `Z` by the same
-parameterized Rust checker, with identical quintic supports.  Generic modular
-reconstruction is also sharply bounded: all 482 coefficient functions have
-stable supports and validated one-variable degree bounds, and seven-prime CRT
-resolves 39456 of 39492 dense scalar coefficients.  The remaining 36 exceed
-the current `~7e20` uniqueness bound.  No uniform characteristic-zero formula
-is claimed until those coefficients, fresh-prime holdouts, and the generic
-denominator-cleared identity pass.  Report and replay:
+A second cold specialization `(a,b)=(3,5)` is proved over `Z` by the same
+parameterized Rust checker, with identical quintic supports.  The generic
+inverse is now exact as well.  Eight-prime CRT resolves all 39,492 dense scalar
+coefficients; an independent stdlib checker validates all 482 coefficient
+functions at 130 points over an unused prime.  Consolidation leaves seven
+denominators and one bidegree-`(6,7)` common denominator.  Finally, an
+injective Kronecker grid at 6,230 values over each of fourteen primes, together
+with exact bidegree and coefficient-height bounds, proves all four
+denominator-cleared residuals over `Z`.  This closes the generic **split**
+inverse, not the ground tangent descent.  Reports and replay:
 `notes/2026-08-25-c958-generic-reconstruction-frontier.md` and its adjacent
-scripts/hash manifest.
+bundle, and `notes/2026-08-25-c958-generic-identity.md` and its adjacent bundle.
+
+The type-`I3` residual quotient is integrally the same `S3` augmentation
+norm-one torus as in type `I1`.  One universal depressed-cubic Cremona chart
+therefore covers both cases by the substitutions
+`(p,q)=(-3a^2,-beta)` and `(-a^2,a^3+beta)`.  Both chart composites and their
+common dense open are exact.  Report and replay:
+`notes/2026-08-25-c958-uniform-cubic-norm-torus.md` and its adjacent bundle.
+
+All sixteen type-`I3` exceptional sections are now explicit over the exact
+degree-24 splitting field, and four certified automorphisms generate the full
+order-24 odd-subset action.  An independent Sage interpolation then constructs
+the three quadratic blowdown coordinates.  They contract the six marked lines
+to four standard points, `[1:A^2:B^2]`, and `[1:A:B]`; thus the split Cox
+moduli again have the square pattern `(A^2,B^2)`.  The strengthened inverse is
+now exact on `a != 0`: a weight change reduces the family to the single
+parameter `s=beta/a^3`, fifteen exceptional-incidence rows uniquely align the
+four inverse cubics, and exact reduction proves landing and both projective
+composites.  An independent Rust quotient-algebra implementation checks all
+three polynomial identities at three primes.  This closes split type-`I3`
+birationality, not ground descent.  The strict Cox source has constructed the
+four normalized marked-plane actions and certified two smooth ground witnesses,
+but its raw-scalar stage has no accepted artifact yet.  Reports and replay:
+`notes/2026-08-25-c958-type-i3-exceptional-sections.md` and
+`notes/2026-08-25-c958-type-i3-split-blowdown.md`, and
+`notes/2026-08-25-c958-type-i3-split-inverse.md`, with their adjacent bundles.
+The exact stop/continue boundary is in
+`notes/2026-08-25-c958-safe-checkpoint.md`.
 
 ## Goal
 

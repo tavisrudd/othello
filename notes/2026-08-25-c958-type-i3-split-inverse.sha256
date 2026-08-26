@@ -1,0 +1,6 @@
+b263ce9ca948833a22a3e3f0b3f821cf8fc2a6bca8158158d167f1d26dbdb57c  notes/2026-08-25-c958-type-i3-split-inverse.py
+8f896d6ab401c0b3f753fa713afbf5cf8372028f14524b4f3de0363e2b6aa5de  notes/2026-08-25-c958-type-i3-split-inverse-verify.py
+31b1d48effd93ce3a6a0993d21a807c08956a5a566d6fab6bc8b06c300d4627f  notes/2026-08-25-c958-type-i3-normalized-split-inverse-formulas.json
+4718ee582876adfb48c393742ac76407ffb5bb668be756545d11cc9b21b8dbf6  notes/2026-08-25-c958-type-i3-normalized-split-inverse.json
+bd16f67164a63ee8ec2f37e69dde9110b8198ec1ba50ec2e3d16a3c1b85db887  notes/2026-08-25-c958-type-i3-split-inverse.md
+611b614fda23ab5ff53ef67ac91bb52ab78e24463cb345e264bf2ddfb348be88  rust/examples/c958_type_i3_split_inverse_check.rs

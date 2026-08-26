@@ -72,21 +72,34 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   rational row, Cramer, and Cox denominators and proves the full
   forward-then-inverse polynomial identity coefficientwise over `Z`; its
   nonzero cleared denominator has `124666` terms.  The characteristic-zero
-  inverse is therefore certified at this specialization.  Reconstruction and
-  sparse verification over `Q(a,b)` is the next exact gate, followed by ground
-  specialization.
-  A second cold point `(3,5)` now passes the same exact integer checker with
-  identical quintic supports.  The generic reconstruction pipeline has stable
-  482-coefficient support and degree data across seven primes; CRT resolves
-  39456 of 39492 dense scalar slots, leaving exactly 36 above the current
-  `~7e20` uniqueness bound.  This is not yet promoted to `Q(a,b)`: further CRT,
-  fresh-prime holdouts, and the generic cleared identity remain mandatory.
-  Frontier report:
-  `../2026-08-25-c958-generic-reconstruction-frontier.md`.
-  Type `I_3` remains afterward.  Card:
+  inverse is therefore certified at this specialization.  A second cold point
+  `(3,5)` passes the same integer checker with identical quintic supports.
+  Generic reconstruction is now complete: eight-prime CRT resolves all 39,492
+  scalar slots, an independent stdlib checker validates all 482 coefficient
+  functions at 130 points over an unused prime, and consolidation gives one
+  bidegree-`(6,7)` common denominator.  An exhaustive injective Kronecker grid
+  at 6,230 values over each of fourteen primes, combined with exact bidegree
+  and coefficient-height bounds, proves all four cleared residuals over `Z`.
+  Thus the generic **split** quintic inverse over `Q(a,b)` is exact; ground
+  tangent descent remains open.  Reports:
+  `../2026-08-25-c958-generic-reconstruction-frontier.md` and
+  `../2026-08-25-c958-generic-identity.md`.
+  Type `I_3` now shares the same certified universal depressed-cubic norm-torus
+  chart.  Its sixteen exceptional sections and full order-24 action are exact,
+  and an independent Sage calculation constructs and cold-replays the split
+  quadratic blowdown with the same marked-plane square pattern as type `I_1`.
+  Its strengthened split inverse is now complete on `a != 0`: exact weight
+  normalization reduces to `s=beta/a^3`, exceptional-line incidence uniquely
+  aligns the inverse cubics, and characteristic-zero replay proves landing and
+  both projective composites.  A separate Rust quotient-algebra checker passes
+  three full modular specializations.  Strict Cox descent has reached exact
+  normalized marked-plane actions and two ground witnesses, but has no accepted
+  artifact; Hilbert--90 coupling, ground tangent coordinates, and final cubic
+  composites remain unclaimed.  Card:
   `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`;
-  latest report:
-  `../2026-08-25-c958-specialized-quintic-tangent-inverse.md`.
+  latest report and continuation ledger:
+  `../2026-08-25-c958-type-i3-split-inverse.md` and
+  `../2026-08-25-c958-safe-checkpoint.md`.
 - **C963 — proof-producing stable-rationality workbench, queued after C958.**
   Consume C958's accepted type-`I_1` and type-`I_3` ground-field maps as frozen
   interfaces; emit compact straight-line programs, independently checked
