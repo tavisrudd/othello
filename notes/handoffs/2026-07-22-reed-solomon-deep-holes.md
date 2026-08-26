@@ -79,6 +79,17 @@ certificate verification, the general C607 complexity/factorization theorem,
 benchmarks, and independent reviews.  Checkpoint:
 `notes/reed-solomon-tasks/c969-freeze-and-schema.md`.
 
+C970 is queued as the Beyond Four PRS paper-facing packaging successor to
+C969.  It moves the classifier under
+`papers/beyond4_prs/software/prs-classifier/`, makes that subtree independently
+buildable and later extractable with its registries, lock, toolchain, license,
+citation, and documentation intact, then integrates the exact software/theorem
+boundary into the manuscript, supplement verifier, release manifests, and
+deterministic exporter.  Completion requires a disposable history-preserving
+subtree extraction to pass without path repair; publication, pushing, DOI minting,
+and broadening the proved classification domain remain out of scope.  Card:
+`notes/reed-solomon-tasks/c970-beyond4-prs-software-packaging.md`.
+
 C886 is complete.  The paper now has a layered two-track exposition: a mature
 generalist can follow the syndrome-to-carrier mechanism without entering every
 elimination, while the specialist proof, exceptional cases, and verification

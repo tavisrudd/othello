@@ -1,0 +1,133 @@
+# C970: Beyond Four PRS software packaging and paper upgrade
+
+**Lane**: `reed-solomon`
+
+**Status:** queued
+
+## Goal
+
+Publish the C969 structural PRS classifier as a first-class companion artifact
+inside the Beyond Four PRS paper repository while making its eventual extraction
+into a standalone repository a history-preserving subtree operation rather than a
+rewrite.  Upgrade the manuscript, supplement, release exporter, and verification
+gates so that the software's computational scope and theorem boundary are explicit,
+replayable, and release-pinned.
+
+## Repository boundary
+
+The initial authoritative location is:
+
+```text
+papers/beyond4_prs/software/prs-classifier/
+```
+
+That directory must be independently buildable and must behave as a prospective
+repository root.  It owns its `Cargo.toml`, `Cargo.lock`, pinned Rust toolchain,
+MIT license, README, changelog, citation metadata, source, tests, documentation,
+and machine-readable data.  It must contain no filesystem references, embedded
+data paths, documentation links, or build dependencies that escape the subtree.
+The paper remains CC BY 4.0, with the software subtree's MIT exception stated
+unambiguously.
+
+The theorem-domain registry currently consumed from
+`notes/reed-solomon-tasks/c969-theorem-domain-v1.json` moves under the software
+subtree and becomes the canonical machine-readable runtime boundary.  The frozen
+orbit registry moves with it.  Paper-local verification hashes and semantically
+checks those registries rather than maintaining a second authoritative copy.
+
+## Deliverables
+
+1. Relocate `rust/prs_classifier` with history-preserving moves into
+   `papers/beyond4_prs/software/prs-classifier` and make it self-contained.
+2. Give the crate a small stable public interface for `canonicalize`, `distance`,
+   `decode`, `classify`, and `verify_certificate`, with versioned request and
+   certificate schemas.  Separate theorem-domain lookup from computational
+   algorithms; modularize the current monolithic library only where this can be
+   done without changing behavior.
+3. Add subtree-local documentation for the theorem boundary, certificate schemas,
+   complexity claims, reproducible benchmarks, license, citation, and release
+   history.  Replace every monorepo-relative README reference.
+4. Add a manuscript subsection presenting the certified structural classifier as
+   a companion result.  It must distinguish:
+   - dimension-independent structural canonicalization;
+   - exact budgeted distance and decoding for `r >= 5`, `q >= r`;
+   - theorem-gated R5--R10 classification;
+   - complete GF(8)/R7 extraction;
+   - the prior-art-backed even-`q`, `r=q-1` diagonal tangent family; and
+   - fail-closed unsupported or unresolved higher-dimensional classifications.
+5. Add a compact operation/domain/proof-input/certificate table so computational
+   coverage beyond R10 is not presented as a generic higher-dimensional deep-hole
+   theorem.  Keep new mathematics, imported radius promotion, algorithms,
+   certificate records, and implementation reach visibly separate.
+6. Integrate the software subtree into the paper Makefile, reproduction guide,
+   evidence manifest, release manifest, and deterministic release exporter.
+   Distinguish the classifier's lock from the existing supplement toolchain lock.
+7. Refresh the canonical and TIT packaging metadata, PDF hashes, source hashes,
+   page counts, software version/commit pin, and availability statement after all
+   manuscript and verification changes are final.
+
+## Required gates
+
+The paper repository exposes these conceptual gates, with final target names kept
+stable once implemented:
+
+- `software-check`: `cargo fmt --check`, warning-denying clippy, and
+  `cargo test --locked`;
+- `software-slow-check`: release-mode ignored exhaustive orbit and semilinear
+  regressions;
+- `supplement-check`: existing evidence checks plus hashes and semantic validation
+  of the complete software boundary and theorem registries;
+- `release-check`: both manuscript builds, fast and slow software checks, required
+  supplement replays, and current PDF/software/source manifests.
+
+`supplement/prepare_release_export.py` must treat the complete software subtree as
+release-owned input, reject dirty owned paths, include it in the fresh-history
+paper export, and produce a standalone candidate that passes the same checks
+without the development monorepo.
+
+## Implementation order
+
+1. Move the crate without behavioral edits.
+2. Internalize registries and remove all paths escaping the subtree.
+3. Add toolchain, licensing, citation, documentation, and repository-ready metadata.
+4. Modularize interfaces while preserving command and certificate compatibility.
+5. Add software verification and release-export integration.
+6. Upgrade manuscript scope/exposition and provenance ledgers.
+7. Run the full paper/software release gate and refresh immutable-candidate metadata.
+
+Keep coherent software-only changes confined to the software subtree whenever
+possible so a later filtered history remains intelligible.
+
+## Later extraction gate
+
+From a fresh clone of the published paper repository, this operation must produce
+a usable standalone repository without manual source or path repair:
+
+```bash
+git filter-repo \
+  --path software/prs-classifier/ \
+  --path-rename software/prs-classifier/:
+```
+
+The extracted root must build and test with its committed lock and toolchain, retain
+license/citation/reproduction documentation, contain every runtime registry, and
+have no references to the former paper or monorepo layout.  Hosted CI, a standalone
+archive DOI, and crates.io publication are later publication operations, not
+prerequisites for completing C970.
+
+## Non-goals
+
+- Do not broaden the theorem-domain registry merely because generic computation is
+  available.
+- Do not claim novelty for imported covering-radius results.
+- Do not publish, push, rewrite public history, mint a DOI, or extract the standalone
+  repository as part of this task without separate authorization.
+- Do not make the Lean repository depend on the Rust package.
+
+## Acceptance
+
+C970 is complete when the classifier is self-contained under the paper tree; the
+paper states its exact mathematical and computational boundary; all paper-local
+software, supplement, manuscript, and deterministic-export gates pass; the release
+manifests pin the reviewed artifacts; and a dry-run extraction in a disposable
+fresh clone passes the crate's fast checks without path repair.
