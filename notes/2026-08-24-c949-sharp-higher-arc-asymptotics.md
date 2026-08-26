@@ -2300,10 +2300,17 @@ The lower bound `u=Omega(sqrt(q))` completes the bootstrap.  Therefore
 
 ```text
 eta=o(q)  implies
-e=Omega(q^(3/2)),
+e>=q^(3/2)/104 for all sufficiently large q,
 |B triangle S|=2q-7+2e+eta=Omega(q^(3/2)).
                                                 (SR24a-Mason-quantitative-gap)
 ```
+
+The constant `1/104` is deliberately conservative.  For the explicit audit,
+eventually take `eta<=q/4`: pair counting gives `|E|<=20z^2`.  If
+`z<sqrt(q/60)`, then `|E|<r`, the union bound gives `|E|<=(15/2)z`, orphan
+capacity gives `u<=26z`, and the deficit gives `u>=sqrt(q)/2`.  Hence
+`z>=sqrt(q)/52` and, once `z>=2`, `e/q=z-1>=sqrt(q)/104`.  The complementary
+case is stronger.
 
 Thus every near-sharp complement is at least order `q^(3/2)` in symmetric
 difference from every Mason large-root set.  This eliminates every Mason
@@ -5911,6 +5918,13 @@ family is lower priority.
   spectrum at `eta=1` satisfies both scalar moments and the essential-line
   incidence budget while containing no Mason correlation variable; it is a
   moment-level countermodel, not a realizable projective example.
+  **Open quantitative mystery:** the exponent `3/2` enters only through the
+  crude bound `F_0(U)<=binom(u,2)`, where `F_0(U)` counts external Mason
+  points whose four `r`-secants all belong to the deficient block set `U`.
+  Any subquadratic induced-four-block bound for the dual Mason secant
+  hypergraph improves the separation exponent.  The exact next gate is to
+  determine or spectrally bound this induced-edge function, not to revisit
+  the scalar moments.
   **Rejected shortcut — does the three-weight code lie close enough to the
   Griesmer bound to be rigid?**  The small root is exactly a projective
   `q`-ary `[q(q+2)/3,3,q^2/3]` code with nonzero weights
