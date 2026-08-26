@@ -4607,6 +4607,185 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "the q=27 fourth Witt representative gates changed"
         )
 
+    global_leave_ledger_checks = []
+    for ledger_q in (9, 27, 81, 243):
+        line_two = 3 * ledger_q - 6
+        line_three = 2 * ledger_q + 2
+        line_four = ledger_q * (ledger_q - 4) // 3
+        pair_total = (
+            line_two + 3 * line_three + 6 * line_four
+        )
+        point_count = 2 * ledger_q + 1
+        matching_sizes = [ledger_q - 1, ledger_q - 1, ledger_q - 4]
+        unmatched_incidence_defect = sum(
+            point_count - 2 * size for size in matching_sizes
+        )
+        if pair_total != math.comb(point_count, 2):
+            raise AssertionError("the global 2/3/4-secant pair ledger changed")
+        if sum(matching_sizes) != line_two:
+            raise AssertionError("the three-matching leave size changed")
+        if unmatched_incidence_defect != 15:
+            raise AssertionError("the three-matching leave defect changed")
+        line_one = 3 + (ledger_q - 4) * (2 * ledger_q // 3 - 1)
+        local_types = [
+            {
+                "name": "ordinary_three_colour",
+                "count": 2 * ledger_q - 8,
+                "profile_1_2_3_4": [
+                    ledger_q // 3 - 2, 3, 3, 2 * ledger_q // 3 - 3
+                ],
+            },
+            {
+                "name": "boundary_singleton",
+                "count": 3,
+                "profile_1_2_3_4": [
+                    ledger_q // 3 - 1, 2, 2, 2 * ledger_q // 3 - 2
+                ],
+            },
+            {
+                "name": "vertex_triple",
+                "count": 6,
+                "profile_1_2_3_4": [
+                    ledger_q // 3 - 1, 1, 4, 2 * ledger_q // 3 - 3
+                ],
+            },
+        ]
+        if sum(record["count"] for record in local_types) != point_count:
+            raise AssertionError("the local point-type count changed")
+        if any(
+                sum(record["profile_1_2_3_4"]) != ledger_q + 1
+                or (record["profile_1_2_3_4"][1]
+                    + 2 * record["profile_1_2_3_4"][2]
+                    + 3 * record["profile_1_2_3_4"][3]) != 2 * ledger_q
+                for record in local_types):
+            raise AssertionError("a local secant profile changed")
+        line_counts = [line_one, line_two, line_three, line_four]
+        if any(
+                sum(record["count"] * record["profile_1_2_3_4"][index]
+                    for record in local_types) != (index + 1) * line_counts[index]
+                for index in range(4)):
+            raise AssertionError("the local/global secant incidence ledger changed")
+        cubic_exception_numerator = ledger_q * ledger_q - 4 * ledger_q - 18
+        cubic_exception_denominator = 2 * ledger_q - 9
+        cubic_exception_lower_bound = -(
+            -cubic_exception_numerator // cubic_exception_denominator
+        )
+        if (ledger_q >= 27
+                and line_four <= 2 * (2 * ledger_q // 3 - 2) + 3):
+            raise AssertionError("the small cubic-exception case reopened")
+        if (ledger_q >= 27
+                and cubic_exception_lower_bound != (ledger_q + 1) // 2):
+            raise AssertionError("the cubic concentration gap changed")
+        global_leave_ledger_checks.append({
+            "field_order": ledger_q,
+            "point_count": point_count,
+            "line_counts_2_3_4": [line_two, line_three, line_four],
+            "pair_total": pair_total,
+            "matching_sizes": matching_sizes,
+            "unmatched_incidence_defect": unmatched_incidence_defect,
+            "ordinary_degree_distribution": {
+                "1": 6, "2": 3, "3": 2 * ledger_q - 8
+            },
+            "common_matching_domain_exact": 2 * ledger_q - 8,
+            "trisecant_excess_budget": 6,
+            "local_point_types": local_types,
+            "degree_at_most_three_curve_exception_lower_bound": (
+                cubic_exception_lower_bound
+            ),
+            "degree_at_most_three_curve_core_upper_bound": (
+                point_count - cubic_exception_lower_bound
+            ),
+        })
+
+    grid_energy_ledger_counts = {}
+    for epsilon in (0, 1):
+        valid_rows = 0
+        for b_zero in range(2 * chart_r + 1):
+            for b_one in range(2 * chart_r + 1 - b_zero):
+                for b_two in range(
+                        2 * chart_r + 1 - b_zero - b_one):
+                    b_three = 2 * chart_r - b_zero - b_one - b_two
+                    if (b_one + 2 * b_two + 3 * b_three
+                            != 4 * chart_r - epsilon):
+                        continue
+                    if b_three != 2 * b_zero + b_one - epsilon:
+                        raise AssertionError(
+                            "the boundary energy balance changed"
+                        )
+                    pair_energy = b_two + 3 * b_three
+                    if pair_energy != (
+                            2 * chart_r + 3 * b_zero + b_one
+                            - 2 * epsilon):
+                        raise AssertionError(
+                            "the boundary pair-energy formula changed"
+                        )
+                    valid_rows += 1
+        grid_energy_ledger_counts[str(epsilon)] = valid_rows
+    if grid_energy_ledger_counts != {"0": 37, "1": 39}:
+        raise AssertionError("the q=27 boundary energy ledger changed")
+
+    grid_shifted_gcd_checks = 0
+    grid_slopes = normalized_ratio_value_fibers[2]
+    grid_high_values = tuple(range(1, chart_r + 1))
+    for trial in range(chart_q):
+        high_rows = {
+            y_value: tuple(
+                (trial + 5 * y_index + 7 * point_index) % chart_q
+                for point_index in range(4)
+            )
+            for y_index, y_value in enumerate(grid_high_values)
+        }
+        if any(len(set(rows)) != 4 for rows in high_rows.values()):
+            raise AssertionError("the shifted-gcd test fiber collapsed")
+        high_points = [
+            (y_value, u_value)
+            for y_value, rows in high_rows.items() for u_value in rows
+        ]
+        for slope in grid_slopes:
+            slope_plus_one = chart_field.add(slope, 1)
+            direct_pairs = 0
+            for (left_y, left_u), (right_y, right_u) in (
+                    itertools.combinations(high_points, 2)):
+                left_intercept = chart_field.add(
+                    left_y,
+                    chart_field.neg(chart_field.mul(
+                        slope_plus_one, left_u
+                    )),
+                )
+                right_intercept = chart_field.add(
+                    right_y,
+                    chart_field.neg(chart_field.mul(
+                        slope_plus_one, right_u
+                    )),
+                )
+                direct_pairs += left_intercept == right_intercept
+            shifted_common_roots = 0
+            for left_y, right_y in itertools.combinations(
+                    grid_high_values, 2):
+                difference = chart_field.mul(
+                    chart_field.add(left_y, chart_field.neg(right_y)),
+                    chart_field.inv(slope_plus_one),
+                )
+                difference_cubed = chart_field.pow(difference, 3)
+                left_roots = {
+                    chart_field.pow(value, 3)
+                    for value in high_rows[left_y]
+                }
+                shifted_right_roots = {
+                    chart_field.add(
+                        chart_field.pow(value, 3), difference_cubed
+                    )
+                    for value in high_rows[right_y]
+                }
+                shifted_common_roots += len(
+                    left_roots.intersection(shifted_right_roots)
+                )
+            if direct_pairs != shifted_common_roots:
+                raise AssertionError(
+                    "the shifted quartic gcd energy identity changed"
+                )
+            grid_shifted_gcd_checks += 1
+
     shifted_direct_moments = {}
     shifted_defect_moments = {}
     for index in range(1, chart_q - 1):
@@ -4780,6 +4959,13 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         ),
         "balanced_witt_fourth_representative_gate_coefficients": (
             witt_fourth_representative_gate_coefficients
+        ),
+        "balanced_global_three_matching_leave_checks": (
+            global_leave_ledger_checks
+        ),
+        "balanced_grid_energy_ledger_row_counts": grid_energy_ledger_counts,
+        "balanced_grid_shifted_quartic_gcd_checks": (
+            grid_shifted_gcd_checks
         ),
     }
 

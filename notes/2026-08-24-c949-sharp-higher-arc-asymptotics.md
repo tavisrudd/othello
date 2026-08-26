@@ -7,7 +7,9 @@
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 `5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
 reduced to the almost-duplex/near-Rédei/moment conditions
-`(SR18)--(SR24z)` and `(SR24-Witt)--(SR24-WittK)`; no
+`(SR18)--(SR24z)`, `(SR24-Witt)--(SR24-WittK)`, and
+the absolute-defect global design `(SR24a-global)--(SR24a-local')` together
+with `(SR24-grid-energy)--(SR24-grid-gcd'')`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -1817,6 +1819,159 @@ direction.  For every `1<=k<=q-2`, the sum of the `k`th powers of all elements
 of `F_q` is zero.  Reducing the three profiles modulo the characteristic
 therefore gives, for every nonzero homogeneous linear form `L`,
 
+Before reducing modulo three, the same ledger gives a global stability object
+that is much stronger than the four-direction collision count below.  Let
+`ell_i` be the number of affine lines meeting `B_aff` in exactly `i` points.
+Reading the three rows of `(SR24a)` gives
+
+```text
+ell_2=3q-6,       ell_3=2q+2,       ell_4=q(q-4)/3. (SR24a-global)
+```
+
+These numbers exhaust every unordered point-pair, since
+
+```text
+ell_2+3ell_3+6ell_4
+ =3q-6+3(2q+2)+2q(q-4)
+ =q(2q+1)=binom(2q+1,2).              (SR24a-global')
+```
+
+Thus the intersections of size three and four form a pairwise-balanced
+packing on `B_aff`; its leave graph consists exactly of the ordinary
+bisecants.  That leave is not an arbitrary `O(q)`-edge graph.  Its edges are
+the disjoint union of three matchings:
+
+```text
+two vertex-direction matchings: q-1 edges each, three missed vertices each;
+the distinguished radial matching: q-4 edges, nine missed vertices.
+                                                        (SR24a-leave)
+```
+
+The last assertion uses that `(0,0)` is the affine triangle vertex external
+to `B_aff`: two distinct distinguished lines through it meet only there, so
+their two-point intersections with `B_aff` are vertex-disjoint.  Consequently
+the leave graph `Lambda` is properly three-edge-coloured, has maximum degree
+three, and has the exact defect
+
+```text
+sum_(P in B_aff)(3-deg_Lambda(P))=3+3+9=15.        (SR24a-leave')
+```
+
+The overlap of the three missed sets is fixed, not arbitrary.  The two vertex
+triple fibers contain six distinct points.  All six are missed both by their
+corresponding vertex matching and by the radial matching.  The three boundary
+singleton fibers supply the other three points missed by the radial matching.
+The five distinguished lines are concurrent only at the external point
+`(0,0)`, so these nine core points are distinct.  Hence the ordinary degrees
+are exactly
+
+```text
+#{P:d_2(P)=3}=2q-8,   #{P:d_2(P)=2}=3,
+#{P:d_2(P)=1}=6.                              (SR24a-leave'')
+```
+
+The first two colours alone have degree two except at the six vertex-triple
+points, where they have degree one.  They therefore decompose the core into
+alternating even cycles and exactly three alternating paths, with those six
+points as endpoints.  The third matching is a perfect matching on the
+remaining `2q-8` ordinary three-colour points and misses precisely the nine
+exceptional positions.  This is the exact global form of the almost-duplex
+constraint: a three-involution system with fifteen missing incidences
+concentrated on nine known fiber positions, embedded so that every non-leave
+pair is completed on a unique three- or four-secant.
+
+There is also a constant-defect *local* regularity theorem.  For
+`P in B_aff`, let `d_i(P)` be the number of affine lines through `P` that meet
+`B_aff` in `i` points, and set `e(P)=3-d_2(P)`.  The three matching colours
+give `e(P)>=0` and `(SR24a-leave')` gives `sum_P e(P)=15`.  Partitioning the
+other `2q` points by the lines through `P` gives
+
+```text
+d_2(P)+2d_3(P)+3d_4(P)=2q.
+```
+
+Since `3 divides q`, this says that `d_3(P)+e(P)` is divisible by three.  In
+each of the three infinity-boundary directions the line through `P` is either
+a trisecant or the unique singleton.  If `s(P)` counts the latter events,
+then `s(P)<=1`, `d_3(P)>=3-s(P)`, and `e(P)>=s(P)` because a singleton point is
+missed by the radial matching.  Hence `k(P)=(d_3(P)+e(P))/3>=1`.  Moreover,
+each of the six vertex-triple points lies on its vertex trisecant and on all
+three boundary trisecants.  For those points `e(P)=2`, so `d_3(P)>=4` and
+`k(P)>=2`.  Using `sum_P d_3(P)=3ell_3=6q+6` now yields the exact excess budget
+
+```text
+sum_(P in B_aff)(k(P)-1)
+ =(6q+6+15)/3-(2q+1)=6.              (SR24a-local)
+```
+
+The six vertex-triple points already consume all six excess units.  Therefore
+`k=2` on them and `k=1` everywhere else.  Substitution into the point-pair
+identity and then into `d_1+d_2+d_3+d_4=q+1` determines every local profile:
+
+```text
+point type                 count    (d_1,d_2,d_3,d_4)
+ordinary three-colour      2q-8     (q/3-2,3,3,2q/3-3)
+boundary singleton        3        (q/3-1,2,2,2q/3-2)
+vertex-triple              6        (q/3-1,1,4,2q/3-3). (SR24a-local')
+```
+
+Thus `2q-8` points are locally indistinguishable in the full secant ledger,
+and the remaining nine split into two completely determined geometric types.
+This is a field-uniform stability statement with an exact absolute exceptional
+set.  It still does not classify the embedding: the next inverse step must
+show that the three partial involutions and the unique `3/4`-secant completion
+of almost every pair force the fixed spectral carrier.
+
+The four-secants also rule out the naive cubic conclusion from real
+few-ordinary-lines theory.  Let `C` be any nonzero plane curve of degree at
+most three and put `s=|B_aff minus C|`.  A four-secant avoiding those `s`
+points meets `C` in four distinct points and hence, by the line--curve degree
+bound, is a component of `C`.  There are at most three such component lines.
+By `(SR24a-local')`, the largest four-secant degree is `2q/3-2`, attained at
+only the three boundary-singleton points; every other point has degree
+`2q/3-3`.  If `s<=2`, then
+`ell_4<=2(2q/3-2)+3`, already false for `q>=27`.  Thus `s>=3`, and the number
+of four-secants meeting the exceptional set is at most
+
+```text
+3(2q/3-2)+(s-3)(2q/3-3)=s(2q/3-3)+3.
+```
+
+Consequently
+
+```text
+q(q-4)/3=ell_4 <=s(2q/3-3)+6.
+```
+
+For every ternary `q>=27`, this forces
+
+```text
+s >=ceil((q^2-4q-18)/(2q-9))=(q+1)/2. (SR24a-cubic-gap)
+```
+
+(The right fraction lies strictly between `(q-1)/2` and `(q+1)/2`.)  Hence a
+degree-at-most-three curve contains at most `(3q+1)/2` core points.  The
+global ledger therefore identifies degree four as the first possible
+bounded-degree concentration threshold, in exact agreement with the shifted
+quartics `Bhat_y` in `(SR24-grid-gcd)`.
+
+At `q=27` the compressed object has 55 points, `(ell_2,ell_3,ell_4)` equal to
+`(75,56,207)`, and leave-matchings of sizes `(26,26,23)`.  Its point types are
+46 copies of `(7,3,3,15)`, three copies of `(8,2,2,16)`, and six copies of
+`(8,1,4,15)`; every cubic misses at least 14 points.  These are consequences
+of the direction ledger, not search observations.
+
+This is the appropriate finite-field analogue of the *input* to the
+[Green--Tao few-ordinary-lines theorem](https://arxiv.org/abs/1208.4714), but
+that real-plane structure theorem may not be imported here.  The dominant
+blocks have size four, and abstract unions of three near-perfect matchings
+have no rigidity by themselves.  The remaining
+field-uniform task is therefore precise: combine the geometrically embedded
+leave `(SR24a-leave)` and its almost-complete `3/4`-block completion with the
+fixed Witt spectra `(SR24-WittK)`, and prove that only an affine-linearized
+three-involution model can occur.  That model is already excluded by
+`(SR24r)`.
+
 ```text
 sum_{P in B_aff} L(P)^k=0,             1<=k<=q-2.    (SR24b)
 ```
@@ -2834,6 +2989,113 @@ come from unrelated line sets, but from a near-regular common incidence
 system with only three possible zero-coordinate defects.  At `q=27`, it has
 36 edges, nine degree-four `G` vertices, and at least 33 edges avoiding all
 three zero defects.
+
+This last statement is strong saturation, but it is **not yet a stability
+theorem**.  The exact boundary energy ledger identifies the missing estimate.
+Fix `m in R`, let `b_j(m)` count the values `c in T_m` for which exactly `j`
+of the three points on `t-mu=c` lie in `Z`, and put
+`epsilon_m=1_(p_m in Z)`.  Then
+
+```text
+sum_(j=0)^3 b_j=2r,
+sum_(j=0)^3 j b_j=4r-epsilon_m,
+b_3=2b_0+b_1-epsilon_m.                            (SR24-grid-energy)
+```
+
+The number of unordered pairs of `Z`-points identified by this boundary
+projection is therefore exactly
+
+```text
+E_m(Z)=sum_j binom(j,2)b_j
+      =2r+3b_0+b_1-2epsilon_m.                     (SR24-grid-energy')
+```
+
+Its minimum is `2r-epsilon_m`, but the saturation bound gives no upper
+control on the excess.  Indeed, when `epsilon_m=0`, every integer
+`0<=s<=floor(2r/3)` is compatible with
+
+```text
+(b_0,b_1,b_2,b_3)=(s,0,2r-3s,2s).                 (SR24-grid-energy'')
+```
+
+Thus a linear number of empty boundary vertices and degree-three vertices is
+arithmetically consistent with all present counts.  Across the four special
+directions, the forced equal-projection pair count remains only `Theta(q)`:
+the `G` part contributes exactly `6r`, and each boundary part contributes
+the quantity in `(SR24-grid-energy')`.  This is the random-scale collision
+regime, not the amplified additive-energy regime from which a
+Balog--Szemeredi--Gowers/Freiman inverse conclusion could be drawn.
+
+Consequently `(SR24-grid')` alone cannot justify “the carrier is close to a
+linearized model.”  A valid stability proof first needs an independent bound
+on
+
+```text
+Xi=sum_(m in R)(3b_0(m)+b_1(m)-epsilon_m),         (SR24-grid-defect)
+```
+
+or a stronger affine-cycle statistic.  The only available sources capable of
+supplying it are the fixed spectral factorization `(SR24-WittK)`, the
+reciprocal norm, or off-core maximality.  This rules out a tempting but
+unsupported inverse-theorem shortcut and names the exact defect statistic
+that the next argument must control.
+
+The factorized high fibers do, however, encode this energy exactly.  For a
+root `y of G`, augment the divisor in `(SR24z)` to
+
+```text
+Bhat_y(X)=X B_y(X) if y in E, and B_y(X) otherwise.
+```
+
+Every `Bhat_y` is a monic squarefree quartic, and its roots are precisely the
+values `X=u^3` of the four points of `B_aff^Frob` on the high line
+`t+u=y`; the extra root `X=0` records the axis point when `y in E`.
+For distinct `y,z in G` and `m in R`, put
+
+```text
+d_(y,z,m)=(y-z)/(m+1).
+```
+
+The denominator is nonzero by `(SR24u)`.  Two high points `(u,t)` and `(v,s)`
+on the `y,z` fibers have the same boundary intercept in slope `m` exactly
+when
+
+```text
+y-(m+1)u=z-(m+1)v,
+u-v=d_(y,z,m).
+```
+
+Since `(u-d)^3=u^3-d^3`, their number is the shifted common-root count
+
+```text
+deg gcd(Bhat_y(X),
+        Bhat_z(X-d_(y,z,m)^3)).                    (SR24-grid-gcd)
+```
+
+No two distinct points on one `y`-fiber can collide in a boundary direction,
+so summing over unordered pairs of high values gives the exact energy
+
+```text
+E_m(Z)=sum_({y,z} subset G)
+ deg gcd(Bhat_y(X),Bhat_z(X-d_(y,z,m)^3)).          (SR24-grid-gcd')
+```
+
+Consequently
+
+```text
+sum_(m in R) sum_({y,z} subset G) deg gcd(...)
+ =6r-sum_m epsilon_m+Xi >=6r-3.                    (SR24-grid-gcd'')
+```
+
+This is the rigorous incidence--factorization bridge missing from a generic
+BSG heuristic.  At `q=27`, it replaces the energy calculation by only
+`3*binom(9,2)=108` shifted gcds of quartics, whose total degree is at least
+51.  A field-uniform closeout would now show that the coherence identities
+`(SR24z)--(SR24z')` cannot support this many prescribed shifted common roots
+unless the cover becomes affine-linearized; `(SR24r)` already excludes that
+outcome.  That final shifted-gcd stability bound remains open, but its input
+is now the exact cubic/quartic factor state rather than an undefined notion
+of “near additivity.”
 
 The second lifted moment reaches the carrier coefficients.  Define
 
@@ -3950,7 +4212,20 @@ family is lower priority.
   packages the first, second, and fourth spectra as leading coefficients of
   `G product(H_m/J)`, leaving its third coefficient as the exact next blind
   spot.  Coupling this factorization to the four-partite incidence system and
-  reciprocal norm is the new structural closeout target.
+  reciprocal norm is the new structural closeout target.  The stability audit
+  `(SR24-grid-energy)--(SR24-grid-gcd'')` shows that saturation alone supplies
+  only random-scale collision energy, so a generic BSG/Freiman step would be
+  invalid.  It replaces that heuristic by an exact shifted-quartic-gcd sum of
+  at least `6r-3`; proving this many coherent shifted common roots force the
+  excluded affine-linearized case is one corrected inverse-theorem target.
+  The full direction ledger is stronger: `(SR24a-global)--(SR24a-local')`
+  makes the ordinary-line leave the union of three near-perfect matchings with
+  only fifteen missing incidences, and forces the exact three-type local
+  profile `(SR24a-local')` on every point.  Classifying this absolutely
+  defective embedded `3/4`-block design compatibly with
+  `(SR24-WittK)` is now the sharp global stability target.  The same local
+  ledger proves `(SR24a-cubic-gap)`: every cubic misses at least `(q+1)/2`
+  core points, so the first viable bounded-degree carrier is quartic.
   The other triangular row requires a linear
   high-secant trade and
   is therefore a less rigid first target.
