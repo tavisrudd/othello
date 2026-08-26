@@ -15,6 +15,11 @@ import RelativeConicArcs.AlignedQueryFamily
 import RelativeConicArcs.AlignedQueryFaithfulness
 import RelativeConicArcs.SeidelPrincipalMinors
 import RelativeConicArcs.ClebschPassagesCorrespondence
+import RelativeConicArcs.SphereIntegralMoments
+import RelativeConicArcs.TraceSplitQuadraticAlgebra
+import RelativeConicArcs.ClebschGoldenSteinChart
+import RelativeConicArcs.SpinorSquareClass
+import RelativeConicArcs.NormalizedMarkedIncidence
 
 /-!
 # Gate: structural Clebsch passages
@@ -56,7 +61,11 @@ symbolic.
 The gate deliberately does not assert the geometric correspondence between
 Hitchin's spaces and these algebraic models, nor the integral
 Mukai--Umemura comparison.  Those inputs remain outside the formal trust
-claim.
+claim.  It does expose the complete formal consequences now used around that
+boundary: normalized integration of every even homogeneous polynomial on the
+two-sphere, the trace-split quadratic chart and its golden specialization, the
+spinor square class of the marked exchanger, and the deck-equivariance packet
+for normalized marked incidence data.
 -/
 
 #print axioms RelativeConicArcs.QuadraticPinching.conductor_eq_ker
@@ -124,3 +133,15 @@ claim.
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.normalizedMarked_chart_value
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.markedValue_determines_gauntCoefficient
 #print axioms RelativeConicArcs.ClebschPassagesCorrespondence.gauntCoefficient_has_two_structural_factors
+#print axioms RelativeConicArcs.SphereIntegralMoments.normalizedSphereIntegral_eq_normalizedMean_even
+#print axioms RelativeConicArcs.TraceSplitQuadraticAlgebra.splitComparison_surjective
+#print axioms RelativeConicArcs.ClebschSteinChart.Data.branchCoefficient_eq_root_sq
+#print axioms RelativeConicArcs.GoldenResidueAlgebra.relation_irreducible
+#print axioms RelativeConicArcs.GoldenResidueAlgebra.deck_sqrtFive
+#print axioms RelativeConicArcs.ClebschGoldenSteinChart.canonicalData_root
+#print axioms RelativeConicArcs.ClebschGoldenSteinChart.deck_canonicalData_root
+#print axioms RelativeConicArcs.SpinorSquareClass.exchanger_spinorClass
+#print axioms RelativeConicArcs.NormalizedMarkedIncidence.oddValue_deck
+#print axioms RelativeConicArcs.NormalizedMarkedIncidence.conference_deck
+#print axioms RelativeConicArcs.NormalizedMarkedIncidence.pairCoefficients_deck
+#print axioms RelativeConicArcs.NormalizedMarkedIncidence.chartLift_deck

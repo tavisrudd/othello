@@ -1,4 +1,5 @@
 import RelativeConicArcs.FourShadowRecognition
+import RelativeConicArcs.ClebschWeightedJacobianActual
 
 /-!
 # Gate: triangle and commutator-Pfaffian recognition
@@ -22,9 +23,12 @@ displayed conference matrix, so the recognition statement and the uniqueness of
 the conference switching class hold for every such matrix.  The proportionality
 scalar of a sign matrix is unique, because the triangle cubic at the indicator
 vector of a triple is that triple's sign, and it is `4` or `-4`, the product of
-the switching signs deciding which.  The rank-fourteen
-rational Jacobian calculation for local weighted rigidity is external.  No compiled evaluation, external certificate,
-or generated source is used by the declarations printed here.
+the switching signs deciding which.  The local weighted-rigidity calculation is
+also kernel checked: the full twenty-by-fifteen rational Jacobian has the
+one-dimensional scaling kernel, and this is identified with the directional
+derivative of each of the two actual weighted cubic-equality systems.  No
+compiled evaluation, external certificate, or generated source is used by the
+declarations printed here.
 -/
 
 #print axioms RelativeConicArcs.GoldenCommutatorPfaffian.pfaffianSix_bracketMatrix_eq_matchingEvaluation
@@ -69,3 +73,10 @@ or generated source is used by the declarations printed here.
 #print axioms RelativeConicArcs.FourShadowRecognition.exists_nonzero_cubicsProportional_smul_iff_conferenceSquare_of_isSignMatrix
 #print axioms RelativeConicArcs.FourShadowRecognition.exists_relabel_switchMatrix_eq_conferenceMatrix_of_firstRowBalanced
 #print axioms RelativeConicArcs.FourShadowRecognition.exists_switchMatrix_submatrix_eq_conferenceMatrix
+#print axioms RelativeConicArcs.ClebschWeightedJacobian.reducedJacobian_ker
+#print axioms RelativeConicArcs.ClebschWeightedJacobian.kernel_eq_scaling_of_fixed_detection
+#print axioms RelativeConicArcs.ClebschWeightedJacobianFull.jacobian_ker
+#print axioms RelativeConicArcs.ClebschWeightedJacobianActual.actualDirectionalDerivative_eq
+#print axioms RelativeConicArcs.ClebschWeightedJacobianActual.actualJacobian_ker
+#print axioms RelativeConicArcs.ClebschWeightedJacobianActual.negativeDirectionalDerivative_eq
+#print axioms RelativeConicArcs.ClebschWeightedJacobianActual.actualNegativeJacobian_ker
