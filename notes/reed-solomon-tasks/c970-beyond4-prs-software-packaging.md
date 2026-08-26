@@ -29,13 +29,13 @@ fixed-seed property tests (1,280 generated cases), both manuscript builds, and
 the quick 74-artifact supplement gate pass.
 
 The deterministic exporter then produced standalone paper commit
-`38d68b863582e2aed3ee87c9a9e09028d1dd4153` from source commit
-`fe49e690fe86b9c2d314812850c4f3821be1cca9`; its software and quick supplement
+`a1bba5b4c8ef745f27b4af5e1f391f2a43678e96` from source commit
+`de6e2f1c272c1faaeed5dc6a4d4826bdc18e3dbd`; its software and quick supplement
 gates pass without the monorepo, and `cargo package --locked` verifies the
 23-file crate archive. Filtering
 `software/projective-reed-solomon/` to the repository root with
 `git filter-repo` produced disposable software commit
-`36ad2607603b1898eae17c3c09006b20f8bbf840`, whose formatting, warning-free
+`cee89384a33527bca001f4f1295733ced3b8fb65`, whose formatting, warning-free
 Clippy, fast test, and package gates pass without path repair. A CLI smoke
 test classifies the documented GF(7)/R5 tangent request as `DEEP` and emits a
 task-ID-free `projective-reed-solomon-deep-certificate-v1` certificate.
@@ -63,6 +63,9 @@ but it was not run without the separately required approval.
   surface is free of internal task identifiers.
 - **Settled:** the fresh paper export and later software-only history filter both
   work without path repair and pass their fast gates.
+- **Settled:** the fast suite now covers every CLI subcommand, both positive and
+  corrupted certificate replay, candidate-budget exhaustion, rejection beyond
+  the R5--R10 classification boundary, and deterministic algebraic round trips.
 - **Settled:** the stale TIT artifact is replaced by a warning-free 49-page
   build whose strict page gate leaves one page of headroom; only raw coefficient
   tables move to the canonical/supplement copy.
