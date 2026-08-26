@@ -72,8 +72,9 @@ The benchmark separates four costs which must not be conflated:
 4. independent certificate replay, which intentionally repeats canonical
    transport before checking family and radius evidence.
 
-No timing is a novelty or state-of-the-art claim. Nonpersistent
-canonicalization still uses an honest group-scale fallback. Its remaining
-formula-speed canonicalizers, a wider q/field/redundancy benchmark grid beyond
+No timing is a novelty or state-of-the-art claim. Multiple-root nonpersistent
+canonicalization still uses an honest group-scale fallback; rootless and
+simple-root nonpersistent forms share the reduced exact charts. The remaining
+multiple-root canonicalizer, a wider q/field/redundancy benchmark grid beyond
 the first GF(8) fixture, bit-operation accounting, and comparison with external
 decoder software remain open benchmark work.

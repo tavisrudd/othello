@@ -17,7 +17,9 @@ This is the C969 implementation crate.  Its current executable slice provides:
 - exact tangent-family canonicalization in `m*q*(q-1)` transports and
   sigma canonicalization in `m*(q^2-1)` on the rootless-form stratum and
   `O(m*r*q)` on the simple-root stratum; these exhaust persistent sigma, while
-  the full `m*(q^3-q)` path remains as a defensive fallback and for other inputs;
+  the same charts also accelerate nonpersistent forms when applicable;
+- the full `m*(q^3-q)` path retained for multiple-root nonpersistent forms and
+  as a defensive persistent fallback;
 - an intrinsic persistent-sigma `T/T^(r-1)` modulo inversion/Frobenius
   extractor in `F_q[X]/Q`, using no discrete logarithm or torus enumeration;
 - distinct rational-root recovery, Vandermonde magnitude recovery, and an

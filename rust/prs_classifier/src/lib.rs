@@ -853,17 +853,15 @@ pub fn canonicalize_syndrome(
     if persistent == PersistentKind::Tangent {
         return canonicalize_tangent(&field, syndrome, transporter_limit);
     }
-    if persistent == PersistentKind::Sigma {
-        if let Some(canonicalization) =
-            canonicalize_rootless_sigma(&field, syndrome.clone(), transporter_limit)?
-        {
-            return Ok(canonicalization);
-        }
-        if let Some(canonicalization) =
-            canonicalize_simple_root_sigma(&field, syndrome.clone(), transporter_limit)?
-        {
-            return Ok(canonicalization);
-        }
+    if let Some(canonicalization) =
+        canonicalize_rootless_form(&field, syndrome.clone(), transporter_limit)?
+    {
+        return Ok(canonicalization);
+    }
+    if let Some(canonicalization) =
+        canonicalize_simple_root_form(&field, syndrome.clone(), transporter_limit)?
+    {
+        return Ok(canonicalization);
     }
     canonicalize_explicit(&field, syndrome, transporter_limit)
 }
@@ -876,7 +874,7 @@ fn projective_rows(field: &Field) -> Vec<([u32; 2], [u32; 2])> {
     rows
 }
 
-fn canonicalize_rootless_sigma(
+fn canonicalize_rootless_form(
     field: &Field,
     syndrome: Vec<u32>,
     transporter_limit: u64,
@@ -943,11 +941,11 @@ fn canonicalize_rootless_sigma(
         canonical_syndrome: best.ok_or(Error::BadSigmaInvariant)?,
         transporter: best_transporter.ok_or(Error::BadSigmaInvariant)?,
         transporters_examined: examined,
-        complexity: "rootless sigma form: m*(q^2-1) lex-forced second-coordinate transports",
+        complexity: "rootless binary form: m*(q^2-1) lex-forced second-coordinate transports",
     }))
 }
 
-fn canonicalize_simple_root_sigma(
+fn canonicalize_simple_root_form(
     field: &Field,
     syndrome: Vec<u32>,
     transporter_limit: u64,
@@ -1045,7 +1043,7 @@ fn canonicalize_simple_root_sigma(
         transporter: best_transporter.ok_or(Error::BadSigmaInvariant)?,
         transporters_examined: examined,
         complexity:
-            "simple-root sigma form: lex-forced first three coordinates; O(m*r*q) transports",
+            "simple-root binary form: lex-forced first three coordinates; O(m*r*q) transports",
     }))
 }
 
@@ -2625,7 +2623,7 @@ mod tests {
         assert_eq!(invariant.quadratic_gcd, quadratic);
         assert_eq!(invariant.quotient_order, 3);
 
-        let reduced = canonicalize_simple_root_sigma(&field, syndrome.clone(), 2_000)
+        let reduced = canonicalize_simple_root_form(&field, syndrome.clone(), 2_000)
             .unwrap()
             .expect("GF(8) fixture has a nondegenerate simple syndrome-form root");
         let explicit = canonicalize_explicit(&field, syndrome.clone(), 2_000).unwrap();
@@ -2774,6 +2772,24 @@ mod tests {
             verify_deep_certificate(&corrupted, 10_000),
             Err(Error::BadDeepCertificate)
         );
+    }
+
+    #[test]
+    fn lex_form_charts_canonicalize_nonpersistent_input() {
+        let field_spec = FieldSpec {
+            p: 3,
+            degree: 2,
+            modulus: vec![1, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let field = Field::new(field_spec.clone()).unwrap();
+        let syndrome = vec![1, 0, 0, 1, 2];
+        assert_eq!(persistent_kind(&field, &syndrome), PersistentKind::Other);
+        let reduced =
+            canonicalize_syndrome(&request(field_spec, 5, syndrome.clone()), 2_000).unwrap();
+        let explicit = canonicalize_explicit(&field, syndrome, 2_000).unwrap();
+        assert_eq!(reduced.canonical_syndrome, explicit.canonical_syndrome);
+        assert!(reduced.transporters_examined < explicit.transporters_examined);
     }
 
     #[test]

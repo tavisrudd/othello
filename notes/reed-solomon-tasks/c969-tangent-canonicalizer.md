@@ -225,3 +225,10 @@ simple roots and uses 24 rather than 336 transports. The R6 q17 sigma benchmark
 has one simple root and uses 16 rather than 4,896 transports. A bounded quotient
 regression covers all 182 fibers at q=7,8,9,11 through every valid tested level
 R5--R10 without reaching the defensive fallback.
+
+The two lex-coset arguments depend only on the rational-root structure of
+`F_s`, not on persistence. The implementation therefore applies them to every
+non-tangent input before the explicit fallback. A nonpersistent q9/R5 sporadic
+fixture canonicalizes through the reduced charts and is checked against all
+1,440 explicit semilinear transports. Nonpersistent forms with a multiple
+rational root remain the next open lex stratum.
