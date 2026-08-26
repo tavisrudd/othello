@@ -39,6 +39,21 @@ budget gives the separate bound
 No intermediate lower package, old-marker divisor, or parameter-by-parameter
 escape assertion occurs in the proof.
 
+The numerical specialization explains all five fixed-level thresholds at
+once:
+
+\[
+\begin{array}{c|ccccc}
+r&6&7&8&9&10\\ \hline
+Q_r^*&28&35&42&50&56\\
+\text{next prime power}&29&37&43&53&59.
+\end{array}
+\]
+
+These are exactly the current R6--R10 asymptotic entry fields.  Thus the
+simultaneous theorem absorbs the separate stage-budget numerics rather than
+trading their sharp fixed-level bounds for a weaker uniform constant.
+
 ## 1. Composite contraction and direct lifting
 
 Let `E` be two-dimensional over a field `k`, let
