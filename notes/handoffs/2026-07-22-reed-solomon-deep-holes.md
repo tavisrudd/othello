@@ -1235,7 +1235,8 @@ extractor/certificate replay and the generic exact `m(q^2-1)` rootless and
 `O(mrq)` simple-root charts are green; trace nondegeneracy makes them exhaustive
 for persistent sigma, and a q9 sporadic regression checks the generic route.
 Preserve the explicit fallback while deriving the maximal root-multiplicity
-prefix and its first nonzero Hasse coefficient. Keep the
+prefix and implementing the proved triangular successor
+`hE/D+(mu+1)c`; isolate only the simultaneous Lucas degeneration. Keep the
 general C607 split-factorization exponent theorem separate.  C915's three
 independent Version 2 audits remain the
 higher-EV external-release gate but are a separate active card.)

@@ -232,3 +232,28 @@ non-tangent input before the explicit fallback. A nonpersistent q9/R5 sporadic
 fixture canonicalizes through the reduced charts and is checked against all
 1,440 explicit semilinear transports. Nonpersistent forms with a multiple
 rational root remain the next open lex stratum.
+
+### Multiple-root successor
+
+The next reduction has the same triangular form. Let `mu` be the largest
+rational Hasse-root multiplicity of `F_s`; lex order first discards every
+bottom row of smaller multiplicity. For a maximal root `v`, put
+
+\[
+ D=F_s(w^\mu v^{n-\mu}),\qquad
+ E=F_s(w^{\mu+1}v^{n-\mu-1}).
+\]
+
+After normalizing the first nonzero coordinate, at position `mu`, the next
+coordinate for top row `hw+cv` is
+
+\[
+ hE/D+(\mu+1)c.
+\]
+
+Thus if the characteristic does not divide `mu+1`, lex order again fixes `c`
+for each nonzero `h`. If it does divide `mu+1` but `E` is nonzero, it fixes
+`h` and leaves `c`. Only the simultaneous Lucas degeneration
+`p | (mu+1)` and `E=0` requires advancing to another Hasse coordinate. This is
+the exact implementation boundary for the remaining nonpersistent fallback;
+no persistent sigma input reaches it.
