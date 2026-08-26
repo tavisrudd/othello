@@ -1,0 +1,34 @@
+{
+  "schema": "sparse-shadow-paper-iv-golden-contract/v1",
+  "source_export_sha256": "dbccc767a9054ac17253f55347efe9917d53d40eb8ab398b5b1123881b021aa2",
+  "canonical": {
+    "canonical_id": "c20a6dc419b8d981c085251564d8e60b227fb92321c6c00fd8f8e64fd087c604",
+    "automorphism_order": 2184,
+    "generator_count": 4,
+    "search_nodes": 3901,
+    "canonical_leaves": 2184,
+    "refinement_rounds": 11701,
+    "max_depth": 4,
+    "stdout_bytes": 2528704,
+    "stdout_blake3": "a85b5d7f53768ade65cafc1b8039ffa0490697f2a7d721f95115cf2d3242e2c9"
+  },
+  "reconstruction": {
+    "point_count": 183,
+    "line_count": 183,
+    "conic_point_count": 14,
+    "passant_row_count": 78,
+    "elliptic_relation_count": 6,
+    "binary_code_rank": 36,
+    "marking_group": "PGL2(13)",
+    "marking_group_order": 2184,
+    "stdout_bytes": 3462980,
+    "stdout_blake3": "f8fe91946fc881103aeb2f06d3bedef80f997d1b867acc9fd123926202ea0e34"
+  },
+  "nauty_2_9_3": {
+    "colored_incidence_vertex_count": 3081,
+    "colored_incidence_edge_count": 6006,
+    "canonical_graph_blake3": "6b1b49c68cab6b85b34a536796895baec11863fb643eb9b25397bfa2c4780c15",
+    "automorphism_order": 2184,
+    "search_nodes": 12
+  }
+}

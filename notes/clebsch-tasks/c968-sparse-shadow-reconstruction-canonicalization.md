@@ -2,7 +2,7 @@
 
 **Lane:** clebsch
 
-**Status:** active; Paper-I gates green; Paper IV now has a frozen paper-owned export and an independent C968 structural/action gate, with canonical reconstruction next; Papers II, III, and V remain at external source gates; standalone Rust tool; no manuscript or Lean edits
+**Status:** active at three external source gates; Paper-I and Paper-IV canonicalization, reconstruction, independent replay, hot-layout, golden-output, and nauty gates green; Papers II, III, and V remain gated; standalone Rust tool; no manuscript or Lean edits
 
 ## Goal
 
@@ -285,10 +285,16 @@ native transporter, reconstruction, or replay certificate.
 
 Paper IV's paper-owned `verification/sparse_shadow_export.json` now supplies
 all 3003 weighted pairs and three coordinate generators.  C968 independently
-checks the exact source identity, pair census and distribution, permutation
-action, weight preservation, and generated order 2184; see
-`../2026-08-25-c968-paper-iv-sparse-shadow-export.md`.  Its next gate is full
-scheme automorphism equality and intrinsic recovery of the elliptic relations,
-78 incidence rows, plane, conic, polarity, and marking torsor.  Papers II, III,
-and V still require the complete paper-owned export named in their gated
-fixtures; nearby evidence JSON and trust manifests remain insufficient.
+checks the source, pair census, action, and full 2,184-element automorphism
+group by an exhaustive 3,901-node search and a representation-distinct replay.
+It intrinsically recovers six elliptic relations and 78 passant rows, matches
+the canonical shadow to the exact symmetric-square GF(13) model, and emits all
+183 plane points/lines, the 14-point conic, polarity, binary rank 36, and the
+`PGL2(13)` marking torsor.  Canonical, equivalence, reconstruction, corruption,
+relabeling, idempotence, zero-allocation hot-loop, golden-output, and nauty
+2.9.3 gates are green; see
+`../2026-08-25-c968-paper-iv-sparse-shadow-export.md` and
+`../../sparse-shadow/docs/performance-paper-iv.md`.  Papers II, III, and V still
+require the complete paper-owned export named in their gated fixtures; nearby
+evidence JSON and trust manifests remain insufficient.  No unblocked C968
+implementation frontier remains until one of those three exports freezes.

@@ -1,12 +1,18 @@
+#![allow(clippy::cast_possible_truncation)] // Frozen q=13 enumerations have small exact bounds.
+
+use std::collections::{BTreeMap, BTreeSet};
+
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    CanonicalArtifact, InputArtifact, ProfileInput, ShadowError, VerificationReport, canonicalize,
-    verify_canonical_artifact,
+    CanonicalArtifact, DeclaredAction, FiniteFieldSpec, GatedPaperIv, InputArtifact, ProfileInput,
+    ShadowError, VerificationReport, WeightedPair, canonicalize, verify_canonical_artifact,
 };
 
 pub const RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-reconstruction/v2";
 pub const PAPER_I_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-i-carrier/v1";
+pub const PAPER_IV_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-iv-carrier/v1";
+pub const PAPER_IV_RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-paper-iv-reconstruction/v1";
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
@@ -30,6 +36,49 @@ pub struct ReconstructionArtifact {
     pub carrier: PaperICarrier,
     pub ambiguity: Ambiguity,
     pub exact_oriented_return: bool,
+    pub round_trip_shadow: InputArtifact,
+    pub canonical: CanonicalArtifact,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperIvRelation {
+    pub rho: u32,
+    pub pair_multiplicity: u32,
+    pub edges: Vec<[u32; 2]>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperIvCarrier {
+    pub schema: String,
+    pub field: FiniteFieldSpec,
+    pub points: Vec<[u32; 3]>,
+    pub lines: Vec<[u32; 3]>,
+    pub incidence_rows: Vec<Vec<u32>>,
+    pub conic_points: Vec<u32>,
+    pub polarity_point_to_line: Vec<u32>,
+    pub shadow_coordinate_to_internal_point: Vec<u32>,
+    pub shadow_coordinate_to_passant_line: Vec<u32>,
+    pub passant_incidence_rows: Vec<Vec<u32>>,
+    pub elliptic_relations: Vec<PaperIvRelation>,
+    pub binary_code_rank: u32,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct MarkingTorsor {
+    pub group: String,
+    pub order: u64,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperIvReconstructionArtifact {
+    pub schema: String,
+    pub profile: String,
+    pub carrier: PaperIvCarrier,
+    pub ambiguity: MarkingTorsor,
     pub round_trip_shadow: InputArtifact,
     pub canonical: CanonicalArtifact,
 }
@@ -112,6 +161,226 @@ pub fn verify_reconstruction(
     })
 }
 
+/// Reconstruct the marked projective plane carried by the Paper-IV shadow.
+///
+/// # Errors
+///
+/// Returns an error unless canonical recognition identifies the exact q=13
+/// model and every recovered incidence, polarity, relation, and code invariant
+/// passes exact arithmetic checks.
+pub fn reconstruct_paper_iv(
+    input: &InputArtifact,
+) -> Result<PaperIvReconstructionArtifact, ShadowError> {
+    let canonical = canonicalize(input)?;
+    let carrier = recover_paper_iv_carrier(&canonical.canonical)?;
+    Ok(PaperIvReconstructionArtifact {
+        schema: PAPER_IV_RECONSTRUCTION_SCHEMA_VERSION.into(),
+        profile: "paper_iv_minimum_words".into(),
+        carrier,
+        ambiguity: MarkingTorsor {
+            group: "PGL2(13)".into(),
+            order: 2184,
+        },
+        round_trip_shadow: canonical.canonical.clone(),
+        canonical,
+    })
+}
+
+/// Independently replay a Paper-IV reconstruction artifact.
+///
+/// # Errors
+///
+/// Returns an error when canonical replay or any recovered carrier component
+/// differs from exact regeneration.
+pub fn verify_paper_iv_reconstruction(
+    input: &InputArtifact,
+    artifact: &PaperIvReconstructionArtifact,
+) -> Result<VerificationReport, ShadowError> {
+    if artifact.schema != PAPER_IV_RECONSTRUCTION_SCHEMA_VERSION
+        || artifact.profile != "paper_iv_minimum_words"
+        || artifact.ambiguity
+            != (MarkingTorsor {
+                group: "PGL2(13)".into(),
+                order: 2184,
+            })
+    {
+        return Err(ShadowError::Certificate(
+            "Paper-IV reconstruction metadata is inconsistent".into(),
+        ));
+    }
+    let report = verify_canonical_artifact(input, &artifact.canonical)?;
+    if artifact.round_trip_shadow != artifact.canonical.canonical {
+        return Err(ShadowError::Certificate(
+            "Paper-IV round-trip shadow differs from the canonical shadow".into(),
+        ));
+    }
+    let recovered = recover_paper_iv_carrier(&artifact.canonical.canonical)
+        .map_err(|error| ShadowError::Certificate(error.to_string()))?;
+    if artifact.carrier != recovered {
+        return Err(ShadowError::Certificate(
+            "Paper-IV carrier differs from exact arithmetic recovery".into(),
+        ));
+    }
+    Ok(report)
+}
+
+#[allow(clippy::too_many_lines)]
+fn recover_paper_iv_carrier(canonical: &InputArtifact) -> Result<PaperIvCarrier, ShadowError> {
+    let ProfileInput::PaperIvMinimumWords(value) = &canonical.profile else {
+        return Err(ShadowError::Invalid(
+            "Paper-IV carrier recovery received another profile".into(),
+        ));
+    };
+    let model = standard_model(canonical, value)?;
+    let model_canonical = canonicalize(&model)?;
+    if model_canonical.canonical != *canonical {
+        return Err(ShadowError::Invalid(
+            "canonical shadow is not the standard q=13 conic model".into(),
+        ));
+    }
+
+    let points = projective_points();
+    let lines = points.clone();
+    let point_index = points
+        .iter()
+        .enumerate()
+        .map(|(index, &point)| (point, index as u32))
+        .collect::<BTreeMap<_, _>>();
+    let line_index = point_index.clone();
+    let incidence_rows = lines
+        .iter()
+        .map(|&line| {
+            points
+                .iter()
+                .enumerate()
+                .filter(|(_, point)| incident(line, **point))
+                .map(|(index, _)| index as u32)
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
+    if points.len() != 183
+        || incidence_rows.len() != 183
+        || incidence_rows.iter().any(|row| row.len() != 14)
+    {
+        return Err(ShadowError::Invalid(
+            "invalid recovered PG(2,13) incidence".into(),
+        ));
+    }
+    let mut collinear_pair_counts = BTreeMap::<[u32; 2], u8>::new();
+    for row in &incidence_rows {
+        for right in 1..row.len() {
+            for left in 0..right {
+                *collinear_pair_counts
+                    .entry([row[left], row[right]])
+                    .or_default() += 1;
+            }
+        }
+    }
+    if collinear_pair_counts.len() != 183 * 182 / 2
+        || collinear_pair_counts.values().any(|&count| count != 1)
+    {
+        return Err(ShadowError::Invalid(
+            "recovered plane lacks unique lines through point pairs".into(),
+        ));
+    }
+    let conic_points = points
+        .iter()
+        .enumerate()
+        .filter(|(_, point)| delta(**point) == 0)
+        .map(|(index, _)| index as u32)
+        .collect::<Vec<_>>();
+    let polarity_point_to_line = points
+        .iter()
+        .map(|&point| line_index[&polar(point)])
+        .collect::<Vec<_>>();
+    if conic_points.len() != 14
+        || polarity_point_to_line
+            .iter()
+            .copied()
+            .collect::<BTreeSet<_>>()
+            .len()
+            != 183
+    {
+        return Err(ShadowError::Invalid(
+            "invalid recovered conic or polarity".into(),
+        ));
+    }
+    for (point, &line) in points.iter().zip(&polarity_point_to_line) {
+        if pole(lines[line as usize]) != *point
+            || incident(lines[line as usize], *point) != (delta(*point) == 0)
+        {
+            return Err(ShadowError::Invalid(
+                "recovered polarity is not involutive with the declared absolute conic".into(),
+            ));
+        }
+    }
+
+    let internal = internal_points();
+    let mut canonical_to_model = vec![0; 78];
+    for (model_coordinate, &canonical_coordinate) in
+        model_canonical.input_to_canonical.iter().enumerate()
+    {
+        canonical_to_model[canonical_coordinate as usize] = model_coordinate;
+    }
+    let shadow_coordinate_to_internal_point = canonical_to_model
+        .iter()
+        .map(|&model_coordinate| point_index[&internal[model_coordinate]])
+        .collect::<Vec<_>>();
+    let shadow_coordinate_to_passant_line = canonical_to_model
+        .iter()
+        .map(|&model_coordinate| line_index[&polar(internal[model_coordinate])])
+        .collect::<Vec<_>>();
+    let passant_incidence_rows = shadow_coordinate_to_passant_line
+        .iter()
+        .map(|&line| {
+            shadow_coordinate_to_internal_point
+                .iter()
+                .enumerate()
+                .filter(|&(_, &point)| incidence_rows[line as usize].binary_search(&point).is_ok())
+                .map(|(coordinate, _)| coordinate as u32)
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
+    if passant_incidence_rows.iter().any(|row| row.len() != 7) {
+        return Err(ShadowError::Invalid(
+            "invalid recovered passant rows".into(),
+        ));
+    }
+
+    let elliptic_relations = recover_relations(value)?;
+    let weight_eight_rows = relation_rows(&elliptic_relations[0].edges, 78);
+    let mut recovered_rows = passant_incidence_rows.clone();
+    recovered_rows.sort_unstable();
+    let mut expected_rows = weight_eight_rows;
+    expected_rows.sort_unstable();
+    if recovered_rows != expected_rows {
+        return Err(ShadowError::Invalid(
+            "weighted-pair section does not recover the passant incidence rows".into(),
+        ));
+    }
+    let binary_code_rank = binary_rank_from_odd_pairs(value)?;
+    if binary_code_rank != 36 {
+        return Err(ShadowError::Invalid(
+            "recovered binary code has wrong rank".into(),
+        ));
+    }
+
+    Ok(PaperIvCarrier {
+        schema: PAPER_IV_CARRIER_SCHEMA_VERSION.into(),
+        field: value.field.clone(),
+        points,
+        lines,
+        incidence_rows,
+        conic_points,
+        polarity_point_to_line,
+        shadow_coordinate_to_internal_point,
+        shadow_coordinate_to_passant_line,
+        passant_incidence_rows,
+        elliptic_relations,
+        binary_code_rank,
+    })
+}
+
 fn recover_paper_i_carrier(canonical: &InputArtifact) -> Result<PaperICarrier, ShadowError> {
     let ProfileInput::PaperIOrientation(paper) = &canonical.profile else {
         return Err(ShadowError::Invalid(
@@ -129,4 +398,248 @@ fn recover_paper_i_carrier(canonical: &InputArtifact) -> Result<PaperICarrier, S
         axes: antipodal.edges.clone(),
         conference_switching_class: "icosahedral_six_axis_switching_class".into(),
     })
+}
+
+fn standard_model(
+    canonical: &InputArtifact,
+    value: &GatedPaperIv,
+) -> Result<InputArtifact, ShadowError> {
+    let points = internal_points();
+    let mut model = value.clone();
+    model.weighted_pair_section.clear();
+    for right in 1..points.len() {
+        for left in 0..right {
+            let multiplicity = match rho(points[left], points[right])? {
+                0 => 8,
+                1 | 3 => 6,
+                9 => 12,
+                10 => 7,
+                12 => 9,
+                _ => {
+                    return Err(ShadowError::Invalid(
+                        "unexpected q=13 elliptic relation".into(),
+                    ));
+                }
+            };
+            model.weighted_pair_section.push(WeightedPair {
+                left: left as u32,
+                right: right as u32,
+                multiplicity,
+            });
+        }
+    }
+    let matrices = [(1, 1, 0, 1), (0, 1, 12, 0), (2, 0, 0, 1)];
+    model.action = DeclaredAction::VertexPermutations {
+        degree: 78,
+        generators: matrices
+            .iter()
+            .map(|&matrix| {
+                points
+                    .iter()
+                    .map(|&point| {
+                        points
+                            .binary_search(&symmetric_square_action(matrix, point))
+                            .map(|index| index as u32)
+                            .map_err(|_| {
+                                ShadowError::Invalid("q=13 action left the internal points".into())
+                            })
+                    })
+                    .collect::<Result<Vec<_>, _>>()
+            })
+            .collect::<Result<Vec<_>, _>>()?,
+    };
+    let mut artifact = canonical.clone();
+    artifact.profile = ProfileInput::PaperIvMinimumWords(Box::new(model));
+    Ok(artifact)
+}
+
+fn projective_points() -> Vec<[u32; 3]> {
+    let mut points = Vec::with_capacity(183);
+    for y in 0..13 {
+        for z in 0..13 {
+            points.push([1, y, z]);
+        }
+    }
+    for z in 0..13 {
+        points.push([0, 1, z]);
+    }
+    points.push([0, 0, 1]);
+    points
+}
+
+fn internal_points() -> Vec<[u32; 3]> {
+    let squares = (1..13)
+        .map(|value| value * value % 13)
+        .collect::<BTreeSet<_>>();
+    projective_points()
+        .into_iter()
+        .filter(|&point| {
+            let value = delta(point);
+            value != 0 && !squares.contains(&value)
+        })
+        .collect()
+}
+
+fn normalize(mut vector: [u32; 3]) -> [u32; 3] {
+    let first = vector
+        .iter()
+        .copied()
+        .find(|&value| value != 0)
+        .expect("projective vector is nonzero");
+    let inverse = field_inverse(first);
+    for value in &mut vector {
+        *value = *value * inverse % 13;
+    }
+    vector
+}
+
+fn field_inverse(value: u32) -> u32 {
+    (1..13)
+        .find(|candidate| value * candidate % 13 == 1)
+        .expect("nonzero prime-field element is invertible")
+}
+
+fn delta(point: [u32; 3]) -> u32 {
+    (point[1] * point[1] + 13 - point[0] * point[2] % 13) % 13
+}
+
+fn polar(point: [u32; 3]) -> [u32; 3] {
+    normalize([
+        (13 - point[2]) % 13,
+        2 * point[1] % 13,
+        (13 - point[0]) % 13,
+    ])
+}
+
+fn pole(line: [u32; 3]) -> [u32; 3] {
+    normalize([(13 - line[2]) % 13, 7 * line[1] % 13, (13 - line[0]) % 13])
+}
+
+fn incident(line: [u32; 3], point: [u32; 3]) -> bool {
+    (0..3).map(|index| line[index] * point[index]).sum::<u32>() % 13 == 0
+}
+
+fn rho(first: [u32; 3], second: [u32; 3]) -> Result<u32, ShadowError> {
+    let beta = (2 * first[1] * second[1] + 26 - first[0] * second[2] - first[2] * second[0]) % 13;
+    let denominator = delta(first) * delta(second) % 13;
+    if denominator == 0 {
+        return Err(ShadowError::Invalid("rho denominator vanishes".into()));
+    }
+    Ok(beta * beta % 13 * field_inverse(denominator) % 13)
+}
+
+#[allow(clippy::many_single_char_names)]
+fn symmetric_square_action(matrix: (u32, u32, u32, u32), point: [u32; 3]) -> [u32; 3] {
+    let (a, b, c, d) = matrix;
+    let [x, y, z] = point;
+    normalize([
+        (a * a * x + 2 * a * b * y + b * b * z) % 13,
+        (a * c * x + (a * d + b * c) * y + b * d * z) % 13,
+        (c * c * x + 2 * c * d * y + d * d * z) % 13,
+    ])
+}
+
+fn recover_relations(value: &GatedPaperIv) -> Result<Vec<PaperIvRelation>, ShadowError> {
+    let mut weights = vec![0_u32; 78 * 78];
+    for pair in &value.weighted_pair_section {
+        let left = pair.left as usize;
+        let right = pair.right as usize;
+        weights[left * 78 + right] = pair.multiplicity;
+        weights[right * 78 + left] = pair.multiplicity;
+    }
+    let mut edges = BTreeMap::<u32, Vec<[u32; 2]>>::new();
+    for right in 1..78 {
+        for left in 0..right {
+            let multiplicity = weights[left * 78 + right];
+            let relation = match multiplicity {
+                8 => 0,
+                12 => 9,
+                7 => 10,
+                9 => 12,
+                6 => {
+                    let common_sevens = (0..78)
+                        .filter(|&middle| {
+                            weights[left * 78 + middle] == 7 && weights[right * 78 + middle] == 7
+                        })
+                        .count();
+                    match common_sevens {
+                        2 => 1,
+                        4 => 3,
+                        _ => {
+                            return Err(ShadowError::Invalid(
+                                "multiplicity-six relation does not split intrinsically".into(),
+                            ));
+                        }
+                    }
+                }
+                _ => return Err(ShadowError::Invalid("unknown pair multiplicity".into())),
+            };
+            edges
+                .entry(relation)
+                .or_default()
+                .push([left as u32, right as u32]);
+        }
+    }
+    let expected = BTreeMap::from([(0, 273), (1, 546), (3, 546), (9, 546), (10, 546), (12, 546)]);
+    if edges
+        .iter()
+        .map(|(&rho, rows)| (rho, rows.len()))
+        .collect::<BTreeMap<_, _>>()
+        != expected
+    {
+        return Err(ShadowError::Invalid(
+            "invalid recovered elliptic relation sizes".into(),
+        ));
+    }
+    Ok(edges
+        .into_iter()
+        .map(|(rho, edges)| PaperIvRelation {
+            rho,
+            pair_multiplicity: match rho {
+                0 => 8,
+                1 | 3 => 6,
+                9 => 12,
+                10 => 7,
+                12 => 9,
+                _ => unreachable!(),
+            },
+            edges,
+        })
+        .collect())
+}
+
+fn relation_rows(edges: &[[u32; 2]], degree: usize) -> Vec<Vec<u32>> {
+    let mut rows = vec![Vec::new(); degree];
+    for &[left, right] in edges {
+        rows[left as usize].push(right);
+        rows[right as usize].push(left);
+    }
+    for row in &mut rows {
+        row.sort_unstable();
+    }
+    rows
+}
+
+fn binary_rank_from_odd_pairs(value: &GatedPaperIv) -> Result<u32, ShadowError> {
+    let mut rows = vec![0_u128; 78];
+    for pair in &value.weighted_pair_section {
+        if pair.multiplicity % 2 == 1 {
+            rows[pair.left as usize] |= 1_u128 << pair.right;
+            rows[pair.right as usize] |= 1_u128 << pair.left;
+        }
+    }
+    let mut rank = 0;
+    for column in 0..78 {
+        let Some(pivot) = (rank..rows.len()).find(|&row| (rows[row] >> column) & 1 == 1) else {
+            continue;
+        };
+        rows.swap(rank, pivot);
+        for row in 0..rows.len() {
+            if row != rank && (rows[row] >> column) & 1 == 1 {
+                rows[row] ^= rows[rank];
+            }
+        }
+        rank += 1;
+    }
+    u32::try_from(rank).map_err(|_| ShadowError::Invalid("binary rank exceeds u32".into()))
 }

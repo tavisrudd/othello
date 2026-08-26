@@ -7,11 +7,18 @@ use std::{
 
 static TEMP_SEQUENCE: AtomicU64 = AtomicU64::new(0);
 const GOLDEN_CONTRACT: &str = include_str!("../../../fixtures/paper-i-golden-contract.json");
+const PAPER_IV_GOLDEN_CONTRACT: &str =
+    include_str!("../../../fixtures/paper-iv-golden-contract.json");
 
 fn fixture(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
         .join("../../fixtures")
         .join(name)
+}
+
+fn paper_iv_export() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("../../../papers/q13-passant-code/verification/sparse_shadow_export.json")
 }
 
 fn run(args: &[&str]) -> std::process::Output {
@@ -204,6 +211,61 @@ fn every_emitted_certificate_replays_through_the_cli() {
         reconstruction_path.to_str().expect("UTF-8 temporary path"),
     ]);
     assert_valid(&verified);
+    fs::remove_file(reconstruction_path).expect("temporary certificate removes");
+}
+
+#[test]
+fn paper_iv_cli_canonical_and_reconstruction_certificates_replay() {
+    let input = paper_iv_export();
+    if !input.exists() {
+        return;
+    }
+    let input_path = input.to_str().expect("UTF-8 Paper-IV export path");
+
+    let canonical = run(&["canonicalize", input_path]);
+    assert!(canonical.status.success());
+    let golden: serde_json::Value =
+        serde_json::from_str(PAPER_IV_GOLDEN_CONTRACT).expect("Paper-IV golden contract parses");
+    assert_eq!(
+        canonical.stdout.len() as u64,
+        golden["canonical"]["stdout_bytes"]
+            .as_u64()
+            .expect("canonical byte count")
+    );
+    assert_eq!(
+        digest(&canonical.stdout),
+        golden["canonical"]["stdout_blake3"]
+            .as_str()
+            .expect("canonical digest")
+    );
+    let canonical_path = write_temp_json("paper-iv-canonical", &canonical.stdout);
+    assert_valid(&run(&[
+        "verify-certificate",
+        input_path,
+        canonical_path.to_str().expect("UTF-8 temporary path"),
+    ]));
+    fs::remove_file(canonical_path).expect("temporary certificate removes");
+
+    let reconstruction = run(&["reconstruct", input_path]);
+    assert!(reconstruction.status.success());
+    assert_eq!(
+        reconstruction.stdout.len() as u64,
+        golden["reconstruction"]["stdout_bytes"]
+            .as_u64()
+            .expect("reconstruction byte count")
+    );
+    assert_eq!(
+        digest(&reconstruction.stdout),
+        golden["reconstruction"]["stdout_blake3"]
+            .as_str()
+            .expect("reconstruction digest")
+    );
+    let reconstruction_path = write_temp_json("paper-iv-reconstruction", &reconstruction.stdout);
+    assert_valid(&run(&[
+        "verify-reconstruction-certificate",
+        input_path,
+        reconstruction_path.to_str().expect("UTF-8 temporary path"),
+    ]));
     fs::remove_file(reconstruction_path).expect("temporary certificate removes");
 }
 

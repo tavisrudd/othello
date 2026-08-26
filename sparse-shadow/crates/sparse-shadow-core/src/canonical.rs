@@ -3,8 +3,8 @@ use std::collections::BTreeSet;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    BinaryRelation, InputArtifact, PaperIOrientation, ProfileInput, RelationalShadow, ShadowError,
-    VerificationReport, validate, verify_certificate,
+    BinaryRelation, DeclaredAction, GatedPaperIv, InputArtifact, PaperIOrientation, ProfileInput,
+    RelationalShadow, ShadowError, VerificationReport, WeightedPair, validate, verify_certificate,
 };
 
 pub const CANONICAL_SCHEMA_VERSION: &str = "sparse-shadow-canonical/v2";
@@ -72,8 +72,10 @@ pub struct CanonicalArtifact {
 /// canonical artifact cannot be represented by schema v1.
 pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowError> {
     validate(input)?;
-    let ProfileInput::PaperIOrientation(paper) = &input.profile else {
-        return Err(gated_error(&input.profile));
+    let paper = match &input.profile {
+        ProfileInput::PaperIOrientation(paper) => paper,
+        ProfileInput::PaperIvMinimumWords(value) => return canonicalize_paper_iv(input, value),
+        _ => return Err(gated_error(&input.profile)),
     };
 
     let search = crate::hot::search(paper);
@@ -110,6 +112,98 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
         stats: search.stats,
         certificate,
     })
+}
+
+fn canonicalize_paper_iv(
+    input: &InputArtifact,
+    value: &GatedPaperIv,
+) -> Result<CanonicalArtifact, ShadowError> {
+    let search = crate::paper_iv::search(value)?;
+    let input_to_canonical = to_u32_permutation(&search.best_permutation)?;
+    let automorphisms = search
+        .equal_permutations
+        .iter()
+        .map(|permutation| to_u32_permutation(permutation))
+        .collect::<Result<Vec<_>, _>>()?;
+    let canonical = relabel_paper_iv(input, value, &input_to_canonical, &automorphisms);
+    let canonical_json = serde_json::to_string(&canonical)?;
+    let canonical_id = blake3::hash(canonical_json.as_bytes()).to_hex().to_string();
+    let automorphism_generators = generating_set(&automorphisms);
+    let vertex_orbits = permutation_orbits(value.coordinate_count as usize, &automorphisms)?;
+    let point_stabilizers = point_stabilizers(&vertex_orbits, &automorphisms)?;
+    let automorphism_order = u64::try_from(automorphisms.len())
+        .map_err(|_| ShadowError::Invalid("automorphism count exceeds u64".into()))?;
+    let certificate = CanonicalCertificate {
+        certificate_schema: "sparse-shadow-certificate/v1".into(),
+        proof_system: "paper-iv-weighted-scheme-ir-exhaustion/v1".into(),
+        input_to_canonical: input_to_canonical.clone(),
+        canonical_json,
+        canonical_id: canonical_id.clone(),
+        winning_trace: search.winning_trace,
+        automorphisms: automorphisms.clone(),
+        search_stats: search.stats.clone(),
+    };
+    Ok(CanonicalArtifact {
+        schema: CANONICAL_SCHEMA_VERSION.into(),
+        canonical_id,
+        canonical,
+        input_to_canonical,
+        automorphism_generators,
+        automorphism_order,
+        vertex_orbits,
+        point_stabilizers,
+        stats: search.stats,
+        certificate,
+    })
+}
+
+pub(crate) fn relabel_paper_iv(
+    input: &InputArtifact,
+    value: &GatedPaperIv,
+    input_to_canonical: &[u32],
+    automorphisms: &[Vec<u32>],
+) -> InputArtifact {
+    let mut canonical = value.clone();
+    canonical.weighted_pair_section = value
+        .weighted_pair_section
+        .iter()
+        .map(|pair| {
+            let mut endpoints = [
+                input_to_canonical[pair.left as usize],
+                input_to_canonical[pair.right as usize],
+            ];
+            endpoints.sort_unstable();
+            WeightedPair {
+                left: endpoints[0],
+                right: endpoints[1],
+                multiplicity: pair.multiplicity,
+            }
+        })
+        .collect();
+    canonical
+        .weighted_pair_section
+        .sort_unstable_by_key(|pair| (pair.left, pair.right, pair.multiplicity));
+
+    let mut canonical_group = automorphisms
+        .iter()
+        .map(|automorphism| {
+            let mut conjugate = vec![0; input_to_canonical.len()];
+            for old in 0..input_to_canonical.len() {
+                conjugate[input_to_canonical[old] as usize] =
+                    input_to_canonical[automorphism[old] as usize];
+            }
+            conjugate
+        })
+        .collect::<Vec<_>>();
+    canonical_group.sort_unstable();
+    canonical_group.dedup();
+    canonical.action = DeclaredAction::VertexPermutations {
+        degree: value.coordinate_count,
+        generators: generating_set(&canonical_group),
+    };
+    let mut artifact = input.clone();
+    artifact.profile = ProfileInput::PaperIvMinimumWords(Box::new(canonical));
+    artifact
 }
 
 /// Replay a full canonical artifact and bind every public wrapper field to its

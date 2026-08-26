@@ -13,6 +13,15 @@ field and census contract, complete pair domain, multiplicity distribution,
 permutation validity, pair-weight invariance, and bounded closure order.  It
 rejects corrupted pair weights, source hashes, and action generators.
 
+The completed adapter then exhausts the weighted-scheme canonical search with
+3,901 nodes and 2,184 least leaves, proving that the full automorphism group has
+order 2,184.  A representation-distinct checker repeats the tree.  Exact
+arithmetic recovery splits the two multiplicity-six relations intrinsically,
+recovers all six elliptic relations, the 78 passant rows, binary rank 36, all
+183 points and lines of `PG(2,13)`, its 14-point conic and polarity, and the
+residual `PGL2(13)` marking torsor.  Canonical, equivalence, reconstruction,
+corruption, relabeling, idempotence, CLI, golden-output, and nauty gates pass.
+
 ## Reproduction
 
 From `papers/q13-passant-code/`:
@@ -24,8 +33,10 @@ nix shell nixpkgs#python3 --command python3 verification/generate_sparse_shadow_
 From `sparse-shadow/`:
 
 ```sh
-cargo test --locked --workspace --all-features
+cargo test --release --locked --workspace --all-features
 cargo run --locked -q -p sparse-shadow-cli -- validate ../papers/q13-passant-code/verification/sparse_shadow_export.json
+nix-shell integrations/sparse-shadow-nauty/shell.nix --run \
+  'cargo test --release --manifest-path integrations/sparse-shadow-nauty/Cargo.toml --locked'
 ```
 
 The producer and export are recorded in Paper IV's
@@ -39,28 +50,30 @@ The producer and export are recorded in Paper IV's
 The load-bearing antecedent is `verification/pair_reconstruction.json`,
 SHA-256 `cb9c1da169cef5f23402bb87d28d4f5885ddecb9ae7d92f784803a2d9d8d0ae6`.
 Enumeration is deterministic and uses no random seed.
+`fixtures/paper-iv-golden-contract.json` freezes the canonical and
+reconstruction stdout BLAKE3 digests and the nauty comparison; its SHA-256 is
+`a262edfd6b0c10c7be6e3f0888beae1026542e34a1b3b36e6c39f8e7e61cb63c`.
 
-## Boundary and next gate
+## Boundary
 
-This slice certifies a complete weighted-pair object and an explicit
-weight-preserving subgroup of order 2184.  It does not yet certify that this is
-the full automorphism group, canonically reconstruct the six elliptic
-relations or 78 incidence rows, or recover the marked plane, conic, and
-polarity.  C968 next implements those independent reconstruction checks before
-enabling canonicalization and reconstruction certificates for Paper IV.
+The Paper-IV integration is complete.  It proves the exact finite artifact and
+its declared reconstruction; it does not claim a uniform-q theorem, a new
+graph-isomorphism bound, or that nauty supplies the native proof.  The complete
+automorphism set is carried in the certificate, so canonical stdout is about
+2.53 MB and reconstruction stdout about 3.46 MB by deliberate trust-surface
+choice.
 
 ## Mystery ledger
 
-- **Full-group equality:** unsettled in C968.  The export proves a subgroup of
-  order 2184; full scheme rigidity or an independent nauty census must exclude
-  extra automorphisms.
-- **Intrinsic coordinate recovery:** unsettled in C968.  Pair multiplicities
-  expose five classes immediately, but the exact route from those classes to
-  the six elliptic relations and the 78 incidence rows still needs an
-  independently replayed adapter.
-- **Marking torsor:** unsettled in C968.  The export declares `PGL2(13)`, but
-  the canonical artifact must recover and verify the marking action rather
-  than trust the label.
-- **Settled by the closeout pass:** no additional field-arithmetic dependency
-  is needed for this first gate; prime-field arithmetic is already eliminated
-  into the exported integral pair weights and permutations.
+- **Full-group equality:** settled by two exhaustive native searches and the
+  nauty 2.9.3 order-2,184 cross-check.
+- **Intrinsic relation recovery:** settled; common multiplicity-seven counts
+  two and four split the two multiplicity-six relations without field labels.
+- **Marked carrier:** settled by canonical matching to an independently
+  generated symmetric-square GF(13) model and exact plane/conic/polarity replay.
+- **Performance:** the hot producer is zero-allocation.  `perf` leaves unused
+  fixed-signature-tail initialization as a possible speed lever, but no
+  correctness or acceptance gap remains and no speedup claim is made.
+- **Remaining genuine mysteries:** none within the frozen Paper-IV adapter.
+  Uniform-field generalization remains outside C968 and belongs to its existing
+  mathematical owners.

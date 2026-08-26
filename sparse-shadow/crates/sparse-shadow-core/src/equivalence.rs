@@ -139,11 +139,45 @@ fn compose_transporters(left: &[u32], right: &[u32]) -> Result<Vec<u32>, ShadowE
         .collect())
 }
 
+#[allow(clippy::too_many_lines)]
 fn verify_isomorphism(
     left: &InputArtifact,
     right: &InputArtifact,
     permutation: &[u32],
 ) -> Result<(), ShadowError> {
+    if let (ProfileInput::PaperIvMinimumWords(left), ProfileInput::PaperIvMinimumWords(right)) =
+        (&left.profile, &right.profile)
+    {
+        let degree = left.coordinate_count as usize;
+        let image = permutation.iter().copied().collect::<BTreeSet<_>>();
+        if right.coordinate_count != left.coordinate_count
+            || permutation.len() != degree
+            || image.len() != degree
+            || image.iter().any(|&vertex| vertex as usize >= degree)
+        {
+            return Err(ShadowError::Certificate(
+                "Paper-IV equivalence witness is not a permutation".into(),
+            ));
+        }
+        let right_weights = right
+            .weighted_pair_section
+            .iter()
+            .map(|pair| ([pair.left, pair.right], pair.multiplicity))
+            .collect::<std::collections::BTreeMap<_, _>>();
+        for pair in &left.weighted_pair_section {
+            let mut edge = [
+                permutation[pair.left as usize],
+                permutation[pair.right as usize],
+            ];
+            edge.sort_unstable();
+            if right_weights.get(&edge) != Some(&pair.multiplicity) {
+                return Err(ShadowError::Certificate(
+                    "Paper-IV equivalence witness does not preserve pair weights".into(),
+                ));
+            }
+        }
+        return Ok(());
+    }
     let (ProfileInput::PaperIOrientation(left), ProfileInput::PaperIOrientation(right)) =
         (&left.profile, &right.profile)
     else {

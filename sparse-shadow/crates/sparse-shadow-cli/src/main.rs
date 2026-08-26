@@ -4,8 +4,9 @@ use clap::{Parser, Subcommand};
 use serde::{Deserialize, Serialize};
 use sparse_shadow_core::{
     CanonicalArtifact, CanonicalCertificate, EquivalenceCertificate, InputArtifact,
-    ReconstructionArtifact, ShadowError, canonicalize, compare, reconstruct, validate,
-    verify_canonical_artifact, verify_certificate, verify_equivalence, verify_reconstruction,
+    PaperIvReconstructionArtifact, ProfileInput, ReconstructionArtifact, ShadowError, canonicalize,
+    compare, reconstruct, reconstruct_paper_iv, validate, verify_canonical_artifact,
+    verify_certificate, verify_equivalence, verify_paper_iv_reconstruction, verify_reconstruction,
 };
 use thiserror::Error;
 
@@ -64,6 +65,13 @@ enum CanonicalProof {
     Certificate(CanonicalCertificate),
 }
 
+#[derive(Debug, Deserialize)]
+#[serde(untagged)]
+enum ReconstructionProof {
+    PaperIv(Box<PaperIvReconstructionArtifact>),
+    PaperI(Box<ReconstructionArtifact>),
+}
+
 fn main() -> ExitCode {
     match run() {
         Ok(()) => ExitCode::SUCCESS,
@@ -82,7 +90,15 @@ fn run() -> Result<(), CliError> {
         Command::Equivalent { left, right } => {
             print_json(&compare(&read_input(&left)?, &read_input(&right)?)?)?;
         }
-        Command::Reconstruct { input } => print_json(&reconstruct(&read_input(&input)?)?)?,
+        Command::Reconstruct { input } => {
+            let input = read_input(&input)?;
+            match &input.profile {
+                ProfileInput::PaperIvMinimumWords(_) => {
+                    print_json(&reconstruct_paper_iv(&input)?)?;
+                }
+                _ => print_json(&reconstruct(&input)?)?,
+            }
+        }
         Command::VerifyCertificate { input, certificate } => {
             let input = read_input(&input)?;
             match read_json::<CanonicalProof>(&certificate)? {
@@ -107,8 +123,15 @@ fn run() -> Result<(), CliError> {
             )?)?;
         }
         Command::VerifyReconstructionCertificate { input, certificate } => {
-            let certificate = read_json::<ReconstructionArtifact>(&certificate)?;
-            print_json(&verify_reconstruction(&read_input(&input)?, &certificate)?)?;
+            let input = read_input(&input)?;
+            match read_json::<ReconstructionProof>(&certificate)? {
+                ReconstructionProof::PaperIv(certificate) => {
+                    print_json(&verify_paper_iv_reconstruction(&input, &certificate)?)?;
+                }
+                ReconstructionProof::PaperI(certificate) => {
+                    print_json(&verify_reconstruction(&input, &certificate)?)?;
+                }
+            }
         }
     }
     Ok(())

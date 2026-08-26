@@ -457,7 +457,7 @@ fn replay_trace(
 
 #[cfg(test)]
 mod tests {
-    use std::alloc::System;
+    use std::{alloc::System, sync::Mutex};
 
     use stats_alloc::{INSTRUMENTED_SYSTEM, Region, StatsAlloc};
 
@@ -466,9 +466,11 @@ mod tests {
 
     #[global_allocator]
     static GLOBAL: &StatsAlloc<System> = &INSTRUMENTED_SYSTEM;
+    static ALLOCATION_TEST_LOCK: Mutex<()> = Mutex::new(());
 
     #[test]
-    fn paper_i_search_loop_allocates_nothing() {
+    fn paper_i_and_iv_search_loops_allocate_nothing() {
+        let _guard = ALLOCATION_TEST_LOCK.lock().expect("allocation test lock");
         let input: InputArtifact = serde_json::from_str(include_str!(
             "../testdata/paper-i-icosahedral-orbitals.json"
         ))
@@ -493,13 +495,47 @@ mod tests {
             },
         };
         let mut path = [0; PAPER_I_VERTICES];
+        {
+            let region = Region::new(GLOBAL);
+            search.visit(initial, &mut path, 0);
+            let change = region.change();
+            assert_eq!(change.allocations, 0);
+            assert_eq!(change.reallocations, 0);
+            assert_eq!(change.deallocations, 0);
+        }
+        assert_eq!(search.stats.arena_grows, 0);
+        assert_eq!(search.equal_permutations.len(), 120);
+        paper_iv_search_loop_allocates_nothing();
+    }
+
+    fn paper_iv_search_loop_allocates_nothing() {
+        let path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../papers/q13-passant-code/verification/sparse_shadow_export.json");
+        if !path.exists() {
+            return;
+        }
+        let input: InputArtifact = serde_json::from_slice(
+            &std::fs::read(path).expect("Paper-IV export reads for allocation gate"),
+        )
+        .expect("Paper-IV export parses for allocation gate");
+        let crate::ProfileInput::PaperIvMinimumWords(paper) = input.profile else {
+            unreachable!();
+        };
+        let mut search = crate::paper_iv::prepare(&paper).expect("Paper-IV search prepares");
         let region = Region::new(GLOBAL);
-        search.visit(initial, &mut path, 0);
+        crate::paper_iv::run_prepared(&mut search);
         let change = region.change();
+        eprintln!(
+            "Paper-IV hot search: allocations={} reallocations={} deallocations={}",
+            change.allocations, change.reallocations, change.deallocations
+        );
         assert_eq!(change.allocations, 0);
         assert_eq!(change.reallocations, 0);
         assert_eq!(change.deallocations, 0);
-        assert_eq!(search.stats.arena_grows, 0);
-        assert_eq!(search.equal_permutations.len(), 120);
+        assert_eq!(crate::paper_iv::prepared_stats(&search).search_nodes, 3901);
+        assert_eq!(
+            crate::paper_iv::prepared_stats(&search).canonical_leaves,
+            2184
+        );
     }
 }

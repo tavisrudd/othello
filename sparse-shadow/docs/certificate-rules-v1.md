@@ -61,3 +61,40 @@ rules and payload are unchanged.
 The first fixture's certificate is about 5.1 KiB because it carries all 120
 automorphisms. The public artifact reports a three-element generating set, but
 the proof retains the full set so completeness is independently checkable.
+
+## Paper-IV weighted-scheme rules
+
+Proof-system identifier: `paper-iv-weighted-scheme-ir-exhaustion/v1`.
+
+Paper IV applies the same exhaustive-proof principle with a distinct producer
+and checker implementation. The producer uses fixed 78-coordinate partitions,
+fixed 468-byte signatures, fixed 3003-byte leaf keys, fixed branch traces, and
+a preallocated automorphism arena. The checker uses an independently written
+ordered-label/boundary partition representation.
+
+The accepted proof establishes:
+
+1. the exact GF(13), 78-coordinate, 364-support source contract;
+2. a complete upper-triangular weighted section with distribution
+   `6^1092 7^546 8^273 9^546 12^546`;
+3. exhaustive equitable refinement and individualization of every unresolved
+   cell, with no pruning oracle;
+4. exact agreement on the least 3003-color leaf, transporter, winning trace,
+   3,901 nodes, 2,184 leaves, 11,701 refinement rounds, and depth four;
+5. all and only the 2,184 automorphisms attaining the least leaf, each checked
+   directly on the raw weighted pairs;
+6. a generated four-permutation presentation of that full group, its unique
+   78-point orbit, and its point stabilizer of order 28;
+7. intrinsic splitting of multiplicity six by the number (two or four) of
+   common multiplicity-seven neighbors, recovering all six elliptic relations;
+8. recovery of 78 seven-point passant rows, binary rank 36, all 183 points and
+   lines of `PG(2,13)`, the 14-point conic, and its bijective polarity; and
+9. exact matching to the normalized symmetric-square GF(13) model, leaving the
+   declared `PGL2(13)` marking torsor.
+
+Canonical, equivalence, and reconstruction wrappers replay through the same
+public CLI commands as Paper I. Corruption tests alter pair weights, source
+identity, action generators, complete automorphism data, and recovered conic
+data. The optional nauty 2.9.3 backend independently returns group order 2,184
+and the same colored-incidence canonical graph for raw and native-canonical
+inputs; it does not replace the native transporter or proof.

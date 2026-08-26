@@ -1,7 +1,7 @@
 # sparse-shadow-nauty
 
 This optional, unpublished integration cross-checks the authoritative native
-Paper-I artifact with bundled nauty 2.9.3. It is deliberately excluded from the
+Paper-I and Paper-IV artifacts with bundled nauty 2.9.3. It is deliberately excluded from the
 main workspace: native builds, tests, packaging, and verification require no C
 compiler, libclang, FFI, or external canonicalizer.
 

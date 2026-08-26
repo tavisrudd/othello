@@ -129,14 +129,17 @@ pub fn verify_certificate(
             "unsupported certificate schema".into(),
         ));
     }
-    if certificate.proof_system != "paper-i-ir-exhaustion/v1" {
-        return Err(ShadowError::Certificate(
-            "unsupported canonical proof system".into(),
-        ));
-    }
     // This reference search is separate from the producing canonicalizer. It
     // starts from raw relations and trusts neither cached refinement nor hashes.
-    let recomputed = reference_canonicalize(input)?;
+    let recomputed = match certificate.proof_system.as_str() {
+        "paper-i-ir-exhaustion/v1" => reference_canonicalize(input)?,
+        "paper-iv-weighted-scheme-ir-exhaustion/v1" => reference_canonicalize_paper_iv(input)?,
+        _ => {
+            return Err(ShadowError::Certificate(
+                "unsupported canonical proof system".into(),
+            ));
+        }
+    };
     if recomputed.canonical_json != certificate.canonical_json {
         return Err(ShadowError::Certificate(
             "canonical payload differs from independently recomputed search".into(),
@@ -197,6 +200,29 @@ struct ReferenceSearch<'a> {
     winning_trace: Vec<BranchDecision>,
     equal_permutations: Vec<Vec<u32>>,
     stats: crate::SearchStats,
+}
+
+fn reference_canonicalize_paper_iv(input: &InputArtifact) -> Result<ReferenceResult, ShadowError> {
+    validate(input)?;
+    let ProfileInput::PaperIvMinimumWords(value) = &input.profile else {
+        return Err(ShadowError::Certificate(
+            "Paper-IV reference checker received another profile".into(),
+        ));
+    };
+    let search = crate::paper_iv_reference::search(value)?;
+    let canonical = crate::canonical::relabel_paper_iv(
+        input,
+        value,
+        &search.input_to_canonical,
+        &search.automorphisms,
+    );
+    Ok(ReferenceResult {
+        canonical_json: serde_json::to_string(&canonical)?,
+        input_to_canonical: search.input_to_canonical,
+        winning_trace: search.winning_trace,
+        automorphisms: search.automorphisms,
+        search_stats: search.search_stats,
+    })
 }
 
 fn reference_canonicalize(input: &InputArtifact) -> Result<ReferenceResult, ShadowError> {
@@ -668,6 +694,29 @@ fn validate_paper_i_partition(relations: &[BinaryRelation], n: usize) -> Result<
 }
 
 fn verify_automorphism(input: &InputArtifact, permutation: &[u32]) -> Result<(), ShadowError> {
+    if let ProfileInput::PaperIvMinimumWords(value) = &input.profile {
+        let degree = value.coordinate_count as usize;
+        validate_permutation(permutation, degree)
+            .map_err(|error| ShadowError::Certificate(error.to_string()))?;
+        let weights = value
+            .weighted_pair_section
+            .iter()
+            .map(|pair| ([pair.left, pair.right], pair.multiplicity))
+            .collect::<BTreeMap<_, _>>();
+        for pair in &value.weighted_pair_section {
+            let mut image = [
+                permutation[pair.left as usize],
+                permutation[pair.right as usize],
+            ];
+            image.sort_unstable();
+            if weights.get(&image) != Some(&pair.multiplicity) {
+                return Err(ShadowError::Certificate(
+                    "automorphism does not preserve Paper-IV pair weights".into(),
+                ));
+            }
+        }
+        return Ok(());
+    }
     let ProfileInput::PaperIOrientation(paper) = &input.profile else {
         return Err(ShadowError::Certificate(
             "automorphism replay is not enabled for this profile".into(),

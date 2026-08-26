@@ -14,17 +14,18 @@ schema is `sparse-shadow/v1`; the expanded canonical wrapper is
 `sparse-shadow-canonical/v2`, while its unchanged exhaustive proof is
 `sparse-shadow-certificate/v1`.
 
-Reconstruction output is `sparse-shadow-reconstruction/v2`. It contains a
-typed `sparse-shadow-paper-i-carrier/v1` payload with the six recovered
-antipodal axes in canonical coordinates, rather than only a carrier label.
+Paper-I reconstruction output is `sparse-shadow-reconstruction/v2`; Paper IV
+uses `sparse-shadow-paper-iv-reconstruction/v1`. Their typed carriers contain,
+respectively, the six antipodal axes and the full 183-point/line projective
+plane with its conic, polarity, six elliptic relations, and 78 passant rows.
 Automorphism, orbit, and point-stabilizer fields use raw input coordinates;
 `input_to_canonical` is the explicit bridge between the two bases.
 
-The first development gate enables only the hand-checkable Paper-I orientation
-fixtures: an uncalibrated shadow with residual `C2` and a calibrated triangle
-with exact oriented return. The other four typed profiles are represented in
-schema version 1 but remain explicitly gated until their frozen exported
-fixtures exist; failure diagnostics name the required export.
+Paper I and Paper IV are enabled. Paper IV consumes the paper-owned
+`papers/q13-passant-code/verification/sparse_shadow_export.json`, proves the
+full automorphism group by exhaustive weighted-scheme refinement, and recovers
+the marked `PG(2,13)` model with residual `PGL2(13)` marking torsor. Papers II,
+III, and V remain explicitly gated; diagnostics name their required exports.
 
 `fixtures/paper-i-golden-contract.json` freezes the enabled adapter's canonical
 identities, group and point-stabilizer summaries, vertex orbits, exhaustive
@@ -33,6 +34,9 @@ carriers. It also pins BLAKE3 digests of exact stdout bytes for validate,
 canonicalize, reconstruct, and equivalence commands. Changes to those values require
 an explicit contract review rather than merely remaining deterministic within
 one build.
+`fixtures/paper-iv-golden-contract.json` likewise freezes Paper IV's canonical
+identity, exhaustive counters, full group order, reconstruction census, exact
+CLI stdout digests, and nauty 2.9.3 comparison.
 
 ## Toolchain and commands
 

@@ -54,11 +54,11 @@ not describe same-implementation recomputation as independent certification.
 
 | prior-art consequence | C968 implementation state | evidence boundary |
 |---|---|---|
-| explicit individualization/refinement rather than opaque FFI | implemented for Paper I | producer exhausts 193 nodes; independent checker rederives the same leaf, trace, full 120-action group, and counters |
-| transporter and stabilizer as first-class outputs | implemented for Paper I | canonical wrapper v2 emits the input transporter, full-group generators/orbits, and point stabilizers for orbit representatives; wrapper replay recomputes them from the certified group |
-| exact projective/semilinear action metadata | schema only, fail-closed | Papers II--V name field moduli, encodings, matrices, and Frobenius powers but cannot execute until their complete exports and arithmetic checkers exist |
-| proof producer/checker separation comparable to `isocert` | implemented for Paper I only | `paper-i-ir-exhaustion/v1` uses a structurally separate raw-relation search and rejects result, trace, automorphism, counter, wrapper, equivalence, and reconstruction corruption |
-| named external canonical-labeling baseline | implemented for Paper I with nauty; bliss reserved | colored-incidence v1 is frozen; bundled nauty 2.9.3 independently matches raw/native-canonical digests and orders 120/6; no cross-engine timing claim is made |
+| explicit individualization/refinement rather than opaque FFI | implemented for Papers I and IV | Paper IV exhausts 3,901 nodes and 2,184 least leaves; its independent checker rederives the same leaf, trace, full group, and counters |
+| transporter and stabilizer as first-class outputs | implemented for Papers I and IV | canonical wrapper v2 emits the input transporter, full-group generators/orbits, and point stabilizers; wrapper replay recomputes them from the certified group |
+| exact projective/semilinear action metadata | executable for Paper IV; schema-gated for II, III, V | Paper IV matches its canonical weighted scheme to an exact symmetric-square GF(13) model and reconstructs the plane, conic, polarity, and marking torsor |
+| proof producer/checker separation comparable to `isocert` | implemented for Papers I and IV | the two Paper-IV searches use fixed-cell and ordered-boundary representations and reject result, trace, automorphism, counter, wrapper, equivalence, and reconstruction corruption |
+| named external canonical-labeling baseline | implemented for Papers I and IV with nauty; bliss reserved | nauty 2.9.3 matches raw/native-canonical digests and orders 120/6/2184; no cross-engine timing claim is made |
 
 This mapping records engineering influence, not novelty. In particular, the
 new point-stabilizer surface follows the Feulner/Vole action contract, while the

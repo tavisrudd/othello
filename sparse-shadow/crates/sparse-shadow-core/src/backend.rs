@@ -60,11 +60,11 @@ impl BackendComparison {
     }
 }
 
-/// Encode the enabled Paper-I relational shadow as a colored incidence graph.
+/// Encode an enabled Paper-I or Paper-IV shadow as a colored incidence graph.
 ///
-/// Original vertices retain their typed color/weight/sign data and calibration
-/// membership as color classes. Every relation edge becomes a vertex in a
-/// relation-specific color class joined to its two endpoints. Consequently,
+/// Original vertices retain their typed data as color classes. Every relation
+/// or weighted-pair edge becomes a vertex in a relation-specific color class
+/// joined to its two endpoints. Consequently,
 /// color-preserving graph automorphisms restrict exactly to automorphisms of
 /// the relational shadow.
 ///
@@ -76,6 +76,9 @@ pub fn encode_colored_incidence(
     input: &InputArtifact,
 ) -> Result<ColoredIncidenceGraph, ShadowError> {
     validate(input)?;
+    if let ProfileInput::PaperIvMinimumWords(value) = &input.profile {
+        return encode_paper_iv(value);
+    }
     let ProfileInput::PaperIOrientation(paper) = &input.profile else {
         return Err(ShadowError::Invalid(
             "colored-incidence v1 supports only the enabled Paper-I profile".into(),
@@ -156,6 +159,39 @@ pub fn encode_colored_incidence(
     })
 }
 
+fn encode_paper_iv(value: &crate::GatedPaperIv) -> Result<ColoredIncidenceGraph, ShadowError> {
+    let degree = value.coordinate_count as usize;
+    let original_vertex_nodes = (0..value.coordinate_count).collect::<Vec<_>>();
+    let mut colors = vec![0_u32; degree];
+    let mut edges = Vec::with_capacity(2 * value.weighted_pair_section.len());
+    for pair in &value.weighted_pair_section {
+        let relation_color = match pair.multiplicity {
+            6 => 1,
+            7 => 2,
+            8 => 3,
+            9 => 4,
+            12 => 5,
+            _ => {
+                return Err(ShadowError::Invalid(
+                    "Paper-IV incidence encoding found an unknown weight".into(),
+                ));
+            }
+        };
+        let edge_node = u32::try_from(colors.len())
+            .map_err(|_| ShadowError::Invalid("Paper-IV encoding exceeds u32".into()))?;
+        colors.push(relation_color);
+        edges.push([pair.left.min(edge_node), pair.left.max(edge_node)]);
+        edges.push([pair.right.min(edge_node), pair.right.max(edge_node)]);
+    }
+    edges.sort_unstable();
+    Ok(ColoredIncidenceGraph {
+        schema: BACKEND_GRAPH_SCHEMA_VERSION.into(),
+        colors,
+        edges,
+        original_vertex_nodes,
+    })
+}
+
 /// Bind two observations from one external engine to the authoritative native
 /// canonical artifact.
 ///
@@ -177,7 +213,7 @@ pub fn compare_external_backend(
     let comparison = BackendComparison {
         schema: BACKEND_COMPARISON_SCHEMA_VERSION.into(),
         encoding_schema: BACKEND_GRAPH_SCHEMA_VERSION.into(),
-        authoritative_backend: "native-paper-i-ir/v1".into(),
+        authoritative_backend: authoritative_backend(native)?.into(),
         native_canonical_id: native.canonical_id.clone(),
         external_backend,
         raw_input,
@@ -206,7 +242,7 @@ pub fn verify_backend_comparison(
         |digest: &str| digest.len() == 64 && digest.bytes().all(|byte| byte.is_ascii_hexdigit());
     if comparison.schema != BACKEND_COMPARISON_SCHEMA_VERSION
         || comparison.encoding_schema != BACKEND_GRAPH_SCHEMA_VERSION
-        || comparison.authoritative_backend != "native-paper-i-ir/v1"
+        || comparison.authoritative_backend != authoritative_backend(native)?
         || comparison.native_canonical_id != native.canonical_id
         || comparison.external_backend.engine_version.is_empty()
         || comparison.external_backend.configuration.is_empty()
@@ -232,4 +268,14 @@ pub fn verify_backend_comparison(
         ));
     }
     Ok(())
+}
+
+fn authoritative_backend(native: &CanonicalArtifact) -> Result<&'static str, ShadowError> {
+    match native.certificate.proof_system.as_str() {
+        "paper-i-ir-exhaustion/v1" => Ok("native-paper-i-ir/v1"),
+        "paper-iv-weighted-scheme-ir-exhaustion/v1" => Ok("native-paper-iv-weighted-scheme-ir/v1"),
+        _ => Err(ShadowError::Certificate(
+            "external comparison names an unsupported native proof system".into(),
+        )),
+    }
 }
