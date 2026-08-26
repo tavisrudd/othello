@@ -74,6 +74,15 @@ fn gf16() -> FieldSpec {
     }
 }
 
+fn gf32() -> FieldSpec {
+    FieldSpec {
+        p: 2,
+        degree: 5,
+        modulus: vec![1, 0, 1, 0, 0, 1],
+        encoding: "polynomial-basis-base-p-integer-v1".into(),
+    }
+}
+
 fn request(field: FieldSpec, redundancy: usize, syndrome: Vec<u32>) -> Request {
     Request {
         schema: REQUEST_SCHEMA.into(),
@@ -194,6 +203,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         r16_q16_syndrome[2] = 1;
         r16_q16_syndrome[15] = 2;
         let r16_q16 = request(gf16(), 16, r16_q16_syndrome);
+        let r17_q32 = request(
+            gf32(),
+            17,
+            (0..17).map(|i| (i * i + 3 * i + 1) % 32).collect(),
+        );
         rows.extend(terminal_rows(
             &r5_q8,
             8,
@@ -266,6 +280,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             elapsed_ns_per_iteration: q16_r16_elapsed / u128::from(args.iterations),
             candidates_examined: Some(q16_r16_canonicalization.transporters_examined),
             baseline: "full-length-boundary maximal-root chart; no R16 coding verdict",
+        });
+        let q32_r17_canonicalization = canonicalize_syndrome(&r17_q32, args.candidate_limit)?;
+        let q32_r17_elapsed = elapsed(args.iterations, || {
+            canonicalize_syndrome(&r17_q32, args.candidate_limit)
+        })?;
+        rows.push(BenchmarkRow {
+            operation: "r17_q32_characteristic_power_canonicalization".into(),
+            field_order: 32,
+            redundancy: 17,
+            elapsed_ns_total: q32_r17_elapsed,
+            elapsed_ns_per_iteration: q32_r17_elapsed / u128::from(args.iterations),
+            candidates_examined: Some(q32_r17_canonicalization.transporters_examined),
+            baseline: "characteristic-power rooted chart; no R17 coding verdict",
         });
     }
 

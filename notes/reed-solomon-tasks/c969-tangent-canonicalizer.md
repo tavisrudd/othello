@@ -258,8 +258,9 @@ The same argument is dimension-independent. If `n=p^a` in characteristic
 
 and `z -> z^n` is a Frobenius automorphism of every finite base field. Hence
 every nonzero divided-power degree-`n` form has a rational chart root, so the
-rootless stratum is empty at every redundancy `r=p^a+1`. An R17/GF(32)
-fixture freezes the first binary characteristic-power instance beyond R10.
+rootless stratum is empty at every redundancy `r=p^a+1`. The implementation
+detects this degree pattern and skips the rootless scan. An R17/GF(32) fixture
+freezes the first binary characteristic-power instance beyond R10.
 
 ### Multiple-root successor
 

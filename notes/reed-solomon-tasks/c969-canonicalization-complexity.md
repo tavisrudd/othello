@@ -21,6 +21,8 @@ The lex charts partition every form by maximal rational-root multiplicity.
 
 The `n` factor is only the elementary bound on the number of distinct rational
 roots. Pre-chart root discovery adds at most two passes over `P^1(F_q)`.
+When `n=p^a`, the Frobenius root-existence theorem skips the impossible
+rootless scan and enters the rooted charts directly.
 Consequently every request with `r>=5` and `q>=r` has an exact canonical form
 and replayable transporter after `O(d r q^2)` retained transports and `O(q)`
 root probes. The explicit `d(q^3-q)` enumerator is a defensive oracle, not a
@@ -94,4 +96,5 @@ normalized matrices.
 - GF(16)/R16 exercises the full-length `r=q` boundary and replays its reduced
   transporter without entering explicit enumeration.
 - GF(32)/R17 freezes the general Frobenius/Lucas fact that binary degree
-  `n=p^a` has no rootless divided-power stratum at redundancy `r=p^a+1`.
+  `n=p^a` has no rootless divided-power stratum at redundancy `r=p^a+1`; its
+  characteristic-two degenerate simple-root chart streams 4,960 transports.

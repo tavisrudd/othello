@@ -883,10 +883,12 @@ pub fn canonicalize_syndrome(
     if persistent == PersistentKind::Tangent {
         return canonicalize_tangent(&field, syndrome, transporter_limit);
     }
-    if let Some(canonicalization) =
-        canonicalize_rootless_form(&field, syndrome.clone(), transporter_limit)?
-    {
-        return Ok(canonicalization);
+    if !is_characteristic_power(syndrome.len() - 1, field.spec.p) {
+        if let Some(canonicalization) =
+            canonicalize_rootless_form(&field, syndrome.clone(), transporter_limit)?
+        {
+            return Ok(canonicalization);
+        }
     }
     if let Some(canonicalization) =
         canonicalize_simple_root_form(&field, syndrome.clone(), transporter_limit)?
@@ -899,6 +901,14 @@ pub fn canonicalize_syndrome(
         return Ok(canonicalization);
     }
     canonicalize_explicit(&field, syndrome, transporter_limit)
+}
+
+fn is_characteristic_power(mut degree: usize, characteristic: u32) -> bool {
+    let characteristic = characteristic as usize;
+    while degree > 1 && degree.is_multiple_of(characteristic) {
+        degree /= characteristic;
+    }
+    degree == 1
 }
 
 fn projective_rows(field: &Field) -> Vec<([u32; 2], [u32; 2])> {
@@ -2475,6 +2485,15 @@ mod tests {
         for a in 1..16 {
             assert_eq!(field.mul(a, field.inv(a).unwrap()), 1);
         }
+    }
+
+    #[test]
+    fn characteristic_power_degrees_are_detected() {
+        assert!(is_characteristic_power(4, 2));
+        assert!(is_characteristic_power(9, 3));
+        assert!(is_characteristic_power(25, 5));
+        assert!(!is_characteristic_power(8, 3));
+        assert!(!is_characteristic_power(12, 2));
     }
 
     #[test]

@@ -45,7 +45,8 @@ release-mode coverage also checks all 4,681 projective GF(8)/R5 and all 7,381
 projective GF(9)/R5 forms against full semilinear enumeration.
 An R17/GF(32) fixture also freezes the dimension-independent Lucas consequence
 that degree `p^a` divided-power forms have no rootless stratum in
-characteristic `p`.
+characteristic `p`; canonicalization detects that pattern and skips the
+impossible rootless scan.
 
 The four rational-root strata—rootless, simple, multiple, and pure power—give
 an exhaustive worst-case bound of `O(m*r*q^2)` exact transports for structural
