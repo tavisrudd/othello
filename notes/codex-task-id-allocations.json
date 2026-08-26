@@ -3608,8 +3608,17 @@
       "last": 973,
       "purpose": "prove simultaneous-marker PRS escape, quantify witnesses, and determine the all-level Lucas-carrier discriminator; defer manuscript integration to a separate successor",
       "sequence": 401
+    },
+    {
+      "count": 1,
+      "first": 974,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 974,
+      "purpose": "implement C973 simultaneous-marker locator in Projective Reed--Solomon Toolkit, certify it, then return computational evidence to C973",
+      "sequence": 402
     }
   ],
-  "next_id": 974,
+  "next_id": 975,
   "schema": "codex-task-id-allocations-v1"
 }
