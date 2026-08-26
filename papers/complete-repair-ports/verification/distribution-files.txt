@@ -30,6 +30,7 @@ algorithms/rust/Cargo.toml
 algorithms/rust/README.md
 algorithms/rust/benches/balanced_frontend.rs
 algorithms/rust/benches/defect_augmentation.rs
+algorithms/rust/benches/parallel_kernels.rs
 algorithms/rust/benches/scheduler_locality.rs
 algorithms/rust/benchmark_python.py
 algorithms/rust/evidence/benchmarks.json
