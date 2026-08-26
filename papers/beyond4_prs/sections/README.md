@@ -1,10 +1,12 @@
 # TeX source layout
 
 `main.tex` is the canonical preprint driver and `main-tit.tex` is the
-single-column IEEEtran review driver.  Both consume the same frontmatter,
-twelve active section files, one separate appendix file, acknowledgment, and
-bibliography.  The first eight entries form the body; the fixed-level proof
-files and verification section follow the appendix switch:
+single-column IEEEtran review driver. Both consume the same frontmatter,
+twelve active section files, acknowledgment, and bibliography. The canonical
+driver also prints the separate appendix of raw redundancy-nine coefficient
+arrays; the TIT driver points to its identical electronic-supplement copy.
+The first eight entries form the body; the fixed-level proof files and
+verification section follow the appendix switch:
 
 1. `01-introduction.tex`
 2. `02-overview.tex`

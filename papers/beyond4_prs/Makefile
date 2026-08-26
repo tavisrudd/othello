@@ -44,7 +44,7 @@ tit-check: lint
 	$(LATEXMK) $(TIT_LATEXMK_FLAGS) -jobname=$(TIT_PDF_BASENAME) main-tit.tex
 	@test -f $(TIT_PDF_BASENAME).log
 	@if grep -En 'Overfull|Underfull|LaTeX (Font )?Warning|Package .* Warning|undefined references|Citation .* undefined' $(TIT_PDF_BASENAME).log; then exit 1; fi
-	@pages=$$($(PDFINFO) $(TIT_PDF) | awk '/^Pages:/ {print $$2}'); test "$$pages" -le 50; echo "TIT single-column pages: $$pages / 50"
+	@pages=$$($(PDFINFO) $(TIT_PDF) | awk '/^Pages:/ {print $$2}'); echo "TIT single-column pages: $$pages / target < 50"; test "$$pages" -lt 50
 
 software-check:
 	$(CARGO) fmt --manifest-path $(SOFTWARE_MANIFEST) --all -- --check

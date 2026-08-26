@@ -85,11 +85,15 @@ Projective Reed--Solomon Toolkit now lives under
 library, executable, Clap interface, registries, lock, Rust pin, license,
 citation, and documentation are self-contained and expose no task identifiers.
 The paper and supplement now state and hash the exact software/theorem boundary,
-and the fast software, manuscript, and 74-artifact quick gates pass. Completion
-still requires a clean standalone paper export, a disposable history-filter
-extraction, disposition of the ignored slow regressions, and resolution or
-explicit disposition of the inherited TIT `51 / 50` page count. Publication,
-pushing, DOI minting, and theorem-domain broadening remain out of scope. Card:
+and the fast software, manuscript, and 74-artifact quick gates pass. Both the
+standalone paper export and a history-filtered software-only repository pass
+their fast gates without path repair. A stale 50-page TIT artifact rebuilt to
+51 pages; the review driver now points to, rather than reprints, the two raw
+GF(7) coefficient tables preserved in the canonical paper and supplement. The
+result is 49 pages under standard typography, with a corrected strict `< 50`
+gate. Completion still requires disposition of the five ignored slow
+regressions. Publication, pushing, DOI minting, and theorem-domain broadening
+remain out of scope. Card:
 `notes/reed-solomon-tasks/c970-beyond4-prs-software-packaging.md`.
 
 C886 is complete.  The paper now has a layered two-track exposition: a mature

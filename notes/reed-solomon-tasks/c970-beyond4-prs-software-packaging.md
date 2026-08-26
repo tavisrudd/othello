@@ -27,11 +27,25 @@ domain without broadening the deep-hole theorem domain. Formatting, warning-free
 Clippy, 31 fast tests, both manuscript builds, and the quick 74-artifact
 supplement gate pass.
 
-Open before completion: commit and test a fresh standalone paper export; run the
-disposable history-filter extraction gate; decide whether the five ignored slow
-regressions belong in this release window; and resolve or explicitly disposition
-the TIT build's reported `51 / 50` page count (the inherited Make recipe prints
-that count but does not fail on it).
+The deterministic exporter then produced a standalone paper repository at
+source commit `4dda2dec2764f0dcb08bfe923641943e91c2eeda`; its software and quick
+supplement gates pass without the monorepo. Filtering
+`software/projective-reed-solomon/` to the repository root with
+`git filter-repo` produced a second disposable repository whose formatting,
+warning-free Clippy, and 31-test gates pass without path repair. A CLI smoke
+test classifies the documented GF(7)/R5 tangent request as `DEEP` and emits a
+task-ID-free `prs-deep-certificate-v1` certificate.
+
+The TIT rebuild exposed a stale 50-page committed artifact whose source produced
+51 pages. The review driver now omits only the two tables of raw GF(7)
+redundancy-nine coefficient arrays, retaining them in the canonical paper and
+electronic supplement and pointing there from the unchanged proof. With standard
+IEEE theorem and bibliography typography restored, the TIT PDF is 49 pages. Its
+Make gate now enforces the strict target `< 50` instead of printing and masking a
+failed comparison.
+
+Open before completion: decide whether the five ignored slow regressions belong
+in this release window.
 
 ## Goal
 
