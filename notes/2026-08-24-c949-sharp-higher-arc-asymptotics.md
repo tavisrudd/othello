@@ -2200,8 +2200,8 @@ two sides,
 ```
 
 Thus no bounded or local Mason perturbation can realize any of the concurrent
-or triangular `(SR11)` branches.  This does not rule out the required global
-`Theta(q)` trade.
+or triangular `(SR11)` branches.  This first distance count alone does not
+rule out a global `Theta(q)` trade; minimality does so below.
 
 Minimality gives a robust strengthening.  Write
 
@@ -2256,62 +2256,51 @@ lines share at most one deleted point, inclusion--exclusion then gives
 |N|>=r|E|-binom(|E|,2),             O<=r|E|.   (SR24a-Mason-converted)
 ```
 
-This system has a sharp asymptotic consequence.  Suppose `eta=o(q)` and,
-along a subsequence, `e/q -> c` and `f/q -> g`.  If `g=0`,
-`(SR24a-Mason-orphans)` grows faster than the `O(q)` capacity in
-`(SR24a-Mason-converted)`, a contradiction.  If `g>0`, those two displays give
+The bounded converted-line geometry gives a stronger consequence than a
+linear stability constant.  Fix `C` and suppose `e<=Cq`.  Then `|N|=O_C(q)`,
+so `(SR24a-Mason-converted)` gives `|E|=O_C(1)`.  The orphan inequalities give
 
 ```text
-u >= ceil((1+c)/g+2),
-u+3+3c-6g <= |E|+o(1).                        (SR24a-Mason-limit)
+u(r-3) <= |E|r+4f,
 ```
 
-Since `g<=c`, the left side is at least
-`ceil(1/c+3)+3-3c-o(1)`.  If `c<1`, the union bound in
-`(SR24a-Mason-converted)` gives
+and hence `u=O_C(1)`.  Let `J` count the incidences of the `f` off-triangle
+additions with the deficient Mason blocks.  Since each such block contains
+at most three open-side additions,
 
 ```text
-|N|/r -> 3(1+c)<6,             |E|<=5
+D <= sum_(T in U)x_T <= J+3u.
 ```
 
-for all sufficiently large `q`.  But the orphan lower bound is strictly
-larger than `8-3c>5`, a contradiction.  Therefore
+Every off-triangle point lies on exactly four Mason `r`-secants.  At most
+`binom(u,2)` such points have all four secants in `U`, because each is the
+intersection of a pair of lines of `U`.  Every other off-triangle point
+contributes a missing incidence, so `f<=binom(u,2)+4f-J`.  Combining gives
 
 ```text
-eta=o(q)  implies
-e >= q-o(q),
-|B setminus S| >= 2q-o(q).                    (SR24a-Mason-essential-gap)
+D <= 3f+3u+binom(u,2).
 ```
 
-The equality boundary compresses further.  If `e/q -> 1`, then the union
-bound permits at most six converted `2r`-secants.  Write `f/q -> g` along a
-further subsequence.  The integer block bound and the orphan capacity become
+But the exact deficit and the zero-side filling inequality give
 
 ```text
-u >= ceil(2/g+2),
-|E| >= u+6-6g-o(1),                 |E|<=6.
+D-3f=q-2+e-f-2v-eta >= q-8-eta,
 ```
 
-Consequently `g>=5/6`: at least `5q/6-o(q)` of the additions are off the
-Mason zero triangle.  For every fixed `5/6<=g<1`, the same ceiling forces
-`|E|=6` eventually.  At the endpoint `g=1` the ceiling drops to four, so the
-argument proves only `4<=|E|<=6`; claiming six there would require a
-second-order estimate.  Thus
+which contradicts `u=O_C(1)` when `eta=o(q)`.  Since `C` was arbitrary,
 
 ```text
-e/q -> 1  implies
-f >= 5q/6-o(q),
-4 <= |E| <= 6, with |E|=6 if f/q stays below 1.       (SR24a-Mason-boundary)
+eta=o(q)  implies  e/q -> infinity.            (SR24a-Mason-superlinear-gap)
 ```
 
-Classifying these four-to-six converted-line configurations together with
-the nearly `2q` additions is the next Mason-specific construction gate.
+Thus every near-sharp complement is at superlinear symmetric-difference
+distance from every Mason large-root set.  This eliminates all `O(q)`
+Mason switches, rather than leaving a bounded converted-line equality case.
 
 Thus even the smallest possible triangle fill is not the start of a
-near-sharp construction: any Mason-based witness needs a further linear-size
-global trade which creates new essential `r`-secants.  This is a stability
-obstruction around Mason, not nonexistence of arbitrary near-sharp blocking
-sets.
+near-sharp construction: any Mason-based witness would require a superlinear
+global trade, beyond every `O(q)` scale.  This is a stability obstruction
+around Mason, not nonexistence of arbitrary near-sharp blocking sets.
 
 The first two line moments make the same boundary visible without choosing a
 trade.  For `delta=1-eta`, write `|B|=2r(q-1)+delta` and
@@ -5857,15 +5846,14 @@ family is lower priority.
   the bound improves to `2q-1+ceil((sqrt(q)-2)/3)`.  This closes the direct
   six-point and minimal-trade mechanisms.  On the complementary blocking-set
   side, essential-secants strengthen this across all `(SR11)` signatures:
-  any `eta=o(q)` Mason trade needs at least `2q-o(q)` additions,
-  since a smaller trade leaves quadratically many orphaned Mason points but
-  only constantly many old `2q/3`-secants can be converted to tight lines.
-  At equality, `(SR24a-Mason-boundary)` forces at least `5q/6-o(q)` additions
-  off the zero triangle and only four to six converted lines (exactly six
-  away from the endpoint off-triangle density one).  The remaining mystery
-  is whether this bounded line arrangement can satisfy all old `2r`-line
-  balances and minimality.  These are stability/separation theorems; they do
-  not classify arbitrary small roots or minimal blocking sets.
+  any `eta=o(q)` Mason trade has superlinear size:
+  `(SR24a-Mason-superlinear-gap)` proves `e/q -> infinity`.  Indeed a linear
+  trade permits only constantly many converted old `2q/3`-secants and hence
+  constantly many deficient partition blocks, while the four-block incidence
+  of the off-triangle additions forces a linear deficit outside them.  This
+  settles every `O(q)` Mason-switch mechanism.  It remains a separation
+  theorem around Mason, not a classification of arbitrary small roots or
+  minimal blocking sets.
   **Rejected shortcut — does the three-weight code lie close enough to the
   Griesmer bound to be rigid?**  The small root is exactly a projective
   `q`-ary `[q(q+2)/3,3,q^2/3]` code with nonzero weights
