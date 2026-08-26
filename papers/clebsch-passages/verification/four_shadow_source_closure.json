@@ -5,6 +5,7 @@
     "Mathlib.Data.Fintype.Card",
     "Mathlib.Data.Matrix.Basic",
     "Mathlib.Data.Matrix.Mul",
+    "Mathlib.LinearAlgebra.FiniteDimensional.Basic",
     "Mathlib.LinearAlgebra.Matrix.Notation",
     "Mathlib.Tactic.FinCases",
     "Mathlib.Tactic.Linarith",
@@ -12,7 +13,7 @@
     "Mathlib.Tactic.NormNum",
     "Mathlib.Tactic.Ring"
   ],
-  "module_count": 8,
+  "module_count": 11,
   "roots": [
     "RelativeConicArcs.Gates.FourShadowRecognition"
   ],
@@ -37,16 +38,34 @@
       "sha256": "f17562813c992c291f02e28231aab66c654e89826292fd55071818f0edcf2089"
     },
     {
+      "bytes": 4031,
+      "module": "RelativeConicArcs.ClebschWeightedJacobian",
+      "path": "RelativeConicArcs/ClebschWeightedJacobian.lean",
+      "sha256": "d41902350a66c03bc38886a06f957c4bfd9367fe0e918b46c8864a525e4138fc"
+    },
+    {
+      "bytes": 17674,
+      "module": "RelativeConicArcs.ClebschWeightedJacobianActual",
+      "path": "RelativeConicArcs/ClebschWeightedJacobianActual.lean",
+      "sha256": "286539d6072d87ae3b2d841892c9a84987081f43cc6c8c3a85a9a8fb09b5f725"
+    },
+    {
+      "bytes": 4907,
+      "module": "RelativeConicArcs.ClebschWeightedJacobianFull",
+      "path": "RelativeConicArcs/ClebschWeightedJacobianFull.lean",
+      "sha256": "9b153678495a336e69c4b6367d58b6e6ef52dc881311ef579b949b5c361caaac"
+    },
+    {
       "bytes": 78548,
       "module": "RelativeConicArcs.FourShadowRecognition",
       "path": "RelativeConicArcs/FourShadowRecognition.lean",
       "sha256": "5c257c5e8bc7ecdeebb8ca693e20696b280b0a2ebe24983d347039b66a75a601"
     },
     {
-      "bytes": 5683,
+      "bytes": 6512,
       "module": "RelativeConicArcs.Gates.FourShadowRecognition",
       "path": "RelativeConicArcs/Gates/FourShadowRecognition.lean",
-      "sha256": "ac141e513f305f8d433fa71b7cf5f46eb6dc27fda28af7e2e73d00c358de8463"
+      "sha256": "3630a72fa99325cbc698fc2abc7c7ded64b83c1fb038d93fd293feb31463468a"
     },
     {
       "bytes": 5030,

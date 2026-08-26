@@ -1,0 +1,87 @@
+{
+  "profile": {
+    "adapter": "paper_iii_four_shadow",
+    "input": {
+      "action": {
+        "degree": 6,
+        "generators": [
+          [
+            1,
+            0,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            0
+          ]
+        ],
+        "kind": "vertex_permutations"
+      },
+      "aligned_four_sets": [],
+      "branch_sextic": "J_0=0",
+      "calibrated_triangle_product": -1,
+      "complement_ambiguity": {
+        "kind": "orientation_c2"
+      },
+      "fibre_quadratic_algebra": "Q[t]/(t^2-t-1)",
+      "gate": {
+        "enabled": true,
+        "reason": "paper-owned branch-fibre and aligned-four-set export frozen",
+        "required_export": "papers/clebsch-passages/verification/sparse_shadow_export.json"
+      },
+      "minimality_collisions": [
+        {
+          "boundary": "six_vertices_aligned_family",
+          "common_restricted_shadow_blake3": "c7bcc87f15491ddc26ab3eb04aaca0dc4b2a6961aa6d15f0e1a2b75d24718a87",
+          "distinguishing_datum": "four-shadow conference proportionality plus calibrated triangle product",
+          "left_artifact": "aligned_faithfulness.six_point_witness.graph_G",
+          "right_artifact": "aligned_faithfulness.six_point_witness.graph_H"
+        }
+      ],
+      "rational_fibre_point": [
+        {
+          "denominator": 5,
+          "numerator": 4
+        },
+        {
+          "denominator": 5,
+          "numerator": -1
+        },
+        {
+          "denominator": 5,
+          "numerator": -1
+        },
+        {
+          "denominator": 5,
+          "numerator": -1
+        },
+        {
+          "denominator": 5,
+          "numerator": -1
+        }
+      ],
+      "recovered_twist": "z^2=5J_0",
+      "recovered_two_graph": "the order-six conference switching class recovered by four-shadow proportionality",
+      "source": {
+        "artifact": "papers/clebsch-passages/verification/evidence/orientation_source.json",
+        "paper": "III",
+        "sha256": "37c38ff37a9235f94a772eb473e0d6484420978670027e990ee93e89bbad4193",
+        "theorem": "arithmetic descent, four-shadow recognition, and calibrated two-graph return"
+      },
+      "twist_ambiguity": {
+        "denominator": "(Q^times)^2",
+        "kind": "homogeneous_fibre",
+        "numerator": "Q^times"
+      },
+      "vertex_count": 6
+    }
+  },
+  "schema": "sparse-shadow/v1"
+}

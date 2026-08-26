@@ -111,8 +111,10 @@ two bounds behind the triangle Ramsey equality on six labelled points, and the
 aligned anchor they produce, are kernel-checked and printed by the gate; the
 finite-set extension, the normalization from an arbitrary labelled two-graph,
 and the distinctness of the six anchor points from each other and from the
-root remain human inputs, as do the global Hitchin correspondences, face-axis
-addition theorem, and raw spherical moment.
+root remain human inputs, as do the global Hitchin correspondences and
+face-axis addition theorem.  The normalized integral of every even homogeneous
+polynomial on the two-sphere is now kernel checked through Gaussian moments and
+polar decomposition.
 `passages_source_closure.json` is the exact project-local transitive import
 closure produced by the repository import-closure tool; the verifier pins the
 inventory, every listed source, and its own bytes.
@@ -215,11 +217,25 @@ pentagon classification in both directions.  As with the other two gates,
 every audited terminal depends only on `propext`, `Classical.choice` and
 `Quot.sound`, and the replay enforces that by refusing compiled evaluation
 anywhere in the pinned closure, and any external import outside Mathlib,
-rather than merely recording the boundary.  The rank-14 weighted Jacobian calculation and any global
-classification of remote weighted solutions are not formalized.
+rather than merely recording the boundary.  The full rank-14 weighted
+Jacobian calculation is kernel checked and identified with both actual
+weighted cubic-equality branches.  A global classification of remote weighted
+solutions is not formalized.
 `four_shadow_formal.json`, `four_shadow_axioms.txt` and
 `four_shadow_source_closure.json` play the same roles as their counterparts
 above.
+
+The paper-owned sparse-shadow export is generated and replayed with
+
+```text
+python3 verification/generate_sparse_shadow_export.py \
+  --check verification/sparse_shadow_export.json
+```
+
+It freezes the normalized rational fibre point, golden quadratic algebra,
+order-six conference four-shadow, relabelling action, calibrated triangle
+product, and the sharp six-point aligned-family collision used by the
+current-paper adapter.
 
 Each gate's axiom report is generated from a tracked build log rather than
 written by hand.  `evidence/gate_stdout/passages.stdout.txt`,
