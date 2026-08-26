@@ -39,7 +39,8 @@ proofs apply unchanged. Coding operations (`distance`, `decode`, and
 canonical form is promoted to a deep-hole verdict without a theorem-domain
 row. R11 tangent and sigma fixtures and R12--R13 multiple-root fixtures over
 `F_13` are checked against all 2,184 explicit PGL transports. A slow ignored
-regression checks GF(16)/R11 against all 16,320 semilinear transports.
+regression checks GF(16)/R11 against all 16,320 semilinear transports, and a
+GF(16)/R16 fixture exercises the full-length `r=q` structural boundary.
 
 The four rational-root strata—rootless, simple, multiple, and pure power—give
 an exhaustive worst-case bound of `O(m*r*q^2)` exact transports for structural

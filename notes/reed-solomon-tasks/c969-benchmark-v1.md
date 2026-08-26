@@ -57,6 +57,7 @@ The optional polynomial-basis extension-field pass adds:
 | end-to-end classification | 8 | 5 | 741,621 | -- |
 | positive deep-certificate replay | 8 | 5 | 717,238 | -- |
 | Lucas-degenerate canonicalization | 9 | 5 | 1,267,369 | 144 |
+| full-length structural canonicalization | 16 | 16 | 13,072,870 | 60 |
 
 The terminal fixtures are respectively the R5 tangent, R6 tangent, and frozen
 R7 sporadic representative. Their one-prefix selector outcomes are favorable
@@ -88,5 +89,6 @@ dimension-independent structural canonicalization; they do not assert an R11
 covering radius or coding verdict. The q=8 maximal-root chart reduces the old
 explicit 1,512-transport path to 42 exact transports. A wider q/field/redundancy
 grid remains open, but the q=9 row separately exercises the simultaneous
-Lucas-degenerate `O(m r q^2)` branch. Bit-operation accounting and comparison
-with external decoder software also remain open benchmark work.
+Lucas-degenerate `O(m r q^2)` branch, while GF(16)/R16 exercises the `r=q`
+structural boundary over a nonprime field. Comparison with external decoder
+software remains open benchmark work.

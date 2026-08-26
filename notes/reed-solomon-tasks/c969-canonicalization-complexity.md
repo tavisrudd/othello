@@ -70,9 +70,10 @@ O((d r q^2 + q) (r^2 + r log q) d^2)
 
 base-prime coefficient operations. This is a word-operation bound for the
 crate's `u32` field representation, not a claim about asymptotically fast
-finite-field arithmetic. The reduced charts use `O(r+q^2)` transient storage
-in the degenerate branch; only the defensive explicit oracle materializes
-`Theta(q^3)` normalized matrices.
+finite-field arithmetic. Degenerate affine stabilizers are streamed, so the
+reduced charts use `O(r+q)` transient storage, including the `q+1` projective
+root rows. Only the defensive explicit oracle materializes `Theta(q^3)`
+normalized matrices.
 
 ## Frozen checks
 
@@ -82,4 +83,5 @@ in the degenerate branch; only the defensive explicit oracle materializes
   all 1,440 semilinear transports;
 - q=13/R11--R13 tangent, sigma, and multiple-root forms agree with full PGL;
 - the slow GF(16)/R11 regression agrees with all 16,320 semilinear transports.
-
+- GF(16)/R16 exercises the full-length `r=q` boundary and replays its reduced
+  transporter without entering explicit enumeration.

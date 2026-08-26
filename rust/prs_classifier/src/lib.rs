@@ -1041,27 +1041,25 @@ fn canonicalize_simple_root_form(
             if degenerate_root_count != 0 && base_candidate[2] != 0 {
                 continue;
             }
-            let parameters = if field.spec.p == 2 && base_candidate[2] == 0 {
-                (1..field.order())
-                    .flat_map(|scale| (0..field.order()).map(move |shift| (scale, shift)))
-                    .collect::<Vec<_>>()
-            } else if field.spec.p == 2 {
-                let scale = field
-                    .inv(base_candidate[2])
-                    .ok_or(Error::BadCanonicalizationWitness)?;
-                (0..field.order())
-                    .map(|shift| (scale, shift))
-                    .collect::<Vec<_>>()
-            } else {
-                let two_inverse = field.inv(field.add(1, 1)).expect("odd characteristic");
-                (1..field.order())
-                    .map(|scale| {
+            let parameters: Box<dyn Iterator<Item = (u32, u32)> + '_> =
+                if field.spec.p == 2 && base_candidate[2] == 0 {
+                    Box::new(
+                        (1..field.order())
+                            .flat_map(|scale| (0..field.order()).map(move |shift| (scale, shift))),
+                    )
+                } else if field.spec.p == 2 {
+                    let scale = field
+                        .inv(base_candidate[2])
+                        .ok_or(Error::BadCanonicalizationWitness)?;
+                    Box::new((0..field.order()).map(move |shift| (scale, shift)))
+                } else {
+                    let two_inverse = field.inv(field.add(1, 1)).expect("odd characteristic");
+                    Box::new((1..field.order()).map(move |scale| {
                         let shift =
                             field.neg(field.mul(field.mul(scale, base_candidate[2]), two_inverse));
                         (scale, shift)
-                    })
-                    .collect::<Vec<_>>()
-            };
+                    }))
+                };
             for (scale, shift) in parameters {
                 let matrix = normalize_matrix(
                     field,
@@ -1191,29 +1189,26 @@ fn canonicalize_multiple_root_form(
             if degenerate_root_count != 0 && next != Some(0) {
                 continue;
             }
-            let parameters = if pure_power {
-                vec![(1, 0)]
+            let parameters: Box<dyn Iterator<Item = (u32, u32)> + '_> = if pure_power {
+                Box::new(std::iter::once((1, 0)))
             } else if let Some(inverse) = coefficient_inverse {
-                (1..field.order())
-                    .map(|scale| {
-                        let shift = field.neg(field.mul(
-                            field.mul(scale, next.expect("non-pure form has successor")),
-                            inverse,
-                        ));
-                        (scale, shift)
-                    })
-                    .collect::<Vec<_>>()
+                Box::new((1..field.order()).map(move |scale| {
+                    let shift = field.neg(field.mul(
+                        field.mul(scale, next.expect("non-pure form has successor")),
+                        inverse,
+                    ));
+                    (scale, shift)
+                }))
             } else if next == Some(0) {
-                (1..field.order())
-                    .flat_map(|scale| (0..field.order()).map(move |shift| (scale, shift)))
-                    .collect::<Vec<_>>()
+                Box::new(
+                    (1..field.order())
+                        .flat_map(|scale| (0..field.order()).map(move |shift| (scale, shift))),
+                )
             } else {
                 let scale = field
                     .inv(next.expect("non-pure form has successor"))
                     .ok_or(Error::BadCanonicalizationWitness)?;
-                (0..field.order())
-                    .map(|shift| (scale, shift))
-                    .collect::<Vec<_>>()
+                Box::new((0..field.order()).map(move |shift| (scale, shift)))
             };
             for (scale, shift) in parameters {
                 let matrix = normalize_matrix(
@@ -2704,6 +2699,32 @@ mod tests {
         let explicit = canonicalize_explicit(&field, syndrome, 20_000).unwrap();
         assert_eq!(reduced.canonical_syndrome, explicit.canonical_syndrome);
         assert!(reduced.transporters_examined < explicit.transporters_examined);
+    }
+
+    #[test]
+    fn structural_canonicalization_replays_at_gf16_r16_boundary() {
+        let field_spec = FieldSpec {
+            p: 2,
+            degree: 4,
+            modulus: vec![1, 1, 0, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let field = Field::new(field_spec.clone()).unwrap();
+        let mut syndrome = vec![0; 16];
+        syndrome[2] = 1;
+        syndrome[15] = 2;
+        let canonicalization =
+            canonicalize_syndrome(&request(field_spec, 16, syndrome.clone()), 20_000).unwrap();
+        let (replayed, scale) = apply_semilinear(
+            &field,
+            &syndrome,
+            canonicalization.transporter.frobenius_exponent,
+            canonicalization.transporter.matrix,
+        )
+        .unwrap();
+        assert_eq!(replayed, canonicalization.canonical_syndrome);
+        assert_eq!(scale, canonicalization.transporter.projective_output_scale);
+        assert!(!canonicalization.complexity.starts_with("explicit PGL"));
     }
 
     #[test]

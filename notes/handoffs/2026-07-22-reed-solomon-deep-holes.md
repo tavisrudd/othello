@@ -1168,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, exhaustive persistent-sigma `O(mq^2)`, and exhaustive binary-form lex canonicalizers green, including both degenerate-successor stabilizers, a worst-case `O(m r q^2)` transport bound, and `O(r^2+r log q)` field operations per transport; structural canonicalization supports every `r>=5`, with q13/R11--R13 and GF16/R11 full-orbit regressions, while coding verdicts remain R5--R10 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, exhaustive persistent-sigma `O(mq^2)`, and exhaustive binary-form lex canonicalizers green, including both degenerate-successor stabilizers, a worst-case `O(m r q^2)` transport bound, and `O(r^2+r log q)` field operations per transport; structural canonicalization supports every `r>=5`, with q13/R11--R13 and GF16/R11 full-orbit regressions plus the GF16/R16 full-length boundary, while coding verdicts remain R5--R10 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1236,7 +1236,8 @@ including characteristic-two simple-root and multiple-root Lucas degenerations,
 gives `O(m r q^2)` exact transports, and adjacent-row evaluation costs
 `O(r^2+r log q)` field operations per transport. Structural canonicalization
 extends to every `r>=5`, with q13/R11--R13 and GF16/R11 full-orbit regressions.
-Preserve the explicit enumerator as a reference oracle. Keep coding verdicts
+GF16/R16 also freezes the full-length `r=q` boundary. Preserve the explicit
+enumerator as a reference oracle. Keep coding verdicts
 R5--R10 unless a new covering-radius theorem is separately frozen. Keep the
 general C607 split-factorization exponent theorem separate.  C915's three
 independent Version 2 audits remain the

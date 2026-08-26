@@ -65,6 +65,15 @@ fn gf9() -> FieldSpec {
     }
 }
 
+fn gf16() -> FieldSpec {
+    FieldSpec {
+        p: 2,
+        degree: 4,
+        modulus: vec![1, 1, 0, 0, 1],
+        encoding: "polynomial-basis-base-p-integer-v1".into(),
+    }
+}
+
 fn request(field: FieldSpec, redundancy: usize, syndrome: Vec<u32>) -> Request {
     Request {
         schema: REQUEST_SCHEMA.into(),
@@ -181,6 +190,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if args.extension_fields {
         let r5_q8 = request(gf8(), 5, vec![0, 0, 1, 0, 0]);
         let r5_q9_wild = request(gf9(), 5, vec![0, 0, 1, 0, 4]);
+        let mut r16_q16_syndrome = vec![0; 16];
+        r16_q16_syndrome[2] = 1;
+        r16_q16_syndrome[15] = 2;
+        let r16_q16 = request(gf16(), 16, r16_q16_syndrome);
         rows.extend(terminal_rows(
             &r5_q8,
             8,
@@ -240,6 +253,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             elapsed_ns_per_iteration: q9_wild_elapsed / u128::from(args.iterations),
             candidates_examined: Some(q9_wild_canonicalization.transporters_examined),
             baseline: "Lucas-degenerate maximal-root stabilizers: O(m*r*q^2)",
+        });
+        let q16_r16_canonicalization = canonicalize_syndrome(&r16_q16, args.candidate_limit)?;
+        let q16_r16_elapsed = elapsed(args.iterations, || {
+            canonicalize_syndrome(&r16_q16, args.candidate_limit)
+        })?;
+        rows.push(BenchmarkRow {
+            operation: "r16_q16_extension_structural_canonicalization".into(),
+            field_order: 16,
+            redundancy: 16,
+            elapsed_ns_total: q16_r16_elapsed,
+            elapsed_ns_per_iteration: q16_r16_elapsed / u128::from(args.iterations),
+            candidates_examined: Some(q16_r16_canonicalization.transporters_examined),
+            baseline: "full-length-boundary maximal-root chart; no R16 coding verdict",
         });
     }
 
