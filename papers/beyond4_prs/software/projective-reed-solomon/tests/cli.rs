@@ -16,6 +16,19 @@ const REQUEST: &str = r#"{
   "syndrome": [0, 0, 0, 1, 0]
 }"#;
 
+const SHALLOW_REQUEST: &str = r#"{
+  "schema": "projective-reed-solomon-request-v1",
+  "field": {
+    "p": 7,
+    "degree": 1,
+    "modulus": [0, 1],
+    "encoding": "polynomial-basis-base-p-integer-v1"
+  },
+  "redundancy": 5,
+  "evaluation": "full-projective-nrc-v1",
+  "syndrome": [1, 0, 0, 0, 0]
+}"#;
+
 fn binary() -> Command {
     Command::new(env!("CARGO_BIN_EXE_projective-reed-solomon"))
 }
@@ -118,4 +131,28 @@ fn canonicalize_accepts_a_json_file() {
         Some(5)
     );
     assert!(value["transporter"].is_object());
+}
+
+#[test]
+fn distance_and_decode_emit_the_same_replayable_locator_certificate() {
+    let distance = run_with_stdin(&["--compact", "distance"], SHALLOW_REQUEST);
+    let decode = run_with_stdin(&["--compact", "decode"], SHALLOW_REQUEST);
+    assert!(distance.status.success());
+    assert!(decode.status.success());
+    let distance_value: Value =
+        serde_json::from_slice(&distance.stdout).expect("distance certificate JSON");
+    let decode_value: Value =
+        serde_json::from_slice(&decode.stdout).expect("decode certificate JSON");
+    assert_eq!(distance_value, decode_value);
+    assert_eq!(distance_value["distance"], 1);
+    assert_eq!(
+        distance_value["schema"],
+        "projective-reed-solomon-locator-certificate-v1"
+    );
+
+    let verification = run_with_stdin(
+        &["--compact", "verify-certificate"],
+        &serde_json::to_string(&distance_value).expect("certificate must serialize"),
+    );
+    assert!(verification.status.success());
 }
