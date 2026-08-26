@@ -2248,23 +2248,22 @@ Since `B` is minimal, every orphan must instead lie on a former Mason
 ```
 
 If `E` is the set of these converted lines, pair counting on their at least
-`r` deleted points first makes `|E|=O(1)`.  Since two distinct projective
-lines share at most one deleted point, inclusion--exclusion then gives
+`r` deleted points and inclusion--exclusion give
 
 ```text
 |E| binom(r,2)<=binom(|N|,2),
 |N|>=r|E|-binom(|E|,2),             O<=r|E|.   (SR24a-Mason-converted)
 ```
 
-The bounded converted-line geometry gives a stronger consequence than a
-linear stability constant.  Fix `C` and suppose `e<=Cq`.  Then `|N|=O_C(q)`,
-so `(SR24a-Mason-converted)` gives `|E|=O_C(1)`.  The orphan inequalities give
+The converted-line geometry gives a quantitative stability gap.  Put
+`z=1+e/q`.  For `eta=o(q)`, `|N|=O(qz)`, so pair counting first gives
+`|E|=O(z^2)`.  The orphan inequalities give
 
 ```text
 u(r-3) <= |E|r+4f,
 ```
 
-and hence `u=O_C(1)`.  Let `J` count the incidences of the `f` off-triangle
+Let `J` count the incidences of the `f` off-triangle
 additions with the deficient Mason blocks.  Since each such block contains
 at most three open-side additions,
 
@@ -2287,17 +2286,28 @@ But the exact deficit and the zero-side filling inequality give
 D-3f=q-2+e-f-2v-eta >= q-8-eta,
 ```
 
-which contradicts `u=O_C(1)` when `eta=o(q)`.  Since `C` was arbitrary,
+In particular this forces `u=Omega(sqrt(q))`.  If the claimed quantitative
+bound failed, a subsequence would have `e=o(q^(3/2))`, hence
+`z=o(sqrt(q))`.  On that subsequence `|E|=O(z^2)=o(q)`, so eventually
+`|E|<=r`; the union inequality in `(SR24a-Mason-converted)` improves to
+
+```text
+|N| >= r|E|-binom(|E|,2) >= r|E|/2,
+```
+
+so `|E|=O(z)`.  Since `f<=e`, the orphan inequality now gives `u=O(z)`.
+The lower bound `u=Omega(sqrt(q))` completes the bootstrap.  Therefore
 
 ```text
 eta=o(q)  implies
-e/q -> infinity,
-|B triangle S|/q=(2q-7+2e+eta)/q -> infinity. (SR24a-Mason-superlinear-gap)
+e=Omega(q^(3/2)),
+|B triangle S|=2q-7+2e+eta=Omega(q^(3/2)).
+                                                (SR24a-Mason-quantitative-gap)
 ```
 
-Thus every near-sharp complement is at superlinear symmetric-difference
-distance from every Mason large-root set.  This eliminates all `O(q)`
-Mason switches, rather than leaving a bounded converted-line equality case.
+Thus every near-sharp complement is at least order `q^(3/2)` in symmetric
+difference from every Mason large-root set.  This eliminates every sub-
+`q^(3/2)` Mason switch.
 
 The exact missing bridge to a global contradiction is now visible.  If `M`
 is the point-line incidence matrix, `M^T M=qI+J` gives, for any Mason root
@@ -2315,7 +2325,7 @@ three-line residue core do not control this mixed term.  Even mapping a Mason
 zero triangle to the triangle named by `(SR11)` gives only the lower fill
 bound `(SR24a-Mason-distance)`, not an upper distance bound.  A theorem that
 every near-sharp minimal blocker is `O(q)`-close to some Mason root would,
-together with `(SR24a-Mason-superlinear-gap)`, prove global nonexistence of
+together with `(SR24a-Mason-quantitative-gap)`, prove global nonexistence of
 the near-sharp regime.  It is therefore the missing classification theorem,
 not a consequence that may be assumed from the present moments.
 
@@ -5884,18 +5894,18 @@ family is lower priority.
   the bound improves to `2q-1+ceil((sqrt(q)-2)/3)`.  This closes the direct
   six-point and minimal-trade mechanisms.  On the complementary blocking-set
   side, essential-secants strengthen this across all `(SR11)` signatures:
-  any `eta=o(q)` Mason trade has superlinear size:
-  `(SR24a-Mason-superlinear-gap)` proves `e/q -> infinity`.  Indeed a linear
-  trade permits only constantly many converted old `2q/3`-secants and hence
-  constantly many deficient partition blocks, while the four-block incidence
-  of the off-triangle additions forces a linear deficit outside them.  This
-  settles every `O(q)` Mason-switch mechanism.  It remains a separation
+  any `eta=o(q)` Mason trade has size `Omega(q^(3/2))` by
+  `(SR24a-Mason-quantitative-gap)`.  Pair counting and inclusion--exclusion
+  bound the converted old `2q/3`-secants; orphan capacity bounds the deficient
+  partition blocks; the four-block incidence of the off-triangle additions
+  then forces at least `sqrt(q)` such blocks.  This settles every
+  `o(q^(3/2))` Mason-switch mechanism.  It remains a separation
   theorem around Mason, not a classification of arbitrary small roots or
   minimal blocking sets.  The exact absent bridge is the mixed correlation
   `(SR24a-Mason-mixed)`: intrinsic line moments and `(SR11)` do not bound
   `sum |B intersect ell||S intersect ell|` for any particular Mason `S`.
   Proving an `O(q)` Mason-attraction theorem would combine with the
-  superlinear gap to exclude the full near-sharp regime, so it cannot be
+  quantitative gap to exclude the full near-sharp regime, so it cannot be
   smuggled in as a routine stability corollary.  A formal three-weight line
   spectrum at `eta=1` satisfies both scalar moments and the essential-line
   incidence budget while containing no Mason correlation variable; it is a
