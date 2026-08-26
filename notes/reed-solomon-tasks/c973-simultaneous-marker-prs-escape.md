@@ -12,7 +12,10 @@ witness-abundance lower bound.  The companion
 `c973-2026-08-26-first-lucas-boundary.md` computes the exact R11 carriers in
 characteristics `2,3,7`, closes the binary block for `q>=128` and the
 nonpersistent characteristic-three block for `q>=81`, and closes the
-characteristic-seven block for `q>=343` by a pointed R9 slice.
+characteristic-seven block for `q>=343` by a pointed R9 slice.  The same
+report computes R12: its new characteristic-five block is transverse and
+shallow outside the persistent locus for `q>=125`; the `2/3/7` blocks reduce
+to one-extra-root versions of the R11 constructions.
 
 ## Objective
 

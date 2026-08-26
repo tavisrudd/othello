@@ -189,3 +189,55 @@ on a coherent lower-carrier slice.
 No claim is made here for the small binary fields, for characteristic-seven
 fields below `343`, or for an all-digit-pattern theorem.  No computation or
 manuscript edit was used.
+
+## 5. Next digit block: exact R12 reduction
+
+For redundancy twelve, `d=r-2=10`.  Lucas' criterion gives
+
+\[
+\begin{array}{c|c|c}
+p&\text{nonzero positions in Pascal row }10
+ &\mathcal M^{\max}_{12,p}\\ \hline
+2&\{0,2,8,10\}&\mathbf P\langle e_4,e_5,e_6,e_7\rangle,\\
+3&\{0,1,9,10\}&\mathbf P\langle e_3,\ldots,e_8\rangle,\\
+5&\{0,5,10\}&
+ \mathbf P\langle e_2,e_3,e_4,e_7,e_8,e_9\rangle,\\
+7&\{0,1,2,3,7,8,9,10\}&\mathbf P\langle e_5,e_6\rangle.
+\end{array}                                                \tag{12}
+\]
+
+All other characteristics have empty maximal carrier.  Contraction takes the
+three coherent rows to the already computed R11 supports:
+
+\[
+\begin{aligned}
+\{4,5,6,7\}&\longmapsto\{3,4,5,6,7\} &&(p=2),\\
+\{3,\ldots,8\}&\longmapsto\{2,\ldots,8\} &&(p=3),\\
+\{5,6\}&\longmapsto\{4,5,6\} &&(p=7).
+\end{aligned}                                              \tag{13}
+\]
+
+The characteristic-five support is fresh: its contraction support is
+`{1,...,4} union {6,...,9}`, while the lower R11 characteristic-five carrier
+is empty.  Outside the persistent intersection, choose a contraction away
+from the at-most-three persistent parameters and apply the pointed
+simultaneous theorem at lower redundancy eleven with one forbidden root.  Its
+budget is
+
+\[
+ 12+6((11-5)+1)=54,
+\]
+
+so the integer threshold is `54+2+floor(2 sqrt(54))=70`; the first
+characteristic-five field above it is `125`.  Therefore
+
+\[
+ (\mathcal M^{\max}_{12,5}\setminus\mathcal P_{12})(F_q)
+ \cap\operatorname{SplitFree}_{12}(F_q)=\varnothing
+ \qquad(q\ge125).                                         \tag{14}
+\]
+
+The exact next obstruction is consequently pointed abundance on the three
+R11 coherent constructions: their unpointed witnesses are now proved, but an
+R12 lift must avoid one newly retained root.  This is a reusable one-extra-root
+gate, not a request for R12 ambient enumeration or new orbit classification.
