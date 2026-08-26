@@ -121,14 +121,25 @@ theorem.
 ## 3. Characteristic-seven closure by a pointed R9 slice
 
 For `p=7`, choose the upper contraction marker at infinity.  A syndrome in
-`P<e_4,e_5,e_6>` contracts into the proved R10 carrier.  Choose its internal
-R10 marker to be zero.  The second contraction lies in the characteristic-
-seven R9 binary-quartic carrier `P<e_2,...,e_6>`.
+`P<e_4,e_5,e_6>` contracts into the proved R10 carrier.  Its marker-collision
+divisor is proper in characteristic seven; after the existing exact-gcd route,
+the collision and fixed-factor exclusions are contained in the proved R10
+parameter budget below `3r-5=25`.  Choose a finite internal R10 marker away
+from them.  An affine translation, which fixes the retained point at infinity,
+moves that internal marker to zero.  The second contraction lies in the
+characteristic-seven R9 binary-quartic carrier `P<e_2,...,e_6>`, and zero is
+not a fixed factor of its septic system.
 
 The current R9 rational-base selector has total degree at most `102` in four
-ordered finite roots.  Multiplying it by the four factors which require those
-roots to avoid zero raises the total degree to at most `106`.  Hence a good
-distinct rational base avoiding zero exists for `q>106`.
+ordered finite roots.  In the residual-quadratic notation, at least one
+coefficient of `N_u(x)` as a polynomial in the moving root is nonzero on the
+base space.  Otherwise every squarefree member parametrized by the nonempty
+good-slice open would contain zero, forcing zero to be a fixed factor of the
+whole pencil.  Such a coefficient has total base degree at most `8`.
+Multiplying the existing selector by this coefficient and by the four factors
+which require the fixed roots to avoid zero raises the total degree to at most
+`102+8+4=114`.  Hence a good distinct rational base with a nonzero
+fixed-root resultant exists for `q>114`.
 
 On the resulting genus-at-most-one moving-root slice, the existing deletion
 degree is `32`.  Requiring the moving root to avoid zero removes at most two
