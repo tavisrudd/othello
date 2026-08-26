@@ -2895,6 +2895,28 @@ This is the same rank-one/cubic shape suggested by the finite carrier cores,
 but it is not yet a Mobius theorem: `[a_r:b_r]` has degree bounds `(2,1)`,
 and another identity is needed to remove or control the quadratic term.
 
+The omitted slope at `T` does not supply that identity for free.  In the
+affine pencil through `T`, the multiplicities of `D_aff` are
+
+```text
+generic T:     (nu_0,nu_1,nu_2,nu_3)=(r-3,3,0,2r),
+exceptional T: (nu_0,nu_1,nu_2,nu_3)=(r-2,1,1,2r).
+```
+
+Inserting the missing intercepts before division therefore costs degree
+`r-3` or `r-2` and leaves a quotient of degree `4r` or `4r+1`, not a bounded
+residue.  More explicitly, if `t_P=b_P-Ma_P`, long division gives, up to the
+fixed sign convention,
+
+```text
+b_r(M)=e_1({t_P}),       a_r(M)=e_2({t_P}).        (SR24a-Redei-top)
+```
+
+The local profile fixes the fiber multiplicities but not these first two
+coordinate moments.  Consequently homogenizing at the tangent point cannot
+by itself force `c=0` or lower `deg C_3`; a bivariate transition, Witt, or
+reciprocal-norm identity is genuinely still required.
+
 The complementary dirty case is also rigid.  A point with `b(V)=0` lies on
 exactly `r+1` four-secants and `2r` tangents.  If every tangent is dirty,
 tangent--point incidence with `t_1` from `(SR24a-blocking4)` gives
@@ -2903,9 +2925,9 @@ tangent--point incidence with `t_1` from `(SR24a-blocking4)` gives
 |{V notin D:b(V)=0}| >= ceil(t_1/(2r))=q-3.       (SR24a-Redei-dirty)
 ```
 
-Neither this large zero-defect set nor the residual cubic has yet been
-excluded.  They are now the two exact arrangement-level branches; ordinary
-local jets, freeness, and scalar cocycles do not address either one.
+The zero-defect alternative will in fact be eliminated below by the exact
+weighted low-secant second moment.  Ordinary local jets, freeness, and scalar
+cocycles do not see that global norm saturation.
 
 The cube-free part of every local joining-line product is also uniform.  Let
 `V_X,V_Y,V_Z` be the three points of the dual plane corresponding to the
@@ -2934,6 +2956,107 @@ and two trisecants: `2(q-1)+2*3=2q+4`.  Thus the local cube-free residues
 already glue to the fixed zero triangle; all remaining inverse information
 is in the degree-`2q/3` cube roots `R_P`.  In particular a scalar Segre
 product or its cube class cannot by itself force a quartic carrier.
+
+These three pencils also saturate the entire global cube-free norm.  Give
+each bisecant weight one and each trisecant weight two.  The total line
+weight and squared weight are
+
+```text
+W=t_2+2t_3=3q+3,       S_2=t_2+4t_3=3q+9.
+```
+
+The point degree of this weighted line family is exactly `b(X)`.  Since two
+distinct projective lines meet once,
+
+```text
+sum_X b(X)^2=q S_2+W^2=12q^2+27q+9.
+```
+
+Every point of `D` has `b=3`.  Subtracting those points and also using the
+first moment gives
+
+```text
+sum_(X notin D)b(X)=3q^2-9,
+sum_(X notin D)b(X)^2=12q^2+9q-27.
+```
+
+There are `q^2-q-3` external points and `j(X)=b(X)/3` is integral.  Therefore
+
+```text
+sum_(X notin D)(j(X)-1)^2=q^2/3.                  (SR24a-Redei-norm)
+```
+
+At each `V_i`, the pencil `(a_1,a_2,a_3,a_4)=(0,q-1,2,0)` has
+`j(V_i)-1=r`.  The three vertices already contribute
+`3r^2=q^2/3`, exhausting `(SR24a-Redei-norm)`.  Consequently
+
+```text
+b(X)=3 for every X notin D union {V_X,V_Y,V_Z}.   (SR24a-Redei-clean)
+```
+
+In particular no zero-defect point exists, every tangent is clean, and
+`(SR24a-Redei-rankone)` is unconditional in every tangent chart.  The full
+external pencil spectrum is now fixed: apart from the three `V_i`, every
+external point has one of
+
+```text
+(a_1,a_2,a_3,a_4)=(2r-2,3,0,r),
+                    (2r-1,1,1,r).                (SR24a-external-local)
+```
+
+The norm identity makes the cube-free cubic itself global.  Let `w` be the
+line-weight vector that is one on a bisecant, two on a trisecant, and zero
+otherwise.  Its point-degree vector is now `3` everywhere except for value
+`q+3` at the three `V_i`.  The sum of the three full pencil indicators at
+`V_X,V_Y,V_Z` has exactly the same point degrees.  The projective incidence
+matrix is invertible over `Q`, because `M M^T=qI+J`; hence
+
+```text
+1_(2-secants)+2 1_(3-secants)
+ =1_(pencil(V_X))+1_(pencil(V_Y))+1_(pencil(V_Z)).
+                                                        (SR24a-low-pencils)
+```
+
+Thus the connector lines `V_iV_j` are precisely the three trisecants and
+every other line of those pencils is a bisecant.
+
+Return to any tangent chart used in `(SR24a-Redei-division)`; no `V_i` lies
+on a tangent, so write `V_i=(a_i,b_i)` in the affine chart and put
+
+```text
+B_0(X,M)=product_(i=1)^3 (X-b_i+Ma_i).
+```
+
+For every field slope, `(SR24a-low-pencils)` gives the exact identity
+
+```text
+A_(2,m)A_(3,m)^2=B_0(X,m),
+Q(X,m)=B_0(X,m)A_(4,m)(X)^3.
+```
+
+Divide `Q` by the monic cubic `B_0` over `F_q[M]`.  Filtered long division
+preserves total degree, so `Q=B_0 C+R` with
+`deg C<=q`, `deg_X R<3`, and `deg R<=q+3`.  Every field fiber of `R` is zero;
+coefficientwise division by `M^q-M` therefore gives
+
+```text
+R=(M^q-M)E,       deg_X E<3,       deg E<=3.
+```
+
+Moreover `C(X,m)=A_(4,m)(X)^3`.  If `3` does not divide `k`, the coefficient
+of `X^k` in `C` vanishes at all `q` field values of `m` and has degree at
+most `q-k<q`; hence it is identically zero.  Therefore the full quotient has
+the unconditional bounded-remainder form
+
+```text
+Q(X,M)=B_0(X,M) C_0(X^3,M)+(M^q-M)E(X,M),
+deg_X E<3,       deg E<=3.                         (SR24a-Redei-cubic)
+```
+
+This strictly strengthens `(SR24a-Redei-rankone)`: all field-size ambiguity
+has collapsed to the nine coefficients of one cubic `E`.  The identity does
+not force `E=0`; splitting of the original point product, the reciprocal
+chart, and the Witt/mapping gates are exactly the remaining global inputs.
 
 There is a useful equivalent design compression.  Take the points of `D` as
 vertices, its `4`-secants as four-element blocks, and join two vertices in a
@@ -6124,14 +6247,23 @@ family is lower priority.
   a scalar cocycle.
   **Settled by `ej`+`tt` — is there any global bounded residue before the
   carrier?**  Yes.  The tangent-pencil defect is a multiple of three with
-  average three on every tangent.  A clean tangent gives the exact
-  field-uniform rank-one/cubic certificate `(SR24a-Redei-rankone)`; if no
-  tangent is clean, `(SR24a-Redei-dirty)` forces at least `q-3` external
-  zero-defect pencils.  The certificate is offset-sensitive and avoids the
-  local-jet no-go.  **Open:** eliminate the quadratic term in the top ratio
-  and the residual cubic, or exclude the dirty zero-defect set.  Calling the
-  current ratio Mobius would be premature: its numerator may still have
-  degree two.
+  average three on every tangent.  The weighted low-secant norm
+  `(SR24a-Redei-norm)` is saturated by the three zero-triangle vertices, so
+  every tangent is clean.  Incidence inversion then identifies the weighted
+  low-line family with the three full zero-triangle pencils, and
+  `(SR24a-Redei-cubic)` strengthens the rank-one minors to
+
+  ```text
+  Q=B_0 C_0(X^3,M)+(M^q-M)E,  deg_X E<3, deg E<=3.
+  ```
+
+  Thus the full remaining field-uniform ambiguity is exactly nine bounded
+  coefficients.  The certificate is offset-sensitive and avoids the
+  local-jet no-go.  **Open:** eliminate `E` using the original split product,
+  reciprocal chart, fourth-Witt, and mapping gates.  A reciprocal cubic may
+  explain C962's 18-coefficient carrier basis, but that identification is not
+  yet proved.  The omitted tangent slope cannot remove `E` because its
+  missing-intercept factor has degree `Theta(q)`.
   **Settled by `ej`+`tt` — is Mason's large-root family a nearby construction
   of the small root?**  It is the correct characteristic-divisible neighbor,
   but not a cheap switch.  Complementing after one zero side produces a

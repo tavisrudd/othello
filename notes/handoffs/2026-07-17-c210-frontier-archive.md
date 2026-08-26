@@ -334,3 +334,51 @@ yet a Mobius certificate because the top ratio has degree bounds `(2,1)`;
 the possible quadratic coefficient remains to be killed.  The complementary
 dirty branch and this residual cubic are now the two arrangement-level
 frontiers.
+
+The immediate projective-infinity shortcut was red-teamed and rejected.  At
+the omitted tangent direction, `D_aff` has `r-3` or `r-2` empty intercept
+fibers.  Completing them raises the quotient degree to `4r` or `4r+1`.
+Moreover the clean certificate's top pair is exactly the first two affine
+elementary moments, which the local fiber multiplicities do not determine.
+Thus the tangent-at-infinity profile cannot force the constant `c` to vanish
+or reduce the residual cubic without an additional bivariate identity.
+
+### Dirty branch eliminated by norm saturation
+
+The clean/dirty dichotomy collapsed further.  Weight every `D`-bisecant by
+one and every trisecant by two.  Unique projective line intersections give
+an exact second moment for the resulting point degrees `b(X)`.  After
+subtracting the points of `D`,
+
+```text
+sum_(X notin D)(b(X)/3-1)^2=q^2/3.
+```
+
+The three zero-triangle vertices have `q-1` bisecants and two trisecants
+through each, so each contributes `(q/3)^2`; together they exhaust the norm.
+Every other external point therefore has `b=3`.  There are no zero-defect
+points, every tangent is clean, and the rank-one/cubic Redei certificate is
+unconditional.  The remaining balanced obstruction is only the possible
+quadratic top coefficient and residual cubic, not a second dirty geometry.
+
+### Exact nine-coefficient Redei remainder
+
+Norm saturation also determines the low-line geometry itself.  Inverting the
+projective incidence matrix shows that the bisecant indicator plus twice the
+trisecant indicator is exactly the sum of the three zero-triangle pencil
+indicators.  Hence the three connector lines are precisely the trisecants and
+all other lines in those pencils are bisecants.
+
+Writing `B_0(X,M)` for the moving cubic through the three pencil vertices,
+global monic division and field-fibre interpolation give
+
+```text
+Q(X,M)=B_0(X,M)C_0(X^3,M)+(M^q-M)E(X,M),
+deg_X E<3, deg E<=3.
+```
+
+Thus all field-size ambiguity is confined to nine coefficients of one cubic.
+Two independent audits checked the incidence inversion, connector
+multiplicities, filtered degree bounds, and cube-coefficient interpolation.
+The identity does not yet kill `E`; the remaining target is to couple it to
+the split point product, reciprocal chart, fourth-Witt, and mapping gates.
