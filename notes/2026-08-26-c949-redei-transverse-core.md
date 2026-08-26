@@ -183,6 +183,59 @@ identified with C962's carrier coordinates.  C962 uses two univariate
 degree-`r-1` polynomials, of dimension `2r`; that dimension equals 18 only at
 `q=27`.  An explicit carrier-to-Redei map is still required.
 
+## Exact two-tangent transpose
+
+The natural reciprocal comparison uses two tangent charts, not the formal
+substitution `M -> M^(-1)` inside one chart.  Choose projective coordinates
+so that
+
+```text
+C=0 is tangent at T_infty=[1:0:0],
+A=0 is tangent at T_0=[0:0:1],
+tau[A:B:C]=[C:B:A].
+```
+
+Put `D^circ=D\{T_infty,T_0}`.  Every point of `D^circ` has `A,C` nonzero.
+For the native affine products of `D` and `tau D`, direct comparison of the
+linear factors gives
+
+```text
+X R_D(M,X)=lambda M R_(tau D)(X,M),
+lambda=product_(P in D^circ) A(P)/C(P).             (TR11)
+```
+
+The factors `X,M` are essential: they are the two tangent endpoints omitted
+in the respective affine products.  A bare equality of the two `R` products
+is false.
+
+Write the two canonical divisions as
+
+```text
+R_D=FQ_D+GH_D,
+R_(tau D)=FQ_tau+GH_tau.
+```
+
+Substitution in `(TR11)` and coprimality of `F(X)` and `G(M)` give a unique
+polynomial `L` with `deg L<=4` such that
+
+```text
+X Q_D(M,X)-lambda M H_tau(X,M)= F(X)L(X,M),
+X H_D(M,X)-lambda M Q_tau(X,M)=-G(M)L(X,M).         (TR12)
+```
+
+This is the exact bounded Koszul transition for the full quotient pair.  The
+quartic degree, rather than cubic degree, is forced by the two endpoint
+factors.
+
+The low-pencil cubics transform compatibly, but `(TR12)` does not close on
+`(E,U)`.  After inserting `(TR10)`, the high quotients `C_0,D` remain and the
+field factors absorb the bounded cores into `L`; reduction modulo `F` or `G`
+erases the corresponding terms.  Moreover `tau` is a coordinate change, not
+an automorphism of `D`.  Therefore no invariance equation or vanishing of the
+three homogeneous reciprocal coefficients follows from transpose covariance
+alone.  A successful reciprocal argument must independently control `L` or
+the high quotients using the balanced norm/Witt data.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -190,8 +243,9 @@ degree-`r-1` polynomials, of dimension `2r`; that dimension equals 18 only at
 - **Settled:** connector mixed derivatives recover the three values
   `E(c,sigma)`.
 - **Settled:** both canonical quotients compress to the bounded pair `(E,U)`.
-- **Open:** determine the reciprocal transition law of the pair, including
-  the high quotients `C_0,D`.
+- **Settled/no-go:** the transition is `(TR12)` with a bounded quartic `L`,
+  but covariance alone lets `L` absorb the entire core.
+- **Open:** constrain `L` from the reciprocal norm or a Witt lift.
 - **Open:** decide whether a Witt or norm identity forces any nonzero linear
   functional of `E` or `U`.
 - **Open:** construct an explicit map to the finite carrier `(A,C)`, or prove

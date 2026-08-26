@@ -115,6 +115,20 @@ This is the first genuine bounded `9+9` quotient state.  It remains a
 compression, not a contradiction or an identification with C962's carrier.
 Focused proof: `notes/2026-08-26-c949-redei-transverse-core.md`.
 
+The subsequent TT/red-team pass compared two tangent charts under the
+coordinate transposition `[A:B:C] -> [C:B:A]`.  Accounting for the two
+omitted tangent endpoints gives
+
+```text
+X R_D(M,X)=lambda M R_(tau D)(X,M).
+```
+
+The two canonical quotient pairs differ by one bounded quartic Koszul term
+`L`.  This is exact, but not yet a relation on `(E,U)`: the high quotients
+absorb the bounded terms, and `tau` is a coordinate change rather than a
+symmetry of `D`.  The next genuine gate is to constrain `L` using the
+reciprocal norm or a Witt identity.
+
 ## 2026-08-26 — task-card reorganization
 
 The former 6,800-line C949 card was frozen as

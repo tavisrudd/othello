@@ -196,7 +196,8 @@ Relate or contradict the bounded pair `(E,U)`, preferably beginning with the
 three reciprocal obstructions `e_03,e_12,e_21`, from one of:
 
 1. the globally split point product before specialization;
-2. the reciprocal norm as a polynomial identity rather than field fibers;
+2. the reciprocal norm as a polynomial identity that constrains the quartic
+   two-tangent transition `L` from `(TR12)`;
 3. a Witt lift that evaluates
    `(partial_M-a_i partial_X)Q` on the moving pencil root;
 4. a bounded symbolic rejection core extracted from the q=27 gates.
@@ -254,6 +255,9 @@ separate global trade obstruction or construction.
   coefficients.
 - **Settled/no-go:** finite slope fibers cannot constrain `E`; they are
   invariant under `Q -> Q+(M^q-M)E'`.
+- **Settled/no-go:** two-tangent transpose gives an exact bounded quartic
+  transition, but coordinate covariance alone absorbs `(E,U)` into its high
+  quotient and supplies no self-relation.
 - **Open:** compute the transverse pencil derivatives from split/Witt/norm
   data.
 - **Open:** connect any resulting bounded identity to C962's `(A,C)` carrier
@@ -263,7 +267,6 @@ separate global trade obstruction or construction.
 
 ## Next checkpoint
 
-Derive the reciprocal transition of the full quotient pair `(Q,H)` and test
-whether it gives a nontrivial linear relation between `E` and `U`.  Keep the
-high quotients `C_0,D` explicit so the finite-fiber gauge freedom is not
-mistaken for a contradiction.
+Express the balanced reciprocal norm or fourth-Witt identity in the
+two-tangent coordinates of `(TR12)` and test whether it fixes any coefficient
+of the quartic `L`.  Transpose covariance by itself is closed as tautological.
