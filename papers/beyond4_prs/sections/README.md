@@ -1,6 +1,6 @@
 # TeX source layout
 
-`main.tex` is the canonical preprint driver and `main-tit.tex` is the
+`main.tex` is the canonical manuscript driver and `main-tit.tex` is the
 single-column IEEEtran review driver. Both consume the same frontmatter,
 twelve active section files, acknowledgment, and bibliography. The canonical
 driver also prints the separate appendix of raw redundancy-nine coefficient

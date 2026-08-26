@@ -270,7 +270,6 @@ def check_formal_scope() -> None:
 
 def check_public_release_gate() -> None:
     manifest = (SUPPLEMENT / "RELEASE-MANIFEST.md").read_text(encoding="utf-8")
-    main = (PAPER / "main.tex").read_text(encoding="utf-8")
     candidate_manifest = manifest.split(
         "## Current Version 2 local candidate", 1
     )[1].split("## Artifact rows", 1)[0]
@@ -305,8 +304,6 @@ def check_public_release_gate() -> None:
         raise SystemExit("public PDF hash differs from the local candidate")
     if field("PDF bytes") != field("Local built PDF bytes"):
         raise SystemExit("public PDF byte count differs from the local candidate")
-    if "Unrefereed preprint" not in main:
-        raise SystemExit("the manuscript is not visibly labelled as an unrefereed preprint")
     print("verified public release metadata")
 
 

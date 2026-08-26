@@ -42,7 +42,7 @@ make software-check
 make supplement-check
 ```
 
-`make check` builds the canonical preprint
+`make check` builds the canonical manuscript
 `prs-beyond-redundancy-four.pdf`.  `make tit-check` builds the
 IEEEtran single-column review manuscript
 `prs-beyond-redundancy-four-tit-submission.pdf`.
@@ -78,11 +78,9 @@ The electronic supplement contains public classification records, generators,
 independent replays, checksums, toolchain locks, and the declaration-level map
 of the conditional Lean formalization.
 
-The tree carries the unrefereed Version 2 candidate. Its fixed-level results
-reach redundancies five through ten at the field ranges stated above; the
-arbitrary-redundancy theorem remains conditional on its explicit intermediate
-package hypotheses. Version 1 and its DOI remain immutable, while a public
-Version 2 revision is an author decision.
+The fixed-level results reach redundancies five through ten at the field ranges
+stated above; the arbitrary-redundancy theorem remains conditional on its
+explicit intermediate package hypotheses.
 
 Run
 
@@ -93,7 +91,7 @@ python3 supplement/verify.py
 for the local bundle, companion-software manifest, classification-record,
 manuscript-label, and formal-scope checks. Add `--replay` to execute every
 paper-local Python replay.
-`--release` is reserved for an immutable public candidate whose repository,
+`--release` is reserved for an immutable public release whose repository,
 revision, archive, DOI, PDF, and independent-reader fields are complete.
 
 Lean checks coordinate algebra, finite-record arithmetic, uniform budget
@@ -113,4 +111,4 @@ conjecture.  Version 1 and its public identifiers remain immutable.
 No upload or external publication is performed by the local verification
 commands. The public release surface records the paper and Lean revisions,
 archive metadata, and independent-reader fields separately from this local
-candidate.
+bundle.

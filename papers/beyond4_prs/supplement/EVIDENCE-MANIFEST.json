@@ -545,12 +545,12 @@
       "sha256": "f01c53a315c95ecafc96b4fb2402616cbb67322fd0ecd3adb512b16b60f7b8ef"
     },
     {
-      "bytes": 16218,
+      "bytes": 16023,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "b51bb68c53f3c7a13c5d53f582dc9b77cf6736d3eacb3c9d6c67f4a070b6019a"
+      "sha256": "3d46a0d21314136d7ea73a6650b8b51ed51c812ba29870ebb1e0db55d0907c17"
     },
     {
       "bytes": 17225,
