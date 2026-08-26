@@ -81,10 +81,17 @@ normalized matrices.
   their returned transporters;
 - a slow release-mode oracle checks all 4,681 projective GF(8)/R5 binary forms,
   including characteristic-two successor degenerations, against full
-  semilinear minima without reaching the defensive fallback;
+  semilinear minima without reaching the defensive fallback; it also confirms
+  the Lucas consequence that this degree-four divided-power space has no
+  rootless stratum because fourth power is an automorphism of `F_8`;
+- a second slow oracle checks all 7,381 projective GF(9)/R5 forms against full
+  semilinear minima, covering the characteristic-three Lucas-degenerate wild
+  orbit in its complete ambient projective space;
 - the GF(9)/R5 Lucas-degenerate wild form uses 144 transports and agrees with
   all 1,440 semilinear transports;
 - q=13/R11--R13 tangent, sigma, and multiple-root forms agree with full PGL;
 - the slow GF(16)/R11 regression agrees with all 16,320 semilinear transports.
 - GF(16)/R16 exercises the full-length `r=q` boundary and replays its reduced
   transporter without entering explicit enumeration.
+- GF(32)/R17 freezes the general Frobenius/Lucas fact that binary degree
+  `n=p^a` has no rootless divided-power stratum at redundancy `r=p^a+1`.

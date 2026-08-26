@@ -2728,6 +2728,36 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "slow GF(32)/R17 characteristic-power boundary"]
+    fn characteristic_power_degree_has_no_rootless_stratum_at_gf32_r17() {
+        let field_spec = FieldSpec {
+            p: 2,
+            degree: 5,
+            modulus: vec![1, 0, 1, 0, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let field = Field::new(field_spec.clone()).unwrap();
+        let syndrome = (0..17)
+            .map(|i| (i * i + 3 * i + 1) % 32)
+            .collect::<Vec<_>>();
+        let canonicalization =
+            canonicalize_syndrome(&request(field_spec, 17, syndrome.clone()), 50_000).unwrap();
+        let (replayed, scale) = apply_semilinear(
+            &field,
+            &syndrome,
+            canonicalization.transporter.frobenius_exponent,
+            canonicalization.transporter.matrix,
+        )
+        .unwrap();
+        assert_eq!(replayed, canonicalization.canonical_syndrome);
+        assert_eq!(scale, canonicalization.transporter.projective_output_scale);
+        assert!(!canonicalization
+            .complexity
+            .starts_with("rootless binary form"));
+        assert!(!canonicalization.complexity.starts_with("explicit PGL"));
+    }
+
+    #[test]
     fn fast_terminal_selector_covers_r6_and_r7_representatives() {
         for input in [
             request(prime_field(17), 6, vec![0, 0, 0, 0, 1, 0]),
@@ -2817,6 +2847,9 @@ mod tests {
         let mut examined = 0;
         let syndromes = projective_span(&field, &basis, 5_000, &mut examined).unwrap();
         assert_eq!(syndromes.len(), 4_681);
+        let mut saw_rootless = false;
+        let mut saw_degenerate_simple_root = false;
+        let mut saw_multiple_root = false;
         for syndrome in syndromes {
             let reduced =
                 canonicalize_syndrome(&request(field_spec.clone(), 5, syndrome.clone()), 2_000)
@@ -2824,7 +2857,50 @@ mod tests {
             let explicit = canonicalize_explicit(&field, syndrome, 2_000).unwrap();
             assert_eq!(reduced.canonical_syndrome, explicit.canonical_syndrome);
             assert!(!reduced.complexity.starts_with("explicit PGL"));
+            saw_rootless |= reduced.complexity.starts_with("rootless binary form");
+            saw_degenerate_simple_root |=
+                reduced.complexity.contains("characteristic-two degenerate");
+            saw_multiple_root |= reduced.complexity.starts_with("multiple-root binary form");
         }
+        assert!(!saw_rootless);
+        assert!(saw_degenerate_simple_root && saw_multiple_root);
+    }
+
+    #[test]
+    #[ignore = "slow exhaustive GF(9) projective-space oracle"]
+    fn lex_charts_exhaust_all_r5_gf9_binary_forms() {
+        let field_spec = FieldSpec {
+            p: 3,
+            degree: 2,
+            modulus: vec![1, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let field = Field::new(field_spec.clone()).unwrap();
+        let basis = (0..5)
+            .map(|i| {
+                let mut vector = vec![0; 5];
+                vector[i] = 1;
+                vector
+            })
+            .collect::<Vec<_>>();
+        let mut examined = 0;
+        let syndromes = projective_span(&field, &basis, 8_000, &mut examined).unwrap();
+        assert_eq!(syndromes.len(), 7_381);
+        let mut saw_rootless = false;
+        let mut saw_simple_root = false;
+        let mut saw_lucas_degenerate = false;
+        for syndrome in syndromes {
+            let reduced =
+                canonicalize_syndrome(&request(field_spec.clone(), 5, syndrome.clone()), 2_000)
+                    .unwrap();
+            let explicit = canonicalize_explicit(&field, syndrome, 2_000).unwrap();
+            assert_eq!(reduced.canonical_syndrome, explicit.canonical_syndrome);
+            assert!(!reduced.complexity.starts_with("explicit PGL"));
+            saw_rootless |= reduced.complexity.starts_with("rootless binary form");
+            saw_simple_root |= reduced.complexity.starts_with("simple-root binary form");
+            saw_lucas_degenerate |= reduced.complexity.contains("Lucas-degenerate");
+        }
+        assert!(saw_rootless && saw_simple_root && saw_lucas_degenerate);
     }
 
     #[test]

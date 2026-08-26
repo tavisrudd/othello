@@ -41,8 +41,11 @@ row. R11 tangent and sigma fixtures and R12--R13 multiple-root fixtures over
 `F_13` are checked against all 2,184 explicit PGL transports. A slow ignored
 regression checks GF(16)/R11 against all 16,320 semilinear transports, and a
 GF(16)/R16 fixture exercises the full-length `r=q` structural boundary. Slow
-release-mode coverage also checks all 4,681 projective GF(8)/R5 forms against
-full semilinear enumeration.
+release-mode coverage also checks all 4,681 projective GF(8)/R5 and all 7,381
+projective GF(9)/R5 forms against full semilinear enumeration.
+An R17/GF(32) fixture also freezes the dimension-independent Lucas consequence
+that degree `p^a` divided-power forms have no rootless stratum in
+characteristic `p`.
 
 The four rational-root strata—rootless, simple, multiple, and pure power—give
 an exhaustive worst-case bound of `O(m*r*q^2)` exact transports for structural

@@ -62,8 +62,11 @@ binary-form charts. R11 tangent/sigma and R12--R13 multiple-root fixtures over
 `F_13` agree with full PGL enumeration; a slow GF(16)/R11 regression agrees
 with full semilinear enumeration, and GF(16)/R16 exercises the full-length
 `r=q` structural boundary. A slow oracle exhausts all 4,681 projective
-GF(8)/R5 forms, including the characteristic-two degenerate successor. The
-full PGL enumerator remains as a
+GF(8)/R5 forms, including the characteristic-two degenerate successor; another
+exhausts all 7,381 projective GF(9)/R5 forms, including the Lucas-degenerate
+wild orbit. GF(32)/R17 freezes the first beyond-R10 binary characteristic-power
+degree and its necessarily non-rootless chart. The full PGL enumerator remains
+as a
 defensive reference and regression oracle, not a reachable binary-form
 stratum. The exhaustive structural bound is `O(m r q^2)`. `classify`, `distance`,
 and `decode` deliberately remain R5--R10-only, so this scope extension makes no

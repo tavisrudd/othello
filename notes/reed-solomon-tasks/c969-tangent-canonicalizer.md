@@ -235,6 +235,32 @@ non-tangent input before the multiple-root chart. Nonpersistent q8 and q9/R5
 fixtures exercise respectively the characteristic-two degenerate simple-root
 and other reduced charts, and are checked against full semilinear enumeration.
 
+The exhaustive GF(8)/R5 sweep has no rootless stratum, as Lucas arithmetic
+predicts. At binary degree four in characteristic two, the zeroth transformed
+coordinate is
+
+\[
+ s_0\delta^4+s_4\gamma^4.
+\]
+
+Fourth power is an automorphism of `F_8`, so some projective pair
+`[gamma:delta]` kills this coordinate (and if both endpoint coefficients
+vanish, every pair does). Thus every divided-power binary quartic over `F_8`
+has a rational chart root. The exhaustive test separately confirms that the
+characteristic-two degenerate simple-root and multiple-root charts both occur.
+
+The same argument is dimension-independent. If `n=p^a` in characteristic
+`p`, then
+
+\[
+ (\delta+\gamma x)^n=\delta^n+\gamma^n x^n,
+\]
+
+and `z -> z^n` is a Frobenius automorphism of every finite base field. Hence
+every nonzero divided-power degree-`n` form has a rational chart root, so the
+rootless stratum is empty at every redundancy `r=p^a+1`. An R17/GF(32)
+fixture freezes the first binary characteristic-power instance beyond R10.
+
 ### Multiple-root successor
 
 The next reduction has the same triangular form. Let `mu` be the largest
