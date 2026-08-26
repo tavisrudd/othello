@@ -53,21 +53,21 @@
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex",
-      "text": "T.~Rudd, \\newblock Minimum-word reconstruction of $\\PG(2,13)$ from a binary conic code, \\newblock Paper~IV, companion manuscript, 2026."
+      "text": "T.~Rudd, \\newblock Reconstructing $\\PG(2,13)$, its conic, and polarity from the minimum words of a binary conic code, \\newblock Companion preprint, 2026."
     },
     {
       "key": "RuddRigidity2026",
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex",
-      "text": "T.~Rudd, \\newblock Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus, \\newblock Paper~I, released manuscript, version 2, 2026."
+      "text": "T.~Rudd, \\newblock Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus, \\newblock Released manuscript, version 2, 2026."
     }
   ],
   "dir": "papers/clebsch-rigidity",
   "environment_counts": {
     "corollary": 1,
     "lemma": 2,
-    "proposition": 1,
+    "proposition": 2,
     "remark": 3,
     "theorem": 7
   },
@@ -95,6 +95,10 @@
     {
       "environment": "lemma",
       "label": "lem:q9-polarity"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:fifteen-class-census"
     },
     {
       "environment": "proposition",
@@ -162,23 +166,23 @@
   "paper": "clebsch_rigidity_companion",
   "pdfs": [
     {
-      "bytes": 206791,
-      "pages": 27,
+      "bytes": 216074,
+      "pages": 29,
       "path": "papers/clebsch-rigidity/clebsch_rigidity.pdf",
-      "sha256": "46b012419591ee57d5cff6758d74042a1c1dad8e07d66b8c1b4700b9c1ff5f6c"
+      "sha256": "8b36f916213c810472988cdc26cadb1c3354164fbe7d2279dcdffdc80806e5ee"
     },
     {
-      "bytes": 136883,
-      "pages": 13,
+      "bytes": 138815,
+      "pages": 14,
       "path": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.pdf",
-      "sha256": "26509dc32dddad52a9da7678244d29eefb57d64ca2c7ede58eb40e8e2a75986b"
+      "sha256": "db06e29a8257ad327f560f3115cc8da8d59c33452902d9fd57ec6323d0b0ca0a"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.tex",
-      "sha256": "997f4c42550b7fae1ff6eceb27dcce1f4d9643a1d074c78940d71307a6f9d128"
+      "sha256": "dabd24cd42aa7abbc55d1410b90ac311e51b6fdfdcd2082f7d9f98d57d8582f9"
     }
   ],
   "title": "Computational strengthenings of Clebsch syndrome rigidity",

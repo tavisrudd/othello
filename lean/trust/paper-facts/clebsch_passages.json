@@ -13,6 +13,12 @@
       "source": "papers/clebsch-passages/sections/10-references.tex"
     },
     {
+      "key": "BeauvilleDeterminantal",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
       "key": "BinaryForms",
       "kind": "bibitem",
       "self_authored": false,
@@ -26,6 +32,18 @@
     },
     {
       "key": "BrouwerVanMaldeghem",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "BrunelSignedDPP",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "BrunelUrschel",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-passages/sections/10-references.tex"
@@ -103,6 +121,18 @@
       "source": "papers/clebsch-passages/sections/10-references.tex"
     },
     {
+      "key": "HoltzSturmfels",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "HuangOeding",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
       "key": "IntersectionMatrices",
       "kind": "bibitem",
       "self_authored": false,
@@ -110,6 +140,12 @@
     },
     {
       "key": "JolliffeInclusion",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "KummerfeldRamsey",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-passages/sections/10-references.tex"
@@ -145,6 +181,19 @@
       "source": "papers/clebsch-passages/sections/10-references.tex"
     },
     {
+      "key": "RisingKuleszaTaskar",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "RuddCompanion2026",
+      "kind": "bibitem",
+      "self_authored": true,
+      "source": "papers/clebsch-passages/sections/10-references.tex",
+      "text": "T.~Rudd, \\emph{Chordal and Conference Cubics: Reconstruction and a Residual \\(C_2\\)-Torsor}, Companion preprint (2026)."
+    },
+    {
       "key": "SNR1981",
       "kind": "bibitem",
       "self_authored": false,
@@ -155,13 +204,19 @@
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-passages/sections/10-references.tex"
+    },
+    {
+      "key": "TanturriPfaffian",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-passages/sections/10-references.tex"
     }
   ],
   "dir": "papers/clebsch-passages",
   "environment_counts": {
-    "proposition": 3,
-    "remark": 1,
-    "theorem": 5
+    "proposition": 4,
+    "remark": 3,
+    "theorem": 7
   },
   "labels": [
     {
@@ -170,11 +225,31 @@
     },
     {
       "environment": "equation",
+      "label": "eq:aligned-pair-criterion"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:branch-cycle"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:complementary-inner-product"
+    },
+    {
+      "environment": "equation",
       "label": "eq:face-axis-labels"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:two-graph-parity"
     },
     {
       "environment": "figure",
       "label": "fig:four-cubic-shadows"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:programme-map"
     },
     {
       "environment": "figure",
@@ -186,7 +261,19 @@
     },
     {
       "environment": "proposition",
+      "label": "prop:nonsingular-complementary-minors"
+    },
+    {
+      "environment": "proposition",
       "label": "prop:spinor-specialization"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:alignment-query-count"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:six-point-witness"
     },
     {
       "environment": "",
@@ -194,7 +281,31 @@
     },
     {
       "environment": "",
+      "label": "sec:arithmetic-main-proof"
+    },
+    {
+      "environment": "",
       "label": "sec:cover"
+    },
+    {
+      "environment": "",
+      "label": "sec:exchange-spectra"
+    },
+    {
+      "environment": "",
+      "label": "sec:finite-field-specialization"
+    },
+    {
+      "environment": "",
+      "label": "sec:four-shadows"
+    },
+    {
+      "environment": "",
+      "label": "sec:golden-exchanger"
+    },
+    {
+      "environment": "",
+      "label": "sec:golden-fibre"
     },
     {
       "environment": "",
@@ -210,7 +321,23 @@
     },
     {
       "environment": "",
+      "label": "sec:rational-incidence-model"
+    },
+    {
+      "environment": "",
+      "label": "sec:reconstruct-signing"
+    },
+    {
+      "environment": "",
       "label": "sec:verification"
+    },
+    {
+      "environment": "equation",
+      "label": "tab:outer-coefficient-words"
+    },
+    {
+      "environment": "equation",
+      "label": "tab:reduced-jacobian"
     },
     {
       "environment": "theorem",
@@ -226,6 +353,10 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:golden-equality-rigidity"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:harmonic-main"
     },
     {
@@ -235,6 +366,10 @@
     {
       "environment": "proposition",
       "label": "thm:orientation-source"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:triangle-pfaffian-recognition"
     }
   ],
   "main": "papers/clebsch-passages/clebsch_passages.tex",
@@ -242,37 +377,37 @@
   "paper": "clebsch_passages",
   "pdfs": [
     {
-      "bytes": 217369,
-      "pages": 29,
+      "bytes": 274231,
+      "pages": 39,
       "path": "papers/clebsch-passages/clebsch_passages.pdf",
-      "sha256": "cba798e5c3c62204af8366bcba26daabce9c9532c9340c3a4abf1d7bf4ce3f6a"
+      "sha256": "cc5d5b8749cf577749cc32db38606e21790b177d6e6782673c95f2da4ff80030"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-passages/clebsch_passages.tex",
-      "sha256": "d601e4281f6fedb9b9c105650ea80bfa74071fea65ac8e23b149a15f7228b331"
+      "sha256": "dceee770abd7d8687d6df1e57c6ecd61e508fe4261b076fec62c652b8d99b508"
     },
     {
       "path": "papers/clebsch-passages/sections/01-introduction.tex",
-      "sha256": "dbf16a7bf40f3ca9bc1a5475452d215e6f24f20a054506f3a85056c54a5efadc"
+      "sha256": "9569835099d13c22beed2aa3a24315aedd690ca9e51bd555adc56abb73b867ac"
     },
     {
       "path": "papers/clebsch-passages/sections/02-orientation-cover.tex",
-      "sha256": "b2a8989dbee1d36ef25f9ab9596388b01b92229d6f50b6675e82aac680e88d5b"
+      "sha256": "c714b229d1948509c133b28d9cc90b94166eb2cf37e21cfba5fcc694abcbe3c1"
     },
     {
       "path": "papers/clebsch-passages/sections/03-orientation-source.tex",
-      "sha256": "e0d7c43449bc9721d3641134dbb5130600e9064239b7346a83044e23f4fea822"
+      "sha256": "2ea744bfb964840e48533b0320db20128c43e6121cdd10469c71ed93f6161201"
     },
     {
       "path": "papers/clebsch-passages/sections/04-arithmetic-specialization.tex",
-      "sha256": "b441a22a2dff38a9d502253fa67ec40165c626c6e65f6b4c99b93b9725bc7455"
+      "sha256": "4ae82f831aafb77c2ac7e1114df559b2c711eae79e82363361e5576368f260f4"
     },
     {
       "path": "papers/clebsch-passages/sections/05-golden-operator.tex",
-      "sha256": "3271f94c27a1db520f84f912f8409ed2b8709b991ab8b2f30a49141083bf398a"
+      "sha256": "2ae3f581b522521fa138e53be8676b2adfd356c5a36e80d4a477648c8a172aa5"
     },
     {
       "path": "papers/clebsch-passages/sections/05-harmonic-realization.tex",
@@ -280,7 +415,11 @@
     },
     {
       "path": "papers/clebsch-passages/sections/09-conclusion.tex",
-      "sha256": "2ce7f1b81acfb72ae20dfa3afede006e09e268c410d4796ec940acb6a2533146"
+      "sha256": "49f1b9c39751300cb5565af28cd2eca35629068caa3ee7207eaabbd1c313dcb5"
+    },
+    {
+      "path": "papers/clebsch-passages/sections/09-programme-coda.tex",
+      "sha256": "1206d26f844fd17d717d18cfe0ef542a046fec9aebe2c5ed6f0d8bb8b63605f8"
     },
     {
       "path": "papers/clebsch-passages/sections/07-marking-ambiguities.tex",
@@ -288,11 +427,11 @@
     },
     {
       "path": "papers/clebsch-passages/sections/08-verification.tex",
-      "sha256": "56fdfa8a3904d8a948d5038eb199b4234c95c34cd37edd42d60aa1e68d3e8a77"
+      "sha256": "81fbce6119705d3d63db38d70955185a246748503491fff15f00f18a385a11d0"
     },
     {
       "path": "papers/clebsch-passages/sections/10-references.tex",
-      "sha256": "cb9d9894d2e256e3ecd507ee3651b294bf20051329450c3f9266464b99084755"
+      "sha256": "dbedb7c5dc41fbb3608c27d4e897a38ca8771fe1d1869a9b80cad8075c768ee4"
     }
   ],
   "title": "Golden descent and operator realizations of the Clebsch cubic",

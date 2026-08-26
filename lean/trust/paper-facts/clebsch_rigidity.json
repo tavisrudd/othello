@@ -79,7 +79,19 @@
       "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
     },
     {
+      "key": "GillespieOCathainPraeger2018",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
+    },
+    {
       "key": "GuruswamiVardy2005",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
+    },
+    {
+      "key": "HaemersParsaeiMajd2022",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-rigidity/clebsch_rigidity.tex"
@@ -122,32 +134,11 @@
       "text": "T.~Rudd, \\newblock Computational strengthenings of Clebsch syndrome rigidity, \\newblock companion manuscript, 2026."
     },
     {
-      "key": "RuddFactorization2026",
-      "kind": "bibitem",
-      "self_authored": true,
-      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex",
-      "text": "T.~Rudd, \\newblock Quadratic trade rigidity and cubic orientation in conic matching quotients, \\newblock Paper~II, released manuscript, version 2, 2026, \\newblock \\href{https://doi.org/10.5281/zenodo.21682217} {doi:10.5281/zenodo.21682217}."
-    },
-    {
-      "key": "RuddGoldenQuantum2026",
-      "kind": "bibitem",
-      "self_authored": true,
-      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex",
-      "text": "T.~Rudd, \\newblock Exchange landscapes, orientation, and rigidity in the Golden six-mode conference interferometer, \\newblock companion manuscript, 2026."
-    },
-    {
-      "key": "RuddPassages2026",
-      "kind": "bibitem",
-      "self_authored": true,
-      "source": "papers/clebsch-rigidity/clebsch_rigidity.tex",
-      "text": "T.~Rudd, \\newblock Golden descent and operator realizations of the Clebsch cubic, \\newblock Paper~III (\\emph{passages}), released manuscript, version 2, 2026, \\newblock \\href{https://doi.org/10.5281/zenodo.21682515} {doi:10.5281/zenodo.21682515}."
-    },
-    {
       "key": "RuddPassant2026",
       "kind": "bibitem",
       "self_authored": true,
       "source": "papers/clebsch-rigidity/clebsch_rigidity.tex",
-      "text": "T.~Rudd, \\newblock Minimum-word reconstruction of $\\PG(2,13)$ from a binary conic code, \\newblock Paper~IV, companion manuscript, 2026."
+      "text": "T.~Rudd, \\newblock Reconstructing $\\PG(2,13)$, its conic, and polarity from the minimum words of a binary conic code, \\newblock Companion preprint, 2026."
     },
     {
       "key": "SVM1995",
@@ -207,6 +198,10 @@
     {
       "environment": "definition",
       "label": "def:hexagon"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:programme-map"
     },
     {
       "environment": "figure",
@@ -305,6 +300,10 @@
       "label": "sec:verification"
     },
     {
+      "environment": "proof",
+      "label": "tab:normalizer-actions"
+    },
+    {
       "environment": "theorem",
       "label": "thm:orientation-two-graph"
     },
@@ -318,23 +317,23 @@
   "paper": "clebsch_rigidity",
   "pdfs": [
     {
-      "bytes": 206791,
-      "pages": 27,
+      "bytes": 216074,
+      "pages": 29,
       "path": "papers/clebsch-rigidity/clebsch_rigidity.pdf",
-      "sha256": "46b012419591ee57d5cff6758d74042a1c1dad8e07d66b8c1b4700b9c1ff5f6c"
+      "sha256": "8b36f916213c810472988cdc26cadb1c3354164fbe7d2279dcdffdc80806e5ee"
     },
     {
-      "bytes": 136883,
-      "pages": 13,
+      "bytes": 138815,
+      "pages": 14,
       "path": "papers/clebsch-rigidity/clebsch_rigidity_computational_companion.pdf",
-      "sha256": "26509dc32dddad52a9da7678244d29eefb57d64ca2c7ede58eb40e8e2a75986b"
+      "sha256": "db06e29a8257ad327f560f3115cc8da8d59c33452902d9fd57ec6323d0b0ca0a"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-rigidity/clebsch_rigidity.tex",
-      "sha256": "b9999274be726a92e5ad1a1d5619028c505b84b89d5e241232e0d743248c4cf9"
+      "sha256": "60573c3f03c4df94a1115071a0a9ffb635b92afc2e79e10fdf8edf8fc238d4be"
     }
   ],
   "title": "Reconstructing the Clebsch code and its golden orientation\\\\ from its deep-hole syndrome locus",

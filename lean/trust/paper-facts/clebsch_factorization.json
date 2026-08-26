@@ -19,6 +19,12 @@
       "source": "papers/clebsch-factorization/clebsch_factorization.tex"
     },
     {
+      "key": "DotyHenke2002",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
       "key": "Dye1991",
       "kind": "bibitem",
       "self_authored": false,
@@ -31,13 +37,31 @@
       "source": "papers/clebsch-factorization/clebsch_factorization.tex"
     },
     {
+      "key": "Faber2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
       "key": "Giudici2007",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-factorization/clebsch_factorization.tex"
     },
     {
+      "key": "GiudiciLiPotocnikPraeger2006",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
       "key": "Han2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/clebsch-factorization/clebsch_factorization.tex"
+    },
+    {
+      "key": "KorchmarosPaceSonnino2018",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/clebsch-factorization/clebsch_factorization.tex"
@@ -71,12 +95,28 @@
   "dir": "papers/clebsch-factorization",
   "environment_counts": {
     "corollary": 10,
-    "lemma": 7,
+    "lemma": 9,
     "proposition": 5,
     "remark": 7,
     "theorem": 7
   },
   "labels": [
+    {
+      "environment": "document",
+      "label": "app:contraction-proof"
+    },
+    {
+      "environment": "document",
+      "label": "app:linear-detectors"
+    },
+    {
+      "environment": "document",
+      "label": "app:modular-detectors"
+    },
+    {
+      "environment": "document",
+      "label": "app:outer-parity-proof"
+    },
     {
       "environment": "document",
       "label": "app:profile-cubic"
@@ -126,12 +166,20 @@
       "label": "cor:self-associated-gorenstein"
     },
     {
+      "environment": "figure",
+      "label": "fig:programme-map"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:affine-class-contraction"
+    },
+    {
       "environment": "lemma",
       "label": "lem:hyperplane-square"
     },
     {
       "environment": "lemma",
-      "label": "lem:lucas-socle-square-parity"
+      "label": "lem:opposite-parity-quadratic"
     },
     {
       "environment": "lemma",
@@ -144,6 +192,10 @@
     {
       "environment": "lemma",
       "label": "lem:split-inert-frames"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:targeted-linear-detectors"
     },
     {
       "environment": "lemma",
@@ -267,17 +319,17 @@
   "paper": "clebsch_factorization",
   "pdfs": [
     {
-      "bytes": 282666,
-      "pages": 43,
+      "bytes": 295446,
+      "pages": 47,
       "path": "papers/clebsch-factorization/clebsch_factorization.pdf",
-      "sha256": "0f5f18b0791a5aa4dcf488bc26354b435ada57eae6ab4d81123bdfbb39f09911"
+      "sha256": "157ce2a279999b10a267983e355f883acdfebaf4271e1d2285e5455f705ce7f8"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/clebsch-factorization/clebsch_factorization.tex",
-      "sha256": "120cf9ae4fd926130c34305dca6dfc36682989dae5ed2aa00992707abd27e7e6"
+      "sha256": "54784bcb7656815881c97ab191010c260868d08d4fb404dbdf8c2a07e6a08ff4"
     }
   ],
   "title": "Quadratic trade rigidity and cubic orientation\\\\ in conic matching quotients",
