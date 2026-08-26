@@ -96,9 +96,9 @@
       "sha256": "57437855a31cdecfe5b52da90f5e54cb54cfe987cfdfe2125dc81b3b8c777a91"
     },
     {
-      "bytes": 6628,
+      "bytes": 6591,
       "path": "software/projective-reed-solomon/tests/cli.rs",
-      "sha256": "341fb4792b36b6144978b15778fb3f69ea188343828db32c5a8498d7df83bec0"
+      "sha256": "9ca4948eaade3ffc4f5153712a2f5fffe15ae0362b31e45063078d9884beeef8"
     },
     {
       "bytes": 5788,

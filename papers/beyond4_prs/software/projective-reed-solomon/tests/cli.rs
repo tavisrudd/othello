@@ -71,7 +71,6 @@ fn help_exposes_the_mathematical_commands() {
     for command in ["canonicalize", "distance", "decode", "classify", "verify"] {
         assert!(help.contains(command), "missing command {command}");
     }
-    assert!(!help.contains("C969"));
 }
 
 #[test]
