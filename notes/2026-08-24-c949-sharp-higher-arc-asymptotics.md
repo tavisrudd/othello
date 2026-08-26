@@ -2271,13 +2271,14 @@ block contains at most three open-side additions,
 D <= sum_(T in U)x_T <= J+3u.
 ```
 
-Every off-triangle point lies on exactly four Mason `r`-secants.  At most
-`binom(u,2)` such points have all four secants in `U`, because each is the
-intersection of a pair of lines of `U`.  Every other off-triangle point
-contributes a missing incidence, so `f<=binom(u,2)+4f-J`.  Combining gives
+Every off-triangle point lies on exactly four Mason `r`-secants.  A point
+whose four secants lie in `U` consumes six distinct pairs of lines of `U`,
+so there are at most `binom(u,2)/6` such points.  Every other off-triangle
+point contributes a missing incidence, so
+`f<=binom(u,2)/6+4f-J`.  Combining gives
 
 ```text
-D <= 3f+3u+binom(u,2).
+D <= 3f+3u+binom(u,2)/6.
 ```
 
 But the exact deficit and the zero-side filling inequality give
@@ -2326,7 +2327,7 @@ v=2q-2,   b=(q-1)(q-3)/3,   d=2r-2,
 For `U` deficient blocks this gives exactly
 
 ```text
-6F_0(U)<=binom(|U|,2)-e_leave(U).
+6F_4(U)<=binom(|U|,2)-e_leave(U).
 ```
 
 The three matching leaves alone give no subquadratic improvement for
@@ -5975,7 +5976,7 @@ family is lower priority.
   incidence budget while containing no Mason correlation variable; it is a
   moment-level countermodel, not a realizable projective example.
   **Open quantitative mystery:** the exponent `3/2` enters only through the
-  crude bound `F_0(U)<=binom(u,2)`, where `F_0(U)` counts external Mason
+  crude bound `6F_4(U)<=binom(u,2)`, where `F_4(U)` counts external Mason
   points whose four `r`-secants all belong to the deficient block set `U`.
   `(SR24a-Mason-hypergraph)` identifies it as a regular four-uniform linear
   design whose pair leave is three perfect matchings.  A four-group affine
