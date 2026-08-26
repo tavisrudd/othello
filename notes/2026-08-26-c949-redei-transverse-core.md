@@ -497,6 +497,49 @@ average of the differently parameterized tangent `E_3` forms transports
 normalization or a polynomial norm/Witt identity controlling the full sum
 `(TR25)`.
 
+There is a separate selector obstruction relevant to minimum-size
+constructions.  `Chow_D`, `(E,U)`, and `(TR21)--(TR25)` are unweighted data
+of the tight-line set.  A downward four-switch requires a **blocker-labeled**
+fourfold point, four **arc-labeled** degree-one donors, and non-tight blocker
+slack.  None of these labels or slacks is recorded by the unweighted Chow
+form.  In the balanced `eta=1` branch the exact selector ledger has
+
+```text
+(b_1,b_2,b_3,b_4)=(2q(q-4)/3,2q,0,0),               (TR26)
+```
+
+so the required blocker-labeled fourfold point is absent identically even
+though the unweighted arrangement has many fourfold points.  At `eta=2`,
+`b_4` is at most one and is not forced.  Therefore no functional of the
+current unweighted `E,U` or first polar can certify a downward construction
+without a new marked-selector carrier or norm identity.
+
+At `eta=1` the marked low selector nevertheless has an exact graph normal
+form.  Join two vertices of `D` when their line is a bisecant.  The nine
+exceptional vertices have degree one and the `2q-5` generic vertices degree
+three.  The unique selected tangent is incident with a generic vertex
+`v_0`; the selected `A_2` edges form a perfect matching on the remaining
+`2q-6` generic vertices.  No selected edge meets `v_0` or an exceptional
+vertex, and the complementary blocker-edge graph has degree sequence
+`1^9,2^(2q-6),3^1`.  This is the selector compression `(v_0,tau,matching)`
+from `(SR16)--(SR17b)`, not a new identification with C962's 714 mapping
+tasks.  Tutte feasibility and all high-incidence/mapping gates remain.
+
+More precisely, each of the three side colours restricts to a matching on
+the generic vertices with three missing generic incidences.  No single
+colour can supply the selector matching after deleting `v_0`.  For a fixed
+generic `v_0`, feasibility is exactly
+
+```text
+odd(H[G\{v_0}] - X) <= |X|   for every X subset G\{v_0}.
+```
+
+The secant ledger fixes the almost-cubic coloured degree sequence but no
+such odd cuts.  A new projective expansion theorem would have to turn an
+odd cut into too many completed tri/four-secant pairs.  Computationally,
+this is still a useful exact first gate: test all generic `v_0` and their
+perfect matchings before invoking the q=27 carrier/mapping machinery.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -521,5 +564,7 @@ normalization or a polynomial norm/Witt identity controlling the full sum
   catalecticant/jet of a binary cube root.
 - **Settled/no-go:** tangent-origin gauge changes cannot see that normal
   polar, while changing tangents mixes every normal layer as in `(TR25)`.
+- **Settled/no-go:** unweighted Chow/Redei data omit the arc/blocker selector
+  and non-tight slack; `(TR26)` shows this is decisive already at `eta=1`.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
-  transports the fourth-Witt gate to `E,U`, or `L`.
+  transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.

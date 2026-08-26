@@ -77,6 +77,13 @@ does not turn the known lower bound into a construction upper bound and does
 not normalize a candidate near-minimizer downward.  See `(MV6)--(MV9)` in
 the focused variance note.
 
+The exact reverse move would lower repair by three, but it needs a safe
+blocker point of tight degree four and four arc-labeled degree-one donors.
+The balanced `(4,-3)` arm is automatically reverse-free at `eta=1,2`: at
+`eta=1` it has `b_4=0`, and at `eta=2` there is at most one such center and
+at most one degree-one donor.  This closes the switch route for the main
+constant-repair branch.
+
 ### 2. Mason-relative quadratic separation
 
 Let `B` be a near-sharp minimal `q/3`-fold blocking complement and `S` any
@@ -106,6 +113,19 @@ It does **not** prove that an arbitrary near-sharp blocker is close to any
 Mason root.  That missing mixed-correlation theorem would itself be a major
 global classification input.
 
+It also closes the tempting Mason-completion construction.  If
+`K_0=PG(2,q)\(S union L_3)` is the canonical Mason complement, then for any
+near-base target `A`
+
+```text
+|A triangle K_0| >= (2c_*-o(1))q^2-(q+1).
+```
+
+Consequently both directions of the exchange are `Omega(q^2)`.  No greedy
+completion, bounded repair, or `O(q)` chain of local switches can construct
+the missing near-sharp family from `K_0`; a Mason-seeded construction would
+have to be a genuinely quadratic global trade.
+
 ### 3. Balanced blocking geometry
 
 The balanced `(4,-3), eta=1` branch dualizes to a minimal blocking
@@ -117,6 +137,13 @@ t_3=3,              t_4=q(q+2)/3.
 ```
 
 Its high-line arrangement has only double, triple, and quadruple points.
+The arc/blocker selector is not determined by that unweighted spectrum.  In
+the exact balanced `eta=1` labeling, the blocker degree split is
+
+```text
+(b_1,b_2,b_3,b_4)=(2q(q-4)/3,2q,0,0).
+```
+
 Local jets, scalar cocycles, freeness/Saito, and automatic cube-root gluing
 are all proved no-go routes.  A quartic carrier would contradict blocking for
 `q>=81`, but no quartic-carrier implication is proved.
@@ -183,6 +210,31 @@ of them.  The values of `E` are exactly the transverse derivatives of `Q`
 along the three moving low-pencil roots.  Hence the next proof must use a
 pre-specialization split-product, reciprocal-norm, or Witt identity.
 
+The selector has one further exact graph compression already proved in the
+frozen snapshot.  Make a graph on the `2q+4` points of `D`, with one edge for
+each bisecant.  At `eta=1` its nine exceptional vertices have degree one and
+the other `2q-5` vertices degree three.  The unique selected tangent meets a
+generic vertex `v_0`; the selected `A_2` bisecants form a perfect matching on
+the `2q-6` other generic vertices and avoid both `v_0` and the exceptional
+vertices.  Equivalently the complementary blocker graph has degree sequence
+
+```text
+1^9, 2^(2q-6), 3^1.
+```
+
+Thus the marked selector relative to `D` reduces to `(v_0, tangent,
+perfect matching)`.  This is necessary, not sufficient: it does not yet
+enforce Tutte feasibility, the fourfold/mapping gates, or identify the 714
+q=27 carrier tasks.
+
+The three side colours do not supply that matching automatically: each
+colour restricts to a matching on the generic vertices with exactly three
+generic defects.  After deleting `v_0`, feasibility is exactly Tutte's
+odd-component condition on the remaining `2q-6` generic vertices.  The
+current spectra control degrees but not odd cuts.  This gives a cheap exact
+preprocessing gate for q=27 and a clean field-uniform target: prove a
+geometric odd-cut expansion theorem for the embedded bisecant graph.
+
 ### 5. q=27 finite carrier boundary
 
 C962 supplies a 714-task high-incidence DFS interface.  Each high cell gives
@@ -230,11 +282,39 @@ lower homogeneous Chow layer `(TR21)` and form a marked tail catalecticant
 of a binary cube root `(TR23)--(TR24)`; `C` starts only one layer later.
 An origin gauge cannot expose this normal polar, and every actual tangent
 restriction mixes all normal layers as in `(TR25)`.
+Moreover the current Chow/`(E,U)` state is unweighted: it omits the
+arc/blocker selector and non-tight slack required by a downward trade.
+The next carrier bridge must be marked, not merely another unweighted
+coefficient extraction.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
 
-### EV2 — all-signature mixed-correlation inverse theorem
+### EV2 — non-Mason marked-core construction
+
+The balanced branch now has an exact sufficient construction mechanism.
+Seek a `2q+4` dual blocking four-arc `D` with the local spectra above, mark a
+generic tangent vertex `v_0`, and choose the required perfect matching of
+the remaining generic bisecant graph.  Select the tangent, the `q-3`
+matching bisecants, all three trisecants, and all `q(q+2)/3` four-secants.
+The count is exactly
+
+```text
+1+(q-3)+3+q(q+2)/3=q^2/3+5q/3+1.
+```
+
+The local selector ledger makes every core point tight.  If the remaining
+global off-core concurrency is at most `2q/3+1`, duality gives the desired
+complete arc.  This is a rigorous conditional mechanism, not an existence
+proof: neither the three-colour matching nor the torus fibers enforce that
+last cap.  It is necessarily quadratic-far from every Mason seed.
+
+At q=27, use the Tutte test as preprocessing, then route surviving marked
+cores into the parallel C962 carrier/mapping gates.  Field-uniformly, the
+highest-EV construction theorem is an odd-cut plus off-core concurrency
+bound for this embedded marked torus graph.
+
+### EV3 — all-signature mixed-correlation inverse theorem
 
 Prove that a near-sharp minimal `q/3`-fold blocker either has
 
@@ -265,14 +345,14 @@ exceptional pencil avoiding the bounded bad set admits a capacity-compatible
 directed switch.  What remains is to turn those switches into a contradiction
 or normal form at the target `eta`.
 
-### EV3 — concurrent cubic coupling
+### EV4 — concurrent cubic coupling
 
 Couple the projective cubic `Q_3` controlling the first forbidden concurrent
 coefficient to the two permutation root factorizations.  Directional data
 alone permits arbitrary `Phi_dir Q_3`; the missing input is splitness or an
 offset-sensitive correlation.
 
-### EV4 — triangular `(5,-1)` trade theorem
+### EV5 — triangular `(5,-1)` trade theorem
 
 This signature has `Omega(q)` high-secant trade even when `eta=o(q)`.  It is
 not governed by the constant-repair balanced carrier lemma and needs a
@@ -320,6 +400,14 @@ separate global trade obstruction or construction.
 - **Settled/no-go:** capacity-safe four-donor switches are genuine, but they
   increase arc size and therefore do not improve the minimum-size
   construction sought by `t_n(2,q)`.
+- **Settled/no-go:** the reverse switch is absent in the balanced
+  `eta=1,2` arm, and unweighted Chow data omit the selector labels needed to
+  detect it.
+- **Settled:** at `eta=1` the marked low selector is exactly a generic
+  vertex, its tangent, and a perfect matching of the remaining generic
+  bisecant graph.
+- **Open:** prove or refute the corresponding geometric Tutte/odd-cut
+  condition; side-colour degrees alone do neither.
 - **Open:** compute the transverse pencil derivatives from split/Witt/norm
   data.
 - **Open:** connect any resulting bounded identity to C962's `(A,C)` carrier

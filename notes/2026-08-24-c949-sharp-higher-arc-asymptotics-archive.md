@@ -189,3 +189,29 @@ by three.  The final red-team caught the direction issue: C949's `t_n(2,q)`
 minimizes complete-arc size, so this upward replacement neither supplies the
 missing construction upper bound nor strengthens the lower bound on `t_n`.
 It is retained only as a structural normalization/no-go boundary.
+
+The exact reverse move was then audited.  It needs a blocker-labeled
+degree-four center, four arc-labeled degree-one donors, and non-tight slack.
+The balanced `(4,-3)` branch is automatically reverse-free at `eta=1,2`;
+at `eta=1` its exact blocker degree split has `b_4=0`.  This also exposed a
+new carrier boundary: the current Chow/`(E,U)` state is unweighted and cannot
+recover the selector labels required by a downward construction.
+
+The marked selector was then routed back through the frozen `(SR16)--(SR17b)`
+normal form.  At `eta=1` it is exactly a generic vertex `v_0`, its selected
+tangent, and a perfect matching of the other `2q-6` generic vertices in the
+three-coloured bisecant graph.  The side colours leave three generic defects
+each, so no colour itself supplies the matching; exact feasibility is a
+Tutte odd-cut condition not controlled by the current secant moments.  This
+is now the first finite preprocessing gate before C962's carrier/mapping
+checks, not an asserted identification with its 714 tasks.
+
+The construction audit also separated Mason from the viable mechanism.
+Quadratic Mason separation implies every near-base target is
+`(2c_*-o(1))q^2` symmetric-difference away from the canonical Mason
+complement, up to the removed side.  Hence no greedy completion or `O(q)`
+switch chain can work.  The remaining exact conditional construction is
+non-Mason: realize the marked `2q+4` blocking four-arc and its matching, then
+prove the global off-core concurrency cap.  Selecting its tangent, matching
+bisecants, three trisecants, and all four-secants has the desired
+`q^2/3+5q/3+1` count, but existence and the off-core cap remain open.

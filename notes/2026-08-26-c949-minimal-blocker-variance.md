@@ -252,6 +252,73 @@ need a high-degree blocker point with suitable degree-one arc donors and are
 not supplied by `(MV9)`.  The augmentation is retained as a structural
 normalization/no-go boundary only; no `base+1` bound follows from it.
 
+## Reverse switch and the minimum-size direction
+
+The useful direction for `t_n(2,q)` is the exact reverse move.  Suppose
+`P in B` has `beta_P=4`, no non-tight `(r+1)`-secant contains `P`, and each
+of its four incident tight lines contains a point `Q_i in A` with
+`alpha_(Q_i)=1`.  Relabel `P` into `A` and the four `Q_i` into `B`.  Each old
+tight line retains `r` blocker points.  A non-tight line through `P` had at
+least `r+2` points and loses only `P`; all lines through the `Q_i` gain
+blocker points.  The new blocker remains minimal, and its complete-arc
+complement has repair `eta-3`.
+
+Thus a minimum complete arc is necessarily reverse-switch-free.  If
+
+```text
+L_1={ell in D: ell contains an alpha=1 arc point},
+```
+
+then every safe `beta=4` star contains a tight line outside `L_1`.
+
+The principal triangular arm is automatically reverse-free at the first
+two constant repairs.  In signature `(j,sigma)=(4,-3)`, the exact ledger is
+
+```text
+A_1=-1+2eta-h-2H,       b_3=h,       b_4=H,
+h+2H<=2eta-1.                                    (MV12)
+```
+
+At `eta=1`, `(MV12)` forces `h=H=0`, so `b_4=0` and `A_1=1`: no reverse
+center exists.  At `eta=2`, one has `H<=1`; if the only possible reverse
+center exists (`H=1`), then `A_1<=1`, far short of four donors.  Hence the
+balanced `eta=1,2` branch cannot be reduced by this move.
+
+For the triangular `(5,-1)` arm and the seven concurrent rows, the current
+moments permit the reverse gadget to be absent.  A further theorem would
+have to be an embedded expansion/cover statement for safe `beta=4` stars
+against `L_1`, not another scalar optimization.
+
+## Mason completion is necessarily quadratic
+
+Let `S` be a Mason generalized-KM large root with zero triangle
+`L_1,L_2,L_3`, and put
+
+```text
+K_0=PG(2,q) \ (S union L_3),      |K_0|=q(q+2)/3.
+```
+
+The two other zero sides are `q`-secants of `K_0`.  Merely enforcing the
+`2r+1` cap already requires deleting at least `r-1` points from each, hence
+at least `2r-3` deletions and `5r-3+eta` insertions.  Thus monotone or
+bounded completion is impossible.
+
+The Mason-relative separation theorem is much stronger.  For a near-base
+complete arc `A`, with `B=A^c` and `B_0=K_0^c=S union L_3`,
+
+```text
+|A triangle K_0|=|B triangle B_0|
+ >= (2c_*-o(1))q^2-(q+1),
+c_*=0.0171413259... .                            (MV13)
+```
+
+Writing `R=K_0\A` and `P=A\K_0`, the size difference
+`|P|-|R|=q+eta` then gives `|P|,|R| >= (c_*-o(1))q^2`.  Therefore a
+Mason-seeded sharpness construction must be an explicit global quadratic
+exchange in the Mason incidence structure.  Greedy extension, finite
+completion, and every `O(q)` chain of bounded switches are ruled out.  This
+does not exclude an unrelated small root or a genuinely quadratic trade.
+
 What is **not** proved:
 
 - no zero triangle is located;
