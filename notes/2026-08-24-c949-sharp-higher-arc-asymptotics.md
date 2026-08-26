@@ -404,7 +404,9 @@ cube-sector of `Q`, not the bounded quadratic defect.  It is not determined
 by the 64 missing-root labels and changes with the fixed intercept frame.
 Thus “go one coefficient lower” is not itself a bounded solution: the new
 input must relate each labelled missing polynomial to `G_m`, or control the
-global cube-sector `B_0`.
+global cube-sector `B_0`.  Its degree nevertheless gives two exact compiler
+checksums, the unweighted and slope-weighted sums of the regular scalars plus
+the boundary/vertical quotient values `(TR46a)`.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.

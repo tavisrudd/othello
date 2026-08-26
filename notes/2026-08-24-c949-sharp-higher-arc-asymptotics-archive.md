@@ -360,4 +360,8 @@ coefficient that is not spectrum-blind, but it lies in the unrestricted
 q-scale cube-sector annihilated by the derivative used for the bounded
 quadratic gate.  The labelled missing-root subset does not determine it.
 Thus the next real theorem must connect `A_m` to `G_m` or control that cube
-sector globally; simply descending the Chow coefficients is not enough.
+sector globally; simply descending the Chow coefficients is not enough.  A
+last free interpolation step gives two exact q-scale checksums: the sum and
+slope-weighted sum of the regular `d_m([X]G_m)^3` values are fixed by the two
+finite-boundary and one vertical quotient values.  These are useful compiler
+consistency checks, not bounded label compression.

@@ -984,15 +984,21 @@ derivative that produced the bounded quadratic `p` kills it.  The scalar
 `d_m([X]G_m)^3` is not determined by the labelled missing-root subset
 `A_m|B_6`, and it depends on the fixed intercept frame.
 
-There is a q-scale checksum but no bounded compression.  Since the affine
-polynomial has degree at most `q-2` and vanishes at the vertices,
+There are two q-scale checksums but no bounded compression.  Write
+`theta(m)=e_(q-2)({b(P)-ma(P)})` and let `theta(infinity)` be its homogeneous
+vertical value.  Since its binary form has degree `q-2` and vanishes at the
+vertices,
 
 ```text
 sum_(m regular)d_m([X]G_m)^3
- +sum_(b boundary finite)s_b([X^(r+1)]C_b)^3=0.
+ +theta(b_1)+theta(b_2)=0,
+
+sum_(m regular)m d_m([X]G_m)^3
+ +b_1 theta(b_1)+b_2 theta(b_2)+theta(infinity)=0,   (TR46a)
 ```
 
-This is useful only after all fibres are known.  A genuine residual theorem
+where `theta(b)=-[X^3]quo(C_b^2,A_b)` (equivalently
+`s_b([X^(r+1)]C_b)^3`).  These are useful only after all fibres are known.  A genuine residual theorem
 must bridge the labelled missing polynomial `A_m` to the cube-sector data
 `G_m` or control `B_0` globally.
 
