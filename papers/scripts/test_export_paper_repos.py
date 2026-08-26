@@ -424,7 +424,7 @@ reason = "private analysis workspace"
         self.assertEqual(plan["release_output_policy"], "immutable-source")
         candidate = self.fx.root / "release-candidate"
         manifest = exporter.materialize_repository(commit, "demo-paper", candidate)
-        self.assertEqual(manifest["release_output_policy"], "immutable-source")
+        self.assertNotIn("release_output_policy", manifest)
         self.assertEqual((candidate / "main.pdf").read_bytes(), b"content-addressed release\n")
 
     def test_release_output_policy_rejects_inconsistent_declaration(self) -> None:

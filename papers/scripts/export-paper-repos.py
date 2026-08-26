@@ -740,12 +740,21 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
     collisions = sorted(reserved & {path for path, _, _, _ in payloads})
     if collisions:
         raise Refused(f"repository {repository!r} source collides with generated files: {collisions}")
+    content_sha256 = sha256(
+        "".join(
+            f"{item['path']}\0{item['sha256']}\n"
+            for item in sorted(manifest_files, key=lambda item: item["path"])
+        ).encode()
+    )
     provenance = (
         "# Export provenance\n\n"
-        f"- Source snapshot commit: `{commit}`\n"
-        f"- Repository identity: `tavisrudd/{repository}`\n"
+        f"- Public repository: `https://github.com/tavisrudd/{repository}`\n"
+        f"- Exported-content SHA-256: `{content_sha256}`\n"
         "- Export method: deterministic, content-addressed source materialization.\n"
-        "- File hashes and source blob identities are recorded in `export-manifest.json`.\n"
+        "- File hashes are recorded in `export-manifest.json`; the public Git commit "
+        "is the repository's own `git rev-parse HEAD`.\n"
+        "- Private source-authority and exporter-registry identifiers are deliberately "
+        "not part of this public provenance record.\n"
     ).encode()
     payloads.append(("PROVENANCE.md", provenance, "100644", "generated"))
     manifest_files.append(
@@ -778,23 +787,16 @@ def materialize_repository(source_ref: str, repository: str, out: Path) -> dict[
 
     manifest = {
         "schema_version": 1,
-        "exporter_blob": git(
-            "rev-parse", f"{commit}:papers/scripts/export-paper-repos.py"
-        ).decode().strip(),
+        "content_sha256": content_sha256,
         "github": f"tavisrudd/{repository}",
         "main_sources": plan["main_sources"],
         "manifest_self_excluded": True,
-        "paper_ids": row["paper_ids"],
-        "paper_registry_sha256": sha256(git("show", f"{commit}:{PAPER_REGISTRY}")),
         "repository": repository,
-        "repository_map_sha256": sha256(git("show", f"{commit}:{REPOSITORY_MAP}")),
-        "source_commit": commit,
         "excluded_symlinks": [
             {"path": path, "reason": reason} for path, reason in sorted(exclusions.items())
         ],
         "excluded_path_count": len(path_exclusions) + len(glob_exclusions),
         "excluded_release_outputs": sorted(release_outputs),
-        "release_output_policy": release_output_policy(row),
         "files": sorted(manifest_files, key=lambda item: item["path"]),
     }
     manifest_bytes = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
@@ -922,7 +924,7 @@ def command_materialize(args: argparse.Namespace) -> int:
     manifest = materialize_repository(args.source_ref, args.repository, args.out)
     print(
         f"materialized={args.out.expanduser()} repository={manifest['repository']} "
-        f"source_commit={manifest['source_commit']} files={len(manifest['files']) + 1}"
+        f"content_sha256={manifest['content_sha256']} files={len(manifest['files']) + 1}"
     )
     return 0
 
@@ -936,7 +938,7 @@ def command_sync(args: argparse.Namespace) -> int:
     )
     print(
         f"synced={args.root.expanduser()} repository={manifest['repository']} "
-        f"source_commit={manifest['source_commit']} "
+        f"content_sha256={manifest['content_sha256']} "
         f"changed={manifest['synced_files_changed']}"
     )
     return 0
@@ -1014,7 +1016,7 @@ def command_verify(args: argparse.Namespace) -> int:
     manifest = verify_materialized_tree(args.root)
     print(
         f"verified={args.root.expanduser()} repository={manifest['repository']} "
-        f"source_commit={manifest['source_commit']} tracked_files={len(manifest['files']) + 1}"
+        f"content_sha256={manifest['content_sha256']} tracked_files={len(manifest['files']) + 1}"
     )
     return 0
 
