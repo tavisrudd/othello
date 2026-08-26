@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
-  <title id="title">ERGO-Comp compilation pipeline</title>
+  <title id="title">ERGO-comp compilation pipeline</title>
   <desc id="desc">Structured finite algebraic data passes through certified compilation, then an adaptive exact backend, and produces an optimum with a replayable witness or obstruction.</desc>
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">

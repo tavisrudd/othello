@@ -1,4 +1,4 @@
-# ERGO-Comp Rust engine
+# ERGO-comp Rust engine
 
 This Cargo package is the high-performance counterpart to the exact Python
 oracle in the parent directory. It uses Rust-native representations and

@@ -1,0 +1,36 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  >=Latex,
+  box/.style={draw, rounded corners=2pt, align=center, text width=44mm,
+    minimum height=10mm, inner sep=2.5pt, font=\footnotesize},
+  arrow/.style={->, semithick},
+]
+  \node[box, fill=gray!10] (full) at (0,0)
+    {coefficient-labelled lift systems\\and the ambient presentation};
+  \node[box, fill=blue!8] (labels) at (-3.2,-1.65)
+    {prescribed-coset minima\\indexed by functional label};
+  \node[box, fill=green!9] (supports) at (3.2,-1.65)
+    {exact helper-support families\\with their overlap pattern};
+  \node[box, fill=orange!10] (compose) at (-3.2,-3.30)
+    {exact nonconfinement cost $\Gamma$\\and min--sum composition};
+  \node[box, fill=violet!8] (reliability) at (3.2,-3.30)
+    {bounded reliability and\\service-rate regions};
+  \node[box, fill=gray!12] (rghw) at (0,-4.95)
+    {relative-weight hierarchy\\minimum helper union by rank};
+
+  \draw[arrow] (full) -- (labels);
+  \draw[arrow] (full) -- (supports);
+  \draw[arrow] (labels) -- (compose);
+  \draw[arrow] (supports) -- (reliability);
+  \draw[arrow, dashed] (labels.south east) to[bend left=17] (rghw.north west);
+  \draw[arrow, dashed] (supports.south west) to[bend right=17] (rghw.north east);
+\end{tikzpicture}
+\caption{The two information branches used in the paper.  Fibrewise labelled
+minima form an exact state for numerical composition; minimizing lifts must be
+stored separately to propagate coefficient witnesses.  Exact support families
+retain the overlaps needed for stochastic and fractional recovery questions.  Relative
+weights are the common minimum-cost projection (dashed arrows), complete for
+helper-union minima but not for either richer question.}
+\label{fig:information-hierarchy}
+\end{figure}

@@ -81,34 +81,3 @@ recoverable when it lies in
 \]
 Only this recovered subspace dimension is counted below.  Relations supported
 entirely on $P$ have recovered dimension zero and do not consume helpers.
-
-As a brief illustration of the coefficient layer, minimum-weight equations
-already recover the whole dual of an MDS code.
-
-\begin{theorem}[Minimum-weight MDS recovery equations span the dual]
-\label{thm:mds-reconstruction}
-\coverage{absent}%
-Let $C\leq\F_q^E$ be an $[n,k]_q$ MDS code with $1\leq k<n$, and let
-$x\in E$.  Then
-\[
- \operatorname{span}\cP_x^{(\leq k)}(C)=C^\perp,
-\]
-and their supports form the complete $k$-uniform clutter on
-$E\setminus\{x\}$.
-\end{theorem}
-
-\begin{proof}
-The dual has dimension $n-k$ and distance $k+1$.  For each $(k+1)$-set $T$,
-restriction $C^\perp\to\F_q^{E\setminus T}$ has a nonzero kernel, whose words
-have support exactly $T$ by the distance bound.  Thus all stated supports
-occur.  Fix a $(k-1)$-set $Q\subseteq E\setminus\{x\}$ and take the normalized
-word on $\{x,t\}\cup Q$ for each
-$t\in E\setminus(\{x\}\cup Q)$.  Their private coordinates $t$ make these
-$n-k$ words independent, hence a basis of $C^\perp$.
-\proves{thm:mds-reconstruction}%
-\end{proof}
-
-The support clutter in this theorem depends only on the MDS parameters.  The
-normalized equations retain the represented dual code.  This is the first
-instance of the support--coefficient distinction used in the transfer and
-separation results below.

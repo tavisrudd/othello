@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "paper": "Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies",
+  "paper": "Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs",
   "formal_package": "lean",
   "reviewer_interface": "TavisRuddFiniteGeom.Papers.RecoveryStructures.PaperInterface",
   "axiom_audit": "TavisRuddFiniteGeom.Papers.RecoveryStructures.Verification.AxiomAudit",
   "terminal_namespace": "TavisRuddFiniteGeom.Papers.RecoveryStructures.",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "mathlib_rev": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
-  "claim_count": 25,
+  "claim_count": 26,
   "complete_claim_count": 1,
   "terminal_count": 4,
   "permitted_axioms": [

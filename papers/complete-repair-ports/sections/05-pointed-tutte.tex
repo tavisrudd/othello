@@ -1,21 +1,23 @@
-\section{What the relative-weight hierarchy forgets}
+\section{Sharp limits of coarser recovery invariants}
 \label{sec:separations}
 
-Relative generalized weights record minimum support sizes.  They do not
-record the overlap pattern of all recovery sets, which controls stochastic
-repair.  Nor does the abstract pair record its ambient inner-code realization,
-which can change $d(I^\perp)$ and the prescribed-coset support costs in
-\eqref{eq:weighted-subspace-cost}.  The information loss used in this paper is
+The preceding section supplies an exact numerical state for composition.  We now rule out
+two tempting coarsenings.  Relative generalized weights record minimum support
+sizes but not the overlap pattern of all recovery sets, which controls
+stochastic repair.  The abstract nested pair records more than those minima,
+but not its ambient inner-code realization; that presentation can change
+$d(I^\perp)$ and the prescribed-coset support costs in
+\eqref{eq:weighted-subspace-cost}.  The support-side loss is
 \[
  \text{normalized recovery systems}
  \longrightarrow \text{exact helper supports}
  \longrightarrow \text{relative-weight minima}.
 \]
-The exact finite concatenation formula also needs the outer functional dual
-and the joint support costs of the prescribed inner cosets.  The RGHW layer is
-the relative-matroid support minimum; the extra finite transfer data retain a
-chosen linear realization.  We give one separation at each of the two losses
-relevant to reliability and confinement.
+The exact finite concatenation formula instead uses the outer functional dual
+and the joint support costs of prescribed inner cosets.  The first separation
+below rules out the complete RGHW hierarchy as a reliability invariant at every
+quotient rank.  The second rules out even the full abstract pair, together with
+the same unlabelled helper supports, as a confinement invariant.
 
 First consider a one-dimensional recovered space.  On the helper set
 $\{0,\ldots,8\}$, let
@@ -29,7 +31,7 @@ where, for example, $158$ denotes $\{1,5,8\}$.  Both are realizable as the
 minimum recovery sets at a distinguished coordinate of a represented
 $[10,4,6]_q$ code over a common finite prime field.
 
-\begin{proposition}[Rank-one reliability separation]
+\begin{proposition}[Rank-one support-overlap separation]
 \label{prop:rank-one-reliability-separation}
 \coverage{absent}%
 The two distinguished coordinates above have the same minimum helper cost
@@ -117,7 +119,7 @@ with $\dim(D/K)=\ell$, define its radius-$R$ full-quotient reliability by
 where $S\subseteq J$ is the random set of independently surviving helpers,
 each present with probability $s$.
 
-\begin{theorem}[Equal relative weights, different reliability for full recovery]
+\begin{theorem}[The complete RGHW hierarchy does not determine reliability]
 \label{thm:rghw-reliability-separation}
 \coverage{absent}%
 For every $\ell\geq1$, there are two nested code pairs of quotient dimension
@@ -195,7 +197,7 @@ ambient dual distances.  Let
 The nonzero helper words have weights $1,2,3$, so
 $(M_1,M_2)=(1,3)$.
 
-\begin{proposition}[Different ambient realizations can change confinement]
+\begin{proposition}[The abstract nested pair does not determine confinement]
 \label{prop:coefficient-presentation}
 \coverage{absent}%
 Present the target space first by
@@ -206,16 +208,15 @@ and then by
 \[
  11\mapsto u,\qquad10\mapsto v,\qquad01\mapsto u+v.
 \]
-The two inner codes have the same associated nested pair, the same unlabeled
+The two inner codes have the same associated nested pair, the same unlabelled
 set of helper supports, and the same complete relative-weight
 hierarchy.  Their inner-dual weight multisets are respectively
-$\{2,3,5\}$ and $\{3,3,4\}$.  Hence their values of
-$M_t(D,K)+d(I^\perp)$, equivalently their eventual confinement thresholds,
-are
+$\{2,3,5\}$ and $\{3,3,4\}$.  Hence their additive outer-distance costs are
+respectively
 \[
- (\Gamma_1,\Gamma_2)=(3,5)
+ (M_1+d(I^\perp),M_2+d(I^\perp))=(3,5)
  \qquad\text{and}\qquad
- (\Gamma_1,\Gamma_2)=(4,6).
+ (M_1+d(I^\perp),M_2+d(I^\perp))=(4,6).
 \]
 \end{proposition}
 
@@ -233,3 +234,8 @@ Theorem~\ref{thm:ranked-confinement}.
 \uses{thm:ranked-confinement}%
 \proves{prop:coefficient-presentation}%
 \end{proof}
+
+These are limits on representation, not on executability.  Keeping the
+functional labels avoids the second loss, and keeping minimizing lifts permits
+the exact recursion to return the original coefficient systems.  The next
+section turns that closure law into an optimizer.

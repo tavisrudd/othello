@@ -68,6 +68,7 @@ complete_repair_ports.pdf
 complete_repair_ports.tex
 figures/ergo-comp-cpsat.tex
 figures/ergo-comp-pipeline.tex
+figures/information-hierarchy.tex
 flake.lock
 flake.nix
 formal-annotations.tex

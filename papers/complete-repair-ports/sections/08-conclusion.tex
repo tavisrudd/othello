@@ -1,68 +1,53 @@
 \section{Conclusion}
 
-For a fixed target set, shortening and puncturing the inner dual onto the
-helper coordinates give the associated nested code pair.  Its relative
-generalized Hamming weights give the exact
-minimum helper unions for recovered subspaces of each dimension.  The full
-normalized recovery equations retain the coefficient and overlap data that
-those minima discard.
+The central question is compositional: which recovery information must be
+retained before an inner code is placed inside an outer one?  The canonical
+shortening--puncturing pair answers the single-block minimum-cost question.
+Its relative generalized Hamming weights are exactly the minimum helper unions
+for recovered subspaces of each dimension.  They are not, however, sufficient
+recursive state for finite concatenation.
 
-The dual nested pair describes the same recovery problem from the failure
-side: its relative weights are the minimum numbers of helper failures that
-leave prescribed dimensions of target ambiguity.  Thus helper cost, erasure
-ambiguity, and rank reliability are different summaries of the recovered
-dimension as the surviving helper set varies.
+Exact finite transfer is captured by the prescribed-coset support functions
+indexed by outer functional labels.  Minimizing their blockwise costs over the
+complete outer functional dual gives $\Gamma_{j,T}(O,I)$, the minimum cost of a
+nonconfined normalized recovery system.  The same functions compose
+associatively by min--sum substitution through finite towers.  The numerical
+tables carry fibrewise minima; retaining minimizing lifts alongside them
+transports coefficient-level witnesses.  The rank-one bottleneck further shows
+that $\Gamma_{j,1}$ governs whether every internally recoverable target
+subspace is confined at a fixed radius.
 
-The finite concatenation theorem minimizes prescribed-coset support costs over
-the complete outer functional dual.  Its zero-functional sector has cost
+The additive threshold
 \[
- M_t(D_P,K_P)+d(I^\perp).
+ M_t(D_P,K_P)+d(I^\perp)
 \]
-After the outer-distance gate, every nonzero-functional sector lies above the
-chosen radius, so this additive expression gives the exact confinement
-criterion.
-In sufficiently long concatenations whose outer dual distance grows, every
-bounded equation below the corresponding threshold remains in its inner block
-and zero-extension copies its coefficients and exact support.  This yields
-positive-density realizations and eventually transfers any consequence that
-depends only on the copied minimal recovery sets, including bounded repair
-reliability and service-rate regions.
+is the zero-functional sector of the exact formula.  Outer dual distance makes
+it exact by excluding every nonzero-functional sector below the chosen radius.
+Restriction and zero-extension then preserve normalized equations and exact
+helper supports, not only a locality value.  This coefficient-level bijection
+yields the positive-density and bounded service-rate transfers; the
+one-coordinate weighted formula can remain exact even when the ordinary
+outer-distance gate fails.
 
-At one target coordinate, the same finite formula becomes the scalar
-target-constrained coset-weight formula.  The Singer-cycle construction shows
-that this specialization can certify transfer when ordinary outer support
-distance cannot.
+The separations identify the cost of each projection.  The complete RGHW
+hierarchy determines minimum helper unions but not the overlap law governing
+bounded reliability.  Even the abstract nested pair and its unlabelled helper
+supports do not determine confinement, because the ambient coefficient
+presentation can change $d(I^\perp)$ and the labelled coset costs.  The
+projective-simplex family exhibits all three levels explicitly: RGHWs give its
+minimum costs, ambient dual distance gives its collapsed thresholds, and the
+projective rank distribution gives its reliability polynomial.
 
-Under repeated concatenation, the labelled ordinary prescribed-coset support
-functions compose by exact min-sum substitution.  Helper-restriction costs
-and target images give the target-normalized recursion, while the inner-dual
-distance obeys a compatible formula.  Thus the finite
-nonconfinement cost can be evaluated through a tower while keeping its zero
-and nonzero functional sectors distinct.  The persistent scalar
-$\rho_T(I)+d(I^\perp)$ does not determine the next-level cost.
+ERGO-comp evaluates the closure theorem rather than serving as evidence for it.
+Its min--sum compiler stores labelled minima and predecessor lifts, returning
+exact hierarchical costs and replayable witnesses; its scheduler then optimizes
+the resulting recovery choices under heterogeneous capacities.  The recorded
+CP-SAT comparisons measure this implementation boundary on declared instances
+and do not enter any proof.
 
-The same labelled recursion is executable.  ERGO-Comp evaluates it by an
-exact min--sum dynamic program, retains block labels and coefficient-level
-witnesses, and couples the resulting recovery choices to an exact
-capacity-aware scheduler.  Quotient compilation and positive gradings can
-replace a large ambient box by its reachable state set without weakening the
-answer.  Direct and equivalently preprocessed CP-SAT comparisons separate the
-benefit of this algebraic compilation from the benefit of the specialized
-state engine.
-
-The two separations locate the remaining information.  Equal relative
-weights do not determine the stochastic law because they do not retain the
-intersection pattern of all recovery sets.  Even the associated nested pair
-does not determine the additive threshold: different ambient inner-dual
-realizations can change $d(I^\perp)$.  This is distinct from changing the
-generator-row basis of one inner code.  The projective-simplex family
-exhibits both levels explicitly: its relative weights give the minimum
-recovery costs, while the projective rank distribution gives the complete
-dimension-by-dimension reliability law.
-
-Two extensions require different objects.  Disjoint simultaneous service is
-an integral packing problem, rather than a minimum-union or fractional
-service-rate problem.  Bandwidth-aware repair for array codes allows each
-helper to transmit a subspace of functionals, so its cost is not Hamming
-support.  Neither extension follows by changing terminology in the present
-theorems; each requires a confinement invariant adapted to its cost model.
+Two extensions require different state.  Disjoint simultaneous service is an
+integral packing problem rather than a minimum-union or fractional service-rate
+problem.  Bandwidth-aware array-code repair lets each helper transmit a
+subspace of functionals, so Hamming support is no longer the relevant cost.
+Neither extension follows by relabelling the present invariant; each requires a
+new compositional cost model.

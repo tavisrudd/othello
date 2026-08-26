@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
-  <title id="title">ERGO-Comp speedup over structured CP-SAT</title>
-  <desc id="desc">Horizontal logarithmic bars show ERGO-Comp speedups of 2.465 times on the shell large-box profile, 268.441 times on balanced, 372.846 times on small-state, and 19.697 times on large nonuniform.</desc>
+  <title id="title">ERGO-comp speedup over structured CP-SAT</title>
+  <desc id="desc">Horizontal logarithmic bars show ERGO-comp speedups of 2.465 times on the shell large-box profile, 268.441 times on balanced, 372.846 times on small-state, and 19.697 times on large nonuniform.</desc>
   <defs>
     <linearGradient id="bar" x1="0" x2="1">
       <stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#7c3aed"/>
@@ -17,7 +17,7 @@
   </defs>
   <rect width="1100" height="520" rx="20" fill="#f8fafc"/>
   <text x="55" y="44" class="title">Bounded scheduler profiles versus structured CP-SAT</text>
-  <text x="55" y="68" class="subtitle">ERGO-Comp speedup; logarithmic scale; 11-round rotated warm-solve comparison</text>
+  <text x="55" y="68" class="subtitle">ERGO-comp speedup; logarithmic scale; 11-round rotated warm-solve comparison</text>
 
   <line x1="250" y1="420" x2="1010" y2="420" class="axis"/>
   <line x1="250" y1="92" x2="250" y2="420" class="grid"/>

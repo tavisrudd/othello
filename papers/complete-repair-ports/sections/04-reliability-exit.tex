@@ -74,6 +74,35 @@ $\kappa_C(P)+d(C^\perp)$.  Minimizing over $P$ and using
 \proves{thm:best-target-ghw}%
 \end{proof}
 
+Before bounding the MDS thresholds, we record what the coefficient layer adds
+even when the support clutter is completely uniform.
+
+\begin{theorem}[Minimum-weight MDS recovery equations span the dual]
+\label{thm:mds-reconstruction}
+\coverage{absent}%
+Let $C\leq\F_q^E$ be an $[n,k]_q$ MDS code with $1\leq k<n$, and let
+$x\in E$.  Then
+\[
+ \operatorname{span}\cP_x^{(\leq k)}(C)=C^\perp,
+\]
+and their supports form the complete $k$-uniform clutter on
+$E\setminus\{x\}$.
+\end{theorem}
+
+\begin{proof}
+The dual has dimension $n-k$ and distance $k+1$.  For each $(k+1)$-set $T$,
+restriction $C^\perp\to\F_q^{E\setminus T}$ has a nonzero kernel, whose words
+have support exactly $T$ by the distance bound.  Thus all stated supports
+occur.  Fix a $(k-1)$-set $Q\subseteq E\setminus\{x\}$ and take the normalized
+word on $\{x,t\}\cup Q$ for each
+$t\in E\setminus(\{x\}\cup Q)$.  Their private coordinates $t$ make these
+$n-k$ words independent, hence a basis of $C^\perp$.
+\proves{thm:mds-reconstruction}%
+\end{proof}
+
+The support clutter depends only on the MDS parameters, whereas the normalized
+equations retain the represented dual code.
+
 Put $k=\dim I$ and $b=\rank G_J$.  The exact sequence and the relative and
 ordinary Singleton bounds give
 \begin{equation}
@@ -82,7 +111,7 @@ ordinary Singleton bounds give
  \label{eq:singleton-bounds}
 \end{equation}
 
-\begin{theorem}[MDS thresholds and rigidity]
+\begin{theorem}[MDS ceiling and rank-one rigidity]
 \label{thm:mds-thresholds}
 \coverage{absent}%
 For $1\leq t\leq\ell$,
@@ -128,6 +157,10 @@ inequality; every rank is extremal.
 \uses{prop:relative-profile}%
 \proves{thm:mds-thresholds}%
 \end{proof}
+
+Thus extremality is detected at rank one: equality in the first threshold
+forces the inner code to be MDS and forces every later rank to attain its
+ceiling.  No separate higher-rank hypothesis is needed.
 
 We next record the global parameters and the density of the transferred
 data.  Let the inner code have parameters $[m,k,d]_q$, so
@@ -248,3 +281,8 @@ supersets and capacities outside the target block are irrelevant.
 \uses{thm:ungated-ranked-confinement, thm:objectwise-confinement}%
 \proves{cor:service-rate-transfer}%
 \end{proof}
+
+The next family realizes all three information levels in closed form: its
+RGHWs give minimum recovery costs, its ambient dual distance gives the gated
+confinement thresholds, and its projective rank distribution gives reliability
+beyond the RGHW hierarchy.

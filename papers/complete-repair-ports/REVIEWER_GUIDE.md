@@ -1,24 +1,25 @@
 # A referee's route through the proof
 
-The complete mathematical argument for *Exact Transfer of Bounded Linear
-Recovery and Relative Weight Hierarchies* is in the manuscript. The Lean
+The complete mathematical argument for *Exact Compositional Transfer of
+Bounded Linear Recovery: Relative Weights and Labelled Coset Costs* is in the
+manuscript. The Lean
 companion checks one linear-algebraic component of that argument; it is not
 used to stand in for the relative-weight or concatenation proofs.
 
 ## A first pass
 
-Read `thm:main` and the three paragraphs following it in
-[`complete_repair_ports.tex`](complete_repair_ports.tex). Then read the exact
-sequence, `prop:puncture-shorten-pair`, and `thm:relative-weight-recovery` in
+Read the abstract, the information-hierarchy figure, `thm:main`, and the five-step
+summary following it in [`complete_repair_ports.tex`](complete_repair_ports.tex).
+Then read the exact sequence, `prop:puncture-shorten-pair`, and
+`thm:relative-weight-recovery` in
 [`sections/02-confinement-transfer.tex`](sections/02-confinement-transfer.tex),
-followed by `thm:objectwise-confinement` and `thm:ranked-confinement` in
-[`sections/03-positive-density.tex`](sections/03-positive-density.tex). In that
-section read `thm:ungated-ranked-confinement` first, then its gated
-specializations `thm:objectwise-confinement` and `thm:ranked-confinement`, then
-`prop:prescribed-coset-composition`, `thm:weighted-pointed-confinement`, and
-`prop:strict-weighted-transfer` in the same section.
-Those statements contain the principal theorem and its proof. Sections 5 and
-6 test what the numerical hierarchy retains and discards.
+followed by `thm:ungated-ranked-confinement`, the explicit F2/F4 scalar-loss
+example, `prop:prescribed-coset-composition`, and `cor:all-rank-bottleneck` in
+[`sections/03-positive-density.tex`](sections/03-positive-density.tex). Then
+read its gated specializations `thm:objectwise-confinement` and
+`thm:ranked-confinement`. These statements give the exact finite criterion,
+its closure law, and its scalar collapse. The next section gives the two sharp
+information-loss results; the ERGO section then executes the closure law.
 
 ## Eleven checks against hidden assumptions
 
@@ -41,7 +42,7 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    section through `G_P`. To compare with the standard RGHW definition, the
    proof takes a vector-space complement to `L' ∩ K_P`; this can only shrink
    support. No canonical-complement assumption is used.
-4. **What is the exact finite invariant?** For a recovered subspace `T`, the
+4. **What data give exact finite transfer?** For a recovered subspace `T`, the
    ordinary inner cost is the minimum union support of representatives of the
    prescribed cosets of `I⊥`; the target-block version also imposes the target
    normalization. These are fixed-instance generalized covering costs, not a
@@ -51,9 +52,11 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    realization costs. The target outer projection is assumed nonzero so that a
    nonzero functional sector cannot be confined to the target block.
    `prop:prescribed-coset-composition` shows that the ordinary labelled costs
-   compose by blockwise min-sum substitution. Helper-restriction costs and the
-   target images give the target-normalized recursion. The scalar threshold
-   `rho_T(I)+d(I⊥)` alone is not used as recursive input.
+   compose by blockwise min-sum substitution. These numerical functions store
+   fibrewise minima; coefficient witnesses require separately retained
+   minimizing lifts. Helper-restriction costs and the target images give the
+   target-normalized recursion. The scalar threshold `rho_T(I)+d(I⊥)` alone is
+   not used as recursive input.
 5. **Where does the additive RGHW cost come from?** The map
    `Φ_I : F_q^E → L*` sends each concatenated dual block to its induced inner
    message functional. A dual vector gives a tuple in the functional dual of
@@ -111,17 +114,18 @@ Those statements contain the principal theorem and its proof. Sections 5 and
 ## What is proved where
 
 - [`sections/01-complete-ports.tex`](sections/01-complete-ports.tex) separates
-  exact supports, recovery sets, normalized equations, and reliability, and
-  proves MDS reconstruction.
+  exact supports, recovery sets, normalized equations, and reliability.
 - [`sections/02-confinement-transfer.tex`](sections/02-confinement-transfer.tex)
   proves the exact sequence, RGHW identity, and relative dimension/length
   profile formula.
 - [`sections/03-positive-density.tex`](sections/03-positive-density.tex) proves
   the exact ungated prescribed-coset formula in every recovered dimension,
-  its outer-distance RGHW specialization, the weighted one-coordinate form,
-  and its strictness example.
+  its associative min--sum closure and rank-one bottleneck, its outer-distance
+  RGHW specialization, the weighted one-coordinate form, and its strictness
+  example.
 - [`sections/04-reliability-exit.tex`](sections/04-reliability-exit.tex) proves
-  the generalized-weight, MDS, asymptotic, and service-rate consequences.
+  the generalized-weight, MDS reconstruction and rigidity, asymptotic, and
+  service-rate consequences.
 - [`sections/05-pointed-tutte.tex`](sections/05-pointed-tutte.tex) proves both
   separations.
 - [`sections/06-geometric-flagships.tex`](sections/06-geometric-flagships.tex)

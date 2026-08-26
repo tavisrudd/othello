@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 560" role="img" aria-labelledby="title desc">
-  <title id="title">ERGO-Comp parallel speedup by worker count</title>
+  <title id="title">ERGO-comp parallel speedup by worker count</title>
   <desc id="desc">Line chart showing composition scaling from 0.94 times at one Rayon worker to about 3.2 times at sixteen to twenty workers, and generic scheduler scaling to 2.44 times at twelve workers. Both decline at twenty-four workers.</desc>
   <defs>
     <style>

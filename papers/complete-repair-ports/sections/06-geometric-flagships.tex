@@ -1,7 +1,11 @@
 \section{The projective-simplex family}
 \label{sec:projective-simplex}
 
-The relative-weight hierarchy can be computed exactly for a non-MDS family.
+This non-MDS family realizes the paper's information hierarchy in one model.
+Its relative weights determine the minimum costs, its ambient inner dual gives
+the collapsed confinement thresholds, and the full projective rank distribution
+determines reliability.  Thus the family shows both what the RGHW hierarchy
+captures and what it forgets.
 Assume $m\geq2$, put
 \[
  N=\frac{q^m-1}{q-1},
@@ -70,6 +74,27 @@ follow from the displayed parameters.
 \uses{thm:ranked-confinement}%
 \proves{thm:projective-thresholds}%
 \end{proof}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+question & retained information & exact answer\\
+\midrule
+minimum rank-$t$ helper union & RGHW hierarchy &
+$\dfrac{q^m-q^{m-t}}{q-1}$\\[5pt]
+eventual first nonconfined cost & RGHW plus $d(I_m^\perp)$ &
+$\dfrac{q^m-q^{m-t}}{q-1}+q^{m-1}+1$\\[5pt]
+rank-$t$ recovery reliability & projective rank distribution &
+$R_t(s)$ in~\eqref{eq:projective-mobius-reliability}\\
+\bottomrule
+\end{tabular}
+\caption{The projective-simplex family separates the three questions.  The
+first two use minimum-cost data; the stochastic law requires the distribution
+of ranks of failed projective sets.}
+\label{tab:projective-information-levels}
+\end{table}
 
 This family also gives an exact stochastic law at every recovered dimension.
 Let each helper survive independently with probability $s$, and let $F$ be

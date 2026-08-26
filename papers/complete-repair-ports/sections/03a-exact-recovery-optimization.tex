@@ -1,12 +1,14 @@
 \section{Exact recovery optimization}
 \label{sec:exact-recovery-optimization}
 
-Proposition~\ref{prop:prescribed-coset-composition} is constructive.  It does
-not merely identify a confinement threshold: it gives a finite min--sum
-compiler whose states are the intermediate functionals that scalar summaries
-discard.  The companion software, \emph{ERGO-Comp} (Exact Recovery and
-Generalized-weight Optimization Compiler), implements this construction and
-retains coefficient-level witnesses for every optimum.
+Theorem~\ref{prop:prescribed-coset-composition} is already an algorithm: its
+min--sum states are the intermediate functionals that scalar summaries
+discard.  ERGO-comp (Exact Recovery and Generalized-weight Optimization
+Compiler) evaluates that recursion.  The numerical tables store the exact
+fibrewise minima; predecessor labels and minimizing lifts, stored separately,
+reconstruct a coefficient-level witness for every reported optimum.
+
+\input{figures/ergo-comp-pipeline}
 
 We first state the algorithm in flattened $\F_q$-linear coordinates.  Let
 $T$ have dimension $t$, let the outer message space have dimension $m$, and
@@ -135,7 +137,7 @@ constraints.  The fair deployment boundary is therefore:
 \]
 Direct CP-SAT is an appropriate end-to-end baseline.  A second,
 \emph{structured CP-SAT} baseline receives the same symmetry reduction and
-algebraic preprocessing as ERGO-Comp, isolating the value of the specialized
+algebraic preprocessing as ERGO-comp, isolating the value of the specialized
 state engine from the value of compilation itself.
 
 On the recorded x86-64 benchmark host, eleven interleaved rounds gave the
@@ -148,7 +150,7 @@ claims; exact inputs, outputs, tool versions, and replay metadata are in
 \scriptsize
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
-instance & ERGO-Comp & \shortstack{direct\\CP-SAT} &
+instance & ERGO-comp & \shortstack{direct\\CP-SAT} &
 \shortstack{structured\\CP-SAT} & \shortstack{direct/\\ERGO} &
 \shortstack{structured/\\ERGO}\\
 \midrule
@@ -159,7 +161,7 @@ large nonuniform & $52.85\,\mu$s & $1.250$ ms & $1.041$ ms & $23.65$ & $19.70$\\
 \bottomrule
 \end{tabular}
 \caption{Exact capacitated-repair scheduling.  Both CP-SAT columns return the
-same optimum and witness as ERGO-Comp; the structured column shares its safe
+same optimum and witness as ERGO-comp; the structured column shares its safe
 preprocessing.}
 \label{tab:ergo-comp-cpsat}
 \end{table}
@@ -171,3 +173,8 @@ state sets hidden inside a large capacity box.  The companion therefore solves
 the instance directly when the compiled state is sufficient, and otherwise
 supplies an exact preprocessing front end for a residual CP-SAT model while
 retaining recovery witnesses and confinement thresholds.
+
+The optimizer changes no mathematical hypothesis: it evaluates the labelled
+state proved sufficient above.  We now return to consequences of the collapsed
+RGHW threshold, beginning with ordinary generalized weights and extremal inner
+codes.

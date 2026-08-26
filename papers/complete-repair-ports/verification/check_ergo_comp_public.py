@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the ERGO-Comp release surface."""
+"""Validate the ERGO-comp release surface."""
 
 from __future__ import annotations
 
@@ -51,7 +51,7 @@ FORBIDDEN_SUFFIXES = {
 
 
 def fail(message: str) -> None:
-    raise SystemExit(f"ERGO-Comp public-surface check: FAIL [{message}]")
+    raise SystemExit(f"ERGO-comp public-surface check: FAIL [{message}]")
 
 
 def candidate_paths() -> list[Path]:
@@ -96,7 +96,7 @@ def main() -> None:
     cargo = (ROOT / "rust" / "Cargo.toml").read_text()
     if 'exclude = ["A?ENTS.md"' not in cargo:
         fail("Cargo package does not explicitly exclude its local instruction file")
-    print(f"ERGO-Comp public-surface check: PASS ({scanned} text files)")
+    print(f"ERGO-comp public-surface check: PASS ({scanned} text files)")
 
 
 if __name__ == "__main__":

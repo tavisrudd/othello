@@ -7,7 +7,7 @@ revision, proves the exact sequence attached
 to the target/helper split. Its reviewer interface contains four terminals,
 and its kernel axiom audit reports exactly `Classical.choice`, `Quot.sound`,
 and `propext`. The claim map in `lean/verification/claims.json` records one
-Lean-complete manuscript statement and twenty-four statements with no Lean
+Lean-complete manuscript statement and twenty-five statements with no Lean
 coverage. In particular, the relative-weight identity, exact prescribed-coset
 transfer theorem, and its confinement specializations have human proofs only.
 
@@ -48,7 +48,7 @@ to equal that manifest, apart from the exporter's optional `.gitignore`,
 present; any other unlisted tracked file fails the release gate.
 
 The release verifier also runs `verification/check_ergo_comp_public.py`. That
-gate scans the complete ERGO-Comp package, including code, comments, examples,
+gate scans the complete ERGO-comp package, including code, comments, examples,
 fixtures, benchmark labels, and evidence, for nonpublic identifiers, paths, or
 development residue. The algorithm evidence has an independent canonical
 replay:

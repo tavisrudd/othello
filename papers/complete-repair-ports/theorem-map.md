@@ -1,7 +1,7 @@
 # Theorem and evidence map
 
-This internal map follows the current manuscript *Exact Transfer of Bounded
-Linear Recovery and Relative Weight Hierarchies*. It records mathematical
+This internal map follows the current manuscript *Exact Compositional Transfer
+of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs*. It records mathematical
 dependence and evidence status. It assigns no quality grade.
 
 ## Main proof chain
@@ -14,6 +14,8 @@ dependence and evidence status. It assigns no quality grade.
 | `thm:relative-weight-recovery` | The minimum helper union for recovered dimension `t` is `M_t(D_P,K_P)`. | Recovery systems correspond to `t`-subspaces disjoint from `K_P`; a complement compares this with the standard RGHW minimum. | standard nested-code RGHW support/information interpretation. | absent |
 | `prop:relative-profile` | The relative dimension/length profile is the maximum recoverable target dimension from `s` helpers. | Restrict the exact sequence to vectors supported on a helper set. | standard inverse relation between RGHWs and the relative profile. | absent |
 | `thm:ungated-ranked-confinement` | For a fixed nonzero target-message subspace, `N>=2`, and a target block with nonzero outer projection, minimizing prescribed-coset support costs over `Hom(T,FD(O))` gives the exact finite first nonconfined helper cost; minimizing over internally recoverable `dim T=t` subspaces gives the ranked form. | Decompose every linear recovery system by its outer-functional map; minimize compatible linear lifts blockwise; separate the zero-functional rank-one external perturbation. | generalized covering/coset-support interpretation and classical concatenated-dual decomposition. | absent |
+| `prop:prescribed-coset-composition` | Labelled prescribed-coset support functions compose exactly and associatively by min--sum substitution through finite concatenation towers. | Eliminate intermediate functional maps blockwise and use trace transitivity to identify the composite restriction map. | finite-field trace duality and min--sum variable elimination. | absent |
+| `cor:all-rank-bottleneck` | The minimum nonconfinement cost over all nonzero recoverable target subspaces is attained at rank one. | Restrict a nonconfined system to a line on which an external block map is nonzero. | exact ungated confinement theorem. | absent |
 | `thm:objectwise-confinement` | For `N >= 2` and `d(O^perp)>r+1`, a fixed target subspace has confinement gate `r < rho_T(I) + d(I^perp)`; growing outer dual distance gives the eventual form. | Block-functional dual decomposition; the finite outer gate removes nonzero functional tuples; a rank-one external inner-dual map attains the remaining bound. | finite-field trace duality. | absent |
 | `thm:ranked-confinement` | Under the same finite outer gate, uniformly over recovered dimension `t`, the gate is `r < M_t(D_P,K_P) + d(I^perp)`; growing outer dual distance gives the eventual form. | Minimize the fixed-subspace gate and use an attaining RGHW subspace. | preceding two theorems. | absent |
 

@@ -9,7 +9,7 @@ the theorem dependency order:
    generalized Hamming weights, and the relative dimension/length profile.
 3. `03-positive-density.tex` — the block-functional decomposition and exact
    objectwise and rank-stratified confinement thresholds.
-4. `03a-exact-recovery-optimization.tex` — the ERGO-Comp min--sum compiler,
+4. `03a-exact-recovery-optimization.tex` — the ERGO-comp min--sum compiler,
    exact capacity scheduler, complexity bounds, witnesses, and fair CP-SAT
    comparison.
 5. `04-reliability-exit.tex` — best-target generalized weights, cooperative

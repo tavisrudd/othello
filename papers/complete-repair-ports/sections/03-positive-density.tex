@@ -1,6 +1,14 @@
 \section{Exact confinement under concatenation}
 \label{sec:confinement}
 
+The argument has two stages.  First, every concatenated recovery system is
+classified by its outer functional label.  The zero label gives a local
+recovery system plus an inner-dual perturbation; each nonzero label prescribes
+a coset in every active block.  Minimizing these two sectors gives the exact
+finite nonconfinement cost.  Second, the full label-indexed cost functions,
+rather than their global scalar minima, are passed to the next concatenation
+level by an associative min--sum law.
+
 Let $L/\F_q$ be a finite extension and let
 $\iota:L\xrightarrow{\sim} I\leq\F_q^E$ be an $\F_q$-linear isomorphism,
 used as the inner encoder.
@@ -106,7 +114,7 @@ $O\to L$ is nonzero, hence surjective, and put
  \label{eq:weighted-subspace-cost}
 \end{equation}
 
-\begin{theorem}[Exact finite confinement from prescribed coset supports]
+\begin{theorem}[Exact nonconfinement cost from labelled coset supports]
 \label{thm:ungated-ranked-confinement}
 \coverage{absent}%
 Under the hypotheses above, $\Gamma_{j,T}(O,I)$ is the least helper-union
@@ -168,6 +176,26 @@ with coefficients and supports unchanged.
 \proves{thm:ungated-ranked-confinement}%
 \end{proof}
 
+\paragraph{A complete small instance.}
+Let $I\leq\F_2^3$ have generator columns
+$G=(e_1\mid e_2,e_1+e_2)$, with the first coordinate targeted.  Then
+$K_P=0$, $D_P=\langle(1,1)\rangle$, and
+$M_1(D_P,K_P)=2$: the target is recovered from exactly the two helpers.
+Moreover $I^\perp=\langle(1,1,1)\rangle$, so the zero-functional escape cost
+is $2+3=5$.
+
+Identify the two-dimensional message space with $L=\F_4$ and concatenate with
+the length-six single-parity-check code over $L$.  Its functional dual is the
+repetition line.  Every nonzero label is active in all five blocks outside the
+target block, and each active block costs at least one helper.  Thus its
+nonzero-functional sector also costs at least five, so
+$\Gamma_{j,1}=5$.  Every recovery system of cost at most four is therefore
+confined, while a cost-five witness is obtained by adjoining the inner-dual
+word $(1,1,1)$ in another block.  The same copied support becomes a scheduler
+load vector: two demands in distinct blocks fit unit helper capacities, whereas
+two demands in one block compete for the same helper pair.  This example will
+serve as the model case for the composition and scheduling constructions.
+
 \subsection{Repeated concatenation}
 
 The ordinary prescribed-coset costs retain the intermediate labels needed at
@@ -176,6 +204,22 @@ target image in each inner block.  The resulting formulas are instances of
 variable elimination over the min-sum semiring \cite{AjiMcEliece2000}.  This is also the algebraic
 form of passing symbol-indexed inner costs to an outer decoder, as in soft and
 generalized-concatenated decoding \cite{GuruswamiSudan2002,BlomqvistEtAl2020}.
+
+The zero-functional escape cost alone is not compositional.  Over
+$\F_2\subseteq\F_4$, write the nonzero elements as
+$1,\omega,\omega^2=1+\omega$ and take inner generator columns
+\[
+ I_1:(1,1,\omega),
+ \qquad
+ I_2:(1,1,\omega^2),
+\]
+with the first coordinate targeted.  Both have target recovery cost $1$,
+dual distance $2$, and hence zero-functional escape cost $3$.  Their ordinary coset
+costs on $(1,\omega,\omega^2)$ are $(1,1,2)$ and $(1,2,1)$; their normalized
+target costs are $(0,2,1)$ and $(0,1,2)$.  For an outer functional dual
+spanned by $(1,\omega)$, the nonzero-functional minima are respectively $1$
+and $2$.  Thus the zero-functional minimum alone is not sufficient recursive
+state; the closure theorem must retain the functional labels.
 
 Let $\F_q\subseteq L\subseteq M$ be a tower of finite fields.  Let $B$ be an
 $\F_q$-linear represented code with message space $L$, and let $A$ be an
@@ -195,7 +239,7 @@ Define $\Lambda_{A,T}$ and $\Lambda_{A\circ B,T}$ similarly.  If
 $J\subseteq E_B$, let $\Lambda_{B,J,T}$ denote the same minimum with $Y$
 supported on $J$ and $\phi_B$ restricted to those coordinates.
 
-\begin{proposition}[Composition of prescribed-coset support costs]
+\begin{theorem}[Min--sum closure of prescribed-coset support costs]
 \label{prop:prescribed-coset-composition}
 \coverage{absent}%
 \uses{thm:ungated-ranked-confinement}%
@@ -226,7 +270,7 @@ $U_{P_e}=\operatorname{im}\phi_{B,P_e}$.  If $T\leq M$ and $\iota_T:T\hookrighta
 is the inclusion, then the target-normalized cost satisfies
 \begin{equation}
  \mu_{A\circ B,P,T}(c)=
- \min_{\substack{U,X:T\to L^{E_A}\
+ \min_{\substack{U,X:T\to L^{E_A}\\
                   U_e(T)\subseteq U_{P_e}\ (e\in E_A)\\
                   \phi_AU=\iota_T,\ \phi_AX=c}}
  \sum_{e\in E_A}\Lambda_{B,J_e,T}(X_e-U_e).
@@ -246,7 +290,7 @@ These formulas iterate associatively.  Substitution into
 \eqref{eq:weighted-subspace-cost} therefore gives the exact nonconfinement
 cost through any finite tower, with the zero and nonzero functional sectors
 kept separate at every level.
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
 A leaf-level lift $Y:T\to\F_q^{E_A\times E_B}$ determines intermediate maps
@@ -265,7 +309,7 @@ total intermediate map in block $e$, its helper contribution must lift
 $X_e-U_e$ through $\phi_{B,J_e}$, proving
 \eqref{eq:target-cost-composition}.  Before taking minimum supports, retain
 the actual target maps $a_e$ and the full helper lift sets.  These compose by
-fiber product over the intermediate total maps $X$, so the same argument also
+fibre product over the intermediate total maps $X$, so the same argument also
 transports every coefficient-labelled equation and its support.
 
 A word in $(A\circ B)^\perp$ either has zero intermediate label, when a
@@ -285,39 +329,35 @@ Indeed, trace transitivity gives
  =\Tr_{M/\F_q}\bigl(\phi_A(X(v))m\bigr),
 \]
 and nondegeneracy of the trace pairing identifies the composite restriction
-map with $\phi_A\circ(\phi_B)_e$.
+map with $\phi_A\circ\phi_B^{E_A}$, where $\phi_B^{E_A}$ applies $\phi_B$
+blockwise.
 
-The scalar persistent obstruction alone is not compositional.  Over
-$\F_2\subseteq\F_4$, write the nonzero elements as
-$1,\omega,\omega^2=1+\omega$ and take inner generator columns
-\[
- I_1:(1,1,\omega),
- \qquad
- I_2:(1,1,\omega^2),
-\]
-with the first coordinate targeted.  Both have target recovery cost $1$,
-dual distance $2$, and hence persistent value $3$.  Their ordinary coset
-costs on $(1,\omega,\omega^2)$ are $(1,1,2)$ and $(1,2,1)$; their normalized
-target costs are $(0,2,1)$ and $(0,1,2)$.  For an outer functional dual
-spanned by $(1,\omega)$, the nonzero-functional minima are respectively $1$
-and $2$.  Thus the labelled prescribed-coset functions, rather than one
-persistent minimum, are the closed numerical data under repeated concatenation.
+The simultaneous confinement gate across all recoverable ranks has a single
+bottleneck.
 
-The complete bounded structure across all recoverable ranks has a single
-bottleneck.  If a system on $0\ne T\leq W_P$ is nonconfined, some external
-block map is nonzero on a vector $u\in T$; restriction to
-$\langle u\rangle$ is still nonconfined and cannot enlarge its helper union.
-Consequently
+\begin{corollary}[Rank-one obstruction to complete bounded transfer]
+\label{cor:all-rank-bottleneck}
+\coverage{absent}%
+For every target block $j$ with nonzero outer projection,
 \begin{equation}
  \min_{0\ne T\leq W_P}\Gamma_{j,T}(O,I)=\Gamma_{j,1}(O,I).
  \label{eq:all-rank-bottleneck}
 \end{equation}
-Thus every cost-$\leq r$ system for every internally recoverable target
-subspace is confined if and only if $r<\Gamma_{j,1}(O,I)$.  This is the exact
-finite local-to-global gate for the complete bounded recovery data of the
-target/helper split.
+Consequently every cost-$\leq r$ system for every internally recoverable
+target subspace is confined if and only if $r<\Gamma_{j,1}(O,I)$.
+\end{corollary}
 
-The exact optimization also recovers the persistent obstruction without
+\begin{proof}
+If a system on $0\ne T\leq W_P$ is nonconfined, some external block map is
+nonzero on a vector $u\in T$.  Restriction to $\langle u\rangle$ remains
+nonconfined and cannot enlarge its helper union.  This proves the displayed
+equality, and Theorem~\ref{thm:ungated-ranked-confinement} gives the exact
+gate.
+\uses{thm:ungated-ranked-confinement}%
+\proves{cor:all-rank-bottleneck}%
+\end{proof}
+
+The exact optimization also recovers the outer-distance collapse without
 choosing a radius.  Indeed, every nonzero functional sector costs at least
 $d(O^\perp)-1$, while the zero-functional sector attains
 $M_t(D_P,K_P)+d(I^\perp)$ after minimization over $T$.  Consequently,
@@ -401,7 +441,7 @@ For $\beta\in L^*$, put
  \mu_{I,x}(\beta)=
  \min_{\substack{\Phi_I(y)=\beta\\y_x\neq0}}\wt(y),
 \]
-with value $\infty$ when a constrained fiber is empty.  The first quantity is
+with value $\infty$ when a constrained fibre is empty.  The first quantity is
 the usual coset-leader weight for the inner encoder, while the second retains
 the target-coordinate constraint.  The functional-dual decomposition itself
 is classical concatenation machinery
@@ -543,3 +583,9 @@ The outer-distance gate removes its nonzero-functional sector and gives the
 RGHW threshold in every recovered dimension.  Restricting instead to one
 target coordinate gives Theorem~\ref{thm:weighted-pointed-confinement} without
 the gate.
+
+The labelled functions are sufficient for exact numerical composition;
+minimizing lifts must also be stored to propagate witnesses.  Their
+coarsenings answer different questions.  The next section shows sharply that
+relative-weight minima do not determine recovery reliability and that the
+abstract nested pair does not determine confinement.

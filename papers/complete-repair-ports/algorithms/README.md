@@ -1,8 +1,8 @@
-# ERGO-Comp
+# ERGO-comp
 
 **Exact Recovery and Generalized-weight Optimization Compiler**
 
-The Exact Recovery and Generalized-weight Optimization Compiler (ERGO-Comp) is
+The Exact Recovery and Generalized-weight Optimization Compiler (ERGO-comp) is
 an exact compiler and solver for structured linear-code recovery, capacitated
 repair scheduling, and orbit-structured code search. It turns quotients,
 conserved gradings, generated-span state, bounded moment alphabets, and
@@ -14,10 +14,10 @@ It computes hierarchical cost tables, helper and confinement thresholds,
 maximum feasible repair batches, and structured code-search optima. Each result
 retains the helper choices, intermediate labels, resource loads, coefficient
 data, or obstruction needed to replay it. On the recorded exact scheduler
-profiles, ERGO-Comp is 2.5--373 times faster than CP-SAT given the same safe
+profiles, ERGO-comp is 2.5--373 times faster than CP-SAT given the same safe
 preprocessing.
 
-The paper proves the reductions that ERGO-Comp uses. No theorem in the paper
+The paper proves the reductions that ERGO-comp uses. No theorem in the paper
 depends on this implementation or on its benchmark results.
 
 The implemented core already serves three domains: exact recovery and
@@ -49,9 +49,9 @@ claims about the current command-line interface.
   with deterministic tie-breaking, Python differential oracles, and replayable
   witnesses.
 
-![ERGO-Comp compilation pipeline](docs/pipeline.svg)
+![ERGO-comp compilation pipeline](docs/pipeline.svg)
 
-ERGO-Comp is not a universal replacement for CP-SAT. It is designed for exact
+ERGO-comp is not a universal replacement for CP-SAT. It is designed for exact
 problems whose algebraic structure is expensive for a generic Boolean model to
 rediscover. It can solve the compiled problem directly or act as a front end
 that gives CP-SAT a smaller, stronger residual model.
@@ -68,7 +68,7 @@ cargo run --release --bin ergo-comp -- \
 ```
 
 The example has two repair demands, two unit-capacity resources, and two legal
-helper-load choices per demand. ERGO-Comp returns a complete assignment:
+helper-load choices per demand. ERGO-comp returns a complete assignment:
 
 ```json
 {
@@ -139,7 +139,7 @@ is slower on both measured workloads.
 
 ## Why compilation matters
 
-A generic solver sees variables and constraints. ERGO-Comp also sees the
+A generic solver sees variables and constraints. ERGO-comp also sees the
 mathematical reason many of those variables are equivalent or impossible.
 
 For equal-mass concurrent repair, a positive grading proves that distinct
@@ -153,7 +153,7 @@ outer code, and later tower level. In the included cyclic binary family, the
 catalogue remains at five generated spans while direct lift enumeration grows
 through `2^128` candidates.
 
-For orbit-structured code construction, ERGO-Comp quotients symmetry, packs
+For orbit-structured code construction, ERGO-comp quotients symmetry, packs
 additive syndrome contributions, applies bounded moment and incidence gates,
 and reconstructs coefficient blocks from small seed data. Only the residual
 spatial constraints reach the final enumerator.
@@ -163,20 +163,20 @@ spatial constraints reach the final enumerator.
 The benchmark suite contains both a raw Boolean CP-SAT model and a structured
 CP-SAT control. The structured control receives the same feasibility filtering,
 duplicate removal, Pareto canonicalization, positive-grading bound,
-single-worker policy, and model reuse available without using ERGO-Comp's
+single-worker policy, and model reuse available without using ERGO-comp's
 specialized dynamic program. All solvers must agree on the optimum and retained
 loads before timing is accepted.
 
 An interleaved 11-round comparison on the frozen scheduler profiles measured:
 
-| profile | ERGO-Comp | raw CP-SAT | structured CP-SAT | vs. raw | vs. structured |
+| profile | ERGO-comp | raw CP-SAT | structured CP-SAT | vs. raw | vs. structured |
 |---|---:|---:|---:|---:|---:|
 | shell large-box | 71.881 us | 178.630 us | 177.221 us | 2.485x | 2.465x |
 | balanced | 3.710 us | 1.143 ms | 995.895 us | 308.036x | 268.441x |
 | small-state | 7.304 us | 2.753 ms | 2.723 ms | 376.977x | 372.846x |
 | large nonuniform | 52.849 us | 1.250 ms | 1.041 ms | 23.646x | 19.697x |
 
-![ERGO-Comp speedup over structured CP-SAT](docs/cpsat-comparison.svg)
+![ERGO-comp speedup over structured CP-SAT](docs/cpsat-comparison.svg)
 
 These are bounded results for the declared profiles, not a general solver
 ranking. The exact machine, toolchain, inputs, repetitions, samples, checksums,
@@ -241,12 +241,13 @@ a finite search into an unrestricted theorem or make program execution part of
 the proof of a manuscript theorem.
 
 The mathematical definitions, correctness statements, and complexity bounds
-are given in *Exact Transfer of Bounded Linear Recovery and Relative Weight
-Hierarchies*. They establish the reductions independently of the software. The
+are given in *Exact Compositional Transfer of Bounded Linear Recovery: Relative
+Weights and Labelled Coset Costs*. They
+establish the reductions independently of the software. The
 implementation carries those reductions to problem sizes and applications that
 direct enumeration or generic Boolean modeling reaches less effectively.
 
 ## License
 
-ERGO-Comp is released under the MIT License as part of the paper's companion
+ERGO-comp is released under the MIT License as part of the paper's companion
 repository.

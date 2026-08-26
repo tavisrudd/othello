@@ -186,8 +186,8 @@ results.
   one. Its nullity determines whether the projective transversal group is
   `Fq² ⋊ SL₂(q)` or the smaller split-torus branch. [Diagonal Isoduality and Transversal Clifford Groups](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
 
-- **Relative weights are exact local recovery costs, and their labelled lifts
-  compose.** Shortening and puncturing the inner dual onto the helpers give
+- **Relative weights are exact local recovery costs, and the labelled cost
+  functions compose.** Shortening and puncturing the inner dual onto the helpers give
   `K_P = short_J(I⊥) ⊆ D_P = punct_J(I⊥)`; `M_t(D_P,K_P)` is the minimum
   helper union recovering `t` independent target combinations. For each fixed
   nonzero target-message subspace, prescribed-coset costs over the complete
@@ -195,9 +195,9 @@ results.
   distance hypothesis. The labelled costs compose associatively through
   compatible finite concatenation towers. Under `d(O⊥) > r + 1`, confinement
   through radius `r` is equivalent to `r < M_t(D_P,K_P) + d(I⊥)`.
-  ERGO-Comp executes this recursion, retains witnesses, and schedules repairs
-  exactly under heterogeneous capacities.
-  [Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
+  ERGO-comp executes this recursion, stores minimizing lifts to return
+  witnesses, and schedules repairs exactly under heterogeneous capacities.
+  [Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
 
 - **Order six is the unique nontrivial cut-rigid symmetric conference
   order.** For a balanced half (Y) of a symmetric conference matrix, the
@@ -248,8 +248,8 @@ the theorem column.
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
-| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
-| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `K_P=short_J(I⊥) ⊆ D_P=punct_J(I⊥)`, and `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. For any fixed nonzero target-message subspace, joint prescribed-coset support costs over the complete outer functional dual give the exact finite first nonconfined cost. Under `N ≥ 2` and `d(O⊥)>r+1`, this reduces to `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer. The labelled ordinary coset-support functions compose exactly under repeated concatenation; helper-restriction costs and target images give the normalized recursion. | Every proper inner code and every nonzero target-message subspace, for outer codes with at least two blocks and nonzero projection onto the target block; the RGHW specialization uses `1 ≤ t ≤ dim W_P`, and the composition law applies to every finite field tower. |
+| Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
+| Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs | `K_P=short_J(I⊥) ⊆ D_P=punct_J(I⊥)`, and `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. For any fixed nonzero target-message subspace, joint prescribed-coset support costs over the complete outer functional dual give the exact finite first nonconfined cost. Under `N ≥ 2` and `d(O⊥)>r+1`, this reduces to `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer. The labelled ordinary coset-support functions compose exactly under repeated concatenation; helper-restriction costs and target images give the normalized recursion. | Every proper inner code and every nonzero target-message subspace, for outer codes with at least two blocks and nonzero projection onto the target block; the RGHW specialization uses `1 ≤ t ≤ dim W_P`, and the composition law applies to every finite field tower. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 
 ## Papers and entry points
@@ -279,7 +279,7 @@ boundary, and reproducible entry points.
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Matrix theory / algebraic combinatorics / mathematical physics | Order six is the unique nontrivial cut-independent case; Hermitian triangle holonomy controls the degree-three frontier and rigidity. | [PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [repo](https://github.com/tavisrudd/conference-cut-spectra) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
-| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | Coding theory / distributed storage | Prescribed-coset optimization gives the exact finite nonconfinement cost; labelled costs compose through finite towers, and ERGO-Comp evaluates them with witnesses and exact capacity-aware repair scheduling. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
+| Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs | Coding theory / distributed storage | Prescribed-coset optimization gives the exact finite nonconfinement cost; labelled costs compose through finite towers, and ERGO-comp evaluates them with witnesses and exact capacity-aware repair scheduling. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
 
 The repository for *Reconstructing the Clebsch Code from Its Deep-Hole
 Syndrome Locus* also contains the computational companion
@@ -713,7 +713,7 @@ a fixed code.
 
 ---
 
-#### Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies
+#### Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs
 
 [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [Repository](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
@@ -724,28 +724,26 @@ Its relative generalized Hamming weights are exactly the minimum helper-union
 costs for recovering independent target combinations. For every fixed nonzero
 target-message subspace, prescribed-coset optimization over the complete outer
 functional dual gives the exact finite first nonconfined cost. The labelled
-costs compose associatively through compatible finite concatenation towers and
-retain coefficient-level witnesses. Under `N >= 2` and
+costs compose associatively through compatible finite concatenation towers;
+storing minimizing lifts separately returns coefficient-level witnesses. Under
+`N >= 2` and
 `d(O^perp) > r + 1`, confinement through radius `r` is equivalent to
-`r < M_t(D_P,K_P) + d(I^perp)`. ERGO-Comp turns these formulas into an exact
+`r < M_t(D_P,K_P) + d(I^perp)`. ERGO-comp turns these formulas into an exact
 hierarchical optimizer and capacity-aware repair scheduler.
 
-> *Abstract* Let `I <= F_q^E` have target/helper split `E = P ⊔ J`.
-> Shortening and puncturing `I^perp` onto `J` give `K_P <= D_P`, whose `t`th
-> relative generalized Hamming weight is the exact minimum helper union for
-> `t` independent target combinations. For a fixed nonzero target-message
-> subspace and outer code `O` with at least two blocks and nonzero target-block
-> projection, the first nonconfined helper cost is the minimum prescribed-coset
-> support cost over the complete outer functional dual, with no distance
-> hypothesis. These labelled costs compose by min--sum substitution through
-> compatible finite towers and retain coefficient witnesses. Under
-> `d(O^perp) > r + 1`, confinement through radius `r` is equivalent to
-> `r < M_t(D_P,K_P) + d(I^perp)`; then zero-extension preserves normalized
-> equations and supports. ERGO-Comp (Exact Recovery and Generalized-weight
-> Optimization Compiler) implements this recursion and exact capacity-aware
-> scheduling via quotient states and graded load shells. Recorded structured
-> instances show 2.5--373-fold speedups over equivalently preprocessed CP-SAT;
-> general side constraints use it as a certified CP-SAT front end.
+> *Abstract* Bounded linear recovery under concatenation is not determined by
+> scalar helper thresholds: an outer code can force intermediate functionals
+> that scalar minimization forgets. For an inner code `I` with target/helper
+> split `P ⊔ J`, shortening and puncturing `I^perp` onto `J` give a canonical
+> pair `K_P ⊆ D_P`. Its relative generalized Hamming weights are exactly the
+> minimum helper unions for independent target combinations, but not the labels
+> needed for finite transfer. Minimizing labelled prescribed-coset support
+> costs over the complete outer functional dual gives the exact minimum cost
+> `Gamma_{j,t}(O,I)` of a nonconfined recovery system, without a distance
+> hypothesis. These functions compose associatively by min--sum substitution;
+> stored minimizing lifts propagate coefficient witnesses. Outer dual distance
+> can collapse the formula to `M_t(D_P,K_P)+d(I^perp)`. ERGO-comp executes the
+> recursion with replayable argmin witnesses; the proofs are software-independent.
 > Positive-density and bounded service-rate transfer follow, while equal
 > relative-weight hierarchies need not determine bounded repair reliability.
 
@@ -756,7 +754,7 @@ best-target generalized-weight and cooperative-locality consequences; an MDS
 staircase and rigidity theorem; positive-density and bounded service-rate
 transfer; reliability and coefficient-sensitive separations; and explicit
 projective-simplex formulas; exact min--sum composition through finite
-concatenation towers; and ERGO-Comp's witness-retaining hierarchical optimizer
+concatenation towers; and ERGO-comp's witness-retaining hierarchical optimizer
 and exact capacitated scheduler. The paper-local Lean companion proves the
 associated exact sequence only; the stronger results are human-proved and
 explicitly marked absent from Lean coverage.
@@ -774,7 +772,7 @@ arbitrary-rank optimization and shows when its coarser RGHW specialization
 transports normalized equations and exact supports. The same labelled cost
 data, augmented by target images for normalized demands, can be reused at the
 next concatenation level without collapsing to a distance-only bound.
-ERGO-Comp compiles that algebraic state before specialized dynamic programming
+ERGO-comp compiles that algebraic state before specialized dynamic programming
 or CP-SAT, preserving exact costs, witnesses, and confinement thresholds.
 
 ---

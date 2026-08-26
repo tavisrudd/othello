@@ -1,4 +1,4 @@
-# Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies
+# Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
@@ -6,8 +6,8 @@
 
 [**Open the paper (PDF) →**](complete_repair_ports.pdf)
 
-**Title:** *Exact Transfer of Bounded Linear Recovery and Relative Weight
-Hierarchies*
+**Title:** *Exact Compositional Transfer of Bounded Linear Recovery: Relative
+Weights and Labelled Coset Costs*
 
 For a target set `P` and helper set `J`, shortening and puncturing the inner
 dual onto `J` give `K_P = short_J(I⊥) ⊆ D_P = punct_J(I⊥)`. Thus the pair depends
@@ -33,7 +33,8 @@ sufficiently large lengths at each fixed `r`.
 Across all recoverable target subspaces, the first possible escape already
 occurs in dimension one: restricting a nonconfined higher-rank system to a
 line cannot increase its helper support. Thus the rank-one threshold governs
-simultaneous transfer of the complete bounded local data at every rank.
+whether every internally recoverable target subspace is confined at a fixed
+radius.
 
 For one target coordinate, the general theorem becomes the scalar
 target-constrained coset-weight formula. It can certify transfer when ordinary
@@ -46,15 +47,16 @@ together with the target images give the target-normalized recursion, and the
 inner-dual distance obeys a compatible formula. Thus the exact nonconfinement
 cost can be evaluated through any finite tower while retaining the zero and
 nonzero functional sectors. A single scalar threshold is not sufficient input
-for this recursion; in particular, the persistent value
+for this recursion; in particular, the zero-functional escape cost
 `rho_T(I)+d(I⊥)` loses the required functional labels.
 
-## ERGO-Comp companion
+## ERGO-comp companion
 
-**The Exact Recovery and Generalized-weight Optimization Compiler (ERGO-Comp)
+**The Exact Recovery and Generalized-weight Optimization Compiler (ERGO-comp)
 is an exact compiler and solver derived from the paper's recovery theory.** It
 compiles prescribed-coset support functions through labelled concatenation
-levels, returns exact helper costs and confinement thresholds, and retains
+levels and returns exact helper costs and confinement thresholds. By storing
+minimizing lifts alongside the numerical tables, it also returns
 coefficient-level witnesses rather than only scalar optima. Its capacity-aware
 scheduler selects simultaneous repairs under heterogeneous helper limits and
 coefficient-weighted download costs. The same structural compiler accelerates
@@ -67,7 +69,7 @@ shells. Those reductions are mathematical: each comes with a replay path to
 the original instance. On the recorded exact scheduling suite, the Rust engine
 is 2.5--377 times faster than direct CP-SAT and 2.5--373 times faster than
 CP-SAT receiving the same safe preprocessing. For models with additional
-general constraints, ERGO-Comp supplies an exact preprocessing front end for
+general constraints, ERGO-comp supplies an exact preprocessing front end for
 residual CP-SAT models rather than replacing the general solver.
 
 The tool extends the theory into executable optimization; it is not evidence
@@ -161,7 +163,7 @@ axiom-audit instructions in [`lean/README.md`](lean/README.md).
   dependency macros used by the manuscript.
 - `sections/` contains the proofs, applications, conclusion, and verification
   statement.
-- `algorithms/` contains the ERGO-Comp Rust library and CLI, Python reference
+- `algorithms/` contains the ERGO-comp Rust library and CLI, Python reference
   models, examples, tests, and reproducibility evidence.
 - `lean/` is the paper-owned Lean 4 companion and depends on a pinned Mathlib
   revision.
