@@ -288,11 +288,14 @@ package.  It:
 3. strengthens Corollary `cor:all-rank-bottleneck` to the complete bounded
    transfer equivalence and derives coefficient, support, reliability,
    scheduling, and truncated-minimum consequences; and
-4. updates the abstract, introduction, conclusion, claim registry, formal
+4. adds Proposition `prop:rank-bounded-outer-tests`, proving that
+   functional-dual dimension at most `t` is a complete context family at
+   target rank `t`; and
+5. updates the abstract, introduction, conclusion, claim registry, formal
    boundary count, release gate, and generated PDF consistently.
 
-The patch is 30 pages.  The abstract passes the 200-word cap.  `make check`
-passes warning-free with 28 classified claims and the unchanged four Lean
+The patch is 31 pages.  The abstract passes the 200-word cap.  The release gate
+passes warning-free with 29 classified claims and the unchanged four Lean
 terminals.  No manuscript, verification, or PDF file in this patch is staged
 or committed.
 
