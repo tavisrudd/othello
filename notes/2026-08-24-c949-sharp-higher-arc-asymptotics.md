@@ -2351,6 +2351,23 @@ in `(SR24a-Mason-hypergraph)`.  Yet one group induces
 so this is not a counterexample to Mason-specific expansion; it proves that
 regularity, linearity, and the matching leave alone cannot supply it.
 
+Nor does high induced density automatically produce a Steiner or
+generalized-KM subobject.  If `F_i(U)` counts Mason off-triangle four-blocks
+meeting `U` in `i` vertices, exact pair decomposition gives
+
+```text
+binom(|U|,2)=e_leave(U)+6F_4(U)+3F_3(U)+F_2(U).
+                                                (SR24a-Mason-induced-defect)
+```
+
+A Steiner `2-(|U|,4,1)` subsystem requires all three defect terms outside
+`F_4` to vanish; positive density does not imply that.  In the genuine Mason
+hypergraph, deleting one vertex leaves `F_4=b-d=(q-3)^2/3=Theta(|U|^2)` but
+turns its `d=2r-2` incident blocks into partial triples.  This linear-size
+example does not settle the needed `|U|=o(q)` range, but it rules out a
+blanket density-to-closure inference.  The remaining target must explicitly
+use Mason coordinates/additive structure in that small-set regime.
+
 Thus every near-sharp complement is at least order `q^(3/2)` in symmetric
 difference from every Mason large-root set.  This eliminates every Mason
 switch of size `o(q^(3/2))`.
@@ -5965,7 +5982,10 @@ family is lower priority.
   family with the same parameter relations has a quarter-size quadratic
   induced subdesign, so these abstract data alone cannot improve the bound.
   Any gain must use Mason-specific coordinates/arithmetic or rule out
-  induced subdesigns at the ternary orders.
+  induced subdesigns at the ternary orders.  The exact defect identity
+  `(SR24a-Mason-induced-defect)` also shows that dense full blocks need not
+  close to a Steiner/KM subsystem: partial two- and three-blocks are the
+  uncontrolled boundary, even after deleting one vertex from Mason itself.
   That is the exact next gate, not another scalar-moment calculation.
   **Rejected shortcut — does the three-weight code lie close enough to the
   Griesmer bound to be rigid?**  The small root is exactly a projective
