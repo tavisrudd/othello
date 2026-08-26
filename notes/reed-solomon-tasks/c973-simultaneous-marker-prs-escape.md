@@ -1,6 +1,6 @@
 # C973 — simultaneous-marker PRS escape and all-level Lucas discriminator
 
-**Lane:** `reed-solomon` · **Status:** queued
+**Lane:** `reed-solomon` · **Status:** active — one-hour proof sprint started 2026-08-26
 
 ## Objective
 
