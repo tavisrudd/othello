@@ -3590,8 +3590,17 @@
       "last": 971,
       "purpose": "Prepare ERGO-Comp for clean public export and draft the companion manuscript update",
       "sequence": 399
+    },
+    {
+      "count": 1,
+      "first": 972,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 972,
+      "purpose": "Characterize minimal labelled compositional state, promote rank-one transfer, and sharpen finite label separation",
+      "sequence": 400
     }
   ],
-  "next_id": 972,
+  "next_id": 973,
   "schema": "codex-task-id-allocations-v1"
 }
