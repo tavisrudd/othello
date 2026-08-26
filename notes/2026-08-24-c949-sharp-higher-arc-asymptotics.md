@@ -186,7 +186,11 @@ being claimed here.
 The numerical resemblance between the nine coefficients of `E` and one half
 of the 18-variable carrier is not structural: the reciprocal transform of
 `E` is the same nine-dimensional object, not a second cubic.  A theorem
-linking the tangent-product quotient to `C(x)-yA(x)=-y^2` is still missing.
+identifying those coordinates directly is still missing.  However the
+focused transverse-core snapshot now gives an exact carrier-to-Chow product
+`(TR14)--(TR16)`, so `(A,C)` determines `(Q,H,E,U,L)` algorithmically in both
+the extendable and nonextendable branches.  The remaining gap is a bounded
+coefficient extraction, not existence of a map.
 
 ## Live frontiers, in EV order
 
@@ -201,6 +205,11 @@ three reciprocal obstructions `e_03,e_12,e_21`, from one of:
 3. a Witt lift that evaluates
    `(partial_M-a_i partial_X)Q` on the moving pencil root;
 4. a bounded symbolic rejection core extracted from the q=27 gates.
+
+The carrier-to-point-product map is explicit in `(TR14)--(TR16)`.  The
+highest-EV calculation is to transport the existing fourth-Witt top-carrier
+coefficient through that product and isolate a coefficient of `E,U`, or the
+quartic `L`.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
@@ -261,12 +270,14 @@ separate global trade obstruction or construction.
 - **Open:** compute the transverse pencil derivatives from split/Witt/norm
   data.
 - **Open:** connect any resulting bounded identity to C962's `(A,C)` carrier
-  variables without relying on the numerical `9+9=18` coincidence.
+  variables without relying on the numerical `9+9=18` coincidence; the full
+  product map exists, but its bounded coefficient extraction does not.
 - **Open and global:** classify all nine inverse signatures or construct a
   matching near-sharp family.
 
 ## Next checkpoint
 
-Express the balanced reciprocal norm or fourth-Witt identity in the
-two-tangent coordinates of `(TR12)` and test whether it fixes any coefficient
-of the quartic `L`.  Transpose covariance by itself is closed as tautological.
+Push the fourth-Witt top-carrier coefficient through the explicit product
+`(TR14)--(TR16)` and the canonical divisions.  Test first whether the
+homogeneous degree-four part of `L` depends only on the top four carrier
+coefficients; transpose covariance by itself is closed as tautological.

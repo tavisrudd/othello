@@ -129,6 +129,22 @@ absorb the bounded terms, and `tau` is a coordinate change rather than a
 symmetry of `D`.  The next genuine gate is to constrain `L` using the
 reciprocal norm or a Witt identity.
 
+The balanced shear then supplied the missing full product map.  In
+simultaneous Frobenius coordinates, the two carrier points above `u` have
+line-factor product
+
+```text
+Z_u^2-A(u^3)Z_u+C(u^3),  Z_u=Zeta+(m+w)u.
+```
+
+Multiplication over `u!=0`, followed by the three affine-axis and three
+infinity factors, is exactly the homogeneous Chow product of `D^Frob`.
+Projective substitution and deletion of a tangent factor therefore compute
+the tangent Redei pair and its bounded cores from `(A,C)`.  This works without
+a transversal completion.  The live gap is now coefficient extraction: the
+q-scale product has not yet been compressed enough for the fourth-Witt gate
+to control `E,U`, or `L`.
+
 ## 2026-08-26 — task-card reorganization
 
 The former 6,800-line C949 card was frozen as

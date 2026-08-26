@@ -236,6 +236,84 @@ three homogeneous reciprocal coefficients follows from transpose covariance
 alone.  A successful reciprocal argument must independently control `L` or
 the high quotients using the balanced norm/Witt data.
 
+## Explicit carrier-to-Chow bridge
+
+The balanced shear does supply an exact map from the carrier to the full
+point product.  Use the simultaneous Frobenius coordinates of `(SR24t)` in
+the structural snapshot:
+
+```text
+u=a^r,  t=b^r,  y=t+wu,
+y^2-A(u^3)y+C(u^3)=0.
+```
+
+Let `U_0=A_0^r` be the three marked row values and `E_0=B_0^r` the three
+other affine-axis values.  The zero-completed first carrier and affine core
+are exactly
+
+```text
+S=Frob(H) union (U_0 times {0}),
+B_aff^Frob=S union ({0} times E_0).                 (TR13)
+```
+
+For line-intercept variable `Zeta` and slope `m`, put
+
+```text
+Z_u=Zeta+(m+w)u.
+```
+
+If `y_1,y_2` are the two carrier roots over `u`, then the corresponding
+points have `t_j=y_j-wu`, and hence
+
+```text
+product_(j=1)^2 (Zeta-t_j+m u)
+ =(Z_u-y_1)(Z_u-y_2)
+ =Z_u^2-A(u^3)Z_u+C(u^3).
+```
+
+Multiplying over all nonzero rows gives the exact zero-completed product
+
+```text
+P_car(Zeta,m)
+ =product_(u in F_q^*)
+   [Z_u^2-A(u^3)Z_u+C(u^3)].                       (TR14)
+```
+
+No transversal completion is assumed.  By `(TR13)`, the affine-core product
+is simply
+
+```text
+R_(B_aff^Frob)(Zeta,m)
+ =P_car(Zeta,m) product_(e in E_0)(Zeta-e).         (TR15)
+```
+
+If the three restored infinity points are `[u:t:0]`, the homogeneous Chow
+product of `D^Frob` is, up to a nonzero scalar,
+
+```text
+widehat R_(D^Frob)(Zeta,m)
+ =P_car(Zeta,m)
+  product_(e in E_0)(Zeta-e)
+  product_([u:t:0] in R_infty)(m u-t).             (TR16)
+```
+
+The degree check is exact: `2q-2+3+3=2q+4=|D|`.
+
+Any rational tangent chart is obtained from `(TR16)` by the contragredient
+projective substitution on line coordinates and division by the selected
+tangent-point factor.  Canonical division by `X^q-X` and `M^q-M` then
+computes `Q,H`, hence the bounded cores `E,U` and the two-tangent quartic
+`L`.  Thus the carrier-to-Chow/Redei map is explicit and valid in both the
+extendable and nonextendable branches.
+
+This does not yet yield a bounded fourth-Witt equation.  Expanding `(TR14)`,
+changing to a tangent flag, and performing the degree-`q` divisions mixes
+all `q-1` carrier fibers and the marked boundary coordinates.  The existing
+fourth-Witt gate controls selected top coefficients of `A`, but no proved
+coefficient extraction carries it through `(TR14)--(TR16)` to a linear
+functional of `E,U`, or `L`.  That extraction is now the precise algebraic
+frontier; the absence of a carrier-to-Redei map is no longer the obstruction.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -248,5 +326,6 @@ the high quotients using the balanced norm/Witt data.
 - **Open:** constrain `L` from the reciprocal norm or a Witt lift.
 - **Open:** decide whether a Witt or norm identity forces any nonzero linear
   functional of `E` or `U`.
-- **Open:** construct an explicit map to the finite carrier `(A,C)`, or prove
-  that no such direct map is natural.
+- **Settled:** `(TR14)--(TR16)` give an explicit carrier-to-Chow/Redei map.
+- **Open:** compress the `q-1`-fold product enough to transport the
+  fourth-Witt/top-carrier coefficient gate to `E,U`, or `L`.
