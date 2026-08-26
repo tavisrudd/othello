@@ -7,7 +7,7 @@
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 `5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
 reduced to the almost-duplex/near-Rédei/moment conditions
-`(SR18)--(SR24y)`; no
+`(SR18)--(SR24z)` and `(SR24-Witt)--(SR24-Witt4''''')`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -2525,6 +2525,126 @@ and contributes two; every nonzero three-fiber contributes six.  Therefore
 At `q=27` these numbers are four and 104.  This is a classification of the
 ratio singleton data, not of the carrier realizing them.
 
+The factor `w` is not a projective modulus.  Since `w!=0`, the diagonal
+linear change
+
+```text
+u'=u,              t'=t/w,              y'=y/w=t'+u'
+```
+
+preserves the three coordinate projections and replaces
+
+```text
+E by E/w,          R by R/w,          A by A/w,
+C by C/w^2,        w by 1.                              (SR24u'')
+```
+
+Thus a classification search may normalize `w=1`; the 104 unscaled
+`q=27` ratio sets collapse to the four fibers counted above.  Retaining `w`
+in invariant formulas is only bookkeeping for undoing this normalization.
+Frobenius sends the fiber over `kappa` to that over `kappa^3`.  In the audit's
+fixed `F_27` encoding, the four values split as
+
+```text
+{2},                         {18,23,26}.             (SR24u''-q27)
+```
+
+Consequently only two semilinear ratio cases require exact search at
+`q=27`; the three members of the second orbit are equivalent.
+
+This makes the extendable singleton test especially small.  After the same
+normalization, write `kappa=e_3(R)`, so `R` is a three-fiber of
+`Z(Z+1)^2-kappa`.  A bijection `pi:U -> E` completes the duplex precisely
+when its three cells are absent from `H` and, after the automatic product
+identity, it satisfies
+
+```text
+sum_(u in U) pi(u)/u=1,
+sum_(u in U) u/pi(u)=1/kappa.                       (SR24u''')
+```
+
+These are `(SR19d)` with `e_1(R)=e_2(R)=1`.  Hence at `q=27` the extendable
+branch has four normalized ratio fibers and six scalar tests per pair
+`(U,E)`, rather than a free second carrier or a free shear parameter.
+
+There is one residual homothety after `w=1`: scaling `u,t,y` simultaneously
+by `lambda` leaves `R` and the shear unchanged while scaling both `U,E` by
+`lambda`.  Cubing is bijective on `F_q`, so there is a unique choice with
+
+```text
+e_3(U)=1,                         e_3(E)=kappa.      (SR24u'''')
+```
+
+The extendable singleton data now have a field-uniform parameterization and
+count.  Fix an ordering `(r_1,r_2,r_3)` of a normalized ratio fiber `R`.
+Choose an ordered triple of distinct nonzero rows with
+`u_1u_2u_3=1`, and put `e_i=r_i u_i`.  This gives every transversal mapping
+exactly once, provided the `e_i` are distinct.  There are
+`(q-2)(q-3)` ordered row triples.  For each of the three possible equalities
+`e_i=e_j`, there are `q-3` otherwise-distinct row triples; any intersection
+of two such collision events forces all three `e_i` equal and has one
+solution because cubing is bijective.  Inclusion-exclusion therefore gives
+
+```text
+# normalized transversal mappings for fixed R
+  =(q-2)(q-3)-(3q-11)=q^2-8q+17.                  (SR24u''''')
+```
+
+Across all normalized `R`, the count is
+`(q-3)(q^2-8q+17)/6`; at `q=27` it is `4*530=2120`.
+This counts mappings, not distinct pairs `(U,E)`, since exceptional pairs may
+support two mappings.
+
+The requirement that a completion cell is not already in `H` also becomes
+pointwise.  On the marked row `u_i`, with `X_i=u_i^3`, the existing nonzero
+`t`-value is `W(X_i)=u_i+A(X_i)`.  Hence the proposed cell
+`e_i=r_i u_i` is absent exactly when
+
+```text
+A(u_i^3)!=(r_i-1)u_i,                  i=1,2,3.     (SR24u'''''')
+```
+
+Thus even the cell-avoidance part of extendability is a three-evaluation
+gate on the first carrier.
+
+These reductions give two exact `q=27` decision models, now implemented as
+separate audit commands.  The incidence layer uses one binary variable for
+each possible cover cell `(u,y)`, hence only
+
+```text
+26*27=702                                             (SR24-search27)
+```
+
+cell variables.  It imposes two cells per nonzero row, the normalized
+`t` and `t/u` ledgers, and every full-core affine parallel-class profile:
+the three slopes in `R` have the exact `0/1/3` row of `(SR24a)`, while every
+other nonzero slope has the exact `1/2/4` row.  The extendable option adds
+only `26*3=78` matching variables, enforcing `(SR24u''')`, all three missing
+cells, and the cell-avoidance inequalities `(SR24u'''''')`.
+
+The carrier layer lifts each row to one of `binom(27,2)=351` unordered root
+pairs.  For its rowwise trace and product vectors, degree at most eight is
+equivalent to the 17 vanishing multiplicative moments with exponents
+`1,...,17`; resolving `F_27` over `F_3` gives exactly
+
+```text
+2*17*3=102
+```
+
+ternary Reed--Solomon parity equations.  This yields 9,126 pair variables
+before fixed-transversal pruning, or 7,550 after it.  The commands
+`q27-balanced-incidence-cpsat` and `q27-balanced-carrier-cpsat` keep these two
+logical layers separate.  A solver timeout has status `UNKNOWN` and is not
+an exclusion certificate; only a returned witness or proved infeasibility
+may be used mathematically.
+
+The carrier command encodes each ternary parity as an exact bounded integer
+identity `weighted_sum=3*quotient`.  This is logically identical to reduction
+modulo three, but avoids CP-SAT's rejection of a single enormous modulo
+expression over thousands of row-pair literals.  A final all-direction,
+unfixed-carrier smoke test returns the legitimate status `UNKNOWN`, rather
+than `MODEL_INVALID`; model validity is part of the reproducibility gate.
+
 They also identify exactly why the moment/Hankel route stops.  Multiplicity
 three is zero in the coefficient field, so the factor `G^3` contributes
 nothing to any power sum.  If the two displayed norms are called `D_y,D_t`,
@@ -2542,6 +2662,424 @@ Thus `G` is precisely the information discarded by all of `(SR24s')`--
 Hankel calculation cannot close the branch.  A proof must instead constrain
 this degree-`r` four-fiber polynomial through the second carrier, the
 three-cell transversal, or the integer line geometry.
+
+There is, however, an exact way to recover the information one
+characteristic-three digit higher.  Let `[x]` denote the Teichmüller lift of
+`x in F_q` to the length-two unramified Witt ring `W_2(F_q)`.  The nonzero
+lifts are all `(q-1)`st roots of unity, so
+
+```text
+sum_(x in F_q^*)[x]^k=0,                    1<=k<=q-2.
+```
+
+For an ordinary affine direction `L`, let `G_L` be its `r` full-core
+four-fiber values.  Its exact `1/2/4` ledger therefore gives, in `W_2(F_q)`,
+
+```text
+sum_(P in B_aff)[L(P)]^k
+ =3 sum_(g in G_L)[g]^k.                            (SR24-Witt)
+```
+
+The vertex directions give zero, while an infinity-boundary direction gives
+three times the power sum over its `2r` triple-fiber values.  Hence the
+second ternary digit
+
+```text
+delta_k(L)=((1/3)sum_(P in B_aff)[L(P)]^k) mod 3
+          =sum_(g in G_L)g^k                        (SR24-Witt')
+```
+
+recovers exactly what the ordinary characteristic-three moments discard.
+For `h>=2`, `r=0` in the residue field, and multiplicative Fourier inversion
+even recovers the set itself:
+
+```text
+1_(G_L)(a)=-sum_(k=1)^(q-2) delta_k(L)a^(-k),
+                                                   a in F_q^*. (SR24-Witt'')
+```
+
+This lift remains algebraically coupled as the slope varies.  The first Witt
+carry is explicit:
+
+```text
+[a]+[b]=[a+b]+3[(-(a^2b+ab^2))^r]           in W_2(F_q).
+```
+
+For `L=t-mu`, this becomes
+
+```text
+[L]=[t]-[m][u]-3[(mutL)^r].                         (SR24-Witt''')
+```
+
+Expanding its `k`th power modulo `3^2` expresses `delta_k(t-mu)` through
+lifted mixed carrier moments plus the explicit correction
+`-k(mutL)^rL^(k-1)`.  Thus a field-uniform closeout need not guess `G` or
+repeat the blind Hankel argument: it can attack the slope-polynomial
+compatibility of these second-digit Fourier spectra.  Establishing the
+needed compatibility contradiction remains open, but `(SR24-Witt)` is the
+first exact mechanism here that sees the whole four-fiber polynomial.
+
+For the first lifted moment, the slope dependence collapses completely.
+Write `L_(a,b)=at+bu` and put
+
+```text
+alpha=sum_(P in B_aff)t(P)^(2r)u(P)^r,
+beta =sum_(P in B_aff)t(P)^r u(P)^(2r).
+```
+
+The two vertex ledgers give `sum[B_aff][t]=sum[B_aff][u]=0` already in the
+Witt ring.  Applying the carry formula once therefore yields
+
+```text
+delta_1(L_(a,b))
+ =alpha a^(2r)b^r+beta a^r b^(2r).                 (SR24-Witt1)
+```
+
+For the finite-slope form `L=t-mu`,
+
+```text
+delta_1(t-mu)=-alpha m^r+beta m^(2r).
+```
+
+Unless `alpha=beta=0`, this vanishes at at most one nonzero slope, since
+Frobenius is bijective.  Thus the sum of the high-multiplicity intercept
+values is globally controlled by a two-scalar semilinear form across all
+directions, rather than by `q-1` unrelated sets.
+
+In the normalized balanced branch, the exceptional ordinary slope is
+`m=-1`, so its four-fiber set satisfies
+
+```text
+sum_(g in G_(-1))g=alpha+beta.
+```
+
+For the three boundary slopes `R`, `(SR24u)` gives
+`sum_R m^r=1` and `sum_R m^(2r)=-1`.  If `T_m` denotes the `2r`
+triple-fiber intercept values in boundary slope `m`, summing
+`(SR24-Witt1)` over `R` therefore gives the exact cross-ledger identity
+
+```text
+sum_(g in G_(-1))g
+ +sum_(m in R)sum_(c in T_m)c=0.                   (SR24-Witt1')
+```
+
+This is the first direct equation coupling the balanced four-fiber set to all
+three boundary triple-fiber sets.  Higher Witt moments should similarly
+couple their higher Fourier data, but their mixed carry terms have not yet
+been compressed to a contradiction.
+
+The three boundary supports have a common forced part.  For `m in R` and
+`e in E`, the axis point `(0,e)` lies on the line `t-mu=e`.  A nonzero
+boundary fiber has full-core size zero or three, so this line must contain
+exactly two further points of `S`.  Therefore
+
+```text
+E subset T_m                         for every m in R, (SR24-Witt1'')
+```
+
+and the nine lines `t=mu+e`, `(m,e) in R times E`, are exact bisecants of
+`S` (trisecants after the axis point is restored).  Since the common `E`
+contribution occurs three times and hence vanishes in characteristic three,
+`(SR24-Witt1')` sharpens to
+
+```text
+sum_(g in G_(-1))g
+ +sum_(m in R)sum_(c in T_m minus E)c=0.            (SR24-Witt1''')
+```
+
+This isolates a `3 by 3` boundary-line grid and removes the already-known
+axis contribution from the new Witt obstruction.
+
+The same integer ledger gives a stronger incidence compression before any
+further lifting.  Let
+
+```text
+Z={P in B_aff^Frob:t(P)+u(P) in G_(-1)},
+N=B_aff^Frob minus Z.
+```
+
+Then `|Z|=4r` and `|N|=2r+1`.  For each `m in R`, let `p_m` be the unique
+point on the zero-intercept singleton line `t=mu`.  The complete boundary
+row of `(SR24a)` says exactly
+
+```text
+B_aff^Frob minus {p_m}
+ = disjoint_union_(c in T_m)(B_aff^Frob intersect {t-mu=c}),
+|B_aff^Frob intersect {t-mu=c}|=3.                 (SR24-grid)
+```
+
+Thus every point except `p_m` is on a selected boundary triple in direction
+`m`.  In particular, at most one point of `Z` fails the selected-triple test
+in each boundary direction, and hence
+
+```text
+#{P in Z: t(P)-m u(P) in T_m for every m in R}
+ >=4r-3.                                           (SR24-grid')
+```
+
+Equivalently, adjoining the zero symbol to each `T_m` turns `Z` into a
+linear four-partite incidence system with parts
+
+```text
+G_(-1),  T_(m_1) union {0}, T_(m_2) union {0},
+          T_(m_3) union {0}.
+```
+
+Its `4r` edges are the points of `Z`; every `G_(-1)` vertex has degree four,
+every nonzero boundary vertex has degree at most three, and the zero vertex
+in boundary part `m` has degree at most one.  Any two boundary coordinates
+determine their affine point, so the hypergraph is linear.  This is the
+integral counterpart of the Witt coupling: the four special spectra do not
+come from unrelated line sets, but from a near-regular common incidence
+system with only three possible zero-coordinate defects.  At `q=27`, it has
+36 edges, nine degree-four `G` vertices, and at least 33 edges avoiding all
+three zero defects.
+
+The second lifted moment reaches the carrier coefficients.  Define
+
+```text
+gamma=((1/3)sum_(P in B_aff)[t(P)u(P)]) mod 3
+```
+
+and abbreviate the four residue-field mixed moments
+
+```text
+a_*=sum t^(2r+1)u^r,       b_*=sum t^(2r)u^(r+1),
+c_*=sum t^(r+1)u^(2r),     d_*=sum t^r u^(2r+1).
+```
+
+Squaring the first Witt carry modulo `3^2` gives the finite-slope law
+
+```text
+delta_2(t-mu)
+ =gamma m+a_*m^r-b_*m^(r+1)-c_*m^(2r)+d_*m^(2r+1).
+                                                        (SR24-Witt2)
+```
+
+For a normalized ratio fiber, Newton's recurrence gives
+
+```text
+sum_(m in R)m^(r+1)=kappa^r-1,
+sum_(m in R)m^(2r+1)=1.
+```
+
+Consequently all other terms cancel between the balanced slope and the
+three boundary slopes:
+
+```text
+sum_(g in G_(-1))g^2
+ +sum_(m in R)sum_(c in T_m)c^2=-kappa^r b_*.       (SR24-Witt2')
+```
+
+The surviving mixed moment is itself just a top-coefficient extraction.
+Write `A(X)=sum_(j=0)^(r-1)a_jX^j`.  On a row `X=u^3`, the two `t`-roots have
+second power sum
+
+```text
+W^2+P=-u^2+uA(X)+A(X)^2+C(X).
+```
+
+After raising to `r`, put `A_bar(u)=sum a_j^r u^j` and similarly for `C`.
+Multiplicative orthogonality in
+
+```text
+b_*=sum_(u!=0)u^(r+1)
+       (-u^(2r)+u^r A_bar(u)+A_bar(u)^2+C_bar(u))
+```
+
+leaves only exponent `q-1`.  It occurs at degree `r-2` in `A_bar` and at
+the top square of `A_bar`, so
+
+```text
+b_*=-a_(r-2)^r-a_(r-1)^(2r).                       (SR24-Witt2'')
+```
+
+Combining the last two displays gives the explicit top-coefficient gate
+
+```text
+sum_(g in G_(-1))g^2
+ +sum_(m in R)sum_(c in T_m)c^2
+ =kappa^r(a_(r-2)^r+a_(r-1)^(2r)).                 (SR24-Witt2''')
+```
+
+As before, the tripled common subset `E` may be deleted from the boundary
+sums.  Thus the first two lifted moments recover the first two Fourier
+coordinates of `G_(-1)` and constrain the top two coefficients of `A` using
+the boundary ledger.  A full contradiction would require continuing this
+coefficient extraction far enough to collide with the three norm identities.
+
+There is a single exact formula for that continuation.  Put `L=t-mu` and
+define the divided binomial lift
+
+```text
+Lambda_k(m)=((1/3)sum_(P in B_aff^Frob)
+                    ([t(P)]-[m][u(P)])^k) mod 3.
+```
+
+It is defined because `(SR24b)` makes the residue of the numerator zero.
+The carry identity `(SR24-Witt''')`, followed by a binomial expansion modulo
+`3^2`, gives for every `1<=k<=q-2`
+
+```text
+delta_k(t-mu)
+ =Lambda_k(m)
+  -k m^r sum_P u(P)^r t(P)^r
+                    (t(P)-m u(P))^(r+k-1).          (SR24-Wittk)
+```
+
+This packages every higher lifted slope constraint into divided mixed
+carrier moments plus one explicit residue-field correction; it is not a new
+family of independently chosen four-fiber sets.  The formula specializes to
+`(SR24-Witt1)` and `(SR24-Witt2)`.  Frobenius also removes an entire third of
+the nominal spectrum:
+
+```text
+delta_(3j)(L)=delta_j(L)^3.                         (SR24-Wittk')
+```
+
+Consequently the `q-2` Fourier coordinates in `(SR24-Witt'')` are generated
+by the `2r-1` indices not divisible by three.  In particular `k=3` contains
+no information beyond `k=1`; after the second-moment top-coefficient gate,
+the next genuinely independent lifted constraint is `k=4`.  Formula
+`(SR24-Wittk)` is now the smallest field-uniform route for extracting it and
+testing it against `(SR24w')` and the reciprocal norm.
+
+That `k=4` target has an explicit four-slope form.  In the normalized branch
+put `D=R union {-1}`.  The four slopes are the roots of
+
+```text
+F_D(M)=M^4+(1-kappa)M-kappa.
+```
+
+For a point `(u,t)`, write `ell_m=t-mu`.  Newton's identities for `F_D`
+give the pointwise identity
+
+```text
+sum_(m in D)ell_m^4=t^4+kappa u^4.                 (SR24-Witt4)
+```
+
+The carry of this equality is an ordinary residue-field polynomial.  For a
+finite list `x=(x_i)`, define
+
+```text
+car(x)=-sum_(i!=j)x_i^2x_j+sum_(i<j<k)x_ix_jx_k;
+sum_i[x_i]=[sum_i x_i]+3[car(x)^r].
+```
+
+Put
+
+```text
+s=t^4+kappa u^4,
+e_3=t^3+(1-kappa)u^3,
+e_4=t^4+(1-kappa)tu^3-kappa u^4,
+p_i=sum_(m in D)ell_m^i.
+```
+
+Here `p_1=t,p_2=t^2,p_3=t^3,p_4=s`, and
+
+```text
+p_i=tp_(i-1)+e_3p_(i-3)-e_4p_(i-4),       5<=i<=8.
+```
+
+The third elementary function of the four values `ell_m^4` is
+`e_3^4+t e_3e_4^2-e_4^3`.  Therefore the fourth-power carry difference in
+`(SR24-Witt4)` is
+
+```text
+Theta_4(u,t;kappa)
+ =-s p_8+s^3+e_3^4+t e_3e_4^2-e_4^3
+   +kappa t^8u^4+kappa^2t^4u^8.                   (SR24-Witt4')
+```
+
+The two vertex sums on the right of `(SR24-Witt4)` vanish exactly in the
+length-two Witt ring.  Summing the carries over the core consequently gives
+the first genuinely new post-quadratic spectrum equation
+
+```text
+sum_(g in G_(-1))g^4
+ +sum_(m in R)sum_(c in T_m)c^4
+ =sum_(P in B_aff^Frob)Theta_4(u(P),t(P);kappa)^r. (SR24-Witt4'')
+```
+
+Again the common `E` terms may be deleted on the left.  Unlike a formal
+Teichmuller expression, the right side is now a fixed homogeneous carrier
+polynomial.  In fact the recurrence in `(SR24-Witt4')` collapses it to only
+six monomials:
+
+```text
+Theta_4
+ =(kappa^4-kappa+1)u^12
+  +kappa^2(kappa-1)tu^11
+  +kappa(kappa-1)^2t^2u^10
+  +(1-kappa^3)t^3u^9
+  +(1-kappa)t^9u^3+t^12.                          (SR24-Witt4''')
+```
+
+After raising to `r` and summing over `B_aff^Frob`, four of these six terms
+vanish structurally.  The pure `u` term is a nontrivial vertex power sum.
+The pure `t` term over the two-sheeted cover is `-sum_E e^4`, exactly
+cancelled by the three axis points.  The `t^3u^9` and `t^9u^3` terms become
+`tu^3` and `t^3u`, respectively, and vanish by `(SR24c)`.  Only the two
+weighted mixed moments
+
+```text
+beta_1 =sum_P t(P)^r  u(P)^(2r+3),
+alpha_1=sum_P t(P)^(2r)u(P)^(r+3)
+```
+
+remain, giving
+
+```text
+H_4:=sum_(g in G_(-1))g^4
+     +sum_(m in R)sum_(c in T_m)c^4
+ =kappa^(2r)(kappa-1)^r beta_1
+  +kappa^r(kappa-1)^(2r) alpha_1.                 (SR24-Witt4'''')
+```
+
+For `q>=27`, multiplicative orthogonality extracts both moments from the top
+four trace coefficients.  If `A(X)=sum a_jX^j`, then
+
+```text
+beta_1=-a_(r-4)^r,
+alpha_1=-a_(r-4)^r+a_(r-3)^r a_(r-1)^r-a_(r-2)^(2r).
+```
+
+Consequently the complete fourth-spectrum gate is
+
+```text
+H_4
+ =kappa^r(kappa-1)^r
+   ((kappa^r+1)a_(r-4)^r+(kappa-1)^r Delta_A),
+
+Delta_A=a_(r-3)^r a_(r-1)^r-a_(r-2)^(2r).
+                                                     (SR24-Witt4''''')
+```
+
+This is the promised direct collision between the recovered four-fiber
+spectrum, the boundary geometry, and the carrier: the first independent
+lift after `k=2` sees exactly the top four coefficients of `A` and no
+coefficient of `C`.  In the fixed `q=27` Frobenius class `kappa=-1` (audit
+encoding `2`), the `a_(r-4)` term disappears and the gate is simply
+
+```text
+H_4=-Delta_A=a_(r-2)^(2r)-a_(r-3)^r a_(r-1)^r.    (SR24-Witt4-q27)
+```
+
+Thus one of the two semilinear `q=27` ratio representatives sees only a
+Frobenius-twisted `2 by 2` Hankel determinant of the top three trace
+coefficients.  For the other representative `kappa=18` in the audit basis,
+the same gate is
+
+```text
+H_4=7a_5^9+26(a_6^9a_8^9-a_7^18).                 (SR24-Witt4-q27')
+```
+
+These are the two complete semilinear `q=27` fourth-spectrum carrier states;
+the other two normalized `kappa` values are Frobenius conjugates of the
+second.  The exact `q=27` audit checks
+`(SR24-Witt4)--(SR24-Witt4''')` for all four normalized `kappa` fibers and
+every `(t,u)`, namely 2,916 states, and checks the two coefficient extractions
+on 27 deterministic arbitrary degree-eight pairs `(A,C)`.
 
 The ratio moments give a second, slanted extraction of the same local Newton
 polynomials.  With `Q_k` as in `(SR24s''')`, one has simultaneously
@@ -2661,6 +3199,89 @@ degree at most five and quartic by degree at most four.  The minimal
 first-field search can enumerate these factorizations rather than arbitrary
 degree-eight pairs `(A,C)`.
 
+These separate factorizations obey a strong coherence law.  For each root
+`y` of `G`, let
+
+```text
+B_y(X)=gcd(C(X)-yA(X)+y^2, X^(q-1)-1),
+C(X)-yA(X)+y^2=B_y(X)L_y(X).
+```
+
+Then `deg B_y=3` on `G_3`, `deg B_y=4` on `G_4`, and
+`gcd(L_y,X^(q-1)-1)=1`.  For any two distinct roots `y,z` of `G`,
+
+```text
+(B_yL_y-B_zL_z)/(y-z)=y+z-A(X),
+A(X)=y+z-(B_yL_y-B_zL_z)/(y-z),
+C(X)=B_yL_y+yA(X)-y^2.                              (SR24z)
+```
+
+Thus any two factorized high fibers determine the entire carrier.  Every
+third root `s` must pass the polynomial divided-difference identity
+
+```text
+(B_yL_y-B_zL_z)/(y-z)
+ -(B_zL_z-B_sL_s)/(z-s)=y-s.                       (SR24z')
+```
+
+Equivalently, for every positive `X`-degree, the corresponding coefficient
+of `B_yL_y` is an affine function of `y`; after subtracting `y^2`, the same
+is true in degree zero.  At `q=27`, two cubic/quartic factorizations generate
+`A,C`, and the other seven roots of `G` are pure verification constraints.
+This is the smallest exact coefficient search state obtained so far.
+
+There is also a useful incidence invariant.  Let `n_j` count the nonzero
+`X`-values belonging to exactly `j` of the `G`-root fibers.  Since the cover
+is quadratic in `y`, `j` is at most two.  Counting the `3g+4(r-g)` incidences
+both ways gives
+
+```text
+n_0+n_1+n_2=3r-1,          n_1+2n_2=4r-g,
+n_2-n_0=r+1-g.                                     (SR24z'')
+```
+
+Hence at least `r+1-g>=r-2` rows have both cover roots among the high-fiber
+values.  At `q=27` the excess is `10-g`, between seven and ten.  For such a
+row shared by the `y,z` fibers, `(SR24z)` specializes to
+`A(X)=y+z`, `C(X)=yz`; distinct unordered pairs give distinct target pairs.
+
+The low-order end of the two complete norms exposes the marked rows directly.
+Let `M={u^3:u in U}` be the three roots of `P` in `F_q^*`.  For `X notin M`,
+define the reciprocal local Newton sequence
+
+```text
+R_0(X)=2,                 R_1(X)=W(X)/P(X),
+R_k=(W/P)R_(k-1)-(1/P)R_(k-2).
+```
+
+At a marked row the zero `t`-root is omitted and the other root is `W(X)`.
+The reciprocal power sums of the two almost-duplex projections are therefore
+
+```text
+L_k=sum_(X in M)W(X)^(-k)+sum_(X notin M)R_k(X)
+   =-sum_(e in E)e^(-k),
+
+K_k=sum_(X in M)X^(rk)W(X)^(-k)
+    +sum_(X notin M)X^(rk)R_k(X)
+   =-sum_(rho in R)rho^(-k),              1<=k<=q-2. (SR24z''')
+```
+
+These are the zero-end counterpart of the coefficient diagonals `(SR24w)`;
+unlike the ordinary moments, they retain the marked set `M` explicitly.
+At `k=1`, using `e_2(E)=C(0)`, `e_2(R)=w^2`, and the unconditional product
+identity `e_3(U)e_3(R)=e_3(E)`, they collapse to
+
+```text
+C(0)K_1=w^2 e_3(U)L_1.                              (SR24z'''')
+```
+
+The coefficient of `T^3` in the two norms gives the same product identity
+directly: the three marked linear factors contribute `-product_M W`, while
+the unmarked factors contribute `product_(X notin M)P(X)`; reciprocal scaling
+multiplies this coefficient by `e_3(U)`.  Thus `(SR24z'''')` is not a
+transversal assumption.  It is a rational scalar gate on `A,C,w,U` that
+holds in both the extendable and nonextendable branches.
+
 The preceding calculation can be isolated as the following reusable
 structural proposition.
 
@@ -2677,6 +3298,8 @@ structural proposition.
 > Splitting `G` by its overlap with `J`, the level polynomial has the unique
 > cubic/quartic divisors `(SR24y)` of `X^(q-1)-1` over the corresponding
 > étale algebras.
+> Their products with the root-free cofactors obey the coherence identities
+> `(SR24z)--(SR24z'')`.
 > For fixed `w`, the possible `R` are precisely `w` times the nonzero
 > three-fibers of `Z(Z+1)^2`, giving `(q-3)/6` choices and
 > `(q-1)(q-3)/6` across all nonzero `w`.  If the carrier
@@ -3258,7 +3881,7 @@ family is lower priority.
   root gate, generic/balanced derivative dichotomy, affine-split exclusion,
   exact shifted-fiber/moment constraint, semilinear normalization, and
   balanced ordinary-direction/norm rigidity and coupled diagonal product gate
-  `(SR24m)--(SR24y)`,
+  `(SR24m)--(SR24z)`,
   the coupled Prony/reversal obstruction
   `(SR24n)--(SR24p)`, and the weight-`3q`
   dual word and signed spectrum `(SR24k)--(SR24l')`.  The Vandermonde obstruction
@@ -3274,7 +3897,19 @@ family is lower priority.
   therefore invisible to every characteristic-three power sum.  Consequently
   extending the moment/Hankel window is not a closeout strategy; the minimal
   open step is to rule out (or realize) that three-norm system using the
-  transversal or the integral line geometry.
+  transversal or the integral line geometry.  The length-two Witt lift
+  `(SR24-Witt)--(SR24-Witt4''''')` now supplies a field-uniform mechanism that
+  recovers the missing Fourier spectrum one ternary digit higher.  Its first
+  digit is a two-scalar semilinear form across slopes, its second digit reaches
+  the top two coefficients of `A`, and the all-`k` carry formula reduces the
+  independent spectrum from `q-2` to `2q/3-1` coordinates.  The integral
+  ledger simultaneously makes at least `4q/3-3` of the four-fiber points high
+  in all four special directions, producing a linear four-partite incidence
+  system with only three defect incidences.  The independent `k=4` lift now
+  collapses from its universal carrier polynomial to the top-four-coefficient
+  gate `(SR24-Witt4''''')`.  Coupling that recovered fourth spectrum to the
+  fourth-Newton product and reciprocal norm gates is the new structural
+  closeout target.
   The other triangular row requires a linear
   high-secant trade and
   is therefore a less rigid first target.

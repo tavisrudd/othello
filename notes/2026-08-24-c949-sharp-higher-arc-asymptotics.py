@@ -3510,10 +3510,96 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "balanced_ratio_normalized_cubic": "Z*(Z+1)^2-kappa",
             "balanced_ratio_normalized_cubic_fiber_count": (q - 3) // 6,
             "balanced_ratio_singleton_set_count": (q - 1) * (q - 3) // 6,
+            "balanced_shear_projective_normalization": "w=1",
+            "balanced_normalized_transversal_scalar_target": "(1,1/kappa)",
+            "balanced_normalized_transversal_tests_per_U_E_pair": 6,
+            "balanced_residual_homothety_normalization": "e3(U)=1",
+            "balanced_normalized_E_product": "kappa",
+            "balanced_transversal_mappings_per_normalized_ratio_fiber": (
+                q * q - 8 * q + 17
+            ),
+            "balanced_transversal_mapping_count": (
+                (q - 3) * (q * q - 8 * q + 17) // 6
+            ),
+            "balanced_completion_cell_avoidance_gate": (
+                "A(u_i^3)!=(r_i-1)*u_i"
+            ),
             "balanced_exceptional_norm_derivative_gcd": "Y*G^3",
             "balanced_unshifted_norm_derivative_gcd": "T^3*(T^(q-1)-1)/J",
             "balanced_moment_invisible_factor_degree": r,
             "balanced_moment_only_closeout_possible": False,
+            "balanced_witt_second_digit_recovers_G": True,
+            "balanced_witt_ordinary_direction_identity": (
+                "sum_[P][L(P)]^k=3*sum_[g in G_L][g]^k"
+            ),
+            "balanced_witt_fourier_indicator_formula": (
+                "1_G(a)=-sum_(k=1)^(q-2)delta_k*a^(-k)"
+            ),
+            "balanced_witt_addition_carry": (
+                "[a]+[b]=[a+b]+3*[(-(a^2*b+a*b^2))^r]"
+            ),
+            "balanced_witt_first_slope_form": (
+                "delta_1(a*t+b*u)=alpha*a^(2r)*b^r+beta*a^r*b^(2r)"
+            ),
+            "balanced_witt_first_nonvertex_zero_slope_cap": 1,
+            "balanced_witt_balanced_boundary_sum_gate": (
+                "sum(G_-1)+sum_(m in R)sum(T_m)=0"
+            ),
+            "balanced_boundary_triple_support_common_subset": "E subset T_m",
+            "balanced_boundary_E_line_S_degree": 2,
+            "balanced_boundary_E_line_count": 9,
+            "balanced_four_direction_high_point_count": 4 * r,
+            "balanced_four_direction_low_point_count": 2 * r + 1,
+            "balanced_boundary_unique_zero_intercept_defects": 3,
+            "balanced_points_high_in_all_four_special_directions_lower_bound": (
+                4 * r - 3
+            ),
+            "balanced_four_partite_high_incidence_part_sizes": [
+                r, 2 * r + 1, 2 * r + 1, 2 * r + 1
+            ],
+            "balanced_four_partite_high_incidence_edge_count": 4 * r,
+            "balanced_four_partite_G_degree": 4,
+            "balanced_four_partite_nonzero_boundary_degree_cap": 3,
+            "balanced_four_partite_zero_boundary_degree_cap": 1,
+            "balanced_witt_second_slope_form": (
+                "delta_2(t-mu)=gamma*m+a_*m^r-b_*m^(r+1)"
+                "-c_*m^(2r)+d_*m^(2r+1)"
+            ),
+            "balanced_witt_second_boundary_gate": (
+                "sum(G_-1^2)+sum_(m in R)sum(T_m^2)=-kappa^r*b_*"
+            ),
+            "balanced_witt_second_top_coefficient_extraction": (
+                "b_*=-a_(r-2)^r-a_(r-1)^(2r)"
+            ),
+            "balanced_witt_all_k_slope_formula": (
+                "delta_k=Lambda_k-k*m^r*sum(u^r*t^r*(t-m*u)^(r+k-1))"
+            ),
+            "balanced_witt_frobenius_thinning": "delta_(3j)=delta_j^3",
+            "balanced_witt_independent_spectrum_coordinates": 2 * r - 1,
+            "balanced_witt_next_independent_index_after_two": 4,
+            "balanced_witt_fourth_carry_monomial_count": 6,
+            "balanced_witt_fourth_surviving_mixed_moment_count": 2,
+            "balanced_witt_fourth_beta_extraction": "-a_(r-4)^r",
+            "balanced_witt_fourth_alpha_extraction": (
+                "-a_(r-4)^r+a_(r-3)^r*a_(r-1)^r-a_(r-2)^(2r)"
+            ),
+            "balanced_witt_fourth_carrier_coefficient_window": [
+                r - 4, r - 1
+            ],
+            "balanced_witt_fourth_factored_gate": (
+                "kappa^r*(kappa-1)^r*((kappa^r+1)*a_(r-4)^r"
+                "+(kappa-1)^r*(a_(r-3)^r*a_(r-1)^r-a_(r-2)^(2r)))"
+            ),
+            "balanced_witt_fourth_kappa_minus_one_gate": (
+                "a_(r-2)^(2r)-a_(r-3)^r*a_(r-1)^r"
+            ),
+            "balanced_witt_fourth_q27_semilinear_representative_gates": {
+                "kappa_2": "2*(a_6^9*a_8^9-a_7^18)",
+                "kappa_18": "7*a_5^9+26*(a_6^9*a_8^9-a_7^18)",
+            },
+            "balanced_q27_carrier_rs_parity_encoding": (
+                "bounded_weighted_sum_equals_three_times_quotient"
+            ),
             "balanced_unshifted_diagonal_extraction": "j*(q-1)",
             "balanced_ratio_diagonal_extraction": "k*r-j*(q-1)",
             "balanced_fourth_newton_unshifted_product_coefficient": (
@@ -3540,6 +3626,16 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "balanced_etale_divisor_degrees": [3, 4],
             "balanced_etale_cofactor_degree_caps": [r - 4, r - 5],
             "balanced_minimum_quartic_components": r - 3,
+            "balanced_high_fiber_factor_coherence": (
+                "(F_y-F_z)/(y-z)=y+z-A"
+            ),
+            "balanced_high_fibers_determining_carrier": 2,
+            "balanced_high_fiber_row_overlap_excess": "n2-n0=r+1-g",
+            "balanced_reciprocal_local_newton_trace": "W/P",
+            "balanced_reciprocal_local_newton_product": "1/P",
+            "balanced_reciprocal_first_scalar_gate": (
+                "C(0)*K_1=w^2*e3(U)*L_1"
+            ),
             "critical_moment_band": [1, 2 * r - 2],
             "critical_moment_band_length": 2 * r - 2,
             "reciprocal_chart_reversal": "i -> 2r-1-i",
@@ -4189,6 +4285,89 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             balanced_ratio_ordered_collisions += left_value == right_value
     if balanced_ratio_ordered_collisions != chart_q - 1:
         raise AssertionError("the balanced cubic collision count changed")
+    normalized_ratio_value_fibers: dict[int, list[int]] = {}
+    for ratio_value in range(chart_q):
+        cubic_value = chart_field.mul(
+            ratio_value,
+            chart_field.pow(chart_field.add(ratio_value, 1), 2),
+        )
+        normalized_ratio_value_fibers.setdefault(cubic_value, []).append(
+            ratio_value
+        )
+    normalized_ratio_value_fibers = {
+        value: roots for value, roots in normalized_ratio_value_fibers.items()
+        if value != 0 and len(roots) == 3
+    }
+    if set(normalized_ratio_value_fibers) != (
+            balanced_ratio_normalized_fibers):
+        raise AssertionError("the normalized ratio fibers changed")
+    normalized_kappa_frobenius_orbits = []
+    unseen_kappas = set(normalized_ratio_value_fibers)
+    while unseen_kappas:
+        start = min(unseen_kappas)
+        orbit = []
+        value = start
+        while value not in orbit:
+            orbit.append(value)
+            unseen_kappas.discard(value)
+            value = chart_field.pow(value, 3)
+        normalized_kappa_frobenius_orbits.append(sorted(orbit))
+    normalized_kappa_frobenius_orbits.sort()
+    if normalized_kappa_frobenius_orbits != [[2], [18, 23, 26]]:
+        raise AssertionError("the normalized kappa Frobenius orbits changed")
+    normalized_transversal_mappings = 0
+    normalized_transversal_pairs: Counter[
+        tuple[int, tuple[int, ...], tuple[int, ...]]
+    ] = Counter()
+    normalized_product_one_ordered_rows = 0
+    for ratio_kappa, ratio_fiber in normalized_ratio_value_fibers.items():
+        for first_row in range(1, chart_q):
+            for second_row in range(1, chart_q):
+                if first_row == second_row:
+                    continue
+                third_row = chart_field.inv(
+                    chart_field.mul(first_row, second_row)
+                )
+                row_tuple = (first_row, second_row, third_row)
+                if len(set(row_tuple)) != 3:
+                    continue
+                if ratio_kappa == next(iter(normalized_ratio_value_fibers)):
+                    normalized_product_one_ordered_rows += 1
+                column_tuple = tuple(
+                    chart_field.mul(ratio_value, row_value)
+                    for ratio_value, row_value in zip(
+                        ratio_fiber, row_tuple
+                    )
+                )
+                if len(set(column_tuple)) != 3:
+                    continue
+                column_product = chart_field.mul(
+                    chart_field.mul(column_tuple[0], column_tuple[1]),
+                    column_tuple[2],
+                )
+                if column_product != ratio_kappa:
+                    raise AssertionError(
+                        "the normalized transversal product changed"
+                    )
+                normalized_transversal_mappings += 1
+                normalized_transversal_pairs[
+                    (ratio_kappa,
+                     tuple(sorted(row_tuple)),
+                     tuple(sorted(column_tuple)))
+                ] += 1
+    expected_transversal_mappings = (
+        (chart_q - 3) * (chart_q * chart_q - 8 * chart_q + 17) // 6
+    )
+    normalized_transversal_pair_multiplicities = Counter(
+        normalized_transversal_pairs.values()
+    )
+    if (normalized_product_one_ordered_rows
+            != (chart_q - 2) * (chart_q - 3)
+            or normalized_transversal_mappings
+            != expected_transversal_mappings
+            or normalized_transversal_pair_multiplicities
+            != Counter({1: 2112, 2: 4})):
+        raise AssertionError("the normalized transversal count changed")
     shifted_singletons = set(cell_c)
 
     def field_sum(values: list[int]) -> int:
@@ -4196,6 +4375,237 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         for value in values:
             total = chart_field.add(total, value)
         return total
+
+    def witt_carry_preimage(values: list[int]) -> int:
+        """C with sum [x_i]=[sum x_i]+3[C^r] in length two."""
+        carry = 0
+        for left_index, left in enumerate(values):
+            for right_index, right in enumerate(values):
+                if left_index == right_index:
+                    continue
+                carry = chart_field.add(
+                    carry,
+                    chart_field.neg(chart_field.mul(
+                        chart_field.pow(left, 2), right
+                    )),
+                )
+        for triple in itertools.combinations(values, 3):
+            carry = chart_field.add(
+                carry,
+                chart_field.mul(
+                    chart_field.mul(triple[0], triple[1]), triple[2]
+                ),
+            )
+        return carry
+
+    witt_four_slope_carry_checks = 0
+    for ratio_kappa, ratio_fiber in normalized_ratio_value_fibers.items():
+        special_slopes = (chart_field.neg(1), *ratio_fiber)
+        one_minus_kappa = chart_field.add(
+            1, chart_field.neg(ratio_kappa)
+        )
+        for t_value in range(chart_q):
+            for u_value in range(chart_q):
+                linear_values = [
+                    chart_field.add(
+                        t_value,
+                        chart_field.neg(chart_field.mul(slope, u_value)),
+                    )
+                    for slope in special_slopes
+                ]
+                fourth_values = [
+                    chart_field.pow(value, 4) for value in linear_values
+                ]
+                t_fourth = chart_field.pow(t_value, 4)
+                u_fourth = chart_field.pow(u_value, 4)
+                kappa_u_fourth = chart_field.mul(
+                    ratio_kappa, u_fourth
+                )
+                if field_sum(fourth_values) != chart_field.add(
+                        t_fourth, kappa_u_fourth):
+                    raise AssertionError(
+                        "the four-slope fourth-power identity changed"
+                    )
+                direct_theta = chart_field.add(
+                    witt_carry_preimage(fourth_values),
+                    chart_field.neg(witt_carry_preimage([
+                        t_fourth, kappa_u_fourth
+                    ])),
+                )
+                e3_linear = chart_field.add(
+                    chart_field.pow(t_value, 3),
+                    chart_field.mul(
+                        one_minus_kappa, chart_field.pow(u_value, 3)
+                    ),
+                )
+                e4_linear = field_sum([
+                    t_fourth,
+                    chart_field.mul(
+                        one_minus_kappa,
+                        chart_field.mul(
+                            t_value, chart_field.pow(u_value, 3)
+                        ),
+                    ),
+                    chart_field.neg(kappa_u_fourth),
+                ])
+                power_sum = {
+                    1: t_value,
+                    2: chart_field.pow(t_value, 2),
+                    3: chart_field.pow(t_value, 3),
+                    4: chart_field.add(t_fourth, kappa_u_fourth),
+                }
+                for exponent in range(5, 9):
+                    power_sum[exponent] = field_sum([
+                        chart_field.mul(t_value, power_sum[exponent - 1]),
+                        chart_field.mul(
+                            e3_linear, power_sum[exponent - 3]
+                        ),
+                        chart_field.neg(chart_field.mul(
+                            e4_linear, power_sum[exponent - 4]
+                        )),
+                    ])
+                e3_fourth_values = field_sum([
+                    chart_field.pow(e3_linear, 4),
+                    chart_field.mul(
+                        chart_field.mul(t_value, e3_linear),
+                        chart_field.pow(e4_linear, 2),
+                    ),
+                    chart_field.neg(chart_field.pow(e4_linear, 3)),
+                ])
+                carry_four = field_sum([
+                    chart_field.neg(chart_field.mul(
+                        power_sum[4], power_sum[8]
+                    )),
+                    chart_field.pow(power_sum[4], 3),
+                    e3_fourth_values,
+                ])
+                carry_target = chart_field.neg(field_sum([
+                    chart_field.mul(
+                        chart_field.pow(t_fourth, 2), kappa_u_fourth
+                    ),
+                    chart_field.mul(
+                        t_fourth, chart_field.pow(kappa_u_fourth, 2)
+                    ),
+                ]))
+                invariant_theta = chart_field.add(
+                    carry_four, chart_field.neg(carry_target)
+                )
+                kappa_two = chart_field.pow(ratio_kappa, 2)
+                kappa_three = chart_field.pow(ratio_kappa, 3)
+                theta_coefficients = {
+                    0: field_sum([
+                        chart_field.pow(ratio_kappa, 4),
+                        chart_field.neg(ratio_kappa), 1,
+                    ]),
+                    1: chart_field.add(
+                        kappa_three, chart_field.neg(kappa_two)
+                    ),
+                    2: field_sum([
+                        kappa_three, kappa_two, ratio_kappa
+                    ]),
+                    3: chart_field.add(1, chart_field.neg(kappa_three)),
+                    9: chart_field.add(1, chart_field.neg(ratio_kappa)),
+                    12: 1,
+                }
+                expanded_theta = 0
+                for t_exponent, coefficient in theta_coefficients.items():
+                    expanded_theta = chart_field.add(
+                        expanded_theta,
+                        chart_field.mul(
+                            coefficient,
+                            chart_field.mul(
+                                chart_field.pow(t_value, t_exponent),
+                                chart_field.pow(
+                                    u_value, 12 - t_exponent
+                                ),
+                            ),
+                        ),
+                    )
+                if (direct_theta != invariant_theta
+                        or direct_theta != expanded_theta):
+                    raise AssertionError(
+                        "the four-slope fourth Witt carry changed"
+                    )
+                witt_four_slope_carry_checks += 1
+
+    witt_fourth_top_coefficient_checks = 0
+    for trial in range(chart_q):
+        a_coefficients = [
+            (7 * trial + 5 * index + 1) % chart_q
+            for index in range(chart_r)
+        ]
+        c_coefficients = [
+            (11 * trial + 4 * index + 2) % chart_q
+            for index in range(chart_r)
+        ]
+        alpha_one = 0
+        beta_one = 0
+        for u_value in range(1, chart_q):
+            x_value = chart_field.pow(u_value, 3)
+            a_value = polynomial_value(a_coefficients, x_value)
+            c_value = polynomial_value(c_coefficients, x_value)
+            w_value = chart_field.add(u_value, a_value)
+            p_value = field_sum([
+                c_value,
+                chart_field.neg(chart_field.mul(u_value, a_value)),
+                chart_field.pow(u_value, 2),
+            ])
+            beta_one = chart_field.add(
+                beta_one,
+                chart_field.mul(
+                    chart_field.pow(u_value, 2 * chart_r + 3),
+                    chart_field.pow(w_value, chart_r),
+                ),
+            )
+            second_root_power_sum = chart_field.add(
+                chart_field.pow(w_value, 2), p_value
+            )
+            alpha_one = chart_field.add(
+                alpha_one,
+                chart_field.mul(
+                    chart_field.pow(u_value, chart_r + 3),
+                    chart_field.pow(second_root_power_sum, chart_r),
+                ),
+            )
+        expected_beta_one = chart_field.neg(chart_field.pow(
+            a_coefficients[chart_r - 4], chart_r
+        ))
+        expected_alpha_one = field_sum([
+            expected_beta_one,
+            chart_field.mul(
+                chart_field.pow(a_coefficients[chart_r - 3], chart_r),
+                chart_field.pow(a_coefficients[chart_r - 1], chart_r),
+            ),
+            chart_field.neg(chart_field.pow(
+                a_coefficients[chart_r - 2], 2 * chart_r
+            )),
+        ])
+        if (alpha_one != expected_alpha_one
+                or beta_one != expected_beta_one):
+            raise AssertionError(
+                "the fourth Witt top-coefficient extraction changed"
+            )
+        witt_fourth_top_coefficient_checks += 1
+
+    witt_fourth_representative_gate_coefficients = {}
+    for ratio_kappa in (2, 18):
+        kappa_r = chart_field.pow(ratio_kappa, chart_r)
+        difference_r = chart_field.pow(
+            chart_field.add(ratio_kappa, chart_field.neg(1)), chart_r
+        )
+        common = chart_field.mul(kappa_r, difference_r)
+        witt_fourth_representative_gate_coefficients[str(ratio_kappa)] = {
+            "a_r_minus_4": chart_field.mul(
+                common, chart_field.add(kappa_r, 1)
+            ),
+            "top_hankel_minor": chart_field.mul(common, difference_r),
+        }
+    if witt_fourth_representative_gate_coefficients != {
+            "2": {"a_r_minus_4": 0, "top_hankel_minor": 2},
+            "18": {"a_r_minus_4": 7, "top_hankel_minor": 26}}:
+        raise AssertionError(
+            "the q=27 fourth Witt representative gates changed"
+        )
 
     shifted_direct_moments = {}
     shifted_defect_moments = {}
@@ -4318,6 +4728,27 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         "balanced_ratio_normalized_cubic_fibers": (
             len(balanced_ratio_normalized_fibers)
         ),
+        "balanced_ratio_candidates_after_shear_normalization": (
+            len(balanced_ratio_normalized_fibers)
+        ),
+        "balanced_shear_parameters_after_projective_normalization": 1,
+        "balanced_ratio_kappa_frobenius_orbits": (
+            normalized_kappa_frobenius_orbits
+        ),
+        "balanced_ratio_semilinear_search_representatives": 2,
+        "balanced_product_one_ordered_row_triples": (
+            normalized_product_one_ordered_rows
+        ),
+        "balanced_normalized_transversal_mappings": (
+            normalized_transversal_mappings
+        ),
+        "balanced_normalized_transversal_distinct_U_E_pairs": (
+            len(normalized_transversal_pairs)
+        ),
+        "balanced_normalized_transversal_pair_mapping_multiplicities": {
+            str(multiplicity): count for multiplicity, count
+            in sorted(normalized_transversal_pair_multiplicities.items())
+        },
         "balanced_ratio_zero_leading_or_boundary_direction_survivors": 0,
         "balanced_fourth_newton_product_checks": (
             balanced_fourth_newton_product_checks
@@ -4331,6 +4762,25 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         "balanced_t_norm_derivative_gcd_degree": chart_q - 1,
         "balanced_etale_factor_degree_caps": [[3, chart_r - 4],
                                                 [4, chart_r - 5]],
+        "balanced_high_fibers_after_two_seed_fibers": chart_r - 2,
+        "balanced_high_fiber_row_overlap_excess_range": [
+            chart_r - 2, chart_r + 1
+        ],
+        "balanced_four_direction_high_points": 4 * chart_r,
+        "balanced_four_direction_low_points": 2 * chart_r + 1,
+        "balanced_points_high_in_all_four_special_directions_lower_bound": (
+            4 * chart_r - 3
+        ),
+        "balanced_witt_independent_spectrum_coordinates": 2 * chart_r - 1,
+        "balanced_witt_four_slope_fourth_carry_checks": (
+            witt_four_slope_carry_checks
+        ),
+        "balanced_witt_fourth_top_coefficient_checks": (
+            witt_fourth_top_coefficient_checks
+        ),
+        "balanced_witt_fourth_representative_gate_coefficients": (
+            witt_fourth_representative_gate_coefficients
+        ),
     }
 
     # Exhaust the smallest coefficient space for the new three-norm gate.
@@ -4474,6 +4924,23 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         "three_projection_survivors": sharp_three_projection_survivors,
         "interpretation": "finite falsification check, not asymptotic evidence",
     }
+    teichmuller_f3 = {0: 0, 1: 1, 2: 8}
+    witt_carry_f3_checks = 0
+    for left in range(3):
+        for right in range(3):
+            carry_residue = (-(
+                left * left * right + left * right * right
+            )) % 3
+            lifted_left = (
+                teichmuller_f3[left] + teichmuller_f3[right]
+            ) % 9
+            lifted_right = (
+                teichmuller_f3[(left + right) % 3]
+                + 3 * teichmuller_f3[carry_residue]
+            ) % 9
+            if lifted_left != lifted_right:
+                raise AssertionError("the length-two Witt carry changed")
+            witt_carry_f3_checks += 1
 
     output.write_text(json.dumps({
         "schema": "c949-sharp-linear-coefficient-audit-v2",
@@ -4505,11 +4972,504 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         "field_checks": field_checks,
         "q27_chart_compatibility_microcheck": chart_compatibility_microcheck,
         "q9_balanced_three_norm_exhaust": balanced_three_norm_q9_exhaust,
+        "witt_carry_f3_checks": witt_carry_f3_checks,
         "period_four_recurrence_sharpness_microcheck": (
             recurrence_sharpness_microcheck
         ),
         "checked": True,
     }, indent=2, sort_keys=True) + "\n")
+
+
+def search_q27_balanced_carrier(
+        ratio_index: int,
+        transversal_index: int | None,
+        all_direction_ledger: bool,
+        omit_rs_gate: bool,
+        output: Path,
+        seconds: float,
+        workers: int,
+) -> None:
+    """Search the normalized balanced three-projection/RS gate at q=27."""
+    from ortools.sat.python import cp_model
+
+    field = Field(27)
+    q = field.q
+    r = q // 3
+    nonzero = tuple(range(1, q))
+    cubic_fibers: dict[int, list[int]] = {}
+    for value in range(q):
+        image = field.mul(
+            value, field.pow(field.add(value, 1), 2)
+        )
+        cubic_fibers.setdefault(image, []).append(value)
+    normalized_ratio_fibers = sorted(
+        (kappa, tuple(roots))
+        for kappa, roots in cubic_fibers.items()
+        if kappa != 0 and len(roots) == 3
+    )
+    if not 0 <= ratio_index < len(normalized_ratio_fibers):
+        raise ValueError(
+            f"ratio index must be between 0 and "
+            f"{len(normalized_ratio_fibers) - 1}"
+        )
+    ratio_kappa, ratio_singletons = normalized_ratio_fibers[ratio_index]
+    ratio_singleton_set = set(ratio_singletons)
+    normalized_mappings = []
+    for first_row in nonzero:
+        for second_row in nonzero:
+            if first_row == second_row:
+                continue
+            third_row = field.inv(field.mul(first_row, second_row))
+            rows = (first_row, second_row, third_row)
+            if len(set(rows)) != 3:
+                continue
+            columns = tuple(
+                field.mul(ratio_value, row_value)
+                for ratio_value, row_value in zip(ratio_singletons, rows)
+            )
+            if len(set(columns)) == 3:
+                normalized_mappings.append((rows, columns))
+    if len(normalized_mappings) != q * q - 8 * q + 17:
+        raise AssertionError("the normalized mapping parameterization changed")
+    fixed_mapping = None
+    if transversal_index is not None:
+        if not 0 <= transversal_index < len(normalized_mappings):
+            raise ValueError(
+                f"transversal index must be between 0 and "
+                f"{len(normalized_mappings) - 1}"
+            )
+        fixed_mapping = normalized_mappings[transversal_index]
+    fixed_rows = set(fixed_mapping[0]) if fixed_mapping else set()
+    fixed_columns = set(fixed_mapping[1]) if fixed_mapping else set()
+    fixed_completion = (
+        dict(zip(fixed_mapping[0], fixed_mapping[1]))
+        if fixed_mapping else {}
+    )
+
+    model = cp_model.CpModel()
+    row_options: dict[int, list[dict[str, object]]] = {}
+    all_options: list[dict[str, object]] = []
+    for u_value in nonzero:
+        x_value = field.pow(u_value, 3)
+        options = []
+        for first_y, second_y in itertools.combinations(range(q), 2):
+            if fixed_mapping is not None:
+                has_zero_t = u_value in (first_y, second_y)
+                if has_zero_t != (u_value in fixed_rows):
+                    continue
+                if (u_value in fixed_rows
+                        and field.add(
+                            u_value, fixed_completion[u_value]
+                        ) in (first_y, second_y)):
+                    continue
+            variable = model.NewBoolVar(
+                f"row_{u_value}_y_{first_y}_{second_y}"
+            )
+            y_values = (first_y, second_y)
+            t_values = tuple(
+                field.add(y_value, field.neg(u_value))
+                for y_value in y_values
+            )
+            ratio_values = tuple(
+                field.mul(t_value, field.inv(u_value))
+                for t_value in t_values
+            )
+            option = {
+                "variable": variable,
+                "u": u_value,
+                "x": x_value,
+                "y": y_values,
+                "t": t_values,
+                "ratio": ratio_values,
+                "A": field.add(first_y, second_y),
+                "C": field.mul(first_y, second_y),
+            }
+            options.append(option)
+            all_options.append(option)
+        model.Add(sum(option["variable"] for option in options) == 1)
+        row_options[u_value] = options
+
+    def fiber_count(coordinate: str, value: int):
+        terms = []
+        for option in all_options:
+            multiplicity = option[coordinate].count(value)
+            if multiplicity:
+                terms.append(multiplicity * option["variable"])
+        return sum(terms)
+
+    t_counts = [fiber_count("t", value) for value in range(q)]
+    ratio_counts = [fiber_count("ratio", value) for value in range(q)]
+    y_counts = [fiber_count("y", value) for value in range(q)]
+    model.Add(t_counts[0] == 3)
+    model.Add(ratio_counts[0] == 3)
+    model.Add(y_counts[0] == 2)
+
+    singleton_t = {value: model.NewBoolVar(f"singleton_t_{value}")
+                   for value in nonzero}
+    for value in nonzero:
+        model.Add(t_counts[value] + singleton_t[value] == 2)
+        if fixed_mapping is not None:
+            model.Add(singleton_t[value] == (value in fixed_columns))
+        model.Add(ratio_counts[value] == (
+            1 if value in ratio_singleton_set else 2
+        ))
+    model.Add(sum(singleton_t.values()) == 3)
+
+    four_y = {value: model.NewBoolVar(f"four_y_{value}")
+              for value in nonzero}
+    for value in nonzero:
+        model.Add(
+            y_counts[value] + singleton_t[value] == 1 + 3 * four_y[value]
+        )
+    model.Add(sum(four_y.values()) == r)
+
+    if all_direction_ledger:
+        for slope in nonzero:
+            intercept_buckets: list[list[object]] = [
+                [] for _ in range(q)
+            ]
+            for option in all_options:
+                slope_u = field.mul(slope, option["u"])
+                for t_value in option["t"]:
+                    intercept = field.add(
+                        t_value, field.neg(slope_u)
+                    )
+                    intercept_buckets[intercept].append(option["variable"])
+            full_counts = [
+                sum(intercept_buckets[value])
+                + (singleton_t[value] if value != 0 else 0)
+                for value in range(q)
+            ]
+            if slope in ratio_singleton_set:
+                model.Add(full_counts[0] == 1)
+                triple_fibers = []
+                for value in nonzero:
+                    is_triple = model.NewBoolVar(
+                        f"slope_{slope}_triple_{value}"
+                    )
+                    model.Add(full_counts[value] == 3 * is_triple)
+                    triple_fibers.append(is_triple)
+                model.Add(sum(triple_fibers) == 2 * r)
+            else:
+                model.Add(full_counts[0] == 2)
+                four_fibers = []
+                for value in nonzero:
+                    is_four = model.NewBoolVar(
+                        f"slope_{slope}_four_{value}"
+                    )
+                    model.Add(full_counts[value] == 1 + 3 * is_four)
+                    four_fibers.append(is_four)
+                model.Add(sum(four_fibers) == r)
+
+    if fixed_mapping is None:
+        # Common homothety lets one marked row be normalized to u=1.
+        model.Add(sum(
+            option["variable"] for option in row_options[1]
+            if 0 in option["t"]
+        ) == 1)
+
+    if not omit_rs_gate:
+        # Evaluation on F_q^* has degree <=8 iff moments 1,...,17 vanish.
+        for coordinate in ("A", "C"):
+            for exponent in range(1, q - r):
+                for component in range(field.degree):
+                    terms = []
+                    for option in all_options:
+                        weighted_value = field.mul(
+                            option[coordinate],
+                            field.pow(option["x"], exponent),
+                        )
+                        coefficient = field.coeffs(weighted_value)[component]
+                        if coefficient:
+                            terms.append(coefficient * option["variable"])
+                    weighted_sum = model.NewIntVar(
+                        0, 2 * (q - 1),
+                        f"{coordinate}_moment_{exponent}_{component}_sum",
+                    )
+                    quotient = model.NewIntVar(
+                        0, 2 * (q - 1) // 3,
+                        f"{coordinate}_moment_{exponent}_{component}_quotient",
+                    )
+                    model.Add(weighted_sum == sum(terms))
+                    model.Add(weighted_sum == 3 * quotient)
+
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = seconds
+    solver.parameters.num_search_workers = workers
+    status = solver.Solve(model)
+    status_name = solver.StatusName(status)
+    scope_parts = ["normalized balanced t/y/ratio fiber ledgers"]
+    if not omit_rs_gate:
+        scope_parts.append("exact degree-eight Reed-Solomon membership")
+    if all_direction_ledger:
+        scope_parts.append("all affine parallel-class ledgers")
+    scope_parts.append("no selector or off-core regularity constraints")
+    result: dict[str, object] = {
+        "schema": "c949-q27-balanced-three-projection-cpsat-v1",
+        "scope": "; ".join(scope_parts),
+        "field_order": q,
+        "ratio_index": ratio_index,
+        "ratio_kappa": ratio_kappa,
+        "ratio_singletons": list(ratio_singletons),
+        "normalized_transversal_mapping_count": len(normalized_mappings),
+        "transversal_index": transversal_index,
+        "all_direction_ledger": all_direction_ledger,
+        "reed_solomon_gate_omitted": omit_rs_gate,
+        "row_pair_binary_variables": len(all_options),
+        "forced_marked_row": 1 if fixed_mapping is None else None,
+        "time_limit_seconds": seconds,
+        "workers": workers,
+        "solver_version": __import__("ortools").__version__,
+        "status": status_name,
+        "wall_time_seconds": solver.WallTime(),
+        "conflicts": solver.NumConflicts(),
+        "branches": solver.NumBranches(),
+    }
+    if fixed_mapping is not None:
+        result["fixed_transversal"] = {
+            "rows": list(fixed_mapping[0]),
+            "columns": list(fixed_mapping[1]),
+            "ratios": list(ratio_singletons),
+        }
+    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        selected = [
+            option for option in all_options
+            if solver.Value(option["variable"])
+        ]
+        result["rows"] = [{
+            key: (list(option[key]) if isinstance(option[key], tuple)
+                  else option[key])
+            for key in ("u", "x", "y", "t", "ratio", "A", "C")
+        } for option in selected]
+        result["t_singletons"] = [
+            value for value in nonzero if solver.Value(singleton_t[value])
+        ]
+        result["full_core_four_y_values"] = [
+            value for value in nonzero if solver.Value(four_y[value])
+        ]
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+
+
+def search_q27_balanced_incidence(
+        ratio_index: int,
+        require_extendable: bool,
+        output: Path,
+        seconds: float,
+        workers: int,
+) -> None:
+    """Search the 702-cell normalized q=27 full direction ledger."""
+    from ortools.sat.python import cp_model
+
+    field = Field(27)
+    q = field.q
+    r = q // 3
+    nonzero = tuple(range(1, q))
+    cubic_fibers: dict[int, list[int]] = {}
+    for value in range(q):
+        image = field.mul(
+            value, field.pow(field.add(value, 1), 2)
+        )
+        cubic_fibers.setdefault(image, []).append(value)
+    normalized_ratio_fibers = sorted(
+        (kappa, tuple(roots))
+        for kappa, roots in cubic_fibers.items()
+        if kappa != 0 and len(roots) == 3
+    )
+    if not 0 <= ratio_index < len(normalized_ratio_fibers):
+        raise ValueError(
+            f"ratio index must be between 0 and "
+            f"{len(normalized_ratio_fibers) - 1}"
+        )
+    ratio_kappa, ratio_singletons = normalized_ratio_fibers[ratio_index]
+    ratio_singleton_set = set(ratio_singletons)
+
+    model = cp_model.CpModel()
+    cells = {
+        (u_value, y_value): model.NewBoolVar(
+            f"cell_{u_value}_{y_value}"
+        )
+        for u_value in nonzero for y_value in range(q)
+    }
+    for u_value in nonzero:
+        model.Add(sum(
+            cells[u_value, y_value] for y_value in range(q)
+        ) == 2)
+
+    def count_values(transform, target: int):
+        return sum(
+            cells[u_value, y_value]
+            for u_value in nonzero for y_value in range(q)
+            if transform(u_value, y_value) == target
+        )
+
+    y_counts = [
+        count_values(lambda _u, y_value: y_value, value)
+        for value in range(q)
+    ]
+    t_counts = [
+        count_values(
+            lambda u_value, y_value: field.add(
+                y_value, field.neg(u_value)
+            ),
+            value,
+        )
+        for value in range(q)
+    ]
+    ratio_counts = [
+        count_values(
+            lambda u_value, y_value: field.mul(
+                field.add(y_value, field.neg(u_value)),
+                field.inv(u_value),
+            ),
+            value,
+        )
+        for value in range(q)
+    ]
+    model.Add(y_counts[0] == 2)
+    model.Add(t_counts[0] == 3)
+    model.Add(ratio_counts[0] == 3)
+    singleton_t = {
+        value: model.NewBoolVar(f"singleton_t_{value}")
+        for value in nonzero
+    }
+    for value in nonzero:
+        model.Add(t_counts[value] + singleton_t[value] == 2)
+        model.Add(ratio_counts[value] == (
+            1 if value in ratio_singleton_set else 2
+        ))
+    model.Add(sum(singleton_t.values()) == 3)
+
+    four_y = []
+    for value in nonzero:
+        is_four = model.NewBoolVar(f"balanced_four_y_{value}")
+        model.Add(
+            y_counts[value] + singleton_t[value] == 1 + 3 * is_four
+        )
+        four_y.append(is_four)
+    model.Add(sum(four_y) == r)
+
+    for slope in nonzero:
+        full_counts = []
+        for intercept in range(q):
+            cover_count = sum(
+                cells[u_value, y_value]
+                for u_value in nonzero for y_value in range(q)
+                if field.add(
+                    field.add(y_value, field.neg(u_value)),
+                    field.neg(field.mul(slope, u_value)),
+                ) == intercept
+            )
+            full_counts.append(
+                cover_count
+                + (singleton_t[intercept] if intercept != 0 else 0)
+            )
+        if slope in ratio_singleton_set:
+            model.Add(full_counts[0] == 1)
+            triple_fibers = []
+            for intercept in nonzero:
+                is_triple = model.NewBoolVar(
+                    f"boundary_{slope}_triple_{intercept}"
+                )
+                model.Add(full_counts[intercept] == 3 * is_triple)
+                triple_fibers.append(is_triple)
+            model.Add(sum(triple_fibers) == 2 * r)
+        else:
+            model.Add(full_counts[0] == 2)
+            four_fibers = []
+            for intercept in nonzero:
+                is_four = model.NewBoolVar(
+                    f"ordinary_{slope}_four_{intercept}"
+                )
+                model.Add(full_counts[intercept] == 1 + 3 * is_four)
+                four_fibers.append(is_four)
+            model.Add(sum(four_fibers) == r)
+
+    matching = None
+    if require_extendable:
+        matching = {
+            (u_value, ratio_value): model.NewBoolVar(
+                f"completion_{u_value}_{ratio_value}"
+            )
+            for u_value in nonzero
+            for ratio_value in ratio_singletons
+        }
+        for ratio_value in ratio_singletons:
+            model.Add(sum(
+                matching[u_value, ratio_value] for u_value in nonzero
+            ) == 1)
+        for u_value in nonzero:
+            model.Add(sum(
+                matching[u_value, ratio_value]
+                for ratio_value in ratio_singletons
+            ) == cells[u_value, u_value])
+            for ratio_value in ratio_singletons:
+                column = field.mul(ratio_value, u_value)
+                completion_y = field.add(u_value, column)
+                model.Add(
+                    matching[u_value, ratio_value]
+                    + cells[u_value, completion_y] <= 1
+                )
+        for column in nonzero:
+            model.Add(singleton_t[column] == sum(
+                matching[u_value, ratio_value]
+                for u_value in nonzero
+                for ratio_value in ratio_singletons
+                if field.mul(ratio_value, u_value) == column
+            ))
+        model.Add(sum(
+            matching[1, ratio_value]
+            for ratio_value in ratio_singletons
+        ) == 1)
+    else:
+        # Normalize one of the three t=0 rows by common homothety.
+        model.Add(cells[1, 1] == 1)
+
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = seconds
+    solver.parameters.num_search_workers = workers
+    status = solver.Solve(model)
+    result: dict[str, object] = {
+        "schema": "c949-q27-balanced-full-direction-incidence-cpsat-v1",
+        "scope": (
+            "normalized full affine parallel-class ledger; "
+            + ("extendable singleton transversal and cell avoidance; "
+               if require_extendable else "")
+            + "no Reed-Solomon carrier, selector, or off-core regularity gate"
+        ),
+        "field_order": q,
+        "cell_binary_variables": (q - 1) * q,
+        "ratio_index": ratio_index,
+        "ratio_kappa": ratio_kappa,
+        "ratio_singletons": list(ratio_singletons),
+        "require_extendable": require_extendable,
+        "time_limit_seconds": seconds,
+        "workers": workers,
+        "solver_version": __import__("ortools").__version__,
+        "status": solver.StatusName(status),
+        "wall_time_seconds": solver.WallTime(),
+        "conflicts": solver.NumConflicts(),
+        "branches": solver.NumBranches(),
+    }
+    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        result["rows"] = [{
+            "u": u_value,
+            "y": [
+                y_value for y_value in range(q)
+                if solver.Value(cells[u_value, y_value])
+            ],
+        } for u_value in nonzero]
+        result["t_singletons"] = [
+            value for value in nonzero
+            if solver.Value(singleton_t[value])
+        ]
+        if matching is not None:
+            result["completion_mapping"] = [{
+                "u": u_value,
+                "ratio": ratio_value,
+                "t": field.mul(ratio_value, u_value),
+            } for u_value in nonzero for ratio_value in ratio_singletons
+              if solver.Value(matching[u_value, ratio_value])]
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
 
 
 def main() -> None:
@@ -4575,6 +5535,22 @@ def main() -> None:
     exact_target.add_argument("--output", type=Path, required=True)
     sharp_linear = subparsers.add_parser("sharp-linear-coefficient-audit")
     sharp_linear.add_argument("--output", type=Path, required=True)
+    balanced_carrier = subparsers.add_parser("q27-balanced-carrier-cpsat")
+    balanced_carrier.add_argument("--ratio-index", type=int, required=True)
+    balanced_carrier.add_argument("--transversal-index", type=int)
+    balanced_carrier.add_argument("--all-direction-ledger", action="store_true")
+    balanced_carrier.add_argument("--omit-rs-gate", action="store_true")
+    balanced_carrier.add_argument("--output", type=Path, required=True)
+    balanced_carrier.add_argument("--seconds", type=float, default=300.0)
+    balanced_carrier.add_argument("--workers", type=int, default=8)
+    balanced_incidence = subparsers.add_parser(
+        "q27-balanced-incidence-cpsat"
+    )
+    balanced_incidence.add_argument("--ratio-index", type=int, required=True)
+    balanced_incidence.add_argument("--require-extendable", action="store_true")
+    balanced_incidence.add_argument("--output", type=Path, required=True)
+    balanced_incidence.add_argument("--seconds", type=float, default=300.0)
+    balanced_incidence.add_argument("--workers", type=int, default=8)
     structure = subparsers.add_parser("analyze-blocking-certificate")
     structure.add_argument("--certificate", type=Path, required=True)
     structure.add_argument("--output", type=Path, required=True)
@@ -4644,6 +5620,18 @@ def main() -> None:
         audit_exact_target_obstruction(args.output)
     elif args.command == "sharp-linear-coefficient-audit":
         audit_sharp_linear_coefficient(args.output)
+    elif args.command == "q27-balanced-carrier-cpsat":
+        search_q27_balanced_carrier(
+            args.ratio_index, args.transversal_index,
+            args.all_direction_ledger,
+            args.omit_rs_gate,
+            args.output, args.seconds, args.workers
+        )
+    elif args.command == "q27-balanced-incidence-cpsat":
+        search_q27_balanced_incidence(
+            args.ratio_index, args.require_extendable,
+            args.output, args.seconds, args.workers
+        )
     elif args.command == "analyze-blocking-certificate":
         analyze_blocking_certificate(args.certificate, args.output)
     elif args.command == "analyze-unital-mechanism":
