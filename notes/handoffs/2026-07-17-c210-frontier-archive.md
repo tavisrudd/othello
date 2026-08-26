@@ -1,0 +1,245 @@
+# Relconic live-frontier session archive
+
+**Lane**: `relconic`
+
+**Status**: append-only session index.  This file records substantial active-
+frontier landings and points to their dated research reports.  It is not the
+proof authority and must not grow copies of long derivations.  The live map is
+`2026-07-17-c210.md`; closed pre-2026-08-15 programs remain in
+`done/2026-07-17-c210-archive.md`.
+
+## How to use this archive
+
+- Start a session from `2026-07-17-c210.md`, not this file.
+- Follow a dated report only when its branch is selected by the live map.
+- Append one compact entry after a substantial session: outcome, exact scope,
+  remaining gate, commits, and report/artifact links.
+- Corrections replace the claim in the live map and append a correction here;
+  do not rewrite older entries.
+
+## 2026-08-22 to 2026-08-25 — inherited sharp lower bound
+
+C945 and C970 established the field-uniform lower-bound side for complete
+`(2q/3+1)`-arcs:
+
+```text
+t_(2q/3+1)(2,q) >= q^2/3+5q/3-o(q).
+```
+
+The centered shell forces at least three line-code generators and the signed
+norm/cap estimate forces displacement at least `q/3-o(q)`.  This is the
+current proved asymptotic lower bound, not a matching construction.
+
+Reports and artifacts:
+
+- `notes/2026-08-22-c945-higher-arc-defect.md`
+- `notes/2026-08-25-c970-integral-secants-25-18-upgrade.md`
+- `notes/2026-08-25-c949-sharp-linear-coefficient-audit.json`
+- `papers/integral_secant_arcs/`
+
+## 2026-08-24 to 2026-08-25 — C949 inverse reduction
+
+C949 eliminated the exact `5/3` endpoint for sufficiently large ternary
+fields and reduced sublinear repair to nine structural signatures: seven
+concurrent rows and triangular `(4,-3),(5,-1)`.  Bruen--Fisher supplies the
+adjacent signed core but its overloaded pencils force linear repair, so it is
+not a near-sharp mechanism.
+
+The concurrent branch became a two-permutation Rédei problem.  Its seven
+infinity signatures compress to three affine ghost types `m_0 in {1,4,7}`.
+The first uncontrolled forbidden coefficient is
+`E_(q+4)=Phi_dir Q_3`; low/high Newton reciprocity does not kill its cubic
+quotient.  This is a proved method boundary, not a classification.
+
+The triangular `(4,-3)` branch became the balanced carrier problem with four
+special directions, Witt carries, reciprocal norms, a four-partite incidence
+system, and the top-coefficient package `SR24-WittK`.  The `(5,-1)` branch is
+different: even `eta=o(q)` requires a linear high-secant trade and is not
+covered by the exact balanced carrier lemma.
+
+Primary snapshot:
+
+- `notes/2026-08-24-c949-sharp-higher-arc-asymptotics.md`
+
+Representative foundation commits:
+
+- `379aba899` — inverse branch to free blocking arrangement
+- `d6677dcf1` — eliminate balanced carrier nullity
+- `b978cdb2b` — structural sharpness advance
+
+## 2026-08-25 to 2026-08-26 — finite carrier compiler and symbolic target
+
+C962 supplied the finite `q=27` carrier interface.  All 714 fixed-mapping
+tasks retain affine rank 102; useful compression is nonlinear/high-incidence.
+A high cell gives a cofactor-free linear equation in 18 carrier coefficients.
+Eight double-high rows determine the carrier; seven leave at most a
+one-dimensional Möbius defect, so a terminal has normally one carrier and at
+most 27 in the exceptional case.
+
+The intended computation is a high-incidence DFS with rollback linear bases,
+immediate inconsistency rejection, bounded Möbius terminals, fourth-Witt/
+reciprocal-norm/mapping gates, and canonical minimal rejection cores.  The
+field-uniform objective is not merely `q=27` rejection: classify the 714
+cores under symmetry and extract a bounded symbolic cross-ratio/Möbius
+certificate valid for `q=3^h`.
+
+The C962 implementation later gained parallel search in its owning work, but
+the parallel balanced-DFS path was not present in this checkout at the C949
+closeout and therefore was not reviewed here.
+
+Reports and private implementation context:
+
+- `notes/2026-08-25-c962-application-opportunities-memo.md`
+- `notes/2026-08-25-c962-recovery-algorithms-and-bounds.md`
+- `papers/complete-repair-ports/algorithms/` (private; never publish)
+
+## 2026-08-26 — carrier/conductor compression and no-go boundary
+
+The dual high-line arrangement has `2q+4` rational lines with
+`t_2=3q-3`, `t_3=3`, and `t_4=q(q+2)/3`.  Every local joining-line product
+has the uniform residue
+
+```text
+Delta_P=R_P^3(PV_X)(PV_Y)(PV_Z),   deg R_P=2q/3.
+```
+
+Branchwise roots glue exactly when a degree-`2q/3` plane form passes through
+the quadruple set.  The conductor conditions are explicit: value matching at
+double nodes; two values and one first jet at triple nodes; and two first-jet
+plus one second-jet conditions at quadruple nodes after zero values.  A
+solution saturates Bezout and is a strong high-degree complete-intersection
+carrier.
+
+Several tempting shortcuts were closed:
+
+- all finite pointwise torus jets are Koszul-formal and yield no new local
+  invariant;
+- cubing loses precisely the conductor data needed to descend roots;
+- Saito/Yoshinaga freeness is universal for rational covering arrangements
+  and does not produce the carrier;
+- Segre-pencil propagation is a tautological sign cocycle;
+- a scalar low-node cocycle cannot see first/second jets at quadruple nodes.
+
+If a global mechanism forces a degree-at-most-four carrier, the quartic
+blocking argument excludes it for `q>=81`, including geometrically reducible
+quartics.  That remains conditional and covers only triangular `(4,-3)`.
+
+Primary snapshot:
+
+- `notes/2026-08-24-c949-sharp-higher-arc-asymptotics.md`
+
+## 2026-08-26 — Mason stability upgraded to a quantitative gap
+
+For a near-sharp complement `B`, put `r=q/3`, compare with any Mason large
+root `S`, and write
+
+```text
+P=B\S,  N=S\B,  |P|=q-3+e.
+```
+
+Mason's `2q-2` `r`-secants partition `S`.  Deficient partition blocks create
+orphaned surviving points; minimality forces their essential `r`-secants to
+be converted old `2r`-secants.  Pair counting and inclusion--exclusion bound
+the converted lines, while four-block incidence bounds the deficient blocks.
+The resulting field-uniform theorem is
+
+```text
+eta=o(q) => e>=q^(3/2)/104 eventually,
+             |B triangle S|=Omega(q^(3/2)).
+```
+
+This holds across all nine SR11 signatures but is Mason-relative: it does not
+classify arbitrary minimal `r`-fold blockers.
+
+The exponent-loss object is the Mason concurrence hypergraph on `2q-2`
+`r`-secants.  It is regular, four-uniform, and linear; its pair leave is three
+perfect matchings.  For `U` deficient blocks,
+
+```text
+binom(|U|,2)=e_leave(U)+6F_4(U)+3F_3(U)+F_2(U).
+```
+
+Generic design data cannot improve the quadratic full-block bound.  An
+explicit four-group affine-design family has the same parameter relations
+and a quadratic induced subdesign, while deleting one vertex from Mason
+itself leaves dense full blocks but creates many partial triples.  Any
+improvement must use Mason-specific coordinates/additive structure in the
+small-set regime `|U|=o(q)`.
+
+Commit chain:
+
+- `d0490206f`, `85a6e62ec`, `6bc57572d` — initial stability gaps
+- `959c990d7`, `cada29be1` — exclude linear switches and prove the
+  `q^(3/2)` scale
+- `87396e58c` — conservative constant `1/104`
+- `6a963b868`, `9c9a65371`, `6900e024d`, `13a10d6f2` — concurrence
+  hypergraph, generic no-go, and normalized induced-block defect
+
+## 2026-08-26 — TT closeout and corrected frontier
+
+The strongest unifying observation is that both the balanced SR11 core and
+the Mason comparison produce a near-Steiner `3/4`-block geometry with a
+three-matching pair leave.  The next theorem should target this shared
+structure rather than treat all branches independently.
+
+Highest-EV frontier:
+
+1. Prove a robust defect dichotomy: either the embedded block system
+   linearizes/Masonizes within `o(q^(3/2))`, or accumulated pair-completion
+   defect forces `eta>=c q`.
+2. In the Mason small-set regime, `|U|~sqrt(q)` and `F_4(U)~|U|^2`, so the
+   additive energy is genuinely high.  Parameterize `r`-secants by their
+   zero-triangle intersections and apply a BSG/Freiman or cross-ratio inverse
+   theorem.  The earlier global BSG attempt had insufficient energy; this
+   localized one does not.
+3. Treat the carrier as a generalized-Picard/conductor obstruction and use
+   canonical `q=27` rejection cores to guess a bounded left-kernel or
+   cross-ratio certificate.
+4. Do not assume Mason attraction from scalar moments.  The exact missing
+   mixed correlation is
+   `q|B intersect S|=sum_ell |B intersect ell||S intersect ell|-|B||S|`.
+5. A full theorem still needs the concurrent split-permutation coupling, the
+   triangular `(5,-1)` global trade, or one robust inverse theorem that
+   subsumes both, plus the matching sharpness/construction side.
+
+The honest closeout estimate was roughly 60% of the full C949 program:
+structural reduction is substantially further along than the actual sharp
+asymptotic closeout.
+
+Primary authority:
+
+- `notes/2026-08-24-c949-sharp-higher-arc-asymptotics.md`
+
+Final session commits:
+
+- `0e93feb41` — isolate the missing Mason-attraction/mixed-correlation theorem
+- `03abc4d38` — relax the sufficient attraction scale to `o(q^(3/2))`
+- `9c9a65371`, `6900e024d`, `13a10d6f2` — red-team the hypergraph frontier
+
+## Preserved closed-program literature boundary
+
+For a fixed relative-conic parameter specialization, prefer normalization
+plus Hasse--Weil with an explicit genus bound.  The historical sources are
+H. Stichtenoth, *Algebraic Function Fields and Codes*, second edition,
+Proposition 3.7.8 for Artin--Schreier ramification/genus and Theorem 5.2.3 for
+Hasse--Weil, DOI `10.1007/978-3-540-76878-4`.  Use Aubry--Perret, *A Weil
+theorem for singular curves*, DOI `10.1515/9783110811056.1`, only for direct
+point counts on a singular projective model rather than its normalization.
+
+Do not invoke Lang--Weil as a bare label: record the constant field, absolute
+irreducibility, genus/degree, removed points, and the resulting extension
+threshold.  The full geometric baseline remains in
+`papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex`.
+
+## 2026-08-26 — startup and card compression
+
+The live relconic handoff had grown to 789 lines by duplicating C949's dated
+proof report.  It was replaced by a 195-line routing map containing only the
+current theorem state, five ordered frontiers, source routing, other live
+cards, and ownership.  This append-only file now owns session summaries and
+links; the dated C949 report remains the detailed authority.  The C949 queue
+row was reduced from a historical card dump to a short index entry pointing
+at the live map, proof report, and this archive.
+
+Exact prior handoff prose remains recoverable from Git history; it was not
+copied here because that would recreate the startup problem this split fixes.
