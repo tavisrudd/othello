@@ -334,3 +334,21 @@ q=27 `e_26` value from a completed carrier and resolved mapping, without
 splitting the carrier quadratics.  Its redundancy or extra rejection power
 relative to the existing terminal gates remains an explicit computational
 question.
+
+The final hostile compiler review caught a variable-name trap.  The abstract
+affine Chow convention uses the constant-coordinate variable `W_aff`, but in
+the existing homogeneous carrier form an affine factor is `Z+Mu-tW`; hence
+`(U,V,W_aff)=(M,-W,Z)`.  The specialized q=27 coefficient is therefore
+`[Z^29]`, not `[W^29]`, after removing the three infinity factors.  The
+three-scalar recurrence is unchanged and is the safer implementation.
+
+The last TT/EJ pass supplied two exact upgrades.  First, joint Frobenius
+transport cubes the three projection scalars and permutes their boundary
+labels, so the all-zero filter is constant on C962's 714 joint work orbits.
+Second, the entire directional elementary-symmetric form is
+`psi=-1-P_reg p` with `deg p<=2`: its values are `-1` on all regular
+directions, `1` at the two vertex directions, and zero at the three boundary
+directions.  This yields a stronger quadratic-quotient compiler check, but
+also proves a sharp no-go: this coefficient cannot distinguish the 64
+labelled degree-five residual patterns.  Cross-slope propagation must use a
+lower projection coefficient.

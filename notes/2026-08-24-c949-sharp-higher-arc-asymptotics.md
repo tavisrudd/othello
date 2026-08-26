@@ -357,6 +357,12 @@ If starting from `Chow_D`, first remove its three known infinity factors;
 raw carrier rows remain insufficient.  Independence from the existing gates
 is not yet proved.
 
+In the concrete `(TR16h)` variables the abstract affine Chow coordinates are
+`(U,V,W_aff)=(M,-W,Z)`.  Thus the q=27 compiler extracts `[Z^29]`, as a
+binary form in `(M,-W)`, after removing the infinity factors.  Extracting
+`[W^29]` from `(TR16h)` is a different, unsupported coefficient.  The three
+scalar recurrences below avoid this coordinate trap entirely.
+
 The q=27 compiler need not construct that full product.  At each boundary
 normal covector, the two carrier roots over `u` give an explicit quadratic
 generating factor whose coefficients use only `A(u^3),C(u^3),w,u`; the three
@@ -365,6 +371,26 @@ only through `z^26` evaluates the required `e_26` directly.  Thus `(TR43)` is
 an exact cheap post-terminal filter once the resolved mapping has been
 converted to the `(TR13)` boundary frame.  Whether it rejects anything not
 already rejected by fourth Witt, reciprocal norm, or mapping remains open.
+
+The verdict is invariant under the existing **joint** semilinear quotient:
+Frobenius transport cubes the three outputs and permutes their boundary
+labels.  Hence one exact evaluation per 714 carrier--mapping representative
+suffices; transporting the mapping without its carrier and boundary frame is
+not allowed.
+
+The whole binary form has the sharper normal form
+
+```text
+psi(m)=-1-P_reg(m)p(m),       deg p<=2.             (TR45)
+```
+
+It equals `-1` on every regular direction, `1` at both vertex directions,
+and zero at the three boundary directions.  Homogeneously,
+`hat psi+N^(q-1)=-N hat P_reg hat p`.  This gives a stronger post-terminal
+quadratic-quotient check after the cheap three-root test.  It also proves
+that this coefficient is blind to the 64 labelled residual patterns: all
+regular directions have the same value.  Cross-slope propagation must use
+a lower Chow/projection coefficient.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
@@ -542,8 +568,17 @@ separate global trade obstruction or construction.
 - **Settled:** the affine-core Chow coefficient `[W^(q+2)]C_B` is exactly
   that binary form, so the cyclic gate has a precise post-terminal compiler;
   the direction cubic must be dualized and the three infinity factors removed.
+- **Settled/no-go:** under the `(TR16h)` variable names this is `[Z^(q+2)]`,
+  not `[W^(q+2)]`; red-team caught the wrong-flag extraction before coding.
 - **Settled:** a truncated univariate quadratic recurrence evaluates the
   three q=27 roots directly from a completed carrier and resolved mapping.
+- **Settled:** the verdict is invariant on the 714 joint semilinear work
+  orbits, so no unquotienting is needed.
+- **Settled:** the full directional form has a quadratic quotient normal
+  form and is constant on every regular direction.
+- **Settled/no-go:** the cyclic gate cannot see which of the 64 labelled
+  residual patterns occurs; residual synchronization needs a lower
+  projection coefficient.
 - **Open:** determine whether this compiler rejects any surviving q=27
   terminal independently of fourth Witt, reciprocal norm, and mapping.
 - **Open:** synchronize those residuals across slopes; fiberwise boundedness
@@ -564,8 +599,9 @@ separate global trade obstruction or construction.
 
 Implement the post-terminal `(TR43)` recurrence in the C962 normalization
 and compare its rejection cores with fourth Witt, reciprocal norm, and
-mapping.  Then transport the stronger four-slope compatibility `(TR38)` if
-the cyclic root test is not already decisive.
+mapping, once per joint orbit.  On survivors, test the full `(TR45)`
+quadratic quotient.  For the field-uniform residual frontier, move one Chow
+coefficient lower: `(TR45)` proves the current coefficient is label-blind.
 In parallel, use the two-monomer matching gate and degree-five labelled
 residuals as q=27 prefilters before the carrier DFS.  Field-uniformly, prove
 cross-slope propagation for those residuals or construct a genuinely

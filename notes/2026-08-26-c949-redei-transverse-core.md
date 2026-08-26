@@ -874,6 +874,18 @@ carrier terminal plus its resolved mapping and the fixed homogeneous
 boundary convention therefore suffice for this cheap necessary filter.  A
 raw carrier or unresolved mapping task does not.
 
+Coordinate conversion is essential.  In `(TR16h)` an affine point factor is
+`Z+Mu-tW`, so relative to the abstract convention above
+
+```text
+(U,V,W_aff)=(M,-W,Z).
+```
+
+Consequently the compiler extracts `[Z^(q+2)]C_B(Z,M,W)`, viewed as a binary
+form in `(M,-W)`, not `[W^(q+2)]` of the displayed `(TR16h)` polynomial.
+The latter is a different Chow coefficient and has no proved boundary-cubic
+divisibility.  At q=27 the correct specialized coefficient is `[Z^29]`.
+
 There is an exact univariate compiler that avoids root extraction and the
 full 55-factor Chow expansion.  For a boundary direction `[u_i:t_i]`, put
 
@@ -906,6 +918,51 @@ boundary directions.  This uses only the completed carrier, resolved
 mapping, and explicit Frobenius boundary frame.  Raw mapping columns must be
 converted to the `E_0` coordinates of `(TR13)` first.  No implication from,
 or independence of, the current fourth-Witt and norm gates is yet proved.
+
+The three-value verdict respects the existing semilinear quotient.  Under
+joint Frobenius transport of the carrier, mapping, affine core, and boundary
+frame, projected point coordinates are cubed and the three boundary
+directions are merely permuted.  Since `e_(q-1)` has prime-field
+coefficients,
+
+```text
+g'_(sigma(i))=g_i^(3^j),
+g_i=Psi(t_i,-u_i).                                  (TR44)
+```
+
+Projective rescaling only multiplies by a nonzero scalar, so the all-zero
+verdict is invariant.  The gate may therefore be evaluated once on each of
+the 714 **joint** carrier--mapping orbit representatives.  Transporting only
+the mapping while fixing an arbitrary carrier or boundary frame is invalid.
+
+There is a stronger exact global form.  In the boundary-vertical chart put
+
+```text
+psi(m)=e_(q-1)({b(P)-m a(P):P in B_aff}).
+```
+
+Coefficient comparison in `S=(X^q-X)Q+J`, using monicity of `Q` and
+`[X^2]Q=-P_reg p`, gives
+
+```text
+psi(m)=-1-P_reg(m)p(m),       deg p<=2.             (TR45)
+```
+
+Thus `psi=-1` on every regular direction, `psi=1` at both vertex directions,
+and `psi=0` at all three boundary directions (including infinity).  If
+`hat psi(M,N)=N^(q-1)psi(M/N)`, then
+
+```text
+hat psi(M,N)
+ =-N^(q-1)-N hat P_reg(M,N)hat p(M,N).
+```
+
+This is a stronger compiler target than the three zeros: after the cheap
+root test, the full binary form must have the displayed quadratic quotient.
+It is also a no-go for using `Psi` to synchronize the 64 labelled residual
+patterns from `(TR33)`: every regular direction has the same value `-1`, so
+this coefficient contains no missing-label information.  A residual
+propagation theorem must use a lower projection/Chow coefficient.
 
 ## Mystery ledger (`ej` + `tt`)
 
@@ -968,9 +1025,20 @@ or independence of, the current fourth-Witt and norm gates is yet proved.
 - **Settled:** `(TR42)` compiles that divisibility exactly from the completed
   affine-core Chow product; the three infinity factors of `Chow_D` must be
   removed first, and direction coordinates are dualized.
+- **Settled/no-go:** in the existing `(Z,M,W)` carrier form the affine
+  homogenizing variable is `Z`; extracting `[W^(q+2)]` there is a wrong-flag
+  coefficient and cannot be used as the gate.
 - **Settled:** `(TR43)` evaluates all three roots by a truncated univariate
   recurrence from completed carrier/mapping data, with no root extraction or
   full Chow expansion.
+- **Settled:** `(TR44)` makes the all-three-zero verdict invariant under the
+  existing joint semilinear quotient, so representative-only evaluation is
+  exact.
+- **Settled:** `(TR45)` determines the entire directional binary form up to
+  one quadratic quotient and proves that its regular-direction values are
+  label-blind.
+- **Settled/no-go:** `(TR41)--(TR45)` cannot propagate the 64 labelled
+  degree-five residual patterns; a lower projection coefficient is required.
 - **Open:** determine whether this post-terminal filter rejects any surviving
   q=27 carrier states independently of fourth Witt, reciprocal norm, and the
   mapping gate; no symmetry of `D` may be assumed.
