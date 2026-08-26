@@ -3581,8 +3581,17 @@
       "last": 970,
       "purpose": "Package the C969 classifier inside the Beyond Four PRS paper repository, upgrade the manuscript-facing software boundary and release verification, and preserve clean later standalone extraction",
       "sequence": 398
+    },
+    {
+      "count": 1,
+      "first": 971,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 971,
+      "purpose": "Prepare ERGO-Comp for clean public export and draft the companion manuscript update",
+      "sequence": 399
     }
   ],
-  "next_id": 971,
+  "next_id": 972,
   "schema": "codex-task-id-allocations-v1"
 }
