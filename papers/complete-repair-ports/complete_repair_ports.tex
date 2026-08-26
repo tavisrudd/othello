@@ -58,12 +58,13 @@ over the complete outer functional dual, with no distance hypothesis.  These
 labelled costs compose by min--sum substitution through compatible finite
 towers and retain coefficient witnesses.  Under $d(O^\perp)>r+1$, confinement
 through radius $r$ is equivalent to $r<M_t(D_P,K_P)+d(I^\perp)$; then
-zero-extension preserves normalized equations and supports.  ERGO-Comp (Exact
-Recovery and Generalized-weight Optimization Compiler) implements this
-recursion and exact capacity-aware scheduling via quotient states and graded
-load shells.  Recorded structured instances show $2.5$--$373$-fold speedups
-over equivalently preprocessed CP-SAT; general side constraints use it as a
-certified CP-SAT front end.  Positive-density and
+zero-extension preserves normalized equations and supports.  The theory yields
+ERGO-Comp (Exact Recovery and Generalized-weight Optimization Compiler), an
+exact compiler and solver using quotient states and graded load shells.  The
+proofs are software-independent.
+Recorded instances show $2.5$--$373$-fold speedups over equivalently
+preprocessed constraint programming--satisfiability (CP-SAT); general side
+constraints pass to CP-SAT after exact preprocessing.  Positive-density and
 bounded service-rate transfer follow, while equal relative-weight hierarchies
 need not determine bounded repair reliability.
 \end{abstract}
@@ -82,8 +83,8 @@ coefficients that implement the recovery equations.
 
 This paper applies relative generalized Hamming weights to a canonical nested
 pair obtained by shortening and puncturing the inner dual.  Relative
-generalized Hamming weights and the relative dimension/length profile were
-introduced for nested codes by
+generalized Hamming weights (RGHWs) and relative dimension/length profiles
+(RDLPs) were introduced for nested codes by
 Luo, Mitrpant, Vinck, and Chen, who interpreted them as access thresholds in
 a wiretap model~\cite{LuoEtAl2005}; later work develops their
 ramp-secret-sharing and algorithmic roles
@@ -203,22 +204,29 @@ The first failure comes from the overlap pattern of all recovery equations.
 The second compares different ambient inner-dual realizations of the same
 abstract nested pair; it is not a change of generator-row basis for one code.
 
-Concatenation has long been used to construct LRCs with prescribed parameter
-properties \cite{LiuEtAl2022,JinFu2026}.  Jin and Fu fix a binary $[3,2,2]$
+Concatenation has long been used to construct locally repairable codes (LRCs)
+with prescribed parameter properties \cite{LiuEtAl2022,JinFu2026}.  Jin and Fu
+fix a binary $[3,2,2]$
 inner code and choose $\F_4$ outer codes to obtain parameter-optimal binary
 locality-two codes.  Here the inner code and target split are arbitrary, and the
 question is the exact obstruction to preserving every bounded dual recovery
 equation.  The finite formula is rank-stratified and ungated; the RGHW formula
 is its outer-distance specialization.  We make no minimum-bandwidth claim.
 
-The formulas are also algorithms.  ERGO-Comp evaluates the labelled
-prescribed-coset recursion through a finite tower, retains the intermediate
-functionals needed for composition, and returns exact recovery witnesses and
-confinement thresholds.  Its capacity scheduler uses the same compiled
-recovery choices to optimize simultaneous repairs under heterogeneous helper
-loads.  Section~\ref{sec:exact-recovery-optimization} gives correctness and
-complexity bounds and compares both direct and equivalently preprocessed
-CP-SAT baselines.
+The companion implementation, ERGO-Comp (Exact Recovery and Generalized-weight
+Optimization Compiler), applies these reductions.  Its current engines cover
+labelled hierarchical composition, capacitated repair scheduling, and
+orbit-structured code search; this paper analyzes the first two.  The
+composition engine retains the intermediate functionals needed through a
+finite tower and returns exact recovery witnesses and confinement thresholds.
+The scheduler optimizes simultaneous repairs under heterogeneous capacities.
+Both use quotient, grading, and generated-span reductions before a specialized
+exact engine or a residual CP-SAT model.  No mathematical result in the paper
+depends on the implementation or its measurements.
+Section~\ref{sec:exact-recovery-optimization} gives correctness and complexity
+bounds and compares both direct and equivalently preprocessed CP-SAT baselines.
+
+\input{figures/ergo-comp-pipeline}
 
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}

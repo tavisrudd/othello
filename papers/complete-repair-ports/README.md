@@ -51,12 +51,15 @@ for this recursion; in particular, the persistent value
 
 ## ERGO-Comp companion
 
-**ERGO-Comp turns the paper's exact recovery theorems into executable
-optimizers.** It compiles prescribed-coset support functions through labelled
-concatenation levels, returns exact helper costs and confinement thresholds,
-and retains coefficient-level witnesses rather than only scalar optima. Its
-capacity-aware scheduler selects simultaneous repairs under heterogeneous
-helper limits and supports coefficient-weighted download costs.
+**The Exact Recovery and Generalized-weight Optimization Compiler (ERGO-Comp)
+is an exact compiler and solver derived from the paper's recovery theory.** It
+compiles prescribed-coset support functions through labelled concatenation
+levels, returns exact helper costs and confinement thresholds, and retains
+coefficient-level witnesses rather than only scalar optima. Its capacity-aware
+scheduler selects simultaneous repairs under heterogeneous helper limits and
+coefficient-weighted download costs. The same structural compiler accelerates
+orbit-structured code search and can shrink residual constraint
+programming-satisfiability (CP-SAT) models.
 
 The compiler exploits quotient coordinates, projectively equivalent columns,
 repeated block types, packed finite-field arithmetic, and graded antichain
@@ -64,8 +67,17 @@ shells. Those reductions are mathematical: each comes with a replay path to
 the original instance. On the recorded exact scheduling suite, the Rust engine
 is 2.5--377 times faster than direct CP-SAT and 2.5--373 times faster than
 CP-SAT receiving the same safe preprocessing. For models with additional
-general constraints, ERGO-Comp is a certified front end to CP-SAT rather than
-a replacement for it.
+general constraints, ERGO-Comp supplies an exact preprocessing front end for
+residual CP-SAT models rather than replacing the general solver.
+
+The tool extends the theory into executable optimization; it is not evidence
+for the proofs. The mathematical results establish the reductions, and no
+theorem relies on the implementation or its measurements.
+
+Its current engines cover hierarchical recovery, capacity-aware batch
+scheduling, and orbit-structured code search. They also supply the core exact
+objects for batch and private information retrieval (PIR), availability,
+topology-aware repair, service-rate, and recovery-profile design front ends.
 
 Quick-start commands, JSON examples, architecture notes, and reproducible
 benchmarks are in [`algorithms/`](algorithms/).

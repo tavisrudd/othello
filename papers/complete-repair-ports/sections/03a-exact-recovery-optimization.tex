@@ -164,8 +164,10 @@ preprocessing.}
 \label{tab:ergo-comp-cpsat}
 \end{table}
 
+\input{figures/ergo-comp-cpsat}
+
 The largest gains occur on graded shells and other low-dimensional reachable
-state sets hidden inside a large capacity box.  The practical companion is
-therefore useful both as a complete solver for structured recovery instances
-and as a certified front end that shrinks a residual CP-SAT model while
-retaining exact recovery witnesses and confinement thresholds.
+state sets hidden inside a large capacity box.  The companion therefore solves
+the instance directly when the compiled state is sufficient, and otherwise
+supplies an exact preprocessing front end for a residual CP-SAT model while
+retaining recovery witnesses and confinement thresholds.

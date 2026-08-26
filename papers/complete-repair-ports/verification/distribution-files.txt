@@ -6,6 +6,9 @@ REVIEWER_GUIDE.md
 algorithms/README.md
 algorithms/SHA256SUMS
 algorithms/benchmark_algorithms.py
+algorithms/docs/cpsat-comparison.svg
+algorithms/docs/parallel-scaling.svg
+algorithms/docs/pipeline.svg
 algorithms/evidence/results.json
 algorithms/generate_evidence.py
 algorithms/gf27_defect_cpsat.py
@@ -62,6 +65,8 @@ algorithms/rust/tests/python_parity.rs
 algorithms/test_algorithms.py
 complete_repair_ports.pdf
 complete_repair_ports.tex
+figures/ergo-comp-cpsat.tex
+figures/ergo-comp-pipeline.tex
 flake.lock
 flake.nix
 formal-annotations.tex

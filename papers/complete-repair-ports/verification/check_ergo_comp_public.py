@@ -12,7 +12,7 @@ ROOT = PAPER / "algorithms"
 
 EXCLUDED_DIRS = {"__pycache__", "target"}
 EXCLUDED_FILE_PATTERNS = {"rust/A?ENTS.md"}
-TEXT_SUFFIXES = {".json", ".lock", ".md", ".py", ".rs", ".toml", ".txt"}
+TEXT_SUFFIXES = {".json", ".lock", ".md", ".py", ".rs", ".svg", ".toml", ".txt"}
 TEXT_NAMES = {"SHA256SUMS"}
 
 FORBIDDEN = (
