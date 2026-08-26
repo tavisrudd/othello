@@ -65,8 +65,8 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `90b637ff2378755a38fb05bb0aa7b08d44ddfa75cb6dea3ce000d4037ac30f01` | 22052 |
-| `EVIDENCE-ROWS.md` | `dbd3ef1309bb9494c8ee2cec9cb324de24cdebe7ac777a955280ffe2499f0368` | 14615 |
+| `EVIDENCE-MANIFEST.json` | `64b2f5f14a3c44d1b9ce2dd34e9f0f7daf59b4a864d59538187bde118a0d6768` | 22052 |
+| `EVIDENCE-ROWS.md` | `421fdb6814ddc465f1c819920c668e1725d4fbb5e18a48203a329ff23609ef68` | 14615 |
 | `package_evidence_bundle.py` | `b5c59f2d79170abca1ce305d98acb35a71428d36ab257d9ecd06aa043981037f` | 15213 |
 | `verify.py` | `b51bb68c53f3c7a13c5d53f582dc9b77cf6736d3eacb3c9d6c67f4a070b6019a` | 16218 |
 | `build_r6_paper_table.py` | `b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98` | 3878 |

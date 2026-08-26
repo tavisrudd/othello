@@ -28,7 +28,7 @@ boundaries remain separate.
 - thm:r8, thm:r9, cor:r10: fixed high-field classifications.
 - thm:m9-shallow: empty first higher Lucas carrier.
 
-The complete set of 75 numbered labels is reconciled mechanically against
+The complete set of 84 numbered labels is reconciled mechanically against
 supplement/LEAN-STATEMENTS.md.
 
 ## Boundaries
