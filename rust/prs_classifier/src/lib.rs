@@ -2744,6 +2744,7 @@ mod tests {
         assert_eq!(replayed, canonicalization.canonical_syndrome);
         assert_eq!(scale, canonicalization.transporter.projective_output_scale);
         assert!(!canonicalization.complexity.starts_with("explicit PGL"));
+        assert_eq!(canonicalization.transporters_examined, 60);
     }
 
     #[test]
@@ -2759,8 +2760,12 @@ mod tests {
         let syndrome = (0..17)
             .map(|i| (i * i + 3 * i + 1) % 32)
             .collect::<Vec<_>>();
-        let canonicalization =
-            canonicalize_syndrome(&request(field_spec, 17, syndrome.clone()), 50_000).unwrap();
+        let input = request(field_spec, 17, syndrome.clone());
+        assert_eq!(
+            canonicalize_syndrome(&input, 4_959),
+            Err(Error::CandidateLimit { limit: 4_959 })
+        );
+        let canonicalization = canonicalize_syndrome(&input, 4_960).unwrap();
         let (replayed, scale) = apply_semilinear(
             &field,
             &syndrome,
@@ -2774,6 +2779,7 @@ mod tests {
             .complexity
             .starts_with("rootless binary form"));
         assert!(!canonicalization.complexity.starts_with("explicit PGL"));
+        assert_eq!(canonicalization.transporters_examined, 4_960);
     }
 
     #[test]

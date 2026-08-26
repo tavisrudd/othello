@@ -98,3 +98,11 @@ normalized matrices.
 - GF(32)/R17 freezes the general Frobenius/Lucas fact that binary degree
   `n=p^a` has no rootless divided-power stratum at redundancy `r=p^a+1`; its
   characteristic-two degenerate simple-root chart streams 4,960 transports.
+
+Run the slow full-orbit checks from `rust/prs_classifier` in release mode:
+
+```text
+cargo test --release lex_charts_exhaust_all_r5_gf --lib -- --ignored
+cargo test --release structural_canonicalization_extends_to_gf16_r11 --lib -- --ignored --exact
+cargo test --release characteristic_power_degree_has_no_rootless_stratum_at_gf32_r17 --lib -- --ignored --exact
+```
