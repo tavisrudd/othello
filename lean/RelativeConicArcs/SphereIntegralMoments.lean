@@ -318,4 +318,114 @@ theorem normalizedSphereIntegral_one : normalizedSphereIntegral 1 = 1 := by
   rw [normalizedSphereIntegral]
   simp [evalOnSphere, sphereMass, hm]
 
+private lemma integral_volumeIoiPow_two (d : ℕ) :
+    (∫ r : Ioi (0 : ℝ), r.1 ^ d * gaussianKernel r.1
+      ∂Measure.volumeIoiPow 2) = radialMoment d := by
+  simp only [Measure.volumeIoiPow, ENNReal.ofReal]
+  rw [integral_withDensity_eq_integral_smul,
+    integral_subtype_comap measurableSet_Ioi
+      (fun r : ℝ => Real.toNNReal (r ^ 2) • (r ^ d * gaussianKernel r))]
+  · rw [radialMoment]
+    apply setIntegral_congr_fun measurableSet_Ioi
+    intro r hr
+    change (Real.toNNReal (r ^ 2) : ℝ) * (r ^ d * gaussianKernel r) =
+      r ^ (d + 2) * gaussianKernel r
+    rw [Real.coe_toNNReal _ (pow_nonneg hr.out.le 2)]
+    ring
+  · exact (measurable_subtype_coe.pow_const 2).real_toNNReal
+
+private lemma gaussianPolynomialIntegral_polar {p : MvPolynomial (Fin 3) ℝ} {d : ℕ}
+    (hp : p.IsHomogeneous d) :
+    gaussianPolynomialIntegral p =
+      (∫ y, evalOnSphere p y ∂sphereMeasure) * radialMoment d := by
+  let g : EuclideanSpace ℝ (Fin 3) → ℝ := fun x =>
+    eval (fun i => x i) p * Real.exp (-(1 / 2 : ℝ) * ‖x‖ ^ 2)
+  calc
+    gaussianPolynomialIntegral p = ∫ x : EuclideanSpace ℝ (Fin 3), g x := rfl
+    _ = ∫ x : ({(0)}ᶜ : Set (EuclideanSpace ℝ (Fin 3))),
+        g x.1 ∂((volume : Measure (EuclideanSpace ℝ (Fin 3))).comap (↑)) := by
+      rw [integral_subtype_comap (measurableSet_singleton _).compl g,
+        restrict_compl_singleton]
+    _ = ∫ z : Sphere3 × Ioi (0 : ℝ),
+        g (((homeomorphUnitSphereProd (EuclideanSpace ℝ (Fin 3))).symm z).1)
+          ∂(sphereMeasure.prod (Measure.volumeIoiPow 2)) := by
+      simpa [sphereMeasure] using
+        (volume : Measure (EuclideanSpace ℝ (Fin 3))).measurePreserving_homeomorphUnitSphereProd
+          |>.integral_comp (Homeomorph.measurableEmbedding _)
+            (fun z : Sphere3 × Ioi (0 : ℝ) =>
+              g (((homeomorphUnitSphereProd (EuclideanSpace ℝ (Fin 3))).symm z).1))
+    _ = ∫ z : Sphere3 × Ioi (0 : ℝ),
+        evalOnSphere p z.1 * (z.2.1 ^ d * gaussianKernel z.2.1)
+          ∂(sphereMeasure.prod (Measure.volumeIoiPow 2)) := by
+      apply integral_congr_ae
+      filter_upwards with z
+      have hr : 0 < z.2.1 := z.2.2
+      have hy0 : dist z.1.1 0 = 1 := z.1.2
+      have hy : ‖z.1.1‖ = 1 := by simpa only [dist_zero_right] using hy0
+      rw [homeomorphUnitSphereProd_symm_apply_coe]
+      simp only [g, evalOnSphere, PiLp.smul_apply, smul_eq_mul]
+      rw [eval_smul_of_isHomogeneous hp, norm_smul, Real.norm_eq_abs,
+        abs_of_pos hr, hy, mul_one]
+      simp [gaussianKernel]
+      ring
+    _ = (∫ y, evalOnSphere p y ∂sphereMeasure) *
+        ∫ r : Ioi (0 : ℝ), r.1 ^ d * gaussianKernel r.1
+          ∂Measure.volumeIoiPow 2 := by
+      exact integral_prod_mul (μ := sphereMeasure) (ν := Measure.volumeIoiPow 2)
+        (evalOnSphere p) (fun r : Ioi (0 : ℝ) => r.1 ^ d * gaussianKernel r.1)
+    _ = (∫ y, evalOnSphere p y ∂sphereMeasure) * radialMoment d := by
+      rw [integral_volumeIoiPow_two]
+
+private lemma radialMoment_pos (d : ℕ) : 0 < radialMoment d := by
+  rw [radialMoment_formula]
+  positivity
+
+private lemma momentFactor_even_pos (k : ℕ) : 0 < momentFactor (2 * k + 2) := by
+  have h := radialMoment_two_mul k
+  have hk := radialMoment_pos (2 * k)
+  have h0 := radialMoment_pos 0
+  nlinarith
+
+private lemma gaussianMass_cube_eq_sphereMass_mul_radialMoment_zero :
+    gaussianMass ^ 3 = sphereMass * radialMoment 0 := by
+  have hcart := gaussianPolynomialIntegral_eq_gaussianMoment
+    (1 : MvPolynomial (Fin 3) ℝ)
+  have hpolar := gaussianPolynomialIntegral_polar
+    (p := (1 : MvPolynomial (Fin 3) ℝ)) (d := 0) (isHomogeneous_one (Fin 3) ℝ)
+  calc
+    gaussianMass ^ 3 = gaussianPolynomialIntegral (1 : MvPolynomial (Fin 3) ℝ) := by
+      rw [hcart, gaussianMoment_one, one_mul]
+    _ = (∫ y, evalOnSphere (1 : MvPolynomial (Fin 3) ℝ) y ∂sphereMeasure) *
+        radialMoment 0 := hpolar
+    _ = sphereMass * radialMoment 0 := by
+      congr 1
+      simp [evalOnSphere, sphereMass]
+
+/-- On every even homogeneous ternary form, the algebraic normalized mean is
+exactly normalized integration against Mathlib's polar-decomposition surface
+measure on the unit two-sphere. -/
+theorem normalizedSphereIntegral_eq_normalizedMean_even (k : ℕ)
+    (p : MvPolynomial (Fin 3) ℝ) (hp : p.IsHomogeneous (2 * k)) :
+    normalizedSphereIntegral p = normalizedMean (2 * k) p := by
+  have hcart := gaussianPolynomialIntegral_eq_gaussianMoment p
+  have hpolar := gaussianPolynomialIntegral_polar hp
+  have hrad := radialMoment_two_mul k
+  have hmass := gaussianMass_cube_eq_sphereMass_mul_radialMoment_zero
+  have hr0 := radialMoment_pos 0
+  have hmf := momentFactor_even_pos k
+  have hcancel :
+      gaussianMoment p * sphereMass =
+        (∫ y, evalOnSphere p y ∂sphereMeasure) * momentFactor (2 * k + 2) := by
+    apply mul_right_cancel₀ hr0.ne'
+    calc
+      (gaussianMoment p * sphereMass) * radialMoment 0 =
+          gaussianMoment p * gaussianMass ^ 3 := by rw [hmass]; ring
+      _ = gaussianPolynomialIntegral p := hcart.symm
+      _ = (∫ y, evalOnSphere p y ∂sphereMeasure) * radialMoment (2 * k) := hpolar
+      _ = ((∫ y, evalOnSphere p y ∂sphereMeasure) * momentFactor (2 * k + 2)) *
+          radialMoment 0 := by rw [hrad]; ring
+  rw [normalizedSphereIntegral, normalizedMean]
+  field_simp [sphereMass_pos.ne', hmf.ne']
+  simpa [mul_comm] using hcancel.symm
+
 end RelativeConicArcs.SphereIntegralMoments
