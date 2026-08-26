@@ -3572,8 +3572,17 @@
       "last": 969,
       "purpose": "Structural PRS deep-hole classifier for redundancies 5 through 10",
       "sequence": 397
+    },
+    {
+      "count": 1,
+      "first": 970,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 970,
+      "purpose": "Package the C969 classifier inside the Beyond Four PRS paper repository, upgrade the manuscript-facing software boundary and release verification, and preserve clean later standalone extraction",
+      "sequence": 398
     }
   ],
-  "next_id": 970,
+  "next_id": 971,
   "schema": "codex-task-id-allocations-v1"
 }
