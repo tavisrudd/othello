@@ -736,13 +736,11 @@ fn validate_paper_iii(value: &GatedPaperIii) -> Result<usize, ShadowError> {
         validate_gate("paper_iii_four_shadow", &value.gate)?;
         unreachable!();
     }
-    if value.gate.required_export
-        != "papers/clebsch-passages/verification/sparse_shadow_export.json"
+    if value.gate.required_export != "verification/sparse_shadow_export.json"
         || value.source.paper != "III"
         || value.source.theorem
             != "arithmetic descent, four-shadow recognition, and calibrated two-graph return"
-        || value.source.artifact
-            != "papers/clebsch-passages/verification/evidence/orientation_source.json"
+        || value.source.artifact != "verification/evidence/orientation_source.json"
         || value.source.sha256 != "37c38ff37a9235f94a772eb473e0d6484420978670027e990ee93e89bbad4193"
         || value.branch_sextic != "J_0=0"
         || value.fibre_quadratic_algebra != "Q[t]/(t^2-t-1)"

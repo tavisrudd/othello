@@ -15,7 +15,7 @@ HERE = Path(__file__).resolve().parent
 EVIDENCE = HERE / "evidence"
 ORIENTATION_PATH = EVIDENCE / "orientation_source.json"
 ALIGNED_PATH = EVIDENCE / "aligned_faithfulness.json"
-REQUIRED_EXPORT = "papers/clebsch-passages/verification/sparse_shadow_export.json"
+REQUIRED_EXPORT = "verification/sparse_shadow_export.json"
 
 
 def compose(left: tuple[int, ...], right: tuple[int, ...]) -> tuple[int, ...]:
@@ -98,7 +98,7 @@ def compute() -> dict[str, object]:
                 "source": {
                     "paper": "III",
                     "theorem": "arithmetic descent, four-shadow recognition, and calibrated two-graph return",
-                    "artifact": "papers/clebsch-passages/verification/evidence/orientation_source.json",
+                    "artifact": "verification/evidence/orientation_source.json",
                     "sha256": hashlib.sha256(ORIENTATION_PATH.read_bytes()).hexdigest(),
                 },
                 "branch_sextic": "J_0=0",
