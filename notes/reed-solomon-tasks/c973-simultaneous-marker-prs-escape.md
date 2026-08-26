@@ -1,7 +1,8 @@
 # C973 — simultaneous-marker PRS escape and all-level Lucas discriminator
 
-**Lane:** `reed-solomon` · **Status:** active — simultaneous-marker theorem and
-improved threshold proved; independent review and Lucas discriminator open
+**Lane:** `reed-solomon` · **Status:** active — first proof goal complete;
+simultaneous-marker theorem, improved threshold, R11 closure, and R12
+reduction proved; independent review and pointed R11 abundance open
 
 **Current checkpoint:**
 `c973-2026-08-26-simultaneous-marker-theorem.md` proves direct composite
@@ -19,6 +20,9 @@ to one-extra-root versions of the R11 constructions.  The manuscript-frozen
 `c973-2026-08-26-paper-successor-map.md` gives exact replacement statements,
 the deletion/retention map, frontmatter and trust updates, and a target net
 reduction of 2--5 pages for a separately allocated integration successor.
+The author-side audit and explicit `ej`/`tt` mystery closeout are
+`c973-2026-08-26-hostile-proof-audit.md` and
+`c973-2026-08-26-sprint-closeout.md`.
 
 ## Objective
 
