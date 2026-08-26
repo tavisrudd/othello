@@ -28,12 +28,15 @@ Clippy, 31 focused library tests, three compiled-CLI integration tests, four
 fixed-seed property tests (1,024 generated cases), both manuscript builds, and
 the quick 74-artifact supplement gate pass.
 
-The deterministic exporter then produced a standalone paper repository at
-source commit `4dda2dec2764f0dcb08bfe923641943e91c2eeda`; its software and quick
-supplement gates pass without the monorepo. Filtering
+The deterministic exporter then produced standalone paper commit
+`af578447e4ae58697387a2adf3fdbd8adc7784e7` from source commit
+`09b276eead78b433fe1c632dba34d51b6c9f4916`; its software and quick supplement
+gates pass without the monorepo, and `cargo package --locked` verifies the
+23-file crate archive. Filtering
 `software/projective-reed-solomon/` to the repository root with
-`git filter-repo` produced a second disposable repository whose formatting,
-warning-free Clippy, and fast test gates pass without path repair. A CLI smoke
+`git filter-repo` produced disposable software commit
+`42feb6c9bd78dd74bd05808014d1094765e26eac`, whose formatting, warning-free
+Clippy, fast test, and package gates pass without path repair. A CLI smoke
 test classifies the documented GF(7)/R5 tangent request as `DEEP` and emits a
 task-ID-free `projective-reed-solomon-deep-certificate-v1` certificate.
 
