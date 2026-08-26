@@ -935,15 +935,27 @@ verdict is invariant.  The gate may therefore be evaluated once on each of
 the 714 **joint** carrier--mapping orbit representatives.  Transporting only
 the mapping while fixing an arbitrary carrier or boundary frame is invalid.
 
-For the current Rust terminal, run this only as a post-terminal C949 audit.
-The constructor has `columns=t` and `ratios=t/u`, so conditional on the paper
-frame the natural restored directions are `[row:column:0]=[1:ratio:0]` with
-normal covectors `(column,-row)`.  The current witness/API does not type or
-verify that these code ratio directions are exactly the paper's three
-`R_infinity` directions in the `(TR13)` frame.  That coordinate lemma and a
-replay fixture are the remaining implementation certificate.  Do not insert
-an extra shear into the boundary normal or silently promote this to a general
-C962 rejection reason before that check.
+The adapter to the current Rust terminal is already determined
+mathematically.  `(SR24t)--(SR24u)` define `(u,t)=(a^r,b^r)` and identify the
+three singleton values `R` of `t/u` as the infinity-boundary directions.
+`(SR24u''''')` writes every completed transversal as `e_i=r_i u_i`.  Rust's
+constructor is identical: `columns=ratios*rows`.  Hence its restored points
+are
+
+```text
+[row_i:column_i:0]=[1:ratio_i:0],
+```
+
+and the compiler covectors are `(column_i,-row_i)`, equivalently
+`(ratio_i,-1)`.  No extra shear belongs in the boundary normal and no lookup
+table is needed.  Implementation still needs a small documented encoding
+adapter/replay fixture tying the Rust field bytes to this frame; that is a
+representation check, not an open geometric lemma.  The filter remains
+C949-branch-specific rather than a general C962 terminal semantic.  Crucially,
+this uses the resolved mapping's paired **ratio** data in the extendable
+branch; the unordered row and column triples alone do not determine
+`R_infinity`, and `(TR13)--(TR15)` do not supply it in the nonextendable
+branch.
 
 There is a stronger exact global form.  In the boundary-vertical chart put
 
@@ -1096,7 +1108,11 @@ must bridge the labelled missing polynomial `A_m` to the cube-sector data
 - **Open:** determine whether this post-terminal filter rejects any surviving
   q=27 carrier states independently of fourth Witt, reciprocal norm, and the
   mapping gate; no symmetry of `D` may be assumed.
-- **Open:** certify and fixture the code-ratio to paper-`R_infinity` adapter
-  before making `(TR43)` an implementation rejection reason.
+- **Settled:** `(SR24t)--(SR24u''''')` identify Rust
+  `[row:column:0]=[1:ratio:0]` with the paper's `R_infinity`; the compiler
+  normal is `(column,-row)` with no extra shear.
+- **Open:** add the small field-encoding/replay fixture and measure the
+  filter's independent rejection distribution before making it a terminal
+  reason.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.

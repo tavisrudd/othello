@@ -378,12 +378,16 @@ labels.  Hence one exact evaluation per 714 carrier--mapping representative
 suffices; transporting the mapping without its carrier and boundary frame is
 not allowed.
 
-For the current Rust constructor, `columns=t` and `ratios=t/u`; the natural
-restored directions are therefore `[row:column:0]=[1:ratio:0]`, with normal
-covectors `(column,-row)`.  The API does not yet certify that these code
-directions are exactly the paper's `R_infinity` frame.  Keep the gate as a
-post-terminal diagnostic until that coordinate lemma and a replay fixture
-are landed; do not add an extra shear to the boundary normal.
+The adapter to the current Rust constructor is now exact.  `(SR24t)--(SR24u)`
+identify the singleton values of `t/u` as the infinity-boundary directions,
+and `(SR24u''''')` writes `e_i=r_i u_i`, exactly matching
+`columns=ratios*rows`.  Thus the restored points are
+`[row:column:0]=[1:ratio:0]` and their normal covectors are
+`(column,-row)`.  No extra shear or geometric lookup table is needed.  Only
+a small field-encoding/replay fixture remains before code integration.  This
+uses the resolved extendable mapping's ratio pairing; unordered row/column
+triples alone do not determine `R_infinity`, and the nonextendable branch
+still needs its boundary directions supplied separately.
 
 The whole binary form has the sharper normal form
 
@@ -609,8 +613,10 @@ separate global trade obstruction or construction.
   the missing-label subset.
 - **Open:** determine whether this compiler rejects any surviving q=27
   terminal independently of fourth Witt, reciprocal norm, and mapping.
-- **Open:** certify the Rust code-ratio to paper-`R_infinity` adapter before
-  promoting the diagnostic to a terminal rejection reason.
+- **Settled:** the Rust ratio directions are exactly the paper's
+  `R_infinity` directions; the normals are `(column,-row)`.
+- **Open:** add the encoding/replay fixture and measure independent q=27
+  rejection power before promoting the diagnostic to a terminal reason.
 - **Open:** synchronize those residuals across slopes; fiberwise boundedness
   alone does not give a common carrier.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut
@@ -627,8 +633,8 @@ separate global trade obstruction or construction.
 
 ## Next checkpoint
 
-Certify the code-ratio to paper-`R_infinity` adapter, then implement the
-post-terminal `(TR43)` recurrence and compare its rejection cores with
+Implement the proved `(column,-row)` post-terminal `(TR43)` recurrence with
+an encoding/replay fixture and compare its rejection cores with
 fourth Witt, reciprocal norm, and mapping, once per joint orbit.  On
 survivors, test the full `(TR45)`
 quadratic quotient.  For the field-uniform residual frontier, prove a bridge

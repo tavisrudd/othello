@@ -374,3 +374,15 @@ paper's `R_infinity` frame and add a replay fixture; no extra shear belongs
 in the normal.  Until then the gate remains a post-terminal diagnostic.  The
 closeout also blocks one last false inference: cubing is bijective in the
 ternary field, so TR46's cube values provide no common-root gluing.
+
+The final source check then closed the adapter mathematically.
+`(SR24t)--(SR24u)` define the Frobenius `(u,t)` frame and explicitly call the
+singleton `t/u` values the infinity-boundary directions;
+`(SR24u''''')` has `e_i=r_i u_i`, exactly Rust's
+`columns=ratios*rows`.  Therefore the restored points are
+`[row:column:0]` and their normals are `(column,-row)`.  No lookup table or
+extra shear is needed.  The only remaining implementation work is a small
+field-encoding/replay fixture and rejection-distribution measurement.
+The derivation uses the resolved mapping's ratio pairing; the unordered
+row/column triples alone do not determine the infinity points, and no such
+claim is made for a nonextendable carrier without boundary-direction input.
