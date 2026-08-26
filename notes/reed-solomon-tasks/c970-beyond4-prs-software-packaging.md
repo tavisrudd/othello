@@ -29,13 +29,13 @@ fixed-seed property tests (1,280 generated cases), both manuscript builds, and
 the quick 74-artifact supplement gate pass.
 
 The deterministic exporter then produced standalone paper commit
-`af578447e4ae58697387a2adf3fdbd8adc7784e7` from source commit
-`09b276eead78b433fe1c632dba34d51b6c9f4916`; its software and quick supplement
+`088ac6ec67f9e722f86f0b31ff03a2cd4a65ae70` from source commit
+`a6d21b50dc7666b20fcaa7f76c5c69018b279fe9`; its software and quick supplement
 gates pass without the monorepo, and `cargo package --locked` verifies the
 23-file crate archive. Filtering
 `software/projective-reed-solomon/` to the repository root with
 `git filter-repo` produced disposable software commit
-`42feb6c9bd78dd74bd05808014d1094765e26eac`, whose formatting, warning-free
+`46022b0b12a3715cfb646df7cba222e509703cd5`, whose formatting, warning-free
 Clippy, fast test, and package gates pass without path repair. A CLI smoke
 test classifies the documented GF(7)/R5 tangent request as `DEEP` and emits a
 task-ID-free `projective-reed-solomon-deep-certificate-v1` certificate.
