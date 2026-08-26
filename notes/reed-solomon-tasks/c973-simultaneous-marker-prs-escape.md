@@ -1,6 +1,14 @@
 # C973 — simultaneous-marker PRS escape and all-level Lucas discriminator
 
-**Lane:** `reed-solomon` · **Status:** active — one-hour proof sprint started 2026-08-26
+**Lane:** `reed-solomon` · **Status:** active — simultaneous-marker theorem and
+improved threshold proved; independent review and Lucas discriminator open
+
+**Current checkpoint:**
+`c973-2026-08-26-simultaneous-marker-theorem.md` proves direct composite
+lifting, a degree-six Vandermonde selector, unconditional arbitrary-`r`
+containment at
+`6r-16+floor(2 sqrt(6r-18))`, its sharper binary refinement, and a fixed-`r`
+witness-abundance lower bound.
 
 ## Objective
 
