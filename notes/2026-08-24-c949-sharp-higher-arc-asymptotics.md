@@ -10,7 +10,7 @@
 
 ## Goal and honest status
 
-For `q=3^h`, determine the sharp asymptotics of the largest complete
+For `q=3^h`, determine the sharp asymptotics of the minimum size of a complete
 `(2q/3+1)`-arc in `PG(2,q)`.
 
 Established:
@@ -20,12 +20,12 @@ t_(2q/3+1)(2,q) >= q^2/3+5q/3-o(q),
 ```
 
 and the exact `5/3` endpoint is absent for all sufficiently large ternary
-fields.  The full matching upper bound, a matching construction, and a
-classification of all near-extremizers remain open.
+fields.  A matching near-base construction and classification of all
+near-extremizers remain open.
 
-Current honest completion estimate: about **70% of the structural program**,
-but materially less than 70% of a finished asymptotic theorem because the
-remaining step is a global inverse/classification theorem.
+Current honest completion estimate: about **75% of the structural program**,
+but materially less than 75% of a finished asymptotic theorem because the
+remaining step is the global upper-bound inverse/classification theorem.
 
 ## Read routing
 
@@ -64,6 +64,18 @@ E_(q+4)=Phi_dir Q_3,
 
 where `Q_3` is a projective cubic.  Ordinary Newton reciprocity does not
 determine it.
+
+### 1a. Capacity-safe augmentation boundary
+
+The non-tight line variance gives at most `10-j` fragile `(r+1)` lines and
+all but `O(1)` tight lines contain linearly many safe degree-one blocker
+donors.  Exchanging a typical degree-four arc point with four
+capacity-compatible donors preserves completeness and raises the arc size
+by three.  This is a valid replacement move, but it runs in the wrong
+direction for `t_n(2,q)`, which minimizes the size of a complete arc.  It
+does not turn the known lower bound into a construction upper bound and does
+not normalize a candidate near-minimizer downward.  See `(MV6)--(MV9)` in
+the focused variance note.
 
 ### 2. Mason-relative quadratic separation
 
@@ -214,7 +226,10 @@ the original affine leading product is carrier-blind.  The highest-EV
 calculation is therefore to transport the existing fourth-Witt top-carrier
 coefficient through the actual tangent reflagging.  The required four
 carrier coefficients are now located explicitly and linearly in the first
-lower homogeneous Chow layer `(TR21)`; `C` starts only one layer later.
+lower homogeneous Chow layer `(TR21)` and form a marked tail catalecticant
+of a binary cube root `(TR23)--(TR24)`; `C` starts only one layer later.
+An origin gauge cannot expose this normal polar, and every actual tangent
+restriction mixes all normal layers as in `(TR25)`.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
@@ -238,6 +253,17 @@ embedded stability/classification theorem for that approximate design,
 coupled to the three-line residue core.  Off that core every exceptional
 degree costs nine units of the variance budget, but this alone still permits
 `O(q)` exceptional pencils.
+
+The embedded pencil identity `(MV4)--(MV5)` is exact, but a local relabeling
+switch preserves the tight-line/residue ledger while exchanging high
+degrees.  Therefore a pointwise cap must use non-tight-line slack or the
+carrier/mapping equations, not further optimization of the same moments.
+The non-tight variance `(MV6)--(MV9)` now supplies a first such input: there
+are at most `10-j` fragile `(r+1)` lines, and all but `O(1)` tight lines have
+at least `r/2` individually safe degree-one donors.  Every fixed-degree
+exceptional pencil avoiding the bounded bad set admits a capacity-compatible
+directed switch.  What remains is to turn those switches into a contradiction
+or normal form at the target `eta`.
 
 ### EV3 — concurrent cubic coupling
 
@@ -287,21 +313,26 @@ separate global trade obstruction or construction.
   reflagging.
 - **Settled:** the first lower Chow layer contains all coefficients of `A`
   lacunarily and linearly, including exactly the four used by fourth Witt.
+- **Settled/no-go:** that fourth-Witt tail minor is flag-marked rather than
+  projectively covariant; actual tangent restrictions mix every Chow layer.
 - **Settled:** the minimal-blocker variance identity makes every SR11
   signature an `O(q)`-defect one/four tight-line design.
+- **Settled/no-go:** capacity-safe four-donor switches are genuine, but they
+  increase arc size and therefore do not improve the minimum-size
+  construction sought by `t_n(2,q)`.
 - **Open:** compute the transverse pencil derivatives from split/Witt/norm
   data.
 - **Open:** connect any resulting bounded identity to C962's `(A,C)` carrier
   variables without relying on the numerical `9+9=18` coincidence; the full
-  product map exists, but its bounded coefficient extraction does not.
+  product map and first-polar coefficient extraction exist, but no bounded
+  transition to `(E,U,L)` is proved.
 - **Open and global:** classify all nine inverse signatures or construct a
   matching near-sharp family.
 
 ## Next checkpoint
 
-Compute the actual tangent reflagging of `(TR16h)` and test whether the
-explicit four-coefficient polar `(TR21)` maps to a bounded functional of
-`E_3` or `L_4`.
-In parallel, combine `(MV1)` with the signed three-line residue support to
-classify the `O(q)` exceptional degree set of the approximate one/four
-design.
+Find a marked-flag norm/Witt transition that controls the full tangent
+restriction `(TR25)`, rather than another origin gauge or one-polar
+calculation.  In parallel, attack the constant-repair construction directly
+through the bounded carrier gates; the safe-donor move is closed as an
+upward, wrong-direction normalization for the minimum problem.

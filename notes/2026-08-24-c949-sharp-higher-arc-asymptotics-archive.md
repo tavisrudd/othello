@@ -167,9 +167,25 @@ locates every coefficient of `A` lacunarily and linearly; in particular the
 four fourth-Witt inputs are already present there and `C` begins only at the
 next layer.  The live algebraic task is now the actual tangent reflagging.
 
-Second, `notes/2026-08-26-c949-minimal-blocker-variance.md` identifies the
-published minimal-blocker variance with C949's defect norm.  Across every
+Second, `notes/2026-08-26-c949-minimal-blocker-variance.md` re-centers the
+degree ledger underlying the minimal-blocker bound as C949's defect norm.
+Across every
 fixed SR11 signature the tight lines partition the blocking complement and
 cover the arc fourfold outside an exact `O(q)` weighted degree defect.  This
 is a global approximate-design normal form, but the equality theorem remains
 inapplicable and no Mason attraction is claimed.
+
+The final audit sharpened both boundaries.  The fourth-Witt coefficients form
+a marked tail catalecticant of the binary cube root in `(TR23)`, but every
+actual tangent restriction mixes all Chow-normal layers.  Globally, the
+embedded tight-pencil sum `(MV4)--(MV5)` is exact, but a local relabeling
+switch preserves the tight-line/residue ledger; any degree cap must use
+non-tight-line slack or carrier/mapping data.
+
+The non-tight variance then produced a capacity-safe augmentation.  Outside
+`O(1)` bad tight lines, a degree-four arc point can exchange with four
+degree-one blocker donors while preserving completeness and growing the arc
+by three.  The final red-team caught the direction issue: C949's `t_n(2,q)`
+minimizes complete-arc size, so this upward replacement neither supplies the
+missing construction upper bound nor strengthens the lower bound on `t_n`.
+It is retained only as a structural normalization/no-go boundary.

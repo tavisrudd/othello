@@ -136,6 +136,122 @@ lines themselves contain `Theta(q)` points.  A genuine upgrade needs an
 embedded-pencil restriction such as an `alpha_P<=4` theorem or expansion of
 the tight-line incidence hypergraph.
 
+The actual tight-line embedding gives one further exact identity.  Every
+`ell in D` satisfies
+
+```text
+sum_(P in ell) u_P=4-j.                              (MV4)
+```
+
+Indeed `sum_(P in ell)d_P=q+T`, while `|A intersect ell|=2r+1`.  If a point
+`P` has tight degree `h` and `Star(P)` is the disjoint union, off `P`, of its
+`h` incident tight lines, then
+
+```text
+sum_(Q in Star(P))u_Q
+ =h(h-j),       P in A,
+ =h(h+3-j),     P in B.                             (MV5)
+```
+
+This converts a high-degree point into a forced signed mass on its embedded
+pencil.  It still does not cap the degree-seven case: each incident line
+meets the three generator lines, and their core values can absorb the first
+bounded levels of `(MV5)`.
+
+There is also a sharp ledger-level switch symmetry.  Suppose `P in A` has
+degree `h` and on each incident tight line choose a distinct degree-one
+point `Q_i in B`.  Relabel `P` into `B` and all `Q_i` into `A`.  Every line
+of `D` retains exactly `r` points of `B`, the residue word is unchanged, and
+`eta` increases by `h-1`.  The norm changes by exactly
+
+```text
+[(1-h)^2-(4-h)^2]+9h=15(h-1),
+```
+
+exactly matching `(MV1)`.  The reverse switch exchanges a high `B` degree
+for a high `A` degree.  This need not preserve blocking on non-tight lines or
+arc completeness, so it is not a geometric counterexample.  It proves that
+the tight-line arrangement, its first two moments, and the ternary core
+cannot by themselves yield a pointwise cap.  The missing input is
+non-tight-line slack/minimality or the carrier/mapping equations.
+
+## Non-tight variance and safe donors
+
+The line-intersection version of the same variance ledger supplies exactly
+that slack information.  Put
+
+```text
+epsilon=(1-eta)/(3r),
+c=2r+epsilon,
+Pi=2r+(-3r+1)epsilon-epsilon^2.
+```
+
+If `n_ell=|B intersect ell|`, the exact Section-5 re-centering is
+
+```text
+sum_(ell notin D)(n_ell-c)^2
+ =3cPi-(r+epsilon)^2
+       (j+2-(1-eta)/r).                              (MV6)
+```
+
+For fixed SR11 `j` and `eta=o(r)`, this becomes
+
+```text
+sum_(ell notin D)(n_ell-2r)^2=(10-j)r^2+o(r^2).      (MV7)
+```
+
+In particular, every non-tight `(r+1)`-secant contributes
+`(r-1+o(1))^2`; hence for all sufficiently large fields there are at most
+`10-j` such lines.
+
+Call a degree-one point `Q in B` **individually safe** if no non-tight
+`(r+1)`-secant contains it.  Moving one individually safe `Q` from `B` to
+`A` cannot make a non-tight line deficient.  Equation `(MV1)` gives
+
+```text
+sum_(P in B: beta_P!=1) beta_P <=2(MV1),             (MV8)
+```
+
+because `beta_P-1<=(beta_P-1)^2`.  On each tight line, at most `10-j`
+degree-one points are individually unsafe, one at its intersection with
+each fragile line.  Consequently the number of tight lines containing fewer
+than `r/2` individually safe degree-one points is at most
+
+```text
+2(MV1)/(r/2-(10-j))=O(1).                            (MV9)
+```
+
+Thus all but a bounded number of the `2q+O(1)` tight lines contain at least
+`r/2` individually safe donors.  For every fixed degree `h`, if the `h`
+tight lines through `P in A` avoid this bounded bad set, the donors in the
+formal switch can be chosen compatibly.  Greedily, after choosing fewer than
+`h` donors, a non-tight line can be saturated only if it already contains at
+least two of them, so it forbids at most one point of the next tight line;
+there are at most `binom(h,2)` such forbidden points.  For large `r`, one of
+the `r/2` choices remains.  The simultaneous switch then preserves every
+line's `r`-fold blocking inequality and all old tight lines, hence preserves
+minimality/completeness while increasing `eta` by `h-1`.
+
+This still does not remove a high-degree point: the switch changes its side
+but preserves the tight arrangement.  The next obstruction must exploit the
+direction of the move, the target value of `eta`, or the carrier/mapping
+data.  No simultaneous-move claim is made for `h` growing with `r`.
+
+## Direction of the augmentation
+
+The typical degree `h=4` gives a genuine three-point augmentation: under the
+safe-line hypotheses above, one may replace one arc point by four blocker
+donors and obtain another complete arc with repair `eta+3`.  The proof is
+sign-free and applies throughout the sublinear regime.
+
+This is **not** a sharpness construction for C949.  The quantity
+`t_(2q/3+1)(2,q)` is the *minimum* size of a complete arc.  The switch moves
+upward, so a larger complete arc does not improve the required construction
+upper bound and does not exclude the original smaller arc.  Reverse moves
+need a high-degree blocker point with suitable degree-one arc donors and are
+not supplied by `(MV9)`.  The augmentation is retained as a structural
+normalization/no-go boundary only; no `base+1` bound follows from it.
+
 What is **not** proved:
 
 - no zero triangle is located;

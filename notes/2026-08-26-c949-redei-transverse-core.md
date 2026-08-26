@@ -443,6 +443,60 @@ reflag restricts `(TR16h)` to a new infinity plane and can mix all original
 `W` layers.  They sharpen the live frontier to computing that restriction,
 not discovering where the carrier coefficients enter.
 
+There is a useful cube-root compression of `(TR21)`.  Define the binary form
+
+```text
+B_A(Z,M)=sum_(h=1)^(r-1)(-1)^h a_h^r
+                         Z^(h-1)M^(r-h-1).
+```
+
+Since `x -> x^r` is the inverse of cubing on `F_q`, one has exactly
+
+```text
+P_1/G=a_0Z^(q-2)-wM^(q-2)+Z^2M^2 B_A(Z,M)^3.        (TR23)
+```
+
+If the leading tail of `B_A` is
+
+```text
+b_0Z^(r-2)+b_1Z^(r-3)M+b_2Z^(r-4)M^2+b_3Z^(r-5)M^3,
+```
+
+then
+
+```text
+(b_0,b_1,b_2,b_3)
+ =(a_(r-1)^r,-a_(r-2)^r,a_(r-3)^r,-a_(r-4)^r),
+Delta_A=b_0b_2-b_1^2.                               (TR24)
+```
+
+Thus fourth Witt is a marked tail jet/catalecticant expression of one binary
+cube root.  The marking matters: this individual tail minor is not a
+`PGL_2` covariant, and a general change of flag mixes it with all coefficients.
+
+The tangent-reflag obstruction is exact.  Fixing a tangent as infinity and
+changing only the affine origin applies a `GL_2` change to the restriction
+of `Chow_D` to that line-variable plane; it cannot introduce the normal
+polar `(TR21)`.  If a different tangent has equation
+
+```text
+W=-(alpha Z+beta M)/gamma
+```
+
+in the carrier flag, then its restriction is
+
+```text
+sum_j (-(alpha Z+beta M)/gamma)^j P_j(Z,M),          (TR25)
+```
+
+where `P_j=[W^j]Chow_D`.  The carrier infinity line is a trisecant, so no
+actual tangent has `alpha=beta=0`; every tangent restriction mixes all
+normal layers.  Consequently neither an origin gauge nor an unweighted
+average of the differently parameterized tangent `E_3` forms transports
+`(TR24)` to `L_4`.  A valid bridge must supply a common marked-flag
+normalization or a polynomial norm/Witt identity controlling the full sum
+`(TR25)`.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -463,5 +517,9 @@ not discovering where the carrier coefficients enter.
   reflagging.
 - **Settled:** `(TR21)--(TR22)` locate the entire fourth-Witt carrier input
   linearly in the first lower homogeneous Chow layer.
-- **Open:** compute the tangent reflagging well enough to transport the
-  fourth-Witt/top-carrier coefficient gate to `E,U`, or `L`.
+- **Settled:** `(TR23)--(TR24)` identify fourth Witt as a marked tail
+  catalecticant/jet of a binary cube root.
+- **Settled/no-go:** tangent-origin gauge changes cannot see that normal
+  polar, while changing tangents mixes every normal layer as in `(TR25)`.
+- **Open:** obtain a common marked-flag or full norm/Witt transition that
+  transports the fourth-Witt gate to `E,U`, or `L`.
