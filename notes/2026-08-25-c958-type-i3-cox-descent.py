@@ -163,16 +163,9 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
 
     ambient = PolynomialRing(field, names=("Y1", "Y2", "Y3", "Y4"))
     y1, y2, y3, y4 = ambient.gens()
-    plane = PolynomialRing(field, names=("Z1", "Z2", "Z3"))
-    z1, z2, z3 = plane.gens()
-    plane_fraction = plane.fraction_field()
     quadric_monomials = [
         y1**2, y1 * y2, y1 * y3, y1 * y4, y2**2,
         y2 * y3, y2 * y4, y3**2, y3 * y4, y4**2,
-    ]
-    plane_cubic_monomials = [
-        z1**3, z1**2 * z2, z1**2 * z3, z1 * z2**2, z1 * z2 * z3,
-        z1 * z3**2, z2**3, z2**2 * z3, z2 * z3**2, z3**3,
     ]
     quadrics = {
         coordinate: sum(
@@ -309,19 +302,6 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
                 .replace("c958r", "r").replace("c958d", "d")
                 .replace("c958e", "delta"))
 
-    def lift_normalized_polynomial(value):
-        return sum((
-            parse_normalized(normalized_text(coefficient))
-            * z1**exponents[0] * z2**exponents[1] * z3**exponents[2]
-            for exponents, coefficient in value.dict().items()
-        ), plane.zero())
-
-    input_rescaling = plane.hom([
-        z1 / plane_coordinate_scales["Z1"],
-        z2 / plane_coordinate_scales["Z2"],
-        z3 / plane_coordinate_scales["Z3"],
-    ], plane)
-    plane_actions = {}
     normalized_plane_actions = {}
     for name, coefficient_map in n_coefficient_maps.items():
         normalized_values = [n_inverse_hom(coefficient_map(n_quadrics[coordinate]))
@@ -331,21 +311,11 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
         )
         assert normalized_common
         normalized_plane_actions[name] = normalized_values
-        values = [
-            automorphisms[name](plane_coordinate_scales[coordinate])
-            * input_rescaling(lift_normalized_polynomial(value))
-            for coordinate, value in zip(("Z1", "Z2", "Z3"), normalized_values)
-        ]
-        assert all(value in plane for value in values)
-        plane_actions[name] = [plane(value) for value in values]
         progress(f"computed the marked-plane action of {name}")
-
-    alpha = parse(blowdown["split_quartic_moduli"]["a_split"])
-    gamma = parse(blowdown["split_quartic_moduli"]["b_split"])
 
     def cox_forms(alpha_value, gamma_value, coordinates):
         x, y, w = coordinates
-        answer = {f"E{index}": plane.one() for index in range(1, 6)}
+        answer = {f"E{index}": x.parent().one() for index in range(1, 6)}
         answer.update({
             "L12": w,
             "L13": y,
@@ -367,7 +337,7 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
     labels = [f"E{index}" for index in range(1, 6)]
     labels += [f"L{left}{right}" for left in range(1, 6) for right in range(left + 1, 6)]
     labels += ["Q"]
-    source_forms = cox_forms(alpha, gamma, (z1, z2, z3))
+    n_source_forms = cox_forms(n_alpha, n_gamma, (nz1, nz2, nz3))
 
     # Two explicit ground points away from the distinguished line.  They give
     # concrete candidates for the later tangent point and orbit-test point,
@@ -399,19 +369,14 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
         parse_normalized(normalized_text(point[2])),
         a * parse_normalized(normalized_text(point[3])),
     ] for point in normalized_ground_surface_points]
-    ground_plane_points = [[
-        plane_coordinate_scales[name]
-        * parse_normalized(normalized_text(value))
-        for name, value in zip(("Z1", "Z2", "Z3"), point)
-    ] for point in normalized_ground_plane_points]
     assert all(cubic(*point) == 0 for point in ground_surface_points)
     assert all(any(cubic.derivative(variable)(*point) != 0 for variable in ambient.gens())
                for point in ground_surface_points)
     assert any(ground_surface_points[0][left] * ground_surface_points[1][right]
                != ground_surface_points[0][right] * ground_surface_points[1][left]
                for left, right in ((0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)))
-    assert all(all(cox_forms(alpha, gamma, point).values())
-               for point in ground_plane_points)
+    assert all(all(cox_forms(n_alpha, n_gamma, point).values())
+               for point in normalized_ground_plane_points)
     for name, morphism in n_automorphisms.items():
         for point in normalized_ground_plane_points:
             mapped = [value(*point) for value in normalized_plane_actions[name]]
@@ -420,57 +385,88 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
                        for left, right in ((0, 1), (0, 2), (1, 2)))
     progress("certified the explicit pair of smooth ground surface points")
 
-    raw_scalars = {}
+    n_raw_scalars = {}
 
-    def constant_ratio(numerator, denominator):
-        value = plane_fraction(numerator) / plane_fraction(denominator)
-        top, bottom = value.numerator(), value.denominator()
-        assert top.degree() == 0 and bottom.degree() == 0
-        return field(top.constant_coefficient() / bottom.constant_coefficient())
+    def constant_ratio(numerator, denominator, context):
+        numerator_terms = numerator.dict()
+        denominator_terms = denominator.dict()
+        if not numerator_terms or numerator_terms.keys() != denominator_terms.keys():
+            raise AssertionError(
+                f"nonproportional Cox supports at {context}: "
+                f"{len(numerator_terms)} versus {len(denominator_terms)} terms"
+            )
+        pivot = next(iter(numerator_terms))
+        ratio = numerator_terms[pivot] / denominator_terms[pivot]
+        assert all(numerator_terms[exponents] == ratio * denominator_terms[exponents]
+                   for exponents in numerator_terms)
+        return normalized_field(ratio)
 
     for name, action in sections["generator_actions"].items():
-        morphism = automorphisms[name]
-        target_forms = cox_forms(
-            morphism(alpha), morphism(gamma), plane_actions[name],
-        )
+        morphism = n_automorphisms[name]
         raw_exceptional = {
-            index: source_forms[action[f"E{index}"]] for index in range(1, 6)
+            index: n_source_forms[action[f"E{index}"]] for index in range(1, 6)
         }
-        scalars = {action[f"E{index}"]: field.one() for index in range(1, 6)}
+        target_forms = cox_forms(
+            morphism(n_alpha), morphism(n_gamma), normalized_plane_actions[name],
+        )
+        calibration_target = "L12"
+        calibration_source = action[calibration_target]
+        calibration_denominator = (
+            n_source_forms[calibration_source]
+            * raw_exceptional[1] * raw_exceptional[2]
+        )
+        common_factor = exact_polynomial_quotient(
+            target_forms[calibration_target], calibration_denominator,
+        )
+        assert common_factor is not None and common_factor
+        reduced_action = [
+            exact_polynomial_quotient(value, common_factor)
+            for value in normalized_plane_actions[name]
+        ]
+        assert all(value is not None for value in reduced_action)
+        normalized_plane_actions[name] = reduced_action
+        target_forms = cox_forms(
+            morphism(n_alpha), morphism(n_gamma), reduced_action,
+        )
+        scalars = {action[f"E{index}"]: normalized_field.one() for index in range(1, 6)}
         for left in range(1, 6):
             for right in range(left + 1, 6):
                 target = f"L{left}{right}"
                 source = action[target]
                 scalars[source] = constant_ratio(
                     target_forms[target],
-                    source_forms[source] * raw_exceptional[left] * raw_exceptional[right],
+                    n_source_forms[source] * raw_exceptional[left] * raw_exceptional[right],
+                    f"{name}:{target}->{source}",
                 )
         source = action["Q"]
         scalars[source] = constant_ratio(
-            target_forms["Q"], source_forms[source]
+            target_forms["Q"], n_source_forms[source]
             * raw_exceptional[1] * raw_exceptional[2] * raw_exceptional[3]
             * raw_exceptional[4] * raw_exceptional[5],
+            f"{name}:Q->{source}",
         )
         assert set(scalars) == set(labels)
-        raw_scalars[name] = scalars
+        n_raw_scalars[name] = scalars
     progress("computed all raw Cox coordinate scalars")
 
-    distinguished = [parse(value) for value in blowdown["distinguished_sixth_point"]]
-    ground_plane = [value / distinguished[2] for value in distinguished]
-    ground_lift_polys = cox_forms(alpha, gamma, ground_plane)
-    ground_lift = {label: field(value) for label, value in ground_lift_polys.items()}
+    n_distinguished = [parse_in_normalized_field(value)
+                       for value in blowdown["distinguished_sixth_point"]]
+    n_ground_plane = [value / n_distinguished[2] for value in n_distinguished]
+    ground_lift_polys = cox_forms(n_alpha, n_gamma, n_ground_plane)
+    ground_lift = {label: normalized_field(value)
+                   for label, value in ground_lift_polys.items()}
     assert all(ground_lift.values())
 
     strict_scalars = {}
     for name, action in sections["generator_actions"].items():
-        morphism = automorphisms[name]
+        morphism = n_automorphisms[name]
         inverse_action = {image: source for source, image in action.items()}
         strict_scalars[name] = {
             source: morphism(ground_lift[inverse_action[source]]) / ground_lift[source]
             for source in labels
         }
-        mapped_point = [value(*ground_plane) for value in plane_actions[name]]
-        expected_point = [morphism(value) for value in distinguished]
+        mapped_point = [value(*n_ground_plane) for value in normalized_plane_actions[name]]
+        expected_point = [morphism(value) for value in n_distinguished]
         assert all(mapped_point[0] * expected_point[index]
                    == mapped_point[index] * expected_point[0] for index in (1, 2))
 
@@ -483,16 +479,16 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
         return tuple(left[labels.index(right[index])] for index in range(len(labels)))
 
     identity = tuple(labels)
-    field_generators = (delta, d, r, g, beta, a)
+    field_generators = (n_delta, n_d, n_r, n_g, n_beta)
     elements = {
         identity: {
             "images": field_generators,
-            "scalars": {label: field.one() for label in labels},
+            "scalars": {label: normalized_field.one() for label in labels},
             "word": [],
         }
     }
     queue = [identity]
-    generator_names = tuple(automorphisms)
+    generator_names = tuple(n_automorphisms)
     while queue:
         current_key = queue.pop(0)
         current = elements[current_key]
@@ -500,18 +496,18 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
         def apply_current(value):
             # Simultaneous substitution through a field endomorphism reconstructed
             # from the stored images; the base parameter a is fixed.
-            a_field = field
-            for _ in range(5):
+            a_field = normalized_field
+            for _ in range(4):
                 a_field = a_field.base_field()
-            morphism = field.hom(
-                list(current["images"][:5]), base_morphism=a_field.hom(a_field.gen())
+            morphism = normalized_field.hom(
+                list(current["images"]), base_morphism=a_field.hom(a_field.gen())
             )
             return morphism(value)
 
         for name in generator_names:
             generator_action = action_tuples[name]
             product_key = compose_permutation(current_key, generator_action)
-            generator_map = automorphisms[name]
+            generator_map = n_automorphisms[name]
             product_images = tuple(apply_current(generator_map(value))
                                    for value in field_generators)
             product_scalars = {
@@ -536,7 +532,8 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
     def text(value):
         return (str(value).replace("^", "**").replace("c958g", "g")
                 .replace("c958r", "r").replace("c958d", "d")
-                .replace("c958e", "delta"))
+                .replace("c958e", "delta").replace("NZ1", "Z1")
+                .replace("NZ2", "Z2").replace("NZ3", "Z3"))
 
     return {
         "schema": "c958-type-i3-cox-descent-v1",
@@ -547,27 +544,32 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
             "split_blowdown_source": sha256(BLOWDOWN_SOURCE),
         },
         "upstream_inverse_schema": inverse["schema"],
+        "coordinate_model": "normalized one-parameter model s=beta/a**3 on a!=0",
         "normalized_plane_coordinate_scales": {
-            name: text(value) for name, value in plane_coordinate_scales.items()
+            name: normalized_text(value) for name, value in plane_coordinate_scales.items()
         },
         "generator_order": list(generator_names),
         "generator_actions": sections["generator_actions"],
         "generator_field_images_delta_d_r_g": {
-            name: [text(automorphisms[name](value)) for value in (delta, d, r, g)]
+            name: [text(n_automorphisms[name](value))
+                   for value in (n_delta, n_d, n_r, n_g)]
             for name in generator_names
         },
         "marked_plane_actions": {
-            name: [text(value) for value in plane_actions[name]] for name in generator_names
-        },
-        "raw_coordinate_scalars": {
-            name: {label: text(value) for label, value in raw_scalars[name].items()}
+            name: [text(value) for value in normalized_plane_actions[name]]
             for name in generator_names
         },
-        "ground_point_marked_plane": [text(value) for value in distinguished],
+        "normalized_raw_coordinate_scalars": {
+            name: {label: text(value) for label, value in n_raw_scalars[name].items()}
+            for name in generator_names
+        },
+        "ground_point_marked_plane": [text(value) for value in n_distinguished],
         "ground_surface_point_pair": [{
-            "ambient": [text(value) for value in surface_point],
-            "marked_plane": [text(value) for value in plane_point],
-        } for surface_point, plane_point in zip(ground_surface_points, ground_plane_points)],
+            "ambient_normalized": [text(value) for value in surface_point],
+            "marked_plane_normalized": [text(value) for value in plane_point],
+        } for surface_point, plane_point in zip(
+            normalized_ground_surface_points, normalized_ground_plane_points,
+        )],
         "ground_lift": {label: text(value) for label, value in ground_lift.items()},
         "strict_coordinate_scalars": {
             name: {label: text(value) for label, value in strict_scalars[name].items()}
@@ -579,8 +581,9 @@ def build(inverse_input=INVERSE_INPUT, allow_one_sided=False):
         ),
         "certified": [
             "the four radical substitutions are endomorphisms of the degree-24 splitting field",
-            "conjugating the split blowdown through its inverse gives the displayed marked-plane actions",
-            "the marked-plane actions induce the certified odd-subset permutations on all Cox forms",
+            "the exact coordinate scaling conjugates the original family to the normalized one-parameter model",
+            "conjugating the normalized split blowdown through its inverse gives the displayed marked-plane actions",
+            "the normalized marked-plane actions induce the certified odd-subset permutations on all Cox forms",
             "the distinguished-line contraction supplies a nonvanishing ground Cox lift",
             "two explicit distinct smooth off-line ground points give nonvanishing marked-plane Cox sections",
             "normalization at that lift gives a strict semilinear Cox descent action of order 24",

@@ -111,10 +111,12 @@ def build():
     assert cox["input_sha256"]["split_blowdown_source"] == hashlib.sha256(
         BLOWDOWN_SOURCE.read_bytes()
     ).hexdigest()
-    blowdown_source = load_module(BLOWDOWN_SOURCE, "c958_i3_blowdown")
     cox_source = load_module(COX_SOURCE, "c958_i3_cox")
-    field, a, beta, r, d, g, delta = blowdown_source.build_field()
-    automorphisms = cox_source.build_automorphisms(field, a, beta, r, d, g, delta)
+    field, beta, r, d, g, delta = cox_source.load_inverse_source().build_normalized_field()
+    a = field.one()
+    automorphisms = cox_source.build_automorphisms(
+        field, a, beta, r, d, g, delta, base_depth=4,
+    )
 
     def parse_field(value):
         return field(sage_eval(
@@ -328,7 +330,7 @@ def build():
 
     field_generators = (delta, d, r, g, beta)
     a_field = field
-    for _ in range(5):
+    for _ in range(4):
         a_field = a_field.base_field()
     base_identity = a_field.hom(a_field.gen())
 
@@ -378,6 +380,7 @@ def build():
 
     return {
         "schema": "c958-type-i3-full-coboundary-slp-v1",
+        "coordinate_model": "normalized one-parameter model s=beta/a**3 on a!=0",
         "input_sha256": {
             "cox_descent": hashlib.sha256(cox_bytes).hexdigest(),
             "split_blowdown": hashlib.sha256(blowdown_bytes).hexdigest(),

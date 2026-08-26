@@ -50,29 +50,32 @@ The Cox source currently completes these stages exactly:
 4. constructs the four marked-plane actions by conjugating through the exact
    inverse and strips the known exceptional factors by sparse exact division;
 5. checks two distinct smooth ground surface points, their nonvanishing Cox
-   forms, and action compatibility without a pathological projective inversion.
+   forms, and action compatibility without a pathological projective inversion;
+6. removes the remaining common projective factor by exact division against a
+   certified Cox pullback, then verifies every raw Cox scalar coefficientwise
+   in the normalized one-parameter field; and
+7. constructs the normalized ground lift and strict generator scalars.
 
-The next line is the current performance frontier: constructing
-`target_forms` in the original two-parameter tower while recovering the raw
-Cox proportionality scalars.  It spends minutes in nested rational-function
-gcds and was interrupted; no failed mathematical assertion was observed.
+The current performance frontier is enumeration and equality checking of the
+strict order-24 semilinear group.  The last run reached that loop after all raw
+scalar checks passed, then spent more than three minutes there and was
+interrupted at the user's stop request.  It produced no JSON artifact and no
+failed mathematical assertion.
 
 ## Exact next implementation step
 
-Keep the raw-scalar calculation in the normalized one-parameter field:
+Keep the descent datum in the normalized one-parameter field.  Replace the
+current repeated construction of nested Sage homomorphisms in the group loop
+by one of these exact routes:
 
-1. define `n_source_forms = cox_forms(n_alpha,n_gamma,(nz1,nz2,nz3))`;
-2. for each generator, form the target Cox forms from
-   `normalized_plane_actions[name]` and `n_automorphisms[name]`;
-3. compare polynomial coefficient dictionaries directly, choosing one nonzero
-   coefficient ratio and checking every coefficient by cross multiplication;
-4. lift only the resulting constant scalar through `parse_normalized`;
-5. account explicitly for the diagonal plane-coordinate scales when translating
-   normalized Cox labels to the original marking, or, preferably, retain the
-   entire strict descent datum in normalized coordinates and state the exact
-   conjugation once;
-6. generate `notes/2026-08-25-c958-type-i3-cox-descent.json`, replay it with
-   `--check`, and only then run the full-coboundary source.
+1. precompute canonical coefficient vectors for the five field generators and
+   sixteen scalars under each of the 24 words, then compare those vectors; or
+2. port just the finite semilinear group-law check to the existing Rust
+   degree-24 quotient algebra and retain Sage for the generic formula source.
+
+After the order-24 check completes, generate
+`notes/2026-08-25-c958-type-i3-cox-descent.json`, replay it with `--check`, and
+only then run the already-normalized full-coboundary source.
 
 Do not restore pivot normalization of generic projective points: it caused a
 ten-minute extended-gcd computation in the original tower and is unnecessary
