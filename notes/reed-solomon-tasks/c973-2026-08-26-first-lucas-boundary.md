@@ -1,7 +1,8 @@
 # C973 checkpoint — first unresolved all-level Lucas block
 
 **Lane:** `reed-solomon` · **Date:** 2026-08-26 · **Status:** exact R11
-reduction proved; two pointed lower-carrier gates remain
+reduction proved; binary and characteristic-three blocks closed
+asymptotically; one characteristic-seven pointed gate remains
 
 ## Result
 
@@ -49,8 +50,9 @@ coordinate appears.
 Thus characteristic three is transverse after one contraction, whereas
 characteristics two and seven are genuinely coherent contained descendants.
 The first exact unresolved arithmetic object is not an unspecified higher
-Lucas union: it is the pointed-witness problem on the two already known lower
-carriers in the first and third rows of (3).
+Lucas union: after the binary argument below, it is the pointed-witness
+problem on the already known characteristic-seven lower carrier in the third
+row of (3).
 
 ## 1. Characteristic-three transverse closure
 
@@ -87,24 +89,35 @@ The intersection with the persistent scheme remains governed by the existing
 tangent/secant arithmetic; (6) says that the Lucas carrier contributes no new
 split-free direction outside it.
 
-## 2. The binary pointed-C620 gate
+## 2. Binary closure from the affine C620 constructions
 
-For `p=2`, every first contraction of (2) lands in the degree-nine carrier
-closed by C620.  C620 proves every lower carrier point shallow, and its
-principal-open construction produces monic eight-root witnesses by a
-six-root/final-pair Artin--Schreier curve.  What C620 does not state uniformly
-on every invariant stratum is the pointed assertion needed here:
+For `p=2`, contract at infinity.  A syndrome supported on
+`{3,...,7}` remains nonzero and contracts into
+`M^max_(10,2)=P<e_2,...,e_7>`.  Every proof stratum of the lower carrier has
+an affine, monic degree-eight witness for `q>=128`:
 
-> for a prescribed contraction root `lambda`, the lower carrier syndrome has
-> a split squarefree octic avoiding `lambda`.
+- C530's graph construction uses monic three-space subspace polynomials;
+- C531's off-graph construction uses the finite inverses of the seven
+  nonzero points of a three-space, again giving eight finite roots;
+- C578's rank-two construction is the monic six-root/final-pair system for
+  every `q>=128`; and
+- C620's two-moduli complement construction is the same monic system and is
+  already uniform from `q>=64`.
 
-This is the exact R11 binary gate.  It is strictly smaller than reclassifying
-the degree-nine carrier: the unpointed classification, orbit strata, trace
-criterion, and `q=16,32` certificates are already proved.  A positive proof
-should add one fixed-root resultant to C620's final-pair system and obtain a
-uniform Hasse--Weil deletion bound; the finite `q=16,32` bridge, if still
-needed, must be a new task-owned pointed certificate rather than an inference
-from the unpointed records.
+Thus the lower octic avoids infinity.  Multiplication by the upper infinity
+marker gives a split squarefree nonic in the R11 kernel.  Therefore
+
+\[
+ \mathcal M^{\max}_{11,2}(F_q)
+ \cap\operatorname{SplitFree}_{11}(F_q)=\varnothing
+ \qquad(q\geq128).                                        \tag{7}
+\]
+
+The fields `q=16,32,64` are not inferred from the unpointed certificates.
+Closing them would require checking that a certified lower witness can be
+chosen away from the prescribed upper marker, or producing a new compact
+pointed certificate.  This finite bridge does not affect the asymptotic R11
+theorem.
 
 ## 3. The characteristic-seven pointed-R10 gate
 
@@ -127,16 +140,12 @@ exact odd-characteristic obstruction.
 
 ## 4. Consequence for the all-level programme
 
-The R11 audit rules out a vague digit-pattern search.  The next proof has two
-bounded inputs:
-
-1. pointed witness abundance on C620's binary degree-nine carrier; and
-2. pointed propriety of the characteristic-seven R10 lift.
-
-Characteristic three already closes asymptotically through the new pointed
-simultaneous theorem.  If the two pointed gates close, R11 contributes no new
-nonpersistent split-free family above their explicit field bounds.  The next
-Lucas level should then be computed only after this pointed recursion is
+The R11 audit rules out a vague digit-pattern search.  The sole remaining
+asymptotic input is pointed propriety of the characteristic-seven R10 lift.
+Characteristics two and three close above `128` and `81`, respectively.  If
+the characteristic-seven gate closes, R11 contributes no new nonpersistent
+split-free family above the maximum of the three explicit field bounds.  The
+next Lucas level should then be computed only after this pointed recursion is
 packaged as a reusable lemma.
 
 No claim is made here for the small binary fields, for characteristic-seven
