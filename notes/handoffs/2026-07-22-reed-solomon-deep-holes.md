@@ -93,12 +93,19 @@ their fast gates without path repair. A stale 50-page TIT artifact rebuilt to
 51 pages; the review driver now points to, rather than reprints, the two raw
 GF(7) coefficient tables preserved in the canonical paper and supplement. The
 result is 49 pages under standard typography, with a corrected strict `< 50`
-gate. Four ignored GF(8), GF(9), and GF(32) release regressions pass on the
-expanded test build in 129.91 seconds. The sole unrun gate is the separately
-named GF(16)/R11 exhaustive semilinear census, which remains part of
-`release-check` and needs explicit
-approval. Publication, pushing, DOI minting, and theorem-domain broadening
-remain out of scope. Card:
+gate. The public CLI now has versioned result envelopes, runnable examples,
+stable exit semantics, and a coherent 0.1.0 package. The manuscript's 84
+numbered results are connected through checked coverage, Lean, import,
+evidence, dependency, and proved-claim annotations. Publication administration
+has moved outside paper trees, and the exporter refuses it even when an
+exclusion attempts to mask it. Two cold-review rounds closed every repairable
+public-package finding; mirror commit `89b317f` and a clean archive pass the
+fast manuscript, software, supplement, annotation, provenance, and certificate
+gates. Four ignored GF(8), GF(9), and GF(32) release regressions pass on the
+expanded test build in 129.91 seconds. The remaining gates are the separately
+approved GF(16)/R11 exhaustive semilinear census and immutable Version 2
+publication metadata. Publication, pushing, DOI minting, and theorem-domain
+broadening remain out of scope. Card:
 `notes/reed-solomon-tasks/c970-beyond4-prs-software-packaging.md`.
 
 C886 is complete.  The paper now has a layered two-track exposition: a mature

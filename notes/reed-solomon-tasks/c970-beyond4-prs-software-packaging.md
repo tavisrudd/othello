@@ -2,7 +2,8 @@
 
 **Lane**: `reed-solomon`
 
-**Status:** active; self-contained paper subtree and fast paper/software gates green
+**Status:** active; public package and re-referee gates green, with immutable
+publication metadata and the separately approved GF(16)/R11 census still open
 
 ## Checkpoint: 2026-08-25
 
@@ -20,7 +21,7 @@ boundary, certificate documentation, complexity summary, benchmark protocol,
 and terminal-selector summary.
 
 The paper Makefile has fast and slow software targets. The supplement generates
-and verifies a complete 21-file software manifest, registers it in the 74-entry
+and verifies a complete 24-artifact software manifest, registers it in the 74-entry
 evidence bundle, and includes the whole software subtree in deterministic export
 ownership. The canonical and TIT manuscripts state the broader computational
 domain without broadening the deep-hole theorem domain. Formatting, warning-free
@@ -28,11 +29,11 @@ Clippy, 31 focused library tests, seven compiled-CLI integration tests, five
 fixed-seed property tests (1,280 generated cases), both manuscript builds, and
 the quick 74-artifact supplement gate pass.
 
-The deterministic exporter then produced standalone paper commit
-`34679c22419f094ae571eefb4c1d706ddba30065` from source commit
-`65c974869343b8f514ca9d783f0ef20c488abe36`; its software and quick supplement
-gates pass without the monorepo, and `cargo package --locked` verifies the
-23-file crate archive. Filtering
+The deterministic portfolio exporter now records only public, resolvable
+provenance: repository identity, a content digest, and file hashes. The repaired
+standalone paper is at public-mirror commit `89b317f`; its software and quick
+supplement gates pass without the monorepo, and `cargo package --locked` verifies
+the 26-file crate archive. Filtering
 `software/projective-reed-solomon/` to the repository root with
 `git filter-repo` produced disposable software commit
 `fd8f5d01e9c13e07d468e9bcac34a1eb90b46351`, whose formatting, warning-free
@@ -55,6 +56,21 @@ GF(16)/R11 semilinear census is
 isolated as `make software-gf16-check`; `make release-check` still requires it,
 but it was not run without the separately required approval.
 
+The public polish adds runnable examples, a command-oriented guide, versioned
+canonicalization/classification/verification result envelopes, human-readable
+exit-2 failures, and tested compact/pretty output. Two cold-review rounds found
+and closed every repairable defect in the release gate, draft status,
+reproduction guide, schema claims, certificate trust wording, metadata,
+provenance, and documentation. The release gate now fails cleanly only on
+intentionally unset immutable publication fields.
+
+The paper also adopts the cubic-paper formal-annotation macros and a gated
+machine-readable layer for all 84 numbered results: 84 coverage annotations,
+24 Lean links, five imported-source links, eight evidence links, eight theorem
+dependencies, and nine public proved-claim identifiers. Every import/evidence
+registry entry must be used, and every evidence bundle resolves to exact path
+prefixes in the hashed 74-artifact manifest.
+
 ## Closeout and mystery ledger
 
 - **Settled:** the public name is Projective Reed--Solomon Toolkit, with the
@@ -69,9 +85,17 @@ but it was not run without the separately required approval.
 - **Settled:** the stale TIT artifact is replaced by a warning-free 49-page
   build whose strict page gate leaves one page of headroom; only raw coefficient
   tables move to the canonical/supplement copy.
+- **Settled:** publication correspondence and submission administration live
+  outside every paper tree; the exporter refuses such paths before exclusions
+  can mask them, and the portfolio-wide administrative audit is clean.
+- **Settled:** two cold-review rounds closed every repairable manuscript,
+  software, trust-boundary, annotation, reproduction, and provenance defect.
 - **Open:** the sole unrun evidence gate is the exact GF(16)/R11 semilinear
   census. Its owning command is `make software-gf16-check`; no mathematical or
   packaging inference is drawn from an unrun result.
+- **Open:** immutable Version 2 repository/tag/commit, public Lean revision,
+  archive hashes, DOI, and released-PDF fields are author publication actions;
+  `supplement/verify.py --release` fails closed on the first unset field.
 
 ## Goal
 
