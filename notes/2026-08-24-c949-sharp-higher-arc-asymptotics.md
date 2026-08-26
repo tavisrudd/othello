@@ -325,6 +325,14 @@ complete arc.  This is a rigorous conditional mechanism, not an existence
 proof: neither the three-colour matching nor the torus fibers enforce that
 last cap.  It is necessarily quadratic-far from every Mason seed.
 
+The simplest non-Mason formula is now closed.  The inverse duplex
+`b=a^(-1)` or `b=g a^(-1)` has an explicit valid three-cell transversal and
+a raw marked matching, but that matching violates the colour cap.  More
+fundamentally, a quadratic-character count produces four retained generic
+lines plus one forced boundary line through a point for every ternary
+`q>=27`.  Thus the whole inverse two-conic family fails the fourfold cap; a
+viable duplex must be genuinely non-inverse.
+
 At q=27, use the Tutte test as preprocessing, then route surviving marked
 cores into the parallel C962 carrier/mapping gates.  Field-uniformly, the
 highest-EV construction theorem is an odd-cut plus off-core concurrency
@@ -422,6 +430,8 @@ separate global trade obstruction or construction.
 - **Settled:** at `eta=1` the marked low selector is exactly a generic
   vertex, its tangent, and a perfect matching of the remaining generic
   bisecant graph.
+- **Settled/no-go:** the canonical inverse duplex has a valid transversal
+  but a forced fivefold boundary concurrence for every ternary `q>=27`.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut
   condition; after a suitable marking it is exactly a two-monomer
   augmenting-path problem, and side-colour degrees alone do not solve it.

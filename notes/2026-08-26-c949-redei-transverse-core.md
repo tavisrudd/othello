@@ -603,6 +603,49 @@ has chords through the interiors of `Theta(q)` alternating paths/cycles and
 may change augmentation and the off-core cap.  The bounded object is the
 defect wiring; the path/cycle geometry remains q-scale.
 
+## Explicit inverse duplex and a fivefold obstruction
+
+Let `n=q-1`, choose primitive `g`, and put
+
+```text
+E_(x,epsilon)=(g^x,g^(epsilon-x)),   epsilon in {0,1}.
+```
+
+Delete `E_(0,0),E_(1,0),E_(3,1)`.  For `n>=8` the singleton exponent sets
+in `a,b,a/b` are
+
+```text
+{0,1,3},  {0,-1,-2},  {0,2,5}.                    (TR29)
+```
+
+Thus all three projections have profile `1^3 2^(q-4)` and satisfy the
+product gate.  The `a`- and `b`-matchings form a `2n`-cycle; deletion leaves
+two even paths and the isolated vertex `v_0=E_(1,1)=(g,1)`, hence a raw
+perfect matching of `H\{v_0}`.  That matching uses `q-4` edges of one
+colour and violates `(SR19b)` for `q>=27`; no balanced selector is claimed.
+
+Irrespective of the selector, the standard nine-boundary completion violates
+the fourfold cap.  A forced boundary point `[0:beta:1]` and the primal point
+`P_t=[beta^2 t:1:-beta]` give branch equations
+
+```text
+beta^2 t a^2-beta a+c=0,       c in {1,g}.
+```
+
+Their discriminants are `beta^2(1-t)` and `beta^2(1-gt)`.  For quadratic
+character `chi`, the number of `t` making both nonzero squares is
+
+```text
+N=(q-1-chi(1-g)-chi(1-g^(-1)))/4 >= (q-3)/4.       (TR30)
+```
+
+For `q>=27`, exclude `t=0` and at most one value for each deleted line; at
+least two choices remain.  Each gives four distinct retained generic lines
+through `P_t`, and the boundary line is a fifth.  Hence the inverse duplex
+fails the cap for every ternary `q>=27`.  This strengthens `(SR21)`'s
+`q>=81` blocking obstruction, but only for this inverse two-conic family and
+its standard boundary realization.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -632,5 +675,7 @@ defect wiring; the path/cycle geometry remains q-scale.
 - **Settled/no-go:** `(TR26-marked)` recovers the exact selector as a q-scale cube,
   but characteristic-three logarithmic differentiation erases it and no
   bounded marked bridge follows.
+- **Settled/no-go:** `(TR29)--(TR30)` give a valid inverse-duplex transversal
+  but force a fivefold boundary concurrence for every ternary `q>=27`.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.

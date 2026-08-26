@@ -238,3 +238,12 @@ it is the cube of the degree-`q-2` tangent-plus-matching product.  This
 recovers the selector but does not bound it; in characteristic three its
 ordinary logarithmic derivative vanishes.  Hence the desired bridge must be
 a genuinely mixed marked norm identity rather than an unweighted polar.
+
+The canonical inverse duplex was then pushed through an explicit valid
+three-cell deletion.  It realizes all three `1^3 2^(q-4)` projection
+profiles and has a raw near-perfect matching, although that matching violates
+the selector colour cap.  A direct character calculation is decisive: for
+every ternary `q>=27`, simultaneous splitting of the two inverse quadratics
+leaves four retained generic lines through a point together with one forced
+boundary line.  This strengthens the prior `q>=81` coverage no-go to a
+fivefold-concurrency obstruction for the standard inverse family.
