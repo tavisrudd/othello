@@ -874,6 +874,39 @@ carrier terminal plus its resolved mapping and the fixed homogeneous
 boundary convention therefore suffice for this cheap necessary filter.  A
 raw carrier or unresolved mapping task does not.
 
+There is an exact univariate compiler that avoids root extraction and the
+full 55-factor Chow expansion.  For a boundary direction `[u_i:t_i]`, put
+
+```text
+(alpha_i,beta_i)=(t_i,-u_i),
+d_i=alpha_i-beta_i w.
+```
+
+For each `u in F_q^*`, the two carrier roots contribute
+
+```text
+h_(i,u)(z)=1+s_(i,u)z+p_(i,u)z^2,
+s_(i,u)=2d_i u+beta_i A(u^3),
+p_(i,u)=d_i^2u^2+beta_i d_i u A(u^3)+beta_i^2C(u^3).
+```
+
+Indeed this is the product of `1+(alpha_i u+beta_i(y-wu))z` over the two
+roots of `y^2-A(u^3)y+C(u^3)`.  The three affine-axis completion points add
+`product_(e in E_0)(1+beta_i e z)`.  Therefore
+
+```text
+Psi(alpha_i,beta_i)
+ =[z^(q-1)] product_(u!=0)h_(i,u)(z)
+               product_(e in E_0)(1+beta_i e z).    (TR43)
+```
+
+At q=27, keep only coefficients through `z^26` while multiplying 26
+quadratics and three linears, and require the result to vanish for all three
+boundary directions.  This uses only the completed carrier, resolved
+mapping, and explicit Frobenius boundary frame.  Raw mapping columns must be
+converted to the `E_0` coordinates of `(TR13)` first.  No implication from,
+or independence of, the current fourth-Witt and norm gates is yet proved.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -935,6 +968,9 @@ raw carrier or unresolved mapping task does not.
 - **Settled:** `(TR42)` compiles that divisibility exactly from the completed
   affine-core Chow product; the three infinity factors of `Chow_D` must be
   removed first, and direction coordinates are dualized.
+- **Settled:** `(TR43)` evaluates all three roots by a truncated univariate
+  recurrence from completed carrier/mapping data, with no root extraction or
+  full Chow expansion.
 - **Open:** determine whether this post-terminal filter rejects any surviving
   q=27 carrier states independently of fourth Witt, reciprocal norm, and the
   mapping gate; no symmetry of `D` may be assumed.

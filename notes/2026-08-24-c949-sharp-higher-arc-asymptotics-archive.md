@@ -324,3 +324,13 @@ builds this product after a terminal's mapping and boundary frame are
 resolved.  If starting from `Chow_D`, its three known infinity factors must
 first be removed.  Thus the gate is now an exact post-terminal compiler
 filter, while its independence and rejection power remain open.
+
+The final TT pass also removed the need to materialize the full Chow form.
+At a boundary normal covector, the two carrier roots over each nonzero row
+give a quadratic generating factor with coefficients expressed directly in
+`A(u^3),C(u^3),w,u`; the three affine-axis points give three linears.  A
+truncated coefficient recurrence through degree 26 therefore computes each
+q=27 `e_26` value from a completed carrier and resolved mapping, without
+splitting the carrier quadratics.  Its redundancy or extra rejection power
+relative to the existing terminal gates remains an explicit computational
+question.
