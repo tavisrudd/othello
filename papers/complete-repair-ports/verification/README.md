@@ -7,7 +7,7 @@ revision, proves the exact sequence attached
 to the target/helper split. Its reviewer interface contains four terminals,
 and its kernel axiom audit reports exactly `Classical.choice`, `Quot.sound`,
 and `propext`. The claim map in `lean/verification/claims.json` records one
-Lean-complete manuscript statement and twenty-one statements with no Lean
+Lean-complete manuscript statement and twenty-four statements with no Lean
 coverage. In particular, the relative-weight identity, exact prescribed-coset
 transfer theorem, and its confinement specializations have human proofs only.
 
@@ -46,6 +46,23 @@ In a standalone checkout, the verifier also requires the Git tracked-file set
 to equal that manifest, apart from the exporter's optional `.gitignore`,
 `PROVENANCE.md`, and `export-manifest.json`.  Those files are scanned when
 present; any other unlisted tracked file fails the release gate.
+
+The release verifier also runs `verification/check_ergo_comp_public.py`. That
+gate scans the complete ERGO-Comp package, including code, comments, examples,
+fixtures, benchmark labels, and evidence, for nonpublic identifiers, paths, or
+development residue. The algorithm evidence has an independent canonical
+replay:
+
+```text
+cd algorithms
+python3 -m unittest -v test_algorithms.py
+python3 generate_evidence.py --check
+cd rust
+cargo fmt --check
+cargo clippy --all-targets --all-features -- -D warnings
+cargo test --all-features
+python3 generate_fixtures.py --check
+```
 
 Refresh the tracked PDF only through the deterministic path:
 

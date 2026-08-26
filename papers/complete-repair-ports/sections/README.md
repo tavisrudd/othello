@@ -9,16 +9,19 @@ the theorem dependency order:
    generalized Hamming weights, and the relative dimension/length profile.
 3. `03-positive-density.tex` — the block-functional decomposition and exact
    objectwise and rank-stratified confinement thresholds.
-4. `04-reliability-exit.tex` — best-target generalized weights, cooperative
+4. `03a-exact-recovery-optimization.tex` — the ERGO-Comp min--sum compiler,
+   exact capacity scheduler, complexity bounds, witnesses, and fair CP-SAT
+   comparison.
+5. `04-reliability-exit.tex` — best-target generalized weights, cooperative
    locality, MDS rigidity, positive-density realization, and service-rate
    transfer.
-5. `05-pointed-tutte.tex` — reliability and coefficient-presentation
+6. `05-pointed-tutte.tex` — reliability and coefficient-presentation
    separations beyond the relative-weight hierarchy.
-6. `06-geometric-flagships.tex` — projective-simplex weights, thresholds,
+7. `06-geometric-flagships.tex` — projective-simplex weights, thresholds,
    reliability, and the equality case for the first recovery cost.
-7. `07-verification-provenance.tex` — the exact paper-local Lean boundary and
+8. `07-verification-provenance.tex` — the exact paper-local Lean boundary and
    the role of finite arithmetic checks.
-8. `08-conclusion.tex` — mathematical synthesis and the boundary with
+9. `08-conclusion.tex` — mathematical synthesis and the boundary with
    disjoint-packing and bandwidth-aware models.
 
 The filenames are retained for repository continuity. Their old private nouns

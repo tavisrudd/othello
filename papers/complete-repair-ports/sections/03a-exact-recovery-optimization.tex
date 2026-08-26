@@ -1,0 +1,171 @@
+\section{Exact recovery optimization}
+\label{sec:exact-recovery-optimization}
+
+Proposition~\ref{prop:prescribed-coset-composition} is constructive.  It does
+not merely identify a confinement threshold: it gives a finite min--sum
+compiler whose states are the intermediate functionals that scalar summaries
+discard.  The companion software, \emph{ERGO-Comp} (Exact Recovery and
+Generalized-weight Optimization Compiler), implements this construction and
+retains coefficient-level witnesses for every optimum.
+
+We first state the algorithm in flattened $\F_q$-linear coordinates.  Let
+$T$ have dimension $t$, let the outer message space have dimension $m$, and
+let the inner label space have dimension $s$.  For the $i$th outer coordinate,
+write
+\[
+ A_i:\operatorname{Hom}_{\F_q}(T,\F_q^s)
+       \longrightarrow \operatorname{Hom}_{\F_q}(T,\F_q^m)
+\]
+for its contribution to the outer restriction map, and let
+$\lambda_i(b)$ be the prescribed-coset support cost of the inner label $b$.
+Different inner blocks may have different cost functions.
+
+\begin{proposition}[Exact hierarchical recovery optimizer]
+\label{prop:exact-hierarchical-optimizer}
+\coverage{absent}%
+\uses{prop:prescribed-coset-composition}%
+For $c\in\operatorname{Hom}_{\F_q}(T,\F_q^m)$, define
+\begin{equation}
+ D_0(c)=\begin{cases}0,&c=0,\\+\infty,&c\ne0,\end{cases}
+ \qquad
+ D_i(c)=\min_b\bigl(D_{i-1}(c-A_i b)+\lambda_i(b)\bigr).
+ \label{eq:hierarchical-recovery-dp}
+\end{equation}
+Then $D_N(c)$ is the exact prescribed-coset support cost of the concatenated
+code at label $c$.  Storing a minimizing label $b$ and predecessor state at
+each finite entry returns an exact block-labelled recovery witness, not only
+its scalar cost.  The same recursion applies to the target-normalized formula
+after adjoining its target-image labels to the state.
+
+If every label is enumerated, put $Q=q^{mt}$ and $S=q^{st}$.  The direct
+table algorithm uses $O(NQS)$ min--sum transitions, $O(Q)$ working cost
+memory, and $O(NQ)$ predecessor entries when all witnesses are retained.
+Unreachable labels, quotient coordinates, projectively equivalent columns,
+and repeated block types may be compiled out without changing the optimum or
+the replayed witness.
+\end{proposition}
+
+\begin{proof}
+After $i$ blocks, $D_i(c)$ is the least sum of inner support costs among
+labels $(b_1,\ldots,b_i)$ satisfying
+$\sum_{j\leq i}A_jb_j=c$.  This invariant is true at $i=0$.  Conditioning on
+the last label $b_i$ gives exactly~\eqref{eq:hierarchical-recovery-dp}, so
+induction proves the claim.  The leaf supports lie in disjoint blocks, hence
+their costs add.  Backtracking the stored minimizers reconstructs the labels;
+the inner prescribed-coset witnesses then reconstruct the coefficient-level
+recovery system.  There are $Q$ states and $S$ candidate labels per block,
+which gives the stated bounds.  The target-normalized case is the same
+invariant applied to the paired labels in~\eqref{eq:target-cost-composition}.
+\uses{prop:prescribed-coset-composition}%
+\proves{prop:exact-hierarchical-optimizer}%
+\end{proof}
+
+The resulting table supplies all exact helper costs needed by the finite
+confinement formula, including its zero and nonzero outer-functional sectors.
+It can therefore emit a replayable recovery witness when a threshold fails,
+or a complete exhausted-state certificate when the requested label is
+unreachable.  Iterating the compiler through a tower preserves the
+intermediate labels required at the next level; collapsing each table to one
+minimum would destroy precisely this compositional information.
+
+The same support functions also lead to an exact capacity-aware repair
+scheduler.  Suppose demand $i$ has at most $A$ admissible recovery choices.
+Choice $a$ consumes a nonnegative integer load vector
+$\ell_{i,a}\in\mathbb Z_{\geq0}^H$ on $H$ helpers, and capacities are
+$\boldsymbol c=(c_1,\ldots,c_H)$.  A demand may be skipped.  This model
+distinguishes support occupancy from coefficient-weighted download and permits
+different capacities at different helpers.
+
+\begin{proposition}[Exact capacitated repair scheduling]
+\label{prop:capacitated-repair-scheduling}
+\coverage{absent}%
+Let $\mathcal S=\prod_{h=1}^H\{0,\ldots,c_h\}$.  A dynamic program indexed by
+the current load $u\in\mathcal S$, with transitions
+$u\mapsto u+\ell_{i,a}$ whenever the result is within capacity and with a
+skip transition, returns the maximum number of simultaneously served demands
+and an exact assignment witness.  It uses
+\begin{equation}
+ O\!\left(DAH\prod_{h=1}^H(c_h+1)\right)
+ \quad\text{time and}\quad
+ O\!\left(\prod_{h=1}^H(c_h+1)\right)
+ \quad\text{working memory},
+ \label{eq:capacitated-repair-bound}
+\end{equation}
+apart from stored predecessors.
+
+If there are positive integer weights $w_h$ and a common $M>0$ such that
+$w\mathbin\cdot\ell_{i,a}=M$ for every admissible choice, a state serving
+exactly $r$ demands lies on the graded shell
+\[
+ \mathcal S_r=\{u\in\mathcal S:w\mathbin\cdot u=rM\}.
+\]
+Thus the full box may be replaced by the union of its reachable shells.  Two
+distinct states on one shell are incomparable in the componentwise order, so
+ordinary Pareto-dominance pruning cannot remove either one.  The grading is
+therefore both an exact compression and a certificate of the limit of that
+common pruning rule.
+\end{proposition}
+
+\begin{proof}
+After processing the first $i$ demands, associate to every reachable load the
+largest served count and a predecessor realizing it.  The skip and assignment
+transitions enumerate exactly the feasible decisions for demand $i+1$;
+induction gives optimality and witness recovery.  Scanning at most $A$
+choices across $H$ coordinates for every demand and box state gives
+\eqref{eq:capacitated-repair-bound}.  Under the grading hypothesis, additivity
+places every $r$-repair load on $\mathcal S_r$.  If $u\leq v$ componentwise
+and both lie on the same shell, positivity of $w$ forces $u=v$, proving the
+antichain assertion.
+\proves{prop:capacitated-repair-scheduling}%
+\end{proof}
+
+\subsection{Measured solver boundary}
+
+The specialized dynamic programs are most useful when compilation exposes a
+small algebraic state space.  They are not replacements for a general
+constraint solver when the residual model contains unrelated side
+constraints.  The fair deployment boundary is therefore:
+\[
+ \text{algebraic compilation}
+ \longrightarrow
+ \begin{cases}
+   \text{specialized exact DP},&\text{when the compiled state is sufficient},\\
+   \text{CP-SAT},&\text{for the remaining general constraints}.
+ \end{cases}
+\]
+Direct CP-SAT is an appropriate end-to-end baseline.  A second,
+\emph{structured CP-SAT} baseline receives the same symmetry reduction and
+algebraic preprocessing as ERGO-Comp, isolating the value of the specialized
+state engine from the value of compilation itself.
+
+On the recorded x86-64 benchmark host, eleven interleaved rounds gave the
+following medians.  These are implementation measurements, not asymptotic
+claims; exact inputs, outputs, tool versions, and replay metadata are in
+\texttt{algorithms/evidence/benchmarks.json}.
+
+\begin{table}[H]
+\centering
+\scriptsize
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+instance & ERGO-Comp & \shortstack{direct\\CP-SAT} &
+\shortstack{structured\\CP-SAT} & \shortstack{direct/\\ERGO} &
+\shortstack{structured/\\ERGO}\\
+\midrule
+large box & $71.88\,\mu$s & $178.63\,\mu$s & $177.22\,\mu$s & $2.49$ & $2.47$\\
+balanced shell & $3.71\,\mu$s & $1.143$ ms & $0.996$ ms & $308.04$ & $268.44$\\
+small state & $7.30\,\mu$s & $2.753$ ms & $2.723$ ms & $376.98$ & $372.85$\\
+large nonuniform & $52.85\,\mu$s & $1.250$ ms & $1.041$ ms & $23.65$ & $19.70$\\
+\bottomrule
+\end{tabular}
+\caption{Exact capacitated-repair scheduling.  Both CP-SAT columns return the
+same optimum and witness as ERGO-Comp; the structured column shares its safe
+preprocessing.}
+\label{tab:ergo-comp-cpsat}
+\end{table}
+
+The largest gains occur on graded shells and other low-dimensional reachable
+state sets hidden inside a large capacity box.  The practical companion is
+therefore useful both as a complete solver for structured recovery instances
+and as a certified front end that shrinks a residual CP-SAT model while
+retaining exact recovery witnesses and confinement thresholds.

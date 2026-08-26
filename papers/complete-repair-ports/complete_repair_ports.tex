@@ -49,30 +49,26 @@
 
 \begin{abstract}
 Let $I\leq\mathbb F_q^E$, let $P\subseteq E$ be a target set, and put
-$J=E\setminus P$.  Shortening and puncturing $I^\perp$ onto $J$ give a
-nested pair $K_P\subseteq D_P\leq\mathbb F_q^J$.  Its relative generalized
-Hamming weight $M_t(D_P,K_P)$ is the minimum helper union recovering $t$
-independent target combinations.  For a fixed nonzero target-message
-subspace and an outer code with at least two blocks and nonzero projection
-onto the target block, we express
-the exact least helper union of a nonconfined recovery system as an
-optimization of prescribed-coset support costs over the complete outer
-functional dual.  This requires no outer-distance gate.  If
-$O\leq L^N$ is $L$-linear, $N\geq2$, and
-$d(O^\perp)>r+1$, its criterion reduces in recovered dimension $t$ to
+$J=E\setminus P$.  Shortening and puncturing $I^\perp$ onto $J$ give
+$K_P\subseteq D_P\leq\mathbb F_q^J$, whose relative generalized Hamming
+weight $M_t(D_P,K_P)$ is the minimum helper union recovering $t$ independent
+target combinations.  For a fixed nonzero target-message subspace, we express
+the exact least nonconfined helper union as an optimization of prescribed-coset
+support costs over the complete outer functional dual, without an
+outer-distance gate.  For an $L$-linear outer code $O\leq L^N$, $N\geq2$,
+the condition $d(O^\perp)>r+1$ reduces the exact criterion to
 \[
  r<M_t(D_P,K_P)+d(I^\perp).
 \]
 Below either exact threshold, zero-extension preserves normalized equations
-and exact supports.  The one-coordinate specialization recovers the weighted
-coset formula, and a single-parity-check family transfers beyond the ordinary
-outer support-distance gate.
-
-Positive-density and bounded service-rate transfer follow.  Equal
-relative-weight hierarchies need not determine bounded repair reliability,
-and ambient inner-dual realizations of one nested pair can have different
-confinement thresholds.  A projective-simplex family gives a non-MDS
-hierarchy and projective-rank reliability.
+and supports.  The one-coordinate specialization recovers the weighted-coset
+formula and can transfer beyond the ordinary outer support-distance gate.
+Positive-density and bounded service-rate transfer follow, while equal
+relative-weight hierarchies need not determine bounded repair reliability.
+ERGO-Comp implements the constructive formulas as an exact hierarchical
+optimizer and capacity-aware scheduler with retained witnesses; on the
+recorded structured instances it is $2.5$--$377$ times faster than direct
+CP-SAT.
 \end{abstract}
 
 \section{Introduction}
@@ -218,9 +214,19 @@ question is the exact obstruction to preserving every bounded dual recovery
 equation.  The finite formula is rank-stratified and ungated; the RGHW formula
 is its outer-distance specialization.  We make no minimum-bandwidth claim.
 
+The formulas are also algorithms.  ERGO-Comp evaluates the labelled
+prescribed-coset recursion through a finite tower, retains the intermediate
+functionals needed for composition, and returns exact recovery witnesses and
+confinement thresholds.  Its capacity scheduler uses the same compiled
+recovery choices to optimize simultaneous repairs under heterogeneous helper
+loads.  Section~\ref{sec:exact-recovery-optimization} gives correctness and
+complexity bounds and compares both direct and equivalently preprocessed
+CP-SAT baselines.
+
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}
 \input{sections/03-positive-density}
+\input{sections/03a-exact-recovery-optimization}
 \input{sections/04-reliability-exit}
 \input{sections/05-pointed-tutte}
 \input{sections/06-geometric-flagships}

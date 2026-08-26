@@ -1,0 +1,186 @@
+use crate::field::{FieldError, Prime};
+use serde::{Deserialize, Serialize};
+use thiserror::Error;
+
+#[derive(Debug, Clone, PartialEq, Eq, Error)]
+pub enum MatrixError {
+    #[error(transparent)]
+    Field(#[from] FieldError),
+    #[error("matrix dimensions exceed the u16 representation")]
+    DimensionOverflow,
+    #[error("matrix data length does not match rows times columns")]
+    Shape,
+    #[error("matrix entries must be reduced modulo the field order")]
+    UnreducedEntry,
+}
+
+/// Cold owning matrix. Hot DP records use integer IDs into contiguous pools.
+#[repr(C)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
+pub struct Matrix {
+    data: Box<[u8]>,
+    rows: u16,
+    cols: u16,
+    _pad: u32,
+    _reserved: u64,
+}
+
+const _: () = assert!(std::mem::size_of::<Matrix>() == 32);
+const _: () = assert!(std::mem::align_of::<Matrix>() == 8);
+
+impl Matrix {
+    pub fn new<const P: u8>(
+        rows: usize,
+        cols: usize,
+        data: impl Into<Box<[u8]>>,
+    ) -> Result<Self, MatrixError> {
+        Prime::<P>::validate()?;
+        let rows = u16::try_from(rows).map_err(|_| MatrixError::DimensionOverflow)?;
+        let cols = u16::try_from(cols).map_err(|_| MatrixError::DimensionOverflow)?;
+        let data = data.into();
+        if data.len() != rows as usize * cols as usize {
+            return Err(MatrixError::Shape);
+        }
+        if data.iter().any(|&entry| entry >= P) {
+            return Err(MatrixError::UnreducedEntry);
+        }
+        Ok(Self {
+            data,
+            rows,
+            cols,
+            _pad: 0,
+            _reserved: 0,
+        })
+    }
+
+    pub fn zeros<const P: u8>(rows: usize, cols: usize) -> Result<Self, MatrixError> {
+        Self::new::<P>(rows, cols, vec![0; rows.saturating_mul(cols)])
+    }
+
+    #[inline]
+    pub fn rows(&self) -> usize {
+        self.rows as usize
+    }
+
+    #[inline]
+    pub fn cols(&self) -> usize {
+        self.cols as usize
+    }
+
+    #[inline]
+    pub fn as_slice(&self) -> &[u8] {
+        &self.data
+    }
+
+    #[inline]
+    pub fn row(&self, row: usize) -> &[u8] {
+        let start = row * self.cols();
+        &self.data[start..start + self.cols()]
+    }
+
+    pub fn column(&self, column: usize) -> Box<[u8]> {
+        (0..self.rows())
+            .map(|row| self.data[row * self.cols() + column])
+            .collect::<Vec<_>>()
+            .into_boxed_slice()
+    }
+
+    pub fn transpose<const P: u8>(&self) -> Result<Self, MatrixError> {
+        let mut data = vec![0; self.data.len()];
+        for row in 0..self.rows() {
+            for col in 0..self.cols() {
+                data[col * self.rows() + row] = self.data[row * self.cols() + col];
+            }
+        }
+        Self::new::<P>(self.cols(), self.rows(), data)
+    }
+
+    pub fn canonical_row_basis<const P: u8>(&self) -> Result<Self, MatrixError> {
+        Prime::<P>::validate()?;
+        let rows = self.rows();
+        let cols = self.cols();
+        let mut data = self.data.to_vec();
+        let pivot_row = canonicalize_rows_in_place::<P>(&mut data, rows, cols)?;
+        data.truncate(pivot_row * cols);
+        Self::new::<P>(pivot_row, cols, data)
+    }
+
+    pub fn append_row<const P: u8>(&self, row: &[u8]) -> Result<Self, MatrixError> {
+        if row.len() != self.cols() {
+            return Err(MatrixError::Shape);
+        }
+        let mut data = Vec::with_capacity(self.data.len() + row.len());
+        data.extend_from_slice(&self.data);
+        data.extend_from_slice(row);
+        Self::new::<P>(self.rows() + 1, self.cols(), data)
+    }
+
+    pub fn row_space_contains<const P: u8>(&self, candidate: &Matrix) -> Result<bool, MatrixError> {
+        if self.cols() != candidate.cols() {
+            return Err(MatrixError::Shape);
+        }
+        let rank = self.rows();
+        let mut joined = self.clone();
+        for row in 0..candidate.rows() {
+            joined = joined.append_row::<P>(candidate.row(row))?;
+        }
+        Ok(joined.canonical_row_basis::<P>()?.rows() == rank)
+    }
+}
+
+pub(crate) fn canonicalize_rows_in_place<const P: u8>(
+    data: &mut [u8],
+    rows: usize,
+    cols: usize,
+) -> Result<usize, MatrixError> {
+    if data.len() != rows.saturating_mul(cols) {
+        return Err(MatrixError::Shape);
+    }
+    let mut pivot_row = 0usize;
+    for col in 0..cols {
+        let Some(found) = (pivot_row..rows).find(|&row| data[row * cols + col] != 0) else {
+            continue;
+        };
+        if found != pivot_row {
+            for j in 0..cols {
+                data.swap(found * cols + j, pivot_row * cols + j);
+            }
+        }
+        let inverse = Prime::<P>::inverse(data[pivot_row * cols + col])?;
+        for j in col..cols {
+            data[pivot_row * cols + j] = Prime::<P>::mul(data[pivot_row * cols + j], inverse);
+        }
+        for row in 0..rows {
+            if row == pivot_row {
+                continue;
+            }
+            let factor = data[row * cols + col];
+            if factor == 0 {
+                continue;
+            }
+            for j in col..cols {
+                let product = Prime::<P>::mul(factor, data[pivot_row * cols + j]);
+                data[row * cols + j] = Prime::<P>::sub(data[row * cols + j], product);
+            }
+        }
+        pivot_row += 1;
+        if pivot_row == rows {
+            break;
+        }
+    }
+    Ok(pivot_row)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn canonical_basis_is_stable() {
+        let matrix = Matrix::new::<3>(3, 3, vec![2, 1, 0, 1, 2, 0, 0, 0, 0]).unwrap();
+        let basis = matrix.canonical_row_basis::<3>().unwrap();
+        assert_eq!(basis.rows(), 1);
+        assert_eq!(basis.as_slice(), &[1, 2, 0]);
+        assert_eq!(basis.canonical_row_basis::<3>().unwrap(), basis);
+    }
+}

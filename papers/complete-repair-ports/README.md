@@ -49,6 +49,27 @@ nonzero functional sectors. A single scalar threshold is not sufficient input
 for this recursion; in particular, the persistent value
 `rho_T(I)+d(I⊥)` loses the required functional labels.
 
+## ERGO-Comp companion
+
+**ERGO-Comp turns the paper's exact recovery theorems into executable
+optimizers.** It compiles prescribed-coset support functions through labelled
+concatenation levels, returns exact helper costs and confinement thresholds,
+and retains coefficient-level witnesses rather than only scalar optima. Its
+capacity-aware scheduler selects simultaneous repairs under heterogeneous
+helper limits and supports coefficient-weighted download costs.
+
+The compiler exploits quotient coordinates, projectively equivalent columns,
+repeated block types, packed finite-field arithmetic, and graded antichain
+shells. Those reductions are mathematical: each comes with a replay path to
+the original instance. On the recorded exact scheduling suite, the Rust engine
+is 2.5--377 times faster than direct CP-SAT and 2.5--373 times faster than
+CP-SAT receiving the same safe preprocessing. For models with additional
+general constraints, ERGO-Comp is a certified front end to CP-SAT rather than
+a replacement for it.
+
+Quick-start commands, JSON examples, architecture notes, and reproducible
+benchmarks are in [`algorithms/`](algorithms/).
+
 ## Main consequences
 
 - Minimizing simultaneous recovery cost over all target `e`-sets gives
@@ -128,6 +149,8 @@ axiom-audit instructions in [`lean/README.md`](lean/README.md).
   dependency macros used by the manuscript.
 - `sections/` contains the proofs, applications, conclusion, and verification
   statement.
+- `algorithms/` contains the ERGO-Comp Rust library and CLI, Python reference
+  models, examples, tests, and reproducibility evidence.
 - `lean/` is the paper-owned Lean 4 companion and depends on a pinned Mathlib
   revision.
 - `verification/` contains release and evidence checks.
