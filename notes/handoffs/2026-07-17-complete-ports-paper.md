@@ -5,8 +5,9 @@
 **Date**: 2026-08-24
 **Status**: ACTIVE; C961 REPEATED-CONCATENATION COST COMPOSITION PROVED,
 PRIORITY-BOUNDED, HARD-RED-TEAMED, AND EXPORTED; 24-PAGE AUTHORITY AND 40-FILE
-STANDALONE GATES PASS; C962 ALGORITHM/BOUND DEVELOPMENT IS IN PROGRESS; C325
-APPENDIX VERIFIER AND C953 AGGREGATE REVIEW FOLLOW;
+STANDALONE GATES PASS; C962 ALGORITHM/BOUND DEVELOPMENT IS IN PROGRESS; C971
+ERGO-COMP PACKAGING AND MANUSCRIPT DRAFT, C325 APPENDIX VERIFIER, AND C953
+AGGREGATE REVIEW FOLLOW;
 C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
@@ -201,7 +202,15 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 ## Next step
 
 C961 is closed.  Run C962 paper-owned algorithm and bound development next,
-then C325 appendix-only verification, then C953
+including the private Rust-native parity engine under
+`papers/complete-repair-ports/algorithms/rust/`.  Every Rust work session must
+read `notes/queens-othello-perf-playbook.md` and obey the nested Rust
+`AGENTS.md`; Python remains the exact differential oracle, and no Rust
+performance result is accepted before cost/witness/load parity.  Then run C971
+ERGO-Comp packaging, public-surface cleanup, fair benchmark evidence, product
+README, and manuscript-update drafting; exported code and comments must contain
+no internal process artifacts or identifiers.  Then C325 appendix-only
+verification, then C953
 aggregate referee/export review.  C955 owns the later coefficient-presentation
 spectrum. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier
