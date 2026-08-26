@@ -1,3 +1,4 @@
+import RelativeConicArcs.CubicEqualityPattern
 import RelativeConicArcs.FaceAxisHarmonicGram
 
 /-!
@@ -1174,6 +1175,38 @@ theorem applyRotationWord_tripleTransportWord {a b c i j k : Fin 5}
       have h := applyRotationWord_inverseRotationWord (canonicalTripleWord i j k) k
       rwa [ht.2.2] at h
 
+private def auxiliaryLabel : Fin 5 → Fin 5 → Fin 5 :=
+  ![![1, 2, 1, 1, 1],
+    ![2, 0, 0, 0, 0],
+    ![1, 0, 0, 0, 0],
+    ![1, 0, 0, 0, 0],
+    ![1, 0, 0, 0, 0]]
+
+private theorem auxiliaryLabel_ne_left {a b : Fin 5} (hab : a ≠ b) :
+    auxiliaryLabel a b ≠ a := by
+  revert a b
+  decide
+
+private theorem auxiliaryLabel_ne_right {a b : Fin 5} (hab : a ≠ b) :
+    auxiliaryLabel a b ≠ b := by
+  revert a b
+  decide
+
+/-- Some displayed rotation word carries any ordered pair of distinct labels
+to any other ordered pair of distinct labels. -/
+theorem exists_applyRotationWord_eq_pair {a b i j : Fin 5}
+    (hab : a ≠ b) (hij : i ≠ j) :
+    ∃ word : List (Fin 3),
+      applyRotationWord word a = i ∧ applyRotationWord word b = j := by
+  let word := tripleTransportWord a b (auxiliaryLabel a b)
+    i j (auxiliaryLabel i j)
+  have h := applyRotationWord_tripleTransportWord hab
+    (Ne.symm (auxiliaryLabel_ne_left hab))
+    (Ne.symm (auxiliaryLabel_ne_right hab)) hij
+    (Ne.symm (auxiliaryLabel_ne_left hij))
+    (Ne.symm (auxiliaryLabel_ne_right hij))
+  exact ⟨word, h.1, h.2.1⟩
+
 /-- The coordinate weight supported at one of the five labels. -/
 def coordinateWeight (i : Fin 5) : Fin 5 → ℝ := fun j ↦ if j = i then 1 else 0
 
@@ -1200,6 +1233,20 @@ noncomputable def faceAxisMixedCubic (y z w : Fin 5 → ℝ) : ℝ :=
   normalizedMean 18
     (zonalCombination (pairSum y) * zonalCombination (pairSum z) *
       zonalCombination (pairSum w))
+
+/-- Interchanging the first two arguments does not change the polarized cubic. -/
+theorem faceAxisMixedCubic_swap_left (y z w : Fin 5 → ℝ) :
+    faceAxisMixedCubic y z w = faceAxisMixedCubic z y w := by
+  rw [faceAxisMixedCubic, faceAxisMixedCubic]
+  congr 1
+  ring
+
+/-- Interchanging the last two arguments does not change the polarized cubic. -/
+theorem faceAxisMixedCubic_swap_right (y z w : Fin 5 → ℝ) :
+    faceAxisMixedCubic y z w = faceAxisMixedCubic y w z := by
+  rw [faceAxisMixedCubic, faceAxisMixedCubic]
+  congr 1
+  ring
 
 /-- The polarized cubic is invariant when all three weights are pulled back by
 one displayed label permutation. -/
@@ -1251,6 +1298,16 @@ theorem faceAxisMixedCubic_comp_applyRotationWord
 noncomputable def faceAxisCubicCoefficient (i j k : Fin 5) : ℝ :=
   faceAxisMixedCubic (coordinateWeight i) (coordinateWeight j) (coordinateWeight k)
 
+/-- The first two indices of a polarized structure coefficient may be exchanged. -/
+theorem faceAxisCubicCoefficient_swap_left (i j k : Fin 5) :
+    faceAxisCubicCoefficient i j k = faceAxisCubicCoefficient j i k := by
+  exact faceAxisMixedCubic_swap_left _ _ _
+
+/-- The last two indices of a polarized structure coefficient may be exchanged. -/
+theorem faceAxisCubicCoefficient_swap_right (i j k : Fin 5) :
+    faceAxisCubicCoefficient i j k = faceAxisCubicCoefficient i k j := by
+  exact faceAxisMixedCubic_swap_right _ _ _
+
 /-- Simultaneous transport of all three indices by a rotation word preserves a
 polarized structure coefficient. -/
 theorem faceAxisCubicCoefficient_applyRotationWord
@@ -1275,6 +1332,36 @@ theorem faceAxisCubicCoefficient_applyRotationWord
     (coordinateWeight (applyRotationWord word k))
   rw [hcoordinate i, hcoordinate j, hcoordinate k] at h
   exact h.symm
+
+/-- Every coefficient whose three indices coincide equals the coefficient at
+the first label. -/
+theorem faceAxisCubicCoefficient_eq_diagonal (i : Fin 5) :
+    faceAxisCubicCoefficient i i i = faceAxisCubicCoefficient 0 0 0 := by
+  have h := faceAxisCubicCoefficient_applyRotationWord (rootMoverWord i) 0 0 0
+  rw [applyRotationWord_rootMoverWord] at h
+  exact h
+
+/-- Every coefficient with a specified repeated index and one different index
+equals the coefficient at `(0,0,1)`. -/
+theorem faceAxisCubicCoefficient_eq_double {i j : Fin 5} (hij : i ≠ j) :
+    faceAxisCubicCoefficient i i j = faceAxisCubicCoefficient 0 0 1 := by
+  obtain ⟨word, h0, h1⟩ := exists_applyRotationWord_eq_pair (by decide : (0 : Fin 5) ≠ 1) hij
+  have h := faceAxisCubicCoefficient_applyRotationWord word 0 0 1
+  rw [h0, h1] at h
+  exact h
+
+/-- Every coefficient with three distinct indices equals the coefficient at
+`(0,1,2)`. -/
+theorem faceAxisCubicCoefficient_eq_distinct {i j k : Fin 5}
+    (hij : i ≠ j) (hik : i ≠ k) (hjk : j ≠ k) :
+    faceAxisCubicCoefficient i j k = faceAxisCubicCoefficient 0 1 2 := by
+  have h := faceAxisCubicCoefficient_applyRotationWord
+    (tripleTransportWord 0 1 2 i j k) 0 1 2
+  have ht := applyRotationWord_tripleTransportWord
+    (by decide : (0 : Fin 5) ≠ 1) (by decide : (0 : Fin 5) ≠ 2)
+    (by decide : (1 : Fin 5) ≠ 2) hij hik hjk
+  rw [ht.1, ht.2.1, ht.2.2] at h
+  exact h
 
 /-- Expanding the face-axis field in the coordinate weights expands its cubic
 moment into the corresponding three-index structure coefficients. -/
@@ -1302,5 +1389,144 @@ theorem faceAxisCubic_eq_sum_coefficients (y : Fin 5 → ℝ) :
         ring,
       normalizedMean_C_mul]
   rfl
+
+/-- The three index-equality patterns for the polarized cubic coefficient. -/
+private noncomputable def faceAxisCubicCoefficientPattern (i j k : Fin 5) : ℝ :=
+      if i = j then
+        if j = k then faceAxisCubicCoefficient 0 0 0
+        else faceAxisCubicCoefficient 0 0 1
+      else if i = k then faceAxisCubicCoefficient 0 0 1
+      else if j = k then faceAxisCubicCoefficient 0 0 1
+      else faceAxisCubicCoefficient 0 1 2
+
+private theorem faceAxisCubicCoefficientPattern_eq_cubicEqualityPattern
+    (i j k : Fin 5) :
+    faceAxisCubicCoefficientPattern i j k =
+      CubicEqualityPattern.coefficient
+        (faceAxisCubicCoefficient 0 0 0)
+        (faceAxisCubicCoefficient 0 0 1)
+        (faceAxisCubicCoefficient 0 1 2) i j k :=
+  rfl
+
+/-- The polarized coefficient depends only on whether its three indices are
+all equal, exactly two are equal, or all three are distinct. -/
+private theorem faceAxisCubicCoefficient_eq_pattern (i j k : Fin 5) :
+    faceAxisCubicCoefficient i j k = faceAxisCubicCoefficientPattern i j k := by
+  unfold faceAxisCubicCoefficientPattern
+  by_cases hij : i = j
+  · subst j
+    by_cases hik : i = k
+    · subst k
+      calc
+        faceAxisCubicCoefficient i i i = faceAxisCubicCoefficient 0 0 0 :=
+          faceAxisCubicCoefficient_eq_diagonal i
+        _ = (if i = i then
+              if i = i then faceAxisCubicCoefficient 0 0 0
+              else faceAxisCubicCoefficient 0 0 1
+            else if i = i then faceAxisCubicCoefficient 0 0 1
+            else if i = i then faceAxisCubicCoefficient 0 0 1
+            else faceAxisCubicCoefficient 0 1 2) := by simp
+    · calc
+        faceAxisCubicCoefficient i i k = faceAxisCubicCoefficient 0 0 1 :=
+          faceAxisCubicCoefficient_eq_double hik
+        _ = (if i = i then
+              if i = k then faceAxisCubicCoefficient 0 0 0
+              else faceAxisCubicCoefficient 0 0 1
+            else if i = k then faceAxisCubicCoefficient 0 0 1
+            else if i = k then faceAxisCubicCoefficient 0 0 1
+            else faceAxisCubicCoefficient 0 1 2) := by simp [hik]
+  · by_cases hik : i = k
+    · subst k
+      calc
+        faceAxisCubicCoefficient i j i = faceAxisCubicCoefficient i i j :=
+          faceAxisCubicCoefficient_swap_right i j i
+        _ = faceAxisCubicCoefficient 0 0 1 :=
+          faceAxisCubicCoefficient_eq_double hij
+        _ = (if i = j then
+              if j = i then faceAxisCubicCoefficient 0 0 0
+              else faceAxisCubicCoefficient 0 0 1
+            else if i = i then faceAxisCubicCoefficient 0 0 1
+            else if j = i then faceAxisCubicCoefficient 0 0 1
+            else faceAxisCubicCoefficient 0 1 2) := by simp [hij]
+    · by_cases hjk : j = k
+      · subst k
+        calc
+          faceAxisCubicCoefficient i j j = faceAxisCubicCoefficient j i j :=
+            faceAxisCubicCoefficient_swap_left i j j
+          _ = faceAxisCubicCoefficient j j i :=
+            faceAxisCubicCoefficient_swap_right j i j
+          _ = faceAxisCubicCoefficient 0 0 1 :=
+            faceAxisCubicCoefficient_eq_double (Ne.symm hij)
+          _ = (if i = j then
+                if j = j then faceAxisCubicCoefficient 0 0 0
+                else faceAxisCubicCoefficient 0 0 1
+              else if i = j then faceAxisCubicCoefficient 0 0 1
+              else if j = j then faceAxisCubicCoefficient 0 0 1
+              else faceAxisCubicCoefficient 0 1 2) := by simp [hij]
+      · calc
+          faceAxisCubicCoefficient i j k = faceAxisCubicCoefficient 0 1 2 :=
+            faceAxisCubicCoefficient_eq_distinct hij hik hjk
+          _ = (if i = j then
+                if j = k then faceAxisCubicCoefficient 0 0 0
+                else faceAxisCubicCoefficient 0 0 1
+              else if i = k then faceAxisCubicCoefficient 0 0 1
+              else if j = k then faceAxisCubicCoefficient 0 0 1
+              else faceAxisCubicCoefficient 0 1 2) := by simp [hij, hik, hjk]
+
+/-- On the sum-zero five-label module, the cubic is the cube sum multiplied by
+the alternating combination of its three polarized coefficient values. -/
+private theorem faceAxisCubic_eq_coefficientCombination_mul_sum_cube
+    {y : Fin 5 → ℝ} (hy : ∑ i, y i = 0) :
+    faceAxisCubic y =
+      (faceAxisCubicCoefficient 0 0 0 -
+          3 * faceAxisCubicCoefficient 0 0 1 +
+          2 * faceAxisCubicCoefficient 0 1 2) * ∑ i, y i ^ 3 := by
+  rw [faceAxisCubic_eq_sum_coefficients]
+  simp_rw [faceAxisCubicCoefficient_eq_pattern]
+  simp_rw [faceAxisCubicCoefficientPattern_eq_cubicEqualityPattern]
+  exact CubicEqualityPattern.reversed_sum_coefficient_mul_of_sum_eq_zero _ _ _ y hy
+
+/-- The real Clebsch cubic on the sum-zero five-label module, normalized as
+one third of the sum of the coordinate cubes. -/
+noncomputable def realSigmaThree (y : Fin 5 → ℝ) : ℝ :=
+  (1 / 3) * ∑ i, y i ^ 3
+
+/-- The cubic moment of the face-axis field at the stabilizer-fixed weight is
+the marked rational value used to normalize the invariant cubic line. -/
+theorem faceAxisCubic_stabilizerFixedVertexWeight :
+    faceAxisCubic stabilizerFixedVertexWeight = -15680000 / 1247103 := by
+  exact normalizedMean_zonalCombination_stabilizerFixedVertexWeight_cube
+
+/-- The normalized cubic moment of the labelled icosahedral face-axis field
+restricts to `-784000/1247103` times the real Clebsch cubic. -/
+theorem faceAxisCubic_eq_gauntCoefficient_mul_realSigmaThree
+    {y : Fin 5 → ℝ} (hy : ∑ i, y i = 0) :
+    faceAxisCubic y = (-784000 / 1247103) * realSigmaThree y := by
+  let coefficientCombination :=
+    faceAxisCubicCoefficient 0 0 0 -
+      3 * faceAxisCubicCoefficient 0 0 1 +
+      2 * faceAxisCubicCoefficient 0 1 2
+  have hmarkedSum : ∑ i, stabilizerFixedVertexWeight i = 0 := by
+    norm_num [stabilizerFixedVertexWeight, Fin.sum_univ_five,
+      Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
+      Matrix.cons_val_three, Matrix.cons_val_four, Matrix.head_cons,
+      Matrix.tail_cons]
+  have hmarked :=
+    faceAxisCubic_eq_coefficientCombination_mul_sum_cube hmarkedSum
+  rw [faceAxisCubic_stabilizerFixedVertexWeight] at hmarked
+  change (-15680000 / 1247103 : ℝ) = coefficientCombination *
+    ∑ i, stabilizerFixedVertexWeight i ^ 3 at hmarked
+  norm_num [stabilizerFixedVertexWeight, Fin.sum_univ_five,
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
+    Matrix.cons_val_three, Matrix.cons_val_four, Matrix.head_cons,
+    Matrix.tail_cons] at hmarked
+  have hcoefficient : coefficientCombination =
+      (-784000 / 1247103 : ℝ) / 3 := by
+    linarith
+  rw [faceAxisCubic_eq_coefficientCombination_mul_sum_cube hy]
+  change coefficientCombination * ∑ i, y i ^ 3 =
+    (-784000 / 1247103) * ((1 / 3) * ∑ i, y i ^ 3)
+  rw [hcoefficient]
+  ring
 
 end RelativeConicArcs.SphericalCubicRestriction
