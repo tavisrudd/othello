@@ -540,6 +540,26 @@ odd cut into too many completed tri/four-secant pairs.  Computationally,
 this is still a useful exact first gate: test all generic `v_0` and their
 perfect matchings before invoking the q=27 carrier/mapping machinery.
 
+The side colours nevertheless give an absolute matching-defect bound.  Let
+`D_c` be the three generic vertices which colour `c` pairs to exceptional
+vertices.  Its remaining edges form a perfect matching of `G\D_c`.  Hence
+deleting an arbitrary marked vertex leaves matching deficiency at most four,
+while choosing `v_0 in D_c` leaves exactly the other two vertices of `D_c`
+unmatched and gives
+
+```text
+def_Tutte(H[G\{v_0}]) <= 2.                         (TR27)
+```
+
+Every generic vertex has tangent choices, so this marking is admissible.
+The full selector exists iff an alternating path in the other two colours
+joins the two exposed monomers (or an equivalent augmentation exists).
+Abstract three-coloured degree data cannot force this: one may attach three
+generic vertices to exceptions in all three colours and put three disjoint
+perfect matchings on the rest, leaving three isolated generic vertices.
+That countermodel is not asserted projectively realizable; it proves that
+the next lemma must use the tri/four-secant completion geometry.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`

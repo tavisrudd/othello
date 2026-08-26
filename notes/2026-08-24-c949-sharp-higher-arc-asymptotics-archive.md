@@ -215,3 +215,12 @@ non-Mason: realize the marked `2q+4` blocking four-arc and its matching, then
 prove the global off-core concurrency cap.  Selecting its tangent, matching
 bisecants, three trisecants, and all four-secants has the desired
 `q^2/3+5q/3+1` count, but existence and the off-core cap remain open.
+
+An alternating-colour pass improved the selector frontier further.  Each
+side colour is already a perfect matching after deleting the three generic
+vertices which it pairs to exceptional lines.  Choosing the tangent marker
+at one of those three vertices therefore leaves exactly two exposed
+monomers.  Thus the q-scale selector search has matching deficiency at most
+two; what remains is one projective augmenting-path lemma through the other
+colours.  An abstract coloured countermodel with three isolated generic
+vertices shows that degree/colour data alone cannot prove the path.

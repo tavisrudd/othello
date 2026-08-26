@@ -231,9 +231,17 @@ The three side colours do not supply that matching automatically: each
 colour restricts to a matching on the generic vertices with exactly three
 generic defects.  After deleting `v_0`, feasibility is exactly Tutte's
 odd-component condition on the remaining `2q-6` generic vertices.  The
-current spectra control degrees but not odd cuts.  This gives a cheap exact
-preprocessing gate for q=27 and a clean field-uniform target: prove a
-geometric odd-cut expansion theorem for the embedded bisecant graph.
+current spectra control degrees but not odd cuts.
+
+There is, however, an exact constant-defect theorem.  For a side colour
+`c`, let `D_c` be its three generic vertices paired to exceptional vertices.
+The colour is a perfect matching on `G\D_c`.  Marking any `v_0 in D_c`
+leaves only the other two vertices of `D_c` unmatched, so the selector graph
+after deleting `v_0` has matching deficiency at most two.  Every such
+generic vertex supports a tangent marker.  The missing matching theorem is
+therefore precisely a **two-monomer augmenting-path lemma** through the other
+two colours.  This gives a cheap exact preprocessing gate for q=27 and a
+clean field-uniform projective expansion target.
 
 ### 5. q=27 finite carrier boundary
 
@@ -407,7 +415,8 @@ separate global trade obstruction or construction.
   vertex, its tangent, and a perfect matching of the remaining generic
   bisecant graph.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut
-  condition; side-colour degrees alone do neither.
+  condition; after a suitable marking it is exactly a two-monomer
+  augmenting-path problem, and side-colour degrees alone do not solve it.
 - **Open:** compute the transverse pencil derivatives from split/Witt/norm
   data.
 - **Open:** connect any resulting bounded identity to C962's `(A,C)` carrier
