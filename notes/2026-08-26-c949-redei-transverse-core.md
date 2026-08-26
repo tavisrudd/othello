@@ -1008,6 +1008,36 @@ derivative that produced the bounded quadratic `p` kills it.  The scalar
 Being a cube gives no additional restriction over `F_(3^h)`, because
 Frobenius is bijective; no common cube-root gluing follows.
 
+The six marked boundary factors nevertheless give an exact local bridge to
+the cube sector.  At a regular slope the full product is
+
+```text
+S_m=(X^q-X)(X-d_m)G_m^3.
+```
+
+If a boundary intercept `b` has multiplicity `c_b` in the six-point boundary
+product `B_6`, then deleting those boundary points leaves H empty at `b`
+exactly when
+
+```text
+c_b=1+ord_b((X-d_m)G_m^3).                         (TR47)
+```
+
+This valuation form is valid even at boundary collisions.  When the six
+intercepts are distinct and `B_6=A_mD_m`, it becomes
+
+```text
+gcd(B_6,(X-d_m)G_m^3)=D_m,
+D_m/gcd(D_m,X-d_m) divides G_m,
+Res(A_m,(X-d_m)G_m) != 0.                          (TR47a)
+```
+
+Equivalently, the missing label marks exactly the boundary roots outside the
+double/quadruple support.  This genuinely connects `A_m` to roots of `G_m`,
+but leaves the unmarked cofactor of `G_m` q-scale and does not determine the
+TR46 scalar.  The next theorem must synchronize these forced moving divisors
+across slopes, ideally with marked norm/Witt data.
+
 There are two q-scale checksums but no bounded compression.  Write
 `theta(m)=e_(q-2)({b(P)-ma(P)})` and let `theta(infinity)` be its homogeneous
 vertical value.  Since its binary form has degree `q-2` and vanishes at the
@@ -1105,6 +1135,12 @@ must bridge the labelled missing polynomial `A_m` to the cube-sector data
   in the unrestricted q-scale cube-sector and is not determined by the
   missing-label subset.  Merely descending one coefficient is not another
   bounded certificate, and cubing itself is bijective.
+- **Settled:** `(TR47)` recovers every H-missing boundary label from the
+  valuation of `(X-d_m)G_m^3`; in collision-free slopes it is a degree-six
+  gcd/divisibility bridge from `A_m` to `G_m`.
+- **Open:** synchronize those forced moving divisors across slopes; their
+  residual cofactors remain q-scale and local divisibility is below the
+  interpolation threshold.
 - **Open:** determine whether this post-terminal filter rejects any surviving
   q=27 carrier states independently of fourth Witt, reciprocal norm, and the
   mapping gate; no symmetry of `D` may be assumed.

@@ -411,15 +411,27 @@ e_(q-2)(b-Ma)=-[X^3]Q
 ```
 
 It vanishes at the two vertex slopes, but lies in the unrestricted q-scale
-cube-sector of `Q`, not the bounded quadratic defect.  It is not determined
-by the 64 missing-root labels and changes with the fixed intercept frame.
-Thus “go one coefficient lower” is not itself a bounded solution: the new
-input must relate each labelled missing polynomial to `G_m`, or control the
-global cube-sector `B_0`.  Its degree nevertheless gives two exact compiler
+cube-sector of `Q`, not the bounded quadratic defect, and changes with the
+fixed intercept frame.  Its degree gives two exact compiler
 checksums, the unweighted and slope-weighted sums of the regular scalars plus
 the boundary/vertical quotient values `(TR46a)`.
 Cubing supplies no hidden restriction here: Frobenius is bijective over
 `F_(3^h)`, so these values do not glue to a common cube root.
+
+The six marked boundary factors do restore an exact local bridge.  At every
+regular slope, if a boundary intercept has multiplicity `c_b`, then H is
+empty there exactly when
+
+```text
+c_b=1+ord_b((X-d_m)G_m^3).                         (TR47)
+```
+
+For six distinct intercepts and `B_6=A_mD_m`, this is the degree-six rule
+`gcd(B_6,(X-d_m)G_m^3)=D_m`; hence
+`D_m/gcd(D_m,X-d_m)` divides `G_m` and `A_m` is coprime to the double/fourfold
+support.  The remaining cofactor of `G_m` is still q-scale.  The real next
+theorem is to synchronize these forced moving divisors across slopes using
+marked norm/Witt data.
 
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
@@ -638,8 +650,8 @@ an encoding/replay fixture and compare its rejection cores with
 fourth Witt, reciprocal norm, and mapping, once per joint orbit.  On
 survivors, test the full `(TR45)`
 quadratic quotient.  For the field-uniform residual frontier, prove a bridge
-from the labelled missing polynomial `A_m` to the cube-sector `G_m` in
-`(TR46)`; coefficient descent alone has now been exhausted.
+lifting the local marked-root divisibility `(TR47)` to a common cube-sector
+section or contradiction; coefficient descent alone is exhausted.
 In parallel, use the two-monomer matching gate and degree-five labelled
 residuals as q=27 prefilters before the carrier DFS.  Field-uniformly, prove
 cross-slope propagation for those residuals or construct a genuinely

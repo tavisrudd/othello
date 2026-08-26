@@ -386,3 +386,13 @@ field-encoding/replay fixture and rejection-distribution measurement.
 The derivation uses the resolved mapping's ratio pairing; the unordered
 row/column triples alone do not determine the infinity points, and no such
 claim is made for a nonextendable carrier without boundary-direction input.
+
+The final AA pass recovered the first exact local marked bridge.  At a
+regular slope, H is missing a boundary intercept `b` exactly when its
+six-boundary multiplicity equals
+`1+ord_b((X-d_m)G_m^3)`.  With distinct boundary intercepts and
+`B_6=A_mD_m`, this is
+`gcd(B_6,(X-d_m)G_m^3)=D_m`.  Thus the missing label separates roots outside
+the double/quadruple support from complementary boundary roots forced into
+it.  The result is collision-safe in valuation form, but the remaining
+cofactor of `G_m` is q-scale; no global cube gluing follows.
