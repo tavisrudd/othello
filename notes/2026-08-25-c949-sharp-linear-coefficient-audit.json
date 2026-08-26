@@ -199,6 +199,47 @@
               "exceptional_directions": 3,
               "frobenius_fiber_quadratic_normal_form": {
                 "all_other_nonzero_line_functional_root_cap": 4,
+                "balanced_etale_cofactor_degree_caps": [
+                  23,
+                  22
+                ],
+                "balanced_etale_divisor_degrees": [
+                  3,
+                  4
+                ],
+                "balanced_exceptional_E_fiber_sizes": [
+                  0,
+                  3
+                ],
+                "balanced_exceptional_direction_class": "ordinary_1_2_4",
+                "balanced_exceptional_direction_root_cap": 4,
+                "balanced_exceptional_four_fiber_count": 27,
+                "balanced_exceptional_norm_derivative_gcd": "Y*G^3",
+                "balanced_exceptional_norm_identity": "Y^2*(Y^(q-1)-1)*G^3/J",
+                "balanced_exceptional_other_nonzero_fiber_sizes": [
+                  1,
+                  4
+                ],
+                "balanced_exceptional_y_zero_fiber_size": 2,
+                "balanced_extendable_product_coefficient_gate": "w*[X^(q-1)]Q_4=A(0)*e3(U)*[X^(r+1)]Q_4",
+                "balanced_fourth_newton_ratio_product_coefficient": "[X^(r+1)]Q_4=w*e3(R)",
+                "balanced_fourth_newton_unshifted_product_coefficient": "[X^(q-1)]Q_4=e1(E)*e3(E)",
+                "balanced_leading_coefficient_nonzero": true,
+                "balanced_minimal_nonlinear_gate": "coupled_t_y_ratio_norms",
+                "balanced_minimum_quartic_components": 24,
+                "balanced_moment_invisible_factor_degree": 27,
+                "balanced_moment_only_closeout_possible": false,
+                "balanced_ratio_diagonal_extraction": "k*r-j*(q-1)",
+                "balanced_ratio_norm_identity": "D^3*(D^(q-1)-1)^2/J_R",
+                "balanced_ratio_normalized_cubic": "Z*(Z+1)^2-kappa",
+                "balanced_ratio_normalized_cubic_fiber_count": 13,
+                "balanced_ratio_reversed_local_quadratic": "V^2-Z*A_rev(Z)*V+Z^(r+1)*C_rev(Z)",
+                "balanced_ratio_reversed_product_degree_cap": 54,
+                "balanced_ratio_reversed_trace_degree_cap": 27,
+                "balanced_ratio_shifted_norm_identity": "(V-w)^3*((V-w)^(q-1)-1)^2/J_R(V-w)",
+                "balanced_ratio_singleton_first_symmetric_value": "w",
+                "balanced_ratio_singleton_second_symmetric_value": "w^2",
+                "balanced_ratio_singleton_set_count": 1040,
                 "balanced_shifted_coordinate": "t=y-w*X^r=b^r",
                 "balanced_shifted_global_moment_extraction": "S_k=-sum_j [X^(j*(q-1))]Q_k",
                 "balanced_shifted_local_newton_degree_cap": "deg(Q_k)<=k*r",
@@ -216,6 +257,12 @@
                 "balanced_shifted_order_three_recurrence_starts": 76,
                 "balanced_shifted_zero_4_by_4_hankel_minors": 73,
                 "balanced_shifted_zero_fiber_size": 3,
+                "balanced_simultaneous_frobenius_is_semilinear_collineation": true,
+                "balanced_unshifted_diagonal_extraction": "j*(q-1)",
+                "balanced_unshifted_norm_derivative_gcd": "T^3*(T^(q-1)-1)/J",
+                "balanced_unshifted_norm_identity": "T^3*(T^(q-1)-1)^2/J",
+                "balanced_unshifted_singleton_first_symmetric_value": "A(0)",
+                "balanced_unshifted_singleton_second_symmetric_value": "C(0)",
                 "canonical_section_branch_dichotomy": [
                   "generic",
                   "balanced_shear"
@@ -540,6 +587,47 @@
               "exceptional_directions": 3,
               "frobenius_fiber_quadratic_normal_form": {
                 "all_other_nonzero_line_functional_root_cap": 4,
+                "balanced_etale_cofactor_degree_caps": [
+                  77,
+                  76
+                ],
+                "balanced_etale_divisor_degrees": [
+                  3,
+                  4
+                ],
+                "balanced_exceptional_E_fiber_sizes": [
+                  0,
+                  3
+                ],
+                "balanced_exceptional_direction_class": "ordinary_1_2_4",
+                "balanced_exceptional_direction_root_cap": 4,
+                "balanced_exceptional_four_fiber_count": 81,
+                "balanced_exceptional_norm_derivative_gcd": "Y*G^3",
+                "balanced_exceptional_norm_identity": "Y^2*(Y^(q-1)-1)*G^3/J",
+                "balanced_exceptional_other_nonzero_fiber_sizes": [
+                  1,
+                  4
+                ],
+                "balanced_exceptional_y_zero_fiber_size": 2,
+                "balanced_extendable_product_coefficient_gate": "w*[X^(q-1)]Q_4=A(0)*e3(U)*[X^(r+1)]Q_4",
+                "balanced_fourth_newton_ratio_product_coefficient": "[X^(r+1)]Q_4=w*e3(R)",
+                "balanced_fourth_newton_unshifted_product_coefficient": "[X^(q-1)]Q_4=e1(E)*e3(E)",
+                "balanced_leading_coefficient_nonzero": true,
+                "balanced_minimal_nonlinear_gate": "coupled_t_y_ratio_norms",
+                "balanced_minimum_quartic_components": 78,
+                "balanced_moment_invisible_factor_degree": 81,
+                "balanced_moment_only_closeout_possible": false,
+                "balanced_ratio_diagonal_extraction": "k*r-j*(q-1)",
+                "balanced_ratio_norm_identity": "D^3*(D^(q-1)-1)^2/J_R",
+                "balanced_ratio_normalized_cubic": "Z*(Z+1)^2-kappa",
+                "balanced_ratio_normalized_cubic_fiber_count": 40,
+                "balanced_ratio_reversed_local_quadratic": "V^2-Z*A_rev(Z)*V+Z^(r+1)*C_rev(Z)",
+                "balanced_ratio_reversed_product_degree_cap": 162,
+                "balanced_ratio_reversed_trace_degree_cap": 81,
+                "balanced_ratio_shifted_norm_identity": "(V-w)^3*((V-w)^(q-1)-1)^2/J_R(V-w)",
+                "balanced_ratio_singleton_first_symmetric_value": "w",
+                "balanced_ratio_singleton_second_symmetric_value": "w^2",
+                "balanced_ratio_singleton_set_count": 9680,
                 "balanced_shifted_coordinate": "t=y-w*X^r=b^r",
                 "balanced_shifted_global_moment_extraction": "S_k=-sum_j [X^(j*(q-1))]Q_k",
                 "balanced_shifted_local_newton_degree_cap": "deg(Q_k)<=k*r",
@@ -557,6 +645,12 @@
                 "balanced_shifted_order_three_recurrence_starts": 238,
                 "balanced_shifted_zero_4_by_4_hankel_minors": 235,
                 "balanced_shifted_zero_fiber_size": 3,
+                "balanced_simultaneous_frobenius_is_semilinear_collineation": true,
+                "balanced_unshifted_diagonal_extraction": "j*(q-1)",
+                "balanced_unshifted_norm_derivative_gcd": "T^3*(T^(q-1)-1)/J",
+                "balanced_unshifted_norm_identity": "T^3*(T^(q-1)-1)^2/J",
+                "balanced_unshifted_singleton_first_symmetric_value": "A(0)",
+                "balanced_unshifted_singleton_second_symmetric_value": "C(0)",
                 "canonical_section_branch_dichotomy": [
                   "generic",
                   "balanced_shear"
@@ -881,6 +975,47 @@
               "exceptional_directions": 3,
               "frobenius_fiber_quadratic_normal_form": {
                 "all_other_nonzero_line_functional_root_cap": 4,
+                "balanced_etale_cofactor_degree_caps": [
+                  239,
+                  238
+                ],
+                "balanced_etale_divisor_degrees": [
+                  3,
+                  4
+                ],
+                "balanced_exceptional_E_fiber_sizes": [
+                  0,
+                  3
+                ],
+                "balanced_exceptional_direction_class": "ordinary_1_2_4",
+                "balanced_exceptional_direction_root_cap": 4,
+                "balanced_exceptional_four_fiber_count": 243,
+                "balanced_exceptional_norm_derivative_gcd": "Y*G^3",
+                "balanced_exceptional_norm_identity": "Y^2*(Y^(q-1)-1)*G^3/J",
+                "balanced_exceptional_other_nonzero_fiber_sizes": [
+                  1,
+                  4
+                ],
+                "balanced_exceptional_y_zero_fiber_size": 2,
+                "balanced_extendable_product_coefficient_gate": "w*[X^(q-1)]Q_4=A(0)*e3(U)*[X^(r+1)]Q_4",
+                "balanced_fourth_newton_ratio_product_coefficient": "[X^(r+1)]Q_4=w*e3(R)",
+                "balanced_fourth_newton_unshifted_product_coefficient": "[X^(q-1)]Q_4=e1(E)*e3(E)",
+                "balanced_leading_coefficient_nonzero": true,
+                "balanced_minimal_nonlinear_gate": "coupled_t_y_ratio_norms",
+                "balanced_minimum_quartic_components": 240,
+                "balanced_moment_invisible_factor_degree": 243,
+                "balanced_moment_only_closeout_possible": false,
+                "balanced_ratio_diagonal_extraction": "k*r-j*(q-1)",
+                "balanced_ratio_norm_identity": "D^3*(D^(q-1)-1)^2/J_R",
+                "balanced_ratio_normalized_cubic": "Z*(Z+1)^2-kappa",
+                "balanced_ratio_normalized_cubic_fiber_count": 121,
+                "balanced_ratio_reversed_local_quadratic": "V^2-Z*A_rev(Z)*V+Z^(r+1)*C_rev(Z)",
+                "balanced_ratio_reversed_product_degree_cap": 486,
+                "balanced_ratio_reversed_trace_degree_cap": 243,
+                "balanced_ratio_shifted_norm_identity": "(V-w)^3*((V-w)^(q-1)-1)^2/J_R(V-w)",
+                "balanced_ratio_singleton_first_symmetric_value": "w",
+                "balanced_ratio_singleton_second_symmetric_value": "w^2",
+                "balanced_ratio_singleton_set_count": 88088,
                 "balanced_shifted_coordinate": "t=y-w*X^r=b^r",
                 "balanced_shifted_global_moment_extraction": "S_k=-sum_j [X^(j*(q-1))]Q_k",
                 "balanced_shifted_local_newton_degree_cap": "deg(Q_k)<=k*r",
@@ -898,6 +1033,12 @@
                 "balanced_shifted_order_three_recurrence_starts": 724,
                 "balanced_shifted_zero_4_by_4_hankel_minors": 721,
                 "balanced_shifted_zero_fiber_size": 3,
+                "balanced_simultaneous_frobenius_is_semilinear_collineation": true,
+                "balanced_unshifted_diagonal_extraction": "j*(q-1)",
+                "balanced_unshifted_norm_derivative_gcd": "T^3*(T^(q-1)-1)/J",
+                "balanced_unshifted_norm_identity": "T^3*(T^(q-1)-1)^2/J",
+                "balanced_unshifted_singleton_first_symmetric_value": "A(0)",
+                "balanced_unshifted_singleton_second_symmetric_value": "C(0)",
                 "canonical_section_branch_dichotomy": [
                   "generic",
                   "balanced_shear"
@@ -1100,10 +1241,29 @@
     "zero_pattern_over_two_periods": "00110011"
   },
   "q27_chart_compatibility_microcheck": {
+    "balanced_etale_factor_degree_caps": [
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        4
+      ]
+    ],
+    "balanced_fourth_newton_product_checks": 104,
+    "balanced_ordinary_y_profile_variants": 4,
+    "balanced_ratio_cubic_ordered_collisions": 26,
+    "balanced_ratio_normalized_cubic_fibers": 4,
+    "balanced_ratio_reversal_checks": 26,
+    "balanced_ratio_rigidity_triples": 104,
+    "balanced_ratio_zero_leading_or_boundary_direction_survivors": 0,
     "balanced_shifted_diagonal_extraction_checks": 25,
     "balanced_shifted_moment_identity_evaluations": 25,
     "balanced_shifted_order_three_recurrence_checks": 22,
     "balanced_shifted_zero_consecutive_4_by_4_hankel_minors": 19,
+    "balanced_t_norm_derivative_gcd_degree": 26,
+    "balanced_y_norm_derivative_gcd_degree": 28,
     "canonical_section_derivative_evaluations": 2187,
     "critical_band_reversal_evaluations": 16,
     "field_order": 27,
@@ -1119,6 +1279,14 @@
     "reciprocal_P_evaluations": 26,
     "reciprocal_W_evaluations": 26,
     "zero_consecutive_4_by_4_hankel_minors": 10
+  },
+  "q9_balanced_three_norm_exhaust": {
+    "degree_cap": 2,
+    "field_order": 9,
+    "interpretation": "finite falsification check, not asymptotic evidence",
+    "nonzero_shear_parameter_tests": 26496,
+    "split_quadratic_covers": 3312,
+    "three_projection_survivors": 0
   },
   "raw_concurrent_rows_for_sublinear_repair": [
     [

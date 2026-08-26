@@ -3495,6 +3495,51 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 "S_k=-sum_j [X^(j*(q-1))]Q_k"
             ),
             "balanced_shifted_maximum_extracted_diagonal_index": r - 1,
+            "balanced_simultaneous_frobenius_is_semilinear_collineation": True,
+            "balanced_ratio_singleton_first_symmetric_value": "w",
+            "balanced_ratio_singleton_second_symmetric_value": "w^2",
+            "balanced_leading_coefficient_nonzero": True,
+            "balanced_exceptional_direction_class": "ordinary_1_2_4",
+            "balanced_exceptional_direction_root_cap": 4,
+            "balanced_exceptional_y_zero_fiber_size": 2,
+            "balanced_exceptional_E_fiber_sizes": [0, 3],
+            "balanced_exceptional_other_nonzero_fiber_sizes": [1, 4],
+            "balanced_exceptional_four_fiber_count": r,
+            "balanced_exceptional_norm_identity": "Y^2*(Y^(q-1)-1)*G^3/J",
+            "balanced_unshifted_norm_identity": "T^3*(T^(q-1)-1)^2/J",
+            "balanced_ratio_normalized_cubic": "Z*(Z+1)^2-kappa",
+            "balanced_ratio_normalized_cubic_fiber_count": (q - 3) // 6,
+            "balanced_ratio_singleton_set_count": (q - 1) * (q - 3) // 6,
+            "balanced_exceptional_norm_derivative_gcd": "Y*G^3",
+            "balanced_unshifted_norm_derivative_gcd": "T^3*(T^(q-1)-1)/J",
+            "balanced_moment_invisible_factor_degree": r,
+            "balanced_moment_only_closeout_possible": False,
+            "balanced_unshifted_diagonal_extraction": "j*(q-1)",
+            "balanced_ratio_diagonal_extraction": "k*r-j*(q-1)",
+            "balanced_fourth_newton_unshifted_product_coefficient": (
+                "[X^(q-1)]Q_4=e1(E)*e3(E)"
+            ),
+            "balanced_unshifted_singleton_first_symmetric_value": "A(0)",
+            "balanced_unshifted_singleton_second_symmetric_value": "C(0)",
+            "balanced_fourth_newton_ratio_product_coefficient": (
+                "[X^(r+1)]Q_4=w*e3(R)"
+            ),
+            "balanced_extendable_product_coefficient_gate": (
+                "w*[X^(q-1)]Q_4=A(0)*e3(U)*[X^(r+1)]Q_4"
+            ),
+            "balanced_ratio_norm_identity": "D^3*(D^(q-1)-1)^2/J_R",
+            "balanced_ratio_shifted_norm_identity": (
+                "(V-w)^3*((V-w)^(q-1)-1)^2/J_R(V-w)"
+            ),
+            "balanced_ratio_reversed_local_quadratic": (
+                "V^2-Z*A_rev(Z)*V+Z^(r+1)*C_rev(Z)"
+            ),
+            "balanced_ratio_reversed_trace_degree_cap": r,
+            "balanced_ratio_reversed_product_degree_cap": 2 * r,
+            "balanced_minimal_nonlinear_gate": "coupled_t_y_ratio_norms",
+            "balanced_etale_divisor_degrees": [3, 4],
+            "balanced_etale_cofactor_degree_caps": [r - 4, r - 5],
+            "balanced_minimum_quartic_components": r - 3,
             "critical_moment_band": [1, 2 * r - 2],
             "critical_moment_band_length": 2 * r - 2,
             "reciprocal_chart_reversal": "i -> 2r-1-i",
@@ -3563,6 +3608,13 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 != frobenius_fiber_normal_form[
                     "balanced_shifted_maximum_extracted_diagonal_index"]):
             raise AssertionError("the balanced diagonal range changed")
+        for balanced_g in range(4):
+            balanced_y_mass = (
+                2 + 3 * balanced_g + 4 * (r - balanced_g)
+                + (2 * r - 4 + balanced_g)
+            )
+            if balanced_y_mass != 2 * (q - 1):
+                raise AssertionError("the balanced ordinary fiber mass changed")
         critical_trace_exponents = [
             (-3 * index) % (q - 1)
             for index in (r, r + 1, r + 2)
@@ -3851,6 +3903,30 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
     derivative_A = sum_coefficients[:chart_r]
     derivative_B = product_coefficients[:chart_r]
     derivative_C = list(reversed(sum_coefficients[:chart_r]))
+    balanced_ratio_reversal_checks = 0
+    derivative_A_reversed = list(reversed(derivative_A))
+    derivative_C_reversed = list(reversed(derivative_C))
+    for x_value in range(1, chart_q):
+        z_value = chart_field.inv(x_value)
+        direct_trace = chart_field.mul(
+            chart_field.pow(x_value, chart_q - 1 - chart_r),
+            polynomial_value(derivative_A, x_value),
+        )
+        reversed_trace = chart_field.mul(
+            z_value, polynomial_value(derivative_A_reversed, z_value)
+        )
+        direct_product = chart_field.mul(
+            chart_field.pow(x_value, chart_q - 1 - 2 * chart_r),
+            polynomial_value(derivative_C, x_value),
+        )
+        reversed_product = chart_field.mul(
+            chart_field.pow(z_value, chart_r + 1),
+            polynomial_value(derivative_C_reversed, z_value),
+        )
+        if (direct_trace != reversed_trace
+                or direct_product != reversed_product):
+            raise AssertionError("the balanced ratio reversal changed")
+        balanced_ratio_reversal_checks += 1
     derivative_s = chart_field.pow(primitive, 5)
     derivative_rho = chart_field.pow(primitive, 7)
     shifted_h = [0] * chart_r + [primitive]
@@ -4039,6 +4115,80 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
 
     cell_a = [chart_field.pow(primitive, exponent) for exponent in (1, 2, 4)]
     cell_c = [chart_field.pow(primitive, exponent) for exponent in (3, 5, 7)]
+    balanced_ratio_triples = 0
+    balanced_ratio_normalized_fibers = set()
+    balanced_fourth_newton_product_checks = 0
+    for ratio_triple in itertools.combinations(range(1, chart_q), 3):
+        ratio_w = 0
+        for ratio_value in ratio_triple:
+            ratio_w = chart_field.add(ratio_w, ratio_value)
+        ratio_e2 = chart_field.add(
+            chart_field.mul(ratio_triple[0], ratio_triple[1]),
+            chart_field.add(
+                chart_field.mul(ratio_triple[0], ratio_triple[2]),
+                chart_field.mul(ratio_triple[1], ratio_triple[2]),
+            ),
+        )
+        if ratio_e2 != chart_field.mul(ratio_w, ratio_w):
+            continue
+        if ratio_w == 0 or chart_field.neg(ratio_w) in ratio_triple:
+            raise AssertionError("the balanced ratio direction rigidity changed")
+        ratio_e3 = chart_field.mul(
+            chart_field.mul(ratio_triple[0], ratio_triple[1]),
+            ratio_triple[2],
+        )
+        ratio_kappa = chart_field.mul(
+            ratio_e3, chart_field.inv(chart_field.pow(ratio_w, 3))
+        )
+        for ratio_value in ratio_triple:
+            normalized = chart_field.mul(
+                ratio_value, chart_field.inv(ratio_w)
+            )
+            if chart_field.mul(
+                    normalized,
+                    chart_field.pow(chart_field.add(normalized, 1), 2)
+                    ) != ratio_kappa:
+                raise AssertionError("the normalized balanced cubic changed")
+        ratio_p4 = 0
+        for ratio_value in ratio_triple:
+            ratio_p4 = chart_field.add(
+                ratio_p4, chart_field.pow(ratio_value, 4)
+            )
+        ratio_quadratic_p4 = chart_field.add(
+            chart_field.pow(ratio_w, 4),
+            chart_field.add(
+                chart_field.neg(chart_field.mul(
+                    chart_field.pow(ratio_w, 2), ratio_e2
+                )),
+                chart_field.neg(chart_field.pow(ratio_e2, 2)),
+            ),
+        )
+        if ratio_p4 != chart_field.add(
+                ratio_quadratic_p4,
+                chart_field.mul(ratio_w, ratio_e3)):
+            raise AssertionError("the fourth Newton product diagonal changed")
+        balanced_fourth_newton_product_checks += 1
+        balanced_ratio_normalized_fibers.add(ratio_kappa)
+        balanced_ratio_triples += 1
+    if (balanced_ratio_triples
+            != (chart_q - 1) * (chart_q - 3) // 6
+            or len(balanced_ratio_normalized_fibers)
+            != (chart_q - 3) // 6):
+        raise AssertionError("the normalized balanced fiber count changed")
+    balanced_ratio_ordered_collisions = 0
+    for left in range(chart_q):
+        left_value = chart_field.mul(
+            left, chart_field.pow(chart_field.add(left, 1), 2)
+        )
+        for right in range(chart_q):
+            if left == right:
+                continue
+            right_value = chart_field.mul(
+                right, chart_field.pow(chart_field.add(right, 1), 2)
+            )
+            balanced_ratio_ordered_collisions += left_value == right_value
+    if balanced_ratio_ordered_collisions != chart_q - 1:
+        raise AssertionError("the balanced cubic collision count changed")
     shifted_singletons = set(cell_c)
 
     def field_sum(values: list[int]) -> int:
@@ -4164,9 +4314,115 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         "balanced_shifted_diagonal_extraction_checks": (
             shifted_diagonal_extraction_checks
         ),
+        "balanced_ratio_rigidity_triples": balanced_ratio_triples,
+        "balanced_ratio_normalized_cubic_fibers": (
+            len(balanced_ratio_normalized_fibers)
+        ),
+        "balanced_ratio_zero_leading_or_boundary_direction_survivors": 0,
+        "balanced_fourth_newton_product_checks": (
+            balanced_fourth_newton_product_checks
+        ),
+        "balanced_ratio_cubic_ordered_collisions": (
+            balanced_ratio_ordered_collisions
+        ),
+        "balanced_ratio_reversal_checks": balanced_ratio_reversal_checks,
+        "balanced_ordinary_y_profile_variants": 4,
+        "balanced_y_norm_derivative_gcd_degree": chart_q + 1,
+        "balanced_t_norm_derivative_gcd_degree": chart_q - 1,
+        "balanced_etale_factor_degree_caps": [[3, chart_r - 4],
+                                                [4, chart_r - 5]],
     }
 
+    # Exhaust the smallest coefficient space for the new three-norm gate.
+    # This is a finite falsification check, not asymptotic evidence.
     sharp_field = Field(9)
+    sharp_q = sharp_field.q
+    sharp_r = sharp_q // 3
+
+    def sharp_polynomial_value(
+            coefficients: tuple[int, ...], value: int) -> int:
+        result = 0
+        for coefficient in reversed(coefficients):
+            result = sharp_field.add(
+                sharp_field.mul(result, value), coefficient
+            )
+        return result
+
+    sharp_nonzero = tuple(range(1, sharp_q))
+    sharp_low_degree_functions = [
+        tuple(sharp_polynomial_value(coefficients, value)
+              for value in sharp_nonzero)
+        for coefficients in itertools.product(range(sharp_q), repeat=sharp_r)
+    ]
+    sharp_quadratic_roots = {
+        (trace, product): tuple(
+            root for root in range(sharp_q)
+            if sharp_field.add(
+                sharp_field.add(
+                    sharp_field.mul(root, root),
+                    sharp_field.neg(sharp_field.mul(trace, root)),
+                ),
+                product,
+            ) == 0
+        )
+        for trace in range(sharp_q)
+        for product in range(sharp_q)
+    }
+    sharp_split_covers = 0
+    sharp_three_projection_tests = 0
+    sharp_three_projection_survivors = 0
+    for sharp_A_values in sharp_low_degree_functions:
+        for sharp_C_values in sharp_low_degree_functions:
+            local_roots = tuple(
+                sharp_quadratic_roots[trace, product]
+                for trace, product in zip(sharp_A_values, sharp_C_values)
+            )
+            if any(len(roots) != 2 for roots in local_roots):
+                continue
+            sharp_split_covers += 1
+            for sharp_w in range(1, sharp_q):
+                sharp_three_projection_tests += 1
+                y_fibers: Counter[int] = Counter()
+                t_fibers: Counter[int] = Counter()
+                ratio_fibers: Counter[int] = Counter()
+                for position, x_value in enumerate(sharp_nonzero):
+                    u_value = sharp_field.pow(x_value, sharp_r)
+                    shift = sharp_field.mul(sharp_w, u_value)
+                    for y_value in local_roots[position]:
+                        t_value = sharp_field.add(
+                            y_value, sharp_field.neg(shift)
+                        )
+                        ratio_value = sharp_field.mul(
+                            t_value, sharp_field.inv(u_value)
+                        )
+                        y_fibers[y_value] += 1
+                        t_fibers[t_value] += 1
+                        ratio_fibers[ratio_value] += 1
+                target_profile = [1, 1, 1, 2, 2, 2, 2, 2, 3]
+                if (t_fibers[0] != 3
+                        or sorted(t_fibers.values()) != target_profile
+                        or ratio_fibers[0] != 3
+                        or sorted(ratio_fibers.values()) != target_profile):
+                    continue
+                singleton_t = {
+                    value for value, multiplicity in t_fibers.items()
+                    if multiplicity == 1
+                }
+                if (y_fibers[0] != 2
+                        or any(y_fibers[value] not in (0, 3)
+                               for value in singleton_t)
+                        or any(y_fibers[value] not in (1, 4)
+                               for value in range(1, sharp_q)
+                               if value not in singleton_t)
+                        or sum(y_fibers[value] == 4
+                               for value in range(sharp_q)) != sharp_r):
+                    continue
+                sharp_three_projection_survivors += 1
+    if (sharp_split_covers != 3312
+            or sharp_three_projection_tests != 26496
+            or sharp_three_projection_survivors != 0):
+        raise AssertionError("the q=9 balanced three-norm exhaust changed")
+
     minus_one = sharp_field.neg(1)
     omega = next(value for value in range(1, sharp_field.q)
                  if sharp_field.mul(value, value) == minus_one)
@@ -4210,6 +4466,14 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         "distinct_missing_ratio_coordinates": len(set(sharp_ratios)),
         "consequence": "q/3 leading moment-support coefficient is recurrence-sharp",
     }
+    balanced_three_norm_q9_exhaust = {
+        "field_order": sharp_q,
+        "degree_cap": sharp_r - 1,
+        "split_quadratic_covers": sharp_split_covers,
+        "nonzero_shear_parameter_tests": sharp_three_projection_tests,
+        "three_projection_survivors": sharp_three_projection_survivors,
+        "interpretation": "finite falsification check, not asymptotic evidence",
+    }
 
     output.write_text(json.dumps({
         "schema": "c949-sharp-linear-coefficient-audit-v2",
@@ -4240,6 +4504,7 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         ],
         "field_checks": field_checks,
         "q27_chart_compatibility_microcheck": chart_compatibility_microcheck,
+        "q9_balanced_three_norm_exhaust": balanced_three_norm_q9_exhaust,
         "period_four_recurrence_sharpness_microcheck": (
             recurrence_sharpness_microcheck
         ),

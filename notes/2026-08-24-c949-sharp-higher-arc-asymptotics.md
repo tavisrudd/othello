@@ -7,7 +7,7 @@
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 `5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
 reduced to the almost-duplex/near-Rédei/moment conditions
-`(SR18)--(SR24s)`; no
+`(SR18)--(SR24y)`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -2393,6 +2393,321 @@ shifted projection, including the `q-8` Hankel window.  This packages both
 projections sharply, but it still does not prove that no nonlinear cover has
 both properties.
 
+The geometry becomes cleaner if Frobenius is applied to both affine
+coordinates, rather than only to the fiber coordinate.  Put
+
+```text
+u=a^r,                         t=b^r.
+```
+
+This is a semilinear collineation of the affine plane: an original line
+`b=ma+c` becomes `t=m^r u+c^r`.  It preserves all incidences and sends the
+three almost-duplex projections to `u,t,t/u`.  If
+`U=A_0^r` and `E=B_0^r`, the zero-completed first carrier and the full affine
+core become
+
+```text
+S=Frob(H) union (U times {0}),
+B_aff^Frob=S union ({0} times E).                    (SR24t)
+```
+
+Thus `S` has two points above every `u!=0`, while its `t`-fibers have the
+profile `(SR24s)`.  In the balanced branch the shear is now the ordinary
+linear projection
+
+```text
+y=t+wu,
+```
+
+and the cover equation is
+
+```text
+y^2-A(u^3)y+C(u^3)=0.                               (SR24t')
+```
+
+The apparent high degree in `u` is purely Frobenius-lacunary.  More
+importantly, `(SR24a)` applies directly to the `y`-direction.
+
+The second almost-duplex projection decides which direction class this can
+be.  Let `R` be the three singleton values of `t/u=(b/a)^r`.  Summing the
+first powers of that projection over `S` and using
+`W(X)=wX^r+A(X)` gives
+
+```text
+-sum_(rho in R)rho=sum_(X!=0)X^(-r)W(X)=-w.
+```
+
+For the second powers, the local root sum is `W^2+P`; in the balanced branch
+its coefficient at `X^(2r)` is `-w^2`, and every lower term misses the
+required multiplicative frequency.  Hence
+
+```text
+e_1(R)=w,                         e_2(R)=w^2.        (SR24u)
+```
+
+This has two immediate geometric consequences.  If `w=0`, the root
+polynomial of the three distinct nonzero values in `R` would be
+`T^3-e_3(R)`, a cube over the perfect field, impossible.  Thus `w!=0`.
+Moreover substituting `T=-w` in
+
+```text
+T^3-wT^2+w^2T-e_3(R)
+```
+
+gives `-e_3(R)!=0`; hence `-w` is not one of the three infinity-boundary
+directions `R`.  The balanced exceptional direction is therefore neither a
+vertex direction nor an infinity-boundary direction.  It is forced to be one
+of the `q-4` ordinary directions in `(SR24a)`.
+
+This fixes its complete fiber ledger.  Write `g` for the number of values of
+`E` lying on a four-point `B_aff^Frob` fiber in the `y`-direction.  Then
+`0<=g<=3`, and the fibers of `S` under `y` are exactly
+
+```text
+y=0:                    2;
+y in E:                 g values of size 3, 3-g values of size 0;
+y in F_q^* minus E:     r-g values of size 4,
+                        2r-4+g values of size 1.    (SR24v)
+```
+
+In particular the perfect-cube pencil `(SR24m'''')` never has five roots in
+the balanced branch: its exact root counts are those in `(SR24v)`, and its
+maximum is four.  Equivalently, with
+
+```text
+J(Y)=product_(e in E)(Y-e),          Q(Y)=Y^(q-1)-1,
+```
+
+there is a squarefree degree-`r` polynomial `G`, whose roots are precisely
+the ordinary-direction four-fiber values, such that the norm of the balanced
+cover is
+
+```text
+product_(X!=0)(Y^2-A(X)Y+C(X))
+       =Y^2 Q(Y)G(Y)^3/J(Y).                         (SR24v')
+```
+
+Here `X=u^3`; the quotient is a polynomial because every root of `J` lies in
+`F_q^*`, and roots of `G` may lie in `E`.  The unshifted `t`-norm is likewise
+
+```text
+product_(X!=0)(T^2-W(X)T+P(X))
+       =T^3 Q(T)^2/J(T).                             (SR24v'')
+```
+
+Thus the nonlinear balanced survivor has been compressed to two explicit
+split norm identities coupled by the fiberwise shear.  Its ratio singleton
+set is also canonical after scaling: `R/w` is a three-element fiber of
+`Z(Z+1)^2`, since its root polynomial is
+`Z^3-Z^2+Z-e_3(R)/w^3`.  These identities sharply delimit the survivor, but
+they do not yet prove that the two norm factorizations are incompatible for
+arbitrary degree-`r-1` coefficients `A,C`.
+
+The normalized singleton choice is counted exactly.  For
+`f(Z)=Z(Z+1)^2`, division by `x-y` gives
+
+```text
+(f(x)-f(y))/(x-y)
+ =x^2+xy+y^2-x-y+1.
+```
+
+Writing `d=x-y!=0`, the last equation has the unique solution
+`y=-d^2+d-1`.  Hence there are `q-1` ordered collisions with distinct
+arguments.  The critical value zero has the two distinct preimages `0,-1`
+and contributes two; every nonzero three-fiber contributes six.  Therefore
+
+```text
+# normalized admissible fibers R/w=(q-3)/6,
+# unnormalized admissible ratio singleton sets
+                         =(q-1)(q-3)/6.              (SR24u')
+```
+
+At `q=27` these numbers are four and 104.  This is a classification of the
+ratio singleton data, not of the carrier realizing them.
+
+They also identify exactly why the moment/Hankel route stops.  Multiplicity
+three is zero in the coefficient field, so the factor `G^3` contributes
+nothing to any power sum.  If the two displayed norms are called `D_y,D_t`,
+their split multiplicities give
+
+```text
+gcd(D_y,D_y')=Y G(Y)^3,
+gcd(D_t,D_t')=T^3 Q(T)/J(T),                         (SR24v''')
+Y Q(Y)D_y(Y)=G(Y)^3D_t(Y).
+```
+
+Thus `G` is precisely the information discarded by all of `(SR24s')`--
+`(SR24s''')`; it can be recovered as the cube root of
+`gcd(D_y,D_y')/Y`, but not from the moment sequence.  Extending the same
+Hankel calculation cannot close the branch.  A proof must instead constrain
+this degree-`r` four-fiber polynomial through the second carrier, the
+three-cell transversal, or the integer line geometry.
+
+The ratio moments give a second, slanted extraction of the same local Newton
+polynomials.  With `Q_k` as in `(SR24s''')`, one has simultaneously
+
+```text
+-sum_(e in E)e^k
+ =-sum_j [X^(j(q-1))]Q_k(X),
+
+-sum_(rho in R)rho^k
+ =-sum_j [X^(rk-j(q-1))]Q_k(X),              1<=k<=q-2, (SR24w)
+```
+
+where in each line `j` ranges over the indices for which the displayed
+exponent lies between zero and `kr`.  Thus the two singleton sets are the
+characteristic roots of two rank-three diagonal extractions from one
+order-two local sequence.
+
+At `k=1,2` the ordinary diagonal has not yet reached a positive multiple of
+`q-1`, so it first gives
+
+```text
+e_1(E)=A(0),                         e_2(E)=C(0).
+```
+
+The first genuinely product-sensitive instance is `k=4`.  Newton's
+identities for a three-set then give
+
+```text
+[X^(q-1)]Q_4=e_1(E)e_3(E),
+[X^(r+1)]Q_4=w e_3(R).                              (SR24w')
+```
+
+The second equality uses `(SR24u)`; the top coefficient of `Q_4` is `-w^4`,
+and the two ratio diagonals at `4r` and `r+1` supply the displayed sign.
+If the three-cell transversal exists, let `U=A_0^r` be its row set.  Its
+product identity is `e_3(U)e_3(R)=e_3(E)`, so `(SR24w')` compresses the
+first/second-carrier product compatibility to the single coefficient gate
+
+```text
+w [X^(q-1)]Q_4
+ =A(0)e_3(U)[X^(r+1)]Q_4.                           (SR24w'')
+```
+
+This is necessary only in the extendable branch; it does not silently replace
+the two-scalar transversal test `(SR19d)`.  Its value is that a search need
+not carry two independent product ledgers: two coefficients of the first
+carrier's fourth Newton polynomial already contain them.
+
+The entire second projection also has an exact norm form.  Put
+`J_R(D)=product_(rho in R)(D-rho)`.  Since `d=t/u` has three zero values on
+the marked cells, singleton values `R`, and doubleton fibers at every other
+nonzero value,
+
+```text
+product_(X!=0)
+ (D^2-X^(-r)W(X)D+X^(-2r)P(X))
+       =D^3(D^(q-1)-1)^2/J_R(D).                    (SR24x)
+```
+
+Equivalently, for `v=y/u=d+w`,
+
+```text
+product_(X!=0)
+ (V^2-X^(-r)A(X)V+X^(-2r)C(X))
+ =(V-w)^3((V-w)^(q-1)-1)^2/J_R(V-w).               (SR24x')
+```
+
+The negative exponents admit a cleaner removal than clearing denominators.
+Put `Z=X^(-1)` and reverse the two low-degree coefficients,
+
+```text
+A^*(Z)=Z^(r-1)A(Z^(-1)),          C^*(Z)=Z^(r-1)C(Z^(-1)).
+```
+
+Because inversion permutes `F_q^*`, `(SR24x')` is the ordinary polynomial
+resultant identity
+
+```text
+product_(Z!=0)
+ (V^2-ZA^*(Z)V+Z^(r+1)C^*(Z))
+ =(V-w)^3((V-w)^(q-1)-1)^2/J_R(V-w).              (SR24x'')
+```
+
+Thus the reciprocal chart acts by literal coefficient reversal: its trace
+has degree at most `r` and its product has degree at most `2r`.  The remaining
+balanced carrier is one quadratic family whose three projections have the
+explicit norms `(SR24v')`, `(SR24v'')`, and `(SR24x'')`.  This avoids
+introducing an independently chosen second-chart carrier: its entire spectral
+content is already the reversal of the first family.  Proving that this
+three-norm system has no degree-`r-1` solution, or constructing one, is the
+exact nonlinear algebraic closeout.
+
+The hidden factor `G` itself has a lower-degree algebraic avatar.  Split it as
+
+```text
+G_3=gcd(G,J),                    G_4=G/G_3,
+```
+
+where `deg G_3=g<=3`: roots of `G_3` are the values whose deleted axis point
+leaves a three-fiber of `S`, while roots of `G_4` retain four points.  In the
+split étale algebras `K_i=F_q[Y]/(G_i)`, whenever the corresponding factor is
+nonconstant, write `y_bar` for the residue class of `Y`.  Componentwise monic
+gcd and the Chinese remainder theorem give
+unique monic polynomials `H_i in K_i[X]` satisfying
+
+```text
+deg H_i=i,
+H_i divides C(X)-y_bar A(X)+y_bar^2,
+H_i divides X^(q-1)-1,          gcd(H_i,dH_i/dX)=1,  i=3,4. (SR24y)
+```
+
+The respective cofactors have degrees at most `r-4` and `r-5`.  This replaces
+the moving degree-`r` multiplicity-three norm factor by cubic/quartic divisors
+of the fixed split polynomial `X^(q-1)-1`.  At least `r-3` components lie in
+the quartic algebra.  For `q=27`, the two local factor types are cubic by
+degree at most five and quartic by degree at most four.  The minimal
+first-field search can enumerate these factorizations rather than arbitrary
+degree-eight pairs `(A,C)`.
+
+The preceding calculation can be isolated as the following reusable
+structural proposition.
+
+> **Balanced three-norm proposition.**  Let `q=3r`, and suppose a `+1`
+> triangular target carrier has reached the balanced branch of
+> `(SR24m-shear)`.  Then, after the simultaneous semilinear Frobenius change,
+> it is a two-sheeted cover
+> `y^2-A(X)y+C(X)=0` of `F_q^*`, with `deg A,deg C<=r-1` and `X=u^3`.
+> Its shear coefficient satisfies `w!=0`.  The three ratio singletons obey
+> `e_1(R)=w`, `e_2(R)=w^2`, and `-w notin R`; hence the sheared direction is
+> ordinary and has the exact ledger `(SR24v)`.  Consequently there are
+> squarefree polynomials `J,J_R,G` of degrees `3,3,r` for which its three
+> projection norms are exactly `(SR24v')`, `(SR24v'')`, and `(SR24x'')`.
+> Splitting `G` by its overlap with `J`, the level polynomial has the unique
+> cubic/quartic divisors `(SR24y)` of `X^(q-1)-1` over the corresponding
+> étale algebras.
+> For fixed `w`, the possible `R` are precisely `w` times the nonzero
+> three-fibers of `Z(Z+1)^2`, giving `(q-3)/6` choices and
+> `(q-1)(q-3)/6` across all nonzero `w`.  If the carrier
+> is extendable through the singleton transversal, it additionally satisfies
+> the fourth-Newton coefficient gate `(SR24w'')`.
+
+Indeed, `(SR24u)` follows by extracting the first two multiplicative
+frequencies of the ratio projection.  It places the shear in the ordinary
+row of `(SR24a)`, whose integer fiber ledger gives `(SR24v)` and hence the
+first two norms by recording root multiplicities.  Applying the same ledger
+to `t/u`, followed by `Z=X^(-1)`, gives the reversed third norm.  The collision
+calculation for `Z(Z+1)^2` gives the stated finite list, while the two
+diagonals of `Q_4` give the transversal gate.  No classification theorem is
+being smuggled into the proposition: it is a necessary normal form.  Its
+unresolved content is exactly whether these three resultants can coexist with
+the remaining line caps and transversal constraints.
+
+At `q=9` the proposition already gives a short structural exclusion.  The
+ordinary ledger requires three values whose `S`-fibers have size three or
+four, but every level `C-yA+y^2` has degree at most two.  Such a polynomial
+cannot have three or four nonzero roots unless it vanishes identically, in
+which case it has all eight.
+Thus the balanced branch is empty at `q=9`.  As a reproducibility check, the
+audit also exhausts this normal form.
+Among all degree-at-most-two pairs `(A,C)`, exactly 3,312 give a split
+two-sheeted cover over `F_9^*`; testing all eight nonzero shears gives 26,496
+parameter cases.  None has the simultaneous `t`, `t/u`, and ordinary-`y`
+fiber ledgers of the proposition, even before the transversal gate is
+imposed.  The enumeration is not used as asymptotic evidence; for `q>=27`,
+degree alone permits four-fibers and the field-uniform problem remains.
+
 Summarizing, every Frobenius-quadratic carrier satisfies the following exact
 section dichotomy:
 
@@ -2543,6 +2858,18 @@ This places every `+1` triangular core behind a weight-`3q` ternary
 dual-incidence word with a prescribed sign split.  Hull membership is not
 asserted: the existing small-line-cover theorem applies to words also known
 to lie in the line code, and `(SR24k)` by itself proves only dual membership.
+
+The recent few-special-directions theorem does not bridge this gap.  On the
+affine patch, subtracting the origin makes the line sum constant within every
+parallel class: it is `2`, `0`, or `1` according to the direction class in
+`(SR24a)`.  Hence the corresponding ternary multiset has *zero* mod-special
+directions.  Adriaensen--Szőnyi--Weiner Theorem 1.8 explicitly permits this
+zero branch, while their small-weight classification concerns words already
+in the line code `C(2,q)`.  Our word is presently only in `C(2,q)^perp`.
+Therefore neither their degree bound nor their small-weight theorem licenses
+a few-line representation of `g`; a successful code-theoretic closeout would
+need the genuinely new step `g in C(2,q)` (or a direct classification in the
+dual at weight `3q`).
 
 The signed support spectrum is also fixed.  Writing `(p,n)` for the numbers
 of positive and negative coordinates on a line, its projective lines split as
@@ -2929,7 +3256,9 @@ family is lower priority.
   moment triangle `(SR24b)--(SR24d)`, the Frobenius-quadratic normal forms
   `(SR24e)--(SR24g)` (only two independent by `(SR24n)`), the original-line
   root gate, generic/balanced derivative dichotomy, affine-split exclusion,
-  and exact shifted-fiber/moment constraint `(SR24m)--(SR24s)`,
+  exact shifted-fiber/moment constraint, semilinear normalization, and
+  balanced ordinary-direction/norm rigidity and coupled diagonal product gate
+  `(SR24m)--(SR24y)`,
   the coupled Prony/reversal obstruction
   `(SR24n)--(SR24p)`, and the weight-`3q`
   dual word and signed spectrum `(SR24k)--(SR24l')`.  The Vandermonde obstruction
@@ -2937,6 +3266,15 @@ family is lower priority.
   and, more generally, forces at least `q/3-2` completed-fiber frequencies
   and trace degree at least `q-8` in each triangle chart; the leading
   coefficient is recurrence-sharp before the geometric gates are imposed.
+  In the balanced survivor, simultaneous Frobenius normalization now forces
+  the exceptional shear into the ordinary direction class, improves its
+  level cap from five to four, and packages all three projections as one
+  coupled quadratic three-norm system.  The missing datum is exactly the
+  degree-`q/3` full-core four-fiber polynomial `G`: it occurs only as `G^3` and is
+  therefore invisible to every characteristic-three power sum.  Consequently
+  extending the moment/Hankel window is not a closeout strategy; the minimal
+  open step is to rule out (or realize) that three-norm system using the
+  transversal or the integral line geometry.
   The other triangular row requires a linear
   high-secant trade and
   is therefore a less rigid first target.
@@ -3161,10 +3499,13 @@ is the source of `(LB3+)`; the finite searches play no role in that theorem.
   `10.3390/math14071137`, SHA-256
   `417190b17f1fdd152cad6bc02cfb167b8a18952e6cbdf2a4da8ccbb59890e5c9`.
 - Adriaensen--Szőnyi--Weiner, *Multisets with few special directions and small
-  weight codewords in Desarguesian planes*, arXiv:2411.19201v3: **full text**,
+  weight codewords in Desarguesian planes*, *Designs, Codes and Cryptography*
+  94 (2026), Article 35, DOI `10.1007/s10623-025-01777-8`;
+  arXiv:2411.19201v3: **full text**,
   inherited C945 read of Sections 1--7 and revisited here at Definitions
-  1.4--1.5 and Theorems 1.7--1.9 for the projection-function/mod-special-
-  direction dictionary; cache key `arXiv:2411.19201`, SHA-256
+  1.4--1.5, Theorems 1.7--1.9, and the line-code correspondence for the
+  projection-function/mod-special-direction dictionary and the explicit
+  zero-special-direction boundary; cache key `arXiv:2411.19201`, SHA-256
   `0fc810af52d3d70424f72c82878b69d55fa4abb285c344934dfac65587c86c19`.
 - Szőnyi--Weiner, *Stability of `k mod p` multisets and small weight codewords
   of the code generated by the lines of `PG(2,q)`*: **partial**, introduction,
