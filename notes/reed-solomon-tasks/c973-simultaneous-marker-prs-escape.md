@@ -1,8 +1,8 @@
 # C973 — simultaneous-marker PRS escape and all-level Lucas discriminator
 
-**Lane:** `reed-solomon` · **Status:** active — first proof goal complete;
-simultaneous-marker theorem, improved threshold, R11 closure, and R12
-reduction proved; independent review and pointed R11 abundance open
+**Lane:** `reed-solomon` · **Status:** active — second proof sprint started;
+standalone reconstruction of the row-space selector converse and terminal
+`S_3` open is in progress
 
 **Current checkpoint:**
 `c973-2026-08-26-simultaneous-marker-theorem.md` proves direct composite
@@ -23,6 +23,8 @@ reduction of 2--5 pages for a separately allocated integration successor.
 The author-side audit and explicit `ej`/`tt` mystery closeout are
 `c973-2026-08-26-hostile-proof-audit.md` and
 `c973-2026-08-26-sprint-closeout.md`.
+The user-requested second Tao pass and its action gates are recorded in
+`c973-2026-08-26-tao-second-pass.md`.
 
 ## Objective
 
