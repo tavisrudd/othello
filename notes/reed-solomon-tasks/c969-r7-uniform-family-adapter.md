@@ -39,10 +39,12 @@ without growing the registry.
 ## Radius boundary
 
 Formula recognition certifies the syndrome-side family only. The shared
-theorem-domain check remains independent. In particular, no positive deep
-certificate is emitted in the frozen q=7,8,9 radius gap. From q=11 onward the
-R7 radius-six premise is available; for the recurring central family the first
-case is q=32.
+theorem-domain check remains independent. No positive deep certificate is
+emitted for this central family at q=7,9, where the radius remains open. At
+q=8 exhaustive locator replay proves the central point has distance seven;
+together with the separate diagonal tangent certificate this completes the
+deep-hole extraction. From q=11 onward the R7 radius-six premise is available;
+for the recurring central family the next case is q=32.
 
 The all-field R7 theorem leaves no other recurring nonpersistent family:
 outside the bounded q=7,8,9,11 certificate rows, the inventory is persistent

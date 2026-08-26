@@ -73,9 +73,11 @@ defensive reference and regression oracle, not a reachable binary-form
 stratum. The exhaustive structural bound is `O(m r q^2)`. Exact `distance` and
 `decode` now share the structural API's full range `r>=5`, `q>=r`: the locator
 kernel enumeration and final `r`-column NRC basis argument are independent of
-the frozen theorem registry. `classify` deliberately remains R5--R10-only, so
-this scope extension makes no unsupported covering-radius or deep-hole
-assertion; in particular exact distance `r-1` is not called deep at R11+.
+the frozen theorem registry. General `classify` deliberately remains
+R5--R10-only. The one higher-dimensional exception is the prior-art-backed
+even diagonal `r=q-1` tangent orbit, whose exact distance `r` certificate is
+replayed intrinsically; all other R11+ forms remain unsupported, and exact
+distance `r-1` is never called deep without a radius theorem.
 The implementation-level field-operation accounting and quadratic
 symmetric-power recurrence are recorded in
 `c969-canonicalization-complexity.md`.

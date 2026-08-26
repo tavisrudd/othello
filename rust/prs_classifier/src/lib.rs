@@ -122,6 +122,9 @@ pub enum DeepFamilyEvidence {
     Formula {
         invariant: String,
     },
+    ExactDistance {
+        criterion: String,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, PartialEq, Eq)]
@@ -149,7 +152,7 @@ pub struct Canonicalization {
     pub complexity: &'static str,
 }
 
-#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "snake_case")]
 pub enum PersistentKind {
     Tangent,
@@ -1516,7 +1519,16 @@ pub fn verify_deep_certificate(
     certificate: &DeepCertificate,
     transporter_limit: u64,
 ) -> Result<(), Error> {
-    if certificate.schema != DEEP_CERTIFICATE_SCHEMA || certificate.domain_registry_version != 1 {
+    if certificate.schema != DEEP_CERTIFICATE_SCHEMA {
+        return Err(Error::BadDeepCertificate);
+    }
+    if certificate.domain_registry_version == 2 {
+        return verify_even_diagonal_tangent_certificate(certificate, transporter_limit);
+    }
+    if certificate.domain_registry_version == 3 {
+        return verify_q8_r7_exact_certificate(certificate, transporter_limit);
+    }
+    if certificate.domain_registry_version != 1 {
         return Err(Error::BadDeepCertificate);
     }
     let (field, syndrome) =
@@ -1591,11 +1603,241 @@ pub fn verify_deep_certificate(
     Ok(())
 }
 
+const EVEN_DIAGONAL_TANGENT_FAMILY: &str = "char2.diagonal_tangent";
+const EVEN_DIAGONAL_TANGENT_CRITERION: &str =
+    "tangent normal form e_(r-2); degree-(r-1) locator would leave two distinct field elements with zero sum";
+const Q8_R7_EXACT_CRITERION: &str =
+    "exhaustive GF(8)/R7 locator search found no split support through degree six";
+const Q8_R7_RADIUS_SOURCE: &str = "imported:Wu-Ding-Chen-Theorem-17:GF(8)/R7 rho=7";
+
+fn even_diagonal_tangent_canonicalization(
+    request: &Request,
+    field: &Field,
+    syndrome: &[u32],
+    transporter_limit: u64,
+) -> Result<Option<Canonicalization>, Error> {
+    if field.spec.p != 2 || request.redundancy + 1 != field.order() as usize {
+        return Ok(None);
+    }
+    let canonicalization = canonicalize_syndrome(request, transporter_limit)?;
+    let mut normal_form = vec![0; request.redundancy];
+    normal_form[request.redundancy - 2] = 1;
+    let mut normal_request = request.clone();
+    normal_request.syndrome = normal_form;
+    let normal_canonicalization = canonicalize_syndrome(&normal_request, transporter_limit)?;
+    Ok(
+        (canonicalization.canonical_syndrome == normal_canonicalization.canonical_syndrome
+            && persistent_kind(field, syndrome) == PersistentKind::Tangent)
+            .then_some(canonicalization),
+    )
+}
+
+fn even_diagonal_tangent_radius_source(redundancy: usize) -> String {
+    format!("exact-distance-v1:R{redundancy}=q-1 in characteristic two forces rho={redundancy}")
+}
+
+fn verify_even_diagonal_tangent_certificate(
+    certificate: &DeepCertificate,
+    transporter_limit: u64,
+) -> Result<(), Error> {
+    let (field, syndrome) = validate_canonicalization_request(&certificate.request)
+        .map_err(|_| Error::BadDeepCertificate)?;
+    let canonicalization = even_diagonal_tangent_canonicalization(
+        &certificate.request,
+        &field,
+        &syndrome,
+        transporter_limit,
+    )
+    .map_err(|_| Error::BadDeepCertificate)?
+    .ok_or(Error::BadDeepCertificate)?;
+    if certificate.normalized_syndrome != syndrome
+        || certificate.distance != certificate.request.redundancy
+        || certificate.family != EVEN_DIAGONAL_TANGENT_FAMILY
+        || certificate.family_evidence
+            != (DeepFamilyEvidence::ExactDistance {
+                criterion: EVEN_DIAGONAL_TANGENT_CRITERION.into(),
+            })
+        || certificate.canonical_syndrome != canonicalization.canonical_syndrome
+        || certificate.transporter != canonicalization.transporter
+        || certificate.split_free_source != EVEN_DIAGONAL_TANGENT_CRITERION
+        || certificate.radius_source
+            != even_diagonal_tangent_radius_source(certificate.request.redundancy)
+    {
+        return Err(Error::BadDeepCertificate);
+    }
+    Ok(())
+}
+
+fn classify_even_diagonal_tangent(
+    request: &Request,
+    transporter_limit: u64,
+) -> Result<Option<ClassificationResult>, Error> {
+    let (field, syndrome) = validate_canonicalization_request(request)?;
+    let Some(canonicalization) =
+        even_diagonal_tangent_canonicalization(request, &field, &syndrome, transporter_limit)?
+    else {
+        return Ok(None);
+    };
+    let radius_source = even_diagonal_tangent_radius_source(request.redundancy);
+    let deep_certificate = DeepCertificate {
+        schema: DEEP_CERTIFICATE_SCHEMA.into(),
+        domain_registry_version: 2,
+        request: request.clone(),
+        normalized_syndrome: syndrome,
+        distance: request.redundancy,
+        family: EVEN_DIAGONAL_TANGENT_FAMILY.into(),
+        family_evidence: DeepFamilyEvidence::ExactDistance {
+            criterion: EVEN_DIAGONAL_TANGENT_CRITERION.into(),
+        },
+        canonical_syndrome: canonicalization.canonical_syndrome.clone(),
+        transporter: canonicalization.transporter.clone(),
+        split_free_source: EVEN_DIAGONAL_TANGENT_CRITERION.into(),
+        radius_source: radius_source.clone(),
+    };
+    Ok(Some(ClassificationResult {
+        status: VerdictStatus::Deep,
+        distance: Some(request.redundancy),
+        distance_lower_bound: request.redundancy,
+        family: Some(EVEN_DIAGONAL_TANGENT_FAMILY.into()),
+        canonicalization: Some(canonicalization),
+        locator_certificate: None,
+        deep_certificate: Some(deep_certificate),
+        split_free_source: Some(EVEN_DIAGONAL_TANGENT_CRITERION.into()),
+        radius_source: Some(radius_source),
+        note: "exact distance equals the redundancy, so the redundancy upper bound is attained"
+            .into(),
+    }))
+}
+
+fn q8_r7_field(field: &Field, request: &Request) -> bool {
+    field.spec.p == 2 && field.spec.degree == 3 && field.order() == 8 && request.redundancy == 7
+}
+
+fn verify_q8_r7_exact_certificate(
+    certificate: &DeepCertificate,
+    candidate_limit: u64,
+) -> Result<(), Error> {
+    let (field, syndrome) =
+        validate_request(&certificate.request).map_err(|_| Error::BadDeepCertificate)?;
+    if !q8_r7_field(&field, &certificate.request)
+        || !matches!(
+            search_locator(&certificate.request, 6, candidate_limit),
+            Err(Error::NoLocator(6))
+        )
+    {
+        return Err(Error::BadDeepCertificate);
+    }
+    let canonicalization = canonicalize_syndrome(&certificate.request, candidate_limit)
+        .map_err(|_| Error::BadDeepCertificate)?;
+    let persistent = persistent_kind(&field, &syndrome);
+    let frozen = frozen_orbit_lookup(&field, 7, &canonicalization.canonical_syndrome);
+    let formula = formula_family(&field, &syndrome);
+    let replayed_family = match persistent {
+        PersistentKind::Tangent => Some("persistent.tangent"),
+        PersistentKind::Sigma => Some("persistent.sigma"),
+        _ => frozen
+            .as_ref()
+            .map(|record| record.family.as_str())
+            .or_else(|| formula.map(|(family, _)| family)),
+    };
+    if certificate.normalized_syndrome != syndrome
+        || certificate.distance != 7
+        || replayed_family != Some(certificate.family.as_str())
+        || certificate.family_evidence
+            != (DeepFamilyEvidence::ExactDistance {
+                criterion: Q8_R7_EXACT_CRITERION.into(),
+            })
+        || certificate.canonical_syndrome != canonicalization.canonical_syndrome
+        || certificate.transporter != canonicalization.transporter
+        || certificate.split_free_source != Q8_R7_EXACT_CRITERION
+        || certificate.radius_source != Q8_R7_RADIUS_SOURCE
+    {
+        return Err(Error::BadDeepCertificate);
+    }
+    Ok(())
+}
+
+fn classify_q8_r7_exact(
+    request: &Request,
+    locator_candidate_limit: u64,
+    transporter_limit: u64,
+) -> Result<Option<ClassificationResult>, Error> {
+    let (field, syndrome) = validate_request(request)?;
+    if !q8_r7_field(&field, request) {
+        return Ok(None);
+    }
+    match search_locator(request, 6, locator_candidate_limit) {
+        Ok(certificate) => {
+            return Ok(Some(ClassificationResult {
+                status: VerdictStatus::NotDeep,
+                distance: Some(certificate.distance),
+                distance_lower_bound: certificate.distance,
+                family: None,
+                canonicalization: None,
+                locator_certificate: Some(certificate),
+                deep_certificate: None,
+                split_free_source: None,
+                radius_source: Some(Q8_R7_RADIUS_SOURCE.into()),
+                note: "exact locator distance is below the imported GF(8)/R7 radius seven".into(),
+            }));
+        }
+        Err(Error::NoLocator(6)) => {}
+        Err(error) => return Err(error),
+    }
+    let canonicalization = canonicalize_syndrome(request, transporter_limit)?;
+    let persistent = persistent_kind(&field, &syndrome);
+    let frozen = frozen_orbit_lookup(&field, 7, &canonicalization.canonical_syndrome);
+    let formula = formula_family(&field, &syndrome);
+    let family = match persistent {
+        PersistentKind::Tangent => Some("persistent.tangent".to_string()),
+        PersistentKind::Sigma => Some("persistent.sigma".to_string()),
+        _ => frozen
+            .as_ref()
+            .map(|record| record.family.clone())
+            .or_else(|| formula.map(|(family, _)| family.into())),
+    }
+    .ok_or(Error::BadDeepCertificate)?;
+    let deep_certificate = DeepCertificate {
+        schema: DEEP_CERTIFICATE_SCHEMA.into(),
+        domain_registry_version: 3,
+        request: request.clone(),
+        normalized_syndrome: syndrome,
+        distance: 7,
+        family: family.clone(),
+        family_evidence: DeepFamilyEvidence::ExactDistance {
+            criterion: Q8_R7_EXACT_CRITERION.into(),
+        },
+        canonical_syndrome: canonicalization.canonical_syndrome.clone(),
+        transporter: canonicalization.transporter.clone(),
+        split_free_source: Q8_R7_EXACT_CRITERION.into(),
+        radius_source: Q8_R7_RADIUS_SOURCE.into(),
+    };
+    Ok(Some(ClassificationResult {
+        status: VerdictStatus::Deep,
+        distance: Some(7),
+        distance_lower_bound: 7,
+        family: Some(family),
+        canonicalization: Some(canonicalization),
+        locator_certificate: None,
+        deep_certificate: Some(deep_certificate),
+        split_free_source: Some(Q8_R7_EXACT_CRITERION.into()),
+        radius_source: Some(Q8_R7_RADIUS_SOURCE.into()),
+        note: "exhaustive locator failure attains the imported GF(8)/R7 radius seven".into(),
+    }))
+}
+
 pub fn classify(
     request: &Request,
     locator_candidate_limit: u64,
     transporter_limit: u64,
 ) -> Result<ClassificationResult, Error> {
+    if let Some(result) = classify_even_diagonal_tangent(request, transporter_limit)? {
+        return Ok(result);
+    }
+    if let Some(result) = classify_q8_r7_exact(request, locator_candidate_limit, transporter_limit)?
+    {
+        return Ok(result);
+    }
     let (field, syndrome) = validate_request(request)?;
     let split_degree = request.redundancy - 2;
     let persistent = persistent_kind(&field, &syndrome);
@@ -2605,6 +2847,218 @@ mod tests {
         let certificate = search_exact_locator(&request(field_spec, 11, syndrome), 10_000).unwrap();
         assert_eq!(certificate.distance, 2);
         verify_certificate(&certificate).unwrap();
+    }
+
+    #[test]
+    fn even_diagonal_tangent_resolves_q8_r7_radius() {
+        let field_spec = FieldSpec {
+            p: 2,
+            degree: 3,
+            modulus: vec![1, 1, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let mut syndrome = vec![0; 7];
+        syndrome[5] = 1;
+        let input = request(field_spec.clone(), 7, syndrome);
+
+        let exact = search_exact_locator(&input, 100_000).unwrap();
+        assert_eq!(exact.distance, 7);
+        let result = classify(&input, 100_000, 10_000).unwrap();
+        assert_eq!(result.status, VerdictStatus::Deep);
+        assert_eq!(result.distance, Some(7));
+        assert_eq!(result.family.as_deref(), Some(EVEN_DIAGONAL_TANGENT_FAMILY));
+        let certificate = result.deep_certificate.unwrap();
+        verify_deep_certificate(&certificate, 10_000).unwrap();
+
+        let mut corrupted = certificate;
+        corrupted.family_evidence = DeepFamilyEvidence::ExactDistance {
+            criterion: "corrupt".into(),
+        };
+        assert_eq!(
+            verify_deep_certificate(&corrupted, 10_000),
+            Err(Error::BadDeepCertificate)
+        );
+
+        let mut nearby = vec![0; 7];
+        nearby[5] = 1;
+        nearby[6] = 1;
+        let nearby_input = request(field_spec, 7, nearby);
+        assert_eq!(
+            search_exact_locator(&nearby_input, 100_000)
+                .unwrap()
+                .distance,
+            6
+        );
+        assert_eq!(
+            classify(&nearby_input, 100_000, 10_000).unwrap().status,
+            VerdictStatus::NotDeep
+        );
+
+        let mut central = vec![0; 7];
+        central[3] = 1;
+        let central_result = classify(
+            &request(
+                FieldSpec {
+                    p: 2,
+                    degree: 3,
+                    modulus: vec![1, 1, 0, 1],
+                    encoding: "polynomial-basis-base-p-integer-v1".into(),
+                },
+                7,
+                central,
+            ),
+            100_000,
+            10_000,
+        )
+        .unwrap();
+        assert_eq!(central_result.status, VerdictStatus::Deep);
+        assert_eq!(central_result.distance, Some(7));
+        assert_eq!(central_result.family.as_deref(), Some("r7.char2_central"));
+        verify_deep_certificate(&central_result.deep_certificate.unwrap(), 100_000).unwrap();
+    }
+
+    #[test]
+    fn even_diagonal_tangent_classifies_gf16_r15() {
+        let field_spec = FieldSpec {
+            p: 2,
+            degree: 4,
+            modulus: vec![1, 1, 0, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let field = Field::new(field_spec.clone()).unwrap();
+        let mut syndrome = vec![0; 15];
+        syndrome[13] = 1;
+        let result = classify(
+            &request(field_spec.clone(), 15, syndrome.clone()),
+            1,
+            20_000,
+        )
+        .unwrap();
+        assert_eq!(result.status, VerdictStatus::Deep);
+        assert_eq!(result.distance, Some(15));
+        verify_deep_certificate(&result.deep_certificate.unwrap(), 20_000).unwrap();
+
+        let transformed = apply_semilinear(&field, &syndrome, 2, [1, 1, 1, 0])
+            .unwrap()
+            .0;
+        let transformed_result =
+            classify(&request(field_spec, 15, transformed), 1, 20_000).unwrap();
+        assert_eq!(transformed_result.status, VerdictStatus::Deep);
+        verify_deep_certificate(&transformed_result.deep_certificate.unwrap(), 20_000).unwrap();
+    }
+
+    #[test]
+    #[ignore = "R7/q=8 complete distance-extraction audit"]
+    fn audit_q8_r7_split_free_distances() {
+        let field_spec = FieldSpec {
+            p: 2,
+            degree: 3,
+            modulus: vec![1, 1, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let field = Field::new(field_spec.clone()).unwrap();
+        let registry: FrozenOrbitRegistry =
+            serde_json::from_str(include_str!("../data/frozen-orbits-v1.json")).unwrap();
+        let mut frozen_histogram = std::collections::BTreeMap::new();
+        let mut frozen_deep = Vec::new();
+        for record in registry
+            .records
+            .iter()
+            .filter(|record| record.q == 8 && record.redundancy == 7)
+        {
+            let input = request(
+                field_spec.clone(),
+                7,
+                record.canonical_representative.clone(),
+            );
+            let distance = search_exact_locator(&input, 100_000).unwrap().distance;
+            assert_eq!(
+                classify(&input, 100_000, 10_000).unwrap().status,
+                if distance == 7 {
+                    VerdictStatus::Deep
+                } else {
+                    VerdictStatus::NotDeep
+                }
+            );
+            *frozen_histogram.entry(distance).or_insert(0usize) += 1;
+            if distance == 7 {
+                frozen_deep.push((
+                    record.canonical_representative.clone(),
+                    record.semilinear_orbit_size,
+                ));
+            }
+        }
+
+        let mut persistent_orbits = BTreeSet::new();
+        for constant in 0..field.order() {
+            for linear in 0..field.order() {
+                for initial in (0..field.order())
+                    .map(|second| [1, second])
+                    .chain(std::iter::once([0, 1]))
+                {
+                    let mut syndrome = vec![initial[0], initial[1]];
+                    while syndrome.len() < 7 {
+                        let i = syndrome.len();
+                        syndrome.push(field.add(
+                            field.mul(linear, syndrome[i - 1]),
+                            field.mul(constant, syndrome[i - 2]),
+                        ));
+                    }
+                    let kind = persistent_kind(&field, &syndrome);
+                    if !matches!(kind, PersistentKind::Tangent | PersistentKind::Sigma) {
+                        continue;
+                    }
+                    let canonical =
+                        canonicalize_syndrome(&request(field_spec.clone(), 7, syndrome), 10_000)
+                            .unwrap()
+                            .canonical_syndrome;
+                    persistent_orbits.insert((kind, canonical));
+                }
+            }
+        }
+        let mut persistent_histogram = std::collections::BTreeMap::new();
+        let mut persistent_deep = Vec::new();
+        for (kind, syndrome) in &persistent_orbits {
+            let input = request(field_spec.clone(), 7, syndrome.clone());
+            let distance = search_exact_locator(&input, 100_000).unwrap().distance;
+            assert_eq!(
+                classify(&input, 100_000, 10_000).unwrap().status,
+                if distance == 7 {
+                    VerdictStatus::Deep
+                } else {
+                    VerdictStatus::NotDeep
+                }
+            );
+            *persistent_histogram
+                .entry((*kind, distance))
+                .or_insert(0usize) += 1;
+            if distance == 7 {
+                let mut orbit = BTreeSet::new();
+                for exponent in 0..field.spec.degree {
+                    for matrix in normalized_pgl_matrices(&field) {
+                        orbit.insert(
+                            apply_semilinear(&field, syndrome, exponent, matrix)
+                                .unwrap()
+                                .0,
+                        );
+                    }
+                }
+                persistent_deep.push((syndrome.clone(), orbit.len()));
+            }
+        }
+        assert_eq!(frozen_histogram, [(6, 45), (7, 1)].into_iter().collect());
+        assert_eq!(frozen_deep, vec![(vec![0, 0, 0, 1, 0, 0, 0], 1)]);
+        assert_eq!(
+            persistent_histogram,
+            [
+                ((PersistentKind::Tangent, 6), 1),
+                ((PersistentKind::Tangent, 7), 1),
+                ((PersistentKind::Sigma, 6), 2),
+            ]
+            .into_iter()
+            .collect()
+        );
+        assert_eq!(persistent_deep, vec![(vec![0, 0, 0, 0, 0, 1, 0], 9)]);
     }
 
     #[test]

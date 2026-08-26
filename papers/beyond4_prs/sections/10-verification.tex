@@ -114,5 +114,9 @@ replayable exact nearest-error certificates for every $r\geq5$ with
 $q\geq r$.  Its locator candidates are streamed, so the candidate budget
 bounds search time rather than allocated locator storage.  This broader
 algorithmic domain is not used to promote an R11-or-higher syndrome to a deep
-hole: such a promotion still requires an independently proved covering radius
-and family exhaustion.
+hole without an independently proved covering radius and family exhaustion.
+The one enabled higher-redundancy exception is the even diagonal $r=q-1$:
+the implementation replays the $e_{r-2}$ terminal-locator obstruction and
+imports the dimension-two radius theorem of
+\cite[Thm.~17(1)]{WuDingChen2023}.  This is an explicit certified family, not
+a complete R11-or-higher classification.

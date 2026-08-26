@@ -137,8 +137,9 @@ If search also fails at degree `r-1`, choose any `r` distinct NRC columns.
 Their projective Vandermonde matrix is invertible. Its solution cannot have a
 zero coefficient, since that would be a locator-supported representation of
 weight at most `r-1`. This proves the final weight-`r` branch used by the
-exact decoder. In particular, it does not turn the separate R7 `q=7,8,9`
-covering-radius classification gap into a false radius claim.
+exact decoder. It does not turn the R7 `q=7,9` radius gaps into a false claim.
+At q=8, however, its exhaustive terminal replay resolves every frozen and
+persistent orbit: only the diagonal tangent and central nucleus reach seven.
 
 ## Regression boundary
 

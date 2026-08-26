@@ -29,10 +29,13 @@ locator, its coefficient vector, and the Hankel-kernel basis, rather than all
 candidates allowed by the budget. This is the concrete C962-derived
 implementation improvement.
 
-`classify` intentionally remains R5--R10-only. In particular, exact distance
-`r-1` at R11+ is not a deep-hole theorem: promotion still requires an
-independent covering-radius result. This is the strongest honest current
-beyond-R10 coding statement.
+General `classify` intentionally remains R5--R10-only. One exact imported
+exception is now enabled: for even `q` and `r=q-1`, the distinguished tangent
+normal-form orbit has exact distance and covering radius `r`. In particular,
+exact distance `r-1` at R11+ is still not promoted without an independent
+covering-radius result. At GF(8)/R7, combining that radius with exhaustive
+distance extraction closes the entire classification: exactly the
+nine-direction diagonal tangent orbit and fixed central nucleus are deep.
 
 ## Closest binary-form algorithmic literature
 
@@ -74,16 +77,22 @@ irreducible/smooth-form algorithms.
 
 Zhang--Wan establish PRS covering-radius and deep-hole results in stated
 ranges, and Zhang--Wan--Kaipa report complete deep-hole classification through
-redundancy four. Neither source gives the R11+ covering-radius theorem that
-would be needed to turn C969 canonical strata or exact distance `r-1` into
-deep-hole classes.
+redundancy four. There is an important diagonal exception to the otherwise
+missing R11+ radius input: Wu--Ding--Chen Theorem 17 proves radius `q-1` for
+even-field `PRS(2)`, and Xu gives the associated explicit deep family. C969 now
+imports that theorem through its intrinsic `e_(r-2)` syndrome orbit and exact
+locator certificate. These sources do not promote general distance `r-1`
+strata at R11+.
 ([arXiv:1605.02423](https://arxiv.org/abs/1605.02423),
-[arXiv:1901.05445](https://arxiv.org/abs/1901.05445))
+[arXiv:1901.05445](https://arxiv.org/abs/1901.05445),
+[arXiv:2312.05534](https://arxiv.org/abs/2312.05534),
+[Xu 2023](https://doi.org/10.1051/wujns/2023281015))
 
 Consequently the paper upgrade has two levels:
 
-- **mathematical headline unchanged:** exact deep-hole classifications remain
-  those proved through R10 in the manuscript's field ranges;
+- **main fixed-level headline unchanged:** exact classifications remain those
+  proved through R10 in the manuscript's field ranges, while the imported
+  even diagonal family supplies an arbitrary-redundancy deep orbit;
 - **artifact and algorithm scope substantially enlarged:** exact semilinear
   orbit canonicalization and exact nearest-error decoding now work at R11 and
   every higher admissible redundancy, with R11--R17 structural regression

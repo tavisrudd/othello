@@ -12,8 +12,8 @@ This is the C969 implementation crate.  Its current executable slice provides:
   families and the characteristic-three nucleus/wild families;
 - the uniform R6 odd-binary third-nucleus adapter, including its exact
   extension-degree toggle;
-- the uniform R7 odd-binary central-nucleus adapter, kept separate from the
-  q=7,8,9 radius gap;
+- the uniform R7 odd-binary central-nucleus adapter, with complete q=8 exact
+  distance extraction and the q=7,9 radius gap kept separate;
 - exact tangent-family canonicalization in `m*q*(q-1)` transports and
   sigma canonicalization in `m*(q^2-1)` on the rootless-form stratum and
   `O(m*r*q)` on the simple-root stratum; these exhaust persistent sigma, while
@@ -37,10 +37,14 @@ redundancy `r>=5` with `q>=r`. The exact tangent and binary-form lex-coset
 proofs apply unchanged. Exact coding operations (`distance` and `decode`) now
 accept the same range: exhaustive locator search through degree `r-1`, followed
 by an arbitrary `r`-column NRC basis, is dimension-independent and returns a
-replayable nearest-word certificate. `classify` remains restricted to
-R5--R10; in particular, no higher-dimensional canonical form or exact distance
-`r-1` is promoted to a deep-hole verdict without an independent covering-radius
-theorem-domain row. R11 tangent and sigma fixtures and R12--R13 multiple-root fixtures over
+replayable nearest-word certificate. General `classify` remains restricted to
+R5--R10, but one prior-art-backed diagonal family is enabled in every even
+field: when `r=q-1`, the exact orbit of the tangent normal form `e_(r-2)` has
+distance and covering radius `r`. Its version-2 positive certificate replays
+the terminal locator coefficient and two-element-complement obstruction. No
+other higher-dimensional canonical form or exact distance `r-1` is promoted
+without an independent covering-radius theorem-domain row. R11 tangent and
+sigma fixtures and R12--R13 multiple-root fixtures over
 `F_13` are checked against all 2,184 explicit PGL transports. A slow ignored
 regression checks GF(16)/R11 against all 16,320 semilinear transports, and a
 GF(16)/R16 fixture exercises the full-length `r=q` structural boundary. Slow
@@ -61,9 +65,14 @@ operations per transport; see the
 [full accounting](../../notes/reed-solomon-tasks/c969-canonicalization-complexity.md).
 
 `classify` returns witness-backed `NOT_DEEP`, persistent-family `DEEP`, and
-frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. `canonicalize` uses
+frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. At GF(8)/R7 it is
+complete: the nine-direction diagonal tangent orbit and the fixed central
+nucleus are deep, while every other split-free orbit has distance six.
+`canonicalize` uses
 proved lex-coset charts on every binary form; the explicit group action remains
-as a defensive reference path. Further R8--R10 nonpersistent formula adapters
+as a defensive reference path. It additionally returns prior-art-backed
+`DEEP` for the even `r=q-1` diagonal tangent orbit, including GF(16)/R15.
+Further R8--R10 nonpersistent formula adapters
 remain open. `distance` and `decode` are exact for every `r>=5`, `q>=r`, within their explicit
 candidate budget: after degrees through `r-1` they use an arbitrary NRC basis
 at degree `r`, whose coefficients are forced nonzero by the failed lower

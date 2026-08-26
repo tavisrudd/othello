@@ -8,7 +8,7 @@ boundaries remain separate.
 |---|---|---|---|---|
 | R5 | Complete redundancy-five classification | all prime powers q >= 7 | exact sporadic fields 7,8,9,11,13,17,19 | printed cubic-pencil proof plus Certificate R5 |
 | R6 | Complete redundancy-six classification | all prime powers q >= 7 | bounded exception delta and recurring odd-binary nucleus orbit | printed depth-one proof plus R6/R6-NF certificates |
-| R7 | Complete split-free classification | all prime powers q >= 7; deep holes for q >= 11 | no radius promotion at q=7,8,9 | printed depth-two proof plus compact R7 record and direct-locus replay |
+| R7 | Complete split-free classification | all prime powers q >= 7; complete deep holes for q=8 and q >= 11 | radius open at q=7,9 | printed depth-two proof plus compact R7 record, direct-locus replay, imported even-diagonal radius, and exact q8 distance extraction |
 | Polar escape | Finite-depth coherent marked contraction | arbitrary finite depth under explicit stagewise data | supplies neither carrier geometry nor radius | printed construction; contraction/lifting algebra kernel checked |
 | Recursive carrier | Exact reduced contained carrier | every r >= 6, fibrewise over each characteristic | persistent scheme plus one maximal adjacent-zero Lucas carrier; no uniform nilpotent integral model | printed reduced-prime, Pascal, density, and generic-point proofs; stable-component replay; kernel-checked density/selection |
 | Uniform consequence | Conditional split-free containment and high-characteristic classification | q >= 6r-15+floor(2 sqrt(6r-17)) | requires explicit stagewise lower packages; exact deep holes when these hold and char(F_q) > r-1 | recursive carrier plus stated package hypothesis and Seroussi--Roth--Dür radius route |

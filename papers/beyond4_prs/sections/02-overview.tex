@@ -118,8 +118,9 @@ Red. & Field range & Split-free geometry & Deep holes and radius
 \midrule
 \(5\) & \(q\geq7\) & Complete & Complete; \(\rho=4\) & None\\
 \(6\) & \(q\geq7\) & Complete & Complete; \(\rho=5\) & None\\
-\(7\) & \(q\geq7\) & Complete & Complete for \(q\geq11\) & Radius at
-\(7,8,9\)\\
+\(7\) & \(q\geq7\) & Complete & Complete for \(q\geq11\) and at $q=8$;
+there \(\rho=7\) and exactly ten directions in two orbits are deep & Radius
+at $q=7,9$\\
 \(8\) & \(q\geq43\) & Persistent-only & Complete; \(\rho=7\) & Below range\\
 \(9\) & \(q\geq53\) & Persistent-only & Complete; \(\rho=8\) & Below range\\
 \(10\) & \(q\geq59\) & Persistent-only & Complete; \(\rho=9\) & Below range\\
@@ -134,6 +135,20 @@ Lucas arithmetic in small characteristic\\
 Here \(Q_r=6r-15+\lfloor2\sqrt{6r-17}\rfloor\).  The R7 finite record
 is exposed only as a four-field exception delta beyond the uniform
 \(T/T^6\) spine: the full fourteen-field ledger remains in the supplement.
+At the even diagonal $r=q-1$, equivalently the dimension-two code,
+\cite[Thm.~17(1)]{WuDingChen2023} gives \(\rho=r\), and
+\cite{Xu2023} gives the corresponding explicit deep family.  In the syndrome
+coordinates used here its distinguished direction is $e_{r-2}$: a split
+degree-$(r-1)$ locator would require a $(q-2)$-subset of \(\F_q\) of sum
+zero, whose two-element complement would consist of distinct elements with
+zero sum, impossible in characteristic two.  This supplies an explicit deep
+direction at every such redundancy (for example R15 over \(\F_{16}\)); it is
+an imported diagonal family, not a complete higher-redundancy classification.
+At $q=8$/R7 the finite extraction is complete: among the 46 frozen
+nonpersistent semilinear representatives, only the fixed central nucleus has
+distance seven, and among the four persistent representatives only the
+nine-direction diagonal tangent orbit does. Thus there are exactly ten
+projective deep-hole directions.
 
 \noindent\emph{Relation to previous work.}
 The tangent and conjugate-secant families and the coding/normal-rational

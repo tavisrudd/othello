@@ -16,7 +16,7 @@ The exact code-level classification surface is:
 |---:|---|---|---|
 | 5 | complete for every prime power `q>=7` | `rho=4` on the same range | complete |
 | 6 | complete for every prime power `q>=7` | `rho=5` on the same range | complete |
-| 7 | complete for every prime power `q>=7` | `rho=6` only for `q>=11` | `UNRESOLVED` on split-free inputs at `q=7,8,9`; complete from 11 |
+| 7 | complete for every prime power `q>=7` | `rho=6` for `q>=11`; `rho=7` at `q=8` | complete at `q=8` (nine diagonal-tangent directions plus the central nucleus); radius unresolved at `q=7,9`; complete from 11 |
 | 8 | persistent-only for `q>=43` | `rho=7` on the same range | complete from 43; below range unsupported |
 | 9 | persistent-only for `q>=53` | `rho=8` on the same range | complete from 53; below range unsupported |
 | 10 | persistent-only for `q>=59` | `rho=9` on the same range | complete from 59; below range unsupported |
@@ -78,7 +78,8 @@ representative is stated.
 | R5 sporadic | `q=9`, R5 | `(1,0,0,1,2)` | `DEEP`; certified gcd-one S3 pencil; orbit size 180, stabilizer 4 |
 | R6 binary nucleus | `q=8`, R6 | `(0,0,0,1,0,0)` | `DEEP`; `m=3` odd; orbit size 9, stabilizer 56 |
 | R6 sporadic | `q=8`, R6 | `(1,0,1,3,5,2)` | `DEEP`; certified trivial-gcd net; orbit size 168, stabilizer 3 |
-| R7 central nucleus | `q=8`, R7 | `(0,0,0,1,0,0,0)` | split-free, but code verdict `UNRESOLVED` because the radius premise is absent |
+| R7 diagonal tangent | `q=8`, R7 | `(0,0,0,0,0,1,0)` | `DEEP` at exact distance seven; terminal locator/complement replay and imported `rho=7` |
+| R7 central nucleus | `q=8`, R7 | `(0,0,0,1,0,0,0)` | `DEEP`; exhaustive locator failure through degree six, fixed semilinear orbit, and imported `rho=7` |
 | R7 sporadic | `q=7`, R7 | `(0,0,0,0,1,0,0)` | split-free certified; code verdict `UNRESOLVED` for the same radius gap |
 | R8 persistent tangent | `q=43`, R8 | `e_6` | `DEEP`; persistent rational-square gcd and `rho=7` |
 | R9 persistent tangent | `q=53`, R9 | `e_7` | `DEEP`; persistent rational-square gcd and `rho=8` |

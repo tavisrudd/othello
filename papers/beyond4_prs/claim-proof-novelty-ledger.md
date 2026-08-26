@@ -30,7 +30,7 @@ is used to infer a covering radius or an unrestricted geometric statement.
 | HC | conditional high-characteristic exact classification above Q_r | DERIVED / IMPORTED-1 | with the stagewise packages, char(F_q) > r-1 makes the Lucas carrier empty; Seroussi--Roth and Dür supply radius promotion |
 | R6 | complete redundancy-six deep holes for q >= 7 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | R6/R6-NF certificates and exact radius endpoint |
 | R7-SF | complete redundancy-seven split-free classification for q >= 7 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | uniform T/T^6 spine from q >= 13; central odd-binary singleton separate; exception delta only at 7,8,9,11 |
-| R7-DH | redundancy-seven deep holes for q >= 11 | DERIVED / IMPORTED-1 | no promotion at q=7,8,9 |
+| R7-DH | complete redundancy-seven deep holes for q=8 and q>=11 | DERIVED / IMPORTED-1 / CERTIFIED | Wu--Ding--Chen gives `rho=7` at q=8; exact extraction over 46 frozen and four persistent semilinear representatives leaves the nine-direction diagonal tangent orbit and fixed central nucleus, ten projective directions total; no radius promotion at q=7,9 |
 | R7-DL | direct-locus finite completeness replay | CERTIFIED | shares the direct-locus engine, R5 field layer, and R6 pointed theorem from q >= 16; not a second field implementation |
 | R8 | persistent-only deep holes for q >= 43 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | three-marker package and Certificate R8 |
 | R9 | persistent-only deep holes for q >= 53 | MANUSCRIPT / CERTIFIED / KERNEL-CONDITIONAL | residual-quadratic slice, characteristic-seven bridge, Certificate R9 |
@@ -56,6 +56,7 @@ is used to infer a covering radius or an unrestricted geometric statement.
 |---|---|---|---|
 | SW-CAN | exact semilinear lex canonical form and transporter for every nonzero binary form with `r>=5`, `q>=r` | IMPLEMENTED / DIFFERENTIAL-CERTIFIED / QUALIFIED-NOVELTY | all rational-root multiplicity strata, including characteristic-two and Lucas degeneracies; `O(m r q^2)` retained transports; fixed-degree quartic orbit classifications, smooth-form isomorphism algorithms, and irreducible-place enumeration are prior art and delimit the claim |
 | SW-DEC | exact syndrome distance and nearest-error certificate for every `r>=5`, `q>=r`, within the explicit candidate budget | IMPLEMENTED / CERTIFICATE-REPLAY | exhaustive locator degrees through `r-1`, then an `r`-column NRC basis; streamed locator enumeration; no radius theorem and no R11+ deep-hole promotion |
+| SW-EVEN-DIAG | the `e_(r-2)` semilinear orbit is certified deep for every even `q` at `r=q-1` | PRIOR-ART / IMPORTED / CERTIFICATE-REPLAY | Wu--Ding--Chen Thm. 17 supplies `rho(PRS(2))=q-1`; Xu 2023 supplies the explicit family; C969 replays the intrinsic terminal-locator/two-element-complement criterion and orbit transporter, including GF(8)/R7 and GF(16)/R15; at q=8 a separate exhaustive certificate also finds the fixed central deep direction and proves all other split-free orbits shallow |
 
 The source-by-source comparison and the C949/C962 transfer boundary are in
 `notes/reed-solomon-tasks/c969-literature-and-paper-upgrade.md`.
