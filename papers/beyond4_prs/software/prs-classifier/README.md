@@ -1,6 +1,7 @@
 # PRS structural classifier
 
-This is the C969 implementation crate.  Its current executable slice provides:
+This is the companion implementation for *Projective Reed--Solomon deep holes
+beyond redundancy four*. Its current executable slice provides:
 
 - exact polynomial-basis arithmetic over explicitly represented finite fields;
 - projective syndrome normalization;
@@ -61,8 +62,7 @@ canonicalization, where `m` is the field extension degree. This is strictly
 below full `m*(q^3-q)` enumeration when `r` is treated as the fixed redundancy;
 the implementation retains that enumeration as its independent reference. The
 symmetric-power action uses adjacent exact-linear-factor rows in `O(r^2)` field
-operations per transport; see the
-[full accounting](../../notes/reed-solomon-tasks/c969-canonicalization-complexity.md).
+operations per transport; see the [full accounting](docs/complexity.md).
 
 `classify` returns witness-backed `NOT_DEEP`, persistent-family `DEEP`, and
 frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. At GF(8)/R7 it is
@@ -89,9 +89,9 @@ separate locator selection cost from root-factorization cost.
 
 The generic exact terminal fallback still enumerates the degree-`r-1` locator
 hyperplane.  For R5--R7 it is now reached only as the bounded-small-field and
-defensive correctness branch after the 12-point selector.  The proof and
-degree count are recorded in
-`notes/reed-solomon-tasks/c969-terminal-hyperplane-solver.md`.
+defensive correctness branch after the 12-point selector. The proof and
+degree count are summarized in
+[`docs/terminal-hyperplane-solver.md`](docs/terminal-hyperplane-solver.md).
 
 `verify-certificate` accepts both `c969-locator-certificate-v1` negative
 witnesses and `c969-deep-certificate-v1` positive certificates.  A deep
@@ -101,9 +101,22 @@ certificate is emitted only for `DEEP`, never for `UNRESOLVED` or
 The reproducible benchmark harness is built and run with:
 
 ```text
-cargo run --release --manifest-path rust/prs_classifier/Cargo.toml \
+cargo run --release --manifest-path software/prs-classifier/Cargo.toml \
   --bin c969_benchmark -- --iterations 10 --extension-fields
 ```
 
-Its selector, projective-oracle, canonicalization, classification, and replay
-rows are documented in `notes/reed-solomon-tasks/c969-benchmark-v1.md`.
+When run from this directory, omit `--manifest-path`. Its selector,
+projective-oracle, canonicalization, classification, and replay rows are
+documented in [`docs/benchmarks.md`](docs/benchmarks.md).
+
+## Repository boundary
+
+This directory is deliberately self-contained. `data/theorem-domain-v1.json`
+is the fail-closed theorem registry used by positive deep certificates, while
+`data/frozen-orbits-v1.json` records the frozen finite exceptional orbits.
+Neither file silently promotes generic computation into a covering-radius
+theorem. See [`docs/theorem-boundary.md`](docs/theorem-boundary.md) and
+[`docs/certificate-schemas.md`](docs/certificate-schemas.md).
+
+The software is licensed under the MIT License. The surrounding paper and its
+non-software material are licensed separately under CC BY 4.0.

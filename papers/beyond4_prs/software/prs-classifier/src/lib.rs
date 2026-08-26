@@ -1434,10 +1434,9 @@ pub fn frozen_orbit_lookup(
 }
 
 fn theorem_domain_registry() -> TheoremDomainRegistry {
-    let registry: TheoremDomainRegistry = serde_json::from_str(include_str!(
-        "../../../notes/reed-solomon-tasks/c969-theorem-domain-v1.json"
-    ))
-    .expect("frozen theorem-domain registry must parse");
+    let registry: TheoremDomainRegistry =
+        serde_json::from_str(include_str!("../data/theorem-domain-v1.json"))
+            .expect("frozen theorem-domain registry must parse");
     assert_eq!(registry.schema, "c969-theorem-domain-v1");
     assert_eq!(registry.registry_version, 1);
     registry

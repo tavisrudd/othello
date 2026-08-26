@@ -5,7 +5,7 @@
 ## Frozen truth boundary
 
 The machine registry is
-`notes/reed-solomon-tasks/c969-theorem-domain-v1.json`.  It pins the current
+`papers/beyond4_prs/software/prs-classifier/data/theorem-domain-v1.json`.  It pins the current
 Version 2 theorem map and the load-bearing R5, R6, R7, and binary-R10
 certificates to authority commit `9da3651b5f1e0cd390f8fb40f74415e0fedc0b0e`.
 The public classifier must fail closed if any pinned hash changes.
