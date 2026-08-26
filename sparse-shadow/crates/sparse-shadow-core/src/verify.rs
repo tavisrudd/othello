@@ -102,7 +102,7 @@ pub fn validate(input: &InputArtifact) -> Result<VerificationReport, ShadowError
             checked_automorphisms = validate_paper_iv(value)?;
         }
         ProfileInput::PaperVChordalConference(value) => {
-            validate_gate("paper_v_chordal_conference", &value.gate)?;
+            checked_automorphisms = validate_paper_v(value)?;
         }
     }
     Ok(VerificationReport {
@@ -135,6 +135,7 @@ pub fn verify_certificate(
         "paper-i-ir-exhaustion/v1" => reference_canonicalize(input)?,
         "paper-ii-declared-action-exhaustion/v1" => reference_canonicalize_paper_ii(input)?,
         "paper-iv-weighted-scheme-ir-exhaustion/v1" => reference_canonicalize_paper_iv(input)?,
+        "paper-v-marked-conference-action-exhaustion/v1" => reference_canonicalize_paper_v(input)?,
         _ => {
             return Err(ShadowError::Certificate(
                 "unsupported canonical proof system".into(),
@@ -297,6 +298,95 @@ fn reference_canonicalize_paper_iv(input: &InputArtifact) -> Result<ReferenceRes
         automorphisms: search.automorphisms,
         search_stats: search.search_stats,
     })
+}
+
+fn reference_canonicalize_paper_v(input: &InputArtifact) -> Result<ReferenceResult, ShadowError> {
+    validate(input)?;
+    let ProfileInput::PaperVChordalConference(value) = &input.profile else {
+        return Err(ShadowError::Certificate(
+            "Paper-V checker received another profile".into(),
+        ));
+    };
+    let mut permutation = vec![0, 1, 2, 3, 4, 5];
+    let mut best_key = None;
+    let mut best = Vec::new();
+    let mut equal = Vec::new();
+    loop {
+        let mut inverse = [0; 6];
+        for (old, &new) in permutation.iter().enumerate() {
+            inverse[new] = old;
+        }
+        let mut key = Vec::with_capacity(21);
+        for left in 0..6 {
+            for right in left + 1..6 {
+                key.push(value.delta_matrix[inverse[left]][inverse[right]].numerator);
+            }
+        }
+        for &old in &inverse {
+            key.push(
+                i64::try_from(permutation[value.outer_involution[old] as usize])
+                    .expect("Paper-V image fits i64"),
+            );
+        }
+        match best_key.as_ref().map(|old| key.cmp(old)) {
+            None | Some(std::cmp::Ordering::Less) => {
+                best_key = Some(key);
+                best.clone_from(&permutation);
+                equal = vec![permutation.clone()];
+            }
+            Some(std::cmp::Ordering::Equal) => equal.push(permutation.clone()),
+            Some(std::cmp::Ordering::Greater) => {}
+        }
+        if !next_permutation(&mut permutation) {
+            break;
+        }
+    }
+    let input_to_canonical = best
+        .iter()
+        .map(|&image| u32::try_from(image).expect("Paper-V image fits u32"))
+        .collect::<Vec<_>>();
+    let mut automorphisms = equal
+        .iter()
+        .map(|candidate| {
+            let mut inverse = [0; 6];
+            for (old, &new) in candidate.iter().enumerate() {
+                inverse[new] = old;
+            }
+            best.iter()
+                .map(|&canonical| {
+                    u32::try_from(inverse[canonical]).expect("Paper-V image fits u32")
+                })
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
+    automorphisms.sort_unstable();
+    let canonical = crate::canonical::relabel_paper_v(input, value, &input_to_canonical)?;
+    Ok(ReferenceResult {
+        canonical_json: serde_json::to_string(&canonical)?,
+        input_to_canonical,
+        winning_trace: Vec::new(),
+        automorphisms,
+        search_stats: crate::SearchStats {
+            search_nodes: 720,
+            canonical_leaves: 720,
+            refinement_rounds: 0,
+            max_depth: 0,
+            arena_grows: 0,
+        },
+    })
+}
+
+fn next_permutation(values: &mut [usize]) -> bool {
+    let Some(pivot) = (0..values.len() - 1).rfind(|&index| values[index] < values[index + 1])
+    else {
+        return false;
+    };
+    let successor = (pivot + 1..values.len())
+        .rfind(|&index| values[pivot] < values[index])
+        .expect("pivot has a successor");
+    values.swap(pivot, successor);
+    values[pivot + 1..].reverse();
+    true
 }
 
 fn reference_canonicalize(input: &InputArtifact) -> Result<ReferenceResult, ShadowError> {
@@ -686,6 +776,181 @@ fn validate_paper_ii(value: &GatedPaperIi) -> Result<usize, ShadowError> {
     Ok(order)
 }
 
+#[allow(clippy::too_many_lines)] // One linear exact-contract audit is easiest to review.
+fn validate_paper_v(value: &crate::GatedPaperV) -> Result<usize, ShadowError> {
+    if !value.gate.enabled {
+        validate_gate("paper_v_chordal_conference", &value.gate)?;
+        unreachable!();
+    }
+    if value.source.paper != "V"
+        || value.source.theorem != "carrier recovery and exact marked return"
+        || value.source.artifact
+            != "papers/chordal-conference-reconstruction/verification/evidence/conference_node_completeness.json"
+        || value.source.sha256 != "2d3621207f01f0243d50b0a22d24d13add9f1e56c6a7a08129fb23f5376bcf4e"
+        || !matches!(value.base_field, crate::BaseFieldSpec::Rational)
+        || value.verification_field.characteristic != 11
+        || value.verification_field.degree != 1
+        || !value
+            .verification_field
+            .modulus_coefficients_low_to_high
+            .is_empty()
+        || value.verification_field.element_encoding != "least_nonnegative_residue"
+        || value.recovered_carrier
+            != "singular quartic, twelve points, six axes, and conference switching class"
+        || !matches!(value.ambiguity, AmbiguitySpec::OrientationC2 {})
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-V source or recovery contract".into(),
+        ));
+    }
+    let residue = &value.retained_residue;
+    if residue.action != crate::ActionKind::ColorPreservingPermutations
+        || residue.vertices.len() != 6
+        || residue
+            .vertices
+            .iter()
+            .any(|vertex| vertex.color != 0 || vertex.weight != 1 || vertex.sign != 0)
+        || residue.relations.len() != 2
+        || residue.relations[0].name != "conference_positive"
+        || residue.relations[1].name != "conference_negative"
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-V retained residue".into(),
+        ));
+    }
+    for relation in &residue.relations {
+        validate_relation(relation, 6)?;
+    }
+    let positive = residue.relations[0]
+        .edges
+        .iter()
+        .copied()
+        .collect::<BTreeSet<_>>();
+    let negative = residue.relations[1]
+        .edges
+        .iter()
+        .copied()
+        .collect::<BTreeSet<_>>();
+    if positive.len() != 10
+        || negative.len() != 5
+        || !positive.is_disjoint(&negative)
+        || positive.len() + negative.len() != 15
+    {
+        return Err(ShadowError::Invalid(
+            "Paper-V conference signs do not partition K6".into(),
+        ));
+    }
+    if value.delta_matrix.len() != 6 || value.delta_matrix.iter().any(|row| row.len() != 6) {
+        return Err(ShadowError::Invalid(
+            "Paper-V delta matrix is not six by six".into(),
+        ));
+    }
+    for row in 0..6 {
+        for column in 0..6 {
+            let entry = &value.delta_matrix[row][column];
+            let expected = if row == column {
+                0
+            } else if positive.contains(&[
+                u32::try_from(row.min(column)).expect("Paper-V index fits u32"),
+                u32::try_from(row.max(column)).expect("Paper-V index fits u32"),
+            ]) {
+                1
+            } else {
+                -1
+            };
+            if entry.denominator != 1
+                || entry.numerator != expected
+                || value.delta_matrix[row][column] != value.delta_matrix[column][row]
+            {
+                return Err(ShadowError::Invalid(
+                    "Paper-V delta matrix disagrees with residue".into(),
+                ));
+            }
+        }
+    }
+    for row in 0..6 {
+        for column in 0..6 {
+            let square: i64 = (0..6)
+                .map(|middle| {
+                    value.delta_matrix[row][middle].numerator
+                        * value.delta_matrix[middle][column].numerator
+                })
+                .sum();
+            if square != if row == column { 5 } else { 0 } {
+                return Err(ShadowError::Invalid(
+                    "Paper-V delta matrix does not square to 5I".into(),
+                ));
+            }
+        }
+    }
+    validate_permutation(&value.outer_involution, 6)?;
+    let square = compose_u32(&value.outer_involution, &value.outer_involution);
+    let fourth = compose_u32(&square, &square);
+    if square == (0_u32..6).collect::<Vec<_>>() || fourth != (0_u32..6).collect::<Vec<_>>() {
+        return Err(ShadowError::Invalid(
+            "Paper-V outer lift must have order four".into(),
+        ));
+    }
+    let DeclaredAction::VertexPermutations { degree, generators } = &value.action else {
+        return Err(ShadowError::Invalid(
+            "Paper-V action must use vertex permutations".into(),
+        ));
+    };
+    if *degree != 6 || generators.is_empty() {
+        return Err(ShadowError::Invalid("invalid Paper-V action degree".into()));
+    }
+    for generator in generators {
+        validate_permutation(generator, 6)?;
+    }
+    let order = generated_permutation_group_order(generators, 6, 720)?;
+    if order != 720 {
+        return Err(ShadowError::Invalid(
+            "Paper-V action does not generate S6".into(),
+        ));
+    }
+    let points_valid = |points: &[Vec<u32>], count: usize| {
+        points.len() == count
+            && points
+                .iter()
+                .all(|point| point.len() == 5 && point.iter().all(|&x| x < 11))
+            && points.iter().collect::<BTreeSet<_>>().len() == count
+    };
+    if !points_valid(&value.conference_singular_points, 6)
+        || !points_valid(&value.chordal_singular_points, 12)
+        || value.conference_cubic.len() != 35
+        || value.chordal_cubic.len() != 35
+        || value
+            .conference_cubic
+            .iter()
+            .chain(&value.chordal_cubic)
+            .any(|&x| x >= 11)
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-V cubic or singular-point census".into(),
+        ));
+    }
+    let Some(calibration) = &value.odd_calibration else {
+        return Err(ShadowError::Invalid(
+            "Paper-V selected-line calibration is absent".into(),
+        ));
+    };
+    if value.selected_chordal_line != Some(0)
+        || calibration.name != "selected_chordal_line"
+        || calibration.support != [0]
+        || calibration.value != 1
+        || !value.minimality_collisions.is_empty()
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-V selected-line calibration".into(),
+        ));
+    }
+    Ok(order)
+}
+
+fn compose_u32(left: &[u32], right: &[u32]) -> Vec<u32> {
+    right.iter().map(|&image| left[image as usize]).collect()
+}
+
 fn validate_paper_iv(value: &GatedPaperIv) -> Result<usize, ShadowError> {
     if !value.gate.enabled {
         validate_gate("paper_iv_minimum_words", &value.gate)?;
@@ -884,7 +1149,31 @@ fn validate_paper_i_partition(relations: &[BinaryRelation], n: usize) -> Result<
     Ok(())
 }
 
+#[allow(clippy::too_many_lines)]
 fn verify_automorphism(input: &InputArtifact, permutation: &[u32]) -> Result<(), ShadowError> {
+    if let ProfileInput::PaperVChordalConference(value) = &input.profile {
+        validate_permutation(permutation, 6)
+            .map_err(|error| ShadowError::Certificate(error.to_string()))?;
+        for row in 0..6 {
+            for column in 0..6 {
+                if value.delta_matrix[row][column]
+                    != value.delta_matrix[permutation[row] as usize][permutation[column] as usize]
+                {
+                    return Err(ShadowError::Certificate(
+                        "automorphism does not preserve the Paper-V delta matrix".into(),
+                    ));
+                }
+            }
+            if permutation[value.outer_involution[row] as usize]
+                != value.outer_involution[permutation[row] as usize]
+            {
+                return Err(ShadowError::Certificate(
+                    "automorphism does not centralize the Paper-V outer lift".into(),
+                ));
+            }
+        }
+        return Ok(());
+    }
     if let ProfileInput::PaperIiTrade(value) = &input.profile {
         validate_permutation(permutation, 12)
             .map_err(|error| ShadowError::Certificate(error.to_string()))?;

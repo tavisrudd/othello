@@ -2,7 +2,7 @@
 
 **Lane:** clebsch
 
-**Status:** active at two external source gates; Papers I, II, and IV canonicalization, reconstruction, independent replay, hot-layout, golden/backend gates green; Papers III and V remain gated; standalone Rust tool; no manuscript or Lean edits
+**Status:** active at one external source gate; Papers I, II, IV, and V canonicalization, reconstruction, independent replay, hot-layout, golden/backend gates green; Paper III remains gated; standalone Rust tool; no manuscript or Lean edits
 
 ## Goal
 
@@ -310,5 +310,24 @@ loop is allocation-free. See
 `../2026-08-25-c968-paper-ii-sparse-shadow-export.md` and
 `../../sparse-shadow/docs/performance-paper-ii.md`.
 
-Papers III and V still require their complete paper-owned exports. No unblocked
-C968 implementation frontier remains until one freezes.
+Paper III still requires its complete paper-owned export. No unblocked C968
+implementation frontier remains until it freezes.
+
+## 2026-08-25 Paper-V integration
+
+Paper V's deterministic paper-owned export freezes the signed six-axis
+conference residue, its rational conference matrix, a selected chordal line,
+the order-four lift of the residual outer `C2` coset, and exact `F11` equations
+and singular loci for the conference and chordal cubics. C968 exhausts the
+720-element `S6` action with a fixed 21-byte key, independently replays the
+canonical certificate through a separate lexicographic enumerator, and emits
+the six-axis/twelve-point/cubic reconstruction carrier. Exact validation checks
+the conference-square identity, the two singular loci, the selected-line odd
+calibration, and the distinction between an order-four lift and its order-two
+outer coset. The combined marking has trivial automorphism group. CLI,
+corruption, relabeling, idempotence, zero-allocation, golden-output, checksum,
+and nauty 2.9.3 gates are green; see
+`../2026-08-25-c968-paper-v-sparse-shadow-export.md` and
+`../../sparse-shadow/docs/performance-paper-v.md`.
+
+Paper III is now the only remaining exact export gate.

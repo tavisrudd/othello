@@ -469,7 +469,7 @@ mod tests {
     static ALLOCATION_TEST_LOCK: Mutex<()> = Mutex::new(());
 
     #[test]
-    fn paper_i_ii_and_iv_search_loops_allocate_nothing() {
+    fn paper_i_ii_iv_and_v_search_loops_allocate_nothing() {
         let _guard = ALLOCATION_TEST_LOCK.lock().expect("allocation test lock");
         let input: InputArtifact = serde_json::from_str(include_str!(
             "../testdata/paper-i-icosahedral-orbitals.json"
@@ -507,6 +507,7 @@ mod tests {
         assert_eq!(search.equal_permutations.len(), 120);
         paper_ii_search_loop_allocates_nothing();
         paper_iv_search_loop_allocates_nothing();
+        paper_v_search_loop_allocates_nothing();
     }
 
     fn paper_ii_search_loop_allocates_nothing() {
@@ -564,6 +565,33 @@ mod tests {
         assert_eq!(
             crate::paper_iv::prepared_stats(&search).canonical_leaves,
             2184
+        );
+    }
+
+    fn paper_v_search_loop_allocates_nothing() {
+        let path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(
+            "../../../papers/chordal-conference-reconstruction/verification/evidence/sparse_shadow_export.json",
+        );
+        if !path.exists() {
+            return;
+        }
+        let input: InputArtifact =
+            serde_json::from_slice(&std::fs::read(path).expect("read Paper-V export"))
+                .expect("parse Paper-V export");
+        let crate::ProfileInput::PaperVChordalConference(paper) = input.profile else {
+            unreachable!()
+        };
+        let mut search = crate::paper_v::prepare(&paper).expect("Paper-V search prepares");
+        let region = Region::new(GLOBAL);
+        crate::paper_v::run_prepared(&mut search);
+        let change = region.change();
+        assert_eq!(change.allocations, 0);
+        assert_eq!(change.reallocations, 0);
+        assert_eq!(change.deallocations, 0);
+        assert_eq!(crate::paper_v::prepared_stats(&search).search_nodes, 720);
+        assert_eq!(
+            crate::paper_v::prepared_stats(&search).canonical_leaves,
+            720
         );
     }
 }

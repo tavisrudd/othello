@@ -3,9 +3,9 @@ use std::collections::BTreeSet;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    BinaryRelation, DeclaredAction, GatedPaperIi, GatedPaperIv, InputArtifact, PaperIOrientation,
-    ProfileInput, RelationalShadow, ShadowError, VerificationReport, WeightedPair, validate,
-    verify_certificate,
+    BinaryRelation, DeclaredAction, GatedPaperIi, GatedPaperIv, GatedPaperV, InputArtifact,
+    PaperIOrientation, ProfileInput, RelationalShadow, ShadowError, VerificationReport,
+    WeightedPair, validate, verify_certificate,
 };
 
 pub const CANONICAL_SCHEMA_VERSION: &str = "sparse-shadow-canonical/v2";
@@ -77,7 +77,8 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
         ProfileInput::PaperIOrientation(paper) => paper,
         ProfileInput::PaperIiTrade(value) => return canonicalize_paper_ii(input, value),
         ProfileInput::PaperIvMinimumWords(value) => return canonicalize_paper_iv(input, value),
-        _ => return Err(gated_error(&input.profile)),
+        ProfileInput::PaperVChordalConference(value) => return canonicalize_paper_v(input, value),
+        ProfileInput::PaperIiiFourShadow(_) => return Err(gated_error(&input.profile)),
     };
 
     let search = crate::hot::search(paper);
@@ -114,6 +115,97 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
         stats: search.stats,
         certificate,
     })
+}
+
+fn canonicalize_paper_v(
+    input: &InputArtifact,
+    value: &GatedPaperV,
+) -> Result<CanonicalArtifact, ShadowError> {
+    let search = crate::paper_v::search(value)?;
+    let input_to_canonical = to_u32_permutation(&search.best_permutation)?;
+    let automorphisms = automorphisms(&search.best_permutation, &search.equal_permutations)?;
+    let canonical = relabel_paper_v(input, value, &input_to_canonical)?;
+    let canonical_json = serde_json::to_string(&canonical)?;
+    let canonical_id = blake3::hash(canonical_json.as_bytes()).to_hex().to_string();
+    let automorphism_generators = generating_set(&automorphisms);
+    let vertex_orbits = permutation_orbits(6, &automorphisms)?;
+    let point_stabilizers = point_stabilizers(&vertex_orbits, &automorphisms)?;
+    let certificate = CanonicalCertificate {
+        certificate_schema: "sparse-shadow-certificate/v1".into(),
+        proof_system: "paper-v-marked-conference-action-exhaustion/v1".into(),
+        input_to_canonical: input_to_canonical.clone(),
+        canonical_json,
+        canonical_id: canonical_id.clone(),
+        winning_trace: Vec::new(),
+        automorphisms: automorphisms.clone(),
+        search_stats: search.stats.clone(),
+    };
+    Ok(CanonicalArtifact {
+        schema: CANONICAL_SCHEMA_VERSION.into(),
+        canonical_id,
+        canonical,
+        input_to_canonical,
+        automorphism_generators,
+        automorphism_order: automorphisms.len() as u64,
+        vertex_orbits,
+        point_stabilizers,
+        stats: search.stats,
+        certificate,
+    })
+}
+
+pub(crate) fn relabel_paper_v(
+    input: &InputArtifact,
+    value: &GatedPaperV,
+    input_to_canonical: &[u32],
+) -> Result<InputArtifact, ShadowError> {
+    let permutation = input_to_canonical
+        .iter()
+        .map(|&image| image as usize)
+        .collect::<Vec<_>>();
+    let mut canonical = value.clone();
+    let mut vertices = value.retained_residue.vertices.clone();
+    for (old, &new) in permutation.iter().enumerate() {
+        vertices[new] = value.retained_residue.vertices[old].clone();
+    }
+    canonical.retained_residue.vertices = vertices;
+    canonical.retained_residue.relations = value
+        .retained_residue
+        .relations
+        .iter()
+        .map(|relation| relabel_relation(relation, &permutation))
+        .collect();
+    let mut outer = vec![0; 6];
+    for old in 0..6 {
+        outer[permutation[old]] = input_to_canonical[value.outer_involution[old] as usize];
+    }
+    canonical.outer_involution = outer;
+    let mut delta = value.delta_matrix.clone();
+    for row in 0..6 {
+        for column in 0..6 {
+            delta[permutation[row]][permutation[column]] = value.delta_matrix[row][column].clone();
+        }
+    }
+    canonical.delta_matrix = delta;
+    let declared_group = crate::paper_v::declared_group(value)?;
+    let mut conjugated = declared_group
+        .iter()
+        .map(|element| {
+            let mut result = vec![0; 6];
+            for old in 0..6 {
+                result[permutation[old]] = input_to_canonical[element[old]];
+            }
+            result
+        })
+        .collect::<Vec<_>>();
+    conjugated.sort_unstable();
+    canonical.action = DeclaredAction::VertexPermutations {
+        degree: 6,
+        generators: generating_set(&conjugated),
+    };
+    let mut artifact = input.clone();
+    artifact.profile = ProfileInput::PaperVChordalConference(Box::new(canonical));
+    Ok(artifact)
 }
 
 fn canonicalize_paper_ii(

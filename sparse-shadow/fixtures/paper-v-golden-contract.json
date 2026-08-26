@@ -1,0 +1,18 @@
+{
+  "automorphism_order": 1,
+  "canonical_id": "2515fa4e7a4f27c00330d2ad7ee18a5ed2f9335b10aca10dcae2440683309141",
+  "carrier": {
+    "chordal_point_count": 12,
+    "conference_node_count": 6,
+    "cubic_coefficient_counts": [35, 35],
+    "selected_chordal_line": 0
+  },
+  "proof_system": "paper-v-marked-conference-action-exhaustion/v1",
+  "search_stats": {
+    "arena_grows": 0,
+    "canonical_leaves": 720,
+    "max_depth": 0,
+    "refinement_rounds": 0,
+    "search_nodes": 720
+  }
+}

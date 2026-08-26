@@ -15,6 +15,8 @@ pub const PAPER_II_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-ii-carrie
 pub const PAPER_II_RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-paper-ii-reconstruction/v1";
 pub const PAPER_IV_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-iv-carrier/v1";
 pub const PAPER_IV_RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-paper-iv-reconstruction/v1";
+pub const PAPER_V_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-v-carrier/v1";
+pub const PAPER_V_RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-paper-v-reconstruction/v1";
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
@@ -62,6 +64,33 @@ pub struct PaperIiReconstructionArtifact {
     pub carrier: PaperIiCarrier,
     pub ambiguity: Ambiguity,
     pub exact_oriented_return: bool,
+    pub round_trip_shadow: InputArtifact,
+    pub canonical: CanonicalArtifact,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperVCarrier {
+    pub schema: String,
+    pub verification_field: FiniteFieldSpec,
+    pub six_axes: Vec<Vec<u32>>,
+    pub chordal_quartic_points: Vec<Vec<u32>>,
+    pub conference_cubic: Vec<u32>,
+    pub chordal_cubic: Vec<u32>,
+    pub delta_matrix: Vec<Vec<crate::RationalCoefficient>>,
+    pub conference_positive_edges: Vec<[u32; 2]>,
+    pub outer_lift: Vec<u32>,
+    pub selected_chordal_line: u32,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperVReconstructionArtifact {
+    pub schema: String,
+    pub profile: String,
+    pub carrier: PaperVCarrier,
+    pub ambiguity: Ambiguity,
+    pub exact_marked_return: bool,
     pub round_trip_shadow: InputArtifact,
     pub canonical: CanonicalArtifact,
 }
@@ -224,6 +253,83 @@ fn recover_paper_ii_carrier(input: &InputArtifact) -> Result<PaperIiCarrier, Sha
         oriented_sheets,
         full_action_order: 1320,
         oriented_stabilizer_order: 660,
+    })
+}
+
+/// Reconstruct Paper V's marked chordal/conference carrier.
+///
+/// # Errors
+///
+/// Returns an error if validation, canonicalization, or carrier recovery fails.
+pub fn reconstruct_paper_v(
+    input: &InputArtifact,
+) -> Result<PaperVReconstructionArtifact, ShadowError> {
+    let canonical = canonicalize(input)?;
+    let carrier = recover_paper_v_carrier(&canonical.canonical)?;
+    Ok(PaperVReconstructionArtifact {
+        schema: PAPER_V_RECONSTRUCTION_SCHEMA_VERSION.into(),
+        profile: "paper_v_chordal_conference".into(),
+        carrier,
+        ambiguity: Ambiguity::OrientationC2 {
+            killed_by_calibration: true,
+        },
+        exact_marked_return: true,
+        round_trip_shadow: canonical.canonical.clone(),
+        canonical,
+    })
+}
+
+/// Independently replay a Paper-V carrier reconstruction.
+///
+/// # Errors
+///
+/// Returns an error if the canonical proof, carrier, round trip, or ambiguity is corrupt.
+pub fn verify_paper_v_reconstruction(
+    input: &InputArtifact,
+    artifact: &PaperVReconstructionArtifact,
+) -> Result<VerificationReport, ShadowError> {
+    if artifact.schema != PAPER_V_RECONSTRUCTION_SCHEMA_VERSION
+        || artifact.profile != "paper_v_chordal_conference"
+        || artifact.ambiguity
+            != (Ambiguity::OrientationC2 {
+                killed_by_calibration: true,
+            })
+        || !artifact.exact_marked_return
+    {
+        return Err(ShadowError::Certificate(
+            "Paper-V reconstruction metadata is inconsistent".into(),
+        ));
+    }
+    let report = verify_canonical_artifact(input, &artifact.canonical)?;
+    if artifact.carrier != recover_paper_v_carrier(&artifact.canonical.canonical)?
+        || artifact.round_trip_shadow != artifact.canonical.canonical
+    {
+        return Err(ShadowError::Certificate(
+            "Paper-V carrier or round trip is corrupt".into(),
+        ));
+    }
+    Ok(report)
+}
+
+fn recover_paper_v_carrier(input: &InputArtifact) -> Result<PaperVCarrier, ShadowError> {
+    let ProfileInput::PaperVChordalConference(value) = &input.profile else {
+        return Err(ShadowError::Invalid(
+            "Paper-V reconstruction received another profile".into(),
+        ));
+    };
+    Ok(PaperVCarrier {
+        schema: PAPER_V_CARRIER_SCHEMA_VERSION.into(),
+        verification_field: value.verification_field.clone(),
+        six_axes: value.conference_singular_points.clone(),
+        chordal_quartic_points: value.chordal_singular_points.clone(),
+        conference_cubic: value.conference_cubic.clone(),
+        chordal_cubic: value.chordal_cubic.clone(),
+        delta_matrix: value.delta_matrix.clone(),
+        conference_positive_edges: value.retained_residue.relations[0].edges.clone(),
+        outer_lift: value.outer_involution.clone(),
+        selected_chordal_line: value
+            .selected_chordal_line
+            .expect("validated Paper-V selected line"),
     })
 }
 

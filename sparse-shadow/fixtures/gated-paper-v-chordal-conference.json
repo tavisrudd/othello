@@ -24,6 +24,16 @@
       "selected_chordal_line": null,
       "outer_involution": [],
       "delta_matrix": [],
+      "verification_field": {
+        "characteristic": 11,
+        "degree": 1,
+        "modulus_coefficients_low_to_high": [],
+        "element_encoding": "least_nonnegative_residue"
+      },
+      "conference_singular_points": [],
+      "chordal_singular_points": [],
+      "conference_cubic": [],
+      "chordal_cubic": [],
       "recovered_carrier": "singular quartic, twelve points, six axes, and conference switching class",
       "ambiguity": {"kind": "orientation_c2"},
       "odd_calibration": null,
@@ -31,4 +41,3 @@
     }
   }
 }
-

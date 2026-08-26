@@ -40,6 +40,11 @@ and its matching node. Its color-preserving automorphism group is therefore the
 cubic-oriented trade stabilizer; nauty 2.9.3 independently returns order 660.
 Paper IV uses one colored node per weighted pair.
 
+For Paper V, 15 sign-colored edge nodes encode the conference matrix. Six
+three-node directed gadgets encode the outer lift with distinct source and
+target port colors. The resulting 39-node, 54-edge graph has the same trivial
+marked automorphism group as the native certificate.
+
 ## Comparison contract
 
 `sparse-shadow-backend-comparison/v1` records an engine descriptor and two

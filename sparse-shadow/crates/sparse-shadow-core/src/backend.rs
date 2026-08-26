@@ -79,6 +79,9 @@ pub fn encode_colored_incidence(
     if let ProfileInput::PaperIiTrade(value) = &input.profile {
         return encode_paper_ii(value);
     }
+    if let ProfileInput::PaperVChordalConference(value) = &input.profile {
+        return encode_paper_v(value);
+    }
     if let ProfileInput::PaperIvMinimumWords(value) = &input.profile {
         return encode_paper_iv(value);
     }
@@ -183,6 +186,46 @@ fn encode_paper_ii(value: &crate::GatedPaperIi) -> Result<ColoredIncidenceGraph,
                 edges.push([matching_node.min(edge_node), matching_node.max(edge_node)]);
             }
         }
+    }
+    edges.sort_unstable();
+    Ok(ColoredIncidenceGraph {
+        schema: BACKEND_GRAPH_SCHEMA_VERSION.into(),
+        colors,
+        edges,
+        original_vertex_nodes,
+    })
+}
+
+fn encode_paper_v(value: &crate::GatedPaperV) -> Result<ColoredIncidenceGraph, ShadowError> {
+    let original_vertex_nodes = (0_u32..6).collect::<Vec<_>>();
+    let mut colors = vec![0_u32; 6];
+    let mut edges = Vec::with_capacity(54);
+    for (relation_index, relation) in value.retained_residue.relations.iter().enumerate() {
+        for &[left, right] in &relation.edges {
+            let edge_node = u32::try_from(colors.len())
+                .map_err(|_| ShadowError::Invalid("Paper-V encoding exceeds u32".into()))?;
+            colors.push(1 + u32::try_from(relation_index).expect("two relation colors fit u32"));
+            edges.push([left.min(edge_node), left.max(edge_node)]);
+            edges.push([right.min(edge_node), right.max(edge_node)]);
+        }
+    }
+    for source in 0_u32..6 {
+        let map_node = u32::try_from(colors.len())
+            .map_err(|_| ShadowError::Invalid("Paper-V encoding exceeds u32".into()))?;
+        colors.push(3);
+        let source_port = u32::try_from(colors.len())
+            .map_err(|_| ShadowError::Invalid("Paper-V encoding exceeds u32".into()))?;
+        colors.push(4);
+        let target_port = u32::try_from(colors.len())
+            .map_err(|_| ShadowError::Invalid("Paper-V encoding exceeds u32".into()))?;
+        colors.push(5);
+        let target = value.outer_involution[source as usize];
+        edges.extend([
+            [source.min(source_port), source.max(source_port)],
+            [source_port.min(map_node), source_port.max(map_node)],
+            [map_node.min(target_port), map_node.max(target_port)],
+            [target.min(target_port), target.max(target_port)],
+        ]);
     }
     edges.sort_unstable();
     Ok(ColoredIncidenceGraph {
@@ -309,6 +352,9 @@ fn authoritative_backend(native: &CanonicalArtifact) -> Result<&'static str, Sha
         "paper-i-ir-exhaustion/v1" => Ok("native-paper-i-ir/v1"),
         "paper-ii-declared-action-exhaustion/v1" => Ok("native-paper-ii-declared-action/v1"),
         "paper-iv-weighted-scheme-ir-exhaustion/v1" => Ok("native-paper-iv-weighted-scheme-ir/v1"),
+        "paper-v-marked-conference-action-exhaustion/v1" => {
+            Ok("native-paper-v-marked-conference-action/v1")
+        }
         _ => Err(ShadowError::Certificate(
             "external comparison names an unsupported native proof system".into(),
         )),
