@@ -646,6 +646,45 @@ fails the cap for every ternary `q>=27`.  This strengthens `(SR21)`'s
 `q>=81` blocking obstruction, but only for this inverse two-conic family and
 its standard boundary realization.
 
+## SR23 collision saturation
+
+The near-surjective ordinary projections are globally almost extremal.  For
+an ordinary direction `m`, let `z_m<=6` be the number of empty intercepts,
+let `h_(i,m)` count fibers of size `i`, and put
+
+```text
+E_m=q-5+z_m,
+C_m=sum_i binom(i,2)h_(i,m)
+   =E_m+h_(3,m)+3h_(4,m).
+```
+
+The three special directions contribute `q-4` pairs each, while every pair
+of points of `H` has one direction.  Therefore, with `Z=sum_m z_m`,
+
+```text
+sum_ord (h_(3,m)+3h_(4,m))=q^2-7q+17-Z.            (TR31)
+```
+
+At fixed `E_m`, cap four gives the universal upper bound
+`2E_m-epsilon_m`, where `epsilon_m=0` iff `z_m=2 mod 3` and is one
+otherwise.  Its exact deficit is
+
+```text
+D_m=h_(2,m)+h_(3,m)-epsilon_m >= 0,
+sum_ord D_m=2Z-sum_ord epsilon_m-7=O(q).            (TR32)
+```
+
+Thus the `Theta(q^2)` collision mass differs from the packing by ones and
+fours optimum by only `O(q)` total units.
+
+There is an equivalent directional Redei compression.  Reduce the intercept
+product `P_m(T)` modulo `T^q-T`.  If `z_m=0` the remainder is zero; otherwise
+it vanishes on the `q-z_m` occupied intercepts and hence equals their root
+product times a residual of degree at most `z_m-1<=5`.  The remaining
+theorem is cross-directional: synchronize these varying degree-five
+residuals into a common carrier or contradiction.  Scalar saturation alone
+does not even force one defect-free direction.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -677,5 +716,10 @@ its standard boundary realization.
   bounded marked bridge follows.
 - **Settled/no-go:** `(TR29)--(TR30)` give a valid inverse-duplex transversal
   but force a fivefold boundary concurrence for every ternary `q>=27`.
+- **Settled:** `(TR31)--(TR32)` show the ordinary projections have only
+  `O(q)` total defect from cap-four collision saturation; every directional
+  Redei remainder has residual degree at most five.
+- **Open:** prove a cross-direction propagation theorem for those bounded
+  residuals; separate fiber factorization does not supply a common carrier.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.

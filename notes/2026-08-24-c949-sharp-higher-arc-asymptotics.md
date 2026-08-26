@@ -175,8 +175,9 @@ Q(X,M)=B_0(X,M)C_0(X^3,M)+(M^q-M)E(X,M),
 deg_X E<3,  deg E<=3.                       (SR24a-Redei-cubic)
 ```
 
-All `q`-scale ambiguity is therefore confined to the **nine coefficients**
-of one cubic `E`.
+All failure of the field fibers to assemble into the displayed global cube
+channel is therefore confined to the **nine coefficients** of one cubic
+`E`; the large cube quotient `C_0` itself remains q-scale.
 
 The split-product companion quotient compresses further.  If
 `R=(X^q-X)Q+(M^q-M)H`, canonical division of `H` by `B_0`, followed by the
@@ -333,6 +334,31 @@ lines plus one forced boundary line through a point for every ternary
 `q>=27`.  Thus the whole inverse two-conic family fails the fourfold cap; a
 viable duplex must be genuinely non-inverse.
 
+The extendable branch is already known to require linear algebraic
+complexity.  The carry-free moment ledger makes the completed duplex moments
+
+```text
+mu_i=sum_(t=1)^3 b_t^(q/3)a_t^i,   1<=i<=2q/3-2,
+```
+
+a rank-three Prony sequence with no `000`, `00100`, or `001010` pattern.
+Therefore at least `q/3-2` of these moments are nonzero; intrinsically, the
+two-permutation trace has multiplicative Fourier support at least `q/3-2`
+and interpolation degree at least `q-8` in every torus chart.  In particular
+all bounded-degree and two-monomial duplex families are excluded for
+`q>=27`.  See `(SR24d)--(SR24j)`.  A successful formula must be genuinely
+nonlinear in all three charts, not merely a different low-degree ansatz.
+
+At the same time `(SR23)` leaves only a bounded residual in every ordinary
+direction.  If `z_m<=6` intercepts are missing, the Redei remainder is the
+occupied-root product times a polynomial of degree at most `z_m-1<=5`.
+Globally, the collision ledger has only `O(q)` total defect from the
+ones-plus-fours packing maximum, despite `Theta(q^2)` high collisions.  The
+construction frontier is therefore a sharp tension: linear Fourier
+complexity in each chart, but degree-five directional residuals.  A
+cross-direction synchronization theorem for those residuals is now the
+highest-EV structural route.
+
 At q=27, use the Tutte test as preprocessing, then route surviving marked
 cores into the parallel C962 carrier/mapping gates.  Field-uniformly, the
 highest-EV construction theorem is an odd-cut plus off-core concurrency
@@ -432,6 +458,10 @@ separate global trade obstruction or construction.
   bisecant graph.
 - **Settled/no-go:** the canonical inverse duplex has a valid transversal
   but a forced fivefold boundary concurrence for every ternary `q>=27`.
+- **Settled:** every ordinary projection has a degree-at-most-five Redei
+  residual, and their total collision-packing defect is only `O(q)`.
+- **Open:** synchronize those residuals across slopes; fiberwise boundedness
+  alone does not give a common carrier.
 - **Open:** prove or refute the corresponding geometric Tutte/odd-cut
   condition; after a suitable marking it is exactly a two-monomer
   augmenting-path problem, and side-colour degrees alone do not solve it.

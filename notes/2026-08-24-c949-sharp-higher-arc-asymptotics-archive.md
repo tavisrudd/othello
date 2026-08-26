@@ -247,3 +247,17 @@ every ternary `q>=27`, simultaneous splitting of the two inverse quadratics
 leaves four retained generic lines through a point together with one forced
 boundary line.  This strengthens the prior `q>=81` coverage no-go to a
 fivefold-concurrency obstruction for the standard inverse family.
+
+The live routing card now also records the earlier carry-free complexity
+theorem from `(SR24d)--(SR24j)`: every extendable target duplex has at least
+`q/3-2` nonzero critical Prony moments, hence linear multiplicative-Fourier
+support and near-maximal interpolation degree in all three charts.  This
+closes every bounded-degree/two-monomial formula, while honestly leaving a
+genuinely nonlinear non-inverse duplex open.
+
+The SR23 projection condition then yielded a new saturation ledger.  Across
+all ordinary directions the `Theta(q^2)` collision mass is within only
+`O(q)` of the cap-four packing maximum, and each directional Redei remainder
+factors through a residual of degree at most five.  This does not contradict
+the full-core profiles, but it changes the remaining construction theorem
+into a precise cross-slope propagation problem for bounded residuals.
