@@ -2334,6 +2334,23 @@ The three matching leaves alone give no subquadratic improvement for
 Improving the `3/2` exponent therefore requires a genuine expansion or
 no-induced-subdesign theorem for this specific Mason hypergraph.
 
+This generic limitation has an explicit infinite countermodel.  For
+`s=4^k`, take four groups `G_i=F_s`.  Inside each group use the affine-line
+Steiner `2-(s,4,1)` design of `AG(k,4)`, delete one parallel class, and
+one-factorize each deleted four-set into three leaves.  Across the four groups
+use the transversal blocks
+
+```text
+(x,y,x+y,x+lambda y),       lambda notin {0,1}.
+```
+
+The resulting regular linear four-graph has `v=4s`, degree `(v-4)/3`, and
+pair leave three perfect matchings, exactly the abstract parameter relations
+in `(SR24a-Mason-hypergraph)`.  Yet one group induces
+`s(s-4)/12=Theta(s^2)` four-blocks.  These are not the ternary Mason orders,
+so this is not a counterexample to Mason-specific expansion; it proves that
+regularity, linearity, and the matching leave alone cannot supply it.
+
 Thus every near-sharp complement is at least order `q^(3/2)` in symmetric
 difference from every Mason large-root set.  This eliminates every Mason
 switch of size `o(q^(3/2))`.
@@ -5944,9 +5961,11 @@ family is lower priority.
   crude bound `F_0(U)<=binom(u,2)`, where `F_0(U)` counts external Mason
   points whose four `r`-secants all belong to the deficient block set `U`.
   `(SR24a-Mason-hypergraph)` identifies it as a regular four-uniform linear
-  design whose pair leave is three perfect matchings.  These parameters alone
-  do not improve the quadratic bound; any subquadratic induced-four-block
-  bound must use specific Mason expansion or rule out induced subdesigns.
+  design whose pair leave is three perfect matchings.  A four-group affine
+  family with the same parameter relations has a quarter-size quadratic
+  induced subdesign, so these abstract data alone cannot improve the bound.
+  Any gain must use Mason-specific coordinates/arithmetic or rule out
+  induced subdesigns at the ternary orders.
   That is the exact next gate, not another scalar-moment calculation.
   **Rejected shortcut — does the three-weight code lie close enough to the
   Griesmer bound to be rigid?**  The small root is exactly a projective
