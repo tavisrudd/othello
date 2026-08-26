@@ -2297,6 +2297,42 @@ Thus every near-sharp complement is at superlinear symmetric-difference
 distance from every Mason large-root set.  This eliminates all `O(q)`
 Mason switches, rather than leaving a bounded converted-line equality case.
 
+The exact missing bridge to a global contradiction is now visible.  If `M`
+is the point-line incidence matrix, `M^T M=qI+J` gives, for any Mason root
+`S`,
+
+```text
+q|B intersect S|
+ =sum_ell |B intersect ell| |S intersect ell|-|B||S|.  (SR24a-Mason-mixed)
+```
+
+Thus an `O(q)`-proximity theorem is precisely a lower bound on the mixed
+correlation of the line-degree vector of `B` with a Mason `{0,r,2r}` vector.
+The first two moments, the intrinsic degree spectrum, and the `(SR11)`
+three-line residue core do not control this mixed term.  Even mapping a Mason
+zero triangle to the triangle named by `(SR11)` gives only the lower fill
+bound `(SR24a-Mason-distance)`, not an upper distance bound.  A theorem that
+every near-sharp minimal blocker is `O(q)`-close to some Mason root would,
+together with `(SR24a-Mason-superlinear-gap)`, prove global nonexistence of
+the near-sharp regime.  It is therefore the missing classification theorem,
+not a consequence that may be assumed from the present moments.
+
+There is also a concrete moment-only red team.  At `eta=1`, `q=3r`, the
+formal complement spectrum
+
+```text
+t_r=6r+7,       t_(2r)=9r^2-3r-9,       t_q=3
+```
+
+satisfies the total line count, both incidence moments, and
+`sum c_ell(r-c_ell)=-6r^2`.  Its `r`-line incidence budget is
+`r(6r+7)=|B|+9r`, enough abstractly to give every point an essential
+`r`-secant.  This is not asserted to be a realizable projective set and it
+does not pass the later completeness/`(SR11)` gates; it shows only that the
+scalar moments plus the numerical minimality budget cannot produce a Mason
+correlation.  Projective coherence of the embedded `r`-secant arrangement is
+the indispensable extra input.
+
 Thus even the smallest possible triangle fill is not the start of a
 near-sharp construction: any Mason-based witness would require a superlinear
 global trade, beyond every `O(q)` scale.  This is a stability obstruction
@@ -5853,7 +5889,15 @@ family is lower priority.
   of the off-triangle additions forces a linear deficit outside them.  This
   settles every `O(q)` Mason-switch mechanism.  It remains a separation
   theorem around Mason, not a classification of arbitrary small roots or
-  minimal blocking sets.
+  minimal blocking sets.  The exact absent bridge is the mixed correlation
+  `(SR24a-Mason-mixed)`: intrinsic line moments and `(SR11)` do not bound
+  `sum |B intersect ell||S intersect ell|` for any particular Mason `S`.
+  Proving an `O(q)` Mason-attraction theorem would combine with the
+  superlinear gap to exclude the full near-sharp regime, so it cannot be
+  smuggled in as a routine stability corollary.  A formal three-weight line
+  spectrum at `eta=1` satisfies both scalar moments and the essential-line
+  incidence budget while containing no Mason correlation variable; it is a
+  moment-level countermodel, not a realizable projective example.
   **Rejected shortcut — does the three-weight code lie close enough to the
   Griesmer bound to be rigid?**  The small root is exactly a projective
   `q`-ary `[q(q+2)/3,3,q^2/3]` code with nonzero weights
