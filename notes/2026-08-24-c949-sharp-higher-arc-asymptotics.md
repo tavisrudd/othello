@@ -2318,16 +2318,17 @@ q|B intersect S|
  =sum_ell |B intersect ell| |S intersect ell|-|B||S|.  (SR24a-Mason-mixed)
 ```
 
-Thus an `O(q)`-proximity theorem is precisely a lower bound on the mixed
-correlation of the line-degree vector of `B` with a Mason `{0,r,2r}` vector.
+Thus a proximity theorem is precisely a lower bound on the mixed correlation
+of the line-degree vector of `B` with a Mason `{0,r,2r}` vector.
 The first two moments, the intrinsic degree spectrum, and the `(SR11)`
 three-line residue core do not control this mixed term.  Even mapping a Mason
 zero triangle to the triangle named by `(SR11)` gives only the lower fill
-bound `(SR24a-Mason-distance)`, not an upper distance bound.  A theorem that
-every near-sharp minimal blocker is `O(q)`-close to some Mason root would,
-together with `(SR24a-Mason-quantitative-gap)`, prove global nonexistence of
-the near-sharp regime.  It is therefore the missing classification theorem,
-not a consequence that may be assumed from the present moments.
+bound `(SR24a-Mason-distance)`, not an upper distance bound.  It now suffices
+to prove that every near-sharp minimal blocker is `o(q^(3/2))`-close to some
+Mason root; together with `(SR24a-Mason-quantitative-gap)`, this would
+prove global nonexistence of the near-sharp regime.  It is therefore the
+missing classification theorem, not a consequence that may be assumed from
+the present moments.
 
 There is also a concrete moment-only red team.  At `eta=1`, `q=3r`, the
 formal complement spectrum
@@ -5904,7 +5905,7 @@ family is lower priority.
   minimal blocking sets.  The exact absent bridge is the mixed correlation
   `(SR24a-Mason-mixed)`: intrinsic line moments and `(SR11)` do not bound
   `sum |B intersect ell||S intersect ell|` for any particular Mason `S`.
-  Proving an `O(q)` Mason-attraction theorem would combine with the
+  Proving an `o(q^(3/2))` Mason-attraction theorem would combine with the
   quantitative gap to exclude the full near-sharp regime, so it cannot be
   smuggled in as a routine stability corollary.  A formal three-weight line
   spectrum at `eta=1` satisfies both scalar moments and the essential-line
