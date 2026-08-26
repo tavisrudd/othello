@@ -334,6 +334,11 @@ values: both boundary quotients must then give the same coefficient of
 `e_26(a)=0`.  Transporting that filter into the 714 carrier gauges is now a
 precise compiler task, not a search for an unspecified invariant.
 
+Do not evaluate it on the original carrier top form: that chart's analogous
+coefficient is `1`.  The full boundary reflag must mix lower Chow layers and
+completion factors to produce zero.  This `1 -> 0` cancellation is a sharp
+unit test for the missing carrier compiler, not a contradiction.
+
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
 

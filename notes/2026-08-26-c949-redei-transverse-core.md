@@ -813,6 +813,18 @@ In the normalized q=27 flag this is the constant-time filter `e_26(a)=0`.
 It is coordinate-gauge dependent and cannot be applied to C962's 714 tasks
 until the carrier-to-this-Redei-flag map is made explicit.
 
+This dependence is substantive.  In the original balanced-shear carrier
+flag, `(TR20)` has
+
+```text
+[Zeta^(q+2)m^(q-1)] Zeta^3(Zeta^(q-1)-m^(q-1))^2=1,
+```
+
+not zero.  There is no contradiction: the boundary reflag and completion
+factors mix the full Chow layers into the new coefficient.  Any proposed
+carrier compiler must reproduce the `1 -> 0` cancellation from the complete
+reflagged product; evaluating `(TR40)` on raw carrier variables is invalid.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -866,5 +878,8 @@ until the carrier-to-this-Redei-flag map is made explicit.
   equivalent normalized elementary-symmetric compiler gate.
 - **Open:** identify `(TR38)` with a carrier/Witt/norm functional or use it
   directly against the selector and mapping gates.
+- **Settled/no-go:** the old carrier-top coefficient is one while `(TR40)`
+  is zero in the boundary flag; this is a reflag compiler test, not a
+  contradiction or a raw-carrier gate.
 - **Open:** obtain a common marked-flag or full norm/Witt transition that
   transports the fourth-Witt gate and the marked selector to `E,U`, or `L`.

@@ -301,3 +301,10 @@ the normalized elementary-symmetric identity `e_(q-1)(a)=0`, hence the
 constant-time q=27 filter `e_26(a)=0`.  Red-team confirmed the algebra and
 also the scope: the filter is flag-dependent, so it cannot be inserted into
 C962's 714 tasks until the explicit carrier-to-Redei gauge map is fixed.
+
+A last coordinate sanity check compared this zero with `(TR20)`: the
+analogous coefficient in the original balanced-shear top form is `1`.
+Independent red teams confirmed that the flags differ and the full
+projective reflag mixes lower Chow layers and completion factors.  The
+apparent `1 -> 0` change is therefore an exact compiler unit test, not a
+contradiction and not a gate on raw carrier coordinates.
