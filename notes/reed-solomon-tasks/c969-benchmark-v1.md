@@ -66,13 +66,14 @@ The benchmark separates four costs which must not be conflated:
 1. fixed-grid terminal completion after streamed prefix selection;
 2. the generic exact projective-locator oracle;
 3. exact tangent `mq(q-1)`, rootless-sigma `m(q^2-1)`, and simple-root-sigma
-   `O(mrq)` semilinear canonicalization, with the explicit `m(q^3-q)` fallback
-   retained for degenerate-root sigma and other families; and
+   `O(mrq)` semilinear canonicalization; the two sigma charts are exhaustive,
+   while the explicit `m(q^3-q)` fallback remains defensive and serves other
+   families; and
 4. independent certificate replay, which intentionally repeats canonical
    transport before checking family and radius evidence.
 
-No timing is a novelty or state-of-the-art claim. Degenerate-root sigma and
-nonpersistent canonicalization still use an honest group-scale fallback. Their
-remaining formula-speed canonicalizers, a wider q/field/redundancy benchmark
-grid beyond the first GF(8) fixture, bit-operation accounting, and comparison
-with external decoder software remain open benchmark work.
+No timing is a novelty or state-of-the-art claim. Nonpersistent
+canonicalization still uses an honest group-scale fallback. Its remaining
+formula-speed canonicalizers, a wider q/field/redundancy benchmark grid beyond
+the first GF(8) fixture, bit-operation accounting, and comparison with external
+decoder software remain open benchmark work.

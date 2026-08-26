@@ -41,11 +41,12 @@ Persistent tangent canonicalization now uses the repeated quadratic-gcd root
 to restrict exact lexicographic minimization to `m q(q-1)` affine transports;
 `c969-tangent-canonicalizer.md` proves equivalence to the full orbit minimum.
 Rootless-form sigma inputs now canonicalize exactly in `m(q^2-1)` transports,
-and the simple-root stratum in `O(m r q)`; degenerate-root sigma and
-nonpersistent inputs retain the explicit group fallback. A
+and the simple-root stratum in `O(m r q)`. Trace-pairing nondegeneracy proves
+these strata exhaust persistent sigma; nonpersistent inputs retain the explicit
+group fallback. A
 frozen R5 counterexample proves that centering an irreducible sigma gcd and
 enumerating its torus normalizer does not preserve the full-orbit minimum. The
-remaining sigma speedup is therefore phrased in intrinsic lex-coordinate
+sigma canonicalization is therefore phrased in intrinsic lex-coordinate
 strata rather than a guessed target quadratic. The fixed-pair class is
 extracted intrinsically in
 `F_q[X]/Q`: its inversion orbit is encoded by a trace, fused under base-field

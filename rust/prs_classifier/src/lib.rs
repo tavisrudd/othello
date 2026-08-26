@@ -2649,6 +2649,89 @@ mod tests {
     }
 
     #[test]
+    fn sigma_lex_charts_cover_bounded_quotient_fibres() {
+        let mut fibres = 0;
+        for q in [7, 11] {
+            let field_spec = prime_field(q);
+            let field = Field::new(field_spec.clone()).unwrap();
+            let quadratic = (1..q)
+                .flat_map(|constant| (0..q).map(move |linear| vec![constant, linear, 1]))
+                .find(|candidate| (0..q).all(|x| field.eval(candidate, x) != 0))
+                .unwrap();
+            for redundancy in 5..=usize::min(q as usize, 10) {
+                for [s0, s1] in (0..q)
+                    .map(|second| [1, second])
+                    .chain(std::iter::once([0, 1]))
+                {
+                    let mut syndrome = vec![s0, s1];
+                    while syndrome.len() < redundancy {
+                        let last = syndrome.len() - 1;
+                        syndrome.push(field.neg(field.add(
+                            field.mul(quadratic[1], syndrome[last]),
+                            field.mul(quadratic[0], syndrome[last - 1]),
+                        )));
+                    }
+                    let canonical = canonicalize_syndrome(
+                        &request(field_spec.clone(), redundancy, syndrome.clone()),
+                        5_000,
+                    )
+                    .unwrap();
+                    assert_ne!(
+                        canonical.transporters_examined,
+                        u64::from(q).pow(3) - u64::from(q)
+                    );
+                    fibres += 1;
+                }
+            }
+        }
+        for field_spec in [
+            FieldSpec {
+                p: 2,
+                degree: 3,
+                modulus: vec![1, 1, 0, 1],
+                encoding: "polynomial-basis-base-p-integer-v1".into(),
+            },
+            FieldSpec {
+                p: 3,
+                degree: 2,
+                modulus: vec![1, 0, 1],
+                encoding: "polynomial-basis-base-p-integer-v1".into(),
+            },
+        ] {
+            let field = Field::new(field_spec.clone()).unwrap();
+            let q = field.order();
+            let quadratic = (1..q)
+                .flat_map(|constant| (0..q).map(move |linear| vec![constant, linear, 1]))
+                .find(|candidate| (0..q).all(|x| field.eval(candidate, x) != 0))
+                .unwrap();
+            for redundancy in 5..=usize::min(q as usize, 9) {
+                for [s0, s1] in (0..q)
+                    .map(|second| [1, second])
+                    .chain(std::iter::once([0, 1]))
+                {
+                    let mut syndrome = vec![s0, s1];
+                    while syndrome.len() < redundancy {
+                        let last = syndrome.len() - 1;
+                        syndrome.push(field.neg(field.add(
+                            field.mul(quadratic[1], syndrome[last]),
+                            field.mul(quadratic[0], syndrome[last - 1]),
+                        )));
+                    }
+                    let canonical = canonicalize_syndrome(
+                        &request(field_spec.clone(), redundancy, syndrome.clone()),
+                        5_000,
+                    )
+                    .unwrap();
+                    let full = (u64::from(q).pow(3) - u64::from(q)) * field_spec.degree as u64;
+                    assert_ne!(canonical.transporters_examined, full);
+                    fibres += 1;
+                }
+            }
+        }
+        assert_eq!(fibres, 182);
+    }
+
+    #[test]
     fn pgl_action_preserves_nrc_and_canonicalizes_equivalent_inputs() {
         let field_spec = prime_field(7);
         let field = Field::new(field_spec.clone()).unwrap();

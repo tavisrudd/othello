@@ -209,7 +209,19 @@ sets `c=-hC/(2B)` for each of the `q-1` scales `h`. In characteristic two, if
 so both cases use `O(m n q)` transports. The implementation checks the forced
 prefix and retains exact transporters.
 
-Multiple roots, and the characteristic-two `C=0` stratum, retain the full
-explicit fallback. On q7/R5 the trace-two class has four simple roots and now
-uses 24 rather than 336 transports. The R6 q17 sigma benchmark has one simple
-root and uses 16 rather than 4,896 transports.
+There is in fact no remaining degenerate persistent-sigma stratum. Write
+`mu=lambda L(v)^n` and `t=L(w)/L(v)` in `F_(q^2)`. A rational root says
+`Tr(mu)=0`. If it were multiple, `B=Tr(mu t)` would also vanish. But `mu` is
+nonzero and `{1,t}` is an `F_q` basis, contradicting nondegeneracy of the trace
+pairing. Thus every rational root is simple. In characteristic two, `C=0`
+would similarly put both `1` and `t^2` in the one-dimensional trace kernel;
+this is impossible because `t^2 in F_q` would imply `t in F_q` over the
+perfect field `F_q`.
+
+Consequently the rootless and simple-root charts cover every persistent sigma
+input, with worst-case `O(mq^2)` transports. The explicit group path remains
+only as a defensive fail-closed branch. On q7/R5 the trace-two class has four
+simple roots and uses 24 rather than 336 transports. The R6 q17 sigma benchmark
+has one simple root and uses 16 rather than 4,896 transports. A bounded quotient
+regression covers all 182 fibers at q=7,8,9,11 through every valid tested level
+R5--R10 without reaching the defensive fallback.
