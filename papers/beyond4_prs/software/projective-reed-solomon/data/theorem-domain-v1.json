@@ -1,5 +1,5 @@
 {
-  "schema": "prs-theorem-domain-v1",
+  "schema": "projective-reed-solomon-theorem-domain-v1",
   "registry_version": 1,
   "frozen_at_authority_commit": "9da3651b5f1e0cd390f8fb40f74415e0fedc0b0e",
   "frozen_surface": {

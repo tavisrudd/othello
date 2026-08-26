@@ -20,21 +20,22 @@ boundary, certificate documentation, complexity summary, benchmark protocol,
 and terminal-selector summary.
 
 The paper Makefile has fast and slow software targets. The supplement generates
-and verifies a complete 18-file software manifest, registers it in the 74-entry
+and verifies a complete 21-file software manifest, registers it in the 74-entry
 evidence bundle, and includes the whole software subtree in deterministic export
 ownership. The canonical and TIT manuscripts state the broader computational
 domain without broadening the deep-hole theorem domain. Formatting, warning-free
-Clippy, 31 fast tests, both manuscript builds, and the quick 74-artifact
-supplement gate pass.
+Clippy, 31 focused library tests, three compiled-CLI integration tests, four
+fixed-seed property tests (1,024 generated cases), both manuscript builds, and
+the quick 74-artifact supplement gate pass.
 
 The deterministic exporter then produced a standalone paper repository at
 source commit `4dda2dec2764f0dcb08bfe923641943e91c2eeda`; its software and quick
 supplement gates pass without the monorepo. Filtering
 `software/projective-reed-solomon/` to the repository root with
 `git filter-repo` produced a second disposable repository whose formatting,
-warning-free Clippy, and 31-test gates pass without path repair. A CLI smoke
+warning-free Clippy, and fast test gates pass without path repair. A CLI smoke
 test classifies the documented GF(7)/R5 tangent request as `DEEP` and emits a
-task-ID-free `prs-deep-certificate-v1` certificate.
+task-ID-free `projective-reed-solomon-deep-certificate-v1` certificate.
 
 The TIT rebuild exposed a stale 50-page committed artifact whose source produced
 51 pages. The review driver now omits only the two tables of raw GF(7)

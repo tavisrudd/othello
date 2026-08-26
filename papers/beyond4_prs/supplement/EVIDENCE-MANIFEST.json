@@ -497,12 +497,12 @@
       "sha256": "ab90aea82259a0d0fdd71838aeefbdf67dd54b81142de8b462725c23046d1b51"
     },
     {
-      "bytes": 3462,
+      "bytes": 4013,
       "path": "SOFTWARE-MANIFEST.json",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Companion-software manifest",
-      "sha256": "face06dfa0263f8a6ce65fb8c313f9318a50947e29ed83eaf850e4b6a9578b9a"
+      "sha256": "1bc43979a84b2c56f8eedd1e5dd0ab1012bc68fc7c208685f0b0af510d0aaeab"
     },
     {
       "bytes": 12027,

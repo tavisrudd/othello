@@ -16,14 +16,14 @@
       "sha256": "0772021fc1e4ada77a61a5d00acab923666f8642b50c11d63af4d267e8b8ce47"
     },
     {
-      "bytes": 6999,
+      "bytes": 14669,
       "path": "software/projective-reed-solomon/Cargo.lock",
-      "sha256": "8dc9c53644af4173edda0cc01a93db424a5424b09f6f58aa53d57c56c2ab2b6e"
+      "sha256": "86c58cbc685518c227a599479b61a760882f7b0ec65a6ef7993c77e713820cae"
     },
     {
-      "bytes": 571,
+      "bytes": 855,
       "path": "software/projective-reed-solomon/Cargo.toml",
-      "sha256": "ac337deb8be78c0e4e739c1aed88ecd5b528c2e87de84d6631f8148013b3f121"
+      "sha256": "f588cfce8d241fb0064dc422b6a2646bb368af505837504cd34ed2c71c4eebc6"
     },
     {
       "bytes": 1067,
@@ -31,29 +31,29 @@
       "sha256": "4e0707ba71e80441ab251d8a520456723b8747e3929fc9df17d831e3ee282b15"
     },
     {
-      "bytes": 8343,
+      "bytes": 8519,
       "path": "software/projective-reed-solomon/README.md",
-      "sha256": "71cac1c10794070c14d4fdfd229559c5d4d8a546da080df1235e51faccfd52c6"
+      "sha256": "e36619f735e8e75d4f14983c12f9a91c342eb0478da6f75bbe75bbd31aded926"
     },
     {
-      "bytes": 72422,
+      "bytes": 72442,
       "path": "software/projective-reed-solomon/data/frozen-orbits-v1.json",
-      "sha256": "1ccac4e15129fd31605df23c0e611ddf84da32adf7b20316389b4e4187f51ddd"
+      "sha256": "aebaf01b3fefef4dea738bc476a04193b4f24f7953ad533374319e4d4b616e85"
     },
     {
-      "bytes": 7120,
+      "bytes": 7140,
       "path": "software/projective-reed-solomon/data/theorem-domain-v1.json",
-      "sha256": "cfaf6182641c8e2c27668e5041d96146687661d64df5f947cfb85cbca1876027"
+      "sha256": "1619d15d50ae70d9a59bceb67a7c53d4d795b59e2880f570ad870ef364b9aba3"
     },
     {
-      "bytes": 795,
+      "bytes": 815,
       "path": "software/projective-reed-solomon/docs/benchmarks.md",
-      "sha256": "c82daf284eeba84f748fa3179833d5e25564b27181cf46d791fc152d67fc58fc"
+      "sha256": "79e6311ccc60579a66514afb6efceb48b809111f5d505096887ede5b7a9a95c0"
     },
     {
-      "bytes": 888,
+      "bytes": 948,
       "path": "software/projective-reed-solomon/docs/certificate-schemas.md",
-      "sha256": "b478ba07fa9e901e187e569a66b4a81489f688ccd254666e3cf80d477cec17b4"
+      "sha256": "d047c16d4729dbeb1939a8290f1b68c1fcd04752ad53d2b544d54428dad6cc4f"
     },
     {
       "bytes": 951,
@@ -66,6 +66,11 @@
       "sha256": "f9aa898b7c605dcd8f55834d3713529908095e1ab37877fc4ab43eb2b8f429f5"
     },
     {
+      "bytes": 1356,
+      "path": "software/projective-reed-solomon/docs/testing.md",
+      "sha256": "681d7a902090906632358a65e3d88477eb277c3f7e75d7880430f59725a21b27"
+    },
+    {
       "bytes": 1272,
       "path": "software/projective-reed-solomon/docs/theorem-boundary.md",
       "sha256": "b1ca9dac08a03cd0e26b8ae2c76a8c3207af0467a5bca16e7043526d2618f2c5"
@@ -76,19 +81,29 @@
       "sha256": "e1633ee4dccddc1fd314c184e83109e96a8366e1fbc8f8e51e505f8aa879a929"
     },
     {
-      "bytes": 16878,
+      "bytes": 16898,
       "path": "software/projective-reed-solomon/src/bin/projective_reed_solomon_benchmark.rs",
-      "sha256": "97c59727eeb57a82563155b950a9a56a74b456f0cd6e8470c06ac5636773fa6b"
+      "sha256": "f26801fd0af895aa60f8eaba1c0c89148666a1e94855e3d17a9fd3709fb93363"
     },
     {
-      "bytes": 145174,
+      "bytes": 145296,
       "path": "software/projective-reed-solomon/src/lib.rs",
-      "sha256": "ba9cdad226fd8c6716da1a1556d055feb604c8f60730d12a4d2c14936ea14e39"
+      "sha256": "bab1c096625c6c23d26a4c8080165bed6b610531f8eccce3a9bf83e12e9b30b1"
     },
     {
       "bytes": 4000,
       "path": "software/projective-reed-solomon/src/main.rs",
       "sha256": "57437855a31cdecfe5b52da90f5e54cb54cfe987cfdfe2125dc81b3b8c777a91"
+    },
+    {
+      "bytes": 3322,
+      "path": "software/projective-reed-solomon/tests/cli.rs",
+      "sha256": "277284a1926a5edde2e97f9ae99ea95778ab6e1dfdd216d1f23cc5b03e22f4fa"
+    },
+    {
+      "bytes": 4333,
+      "path": "software/projective-reed-solomon/tests/properties.rs",
+      "sha256": "88ebdf885950b24ec336a88c2684b1569bc071a29d6b1ebb08c35275e35b4604"
     }
   ],
   "hash": "sha256",

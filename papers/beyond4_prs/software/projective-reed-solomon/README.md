@@ -62,7 +62,7 @@ A prime-field request has this shape:
 
 ```json
 {
-  "schema": "prs-request-v1",
+  "schema": "projective-reed-solomon-request-v1",
   "field": {
     "p": 7,
     "degree": 1,
@@ -135,8 +135,9 @@ defensive correctness branch after the 12-point selector. The proof and
 degree count are summarized in
 [`docs/terminal-hyperplane-solver.md`](docs/terminal-hyperplane-solver.md).
 
-`verify-certificate` accepts both `prs-locator-certificate-v1` negative
-witnesses and `prs-deep-certificate-v1` positive certificates. A deep
+`verify-certificate` accepts both
+`projective-reed-solomon-locator-certificate-v1` negative witnesses and
+`projective-reed-solomon-deep-certificate-v1` positive certificates. A deep
 certificate is emitted only for `DEEP`, never for `UNRESOLVED` or
 `UNSUPPORTED`.
 
@@ -159,6 +160,8 @@ is the fail-closed theorem registry used by positive deep certificates, while
 Neither file silently promotes generic computation into a covering-radius
 theorem. See [`docs/theorem-boundary.md`](docs/theorem-boundary.md) and
 [`docs/certificate-schemas.md`](docs/certificate-schemas.md).
+The deterministic unit, property, CLI, and exhaustive layers are described in
+[`docs/testing.md`](docs/testing.md).
 
 The software is licensed under the MIT License. The surrounding paper and its
 non-software material are licensed separately under CC BY 4.0.

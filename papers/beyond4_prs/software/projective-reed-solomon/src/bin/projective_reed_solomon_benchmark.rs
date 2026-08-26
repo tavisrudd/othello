@@ -409,7 +409,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!(
         "{}",
         serde_json::to_string_pretty(&BenchmarkReport {
-            schema: "prs-benchmark-report-v1",
+            schema: "projective-reed-solomon-benchmark-report-v1",
             crate_version: env!("CARGO_PKG_VERSION"),
             build_profile: if cfg!(debug_assertions) {
                 "debug"

@@ -7,7 +7,7 @@ cargo run --locked --release --bin projective-reed-solomon-benchmark -- \
   --iterations 10 --extension-fields
 ```
 
-It emits `prs-benchmark-report-v1` JSON and separately times the terminal
+It emits `projective-reed-solomon-benchmark-report-v1` JSON and separately times the terminal
 selector, exact projective-locator oracle, structural canonicalization,
 classification, and certificate replay. Candidate and transport counts are
 reported alongside timings so machine speed is not confused with the proved

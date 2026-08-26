@@ -85,7 +85,9 @@ Projective Reed--Solomon Toolkit now lives under
 library, executable, Clap interface, registries, lock, Rust pin, license,
 citation, and documentation are self-contained and expose no task identifiers.
 The paper and supplement now state and hash the exact software/theorem boundary,
-and the fast software, manuscript, and 74-artifact quick gates pass. Both the
+and the fast software gate now covers 31 focused library tests, three compiled-CLI
+integration tests, and four fixed-seed property tests (1,024 generated cases).
+The manuscript and 74-artifact quick gates pass. Both the
 standalone paper export and a history-filtered software-only repository pass
 their fast gates without path repair. A stale 50-page TIT artifact rebuilt to
 51 pages; the review driver now points to, rather than reprints, the two raw

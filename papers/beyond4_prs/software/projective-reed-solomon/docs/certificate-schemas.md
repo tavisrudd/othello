@@ -2,10 +2,10 @@
 
 The command-line interface accepts and emits versioned JSON objects.
 
-- `prs-request-v1` is the normalized operation request.
-- `prs-locator-certificate-v1` records a locator and magnitude reconstruction
+- `projective-reed-solomon-request-v1` is the normalized operation request.
+- `projective-reed-solomon-locator-certificate-v1` records a locator and magnitude reconstruction
   that independently witnesses a closer codeword.
-- `prs-deep-certificate-v1` records the normalized syndrome, canonical
+- `projective-reed-solomon-deep-certificate-v1` records the normalized syndrome, canonical
   transporter, recognized family or frozen orbit, applicable theorem-domain
   row, and covering-radius promotion used for a positive `DEEP` verdict.
 
