@@ -6,6 +6,8 @@
 //! remaining singleton transversals into compact, allocation-free scan data.
 
 use crate::projective::TernaryExtensionField;
+#[cfg(feature = "parallel")]
+use rayon::prelude::*;
 use rustc_hash::{FxHashMap, FxHashSet};
 use thiserror::Error;
 
@@ -1707,11 +1709,7 @@ impl BalancedTransversalCatalog {
         &self,
         limits: BalancedQueueLimits,
     ) -> Result<BalancedQueueDfsResult, BalancedDfsError> {
-        let task_cap = if limits.max_tasks == 0 {
-            self.all_work_items().len()
-        } else {
-            usize::from(limits.max_tasks).min(self.all_work_items().len())
-        };
+        let task_cap = balanced_task_cap(self.all_work_items().len(), limits.max_tasks);
         let mut tasks = Vec::with_capacity(task_cap);
         for work_ordinal in 0..task_cap {
             let result = self.search_balanced_work_item(work_ordinal, limits)?;
@@ -1732,6 +1730,80 @@ impl BalancedTransversalCatalog {
             },
             tasks: tasks.into_boxed_slice(),
         })
+    }
+
+    /// Evaluates every selected work item, including items whose bounded
+    /// search returns `Incomplete`.  This is the checkpoint-friendly queue
+    /// operation: task results remain in canonical ordinal order, and only a
+    /// complete rejection of all 714 tasks can return `Rejected`.
+    pub fn search_balanced_work_batch(
+        &self,
+        limits: BalancedQueueLimits,
+    ) -> Result<BalancedQueueDfsResult, BalancedDfsError> {
+        let task_cap = balanced_task_cap(self.all_work_items().len(), limits.max_tasks);
+        let mut tasks = Vec::with_capacity(task_cap);
+        for work_ordinal in 0..task_cap {
+            tasks.push(self.search_balanced_work_item(work_ordinal, limits)?);
+        }
+        Ok(finish_balanced_work_batch(
+            self.all_work_items().len(),
+            tasks,
+        ))
+    }
+
+    /// Parallel counterpart of [`Self::search_balanced_work_batch`].
+    ///
+    /// Work stealing occurs only across the independent semilinear tasks;
+    /// each task keeps the allocation-conscious depth-first search local to
+    /// one worker.  The caller controls the Rayon pool, while collection by
+    /// indexed ordinal makes the result bit-for-bit deterministic.
+    #[cfg(feature = "parallel")]
+    pub fn search_balanced_work_batch_parallel(
+        &self,
+        limits: BalancedQueueLimits,
+    ) -> Result<BalancedQueueDfsResult, BalancedDfsError> {
+        let task_cap = balanced_task_cap(self.all_work_items().len(), limits.max_tasks);
+        let tasks = (0..task_cap)
+            .into_par_iter()
+            .map(|work_ordinal| self.search_balanced_work_item(work_ordinal, limits))
+            .collect::<Result<Vec<_>, _>>()?;
+        Ok(finish_balanced_work_batch(
+            self.all_work_items().len(),
+            tasks,
+        ))
+    }
+}
+
+#[inline]
+fn balanced_task_cap(task_count: usize, max_tasks: u16) -> usize {
+    if max_tasks == 0 {
+        task_count
+    } else {
+        usize::from(max_tasks).min(task_count)
+    }
+}
+
+fn finish_balanced_work_batch(
+    total_task_count: usize,
+    tasks: Vec<BalancedWorkDfsResult>,
+) -> BalancedQueueDfsResult {
+    let status = if tasks
+        .iter()
+        .any(|task| task.status == BalancedDfsStatus::Witness)
+    {
+        BalancedDfsStatus::Witness
+    } else if tasks.len() == total_task_count
+        && tasks
+            .iter()
+            .all(|task| task.status == BalancedDfsStatus::Rejected)
+    {
+        BalancedDfsStatus::Rejected
+    } else {
+        BalancedDfsStatus::Incomplete
+    };
+    BalancedQueueDfsResult {
+        status,
+        tasks: tasks.into_boxed_slice(),
     }
 }
 
@@ -3320,5 +3392,53 @@ mod tests {
         assert_eq!(result.tasks.len(), 1);
         assert_eq!(result.tasks[0].high_sets_examined, 1);
         assert_eq!(result.tasks[0].stats.nodes, 1);
+    }
+
+    #[test]
+    fn bounded_work_batch_retains_every_checkpoint() {
+        let catalog = BalancedTransversalCatalog::q27();
+        let result = catalog
+            .search_balanced_work_batch(BalancedQueueLimits {
+                max_tasks: 8,
+                max_high_sets_per_task: 1,
+                per_high_set: BalancedDfsLimits {
+                    max_nodes: 1,
+                    max_terminal_carriers: 0,
+                },
+            })
+            .unwrap();
+        assert_eq!(result.status, BalancedDfsStatus::Incomplete);
+        assert_eq!(result.tasks.len(), 8);
+        assert!(result
+            .tasks
+            .iter()
+            .enumerate()
+            .all(|(ordinal, task)| usize::from(task.work_ordinal) == ordinal));
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn parallel_work_batch_is_deterministic_across_thread_counts() {
+        let catalog = BalancedTransversalCatalog::q27();
+        let limits = BalancedQueueLimits {
+            max_tasks: 8,
+            max_high_sets_per_task: 1,
+            per_high_set: BalancedDfsLimits {
+                max_nodes: 1,
+                max_terminal_carriers: 0,
+            },
+        };
+        let expected = catalog.search_balanced_work_batch(limits).unwrap();
+        for threads in [1, 2, 4] {
+            let pool = rayon::ThreadPoolBuilder::new()
+                .num_threads(threads)
+                .build()
+                .unwrap();
+            assert_eq!(
+                pool.install(|| catalog.search_balanced_work_batch_parallel(limits))
+                    .unwrap(),
+                expected
+            );
+        }
     }
 }

@@ -31,11 +31,23 @@ fn main() {
     let max_high_sets = parse_argument(&arguments, 2, 1);
     let max_nodes = parse_argument(&arguments, 3, 10_000);
     let max_terminals = parse_argument(&arguments, 4, 10_000);
+    let options = arguments.get(5..).unwrap_or_default();
+    let requested_threads = options
+        .iter()
+        .find_map(|value| value.strip_prefix("threads="))
+        .map(|value| {
+            let threads = value
+                .parse::<usize>()
+                .expect("thread count must be an integer");
+            assert!(threads != 0, "thread count must be positive");
+            threads
+        });
     let catalog = BalancedTransversalCatalog::q27();
-    if let Some(encoded) = arguments
-        .get(5)
-        .and_then(|value| value.strip_prefix("high="))
-    {
+    if let Some(encoded) = options.iter().find_map(|value| value.strip_prefix("high=")) {
+        assert!(
+            requested_threads.is_none(),
+            "exact-spec mode evaluates one task"
+        );
         let values = encoded
             .split(',')
             .map(|value| value.parse::<u8>().expect("high values must be bytes"))
@@ -88,18 +100,51 @@ fn main() {
         print_cores(&result.rejection_cores);
         return;
     }
-    let show_cores = arguments.get(5).is_some_and(|value| value == "cores");
-    let result = catalog
-        .search_balanced_work_queue(BalancedQueueLimits {
-            max_tasks: u16::try_from(max_tasks).expect("task limit exceeds u16"),
-            max_high_sets_per_task: max_high_sets,
-            per_high_set: BalancedDfsLimits {
-                max_nodes,
-                max_terminal_carriers: max_terminals,
-            },
-        })
-        .expect("bounded DFS input is valid");
-    println!("status={:?} tasks={}", result.status, result.tasks.len());
+    let show_cores = options.iter().any(|value| value == "cores");
+    let limits = BalancedQueueLimits {
+        max_tasks: u16::try_from(max_tasks).expect("task limit exceeds u16"),
+        max_high_sets_per_task: max_high_sets,
+        per_high_set: BalancedDfsLimits {
+            max_nodes,
+            max_terminal_carriers: max_terminals,
+        },
+    };
+    #[cfg(feature = "parallel")]
+    let threads = Some(requested_threads.unwrap_or_else(|| {
+        std::thread::available_parallelism()
+            .expect("available parallelism must be reported")
+            .get()
+    }));
+    #[cfg(not(feature = "parallel"))]
+    let threads = requested_threads;
+    let result = if let Some(threads) = threads {
+        #[cfg(feature = "parallel")]
+        {
+            let pool = rayon::ThreadPoolBuilder::new()
+                .num_threads(threads)
+                .thread_name(|index| format!("balanced-{index}"))
+                .build()
+                .expect("Rayon pool construction must succeed");
+            pool.install(|| catalog.search_balanced_work_batch_parallel(limits))
+                .expect("bounded DFS input is valid")
+        }
+        #[cfg(not(feature = "parallel"))]
+        {
+            let _ = threads;
+            panic!("threads= requires --features parallel");
+        }
+    } else {
+        catalog
+            .search_balanced_work_queue(limits)
+            .expect("bounded DFS input is valid")
+    };
+    println!(
+        "status={:?} tasks={} mode={} threads={}",
+        result.status,
+        result.tasks.len(),
+        if threads.is_some() { "batch" } else { "prefix" },
+        threads.unwrap_or(1)
+    );
     for task in &result.tasks {
         let core_sizes = task
             .rejection_cores
