@@ -1168,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, exhaustive persistent-sigma `O(mq^2)`, and generic rootless/simple-root lex canonicalizers green; the sigma quotient has intrinsic certificate replay, while the multiple-root nonpersistent chart and general complexity theorem remain open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, exhaustive persistent-sigma `O(mq^2)`, and exhaustive binary-form lex canonicalizers green, including the Lucas-degenerate maximal-root stabilizer at `O(m r q^2)`; structural canonicalization supports every `r>=5`, with R11 q13 full-PGL regressions, while coding verdicts remain R5--R10 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1230,13 +1230,13 @@ history.
 
 `go C969`
 
-(Resolve the multiple-root nonpersistent lex chart. The intrinsic sigma
-extractor/certificate replay and the generic exact `m(q^2-1)` rootless and
-`O(mrq)` simple-root charts are green; trace nondegeneracy makes them exhaustive
-for persistent sigma, and a q9 sporadic regression checks the generic route.
-Preserve the explicit fallback while deriving the maximal root-multiplicity
-prefix and implementing the proved triangular successor
-`hE/D+(mu+1)c`; isolate only the simultaneous Lucas degeneration. Keep the
+(Turn the exhaustive binary-form lex charts into a general complexity theorem
+and widen the higher-dimensional regression grid. The simultaneous Lucas
+degeneration is closed by exact maximal-root stabilizer enumeration in
+`O(m r q^2)`, persistent sigma is exhaustive, and structural canonicalization
+extends to every `r>=5` with R11 q13 full-PGL regressions. Preserve the explicit
+enumerator as a reference oracle. Keep coding verdicts
+R5--R10 unless a new covering-radius theorem is separately frozen. Keep the
 general C607 split-factorization exponent theorem separate.  C915's three
 independent Version 2 audits remain the
 higher-EV external-release gate but are a separate active card.)

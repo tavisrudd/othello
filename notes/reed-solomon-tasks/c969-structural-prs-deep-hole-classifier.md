@@ -43,8 +43,9 @@ to restrict exact lexicographic minimization to `m q(q-1)` affine transports;
 Rootless-form sigma inputs now canonicalize exactly in `m(q^2-1)` transports,
 and the simple-root stratum in `O(m r q)`. Trace-pairing nondegeneracy proves
 these strata exhaust persistent sigma. The same exact lex charts now accelerate
-rootless and simple-root nonpersistent inputs; only their multiple-root stratum
-retains the explicit group fallback. A
+all nonpersistent inputs: maximal rational Hasse multiplicity handles the
+multiple-root stratum in `O(m r q)` transports, or `O(m r q^2)` when its first
+successor is simultaneously Lucas-degenerate. A
 frozen R5 counterexample proves that centering an irreducible sigma gcd and
 enumerating its torus normalizer does not preserve the full-orbit minimum. The
 sigma canonicalization is therefore phrased in intrinsic lex-coordinate
@@ -52,6 +53,15 @@ strata rather than a guessed target quadratic. The fixed-pair class is
 extracted intrinsically in
 `F_q[X]/Q`: its inversion orbit is encoded by a trace, fused under base-field
 Frobenius, attached to positive sigma certificates, and independently replayed.
+
+The structural canonicalization API now extends beyond the classifier's
+R5--R10 theorem registry: for every `r>=5` with `q>=r`, it returns an exact
+semilinear canonical form and transporter using the dimension-independent
+binary-form charts. R11 tangent and sigma fixtures over `F_13` agree with full
+PGL enumeration. The full PGL enumerator remains as a defensive reference and
+regression oracle, not a reachable generic-form branch. `classify`, `distance`,
+and `decode` deliberately remain R5--R10-only, so this scope extension makes no
+unsupported covering-radius or deep-hole assertion.
 
 ## Goal
 

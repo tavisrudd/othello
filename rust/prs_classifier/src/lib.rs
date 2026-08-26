@@ -20,6 +20,8 @@ pub enum Error {
     ReducibleModulus,
     #[error("redundancy must lie in 5..=10")]
     BadRedundancy,
+    #[error("structural canonicalization requires redundancy at least 5")]
+    BadCanonicalizationRedundancy,
     #[error("full-length PRS requires q>=r so that the code has positive dimension")]
     BadCodeParameters,
     #[error("the syndrome dimension does not equal the redundancy")]
@@ -46,6 +48,8 @@ pub enum Error {
     BadDeepCertificate,
     #[error("persistent sigma invariant extraction failed")]
     BadSigmaInvariant,
+    #[error("reduced canonicalization witness failed")]
+    BadCanonicalizationWitness,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
@@ -386,11 +390,22 @@ impl Field {
 }
 
 pub fn validate_request(request: &Request) -> Result<(Field, Vec<u32>), Error> {
-    if request.schema != REQUEST_SCHEMA || request.evaluation != "full-projective-nrc-v1" {
-        return Err(Error::BadSchema);
-    }
     if !(5..=10).contains(&request.redundancy) {
         return Err(Error::BadRedundancy);
+    }
+    validate_request_shape(request)
+}
+
+fn validate_canonicalization_request(request: &Request) -> Result<(Field, Vec<u32>), Error> {
+    if request.redundancy < 5 {
+        return Err(Error::BadCanonicalizationRedundancy);
+    }
+    validate_request_shape(request)
+}
+
+fn validate_request_shape(request: &Request) -> Result<(Field, Vec<u32>), Error> {
+    if request.schema != REQUEST_SCHEMA || request.evaluation != "full-projective-nrc-v1" {
+        return Err(Error::BadSchema);
     }
     if request.syndrome.len() != request.redundancy {
         return Err(Error::BadSyndromeDimension);
@@ -848,7 +863,7 @@ pub fn canonicalize_syndrome(
     request: &Request,
     transporter_limit: u64,
 ) -> Result<Canonicalization, Error> {
-    let (field, syndrome) = validate_request(request)?;
+    let (field, syndrome) = validate_canonicalization_request(request)?;
     let persistent = persistent_kind(&field, &syndrome);
     if persistent == PersistentKind::Tangent {
         return canonicalize_tangent(&field, syndrome, transporter_limit);
@@ -860,6 +875,11 @@ pub fn canonicalize_syndrome(
     }
     if let Some(canonicalization) =
         canonicalize_simple_root_form(&field, syndrome.clone(), transporter_limit)?
+    {
+        return Ok(canonicalization);
+    }
+    if let Some(canonicalization) =
+        canonicalize_multiple_root_form(&field, syndrome.clone(), transporter_limit)?
     {
         return Ok(canonicalization);
     }
@@ -938,8 +958,8 @@ fn canonicalize_rootless_form(
     }
     Ok(Some(Canonicalization {
         normalized_input: syndrome,
-        canonical_syndrome: best.ok_or(Error::BadSigmaInvariant)?,
-        transporter: best_transporter.ok_or(Error::BadSigmaInvariant)?,
+        canonical_syndrome: best.ok_or(Error::BadCanonicalizationWitness)?,
+        transporter: best_transporter.ok_or(Error::BadCanonicalizationWitness)?,
         transporters_examined: examined,
         complexity: "rootless binary form: m*(q^2-1) lex-forced second-coordinate transports",
     }))
@@ -997,7 +1017,7 @@ fn canonicalize_simple_root_form(
             let parameters = if field.spec.p == 2 {
                 let scale = field
                     .inv(base_candidate[2])
-                    .ok_or(Error::BadSigmaInvariant)?;
+                    .ok_or(Error::BadCanonicalizationWitness)?;
                 (0..field.order())
                     .map(|shift| (scale, shift))
                     .collect::<Vec<_>>()
@@ -1039,11 +1059,169 @@ fn canonicalize_simple_root_form(
     }
     Ok(Some(Canonicalization {
         normalized_input: syndrome,
-        canonical_syndrome: best.ok_or(Error::BadSigmaInvariant)?,
-        transporter: best_transporter.ok_or(Error::BadSigmaInvariant)?,
+        canonical_syndrome: best.ok_or(Error::BadCanonicalizationWitness)?,
+        transporter: best_transporter.ok_or(Error::BadCanonicalizationWitness)?,
         transporters_examined: examined,
         complexity:
             "simple-root binary form: lex-forced first three coordinates; O(m*r*q) transports",
+    }))
+}
+
+fn canonicalize_multiple_root_form(
+    field: &Field,
+    syndrome: Vec<u32>,
+    transporter_limit: u64,
+) -> Result<Option<Canonicalization>, Error> {
+    let rows = projective_rows(field);
+    let mut maximal_multiplicity = 0;
+    let mut maximal_root_count = 0u64;
+    for &(bottom, complement) in &rows {
+        let matrix = [complement[0], complement[1], bottom[0], bottom[1]];
+        let (candidate, _) = apply_semilinear(field, &syndrome, 0, matrix)?;
+        let multiplicity = candidate
+            .iter()
+            .position(|&coordinate| coordinate != 0)
+            .ok_or(Error::BadCanonicalizationWitness)?;
+        if multiplicity > maximal_multiplicity {
+            maximal_multiplicity = multiplicity;
+            maximal_root_count = 1;
+        } else if multiplicity == maximal_multiplicity {
+            maximal_root_count += 1;
+        }
+    }
+    if maximal_multiplicity < 2 {
+        return Ok(None);
+    }
+    let pure_power = maximal_multiplicity + 1 == syndrome.len();
+    let modular_coefficient = if pure_power {
+        0
+    } else {
+        ((maximal_multiplicity + 1) as u32) % field.spec.p
+    };
+    let mut degenerate_root_count = 0u64;
+    if !pure_power && modular_coefficient == 0 {
+        for &(bottom, complement) in &rows {
+            let matrix = [complement[0], complement[1], bottom[0], bottom[1]];
+            let (candidate, _) = apply_semilinear(field, &syndrome, 0, matrix)?;
+            let multiplicity = candidate
+                .iter()
+                .position(|&coordinate| coordinate != 0)
+                .ok_or(Error::BadCanonicalizationWitness)?;
+            if multiplicity == maximal_multiplicity && candidate[maximal_multiplicity + 1] == 0 {
+                degenerate_root_count += 1;
+            }
+        }
+    }
+
+    let (retained_root_count, per_root) = if pure_power {
+        (maximal_root_count, 1)
+    } else if modular_coefficient != 0 {
+        (maximal_root_count, u64::from(field.order() - 1))
+    } else if degenerate_root_count == 0 {
+        (maximal_root_count, u64::from(field.order()))
+    } else {
+        (
+            degenerate_root_count,
+            u64::from(field.order()) * u64::from(field.order() - 1),
+        )
+    };
+    let total = retained_root_count
+        .checked_mul(per_root)
+        .and_then(|count| count.checked_mul(u64::try_from(field.spec.degree).unwrap_or(u64::MAX)))
+        .ok_or(Error::FieldTooLarge)?;
+    if total > transporter_limit {
+        return Err(Error::CandidateLimit {
+            limit: transporter_limit,
+        });
+    }
+
+    let coefficient_inverse = field.inv(modular_coefficient);
+    let mut best: Option<Vec<u32>> = None;
+    let mut best_transporter = None;
+    let mut examined = 0;
+    for exponent in 0..field.spec.degree {
+        for &(bottom, complement) in &rows {
+            let base_matrix = [complement[0], complement[1], bottom[0], bottom[1]];
+            let (base_candidate, _) = apply_semilinear(field, &syndrome, exponent, base_matrix)?;
+            let multiplicity = base_candidate
+                .iter()
+                .position(|&coordinate| coordinate != 0)
+                .ok_or(Error::BadCanonicalizationWitness)?;
+            if multiplicity != maximal_multiplicity {
+                continue;
+            }
+            let next = (!pure_power).then(|| base_candidate[maximal_multiplicity + 1]);
+            if degenerate_root_count != 0 && next != Some(0) {
+                continue;
+            }
+            let parameters = if pure_power {
+                vec![(1, 0)]
+            } else if let Some(inverse) = coefficient_inverse {
+                (1..field.order())
+                    .map(|scale| {
+                        let shift = field.neg(field.mul(
+                            field.mul(scale, next.expect("non-pure form has successor")),
+                            inverse,
+                        ));
+                        (scale, shift)
+                    })
+                    .collect::<Vec<_>>()
+            } else if next == Some(0) {
+                (1..field.order())
+                    .flat_map(|scale| (0..field.order()).map(move |shift| (scale, shift)))
+                    .collect::<Vec<_>>()
+            } else {
+                let scale = field
+                    .inv(next.expect("non-pure form has successor"))
+                    .ok_or(Error::BadCanonicalizationWitness)?;
+                (0..field.order())
+                    .map(|shift| (scale, shift))
+                    .collect::<Vec<_>>()
+            };
+            for (scale, shift) in parameters {
+                let matrix = normalize_matrix(
+                    field,
+                    [
+                        field.add(field.mul(scale, complement[0]), field.mul(shift, bottom[0])),
+                        field.add(field.mul(scale, complement[1]), field.mul(shift, bottom[1])),
+                        bottom[0],
+                        bottom[1],
+                    ],
+                )?;
+                let (candidate, output_scale) =
+                    apply_semilinear(field, &syndrome, exponent, matrix)?;
+                debug_assert!(candidate[..maximal_multiplicity]
+                    .iter()
+                    .all(|&coordinate| coordinate == 0));
+                debug_assert_eq!(candidate[maximal_multiplicity], 1);
+                if !pure_power {
+                    debug_assert_eq!(
+                        candidate[maximal_multiplicity + 1],
+                        u32::from(modular_coefficient == 0 && degenerate_root_count == 0)
+                    );
+                }
+                examined += 1;
+                if best.as_ref().is_none_or(|current| candidate < *current) {
+                    best = Some(candidate);
+                    best_transporter = Some(Transporter {
+                        frobenius_exponent: exponent,
+                        matrix,
+                        projective_output_scale: output_scale,
+                    });
+                }
+            }
+        }
+    }
+    Ok(Some(Canonicalization {
+        normalized_input: syndrome,
+        canonical_syndrome: best.ok_or(Error::BadCanonicalizationWitness)?,
+        transporter: best_transporter.ok_or(Error::BadCanonicalizationWitness)?,
+        transporters_examined: examined,
+        complexity: if degenerate_root_count == 0 {
+            "multiple-root binary form: maximal Hasse multiplicity and lex-forced successor; O(m*r*q) transports"
+        } else {
+            "multiple-root binary form: Lucas-degenerate maximal-root stabilizers; O(m*r*q^2) transports"
+        },
     }))
 }
 
@@ -2326,6 +2504,51 @@ mod tests {
     }
 
     #[test]
+    fn structural_canonicalization_extends_beyond_r10() {
+        let field_spec = prime_field(13);
+        let field = Field::new(field_spec.clone()).unwrap();
+
+        let mut tangent = vec![0; 11];
+        tangent[9] = 1;
+        let tangent_request = request(field_spec.clone(), 11, tangent.clone());
+        let tangent_reduced = canonicalize_syndrome(&tangent_request, 3_000).unwrap();
+        let tangent_explicit = canonicalize_explicit(&field, tangent, 3_000).unwrap();
+        assert_eq!(
+            tangent_reduced.canonical_syndrome,
+            tangent_explicit.canonical_syndrome
+        );
+        assert_eq!(tangent_reduced.transporters_examined, 156);
+
+        let quadratic = (1..13)
+            .flat_map(|constant| (0..13).map(move |linear| vec![constant, linear, 1]))
+            .find(|candidate| (0..13).all(|x| field.eval(candidate, x) != 0))
+            .unwrap();
+        let mut sigma = vec![1, 1];
+        while sigma.len() < 11 {
+            let last = sigma.len() - 1;
+            sigma.push(field.neg(field.add(
+                field.mul(quadratic[1], sigma[last]),
+                field.mul(quadratic[0], sigma[last - 1]),
+            )));
+        }
+        let sigma_request = request(field_spec, 11, sigma.clone());
+        let invariant = sigma_invariant(&field, &sigma).unwrap();
+        assert_eq!(invariant.quotient_order, 2);
+        let sigma_reduced = canonicalize_syndrome(&sigma_request, 3_000).unwrap();
+        let sigma_explicit = canonicalize_explicit(&field, sigma, 3_000).unwrap();
+        assert_eq!(
+            sigma_reduced.canonical_syndrome,
+            sigma_explicit.canonical_syndrome
+        );
+        assert!(sigma_reduced.transporters_examined < sigma_explicit.transporters_examined);
+
+        assert_eq!(
+            classify(&sigma_request, 3_000, 3_000),
+            Err(Error::BadRedundancy)
+        );
+    }
+
+    #[test]
     fn fast_terminal_selector_covers_r6_and_r7_representatives() {
         for input in [
             request(prime_field(17), 6, vec![0, 0, 0, 0, 1, 0]),
@@ -2359,6 +2582,30 @@ mod tests {
                 assert_eq!(certificate.distance, 4);
                 verify_certificate(&certificate).unwrap();
             }
+        }
+    }
+
+    #[test]
+    fn lex_charts_exhaust_all_r5_q5_binary_forms() {
+        let field_spec = prime_field(5);
+        let field = Field::new(field_spec.clone()).unwrap();
+        let basis = (0..5)
+            .map(|i| {
+                let mut vector = vec![0; 5];
+                vector[i] = 1;
+                vector
+            })
+            .collect::<Vec<_>>();
+        let mut examined = 0;
+        let syndromes = projective_span(&field, &basis, 1_000, &mut examined).unwrap();
+        assert_eq!(syndromes.len(), 781);
+        for syndrome in syndromes {
+            let reduced =
+                canonicalize_syndrome(&request(field_spec.clone(), 5, syndrome.clone()), 1_000)
+                    .unwrap();
+            let explicit = canonicalize_explicit(&field, syndrome, 1_000).unwrap();
+            assert_eq!(reduced.canonical_syndrome, explicit.canonical_syndrome);
+            assert!(!reduced.complexity.starts_with("explicit PGL"));
         }
     }
 
@@ -2742,7 +2989,7 @@ mod tests {
         let left = canonicalize_syndrome(&request(field_spec.clone(), 5, point), 1_000).unwrap();
         let right = canonicalize_syndrome(&request(field_spec, 5, image), 1_000).unwrap();
         assert_eq!(left.canonical_syndrome, right.canonical_syndrome);
-        assert_eq!(left.transporters_examined, 336);
+        assert_eq!(left.transporters_examined, 1);
     }
 
     #[test]
@@ -2753,11 +3000,31 @@ mod tests {
             modulus: vec![1, 0, 1],
             encoding: "polynomial-basis-base-p-integer-v1".into(),
         };
-        let result =
-            classify(&request(field_spec, 5, vec![0, 0, 1, 0, 4]), 10_000, 10_000).unwrap();
+        let field = Field::new(field_spec.clone()).unwrap();
+        let syndrome = vec![0, 0, 1, 0, 4];
+        let result = classify(&request(field_spec, 5, syndrome.clone()), 10_000, 10_000).unwrap();
         assert_eq!(result.status, VerdictStatus::Deep);
         assert_eq!(result.distance, Some(4));
         assert_eq!(result.family.as_deref(), Some("r5.char3_wild"));
+        assert_eq!(
+            result
+                .canonicalization
+                .as_ref()
+                .unwrap()
+                .transporters_examined,
+            144
+        );
+        let explicit = canonicalize_explicit(&field, syndrome, 2_000).unwrap();
+        assert_eq!(
+            result.canonicalization.as_ref().unwrap().canonical_syndrome,
+            explicit.canonical_syndrome
+        );
+        assert!(result
+            .canonicalization
+            .as_ref()
+            .unwrap()
+            .complexity
+            .contains("Lucas-degenerate"));
         let certificate = result.deep_certificate.as_ref().unwrap();
         verify_deep_certificate(certificate, 10_000).unwrap();
         let mut corrupted = certificate.clone();
@@ -2789,6 +3056,16 @@ mod tests {
             canonicalize_syndrome(&request(field_spec, 5, syndrome.clone()), 2_000).unwrap();
         let explicit = canonicalize_explicit(&field, syndrome, 2_000).unwrap();
         assert_eq!(reduced.canonical_syndrome, explicit.canonical_syndrome);
+        assert!(reduced.transporters_examined < explicit.transporters_examined);
+
+        let field = Field::new(prime_field(7)).unwrap();
+        let syndrome = vec![0, 0, 1, 0, 0];
+        assert_eq!(persistent_kind(&field, &syndrome), PersistentKind::Other);
+        let reduced =
+            canonicalize_syndrome(&request(prime_field(7), 5, syndrome.clone()), 1_000).unwrap();
+        let explicit = canonicalize_explicit(&field, syndrome, 1_000).unwrap();
+        assert_eq!(reduced.canonical_syndrome, explicit.canonical_syndrome);
+        assert!(reduced.complexity.starts_with("multiple-root binary form"));
         assert!(reduced.transporters_examined < explicit.transporters_examined);
     }
 

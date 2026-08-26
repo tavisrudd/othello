@@ -253,7 +253,25 @@ coordinate for top row `hw+cv` is
 
 Thus if the characteristic does not divide `mu+1`, lex order again fixes `c`
 for each nonzero `h`. If it does divide `mu+1` but `E` is nonzero, it fixes
-`h` and leaves `c`. Only the simultaneous Lucas degeneration
-`p | (mu+1)` and `E=0` requires advancing to another Hasse coordinate. This is
-the exact implementation boundary for the remaining nonpersistent fallback;
-no persistent sigma input reaches it.
+`h` and leaves `c`. In the simultaneous Lucas degeneration
+`p | (mu+1)` and `E=0`, that root has successor coordinate zero and is therefore
+lexicographically prior to every maximal root with `E` nonzero. Retain exactly
+those degenerate roots and enumerate their full affine stabilizers: `q(q-1)`
+top rows per root. This remains exact and costs `O(m n q^2)`, rather than the
+full `m(q^3-q)` group. The q9/R5 wild fixture freezes this branch at 144
+transports and agrees with all 1,440 explicit semilinear transports. Pure
+powers terminate at the normalized last coordinate and need one top row per
+maximal root. Thus the multiple-root chart is exhaustive; no persistent sigma
+input reaches its degenerate branch.
+
+## Dimension-independent structural scope
+
+The tangent, rootless, simple-root, and multiple-root coset arguments use only
+the degree `n=r-1` binary-form action. They do not use the R5--R10 covering
+radius or classification tables. The structural `canonicalize` operation
+therefore accepts every `r>=5` with `q>=r`, while coding verdicts remain frozen
+at R5--R10. At R11 over `F_13`, both a tangent fixture and a nontrivial sigma
+fixture (quotient order two) return the same minima as all 2,184 explicit PGL
+transports; the tangent path examines 156 transports. This is an exact
+higher-dimensional orbit/canonicalization result, not a higher-dimensional
+deep-hole claim.

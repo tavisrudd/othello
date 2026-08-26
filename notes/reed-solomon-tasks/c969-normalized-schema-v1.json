@@ -21,7 +21,11 @@
       },
       "additionalProperties": false
     },
-    "redundancy": {"type": "integer", "minimum": 5, "maximum": 10},
+    "redundancy": {
+      "description": "minimum 5; classify/distance/decode are theorem-scoped to at most 10, while canonicalize supports every r<=q",
+      "type": "integer",
+      "minimum": 5
+    },
     "evaluation": {"const": "full-projective-nrc-v1"},
     "syndrome": {
       "description": "nonzero divided-power coordinates, each encoded in [0,q)",

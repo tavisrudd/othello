@@ -18,8 +18,9 @@ This is the C969 implementation crate.  Its current executable slice provides:
   sigma canonicalization in `m*(q^2-1)` on the rootless-form stratum and
   `O(m*r*q)` on the simple-root stratum; these exhaust persistent sigma, while
   the same charts also accelerate nonpersistent forms when applicable;
-- the full `m*(q^3-q)` path retained for multiple-root nonpersistent forms and
-  as a defensive persistent fallback;
+- exact maximal-Hasse-root canonicalization in `O(m*r*q)` transports off the
+  simultaneous Lucas degeneration and `O(m*r*q^2)` on it, including pure
+  powers, with the full `m*(q^3-q)` path retained as a defensive fallback;
 - an intrinsic persistent-sigma `T/T^(r-1)` modulo inversion/Frobenius
   extractor in `F_q[X]/Q`, using no discrete logarithm or torus enumeration;
 - distinct rational-root recovery, Vandermonde magnitude recovery, and an
@@ -30,11 +31,19 @@ This is the C969 implementation crate.  Its current executable slice provides:
   `m(q^3-q)` cost exposed; and
 - the five required command names.
 
+Structural `canonicalize` is dimension-independent: it accepts every
+redundancy `r>=5` with `q>=r`. The exact tangent and binary-form lex-coset
+proofs apply unchanged. Coding operations (`distance`, `decode`, and
+`classify`) remain restricted to R5--R10; in particular, no higher-dimensional
+canonical form is promoted to a deep-hole verdict without a theorem-domain
+row. R11 tangent and sigma fixtures over `F_13` are checked against all 2,184
+explicit PGL transports.
+
 `classify` returns witness-backed `NOT_DEEP`, persistent-family `DEEP`, and
 frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. `canonicalize` uses
-the proved affine-coset path on tangent inputs and the explicit group-scale
-fallback on sigma and other inputs.  Further R8--R10 nonpersistent formula
-adapters remain open.  `distance` and `decode` are
+proved lex-coset charts on every binary form; the explicit group action remains
+as a defensive reference path. Further R8--R10 nonpersistent formula adapters
+remain open. `distance` and `decode` are
 exact within their explicit
 candidate budget: after degrees through `r-1` they use an arbitrary NRC basis
 at degree `r`, whose coefficients are forced nonzero by the failed lower
