@@ -2290,7 +2290,9 @@ D-3f=q-2+e-f-2v-eta >= q-8-eta,
 which contradicts `u=O_C(1)` when `eta=o(q)`.  Since `C` was arbitrary,
 
 ```text
-eta=o(q)  implies  e/q -> infinity.            (SR24a-Mason-superlinear-gap)
+eta=o(q)  implies
+e/q -> infinity,
+|B triangle S|/q=(2q-7+2e+eta)/q -> infinity. (SR24a-Mason-superlinear-gap)
 ```
 
 Thus every near-sharp complement is at superlinear symmetric-difference
