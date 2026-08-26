@@ -352,3 +352,12 @@ directions.  This yields a stronger quadratic-quotient compiler check, but
 also proves a sharp no-go: this coefficient cannot distinguish the 64
 labelled degree-five residual patterns.  Cross-slope propagation must use a
 lower projection coefficient.
+
+The final hostile probe computed that next coefficient explicitly.  It is
+`e_(q-2)(b-Ma)=-[X^3]Q`, equal on a regular fibre to
+`d_m([X]G_m)^3` and zero at both vertex directions.  This is the first
+coefficient that is not spectrum-blind, but it lies in the unrestricted
+q-scale cube-sector annihilated by the derivative used for the bounded
+quadratic gate.  The labelled missing-root subset does not determine it.
+Thus the next real theorem must connect `A_m` to `G_m` or control that cube
+sector globally; simply descending the Chow coefficients is not enough.

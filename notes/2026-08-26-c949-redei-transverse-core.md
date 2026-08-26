@@ -964,6 +964,38 @@ patterns from `(TR33)`: every regular direction has the same value `-1`, so
 this coefficient contains no missing-label information.  A residual
 propagation theorem must use a lower projection/Chow coefficient.
 
+The immediately lower elementary-symmetric coefficient is exact but exits
+the bounded state.  With `t_P=b(P)-Ma(P)`, coefficient comparison gives
+
+```text
+e_(q-2)({t_P})=-[X^3]Q.                             (TR46)
+```
+
+At a regular direction, where `Q=(X-d_m)G_m^3`, this is
+
+```text
+e_(q-2)=d_m([X]G_m)^3,
+```
+
+while it vanishes at both vertex directions.  Hence its degree-`q-2`
+binary form has the two vertex normal covectors as factors.  However
+`[X^3]Q` lies in the unrestricted cube-sector `B_0(X^3,M)` of `(TR34)`; the
+derivative that produced the bounded quadratic `p` kills it.  The scalar
+`d_m([X]G_m)^3` is not determined by the labelled missing-root subset
+`A_m|B_6`, and it depends on the fixed intercept frame.
+
+There is a q-scale checksum but no bounded compression.  Since the affine
+polynomial has degree at most `q-2` and vanishes at the vertices,
+
+```text
+sum_(m regular)d_m([X]G_m)^3
+ +sum_(b boundary finite)s_b([X^(r+1)]C_b)^3=0.
+```
+
+This is useful only after all fibres are known.  A genuine residual theorem
+must bridge the labelled missing polynomial `A_m` to the cube-sector data
+`G_m` or control `B_0` globally.
+
 ## Mystery ledger (`ej` + `tt`)
 
 - **Settled:** the split point product gives the exact restrictions `(TR3)`
@@ -1039,6 +1071,10 @@ propagation theorem must use a lower projection/Chow coefficient.
   label-blind.
 - **Settled/no-go:** `(TR41)--(TR45)` cannot propagate the 64 labelled
   degree-five residual patterns; a lower projection coefficient is required.
+- **Settled/no-go:** `(TR46)` is the first richer coefficient, but it lands
+  in the unrestricted q-scale cube-sector and is not determined by the
+  missing-label subset.  Merely descending one coefficient is not another
+  bounded certificate.
 - **Open:** determine whether this post-terminal filter rejects any surviving
   q=27 carrier states independently of fourth Witt, reciprocal norm, and the
   mapping gate; no symmetry of `D` may be assumed.

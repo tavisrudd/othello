@@ -392,6 +392,20 @@ that this coefficient is blind to the 64 labelled residual patterns: all
 regular directions have the same value.  Cross-slope propagation must use
 a lower Chow/projection coefficient.
 
+The next coefficient is now audited as well:
+
+```text
+e_(q-2)(b-Ma)=-[X^3]Q
+             =d_m([X]G_m)^3       on regular slopes.  (TR46)
+```
+
+It vanishes at the two vertex slopes, but lies in the unrestricted q-scale
+cube-sector of `Q`, not the bounded quadratic defect.  It is not determined
+by the 64 missing-root labels and changes with the fixed intercept frame.
+Thus “go one coefficient lower” is not itself a bounded solution: the new
+input must relate each labelled missing polynomial to `G_m`, or control the
+global cube-sector `B_0`.
+
 Do not return to finite-fiber interpolation, the omitted tangent slope,
 pointwise torus jets, scalar holonomy, or automatic cube-root gluing.
 
@@ -579,6 +593,9 @@ separate global trade obstruction or construction.
 - **Settled/no-go:** the cyclic gate cannot see which of the 64 labelled
   residual patterns occurs; residual synchronization needs a lower
   projection coefficient.
+- **Settled/no-go:** the immediately lower coefficient does see detailed
+  fibre data, but sits in the q-scale cube-sector and has no current map from
+  the missing-label subset.
 - **Open:** determine whether this compiler rejects any surviving q=27
   terminal independently of fourth Witt, reciprocal norm, and mapping.
 - **Open:** synchronize those residuals across slopes; fiberwise boundedness
@@ -600,8 +617,9 @@ separate global trade obstruction or construction.
 Implement the post-terminal `(TR43)` recurrence in the C962 normalization
 and compare its rejection cores with fourth Witt, reciprocal norm, and
 mapping, once per joint orbit.  On survivors, test the full `(TR45)`
-quadratic quotient.  For the field-uniform residual frontier, move one Chow
-coefficient lower: `(TR45)` proves the current coefficient is label-blind.
+quadratic quotient.  For the field-uniform residual frontier, prove a bridge
+from the labelled missing polynomial `A_m` to the cube-sector `G_m` in
+`(TR46)`; coefficient descent alone has now been exhausted.
 In parallel, use the two-monomer matching gate and degree-five labelled
 residuals as q=27 prefilters before the carrier DFS.  Field-uniformly, prove
 cross-slope propagation for those residuals or construct a genuinely
