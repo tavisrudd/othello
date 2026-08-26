@@ -2255,63 +2255,101 @@ If `E` is the set of these converted lines, pair counting on their at least
 |N|>=r|E|-binom(|E|,2),             O<=r|E|.   (SR24a-Mason-converted)
 ```
 
-The converted-line geometry gives a quantitative stability gap.  Put
-`z=1+e/q`.  For `eta=o(q)`, `|N|=O(qz)`, so pair counting first gives
-`|E|=O(z^2)`.  The orphan inequalities give
-
-```text
-u(r-3) <= |E|r+4f,
-```
-
-and hence `u=O(|E|+z)`.  Let `J` count the incidences of the `f`
-off-triangle additions with the deficient Mason blocks.  Since each such
-block contains at most three open-side additions,
+The converted-line geometry gives a sharper quantitative dichotomy.  Let
+`J` count incidences of the `f` off-triangle additions with the deficient
+Mason blocks.  Since each such block contains at most three open-side
+additions,
 
 ```text
 D <= sum_(T in U)x_T <= J+3u.
 ```
 
-Every off-triangle point lies on exactly four Mason `r`-secants.  A point
-whose four secants lie in `U` consumes six distinct pairs of lines of `U`,
-so there are at most `binom(u,2)/6` such points.  Every other off-triangle
-point contributes a missing incidence, so
-`f<=binom(u,2)/6+4f-J`.  Combining gives
+For an off-triangle addition `X`, let `k_X` be the number of lines of `U`
+through `X`.  Every pair of lines has a unique projective intersection, so
 
 ```text
-D <= 3f+3u+binom(u,2)/6.
+sum_X binom(k_X,2) <= binom(u,2).
 ```
 
-But the exact deficit and the zero-side filling inequality give
+The pointwise inequality `k<=1+binom(k,2)` for `0<=k<=4` gives
+`J<=f+binom(u,2)`.  Consequently the exact deficit satisfies
 
 ```text
-D-3f=q-2+e-f-2v-eta >= q-8-eta,
+q+e+f-8-eta <= binom(u,2)+3u.                 (SR24a-Mason-U-pairs)
 ```
 
-In particular, this forces `u=Omega(sqrt(q))`.  If the claimed quantitative
-bound failed, a subsequence would have `e=o(q^(3/2))`, hence
-`z=o(sqrt(q))`.  On that subsequence `|E|=O(z^2)=o(q)`, so eventually
-`|E|<=r`; the union inequality in `(SR24a-Mason-converted)` improves to
+Now split according to the number of converted lines.  If `|E|<=r`, the
+union inequality in `(SR24a-Mason-converted)` gives
 
 ```text
-|N| >= r|E|-binom(|E|,2) >= r|E|/2,
+|E|<=2|N|/r=O(1+e/q).
 ```
 
-so `|E|=O(z)`.  Since `f<=e`, the orphan inequality now gives `u=O(z)`.
-The lower bound `u=Omega(sqrt(q))` completes the bootstrap.  Therefore
+Since `f<=e`, orphan capacity then gives `u=O(1+e/q)`.  Substitution in
+`(SR24a-Mason-U-pairs)` forces `e=Omega(q^2)`: writing `z=1+e/q`, its two
+sides have orders at least `qz` and at most `z^2`, respectively.
+
+This branch has an optimized limiting constant.  The preceding unscaled
+argument first excludes `e=o(q^2)`.  On a subsequence put
+
+```text
+c=e/q^2,   g=f/q^2,   M=|E|/q,   U=u/q.
+```
+
+Union, orphan capacity, and `(SR24a-Mason-U-pairs)` give
+
+```text
+c >= M/3-M^2/2,       U <= M+12g,
+c+g <= U^2/2,         0<=g<=c,   0<=M<=1/3.
+```
+
+For `0<c<1/18`, the largest allowed `M` is
+`a(c)=1/3-sqrt(1/9-2c)`.  With `M=a(c)`, the feasibility function
+`(a(c)+12g)^2/2-(c+g)` is convex on `0<=g<=c`, so its maximum occurs at
+`g=0` or `g=c`.  The first endpoint is negative; the threshold at the second
+is
+
+```text
+a(c)+12c=2sqrt(c).
+```
+
+Thus `c>=c_*`, where `c_*=x_*^2=0.0171413259...` and `x_*` is the unique
+positive root of
+
+```text
+216x^3-72x^2+21x-2=0.                         (SR24a-Mason-cstar)
+```
+
+In particular `c_*>1/60`.
+
+If instead `m=|E|>r`, there is a still simpler projective second-moment
+bound.  Let `d_X` count the lines of `E` through a plane point `X`.  Unique
+intersection of projective lines gives exactly
+
+```text
+sum_X d_X^2=m(q+m).
+```
+
+Every converted line contains at least `r` points of `N`, so Cauchy--Schwarz
+on `N` gives
+
+```text
+(mr)^2 <= I(N,E)^2 <= |N|m(q+m),
+|N| >= mr^2/(q+m) > r^2/4.
+```
+
+This arm has `e>=q^2/36-O(q)`, which is stronger than `c_*q^2`.  Therefore
 
 ```text
 eta=o(q)  implies
-e>=q^(3/2)/104 for all sufficiently large q,
-|B triangle S|=2q-7+2e+eta=Omega(q^(3/2)).
+liminf_(q to infinity) e/q^2 >= c_* > 1/60,
+|B triangle S| >= (2c_*-o(1))q^2.
                                                 (SR24a-Mason-quantitative-gap)
 ```
 
-The constant `1/104` is deliberately conservative.  For the explicit audit,
-eventually take `eta<=q/4`: pair counting gives `|E|<=20z^2`.  If
-`z<sqrt(q/60)`, then `|E|<r`, the union bound gives `|E|<=(15/2)z`, orphan
-capacity gives `u<=26z`, and the deficit gives `u>=sqrt(q)/2`.  Hence
-`z>=sqrt(q)/52` and, once `z>=2`, `e/q=z-1>=sqrt(q)/104`.  The complementary
-case is stronger.
+The gap is now quadratic, not merely superlinear.  This supersedes both the
+earlier `q^(3/2)/104` bootstrap and the intermediate
+`q^(3/2)/(3sqrt(3))` pair-counting bound.
 
 The exponent-loss object has an exact design form.  Take the `2q-2` Mason
 `r`-secants as vertices.  Every off-triangle point gives a four-block and
@@ -2334,6 +2372,27 @@ The three matching leaves alone give no subquadratic improvement for
 `|U|<=v/2`; abstract linear-hypergraph counting permits the quadratic scale.
 Improving the `3/2` exponent therefore requires a genuine expansion or
 no-induced-subdesign theorem for this specific Mason hypergraph.
+
+There is an exact coordinate compression even without an explicit formula
+for Mason's construction.  Normalize its zero triangle to
+`X Y Z=0` and write a dual `r`-secant as `[A:B:C]`.  Such a secant avoids
+all three vertices, so `ABC!=0`; after `C=1`, put `(a,b)=(A/C,B/C)`.
+The open-side pencil counts say that each of `a`, `b`, and `a/b` takes every
+value of `F_q^*` exactly twice on the dual set.  Hence its `a`--`b` incidence
+graph is two-regular bipartite and decomposes into two perfect matchings:
+
+```text
+D_M={(a,f_0(a)),(a,f_1(a)):a in F_q^*},
+```
+
+where `f_0,f_1` are permutations, `f_0(a)!=f_1(a)`, and the multiset
+`{a/f_i(a)}` is two copies of `F_q^*`.  The four-blocks are exactly the
+four-point intersections with noncoordinate affine lines
+`x a+y b+z=0`.  This torus/two-permutation model is intrinsic, but the
+authenticated Mason source presently supplies no formula or additive
+regularity for `f_0,f_1`.  A Freiman/energy argument therefore needs a new
+geometric constraint on these permutations; the three twofold projections
+alone do not provide one.
 
 This generic limitation has an explicit infinite countermodel.  For
 `s=4^k`, take four groups `G_i=F_s`.  Inside each group use the affine-line
@@ -2367,11 +2426,11 @@ hypergraph, deleting one vertex leaves `F_4=b-d=(q-3)^2/3=Theta(|U|^2)` but
 turns its `d=2r-2` incident blocks into partial triples.  This linear-size
 example does not settle the needed `|U|=o(q)` range, but it rules out a
 blanket density-to-closure inference.  The remaining target must explicitly
-use Mason coordinates/additive structure in that small-set regime.
+use Mason coordinates/additive structure or a mixed-correlation theorem.
 
-Thus every near-sharp complement is at least order `q^(3/2)` in symmetric
-difference from every Mason large-root set.  This eliminates every Mason
-switch of size `o(q^(3/2))`.
+Thus every near-sharp complement is separated by a fixed positive `q^2`
+fraction from every Mason large-root set.  This eliminates every
+subquadratic Mason switch.
 
 The exact missing bridge to a global contradiction is now visible.  If `M`
 is the point-line incidence matrix, `M^T M=qI+J` gives, for any Mason root
@@ -2388,7 +2447,7 @@ The first two moments, the intrinsic degree spectrum, and the `(SR11)`
 three-line residue core do not control this mixed term.  Even mapping a Mason
 zero triangle to the triangle named by `(SR11)` gives only the lower fill
 bound `(SR24a-Mason-distance)`, not an upper distance bound.  It now suffices
-to prove that every near-sharp minimal blocker is `o(q^(3/2))`-close to some
+to prove that every near-sharp minimal blocker is `o(q^2)`-close to some
 Mason root; together with `(SR24a-Mason-quantitative-gap)`, this would
 prove global nonexistence of the near-sharp regime.  It is therefore the
 missing classification theorem, not a consequence that may be assumed from
@@ -5959,35 +6018,44 @@ family is lower priority.
   the bound improves to `2q-1+ceil((sqrt(q)-2)/3)`.  This closes the direct
   six-point and minimal-trade mechanisms.  On the complementary blocking-set
   side, essential-secants strengthen this across all `(SR11)` signatures:
-  any `eta=o(q)` Mason trade has size `Omega(q^(3/2))` by
-  `(SR24a-Mason-quantitative-gap)`.  Pair counting and inclusion--exclusion
-  bound the converted old `2q/3`-secants; orphan capacity bounds the deficient
-  partition blocks; the four-block incidence of the off-triangle additions
-  then forces at least `sqrt(q)` such blocks.  This settles every
-  `o(q^(3/2))` Mason-switch mechanism.  It remains a separation
-  theorem around Mason, not a classification of arbitrary small roots or
+  `(SR24a-Mason-quantitative-gap)` now gives the quadratic separation
+  `liminf e/q^2>=c_*>1/60`.  The key new inputs are the pointwise
+  deficient-block inequality `(SR24a-Mason-U-pairs)` and the exact
+  projective second moment `sum_X d_X^2=m(q+m)` for the converted lines.
+  This settles every `o(q^2)` Mason-switch mechanism and supersedes both the
+  earlier `1/104`/`sqrt(q)` bootstrap and the intermediate `q^(3/2)` bound.
+  The exact zero-triangle normalization also compresses the
+  dual Mason `q/3`-secants into two permutation graphs on the torus, with
+  each of `a,b,a/b` two-to-one.  What remains unexplained is which additional
+  constraint on those permutations encodes Mason's `0/r/2r` geometry.  This
+  remains a separation theorem around Mason, not a classification of
+  arbitrary small roots or
   minimal blocking sets.  The exact absent bridge is the mixed correlation
   `(SR24a-Mason-mixed)`: intrinsic line moments and `(SR11)` do not bound
   `sum |B intersect ell||S intersect ell|` for any particular Mason `S`.
-  Proving an `o(q^(3/2))` Mason-attraction theorem would combine with the
+  Proving any `o(q^2)` Mason-attraction theorem would combine with the
   quantitative gap to exclude the full near-sharp regime, so it cannot be
   smuggled in as a routine stability corollary.  A formal three-weight line
   spectrum at `eta=1` satisfies both scalar moments and the essential-line
   incidence budget while containing no Mason correlation variable; it is a
   moment-level countermodel, not a realizable projective example.
-  **Open quantitative mystery:** the exponent `3/2` enters only through the
-  crude bound `6F_4(U)<=binom(u,2)`, where `F_4(U)` counts external Mason
-  points whose four `r`-secants all belong to the deficient block set `U`.
-  `(SR24a-Mason-hypergraph)` identifies it as a regular four-uniform linear
+  **Settled quantitative mystery:** the earlier exponent `3/2` was not a
+  genuine boundary.  Counting all `U`-line pairs through each off-triangle
+  addition and using `k<=1+binom(k,2)` supplies the missing factor; the
+  converted-line second moment then forces quadratic distance.  The design
+  identity `6F_4(U)<=binom(u,2)` remains useful context but is no longer the
+  quantitative gate.  `(SR24a-Mason-hypergraph)` identifies the underlying
+  incidence object as a regular four-uniform linear
   design whose pair leave is three perfect matchings.  A four-group affine
   family with the same parameter relations has a quarter-size quadratic
-  induced subdesign, so these abstract data alone cannot improve the bound.
-  Any gain must use Mason-specific coordinates/arithmetic or rule out
-  induced subdesigns at the ternary orders.  The exact defect identity
+  induced subdesign, so these abstract data alone cannot supply attraction.
+  Any global classification must still use Mason-specific
+  coordinates/arithmetic.  The exact defect identity
   `(SR24a-Mason-induced-defect)` also shows that dense full blocks need not
   close to a Steiner/KM subsystem: partial two- and three-blocks are the
   uncontrolled boundary, even after deleting one vertex from Mason itself.
-  That is the exact next gate, not another scalar-moment calculation.
+  The next gate is now the mixed-correlation/Mason-attraction theorem, not
+  another scalar-moment or induced-density calculation.
   **Rejected shortcut — does the three-weight code lie close enough to the
   Griesmer bound to be rigid?**  The small root is exactly a projective
   `q`-ary `[q(q+2)/3,3,q^2/3]` code with nonzero weights

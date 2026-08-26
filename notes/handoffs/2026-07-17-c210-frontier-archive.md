@@ -243,3 +243,57 @@ at the live map, proof report, and this archive.
 
 Exact prior handoff prose remains recoverable from Git history; it was not
 copied here because that would recreate the startup problem this split fixes.
+
+## 2026-08-26 — converted-line dichotomy and Mason torus model
+
+The Mason-relative quantitative theorem was sharpened.  For deficient old
+`r=q/3` blocks `U`, off-triangle additions give the pair-incidence inequality
+
+```text
+q+e+f-8-eta <= binom(|U|,2)+3|U|.
+```
+
+If at most `r` former `2r`-secants become tight, union and orphan capacity
+force `e=Omega(q^2)`.  If more than `r` become tight, deleted-point pair
+counting gives `|N|>r sqrt(r-1)` and hence
+
+```text
+e >= (1/(3sqrt(3))-o(1))q^(3/2).
+```
+
+This supersedes the earlier constant `1/104` and invalidates the routing
+heuristic that the decisive object must have `|U|~sqrt(q)`.  The live
+frontier now targets near-Steiner stability of the more than `q/3` converted
+lines.
+
+An exact Mason coordinate interface was also extracted without assuming an
+unavailable formula for Mason's construction.  After normalizing the zero
+triangle, the dual `r`-secants are two permutation graphs on the torus,
+`{(a,f_0(a)),(a,f_1(a))}`, and each of `a,b,a/b` is two-to-one.  Fourfold
+concurrences are four-point intersections with noncoordinate affine lines.
+The consulted Csajbok--Weiner source authenticates Mason's incidence
+parameters but does not provide formulas for the permutations; additive
+rigidity remains a new theorem, not imported structure.
+
+### Immediate TT/EJ upgrade
+
+The `q^(3/2)` statement above was itself superseded in the same session.
+For `m` converted lines, the exact projective identity
+
+```text
+sum_X d_X^2=m(q+m)
+```
+
+and Cauchy--Schwarz give `|N|>=m r^2/(q+m)`, so `m>r` already forces
+`e>=q^2/36-O(q)`.  When `m<=r`, the new pair-incidence inequality, union,
+and orphan capacity force a positive quadratic constant.  Optimizing their
+limiting ledger gives
+
+```text
+liminf e/q^2 >= c_*=0.0171413259... > 1/60,
+216sqrt(c_*)^3-72c_*+21sqrt(c_*)-2=0.
+```
+
+Thus the durable conclusion is quadratic separation from every Mason root;
+the intervening `q^(3/2)` bound is retained here only as the chronological
+route by which the stronger second-moment argument was found.
