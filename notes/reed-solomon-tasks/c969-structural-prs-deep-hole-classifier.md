@@ -10,15 +10,17 @@ exact extension-field arithmetic, projective normalization, both locator
 charts, increasing-degree Hankel search, magnitude recovery, and certificate
 replay, including the frozen R10 q=16 Lucas witness.  It also detects the
 persistent tangent/sigma gcd branches and returns an exact semilinear
-transporter through an explicit `m(q^3-q)` canonicalization fallback.  A
+transporter through exhaustive binary-form lex charts, with worst-case
+`O(m r q^2)` retained transports and explicit `m(q^3-q)` enumeration kept as
+a reference oracle. A
 deterministically regenerated 338-row semilinear exception registry now
 compresses the frozen R5--R7 certificates; classifier tests cover an R5 wild
 deep orbit and the R7 small-field radius-gap verdict.  The R5--R7 terminal gate
 is now proved and implemented by a streaming 12-point bilinear selector with
 exact
 `O(q)`, `O(q^2)`, and `O(q^3)` prefix counts, both infinity charts, and a
-bounded small-field fallback.  Further R8--R10 nonpersistent formula adapters
-and formula-speed canonicalizers remain open, but the R5 tame osculating and
+bounded small-field fallback. Further R8--R10 nonpersistent formula adapters
+remain open, but the R5 tame osculating and
 characteristic-three nucleus/wild adapters and R6 recurring odd-binary nucleus
 plus R7 central odd-binary nucleus now replay intrinsically above the finite
 registry.  This closes the recurring nonpersistent R5--R7 formula inventory;
@@ -44,9 +46,9 @@ Rootless-form sigma inputs now canonicalize exactly in `m(q^2-1)` transports,
 and its simple-root stratum in `O(m r q)`. Trace-pairing nondegeneracy proves
 these strata exhaust persistent sigma. The same exact lex charts now accelerate
 all nonpersistent inputs: a characteristic-two zero-successor simple root uses
-its `q(q-1)` affine stabilizer, while maximal rational Hasse multiplicity handles the
-multiple-root stratum in `O(m r q)` transports, or `O(m r q^2)` when its first
-successor is simultaneously Lucas-degenerate. A
+its `q(q-1)` affine stabilizer, while maximal rational Hasse multiplicity
+handles the multiple-root stratum in `O(m r q)` transports, or `O(m r q^2)`
+when its first successor is simultaneously Lucas-degenerate. A
 frozen R5 counterexample proves that centering an irreducible sigma gcd and
 enumerating its torus normalizer does not preserve the full-orbit minimum. The
 sigma canonicalization is therefore phrased in intrinsic lex-coordinate

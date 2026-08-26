@@ -44,8 +44,9 @@ enumeration.
 
 The operation count is `m q(q-1)` transports rather than `m(q^3-q)`. The exact
 transporter, including Frobenius exponent, normalized matrix, and output scale,
-is retained in the certificate. Sigma syndromes and all nonpersistent inputs
-continue to use the explicit fallback; no faster claim is made for them yet.
+is retained in the certificate. The later rootless, simple-root, and
+multiple-root charts give the same exact reduction for sigma and nonpersistent
+forms; explicit enumeration remains only as a defensive oracle.
 
 ## Regression
 
@@ -155,8 +156,8 @@ Regression tests recover traces `2,5,0` for the three q7/R5 classes and verify
 the trace over all 336 PGL transports. A characteristic-two R7 fixture checks
 the nontrivial order-three quotient over GF(8) across all 1,512 semilinear
 transports. The canonicalizers below avoid choosing a target quadratic by
-working directly with forced lexicographic coordinates; only their degenerate
-root stratum remains open.
+working directly with forced lexicographic coordinates; their degenerate
+successor strata are closed by streamed affine-stabilizer enumeration.
 
 ### Rootless-form lex chart
 

@@ -206,19 +206,21 @@ premise and therefore cannot promote the q=7,8,9 gap.
 - **Settled:** an exact fallback decoder needs no radius theorem.  Exhaustive
   failure through degree `r-1` followed by one NRC basis gives distance `r`
   and forces every basis magnitude nonzero.
-- **Open:** the terminal-hyperplane solver has not replaced the exhaustive
-  `q^(r-2)` fallback.  Exact missing evidence: both infinity charts, the
-  bilinear last-root equation, collision divisor, constant-grid proof, bounded
-  small-field branch, and the advertised R5--R7 operation counts.
+- **Settled:** the R5--R7 terminal-hyperplane solver uses both infinity charts,
+  the bilinear last-root equation, collision handling, and a fixed 12-point
+  grid, with exact streamed `O(q)`, `O(q^2)`, and `O(q^3)` prefix counts and a
+  bounded small-field fallback.
 - **Open:** field arithmetic is exact only in the supplied polynomial basis.
   The schema's canonical cross-model isomorphism and its certificate are not
   implemented, so extension-field exception lookup currently requires the
   frozen modulus.
-- **Open:** shallow locator certificates have an independent verifier and a
-  corruption test.  Positive deep results still need a separate verifier for
-  theorem-domain hashes, family invariants, orbit transporter, exhaustiveness,
-  and radius promotion.
-- **Open:** uniform nonpersistent adapters are missing above the finite
-  certificates: R5 osculating/wild formulas, the recurring R6 binary nucleus,
-  and formula-speed canonicalizers.  The implementation returns
-  `UNSUPPORTED`, not a guessed family, on those paths.
+- **Settled:** positive deep certificates now have a separate verifier for the
+  theorem-domain row, family invariant, orbit transporter, split-free route,
+  and radius promotion, with corruption tests.
+- **Settled:** uniform R5 osculating/wild, R6 binary-nucleus, and R7
+  central-nucleus adapters replay above the finite registry. Exact structural
+  canonicalization is exhaustive in `O(m r q^2)` retained transports for every
+  `r>=5`, including degenerate successors and dimensions beyond R10.
+- **Open:** nonpersistent classification formulas at R8--R10 remain missing;
+  the implementation fails closed rather than promoting a structural canonical
+  form to an unsupported coding verdict.
