@@ -156,3 +156,18 @@ fn distance_and_decode_emit_the_same_replayable_locator_certificate() {
     );
     assert!(verification.status.success());
 }
+
+#[test]
+fn classify_fails_closed_when_the_candidate_budget_is_exhausted() {
+    let output = run_with_stdin(
+        &["--candidate-limit", "0", "--compact", "classify"],
+        REQUEST,
+    );
+    assert!(!output.status.success());
+    assert!(output.stdout.is_empty());
+    assert!(
+        String::from_utf8_lossy(&output.stderr).contains("CandidateLimit"),
+        "unexpected failure: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+}
