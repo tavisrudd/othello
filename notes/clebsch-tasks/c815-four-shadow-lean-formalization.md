@@ -10,9 +10,9 @@ unique, the aligned-design strengths are formalized at the manuscript's quantifi
 range, the rank-14 weighted Jacobian now has a structural proof, and the
 HARM-2 cubic coefficient collapse and reusable ARITH-1 trace-split quadratic
 algebra are now kernel-checked; the remaining work is the analytic sphere
-bridge, the paper-specific arithmetic/fibre/orientation interfaces, the reduced
-weighted-Jacobian Lean bridge, and aggregate closure before the API is handed
-to C823
+bridge, the geometric arithmetic/fibre/orientation identifications, the
+concrete full-Jacobian promotion from the kernel-checked reduced table, and
+aggregate closure before the API is handed to C823
 
 ## Objective
 
@@ -422,3 +422,29 @@ the geometric Stein comparison.
 See `../2026-08-25-c815-two-hour-closure-attempt.md`.  The Paper III
 `sparse_shadow_export.json` remains forbidden until these remaining interfaces
 and the C815 aggregate gate are frozen.
+
+## 2026-08-26 arithmetic and rigidity continuation
+
+Four further source modules are landed and individually green under both the
+guarded elaborator and the serialized build queue.
+
+- `RelativeConicArcs.ClebschSteinChart` specializes the trace-split core to the
+  normalized chart, proves `5 J0 = (4 sqrtFive sigmaThree)^2`, and supplies the
+  split comparison.  The identification with the geometric incidence
+  normalization remains an explicit geometric obligation.
+- `RelativeConicArcs.GoldenResidueAlgebra` constructs the irreducible golden
+  quadratic algebra over the rationals, its canonical square root of five, and
+  the involutive deck automorphism negating that root.
+- `RelativeConicArcs.SpinorSquareClass` defines square classes through the
+  quotient of units by squares, proves multiplicativity for lists of
+  reflections, and computes the exchanger pair as the class of two.
+- `RelativeConicArcs.ClebschWeightedJacobian` proves that the displayed reduced
+  eight-by-five Jacobian has exactly the scaling line as kernel and isolates
+  the fixed-vector-detection theorem needed to promote that calculation to the
+  full equivariant Jacobian.
+
+These modules close the algebraic cores of ARITH-1 and ARITH-2 and the finite
+linear algebra in the weighted-Jacobian item.  They do not close the geometric
+chart/fibre identifications, the concrete alternating-group fixed-detection
+instantiation, HARM-1's surface-integral theorem, or the aggregate gates.  In
+particular they do not authorize the Paper III sparse-shadow export.
