@@ -14,6 +14,7 @@ struct Args {
     iterations: u32,
     #[arg(long, default_value_t = 10_000_000)]
     candidate_limit: u64,
+    /// Include GF(8), GF(9), GF(16), and the slower GF(32)/R17 structural row.
     #[arg(long)]
     extension_fields: bool,
 }

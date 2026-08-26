@@ -904,6 +904,9 @@ pub fn canonicalize_syndrome(
 }
 
 fn is_characteristic_power(mut degree: usize, characteristic: u32) -> bool {
+    // If n=p^a, then (delta+gamma*x)^n has only endpoint terms. Frobenius is
+    // bijective on F_q, so every nonzero divided-power form has a rational
+    // bottom row killing its zeroth transformed coordinate.
     let characteristic = characteristic as usize;
     while degree > 1 && degree.is_multiple_of(characteristic) {
         degree /= characteristic;
