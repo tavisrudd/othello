@@ -15,7 +15,10 @@ nonpersistent characteristic-three block for `q>=81`, and closes the
 characteristic-seven block for `q>=343` by a pointed R9 slice.  The same
 report computes R12: its new characteristic-five block is transverse and
 shallow outside the persistent locus for `q>=125`; the `2/3/7` blocks reduce
-to one-extra-root versions of the R11 constructions.
+to one-extra-root versions of the R11 constructions.  The manuscript-frozen
+`c973-2026-08-26-paper-successor-map.md` gives exact replacement statements,
+the deletion/retention map, frontmatter and trust updates, and a target net
+reduction of 2--5 pages for a separately allocated integration successor.
 
 ## Objective
 
