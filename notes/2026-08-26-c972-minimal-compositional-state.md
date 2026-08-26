@@ -2,10 +2,10 @@
 
 **Lane**: `complete-ports`
 
-**Status**: IN PROGRESS; RANK-ONE COMPLETE-TRANSFER EQUIVALENCE AND THE
+**Status**: MATHEMATICS COMPLETE; RANK-ONE COMPLETE-TRANSFER EQUIVALENCE AND THE
 COARSEST RANK-ONE OUTER-OBSERVABLE STATE PROVED; EXISTING BINARY/QUATERNARY
-EXAMPLE UPGRADED TO A FIXED-CODE, FIXED-PAIR LABEL SEPARATION; MANUSCRIPT
-PATCHES NOT YET APPLIED
+EXAMPLE UPGRADED TO A FIXED-CODE, FIXED-PAIR LABEL SEPARATION; VALIDATED
+MANUSCRIPT PATCH PREPARED BUT INTENTIONALLY UNCOMMITTED
 
 ## Goal
 
@@ -156,6 +156,9 @@ their `z_I(T)` values agree and their truncated line-probe profiles
 Consequently this pair is the coarsest numerical state observable through all
 rank-one exact-confinement contexts.  Any invariant determining those costs
 must refine this contextual quotient.
+Moreover, the full outer code together with outer codes having
+one-dimensional functional dual forms a complete separating family; larger
+outer duals introduce no additional rank-one tests.
 
 ### Proof
 
@@ -250,3 +253,53 @@ the contextual-state theorem, whose proof above is independent of computation.
   explicit.  The theorem is fixed-`T`; line probes alone do not characterize
   higher-dimensional `T`, where a map into `D` can have image spanning several
   `L`-lines.
+
+## Second and third TT / EJ / red-team checkpoints
+
+- **TT:** the universal tests are not arbitrary tropical functionals.  They
+  are the projective lines in realizable outer dual codes.  The proof constructs
+  each test as `O=(L b)^perp` and checks the target projection.
+- **EJ:** arbitrary outer codes are unnecessary for separating rank-one states.
+  The full outer code exposes `z`, and outer codes with one-dimensional
+  functional dual expose every truncated line probe.  These contexts form a
+  complete separating family.
+- **Red team:** the minimality conclusion concerns exact numerical
+  nonconfinement costs.  It neither reconstructs minimizing coefficient lifts
+  nor asserts raw-table equality.  Restriction to a target line preserves the
+  normalization equation, and bounded consequences use the full
+  restriction/zero-extension bijection rather than equality of scalar minima.
+- **Red team:** the fixed-code separation compares two encoders of the same
+  binary row space.  Their encoder identifications with `F_4` differ by an
+  `F_2`-linear transformation that is not invisible to a fixed `F_4`-linear
+  outer code; this is exactly the represented functional-label distinction the
+  theorem measures.
+
+## Uncommitted manuscript patch
+
+The working tree contains an intentionally uncommitted patch to the paper
+package.  It:
+
+1. promotes the binary/quaternary example to Proposition
+   `prop:functional-label-separation` with all fixed data stated explicitly;
+2. adds Theorem `thm:rank-one-contextual-state`, including the projective
+   line-probe transform, realizable converse, coarsest-state statement, and
+   one-dimensional-dual separating family;
+3. strengthens Corollary `cor:all-rank-bottleneck` to the complete bounded
+   transfer equivalence and derives coefficient, support, reliability,
+   scheduling, and truncated-minimum consequences; and
+4. updates the abstract, introduction, conclusion, claim registry, formal
+   boundary count, release gate, and generated PDF consistently.
+
+The patch is 30 pages.  The abstract passes the 200-word cap.  `make check`
+passes warning-free with 28 classified claims and the unchanged four Lean
+terminals.  No manuscript, verification, or PDF file in this patch is staged
+or committed.
+
+## Remaining boundary
+
+The higher-rank analogue of the contextual-state theorem is open.  A map
+`T -> D` for `dim(T)>1` can have image spanning several `L`-lines, so the
+rank-one projective transform is not a complete test family there.  The exact
+higher-rank contextual quotient is the family of minima over realizable
+`F_q`-linear maps into outer dual subspaces; finding a smaller intrinsic
+description is a distinct successor problem, not a gap in the rank-one result.
