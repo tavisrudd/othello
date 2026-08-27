@@ -6,6 +6,8 @@
   certificate replay and fail-closed candidate limits.
 - Let higher-redundancy classification return certified negative witnesses or
   unsupported structural families without broadening positive theorem rows.
+- Bind pointed forbidden roots and the witness certificate in a typed result
+  envelope, with frozen lowercase JSON round-trip tests for the `Root` enum.
 
 ## 0.1.0 - 2026-08-25
 

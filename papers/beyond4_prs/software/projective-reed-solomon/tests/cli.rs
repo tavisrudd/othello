@@ -72,12 +72,18 @@ fn simultaneous_locator_emits_a_replayable_r6_witness() {
         request,
     );
     assert!(output.status.success());
-    let certificate: Value = serde_json::from_slice(&output.stdout).unwrap();
+    let result: Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(
+        result["schema"],
+        "projective-reed-solomon-simultaneous-locator-v1"
+    );
+    assert_eq!(result["forbidden"], serde_json::json!(["infinity"]));
+    let certificate = &result["certificate"];
     assert_eq!(certificate["distance"], 4);
     assert!(!certificate["support"]
         .as_array()
         .unwrap()
-        .contains(&Value::String("Infinity".into())));
+        .contains(&Value::String("infinity".into())));
     let replay = run_with_stdin(&["--compact", "verify"], &certificate.to_string());
     assert!(replay.status.success());
 }

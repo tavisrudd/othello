@@ -2,8 +2,9 @@ use clap::{Parser, Subcommand};
 use projective_reed_solomon::{
     canonicalize_syndrome, classify, search_exact_locator,
     search_pointed_simultaneous_marker_locator, verify_certificate, verify_deep_certificate,
-    DeepCertificate, LocatorCertificate, Request, Root, CANONICALIZATION_SCHEMA,
-    CERTIFICATE_SCHEMA, CLASSIFICATION_SCHEMA, DEEP_CERTIFICATE_SCHEMA, VERIFICATION_SCHEMA,
+    DeepCertificate, LocatorCertificate, Request, Root, SimultaneousLocatorResult,
+    CANONICALIZATION_SCHEMA, CERTIFICATE_SCHEMA, CLASSIFICATION_SCHEMA, DEEP_CERTIFICATE_SCHEMA,
+    SIMULTANEOUS_LOCATOR_SCHEMA, VERIFICATION_SCHEMA,
 };
 use std::fs;
 use std::io::{self, Read};
@@ -190,7 +191,14 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
                 &forbidden,
                 cli.candidate_limit,
             )?;
-            print_json(&certificate, cli.compact)?;
+            print_json(
+                &SimultaneousLocatorResult {
+                    schema: SIMULTANEOUS_LOCATOR_SCHEMA.into(),
+                    forbidden,
+                    certificate,
+                },
+                cli.compact,
+            )?;
         }
         Command::Classify(args) => {
             let request: Request = serde_json::from_str(&read_input(&args.input.input)?)?;

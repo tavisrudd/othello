@@ -15,6 +15,9 @@ The command-line interface accepts and emits versioned JSON objects.
   envelope, which may contain a deep certificate.
 - `projective-reed-solomon-verification-v1` reports successful replay of a
   locator or deep certificate.
+- `projective-reed-solomon-simultaneous-locator-v1` binds a typed list of
+  forbidden projective `Root` values to the returned locator certificate.  It
+  is a result envelope, not a new certificate trust route.
 
 `verify-certificate` recomputes field arithmetic, normalization, transport,
 locator or family checks, and the frozen registry lookup. It rejects corrupted

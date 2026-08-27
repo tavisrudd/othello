@@ -8,6 +8,7 @@ pub const DEEP_CERTIFICATE_SCHEMA: &str = "projective-reed-solomon-deep-certific
 pub const CANONICALIZATION_SCHEMA: &str = "projective-reed-solomon-canonicalization-v1";
 pub const CLASSIFICATION_SCHEMA: &str = "projective-reed-solomon-classification-v1";
 pub const VERIFICATION_SCHEMA: &str = "projective-reed-solomon-verification-v1";
+pub const SIMULTANEOUS_LOCATOR_SCHEMA: &str = "projective-reed-solomon-simultaneous-locator-v1";
 
 #[derive(Debug, Error, PartialEq, Eq)]
 pub enum Error {
@@ -94,6 +95,13 @@ pub struct LocatorCertificate {
     pub support: Vec<Root>,
     pub magnitudes: Vec<u32>,
     pub candidates_examined: u64,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+pub struct SimultaneousLocatorResult {
+    pub schema: String,
+    pub forbidden: Vec<Root>,
+    pub certificate: LocatorCertificate,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
@@ -2953,6 +2961,17 @@ mod tests {
     }
 
     #[test]
+    fn root_json_contract_is_lowercase_and_round_trips() {
+        for (root, expected) in [
+            (Root::Finite(3), serde_json::json!({"finite": 3})),
+            (Root::Infinity, serde_json::json!("infinity")),
+        ] {
+            assert_eq!(serde_json::to_value(root).unwrap(), expected);
+            assert_eq!(serde_json::from_value::<Root>(expected).unwrap(), root);
+        }
+    }
+
+    #[test]
     fn decode_and_verify_weight_two() {
         let field = Field::new(prime_field(7)).unwrap();
         let support = vec![Root::Finite(1), Root::Finite(3)];
@@ -3473,6 +3492,23 @@ mod tests {
             search_pointed_simultaneous_marker_locator(&input, &[Root::Infinity], 1_000).unwrap();
         assert!(!certificate.support.contains(&Root::Infinity));
         verify_certificate(&certificate).unwrap();
+    }
+
+    #[test]
+    fn pointed_simultaneous_marker_locator_rejects_bad_root_sets() {
+        let input = request(prime_field(13), 11, vec![1; 11]);
+        assert_eq!(
+            search_pointed_simultaneous_marker_locator(
+                &input,
+                &[Root::Finite(1), Root::Finite(1)],
+                1_000,
+            ),
+            Err(Error::BadSupport)
+        );
+        assert_eq!(
+            search_pointed_simultaneous_marker_locator(&input, &[Root::Finite(13)], 1_000),
+            Err(Error::BadElement(13))
+        );
     }
 
     #[test]
