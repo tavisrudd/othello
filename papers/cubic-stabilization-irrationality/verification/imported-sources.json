@@ -1,4 +1,16 @@
 {
+  "cmr-oadp-tangent-projection": {
+    "citation": "CMR",
+    "conventions": [
+      {
+        "aspect": "domain",
+        "matched": "After base change to an algebraic closure, the projective Cox model is a seven-dimensional variety with one apparent double point in P15.",
+        "requirement": "Corollary 4.2 applies to a variety with one apparent double point in P^{2n+1}."
+      }
+    ],
+    "pinpoint": "Corollary 4.2",
+    "used": "Over an algebraically closed field, tangent projection from a general point of the projective Cox model is birational."
+  },
   "egfs-very-general-cubic": {
     "citation": "EGFS",
     "conventions": [
@@ -69,10 +81,15 @@
         "aspect": "hypothesis",
         "matched": "The paper restricts to Delta nonzero.",
         "requirement": "The five points are in general position: ab(a-1)(b-1)(a-b) is nonzero."
+      },
+      {
+        "aspect": "descent",
+        "matched": "The ground field has characteristic zero, the split projective Cox model has one apparent double point, and the rational-point hypothesis gives Zariski-dense k-points on the twisted Cox model.",
+        "requirement": "Theorem 2.4 gives the ground-field birational tangent projection under the one-apparent-double-point and Zariski-density hypotheses."
       }
     ],
-    "pinpoint": "Section 3, equations (3.1)--(3.2), and Lemma 3.2",
-    "used": "The split Cox model, its Jacobian, and the OADP property."
+    "pinpoint": "Theorem 2.4; Section 3, equations (3.1)--(3.2), and Lemma 3.2",
+    "used": "The split Cox model, its Jacobian and one-apparent-double-point property, and the ground-field birational tangent projection."
   },
   "tz-cubic-series": {
     "citation": "TZ",

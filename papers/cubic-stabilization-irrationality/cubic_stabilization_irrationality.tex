@@ -434,7 +434,7 @@ Theorem~\ref{thm:torus-quotient}.
 \label{prop:tangent-section}
 \coverage{absent}%
 \uses{thm:torus-quotient}%
-\imports{tz-cox-model,tz-torsor-splitting,tz-type-classification}%
+\imports{cmr-oadp-tangent-projection,tz-cox-model,tz-torsor-splitting,tz-type-classification}%
 \evidence{quartic-del-pezzo-slice-cover}%
 Over an algebraically closed field, let \(Z\) be the projective Cox model of
 a smooth quartic del Pezzo surface.  There exist a general tangent point
@@ -463,6 +463,10 @@ specify the point \(x\) used to evaluate the matrix.
 \begin{center}
 \SliceWitnessTable
 \end{center}
+Here \(e\) gives the five coordinates \(E_1,\ldots,E_5\).  From \(e\) and
+\(z'\), the public generator constructs the remaining coordinates
+\(L_{ij}\) and \(Q\) and verifies directly that the resulting point satisfies
+all twenty Cox quadrics.
 
 Let \(D_i\) be the determinant of this evaluation matrix, and let \(M_i\)
 be the fixed \(8\)-by-\(8\) Jacobian minor at the same tangent point.  After
@@ -474,18 +478,38 @@ one explicit B\'ezout identity, that
  \bigcup_{i=1}^4\{D_iM_i\ne0\}=\{\Delta\ne0\}.
  \label{eq:witness-cover}
 \end{equation}
-Thus, for every smooth Cox model over an algebraically closed field, one of
-the four choices has a smooth tangent point and an evaluation map that is an
-isomorphism at \(x\).  Invertibility is open in the pair of points.  Since the
-projective Cox model is geometrically integral, this nonempty open meets the
-open where \(p\) is general for tangent projection and, for that \(p\), the
-open \(U_p\) on which \(\pi_p\) is an isomorphism.  We may also require that
-the \(T_3\)-action be free at \(x\).
+Let \(\mathcal E_{\mathrm{ev}}\subset Z_{\mathrm{sm}}\times Z\) be the
+open locus where the evaluation map is an isomorphism and the \(T_3\)-action
+is free at \(x\).  The four choices above show that this open is nonempty for
+every smooth split Cox model.
+
+We now impose the tangent-projection condition uniformly in \(p\).  Let
+\(G\subset Z_{\mathrm{sm}}\) be the nonempty open over which the tangent
+projection is birational.  The affine tangent spaces form a subbundle
+\(\widehat{\mathcal T}\subset V\otimes\mathcal O_G\).  Put
+\[
+ \mathcal Q=(V\otimes\mathcal O_G)/\widehat{\mathcal T}.
+\]
+The tangent projections are the fibres of the rational \(G\)-map
+\[
+ \Pi:G\times Z\dashrightarrow\PP_G(\mathcal Q),
+ \qquad (p,x)\longmapsto(p,\pi_p(x)).
+\]
+Its generic fibre is birational, so \(\Pi\) restricts to an isomorphism
+between dense open subsets of its source and target.  Denote the source open
+by \(\mathcal U\).  Thus \((p,x)\in\mathcal U\) is a single open condition on
+the pair, and its fibre over \(p\) is an open \(U_p\) on which \(\pi_p\) is
+an isomorphism.  Since \(G\times Z\) is geometrically integral, the open
+\(\mathcal U\cap\mathcal E_{\mathrm{ev}}\) is nonempty.
+
+Choose \((p,x)\) in this intersection.  Then \(p\) is general for tangent
+projection, \(x\in U_p\), the evaluation map is an isomorphism at \(x\), and
+the \(T_3\)-action is free at \(x\).
 
 Let \(H_p\) be the four-dimensional space of tangent hyperplanes containing
-\(B\).  Evaluation identifies \(H_p\) with the four selected weight-space components at
-\(x\).  Hyperplanes in \(H_p\) that vanish at \(x\) form a
-three-dimensional subspace; choose a basis
+\(B\).  Evaluation at \(x\) on the four selected weight-space components
+defines an isomorphism \(H_p\simeq k^4\).  Hyperplanes in \(H_p\) that vanish
+at \(x\) form a three-dimensional subspace; choose a basis
 \(\lambda_1,\lambda_2,\lambda_3\) and let \(\Lambda\) be their common zero
 locus.  Then \(x\in\Lambda\cap U_p\).  Under the evaluation isomorphism the
 three rows span the hyperplane \(u_0+u_1+u_2+u_3=0\), so their four maximal
@@ -494,17 +518,18 @@ the same point that lies in the tangent-projection isomorphism open.
 
 It remains to obtain \(p\), \(x\), and \(\Lambda\) over the ground field.
 Fix a twist of one of the four types.
-Because \(T_3\) and \(B\) are Galois stable, the preceding conditions define
-a nonempty Galois-invariant open in the product of the parameter spaces for
-\(p\) and \(x\).  Its projection to the \(p\)-factor is dense constructible
-and therefore contains a nonempty open.
+Because \(T_3\), \(B\), the set of four selected weight spaces, and the
+universal tangent-projection map are defined over \(k\), the intersection
+\(\mathcal U\cap\mathcal E_{\mathrm{ev}}\) is a nonempty \(k\)-open in
+\(G\times Z\).  Its projection to \(G\) is dense constructible and therefore
+contains a nonempty open \(G_0\).
 
 Corollary~3.5 of \cite{TZ} supplies the universal torsor whose fibre over a
 fixed point of \(S(k)\) is trivial.  Its \(k\)-points are Zariski dense by
 \cite[Lemma~2.1]{TZ}, and the same holds in the projective Cox model.  Hence
-this nonempty open in the parameter space for \(p\) has a \(k\)-point.  At
-that point, Zariski density supplies a \(k\)-rational point \(x\) in the
-corresponding nonempty open.
+\(G_0\) contains a point \(p\in Z(k)\).  The fibre
+\((\mathcal U\cap\mathcal E_{\mathrm{ev}})_p\) is a nonempty \(k\)-open in
+\(Z\), so Zariski density supplies a point \(x\in Z(k)\) in that fibre.
 The kernel of evaluation at \(x\) is a
 three-dimensional \(k\)-space, so a \(k\)-basis gives \(\Lambda\).  We do not
 claim that any one of the four displayed coordinate choices descends.
