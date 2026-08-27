@@ -3644,8 +3644,17 @@
       "last": 977,
       "purpose": "cold paragraph-by-paragraph accessibility read and exposition repair of High-Weight GRS paper",
       "sequence": 405
+    },
+    {
+      "count": 1,
+      "first": 978,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 978,
+      "purpose": "exposition repairs for the cubic-stabilization m=1 paper",
+      "sequence": 406
     }
   ],
-  "next_id": 978,
+  "next_id": 979,
   "schema": "codex-task-id-allocations-v1"
 }
