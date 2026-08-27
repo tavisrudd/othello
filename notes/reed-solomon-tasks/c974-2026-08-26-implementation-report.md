@@ -95,8 +95,8 @@ Inputs are fixed polynomial-basis models:
 - `GF(27)=F_3[x]/(x^3+2x+1)`;
 - `GF(49)=F_7[x]/(x^2+1)`.
 
-The generator is 6,727 bytes with SHA-256
-`41e778f8c406d1c635a7ac15b4d4f7beda4abe43c5fef8ed15ed464a83189bf4`.
+The generator is 6,688 bytes with SHA-256
+`4e3fae89bf921f8db27dad9c8919e735bab3fa10934a052f0951b69a214c9e37`.
 The canonical 155,920-byte JSON is SHA-256
 `b2eb848006e7b80bcdc267e36e3c2b4f631b72f4c2d3908cad9b986be3c792cc`.
 

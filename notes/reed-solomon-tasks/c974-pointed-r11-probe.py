@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_BINARY = ROOT / "papers/beyond4_prs/software/projective-reed-solomon/target/release/projective-reed-solomon"
 DEFAULT_OUTPUT = Path(__file__).with_name("c974-pointed-r11-probe.json")
 SCHEMA = "c974-pointed-r11-probe-v1"
+SOFTWARE_AUTHORITY_COMMIT = "0c11aa5cfc6cca18b2ce14d5807033b5d031f092"
 
 
 FIELDS = [
@@ -56,13 +57,6 @@ def run_json(command, stdin):
 
 
 def generate(binary, candidate_limit, selected_fields, representative_count):
-    commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        check=True,
-    ).stdout.strip()
     records = []
     fields = [entry for entry in FIELDS if not selected_fields or entry[0] in selected_fields]
     for field_name, field, carrier_support in fields:
@@ -99,7 +93,9 @@ def generate(binary, candidate_limit, selected_fields, representative_count):
                     record.update({"status": "NO_WITNESS_WITHIN_LIMIT", "error": error})
                 else:
                     support = certificate["support"]
-                    forbidden_json = "Infinity" if forbidden == "infinity" else {"Finite": forbidden}
+                    forbidden_json = (
+                        "infinity" if forbidden == "infinity" else {"finite": forbidden}
+                    )
                     if forbidden_json in support:
                         raise RuntimeError("returned support contains the forbidden root")
                     verified, verify_error = run_json(
@@ -132,7 +128,7 @@ def generate(binary, candidate_limit, selected_fields, representative_count):
         }
     return {
         "schema": SCHEMA,
-        "authority_commit": commit,
+        "authority_commit": SOFTWARE_AUTHORITY_COMMIT,
         "candidate_limit": candidate_limit,
         "scope": f"{representative_count} deterministic dense carrier representatives times every projective forbidden root in {','.join(name for name, _, _ in fields)}",
         "summary": summary,
