@@ -21,6 +21,32 @@ costs and for simultaneous failures with packing or capacity constraints.
 Manuscript and software changes are out of scope until a theorem survives the
 proof, literature, and hostile-review gates.
 
+## Candidate theorem package
+
+1. **Column-type response.**  Every rank-`t` outer optimization is a tropical
+   lower envelope over `L`-linear column types in functional-dual dimension at
+   most `t`, and every admissible column-type context is realized by an outer
+   code.
+2. **Bounded small model.**  Through helper radius `r`, contextual equivalence
+   is decided by outer codes of length at most `max(2,r+1)` and
+   functional-dual dimension at most `min(t,r)`.  The orbit-normalized finite
+   table is the exact coarsest observable numerical quotient.
+3. **Universality and congruence.**  Every invariant predicting all bounded
+   outer responses factors through this quotient, and the quotient is a
+   congruence for compatible concatenation.  A finite layer library therefore
+   acts through a finite transformation category.
+4. **Exact state census.**  `GL_s(L)` reduces the target type to zero or one
+   nonzero covector; Burnside averaging and Möbius inversion on invariant
+   subspaces give the exact number of basis-free probes.
+5. **Ordered-monoid and Pareto closure.**  Every finite extensive ordered cost
+   monoid has a finite contextual quotient.  For `k` additive resources the
+   sharp universal repetition cap is `1+k(R-1)`; when helper count is tracked,
+   the stronger radius-`r_h` small model has length at most `r_h+1`.
+6. **Multi-target-block compression.**  With `p` target blocks and surjective
+   outer target projection, any cost-`r` joint witness compresses to at most
+   `p+r` blocks.  The missing piece is the corresponding multi-block
+   target-normalized labelled-cost interface.
+
 ## Starting point
 
 For a fixed target space `T` of dimension `t`, the paper assigns an inner
@@ -168,6 +194,23 @@ If no sector of those dimensions has cost below `R`, every omitted sector is
 truncated to `R`.  This is an exact rank--radius reduction, not merely a search
 heuristic.
 
+There is a matching cutoff on the target side.  A normalized recovery system
+for a `t`-dimensional target subspace expresses that subspace in the span of
+its helper generator columns.  A helper union of size `c` spans dimension at
+most `c`, so every such system satisfies
+
+```text
+t <= c.
+```
+
+At recovery radius `r=R-1`, target ranks above `r` therefore have no bounded
+systems, while every relevant outer functional-dual image also has rank at
+most `r`.  The complete bounded demand diagram is confined to a
+rank-`r`-by-rank-`r` window.  This target-rank cutoff concerns existence and
+exact bounded costs; the manuscript's stronger rank-one bottleneck says that
+rank-one targets alone control the yes/no confinement threshold across all
+recoverable ranks.
+
 ### Small separating-context theorem
 
 There is a stronger simultaneous reduction.  Suppose two inner problems have
@@ -284,6 +327,32 @@ the number of contextual probes are uniform in the target rank once `t>=r`,
 and are independent of the inner block length.  This is a semantic state-size
 bound, not an oracle-time bound: evaluating one prescribed-coset entry may
 still be computationally difficult.
+
+For a fixed recoverable target space `W` of dimension `ell`, the complete
+radius-`r` numerical diagram over all nonzero `T<=W` needs only
+`dim T<=min(ell,r)`.  A raw orbit-normalized probe bound is
+
+```text
+sum_{t=1}^min(ell,r) GaussianBinom(ell,t)_q
+  * 2 sum_{s=1}^min(t,r) binom(Q^s+r-1,r).
+```
+
+The formula counts identified target subspaces separately and deliberately
+ignores correlations among their response tables.
+
+At the smallest nontrivial radius `r=1`, the state is especially concrete.
+Only `s=1` and outer length two can occur.  Scale the unique helper column type
+to one; the target/helper ratio is then one scalar `c in L`, including zero.
+Thus a target line's complete radius-one numerical state consists of the
+zero-sector value and exactly `Q=|L|` two-block probes.  Higher-dimensional
+targets have no one-helper recovery systems.  This both checks the formulas
+and gives the smallest worked instance of the all-rank construction.
+
+Indeed, constructing the state is NP-hard in general.  Its zero-sector
+coordinate already contains exact recovery cost and inner-dual minimum-distance
+information, and the lane's earlier complexity work gives NP-hard fixed
+fibre problems even for a single binary demand.  The theorem bounds which
+outer observations matter; it does not make the inner fibre oracle easy.
 
 For direct evaluation of a fixed large context, there is also an exact
 state-dependent coordinatewise cap.  Put `C=min(R,z)` and, for fixed
@@ -427,6 +496,38 @@ For `t=s=1`, the formula reduces to the zero-truncated projective line-probe
 profile already in the paper: changing the generator of the one-dimensional
 outer dual is exactly the scalar minimization in that theorem.
 
+### Unbounded targets with no finite zero-sector ceiling
+
+If `z=infinity` and no radius is fixed, the small-context theorem does not
+give a uniform arity bound.  The finite tropical representation still gives a
+decision procedure.  For two fixed envelopes
+
+```text
+F(n)=min_i (u_i+c_i.n),
+G(n)=min_j (v_j+d_j.n),
+```
+
+the strict inequality `F(n)<G(n)` holds exactly when, for some form `i`,
+
+```text
+u_i+c_i.n < v_j+d_j.n    for every j.
+```
+
+Together with `n_a>=0` and the spanning condition, this is a finite disjunction
+of integer-linear feasibility problems: express spanning by requiring one of
+the finitely many bases of `V_s^vee` to have positive multiplicity.  Infinite
+coefficients require only a finite preliminary split according to whether the
+corresponding multiplicity is zero.  Testing both strict directions for every
+`s<=t` and target type decides exact contextual equivalence; a feasible integer
+point supplies a separating outer code.
+
+No bound independent of the affine coefficients is possible at the abstract
+min-plus level.  The functions `2n` and `min(2n,M+n)` agree through `n=M` and
+differ afterward.  Whether represented-code fibres force a substantially
+smaller coefficient-sensitive bound is open.  Thus radius truncation and the
+finite recoverable-target ceiling are doing real mathematical work in the
+small-model theorem.
+
 ## Congruence and a finite typed algebra
 
 Define two rank-`t` inner states to be `R`-equivalent when every compatible
@@ -492,6 +593,12 @@ Myhill--Nerode analogy.  The semantic kernel statement is formal; the
 substantive coding-theoretic content is that the column-type reduction,
 rank bound, radius cap, and basis quotient realize it by one explicit finite
 test family with a bounded separating context.
+
+Minimality here concerns observational equivalence, not storage layout.  The
+displayed probe vector may contain coordinates computable from other
+coordinates; quotienting its image by equality gives the canonical minimal
+state, while finding the fewest probes or the smallest circuit representing
+that image is a separate optimization problem.
 
 ### Finite tower-synthesis corollary
 
@@ -625,12 +732,55 @@ rank--radius argument then also restricts the Pareto probes to
 `s<=min(t,R_h-1)`.  Without such a positive rank-controlling resource, the
 safe dimension bound remains `s<=t`.
 
+There is a stronger budget-box version.  Let `r=(r_h,r_2,...,r_k)` be a
+componentwise resource budget, with the first coordinate counting helpers.
+Observe a context by the set of attainable cost vectors dominated by `r`
+(equivalently, by its Pareto frontier inside that finite box).  If two inner
+problems have different observations, choose `b<=r` attainable in the first
+and not the second, and a first-state witness of cost at most `b`.
+
+If this witness is in the zero sector, the zero-functional context separates
+the states.  Otherwise its nonzero external blocks number at most `b_h<=r_h`.
+Passing to the `L`-span of its label image and puncturing all identically zero
+external coordinates preserves the first witness and can only remove feasible
+options from the second state.  Hence the same budget distinction is witnessed
+by a context with
+
+```text
+functional-dual dimension <= min(t,r_h),
+outer length <= max(2,r_h+1).
+```
+
+The complete Pareto test table therefore needs only spanning multiplicity
+vectors of total size at most `r_h`.  Its orbit-normalized probe count is at
+most
+
+```text
+2 sum_{s=1}^min(t,r_h) binom(Q^s+r_h-1,r_h),
+```
+
+and each entry is an antichain in the box
+`product_i {0,...,r_i}`.  This is the practically relevant multi-resource
+small-model theorem: exact additive bandwidth, traffic, or energy tradeoffs
+compose with no larger outer contexts once helper participation is one tracked
+budget.
+The generic `K_R,k` cap remains necessary only when no resource controls the
+number of active blocks.
+
 This proves a finite higher-rank contextual algebra for any fixed finite list
 of additive resources—for example helper count together with finitely many
 fixed traffic or energy categories.  It also applies to a max- or
 divisibility-based subpacketization statistic if that statistic has a finite
 interface-independent monoid law.  It does not by itself cover two major
-cases:
+cases.  Concrete covered models include heterogeneous per-helper I/O weights,
+additive bytes or symbols sent, energy, and a fixed list of rack or link
+egress categories.  A fixed-subpacketization linear-repair model also fits
+when each prescribed-coset fibre stores the Pareto costs of all allowed helper
+response maps and different blocks remain independent.  Cross-helper network
+coding or shared constraints do not satisfy that independence without a
+larger interface state.
+
+The two principal exclusions are:
 
 1. subpacketization is often an interface or feasibility parameter, rather
    than an independent cost with a closed monoid law; and
@@ -643,6 +793,59 @@ subpacketization needs an enriched interface law, while packing needs helper
 identity and overlap rather than only a fixed-dimensional cost vector.
 
 ## Extensions requested by the research feedback
+
+### Multi-target-block compression lemma
+
+The small-model mechanism extends algebraically to several distinguished
+outer blocks.  Let `P` be a set of `p` target blocks and let `D<=L^N` satisfy
+
+```text
+D intersect L^P = 0.
+```
+
+This is dual to surjectivity of the outer code's projection onto all target
+blocks.  For a joint functional-label map `B:T->D`, put
+`D_B=span_L B(T)` and let `A` be the external coordinates on which `B` is
+nonzero.  Coordinates outside `P union A` vanish on `D_B`; if an element of
+`D_B` also vanishes on `A`, it is supported in `P` and hence is zero.  Thus
+projection to `A` is injective on `D_B`.
+
+Consequently any block-additive joint witness of helper cost at most `r`
+compresses to the `p` target blocks and at most `r` active external blocks:
+
+```text
+functional-dual image dimension <= r,
+outer length <= p+r.
+```
+
+The same restriction monotonicity used in the one-target proof preserves a
+separation between two numerical states.  What is not yet supplied is the
+multi-target-block analogue of the manuscript's target-normalized labelled
+cost formula.  Once that interface is defined, this lemma gives its
+small-context theorem immediately.  It is the clearest route from the present
+theory to simultaneous multi-node repair across concatenation blocks.
+
+The basis quotient also has a clean `p`-target form.  The target column tuple
+is a linear map `a_P:V_s->L^p`.  Two such maps differ by a change of basis in
+`V_s` exactly when they have the same image subspace in `L^p`; any two
+surjections onto that image are related by an automorphism of `V_s` after
+matching their kernels.  Thus target-type orbits are indexed by subspaces
+`U<=L^p` of dimension at most `s`, in number
+
+```text
+sum_{d=0}^min(s,p) GaussianBinom(p,d)_Q.
+```
+
+For a helper budget `r`, a raw normalized probe bound for the future
+multi-block state is consequently
+
+```text
+sum_{s=1}^min(t,r)
+  (sum_{d=0}^min(s,p) GaussianBinom(p,d)_Q)
+  binom(Q^s+r-1,r),
+```
+
+before stabilizer-orbit reduction of helper multiplicities.
 
 1. **Towers and code synthesis.** Propagate the finite orbit-indexed state or a
    verified compressed circuit through a tower; derive mathematical pruning
@@ -699,6 +902,20 @@ identity and overlap rather than only a fixed-dimensional cost vector.
    resource dimensions and interface-valued subpacketization remain open.
 5. Run the full literature and hostile-referee gates, then decide whether the
    result belongs in the current paper or a separate sequel.
+
+## Promotion recommendation after the remaining gates
+
+The current paper should receive only the scalar core if it survives review:
+the column-type theorem, the `max(2,r+1)` small separating-context theorem,
+the universal factorization/congruence statement, and the exact recoverable-
+target corollary.  These directly strengthen its existing rank-one contextual
+theorem and can replace the present all-arities qualification rather than
+opening a new application section.
+
+The exact Burnside--Möbius census is appendix material.  The finite-monoid,
+Pareto, multi-resource, and multi-target-block developments are a coherent
+sequel or optimization-facing note; inserting them all into the current
+37-page manuscript would obscure the scalar coding theorem.
 
 ## EJ + TT closeout and mystery ledger
 
