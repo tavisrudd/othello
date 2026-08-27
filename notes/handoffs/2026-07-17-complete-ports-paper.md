@@ -6,8 +6,7 @@
 **Status**: ACTIVE; C972 COMPOSITIONAL-STATE CHARACTERIZATION AND C976
 EXPOSITION/LITERATURE/EXPORT CLOSED; 37-PAGE AUTHORITY, 29-CLAIM, FOUR-LEAN-
 TERMINAL, AND 77-FILE PUBLIC-SURFACE GATES PASS; C962 ALGORITHM/BOUND
-DEVELOPMENT REMAINS IN PROGRESS WITH C972-DERIVED CONTEXTUAL KERNELS VALIDATED;
-C325 APPENDIX VERIFIER AND C953 AGGREGATE
+DEVELOPMENT REMAINS IN PROGRESS; C325 APPENDIX VERIFIER AND C953 AGGREGATE
 REVIEW FOLLOW; C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR
 DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
@@ -98,15 +97,6 @@ Completed preparation:
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
 Current and completed strengthening:
-
-- [C962 exact recovery algorithms](../2026-08-25-c962-recovery-algorithms-and-bounds.md)
-  now includes a radius-pruned rank-one complete-transfer certificate, lazy
-  projective line-probe caching, and rank-bounded contextual subspace caching
-  with Python/Rust differential fixtures and interleaved cold/warm A/B evidence.
-  The certificate is 1.66x faster for the measured exact radius decision and
-  removes the higher-rank recomputations; warm projective and rank-bounded
-  queries are 2.62x and 5.83x faster, while their measured cold paths remain
-  slower and are not selected for one-shot queries.
 
 - [C972 minimal compositional state](../2026-08-26-c972-minimal-compositional-state.md)
   identifies the zero-truncated projective line-probe profile as the coarsest
@@ -229,8 +219,9 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 ## Next step
 
 C962 remains the active private code-and-mathematics task for ergodis algorithm
-development and benchmark evidence.  The C972 contextual-state kernels are
-complete and the bundle-wide evidence manifest is current.
+development and benchmark evidence.  Its bundle-wide evidence check currently
+reports stale hashes for `ergodis/BENCHMARKS.md`, `Cargo.toml`, and `README.md`;
+the regenerated C972 scalar-separation entry still equals the tracked result.
 Continue C962 with the bounded explicit/ZDD/Roaring representation experiment,
 then only for additional paper-owned algorithm and bound development beyond
 the exported ERGO-comp baseline.
