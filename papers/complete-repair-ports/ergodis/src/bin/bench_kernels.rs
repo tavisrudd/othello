@@ -3,14 +3,16 @@ use std::time::Instant;
 
 use ergodis::{
     azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
-    ceph_xor_repair_supports_compressed, compile_binary_rank_one, compile_binary_target_subspace,
-    confinement_by_generators_field, gpu_checkpoint_mds_recovery,
-    gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair, schedule_repair_dag,
-    ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
+    ceph_xor_repair_supports_compressed, certify_rank_one_transfer_by_generators_field,
+    compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
+    gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair,
+    schedule_repair_dag, ternary_orbit_syndrome_meet_in_middle,
+    ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
-    ternary_orbit_syndrome_search_correlated, CephXorLayer, CompositionTower, FiniteField, Gf4,
-    GpuCheckpointCapacities, Matrix, OrbitOption, Prime, QcLdpcCode, RepairTask, TowerLevel,
-    WeightedRepairProblem, WeightedRepairWorkspace, WeightedSchedulerBackend,
+    ternary_orbit_syndrome_search_correlated, CephXorLayer, CompositionTower, ContextStrategy,
+    FiniteField, Gf4, GpuCheckpointCapacities, Matrix, OrbitOption, Prime, QcLdpcCode,
+    RankOneProbeCache, RepairTask, TowerLevel, WeightedRepairProblem, WeightedRepairWorkspace,
+    WeightedSchedulerBackend,
 };
 
 fn next_u32(state: &mut u64) -> u32 {
@@ -113,13 +115,14 @@ fn gf4_hamming_dual_basis(dimension: usize) -> Matrix {
     Matrix::new_field::<Gf4>(dimension, column_count, data).unwrap()
 }
 
-fn jin_fu_hamming_spec(variant: &str) -> Option<usize> {
+fn jin_fu_hamming_spec(variant: &str) -> Option<(&str, usize)> {
     let mut fields = variant.split(':');
-    if fields.next()? != "jin-fu-hamming" || fields.next()? != "rust" {
+    if fields.next()? != "jin-fu-hamming" {
         return None;
     }
+    let backend = fields.next()?;
     let dimension = fields.next()?.parse().ok()?;
-    fields.next().is_none().then_some(dimension)
+    fields.next().is_none().then_some((backend, dimension))
 }
 
 fn application_spec(variant: &str) -> Option<(&str, Vec<usize>)> {
@@ -681,28 +684,110 @@ fn main() {
         );
         return;
     }
-    if let Some(dimension) = jin_fu_hamming_spec(&variant) {
+    if let Some((backend, dimension)) = jin_fu_hamming_spec(&variant) {
         let functional_dual_basis = gf4_hamming_dual_basis(dimension);
         let block_count = functional_dual_basis.cols();
         let profile = compile_binary_rank_one::<Gf4>(&[1, 2, 3], 0, 16).unwrap();
         let inner_dual = profile.inner_dual().unwrap();
         let (ordinary, target) = profile.cost_tables::<Gf4>().unwrap();
         let expected_nonzero = 4u32.pow((dimension - 1) as u32) - 1;
+        let mut warm_cache =
+            RankOneProbeCache::<Gf4>::new(&ordinary, &target, block_count, 0, inner_dual.cost)
+                .unwrap();
         for _ in 0..repetitions {
-            let answer = confinement_by_generators_field::<Gf4>(
-                &functional_dual_basis,
-                block_count,
-                &ordinary,
-                &target,
-                0,
-                inner_dual.cost,
-            )
-            .unwrap();
-            assert_eq!(answer.cost, 5);
-            assert_eq!(answer.nonzero_cost, Some(expected_nonzero));
-            work += answer.transitions;
-            checksum += u64::from(answer.cost);
-            black_box(answer);
+            match backend {
+                "rust" => {
+                    let answer = confinement_by_generators_field::<Gf4>(
+                        &functional_dual_basis,
+                        block_count,
+                        &ordinary,
+                        &target,
+                        0,
+                        inner_dual.cost,
+                    )
+                    .unwrap();
+                    assert_eq!(answer.cost, 5);
+                    assert_eq!(answer.nonzero_cost, Some(expected_nonzero));
+                    work += answer.transitions;
+                    checksum += u64::from(answer.cost);
+                    black_box(answer);
+                }
+                "certificate" => {
+                    let answer = certify_rank_one_transfer_by_generators_field::<Gf4>(
+                        &functional_dual_basis,
+                        block_count,
+                        &ordinary,
+                        &target,
+                        0,
+                        inner_dual.cost,
+                        4,
+                    )
+                    .unwrap();
+                    assert!(answer.transfers_completely);
+                    work += answer.candidates_examined;
+                    checksum += 5;
+                    black_box(answer);
+                }
+                "cache-cold" => {
+                    let mut cache = RankOneProbeCache::<Gf4>::new(
+                        &ordinary,
+                        &target,
+                        block_count,
+                        0,
+                        inner_dual.cost,
+                    )
+                    .unwrap();
+                    let answer = cache.context_cost_cached(&functional_dual_basis).unwrap();
+                    assert_eq!(answer.cost, 5);
+                    work += answer.work.outer_vectors;
+                    peak_states = peak_states.max(cache.cached_probe_count() as u64);
+                    checksum += u64::from(answer.cost);
+                    black_box(answer);
+                }
+                "cache-warm" => {
+                    let answer = warm_cache
+                        .context_cost_cached(&functional_dual_basis)
+                        .unwrap();
+                    assert_eq!(answer.cost, 5);
+                    work += answer.work.outer_vectors;
+                    peak_states = peak_states.max(warm_cache.cached_probe_count() as u64);
+                    checksum += u64::from(answer.cost);
+                    black_box(answer);
+                }
+                "auto-one" | "auto-zero-budget" => {
+                    let mut cache = RankOneProbeCache::<Gf4>::new(
+                        &ordinary,
+                        &target,
+                        block_count,
+                        0,
+                        inner_dual.cost,
+                    )
+                    .unwrap();
+                    let answer = cache
+                        .context_cost_planned(
+                            &functional_dual_basis,
+                            ContextStrategy::Auto {
+                                expected_queries: 1,
+                                memory_budget_bytes: if backend == "auto-one" {
+                                    usize::MAX
+                                } else {
+                                    0
+                                },
+                            },
+                        )
+                        .unwrap();
+                    assert_eq!(answer.result.cost, 5);
+                    work += answer
+                        .result
+                        .work
+                        .outer_vectors
+                        .max(answer.result.work.generator_candidates);
+                    peak_states = peak_states.max(cache.cached_probe_count() as u64);
+                    checksum += u64::from(answer.result.cost);
+                    black_box(answer);
+                }
+                _ => panic!("unknown Jin--Fu Hamming benchmark backend"),
+            }
         }
         let elapsed_ns = started.elapsed().as_nanos();
         println!(
@@ -711,26 +796,105 @@ fn main() {
         );
         return;
     }
-    if variant == "jin-fu:rust" {
+    if matches!(
+        variant.as_str(),
+        "jin-fu:rust"
+            | "jin-fu:certificate"
+            | "jin-fu:cache-cold"
+            | "jin-fu:cache-warm"
+            | "jin-fu:auto-one"
+            | "jin-fu:auto-zero-budget"
+    ) {
         let functional_dual_basis = jin_fu_outer_dual_basis();
         let profile = compile_binary_rank_one::<Gf4>(&[1, 2, 3], 0, 16).unwrap();
         let inner_dual = profile.inner_dual().unwrap();
         let (ordinary, target) = profile.cost_tables::<Gf4>().unwrap();
+        let mut warm_cache =
+            RankOneProbeCache::<Gf4>::new(&ordinary, &target, 43, 0, inner_dual.cost).unwrap();
         for _ in 0..repetitions {
-            let answer = confinement_by_generators_field::<Gf4>(
-                &functional_dual_basis,
-                43,
-                &ordinary,
-                &target,
-                0,
-                inner_dual.cost,
-            )
-            .unwrap();
-            assert_eq!(answer.cost, 5);
-            assert_eq!(answer.nonzero_cost, Some(26));
-            work += answer.transitions;
-            checksum += u64::from(answer.cost);
-            black_box(answer);
+            match variant.as_str() {
+                "jin-fu:rust" => {
+                    let answer = confinement_by_generators_field::<Gf4>(
+                        &functional_dual_basis,
+                        43,
+                        &ordinary,
+                        &target,
+                        0,
+                        inner_dual.cost,
+                    )
+                    .unwrap();
+                    assert_eq!(answer.cost, 5);
+                    assert_eq!(answer.nonzero_cost, Some(26));
+                    work += answer.transitions;
+                    checksum += u64::from(answer.cost);
+                    black_box(answer);
+                }
+                "jin-fu:certificate" => {
+                    let answer = certify_rank_one_transfer_by_generators_field::<Gf4>(
+                        &functional_dual_basis,
+                        43,
+                        &ordinary,
+                        &target,
+                        0,
+                        inner_dual.cost,
+                        4,
+                    )
+                    .unwrap();
+                    assert!(answer.transfers_completely);
+                    work += answer.candidates_examined;
+                    checksum += 5;
+                    black_box(answer);
+                }
+                "jin-fu:cache-cold" => {
+                    let mut cache =
+                        RankOneProbeCache::<Gf4>::new(&ordinary, &target, 43, 0, inner_dual.cost)
+                            .unwrap();
+                    let answer = cache.context_cost_cached(&functional_dual_basis).unwrap();
+                    assert_eq!(answer.cost, 5);
+                    work += answer.work.outer_vectors;
+                    peak_states = peak_states.max(cache.cached_probe_count() as u64);
+                    checksum += u64::from(answer.cost);
+                    black_box(answer);
+                }
+                "jin-fu:cache-warm" => {
+                    let answer = warm_cache
+                        .context_cost_cached(&functional_dual_basis)
+                        .unwrap();
+                    assert_eq!(answer.cost, 5);
+                    work += answer.work.outer_vectors;
+                    peak_states = peak_states.max(warm_cache.cached_probe_count() as u64);
+                    checksum += u64::from(answer.cost);
+                    black_box(answer);
+                }
+                "jin-fu:auto-one" | "jin-fu:auto-zero-budget" => {
+                    let mut cache =
+                        RankOneProbeCache::<Gf4>::new(&ordinary, &target, 43, 0, inner_dual.cost)
+                            .unwrap();
+                    let answer = cache
+                        .context_cost_planned(
+                            &functional_dual_basis,
+                            ContextStrategy::Auto {
+                                expected_queries: 1,
+                                memory_budget_bytes: if variant == "jin-fu:auto-one" {
+                                    usize::MAX
+                                } else {
+                                    0
+                                },
+                            },
+                        )
+                        .unwrap();
+                    assert_eq!(answer.result.cost, 5);
+                    work += answer
+                        .result
+                        .work
+                        .outer_vectors
+                        .max(answer.result.work.generator_candidates);
+                    peak_states = peak_states.max(cache.cached_probe_count() as u64);
+                    checksum += u64::from(answer.result.cost);
+                    black_box(answer);
+                }
+                _ => unreachable!(),
+            }
         }
         let elapsed_ns = started.elapsed().as_nanos();
         println!(

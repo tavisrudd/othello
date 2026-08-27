@@ -34,6 +34,23 @@ pub struct ConfinementAnswer {
     pub transitions: u64,
 }
 
+/// Radius decision for the rank-one complete-transfer criterion.
+///
+/// Unlike [`ConfinementAnswer`], this deliberately does not compute the exact
+/// losing nonzero-sector minimum.  It stops at the first obstruction of cost
+/// at most `radius`, or certifies that none exists.
+#[derive(Debug)]
+pub struct RankOneTransferCertificate {
+    pub radius: u32,
+    pub transfers_completely: bool,
+    pub obstruction_cost: Option<u32>,
+    pub obstruction_sector: Option<ConfinementSector>,
+    pub functional_coefficients: Option<Matrix>,
+    pub block_labels: Box<[Matrix]>,
+    pub candidates_examined: u64,
+    pub local_lookups: u64,
+}
+
 pub fn confinement_by_generators<const P: u8>(
     functional_dual_basis: &Matrix,
     block_count: usize,
@@ -77,11 +94,11 @@ pub fn confinement_by_generators_field<F: FiniteField>(
         .checked_add(inner_dual_distance)
         .ok_or(ConfinementError::Overflow)?;
     let mut best_nonzero_cost = None;
-    let mut best_nonzero_coefficients = None;
-    let mut best_nonzero_labels = vec![zero.clone(); block_count];
     let coefficient_len = functional_dual_basis.rows() * demand_cols;
     let mut coefficients = vec![0u8; coefficient_len];
     let mut block_data = vec![0u8; block_count * label_rows * demand_cols];
+    let mut best_nonzero_coefficients = vec![0u8; coefficient_len];
+    let mut best_nonzero_labels = vec![0u8; block_data.len()];
     let mut transitions = 0u64;
 
     while increment_base_field::<F>(&mut coefficients) {
@@ -99,10 +116,8 @@ pub fn confinement_by_generators_field<F: FiniteField>(
         for block in 0..block_count {
             let start = block * label_rows * demand_cols;
             let end = start + label_rows * demand_cols;
-            let label =
-                Matrix::new_field::<F>(label_rows, demand_cols, block_data[start..end].to_vec())?;
             let table = if block == target_block { target } else { inner };
-            let Some(local_cost) = table.cost(&label) else {
+            let Some(local_cost) = table.cost_slice(&block_data[start..end]) else {
                 feasible = false;
                 break;
             };
@@ -116,20 +131,8 @@ pub fn confinement_by_generators_field<F: FiniteField>(
         }
         if feasible && best_nonzero_cost.is_none_or(|incumbent| cost < incumbent) {
             best_nonzero_cost = Some(cost);
-            best_nonzero_coefficients = Some(Matrix::new_field::<F>(
-                functional_dual_basis.rows(),
-                demand_cols,
-                coefficients.clone(),
-            )?);
-            for (block, slot) in best_nonzero_labels.iter_mut().enumerate() {
-                let start = block * label_rows * demand_cols;
-                let end = start + label_rows * demand_cols;
-                *slot = Matrix::new_field::<F>(
-                    label_rows,
-                    demand_cols,
-                    block_data[start..end].to_vec(),
-                )?;
-            }
+            best_nonzero_coefficients.copy_from_slice(&coefficients);
+            best_nonzero_labels.copy_from_slice(&block_data);
         }
     }
 
@@ -145,14 +148,168 @@ pub fn confinement_by_generators_field<F: FiniteField>(
         } else {
             ConfinementSector::Zero
         },
-        functional_coefficients: nonzero_wins.then_some(best_nonzero_coefficients).flatten(),
+        functional_coefficients: if nonzero_wins {
+            Some(Matrix::new_field::<F>(
+                functional_dual_basis.rows(),
+                demand_cols,
+                best_nonzero_coefficients,
+            )?)
+        } else {
+            None
+        },
         block_labels: if nonzero_wins {
-            best_nonzero_labels.into_boxed_slice()
+            best_nonzero_labels
+                .chunks_exact(label_rows * demand_cols)
+                .map(|label| Matrix::new_field::<F>(label_rows, demand_cols, label.to_vec()))
+                .collect::<Result<Vec<_>, MatrixError>>()?
+                .into_boxed_slice()
         } else {
             vec![zero; block_count].into_boxed_slice()
         },
         transitions,
     })
+}
+
+/// Decide the rank-one complete-transfer condition through `radius`.
+///
+/// The input tables must have one demand column.  The zero-functional cost is
+/// checked first.  Nonzero candidates are accumulated target block first and
+/// abandoned as soon as their partial cost exceeds `radius`.
+pub fn certify_rank_one_transfer_by_generators_field<F: FiniteField>(
+    functional_dual_basis: &Matrix,
+    block_count: usize,
+    inner: &CostTable,
+    target: &CostTable,
+    target_block: usize,
+    inner_dual_distance: u32,
+    radius: u32,
+) -> Result<RankOneTransferCertificate, ConfinementError> {
+    F::validate().map_err(MatrixError::from)?;
+    let (label_rows, demand_cols) = inner.shape();
+    if demand_cols != 1
+        || inner.field_order() != F::ORDER
+        || target.field_order() != F::ORDER
+        || target.shape() != (label_rows, demand_cols)
+        || functional_dual_basis.cols() != block_count * label_rows
+        || target_block >= block_count
+    {
+        return Err(ConfinementError::Shape);
+    }
+    let zero = Matrix::zeros_field::<F>(label_rows, 1)?;
+    let zero_cost = target
+        .cost(&zero)
+        .ok_or(ConfinementError::Shape)?
+        .checked_add(inner_dual_distance)
+        .ok_or(ConfinementError::Overflow)?;
+    if zero_cost <= radius {
+        return Ok(RankOneTransferCertificate {
+            radius,
+            transfers_completely: false,
+            obstruction_cost: Some(zero_cost),
+            obstruction_sector: Some(ConfinementSector::Zero),
+            functional_coefficients: None,
+            block_labels: vec![zero; block_count].into_boxed_slice(),
+            candidates_examined: 0,
+            local_lookups: 1,
+        });
+    }
+
+    let coefficient_len = functional_dual_basis.rows();
+    let mut coefficients = vec![0u8; coefficient_len];
+    let mut block_data = vec![0u8; block_count * label_rows];
+    let mut candidates_examined = 0u64;
+    let mut local_lookups = 1u64;
+    let mut order = Vec::with_capacity(block_count);
+    order.push(target_block);
+    order.extend((0..block_count).filter(|&block| block != target_block));
+
+    while increment_base_field::<F>(&mut coefficients) {
+        candidates_examined += 1;
+        evaluate_functional::<F>(
+            functional_dual_basis,
+            block_count,
+            label_rows,
+            1,
+            &coefficients,
+            &mut block_data,
+        );
+        let mut cost = 0u32;
+        let mut feasible = true;
+        for &block in &order {
+            let start = block * label_rows;
+            let end = start + label_rows;
+            let table = if block == target_block { target } else { inner };
+            local_lookups += 1;
+            let Some(local_cost) = table.cost_slice(&block_data[start..end]) else {
+                feasible = false;
+                break;
+            };
+            cost = cost
+                .checked_add(local_cost)
+                .ok_or(ConfinementError::Overflow)?;
+            if cost > radius {
+                feasible = false;
+                break;
+            }
+        }
+        if feasible {
+            let labels = (0..block_count)
+                .map(|block| {
+                    let start = block * label_rows;
+                    Matrix::new_field::<F>(
+                        label_rows,
+                        1,
+                        block_data[start..start + label_rows].to_vec(),
+                    )
+                })
+                .collect::<Result<Vec<_>, MatrixError>>()?;
+            return Ok(RankOneTransferCertificate {
+                radius,
+                transfers_completely: false,
+                obstruction_cost: Some(cost),
+                obstruction_sector: Some(ConfinementSector::Nonzero),
+                functional_coefficients: Some(Matrix::new_field::<F>(
+                    functional_dual_basis.rows(),
+                    1,
+                    coefficients.clone(),
+                )?),
+                block_labels: labels.into_boxed_slice(),
+                candidates_examined,
+                local_lookups,
+            });
+        }
+    }
+
+    Ok(RankOneTransferCertificate {
+        radius,
+        transfers_completely: true,
+        obstruction_cost: None,
+        obstruction_sector: None,
+        functional_coefficients: None,
+        block_labels: Vec::new().into_boxed_slice(),
+        candidates_examined,
+        local_lookups,
+    })
+}
+
+pub fn certify_rank_one_transfer_by_generators<const P: u8>(
+    functional_dual_basis: &Matrix,
+    block_count: usize,
+    inner: &CostTable,
+    target: &CostTable,
+    target_block: usize,
+    inner_dual_distance: u32,
+    radius: u32,
+) -> Result<RankOneTransferCertificate, ConfinementError> {
+    certify_rank_one_transfer_by_generators_field::<Prime<P>>(
+        functional_dual_basis,
+        block_count,
+        inner,
+        target,
+        target_block,
+        inner_dual_distance,
+        radius,
+    )
 }
 
 #[repr(C)]
@@ -478,5 +635,36 @@ mod tests {
         assert_eq!(generated.nonzero_cost, syndrome.nonzero_cost);
         assert_eq!(generated.sector, syndrome.sector);
         assert_eq!(generated.block_labels, syndrome.block_labels);
+    }
+
+    #[test]
+    fn rank_one_certificate_matches_exact_radius_decisions() {
+        let table = binary_scalar_table();
+        let basis = Matrix::new::<2>(2, 3, vec![1, 1, 0, 0, 1, 1]).unwrap();
+        let exact = confinement_by_generators::<2>(&basis, 3, &table, &table, 0, 3).unwrap();
+        for radius in 0..=4 {
+            let certificate = certify_rank_one_transfer_by_generators::<2>(
+                &basis, 3, &table, &table, 0, 3, radius,
+            )
+            .unwrap();
+            assert_eq!(certificate.transfers_completely, radius < exact.cost);
+            assert_eq!(certificate.obstruction_cost.is_some(), radius >= exact.cost);
+        }
+    }
+
+    #[test]
+    fn rank_one_certificate_short_circuits_zero_and_nonzero_obstructions() {
+        let table = binary_scalar_table();
+        let basis = Matrix::new::<2>(3, 4, vec![1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1]).unwrap();
+        let zero = certify_rank_one_transfer_by_generators::<2>(&basis, 4, &table, &table, 0, 1, 1)
+            .unwrap();
+        assert_eq!(zero.obstruction_sector, Some(ConfinementSector::Zero));
+        assert_eq!(zero.candidates_examined, 0);
+
+        let nonzero =
+            certify_rank_one_transfer_by_generators::<2>(&basis, 4, &table, &table, 0, 4, 2)
+                .unwrap();
+        assert_eq!(nonzero.obstruction_sector, Some(ConfinementSector::Nonzero));
+        assert!(nonzero.candidates_examined < 7);
     }
 }

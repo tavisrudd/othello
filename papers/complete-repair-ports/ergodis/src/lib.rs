@@ -9,6 +9,7 @@ pub mod balanced;
 pub mod bitset;
 pub mod composition;
 pub mod confinement;
+pub mod contextual;
 pub mod defect;
 pub mod field;
 pub mod incidence;
@@ -38,8 +39,13 @@ pub use composition::{
     TowerAnswer, TowerLevel, TowerWitness,
 };
 pub use confinement::{
+    certify_rank_one_transfer_by_generators, certify_rank_one_transfer_by_generators_field,
     confinement_by_generators, confinement_by_generators_field, confinement_by_syndrome,
-    ConfinementAnswer, ConfinementError, ConfinementSector,
+    ConfinementAnswer, ConfinementError, ConfinementSector, RankOneTransferCertificate,
+};
+pub use contextual::{
+    ContextCost, ContextExecution, ContextPlan, ContextStrategy, ContextWork, ContextualError,
+    PlannedContextCost, RankBoundedContextCache, RankOneProbeCache,
 };
 pub use field::{FieldError, FiniteField, Gf4, Prime};
 pub use matrix::{Matrix, MatrixError};

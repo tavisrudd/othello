@@ -1,0 +1,164 @@
+{
+  "measurements": {
+    "complete_transfer_all_ranks/A_compute_each_rank": {
+      "central_ns": [
+        197680.0,
+        190990.0
+      ],
+      "mean_central_ns": 194335.0,
+      "peak_rss_kib": 11244
+    },
+    "complete_transfer_all_ranks/B_rank_one_certificate": {
+      "central_ns": [
+        289.31,
+        310.27
+      ],
+      "mean_central_ns": 299.78999999999996,
+      "peak_rss_kib": 11100
+    },
+    "projective_auto_one_shot/A_direct_vectors": {
+      "central_ns": [
+        14894.0,
+        15004.0
+      ],
+      "mean_central_ns": 14949.0,
+      "peak_rss_kib": 12248
+    },
+    "projective_auto_one_shot/B_auto_cached": {
+      "central_ns": [
+        14762.0,
+        15122.0
+      ],
+      "mean_central_ns": 14942.0,
+      "peak_rss_kib": 11648
+    },
+    "projective_line_cache_cold/A_direct_vectors": {
+      "central_ns": [
+        15857.0,
+        15040.0
+      ],
+      "mean_central_ns": 15448.5,
+      "peak_rss_kib": 11640
+    },
+    "projective_line_cache_cold/B_build_and_query": {
+      "central_ns": [
+        14408.0,
+        14306.0
+      ],
+      "mean_central_ns": 14357.0,
+      "peak_rss_kib": 11240
+    },
+    "projective_line_cache_warm/A_direct_vectors": {
+      "central_ns": [
+        14741.0,
+        14763.0
+      ],
+      "mean_central_ns": 14752.0,
+      "peak_rss_kib": 11860
+    },
+    "projective_line_cache_warm/B_cached_lines": {
+      "central_ns": [
+        7373.8,
+        7078.700000000001
+      ],
+      "mean_central_ns": 7226.25,
+      "peak_rss_kib": 11440
+    },
+    "rank_bounded_auto_one_shot/A_direct_maps": {
+      "central_ns": [
+        13887.0,
+        13813.0
+      ],
+      "mean_central_ns": 13850.0,
+      "peak_rss_kib": 11696
+    },
+    "rank_bounded_auto_one_shot/B_auto_direct": {
+      "central_ns": [
+        13953.0,
+        13740.0
+      ],
+      "mean_central_ns": 13846.5,
+      "peak_rss_kib": 11120
+    },
+    "rank_bounded_context_cache_cold/A_direct_maps": {
+      "central_ns": [
+        13820.0,
+        13979.0
+      ],
+      "mean_central_ns": 13899.5,
+      "peak_rss_kib": 11380
+    },
+    "rank_bounded_context_cache_cold/B_build_and_query": {
+      "central_ns": [
+        20587.0,
+        20256.0
+      ],
+      "mean_central_ns": 20421.5,
+      "peak_rss_kib": 11436
+    },
+    "rank_bounded_context_cache_warm/A_direct_maps": {
+      "central_ns": [
+        13379.0,
+        13877.0
+      ],
+      "mean_central_ns": 13628.0,
+      "peak_rss_kib": 11544
+    },
+    "rank_bounded_context_cache_warm/B_cached_subspaces": {
+      "central_ns": [
+        2281.1,
+        2403.1
+      ],
+      "mean_central_ns": 2342.1,
+      "peak_rss_kib": 11532
+    },
+    "rank_one_radius_decision/A_exact_then_compare": {
+      "central_ns": [
+        33736.0,
+        33361.0
+      ],
+      "mean_central_ns": 33548.5,
+      "peak_rss_kib": 11660
+    },
+    "rank_one_radius_decision/B_radius_certificate": {
+      "central_ns": [
+        26795.0,
+        27158.0
+      ],
+      "mean_central_ns": 26976.5,
+      "peak_rss_kib": 11172
+    }
+  },
+  "noncanonical": true,
+  "protocol": {
+    "memory": "separate A/B processes; 10 Criterion samples, 0.2 s warmup and measurement; GNU time maximum RSS",
+    "timing": "two rounds with A/B order reversed; 15 Criterion samples, 1 s warmup, 0.5 s measurement"
+  },
+  "schema": "ergodis-contextual-ab-v1",
+  "work": {
+    "all_rank": {
+      "certificate_candidates": 7,
+      "certificate_lookups": 12,
+      "exact_candidates": 4676
+    },
+    "projective": {
+      "cache_entries": 85,
+      "cold_scalar_probes": 255,
+      "direct_vectors": 255,
+      "lines": 85,
+      "warm_hits": 85
+    },
+    "radius": {
+      "certificate_candidates": 255,
+      "certificate_lookups": 256,
+      "exact_candidates": 255
+    },
+    "rank_bounded": {
+      "cache_entries": 50,
+      "cold_candidates": 255,
+      "direct_maps": 255,
+      "subspaces": 50,
+      "warm_hits": 50
+    }
+  }
+}

@@ -3,11 +3,13 @@ use ergodis::balanced::{
     HighFiberSpec,
 };
 use ergodis::{
-    compile_binary_rank_one, compile_binary_target_subspace, compile_integer_affine_constraints,
+    certify_rank_one_transfer_by_generators, compile_binary_rank_one,
+    compile_binary_target_subspace, compile_integer_affine_constraints,
     compile_ternary_affine_constraints, confinement_by_generators, confinement_by_generators_field,
     confinement_by_syndrome, maximum_parallel_repairs, ternary_orbit_syndrome_search,
-    CompositionTable, ConfinementSector, CostTable, GeneratedSpanTable, Gf4,
-    IntegerAffineCompilation, Matrix, OrbitOption, TernaryAffineCompilation, WeightedRepairProblem,
+    CompositionTable, ConfinementSector, ContextExecution, ContextStrategy, CostTable,
+    GeneratedSpanTable, Gf4, IntegerAffineCompilation, Matrix, OrbitOption, Prime,
+    RankBoundedContextCache, RankOneProbeCache, TernaryAffineCompilation, WeightedRepairProblem,
 };
 use serde::Deserialize;
 
@@ -18,12 +20,55 @@ struct Fixture {
     cases: Vec<Case>,
     compositions: Vec<CompositionCase>,
     confinements: Vec<ConfinementCase>,
+    contextual_state: ContextualStateCase,
     gf4_transfers: Vec<Gf4TransferCase>,
     gf4_target_subspaces: Vec<Gf4TargetSubspaceCase>,
     target_towers: Vec<TargetTowerCase>,
     orbits: Vec<OrbitCase>,
     weighted_schedulers: Vec<WeightedSchedulerCase>,
     unit_schedulers: Vec<UnitSchedulerCase>,
+}
+
+#[derive(Deserialize)]
+struct ContextualStateCase {
+    basis: Vec<u8>,
+    basis_rows: usize,
+    block_count: usize,
+    rank_one_cost: u32,
+    certificates: Vec<CertificateFixture>,
+    projective: ProjectiveFixture,
+    rank_bounded: RankBoundedFixture,
+}
+
+#[derive(Deserialize)]
+struct CertificateFixture {
+    radius: u32,
+    transfers: bool,
+    sector: Option<String>,
+    cost: Option<u32>,
+}
+
+#[derive(Deserialize)]
+struct ProjectiveFixture {
+    first_cost: u32,
+    first_lines: u64,
+    first_scalar_probes: u64,
+    second_cost: u32,
+    second_hits: u64,
+    auto_executions: Vec<String>,
+    estimated_cache_bytes: u64,
+}
+
+#[derive(Deserialize)]
+struct RankBoundedFixture {
+    direct_cost: u32,
+    first_cost: u32,
+    first_subspaces: u64,
+    first_candidates: u64,
+    second_cost: u32,
+    second_hits: u64,
+    auto_executions: Vec<String>,
+    estimated_cache_bytes: u64,
 }
 
 #[derive(Deserialize)]
@@ -705,11 +750,162 @@ fn check_balanced_terminal(case: &BalancedTerminalCase) {
     assert_eq!(name, case.expected_rejection);
 }
 
+fn check_contextual_state(case: &ContextualStateCase) {
+    let basis = Matrix::new::<2>(case.basis_rows, case.block_count, case.basis.clone()).unwrap();
+    let scalar = CostTable::from_entries::<2>(
+        1,
+        1,
+        [
+            (Matrix::new::<2>(1, 1, vec![0]).unwrap(), 0),
+            (Matrix::new::<2>(1, 1, vec![1]).unwrap(), 1),
+        ],
+    )
+    .unwrap();
+    let scalar_target = CostTable::from_entries::<2>(
+        1,
+        1,
+        [
+            (Matrix::new::<2>(1, 1, vec![0]).unwrap(), 1),
+            (Matrix::new::<2>(1, 1, vec![1]).unwrap(), 0),
+        ],
+    )
+    .unwrap();
+    let direct =
+        confinement_by_generators::<2>(&basis, case.block_count, &scalar, &scalar_target, 0, 3)
+            .unwrap();
+    assert_eq!(direct.cost, case.rank_one_cost);
+    for expected in &case.certificates {
+        let answer = certify_rank_one_transfer_by_generators::<2>(
+            &basis,
+            case.block_count,
+            &scalar,
+            &scalar_target,
+            0,
+            3,
+            expected.radius,
+        )
+        .unwrap();
+        assert_eq!(answer.transfers_completely, expected.transfers);
+        assert_eq!(answer.obstruction_cost, expected.cost);
+        let sector = answer.obstruction_sector.map(|value| match value {
+            ConfinementSector::Zero => "zero",
+            ConfinementSector::Nonzero => "nonzero",
+        });
+        assert_eq!(sector, expected.sector.as_deref());
+    }
+
+    let mut probes =
+        RankOneProbeCache::<Prime<2>>::new(&scalar, &scalar_target, case.block_count, 0, 3)
+            .unwrap();
+    let first = probes.context_cost_cached(&basis).unwrap();
+    let second = probes.context_cost_cached(&basis).unwrap();
+    assert_eq!(first.cost, case.projective.first_cost);
+    assert_eq!(first.work.distinct_subspaces, case.projective.first_lines);
+    assert_eq!(
+        first.work.scalar_probes,
+        case.projective.first_scalar_probes
+    );
+    assert_eq!(second.cost, case.projective.second_cost);
+    assert_eq!(second.work.cache_hits, case.projective.second_hits);
+    let strategies = [
+        ContextStrategy::Auto {
+            expected_queries: 1,
+            memory_budget_bytes: usize::MAX,
+        },
+        ContextStrategy::Auto {
+            expected_queries: 1,
+            memory_budget_bytes: 0,
+        },
+        ContextStrategy::Auto {
+            expected_queries: 1,
+            memory_budget_bytes: usize::MAX,
+        },
+    ];
+    for (strategy, expected) in strategies.into_iter().zip(&case.projective.auto_executions) {
+        let mut planned =
+            RankOneProbeCache::<Prime<2>>::new(&scalar, &scalar_target, case.block_count, 0, 3)
+                .unwrap();
+        let execution = planned.context_cost_planned(&basis, strategy).unwrap().plan;
+        assert_eq!(execution_name(execution.execution), expected);
+        assert_eq!(
+            execution.estimated_cache_bytes,
+            case.projective.estimated_cache_bytes
+        );
+    }
+
+    let rank_two = CostTable::from_entries::<2>(
+        1,
+        2,
+        (0u8..4).map(|bits| {
+            let data = vec![bits & 1, (bits >> 1) & 1];
+            let cost = data.iter().filter(|&&entry| entry != 0).count() as u32;
+            (Matrix::new::<2>(1, 2, data).unwrap(), cost)
+        }),
+    )
+    .unwrap();
+    let direct_rank_two =
+        confinement_by_generators::<2>(&basis, case.block_count, &rank_two, &rank_two, 0, 2)
+            .unwrap();
+    assert_eq!(direct_rank_two.cost, case.rank_bounded.direct_cost);
+    let mut contexts =
+        RankBoundedContextCache::<Prime<2>>::new(&rank_two, &rank_two, case.block_count, 0, 2)
+            .unwrap();
+    let first = contexts.context_cost_cached(&basis).unwrap();
+    let second = contexts.context_cost_cached(&basis).unwrap();
+    assert_eq!(first.cost, case.rank_bounded.first_cost);
+    assert_eq!(
+        first.work.distinct_subspaces,
+        case.rank_bounded.first_subspaces
+    );
+    assert_eq!(
+        first.work.generator_candidates,
+        case.rank_bounded.first_candidates
+    );
+    assert_eq!(second.cost, case.rank_bounded.second_cost);
+    assert_eq!(second.work.cache_hits, case.rank_bounded.second_hits);
+    let strategies = [
+        ContextStrategy::Auto {
+            expected_queries: 1,
+            memory_budget_bytes: usize::MAX,
+        },
+        ContextStrategy::Auto {
+            expected_queries: 2,
+            memory_budget_bytes: 0,
+        },
+        ContextStrategy::Auto {
+            expected_queries: 2,
+            memory_budget_bytes: usize::MAX,
+        },
+    ];
+    for (strategy, expected) in strategies
+        .into_iter()
+        .zip(&case.rank_bounded.auto_executions)
+    {
+        let mut planned =
+            RankBoundedContextCache::<Prime<2>>::new(&rank_two, &rank_two, case.block_count, 0, 2)
+                .unwrap();
+        let execution = planned.context_cost_planned(&basis, strategy).unwrap().plan;
+        assert_eq!(execution_name(execution.execution), expected);
+        assert_eq!(
+            execution.estimated_cache_bytes,
+            case.rank_bounded.estimated_cache_bytes
+        );
+    }
+}
+
+fn execution_name(execution: ContextExecution) -> &'static str {
+    match execution {
+        ContextExecution::Direct => "direct",
+        ContextExecution::Cached => "cached",
+    }
+}
+
 #[test]
 fn generated_spans_match_python_costs_and_supports() {
     let fixture: Fixture =
         serde_json::from_str(include_str!("fixtures/python_span_cases.json")).unwrap();
-    assert_eq!(fixture.schema, "ergodis-rust-v6");
+    assert_eq!(fixture.schema, "ergodis-rust-v8");
+    check_contextual_state(&fixture.contextual_state);
     for case in &fixture.balanced_terminal_cases {
         check_balanced_terminal(case);
     }

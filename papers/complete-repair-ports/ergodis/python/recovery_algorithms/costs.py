@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from itertools import product
+from math import prod
 from typing import Iterable, Mapping, Sequence
 
 from .finite import (
@@ -838,6 +839,92 @@ class ConfinementPlan:
     result: ConfinementResult
 
 
+@dataclass(frozen=True)
+class RankOneTransferCertificate:
+    radius: int
+    transfers_completely: bool
+    obstruction_cost: int | None
+    obstruction_sector: str | None
+    functional_coefficients: tuple[int, ...] | None
+    block_labels: tuple[Matrix, ...]
+    candidates_examined: int
+    local_lookups: int
+
+
+def certify_rank_one_transfer(
+    functional_dual_basis: Matrix,
+    block_count: int,
+    inner_lambda: CostTable,
+    target_mu: CostTable,
+    target_block: int,
+    inner_dual_distance: int,
+    radius: int,
+) -> RankOneTransferCertificate:
+    """Decide complete transfer through ``radius`` from rank-one costs."""
+
+    p = inner_lambda.p
+    k = inner_lambda.output_dim
+    if (
+        radius < 0
+        or inner_lambda.demand_dim != 1
+        or target_mu.p != p
+        or target_mu.output_dim != k
+        or target_mu.demand_dim != 1
+        or not 0 <= target_block < block_count
+        or any(len(row) != block_count * k for row in functional_dual_basis)
+    ):
+        raise ValueError("incompatible rank-one certificate input")
+    zero = zero_matrix(k, 1)
+    zero_cost = target_mu.get(zero) + inner_dual_distance
+    if zero_cost <= radius:
+        return RankOneTransferCertificate(
+            radius, False, zero_cost, "zero", None, (zero,) * block_count, 0, 1
+        )
+
+    dimension = len(functional_dual_basis)
+    fd_transpose = transpose(functional_dual_basis)
+    examined = 0
+    lookups = 1
+    order = (target_block,) + tuple(
+        block for block in range(block_count) if block != target_block
+    )
+    for coefficients in all_matrices(dimension, 1, p):
+        if not any(row[0] for row in coefficients):
+            continue
+        examined += 1
+        blocks_flat = mat_mul(fd_transpose, coefficients, p)
+        labels = tuple(
+            tuple(blocks_flat[h * k + i] for i in range(k))
+            for h in range(block_count)
+        )
+        cost = 0
+        feasible = True
+        for block in order:
+            lookups += 1
+            cost += (
+                target_mu.get(labels[block])
+                if block == target_block
+                else inner_lambda.get(labels[block])
+            )
+            if cost > radius:
+                feasible = False
+                break
+        if feasible:
+            return RankOneTransferCertificate(
+                radius,
+                False,
+                cost,
+                "nonzero",
+                flatten(coefficients),
+                labels,
+                examined,
+                lookups,
+            )
+    return RankOneTransferCertificate(
+        radius, True, None, None, None, (), examined, lookups
+    )
+
+
 def exact_confinement_cost(
     functional_dual_basis: Matrix,
     block_count: int,
@@ -919,6 +1006,434 @@ def exact_confinement_cost(
         ),
         inner_distance_support,
         zero_witness is not None and inner_distance_support is not None,
+    )
+
+
+@dataclass(frozen=True)
+class ContextWork:
+    outer_vectors: int = 0
+    distinct_subspaces: int = 0
+    cache_hits: int = 0
+    scalar_probes: int = 0
+    generator_candidates: int = 0
+
+
+@dataclass(frozen=True)
+class ContextCost:
+    cost: int
+    sector: str
+    work: ContextWork
+
+
+@dataclass(frozen=True)
+class ContextPlan:
+    execution: str
+    expected_queries: int
+    amortization_queries: int
+    estimated_cache_entries: int
+    estimated_cache_bytes: int
+
+
+@dataclass(frozen=True)
+class PlannedContextCost:
+    result: ContextCost
+    plan: ContextPlan
+
+
+def _projective_line_count(p: int, dimension: int) -> int:
+    return (p**dimension - 1) // (p - 1)
+
+
+def _rank_bounded_subspace_count(p: int, dimension: int, max_rank: int) -> int:
+    total = 0
+    for rank in range(1, max_rank + 1):
+        numerator = prod(p ** (dimension - index) - 1 for index in range(rank))
+        denominator = prod(p ** (rank - index) - 1 for index in range(rank))
+        total += numerator // denominator
+    return total
+
+
+def _context_plan(
+    strategy: str,
+    expected_queries: int,
+    memory_budget_bytes: int,
+    amortization_queries: int,
+    estimated_cache_entries: int,
+    estimated_entry_bytes: int,
+) -> ContextPlan:
+    if strategy not in {"direct", "cached", "auto"}:
+        raise ValueError("unknown contextual execution strategy")
+    if expected_queries <= 0 or memory_budget_bytes < 0:
+        raise ValueError("invalid contextual execution forecast")
+    estimated_cache_bytes = estimated_cache_entries * estimated_entry_bytes
+    execution = strategy
+    if strategy == "auto":
+        execution = (
+            "cached"
+            if expected_queries >= amortization_queries
+            and memory_budget_bytes >= estimated_cache_bytes
+            else "direct"
+        )
+    return ContextPlan(
+        execution,
+        expected_queries,
+        amortization_queries,
+        estimated_cache_entries,
+        estimated_cache_bytes,
+    )
+
+
+def _validate_scalar_context(
+    functional_dual_basis: Matrix, block_count: int, target_block: int, p: int
+) -> Matrix:
+    if any(len(row) != block_count for row in functional_dual_basis):
+        raise ValueError("functional-dual basis has wrong width")
+    basis = canonical_row_basis(functional_dual_basis, p)
+    target_line = (tuple(int(block == target_block) for block in range(block_count)),)
+    if subspace_contains(basis, target_line, p):
+        raise ValueError("functional dual kills the target projection")
+    return basis
+
+
+class RankOneProbeCache:
+    """Lazy zero-truncated projective line-probe profile over a prime field."""
+
+    def __init__(
+        self,
+        inner_lambda: CostTable,
+        target_mu: CostTable,
+        block_count: int,
+        target_block: int,
+        inner_dual_distance: int,
+    ) -> None:
+        if (
+            inner_lambda.output_dim != 1
+            or inner_lambda.demand_dim != 1
+            or target_mu.p != inner_lambda.p
+            or target_mu.output_dim != 1
+            or target_mu.demand_dim != 1
+            or block_count < 2
+            or not 0 <= target_block < block_count
+        ):
+            raise ValueError("incompatible rank-one probe input")
+        self.inner = inner_lambda
+        self.target = target_mu
+        self.block_count = block_count
+        self.target_block = target_block
+        self.inner_dual_distance = inner_dual_distance
+        self.zero_cost = target_mu.get(((0,),)) + inner_dual_distance
+        self.probes: dict[tuple[int, ...], int] = {}
+
+    def context_cost(self, functional_dual_basis: Matrix) -> ContextCost:
+        return self.context_cost_planned(functional_dual_basis).result
+
+    def _cached_context_cost_if_complete(self, basis: Matrix) -> ContextCost | None:
+        if not self.probes:
+            return None
+        p = self.inner.p
+        seen: set[tuple[int, ...]] = set()
+        best = self.zero_cost
+        outer_vectors = distinct = hits = 0
+        for coefficients in product(range(p), repeat=len(basis)):
+            if not any(coefficients):
+                continue
+            outer_vectors += 1
+            vector = tuple(
+                sum(coefficients[row] * basis[row][col] for row in range(len(basis)))
+                % p
+                for col in range(self.block_count)
+            )
+            pivot = next(value for value in vector if value)
+            inverse = pow(pivot, -1, p)
+            line = tuple(inverse * value % p for value in vector)
+            if line in seen:
+                continue
+            seen.add(line)
+            distinct += 1
+            if line not in self.probes:
+                return None
+            hits += 1
+            best = min(best, self.probes[line])
+        return ContextCost(
+            best,
+            "nonzero" if best < self.zero_cost else "zero",
+            ContextWork(outer_vectors, distinct, hits, 0, 0),
+        )
+
+    def context_cost_cached(self, functional_dual_basis: Matrix) -> ContextCost:
+        p = self.inner.p
+        basis = _validate_scalar_context(
+            functional_dual_basis, self.block_count, self.target_block, p
+        )
+        seen: set[tuple[int, ...]] = set()
+        best = self.zero_cost
+        outer_vectors = distinct = hits = scalar_probes = 0
+        for coefficients in product(range(p), repeat=len(basis)):
+            if not any(coefficients):
+                continue
+            outer_vectors += 1
+            vector = tuple(
+                sum(coefficients[row] * basis[row][col] for row in range(len(basis)))
+                % p
+                for col in range(self.block_count)
+            )
+            pivot = next(value for value in vector if value)
+            inverse = pow(pivot, -1, p)
+            line = tuple(inverse * value % p for value in vector)
+            if line in seen:
+                continue
+            seen.add(line)
+            distinct += 1
+            if line in self.probes:
+                hits += 1
+                probe = self.probes[line]
+            else:
+                probe = self.zero_cost
+                for scalar in range(1, p):
+                    scalar_probes += 1
+                    cost = 0
+                    for block, value in enumerate(line):
+                        label = ((scalar * value % p,),)
+                        cost += (
+                            self.target.get(label)
+                            if block == self.target_block
+                            else self.inner.get(label)
+                        )
+                        if cost >= probe:
+                            break
+                    probe = min(probe, cost)
+                self.probes[line] = probe
+            best = min(best, probe)
+        return ContextCost(
+            best,
+            "nonzero" if best < self.zero_cost else "zero",
+            ContextWork(outer_vectors, distinct, hits, scalar_probes, 0),
+        )
+
+    def context_cost_planned(
+        self,
+        functional_dual_basis: Matrix,
+        strategy: str = "auto",
+        expected_queries: int = 1,
+        memory_budget_bytes: int = 2**63 - 1,
+    ) -> PlannedContextCost:
+        basis = _validate_scalar_context(
+            functional_dual_basis, self.block_count, self.target_block, self.inner.p
+        )
+        if strategy == "auto":
+            if expected_queries <= 0:
+                raise ValueError("expected query count must be positive")
+            cached = self._cached_context_cost_if_complete(basis)
+            if cached is not None:
+                entries = len(self.probes)
+                return PlannedContextCost(
+                    cached,
+                    ContextPlan(
+                        "cached", expected_queries, 1, entries,
+                        entries * (self.block_count + 32),
+                    ),
+                )
+        plan = _context_plan(
+            strategy,
+            expected_queries,
+            memory_budget_bytes,
+            1,
+            len(self.probes) + _projective_line_count(self.inner.p, len(basis)),
+            self.block_count + 32,
+        )
+        result = (
+            self.context_cost_cached(basis)
+            if plan.execution == "cached"
+            else _direct_context_cost(
+                basis,
+                self.block_count,
+                self.inner,
+                self.target,
+                self.target_block,
+                self.inner_dual_distance,
+            )
+        )
+        return PlannedContextCost(result, plan)
+
+
+class RankBoundedContextCache:
+    """Exact rank-bounded outer-context cache; maps remain fully labelled."""
+
+    def __init__(
+        self,
+        inner_lambda: CostTable,
+        target_mu: CostTable,
+        block_count: int,
+        target_block: int,
+        inner_dual_distance: int,
+    ) -> None:
+        if (
+            inner_lambda.output_dim != 1
+            or inner_lambda.demand_dim == 0
+            or target_mu.p != inner_lambda.p
+            or target_mu.output_dim != 1
+            or target_mu.demand_dim != inner_lambda.demand_dim
+        ):
+            raise ValueError("incompatible rank-bounded context input")
+        self.inner = inner_lambda
+        self.target = target_mu
+        self.block_count = block_count
+        self.target_block = target_block
+        self.inner_dual_distance = inner_dual_distance
+        self.target_rank = inner_lambda.demand_dim
+        self.zero_cost = target_mu.get(zero_matrix(1, self.target_rank)) + inner_dual_distance
+        self.costs: dict[Matrix, int] = {}
+
+    def context_cost(self, functional_dual_basis: Matrix) -> ContextCost:
+        return self.context_cost_planned(functional_dual_basis).result
+
+    def _subspaces(self, basis: Matrix) -> set[Matrix]:
+        p = self.inner.p
+        subspaces: set[Matrix] = set()
+        for rank in range(1, min(self.target_rank, len(basis)) + 1):
+            for candidate in all_matrices(rank, len(basis), p):
+                canonical = canonical_row_basis(candidate, p)
+                if len(canonical) == rank:
+                    subspaces.add(canonical)
+        return subspaces
+
+    def _cached_context_cost_if_complete(self, basis: Matrix) -> ContextCost | None:
+        if not self.costs:
+            return None
+        best = self.zero_cost
+        subspaces = self._subspaces(basis)
+        for coefficient_basis in sorted(subspaces):
+            ambient_basis = canonical_row_basis(
+                mat_mul(coefficient_basis, basis, self.inner.p), self.inner.p
+            )
+            if ambient_basis not in self.costs:
+                return None
+            best = min(best, self.costs[ambient_basis])
+        return ContextCost(
+            best,
+            "nonzero" if best < self.zero_cost else "zero",
+            ContextWork(0, len(subspaces), len(subspaces), 0, 0),
+        )
+
+    def context_cost_cached(self, functional_dual_basis: Matrix) -> ContextCost:
+        p = self.inner.p
+        basis = _validate_scalar_context(
+            functional_dual_basis, self.block_count, self.target_block, p
+        )
+        subspaces = self._subspaces(basis)
+        best = self.zero_cost
+        hits = transitions = 0
+        for coefficient_basis in sorted(subspaces):
+            ambient_basis = canonical_row_basis(mat_mul(coefficient_basis, basis, p), p)
+            if ambient_basis in self.costs:
+                hits += 1
+                cost = self.costs[ambient_basis]
+            else:
+                cost = self.zero_cost
+                rank = len(ambient_basis)
+                for coefficients in all_matrices(rank, self.target_rank, p):
+                    if len(canonical_row_basis(coefficients, p)) != rank:
+                        continue
+                    transitions += 1
+                    candidate = 0
+                    for block in range(self.block_count):
+                        label = (
+                            tuple(
+                                sum(
+                                    ambient_basis[row][block] * coefficients[row][col]
+                                    for row in range(rank)
+                                )
+                                % p
+                                for col in range(self.target_rank)
+                            ),
+                        )
+                        candidate += (
+                            self.target.get(label)
+                            if block == self.target_block
+                            else self.inner.get(label)
+                        )
+                        if candidate >= cost:
+                            break
+                    cost = min(cost, candidate)
+                self.costs[ambient_basis] = cost
+            best = min(best, cost)
+        return ContextCost(
+            best,
+            "nonzero" if best < self.zero_cost else "zero",
+            ContextWork(0, len(subspaces), hits, 0, transitions),
+        )
+
+    def context_cost_planned(
+        self,
+        functional_dual_basis: Matrix,
+        strategy: str = "auto",
+        expected_queries: int = 1,
+        memory_budget_bytes: int = 2**63 - 1,
+    ) -> PlannedContextCost:
+        basis = _validate_scalar_context(
+            functional_dual_basis, self.block_count, self.target_block, self.inner.p
+        )
+        if strategy == "auto":
+            if expected_queries <= 0:
+                raise ValueError("expected query count must be positive")
+            cached = self._cached_context_cost_if_complete(basis)
+            if cached is not None:
+                entries = len(self.costs)
+                return PlannedContextCost(
+                    cached,
+                    ContextPlan(
+                        "cached", expected_queries, 2, entries,
+                        entries * (self.target_rank * self.block_count + 32),
+                    ),
+                )
+        plan = _context_plan(
+            strategy,
+            expected_queries,
+            memory_budget_bytes,
+            2,
+            len(self.costs)
+            + _rank_bounded_subspace_count(
+                self.inner.p,
+                len(basis),
+                min(self.target_rank, len(basis)),
+            ),
+            self.target_rank * self.block_count + 32,
+        )
+        result = (
+            self.context_cost_cached(basis)
+            if plan.execution == "cached"
+            else _direct_context_cost(
+                basis,
+                self.block_count,
+                self.inner,
+                self.target,
+                self.target_block,
+                self.inner_dual_distance,
+            )
+        )
+        return PlannedContextCost(result, plan)
+
+
+def _direct_context_cost(
+    functional_dual_basis: Matrix,
+    block_count: int,
+    inner: CostTable,
+    target: CostTable,
+    target_block: int,
+    inner_dual_distance: int,
+) -> ContextCost:
+    result = exact_confinement_cost(
+        functional_dual_basis,
+        block_count,
+        inner,
+        target,
+        target_block,
+        inner_dual_distance,
+    )
+    return ContextCost(
+        result.cost,
+        result.sector,
+        ContextWork(generator_candidates=result.transitions),
     )
 
 

@@ -57,6 +57,10 @@ name = "balanced_parallel"
 harness = false
 required-features = ["parallel"]
 
+[[bench]]
+name = "contextual_state"
+harness = false
+
 
 [profile.release]
 opt-level = 3

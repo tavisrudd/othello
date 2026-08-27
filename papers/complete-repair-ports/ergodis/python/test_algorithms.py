@@ -8,8 +8,14 @@ import unittest
 from itertools import combinations, product
 from pathlib import Path
 
+from run_benchmarks import command as benchmark_command
+
 from recovery_algorithms.costs import (
     INF,
+    CostTable,
+    RankBoundedContextCache,
+    RankOneProbeCache,
+    certify_rank_one_transfer,
     compose_cost_table,
     compose_cost_table_with_witnesses,
     compose_prescribed_costs_via_spans,
@@ -453,6 +459,128 @@ class TargetAndConfinementTests(unittest.TestCase):
             result = exact_confinement_cost(fd_basis, 2, lam, mu, 0, 2)
             costs.append(result.cost)
         self.assertEqual(costs, [1, 2])
+
+    def test_rank_one_transfer_certificate_matches_exact_cost(self) -> None:
+        table = CostTable(2, 1, 1, {(0,): 0, (1,): 1})
+        basis = ((1, 1, 0), (0, 1, 1))
+        exact = exact_confinement_cost(basis, 3, table, table, 0, 3)
+        for radius in range(5):
+            certificate = certify_rank_one_transfer(
+                basis, 3, table, table, 0, 3, radius
+            )
+            self.assertEqual(certificate.transfers_completely, radius < exact.cost)
+
+    def test_rank_one_projective_probe_cache_matches_direct_cost(self) -> None:
+        table = CostTable(3, 1, 1, {(0,): 0, (1,): 1, (2,): 1})
+        target = CostTable(3, 1, 1, {(0,): 1, (1,): 0, (2,): 2})
+        basis = ((1, 1, 0), (0, 1, 1))
+        direct = exact_confinement_cost(basis, 3, table, target, 0, 2)
+        cache = RankOneProbeCache(table, target, 3, 0, 2)
+        first = cache.context_cost_cached(basis)
+        second = cache.context_cost_cached(basis)
+        self.assertEqual(first.cost, direct.cost)
+        self.assertEqual(second.cost, direct.cost)
+        self.assertEqual(second.work.scalar_probes, 0)
+        self.assertEqual(second.work.cache_hits, second.work.distinct_subspaces)
+        warm_default = cache.context_cost_planned(basis)
+        self.assertEqual(warm_default.plan.execution, "cached")
+        self.assertEqual(warm_default.result.work.scalar_probes, 0)
+        planned = RankOneProbeCache(table, target, 3, 0, 2)
+        one_shot = planned.context_cost_planned(basis, expected_queries=1)
+        self.assertEqual(one_shot.plan.execution, "cached")
+        self.assertGreater(len(planned.probes), 0)
+        constrained = RankOneProbeCache(table, target, 3, 0, 2)
+        constrained_direct = constrained.context_cost_planned(
+            basis, expected_queries=1, memory_budget_bytes=0
+        )
+        self.assertEqual(constrained_direct.plan.execution, "direct")
+        self.assertEqual(len(constrained.probes), 0)
+        reused = constrained.context_cost_planned(basis, expected_queries=1)
+        self.assertEqual(reused.plan.execution, "cached")
+        self.assertGreater(len(constrained.probes), 0)
+        defaulted = RankOneProbeCache(table, target, 3, 0, 2)
+        self.assertEqual(defaulted.context_cost(basis).cost, direct.cost)
+        self.assertGreater(len(defaulted.probes), 0)
+
+        estimate = RankOneProbeCache(table, target, 3, 0, 2).context_cost_planned(
+            basis, strategy="direct"
+        ).plan.estimated_cache_bytes
+        below = RankOneProbeCache(table, target, 3, 0, 2)
+        self.assertEqual(
+            below.context_cost_planned(
+                basis, memory_budget_bytes=estimate - 1
+            ).plan.execution,
+            "direct",
+        )
+        boundary = RankOneProbeCache(table, target, 3, 0, 2)
+        self.assertEqual(
+            boundary.context_cost_planned(
+                basis, memory_budget_bytes=estimate
+            ).plan.execution,
+            "cached",
+        )
+
+    def test_rank_one_cache_completes_a_partial_nonempty_profile(self) -> None:
+        table = CostTable(2, 1, 1, {(0,): 0, (1,): 1})
+        first_basis = ((0, 1, 1, 0), (0, 0, 1, 1))
+        second_basis = ((0, 1, 0, 1), (0, 0, 0, 1))
+        cache = RankOneProbeCache(table, table, 4, 0, 2)
+        cache.context_cost_cached(first_basis)
+        before = len(cache.probes)
+        direct = exact_confinement_cost(second_basis, 4, table, table, 0, 2)
+        completed = cache.context_cost_cached(second_basis)
+        warm = cache.context_cost_cached(second_basis)
+        self.assertEqual(completed.cost, direct.cost)
+        self.assertGreater(len(cache.probes), before)
+        self.assertEqual(warm.work.cache_hits, warm.work.distinct_subspaces)
+
+    def test_rank_bounded_context_cache_matches_direct_cost(self) -> None:
+        costs = {
+            (left, right): int(left != 0) + int(right != 0)
+            for left, right in product(range(2), repeat=2)
+        }
+        table = CostTable(2, 1, 2, costs)
+        basis = ((1, 1, 0, 0), (0, 1, 1, 0), (0, 0, 1, 1))
+        direct = exact_confinement_cost(basis, 4, table, table, 0, 2)
+        cache = RankBoundedContextCache(table, table, 4, 0, 2)
+        first = cache.context_cost_cached(basis)
+        second = cache.context_cost_cached(basis)
+        self.assertEqual(first.cost, direct.cost)
+        self.assertEqual(first.work.generator_candidates, direct.transitions)
+        self.assertEqual(second.cost, direct.cost)
+        self.assertEqual(second.work.cache_hits, second.work.distinct_subspaces)
+        warm_default = cache.context_cost_planned(basis)
+        self.assertEqual(warm_default.plan.execution, "cached")
+        self.assertEqual(warm_default.result.work.generator_candidates, 0)
+        defaulted = RankBoundedContextCache(table, table, 4, 0, 2)
+        self.assertEqual(defaulted.context_cost(basis).cost, direct.cost)
+        self.assertEqual(len(defaulted.costs), 0)
+
+    def test_rank_bounded_cache_completes_partial_nonempty_state(self) -> None:
+        costs = {
+            (left, right): int(left != 0) + int(right != 0)
+            for left, right in product(range(2), repeat=2)
+        }
+        table = CostTable(2, 1, 2, costs)
+        first_basis = ((0, 1, 1, 0, 0), (0, 0, 1, 1, 0))
+        second_basis = ((0, 1, 0, 1, 0), (0, 0, 1, 0, 1))
+        cache = RankBoundedContextCache(table, table, 5, 0, 2)
+        cache.context_cost_cached(first_basis)
+        before = len(cache.costs)
+        direct = exact_confinement_cost(second_basis, 5, table, table, 0, 2)
+        completed = cache.context_cost_cached(second_basis)
+        warm = cache.context_cost_cached(second_basis)
+        self.assertEqual(completed.cost, direct.cost)
+        self.assertGreater(len(cache.costs), before)
+        self.assertEqual(warm.work.cache_hits, warm.work.distinct_subspaces)
+
+    def test_benchmark_cpsat_direct_routes_to_python(self) -> None:
+        for variant in ("jin-fu:cpsat-direct:6", "jin-fu-hamming:cpsat-direct:6"):
+            routed = benchmark_command(variant, 1)
+            self.assertIn("benchmark_python.py", " ".join(routed))
+        self.assertNotIn(
+            "benchmark_python.py", " ".join(benchmark_command("jin-fu:rust", 1))
+        )
 
     def test_rank_one_restriction_never_increases_union_support(self) -> None:
         for lift in all_matrices(5, 3, 2):

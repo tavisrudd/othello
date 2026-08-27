@@ -191,6 +191,84 @@ nix shell nixpkgs#uv --command uv run --no-project \
   python3 python/verify_baseline_encodings.py
 ```
 
+## Contextual-state A/B
+
+The contextual-state shortcuts were measured in two interleaved rounds with the
+A/B order reversed, 15 Criterion samples per round, a one-second warmup, and a
+half-second measurement window.  Times below are the means of the two reported
+central estimates.  Inputs are deterministic microcases; they establish the
+cost of these kernels, not an end-to-end application speedup.
+
+| operation | baseline | optimized | result |
+| --- | ---: | ---: | ---: |
+| rank-one radius decision | 33.55 us | 26.98 us | 1.24x |
+| complete-transfer check through ranks 1--4 | 194.34 us | 0.300 us | 648x |
+| projective line cache, first query | 15.45 us | 14.36 us | 1.08x |
+| projective line cache, warm query | 14.75 us | 7.226 us | 2.04x |
+| projective auto, one forecast query | 14.95 us | 14.94 us | 1.00x |
+| rank-bounded context cache, first query | 13.90 us | 20.42 us | 0.68x |
+| rank-bounded context cache, warm query | 13.63 us | 2.342 us | 5.82x |
+| rank-bounded auto, one forecast query | 13.85 us | 13.85 us | 1.00x |
+
+The radius certificate examines the same 255 outer vectors in the successful
+case but performs only 256 local lookups after radius pruning.  The all-rank
+shortcut replaces 4,676 generator candidates by seven rank-one candidates and
+12 local lookups.  The projective case stores 85 line probes; its cold pass
+performs the same 255 scalar probes as direct enumeration and now pays off on
+the first query.  The rank-bounded atomic fill stores 50 subspace responses but
+visits each of the 255 nonzero maps exactly once, rather than repeating 570
+subproblem candidates; cold plus one warm query beats two direct queries, so
+its threshold is two.  `Auto` bypasses that cold fill for a one-query forecast
+with no resolved timing penalty (13.85 versus 13.85 us) and leaves the cache
+empty.  Peak RSS was 10.8--12.0 MiB in separate A/B processes; pairwise
+differences were at most about 0.6 MiB and remain noisy at process level.
+
+Replay wall time with `scripts/contextual-ab.sh`; replay peak RSS with
+`scripts/contextual-memory-ab.sh` and the compiled Criterion binary.  The
+canonical reduction of the measured logs is
+`evidence/contextual-state-ab.json`; the reduction entry point is
+`python/summarize_contextual_ab.py`.
+
+### Application-specific applicability
+
+The six headline storage kernels above do not call contextual confinement, so
+injecting this cache into those rows would not test the optimization.  It does
+apply directly to the Jin--Fu concatenated-LRC benchmarks, which repeatedly
+evaluate compatible scalar-labelled GF(4) outer contexts.  Eleven pinned-core
+rounds were rotated across every variant.  The one-query rows include input
+compilation; the eight-query rows retain state only for the warm variant.
+
+| Jin--Fu workload | exact full result | radius certificate | cold cache | auto, one query | warm cache, 8-query mean |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Ex. 5.7, cyclic `[43,36,5]` | 13.87 ms | 11.55 ms | 2.288 ms | 2.245 ms | 1.578 ms |
+| Cor. 5.4, Hamming `[1365,1359,3]` | 104.30 ms | 75.67 ms | 7.052 ms | 6.996 ms | 6.018 ms |
+
+Cold caching is respectively 6.06x and 14.79x faster than exact enumeration;
+eight-query warm reuse is 8.88x and 17.25x faster.  A zero-byte `Auto` budget
+selects direct execution and measures 14.03 ms and 104.69 ms, indistinguishable
+from the corresponding baselines.  The cache stores 5,461 and 1,365 projective
+lines.  Peak RSS rises from about 2.6 to 2.7 MiB for Example 5.7 and from 2.6
+to 4.3 MiB for the long-key Hamming case.  The planner therefore estimates
+each entry from its actual key width plus record/index overhead, rather than a
+fixed per-entry constant.
+
+`context_cost` uses the one-query `Auto` forecast by default.  Callers use
+`context_cost_cached` only to force admission or `context_cost_planned` when
+they know a different reuse count or memory budget.  Thus default projective
+queries select the measured cold win, while default one-shot rank-bounded
+queries stay direct.  Once a context is complete in either cache, `Auto` reuses
+it without treating already allocated records as a new admission.
+
+These endpoints have different output strength.  The cache returns the exact
+zero-truncated confinement value `gamma`; the certificate returns the exact
+radius-four transfer decision.  Only the full baseline also retains the losing
+nonzero minimum and its witness.  The comparison is valid for applications
+asking for `gamma` or the transfer decision, not as a drop-in speed claim when
+that additional losing-sector witness is required.  Raw samples and artifact
+hashes are in `evidence/benchmarks.json` under `jin_fu_contextual_state_ab`;
+replay with `python/run_benchmarks.py --write --jin-fu-contextual-only
+--ab-rounds 11`.
+
 ## Bounded performance evidence
 
 The GF(27) balanced Criterion target additionally measures two new compiled

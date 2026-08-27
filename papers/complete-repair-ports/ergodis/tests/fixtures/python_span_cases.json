@@ -16954,6 +16954,84 @@
       "target_block": 0
     }
   ],
+  "contextual_state": {
+    "basis": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "basis_rows": 3,
+    "block_count": 4,
+    "certificates": [
+      {
+        "cost": null,
+        "radius": 0,
+        "sector": null,
+        "transfers": true
+      },
+      {
+        "cost": 1,
+        "radius": 1,
+        "sector": "nonzero",
+        "transfers": false
+      },
+      {
+        "cost": 1,
+        "radius": 2,
+        "sector": "nonzero",
+        "transfers": false
+      },
+      {
+        "cost": 3,
+        "radius": 3,
+        "sector": "nonzero",
+        "transfers": false
+      },
+      {
+        "cost": 4,
+        "radius": 4,
+        "sector": "zero",
+        "transfers": false
+      }
+    ],
+    "projective": {
+      "auto_executions": [
+        "cached",
+        "direct",
+        "cached"
+      ],
+      "estimated_cache_bytes": 252,
+      "first_cost": 1,
+      "first_lines": 7,
+      "first_scalar_probes": 7,
+      "second_cost": 1,
+      "second_hits": 7
+    },
+    "rank_bounded": {
+      "auto_executions": [
+        "direct",
+        "direct",
+        "cached"
+      ],
+      "direct_cost": 2,
+      "estimated_cache_bytes": 560,
+      "first_candidates": 63,
+      "first_cost": 2,
+      "first_subspaces": 14,
+      "second_cost": 2,
+      "second_hits": 14
+    },
+    "rank_one_cost": 1
+  },
   "gf4_target_subspaces": [
     {
       "columns": [
@@ -19516,7 +19594,7 @@
       ]
     }
   ],
-  "schema": "ergodis-rust-v6",
+  "schema": "ergodis-rust-v8",
   "target_towers": [
     {
       "ordinary": [

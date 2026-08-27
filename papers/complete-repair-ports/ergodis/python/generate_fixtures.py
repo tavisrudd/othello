@@ -14,6 +14,10 @@ sys.path.insert(0, str(PYTHON_ROOT))
 
 from recovery_algorithms.costs import (  # noqa: E402
     INF,
+    CostTable,
+    RankBoundedContextCache,
+    RankOneProbeCache,
+    certify_rank_one_transfer,
     compose_cost_table_with_witnesses,
     exact_confinement_cost,
     exact_confinement_cost_syndrome_dp,
@@ -540,9 +544,83 @@ def target_tower_case() -> dict[str, object]:
     }
 
 
+def contextual_state_case() -> dict[str, object]:
+    scalar = CostTable(2, 1, 1, {(0,): 0, (1,): 1})
+    scalar_target = CostTable(2, 1, 1, {(0,): 1, (1,): 0})
+    basis = ((1, 1, 0, 0), (0, 1, 1, 0), (0, 0, 1, 1))
+    direct = exact_confinement_cost(basis, 4, scalar, scalar_target, 0, 3)
+    probe_cache = RankOneProbeCache(scalar, scalar_target, 4, 0, 3)
+    first_probe = probe_cache.context_cost_cached(basis)
+    second_probe = probe_cache.context_cost_cached(basis)
+    probe_plan_records = [
+        RankOneProbeCache(scalar, scalar_target, 4, 0, 3).context_cost_planned(
+            basis, expected_queries=queries, memory_budget_bytes=budget
+        ).plan
+        for queries, budget in ((1, 2**63 - 1), (1, 0), (1, 2**63 - 1))
+    ]
+    probe_plans = [plan.execution for plan in probe_plan_records]
+
+    rank_two_costs = {
+        (left, right): int(left != 0) + int(right != 0)
+        for left in range(2)
+        for right in range(2)
+    }
+    rank_two = CostTable(2, 1, 2, rank_two_costs)
+    direct_rank_two = exact_confinement_cost(basis, 4, rank_two, rank_two, 0, 2)
+    rank_cache = RankBoundedContextCache(rank_two, rank_two, 4, 0, 2)
+    first_rank = rank_cache.context_cost_cached(basis)
+    second_rank = rank_cache.context_cost_cached(basis)
+    rank_plan_records = [
+        RankBoundedContextCache(rank_two, rank_two, 4, 0, 2).context_cost_planned(
+            basis, expected_queries=queries, memory_budget_bytes=budget
+        ).plan
+        for queries, budget in ((1, 2**63 - 1), (2, 0), (2, 2**63 - 1))
+    ]
+    rank_plans = [plan.execution for plan in rank_plan_records]
+    return {
+        "basis": flatten(basis),
+        "basis_rows": len(basis),
+        "block_count": 4,
+        "rank_one_cost": direct.cost,
+        "certificates": [
+            {
+                "radius": radius,
+                "transfers": certificate.transfers_completely,
+                "sector": certificate.obstruction_sector,
+                "cost": certificate.obstruction_cost,
+            }
+            for radius in range(5)
+            for certificate in (
+                certify_rank_one_transfer(
+                    basis, 4, scalar, scalar_target, 0, 3, radius
+                ),
+            )
+        ],
+        "projective": {
+            "first_cost": first_probe.cost,
+            "first_lines": first_probe.work.distinct_subspaces,
+            "first_scalar_probes": first_probe.work.scalar_probes,
+            "second_cost": second_probe.cost,
+            "second_hits": second_probe.work.cache_hits,
+            "auto_executions": probe_plans,
+            "estimated_cache_bytes": probe_plan_records[0].estimated_cache_bytes,
+        },
+        "rank_bounded": {
+            "direct_cost": direct_rank_two.cost,
+            "first_cost": first_rank.cost,
+            "first_subspaces": first_rank.work.distinct_subspaces,
+            "first_candidates": first_rank.work.generator_candidates,
+            "second_cost": second_rank.cost,
+            "second_hits": second_rank.work.cache_hits,
+            "auto_executions": rank_plans,
+            "estimated_cache_bytes": rank_plan_records[0].estimated_cache_bytes,
+        },
+    }
+
+
 def payload() -> bytes:
     value = {
-        "schema": "ergodis-rust-v6",
+        "schema": "ergodis-rust-v8",
         "balanced_terminal_cases": balanced_terminal_cases(),
         "cases": family(2, 2, 3, 2) + family(3, 1, 3, 2),
         "compositions": [
@@ -560,6 +638,7 @@ def payload() -> bytes:
             ),
         ],
         "confinements": [confinement_case(1), confinement_case(2)],
+        "contextual_state": contextual_state_case(),
         "gf4_transfers": [gf4_transfer_case()],
         "gf4_target_subspaces": [gf4_target_subspace_case()],
         "target_towers": [target_tower_case()],

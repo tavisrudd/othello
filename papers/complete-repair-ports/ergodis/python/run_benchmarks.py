@@ -23,9 +23,9 @@ BINARY = Path(
 
 def command(variant: str, repetitions: int) -> list[str]:
     cpu_set = "0-23" if "parallel-" in variant else "2"
-    if any(
-        f":{backend}:" in variant
-        for backend in ("cpsat", "maxflow", "highs", "cryptominisat", "zdd")
+    backend_fields = set(variant.split(":"))
+    if backend_fields.intersection(
+        {"cpsat", "cpsat-direct", "maxflow", "highs", "cryptominisat", "zdd"}
     ):
         dependencies = []
         if "highs" in variant:
@@ -205,6 +205,7 @@ def main() -> None:
     parser.add_argument("--transfer-only", action="store_true")
     parser.add_argument("--transfer-deep-only", action="store_true")
     parser.add_argument("--jin-fu-only", action="store_true")
+    parser.add_argument("--jin-fu-contextual-only", action="store_true")
     parser.add_argument("--jin-fu-hamming-only", action="store_true")
     parser.add_argument("--scheduler-scaling-only", action="store_true")
     parser.add_argument("--orbit-scaling-only", action="store_true")
@@ -802,6 +803,114 @@ def main() -> None:
                 "samples, and one completed direct CP-SAT solve"
             ),
             "measurements": measured,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.jin_fu_contextual_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --jin-fu-contextual-only")
+        value = json.loads(OUTPUT.read_text())
+        one_query_variants = (
+            "jin-fu:rust",
+            "jin-fu:certificate",
+            "jin-fu:cache-cold",
+            "jin-fu:auto-one",
+            "jin-fu:auto-zero-budget",
+        )
+        repeated_variants = (
+            "jin-fu:rust",
+            "jin-fu:cache-cold",
+            "jin-fu:cache-warm",
+        )
+        one_query = run_group(one_query_variants, 1, args.ab_rounds)
+        repeated = run_group(repeated_variants, 8, args.ab_rounds)
+        hamming_one_variants = tuple(
+            f"jin-fu-hamming:{backend}:6"
+            for backend in (
+                "rust",
+                "certificate",
+                "cache-cold",
+                "auto-one",
+                "auto-zero-budget",
+            )
+        )
+        hamming_repeated_variants = tuple(
+            f"jin-fu-hamming:{backend}:6"
+            for backend in ("rust", "cache-cold", "cache-warm")
+        )
+        hamming_one = run_group(hamming_one_variants, 1, args.ab_rounds)
+        hamming_repeated = run_group(hamming_repeated_variants, 8, args.ab_rounds)
+        for name, measured in (("one_query", one_query), ("eight_queries", repeated)):
+            if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"Jin--Fu contextual checksum mismatch: {name}")
+            if len({entry["work_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"Jin--Fu contextual work mismatch: {name}")
+        for name, measured in (
+            ("hamming_one_query", hamming_one),
+            ("hamming_eight_queries", hamming_repeated),
+        ):
+            if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"Jin--Fu contextual checksum mismatch: {name}")
+            if len({entry["work_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"Jin--Fu contextual work mismatch: {name}")
+        value["jin_fu_contextual_state_ab"] = {
+            "source": {
+                "paper": "Jin--Fu (2026), arXiv:2605.04618v1, Example 5.7",
+                "outer_code": "GF(4) cyclic [43,36,5]",
+                "outer_functionals": 16_383,
+                "projective_lines": 5_461,
+            },
+            "rounds": args.ab_rounds,
+            "protocol": {
+                "common": "rotated pinned-core release-binary runs; deterministic compiled GF(4) labelled costs",
+                "one_query": "one end-to-end gamma or radius-four decision per process",
+                "eight_queries": "eight compatible queries per process; warm cache retains admitted state",
+                "scope": "gamma/transfer-decision comparison; only the exact baseline also retains the losing nonzero minimum and witness",
+            },
+            "one_query": one_query,
+            "eight_queries": repeated,
+            "hamming_one_query": hamming_one,
+            "hamming_eight_queries": hamming_repeated,
+            "speedups": {
+                "cold_cache_over_exact": ratio(
+                    one_query["jin-fu:rust"]["median_ns_per_solve"],
+                    one_query["jin-fu:cache-cold"]["median_ns_per_solve"],
+                ),
+                "auto_one_over_exact": ratio(
+                    one_query["jin-fu:rust"]["median_ns_per_solve"],
+                    one_query["jin-fu:auto-one"]["median_ns_per_solve"],
+                ),
+                "warm_eight_over_exact": ratio(
+                    repeated["jin-fu:rust"]["median_ns_per_solve"],
+                    repeated["jin-fu:cache-warm"]["median_ns_per_solve"],
+                ),
+                "hamming_cold_cache_over_exact": ratio(
+                    hamming_one["jin-fu-hamming:rust:6"]["median_ns_per_solve"],
+                    hamming_one["jin-fu-hamming:cache-cold:6"][
+                        "median_ns_per_solve"
+                    ],
+                ),
+                "hamming_auto_one_over_exact": ratio(
+                    hamming_one["jin-fu-hamming:rust:6"]["median_ns_per_solve"],
+                    hamming_one["jin-fu-hamming:auto-one:6"][
+                        "median_ns_per_solve"
+                    ],
+                ),
+                "hamming_warm_eight_over_exact": ratio(
+                    hamming_repeated["jin-fu-hamming:rust:6"][
+                        "median_ns_per_solve"
+                    ],
+                    hamming_repeated["jin-fu-hamming:cache-warm:6"][
+                        "median_ns_per_solve"
+                    ],
+                ),
+            },
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
         }
         OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
         return

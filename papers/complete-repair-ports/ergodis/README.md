@@ -95,6 +95,46 @@ Use `ergodis <command> --help` for command-specific options. The input schemas
 are represented by complete examples in `examples/data/`; these are also used
 by the end-to-end CLI tests.
 
+### Contextual-state library APIs
+
+The Rust library exposes three exact shortcuts derived from the compositional
+state theorem:
+
+- `certify_rank_one_transfer_by_generators` decides whether every bounded
+  recovery system through a supplied radius transfers completely.  It checks
+  the zero sector first, evaluates the target block first, prunes partial costs
+  above the radius, and stops at the first obstruction.  Use the full
+  `confinement_by_generators` API when the exact losing nonzero-sector minimum
+  is also required.
+- `RankOneProbeCache` stores the zero-truncated projective line-probe profile
+  lazily.  It is intended for repeated compatible outer contexts over the same
+  scalar-labelled inner state.
+- `RankBoundedContextCache` decomposes a rank-`t` query into canonical outer
+  functional-dual subspaces of dimension at most `t` and reuses exact results
+  across contexts.  It never merges differently labelled maps merely because
+  they generate the same subspace.
+- `context_cost` defaults to a safe one-query `Auto` forecast.
+  `context_cost_cached` requests cache admission explicitly, while
+  `context_cost_planned` accepts `Direct`, `Cached`, or a caller-supplied
+  `Auto` forecast.
+  `Auto` admits state only when the measured reuse threshold is met and a
+  conservative query-cache estimate, including actual key width, fits the
+  caller's byte budget; otherwise
+  it executes the exact direct scan without mutating the cache.  A context
+  already complete in the cache is reused without a new admission, even when
+  its fresh-query forecast would select direct execution.
+
+The Rust hot scans use preallocated coefficient, label, elimination, and RREF
+scratch.  Persistent keys occupy one flat byte pool behind compact 16-byte
+records and integer open-addressing slots; local table lookups consume slices,
+so candidate enumeration does not allocate.  Allocation is confined to
+validation/setup, reserved state admission, and final witness materialization.
+
+The two context caches currently specialize to scalar labels over the outer
+field.  A flattened base-field representation of a proper extension does not
+carry enough information to recover extension-field scalar multiplication; a
+future generalized API must receive that action explicitly.
+
 ### Parallel execution
 
 `compose`, `transfer-tower`, and `schedule` accept `--parallel`. The worker

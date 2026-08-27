@@ -3572,6 +3572,1770 @@
       "paper": "Jin--Fu (2026), arXiv:2605.04618v1, Example 5.7"
     }
   },
+  "jin_fu_contextual_state_ab": {
+    "artifacts": {
+      "bench_kernels_binary_sha256": "2326891092056f6314bd96b6ccacde785c626d52e847de0edf43fa89616a8c3e",
+      "bench_kernels_source_sha256": "282abf26932c12c7a33df42d12476fbc6c0f1a83c00b5e295538368e999f837e",
+      "run_benchmarks_sha256": "4c80f484dc39ca76a91d4db7297767db9dad6beceff7d10a5380c6f7d11eac77"
+    },
+    "eight_queries": {
+      "jin-fu:cache-cold": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 2162714.25,
+        "median_peak_rss_kib": 2956,
+        "peak_states": 5461,
+        "samples": [
+          {
+            "checksum": 40,
+            "elapsed_ns": 17131287,
+            "peak_rss_kib": 3000,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17064293,
+            "peak_rss_kib": 2884,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17382785,
+            "peak_rss_kib": 2872,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17116720,
+            "peak_rss_kib": 2968,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17474045,
+            "peak_rss_kib": 2868,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17518388,
+            "peak_rss_kib": 3080,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17211226,
+            "peak_rss_kib": 2880,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17136106,
+            "peak_rss_kib": 3036,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17301714,
+            "peak_rss_kib": 2928,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17869381,
+            "peak_rss_kib": 3044,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 17531552,
+            "peak_rss_kib": 2956,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-cold",
+            "work": 131064
+          }
+        ],
+        "work_per_solve": 16383
+      },
+      "jin-fu:cache-warm": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 1577518.5,
+        "median_peak_rss_kib": 2952,
+        "peak_states": 5461,
+        "samples": [
+          {
+            "checksum": 40,
+            "elapsed_ns": 12208331,
+            "peak_rss_kib": 3008,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 12248505,
+            "peak_rss_kib": 3016,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 13049948,
+            "peak_rss_kib": 2876,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 12211296,
+            "peak_rss_kib": 2920,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 12762833,
+            "peak_rss_kib": 3060,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 12817244,
+            "peak_rss_kib": 2872,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 12755399,
+            "peak_rss_kib": 2952,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 12242554,
+            "peak_rss_kib": 2936,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 12460471,
+            "peak_rss_kib": 3004,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 12620148,
+            "peak_rss_kib": 2928,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 12702972,
+            "peak_rss_kib": 3016,
+            "peak_states": 5461,
+            "repetitions": 8,
+            "variant": "jin-fu:cache-warm",
+            "work": 131064
+          }
+        ],
+        "work_per_solve": 16383
+      },
+      "jin-fu:rust": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 14007845.25,
+        "median_peak_rss_kib": 2576,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 40,
+            "elapsed_ns": 112062762,
+            "peak_rss_kib": 2612,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 111069422,
+            "peak_rss_kib": 2488,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 111057480,
+            "peak_rss_kib": 2608,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 109643818,
+            "peak_rss_kib": 2564,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 108898840,
+            "peak_rss_kib": 2492,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 112917744,
+            "peak_rss_kib": 2572,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 114499549,
+            "peak_rss_kib": 2628,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 115542451,
+            "peak_rss_kib": 2672,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 112589893,
+            "peak_rss_kib": 2640,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 110888565,
+            "peak_rss_kib": 2576,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 112951546,
+            "peak_rss_kib": 2564,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu:rust",
+            "work": 131064
+          }
+        ],
+        "work_per_solve": 16383
+      }
+    },
+    "hamming_eight_queries": {
+      "jin-fu-hamming:cache-cold:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 6266346.0,
+        "median_peak_rss_kib": 4484,
+        "peak_states": 1365,
+        "samples": [
+          {
+            "checksum": 40,
+            "elapsed_ns": 50219064,
+            "peak_rss_kib": 4484,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 49693685,
+            "peak_rss_kib": 4424,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 50278754,
+            "peak_rss_kib": 4584,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 50412174,
+            "peak_rss_kib": 4412,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 49768735,
+            "peak_rss_kib": 4552,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 50130768,
+            "peak_rss_kib": 4388,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 50128955,
+            "peak_rss_kib": 4544,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 49687283,
+            "peak_rss_kib": 4408,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 50190300,
+            "peak_rss_kib": 4492,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 50332014,
+            "peak_rss_kib": 4444,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 49189136,
+            "peak_rss_kib": 4496,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 32760
+          }
+        ],
+        "work_per_solve": 4095
+      },
+      "jin-fu-hamming:cache-warm:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 6018144.0,
+        "median_peak_rss_kib": 4532,
+        "peak_states": 1365,
+        "samples": [
+          {
+            "checksum": 40,
+            "elapsed_ns": 48574091,
+            "peak_rss_kib": 4548,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 48091372,
+            "peak_rss_kib": 4552,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 48517235,
+            "peak_rss_kib": 4400,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 48375420,
+            "peak_rss_kib": 4532,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 47989802,
+            "peak_rss_kib": 4416,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 48839305,
+            "peak_rss_kib": 4524,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 48100900,
+            "peak_rss_kib": 4560,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 48066285,
+            "peak_rss_kib": 4564,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 48624184,
+            "peak_rss_kib": 4600,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 48145152,
+            "peak_rss_kib": 4496,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 47855392,
+            "peak_rss_kib": 4516,
+            "peak_states": 1365,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:cache-warm:6",
+            "work": 32760
+          }
+        ],
+        "work_per_solve": 4095
+      },
+      "jin-fu-hamming:rust:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 103812791.25,
+        "median_peak_rss_kib": 2660,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 40,
+            "elapsed_ns": 839055969,
+            "peak_rss_kib": 2660,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 842839252,
+            "peak_rss_kib": 2680,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 830234643,
+            "peak_rss_kib": 2640,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 827631465,
+            "peak_rss_kib": 2744,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 830502330,
+            "peak_rss_kib": 2740,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 826950947,
+            "peak_rss_kib": 2772,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 833296741,
+            "peak_rss_kib": 2660,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 831411491,
+            "peak_rss_kib": 2656,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 832500628,
+            "peak_rss_kib": 2724,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 828915061,
+            "peak_rss_kib": 2660,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          },
+          {
+            "checksum": 40,
+            "elapsed_ns": 826713842,
+            "peak_rss_kib": 2588,
+            "peak_states": 0,
+            "repetitions": 8,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 32760
+          }
+        ],
+        "work_per_solve": 4095
+      }
+    },
+    "hamming_one_query": {
+      "jin-fu-hamming:auto-one:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 6995756.0,
+        "median_peak_rss_kib": 4236,
+        "peak_states": 1365,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 7092807,
+            "peak_rss_kib": 4124,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 6788069,
+            "peak_rss_kib": 4256,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7214483,
+            "peak_rss_kib": 4068,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7256360,
+            "peak_rss_kib": 4260,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 6810400,
+            "peak_rss_kib": 4124,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7157065,
+            "peak_rss_kib": 4320,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 6554754,
+            "peak_rss_kib": 4224,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 6995756,
+            "peak_rss_kib": 4272,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7205766,
+            "peak_rss_kib": 4212,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 6525700,
+            "peak_rss_kib": 4308,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 6784833,
+            "peak_rss_kib": 4236,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-one:6",
+            "work": 4095
+          }
+        ],
+        "work_per_solve": 4095
+      },
+      "jin-fu-hamming:auto-zero-budget:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 104694171.0,
+        "median_peak_rss_kib": 2684,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 105625475,
+            "peak_rss_kib": 2716,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104445519,
+            "peak_rss_kib": 2752,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 105889377,
+            "peak_rss_kib": 2668,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104116376,
+            "peak_rss_kib": 2772,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104782035,
+            "peak_rss_kib": 2760,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104559891,
+            "peak_rss_kib": 2652,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104530056,
+            "peak_rss_kib": 2656,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104778428,
+            "peak_rss_kib": 2740,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 106315701,
+            "peak_rss_kib": 2668,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 103917104,
+            "peak_rss_kib": 2640,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104694171,
+            "peak_rss_kib": 2684,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:auto-zero-budget:6",
+            "work": 4095
+          }
+        ],
+        "work_per_solve": 4095
+      },
+      "jin-fu-hamming:cache-cold:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 7052260.0,
+        "median_peak_rss_kib": 4248,
+        "peak_states": 1365,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 7103246,
+            "peak_rss_kib": 4276,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7008820,
+            "peak_rss_kib": 4240,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 6977401,
+            "peak_rss_kib": 4236,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7229490,
+            "peak_rss_kib": 4284,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7120598,
+            "peak_rss_kib": 4244,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7052260,
+            "peak_rss_kib": 4264,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 6828073,
+            "peak_rss_kib": 4164,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7272662,
+            "peak_rss_kib": 4236,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 6755859,
+            "peak_rss_kib": 4260,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7014771,
+            "peak_rss_kib": 4248,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 7235442,
+            "peak_rss_kib": 4292,
+            "peak_states": 1365,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cache-cold:6",
+            "work": 4095
+          }
+        ],
+        "work_per_solve": 4095
+      },
+      "jin-fu-hamming:certificate:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 75667446.0,
+        "median_peak_rss_kib": 2624,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 75598969,
+            "peak_rss_kib": 2640,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 75345747,
+            "peak_rss_kib": 2536,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 75794693,
+            "peak_rss_kib": 2600,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 75610862,
+            "peak_rss_kib": 2604,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 75765990,
+            "peak_rss_kib": 2688,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 75567020,
+            "peak_rss_kib": 2512,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 76420568,
+            "peak_rss_kib": 2600,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 75488563,
+            "peak_rss_kib": 2660,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 76001167,
+            "peak_rss_kib": 2708,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 75861087,
+            "peak_rss_kib": 2660,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 75667446,
+            "peak_rss_kib": 2624,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:certificate:6",
+            "work": 4095
+          }
+        ],
+        "work_per_solve": 4095
+      },
+      "jin-fu-hamming:rust:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 104304115.0,
+        "median_peak_rss_kib": 2636,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 104244905,
+            "peak_rss_kib": 2636,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104647234,
+            "peak_rss_kib": 2788,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 111280284,
+            "peak_rss_kib": 2688,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104304115,
+            "peak_rss_kib": 2676,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104175947,
+            "peak_rss_kib": 2752,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 105176219,
+            "peak_rss_kib": 2600,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 103728754,
+            "peak_rss_kib": 2600,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104043721,
+            "peak_rss_kib": 2660,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 105797075,
+            "peak_rss_kib": 2600,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104074178,
+            "peak_rss_kib": 2588,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 104333911,
+            "peak_rss_kib": 2636,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          }
+        ],
+        "work_per_solve": 4095
+      }
+    },
+    "one_query": {
+      "jin-fu:auto-one": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 2245421.0,
+        "median_peak_rss_kib": 2720,
+        "peak_states": 5461,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 2207770,
+            "peak_rss_kib": 2712,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2210606,
+            "peak_rss_kib": 2588,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2204294,
+            "peak_rss_kib": 2616,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2790516,
+            "peak_rss_kib": 2884,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2257103,
+            "peak_rss_kib": 2796,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2382767,
+            "peak_rss_kib": 2856,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2341339,
+            "peak_rss_kib": 2696,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2245421,
+            "peak_rss_kib": 2676,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2225233,
+            "peak_rss_kib": 2780,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2213711,
+            "peak_rss_kib": 2804,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2280586,
+            "peak_rss_kib": 2720,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-one",
+            "work": 16383
+          }
+        ],
+        "work_per_solve": 16383
+      },
+      "jin-fu:auto-zero-budget": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 14032909.0,
+        "median_peak_rss_kib": 2572,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 13593761,
+            "peak_rss_kib": 2608,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 13720216,
+            "peak_rss_kib": 2580,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 13903958,
+            "peak_rss_kib": 2680,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 13906473,
+            "peak_rss_kib": 2604,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 15060171,
+            "peak_rss_kib": 2504,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14242729,
+            "peak_rss_kib": 2612,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14032909,
+            "peak_rss_kib": 2572,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14203255,
+            "peak_rss_kib": 2536,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14367421,
+            "peak_rss_kib": 2540,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 13898998,
+            "peak_rss_kib": 2564,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14430268,
+            "peak_rss_kib": 2552,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:auto-zero-budget",
+            "work": 16383
+          }
+        ],
+        "work_per_solve": 16383
+      },
+      "jin-fu:cache-cold": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 2288141.0,
+        "median_peak_rss_kib": 2716,
+        "peak_states": 5461,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 2966984,
+            "peak_rss_kib": 2688,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2217579,
+            "peak_rss_kib": 2856,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2220725,
+            "peak_rss_kib": 2676,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2288141,
+            "peak_rss_kib": 2720,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2237116,
+            "peak_rss_kib": 2716,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2574293,
+            "peak_rss_kib": 2800,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2237115,
+            "peak_rss_kib": 2748,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2333855,
+            "peak_rss_kib": 2716,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 3053716,
+            "peak_rss_kib": 2712,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2227377,
+            "peak_rss_kib": 2752,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 2511196,
+            "peak_rss_kib": 2684,
+            "peak_states": 5461,
+            "repetitions": 1,
+            "variant": "jin-fu:cache-cold",
+            "work": 16383
+          }
+        ],
+        "work_per_solve": 16383
+      },
+      "jin-fu:certificate": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 11551919.0,
+        "median_peak_rss_kib": 2548,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 11551919,
+            "peak_rss_kib": 2496,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 12278993,
+            "peak_rss_kib": 2668,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 11524758,
+            "peak_rss_kib": 2596,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 11505332,
+            "peak_rss_kib": 2548,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 11547360,
+            "peak_rss_kib": 2564,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 11914384,
+            "peak_rss_kib": 2536,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 11655311,
+            "peak_rss_kib": 2672,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 11559252,
+            "peak_rss_kib": 2500,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 12114306,
+            "peak_rss_kib": 2500,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 11286094,
+            "peak_rss_kib": 2664,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 11313965,
+            "peak_rss_kib": 2540,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:certificate",
+            "work": 16383
+          }
+        ],
+        "work_per_solve": 16383
+      },
+      "jin-fu:rust": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 13874203.0,
+        "median_peak_rss_kib": 2564,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 13554888,
+            "peak_rss_kib": 2540,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 13874203,
+            "peak_rss_kib": 2560,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14870207,
+            "peak_rss_kib": 2652,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 13748338,
+            "peak_rss_kib": 2536,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14838758,
+            "peak_rss_kib": 2620,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 13773084,
+            "peak_rss_kib": 2504,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14352794,
+            "peak_rss_kib": 2640,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 13837875,
+            "peak_rss_kib": 2596,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14336593,
+            "peak_rss_kib": 2580,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 14089924,
+            "peak_rss_kib": 2564,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 13652971,
+            "peak_rss_kib": 2504,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          }
+        ],
+        "work_per_solve": 16383
+      }
+    },
+    "protocol": {
+      "common": "rotated pinned-core release-binary runs; deterministic compiled GF(4) labelled costs",
+      "eight_queries": "eight compatible queries per process; warm cache retains admitted state",
+      "one_query": "one end-to-end gamma or radius-four decision per process",
+      "scope": "gamma/transfer-decision comparison; only the exact baseline also retains the losing nonzero minimum and witness"
+    },
+    "rounds": 11,
+    "source": {
+      "outer_code": "GF(4) cyclic [43,36,5]",
+      "outer_functionals": 16383,
+      "paper": "Jin--Fu (2026), arXiv:2605.04618v1, Example 5.7",
+      "projective_lines": 5461
+    },
+    "speedups": {
+      "auto_one_over_exact": 6.179,
+      "cold_cache_over_exact": 6.064,
+      "hamming_auto_one_over_exact": 14.91,
+      "hamming_cold_cache_over_exact": 14.79,
+      "hamming_warm_eight_over_exact": 17.25,
+      "warm_eight_over_exact": 8.88
+    }
+  },
   "jin_fu_hamming_lrc_scale": {
     "artifacts": {
       "bench_kernels_binary_sha256": "56ad1c758d9dfaf494967622febc8b99c72af1e1f0000fd716485b0d358893a9",

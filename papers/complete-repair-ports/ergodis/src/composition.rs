@@ -126,7 +126,15 @@ impl CostTable {
         if label.rows() != self.rows as usize || label.cols() != self.cols as usize {
             return None;
         }
-        let record = *self.index.get(label.as_slice())?;
+        self.cost_slice(label.as_slice())
+    }
+
+    /// Look up an already shape-checked flat label without constructing a matrix.
+    pub(crate) fn cost_slice(&self, label: &[u8]) -> Option<u32> {
+        if label.len() != self.rows as usize * self.cols as usize {
+            return None;
+        }
+        let record = *self.index.get(label)?;
         Some(self.records[record as usize].cost)
     }
 
