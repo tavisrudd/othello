@@ -117,6 +117,11 @@ filtered `GL_2`-module structure of every maximal Lucas carrier and Pascal
 nucleus from the base-`p` digits of `r-2`.  Use the one-carry standard-module
 theorem and the characteristic-seven R11--R13 closure as one worked
 corollary; do not add separate R11, R12, and R13 subsections.
+State the empty-carrier criterion as the general arithmetic corollary: for
+`r>=p+2`, the modular carrier vanishes exactly when `r-1` or `r` has a single
+nonzero base-`p` digit.  This identifies infinitely many small-characteristic
+redundancies where the unconditional transverse theorem is already the full
+carrier statement.
 
 Suggested label: `cor:recursive-carrier-unconditional`, or merge this result
 into the proof of the main theorem if a separate statement would merely
@@ -224,11 +229,16 @@ Target the rewrite to remove more than it adds:
 
 - add roughly 2--3 proof pages for composite contraction, the selector, the
   Vandermonde lemma, terminal subtraction, and abundance;
+- add at most 1--1.5 pages for the digit-stripping sequences, dimension/empty
+  criterion, and one-carry corollary;
 - delete or demote roughly 5--8 pages of general stagewise-package definitions,
   repeated marker budgets, and fixed-level discharge prose; and
+- replace at least 1--2 pages of R11--R13 characteristic-seven prose by the
+  one-carry corollary and one seven-row certificate table; and
 - retain the genuinely arithmetic appendices and finite records unchanged.
 
-Expected net change: **2--5 pages shorter**, with a stronger main theorem.
+Expected net change: **2--6 pages shorter**, with a stronger main theorem and
+an all-digit structural carrier statement.
 The successor must verify this against both canonical and TIT renders rather
 than treating the estimate as a gate.
 
@@ -242,10 +252,14 @@ Before manuscript adoption:
    and strict integer thresholds;
 3. coding review of the improved threshold against the radius range;
 4. focused review of the R11 characteristic-seven fixed-root resultant;
-5. current literature delta before any novelty sentence;
-6. statement-map, annotation, evidence, and formal-boundary reconciliation;
-7. both manuscript builds, complete verifier, and clean standalone export;
-8. cold specialist and generalist reads of the compressed architecture.
+5. rational-`GL_2` review of the digit-stripping twists, quotients, and
+   nonsplitting boundary;
+6. full-text comparison with the classical type-`A_1` Weyl/symmetric-power
+   literature before any novelty sentence;
+7. current coding-theory literature delta for the PRS application;
+8. statement-map, annotation, evidence, and formal-boundary reconciliation;
+9. both manuscript builds, complete verifier, and clean standalone export;
+10. cold specialist and generalist reads of the compressed architecture.
 
 The seam reconstruction sharpens Gate 1: the external reader must check
 C536's coherent-Fano identity, the projected-Veronese no-line property,

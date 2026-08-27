@@ -3,6 +3,11 @@
 Date: 2026-08-26  
 Status: proved; structural input for the arbitrary-redundancy programme
 
+This theorem is the `D=1` specialization of the later coupled exact sequences
+in `c973-2026-08-26-digit-stripping-exact-sequence.md`.  Retain it as the
+short worked corollary used by the characteristic-seven certificate argument,
+not as a separate general architecture.
+
 ## Theorem
 
 Let the characteristic be `p`, let

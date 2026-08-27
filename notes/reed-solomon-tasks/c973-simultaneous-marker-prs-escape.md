@@ -51,6 +51,16 @@ nucleus and maximal carrier admit coupled least-digit exact sequences with
 explicit determinant, divided-power, and Frobenius-twist factors.  The
 remaining all-level gate is arithmetic transport of pointed witnesses through
 those extensions, not identification of the carrier module.
+The 30-minute continuation, structural/computational boundary, software
+interface, explicit `ej`/`tt` pass, and revised mystery ledger are summarized
+in `c973-2026-08-26-third-sprint-closeout.md`.
+Preliminary literature positioning is in
+`c973-2026-08-26-module-literature-preaudit.md`; it treats the module
+filtration as likely classical pending full-text comparison and reserves the
+PRS pointed-abundance application as the substantive open research claim.
+The digit theorem's author-side seam review is
+`c973-2026-08-26-digit-stripping-hostile-audit.md`; independent specialist
+review remains required.
 
 ## Objective
 

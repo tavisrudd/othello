@@ -50,6 +50,14 @@ def digit_statistics(row: int, prime: int) -> tuple[int, int]:
     return nonzero_count, run_count
 
 
+def has_one_nonzero_digit(value: int, prime: int) -> bool:
+    if value <= 0:
+        raise ValueError("digit test requires a positive integer")
+    while value % prime == 0:
+        value //= prime
+    return 1 <= value <= prime - 1
+
+
 def assert_translation_stable(
     support: set[int], degree: int, prime: int
 ) -> None:
@@ -57,6 +65,17 @@ def assert_translation_stable(
         for target in range(source, degree + 1):
             if comb(target, source) % prime:
                 assert target in support, (prime, degree, source, target)
+
+
+def has_translation_leak(
+    quotient: set[int], submodule: set[int], prime: int
+) -> bool:
+    return any(
+        comb(target, source) % prime
+        for source in quotient
+        for target in submodule
+        if target >= source
+    )
 
 
 def check_nucleus(prime: int, lower_row: int, digit: int) -> None:
@@ -76,6 +95,8 @@ def check_nucleus(prime: int, lower_row: int, digit: int) -> None:
     assert submodule.isdisjoint(quotient)
     assert actual == submodule | quotient
     assert_translation_stable(submodule, row, prime)
+    if digit <= prime - 2 and lower_nucleus:
+        assert has_translation_leak(quotient, submodule, prime)
 
 
 def check_carrier(prime: int, lower_row: int, digit: int) -> None:
@@ -105,9 +126,17 @@ def check_carrier(prime: int, lower_row: int, digit: int) -> None:
     actual = carrier_support(row, prime)
     nonzero_count, run_count = digit_statistics(row, prime)
     assert len(actual) == row + 2 - nonzero_count - run_count
+    predicted_empty = (
+        row < prime
+        or has_one_nonzero_digit(row + 1, prime)
+        or has_one_nonzero_digit(row + 2, prime)
+    )
+    assert (not actual) == predicted_empty
     assert submodule.isdisjoint(quotient)
     assert actual == submodule | quotient
     assert_translation_stable(submodule, degree, prime)
+    if quotient and submodule:
+        assert has_translation_leak(quotient, submodule, prime)
 
 
 def check_rescaling(prime: int, shift: int, module_degree: int) -> None:

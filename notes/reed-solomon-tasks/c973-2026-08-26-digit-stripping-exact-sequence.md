@@ -188,6 +188,28 @@ and the second block modulo the first is
 `Gamma^a E tensor (Z_D)^(1)`.  Translation, scaling, and inversion factor
 exactly as in the proof of (1).
 
+The extensions are genuinely necessary.  As rational `GL_2`-modules, (1) is
+nonsplit whenever `a<=p-3` and `Z_D!=0`, precisely the case in which both its
+displayed terms are nonzero.  Indeed diagonal-torus weights in
+`Gamma^(pD+a+1) E` are one-dimensional and distinct, so an equivariant section
+would have to lift each quotient coordinate `e_(ph+b)` to that same coordinate.
+For `h` in `Z_D`, upper translation sends
+
+```
+e_(ph+a+1) -> e_(ph+a+1)+(a+2)u e_(ph+a+2)+...,
+```
+
+and `a+2` is nonzero while the second coordinate lies in the left submodule.
+Thus the visible quotient coordinate span is not stable.  The same argument
+shows that (2) is nonsplit whenever `C_D!=0`, using leakage from low digit zero
+to low digit one.  Sequence (3) is nonsplit whenever `a<=p-2` and `Z_D!=0`,
+using leakage from low digit `a` to `a+1`.  The remaining cases have one zero
+term and are tautologically split.
+
+This nonsplitting statement concerns rational `GL_2` modules.  It does not
+rule out accidental splittings after restriction to a particular finite
+subgroup, nor is such a finite-group splitting used here.
+
 The theorem replaces an unstructured all-digit carrier problem by two coupled
 recursive objects:
 
@@ -226,6 +248,56 @@ dim C_d = d+2-nu(d)-eta(d).                               (7)
 
 Formula (7) gives an immediate digit-level complexity discriminator before
 any finite-field search is attempted.
+
+Since the ambient syndrome vector space has dimension `d+2`, (7) also gives
+
+```
+codim(C_d in Gamma^(d+1) E) = nu(d)+eta(d).                (7a)
+```
+
+For every nonempty carrier with `d>=1`, this codimension is at least three.
+Over `F_q` its projective point count and ambient density are exactly
+
+```
+#P(C_d)(F_q) = (q^(dim C_d)-1)/(q-1),
+#P(C_d)(F_q) / #P(Gamma^(d+1)E)(F_q)
+  = (q^(dim C_d)-1)/(q^(d+2)-1).                           (7b)
+```
+
+Thus the simultaneous-marker classifier's unresolved modular branch is an
+explicitly counted linear set of asymptotic density
+`q^(-nu(d)-eta(d))`, before any carrier arithmetic is attempted.
+
+It also gives an exact empty-carrier classification.  For `d>=p`, write
+`d=pD+a`.  If `a<=p-3`, the explicit left term of (1) is nonzero.  If
+`a=p-2`, (1) is zero exactly when `Z_D=0`; if `a=p-1`, (2) is zero exactly
+when `Z_D=0` (which already forces `C_D=0`).  Finally `Z_D=0` exactly when
+`D+1` has one nonzero base-`p` digit: Lucas says all `D+1` positions are
+nonzero precisely when every digit below the leading digit of `D` is `p-1`,
+which is precisely that carry condition on `D+1`.  Hence
+
+```
+C_d=0
+iff d<p, or d+1=c p^ell, or d+2=c p^ell
+    for some ell>=1 and 1<=c<=p-1.                         (8)
+```
+
+Equivalently, at redundancy `r=d+2>=p+2`, the maximal modular carrier is
+empty exactly when `r-1` or `r` has a single nonzero base-`p` digit.  On every
+such redundancy, the unconditional simultaneous-marker theorem needs no
+small-characteristic carrier analysis at all.
+
+More precisely, if the C973 simultaneous-marker field threshold also holds,
+then at every redundancy satisfying (8)
+
+```
+SplitFree_r(F_q) subseteq P_r(F_q).                        (9)
+```
+
+Thus (9) is an infinite family of unconditional small-characteristic
+nonpersistent-exclusion theorems.  Promotion from split-free directions to
+deep holes still uses the separate covering-radius gate; (8) does not supply
+that gate.
 
 The remaining hard operation is arithmetic rather than representation
 identification: determine whether pointed shallow-witness abundance passes
@@ -267,8 +339,8 @@ cd notes/reed-solomon-tasks
 sha256sum -c c973-digit-stripping-check.sha256
 ```
 
-The 4,655-byte checker has SHA-256
-`44f7bf4d79a61768abd82a5578face2b33601b9e0b49f5e0165074c239cd4cc9`.
+The 5,531-byte checker has SHA-256
+`398b04a668079ed764dcbcd150145a4a3c4ade9e628a5f6dcba35bf63d14e83f`.
 Its bounded range is not evidence for the universal quantifier; equations
 (3)--(6) are the proof.
 
@@ -291,13 +363,24 @@ application that would require splitting remains outside the claim.
 - Settled: all other least digits pass to the lower Pascal nucleus rather than
   directly to another carrier.
 - Open: whether pointed abundance is extension-stable.
-- Open: the precise extension class in (1) and when the sequence splits as a
-  finite-group module; splitting is not needed for the theorem above.
+- Settled: whenever both rational-module terms are nonzero, the exact
+  sequences are nonsplit; direct-sum induction is therefore unavailable.
+- Open: accidental splitting after restriction to particular finite groups;
+  it is neither expected to control pointed abundance nor needed here.
 - Settled: `Z_D` has the parallel exact sequence (3), so the coupled
   filtered-module recursion terminates on the base-`p` digits.
+- Settled: equation (8) classifies every redundancy with empty maximal Lucas
+  carrier; these levels inherit the unconditional transverse theorem without
+  any modular follow-up.
 - Open: independent representation-theory review of the determinant twists
   and quotient equivariance before manuscript integration; the coordinate
   proof and bounded checker are author-side evidence only.
+- Open: literature/priority audit against the known submodule filtrations of
+  binary Weyl and divided-power modules (Doty/Jantzen lineage).  No novelty
+  claim is made for the exact sequences until that audit is complete.  The
+  metadata/partial-text triage is recorded in
+  `c973-2026-08-26-module-literature-preaudit.md` and indicates that the
+  filtered-module structure is likely classical.
 - Owner: C973 mathematical continuation; computational canonicalization is a
   future software successor only after the quotient strategy is proved useful.
 

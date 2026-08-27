@@ -1,7 +1,8 @@
 # C973 — Projective Reed--Solomon Toolkit leverage map
 
-**Lane:** `reed-solomon` · **Date:** 2026-08-26 · **Status:** design interface
-only; implementation belongs to a C969/C970 successor
+**Lane:** `reed-solomon` · **Date:** 2026-08-26 · **Status:** C974 implemented
+the exact enumerative negative path; symbolic-selector and digit-recursive
+optimizations remain successor interfaces
 
 ## Executive result
 
@@ -24,6 +25,12 @@ The first path produces an ordinary locator witness and can reuse the current
 certificate verifier.  The second produces a positive mathematical verdict
 and therefore requires a new versioned theorem-domain rule and deep-certificate
 replay route.
+
+C974 subsequently implemented `simultaneous-locator` for every `r>=6`, with
+typed forbidden roots, direct R5 pencil completion, ordinary locator replay,
+and fail-closed budget semantics.  It is the exact enumerative realization of
+Steps 4--5 below, not yet the symbolic selector of Steps 1--3.  The q=49 C973
+orbit certificates demonstrate its first theorem-facing Lucas-carrier use.
 
 ## 1. Constructive locator route
 
@@ -174,9 +181,32 @@ the current extraction proof.
 This sequence gives the toolkit useful higher-redundancy witnesses before it
 asks users to trust a broader positive classification surface.
 
+## 7. Digit-stripping leverage
+
+The later C973 digit-stripping theorem supplies a typed structural prepass for
+`r-2=d=pD+a`:
+
+- compute `nu(d)` and `eta(d)` from the base-`p` digits and return the exact
+  carrier dimension `d+2-nu(d)-eta(d)`;
+- report the exact projective carrier count and codimension `nu(d)+eta(d)`, so
+  benchmark coverage is measured against the theorem-sized unresolved set;
+- skip the Lucas branch entirely when `r-1` or `r` has one nonzero base-`p`
+  digit;
+- expose whether a carrier syndrome lies in the explicit determinant-twisted
+  tensor submodule or has a nonzero nucleus/carrier quotient coordinate; and
+- recurse on `D` for canonicalization before enumerating marker supports.
+
+These calculations use integer digits and typed module cases; they should not
+be represented by string family labels.  A future implementation should use
+an enum distinguishing `TensorSubmodule`, `NucleusQuotient`, and
+`CarrierQuotient`, plus structured digit and dimension fields.  This is an
+optimization/diagnostic interface until a pointed-abundance theorem proves
+that a quotient result can safely determine classification.
+
 ## Ownership
 
-C973 changes no file under
-`papers/beyond4_prs/software/projective-reed-solomon/`.  Implementation,
-registry migration, tests, benchmarks, public documentation, and release
-integration require a separately authorized C969/C970 software successor.
+C973 itself changed no software file.  The user-authorized C974 successor
+implemented, tested, documented, and archived the enumerative simultaneous
+locator.  Symbolic-selector optimization, digit-recursive canonicalization,
+registry migration, and any positive-classification expansion require new
+successor ownership.
