@@ -126,10 +126,11 @@ Beauville, Colliot-Th\'el\`ene, Sansuc, and Swinnerton-Dyer
 over quartic del Pezzo surfaces and classify the four minimal Galois types
 relevant to stable rationality.  We use their Cox model and its
 one-apparent-double-point property, Galois classification, and generic
-splitting of the universal torsor \cite{TZ}.  The standard tangent-projection
-result for varieties with one apparent double point is due to Ciliberto,
-Mella, and Russo \cite[Corollary~4.2]{CMR}.  Our additional input is a
-rank-three quotient of the projective Cox model.
+splitting of the universal torsor \cite{TZ}.  The tangent-projection theorem
+for smooth varieties with one apparent double point is due to Ciliberto,
+Mella, and Russo \cite[Corollary~4.2]{CMR}.  The projective Cox model may be
+singular, so we use the stronger form proved in \cite[Theorem~2.4]{TZ}.  Our
+additional input is a rank-three quotient of that model.
 
 When \(S(k)\ne\varnothing\), the hypothesis on \(\Pic(S_{\bar k})\) is
 condition~(1) of \cite[Corollary~4.3]{TZ}.  Manin proves that stable
@@ -219,8 +220,10 @@ infinite field \(k\).  At a smooth point \(p\in Z(k)\), write
 for projection from the embedded tangent space; the hat denotes the affine
 cone.  In the application, \(Z\subset\PP^{2n+1}\) has one apparent double
 point.  Over an algebraically closed field, its tangent projection is
-birational by \cite[Corollary~4.2]{CMR}; the form over \(k\) used here is
-\cite[Theorem~2.4]{TZ}.
+birational in the smooth case by \cite[Corollary~4.2]{CMR}.  The projective
+Cox model need not be smooth.  The form used here is the stronger
+\cite[Theorem~2.4]{TZ}, which applies to a projective variety whose base
+change has one apparent double point and whose \(k\)-points are dense.
 
 \begin{theorem}[A quotient criterion]
 \label{thm:torus-quotient}
@@ -434,7 +437,7 @@ Theorem~\ref{thm:torus-quotient}.
 \label{prop:tangent-section}
 \coverage{absent}%
 \uses{thm:torus-quotient}%
-\imports{cmr-oadp-tangent-projection,tz-cox-model,tz-torsor-splitting,tz-type-classification}%
+\imports{tz-cox-model,tz-tangent-projection,tz-torsor-splitting,tz-type-classification}%
 \evidence{quartic-del-pezzo-slice-cover}%
 Over an algebraically closed field, let \(Z\) be the projective Cox model of
 a smooth quartic del Pezzo surface.  There exist a general tangent point
@@ -481,7 +484,7 @@ one explicit B\'ezout identity, that
 Let \(\mathcal E_{\mathrm{ev}}\subset Z_{\mathrm{sm}}\times Z\) be the
 open locus where the evaluation map is an isomorphism and the \(T_3\)-action
 is free at \(x\).  The four choices above show that this open is nonempty for
-every smooth split Cox model.
+every split Cox model attached to a smooth quartic del Pezzo surface.
 
 We now impose the tangent-projection condition uniformly in \(p\).  Let
 \(G\subset Z_{\mathrm{sm}}\) be the nonempty open over which the tangent
@@ -495,12 +498,13 @@ The tangent projections are the fibres of the rational \(G\)-map
  \Pi:G\times Z\dashrightarrow\PP_G(\mathcal Q),
  \qquad (p,x)\longmapsto(p,\pi_p(x)).
 \]
-Its generic fibre is birational, so \(\Pi\) restricts to an isomorphism
+The induced map on the generic fibre of \(G\) is birational, so \(\Pi\)
+restricts to an isomorphism
 between dense open subsets of its source and target.  Denote the source open
 by \(\mathcal U\).  Thus \((p,x)\in\mathcal U\) is a single open condition on
 the pair, and its fibre over \(p\) is an open \(U_p\) on which \(\pi_p\) is
 an isomorphism.  Since \(G\times Z\) is geometrically integral, the open
-\(\mathcal U\cap\mathcal E_{\mathrm{ev}}\) is nonempty.
+\(\mathcal U\cap(\mathcal E_{\mathrm{ev}}|_{G\times Z})\) is nonempty.
 
 Choose \((p,x)\) in this intersection.  Then \(p\) is general for tangent
 projection, \(x\in U_p\), the evaluation map is an isomorphism at \(x\), and
@@ -520,7 +524,8 @@ It remains to obtain \(p\), \(x\), and \(\Lambda\) over the ground field.
 Fix a twist of one of the four types.
 Because \(T_3\), \(B\), the set of four selected weight spaces, and the
 universal tangent-projection map are defined over \(k\), the intersection
-\(\mathcal U\cap\mathcal E_{\mathrm{ev}}\) is a nonempty \(k\)-open in
+\(\mathcal U\cap(\mathcal E_{\mathrm{ev}}|_{G\times Z})\) is a nonempty
+\(k\)-open in
 \(G\times Z\).  Its projection to \(G\) is dense constructible and therefore
 contains a nonempty open \(G_0\).
 
@@ -528,7 +533,8 @@ Corollary~3.5 of \cite{TZ} supplies the universal torsor whose fibre over a
 fixed point of \(S(k)\) is trivial.  Its \(k\)-points are Zariski dense by
 \cite[Lemma~2.1]{TZ}, and the same holds in the projective Cox model.  Hence
 \(G_0\) contains a point \(p\in Z(k)\).  The fibre
-\((\mathcal U\cap\mathcal E_{\mathrm{ev}})_p\) is a nonempty \(k\)-open in
+\((\mathcal U\cap(\mathcal E_{\mathrm{ev}}|_{G\times Z}))_p\) is a nonempty
+\(k\)-open in
 \(Z\), so Zariski density supplies a point \(x\in Z(k)\) in that fibre.
 The kernel of evaluation at \(x\) is a
 three-dimensional \(k\)-space, so a \(k\)-basis gives \(\Lambda\).  We do not

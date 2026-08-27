@@ -16,10 +16,6 @@ source audit checked the proof inputs at the following depths:
   for rationality of degree at least five del Pezzo surfaces with a rational
   point. Read depth: partial (Theorem 2.1); PDF SHA-256
   `ed5b1bbade653b7feab309b5d43a775fbc971cead2d904a4f0e94c1aca8271af`.
-- Ciliberto--Mella--Russo, *Varieties with one apparent double point*,
-  arXiv:math/0210008v1. Read depth: partial (Theorem 4.1 and Corollary 4.2);
-  cached as `arXiv:math/0210008`, PDF SHA-256
-  `aa68b601d43dd24b948fb2931d09a522880f9a4d9785342cc76805b0a0de1a56`.
 - Yu. I. Manin, *Rational surfaces over perfect fields*. Read depth: partial
   (Theorem 2.2 in the English résumé); the theorem gives stable equivalence
   of the geometric divisor-class lattices after adjoining permutation
@@ -39,7 +35,7 @@ source audit checked the proof inputs at the following depths:
   threefolds); cached as `arXiv:2507.15704`, PDF SHA-256
   `f0284c8249c07ab5e3d9e5e49504662fad26de205563ab5a48aea27e742741ee`.
 
-Two historical citations in the introduction are contextual rather than
+Three historical citations are contextual rather than
 load-bearing:
 
 - Beauville--Colliot-Thélène--Sansuc--Swinnerton-Dyer, *Variétés stablement
@@ -51,6 +47,12 @@ load-bearing:
   secondary only, through Tschinkel--Zhang's “Levels of stable rationality”
   paragraph following Remark 4.4, which attributes the type-`I_0` two-variable bound
   to this paper; bibliographic metadata taken from their reference list.
+- Ciliberto--Mella--Russo, *Varieties with one apparent double point*,
+  arXiv:math/0210008v1. Read depth: partial (Theorem 4.1 and Corollary 4.2);
+  cached as `arXiv:math/0210008`, PDF SHA-256
+  `aa68b601d43dd24b948fb2931d09a522880f9a4d9785342cc76805b0a0de1a56`.
+  Corollary 4.2 is cited only for the smooth historical case; the possibly
+  singular Cox model uses Tschinkel--Zhang Theorem 2.4 instead.
 
 The bounded novelty screen and its exact limitations remain in the durable
 research report; the manuscript uses no "first" or "to our knowledge"
