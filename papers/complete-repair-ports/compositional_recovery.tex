@@ -61,11 +61,11 @@ through finite concatenation towers.  Sufficient outer dual distance excludes
 the nonzero functional terms and reduces the answer to
 $M_t(D_P,K_P)+d(I^\perp)$.  Below the resulting helper-cost threshold, restriction and
 zero-extension preserve every normalized recovery equation and its exact
-helper support, not only the minimum cost.  Thus relative weights solve the
-single-block minimum problem, while labelled coset costs provide the finer
-data needed for exact composition.  A companion exact implementation evaluates
-the recursion and returns optimizing coefficient witnesses; no proof depends
-on software.
+helper support, not only the minimum cost.  Relative weights solve the
+single-block minimum; labelled coset costs form a closed compositional state.
+At rank one, we characterize exactly which numerical distinctions any outer
+code can observe.  A companion implementation evaluates the recursion and
+returns witnesses; proofs are software-independent.
 \end{abstract}
 
 \section{Introduction}
@@ -232,11 +232,15 @@ The rank-one consequence is especially simple: a nonconfined recovery on a
 higher-dimensional target restricts to a nonconfined recovery on a target
 line without increasing its helper support.  Hence confinement through a
 fixed radius holds at every recoverable rank if and only if it holds at rank
-one (Corollary~\ref{cor:all-rank-bottleneck}).  Theorem
-\ref{thm:rank-one-contextual-state} separately identifies which numerical
-label distinctions compatible outer codes can detect, and Proposition
-\ref{prop:rank-bounded-outer-tests} shows that target rank $t$ needs no test
-whose outer functional dual has dimension greater than $t$.
+one (Corollary~\ref{cor:all-rank-bottleneck}).  At rank one,
+Theorem~\ref{thm:rank-one-contextual-state} shows that outer codes observe
+exactly the zero-sector cost and the zero-truncated projective line-probe
+profile.  Equality of these data is the coarsest numerical congruence under
+compatible further concatenation.  Thus the full labelled table is a
+convenient closed state, but it is not generally minimal.  At rank $t$,
+Proposition~\ref{prop:rank-bounded-outer-tests} shows that no test with outer
+functional-dual dimension greater than $t$ is needed; it does not claim an
+intrinsic minimal quotient at higher rank.
 
 The label loss is already visible over $\F_2\subseteq\F_4$.  Two
 three-column encoders have the same binary image code, dual, abstract nested

@@ -193,7 +193,9 @@ results.
   nonzero target-message subspace, prescribed-coset costs over the complete
   outer functional dual give the exact first nonconfined cost without a
   distance hypothesis. The labelled costs compose associatively through
-  compatible finite concatenation towers. Under `d(O⊥) > r + 1`, confinement
+  compatible finite concatenation towers. At rank one, their zero-truncated
+  projective line-probe profile is the coarsest numerical state observable by
+  all compatible outer codes. Under `d(O⊥) > r + 1`, confinement
   through radius `r` is equivalent to `r < M_t(D_P,K_P) + d(I⊥)`.
   ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis)
   executes this recursion, stores minimizing lifts to return witnesses, and
@@ -779,11 +781,11 @@ hierarchical optimizer and capacity-aware repair scheduler.
 > functional terms and reduces the answer to
 > `M_t(D_P,K_P) + d(I^perp)`. Below the resulting helper-cost threshold,
 > restriction and zero-extension preserve every normalized recovery equation
-> and its exact helper support, not only the minimum cost. Thus relative weights
-> solve the single-block minimum problem, while labelled coset costs provide the
-> finer data needed for exact composition. A companion exact implementation
-> evaluates the recursion and returns optimizing coefficient witnesses; no
-> proof depends on software.
+> and its exact helper support, not only the minimum cost. Relative weights
+> solve the single-block minimum; labelled coset costs form a closed
+> compositional state. At rank one, we characterize exactly which numerical
+> distinctions any outer code can observe. A companion implementation evaluates
+> the recursion and returns witnesses; proofs are software-independent.
 
 **Delivers.** The associated nested code pair and its exact relative-weight
 interpretation; an exact ungated arbitrary-rank prescribed-coset theorem;
