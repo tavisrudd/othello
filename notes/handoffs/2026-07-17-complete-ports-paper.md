@@ -16,7 +16,7 @@ DEPOSIT
 Recovery*
 **Standalone paper repository**: `tavisrudd/compositional-recovery` at
 `~/src/math-papers/compositional-recovery`
-**Current local standalone commit**: `57e9d26` (37-page revised manuscript;
+**Current local standalone commit**: `22f1485` (37-page revised manuscript;
 verified; no push or deposit)
 **Approved paper license**: MIT
 
@@ -252,6 +252,6 @@ hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
 and is not evidence for or a release dependency of the paper-local companion.
 
-Local standalone synchronization is complete at `57e9d26`. Publication, push,
+Local standalone synchronization is complete at `22f1485`. Publication, push,
 and deposit remain gated on C325 and C953; the approved repository metadata
 does not authorize any of those external actions.
