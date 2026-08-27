@@ -201,8 +201,15 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C961 and C971 are closed.  Continue C962 only for additional paper-owned
-algorithm and bound development beyond the exported ERGO-Comp baseline.
+C961 and C971 are closed. C962 now includes the streamed/narrow Rust kernels,
+the regenerated scaling and TMA evidence, and a paper-native benchmark on
+Jin--Fu's published binary `[129,72,10;2]` concatenated LRC: ERGO-comp computes
+the exact confinement cost `Gamma=5` in a seven-round median of 20.938 ms,
+versus 4.07 s for direct CP-SAT and 4.91 s for labelled CP-SAT. The exact model,
+raw samples, hashes, and source-depth audit are in
+`notes/2026-08-26-c962-published-benchmark-audit.md` and commit `12899bad8`.
+Continue C962 only for additional paper-owned
+algorithm and bound development beyond the exported ERGO-comp baseline.
 Python remains the exact differential oracle, and no Rust performance result is
 accepted before cost/witness/load parity.  Then run C325 appendix-only
 verification, followed by C953
