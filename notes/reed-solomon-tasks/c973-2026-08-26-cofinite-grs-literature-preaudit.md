@@ -61,6 +61,13 @@ geometry work on deleting points from NRCs, and compare the exact shell count
 against generalized/projective RS coset-weight papers not indexed by the
 queries above.
 
+The current manuscript bibliography and audit pin `XuHongXu2017` to arXiv
+version 1 and mark it abstract/metadata only.  The present preaudit read the
+current 2026 arXiv rendering.  A paper successor that cites a load-bearing
+statement from that source must reconcile the version metadata and upgrade
+the literature-audit access row; it must not silently treat this preaudit as
+the manuscript's completed source audit.
+
 ## Highest-EV literature gate for the paper successor
 
 Audit one precise statement, not the whole transfer package:
