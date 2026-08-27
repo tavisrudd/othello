@@ -1,9 +1,9 @@
 # C973 — simultaneous-marker PRS escape and all-level Lucas discriminator
 
 **Lane:** `reed-solomon` · **Status:** active — arbitrary-`r` escape proved;
-the first one-carry Lucas block now has an explicit module theorem and the
-characteristic-seven R11/R12 carriers are pointedly closed; external review
-and a multi-digit module/abundance theorem remain open
+the multi-digit carrier module theorem is proved, characteristic seven is
+pointedly closed, and the exact GF(16) pointed quotient closes binary R11/R12
+there; GF(27), GF(32), GF(64), and external review remain open
 
 **Current checkpoint:**
 `c973-2026-08-26-simultaneous-marker-theorem.md` proves direct composite
@@ -87,6 +87,13 @@ columns are exact additive or cyclic-group subset-count problems, while a
 double count gives configuration-free family aggregates and hence aggregate
 minimum-word counts.  Arbitrary-deletion evaluation is exposed as a typed
 group-DP software follow-up, not added to the frozen toolkit here.
+The next exact arithmetic bridge is
+`c973-2026-08-27-r11-gf16-pointed-closure.md`: normalizing the prescribed root
+to infinity reduces the full GF(16) R11 carrier to 317 upper-Borel orbits.
+All 317 have independently replayed finite locators (307 of degree nine and
+10 of degree eight).  Hence GF(16) leaves the possible R11 modular-exception
+set, and one-marker lifting also makes the GF(16) binary R12 carrier shallow.
+The remaining R11 fields are exactly GF(27), GF(32), and GF(64).
 
 ## Objective
 
