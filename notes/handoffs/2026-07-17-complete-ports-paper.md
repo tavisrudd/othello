@@ -102,9 +102,11 @@ Current and completed strengthening:
 - [C980 higher-rank contextual minimality](../2026-08-27-c980-higher-rank-contextual-minimality.md)
   is now a mathematics-only active task.  Its first candidate reduction writes
   every rank-`t` outer context as a dimension-`s<=t` multiset of finite column
-  types and expresses its response as a finite tropical lower envelope.  The
-  immediate gates are typed proof review, canonical lower-hull equality,
-  state-complexity bounds, and the Pareto-cost extension.
+  types and expresses its response as a finite tropical lower envelope.
+  Zero truncation caps each type multiplicity at `z`, giving a candidate
+  complete outer-length bound `1+z(|L|^s-1)` and one finite higher-rank test
+  family.  The immediate gates are typed proof review, canonical integer-envelope
+  equality, sharp state-complexity bounds, and the Pareto-cost extension.
 
 - [C962 exact recovery algorithms](../2026-08-25-c962-recovery-algorithms-and-bounds.md)
   now includes a radius-pruned rank-one complete-transfer certificate, lazy

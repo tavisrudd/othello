@@ -100,6 +100,55 @@ This proof is algebraically complete as a candidate lemma.  It still needs a
 typed reread against the paper's trace identification, target normalization,
 and repeated-field-tower conventions before promotion.
 
+## Multiplicity capping: one finite complete test family
+
+The zero truncation makes the apparently infinite arity range finite.  Assume
+the target is recoverable, so `z` is finite, and cap every helper-type
+multiplicity by
+
+```text
+nbar_a = min(n_a, z).
+```
+
+For a fixed map `X`, each slope `lambda(a X)` is either zero, a positive
+integer, or infinity.  If the slope is zero, changing `n_a` has no effect.  If
+it is positive and `n_a >= z`, both the original and capped affine form are at
+least `z`; if it is infinite, every positive multiplicity already makes the
+form infinite.  Therefore, term by term and hence after minimization,
+
+```text
+min(z, F[s,a_0](n)) = min(z, F[s,a_0](nbar)).
+```
+
+Capping preserves the positive support of `n`, so it also preserves the helper
+spanning condition.  Every outer context is consequently equivalent, for the
+truncated exact cost, to one with at most
+
+```text
+1 + z (Q^s - 1)
+```
+
+blocks: one target block and at most `z` helpers of each nonzero column type.
+
+This gives one arity-independent finite complete profile.  For fixed
+`(q,L,T,z)`, the number of raw probes is at most
+
+```text
+P_t(z,Q) = sum_{s=1}^t Q^s (z+1)^(Q^s-1),
+```
+
+before discarding nonspanning multiplicity vectors and quotienting by
+`GL_s(L)`.  Each probe value lies in `{0,...,z}`.  Hence the exact contextual
+quotient has at most `(z+1)^P_t(z,Q)` numerical classes.  This is a coarse
+existence bound, not a claim that the state is practically small.
+
+Together with the column-type response theorem, the capped profile is a finite
+higher-rank Myhill--Nerode state: equality of `z` and all capped probe values is
+equivalent to indistinguishability under every finite compatible outer code.
+This also strengthens the current rank-one statement, which deliberately did
+not claim an arity-independent finite table.  No manuscript change is proposed
+until the proof and literature gates close.
+
 ## Arity-independent finite representation
 
 Although `n` ranges over unbounded outer lengths, each response is the lower
@@ -120,11 +169,13 @@ by
 sum_{s=1}^t Q^(2s) (Q^(t s)-1).
 ```
 
-The bound is deliberately raw.  The mathematical target is the canonical
-lower hull after removing forms invisible on the admissible nonnegative
-integer cone, modulo the natural `GL_s(L)` change of basis.  Proving an
-effective equality test and a sharper bound for that hull is the first open
-gate.
+The bound is deliberately raw.  The finite capped truth table above is already
+canonical as a response function, while the lower-envelope form can be much
+smaller computationally.  The next mathematical target is a canonical integer
+lower envelope after removing forms invisible on the capped admissible grid,
+modulo the natural `GL_s(L)` change of basis.  Distinct affine descriptions can
+agree on every integer probe, so an ordinary real convex lower hull is not by
+itself a correct canonicalization.
 
 For `t=s=1`, the formula reduces to the zero-truncated projective line-probe
 profile already in the paper: changing the generator of the one-dimensional
@@ -181,8 +232,9 @@ interfaces, fields, target normalizations, and allowed outer projections.
 
 1. Formalize the column-type response theorem and all-rank congruence with
    exact types and hypotheses.
-2. Prove lower-envelope equality and canonical-hull criteria on the admissible
-   integer cones; quotient by `GL_s(L)`.
+2. Prove the multiplicity-capping lemma under all edge cases, then derive
+   lower-envelope equality and canonicalization on the capped admissible grid;
+   quotient by `GL_s(L)`.
 3. Derive lower and upper state-complexity bounds and construct families that
    force large contextual states.
 4. Test the Pareto-semiring extension for bandwidth and simultaneous requests;
