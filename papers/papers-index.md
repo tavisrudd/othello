@@ -192,17 +192,15 @@ graphs*
 - *Status:* N1-only LaTeX working manuscript with complete written proof; the planned Lean library
   is not yet built. Full-complex reconstruction remains a softened scope remark.
 
-**Active unnumbered candidate · `beyond4_prs`** — *Deep holes of projective Reed--Solomon codes
-beyond redundancy four: recursive carriers and exact classifications through redundancy ten*
-- *Status:* user-directed merger admitted to active manuscript staging.  C538 creates the first
-  integrated draft; C545 releases a proof-complete Version 1 preprint with a policy-checked DOI;
-  C539--C544 close the paper-facing Lean package.
-- *Owns:* C491's complete redundancy-five classification as its headline, the C498/C509
-  all-field redundancy-six/seven theorems, C512 coherent polar induction, C513/C516 fixed-level
-  high-field results, C525 ordered-Hessian containment, and C529/C530 Lucas arithmetic.
-- *Boundary:* this supersedes the redundancy-five-only C500 plan.  C481--C490 reconstruction,
-  twisted-RS results, and unfinished redundancy ten remain outside.  Numbering and ship-order
-  admission wait for C538's manuscript-level review.
+**Active unnumbered candidate · `high_weight_grs_cosets`** — *High-weight cosets of generalized and
+extended Reed--Solomon codes*
+- *Status:* 42-page archival manuscript and 30-page IEEE TIT version with a public verification
+  bundle; the current revision is under final artifact packaging.
+- *Owns:* the arbitrary-redundancy classification of all weight-at-least-(r-1) cosets for
+  point-deleted projective-line supports, its deep-hole and MDS/NMDS extension consequences, and
+  the sharp redundancy-five through redundancy-seven refinements.
+- *Boundary:* R8--R10 computations remain companion records and are not claims of the submission;
+  the general Reed--Solomon deep-hole conjecture is not claimed.
 
 **Active unnumbered candidate · `ame_lu`** — *Local-Unitary Rigidity and Quantitative Rounding for
 Stabilizer AME States*
@@ -329,7 +327,7 @@ repositories: an evidence-based essay and practical how-to
   coordinate quadratic extension theorem, robust repair, exact Q25 minimum/classification, and
   completed internal referee closeout. Continuation rigidity has an N1-only LaTeX working
   manuscript but no Lean library yet.
-- **Active manuscript scaffold:** `beyond4_prs` — C538 owns the integrated draft, C545 the rapid
+- **Active manuscript scaffold:** `high_weight_grs_cosets` — C538 owns the integrated draft, C545 the rapid
   proof-complete DOI-bearing preprint, and C539--C544 the Lean closure.
 - **Sequence packages (ready/draft):** the two `oeis-submissions/` entries.
 

@@ -81,8 +81,8 @@ path = "notes/2026-07-31-results-summary-snapshot.md"
 papers = [
   "ame_lu",
   "arcs_complete_outside_conic",
-  "beyond4_prs",
-  "beyond4_prs_submission",
+  "high_weight_grs_cosets",
+  "high_weight_grs_cosets_submission",
   "clebsch_factorization",
   "clebsch_passages",
   "clebsch_rigidity",
@@ -167,17 +167,17 @@ main = "arcs_complete_outside_conic.tex"
 lane = "relconic"
 
 [[paper]]
-id = "beyond4_prs"
-dir = "papers/beyond4_prs"
-main = "main.tex"
+id = "high_weight_grs_cosets"
+dir = "papers/high_weight_grs_cosets"
+main = "high-weight-grs-cosets.tex"
 lane = "reed-solomon"
 
 # The journal-submission variant is a separate manuscript with its own title casing and its own
 # generated bibliography, so it is registered separately rather than folded into the preprint.
 [[paper]]
-id = "beyond4_prs_submission"
-dir = "papers/beyond4_prs"
-main = "main-tit.tex"
+id = "high_weight_grs_cosets_submission"
+dir = "papers/high_weight_grs_cosets"
+main = "high-weight-grs-cosets-tit.tex"
 lane = "reed-solomon"
 
 [[paper]]

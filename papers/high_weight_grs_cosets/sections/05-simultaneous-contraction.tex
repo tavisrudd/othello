@@ -1,0 +1,199 @@
+\section{Simultaneous contraction and escape}
+\label{sec:simultaneous-contraction}
+
+The recursive carrier theorem identifies the syndromes whose entire terminal
+row space is trapped.  We now treat every other syndrome without choosing a
+sequence of intermediate good fibers.  All contracted roots are selected at
+once, and only the terminal R5 pencil is counted.
+
+Let \(E\) be two-dimensional over a field \(k\).  For
+\(f\in\Gamma^{r-1}E\) and \(R\in\Sym^m(E^\vee)\), define the composite
+contraction by
+\begin{equation}\label{eq:composite-contraction}
+ \langle\iota_Rf,h\rangle=\langle f,Rh\rangle .
+\end{equation}
+
+\begin{proposition}[Composite contraction]
+\label{thm:composite-contraction}%
+\coverage{absent}%
+For every \(h\in\Sym^{r-2-m}E^\vee\),
+\[
+ h\in W_{\iota_Rf}\quad\Longleftrightarrow\quad Rh\in W_f.
+\]
+The construction commutes with base change and the natural
+\(\operatorname{GL}(E)\)-action.  If \(R\) is split and squarefree, then
+\(Rh\) is split and squarefree exactly when \(h\) is split and squarefree and
+has no root in common with \(R\).
+\end{proposition}
+
+\begin{proof}
+For every \(\lambda\in E^\vee\),
+\[
+ \langle\iota_Rf,\lambda h\rangle
+   =\langle f,R\lambda h\rangle.
+\]
+These are precisely the two Hankel equations defining the two witness
+systems.  The pairing also proves base-change and equivariance.  The final
+assertion is the usual coprimality criterion after passage to an algebraic
+closure.
+\end{proof}
+
+We use one elementary finite-field lemma to choose the roots of \(R\).
+
+\begin{lemma}[Vandermonde grid]
+\label{lem:vandermonde-grid}%
+\coverage{absent}%
+Let \(P\in\F_q[x_1,\ldots,x_m]\) be nonzero and satisfy
+\(\deg_{x_i}P\leq d\) for every \(i\).  If \(q>d+m-1+s\), then there are
+pairwise distinct \(a_1,\ldots,a_m\in\F_q\), outside any prescribed set of
+\(s\) field elements, for which \(P(a_1,\ldots,a_m)\ne0\).
+\end{lemma}
+
+\begin{proof}
+Multiply \(P\) by
+\[
+ \prod_{i<j}(x_i-x_j)
+ \prod_{i=1}^m\prod_{a\in A_0}(x_i-a),
+\]
+where \(A_0\subset\F_q\) is the forbidden set.  The product is nonzero and
+has degree at most \(d+m-1+s<q\) in each variable.  A polynomial reduced to
+degree below \(q\) in every variable cannot vanish on all of \(\F_q^m\).
+At a nonzero value, the coordinates are distinct and avoid \(A_0\).
+\end{proof}
+
+Put \(m=r-5\).  If \(R=\lambda_1\cdots\lambda_m\), the coefficient row of
+\(R\) sends \(f\) to the bottom syndrome
+\[
+ \iota_Rf=h\operatorname{Cat}_{m,4}(f).
+\]
+
+\begin{lemma}[Terminal selector]
+\label{lem:terminal-selector}%
+\coverage{absent}%
+Let \(L_f\) be the projectivized row space of
+\(\operatorname{Cat}_{m,4}(f)\).  If
+\(f\notin\cP_r\cup\cM^{\max}_{r,p}\), there is a homogeneous polynomial
+\(F_f\) over \(\F_q\), of degree at most six (at most four when \(p=2\)),
+which vanishes on the reduced terminal carrier but is nonzero on \(L_f\).
+Consequently
+\[
+ S_f(\lambda_1,\ldots,\lambda_m)
+ =F_f(\iota_{\lambda_1\cdots\lambda_m}f)
+\]
+is a nonzero \(\F_q\)-polynomial of degree at most six, respectively four,
+in each marker.
+\end{lemma}
+
+\begin{proof}
+Proposition~\ref{prop:recursive-component-selection} says that \(L_f\) is
+not contained in the reduced terminal carrier.  By
+Proposition~\ref{prop:reduced-terminal-carrier}, that carrier is
+\(V(D)\cup V(I_{\mathrm{res},p})\), where \(D\) has degree three and
+\(I_{\mathrm{res},p}\) has generators over the prime field of degree at
+most three, or degree one when \(p=2\).  The irreducible space \(L_f\) is
+contained in neither component.  Thus \(D|_{L_f}\ne0\), and some listed
+generator \(G\in I_{\mathrm{res},p}\) has \(G|_{L_f}\ne0\).  Since the
+coordinate ring of \(L_f\) is a domain, \(F_f=DG\) is nonzero on \(L_f\),
+vanishes on both components, and has the asserted degree.  It is defined
+over \(\F_q\).
+
+The ordered root-product map
+\((\PP^1)^m\to\PP(\Sym^mE^\vee)\) is geometrically surjective, and the
+linear catalecticant map is surjective onto \(L_f\).  Hence the pullback of
+the nonzero restriction \(F_f|_{L_f}\) is nonzero.  Every
+coefficient of \(\lambda_1\cdots\lambda_m\) is linear in each marker;
+therefore composition preserves the degree bound separately in every
+marker.
+\end{proof}
+
+\begin{theorem}[Simultaneous-marker escape]
+\label{thm:simultaneous-marker-escape}%
+\coverage{absent}%
+Let \(r\geq6\), let \(A\subseteq\PP^1(\F_q)\) have size \(s\), and put
+\[
+ Q^*_{r,s}=6(r+s)-16+
+ \left\lfloor2\sqrt{6(r+s)-18}\right\rfloor .
+\]
+If \(q\geq Q^*_{r,s}\) and
+\(f\notin\cP_r\cup\cM^{\max}_{r,p}\), then \(W_f\) contains a split
+squarefree form of degree \(r-2\) whose roots avoid \(A\).  In characteristic
+two it is enough that
+\[
+ q\geq6(r+s)-22+
+ \left\lfloor2\sqrt{6(r+s)-24}\right\rfloor .
+\]
+\end{theorem}
+
+\begin{proof}
+Choose a retained point of \(S\) as infinity by a projective coordinate
+change.  Then every deleted point lies in the affine marker chart.
+Lemma~\ref{lem:terminal-selector} and
+Lemma~\ref{lem:vandermonde-grid} give a split squarefree marker form \(R\),
+disjoint from \(A\), for which \(b=\iota_Rf\) lies outside both components of
+the terminal carrier.  The required selector inequality is
+\(q>r+s\), or \(q>r+s-2\) in characteristic two; it is weaker than the
+displayed hypotheses.
+
+By Proposition~\ref{prop:reduced-terminal-carrier}, the terminal system
+\(W_b\) is a base-point-free pencil of cubics with geometric monodromy
+\(S_3\).  Proposition~\ref{prop:r5-count} and its branch
+budget give at least
+\[
+ \frac{q+1-2\sqrt q-B_p}{6},\qquad
+ B_p=\begin{cases}6,&p=2,\\12,&p\ne2,
+ \end{cases}
+\]
+split squarefree pencil members.  A prescribed rational root occurs in at
+most one member of a base-point-free pencil.  Hence a split cubic avoids the
+\(m+s\) roots of \(R\) and \(A\) whenever
+\[
+ q+1-2\sqrt q>B_p+6(m+s).
+\]
+For an integer \(\Delta\geq0\), the least integer bound forced by
+\(q+1-2\sqrt q>\Delta\) is
+\[
+ \Delta+2+\lfloor2\sqrt\Delta\rfloor.
+\]
+Taking \(\Delta=6(r+s)-18\), or \(6(r+s)-24\) in characteristic two,
+gives the stated thresholds.  Proposition~\ref{thm:composite-contraction}
+multiplies the terminal cubic by \(R\), producing the required locator in
+\(W_f\).
+\end{proof}
+
+The proof yields many locators rather than one isolated witness.
+
+\begin{corollary}[Split-witness abundance]
+\label{cor:split-witness-abundance}%
+\coverage{absent}%
+Fix \(r,s\).  Under the hypotheses of
+Theorem~\ref{thm:simultaneous-marker-escape}, every syndrome outside the two
+carriers has at least
+\[
+ \frac{q^{r-4}}{(r-2)!}-O_{r,s}(q^{r-9/2})
+\]
+split squarefree members of \(W_f\) supported on \(S\).  This denotes a lower
+bound, not an asymptotic equality.
+\end{corollary}
+
+\begin{proof}
+On the affine marker chart, the selector has total degree at most \(6m\).
+After deleting diagonals and forbidden values, the number of good ordered
+marker tuples is at least
+\[
+ (q-s)_m-6m q^{m-1},
+\]
+with \(6m\) replaced by \(4m\) in characteristic two.  Each has at least
+\[
+ \max\!\left(0,
+ \left\lceil\frac{q+1-2\sqrt q-B_p}{6}\right\rceil-m-s\right)
+\]
+terminal cubics.  A degree-\((m+3)\) locator has at most
+\((m+3)!/6\) ordered marker--cubic decompositions.  Division by this
+multiplicity gives the displayed leading term and error.
+\end{proof}
+
+For fixed \(r\), successive specialization of the selector gives a
+deterministic construction using at most \((r-5)q\) partial-substitution
+tests and \(q+1\) terminal pencil tests, assuming explicit coefficient access.
+The dense selector has size exponential in \(r\); this is not a uniform
+polynomial-time decoding theorem.

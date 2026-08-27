@@ -2548,7 +2548,7 @@ contain, not a judgement about what is ready: the ship-order table after it carr
 hand-written.
 
 **Read the row count with three corrections, or it misdescribes the portfolio.**
-`beyond4_prs` and `beyond4_prs_submission` are one manuscript in two typesettings, not two results;
+`high_weight_grs_cosets` and `high_weight_grs_cosets_submission` are one manuscript in two typesettings, not two results;
 `clebsch_hexagon_code` is the superseded integrated manuscript, preserved only as a fallback for
 material the rigidity paper, its companion, and the trade-rigidity paper now carry; and two rows are
 not papers — `golden_operator` is a source-lane draft feeding forward versions of the passages
@@ -2573,8 +2573,8 @@ Line-Code Obstructions for Complete \((k,n)\)-Arcs* under the alias
 |-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|--------------------|-------|-----|-----|------|-----|--------|
 | `ame_lu`                            | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States                                                               | `ame-lu`           | 37    | 10  | 14  | 9    | 11  | 62     |
 | `arcs_complete_outside_conic`       | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity                                            | `relconic`         | 27    | 9   | 4   | 5    | 22  | 79     |
-| `beyond4_prs`                       | Deep holes of projective Reed--Solomon codes beyond redundancy four: recursive carriers and exact classifications through redundancy ten | `reed-solomon`     | 71    | 12  | 19  | 47   | 6   | 143    |
-| `beyond4_prs_submission`            | Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | `reed-solomon`     | 71    | 12  | 19  | 47   | 6   | 143    |
+| `high_weight_grs_cosets`                       | High-weight cosets of generalized and extended Reed--Solomon codes | `reed-solomon`     | 42    | 11  | 13  | 24   | 7   | 94     |
+| `high_weight_grs_cosets_submission`            | High-Weight Cosets of Generalized and Extended Reed--Solomon Codes | `reed-solomon`     | 30    | 11  | 13  | 24   | 7   | 94     |
 | `blown_up_theta_lattice`            | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold                                                 | `cubic-threefolds` | 11    | 4   | 3   | 2    | 2   | 45     |
 | `chordal_conference_reconstruction` | Chordal and Conference Cubics: Reconstruction and a Residual \(C_2\)-Torsor                                                              | `clebsch`          | 23    | 4   | 5   | 8    | 3   | 36     |
 | `clebsch_factorization`             | Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients                                                               | `clebsch`          | 47    | 7   | 9   | 5    | 10  | 53     |
@@ -2606,7 +2606,7 @@ Line-Code Obstructions for Complete \((k,n)\)-Arcs* under the alias
 | 5 | Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | associated shortening–puncturing pair, exact rank-stratified helper costs, ungated transfer, and associative composition | 24-page verified standalone candidate; algorithm/bound development active; publication gated |
 | 6 | Frobenius-equivariant pair extension and robust repair of eight-arcs | every invariant eight-arc in `PG(2,25)` pair-extends | extremal gate cleared; bookkeeping + graph remain |
 | 7 | Semilinear rigidity of four-point-frame continuation graphs | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13` | manuscript complete; Lean planned; audit gated |
-| — | Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications through redundancy ten | exact R5–R10 at stated field ranges + coherent-polar high-field containment | 56-page reproducible V2; local release gates green, public revision unset |
+| — | High-weight cosets of generalized and extended Reed–Solomon codes | exact R5–R10 at stated field ranges + coherent-polar high-field containment | 56-page reproducible V2; local release gates green, public revision unset |
 | — | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | LU-to-LC for every stabilizer AME state, plus cleaning-based rounding and logical (8\varepsilon) rounding | corrected local release candidate; generic Lean core, mirrors synchronized and unpushed |
 | — | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | multiplier nullity selects the exact fixed-party transversal logical group | 23-page deposited candidate; own semantic Lean gate, axiom audit, and claim manifest |
 | — | Golden descent and operator realizations of the Clebsch cubic (Clebsch III) | one oriented coordinate line behind both realizations, rational branch closure, triangle--Pfaffian recognition, and a bounded operator core | v1/v2 released under the earlier title; forward human proof and standalone manuscript green |

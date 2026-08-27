@@ -1,0 +1,186 @@
+\section{High-weight cosets and code extensions}
+\label{sec:high-weight-cosets}
+
+We now prove Theorem~\ref{thm:main} and record its two coding consequences.
+The reader needs only the conclusion of the preceding sections: outside
+\(\cP_r\cup\cM^{\max}_{r,p}\), there is a degree-\((r-2)\) split squarefree
+locator supported on \(S\).
+
+\subsection{Coset weights}
+
+Let the columns of \(H_S\) be \(w_a\nu_{r-1}(a)\), \(a\in S\), with every
+\(w_a\ne0\).  Rescaling an error value absorbs \(w_a\), so
+\begin{equation}\label{eq:grs-coset-weight}
+ d_S(f)=\min\bigl\{|T|:T\subseteq S,\quad
+ f\in\langle\nu_{r-1}(T)\rangle\bigr\}.
+\end{equation}
+Thus arbitrary GRS multipliers change neither coset weight nor the projective
+syndrome geometry.  The Hankel criterion identifies a degree-\((r-2)\) split
+squarefree member of \(W_f\), supported on \(S\), with a representation in
+\eqref{eq:grs-coset-weight} of size \(r-2\).
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The pointed simultaneous-marker theorem gives
+\(d_S(f)\leq r-2\) outside
+\(\cP_r\cup\cM^{\max}_{r,p}\), with the two stated thresholds.  If
+\(p>r-1\), no two adjacent entries of Pascal row \(r-2\) vanish, so the Lucas
+carrier is empty.
+
+The rational points of \(\cP_r\) have four disjoint strata: curve points,
+interiors of rational split secants, off-curve tangent points, and rational
+points of conjugate secants.  When \(s=0\), the Seroussi--Roth--D\"ur radius
+gate gives radius \(r-1\).  Curve points and split-secant interiors have
+weights one and two, while the full-support rank-two calculation
+\cite[Thms.~I.5--I.6]{ZWK2020} gives weight \(r-1\) on every off-curve tangent
+point and rational point of a conjugate secant.  These are therefore exactly
+the maximum-weight strata.
+
+Suppose \(s>0\).  If \(a\in A\), the arc property says that
+\(\nu_{r-1}(a)\) is outside the span of every \(r-1\) retained columns, while
+any \(r\) retained columns span the syndrome space.  Hence
+\(d_S(\nu_{r-1}(a))=r\).  Seroussi and Roth's unique-extension theorem
+\cite[Thm.~1]{SeroussiRoth1986} applies when
+\[
+ 2\leq r\leq |S|-\left\lfloor\frac{q-1}{2}\right\rfloor.
+\]
+Indeed \(q\geq Q^*_{r,s}\) implies \(q\geq2(r+s)-3\), and hence
+\(r\leq(q+3)/2-s\leq |S|-\lfloor(q-1)/2\rfloor\).  The theorem therefore
+says that these omitted curve points are all the weight-\(r\) directions.
+
+Deleting columns cannot lower the weight of a tangent or conjugate-secant
+direction.  Its full-support weight is \(r-1\), and it is not one of the
+weight-\(r\) directions, so its \(S\)-weight remains \(r-1\).  Let \(f\) be an
+interior point of a rational secant with at least one endpoint in \(A\).  A
+representation of \(f\) by at most \(r-2\) retained columns, combined with
+the secant representation, would give a nontrivial dependence among at most
+\(r\) distinct normal-rational-curve points.  This contradicts the arc
+property.  Hence \(d_S(f)\geq r-1\), and the deep-shell classification gives
+equality.  Retained curve points have weight one, and interiors of secants
+whose two endpoints are retained have weight two.  The escape theorem deals
+with every point outside \(\cP_r\), so the list is exhaustive.
+
+Tangent and conjugate-secant directions contribute
+\(q(q+1)^2/2\).  The number of rational secants incident with \(A\) is
+\[
+ \binom{q+1}{2}-\binom{q+1-s}{2}=\frac{s(2q+1-s)}2,
+\]
+and each has \(q-1\) interior rational points.  This gives \(N_{r-1}\).
+Syndrome vectors parametrize cosets, and every nonzero projective direction
+has \(q-1\) representatives, giving the literal coset counts.
+\end{proof}
+
+For the full affine support \(A=\{\infty\}\), the theorem reads
+\[
+ N_r=1,\qquad N_{r-1}=\frac{q(q^2+4q-1)}2.
+\]
+The first equality is classical in this high-rate range; the second records
+the complete next shell.
+
+\subsection{MDS and NMDS appended columns}
+
+For a nonzero syndrome column \(f\), put
+\[
+ \widehat C_f=\ker[H_S\mid f].
+\]
+
+\begin{corollary}[One-column extensions]
+\label{cor:one-column-extensions}%
+\coverage{absent}%
+For every \(f\ne0\),
+\begin{equation}\label{eq:extension-distance}
+ d(\widehat C_f)=d_S(f)+1.
+\end{equation}
+Under the large-characteristic hypotheses of Theorem~\ref{thm:main}, the
+omitted curve points give exactly the MDS extensions; the tangent,
+conjugate-secant, and \(A\)-incident split-secant points give exactly the
+NMDS extensions; every other appended column has Singleton defect at least
+two.  For \(s=0\), the MDS class is empty.
+\end{corollary}
+
+\begin{proof}
+The old columns of \(H_S\) have no dependent set of at most \(r\) columns.
+A smallest dependence in \([H_S\mid f]\) either uses only old columns and
+has size at least \(r+1\), or contains \(f\); after deleting \(f\), the latter
+is a smallest old-column span of \(f\).  This proves
+\eqref{eq:extension-distance}.
+
+If \(d_S(f)=r-1\), the primal extension has distance \(r\), one below the
+Singleton bound.  Choose \(r-1\) old columns spanning \(f\).  A nonzero
+functional vanishing on their hyperplane gives a dual word of weight
+\(|S|+1-r\), also one below the dual Singleton bound; the GRS distance of the
+old part gives the reverse inequality.  Hence the extension is NMDS.
+Conversely, an NMDS extension has primal distance \(r\), so
+\eqref{eq:extension-distance} forces \(d_S(f)=r-1\).  The theorem now gives
+the stated classes.
+\end{proof}
+
+\subsection{Family-aggregate NMDS enumerators}
+
+Put \(m=r-1\), \(N=|S|=q+1-s\), and define
+\[
+ \mu_S(f)=\#\{T\subseteq S:|T|=m,\quad
+                    f\in\langle\nu_m(T)\rangle\}.
+\]
+For a weight-\((r-1)\) projective syndrome direction \([f]\), every such
+support gives one minimal dependence, unique up to a nonzero scalar.  Thus
+\begin{equation}\label{eq:nmds-minimum-coefficient}
+ A_r(\widehat C_f)=(q-1)\mu_S(f).
+\end{equation}
+
+Let \(\mathrm{Tan}\), \(\mathrm{Conj}\), and \(\mathrm{Split}_A\) denote
+the sets of projective tangent, conjugate-secant, and deleted-point-incident
+split-secant directions in this shell.  Sums use one representative of each
+projective direction.
+
+\begin{theorem}[Family-aggregate minimum supports]
+\label{thm:family-aggregate-nmds}%
+\coverage{absent}%
+Under the large-characteristic hypotheses of Theorem~\ref{thm:main},
+\begin{align}
+ \sum_{f\in\mathrm{Tan}}\mu_S(f)
+   &=(q+1-m)\binom Nm,\label{eq:aggregate-tangent}\\
+ \sum_{f\in\mathrm{Conj}}\mu_S(f)
+   &=\frac{q(q-1)}2\binom Nm,\label{eq:aggregate-conjugate}\\
+ \sum_{f\in\mathrm{Split}_A}\mu_S(f)
+   &=\left[\binom s2+s(N-m)\right]\binom Nm.
+   \label{eq:aggregate-split}
+\end{align}
+These identities determine the complete family-aggregate and family-average
+NMDS weight enumerators.  They do not assert that individual extensions in
+one family have equal weight distributions.
+\end{theorem}
+
+\begin{proof}
+For \(T\in\binom Sm\), let \(H_T\) be the hyperplane spanned by its normal-
+rational-curve points.  On the tangent at \(a\), \(H_T\) meets the tangent at
+the curve point if \(a\in T\), and at one off-curve point otherwise.  Thus
+each \(T\) contributes \(q+1-m\) tangent incidences.  Every conjugate secant
+meets \(H_T\) in exactly one rational point, giving \(q(q-1)/2\) incidences.
+A secant through two omitted points contributes for every \(T\); a secant
+through one omitted and one retained point contributes exactly when the
+retained endpoint is outside \(T\).  These give respectively
+\(\binom s2\) and \(s(N-m)\) incidences per \(T\).  Summing over all
+\(\binom Nm\) sets \(T\) proves the three formulas.
+
+If \(\mathcal A_j^{\mathcal F}=\sum_{[f]\in\mathcal F}
+A_j(\widehat C_f)\), then \eqref{eq:nmds-minimum-coefficient} gives
+\begin{align*}
+ \mathcal A_r^{\mathrm{Tan}}
+   &=(q-1)(q+1-m)\binom Nm,\\
+ \mathcal A_r^{\mathrm{Conj}}
+   &=(q-1)\frac{q(q-1)}2\binom Nm,\\
+ \mathcal A_r^{\mathrm{Split}_A}
+   &=(q-1)\left[\binom s2+s(N-m)\right]\binom Nm.
+\end{align*}
+
+Let \(L=N+1\) and \(K=L-r\).  The standard NMDS recurrence
+\cite[Thm.~10]{MeneghettiPellegriniSala2020} expresses every coefficient as
+\begin{align*}
+ A_{r+i}(\widehat C_f)
+={}&\binom{L}{K-i}
+ \sum_{j=0}^{i-1}(-1)^j\binom{r+i}{j}(q^{i-j}-1)\\
+ &+(-1)^i\binom Ki A_r(\widehat C_f),\qquad 1\leq i\leq K.
+\end{align*}
+Summing this identity over a family and applying
+\eqref{eq:nmds-minimum-coefficient} proves the final assertion.
+\end{proof}

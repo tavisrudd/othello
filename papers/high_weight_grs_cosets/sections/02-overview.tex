@@ -1,0 +1,240 @@
+\section{Fixed-level proof map and related work}\label{sec:overview}
+
+Here is the argument in one pass.  A syndrome \(f\) determines a linear
+system \(W_f\) of binary forms through its two-row Hankel matrix.  The
+Hankel criterion says that a completely split squarefree form in \(W_f\)
+is a witness that \(f\) lies in the span of the required number of distinct
+normal-rational-curve points; we call such a syndrome \emph{shallow}.  Thus
+the geometric problem is to find such a form.  Only after the separate
+covering-radius gate does its absence mean that \(f\) is a deep-hole
+syndrome.
+
+At redundancy five, \(W_f\) is a pencil of cubics.  Its off-diagonal fiber
+square records ordered pairs of distinct roots lying in one pencil member.
+The exact count in Proposition~\ref{prop:r5-count} turns rational
+points on that genus-one curve into split cubics and makes R5 the terminal
+model for every later level.
+
+At higher redundancy, choose a root \(\lambda\) as a marker and contract the
+syndrome.  A split witness in the lower system lifts after multiplication by
+\(\lambda\), and it stays squarefree precisely when it avoids that marker.
+As \(\lambda\) varies, the contracted syndromes trace a polar line.  There
+are then two branches.  We use \emph{transverse} as shorthand for
+\emph{noncontained}: such a line meets the lower bad locus in only finitely
+many marker parameters.  After discarding those parameters and finitely many
+points on the lower splitting cover, a rational-point bound supplies a
+witness.  If the line is contained, the component calculation places the
+original syndrome in the persistent catalecticant locus or a
+characteristic-dependent Lucas carrier.  The first is the rank-two
+catalecticant locus carrying the tangent, conjugate-secant, and shallow
+rational-secant strata.  The second is a linear coordinate space forced by
+adjacent binomial coefficients that vanish in the field characteristic; this
+is why a new obstruction can appear in small characteristic.  The
+classification of the contained branch is unconditional.  The simultaneous-
+marker theorem chooses every retained root at once and proves that every point
+outside it escapes under the field-size bound of Theorem~\ref{thm:main}.
+Figure~\ref{fig:polar-flow} displays this single recursion.
+
+\begin{figure}[H]
+\centering
+\[
+\begin{array}{rcl}
+\text{coding}
+ &:& [f]\longmapsto W_f\supset\text{split squarefree }g
+      \longmapsto [f]\text{ is shallow},\\[4pt]
+\text{recursion}
+ &:& [f]\xrightarrow{\ \text{contract at }\lambda\ }
+      \text{lower splitting problem},\\[2pt]
+&&\begin{array}{rcl}
+\text{contained}&\longmapsto&\text{persistent or Lucas carrier},\\
+\text{transverse}&\longmapsto&
+ \text{lower witness }g,\ \lambda\nmid g
+ \longmapsto \lambda g\in W_f .
+\end{array}
+\end{array}
+\]
+\caption{The conceptual route through the paper.  The first line changes
+from coding language to a splitting problem.  Marked contraction then
+separates the contained branch, classified by the carrier theorem, from the
+transverse branch, where finite avoidance and point counting produce the
+lower witness \(g\).}
+\label{fig:polar-flow}
+\end{figure}
+
+The proof has one recursive spine and six evaluated levels.
+Table~\ref{tab:dependency-map} shows what changes from one level to the next;
+its deletion budget is the number of points excluded from the terminal cover.
+Table~\ref{tab:classification-status} separately records which geometric
+classifications promote to code deep-hole classifications.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Results and mechanisms.  The closing-gate column records the first
+field range in which the stated geometric argument closes; bounded
+certificates handle only the listed lower fields.}
+\label{tab:dependency-map}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.07\textwidth}p{0.24\textwidth}p{0.40\textwidth}
+                p{0.22\textwidth}}
+\toprule
+Level & New obstruction & Main geometric mechanism & Closing gate\\
+\midrule
+R5 & cubic splitting & cubic pencil and off-diagonal \((2,2)\) fiber square;
+exact fiber-square counting identity & branch correction at most \(12\), or \(6\) in
+characteristic two; geometric threshold \(20\) and seven-field certificate\\
+R6 & one retained marker & one contraction to the same R5 curve & deletion
+budget \(19\); geometric threshold \(29\) and finite bridge\\
+R7 & two retained markers & two coherent contractions to the same R5 curve &
+deletion budget \(25\); geometric threshold \(37\) and finite bridge\\
+R8 & three retained markers & the same integral \((2,2)\) terminal cover &
+deletion budget \(30\); \(q\geq43\)\\
+R9 & four markers and a characteristic-seven carrier & terminal cover off
+the carrier; residual-quadratic genus-one slice on it & deletion \(36\),
+\(q\geq53\); in characteristic seven, \(q=343\) is geometric and the
+below-range \(q=49\) row is certified\\
+R10 & five markers and the first higher Lucas carrier & odd terminal cover;
+binary ordered-Hessian genus-one slice; final-pair Artin--Schreier trace test
+on the carrier & odd: deletion \(42\), \(q\geq59\); binary: selector bound
+\(40\), deletion \(23\), \(q\geq64\); stated carrier certificates\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\small
+\caption{Classification status, with $p=\operatorname{char}\F_q$.  A
+split-free equality becomes a code deep-hole equality only after the radius
+gate.}
+\label{tab:classification-status}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{0.07\textwidth}p{0.15\textwidth}
+                p{0.29\textwidth}p{0.29\textwidth}
+                p{0.12\textwidth}}
+\toprule
+Red. & Field range & Split-free geometry & Deep holes and radius
+& Gap\\
+\midrule
+\(5\) & \(q\geq7\) & Complete & Complete; \(\rho=4\) & None\\
+\(6\) & \(q\geq7\) & Complete & Complete; \(\rho=5\) & None\\
+\(7\) & \(q\geq7\) & Complete & Complete for \(q\geq11\) and at $q=8$;
+there \(\rho=7\) and exactly ten directions in two orbits are deep & Radius
+at $q=7,9$\\
+\(8\) & \(q\geq43\) & Persistent-only & Complete; \(\rho=7\) & Below range\\
+\(9\) & \(q\geq53\) & Persistent-only & Complete; \(\rho=8\) & Below range\\
+\(10\) & \(q\geq59\) & Persistent-only & Complete; \(\rho=9\) & Below range\\
+\(r\geq6\) & \(q\geq Q_r^*\) & Contained in persistent plus maximal Lucas;
+persistent-only if \(p>r-1\) & Complete if \(p>r-1\) & Lucas arithmetic in
+small characteristic\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Here \(Q_r^*=6r-16+\lfloor2\sqrt{6r-18}\rfloor\).  The R7 finite record
+is exposed only as a four-field exception delta beyond the uniform
+\(T/T^6\) spine: the full fourteen-field ledger remains in the supplement.
+At the even diagonal $r=q-1$, equivalently the dimension-two code,
+\cite[Thm.~17(1)]{WuDingChen2023} gives \(\rho=r\), and
+\cite{Xu2023} gives the corresponding explicit deep family.  In the syndrome
+coordinates used here its distinguished direction is $e_{r-2}$: a split
+degree-$(r-1)$ locator would require a $(q-2)$-subset of \(\F_q\) of sum
+zero, whose two-element complement would consist of distinct elements with
+zero sum, impossible in characteristic two.  This supplies an explicit deep
+direction at every such redundancy (for example R15 over \(\F_{16}\)); it is
+an imported diagonal family, not a complete higher-redundancy classification.
+At $q=8$/R7 the finite extraction is complete: among the 46 frozen
+nonpersistent semilinear representatives, only the fixed central nucleus has
+distance seven, and among the four persistent representatives only the
+nine-direction diagonal tangent orbit does. Thus there are exactly ten
+projective deep-hole directions.
+
+\noindent\emph{Relation to previous work.}
+The tangent and conjugate-secant families and the coding/normal-rational
+curve dictionary come from
+\cite[Prop.~1]{Kaipa2017} and
+\cite[Lem.~II.4 and Thms.~I.4--I.6]{ZWK2020};
+the covering-radius input in the high-rate range combines the
+Seroussi--Roth extension theorem \cite[Thm.~1]{SeroussiRoth1986} with
+Dür's completeness--covering-radius equivalence
+\cite{Dur1994}, as stated by
+Kaipa \cite[Sec.~IV and Prop.~4(1)]{Kaipa2017}.
+The broader arc/MDS and code-automorphism
+background is surveyed or established in
+\cite{BallLavrauw2019,Dur1987}.  Earlier explicit-family results for
+projective and generalized projective Reed--Solomon codes include
+\cite{ZhangWan2017,XuHongXu2017,Xu2023}; the recent extension framework
+of \cite{WuDingChen2023} further clarifies the deep-hole/MDS-extension
+interface.  These works construct families, treat punctured or
+lower-redundancy regimes, or analyze the extension criterion; they do
+not supply the complete redundancy-five cubic-pencil exhaustion proved
+here.  Classical apolarity, catalecticants,
+and binary-form rank strata are treated in
+\cite{IarrobinoKanev1999,ComasSeiguer2011}; our use of divided powers
+keeps the small-characteristic contraction formulas explicit.
+
+A second body of work meets this paper at redundancy five rather than
+at its coding statement.  A redundancy-five witness system is a pencil
+of binary cubics, that is a line of \(\mathrm{PG}(3,q)\) relative to the
+twisted cubic, and split-freeness asks that the pencil contain no
+completely split squarefree member, equivalently that the line lie in
+no plane meeting the curve in three distinct rational points.  In that
+form the question belongs to the twisted-cubic line-orbit literature
+and has been answered there.  Blokhuis, Pellikaan, and Sz\H onyi
+partition the lines into classes and settle, for \(q\geq23\) and in
+every characteristic, which classes lie in such a plane, by way of the
+double point scheme of the associated degree-three rational function
+\cite[Thm.~8.1, Prop.~8.4 and Rem.~7.12]{BPS2022}; the same table is
+confirmed by the classification of degree-three permutation rational
+functions \cite{FerragutiMicheli2020}.  Exact incidence counts, rather
+than the vanishing test, are supplied for the non-generic classes by
+Davydov, Marcugini, and Pambianco \cite{DMP2021,DMP2022,DMP2023} and by
+G\"unay and Lavrauw \cite{GunayLavrauw2022}, and for the generic class
+by Kaipa, Patanker, and Pradhan \cite{KPP2025} and Kaipa and Pradhan
+\cite{KaipaPradhan2025}, whose Proposition~4.5 and Theorem~5.1 express the count through
+an associated binary quartic and elliptic curve; the generic class in
+characteristic three is \cite{KaipaPradhan2025char3} and in
+characteristic two is Ceria and Pavese \cite{CeriaPavese2023}.
+Section~\ref{sec:r5} states the correspondence class by class in
+Remark~\ref{rem:r5-line-literature}.  Blokhuis--Pellikaan--Sz\H onyi
+formulate the codimension-four generalized Reed--Solomon problem in
+syndrome and coset-leader language and compute its extended coset-leader
+weight enumerator.  What redundancy five adds here is the passage from a
+syndrome to its pencil: the divided-power Hankel dictionary, the
+resulting restriction on which lines occur, the classification of
+split-free \emph{syndromes} with their orbit sizes, stabilizers, and
+Frobenius fusion, and the promotion of split-free to deep through the
+radius gate.
+
+Three companion papers provide comparisons with relative conic completion,
+inverse rigidity, and conic-ideal factorization memory
+\cite{RuddPrescribedHoles2026,RuddRigidity2026,RuddFactorization2026};
+none is an input here.  The MDS--CSS companion \cite{RuddAMELU2026}
+proves general rigidity and conversion theorems for MDS--CSS codes; this
+paper draws no consequence from them, since the one-column extensions
+that would have supplied their input do not exist at these radii
+(Remark~\ref{rem:q8-no-extension}).
+
+From the viewpoint of binary forms, the question is which linear
+systems contain a totally split squarefree member.  Factorization
+statistics in linear families \cite{CMP2017} and
+normal-rational-curve nuclei
+\cite[Lem.~1 and Thm.~1]{GmainerHavlicek2013} are inputs.
+For splitting families, we use Wang's Theorem~3.6
+\cite{Wang2026}: on the \'etale locus, the factorization type of a
+specialized polynomial is the cycle type of its Frobenius conjugacy
+class.  The coding-theory references above
+identify deep syndromes with uncovered points of a
+normal rational curve and settle the lower-redundancy families; they do
+not classify the redundancy-five cubic pencils.  The orbit-theoretic
+and factorization references supply normal forms and distribution
+tools, but not the coherent marked contraction used here.  The nucleus
+results locate characteristic-dependent kernels, while the present
+work computes which of their coherent lifts meet the PRS splitting
+incidence.  Accordingly, the mathematical spine consists of the
+redundancy-five terminal classification, simultaneous-marker escape,
+the reduced recursive carrier theorem, and the arithmetic evaluation of
+that carrier through redundancy ten.  Wang--Wu--Hu's projective-subline
+criterion is imported at its exact endpoint; the adjacent-zero carrier, its
+coherent nesting, and the final-pair split-squarefree classification are the
+paper-owned steps.

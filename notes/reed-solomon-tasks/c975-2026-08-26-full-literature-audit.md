@@ -500,7 +500,7 @@ are the new conjunction.
 | Surface | Audit action |
 |---|---|
 | `notes/reed-solomon-tasks/c975-2026-08-26-full-literature-audit.md` | Created; this is the durable audit record |
-| `papers/beyond4_prs/claim-proof-novelty-ledger.md` | **Not edited.** No C975-owned row exists yet, and creating the manuscript claim row belongs to the separate paper-update item. Existing R5--R10 rows were outside this audit's ownership. |
+| `papers/high_weight_grs_cosets/claim-proof-novelty-ledger.md` | **Not edited.** No C975-owned row exists yet, and creating the manuscript claim row belongs to the separate paper-update item. Existing R5--R10 rows were outside this audit's ownership. |
 | Beyond4 manuscript files | **Not edited**, as required |
 | Paper snapshot / public summary | Not yet applicable; the theorem is not yet integrated |
 

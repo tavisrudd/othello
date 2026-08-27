@@ -1,0 +1,119 @@
+\section{Introduction}
+
+The weight of a coset of a linear code is the minimum Hamming weight of a
+vector in that coset.  We determine the cosets of weight at least \(r-1\) for
+a family of long generalized and extended Reed--Solomon codes of redundancy
+\(r\).  The same classification determines their deep holes and the
+one-column extensions whose Singleton defect is at most one.
+
+Let \(A\subseteq\PP^1(\F_q)\), put \(s=|A|\) and
+\(S=\PP^1(\F_q)\setminus A\), and let \(C_S(v)\) be a redundancy-\(r\)
+generalized Reed--Solomon code on \(S\), with arbitrary nonzero coordinate
+multipliers \(v\).  A parity-check matrix \(H_S\) has columns proportional to
+the points of the degree-\((r-1)\) normal rational curve
+\[
+  \NRC_{r-1}=\{(1,t,\ldots,t^{r-1}):t\in\F_q\}
+              \cup\{(0,\ldots,0,1)\}\subset\PP^{r-1}.
+\]
+For a syndrome \(f\), let \(d_S(f)\) be the least number of columns of \(H_S\)
+whose span contains \(f\); this is the weight of the corresponding coset.
+Column multipliers do not change these projective spans.
+
+\begin{theorem}[High-weight cosets]
+\label{thm:main}%
+\coverage{absent}%
+\uses{thm:simultaneous-marker-escape,prop:recursive-component-selection}%
+\proves{main-fixed-level-classification-package}%
+Let \(r\geq6\), let \(A\subseteq\PP^1(\F_q)\) have size \(s\), and assume
+\(r\leq q+1-s\).  Put
+\[
+ Q^*_{r,s}=6(r+s)-16+
+ \left\lfloor2\sqrt{6(r+s)-18}\right\rfloor .
+\]
+If \(q\geq Q^*_{r,s}\), then
+\[
+ f\notin \cP_r\cup\cM^{\max}_{r,p}
+ \quad\Longrightarrow\quad d_S(f)\leq r-2,
+ \qquad p=\operatorname{char}\F_q,
+ \autoeqtag{eq:main-carrier-containment}
+\]
+where \(\cP_r\) is the rank-at-most-two catalecticant locus and
+\[
+ \cM^{\max}_{r,p}=
+ \PP\!\left\langle e_j:
+ 0\leq j\leq r-1,\quad
+ \binom{r-2}{j}=\binom{r-2}{j-1}=0\pmod p\right\rangle ,
+\]
+where \(\binom nk=0\) for \(k\notin\{0,\ldots,n\}\).
+In characteristic two the same conclusion holds with
+\(6(r+s)-22+\lfloor2\sqrt{6(r+s)-24}\rfloor\) in place of
+\(Q^*_{r,s}\).
+
+Assume in addition that \(p>r-1\).  If \(s=0\), the covering radius is
+\(r-1\), and the cosets of weight \(r-1\) are exactly the tangent and
+conjugate-secant directions.  If \(s>0\), the covering radius is \(r\): the
+weight-\(r\) directions are the omitted curve points, and the weight-\(r-1\)
+directions are exactly the tangent points, conjugate-secant points, and
+interior points of rational secants incident with \(A\).  Their projective
+counts are
+\[
+ N_r=s,\qquad
+ N_{r-1}=\frac{q(q+1)^2}{2}
+       +\frac{(q-1)s(2q+1-s)}2.
+\]
+The corresponding numbers of nonzero cosets are \((q-1)N_r\) and
+\((q-1)N_{r-1}\).
+\end{theorem}
+
+The only computer-algebra input to the uniform theorem is the exact reduced
+terminal-carrier decomposition in Proposition~\ref{prop:reduced-terminal-carrier},
+verified by the registered Gr\"obner-elimination certificate.  Recursive
+component selection, simultaneous finite-field selection, shell transfer, and
+the enumerative double counts are mathematical arguments.  The covering-radius
+and MDS-extension gates are imported from Seroussi--Roth and D\"ur.
+
+The same statement has two immediate coding readings.  Appending \(f\) as a new
+parity-check column gives a code \(\widehat C_f\) with
+\(d(\widehat C_f)=d_S(f)+1\).  Thus the two displayed shells classify all
+MDS and NMDS one-column extensions in this family.  A family-wise double count
+determines the aggregate number of minimum words in the tangent,
+conjugate-secant, and incident-split-secant families; the standard NMDS
+recurrence then gives their complete family-aggregate weight enumerators.
+
+For \(s=0\), \(C_S(v)\) is monomially equivalent to the full extended or
+projective Reed--Solomon code.  For \(s>0\), a projective change of coordinate moves an
+omitted point to infinity, so the code is monomially equivalent to an
+ordinary GRS code.  To our knowledge, no earlier result classifies, for
+arbitrary redundancy, every projective syndrome direction of such a code
+with coset weight at least \(r-1\) after finitely many prescribed points are
+deleted.  In the range of Theorem~\ref{thm:main}, these are exactly the
+omitted curve points in weight \(r\), and the tangent, conjugate-secant, and
+deleted-point-incident split-secant directions in weight \(r-1\).
+
+The qualification is essential.  The covering-radius, syndrome, and
+MDS-extension dictionaries are classical
+\cite{SeroussiRoth1986,Dur1994,Kaipa2017,WuDingChen2023}.  For full projective
+support at redundancy four, the tangent and conjugate-secant shell and its
+count are already known
+\cite{ZWK2020,BPS2022,DMPCosets2021}.  Point-deleted projective evaluation
+sets were studied in \cite{XuHongXu2017}, and recent work gives general
+MDS/NMDS constructions from deep holes \cite{LiLuLingLam2026}.  None of these
+results gives the complete point-deleted top two shells at arbitrary
+redundancy.  The novelty here is that conjunction and its uniform exclusion
+off the explicit carrier; the extension and enumerator statements are its
+consequences.
+
+The proof has two geometric inputs.  Composite contraction sends \(f\) to the
+terminal redundancy-five system while remembering all \(r-5\) contracted
+roots.  The reduced carrier theorem confines every trapped row space to
+\(\cP_r\cup\cM^{\max}_{r,p}\).  Outside that union, one terminal equation has
+degree at most six in each marker; a Vandermonde argument chooses all markers
+at once, and the exact R5 pencil count supplies a split cubic avoiding them
+and \(A\).  No intermediate classification is assumed.
+
+The full-support calculations remain useful where they are sharper than the
+uniform theorem.  Redundancy five supplies the terminal cubic engine and a
+complete classification over every prime power \(q\geq7\); redundancies six
+and seven supply exact small-field and modular refinements.  They are stated
+and proved after the arbitrary-redundancy theorem, with their separate radius
+and certificate boundaries kept explicit.

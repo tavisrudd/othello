@@ -120,10 +120,10 @@ path = "arcs_complete_outside_conic_proof_audit.md"
 reason = "private proof-development audit, superseded by the manuscript verification appendix"
 
 [[repository]]
-name = "beyond4-prs"
+name = "high-weight-grs-cosets"
 include_release_pdfs = true
-source = "papers/beyond4_prs"
-paper_ids = ["beyond4_prs", "beyond4_prs_submission"]
+source = "papers/high_weight_grs_cosets"
+paper_ids = ["high_weight_grs_cosets", "high_weight_grs_cosets_submission"]
 disposition = "active"
 
 [[repository.exclude_path]]

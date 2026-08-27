@@ -1,0 +1,127 @@
+{
+  "entries": [
+    {
+      "bytes": 9,
+      "path": "software/projective-reed-solomon/.gitignore",
+      "sha256": "306fd52e74fca6746e12acc750f232de15e71da917756a1270d74c91f5eb7368"
+    },
+    {
+      "bytes": 1081,
+      "path": "software/projective-reed-solomon/CHANGELOG.md",
+      "sha256": "c756ffa226af28e719fe7598f156c4eea6b87e038add5cffa1d27dbb7af09b85"
+    },
+    {
+      "bytes": 349,
+      "path": "software/projective-reed-solomon/CITATION.cff",
+      "sha256": "ef240c2e072db26dec6928560d2138241148afd37522446c97e57342c19d70c3"
+    },
+    {
+      "bytes": 14682,
+      "path": "software/projective-reed-solomon/Cargo.lock",
+      "sha256": "b9176f8180d4368212d7a2a54698956951367f9716459dc5302292610e2f16ed"
+    },
+    {
+      "bytes": 881,
+      "path": "software/projective-reed-solomon/Cargo.toml",
+      "sha256": "73fc67f5f8f27695e631a837f9a30eb9be22bfe1165cd076e53153492f68041d"
+    },
+    {
+      "bytes": 1067,
+      "path": "software/projective-reed-solomon/LICENSE",
+      "sha256": "4e0707ba71e80441ab251d8a520456723b8747e3929fc9df17d831e3ee282b15"
+    },
+    {
+      "bytes": 8307,
+      "path": "software/projective-reed-solomon/README.md",
+      "sha256": "874b9cf3d2d075ee5ad44688de2cd3ecfa1a261fd80786f461d4a3a7b43845fb"
+    },
+    {
+      "bytes": 72442,
+      "path": "software/projective-reed-solomon/data/frozen-orbits-v1.json",
+      "sha256": "aebaf01b3fefef4dea738bc476a04193b4f24f7953ad533374319e4d4b616e85"
+    },
+    {
+      "bytes": 7140,
+      "path": "software/projective-reed-solomon/data/theorem-domain-v1.json",
+      "sha256": "1619d15d50ae70d9a59bceb67a7c53d4d795b59e2880f570ad870ef364b9aba3"
+    },
+    {
+      "bytes": 815,
+      "path": "software/projective-reed-solomon/docs/benchmarks.md",
+      "sha256": "e37845e5402f3aa9af64c3a30a4951e6bf377368f52976cd8763200fcbb804e6"
+    },
+    {
+      "bytes": 1972,
+      "path": "software/projective-reed-solomon/docs/certificate-schemas.md",
+      "sha256": "44bd76e0dd79cf3d6610eb6493e387e7a6f641b9006d29426cde115bd5ff0427"
+    },
+    {
+      "bytes": 4908,
+      "path": "software/projective-reed-solomon/docs/cli.md",
+      "sha256": "2c4817b2c4077db3c6e563c87d618e493797dc63ef76b142d631d61660a33a77"
+    },
+    {
+      "bytes": 1601,
+      "path": "software/projective-reed-solomon/docs/complexity.md",
+      "sha256": "1238c29c22bbda070c1d70b416972b38e865ee1ef2584a18f7ec00fe9afa8ad5"
+    },
+    {
+      "bytes": 951,
+      "path": "software/projective-reed-solomon/docs/terminal-hyperplane-solver.md",
+      "sha256": "f9aa898b7c605dcd8f55834d3713529908095e1ab37877fc4ab43eb2b8f429f5"
+    },
+    {
+      "bytes": 1531,
+      "path": "software/projective-reed-solomon/docs/testing.md",
+      "sha256": "683402f10a8a5612317c26056a50596281b80ca154228012b58fa2453ddd3bc5"
+    },
+    {
+      "bytes": 1795,
+      "path": "software/projective-reed-solomon/docs/theorem-boundary.md",
+      "sha256": "fb64337270970748b2e3abe444cc4f8846e1b764505196e9a268284770a80eac"
+    },
+    {
+      "bytes": 268,
+      "path": "software/projective-reed-solomon/examples/shallow-r5-f7.json",
+      "sha256": "6b806b838c60ebc4a1b8fc236aa833c7f1c9dccd3073f21044cbd8be684aad64"
+    },
+    {
+      "bytes": 268,
+      "path": "software/projective-reed-solomon/examples/tangent-r5-f7.json",
+      "sha256": "b9dc17c41bc3b86fdda1ae35679f4d0e704fc05ca1cceb7a05e219fb53e10410"
+    },
+    {
+      "bytes": 86,
+      "path": "software/projective-reed-solomon/rust-toolchain.toml",
+      "sha256": "e1633ee4dccddc1fd314c184e83109e96a8366e1fbc8f8e51e505f8aa879a929"
+    },
+    {
+      "bytes": 16898,
+      "path": "software/projective-reed-solomon/src/bin/projective_reed_solomon_benchmark.rs",
+      "sha256": "f26801fd0af895aa60f8eaba1c0c89148666a1e94855e3d17a9fd3709fb93363"
+    },
+    {
+      "bytes": 154096,
+      "path": "software/projective-reed-solomon/src/lib.rs",
+      "sha256": "da093ae6992c0ea7fc8ad4cf922545a9b1621fae6e5ab144456ff13209f3e300"
+    },
+    {
+      "bytes": 8197,
+      "path": "software/projective-reed-solomon/src/main.rs",
+      "sha256": "a9aa33a7e02785aa69998efd44499d63a9b991c08c8bb24319ec606f3bfa0d3e"
+    },
+    {
+      "bytes": 7836,
+      "path": "software/projective-reed-solomon/tests/cli.rs",
+      "sha256": "a30ed12c9f85e5176114465f613d2d7649e8fff99f154eb421153d029c08146a"
+    },
+    {
+      "bytes": 5788,
+      "path": "software/projective-reed-solomon/tests/properties.rs",
+      "sha256": "412788269195977d64479c08615c2a8f05698b0a457acaaf0f4fc4881f8bf7c1"
+    }
+  ],
+  "hash": "sha256",
+  "path_base": "paper",
+  "schema": "beyond-four-prs-software-manifest-v1"
+}

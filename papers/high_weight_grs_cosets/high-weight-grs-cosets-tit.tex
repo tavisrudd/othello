@@ -1,0 +1,91 @@
+\documentclass[10pt,journal,onecolumn]{IEEEtran}
+\newif\ifTITSubmission
+\TITSubmissiontrue
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\input{formal-annotations}
+\def\UrlBreaks{\do\-\do\/\do\.}
+\setlength{\emergencystretch}{2em}
+\hbadness=10000
+\hfuzz=3pt
+
+\newtheoremstyle{upright}
+  {6pt}{6pt}{\normalfont}{}{\bfseries}{.}{.5em}{}
+\theoremstyle{upright}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\PRS}{\operatorname{PRS}}
+\newcommand{\GRS}{\operatorname{GRS}}
+\newcommand{\PGL}{\operatorname{PGL}}
+\newcommand{\PGammaL}{\mathrm{P}\Gamma\mathrm{L}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Hess}{\operatorname{Hess}}
+\newcommand{\autoeqtag}[1]{\refstepcounter{equation}\tag{\theequation}\label{#1}}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cM}{\mathcal M}
+\newcommand{\cN}{\mathcal N}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\cU}{\mathcal U}
+\newcommand{\cW}{\mathcal W}
+\newcommand{\NRC}{\mathcal R}
+
+\title{High-Weight Cosets of Generalized and Extended Reed--Solomon Codes}
+\author{Tavis Rudd}
+\hypersetup{
+  pdftitle={High-Weight Cosets of Generalized and Extended Reed--Solomon Codes},
+  pdfauthor={Tavis Rudd}
+}
+
+\begin{document}
+\raggedbottom
+\maketitle
+
+\begin{abstract}
+\input{frontmatter/abstract}
+\end{abstract}
+
+\begin{IEEEkeywords}
+\input{frontmatter/index-terms}
+\end{IEEEkeywords}
+
+\input{sections/01-introduction}
+\input{sections/02-results-map}
+\input{sections/03-dictionary}
+\input{sections/07-recursive-carriers}
+\input{sections/05-simultaneous-contraction}
+\input{sections/06-high-weight-cosets}
+\input{sections/04-redundancy-five}
+\input{sections/08-fixed-level-roadmap}
+\input{sections/11-provenance-boundary}
+\input{frontmatter/acknowledgment}
+\appendices
+\input{sections/05-polar-tit-interface}
+\input{sections/06-redundancies-six-seven}
+\input{sections/10-verification}
+\clearpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}

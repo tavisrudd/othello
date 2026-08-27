@@ -1,0 +1,416 @@
+\section{The recursive carrier theorem}\label{sec:recursive-carriers}
+
+Composite contraction reduces the uniform problem to the geometry of linear
+spaces contained in the terminal bad locus.  We determine that locus after
+reduction in each geometric fiber and show that all modular descendants merge
+into one linear carrier.
+
+For \(r\geq6\), put \(n=r-1\), and let the ground field have
+characteristic \(p>0\).  In divided-power coordinates define
+\begin{equation}\label{eq:maximal-lucas-carrier}
+ \cM^{\max}_{r,p}=
+ \PP\!\left\langle e_j:
+ 0\leq j\leq r-1,\quad
+ \binom{r-2}{j}=\binom{r-2}{j-1}=0\pmod p\right\rangle ,
+\end{equation}
+where \(\binom nk=0\) when \(k\notin\{0,\ldots,n\}\).
+An empty span denotes the empty projective scheme.  Let
+\(\cP_r\) be the rank-at-most-two consecutive catalecticant scheme in
+\(\PP(\Gamma^{r-1}E)\).
+
+\begin{definition}[Reduced terminal bad scheme]\label{def:terminal-bad-scheme}%
+\coverage{absent}%
+For a cubic pencil with Pl\"ucker coordinates \(z_0,\ldots,z_5\), put
+\[
+ \Phi_z(t,s)=z_0+z_1(t+s)+z_2(t^2+ts+s^2)+z_3ts
+              +z_4ts(t+s)+z_5t^2s^2
+\]
+and let \(K\subset\mathbb Z[z_0,\ldots,z_5]\) be the ideal
+\begin{align*}
+(&3z_4^2-9z_2z_5-z_3z_5, z_3z_4-3z_1z_5,
+ z_3^2-9z_0z_5,\\
+ &z_2z_3-z_1z_4+z_0z_5, z_1z_3-3z_0z_4,
+ 3z_1^2-9z_0z_2-z_0z_3).
+\end{align*}
+The polynomial \(\Phi_z\) is the off-diagonal ordered-pair equation of the
+pencil: the diagonal factor has already been divided out.  The ideal \(K\)
+is the saturated coefficient-elimination ideal of its symmetric residual
+factorization; the anti-invariant collision component is removed before
+elimination.  This identification is the computer-assisted statement checked
+by Certificate SC.
+
+For
+\[
+ z(c)=(c_2c_4-c_3^2,-c_1c_4+c_2c_3,c_1c_3-c_2^2,
+ c_0c_4-c_1c_3,-c_0c_3+c_1c_2,c_0c_2-c_1^2)
+\]
+and
+\[
+ D=\det\begin{pmatrix}
+ c_0&c_1&c_2\\c_1&c_2&c_3\\c_2&c_3&c_4
+ \end{pmatrix},
+\]
+define in characteristic \(p\)
+\[
+ I_{\mathrm{res},p}
+ =\sqrt{\bigl((z^*K)\otimes\F_p:D^\infty\bigr)},
+ \qquad
+ \mathcal B_{5,p}^{\mathrm{red}}
+ =V(D)\cup V(I_{\mathrm{res},p}).
+\]
+This is the \emph{reduced terminal bad scheme}.  Thus the scheme being
+decomposed is fixed before its component calculation; it is not inferred
+from a finite-field census.
+\end{definition}
+
+The next two propositions and one theorem prove the unconditional geometric
+layer: they find every reduced terminal component, merge all modular descendants, and
+select the components that persist up the contraction tower.  On a first
+pass, read their statements and the four-row component table in
+Proposition~\ref{prop:recursive-component-selection}, then resume at
+Theorem~\ref{thm:recursive-carrier}.  The intervening elimination and
+characteristic-wise substitutions prove exhaustiveness and add no hypothesis
+to the finite-depth theorem.
+
+\begin{proposition}[Computer-assisted terminal decomposition]\label{prop:reduced-terminal-carrier}%
+\coverage{absent}%
+\evidence{certificate-stable-components}%
+The reduced terminal bad scheme of
+Definition~\ref{def:terminal-bad-scheme} is the irredundant union of the prime
+cubic \(V(D)\) and one residual prime.  Away from characteristics two and
+three the residual prime is the projected Veronese surface
+\[
+ [u:v:w]\longmapsto [6u^2:3uv:v^2+2uw:3vw:6w^2],
+ \autoeqtag{eq:terminal-residual-param}
+\]
+the locus of syndrome quartics that are scalar multiples of squares of binary
+quadratics.  The coordinates in \eqref{eq:terminal-residual-param} are the
+bottom \(c_i\); writing \(z_i=\binom4ic_i\) for the plain coefficients of the
+associated quartic \(f_c=\sum_{i=0}^4z_iX^{4-i}Y^i\), the parametrization gives
+\(f_c=6(uX^2+vXY+wY^2)^2\), so the same surface is the
+plain-coefficient Veronese in rescaled divided-power coordinates.
+In characteristic two it is the plane \(V(c_0,c_4)\).  In
+characteristic three it is the cone with \(c_2\) free and prime ideal
+\[
+ (c_1c_3-c_0c_4,\ c_1^3-c_0^2c_3,\
+   c_0c_3^2-c_1^2c_4,\ c_3^3-c_1c_4^2).
+ \autoeqtag{eq:terminal-char3-prime}
+\]
+There is no flat reduced integral model having exactly these residual
+fibers.
+
+For a base-point-free separable terminal pencil, lying outside this scheme is
+equivalent to geometric \(S_3\) monodromy of its cubic map.  Thus
+Proposition~\ref{prop:r5-count} and Lemma~\ref{lem:r5-branch} apply to every
+terminal point outside \(\mathcal B_{5,p}^{\mathrm{red}}\).
+\end{proposition}
+
+\begin{proof}
+The elimination has a concrete geometric source.  On
+\(\operatorname{Gr}(2,\Gamma^3E)\), use the Plücker coordinates and
+ordered-pair equation of Definition~\ref{def:terminal-bad-scheme}.
+For the Hankel matrix
+\[
+ H_c=\begin{pmatrix}c_0&c_1&c_2&c_3\\c_1&c_2&c_3&c_4\end{pmatrix},
+\]
+the signed maximal minors give the map explicitly:
+\[
+ z(c)=(c_2c_4-c_3^2,\,-c_1c_4+c_2c_3,\,c_1c_3-c_2^2,
+ c_0c_4-c_1c_3,\,-c_0c_3+c_1c_2,\,c_0c_2-c_1^2).
+\]
+After the diagonal and collision factors already charged as deletion
+divisors are saturated away, the terminal bad locus is the pullback, along
+the Hankel Plücker map \(c\mapsto z(c)\), of the factorization locus of
+\(\Phi_z\).  The involution \((t,s)\leftrightarrow(s,t)\) leaves three
+possibilities.  Symmetric factors give the residual component below;
+exchanged factors give \(D=0\); and an anti-invariant factor is proportional
+to \(s-t\).  In the last case the only nonzero Plücker coordinates are
+\(z_2=-\mu\) and \(z_3=3\mu\), and hence
+\[
+ z_0z_5-z_1z_4+z_2z_3=(-\mu)(3\mu)=-3\mu^2.
+\]
+Thus it
+survives only in characteristic three and is then the diagonal collision
+already removed.  Thus the two displayed primes are the only possible
+noncollision components before small-characteristic specialization.
+
+The exact saturated bridge can also be read without the elimination file.
+Let \(J=z^*K\) in the notation of
+Definition~\ref{def:terminal-bad-scheme}.
+If \(V\) denotes the seven-generator residual ideal printed below, exact
+reduction gives \(J\subseteq V\), \(3D\,V\subseteq J\), and
+\((J:D^\infty)=V\) over \(\mathbb Q\).  The factor \(3\) is necessary over
+\(\mathbb Z\), which is precisely why the characteristic-three fiber is
+checked separately.
+
+Outside characteristics two and three, elimination of the ordered residual
+roots gives the prime kernel of \eqref{eq:terminal-residual-param}; one
+convenient generating set is
+\begin{align*}
+&2c_3^3-3c_2c_3c_4+c_1c_4^2,\\
+&6c_2c_3^2-9c_2^2c_4+2c_1c_3c_4+c_0c_4^2,\\
+&2c_1c_3^2-3c_1c_2c_4+c_0c_3c_4,\quad
+  c_0c_3^2-c_1^2c_4,
+\end{align*}
+together with their images under \(c_i\leftrightarrow c_{4-i}\).  Direct
+reduction gives the plane in characteristic two and
+\eqref{eq:terminal-char3-prime} in characteristic
+three.  The ordered-Hessian calculation sends its complementary ruling to
+rank one.
+
+Here exhaustiveness is an exact elimination statement, not a visual
+factorization heuristic.  Certificate SC starts from the terminal
+ordered-root incidence ideal, saturates the collision factors, eliminates
+the root variables, and verifies the two generic primes and their
+characteristic-\(2,3\) fibers by Gröbner reduction.  Its public Python and
+Singular inputs are in
+\texttt{supplement/evidence/stable-components/}; every generator and
+remainder used for this conclusion is hash-pinned there.
+
+Each displayed residual ideal is prime:
+\eqref{eq:terminal-residual-param} is a projective parametrization with prime
+kernel, the characteristic-two ideal is linear, and
+\eqref{eq:terminal-char3-prime} is the
+toric prime of the monomial quartic after projection from \(e_2\).  None is
+contained in \(V(D)\): use \((3,0,1,0,3)\), which is the image of
+\((u,v,w)=(1,0,1)\) and has \(D=8\), together with \(e_2\) and
+\((1,0,1,0,0)\), respectively.  Thus the intersection with \((D)\) is an
+irredundant reduced decomposition and has no embedded prime.  The residual
+degree is four generically and one in characteristic two.  Constancy of the
+Hilbert polynomial in a flat projective family rules out the final assertion.
+The exact eliminations and the characteristic-\(2,3,5\) reductions are
+replayed by the stable-component certificates described in
+Section~\ref{sec:verification}.
+
+Finally, a base-point-free separable cubic map has transitive geometric
+monodromy \(C_3\) or \(S_3\).  Its off-diagonal ordered-pair curve is
+reducible exactly in the cyclic case, and the noncollision reducibility is
+precisely the saturated residual factorization encoded by \(K\).  A pencil
+outside the displayed scheme therefore has geometric monodromy \(S_3\),
+which proves the last clause.
+\end{proof}
+
+\begin{definition}[Coherent polar flag]
+A coherent polar flag from redundancy \(r\) to redundancy five is a sequence
+\[
+ f=f_r,\qquad f_{j-1}=\iota_{\lambda_j}f_j
+ \quad (j=r,\ldots,6),
+\]
+with distinct geometric markers \(\lambda_j\), such that every contraction is
+nonzero and every earlier marker remains a forbidden root for the lower
+witness system.  A coherent lift reverses this sequence using
+Equation~\eqref{eq:lift}.
+\end{definition}
+
+\begin{proposition}[Maximal Lucas union]\label{prop:maximal-lucas-union}%
+\coverage{absent}%
+\imports{wang-wu-hu}%
+Every normal-rational-curve nucleus encountered in a coherent polar flag,
+and every later lift of it, is contained in
+\(\cM^{\max}_{r,p}\).  Their reduced union equals that single linear
+scheme.  A polar line not contained in the union meets it in degree at most
+one.
+\end{proposition}
+
+\begin{proof}
+For the order-\(a\) nucleus of the degree-\(d\) curve, its coordinate support
+is contained in
+\[
+ \widehat S_{d,p}=\{i:\binom di=0\pmod p\},
+ \autoeqtag{eq:lucas-zero-support}
+\]
+because the nucleus conditions include the row \(d\).  If a support is
+\(S\subset\{0,\ldots,d\}\), one coherent lift has support
+\[
+ L_d(S)=\{j:(j=d+1\text{ or }j\in S),\
+                 (j=0\text{ or }j-1\in S)\}.
+ \autoeqtag{eq:lucas-support-lift}
+\]
+This operation preserves inclusions.  Pascal's identity gives
+\(L_d(\widehat S_{d,p})\subset\widehat S_{d+1,p}\).
+Induction therefore contains every earlier descendant in the last one.
+Conversely, the top-order nucleus at \(d=r-2\) occurs in the union, and its
+one-step lift is exactly \eqref{eq:maximal-lucas-carrier}.  The union is
+therefore one linear scheme.  Pulling its linear ideal back to a projective
+line gives nonzero linear forms unless the line is contained, proving the
+degree bound.
+\end{proof}
+
+The endpoint arithmetic in Proposition~\ref{prop:maximal-lucas-union} has a
+known projective-subline form.  Wang--Wu--Hu
+\cite[Prop.~11]{WangWuHu2026} prove that the Lucas block with
+\(k=p^a+1\) is nonempty over \(\F_{p^e}\) exactly when \(a\mid e\), and
+then its blocks are projective sublines.  We use this criterion at that
+exact boundary.  The adjacent-zero carrier
+\eqref{eq:maximal-lucas-carrier}, its nesting through coherent lifts, and
+its split-squarefree Hankel incidence are separate questions addressed here.
+
+\begin{definition}[Reduced recursively contained carrier]
+Take the reduced union of the irreducible upper components whose generic
+coherent contraction row space is contained in a component of
+\(\mathcal B_{5,p}^{\mathrm{red}}\), together with every coherent lift of an
+intermediate normal-rational-curve nucleus.  This is the \emph{reduced
+recursively contained carrier}.  Fixed-gcd strata and isolated marker
+collisions are excluded: they are handled by lower packages and deletion
+divisors, respectively.
+\end{definition}
+
+\begin{theorem}[Recursive carrier]
+\label{prop:recursive-component-selection}%
+\coverage{fragment}%
+The reduced recursively contained carrier generated by the terminal carrier
+and all intermediate nuclei is exactly
+\begin{equation}\label{eq:recursive-carrier}
+                       \cP_r\cup\cM^{\max}_{r,p}.
+\end{equation}
+Fixed linear gcds retain their quadratic-graph package, and marker collisions
+remain deletion divisors; neither is included in
+\eqref{eq:recursive-carrier}.
+\end{theorem}
+
+\begin{proof}
+Retain \(m\) markers.  If \(h\) is the coefficient row of their product,
+the bottom syndrome is
+\[
+ h\operatorname{Cat}_{m,4}(f),\qquad
+ \operatorname{Cat}_{m,4}(f)=
+ \begin{pmatrix}
+ a_0&a_1&a_2&a_3&a_4\\
+ a_1&a_2&a_3&a_4&a_5\\
+ \vdots&\vdots&\vdots&\vdots&\vdots\\
+ a_m&a_{m+1}&a_{m+2}&a_{m+3}&a_{m+4}
+ \end{pmatrix}.
+ \autoeqtag{eq:marker-catalecticant}
+\]
+Over an algebraic closure, products of distinct linear forms are dense in
+the projective space of binary forms.  Deleting the projective kernel of the
+linear map does not change its image closure.  Hence the attainable bottom
+syndromes close to the projectivized row space of
+\eqref{eq:marker-catalecticant}.  This row space is
+irreducible.  If it lies in the finite reduced union of
+Proposition~\ref{prop:reduced-terminal-carrier}, its generic point lies in
+one component, so the whole row space lies in that component.  This is a
+geometric-marker statement; no density of the finite set of rational marker
+tuples is used.  The density and finite-component-selection implication are
+also kernel checked by the declarations listed in the formalization ledger.
+
+The remaining component check is summarized by
+\[
+\begin{array}{c|c|c}
+\text{component}&\text{possible linear part}&\text{upper lift}\\ \hline
+V(D)&\text{arbitrary}&\cP_r\\
+\text{Veronese }(p\ne2,3)&\text{point}&\text{rank one}\\
+\text{wild cone }(p=3)&\text{ruling through }e_2&\text{rank one}\\
+V(c_0,c_4)\ (p=2)&\text{binary-plane subspace}&
+   \cM^{\max}_{r,2}
+\end{array}
+\]
+Here is the calculation behind the four rows.  Substitute
+\(c_i=xd_i+yd_{i+1}\).  For \(V(D)\), the coefficients in \(x,y\) are
+exactly the \(3\times3\) minors of
+\[
+ \begin{pmatrix}d_0&d_1&d_2&d_3\\d_1&d_2&d_3&d_4\\
+ d_2&d_3&d_4&d_5\end{pmatrix},
+\]
+the consecutive Fano identity.  For the generic residual prime their unique
+minimal prime is the ideal of the \(2\times2\) minors of
+\(\bigl(\begin{smallmatrix}d_0&\cdots&d_4\\d_1&\cdots&d_5\end{smallmatrix}\bigr)\),
+so the upper syndrome has rank one; geometrically this is also the fact that
+the projected Veronese contains no line.  The same coefficient ideal in
+characteristic three is again this rank-one ideal, verifying directly that
+every positive-dimensional ruling of the wild cone through \(e_2\) lifts
+into \(\cP_r\).  In characteristic two it has exactly the two minimal primes
+\[
+ (d_0,d_1,d_4,d_5)
+ \quad\text{and}\quad
+ (d_3d_4+d_2d_5,d_1d_4+d_0d_5,d_3^2+d_1d_5,
+ d_2d_3+d_0d_5,d_2^2+d_0d_4,d_1d_2+d_0d_3).
+\]
+The second lies in the persistent \(3\times3\)-minor ideal; the first is the
+binary-plane descendant.  Successive overlaps cut it to the binary line,
+then the central point, then the empty projective space, and
+\eqref{eq:lucas-support-lift} identifies precisely these spaces as Lucas
+lifts.  On a nucleus, \eqref{eq:lucas-support-lift} and
+Proposition~\ref{prop:maximal-lucas-union} then place every surviving lift in
+the maximal modular carrier.
+
+The coherent-Fano part of Certificate SC verifies these consecutive-row
+substitutions, including the characteristic-three ruling and the
+characteristic-two successive supports, against the same incidence ideal.
+This exhausts every component and proves \eqref{eq:recursive-carrier} by
+induction on the flag length.
+\end{proof}
+
+\begin{theorem}[Uniform recursive-carrier consequence]
+\label{thm:recursive-carrier}%
+\coverage{absent}%
+\uses{thm:simultaneous-marker-escape}%
+\evidence{certificate-stable-components}%
+\proves{recursive-carrier-classification}%
+Let \(r\geq6\), and let \(q\) be a prime power with
+\begin{equation}\label{eq:uniform-threshold}
+ q\geq Q_r^*:=6r-16+\left\lfloor2\sqrt{6r-18}\right\rfloor.
+\end{equation}
+Every split-free redundancy-\(r\) syndrome lies in
+\(\cP_r\cup\cM^{\max}_{r,p}\).  If \(p>r-1\), the modular term is empty,
+and the projective deep-hole syndromes are exactly the persistent tangent
+and conjugate-secant families.  Their cardinality is
+\[
+                         \frac{q(q+1)^2}{2},
+\]
+and their orbit law is \(T/T^{r-1}\) modulo inversion and coefficient
+Frobenius, with tangent cocycle \(z\mapsto z+(r-1)u\).  In characteristic
+two the carrier containment holds under
+\(q\geq6r-22+\lfloor2\sqrt{6r-24}\rfloor\).
+\end{theorem}
+
+\begin{proof}
+Proposition~\ref{prop:recursive-component-selection} identifies the complete
+reduced carrier.  Theorem~\ref{thm:simultaneous-marker-escape}, with (s=0),
+gives a split squarefree kernel member at every point outside it.  Its strict
+genus-one inequality is exactly \eqref{eq:uniform-threshold}; no intermediate
+lower package is assumed.
+
+If \(p>r-1\), no interior entry of Pascal row \(r-2\) vanishes, so
+\(\cM^{\max}_{r,p}=\varnothing\).  Rank one and rational secants are shallow;
+the remaining rank-two points are precisely the tangent and conjugate-secant
+families and are split-free.  The threshold lies in the
+Seroussi--Roth--Dür radius range, so split-free and deep coincide.  The count
+and orbit law are the persistent calculation already used at R6 and R7.
+\end{proof}
+
+The carrier theorem is fiberwise and reduced.  It makes no assertion about nilpotent
+structure in a chosen integral incidence model, and in small characteristic
+it classifies the only possible carrier of additional split-free points, not
+the arithmetic of every point on that carrier.  The simultaneous-marker
+theorem proves escape from its complement directly.
+
+\begin{proposition}[Upper-level radius gate]\label{prop:upper-radius}%
+\coverage{fragment}%
+\imports{duer,seroussi-roth}%
+For the ranges used below,
+\[
+\begin{aligned}
+ \rho(\PRS(q-7))&=7 &&(q\geq43),\\
+ \rho(\PRS(q-8))&=8 &&(q\geq53),\\
+ \rho(\PRS(q-9))&=9 &&(q\geq59).
+\end{aligned}
+\]
+More generally, the radius is \(r-1\) under the full-support,
+large-characteristic hypotheses of Theorem~\ref{thm:main}.
+\end{proposition}
+
+\begin{proof}
+The dual GRS code has dimension \(r\).  In each displayed range, and also
+under \eqref{eq:uniform-threshold}, one has
+\[
+                         r\leq\left\lfloor q/2\right\rfloor+2.
+\]
+Seroussi--Roth \cite[Thm.~1]{SeroussiRoth1986} therefore gives
+nonextendability of the corresponding normal rational curve; its stated
+even-field dimension-three exception is irrelevant because \(r\geq8\).
+Dür's completeness--covering-radius equivalence \cite{Dur1994}, in the
+form recorded by Kaipa \cite[Sec.~IV and Prop.~4(1)]{Kaipa2017}, gives
+the asserted radius.  Thus the promotion from split-free syndromes to deep
+holes in R8--R10 uses one explicit imported gate.
+\end{proof}

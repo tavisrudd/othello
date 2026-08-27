@@ -81,7 +81,7 @@ benchmarks, and independent reviews.  Checkpoint:
 
 C970 is active as the Beyond Four PRS paper-facing packaging successor to C969.
 Projective Reed--Solomon Toolkit now lives under
-`papers/beyond4_prs/software/projective-reed-solomon/`; its unambiguous crate,
+`papers/high_weight_grs_cosets/software/projective-reed-solomon/`; its unambiguous crate,
 library, executable, Clap interface, registries, lock, Rust pin, license,
 citation, and documentation are self-contained and expose no task identifiers.
 The paper and supplement now state and hash the exact software/theorem boundary,
@@ -106,7 +106,7 @@ expanded test build in 129.91 seconds. The remaining gates are the separately
 approved GF(16)/R11 exhaustive semilinear census and immutable Version 2
 publication metadata. Publication, pushing, DOI minting, and theorem-domain
 broadening remain out of scope. Card:
-`notes/reed-solomon-tasks/c970-beyond4-prs-software-packaging.md`.
+`notes/reed-solomon-tasks/c970-high-weight-grs-cosets-software-packaging.md`.
 
 C974 is complete.  The toolkit now contracts arbitrary degree-`r-5` marker
 supports directly to a complete R5 cubic pencil, returns the resulting
@@ -261,10 +261,10 @@ and two Singular eliminations pass.  Report:
 `notes/2026-08-07-c885-full-review.md`.
 
 C545 is complete.  Version 1 was published on 2026-07-29 at
-`github.com/tavisrudd/beyond4-prs`, with immutable release commit `0d3cea2`,
+`github.com/tavisrudd/high-weight-grs-cosets`, with immutable release commit `0d3cea2`,
 Zenodo version DOI `10.5281/zenodo.21682216`, and concept DOI
 `10.5281/zenodo.21682069`.  The source archive and released PDF hashes are
-recorded in `papers/beyond4_prs/supplement/RELEASE-MANIFEST.md`; the C620,
+recorded in `papers/high_weight_grs_cosets/supplement/RELEASE-MANIFEST.md`; the C620,
 C660, and C608 publication gates are cleared.
 
 At the C656 checkpoint, its cold audit rejected the arbitrary-level
@@ -360,7 +360,7 @@ is only the `AGL_1(F8)` linear section: quotient directions `t^2,t^4` enlarge it
 `AGL_3(F2)` additive cover, while the generic framed incidence is a nonconstant Artin--Schreier
 double cover.  Every field of dimension at least three over `F2` contains a three-space subspace
 polynomial, so the full `e_7` orbit is shallow over every admissible field.  C538 created the
-integrated `papers/beyond4_prs/` manuscript, compiled PDF, theorem map, claim/proof/novelty ledger,
+integrated `papers/high_weight_grs_cosets/` manuscript, compiled PDF, theorem map, claim/proof/novelty ledger,
 and exact verification map. Its independent review corrected C509's small-field boundary:
 `q=7,8,9` are certified split-free syndrome tables, not code deep-hole tables without a separate
 covering-radius premise; Seroussi--Roth supplies that premise from `q>=11`. A full-draft review then

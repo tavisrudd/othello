@@ -1,0 +1,993 @@
+{
+  "bibliography": [
+    {
+      "key": "AubryPerret1995",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "BPS2022",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "CeriaPavese2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "DMP2021",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "DMP2022",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "DMP2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "DMPCosets2021",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "Dur1994",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "FerragutiMicheli2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "GunayLavrauw2022",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "Kaipa2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "KaipaPradhan2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "KaipaPradhan2025char3",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "LiLuLingLam2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "MeneghettiPellegriniSala2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "Wang2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "WangWuHu2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "WuDingChen2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "XuHongXu2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "ZWK2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "AubryPerret1995",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "BPS2022",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "CeriaPavese2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "DMP2021",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "DMP2022",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "DMP2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "DMPCosets2021",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "Dur1994",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "FerragutiMicheli2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "GunayLavrauw2022",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "Kaipa2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "KaipaPradhan2025",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "KaipaPradhan2025char3",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "LiLuLingLam2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "MeneghettiPellegriniSala2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "Wang2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "WangWuHu2026",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "WuDingChen2023",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "XuHongXu2017",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "ZWK2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "AubryPerret1995",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Coverings of singular curves over finite fields"
+    },
+    {
+      "key": "BPS2022",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "The Extended Coset Leader Weight Enumerator of a Twisted Cubic Code"
+    },
+    {
+      "key": "BallLavrauw2019",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Arcs in Finite Projective Spaces"
+    },
+    {
+      "key": "BenSassonEtAl2016",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Subspace Polynomials and Cyclic Subspace Codes"
+    },
+    {
+      "key": "CMP2017",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "The distribution of factorization patterns on linear families of polynomials over a finite field"
+    },
+    {
+      "key": "CeriaPavese2023",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On the Geometry of a {$(q+1)$}-arc of {$PG(3,q)$}, $q$ Even"
+    },
+    {
+      "key": "ComasSeiguer2011",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On the Rank of a Binary Form"
+    },
+    {
+      "key": "DMP2021",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Twisted Cubic and Point-Line Incidence Matrix in {$PG(3,q)$}"
+    },
+    {
+      "key": "DMP2022",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Twisted Cubic and Plane-Line Incidence Matrix in {$PG(3,q)$}"
+    },
+    {
+      "key": "DMP2023",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Orbits of Lines for a Twisted Cubic in {$PG(3,q)$}"
+    },
+    {
+      "key": "DMPCosets2021",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On Cosets Weight Distribution of Doubly-Extended {Reed--Solomon} Codes of Codimension 4"
+    },
+    {
+      "key": "Dur1987",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "The Automorphism Groups of {Reed--Solomon} Codes"
+    },
+    {
+      "key": "Dur1994",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On the Covering Radius of {Reed--Solomon} Codes"
+    },
+    {
+      "key": "FerragutiMicheli2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Full Classification of Permutation Rational Functions and Complete Rational Functions of Degree Three over Finite Fields"
+    },
+    {
+      "key": "GmainerHavlicek2013",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Nuclei of Normal Rational Curves"
+    },
+    {
+      "key": "GunayLavrauw2022",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On Pencils of Cubics on the Projective Line over Finite Fields of Characteristic $>3$"
+    },
+    {
+      "key": "IarrobinoKanev1999",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Power Sums, Gorenstein Algebras, and Determinantal Loci"
+    },
+    {
+      "key": "KPP2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On the {$PGL_2(q)$}-orbits of lines of {$PG(3,q)$} and binary quartic forms"
+    },
+    {
+      "key": "Kaipa2017",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Deep Holes and {MDS} Extensions of {Reed--Solomon} Codes"
+    },
+    {
+      "key": "KaipaPradhan2025",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Incidence of Lines, Points and Planes in {$PG(3,q)$} with Respect to the Twisted Cubic"
+    },
+    {
+      "key": "KaipaPradhan2025char3",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On the {$PGL_2(q)$}-orbits of lines of {$PG(3,q)$} and binary quartic forms in characteristic three"
+    },
+    {
+      "key": "LiLuLingLam2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "A Framework for Constructing Non-{GRS} {MDS--NMDS} Codes from Deep Holes and Its Application"
+    },
+    {
+      "key": "LidlNiederreiter1996",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Finite Fields"
+    },
+    {
+      "key": "MeneghettiPellegriniSala2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "A Formula on the Weight Distribution of Linear Codes with Applications to {AMDS} Codes"
+    },
+    {
+      "key": "RuddAMELU2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States"
+    },
+    {
+      "key": "RuddFactorization2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Quadratic trade rigidity and cubic orientation in conic matching quotients"
+    },
+    {
+      "key": "RuddPrescribedHoles2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity"
+    },
+    {
+      "key": "RuddRigidity2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Reconstructing the {Clebsch} code and its golden orientation from its deep-hole syndrome locus"
+    },
+    {
+      "key": "SeroussiRoth1986",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On {MDS} Extensions of Generalized {Reed--Solomon} Codes"
+    },
+    {
+      "key": "Wang2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Splitting of Polynomial Families via Galois Theory"
+    },
+    {
+      "key": "WangWuHu2026",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "{$3$-Designs from $\\mathrm{GL}_2(\\mathbb F_q)$-Invariant Subspaces of $\\mathbb F_q[X,Y]_k$}"
+    },
+    {
+      "key": "WuDingChen2023",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "When Does the Extended Code of an {MDS} Code Remain {MDS}?"
+    },
+    {
+      "key": "Xu2023",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On Deep Holes of Projective {Reed--Solomon} Codes over Finite Fields with Even Characteristic"
+    },
+    {
+      "key": "XuHongXu2017",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On Deep Holes of Generalized Projective {Reed--Solomon} Codes"
+    },
+    {
+      "key": "ZWK2020",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Deep Holes of Projective {Reed--Solomon} Codes"
+    },
+    {
+      "key": "ZhangWan2017",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "Explicit Deep Holes of {Reed--Solomon} Codes"
+    }
+  ],
+  "dir": "papers/high_weight_grs_cosets",
+  "environment_counts": {
+    "corollary": 7,
+    "definition": 5,
+    "lemma": 13,
+    "proposition": 24,
+    "remark": 2,
+    "theorem": 11
+  },
+  "labels": [
+    {
+      "environment": "",
+      "label": "#1"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:one-column-extensions"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:r5-binary-shallow"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:r5-equidistribution"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:r5-forced"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:r7-contained"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:split-witness-abundance"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:splitfree"
+    },
+    {
+      "environment": "definition",
+      "label": "def:contained"
+    },
+    {
+      "environment": "definition",
+      "label": "def:lower-package"
+    },
+    {
+      "environment": "definition",
+      "label": "def:terminal-bad-scheme"
+    },
+    {
+      "environment": "align",
+      "label": "eq:aggregate-conjugate"
+    },
+    {
+      "environment": "align",
+      "label": "eq:aggregate-split"
+    },
+    {
+      "environment": "align",
+      "label": "eq:aggregate-tangent"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:composite-contraction"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:extension-distance"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:grs-coset-weight"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:lift"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:maximal-lucas-carrier"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:nmds-minimum-coefficient"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r5-count"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:r5-orbit-criterion"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:recursive-carrier"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:uniform-threshold"
+    },
+    {
+      "environment": "figure",
+      "label": "fig:headline-proof-route"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:cyclic"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:exact-linear-gcd-transport"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:hankel"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:identically-colliding"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:linear-modular-pullback"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:marker-collision"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:old-marker-fixed-factor"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:r5-branch"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:r6-gcd1"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:s3"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:terminal-selector"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:uniform-collision"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:vandermonde-grid"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:contained-rank-two"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:maximal-lucas-union"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-bridge"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-count"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-fibre-is-elliptic"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-gcd1"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-gcd2"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-incidence"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r5-radius"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-contained"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-degrees"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-lower-carrier"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-modular"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-nucleus"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-one-step"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-persistent"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r6-secant"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r7-central"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r7-collision"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r7-gcd1"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:r7-pointed"
+    },
+    {
+      "environment": "theorem",
+      "label": "prop:recursive-component-selection"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:reduced-terminal-carrier"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:upper-radius"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:q8-no-extension"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:r5-line-literature"
+    },
+    {
+      "environment": "",
+      "label": "sec:boundary"
+    },
+    {
+      "environment": "",
+      "label": "sec:dictionary"
+    },
+    {
+      "environment": "",
+      "label": "sec:fixed-level-roadmap"
+    },
+    {
+      "environment": "",
+      "label": "sec:high-weight-cosets"
+    },
+    {
+      "environment": "",
+      "label": "sec:polar"
+    },
+    {
+      "environment": "",
+      "label": "sec:provenance"
+    },
+    {
+      "environment": "",
+      "label": "sec:r5"
+    },
+    {
+      "environment": "",
+      "label": "sec:r67"
+    },
+    {
+      "environment": "",
+      "label": "sec:recursive-carriers"
+    },
+    {
+      "environment": "",
+      "label": "sec:results-map"
+    },
+    {
+      "environment": "",
+      "label": "sec:simultaneous-contraction"
+    },
+    {
+      "environment": "",
+      "label": "sec:verification"
+    },
+    {
+      "environment": "longtable",
+      "label": "tab:evidence"
+    },
+    {
+      "environment": "table",
+      "label": "tab:field-ranges"
+    },
+    {
+      "environment": "table",
+      "label": "tab:headline-shells"
+    },
+    {
+      "environment": "table",
+      "label": "tab:notation"
+    },
+    {
+      "environment": "table",
+      "label": "tab:r5-sanity"
+    },
+    {
+      "environment": "longtable",
+      "label": "tab:r5sporadic"
+    },
+    {
+      "environment": "longtable",
+      "label": "tab:r6-exceptional"
+    },
+    {
+      "environment": "proposition",
+      "label": "thm:composite-contraction"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:family-aggregate-nmds"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:induction"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:main"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:polar-construction"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:r5"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:r6"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:r7"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:recursive-carrier"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:simultaneous-marker-escape"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:spine"
+    }
+  ],
+  "main": "papers/high_weight_grs_cosets/high-weight-grs-cosets.tex",
+  "manifest_labels": null,
+  "paper": "high_weight_grs_cosets",
+  "pdfs": [
+    {
+      "bytes": 467233,
+      "pages": 30,
+      "path": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.pdf",
+      "sha256": "44aedca26547f7f77cfbadc9c607d8018fda3e8327f1cb77767594651eb7ea22"
+    },
+    {
+      "bytes": 304900,
+      "pages": 42,
+      "path": "papers/high_weight_grs_cosets/high-weight-grs-cosets.pdf",
+      "sha256": "c6409cf1a1fb4bb31619690f59ad389e1b9c1f8902a64514bb8f75382fbde3f9"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/high_weight_grs_cosets/high-weight-grs-cosets.tex",
+      "sha256": "7ff20cd9c6a349668c9faf0085f652b0d2d1af544a9a7d6868779c4a41b80955"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/formal-annotations.tex",
+      "sha256": "bb1c9ce344aa36aa8931c29e65c5761d56aecbfd0817920cc63a0d51566a913b"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/frontmatter/abstract.tex",
+      "sha256": "c67e4233a3fa9e36e0ce4c74caf5a1257b393c574ce59b54d2087bfe7c9d788b"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/frontmatter/index-terms.tex",
+      "sha256": "a42d1b09b08a60561df0cc1e85ce35d4b1c0f0589edbd9a9c32949976e8efd69"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/01-introduction.tex",
+      "sha256": "c720539690fb8a2af618e107bcf77adaf50e24ee5f1c0e825d88329bba88507f"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/02-results-map.tex",
+      "sha256": "e18283357e6744b73d87f46947cea79236089ee4bb9149c95bdc50e8ed2a750a"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/03-dictionary.tex",
+      "sha256": "385b63a40ab8596838bcc2bd8d29cc37b73e2b65e9a1b639c72e9d74d590590d"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/07-recursive-carriers.tex",
+      "sha256": "22d89a7e5a5b2ef0355e3d386cb3bf951396daf75a79c796620d767308b46595"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/05-simultaneous-contraction.tex",
+      "sha256": "9c28192a5e2a1827d4f2d634d9ddf1b903ccd8f5391a9d234371bfce2f23d46b"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/06-high-weight-cosets.tex",
+      "sha256": "f94145566ab309b8079d773c4179120da040fc1e3f40519247df94fbff6c5215"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/04-redundancy-five.tex",
+      "sha256": "a869dbde8e510d3b4bc5eb3dbd9d99d5ed84f721178d39bbe5d8cce0f49eb081"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/08-fixed-level-roadmap.tex",
+      "sha256": "67639e57cf2697c4e952663a4202b9e46c4281bee739592353a0c7c0501793e8"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/11-provenance-boundary.tex",
+      "sha256": "601d32d0f20130ec3ce3bc3c72c4787389f28e82ed92f90dd53c8f6632dd85fb"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/frontmatter/acknowledgment.tex",
+      "sha256": "8d5d2f5f72beba701b85c6b83e78a6b92ac7138c94ac9ba26f11fd7bd2ae3560"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/05-polar-tit-interface.tex",
+      "sha256": "845cf97fe56071e3d9c427695fc3a0e22d5d372aac2b7adfa279d450435522e0"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/06-redundancies-six-seven.tex",
+      "sha256": "bfbf03ff7180a6597407a865d33c773a990bd88cbfb1f00f04859cb4868e623a"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/frontmatter/r6-exceptional-table.tex",
+      "sha256": "984070b502841313b5e28d35f0b1d4bfab6dd0de49dcdf435e4d81dac38ec4ab"
+    },
+    {
+      "path": "papers/high_weight_grs_cosets/sections/10-verification.tex",
+      "sha256": "79e2c4f4838d09344ba9ab55d71327a126e070e70dff8070205e8d05cc7cd51a"
+    }
+  ],
+  "title": "High-weight cosets of generalized and extended Reed--Solomon codes",
+  "title_normalized": "high-weight cosets of generalized and extended reed-solomon codes",
+  "untracked_bibliography": [
+    "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl",
+    "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+  ]
+}

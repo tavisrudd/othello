@@ -1,0 +1,44 @@
+{
+  "title": "High-weight cosets of generalized and extended Reed–Solomon codes",
+  "description": "For every redundancy r≥6, this preprint classifies all cosets of weight at least r−1 for sufficiently long generalized and extended Reed–Solomon codes supported on a projective line with any prescribed finite set of points deleted. The result gives exact deep-hole shells, all MDS and NMDS one-column extensions, family-wise minimum-support counts, and aggregate weight enumerators. Its proof combines coherent polar contraction, an exact computer-assisted terminal decomposition, a recursive carrier theorem, simultaneous finite-field selection, and a genus-one terminal count. Detailed redundancy-five through redundancy-seven results provide sharper fixed-level refinements. The electronic supplement exposes the exact computational and imported-theorem boundaries.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "generalized Reed–Solomon codes",
+    "extended Reed–Solomon codes",
+    "projective Reed–Solomon codes",
+    "Reed–Solomon codes",
+    "deep holes",
+    "covering radius",
+    "MDS codes",
+    "MDS extensions",
+    "normal rational curves",
+    "finite projective geometry",
+    "finite fields",
+    "binary forms",
+    "apolarity",
+    "catalecticants",
+    "Hankel matrices",
+    "Lucas theorem",
+    "algebraic coding theory",
+    "formalized mathematics",
+    "Lean 4"
+  ],
+  "notes": "Correspondence: tavis@damnsimple.com",
+  "related_identifiers": [
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.21650878",
+      "relation": "isSupplementedBy",
+      "resource_type": "software"
+    }
+  ]
+}

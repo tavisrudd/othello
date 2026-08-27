@@ -59,8 +59,7 @@ The results are grouped as follows.
 9. *Integral Secant Distributions and Improved Bounds for Complete
    \((k,n)\)-Arcs* — exact integer degree envelopes and modular-lift
    improvements for complete higher arcs.
-10. *Deep holes of projective Reed–Solomon codes beyond redundancy four:
-   recursive carriers and exact classifications through redundancy ten*.
+10. *High-weight cosets of generalized and extended Reed–Solomon codes*.
 11. *Exact Transfer of Bounded Linear Recovery and Relative Weight
    Hierarchies* — local memory, exact rank-stratified transfer, and
    compositional recovery costs.
@@ -1981,14 +1980,16 @@ centered incidence descent produces a signed codeword of weight \(4q-6\), with
 no tangents and opposite signs on every support two-secant.  This is a sharp
 structural reduction, not an asymptotic construction or a completed theorem.
 
-## *Deep holes of projective Reed–Solomon codes beyond redundancy four: recursive carriers and exact classifications through redundancy ten*
+## *High-weight cosets of generalized and extended Reed–Solomon codes*
 
 A projective Reed–Solomon code is the evaluation code of polynomials of bounded
-degree on the rational normal curve. Its *covering radius* and the geometry of
-its deepest syndromes are classical open questions; the results below classify
-them exactly at redundancies three, five, six, and seven, and give a uniform
-high-field containment theorem at arbitrary redundancy. They do **not** prove
-the general Reed–Solomon deep-hole conjecture.
+degree on the rational normal curve.  For every redundancy (r\ge6), the main
+theorem classifies all cosets of weight at least (r-1) for sufficiently long
+generalized and extended Reed–Solomon codes supported on a projective line with
+any prescribed finite set of points deleted.  It yields exact deep-hole shells,
+all MDS and NMDS one-column extensions, family-wise minimum-support counts, and
+aggregate weight enumerators.  Detailed redundancy-five through
+redundancy-seven results sharpen the uniform theorem.
 
 ### Redundancy three — all fields
 
@@ -3675,10 +3676,10 @@ are vacuous because a natural number can encode the whole residual.
   programme proves \(t_7(2,9)=39\) structurally and reduces the first
   \(q=27\) target to two Frobenius branches and a signed support codeword; no
   asymptotic construction is yet claimed.
-- ***Deep holes of projective Reed–Solomon codes beyond redundancy four:***
-  exact at redundancies three, five, six, seven, eight, nine, and ten at the
-  stated field ranges, with a uniform high-field containment theorem at
-  arbitrary redundancy; not a proof of the general deep-hole conjecture.
+- ***High-weight cosets of generalized and extended Reed–Solomon codes:***
+  exact weight-(r) and weight-((r-1)) shells at arbitrary redundancy in the
+  stated field range, with sharp refinements through redundancy seven; not a
+  proof of the general deep-hole conjecture.
 - ***Exact Transfer of Bounded Linear Recovery and Relative Weight
   Hierarchies:*** the associated shortening--puncturing pair's relative
   generalized Hamming weights are the exact rank-stratified helper costs; an

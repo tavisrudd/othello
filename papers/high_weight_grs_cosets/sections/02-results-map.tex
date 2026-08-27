@@ -1,0 +1,87 @@
+\section{Results at a glance}
+\label{sec:results-map}
+
+Theorem~\ref{thm:main} classifies every coset of weight at least \(r-1\).
+Its conclusion is independent of the placement of the deleted set \(A\) and
+of all nonzero GRS column multipliers.
+
+\begin{table}[H]
+\centering
+\small
+\caption{The high-weight cosets when \(p>r-1\) and the field-size hypothesis
+of Theorem~\ref{thm:main} holds.  Counts are projective syndrome directions;
+literal nonzero coset counts are larger by a factor of \(q-1\).}
+\label{tab:headline-shells}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{p{0.12\textwidth}p{0.12\textwidth}p{0.25\textwidth}
+                p{0.38\textwidth}}
+\toprule
+Support & Radius & Weight \(r\) & Weight \(r-1\)\\
+\midrule
+\(s=0\) & \(r-1\) & none & tangents and conjugate secants;
+count \(q(q+1)^2/2\)\\
+\(s>0\) & \(r\) & omitted curve points; count \(s\) & tangents,
+conjugate secants, and interiors of split secants incident with \(A\);
+count \(q(q+1)^2/2+(q-1)s(2q+1-s)/2\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Appending a syndrome direction as a parity-check column raises its coset
+weight by one.  The preceding table therefore gives all one-column
+extensions with Singleton defect at most one:
+\[
+\begin{array}{c|c|c}
+d_S(f)&d(\ker[H_S\mid f])&\text{extension class}\\ \hline
+r&r+1&\text{MDS}\\
+r-1&r&\text{NMDS}\\
+\leq r-2&\leq r-1&\text{defect at least two}.
+\end{array}
+\]
+Theorem~\ref{thm:family-aggregate-nmds} then counts the minimum supports in
+each NMDS family and determines its complete aggregate weight enumerator.
+
+In arbitrary characteristic the exact Lucas-carrier arithmetic can be more
+complicated, but the general conclusion remains short:
+\[
+ d_S(f)\geq r-1
+ \quad\Longrightarrow\quad
+ f\in\cP_r\cup\cM^{\max}_{r,p}.
+\]
+The carrier is explicit from adjacent zero entries in Pascal row \(r-2\).
+The fixed R5--R7 classifications decide its arithmetic in the ranges stated
+in Section~\ref{sec:fixed-level-roadmap}; they sharpen the uniform theorem in
+small fields but are not inputs to it.
+
+\subsection{Why the classification closes}
+
+The proof has three steps.  First, the Hankel dictionary converts a
+weight-\((r-2)\) representation into a split squarefree binary form.  Second,
+the recursive carrier theorem identifies exactly when every contraction to
+the terminal R5 system is trapped.  Third, outside that carrier, one
+degree-six selector chooses all contraction roots simultaneously; the exact
+R5 pencil count supplies the remaining cubic while avoiding those roots and
+the deleted set \(A\).
+
+\begin{figure}[H]
+\centering
+\[
+\begin{array}{c}
+\text{syndrome }f\\[1mm]
+\downarrow\quad\text{Hankel dictionary}\\[1mm]
+W_f\text{ contains a split squarefree locator}\\[1mm]
+\uparrow\quad\text{composite contraction and one R5 pencil count}\\[1mm]
+f\notin\cP_r\cup\cM^{\max}_{r,p}.
+\end{array}
+\]
+\caption{The proof route.  The carrier theorem identifies the only possible
+obstruction; simultaneous contraction constructs a locator everywhere else.}
+\label{fig:headline-proof-route}
+\end{figure}
+
+A first-pass reader can now continue with the coding dictionary in
+Section~\ref{sec:dictionary}, the terminal R5 count in Section~\ref{sec:r5},
+the recursive carrier in Section~\ref{sec:recursive-carriers}, and the
+simultaneous escape theorem in Section~\ref{sec:simultaneous-contraction}.
+The detailed fixed-level polar packages, exceptional orbit tables, modular
+calculations, and verification records are collected in the appendices.

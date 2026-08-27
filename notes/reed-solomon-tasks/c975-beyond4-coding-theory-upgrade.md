@@ -1,14 +1,26 @@
-# C975 — Beyond Four coding-theory upgrade
+# C975 — High-weight GRS cosets paper upgrade
 
 **Lane:** `reed-solomon` · **Status:** active
 
-**Current checkpoint:** theorem-driven spine and framing proposed in
-`c975-2026-08-26-paper-spine-and-framing.md`; manuscript edits await review
-of that architecture.
+**Current checkpoint:** the theorem-driven rewrite is integrated and has passed
+the final cold read at **minor revision, 8.5/10**, with no conceptual blocker.  The paper
+now leads with the arbitrary-redundancy point-deleted GRS/EGRS shell theorem,
+simultaneous contraction, exact MDS/NMDS column classification, and
+family-aggregate enumerators.  The first cold referee returned major revision
+for proof-integration defects; the explicit terminal-selector lemma, complete
+stagewise appendix proofs, imported-range arithmetic, trust boundary, and
+fixed-level subordination are repaired.  R8--R10 now remain companion-source
+results rather than submission claims.  The current builds are 42 canonical
+pages and 30/50 TIT review pages, with 55 reconciled formal annotations and
+green manuscript, supplement, and software gates.  The exact-threshold,
+falling-factorial, Lucas-index, reference, and artifact-route repairs from the
+final read are complete.  The authority is being renamed to
+`papers/high_weight_grs_cosets`, with public basename and repository
+`high-weight-grs-cosets`.
 
 ## Objective
 
-Make *Projective Reed--Solomon deep holes beyond redundancy four* as strong
+Make *High-weight cosets of generalized and extended Reed--Solomon codes* as strong
 and broadly relevant to modern coding theory as the proved results permit.
 The paper should lead with its arbitrary-redundancy structural theorem and
 the resulting distance-partition/code-extension statements, not with the

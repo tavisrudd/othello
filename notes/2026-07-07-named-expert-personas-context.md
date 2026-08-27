@@ -36,7 +36,7 @@ preload one for another paper, even when subjects or named experts overlap.
 | `papers/arcs_complete_outside_conic/` | `../papers/expert-profiles/03-arcs-complete-outside-conic.md` |
 | `papers/clebsch-rigidity/` | `../papers/expert-profiles/04-clebsch-rigidity.md` |
 | `papers/complete-repair-ports/` | `../papers/expert-profiles/05-complete-repair-ports.md` |
-| `papers/beyond4_prs/` | `../papers/expert-profiles/08-beyond-four-prs.md` |
+| `papers/high_weight_grs_cosets/` | `../papers/expert-profiles/08-beyond-four-prs.md` |
 | `papers/clebsch-factorization/` | `../papers/expert-profiles/09-clebsch-factorization.md` |
 | `papers/clebsch-passages/` | `../papers/expert-profiles/10-clebsch-passages.md` |
 | `papers/ame_lu/` | `../papers/expert-profiles/11-ame-lu.md` |

@@ -1,0 +1,49 @@
+\section{Sharp fixed-level and modular refinements}
+\label{sec:fixed-level-roadmap}
+
+Proposition~\ref{prop:recursive-component-selection} identifies every
+component on which contraction can remain trapped, and
+Theorem~\ref{thm:simultaneous-marker-escape} handles its complement uniformly.
+The retained fixed levels give exact classifications below the uniform field
+threshold and resolve the first modular carriers.  Their proofs use stagewise polar
+packages, marker and ramification divisors, and explicit adjacent-zero Hankel
+kernels.  These calculations refine the general theorem; they are not its
+induction steps.
+
+The exact exceptional orbits and separate covering-radius gates at
+redundancies six and seven are stated in Theorems~\ref{thm:r6} and
+\ref{thm:r7}.  In each case the geometric
+argument first classifies split-free syndrome directions and only then invokes
+Proposition~\ref{prop:upper-radius}.
+
+\begin{theorem}[Redundancy-six deep holes and redundancy-seven split-free syndromes]
+\label{thm:spine}%
+\coverage{conditional_deduction}%
+\lean{PRSRedundancySixSeven.redundancySixAllFieldSynthesis,redundancySevenAllFieldSynthesis,PRSPolarInduction.fifthPower_sigmaInversionOrbitCount}%
+The following statements hold.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item For every prime power $q\geq7$, the projective deep-hole
+      directions of $\PRS(q-5)$ are exactly the persistent tangent and
+      conjugate-secant families, the five finite-field exception rows of
+      Theorem~\ref{thm:r6}, and, when $q=2^m$ with odd $m\geq5$, one
+      characteristic-two nucleus orbit.
+\item For every prime power $q\geq7$, Theorem~\ref{thm:r7} gives the
+      complete split-free redundancy-seven classification.  For $q\geq13$
+      only the persistent families and, when $q=2^m$ with odd $m$, one
+      central nucleus point remain.  The result is a deep-hole classification
+      for $q\geq11$.  At $q=8$ the known radius is seven; exact extraction
+      leaves the nine-direction diagonal tangent orbit and the fixed central
+      nucleus, so the classification is complete there as well.  The radii at
+      $q=7,9$ remain separate.
+\end{enumerate}
+\end{theorem}
+
+At redundancies six and seven, the first two pointed packages expose the
+stagewise mechanism in its smallest dimensions.  The persistent rank-two
+carrier, exact-linear-gcd boundary, modular nucleus, and self-collision
+divisor account for every polar line that can fail to escape.  The remaining
+line meets a proper bad scheme of bounded degree, and the terminal cubic cover
+supplies a split squarefree witness.  Appendix~\ref{sec:r67} proves the
+exhaustive contained-component classification and closes the bounded fields
+by finite certificates.  Higher fixed-level calculations are not needed for
+the arbitrary-redundancy theorem and are left to the companion record.
