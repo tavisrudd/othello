@@ -281,6 +281,41 @@ replaces the failed rigid slope pencil by a moving-coefficient cubic trace and
 a linear-denominator genus-zero slice, without any certificate or residual
 selector hypothesis.
 
+The complete forced-root locus of the slope pencil is also explicit.  The
+three rows in (6), on quartic coordinates `(p0,...,p4)`, are
+
+\[
+\begin{pmatrix}
+z_3&z_4&z_5&z_6&z_7\\
+0&z_3&z_4&z_5&z_6\\
+0&0&z_3&z_4&z_5
+\end{pmatrix}.                                             \tag{20}
+\]
+
+Its kernel is contained in `p0=0` exactly when the first coordinate
+functional lies in the row span.  If `z3=0`, this is impossible.  If
+`z3!=0`, scale `z3=1` and solve the row-combination equations from left to
+right.  The last two equations give precisely
+
+\[
+ z_6=z_4^3,qquad
+ z_7=z_4^4+z_5^2+z_4^2z_5.                                \tag{21}
+\]
+
+Thus every rigid slope obstruction lies on the explicit two-parameter
+surface
+
+\[
+ (z_3,z_4,z_5,z_6,z_7)
+ =(1,u,v,u^3,u^4+v^2+u^2v).                               \tag{22}
+\]
+
+The dense syndrome is the point `(u,v)=(1,1)` and is closed above.  Off
+(22), the slope kernel contains quartics with nonzero constant term; the
+remaining issue there is complete splitting and selector nonvanishing, not a
+forced forbidden root.  On (22), the correct continuation is to generalize
+the affine-two-space cubic-trace chart rather than retry the rigid pencil.
+
 The nearest structured realization writes the five fixed roots as an affine
 two-plane plus one point.  If
 
@@ -292,7 +327,7 @@ is the subspace polynomial of a two-dimensional `F2`-space and `C=L_U(b)` is
 the nonzero value defining a coset disjoint from zero, then
 
 \[
- h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{20}
+ h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{23}
 \]
 
 is automatically split with five distinct nonzero roots when the extra root
@@ -300,23 +335,22 @@ avoids that coset.  Its coefficients are
 
 \[
  (g_0,g_1,g_2,g_3,g_4,g_5)
- =(aC,aB+C,aA+B,A,a,1).                                   \tag{21}
+ =(aC,aB+C,aA+B,A,a,1).                                   \tag{24}
 \]
 
-Equations (20)--(21) give a four-parameter split chart on which the slope-pencil
+Equations (23)--(24) give a four-parameter split chart on which the slope-pencil
 conditions can be imposed explicitly.  The next proof should either:
 
 1. use the slope-pencil gate (6) on the strata where its constant term is not
    forced to vanish; or
-2. copy the successful dense calculation (14)--(19) on the remaining
-   forced-root strata.
+2. copy the successful dense calculation (14)--(19) across the surface (22).
 
 The degenerate chart `B3D=0` must be treated separately.  It includes the
 endpoint syndrome `e7`, for which `B3=0`, `D=1`, and
 
 \[
  \operatorname {Tr}T
- =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{22}
+ =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{25}
 \]
 
 when `g4!=0`.  This is already an explicit lower-dimensional trace problem,
@@ -346,6 +380,7 @@ arguments do not answer that arithmetic question.
 | Why is GF(64) numerically plausible? | 32 coefficient values are rootless before selector exclusions | preserve this balance on a split chart |
 | How is the balanced `B0`-line realized by split quintics? | conditionally solved by the slope pencil (6), but not universally | use it only off its forced-root strata |
 | What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
+| How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |
 

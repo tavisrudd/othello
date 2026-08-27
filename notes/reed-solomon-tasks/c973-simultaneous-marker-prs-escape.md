@@ -128,6 +128,9 @@ trace/collision exclusions, and the resulting genus-zero curve has 65 points
 against at most 45 deletions.  Thus the dense forced-root syndrome is
 pointedly closed without a certificate.  The remaining GF(64) work is to
 cover the other slope-degenerate strata by the balanced or cubic-trace charts.
+The rigid slope pencil's entire forced-zero locus is now the explicit surface
+`(1,u,v,u^3,u^4+v^2+u^2v)`.  The dense point `(u,v)=(1,1)` is closed above;
+the next trace calculation is two-parameter only.
 
 ## Objective
 

@@ -138,7 +138,9 @@ a cubic Artin--Schreier trace with at least 24 good parameters against 23
 exclusions.  The explicit `beta=1` specialization makes the moving-root cover
 genus zero and leaves 65 points against 45 deletions, so the dense forced-root
 syndrome is now pointedly closed without a certificate.  Remaining GF(64)
-work concerns the other slope-degenerate strata.
+work concerns the other slope-degenerate strata.  Their complete forced-zero
+locus is the explicit surface
+`(1,u,v,u^3,u^4+v^2+u^2v)`, reducing that continuation to two parameters.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with
