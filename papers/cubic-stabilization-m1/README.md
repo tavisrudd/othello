@@ -11,13 +11,14 @@
 **Title:** *Irrationality of cubic threefolds after one stabilization.*
 
 For every smooth complex cubic threefold `X`, the paper proves that
-`X x P^1` is irrational.  The proof uses an occurrence-indexed ledger of
-generic even quantum-D-module blocks and a rank-two formal-exponent marker.
-The marker vanishes on every center that can occur in weak factorization in
-dimension four, doubles under product with `P^1`, detects the cubic block, and
-vanishes on projective space.  The same construction gives an irrationality
-criterion for smooth projective threefolds and the one-stabilization theorem
-for smooth prime Fano threefolds of genus eight.
+`X x P^1` is irrational.  The proof decomposes the generic even quantum
+`D`-module into blocks and records their isomorphism classes in a free
+commutative monoid.  An additive rank-two formal-exponent marker vanishes on
+every center that can occur in weak factorization in dimension four, doubles
+under product with `P^1`, detects the cubic block, and vanishes on projective
+space.  The same construction gives an irrationality criterion for smooth
+projective threefolds and the one-stabilization theorem for smooth prime Fano
+threefolds of genus eight.
 
 ## Companion papers
 
