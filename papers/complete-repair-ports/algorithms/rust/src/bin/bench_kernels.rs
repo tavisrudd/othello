@@ -2,10 +2,11 @@ use std::hint::black_box;
 use std::time::Instant;
 
 use ergo_comp::{
-    azure_lrc_12_2_2_counted, ceph_xor_repair_supports, compile_binary_rank_one,
-    compile_binary_target_subspace, confinement_by_generators_field, gpu_checkpoint_mds_recovery,
-    gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair, schedule_repair_dag,
-    ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
+    azure_lrc_12_2_2_counted, ceph_xor_repair_supports, ceph_xor_repair_supports_compressed,
+    compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
+    gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair,
+    schedule_repair_dag, ternary_orbit_syndrome_meet_in_middle,
+    ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
     ternary_orbit_syndrome_search_correlated, CephXorLayer, CompositionTower, FiniteField, Gf4,
     GpuCheckpointCapacities, Matrix, OrbitOption, Prime, QcLdpcCode, RepairTask, TowerLevel,
@@ -182,20 +183,23 @@ fn repair_dag_fixture(width: usize, layers: usize) -> Vec<RepairTask> {
     tasks
 }
 
-fn ceph_diamond_fixture(levels: usize) -> (usize, Vec<CephXorLayer>, Vec<usize>) {
-    assert!(levels > 0 && 3 * levels < 128);
+fn ceph_fanout_fixture(levels: usize, branches: usize) -> (usize, Vec<CephXorLayer>, Vec<usize>) {
+    assert!(levels > 0 && branches > 1 && (branches + 1) * levels < 256);
     let common = levels;
-    let mut layers = Vec::with_capacity(2 * levels);
+    let mut layers = Vec::with_capacity(branches * levels);
     for level in 0..levels {
         let previous = if level == 0 { common } else { level - 1 };
-        for branch in 0..2 {
+        for branch in 0..branches {
             layers.push(CephXorLayer {
                 parity: level as u8,
-                data: Box::new([previous as u8, (levels + 1 + 2 * level + branch) as u8]),
+                data: Box::new([
+                    previous as u8,
+                    (levels + 1 + branches * level + branch) as u8,
+                ]),
             });
         }
     }
-    (3 * levels + 1, layers, (0..levels).collect())
+    ((branches + 1) * levels + 1, layers, (0..levels).collect())
 }
 
 fn transfer_tower_spec(variant: &str) -> Option<(&str, usize, usize)> {
@@ -494,8 +498,9 @@ fn main() {
     if let Some((application, parameters)) = application_spec(&variant) {
         for _ in 0..repetitions {
             match (application, parameters.as_slice()) {
-                ("ceph", &[levels]) => {
-                    let (coordinates, layers, unavailable) = ceph_diamond_fixture(levels);
+                ("ceph", parameters @ &[levels, ..]) if parameters.len() <= 2 => {
+                    let branches = parameters.get(1).copied().unwrap_or(2);
+                    let (coordinates, layers, unavailable) = ceph_fanout_fixture(levels, branches);
                     let answer = ceph_xor_repair_supports(
                         coordinates,
                         &layers,
@@ -504,10 +509,28 @@ fn main() {
                         1 << 34,
                     )
                     .unwrap();
-                    assert_eq!(answer.supports.len(), 1usize << levels);
+                    assert_eq!(answer.supports.len(), branches.pow(levels as u32));
                     work += answer.combinations_examined;
                     peak_states = peak_states.max(answer.supports.len() as u64);
                     checksum += answer.supports.len() as u64;
+                    black_box(answer);
+                }
+                ("ceph-zdd", parameters @ &[levels, ..]) if parameters.len() <= 2 => {
+                    let branches = parameters.get(1).copied().unwrap_or(2);
+                    let (coordinates, layers, unavailable) = ceph_fanout_fixture(levels, branches);
+                    let answer = ceph_xor_repair_supports_compressed(
+                        coordinates,
+                        &layers,
+                        levels - 1,
+                        &unavailable,
+                        1 << 24,
+                    )
+                    .unwrap();
+                    assert_eq!(answer.support_count, branches.pow(levels as u32) as u64);
+                    work += answer.zdd_operations;
+                    assert!(!answer.zdd_storage_grew, "ZDD storage grew after setup");
+                    peak_states = peak_states.max(u64::from(answer.zdd_nodes));
+                    checksum += answer.support_count;
                     black_box(answer);
                 }
                 ("azure", &[demands, capacity]) => {

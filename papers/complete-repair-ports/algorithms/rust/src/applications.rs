@@ -3,6 +3,7 @@
 use crate::field::FiniteField;
 use crate::matrix::{canonicalize_rows_in_place_field, Matrix, MatrixError};
 use crate::scheduler::{SchedulerError, WeightedRepairProblem};
+use crate::zdd::{DirectMemo, Zdd, ZddMemo, EMPTY, UNIT};
 use rustc_hash::{FxHashMap, FxHashSet};
 use std::collections::VecDeque;
 use thiserror::Error;
@@ -32,6 +33,16 @@ pub struct CephRepairAnswer {
     pub supports: Box<[Box<[u8]>]>,
     pub closure_rounds: u32,
     pub combinations_examined: u64,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct CephCompressedRepairAnswer {
+    pub support_count: u64,
+    pub first_support: Option<Box<[u8]>>,
+    pub closure_rounds: u32,
+    pub zdd_nodes: u32,
+    pub zdd_operations: u64,
+    pub zdd_storage_grew: bool,
 }
 
 /// Parse Ceph's low-level layer strings. Each contiguous non-underscore run
@@ -102,16 +113,16 @@ pub fn ceph_xor_repair_supports(
     {
         return Err(ApplicationError::Shape);
     }
-    let unavailable: FxHashSet<usize> = unavailable.iter().copied().collect();
-    if unavailable
-        .iter()
-        .any(|&coordinate| coordinate >= coordinate_count)
-    {
-        return Err(ApplicationError::Shape);
+    let mut unavailable_mask = [false; 256];
+    for &coordinate in unavailable {
+        if coordinate >= coordinate_count {
+            return Err(ApplicationError::Shape);
+        }
+        unavailable_mask[coordinate] = true;
     }
     let mut supports = vec![Vec::<u128>::new(); coordinate_count];
     for (coordinate, entries) in supports.iter_mut().enumerate() {
-        if !unavailable.contains(&coordinate) {
+        if !unavailable_mask[coordinate] {
             entries.push(1u128 << coordinate);
         }
     }
@@ -181,6 +192,138 @@ pub fn ceph_xor_repair_supports(
             .into_boxed_slice(),
         closure_rounds: rounds,
         combinations_examined: examined,
+    })
+}
+
+/// Compute the exact inclusion-minimal repair-support family as a reduced
+/// zero-suppressed decision diagram. This returns its cardinality and one
+/// canonical member without materializing the complete family.
+pub fn ceph_xor_repair_supports_compressed(
+    coordinate_count: usize,
+    layers: &[CephXorLayer],
+    target: usize,
+    unavailable: &[usize],
+    node_budget: usize,
+) -> Result<CephCompressedRepairAnswer, ApplicationError> {
+    if coordinate_count > usize::from(u8::MAX) + 1
+        || target >= coordinate_count
+        || layers.iter().any(|layer| {
+            usize::from(layer.parity) >= coordinate_count
+                || layer
+                    .data
+                    .iter()
+                    .any(|&coordinate| usize::from(coordinate) >= coordinate_count)
+        })
+    {
+        return Err(ApplicationError::Shape);
+    }
+    let mut unavailable_mask = [false; 256];
+    for &coordinate in unavailable {
+        if coordinate >= coordinate_count {
+            return Err(ApplicationError::Shape);
+        }
+        unavailable_mask[coordinate] = true;
+    }
+    let capacity_hint = coordinate_count
+        .saturating_mul(layers.len())
+        .saturating_mul(4);
+    ceph_xor_repair_supports_compressed_with::<DirectMemo>(
+        coordinate_count,
+        layers,
+        target,
+        &unavailable_mask,
+        node_budget,
+        capacity_hint,
+    )
+}
+
+fn ceph_xor_repair_supports_compressed_with<M: ZddMemo>(
+    coordinate_count: usize,
+    layers: &[CephXorLayer],
+    target: usize,
+    unavailable: &[bool; 256],
+    node_budget: usize,
+    capacity_hint: usize,
+) -> Result<CephCompressedRepairAnswer, ApplicationError> {
+    let group_coordinates = layers
+        .iter()
+        .map(|layer| layer.data.len() + 1)
+        .sum::<usize>();
+    let mut group_data = Vec::with_capacity(group_coordinates);
+    let mut group_offsets = Vec::with_capacity(layers.len() + 1);
+    group_offsets.push(0usize);
+    for layer in layers {
+        let mut seen = [false; 256];
+        let start = group_data.len();
+        for coordinate in std::iter::once(layer.parity).chain(layer.data.iter().copied()) {
+            let coordinate = usize::from(coordinate);
+            if seen[coordinate] {
+                return Err(ApplicationError::Shape);
+            }
+            seen[coordinate] = true;
+            group_data.push(coordinate);
+        }
+        group_data[start..].sort_unstable();
+        group_offsets.push(group_data.len());
+    }
+    let mut zdd = Zdd::<M>::with_capacity(node_budget, capacity_hint);
+    let mut supports = Vec::with_capacity(coordinate_count);
+    for (coordinate, &is_unavailable) in unavailable.iter().take(coordinate_count).enumerate() {
+        let root = if is_unavailable {
+            EMPTY
+        } else {
+            zdd.singleton(coordinate as u32)
+                .ok_or(ApplicationError::Budget {
+                    budget: node_budget as u64,
+                })?
+        };
+        supports.push(root);
+    }
+    let mut closure_rounds = 0u32;
+    loop {
+        let mut changed = false;
+        closure_rounds += 1;
+        for offsets in group_offsets.windows(2) {
+            let group = &group_data[offsets[0]..offsets[1]];
+            for &destination in group {
+                let mut product = UNIT;
+                for &source in group {
+                    if source != destination {
+                        product = zdd.join(product, supports[source]).ok_or(
+                            ApplicationError::Budget {
+                                budget: node_budget as u64,
+                            },
+                        )?;
+                    }
+                }
+                let combined =
+                    zdd.union(supports[destination], product)
+                        .ok_or(ApplicationError::Budget {
+                            budget: node_budget as u64,
+                        })?;
+                let minimal = zdd.minimal(combined).ok_or(ApplicationError::Budget {
+                    budget: node_budget as u64,
+                })?;
+                if minimal != supports[destination] {
+                    supports[destination] = minimal;
+                    changed = true;
+                }
+            }
+        }
+        if !changed {
+            break;
+        }
+    }
+    let root = supports[target];
+    let support_count = zdd.count(root).ok_or(ApplicationError::TooLarge)?;
+    let first_support = zdd.first(root);
+    Ok(CephCompressedRepairAnswer {
+        support_count,
+        first_support,
+        closure_rounds,
+        zdd_nodes: zdd.node_count() as u32,
+        zdd_operations: zdd.operations(),
+        zdd_storage_grew: zdd.storage_grew(),
     })
 }
 
@@ -1236,6 +1379,75 @@ mod tests {
         .unwrap();
         let answer = ceph_xor_repair_supports(8, &layers, 2, &[2], 10_000).unwrap();
         assert_eq!(&*answer.supports, &[Box::from([1, 3])]);
+        let compressed = ceph_xor_repair_supports_compressed(8, &layers, 2, &[2], 10_000).unwrap();
+        assert_eq!(compressed.support_count, 1);
+        assert_eq!(compressed.first_support.as_deref(), Some([1, 3].as_slice()));
+    }
+
+    #[test]
+    fn compressed_ceph_family_counts_diamond_fanout_without_enumeration() {
+        for levels in 1..=12 {
+            let common = levels;
+            let mut layers = Vec::with_capacity(2 * levels);
+            for level in 0..levels {
+                let previous = if level == 0 { common } else { level - 1 };
+                for branch in 0..2 {
+                    layers.push(CephXorLayer {
+                        parity: level as u8,
+                        data: Box::new([previous as u8, (levels + 1 + 2 * level + branch) as u8]),
+                    });
+                }
+            }
+            let answer = ceph_xor_repair_supports_compressed(
+                3 * levels + 1,
+                &layers,
+                levels - 1,
+                &(0..levels).collect::<Vec<_>>(),
+                1 << 20,
+            )
+            .unwrap();
+            assert_eq!(answer.support_count, 1u64 << levels);
+            assert_eq!(answer.first_support.as_ref().unwrap().len(), levels + 1);
+        }
+    }
+
+    #[test]
+    fn compressed_ceph_matches_explicit_closure_on_seeded_small_layers() {
+        let mut state = 0x4f1b_c3d8_a927_650eu64;
+        for _ in 0..128 {
+            let mut layers = Vec::with_capacity(6);
+            for _ in 0..6 {
+                let mut coordinates = [0u8; 3];
+                for index in 0..3 {
+                    loop {
+                        state = state
+                            .wrapping_mul(6_364_136_223_846_793_005)
+                            .wrapping_add(1_442_695_040_888_963_407);
+                        let candidate = (state >> 61) as u8;
+                        if !coordinates[..index].contains(&candidate) {
+                            coordinates[index] = candidate;
+                            break;
+                        }
+                    }
+                }
+                layers.push(CephXorLayer {
+                    parity: coordinates[0],
+                    data: Box::new([coordinates[1], coordinates[2]]),
+                });
+            }
+            let target = (state as usize >> 8) & 7;
+            let explicit =
+                ceph_xor_repair_supports(8, &layers, target, &[target], 1 << 24).unwrap();
+            let compressed =
+                ceph_xor_repair_supports_compressed(8, &layers, target, &[target], 1 << 20)
+                    .unwrap();
+            assert_eq!(compressed.support_count as usize, explicit.supports.len());
+            if let Some(first) = &compressed.first_support {
+                assert!(explicit.supports.iter().any(|support| support == first));
+            } else {
+                assert!(explicit.supports.is_empty());
+            }
+        }
     }
 
     #[test]
