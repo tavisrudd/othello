@@ -114,17 +114,12 @@
     "PutSinger:ch-3": {
       "citation": "PutSinger",
       "pinpoint": "Chapter 3",
-      "used": "The formal classification of differential modules, including regular-singular exponents and the ramified Levelt--Turrittin factors used in the tensor-product argument.",
+      "used": "The regular-singular classification identifying the formal exponent classes of the canonically modified rank-two block with the eigenvalues of its residue modulo the integers.",
       "conventions": [
         {
           "aspect": "normalization",
           "requirement": "Exponents are classified modulo the integers.",
           "matched": "Only the difference of the two exponents of the modified rank-two module is used, and it is read modulo that ambiguity."
-        },
-        {
-          "aspect": "tensor products",
-          "requirement": "After a common ramification, exponential factors add and their regular-singular factors tensor.",
-          "matched": "The projective-line product proof writes this operation explicitly and observes that the rank-one projective factor changes only the scalar irregular exponential."
         }
       ]
     },

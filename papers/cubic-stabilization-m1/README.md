@@ -20,10 +20,13 @@ space.  The same construction gives an irrationality criterion for smooth
 projective threefolds and the one-stabilization theorem for smooth prime Fano
 threefolds of genus eight.
 
+Here *even* means that odd bulk variables are set to zero and the connection
+is restricted to even cohomology.  *Generic* means that the numerical Novikov
+and even bulk coefficient ring is replaced by its fraction field.
+
 ## Companion papers
 
-The repository currently keeps two logically separate companions beside the
-primary paper:
+This paper directory contains two logically separate technical companions:
 
 - [`companions/six-axis-cubic-pencil/`](companions/six-axis-cubic-pencil/):
   *Integral divisor products on the nonstandard A5-invariant cubic pencil*.
@@ -36,6 +39,13 @@ primary paper:
 
 The companions are not sections of the primary paper and are not required to
 read its proof.
+
+A separate forward companion,
+[*Sharpness of Irrationality after One Stabilization for Cubic
+Threefolds*](../cubic-stabilization-irrationality/), proves that the bound is
+sharp.  It gives two explicit smooth cubic threefolds over `Q` for which
+`X x P^1` is irrational but `X x P^2` is rational.  That paper uses the
+one-stabilization theorem here as an input; it is not an input to this paper.
 
 ## Build and verification
 

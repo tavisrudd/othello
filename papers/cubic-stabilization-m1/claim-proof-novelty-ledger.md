@@ -73,8 +73,8 @@ carry a construction the citation graph hides. Until those are covered, public
 prose should say only what is proved and should avoid “first,” “new,” or “to
 our knowledge.”
 
-The 2026-08-18 positioning pass added two 2026 sources and the classical
-comparison the introduction had left implicit. Web search on
+The positioning pass begun on 2026-08-18 added recent sources and the
+classical comparison the introduction had left implicit. Web search on
 "Guere cubic threefold irrationality Hodge quantum cohomology" recovered
 Guere, arXiv:2603.04518v1, and Benedetti--Fay--Guere--Manivel--Perrin,
 arXiv:2607.26718v1. Neither pre-empts anything in this paper: Guere states a
@@ -85,10 +85,17 @@ existence does, however, bound the novelty posture: the joint paper derives
 irrationality from atoms, monodromy, and Hodge theory without explicit
 quantum-cohomology computations, so this paper claims no novelty for the
 broad idea of localizing Hodge data into quantum spectral packets, nor for
-"the first atomic refinement of a classical Hodge obstruction." What is
-claimed is the rank-two atomic residue discriminant, the uniform
-one-stabilization theorem, and the separation of surface-realizability of a
-Hodge representation from surface-realizability of the atom carrying it.
+"the first atomic refinement of a classical Hodge obstruction."  KKPY's
+Example 6.21 already recovers the irrationality of every smooth cubic
+threefold from the zero spectral piece enhanced by Serre/formal-monodromy
+data.  The invariant claimed here is instead the rank-two formal-exponent
+marker: after the canonical elementary modification, it requires the two
+residue eigenvalues to be distinct modulo the integers.  A merely nonzero
+residue discriminant is insufficient because it also permits resonant blocks.
+The contribution is localized to the uniform one-stabilization theorem, the
+faithful specialization of individual center summands, vanishing for every
+point, curve, and surface center, and the projective-bundle comparison used
+for stabilization.
 
 The same pass records the classical comparison now printed in the
 introduction: after one stabilization the direct Clemens--Griffiths mechanism

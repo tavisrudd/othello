@@ -18,16 +18,30 @@ For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
 
+The stable-rationality picture varies across the moduli space.  Hassett and
+Tschinkel identified varieties birational to cubic threefolds as the
+exceptional Fano-threefold case not covered by their stable-irrationality
+theorem \cite{HassettTschinkel}.  More recently, Engel, de~Gaay Fortman, and
+Schreieder proved that a very general complex cubic threefold is not stably
+rational \cite[Corollary~1.4]{EGFS}, whereas Tschinkel and Zhang constructed
+explicit stably rational smooth cubic threefolds over \(\mathbf Q\)
+\cite[Theorem~1.3]{TschinkelZhangTorsors}.  The theorem above is uniform
+across this divide: it also obstructs the first stabilization of those
+stably rational examples.  A companion paper proves that this bound is sharp:
+it gives two explicit examples for which \(X\times\PP^2\) is rational
+\cite{RuddSharpness}.
+
 The proof uses the quantum \(D\)-module (QDM): the cohomology module over the
-ring of Novikov and bulk parameters, equipped with its flat quantum connection.
+ring of Novikov and bulk parameters, equipped with its flat quantum connection
+\cite{IritaniQDM}.
 The Novikov parameters record curve classes, while the bulk parameters are
 coordinates on cohomology.  We use the even part of the QDM: the odd bulk
 variables are set to zero, and the module is restricted to even cohomology.  We
 then replace the ring of numerical Novikov and even bulk parameters by its
-fraction field; this is what \emph{generic} means here.  The leading coefficient
-of the \(z\)-connection is quantum multiplication by the Euler field.  Over an
-algebraic closure of the generic coefficient field, its generalized eigenspaces
-decompose the formal connection into blocks.
+fraction field; this is what \emph{generic} means here.  In the direction of the
+connection variable \(z\), the leading coefficient is quantum multiplication by
+the Euler field.  Over an algebraic closure of the generic coefficient field,
+its generalized eigenspaces decompose the formal connection into blocks.
 
 We record the block isomorphism classes in a free commutative monoid.  For an
 additive marker on this monoid, Iritani's blowup theorem gives a formula for
@@ -48,16 +62,30 @@ vanishes on points, curves, and surfaces and on projective space.
 Iritani--Koto's projective-bundle theorem shows that it doubles after product
 with \(\PP^1\).  This proves the theorem.
 
-The comparison inputs are Iritani's blowup decomposition and
-Iritani--Koto's projective-bundle decomposition
-\cite{IritaniBlowup,IritaniKoto}.  The new point is to combine these formulas
-with weak factorization while retaining the individual center summands, and
-then to apply an additive rank-two exponent marker that vanishes on every
-center that can occur in such a fourfold factorization.  Cai independently
-computes the cubic quantum differential equation in a normalization compatible
-with ours
-\cite{Cai}; the birational marker and stabilization argument are not part of
-that calculation.
+This use of Euler spectral pieces in birational geometry belongs to the same
+circle of ideas as the Hodge-atom framework of
+Katzarkov--Kontsevich--Pantev--Yu \cite{KKPYYu}.  Their framework combines the
+generalized eigenspaces of Euler multiplication, Iritani's blowup theorem, and
+weak factorization to produce birational invariants.  In particular, their
+Example~6.21 uses the zero spectral piece, enhanced by the Serre operator and
+formal monodromy, to recover the irrationality of every smooth cubic
+threefold \cite[Example~6.21]{KKPYYu}.  Recent applications and refinements
+include work on cubic, Gushel--Mukai, and K\"uchle fourfolds
+\cite{GuereCubicFourfold,BenedettiManivelPerrin,
+BenedettiFayGuereManivelPerrin}.
+
+The marker used here is narrower: it uses no Hodge structure and records only
+the rank-two formal-exponent condition above.  Its purpose is the
+one-stabilization problem.  The additional ingredients are the faithful
+specialization of each center summand in Iritani's blowup comparison, vanishing
+on every point, curve, and surface center, and Iritani--Koto's
+projective-bundle comparison for stabilization
+\cite{IritaniBlowup,IritaniKoto}.  Gyenge gives a complementary
+formal tensor-product theorem for quantum \(D\)-modules of products and proves
+multiplicativity for Hodge atoms \cite{GyengeProduct}.  Cai independently
+computes the same two exponent representatives and uses them with Iritani's
+blowup theorem to prove symplectic irrationality of cubic threefolds
+\cite{Cai}; that argument does not address stabilization.
 
 The same construction gives a threefold criterion without stabilization.
 
@@ -81,6 +109,9 @@ smooth prime Fano threefold \(V\) of genus eight, it associates a smooth
 Pfaffian cubic threefold \(X\) and rank-two projective bundles over \(V\) and
 \(X\) related by a flop
 \cite[Theorems~2.17--2.18]{KuznetsovV14}.
+Tschinkel and Zhang study equivariant and twisted stable-birational
+refinements of this Pfaffian--Grassmannian correspondence
+\cite{TschinkelZhangV14}.
 This gives the following consequence.
 
 \begin{corollary}[Irrationality after one stabilization for \(V_{14}\)]

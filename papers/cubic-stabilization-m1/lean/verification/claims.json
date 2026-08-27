@@ -25,10 +25,10 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwoResidueMarker_eq_of_birational",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicThreefold_oneProjectiveLine_conclusion_of_residueMarker"
       ],
-      "objects": "A direct rank-two residue block presentation over a supplied commutative coefficient ring, the free commutative monoid of block multisets and its natural-valued additive marker, smooth projective varieties through dimension four, smooth centers with their individual specialized QDM summands, projective-line stabilization, projective four-space, and a rationality predicate.",
-      "hypotheses": "Regular isomorphism preserves the residue weight; a typed factorization input supplies every blowup and blowdown formula while retaining the individual center summands; every summand from a smooth center of dimension at most two has zero marker; the cubic marker equals one; the projective-line formula doubles it; projective four-space has marker zero; and rationality supplies the birational comparison.",
+      "objects": "An abstract block record over a supplied commutative coefficient ring: in rank two it stores a leading matrix, a modified-residue matrix, and a supplied exponent difference, while in every other rank it stores that rank and a proof that it is not two. The remaining objects are the free commutative monoid of these block classes and its natural-number-valued additive marker, smooth projective varieties through dimension four, smooth centers with their individual specialized QDM summands, projective-line stabilization, projective four-space, and a rationality predicate.",
+      "hypotheses": "The supplied relation called regular isomorphism preserves the entire zero-or-one marker weight; assumed weak-factorization data and marker formulas supply every blowup and blowdown formula while retaining the individual center summands; every summand from a smooth center of dimension at most two has zero marker; the cubic marker equals one; the projective-line formula doubles it; projective four-space has marker zero; and rationality supplies the birational comparison.",
       "conclusion": "The stabilized cubic has nonzero marker, whereas projective four-space has marker zero; birational invariance therefore implies that the cubic threefold times one projective line is not rational.",
-      "cautions": "Conditional deduction at the formal boundary. Lean constructs the quotient by regular isomorphism, the free commutative-monoid extension of the marker, the telescoping factorization argument with individual center summands kept separate, and descent to birational classes. It does not construct the cubic QDM, the Iritani or Iritani–Koto comparisons, weak factorization, or the geometric proofs of vanishing on low-dimensional centers. Those inputs remain explicit fields of the direct residue context.",
+      "cautions": "Conditional deduction. Lean defines the marker from the stored leading matrix and supplied exponent difference, constructs the quotient by the supplied regular-isomorphism relation, extends the marker to the free commutative monoid, proves the telescoping factorization argument with individual center summands kept separate, and obtains descent to birational classes. It does not prove that the stored matrices and exponent difference arise from a formal connection or from residue eigenvalues. Nor does it construct the cubic QDM, the Iritani or Iritani–Koto comparisons, weak factorization, or the geometric proofs of vanishing on low-dimensional centers. Those inputs remain explicit hypotheses of the formal theorem.",
       "statement_digest": "90fbb0916c1f7b4e7b7e57bb8ea581e3d45f3914e6a6f66d4aba23e241428af4",
       "terminal_digest": "c76771330994e3bf76753fc318ed5c8045703600a05a6f9c128db153d5eae0fa"
     },
@@ -39,7 +39,7 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.threefold_not_rational_of_occurrenceIndexedMarker"
       ],
       "objects": "An additive marker on block multisets for smooth projective threefolds, a projective-three-space endpoint, a selected threefold, and a rationality predicate.",
-      "hypotheses": "A typed dimension-three factorization input supplies the blowup and blowdown formulas; every point or curve center summand has zero marker; both endpoints are smooth of dimension three; projective three-space has marker zero; the selected threefold has nonzero marker; and rationality supplies the birational comparison with projective three-space.",
+      "hypotheses": "Assumed weak-factorization data and marker formulas in dimension three supply the blowup and blowdown formulas; every point or curve center summand has zero marker; both endpoints are smooth of dimension three; projective three-space has marker zero; the selected threefold has nonzero marker; and rationality supplies the birational comparison with projective three-space.",
       "conclusion": "The selected threefold is not rational.",
       "cautions": "Fragment. Lean proves the endpoint contradiction while retaining each center summand separately, but does not construct the generic even QDM, identify a counted block with a nonzero additive marker, supply weak factorization or vanishing on centers, calculate projective space, or construct the rationality comparison.",
       "statement_digest": "3b6ba0d8684a8d7110811fa6fb6f0ed0a293da76d7fe72cec3667da882b8e291",
@@ -54,7 +54,7 @@
       "objects": "A framed block retaining a marked small section and original-loop monodromy, the free commutative monoid of framed-block isomorphism classes and its additive primitive-sixth marker, smooth projective fourfold objects, smooth centers with their individual specialized QDM summands, projective-line stabilization, projective four-space, and rationality.",
       "hypotheses": "Regular isomorphism preserves primitive-sixth multiplicity; the residual framed hypotheses supply comparison data retaining each center summand separately, together with vanishing of every such center contribution; the cubic marker equals two; the projective-line formula doubles it; projective four-space has marker zero; and rationality supplies the birational comparison.",
       "conclusion": "The stabilized cubic has framed marker four; every rational smooth projective fourfold has framed marker zero; and consequently the stabilized cubic is irrational.",
-      "cautions": "Conditional deduction. The framed block presentation and additive marker are distinct from the residue presentation but invoke the same general birational-descent theorem. Lean does not construct the framed QDM comparisons or prove residual Hypotheses 5.7R and 5.7T; their exact formulas and vanishing statements for the separate center summands remain typed fields of the framed context.",
+      "cautions": "Conditional deduction. The framed block presentation and additive marker are distinct from the residue presentation but invoke the same general birational-descent theorem. Lean does not construct the framed QDM comparisons or prove residual Hypotheses 5.7R and 5.7T; their exact formulas and vanishing statements for the separate center summands remain explicit hypotheses.",
       "statement_digest": "546cc5e738069364fed90ad6afb360b4217850ea8f42bb7a3aafa25d8f577dcb",
       "terminal_digest": "def6d5a19dfeff196f2c8ea160bc6d2b5f778fefc50a5ae86b4e5c13ee86d7c3"
     },
@@ -65,10 +65,10 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.primitiveMinimalClassFamily_universalCH0_and_irrational_stabilization",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exists_universalCH0_cubic_with_irrational_stabilization"
       ],
-      "objects": "A parameter type indexing the family; one typed family of variety objects carrying a named projective-line product operation and rationality predicate; a separate type of intermediate-Jacobian objects with predicates for smooth complex cubic status, algebraicity of the primitive minimal class, and universal CH0-triviality; and a direct rank-two residue-marker context with factorization data that retain the individual center summands.",
-      "hypotheses": "Every indexed fibre is a smooth complex cubic threefold whose intermediate Jacobian has algebraic primitive minimal class; Voisin's equivalence between that algebraicity and universal CH0-triviality, for every smooth cubic under consideration; preservation of universal CH0-triviality under the named projective-line product; and, for every fibre, the direct residue-marker one-step input, including the projective-line marker formula and comparison with projective four-space. The existential form additionally assumes the parameter type nonempty.",
+      "objects": "A parameter type indexing the family; one abstract family of varieties carrying an operation representing product with the projective line and a rationality predicate; a separate type of intermediate-Jacobian objects with predicates for smooth complex cubic status, algebraicity of the primitive minimal class, and universal CH0-triviality; and the hypotheses of the rank-two formal-exponent marker argument, with factorization data that retain the individual center summands.",
+      "hypotheses": "Every indexed fibre is a smooth complex cubic threefold whose intermediate Jacobian has algebraic primitive minimal class; Voisin's equivalence between that algebraicity and universal CH0-triviality, for every smooth cubic under consideration; preservation of universal CH0-triviality under product with the projective line; and, for every fibre, the hypotheses used in the one-stabilization marker theorem, including the projective-line marker formula and comparison with projective four-space. The existential form additionally assumes the parameter type nonempty.",
       "conclusion": "Every fibre is universally CH0-trivial, its projective-line stabilization is universally CH0-trivial, and that stabilization is not rational; and, when the parameter type is nonempty, some cubic threefold with all three properties exists.",
-      "cautions": "Fragment. Lean checks the fibrewise separation composition but does not represent the moduli space, countable union of subvarieties, or codimension bound in the theorem type. It also constructs no Chow group, projective-bundle formula, intermediate Jacobian, primitive minimal class, or quantum connection. The existential statement rests on a supplied nonempty parameter type, and irrationality enters through the same direct rank-two residue-marker context as thm:every-cubic. Because the codimension-three locus is a clause of the manuscript corollary but has no formal object or conclusion, this row is not graded as a conditional deduction.",
+      "cautions": "Fragment. Lean checks the fibrewise separation composition but does not represent the moduli space, countable union of subvarieties, or codimension bound in the theorem type. It also constructs no Chow group, projective-bundle formula, intermediate Jacobian, primitive minimal class, or quantum connection. The existential statement rests on a supplied nonempty parameter type, and irrationality enters through the same hypotheses of the rank-two formal-exponent marker argument as thm:every-cubic. Because the codimension-three locus is a clause of the manuscript corollary but has no formal object or conclusion, this row is not graded as a conditional deduction.",
       "statement_digest": "639c4ac95c72a642c2ec64c48d3fe1957c7127e1ae0cb77bf2f69ad49a3b08de",
       "terminal_digest": "14b26f2cbabda3a39da971693e59bcb7ecf6f79a87c5d739a8c27c64c2bd5161"
     },
@@ -78,10 +78,10 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.fermatCubic_universalCH0_and_irrational_stabilization"
       ],
-      "objects": "A typed variety object with a named projective-line product operation and a rationality predicate; a supplied universal CH0-triviality predicate; an assignment of a defining polynomial in five variables over a nontrivial commutative coefficient ring; the notion of a decomposition of such a polynomial as a sum of polynomials in pairwise disjoint groups of at most three variables; the Fermat form; and the direct rank-two residue-marker context.",
-      "hypotheses": "The almost-diagonal criterion, in the form that a variety whose defining polynomial admits such a decomposition is universally CH0-trivial; preservation of universal CH0-triviality under the named projective-line product; the identification of the defining polynomial of the given variety with the Fermat form; and the direct residue-marker one-step input.",
+      "objects": "An abstract variety with an operation representing product with the projective line and a rationality predicate; a supplied universal CH0-triviality predicate; an assignment of a defining polynomial in five variables over a nontrivial commutative coefficient ring; the notion of a decomposition of such a polynomial as a sum of polynomials in pairwise disjoint groups of at most three variables; the Fermat form; and the hypotheses of the rank-two formal-exponent marker argument.",
+      "hypotheses": "The almost-diagonal criterion, in the form that a variety whose defining polynomial admits such a decomposition is universally CH0-trivial; preservation of universal CH0-triviality under product with the projective line; the identification of the defining polynomial of the given variety with the Fermat form; and the hypotheses used in the one-stabilization marker theorem.",
       "conclusion": "The projective-line stabilization of that variety is universally CH0-trivial and is not rational.",
-      "cautions": "Lean constructs no hypersurface, no Chow group, and no projective-bundle formula, and proves nothing about smoothness: the criterion enters as a premise about the supplied predicate, and the ground field of the geometric statement is not represented. What is proved rather than assumed is the combinatorial hypothesis of that criterion. Irrationality enters through the same direct rank-two residue-marker context as thm:every-cubic.",
+      "cautions": "Lean constructs no hypersurface, no Chow group, and no projective-bundle formula, and proves nothing about smoothness: the criterion enters as a premise about the supplied predicate, and the ground field of the geometric statement is not represented. What is proved rather than assumed is the combinatorial hypothesis of that criterion. Irrationality enters through the same hypotheses of the rank-two formal-exponent marker argument as thm:every-cubic.",
       "statement_digest": "5181875068f9603708f42592697e31e2853ae3f942b17c5bf6f2df14dbfdbcb2",
       "terminal_digest": "709358f4ae2857b3fa8a8ae81b8288ecb3bbf759c74d1b80ca48b06b6b2cd3db"
     },
@@ -91,10 +91,10 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.coprimeUnirationalDegrees_universalCH0_and_irrational_stabilization"
       ],
-      "objects": "A typed variety object with a named projective-line product operation and a rationality predicate; supplied predicates for universal CH0-triviality and for admitting a unirational parametrization of a given natural-number degree; and the direct rank-two residue-marker context.",
-      "hypotheses": "The passage from two unirational parametrizations of coprime degrees to universal CH0-triviality; persistence of each parametrization degree under the named projective-line product; unirational parametrizations of degrees two and three on the given cubic threefold; and the direct residue-marker one-step input.",
+      "objects": "An abstract variety with an operation representing product with the projective line and a rationality predicate; supplied predicates for universal CH0-triviality and for admitting a unirational parametrization of a given natural-number degree; and the hypotheses of the rank-two formal-exponent marker argument.",
+      "hypotheses": "The passage from two unirational parametrizations of coprime degrees to universal CH0-triviality; persistence of each parametrization degree under product with the projective line; unirational parametrizations of degrees two and three on the given cubic threefold; and the hypotheses used in the one-stabilization marker theorem.",
       "conclusion": "The projective-line stabilization admits unirational parametrizations of degrees two and three, is universally CH0-trivial, and is not rational.",
-      "cautions": "Lean constructs no unirational parametrization, no decomposition of the diagonal, and no Chow group; the degree predicate is opaque and the criterion is a premise. Coprimality of two and three is the only arithmetic proved. The statement is about one supplied cubic threefold, asserts nothing about other members of the cited family, and addresses stable rationality nowhere. Irrationality enters through the same direct rank-two residue-marker context as thm:every-cubic.",
+      "cautions": "Lean constructs no unirational parametrization, no decomposition of the diagonal, and no Chow group; the degree predicate is opaque and the criterion is a premise. Coprimality of two and three is the only arithmetic proved. The statement is about one supplied cubic threefold, asserts nothing about other members of the cited family, and addresses stable rationality nowhere. Irrationality enters through the same hypotheses of the rank-two formal-exponent marker argument as thm:every-cubic.",
       "statement_digest": "05bb980d4dbd39b643610c3717227049567ab08cefea8ede9d8deddf802ec684",
       "terminal_digest": "2bd4dbf8bcddedec830b19086257c62a629b6026ff3cda24a0189d0332701783"
     },
@@ -104,10 +104,10 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.separationFamily_of_sixAxis_residue_and_period_inputs"
       ],
-      "objects": "A parameter type; one typed family of variety objects used simultaneously by cycle and rationality signatures; a separate intermediate-Jacobian type; a named projective-line product operation; predicates for smooth cubic status, universal CH0-triviality, rationality, and family non-isotriviality; a direct rank-two residue-marker context; an opaque period type and period map; and an opaque coarse-moduli type with the separated-variable and Eckardt predicates.",
-      "hypotheses": "For every parameter, the fibre is a smooth complex cubic threefold with algebraic primitive minimal class and the direct residue-marker one-step input holds. Voisin's criterion and preservation of universal CH0-triviality under the named projective-line product are explicit premises. Non-isotriviality is not supplied as the conclusion: two parameters with distinct period-map values are supplied, together with the external implication from period-map nonconstancy to the family predicate. The exclusion clause supplies the Eckardt criterion, projective invariance, the pencil's Eckardt locus, and primitive data consisting of a chosen parameter, a chosen separated-variable model, its projective equivalence to that fibre, and the equality of the parameter's moduli point with the distinguished point.",
+      "objects": "A parameter type; one abstract family of varieties used simultaneously by cycle and rationality signatures; a separate intermediate-Jacobian type; an operation representing product with the projective line; predicates for smooth cubic status, universal CH0-triviality, rationality, and family non-isotriviality; the hypotheses of the rank-two formal-exponent marker argument; an opaque period type and period map; and an opaque coarse-moduli type with the separated-variable and Eckardt predicates.",
+      "hypotheses": "For every parameter, the fibre is a smooth complex cubic threefold with algebraic primitive minimal class and the hypotheses used in the one-stabilization marker theorem hold. Voisin's criterion and preservation of universal CH0-triviality under product with the projective line are explicit premises. Non-isotriviality is not supplied as the conclusion: two parameters with distinct period-map values are supplied, together with the external implication from period-map nonconstancy to the family predicate. The exclusion clause supplies the Eckardt criterion, projective invariance, the pencil's Eckardt locus, and primitive data consisting of a chosen parameter, a chosen separated-variable model, its projective equivalence to that fibre, and the equality of the parameter's moduli point with the distinguished point.",
       "conclusion": "Every fibre is universally CH0-trivial; every named projective-line stabilization is universally CH0-trivial and irrational; the family is non-isotrivial; and the separated-variable locus of the family in coarse moduli is exactly the distinguished point.",
-      "cautions": "Lean checks the final composition. It does not construct the A5-invariant pencil, its connected smooth locus, the invariant cubic space, its fibres, intermediate Jacobians, Chow groups, projective-bundle formula, primitive minimal classes, Voisin's criterion, direct QDM comparison data, coarse moduli, or period map. Irrationality uses the same direct rank-two residue-marker context as thm:every-cubic. The period argument exposes a nonconstant map and a comparison implication rather than storing non-isotriviality itself as an input field. The separated-variable existence conclusion is constructed from the separately typed parameter, model, equality, separated-form, and equivalence data rather than stored as an existential premise.",
+      "cautions": "Lean checks the final composition. It does not construct the A5-invariant pencil, its connected smooth locus, the invariant cubic space, its fibres, intermediate Jacobians, Chow groups, projective-bundle formula, primitive minimal classes, Voisin's criterion, direct QDM comparison data, coarse moduli, or period map. Irrationality uses the same hypotheses of the rank-two formal-exponent marker argument as thm:every-cubic. The period argument exposes a nonconstant map and a comparison implication rather than storing non-isotriviality itself as an input field. The separated-variable existence conclusion is constructed from the separately typed parameter, model, equality, separated-form, and equivalence data rather than stored as an existential premise.",
       "statement_digest": "b2d13427f95e250627014fa282d30ad01c928364a71c2c38084934ae11427d1d",
       "terminal_digest": "ed50c124bf811b509f54c85cbbd98b46561b499f86ee1e01cf2bac5a67a5ae8d"
     },
@@ -529,7 +529,7 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.numericalNovikov_logarithmicOperator_commutes_with_pushforward",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.numericalNovikov_logarithmicOperator_leibniz"
       ],
-      "objects": "Three nested algebraic branches are represented. The general coefficient-pushforward branch has effective homological and numerical additive monoids, a possibly nonsurjective quotient, compatible natural-valued degree functions, finite bounded homological pieces, and ordinary or completed coefficient families. The completed-convolution branch has one additive monoid with an additive natural grading, finite bounded pieces, and compatible systems of finite additive-monoid-algebra truncations. The completed numerical-ring branch adds finite bounded numerical pieces, a surjective degree-compatible quotient, finite coefficient packets, and additive scalar-weight homomorphisms for logarithmic Novikov operators.",
+      "objects": "Three nested algebraic branches are represented. The general coefficient-pushforward branch has effective homological and numerical additive monoids, a possibly nonsurjective quotient, compatible natural-number-valued degree functions, finite bounded homological pieces, and ordinary or completed coefficient families. The completed-convolution branch has one additive monoid with an additive natural grading, finite bounded pieces, and compatible systems of finite additive-monoid-algebra truncations. The completed numerical-ring branch adds finite bounded numerical pieces, a surjective degree-compatible quotient, finite coefficient packets, and additive scalar-weight homomorphisms for logarithmic Novikov operators.",
       "hypotheses": "In the general branch, ordinary pushforward uses additive-commutative-monoid coefficients, while completed additive pushforward uses additive-commutative-group coefficients; its elementary cutoff-agreement theorem assumes equality of the two source families through the chosen cutoff. The convolution, `AgreeThrough`, and cutoff-continuity terminals use commutative-ring coefficients. The finite-packet terminal uses additive-commutative-monoid coefficients and explicitly assumes that its coefficient function is constant on numerical fibers. The compatible-family pushforward terminal assumes a surjective quotient with exact degree compatibility, finite bounded gradings on both sides, and commutative-ring coefficients. The standalone Leibniz terminal assumes one finite-degree additive monoid, commutative-ring coefficients, and an additive scalar weight. Its numerical pushforward-commutation terminal additionally supplies an additive numerical weight whose homological weight is the quotient pullback.",
       "conclusion": "Ordered additive decompositions are finite and exact; convolution gives completed coefficient families a commutative-ring structure and agrees through every cutoff with ordinary additive-monoid-algebra multiplication. Completed coefficient families are equivalent, by mutually inverse reconstruction maps, to compatible systems of finite degree truncations. Under this equivalence, numerical pushforward is levelwise the ordinary additive-monoid-algebra map induced by the quotient, and the completed/truncation square commutes exactly. Addition, convolution, and numerical pushforward preserve coefficient agreement through the same cutoff, so numerical pushforward satisfies the explicit cutoff-continuity predicate with identity modulus. Finite-fiber numerical summation preserves finite-below support and cutoff agreement, commutes exactly with finite truncation, preserves convolution and the unit, and defines a unital ring homomorphism. Finite coefficient packets constant on numerical fibers descend termwise and fiber sums are cardinality multiples of the descended coefficient. The coefficientwise operator associated to an additive scalar weight is an additive homomorphism and satisfies the Leibniz rule for completed convolution; completed pushforward commutes with this operator when the weight factors through the quotient.",
       "cautions": "The general coefficient-pushforward quotient need not be surjective. The completed numerical pushforward is proved to be a ring homomorphism when its monoid quotient is surjective; Lean does not assert that this ring homomorphism is itself surjective. The formal completed rings are coefficient families with a finite-below support condition. Their explicit compatible-truncation object and type equivalence are coefficientwise. Cutoff continuity is a quantified coefficient-agreement predicate, not Mathlib topological continuity; no topology, uniform space, categorical limit cone, or universal property in a category of topological rings is represented. The finite-type Chow-variety proof of bounded finiteness is supplied as a hypothesis rather than formalized. Lean assumes rather than proves numerical invariance of the finite coefficient packet, and it does not identify that packet with Gromov--Witten invariants. The weighted operator is packaged additively but is not bundled as a scalar-linear derivation over a separately modeled coefficient subring. Quantum products and connections, curve pushforward and normal-bundle pairings, geometric construction of the additive curve-pairing weights, and base change of the quantum comparison isomorphisms are not represented.",
@@ -573,7 +573,7 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.strictNovikovAdmissibleData"
       ],
-      "objects": "Lean represents an effective additive monoid, a complete separated topological commutative domain, a multiplicative monomial-image function, a natural-valued length, and a natural-valued valuation.",
+      "objects": "Lean represents an effective additive monoid, a complete separated topological commutative domain, a multiplicative monomial-image function, a natural-number-valued length, and a natural-number-valued valuation.",
       "hypotheses": "The monomial image preserves zero and addition, every monomial image is nonzero, valuation equals length on monomials, length is positive off zero and proper on bounded sets, and valuation is additive on products of nonzero target elements.",
       "conclusion": "A typed certificate for the algebraic and topological core of strict Novikov admissibility.",
       "cautions": "Lean does not construct the numerical Novikov completion or the associated graded ring; global valuation multiplicativity records the no-product-cancellation input but is not yet proved equivalent to the manuscript's domain associated-graded condition.",
@@ -643,7 +643,7 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.framedSixthMarker_eq_of_birational",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.framedSixthMarker_eq_of_oneProjectiveLine_birational"
       ],
-      "objects": "The free commutative monoid of framed-block isomorphism classes, whose blocks retain a marked small section and original-loop monodromy, its natural-valued additive primitive-sixth marker, smooth projective varieties in a fixed ambient dimension at most four, smooth centers with their individual specialized QDM summands, and one-projective-line stabilizations of threefolds.",
+      "objects": "The free commutative monoid of framed-block isomorphism classes, whose blocks retain a marked small section and original-loop monodromy, its natural-number-valued additive primitive-sixth marker, smooth projective varieties in a fixed ambient dimension at most four, smooth centers with their individual specialized QDM summands, and one-projective-line stabilizations of threefolds.",
       "hypotheses": "Regular isomorphism preserves primitive-sixth multiplicity; the residual hypotheses provide factorization data retaining each center summand separately and vanishing of every center contribution allowed in the fixed dimension; and the stabilization consequence additionally uses the rank-two projective-bundle formulas for both threefolds.",
       "conclusion": "Birational smooth projective objects of any fixed dimension at most four have equal primitive-sixth marker. If two smooth projective threefolds become birational after multiplication by one projective line, their primitive-sixth markers are equal.",
       "cautions": "Conditional deduction. Lean constructs the additive marker on the free commutative monoid, applies the general birational-descent theorem with each center summand retained separately, and cancels the factor two in the one-projective-line consequence. It does not construct the QDM comparisons, projective-bundle formulas, or the proofs that the separate center contributions vanish; those remain explicit typed inputs. The general theorem is registered separately under thm:marker-ledger.",
@@ -740,10 +740,10 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.genusEight_oneProjectiveLine_not_rational_of_residueContext"
       ],
-      "objects": "An abstract geometric signature naming an object representing a smooth prime Fano threefold of genus eight, its associated Pfaffian cubic, both rank-two projectivizations, and the direct formal-exponent-marker context for irrationality.",
-      "hypotheses": "Each projectivization is birational to the one-projective-line product of its base, the two projectivizations are birational through the flop, rationality transports along the context's birational relation, and the associated cubic satisfies the direct marker one-step input.",
+      "objects": "An abstract geometric signature naming an object representing a smooth prime Fano threefold of genus eight, its associated Pfaffian cubic, both rank-two projectivizations, and the hypotheses of the rank-two formal-exponent marker argument.",
+      "hypotheses": "Each projectivization is birational to the one-projective-line product of its base, the two projectivizations are birational through the flop, rationality transports along the context's birational relation, and the associated cubic satisfies the hypotheses used in the one-stabilization marker theorem.",
       "conclusion": "The product of the represented Fano threefold with one projective line is irrational.",
-      "cautions": "Conditional deduction at the formal boundary. Lean constructs neither the Fano threefold, Pfaffian cubic, bundles, projectivizations, nor flop, and does not prove that a rank-two projectivization is birational to the corresponding product. No higher stabilization is represented.",
+      "cautions": "Conditional deduction. Lean constructs neither the Fano threefold, Pfaffian cubic, bundles, projectivizations, nor flop, and does not prove that a rank-two projectivization is birational to the corresponding product. No higher stabilization is represented.",
       "statement_digest": "3eb15babef9517601b6cebae13065dd178bf9a62325dc14f87534123b978ad13",
       "terminal_digest": "b331627f1fd37385eb2217f78ad8c401959b1057677a37d7667571e03dce284a"
     },
@@ -753,7 +753,7 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.genusEight_framedSixthMarker_eq_two_of_categoricalFlop"
       ],
-      "objects": "An abstract geometric signature naming an object representing a smooth prime Fano threefold of genus eight, its associated Pfaffian cubic, both rank-two projectivizations, and the framed primitive-sixth marker context.",
+      "objects": "An abstract geometric signature naming an object representing a smooth prime Fano threefold of genus eight, its associated Pfaffian cubic, both rank-two projectivizations, and the hypotheses for the framed primitive-sixth marker.",
       "hypotheses": "The bases have dimension three, both projectivizations satisfy the rank-two marker formulas, the total spaces are birational through the flop, and the associated cubic has framed marker two.",
       "conclusion": "The represented Fano threefold has primitive-sixth marker two.",
       "cautions": "Conditional deduction. Lean applies framed marker invariance to the two projectivizations and cancels the common factor two, but constructs none of the geometric objects, the flop, the framed QDM comparisons, or the proofs that the center contributions vanish.",
@@ -879,7 +879,7 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.occurrenceIndexedMarker_descends_to_birationalClasses"
       ],
       "objects": "Regular-isomorphism classes of typed blocks, their effective multisets, an additive marker valued in an arbitrary commutative additive monoid, abstract varieties and smooth centers, and a separately indexed family of specialized center summands.",
-      "hypotheses": "A typed factorization input supplies blowup and blowdown chains in ambient dimension d, each blowup records its codimension and a literal Fin(c-1)-indexed family of center summands, and every summand from a smooth center with centerDimension + 2 at most d has zero marker contribution.",
+      "hypotheses": "Assumed weak-factorization data and marker formulas supply blowup and blowdown chains in ambient dimension d, each blowup records its codimension and a separately indexed family of c-1 center summands, and every summand from a smooth center of dimension at most d-2 has zero marker contribution.",
       "conclusion": "The marker is the unique additive extension of its value on each block class; birationally related endpoints have equal markers; and the marker descends to the quotient set of birational classes.",
       "cautions": "Conditional deduction. Lean proves the free commutative-monoid construction, the arbitrary-monoid and arbitrary-dimension telescoping argument, preservation of the individual center summands, and descent to birational classes. Weak factorization and the geometric operation formulas are supplied as typed inputs rather than formalized from algebraic geometry. The QDM comparisons that produce those formulas remain outside this row and are registered under prop:qdm-operation-ledgers.",
       "statement_digest": "c22e56f91ccdc4f1a3421fee5c6c71c2a37f331212d4668bbbeb770aac070730",
@@ -891,10 +891,10 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.faithfulCenterBaseChange_targetOnly_injective"
       ],
-      "objects": "Iritani's divisor-equation-reduced completed coefficient ring for a blowup center, its combined Novikov-divisor generators, the independent center coordinates in the Section 5.8 external direct-sum target, the common Laurent comparison ring, and the intrinsic generic even quantum D-module of the center together with its separately recorded scalar extensions in the center summands.",
+      "objects": "Iritani's divisor-equation-reduced completed coefficient ring for a blowup center, its combined Novikov-divisor generators, the independent center coordinates in the external direct-sum target, the common Laurent comparison ring, and the intrinsic generic even quantum D-module of the center together with its separately recorded scalar extensions in the center summands.",
       "hypotheses": "Divisor pairings separate numerical curve classes; fibres of the untagged center monomial map are finite in every bounded ample-degree slice; the reduced source does not contain the independent target coordinates as coefficients; Iritani's reduced center connection and external direct-sum comparison are defined over the stated rings; and the combined bulk Jacobian is invertible.",
       "conclusion": "The pullback from the reduced source to the external direct-sum target is injective because the exponential characters in the independent target coordinates separate every finite collision fibre. After passage to generic fraction fields, every center summand is a faithful scalar extension and formal reparametrization of the intrinsic generic numerical even QDM of the center.",
-      "cautions": "Fragment. Lean proves the completed-series injection from typed initial-form data involving independent target coordinates, and the source type deliberately contains no target coordinate variables. It does not construct the geometric reduced source, the independent Section 5.8 target coordinates, the completed filtrations and initial-form detector from Iritani's rings, the comparison and inverse, the bulk Jacobian, or the claimed QDM base-change diagram.",
+      "cautions": "Fragment. Lean proves the completed-series injection from the stated initial-form hypotheses involving independent target coordinates, and the source type deliberately contains no target coordinate variables. It does not construct the geometric reduced source, the independent target coordinates, the completed filtrations and initial-form detector from Iritani's rings, the comparison and inverse, the bulk Jacobian, or the claimed QDM base-change diagram.",
       "statement_digest": "3ad0369ee31cb82ff4fb3a40172ceeb7a4ce08bc0632fc2b91091b440b097fcd",
       "terminal_digest": "be590125a3df1d1b3fcc5f61b18adae20fb8fb14cb93839ae248b8c14c566ff7"
     },
@@ -912,7 +912,7 @@
       "objects": "The generic QDM block decomposition on even cohomology, its effective block multiset, an additive marker, an integer suspension action on block classes, the corresponding multisets for varieties and individual center summands, a parity-preserving equivalence on full cohomology, and a finite multiplicity-preserving matching of transported block classes with a recorded degree shift on every pair.",
       "hypotheses": "The comparison on full cohomology preserves the chosen even submodules in both directions. The additive marker is invariant under every recorded suspension. The projective-bundle matching identifies the total-space blocks with rank copies of the base blocks up to those suspensions. The blowup matching identifies the blowup blocks with the ambient blocks plus the literal finite family of individual center blocks, again up to recorded suspensions. Smoothness, positivity of the bundle rank, and the projective-bundle dimension formula are explicit premises of the packaged projective-bundle result.",
       "conclusion": "Lean restricts the parity-preserving comparison to a linear equivalence on even cohomology, converts each suspension-compatible block matching into equality of additive markers, and derives the projective-bundle and blowup marker formulas with every center summand kept separate. It also packages the blowup formula with the center source and dimension data used in birational descent.",
-      "cautions": "Conditional deduction. Lean proves the restriction to even cohomology and the suspension-invariant categorical additivity step without identifying nonzero-degree maps with degree-zero graded morphisms. The packaged blowup terminal keeps the source of every center summand visible. Lean does not construct cohomology or its parity splitting, the geometric QDM blocks, a fixed algebraic splitting field, the common coefficient ring, the parity-preserving regular comparison maps, pairwise spectral separation of summands, the invertible bulk Jacobians, or the component matching from Iritani's and Iritani–Koto's theorems; those remain the manuscript's cited geometric and analytic inputs.",
+      "cautions": "Conditional deduction. Lean proves the restriction to even cohomology and the suspension-invariant categorical additivity step without identifying nonzero-degree maps with degree-zero graded morphisms. The formal blowup theorem keeps the source of every center summand visible. Lean does not construct cohomology or its parity splitting, the geometric QDM blocks, a fixed algebraic splitting field, the common coefficient ring, the parity-preserving regular comparison maps, pairwise spectral separation of summands, the invertible bulk Jacobians, or the component matching from Iritani's and Iritani–Koto's theorems; those remain the manuscript's cited geometric and analytic inputs.",
       "statement_digest": "b607fd91bfe0f75fb533f1dead9103a74a5e519dcf892b992f92bdd9587ad747",
       "terminal_digest": "ec2903f27f534c7d201f8d7284d3855ae3e09d50a5cf6bd55af84bca25c3c5f2"
     },
@@ -922,9 +922,9 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwoResidueMarker_lowDimensionalOccurrenceNullity"
       ],
-      "objects": "The direct rank-two residue marker, smooth centers and their dimensions, individual specialized center summands in the QDM comparison, the intrinsic marker of a center, initial surface classes, positive-rank projective bundles, and point blowups.",
-      "hypotheses": "Every smooth center of dimension at most two is built inductively from an initial class by positive-rank projective bundles and point blowups; the intrinsic residue marker vanishes on the initial classes, is multiplied by bundle rank, and is preserved by point blowup; and the marker of every individual center summand equals the intrinsic marker of its source center.",
-      "conclusion": "Every QDM center summand whose smooth source has dimension at most two has zero direct residue marker, exactly the vanishing premise needed for birational descent in dimension four.",
+      "objects": "The rank-two formal-exponent marker, smooth centers and their dimensions, individual specialized center summands in the QDM comparison, the intrinsic marker of a center, minimal surfaces with nef canonical class, projective two-space, ruled surfaces, positive-rank projective bundles, and point blowups.",
+      "hypotheses": "Every smooth center of dimension at most two is obtained from a minimal surface with nef canonical class, projective two-space, or a ruled surface by point blowups; the intrinsic formal-exponent marker vanishes in those initial cases, is multiplied by bundle rank, and is preserved by point blowup; and the marker of every individual center summand equals the intrinsic marker of its source center.",
+      "conclusion": "Every QDM center summand whose smooth source has dimension at most two has zero rank-two formal-exponent marker, exactly the vanishing premise needed for birational descent in dimension four.",
       "cautions": "Conditional deduction. Lean proves the classification induction and its application to each individual center summand, but does not construct the geometric QDM blocks, classify the surfaces, prove the initial calculations or operation formulas, or construct the faithful comparison for each center summand.",
       "statement_digest": "8537c121f53992f1723ebcd290313be05adc3ce66ea78da2df973f2e036a4850",
       "terminal_digest": "5ba89ca7cb2e71e08172b3d6baff7ab9c7ec980d2c21ef45e620c96f0d63225c"
@@ -933,237 +933,237 @@
   "machinery": [
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.proLaurentGaugeSystem",
-      "reason": "Formalizes the pro-Laurent gauge tower and the invariance of its finite-level characteristic polynomials under compatible conjugation. The manuscript reached its specialization step through this tower in an earlier draft; Section 5 now attaches Hypothesis 5.7T directly to the specialization and states explicitly that no pro-Laurent framed operator is invoked, so no current claim rests on these declarations.",
+      "reason": "Formalizes the pro-Laurent gauge tower and invariance of its finite-level characteristic polynomials under compatible conjugation. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7T or any labelled manuscript claim.",
       "terminal_digest": "826a2598bde4c4b8a258f95f988580c82067e572ce03d5313e7067a2fc1c4e41"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.proLaurentGaugeGroup",
-      "reason": "Formalizes the pro-Laurent gauge tower and the invariance of its finite-level characteristic polynomials under compatible conjugation. The manuscript reached its specialization step through this tower in an earlier draft; Section 5 now attaches Hypothesis 5.7T directly to the specialization and states explicitly that no pro-Laurent framed operator is invoked, so no current claim rests on these declarations.",
+      "reason": "Formalizes the pro-Laurent gauge tower and invariance of its finite-level characteristic polynomials under compatible conjugation. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7T or any labelled manuscript claim.",
       "terminal_digest": "7cdb198125d13490aeeb06e94adb13f77114f411feff7459020f9e9735e622fa"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.framedMonodromy_characteristicPolynomial_baseChange_and_gauge",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "ca8432c867a7bac7d9deed9cfc4dca07c27c768e50e9cf8bcca45144c0e61b44"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.differentialConstants_flatCoefficientBaseChange",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "85b94460fb1467e3f7ea1d3d7e4e01f4feecfe134ad6844aaca58571b43e7a82"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.differentialDerivation_flatCoefficientBaseChange",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "c162027d3be4e6d2761da765f301e7e5cddd6b836f818c94c7ba7a32b6bbab45"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.horizontalMonodromy_flatCoefficientBaseChange",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "8ca5c34206510f0f28b9a87e2fb3355b20839042bbc5ded96a76e81449a36d60"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.horizontalMonodromy_characteristicPolynomialTower",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "1fb61c2410f97362eda420dd1ca5944ec016ad3154a9c1d9b07446a2bbfe6b05"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.horizontalMonodromy_coefficientTower_horizontalReduction",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "a8891464c9c9b0be6da3a0f73908618c68e0d53d12da14462efe9654f47944ae"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.horizontalMonodromy_idealFiltration_horizontalFamily",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "8d810d69ada81ebfe0f8f63048cc1ea489a7f0e6fee9872a518cdb944cf2e044"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.horizontalMonodromy_completeSeparatedFiltration_horizontalFamily_bijective",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "96ae2c952b9adbb7b767f0c5f374eec7ca1b688754aef4051585cf414d91df27"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.horizontalMonodromy_adicCharacteristicPolynomialTower",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "c8348e1ae9e98bc71b11d4ea5d993d88f247d12656a6c122cada612ae7f915c1"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.formalDifferentialModule_solutionPresentation_baseChange",
-      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, its characteristic-polynomial towers over ideal filtrations and adic quotients, and the conditional formal-differential realization of that packet. The manuscript's surviving base-change statement is the numerical Novikov one, whose Lean coverage is registered separately, and these declarations do not prove it.",
+      "reason": "Formalizes coefficientwise and flat base change for horizontal monodromy, characteristic-polynomial towers over ideal filtrations and adic quotients, and a conditional formal-differential realization. These declarations do not establish the numerical-Novikov base-change statement used by the manuscript.",
       "terminal_digest": "c0f9817385453b2c7d3482483f927aea9f491d76fd44d5c63398f7f5b0c4e908"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.proLaurentCharacteristicPolynomialSystem",
-      "reason": "Formalizes the pro-Laurent gauge tower and the invariance of its finite-level characteristic polynomials under compatible conjugation. The manuscript reached its specialization step through this tower in an earlier draft; Section 5 now attaches Hypothesis 5.7T directly to the specialization and states explicitly that no pro-Laurent framed operator is invoked, so no current claim rests on these declarations.",
+      "reason": "Formalizes the pro-Laurent gauge tower and invariance of its finite-level characteristic polynomials under compatible conjugation. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7T or any labelled manuscript claim.",
       "terminal_digest": "10d56659c37bf9f8982180f81bab46ec6766cb9325bf3a546b0ebc7922843abf"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.proLaurent_characteristicPolynomial_of_compatibleMonodromy",
-      "reason": "Formalizes the pro-Laurent gauge tower and the invariance of its finite-level characteristic polynomials under compatible conjugation. The manuscript reached its specialization step through this tower in an earlier draft; Section 5 now attaches Hypothesis 5.7T directly to the specialization and states explicitly that no pro-Laurent framed operator is invoked, so no current claim rests on these declarations.",
+      "reason": "Formalizes the pro-Laurent gauge tower and invariance of its finite-level characteristic polynomials under compatible conjugation. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7T or any labelled manuscript claim.",
       "terminal_digest": "1ba1b897d1b45316ce7d88711d38b89510112105259072933682ed73b04a2663"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.proLaurent_conjugatedMonodromy_compatible_and_charpoly",
-      "reason": "Formalizes the pro-Laurent gauge tower and the invariance of its finite-level characteristic polynomials under compatible conjugation. The manuscript reached its specialization step through this tower in an earlier draft; Section 5 now attaches Hypothesis 5.7T directly to the specialization and states explicitly that no pro-Laurent framed operator is invoked, so no current claim rests on these declarations.",
+      "reason": "Formalizes the pro-Laurent gauge tower and invariance of its finite-level characteristic polynomials under compatible conjugation. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7T or any labelled manuscript claim.",
       "terminal_digest": "4c7b4ef2ecaaec8b4697c6d233ecb1a2648e1139e823e0902433349cee9bc7db"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.formalBaseShift_completedDivisorSubstitution",
-      "reason": "Formalizes the exact divisor substitution on a completed Novikov ring, triviality of the scalar string gauge, and the resulting finite-level matrix identity for the bulk characteristic polynomial. The manuscript now proves the string and divisor shifts directly from the String and Divisor Equations, so its lemma is not this finite-level matrix packet.",
+      "reason": "Formalizes exact divisor substitution on a completed Novikov ring, triviality of the scalar string gauge, and a finite-level matrix identity for the bulk characteristic polynomial. The manuscript's String- and Divisor-Equation argument does not depend on these declarations.",
       "terminal_digest": "c426aa598817d1a4eb6092eab85c20bcedd22183724c3fb83646d2d974f2bd62"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.formalBaseShift_formalStringGauge_trivial",
-      "reason": "Formalizes the exact divisor substitution on a completed Novikov ring, triviality of the scalar string gauge, and the resulting finite-level matrix identity for the bulk characteristic polynomial. The manuscript now proves the string and divisor shifts directly from the String and Divisor Equations, so its lemma is not this finite-level matrix packet.",
+      "reason": "Formalizes exact divisor substitution on a completed Novikov ring, triviality of the scalar string gauge, and a finite-level matrix identity for the bulk characteristic polynomial. The manuscript's String- and Divisor-Equation argument does not depend on these declarations.",
       "terminal_digest": "31f68dc9cdc2bfcedb3ee71034f29d3ccff8d05bc41b86be11c3a76f00ebcd0a"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.formalBaseShift_characteristicPolynomial_of_matrixInput",
-      "reason": "Formalizes the exact divisor substitution on a completed Novikov ring, triviality of the scalar string gauge, and the resulting finite-level matrix identity for the bulk characteristic polynomial. The manuscript now proves the string and divisor shifts directly from the String and Divisor Equations, so its lemma is not this finite-level matrix packet.",
+      "reason": "Formalizes exact divisor substitution on a completed Novikov ring, triviality of the scalar string gauge, and a finite-level matrix identity for the bulk characteristic polynomial. The manuscript's String- and Divisor-Equation argument does not depend on these declarations.",
       "terminal_digest": "19caf61932401334384b088be89dd86e1e7e8e4909c19d8b8ff69987b6c9a799"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.filteredCoefficientQuotient_reduction_and_substitution",
-      "reason": "Formalizes the filtration side of the superseded base-shift route: decreasing and adic ideal filtrations, their quotient towers, filtration-preserving endomorphisms, multiplicativity, and completeness and separatedness in the compatible-quotient-family sense. General algebra, retained because it is reusable, but no current manuscript claim states it.",
+      "reason": "Formalizes decreasing and adic ideal filtrations, quotient towers, filtration-preserving endomorphisms, multiplicativity, completeness, and separatedness. No labelled manuscript claim depends on these general algebraic declarations.",
       "terminal_digest": "93d57c80066131d4e7ab4ad7ba011ec72806980f7fd4bdb9fa049db7823e5b3b"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.filteredCoefficientQuotient_adicFiltration_mul_mem_add",
-      "reason": "Formalizes the filtration side of the superseded base-shift route: decreasing and adic ideal filtrations, their quotient towers, filtration-preserving endomorphisms, multiplicativity, and completeness and separatedness in the compatible-quotient-family sense. General algebra, retained because it is reusable, but no current manuscript claim states it.",
+      "reason": "Formalizes decreasing and adic ideal filtrations, quotient towers, filtration-preserving endomorphisms, multiplicativity, completeness, and separatedness. No labelled manuscript claim depends on these general algebraic declarations.",
       "terminal_digest": "ec43b9031a3de555f84255ad4b64ce2dd61ce9a0b840e55cc7ef9eb47b5eaa97"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.filteredCoefficientQuotient_adicEndomorphism_compatible",
-      "reason": "Formalizes the filtration side of the superseded base-shift route: decreasing and adic ideal filtrations, their quotient towers, filtration-preserving endomorphisms, multiplicativity, and completeness and separatedness in the compatible-quotient-family sense. General algebra, retained because it is reusable, but no current manuscript claim states it.",
+      "reason": "Formalizes decreasing and adic ideal filtrations, quotient towers, filtration-preserving endomorphisms, multiplicativity, completeness, and separatedness. No labelled manuscript claim depends on these general algebraic declarations.",
       "terminal_digest": "c6ff063c5036ba71cbee9f550dfb2012954f8a17f6ce8dea5b02055a966aa7de"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.formalBaseShift_bulkSystem_compatible_and_charpoly",
-      "reason": "Formalizes the filtration side of the superseded base-shift route: decreasing and adic ideal filtrations, their quotient towers, filtration-preserving endomorphisms, multiplicativity, and completeness and separatedness in the compatible-quotient-family sense. General algebra, retained because it is reusable, but no current manuscript claim states it.",
+      "reason": "Formalizes decreasing and adic ideal filtrations, quotient towers, filtration-preserving endomorphisms, multiplicativity, completeness, and separatedness. No labelled manuscript claim depends on these general algebraic declarations.",
       "terminal_digest": "875e55dbcf06870dcb73fe8162fccb3dc2ad9a38cc4c9d17c80ba497a82097d2"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.filteredFormalBaseShift_bulkSystem_compatible_and_charpoly",
-      "reason": "Formalizes the filtration side of the superseded base-shift route: decreasing and adic ideal filtrations, their quotient towers, filtration-preserving endomorphisms, multiplicativity, and completeness and separatedness in the compatible-quotient-family sense. General algebra, retained because it is reusable, but no current manuscript claim states it.",
+      "reason": "Formalizes decreasing and adic ideal filtrations, quotient towers, filtration-preserving endomorphisms, multiplicativity, completeness, and separatedness. No labelled manuscript claim depends on these general algebraic declarations.",
       "terminal_digest": "dac1e8538cf2317109265f979c6f58877502ceaf10a029eda0bd1606bbf4d7b4"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.multiplicativeFilteredFormalBaseShift_conclusion",
-      "reason": "Formalizes the filtration side of the superseded base-shift route: decreasing and adic ideal filtrations, their quotient towers, filtration-preserving endomorphisms, multiplicativity, and completeness and separatedness in the compatible-quotient-family sense. General algebra, retained because it is reusable, but no current manuscript claim states it.",
+      "reason": "Formalizes decreasing and adic ideal filtrations, quotient towers, filtration-preserving endomorphisms, multiplicativity, completeness, and separatedness. No labelled manuscript claim depends on these general algebraic declarations.",
       "terminal_digest": "967997ef6cab691f0784b1f7684ccc91836143363afdb550b6ab9efe4dc2f25b"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.completeSeparatedMultiplicativeFormalBaseShift_conclusion",
-      "reason": "Formalizes the filtration side of the superseded base-shift route: decreasing and adic ideal filtrations, their quotient towers, filtration-preserving endomorphisms, multiplicativity, and completeness and separatedness in the compatible-quotient-family sense. General algebra, retained because it is reusable, but no current manuscript claim states it.",
+      "reason": "Formalizes decreasing and adic ideal filtrations, quotient towers, filtration-preserving endomorphisms, multiplicativity, completeness, and separatedness. No labelled manuscript claim depends on these general algebraic declarations.",
       "terminal_digest": "e97fafdae209c0030bbd538f9e380c7728b199d97774f21a9946dd3fc7439b18"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.adicFormalBaseShift_bulkSystem_compatible_and_charpoly",
-      "reason": "Formalizes the filtration side of the superseded base-shift route: decreasing and adic ideal filtrations, their quotient towers, filtration-preserving endomorphisms, multiplicativity, and completeness and separatedness in the compatible-quotient-family sense. General algebra, retained because it is reusable, but no current manuscript claim states it.",
+      "reason": "Formalizes decreasing and adic ideal filtrations, quotient towers, filtration-preserving endomorphisms, multiplicativity, completeness, and separatedness. No labelled manuscript claim depends on these general algebraic declarations.",
       "terminal_digest": "731a79748a9746547ebef0ed5df357eb033b7fa62295dbc177221cbacb9f8723"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.constantFlatGauge_normalized_and_recursion",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "03a6ef214fde364b672d8fd15f8a0c4918bf68b130c1faa98c266512ad73e830"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.compatibleConstantFlatGauge_reduction_and_derivative",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "cbdc0350df38ac33b411804b034b7763c9fce9f9febb2d5db33d71e2710ea6f9"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.varyingFlatGauge_normalized_unique_and_invertible",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "628a843b1afda60578860bd608a1b1dd6055ae8c791b0d35b8807f4122fe92f1"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.compatibleVaryingFlatGauge_reduction_unique_and_invertible",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "7b1a9be1a9ce9954fee59386a77ec39bb546a2d06f0091e198184ca0afc47d3d"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.filteredVaryingFlatGauge_quotient_reduction_unique_and_invertible",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "d9bdcb0282ae52cf6b575f0f9d36d15cfb348f9ef0e323b8309a7e20f039b859"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.multivariableLaurentFlatGauge_normalizedSolution_unique",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "e4fc3bb705acdde870eb7953d38e254da31362cfcd978030dd71757956365ec5"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.multivariableFormalFlatGauge_existsUnique_of_zeroCurvature",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "0f789cd501b6fa88b6320cfa1f6635852b63f34716dc3e183f10d3e39e4395c0"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.filteredMultivariableFormalFlatGauge_quotient_compatible",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "5c0429a4ce610a290da6c8a27700684904548fc8518ac74d2977bd9ca3e4c753"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.filteredMultivariableLaurentFlatGauge_quotient_compatible",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "7220858667cb9263e3bac5e362b085767f9c0917f16b840426c1ef7a7d43836a"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.filteredMultivariableLaurentFlatGauge_uniformBound_of_finiteBulkSupport",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "dba93238a37c47b5647bd88d9207e079136fd5e0bf4357e9e1e7d65e4b72a5e0"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.multivariableLaurentSeries_uniformBound_of_totalDegreeCutoff",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "1700b482349008515b47185a2b1d5fe49fbfcd22f32255dd744ebe9e59c52778"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.multiplicativeFiltration_positiveBulkMonomial_vanishes_in_quotient",
-      "reason": "Formalizes the positive-filtration evaluation branch: vanishing of positive bulk monomials in each quotient, finite evaluation and the resulting limit gauge, and the strongest base-ring form of the bulk system. This is what the deleted bulk-displacement statement rested on, and the manuscript now assumes Hypothesis 5.7R instead of proving it.",
+      "reason": "Formalizes vanishing of positive bulk monomials in adic quotients, finite evaluation, the limit gauge, and the corresponding base-ring bulk system. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7R, which remains an explicit hypothesis.",
       "terminal_digest": "b2dced5726d1a1e7d085d2cd2abd624603a5af0c5c3cef44265578d92c7d3b9e"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.multiplicativeFiltration_positiveLaurentFlatGauge_finiteEvaluation",
-      "reason": "Formalizes the positive-filtration evaluation branch: vanishing of positive bulk monomials in each quotient, finite evaluation and the resulting limit gauge, and the strongest base-ring form of the bulk system. This is what the deleted bulk-displacement statement rested on, and the manuscript now assumes Hypothesis 5.7R instead of proving it.",
+      "reason": "Formalizes vanishing of positive bulk monomials in adic quotients, finite evaluation, the limit gauge, and the corresponding base-ring bulk system. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7R, which remains an explicit hypothesis.",
       "terminal_digest": "25d80ec917177f0f0c195e1acf6450f45a942d19dbb1603f2397b0d1e10cd4de"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.completeSeparatedFiltration_positiveLaurentFlatGauge_limit",
-      "reason": "Formalizes the positive-filtration evaluation branch: vanishing of positive bulk monomials in each quotient, finite evaluation and the resulting limit gauge, and the strongest base-ring form of the bulk system. This is what the deleted bulk-displacement statement rested on, and the manuscript now assumes Hypothesis 5.7R instead of proving it.",
+      "reason": "Formalizes vanishing of positive bulk monomials in adic quotients, finite evaluation, the limit gauge, and the corresponding base-ring bulk system. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7R, which remains an explicit hypothesis.",
       "terminal_digest": "c47d1b5267c27f15b1ebcf5d286240fc6b29ebc09598be951ded03319122b437"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.positiveEvaluatedFormalBaseShift_bulkSystem",
-      "reason": "Formalizes the positive-filtration evaluation branch: vanishing of positive bulk monomials in each quotient, finite evaluation and the resulting limit gauge, and the strongest base-ring form of the bulk system. This is what the deleted bulk-displacement statement rested on, and the manuscript now assumes Hypothesis 5.7R instead of proving it.",
+      "reason": "Formalizes vanishing of positive bulk monomials in adic quotients, finite evaluation, the limit gauge, and the corresponding base-ring bulk system. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7R, which remains an explicit hypothesis.",
       "terminal_digest": "12b4fc5576018e8b5a69dfcd17c104d22a674ecd2317aecdf94ccd7870856989"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.positiveEvaluatedFilteredFormalBaseShift_substitution_and_bulkSystem",
-      "reason": "Formalizes the positive-filtration evaluation branch: vanishing of positive bulk monomials in each quotient, finite evaluation and the resulting limit gauge, and the strongest base-ring form of the bulk system. This is what the deleted bulk-displacement statement rested on, and the manuscript now assumes Hypothesis 5.7R instead of proving it.",
+      "reason": "Formalizes vanishing of positive bulk monomials in adic quotients, finite evaluation, the limit gauge, and the corresponding base-ring bulk system. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7R, which remains an explicit hypothesis.",
       "terminal_digest": "88d68ae7836eef99c88e56c8e2d0a7e55af53b6f992e4d2962044d828594a3c8"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.positiveEvaluatedBaseFormalBaseShift_smallMonodromy_and_bulkSystem",
-      "reason": "Formalizes the positive-filtration evaluation branch: vanishing of positive bulk monomials in each quotient, finite evaluation and the resulting limit gauge, and the strongest base-ring form of the bulk system. This is what the deleted bulk-displacement statement rested on, and the manuscript now assumes Hypothesis 5.7R instead of proving it.",
+      "reason": "Formalizes vanishing of positive bulk monomials in adic quotients, finite evaluation, the limit gauge, and the corresponding base-ring bulk system. These declarations do not establish the framed-monodromy companion's Hypothesis 5.7R, which remains an explicit hypothesis.",
       "terminal_digest": "5675ebf26394af170408edc6f36f4d8b14d74100abb50081158d26c520174469"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.multivariableFlatGauge_invertibleSolution_curvature",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "f489f3dec302d8c0d16578f59c2c555c229c50b72a118776e2eb3c4a86fb8b65"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.multivariableFormalPartialDerivations_and_curvature",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "85e3e93c8c425b2055105e9b6b85dad8c1aab9efaddab0f4435fd14a2167b0ac"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.multivariableFormalConnection_curvature_of_potential_and_commutingProduct",
-      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, in the constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature integrability identities that force them. This is the frame transport machinery of the superseded route; the manuscript no longer states a gauge-transport lemma at this generality.",
+      "reason": "Formalizes existence and uniqueness of normalized flat gauges over rational coefficient algebras, including constant, one-variable, multivariable formal, and Laurent-coefficient cases, together with the zero-curvature identities forcing them. No labelled manuscript claim asserts gauge transport at this generality.",
       "terminal_digest": "231f58503d6597b550a84d935db6e3ecaadde088cb80c8b45d21988121558a5e"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.sixAxisLocalChart_exoticSlope_not_selfAdjoint_over_orderedRing",
-      "reason": "Records the coefficient-ring scope of the two-primary depth-one slope. The depth-one block 5I4-J4 pairs a vector to the sum of the squares of its coordinates and of their pairwise differences, and the dual form (1/5)(I4+J4) to the inverse of five times the sum of the squares and the square of the coordinate sum, so both are positive semidefinite over a linearly ordered commutative ring and positive on the first coordinate vector; no matrix satisfying the relation of a primitive cube root of unity is self-adjoint for either. The manuscript places that slope over a complete unramified discrete valuation ring at two, which carries no compatible order, so no manuscript claim rests on this declaration; it states why the exotic slope cannot be exhibited as an integral matrix and must be reached through the residue field and a lift.",
+      "reason": "Records the coefficient-ring scope of the two-primary depth-one slope. The depth-one block 5I4-J4 pairs a vector to the sum of the squares of its coordinates and of their pairwise differences, and the dual form (1/5)(I4+J4) to the inverse of five times the sum of the squares and the square of the coordinate sum, so both are positive semidefinite over a linearly ordered commutative ring and positive on the first coordinate vector; no matrix satisfying the relation of a primitive cube root of unity is self-adjoint for either. This proves only an obstruction over linearly ordered coefficient rings; it does not construct the two-primary slope over the complete unramified discrete valuation ring used in the manuscript.",
       "terminal_digest": "538b3b4b5f9135bccf204201b6248c49aa29741b0d22cbb07967136ed8d34916"
     },
     {
@@ -1173,177 +1173,177 @@
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.eulerOperator_generalizedEigenspaces_under_sign_reversal",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "1224e711a9b208a602ac9550818525db82509b397486a8f9579723dc1b64e8f0"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.eulerOperator_eigenvalue_count_under_sign_reversal",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "c984cc5cd64bdea868d9a5293365b64e9dba6603a8ead60925057d7124e9093e"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.eulerOperator_cyclic_span_under_sign_reversal",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "52e9871ce08ab3a2188e82fc0e542b20d8ab779ab2090b2884fc74f57d4edbe7"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.characteristicDiscriminant_under_root_sign_reversal",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "d08fb0b4b90bf024baef8d3dcf4472714745c59e546b28bdba0890baf019f752"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.residueDiscriminant_under_sign_reversal",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "f15cfa314182becba211ec2bcdfdeca65f4d51bb242a6d812bdf39aac5cb4785"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.characteristicDiscriminant_under_odd_coefficient_sign_reversal",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "f6bbae5c37aa4fc5ae2e5961b0e57566413b439c273858842d0b51e9f8c3c27a"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.hodgeFixedSubalgebra_closed_under_eulerMultiplication",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "6f9410b3295b9a3e5298a69baaeadbaa020f9f787a77d054420be0307da70a61"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.hodgeFixedSubalgebra_eigenvector_transfers",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "9c39be62fad9b348fa562e89fa86020d09c1a38f817b1a081c67c3a07b8aff97"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.hodgeFixedTangentSpace_span_and_finrank",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "b8966215ed938bf11bbd97f367d6530a383ca11e4c1c74c45f5b44afab5051a0"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.truncatedHyperplaneAlgebra_model",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "274fc8b3da483f68e16e3f8ae22877b13dc4ae06b51ff5e15ac4bffc1c74be59"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.quarticDiscriminant_eq_squared_root_differences",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "33c381b66dac6d2dab02b97b57172546614505e60028ae5989748d4fd7592762"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.eulerFrame_discriminant_logarithmicDerivatives",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "eee41653461791adb3705898ddc9f89e704e62ee226e5467c70cab3a92e07cc6"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.eulerFrame_discriminant_differential",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "0dda57182e20a639cf467b4f3cc8835d4975fc53720dee56c686c56362324c38"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.eulerFrame_discriminant_eq_zero_of_vanishing_at_base_point",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "6325f57fe2f9501f7b3dd92858d50fb3d33ebb9b6e364b51ea607236ca13dec5"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.eulerFrame_data_nonempty",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "e523da02c91c54df5b7c6a42d4da42f446d4d9df29d4c7b3ee31524ec0bb9b0a"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.eulerMultiplication_eigenvalues_module_eq_algebra",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "bf9099529354f39f215e0466209151cdd18b044861be44e5bde6af6497508ffc"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicThreefold_totalChernClass_identity",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "ca51f5637b43a6d86aa1731a8833b63c3cdd01218b70bcc0a036d2d1edbd156b"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicThreefold_bettiThree_eq_ten",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "c7690f34ffaffb7955d57af1f83e580a0e1bef783a9f677b3b4fb243ff4cd12c"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicThreefold_eulerMultiplication_annihilates_degreeThree",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "cb325801aa2889196019a0fcab9fd26cf8b65862d60172737da3af0ee28d7628"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicZeroPacket_component_excludes_rankOne_branches",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "406dce06e89d74f33920aa9dd50819b608bbea1602615464d2b08aca8bb6d714"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicZeroPacket_parityRanks_eq_two_and_ten",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "12b69a0a3b9bc59c7b207cdc53d3e3293af5890e9aaa519fa669b28e3554f293"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicThreefold_totalChernClass_uniqueness",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "1d5a2dfe8c1b04d91829670e4a4d6f74ee0fb958296c35c5ebbc37f96b90e31d"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.quantumPairing_horizontality_of_selfAdjoint_multiplication",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "67d5325f5dc85d59bd98ee8cc56800bd2ae2a6340d21574481d3e220829164f0"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.separatedSpectralFactors_pairing_blockDiagonal",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "f1ee8dba85f5040b274034b5336bb7d4f7c754f86529dd3cf8b0b50b88639c22"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.separatedSpectralFactors_pairing_eq_zero_of_horizontality",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "a878a3cb4b586e3d3c115dd19e740e618a7b0acf0fbe522a8457aaa8690fabf0"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.separatedSpectralFactors_labelledPairing_blockDiagonal_of_horizontality",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "e7d76e1c17ab0d2c0ec195b25c9f3fc7f0bd9c1a94729a51fbd7a5736a92ee9f"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.separatedSpectralFactors_evenPart_pairing_nondegenerate",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "180536f8f4fa82dc254aed0fc85852499bed72c482feb5a4a000dab51f6823d7"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.separatedSpectralFactors_equalEigenvalues_admit_nonzero_horizontalPairing",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "af2775034359d3bdedbebdb828b54847e881d4ad779671e3e4a70e7c021dac2f"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.atomicFactor_residueDiscriminant_invariant_under_blockDiagonal_frame_change",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "3bf37d0af1c14f0285bdb1e0a1e22a952659bc1f05027634c6af96fc98beaee6"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.sylvesterEquation_unique_solution_of_separated_spectra",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "e8ba71c54da4da8ab8c1683c34eea8f1da10c87807ae5b218d2b716a67c3502b"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.blockSylvesterEquation_unique_blockOffDiagonal_solution",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "d14fff7774df92103a3c0d2cc7eb40d72b74997f4c72dae6b42aa704f1933a76"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.exists_normalizedBlockGauge_of_separated_blocks",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "4bca414859a100b87c9453b60582794401c300a8dcffee57e05e36527f3e2fbe"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.normalizedBlockGauge_unique_of_separated_blocks",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "9076d495a38dcfe44c468419fa7eae7fe6698804230b843dd7713dfb70ea746b"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.atomicResidueDiscriminant_constant_on_formal_germ",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "65ec570a2aa9b7c7a6c1da1abac03b8854fa6902c5ac7ec386ced6e425b80f15"
     },
     {
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.atomicResidueDiscriminant_invariant_under_frame_change",
-      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "reason": "Formalizes auxiliary linear-algebra and formal-connection statements that provide no coverage of a labelled manuscript claim.",
       "terminal_digest": "76485992b885237b206670214c62cb9ea4fe2968be6580b70ac7769972b03638"
     }
   ]
