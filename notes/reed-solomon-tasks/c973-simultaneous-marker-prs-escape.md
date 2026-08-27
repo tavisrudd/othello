@@ -156,6 +156,11 @@ Among them, the six roots of `tau^6+tau^5+1` form another constant-cover
 stratum: taking the added root `a=tau` forces `B0=0` and a trace-zero constant
 cover.  Two rational lines again give 130 points against 54 deletions.  The
 forced-root surface is down to 57 `tau` forms.
+The specialization `a=tau` has a fully factored trace-zero locus.  It closes
+nine more noncolliding roots, and `tau=0` reuses the endpoint argument.  The
+surface remainder is exactly 47 forms: 42 trace-one values, the three roots
+of `tau^3+tau^2+1` where `a=tau` collides with `H`, and the two roots of
+`tau^2+tau+1` where its denominator vanishes.
 
 ## Objective
 

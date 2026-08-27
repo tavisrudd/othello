@@ -158,6 +158,9 @@ a `GF(8)` specialization has 12 elliptic points over `GF(8)`, hence 72 over
 Six more are now closed uniformly: if `tau^6+tau^5+1=0`, choosing `a=tau`
 forces a trace-zero constant cover with 130 points against 54 deletions.  The
 surface remainder is 57 `tau` forms.
+Factoring the constant-cover trace for `a=tau` closes nine further forms, and
+`tau=0` reuses the endpoint.  The exact remainder is 47: 42 trace-one forms,
+three fixed-root-collision forms, and two denominator-degenerate forms.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

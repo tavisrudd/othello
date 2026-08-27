@@ -576,6 +576,53 @@ coefficient `c^2`.  The remaining base polynomials are visibly nonzero from
 This closes all six roots of `tau^6+tau^5+1` without a certificate.  The
 forced-root surface is reduced to 57 normal forms.
 
+The specialization `a=tau` is useful beyond that sextic.  It always gives
+
+\[
+ B_0=0,\qquad B_1=\tau^3,\qquad
+ B_2=B_3=\tau^2+\tau+1,
+\]
+
+and, when the last coefficient is nonzero, the constant in (25) is
+
+\[
+                 T(\tau)=\tau+\frac1{\tau^2+\tau+1}.
+\]
+
+Summing the six Frobenius powers and reducing against `X^64-X` gives the
+exact trace-zero factorization
+
+\[
+\begin{aligned}
+ &\tau(\tau+1)(\tau^3+\tau+1)(\tau^3+\tau^2+1)\\
+ &\qquad\cdot(\tau^6+\tau^5+1)
+ (\tau^6+\tau^5+\tau^2+\tau+1)=0.                        \tag{31}
+\end{aligned}
+\]
+
+The denominator-zero values are the two roots of `tau^2+tau+1` and do not
+occur in (31).  The factor `tau+1` is the dense form already closed.  The
+roots of `tau^3+tau^2+1` are exactly the three nontrivial roots of `H`, so
+`a=tau` collides with the fixed affine plane there.  The two sextic factors
+and the two cubic factors in (31) are pairwise coprime to the denominator;
+apart from that one collision cubic, they are also coprime to `H`.
+
+Consequently `a=tau` and the same `130>54` constant-cover proof close the
+three roots of `tau^3+tau+1` and the six roots of
+`tau^6+tau^5+tau^2+tau+1`, in addition to the sextic already treated.  At
+`tau=0`, the coefficient tuple is the one from the `(0,0)` boundary, so its
+earlier trace-zero choice with `a!=0` closes this form too.  Ten of the 57
+forms are thereby removed.  The exact surface remainder has 47 forms:
+
+| remaining stratum | size |
+|---|---:|
+| `Tr(T(tau))=1` | 42 |
+| `tau^3+tau^2+1=0` (the `a=tau` collision cubic) | 3 |
+| `tau^2+tau+1=0` (denominator zero) | 2 |
+
+This is a theorem-derived arithmetic partition, not a list of support
+certificates.
+
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
 degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
@@ -584,7 +631,7 @@ Hankel equations reduce to
 \[
 \begin{aligned}
  k_0+uv^2k_5+(u^6+v^3)k_6&=0,\\
- k_1+uv^2k_6+(u^6+v^3)k_7&=0.                            \tag{31}
+ k_1+uv^2k_6+(u^6+v^3)k_7&=0.                            \tag{32}
 \end{aligned}
 \]
 
@@ -593,7 +640,7 @@ removed.  Write the subspace polynomial as
 
 \[
  L_U(t)=t^8+\alpha t^4+\beta t^2+\gamma t,
- \qquad \gamma\ne0.                                      \tag{32}
+ \qquad \gamma\ne0.                                      \tag{33}
 \]
 
 Synthetic division of `L_U(t)+C` by `t+r` gives
@@ -601,11 +648,11 @@ Synthetic division of `L_U(t)+C` by `t+r` gives
 \[
  k_7=1,\ k_6=r,\ k_5=r^2,\quad
  k_1=\beta+r^6+\alpha r^2,\quad
- k_0=\gamma+r\beta+r^7+\alpha r^3.                       \tag{33}
+ k_0=\gamma+r\beta+r^7+\alpha r^3.                       \tag{34}
 \]
 
-Substitution of (33) into (31) first determines `beta` and then cancels every
-term except `gamma`; hence (31) forces `gamma=0`, contradicting (32).
+Substitution of (34) into (32) first determines `beta` and then cancels every
+term except `gamma`; hence (32) forces `gamma=0`, contradicting (33).
 Therefore the natural `q`-support plus affine-three-space-minus-one padding
 cannot close even the split-quadratic stratum.  This explains a substantial
 part of the earlier support-atlas failure without appealing to its
@@ -628,7 +675,7 @@ is the subspace polynomial of a two-dimensional `F2`-space and `C=L_U(b)` is
 the nonzero value defining a coset disjoint from zero, then
 
 \[
- h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{34}
+ h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{35}
 \]
 
 is automatically split with five distinct nonzero roots when the extra root
@@ -636,10 +683,10 @@ avoids that coset.  Its coefficients are
 
 \[
  (g_0,g_1,g_2,g_3,g_4,g_5)
- =(aC,aB+C,aA+B,A,a,1).                                   \tag{35}
+ =(aC,aB+C,aA+B,A,a,1).                                   \tag{36}
 \]
 
-Equations (34)--(35) give a four-parameter split chart on which the slope-pencil
+Equations (35)--(36) give a four-parameter split chart on which the slope-pencil
 conditions can be imposed explicitly.  The next proof should either:
 
 1. use the slope-pencil gate (6) on the strata where its constant term is not
@@ -651,7 +698,7 @@ endpoint syndrome `e7`, for which `B3=0`, `D=1`, and
 
 \[
  \operatorname {Tr}T
- =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{36}
+ =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{37}
 \]
 
 when `g4!=0`.  This is already an explicit lower-dimensional trace problem,
@@ -683,11 +730,12 @@ arguments do not answer that arithmetic question.
 | What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
-| How many marked-torus forms remain? | 66 total; `tau=1`, both `u=0` forms, and six constant-cover forms are closed | 57 `tau` values |
+| How many marked-torus forms remain? | 66 total; the constant-cover trace factorization (31) leaves 47 | three explicit arithmetic strata above |
 | Does rootlessness close the `(0,0)` boundary? | no; (25) makes the cover empty, but the opposite trace splits it into two rational lines | closed by `130>54` |
 | What closes the `(0,1)` boundary? | a `GF(8)` elliptic specialization with 72 points | closed by `72>52` |
 | What happens when `tau^6+tau^5+1=0`? | `n0n2=tau^9 n1^2` with trace-zero constant | all six forms closed by `130>54` |
-| Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (31)--(33) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
+| How far does `a=tau` extend? | factorization (31) closes nine additional noncolliding roots; `tau=0` reuses the endpoint | ten more forms closed |
+| Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (32)--(34) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |
 
