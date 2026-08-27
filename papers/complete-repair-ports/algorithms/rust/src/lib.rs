@@ -3,6 +3,7 @@
 //! The crate is organized around compact state representations and replayable
 //! arena witnesses.  It intentionally does not mirror the Python module tree.
 
+pub mod applications;
 mod arena;
 pub mod balanced;
 pub mod bitset;
@@ -21,6 +22,12 @@ pub mod span;
 pub mod transfer;
 pub mod witness;
 
+pub use applications::{
+    azure_lrc_12_2_2_upgrade_domains, ceph_xor_repair_supports, gpu_checkpoint_mds_recovery,
+    minimum_node_span_repair, schedule_repair_dag, ApplicationError, CephRepairAnswer,
+    CephXorLayer, NodeSpanRepairAnswer, QcLdpcCode, QcTrappingSetAnswer, RepairDagAnswer,
+    RepairTask,
+};
 pub use composition::{
     CompositionAnswer, CompositionError, CompositionTable, CompositionTower, CostTable,
     TowerAnswer, TowerLevel, TowerWitness,
