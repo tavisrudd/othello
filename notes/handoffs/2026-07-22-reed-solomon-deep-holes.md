@@ -124,11 +124,19 @@ final-pair trace cover, not a GF(64) census.  The exact reduction now sharpens
 the genus-one deletion budget to 48 against the GF(64) Hasse lower bound 49;
 the sole remaining binary lemma is selection of five fixed roots for which
 the quadratic final-product numerator is rootless, equivalently one explicit
-Artin--Schreier trace bit.  Checkpoints:
+Artin--Schreier trace bit.  The coefficient-space trace is now exactly
+balanced: whenever `B3(B2^2+B1B3)!=0`, precisely half of the `B0` values are
+rootless.  The remaining binary gate is realizing that affine direction in a
+split-quintic chart, with a separate explicit degenerate stratum.  Three
+linear slope equations reduce the generic realization to a binary-quartic
+pencil; a suitable split quartic gives exactly 32 rootless parameters versus
+at most 23 exclusions.  The open seam is quartic splitting plus nonvanishing
+of the restricted C620 selector.  Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with
 the structural frontier in
-`notes/reed-solomon-tasks/c973-2026-08-27-gf64-pointed-trace-gate.md`.
+`notes/reed-solomon-tasks/c973-2026-08-27-gf64-pointed-trace-gate.md` and
+`notes/reed-solomon-tasks/c973-2026-08-27-gf64-trace-balance.md`.
 
 C974 is complete.  The toolkit now contracts arbitrary degree-`r-5` marker
 supports directly to a complete R5 cubic pencil, returns the resulting

@@ -108,7 +108,16 @@ That reduction is now exact in
 genus-at-most-one final-pair curve, versus the GF(64) Hasse lower bound 49,
 provided its quadratic final-product numerator `N(x)` is rootless.  This is
 equivalent to one explicit Artin--Schreier trace bit on the five fixed roots.
-Proving that trace selectable is the sole remaining binary arithmetic gate.
+The coefficient-space half of that gate is now proved in
+`c973-2026-08-27-gf64-trace-balance.md`: on every chart with
+`B3(B2^2+B1B3)!=0`, exactly half of the `B0` values make `N(x)` rootless.
+The remaining binary operation is to realize that balanced direction inside
+a split-quintic chart while retaining the C620 selector, plus the explicit
+degenerate chart beginning at `e7`.  The exact generic realization is now a
+binary-quartic slope pencil: three linear convolution equations fix
+`B1,B2,B3`, a fourth inequality makes the added root run `B0` bijectively,
+and the margin is 32 rootless parameters versus at most 23 selector/zero
+exclusions.
 
 ## Objective
 
