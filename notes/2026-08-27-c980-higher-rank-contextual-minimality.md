@@ -518,6 +518,36 @@ costs.  Sharpness for linear fibre systems, and then for represented codes,
 remains a genuine coding-theoretic question; those extra identities might
 permit a smaller bound.
 
+One such identity gives an exact collapse.  Suppose ordinary fibre cost is
+invariant under the scalar action:
+
+```text
+lambda(cB)=lambda(B) for every c in L^times.
+```
+
+In any compatible outer context, the target coordinate functional on `D` is
+an `L`-linear combination of the helper coordinate functionals, say
+`a_j=sum_h c_h a_h`.  Hence every sector satisfies
+
+```text
+B_j = sum_h c_h B_h,
+lambda(B_j) <= sum_h lambda(c_h B_h)
+             = sum_h lambda(B_h)
+```
+
+by subadditivity and scalar invariance.  If `B_j` is nonzero, the two-block
+functional-dual line with labels `(B_j,-B_j)` has cost no larger than the
+original sector.  If `B_j=0`, retain any one nonzero helper label in a
+two-block line whose target coordinate is zero.  The zero sector is already a
+two-block context with functional dual zero.
+
+Therefore, under scalar invariance, the minimum nonconfinement cost over all
+compatible outer contexts is attained at outer length two and functional-dual
+dimension at most one.  This does not replace higher-rank states for a fixed
+outer code: the constructed two-block context need not be a subcontext of the
+given code.  It identifies scalar-action anisotropy as a necessary mechanism
+for genuinely cheaper higher-rank contexts in the unrestricted family.
+
 The nonspanning vectors can be removed in closed form.  In radius notation
 `r=R-1`, Möbius inversion on the full subspace lattice of `V_s^vee` gives the
 exact number
@@ -1396,7 +1426,9 @@ Open mysteries:
    the abstract scalar and Pareto cost algebras.  Code-realizable sharpness of
    the `r+1` separating-context bound is not proved; even sharpness under all
    subadditivity/scalar-action identities of linear fibres remains open.
-   Contextual-class lower bounds are also open.
+   Scalar-invariant fibres collapse the unrestricted minimum to a two-block
+   rank-one context, so any sharp code family must exploit scalar-action
+   anisotropy.  Contextual-class lower bounds are also open.
 4. **Witness semantics.**  Numerical contextual equivalence need not transport
    coefficient argmins.  The bounded witness-cover theorem now proves that all
    coefficient systems and exact supports come from shortenings to at most `r`
