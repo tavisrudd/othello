@@ -71,12 +71,14 @@ absence assertion.
   resolves to the retired manuscript and has been removed from release-facing
   README surfaces until a new version is deposited.
 
-The current authority is commit `14599100d`; standalone commit `c54399c`
-records the synchronized export.  Both release gates and export-manifest
-verification pass, with content digest
-`1c73b2f6bf73eddc18112955de1fb63a26c4b0a2c5309b5944dde236824963fa`.
+The current manuscript and paper-README authority change is commit
+`563df343f`; portfolio-summary authority commit `d93878af3` carries the same
+abstract.  Standalone paper commit `29d8698` and portfolio-summary commit
+`13b3ea1` record the synchronized exports.  Both paper release gates and
+export-manifest verification pass, with content digest
+`de59ba1d5fbb5cf5939ea4d96a1b151aaf21c9fce459131fcb39e204ba3fcd4f`.
 The authority and mirror PDFs are byte-identical with SHA-256
-`2142895222b3cc2738188c309406b32e2afb005dbb6e549b3025f1c2e6185221`.
+`a90223898c0f8f929187e6d9ecc22424506e21c94660e1e0389b53f9b6cd46cd`.
 The public GitHub remote has not been pushed. The removed conditional sources
 remain recoverable from Git history.
 
@@ -94,6 +96,10 @@ projection input is Tschinkel--Zhang Theorem 2.4, not the smooth historical
 Ciliberto--Mella--Russo result, and Proposition 3.2 must be stated over a
 characteristic-zero field.  Both are now explicit, and a fresh isolated
 referee accepted the repaired source with no required correction.
+
+The final synchronization pass defined the stabilization-level notation in the
+paper README, made the abstract's ground fields literal, and replaced the
+portfolio's older abstract paraphrase with the current abstract.
 
 ## Mystery ledger
 

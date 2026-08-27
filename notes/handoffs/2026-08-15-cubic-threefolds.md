@@ -43,10 +43,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   singular-compatible tangent-projection citation, the relative evaluation
   construction, and specialist orientation.  A fresh isolated referee returns
   Accept with no required correction; the eleven-page authority and standalone
-  PDFs are byte-identical, and both gates pass at authority commit `14599100d`
-  and standalone commit `c54399c`.  The original AI disclosure is restored
-  verbatim.  C956 remains active by author instruction; do not publish, deposit,
-  or close without that instruction.  Report and live card:
+  PDFs are byte-identical, and both gates pass.  The abstract, paper README,
+  and portfolio summary are synchronized at authority commits `563df343f` and
+  `d93878af3`, standalone paper commit `29d8698`, and standalone portfolio
+  commit `13b3ea1`.  The original AI disclosure is restored verbatim.  C956
+  remains active by author instruction; do not push, deposit, or close without
+  that instruction.  Report and live card:
   `../2026-08-24-c956-exact-level-two-cubic-manuscript.md` and
   `../cubic-threefolds-tasks/c956-exact-level-two-cubic-manuscript.md`.
 - **C978 — cubic-stabilization `m=1` exposition repairs, active.** The abstract,

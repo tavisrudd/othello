@@ -84,12 +84,14 @@ the mathematical narrative.
 
 ## Remaining work
 
-Authority commit `14599100d` and standalone commit `c54399c` pass their full
-release gates; the export manifest agrees, all eleven PDF pages have been
-reviewed, and the PDFs are byte-identical.  Independent algebraic-geometry,
-quotient/descent/computation, public-repository, and specialist-exposition
-reviews have all been completed.  A fresh isolated referee accepted the final
-repaired candidate with no required correction.
+Manuscript/README authority commit `563df343f`, portfolio authority commit
+`d93878af3`, standalone paper commit `29d8698`, and standalone portfolio commit
+`13b3ea1` are synchronized.  The paper release gates and export manifest pass,
+all eleven PDF pages have been reviewed, and the PDFs are byte-identical.
+Independent reviews in algebraic geometry, quotient/descent/computation,
+public-repository presentation, and specialist exposition have all been
+completed.  A fresh isolated referee accepted the final repaired candidate
+with no required correction.
 
 The task remains active because the author instructed that C956 not be closed.
 The only remaining actions are author-authorized publication of the standalone
