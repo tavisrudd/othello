@@ -30,6 +30,12 @@ load-bearing:
   paragraph following Remark 4.4, which attributes the type-`I_0` two-variable bound
   to this paper; bibliographic metadata taken from their reference list.
 
+The historical source for tangent projection from an OADP variety was also
+checked directly: Ciliberto--Mella--Russo, *Varieties with one apparent double
+point*, arXiv:math/0210008v1. Read depth: partial (Theorem 4.1 and Corollary
+4.2); cached as `arXiv:math/0210008`, PDF SHA-256
+`aa68b601d43dd24b948fb2931d09a522880f9a4d9785342cc76805b0a0de1a56`.
+
 The bounded novelty screen and its exact limitations remain in the durable
 research report; the manuscript uses no "first" or "to our knowledge"
 formulation derived from that screen.

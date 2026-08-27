@@ -54,7 +54,7 @@
     "conclusion": "The Rosenlicht quotient Z/T is k-rational.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "3fc834a9aebd64d459871a16f471587c1e071888791265ffd8c0500a76fbdbcc",
+    "digest": "bcb3a41919ba12725a565f17401d54aca428bf3528e10cd126c4d79eea9e7bbd",
     "environment": "theorem",
     "hypotheses": "A generically free projectively linear rank-r torus action, a rational point in the birational tangent-projection locus, descended complementary sums of projective weight spaces, an integral basis of weight differences, and a nondegenerate tangent linear section whose orbit-section component meets the tangent-projection isomorphism open.",
     "objects": "A projective torus action on a projective variety and its Rosenlicht quotient."

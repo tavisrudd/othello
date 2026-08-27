@@ -185,7 +185,7 @@ and is infinite at a very general point.
 
 Here is the proof of the surface theorem.  Let \(Z\) be the projective Cox
 model of \(S\).  The rank-five torus \(T_0\) acting on \(Z\) contains a
-saturated rank-three subtorus \(T_3\).  Four of its weight blocks form a
+saturated rank-three subtorus \(T_3\).  Four of its weight spaces form a
 Galois-stable set, and their weight differences form a lattice basis.  A
 codimension-three tangent section meets a general \(T_3\)-orbit once, so
 tangent projection identifies \(Z/T_3\) birationally with \(\PP^4\).
@@ -200,6 +200,14 @@ Section~4 we deduce the rationality statements.
 
 \section{A criterion for rational torus quotients}
 
+The criterion below turns a linear section into a rational quotient.  Choose
+\(r+1\) weight spaces whose weight differences form a basis of the character
+lattice.  Signed maximal minors then give the unique translate of a general
+torus orbit that lies in a suitable codimension-\(r\) linear section.  If the
+section contains the centre of a birational tangent projection, that
+projection parametrizes the relevant component of the section, and hence the
+quotient.
+
 Let \(Z\subset\PP(V)\) be a geometrically integral \(n\)-fold over an
 infinite field \(k\).  At a smooth point \(p\in Z(k)\), write
 \begin{equation}
@@ -208,7 +216,8 @@ infinite field \(k\).  At a smooth point \(p\in Z(k)\), write
 \end{equation}
 for projection from the embedded tangent space; the hat denotes the affine
 cone.  In the application, \(Z\subset\PP^{2n+1}\) has one apparent double
-point, and \(\pi_p\) is birational for general \(p\) by
+point.  Over an algebraically closed field, its tangent projection is
+birational by \cite[Corollary~4.2]{CMR}; the form over \(k\) used here is
 \cite[Theorem~2.4]{TZ}.
 
 \begin{theorem}[A quotient criterion]
@@ -239,8 +248,8 @@ matrix
  A(x)_{ij}=\lambda_i(x_j),\qquad x_j\in V_{w_j},
  \label{eq:coefficient-matrix}
 \end{equation}
-has rank \(r\) and all \(r+1\) maximal minors nonzero.  Then the
-Rosenlicht quotient \(Z/T\) is \(k\)-rational.
+has rank \(r\) and all \(r+1\) maximal minors nonzero.  Then the Rosenlicht
+quotient \(Z/T\), whose function field is \(k(Z)^T\), is \(k\)-rational.
 \end{theorem}
 
 \begin{proof}
@@ -364,19 +373,22 @@ image, the sublattice
  N_3=\Z e_3\oplus\Z e_4\oplus\Z e_5\subset X_*(T_{0,\bar k})
  \label{eq:rank-three-lattice}
 \end{equation}
-is saturated and Galois stable.  The two generators act on this basis by
+is saturated and Galois stable.  The two displayed generators of the
+type-\(I_3\) Galois image act on this basis by
 \[
  \IThreeActionOne,
  \qquad
  \IThreeActionTwo.
 \]
 Let \(T_3\subset T_0\) be the corresponding rank-three subtorus.  Four
-blocks of Cox generators have the following projective \(T_3\)-weights:
+groups of Cox generators span weight spaces with the following projective
+\(T_3\)-weights:
 \begin{center}
 \IThreeWeightTable
 \end{center}
-The four blocks form a Galois-stable set, but they are not individually
-Galois stable.  On their displayed weights, the first generator acts by
+These four weight spaces form a Galois-stable set, but they are not
+individually Galois stable.  On their weights, the first displayed generator
+acts by
 \[
  (011\;111)(101\;110),
 \]
@@ -389,12 +401,12 @@ the Galois-stable subspace
  \label{eq:boundary-subspace}
 \end{equation}
 The determinant of the three weight differences from \((0,1,1)\) is one.
-Consequently the direct sum of the four selected blocks and the affine cone
-over \(B\) are complementary subspaces defined over the ground field, as
+Consequently the direct sum of the four selected weight spaces and the
+affine cone over \(B\) are complementary subspaces defined over the ground field, as
 required in Theorem~\ref{thm:torus-quotient}.  On the open where the four
-selected block components are nonzero, a projective stabilizer fixes their
-three ratios.  The three weight differences form a basis, so that stabilizer
-is trivial.  In particular, the \(T_3\)-action is generically free.
+selected weight-space components are nonzero, a projective stabilizer fixes
+their three ratios.  The three weight differences form a basis, so that
+stabilizer is trivial.  In particular, the \(T_3\)-action is generically free.
 
 \begin{remark}[Saturation and the projective kernel]
 \label{rem:saturation}
@@ -442,7 +454,7 @@ Use the standard blowup points
 \end{equation}
 For a tangent point with auxiliary coordinates \(z=(z_1,z_2,z_3)\), the
 space of tangent hyperplanes containing \(B\) has dimension four.  Evaluation
-on the four selected blocks of Cox generators gives a \(4\)-by-\(4\) matrix.
+on the four selected weight spaces gives a \(4\)-by-\(4\) matrix.
 The following exact choices are used; \(e=(e_1,\ldots,e_5)\) and \(z'\)
 specify the orbit-test point at which the evaluation matrix is tested.
 \begin{center}
@@ -460,7 +472,7 @@ one explicit B\'ezout identity, that
  \label{eq:witness-cover}
 \end{equation}
 Thus every smooth geometric Cox model has a witness for which the tangent
-point is smooth and the four-block evaluation map is an isomorphism at the
+point is smooth and the evaluation map is an isomorphism at the
 orbit-test point.  Invertibility is open in the pair of points.  Since the
 projective Cox model is geometrically integral, this nonempty open meets the
 open where \(p\) is general for tangent projection and, for that \(p\), the
@@ -468,7 +480,7 @@ open \(U_p\) on which \(\pi_p\) is an isomorphism.  We may also require that
 the \(T_3\)-action be free at \(x\).
 
 Let \(H_p\) be the four-dimensional space of tangent hyperplanes containing
-\(B\).  Evaluation identifies \(H_p\) with the four selected block values at
+\(B\).  Evaluation identifies \(H_p\) with the four selected weight-space components at
 \(x\).  Hyperplanes in \(H_p\) that vanish at \(x\) form a
 three-dimensional subspace; choose a basis
 \(\lambda_1,\lambda_2,\lambda_3\) and let \(\Lambda\) be their common zero
@@ -493,7 +505,7 @@ three-dimensional \(k\)-space, so a \(k\)-basis gives \(\Lambda\).  No
 individual split-coordinate witness is asserted to descend.
 
 For type \(I_3\), stability of \(N_3\), \(B\), and the set of four selected
-Cox blocks is checked on the two displayed generators.  Up to conjugacy in
+Cox weight spaces is checked on the two displayed generators.  Up to conjugacy in
 \(W(D_5)\), the groups of types \(I_0,I_1,I_2\) are subgroups of the group of
 type \(I_3\) \cite[Lemma~4.2]{TZ}.  Restriction and a change of marking
 preserve the same data.  This exhausts the four Galois images allowed by the
@@ -674,9 +686,9 @@ residual rank-two quotient, the tangent Jacobian, all four pairs
 with SymPy~1.14.0.  The certificate retains exact Nullstellensatz identities
 for the six empty branches; both public programs verify those identities
 directly.  The generator also derives the evaluation-kernel slice through the
-orbit-test point and renders every computation-derived matrix, block, witness,
-determinant, minor, and B\'ezout coefficient printed in the manuscript into a
-checked TeX artifact.  A second checker independently verifies the resulting
+orbit-test point and renders every computation-derived matrix, weight-space
+table, witness, determinant, minor, and B\'ezout coefficient printed in the
+manuscript into a checked TeX artifact.  A second checker independently verifies the resulting
 cover, kernel slice, and quotient minors.  We check the transcription of the
 source equations, the quotient criterion, equivariant generic trivialization,
 incidence descent, and function-field argument in the text; the programs do
@@ -712,6 +724,12 @@ and P.~Swinnerton-Dyer,
 \emph{Vari\'et\'es stablement rationnelles non rationnelles},
 Ann. of Math. (2) 121 (1985), no.~2, 283--318,
 \href{https://doi.org/10.2307/1971174}{doi:10.2307/1971174}.
+
+\bibitem{CMR} C.~Ciliberto, M.~Mella, and F.~Russo,
+\emph{Varieties with one apparent double point},
+J. Algebraic Geom. 13 (2004), no.~3, 475--512,
+\href{https://doi.org/10.1090/S1056-3911-03-00355-2}
+{doi:10.1090/S1056-3911-03-00355-2}.
 
 \bibitem{EGFS} P.~Engel, O.~de Gaay Fortman, and S.~Schreieder,
 \emph{Matroids and the integral Hodge conjecture for abelian varieties},
