@@ -3653,8 +3653,17 @@
       "last": 978,
       "purpose": "exposition repairs for the cubic-stabilization m=1 paper",
       "sequence": 406
+    },
+    {
+      "count": 1,
+      "first": 979,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 979,
+      "purpose": "MDS--CSS manuscript exposition revision and standalone README correction",
+      "sequence": 407
     }
   ],
-  "next_id": 979,
+  "next_id": 980,
   "schema": "codex-task-id-allocations-v1"
 }
