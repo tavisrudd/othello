@@ -1,12 +1,12 @@
 use anyhow::{bail, Context, Result};
 use clap::{Parser, Subcommand};
 use ergo_comp::{
-    azure_lrc_12_2_2_counted, ceph_xor_repair_supports, compile_binary_rank_one,
-    compile_binary_target_subspace, confinement_by_generators_field, gpu_checkpoint_mds_recovery,
-    gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair, parse_ceph_xor_layers,
-    schedule_repair_dag, CephXorLayer, CoefficientWitness, CompositionTable, CompositionTower,
-    ConfinementSector, CostTable, FiniteField, Gf4, GpuCheckpointCapacities, Matrix,
-    MatrixCoefficientWitness, Prime, QcLdpcCode, RepairTask, TowerLevel, TowerWitness,
+    azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
+    compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
+    gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair,
+    parse_ceph_xor_layers, schedule_repair_dag, CephXorLayer, CoefficientWitness, CompositionTable,
+    CompositionTower, ConfinementSector, CostTable, FiniteField, Gf4, GpuCheckpointCapacities,
+    Matrix, MatrixCoefficientWitness, Prime, QcLdpcCode, RepairTask, TowerLevel, TowerWitness,
     WeightedRepairProblem, WeightedSchedulerBackend,
 };
 use serde::{Deserialize, Serialize};
@@ -254,6 +254,16 @@ enum ApplicationInput {
         unavailable: Vec<usize>,
         #[serde(default = "default_candidate_budget")]
         budget: u64,
+        #[serde(default)]
+        exact_reliability: bool,
+        #[serde(default)]
+        resource_of_coordinate: Option<Vec<u8>>,
+        #[serde(default)]
+        capacities: Option<Vec<u32>>,
+        #[serde(default)]
+        demand_count: usize,
+        #[serde(default = "default_candidate_budget_usize")]
+        frontier_budget: usize,
     },
     AzureLrc {
         capacities: Vec<u32>,
@@ -1058,6 +1068,11 @@ fn application(input: ApplicationInput) -> Result<Value> {
             target,
             unavailable,
             budget,
+            exact_reliability,
+            resource_of_coordinate,
+            capacities,
+            demand_count,
+            frontier_budget,
         } => {
             if layers.is_empty() == patterns.is_empty() {
                 bail!("declare exactly one of Ceph 'layers' or 'patterns'");
@@ -1073,14 +1088,98 @@ fn application(input: ApplicationInput) -> Result<Value> {
             } else {
                 parse_ceph_xor_layers(coordinate_count, &patterns)?
             };
-            let answer =
-                ceph_xor_repair_supports(coordinate_count, &layers, target, &unavailable, budget)?;
-            Ok(json!({
-                "application": "ceph-recursive-lrc",
-                "supports": answer.supports,
-                "closure_rounds": answer.closure_rounds,
-                "combinations_examined": answer.combinations_examined,
-            }))
+            match (resource_of_coordinate, capacities) {
+                (None, None) if !exact_reliability => {
+                    let answer = ceph_xor_repair_supports(
+                        coordinate_count,
+                        &layers,
+                        target,
+                        &unavailable,
+                        budget,
+                    )?;
+                    Ok(json!({
+                        "application": "ceph-recursive-lrc",
+                        "supports": answer.supports,
+                        "closure_rounds": answer.closure_rounds,
+                        "combinations_examined": answer.combinations_examined,
+                    }))
+                }
+                (resources, capacities) => {
+                    if resources.is_some() != capacities.is_some() {
+                        bail!("resource_of_coordinate and capacities must be supplied together");
+                    }
+                    let node_budget = usize::try_from(budget)
+                        .context("Ceph compressed node budget does not fit usize")?;
+                    let mut family = ceph_xor_repair_family(
+                        coordinate_count,
+                        &layers,
+                        target,
+                        &unavailable,
+                        node_budget,
+                    )?;
+                    let reliability = exact_reliability
+                        .then(|| family.reliability_polynomial())
+                        .transpose()?
+                        .map(|polynomial| {
+                            json!({
+                                "variable_count": polynomial.variable_count(),
+                                "success_counts_by_available": polynomial
+                                    .success_counts_by_available
+                                    .iter()
+                                    .map(ToString::to_string)
+                                    .collect::<Vec<_>>(),
+                            })
+                        });
+                    let scheduling = resources
+                        .zip(capacities)
+                        .map(|(resources, capacities)| -> Result<Value> {
+                            let aggregated = family.aggregate_for_scheduler(
+                                &resources,
+                                &capacities,
+                                demand_count,
+                                frontier_budget,
+                            )?;
+                            let answer = aggregated.problem.solve_adaptive()?;
+                            let options = aggregated
+                                .options
+                                .iter()
+                                .map(|option| {
+                                    json!({
+                                        "loads": option.loads,
+                                        "representative_support": option.representative_support,
+                                    })
+                                })
+                                .collect::<Vec<_>>();
+                            let assignment = answer
+                                .assignment
+                                .iter()
+                                .map(|choice| {
+                                    json!({
+                                        "demand": choice.demand,
+                                        "loads": choice.loads,
+                                        "representative_support": aggregated
+                                            .representative_support(&choice.loads),
+                                    })
+                                })
+                                .collect::<Vec<_>>();
+                            Ok(json!({
+                                "aggregate_options": options,
+                                "repaired_count": answer.repaired_count(),
+                                "complete": answer.complete(),
+                                "assignment": assignment,
+                                "total_loads": answer.total_loads,
+                                "transitions_examined": answer.transitions_examined,
+                                "peak_pareto_states": answer.peak_pareto_states,
+                            }))
+                        })
+                        .transpose()?;
+                    Ok(json!({
+                        "application": "ceph-recursive-lrc-compressed",
+                        "reliability": reliability,
+                        "scheduling": scheduling,
+                    }))
+                }
+            }
         }
         ApplicationInput::AzureLrc {
             capacities,

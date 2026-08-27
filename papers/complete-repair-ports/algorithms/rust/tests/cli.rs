@@ -163,6 +163,32 @@ fn application_cli_covers_storage_graph_qc_vector_and_gpu_front_ends() {
     }));
     assert_eq!(ceph["supports"], serde_json::json!([[1, 3]]));
 
+    let ceph_compressed = run_application(serde_json::json!({
+        "kind": "ceph-xor",
+        "coordinate_count": 8,
+        "layers": [
+            {"parity": 1, "data": [2, 3]},
+            {"parity": 5, "data": [6, 7]},
+            {"parity": 0, "data": [1, 2, 3]},
+            {"parity": 4, "data": [5, 6, 7]}
+        ],
+        "target": 2,
+        "unavailable": [2],
+        "exact_reliability": true,
+        "resource_of_coordinate": [0, 0, 0, 1, 0, 0, 0, 0],
+        "capacities": [3, 3],
+        "demand_count": 3
+    }));
+    assert_eq!(
+        ceph_compressed["reliability"]["success_counts_by_available"],
+        serde_json::json!(["0", "0", "1", "5", "10", "10", "5", "1"])
+    );
+    assert_eq!(ceph_compressed["scheduling"]["repaired_count"], 3);
+    assert_eq!(
+        ceph_compressed["scheduling"]["assignment"][0]["representative_support"],
+        serde_json::json!([1, 3])
+    );
+
     let azure = run_application(serde_json::json!({
         "kind": "azure-lrc",
         "capacities": [6, 6, 6, 6, 6, 6, 3, 0, 0],

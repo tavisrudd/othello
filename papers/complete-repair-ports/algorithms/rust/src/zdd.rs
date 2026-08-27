@@ -1,3 +1,6 @@
+use num_bigint::BigUint;
+use num_traits::{One, Zero};
+
 pub(crate) const EMPTY: u32 = 0;
 pub(crate) const UNIT: u32 = 1;
 
@@ -129,6 +132,23 @@ struct UnionFrame {
     high_right: u32,
     low: u32,
     variable: u32,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default)]
+struct FrontierRange {
+    start: u32,
+    len: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<FrontierRange>() == 8);
+const _: () = assert!(std::mem::align_of::<FrontierRange>() == 4);
+
+#[derive(Debug)]
+pub(crate) struct AggregatedFrontier {
+    pub(crate) codes: Box<[u64]>,
+    pub(crate) supports: Box<[Box<[u8]>]>,
+    pub(crate) strides: Box<[u64]>,
 }
 
 const _: () = assert!(std::mem::size_of::<UnionFrame>() == 24);
@@ -406,6 +426,10 @@ impl<M: ZddMemo> Zdd<M> {
         self.nodes.len()
     }
 
+    pub(crate) fn node_budget(&self) -> usize {
+        self.node_budget
+    }
+
     pub(crate) fn operations(&self) -> u64 {
         self.operations
     }
@@ -678,6 +702,238 @@ impl<M: ZddMemo> Zdd<M> {
             }
         }
         (root == UNIT).then(|| Box::from(&support[..len]))
+    }
+
+    pub(crate) fn reliability_counts(
+        &mut self,
+        root: u32,
+        included_variables: &[bool],
+    ) -> Option<Box<[BigUint]>> {
+        fn binomial_row(size: usize) -> Vec<BigUint> {
+            let mut row = Vec::with_capacity(size + 1);
+            row.push(BigUint::one());
+            for index in 1..=size {
+                let next = (&row[index - 1] * (size + 1 - index)) / index;
+                row.push(next);
+            }
+            row
+        }
+
+        fn convolve_binomial(values: &[BigUint], gap: usize) -> Vec<BigUint> {
+            if gap == 0 {
+                return values.to_vec();
+            }
+            let binomial = binomial_row(gap);
+            let mut output = vec![BigUint::zero(); values.len() + gap];
+            for (left_index, left) in values.iter().enumerate() {
+                for (right_index, right) in binomial.iter().enumerate() {
+                    output[left_index + right_index] += left * right;
+                }
+            }
+            output
+        }
+
+        fn counts_from<M: ZddMemo>(
+            zdd: &mut Zdd<M>,
+            root: u32,
+            start: usize,
+            included_variables: &[bool],
+            memo: &mut Vec<Option<Box<[BigUint]>>>,
+        ) -> Option<Vec<BigUint>> {
+            let variable_count = included_variables.len();
+            if start > variable_count {
+                return None;
+            }
+            if root == EMPTY {
+                let remaining = included_variables[start..]
+                    .iter()
+                    .filter(|&&keep| keep)
+                    .count();
+                return Some(vec![BigUint::zero(); remaining + 1]);
+            }
+            if root == UNIT {
+                let remaining = included_variables[start..]
+                    .iter()
+                    .filter(|&&keep| keep)
+                    .count();
+                return Some(binomial_row(remaining));
+            }
+            let variable = zdd.variable(root) as usize;
+            if variable < start || variable >= variable_count || !included_variables[variable] {
+                return None;
+            }
+            if memo.len() <= root as usize {
+                memo.resize(root as usize + 1, None);
+            }
+            let core = if let Some(cached) = &memo[root as usize] {
+                cached.to_vec()
+            } else {
+                let node = zdd.node(root);
+                let low = counts_from(zdd, node.low, variable + 1, included_variables, memo)?;
+                let high_root = zdd.union(node.low, node.high)?;
+                let high = counts_from(zdd, high_root, variable + 1, included_variables, memo)?;
+                let tail_size = included_variables[variable + 1..]
+                    .iter()
+                    .filter(|&&keep| keep)
+                    .count();
+                let mut counts = vec![BigUint::zero(); tail_size + 2];
+                for (weight, count) in low.into_iter().enumerate() {
+                    counts[weight] += count;
+                }
+                for (weight, count) in high.into_iter().enumerate() {
+                    counts[weight + 1] += count;
+                }
+                memo[root as usize] = Some(counts.clone().into_boxed_slice());
+                counts
+            };
+            let gap = included_variables[start..variable]
+                .iter()
+                .filter(|&&keep| keep)
+                .count();
+            Some(convolve_binomial(&core, gap))
+        }
+
+        counts_from(self, root, 0, included_variables, &mut Vec::new()).map(Vec::into_boxed_slice)
+    }
+
+    pub(crate) fn aggregate_frontier(
+        &self,
+        root: u32,
+        resource_of_variable: &[u8],
+        capacities: &[u32],
+        frontier_budget: usize,
+    ) -> Option<AggregatedFrontier> {
+        fn dominates(left: u64, right: u64, strides: &[u64], capacities: &[u32]) -> bool {
+            strides.iter().zip(capacities).all(|(&stride, &capacity)| {
+                let radix = u64::from(capacity) + 1;
+                left / stride % radix <= right / stride % radix
+            })
+        }
+
+        let mut strides = Vec::with_capacity(capacities.len());
+        let mut state_space = 1u64;
+        for &capacity in capacities {
+            strides.push(state_space);
+            state_space = state_space.checked_mul(u64::from(capacity) + 1)?;
+        }
+        let mut reachable = vec![false; self.nodes.len() + 2];
+        let mut stack = Vec::with_capacity(256);
+        stack.push(root);
+        while let Some(current) = stack.pop() {
+            if current < 2 || std::mem::replace(&mut reachable[current as usize], true) {
+                continue;
+            }
+            let node = self.node(current);
+            stack.push(node.low);
+            stack.push(node.high);
+        }
+
+        let mut ranges = vec![FrontierRange::default(); self.nodes.len() + 2];
+        let mut pool = vec![0u64];
+        ranges[UNIT as usize] = FrontierRange { start: 0, len: 1 };
+        let mut scratch = Vec::<u64>::new();
+        for root_index in 2..ranges.len() {
+            if !reachable[root_index] {
+                continue;
+            }
+            let node = self.node(root_index as u32);
+            let resource = *resource_of_variable.get((node.meta & 0xff) as usize)? as usize;
+            let &stride = strides.get(resource)?;
+            let radix = u64::from(*capacities.get(resource)?) + 1;
+            let low_range = ranges[node.low as usize];
+            let high_range = ranges[node.high as usize];
+            let low = &pool[low_range.start as usize..(low_range.start + low_range.len) as usize];
+            let high =
+                &pool[high_range.start as usize..(high_range.start + high_range.len) as usize];
+            scratch.clear();
+            let mut low_index = 0;
+            let mut high_index = 0;
+            while low_index < low.len() || high_index < high.len() {
+                while high_index < high.len() && high[high_index] / stride % radix + 1 >= radix {
+                    high_index += 1;
+                }
+                let low_code = low.get(low_index).copied();
+                let high_code = high.get(high_index).copied().map(|code| code + stride);
+                let next = match (low_code, high_code) {
+                    (Some(left), Some(right)) if left <= right => {
+                        low_index += 1;
+                        left
+                    }
+                    (Some(_), Some(right)) => {
+                        high_index += 1;
+                        right
+                    }
+                    (Some(left), None) => {
+                        low_index += 1;
+                        left
+                    }
+                    (None, Some(right)) => {
+                        high_index += 1;
+                        right
+                    }
+                    (None, None) => break,
+                };
+                if scratch.last() == Some(&next)
+                    || scratch
+                        .iter()
+                        .any(|&existing| dominates(existing, next, &strides, capacities))
+                {
+                    continue;
+                }
+                scratch.push(next);
+                if pool.len().saturating_add(scratch.len()) > frontier_budget {
+                    return None;
+                }
+            }
+            let start = u32::try_from(pool.len()).ok()?;
+            let len = u32::try_from(scratch.len()).ok()?;
+            pool.extend_from_slice(&scratch);
+            ranges[root_index] = FrontierRange { start, len };
+        }
+
+        let root_range = ranges[root as usize];
+        let codes =
+            pool[root_range.start as usize..(root_range.start + root_range.len) as usize].to_vec();
+        let mut supports = Vec::with_capacity(codes.len());
+        for &target_code in &codes {
+            let mut current = root;
+            let mut code = target_code;
+            let mut support = Vec::new();
+            while current >= 2 {
+                let node = self.node(current);
+                let low_range = ranges[node.low as usize];
+                let low_codes =
+                    &pool[low_range.start as usize..(low_range.start + low_range.len) as usize];
+                if low_codes.binary_search(&code).is_ok() {
+                    current = node.low;
+                    continue;
+                }
+                let variable = (node.meta & 0xff) as usize;
+                let resource = resource_of_variable[variable] as usize;
+                let stride = strides[resource];
+                if code < stride {
+                    return None;
+                }
+                code -= stride;
+                let high_range = ranges[node.high as usize];
+                let high_codes =
+                    &pool[high_range.start as usize..(high_range.start + high_range.len) as usize];
+                if high_codes.binary_search(&code).is_err() {
+                    return None;
+                }
+                support.push(variable as u8);
+                current = node.high;
+            }
+            if current != UNIT || code != 0 {
+                return None;
+            }
+            supports.push(support.into_boxed_slice());
+        }
+        Some(AggregatedFrontier {
+            codes: codes.into_boxed_slice(),
+            supports: supports.into_boxed_slice(),
+            strides: strides.into_boxed_slice(),
+        })
     }
 
     #[cfg(test)]

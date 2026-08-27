@@ -2,11 +2,11 @@ use std::hint::black_box;
 use std::time::Instant;
 
 use ergo_comp::{
-    azure_lrc_12_2_2_counted, ceph_xor_repair_supports, ceph_xor_repair_supports_compressed,
-    compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
-    gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair,
-    schedule_repair_dag, ternary_orbit_syndrome_meet_in_middle,
-    ternary_orbit_syndrome_meet_in_middle_count_split,
+    azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
+    ceph_xor_repair_supports_compressed, compile_binary_rank_one, compile_binary_target_subspace,
+    confinement_by_generators_field, gpu_checkpoint_mds_recovery,
+    gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair, schedule_repair_dag,
+    ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
     ternary_orbit_syndrome_search_correlated, CephXorLayer, CompositionTower, FiniteField, Gf4,
     GpuCheckpointCapacities, Matrix, OrbitOption, Prime, QcLdpcCode, RepairTask, TowerLevel,
@@ -532,6 +532,55 @@ fn main() {
                     peak_states = peak_states.max(u64::from(answer.zdd_nodes));
                     checksum += answer.support_count;
                     black_box(answer);
+                }
+                ("ceph-reliability", parameters @ &[levels, ..]) if parameters.len() <= 2 => {
+                    let branches = parameters.get(1).copied().unwrap_or(2);
+                    let (coordinates, layers, unavailable) = ceph_fanout_fixture(levels, branches);
+                    let mut family = ceph_xor_repair_family(
+                        coordinates,
+                        &layers,
+                        levels - 1,
+                        &unavailable,
+                        1 << 24,
+                    )
+                    .unwrap();
+                    let polynomial = family.reliability_polynomial().unwrap();
+                    assert_eq!(polynomial.variable_count(), coordinates - unavailable.len());
+                    work += polynomial.success_counts_by_available.len() as u64;
+                    peak_states =
+                        peak_states.max(polynomial.success_counts_by_available.len() as u64);
+                    checksum += polynomial.variable_count() as u64;
+                    black_box(polynomial);
+                }
+                ("ceph-aggregate", &[levels, branches, demands]) => {
+                    let (coordinates, layers, unavailable) = ceph_fanout_fixture(levels, branches);
+                    let family = ceph_xor_repair_family(
+                        coordinates,
+                        &layers,
+                        levels - 1,
+                        &unavailable,
+                        1 << 24,
+                    )
+                    .unwrap();
+                    let mut resources = vec![0u8; coordinates];
+                    resources[levels] = branches as u8;
+                    for level in 0..levels {
+                        for branch in 0..branches {
+                            resources[levels + 1 + branches * level + branch] = branch as u8;
+                        }
+                    }
+                    let leaf_capacity = levels.saturating_mul(demands).div_ceil(branches) as u32;
+                    let mut capacities = vec![leaf_capacity; branches];
+                    capacities.push(demands as u32);
+                    let aggregated = family
+                        .aggregate_for_scheduler(&resources, &capacities, demands, 1 << 24)
+                        .unwrap();
+                    peak_states = peak_states.max(aggregated.options.len() as u64);
+                    let answer = aggregated.problem.solve_adaptive().unwrap();
+                    assert_eq!(answer.repaired_count(), demands);
+                    work += answer.transitions_examined;
+                    checksum += answer.repaired_count() as u64;
+                    black_box((aggregated, answer));
                 }
                 ("azure", &[demands, capacity]) => {
                     let capacities = black_box([capacity as u32; 9]);

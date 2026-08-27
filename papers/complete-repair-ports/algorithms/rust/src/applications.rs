@@ -3,7 +3,9 @@
 use crate::field::FiniteField;
 use crate::matrix::{canonicalize_rows_in_place_field, Matrix, MatrixError};
 use crate::scheduler::{SchedulerError, WeightedRepairProblem};
-use crate::zdd::{DirectMemo, Zdd, ZddMemo, EMPTY, UNIT};
+use crate::zdd::{DirectMemo, Zdd, EMPTY, UNIT};
+use num_bigint::BigUint;
+use num_traits::ToPrimitive;
 use rustc_hash::{FxHashMap, FxHashSet};
 use std::collections::VecDeque;
 use thiserror::Error;
@@ -43,6 +45,149 @@ pub struct CephCompressedRepairAnswer {
     pub zdd_nodes: u32,
     pub zdd_operations: u64,
     pub zdd_storage_grew: bool,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct CephReliabilityPolynomial {
+    /// Number of successful helper-availability sets at each exact cardinality.
+    pub success_counts_by_available: Box<[BigUint]>,
+}
+
+impl CephReliabilityPolynomial {
+    pub fn variable_count(&self) -> usize {
+        self.success_counts_by_available.len().saturating_sub(1)
+    }
+
+    pub fn evaluate_uniform(&self, probability: f64) -> Option<f64> {
+        if !(0.0..=1.0).contains(&probability) {
+            return None;
+        }
+        let size = self.variable_count();
+        let failure = 1.0 - probability;
+        self.success_counts_by_available
+            .iter()
+            .enumerate()
+            .try_fold(0.0, |sum, (available, count)| {
+                Some(
+                    sum + count.to_f64()?
+                        * probability.powi(available as i32)
+                        * failure.powi((size - available) as i32),
+                )
+            })
+    }
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct CephAggregatedRepairOption {
+    pub loads: Box<[u32]>,
+    pub representative_support: Box<[u8]>,
+}
+
+#[derive(Clone, Debug)]
+pub struct CephAggregatedRepairProblem {
+    pub problem: WeightedRepairProblem,
+    pub options: Box<[CephAggregatedRepairOption]>,
+}
+
+impl CephAggregatedRepairProblem {
+    pub fn representative_support(&self, loads: &[u32]) -> Option<&[u8]> {
+        self.options
+            .binary_search_by(|option| option.loads.as_ref().cmp(loads))
+            .ok()
+            .map(|index| self.options[index].representative_support.as_ref())
+    }
+}
+
+#[derive(Debug)]
+pub struct CephCompressedRepairFamily {
+    coordinate_count: usize,
+    eligible_helpers: Box<[bool]>,
+    root: u32,
+    zdd: Zdd<DirectMemo>,
+    closure_rounds: u32,
+}
+
+impl CephCompressedRepairFamily {
+    pub fn summary(&self) -> Result<CephCompressedRepairAnswer, ApplicationError> {
+        Ok(CephCompressedRepairAnswer {
+            support_count: self
+                .zdd
+                .count(self.root)
+                .ok_or(ApplicationError::TooLarge)?,
+            first_support: self.zdd.first(self.root),
+            closure_rounds: self.closure_rounds,
+            zdd_nodes: self.zdd.node_count() as u32,
+            zdd_operations: self.zdd.operations(),
+            zdd_storage_grew: self.zdd.storage_grew(),
+        })
+    }
+
+    pub fn reliability_polynomial(
+        &mut self,
+    ) -> Result<CephReliabilityPolynomial, ApplicationError> {
+        let success_counts_by_available = self
+            .zdd
+            .reliability_counts(self.root, &self.eligible_helpers)
+            .ok_or(ApplicationError::Budget {
+                budget: self.zdd.node_budget() as u64,
+            })?;
+        Ok(CephReliabilityPolynomial {
+            success_counts_by_available,
+        })
+    }
+
+    pub fn aggregate_for_scheduler(
+        &self,
+        resource_of_coordinate: &[u8],
+        capacities: &[u32],
+        demand_count: usize,
+        frontier_budget: usize,
+    ) -> Result<CephAggregatedRepairProblem, ApplicationError> {
+        if resource_of_coordinate.len() != self.coordinate_count
+            || resource_of_coordinate
+                .iter()
+                .any(|&resource| usize::from(resource) >= capacities.len())
+        {
+            return Err(ApplicationError::Shape);
+        }
+        let frontier = self
+            .zdd
+            .aggregate_frontier(
+                self.root,
+                resource_of_coordinate,
+                capacities,
+                frontier_budget,
+            )
+            .ok_or(ApplicationError::Budget {
+                budget: frontier_budget as u64,
+            })?;
+        let mut options = frontier
+            .codes
+            .iter()
+            .zip(frontier.supports)
+            .map(|(&code, representative_support)| {
+                let loads = frontier
+                    .strides
+                    .iter()
+                    .zip(capacities)
+                    .map(|(&stride, &capacity)| (code / stride % (u64::from(capacity) + 1)) as u32)
+                    .collect::<Vec<_>>()
+                    .into_boxed_slice();
+                CephAggregatedRepairOption {
+                    loads,
+                    representative_support,
+                }
+            })
+            .collect::<Vec<_>>();
+        options.sort_unstable_by(|left, right| left.loads.cmp(&right.loads));
+        let families =
+            (0..demand_count).map(|_| options.iter().map(|option| option.loads.as_ref()));
+        let problem = WeightedRepairProblem::from_family_iterators(capacities, families)?;
+        Ok(CephAggregatedRepairProblem {
+            problem,
+            options: options.into_boxed_slice(),
+        })
+    }
 }
 
 fn ceil_sqrt(value: usize) -> usize {
@@ -222,6 +367,16 @@ pub fn ceph_xor_repair_supports_compressed(
     unavailable: &[usize],
     node_budget: usize,
 ) -> Result<CephCompressedRepairAnswer, ApplicationError> {
+    ceph_xor_repair_family(coordinate_count, layers, target, unavailable, node_budget)?.summary()
+}
+
+pub fn ceph_xor_repair_family(
+    coordinate_count: usize,
+    layers: &[CephXorLayer],
+    target: usize,
+    unavailable: &[usize],
+    node_budget: usize,
+) -> Result<CephCompressedRepairFamily, ApplicationError> {
     if coordinate_count > usize::from(u8::MAX) + 1
         || target >= coordinate_count
         || layers.iter().any(|layer| {
@@ -263,7 +418,7 @@ pub fn ceph_xor_repair_supports_compressed(
     let node_capacity_hint = memo_capacity_hint
         .saturating_mul(capacity_scale_tenths)
         .div_ceil(10);
-    ceph_xor_repair_supports_compressed_with::<DirectMemo>(
+    ceph_xor_repair_family_with(
         coordinate_count,
         layers,
         target,
@@ -274,7 +429,7 @@ pub fn ceph_xor_repair_supports_compressed(
     )
 }
 
-fn ceph_xor_repair_supports_compressed_with<M: ZddMemo>(
+fn ceph_xor_repair_family_with(
     coordinate_count: usize,
     layers: &[CephXorLayer],
     target: usize,
@@ -282,7 +437,7 @@ fn ceph_xor_repair_supports_compressed_with<M: ZddMemo>(
     node_budget: usize,
     node_capacity_hint: usize,
     memo_capacity_hint: usize,
-) -> Result<CephCompressedRepairAnswer, ApplicationError> {
+) -> Result<CephCompressedRepairFamily, ApplicationError> {
     let group_coordinates = layers
         .iter()
         .map(|layer| layer.data.len() + 1)
@@ -304,7 +459,8 @@ fn ceph_xor_repair_supports_compressed_with<M: ZddMemo>(
         group_data[start..].sort_unstable();
         group_offsets.push(group_data.len());
     }
-    let mut zdd = Zdd::<M>::with_capacities(node_budget, node_capacity_hint, memo_capacity_hint);
+    let mut zdd =
+        Zdd::<DirectMemo>::with_capacities(node_budget, node_capacity_hint, memo_capacity_hint);
     let mut supports = Vec::with_capacity(coordinate_count);
     for (coordinate, &is_unavailable) in unavailable.iter().take(coordinate_count).enumerate() {
         let root = if is_unavailable {
@@ -352,16 +508,15 @@ fn ceph_xor_repair_supports_compressed_with<M: ZddMemo>(
             break;
         }
     }
-    let root = supports[target];
-    let support_count = zdd.count(root).ok_or(ApplicationError::TooLarge)?;
-    let first_support = zdd.first(root);
-    Ok(CephCompressedRepairAnswer {
-        support_count,
-        first_support,
+    Ok(CephCompressedRepairFamily {
+        coordinate_count,
+        eligible_helpers: unavailable[..coordinate_count]
+            .iter()
+            .map(|&is_unavailable| !is_unavailable)
+            .collect(),
+        root: supports[target],
+        zdd,
         closure_rounds,
-        zdd_nodes: zdd.node_count() as u32,
-        zdd_operations: zdd.operations(),
-        zdd_storage_grew: zdd.storage_grew(),
     })
 }
 
@@ -1420,6 +1575,25 @@ mod tests {
         let compressed = ceph_xor_repair_supports_compressed(8, &layers, 2, &[2], 10_000).unwrap();
         assert_eq!(compressed.support_count, 1);
         assert_eq!(compressed.first_support.as_deref(), Some([1, 3].as_slice()));
+
+        let mut family = ceph_xor_repair_family(8, &layers, 2, &[2], 10_000).unwrap();
+        let reliability = family.reliability_polynomial().unwrap();
+        assert_eq!(
+            &*reliability.success_counts_by_available,
+            [0u32, 0, 1, 5, 10, 10, 5, 1].map(BigUint::from).as_slice()
+        );
+        assert_eq!(reliability.evaluate_uniform(0.5), Some(0.25));
+
+        let aggregated = family
+            .aggregate_for_scheduler(&[0, 0, 0, 1, 0, 0, 0, 0], &[3, 3], 3, 10_000)
+            .unwrap();
+        assert_eq!(
+            aggregated.representative_support(&[1, 1]),
+            Some([1, 3].as_slice())
+        );
+        let schedule = aggregated.problem.solve_adaptive().unwrap();
+        assert_eq!(schedule.repaired_count(), 3);
+        assert_eq!(&*schedule.total_loads, &[3, 3]);
     }
 
     #[test]
@@ -1485,6 +1659,123 @@ mod tests {
             } else {
                 assert!(explicit.supports.is_empty());
             }
+
+            let mut family =
+                ceph_xor_repair_family(8, &layers, target, &[target], 1 << 20).unwrap();
+            let reliability = family.reliability_polynomial().unwrap();
+            let eligible = (0..8)
+                .filter(|&coordinate| coordinate != target)
+                .collect::<Vec<_>>();
+            let mut expected = vec![0u32; eligible.len() + 1];
+            for mask in 0u16..1u16 << eligible.len() {
+                let available = eligible
+                    .iter()
+                    .enumerate()
+                    .filter(|&(index, _)| mask & (1 << index) != 0)
+                    .map(|(_, &coordinate)| coordinate as u8)
+                    .collect::<Vec<_>>();
+                if explicit.supports.iter().any(|support| {
+                    support
+                        .iter()
+                        .all(|coordinate| available.contains(coordinate))
+                }) {
+                    expected[mask.count_ones() as usize] += 1;
+                }
+            }
+            assert_eq!(
+                &*reliability.success_counts_by_available,
+                expected.into_iter().map(BigUint::from).collect::<Vec<_>>()
+            );
+
+            let resource_map = [0u8, 1, 2, 0, 1, 2, 0, 1];
+            let mut expected_loads = explicit
+                .supports
+                .iter()
+                .map(|support| {
+                    let mut loads = [0u32; 3];
+                    for &coordinate in support.iter() {
+                        loads[resource_map[coordinate as usize] as usize] += 1;
+                    }
+                    loads
+                })
+                .collect::<Vec<_>>();
+            expected_loads.sort_unstable();
+            expected_loads.dedup();
+            let all_loads = expected_loads.clone();
+            expected_loads.retain(|right| {
+                !all_loads
+                    .iter()
+                    .any(|left| left != right && left.iter().zip(right.iter()).all(|(a, b)| a <= b))
+            });
+            let aggregated = family
+                .aggregate_for_scheduler(&resource_map, &[8, 8, 8], 1, 1 << 20)
+                .unwrap();
+            assert_eq!(
+                aggregated
+                    .options
+                    .iter()
+                    .map(|option| option.loads.as_ref())
+                    .collect::<Vec<_>>(),
+                expected_loads
+                    .iter()
+                    .map(<[u32; 3]>::as_slice)
+                    .collect::<Vec<_>>()
+            );
+            for option in &aggregated.options {
+                assert!(explicit.supports.contains(&option.representative_support));
+                let mut loads = [0u32; 3];
+                for &coordinate in option.representative_support.iter() {
+                    loads[resource_map[coordinate as usize] as usize] += 1;
+                }
+                assert_eq!(loads.as_slice(), option.loads.as_ref());
+            }
+        }
+    }
+
+    #[test]
+    fn aggregate_frontier_compresses_exponential_fanout_for_scheduling() {
+        let levels = 12;
+        let common = levels;
+        let mut layers = Vec::with_capacity(2 * levels);
+        for level in 0..levels {
+            let previous = if level == 0 { common } else { level - 1 };
+            for branch in 0..2 {
+                layers.push(CephXorLayer {
+                    parity: level as u8,
+                    data: Box::new([previous as u8, (levels + 1 + 2 * level + branch) as u8]),
+                });
+            }
+        }
+        let coordinate_count = 3 * levels + 1;
+        let mut resources = vec![0u8; coordinate_count];
+        resources[common] = 2;
+        for level in 0..levels {
+            resources[levels + 1 + 2 * level] = 0;
+            resources[levels + 2 + 2 * level] = 1;
+        }
+        let family = ceph_xor_repair_family(
+            coordinate_count,
+            &layers,
+            levels - 1,
+            &(0..levels).collect::<Vec<_>>(),
+            1 << 20,
+        )
+        .unwrap();
+        assert_eq!(family.summary().unwrap().support_count, 1 << levels);
+        let aggregated = family
+            .aggregate_for_scheduler(&resources, &[levels as u32, levels as u32, 2], 2, 1 << 20)
+            .unwrap();
+        assert_eq!(aggregated.options.len(), levels + 1);
+        assert!(aggregated.options.iter().all(|option| {
+            option.loads.iter().sum::<u32>() == levels as u32 + 1
+                && option.loads[2] == 1
+                && option.representative_support.len() == levels + 1
+        }));
+        let answer = aggregated.problem.solve_adaptive().unwrap();
+        assert_eq!(answer.repaired_count(), 2);
+        assert_eq!(&*answer.total_loads, &[levels as u64, levels as u64, 2]);
+        for choice in &answer.assignment {
+            assert!(aggregated.representative_support(&choice.loads).is_some());
         }
     }
 
