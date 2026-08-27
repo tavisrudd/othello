@@ -7,8 +7,10 @@
 Referees may also use the focused [referee guide](REVIEWER_GUIDE.md).
 
 The theorem that every smooth complex cubic threefold remains irrational
-after multiplication by `P¹` is sharp. For each of two displayed smooth cubic
-threefolds `X/Q`, this paper proves
+after multiplication by `P¹` is sharp. Write `ell_k(V)` for the least
+nonnegative integer `m` such that `V × P^m` is `k`-rational, or infinity if no
+such integer exists. For each of two displayed smooth cubic threefolds `X/Q`,
+this paper proves
 
 ```text
 ell_Q(X) = ell_C(X_C) = 2.
