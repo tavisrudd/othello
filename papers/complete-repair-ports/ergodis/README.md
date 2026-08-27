@@ -82,13 +82,13 @@ aggregate loads, selected backend, and auditable work counters:
 
 ## Commands
 
-| command             | use                                                                 |
-| :------------------ | :------------------------------------------------------------------ |
-| `compose`           | compose an existing labelled cost table through one outer layer     |
-| `transfer`          | derive exact rank-one transfer data from represented inner encoders |
-| `transfer-subspace` | analyze an explicit normalized target subspace of arbitrary rank     |
-| `transfer-tower`    | compile through several layers and replay coefficient witnesses      |
-| `schedule`          | optimize alternative recovery systems under resource capacities     |
+| command             | use                                                                   |
+| :------------------ | :-------------------------------------------------------------------- |
+| `compose`           | compose an existing labelled cost table through one outer layer       |
+| `transfer`          | derive exact rank-one transfer data from represented inner encoders   |
+| `transfer-subspace` | analyze an explicit normalized target subspace of arbitrary rank      |
+| `transfer-tower`    | compile through several layers and replay coefficient witnesses       |
+| `schedule`          | optimize alternative recovery systems under resource capacities       |
 | `application`       | run a tagged storage, repair-DAG, QC-LDPC, vector, or GPU model       |
 
 Use `ergodis <command> --help` for command-specific options. The input schemas
@@ -114,19 +114,20 @@ be faster sequentially; outputs and canonical witnesses are identical.
 
 `ergodis application` accepts one tagged JSON document and returns the exact
 application result together with a replayable witness, support family, or
-obstruction and explicit work counters. These built-in applications are worked examples of the solver's
-compilation model, not an exhaustive application catalogue or separate
-general-purpose products. Each preserves its mathematical structure instead
-of flattening the problem into generic Boolean variables.
+obstruction and explicit work counters. The second column below states the
+decision problem in operational terms; the third names the mathematical
+reduction ergodis uses. These built-in applications are worked examples of the
+solver's compilation model, not an exhaustive application catalogue or
+separate general-purpose products.
 
-| input `kind`     | exact question                                                  | principal reduction                      |
-| :--------------- | :-------------------------------------------------------------- | :--------------------------------------- |
-| `ceph-xor`       | minimal helper supports through recursive XOR coding layers     | monotone antichain or compressed ZDD     |
-| `azure-lrc`      | simultaneous LRC(12,2,2) repairs across nine upgrade domains    | six load types plus capacity bounds      |
-| `repair-dag`     | minimum slots for precedence-constrained unit repair tasks      | ready-set dominance plus capacity search |
-| `qc-ldpc`        | bounded trapping- or stopping-set existence in a QC lift        | cyclic quotient or degree-two components |
-| `vector-repair`  | minimum storage nodes spanning a vector/subpacketized target    | quotient of generated node subspaces     |
-| `gpu-checkpoint` | simultaneous MDS checkpoint recovery across node and rack links | aggregate capacities and cyclic witness  |
+| input `kind`     | exact question                                                   | principal reduction                              |
+| :--------------- | :--------------------------------------------------------------- | :----------------------------------------------- |
+| `ceph-xor`       | in distributed storage, list every minimal repair set            | shared decision graph for set families           |
+| `azure-lrc`      | in cloud storage, serve the most losses within domain capacities | six recurring load types and capacity bounds     |
+| `repair-dag`     | finish dependent repair tasks in the fewest capacity-safe slots  | equivalent ready-task sets plus capacity search  |
+| `qc-ldpc`        | find a small failure-causing pattern in a repeated sparse code   | cyclic symmetry and graph components             |
+| `vector-repair`  | find the fewest physical nodes whose symbols span the target     | merge identical generated node spans             |
+| `gpu-checkpoint` | assign helpers without overloading nodes or rack links           | aggregate capacities, then construct the witness |
 
 Additional examples:
 
@@ -168,12 +169,12 @@ These are bounded exact comparisons, not universal solver rankings. Every
 control reproduces the same exact support family, optimum, or feasibility
 verdict, as applicable; timing includes input or model construction.
 
-| workload                    | scale                                  | ergodis | matched control         | control time | speedup  |
-| :-------------------------- | :------------------------------------- | ------: | :---------------------- | -----------: | -------: |
-| Ceph XOR support family     | 8 diamonds, 256 minimal supports       |  102 us | Graphillion ZDD closure |       864 us |       8x |
-| represented GF(4) tower     | depth 6, fanout 4; 4,096 leaves        |  766 us | direct CP-SAT           |     263.76 s | 344,300x |
+| workload                    | scale                                  |  ergodis | matched control         | control time | speedup  |
+| :-------------------------- | :------------------------------------- | -------: | :---------------------- | -----------: | -------: |
+| Ceph XOR support family     | 8 diamonds, 256 minimal supports       |   102 us | Graphillion ZDD closure |       864 us |       8x |
+| represented GF(4) tower     | depth 6, fanout 4; 4,096 leaves        |   766 us | direct CP-SAT           |     263.76 s | 344,300x |
 | published Hamming-outer LRC | binary `[4095,2718,6;2]`               |   231 ms | direct CP-SAT           |        100 s |     432x |
-| GPU MDS checkpoint recovery | 10,000 shards, 6,000 data, 64 failures |  100 us | OR-Tools bipartite flow |   103,061 us |   1,029x |
+| GPU MDS checkpoint recovery | 10,000 shards, 6,000 data, 64 failures |   100 us | OR-Tools bipartite flow |   103,061 us |   1,029x |
 
 See `BENCHMARKS.md` for all comparison tables, peak RSS, protocols,
 architecture flags, profiling results, limits probes, and exact replay

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 610" role="img" aria-labelledby="title desc">
   <title id="title">ergodis exact benchmark highlights</title>
-  <desc id="desc">Horizontal logarithmic bars compare ergodis with matched exact controls. Speedups range from 8 times for a Ceph XOR support family to 344,300 times for direct CP-SAT on a represented GF(4) tower.</desc>
+  <desc id="desc">Horizontal logarithmic bars compare ergodis with matched exact controls on distributed repair, cloud repair batching, sparse graph-code search, scheduling, checkpoint recovery, and hierarchical finite-field recovery.</desc>
   <defs>
     <linearGradient id="application-bar" x1="0" x2="1">
       <stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#0ea5e9"/>
@@ -20,8 +20,8 @@
     </style>
   </defs>
   <rect width="1200" height="610" rx="20" fill="#f8fafc"/>
-  <text x="55" y="45" class="title">Exact structure-aware benchmark highlights</text>
-  <text x="55" y="70" class="subtitle">Matched controls differ by row; input or model construction is included; logarithmic scale</text>
+  <text x="55" y="45" class="title">How much faster ergodis is than matched exact controls</text>
+  <text x="55" y="70" class="subtitle">Longer bars mean larger ergodis speedups; construction time included; logarithmic scale</text>
 
   <line x1="315" y1="530" x2="1135" y2="530" class="axis"/>
   <g class="grid">
@@ -41,36 +41,36 @@
   </g>
 
   <g>
-    <text x="295" y="126" text-anchor="end" class="profile">Ceph XOR support family</text>
-    <text x="295" y="145" text-anchor="end" class="control">Graphillion ZDD closure</text>
+    <text x="295" y="126" text-anchor="end" class="profile">Distributed XOR repair</text>
+    <text x="295" y="145" text-anchor="end" class="control">Graphillion decision diagram</text>
     <rect x="315" y="112" width="123" height="30" rx="7" fill="url(#application-bar)"/>
     <text x="448" y="133" class="value">8×</text>
 
-    <text x="295" y="196" text-anchor="end" class="profile">published Hamming-outer LRC</text>
+    <text x="295" y="196" text-anchor="end" class="profile">Published cloud repair code</text>
     <text x="295" y="215" text-anchor="end" class="control">direct CP-SAT</text>
     <rect x="315" y="182" width="360" height="30" rx="7" fill="url(#application-bar)"/>
     <text x="685" y="203" class="value">432×</text>
 
-    <text x="295" y="266" text-anchor="end" class="profile">GPU MDS checkpoint recovery</text>
-    <text x="295" y="285" text-anchor="end" class="control">OR-Tools bipartite flow</text>
+    <text x="295" y="266" text-anchor="end" class="profile">GPU checkpoint recovery</text>
+    <text x="295" y="285" text-anchor="end" class="control">OR-Tools network flow</text>
     <rect x="315" y="252" width="412" height="30" rx="7" fill="url(#application-bar)"/>
     <text x="737" y="273" class="value">1,029×</text>
 
-    <text x="295" y="336" text-anchor="end" class="profile">repair DAG</text>
-    <text x="295" y="355" text-anchor="end" class="control">CP-SAT interval model</text>
+    <text x="295" y="336" text-anchor="end" class="profile">Dependent repair schedule</text>
+    <text x="295" y="355" text-anchor="end" class="control">CP-SAT scheduling model</text>
     <rect x="315" y="322" width="533" height="30" rx="7" fill="url(#application-bar)"/>
     <text x="858" y="343" class="value">7,881×</text>
 
-    <text x="295" y="406" text-anchor="end" class="profile">Azure LRC batch</text>
-    <text x="295" y="425" text-anchor="end" class="control">HiGHS counted model</text>
+    <text x="295" y="406" text-anchor="end" class="profile">Cloud repair batch</text>
+    <text x="295" y="425" text-anchor="end" class="control">HiGHS integer model</text>
     <rect x="315" y="392" width="716" height="30" rx="7" fill="url(#application-bar)"/>
     <text x="1041" y="413" class="value">174,000×</text>
 
-    <text x="295" y="476" text-anchor="end" class="profile">represented GF(4) tower</text>
+    <text x="295" y="476" text-anchor="end" class="profile">Hierarchical finite-field recovery</text>
     <text x="295" y="495" text-anchor="end" class="control">direct CP-SAT, 4,096 leaves</text>
     <rect x="315" y="462" width="757" height="30" rx="7" fill="url(#theorem-bar)"/>
     <text x="1082" y="483" class="value">344,300×</text>
   </g>
 
-  <text x="725" y="588" text-anchor="middle" class="subtitle">Every control reproduces the same exact support family, optimum, or feasibility verdict, as applicable.</text>
+  <text x="725" y="588" text-anchor="middle" class="subtitle">1,000× means the matched control took 1,000 times as long to return the same exact result.</text>
 </svg>

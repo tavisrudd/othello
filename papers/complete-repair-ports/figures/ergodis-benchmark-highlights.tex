@@ -8,26 +8,28 @@
   }
   \draw[semithick] (0,0.25) -- (6,0.25);
   \foreach \y/\name/\w/\value in {
-    6/{\shortstack[r]{Ceph XOR\\[-1pt]\textcolor{gray}{\tiny Graphillion ZDD}}}/0.903/{8\times},
-    5/{\shortstack[r]{published LRC\\[-1pt]\textcolor{gray}{\tiny direct CP-SAT}}}/2.635/{432\times},
-    4/{\shortstack[r]{GPU MDS\\[-1pt]\textcolor{gray}{\tiny OR-Tools max-flow}}}/3.012/{1{,}029\times},
-    3/{\shortstack[r]{repair DAG\\[-1pt]\textcolor{gray}{\tiny CP-SAT interval}}}/3.897/{7{,}881\times},
-    2/{\shortstack[r]{Azure LRC\\[-1pt]\textcolor{gray}{\tiny HiGHS model}}}/5.240/{174{,}000\times}} {
+    6/{\shortstack[r]{distributed XOR repair\\[-1pt]\textcolor{gray}{\tiny Graphillion decision diagram}}}/0.903/{8\times},
+    5/{\shortstack[r]{published cloud repair code\\[-1pt]\textcolor{gray}{\tiny direct CP-SAT}}}/2.635/{432\times},
+    4/{\shortstack[r]{GPU checkpoint recovery\\[-1pt]\textcolor{gray}{\tiny OR-Tools network flow}}}/3.012/{1{,}029\times},
+    3/{\shortstack[r]{dependent repair schedule\\[-1pt]\textcolor{gray}{\tiny CP-SAT scheduling model}}}/3.897/{7{,}881\times},
+    2/{\shortstack[r]{cloud repair batch\\[-1pt]\textcolor{gray}{\tiny HiGHS integer model}}}/5.240/{174{,}000\times}} {
     \node[anchor=east] at (-0.08,\y) {\name};
     \fill[blue!48] (0,\y-0.25) rectangle (\w,\y+0.25);
     \node[anchor=west, font=\scriptsize\bfseries] at (\w+0.06,\y) {$\value$};
   }
   \node[anchor=east] at (-0.08,1)
-    {\shortstack[r]{$\F_4$ tower\\[-1pt]\textcolor{gray}{\tiny direct CP-SAT}}};
+    {\shortstack[r]{hierarchical $\F_4$ recovery\\[-1pt]\textcolor{gray}{\tiny direct CP-SAT}}};
   \fill[violet!58] (0,0.75) rectangle (5.537,1.25);
   \node[anchor=west, font=\scriptsize\bfseries] at (5.597,1) {$344{,}300\times$};
-  \node[below] at (3,-0.48) {matched exact-control time / ergodis time (logarithmic scale)};
+  \node[below] at (3,-0.48) {ergodis speedup: control time / ergodis time (logarithmic scale)};
 \end{tikzpicture}
-\caption{Speedup over matched exact controls for representative applications
-and the theorem-driven tower computation.  Each formulation-specific control
+\caption{How many times faster ergodis is than matched exact controls for
+representative applications and the theorem-driven tower computation.  Longer
+bars mean larger ergodis speedups.  Each formulation-specific control
 is printed beneath its workload; full instances appear in
-Table~\ref{tab:ergodis-applications}, with the published-LRC check below.  The distinguished
-$\F_4$ tower row compares labelled min--sum composition with direct CP-SAT and
+Table~\ref{tab:ergodis-applications}, with the published cloud-code check below.
+The distinguished hierarchical $\F_4$ row compares labelled min--sum
+composition with direct CP-SAT and
 isolates the reduction supplied by the closure theorem.  Controls differ by
 row, so this is not a general solver ranking.}
 \label{fig:ergodis-applications}

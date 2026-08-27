@@ -48,15 +48,15 @@
   <text x="817" y="295" text-anchor="middle" class="heading">Residual exact solver</text>
   <text x="817" y="322" text-anchor="middle" class="small">enumerator or CP-SAT</text>
 
-  <path d="M920 207 H980" class="arrow"/>
+  <path d="M920 207 H965" class="arrow"/>
 
-  <rect x="985" y="92" width="165" height="230" rx="16" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-  <text x="1067" y="126" text-anchor="middle" class="heading">Exact result</text>
-  <text x="1010" y="166" class="body">• Γ / confinement</text>
-  <text x="1010" y="194" class="body">• coefficient witness</text>
-  <text x="1010" y="222" class="body">• support / reliability</text>
-  <text x="1010" y="250" class="body">• schedule / loads</text>
-  <text x="1010" y="278" class="body">• design / obstruction</text>
+  <rect x="970" y="92" width="200" height="230" rx="16" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="1070" y="126" text-anchor="middle" class="heading">Exact result</text>
+  <text x="990" y="166" class="body">• Γ / confinement</text>
+  <text x="990" y="194" class="body">• coefficient witness</text>
+  <text x="990" y="222" class="body">• support / reliability</text>
+  <text x="990" y="250" class="body">• schedule / loads</text>
+  <text x="990" y="278" class="body">• design / obstruction</text>
 
   <path d="M715 365 H920" stroke="#7c3aed" stroke-width="5" stroke-linecap="round"/>
   <text x="817" y="394" text-anchor="middle" class="small">canonical replayable witnesses throughout</text>

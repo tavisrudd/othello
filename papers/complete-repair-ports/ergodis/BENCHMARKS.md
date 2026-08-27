@@ -5,17 +5,72 @@ backend-specific measurement notes. See `README.md` for installation and use.
 
 ## Application-example comparisons
 
-A pinned-core exact comparison against stronger formulation-specific
-open-source controls gives the primary bounded results below. Times include
-construction of the application state or control model; RSS is process
-high-water memory. Every control reproduces the same exact support family,
-optimum, or feasibility verdict, as applicable. These are deliberately not described as universal SOTA
-claims: commercial MILP and scheduling solvers and domain-specific LDPC
-enumerators are not included.
+These benchmarks ask six concrete questions about storage and coding systems.
+Each example preserves the structure of its source problem rather than first
+flattening it into generic Boolean variables.
 
-These rows benchmark the bundled application examples; they are demonstrations
-of the compiler's reductions, not a claim that the subcommand is a complete
-storage or coding application suite.
+### What the scenarios mean
+
+**Distributed XOR repair (Ceph-style).** Ceph is a distributed object-storage
+system. This synthetic Ceph-style case models an object protected by several
+layers of XOR parity. Each layer offers alternative helper paths, so the number
+of minimal repair sets doubles repeatedly. The benchmark constructs the
+complete family of minimal surviving helper sets and keeps it available for
+reliability and scheduling queries. A zero-suppressed decision diagram (ZDD)
+stores this set family by sharing repeated choices instead of listing every set.
+
+**Cloud repair batching (Azure-style).** A locally repairable code (LRC) is
+designed so that a missing fragment can usually be rebuilt from a small nearby
+group instead of reading the whole codeword. The benchmark uses a published
+layout for Microsoft's Azure code. Many data fragments fail while nine storage
+or upgrade domains have separate capacity limits. Each fragment can be
+repaired locally or through either of two global parities, and those choices
+load the domains differently. The benchmark chooses the repair mode for every
+request to maximize the number served; the large instance contains 100,000
+requests but only six distinct load types.
+
+**Repair dependency graph.** A directed acyclic graph (DAG) records which repair
+tasks must finish before other tasks can start. Several ready tasks may run
+together if their combined resource loads fit within the slot capacities. The
+benchmark finds the shortest valid schedule and returns the tasks assigned to
+each slot.
+
+**Sparse graph-code failure search.** A low-density parity-check (LDPC) code is
+an error-correcting code defined by a sparse graph. In a quasi-cyclic (QC) LDPC
+code, a large graph is assembled by cyclically shifting a small template.
+Certain small groups of variables can trap an iterative decoder or prevent it
+from making progress. The benchmark asks whether such a group of a prescribed
+size exists and returns it when it does. The repeated cyclic structure and the
+graph components replace a search over all subsets of the large code.
+
+**Vector repair.** One physical storage node may hold several subpacketized
+symbols, but reading any number of its symbols incurs one node cost. The
+benchmark finds the fewest physical nodes whose combined linear span contains
+the requested target subspace and returns those nodes.
+
+**GPU checkpoint recovery.** A maximum-distance-separable (MDS) code lets any
+sufficiently large set of surviving checkpoint shards reconstruct a failure.
+The shards are spread across GPU nodes and racks, and a failed batch must be
+rebuilt without exceeding per-node and same-rack or cross-rack transfer
+capacities. The benchmark decides aggregate feasibility first and then emits
+every concrete helper-shard assignment. It models repair traffic after
+placement is fixed, not GPU execution or overlap with training.
+
+### Headline results
+
+The rows below are bounded demonstrations of these six application models, not
+a claim that the subcommand is a complete storage or coding suite. Every
+control reproduces the same exact support family, optimum, or feasibility
+verdict, as applicable.
+
+Read the chart as six separate matched comparisons, not as a ranking of the
+applications or controls. The Ceph row asks for an entire support family and
+therefore compares two compressed family representations. The other rows ask
+for an optimum or an exact feasibility decision. Every multiplier is the
+control time divided by the ergodis time: `1,000x` means that the control took
+1,000 times as long to return the same exact result. The largest gains occur
+when the algebra reduces a large raw model to a few load types, graph
+components, or aggregate capacity totals before the exact solve begins.
 
 ![ergodis and matched exact controls](docs/benchmark-highlights.svg)
 
@@ -37,10 +92,25 @@ storage or coding application suite.
 | vector node span |     2.2 MiB |    20.8 MiB |
 | GPU MDS          |     3.6 MiB |    69.1 MiB |
 
-The outcome strength is not identical across rows; the comparison requires
-the same support family, optimum, or feasibility verdict, as applicable,
-while ergodis often returns a stronger
-application-level object:
+### Methodology
+
+Each row uses a formulation-specific open-source control that matches the
+question being answered. Times include construction of the ergodis state or
+the control model; RSS is the process high-water memory. The two programs were
+run with the same CPU affinity in rotated order so ambient machine load did not
+systematically favor either one. The headline controls use eleven rounds, and
+the table reports medians and ratios computed from the unrounded samples.
+
+The controls establish exact equality of the support family, optimum, or
+feasibility verdict rather than agreement on a heuristic score. Raw samples,
+checksums, package versions, and replay commands are recorded in
+`evidence/benchmarks.json`. Commercial solvers and domain-specific LDPC
+enumerators are not included, so these measurements support only the declared
+instance comparisons.
+
+The outcome strength is not identical across rows. Each control returns the
+same support family, optimum, or feasibility verdict, as applicable; ergodis
+often returns a richer application-level object:
 
 | application      | exact control establishes        | additional ergodis output                                      |
 | :--------------- | :------------------------------- | :------------------------------------------------------------- |
@@ -153,7 +223,7 @@ carrier-kernel pair.  Eight double rows force carrier uniqueness; seven leave
 at most one fractional-linear defect parameter.  The ledger keeps zero- and
 double-row counts in its spare bytes and reports this zero/one nullity bound.
 
-`python/run_benchmarks.py` runs pinned-core, rotated interleaved release comparisons
+`python/run_benchmarks.py` runs fixed-affinity, rotated interleaved release comparisons
 and records raw samples in `evidence/benchmarks.json`. On its one deterministic
 workload per kernel, the seven-round medians are:
 
@@ -225,7 +295,7 @@ iteratively with no allocation. The code, 24-bit parent, 8-bit depth, and
 option ID occupy one 16-byte witness node. Compiled metadata selects sparse or dense generation once, with separate
 occupancy models for this fused kernel and the general dominance kernels.
 
-In the fresh 21-round pinned-core interleave, the balanced dense backend takes
+In the fresh 21-round fixed-affinity interleave, the balanced dense backend takes
 144.0 us versus 1.170 ms for antichain-aware sparse Rust and 2.246 ms for a
 reused-model OR-Tools 9.14 CP-SAT solve (`15.60x`). On the
 small-state/high-demand case it takes 26.4 us versus 11.082 ms for CP-SAT
@@ -276,7 +346,7 @@ use seven. This sweep shows two different advantages: the dense certified
 kernel scales gently with demand count, while option canonicalization prevents
 a thousand alternatives per demand from reaching the residual optimizer.
 
-The represented-tower path has a separate 21-round, pinned-core end-to-end
+The represented-tower path has a separate 21-round, fixed-affinity end-to-end
 comparison. Direct CP-SAT receives binary coefficient variables, the exact
 row-support objective, and GF(4) parity constraints. The stronger-preprocessing
 control receives the same independently generated labelled cost tables as
@@ -332,7 +402,7 @@ the exact GF(4) outer-functional parity constraints. Labelled CP-SAT receives
 the same four-entry ordinary and target-normalized cost tables as ergodis.
 Both CP-SAT models prove the nonzero-sector optimum before it is compared with
 the known zero sector; all three backends return the same exact `Gamma`.
-Times are medians of seven rotated, pinned-core, deterministic single-worker
+Times are medians of seven rotated, fixed-affinity, deterministic single-worker
 runs. Replay with `python/run_benchmarks.py --write --jin-fu-only --ab-rounds 7`.
 
 A larger member of Jin and Fu's published Hamming-outer family makes the same
@@ -350,7 +420,7 @@ cost `1,023`, `Gamma=5`, and maximum confined radius `4`.
 | direct CP-SAT   |      100 s |  119 MiB |          432x |
 | labelled CP-SAT |       82 s |  124 MiB |          356x |
 
-The Rust time is the median of 21 pinned-core runs. Because each exact CP-SAT
+The Rust time is the median of 21 fixed-affinity runs. Because each exact CP-SAT
 solve takes more than a minute, its row is one completed deterministic
 single-worker proof of optimality, not a timing distribution. This is a mixed
 algorithm-and-engineering comparison: unlike the represented-tower results
@@ -358,7 +428,7 @@ above, it does not isolate min--sum composition as the sole source of the win.
 Replay with `python/run_benchmarks.py --write --jin-fu-hamming-only`.
 
 ergodis alone can be pushed much farther before ten seconds. The following
-are pinned-core single end-to-end solves, including instance compilation and
+use fixed CPU affinity and are single end-to-end solves, including instance compilation and
 complete witness construction. They are the largest completed geometric or
 power-of-ten probes attempted, not claimed hard limits.
 
@@ -447,7 +517,7 @@ Streaming tower replay and the deep orbit DFS are currently sequential, so no
 synthetic multithread number is reported for those rows.
 Replay with `python/run_benchmarks.py --write --ergodis-thread-sweep-only`.
 
-A pinned-core `perf stat` diagnostic on the largest nonuniform profile records
+A fixed-affinity `perf stat` diagnostic on the largest nonuniform profile records
 about 661,000 cycles, 2.01 million instructions, 341,000 branches, 454 branch
 misses, and 961 cache misses per solve. Against the preceding implementation,
 instructions per examined transition fall from about 357 to 61. Top-down slot
@@ -462,7 +532,7 @@ Repeated callers can pass a `WeightedRepairWorkspace` to
 Frontiers, witnesses, membership bits, and narrow packed metadata then retain
 their allocations between exact solves; result ownership remains unchanged.
 The workspace is problem-independent and offers `shrink_to_fit` when a caller
-wants to release retained capacity. In a fresh 21-round pinned-core interleave,
+wants to release retained capacity. In a fresh 21-round fixed-affinity interleave,
 workspace reuse improves the large nonuniform profile from 205.0 to 133.3 us
 (`1.538x`), the balanced profile from 9.48 to 7.72 us (`1.227x`), and the
 tiny-state/high-demand profile from 12.20 to 11.07 us (`1.102x`). Work,
@@ -502,7 +572,7 @@ measurement, a warmed workspace, and transition throughput. With the final
 production-equivalent profile and `x86-64-v3`, its point estimates are 3.794 us
 for balanced, 8.097 us for small-state, and 67.941 us for large nonuniform.
 Criterion values are within-harness microbenchmark baselines; release claims
-continue to use the pinned rotated cross-binary harness.
+continue to use the controlled rotated cross-binary harness.
 
 ![ergodis parallel scaling by worker count](docs/parallel-scaling.svg)
 
@@ -606,13 +676,13 @@ For nine fibers, `g` cubic and `9-g` quartic, it maintains all target counts
 and `n2-n0=10-g`. With `R` rows remaining it rejects when the overlap target
 is outside `delta+[-R,R]`, one fiber deficit exceeds `R`, or total deficit
 exceeds `2R`. A complete 26-row replay measures 320 ns under the loaded-host
-Criterion run (about 12.3 ns per row). A separate pinned release probe over
+Criterion run (about 12.3 ns per row). A separate release probe with fixed CPU affinity over
 26 million row transitions per round gives 236.3 ns per replay, 9.09 ns and 37.2 cycles
 per row, 145.4 instructions per row, about `0.00005` L1D misses per row, and
 negligible branch misses. The state is compute/front-end work, not cache-miss
 bound; packed-nibble or SIMD rewriting is not justified by this profile.
 
-On a heavily loaded host, pinned-core Criterion diagnostics gave 104.79 us to
+On a heavily loaded host, fixed-affinity Criterion diagnostics gave 104.79 us to
 compile both cases, 174--187 ns to scan one 530-record mapping pool, 540--559
 ns for a complete three-evaluation avoidance pass, and 199--202 ns to scan all
 729 precomputed fourth-Witt weights in one case. These are provisional
