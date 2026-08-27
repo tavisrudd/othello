@@ -6,7 +6,8 @@
 **Status**: ACTIVE; C972 COMPOSITIONAL-STATE CHARACTERIZATION AND C976
 EXPOSITION/LITERATURE/EXPORT CLOSED; 37-PAGE AUTHORITY, 29-CLAIM, FOUR-LEAN-
 TERMINAL, AND 77-FILE PUBLIC-SURFACE GATES PASS; C962 ALGORITHM/BOUND
-DEVELOPMENT REMAINS IN PROGRESS; C325 APPENDIX VERIFIER AND C953 AGGREGATE
+DEVELOPMENT REMAINS IN PROGRESS WITH C972-DERIVED CONTEXTUAL KERNELS VALIDATED;
+C325 APPENDIX VERIFIER AND C953 AGGREGATE
 REVIEW FOLLOW; C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR
 DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
@@ -15,7 +16,7 @@ DEPOSIT
 Recovery*
 **Standalone paper repository**: `tavisrudd/compositional-recovery` at
 `~/src/math-papers/compositional-recovery`
-**Current local standalone commit**: `1fdb00c` (37-page revised manuscript;
+**Current local standalone commit**: `57e9d26` (37-page revised manuscript;
 verified; no push or deposit)
 **Approved paper license**: MIT
 
@@ -97,6 +98,15 @@ Completed preparation:
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
 Current and completed strengthening:
+
+- [C962 exact recovery algorithms](../2026-08-25-c962-recovery-algorithms-and-bounds.md)
+  now includes a radius-pruned rank-one complete-transfer certificate, lazy
+  projective line-probe caching, and rank-bounded contextual subspace caching
+  with Python/Rust differential fixtures and interleaved cold/warm A/B evidence.
+  The certificate is 1.66x faster for the measured exact radius decision and
+  removes the higher-rank recomputations; warm projective and rank-bounded
+  queries are 2.62x and 5.83x faster, while their measured cold paths remain
+  slower and are not selected for one-shot queries.
 
 - [C972 minimal compositional state](../2026-08-26-c972-minimal-compositional-state.md)
   identifies the zero-truncated projective line-probe profile as the coarsest
@@ -219,9 +229,8 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 ## Next step
 
 C962 remains the active private code-and-mathematics task for ergodis algorithm
-development and benchmark evidence.  Its bundle-wide evidence check currently
-reports stale hashes for `ergodis/BENCHMARKS.md`, `Cargo.toml`, and `README.md`;
-the regenerated C972 scalar-separation entry still equals the tracked result.
+development and benchmark evidence.  The C972 contextual-state kernels are
+complete and the bundle-wide evidence manifest is current.
 Continue C962 with the bounded explicit/ZDD/Roaring representation experiment,
 then only for additional paper-owned algorithm and bound development beyond
 the exported ERGO-comp baseline.
@@ -238,6 +247,6 @@ hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
 and is not evidence for or a release dependency of the paper-local companion.
 
-Local standalone synchronization is complete at `e7b9717`. Publication, push,
+Local standalone synchronization is complete at `57e9d26`. Publication, push,
 and deposit remain gated on C325 and C953; the approved repository metadata
 does not authorize any of those external actions.
