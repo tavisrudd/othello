@@ -20,11 +20,11 @@
     "objects": "The two explicit series of cubic hypersurfaces."
   },
   "cor:moduli": {
-    "cautions": "The finite value is proved only on the isomorphism classes represented by the displayed examples; the infinite value is a very-general statement.",
+    "cautions": "The finite value is proved only for X_1 and X_3; the infinite value is a very-general statement.",
     "conclusion": "The function ell_C is two on the displayed cubic examples and infinite at a very general point.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "3727875ecc1ed80a7a1d328edef9da78abf2da1ee12059ddf763f10287308ea4",
+    "digest": "77d9f5d9983709f282007f09f342a57421a1bdf175c32176565740ed1fd62184",
     "environment": "corollary",
     "hypotheses": "The base field is C and the cubic is either displayed or very general as specified.",
     "objects": "The level-of-stable-rationality function ell_C on smooth cubic-threefold moduli."
