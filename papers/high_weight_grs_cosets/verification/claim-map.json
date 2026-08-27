@@ -166,6 +166,12 @@
       "source": "sections/07-recursive-carriers.tex",
       "status": "Manuscript Lucas/Pascal proof. The degree-one pullback enters the formal recursive interface as an explicit geometric input."
     },
+    "prop:persistent-count-orbits": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-recursive-carriers.tex",
+      "status": "Elementary uniform rank-two count and stabilizer calculation. The established full-support family/count boundary is cited in the proof; no Lean declaration carries the orbit classification."
+    },
     "prop:r5-bridge": {
       "coverage": "fragment",
       "lean": [
