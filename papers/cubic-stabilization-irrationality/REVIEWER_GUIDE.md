@@ -38,9 +38,11 @@ calculation and the evidence boundary.
    Ciliberto--Mella--Russo.  The section constructs a Galois-stable saturated
    rank-three subtorus, four selected weight spaces whose weight differences
    form a basis, and the complementary subspace `B`.  Proposition
-   `prop:tangent-section`
-   constructs the required tangent linear section and explains its descent
-   for types `I0`--`I3`.
+   `prop:tangent-section` constructs the required tangent linear section and
+   explains its descent for types `I0`--`I3`.  To make the openness condition
+   uniform in the tangent point `p`, the proof packages the tangent projections
+   into a rational map over the `p`-parameter space and uses its relative
+   isomorphism locus before applying density of rational points.
 4. **What does the computation prove?** The four rows in the parameter table
    give evaluation determinants `D_i` and smoothness minors `M_i`.  Appendix A
    proves that the opens `D_i M_i != 0` cover the smooth parameter locus
