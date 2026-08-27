@@ -320,29 +320,61 @@ Thus $\phi$ is the trace-coordinate form of $\Phi$, and $\Lambda$ is the
 corresponding ordinary prescribed-coset cost $\lambda$.  The change of letters
 only distinguishes the two levels in the following substitution.
 
+For the recovery-specific form, suppose that a target set in $A\circ B$ meets
+block $e$ in $P_e\subseteq E_B$.  Put $J_e=E_B\setminus P_e$ and
+$U_{P_e}=\operatorname{im}\phi_{B,P_e}$.  If $T\leq M$, let
+$\iota_T:T\hookrightarrow M$ be the inclusion.  The variables below have the
+following roles:
+\[
+\begin{array}{c|l}
+ U_e & \text{intermediate contribution supplied by target coordinates in block }e\\
+ X_e & \text{total intermediate functional label required in block }e\\
+ X_e-U_e & \text{label that the helper coordinates in block }e\text{ must realize.}
+\end{array}
+\]
+
 \begin{theorem}[Min--sum closure of prescribed-coset support costs]
 \label{prop:prescribed-coset-composition}
 \coverage{absent}%
 \uses{thm:ungated-ranked-confinement}%
-For every $\F_q$-linear map $c:T\to M$,
+For every $\F_q$-linear map $c:T\to M$, the ordinary prescribed-coset cost is
 \begin{equation}
  \Lambda_{A\circ B,T}(c)=
  \min_{\substack{X:T\to L^{E_A}\ \phi_AX=c}}
  \sum_{e\in E_A}\Lambda_{B,T}(X_e).
  \label{eq:coset-cost-composition}
 \end{equation}
-The same formula iterates associatively: either parenthesization of a finite
-tower minimizes over the same intermediate labels and sums the same leaf
-costs.
+For $T\leq M$ and the target split above, the target-normalized recovery cost
+is
+\begin{equation}
+ \mu_{A\circ B,P,T}(c)=
+ \min_{\substack{U,X:T\to L^{E_A}\\
+                  U_e(T)\subseteq U_{P_e}\ (e\in E_A)\\
+                  \phi_AU=\iota_T,\ \phi_AX=c}}
+ \sum_{e\in E_A}\Lambda_{B,J_e,T}(X_e-U_e).
+ \label{eq:target-cost-composition}
+\end{equation}
+Both formulas iterate associatively through a finite tower: either
+parenthesization minimizes over the same intermediate labels and target
+contributions and sums the same leaf costs.  Storing minimizing target and
+helper lifts propagates one coefficient-level witness; retaining every witness
+requires the full lift sets rather than only the numerical minima.
 \end{theorem}
 
 \begin{proof}
 A leaf-level lift $Y:T\to\F_q^{E_A\times E_B}$ determines intermediate maps
 $X_e=\phi_BY_e$.  Its support is the disjoint union of its supports in the
 inner blocks.  At fixed $X$, the block lifts are independent and attain their
-minima separately, which proves \eqref{eq:coset-cost-composition}.  At three
-or more levels, either parenthesization eliminates the same intermediate
-arrays, proving associativity.
+minima separately, which proves \eqref{eq:coset-cost-composition}.
+
+For the target-normalized formula, lift $U_e$ to an actual target map
+$a_e:T\to\F_q^{P_e}$.  The condition $\phi_AU=\iota_T$ is exactly target
+normalization.  Once $X_e$ is fixed, the helper contribution must lift
+$X_e-U_e$ through $\phi_{B,J_e}$, independently in each block.  This proves
+\eqref{eq:target-cost-composition}; storing the displayed lifts gives the
+stated witness semantics.  At three or more levels, either parenthesization
+eliminates the same intermediate arrays and target contributions, proving
+associativity.
 \uses{thm:ungated-ranked-confinement}%
 \proves{prop:prescribed-coset-composition}%
 \end{proof}
@@ -367,36 +399,6 @@ Indeed, every nonzero intermediate coordinate map costs between
 $\delta_{B,T}$ and $R_{B,T}$.  Minimizing the number of nonzero intermediate
 coordinates proves the bounds; a one-coordinate outer realization attaining
 either extremum proves sharpness.
-
-\paragraph{Target-normalized closure.}
-For recovery, ordinary labels are supplemented by the contribution already
-supplied on the target coordinates.  Suppose that a target set in $A\circ B$ meets block $e$ in
-$P_e\subseteq E_B$, and put $J_e=E_B\setminus P_e$ and
-$U_{P_e}=\operatorname{im}\phi_{B,P_e}$.  If $T\leq M$ and $\iota_T:T\hookrightarrow M$
-is the inclusion, the variables in the next formula have the following roles:
-\[
-\begin{array}{c|l}
- U_e & \text{intermediate contribution supplied by target coordinates in block }e\\
- X_e & \text{total intermediate functional label required in block }e\\
- X_e-U_e & \text{label that the helper coordinates in block }e\text{ must realize.}
-\end{array}
-\]
-The target-normalized cost is therefore
-\begin{equation}
- \mu_{A\circ B,P,T}(c)=
- \min_{\substack{U,X:T\to L^{E_A}\\
-                  U_e(T)\subseteq U_{P_e}\ (e\in E_A)\\
-                  \phi_AU=\iota_T,\ \phi_AX=c}}
- \sum_{e\in E_A}\Lambda_{B,J_e,T}(X_e-U_e).
- \label{eq:target-cost-composition}
-\end{equation}
-To verify the formula, lift $U_e$ to an actual target map
-$a_e:T\to\F_q^{P_e}$.  The condition $\phi_AU=\iota_T$ is exactly target
-normalization.  Once $X_e$ is fixed, the helper contribution must lift
-$X_e-U_e$ through $\phi_{B,J_e}$, independently in each block.  If one also
-stores the target maps $a_e$ and minimizing helper lifts, backtracking recovers
-one coefficient-level witness.  Retaining every witness requires the full
-lift sets, not only these numerical minima.
 
 \paragraph{Dual-distance recursion.}
 The same zero/nonzero-label split gives
@@ -463,6 +465,10 @@ $O\leq L^N$ an $L$-linear code, and nonzero projection onto the distinguished
 block $j$.  The context family ranges over every such $N$ and $j$, while the
 inner target/helper split and the identified target line $T$ remain fixed.
 Thus ``rank one'' refers to $\dim_{\F_q}T=1$, not to the dimension of $O$.
+Operationally, two inner representations are indistinguishable at $T$ when
+every compatible outer code assigns them the same exact nonconfinement cost.
+The theorem below identifies exactly which numerical data determine that
+response.
 Two represented inner codes are \emph{contextually equivalent at $T$} when
 their values of $\Gamma_{j,T}$ agree in every member of this family.  A
 compatible further concatenation adds outer layers above the same

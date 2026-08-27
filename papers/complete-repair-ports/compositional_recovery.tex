@@ -147,6 +147,17 @@ For concatenation, identify the message space of $I$ with a finite extension
 field $L/\F_q$ and retain the chosen encoder $L\to I$.  We call this encoder
 together with its image a \emph{represented inner code}; the representation
 matters because it assigns field functionals to coefficient fibres.
+The maps used in this passage are
+\[
+ L\xrightarrow[\sim]{\ \iota_I\ }I\subseteq\F_q^E,
+ \qquad
+ \F_q^E\xrightarrow{\ \Phi_I\ }L^*,
+ \qquad
+ L\xrightarrow[\sim]{\ b\mapsto(a\mapsto\Tr_{L/\F_q}(ba))\ }L^*.
+\]
+Here $\Phi_I(y)(a)=\langle y,\iota_I(a)\rangle$; its fibres are cosets of
+$I^\perp$.  Thus changing $\iota_I$ can relabel the same coefficient fibres
+even when the image code $I$ is unchanged.
 
 For an outer code $O$, let $\operatorname{FD}(O)$ be its functional dual: the
 tuples of $\F_q$-linear functionals on $L$ whose coordinatewise evaluations

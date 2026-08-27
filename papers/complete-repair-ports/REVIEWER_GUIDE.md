@@ -51,11 +51,10 @@ information-loss results; the ergodis section then executes the closure law.
    `rho_T(I)+d(I⊥)`, while every nonzero sector retains its actual inner
    realization costs. The target outer projection is assumed nonzero so that a
    nonzero functional sector cannot be confined to the target block.
-   `prop:prescribed-coset-composition` shows that the ordinary labelled costs
-   compose by blockwise min-sum substitution. These numerical functions store
-   fibrewise minima; coefficient witnesses require separately retained
-   minimizing lifts. Helper-restriction costs and the target images give the
-   target-normalized recursion. The scalar threshold `rho_T(I)+d(I⊥)` alone is
+   `prop:prescribed-coset-composition` gives both the ordinary and the
+   target-normalized blockwise min-sum recursions. These numerical functions
+   store fibrewise minima; coefficient witnesses require separately retained
+   minimizing lifts. The scalar threshold `rho_T(I)+d(I⊥)` alone is
    not used as recursive input.
 5. **Where does the additive RGHW cost come from?** The map
    `Φ_I : F_q^E → L*` sends each concatenated dual block to its induced inner
