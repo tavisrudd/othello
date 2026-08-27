@@ -210,6 +210,35 @@ pub struct TowerAnswer {
     pub witness: TowerWitness,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct TowerReplaySummary {
+    pub cost: u32,
+    pub witness_nodes: u64,
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct TowerWitnessVisit<'a> {
+    pub level_from_base: usize,
+    pub label_rows: usize,
+    pub label_cols: usize,
+    pub label_data: &'a [u8],
+    pub cost: u32,
+    pub target_normalized: bool,
+    pub child_count: usize,
+}
+
+#[derive(Clone, Copy)]
+struct ReplayLabel<'a> {
+    rows: usize,
+    cols: usize,
+    data: &'a [u8],
+}
+
+struct ReplayScratch<'a> {
+    choice_offsets: &'a [usize],
+    choices: &'a mut [u32],
+}
+
 #[derive(Debug)]
 pub struct CompositionTable {
     rows: u16,
@@ -669,6 +698,42 @@ impl CompositionTower {
         self.answer_ordinary_field::<Prime<P>>(label, witness_node_budget)
     }
 
+    pub fn replay_target_witness_field<F: FiniteField>(
+        &self,
+        label: &Matrix,
+        witness_node_budget: u64,
+        mut visit: impl FnMut(TowerWitnessVisit<'_>),
+    ) -> Result<Option<TowerReplaySummary>, CompositionError> {
+        self.replay_impl::<F>(label, true, witness_node_budget, &mut visit)
+    }
+
+    pub fn replay_target_witness<const P: u8>(
+        &self,
+        label: &Matrix,
+        witness_node_budget: u64,
+        visit: impl FnMut(TowerWitnessVisit<'_>),
+    ) -> Result<Option<TowerReplaySummary>, CompositionError> {
+        self.replay_target_witness_field::<Prime<P>>(label, witness_node_budget, visit)
+    }
+
+    pub fn replay_ordinary_witness_field<F: FiniteField>(
+        &self,
+        label: &Matrix,
+        witness_node_budget: u64,
+        mut visit: impl FnMut(TowerWitnessVisit<'_>),
+    ) -> Result<Option<TowerReplaySummary>, CompositionError> {
+        self.replay_impl::<F>(label, false, witness_node_budget, &mut visit)
+    }
+
+    pub fn replay_ordinary_witness<const P: u8>(
+        &self,
+        label: &Matrix,
+        witness_node_budget: u64,
+        visit: impl FnMut(TowerWitnessVisit<'_>),
+    ) -> Result<Option<TowerReplaySummary>, CompositionError> {
+        self.replay_ordinary_witness_field::<Prime<P>>(label, witness_node_budget, visit)
+    }
+
     fn validate_bases<F: FiniteField>(
         ordinary_base: &CostTable,
         target_base: &CostTable,
@@ -715,6 +780,55 @@ impl CompositionTower {
             cost: witness.cost,
             witness_nodes: required,
             witness,
+        }))
+    }
+
+    fn replay_impl<F: FiniteField>(
+        &self,
+        label: &Matrix,
+        target_normalized: bool,
+        witness_node_budget: u64,
+        visit: &mut impl FnMut(TowerWitnessVisit<'_>),
+    ) -> Result<Option<TowerReplaySummary>, CompositionError> {
+        let required = self.witness_node_count()?;
+        if required > witness_node_budget {
+            return Err(CompositionError::WitnessBudget {
+                required,
+                budget: witness_node_budget,
+            });
+        }
+        Self::validate_bases::<F>(&self.ordinary_base, &self.target_base)?;
+        let mut choice_offsets = Vec::with_capacity(self.levels.len());
+        let mut choice_count = 0usize;
+        for level in &self.levels {
+            choice_offsets.push(choice_count);
+            choice_count = choice_count
+                .checked_add(level.block_count)
+                .ok_or(CompositionError::Overflow)?;
+        }
+        // One scratch allocation covers every recursion level. A child writes only
+        // its own level segment, so the parent's choices remain live for siblings.
+        let mut choices = vec![0u32; choice_count];
+        let Some(cost) = self.replay_expand(
+            self.levels.len().checked_sub(1),
+            ReplayLabel {
+                rows: label.rows(),
+                cols: label.cols(),
+                data: label.as_slice(),
+            },
+            target_normalized,
+            &mut ReplayScratch {
+                choice_offsets: &choice_offsets,
+                choices: &mut choices,
+            },
+            visit,
+        )?
+        else {
+            return Ok(None);
+        };
+        Ok(Some(TowerReplaySummary {
+            cost,
+            witness_nodes: required,
         }))
     }
 
@@ -776,6 +890,93 @@ impl CompositionTower {
             target_normalized,
             children: children.into_boxed_slice(),
         }))
+    }
+
+    fn replay_expand(
+        &self,
+        level_index: Option<usize>,
+        label: ReplayLabel<'_>,
+        target_normalized: bool,
+        scratch: &mut ReplayScratch<'_>,
+        visit: &mut impl FnMut(TowerWitnessVisit<'_>),
+    ) -> Result<Option<u32>, CompositionError> {
+        let Some(level_index) = level_index else {
+            let table = if target_normalized {
+                &self.target_base
+            } else {
+                &self.ordinary_base
+            };
+            if label.rows != table.rows as usize || label.cols != table.cols as usize {
+                return Err(CompositionError::Shape);
+            }
+            let Some(&position) = table.index.get(label.data) else {
+                return Ok(None);
+            };
+            let cost = table.records[position as usize].cost;
+            visit(TowerWitnessVisit {
+                level_from_base: 0,
+                label_rows: label.rows,
+                label_cols: label.cols,
+                label_data: label.data,
+                cost,
+                target_normalized,
+                child_count: 0,
+            });
+            return Ok(Some(cost));
+        };
+        let level = &self.levels[level_index];
+        let table = if target_normalized {
+            &level.target
+        } else {
+            &level.ordinary
+        };
+        if label.rows != table.rows as usize || label.cols != table.cols as usize {
+            return Err(CompositionError::Shape);
+        }
+        let Some(&position) = table.index.get(label.data) else {
+            return Ok(None);
+        };
+        let record = table.records[position as usize];
+        let choice_start = scratch.choice_offsets[level_index];
+        let choice_end = choice_start + level.block_count;
+        fill_path_choices(
+            &table.witnesses,
+            record.witness,
+            &mut scratch.choices[choice_start..choice_end],
+        )?;
+        visit(TowerWitnessVisit {
+            level_from_base: level_index + 1,
+            label_rows: label.rows,
+            label_cols: label.cols,
+            label_data: label.data,
+            cost: record.cost,
+            target_normalized,
+            child_count: level.block_count,
+        });
+        for block in 0..level.block_count {
+            let choice = scratch.choices[choice_start + block] as usize;
+            let child_target = target_normalized && block == level.target_block;
+            let inner = if child_target {
+                table.target.as_ref().unwrap_or(&table.ordinary)
+            } else {
+                &table.ordinary
+            };
+            let inner_record = inner.records[choice];
+            let local_label = inner.labels.get(inner_record.label);
+            self.replay_expand(
+                level_index.checked_sub(1),
+                ReplayLabel {
+                    rows: local_label.rows,
+                    cols: local_label.cols,
+                    data: local_label.data,
+                },
+                child_target,
+                scratch,
+                visit,
+            )?
+            .ok_or(CompositionError::Shape)?;
+        }
+        Ok(Some(record.cost))
     }
 }
 
@@ -976,6 +1177,27 @@ fn path_choices(witnesses: &[CompositionWitnessNode], mut witness: u32) -> Vec<u
     }
     result.reverse();
     result
+}
+
+fn fill_path_choices(
+    witnesses: &[CompositionWitnessNode],
+    mut witness: u32,
+    output: &mut [u32],
+) -> Result<(), CompositionError> {
+    let mut remaining = output.len();
+    while witness != ROOT_WITNESS {
+        if remaining == 0 {
+            return Err(CompositionError::Shape);
+        }
+        remaining -= 1;
+        let node = witnesses[witness as usize];
+        output[remaining] = node.choice;
+        witness = node.parent;
+    }
+    if remaining != 0 {
+        return Err(CompositionError::Shape);
+    }
+    Ok(())
 }
 
 fn path_is_lex_smaller(
@@ -1312,8 +1534,49 @@ mod tests {
         assert!(!answer.witness.children[1].target_normalized);
         assert!(answer.witness.children[0].children[0].target_normalized);
         assert!(!answer.witness.children[0].children[1].target_normalized);
+        let mut eager = Vec::new();
+        fn flatten(
+            witness: &TowerWitness,
+            level_from_base: usize,
+            output: &mut Vec<(usize, Vec<u8>, u32, bool, usize)>,
+        ) {
+            output.push((
+                level_from_base,
+                witness.label.as_slice().to_vec(),
+                witness.cost,
+                witness.target_normalized,
+                witness.children.len(),
+            ));
+            for child in &witness.children {
+                flatten(child, level_from_base - 1, output);
+            }
+        }
+        flatten(&answer.witness, 2, &mut eager);
+        let mut streamed = Vec::new();
+        let summary = tower
+            .replay_target_witness::<2>(&label, 7, |visit| {
+                streamed.push((
+                    visit.level_from_base,
+                    visit.label_data.to_vec(),
+                    visit.cost,
+                    visit.target_normalized,
+                    visit.child_count,
+                ));
+            })
+            .unwrap()
+            .unwrap();
+        assert_eq!(summary.cost, answer.cost);
+        assert_eq!(summary.witness_nodes, answer.witness_nodes);
+        assert_eq!(streamed, eager);
         assert!(matches!(
             tower.answer_target::<2>(&label, 6),
+            Err(CompositionError::WitnessBudget {
+                required: 7,
+                budget: 6
+            })
+        ));
+        assert!(matches!(
+            tower.replay_target_witness::<2>(&label, 6, |_| {}),
             Err(CompositionError::WitnessBudget {
                 required: 7,
                 budget: 6

@@ -580,8 +580,131 @@ struct Search<'a> {
     memo_prunes: u64,
 }
 
+#[repr(C)]
+#[derive(Clone, Copy)]
+struct SearchFrame {
+    family: u32,
+    next_option: u32,
+    end_option: u32,
+    incoming_option: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<SearchFrame>() == 16);
+const _: () = assert!(std::mem::align_of::<SearchFrame>() == 4);
+const NO_OPTION: u32 = u32::MAX;
+
+enum Entry {
+    Descend,
+    Reject,
+    Accept,
+}
+
 impl Search<'_> {
-    fn visit<const CORRELATED: bool>(&mut self, family_index: usize) -> Result<bool, OrbitError> {
+    fn enter<const CORRELATED: bool>(&mut self, family_index: usize) -> Entry {
+        self.states_examined += 1;
+        let suffix_total = family_index * self.total_width;
+        for coordinate in 0..self.total_width {
+            let current = self.totals[coordinate];
+            let target = self.target_totals[coordinate];
+            if current + self.suffix_min[suffix_total + coordinate] > target
+                || current + self.suffix_max[suffix_total + coordinate] < target
+            {
+                self.bound_prunes += 1;
+                return Entry::Reject;
+            }
+        }
+        if CORRELATED {
+            for ((needed, &target), &current) in self
+                .needed
+                .iter_mut()
+                .zip(self.target_packed)
+                .zip(&self.packed)
+            {
+                *needed = target.add_mod3(current).add_mod3(current);
+            }
+            if !self.correlated_suffixes[family_index].contains(&self.needed) {
+                self.residue_prunes += 1;
+                return Entry::Reject;
+            }
+        } else {
+            let suffix_residue = family_index * self.target_residue.len();
+            for coordinate in 0..self.target_residue.len() {
+                let block = self.packed[coordinate / 21].raw();
+                let current = ((block >> (3 * (coordinate % 21))) & 7) as u8;
+                let needed = (self.target_residue[coordinate] + 3 - current) % 3;
+                if self.suffix_residues[suffix_residue + coordinate] & (1 << needed) == 0 {
+                    self.residue_prunes += 1;
+                    return Entry::Reject;
+                }
+            }
+        }
+        let family_u32 = family_index as u32;
+        if self.dead.contains(family_u32, &self.packed, &self.totals) {
+            self.memo_prunes += 1;
+            return Entry::Reject;
+        }
+        if family_index == self.families.len() {
+            return if self
+                .packed
+                .iter()
+                .zip(self.target_packed)
+                .all(|(left, right)| left.raw() == right.raw())
+                && self.totals == self.target_totals
+            {
+                Entry::Accept
+            } else {
+                Entry::Reject
+            };
+        }
+        Entry::Descend
+    }
+
+    fn apply(&mut self, option_index: usize) {
+        let option = self.options[option_index];
+        let residue_start = option.residue_start as usize;
+        for (left, &right) in self
+            .packed
+            .iter_mut()
+            .zip(&self.residues[residue_start..residue_start + self.residue_blocks])
+        {
+            *left = left.add_mod3(right);
+        }
+        let totals_start = option.totals_start as usize;
+        for (left, &right) in self
+            .totals
+            .iter_mut()
+            .zip(&self.option_totals[totals_start..totals_start + self.total_width])
+        {
+            *left += right;
+        }
+        self.choices.push(option.label);
+    }
+
+    fn undo(&mut self, option_index: usize) {
+        let option = self.options[option_index];
+        self.choices.pop();
+        let totals_start = option.totals_start as usize;
+        for (left, &right) in self
+            .totals
+            .iter_mut()
+            .zip(&self.option_totals[totals_start..totals_start + self.total_width])
+        {
+            *left -= right;
+        }
+        let residue_start = option.residue_start as usize;
+        for (left, &right) in self
+            .packed
+            .iter_mut()
+            .zip(&self.residues[residue_start..residue_start + self.residue_blocks])
+        {
+            *left = left.add_mod3(right).add_mod3(right);
+        }
+    }
+
+    fn visit_recursive<const CORRELATED: bool>(
+        &mut self,
+        family_index: usize,
+    ) -> Result<bool, OrbitError> {
         self.states_examined += 1;
         let suffix_total = family_index * self.total_width;
         for coordinate in 0..self.total_width {
@@ -632,7 +755,6 @@ impl Search<'_> {
                 .all(|(left, right)| left.raw() == right.raw())
                 && self.totals == self.target_totals);
         }
-
         let family = self.families[family_index];
         let start = family.option_start as usize;
         let end = start + family.option_len as usize;
@@ -655,7 +777,7 @@ impl Search<'_> {
                 *left += right;
             }
             self.choices.push(option.label);
-            if self.visit::<CORRELATED>(family_index + 1)? {
+            if self.visit_recursive::<CORRELATED>(family_index + 1)? {
                 return Ok(true);
             }
             self.choices.pop();
@@ -675,6 +797,57 @@ impl Search<'_> {
             }
         }
         self.dead.insert(family_u32, &self.packed, &self.totals)?;
+        Ok(false)
+    }
+
+    fn run<const CORRELATED: bool>(&mut self) -> Result<bool, OrbitError> {
+        let mut stack = Vec::with_capacity(self.families.len() + 1);
+        stack.push(SearchFrame {
+            family: 0,
+            next_option: NO_OPTION,
+            end_option: 0,
+            incoming_option: NO_OPTION,
+        });
+        while let Some(frame) = stack.last_mut() {
+            let family_index = frame.family as usize;
+            if frame.next_option == NO_OPTION {
+                match self.enter::<CORRELATED>(family_index) {
+                    Entry::Accept => return Ok(true),
+                    Entry::Reject => {
+                        let incoming = frame.incoming_option;
+                        stack.pop();
+                        if incoming != NO_OPTION {
+                            self.undo(incoming as usize);
+                        }
+                        continue;
+                    }
+                    Entry::Descend => {
+                        let family = self.families[family_index];
+                        frame.next_option = family.option_start;
+                        frame.end_option = family.option_start + family.option_len;
+                    }
+                }
+            }
+            if frame.next_option == frame.end_option {
+                self.dead.insert(frame.family, &self.packed, &self.totals)?;
+                let incoming = frame.incoming_option;
+                stack.pop();
+                if incoming != NO_OPTION {
+                    self.undo(incoming as usize);
+                }
+                continue;
+            }
+            let option = frame.next_option;
+            frame.next_option += 1;
+            let next_family = frame.family + 1;
+            self.apply(option as usize);
+            stack.push(SearchFrame {
+                family: next_family,
+                next_option: NO_OPTION,
+                end_option: 0,
+                incoming_option: option,
+            });
+        }
         Ok(false)
     }
 }
@@ -804,10 +977,15 @@ fn orbit_search_impl(
         residue_prunes: 0,
         memo_prunes: 0,
     };
-    let feasible = if correlated_suffixes.is_empty() {
-        search.visit::<false>(0)?
+    let iterative = family_count > 4_096;
+    let feasible = if correlated_suffixes.is_empty() && iterative {
+        search.run::<false>()?
+    } else if correlated_suffixes.is_empty() {
+        search.visit_recursive::<false>(0)?
+    } else if iterative {
+        search.run::<true>()?
     } else {
-        search.visit::<true>(0)?
+        search.visit_recursive::<true>(0)?
     };
     Ok(OrbitSyndromeResult {
         choices: feasible.then(|| search.choices.into_boxed_slice()),

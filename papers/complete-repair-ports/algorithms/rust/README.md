@@ -177,6 +177,25 @@ instance: its 26.1 us median is `40.4x` faster than coordinate DFS, `172.7x`
 faster than correlated closure, and `3,229x` faster than Python. Its two half
 enumerations examine 486 assignments and retain 243 right states. Bounded
 preallocation contributes a separately measured `1.214x`.
+
+A separate exact-feasibility scaling sweep holds four choices per family and
+six ternary syndrome coordinates while increasing the number of orbit
+families. CP-SAT receives one-hot family choices and the same exact ternary
+syndrome equations. The packed coordinate engine is the appropriate ERGO
+backend in this regime; building correlated suffix closure would waste both
+time and memory.
+
+| families | ERGO time | ERGO RSS | CP-SAT time | CP-SAT RSS | speedup |
+|---------:|----------:|---------:|------------:|-----------:|--------:|
+|       80 |     46 us |  1.6 MiB |   29.590 ms |   77.3 MiB |    644x |
+|      320 |    138 us |  1.7 MiB |  168.105 ms |   83.9 MiB |  1,215x |
+|    1,280 |    424 us |  2.3 MiB |       1.09 s |  104.7 MiB |  2,582x |
+|    8,192 |  2,735 us |  6.2 MiB |      20.21 s |  246.7 MiB |  7,388x |
+
+The first two rows use 21 rotated rounds, the 1,280-family row seven, and the
+seconds-scale 8,192-family row three. Every run returns the same feasibility
+verdict; raw samples and artifact hashes are recorded separately from the
+older Python-oracle comparison.
 For unequal family sizes, the production split minimizes the exact sum of the
 two contiguous half-assignment products, breaking ties toward the smaller
 right table. On the skew `[2,2,2,2,2,2,64]` fixture this changes 520 examined
@@ -231,6 +250,29 @@ protocol gives Rust wins of `336.514x`, `560.936x`, and `18.074x` on the
 balanced, small-state, and large-nonuniform profiles respectively.  These are
 bounded warm-solve results, not universal claims about CP-SAT.
 
+An end-to-end scaling sweep then increases one input axis at a time. The demand
+sweep holds four options per demand; the option sweep holds 80 demands. Raw
+CP-SAT receives all generated options, while the structured control receives
+the same safe Pareto canonicalization and grading bound as ERGO-comp. All
+three backends return the same optimum.
+
+| demands | ERGO time | ERGO RSS | raw CP-SAT | raw RSS | structured CP-SAT | structured RSS | speedup: raw / structured |
+|--------:|----------:|---------:|-----------:|--------:|------------------:|---------------:|--------------------------:|
+|      80 |     46 us |  1.6 MiB |   6.686 ms | 75.1 MiB |          6.733 ms |       75.2 MiB |              147x / 148x |
+|     320 |    146 us |  1.6 MiB |  28.045 ms | 78.2 MiB |         28.173 ms |       78.0 MiB |              192x / 193x |
+|   1,280 |    515 us |  2.1 MiB | 212.182 ms | 97.3 MiB |        212.162 ms |       95.7 MiB |              412x / 412x |
+|   8,192 |  2,633 us |  4.4 MiB |      1.37 s | 199.9 MiB |            1.35 s |      188.6 MiB |              522x / 511x |
+
+| options per demand | ERGO time | ERGO RSS | raw CP-SAT | raw RSS | structured CP-SAT | structured RSS | speedup: raw / structured |
+|-------------------:|----------:|---------:|-----------:|--------:|------------------:|---------------:|--------------------------:|
+|                 64 |    417 us |  1.8 MiB |  72.216 ms | 84.8 MiB |         18.334 ms |       77.5 MiB |               173x / 44x |
+|              1,024 |  4,515 us |  6.0 MiB |       1.59 s | 386.1 MiB |         71.936 ms |       89.7 MiB |               353x / 16x |
+
+The small and medium rows use 21 rotated rounds; the two seconds-scale rows
+use seven. This sweep shows two different advantages: the dense certified
+kernel scales gently with demand count, while option canonicalization prevents
+a thousand alternatives per demand from reaching the residual optimizer.
+
 The represented-tower path has a separate 21-round, pinned-core end-to-end
 comparison. Direct CP-SAT receives binary coefficient variables, the exact
 row-support objective, and GF(4) parity constraints. The stronger-preprocessing
@@ -240,18 +282,112 @@ Every solver proves the same optimum; ERGO-comp additionally expands its
 canonical coefficient witness tree.
 
 | depth / fanout | leaves | ERGO time | ERGO RSS | direct CP-SAT | direct RSS | labelled CP-SAT | labelled RSS | speedup: direct / labelled |
-|:---------------|-------:|----------:|---------:|--------------:|-----------:|----------------:|-------------:|--------------------------:|
-| 2 / 2          |      4 |     89 us |  1.3 MiB |      3.011 ms |   74.4 MiB |        4.917 ms |     74.9 MiB |                 34x / 55x |
-| 3 / 3          |     27 |    134 us |  1.3 MiB |     11.560 ms |   75.5 MiB |       27.479 ms |     77.0 MiB |                86x / 204x |
-| 4 / 3          |     81 |    166 us |  1.3 MiB |     43.160 ms |   78.5 MiB |      112.086 ms |     82.0 MiB |               260x / 676x |
-| 5 / 4          |  1,024 |    300 us |  1.4 MiB |        8.21 s |  126.4 MiB |          1.57 s |    157.8 MiB |          27,385x / 5,224x |
+|:---------------|-------:|----------:|---------:|--------------:|-----------:|----------------:|-------------:|---------------------------:|
+| 2 / 2          |      4 |     89 us |  1.3 MiB |      3.011 ms |   74.4 MiB |        4.917 ms |     74.9 MiB |                  34x / 55x |
+| 3 / 3          |     27 |    134 us |  1.3 MiB |     11.560 ms |   75.5 MiB |       27.479 ms |     77.0 MiB |                 86x / 204x |
+| 4 / 3          |     81 |    166 us |  1.3 MiB |     43.160 ms |   78.5 MiB |      112.086 ms |     82.0 MiB |                260x / 676x |
+| 5 / 4          |  1,024 |    300 us |  1.4 MiB |        8.21 s |  126.4 MiB |          1.57 s |    157.8 MiB |           27,385x / 5,224x |
+| 6 / 4          |  4,096 |    766 us |  2.8 MiB |      263.76 s |  281.4 MiB |          6.19 s |    411.4 MiB |          344,300x / 8,080x |
 
 These are bounded single-worker results for the identity-block GF(4) tower
 family, not a general claim about CP-SAT. The first three rows use 21 rounds;
-the expensive 1,024-leaf row uses seven. Raw samples, artifact hashes, work
-counters, and the exact protocol are in `evidence/benchmarks.json`; replay with
-`run_benchmarks.py --write --transfer-only --ab-rounds 21` after building the
-release benchmark binary with the documented architecture flags.
+the 1,024-leaf row uses seven. At 4,096 leaves, Rust uses 21 samples, labelled
+CP-SAT seven, and direct CP-SAT one completed solve. Raw samples, artifact
+hashes, work counters, and the exact protocol are in
+`evidence/benchmarks.json`; replay the first four rows with
+`run_benchmarks.py --write --transfer-only --ab-rounds 21` and the last with
+`run_benchmarks.py --write --transfer-deep-only` after building the release
+benchmark binary with the documented architecture flags.
+
+ERGO-comp alone can be pushed much farther before ten seconds. The following
+are pinned-core single end-to-end solves, including instance compilation and
+complete witness construction. They are the largest completed geometric or
+power-of-ten probes attempted, not claimed hard limits.
+
+| kernel                     | input scale                                     |            exact work |   time |  peak RSS |
+|:---------------------------|:------------------------------------------------|----------------------:|-------:|----------:|
+| represented tower          | depth 14, fanout 4; 268,435,456 leaves          | 357,913,941 witnesses | 3.90 s |   2.5 MiB |
+| scheduling: demand scaling | 40,000,000 demands; 4 alternatives each         |   2,039,999,880 moves | 8.03 s | 2,787 MiB |
+| scheduling: fanout scaling | 80 demands; 14,000,000 alternatives each        |           9,338 moves | 9.12 s |   2.3 MiB |
+| orbit feasibility          | 10,000,000 families; 4 alternatives, width 6    |     10,000,003 states | 3.08 s | 4,523 MiB |
+
+The tower streams nearly 358 million reconstructible witness records. The
+scheduler-fanout row generates and canonicalizes 1.12 billion alternatives,
+yet retains only the antichain needed for 9,338 optimizer moves. The demand
+and orbit axes remain representation-memory limited; tower replay and
+scheduler fanout no longer are. Replay with
+`run_benchmarks.py --write --ergo-limits-only`.
+
+Zen 5 top-down microarchitecture analysis supports that diagnosis. These are
+percentages of pipeline slots, rounded to whole percentages; the top-level
+group is multiplexed and therefore approximate. The memory/core columns come
+from a separate nonmultiplexed backend-breakdown run.
+
+| kernel                     | retiring | frontend | bad speculation | backend | memory | core |
+|:---------------------------|---------:|---------:|----------------:|--------:|-------:|-----:|
+| represented tower          |      55% |       2% |              1% |     42% |    21% |  20% |
+| scheduling: demand scaling |      38% |      32% |             17% |     13% |     6% |   3% |
+| scheduling: fanout scaling |      18% |      17% |             25% |     39% |    30% |   9% |
+| orbit feasibility          |      61% |      14% |              1% |     24% |    22% |   2% |
+
+These measurements follow streaming witness/input introduction and precede
+the final narrow-load representation. They show the tower shifting from 48%
+memory-bound to a balanced 21% memory / 20% core split, while the streamed
+fanout compiler exposes branch and residual memory costs. Replay with
+`run_benchmarks.py --write --tma-large-only`.
+
+Tower witness replay therefore also has a low-memory mode. It retains the
+compiled argmin tables, preallocates one `O(depth * fanout)` choice scratch,
+and emits preorder records through a callback; it allocates neither per node
+nor per push. A record contains its level, label bytes, cost, normalization
+flag, and child count, so the original tree is reconstructible from the
+stream. The eager API remains available when callers actually need an owned
+tree.
+
+| mode      | depth / fanout | witness records |    time |  peak RSS |
+|:----------|:---------------|----------------:|--------:|----------:|
+| eager     | 12 / 4         |      22,369,621 |  1.32 s | 1,965 MiB |
+| streaming | 12 / 4         |      22,369,621 |  238 ms |   2.4 MiB |
+| streaming | 14 / 4         |     357,913,941 |  3.83 s |   2.4 MiB |
+
+At depth 12, streaming is 6x faster and uses about 800x less peak memory. The
+depth-14 run expands 268 million leaves and nearly 358 million exact witness
+records below four seconds. These are seven-round rotated medians at depth 12
+and three rounds at depth 14; replay with
+`run_benchmarks.py --write --tower-stream-only --ab-rounds 7`.
+
+Scheduling input compilation has a matching streaming path. Its generic
+iterator API maintains each family's Pareto-minimal antichain online; generated
+callers can yield stack arrays, and materialized callers use the same canonical
+implementation. Family records occupy 8 bytes, option offsets are derived
+from fixed-width layout rather than stored, and retained loads use the
+narrowest exact `u8`/`u16`/`u32` representation selected once at construction.
+
+| axis                         | materialized time | materialized RSS | streamed time | streamed RSS |
+|:-----------------------------|------------------:|-----------------:|--------------:|-------------:|
+| 10,000,000 demands x 4       |            2.81 s |        3,588 MiB |        2.31 s |    1,576 MiB |
+| 80 demands x 1,000,000       |            2.69 s |        4,275 MiB |         891 ms |      2.2 MiB |
+
+These three-round rotated comparisons use identical generated alternatives,
+work counts, and optima. The final derived-offset and narrow-load changes then
+move the 10-million-demand single run to about 2.14 s / 699 MiB and enable the
+40-million-demand stress row above. Replay the paired comparison with
+`run_benchmarks.py --write --streaming-input-only`.
+
+The frontier-sized thread sweep includes compilation and uses CPUs 0--23 for
+parallel variants. Additional workers act only on the small residual solve,
+so the results are effectively flat; 24 is not the optimum.
+
+| axis                    |      single thread |           best parallel | verdict |
+|:------------------------|-------------------:|------------------------:|:-------|
+| 40,000,000 demands x 4  | 8.25 s / 2,787 MiB | 8.13 s / 2,787 MiB (12) | neutral |
+| 80 demands x 14,000,000 |   9.15 s / 2.4 MiB |    9.12 s / 2.6 MiB (8) | neutral |
+
+Parentheses give worker count. These are single frontier probes, not stable
+speedup claims; the sequential path remains the default for these shapes.
+Streaming tower replay and the deep orbit DFS are currently sequential, so no
+synthetic multithread number is reported for those rows.
+Replay with `run_benchmarks.py --write --ergo-thread-sweep-only`.
 
 A pinned-core `perf stat` diagnostic on the largest nonuniform profile records
 about 661,000 cycles, 2.01 million instructions, 341,000 branches, 454 branch

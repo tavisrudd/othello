@@ -39,6 +39,27 @@ def transfer_tower_spec(variant: str):
     return fields[1], int(fields[2]), int(fields[3])
 
 
+def orbit_grid_spec(variant: str):
+    fields = variant.split(":")
+    if len(fields) != 6 or fields[:2] != ["orbit-grid", "cpsat"]:
+        return None
+    return tuple(int(field) for field in fields[2:])
+
+
+def orbit_grid_problem(spec: tuple[int, int, int, int]):
+    family_count, option_count, width, seed = spec
+    generator = Generator(seed)
+    families = tuple(
+        tuple(
+            tuple(generator.next_u32() % 3 for _ in range(width))
+            for _ in range(option_count)
+        )
+        for _ in range(family_count)
+    )
+    target = tuple(generator.next_u32() % 3 for _ in range(width))
+    return families, target
+
+
 def gf4_target_tables():
     columns = (1, 2, 1, 2)
     ordinary = {}
@@ -224,8 +245,9 @@ def main() -> None:
     graded_grid = graded_scheduler_grid_spec(variant)
     heterogeneous_grid = heterogeneous_scheduler_grid_spec(variant)
     transfer_tower = transfer_tower_spec(variant)
+    orbit_grid = orbit_grid_spec(variant)
     cp_model = None
-    if transfer_tower is not None or variant in ("scheduler-cpsat", "scheduler-cpsat-small") or (
+    if transfer_tower is not None or orbit_grid is not None or variant in ("scheduler-cpsat", "scheduler-cpsat-small") or (
         grid is not None and grid[0] == "cpsat"
     ) or (
         graded_grid is not None and graded_grid[0].startswith("cpsat")
@@ -237,7 +259,35 @@ def main() -> None:
         cp_model = loaded_cp_model
     work = peak_states = checksum = 0
     started = perf_counter_ns()
-    if transfer_tower is not None:
+    if orbit_grid is not None:
+        assert cp_model is not None
+        families, target = orbit_grid_problem(orbit_grid)
+        model = cp_model.CpModel()
+        choices = [
+            [model.new_bool_var(f"x_{family}_{option}") for option in range(len(options))]
+            for family, options in enumerate(families)
+        ]
+        for family in choices:
+            model.add_exactly_one(family)
+        for coordinate, target_value in enumerate(target):
+            total = sum(
+                residue[coordinate] * choices[family][option]
+                for family, options in enumerate(families)
+                for option, residue in enumerate(options)
+            )
+            carry = model.new_int_var(0, len(families), f"carry_{coordinate}")
+            model.add(total == target_value + 3 * carry)
+        solver = cp_model.CpSolver()
+        solver.parameters.num_workers = 1
+        solver.parameters.random_seed = 0
+        for _ in range(repetitions):
+            status = solver.solve(model)
+            if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+                raise RuntimeError(f"CP-SAT did not find a solution: {solver.status_name(status)}")
+            work += solver.num_branches
+            peak_states = max(peak_states, solver.num_conflicts)
+            checksum += 1
+    elif transfer_tower is not None:
         assert cp_model is not None
         backend, depth, fanout = transfer_tower
         leaves = fanout**depth

@@ -48,21 +48,63 @@ pub struct PositiveGradingCertificate {
 struct FamilyRecord {
     option_start: u32,
     option_len: u32,
-    _reserved: [u32; 2],
 }
 
-const _: () = assert!(std::mem::size_of::<FamilyRecord>() == 16);
+const _: () = assert!(std::mem::size_of::<FamilyRecord>() == 8);
 const _: () = assert!(std::mem::align_of::<FamilyRecord>() == 4);
 
-#[repr(C)]
-#[derive(Clone, Copy, Debug)]
-struct OptionRecord {
-    load_start: u32,
-    _reserved: [u32; 3],
+#[derive(Clone, Debug)]
+enum OptionLoads {
+    U8(Box<[u8]>),
+    U16(Box<[u16]>),
+    U32(Box<[u32]>),
 }
 
-const _: () = assert!(std::mem::size_of::<OptionRecord>() == 16);
-const _: () = assert!(std::mem::align_of::<OptionRecord>() == 4);
+impl OptionLoads {
+    #[inline]
+    fn get(&self, index: usize) -> u32 {
+        match self {
+            Self::U8(values) => u32::from(values[index]),
+            Self::U16(values) => u32::from(values[index]),
+            Self::U32(values) => values[index],
+        }
+    }
+}
+
+enum OptionLoadsBuilder {
+    U8(Vec<u8>),
+    U16(Vec<u16>),
+    U32(Vec<u32>),
+}
+
+impl OptionLoadsBuilder {
+    fn new(capacities: &[u32]) -> Self {
+        let maximum = capacities.iter().copied().max().unwrap_or(0);
+        if u8::try_from(maximum).is_ok() {
+            Self::U8(Vec::new())
+        } else if u16::try_from(maximum).is_ok() {
+            Self::U16(Vec::new())
+        } else {
+            Self::U32(Vec::new())
+        }
+    }
+
+    fn extend(&mut self, loads: &[u32]) {
+        match self {
+            Self::U8(values) => values.extend(loads.iter().map(|&load| load as u8)),
+            Self::U16(values) => values.extend(loads.iter().map(|&load| load as u16)),
+            Self::U32(values) => values.extend_from_slice(loads),
+        }
+    }
+
+    fn finish(self) -> OptionLoads {
+        match self {
+            Self::U8(values) => OptionLoads::U8(values.into_boxed_slice()),
+            Self::U16(values) => OptionLoads::U16(values.into_boxed_slice()),
+            Self::U32(values) => OptionLoads::U32(values.into_boxed_slice()),
+        }
+    }
+}
 
 #[repr(C)]
 #[derive(Clone, Copy, Debug)]
@@ -263,8 +305,8 @@ impl WeightedRepairWorkspace {
 pub struct WeightedRepairProblem {
     capacities: Box<[u32]>,
     families: Box<[FamilyRecord]>,
-    options: Box<[OptionRecord]>,
-    option_loads: Box<[u32]>,
+    option_count: u32,
+    option_loads: OptionLoads,
     dense_state_space: u32,
     positive_grading: Option<PositiveGradingCertificate>,
     graded_shell: Option<GradedShellLayout>,
@@ -276,7 +318,21 @@ impl WeightedRepairProblem {
         capacities: &[u32],
         raw_families: &[Vec<Vec<u32>>],
     ) -> Result<Self, SchedulerError> {
-        Self::from_families_impl(capacities, raw_families, None)
+        Self::from_family_iterators_impl(capacities, raw_families, None)
+    }
+
+    /// Compiles families from arbitrary iterators without materializing a nested
+    /// input tree. Each family retains only its current Pareto-minimal antichain.
+    pub fn from_family_iterators<I, FI, L>(
+        capacities: &[u32],
+        raw_families: I,
+    ) -> Result<Self, SchedulerError>
+    where
+        I: IntoIterator<Item = FI>,
+        FI: IntoIterator<Item = L>,
+        L: AsRef<[u32]>,
+    {
+        Self::from_family_iterators_impl(capacities, raw_families, None)
     }
 
     /// Compiles a problem and verifies a caller-supplied positive grading.
@@ -290,66 +346,78 @@ impl WeightedRepairProblem {
         raw_families: &[Vec<Vec<u32>>],
         weights: &[u32],
     ) -> Result<Self, SchedulerError> {
-        Self::from_families_impl(capacities, raw_families, Some(weights))
+        Self::from_family_iterators_impl(capacities, raw_families, Some(weights))
     }
 
-    fn from_families_impl(
+    pub fn from_family_iterators_with_positive_grading<I, FI, L>(
         capacities: &[u32],
-        raw_families: &[Vec<Vec<u32>>],
+        raw_families: I,
+        weights: &[u32],
+    ) -> Result<Self, SchedulerError>
+    where
+        I: IntoIterator<Item = FI>,
+        FI: IntoIterator<Item = L>,
+        L: AsRef<[u32]>,
+    {
+        Self::from_family_iterators_impl(capacities, raw_families, Some(weights))
+    }
+
+    fn from_family_iterators_impl<I, FI, L>(
+        capacities: &[u32],
+        raw_families: I,
         grading_weights: Option<&[u32]>,
-    ) -> Result<Self, SchedulerError> {
-        u32::try_from(raw_families.len()).map_err(|_| SchedulerError::TooLarge)?;
+    ) -> Result<Self, SchedulerError>
+    where
+        I: IntoIterator<Item = FI>,
+        FI: IntoIterator<Item = L>,
+        L: AsRef<[u32]>,
+    {
         let width = capacities.len();
-        let mut families = Vec::with_capacity(raw_families.len());
-        let mut options = Vec::new();
-        let mut option_loads = Vec::new();
+        let raw_families = raw_families.into_iter();
+        let mut families = Vec::with_capacity(raw_families.size_hint().0);
+        let mut option_count = 0u32;
+        let mut option_loads = OptionLoadsBuilder::new(capacities);
         for raw_family in raw_families {
-            if raw_family.iter().any(|loads| loads.len() != width) {
-                return Err(SchedulerError::WidthMismatch);
-            }
-            let mut canonical: Vec<Vec<u32>> = raw_family
-                .iter()
-                .filter(|loads| loads.iter().zip(capacities).all(|(load, cap)| load <= cap))
-                .cloned()
-                .collect();
-            canonical.sort_unstable();
-            canonical.dedup();
-            let minimal: Vec<_> = canonical
-                .iter()
-                .enumerate()
-                .filter(|(index, loads)| {
-                    !canonical.iter().enumerate().any(|(other_index, other)| {
-                        index != &other_index
-                            && other
-                                .iter()
-                                .zip(loads.iter())
-                                .all(|(left, right)| left <= right)
-                    })
-                })
-                .map(|(_, loads)| loads)
-                .collect();
-            let option_start =
-                u32::try_from(options.len()).map_err(|_| SchedulerError::TooLarge)?;
-            for loads in &minimal {
-                let load_start =
-                    u32::try_from(option_loads.len()).map_err(|_| SchedulerError::TooLarge)?;
-                option_loads.extend_from_slice(loads);
-                options.push(OptionRecord {
-                    load_start,
-                    _reserved: [0; 3],
+            let mut minimal: Vec<Box<[u32]>> = Vec::new();
+            for raw_loads in raw_family {
+                let loads = raw_loads.as_ref();
+                if loads.len() != width {
+                    return Err(SchedulerError::WidthMismatch);
+                }
+                if loads.iter().zip(capacities).any(|(load, cap)| load > cap)
+                    || minimal
+                        .iter()
+                        .any(|other| other.iter().zip(loads).all(|(left, right)| left <= right))
+                {
+                    continue;
+                }
+                minimal.retain(|other| {
+                    !loads
+                        .iter()
+                        .zip(other.iter())
+                        .all(|(left, right)| left <= right)
                 });
+                minimal.push(loads.into());
+            }
+            minimal.sort_unstable();
+            let option_start = option_count;
+            for loads in &minimal {
+                option_loads.extend(loads);
+                option_count = option_count
+                    .checked_add(1)
+                    .ok_or(SchedulerError::TooLarge)?;
             }
             families.push(FamilyRecord {
                 option_start,
                 option_len: u32::try_from(minimal.len()).map_err(|_| SchedulerError::TooLarge)?,
-                _reserved: [0; 2],
             });
         }
+        u32::try_from(families.len()).map_err(|_| SchedulerError::TooLarge)?;
         let mut problem = Self {
             capacities: capacities.into(),
             families: families.into_boxed_slice(),
-            options: options.into_boxed_slice(),
-            option_loads: option_loads.into_boxed_slice(),
+            option_count,
+            option_loads: option_loads.finish(),
             dense_state_space: 0,
             positive_grading: None,
             graded_shell: None,
@@ -373,9 +441,16 @@ impl WeightedRepairProblem {
         Ok(problem)
     }
 
-    fn option_load(&self, option: u32) -> &[u32] {
-        let start = self.options[option as usize].load_start as usize;
-        &self.option_loads[start..start + self.capacities.len()]
+    #[inline]
+    fn option_load_coordinate(&self, option: u32, coordinate: usize) -> u32 {
+        let start = option as usize * self.capacities.len();
+        self.option_loads.get(start + coordinate)
+    }
+
+    fn option_load_box(&self, option: u32) -> Box<[u32]> {
+        (0..self.capacities.len())
+            .map(|coordinate| self.option_load_coordinate(option, coordinate))
+            .collect()
     }
 
     fn solve_impl<const DENSE: bool, const PACKED: bool, const WIDE: bool>(
@@ -400,14 +475,14 @@ impl WeightedRepairProblem {
             (Vec::new(), 0)
         };
         let dense_option_deltas = if DENSE {
-            self.options
-                .iter()
-                .enumerate()
-                .map(|(option, _)| {
-                    self.option_load(option as u32)
+            (0..self.option_count as usize)
+                .map(|option| {
+                    dense_strides
                         .iter()
-                        .zip(&dense_strides)
-                        .map(|(&load, &stride)| load as usize * stride)
+                        .enumerate()
+                        .map(|(coordinate, &stride)| {
+                            self.option_load_coordinate(option as u32, coordinate) as usize * stride
+                        })
                         .sum()
                 })
                 .collect::<Vec<usize>>()
@@ -502,10 +577,9 @@ impl WeightedRepairProblem {
                         .map(|&(_, feasible)| feasible)
                         .unwrap_or(true);
                     if candidate_packed.is_none() {
-                        let candidate_load = self.option_load(option);
                         for coordinate in 0..width {
                             let Some(sum) = loads[used_start + coordinate]
-                                .checked_add(candidate_load[coordinate])
+                                .checked_add(self.option_load_coordinate(option, coordinate))
                             else {
                                 feasible = false;
                                 break;
@@ -554,10 +628,9 @@ impl WeightedRepairProblem {
                         record.repairs = repairs;
                     } else {
                         if candidate_packed.is_some() && store_loads {
-                            let candidate_load = self.option_load(option);
                             for coordinate in 0..width {
-                                scratch[coordinate] =
-                                    loads[used_start + coordinate] + candidate_load[coordinate];
+                                scratch[coordinate] = loads[used_start + coordinate]
+                                    + self.option_load_coordinate(option, coordinate);
                             }
                         }
                         let load_start = if store_loads {
@@ -663,7 +736,7 @@ impl WeightedRepairProblem {
             .iter()
             .map(|&(demand, option)| WeightedRepairChoice {
                 demand,
-                loads: self.option_load(option).into(),
+                loads: self.option_load_box(option),
             })
             .collect();
         let mut repaired = vec![false; self.families.len()];
@@ -821,26 +894,29 @@ impl WeightedRepairProblem {
         if weights.len() != self.capacities.len() || weights.contains(&0) {
             return None;
         }
-        self.options.first()?;
-        let expected = self
-            .option_load(0)
-            .iter()
-            .zip(weights)
-            .try_fold(0u64, |sum, (&load, &weight)| {
-                sum.checked_add(u64::from(load) * u64::from(weight))
-            })?;
+        (self.option_count != 0).then_some(())?;
+        let expected =
+            weights
+                .iter()
+                .enumerate()
+                .try_fold(0u64, |sum, (coordinate, &weight)| {
+                    sum.checked_add(
+                        u64::from(self.option_load_coordinate(0, coordinate)) * u64::from(weight),
+                    )
+                })?;
         if expected == 0 {
             return None;
         }
-        self.options
-            .iter()
-            .enumerate()
-            .all(|(option, _)| {
-                self.option_load(option as u32)
+        (0..self.option_count as usize)
+            .all(|option| {
+                weights
                     .iter()
-                    .zip(weights)
-                    .try_fold(0u64, |sum, (&load, &weight)| {
-                        sum.checked_add(u64::from(load) * u64::from(weight))
+                    .enumerate()
+                    .try_fold(0u64, |sum, (coordinate, &weight)| {
+                        sum.checked_add(
+                            u64::from(self.option_load_coordinate(option as u32, coordinate))
+                                * u64::from(weight),
+                        )
                     })
                     == Some(expected)
             })
@@ -949,15 +1025,17 @@ impl WeightedRepairProblem {
             debug_assert_eq!(product, dense_state_space);
         }
         option_deltas.clear();
-        if option_deltas.capacity() < self.options.len() {
-            option_deltas.reserve_exact(self.options.len());
+        if option_deltas.capacity() < self.option_count as usize {
+            option_deltas.reserve_exact(self.option_count as usize);
         }
-        for option in 0..self.options.len() {
+        for option in 0..self.option_count as usize {
             option_deltas.push(
-                self.option_load(option as u32)
+                strides
                     .iter()
-                    .zip(strides.iter())
-                    .map(|(&load, &stride)| load as usize * stride)
+                    .enumerate()
+                    .map(|(coordinate, &stride)| {
+                        self.option_load_coordinate(option as u32, coordinate) as usize * stride
+                    })
                     .sum::<usize>(),
             );
         }
@@ -983,20 +1061,21 @@ impl WeightedRepairProblem {
             shift += lane_bits;
         }
         option_packed.clear();
-        if option_packed.capacity() < self.options.len() {
-            option_packed.reserve_exact(self.options.len());
+        if option_packed.capacity() < self.option_count as usize {
+            option_packed.reserve_exact(self.option_count as usize);
         }
-        for option in 0..self.options.len() {
+        for option in 0..self.option_count as usize {
             option_packed.push(
-                self.option_load(option as u32)
+                packed_shifts
                     .iter()
-                    .zip(packed_shifts.iter())
-                    .map(|(&load, &shift)| u64::from(load) << shift)
+                    .enumerate()
+                    .map(|(coordinate, &shift)| {
+                        u64::from(self.option_load_coordinate(option as u32, coordinate)) << shift
+                    })
                     .sum(),
             );
         }
-        let lex_base =
-            u64::try_from(self.options.len() + 1).map_err(|_| SchedulerError::TooLarge)?;
+        let lex_base = u64::from(self.option_count) + 1;
         let maximum_repairs = self.graded_repair_upper_bound();
         debug_assert!(maximum_repairs.is_some_and(|repairs| repairs <= u8::MAX as usize));
         let lex_codes_fit = maximum_repairs.is_some_and(|repairs| {
@@ -1155,7 +1234,7 @@ impl WeightedRepairProblem {
             .iter()
             .map(|&(demand, option)| WeightedRepairChoice {
                 demand,
-                loads: self.option_load(option).into(),
+                loads: self.option_load_box(option),
             })
             .collect::<Vec<_>>();
         repaired.resize(self.families.len(), false);
@@ -1267,14 +1346,15 @@ impl WeightedRepairProblem {
                 .checked_mul(u64::from(capacity) + 1)
                 .ok_or(SchedulerError::TooLarge)?;
         }
-        let mut option_deltas = Vec::with_capacity(self.options.len());
-        for option in 0..self.options.len() {
-            let delta = self
-                .option_load(option as u32)
+        let mut option_deltas = Vec::with_capacity(self.option_count as usize);
+        for option in 0..self.option_count as usize {
+            let delta = strides
                 .iter()
-                .zip(&strides)
-                .try_fold(0u64, |sum, (&load, &stride)| {
-                    sum.checked_add(u64::from(load) * stride)
+                .enumerate()
+                .try_fold(0u64, |sum, (coordinate, &stride)| {
+                    sum.checked_add(
+                        u64::from(self.option_load_coordinate(option as u32, coordinate)) * stride,
+                    )
                 })
                 .ok_or(SchedulerError::TooLarge)?;
             option_deltas.push(delta);
@@ -1303,8 +1383,8 @@ impl WeightedRepairProblem {
                 let option_end = option_start + family.option_len;
                 for option in option_start..option_end {
                     transitions_examined += 1;
-                    let option_load = self.option_load(option);
-                    let feasible = option_load.iter().enumerate().all(|(coordinate, &load)| {
+                    let feasible = (0..width).all(|coordinate| {
+                        let load = self.option_load_coordinate(option, coordinate);
                         let radix = u64::from(self.capacities[coordinate]) + 1;
                         let used = state.key / strides[coordinate] % radix;
                         u64::from(load) <= u64::from(self.capacities[coordinate]) - used
@@ -1409,7 +1489,7 @@ impl WeightedRepairProblem {
             .iter()
             .map(|&(demand, option)| WeightedRepairChoice {
                 demand,
-                loads: self.option_load(option).into(),
+                loads: self.option_load_box(option),
             })
             .collect();
         let mut repaired = vec![false; self.families.len()];
@@ -1478,16 +1558,14 @@ fn dense_packed_feasibility(problem: &WeightedRepairProblem) -> Option<(u128, u1
         guard |= lane_limit << shift;
         shift += lane_bits;
     }
-    let option_packed = problem
-        .options
-        .iter()
-        .enumerate()
-        .map(|(option, _)| {
-            problem
-                .option_load(option as u32)
+    let option_packed = (0..problem.option_count as usize)
+        .map(|option| {
+            shifts
                 .iter()
-                .zip(&shifts)
-                .map(|(&load, &shift)| u128::from(load) << shift)
+                .enumerate()
+                .map(|(coordinate, &shift)| {
+                    u128::from(problem.option_load_coordinate(option as u32, coordinate)) << shift
+                })
                 .sum()
         })
         .collect();
@@ -1878,6 +1956,30 @@ mod tests {
         let answer = problem.solve().unwrap();
         assert_eq!(answer.repaired_count(), 2);
         assert!(answer.total_loads.iter().zip([2, 1]).all(|(x, y)| *x <= y));
+    }
+
+    #[test]
+    fn iterator_constructor_streams_to_the_canonical_antichain() {
+        let families = [
+            [[2, 2], [1, 2], [1, 1], [0, 2], [0, 2], [3, 0]],
+            [[2, 0], [1, 1], [0, 2], [2, 0], [2, 2], [3, 3]],
+        ];
+        let problem = WeightedRepairProblem::from_family_iterators(
+            &[2, 2],
+            families.into_iter().map(IntoIterator::into_iter),
+        )
+        .unwrap();
+        assert_eq!(problem.families.len(), 2);
+        assert_eq!(problem.families[0].option_len, 2);
+        assert_eq!(problem.families[1].option_len, 3);
+        let problem_ref = &problem;
+        let stored = (0..problem.option_count)
+            .flat_map(|option| {
+                (0..2).map(move |coordinate| problem_ref.option_load_coordinate(option, coordinate))
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(stored, [0, 2, 1, 1, 0, 2, 1, 1, 2, 0]);
+        assert_eq!(problem.solve_adaptive().unwrap().repaired_count(), 2);
     }
 
     #[test]

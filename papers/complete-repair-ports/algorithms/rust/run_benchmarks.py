@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import platform
+import re
 import statistics
 import subprocess
 from pathlib import Path
@@ -20,11 +21,12 @@ BINARY = Path(
 
 
 def command(variant: str, repetitions: int) -> list[str]:
+    cpu_set = "0-23" if "parallel-" in variant else "2"
     if "cpsat" in variant:
         return [
             "taskset",
             "-c",
-            "2",
+            cpu_set,
             "nix",
             "shell",
             "nixpkgs#uv",
@@ -43,7 +45,7 @@ def command(variant: str, repetitions: int) -> list[str]:
         return [
             "taskset",
             "-c",
-            "2",
+            cpu_set,
             "nix",
             "shell",
             "nixpkgs#python3",
@@ -53,7 +55,7 @@ def command(variant: str, repetitions: int) -> list[str]:
             variant,
             str(repetitions),
         ]
-    return ["taskset", "-c", "2", str(BINARY), variant, str(repetitions)]
+    return ["taskset", "-c", cpu_set, str(BINARY), variant, str(repetitions)]
 
 
 def run_group(variants: tuple[str, ...], repetitions: int, rounds: int):
@@ -123,6 +125,45 @@ def run_binary_ab(
     }
 
 
+def run_perf_group(variant: str, group: str):
+    perf_command = ["perf", "stat", "-M", group, "-x,"] + command(variant, 1)
+    completed = subprocess.run(
+        perf_command,
+        check=True,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    sample = json.loads(completed.stdout)
+    metrics = {}
+    for line in completed.stderr.splitlines():
+        fields = line.split(",", 6)
+        if len(fields) != 7:
+            continue
+        match = re.search(r"%\S*\s+([a-z_]+)$", fields[6])
+        if match is not None:
+            metrics[match.group(1)] = float(fields[5])
+    return {
+        "command": perf_command,
+        "sample": sample,
+        "percent": metrics,
+        "raw_perf_csv": completed.stderr.splitlines(),
+    }
+
+
+def run_tma(variant: str):
+    pipeline = run_perf_group(variant, "PipelineL1")
+    backend = run_perf_group(variant, "backend_bound_group")
+    return {
+        "command": pipeline["command"],
+        "sample": pipeline["sample"],
+        "pipeline_l1_percent": pipeline["percent"],
+        "backend_breakdown_percent": backend["percent"],
+        "raw_pipeline_l1_csv": pipeline["raw_perf_csv"],
+        "raw_backend_csv": backend["raw_perf_csv"],
+    }
+
+
 def ratio(numerator: float, denominator: float) -> float:
     return round(numerator / denominator, 3)
 
@@ -150,6 +191,15 @@ def main() -> None:
     parser.add_argument("--locality-only", action="store_true")
     parser.add_argument("--structured-cpsat-only", action="store_true")
     parser.add_argument("--transfer-only", action="store_true")
+    parser.add_argument("--transfer-deep-only", action="store_true")
+    parser.add_argument("--scheduler-scaling-only", action="store_true")
+    parser.add_argument("--orbit-scaling-only", action="store_true")
+    parser.add_argument("--orbit-iterative-ab", action="store_true")
+    parser.add_argument("--ergo-limits-only", action="store_true")
+    parser.add_argument("--tma-large-only", action="store_true")
+    parser.add_argument("--tower-stream-only", action="store_true")
+    parser.add_argument("--ergo-thread-sweep-only", action="store_true")
+    parser.add_argument("--streaming-input-only", action="store_true")
     parser.add_argument("--baseline-binary", type=Path)
     parser.add_argument("--candidate-binary", type=Path, default=BINARY)
     parser.add_argument("--locality-key", default="scheduler_locality_ab")
@@ -158,6 +208,375 @@ def main() -> None:
         raise SystemExit("pass --write to record a fresh noncanonical benchmark")
     if not BINARY.exists():
         raise SystemExit("build target/release/bench_kernels first")
+
+    if args.streaming_input_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --streaming-input-only")
+        value = json.loads(OUTPUT.read_text())
+        profiles = {}
+        for name, demands, options in (
+            ("demands-10000000", 10_000_000, 4),
+            ("options-1000000", 80, 1_000_000),
+        ):
+            prefix = (
+                "scheduler-graded-grid:{}:4:2:"
+                f"{demands}:{options}:2719080173"
+            )
+            variants = (
+                prefix.format("graded-adaptive-workspace"),
+                prefix.format("graded-stream"),
+            )
+            measured = run_group(variants, 1, 3)
+            if len({entry["work_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"streaming-input work mismatch: {name}")
+            if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"streaming-input checksum mismatch: {name}")
+            profiles[name] = {
+                "speedup": ratio(
+                    measured[variants[0]]["median_ns_per_solve"],
+                    measured[variants[1]]["median_ns_per_solve"],
+                ),
+                "measurements": measured,
+            }
+        value["streaming_input_compilation"] = {
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": (
+                "three-round pinned-core rotated end-to-end comparison; exact work "
+                "and optimum parity; generated alternatives are identical"
+            ),
+            "profiles": profiles,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.ergo_thread_sweep_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --ergo-thread-sweep-only")
+        value = json.loads(OUTPUT.read_text())
+        profiles = {}
+        for name, demands, options in (
+            ("demands-40000000", 40_000_000, 4),
+            ("options-14000000", 80, 14_000_000),
+        ):
+            prefix = (
+                "scheduler-graded-grid:{}:4:2:"
+                f"{demands}:{options}:2719080173"
+            )
+            variants = (prefix.format("graded-stream"),) + tuple(
+                prefix.format(f"graded-stream-parallel-{threads}")
+                for threads in (2, 4, 8, 12, 16, 24)
+            )
+            measured = run_group(variants, 1, 1)
+            if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"scheduler thread-sweep checksum mismatch: {name}")
+            profiles[name] = {"variants": variants, "measurements": measured}
+        value["ergo_large_thread_sweep"] = {
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": (
+                "one pinned end-to-end solve per 1/2/4/8/12/16/24-worker point; "
+                "streaming problem compilation included; exact optimum parity"
+            ),
+            "profiles": profiles,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.tower_stream_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --tower-stream-only")
+        value = json.loads(OUTPUT.read_text())
+        eager_variant = "transfer-tower:rust:12:4"
+        stream_variant = "transfer-tower:rust-stream:12:4"
+        depth_12 = run_group((eager_variant, stream_variant), 1, args.ab_rounds)
+        depth_14_variant = "transfer-tower:rust-stream:14:4"
+        depth_14 = run_group((depth_14_variant,), 1, min(args.ab_rounds, 3))
+        if depth_12[eager_variant]["work_per_solve"] != depth_12[stream_variant]["work_per_solve"]:
+            raise RuntimeError("eager/streaming tower witness count mismatch")
+        value["tower_streaming_replay"] = {
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": (
+                "pinned-core end-to-end replay; seven-round rotated depth-12 "
+                "eager/streaming comparison and three depth-14 streaming rounds"
+            ),
+            "depth_12_speedup": ratio(
+                depth_12[eager_variant]["median_ns_per_solve"],
+                depth_12[stream_variant]["median_ns_per_solve"],
+            ),
+            "depth_12": depth_12,
+            "depth_14": depth_14[depth_14_variant],
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.tma_large_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --tma-large-only")
+        value = json.loads(OUTPUT.read_text())
+        variants = {
+            "tower-stream-depth-14": "transfer-tower:rust-stream:14:4",
+            "scheduler-demands-10000000": (
+                "scheduler-graded-grid:graded-stream:4:2:"
+                "10000000:4:2719080173"
+            ),
+            "scheduler-options-1000000": (
+                "scheduler-graded-grid:graded-stream:4:2:"
+                "80:1000000:2719080173"
+            ),
+            "orbit-families-10000000": "orbit-grid:rust:10000000:4:6:2719081239",
+        }
+        value["large_case_tma"] = {
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": (
+                "Linux perf PipelineL1 and backend_bound_group metrics; pinned core; "
+                "one complete end-to-end solve per group; multiplexed Zen 5 "
+                "PipelineL1 counters are approximate"
+            ),
+            "profiles": {name: run_tma(variant) for name, variant in variants.items()},
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.ergo_limits_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --ergo-limits-only")
+        value = json.loads(OUTPUT.read_text())
+        variants = {
+            "tower-stream-depth-14": "transfer-tower:rust-stream:14:4",
+            "scheduler-demands-40000000": (
+                "scheduler-graded-grid:graded-stream:4:2:"
+                "40000000:4:2719080173"
+            ),
+            "scheduler-options-14000000": (
+                "scheduler-graded-grid:graded-stream:4:2:"
+                "80:14000000:2719080173"
+            ),
+            "orbit-families-10000000": "orbit-grid:rust:10000000:4:6:2719081239",
+        }
+        profiles = {
+            name: run_group((variant,), 1, 1)[variant]
+            for name, variant in variants.items()
+        }
+        value["ergo_sub_ten_second_stress"] = {
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": (
+                "pinned-core deterministic single end-to-end solves; largest completed "
+                "power-of-ten/geometric probes below ten seconds, not universal limits"
+            ),
+            "variants": variants,
+            "profiles": profiles,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.orbit_iterative_ab:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --orbit-iterative-ab")
+        if args.baseline_binary is None or not args.baseline_binary.exists():
+            raise SystemExit("--orbit-iterative-ab requires an existing --baseline-binary")
+        if not args.candidate_binary.exists():
+            raise SystemExit("--candidate-binary does not exist")
+        value = json.loads(OUTPUT.read_text())
+        profiles = {}
+        for name, variant, repetitions in (
+            ("fixed-coordinate", "orbit-coordinate", 100),
+            ("families-8192", "orbit-grid:rust:8192:4:6:2719081239", 50),
+        ):
+            measured = run_binary_ab(
+                variant,
+                repetitions,
+                args.ab_rounds,
+                args.baseline_binary,
+                args.candidate_binary,
+            )
+            if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"orbit iterative checksum mismatch: {variant}")
+            if len({entry["work_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"orbit iterative work mismatch: {variant}")
+            profiles[name] = {
+                "variant": variant,
+                "speedup": ratio(
+                    measured["baseline"]["median_ns_per_solve"],
+                    measured["candidate"]["median_ns_per_solve"],
+                ),
+                "measurements": measured,
+            }
+        value["orbit_iterative_ab"] = {
+            "rounds": args.ab_rounds,
+            "protocol": "saved-binary rotated interleave; exact work and checksum parity",
+            "profiles": profiles,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.orbit_scaling_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --orbit-scaling-only")
+        value = json.loads(OUTPUT.read_text())
+        profiles = {}
+        for family_count, profile_rounds in (
+            (80, args.ab_rounds),
+            (320, args.ab_rounds),
+            (1_280, min(args.ab_rounds, 7)),
+            (8_192, min(args.ab_rounds, 3)),
+        ):
+            variants = (
+                f"orbit-grid:rust:{family_count}:4:6:2719081239",
+                f"orbit-grid:cpsat:{family_count}:4:6:2719081239",
+            )
+            measured = run_group(variants, 1, profile_rounds)
+            if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"orbit scaling checksum mismatch: {variants}")
+            profiles[str(family_count)] = {
+                "families": family_count,
+                "options_per_family": 4,
+                "syndrome_width": 6,
+                "rounds": profile_rounds,
+                "rust_speedup_over_cpsat": ratio(
+                    measured[variants[1]]["median_ns_per_solve"],
+                    measured[variants[0]]["median_ns_per_solve"],
+                ),
+                "measurements": measured,
+            }
+        value["orbit_scaling_cpsat"] = {
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "benchmark_python_sha256": sha256(ROOT / "benchmark_python.py"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": {
+                "common": "rotated interleave; deterministic single worker; exact feasibility",
+                "rust": "coordinate DFS over packed ternary residues",
+                "cpsat": "one-hot orbit choices and exact ternary syndrome equations",
+            },
+            "profiles": profiles,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.scheduler_scaling_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --scheduler-scaling-only")
+        value = json.loads(OUTPUT.read_text())
+        cases = (
+            ("demands-80", 4, 2, 80, 4, args.ab_rounds),
+            ("demands-320", 4, 2, 320, 4, args.ab_rounds),
+            ("demands-1280", 4, 2, 1_280, 4, args.ab_rounds),
+            ("demands-8192", 4, 2, 8_192, 4, min(args.ab_rounds, 7)),
+            ("options-64", 4, 2, 80, 64, args.ab_rounds),
+            ("options-1024", 4, 2, 80, 1_024, min(args.ab_rounds, 7)),
+        )
+        profiles = {}
+        for name, resources, capacity, demands, options, profile_rounds in cases:
+            prefix = (
+                f"scheduler-graded-grid:{{}}:{resources}:{capacity}:"
+                f"{demands}:{options}:2719080173"
+            )
+            variants = (
+                prefix.format("graded-adaptive-workspace"),
+                prefix.format("cpsat"),
+                prefix.format("cpsat-structured"),
+            )
+            measured = run_group(variants, 1, profile_rounds)
+            if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+                raise RuntimeError(f"scheduler scaling checksum mismatch: {variants}")
+            profiles[name] = {
+                "resources": resources,
+                "capacity": capacity,
+                "demands": demands,
+                "options_per_demand": options,
+                "rounds": profile_rounds,
+                "rust_speedup_over_raw_cpsat": ratio(
+                    measured[variants[1]]["median_ns_per_solve"],
+                    measured[variants[0]]["median_ns_per_solve"],
+                ),
+                "rust_speedup_over_structured_cpsat": ratio(
+                    measured[variants[2]]["median_ns_per_solve"],
+                    measured[variants[0]]["median_ns_per_solve"],
+                ),
+                "measurements": measured,
+            }
+        value["scheduler_scaling_cpsat"] = {
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "benchmark_python_sha256": sha256(ROOT / "benchmark_python.py"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": {
+                "common": "rotated interleave; deterministic single worker; one end-to-end solve",
+                "rust": "canonical options; grading certificate; adaptive reusable workspace",
+                "raw_cpsat": "raw generated options",
+                "structured_cpsat": "Pareto-canonical options and exact grading bound",
+            },
+            "profiles": profiles,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.transfer_deep_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --transfer-deep-only")
+        value = json.loads(OUTPUT.read_text())
+        variants = {
+            "rust": ("transfer-tower:rust:6:4", 21),
+            "direct_cpsat": ("transfer-tower:cpsat-direct:6:4", 1),
+            "structured_cpsat": ("transfer-tower:cpsat:6:4", 7),
+        }
+        measured = {
+            name: run_group((variant,), 1, rounds)[variant]
+            for name, (variant, rounds) in variants.items()
+        }
+        if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+            raise RuntimeError("deep transfer CP-SAT checksum mismatch")
+        value["transfer_tower_deep_stress"] = {
+            "depth": 6,
+            "fanout": 4,
+            "leaf_blocks": 4**6,
+            "witness_nodes": sum(4**level for level in range(7)),
+            "rounds": {name: rounds for name, (_, rounds) in variants.items()},
+            "rust_speedup_over_direct_cpsat": ratio(
+                measured["direct_cpsat"]["median_ns_per_solve"],
+                measured["rust"]["median_ns_per_solve"],
+            ),
+            "rust_speedup_over_structured_cpsat": ratio(
+                measured["structured_cpsat"]["median_ns_per_solve"],
+                measured["rust"]["median_ns_per_solve"],
+            ),
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "benchmark_python_sha256": sha256(ROOT / "benchmark_python.py"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": (
+                "single-worker exact stress: 21 Rust samples, seven structured CP-SAT "
+                "samples, and one completed direct CP-SAT solve"
+            ),
+            "measurements": measured,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
 
     if args.transfer_only:
         if not OUTPUT.exists():
