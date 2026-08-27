@@ -10,6 +10,16 @@ Discovery companion:
 
 ## Current status
 
+**C979 is running and user-held open (2026-08-27).**  After a complete read
+of *Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes*,
+revise its exposition around the all-length diagonal-multiplier nullity
+dichotomy for quantum-information readers.  The work includes the introduction,
+the Section 3 proof architecture, the hierarchy of the six-point applications
+and refinements, the verification/appendix presentation, and the paper README's
+false Clebsch-series/portfolio affiliation.  Preserve theorem scope and trust
+boundaries.  Do not close or archive C979 until the user explicitly directs it.
+Live card: `2026-08-27-c979-mds-css-exposition-revision.md`.
+
 **Referee edits applied (2026-08-16, unallocated user request).**  Fourteen
 edits to Paper I: the Corollary B.19 phase sign and empty-complement corner, the
 Lemma 5.1 `c=0` branch, explicitly constructed traceless local logarithms in the
