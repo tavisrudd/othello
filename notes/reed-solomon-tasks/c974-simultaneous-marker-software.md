@@ -1,6 +1,7 @@
 # C974 — simultaneous-marker locator software
 
-**Lane:** `reed-solomon` · **Status:** active
+**Lane:** `reed-solomon` · **Status:** implementation and bounded pointed R11
+probe green; final full validation and handoff pending
 
 ## Objective
 

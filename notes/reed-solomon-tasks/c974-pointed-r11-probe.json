@@ -1,0 +1,9502 @@
+{
+  "authority_commit": "0c11aa5cfc6cca18b2ce14d5807033b5d031f092",
+  "candidate_limit": 100000,
+  "records": [
+    {
+      "candidates_examined": 380,
+      "field": "gf16",
+      "forbidden": 0,
+      "locator_sha256": "cb0d06e4f52dc682064d92ebda648369867d17412fd36112e84aa70eea43c874",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 13
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 384,
+      "field": "gf16",
+      "forbidden": 1,
+      "locator_sha256": "90db27a228765d349b079958329538737232ef2a2176d14626660d4cab4af540",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 9
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 462,
+      "field": "gf16",
+      "forbidden": 2,
+      "locator_sha256": "55536565b8bd86e2b8808c5f48c4dac05d84c1a82d112960094f3ff29c2773a9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 13
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 233,
+      "field": "gf16",
+      "forbidden": 3,
+      "locator_sha256": "003b9acff203ddcdbbc32c2e1085088721522e977b643e7cdea9c9a99da418d7",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 9
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 13
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 220,
+      "field": "gf16",
+      "forbidden": 4,
+      "locator_sha256": "5d52016378f644adcabdbc17ba49235701db06a6fdb5b8fda7d616586c411902",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 13
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 220,
+      "field": "gf16",
+      "forbidden": 5,
+      "locator_sha256": "5d52016378f644adcabdbc17ba49235701db06a6fdb5b8fda7d616586c411902",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 13
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 8,
+      "field": "gf16",
+      "forbidden": 6,
+      "locator_sha256": "80e7b896405f53279acdf6d05ab20541614baf6685b81dd50df6e33180829dd9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 9,
+      "field": "gf16",
+      "forbidden": 7,
+      "locator_sha256": "94aff9d0676071f2256e5fc50da74e0467c73c3e4b4e0cc5a07379f15f6e462d",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 12
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 9,
+      "field": "gf16",
+      "forbidden": 8,
+      "locator_sha256": "94aff9d0676071f2256e5fc50da74e0467c73c3e4b4e0cc5a07379f15f6e462d",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 12
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 8,
+      "field": "gf16",
+      "forbidden": 9,
+      "locator_sha256": "80e7b896405f53279acdf6d05ab20541614baf6685b81dd50df6e33180829dd9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 8,
+      "field": "gf16",
+      "forbidden": 10,
+      "locator_sha256": "80e7b896405f53279acdf6d05ab20541614baf6685b81dd50df6e33180829dd9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 8,
+      "field": "gf16",
+      "forbidden": 11,
+      "locator_sha256": "80e7b896405f53279acdf6d05ab20541614baf6685b81dd50df6e33180829dd9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 8,
+      "field": "gf16",
+      "forbidden": 12,
+      "locator_sha256": "80e7b896405f53279acdf6d05ab20541614baf6685b81dd50df6e33180829dd9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 8,
+      "field": "gf16",
+      "forbidden": 13,
+      "locator_sha256": "80e7b896405f53279acdf6d05ab20541614baf6685b81dd50df6e33180829dd9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 8,
+      "field": "gf16",
+      "forbidden": 14,
+      "locator_sha256": "80e7b896405f53279acdf6d05ab20541614baf6685b81dd50df6e33180829dd9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 9,
+      "field": "gf16",
+      "forbidden": 15,
+      "locator_sha256": "94aff9d0676071f2256e5fc50da74e0467c73c3e4b4e0cc5a07379f15f6e462d",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 12
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 8,
+      "field": "gf16",
+      "forbidden": "infinity",
+      "locator_sha256": "80e7b896405f53279acdf6d05ab20541614baf6685b81dd50df6e33180829dd9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 15
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 380,
+      "field": "gf16",
+      "forbidden": 0,
+      "locator_sha256": "698dc8933c75055b9ac751487c39e48b6a0e442d7daf7bbc0e9948d60fc4e29e",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 15
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 56,
+      "field": "gf16",
+      "forbidden": 1,
+      "locator_sha256": "b98e70ee1d1c070485b7e980f0e5bde5a5d11655577d4e5955b2208231080e5e",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 9
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 13
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 32,
+      "field": "gf16",
+      "forbidden": 2,
+      "locator_sha256": "83fa4236a0a1e0aa4b20b1d8a052db85f723a113b6478eef5f9d73d8d88d8f49",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 9
+        },
+        {
+          "finite": 13
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 86,
+      "field": "gf16",
+      "forbidden": 3,
+      "locator_sha256": "6d21b81e4c0114aa4188ed43fe93ef53e44a0c54a0a3f4aaee4262b25d5fb8ff",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 13
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 38,
+      "field": "gf16",
+      "forbidden": 4,
+      "locator_sha256": "bf37bf060abded3640a13859a009d530bcaf53a6c245982e8cdd88c7f41e1f14",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 13
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 12,
+      "field": "gf16",
+      "forbidden": 5,
+      "locator_sha256": "7c9114c91063b9e69dce72de14b38b9f05f18ef53fdcc74066e0d91ce09389a7",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 218,
+      "field": "gf16",
+      "forbidden": 6,
+      "locator_sha256": "bf37bf060abded3640a13859a009d530bcaf53a6c245982e8cdd88c7f41e1f14",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 13
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 30,
+      "field": "gf16",
+      "forbidden": 7,
+      "locator_sha256": "7c9114c91063b9e69dce72de14b38b9f05f18ef53fdcc74066e0d91ce09389a7",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 390,
+      "field": "gf16",
+      "forbidden": 8,
+      "locator_sha256": "d49ab4c3f3d28494833c473ff0806feb668ac737786072c9902e68d977231c8e",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 9
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 30,
+      "field": "gf16",
+      "forbidden": 9,
+      "locator_sha256": "7c9114c91063b9e69dce72de14b38b9f05f18ef53fdcc74066e0d91ce09389a7",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 390,
+      "field": "gf16",
+      "forbidden": 10,
+      "locator_sha256": "d49ab4c3f3d28494833c473ff0806feb668ac737786072c9902e68d977231c8e",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 9
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 30,
+      "field": "gf16",
+      "forbidden": 11,
+      "locator_sha256": "7c9114c91063b9e69dce72de14b38b9f05f18ef53fdcc74066e0d91ce09389a7",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 30,
+      "field": "gf16",
+      "forbidden": 12,
+      "locator_sha256": "7c9114c91063b9e69dce72de14b38b9f05f18ef53fdcc74066e0d91ce09389a7",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 30,
+      "field": "gf16",
+      "forbidden": 13,
+      "locator_sha256": "7c9114c91063b9e69dce72de14b38b9f05f18ef53fdcc74066e0d91ce09389a7",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 236,
+      "field": "gf16",
+      "forbidden": 14,
+      "locator_sha256": "bf37bf060abded3640a13859a009d530bcaf53a6c245982e8cdd88c7f41e1f14",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 13
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 30,
+      "field": "gf16",
+      "forbidden": 15,
+      "locator_sha256": "7c9114c91063b9e69dce72de14b38b9f05f18ef53fdcc74066e0d91ce09389a7",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 30,
+      "field": "gf16",
+      "forbidden": "infinity",
+      "locator_sha256": "7c9114c91063b9e69dce72de14b38b9f05f18ef53fdcc74066e0d91ce09389a7",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 14
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 2,
+      "field": "gf27",
+      "forbidden": 0,
+      "locator_sha256": "e01c3c2940d994450b7c9cea6823187f32df0b42c54f520277b511648526e53f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 15
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 2,
+      "field": "gf27",
+      "forbidden": 1,
+      "locator_sha256": "647e2d917d094a4211307435df15cec8c85dc2d1e9aad503f14c4f5b4d7afedd",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 20
+        },
+        {
+          "finite": 21
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 10,
+      "field": "gf27",
+      "forbidden": 2,
+      "locator_sha256": "d97c628a858e95f89f23b28e94adf79ce19b00ca5a873a94af66f4efe3d2dfb9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 23
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 5,
+      "field": "gf27",
+      "forbidden": 3,
+      "locator_sha256": "1d4ee64049d64197c3238ef5c8cdaef07068f2a3f2ed8e0becdbfbf7858d0935",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 18
+        },
+        {
+          "finite": 21
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 49,
+      "field": "gf27",
+      "forbidden": 4,
+      "locator_sha256": "bd1b668b2215b0fecad887e545dfc9f0d0b81af60b2d7a80977648bbaab5b27f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 16
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 24,
+      "field": "gf27",
+      "forbidden": 5,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 36,
+      "field": "gf27",
+      "forbidden": 6,
+      "locator_sha256": "47545abc7797da40f0d65816126a1bdc8da8ce96f95212130a9704fcee1858e7",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 19
+        },
+        {
+          "finite": 20
+        },
+        {
+          "finite": 26
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 54,
+      "field": "gf27",
+      "forbidden": 7,
+      "locator_sha256": "afbc896aced6f87fca66b06522366c6ec9af16f7224c2f3c9207e23f7d34fc92",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 13
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 8,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 9,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 10,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 11,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 12,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 13,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 14,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 15,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 54,
+      "field": "gf27",
+      "forbidden": 16,
+      "locator_sha256": "afbc896aced6f87fca66b06522366c6ec9af16f7224c2f3c9207e23f7d34fc92",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 13
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 17,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 18,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 19,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 20,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 21,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 54,
+      "field": "gf27",
+      "forbidden": 22,
+      "locator_sha256": "afbc896aced6f87fca66b06522366c6ec9af16f7224c2f3c9207e23f7d34fc92",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 13
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 23,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 24,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 25,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": 26,
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 53,
+      "field": "gf27",
+      "forbidden": "infinity",
+      "locator_sha256": "3e0ed3f275711bc401f571f9151b0bea0d9dcb382b1b7c8c7446972bd06b3d3f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 22
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 2,
+      "field": "gf27",
+      "forbidden": 0,
+      "locator_sha256": "490b2561c34c856a37ebe9c8e90594b5157b0d6c1ad1c13d4daa8049e4acb68c",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 14
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 25,
+      "field": "gf27",
+      "forbidden": 1,
+      "locator_sha256": "bc5654bb5d7a15cfa989c36c39f1a972cc3cdbd36b6a2872df3782ad74dbb98a",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 20
+        },
+        {
+          "finite": 23
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 8,
+      "field": "gf27",
+      "forbidden": 2,
+      "locator_sha256": "5427d21d77ac5949bf632124496f88e4f04ce16d546a56d98875f9e6fa7ded3c",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 13
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 20,
+      "field": "gf27",
+      "forbidden": 3,
+      "locator_sha256": "98aca5efd998d0cca2347f586131bcf8cc7a76363e095df2d05618710cb81f46",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        },
+        {
+          "finite": 26
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 61,
+      "field": "gf27",
+      "forbidden": 4,
+      "locator_sha256": "eac0103e95b4171ff12fa51f27567063769ba5d492fd903b5d0286a092c0fc16",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 19
+        },
+        {
+          "finite": 21
+        },
+        {
+          "finite": 25
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 2,
+      "field": "gf27",
+      "forbidden": 5,
+      "locator_sha256": "657d6036ad42fcb3393378e730628fa89394a6cafee06dd17db6eb20fc21f4fe",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 18
+        },
+        {
+          "finite": 23
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 31,
+      "field": "gf27",
+      "forbidden": 6,
+      "locator_sha256": "a190550c6f1faefa213d23f3cdfdc79318cbb306699f178ee4e37ce48f6769db",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 19
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 7,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 8,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 9,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 10,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 11,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 12,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 13,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 14,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 31,
+      "field": "gf27",
+      "forbidden": 15,
+      "locator_sha256": "657d6036ad42fcb3393378e730628fa89394a6cafee06dd17db6eb20fc21f4fe",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 18
+        },
+        {
+          "finite": 23
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 16,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 17,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 18,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 19,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 20,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 21,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 22,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 23,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 31,
+      "field": "gf27",
+      "forbidden": 24,
+      "locator_sha256": "657d6036ad42fcb3393378e730628fa89394a6cafee06dd17db6eb20fc21f4fe",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 18
+        },
+        {
+          "finite": 23
+        },
+        "infinity"
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 25,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": 26,
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 29,
+      "field": "gf27",
+      "forbidden": "infinity",
+      "locator_sha256": "1a5fd26c01f56a8c597cf5b17da07be5067affc3c974c5b02296d093c718a098",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 6
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        2,
+        5,
+        8,
+        11,
+        14,
+        17,
+        20,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 57,
+      "field": "gf49",
+      "forbidden": 0,
+      "locator_sha256": "ab5b9e40358987ec612e7455bc6631723380417087cd21b1e2a211303fe7e166",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 13
+        },
+        {
+          "finite": 22
+        },
+        {
+          "finite": 26
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 64,
+      "field": "gf49",
+      "forbidden": 1,
+      "locator_sha256": "c6159eb1bf02e9bc6880e4e2582c69aa0718d12b47746da82abc694a5569be38",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 25
+        },
+        {
+          "finite": 28
+        },
+        {
+          "finite": 39
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 11643,
+      "field": "gf49",
+      "forbidden": 2,
+      "locator_sha256": "22597a0f1d0e3af269f0f366f32ffef43868572f8bca6b74d39c1fb086673c1f",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 13
+        },
+        {
+          "finite": 24
+        },
+        {
+          "finite": 25
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 57,
+      "field": "gf49",
+      "forbidden": 3,
+      "locator_sha256": "4943133f42ecc42d5bef0c2a2c2e168d0f426343ae46dd5a5568112dbf40cf0d",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 34
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 11665,
+      "field": "gf49",
+      "forbidden": 4,
+      "locator_sha256": "4e757770ba655f80731fcc6860d9de5327f5732e17fb03c297c78d3a058678b9",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 10
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 16
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 68,
+      "field": "gf49",
+      "forbidden": 5,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 68,
+      "field": "gf49",
+      "forbidden": 6,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 105,
+      "field": "gf49",
+      "forbidden": 7,
+      "locator_sha256": "73d2e86e441d4625e82769ed31ffac928739c4909f4603abe2bd3ccfe239aa37",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 15
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 24
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 8,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 9,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 10,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 127,
+      "field": "gf49",
+      "forbidden": 11,
+      "locator_sha256": "797c2c3969092d0af9b8fbdf193fa587016a4a506aad17a6c36044ae3205b113",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 33
+        },
+        {
+          "finite": 36
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 12,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 13,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 14,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 15,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 16,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 17,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 18,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 19,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 20,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 21,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 22,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 23,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 24,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 25,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 26,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 27,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 28,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 29,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 30,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 31,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 32,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 33,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 34,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 35,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 36,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 37,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 38,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 39,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 40,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 41,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 42,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 127,
+      "field": "gf49",
+      "forbidden": 43,
+      "locator_sha256": "797c2c3969092d0af9b8fbdf193fa587016a4a506aad17a6c36044ae3205b113",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 33
+        },
+        {
+          "finite": 36
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 44,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 45,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 46,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": 47,
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 127,
+      "field": "gf49",
+      "forbidden": 48,
+      "locator_sha256": "797c2c3969092d0af9b8fbdf193fa587016a4a506aad17a6c36044ae3205b113",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 33
+        },
+        {
+          "finite": 36
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 119,
+      "field": "gf49",
+      "forbidden": "infinity",
+      "locator_sha256": "7cfe26e47850b90ce5b508b582b8c1601cb436eaabd850f9c8c0ca953953b45b",
+      "representative": "dense-one",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 11
+        },
+        {
+          "finite": 43
+        },
+        {
+          "finite": 48
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 74,
+      "field": "gf49",
+      "forbidden": 0,
+      "locator_sha256": "199655a720f7742dea6b917f0f02963c8d30fd4b437e39f783fe57ad62f0aeb4",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 18
+        },
+        {
+          "finite": 30
+        },
+        {
+          "finite": 43
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 58,
+      "field": "gf49",
+      "forbidden": 1,
+      "locator_sha256": "47a4bab7b3c8b9d4fcdb0b7fe6bbd1a84d78f7f4e8159ac377bb13dfcfbc3f04",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 12
+        },
+        {
+          "finite": 23
+        },
+        {
+          "finite": 25
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 66,
+      "field": "gf49",
+      "forbidden": 2,
+      "locator_sha256": "f8c9aa32df2bfe61c0188123ae4f58b8b776355aa174865056e303fd13d5e145",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 19
+        },
+        {
+          "finite": 27
+        },
+        {
+          "finite": 42
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 57,
+      "field": "gf49",
+      "forbidden": 3,
+      "locator_sha256": "4488fd1866bddc41618ca44c06161a02a032fae5cd64fb0051485293ea27b71b",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 24
+        },
+        {
+          "finite": 36
+        },
+        {
+          "finite": 43
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 59,
+      "field": "gf49",
+      "forbidden": 4,
+      "locator_sha256": "fe3b1979f74fcb0e52d6503c553f694090c4f322ba14e161e3fdc8473ee3e3c7",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 5
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 21
+        },
+        {
+          "finite": 36
+        },
+        {
+          "finite": 42
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 55,
+      "field": "gf49",
+      "forbidden": 5,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 55,
+      "field": "gf49",
+      "forbidden": 6,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 109,
+      "field": "gf49",
+      "forbidden": 7,
+      "locator_sha256": "cce4a642fa086e10be6aed57e121d175c20553c5f1924f566fb50bff4c5cd2d2",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 8
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 16
+        },
+        {
+          "finite": 23
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 8,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 9,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 10,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 11,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 12,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 13,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 112,
+      "field": "gf49",
+      "forbidden": 14,
+      "locator_sha256": "449fff5b850f91eb7b7caf52c45584767f76062cd14086b9510c137306cc310a",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 24
+        },
+        {
+          "finite": 30
+        },
+        {
+          "finite": 33
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 15,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 16,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 112,
+      "field": "gf49",
+      "forbidden": 17,
+      "locator_sha256": "449fff5b850f91eb7b7caf52c45584767f76062cd14086b9510c137306cc310a",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 24
+        },
+        {
+          "finite": 30
+        },
+        {
+          "finite": 33
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 18,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 19,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 20,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 112,
+      "field": "gf49",
+      "forbidden": 21,
+      "locator_sha256": "449fff5b850f91eb7b7caf52c45584767f76062cd14086b9510c137306cc310a",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 24
+        },
+        {
+          "finite": 30
+        },
+        {
+          "finite": 33
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 22,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 23,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 24,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 25,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 26,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 27,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 28,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 29,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 30,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 31,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 32,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 33,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 34,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 35,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 36,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 37,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 38,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 39,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 40,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 41,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 42,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 43,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 44,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 45,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 46,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 47,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": 48,
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "candidates_examined": 106,
+      "field": "gf49",
+      "forbidden": "infinity",
+      "locator_sha256": "3f193efc1b807c46b1407e7e54741ab689351857ba2f90864c288b211663e8b8",
+      "representative": "dense-deterministic",
+      "status": "WITNESS",
+      "support": [
+        {
+          "finite": 0
+        },
+        {
+          "finite": 1
+        },
+        {
+          "finite": 2
+        },
+        {
+          "finite": 3
+        },
+        {
+          "finite": 4
+        },
+        {
+          "finite": 7
+        },
+        {
+          "finite": 14
+        },
+        {
+          "finite": 17
+        },
+        {
+          "finite": 21
+        }
+      ],
+      "syndrome": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        8,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "schema": "c974-pointed-r11-probe-v1",
+  "scope": "2 deterministic dense carrier representatives times every projective forbidden root in gf16,gf27,gf49",
+  "summary": {
+    "gf16": {
+      "failures": 0,
+      "max_candidates_examined": 462,
+      "probes": 34,
+      "witnesses": 34
+    },
+    "gf27": {
+      "failures": 0,
+      "max_candidates_examined": 61,
+      "probes": 56,
+      "witnesses": 56
+    },
+    "gf49": {
+      "failures": 0,
+      "max_candidates_examined": 11665,
+      "probes": 100,
+      "witnesses": 100
+    }
+  }
+}
