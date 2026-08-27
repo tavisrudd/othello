@@ -1,9 +1,9 @@
 # C973 — simultaneous-marker PRS escape and all-level Lucas discriminator
 
-**Lane:** `reed-solomon` · **Status:** active — second proof sprint complete;
-both standalone seam reconstructions pass author-side review and deterministic
-fixed-`r` selector extraction is proved; external review and pointed R11
-abundance remain open
+**Lane:** `reed-solomon` · **Status:** active — arbitrary-`r` escape proved;
+the first one-carry Lucas block now has an explicit module theorem and the
+characteristic-seven R11/R12 carriers are pointedly closed; external review
+and a multi-digit module/abundance theorem remain open
 
 **Current checkpoint:**
 `c973-2026-08-26-simultaneous-marker-theorem.md` proves direct composite
@@ -35,7 +35,17 @@ redundancy.  `c973-2026-08-26-software-leverage.md` maps this into a certified
 fast negative locator path and a separately gated parameterized R11+
 classification route for the Projective Reed--Solomon Toolkit.  The
 second-sprint verdict and revised mystery ledger are in
-`c973-2026-08-26-second-sprint-closeout.md`.
+`c973-2026-08-26-second-sprint-closeout.md`.  C974 implemented and typed that
+arbitrary-redundancy simultaneous locator.  Its C973 application is recorded
+in `c973-2026-08-26-characteristic-seven-closure.md`: seven orbit-normalized
+q=49 certificates make the R11 and R12 characteristic-seven carriers
+pointedly shallow, while a strengthened R9 selector propagates through R13.
+The unifying result is
+`c973-2026-08-26-one-carry-module-theorem.md`, which identifies every carrier
+with `r-2=p+a`, `0<=a<=p-3`, as the standard projective module
+`P(Gamma^(p-a-3) E)`.  Consequently the only possible R11 modular exceptions
+are now `q in {16,27,32,64}`; further level-by-level work is intentionally
+deprioritized in favor of the multi-digit module theorem.
 
 ## Objective
 
