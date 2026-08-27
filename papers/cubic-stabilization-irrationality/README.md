@@ -41,7 +41,7 @@ the upper bound.
   `Q`. This answers the affine-line stabilization question raised by
   Tschinkel and Zhang.
 - On the moduli space of smooth complex cubic threefolds,
-  `ell_C((X_j)_C) = 2` for `j in {1,3}`, while the stabilization level is
+  `ell_C((X_j)_C) = 2` for `j ∈ {1,3}`, while the stabilization level is
   infinite at a very general point.
 
 The paper does not claim that every smooth cubic threefold has finite
@@ -63,8 +63,8 @@ starts from the transcribed type-`I₃` matrices and twenty Cox quadrics. It
 reconstructs the saturated rank-three lattice, Cox weights, residual rank-two
 quotient, tangent Jacobian, four symbolic evaluation determinants, and the
 four-open cover of the smooth parameter locus. It also constructs the linear
-section defined by the kernel of evaluation at the point \(x\). For each of
-the six empty localized cases,
+section from the three-dimensional kernel of the functional
+`H_p -> k`, `lambda |-> lambda(x)`. For each of the six empty localized cases,
 [`verification/groebner-empty-certificates.json`](verification/groebner-empty-certificates.json)
 retains an exact identity expressing a nonzero constant in the corresponding
 localized ideal. The generator renders all computation-derived values printed

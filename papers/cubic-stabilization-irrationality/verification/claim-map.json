@@ -30,13 +30,13 @@
     "objects": "The level-of-stable-rationality function ell_C on smooth cubic-threefold moduli."
   },
   "prop:tangent-section": {
-    "cautions": "The subgroup classification is complete only for the four hereditary-H1 types; no classification of all W(D5) subgroups is claimed.",
+    "cautions": "The subgroup classification is complete only for the four types for which H1 vanishes on every subgroup; no classification of all W(D5) subgroups is claimed.",
     "conclusion": "Geometrically, there is a codimension-three tangent linear section containing a point x on the quotient component where tangent projection is an isomorphism. For each of the four types, the points and the section descend when the surface has a rational point.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "3185c31ca3de7f92a618efd2f7122a616a9a4b5267132ac29bcc6c8fb3663667",
+    "digest": "bf322ba1d6df1b08cf546b19eeaf915384952588a1356890c998c586e0b554bd",
     "environment": "proposition",
-    "hypotheses": "The Cox parameters lie on the smooth open; for ground-field descent the quartic del Pezzo surface has a rational point and the Galois image has type I0, I1, I2, or I3.",
+    "hypotheses": "The ground field has characteristic zero and the Cox parameters lie on the smooth open; for ground-field descent the quartic del Pezzo surface has a rational point and the Galois image has type I0, I1, I2, or I3.",
     "objects": "The saturated rank-three subtorus, complementary Cox-coordinate subspace, and the incidence conditions defining the tangent section."
   },
   "rem:saturation": {
