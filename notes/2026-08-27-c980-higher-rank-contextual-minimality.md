@@ -52,6 +52,10 @@ proof, literature, and hostile-review gates.
    outer target projection, any cost-`r` joint witness compresses to at most
    `max(2,p+r)` blocks.  The missing piece is the corresponding multi-block
    target-normalized labelled-cost interface.
+8. **Finite-interface criterion.**  The same small model holds for any
+   associative linear gluing with a finite label interface, injective active
+   boundary observation, block-independent lifts, and a positive active-block
+   budget.
 
 ## Starting point
 
@@ -922,16 +926,27 @@ the response function.
 
 ### Family-restricted contextual quotients
 
-If applications allow only a class `C` of outer contexts, restrict
-`sigma_R` to the small probe orbits realized by members of `C`.  Equality on
-those coordinates is the coarsest numerical state observable by that family.
-When `C` is closed under compatible continuation and composition, the same
-continuation argument makes the restricted equivalence a congruence.
+If applications allow only a class `C` of outer contexts, the union of small
+shortening orbits occurring in members of `C` is a sufficient restricted
+state.  The genuinely coarsest family state is the response vector
+
+```text
+I |-> ( min_{K in Sig_r,j(D_C)} sigma_R(I)(K) )_{C in C}.
+```
+
+Its kernel can be coarser than equality on every shortening coordinate,
+because a probe that appears inside a family member need not be independently
+observable as an admitted context.  The two notions agree when the family is
+probe-separating—for example, when every relevant shortening orbit is itself
+realized as a context in `C`.  When `C` is closed under compatible continuation
+and composition, the continuation argument makes the true response-vector
+equivalence a congruence.
 
 This can collapse the state dramatically.  An outer family with
 `d(O^perp)>r+1` realizes no nonzero radius-`r` shortening and observes only the
 zero sector.  A locally recoverable outer family observes only the orbit types
-of its low-support local dual shortenings.  Thus MDS-like large-distance
+of its low-support local dual shortenings through the minima over their
+signatures.  Thus MDS-like large-distance
 storage layers and sparse-local-parity layers reduce the universal state for
 opposite structural reasons, both visible directly from the bounded
 dual-shortening formula.
@@ -1223,6 +1238,34 @@ sum_{s=1}^min(t,r)
 
 before stabilizer-orbit reduction of helper multiplicities.
 
+### Abstract finite-interface criterion
+
+The small-model proof uses four structural properties, not a special identity
+of concatenated codes:
+
+1. local compatibility labels form a finite linear interface;
+2. surjectivity at the distinguished target boundary is dual to the absence
+   of a nonzero interface vector supported only on that boundary;
+3. at fixed labels, block lifts are independent and their costs compose in a
+   finite ordered monoid or relational product; and
+4. every active external block consumes at least one unit of a tracked budget.
+
+Any linear code operation or finite algebraic gluing problem with these
+properties has the same conclusion.  A budget-`r` witness spans an interface
+subobject injected by at most `r` active external blocks; puncturing
+everything else gives a `max(2,p+r)` small model.  Contextual equivalence is
+the kernel of the resulting finite response relation and is a congruence
+whenever the gluings compose associatively.
+
+This is a criterion for existence of a finite compositional state, not a claim
+that every code operation satisfies it.  The proof fails exactly when active
+blocks can have zero tracked cost, the boundary projection is not surjective,
+block lifts are coupled by a nonlocal constraint, the label/interface alphabet
+grows with the instance, or composition leaves the typed context family.
+Bandwidth and fixed-batch extensions above fit by enriching the finite local
+cost or relation; unbounded per-helper packing and general nonlinear repair do
+not.
+
 1. **Towers and code synthesis.** Propagate the finite orbit-indexed state or a
    verified compressed circuit through a tower; derive mathematical pruning
    and dominance laws before considering search software.
@@ -1248,16 +1291,24 @@ before stabilizer-orbit reduction of helper multiplicities.
 - This is numerical cost semantics only.  Coefficient witnesses and the full
   argmin family are not determined by the quotient; per-helper overlap and
   packing data are also absent.
-- Infinity is absorbed by radius truncation; zero-cost labels are unchanged;
-  zero helper column types are removable; capping preserves positive support
-  and hence spanning; the target type may be zero; and helper spanning is
-  exactly the nondegenerate-target-projection condition.
+- Numerical column-type canonicalization may delete zero functional columns.
+  Witness, reliability, and scheduling states must retain a zero-label block
+  whenever it carries a nonzero inner-dual coefficient map.
+- In the numerical table, infinity is absorbed by radius truncation, zero-cost
+  labels are unchanged, and zero helper column types are removable.  Capping
+  preserves positive support and hence spanning; the target type may be zero;
+  and helper spanning is exactly the nondegenerate-target-projection
+  condition.
 - The arity-independent bound is independent of inner length and zero-sector
   finiteness.  The `GL_s(L)` orbit table is canonical, while a smallest affine
   circuit need not be unique.
 - The general finite-monoid theorem requires monotonicity and extensivity.  A
   parameter that changes the interface or whose resource dimension grows with
   the physical instance is outside it.
+- For a restricted outer family, the union of its shortening probes is a
+  sufficient state.  It is the coarsest state only under the additional
+  probe-separation condition; otherwise the family observes only minima over
+  probe signatures.
 - Audit weighted automata, tropical rational series, valued CSPs, tensor
   networks, and algebraic dynamic programming before making a Myhill--Nerode or
   priority claim.
@@ -1311,7 +1362,7 @@ sequel or optimization-facing note; inserting them all into the current
 
 ## EJ + TT closeout and mystery ledger
 
-The continuing EJ, TT, and red-team passes settled six points that were not
+The continuing EJ, TT, and red-team passes settled eight points that were not
 visible in the initial plan.  First, compatibility means that the helper
 coordinate functionals span the outer-dual coordinate space; nonzero target
 type is neither necessary nor sufficient.  Second, truncation at `R=r+1`, not
@@ -1322,9 +1373,13 @@ most `min(t,r)`.  Fourth, the final response `min(R,z,F)`, rather than `F`
 alone, is the minimal observable table, and the basis action reduces target
 types to zero and one nonzero representative.  Fifth, the response vector has
 the exact universal factorization property of a syntactic quotient and yields
-a finite transformation category for tower synthesis.  Sixth, the Pareto cap
-is the sharp linear value `1+k(R-1)`, and the mechanism extends to every finite
-extensive ordered cost monoid.
+a finite transformation category for tower synthesis.  Sixth, the exact
+dual-shortening and witness-cover identities reconstruct every bounded
+coefficient and support system from small contexts and expose a finite outer
+signature.  Seventh, the Pareto cap is the sharp linear value `1+k(R-1)`, and
+the mechanism extends to every finite extensive ordered cost monoid.  Eighth,
+fixed-batch packing and several target blocks retain small models when their
+active helper and target interfaces are bounded.
 
 Open mysteries:
 
