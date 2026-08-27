@@ -3626,8 +3626,26 @@
       "last": 975,
       "purpose": "integrate C973 arbitrary-redundancy cofinite-GRS and NMDS results into Beyond4 for coding-theory impact",
       "sequence": 403
+    },
+    {
+      "count": 1,
+      "first": 976,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 976,
+      "purpose": "Repair manuscript exposition and clarity from sequential paragraph cold-read memo",
+      "sequence": 404
+    },
+    {
+      "count": 1,
+      "first": 977,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 977,
+      "purpose": "cold paragraph-by-paragraph accessibility read and exposition repair of High-Weight GRS paper",
+      "sequence": 405
     }
   ],
-  "next_id": 976,
+  "next_id": 978,
   "schema": "codex-task-id-allocations-v1"
 }
