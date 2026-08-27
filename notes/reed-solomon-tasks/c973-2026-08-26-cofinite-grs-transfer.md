@@ -325,7 +325,7 @@ three Veronese curve makes these contributions disjoint.  Equations
 1. **GRS multipliers:** exact and free, by (6).
 2. **Full affine RS:** `s=1`; the theorem identifies both the known unique
    deep direction and the complete next-to-deep shell.
-3. **Boundedly punctured projective/affine GRS:** exact for fixed `s`, with
+3. **Cofinite-support projective/affine GRS:** exact for fixed `s`, with
    threshold cost linear in `s`.  The new locator is constructive and avoids
    every puncture simultaneously.
 4. **Near-deep decoding:** outside the two carriers, the software certificate
@@ -486,7 +486,7 @@ as necessary for the former.
 | feature | status after closeout | exact remaining gate |
 |---|---|---|
 | Deleting one curve point promotes all interior points of its incident split secants from weight two to weight `r-1` | settled structurally by NRC independence plus Seroussi--Roth; counted in (13) | literature audit only |
-| Tangent/conjugate shell is unchanged by any bounded puncture | settled structurally by monotonicity and the exact deep-shell theorem | literature audit only |
+| Tangent/conjugate shell is unchanged by any bounded support deletion | settled structurally by monotonicity and the exact deep-shell theorem | literature audit only |
 | GRS multipliers might change locators or weights | settled: column scaling is absorbed into error magnitudes in (6) | none |
 | Pointed abundance might lose its leading term | settled by (8a)--(8c) for fixed `r,s` | software exposure is a separate C974 item |
 | Small-characteristic `r-1` shell on the Lucas carrier | candidate population now bounded explicitly by (5b), exact shell open | arithmetic pointed-abundance through the digit-stripping extensions remains owned by C973 |
