@@ -142,6 +142,22 @@ before discarding nonspanning multiplicity vectors and quotienting by
 quotient has at most `(z+1)^P_t(z,Q)` numerical classes.  This is a coarse
 existence bound, not a claim that the state is practically small.
 
+The cap has an exact type-dependent refinement.  For a fixed `(s,a_0)` and
+helper type `a`, write
+
+```text
+u_X = mu(a_0 X),       c_Xa = lambda(a X).
+```
+
+For every form with `u_X < z`, the least positive multiplicity that makes its
+`a`-contribution reach `z` is `ceil((z-u_X)/c_Xa)` when `c_Xa` is finite and
+positive, and is one when `c_Xa` is infinite.  Let `R_a` be the maximum of
+these thresholds and one.  Then `n_a` may be capped at `R_a`: zero remains
+zero, positive support remains positive, every form with zero slope is
+unchanged, and every affected positive-slope form is already truncated at
+`z`.  Thus `R_a <= z`, and the sharper probe count replaces
+`(z+1)^(Q^s-1)` by `product_a (R_a+1)`.
+
 Together with the column-type response theorem, the capped profile is a finite
 higher-rank Myhill--Nerode state: equality of `z` and all capped probe values is
 equivalent to indistinguishability under every finite compatible outer code.
@@ -241,3 +257,33 @@ interfaces, fields, target normalizations, and allowed outer projections.
    record a sharp failure theorem if closure breaks.
 5. Run the full literature and hostile-referee gates, then decide whether the
    result belongs in the current paper or a separate sequel.
+
+## EJ + TT closeout and mystery ledger
+
+The closeout pass settled two points that were not visible in the initial
+plan.  First, compatibility means that the helper coordinate functionals span
+the outer dual coordinate space; nonzero target type is neither necessary nor
+sufficient.  Second, zero truncation converts the unbounded outer-arity family
+into one finite complete test family, with the type-dependent caps above.  The
+rank-one theorem therefore has a finite-table strengthening as a special case.
+
+Open mysteries:
+
+1. **Typed tower congruence.**  The abstract context-composition proof is
+   immediate, but the exact field-tower, trace, and target-normalization types
+   have not yet received a line-by-line proof audit.
+2. **Intrinsic canonical form.**  The capped truth table is canonical but
+   large.  A basis-free `GL_s(L)` quotient and a unique minimal integer-envelope
+   representation remain open; an ordinary real convex hull is insufficient.
+3. **Tightness.**  No family yet proves that the uniform or adaptive
+   multiplicity bounds, the outer-length bound, or the exponential profile
+   count are asymptotically necessary.
+4. **Witness semantics.**  Numerical contextual equivalence need not transport
+   coefficient argmins.  The smallest compositional witness-bearing state may
+   be strictly larger.
+5. **Pareto closure.**  It remains unknown whether bandwidth and simultaneous
+   packing objectives close as finite Pareto antichains or force unbounded
+   overlap state.
+6. **Priority.**  The connection with syntactic congruences, tropical series,
+   valued CSPs, and weighted tree automata requires a full literature audit
+   before any novelty statement.
