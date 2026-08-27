@@ -70,5 +70,17 @@
         "matched": "At redundancy seven and q=8, PRS(q-6) is PRS(2) of length nine."
       }
     ]
+  },
+  "zwk-full-support-rank-two": {
+    "citation": "ZWK2020",
+    "pinpoint": "Theorems I.5--I.7 and Section III",
+    "used": "Full-support tangent and conjugate-secant syndrome weights in the applicable projective Reed--Solomon range.",
+    "conventions": [
+      {
+        "aspect": "normalization",
+        "requirement": "The support and coordinate conventions agree with the full projective support and the degree-(r-1) normal rational curve.",
+        "matched": "The manuscript uses the same full projective support after monomial normalization and its divided-power parity-check columns parametrize that normal rational curve."
+      }
+    ]
   }
 }

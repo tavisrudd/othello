@@ -142,3 +142,58 @@ The post-integration red team also removed stale R8--R10 submission rows,
 corrected the R6/R7 terminal bounds to \(18/24\), and returned final
 **ACCEPT**.  Both 44-page canonical and 32-page TIT builds and the complete
 supplement gate pass.
+
+## Global exposition and trust pass
+
+The final section-by-section pass makes both the theorem spine and the
+exposition spine explicit before any long proof.  The introduction now
+defines the second catalecticant, the persistent carrier, and the
+divided-power basis at first use; the results map follows the actual reading
+order; and the conclusion synthesizes the coding result, method, and remaining
+small-characteristic obstruction before listing open problems.  The manuscript
+uses ordinary external-reader language rather than audit or submission-process
+terminology.
+
+Two correctness/trust repairs were required.  The dictionary's full-support
+radius sentence is now explicitly restricted to the hypotheses of the main
+theorem.  The R5 novelty boundary now acknowledges the published
+codimension-four GRS syndrome/coset enumerator and claims only the precise
+divided-power syndrome-to-pencil image, realized-line restriction, exact
+syndrome inventory and orbit fusion, and covering-radius promotion.  The BPS
+citations use published numbering, the Kaipa--Pradhan denominator discrepancy
+is stated accurately, the bibliography/read-depth inventory covers all 37
+entries, and the main, R6, simultaneous-escape, and R6--R7 spine theorems have
+their actual imports and dependencies in the checked annotation layer.
+
+A proof-order audit found one apparent back-edge: the R5 section used the
+base-point-free lemma from the later recursive-carrier section, while the
+carrier theorem used the later R5 count.  Moving the catalecticant definition
+and the self-contained base-point-free lemma into the dictionary makes the
+logical dependency linear.  The remaining forward reference is explicitly
+identified as a terminal counting input proved later in R5, preserving the
+headline-first presentation without duplicating the theorem.
+
+Three independent final checks returned ACCEPT: the changed-paragraph reader
+found the scope and flow clear, the theorem referee accepted the revised proof
+order, and the PDF reader found no layout regression.  Removing forced
+bibliography page breaks and keeping two appendix results with their lists
+reduces the warning-free builds to 43 archival pages and 31 TIT pages.  The
+annotation, evidence-package, release-manifest, and complete supplement gates
+all pass.
+
+## Extra-juice, Tao, and mystery closeout
+
+The extra-juice pass promoted every cheap task-owned gain: it removed the
+apparent proof back-edge, converted internal workflow phrases to
+external-reader prose, and made the imported theorem dependencies executable
+checks rather than prose assertions.  The Tao pass asked whether the strongest
+statement was visible before its machinery, whether deletion genuinely changes
+the coding problem, and whether prior cubic-pencil geometry was being mistaken
+for a coding-level novelty claim.  The theorem/results/conclusion spine now
+answers all three directly.
+
+**Mystery ledger.**  No genuine exposition or trust mystery remains within
+C977.  The arithmetic of later maximal Lucas carriers is a mathematical
+frontier owned by C973, not an omitted explanation.  Publication-independent
+external review remains owned by C915 and is not evidence supplied by this
+internal accessibility pass.

@@ -23,6 +23,7 @@ Column multipliers do not change these projective spans.
 \label{thm:main}%
 \coverage{absent}%
 \uses{thm:simultaneous-marker-escape,prop:recursive-component-selection}%
+\imports{duer,seroussi-roth,zwk-full-support-rank-two}%
 \proves{main-fixed-level-classification-package}%
 Let \(r\geq6\), let \(A\subseteq\PP^1(\F_q)\) have size \(s\), and assume
 \(r\leq q+1-s\).  Put
@@ -37,14 +38,16 @@ If \(q\geq Q^*_{r,s}\), then
  \qquad p=\operatorname{char}\F_q,
  \autoeqtag{eq:main-carrier-containment}
 \]
-where \(\cP_r\) is the rank-at-most-two catalecticant locus and
+where \(\cP_r\) is the rank-at-most-two locus of the consecutive
+three-row Hankel (second catalecticant) matrix of \(f\), and
 \[
  \cM^{\max}_{r,p}=
  \PP\!\left\langle e_j:
  0\leq j\leq r-1,\quad
  \binom{r-2}{j}=\binom{r-2}{j-1}=0\pmod p\right\rangle ,
 \]
-where \(\binom nk=0\) for \(k\notin\{0,\ldots,n\}\).
+where \(e_0,\ldots,e_{r-1}\) is the standard divided-power coordinate
+basis and \(\binom nk=0\) for \(k\notin\{0,\ldots,n\}\).
 In characteristic two the same conclusion holds with
 \(6(r+s)-22+\lfloor2\sqrt{6(r+s)-24}\rfloor\) in place of
 \(Q^*_{r,s}\).
@@ -111,9 +114,11 @@ count are already known
 sets were studied in \cite{XuHongXu2017}, and recent work gives general
 MDS/NMDS constructions from deep holes \cite{LiLuLingLam2026}.  None of these
 results gives the complete point-deleted top two shells at arbitrary
-redundancy.  The novelty here is that conjunction and its uniform exclusion
-off the explicit carrier; the extension and enumerator statements are its
-consequences.
+redundancy.  The new contribution is the
+syndrome-to-Hankel carrier classification together with simultaneous
+exclusion off that carrier; these yield the arbitrary-redundancy
+prescribed-deletion shell theorem.  The extension and enumerator statements
+are consequences.
 
 The witness sought is a degree-\((r-2)\) binary form in \(W_f\) whose distinct
 rational roots all lie in \(S\); by the Hankel criterion, its roots are the
@@ -133,5 +138,5 @@ uniform theorem.  Redundancy five supplies the terminal cubic engine and a
 complete classification over every prime power \(q\geq7\); redundancies six
 and seven supply exact small-field and modular refinements.  They are stated
 and proved after the arbitrary-redundancy theorem, with their separate radius
-and certificate boundaries kept explicit.  The earlier R8--R10 calculations
-are companion records, not induction hypotheses or claims of this submission.
+and certificate boundaries kept explicit.  The R8--R10 calculations are not
+used as induction hypotheses and are not included here.

@@ -7,7 +7,7 @@ supplement/EVIDENCE-MANIFEST.json and checked by supplement/verify.py.
 | Public bundle | Exact role | Independent or separate check | Non-claim |
 |---|---|---|---|
 | Certificate R5 | exhaustive bounded cubic-pencil census and orbit records | separately written R5 replay | no high-field geometry or radius theorem |
-| Certificate R6 | definition/Hankel equality on the declared finite fields | independent definition replay on the documented subrange | no continuation theorem |
+| Certificate R6 | definition/Hankel equality on the declared finite fields, including the q=7 definition-level syndrome/radius scan | independent definition replay on the documented subrange | no continuation theorem |
 | Certificate R6-NF | small semilinear normal forms | deterministic checker plus R6 dependency replay | not a second full census |
 | Certificate R7 | finite pointed calibration and public orbit record | quotient replay, arithmetic replay, and companion exact-distance extraction | the certificate itself proves split-free classification, not the q=7,9 MDS length bounds or the q=8 external radius; at q=8 exactly the diagonal tangent and central nucleus are deep |
 | Certificate R7 direct locus | complete fourteen-field direct-locus reconstruction | checker validates mass identities, orbit--stabilizer, Frobenius, and frozen comparison | shares the public direct-locus engine, R5 field layer, and R6 pointed theorem from q >= 16; checker is not a second field implementation |

@@ -2,9 +2,9 @@
 
 **Lane**: `reed-solomon`
 
-**Status:** Active.  A context-clean reader is traversing the canonical TeX in
-22 immutable packets, one paragraph at a time, with a contemporaneous journal
-entry required before the next paragraph is opened.
+**Status:** Active.  The raw paragraph journal, two section-level repair
+passes, global exposition/trust review, context-clean rereads, both manuscript
+builds, and complete supplement gate are closed.  Standalone export remains.
 
 ## Goal
 
@@ -66,6 +66,8 @@ family-aggregate NMDS enumerator, received three independent mathematical and
 expository passes, and has a focused novelty delta separating the paper-owned
 family incidence totals from the standard recurrence.  Both manuscript builds
 remain at 44 and 32 pages and the affected pages are visually clean.
-Remaining work is the section-level pass through the fixed-redundancy and
-verification/provenance material, followed by one global
-headline/interest/novelty/prior-literature flow pass and the standalone export.
+The final global pass repaired the headline definitions, reading route,
+conclusion, R5 novelty boundary, imported-dependency annotations, and one
+apparent proof-order back-edge.  Final builds are 43 archival pages and 31 TIT
+pages; all internal gates and independent rereads accept the revision.
+Standalone synchronization and replay are the only remaining steps.

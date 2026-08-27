@@ -58,7 +58,7 @@
     "lem:basepointfree-off-persistent": {
       "coverage": "absent",
       "lean": [],
-      "source": "sections/07-recursive-carriers.tex",
+      "source": "sections/03-dictionary.tex",
       "status": "Characteristic-free manuscript proof that a nonconstant geometric gcd forces second-catalecticant rank at most two; the Hankel normal forms identify the rank-one and rank-two gcd degrees."
     },
     "lem:cyclic": {
@@ -323,6 +323,11 @@
     },
     "thm:main": {
       "coverage": "absent",
+      "imports": [
+        "duer",
+        "seroussi-roth",
+        "zwk-full-support-rank-two"
+      ],
       "lean": [],
       "proves": [
         "main-fixed-level-classification-package"
@@ -364,6 +369,10 @@
       "coverage": "conditional_deduction",
       "evidence": [
         "certificate-r6"
+      ],
+      "imports": [
+        "duer",
+        "seroussi-roth"
       ],
       "lean": [
         "PRSRedundancySixSeven.redundancySixAllFieldSynthesis",
@@ -424,7 +433,13 @@
       "coverage": "absent",
       "lean": [],
       "source": "sections/05-simultaneous-contraction.tex",
-      "status": "Manuscript proof from the concrete reduced-carrier converse, the degree-six selector, the Vandermonde grid lemma, and the exact R5 count. No computation or Lean theorem supplies the arbitrary-redundancy escape."
+      "status": "Manuscript proof from the concrete reduced-carrier converse, the degree-six selector, the Vandermonde grid lemma, and the exact R5 count. No computation or Lean theorem supplies the arbitrary-redundancy escape.",
+      "uses": [
+        "prop:recursive-component-selection",
+        "prop:reduced-terminal-carrier",
+        "prop:r5-count",
+        "lem:r5-branch"
+      ]
     },
     "thm:spine": {
       "coverage": "conditional_deduction",
@@ -434,7 +449,11 @@
         "PRSPolarInduction.fifthPower_sigmaInversionOrbitCount"
       ],
       "source": "sections/08-fixed-level-roadmap.tex",
-      "status": "Derived manuscript aggregation of the R6/R7 clauses and persistent orbit law; each clause retains its own boundary."
+      "status": "Derived manuscript aggregation of the R6/R7 clauses and persistent orbit law; each clause retains its own boundary.",
+      "uses": [
+        "thm:r6",
+        "thm:r7"
+      ]
     }
   },
   "schema_version": 1

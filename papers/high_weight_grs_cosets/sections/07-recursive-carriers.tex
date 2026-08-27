@@ -14,60 +14,9 @@ characteristic \(p>0\).  In divided-power coordinates define
  \binom{r-2}{j}=\binom{r-2}{j-1}=0\pmod p\right\rangle ,
 \end{equation}
 where \(\binom nk=0\) when \(k\notin\{0,\ldots,n\}\).
-An empty span denotes the empty projective scheme.  Let
-\[
- C_f^{(2)}:\Sym^{r-3}E^\vee\longrightarrow\Gamma^2E,
- \qquad R\longmapsto\iota_Rf ,
-\]
-be the second catalecticant.  For \(f=(a_0:\cdots:a_{r-1})\), its matrix is
-\[
- \begin{pmatrix}
- a_0&a_1&\cdots&a_{r-3}\\
- a_1&a_2&\cdots&a_{r-2}\\
- a_2&a_3&\cdots&a_{r-1}
- \end{pmatrix}.
-\]
-Define
-\(\cP_r=\{[f]\in\PP(\Gamma^{r-1}E):
-\operatorname{rank}C_f^{(2)}\leq2\}\).
-This is the second secant variety, with its determinantal scheme structure.
-Its rank-two
-points split into tangent, rational-secant, and conjugate-secant types; only
-the first and third are split-free on full support.
-
-\begin{lemma}[Base-point freeness off the persistent carrier]
-\label{lem:basepointfree-off-persistent}%
-\coverage{absent}%
-For every \(r\geq5\), if \([f]\notin\cP_r\), then \(W_f\) has trivial
-geometric gcd.  If \(W_f\) has nontrivial gcd, its degree is one exactly when
-\(H_f\) has rank one, on the normal rational curve, and is two when \(H_f\)
-has rank two.
-\end{lemma}
-
-\begin{proof}
-Work over an algebraic closure and suppose that a linear form \(L\) divides
-every member of \(W_f\).  Multiplication by \(L\) is injective, and, with
-\[
- K_L=(LE^\vee)^\perp\subset\Gamma^2E,
-\]
-the perfect pairing gives
-\[
- \{R\in\Sym^{r-3}E^\vee:LR\in W_f\}
-   =\bigl(C_f^{(2)}\bigr)^{-1}(K_L).
-\]
-Here \(K_L\) is one-dimensional.  Because \(W_f\subset L\Sym^{r-3}E^\vee\),
-multiplication by \(L\) identifies the left-hand side with \(W_f\), so its
-dimension is at least \(r-3\).  If \(C_f^{(2)}\) had rank three, it
-would be surjective and the right-hand side would instead have dimension
-\((r-2-3)+1=r-4\).  Hence \(\operatorname{rank}C_f^{(2)}\leq2\), so
-\([f]\in\cP_r\), a contradiction.
-
-For the final assertion, the rank-one normal form is a curve point and gives
-\(W_f=L\Sym^{r-3}E^\vee\).  At a rank-two secant or tangent point, direct
-substitution in the Hankel matrix gives respectively
-\(W_f=L_1L_2\Sym^{r-4}E^\vee\) or
-\(W_f=L^2\Sym^{r-4}E^\vee\).
-\end{proof}
+An empty span denotes the empty projective scheme.  The second catalecticant
+\(C_f^{(2)}\) and its rank-two locus \(\cP_r\) were defined in
+Section~\ref{sec:dictionary}.
 
 The next two propositions and one theorem prove the unconditional geometric
 layer: they find every reduced terminal component, merge all modular
@@ -174,8 +123,9 @@ pencil: base-point freeness follows from
 Lemma~\ref{lem:basepointfree-off-persistent}, while the only inseparable
 Hankel pencil is the characteristic-three all-cube nucleus, contained in the
 residual prime.  For such a pencil, lying outside the scheme is equivalent to
-geometric \(S_3\) monodromy of its cubic map.  Thus
-Proposition~\ref{prop:r5-count} and Lemma~\ref{lem:r5-branch} apply to every
+geometric \(S_3\) monodromy of its cubic map.  Thus the terminal counting
+inputs proved later in Section~\ref{sec:r5},
+Proposition~\ref{prop:r5-count} and Lemma~\ref{lem:r5-branch}, apply to every
 terminal point outside \(\mathcal B_{5,p}^{\mathrm{red}}\).
 \end{proposition}
 
@@ -595,10 +545,10 @@ it classifies the only possible carrier of additional split-free points, not
 the arithmetic of every point on that carrier.  The simultaneous-marker
 theorem proves escape from its complement directly.
 
-\begin{proposition}[Upper-level radius gate]\label{prop:upper-radius}%
+\begin{proposition}[Covering radii at higher levels]\label{prop:upper-radius}%
 \coverage{fragment}%
 \imports{duer,seroussi-roth}%
-For the ranges used below,
+For the following fixed-level ranges,
 \[
 \begin{aligned}
  \rho(\PRS(q-7))&=7 &&(q\geq43),\\
@@ -621,6 +571,6 @@ nonextendability of the corresponding normal rational curve; its stated
 even-field dimension-three exception is irrelevant because \(r\geq8\).
 Dür's completeness--covering-radius equivalence \cite{Dur1994}, in the
 form recorded by Kaipa \cite[Sec.~IV and Prop.~4(1)]{Kaipa2017}, gives
-the asserted radius.  Thus the promotion from split-free syndromes to deep
-holes in the companion R8--R10 calculations uses one explicit imported gate.
+the asserted radius.  Thus any promotion from split-free syndromes to deep
+holes in these ranges uses this explicit imported covering-radius input.
 \end{proof}

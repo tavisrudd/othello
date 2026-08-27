@@ -10,19 +10,22 @@ fixed-level, residual-discriminant, and ordered-Hessian audits made on
 2026-07-22 and 2026-07-23. It does not turn a targeted search into an
 unqualified priority claim.
 
-Of the 34 bibliography entries, eleven were read at **full text** or at full
+Of the 37 bibliography entries, twelve were read at **full text** or at full
 text at their load-bearing statements (Kaipa; Zhang--Wan--Kaipa; Wang;
 Ball--Lavrauw; Xu 2023; Wu--Ding--Chen; Wang--Wu--Hu;
 Blokhuis--Pellikaan--Szőnyi; Kaipa--Pradhan 2025; Dür 1994;
-Ball--De Beule), eleven at **partial**
+Ball--De Beule; the 2021 Davydov--Marcugini--Pambianco coset-distribution
+paper), thirteen at **partial**
 depth (Kaipa--Patanker--Pradhan; Günay--Lavrauw;
 Davydov--Marcugini--Pambianco 2022; Cesaratto--Matera--Pérez;
 Gmainer--Havlicek; Seroussi--Roth; Aubry--Perret; and the four repository
-companion manuscripts at their cross-cited statements), and twelve at
+companion manuscripts at their cross-cited statements; Li--Lu--Ling--Lam;
+Meneghetti--Pellegrini--Sala), and twelve at
 **abstract/metadata only** (Zhang--Wan 2017; Xu--Hong--Xu;
 Iarrobino--Kanev; Comas--Seiguer; Dür 1987;
 Lidl--Niederreiter; Ben-Sasson et al.;
-Davydov--Marcugini--Pambianco 2021 and 2023; Kaipa--Pradhan characteristic
+the Davydov--Marcugini--Pambianco point-line incidence papers of 2021 and
+2023; Kaipa--Pradhan characteristic
 three; Ceria--Pavese; Ferraguti--Micheli).
 
 The consolidated verdict is:
@@ -35,11 +38,10 @@ The consolidated verdict is:
   finite-field Galois theory, and subspace-polynomial background are inputs,
   not novelty claims;
 - no source located in the recorded three-graph coding screens or the
-  claim-specific object searches states the R5--R7 classifications, the
-  coherent marked-contraction theorem, or the R8/R9 fixed-level bounds;
-- the ordered-Hessian, Lucas, and `e_7` sections make no absence-based
-  priority assertion; they state and prove their exact mathematical
-  boundaries;
+  claim-specific object searches states the paper's exact R5--R7
+  classifications or coherent marked-contraction theorem;
+- the R8/R9 and ordered-Hessian/Lucas/`e_7` findings below are historical
+  companion records, not claims of the current submission;
 - every absence-dependent sentence must remain qualified by the recorded
   search boundary and by the MathSciNet coverage gap.
 
@@ -84,6 +86,19 @@ the cited papers' bibliographies.
   `0060fe492b052afe81822171901750ba7022eb51d70f51dbfc09b4df9eab94a4`.
   At \(q=9=3^2\) and dimension \(4=2\cdot3-2\), the theorem excludes the
   length-\(11\) MDS code that a weight-seven R7 syndrome would produce.
+- Davydov--Marcugini--Pambianco, coset-distribution paper (2021) — **full text**, arXiv v2, all
+  sections; cache key `arXiv:2007.08798`, SHA-256
+  `c07254e4aeffada926e0738427d210a93b6c34118aa27d8fe7d474716a4060bd`.
+  It gives codimension-four GRS syndrome and coset weight distributions;
+  this is prior coding-level enumerator context, not the realized-pencil
+  classification claimed here.
+- Li--Lu--Ling--Lam — **partial**, abstract and Sections I and III-A--B
+  (Lemma 6, Theorems 7 and 10, Corollary 8); cache key
+  `arXiv:2605.12133`, SHA-256
+  `8f854dcb3ad549b8bfdcaac6f585edc9d9516c7ea9674e970f54020657c0fa7d`.
+- Meneghetti--Pellegrini--Sala — **partial**, introduction, Section 4,
+  and Theorem 10; cache key `arXiv:2003.14063`, SHA-256
+  `245fb371b7afb83e629a558e4bec8786b4c67719d0c67299b120b5038e0ee2e5`.
 - Kaipa--Patanker--Pradhan — **partial**, current cached v3 abstract,
   introduction, and orbit-classification statements; cache key
   `arXiv:2312.07118`, SHA-256
@@ -122,7 +137,7 @@ It does not impose Hankel overlap, preserve a forbidden marked
 factor through contractions, classify contained catalecticant/Lucas flags,
 or produce the paper's effective fixed-redundancy thresholds.
 
-The R8 and R9 delta audits reuse the pinned coding trees and screen their
+The companion-only R8 and R9 delta audits reuse the pinned coding trees and screen their
 exact fixed-level objects. No redundancy-eight or redundancy-nine
 projective-RS classification, residual-quadratic package, or
 characteristic-seven carrier theorem was located. The manuscript claims only
@@ -143,7 +158,7 @@ the displayed high-field ranges; it does not claim bounded-field completion.
 
 ## Ordered Hessian, Lucas carriers, and `e_7`
 
-The ordered-Hessian delta screened the characteristic-two twisted-cubic
+This companion-only ordered-Hessian delta screened the characteristic-two twisted-cubic
 line-orbit and binary-cubic Hessian objects. The closest line-orbit papers
 either exclude characteristics two and three or provide finite incidence
 tables rather than the divided-Hessian `(2,2)` component and constrained PRS
@@ -274,10 +289,12 @@ by the unchanged three-graph baseline plus this delta.  MathSciNet and Google
 Scholar remain not covered for the reasons stated below; those gaps license
 no unqualified priority claim.
 
-## Version 2 synthesis delta through 2026-08-02
+## Historical companion synthesis delta through 2026-08-02
 
-Version 2 adopts the reduced recursive-carrier theorem and the complete first
-higher-Lucas-carrier arithmetic. The source inventory remains 26 works:
+This section records the broader companion development from which the current
+submission retains only the reduced recursive-carrier theorem.  That version
+also adopted complete first higher-Lucas-carrier arithmetic. Its source
+inventory was 26 works:
 seven read at full text, nine at partial depth, and ten at
 abstract/metadata depth. No source is promoted or characterized beyond the
 read-depth ledger below.
@@ -337,10 +354,10 @@ distribution question for line orbits, and in that form it is settled.
 
 Blokhuis--Pellikaan--Szőnyi partition the lines into classes and determine,
 for q >= 23 and in every characteristic, which classes lie in such a plane
-(Thm. 7.1, Prop. 7.4). Their route is the manuscript's: the double point
+(published Thm. 8.1, Prop. 8.4). Their route is the manuscript's: the double point
 scheme of the associated degree-three rational function is a genus-one curve,
 at most twelve points are excluded, and Hasse--Weil forces a fibre with three
-distinct rational points once q >= 23 (Rem. 6.12). The manuscript's Section IV
+distinct rational points once q >= 23 (published Rem. 7.12). The manuscript's Section IV
 reproves this stratum by stratum; the correspondence is printed in the
 manuscript at Remark `rem:r5-line-literature`. The manuscript's only
 divergence is the substitution of the Aubry--Perret bound for Hasse--Weil,
@@ -352,18 +369,21 @@ Davydov--Marcugini--Pambianco Thm. 3.3 for the non-generic classes at q >= 5,
 Günay--Lavrauw for the same classes at odd q prime to three, Kaipa--Pradhan
 Thm. 1.3 for the generic class in characteristic other than two and three,
 their characteristic-three companion, and Ceria--Pavese in characteristic two.
-Kaipa--Pradhan Thm. 1.3 expresses the number of split squarefree members of a
-generic pencil as `(#E_L(F_q) - 3 eta_L)/3`, so a generic line is split-free
+The displayed denominator in Kaipa--Pradhan Thm. 1.3(3) is `/3`, while their
+proof and equivalent incidence count give the `/6` normalization used in the
+manuscript.  With that correction, the number of split squarefree members of a
+generic pencil is `(#E_L(F_q) - 3 eta_L)/6`, so a generic line is split-free
 exactly when `#E_L(F_q) = 3 eta_L <= 12`, which the Hasse bound forbids for
 q >= 23 and permits only for q <= 19. That reproduces the manuscript's
 threshold with an arithmetic reason for it.
 
-What remains without a located predecessor is the syndrome layer: the
-divided-power Hankel passage from a syndrome to its pencil, the exclusion of
-line classes that no rank-two syndrome realizes, the split-free syndrome
-inventory with representatives, orbit sizes, stabilizers, and Frobenius
-fusion, and the covering-radius promotion. No source located here contains a
-projective Reed--Solomon deep-hole, covering-radius, or syndrome statement.
+What remains without a located predecessor is the precise syndrome layer:
+the divided-power map from a syndrome to its pencil, the restriction to line
+classes realized by rank-two syndromes, the exact inventory with
+representatives, orbit sizes, stabilizers, and Frobenius fusion, and the
+covering-radius promotion.  Davydov--Marcugini--Pambianco already gives a
+codimension-four GRS syndrome/coset enumerator, so no novelty is claimed for a
+syndrome or coset statement as such.
 
 **Screened set.** Works citing Blokhuis--Pellikaan--Szőnyi, resolved by DOI
 `10.1007/s10623-022-01060-0`. Counts obtained independently and recorded
@@ -396,7 +416,8 @@ the pre-1985 twisted-cubic literature.
 
 ## Bibliography metadata and read-depth ledger
 
-Every DOI was resolved on 2026-07-23 by DOI content negotiation; author,
+The baseline DOI metadata was resolved on 2026-07-23 by DOI content
+negotiation; later additions use the pinned records listed above.  Author,
 title, venue/book, volume, pages, and year were compared with `refs.bib`.
 The two apparent date differences are not errors:
 Cesaratto--Matera--Pérez was online in 2016 but appears in Combinatorica

@@ -34,6 +34,7 @@ LINKS: dict[str, dict[str, list[str]]] = {
     "thm:r6": {
         "evidence": ["certificate-r6"],
         "uses": ["thm:r5"],
+        "imports": ["duer", "seroussi-roth"],
         "proves": ["redundancy-six-classification"],
     },
     "thm:r7": {
@@ -67,6 +68,14 @@ LINKS: dict[str, dict[str, list[str]]] = {
         "uses": ["thm:simultaneous-marker-escape"],
         "proves": ["recursive-carrier-classification"],
     },
+    "thm:simultaneous-marker-escape": {
+        "uses": [
+            "prop:recursive-component-selection",
+            "prop:reduced-terminal-carrier",
+            "prop:r5-count",
+            "lem:r5-branch",
+        ],
+    },
     "thm:m9-shallow": {
         "evidence": ["certificate-lucas-m9"],
         "uses": ["prop:linearized"],
@@ -74,8 +83,10 @@ LINKS: dict[str, dict[str, list[str]]] = {
     },
     "thm:main": {
         "uses": ["thm:simultaneous-marker-escape", "prop:recursive-component-selection"],
+        "imports": ["duer", "seroussi-roth", "zwk-full-support-rank-two"],
         "proves": ["main-fixed-level-classification-package"],
     },
+    "thm:spine": {"uses": ["thm:r6", "thm:r7"]},
 }
 
 

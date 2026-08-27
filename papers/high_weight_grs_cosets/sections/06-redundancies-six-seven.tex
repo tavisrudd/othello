@@ -286,6 +286,7 @@ its lower-unipotent transforms and endpoint are precisely
 $\cN_3(\F_q)$.
 \end{proof}
 
+\pagebreak[3]
 \begin{proposition}[Exhaustive R6 contained-component classification]
 \label{prop:r6-contained}%
 \coverage{absent}%
@@ -381,7 +382,7 @@ Proposition~\ref{prop:r6-nucleus} gives the asserted odd-degree
 split-free orbit and proves shallowness in even extension degree.
 \end{proof}
 
-The covering-radius gate is complete.  Its exact high-rate endpoint is
+The covering-radius input is complete.  Its exact high-rate endpoint is
 \(q=8\), since \(6=\lfloor8/2\rfloor+2\).  Thus Seroussi--Roth
 nonextendability and Dür's equivalence give
 \(\rho(\PRS(q-5))=5\) for \(q\geq8\), while Certificate R6 checks it
@@ -391,6 +392,7 @@ directly at \(q=7\) and independently confirms \(q=8\).
 \coverage{conditional_deduction}%
 \lean{PRSRedundancySixSeven.redundancySixAllFieldSynthesis,PRSRedundancySixSevenCertificate.redundancySix_count_exhaustion,PRSUniformCoveringRadius.SeroussiRothDuerRadiusInput.seroussiRothDimensionRange_six_eight,radiusRange_six_eight_of_externalSeroussiRothDuer}%
 \uses{thm:r5}%
+\imports{duer,seroussi-roth}%
 \evidence{certificate-r6}%
 \proves{redundancy-six-classification}%
 For every prime power $q\geq7$, the deep syndromes of $\PRS(q-5)$ are
@@ -426,7 +428,7 @@ q\in\{7,8,9,11,13,16,17,19,23,25,27\},
 \]
 finds exceptional projective-orbit counts $18,11,4,2,1$ only at the
 five displayed fields, and no further orbit at the remaining fields.
-Together with the separate radius gate, this covers every prime power
+Together with the separate covering-radius argument, this covers every prime power
 $q\geq7$.
 \end{proof}
 
@@ -608,6 +610,7 @@ identical-collision alternatives of Definition~\ref{def:contained},
 so the list is exhaustive.
 \end{proof}
 
+\pagebreak[3]
 \begin{theorem}[Redundancy-seven classification]
 \label{thm:r7}%
 \coverage{conditional_deduction}%

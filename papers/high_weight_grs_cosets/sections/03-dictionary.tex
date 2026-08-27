@@ -26,7 +26,7 @@ in any characteristic.  Define
  W_f=\ker H_f\subset\Sym^{r-2}E^\vee.
 \]
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \small
 \caption{Notation used from the Hankel dictionary onward.}
@@ -121,6 +121,61 @@ membership does not by itself assert deepness\\
 \end{tabular}
 \end{table}
 
+The persistent carrier is the rank-two locus of the second catalecticant
+\[
+ C_f^{(2)}:\Sym^{r-3}E^\vee\longrightarrow\Gamma^2E,
+ \qquad R\longmapsto\iota_Rf .
+\]
+For \(f=(a_0:\cdots:a_{r-1})\), its matrix is
+\[
+ \begin{pmatrix}
+ a_0&a_1&\cdots&a_{r-3}\\
+ a_1&a_2&\cdots&a_{r-2}\\
+ a_2&a_3&\cdots&a_{r-1}
+ \end{pmatrix}.
+\]
+Define
+\(\cP_r=\{[f]\in\PP(\Gamma^{r-1}E):
+\operatorname{rank}C_f^{(2)}\leq2\}\).
+This is the second secant variety, with its determinantal scheme structure.
+Its rank-two points split into tangent, rational-secant, and
+conjugate-secant types; only the first and third are split-free on full
+support.
+
+\begin{lemma}[Base-point freeness off the persistent carrier]
+\label{lem:basepointfree-off-persistent}%
+\coverage{absent}%
+For every \(r\geq5\), if \([f]\notin\cP_r\), then \(W_f\) has trivial
+geometric gcd.  If \(W_f\) has nontrivial gcd, its degree is one exactly when
+\(H_f\) has rank one, on the normal rational curve, and is two when \(H_f\)
+has rank two.
+\end{lemma}
+
+\begin{proof}
+Work over an algebraic closure and suppose that a linear form \(L\) divides
+every member of \(W_f\).  Multiplication by \(L\) is injective, and, with
+\[
+ K_L=(LE^\vee)^\perp\subset\Gamma^2E,
+\]
+the perfect pairing gives
+\[
+ \{R\in\Sym^{r-3}E^\vee:LR\in W_f\}
+   =\bigl(C_f^{(2)}\bigr)^{-1}(K_L).
+\]
+Here \(K_L\) is one-dimensional.  Because
+\(W_f\subset L\Sym^{r-3}E^\vee\), multiplication by \(L\) identifies the
+left-hand side with \(W_f\), so its dimension is at least \(r-3\).  If
+\(C_f^{(2)}\) had rank three, it would be surjective and the right-hand side
+would instead have dimension \((r-2-3)+1=r-4\).  Hence
+\(\operatorname{rank}C_f^{(2)}\leq2\), so \([f]\in\cP_r\), a contradiction.
+
+For the final assertion, the rank-one normal form is a curve point and gives
+\(W_f=L\Sym^{r-3}E^\vee\).  At a rank-two secant or tangent point, direct
+substitution in the Hankel matrix gives respectively
+\(W_f=L_1L_2\Sym^{r-4}E^\vee\) or
+\(W_f=L^2\Sym^{r-4}E^\vee\).
+\end{proof}
+
 The first locus that persists under contraction is already visible
 here.  If every member of $W_f$ has a common quadratic factor, then
 that factor is either a
@@ -141,12 +196,13 @@ so its degree is at most two.
 A split squarefree degree-\((r-2)\) member of \(W_f\), with roots in the
 evaluation support, is an explicit coset representative of weight at most
 \(r-2\).  Its absence is a deep-hole condition only after the independent
-covering-radius gate.  Section~\ref{sec:high-weight-cosets} applies this
+covering-radius input.  Section~\ref{sec:high-weight-cosets} applies this
 dictionary to deleted supports and arbitrary GRS multipliers, classifies the
 weight-\(r\) and weight-\((r-1)\) shells, and translates them into MDS and NMDS
-one-column extensions.  In the full-support case the radius is \(r-1\), so
-the MDS extension class is empty; omitted curve points supply that class as
-soon as the support is proper.
+one-column extensions.  Under the full-support hypotheses of
+Theorem~\ref{thm:main}, the radius is \(r-1\), so the MDS extension class is
+empty; omitted curve points supply that class as soon as the support is
+proper.
 
 The same dictionary gives recognition procedures.  From a syndrome one
 forms \(H_f\), computes \(W_f\), and tests the listed geometric families: a
