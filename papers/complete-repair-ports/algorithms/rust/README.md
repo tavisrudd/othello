@@ -114,7 +114,7 @@ enumerators are not included.
 
 | application      | bounded instance                  | matched exact control          | ERGO time | control time | result        |
 | :--------------- | :-------------------------------- | :----------------------------- | --------: | -----------: | :------------ |
-| Ceph XOR         | 8 diamonds, 256 minimal supports  | Graphillion ZDD family closure | 25,339 us |       864 us | ZDD 29x       |
+| Ceph XOR         | 8 diamonds, 256 minimal supports  | Graphillion ZDD family closure |    102 us |       864 us | ERGO 8x       |
 | Azure LRC        | 100,000 demands, domain cap 100k  | HiGHS counted integer model    |     <1 us |     4,877 us | ERGO 173,996x |
 | Repair DAG       | 3 layers x 21 tasks               | CP-SAT interval scheduling     |      2 us |    19,218 us | ERGO 7,881x   |
 | QC-LDPC          | lift 50,000, weight 4             | CryptoMiniSat native XOR       |  1,517 us |   509,306 us | ERGO 336x     |
@@ -123,7 +123,7 @@ enumerators are not included.
 
 | application      | ERGO RSS | control RSS |
 | :--------------- | -------: | ----------: |
-| Ceph XOR         |  3.0 MiB |    19.4 MiB |
+| Ceph XOR         |  2.2 MiB |    19.4 MiB |
 | Azure LRC        |  2.2 MiB |    61.6 MiB |
 | Repair DAG       |  2.3 MiB |    79.1 MiB |
 | QC-LDPC          |  4.0 MiB |   231.8 MiB |
@@ -134,20 +134,32 @@ The outcome strength is not identical across rows; the comparison requires
 the same optimum or decision, while ERGO-comp often returns a stronger
 application-level object:
 
-| application      | exact control establishes        | additional ERGO-comp output                           |
-| :--------------- | :------------------------------- | :---------------------------------------------------- |
-| Ceph XOR         | compact exact 256-support family | all sorted minimal supports and closure-work counters |
-| Azure LRC        | maximum repaired count           | mode counts, all nine loads, direct capacity check    |
-| Repair DAG       | optimal makespan and schedule    | canonical task batches and ready-state count          |
-| QC-LDPC          | no weight-four codeword          | component reason; normalized witness when feasible    |
-| vector node span | optimum is four nodes            | canonical helpers, span count, transition count       |
-| GPU MDS          | feasible full helper flow        | every helper shard, node/rack loads, cyclic witness   |
+| application      | exact control establishes        | additional ERGO-comp output                                    |
+| :--------------- | :------------------------------- | :------------------------------------------------------------- |
+| Ceph XOR         | compact exact 256-support family | packed exact ZDD, canonical support, and closure-work counters |
+| Azure LRC        | maximum repaired count           | mode counts, all nine loads, direct capacity check             |
+| Repair DAG       | optimal makespan and schedule    | canonical task batches and ready-state count                   |
+| QC-LDPC          | no weight-four codeword          | component reason; normalized witness when feasible             |
+| vector node span | optimum is four nodes            | canonical helpers, span count, transition count                |
+| GPU MDS          | feasible full helper flow        | every helper shard, node/rack loads, cyclic witness            |
 
-The Ceph row is an intentional loss. ERGO-comp materializes the complete
-antichain, whereas Graphillion retains the exponentially branching family as
-a ZDD. This identifies a concrete backend boundary: high-fanout recursive XOR
-closures should use a compressed-family representation when explicit support
-enumeration is not required.
+The compressed Ceph kernel removes the earlier explicit-antichain bottleneck.
+It retains the exponentially branching family as a packed ZDD, then reuses that
+state for exact reliability and resource-aware scheduling without materializing
+the supports.  The Graphillion samples above are unchanged; only the affected
+Rust measurements were rerun.
+
+| diamonds | represented supports | compressed family | exact reliability | scheduling quotient |
+| -------: | -------------------: | ----------------: | ----------------: | ------------------: |
+|       10 |                1,024 |             89 us |            100 us |              102 us |
+|       30 |        1,073,741,824 |          1,002 us |          1,083 us |            1,101 us |
+|       80 |       2^80 = 1.21e24 |  not materialized |          6,722 us |            7,727 us |
+
+At ten diamonds, the previous explicit Rust path takes 728,737 us and 10.2 MiB
+to materialize 1,024 supports.  The reliability column instead returns exact
+success counts by available-helper cardinality.  The scheduling column compiles
+the family to a Pareto-minimal two-domain load frontier, solves two demands,
+and retains a representative helper support for each selected load vector.
 
 The large wins come from mathematical reductions: six demand types for Azure
 LRC, full-ready-set dominance for unit repair DAGs, connected components for

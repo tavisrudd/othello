@@ -745,8 +745,10 @@
   },
   "application_formulation_specific_comparisons": {
     "artifacts": {
+      "bench_kernels_binary_sha256": "163b45ccbd6511f037d99c85b2c2771b9a0ea5744747769ad4b957eda15cda64",
+      "bench_kernels_source_sha256": "59d61fa8b54e45e3b6cdf0d8be6d1569e9bfd4e8a6c6d3ecceb86556bee30233",
       "benchmark_python_sha256": "c7030a06596421ba140e49ee553075e9f4aa63129f4fa7a93194526a4a9493a0",
-      "run_benchmarks_sha256": "a2ce79e4d2342c40dac3193a447c9bf557f8b75e3e44c21f658741cf6c576bfe",
+      "run_benchmarks_sha256": "5266d566a61e8709e342ee7ed7727b3a3d6fb938de986cd18254e66ff1ef2326",
       "verify_baseline_encodings_sha256": "65ece2f92f196713a043bf845b41263de52f3a2082afafc3f7aeb8b347a4074f"
     },
     "measurements": {
@@ -1052,113 +1054,113 @@
         },
         "rust": {
           "checksum_per_solve": 256,
-          "median_ns_per_solve": 25338666.0,
-          "median_peak_rss_kib": 3064,
-          "peak_states": 256,
+          "median_ns_per_solve": 102220.0,
+          "median_peak_rss_kib": 2236,
+          "peak_states": 1568,
           "samples": [
             {
               "checksum": 256,
-              "elapsed_ns": 25058013,
-              "peak_rss_kib": 2972,
-              "peak_states": 256,
+              "elapsed_ns": 119753,
+              "peak_rss_kib": 2236,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 25101764,
-              "peak_rss_kib": 3112,
-              "peak_states": 256,
+              "elapsed_ns": 102220,
+              "peak_rss_kib": 2236,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 25501919,
-              "peak_rss_kib": 3048,
-              "peak_states": 256,
+              "elapsed_ns": 100637,
+              "peak_rss_kib": 2252,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 25033116,
-              "peak_rss_kib": 3064,
-              "peak_states": 256,
+              "elapsed_ns": 100988,
+              "peak_rss_kib": 2188,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 25338856,
-              "peak_rss_kib": 3084,
-              "peak_states": 256,
+              "elapsed_ns": 104324,
+              "peak_rss_kib": 2236,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 24942779,
-              "peak_rss_kib": 2996,
-              "peak_states": 256,
+              "elapsed_ns": 107541,
+              "peak_rss_kib": 2280,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 25412302,
-              "peak_rss_kib": 3072,
-              "peak_states": 256,
+              "elapsed_ns": 111497,
+              "peak_rss_kib": 2276,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 25329168,
-              "peak_rss_kib": 3032,
-              "peak_states": 256,
+              "elapsed_ns": 100988,
+              "peak_rss_kib": 2220,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 25447859,
-              "peak_rss_kib": 3160,
-              "peak_states": 256,
+              "elapsed_ns": 99745,
+              "peak_rss_kib": 2168,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 25338666,
-              "peak_rss_kib": 3032,
-              "peak_states": 256,
+              "elapsed_ns": 102390,
+              "peak_rss_kib": 2248,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             },
             {
               "checksum": 256,
-              "elapsed_ns": 25381765,
-              "peak_rss_kib": 3100,
-              "peak_states": 256,
+              "elapsed_ns": 101118,
+              "peak_rss_kib": 2248,
+              "peak_states": 1568,
               "repetitions": 1,
-              "variant": "application:ceph:rust:8",
-              "work": 446089
+              "variant": "application:ceph-zdd:rust:8:2",
+              "work": 4293
             }
           ],
-          "work_per_solve": 446089
+          "work_per_solve": 4293
         },
-        "rust_speedup": 0.034
+        "rust_speedup": 8.452
       },
       "gpu_checkpoint_mds": {
         "baseline": {
@@ -1918,6 +1920,979 @@
       "repair_dag": "OR-Tools 9.14 interval variables and NoOverlap constraints",
       "scope": "strong open-source formulation-specific baseline, not a universal SOTA claim",
       "vector_node_span": "CryptoMiniSat 5.14 native XOR clauses plus sequential helper-cardinality bounds"
+    }
+  },
+  "ceph_compressed_family_consumers": {
+    "artifacts": {
+      "bench_kernels_binary_sha256": "163b45ccbd6511f037d99c85b2c2771b9a0ea5744747769ad4b957eda15cda64",
+      "bench_kernels_source_sha256": "59d61fa8b54e45e3b6cdf0d8be6d1569e9bfd4e8a6c6d3ecceb86556bee30233",
+      "run_benchmarks_sha256": "5266d566a61e8709e342ee7ed7727b3a3d6fb938de986cd18254e66ff1ef2326"
+    },
+    "profiles": {
+      "depth-10": {
+        "depth": 10,
+        "measurements": {
+          "application:ceph-aggregate:rust:10:2:2": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 102379.6,
+            "median_peak_rss_kib": 2324,
+            "peak_states": 11,
+            "samples": [
+              {
+                "checksum": 20,
+                "elapsed_ns": 1023796,
+                "peak_rss_kib": 2292,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1027593,
+                "peak_rss_kib": 2268,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1027263,
+                "peak_rss_kib": 2368,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1012956,
+                "peak_rss_kib": 2408,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1023566,
+                "peak_rss_kib": 2408,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1021442,
+                "peak_rss_kib": 2264,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1020450,
+                "peak_rss_kib": 2372,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1045226,
+                "peak_rss_kib": 2324,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1024507,
+                "peak_rss_kib": 2260,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1036360,
+                "peak_rss_kib": 2264,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 1023015,
+                "peak_rss_kib": 2404,
+                "peak_states": 11,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:10:2:2",
+                "work": 1430
+              }
+            ],
+            "work_per_solve": 143
+          },
+          "application:ceph-reliability:rust:10:2": {
+            "checksum_per_solve": 21,
+            "median_ns_per_solve": 99525.3,
+            "median_peak_rss_kib": 2412,
+            "peak_states": 22,
+            "samples": [
+              {
+                "checksum": 210,
+                "elapsed_ns": 990684,
+                "peak_rss_kib": 2376,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 983952,
+                "peak_rss_kib": 2404,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 984183,
+                "peak_rss_kib": 2320,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 1000052,
+                "peak_rss_kib": 2472,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 1037272,
+                "peak_rss_kib": 2448,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 1012165,
+                "peak_rss_kib": 2448,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 995253,
+                "peak_rss_kib": 2460,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 998509,
+                "peak_rss_kib": 2420,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 995974,
+                "peak_rss_kib": 2336,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 987638,
+                "peak_rss_kib": 2412,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              },
+              {
+                "checksum": 210,
+                "elapsed_ns": 988300,
+                "peak_rss_kib": 2396,
+                "peak_states": 22,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:10:2",
+                "work": 220
+              }
+            ],
+            "work_per_solve": 22
+          },
+          "application:ceph-zdd:rust:10:2": {
+            "checksum_per_solve": 1024,
+            "median_ns_per_solve": 88840.4,
+            "median_peak_rss_kib": 2252,
+            "peak_states": 2458,
+            "samples": [
+              {
+                "checksum": 10240,
+                "elapsed_ns": 875010,
+                "peak_rss_kib": 2204,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 878115,
+                "peak_rss_kib": 2324,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 906097,
+                "peak_rss_kib": 2284,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 878646,
+                "peak_rss_kib": 2252,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 882994,
+                "peak_rss_kib": 2344,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 937946,
+                "peak_rss_kib": 2252,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 906207,
+                "peak_rss_kib": 2240,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 888404,
+                "peak_rss_kib": 2320,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 894826,
+                "peak_rss_kib": 2236,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 889286,
+                "peak_rss_kib": 2244,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              },
+              {
+                "checksum": 10240,
+                "elapsed_ns": 882734,
+                "peak_rss_kib": 2280,
+                "peak_states": 2458,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:10:2",
+                "work": 64160
+              }
+            ],
+            "work_per_solve": 6416
+          }
+        },
+        "original_explicit": {
+          "checksum_per_solve": 1024,
+          "median_ns_per_solve": 728737002.0,
+          "median_peak_rss_kib": 10440,
+          "peak_states": 1024,
+          "samples": [
+            {
+              "checksum": 1024,
+              "elapsed_ns": 728162803,
+              "peak_rss_kib": 10432,
+              "peak_states": 1024,
+              "repetitions": 1,
+              "variant": "application:ceph:rust:10:2",
+              "work": 7027337
+            },
+            {
+              "checksum": 1024,
+              "elapsed_ns": 724436425,
+              "peak_rss_kib": 10428,
+              "peak_states": 1024,
+              "repetitions": 1,
+              "variant": "application:ceph:rust:10:2",
+              "work": 7027337
+            },
+            {
+              "checksum": 1024,
+              "elapsed_ns": 733530477,
+              "peak_rss_kib": 10400,
+              "peak_states": 1024,
+              "repetitions": 1,
+              "variant": "application:ceph:rust:10:2",
+              "work": 7027337
+            },
+            {
+              "checksum": 1024,
+              "elapsed_ns": 730271659,
+              "peak_rss_kib": 10440,
+              "peak_states": 1024,
+              "repetitions": 1,
+              "variant": "application:ceph:rust:10:2",
+              "work": 7027337
+            },
+            {
+              "checksum": 1024,
+              "elapsed_ns": 737236518,
+              "peak_rss_kib": 10476,
+              "peak_states": 1024,
+              "repetitions": 1,
+              "variant": "application:ceph:rust:10:2",
+              "work": 7027337
+            },
+            {
+              "checksum": 1024,
+              "elapsed_ns": 728737002,
+              "peak_rss_kib": 10516,
+              "peak_states": 1024,
+              "repetitions": 1,
+              "variant": "application:ceph:rust:10:2",
+              "work": 7027337
+            },
+            {
+              "checksum": 1024,
+              "elapsed_ns": 728583286,
+              "peak_rss_kib": 10472,
+              "peak_states": 1024,
+              "repetitions": 1,
+              "variant": "application:ceph:rust:10:2",
+              "work": 7027337
+            }
+          ],
+          "work_per_solve": 7027337
+        },
+        "represented_supports": "1024"
+      },
+      "depth-30": {
+        "depth": 30,
+        "measurements": {
+          "application:ceph-aggregate:rust:30:2:2": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 1101417.8,
+            "median_peak_rss_kib": 3364,
+            "peak_states": 31,
+            "samples": [
+              {
+                "checksum": 20,
+                "elapsed_ns": 11089989,
+                "peak_rss_kib": 3364,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 11334374,
+                "peak_rss_kib": 3356,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 11301433,
+                "peak_rss_kib": 3360,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 11269133,
+                "peak_rss_kib": 3364,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 11014178,
+                "peak_rss_kib": 3332,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 11466520,
+                "peak_rss_kib": 3228,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 8894201,
+                "peak_rss_kib": 3364,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 8323939,
+                "peak_rss_kib": 3308,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 8086857,
+                "peak_rss_kib": 3420,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 8234894,
+                "peak_rss_kib": 3396,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              },
+              {
+                "checksum": 20,
+                "elapsed_ns": 8402916,
+                "peak_rss_kib": 3444,
+                "peak_states": 31,
+                "repetitions": 10,
+                "variant": "application:ceph-aggregate:rust:30:2:2",
+                "work": 10230
+              }
+            ],
+            "work_per_solve": 1023
+          },
+          "application:ceph-reliability:rust:30:2": {
+            "checksum_per_solve": 61,
+            "median_ns_per_solve": 1082641.8,
+            "median_peak_rss_kib": 3684,
+            "peak_states": 62,
+            "samples": [
+              {
+                "checksum": 610,
+                "elapsed_ns": 10894425,
+                "peak_rss_kib": 3716,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 11139010,
+                "peak_rss_kib": 3620,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 10826418,
+                "peak_rss_kib": 3468,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 10841266,
+                "peak_rss_kib": 3684,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 11226163,
+                "peak_rss_kib": 3732,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 11296504,
+                "peak_rss_kib": 3496,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 9687658,
+                "peak_rss_kib": 3720,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 8146960,
+                "peak_rss_kib": 3644,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 8356670,
+                "peak_rss_kib": 3548,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 7756954,
+                "peak_rss_kib": 3732,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              },
+              {
+                "checksum": 610,
+                "elapsed_ns": 7808319,
+                "peak_rss_kib": 3700,
+                "peak_states": 62,
+                "repetitions": 10,
+                "variant": "application:ceph-reliability:rust:30:2",
+                "work": 620
+              }
+            ],
+            "work_per_solve": 62
+          },
+          "application:ceph-zdd:rust:30:2": {
+            "checksum_per_solve": 1073741824,
+            "median_ns_per_solve": 1001785.3,
+            "median_peak_rss_kib": 3296,
+            "peak_states": 22358,
+            "samples": [
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 10032580,
+                "peak_rss_kib": 3156,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 10026890,
+                "peak_rss_kib": 3368,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 10067194,
+                "peak_rss_kib": 3400,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 10104975,
+                "peak_rss_kib": 3332,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 10017853,
+                "peak_rss_kib": 3348,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 10151462,
+                "peak_rss_kib": 3200,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 9317569,
+                "peak_rss_kib": 3128,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 7495596,
+                "peak_rss_kib": 3320,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 7194456,
+                "peak_rss_kib": 3172,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 7070615,
+                "peak_rss_kib": 3128,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              },
+              {
+                "checksum": 10737418240,
+                "elapsed_ns": 7239430,
+                "peak_rss_kib": 3296,
+                "peak_states": 22358,
+                "repetitions": 10,
+                "variant": "application:ceph-zdd:rust:30:2",
+                "work": 589300
+              }
+            ],
+            "work_per_solve": 58930
+          }
+        },
+        "represented_supports": "1073741824"
+      },
+      "depth-80": {
+        "depth": 80,
+        "measurements": {
+          "application:ceph-aggregate:rust:80:2:2": {
+            "checksum_per_solve": 2,
+            "median_ns_per_solve": 7726620.6,
+            "median_peak_rss_kib": 11004,
+            "peak_states": 81,
+            "samples": [
+              {
+                "checksum": 10,
+                "elapsed_ns": 38617825,
+                "peak_rss_kib": 11048,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 41112821,
+                "peak_rss_kib": 11092,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 38633103,
+                "peak_rss_kib": 10956,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 38691763,
+                "peak_rss_kib": 11016,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 38684028,
+                "peak_rss_kib": 11004,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 38337433,
+                "peak_rss_kib": 10956,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 38395591,
+                "peak_rss_kib": 10956,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 38640086,
+                "peak_rss_kib": 11048,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 38627222,
+                "peak_rss_kib": 10964,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 38750272,
+                "peak_rss_kib": 10884,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              },
+              {
+                "checksum": 10,
+                "elapsed_ns": 38407904,
+                "peak_rss_kib": 11068,
+                "peak_states": 81,
+                "repetitions": 5,
+                "variant": "application:ceph-aggregate:rust:80:2:2",
+                "work": 33615
+              }
+            ],
+            "work_per_solve": 6723
+          },
+          "application:ceph-reliability:rust:80:2": {
+            "checksum_per_solve": 161,
+            "median_ns_per_solve": 6722216.4,
+            "median_peak_rss_kib": 12956,
+            "peak_states": 162,
+            "samples": [
+              {
+                "checksum": 805,
+                "elapsed_ns": 35862174,
+                "peak_rss_kib": 12952,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 33611082,
+                "peak_rss_kib": 12956,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 33477184,
+                "peak_rss_kib": 12928,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 33600052,
+                "peak_rss_kib": 12920,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 33340609,
+                "peak_rss_kib": 12956,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 34302380,
+                "peak_rss_kib": 12952,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 33360696,
+                "peak_rss_kib": 13008,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 33929415,
+                "peak_rss_kib": 13008,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 33331552,
+                "peak_rss_kib": 13000,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 33629988,
+                "peak_rss_kib": 12892,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              },
+              {
+                "checksum": 805,
+                "elapsed_ns": 33750702,
+                "peak_rss_kib": 13008,
+                "peak_states": 162,
+                "repetitions": 5,
+                "variant": "application:ceph-reliability:rust:80:2",
+                "work": 810
+              }
+            ],
+            "work_per_solve": 162
+          }
+        },
+        "represented_supports": "1208925819614629174706176"
+      }
+    },
+    "protocol": {
+      "aggregate": "Pareto-minimal two-domain load frontier, two-demand exact schedule, and representative supports",
+      "common": "pinned-core deterministic end-to-end Rust runs; compressed family rebuilt for every solve",
+      "reliability": "exact success counts by available-helper cardinality",
+      "scope": "Rust-only update; recorded competitor samples are unchanged"
+    },
+    "rounds": {
+      "compressed": 11,
+      "original_explicit": 7
     }
   },
   "comparisons": {

@@ -23,7 +23,7 @@ BINARY = Path(
 def command(variant: str, repetitions: int) -> list[str]:
     cpu_set = "0-23" if "parallel-" in variant else "2"
     if any(
-        backend in variant
+        f":{backend}:" in variant
         for backend in ("cpsat", "maxflow", "highs", "cryptominisat", "zdd")
     ):
         dependencies = []
@@ -215,6 +215,7 @@ def main() -> None:
     parser.add_argument("--streaming-input-only", action="store_true")
     parser.add_argument("--applications-only", action="store_true")
     parser.add_argument("--application-sota-only", action="store_true")
+    parser.add_argument("--ceph-rust-only", action="store_true")
     parser.add_argument("--baseline-binary", type=Path)
     parser.add_argument("--candidate-binary", type=Path, default=BINARY)
     parser.add_argument("--locality-key", default="scheduler_locality_ab")
@@ -223,6 +224,65 @@ def main() -> None:
         raise SystemExit("pass --write to record a fresh noncanonical benchmark")
     if not BINARY.exists():
         raise SystemExit("build target/release/bench_kernels first")
+
+    if args.ceph_rust_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --ceph-rust-only")
+        value = json.loads(OUTPUT.read_text())
+        comparison = value["application_formulation_specific_comparisons"]
+        ceph = comparison["measurements"]["ceph_recursive_xor"]
+        variant = "application:ceph-zdd:rust:8:2"
+        rust = run_group((variant,), 1, args.ab_rounds)[variant]
+        if rust["checksum_per_solve"] != ceph["baseline"]["checksum_per_solve"]:
+            raise RuntimeError("Ceph Graphillion/Rust checksum mismatch")
+        ceph["rust"] = rust
+        ceph["rust_speedup"] = ratio(
+            ceph["baseline"]["median_ns_per_solve"], rust["median_ns_per_solve"]
+        )
+        ceph["rounds"]["rust"] = args.ab_rounds
+        comparison["artifacts"]["bench_kernels_binary_sha256"] = sha256(BINARY)
+        comparison["artifacts"]["bench_kernels_source_sha256"] = sha256(
+            ROOT / "src/bin/bench_kernels.rs"
+        )
+        comparison["artifacts"]["run_benchmarks_sha256"] = sha256(
+            Path(__file__).resolve()
+        )
+
+        profiles = {}
+        for depth, repetitions in ((10, 10), (30, 10), (80, 5)):
+            variants = [
+                f"application:ceph-reliability:rust:{depth}:2",
+                f"application:ceph-aggregate:rust:{depth}:2:2",
+            ]
+            if depth < 64:
+                variants.insert(0, f"application:ceph-zdd:rust:{depth}:2")
+            measurements = run_group(tuple(variants), repetitions, args.ab_rounds)
+            profiles[f"depth-{depth}"] = {
+                "depth": depth,
+                "represented_supports": str(1 << depth),
+                "measurements": measurements,
+            }
+        explicit_variant = "application:ceph:rust:10:2"
+        profiles["depth-10"]["original_explicit"] = run_group(
+            (explicit_variant,), 1, args.rounds
+        )[explicit_variant]
+        value["ceph_compressed_family_consumers"] = {
+            "protocol": {
+                "common": "pinned-core deterministic end-to-end Rust runs; compressed family rebuilt for every solve",
+                "scope": "Rust-only update; recorded competitor samples are unchanged",
+                "reliability": "exact success counts by available-helper cardinality",
+                "aggregate": "Pareto-minimal two-domain load frontier, two-demand exact schedule, and representative supports",
+            },
+            "rounds": {"compressed": args.ab_rounds, "original_explicit": args.rounds},
+            "profiles": profiles,
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
 
     if args.application_sota_only:
         if not OUTPUT.exists():
