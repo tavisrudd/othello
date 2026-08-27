@@ -1,4 +1,4 @@
-\section{Scalar invariants and generic blindness}\label{sec:invariants}
+\section{Limits of fixed-copy scalar invariants}\label{sec:invariants}
 
 The operator-valued marginal mechanism retains local Weyl axes.  Fixed-copy
 scalar contractions retain less: on algebraic families they are generically
@@ -20,16 +20,14 @@ Counting its solutions gives the normalized contraction
    =q^{dr-\rank M_{\boldsymbol\sigma}(G)}.
 \end{equation}
 
-\begin{proposition}[Generic constancy]\label{thm:fixed-copy-boundary}
+\begin{proposition}[Generic constancy of fixed-copy invariants]\label{thm:fixed-copy-boundary}
 Fix \(r\) and a field \(k\) of cardinality \(q\), which is also the local
 Hilbert-space dimension under the code--state dictionary.  Fix an
 irreducible reduced parameter variety \(X\) over \(k\), and a regular
 generator-matrix chart \(G(x)\) of constant code dimension.  Every
 degree-\((r,r)\) permutation contraction of the associated equal-phase
 states has one value at every \(k\)-point of some dense open subscheme
-\(U\subseteq X\) defined over \(k\).  This asserts no existence of
-\(k\)-points in \(U\): if \(U(k)=\varnothing\), the finite-field
-pointwise conclusion is vacuous.  The same holds for party-orbit sums and
+\(U\subseteq X\) defined over \(k\).  The same holds for party-orbit sums and
 linear combinations.  After evaluating the states as vectors in
 \((\mathbb C^q)^{\otimes n}\), in the stable range \(q\geq r\), every
 scalar LU-invariant of bidegree \((r,r)\) is generically constant in this
@@ -43,9 +41,7 @@ matrix whose entries are regular functions over \(k\).  A maximal nonzero
 minor shows that this rank is constant on a dense open subscheme defined
 over \(k\).  There are only finitely many diagrams at fixed \(r\), so
 their generic-rank opens have a common dense intersection because \(X\)
-is irreducible.  This proves the geometric generic-rank assertion; the
-explicit caveat in the statement is necessary when passing to finite-field
-rational points.  Over the complex vector space
+is irreducible.  This proves the geometric generic-rank assertion.  Over the complex vector space
 \((\mathbb C^q)^{\otimes n}\), applied pointwise to each code state, the
 first fundamental theorem for unitary invariants says that local
 copy-permutation diagrams span the bidegree-\((r,r)\) invariants; when the
@@ -54,10 +50,17 @@ additional dimension relations among these diagrams
 \cite[Section~2]{CollinsSniady2006}.
 \end{proof}
 
+\begin{remark}[Finite-field points]
+The dense open subscheme \(U\) need not contain a \(k\)-rational point.  If
+\(U(k)=\varnothing\), the corresponding pointwise statement over the finite
+field is vacuous; the geometric generic-rank statement remains valid.
+\end{remark}
+
 Thus no fixed copy number can recover a nonconstant pencil coordinate on
 the generic locus.  A scalar witness can still detect a special
 rank-jump stratum, as the four-copy example in
 Appendix~\ref{sec:scalar-certificates} does.  In contrast, the four-party
 reduced-operator family \eqref{eq:css-reduced-state} retains the Weyl axes,
 and the imported rigidity theorem forces Cliffordness.  This is the precise
-distinction between scalar blindness and marginal covariant rigidity.
+distinction between generic constancy of scalar invariants and the
+operator-valued marginal information used by the rigidity theorem.

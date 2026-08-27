@@ -17,11 +17,11 @@ Clifford when conjugation permutes their projective axes
 After choosing dual \(\F_p\)-bases of \(\F_q\), this Weyl system is the
 Pauli system of \(e\) \(p\)-level factors.  Its projective Clifford
 normalizer has the standard exact sequence
-\[
+\begin{equation}\label{eq:projective-clifford-sequence}
  1\longrightarrow \F_p^{2e}\longrightarrow
  \operatorname{PCliff}(q)\longrightarrow
- \operatorname{Sp}_{2e}(\F_p)\longrightarrow1,          \tag{2.0}
-\]
+ \operatorname{Sp}_{2e}(\F_p)\longrightarrow1.
+\end{equation}
 including \(p=2\): the kernel is the projective Pauli group, and every
 trace-symplectic \(\F_p\)-linear label map has a Clifford lift
 \cite{DehaeneDeMoor2003,HostensDehaeneDeMoor2005}.
@@ -35,24 +35,26 @@ prime-power stabilizer correspondence
 For each \(\ell\in L\), write the stabilizer lift as
 \(\widetilde W_\ell=\alpha_\ell W_\ell\), where
 \(\alpha_\ell\ne0\).  Then
-\[
+\begin{equation}\label{eq:stabilizer-projector}
  \lvert\psi\rangle\langle\psi\rvert
-   =q^{-n}\sum_{\ell\in L}\widetilde W_\ell .           \tag{2.1}
-\]
+   =q^{-n}\sum_{\ell\in L}\widetilde W_\ell .
+\end{equation}
 If \(A\) is a party set, put
 \[
  L(A)=\{\ell\in L:\supp(\ell)\subseteq A\}.
 \]
 Weyl orthogonality and partial trace give
-\[
- \rho^\psi_A=q^{-|A|}\sum_{\ell\in L(A)}\widetilde W_\ell .  \tag{2.2}
-\]
+\begin{equation}\label{eq:reduced-stabilizer-state}
+ \rho^\psi_A=q^{-|A|}\sum_{\ell\in L(A)}\widetilde W_\ell .
+\end{equation}
 In particular, \(\rho^\psi_A\) is maximally mixed exactly when
 \(L(A)=\{0\}\).  Thus a stabilizer state on \(2m\) parties is AME exactly
 when it has no nonidentity stabilizer label supported on at most \(m\)
 parties.
 
-The rigidity and atlas theorems use only \((2.0)\)--\((2.2)\).  For the
+The rigidity and minimum-support transition theorems use only
+\eqref{eq:projective-clifford-sequence}--\eqref{eq:reduced-stabilizer-state}.
+For the
 geometric classification and explicit six-party applications, we now
 specialize to the MDS--CSS model.
 
@@ -131,7 +133,7 @@ For a party set \(S\), let
 \]
 The general stabilizer partial-trace formula specializes to
 \begin{equation}\label{eq:css-reduced-state}
- \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .        \tag{2.3}
+ \rho^C_S=q^{-|S|}\sum_{\ell\in L_C(S)}W_\ell .
 \end{equation}
 For later block calculations, write
 \[

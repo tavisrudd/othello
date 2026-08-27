@@ -986,16 +986,16 @@ maximal-secant family from the high-character lines.
 **Standout result.** A zero-or-one-dimensional nullity test determines which
 projective transversal logical group an odd-prime MDS–CSS code supports.
 
-> *Abstract* Let C be a linear [2m,m,m+1]q maximum-distance-separable code. The space of diagonal multipliers carrying C to C⊥ has dimension zero or one, and every nonzero multiplier has full support and is unique up to scalar. Over an odd prime field this nullity test determines the exact fixed-party projective transversal logical group of the associated [[2m−1,1,m]]q MDS–CSS code: it is Fq² ⋊ SL₂(q) in the diagonally isodual case and Fq² ⋊ T otherwise, where T is the split torus. Rigidity of stabilizer absolutely maximally entangled states supplies the converse: every tensor-product logical implementation is Clifford factor by factor. The linear SL₂(q) action has coherent Weil lifts, while the full affine group retains the Heisenberg obstruction to a scalar splitting.
+> *Abstract* Transversal gates implement encoded operations by tensor products of single-qudit unitaries. We determine the exact projective transversal logical group for the quantum MDS–CSS codes associated with linear [2m,m,m+1]q maximum-distance-separable codes over odd prime fields, allowing the one-qudit gate to depend on the coordinate. The classification reduces to the diagonal multiplier space D(C,C⊥) = {s ∈ Fq²ᵐ : diag(s)C ⊆ C⊥}. The MDS property forces this space to have dimension zero or one. The exact logical group is Fq² ⋊ T in the zero-dimensional case and Fq² ⋊ SL₂(q) in the one-dimensional case, where T is the split torus. Thus a linear-algebraic nullity test on the classical code determines all transversal logical unitaries. The construction is explicit, and an imported rigidity theorem for stabilizer absolutely maximally entangled states excludes non-Clifford product implementations.
 >
-> For six coordinates, diagonal isoduality is exactly self-association of the corresponding six-arc and hence the conic boundary. On an explicit non-GRS pencil a degree-eight quotient z classifies projective and monomial-code equivalence over odd fields and local-Clifford and local-unitary equivalence over odd prime fields. The Clebsch [6,3,4]₁₁ code gives a worked syndrome-geometric application. Fixed-copy scalar contractions are generically constant on the pencil, explaining why the operator-valued Weyl atlas retains classification data that bounded scalar invariants lose. Exact certificate replays cover the finite six-point computations; the all-length multiplier and group theorems are conceptual.
+> For length six, the nonzero-multiplier condition is equivalent to the six projective points lying on a conic. We also classify an explicit non-GRS one-parameter family by a degree-eight invariant and analyze the Clebsch [6,3,4]₁₁ code as an example. These six-point results and their exact certificate checks are applications of the all-length classification, not premises of it.
 >
 **Delivers.** A classification of the diagonal rescalings that make a code
 match its dual, together with the logical operations that can then be performed
 independently across its physical locations.
 
-**Who cares.** Quantum coding theorists, finite geometers, and researchers
-studying transversal gates and logical symmetries.
+**Who cares.** Quantum-information and quantum-coding specialists studying
+stabilizer codes, transversal gates, and logical symmetries.
 
 **Why it matters.** Transversal operations are valuable because they act
 independently on separate physical systems.  The result identifies exactly

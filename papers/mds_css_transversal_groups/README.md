@@ -9,8 +9,8 @@ of MDS--CSS Codes* and its paper-local verification package.
 
 For an odd-prime linear `[2m,m,m+1]_q` MDS code, the paper proves that the
 space of diagonal code-to-dual multipliers has nullity zero or one and that
-this nullity selects the exact fixed-party projective transversal logical
-group: `F_q^2 ⋊ SL_2(q)` on the diagonally isodual branch and `F_q^2 ⋊ T`
+this nullity selects the exact fixed-coordinate, site-dependent projective
+transversal logical group: `F_q^2 ⋊ SL_2(q)` on the diagonally isodual branch and `F_q^2 ⋊ T`
 otherwise.  Stabilizer-AME rigidity supplies the converse: every
 tensor-product logical implementation is Clifford factor by factor.  The
 linear `SL_2(q)` action has coherent Weil lifts, while its affine extension

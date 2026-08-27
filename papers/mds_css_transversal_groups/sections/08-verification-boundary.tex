@@ -1,64 +1,68 @@
 \section{Verification and scope}\label{sec:verification}
 
-The all-length multiplier-line theorem and the exact transversal-group
-dichotomy are proved in the text.  They use no finite census.  The imported
-stabilizer-AME rigidity and phase-correction results are proved in the
-companion paper \cite{RuddAMEStabilizerRigidity2026}; they are not counted as
-independent results of this paper.
+The all-length multiplier theorem and transversal-group dichotomy are proved
+in the text and use no finite enumeration.  The only imported ingredients in
+the group classification are the stabilizer-AME rigidity and
+stabilizer-character correction stated in the introduction
+\cite{RuddAMEStabilizerRigidity2026}.
 
-The six-point applications have a separate exact-arithmetic evidence layer.
-The paper-local supplement contains the generators, compact JSON
-certificates, and a deterministic standard-library verifier for the pencil
-quotient, holonomy reconstruction, Clebsch and \(H_3\) marginal calculations,
-the four-copy separator at \(q=13\), transport divisor, and twelve
-party-extension rows.  The command
+\begin{table}[p]
+\centering
+\small
+\begin{tabular}{@{}L{.20\textwidth}L{.17\textwidth}L{.27\textwidth}L{.25\textwidth}@{}}
+\toprule
+Claim family & Status & Verification method & Imported or trusted input \\
+\midrule
+Multiplier nullity & proved here & MDS distance and a vanishing-coordinate argument & none \\
+Exact fixed-coordinate group & proved here & block preservation, explicit unipotents, and logical Paulis & imported product-unitary rigidity and phase correction \\
+Six-point conic criterion & proved here & MDS--CSS dictionary and Gale-transform argument & none \\
+Pencil quotient & proved here & symbolic bracket identities and exact transition-map enumeration & imported minimum-support transition theorem; certificate replay for the enumeration \\
+Frobenius-sector formulas & proved here & direct finite-field algebra & no complete extension-field orbit classification \\
+Clebsch application & consequence & syndrome lemma composed with the cited Clebsch deep-hole theorem & cited conic, count, and orbit result \\
+Scalar separators and transport divisor & appendix results & exact generators, JSON certificates, and independent replay & finite exact computation \\
+Coordinate-permutation extensions & twelve computed cases & exhaustive permutation checks and explicit complements & no general classification beyond the listed cases \\
+Formalization & partial & Lean kernel checking through the paper-specific gate & hypothesis-explicit interfaces and three native finite cardinality evaluations \\
+\bottomrule
+\end{tabular}
+\caption{Proof and verification status of the main claim families.  A
+hypothesis-explicit interface proves a conclusion from named mathematical or
+computational inputs; importing it does not prove those inputs.}
+\label{tab:verification-status}
+\end{table}
+
+The paper-local supplement contains the exact generators, compact JSON
+certificates, and a deterministic standard-library verifier for the six-point
+computations.  Running
 \begin{center}
 \texttt{python3 supplement/verify.py --replay}
 \end{center}
-checks the manifest hashes and regenerates every certificate in memory.  The
-supplement records each finite domain, termination condition, independent
-replay, and negative scope statement.  These computations support the
-displayed finite applications; they are not premises of
-Theorem~\ref{thm:diagonal-isodual-transversal-group}.
+checks the manifest and regenerates every certificate in memory.  The
+supplement records each finite domain, stopping condition, independent replay,
+and negative scope statement.
 
-The Lean development is written in Lean~4 with toolchain \texttt{v4.32.0-rc1}
-and a pinned Mathlib revision, in the shared source namespace
-\texttt{RelativeConicArcs.AMELU}.  It has two semantic roots: an import-only
-gate whose transitive closure is this paper's checked surface, and an audit
-module that imports only that gate and prints the axiom dependencies of every
-declaration cited here.
+The Lean~4 development uses toolchain \texttt{v4.32.0-rc1} with a pinned
+Mathlib revision.  Its paper-specific roots are
 \begin{center}
-gate: \texttt{RelativeConicArcs.Gates.MDSCSSTransversalGeometry}\\
-audit: \texttt{RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms}
+\texttt{RelativeConicArcs.Gates.MDSCSSTransversalGeometry}\
+\texttt{RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms}.
 \end{center}
-A content-addressed record of that closure, covering its modules, imports,
-terminal names, axiom facts, exporter digest, and toolchain identity,
-accompanies the Lean source, and the supplement's crosswalk names the
-declarations behind each group of statements below.
-
-Checking by kernel reduction, with no appeal to compiled evaluation, covers the
-MDS--CSS and stabilizer dictionaries, the diagonal-multiplier line and nullity
-test, the pencil quotient and the extension-field scalar algebra, syndrome
-geometry, the contraction and transport cycle algebra, and the abstract
-consequences of a supplied party-extension complement.  The exact carrier, the
-admitted-pencil classification, the marginal and four-copy separators, the
-fixed-party logical-phase kernel, and the transport determinant, rank, and
-orbit-geometry bridges are stated as interfaces.  Each derives its conclusion
-from a structure whose fields assert the geometric propagation,
-orbit-recognition, or finite-certificate facts that the text or the supplement
-establishes, so importing the gate proves none of those inputs.  Three
-six-party graph cardinalities are discharged by exhaustive native evaluation,
-which exposes declaration-local implementation axioms of the pinned toolchain;
-the rank-four multiplicity identity and the marginal-moment separator are
-proved from the star count and inherit its evaluation axiom.  Every other cited
-declaration depends on no more than propositional extensionality, choice, and
-quotient soundness.  The odd-field Weil lift, the Heisenberg nonsplitting
-argument, the complete translation fiber, and the twelve concrete complements
-retain the manuscript or certificate boundaries stated above.
+The first is the import-only gate for the checked surface; the second prints
+the axiom dependencies of every cited declaration.  Kernel reduction covers
+the MDS--CSS dictionary, multiplier nullity, pencil quotient,
+extension-field scalar formulas, syndrome geometry, contraction algebra,
+transport cycle algebra, and the abstract consequences of a supplied
+coordinate-permutation complement.  The exact group, finite classifications,
+separators, and transport geometry use interfaces whose input fields are
+proved in the text or supplied by the certificates.  Three graph
+cardinalities use exhaustive native evaluation; two marginal-moment results
+inherit the star-count evaluation axiom.  Apart from those local declarations,
+the cited formal results use only propositional extensionality, choice, and
+quotient soundness.
 
 The local-unitary classification by \(z\) is restricted to odd prime fields.
 Over extension fields, Frobenius is already an additional local Clifford and
 the full additive-Clifford orbit problem is not claimed.  The exact group
-theorem is fixed-party and transversal: it does not classify party-moving
-enlargements outside the twelve certificate-checked rows, non-product physical
-implementations, nonstabilizer AME states, or unrelated quantum-code families.
+theorem fixes the physical coordinates and assumes a product implementation.
+It does not classify arbitrary coordinate-permutation enlargements,
+non-product physical implementations, nonstabilizer AME states, or unrelated
+quantum-code families.

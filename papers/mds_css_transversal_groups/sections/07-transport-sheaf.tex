@@ -9,28 +9,31 @@ Let \(V\) be the three-dimensional message space and let
 \(g_i:V\to k\) be the six coordinate covectors.  Form a bipartite
 four-sheeted cover with vertices \(L_a,R_b\), \(0\leq a,b<4\), and a
 color-\(i\) edge from \(L_a\) to \(R_{\sigma_i(a)}\).  Put \(V\) at each
-vertex and \(k\) at each edge, using \(g_{p(i)}\) as both restriction
-maps for a party assignment \(p\in S_6\).  A global section is a tuple
+vertex and \(k\) at each edge, using \(g_{\eta(i)}\) as both restriction
+maps for a coordinate assignment \(\eta\in S_6\).  This is a transport
+system: each edge equation requires the vertex data at its two ends to agree
+after applying the corresponding coordinate functional.  A solution is a tuple
 \((x_a,y_b)\in V^8\) satisfying
 \begin{equation}\label{eq:transport-section}
- g_{p(i)}(x_a-y_{\sigma_i(a)})=0 .
+ g_{\eta(i)}(x_a-y_{\sigma_i(a)})=0 .
 \end{equation}
 on all \(24\) edges.  The three-dimensional constant-section space is
 always present.  Gauging it away leaves the \(24\)-by-\(21\) matching
 matrix in \eqref{eq:permutation-contraction}.
 
 Let \(U=k^4/k(1,1,1,1)\), and let \(\rho_i\) be the action of
-\(\sigma_i\) on \(U\).  For each \(p\), the MDS property makes
-\(g_{p(3)},g_{p(4)},g_{p(5)}\) a basis of \(V^*\).  Define \(Q_p\) by
+\(\sigma_i\) on \(U\).  For each \(\eta\), the MDS property makes
+\(g_{\eta(3)},g_{\eta(4)},g_{\eta(5)}\) a basis of \(V^*\).  Define
+\(Q_\eta\) by
 \begin{equation}\label{eq:transport-systematic}
- g_{p(i)}=\sum_{k=0}^2(Q_p)_{ik}g_{p(3+k)}
+ g_{\eta(i)}=\sum_{k=0}^2(Q_\eta)_{ik}g_{\eta(3+k)}
  \qquad(0\leq i<3).
 \end{equation}
-Thus \(Q_p\) is the left block obtained by systematizing the
+Thus \(Q_\eta\) is the left block obtained by systematizing the
 party-reordered generator matrix on its last three columns; no pivot can
 vanish because every three coordinate covectors are independent.  Put
-\(\widetilde Q_p=2(t-1)Q_p\).  This scalar is a unit on the admitted
-locus.  For the identity assignment, the polynomial representative is
+\(\widetilde Q_\eta=2(t-1)Q_\eta\).  This scalar is a unit on the regular
+non-GRS locus.  For the identity assignment, the polynomial representative is
 \[
 \widetilde Q_1=\begin{pmatrix}a&b&c\\a&c&b\\d&d&d\end{pmatrix},
 \quad
@@ -43,24 +46,24 @@ If \(Y_k\in U\) are the three free copy vectors, then
 \eqref{eq:transport-section} reduces
 to the \(9\)-by-\(9\) block transport operator
 \begin{equation}\label{eq:transport-operator}
- \widetilde T_p
- =\bigl((\widetilde Q_p)_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.
+ \widetilde T_\eta
+ =\bigl((\widetilde Q_\eta)_{ik}(\rho_i-\rho_{3+k})\bigr)_{i,k=0}^2.
 \end{equation}
 The dimension identity
 \begin{equation}\label{eq:transport-rank-bridge}
  21-\rank M_{\pi\boldsymbol\sigma}(G(t))
-   =9-\rank\widetilde T_p
+   =9-\rank\widetilde T_\eta
 \end{equation}
-holds over the field \(k\), where \(p=\pi\) in the convention of
+holds over the field \(k\), where \(\eta=\pi\) in the convention of
 Section~\ref{sec:invariants}.  It follows by quotienting the
 three-dimensional constant-section kernel and then eliminating the three
 free systematic coordinates.  Multiplying the resulting operator by
 the unit \(2(t-1)\) does not change its rank.  All steps are invertible
-on the admitted six-arc locus.
+on the regular non-GRS six-arc locus.
 
-\begin{theorem}[Transport divisor]\label{thm:transport-divisor}
-For a parameter on the admitted odd non-GRS pencil, there exists a party
-assignment \(p\in S_6\) for which the sheaf
+\begin{theorem}[Transport rank-drop locus]\label{thm:transport-divisor}
+For a parameter on the regular odd non-GRS pencil, there exists a coordinate
+assignment \(\eta\in S_6\) for which the transport system
 \eqref{eq:transport-section} has a nonconstant
 section if and only if
 \[
@@ -70,7 +73,7 @@ or equivalently
 \begin{equation}\label{eq:transport-divisor}
  (z-2)(9z-4)=0.
 \end{equation}
-At a generic point above \(z=2\), exactly \(96\) party assignments have
+At a generic point above \(z=2\), exactly \(96\) coordinate assignments have
 rank \(20\); at a generic point above \(z=4/9\), exactly \(192\) do.
 Every other assignment has rank \(21\).
 \end{theorem}
@@ -81,10 +84,10 @@ For the identity systematic chart, the coefficients satisfy
  a=b+c,\qquad d^2=-2a,\qquad A=a(c-b),\qquad B=bc.
 \]
 Common copy relabelling, a change of basis in \(V\), and rescaling a
-coordinate covector act on \(\widetilde T_p\) by invertible row and column
-operations.  Modulo these operations, the \(720\) party assignments
-split into boundary types and three nonboundary relative-cover types.
-Here the type records the six relative copy permutations
+coordinate covector act on \(\widetilde T_\eta\) by invertible row and column
+operations.  Modulo these operations, the \(720\) coordinate assignments
+split into cases with an immediately invertible boundary block and three
+nonboundary cases determined by the six relative copy permutations
 \(\rho_j^{-1}\rho_i\), equivalently the even-cycle pattern in each pair
 of colored matchings.  Expanding a representative determinant by signed
 cycle covers gives
@@ -101,7 +104,7 @@ With integral bases the determinants are respectively
 64d^3AB(3B+2A),\quad
 64d^3A(B^2-2A^2).
 \]
-All omitted factors are units on the admitted odd pencil.  Every
+All omitted factors are units on the regular odd non-GRS pencil.  Every
 assignment outside these three types has a determinant that is a unit
 there.  The signed cycle-cover ledger, the exhaustion of the \(720\)
 assignments, and a fraction-free determinant path are recorded in the
@@ -141,7 +144,7 @@ Theorem~\ref{thm:lu-lc-rigidity}.  The identity
 7&9B^2-4A^2=2(B^2-2A^2).
 \end{array}
 \]
-Thus in characteristic \(3\) both admitted components disappear; in
+Thus in characteristic \(3\) both regular components disappear; in
 characteristic \(5\) the \(z=4/9\) component lies on the excluded GRS
 boundary; and in characteristic \(7\) the two components merge.  The
 disjoint \(96\)- and \(192\)-element supports then give the exact rank

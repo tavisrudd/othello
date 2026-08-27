@@ -1,14 +1,14 @@
-\section{Computed party-permutation extensions}
+\section{Computed coordinate-permutation extensions}
 \label{sec:party-extensions}
 
 This optional appendix records the splitting obstruction for the projective
-party-permutation extension, together with finite examples.  It may be
-skipped without affecting the fixed-party transversal-group theorem.
+coordinate-permutation extension, together with finite examples.  It may be
+skipped without affecting the fixed-coordinate transversal-group theorem.
 
 \subsection*{The nonabelian factor set}
 
-Let \(\Gamma\) be the fixed-party projective product-unitary symmetry group,
-\(\widetilde\Gamma\) allows party motion, and \(\Pi\) is the realized
+Let \(\Gamma\) be the fixed-coordinate projective product-unitary symmetry group,
+\(\widetilde\Gamma\) allows coordinate permutations, and \(\Pi\) is the realized
 permutation group, so that
 \(1\to\Gamma\to\widetilde\Gamma\to\Pi\to1\) is exact.
 
@@ -44,7 +44,7 @@ That criterion is what the computed rows below verify.
 
 \subsection*{Computed rows}
 
-\begin{corollary}[Computed party-extension splittings]
+\begin{corollary}[Computed coordinate-permutation splittings]
 \label{cor:computed-party-splitting}
 The realized projective party-permutation extension splits for both
 non-GRS \(q=11\) pencil classes, the \(q=11\) GRS evaluation-set
@@ -56,20 +56,23 @@ representatives
 the enhanced-symmetry \(t=-1\) rows over \(\F_{17}\) and \(\F_{31}\),
 and the \(H_3\) representatives
 \((q,\tau)=(11,4),(19,5),(29,6),(31,13)\).
-For every listed non-GRS or \(H_3\) row, party parity acts on the fixed
-split torus \(T\) by inversion.  Thus, after choosing an anchor leg and
-allowing party motion to transport the corresponding encoder view, a
-realized odd party permutation enlarges the possible local linear
-carrier exactly from \(T\) to
+For every listed non-GRS or \(H_3\) row, permutation parity acts on the fixed
+split torus \(T\) by inversion.  Thus, after choosing an input coordinate and
+allowing coordinate permutations to compare the corresponding encoder views,
+a realized odd permutation enlarges the possible input symplectic blocks from
+\(T\) to
 \[
  N(T)=\langle T,J\rangle,\qquad
  J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
  J^2=-I,\qquad J\diag(a,a^{-1})J^{-1}=\diag(a^{-1},a).
 \]
-Hence \(N(T)/T\cong C_2\).  The linear extension does not split in odd
-characteristic, although its projectivization does.  If the party
-permutation fixes the input leg of a chosen encoder, this carrier acts
-as an actual logical enlargement; otherwise it compares two encoder
+Hence \(N(T)/T\cong C_2\).  More precisely, the extension
+\(1\to T\to N(T)\to C_2\to1\) inside \(\mathrm{SL}_2(q)\) does not split in
+odd characteristic because every representative of the nontrivial coset has
+square \(-I\); after quotienting by scalar matrices, the corresponding
+projective extension splits.  If the coordinate permutation fixes the input
+of a chosen encoder, these blocks act as an actual logical enlargement;
+otherwise the permutation compares two encoder
 views of the same six-leg tensor.
 \end{corollary}
 
@@ -77,16 +80,16 @@ views of the same six-leg tensor.
 For each row, an exact finite computation reconstructs the fifteen
 four-support shortened planes, exhausts all \(720\) party permutations,
 and checks the propagated local symplectic blocks against the full CSS
-Lagrangian.  After quotienting by the fixed-party group identified in
-Theorem~\ref{thm:logical-phase}, it is enough to test anchor block \(I\)
-on the GRS locus and anchor blocks \(I,J\) off it; this discards no
+Lagrangian.  After quotienting by the fixed-coordinate group identified in
+Theorem~\ref{thm:logical-phase}, it is enough to test input block \(I\)
+on the GRS locus and input blocks \(I,J\) off it; this discards no
 candidate.  In the order in which the six \(q=11\) rows are listed above,
-their party images are
+their permutation images are
 \[
  S_5,\quad S_4,\quad V_4,\quad C_5,\quad S_3,\quad D_{12},
 \]
 where \(D_{12}\) has order \(12\).  The \(q=17\) and \(q=31\)
-enhanced rows have party images \(S_4\) and \(S_5\), respectively, and
+enhanced rows have permutation images \(S_4\) and \(S_5\), respectively, and
 each listed \(H_3\) image is \(S_5\).
 
 The certificate records the complete normalized factor set for each
@@ -96,24 +99,52 @@ normalized cochain changes the factor set to the identity.  Hence every
 listed extension splits.  Conjugating the fixed torus by the stored lifts
 gives the sign action; any odd lift therefore induces the nontrivial
 class of \(N(T)/T\).  The complement is an involution in the projective
-party-extension group; its determinant-one anchor block is \(J\), whose
+coordinate-permutation extension group; its determinant-one input block is \(J\), whose
 square is \(-I\).
 \end{proof}
 
-At \(q=11\), the \(t=2,z=1\) Clebsch/\(H_3\) class has party image
-\(S_5\), while the \(t=10,z=9\) non-GRS class has party image \(S_4\).
-Both extensions split, and odd party motion inverts \(T\).
-After choosing an anchor leg, the possible one-qudit affine carriers
-across transported encoder views therefore form
-\(\F_q^2\rtimes N(T)\).  This is the logical group of a fixed encoder
-only for the subgroup fixing its input leg; general party motion compares
-different encoder views.  The GRS fixed-party logical group and this
-anchored non-GRS carrier have orders \(159720\) and \(2420\), respectively.
+\begin{table}[htbp]
+\centering
+\scriptsize
+\begin{tabular}{@{}L{.25\textwidth}cL{.20\textwidth}cL{.16\textwidth}@{}}
+\toprule
+Field and representative & GRS & Fixed-coordinate group & Permutation image & Extension \\
+\midrule
+\(q=11,\ t=2,\ z=1\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
+\(q=11,\ t=10,\ z=9\) & no & \(\F_q^2\rtimes T\) & \(S_4\) & splits; \(T\to N(T)\) \\
+\(q=11,\{0,1,2,3,4,5\}\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(V_4\) & splits \\
+\(q=11,\{0,1,2,3,4,6\}\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(C_5\) & splits \\
+\(q=11,\{0,1,2,3,5,6\}\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(S_3\) & splits \\
+\(q=11,\{0,1,2,3,5,9\}\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(D_{12}\) & splits \\
+\(q=17,\ t=-1\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(S_4\) & splits \\
+\(q=31,\ t=-1\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
+\(H_3:(q,\tau)=(11,4)\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
+\(H_3:(q,\tau)=(19,5)\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
+\(H_3:(q,\tau)=(29,6)\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
+\(H_3:(q,\tau)=(31,13)\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
+\bottomrule
+\end{tabular}
+\caption{The twelve certificate-checked coordinate-permutation extensions.
+Here \(D_{12}\) has order \(12\), and \(T\to N(T)\) means that odd
+coordinate permutations supply the nontrivial coset of \(N(T)/T\) when
+encoder views are compared at a chosen input coordinate.}
+\label{tab:party-extension-census}
+\end{table}
 
-Arithmetic symmetry jumps do not change the logical phase.  The
-characteristic-\(17\) tetrahedral specialization lies on the GRS boundary
-and retains the full \(\mathrm{SL}_2(17)\) fixed-party image; its party
+At \(q=11\), the \(t=2,z=1\) Clebsch/\(H_3\) class has permutation image
+\(S_5\), while the \(t=10,z=9\) non-GRS class has permutation image \(S_4\).
+Both extensions split, and odd coordinate permutations invert \(T\).
+After choosing an input coordinate, the possible one-qudit projective groups
+across the resulting encoder views therefore form
+\(\F_q^2\rtimes N(T)\).  This is the logical group of a fixed encoder
+only for the subgroup fixing its input; a general coordinate permutation
+compares different encoder views.  The GRS fixed-coordinate logical group and
+this non-GRS group have orders \(159720\) and \(2420\), respectively.
+
+Arithmetic symmetry jumps do not change which branch of the group theorem
+applies.  The characteristic-\(17\) tetrahedral specialization lies on the GRS
+locus and retains the full \(\mathrm{SL}_2(17)\) fixed-coordinate image; its permutation
 image is \(S_4\), and the computed extension splits.  The
 characteristic-\(31\) \(A_5\) specialization is non-GRS, so its
-fixed-party image is the split torus; its \(S_5\) party image also splits,
-and odd motion enlarges the transported anchor-block carrier to \(N(T)\).
+fixed-coordinate image is the split torus; its \(S_5\) permutation image also
+splits, and odd permutations enlarge the possible input blocks to \(N(T)\).

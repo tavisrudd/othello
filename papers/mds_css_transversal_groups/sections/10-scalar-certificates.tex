@@ -1,9 +1,9 @@
 \section{Explicit scalar certificates}\label{sec:scalar-certificates}
 
 This appendix records two explicit scalar LU separators.  They are not
-used in the uniform rigidity, atlas, or logical-group results; they show
-what finite-copy scalar contractions can still detect on exceptional
-strata despite the generic blindness proved in
+used in the rigidity or logical-group results; they show what finite-copy
+scalar contractions can still detect on exceptional strata despite the
+generic-constancy result in
 Section~\ref{sec:invariants}.
 
 \subsection{A marginal-moment separator}
@@ -66,12 +66,14 @@ matchings are exactly the fixed-point-free involutions in
 \]
 The correspondence is injective because an element of
 \(\mathrm{PGL}_2(k)\) is determined by its action on three points.
-Moreover, \(H\) acts freely on ordered triples of distinct points of
+The group \(H\) acts freely on ordered triples of distinct points of
 \(S\), so \(\lvert H\rvert\mid6\cdot5\cdot4=120\).
 
 Dickson's classification, including the \(p\)-regular cases
 \cite[\S\S239--261]{Dickson1901}, and Faber's \(p\)-irregular
-classification \cite[Theorem~1.1]{Faber2023} now leave the following
+classification \cite[Theorem~1.1]{Faber2023} are used only to obtain a
+uniform upper bound of six; no classification of the six-sets is needed.
+They leave the following
 possibilities.  The last column bounds involutions having no fixed point
 on this six-set:
 \[
@@ -156,12 +158,12 @@ Use the permutation contraction
 
 \begin{theorem}[Exact four-copy separator at \(q=13\)]
 \label{thm:q13-lu}
-The two admitted \(q=13\) pencil classes with \(z=4\) and \(z=12\) are
+The two regular \(q=13\) pencil classes with \(z=4\) and \(z=12\) are
 not local-unitary equivalent, even after arbitrary party permutation.
 \end{theorem}
 
 \begin{proof}
-At \(q=13\), the admitted pencil has two classes in the same complete
+At \(q=13\), the regular non-GRS pencil has two classes in the same complete
 three-copy and marginal-moment bucket, with \(z=4\) and \(z=12\).
 Use the explicit four-copy pattern
 \[
@@ -189,11 +191,8 @@ three-copy contraction sets do not separate this pair;
 claim that four copies are globally minimal.
 \end{proof}
 
-Over \(\mathbb Q(t)\), the matching matrices of every fixed four-copy
-diagram have generically constant rank.  Consequently, after finite-field
-specialization on the common generic-rank open, their contraction values
-are constant and do not recover \(z\) generically.  The witness
-\eqref{eq:q13-values} detects a rank-jump stratum.  In contrast, the four-party
-reduced-operator family \eqref{eq:css-reduced-state} retains the Weyl axes,
-and the imported rigidity theorem forces Cliffordness.  This is the precise
-distinction between scalar blindness and marginal covariant rigidity.
+Over \(\mathbb Q(t)\), every fixed four-copy matching matrix has generically
+constant rank, so \eqref{eq:q13-values} detects a rank-jump stratum rather
+than a generic orbit coordinate.  Section~\ref{sec:invariants} gives the
+general distinction between these scalar contractions and the
+operator-valued reduced states used in the rigidity theorem.

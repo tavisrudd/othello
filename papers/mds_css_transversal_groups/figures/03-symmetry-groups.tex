@@ -17,18 +17,18 @@
   \draw[->] (nullity) -- node[above right,note] {unique projective\\witness $[s]$} (sl);
 
   \node[box] (nt) at (-3.4,-2.0)
-    {$\F_q^2\rtimes N(T)$\\transported anchor};
+    {$\F_q^2\rtimes N(T)$\\input blocks across encoder views};
   \draw[->,dashed] (torus) -- node[right,note]
-    {realized odd\\party motion} (nt);
+    {realized odd\\coordinate permutation} (nt);
 
   \node[note] at (3.4,-1.7)
     {the linear $\mathrm{SL}_2(q)$ factor has a Weil lift;\\
      the affine translation factor has a Heisenberg obstruction};
 \end{tikzpicture}
 \caption{The nullity of the diagonal multiplier space selects the exact
-fixed-party projective transversal group.  Party motion is a separate
-extension problem: in the computed non-GRS rows, an odd permutation enlarges
-the transported anchor carrier from $T$ to $N(T)$, but it need not fix the
-chosen encoder input.}
+fixed-coordinate projective transversal group.  Coordinate permutations form
+a separate extension problem: in the computed non-GRS rows, an odd
+permutation enlarges the possible input blocks from $T$ to $N(T)$ across
+encoder views, but it need not fix the chosen encoder input.}
 \label{fig:symmetry-groups}
 \end{figure}
