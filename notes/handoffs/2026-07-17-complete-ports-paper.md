@@ -11,12 +11,12 @@ VERIFIER AND C953 AGGREGATE REVIEW FOLLOW;
 C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
-**Canonical paper identity**: `complete-ports` — *Exact Transfer of Bounded Linear Recovery and
-Relative Weight Hierarchies*
+**Canonical paper identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
+Recovery*
 **Standalone paper repository**: `tavisrudd/complete-repair-ports` at
-`~/src/math-papers/complete-repair-ports`
-**Current local standalone commit**: `84e2175` (C961 repeated-concatenation
-composition and sharp cost envelopes; verified; no push or deposit)
+`~/src/math-papers/compositional-recovery`
+**Current local standalone commit**: `6466849` (subtitle-free title and current exported manuscript;
+verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
