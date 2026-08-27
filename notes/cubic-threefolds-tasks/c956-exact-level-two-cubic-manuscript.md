@@ -85,8 +85,8 @@ the mathematical narrative.
 
 ## Remaining work
 
-Manuscript authority commit `b0241f344`, portfolio authority commit
-`d93878af3`, standalone paper commit `c50aa13`, and standalone portfolio commit
+Manuscript authority commit `8dc83709b`, portfolio authority commit
+`d93878af3`, standalone paper commit `621b355`, and standalone portfolio commit
 `13b3ea1` are synchronized.  The paper release gates and export manifest pass,
 all eleven PDF pages have been reviewed, and the PDFs are byte-identical.
 Independent reviews in algebraic geometry, quotient/descent/computation,

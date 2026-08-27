@@ -46,8 +46,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   explains descent before use, and moves the exact witness machinery behind
   the conceptual geometry.  The eleven-page authority and standalone PDFs
   are byte-identical, and both gates pass.  The manuscript and portfolio are
-  synchronized at authority commits `b0241f344` and `d93878af3`, standalone
-  paper commit `c50aa13`, and standalone portfolio commit `13b3ea1`.  The
+  synchronized at authority commits `8dc83709b` and `d93878af3`, standalone
+  paper commit `621b355`, and standalone portfolio commit `13b3ea1`.  The
   original AI disclosure is restored verbatim.  C956
   remains active by author instruction; do not push, deposit, or close without
   that instruction.  Report and live card:
