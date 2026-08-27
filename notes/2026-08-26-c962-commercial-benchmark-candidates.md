@@ -24,7 +24,8 @@ enough by itself.
 |    2 | Azure LRC multi-extent repair planning           | repair I/O, bandwidth, tail latency  | direct   | mixed                  |
 |    3 | RepairBoost-style full-node repair scheduling    | rebuild throughput under link limits | partial  | mixed                  |
 |    4 | QC-LDPC trapping/stopping-set design loops       | error floor and design turnaround    | research | mathematical           |
-|    5 | wide-stripe vector-code coefficient search       | low-overhead repair throughput       | research | mathematical           |
+|    5 | GPU-cluster checkpoint parity recovery           | training restart time and lost work  | direct   | mathematical           |
+|    6 | wide-stripe vector-code coefficient search       | low-overhead repair throughput       | research | mathematical           |
 
 ### 1. Recursive Ceph LRC
 
@@ -100,7 +101,27 @@ Primary sources:
 - 3GPP TS 38.212, *NR; Multiplexing and channel coding*:
   <https://portal.3gpp.org/desktopmodules/Specifications/SpecificationDetails.aspx?specificationId=3214>.
 
-### 5. Wide-stripe vector codes
+### 5. GPU-cluster checkpoint parity recovery
+
+REFT protects hybrid-parallel LLM checkpoints with dynamically selected
+in-memory mechanisms including asynchronous erasure coding. Its topology has
+exactly the heterogeneous resources relevant to recovery planning: device/host
+copies, intra-node redundancy, inter-node checkpoint protection, and DP/PP/TP
+sharding groups. It reports evaluation at 512 GPUs and shows in-memory loading
+substantially faster than NFS recovery.
+
+The ERGO-comp front end should compile the actual checkpoint generator matrix,
+price helper shards by PCIe, same-rack, and cross-rack transfer, and schedule all
+lost shards jointly. Hierarchical labelled composition applies when checkpoint
+protection follows the nested DP/PP/TP grouping. A generic MDS/AEC model is a
+valid capability demonstration, but a paper-specific benchmark requires the
+exact AEC parameters and placement from the source artifact.
+
+Primary source: Wang et al., *Fault-Tolerant Hybrid-Parallel Training at Scale
+with Reliable and Efficient In-memory Checkpointing*, arXiv:2310.12670v4:
+<https://arxiv.org/abs/2310.12670>.
+
+### 6. Wide-stripe vector codes
 
 Wide-stripe storage codes make coefficient-search and repair scheduling
 important at roughly hundred-chunk stripes. This is valuable but lies beyond
@@ -114,9 +135,10 @@ Primary source: WiseCode, USENIX OSDI 2026 technical-session description:
 
 ## Recommendation
 
-Implement the recursive Ceph LRC benchmark next. It is the only candidate that
-is simultaneously deployed-system-facing, already within the mathematical
-model, and capable of isolating the min--sum composition theorem with an
-equivalently preprocessed CP-SAT control. Keep the Jin--Fu Hamming-family row as
+Implement the recursive Ceph LRC benchmark first. It is deployed-system-facing,
+already within the mathematical model, and capable of isolating the min--sum
+composition theorem with an equivalently preprocessed CP-SAT control. Follow it
+with REFT-style GPU checkpoint recovery, whose commercial value and linear
+erasure-coding fit are unusually direct. Keep the Jin--Fu Hamming-family row as
 a mixed high-scale exact-solver result; do not use it as the main evidence that
 the mathematics wins.

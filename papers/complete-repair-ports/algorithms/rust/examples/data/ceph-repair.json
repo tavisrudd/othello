@@ -1,12 +1,7 @@
 {
   "kind": "ceph-xor",
   "coordinate_count": 8,
-  "layers": [
-    { "parity": 1, "data": [2, 3] },
-    { "parity": 5, "data": [6, 7] },
-    { "parity": 0, "data": [1, 2, 3] },
-    { "parity": 4, "data": [5, 6, 7] }
-  ],
+  "patterns": ["_cDD_cDD", "cDDD____", "____cDDD"],
   "target": 2,
   "unavailable": [2],
   "budget": 10000

@@ -3,10 +3,10 @@ use clap::{Parser, Subcommand};
 use ergo_comp::{
     azure_lrc_12_2_2_upgrade_domains, ceph_xor_repair_supports, compile_binary_rank_one,
     compile_binary_target_subspace, confinement_by_generators_field, gpu_checkpoint_mds_recovery,
-    minimum_node_span_repair, schedule_repair_dag, CephXorLayer, CoefficientWitness,
-    CompositionTable, CompositionTower, ConfinementSector, CostTable, FiniteField, Gf4, Matrix,
-    MatrixCoefficientWitness, Prime, QcLdpcCode, RepairTask, TowerLevel, TowerWitness,
-    WeightedRepairProblem, WeightedSchedulerBackend,
+    minimum_node_span_repair, parse_ceph_xor_layers, schedule_repair_dag, CephXorLayer,
+    CoefficientWitness, CompositionTable, CompositionTower, ConfinementSector, CostTable,
+    FiniteField, Gf4, Matrix, MatrixCoefficientWitness, Prime, QcLdpcCode, RepairTask, TowerLevel,
+    TowerWitness, WeightedRepairProblem, WeightedSchedulerBackend,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -245,7 +245,10 @@ struct TransferTowerInput {
 enum ApplicationInput {
     CephXor {
         coordinate_count: usize,
+        #[serde(default)]
         layers: Vec<CephLayerSpec>,
+        #[serde(default)]
+        patterns: Vec<String>,
         target: usize,
         unavailable: Vec<usize>,
         #[serde(default = "default_candidate_budget")]
@@ -1050,17 +1053,25 @@ fn application(input: ApplicationInput) -> Result<Value> {
         ApplicationInput::CephXor {
             coordinate_count,
             layers,
+            patterns,
             target,
             unavailable,
             budget,
         } => {
-            let layers: Vec<_> = layers
-                .into_iter()
-                .map(|layer| CephXorLayer {
-                    parity: layer.parity,
-                    data: layer.data.into_boxed_slice(),
-                })
-                .collect();
+            if layers.is_empty() == patterns.is_empty() {
+                bail!("declare exactly one of Ceph 'layers' or 'patterns'");
+            }
+            let layers: Vec<_> = if patterns.is_empty() {
+                layers
+                    .into_iter()
+                    .map(|layer| CephXorLayer {
+                        parity: layer.parity,
+                        data: layer.data.into_boxed_slice(),
+                    })
+                    .collect()
+            } else {
+                parse_ceph_xor_layers(coordinate_count, &patterns)?
+            };
             let answer =
                 ceph_xor_repair_supports(coordinate_count, &layers, target, &unavailable, budget)?;
             Ok(json!({
