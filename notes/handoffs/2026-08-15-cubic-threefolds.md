@@ -61,8 +61,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   byte-identical PDFs. The task remains open for the continuing manuscript and
   public formal-review prose pass. A later full cold-read protocol accepted the
   manuscript and all thirteen PDF pages after prose-only cleanup of the public
-  claim-map descriptions (`bc39e8509`, standalone `2faeb8a`). C978 remains
-  active by author instruction. Card:
+  claim-map descriptions.  The current generic-QDM clarification is synchronized
+  at authority `01cf1eddc` and standalone `bc3d52a`; the standalone gate and
+  exporter verification pass with byte-identical PDFs. C978 remains active by
+  author instruction. Card:
   `../cubic-threefolds-tasks/c978-cubic-m1-exposition-repairs.md`.
 - **C958 — explicit level-two parametrizations, active.**  The type-`I_1`
   splitting field, sixteen exceptional sections, marked-plane blowdown, and

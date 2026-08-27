@@ -43,4 +43,9 @@ formal-review prose pass.  A subsequent full cold-read referee protocol found
 the primary manuscript and all thirteen PDF pages acceptable; its only required
 repairs were legacy terms in public claim-map descriptions.  Those prose-only
 repairs were accepted on rereview and committed as authority `bc39e8509` and
-standalone `2faeb8a`.  C978 remains active by author instruction.
+standalone `2faeb8a`.  The later clarification of the generic QDM convention
+is synchronized at authority `01cf1eddc` and standalone `bc3d52a`; a fresh
+export audit found no delta, the standalone gate passes, and exporter
+verification records content SHA-256
+`9946ec411645c9dbc1665ee13d88bc3764ae12d2b054d73d065cf3d75cdd82c8`.
+C978 remains active by author instruction.
