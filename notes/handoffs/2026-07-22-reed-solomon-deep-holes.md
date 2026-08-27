@@ -137,6 +137,20 @@ verified local standalone commits are `ac38574` and `abea56d`.  Nothing was
 pushed or deposited; the user owns the upstream GitHub rename.  Report:
 `notes/reed-solomon-tasks/c975-2026-08-26-paper-upgrade-report.md`.
 
+C977 is complete.  A context-clean 263-paragraph read, two section-level
+passes, and a global theorem/exposition/trust review now give the paper a
+linear external-reader spine from syndrome--Hankel dictionary through carrier,
+simultaneous escape, shell classification, and coding consequences.  The pass
+repaired one radius-scope overstatement, narrowed the R5 novelty boundary
+against the codimension-four coset literature, updated published pinpoints and
+the 37-source read-depth inventory, made theorem imports executable, and moved
+the base-point-free lemma into the dictionary to remove an apparent proof
+back-edge.  Independent source, theorem, and layout readers accepted the
+result.  The warning-free 43-page archival and 31-page TIT PDFs, complete
+supplement, software gate, and deterministic standalone replay pass; mirror
+commit `0e6abd8` remains unpushed.  Report:
+`notes/reed-solomon-tasks/c977-2026-08-27-accessibility-synthesis.md`.
+
 C886 is complete.  The paper now has a layered two-track exposition: a mature
 generalist can follow the syndrome-to-carrier mechanism without entering every
 elimination, while the specialist proof, exceptional cases, and verification

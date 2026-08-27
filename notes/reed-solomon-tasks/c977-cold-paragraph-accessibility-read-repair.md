@@ -2,9 +2,10 @@
 
 **Lane**: `reed-solomon`
 
-**Status:** Active.  The raw paragraph journal, two section-level repair
+**Status:** Complete.  The raw paragraph journal, two section-level repair
 passes, global exposition/trust review, context-clean rereads, both manuscript
-builds, and complete supplement gate are closed.  Standalone export remains.
+builds, complete supplement gate, and standalone export verification are
+closed.
 
 ## Goal
 
@@ -70,4 +71,4 @@ The final global pass repaired the headline definitions, reading route,
 conclusion, R5 novelty boundary, imported-dependency annotations, and one
 apparent proof-order back-edge.  Final builds are 43 archival pages and 31 TIT
 pages; all internal gates and independent rereads accept the revision.
-Standalone synchronization and replay are the only remaining steps.
+Standalone commits `6053034` and `0e6abd8` replay cleanly and remain unpushed.

@@ -181,6 +181,15 @@ reduces the warning-free builds to 43 archival pages and 31 TIT pages.  The
 annotation, evidence-package, release-manifest, and complete supplement gates
 all pass.
 
+The final authority commits are `dcdf5dabe` and `6c40323d6`.  The deterministic
+export audit reported zero findings; standalone commits `6053034` and
+`0e6abd8` pass both manuscript builds, the software test gate, and the complete
+supplement gate.  Authority and mirror PDFs are byte-identical:
+`1150cb14a00bf0e616fdf4a997817dc5512132ce10b7026c9ab475d593c409bf`
+(archival) and
+`b4e71416a4eb204b10e8de20f9be1e45bb6e1d0ac179a616f3e0525993096806`
+(TIT).  Nothing was pushed or deposited.
+
 ## Extra-juice, Tao, and mystery closeout
 
 The extra-juice pass promoted every cheap task-owned gain: it removed the
