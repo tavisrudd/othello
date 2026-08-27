@@ -9,11 +9,13 @@ is familiar in optimization:
 > decisions before search, solve the remaining finite problem exactly, and
 > retain enough information to reconstruct an original-space witness.
 
-The companion paper proves which state is sufficient for exact composition,
-when scalar summaries lose information, and when a rank-one test controls every
-target dimension. ergodis turns those results into algorithms. It also includes
-exact schedulers and application front ends for storage repair, dependent repair
-tasks, sparse-code searches, and resource-constrained recovery.
+The companion paper,
+[Exact Compositional Transfer of Bounded Linear Recovery](../compositional_recovery.pdf),
+proves which state is sufficient for exact composition, when scalar summaries
+lose information, and when a rank-one test controls every target dimension.
+ergodis turns those results into algorithms. It also includes exact schedulers
+and application front ends for storage repair, dependent repair tasks,
+sparse-code searches, and resource-constrained recovery.
 
 This introduction assumes no coding-theory background. The first half explains
 the mathematical results in optimization language. The second explains what
@@ -47,20 +49,6 @@ uses. When several coded blocks are composed, a recovery equation induces a
 linear functional on each block. Those induced functionals are the interface
 states.
 
-The paper includes an explicit example over a four-element field in which two
-representations have all of the following in common:
-
-- the underlying binary code;
-- its dual code, the space of linear parity relations;
-- every scalar minimum-recovery value;
-- the complete relative-weight hierarchy;
-- the smallest support of a nonzero parity relation; and
-- the unlabelled family of minimum helper supports.
-
-The labelled conditional costs differ. The same outer linking constraint then
-gives exact costs 1 and 2. Nothing except the alignment between costs and
-interface labels has changed.
-
 ## A dictionary for optimization readers
 
 | Coding-theory term              | Optimization interpretation                                      |
@@ -81,6 +69,23 @@ The chosen representation matters for composition because it assigns concrete
 interface labels to coefficient fibres. Two representations can describe the
 same unlabelled feasible supports while presenting different conditional value
 functions to the next layer.
+
+### The separation proved in the paper
+
+The paper gives an explicit example over GF(4), the finite field with four
+elements, in which two representations have all of the following in common:
+
+- the underlying binary code;
+- its dual code, the algebraic orthogonal complement that records parity
+  relations, not an LP or Lagrangian dual;
+- all scalar recovery data relevant to the one-dimensional target;
+- the complete relative-weight hierarchy;
+- the smallest support of a nonzero parity relation; and
+- the unlabelled family of minimum helper supports.
+
+The labelled conditional costs differ. The same outer linking constraint then
+gives exact costs 1 and 2. Nothing except the alignment between costs and
+interface labels has changed.
 
 ## The mathematical results in optimization language
 
@@ -109,10 +114,11 @@ failures.
 
 Let `beta_h` denote the interface functional induced in block `h`. Write
 `c_target(beta_j)` for the least normalized recovery cost in the target block,
-and `c_helper(beta_h)` for the least cost of realizing the prescribed
-functional in another block. Let `D(O)` be the set of label assignments allowed
-by the outer linking constraints, and let `delta` be the least nonzero internal
-dual support.
+where normalized means that the recovery equation acts as the prescribed
+identity on the requested target subspace. Write `c_helper(beta_h)` for the
+least cost of realizing the prescribed functional in another block. Let `D(O)`
+be the set of label assignments allowed by the outer linking constraints, and
+let `delta` be the least nonzero internal dual support.
 
 The first solution that leaves the target block has cost
 
@@ -195,13 +201,15 @@ The conclusion concerns the complete bounded recovery systems, including their
 coefficients and exact helper supports, not only a scalar locality parameter.
 This turns an all-ranks certification problem into a rank-one obstruction test.
 
-At rank one, the paper goes further. The zero-sector cost together with a
-zero-truncated projective line-probe profile is the coarsest numerical state
-that every compatible outer composition can observe. Equivalent states remain
-equivalent after further concatenation. The claim is deliberately limited to
-rank one; at rank `t`, the paper proves that outer tests whose linking-state
-(functional-dual) dimension is at most `t` suffice, not a general minimal-state
-theorem.
+At rank one, the paper goes further. It compares represented inner codes over
+the same extension field after their target lines have been identified. Across
+compatible outer contexts of every finite arity, the coarsest observable
+numerical response consists of the zero-sector cost and the zero-truncated
+line-probe values for every projective label tuple with a nonzero external
+part. This is a response family, not one fixed finite table. Equivalent states
+remain equivalent after further concatenation. At rank `t`, the paper proves
+that outer tests whose linking-state (functional-dual) dimension is at most `t`
+suffice; it does not claim a general minimal state at higher rank.
 
 The line-probe profile records the best nonzero-interface cost along each
 one-dimensional projective direction, truncated when the zero-interface sector
@@ -275,6 +283,12 @@ and optional parallelism where independent work exists.
 The application front ends are worked examples of the compilation model, not
 claims that ergodis is a complete product for each industry.
 
+The `transfer`, `transfer-subspace`, `transfer-tower`, `compose`, and `schedule`
+commands expose the core recovery workflows. Most application rows below are
+tagged models accepted by `ergodis application`; the final finite-field
+construction row describes library machinery exercised by tests and benchmark
+drivers rather than a separate general-purpose CLI.
+
 | Example                    | Exact operational question                                      | Main compiled structure                         |
 | :------------------------- | :-------------------------------------------------------------- | :---------------------------------------------- |
 | linear recovery            | Which helpers and coefficients recover the requested quantity?  | quotient fibres and minimum support             |
@@ -299,7 +313,7 @@ ergodis is complementary to general optimization software.
 
 | Solver class                | Natural strength                              | Where ergodis fits                                      |
 | :-------------------------- | :-------------------------------------------- | :------------------------------------------------------ |
-| CP-SAT / constraint solvers | broad models and mature propagation           | compile first; solve directly or pass a smaller model   |
+| CP-SAT / constraint solvers | broad models and mature propagation           | direct kernels; harnesses test compiled models          |
 | MILP                        | relaxations; mixed discrete/continuous        | use when the residual problem is finite and algebraic   |
 | network flow / matching     | specialized polynomial network models         | select when compilation exposes a network model         |
 | BDD/ZDD tools               | compressed support-family enumeration         | reduce by linear structure before or within the diagram |
@@ -309,8 +323,9 @@ ergodis is complementary to general optimization software.
 CP-SAT remains the appropriate default when arbitrary side constraints dominate
 and no useful algebraic quotient is available. For structured instances, the
 compiled state can instead define a smaller external model after equivalences
-and impossible states have been removed. The repository's comparison harnesses
-exercise this pattern; the ergodis CLI is not a general CP-SAT modelling layer.
+and impossible states have been removed. Comparison adapters in the benchmark
+harness exercise this pattern; the ergodis CLI does not expose a universal
+CP-SAT model-export command.
 Comparisons include both direct CP-SAT and controls given the same safe
 preprocessing where that distinction applies.
 
@@ -320,12 +335,12 @@ The benchmark suite compares exact outputs: the same optimum, support family,
 feasibility verdict, or replayed witness. Timings include input or model
 construction. The headline cases illustrate different sources of advantage:
 
-| Workload                    | What creates the reduction                               | ergodis | Matched control         | Speedup  |
-| :-------------------------- | :------------------------------------------------------- | ------: | :---------------------- | -------: |
-| XOR-code repair supports    | shared structure among many minimal support sets         |  102 us | Graphillion ZDD closure |       8x |
-| represented GF(4) tower     | labelled state avoids expanding 4,096 leaves             |  766 us | direct CP-SAT           | 344,300x |
-| published Hamming-outer LRC | algebraic quotient of a binary local-recovery instance   |  231 ms | direct CP-SAT           |     432x |
-| GPU MDS checkpoint recovery | placement-aware aggregation followed by a flow witness   |  100 us | OR-Tools bipartite flow |   1,029x |
+| Scenario                                  | Scale                            | ergodis | Exact control           | Control time | Speedup  |
+| :---------------------------------------- | :------------------------------- | ------: | :---------------------- | -----------: | -------: |
+| enumerate minimal XOR repair sets         | 8 repeated choices; 256 supports |  102 us | Graphillion ZDD closure |       864 us |       8x |
+| compose a six-level recovery tower        | fanout 4; 4,096 leaves           |  766 us | direct CP-SAT           |     263.76 s | 344,300x |
+| batch repair in a published local code    | 4,095 symbols; 2,718 dimensions  |  231 ms | direct CP-SAT           |        100 s |     432x |
+| assign helpers for a training checkpoint  | 10,000 shards; 64 failures       |  100 us | OR-Tools bipartite flow |   103,061 us |   1,029x |
 
 The table is evidence for these fixed instances, not a universal solver
 ranking. The tower and local-recovery cases primarily demonstrate mathematical
