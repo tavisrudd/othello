@@ -86,14 +86,14 @@ optimum or inclusion-minimal support together with replayable indices and work
 counters. The front ends deliberately expose different mathematical models
 instead of flattening every application into generic Boolean variables.
 
-| input `kind`       | exact question                                                   | principal reduction                         |
-| :----------------- | :--------------------------------------------------------------- | :------------------------------------------ |
-| `ceph-xor`         | minimal helper supports through recursive XOR coding layers      | monotone antichain closure                  |
-| `azure-lrc`        | simultaneous LRC(12,2,2) repairs across nine upgrade domains      | exact support families plus capacity DP     |
-| `repair-dag`       | minimum unit slots for precedence-constrained repair tasks        | ready-set quotient plus resource capacities |
-| `qc-ldpc`          | bounded trapping-set or stopping-set existence in a QC lift       | cyclic normalization before exact search    |
-| `vector-repair`    | minimum storage nodes spanning a vector/subpacketized target      | generated node-subspace DP                  |
-| `gpu-checkpoint`   | simultaneous MDS checkpoint recovery across node and rack links   | helper-family compilation plus capacity DP  |
+| input `kind`       | exact question                                                    | principal reduction                           |
+| :----------------- | :---------------------------------------------------------------- | :-------------------------------------------- |
+| `ceph-xor`         | minimal helper supports through recursive XOR coding layers       | monotone antichain closure                    |
+| `azure-lrc`        | simultaneous LRC(12,2,2) repairs across nine upgrade domains      | six load types plus capacity bounds           |
+| `repair-dag`       | minimum unit slots for precedence-constrained repair tasks        | ready-set dominance plus capacity search      |
+| `qc-ldpc`          | bounded trapping-set or stopping-set existence in a QC lift       | cyclic quotient or degree-two components      |
+| `vector-repair`    | minimum storage nodes spanning a vector/subpacketized target      | quotient of generated node subspaces          |
+| `gpu-checkpoint`   | simultaneous MDS checkpoint recovery across node and rack links   | aggregate capacities plus cyclic realization  |
 
 The Ceph model uses explicit XOR layers and returns all inclusion-minimal leaf
 supports. The Azure model follows the published 16-fragment placement with six
@@ -103,6 +103,36 @@ has been fixed; it does not claim to model GPU execution or checkpoint-copy
 overlap itself. The QC-LDPC search distinguishes the two predicates exactly:
 trapping sets bound the number of odd neighboring checks, while stopping sets
 forbid neighboring checks of degree one.
+
+A seven-round, pinned-core exact comparison against single-worker OR-Tools
+9.14 CP-SAT gives the following bounded results. Times include construction of
+the application state or CP-SAT model; RSS is process high-water memory. The
+large wins come from mathematical reductions: full-ready-set dominance for
+unit repair DAGs, connected components for degree-two QC parity checks,
+quotienting identical generated node subspaces, and aggregate MDS capacity
+followed by cyclic witness realization.
+
+| application / control            | bounded instance                  | ERGO time | ERGO RSS | control time | control RSS | outcome                  |
+| :------------------------------- | :-------------------------------- | --------: | -------: | -----------: | ----------: | :----------------------- |
+| Azure LRC / direct CP-SAT        | 100,000 demands, domain cap 100k  |     <1 us |  2.2 MiB |       8.95 s |   916.6 MiB | CP quotient 5,168x       |
+| Azure LRC / counted CP-SAT       | same six-type quotient            |     <1 us |  2.2 MiB |     1,732 us |    75.5 MiB | ERGO 61,799x faster      |
+| Repair DAG / direct CP-SAT       | 3 layers x 21 tasks               |      2 us |  2.3 MiB |       1.20 s |   145.5 MiB | ERGO 494,061x faster     |
+| QC-LDPC / direct CP-SAT          | lift 50,000, weight 4             |  1,517 us |  4.0 MiB |       1.52 s |   381.6 MiB | ERGO 1,001x faster       |
+| vector node span / direct CP-SAT | 64 nodes, 2 symbols per node      |     10 us |  2.2 MiB |       1.21 s |    85.9 MiB | ERGO 117,097x faster     |
+| GPU MDS / direct CP-SAT          | 10,000 shards, k=6,000, 64 failed |    100 us |  3.6 MiB |      11.82 s |     1.9 GiB | ERGO 118,014x faster     |
+
+When all replacements share a rack and every survivor is remote from the
+replacement nodes, the GPU compiler first aggregates feasible reads by helper
+node and rack tier, then realizes the resulting shard degrees cyclically. This
+avoids both the exponential helper-family enumeration and the complete
+failure-by-shard flow graph while still returning all 384,000 helper
+assignments. Other placements retain the general exact scheduler. The direct
+Azure and GPU rows each use one completed CP-SAT proof; their solves take
+seconds and peak near 1 and 2 GiB respectively. The counted Azure control and
+the other CP-SAT rows use seven rounds, as do all Rust rows. These are
+formulation-specific results, not a universal solver ranking. Raw samples and
+checksums are stored in `evidence/benchmarks.json`; replay them with
+`run_benchmarks.py --write --applications-only --ab-rounds 7`.
 
 For example:
 
@@ -444,9 +474,9 @@ implementation. Family records occupy 8 bytes, option offsets are derived
 from fixed-width layout rather than stored, and retained loads use the
 narrowest exact `u8`/`u16`/`u32` representation selected once at construction.
 
-| axis                         | materialized time | materialized RSS | streamed time | streamed RSS |
-|:-----------------------------|------------------:|-----------------:|--------------:|-------------:|
-| 10,000,000 demands x 4       |            2.81 s |        3,588 MiB |        2.31 s |    1,576 MiB |
+| axis                         | materialized time | materialized RSS | streamed time  | streamed RSS |
+|:-----------------------------|------------------:|-----------------:|---------------:|-------------:|
+| 10,000,000 demands x 4       |            2.81 s |        3,588 MiB |         2.31 s |    1,576 MiB |
 | 80 demands x 1,000,000       |            2.69 s |        4,275 MiB |         891 ms |      2.2 MiB |
 
 These three-round rotated comparisons use identical generated alternatives,
@@ -460,9 +490,9 @@ parallel variants. Additional workers act only on the small residual solve,
 so the results are effectively flat; 24 is not the optimum.
 
 | axis                    |      single thread |           best parallel | verdict |
-|:------------------------|-------------------:|------------------------:|:-------|
+|:------------------------|-------------------:|------------------------:|:--------|
 | 40,000,000 demands x 4  | 8.25 s / 2,787 MiB | 8.13 s / 2,787 MiB (12) | neutral |
-| 80 demands x 14,000,000 |   9.15 s / 2.4 MiB |    9.12 s / 2.6 MiB (8) | neutral |
+| 80 demands x 14,000,000 |   9.15 s / 2.4 MiB |    9.12 s / 2.6 MiB (8) | neutral  |
 
 Parentheses give worker count. These are single frontier probes, not stable
 speedup claims; the sequential path remains the default for these shapes.

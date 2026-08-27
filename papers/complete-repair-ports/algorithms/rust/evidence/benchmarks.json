@@ -1,4 +1,748 @@
 {
+  "application_comparisons": {
+    "artifacts": {
+      "bench_kernels_binary_sha256": "701d8d321e53c62201559ccda02d7dbfd1ffb2f0c24820ba6bac7b9e10506ed6",
+      "bench_kernels_source_sha256": "c5e8541e8c73329264f4f9c25c1fa7ff2d61ec36c47c6f27b04623f8be65638f",
+      "benchmark_python_sha256": "aa56d407586209a808666dc551905c724f1bf2e5af489282865e06d44cf4575b",
+      "run_benchmarks_sha256": "aa9b34478b8bd299bcbf644820eed988013784631dd1e96afc0d759d5bc2bbe3"
+    },
+    "measurements": {
+      "azure_lrc_batch": {
+        "counted_cpsat": {
+          "checksum_per_solve": 100000,
+          "median_ns_per_solve": 1732305.0,
+          "median_peak_rss_kib": 77312,
+          "peak_states": 0,
+          "samples": [
+            {
+              "checksum": 100000,
+              "elapsed_ns": 1704433,
+              "peak_rss_kib": 77260,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:azure-counted:cpsat:100000:100000",
+              "work": 0
+            },
+            {
+              "checksum": 100000,
+              "elapsed_ns": 1750859,
+              "peak_rss_kib": 77420,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:azure-counted:cpsat:100000:100000",
+              "work": 0
+            },
+            {
+              "checksum": 100000,
+              "elapsed_ns": 1731804,
+              "peak_rss_kib": 77288,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:azure-counted:cpsat:100000:100000",
+              "work": 0
+            },
+            {
+              "checksum": 100000,
+              "elapsed_ns": 1732305,
+              "peak_rss_kib": 77508,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:azure-counted:cpsat:100000:100000",
+              "work": 0
+            },
+            {
+              "checksum": 100000,
+              "elapsed_ns": 1841438,
+              "peak_rss_kib": 77456,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:azure-counted:cpsat:100000:100000",
+              "work": 0
+            },
+            {
+              "checksum": 100000,
+              "elapsed_ns": 1715364,
+              "peak_rss_kib": 77284,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:azure-counted:cpsat:100000:100000",
+              "work": 0
+            },
+            {
+              "checksum": 100000,
+              "elapsed_ns": 1748986,
+              "peak_rss_kib": 77312,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:azure-counted:cpsat:100000:100000",
+              "work": 0
+            }
+          ],
+          "work_per_solve": 0
+        },
+        "cpsat": {
+          "checksum_per_solve": 100000,
+          "median_ns_per_solve": 8951721883.0,
+          "median_peak_rss_kib": 938604,
+          "peak_states": 0,
+          "samples": [
+            {
+              "checksum": 100000,
+              "elapsed_ns": 8951721883,
+              "peak_rss_kib": 938604,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:azure:cpsat:100000:100000",
+              "work": 0
+            }
+          ],
+          "work_per_solve": 0
+        },
+        "rounds": {
+          "counted_cpsat": 7,
+          "cpsat": 1,
+          "rust": 7
+        },
+        "rust": {
+          "checksum_per_solve": 100000,
+          "median_ns_per_solve": 28.03128,
+          "median_peak_rss_kib": 2244,
+          "peak_states": 0,
+          "samples": [
+            {
+              "checksum": 10000000000,
+              "elapsed_ns": 2812225,
+              "peak_rss_kib": 2200,
+              "peak_states": 0,
+              "repetitions": 100000,
+              "variant": "application:azure:rust:100000:100000",
+              "work": 100000
+            },
+            {
+              "checksum": 10000000000,
+              "elapsed_ns": 3366988,
+              "peak_rss_kib": 2236,
+              "peak_states": 0,
+              "repetitions": 100000,
+              "variant": "application:azure:rust:100000:100000",
+              "work": 100000
+            },
+            {
+              "checksum": 10000000000,
+              "elapsed_ns": 2803128,
+              "peak_rss_kib": 2308,
+              "peak_states": 0,
+              "repetitions": 100000,
+              "variant": "application:azure:rust:100000:100000",
+              "work": 100000
+            },
+            {
+              "checksum": 10000000000,
+              "elapsed_ns": 3374642,
+              "peak_rss_kib": 2196,
+              "peak_states": 0,
+              "repetitions": 100000,
+              "variant": "application:azure:rust:100000:100000",
+              "work": 100000
+            },
+            {
+              "checksum": 10000000000,
+              "elapsed_ns": 2592115,
+              "peak_rss_kib": 2324,
+              "peak_states": 0,
+              "repetitions": 100000,
+              "variant": "application:azure:rust:100000:100000",
+              "work": 100000
+            },
+            {
+              "checksum": 10000000000,
+              "elapsed_ns": 2598818,
+              "peak_rss_kib": 2396,
+              "peak_states": 0,
+              "repetitions": 100000,
+              "variant": "application:azure:rust:100000:100000",
+              "work": 100000
+            },
+            {
+              "checksum": 10000000000,
+              "elapsed_ns": 2613675,
+              "peak_rss_kib": 2244,
+              "peak_states": 0,
+              "repetitions": 100000,
+              "variant": "application:azure:rust:100000:100000",
+              "work": 100000
+            }
+          ],
+          "work_per_solve": 1
+        },
+        "rust_speedup_over_counted_cpsat": 61798.997,
+        "rust_speedup_over_cpsat": 319347596.078
+      },
+      "gpu_checkpoint_mds": {
+        "cpsat": {
+          "checksum_per_solve": 64,
+          "median_ns_per_solve": 11817389820.0,
+          "median_peak_rss_kib": 2010732,
+          "peak_states": 0,
+          "samples": [
+            {
+              "checksum": 64,
+              "elapsed_ns": 11817389820,
+              "peak_rss_kib": 2010732,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:gpu-compiled:cpsat:10000:6000:64",
+              "work": 0
+            }
+          ],
+          "work_per_solve": 0
+        },
+        "rounds": {
+          "cpsat": 1,
+          "rust": 7
+        },
+        "rust": {
+          "checksum_per_solve": 64,
+          "median_ns_per_solve": 100135.81,
+          "median_peak_rss_kib": 3732,
+          "peak_states": 0,
+          "samples": [
+            {
+              "checksum": 6400,
+              "elapsed_ns": 9778934,
+              "peak_rss_kib": 3664,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:gpu-compiled:rust:10000:6000:64",
+              "work": 38400000
+            },
+            {
+              "checksum": 6400,
+              "elapsed_ns": 10013581,
+              "peak_rss_kib": 3788,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:gpu-compiled:rust:10000:6000:64",
+              "work": 38400000
+            },
+            {
+              "checksum": 6400,
+              "elapsed_ns": 10174240,
+              "peak_rss_kib": 3812,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:gpu-compiled:rust:10000:6000:64",
+              "work": 38400000
+            },
+            {
+              "checksum": 6400,
+              "elapsed_ns": 10344677,
+              "peak_rss_kib": 3732,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:gpu-compiled:rust:10000:6000:64",
+              "work": 38400000
+            },
+            {
+              "checksum": 6400,
+              "elapsed_ns": 9647079,
+              "peak_rss_kib": 3696,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:gpu-compiled:rust:10000:6000:64",
+              "work": 38400000
+            },
+            {
+              "checksum": 6400,
+              "elapsed_ns": 10049698,
+              "peak_rss_kib": 3716,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:gpu-compiled:rust:10000:6000:64",
+              "work": 38400000
+            },
+            {
+              "checksum": 6400,
+              "elapsed_ns": 9852020,
+              "peak_rss_kib": 3748,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:gpu-compiled:rust:10000:6000:64",
+              "work": 38400000
+            }
+          ],
+          "work_per_solve": 384000
+        },
+        "rust_speedup_over_cpsat": 118013.624
+      },
+      "qc_ldpc_codeword": {
+        "cpsat": {
+          "checksum_per_solve": 0,
+          "median_ns_per_solve": 1518405442.0,
+          "median_peak_rss_kib": 390720,
+          "peak_states": 0,
+          "samples": [
+            {
+              "checksum": 0,
+              "elapsed_ns": 1518826013,
+              "peak_rss_kib": 390708,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:qc:cpsat:50000:4",
+              "work": 0
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 1518210337,
+              "peak_rss_kib": 390696,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:qc:cpsat:50000:4",
+              "work": 0
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 1518405442,
+              "peak_rss_kib": 390744,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:qc:cpsat:50000:4",
+              "work": 0
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 1520636265,
+              "peak_rss_kib": 390896,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:qc:cpsat:50000:4",
+              "work": 0
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 1503078060,
+              "peak_rss_kib": 390724,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:qc:cpsat:50000:4",
+              "work": 0
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 1526221404,
+              "peak_rss_kib": 390720,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:qc:cpsat:50000:4",
+              "work": 0
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 1513230652,
+              "peak_rss_kib": 390648,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:qc:cpsat:50000:4",
+              "work": 0
+            }
+          ],
+          "work_per_solve": 0
+        },
+        "rounds": {
+          "cpsat": 7,
+          "rust": 7
+        },
+        "rust": {
+          "checksum_per_solve": 0,
+          "median_ns_per_solve": 1517432.38,
+          "median_peak_rss_kib": 4080,
+          "peak_states": 0,
+          "samples": [
+            {
+              "checksum": 0,
+              "elapsed_ns": 151314420,
+              "peak_rss_kib": 4112,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:qc:rust:50000:4",
+              "work": 100
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 151296707,
+              "peak_rss_kib": 3852,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:qc:rust:50000:4",
+              "work": 100
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 151829710,
+              "peak_rss_kib": 3968,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:qc:rust:50000:4",
+              "work": 100
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 151847162,
+              "peak_rss_kib": 4088,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:qc:rust:50000:4",
+              "work": 100
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 151274546,
+              "peak_rss_kib": 4108,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:qc:rust:50000:4",
+              "work": 100
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 151743238,
+              "peak_rss_kib": 4072,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:qc:rust:50000:4",
+              "work": 100
+            },
+            {
+              "checksum": 0,
+              "elapsed_ns": 153309675,
+              "peak_rss_kib": 4080,
+              "peak_states": 0,
+              "repetitions": 100,
+              "variant": "application:qc:rust:50000:4",
+              "work": 100
+            }
+          ],
+          "work_per_solve": 1
+        },
+        "rust_speedup_over_cpsat": 1000.641
+      },
+      "repair_dag": {
+        "cpsat": {
+          "checksum_per_solve": 3,
+          "median_ns_per_solve": 1204812636.0,
+          "median_peak_rss_kib": 149036,
+          "peak_states": 0,
+          "samples": [
+            {
+              "checksum": 3,
+              "elapsed_ns": 1207081778,
+              "peak_rss_kib": 149000,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:rdag:cpsat:21:3",
+              "work": 6259
+            },
+            {
+              "checksum": 3,
+              "elapsed_ns": 1212739420,
+              "peak_rss_kib": 149036,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:rdag:cpsat:21:3",
+              "work": 6259
+            },
+            {
+              "checksum": 3,
+              "elapsed_ns": 1204968255,
+              "peak_rss_kib": 149432,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:rdag:cpsat:21:3",
+              "work": 6259
+            },
+            {
+              "checksum": 3,
+              "elapsed_ns": 1193190551,
+              "peak_rss_kib": 149008,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:rdag:cpsat:21:3",
+              "work": 6259
+            },
+            {
+              "checksum": 3,
+              "elapsed_ns": 1204812636,
+              "peak_rss_kib": 149092,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:rdag:cpsat:21:3",
+              "work": 6259
+            },
+            {
+              "checksum": 3,
+              "elapsed_ns": 1198589863,
+              "peak_rss_kib": 149088,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:rdag:cpsat:21:3",
+              "work": 6259
+            },
+            {
+              "checksum": 3,
+              "elapsed_ns": 1202845977,
+              "peak_rss_kib": 148940,
+              "peak_states": 0,
+              "repetitions": 1,
+              "variant": "application:rdag:cpsat:21:3",
+              "work": 6259
+            }
+          ],
+          "work_per_solve": 6259
+        },
+        "rounds": {
+          "cpsat": 7,
+          "rust": 7
+        },
+        "rust": {
+          "checksum_per_solve": 3,
+          "median_ns_per_solve": 2438.59,
+          "median_peak_rss_kib": 2392,
+          "peak_states": 0,
+          "samples": [
+            {
+              "checksum": 3000,
+              "elapsed_ns": 3055728,
+              "peak_rss_kib": 2412,
+              "peak_states": 0,
+              "repetitions": 1000,
+              "variant": "application:rdag:rust:21:3",
+              "work": 4000
+            },
+            {
+              "checksum": 3000,
+              "elapsed_ns": 2289612,
+              "peak_rss_kib": 2284,
+              "peak_states": 0,
+              "repetitions": 1000,
+              "variant": "application:rdag:rust:21:3",
+              "work": 4000
+            },
+            {
+              "checksum": 3000,
+              "elapsed_ns": 2802126,
+              "peak_rss_kib": 2368,
+              "peak_states": 0,
+              "repetitions": 1000,
+              "variant": "application:rdag:rust:21:3",
+              "work": 4000
+            },
+            {
+              "checksum": 3000,
+              "elapsed_ns": 2377325,
+              "peak_rss_kib": 2412,
+              "peak_states": 0,
+              "repetitions": 1000,
+              "variant": "application:rdag:rust:21:3",
+              "work": 4000
+            },
+            {
+              "checksum": 3000,
+              "elapsed_ns": 2438590,
+              "peak_rss_kib": 2352,
+              "peak_states": 0,
+              "repetitions": 1000,
+              "variant": "application:rdag:rust:21:3",
+              "work": 4000
+            },
+            {
+              "checksum": 3000,
+              "elapsed_ns": 2557621,
+              "peak_rss_kib": 2392,
+              "peak_states": 0,
+              "repetitions": 1000,
+              "variant": "application:rdag:rust:21:3",
+              "work": 4000
+            },
+            {
+              "checksum": 3000,
+              "elapsed_ns": 2340276,
+              "peak_rss_kib": 2464,
+              "peak_states": 0,
+              "repetitions": 1000,
+              "variant": "application:rdag:rust:21:3",
+              "work": 4000
+            }
+          ],
+          "work_per_solve": 4
+        },
+        "rust_speedup_over_cpsat": 494061.173
+      },
+      "vector_node_span": {
+        "cpsat": {
+          "checksum_per_solve": 4,
+          "median_ns_per_solve": 1208709870.0,
+          "median_peak_rss_kib": 88012,
+          "peak_states": 32664,
+          "samples": [
+            {
+              "checksum": 4,
+              "elapsed_ns": 1210351054,
+              "peak_rss_kib": 88012,
+              "peak_states": 32664,
+              "repetitions": 1,
+              "variant": "application:vector:cpsat:64:2",
+              "work": 147517
+            },
+            {
+              "checksum": 4,
+              "elapsed_ns": 1212295113,
+              "peak_rss_kib": 88008,
+              "peak_states": 32664,
+              "repetitions": 1,
+              "variant": "application:vector:cpsat:64:2",
+              "work": 147517
+            },
+            {
+              "checksum": 4,
+              "elapsed_ns": 1208709870,
+              "peak_rss_kib": 88020,
+              "peak_states": 32664,
+              "repetitions": 1,
+              "variant": "application:vector:cpsat:64:2",
+              "work": 147517
+            },
+            {
+              "checksum": 4,
+              "elapsed_ns": 1200989488,
+              "peak_rss_kib": 87980,
+              "peak_states": 32664,
+              "repetitions": 1,
+              "variant": "application:vector:cpsat:64:2",
+              "work": 147517
+            },
+            {
+              "checksum": 4,
+              "elapsed_ns": 1206395141,
+              "peak_rss_kib": 88104,
+              "peak_states": 32664,
+              "repetitions": 1,
+              "variant": "application:vector:cpsat:64:2",
+              "work": 147517
+            },
+            {
+              "checksum": 4,
+              "elapsed_ns": 1210731665,
+              "peak_rss_kib": 88100,
+              "peak_states": 32664,
+              "repetitions": 1,
+              "variant": "application:vector:cpsat:64:2",
+              "work": 147517
+            },
+            {
+              "checksum": 4,
+              "elapsed_ns": 1199428674,
+              "peak_rss_kib": 87972,
+              "peak_states": 32664,
+              "repetitions": 1,
+              "variant": "application:vector:cpsat:64:2",
+              "work": 147517
+            }
+          ],
+          "work_per_solve": 147517
+        },
+        "rounds": {
+          "cpsat": 7,
+          "rust": 7
+        },
+        "rust": {
+          "checksum_per_solve": 4,
+          "median_ns_per_solve": 10322.286,
+          "median_peak_rss_kib": 2292,
+          "peak_states": 16,
+          "samples": [
+            {
+              "checksum": 4000,
+              "elapsed_ns": 10120180,
+              "peak_rss_kib": 2344,
+              "peak_states": 16,
+              "repetitions": 1000,
+              "variant": "application:vector:rust:64:2",
+              "work": 15000
+            },
+            {
+              "checksum": 4000,
+              "elapsed_ns": 10632613,
+              "peak_rss_kib": 2176,
+              "peak_states": 16,
+              "repetitions": 1000,
+              "variant": "application:vector:rust:64:2",
+              "work": 15000
+            },
+            {
+              "checksum": 4000,
+              "elapsed_ns": 10476473,
+              "peak_rss_kib": 2380,
+              "peak_states": 16,
+              "repetitions": 1000,
+              "variant": "application:vector:rust:64:2",
+              "work": 15000
+            },
+            {
+              "checksum": 4000,
+              "elapsed_ns": 10322286,
+              "peak_rss_kib": 2280,
+              "peak_states": 16,
+              "repetitions": 1000,
+              "variant": "application:vector:rust:64:2",
+              "work": 15000
+            },
+            {
+              "checksum": 4000,
+              "elapsed_ns": 10376827,
+              "peak_rss_kib": 2252,
+              "peak_states": 16,
+              "repetitions": 1000,
+              "variant": "application:vector:rust:64:2",
+              "work": 15000
+            },
+            {
+              "checksum": 4000,
+              "elapsed_ns": 9993453,
+              "peak_rss_kib": 2292,
+              "peak_states": 16,
+              "repetitions": 1000,
+              "variant": "application:vector:rust:64:2",
+              "work": 15000
+            },
+            {
+              "checksum": 4000,
+              "elapsed_ns": 9919876,
+              "peak_rss_kib": 2408,
+              "peak_states": 16,
+              "repetitions": 1000,
+              "variant": "application:vector:rust:64:2",
+              "work": 15000
+            }
+          ],
+          "work_per_solve": 15
+        },
+        "rust_speedup_over_cpsat": 117097.111
+      }
+    },
+    "protocol": {
+      "common": "pinned-core deterministic exact solves; checksum agreement required",
+      "cpsat": "single-worker OR-Tools 9.14 model of the same bounded decision or optimization problem",
+      "rust": "application-specific exact structural kernel, including input compilation"
+    },
+    "rounds": 7,
+    "sources": {
+      "azure_lrc_batch": "Huang et al. (2012), Azure LRC(12,2,2) placement",
+      "gpu_checkpoint_mds": "REFT (SC 2023), erasure-coded in-memory checkpoints after placement",
+      "qc_ldpc_codeword": "QC-LDPC lifted parity-check codeword decision",
+      "repair_dag": "RepairBoost (ATC 2021), repair-DAG scheduling abstraction",
+      "vector_node_span": "subpacketized linear repair with one cost per helper node"
+    }
+  },
   "comparisons": {
     "orbit_coordinate_speedup_over_python": 79.243,
     "orbit_correlated_speedup_over_coordinate": 0.234,
