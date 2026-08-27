@@ -111,6 +111,13 @@ and it does not claim that every Lucas-carrier point is split-free.  The
 sentence separating geometric containment from Lucas arithmetic becomes more
 important, not less.
 
+Immediately after it, insert the digit-stripping exact sequences from
+`c973-2026-08-26-digit-stripping-exact-sequence.md`.  They identify the
+filtered `GL_2`-module structure of every maximal Lucas carrier and Pascal
+nucleus from the base-`p` digits of `r-2`.  Use the one-carry standard-module
+theorem and the characteristic-seven R11--R13 closure as one worked
+corollary; do not add separate R11, R12, and R13 subsections.
+
 Suggested label: `cor:recursive-carrier-unconditional`, or merge this result
 into the proof of the main theorem if a separate statement would merely
 repeat it.
@@ -144,6 +151,10 @@ repeat it.
   trace criterion.
 - Characteristic-seven R9/R10 slice arithmetic, now also reusable for the R11
   pointed lift.
+- The digit-stripping carrier/nucleus exact sequences, the closed digit
+  dimension formula, and the length-neutral one-carry corollary.
+- The seven q=49 pointed locator certificates, in the supplement only, which
+  close the five quadratic and two standard-module orbit representatives.
 - The Seroussi--Roth--Dür radius gate as a visibly separate proposition.
 - All trust, imported-literature, certificate, and formalization boundaries.
 
@@ -190,17 +201,19 @@ The paper successor should update:
 - **Overview table:** mark arbitrary-`r` containment unconditional at `Q*_r`;
   keep all-characteristic exactness open on the maximal Lucas carrier.
 - **Scope/open problems:** replace “prove every intermediate lower package” by
-  “classify pointed abundance along coherent Lucas descendants”; cite the R11
-  and R12 reductions as the first calibrated blocks only after review.
+  “transport pointed abundance through the digit-stripping module
+  extensions”; cite the R11/R12 characteristic-seven orbit closure only after
+  independent review.
 - **Theorem/claim map:** add composite contraction, selector, pointed selector,
   abundance, and revised main theorem; retire conditional-package dependency
   edges.
 - **Formalization ledger:** do not claim kernel coverage for the geometric
   selector converse.  Existing contraction and arithmetic terminals may be
   reused only after exact statement comparison.
-- **Evidence registry:** no new computation supports the main theorem.  R11
-  and R12 arguments are proof-only compositions; existing certificates retain
-  their original finite domains.
+- **Evidence registry:** no computation supports the arbitrary-`r` escape or
+  digit-stripping theorems.  Register the q=49 locator bundle only for the
+  finite characteristic-seven pointed corollary; distinguish its structural
+  orbit reduction from its seven computational existence witnesses.
 - **Verification boundary:** add a fail-closed check that no headline theorem
   still contains the removed package hypothesis and that the strict threshold
   arithmetic is reconciled.

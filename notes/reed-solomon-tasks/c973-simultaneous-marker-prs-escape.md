@@ -45,7 +45,12 @@ The unifying result is
 with `r-2=p+a`, `0<=a<=p-3`, as the standard projective module
 `P(Gamma^(p-a-3) E)`.  Consequently the only possible R11 modular exceptions
 are now `q in {16,27,32,64}`; further level-by-level work is intentionally
-deprioritized in favor of the multi-digit module theorem.
+deprioritized in favor of the multi-digit module theorem.  That theorem is now
+proved in `c973-2026-08-26-digit-stripping-exact-sequence.md`: both the Pascal
+nucleus and maximal carrier admit coupled least-digit exact sequences with
+explicit determinant, divided-power, and Frobenius-twist factors.  The
+remaining all-level gate is arithmetic transport of pointed witnesses through
+those extensions, not identification of the carrier module.
 
 ## Objective
 
