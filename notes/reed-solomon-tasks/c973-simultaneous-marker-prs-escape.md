@@ -61,6 +61,16 @@ PRS pointed-abundance application as the substantive open research claim.
 The digit theorem's author-side seam review is
 `c973-2026-08-26-digit-stripping-hostile-audit.md`; independent specialist
 review remains required.
+The cofinite-support transfer is proved in
+`c973-2026-08-26-cofinite-grs-transfer.md`.  For a GRS support obtained by
+deleting `s` projective evaluation points, it gives the pointed threshold
+`6r+6s-16+floor(2 sqrt(6r+6s-18))`, an `r-2` locator avoiding every deletion,
+and, in large characteristic, the exact distance-`r` and distance-`r-1`
+shells and their counts.  The full-affine deep shell is classical in this
+high-rate range; the next-to-deep shell and constructive separation require
+a claim-specific prior-art audit.  Generic LDPC does not inherit the theorem,
+but RS-local Tanner and lifted-code compatibility is recorded as a separate
+open direction.
 
 ## Objective
 
