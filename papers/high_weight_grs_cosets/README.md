@@ -175,7 +175,7 @@ examples and exact trust semantics.
 
 ## Files
 
-- `high-weight-grs-cosets.pdf` is the 42-page archival paper.
+- `high-weight-grs-cosets.pdf` is the 43-page archival paper.
 - `high-weight-grs-cosets.tex` is its manuscript driver.
 - `high-weight-grs-cosets-tit.pdf` is the 31-page IEEE TIT version.
 - `high-weight-grs-cosets-tit.tex` is the corresponding submission driver.

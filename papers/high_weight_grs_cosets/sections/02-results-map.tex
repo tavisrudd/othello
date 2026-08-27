@@ -55,29 +55,46 @@ small fields but are not inputs to it.
 
 \subsection{Why the classification closes}
 
-The proof has three steps.  First, the Hankel dictionary converts a
-weight-\((r-2)\) representation into a split squarefree binary form.  Second,
-the recursive carrier theorem identifies exactly when every contraction to
-the terminal R5 system is trapped.  Third, outside that carrier, one
-degree-six selector chooses all contraction roots simultaneously; the exact
-R5 pencil count supplies the remaining cubic while avoiding those roots and
-the deleted set \(A\).
+The proof has three steps.  The Hankel kernel \(W_f\) records the
+degree-\((r-2)\) binary forms whose roots can represent \(f\): a squarefree
+product of rational linear factors supported on \(S\) is exactly an
+\((r-2)\)-column representation.  Choosing one factor contracts both the
+syndrome and the witness problem by one degree; choosing \(r-5\) factors
+leaves a redundancy-five pencil of binary cubics.  The recursive carrier
+theorem identifies when every such contraction is trapped.  Everywhere else,
+one degree-six selector chooses the factors simultaneously, and the exact R5
+pencil count supplies a split squarefree cubic avoiding those factors and \(A\).
 
 \begin{figure}[H]
 \centering
 \[
 \begin{array}{c}
-\text{syndrome }f\\[1mm]
-\downarrow\quad\text{Hankel dictionary}\\[1mm]
-W_f\text{ contains a split squarefree locator}\\[1mm]
-\uparrow\quad\text{composite contraction and one R5 pencil count}\\[1mm]
-f\notin\cP_r\cup\cM^{\max}_{r,p}.
+f\notin
+\underbrace{\cP_r}_{\text{persistent rank-two locus}}
+\cup
+\underbrace{\cM^{\max}_{r,p}}_{\text{small-characteristic Lucas locus}}\\[1mm]
+\Downarrow\quad\text{simultaneous selection and contraction}\\[1mm]
+\substack{\text{one split squarefree cubic in the terminal Hankel pencil,}\\
+          \text{avoiding the markers and }A}\\[1mm]
+\Downarrow\quad\text{lift through }r-5\text{ distinct markers in }S\\[1mm]
+W_f\text{ contains a split squarefree form supported on }S\\[1mm]
+\Updownarrow\quad\text{Hankel criterion}\\[1mm]
+d_S(f)\le r-2.
 \end{array}
 \]
 \caption{The proof route.  The carrier theorem identifies the only possible
 obstruction; simultaneous contraction constructs a locator everywhere else.}
 \label{fig:headline-proof-route}
 \end{figure}
+
+The bounded-field rows below use one finite-certificate contract.  The
+certificate enumerates projective syndromes modulo the stated group, records
+canonical representatives, stabilizers, orbit sizes, and split-member data
+relative to the stated evaluation set,
+and checks that the orbit sizes exhaust the ambient projective space.  A
+separate replay recomputes those invariants from the records.  These finite
+steps complete the split-free geometric classification only in the named fields;
+covering-radius promotion to deep holes remains a separate cited input.
 
 A first-pass reader can now continue with the coding dictionary in
 Section~\ref{sec:dictionary}, the terminal R5 count in Section~\ref{sec:r5},

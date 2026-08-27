@@ -31,19 +31,17 @@ in any characteristic.  Define
 \small
 \caption{Notation used from the Hankel dictionary onward.}
 \label{tab:notation}
-\begin{tabular}{cl}
+\begin{tabular}{p{0.20\textwidth}p{0.72\textwidth}}
 \toprule
 Symbol & Meaning\\
 \midrule
 $q$ & field size; all numerical thresholds are thresholds on prime powers\\
-$k$ & code dimension in $\PRS(k)$\\
-$r=q+1-k$ & redundancy\\
+$k$ & code dimension in the full-support code $\PRS(k)$\\
+$r$ & redundancy; $r=|S|-\dim C_S(v)$, and $r=q+1-k$ only for full support\\
 $n=r-1$ & divided-power degree of a syndrome representative\\
 $E$ & a two-dimensional vector space over the current base field\\
 $f\in\Gamma^nE$ & divided-power representative of a projective syndrome\\
 $W_f\subset\Sym^{n-1}E^\vee$ & Hankel/apolar witness system annihilated by $f$\\
-$g,\delta,\kappa$ & genus, deletion degree, and point-bound correction\\
-$d$ & degree of the unavailable marker scheme\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -91,6 +89,37 @@ degree $r-2$ over $\F_q$.
 We use \emph{split-free} without a covering-radius hypothesis and call
 a direction \emph{shallow} when \(W_f\) contains a completely split
 squarefree form.
+
+The following terms describe the interfaces used in the recursive proof.
+They name geometric data, not additional hypotheses.
+\begin{table}[ht]
+\centering
+\small
+\caption{The recursive vocabulary and its coding role.}
+\label{tab:recursive-vocabulary}
+\begin{tabular}{p{0.16\textwidth}p{0.76\textwidth}}
+\toprule
+Term & Meaning\\
+\midrule
+split locator on \(S\) & a product of \(r-2\) distinct rational linear
+factors in \(W_f\), with zeros in \(S\); it encodes an \((r-2)\)-column
+representation of \(f\)\\
+split-free / shallow & no split locator on \(S\) / the existence of one; for
+full support this is exactly the absence / existence of a completely split
+squarefree member of \(W_f\)\\
+marker & one selected factor \(\lambda\); contraction replaces \(f\) by
+\(\iota_\lambda f\), and lifting multiplies by \(\lambda\)\\
+polar line & the projective image of
+\([\lambda]\mapsto[\iota_\lambda f]\) as the marker varies\\
+collision & a marker fixed in the lower witness system, so every lift repeats
+\(\lambda\)\\
+persistent locus & common-quadratic rank-two families; tangents and conjugate
+secants are split-free, while rational secants are shallow on full support\\
+carrier & a closed locus where every contraction may remain obstructed;
+membership does not by itself assert deepness\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 The first locus that persists under contraction is already visible
 here.  If every member of $W_f$ has a common quadratic factor, then
