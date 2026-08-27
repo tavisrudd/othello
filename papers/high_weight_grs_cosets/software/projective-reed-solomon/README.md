@@ -10,8 +10,8 @@ decoding work beyond the paper's classification range; a positive deep-hole verd
 matching theorem-domain entry and carries a certificate that can be replayed
 independently.
 
-The software accompanies *High-weight cosets of generalized and extended
-Reed--Solomon codes*.  Its simultaneous locator implements the constructive
+The software accompanies *High-Weight Cosets of Generalized and Extended
+Reed--Solomon Codes*.  Its simultaneous locator implements the constructive
 step in the paper's arbitrary-redundancy theorem: prescribed projective roots
 can be forbidden, so point-deleted supports use the same certificate path.
 Outside the explicit carriers, the theorem guarantees existence in its stated

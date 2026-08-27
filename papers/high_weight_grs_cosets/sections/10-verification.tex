@@ -85,6 +85,16 @@ version-specific DOI in \texttt{supplement/RELEASE-MANIFEST.md}; the stable
 concept DOI is \href{https://doi.org/10.5281/zenodo.21682069}%
 {10.5281/zenodo.21682069}.
 
+\ifTITSubmission
+The electronic supplement includes Projective Reed--Solomon Toolkit, a
+proof-carrying executable for exact canonicalization, budgeted distance and
+decoding, theorem-gated classification, certificate replay, and the
+simultaneous locator construction of
+Theorem~\ref{thm:simultaneous-marker-escape}.  It fails closed on budget or
+theorem-domain exhaustion: computation outside a proved classification domain
+cannot create a positive deep-hole claim.  Its README specifies the commands,
+complexity, registry, and trust semantics.
+\else
 The repository includes Projective Reed--Solomon Toolkit under
 \texttt{software/}.  This proof-carrying executable lets a reader move from a
 versioned syndrome request to an independently replayable result.  For every
@@ -118,3 +128,4 @@ $q$ and $r=q-1$; its verifier replays the $e_{r-2}$ terminal-locator
 obstruction and uses the dimension-two radius theorem of
 \cite[Thm.~17(1)]{WuDingChen2023}.  It is a certified family, not a complete
 R11-or-higher classification.
+\fi

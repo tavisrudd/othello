@@ -194,7 +194,7 @@ graphs*
 
 **Active unnumbered candidate · `high_weight_grs_cosets`** — *High-weight cosets of generalized and
 extended Reed--Solomon codes*
-- *Status:* 42-page archival manuscript and 30-page IEEE TIT version with a public verification
+- *Status:* 42-page archival manuscript and 31-page IEEE TIT version with a public verification
   bundle; the current revision is under final artifact packaging.
 - *Owns:* the arbitrary-redundancy classification of all weight-at-least-(r-1) cosets for
   point-deleted projective-line supports, its deep-hole and MDS/NMDS extension consequences, and

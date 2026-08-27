@@ -11,7 +11,7 @@ for proof-integration defects; the explicit terminal-selector lemma, complete
 stagewise appendix proofs, imported-range arithmetic, trust boundary, and
 fixed-level subordination are repaired.  R8--R10 now remain companion-source
 results rather than submission claims.  The current builds are 42 canonical
-pages and 30/50 TIT review pages, with 55 reconciled formal annotations and
+pages and 31/50 TIT review pages, with 55 reconciled formal annotations and
 green manuscript, supplement, and software gates.  The exact-threshold,
 falling-factorial, Lucas-index, reference, and artifact-route repairs from the
 final read are complete.  The authority is being renamed to

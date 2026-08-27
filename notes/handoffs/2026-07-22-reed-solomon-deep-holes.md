@@ -129,7 +129,7 @@ field range; the deep-hole shells, MDS/NMDS one-column extensions,
 family-minimum-support counts, and aggregate enumerators follow from that
 spine.  R5--R7 are sharp refinements and R8--R10 are companion records only.
 Three PDF-only referee rounds ended at minor revision 8.5/10 with no conceptual
-blocker, and every requested repair is in the 42-page archival and 30-page TIT
+blocker, and every requested repair is in the 42-page archival and 31-page TIT
 PDFs.  The authority is `papers/high_weight_grs_cosets`; the TeX/PDF basename,
 local standalone directory, exporter repository, and future upstream name are
 `high-weight-grs-cosets`.  Authority commits are `4008f090f` and `e9b31ee22`;

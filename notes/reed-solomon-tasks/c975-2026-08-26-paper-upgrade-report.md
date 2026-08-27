@@ -94,7 +94,7 @@ version-specific DOI at acceptance.
 
 - abstract lint: 199/200 words;
 - formal annotations: 55/55 reconciled;
-- TIT review build: 30 pages, target strictly below 50;
+- TIT review build: 31 pages, target strictly below 50;
 - canonical build: 42 pages;
 - paper-local evidence: 74 artifacts;
 - companion software manifest: 24 artifacts;

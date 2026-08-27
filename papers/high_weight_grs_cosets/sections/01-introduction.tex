@@ -65,6 +65,16 @@ The corresponding numbers of nonzero cosets are \((q-1)N_r\) and
 \((q-1)N_{r-1}\).
 \end{theorem}
 
+Here \(Q^*_{r,s}=6(r+s)+O(\sqrt{r+s})\).  The conclusion has three levels:
+in every characteristic the field-size hypothesis confines all
+weight-at-least-\((r-1)\) syndromes to
+\(\cP_r\cup\cM^{\max}_{r,p}\); if \(p>r-1\), the Lucas carrier vanishes and
+the shells are completely classified; in small characteristic, the only
+unresolved arbitrary-redundancy arithmetic is confined to the explicit Lucas
+carrier \(\cM^{\max}_{r,p}\).  In the complete-classification range, deleting
+even one point is substantive: the radius jumps from \(r-1\) to \(r\), and the
+omitted points become exactly the new weight-\(r\) shell.
+
 The only computer-algebra input to the uniform theorem is the exact reduced
 terminal-carrier decomposition in Proposition~\ref{prop:reduced-terminal-carrier},
 verified by the registered Gr\"obner-elimination certificate.  Recursive
@@ -72,10 +82,12 @@ component selection, simultaneous finite-field selection, shell transfer, and
 the enumerative double counts are mathematical arguments.  The covering-radius
 and MDS-extension gates are imported from Seroussi--Roth and D\"ur.
 
-The same statement has two immediate coding readings.  Appending \(f\) as a new
-parity-check column gives a code \(\widehat C_f\) with
-\(d(\widehat C_f)=d_S(f)+1\).  Thus the two displayed shells classify all
-MDS and NMDS one-column extensions in this family.  A family-wise double count
+\noindent\textbf{Coding interpretation.}
+Theorem~\ref{thm:main} classifies every coset in the two highest possible
+weight shells of these GRS codes and, equivalently, every one-column extension
+having Singleton defect at most one.
+Indeed, appending \(f\) as a parity-check column gives a code \(\widehat C_f\)
+with \(d(\widehat C_f)=d_S(f)+1\).  A family-wise double count
 determines the aggregate number of minimum words in the tangent,
 conjugate-secant, and incident-split-secant families; the standard NMDS
 recurrence then gives their complete family-aggregate weight enumerators.
@@ -103,17 +115,18 @@ redundancy.  The novelty here is that conjunction and its uniform exclusion
 off the explicit carrier; the extension and enumerator statements are its
 consequences.
 
-The proof has two geometric inputs.  Composite contraction sends \(f\) to the
-terminal redundancy-five system while remembering all \(r-5\) contracted
-roots.  The reduced carrier theorem confines every trapped row space to
-\(\cP_r\cup\cM^{\max}_{r,p}\).  Outside that union, one terminal equation has
-degree at most six in each marker; a Vandermonde argument chooses all markers
-at once, and the exact R5 pencil count supplies a split cubic avoiding them
-and \(A\).  No intermediate classification is assumed.
+The key compression is simultaneous: instead of classifying intermediate
+redundancies, the proof selects all \(r-5\) roots and counts one terminal R5
+cubic pencil.  The carrier theorem confines trapped row spaces to
+\(\cP_r\cup\cM^{\max}_{r,p}\); outside it, a degree-six marker equation, a
+Vandermonde choice, and the exact R5 count give the split cubic.  The witnesses
+are abundant, not fragile: there are at least
+\(q^{r-4}/(r-2)!-O_{r,s}(q^{r-9/2})\) split locators supported on \(S\).
 
 The full-support calculations remain useful where they are sharper than the
 uniform theorem.  Redundancy five supplies the terminal cubic engine and a
 complete classification over every prime power \(q\geq7\); redundancies six
 and seven supply exact small-field and modular refinements.  They are stated
 and proved after the arbitrary-redundancy theorem, with their separate radius
-and certificate boundaries kept explicit.
+and certificate boundaries kept explicit.  The earlier R8--R10 calculations
+are companion records, not induction hypotheses or claims of this submission.
