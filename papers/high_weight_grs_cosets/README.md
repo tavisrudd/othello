@@ -90,8 +90,8 @@ d_S(f) ≥ r−1  =>  f lies in the rank-two locus or the maximal Lucas carrier.
 ```
 
 Exact redundancy-five through redundancy-seven results provide sharper
-small-field and modular refinements. The earlier R8--R10 calculations are
-retained as companion records and are not claims of the submission.
+small-field and modular refinements. The R8--R10 calculations are retained as
+companion records but are not included in the paper's theorem set.
 
 ## Main consequences
 
@@ -120,7 +120,7 @@ elimination replays. Recursive component selection, simultaneous marker
 selection, the genus-one count, shell transfer, and the enumerative double
 counts are mathematical arguments.
 
-The covering-radius and MDS-extension gates use pinpointed results of
+The covering-radius and MDS-extension inputs use pinpointed results of
 Seroussi--Roth and Dür. Every imported result and convention match is recorded
 in [`verification/imported-sources.json`](verification/imported-sources.json).
 The electronic supplement maps every manuscript claim to its human proof,
@@ -175,9 +175,9 @@ examples and exact trust semantics.
 
 ## Files
 
-- `high-weight-grs-cosets.pdf` is the 44-page archival paper.
+- `high-weight-grs-cosets.pdf` is the 43-page archival paper.
 - `high-weight-grs-cosets.tex` is its manuscript driver.
-- `high-weight-grs-cosets-tit.pdf` is the 32-page IEEE TIT version.
+- `high-weight-grs-cosets-tit.pdf` is the 31-page IEEE TIT version.
 - `high-weight-grs-cosets-tit.tex` is the corresponding submission driver.
 - `sections/` contains the common theorem spine and fixed R5--R7 refinements.
 - `supplement/companion-source/` preserves the R8--R10 companion record; its
