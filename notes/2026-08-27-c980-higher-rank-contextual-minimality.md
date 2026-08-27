@@ -30,7 +30,10 @@ proof, literature, and hostile-review gates.
 2. **Bounded small model.**  Through helper radius `r`, contextual equivalence
    is decided by outer codes of length at most `max(2,r+1)` and
    functional-dual dimension at most `min(t,r)`.  The orbit-normalized finite
-   table is the exact coarsest observable numerical quotient.
+   table is the exact coarsest observable numerical quotient.  For a fixed
+   large outer code, its response is the minimum over dual shortenings to the
+   target and at most `r` helpers; the same shortenings cover every bounded
+   coefficient witness and exact helper support.
 3. **Universality and congruence.**  Every invariant predicting all bounded
    outer responses factors through this quotient, and the quotient is a
    congruence for compatible concatenation.  A finite layer library therefore
@@ -41,10 +44,13 @@ proof, literature, and hostile-review gates.
 5. **Ordered-monoid and Pareto closure.**  Every finite extensive ordered cost
    monoid has a finite contextual quotient.  For `k` additive resources the
    sharp universal repetition cap is `1+k(R-1)`; when helper count is tracked,
-   the stronger radius-`r_h` small model has length at most `r_h+1`.
-6. **Multi-target-block compression.**  With `p` target blocks and surjective
+   the stronger radius-`r_h` small model has length at most `max(2,r_h+1)`.
+6. **Fixed-batch packing.**  A batch with per-request budgets `r_i` and
+   per-helper capacities has a relational small model on at most
+   `max(2,p+sum_i r_i)` blocks, retaining exact load and overlap patterns.
+7. **Multi-target-block compression.**  With `p` target blocks and surjective
    outer target projection, any cost-`r` joint witness compresses to at most
-   `p+r` blocks.  The missing piece is the corresponding multi-block
+   `max(2,p+r)` blocks.  The missing piece is the corresponding multi-block
    target-normalized labelled-cost interface.
 
 ## Starting point
@@ -196,8 +202,9 @@ heuristic.
 
 There is a matching cutoff on the target side.  A normalized recovery system
 for a `t`-dimensional target subspace expresses that subspace in the span of
-its helper generator columns.  A helper union of size `c` spans dimension at
-most `c`, so every such system satisfies
+its helper generator columns: orthogonality and target normalization give
+`v=-G_H beta(v)` for every `v in T`.  A helper union of size `c` spans
+dimension at most `c`, so every such system satisfies
 
 ```text
 t <= c.
@@ -243,6 +250,176 @@ truncation at `R` is therefore witnessed at outer length at most `max(2,R)`.
 This small-model theorem is stronger than coordinatewise multiplicity capping:
 the total helper multiplicity, not merely each type multiplicity, is at most
 `R-1`.
+
+The bounded witness-cover theorem below gives a uniform version of this proof:
+choose an actual minimizing coefficient system `Y`, retain every external
+block on which `Y_h` is nonzero, and use `span_L(Phi_I Y)(T)` as the small
+functional dual.  This handles the zero and nonzero sectors in one argument
+and yields the same separating inequality for the second inner state.
+
+### Bounded dual-minor formula
+
+The same proof gives an exact evaluator for one fixed large outer code.  Let
+`D=O^perp`, put `r=R-1`, and for `D'<=D` let `esupp(D')` be the set of
+nonzero coordinate projections outside the target block.  Then
+
+```text
+[Gamma_T(O,I)]_R
+  = min over D'<=D with
+        dim_L D'<=min(t,r) and |esupp(D')|<=r
+      [Gamma_T((D')^perp,I)]_R,
+```
+
+where `D'=0` supplies the zero sector.  Every candidate on the right is a
+restriction of the original functional dual, so its minimum cannot be below
+the left-hand minimum.  Conversely, any left-hand minimum below `R` supplies
+`D_B=span_L B(T)` with the stated dimension and support bounds and has the
+same cost there.  If the left-hand side is `R`, every candidate is also
+truncated to `R`.
+
+Puncturing the identically zero external coordinates of each `D'` turns its
+term into one of the finite column-type probes.  This formula is therefore the
+explicit decoder from the contextual state to the response of an arbitrary
+large outer code.
+
+Equivalently, for each helper set `S` put
+
+```text
+D_S = D intersect L^({j} union S),
+```
+
+the shortening of the outer functional dual to the target and `S`.  Then
+
+```text
+[Gamma_T(O,I)]_R
+  = min_{S subseteq [N] minus {j}, |S|<=r}
+      [Gamma_T((D_S)^perp,I)]_R.
+```
+
+Every `D_S` is a subspace of `D`, while a minimizing map of cost below `R`
+lies in `D_A` for its active external set `A`.  This proves both inequalities.
+Moreover `dim_L D_S<=|S|`, since its helper projection is injective.  Thus
+bounded transfer depends only on the radius-`r` local shortening profile of
+the outer dual around the target coordinate.  This is often the more useful
+form for computation or outer-code preprocessing.
+
+For fixed `r`, the outer-code side therefore requires at most
+
+```text
+sum_{k=0}^r binom(N-1,k)
+```
+
+shortenings.  Puncture each shortening to `{j} union S`, canonicalize its
+column list under `GL_s(L)`, and cache one response per orbit.  The exact
+bounded response is then a minimum of table lookups.  This is a theorem-led
+`N^r` outer preprocessing algorithm; fibre evaluation may still dominate, and
+minimum-support or pointed-GHW information can prune empty ranks and subsets.
+
+Define the numerical radius-`r` outer signature at target `j` by
+
+```text
+Sig_r,j(D) = set of GL-orbits of the punctured shortenings
+             D intersect L^({j} union S),  |S|<=r.
+```
+
+Duplicates are irrelevant for a minimum.  The dual-shortening formula becomes
+the exact pairing
+
+```text
+[Gamma_T(O,I)]_(r+1)
+  = min_{K in Sig_r,j(O^perp)} sigma_(r+1)(I)(K).
+```
+
+Consequently two outer codes with the same signature give the same bounded
+nonconfinement cost for every compatible inner recovery problem.  This is the
+outer counterpart of the minimal inner contextual state and suggests code
+synthesis over shortening signatures rather than full generator matrices.
+For witness counts, reliability, or scheduling, duplicates and the labeled
+placements `S` can matter; retain the labeled multiset signature instead of
+the numerical set in those semantics.
+
+### Bounded witness-cover theorem
+
+The small-model mechanism is not limited to numerical minima.  Let
+`Y:T->(O o I)^perp` be one normalized coefficient system of helper cost at
+most `r`, and let `B=Phi_I Y:T->D`.  Define
+
+```text
+D_Y = span_L B(T),
+S_Y = {external blocks h : Y_h is not the zero coefficient map}.
+```
+
+Every block in `S_Y` contains at least one helper coordinate in the union
+support, so `|S_Y|<=r`.  The nonzero coordinate maps of `B` are a subset of
+`S_Y` and span `D_Y^vee`; zero-label blocks may still carry inner-dual
+coefficients, which is why `S_Y` is defined from `Y` rather than from `B`.
+Projection of `D_Y` to the target and `S_Y` is injective.
+
+Restricting `Y` to those blocks therefore gives the same coefficient system,
+with the same exact helper support and cost, in an outer context of length at
+most `max(2,r+1)` and functional-dual dimension at most `min(t,r)`.  Conversely,
+because `D_Y<=D`, zero-extension of this restricted system is the original
+system.  The pair `(D_Y,S_Y)` is intrinsic to `Y`, so this is a canonical
+compression of each witness, not only an existence proof.
+
+For `B=0`, take `D_Y=0`; the active external blocks carry inner-dual maps and
+the same argument applies.  Thus the complete family of cost-`<=r`
+coefficient systems in an arbitrary outer code is covered by zero-extensions
+from its shortenings to the target and at most `r` active external blocks.
+Retaining the label span and active block set makes the cover disjoint at the
+level of compressed witness data.
+
+This theorem explains the semantics boundary precisely.  The minimal
+numerical quotient discards argmins, but a witness-bearing compiler can retain
+the bounded systems themselves without ever needing a larger outer context.
+Comparing witnesses across different inner codes still requires an explicit
+identification of their coefficient coordinates; no such identification is
+implicit in numerical contextual equivalence.
+
+For a fixed represented inner code and outer code, enumerating these
+shortenings, expanding their bounded witnesses, zero-extending, and
+deduplicating reconstructs the complete bounded coefficient family and its
+exact helper-support projection.  Bounded reliability, service allocation,
+and scheduling models derived from those support or coefficient families can
+therefore use the same local shortening cover.  This does not contradict the
+paper's reliability separation: the witness families are strictly richer
+than the minimal numerical response state.
+
+Writing `Sys_<=r(D)` for the normalized coefficient systems in the outer
+functional dual `D`, the cover has the compact exact form
+
+```text
+Sys_<=r(D)
+  = union_{S subseteq helpers, |S|<=r}
+      zero_extend_S Sys_<=r(D intersect L^({j} union S)).
+```
+
+Duplicates correspond to a system whose active external set is contained in
+more than one enumerated `S`; selecting `S=S_Y` gives its canonical member.
+
+It also recovers the standard outer-distance gate transparently.  A nonzero
+eligible `D'` has total block support at most `r+1`; hence none exists when
+`d(O^perp)>r+1`.  In that case the bounded response is exactly the zero-sector
+response.  The dual-minor formula retains all low-support sectors when the
+distance gate does not remove them.
+
+For rankwise pruning, define the pointed outer support numbers
+
+```text
+delta_j,s(D) = min_{D'<=D, dim_L D'=s} |esupp(D')|.
+```
+
+Only ranks with `delta_j,s(D)<=r` can contribute.  Ordinary generalized
+weights give the immediate sandwich
+
+```text
+d_s(D)-1 <= delta_j,s(D) <= d_s(D),
+```
+
+because deleting the distinguished coordinate changes a support size by at
+most one.  Thus the outer GHW hierarchy is a safe prefilter, while the pointed
+quantity records whether the target coordinate participates.  Neither scalar
+profile replaces the labelled cost evaluation on the surviving subspaces.
 
 ### Bounded higher-rank contextual-state theorem
 
@@ -300,6 +477,25 @@ entry, including `Z_R`, lies in `{0,...,R}`.  Hence there are at most
 contextual classes for the fixed interface.  This is a coarse existence
 bound, not a claim that the state is practically small.
 
+The nonspanning vectors can be removed in closed form.  In radius notation
+`r=R-1`, Möbius inversion on the full subspace lattice of `V_s^vee` gives the
+exact number
+
+```text
+S_s(r,Q) = sum_{d=0}^s GaussianBinom(s,d)_Q
+             (-1)^(s-d) Q^binom(s-d,2)
+             binom(Q^d+r-1,r)
+```
+
+of spanning multiplicity functions of total size at most `r`.  The binomial
+factor counts multisets supported in one fixed `d`-subspace, and the displayed
+coefficient is the Möbius function of the finite subspace lattice.  Thus the
+exact pre-basis-quotient probe count is
+
+```text
+sum_{s=1}^u_R Q^s S_s(R-1,Q).
+```
+
 The basis quotient immediately improves this count.  `GL_s(L)` has two
 orbits on target types: zero and nonzero.  Normalize a nonzero target type to
 one fixed covector and leave the zero type fixed.  Before even quotienting the
@@ -347,6 +543,23 @@ Thus a target line's complete radius-one numerical state consists of the
 zero-sector value and exactly `Q=|L|` two-block probes.  Higher-dimensional
 targets have no one-helper recovery systems.  This both checks the formulas
 and gives the smallest worked instance of the all-rank construction.
+
+For a second check, take `L=F2`, `r=2`, and `t>=2`.  At `s=1`, the helper
+multiplicity is one or two and the normalized target/helper ratio is zero or
+one, giving four orbits.  At `s=2`, spanning with at most two helpers forces an
+unordered basis, on which `GL_2(F2)` is transitive.  Relative to that unordered
+basis, the target type has three orbits: zero, one of the two basis covectors,
+or their sum.  Hence there are seven nonzero-sector probe orbits and, with the
+zero sector, eight state coordinates.  This agrees with the orbit and
+rank--radius formulas without using their coarse binomial upper bound.
+
+The theorem also gives finite certificates.  Inequivalence through radius
+`r` has a separating outer code of length at most `max(2,r+1)`, together with
+the two exact response values and a minimizing coefficient witness for the
+smaller one.  Equivalence is certified by equality of the finite orbit-indexed
+tables, provided each fibre optimum is itself certified.  A witness-producing
+fibre oracle therefore turns the semantic theorem directly into replayable
+contextual-equivalence and inequivalence certificates.
 
 Indeed, constructing the state is NP-hard in general.  Its zero-sector
 coordinate already contains exact recovery cost and inner-dual minimum-distance
@@ -396,6 +609,9 @@ max(2,z)
 blocks (or two blocks when the zero-sector values already differ).  In
 particular, the manuscript's exact rank-one contextual quotient has a finite
 outer-arity-independent realization, not only its bounded-radius shadow.
+Taking `r=z-1` in the dual-shortening formula also recovers the manuscript's
+exact outer-distance collapse: `d(O^perp)>z` leaves only the zero sector, so
+`Gamma_T=z`.
 
 ## Arity-independent finite representation
 
@@ -409,9 +625,9 @@ slopes:     (lambda(a X))_{a in V_s^vee minus {0}}.
 ```
 
 There are at most `Q^(t s)-1` such forms for fixed `(s,a_0)`, and
-`Q^s` target types, including zero.  Thus all finite outer arities are represented by a
-finite family of tropical lower envelopes, with raw coefficient count bounded
-by
+`Q^s` target types, including zero.  Thus all finite outer arities are
+represented by a finite family of tropical lower envelopes, with raw
+coefficient count bounded by
 
 ```text
 sum_{s=1}^t Q^(2s) (Q^(t s)-1).
@@ -485,6 +701,12 @@ For the Pareto table, which uses a coordinatewise cap rather than the scalar
 total-size reduction, the fixed-point count instead assigns one of
 `K_R,k+1` values independently to each group orbit before imposing spanning.
 
+If `N_orb(R,Q,t)` denotes the sum of these two orbit counts over
+`1<=s<=u_R`, the final exact census statement is: the canonical response
+vector has `1+N_orb` coordinates including the zero sector, and its image has
+at most `(R+1)^(1+N_orb)` contextual classes.  The actual image may be much
+smaller because prescribed-coset cost tables satisfy realizability relations.
+
 A unique smallest affine-form presentation does not follow.  On a finite
 integer grid, distinct collections of tied forms can define the same lower
 envelope and different minimal subcollections need not be unique.  The
@@ -495,6 +717,47 @@ problem.
 For `t=s=1`, the formula reduces to the zero-truncated projective line-probe
 profile already in the paper: changing the generator of the one-dimensional
 outer dual is exactly the scalar minimization in that theorem.
+
+### Rank-stratified tropical recursion
+
+For computation, split the envelope by the exact `L`-span of `X(T)`.  Define
+
+```text
+E_s(a_0,n) = min over X:T->V_s with span_L X(T)=V_s of
+             mu(a_0 X) + sum_a n_a lambda(a X).
+```
+
+If a nonzero `X:T->V_s` has image span `H<V_s`, restricting every target and
+helper covector to `H` gives a lower-dimensional column context, and the same
+cost is an exact-span term there.  Therefore
+
+```text
+F_s(K) = min_{0 != H <= V_s} E_dim(H)(K restricted to H),
+```
+
+after choosing a basis of each `H` and deleting zero helper columns.  The
+result is basis-independent.  This yields a triangular dynamic program in
+functional-dual rank and prevents lower-rank sectors from being recomputed in
+every higher-rank envelope.
+
+The number of full-`L`-span `Fq`-linear maps `T->V_s` is itself
+
+```text
+sum_{d=0}^s GaussianBinom(s,d)_Q
+  (-1)^(s-d) Q^binom(s-d,2) Q^(t d),
+```
+
+again by subspace-lattice Möbius inversion.  Exact-rank values `E_s` are useful
+compiled intermediates, but they are not separately observable: lower-rank
+contexts can mask them.  The contextual quotient must still store the final
+responses `C_R`.
+
+Storing one minimizing subspace `H`, full-span map `X`, and minimizing target
+and helper fibre lifts at each step propagates a replayable coefficient
+witness.  Combined with the minimizing outer shortening `S`, the witness path
+records every reduction from the large outer code to the leaf coefficient
+maps.  Retaining all ties gives the complete bounded witness family rather
+than one argmin.
 
 ### Unbounded targets with no finite zero-sector ceiling
 
@@ -620,6 +883,22 @@ claim that the raw state bound is computationally attractive.  A useful
 compiler still needs orbit reduction or a certified compressed circuit for
 the response function.
 
+### Family-restricted contextual quotients
+
+If applications allow only a class `C` of outer contexts, restrict
+`sigma_R` to the small probe orbits realized by members of `C`.  Equality on
+those coordinates is the coarsest numerical state observable by that family.
+When `C` is closed under compatible continuation and composition, the same
+continuation argument makes the restricted equivalence a congruence.
+
+This can collapse the state dramatically.  An outer family with
+`d(O^perp)>r+1` realizes no nonzero radius-`r` shortening and observes only the
+zero sector.  A locally recoverable outer family observes only the orbit types
+of its low-support local dual shortenings.  Thus MDS-like large-distance
+storage layers and sparse-local-parity layers reduce the universal state for
+opposite structural reasons, both visible directly from the bounded
+dual-shortening formula.
+
 ## Finite ordered-monoid and Pareto extensions
 
 The finiteness argument is not specific to addition.  Let `M` be a finite
@@ -637,14 +916,21 @@ fibre value `A`, its powers satisfy
 up(A^(n+1)) subseteq up(A^n),
 ```
 
-by extensivity.  This descending chain stabilizes within `|M|` strict steps,
-and equality of consecutive powers propagates under multiplication by `A`.
-Thus every column-type multiplicity can be capped at `|M|`.  The column-type
-proof then gives a finite contextual quotient and a distinguishing-context
-bound
+by extensivity.  If `A` is nonempty, every power remains nonempty, so a chain
+starting at all of `M` can make at most `|M|-1` strict drops; if `A` is empty,
+all positive powers are already empty.  Equality of consecutive powers
+propagates under multiplication by `A`.  Thus every column-type multiplicity
+can be capped at
 
 ```text
-1 + |M| (Q^t - 1).
+K_M = max(1,|M|-1).
+```
+
+The column-type proof then gives a finite contextual quotient and a
+distinguishing-context bound
+
+```text
+1 + K_M (Q^t - 1).
 ```
 
 This is a general bounded-cost theorem.  It covers saturated additive costs,
@@ -767,6 +1053,17 @@ budget.
 The generic `K_R,k` cap remains necessary only when no resource controls the
 number of active blocks.
 
+More generally, any scalar or vector resource admitting a nonnegative
+rank-control gauge `nu` gives the same compression.  If every nonzero external
+label has `nu`-cost at least `delta>0` and the allowed budget is `b`, then a
+minimizing numerical sector has at most `floor(b/delta)` active external
+blocks.  For the full witness-cover statement, impose the same lower bound on
+every nonzero external coefficient block, including zero-label inner-dual
+blocks.  Replace `r` by `floor(b/delta)` in the rank, length, shortening, and
+probe-count bounds.  The unit helper-count coordinate is the sharp special
+case `delta=1`; zero-cost active blocks invalidate this stronger bound but not
+the generic finite-monoid cap.
+
 This proves a finite higher-rank contextual algebra for any fixed finite list
 of additive resources—for example helper count together with finitely many
 fixed traffic or energy categories.  It also applies to a max- or
@@ -792,6 +1089,48 @@ Those failures locate the extra state that a stronger theory must retain:
 subpacketization needs an enriched interface law, while packing needs helper
 identity and overlap rather than only a fixed-dimensional cost vector.
 
+### Fixed-batch packing small model
+
+Packing nevertheless has a finite small model when the batch and helper
+budgets are fixed.  Consider `m` normalized recovery systems, with request
+`i` using at most `r_i` helpers, and let `p` be the number of distinguished
+outer target blocks.  Assume the outer projection onto those targets is
+surjective, equivalently `D intersect L^P=0`.  Let `S` be the union of their
+active external blocks and let `D_joint` be the `L`-span of all their
+functional-label images.  Then
+
+```text
+|S| <= R_sum = sum_i r_i,
+dim_L D_joint <= min(sum_i dim T_i, R_sum).
+```
+
+The nonzero external coordinate maps of the joint label span inject
+`D_joint`; retain all of `S` as well, including blocks carrying only
+zero-label inner-dual coefficients.  Puncturing to the `p` target blocks and
+`S` preserves every coefficient map, exact helper support, per-helper load,
+and capacity comparison.  Zero-extension recovers the original batch.
+
+Consequently any difference in feasibility of a fixed capacitated batch is
+witnessed by an outer context of length at most
+
+```text
+max(2,p+R_sum).
+```
+
+If the batch has one total union budget `R_union`, replace `R_sum` by
+`R_union`.  This gives a finite relational contextual state for fixed batch
+size and budgets.  It does not give a uniform fixed-dimensional Pareto state
+as `m` or the budgets grow; the state must retain the labeled helper-overlap
+and load patterns on those bounded active blocks.
+
+Define two inner models to be batch-equivalent when every compatible context
+has the same feasible bounded load patterns.  The compression above gives a
+finite test family, and the continuation-composition argument makes this
+equivalence a congruence.  Thus fixed-batch capacitated repair has the same
+finite syntactic-state architecture as the scalar problem, but its state is a
+finite relation on labeled overlap patterns rather than a min-plus value
+function.
+
 ## Extensions requested by the research feedback
 
 ### Multi-target-block compression lemma
@@ -815,7 +1154,7 @@ compresses to the `p` target blocks and at most `r` active external blocks:
 
 ```text
 functional-dual image dimension <= r,
-outer length <= p+r.
+outer length <= max(2,p+r).
 ```
 
 The same restriction monotonicity used in the one-target proof preserves a
@@ -886,6 +1225,22 @@ before stabilizer-orbit reduction of helper multiplicities.
   networks, and algebraic dynamic programming before making a Myhill--Nerode or
   priority claim.
 
+## Proof-dependency audit
+
+The scalar theorem package uses only the manuscript's exact two-sector
+nonconfinement formula, its rank-bounded outer-test proposition, elementary
+finite-dimensional duality, and the already-proved associative
+target-normalized composition law.  The small-model, shortening, and witness
+cover arguments are direct restrictions of a minimizing label or coefficient
+map; no computation or classification theorem enters.
+
+The orbit census additionally uses only Burnside's lemma and Möbius inversion
+on a finite invariant-subspace lattice.  The ordered-monoid and Pareto results
+are finite-poset arguments.  Literature is needed for priority and terminology,
+not to close a missing proof step.  An independent hostile proof read remains
+required because all proofs in this report were developed and audited in one
+research thread.
+
 ## Work order
 
 1. **Done as a candidate theorem:** typed column response, bounded
@@ -950,12 +1305,16 @@ Open mysteries:
    the `r+1` separating-context bound and contextual-class lower bounds remain
    open.
 4. **Witness semantics.**  Numerical contextual equivalence need not transport
-   coefficient argmins.  The smallest compositional witness-bearing state may
-   be strictly larger.
+   coefficient argmins.  The bounded witness-cover theorem now proves that all
+   coefficient systems and exact supports come from shortenings to at most `r`
+   external blocks, including zero-label inner-dual perturbations.  The
+   smallest compositional witness-bearing quotient, and comparison across
+   nonidentical coefficient coordinate sets, remain open.
 5. **Pareto closure — settled within a fixed resource interface.**  Finite
    antichains close under saturated Minkowski addition and Pareto choice.
-   Per-helper packing has growing dimension and still requires labelled
-   overlap state; subpacketization is covered only when it is an
+   Fixed-batch per-helper packing now has a relational small model of size
+   `max(2,p+sum r_i)`; unbounded batch size still has growing dimension and
+   requires labelled overlap state.  Subpacketization is covered only when it is an
    interface-independent finite monoid cost.
 6. **Priority.**  The connection with syntactic congruences, tropical series,
    valued CSPs, and weighted tree automata requires a full literature audit
@@ -963,3 +1322,7 @@ Open mysteries:
 7. **Tower dynamics.**  Finite-state iteration is eventually periodic.  It is
    unknown whether the recovery order forces aperiodicity or convergence to a
    fixed point for natural type-preserving outer layers.
+8. **Multiple target blocks.**  The `p+r` compression lemma and target-type
+   orbit classification are proved.  A full target-normalized labelled-cost
+   interface across several outer blocks is the missing theorem before this
+   becomes an exact multi-node-repair state algebra.
