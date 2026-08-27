@@ -213,7 +213,7 @@ lane = "clebsch"
 [[paper]]
 id = "complete_repair_ports"
 dir = "papers/complete-repair-ports"
-main = "complete_repair_ports.tex"
+main = "compositional_recovery.tex"
 lane = "complete-ports"
 
 [[paper]]
