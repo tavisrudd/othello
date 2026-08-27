@@ -35,34 +35,36 @@ The proof uses the quantum \(D\)-module (QDM): the cohomology module over the
 ring of Novikov and bulk parameters, equipped with its flat quantum connection
 \cite{IritaniQDM}.
 The Novikov parameters record curve classes, while the bulk parameters are
-coordinates on cohomology.  We use the even part of the QDM: the odd bulk
-variables are set to zero, and the module is restricted to even cohomology.  We
-then replace the ring of numerical Novikov and even bulk parameters by its
-fraction field; this is what \emph{generic} means below.  In the direction of the
-connection variable \(z\), the leading coefficient is quantum multiplication by
-the Euler field.  Over an algebraic closure of the generic coefficient field,
-its generalized eigenspaces decompose the formal connection into blocks.
+coordinates on cohomology.  By the even QDM we mean that the odd bulk variables
+are set to zero and the module is restricted to even cohomology.  We then
+replace the ring of numerical Novikov and even bulk
+parameters by its fraction field; this is what \emph{generic} means below.  In
+the direction of the connection variable \(z\), the leading coefficient is
+quantum multiplication by the Euler field.  Over an algebraic closure of the
+generic coefficient field, its generalized eigenspaces decompose the formal
+connection into blocks.
 
 We record the block isomorphism classes in a free commutative monoid.  For an
 additive marker on this monoid, Iritani's blowup theorem gives a formula for
-its change under blowup, with the individual center summands retained
-separately.  Combined with weak factorization, this formula makes any such
-marker that vanishes on every center occurring in a weak factorization of
-smooth fourfolds a birational invariant.
+its change under blowup, with each center summand retained.  Combined with
+weak factorization, this formula makes any such marker that vanishes on every
+center occurring in a weak factorization of smooth fourfolds a birational
+invariant.
 
 The marker counts rank-two blocks for which the centered leading term \(N\) of
 Euler multiplication is nonzero and satisfies \(N^2=0\).  Horizontality of the
 Poincar\'e pairing makes a canonical elementary modification regular singular,
 while flatness gives a Lax equation for its residue and hence preserves its
-eigenvalues.  We count the block when the two residue eigenvalues, equivalently
-the two formal exponent classes, are distinct modulo \(\Z\).  Using Beauville's
-quantum product formulas, we compute exponent representatives \(-1/6\) and
-\(-5/6\) for the cubic block, with difference \(2/3\).  The resulting marker
+eigenvalues.  We count the block when the two residue eigenvalues are distinct
+modulo \(\Z\), equivalently when the two formal exponent classes are distinct.
+Using Beauville's quantum product formulas, we compute the exponent
+representatives \(-1/6\) and \(-5/6\) for the cubic block, with difference
+\(2/3\).  The resulting marker
 vanishes on points, curves, and surfaces and on projective space.
 Iritani--Koto's projective-bundle theorem shows that it doubles after product
 with \(\PP^1\).  This proves the theorem.
 
-This use of Euler spectral pieces in birational geometry belongs to the same
+This use of Euler eigenspace blocks in birational geometry belongs to the same
 circle of ideas as the Hodge-atom framework of
 Katzarkov--Kontsevich--Pantev--Yu \cite{KKPYYu}.  Their framework combines the
 generalized eigenspaces of Euler multiplication, Iritani's blowup theorem, and
@@ -76,9 +78,9 @@ BenedettiFayGuereManivelPerrin}.
 
 The marker used here is narrower: it uses no Hodge structure and records only
 the rank-two formal-exponent condition above.  Its purpose is the
-one-stabilization problem.  The additional ingredients are the faithful
-specialization of each center summand in Iritani's blowup comparison, vanishing
-on every point, curve, and surface center, and Iritani--Koto's
+one-stabilization problem.  The additional ingredients are a specialization
+that keeps the center summands distinct in Iritani's blowup comparison, the
+vanishing of the marker on points, curves, and surfaces, and Iritani--Koto's
 projective-bundle comparison for stabilization
 \cite{IritaniBlowup,IritaniKoto}.  Gyenge gives a complementary
 formal tensor-product theorem for quantum \(D\)-modules of products and proves
@@ -122,8 +124,8 @@ For every smooth prime Fano threefold \(V\) of genus eight,
 \(V\times\PP^1\) is irrational.
 \end{corollary}
 
-The theorem also produces universally \(CH_0\)-trivial fourfolds that are
-irrational.  Universal \(CH_0\)-triviality passes to a projective bundle by
+The theorem also yields universally \(CH_0\)-trivial irrational fourfolds.
+Universal \(CH_0\)-triviality passes to a projective bundle by
 the projective-bundle formula for Chow groups.
 
 \begin{corollary}[Separation in codimension at most three]
