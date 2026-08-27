@@ -113,11 +113,21 @@ The coefficient-space half of that gate is now proved in
 `B3(B2^2+B1B3)!=0`, exactly half of the `B0` values make `N(x)` rootless.
 The remaining binary operation is to realize that balanced direction inside
 a split-quintic chart while retaining the C620 selector, plus the explicit
-degenerate chart beginning at `e7`.  The exact generic realization is now a
-binary-quartic slope pencil: three linear convolution equations fix
-`B1,B2,B3`, a fourth inequality makes the added root run `B0` bijectively,
-and the margin is 32 rootless parameters versus at most 23 selector/zero
-exclusions.
+degenerate chart beginning at `e7`.  A binary-quartic slope pencil gives a
+conditional exact realization with 32 rootless parameters versus at most 23
+selector/zero exclusions, but it is not universal: the dense syndrome
+`(1,1,1,1,1)` forces the slope quartic's constant and linear coefficients to
+zero.  The next structural gate is the full one-variable trace function (or a
+second split direction) on that forced-root stratum.
+The dense obstruction now has its own structural chart: a normalized affine
+two-space plus one root reduces rootlessness to a genuine cubic
+Artin--Schreier trace with at least 24 good parameters, again exceeding the 23
+selector/zero exclusions.  Taking the explicit `beta=1` chart makes the
+moving-root denominator linear; at least 15 parameters survive the exact
+trace/collision exclusions, and the resulting genus-zero curve has 65 points
+against at most 45 deletions.  Thus the dense forced-root syndrome is
+pointedly closed without a certificate.  The remaining GF(64) work is to
+cover the other slope-degenerate strata by the balanced or cubic-trace charts.
 
 ## Objective
 

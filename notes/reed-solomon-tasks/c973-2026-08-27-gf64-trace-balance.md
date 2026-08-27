@@ -1,7 +1,7 @@
 # C973 checkpoint — exact GF(64) trace balance
 
 **Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** coefficient-space
-abundance proved; split-quintic realization remains
+abundance proved; conditional slope chart and its first exact obstruction identified
 
 ## 1. Balance theorem
 
@@ -130,15 +130,156 @@ nonzero fixed roots and the nondegenerate genus-one slice.  The preceding
 Conditions (6) are three homogeneous linear equations on the
 five-dimensional binary-quartic space.  Their kernel has vector dimension at
 least two: it is a projective quartic pencil (or a larger system), not an
-isolated support search.  The remaining generic GF(64) gate is therefore:
+isolated support search.  On the strata where it contains a suitable quartic,
+it gives a complete pointed proof:
 
 > prove that this slope pencil contains a split squarefree quartic avoiding
 > zero with `U0!=0`, and that the C620 selector is nonzero on its added-root
 > line.
 
-This is the correct place to reuse a binary-quartic splitting package.  It is
-strictly smaller than the former five-root trace-selector problem and retains
-the exact 32-versus-23 margin.
+The slope chart is not universal.  For the dense syndrome
+
+\[
+                         z=(1,1,1,1,1),                    \tag{8}
+\]
+
+the three equations `U1=U2=U3=0` are
+
+\[
+\begin{aligned}
+p_0+p_1+p_2+p_3+p_4&=0,\\
+p_1+p_2+p_3+p_4&=0,\\
+p_2+p_3+p_4&=0.
+\end{aligned}
+\]
+
+They force `p0=p1=0`.  Every quartic in the slope pencil therefore contains
+the forbidden root zero, so no quartic allowed by (6) can serve in this
+stratum.  This is an exact structural obstruction, not a failed search.
+
+Consequently (6) is a useful chart and a sharp diagnostic, but not the final
+GF(64) theorem.  The universal proof must allow `B1,B2,B3` to move with the
+added root and analyze the resulting one-variable Artin--Schreier trace
+function, or introduce a second split parameter direction.  It should retain
+the exact balance identity locally rather than revert to a carrier census.
+
+The dense obstruction (8) has an explicit replacement chart.  Choose a
+two-dimensional `F2`-subspace `U` whose subspace polynomial is
+
+\[
+                       L_U(t)=t^4+t^2+\beta t,qquad\beta\ne0.              \tag{9}
+\]
+
+Such a space exists.  Start from `span_F2{1,t}` with `t` outside `F4`; its
+quadratic coefficient `1+t+t^2` is nonzero, and scaling by its unique inverse
+square root normalizes that coefficient to one.  The linear coefficient
+remains nonzero.  Since `L_U(1)=beta`, the affine coset `1+U` is disjoint from
+zero and has polynomial
+
+\[
+                       t^4+t^2+\beta t+\beta.              \tag{10}
+\]
+
+Take these four roots and add the fifth root `a`.  For the dense syndrome,
+direct substitution gives
+
+\[
+                 (B_0,B_1,B_2,B_3)=(a+1,1,\beta a,\beta). \tag{11}
+\]
+
+Thus
+
+\[
+\begin{aligned}
+n_0&=\beta a^2+\beta a+1,\\
+n_1&=\beta,\\
+n_2&=\beta^2a^2+\beta,
+\end{aligned}
+\]
+
+and the rootlessness trace reduces to
+
+\[
+ \operatorname {Tr}\left(
+   \beta a^3+(\beta^{16}+1)a+\beta^{-1}
+ \right).                                                  \tag{12}
+\]
+
+Here trace invariance under fourth powers replaces the term `beta a^4` by
+`beta^16 a`.  The cubic in (12) has nonzero leading coefficient, so its
+Artin--Schreier curve is geometrically integral of genus one.  The Weil bound
+therefore gives at least
+
+\[
+                         (64-16)/2=24                     \tag{13}
+\]
+
+values of `a` with trace one.  The restricted C620 selector has degree at most
+22 in `a`, including collision with the four coset roots, and `a=0` costs one
+more value.  Hence `24>23` closes the dense chart provided the restricted
+selector is not identically zero.
+
+In fact one normalized chart closes directly.  Take `beta=1`; the linearized
+polynomial `t^4+t^2+t` splits over `GF(8) subset GF(64)`, and its affine coset
+has polynomial
+
+\[
+                         H(t)=t^4+t^2+t+1.                 \tag{14}
+\]
+
+Now (12) is simply `Tr(a^3)=1`, because `Tr(1)=0` in the even extension
+`GF(64)/GF(2)`.  At least 24 values satisfy it.  Exclude `a=0`, the four roots
+of `H`, and the at most four roots of
+
+\[
+                         a^4+a^3+1.                        \tag{15}
+\]
+
+At least 15 admissible values remain.
+
+For any such value, the moving-root final-pair data simplify to
+
+\[
+\begin{aligned}
+Q(x)&=1+ax,\\
+\Delta(x)&=(a+1)^2(1+x)^2,\\
+N(x)&=(a^2+1)x^2+x+(a^2+a+1).                             \tag{16}
+\end{aligned}
+\]
+
+The denominator is linear and nonconstant.  At its root, the reduced
+simple-pole test is
+
+\[
+ R=((N\Delta)')^2+(Q')^2N\Delta
+   =\frac{(a+1)^6(a^4+a^3+1)}{a^4}\ne0.                  \tag{17}
+\]
+
+Thus the normalized Artin--Schreier curve is geometrically integral of genus
+zero and has exactly 65 rational points.  Every deletion divisor is proper.
+For a fixed coset root `r`, the identity
+`r^2 Delta+rQ+N=0` would force `r=1/a` and then `a^4=1`, hence `a=1`, already
+excluded by `H(a)=0`.  The moving-root collision polynomial is
+
+\[
+                 (a+1)^2x^4+ax^2+(a^2+a+1),              \tag{18}
+\]
+
+which is never identically zero on the selected domain.  The sharp deletion
+bound is
+
+\[
+ 10+1+2+20+8+2+2=45<65,                                  \tag{19}
+\]
+
+for moving/fixed collisions, the ramified `Q`-root, `Delta=0`, final/fixed
+collisions, final/moving collision, infinity, and moving root zero.  Since
+`N` is rootless, the final pair never contains zero.
+
+This proves pointed shallowness for the dense syndrome (8) over GF(64).  It
+replaces the failed rigid slope pencil by a moving-coefficient cubic trace and
+a linear-denominator genus-zero slice, without any certificate or residual
+selector hypothesis.
 
 The nearest structured realization writes the five fixed roots as an affine
 two-plane plus one point.  If
@@ -151,7 +292,7 @@ is the subspace polynomial of a two-dimensional `F2`-space and `C=L_U(b)` is
 the nonzero value defining a coset disjoint from zero, then
 
 \[
- h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{8}
+ h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{20}
 \]
 
 is automatically split with five distinct nonzero roots when the extra root
@@ -159,22 +300,23 @@ avoids that coset.  Its coefficients are
 
 \[
  (g_0,g_1,g_2,g_3,g_4,g_5)
- =(aC,aB+C,aA+B,A,a,1).                                   \tag{9}
+ =(aC,aB+C,aA+B,A,a,1).                                   \tag{21}
 \]
 
-Equations (8)--(9) give a four-parameter split chart on which the slope-pencil
+Equations (20)--(21) give a four-parameter split chart on which the slope-pencil
 conditions can be imposed explicitly.  The next proof should either:
 
-1. solve the slope-pencil gate (6) directly; or
-2. impose (6) inside the structured subfamily (8)--(9), if its linearized
-   geometry makes quartic splitting transparent.
+1. use the slope-pencil gate (6) on the strata where its constant term is not
+   forced to vanish; or
+2. copy the successful dense calculation (14)--(19) on the remaining
+   forced-root strata.
 
 The degenerate chart `B3D=0` must be treated separately.  It includes the
 endpoint syndrome `e7`, for which `B3=0`, `D=1`, and
 
 \[
  \operatorname {Tr}T
- =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{10}
+ =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{22}
 \]
 
 when `g4!=0`.  This is already an explicit lower-dimensional trace problem,
@@ -202,8 +344,9 @@ arguments do not answer that arithmetic question.
 | Is trace one sparse on the generic coefficient chart? | no; exact density `1/2` | theorem above |
 | Can the trace function collapse to zero? | not when `B3D!=0`; the coefficient in (3) is forced nonzero | proved by squaring |
 | Why is GF(64) numerically plausible? | 32 coefficient values are rootless before selector exclusions | preserve this balance on a split chart |
-| How is the balanced `B0`-line realized by split quintics? | conditionally solved by the slope pencil (6) | prove that pencil has a suitable split quartic and nonzero restricted selector |
-| Does the affine-plane-plus-one chart help? | possibly, as a structured subfamily of the slope pencil | impose (6) in (8)--(9) |
+| How is the balanced `B0`-line realized by split quintics? | conditionally solved by the slope pencil (6), but not universally | use it only off its forced-root strata |
+| What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
+| Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |
 
 Vibe: the trace obstruction is abundant, not exceptional; the last binary

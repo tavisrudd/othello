@@ -128,10 +128,18 @@ Artin--Schreier trace bit.  The coefficient-space trace is now exactly
 balanced: whenever `B3(B2^2+B1B3)!=0`, precisely half of the `B0` values are
 rootless.  The remaining binary gate is realizing that affine direction in a
 split-quintic chart, with a separate explicit degenerate stratum.  Three
-linear slope equations reduce the generic realization to a binary-quartic
-pencil; a suitable split quartic gives exactly 32 rootless parameters versus
-at most 23 exclusions.  The open seam is quartic splitting plus nonvanishing
-of the restricted C620 selector.  Checkpoints:
+linear slope equations give a conditional binary-quartic chart with exactly
+32 rootless parameters versus at most 23 exclusions.  It is not universal:
+the dense syndrome `(1,1,1,1,1)` forces the slope quartic to contain zero.
+The open seam is the full one-variable trace function or a second split
+direction on that forced-root stratum.  For the dense obstruction, a
+normalized affine two-space plus one root gives
+a cubic Artin--Schreier trace with at least 24 good parameters against 23
+exclusions.  The explicit `beta=1` specialization makes the moving-root cover
+genus zero and leaves 65 points against 45 deletions, so the dense forced-root
+syndrome is now pointedly closed without a certificate.  Remaining GF(64)
+work concerns the other slope-degenerate strata.
+Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with
 the structural frontier in
