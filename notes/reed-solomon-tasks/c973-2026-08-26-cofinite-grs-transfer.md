@@ -115,6 +115,12 @@ upper bound
  \frac{(q-1)(N_{r-1}+2s)}{q^r}.                            \tag{5e}
 \]
 
+A uniform received word induces this same uniform syndrome distribution,
+because the syndrome map is surjective and all fibers are code cosets of the
+same size.  Thus (5c)--(5e) are genuine average-decoding statements.  Only
+the two tail probabilities are exact; (5e) remains an upper bound because the
+lower shells have not been enumerated.
+
 Finally, if `N_j(s)` denotes the shell count after deleting `s` points and
 the theorem hypotheses hold at both `s` and `s+1`, then
 
@@ -531,6 +537,7 @@ as necessary for the former.
 | feature | status after closeout | exact remaining gate |
 |---|---|---|
 | Deleting one curve point promotes all interior points of its incident split secants from weight two to weight `r-1` | settled structurally by NRC independence plus Seroussi--Roth; counted in (13) | literature audit only |
+| The last two decoding layers might have non-negligible average mass | settled by (5c)--(5e): their exact mass is `(1/2)q^(4-r)+O_(r,s)(q^(3-r))` for fixed `r,s` | no mathematical gate; compare terminology with average-covering literature before frontmatter use |
 | Tangent/conjugate shell is unchanged by any bounded support deletion | settled structurally by monotonicity and the exact deep-shell theorem | literature audit only |
 | GRS multipliers might change locators or weights | settled: column scaling is absorbed into error magnitudes in (6) | none |
 | Pointed abundance might lose its leading term | settled by (8a)--(8c) for fixed `r,s` | software exposure is a separate C974 item |
