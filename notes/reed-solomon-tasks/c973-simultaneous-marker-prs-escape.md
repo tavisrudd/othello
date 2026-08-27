@@ -144,8 +144,11 @@ the dense genus-zero calculation.
 At the endpoint `(u,v)=(0,0)`, naively reusing that dense affine plane is
 exactly impossible: after an explicit Artin--Schreier change, the final-pair
 cover is `y^2+y=1/(a+1)`, while final-quadratic rootlessness requires that
-same constant to have trace one.  A different subspace/coset coefficient or
-split family is therefore mandatory there.
+same constant to have trace one.  Reversing the trace choice closes the
+endpoint: trace zero splits the cover into two rational lines with 130
+points, while all collisions including the two roots of `N` delete at most
+54.  The remaining forced-root surface is now the 63 generic `tau!=1` forms
+and the single `(0,1)` boundary.
 
 ## Objective
 
