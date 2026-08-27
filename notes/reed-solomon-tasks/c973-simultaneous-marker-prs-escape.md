@@ -163,9 +163,10 @@ of `tau^3+tau^2+1` where `a=tau` collides with `H`, and the two roots of
 `tau^2+tau+1` where its denominator vanishes.
 Frobenius compresses those 47 values to nine semilinear cases: seven
 irreducible sextics, the collision cubic, and the denominator quadratic.
-Cross-ratio transformations cluster the seven sextics as `4+3`, but using
-that further reduction requires a still-open marker-change equivariance
-proof.
+Cross-ratio transformations cluster the seven sextics as `4+3` arithmetically
+but do not act on the ordered pointed contraction problem: its residual torus
+fixes `tau`, and a new marker depends on parent-syndrome data lost under
+contraction.  Nine is therefore the sharp proved symmetry quotient.
 
 ## Objective
 
