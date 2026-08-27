@@ -38,11 +38,11 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.threefold_not_rational_of_occurrenceIndexedMarker"
       ],
-      "objects": "An occurrence-indexed block ledger and additive marker for smooth projective threefolds, a projective-three-space endpoint, a selected threefold, and a rationality predicate.",
-      "hypotheses": "A typed dimension-three factorization provider supplies the blowup and blowdown formulas; every actual point or curve center occurrence has zero marker; both endpoints are smooth of dimension three; projective three-space has marker zero; the selected threefold has nonzero marker; and rationality supplies a birational comparison with projective three-space.",
+      "objects": "An additive marker on block multisets for smooth projective threefolds, a projective-three-space endpoint, a selected threefold, and a rationality predicate.",
+      "hypotheses": "A typed dimension-three factorization input supplies the blowup and blowdown formulas; every point or curve center summand has zero marker; both endpoints are smooth of dimension three; projective three-space has marker zero; the selected threefold has nonzero marker; and rationality supplies the birational comparison with projective three-space.",
       "conclusion": "The selected threefold is not rational.",
-      "cautions": "Fragment. Lean proves the exact occurrence-indexed endpoint contradiction, but does not construct the generic even QDM, identify a marked block with a nonzero folded marker, supply weak factorization or center nullity, calculate projective space, or construct the rationality comparison.",
-      "statement_digest": "01f537e51944e676d06e22163d30e25726ab3b2aece09af72b5eee3f74e6bdf7",
+      "cautions": "Fragment. Lean proves the endpoint contradiction while retaining each center summand separately, but does not construct the generic even QDM, identify a counted block with a nonzero additive marker, supply weak factorization or vanishing on centers, calculate projective space, or construct the rationality comparison.",
+      "statement_digest": "3b6ba0d8684a8d7110811fa6fb6f0ed0a293da76d7fe72cec3667da882b8e291",
       "terminal_digest": "fd742b8caba6eed5b20aef7a07c8938baaf30d65f49d16b708ffa6b525fb0ec7"
     },
     {
@@ -878,11 +878,11 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.occurrenceIndexedMarker_eq_of_birational",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.occurrenceIndexedMarker_descends_to_birationalClasses"
       ],
-      "objects": "Regular-isomorphism components of typed blocks, their effective multiset ledger, an additive fold to an arbitrary commutative additive monoid, abstract varieties and smooth centers, and a separately indexed type of actual specialized center occurrences.",
-      "hypotheses": "A typed factorization provider supplies blowup and blowdown chains in ambient dimension d, each blowup records its codimension and a literal Fin(c-1)-indexed family of actual occurrences, and every actual smooth center occurrence with centerDimension + 2 at most d has zero folded correction.",
-      "conclusion": "The fold is the unique additive extension of its component weight; birationally related endpoints have equal markers; and the marker descends to the quotient set of birational classes.",
-      "cautions": "Conditional deduction. Lean proves the free effective fold, arbitrary-monoid and arbitrary-dimension telescope, occurrence preservation, and quotient descent. Weak factorization and the geometric operation formulas are supplied as typed provider data rather than formalized from algebraic geometry. The QDM comparisons that produce those formulas remain outside this row and are registered under prop:qdm-operation-ledgers.",
-      "statement_digest": "2bb9891d902b7d680b3e27c41fc85124396cac2dd7783e4733564570f00eff1b",
+      "objects": "Regular-isomorphism classes of typed blocks, their effective multisets, an additive marker valued in an arbitrary commutative additive monoid, abstract varieties and smooth centers, and a separately indexed family of specialized center summands.",
+      "hypotheses": "A typed factorization input supplies blowup and blowdown chains in ambient dimension d, each blowup records its codimension and a literal Fin(c-1)-indexed family of center summands, and every summand from a smooth center with centerDimension + 2 at most d has zero marker contribution.",
+      "conclusion": "The marker is the unique additive extension of its value on each block class; birationally related endpoints have equal markers; and the marker descends to the quotient set of birational classes.",
+      "cautions": "Conditional deduction. Lean proves the free commutative-monoid construction, the arbitrary-monoid and arbitrary-dimension telescoping argument, preservation of the individual center summands, and descent to birational classes. Weak factorization and the geometric operation formulas are supplied as typed inputs rather than formalized from algebraic geometry. The QDM comparisons that produce those formulas remain outside this row and are registered under prop:qdm-operation-ledgers.",
+      "statement_digest": "c22e56f91ccdc4f1a3421fee5c6c71c2a37f331212d4668bbbeb770aac070730",
       "terminal_digest": "f8a38d7c98c400a29332ad3f24cebfe48c60bc38ea82dfa62f0f4850e602b042"
     },
     {
@@ -909,11 +909,11 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.qdmBlowup_markerFormula_of_occurrenceBlockComparison",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.qdmBlowup_step_of_occurrenceBlockComparison"
       ],
-      "objects": "The even-carrier generic QDM block presentation, its effective multiset ledger, an additive marker fold, an integer suspension action on block components, variety ledgers, actual occurrence-indexed center ledgers, a parity-preserving full-carrier equivalence, and a finite multiplicity-preserving matching of transported block components with a recorded degree shift on every pair.",
-      "hypotheses": "The full-carrier comparison preserves membership in the chosen even submodules in both directions. The marker fold is invariant under every recorded suspension. The projective-bundle matching identifies the total-space blocks with rank copies of the base blocks up to those suspensions. The blowup matching identifies the blowup blocks with the ambient blocks plus the literal finite family of center-occurrence blocks, again up to recorded suspensions. Smoothness, positivity of the bundle rank, and the projective-bundle dimension formula are explicit premises of the packaged projective-bundle result.",
-      "conclusion": "Lean restricts the parity-preserving comparison to a linear equivalence of even carriers, converts each suspension-compatible matching into a fold-compatible matching, and derives the folded projective-bundle and occurrence-indexed blowup marker formulas. It also packages the blowup formula with the center provenance and dimension metadata consumed by categorical descent.",
-      "cautions": "Conditional deduction. Lean proves the even-submodule restriction and the suspension-invariant categorical additivity step without identifying nonzero-degree maps with degree-zero graded morphisms. The mapped packaged-step terminal keeps actual center-occurrence provenance visible. Lean does not construct cohomology or its parity splitting, the geometric QDM blocks, a fixed algebraic splitting field, the common coefficient spine, the parity-preserving regular comparison maps, pairwise spectral separation of summands, the invertible bulk Jacobians, or the component matching from Iritani's and Iritani–Koto's theorems; those remain the manuscript's cited geometric and analytic inputs.",
-      "statement_digest": "24540a687de6f3d9249ff2f33aae2364ce35decad8208cbda15cffc62a8c5946",
+      "objects": "The generic QDM block decomposition on even cohomology, its effective block multiset, an additive marker, an integer suspension action on block classes, the corresponding multisets for varieties and individual center summands, a parity-preserving equivalence on full cohomology, and a finite multiplicity-preserving matching of transported block classes with a recorded degree shift on every pair.",
+      "hypotheses": "The comparison on full cohomology preserves the chosen even submodules in both directions. The additive marker is invariant under every recorded suspension. The projective-bundle matching identifies the total-space blocks with rank copies of the base blocks up to those suspensions. The blowup matching identifies the blowup blocks with the ambient blocks plus the literal finite family of individual center blocks, again up to recorded suspensions. Smoothness, positivity of the bundle rank, and the projective-bundle dimension formula are explicit premises of the packaged projective-bundle result.",
+      "conclusion": "Lean restricts the parity-preserving comparison to a linear equivalence on even cohomology, converts each suspension-compatible block matching into equality of additive markers, and derives the projective-bundle and blowup marker formulas with every center summand kept separate. It also packages the blowup formula with the center source and dimension data used in birational descent.",
+      "cautions": "Conditional deduction. Lean proves the restriction to even cohomology and the suspension-invariant categorical additivity step without identifying nonzero-degree maps with degree-zero graded morphisms. The packaged blowup terminal keeps the source of every center summand visible. Lean does not construct cohomology or its parity splitting, the geometric QDM blocks, a fixed algebraic splitting field, the common coefficient ring, the parity-preserving regular comparison maps, pairwise spectral separation of summands, the invertible bulk Jacobians, or the component matching from Iritani's and Iritani–Koto's theorems; those remain the manuscript's cited geometric and analytic inputs.",
+      "statement_digest": "b607fd91bfe0f75fb533f1dead9103a74a5e519dcf892b992f92bdd9587ad747",
       "terminal_digest": "ec2903f27f534c7d201f8d7284d3855ae3e09d50a5cf6bd55af84bca25c3c5f2"
     },
     {
@@ -922,11 +922,11 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwoResidueMarker_lowDimensionalOccurrenceNullity"
       ],
-      "objects": "The direct rank-two residue block presentation and fold, smooth centers and their dimensions, actual specialized QDM occurrences, an intrinsic center marker, seed centers, positive-rank projective bundles, and point blowups.",
-      "hypotheses": "Every smooth center of dimension at most two is built inductively from a seed by positive-rank projective bundles and point blowups; the intrinsic residue marker vanishes on seeds, is multiplied by bundle rank, and is preserved by point blowup; and every actual occurrence marker equals the intrinsic marker of its source center.",
-      "conclusion": "Every actual QDM occurrence whose smooth source has dimension at most two has zero direct residue marker, exactly the center-nullity premise consumed by categorical descent in dimension four.",
-      "cautions": "Conditional deduction. Lean proves the full classification induction and its passage to occurrence-indexed nullity, but does not construct the geometric QDM blocks, classify the surfaces, prove the seed calculations or operation formulas, or construct the faithful occurrence comparison.",
-      "statement_digest": "254a0d5feb586c95a1d3345c2063b77362355b2f9d1bd4abda1284026a14956a",
+      "objects": "The direct rank-two residue marker, smooth centers and their dimensions, individual specialized center summands in the QDM comparison, the intrinsic marker of a center, initial surface classes, positive-rank projective bundles, and point blowups.",
+      "hypotheses": "Every smooth center of dimension at most two is built inductively from an initial class by positive-rank projective bundles and point blowups; the intrinsic residue marker vanishes on the initial classes, is multiplied by bundle rank, and is preserved by point blowup; and the marker of every individual center summand equals the intrinsic marker of its source center.",
+      "conclusion": "Every QDM center summand whose smooth source has dimension at most two has zero direct residue marker, exactly the vanishing premise needed for birational descent in dimension four.",
+      "cautions": "Conditional deduction. Lean proves the classification induction and its application to each individual center summand, but does not construct the geometric QDM blocks, classify the surfaces, prove the initial calculations or operation formulas, or construct the faithful comparison for each center summand.",
+      "statement_digest": "8537c121f53992f1723ebcd290313be05adc3ce66ea78da2df973f2e036a4850",
       "terminal_digest": "5ba89ca7cb2e71e08172b3d6baff7ab9c7ec980d2c21ef45e620c96f0d63225c"
     }
   ],

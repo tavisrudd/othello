@@ -1,13 +1,18 @@
 \section{Consequences}
 \label{sec:applications}
 
+No new quantum calculation is needed in this section.  We first apply the
+marker directly in dimension three, then transfer the stabilization theorem
+through Kuznetsov's flop, and finally combine it with known criteria for
+universal \(CH_0\)-triviality.
+
 \begin{proof}[Proof of Corollary~\ref{cor:threefold-marker}]
 In dimension three, every center in projective weak factorization has
 dimension at most one.  The curve part of
 Proposition~\ref{prop:atomic-lowdim} therefore makes
-\(I_{\mathrm{at}}\) birationally invariant.  The generic quantum product of
-\(\PP^3\) is semisimple, so \(I_{\mathrm{at}}(\PP^3)=0\).  A marked block
-gives \(I_{\mathrm{at}}(Y)>0\), ruling out rationality.
+\(I_{\mathrm{exp}}\) birationally invariant.  The generic quantum product of
+\(\PP^3\) is semisimple, so \(I_{\mathrm{exp}}(\PP^3)=0\).  A marked block
+gives \(I_{\mathrm{exp}}(Y)>0\), ruling out rationality.
 \proves{cor:threefold-marker}%
 \uses{prop:atomic-lowdim, thm:marker-ledger}%
 \end{proof}
@@ -58,18 +63,17 @@ of the diagonal and hence universal \(CH_0\)-triviality
 \imports{YYZ:coprime-degree-family, YYZ:coprime-degrees-persist}%
 \end{proof}
 
-The marker operation formula has the same additive shape as Bittner's blowup
-relation \cite[Theorem~3.1]{Bittner}.  More precisely, if an additive
-extension of a marker is defined on the Bittner group, then
+The marker formula has the same additive shape as Bittner's blowup relation
+\cite[Theorem~3.1]{Bittner}.  If a marker extends additively to the Bittner
+group, then
 \[
  I(\Bl_ZY)-I(\PP_Z(N_{Z/Y}))=I(Y)-I(Z)
 \]
 follows from \(I(\Bl_ZY)=I(Y)+(c-1)I(Z)\) and
-\(I(\PP_Z(N_{Z/Y}))=cI(Z)\).  The effective
-\(\mathbf N\)-valued fold used here is not itself such a group-valued motivic
-measure: no subtraction or multiplicativity has been constructed.  The
-parallel explains why the center bound is decisive without claiming a
-Grothendieck-ring factorization that the proof does not supply.
+\(I(\PP_Z(N_{Z/Y}))=cI(Z)\).  The \(\mathbf N\)-valued marker used here is not
+such a group-valued motivic measure: we have constructed neither subtraction
+nor multiplicativity.  The analogy explains why the center bound is decisive,
+but it does not give a factorization through the Grothendieck ring.
 
 All results above concern one product stabilization.  No statement about a
 second or arbitrary stabilization is implicit.

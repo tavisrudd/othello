@@ -18,17 +18,22 @@ For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
 
-The proof uses the generic even quantum \(D\)-module (QDM).  After extending
-its generic coefficient field to an algebraic closure, the generalized
-eigenspaces of quantum multiplication by the Euler field decompose the formal
-connection into blocks.  We record their isomorphism classes in a free
-commutative monoid.  For an additive marker compatible with the QDM
-comparisons, Iritani's blowup theorem gives a formula for its change under
-blowup, with the individual center summands retained separately.  Combined
-with weak factorization, this formula makes any such marker that vanishes on
-every center occurring in a weak factorization of smooth fourfolds a
-birational invariant.  Iritani--Koto's projective-bundle theorem computes the
-marker for projective bundles.
+The proof uses the quantum \(D\)-module (QDM): the cohomology module over the
+ring of Novikov and bulk parameters, equipped with its flat quantum connection.
+We use its even part: the odd bulk variables are set to zero, and the module is
+restricted to even cohomology.  We then replace the ring of numerical Novikov
+and even bulk parameters by its fraction field; this is what \emph{generic}
+means here.  The leading coefficient of the \(z\)-connection is quantum
+multiplication by the Euler field.  Over an
+algebraic closure of the generic coefficient field, its generalized
+eigenspaces decompose the formal connection into blocks.
+
+We record the block isomorphism classes in a free commutative monoid.  For an
+additive marker on this monoid, Iritani's blowup theorem gives a formula for
+its change under blowup, with the individual center summands retained
+separately.  Combined with weak factorization, this formula makes any such
+marker that vanishes on every center occurring in a weak factorization of
+smooth fourfolds a birational invariant.
 
 The marker counts rank-two blocks for which the centered leading term \(N\) of
 Euler multiplication is nonzero and satisfies \(N^2=0\).  Horizontality of the
@@ -38,8 +43,9 @@ eigenvalues.  We count the block when the two residue eigenvalues, equivalently
 the two formal exponent classes, are distinct modulo \(\Z\).  Using Beauville's
 quantum product formulas, we compute exponent representatives \(-1/6\) and
 \(-5/6\) for the cubic block, with difference \(2/3\).  The resulting marker
-vanishes on points, curves, and surfaces, doubles on product with \(\PP^1\),
-and vanishes on projective space.  This proves the theorem.
+vanishes on points, curves, and surfaces and on projective space.
+Iritani--Koto's projective-bundle theorem shows that it doubles after product
+with \(\PP^1\).  This proves the theorem.
 
 The comparison inputs are Iritani's blowup decomposition and
 Iritani--Koto's projective-bundle decomposition
@@ -59,7 +65,8 @@ The same construction gives a threefold criterion without stabilization.
 \coverage{fragment}%
 \lean{threefold_not_rational_of_occurrenceIndexedMarker}%
 Let \(Y\) be a smooth projective complex threefold.  If its generic even QDM
-contains a block marked by \eqref{eq:atomic-fold}, then \(Y\) is irrational.
+contains a block counted by the formal-exponent marker defined in
+\eqref{eq:atomic-fold}, then \(Y\) is irrational.
 \end{corollary}
 
 Indeed, the only centers in a weak factorization of threefolds have dimension

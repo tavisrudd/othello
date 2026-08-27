@@ -3,34 +3,36 @@
 
 We prove the theorem by applying the quantum \(D\)-module
 decomposition formulas directly.  The common argument is stated first for an
-arbitrary additive marker.  The rest of the section constructs the smallest
-marker needed for a cubic threefold and proves that it vanishes on every
-possible low-dimensional center.
+arbitrary additive marker.  We then construct the specific marker used for a
+cubic threefold and prove that it vanishes on points, curves, and surfaces.
 
 Here is the concrete invariant before the general construction.  Split the
 generic even quantum \(D\)-module into formal connection blocks.  A block
-contributes one when it has rank two, its centered leading Euler operator is
-nonzero square-zero, and the two exponent classes obtained after the canonical
-elementary modification are distinct modulo \(\Z\); every other block
-contributes zero.  Their sum is \(I_{\mathrm{at}}\).  The rest of the section
-shows that this count is intrinsic and additive, vanishes on all possible
-centers, equals one on a cubic threefold, doubles after product with \(\PP^1\),
-and vanishes on \(\PP^4\).
+contributes one if it has rank two, its centered leading term \(N\) is nonzero
+with \(N^2=0\), and the two residue eigenvalues after the canonical elementary
+modification are distinct modulo \(\Z\).  These eigenvalues represent the
+block's two formal exponent classes.  Every other block contributes zero, and
+the sum of the contributions is \(I_{\mathrm{exp}}\).  The rest of the section
+shows that this count is intrinsic and additive, vanishes on points, curves,
+and surfaces, equals one on a cubic threefold, doubles after product with
+\(\PP^1\), and vanishes on \(\PP^4\).
 
 \subsection{The one-blowup model}
 
-Let \(Y\) be smooth and projective.  Pass to numerical Novikov variables,
-set the odd bulk variables to zero, and restrict the carrier of the quantum
-connection to \(H^{\mathrm{ev}}(Y)\).  The last restriction is essential: even
-bulk alone still leaves the odd cohomology in the fibre.  Let \(K_Y\) be the
-generic coefficient field of this even QDM and fix an algebraic closure
-\(\overline K_Y\).  All spectral blocks below are formed only after base change
-to \(\overline K_Y\).  Thus later scalar extensions do not split a primary
-factor that was previously counted as one block.
+Let \(Y\) be smooth and projective.  We first make three setup choices.
+Pass to numerical Novikov variables, set the odd bulk variables to zero, and
+restrict the underlying cohomology space to \(H^{\mathrm{ev}}(Y)\).  The
+last restriction is essential: restricting the bulk base alone would still
+leave odd cohomology in the fibre.  Let \(K_Y\) be the generic coefficient
+field of this even QDM and fix an algebraic closure \(\overline K_Y\).  We form
+all spectral blocks only after base change to \(\overline K_Y\), so no later
+scalar extension can split a factor that has already been counted as one
+block.
 
-Let \(U\) be multiplication by the Euler field on the even carrier.  Its
-generalized eigenspaces over \(\overline K_Y\) are summands of the full formal
-connection, rather than merely summands of \(U\):
+Let \(U\) denote multiplication by the Euler field on \(H^{\mathrm{ev}}(Y)\).
+After base change to \(\overline K_Y\), each generalized eigenspace of \(U\) is
+a summand of the full formal connection, not just an invariant subspace of
+\(U\):
 
 \begin{proposition}[Formal spectral connection splitting]
 \label{prop:generic-spectral-connection-splitting}
@@ -65,15 +67,15 @@ blocks.  Nondegeneracy of the total pairing then makes every diagonal
 restriction nondegenerate.
 \end{proof}
 
-We call these factors the \emph{generic even QDM blocks} of \(Y\).  A basic
-block retains its connection, pairing, and centered Euler endomorphism, but
-not an absolute cohomological grading.  A block type may require additional
-marked data.  If it retains grading, morphisms may carry a recorded integral
-suspension and its marker fold must be invariant under that suspension.  The
-atomic type below forgets absolute grading.  Its morphisms preserve all retained
-data and are regular connection isomorphisms after scalar extension and formal
-change of bulk coordinates.  In particular, their gauges use neither negative
-nor fractional powers of the connection variable \(z\).
+We call these factors the \emph{generic even QDM blocks} of \(Y\).  A block
+retains its connection, pairing, and centered Euler endomorphism, but not an
+absolute cohomological grading.  A block type may retain additional marked
+data.  If it retains grading, a morphism may carry a recorded integral
+suspension, and the marker must be invariant under that suspension.  The block
+type used below forgets absolute grading.  Its morphisms preserve the
+retained data and are regular connection isomorphisms after scalar extension
+and formal change of bulk coordinates.  In particular, their gauges use
+neither negative nor fractional powers of the connection variable \(z\).
 
 Fix a block type \(\mathcal T\).  Let \(\Pi_{\mathcal T}\) be the
 regular-isomorphism groupoid of blocks of that type and put
@@ -81,18 +83,19 @@ regular-isomorphism groupoid of blocks of that type and put
  \mathcal L_{\mathcal T}
  :=\pi_0\operatorname{Sym}^{\sqcup}(\Pi_{\mathcal T}),
 \]
-the effective free commutative monoid on their isomorphism classes.  Direct
-sum gives each \(Y\) a block ledger
-\(\mathcal B_{\mathcal T}(Y)\in\mathcal L_{\mathcal T}\).  A
-\emph{marker fold} is a commutative-monoid homomorphism
+the free commutative monoid on their isomorphism classes, equivalently the
+monoid of finite multisets of such classes.  Direct
+sum gives each \(Y\) its block multiset
+\(\mathcal B_{\mathcal T}(Y)\in\mathcal L_{\mathcal T}\).  An
+\emph{additive marker} is a commutative-monoid homomorphism
 \[
  w:\mathcal L_{\mathcal T}\longrightarrow A,
  \qquad I_w(Y):=w(\mathcal B_{\mathcal T}(Y)),
 \]
-where \(A\) is an effective commutative monoid.  No group completion is
-made: it can destroy useful folds, including Boolean ones.
+where \(A\) is a commutative monoid.  We do not pass to a group
+completion: subtraction would destroy useful markers, including Boolean ones.
 
-The two specializations use the following notation.
+We use the following notation.
 \begin{table}[ht]
 \centering
 \begin{tabular}{@{}ll@{}}
@@ -101,41 +104,41 @@ Symbol & Meaning \\
 \midrule
 \(\Pi_{\mathcal T}\) & regular-isomorphism groupoid of typed QDM blocks \\
 \(\mathcal L_{\mathcal T}\) &
-  \(\pi_0\operatorname{Sym}^{\sqcup}(\Pi_{\mathcal T})\), the effective block monoid \\
-\(\mathcal B_{\mathcal T}(Y)\) & block ledger of \(Y\) \\
-\(w:\mathcal L_{\mathcal T}\to A\) & additive marker fold into an effective monoid \\
-\(\omega_j\) & the \(j\)-th center occurrence in one blowup \\
-\(c_w(\omega_j)\) & marker of that actual center occurrence \\
+  \(\pi_0\operatorname{Sym}^{\sqcup}(\Pi_{\mathcal T})\), finite block multisets \\
+\(\mathcal B_{\mathcal T}(Y)\) & multiset of block isomorphism classes for \(Y\) \\
+\(w:\mathcal L_{\mathcal T}\to A\) & additive marker with values in \(A\) \\
+\(\omega_j\) & data attached to the \(j\)-th center summand \\
+\(c_w(\omega_j)\) & marker contribution of that center summand \\
 \bottomrule
 \end{tabular}
-\caption{Notation for the occurrence-indexed marker ledger.}
+\caption{Notation for the block monoid and center summands.}
 \label{tab:marker-notation}
 \end{table}
 
 Consider one blowup
 \(\beta:\widetilde Y=\Bl_ZY\to Y\) along a smooth center of codimension
 \(c\ge2\).  Iritani's comparison has one ambient summand and \(c-1\) center
-summands.  We retain the occurrence data of each center summand: for the
-\(j\)-th, record
+summands.  Distinct copies of the same center must remain distinct in the
+blowup formula.  We therefore retain separate data for each center summand:
+for the \(j\)-th, record
 \[
  \omega_j=(\beta,Z,j,\varsigma_j,\chi_j),
  \qquad 0\le j\le c-2,
 \]
 where \(\varsigma_j\) is Iritani's center reconstruction parameter and
 \(\chi_j\) is the induced numerical Novikov specialization.  Its correction
-is
-\(c_w(\omega_j):=w(\mathcal B_{\mathcal T}(Z;\omega_j))\).  Equality is
-required only after applying \(w\); distinct block multisets may have the same
-marker.
+is \(c_w(\omega_j):=w(\mathcal B_{\mathcal T}(Z;\omega_j))\).  The comparison
+will give equality only after applying \(w\); distinct block multisets may
+have the same marker.
 
-\begin{theorem}[Occurrence-indexed marker ledger]
+\begin{theorem}[Birational invariance of additive markers]
 \label{thm:marker-ledger}
 \coverage{conditional_deduction}%
 \lean{effectiveBlockLedger_fold_unique,%
   occurrenceIndexedMarker_eq_of_birational,%
   occurrenceIndexedMarker_descends_to_birationalClasses}%
 \imports{AKMW:weak-factorization}%
-Let \(w:\mathcal L_{\mathcal T}\to A\) be a marker fold unchanged by the
+Let \(w:\mathcal L_{\mathcal T}\to A\) be an additive marker unchanged by the
 allowed regular scalar extensions and formal coordinate changes.  Suppose
 \begin{align}
  I_w(\PP_Y(V))&=rI_w(Y),
@@ -143,18 +146,19 @@ allowed regular scalar extensions and formal coordinate changes.  Suppose
  I_w(\Bl_ZY)&=I_w(Y)+\sum_{j=0}^{c-2}c_w(\omega_j),
  &&\operatorname{codim}_YZ=c\ge2.                \label{eq:marker-blowup}
 \end{align}
-If every actual smooth center occurrence of dimension at most \(d-2\) has
-zero correction, then \(I_w\) is a birational invariant of smooth projective
-\(d\)-folds.
+If every summand associated with a smooth center of dimension at most \(d-2\)
+has zero correction, then \(I_w\) is a birational invariant of smooth
+projective \(d\)-folds.
 \end{theorem}
 
 \begin{proof}
 Projective weak factorization writes a birational map of smooth projective
 \(d\)-folds as a zigzag of blowups and blowdowns along smooth centers of
 codimension at least two \cite[Theorem~0.3.1]{AKMW}.  By
-\eqref{eq:marker-blowup} and center vanishing, the marker is unchanged at each
-step; the equalities therefore telescope.  Disconnected centers are treated
-componentwise, while a divisor blowup is an isomorphism.
+\eqref{eq:marker-blowup} and the vanishing of every center correction, the
+marker is unchanged at each step; the equalities therefore telescope.
+Disconnected centers are treated componentwise, while a divisor blowup is an
+isomorphism.
 \end{proof}
 
 Equivalently, the marker descends on object sets:
@@ -169,34 +173,39 @@ Equivalently, the marker descends on object sets:
 \end{equation}
 This square reformulates the proof; it is not an additional input.
 
-\subsection{The QDM operation providers}
+\subsection{Compatibility with blowups and projective bundles}
 
-Four compatibility facts place the comparison theorems in the preceding
-framework.
-First, the intrinsic ample-adic completion and the Laurent neighborhood of a
+To use the cited decomposition theorems, we must check that they preserve all
+the data seen by the marker.  Four issues arise: coefficient fields,
+restriction to even cohomology, regularity in \(z\), and faithful embedding of
+the center coefficients.
+\paragraph{Coefficient fields.}
+The intrinsic ample-adic completion and the Laurent neighborhood of a
 fibre or exceptional cusp need not map to one another.  Iritani's
 display~(1.1) supplies the required common coefficient maps
-\cite[(1.1)]{IritaniBlowup}; injectivity for each center occurrence is
+\cite[(1.1)]{IritaniBlowup}; injectivity for each center summand is
 established below.  For projective bundles the common source is
 \(\C[z,q][[Q,\widehat\tau]]\).  On the blowup side the ambient term uses the
 corresponding graded source.  A center term begins with its intrinsic reduced
 coefficient ring from Remark~2.3, maps to the possibly smaller image ring of
-Remark~5.6, and is then pulled to a faithfully tagged occurrence ring in the
-external direct sum.  Embed the generic fields of the ambient common image and
-of these faithfully tagged occurrence images in a fixed algebraically closed
-overfield and form every primary block there.  Base
+Remark~5.6, and is then pulled to a separate target ring for that summand in
+the external direct sum.  Embed the generic fields of the ambient common image
+and of these separate center images in a fixed algebraically closed overfield
+and form every primary block there.  Base
 change after this splitting extension preserves the rank, nilpotent Jordan
 type, regular formal gauge, and formal exponent classes of each block; forming
 primary factors over a nonsplitting field before extension would not.
 
-Second, the comparison is restricted to the even carrier, not merely to the
+\paragraph{Restriction to even cohomology.}
+The comparison is restricted to even cohomology, not merely to the
 even bulk base.  The supermodule conventions and the pull-push and Fourier
 formulas in Iritani's Section~5.8 and Iritani--Koto's construction are
 parity-preserving.  After the odd bulk variables are set to zero, the
 comparison and its inverse therefore restrict to mutually inverse maps on
-\(H^{\mathrm{ev}}\).  This is the QDM on which the atomic ledger is formed.
+\(H^{\mathrm{ev}}\).  This is the QDM on which the additive marker is defined.
 
-Third, the comparisons are regular in \(z\).  Iritani's Theorem~5.18 and
+\paragraph{Regularity in \(z\).}
+The comparisons are regular in \(z\).  Iritani's Theorem~5.18 and
 Iritani--Koto's Theorem~5.1 are respectively defined over rings of the form
 \[
  \C[z]((q_{\mathrm{exc}}^{-1/\mathfrak s}))[[Q,\widetilde\tau]],
@@ -211,12 +220,13 @@ inverses use no negative powers of \(z\); see also
 degree zero: the projective-bundle map has degree \(-(r-1)\), while Iritani's
 ambient and center components have degrees \(0\) and \(-c\), respectively
 \cite[Theorem~5.1(3)]{IritaniKoto}\cite[Theorem~5.18(3)]{IritaniBlowup}.
-Because the atomic block type does not retain absolute grading, these shifts
+Because the block type used here does not retain absolute grading, these shifts
 do not change its component.  For a graded refinement they are recorded as
-integral suspensions, and the operation formula applies only to a fold
+integral suspensions, and the operation formula applies only to a marker
 invariant under those suspensions.
 
-Fourth, Iritani's center map need not be injective
+\paragraph{Faithful center coordinates.}
+Iritani's center map need not be injective
 \cite[(5.15)]{IritaniBlowup}.  After numerical reduction it has the form
 \begin{equation}
  Q_Z^d\longmapsto
@@ -238,7 +248,7 @@ external direct sum of Section~5.8.2, by contrast, the variables
 and the center parameter is identified as
 \(\varsigma_j=\varsigma_j^\circ+s_j\)
 \cite[(5.47)--(5.48)]{IritaniBlowup}.  The divisor components of these
-\emph{target-only} coordinates retain the curve-class information lost by
+independent target coordinates retain the curve-class information lost by
 \eqref{eq:center-novikov-map-atomic}.
 
 \begin{lemma}[Faithful center base change]
@@ -275,6 +285,8 @@ faithful scalar extension, followed by the formal coordinate change
 \end{lemma}
 
 \begin{proof}
+We prove injectivity by filtering to finitely many curve classes and using the
+independence of their exponentials in the target divisor coordinates.
 Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
 \(N_1(Z)\), and use their dual coordinates in \(s_j^{(2)}\).  The variables
 \(s_j\) occur only in the target \(A_j\), not as coefficients in
@@ -319,7 +331,7 @@ Theorem~5.18(7) and Section~5.8.2, transports the same statement to the
 original blowup coordinates.
 \end{proof}
 
-\begin{proposition}[QDM operation ledgers]
+\begin{proposition}[Marker formulas for the QDM comparisons]
 \label{prop:qdm-operation-ledgers}
 \coverage{conditional_deduction}%
 \lean{qdmComparison_evenCarrierEquiv,%
@@ -329,15 +341,16 @@ original blowup coordinates.
   qdmBlowup_markerFormula_of_occurrenceBlockComparison,%
   qdmBlowup_step_of_occurrenceBlockComparison}%
 \imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
-Let a marker fold be preserved by the regular scalar extensions and formal
+Let an additive marker be preserved by the regular scalar extensions and formal
 coordinate changes described above, and by every recorded grading suspension
 if its block type retains grading.  The projective-bundle and blowup QDM
-comparisons on the even carriers then supply \eqref{eq:marker-pbundle} and
-\eqref{eq:marker-blowup}; each center marker is evaluated at its actual
-occurrence \(\omega_j\).
+comparisons on even cohomology then supply \eqref{eq:marker-pbundle} and
+\eqref{eq:marker-blowup}; the contribution of the \(j\)-th center summand is
+evaluated using its separate data \(\omega_j\).
 \end{proposition}
 
 \begin{proof}
+\emph{Projective bundles.}
 For a rank-\(r\) bundle, Iritani--Koto's Theorem~5.1 gives \(r\) copies of
 the base QDM after Laurent extension \cite[Theorem~5.1]{IritaniKoto}.  Its
 invertible joint bulk Jacobian gives independent unit coordinates on the
@@ -346,29 +359,32 @@ adds an independent scalar \(u_jI\) to Euler multiplication.  For two finite
 spectra, the resultant of their translated characteristic polynomials is a
 nonzero polynomial in \(u_i-u_j\), with leading coefficient one.  Hence the
 spectra of distinct factors are disjoint at the generic point: their primary
-blocks do not fuse when the direct sum is formed.  Regularity, even-carrier
-restriction, the fixed splitting field, and suspension invariance therefore carry the marker
-blockwise across the comparison, and additivity gives
+blocks do not fuse when the direct sum is formed.  Regularity, restriction to
+even cohomology, the fixed splitting field, and suspension invariance therefore
+carry the marker blockwise across the comparison, and additivity gives
 \eqref{eq:marker-pbundle}.  Tensoring the bundle by a line bundle, when needed
 for the global-generation convention, changes neither the projective bundle
 nor the intrinsic Novikov embedding
 \cite[Remark~1.2 and Remark~5.2]{IritaniKoto}.
 
+\smallskip
+\noindent\emph{Blowups.}
 For a codimension-\(c\) blowup, Iritani's Theorem~5.18 gives one ambient QDM
 and \(c-1\) center QDMs \cite[Theorem~5.18]{IritaniBlowup}.  Parts (4), (6),
 and (7) give the comparison asymptotics, the leading reconstruction
 parameters, and the invertible combined bulk Jacobian, respectively.  The
 independent unit coordinates supplied by part~(7) give the same nonzero
-resultant argument, so the ambient and occurrence-indexed center spectra are
-pairwise disjoint generically.  Regularity, even-carrier restriction, the
-fixed splitting field, suspension invariance, and
+resultant argument, so the spectra of the ambient and individual center
+summands are pairwise disjoint generically.  Regularity, restriction to even
+cohomology, the fixed splitting field, suspension invariance, and
 Lemma~\ref{lem:faithful-center-base-change} for each center copy then give
 \eqref{eq:marker-blowup}.  Each comparison is evaluated over its own common
-coefficient spine; the proof never composes Laurent comparisons recursively.
+coefficient ring; the proof never composes Laurent comparisons recursively.
 \end{proof}
 
-The QDM comparison need not identify the two ledger elements before applying
-the fold.  The relevant block-ledger operation is instead the additivity square
+The QDM comparisons need not identify the underlying elements of the block
+monoid.  They identify their images under the additive marker \(w\), whose
+additivity is expressed by the square
 \begin{equation}
 \begin{CD}
  \mathcal L_{\mathcal T}\times\mathcal L_{\mathcal T}
@@ -378,28 +394,32 @@ the fold.  The relevant block-ledger operation is instead the additivity square
 \end{CD}
 \label{diag:marker-fold-additivity}
 \end{equation}
-At marker level, Proposition~\ref{prop:qdm-operation-ledgers} supplies the
-resulting equalities in \(A\); its blowup statement also retains the
-occurrence metadata used by Theorem~\ref{thm:marker-ledger}.
+Proposition~\ref{prop:qdm-operation-ledgers} supplies the resulting equalities
+in \(A\).  Its blowup statement also retains the data distinguishing the
+center summands, as required by Theorem~\ref{thm:marker-ledger}.
 
 \subsection{The rank-two formal-exponent marker}
 
-Let \(\mathcal T_{\mathrm{at}}\) be the block type on the
-\(H^{\mathrm{ev}}\)-carrier retaining the connection, pairing, and centered
-Euler endomorphism, with no absolute grading, marked bulk section, or loop
-framing, and specialize to \(A=\mathbf N\).  Let \(E\) be a generic even block
-with centered connection
+We now specialize the general construction to \(A=\mathbf N\).  The block
+type \(\mathcal T_{\mathrm{exp}}\) retains the connection, pairing, and centered
+Euler endomorphism on \(H^{\mathrm{ev}}\).  It retains no absolute
+grading, marked bulk section, or loop framing.  Let \(E\) be a generic even
+block with centered connection
 \begin{equation}
  z\partial_z y=A(z)y,
  \qquad A(z)=z^{-1}N+A_0+zA_1+z^2A_2+\cdots.
  \label{eq:atomic-block-expansion}
 \end{equation}
 Assume \(\rk E=2\), \(N\ne0\), and \(N^2=0\).  Then
-\(L=\im N=\ker N\) is a line.  Define
+\(L=\im N=\ker N\) is a line.  The canonical elementary modification along
+this line is
 \begin{equation}
  E^\sharp=\{s\in E:s\bmod z\in L\}.
  \label{eq:atomic-modification}
 \end{equation}
+
+For this modification to remove the pole, the regular coefficient \(A_0\) must
+preserve \(L\).  Pairing horizontality supplies exactly that condition.
 
 \begin{lemma}[The regular coefficient preserves the nilpotent line]
 \label{lem:A0preserve}
@@ -443,7 +463,7 @@ Lemma~\ref{lem:A0preserve}.  Thus
  \label{eq:res-disc}
 \end{equation}
 
-\begin{proposition}[Rank-two rigidity]
+\begin{proposition}[Invariance of the modified residue]
 \label{prop:rank2-rigidity}
 \coverage{conditional_deduction}%
 \lean{atomicRankTwo_modifiedBase_regular_of_flat_connection,%
@@ -464,6 +484,9 @@ domain and value of \(\delta^\sharp\).
 \end{proposition}
 
 \begin{proof}
+There are two steps.  Flatness first preserves the nonzero square-zero orbit of
+\(N\).  After the elementary modification, it removes the possible base pole
+and gives the Lax equation for the residue.
 Write a centered base equation as
 \(\partial y=(z^{-1}C_\partial+C_{\partial,0}+O(z))y\).  The
 \(z^{-2}\) coefficient of flatness gives \([N,C_\partial]=0\), and the trace
@@ -515,9 +538,9 @@ discriminant formula.
 For such a block \(E\), write \(\rho_1,\rho_2\) for the eigenvalues of its
 modified residue in the
 fixed algebraic closure \(\overline K\) of the generic coefficient field.
-Define the fold on each block by
+Define the marker on each block by
 \begin{equation}
- w_{\mathrm{at}}(E)=
+ w_{\mathrm{exp}}(E)=
  \begin{cases}
  1,&\rk E=2,\ N\ne0,\ N^2=0,\
       [\rho_1]\ne[\rho_2]\text{ in }\overline K/\Z,\\
@@ -526,12 +549,12 @@ Define the fold on each block by
  \label{eq:atomic-fold}
 \end{equation}
 and extend it additively to
-\(w_{\mathrm{at}}:\mathcal L_{\mathcal T_{\mathrm{at}}}\to\mathbf N\).  Put
-\(I_{\mathrm{at}}(Y)=
-w_{\mathrm{at}}(\mathcal B_{\mathcal T_{\mathrm{at}}}(Y))\).
+\(w_{\mathrm{exp}}:\mathcal L_{\mathcal T_{\mathrm{exp}}}\to\mathbf N\).  Put
+\(I_{\mathrm{exp}}(Y)=
+w_{\mathrm{exp}}(\mathcal B_{\mathcal T_{\mathrm{exp}}}(Y))\).
 Propositions~\ref{prop:rank2-rigidity} and
-\ref{prop:residue-discriminant-exponents} make this a lawful marker for
-Proposition~\ref{prop:qdm-operation-ledgers}: conjugation preserves the two
+\ref{prop:residue-discriminant-exponents} make this a well-defined additive
+marker for Proposition~\ref{prop:qdm-operation-ledgers}: conjugation preserves the two
 residue eigenvalues, while changes of regular-singular lattice and recorded
 suspensions shift exponents only by integers.  The condition
 \(\delta^\sharp\ne0\) is insufficient: it says only
@@ -539,6 +562,10 @@ suspensions shift exponents only by integers.  The condition
 
 \subsection{The cubic block}
 \label{subsec:shared-cubic-packet}
+
+Only a rank-two block can contribute to \(I_{\mathrm{exp}}\).  For a cubic
+threefold, the calculation below isolates the unique such candidate and then
+computes the residue of its elementary modification.
 
 Let \(X\subset\PP^4\) be a smooth cubic threefold, let \(P=H|_X\), and put
 \(q=Q^\ell\) for the line class and \(r=(3q)^{1/2}\).  Beauville's formulas
@@ -629,10 +656,10 @@ For the zero block, \(N=J_0=2E_{12}\).  With \(S=\diag(1,z)\),
 \end{equation}
 Its characteristic polynomial is
 \((T+1/6)(T+5/6)\).  Thus the two exponent classes differ by
-\(2/3\notin\Z\), so the block is marked; as a numerical check,
+\(2/3\notin\Z\), so the block is marked.  Equivalently,
 \begin{equation}
  \boxed{\delta^\sharp(X)=\frac49},
- \qquad I_{\mathrm{at}}(X)=1.
+ \qquad I_{\mathrm{exp}}(X)=1.
  \label{eq:cubic-delta}
 \end{equation}
 
@@ -644,12 +671,13 @@ Its characteristic polynomial is
 \lean{rankTwoResidueMarker_lowDimensionalOccurrenceNullity}%
 \uses{prop:rank2-rigidity}%
 \imports{BeauvilleSurfaces:minimal-surface-classification}%
-For every smooth projective \(Z\) of dimension at most two and every actual
-QDM comparison occurrence \(\omega\),
-\(I_{\mathrm{at}}(Z;\omega)=0\).
+For every smooth projective \(Z\) of dimension at most two and every center
+summand specified by comparison data \(\omega\),
+\(I_{\mathrm{exp}}(Z;\omega)=0\).
 \end{proposition}
 
 \begin{proof}
+\emph{Points and curves.}
 A point has one rank-one block.  For \(\PP^1\), the relation
 \(p\star p=Qe^{t_p}\) gives two rank-one generic blocks.
 
@@ -665,6 +693,8 @@ For \(g=1\), \(N=0\).  For \(g>1\), the modification
 Its two eigenvalues, and therefore its two exponent classes, are equal.  Thus
 every curve has zero marker.
 
+\smallskip
+\noindent\emph{Surfaces with nef canonical class.}
 Let \(S\) be a surface with \(K_S\) nef.  For a quantum-product term with
 input degree \(b\), non-scalar Euler degree \(a\ge2\), curve class \(d\), and
 nonunit even bulk degrees \(e_\nu\ge2\), the dimension axiom gives output
@@ -676,16 +706,18 @@ The centered Euler operator strictly raises ordinary degree.  Its only block
 is the whole even cohomology, of rank \(b_0+b_2+b_4\ge3\), so its marker is
 zero.
 
+\smallskip
+\noindent\emph{Other surfaces.}
 A minimal surface with non-nef canonical class is \(\PP^2\) or a ruled
 surface \(\PP_C(V)\) \cite[Chapter~VI]{BeauvilleSurfaces}.  The relation
 \(H^{\star3}=Q\) makes \(\PP^2\) generically semisimple.  Formula
 \eqref{eq:marker-pbundle} and the curve case give zero for ruled surfaces.
 Every nonminimal surface is obtained from a minimal one by point blowups;
 formula~\eqref{eq:marker-blowup} adds only zero point terms.  This proves
-intrinsic nullity.  Lemma~\ref{lem:faithful-center-base-change} identifies
-every faithfully tagged actual center occurrence with a faithful scalar
-extension of the corresponding intrinsic generic block, and the marker is
-unchanged by that extension.
+intrinsic vanishing for every surface.
+Lemma~\ref{lem:faithful-center-base-change} identifies every separate center
+summand with a faithful scalar extension of the corresponding intrinsic generic
+block, and the marker is unchanged by that extension.
 \end{proof}
 
 \subsection{The projective endpoint and the contradiction}
@@ -693,7 +725,7 @@ unchanged by that extension.
 Formula~\eqref{eq:marker-pbundle} applied to
 \(X\times\PP^1=\PP_X(\OO_X^{\oplus2})\) gives
 \begin{equation}
- I_{\mathrm{at}}(X\times\PP^1)=2.
+ I_{\mathrm{exp}}(X\times\PP^1)=2.
  \label{eq:atomic-product-value}
 \end{equation}
 On the other hand, over the generic numerical Novikov field
@@ -701,18 +733,18 @@ On the other hand, over the generic numerical Novikov field
 \(QH^\bullet(\PP^4)=\Lambda[H]/(H^5-Q)\).  At \(Q\ne0\), multiplication
 by \(5H\) has five distinct eigenvalues after algebraic closure.  Thus
 \begin{equation}
- I_{\mathrm{at}}(\PP^4)=0.
+ I_{\mathrm{exp}}(\PP^4)=0.
  \label{eq:atomic-projective-value}
 \end{equation}
 
 \begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
-Proposition~\ref{prop:atomic-lowdim} kills every actual center correction in
-a weak factorization of smooth projective fourfolds.  Hence
-Theorem~\ref{thm:marker-ledger} makes \(I_{\mathrm{at}}\) birationally
+Proposition~\ref{prop:atomic-lowdim} makes every actual center correction zero
+in a weak factorization of smooth projective fourfolds.  Hence
+Theorem~\ref{thm:marker-ledger} makes \(I_{\mathrm{exp}}\) birationally
 invariant.  If \(X\times\PP^1\) were rational, then
 \[
- 2=I_{\mathrm{at}}(X\times\PP^1)
- =I_{\mathrm{at}}(\PP^4)=0,
+ 2=I_{\mathrm{exp}}(X\times\PP^1)
+ =I_{\mathrm{exp}}(\PP^4)=0,
 \]
 a contradiction.
 \proves{thm:every-cubic}%
