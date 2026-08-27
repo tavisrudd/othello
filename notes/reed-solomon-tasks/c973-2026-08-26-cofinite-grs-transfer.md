@@ -316,6 +316,67 @@ than (10), (11) is not a new solution of the full-affine Reed--Solomon
 deep-hole conjecture.  In the fixed-redundancy regime of C973, the affine
 deep shell was already known from high-rate MDS-extension results.
 
+### One-column MDS/NMDS extension dictionary
+
+Let `H_S` be the `r`-row parity-check matrix of `C_S(v)`, let `n=|S|`, and
+for a nonzero syndrome column `f` define
+
+\[
+                 \widehat C_f=\ker[H_S\mid f].             \tag{11a}
+\]
+
+For an arbitrary full-rank parity-check matrix `H`, the circuit formula is
+
+\[
+ d(\ker[H\mid f])=
+ \min\!\left\{d(\ker H),\ 1+
+ \min_{f\in\langle H_T\rangle}|T|\right\}.
+\]
+
+Here `C_S(v)` is MDS, so `d(ker H_S)=r+1`, while every syndrome is
+spanned by at most `r` columns.  Thus, if `w=d_S(f)`, the formula reduces to
+
+\[
+                         d(\widehat C_f)=w+1.               \tag{11b}
+\]
+
+Indeed, the original GRS parity-check columns have no dependent set of size
+at most `r`.  A smallest dependence in the augmented matrix must therefore
+contain `f`, and deleting `f` from it gives a smallest retained-column span
+of `f`; the two support sizes differ by one.
+
+Consequently `w=r` if and only if `\widehat C_f` is MDS.  More strongly,
+`w=r-1` if and only if `\widehat C_f` is near-MDS.  The forward implication
+for the primal code follows from (11b): it has distance `r`, one below its
+Singleton bound.  Choose `r-1` retained columns spanning `f`.  Their span is
+a hyperplane because every `r-1` retained NRC columns are independent.  A
+nonzero linear functional vanishing on it gives a word of
+`\widehat C_f^\perp` with those `r-1` old coordinates and the new coordinate
+all zero, hence with weight `n+1-r`.  Conversely every nonzero dual word has
+the form `(uH_S,u(f))`, and its old part has GRS weight at least `n-r+1`.
+Therefore
+
+\[
+ d(\widehat C_f^\perp)=n+1-r,                              \tag{11c}
+\]
+
+also one below the dual Singleton bound.  Conversely, a near-MDS
+`\widehat C_f` has primal distance `r`, so (11b) forces `w=r-1`.
+
+Thus the large-characteristic shell theorem simultaneously classifies all
+projective one-column extension columns of defect at most one:
+
+* omitted NRC columns give exactly the MDS extensions;
+* tangents, conjugate secants, and omitted-point-incident split secants give
+  exactly the NMDS extensions; and
+* every other column gives Singleton defect at least two.
+
+The projective counts of MDS and NMDS extension columns are respectively
+`N_r` and `N_(r-1)` from (4); scalar multiples only rescale the appended
+coordinate.  These are not orbit counts under the stabilizer of `S`.  In
+small characteristic, (5b) is an explicit upper bound on the number of NMDS
+projective extension columns.
+
 ## 4. Exact next-to-deep shell in large characteristic
 
 Assume `p>r-1`.  Then `M^max_(r,p)` is empty, and the rational points of
@@ -482,6 +543,9 @@ new application section.
    top-shell theorem.  Display the `s=0` and `s=1` consequences in two lines.
    Fold (5c)--(5f) into the same count paragraph; they require no new proof
    subsection and give the software/average-covering interpretation.
+   State (11a)--(11c) as the coding dictionary, so the same theorem is visibly
+   an exact classification of MDS and NMDS one-column extensions rather than
+   a disconnected affine-RS application.
 4. Cite Seroussi--Roth for the deep shell and say explicitly that the affine
    Cheng--Murray case is already known in this high-rate range.  Emphasize the
    new distance-`r-1` shell only after its audit clears.
@@ -538,6 +602,7 @@ as necessary for the former.
 |---|---|---|
 | Deleting one curve point promotes all interior points of its incident split secants from weight two to weight `r-1` | settled structurally by NRC independence plus Seroussi--Roth; counted in (13) | literature audit only |
 | The last two decoding layers might have non-negligible average mass | settled by (5c)--(5e): their exact mass is `(1/2)q^(4-r)+O_(r,s)(q^(3-r))` for fixed `r,s` | no mathematical gate; compare terminology with average-covering literature before frontmatter use |
+| Weight `r-1` might yield only a primal almost-MDS extension | settled by (11c): the dual is also almost-MDS, so the extension is NMDS | audit NMDS-extension prior art before headline use |
 | Tangent/conjugate shell is unchanged by any bounded support deletion | settled structurally by monotonicity and the exact deep-shell theorem | literature audit only |
 | GRS multipliers might change locators or weights | settled: column scaling is absorbed into error magnitudes in (6) | none |
 | Pointed abundance might lose its leading term | settled by (8a)--(8c) for fixed `r,s` | software exposure is a separate C974 item |

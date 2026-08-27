@@ -75,6 +75,12 @@ but RS-local Tanner and lifted-code compatibility is recorded as a separate
 open direction.
 Its scoped primary-source comparison and exact no-novelty boundary are in
 `c973-2026-08-26-cofinite-grs-literature-preaudit.md`.
+The subsequent Tao pass is
+`c973-2026-08-26-cofinite-grs-tao-pass.md`; it proves the universal identity
+for a one-column extension and its GRS specialization
+`d(ker[H_S|f])=d_S(f)+1`, upgrading the top-shell result to an exact
+classification of MDS and NMDS one-column extensions.  It also isolates the
+family-wise minimum-word/support count as the next enumerator gate.
 
 ## Objective
 

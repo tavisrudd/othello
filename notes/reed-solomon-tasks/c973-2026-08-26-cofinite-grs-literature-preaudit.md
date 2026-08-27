@@ -29,6 +29,30 @@ constructive `r-2` separation.
 | Blokhuis--Pellikaan--Szoenyi, *The extended coset leader weight enumerator of a twisted cubic code* (2022) | primary arXiv full-text rendering, abstract, Sections 1--2, statement of the codimension-four scope, and conclusion | exact coset-leader enumerator for the full `q+1` support in codimension four; establishes that shell enumeration is a recognized invariant | fixed codimension four and unpunctured support, not arbitrary `r` or cofinite support |
 | Riasat--Mahdavifar, *Efficient Covering Using Reed--Solomon Codes*, arXiv:2502.01984 | primary arXiv full-text rendering, abstract, introduction, covering setup, and algorithm scope | recent constructive covering via successive puncturing and standard decoders; average covering performance | guarantees a word within the redundancy bound, not exact top shells or proof-carrying `r-2` witnesses |
 
+## NMDS-extension refinement from the Tao pass
+
+The identity
+
+\[
+d(\ker[H_S\mid f])=d_S(f)+1
+\]
+
+turns the same claim into a classification of projective one-column
+extensions: the deep shell is MDS, the next shell is NMDS (the dual defect is
+also one), and the remaining columns have Singleton defect at least two.
+Kaipa, arXiv:1612.05447, explicitly supplies the deep-hole/MDS one-digit
+dictionary, but not the NMDS classification.  The targeted NMDS comparison
+also checked Bartoli--Davydov--Marcugini--Pambianco, arXiv:1609.05657;
+Li--Sun--Zhu, arXiv:2401.04360; and the 2026 Wang--Chen--Yan preprint,
+arXiv:2605.23329.  The latter two construct and analyze different non-GRS or
+twisted-GRS MDS/NMDS families; neither abstract states the ordinary cofinite-
+GRS single-column classification here.
+
+This remains a scoped negative comparison.  It licenses the MDS/NMDS
+reframing, not a novelty adjective.  A final audit should search the terms
+`almost MDS extension`, `near MDS extension`, `single-element extension`, and
+`NRC defect-one extension` through those citation graphs.
+
 ## Search boundary
 
 Targeted searches were run for combinations of:
