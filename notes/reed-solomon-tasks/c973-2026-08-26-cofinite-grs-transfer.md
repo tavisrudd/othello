@@ -122,6 +122,14 @@ nonzero GRS multipliers change affine representatives but neither projective
 column spans, coset-leader weight, carrier membership, nor locator support.
 This is the exact sense in which every theorem below is GRS-covariant.
 
+Terminology matters here.  `C_S(v)` has length `|S|` and dimension
+`|S|-r`; it is the redundancy-`r` GRS code formed on the retained cofinite
+evaluation set.  It is not literal coordinate puncturing of a fixed
+dimension-`q+1-r` PRS code, which would change the redundancy.  The paper
+should use **cofinite-support GRS** in theorem statements and reserve
+`punctured` for the coding operation, even though deleting evaluation points
+is the geometric source of `S`.
+
 The apolar dictionary used in the projective paper also survives unchanged.
 A split squarefree member of `W_f` of degree `r-2`, all of whose roots belong
 to `S`, is equivalent to a representation of `f` by `r-2` distinct retained
