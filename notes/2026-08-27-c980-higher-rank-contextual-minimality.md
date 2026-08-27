@@ -1429,6 +1429,13 @@ Open mysteries:
    Scalar-invariant fibres collapse the unrestricted minimum to a two-block
    rank-one context, so any sharp code family must exploit scalar-action
    anisotropy.  Contextual-class lower bounds are also open.
+   A concrete first search is the duplicated systematic representation
+   `L->F2^(2m)`: here `lambda` is output-row support and `mu` is row support
+   relative to the normalized target map.  For `L=F16`, test two-dimensional
+   target images in Singer orbits avoiding coordinate planes.  A rank-two
+   outer context can split such an image into two scalar-rotated one-row
+   labels; the exact gate is whether every rank-one factorization has total
+   cost at least three.
 4. **Witness semantics.**  Numerical contextual equivalence need not transport
    coefficient argmins.  The bounded witness-cover theorem now proves that all
    coefficient systems and exact supports come from shortenings to at most `r`
