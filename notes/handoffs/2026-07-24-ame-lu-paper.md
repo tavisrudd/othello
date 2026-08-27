@@ -25,7 +25,7 @@ audit, and mirror verification pass.  Preserve theorem scope and trust
 boundaries.  Do not close or archive C979 until the user explicitly directs it.
 Live card: `2026-08-27-c979-mds-css-exposition-revision.md`.
 
-**C981 is queued (2026-08-27).**  Explore the mathematical and publication
+**C981 is running (2026-08-27).**  Explore the mathematical and publication
 potential exposed by the cleaned-up MDS--CSS paper: portability of the
 diagonal-multiplier method beyond MDS codes, the structure replacing the
 nullity dichotomy in broader CSS families, the independent value of the
