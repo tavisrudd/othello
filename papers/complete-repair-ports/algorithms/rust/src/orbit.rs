@@ -800,6 +800,8 @@ impl Search<'_> {
         Ok(false)
     }
 
+    #[cold]
+    #[inline(never)]
     fn run<const CORRELATED: bool>(&mut self) -> Result<bool, OrbitError> {
         let mut stack = Vec::with_capacity(self.families.len() + 1);
         stack.push(SearchFrame {
@@ -977,7 +979,10 @@ fn orbit_search_impl(
         residue_prunes: 0,
         memo_prunes: 0,
     };
-    let iterative = family_count > 4_096;
+    // The recursive kernel is measurably faster at ordinary depths. Reserve the
+    // explicit stack for inputs large enough that call-stack growth, rather
+    // than instruction count, is the binding concern.
+    let iterative = family_count > 32_768;
     let feasible = if correlated_suffixes.is_empty() && iterative {
         search.run::<false>()?
     } else if correlated_suffixes.is_empty() {

@@ -185,12 +185,12 @@ syndrome equations. The packed coordinate engine is the appropriate ERGO
 backend in this regime; building correlated suffix closure would waste both
 time and memory.
 
-| families | ERGO time | ERGO RSS | CP-SAT time | CP-SAT RSS | speedup |
-|---------:|----------:|---------:|------------:|-----------:|--------:|
-|       80 |     46 us |  1.6 MiB |   29.590 ms |   77.3 MiB |    644x |
-|      320 |    138 us |  1.7 MiB |  168.105 ms |   83.9 MiB |  1,215x |
-|    1,280 |    424 us |  2.3 MiB |       1.09 s |  104.7 MiB |  2,582x |
-|    8,192 |  2,735 us |  6.2 MiB |      20.21 s |  246.7 MiB |  7,388x |
+| families   | ERGO time   | ERGO RSS   | CP-SAT time   | CP-SAT RSS   | speedup   |
+| ---------: | ----------: | ---------: | ------------: | -----------: | --------: |
+|         80 |       50 us |    2.3 MiB |     30.024 ms |     77.4 MiB |      599x |
+|        320 |      142 us |    2.4 MiB |    168.641 ms |     84.1 MiB |    1,184x |
+|      1,280 |      647 us |    3.0 MiB |        1.11 s |    104.4 MiB |    1,712x |
+|      8,192 |    2,792 us |    6.9 MiB |       20.32 s |    247.1 MiB |    7,279x |
 
 The first two rows use 21 rotated rounds, the 1,280-family row seven, and the
 seconds-scale 8,192-family row three. Every run returns the same feasibility
@@ -256,17 +256,17 @@ CP-SAT receives all generated options, while the structured control receives
 the same safe Pareto canonicalization and grading bound as ERGO-comp. All
 three backends return the same optimum.
 
-| demands | ERGO time | ERGO RSS | raw CP-SAT | raw RSS | structured CP-SAT | structured RSS | speedup: raw / structured |
-|--------:|----------:|---------:|-----------:|--------:|------------------:|---------------:|--------------------------:|
-|      80 |     46 us |  1.6 MiB |   6.686 ms | 75.1 MiB |          6.733 ms |       75.2 MiB |              147x / 148x |
-|     320 |    146 us |  1.6 MiB |  28.045 ms | 78.2 MiB |         28.173 ms |       78.0 MiB |              192x / 193x |
-|   1,280 |    515 us |  2.1 MiB | 212.182 ms | 97.3 MiB |        212.162 ms |       95.7 MiB |              412x / 412x |
-|   8,192 |  2,633 us |  4.4 MiB |      1.37 s | 199.9 MiB |            1.35 s |      188.6 MiB |              522x / 511x |
+| demands   | ERGO time   | ERGO RSS   | raw CP-SAT   | raw RSS   | structured CP-SAT   | structured RSS   | speedup: raw / structured   |
+| --------: | ----------: | ---------: | -----------: | --------: | ------------------: | ---------------: | --------------------------: |
+|        80 |       49 us |    2.3 MiB |     6.693 ms |  74.9 MiB |            6.768 ms |         74.7 MiB |                 135x / 137x |
+|       320 |      109 us |    2.4 MiB |    27.803 ms |  78.2 MiB |           27.695 ms |         77.7 MiB |                 255x / 254x |
+|     1,280 |      377 us |    2.7 MiB |   210.064 ms |  97.2 MiB |          208.984 ms |         95.5 MiB |                 557x / 555x |
+|     8,192 |    2,205 us |    4.8 MiB |       1.37 s | 199.9 MiB |              1.34 s |        188.1 MiB |                 622x / 607x |
 
-| options per demand | ERGO time | ERGO RSS | raw CP-SAT | raw RSS | structured CP-SAT | structured RSS | speedup: raw / structured |
-|-------------------:|----------:|---------:|-----------:|--------:|------------------:|---------------:|--------------------------:|
-|                 64 |    417 us |  1.8 MiB |  72.216 ms | 84.8 MiB |         18.334 ms |       77.5 MiB |               173x / 44x |
-|              1,024 |  4,515 us |  6.0 MiB |       1.59 s | 386.1 MiB |         71.936 ms |       89.7 MiB |               353x / 16x |
+| options per demand   | ERGO time   | ERGO RSS   | raw CP-SAT   | raw RSS   | structured CP-SAT   | structured RSS   | speedup: raw / structured   |
+| -------------------: | ----------: | ---------: | -----------: | --------: | ------------------: | ---------------: | --------------------------: |
+|                   64 |      351 us |    2.6 MiB |    71.672 ms |  84.9 MiB |           17.168 ms |         77.4 MiB |                  204x / 49x |
+|                1,024 |    3,964 us |    6.7 MiB |       1.58 s | 386.2 MiB |           70.355 ms |         89.8 MiB |                  398x / 18x |
 
 The small and medium rows use 21 rotated rounds; the two seconds-scale rows
 use seven. This sweep shows two different advantages: the dense certified
@@ -281,12 +281,12 @@ ERGO-comp, then uses one-hot leaf choices and the same parity constraints.
 Every solver proves the same optimum; ERGO-comp additionally expands its
 canonical coefficient witness tree.
 
-| depth / fanout | leaves | ERGO time | ERGO RSS | direct CP-SAT | direct RSS | labelled CP-SAT | labelled RSS | speedup: direct / labelled |
-|:---------------|-------:|----------:|---------:|--------------:|-----------:|----------------:|-------------:|---------------------------:|
-| 2 / 2          |      4 |     89 us |  1.3 MiB |      3.011 ms |   74.4 MiB |        4.917 ms |     74.9 MiB |                  34x / 55x |
-| 3 / 3          |     27 |    134 us |  1.3 MiB |     11.560 ms |   75.5 MiB |       27.479 ms |     77.0 MiB |                 86x / 204x |
-| 4 / 3          |     81 |    166 us |  1.3 MiB |     43.160 ms |   78.5 MiB |      112.086 ms |     82.0 MiB |                260x / 676x |
-| 5 / 4          |  1,024 |    300 us |  1.4 MiB |        8.21 s |  126.4 MiB |          1.57 s |    157.8 MiB |           27,385x / 5,224x |
+| depth / fanout   | leaves   | ERGO time   | ERGO RSS   | direct CP-SAT   | direct RSS   | labelled CP-SAT   | labelled RSS   | speedup: direct / labelled   |
+| :--------------- | -------: | ----------: | ---------: | --------------: | -----------: | ----------------: | -------------: | ---------------------------: |
+|            2 / 2 |        4 |       94 us |    2.3 MiB |        2.983 ms |     74.6 MiB |          4.901 ms |       75.2 MiB |                    32x / 52x |
+|            3 / 3 |       27 |      175 us |    2.3 MiB |       11.578 ms |     75.8 MiB |         27.461 ms |       77.3 MiB |                   66x / 156x |
+|            4 / 3 |       81 |      177 us |    2.4 MiB |       43.054 ms |     78.8 MiB |        112.447 ms |       82.3 MiB |                  243x / 635x |
+|            5 / 4 |    1,024 |      316 us |    2.4 MiB |          8.17 s |    126.5 MiB |            1.58 s |      158.1 MiB |             25,889x / 5,013x |
 | 6 / 4          |  4,096 |    766 us |  2.8 MiB |      263.76 s |  281.4 MiB |          6.19 s |    411.4 MiB |          344,300x / 8,080x |
 
 These are bounded single-worker results for the identity-block GF(4) tower

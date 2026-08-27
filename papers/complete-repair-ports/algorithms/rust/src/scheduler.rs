@@ -78,7 +78,10 @@ enum OptionLoadsBuilder {
 }
 
 impl OptionLoadsBuilder {
-    fn new(capacities: &[u32]) -> Self {
+    fn new(capacities: &[u32], narrow: bool) -> Self {
+        if !narrow {
+            return Self::U32(Vec::new());
+        }
         let maximum = capacities.iter().copied().max().unwrap_or(0);
         if u8::try_from(maximum).is_ok() {
             Self::U8(Vec::new())
@@ -318,7 +321,7 @@ impl WeightedRepairProblem {
         capacities: &[u32],
         raw_families: &[Vec<Vec<u32>>],
     ) -> Result<Self, SchedulerError> {
-        Self::from_family_iterators_impl(capacities, raw_families, None)
+        Self::from_materialized_families_impl(capacities, raw_families, None)
     }
 
     /// Compiles families from arbitrary iterators without materializing a nested
@@ -346,7 +349,7 @@ impl WeightedRepairProblem {
         raw_families: &[Vec<Vec<u32>>],
         weights: &[u32],
     ) -> Result<Self, SchedulerError> {
-        Self::from_family_iterators_impl(capacities, raw_families, Some(weights))
+        Self::from_materialized_families_impl(capacities, raw_families, Some(weights))
     }
 
     pub fn from_family_iterators_with_positive_grading<I, FI, L>(
@@ -360,6 +363,66 @@ impl WeightedRepairProblem {
         L: AsRef<[u32]>,
     {
         Self::from_family_iterators_impl(capacities, raw_families, Some(weights))
+    }
+
+    fn from_materialized_families_impl(
+        capacities: &[u32],
+        raw_families: &[Vec<Vec<u32>>],
+        grading_weights: Option<&[u32]>,
+    ) -> Result<Self, SchedulerError> {
+        u32::try_from(raw_families.len()).map_err(|_| SchedulerError::TooLarge)?;
+        let width = capacities.len();
+        let raw_option_count = raw_families
+            .iter()
+            .try_fold(0usize, |sum, family| sum.checked_add(family.len()));
+        let narrow_loads = raw_option_count.is_none_or(|options| options > 65_536);
+        let mut families = Vec::with_capacity(raw_families.len());
+        let mut option_count = 0u32;
+        let mut option_loads = OptionLoadsBuilder::new(capacities, narrow_loads);
+        for raw_family in raw_families {
+            if raw_family.iter().any(|loads| loads.len() != width) {
+                return Err(SchedulerError::WidthMismatch);
+            }
+            let mut canonical: Vec<Vec<u32>> = raw_family
+                .iter()
+                .filter(|loads| loads.iter().zip(capacities).all(|(load, cap)| load <= cap))
+                .cloned()
+                .collect();
+            canonical.sort_unstable();
+            canonical.dedup();
+            let minimal = canonical
+                .iter()
+                .enumerate()
+                .filter(|(index, loads)| {
+                    !canonical.iter().enumerate().any(|(other_index, other)| {
+                        index != &other_index
+                            && other
+                                .iter()
+                                .zip(loads.iter())
+                                .all(|(left, right)| left <= right)
+                    })
+                })
+                .map(|(_, loads)| loads)
+                .collect::<Vec<_>>();
+            let option_start = option_count;
+            for loads in &minimal {
+                option_loads.extend(loads);
+                option_count = option_count
+                    .checked_add(1)
+                    .ok_or(SchedulerError::TooLarge)?;
+            }
+            families.push(FamilyRecord {
+                option_start,
+                option_len: u32::try_from(minimal.len()).map_err(|_| SchedulerError::TooLarge)?,
+            });
+        }
+        Self::finish_compiled_problem(
+            capacities,
+            families,
+            option_count,
+            option_loads,
+            grading_weights,
+        )
     }
 
     fn from_family_iterators_impl<I, FI, L>(
@@ -376,7 +439,7 @@ impl WeightedRepairProblem {
         let raw_families = raw_families.into_iter();
         let mut families = Vec::with_capacity(raw_families.size_hint().0);
         let mut option_count = 0u32;
-        let mut option_loads = OptionLoadsBuilder::new(capacities);
+        let mut option_loads = OptionLoadsBuilder::new(capacities, true);
         for raw_family in raw_families {
             let mut minimal: Vec<Box<[u32]>> = Vec::new();
             for raw_loads in raw_family {
@@ -413,6 +476,23 @@ impl WeightedRepairProblem {
             });
         }
         u32::try_from(families.len()).map_err(|_| SchedulerError::TooLarge)?;
+        Self::finish_compiled_problem(
+            capacities,
+            families,
+            option_count,
+            option_loads,
+            grading_weights,
+        )
+    }
+
+    fn finish_compiled_problem(
+        capacities: &[u32],
+        families: Vec<FamilyRecord>,
+        option_count: u32,
+        option_loads: OptionLoadsBuilder,
+        grading_weights: Option<&[u32]>,
+    ) -> Result<Self, SchedulerError> {
+        let width = capacities.len();
         let mut problem = Self {
             capacities: capacities.into(),
             families: families.into_boxed_slice(),
