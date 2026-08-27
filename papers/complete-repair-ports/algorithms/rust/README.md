@@ -324,6 +324,28 @@ the known zero sector; all three backends return the same exact `Gamma`.
 Times are medians of seven rotated, pinned-core, deterministic single-worker
 runs. Replay with `run_benchmarks.py --write --jin-fu-only --ab-rounds 7`.
 
+A larger member of Jin and Fu's published Hamming-outer family makes the same
+comparison at storage scale. Corollary 5.4 with extension degree six gives a
+GF(4) Hamming `[1365,1359,3]` outer code and binary
+`[4095,2718,6;2]` perfect LRC. The harness generates the complete projective
+simplex dual, verifies its constant-weight property independently, and checks
+all `4^6 - 1 = 4,095` nonzero outer functionals. All three backends prove the
+same exact result: `M_1=2`, zero-functional cost `5`, best nonzero-functional
+cost `1,023`, `Gamma=5`, and maximum confined radius `4`.
+
+| backend            | exact time | peak RSS | relative time |
+| :----------------- | ---------: | -------: | ------------: |
+| ERGO-comp          |     231 ms |  2.4 MiB |            1x |
+| direct CP-SAT      |      100 s |  119 MiB |          432x |
+| labelled CP-SAT    |       82 s |  124 MiB |          356x |
+
+The Rust time is the median of 21 pinned-core runs. Because each exact CP-SAT
+solve takes more than a minute, its row is one completed deterministic
+single-worker proof of optimality, not a timing distribution. This is a mixed
+algorithm-and-engineering comparison: unlike the represented-tower results
+above, it does not isolate min--sum composition as the sole source of the win.
+Replay with `run_benchmarks.py --write --jin-fu-hamming-only`.
+
 ERGO-comp alone can be pushed much farther before ten seconds. The following
 are pinned-core single end-to-end solves, including instance compilation and
 complete witness construction. They are the largest completed geometric or

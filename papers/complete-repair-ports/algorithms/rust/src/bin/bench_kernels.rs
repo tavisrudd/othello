@@ -85,6 +85,40 @@ fn jin_fu_outer_dual_basis() -> Matrix {
     Matrix::new_field::<Gf4>(7, 43, data).unwrap()
 }
 
+fn gf4_hamming_dual_basis(dimension: usize) -> Matrix {
+    assert!((2..=15).contains(&dimension));
+    let column_count = (4usize.pow(dimension as u32) - 1) / 3;
+    let mut rows = vec![Vec::with_capacity(column_count); dimension];
+    for pivot in 0..dimension {
+        let suffixes = 4usize.pow((dimension - pivot - 1) as u32);
+        for mut suffix in 0..suffixes {
+            for (row, entries) in rows.iter_mut().enumerate() {
+                let entry = if row < pivot {
+                    0
+                } else if row == pivot {
+                    1
+                } else {
+                    let digit = suffix & 3;
+                    suffix >>= 2;
+                    digit as u8
+                };
+                entries.push(entry);
+            }
+        }
+    }
+    let data: Vec<u8> = rows.into_iter().flatten().collect();
+    Matrix::new_field::<Gf4>(dimension, column_count, data).unwrap()
+}
+
+fn jin_fu_hamming_spec(variant: &str) -> Option<usize> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "jin-fu-hamming" || fields.next()? != "rust" {
+        return None;
+    }
+    let dimension = fields.next()?.parse().ok()?;
+    fields.next().is_none().then_some(dimension)
+}
+
 fn transfer_tower_spec(variant: &str) -> Option<(&str, usize, usize)> {
     let mut fields = variant.split(':');
     if fields.next()? != "transfer-tower" {
@@ -378,6 +412,36 @@ fn main() {
     let mut work = 0u64;
     let mut peak_states = 0u64;
     let mut checksum = 0u64;
+    if let Some(dimension) = jin_fu_hamming_spec(&variant) {
+        let functional_dual_basis = gf4_hamming_dual_basis(dimension);
+        let block_count = functional_dual_basis.cols();
+        let profile = compile_binary_rank_one::<Gf4>(&[1, 2, 3], 0, 16).unwrap();
+        let inner_dual = profile.inner_dual().unwrap();
+        let (ordinary, target) = profile.cost_tables::<Gf4>().unwrap();
+        let expected_nonzero = 4u32.pow((dimension - 1) as u32) - 1;
+        for _ in 0..repetitions {
+            let answer = confinement_by_generators_field::<Gf4>(
+                &functional_dual_basis,
+                block_count,
+                &ordinary,
+                &target,
+                0,
+                inner_dual.cost,
+            )
+            .unwrap();
+            assert_eq!(answer.cost, 5);
+            assert_eq!(answer.nonzero_cost, Some(expected_nonzero));
+            work += answer.transitions;
+            checksum += u64::from(answer.cost);
+            black_box(answer);
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
     if variant == "jin-fu:rust" {
         let functional_dual_basis = jin_fu_outer_dual_basis();
         let profile = compile_binary_rank_one::<Gf4>(&[1, 2, 3], 0, 16).unwrap();
@@ -699,6 +763,37 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::collections::HashSet;
+
+    #[test]
+    fn gf4_hamming_basis_is_projective_and_simplex_constant_weight() {
+        let dimension = 4;
+        let basis = gf4_hamming_dual_basis(dimension);
+        assert_eq!(basis.cols(), 85);
+        let columns: HashSet<_> = (0..basis.cols())
+            .map(|column| basis.column(column).into_vec())
+            .collect();
+        assert_eq!(columns.len(), basis.cols());
+        assert!(columns.iter().all(|column| {
+            column.iter().any(|&entry| entry != 0)
+                && column.iter().find(|&&entry| entry != 0) == Some(&1)
+        }));
+
+        for packed in 1..4usize.pow(dimension as u32) {
+            let mut weight = 0;
+            for column in 0..basis.cols() {
+                let mut value = 0;
+                for row in 0..dimension {
+                    value = Gf4::add(
+                        value,
+                        Gf4::mul((packed >> (2 * row)) as u8 & 3, basis.row(row)[column]),
+                    );
+                }
+                weight += usize::from(value != 0);
+            }
+            assert_eq!(weight, 64);
+        }
+    }
 
     #[test]
     fn lcg_jump_matches_scalar_steps() {

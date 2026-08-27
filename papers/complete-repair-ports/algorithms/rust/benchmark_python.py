@@ -54,6 +54,17 @@ def jin_fu_spec(variant: str):
     return fields[1]
 
 
+def jin_fu_hamming_spec(variant: str):
+    fields = variant.split(":")
+    if (
+        len(fields) != 3
+        or fields[0] != "jin-fu-hamming"
+        or fields[1] not in ("cpsat", "cpsat-direct")
+    ):
+        return None
+    return fields[1], int(fields[2])
+
+
 def orbit_grid_spec(variant: str):
     fields = variant.split(":")
     if len(fields) != 6 or fields[:2] != ["orbit-grid", "cpsat"]:
@@ -154,6 +165,25 @@ def jin_fu_outer_dual_basis():
             vector[pivot] = rows[row][free]
         basis.append(vector)
     return basis
+
+
+def gf4_hamming_dual_basis(dimension: int):
+    assert 2 <= dimension <= 15
+    rows = [[] for _ in range(dimension)]
+    for pivot in range(dimension):
+        for suffix in range(4 ** (dimension - pivot - 1)):
+            digits = suffix
+            for row in range(dimension):
+                if row < pivot:
+                    entry = 0
+                elif row == pivot:
+                    entry = 1
+                else:
+                    entry = digits & 3
+                    digits >>= 2
+                rows[row].append(entry)
+    assert len(rows[0]) == (4**dimension - 1) // 3
+    return rows
 
 
 def gf4_product_bits(element: int, scalar_bits):
@@ -318,11 +348,13 @@ def main() -> None:
     heterogeneous_grid = heterogeneous_scheduler_grid_spec(variant)
     transfer_tower = transfer_tower_spec(variant)
     jin_fu = jin_fu_spec(variant)
+    jin_fu_hamming = jin_fu_hamming_spec(variant)
     orbit_grid = orbit_grid_spec(variant)
     cp_model = None
     if (
         transfer_tower is not None
         or jin_fu is not None
+        or jin_fu_hamming is not None
         or orbit_grid is not None
         or variant in ("scheduler-cpsat", "scheduler-cpsat-small")
         or (grid is not None and grid[0] == "cpsat")
@@ -369,23 +401,29 @@ def main() -> None:
             work += solver.num_branches
             peak_states = max(peak_states, solver.num_conflicts)
             checksum += 1
-    elif jin_fu is not None:
+    elif jin_fu is not None or jin_fu_hamming is not None:
         assert cp_model is not None
-        basis = jin_fu_outer_dual_basis()
+        if jin_fu_hamming is None:
+            backend = jin_fu
+            basis = jin_fu_outer_dual_basis()
+        else:
+            backend, dimension = jin_fu_hamming
+            basis = gf4_hamming_dual_basis(dimension)
+        block_count = len(basis[0])
         model = cp_model.CpModel()
         functional = [
             [model.new_bool_var(f"u_{row}_{bit}") for bit in range(2)]
-            for row in range(7)
+            for row in range(len(basis))
         ]
         model.add_bool_or(variable for row in functional for variable in row)
         objective = []
-        for block in range(43):
+        for block in range(block_count):
             outer_terms = [[], []]
             for row, basis_row in enumerate(basis):
                 product = gf4_product_bits(basis_row[block], functional[row])
                 outer_terms[0].extend(product[0])
                 outer_terms[1].extend(product[1])
-            if jin_fu == "cpsat":
+            if backend == "cpsat":
                 costs = (2, 0, 1, 1) if block == 0 else (0, 1, 1, 1)
                 choices = [
                     model.new_bool_var(f"x_{block}_{label}") for label in range(4)
@@ -432,7 +470,10 @@ def main() -> None:
                     f"CP-SAT did not prove optimality: {solver.status_name(status)}"
                 )
             nonzero_cost = round(solver.objective_value)
-            assert nonzero_cost == 26
+            expected_nonzero = (
+                26 if jin_fu_hamming is None else 4 ** (dimension - 1) - 1
+            )
+            assert nonzero_cost == expected_nonzero
             work += solver.num_branches
             peak_states = max(peak_states, solver.num_conflicts)
             checksum += min(5, nonzero_cost)

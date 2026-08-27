@@ -21,6 +21,11 @@ inner code to obtain a `[129,72,10;2]` LRC. This is the strongest match because
 it exercises the exact mathematical object compiled by ERGO-comp rather than
 only sharing the scheduler's generic optimization shape.
 
+A scale follow-up uses Corollary 5.4 of the same paper: the GF(4) Hamming
+`[1365,1359,3]` outer code at extension degree six and binary `[3,2,2]` inner
+code give a binary `[4095,2718,6;2]` perfect LRC. This is a completed exact
+comparison, not a timeout claim.
+
 ERGO-comp derives the outer dual basis from the paper's generator polynomial,
 compiles the labelled inner costs, examines the complete set of 16,383 nonzero
 outer functionals, and returns
@@ -52,6 +57,22 @@ This computation adds exact recovery/confinement information to the published
 code. Jin and Fu do not claim these values, and the benchmark is not evidence
 for their minimum-distance theorem.
 
+For the larger Hamming-family instance, ERGO-comp generates the projective
+simplex dual and checks every one of its 4,095 nonzero functionals. Its
+21-sample median is 231 ms and 2.4 MiB peak RSS. One completed direct CP-SAT
+proof takes 100 s and 119 MiB; one completed labelled CP-SAT proof takes 82 s
+and 124 MiB. Rounded speedups are respectively 432x and 356x. All backends
+return `M_1=2`, zero-functional cost `5`, nonzero-sector minimum `1,023`,
+`Gamma=5`, and maximum confined radius `4`. The single CP-SAT samples are
+reported explicitly as single completed solves because repeating minute-scale
+proofs would spend compute without improving the mathematical control.
+
+This scale result is classified as mixed algorithm and implementation evidence.
+The represented-tower benchmark is the cleaner mathematical-compression result:
+CP-SAT receives the same local labelled tables but flattens the hierarchy,
+whereas ERGO-comp applies the associative min--sum closure law. The Hamming
+result must not be used to attribute the entire measured gap to that theorem.
+
 ## Reproduction boundary
 
 Authority paths:
@@ -60,7 +81,7 @@ Authority paths:
 - `papers/complete-repair-ports/algorithms/rust/benchmark_python.py`;
 - `papers/complete-repair-ports/algorithms/rust/run_benchmarks.py`;
 - `papers/complete-repair-ports/algorithms/rust/evidence/benchmarks.json`, key
-  `jin_fu_concatenated_lrc`.
+  `jin_fu_concatenated_lrc` and `jin_fu_hamming_lrc_scale`.
 
 Replay after building the release benchmark binary with the documented
 `x86-64-v3` flags:
@@ -68,6 +89,9 @@ Replay after building the release benchmark binary with the documented
 ```text
 ERGO_BENCH_BINARY=<release-binary> python3 run_benchmarks.py \
   --write --jin-fu-only --ab-rounds 7
+
+ERGO_BENCH_BINARY=<release-binary> python3 run_benchmarks.py \
+  --write --jin-fu-hamming-only
 ```
 
 The evidence record carries the exact binary and source hashes, raw samples,
@@ -102,8 +126,8 @@ claimed fairly.
 
 1. Hengfeng Jin and Fang-Wei Fu, *Constructions of Locally Repairable Codes via
    Concatenated Codes*, arXiv:2605.04618v1 (2026). **Read depth: partial** --
-   cached PDF, Section 3 (especially Construction 3.2) and Example 5.7 in
-   Section 5. Cache key `arXiv:2605.04618`, SHA-256
+   cached PDF, Section 3 (especially Construction 3.2), Corollary 5.4, and
+   Example 5.7 in Section 5. Cache key `arXiv:2605.04618`, SHA-256
    `69847fc4ed1ada75f615ab8d2b2c08484da31253d278f9485cd03f5ab9587d93`.
 
 2. Renata Mansini and Roberto Zanotti, *A Core-Based Exact Algorithm for the

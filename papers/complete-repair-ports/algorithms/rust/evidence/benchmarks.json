@@ -676,6 +676,271 @@
       "paper": "Jin--Fu (2026), arXiv:2605.04618v1, Example 5.7"
     }
   },
+  "jin_fu_hamming_lrc_scale": {
+    "artifacts": {
+      "bench_kernels_binary_sha256": "56ad1c758d9dfaf494967622febc8b99c72af1e1f0000fd716485b0d358893a9",
+      "bench_kernels_source_sha256": "309917fa6323fb4be2867ce64127e9834dc49cbbd4c0d9bde8901c860d85f681",
+      "benchmark_python_sha256": "2a67f224a0ac844f3c1fe8640d3444017e70794ae16e874d1b4d906fd96e55eb",
+      "run_benchmarks_sha256": "fe7d9137343bf3ec728aec647298b3ae2f8f628d3815fc1009ca3103ba27e5e9"
+    },
+    "exact_result": {
+      "best_nonzero_functional_cost": 1023,
+      "gamma": 5,
+      "maximum_confined_radius": 4,
+      "outer_functionals": 4095,
+      "relative_weight": 2,
+      "zero_functional_cost": 5
+    },
+    "measurements": {
+      "jin-fu-hamming:cpsat-direct:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 99630744102.0,
+        "median_peak_rss_kib": 121928,
+        "peak_states": 4656,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 99630744102,
+            "peak_rss_kib": 121928,
+            "peak_states": 4656,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cpsat-direct:6",
+            "work": 172842
+          }
+        ],
+        "work_per_solve": 172842
+      },
+      "jin-fu-hamming:cpsat:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 82057846827.0,
+        "median_peak_rss_kib": 127460,
+        "peak_states": 4480,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 82057846827,
+            "peak_rss_kib": 127460,
+            "peak_states": 4480,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:cpsat:6",
+            "work": 232638
+          }
+        ],
+        "work_per_solve": 232638
+      },
+      "jin-fu-hamming:rust:6": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 230775414.0,
+        "median_peak_rss_kib": 2456,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 302427193,
+            "peak_rss_kib": 2392,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 230037090,
+            "peak_rss_kib": 2488,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 229346012,
+            "peak_rss_kib": 2444,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 230993230,
+            "peak_rss_kib": 2452,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 230340755,
+            "peak_rss_kib": 2464,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 229533801,
+            "peak_rss_kib": 2460,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 229110032,
+            "peak_rss_kib": 2492,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 229970064,
+            "peak_rss_kib": 2508,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 230775414,
+            "peak_rss_kib": 2448,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 231278271,
+            "peak_rss_kib": 2560,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 229970534,
+            "peak_rss_kib": 2448,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 230005549,
+            "peak_rss_kib": 2456,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 231675470,
+            "peak_rss_kib": 2376,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 231092384,
+            "peak_rss_kib": 2428,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 229622175,
+            "peak_rss_kib": 2388,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 230927526,
+            "peak_rss_kib": 2372,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 230857526,
+            "peak_rss_kib": 2500,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 231234678,
+            "peak_rss_kib": 2500,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 230879327,
+            "peak_rss_kib": 2476,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 230406606,
+            "peak_rss_kib": 2376,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 231277808,
+            "peak_rss_kib": 2476,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu-hamming:rust:6",
+            "work": 4095
+          }
+        ],
+        "work_per_solve": 4095
+      }
+    },
+    "protocol": "pinned-core deterministic exact solves; 21 Rust samples and one completed proof of optimality from each CP-SAT model",
+    "rounds": {
+      "direct_cpsat": 1,
+      "rust": 21,
+      "structured_cpsat": 1
+    },
+    "rust_speedup_over_direct_cpsat": 431.722,
+    "rust_speedup_over_structured_cpsat": 355.574,
+    "source": {
+      "concatenated_code": "binary [4095,2718,6;2] perfect LRC",
+      "outer_code": "GF(4) Hamming [1365,1359,3]",
+      "paper": "Jin--Fu (2026), arXiv:2605.04618v1, Corollary 5.4"
+    }
+  },
   "large_case_tma": {
     "artifacts": {
       "bench_kernels_binary_sha256": "2fe19d04b8bfc7f16d8acdc28a573e7f66d713ee85d6c2b1e8b8c041af782d7e",

@@ -193,6 +193,7 @@ def main() -> None:
     parser.add_argument("--transfer-only", action="store_true")
     parser.add_argument("--transfer-deep-only", action="store_true")
     parser.add_argument("--jin-fu-only", action="store_true")
+    parser.add_argument("--jin-fu-hamming-only", action="store_true")
     parser.add_argument("--scheduler-scaling-only", action="store_true")
     parser.add_argument("--orbit-scaling-only", action="store_true")
     parser.add_argument("--orbit-iterative-ab", action="store_true")
@@ -623,6 +624,59 @@ def main() -> None:
                 "direct_cpsat": "binary inner coefficients and support objective; GF(4) outer-functional parity constraints",
                 "structured_cpsat": "the same labelled costs as ERGO; one-hot labels and GF(4) outer-functional parity constraints",
             },
+            "measurements": measured,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.jin_fu_hamming_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --jin-fu-hamming-only")
+        value = json.loads(OUTPUT.read_text())
+        dimension = 6
+        variants = tuple(
+            f"jin-fu-hamming:{backend}:{dimension}"
+            for backend in ("rust", "cpsat-direct", "cpsat")
+        )
+        measured = {}
+        measured[variants[0]] = run_group((variants[0],), 1, 21)[variants[0]]
+        for variant in variants[1:]:
+            measured[variant] = run_group((variant,), 1, 1)[variant]
+        if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+            raise RuntimeError(f"Jin--Fu Hamming CP-SAT checksum mismatch: {variants}")
+        value["jin_fu_hamming_lrc_scale"] = {
+            "source": {
+                "paper": "Jin--Fu (2026), arXiv:2605.04618v1, Corollary 5.4",
+                "outer_code": "GF(4) Hamming [1365,1359,3]",
+                "concatenated_code": "binary [4095,2718,6;2] perfect LRC",
+            },
+            "exact_result": {
+                "outer_functionals": 4095,
+                "relative_weight": 2,
+                "zero_functional_cost": 5,
+                "best_nonzero_functional_cost": 1023,
+                "gamma": 5,
+                "maximum_confined_radius": 4,
+            },
+            "rounds": {"rust": 21, "direct_cpsat": 1, "structured_cpsat": 1},
+            "rust_speedup_over_direct_cpsat": ratio(
+                measured[variants[1]]["median_ns_per_solve"],
+                measured[variants[0]]["median_ns_per_solve"],
+            ),
+            "rust_speedup_over_structured_cpsat": ratio(
+                measured[variants[2]]["median_ns_per_solve"],
+                measured[variants[0]]["median_ns_per_solve"],
+            ),
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "benchmark_python_sha256": sha256(ROOT / "benchmark_python.py"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": (
+                "pinned-core deterministic exact solves; 21 Rust samples and one "
+                "completed proof of optimality from each CP-SAT model"
+            ),
             "measurements": measured,
         }
         OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
