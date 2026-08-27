@@ -9,9 +9,10 @@ all-stabilization manuscript is a different paper.
 
 Read `thm:every-cubic` and the four paragraphs after it in
 [`sections/01-introduction.tex`](sections/01-introduction.tex).  Then turn to
-the one-blowup model at the start of
-[`sections/02-qdm-marker.tex`](sections/02-qdm-marker.tex).  That model describes
-the additive invariant concretely.  The rest of Section 2 proves the theorem.
+the block-multiset construction at the start of
+[`sections/02-qdm-marker.tex`](sections/02-qdm-marker.tex).  That subsection
+describes the additive invariant concretely.  The rest of Section 2 proves the
+theorem.
 Section 3 contains consequences and can wait.
 
 ## Six checks
