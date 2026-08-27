@@ -15,6 +15,10 @@ coefficient lifts, support families, or a replayable obstruction. ergodis is
 specialized for algebraically structured finite domains; it is not a
 general-purpose constraint-programming replacement.
 
+“Invariant synthesis” means constructing the exact labelled cost state needed
+by later composition; it does not mean conjecturing new mathematical
+invariants.
+
 ![ergodis compilation pipeline](docs/pipeline.svg)
 
 ## Install
@@ -50,7 +54,7 @@ ergodis transfer-tower --input examples/data/transfer-tower.json
 # Maximize simultaneous repairs under resource capacities.
 ergodis schedule --input examples/data/schedule.json
 
-# Run a storage-application front end.
+# Run a storage application example.
 ergodis application --input examples/data/ceph-repair.json
 ```
 
@@ -58,6 +62,23 @@ Every command accepts `--input -` for JSON on standard input and writes JSON to
 standard output. Invalid dimensions, unsupported fields, exhausted candidate
 or witness budgets, and inconsistent algebraic data fail closed with a
 nonzero exit status.
+
+For example, the bundled scheduling input returns the complete assignment,
+aggregate loads, selected backend, and auditable work counters:
+
+```json
+{
+  "repaired_count": 2,
+  "complete": true,
+  "assignment": [
+    {"demand": 0, "loads": [0, 1]},
+    {"demand": 1, "loads": [1, 0]}
+  ],
+  "total_loads": [1, 1],
+  "backend": "dense-lattice",
+  "transitions_examined": 8
+}
+```
 
 ## Commands
 
@@ -91,9 +112,9 @@ be faster sequentially; outputs and canonical witnesses are identical.
 
 ## Application examples
 
-`ergodis application` accepts one tagged JSON document and returns an exact
-optimum or inclusion-minimal support together with replayable indices and work
-counters. These built-in applications are worked examples of the solver's
+`ergodis application` accepts one tagged JSON document and returns the exact
+application result together with a replayable witness, support family, or
+obstruction and explicit work counters. These built-in applications are worked examples of the solver's
 compilation model, not an exhaustive application catalogue or separate
 general-purpose products. Each preserves its mathematical structure instead
 of flattening the problem into generic Boolean variables.
@@ -144,8 +165,8 @@ the dynamic-programming state.
 ## Performance highlights
 
 These are bounded exact comparisons, not universal solver rankings. Every
-control proves the same optimum or infeasibility result; timing includes input
-or model construction.
+control reproduces the same exact support family, optimum, or feasibility
+verdict, as applicable; timing includes input or model construction.
 
 | workload                    | scale                                  | ergodis | matched control         | control time | speedup  |
 | :-------------------------- | :------------------------------------- | ------: | :---------------------- | -----------: | -------: |
@@ -158,6 +179,28 @@ See `BENCHMARKS.md` for all comparison tables, peak RSS, protocols,
 architecture flags, profiling results, limits probes, and exact replay
 commands. Machine-readable samples and artifact hashes are in
 `evidence/benchmarks.json`.
+
+## Rust library
+
+The CLI is the stable documented entry point. The same engines are exported by
+the `ergodis` crate for callers that need in-process composition, confinement,
+scheduling, generated-span, or application APIs. Generate the current API
+documentation with:
+
+```text
+cargo doc --all-features --open
+```
+
+The crate is at version 0.1.0; lower-level library interfaces may still evolve.
+
+## Mathematical and evidence boundary
+
+The companion paper, `../complete_repair_ports.pdf`, proves the labelled
+composition and transfer laws from which the recovery compiler is derived.
+ergodis evaluates finite instances and returns replayable witnesses; neither
+its executions nor its benchmarks are premises of those proofs. The Python
+code in `python/` is an independent reference and evidence layer, not the
+production solver.
 
 ## Validate
 
@@ -175,3 +218,7 @@ The test corpus includes exhaustive small-field checks, seeded property tests,
 CLI workflows, GF(4) labelled-transfer witnesses, orbit and scheduling
 certificates, and independent differential fixtures. Performance claims are
 accepted only after exact output and witness parity.
+
+## License
+
+ergodis is distributed under the repository's MIT License.

@@ -97,7 +97,7 @@ HASHED_PATHS = (
     "benches/defect_augmentation.rs",
     "benches/parallel_kernels.rs",
     "benches/scheduler_locality.rs",
-    "docs/cpsat-comparison.svg",
+    "docs/benchmark-highlights.svg",
     "docs/parallel-scaling.svg",
     "docs/pipeline.svg",
     "evidence/benchmarks.json",

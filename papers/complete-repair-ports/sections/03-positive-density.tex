@@ -13,6 +13,13 @@ Let $L/\F_q$ be a finite extension and let
 $\iota:L\xrightarrow{\sim} I\leq\F_q^E$ be an $\F_q$-linear isomorphism,
 used as the inner encoder.
 Assume $0<\dim I<|E|$.
+Whenever the outer alphabet $L$ occurs below, $I$ denotes the represented
+inner code $(I,\iota)$, not only its image subspace.  In particular,
+$O\circ I$, $\Phi_I$, $\lambda_{I,T}$, $\mu_{I,P,T}$, and
+$\Gamma_{j,T}(O,I)$ depend on $\iota$.  The earlier pair
+$K_P\subseteq D_P$ depends only on the image code and target/helper split.
+Proposition~\ref{prop:functional-label-separation} shows that this distinction
+cannot be suppressed under concatenation.
 For an $L$-linear outer code $O\leq L^N$, write
 \[
  O\circ I=\{(\iota(a_1),\ldots,\iota(a_N)):(a_1,\ldots,a_N)\in O\}.
@@ -205,21 +212,52 @@ variable elimination over the min-sum semiring \cite{AjiMcEliece2000}.  This is 
 form of passing symbol-indexed inner costs to an outer decoder, as in soft and
 generalized-concatenated decoding \cite{GuruswamiSudan2002,BlomqvistEtAl2020}.
 
-The zero-functional escape cost alone is not compositional.  Over
-$\F_2\subseteq\F_4$, write the nonzero elements as
-$1,\omega,\omega^2=1+\omega$ and take inner generator columns
+The zero-functional escape cost alone is not compositional.  The next
+separation holds the underlying binary code and all its unlabelled recovery
+data fixed.
+
+\begin{proposition}[Functional labels are necessary for finite composition]
+\label{prop:functional-label-separation}
+\coverage{absent}%
+Over $\F_2\subseteq\F_4$, there are two represented inner encoders with the
+same image code, dual code, target/helper nested pair, complete relative-weight
+hierarchy, dual distance, unlabelled normalized helper-support family, and
+zero-functional escape costs for every recoverable target subspace, but one
+fixed outer represented code gives different exact nonconfinement costs.
+\end{proposition}
+
+\begin{proof}
+Write the nonzero elements of $\F_4$ as
+$1,\omega,\omega^2=1+\omega$ and take generator columns
 \[
  I_1:(1,1,\omega),
  \qquad
  I_2:(1,1,\omega^2),
 \]
-with the first coordinate targeted.  Both have target recovery cost $1$,
-dual distance $2$, and hence zero-functional escape cost $3$.  Their ordinary coset
-costs on $(1,\omega,\omega^2)$ are $(1,1,2)$ and $(1,2,1)$; their normalized
-target costs are $(0,2,1)$ and $(0,1,2)$.  For an outer functional dual
-spanned by $(1,\omega)$, the nonzero-functional minima are respectively $1$
-and $2$.  Thus the zero-functional minimum alone is not sufficient recursive
-state; the closure theorem must retain the functional labels.
+with the first coordinate targeted.  Both generator matrices have binary row
+space
+\[
+ \{(x,x,y):x,y\in\F_2\}
+\]
+and dual $\langle(1,1,0)\rangle$.  Thus both have dual distance $2$,
+$K_P=0\subseteq D_P=\langle(1,0)\rangle$, $M_1=1$, and the same unique
+minimal helper support.  Their recoverable target space is one-dimensional,
+so their complete zero-functional profile is the common value $1+2=3$.
+
+On $(1,\omega,\omega^2)$, their ordinary coset costs are $(1,1,2)$ and
+$(1,2,1)$, while their normalized target costs are $(0,2,1)$ and
+$(0,1,2)$.  Take the fixed outer code whose functional dual is the line
+spanned by $(1,\omega)$.  The three nonzero scalar multiples have respective
+target-plus-external costs
+\[
+ (1,4,2)\qquad\hbox{and}\qquad(2,2,3).
+\]
+Equation~\eqref{eq:weighted-subspace-cost} therefore gives exact costs $1$
+and $2$.  Only the alignment of costs with the intermediate functional labels
+has changed.
+\uses{thm:ungated-ranked-confinement}%
+\proves{prop:functional-label-separation}%
+\end{proof}
 
 Let $\F_q\subseteq L\subseteq M$ be a tower of finite fields.  Let $B$ be an
 $\F_q$-linear represented code with message space $L$, and let $A$ be an
@@ -332,10 +370,136 @@ and nondegeneracy of the trace pairing identifies the composite restriction
 map with $\phi_A\circ\phi_B^{E_A}$, where $\phi_B^{E_A}$ applies $\phi_B$
 blockwise.
 
+For rank-one targets, the exact quotient of the labelled functions observable
+by outer concatenation has a projective description.  Fix a line
+$T=\langle u\rangle\leq W_P$.  For $b\in L$, let
+$\tau_b:T\to L^*$ be defined by
+\[
+ \tau_b(au)(x)=a\Tr_{L/\F_q}(bx)
+ \qquad(a\in\F_q,\ x\in L),
+\]
+and put $z_{I,T}=\rho_T(I)+d(I^\perp)$.  If
+$[b]=[b_1:\cdots:b_N]\in\mathbf P(L^N)$ has a nonzero coordinate outside
+the target block $j$, define
+\begin{equation}
+ \Theta_{I,T}([b])=
+ \min_{s\in L^\times}
+ \left(
+  \mu_{I,P,T}(\tau_{sb_j})+
+  \sum_{h\ne j}\lambda_{I,T}(\tau_{sb_h})
+ \right).
+ \label{eq:rank-one-line-probe}
+\end{equation}
+Changing $u$ or the projective representative of $[b]$ does not change this
+value.
+
+Here a \emph{rank-one outer context} is a triple $(N,j,O)$ with $N\geq2$,
+$O\leq L^N$ an $L$-linear code, and nonzero projection onto the distinguished
+block $j$.  The context family ranges over every such $N$ and $j$, while the
+inner target/helper split and the identified target line $T$ remain fixed.
+Two represented inner codes are \emph{contextually equivalent at $T$} when
+their values of $\Gamma_{j,T}$ agree in every member of this family.  A
+compatible further concatenation adds outer layers above the same
+distinguished leaf and does not retarget that leaf.
+
+\begin{theorem}[Minimal contextual quotient at rank one]
+\label{thm:rank-one-contextual-state}
+\coverage{absent}%
+Let $D=O^\perp\leq L^N$ under the trace identification, and suppose the
+projection of $O$ onto block $j$ is nonzero.  Then
+\begin{equation}
+ \Gamma_{j,T}(O,I)=
+ \min\left\{
+ z_{I,T},
+ \min_{\substack{Lb\leq D\\b\ne0}}\Theta_{I,T}([b])
+ \right\},
+ \label{eq:rank-one-contextual-state}
+\end{equation}
+where the inner minimum is empty when $D=0$.
+
+Consequently, represented inner codes over the same extension field with
+identified target lines are contextually equivalent at $T$ if and only if
+their values $z_{I,T}$ agree and the family of truncated profiles
+\[
+ [b]\longmapsto\min\{z_{I,T},\Theta_{I,T}([b])\}
+\]
+agrees for every $N\geq2$, target block $j$, and projective tuple with nonzero
+external part.  Thus equality of this response family realizes the exact
+numerical contextual quotient at rank one: any invariant determining those
+costs in every outer context must refine its equivalence classes.
+It is enough to test the full outer code and outer codes whose functional dual
+has $L$-dimension one.
+\end{theorem}
+
+\begin{proof}
+A nonzero map from the one-dimensional $\F_q$-space $T$ into $D$ is determined
+by one nonzero tuple $b\in D$.  Partition $D\setminus\{0\}$ into its
+$L$-lines in the nonzero-functional sector of
+\eqref{eq:weighted-subspace-cost}.  Minimization on the line $Lb$ is exactly
+\eqref{eq:rank-one-line-probe}, which proves
+\eqref{eq:rank-one-contextual-state}.
+
+It remains to show that every stated probe is an actual outer-code context.
+The full outer code $O=L^N$ has $D=0$ and exposes $z_{I,T}$.  Given a
+projective tuple $[b]$ with nonzero external part, take
+$D=Lb$ and $O=D^\perp$.  Its target projection is nonzero: otherwise
+$D$ would contain the target coordinate line, forcing every external
+coordinate of $b$ to vanish.  This context exposes
+$\min\{z_{I,T},\Theta_{I,T}([b])\}$.  Equality in every context therefore
+forces equality of the displayed response family; the first part of the
+theorem gives the converse.
+
+For the congruence statement, place the same distinguished target leaf in two
+composites $A\circ I_1$ and $A\circ I_2$.  Any compatible later context $C$
+tests the target-normalized composites
+$C\circ(A\circ I_i)=(C\circ A)\circ I_i$.  The target-normalized composition
+formula \eqref{eq:target-cost-composition} carries the same leaf target image
+on both parenthesizations, and $C\circ A$ is one of the contexts quantified
+above.  Contextual equivalence of $I_1$ and $I_2$ therefore gives equal costs
+after every such $C$.  Hence contextual equivalence is a congruence for the
+specified compatible concatenations.  This is a numerical statement; full
+coefficient witnesses still require the minimizing lifts described after
+Theorem~\ref{prop:prescribed-coset-composition}.
+\uses{thm:ungated-ranked-confinement}%
+\proves{thm:rank-one-contextual-state}%
+\end{proof}
+
+The same generated-image argument bounds the dimension of the outer contexts
+needed at every target rank.
+
+\begin{proposition}[Rank-bounded outer tests]
+\label{prop:rank-bounded-outer-tests}
+\coverage{absent}%
+Let $\dim_{\F_q}T=t$, put $D=O^\perp$, and retain the nonzero projection onto
+block $j$.  For $L$-subspaces $D'\leq D$, set $O_{D'}=(D')^\perp\leq L^N$.
+Then
+\begin{equation}
+ \Gamma_{j,T}(O,I)=
+ \min_{\substack{D'\leq D\\\dim_LD'\leq t}}
+ \Gamma_{j,T}(O_{D'},I).
+ \label{eq:rank-bounded-outer-tests}
+\end{equation}
+Thus outer codes with functional-dual dimension at most $t$ form a complete
+test family for exact contextual equivalence at target rank $t$.
+\end{proposition}
+
+\begin{proof}
+For $B:T\to D$, let $D_B=\operatorname{span}_L B(T)$.  The image of an
+$\F_q$-basis of $T$ generates $D_B$ over $L$, so $\dim_LD_B\leq t$.
+Regarding $B$ as a map into $D_B$ changes none of its block labels or costs.
+Conversely, every map into $D'\leq D$ is a map into $D$.  Minimizing the same
+cost functional in both directions proves
+\eqref{eq:rank-bounded-outer-tests}; $D'=0$ supplies the zero-functional
+sector.  No $D'\leq D$ contains a nonzero target-supported vector, so every
+$O_{D'}$ retains nonzero target projection.
+\uses{thm:ungated-ranked-confinement}%
+\proves{prop:rank-bounded-outer-tests}%
+\end{proof}
+
 The simultaneous confinement gate across all recoverable ranks has a single
 bottleneck.
 
-\begin{corollary}[Rank-one obstruction to complete bounded transfer]
+\begin{corollary}[Rank-one criterion for complete bounded transfer]
 \label{cor:all-rank-bottleneck}
 \coverage{absent}%
 For every target block $j$ with nonzero outer projection,
@@ -343,16 +507,35 @@ For every target block $j$ with nonzero outer projection,
  \min_{0\ne T\leq W_P}\Gamma_{j,T}(O,I)=\Gamma_{j,1}(O,I).
  \label{eq:all-rank-bottleneck}
 \end{equation}
-Consequently every cost-$\leq r$ system for every internally recoverable
-target subspace is confined if and only if $r<\Gamma_{j,1}(O,I)$.
+For every integer $r\geq0$, the following are equivalent:
+\begin{enumerate}
+ \item every cost-$\leq r$ system on every internally recoverable target line
+ is confined;
+ \item every cost-$\leq r$ system on every nonzero internally recoverable
+ target subspace is confined; and
+ \item $r<\Gamma_{j,1}(O,I)$.
+\end{enumerate}
+Under these conditions, restriction and zero-extension are inverse bijections
+simultaneously for every nonzero $T\leq W_P$, preserving every coefficient and
+exact helper support through radius $r$.  Hence they preserve all bounded
+reliability laws and every support- or coefficient-determined capacity and
+scheduling region on these systems.  They also preserve every targetwise and
+rankwise minimum helper-union cost after truncation at $r+1$; when all relevant
+inner minima are at most $r$, the untruncated minima agree.
 \end{corollary}
 
 \begin{proof}
 If a system on $0\ne T\leq W_P$ is nonconfined, some external block map is
 nonzero on a vector $u\in T$.  Restriction to $\langle u\rangle$ remains
 nonconfined and cannot enlarge its helper union.  This proves the displayed
-equality, and Theorem~\ref{thm:ungated-ranked-confinement} gives the exact
-gate.
+equality, and Theorem~\ref{thm:ungated-ranked-confinement} gives the three
+equivalent gates.  Below the gate every bounded system is confined, so
+restriction deletes only zero external blocks and zero-extension is its
+inverse.  The coefficient, support, reliability, capacity, and scheduling
+assertions follow from this bijection.  For a minimum helper-union cost, either
+the inner minimum is at most $r$ and the bijection gives equality, or both
+inner and concatenated minima exceed $r$; this is precisely equality after
+truncation at $r+1$.
 \uses{thm:ungated-ranked-confinement}%
 \proves{cor:all-rank-bottleneck}%
 \end{proof}

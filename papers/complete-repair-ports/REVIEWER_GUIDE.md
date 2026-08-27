@@ -19,7 +19,7 @@ example, `prop:prescribed-coset-composition`, and `cor:all-rank-bottleneck` in
 read its gated specializations `thm:objectwise-confinement` and
 `thm:ranked-confinement`. These statements give the exact finite criterion,
 its closure law, and its scalar collapse. The next section gives the two sharp
-information-loss results; the ERGO section then executes the closure law.
+information-loss results; the ergodis section then executes the closure law.
 
 ## Eleven checks against hidden assumptions
 

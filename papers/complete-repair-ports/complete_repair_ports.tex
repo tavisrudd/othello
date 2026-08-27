@@ -50,22 +50,22 @@
 \begin{abstract}
 Bounded linear recovery under concatenation is not determined by scalar helper
 thresholds: an outer code can force intermediate functionals that scalar
-minimization forgets.  For an inner code $I$ with target/helper split
-$P\sqcup J$, shortening and puncturing $I^\perp$ onto $J$ give a canonical pair
-$K_P\subseteq D_P$.  Its relative generalized Hamming weights are the
-minimum helper unions for independent target combinations, but not the labels
-needed for finite transfer.  We prove that minimizing labelled prescribed-coset
+minimization forgets.  Shortening and puncturing the inner dual onto the
+helpers give a canonical pair $K_P\subseteq D_P$.  Its relative generalized
+Hamming weights are exact minimum helper unions but omit the labels needed for
+finite transfer.  We prove that minimizing labelled prescribed-coset
 support costs over the complete outer functional dual gives
 $\Gamma_{j,t}(O,I)$, the minimum cost of a rank-$t$ nonconfined recovery
-system, without a distance hypothesis.  These functions compose associatively by min--sum substitution
-through finite towers; stored minimizing lifts propagate coefficient witnesses.
-The zero-functional sector has cost $M_t(D_P,K_P)+d(I^\perp)$.  When outer dual
-distance excludes nonzero sectors, this value equals $\Gamma_{j,t}(O,I)$;
-under the corresponding radius condition, restriction and zero-extension
-preserve every normalized equation and exact support.  Equal relative-weight
-hierarchies need not determine bounded reliability, and the same abstract pair
-can have different confinement thresholds.  A companion exact compiler
-executes the witness-returning recursion; proofs are software-independent.
+system, without a distance hypothesis.  These functions compose by min--sum
+through finite towers; stored argmins propagate an optimizing coefficient
+witness.  Rank-one probes characterize exactly which numerical distinctions
+arbitrary outer contexts can observe, while rank-one confinement controls simultaneous
+confinement at every recoverable rank.  When outer distance removes the nonzero sectors,
+the exact cost collapses to $M_t(D_P,K_P)+d(I^\perp)$.  Below a confinement
+threshold, restriction and zero-extension preserve every normalized equation
+and exact support.  Equal relative-weight hierarchies need not determine
+bounded reliability.  A companion exact compiler executes the
+witness-returning recursion; proofs are software-independent.
 \end{abstract}
 
 \section{Introduction}
@@ -97,32 +97,25 @@ support-family branch nor the labelled-cost branch contains the other.
 
 \input{figures/information-hierarchy}
 
-Let $q$ be a prime power.  Let $I\leq\F_q^E$ have a full-row-rank generator matrix
-$G=(G_P\mid G_J)$, where $P$ is the target set and $J=E\setminus P$.  Put
-\[
- U_P=\operatorname{im}G_P,
- \qquad W_P=U_P\cap\operatorname{im}G_J,
-\]
-and define the associated nested code pair
-\[
- K_P=\ker G_J
- \subseteq
- D_P=\{a\in\F_q^J:G_Ja\in U_P\}.
-\]
-Equivalently, and independently of the chosen row basis of $G$,
+Let $q$ be a prime power, let $I\leq\F_q^E$, and partition the coordinates as
+$E=P\sqcup J$ into targets and helpers.  The associated nested code pair is
 \[
  D_P=\operatorname{punct}_J(I^\perp),
  \qquad K_P=\operatorname{short}_J(I^\perp).
 \]
+For a full-row-rank encoder $G=(G_P\mid G_J)$, put
+$W_P=\operatorname{im}G_P\cap\operatorname{im}G_J$.
+The exact sequence in Proposition~\ref{prop:associated-pair} identifies
+$D_P/K_P\cong W_P$, the space of target combinations recoverable from the
+helpers.
 We assume $0<\dim I<|E|$, so both the represented message space and
 $I^\perp$ are nonzero.
 We use the convention $d(0)=\infty$ for the zero code.
-The quotient $D_P/K_P\cong W_P$ is exactly the space of target linear
-combinations recoverable from the helper coordinates.
 Here $t$ is the dimension of a recovered subspace of $W_P$, not the number
 of erased coordinate positions.  Recovering all values on $P$ is the special
-case $U_P\subseteq\operatorname{im}G_J$ and $t=\dim U_P$; dependent target
-columns may make this dimension smaller than $|P|$.
+case $\operatorname{im}G_P\subseteq\operatorname{im}G_J$ and
+$t=\dim\operatorname{im}G_P$; dependent target columns may make this dimension
+smaller than $|P|$.
 
 The first layer is classical nested-code support theory in recovery language:
 the minimum helper union for recovered dimension $t$ is
@@ -176,8 +169,19 @@ Theorem~\ref{prop:prescribed-coset-composition}: the labelled
 prescribed-coset functions entering $\Gamma_{j,T}$ compose associatively by
 exact min--sum substitution.  The numerical functions retain the minimum in
 each labelled fibre.  If the recursion also stores a minimizing lift in each
-attained fibre, those argmins propagate coefficient-level witnesses through
-the tower.
+attained fibre, those argmins propagate an optimizing coefficient-level
+witness through the tower.  Transporting the full family instead requires the
+full lift sets used in the proof of the closure theorem.
+
+Three exact consequences sharpen this state description.  Projective line
+probes characterize the rank-one numerical contextual quotient, without
+claiming that the raw labelled table itself is minimal
+(Theorem~\ref{thm:rank-one-contextual-state}).  At target rank $t$, outer
+functional duals of dimension at most $t$ test every outer context
+(Proposition~\ref{prop:rank-bounded-outer-tests}).  Finally, rank-one
+confinement through a fixed radius is equivalent to confinement at every
+recoverable rank, with the complete bounded coefficient and support families
+transported simultaneously (Corollary~\ref{cor:all-rank-bottleneck}).
 
 The mechanism has two exhaustive sectors.  A zero outer-functional label gives
 one inner recovery system plus a minimum inner-dual perturbation in another
@@ -187,21 +191,14 @@ $\Gamma_{j,T}(O,I)$.  Outer dual
 distance does not create the additive RGHW formula; it removes the nonzero
 sector and leaves that formula as the surviving zero-sector cost.
 
-The scalar loss is already visible over $\F_2\subseteq\F_4$.  Two
-three-column inner encoders have recovery cost one and dual distance two,
-hence the same zero-functional escape cost three, while an outer functional
-dual spanned by $(1,\omega)$ gives respective nonzero-sector minima one and
-two.  The label-by-label calculation appears before the closure theorem in
-Section~\ref{sec:confinement}.  Equal scalar state therefore does not determine
-the next concatenation step.
-
-The result closes in five steps.  The associated pair gives exact single-block
-minimum costs.  Labelled functional costs give the ungated finite criterion.
-Their min--sum law closes under finite towers.  Outer distance collapses the
-exact cost to the additive RGHW threshold.  Finally, the separations in
-Section~\ref{sec:separations} show that relative-weight minima lose
-recovery-set overlap and that the abstract nested pair loses ambient
-coefficient data.
+The label loss is already visible over $\F_2\subseteq\F_4$.  Two
+three-column encoders have the same binary image code, dual, abstract nested
+pair, complete relative-weight hierarchy, dual distance, and unlabelled
+helper-support family.  Their functional labels differ, and one fixed outer
+functional-dual line gives exact nonconfinement costs one and two.
+Proposition~\ref{prop:functional-label-separation} gives the calculation before
+the closure theorem.  Thus every unlabelled and scalar explanation is held
+fixed; only alignment with the intermediate functional labels changes.
 
 The restriction--extension bijection yields the later transfer results.  It preserves every
 block-local statistic determined by normalized recovery systems of cost at
@@ -228,7 +225,10 @@ specialized to the canonical target/helper pair.  Recovery-set and locality
 formulations retain helper supports but generally discard the normalized
 coefficients and functional labels that couple concatenation blocks
 \cite{RawatMazumdarVishwanath2015,GopalanEtAl2012,PamiesEtAl2013,
-AbdelGhaffarWeber2017,MarquezCorbellaEtAl2019}.  Regenerating-code models
+AbdelGhaffarWeber2017,MarquezCorbellaEtAl2019}.  Work on recovering entire
+subspaces from simplex-code columns optimizes disjoint support families, not
+their coefficient-labelled transfer through concatenation
+\cite{CheeEtAl2024}.  Regenerating-code models
 optimize download and subpacketization rather than the scalar helper-support
 cost used here \cite{ShahEtAl2010,YeBarg2016,KurzYaakobi2021}.
 
@@ -242,23 +242,38 @@ equation.  The finite formula is rank-stratified and ungated; the RGHW formula
 is its outer-distance specialization.  We make no minimum-bandwidth claim.
 The functional-dual decomposition is classical concatenation machinery, and
 min--sum elimination also appears in soft and generalized-concatenated decoding
-\cite{ChenLingXing2005,AjiMcEliece2000,GuruswamiSudan2002,
-BlomqvistEtAl2020}.  Here target-normalized prescribed-coset costs characterize
-the exact first nonconfined cost and form a closed state under repeated
+\cite{Forney1966,ChenLingXing2005,AjiMcEliece2000,GuruswamiSudan2002,
+BlomqvistEtAl2020}.  Label-refined precedents are also important: soft
+concatenated decoding passes symbol-indexed reliabilities, and input--output
+weight enumerators can depend on the chosen generator presentation and compose
+by convolution in recursive constructions
+\cite{GuruswamiSudan2002,LoskotBeaulieu2006}.  Nogin's message
+weight functions provide a related representation-sensitive refinement of
+ordinary weight data \cite{Nogin2005}.  These precedents retain labels for
+decoding or enumeration; they do not impose target normalization or identify
+the exact first nonconfined support.  Here target-normalized prescribed-coset
+costs characterize that support and form a closed state under repeated
 concatenation.
 
-The companion Exact Recovery and Generalized-weight Optimization Compiler,
-ERGO-comp, applies these reductions.  Its current engines cover
-labelled hierarchical composition, capacitated repair scheduling, and
-orbit-structured code search; this paper analyzes the first two.  The
-composition engine retains the intermediate functionals needed through a
-finite tower and returns exact recovery witnesses and confinement thresholds.
-The scheduler optimizes simultaneous repairs under heterogeneous capacities.
-Both use quotient, grading, and generated-span reductions before a specialized
-exact engine or a residual CP-SAT model.  No mathematical result in the paper
-depends on the implementation or its measurements.
+The terminology ``contextual equivalence'' and ``congruence'' describes the
+response to all permitted outer compositions.  It parallels behavioural
+minimization for weighted automata over semirings \cite{Mohri2009}, but we make
+no new general automata-minimization claim: Theorem
+\ref{thm:rank-one-contextual-state} identifies the separating outer-code probes
+for this finite coding problem.
+
+ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis) turns
+these reductions into an exact compiler and solver.  It composes labelled
+costs through finite towers, returns recovery witnesses and confinement
+thresholds, and optimizes simultaneous repairs under heterogeneous capacities.
+Its bundled application examples also cover recursive XOR repair, LRC
+batching, repair DAGs, QC-LDPC search, vector repair, and MDS checkpoint
+recovery.  No mathematical result depends on the implementation or its
+measurements.
 Section~\ref{sec:exact-recovery-optimization} gives correctness and complexity
-bounds and compares both direct and equivalently preprocessed CP-SAT baselines.
+bounds and compares matched exact controls for the storage, graph, coding, and
+tower examples; CP-SAT is one control and a residual backend, not the sole
+comparison target.
 
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}

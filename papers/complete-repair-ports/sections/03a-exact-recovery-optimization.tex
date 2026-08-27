@@ -1,14 +1,14 @@
 \section{Exact recovery optimization}
 \label{sec:exact-recovery-optimization}
 
-Theorem~\ref{prop:prescribed-coset-composition} is already an algorithm: its
-min--sum states are the intermediate functionals that scalar summaries
-discard.  ERGO-comp (Exact Recovery and Generalized-weight Optimization
-Compiler) evaluates that recursion.  The numerical tables store the exact
-fibrewise minima; predecessor labels and minimizing lifts, stored separately,
-reconstruct a coefficient-level witness for every reported optimum.
+The closure law in Theorem~\ref{prop:prescribed-coset-composition} supplies an
+exact compiler state: its coordinates are the intermediate functionals that
+scalar summaries discard.  ergodis (Exact Recovery, Global Optimization, and
+Invariant Synthesis) compiles and evaluates that state.  Numerical tables
+store the fibrewise minima; separately stored predecessor labels and
+minimizing lifts reconstruct a coefficient-level witness for every optimum.
 
-\input{figures/ergo-comp-pipeline}
+\input{figures/ergodis-pipeline}
 
 We first state the algorithm in flattened $\F_q$-linear coordinates.  Let
 $T$ have dimension $t$, let the outer message space have dimension $m$, and
@@ -123,6 +123,11 @@ antichain assertion.
 
 \subsection{Measured solver boundary}
 
+The scientific role of the implementation is the exact executable semantics
+above.  The measurements in this subsection assess engineering reach and the
+boundary with a general solver; they are not mathematical evidence or the
+principal contribution of the software.
+
 The specialized dynamic programs are most useful when compilation exposes a
 small algebraic state space.  They are not replacements for a general
 constraint solver when the residual model contains unrelated side
@@ -137,42 +142,74 @@ constraints.  The fair deployment boundary is therefore:
 \]
 Direct CP-SAT is an appropriate end-to-end baseline.  A second,
 \emph{structured CP-SAT} baseline receives the same symmetry reduction and
-algebraic preprocessing as ERGO-comp, isolating the value of the specialized
+algebraic preprocessing as ergodis, isolating the value of the specialized
 state engine from the value of compilation itself.
 
-On the recorded x86-64 benchmark host, eleven interleaved rounds gave the
-following medians.  These are implementation measurements, not asymptotic
-claims; exact inputs, outputs, tool versions, and replay metadata are in
-\texttt{algorithms/evidence/benchmarks.json}.
+The benchmark suite separates the algebraic compiler from the residual state
+engine.  On four exact capacitated-scheduling profiles, ergodis was
+$2.5$--$377$ times faster than direct CP-SAT and $2.5$--$373$ times faster than
+structured CP-SAT receiving the same safe preprocessing.  The represented
+tower benchmark shows where the composition theorem itself changes scale: at
+depth six and fanout four, ergodis expands an exact coefficient witness over
+$4096$ leaves in $766\,\mu$s, while direct and labelled-table CP-SAT take
+$264$ s and $6.19$ s, respectively.  The minute-scale direct entry is one
+completed deterministic solve; the shorter entries are interleaved medians.
+
+The same compilation pattern has been tested through six bundled application
+examples.  They cover recursive Ceph-style XOR repair, Azure-style locally
+repairable code (LRC) batching, precedence-constrained repair directed
+acyclic graphs (DAGs), quasi-cyclic low-density parity-check (QC-LDPC) search,
+vector/subpacketized repair, and MDS checkpoint recovery under node and rack
+capacities.  Each formulation-specific control reproduces the same exact
+support family, optimum, or feasibility verdict, as applicable.  The narrowest
+gap is $8$ times, roughly one order of
+magnitude; the structure-dominated examples reach three to five orders of
+magnitude.  Table~\ref{tab:ergodis-applications} records the bounded instances.
+These comparisons do not include commercial solvers or claim a universal
+ranking.
 
 \begin{table}[H]
 \centering
 \scriptsize
-\begin{tabular}{@{}lrrrrr@{}}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lllrrr@{}}
 \toprule
-instance & ERGO-comp & \shortstack{direct\\CP-SAT} &
-\shortstack{structured\\CP-SAT} & \shortstack{direct/\\ERGO} &
-\shortstack{structured/\\ERGO}\\
+application example & bounded instance & matched exact control & ergodis & control & ratio\\
 \midrule
-large box & $71.88\,\mu$s & $178.63\,\mu$s & $177.22\,\mu$s & $2.49$ & $2.47$\\
-balanced shell & $3.71\,\mu$s & $1.143$ ms & $0.996$ ms & $308.04$ & $268.44$\\
-small state & $7.30\,\mu$s & $2.753$ ms & $2.723$ ms & $376.98$ & $372.85$\\
-large nonuniform & $52.85\,\mu$s & $1.250$ ms & $1.041$ ms & $23.65$ & $19.70$\\
+Ceph XOR & $8$ diamonds, $256$ supports & Graphillion ZDD closure & $102\,\mu$s & $864\,\mu$s & $8\times$\\
+Azure LRC & $100{,}000$ demands & HiGHS counted model & $<1\,\mu$s & $4877\,\mu$s & $174{,}000\times$\\
+repair DAG & $3\times21$ tasks & CP-SAT interval model & $2\,\mu$s & $19{,}218\,\mu$s & $7{,}881\times$\\
+QC-LDPC & lift $50{,}000$, weight $4$ & CryptoMiniSat native XOR & $1517\,\mu$s & $509{,}306\,\mu$s & $336\times$\\
+vector repair & $64$ nodes, $2$ symbols/node & CryptoMiniSat native XOR & $10\,\mu$s & $48{,}691\,\mu$s & $4{,}717\times$\\
+GPU MDS & $10{,}000$ shards, $64$ failures & OR-Tools max-flow & $100\,\mu$s & $103{,}061\,\mu$s & $1{,}029\times$\\
 \bottomrule
 \end{tabular}
-\caption{Exact capacitated-repair scheduling.  Both CP-SAT columns return the
-same optimum and witness as ERGO-comp; the structured column shares its safe
-preprocessing.}
-\label{tab:ergo-comp-cpsat}
+}
+\caption{Exact comparisons for the bundled application examples.  Times
+include construction of the application state or control model; every row
+agrees on the exact support family, optimum, or feasibility verdict being
+compared.  Controls differ by application and are named explicitly; ratios use
+the unrounded timings.}
+\label{tab:ergodis-applications}
 \end{table}
 
-\input{figures/ergo-comp-cpsat}
+\input{figures/ergodis-benchmark-highlights}
 
-The largest gains occur on graded shells and other low-dimensional reachable
-state sets hidden inside a large capacity box.  The companion therefore solves
-the instance directly when the compiled state is sufficient, and otherwise
-supplies an exact preprocessing front end for a residual CP-SAT model while
-retaining recovery witnesses and confinement thresholds.
+As a code-native check, ergodis also analyzes Jin and Fu's published
+$\F_4$ Hamming-outer family~\cite[Corollary~5.4]{JinFu2026}.  For its binary
+$[4095,2718,6;2]$ LRC, all backends obtain the same exact confinement cost;
+ergodis takes $231$ ms, versus $100$ s for direct CP-SAT and $82$ s for
+labelled-table CP-SAT.  Exact inputs, outputs, tool versions, peak memory,
+replay commands, and raw timing samples are in
+\texttt{ergodis/evidence/benchmarks.json} and
+\texttt{ergodis/BENCHMARKS.md}; the two minute-scale CP-SAT entries are single
+completed deterministic solves.
+
+The largest gains arise when the algebraic reductions expose a
+low-dimensional reachable set inside a much larger raw model.  ergodis solves
+that state directly when it is sufficient and otherwise supplies an exact
+preprocessor for a residual CP-SAT model, retaining recovery witnesses and
+confinement thresholds in either case.
 
 The optimizer changes no mathematical hypothesis: it evaluates the labelled
 state proved sufficient above.  We now return to consequences of the collapsed

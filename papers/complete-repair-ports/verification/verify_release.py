@@ -21,7 +21,7 @@ PDF = PAPER / "complete_repair_ports.pdf"
 TITLE = "Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs"
 DOI = "10.5281/zenodo.22051903"
 DETERMINISTIC_EPOCH = "1767225600"
-EXPECTED_PAGES = 29
+EXPECTED_PAGES = 32
 EXPECTED_TOOLCHAIN = "leanprover/lean4:v4.32.0-rc1"
 EXPECTED_MATHLIB = "571b8a8e54219b4d393f75f4b8653fac08197fcc"
 EXPECTED_AXIOMS = {"Classical.choice", "Quot.sound", "propext"}
@@ -215,7 +215,7 @@ def check_metadata_and_formal_boundary() -> None:
     claims = load_json("lean/verification/claims.json").get("claims", [])
     complete = [row for row in claims if row.get("status") == "complete"]
     terminals = [name for row in claims for name in row.get("terminals", [])]
-    require(len(claims) == boundary.get("claim_count") == 26, "claim count drift")
+    require(len(claims) == boundary.get("claim_count") == 29, "claim count drift")
     require(
         len(complete) == boundary.get("complete_claim_count") == 1,
         "complete-claim count drift",
@@ -298,7 +298,7 @@ def main() -> int:
 
     check_public_surface()
     subprocess.run(
-        [sys.executable, PAPER / "verification" / "check_ergo_comp_public.py"],
+        [sys.executable, PAPER / "verification" / "check_ergodis_public.py"],
         check=True,
         cwd=PAPER,
     )
@@ -315,7 +315,7 @@ def main() -> int:
         )
     print(
         f"complete-repair-ports release: PASS "
-        f"[{EXPECTED_PAGES} pages, warning-free, 26 claims, 4 Lean terminals]"
+        f"[{EXPECTED_PAGES} pages, warning-free, 29 claims, 4 Lean terminals]"
     )
     return 0
 

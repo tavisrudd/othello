@@ -9,6 +9,12 @@
 **Title:** *Exact Compositional Transfer of Bounded Linear Recovery: Relative
 Weights and Labelled Coset Costs*
 
+Scalar recovery thresholds do not compose: an outer code can select an
+intermediate functional whose cost scalar minimization discarded. The paper
+identifies labelled prescribed-coset costs as an exact compositional state,
+proves their min--sum closure, and determines when outer distance collapses
+them to a relative-weight formula.
+
 For a target set `P` and helper set `J`, shortening and puncturing the inner
 dual onto `J` give `K_P = short_J(I⊥) ⊆ D_P = punct_J(I⊥)`. Thus the pair depends
 only on the inner code and the target/helper split, not on a generator-row
@@ -50,10 +56,10 @@ nonzero functional sectors. A single scalar threshold is not sufficient input
 for this recursion; in particular, the zero-functional escape cost
 `rho_T(I)+d(I⊥)` loses the required functional labels.
 
-## ERGO-comp companion
+## ergodis companion
 
-**The Exact Recovery and Generalized-weight Optimization Compiler (ERGO-comp)
-is an exact compiler and solver derived from the paper's recovery theory.** It
+**ergodis—Exact Recovery, Global Optimization, and Invariant Synthesis—is an
+exact compiler and solver derived from the paper's recovery theory.** It
 compiles prescribed-coset support functions through labelled concatenation
 levels and returns exact helper costs and confinement thresholds. By storing
 minimizing lifts alongside the numerical tables, it also returns
@@ -63,26 +69,28 @@ coefficient-weighted download costs. The same structural compiler accelerates
 orbit-structured code search and can shrink residual constraint
 programming-satisfiability (CP-SAT) models.
 
-The compiler exploits quotient coordinates, projectively equivalent columns,
-repeated block types, packed finite-field arithmetic, and graded antichain
-shells. Those reductions are mathematical: each comes with a replay path to
-the original instance. On the recorded exact scheduling suite, the Rust engine
-is 2.5--377 times faster than direct CP-SAT and 2.5--373 times faster than
-CP-SAT receiving the same safe preprocessing. For models with additional
-general constraints, ERGO-comp supplies an exact preprocessing front end for
-residual CP-SAT models rather than replacing the general solver.
-
 The tool extends the theory into executable optimization; it is not evidence
 for the proofs. The mathematical results establish the reductions, and no
 theorem relies on the implementation or its measurements.
 
 Its current engines cover hierarchical recovery, capacity-aware batch
-scheduling, and orbit-structured code search. They also supply the core exact
-objects for batch and private information retrieval (PIR), availability,
-topology-aware repair, service-rate, and recovery-profile design front ends.
+scheduling, and orbit-structured code search. Their exact recovery objects
+could support further batch and private information retrieval (PIR),
+availability, topology-aware repair, service-rate, and recovery-profile design
+front ends.
+
+The theorem-driven GF(4) tower benchmark is 344,300 times faster than direct
+CP-SAT and 8,080 times faster than CP-SAT receiving the labelled tables. Across
+six bundled application examples, matched exact controls range from 8 times
+slower to three--five orders of magnitude slower. These are bounded
+measurements, not universal solver rankings. When a model has additional
+general constraints, ergodis instead supplies an exact preprocessing front end
+for residual CP-SAT.
 
 Quick-start commands, JSON examples, architecture notes, and reproducible
-benchmarks are in [`algorithms/`](algorithms/).
+benchmarks are in [`ergodis/`](ergodis/). The production Rust crate is the
+top-level interface; its independent Python reference layer is contained in
+[`ergodis/python/`](ergodis/python/).
 
 ## Main consequences
 
@@ -163,8 +171,8 @@ axiom-audit instructions in [`lean/README.md`](lean/README.md).
   dependency macros used by the manuscript.
 - `sections/` contains the proofs, applications, conclusion, and verification
   statement.
-- `algorithms/` contains the ERGO-comp Rust library and CLI, Python reference
-  models, examples, tests, and reproducibility evidence.
+- `ergodis/` contains the ergodis library, CLI, application examples, tests,
+  performance evidence, and an independent Python validation layer.
 - `lean/` is the paper-owned Lean 4 companion and depends on a pinned Mathlib
   revision.
 - `verification/` contains release and evidence checks.

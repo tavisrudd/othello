@@ -8,8 +8,8 @@ backend-specific measurement notes. See `README.md` for installation and use.
 A pinned-core exact comparison against stronger formulation-specific
 open-source controls gives the primary bounded results below. Times include
 construction of the application state or control model; RSS is process
-high-water memory. Every control proves the same optimum or infeasibility
-status as ergodis. These are deliberately not described as universal SOTA
+high-water memory. Every control reproduces the same exact support family,
+optimum, or feasibility verdict, as applicable. These are deliberately not described as universal SOTA
 claims: commercial MILP and scheduling solvers and domain-specific LDPC
 enumerators are not included.
 
@@ -17,7 +17,7 @@ These rows benchmark the bundled application examples; they are demonstrations
 of the compiler's reductions, not a claim that the subcommand is a complete
 storage or coding application suite.
 
-![ergodis and matched exact controls](docs/cpsat-comparison.svg)
+![ergodis and matched exact controls](docs/benchmark-highlights.svg)
 
 | application      | bounded instance                  | matched exact control          | ergodis time | control time | result           |
 | :--------------- | :-------------------------------- | :----------------------------- | -----------: | -----------: | :--------------- |
@@ -38,7 +38,8 @@ storage or coding application suite.
 | GPU MDS          |     3.6 MiB |    69.1 MiB |
 
 The outcome strength is not identical across rows; the comparison requires
-the same optimum or decision, while ergodis often returns a stronger
+the same support family, optimum, or feasibility verdict, as applicable,
+while ergodis often returns a stronger
 application-level object:
 
 | application      | exact control establishes        | additional ergodis output                                      |
@@ -503,14 +504,17 @@ for balanced, 8.097 us for small-state, and 67.941 us for large nonuniform.
 Criterion values are within-harness microbenchmark baselines; release claims
 continue to use the pinned rotated cross-binary harness.
 
+![ergodis parallel scaling by worker count](docs/parallel-scaling.svg)
+
 The opt-in `parallel_kernels` sweep measures exact output parity at 1, 2, 4,
 6, 8, 12, 16, 20, and 24 workers. On the 24-core benchmark host, the bounded
 width-nine composition fixture improves from 4.925 ms sequential to 1.562 ms
 at 16 workers (`3.15x`); 24 workers take 1.831 ms. The heterogeneous adaptive
 scheduler fixture improves from 44.402 ms to 18.189 ms at 12 workers
-(`2.44x`); 24 workers take 20.831 ms. These two fixtures motivate the CLI's
-command-specific default caps; they are crossover measurements, not universal
-thread-count prescriptions.
+(`2.44x`); 24 workers take 20.831 ms. The CLI defaults to the available CPU
+count; these measured optima can instead be selected explicitly with
+`--threads`. They are crossover measurements, not universal thread-count
+prescriptions.
 
 Explicit SIMD was considered after profiling. The stride/block prefix loop is
 already contiguous and SIMD-friendly, but after division removal it was not

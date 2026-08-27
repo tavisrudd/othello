@@ -16,7 +16,7 @@ ergodis/benches/balanced_parallel.rs
 ergodis/benches/defect_augmentation.rs
 ergodis/benches/parallel_kernels.rs
 ergodis/benches/scheduler_locality.rs
-ergodis/docs/cpsat-comparison.svg
+ergodis/docs/benchmark-highlights.svg
 ergodis/docs/parallel-scaling.svg
 ergodis/docs/pipeline.svg
 ergodis/evidence/benchmarks.json
@@ -83,7 +83,7 @@ ergodis/src/zdd.rs
 ergodis/tests/cli.rs
 ergodis/tests/fixtures/python_span_cases.json
 ergodis/tests/python_parity.rs
-figures/ergodis-cpsat.tex
+figures/ergodis-benchmark-highlights.tex
 figures/ergodis-pipeline.tex
 figures/information-hierarchy.tex
 flake.lock

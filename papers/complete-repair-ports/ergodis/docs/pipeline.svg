@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
   <title id="title">ergodis compilation pipeline</title>
-  <desc id="desc">Structured finite algebraic data passes through certified compilation, then an adaptive exact backend, and produces an optimum with a replayable witness or obstruction.</desc>
+  <desc id="desc">Represented codes, recovery supports, capacities, and symmetry data are compiled into labelled coset states, generated spans, graded shells, and compressed support families before exact composition, scheduling, reliability, or residual search.</desc>
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
       <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
@@ -14,13 +14,13 @@
     </style>
   </defs>
   <rect width="1200" height="430" rx="20" fill="#f8fafc"/>
-  <text x="50" y="48" class="title">Structure first, exact optimization second</text>
+  <text x="50" y="48" class="title">Synthesize the mathematical state before search</text>
 
   <rect x="50" y="92" width="235" height="230" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
   <text x="75" y="126" class="heading">Algebraic problem</text>
-  <text x="75" y="160" class="body">• local cost tables</text>
-  <text x="75" y="188" class="body">• outer linear blocks</text>
-  <text x="75" y="216" class="body">• helper capacities</text>
+  <text x="75" y="160" class="body">• represented codes / towers</text>
+  <text x="75" y="188" class="body">• recovery support families</text>
+  <text x="75" y="216" class="body">• resource capacities</text>
   <text x="75" y="244" class="body">• symmetry / moment data</text>
   <text x="75" y="282" class="small">Integer and finite-field input</text>
 
@@ -28,34 +28,34 @@
 
   <rect x="350" y="72" width="300" height="270" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
   <text x="375" y="106" class="heading">Structural compilation</text>
-  <text x="375" y="142" class="body">Quotient equivalent choices</text>
-  <text x="375" y="172" class="body">Compress generated spans</text>
-  <text x="375" y="202" class="body">Verify positive gradings</text>
-  <text x="375" y="232" class="body">Pack bounded residues</text>
-  <text x="375" y="262" class="body">Reconstruct coefficient blocks</text>
+  <text x="375" y="142" class="body">Synthesize labelled coset state</text>
+  <text x="375" y="172" class="body">Quotient generated spans</text>
+  <text x="375" y="202" class="body">Certify graded load shells</text>
+  <text x="375" y="232" class="body">Compress support families</text>
+  <text x="375" y="262" class="body">Retain reconstructible lifts</text>
   <rect x="375" y="287" width="250" height="34" rx="8" fill="#bbf7d0"/>
   <text x="500" y="309" text-anchor="middle" class="small">smaller exact state space</text>
 
   <path d="M650 207 H710" class="arrow"/>
 
   <rect x="715" y="72" width="205" height="80" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
-  <text x="817" y="105" text-anchor="middle" class="heading">Min-plus DP</text>
-  <text x="817" y="132" text-anchor="middle" class="small">parallel frontiers</text>
+  <text x="817" y="105" text-anchor="middle" class="heading">Tower min-plus</text>
+  <text x="817" y="132" text-anchor="middle" class="small">labelled composition</text>
   <rect x="715" y="167" width="205" height="80" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
-  <text x="817" y="200" text-anchor="middle" class="heading">Capacity DP</text>
-  <text x="817" y="227" text-anchor="middle" class="small">adaptive Pareto / lattice</text>
+  <text x="817" y="200" text-anchor="middle" class="heading">Reliability / schedule</text>
+  <text x="817" y="227" text-anchor="middle" class="small">ZDD, Pareto, or lattice</text>
   <rect x="715" y="262" width="205" height="80" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
-  <text x="817" y="295" text-anchor="middle" class="heading">Residual solver</text>
+  <text x="817" y="295" text-anchor="middle" class="heading">Residual exact solver</text>
   <text x="817" y="322" text-anchor="middle" class="small">enumerator or CP-SAT</text>
 
   <path d="M920 207 H980" class="arrow"/>
 
   <rect x="985" y="92" width="165" height="230" rx="16" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
   <text x="1067" y="126" text-anchor="middle" class="heading">Exact result</text>
-  <text x="1010" y="166" class="body">• optimum cost</text>
-  <text x="1010" y="194" class="body">• helper choices</text>
-  <text x="1010" y="222" class="body">• local labels</text>
-  <text x="1010" y="250" class="body">• load vector</text>
+  <text x="1010" y="166" class="body">• Γ / confinement</text>
+  <text x="1010" y="194" class="body">• coefficient witness</text>
+  <text x="1010" y="222" class="body">• support / reliability</text>
+  <text x="1010" y="250" class="body">• schedule / loads</text>
   <text x="1010" y="278" class="body">• design / obstruction</text>
 
   <path d="M715 365 H920" stroke="#7c3aed" stroke-width="5" stroke-linecap="round"/>
