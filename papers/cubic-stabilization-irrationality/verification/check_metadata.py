@@ -75,7 +75,7 @@ placed_artifacts = (
     r"is saturated and Galois stable. The two displayed generators of the type-\(I_3\) Galois image act on this basis by \[ \IThreeActionOne, \qquad \IThreeActionTwo. \]",
     r"Four groups of Cox generators span weight spaces with the following projective \(T_3\)-weights: \begin{center} \IThreeWeightTable \end{center}",
     r"B=\PP\langle\IThreeBoundaryGenerators\rangle.",
-    r"\(z\) specifies \(p\), while \(e=(e_1,\ldots,e_5)\) and \(z'\) specify the point \(x\) at which the matrix is evaluated. \begin{center} \SliceWitnessTable \end{center}",
+    r"generator constructs the remaining coordinates \(L_{ij}\) and \(Q\) and verifies all twenty Cox quadrics. \begin{center} \SliceWitnessTable \end{center}",
     r"After discarding nonzero rational factors, the four evaluation determinants are \SliceDeterminants and the corresponding smoothness minors are \SliceMinors",
     r"A lexicographic Gr\"obner calculation in \(\mathbf Q[a,b,h]/(h\Delta-1)\) gives \SliceCoverArithmetic Thus \(D_4M_4\ne0\)",
 )

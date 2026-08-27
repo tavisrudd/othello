@@ -484,14 +484,13 @@ four selected weight spaces gives a \(4\)-by-\(4\) matrix.  The following
 rows are exact witnesses for the open cover \eqref{eq:witness-cover}; no later
 conceptual step depends on their individual numerical values.  In each row,
 \(z\) specifies \(p\), while \(e=(e_1,\ldots,e_5)\) and \(z'\) specify the
-point \(x\) at which the matrix is evaluated.
+point \(x\) at which the matrix is evaluated.  More precisely, \(e\) gives
+the five coordinates \(E_1,\ldots,E_5\); from \(e\) and \(z'\), the public
+generator constructs the remaining coordinates \(L_{ij}\) and \(Q\) and
+verifies all twenty Cox quadrics.
 \begin{center}
 \SliceWitnessTable
 \end{center}
-Here \(e\) gives the five coordinates \(E_1,\ldots,E_5\).  From \(e\) and
-\(z'\), the public generator constructs the remaining coordinates
-\(L_{ij}\) and \(Q\) and verifies directly that the resulting point satisfies
-all twenty Cox quadrics.
 
 Let \(D_i\) be the determinant of this evaluation matrix, and let \(M_i\)
 be the fixed \(8\)-by-\(8\) Jacobian minor at the same tangent point.  After
@@ -503,9 +502,18 @@ one explicit B\'ezout identity, that
  \bigcup_{i=1}^4\{D_iM_i\ne0\}=\{\Delta\ne0\}.
  \label{eq:witness-cover}
 \end{equation}
+For \(p\in Z_{\mathrm{sm}}\), let \(H_p\) be the space of tangent
+hyperplanes containing \(B\).  If \(x=\sum_{j=0}^3x_j+x_B\) is its
+weight-space decomposition, evaluation gives
+\[
+ \operatorname{ev}_{p,x}:H_p\longrightarrow k^4,
+ \qquad \lambda\longmapsto
+ \bigl(\lambda(x_0),\ldots,\lambda(x_3)\bigr).
+\]
 Let \(\mathcal E_{\mathrm{ev}}\subset Z_{\mathrm{sm}}\times Z\) be the
-open locus where the evaluation map is an isomorphism and the \(T_3\)-action
-is free at \(x\).  The four choices above show that this open is nonempty for
+open locus where \(H_p\) has dimension four,
+\(\operatorname{ev}_{p,x}\) is an isomorphism, and the \(T_3\)-action is
+free at \(x\).  The four choices above show that this open is nonempty for
 every split Cox model attached to a smooth quartic del Pezzo surface.
 
 We now impose the tangent-projection condition uniformly in \(p\).  Let
@@ -532,15 +540,14 @@ Choose \((p,x)\) in this intersection.  Then \(p\) is general for tangent
 projection, \(x\in U_p\), the evaluation map is an isomorphism at \(x\), and
 the \(T_3\)-action is free at \(x\).
 
-Let \(H_p\) be the four-dimensional space of tangent hyperplanes containing
-\(B\).  Evaluation at \(x\) on the four selected weight-space components
-defines an isomorphism \(H_p\simeq k^4\).  Hyperplanes in \(H_p\) that vanish
-at \(x\) form a three-dimensional subspace; choose a basis
+The inverse image under \(\operatorname{ev}_{p,x}\) of the hyperplane
+\(u_0+u_1+u_2+u_3=0\) is the three-dimensional space of elements of \(H_p\)
+that vanish at \(x\).  Choose a basis
 \(\lambda_1,\lambda_2,\lambda_3\) and let \(\Lambda\) be their common zero
-locus.  Then \(x\in\Lambda\cap U_p\).  Under the evaluation isomorphism the
-three rows span the hyperplane \(u_0+u_1+u_2+u_3=0\), so their four maximal
-minors are all nonzero.  Thus the point satisfying the minor condition is
-the same point that lies in the tangent-projection isomorphism open.
+locus.  Then \(x\in\Lambda\cap U_p\), and the four maximal minors of the
+three evaluation rows are all nonzero.  Thus the point satisfying the minor
+condition is the same point that lies in the tangent-projection isomorphism
+open.
 
 It remains to obtain \(p\), \(x\), and \(\Lambda\) over the ground field.
 Fix a twist of one of the four types.
@@ -558,8 +565,8 @@ fixed point of \(S(k)\) is trivial.  Its \(k\)-points are Zariski dense by
 \((\mathcal U\cap(\mathcal E_{\mathrm{ev}}|_{G\times Z}))_p\) is a nonempty
 \(k\)-open in
 \(Z\), so Zariski density supplies a point \(x\in Z(k)\) in that fibre.
-The kernel of evaluation at \(x\) is a
-three-dimensional \(k\)-space, so a \(k\)-basis gives \(\Lambda\).  We do not
+The functional \(H_p\to k\), \(\lambda\mapsto\lambda(x)\), has a
+three-dimensional kernel, so a \(k\)-basis gives \(\Lambda\).  We do not
 claim that any one of the four displayed coordinate choices descends.
 
 For type \(I_3\), stability of \(N_3\), \(B\), and the set of four selected
