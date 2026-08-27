@@ -59,11 +59,21 @@ the resulting nonsplit extensions.
    Karn, Michael Perlman, and Saisudharshan Sivakumar, “Ideals preserved by
    linear changes of coordinates in positive characteristic.”** arXiv
    `2404.10544`.
-   Read depth: **abstract/metadata only**, arXiv search record.  The abstract
-   explicitly classifies invariant ideals by Doty carry patterns and gives
-   two-variable generator and syzygy results.  It is a current, directly
-   relevant bridge that the full audit must read before deciding how much of
-   the C973 digit filtration is standard carry-ideal structure.
+   Read depth: **partial**, arXiv v1 HTML, Introduction; Theorem 2.8 statement;
+   Section 3.3 statements of Theorems 3.14--3.15; and Section 3.4 statement of
+   Theorem 3.20 and Remark 3.22.  The paper reviews Doty's carry-pattern
+   submodule lattice, completely identifies the image of multiplication
+   `S_1 tensor W -> S_(d+1)`, and in two variables writes carry ideals as
+   products of Frobenius powers of powers of the maximal ideal.  This is a
+   current, directly relevant bridge that the full audit must compare against
+   the C973 sequences.
+
+   Auditor inference, not a claim attributed at this read depth: the
+   multiplication theorem is likely dual to the PRS coherent-lift/contraction
+   map defining `C_d`.  The exact carry-pattern and duality identification was
+   not completed in this sprint.  If it matches, Theorem 3.14 may supply the
+   cleanest citation for the structural image while Theorem 3.20 may explain
+   the Frobenius tensor blocks; neither addresses pointed locator arithmetic.
 
 ## Search trace and coverage
 
