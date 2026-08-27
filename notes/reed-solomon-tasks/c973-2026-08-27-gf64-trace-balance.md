@@ -350,6 +350,37 @@ two boundary forms.  More importantly, the whole 63-point curve `v=u^2` has
 `tau=1` and is equivalent to the dense point already closed by (14)--(19).
 Only the 63 values `tau!=1` and the two `u=0` boundary forms remain on (22).
 
+The endpoint boundary also supplies an exact chart obstruction.  At
+`(u,v)=(0,0)`, reuse the normalized affine plane from the dense proof,
+namely `A=B=C=1` in (28).  Then
+
+\[
+ (B_0,B_1,B_2,B_3)=(0,a,a+1,a+1),
+\]
+
+and `N` is rootless exactly when
+
+\[
+                         \operatorname {Tr}(1/(a+1))=1.
+\]
+
+This still gives 32 coefficient parameters, but the final-pair cover
+collapses in the wrong direction.  Directly from (2), if
+`L=(a+1)^2x`, then
+
+\[
+ \frac{N\Delta}{Q^2}
+ +\left(\frac LQ\right)^2+\frac LQ
+ =\frac1{a+1}.
+\]
+
+Hence the Artin--Schreier change `y -> y+L/Q` makes the cover constant.
+Whenever `N` is rootless, that constant has absolute trace one, so there is
+no rational fibre away from the already deleted poles.  Thus the dense
+affine-plane chart is provably unusable at the endpoint; this is not a failed
+parameter search.  The `(0,0)` boundary needs a different coset/subspace
+coefficient or a different split family.
+
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
 degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
@@ -458,6 +489,7 @@ arguments do not answer that arithmetic question.
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
 | How many marked-torus forms remain? | 66 total; the `tau=1` form is already closed | 63 generic `tau` values and two `u=0` boundaries |
+| Does the dense affine-plane chart close the `(0,0)` boundary? | no; its cover is Artin--Schreier equivalent to the constant `1/(a+1)`, whose trace is one precisely in the rootless case | change the subspace/coset coefficient or the split family |
 | Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (25)--(27) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |

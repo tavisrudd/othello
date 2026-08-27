@@ -141,6 +141,11 @@ remaining search.  The marked torus acts by `(u,v)->(cu,c^2v)`, so the
 surface has only 64 forms `(1,tau)` plus two `u=0` boundaries.  The entire
 63-point curve `v=u^2` is the single `tau=1` form and is already closed by
 the dense genus-zero calculation.
+At the endpoint `(u,v)=(0,0)`, naively reusing that dense affine plane is
+exactly impossible: after an explicit Artin--Schreier change, the final-pair
+cover is `y^2+y=1/(a+1)`, while final-quadratic rootlessness requires that
+same constant to have trace one.  A different subspace/coset coefficient or
+split family is therefore mandatory there.
 
 ## Objective
 

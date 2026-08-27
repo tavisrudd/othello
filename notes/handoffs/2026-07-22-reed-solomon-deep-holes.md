@@ -147,6 +147,9 @@ split quadratic by an affine three-space minus one point is provably
 impossible, so do not spend a search on that support family.  Residual torus
 scaling reduces the surface to `(1,tau)` plus two `u=0` boundary forms; the
 whole `tau=1` orbit is already closed by the dense calculation.
+Do not reuse the same normalized affine plane at the `(0,0)` endpoint: its
+final-pair cover becomes the constant equation `y^2+y=1/(a+1)`, and the
+rootless trace condition makes that fibre empty.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with
