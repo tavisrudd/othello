@@ -45,6 +45,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   fresh re-referees after every accepted repair.  Report and live card:
   `../2026-08-24-c956-exact-level-two-cubic-manuscript.md` and
   `../cubic-threefolds-tasks/c956-exact-level-two-cubic-manuscript.md`.
+- **C978 — cubic-stabilization `m=1` exposition repairs, queued.** Improve
+  theorem-first narrative, local transitions, notation onboarding, and proof
+  roadmaps without changing accepted mathematics, hypotheses, dependencies,
+  citations, or formal-provenance interfaces. Card:
+  `../cubic-threefolds-tasks/c978-cubic-m1-exposition-repairs.md`.
 - **C958 — explicit level-two parametrizations, active.**  The type-`I_1`
   splitting field, sixteen exceptional sections, marked-plane blowdown, and
   inverse anticanonical map are explicit.  The residual factor is the cubic
