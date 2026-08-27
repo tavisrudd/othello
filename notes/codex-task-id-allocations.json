@@ -3671,8 +3671,17 @@
       "last": 980,
       "purpose": "higher-rank contextual minimality and finite-state bounds",
       "sequence": 408
+    },
+    {
+      "count": 1,
+      "first": 981,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 981,
+      "purpose": "Explore mathematical extensions and publication framing exposed by the MDS--CSS exposition revision",
+      "sequence": 409
     }
   ],
-  "next_id": 981,
+  "next_id": 982,
   "schema": "codex-task-id-allocations-v1"
 }
