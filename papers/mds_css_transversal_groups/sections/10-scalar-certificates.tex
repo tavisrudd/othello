@@ -1,10 +1,49 @@
-\section{Explicit scalar certificates}\label{sec:scalar-certificates}
+\section{Explicit invariant certificates}\label{sec:scalar-certificates}
 
-This appendix records two explicit scalar LU separators.  They are not
-used in the rigidity or logical-group results; they show what finite-copy
-scalar contractions can still detect on exceptional strata despite the
-generic-constancy result in
-Section~\ref{sec:invariants}.
+This appendix records the multiplicity bookkeeping for the minimum-support
+holonomy invariant and two explicit scalar LU separators.  The holonomy
+calculation supports the pencil classification.  The scalar separators are
+not used in the rigidity or logical-group results; they show what finite-copy
+contractions can detect on exceptional strata despite the generic-constancy
+result in Section~\ref{sec:invariants}.
+
+\subsection{Minimum-support holonomy bookkeeping}
+\label{sec:holonomy-certificate}
+
+For the atlas in the proof of Theorem~\ref{thm:lc-pencil}, substitute the
+shortened generators into \eqref{eq:minimum-support-holonomy}.  Simplifying
+the \(15\cdot6\cdot5=450\) rational functions exactly and collecting equal
+functions gives
+\begin{equation}\label{eq:holonomy-invariant-multiset}
+\begin{array}{c|c}
+\text{value of \(r(M)\)}&\text{multiplicity}\\
+\hline
+4&90\\
+-1/z&144\\
+(2z+1)^2/z^2&24\\
+\text{each root of }X^2-8X+(8-16z-1/z)&96.
+\end{array}
+\end{equation}
+The certificate replays this symbolic enumeration and an independent
+direct-Lagrangian reconstruction.
+
+Because \(A,B\ne0\) on \(\mathcal U\), we have \(z\ne0\).  The two quadratic
+roots in \eqref{eq:holonomy-invariant-multiset} are taken over an algebraic
+closure; their symmetric multiset descends to \(\F_q\).  Before
+specialization, each root has multiplicity \(96\).  Coincident values have
+their multiplicities added.
+
+The identity
+\[
+ 4B(t)^2+A(t)^2=4G(t)^2
+\]
+shows that the excluded GRS locus is exactly \(z=-1/4\).  Away from it, the
+constant \(4\) bin is isolated and the two quadratic roots are distinct.  The
+bin containing \(-1/z\) can merge with neither, one, or both of the
+weight-\(24\) contribution and one weight-\(96\) contribution.  Its resulting
+multiplicity is \(144\), \(168\), \(240\), or \(264\).  No other bin has one
+of these multiplicities.  Thus the multiset canonically recovers \(-1/z\),
+including every modular collision.
 
 \subsection{A marginal-moment separator}
 

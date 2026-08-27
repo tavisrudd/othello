@@ -119,15 +119,13 @@ Section~\ref{sec:dictionary}, and projective equivalence supplies an LC
 equivalence.
 
 \medskip\noindent\emph{Recovery from minimum-support transitions.}
-We now specialize the imported minimum-support transition theorem to \(m=3\).  Each
-four-party support identifies
-its two-dimensional stabilizer plane with the local Pauli-label plane at
-any party in that support.  Overlapping supports therefore give coordinate
-changes between local Weyl frames, and their compositions around a loop
-give holonomy up to local symplectic conjugacy.  These minimum-support planes
-generate the full stabilizer label group.  The
-450 quantities below are conjugacy data of these transitions, not an independent
-choice of scalar contractions.
+We now specialize the imported minimum-support transition theorem to \(m=3\).
+Its contribution is a canonical atlas of two-dimensional stabilizer planes,
+one for each four-party support.  Each plane identifies with the local
+Pauli-label plane at any party in its support, and the supported planes
+generate the full stabilizer label group.  Overlaps therefore supply
+coordinate changes between local Weyl frames.  Composing two such changes
+gives holonomy data intrinsic up to local symplectic conjugacy.
 
 For the remaining direction assume that \(q\) is prime.  Then a local
 Clifford induces a block \(F_i\in\mathrm{SL}_2(q)\) on each local
@@ -150,39 +148,17 @@ and a party permutation only relabels the data.  Thus the multiset of
 \]
 over the \(15\cdot6\cdot5=450\) choices is an LC and party-permutation
 invariant: it is unchanged by conjugation and scalar multiplication, and it
-also agrees for \(M\) and \(M^{-1}\).
+also agrees for \(M\) and \(M^{-1}\).  It is therefore the right quantity for
+the atlas: it survives a change of local frame, a rescaling of a transition,
+and a reversal of the loop.
 
-Substituting the shortened generators into \((4.4)\), simplifying each
-of the \(450\) rational functions exactly, and collecting equal functions
-gives the following multiset.  The paper-local certificate described in
-Section~\ref{sec:verification} replays both this symbolic enumeration and
-a separate direct-Lagrangian reconstruction:
-\begin{equation}\label{eq:holonomy-invariant-multiset}
-\begin{array}{c|c}
-\text{value of \(r(M)\)}&\text{multiplicity}\\
-\hline
-4&90\\
--1/z&144\\
-(2z+1)^2/z^2&24\\
-\text{each root of }X^2-8X+(8-16z-1/z)&96.
-\end{array}
-\end{equation}
-Because \(A,B\ne0\) on \(\mathcal U\), \(z\ne0\).
-The two roots are taken over an algebraic closure; their symmetric
-multiset descends to \(\F_q\).  The multiplicity \(96\) applies to each
-root before specialization;
-coincident values have their multiplicities added.  The identity
-\[
- 4B(t)^2+A(t)^2=4G(t)^2
-\]
-shows that the excluded GRS locus is exactly \(z=-1/4\).  Away from it,
-the constant \(4\) bin is isolated and the two quadratic roots are
-distinct.  The bin containing \(-1/z\) can merge with neither, one, or
-both of the weight-\(24\) and one weight-\(96\) contributions, so its
-multiplicity is \(144,168,240\), or \(264\).  No other bin has one of
-these multiplicities.  Hence the multiset canonically recovers
-\(-1/z\), including every modular collision, and LC equivalence forces
-equality of \(z\).
+Exact substitution in \eqref{eq:minimum-support-holonomy} puts these values
+into finitely many symbolic families.  Their complete multiplicity and
+collision bookkeeping is recorded in Appendix
+\ref{sec:holonomy-certificate} and replayed by the paper-local certificate.
+One family has value \(-1/z\), and its multiplicity identifies that value
+canonically even after specializations cause families to collide.  The atlas
+therefore recovers \(-1/z\), so LC equivalence forces equality of \(z\).
 \end{proof}
 
 The map \(t\mapsto z\) has degree eight: the four transformations in

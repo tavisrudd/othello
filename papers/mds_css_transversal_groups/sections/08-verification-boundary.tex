@@ -21,7 +21,7 @@ Frobenius-sector formulas & proved here & direct finite-field algebra & no compl
 Clebsch application & consequence & syndrome lemma composed with the cited Clebsch deep-hole theorem & cited conic, count, and orbit result \\
 Scalar separators and transport divisor & appendix results & exact generators, JSON certificates, and independent replay & finite exact computation \\
 Coordinate-permutation extensions & twelve computed cases & exhaustive permutation checks and explicit complements & no general classification beyond the listed cases \\
-Formalization & partial & Lean kernel checking through the paper-specific gate & hypothesis-explicit interfaces and three native finite cardinality evaluations \\
+Formalization & partial & Lean kernel checking & hypothesis-explicit interfaces and three trusted finite cardinality evaluations \\
 \bottomrule
 \end{tabular}
 \caption{Proof and verification status of the main claim families.  A
@@ -32,32 +32,20 @@ computational inputs; importing it does not prove those inputs.}
 
 The paper-local supplement contains the exact generators, compact JSON
 certificates, and a deterministic standard-library verifier for the six-point
-computations.  Running
-\begin{center}
-\texttt{python3 supplement/verify.py --replay}
-\end{center}
-checks the manifest and regenerates every certificate in memory.  The
-supplement records each finite domain, stopping condition, independent replay,
-and negative scope statement.
+computations.  The verifier checks the manifest and regenerates every
+certificate.  The supplement records each finite domain, stopping condition,
+independent replay, and negative scope statement; repository documentation
+gives the exact replay command.
 
-The Lean~4 development uses toolchain \texttt{v4.32.0-rc1} with a pinned
-Mathlib revision.  Its paper-specific roots are
-\begin{center}
-\texttt{RelativeConicArcs.Gates.MDSCSSTransversalGeometry}\
-\texttt{RelativeConicArcs.Gates.MDSCSSTransversalGeometryAxioms}.
-\end{center}
-The first is the import-only gate for the checked surface; the second prints
-the axiom dependencies of every cited declaration.  Kernel reduction covers
-the MDS--CSS dictionary, multiplier nullity, pencil quotient,
-extension-field scalar formulas, syndrome geometry, contraction algebra,
-transport cycle algebra, and the abstract consequences of a supplied
-coordinate-permutation complement.  The exact group, finite classifications,
-separators, and transport geometry use interfaces whose input fields are
-proved in the text or supplied by the certificates.  Three graph
-cardinalities use exhaustive native evaluation; two marginal-moment results
-inherit the star-count evaluation axiom.  Apart from those local declarations,
-the cited formal results use only propositional extensionality, choice, and
-quotient soundness.
+The Lean development formalizes the MDS--CSS dictionary, multiplier nullity,
+pencil quotient, extension-field formulas, syndrome geometry, contraction and
+transport algebra, and abstract consequences of a supplied
+coordinate-permutation complement.  The finite classifications and explicit
+separators remain certificate inputs to hypothesis-explicit interfaces.
+Three finite graph cardinalities are trusted exhaustive evaluations, and two
+marginal-moment results inherit one of those assumptions.  Repository
+documentation records the exact formal entry points, toolchain, and dependency
+audit.
 
 The local-unitary classification by \(z\) is restricted to odd prime fields.
 Over extension fields, Frobenius is already an additional local Clifford and

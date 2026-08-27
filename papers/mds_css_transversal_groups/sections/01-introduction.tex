@@ -39,9 +39,10 @@ vector \(s\in\F_q^{2m}\) is a diagonal code-to-dual multiplier when
  \mathcal D(C,C^\perp)
  =\{s\in\F_q^{2m}:\diag(s)C\subseteq C^\perp\}.
 \]
-The MDS property makes this apparently large endomorphism problem rigid: the
-space has dimension zero or one, and any nonzero multiplier rescales every
-coordinate and maps \(C\) onto \(C^\perp\).  We call the latter case
+The definition asks only for inclusion.  Proposition
+\ref{prop:diagonal-multiplier-line} shows that the MDS property upgrades every
+nonzero inclusion to the equality \(\diag(s)C=C^\perp\).  It also shows that
+the multiplier space has dimension zero or one.  We call the latter case
 \emph{diagonal isoduality}.
 
 \begin{theorem}[Exact transversal logical group]
@@ -65,9 +66,11 @@ matrix \(S\).
 \end{theorem}
 
 Thus the exact transversal group is determined by one nullity computation on
-the classical code.  The translation factor \(\F_q^2\) consists of logical
-Paulis.  The linear factor is either the split torus \(T\) or all of
-\(\mathrm{SL}_2(q)\); no intermediate subgroup occurs.
+the classical code.  In both branches, \(\F_q^2\) acts by logical Pauli
+translations.  The split torus \(T\), the diagonal determinant-one subgroup,
+preserves the logical \(X\)- and \(Z\)-axes separately.  The full
+\(\mathrm{SL}_2(q)\) branch can mix those axes and therefore includes
+Fourier-like transformations exchanging logical \(X\) and \(Z\).
 
 The proof has three steps.  First, represent each one-qudit Clifford by a
 \(2\)-by-\(2\) symplectic matrix.  Preservation of the CSS stabilizer gives
@@ -82,6 +85,7 @@ imported rigidity theorem below shows that an arbitrary product-unitary
 implementation is Clifford at every site, proving that the constructed groups
 are exact.
 
+\paragraph{Prior results.}
 The result fits into a broad study of transversal and automorphism-induced
 logical gates.  Rains organizes coordinatewise symplectic symmetries through
 code-invariance algebras \cite[Theorems~4 and~14]{RainsNonbinary1999}.
@@ -97,17 +101,23 @@ odd-prime one-logical-qudit codes with a complete transversal Clifford set
 \cite[Section~IV.C]{PrakashSinghal2026}; Albert gives related normal forms for
 binary CSS codes \cite[Sections~III--V]{Albert2026}.
 
+\paragraph{Gap and contribution.}
 What is missing from these results is the exact fixed-coordinate,
 site-dependent group for the present MDS--CSS family.  Theorem
 \ref{thm:diagonal-isodual-transversal-group} supplies it by reducing the
-problem to \(\mathcal D(C,C^\perp)\).  The key MDS statement and both group
-constructions are proved here.  We import only the following consequences of
-the companion paper: product-unitary rigidity, the encoder version of that
-rigidity, a stabilizer-character correction, and minimum-support transition
-data.  Tan's general AME--QMDS correspondence relates state symmetries and
-transversal encoder gates \cite[Theorems~3.5--3.6]{Tan2026}; the present
-multiplier theorem computes the exact fixed-coordinate subgroup for this
-family.
+problem to \(\mathcal D(C,C^\perp)\).  The MDS multiplier theorem and both
+group constructions are proved here.  Tan's general AME--QMDS correspondence
+relates state symmetries and transversal encoder gates
+\cite[Theorems~3.5--3.6]{Tan2026}.  The new step here is to compute the exact
+fixed-coordinate subgroup for this family.
+
+\subsection*{Imported inputs}
+
+The exactness argument uses four results from the companion paper:
+product-unitary rigidity, its encoder consequence, a stabilizer-character
+correction, and minimum-support transition data.  Their formal statements are
+collected here so that the boundary between imported and proved material is
+explicit.
 
 \begin{theorem}[Imported stabilizer-AME rigidity
 \cite{RuddAMEStabilizerRigidity2026}]
@@ -137,29 +147,28 @@ product-Clifford map of their stabilizer label groups can be corrected by a
 product Pauli to map one state ray to the other.
 \end{lemma}
 
-The six-coordinate applications also use the companion paper's
-minimum-support transition theorem.  If \(L\) is the Pauli-label group of a
-stabilizer \(\AME(2m,q)\) state, then the labels supported on any
-\((m+1)\)-coordinate set project bijectively onto the Pauli-label plane at
-each retained coordinate, and these supported subgroups span \(L\).
-Consequently, transition maps between overlapping supports determine local
-Clifford equivalence up to local trace-symplectic changes of basis.  We use
-only this statement; its proof and the companion paper's quantitative results
-are not repeated here.
+The six-coordinate applications also use the minimum-support transition
+theorem.  For a stabilizer \(\AME(2m,q)\) state, the Pauli labels supported on
+any \((m+1)\)-coordinate set project bijectively onto the local Pauli-label
+plane at each retained coordinate.  These supported subgroups span the full
+stabilizer label group.  Hence transitions between overlapping supports
+determine local Clifford equivalence up to local trace-symplectic changes of
+basis.  We use only this statement, not the companion paper's quantitative
+results.
 
-The rest of the paper has two roles.  First, it interprets the all-length
-criterion at six coordinates.  A linear \([6,3,4]_q\) MDS code is represented
-by six points in \(\PP^2(\F_q)\), no three collinear.  In this model, diagonal
-isoduality means that the dual code is obtained by independently rescaling the
-six coordinates; projective geometers call the same condition fixed-label
-Gale self-association.  For six points in the projective plane, it is
-equivalent to lying on a conic.  An explicit non-GRS one-parameter family then
-has a degree-eight invariant \(z\) that classifies projective and monomial-code
-equivalence over odd fields and local-Clifford and local-unitary equivalence
-over odd prime fields.  The Clebsch \([6,3,4]_{11}\) code is a worked
+\paragraph{Six-point applications.}
+At length six, the coding-theoretic statement is that
+\(C\) is diagonally isodual.  Its geometric equivalent is that the six
+projective columns lie on a conic, or equivalently are fixed-label Gale
+self-associated.  Its quantum-information consequence is the enlargement of
+the fixed-coordinate logical symplectic image from \(T\) to
+\(\mathrm{SL}_2(q)\).  For an explicit non-GRS pencil, a degree-eight
+invariant \(z\) classifies projective and monomial-code equivalence over odd
+fields.  Over odd prime fields it also classifies local-Clifford and
+local-unitary equivalence.  The Clebsch \([6,3,4]_{11}\) code gives a worked
 syndrome-geometric example.
 
-Second, the paper records refinements and limitations of the classification.
+\paragraph{Lift, verification, and invariant refinements.}
 The linear \(\mathrm{SL}_2(q)\) action has coherent Weil lifts, whereas the
 affine translation subgroup has the usual Heisenberg central extension.
 Coordinate permutations form a separate group-extension problem.  Fixed-copy
@@ -173,7 +182,7 @@ Section~\ref{sec:exact-logical} proves the multiplier theorem and exact group,
 then treats the lift refinements.  Section~\ref{sec:logical} translates the
 criterion into six-point geometry.  Section~\ref{sec:pencil} classifies the
 one-parameter family, and Section~\ref{sec:invariants} gives the limitation on
-fixed-copy scalar invariants.  The appendices contain the explicit scalar
-separators, transport calculation, and coordinate-permutation extensions.
+fixed-copy scalar invariants.  The appendices contain the explicit invariant
+certificates, transport calculation, and coordinate-permutation extensions.
 Section~\ref{sec:verification} states the computational and formal trust
 boundaries.

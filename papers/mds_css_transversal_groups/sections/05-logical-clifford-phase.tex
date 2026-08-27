@@ -88,24 +88,23 @@ T=\{\diag(a,a^{-1}):a\in\F_q^\times\},&\text{if the arc is nonconic}.
 \end{equation}
 Thus every encoder view of a GRS tensor realizes the full one-qudit
 logical symplectic group from fixed-coordinate symmetries.  Off the GRS locus,
-the fixed-coordinate logical symplectic image is the split torus.  At a chosen
-input coordinate, any coordinate-permuting isoduality that exchanges the CSS
-\(X\)- and \(Z\)-spaces transports the encoder view by the nontrivial
-Weyl-group element, so the possible input blocks generate the normalizer of \(T\)
-together with \(T\).  This is an action on one fixed encoder only when
-the isoduality fixes its input leg.
+the fixed-coordinate logical symplectic image is the split torus.
 \end{theorem}
 
 \begin{proof}
 Theorem~\ref{thm:diagonal-isodual-transversal-group} gives
 \(\mathrm{SL}_2(q)\) exactly on the diagonally isodual branch and \(T\)
 otherwise.  Lemma~\ref{lem:six-arc-self-association} identifies diagonal
-isoduality with the conic locus.  At a chosen input coordinate, a
-coordinate-permuting
-isoduality exchanges the CSS \(X\)- and \(Z\)-axes and hence represents
-the nontrivial Weyl-group element normalizing \(T\).  It acts on one fixed
-encoder only when the coordinate permutation fixes that encoder's input.
+isoduality with the conic locus.
 \end{proof}
+
+\begin{remark}[Allowing coordinate permutations]
+At a chosen input coordinate, a coordinate-permuting isoduality that exchanges
+the CSS \(X\)- and \(Z\)-spaces represents the nontrivial Weyl-group element
+normalizing \(T\).  Together with \(T\), the possible input blocks therefore
+generate the normalizer of \(T\).  This gives an action on one fixed encoder
+only when the coordinate permutation fixes its input leg.
+\end{remark}
 
 Adding logical Paulis recovers the exact fixed-coordinate projective logical
 groups in Theorem~\ref{thm:diagonal-isodual-transversal-group}.
@@ -197,7 +196,6 @@ Theorem~\ref{thm:logical-phase} at \(q=11\).
 
 \begin{remark}[Error symmetry without fixed-party duality]
 \label{rem:clebsch-x-syndrome-boundary}
-\medskip\noindent\emph{Syndrome geometry versus code geometry.}
 The one-per-support statement means that the same extremal translated state
 can be created by a minimum \(X\)-operator on either side of every balanced
 \(3\mid3\) cut.
@@ -206,14 +204,6 @@ six parity-check columns on a conic.  Thus the extremal \(X\)-error shell
 has icosahedral covariance while the fixed-party transversal group has no
 Fourier block exchanging \(X\) and \(Z\).  This is a fixed-party statement,
 not an obstruction to every electric--magnetic exchange.
-
-\medskip\noindent\emph{Coordinate-permutation bookkeeping.}
-In the computed
-Clebsch row of Corollary~\ref{cor:computed-party-splitting}, the factor
-\(C_{10}\) scales the ten nonzero syndrome vectors on each ray and disappears
-after projectivization.  The remaining \(A_5\) is the projective monomial
-quotient, whereas \(S_5\) is the larger realized party image.  Odd party
-motion inverts \(T\) and supplies the nontrivial class of \(N(T)/T\).
 
 Changing the row basis of \(H\) changes the displayed conic by a projective
 coordinate transformation.  The covering radius here concerns
@@ -226,6 +216,15 @@ rigidity statement: every product-unitary intertwiner from this tensor to a
 stabilizer AME tensor is Clifford factor by factor.
 \end{remark}
 
+\begin{remark}[Coordinate-permutation groups in the Clebsch example]
+In the computed Clebsch row of
+Corollary~\ref{cor:computed-party-splitting}, the factor \(C_{10}\) scales the
+ten nonzero syndrome vectors on each ray and disappears after
+projectivization.  The remaining \(A_5\) is the projective monomial quotient,
+whereas \(S_5\) is the larger realized party image.  Odd party motion inverts
+\(T\) and supplies the nontrivial class of \(N(T)/T\).
+\end{remark}
+
 A different MDS uniformity governs operator pushing.  Fix an input party
 and a nonidentity Pauli label.  Each of the ten four-sets containing that
 party carries a unique stabilizer representative with that support; removing
@@ -236,4 +235,7 @@ Neither count uses the finite group calculation, although the symmetry
 orbits of the operator pushes can distinguish finer projective classes.
 The comparison separates two uses of MDS uniformity: one fixes an input Pauli
 and counts its minimum-weight physical representatives, while the other fixes
-an \(X\)-syndrome and varies the support of a translating operator.
+an \(X\)-syndrome and varies the support of a translating operator.  This
+distinction matters here because the large symmetry of the error-syndrome
+shell does not enlarge the fixed-coordinate logical group: the latter is
+controlled by diagonal isoduality of the code.
