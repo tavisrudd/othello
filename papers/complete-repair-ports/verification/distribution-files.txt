@@ -39,6 +39,7 @@ ergodis/examples/data/vector-repair.json
 ergodis/examples/gf27_balanced_dfs.rs
 ergodis/examples/gf27_balanced_probe.rs
 ergodis/examples/gf27_prefix_probe.rs
+ergodis/examples/library_composition.rs
 ergodis/proptest-regressions/scheduler.txt
 ergodis/python/README.md
 ergodis/python/benchmark_algorithms.py

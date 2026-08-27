@@ -7,18 +7,18 @@
 mathematical results and solver design in optimization language and assumes no
 coding-theory background.
 
-ergodis is a structure-aware exact finite-domain solver for linear-code
-recovery, capacitated repair scheduling, and finite algebraic search. It
-compiles quotient structure, functional labels, conserved gradings, generated
-spans, and reconstructible coefficient blocks before optimization. Problems
-that are enormous in their raw support or coefficient representation can
-therefore collapse to small exact state spaces.
+ergodis is a compiler and exact solver for finite algebraic optimization
+problems whose raw combinatorial state admits a much smaller mathematically
+derived quotient. Its Rust library provides kernels for linear-code recovery,
+hierarchical composition, capacitated scheduling, and finite algebraic search.
+It compiles functional labels, conserved gradings, generated spans, symmetries,
+and reconstructible coefficient blocks before optimization.
 
-Every successful solve returns more than an optimum: depending on the command,
-the JSON result includes helper choices, resource loads, intermediate labels,
-coefficient lifts, support families, or a replayable obstruction. ergodis is
-specialized for algebraically structured finite domains; it is not a
-general-purpose constraint-programming replacement.
+Every successful computation returns more than an optimum. Library answer
+types, and their CLI JSON representations, retain helper choices, resource
+loads, intermediate labels, coefficient lifts, support families, or replayable
+obstructions. ergodis is specialized for algebraically structured finite
+domains; it is not a general-purpose constraint-programming replacement.
 
 “Invariant synthesis” means constructing the exact labelled cost state needed
 by later composition; it does not mean conjecturing new mathematical
@@ -42,7 +42,68 @@ crossover criteria.
 
 ![ergodis compilation pipeline](docs/pipeline.svg)
 
-## Install
+## Use as a Rust library
+
+The crate is the primary integration surface. The `ergodis` executable calls
+the same public APIs and provides JSON interfaces for examples, shell workflows,
+and independent replay.
+
+After cloning the repository, add the crate by path:
+
+```toml
+[dependencies]
+ergodis = { path = "../compositional-recovery/ergodis" }
+```
+
+Enable `features = ["parallel"]` when independent subproblems are large enough
+to benefit from Rayon. Sequential execution remains available and avoids the
+parallel setup cost on small instances.
+
+This example compiles a binary two-block cost table and queries an exact cost
+with its minimizing local labels:
+
+```rust
+use ergodis::{CompositionTable, CostTable, Matrix};
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let zero = Matrix::new::<2>(1, 1, vec![0])?;
+    let one = Matrix::new::<2>(1, 1, vec![1])?;
+    let inner = CostTable::from_entries::<2>(
+        1,
+        1,
+        [(zero, 0), (one.clone(), 1)],
+    )?;
+    let blocks = [one.clone(), one.clone()];
+    let compiled = CompositionTable::compose::<2>(&blocks, &inner)?;
+    let answer = compiled.answer::<2>(&one)?.expect("reachable label");
+
+    assert_eq!(answer.cost, 1);
+    assert_eq!(answer.local_labels.len(), 2);
+    Ok(())
+}
+```
+
+Run the checked version as `cargo run --release --example library_composition`.
+
+The main library surfaces are:
+
+| API                                                   | Use it for                                                      |
+| :---------------------------------------------------- | :-------------------------------------------------------------- |
+| `CostTable`, `CompositionTable`, `CompositionTower`   | labelled min-sum composition and expanded tower witnesses       |
+| `compile_binary_*`, `confinement_*`, contextual plans | recovery profiles, confinement certificates, and context caches |
+| scheduler functions and workspaces                    | capacitated and coefficient-weighted simultaneous recovery      |
+| span, orbit, incidence, and projective modules        | compiled finite-field and symmetry-reduced search               |
+| application types and functions                       | worked storage, sparse-code, and dependent-task models          |
+
+Generate the complete API documentation with:
+
+```text
+cargo doc --all-features --open
+```
+
+The crate is at version 0.1.0; lower-level interfaces may still evolve.
+
+## Build and use the CLI
 
 ergodis requires Rust 1.82 or later.
 
@@ -92,8 +153,8 @@ aggregate loads, selected backend, and auditable work counters:
   "repaired_count": 2,
   "complete": true,
   "assignment": [
-    {"demand": 0, "loads": [0, 1]},
-    {"demand": 1, "loads": [1, 0]}
+    { "demand": 0, "loads": [0, 1] },
+    { "demand": 1, "loads": [1, 0] }
   ],
   "total_loads": [1, 1],
   "backend": "dense-lattice",
@@ -103,14 +164,14 @@ aggregate loads, selected backend, and auditable work counters:
 
 ## Commands
 
-| command             | use                                                                   |
-| :------------------ | :-------------------------------------------------------------------- |
-| `compose`           | compose an existing labelled cost table through one outer layer       |
-| `transfer`          | derive exact rank-one transfer data from represented inner encoders   |
-| `transfer-subspace` | analyze an explicit normalized target subspace of arbitrary rank      |
-| `transfer-tower`    | compile through several layers and replay coefficient witnesses       |
-| `schedule`          | optimize alternative recovery systems under resource capacities       |
-| `application`       | run a tagged storage, repair-DAG, QC-LDPC, vector, or GPU model       |
+| command             | use                                                                 |
+| :------------------ | :------------------------------------------------------------------ |
+| `compose`           | compose an existing labelled cost table through one outer layer     |
+| `transfer`          | derive exact rank-one transfer data from represented inner encoders |
+| `transfer-subspace` | analyze an explicit normalized target subspace of arbitrary rank    |
+| `transfer-tower`    | compile through several layers and replay coefficient witnesses     |
+| `schedule`          | optimize alternative recovery systems under resource capacities     |
+| `application`       | run a tagged storage, repair-DAG, QC-LDPC, vector, or GPU model     |
 
 Use `ergodis <command> --help` for command-specific options. The input schemas
 are represented by complete examples in `examples/data/`; these are also used
@@ -122,17 +183,17 @@ The Rust library exposes three exact shortcuts derived from the compositional
 state theorem:
 
 - `certify_rank_one_transfer_by_generators` decides whether every bounded
-  recovery system through a supplied radius transfers completely.  It checks
+  recovery system through a supplied radius transfers completely. It checks
   the zero sector first, evaluates the target block first, prunes partial costs
-  above the radius, and stops at the first obstruction.  Use the full
+  above the radius, and stops at the first obstruction. Use the full
   `confinement_by_generators` API when the exact losing nonzero-sector minimum
   is also required.
 - `RankOneProbeCache` stores the zero-truncated projective line-probe profile
-  lazily.  It is intended for repeated compatible outer contexts over the same
+  lazily. It is intended for repeated compatible outer contexts over the same
   scalar-labelled inner state.
 - `RankBoundedContextCache` decomposes a rank-`t` query into canonical outer
   functional-dual subspaces of dimension at most `t` and reuses exact results
-  across contexts.  It never merges differently labelled maps merely because
+  across contexts. It never merges differently labelled maps merely because
   they generate the same subspace.
 - `context_cost` defaults to a safe one-query `Auto` forecast.
   `context_cost_cached` requests cache admission explicitly, while
@@ -141,18 +202,18 @@ state theorem:
   `Auto` admits state only when the measured reuse threshold is met and a
   conservative query-cache estimate, including actual key width, fits the
   caller's byte budget; otherwise
-  it executes the exact direct scan without mutating the cache.  A context
+  it executes the exact direct scan without mutating the cache. A context
   already complete in the cache is reused without a new admission, even when
   its fresh-query forecast would select direct execution.
 
 The Rust hot scans use preallocated coefficient, label, elimination, and RREF
-scratch.  Persistent keys occupy one flat byte pool behind compact 16-byte
+scratch. Persistent keys occupy one flat byte pool behind compact 16-byte
 records and integer open-addressing slots; local table lookups consume slices,
-so candidate enumeration does not allocate.  Allocation is confined to
+so candidate enumeration does not allocate. Allocation is confined to
 validation/setup, reserved state admission, and final witness materialization.
 
 The two context caches currently specialize to scalar labels over the outer
-field.  A flattened base-field representation of a proper extension does not
+field. A flattened base-field representation of a proper extension does not
 carry enough information to recover extension-field scalar multiplication; a
 future generalized API must receive that action explicitly.
 
@@ -230,30 +291,17 @@ These are bounded exact comparisons, not universal solver rankings. Every
 control reproduces the same exact support family, optimum, or feasibility
 verdict, as applicable; timing includes input or model construction.
 
-| workload                    | scale                                  |  ergodis | matched control         | control time | speedup  |
-| :-------------------------- | :------------------------------------- | -------: | :---------------------- | -----------: | -------: |
-| Ceph XOR support family     | 8 diamonds, 256 minimal supports       |   102 us | Graphillion ZDD closure |       864 us |       8x |
-| represented GF(4) tower     | depth 6, fanout 4; 4,096 leaves        |   766 us | direct CP-SAT           |     263.76 s | 344,300x |
-| published Hamming-outer LRC | binary `[4095,2718,6;2]`               |   231 ms | direct CP-SAT           |        100 s |     432x |
-| GPU MDS checkpoint recovery | 10,000 shards, 6,000 data, 64 failures |   100 us | OR-Tools bipartite flow |   103,061 us |   1,029x |
+| workload                    | scale                                  | ergodis | matched control         | control time |  speedup |
+| :-------------------------- | :------------------------------------- | ------: | :---------------------- | -----------: | -------: |
+| Ceph XOR support family     | 8 diamonds, 256 minimal supports       |  102 us | Graphillion ZDD closure |       864 us |       8x |
+| represented GF(4) tower     | depth 6, fanout 4; 4,096 leaves        |  766 us | direct CP-SAT           |     263.76 s | 344,300x |
+| published Hamming-outer LRC | binary `[4095,2718,6;2]`               |  231 ms | direct CP-SAT           |        100 s |     432x |
+| GPU MDS checkpoint recovery | 10,000 shards, 6,000 data, 64 failures |  100 us | OR-Tools bipartite flow |   103,061 us |   1,029x |
 
 See `BENCHMARKS.md` for all comparison tables, peak RSS, protocols,
 architecture flags, profiling results, limits probes, and exact replay
 commands. Machine-readable samples and artifact hashes are in
 `evidence/benchmarks.json`.
-
-## Rust library
-
-The CLI is the stable documented entry point. The same engines are exported by
-the `ergodis` crate for callers that need in-process composition, confinement,
-scheduling, generated-span, or application APIs. Generate the current API
-documentation with:
-
-```text
-cargo doc --all-features --open
-```
-
-The crate is at version 0.1.0; lower-level library interfaces may still evolve.
 
 ## Mathematical and evidence scope
 
