@@ -102,6 +102,13 @@ finds 795 affine support types and proves that the natural affine-three-space
 plus one-root family misses 503 of the 1,129 GF(32) marked orbits.  The next
 binary proof gate is therefore pointed avoidance inside the full C620
 final-pair trace cover, not a small support atlas or a GF(64) in-memory census.
+That reduction is now exact in
+`c973-2026-08-27-gf64-pointed-trace-gate.md`: after the coherent contraction
+`z2=0`, ramified pole counting leaves at most 48 bad rational points on the
+genus-at-most-one final-pair curve, versus the GF(64) Hasse lower bound 49,
+provided its quadratic final-product numerator `N(x)` is rootless.  This is
+equivalent to one explicit Artin--Schreier trace bit on the five fixed roots.
+Proving that trace selectable is the sole remaining binary arithmetic gate.
 
 ## Objective
 

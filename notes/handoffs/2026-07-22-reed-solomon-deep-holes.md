@@ -120,9 +120,15 @@ The exact remaining R11 modular fields are GF(27) and GF(64); external seam
 and representation-theory review remain open.  An exact compression audit
 rules out both a small affine support atlas and the additive-three-space-plus-
 one family; the structural binary target is pointed avoidance in C620's full
-final-pair trace cover, not a GF(64) census.  Checkpoints:
+final-pair trace cover, not a GF(64) census.  The exact reduction now sharpens
+the genus-one deletion budget to 48 against the GF(64) Hasse lower bound 49;
+the sole remaining binary lemma is selection of five fixed roots for which
+the quadratic final-product numerator is rootless, equivalently one explicit
+Artin--Schreier trace bit.  Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
-`notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`.
+`notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with
+the structural frontier in
+`notes/reed-solomon-tasks/c973-2026-08-27-gf64-pointed-trace-gate.md`.
 
 C974 is complete.  The toolkit now contracts arbitrary degree-`r-5` marker
 supports directly to a complete R5 cubic pencil, returns the resulting
