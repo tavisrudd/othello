@@ -63,10 +63,10 @@ starts from the transcribed type-`I₃` matrices and twenty Cox quadrics. It
 reconstructs the saturated rank-three lattice, Cox weights, residual rank-two
 quotient, tangent Jacobian, four symbolic evaluation determinants, and the
 four-open cover of the smooth parameter locus. It also constructs the linear section defined by
-the kernel of evaluation at the point \(x\). For each of the six empty localized branches,
+the kernel of evaluation at the point \(x\). For each of the six empty localized cases,
 [`verification/groebner-empty-certificates.json`](verification/groebner-empty-certificates.json)
-retains an exact identity expressing a nonzero constant in the localized
-branch ideal. The generator renders all computation-derived values printed in
+retains an exact identity expressing a nonzero constant in the corresponding
+localized ideal. The generator renders all computation-derived values printed in
 the manuscript into the checked
 [`verification/slice-cover-values.tex`](verification/slice-cover-values.tex)
 artifact. A second program,
@@ -115,7 +115,7 @@ nix shell nixpkgs#singular -c uv run --with sympy==1.14.0 python3 \
 - `verification/check_slice_cover.py` — independent consequence checker;
 - `verification/slice-cover-certificate.json` — canonical exact certificate;
 - `verification/groebner-empty-certificates.json` — retained exact identities
-  for the six empty localized branches;
+  for the six empty localized cases;
 - `verification/slice-cover-values.tex` — generated, checked manuscript values;
 - `verification/claim-map.json` and `verification/imported-sources.json` —
   theorem coverage and imported-source ledgers;

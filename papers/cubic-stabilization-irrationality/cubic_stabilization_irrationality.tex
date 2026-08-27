@@ -658,14 +658,14 @@ admit a decomposition of the diagonal and hence is not stably rational
 \section{Exact tangent-section certificate}
 \label{app:slice-certificate}
 
-This appendix records the exact cover used in
-Proposition~\ref{prop:tangent-section}.  It exposes the polynomials and the
-two surviving localized branches used in the geometric nonemptiness claim.
-The public generator proves the emptiness of six branches by exact Gr\"obner
-computations.  For each branch, the public certificate also retains a
-machine-readable identity expressing a nonzero constant in the corresponding
-localized ideal.  The displayed evaluations and B\'ezout identity exclude the
-two surviving branches.
+This appendix proves that the four opens used in
+Proposition~\ref{prop:tangent-section} cover the smooth parameter space.
+If the first three products \(D_iM_i\) vanish, choosing one vanishing factor
+from each product gives eight cases.  Exact Gr\"obner computations show that
+six cases are empty.  In each of the other two, the displayed evaluations
+and B\'ezout identity show that \(D_4M_4\ne0\).  The public certificate
+retains, for each empty case, a machine-readable identity expressing a
+nonzero constant in the corresponding localized ideal.
 
 After discarding nonzero rational factors, the four evaluation determinants
 are
@@ -683,21 +683,23 @@ opens \(D_iM_i\ne0\) cover \(\Delta\ne0\).
 
 \section{Verification and scope}
 
-We compute the cocharacter saturation, type-\(I_3\) actions, Cox weights,
-determinant-one weight differences, and tangent-incidence cover using exact
-integer and rational arithmetic.  The public generator starts from the two
+Using exact integer and rational arithmetic, we compute the cocharacter
+saturation, type-\(I_3\) actions, and Cox weights; verify that the selected
+weight differences form a lattice basis; and prove that four explicit opens
+cover the smooth parameter locus.  The public generator starts from the two
 type-\(I_3\) character matrices and a transcription of the twenty Cox
 quadrics in \cite[Section~3]{TZ}.  It reconstructs the saturated rank-three lattice, the
 residual rank-two quotient, the tangent Jacobian, all four pairs
-\((D_i,M_i)\), the eight localized branches, and the B\'ezout identity above
+\((D_i,M_i)\), the eight localized cases, and the B\'ezout identity above
 with SymPy~1.14.0.  The certificate retains exact Nullstellensatz identities
-for the six empty branches; both public programs verify those identities
+for the six empty cases; both public programs verify those identities
 directly.  The generator also derives the linear section defined by the
 kernel of evaluation at \(x\) and renders every computation-derived matrix,
-weight-space table, choice, determinant, minor, and B\'ezout coefficient printed in the
-manuscript into a checked TeX artifact.  A second checker independently
-verifies the resulting cover, linear section, and quotient minors.  We check the transcription of the
-source equations, the quotient criterion, equivariant generic trivialization,
+weight-space table, parameter row, determinant, minor, and B\'ezout
+coefficient printed in the manuscript into a checked TeX artifact.  A second
+checker independently verifies the resulting cover, linear section, and
+quotient minors.  We check the transcription of the source equations, the
+quotient criterion, equivariant generic trivialization,
 incidence descent, and function-field argument in the text; the programs do
 not address them.
 
