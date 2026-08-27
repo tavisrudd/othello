@@ -21,7 +21,8 @@ the resulting nonsplit extensions.
 
 ## Sources screened individually
 
-1. **“The submodule structure of Weyl modules for groups of type A1.”**
+1. **R. Carter and E. Cline, “The submodule structure of Weyl modules for
+   groups of type A1.”**
    DOI `10.1016/B978-0-12-633650-4.50021-7`.
    Read depth: **abstract/metadata only**, ScienceDirect result page; full text
    returned HTTP 403.  The metadata says it characterizes composition factors
@@ -54,6 +55,16 @@ the resulting nonsplit extensions.
    the tensor factors but does not, at the depth read, settle the Weyl-module
    extension used by C973.
 
+5. **Bjørn Cattell-Ravdal, Erin Delargy, Akash Ganguly, Sean Guan, Trevor
+   Karn, Michael Perlman, and Saisudharshan Sivakumar, “Ideals preserved by
+   linear changes of coordinates in positive characteristic.”** arXiv
+   `2404.10544`.
+   Read depth: **abstract/metadata only**, arXiv search record.  The abstract
+   explicitly classifies invariant ideals by Doty carry patterns and gives
+   two-variable generator and syzygy results.  It is a current, directly
+   relevant bridge that the full audit must read before deciding how much of
+   the C973 digit filtration is standard carry-ideal structure.
+
 ## Search trace and coverage
 
 Queries included:
@@ -63,6 +74,7 @@ SL2 symmetric power exact sequence Frobenius twist determinant modular represent
 SL2 induced module exact sequence Frobenius twist symmetric power characteristic p
 "Submodules of symmetric powers of the natural module" Doty PDF
 "The submodule structure of Weyl modules" "A_1" 1976 PDF
+"carry patterns" symmetric powers GL2 Doty submodule lattice
 ```
 
 Covered: general web/arXiv indexing, the author's publication list, and
