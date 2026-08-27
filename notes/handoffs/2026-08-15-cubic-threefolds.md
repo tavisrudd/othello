@@ -55,16 +55,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   introduction, proof roadmaps, technical transitions, and consequences now
   use standard mathematical language; the QDM, its even restriction, and its
   generic coefficient field are introduced before the block construction. All
-  thirteen rebuilt pages have been reviewed, the full paper gate passes, and a
+  fourteen rebuilt pages have been reviewed, the full paper gate passes, and a
   fresh exposition referee returns Accept. Authority commits `26ed17e86` and
   `a19ec904f` are verified in standalone commits `03d6989` and `5ac9211` with
   byte-identical PDFs. The task remains open for the continuing manuscript and
   public formal-review prose pass. A later full cold-read protocol accepted the
-  manuscript and all thirteen PDF pages after prose-only cleanup of the public
-  claim-map descriptions.  The current generic-QDM clarification is synchronized
-  at authority `01cf1eddc` and standalone `bc3d52a`; the standalone gate and
-  exporter verification pass with byte-identical PDFs. C978 remains active by
-  author instruction. Card:
+  manuscript and every PDF page after prose-only cleanup of the public
+  claim-map descriptions.  The final local terminology refinements are
+  synchronized at authority `c11667cca` and standalone `802c030`; both gates
+  and exporter verification pass with byte-identical PDFs. C978 remains active
+  by author instruction. Card:
   `../cubic-threefolds-tasks/c978-cubic-m1-exposition-repairs.md`.
 - **C958 — explicit level-two parametrizations, active.**  The type-`I_1`
   splitting field, sixteen exceptional sections, marked-plane blowdown, and
