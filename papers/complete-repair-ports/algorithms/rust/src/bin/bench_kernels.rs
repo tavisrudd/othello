@@ -2,12 +2,14 @@ use std::hint::black_box;
 use std::time::Instant;
 
 use ergo_comp::{
-    compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
+    azure_lrc_12_2_2_counted, compile_binary_rank_one, compile_binary_target_subspace,
+    confinement_by_generators_field, gpu_checkpoint_mds_recovery,
+    gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair, schedule_repair_dag,
     ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
-    ternary_orbit_syndrome_search_correlated, CompositionTower, FiniteField, Gf4, Matrix,
-    OrbitOption, TowerLevel, WeightedRepairProblem, WeightedRepairWorkspace,
-    WeightedSchedulerBackend,
+    ternary_orbit_syndrome_search_correlated, CompositionTower, FiniteField, Gf4,
+    GpuCheckpointCapacities, Matrix, OrbitOption, Prime, QcLdpcCode, RepairTask, TowerLevel,
+    WeightedRepairProblem, WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
 
 fn next_u32(state: &mut u64) -> u32 {
@@ -117,6 +119,67 @@ fn jin_fu_hamming_spec(variant: &str) -> Option<usize> {
     }
     let dimension = fields.next()?.parse().ok()?;
     fields.next().is_none().then_some(dimension)
+}
+
+fn application_spec(variant: &str) -> Option<(&str, Vec<usize>)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "application" {
+        return None;
+    }
+    let application = fields.next()?;
+    if fields.next()? != "rust" {
+        return None;
+    }
+    let parameters = fields
+        .map(|field| field.parse().ok())
+        .collect::<Option<Vec<_>>>()?;
+    Some((application, parameters))
+}
+
+fn vector_repair_fixture(nodes: usize, subpacketization: usize) -> (Matrix, Vec<u16>, Matrix) {
+    let ambient = 8;
+    let coordinates = nodes * subpacketization;
+    let mut data = vec![0u8; ambient * coordinates];
+    let mut owners = Vec::with_capacity(coordinates);
+    for node in 0..nodes {
+        let kind = node & 3;
+        for symbol in 0..subpacketization {
+            let coordinate = node * subpacketization + symbol;
+            let row = 2 * kind + (symbol & 1);
+            data[row * coordinates + coordinate] = 1;
+            owners.push(node as u16);
+        }
+    }
+    let mut target_data = vec![0u8; ambient * ambient];
+    for diagonal in 0..ambient {
+        target_data[diagonal * ambient + diagonal] = 1;
+    }
+    (
+        Matrix::new::<2>(ambient, coordinates, data).unwrap(),
+        owners,
+        Matrix::new::<2>(ambient, ambient, target_data).unwrap(),
+    )
+}
+
+fn repair_dag_fixture(width: usize, layers: usize) -> Vec<RepairTask> {
+    assert!(width * layers <= 63);
+    let mut tasks = Vec::with_capacity(width * layers);
+    for layer in 0..layers {
+        let predecessors = if layer == 0 {
+            0
+        } else {
+            ((1u64 << width) - 1) << ((layer - 1) * width)
+        };
+        for task in 0..width {
+            let mut loads = vec![0u16; width];
+            loads[(task + layer) % width] = 1;
+            tasks.push(RepairTask {
+                predecessors,
+                loads: loads.into_boxed_slice(),
+            });
+        }
+    }
+    tasks
 }
 
 fn transfer_tower_spec(variant: &str) -> Option<(&str, usize, usize)> {
@@ -412,6 +475,108 @@ fn main() {
     let mut work = 0u64;
     let mut peak_states = 0u64;
     let mut checksum = 0u64;
+    if let Some((application, parameters)) = application_spec(&variant) {
+        for _ in 0..repetitions {
+            match (application, parameters.as_slice()) {
+                ("azure", &[demands, capacity]) => {
+                    let capacities = black_box([capacity as u32; 9]);
+                    let answer = azure_lrc_12_2_2_counted(&capacities, black_box(demands));
+                    work += answer.totals_checked;
+                    checksum += answer.repaired_count;
+                    black_box(answer);
+                }
+                ("rdag", &[width, layers]) => {
+                    let tasks = repair_dag_fixture(width, layers);
+                    let answer = schedule_repair_dag(&vec![1u16; width], &tasks, 1 << 28).unwrap();
+                    assert_eq!(usize::from(answer.slots), layers);
+                    work += answer.states_examined;
+                    checksum += u64::from(answer.slots);
+                    black_box(answer);
+                }
+                ("qc", &[lift, size]) => {
+                    let code =
+                        QcLdpcCode::new(2, 2, lift, vec![Some(0), Some(0), Some(0), Some(1)])
+                            .unwrap();
+                    let answer = code.search_trapping_set(size, 0, 1 << 32).unwrap();
+                    work += answer.candidates_examined;
+                    checksum += answer.answer.is_some() as u64;
+                    black_box(answer);
+                }
+                ("vector", &[nodes, subpacketization]) => {
+                    let (generator, owners, target) =
+                        vector_repair_fixture(nodes, subpacketization);
+                    let answer =
+                        minimum_node_span_repair::<Prime<2>>(&generator, &owners, &target, 1 << 16)
+                            .unwrap()
+                            .unwrap();
+                    assert_eq!(answer.node_cost, 4);
+                    work += answer.transitions;
+                    peak_states = peak_states.max(answer.generated_spans as u64);
+                    checksum += u64::from(answer.node_cost);
+                    black_box(answer);
+                }
+                ("gpu", &[shards, data_shards, failures]) => {
+                    let shard_nodes: Vec<_> = (0..shards).map(|node| node as u16).collect();
+                    let node_racks: Vec<_> = (0..shards).map(|node| (node / 8) as u16).collect();
+                    let failed_shards: Vec<_> = (0..failures).collect();
+                    let replacement_nodes: Vec<_> = (0..failures).map(|node| node as u16).collect();
+                    let mut capacities = vec![failures as u32; shards + 2];
+                    capacities[shards] = (data_shards * failures) as u32;
+                    capacities[shards + 1] = (data_shards * failures) as u32;
+                    let problem = gpu_checkpoint_mds_recovery(
+                        data_shards,
+                        &shard_nodes,
+                        &node_racks,
+                        &failed_shards,
+                        &replacement_nodes,
+                        &capacities,
+                        1 << 24,
+                    )
+                    .unwrap();
+                    let answer = problem.solve_adaptive().unwrap();
+                    assert_eq!(answer.repaired_count(), failures);
+                    work += answer.transitions_examined;
+                    peak_states = peak_states.max(answer.peak_pareto_states as u64);
+                    checksum += answer.repaired_count() as u64;
+                    black_box(answer);
+                }
+                ("gpu-compiled", &[shards, data_shards, failures]) => {
+                    let shard_nodes: Vec<_> = (0..shards).map(|node| node as u16).collect();
+                    let node_racks: Vec<_> = (0..shards).map(|node| (node / 8) as u16).collect();
+                    let failed_shards: Vec<_> = (0..failures).collect();
+                    let replacement_nodes = vec![0u16; failures];
+                    let node_capacities = vec![failures as u32; shards];
+                    let answer = gpu_checkpoint_mds_same_rack_recovery(
+                        data_shards,
+                        &shard_nodes,
+                        &node_racks,
+                        &failed_shards,
+                        &replacement_nodes,
+                        GpuCheckpointCapacities {
+                            nodes: &node_capacities,
+                            same_rack: (data_shards * failures) as u32,
+                            cross_rack: (data_shards * failures) as u32,
+                        },
+                    )
+                    .unwrap()
+                    .unwrap();
+                    assert_eq!(answer.failure_count as usize, failures);
+                    assert_eq!(answer.data_shards as usize, data_shards);
+                    assert_eq!(answer.helper_shards.len(), failures * data_shards);
+                    work += answer.assignments;
+                    checksum += u64::from(answer.failure_count);
+                    black_box(answer);
+                }
+                _ => panic!("unknown application benchmark variant"),
+            }
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
     if let Some(dimension) = jin_fu_hamming_spec(&variant) {
         let functional_dual_basis = gf4_hamming_dual_basis(dimension);
         let block_count = functional_dual_basis.cols();

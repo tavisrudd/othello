@@ -1,12 +1,13 @@
 use anyhow::{bail, Context, Result};
 use clap::{Parser, Subcommand};
 use ergo_comp::{
-    azure_lrc_12_2_2_upgrade_domains, ceph_xor_repair_supports, compile_binary_rank_one,
+    azure_lrc_12_2_2_counted, ceph_xor_repair_supports, compile_binary_rank_one,
     compile_binary_target_subspace, confinement_by_generators_field, gpu_checkpoint_mds_recovery,
-    minimum_node_span_repair, parse_ceph_xor_layers, schedule_repair_dag, CephXorLayer,
-    CoefficientWitness, CompositionTable, CompositionTower, ConfinementSector, CostTable,
-    FiniteField, Gf4, Matrix, MatrixCoefficientWitness, Prime, QcLdpcCode, RepairTask, TowerLevel,
-    TowerWitness, WeightedRepairProblem, WeightedSchedulerBackend,
+    gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair, parse_ceph_xor_layers,
+    schedule_repair_dag, CephXorLayer, CoefficientWitness, CompositionTable, CompositionTower,
+    ConfinementSector, CostTable, FiniteField, Gf4, GpuCheckpointCapacities, Matrix,
+    MatrixCoefficientWitness, Prime, QcLdpcCode, RepairTask, TowerLevel, TowerWitness,
+    WeightedRepairProblem, WeightedSchedulerBackend,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -1088,10 +1089,16 @@ fn application(input: ApplicationInput) -> Result<Value> {
             let capacities: [u32; 9] = capacities
                 .try_into()
                 .map_err(|_| anyhow::anyhow!("Azure LRC needs nine upgrade-domain capacities"))?;
-            application_schedule_output(azure_lrc_12_2_2_upgrade_domains(
-                &capacities,
-                demand_count,
-            )?)
+            let answer = azure_lrc_12_2_2_counted(&capacities, demand_count);
+            Ok(json!({
+                "application": "azure-lrc-12-2-2",
+                "backend": "counted-load-types",
+                "repaired_count": answer.repaired_count,
+                "complete": answer.repaired_count == demand_count as u64,
+                "mode_counts": answer.mode_counts,
+                "total_loads": answer.total_loads,
+                "totals_checked": answer.totals_checked,
+            }))
         }
         ApplicationInput::RepairDag {
             capacities,
@@ -1182,15 +1189,71 @@ fn application(input: ApplicationInput) -> Result<Value> {
             replacement_nodes,
             capacities,
             option_budget,
-        } => application_schedule_output(gpu_checkpoint_mds_recovery(
-            data_shards,
-            &shard_nodes,
-            &node_racks,
-            &failed_shards,
-            &replacement_nodes,
-            &capacities,
-            option_budget,
-        )?),
+        } => {
+            let common_rack = replacement_nodes
+                .first()
+                .and_then(|&node| node_racks.get(usize::from(node)))
+                .copied();
+            let one_replacement_rack = replacement_nodes.is_empty()
+                || common_rack.is_some_and(|rack| {
+                    replacement_nodes
+                        .iter()
+                        .all(|&node| node_racks.get(usize::from(node)).copied() == Some(rack))
+                });
+            let all_helpers_remote = shard_nodes.iter().enumerate().all(|(shard, node)| {
+                failed_shards.contains(&shard) || !replacement_nodes.contains(node)
+            });
+            if capacities.len() == node_racks.len() + 2
+                && one_replacement_rack
+                && all_helpers_remote
+            {
+                let node_count = node_racks.len();
+                if let Some(answer) = gpu_checkpoint_mds_same_rack_recovery(
+                    data_shards,
+                    &shard_nodes,
+                    &node_racks,
+                    &failed_shards,
+                    &replacement_nodes,
+                    GpuCheckpointCapacities {
+                        nodes: &capacities[..node_count],
+                        same_rack: capacities[node_count],
+                        cross_rack: capacities[node_count + 1],
+                    },
+                )? {
+                    let mut helper_shards = Vec::with_capacity(answer.failure_count as usize);
+                    for failure in 0..answer.failure_count as usize {
+                        let mut helpers = Vec::with_capacity(answer.data_shards as usize);
+                        for slot in 0..answer.data_shards as usize {
+                            let Some(shard) = answer.helper_shard(failure, slot) else {
+                                bail!("compiled GPU-checkpoint witness is incomplete");
+                            };
+                            helpers.push(shard);
+                        }
+                        helper_shards.push(helpers);
+                    }
+                    return Ok(json!({
+                        "application": "gpu-checkpoint-mds",
+                        "backend": "aggregate-capacity-cyclic-witness",
+                        "complete": true,
+                        "repaired_count": answer.failure_count,
+                        "helper_shards": helper_shards,
+                        "node_loads": answer.node_loads,
+                        "same_rack_load": answer.same_rack_load,
+                        "cross_rack_load": answer.cross_rack_load,
+                        "assignments": answer.assignments,
+                    }));
+                }
+            }
+            application_schedule_output(gpu_checkpoint_mds_recovery(
+                data_shards,
+                &shard_nodes,
+                &node_racks,
+                &failed_shards,
+                &replacement_nodes,
+                &capacities,
+                option_budget,
+            )?)
+        }
     }
 }
 

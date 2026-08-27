@@ -65,6 +65,13 @@ def jin_fu_hamming_spec(variant: str):
     return fields[1], int(fields[2])
 
 
+def application_spec(variant: str):
+    fields = variant.split(":")
+    if len(fields) < 4 or fields[0] != "application" or fields[2] != "cpsat":
+        return None
+    return fields[1], tuple(int(field) for field in fields[3:])
+
+
 def orbit_grid_spec(variant: str):
     fields = variant.split(":")
     if len(fields) != 6 or fields[:2] != ["orbit-grid", "cpsat"]:
@@ -349,12 +356,14 @@ def main() -> None:
     transfer_tower = transfer_tower_spec(variant)
     jin_fu = jin_fu_spec(variant)
     jin_fu_hamming = jin_fu_hamming_spec(variant)
+    application_case = application_spec(variant)
     orbit_grid = orbit_grid_spec(variant)
     cp_model = None
     if (
         transfer_tower is not None
         or jin_fu is not None
         or jin_fu_hamming is not None
+        or application_case is not None
         or orbit_grid is not None
         or variant in ("scheduler-cpsat", "scheduler-cpsat-small")
         or (grid is not None and grid[0] == "cpsat")
@@ -368,7 +377,199 @@ def main() -> None:
         cp_model = loaded_cp_model
     work = peak_states = checksum = 0
     started = perf_counter_ns()
-    if orbit_grid is not None:
+    if application_case is not None:
+        assert cp_model is not None
+        application, parameters = application_case
+        model = cp_model.CpModel()
+        expected_checksum = 0
+        if application == "azure":
+            demands, capacity = parameters
+            choices = [
+                [model.new_bool_var(f"x_{demand}_{option}") for option in range(4)]
+                for demand in range(demands)
+            ]
+            for family in choices:
+                model.add_exactly_one(family)
+            loads = []
+            for demand in range(demands):
+                target = demand % 12
+                local_index = target % 6
+                options = []
+                local = [0] * 9
+                for domain in range(6):
+                    if domain != local_index:
+                        local[domain] = 1
+                local[6] = 1
+                options.append(local)
+                global_zero = [0] * 9
+                for data in range(12):
+                    if data != target:
+                        global_zero[data % 6] += 1
+                global_zero[7] = 1
+                options.append(global_zero)
+                global_one = global_zero.copy()
+                global_one[7] = 0
+                global_one[8] = 1
+                options.append(global_one)
+                options.append([0] * 9)
+                loads.append(options)
+            for resource_index in range(9):
+                model.add(
+                    sum(
+                        loads[demand][option][resource_index] * choices[demand][option]
+                        for demand in range(demands)
+                        for option in range(4)
+                    )
+                    <= capacity
+                )
+            model.maximize(
+                sum(
+                    choices[demand][option]
+                    for demand in range(demands)
+                    for option in range(3)
+                )
+            )
+            expected_checksum = demands
+        elif application == "azure-counted":
+            demands, capacity = parameters
+            multiplicities = [
+                demands // 6 + int(kind < demands % 6) for kind in range(6)
+            ]
+            counts = [
+                [
+                    model.new_int_var(0, multiplicities[kind], f"x_{kind}_{mode}")
+                    for mode in range(3)
+                ]
+                for kind in range(6)
+            ]
+            for kind in range(6):
+                model.add(sum(counts[kind]) <= multiplicities[kind])
+            local = sum(counts[kind][0] for kind in range(6))
+            global_zero = sum(counts[kind][1] for kind in range(6))
+            global_one = sum(counts[kind][2] for kind in range(6))
+            global_total = global_zero + global_one
+            for domain in range(6):
+                served_type = sum(counts[domain])
+                model.add(local + 2 * global_total - served_type <= capacity)
+            model.add(local <= capacity)
+            model.add(global_zero <= capacity)
+            model.add(global_one <= capacity)
+            model.maximize(local + global_total)
+            expected_checksum = demands
+        elif application == "rdag":
+            width, layers = parameters
+            task_count = width * layers
+            horizon = task_count
+            starts = [model.new_int_var(0, horizon - 1, f"s_{task}") for task in range(task_count)]
+            placed = [
+                [model.new_bool_var(f"x_{task}_{slot}") for slot in range(horizon)]
+                for task in range(task_count)
+            ]
+            for task in range(task_count):
+                model.add_exactly_one(placed[task])
+                model.add(starts[task] == sum(slot * placed[task][slot] for slot in range(horizon)))
+                layer = task // width
+                if layer:
+                    for predecessor in range((layer - 1) * width, layer * width):
+                        model.add(starts[task] >= starts[predecessor] + 1)
+            for resource_index in range(width):
+                for slot in range(horizon):
+                    model.add(
+                        sum(
+                            placed[task][slot]
+                            for task in range(task_count)
+                            if (task % width + task // width) % width == resource_index
+                        )
+                        <= 1
+                    )
+            makespan = model.new_int_var(1, horizon, "makespan")
+            model.add_max_equality(makespan, [start + 1 for start in starts])
+            model.minimize(makespan)
+            expected_checksum = layers
+        elif application == "qc":
+            lift, size = parameters
+            variables = [model.new_bool_var(f"x_{variable}") for variable in range(2 * lift)]
+            model.add(sum(variables) == size)
+            model.add_bool_or([variables[0], variables[lift]])
+            for check_group, shifts in enumerate(((0, 0), (0, 1))):
+                for position in range(lift):
+                    active = [
+                        variables[group * lift + (position - shifts[group]) % lift]
+                        for group in range(2)
+                    ]
+                    half = model.new_int_var(0, 1, f"h_{check_group}_{position}")
+                    model.add(sum(active) == 2 * half)
+            expected_checksum = 0
+        elif application == "vector":
+            nodes, subpacketization = parameters
+            ambient = 8
+            selected = [model.new_bool_var(f"n_{node}") for node in range(nodes)]
+            for demand in range(ambient):
+                coefficients = [
+                    model.new_bool_var(f"a_{demand}_{coordinate}")
+                    for coordinate in range(nodes * subpacketization)
+                ]
+                for node in range(nodes):
+                    for symbol in range(subpacketization):
+                        model.add(coefficients[node * subpacketization + symbol] <= selected[node])
+                for row in range(ambient):
+                    active = [
+                        coefficients[node * subpacketization + symbol]
+                        for node in range(nodes)
+                        for symbol in range(subpacketization)
+                        if 2 * (node & 3) + (symbol & 1) == row
+                    ]
+                    half = model.new_int_var(0, len(active) // 2 + 1, f"h_{demand}_{row}")
+                    model.add(sum(active) == int(row == demand) + 2 * half)
+            model.minimize(sum(selected))
+            expected_checksum = 4
+        elif application in ("gpu", "gpu-compiled"):
+            shards, data_shards, failures = parameters
+            survivors = range(failures, shards)
+            choices = [
+                {
+                    shard: model.new_bool_var(f"x_{failure}_{shard}")
+                    for shard in survivors
+                }
+                for failure in range(failures)
+            ]
+            for family in choices:
+                model.add(sum(family.values()) == data_shards)
+            for shard in survivors:
+                model.add(sum(family[shard] for family in choices) <= failures)
+            same_rack = [shard for shard in survivors if shard < 8]
+            cross_rack = [shard for shard in survivors if shard >= 8]
+            model.add(
+                sum(family[shard] for family in choices for shard in same_rack)
+                <= data_shards * failures
+            )
+            model.add(
+                sum(family[shard] for family in choices for shard in cross_rack)
+                <= data_shards * failures
+            )
+            expected_checksum = failures
+        else:
+            raise RuntimeError(f"unknown application CP-SAT benchmark: {application}")
+        solver = cp_model.CpSolver()
+        solver.parameters.num_workers = 1
+        solver.parameters.random_seed = 0
+        for _ in range(repetitions):
+            status = solver.solve(model)
+            if application == "qc":
+                if status != cp_model.INFEASIBLE:
+                    raise RuntimeError(f"expected infeasibility: {solver.status_name(status)}")
+            elif status != cp_model.OPTIMAL:
+                raise RuntimeError(f"CP-SAT did not prove optimality: {solver.status_name(status)}")
+            objective = (
+                expected_checksum
+                if application in ("gpu", "gpu-compiled", "qc")
+                else round(solver.objective_value)
+            )
+            assert objective == expected_checksum
+            work += solver.num_branches
+            peak_states = max(peak_states, solver.num_conflicts)
+            checksum += expected_checksum
+    elif orbit_grid is not None:
         assert cp_model is not None
         families, target = orbit_grid_problem(orbit_grid)
         model = cp_model.CpModel()

@@ -23,10 +23,12 @@ pub mod transfer;
 pub mod witness;
 
 pub use applications::{
-    azure_lrc_12_2_2_upgrade_domains, ceph_xor_repair_supports, gpu_checkpoint_mds_recovery,
-    minimum_node_span_repair, parse_ceph_xor_layers, schedule_repair_dag, ApplicationError,
-    CephRepairAnswer, CephXorLayer, NodeSpanRepairAnswer, QcLdpcCode, QcTrappingSetAnswer,
-    RepairDagAnswer, RepairTask,
+    azure_lrc_12_2_2_counted, azure_lrc_12_2_2_upgrade_domains, ceph_xor_repair_supports,
+    gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair,
+    parse_ceph_xor_layers, schedule_repair_dag, ApplicationError, AzureLrcBatchAnswer,
+    CephRepairAnswer, CephXorLayer, GpuCheckpointBatchAnswer, GpuCheckpointCapacities,
+    NodeSpanRepairAnswer, QcLdpcCode, QcSearchResult, QcTrappingSetAnswer, RepairDagAnswer,
+    RepairTask,
 };
 pub use composition::{
     CompositionAnswer, CompositionError, CompositionTable, CompositionTower, CostTable,

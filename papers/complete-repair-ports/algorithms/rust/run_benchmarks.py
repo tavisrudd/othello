@@ -202,6 +202,7 @@ def main() -> None:
     parser.add_argument("--tower-stream-only", action="store_true")
     parser.add_argument("--ergo-thread-sweep-only", action="store_true")
     parser.add_argument("--streaming-input-only", action="store_true")
+    parser.add_argument("--applications-only", action="store_true")
     parser.add_argument("--baseline-binary", type=Path)
     parser.add_argument("--candidate-binary", type=Path, default=BINARY)
     parser.add_argument("--locality-key", default="scheduler_locality_ab")
@@ -210,6 +211,71 @@ def main() -> None:
         raise SystemExit("pass --write to record a fresh noncanonical benchmark")
     if not BINARY.exists():
         raise SystemExit("build target/release/bench_kernels first")
+
+    if args.applications_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --applications-only")
+        value = json.loads(OUTPUT.read_text())
+        cases = {
+            "azure_lrc_batch": ("azure", (100_000, 100_000), 100_000, 1),
+            "repair_dag": ("rdag", (21, 3), 1_000, args.ab_rounds),
+            "qc_ldpc_codeword": ("qc", (50_000, 4), 100, args.ab_rounds),
+            "vector_node_span": ("vector", (64, 2), 1_000, args.ab_rounds),
+            "gpu_checkpoint_mds": ("gpu-compiled", (10_000, 6_000, 64), 100, 1),
+        }
+        measurements = {}
+        for name, (application, parameters, rust_repetitions, cpsat_rounds) in cases.items():
+            suffix = ":".join(map(str, parameters))
+            rust = f"application:{application}:rust:{suffix}"
+            cpsat = f"application:{application}:cpsat:{suffix}"
+            rust_result = run_group((rust,), rust_repetitions, args.ab_rounds)[rust]
+            cpsat_result = run_group((cpsat,), 1, cpsat_rounds)[cpsat]
+            if rust_result["checksum_per_solve"] != cpsat_result["checksum_per_solve"]:
+                raise RuntimeError(f"application checksum mismatch: {name}")
+            measurements[name] = {
+                "rust": rust_result,
+                "cpsat": cpsat_result,
+                "rust_speedup_over_cpsat": ratio(
+                    cpsat_result["median_ns_per_solve"],
+                    rust_result["median_ns_per_solve"],
+                ),
+                "rounds": {"rust": args.ab_rounds, "cpsat": cpsat_rounds},
+            }
+            if name == "azure_lrc_batch":
+                counted = f"application:azure-counted:cpsat:{suffix}"
+                counted_result = run_group((counted,), 1, args.ab_rounds)[counted]
+                if rust_result["checksum_per_solve"] != counted_result["checksum_per_solve"]:
+                    raise RuntimeError("Azure counted CP-SAT checksum mismatch")
+                measurements[name]["counted_cpsat"] = counted_result
+                measurements[name]["rust_speedup_over_counted_cpsat"] = ratio(
+                    counted_result["median_ns_per_solve"],
+                    rust_result["median_ns_per_solve"],
+                )
+                measurements[name]["rounds"]["counted_cpsat"] = args.ab_rounds
+        value["application_comparisons"] = {
+            "rounds": args.ab_rounds,
+            "protocol": {
+                "common": "pinned-core deterministic exact solves; checksum agreement required",
+                "rust": "application-specific exact structural kernel, including input compilation",
+                "cpsat": "single-worker OR-Tools 9.14 model of the same bounded decision or optimization problem",
+            },
+            "sources": {
+                "azure_lrc_batch": "Huang et al. (2012), Azure LRC(12,2,2) placement",
+                "repair_dag": "RepairBoost (ATC 2021), repair-DAG scheduling abstraction",
+                "qc_ldpc_codeword": "QC-LDPC lifted parity-check codeword decision",
+                "vector_node_span": "subpacketized linear repair with one cost per helper node",
+                "gpu_checkpoint_mds": "REFT (SC 2023), erasure-coded in-memory checkpoints after placement",
+            },
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "benchmark_python_sha256": sha256(ROOT / "benchmark_python.py"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "measurements": measurements,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
 
     if args.streaming_input_only:
         if not OUTPUT.exists():
