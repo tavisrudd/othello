@@ -194,7 +194,7 @@ cargo doc --all-features --open
 
 The crate is at version 0.1.0; lower-level library interfaces may still evolve.
 
-## Mathematical and evidence boundary
+## Mathematical and evidence scope
 
 The companion paper, `../compositional_recovery.pdf`, proves the labelled
 composition and transfer laws from which the recovery compiler is derived.

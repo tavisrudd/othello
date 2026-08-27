@@ -1,4 +1,4 @@
-# Verification boundary
+# Verification scope
 
 The manuscript has two independently inspectable verification layers.
 
@@ -35,7 +35,7 @@ nix develop .#manuscript --command \
   python3 verification/verify_release.py
 ```
 
-checks the public source inventory, metadata, formal-boundary metadata,
+checks the public source inventory, metadata, formal-coverage metadata,
 machine-readable annotations, TeX warnings, expected page count, and bytewise
 identity of the tracked PDF with a deterministic clean build. It does not
 infer formal coverage from prose or from older external libraries.
@@ -45,10 +45,10 @@ Every listed text file is scanned for private paths and workflow identifiers.
 In a standalone checkout, the verifier also requires the Git tracked-file set
 to equal that manifest, apart from the exporter's optional `.gitignore`,
 `PROVENANCE.md`, and `export-manifest.json`.  Those files are scanned when
-present; any other unlisted tracked file fails the release gate.
+present; any other unlisted tracked file fails the release check.
 
 The release verifier also runs `verification/check_ergodis_public.py`. That
-gate scans the complete ergodis package, including code, comments, examples,
+check scans the complete ergodis package, including code, comments, examples,
 fixtures, benchmark labels, and evidence, for nonpublic identifiers, paths, or
 development residue. The algorithm evidence has an independent canonical
 replay:

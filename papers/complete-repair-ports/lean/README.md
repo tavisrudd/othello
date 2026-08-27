@@ -21,7 +21,7 @@ not formalized in this companion and are
 classified as absent in the claim map. No literature theorem is declared as a
 Lean axiom.
 
-The source and annotation boundary can be checked without invoking Lean:
+The source and annotation scope can be checked without invoking Lean:
 
 ```text
 python3 verification/check_formal_artifact.py --source-only

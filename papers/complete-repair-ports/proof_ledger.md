@@ -83,7 +83,7 @@ over `dim T=t` proves the uniform ranked statement.
 
 For nonzero `B`, choose one target vector on which `B` is nonzero. Its
 functional-dual tuple has at least `d(O^perp)` nonzero blocks, hence at least
-`d(O^perp)-1` nonzero helper blocks outside the target. The finite gate
+`d(O^perp)-1` nonzero helper blocks outside the target. The finite outer-distance condition
 `d(O^perp)>r+1` therefore removes every nonzero functional sector at radius
 `r`. The exact formula reduces to its zero-functional cost
 `rho_T(I)+d(I^perp)`. Outer dual-distance growth makes this automatic
@@ -92,7 +92,7 @@ uniformly for fixed `r`.
 ### Dimension-by-dimension confinement
 
 Every recovered `t`-subspace costs at least `M_t`, and one attains `M_t`.
-Applying the fixed-subspace equivalence gives the uniform gate. The singleton
+Applying the fixed-subspace equivalence gives the uniform condition. The singleton
 conversion adds one target coordinate, so `z_x = M_1 + 1 + d(I^perp)`.
 
 ## Consequence checks
@@ -102,7 +102,7 @@ conversion adds one target coordinate, so `z_x = M_1 + 1 + d(I^perp)`.
   subcode gives the reverse inequality. If the target columns are dependent,
   restriction along a section of `G_P` turns the identity system into a system
   on `im G_P`; conversely, target-kernel equations add the missing coefficient
-  directions without helpers. The fixed-target escape cost is therefore
+  directions without helpers. The fixed-target nonconfinement cost is therefore
   `kappa_C(P)+d(C^perp)`, including the dependent-target case.
 - **MDS formula:** the proof computes
   `dim(span G_P intersect span G_H) = max(0,u+|H|-k)` from the uniform column
@@ -119,7 +119,7 @@ conversion adds one target coordinate, so `z_x = M_1 + 1 + d(I^perp)`.
   first-moment inequalities, not by dual-distance growth alone.
 - **Service rate:** the fixed-length hypothesis `d(O^perp)>r+1` first excludes
   nonzero outer-functional systems; the inner threshold then excludes
-  zero-functional escape. Only inclusion-minimal supports matter. A flow on a
+  zero-functional nonconfinement term. Only inclusion-minimal supports matter. A flow on a
   nonminimal upward-closed recovery set moves to a contained minimal set and
   weakly decreases all loads; cross-block supersets create no extra capacity.
 
@@ -154,7 +154,7 @@ conversion adds one target coordinate, so `z_x = M_1 + 1 + d(I^perp)`.
   then solves the projective multiplicity vector using the real nonsingularity
   of the point--hyperplane incidence matrix.
 
-## Evidence boundary
+## Evidence scope
 
 The paper-local Lean companion proves only the associated-pair exact sequence.
 Its claims manifest marks the RGHW, confinement, asymptotic, reliability,

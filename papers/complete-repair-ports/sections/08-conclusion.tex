@@ -8,17 +8,19 @@ for recovered subspaces of each dimension.  They are not, however, sufficient
 recursive state for finite concatenation.
 
 Exact finite transfer is captured by the prescribed-coset support functions
-indexed by outer functional labels.  Minimizing their blockwise costs over the
-complete outer functional dual gives $\Gamma_{j,T}(O,I)$, the minimum cost of a
-nonconfined normalized recovery system.  The same functions compose
-associatively by min--sum substitution through finite towers.  The numerical
-tables carry fibrewise minima; retaining minimizing lifts alongside them
-transports optimizing coefficient-level witnesses.  Rank-one probes
-characterize the numerical contextual quotient, and the rank-one bottleneck
-controls simultaneous confinement at every recoverable rank.  Below that
-bottleneck, restriction and zero-extension preserve the complete bounded
-coefficient and support families, hence every reliability or scheduling law
-determined by them.
+indexed by the intermediate functional each block must realize.  Minimizing
+their blockwise costs over all compatible outer labels gives
+$\Gamma_{j,T}(O,I)$, the minimum cost of a normalized recovery that leaves the
+target block.  The same labelled costs compose by min--sum through finite
+towers.  The numerical table stores one minimum per label; storing a
+backpointer as well recovers an optimizing coefficient-level witness.  At
+rank one, tests by outer dual lines distinguish exactly what any outer code can
+observe.  Moreover, any higher-rank nonconfinement witness contains a rank-one
+nonconfinement witness of no
+larger cost.  Thus rank-one confinement controls every recoverable rank, and
+below that threshold restriction and zero-extension preserve all bounded
+coefficient and support families and the reliability or scheduling laws
+defined from them.
 
 The additive threshold
 \[
@@ -30,7 +32,7 @@ Restriction and zero-extension then preserve normalized equations and exact
 helper supports, not only a locality value.  This coefficient-level bijection
 yields the positive-density and bounded service-rate transfers; the
 one-coordinate weighted formula can remain exact even when the ordinary
-outer-distance gate fails.
+outer-distance condition fails.
 
 The separations identify the cost of each projection.  The complete RGHW
 hierarchy determines minimum helper unions but not the overlap law governing
@@ -48,7 +50,7 @@ ergodis evaluates the closure theorem rather than serving as evidence for it.
 Its min--sum compiler stores labelled minima and predecessor lifts, returning
 exact hierarchical costs and replayable witnesses; its scheduler then optimizes
 the resulting recovery choices under heterogeneous capacities.  The recorded
-matched exact-control comparisons measure this implementation boundary on declared instances
+matched exact-control comparisons measure this tradeoff on declared instances
 and do not enter any proof.
 
 Two extensions require different state.  Disjoint simultaneous service is an

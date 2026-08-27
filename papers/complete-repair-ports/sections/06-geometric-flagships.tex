@@ -11,7 +11,10 @@ Assume $m\geq2$, put
  N=\frac{q^m-1}{q-1},
 \]
 and let $A$ be an $m\times N$ matrix containing one representative of every
-point of $\operatorname{PG}(m-1,q)$.  Define the inner code by
+point of $\operatorname{PG}(m-1,q)$.  Here
+$\operatorname{PG}(m-1,q)$ is the set of one-dimensional subspaces of
+$\F_q^m$, and $A$ chooses one nonzero vector from each such subspace.  Define
+the inner code by
 \begin{equation}
  I_m^\perp=\{(a,aA):a\in\F_q^m\}.
  \label{eq:projective-inner-dual}
@@ -42,14 +45,17 @@ and
 \end{equation}
 Hence
 \begin{equation}
- \Gamma_t:=M_t(S_m,0)+d(I_m^\perp)
+ C_t:=M_t(S_m,0)+d(I_m^\perp)
  =\frac{q^m-q^{m-t}}{q-1}+q^{m-1}+1.
  \label{eq:projective-thresholds}
 \end{equation}
-In outer families with dual distance tending to infinity, $\Gamma_t$ is the
-eventual first nonconfined helper cost at recovered dimension $t$.
+In outer families with dual distance tending to infinity, the collapsed
+threshold $C_t$ equals $\Gamma_{j,t}(O,I_m)$ once the outer dual distance
+reaches $C_t+1$.  Equivalently, at every fixed helper
+radius the corresponding confinement statement holds for all sufficiently
+large members of the family.
 The family is non-MDS for $m\geq2$; for $m\geq3$ the successive increments
-of $\Gamma_t$ are unequal.
+of $C_t$ are unequal.
 \end{theorem}
 
 \begin{proof}
@@ -105,10 +111,15 @@ indexed by
  =\bigl(\operatorname{span}F\bigr)^\perp,
 \]
 which has dimension $m-\rank(F)$.
+Write $\qbinom ab$ for the Gaussian binomial coefficient, the number of
+$b$-dimensional vector subspaces of $\F_q^a$.  A projective $r$-frame here
+means $r$ linearly independent projective points, or equivalently the
+projectivization of a vector-space basis of its $r$-dimensional span.
 
 \begin{theorem}[Projective rank reliability]
 \label{thm:projective-reliability}
 \coverage{absent}%
+\emph{Exact probability.}
 The probability of retaining at least $t$ independent target recovery
 equations is
 \begin{equation}
@@ -118,6 +129,7 @@ equations is
  (1-s)^{|F|}s^{N-|F|}.
  \label{eq:projective-rank-reliability}
 \end{equation}
+\emph{Closed form.}
 Writing $N_v=(q^v-1)/(q-1)$, this equals
 \begin{equation}
  R_t(s)=
@@ -126,6 +138,7 @@ Writing $N_v=(q^v-1)/(q-1)$, this equals
  (-1)^{u-v}q^{\binom{u-v}{2}}s^{N-N_v}.
  \label{eq:projective-mobius-reliability}
 \end{equation}
+\emph{Endpoint behavior.}
 Its endpoint terms are
 \begin{align}
  R_t(s)&=\qbinom{m}{t}s^{M_t}+O(s^{M_t+1})
@@ -143,6 +156,11 @@ where
 \]
 is the number of unordered projective $r$-frames.
 \end{theorem}
+
+The first endpoint says that rare successful recovery is dominated by the
+$\qbinom mt$ minimum helper supports of size $M_t$.  The second says that
+near-perfect availability first fails on a smallest projective frame whose
+rank exceeds the allowed failure span.
 
 \begin{proof}
 Recovery of $t$ independent target combinations is possible exactly when
@@ -176,8 +194,9 @@ its span and then its unordered projective bases gives $B_{m,m-t+1}$.
 \end{proof}
 
 At the same helper length, the simplex presentation is characterized by its
-first recovery cost.  This is the length-$N$, multiplicity-one specialization
-of Bonisoli's classification of linear equidistant codes
+first recovery cost: equality means that minimum cost is $q^{m-1}$.  This is
+the length-$N$, multiplicity-one specialization of Bonisoli's classification
+of linear equidistant codes, whose nonzero words all have the same weight,
 \cite{Bonisoli1984}; the proof below records the precise zero-column and
 projective-multiplicity conventions used here.
 
@@ -208,7 +227,9 @@ $(q^{m-1}-1)/(q-1)$.
 
 Let $c$ be the vector of projective column multiplicities.  The
 point--hyperplane incidence matrix is square, and its real Gram matrix has
-the form $(r-\lambda)I+\lambda J$ with $r>\lambda$.  It is nonsingular, so
+the form $(r-\lambda)I+\lambda J$: here $r$ is the number of hyperplanes
+through one point and $\lambda$ the number through two distinct points, with
+$r>\lambda$.  It is nonsingular, so
 the constant hyperplane-sum equations have the unique solution
 $c=\mathbf1$.  Conversely, the simplex matrix has constant nonzero weight
 $q^{m-1}$.

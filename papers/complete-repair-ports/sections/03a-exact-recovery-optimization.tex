@@ -21,6 +21,9 @@ write
 for its contribution to the outer restriction map, and let
 $\lambda_i(b)$ be the prescribed-coset support cost of the inner label $b$.
 Different inner blocks may have different cost functions.
+For chosen block labels $b_1,\ldots,b_N$, the total outer label is
+$\sum_iA_i(b_i)$; the dynamic program enforces that this sum equals the
+requested label $c$.
 
 \begin{proposition}[Exact hierarchical recovery optimizer]
 \label{prop:exact-hierarchical-optimizer}
@@ -42,9 +45,6 @@ after adjoining its target-image labels to the state.
 If every label is enumerated, put $Q=q^{mt}$ and $S=q^{st}$.  The direct
 table algorithm uses $O(NQS)$ min--sum transitions, $O(Q)$ working cost
 memory, and $O(NQ)$ predecessor entries when all witnesses are retained.
-Unreachable labels, quotient coordinates, projectively equivalent columns,
-and repeated block types may be compiled out without changing the optimum or
-the replayed witness.
 \end{proposition}
 
 \begin{proof}
@@ -61,6 +61,14 @@ invariant applied to the paired labels in~\eqref{eq:target-cost-composition}.
 \uses{prop:prescribed-coset-composition}%
 \proves{prop:exact-hierarchical-optimizer}%
 \end{proof}
+
+The implementation also removes unreachable labels and merges states only
+when an explicit expansion map identifies each reduced choice with original
+block labels of the same cost.  Backtracking through that map recovers an
+original-instance witness.  Quotient coordinates, projectively equivalent
+columns, and repeated block types are instances of this implementation rule;
+they are not additional claims of Proposition
+\ref{prop:exact-hierarchical-optimizer}.
 
 The resulting table supplies all exact helper costs needed by the finite
 confinement formula, including its zero and nonzero outer-functional sectors.
@@ -106,6 +114,11 @@ distinct states on one shell are incomparable in the componentwise order, so
 ordinary Pareto-dominance pruning cannot remove either one.  The grading is
 therefore both an exact compression and a certificate of the limit of that
 common pruning rule.
+
+For example, if every served repair adds unit total load, all states serving
+$r$ demands lie on $\sum_hu_h=r$.  At a fixed served count, decreasing one
+helper load necessarily increases another, so neither load vector dominates
+the other; objective-aware Pareto pruning cannot discard either state.
 \end{proposition}
 
 \begin{proof}
@@ -121,17 +134,17 @@ antichain assertion.
 \proves{prop:capacitated-repair-scheduling}%
 \end{proof}
 
-\subsection{Measured solver boundary}
+\subsection{Measured performance and solver choice}
 
 The scientific role of the implementation is the exact executable semantics
 above.  The measurements in this subsection assess engineering reach and the
-boundary with a general solver; they are not mathematical evidence or the
+point at which a general solver becomes preferable; they are not mathematical evidence or the
 principal contribution of the software.
 
 The specialized dynamic programs are most useful when compilation exposes a
 small algebraic state space.  They are not replacements for a general
 constraint solver when the residual model contains unrelated side
-constraints.  The fair deployment boundary is therefore:
+constraints.  The appropriate deployment rule is therefore:
 \[
  \text{algebraic compilation}
  \longrightarrow
@@ -140,56 +153,72 @@ constraints.  The fair deployment boundary is therefore:
    \text{CP-SAT},&\text{for the remaining general constraints}.
  \end{cases}
 \]
-Direct CP-SAT is an appropriate end-to-end baseline.  A second,
+CP-SAT combines constraint programming, satisfiability, and linear-relaxation
+methods~\cite{PerronEtAl2023}; it is therefore an appropriate end-to-end
+baseline.  A second,
 \emph{structured CP-SAT} baseline receives the same symmetry reduction and
 algebraic preprocessing as ergodis, isolating the value of the specialized
 state engine from the value of compilation itself.
 
+\paragraph{Measurement protocol.}
+The measurements were made on an AMD Ryzen AI 9 HX 370 under Linux.  Each
+paired program used the same selected logical CPU, and their order was rotated
+to limit ambient-load bias.  Elapsed times are monotonic in-process times and
+include construction of the compiled state or control model.  The application
+controls use eleven rounds and the Rust kernels seven; reported values are
+medians of the raw samples.  The only exceptions are explicitly identified
+single completed deterministic solves.  Peak memory is the process high-water
+resident set size.  Exact versions, checksums, raw samples, and replay commands
+are recorded in \texttt{ergodis/evidence/benchmarks.json}.
+
+The cloud-LRC scheduling kernel in Table~\ref{tab:ergodis-applications}
+operates on the exact six-type quotient of the
+$100{,}000$ demands and is timed in a repeated inner loop; its displayed
+``$<1\,\mu$s'' value is therefore an amortized solve time for the
+preaggregated six-type instance, not a claim about parsing $100{,}000$ input records.  We use
+only the conservative ratio implied by that displayed upper bound.
+
+\paragraph{Compiler versus residual engine.}
 The benchmark suite separates the algebraic compiler from the residual state
 engine.  On four exact capacitated-scheduling profiles, ergodis was
 $2.5$--$377$ times faster than direct CP-SAT and $2.5$--$373$ times faster than
 structured CP-SAT receiving the same safe preprocessing.  The represented
-tower benchmark shows where the composition theorem itself changes scale: at
-depth six and fanout four, ergodis expands an exact coefficient witness over
-$4096$ leaves in $766\,\mu$s, while direct and labelled-table CP-SAT take
-$264$ s and $6.19$ s, respectively.  The minute-scale direct entry is one
-completed deterministic solve; the shorter entries are interleaved medians.
+tower benchmark isolates the composition theorem: at depth six and fanout
+four, ergodis expands an exact coefficient witness over $4096$ leaves in
+$766\,\mu$s, while direct and labelled-table CP-SAT take $264$ s and $6.19$ s,
+respectively.  The direct entry is one completed deterministic solve; the
+shorter entries are interleaved medians.
 
 The same compilation pattern has been tested through six bundled application
-examples.  They cover recursive Ceph-style XOR repair, Azure-style locally
-repairable code (LRC) batching, precedence-constrained repair directed
-acyclic graphs (DAGs), quasi-cyclic low-density parity-check (QC-LDPC) search,
-vector/subpacketized repair, and MDS checkpoint recovery under node and rack
-capacities.  Each formulation-specific control reproduces the same exact
-support family, optimum, or feasibility verdict, as applicable.  The narrowest
-gap is $8$ times, roughly one order of
-magnitude; the structure-dominated examples reach three to five orders of
-magnitude.  Table~\ref{tab:ergodis-applications} records the bounded instances.
-These comparisons do not include commercial solvers or claim a universal
+examples.  These are separate matched comparisons, not a ranking of unlike
+tasks.  Each row below states the question and the exact output checked against
+its formulation-specific open-source control.  The narrowest gap is eightfold;
+the structure-dominated examples reach three to five orders of magnitude.
+The comparisons do not include commercial solvers or claim a universal
 ranking.
 
 \begin{table}[H]
 \centering
 \scriptsize
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}lllrrr@{}}
+\begin{tabular}{@{}llllrrr@{}}
 \toprule
-application example & bounded instance & matched exact control & ergodis & control & ratio\\
+example & question/output checked & bounded instance & exact control & ergodis & control & faster\\
 \midrule
-Ceph XOR & $8$ diamonds, $256$ supports & Graphillion ZDD closure & $102\,\mu$s & $864\,\mu$s & $8\times$\\
-Azure LRC & $100{,}000$ demands & HiGHS counted model & $<1\,\mu$s & $4877\,\mu$s & $174{,}000\times$\\
-repair DAG & $3\times21$ tasks & CP-SAT interval model & $2\,\mu$s & $19{,}218\,\mu$s & $7{,}881\times$\\
-QC-LDPC & lift $50{,}000$, weight $4$ & CryptoMiniSat native XOR & $1517\,\mu$s & $509{,}306\,\mu$s & $336\times$\\
-vector repair & $64$ nodes, $2$ symbols/node & CryptoMiniSat native XOR & $10\,\mu$s & $48{,}691\,\mu$s & $4{,}717\times$\\
-GPU MDS & $10{,}000$ shards, $64$ failures & OR-Tools max-flow & $100\,\mu$s & $103{,}061\,\mu$s & $1{,}029\times$\\
+recursive XOR & complete minimal-support family & $8$ diamonds, $256$ supports & Graphillion ZDD~\cite{InoueEtAl2016} & $102\,\mu$s & $864\,\mu$s & $8\times$\\
+cloud LRC & maximum served count and loads & $100{,}000$ demands, six types & HiGHS integer model & $<1\,\mu$s & $4877\,\mu$s & $>4877\times$\\
+repair DAG & optimal makespan and schedule & $3\times21$ tasks & CP-SAT intervals & $2\,\mu$s & $19{,}218\,\mu$s & $7881\times$\\
+QC-LDPC & absence of a weight-four word & lift $50{,}000$ & CryptoMiniSat XOR & $1517\,\mu$s & $509{,}306\,\mu$s & $336\times$\\
+vector repair & minimum nodes and spanning set & $64$ nodes, $2$ symbols/node & CryptoMiniSat XOR & $10\,\mu$s & $48{,}691\,\mu$s & $4717\times$\\
+GPU MDS & feasible flow and helper assignment & $10{,}000$ shards, $64$ failures & OR-Tools max-flow & $100\,\mu$s & $103{,}061\,\mu$s & $1029\times$\\
 \bottomrule
 \end{tabular}
 }
-\caption{Exact comparisons for the bundled application examples.  Times
-include construction of the application state or control model; every row
-agrees on the exact support family, optimum, or feasibility verdict being
-compared.  Controls differ by application and are named explicitly; ratios use
-the unrounded timings.}
+\caption{Six separate exact comparisons.  ZDD means zero-suppressed decision
+diagram; LRC means locally repairable code; DAG means directed acyclic graph;
+QC-LDPC means quasi-cyclic low-density parity-check code; MDS means
+maximum-distance-separable code.  The cloud-LRC ratio is the conservative bound
+supported by the displayed censored time; other ratios use unrounded medians.}
 \label{tab:ergodis-applications}
 \end{table}
 
@@ -198,12 +227,19 @@ the unrounded timings.}
 As a code-native check, ergodis also analyzes Jin and Fu's published
 $\F_4$ Hamming-outer family~\cite[Corollary~5.4]{JinFu2026}.  For its binary
 $[4095,2718,6;2]$ LRC, all backends obtain the same exact confinement cost;
-ergodis takes $231$ ms, versus $100$ s for direct CP-SAT and $82$ s for
-labelled-table CP-SAT.  Exact inputs, outputs, tool versions, peak memory,
+the 21-run ergodis median is $231$ ms, versus one completed optimality proof
+of $100$ s for direct CP-SAT and $82$ s for labelled-table CP-SAT.  Exact
+inputs, outputs, tool versions, peak memory,
 replay commands, and raw timing samples are in
 \texttt{ergodis/evidence/benchmarks.json} and
 \texttt{ergodis/BENCHMARKS.md}; the two minute-scale CP-SAT entries are single
 completed deterministic solves.
+
+General-purpose constraint solvers have also been used to construct binary
+codes~\cite{KochemazovEtAl2026}, and repair dependency graphs and scheduling
+predate this work~\cite{LinEtAl2021RepairBoost}.  The contribution here is the
+structure-aware compilation of linear-recovery fibres, with exact witnesses,
+before a specialized dynamic program or a residual solver is invoked.
 
 The largest gains arise when the algebraic reductions expose a
 low-dimensional reachable set inside a much larger raw model.  ergodis solves

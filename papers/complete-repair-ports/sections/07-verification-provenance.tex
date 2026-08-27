@@ -1,4 +1,4 @@
-\section{Verification boundary}
+\section{Verification scope}
 \label{sec:verification}
 
 The paper has a paper-owned Lean~4 companion built against a pinned Mathlib
@@ -34,6 +34,8 @@ The axiom audit of all four reviewer-facing declarations reports only
 \[
  \{\texttt{Classical.choice},\texttt{Quot.sound},\texttt{propext}\}.
 \]
+These are routine logical and quotient principles used throughout Mathlib,
+not unproved assumptions about codes or recovery.
 No coding-theory result is introduced as a Lean axiom.
 
 The formal coverage stops at the exact sequence.  In particular,

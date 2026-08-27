@@ -30,6 +30,8 @@ $\{0,\ldots,8\}$, let
 where, for example, $158$ denotes $\{1,5,8\}$.  Both are realizable as the
 minimum recovery sets at a distinguished coordinate of a represented
 $[10,4,6]_q$ code over a common finite prime field.
+Here a \emph{clutter} means a family of sets none of which contains another;
+in this example it is the five inclusion-minimal recovery supports.
 
 \begin{proposition}[Rank-one support-overlap separation]
 \label{prop:rank-one-reliability-separation}
@@ -64,7 +66,12 @@ k&\mathcal A&\mathcal B\\ \hline
 Inclusion--exclusion for the five edge-containment events gives
 \eqref{eq:reliability-A} and~\eqref{eq:reliability-B}.
 
-We now give the representation argument.  Over an infinite field $K$, choose
+We now give the representation argument.  Its purpose is to realize exactly
+the five listed triples as collinear triples; after lifting, adjoining the
+distinguished target $x$ turns exactly those triples into four-column circuits.
+
+\paragraph{The two plane arrangements.}
+Over an infinite field $K$, choose
 five projective lines $\ell_1,\ldots,\ell_5$.  For
 $\mathcal A$, make $\ell_2,\ell_3,\ell_4$ concurrent and label
 \[
@@ -83,9 +90,23 @@ For $\mathcal B$, make $\ell_1,\ell_4,\ell_5$ concurrent at $1$, put
  2=\ell_2\cap\ell_5,
 \]
 and choose $6,3,5,4$ on $\ell_1,\ell_2,\ell_4,\ell_5$, respectively.
+The incidence skeleton is
+\[
+\begin{array}{c|c|c}
+ & \text{three concurrent lines} & \text{other prescribed intersections}\\ \hline
+\mathcal A & \ell_2,\ell_3,\ell_4\text{ at }0
+  & 1=\ell_1\cap\ell_4,\ 4=\ell_3\cap\ell_5,\
+    5=\ell_1\cap\ell_3,\ 8=\ell_1\cap\ell_5\\
+\mathcal B & \ell_1,\ell_4,\ell_5\text{ at }1
+  & 8=\ell_1\cap\ell_3,\ 7=\ell_2\cap\ell_3,\
+    0=\ell_3\cap\ell_4,\ 2=\ell_2\cap\ell_5
+\end{array}
+\]
 At each free choice, avoid the finitely many unwanted joining lines.  The
-displayed triples are then exactly the collinear triples.
+unwanted lines are precisely those that would create an additional collinear
+triple.  The displayed triples are therefore exactly the collinear triples.
 
+\paragraph{Generic lift.}
 Choose representatives $p_i\in K^3$ of either plane configuration, let
 $x=(1,0,0,0)$, and lift helper $i$ to $h_i=(t_i,p_i)\in K^4$.  Dependence of
 the lifts over any displayed line and dependence of any four helper lifts are
@@ -94,10 +115,12 @@ quotient vectors have a unique dependence up to scalar, and the same
 coefficients give one nonzero linear equation in the $t_i$.  For four helper
 points, the quotient vectors span $K^3$, so their lifted determinant is a
 nonzero linear form in the four first coordinates.  Avoiding this finite union
-makes
-every helper triple and quadruple independent, while the dependent
+makes every helper triple and quadruple independent, while the dependent
 four-sets through $x$ are exactly $\{x\}\cup A$ for the five prescribed
-triples $A$.  Choose the construction over $\mathbb Q$ and reduce both
+triples $A$.
+
+\paragraph{Finite-field realization and parameters.}
+Choose the construction over $\mathbb Q$ and reduce both
 configurations modulo one prime avoiding the finitely many nonzero
 determinants.  The two row-span codes then have rank four, dual distance four,
 and minimum recovery sets exactly $\mathcal A$ and $\mathcal B$.  A
@@ -118,6 +141,8 @@ with $\dim(D/K)=\ell$, define its radius-$R$ full-quotient reliability by
 \]
 where $S\subseteq J$ is the random set of independently surviving helpers,
 each present with probability $s$.
+The condition $L+K=D$ says that the surviving helper equations recover the
+entire quotient $D/K$; the radius $R$ bounds their union support $|\supp L|$.
 
 \begin{theorem}[The complete RGHW hierarchy does not determine reliability]
 \label{thm:rghw-reliability-separation}
@@ -175,8 +200,9 @@ isomorphism $\alpha:\F_q^\ell\to D/K\leq V$.  The generator map
  G:\F_q^\ell\oplus\F_q^J\longrightarrow V,
  \qquad G(a,x)=\alpha(a)+\pi(x),
 \]
-has helper kernel $K$ and helper preimage of the target span equal to $D$.
-Its associated nested pair is therefore $K\subseteq D$.
+uses the first $\ell$ coordinates as targets, $J$ as helpers, and has message
+space $V$.  Its helper kernel is $K$ and the helper preimage of the target span
+is $D$, so its associated nested pair is $K\subseteq D$.
 \uses{prop:rank-one-reliability-separation}%
 \proves{thm:rghw-reliability-separation}%
 \end{proof}
@@ -188,7 +214,8 @@ $(D_P,K_P)$ unchanged.  Here a \emph{coefficient presentation} means an
 ambient inner dual code, target coordinates, and target coefficient map that
 realize a prescribed abstract pair $K\subseteq D$ as its
 shortening--puncturing pair.  Different such realizations may have different
-ambient dual distances.  Let
+ambient dual codes and distances, so the examples below cannot be related by
+changing the row basis of one encoder.  Let
 \[
  K=0,\qquad
  D=\langle u,v\rangle\leq\F_2^3,\qquad
@@ -211,7 +238,8 @@ and then by
 The two inner codes have the same associated nested pair, the same unlabelled
 set of helper supports, and the same complete relative-weight
 hierarchy.  Their inner-dual weight multisets are respectively
-$\{2,3,5\}$ and $\{3,3,4\}$.  Hence their additive outer-distance costs are
+$\{2,3,5\}$ and $\{3,3,4\}$.  In every outer-distance regime where the
+collapse theorem applies, their additive costs are
 respectively
 \[
  (M_1+d(I^\perp),M_2+d(I^\perp))=(3,5)
@@ -225,9 +253,22 @@ Use the graph-code realization
 \[
  I^\perp=\{(-\alpha^{-1}(x),x):x\in D\},
 \]
-where $\alpha$ is the displayed identification of the two-dimensional target
-space with $D$.  Adding the target weight to the helper weight gives the two
-listed multisets directly.  Thus $d(I^\perp)$ is two in the first
+where $\alpha$ is the displayed identification from the two-dimensional
+target space to $D$.  Over $\F_2$ the minus sign is invisible.  The three
+nonzero graph words are
+\[
+\begin{array}{c|c|c|c|c}
+ & \text{target coefficient} & \text{helper word}
+ & \text{target/helper weights} & \text{total weight}\\ \hline
+I_1 & 10 & 100 & 1+1 & 2\\
+    & 01 & 011 & 1+2 & 3\\
+    & 11 & 111 & 2+3 & 5\\ \hline
+I_2 & 11 & 100 & 2+1 & 3\\
+    & 10 & 011 & 1+2 & 3\\
+    & 01 & 111 & 1+3 & 4
+\end{array}
+\]
+Thus $d(I^\perp)$ is two in the first
 presentation and three in the second.  Adding this distance to
 $(M_1,M_2)=(1,3)$ gives the two threshold sequences by
 Theorem~\ref{thm:ranked-confinement}.

@@ -19,9 +19,9 @@ the theorem dependency order:
    separations beyond the relative-weight hierarchy.
 7. `06-geometric-flagships.tex` — projective-simplex weights, thresholds,
    reliability, and the equality case for the first recovery cost.
-8. `07-verification-provenance.tex` — the exact paper-local Lean boundary and
+8. `07-verification-provenance.tex` — the exact paper-local Lean coverage and
    the role of finite arithmetic checks.
-9. `08-conclusion.tex` — mathematical synthesis and the boundary with
+9. `08-conclusion.tex` — mathematical synthesis and the distinction from
    disjoint-packing and bandwidth-aware models.
 
 The filenames are retained for repository continuity. Their old private nouns

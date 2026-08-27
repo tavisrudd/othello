@@ -1,16 +1,22 @@
 \section{Consequences of the threshold}
 \label{sec:consequences}
 
-The fixed-target relative weights sit between ordinary generalized weights
-and worst-case cooperative locality.  Let $d_e(C^\perp)$ denote the $e$th
-generalized Hamming weight of $C^\perp$.  For an $e$-set $P\subseteq E$, let
+The fixed-target cost refines ordinary generalized weights, which optimize
+over target sets, and is bounded above by worst-case cooperative locality,
+which maximizes over them.  Let $d_e(C^\perp)$ denote the $e$th
+generalized Hamming weight of $C^\perp$~\cite{Wei1991}.  For an $e$-set $P\subseteq E$, let
 $\kappa_C(P)$ be the least $|H|$ for which some $e$-dimensional subcode
 $A\leq C^\perp$, supported on $P\cup H$, restricts isomorphically to
-$\F_q^P$.  Set $\kappa_C(P)=\infty$ when no such subcode exists.  Thus
+$\F_q^P$, so every target coefficient vector has a unique equation in $A$.
+Set $\kappa_C(P)=\infty$ when no such subcode exists.  Thus
 $\kappa_C(P)$ is the minimum number of helpers needed to recover all
 coordinates in $P$ simultaneously.
 
-\begin{theorem}[Best-target generalized weight and first escape cost]
+The first identity below is the standard information-set interpretation of
+generalized Hamming weights; we record it to derive the paper-specific
+nonconfinement consequence.
+
+\begin{theorem}[Best-target generalized weight and first nonconfinement cost]
 \label{thm:best-target-ghw}
 \coverage{absent}%
 For $1\leq e\leq\dim C^\perp$,
@@ -24,9 +30,9 @@ $r_e^{\mathrm{coop}}(C)=\max_{|P|=e}\kappa_C(P)$, then
 \[
  r_e^{\mathrm{coop}}(C)\geq d_e(C^\perp)-e.
 \]
-For a fixed inner code in the eventual concatenation regime of
-Theorem~\ref{thm:objectwise-confinement}, the least first nonconfinement cost
-over all $e$-coordinate target sets is
+For a fixed inner code $C$, once the outer dual distance is large enough for
+the collapse in Theorem~\ref{thm:objectwise-confinement}, the least helper
+cost of a first nonconfined system over all $e$-coordinate target sets is
 \begin{equation}
  d_e(C^\perp)-e+d(C^\perp).
  \label{eq:best-target-escape}
@@ -39,23 +45,26 @@ $C^\perp$ whose support is $P$ together with its helper union.  Hence
 $d_e(C^\perp)\leq e+\kappa_C(P)$.
 
 Conversely, let $A\leq C^\perp$ have dimension $e$ and support size
-$d_e(C^\perp)$.  An information set $P$ of a generator matrix of $A$ has
+$d_e(C^\perp)$.  Choose $e$ linearly independent columns of a generator
+matrix of $A$; their coordinate set $P$ is an information set and has
 size $e$, and restriction $A\to\F_q^P$ is an isomorphism.  Row reduction on
 these columns gives normalized identity equations whose helper union is
 $\supp(A)\setminus P$.  This proves~\eqref{eq:best-target-ghw}; the
 cooperative-locality inequality follows by taking the maximum instead of the
-minimum.
+minimum; compare~\cite[Theorem~1]{AbdelGhaffarWeber2017}.
 
-It remains to justify the escape formula when the target columns indexed by
+It remains to justify the nonconfinement formula when the target columns indexed by
 $P$ are dependent.  Put $U=\operatorname{im}G_P$.  A normalized identity
 system on $\F_q^P$ and a normalized recovery system on $U$ have the same
 minimum helper union.  Indeed, restricting an identity system along a linear
 section $\alpha:U\to\F_q^P$ gives a system on $U$.  Conversely, given a
 system on $U$, write
 \[
- a=\alpha(G_Pa)+\bigl(a-\alpha(G_Pa)\bigr)
+a=\alpha(G_Pa)+\bigl(a-\alpha(G_Pa)\bigr)
  \qquad(a\in\F_q^P).
 \]
+Thus $G_P:\F_q^P\twoheadrightarrow U$ separates each target vector into its
+chosen lift $\alpha(G_Pa)$ and a kernel relation.
 The second summand lies in $\ker G_P$ and hence is a target-only dual
 equation, so adjoining these kernel equations recovers the full identity
 without adding helpers.  Thus the common minimum is $\kappa_C(P)$.
@@ -89,6 +98,9 @@ and their supports form the complete $k$-uniform clutter on
 $E\setminus\{x\}$.
 \end{theorem}
 
+Equivalently, the minimum-weight dual equations through $x$ realize every
+$k$-subset of the other coordinates as a helper support.
+
 \begin{proof}
 The dual has dimension $n-k$ and distance $k+1$.  For each $(k+1)$-set $T$,
 restriction $C^\perp\to\F_q^{E\setminus T}$ has a nonzero kernel, whose words
@@ -103,24 +115,35 @@ $n-k$ words independent, hence a basis of $C^\perp$.
 The support clutter depends only on the MDS parameters, whereas the normalized
 equations retain the represented dual code.
 
-Put $k=\dim I$ and $b=\rank G_J$.  The exact sequence and the relative and
+Put $k=\dim I$, $u=\rank G_P$, and $b=\rank G_J$.  The exact sequence and the relative and
 ordinary Singleton bounds give
 \begin{equation}
  M_t(D_P,K_P)\leq b-\ell+t,
  \qquad d(I^\perp)\leq k+1.
  \label{eq:singleton-bounds}
 \end{equation}
+The three ranks governing the statement are
+\[
+\begin{array}{c|l}
+ u=\rank G_P & \text{dimension visible on the target coordinates}\\
+ b=\rank G_J & \text{dimension visible on the helper coordinates}\\
+ \ell=\dim(\operatorname{im}G_P\cap\operatorname{im}G_J)
+   & \text{dimension recoverable from the helpers.}
+\end{array}
+\]
 
 \begin{theorem}[MDS ceiling and rank-one rigidity]
 \label{thm:mds-thresholds}
 \coverage{absent}%
+\emph{Universal ceiling.}
 For $1\leq t\leq\ell$,
 \begin{equation}
  M_t(D_P,K_P)+d(I^\perp)
  \leq2k-\ell+t+1.
  \label{eq:threshold-ceiling}
 \end{equation}
-Suppose $I$ is MDS, and put
+\emph{MDS staircase.}
+Suppose $I$ is MDS.  Then
 \[
  u=\min\{k,|P|\},\qquad b=\min\{k,|J|\}.
 \]
@@ -133,25 +156,30 @@ Then $\ell=u+b-k$.  If $\ell\geq1$, then, for $1\leq t\leq\ell$,
 \end{equation}
 If $|J|\geq k$, then $\ell=u$ and these values attain the ceiling in
 \eqref{eq:threshold-ceiling} at every rank.
+\emph{Rank-one rigidity.}
 Conversely, when $\ell\geq1$, equality in~\eqref{eq:threshold-ceiling} at
 $t=1$ forces $I$ to be MDS and forces equality at every rank.
 \end{theorem}
 
 \begin{proof}
 The ceiling follows from~\eqref{eq:singleton-bounds} and $b\leq k$.  For an
-MDS code the column matroid is uniform, so $\rank G_P=u$, $\rank G_J=b$,
+MDS code every set of at most $k$ generator columns is independent; equivalently,
+the column matroid is uniform.  Thus $\rank G_P=u$, $\rank G_J=b$,
 $\ell=u+b-k$, and, for $H\subseteq J$ with $|H|=h\leq k$,
 \[
  \dim\bigl(\operatorname{span}G_P\cap\operatorname{span}G_H\bigr)
  =\max\{0,u+h-k\}.
 \]
+This is the usual dimension count for two subspaces generated by disjoint
+subsets of a uniform $k$-dimensional column configuration.
 Thus Proposition~\ref{prop:relative-profile} gives $M_t=k-u+t$ for
 $1\leq t\leq\ell$; here $k-u+t\leq b\leq|J|$.  Now
 $d(I^\perp)=k+1$, and if $|J|\geq k$, then $b=k$ and $\ell=u$, proving the
 remaining direct assertions.
 
 Equality at $t=1$ forces equality in both Singleton bounds and $b\leq k$.
-Hence $d(I^\perp)=k+1$, so $I$ is MDS, and $M_1=b-\ell+1$.  Strict growth
+Hence $d(I^\perp)=k+1$; equality in the dual Singleton bound is precisely the
+MDS condition for $I$.  Also $M_1=b-\ell+1$.  Strict growth
 then gives $M_t\geq b-\ell+t$, while relative Singleton gives the reverse
 inequality; every rank is extremal.
 \uses{prop:relative-profile}%
@@ -162,36 +190,40 @@ Thus extremality is detected at rank one: equality in the first threshold
 forces the inner code to be MDS and forces every later rank to attain its
 ceiling.  No separate higher-rank hypothesis is needed.
 
-We next record the global parameters and the density of the transferred
-data.  Let the inner code have parameters $[m,k,d]_q$, so
-$[L:\F_q]=k$.  Let $K_N=\dim_L O_N$ and $D_N=d(O_N)$.
+We next show that the transferred local structure can occupy a positive
+fraction of an asymptotically good concatenated family, rather than appearing
+only in one distinguished block.  Let the inner code have parameters
+$[m,k,d]_q$, so $[L:\F_q]=k$.  Let $K_N=\dim_L O_N$ and
+$\Delta_N=d(O_N)$.
 
 \begin{corollary}[Positive-density realization]
 \label{cor:positive-density}
 \coverage{absent}%
-Assume $d(O_N^\perp)\to\infty$.  Below any fixed threshold supplied by
-Theorem~\ref{thm:objectwise-confinement} or
-Theorem~\ref{thm:ranked-confinement}, for all sufficiently large $N$ every
-inner normalized recovery system and exact helper support is copied in each
-of the $N$ blocks.  Each fixed inner coordinate type has density $1/m$ among
-the concatenated coordinates; the union of the types in $P$ has density
-$p/m$.
+Assume $d(O_N^\perp)\to\infty$.  Fix either a nonzero target subspace $T$ and
+a radius $r$ satisfying Theorem~\ref{thm:objectwise-confinement}, or a rank
+$t$ and radius $r$ satisfying Theorem~\ref{thm:ranked-confinement}.  For all
+sufficiently large $N$, every corresponding inner normalized recovery system
+of cost at most $r$ and its exact helper support are copied in each of the
+$N$ blocks.  Each fixed inner coordinate
+type has density $1/m$ among the concatenated coordinates; the union of the
+types in $P$ has density $|P|/m$.
 
 In particular, if $r<M_1(D_P,K_P)+d(I^\perp)$, then all cost-$\leq r$
 systems for all nonzero subspaces of $W_P$ are copied simultaneously in every
-block.  Hence the complete bounded local recovery data through radius $r$
+block by Corollary~\ref{cor:all-rank-bottleneck}.  Hence the complete bounded local recovery data through radius $r$
 occur on the stated positive-density coordinate classes.
 
 The concatenated code has length $mN$, dimension $kK_N$, and minimum distance
-at least $dD_N$.  If
+at least $d\Delta_N$.  If
 \[
  \frac{K_N}{N}\longrightarrow R>0,
  \qquad
- \liminf_N\frac{D_N}{N}\geq\delta>0,
+ \liminf_N\frac{\Delta_N}{N}\geq\delta>0,
 \]
 then the concatenated family has rate $kR/m$ and relative distance at least
-$d\delta/m$.  Outer families satisfying all three hypotheses exist over
-every finite field $L$.
+$d\delta/m$.  Outer families with positive limiting rate, positive primal
+relative distance, and dual distance tending to infinity exist over every
+finite field $L$.
 \end{corollary}
 
 \begin{proof}
@@ -199,7 +231,7 @@ The transfer statement is the zero-extension bijection in the confinement
 theorems, applied independently in every block.  There are $mN$ coordinates,
 and each inner coordinate occurs once in each block, which gives the density
 claims.  The blockwise inner encoder is injective, so restriction of scalars
-gives dimension $kK_N$.  A nonzero outer word has at least $D_N$ nonzero
+gives dimension $kK_N$.  A nonzero outer word has at least $\Delta_N$ nonzero
 symbols, each encoding to an inner word of weight at least $d$.  This proves
 the distance and asymptotic assertions.
 
@@ -210,7 +242,8 @@ $\delta,\delta^\perp$ such that
  \qquad
  H_Q(\delta^\perp)<R,
 \]
-where $H_Q$ is the $Q$-ary entropy function.  The first-moment argument for a
+where $H_Q$ is the standard $Q$-ary entropy function measuring the exponential
+growth rate of a $Q$-ary Hamming ball.  The first-moment argument for a
 random $K_N$-dimensional $L$-linear code bounds the expected numbers of
 nonzero primal and dual words below the two cutoffs, up to subexponential
 factors, by
@@ -223,7 +256,8 @@ respectively.  Both tend to zero by the displayed inequalities, so one may
 choose a sequence with rate tending to $R$, primal relative distance at least
 $\delta$, and dual relative distance at least $\delta^\perp$; see also
 \cite[Chapter~17]{MacWilliamsSloane1977}.
-\uses{thm:objectwise-confinement, thm:ranked-confinement}%
+\uses{thm:objectwise-confinement, thm:ranked-confinement,
+cor:all-rank-bottleneck}%
 \proves{cor:positive-density}%
 \end{proof}
 
@@ -248,7 +282,7 @@ vector $c$, define
  \end{array}\right\}.
 \]
 This is the bounded service-rate region of the recovery-set system
-\cite{Mazumdar2023,ChoudharyEtAl2026}.
+\cite{AktasEtAl2021,AlfaranoEtAl2024,Mazumdar2023,ChoudharyEtAl2026}.
 
 \begin{corollary}[Transfer of bounded service-rate regions]
 \label{cor:service-rate-transfer}
@@ -262,8 +296,10 @@ target block is nonzero.  Suppose
 Transport capacities from the inner helper set to its copy in that block of
 $O\circ I$.  Then the inner and concatenated bounded service-rate regions are
 equal.  Capacities assigned outside the target block do not change this
-equality.  In particular, the hypothesis follows from
-$d(O^\perp)>r+1$ and the corresponding inner inequalities.  Consequently,
+equality, because confinement excludes every cost-$\leq r$ recovery using
+those external helpers.  In particular, the hypothesis follows from
+$d(O^\perp)>r+1$ together with
+$r<\rho_{T_a}(I)+d(I^\perp)$ for every $a\in\mathcal A$.  Consequently,
 for an outer family with $d(O_N^\perp)\to\infty$, the equality holds for all
 sufficiently large $N$ whenever those inner inequalities hold.
 \end{corollary}
@@ -283,6 +319,7 @@ supersets and capacities outside the target block are irrelevant.
 \end{proof}
 
 The next family realizes all three information levels in closed form: its
-RGHWs give minimum recovery costs, its ambient dual distance gives the gated
-confinement thresholds, and its projective rank distribution gives reliability
+RGHWs give minimum recovery costs, its ambient dual distance gives the
+confinement thresholds under the outer-distance condition, and its projective
+rank distribution gives reliability
 beyond the RGHW hierarchy.

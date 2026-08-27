@@ -47,24 +47,26 @@
 \maketitle
 
 \begin{abstract}
-Bounded linear recovery under concatenation is not determined by scalar helper
-thresholds: an outer code can force intermediate functionals that scalar
-minimization forgets.  Shortening and puncturing the inner dual onto the
-helpers give a canonical pair $K_P\subseteq D_P$.  Its relative generalized
-Hamming weights are exact minimum helper unions but omit the labels needed for
-finite transfer.  We prove that minimizing labelled prescribed-coset
-support costs over the complete outer functional dual gives
-$\Gamma_{j,t}(O,I)$, the minimum cost of a rank-$t$ nonconfined recovery
-system, without a distance hypothesis.  These functions compose by min--sum
-through finite towers; stored argmins propagate an optimizing coefficient
-witness.  Rank-one probes characterize exactly which numerical distinctions
-arbitrary outer contexts can observe, while rank-one confinement controls simultaneous
-confinement at every recoverable rank.  When outer distance removes the nonzero sectors,
-the exact cost collapses to $M_t(D_P,K_P)+d(I^\perp)$.  Below a confinement
-threshold, restriction and zero-extension preserve every normalized equation
-and exact support.  Equal relative-weight hierarchies need not determine
-bounded reliability.  A companion exact compiler executes the
-witness-returning recursion; proofs are software-independent.
+In a concatenated linear code, an outer equation selects which inner
+functional each block must realize.  Recording only the least helper count
+forgets that label and can give the wrong finite threshold.  We first show
+that, within one inner block, relative generalized Hamming weights of the
+canonical shortening--puncturing pair are exactly the minimum helper unions
+for recovering each target dimension.  For concatenation, we determine
+exactly the minimum helper cost of a recovery that leaves the target block,
+without assuming an outer-distance bound.  The answer is a labelled min--sum
+formula over functionals compatible with the outer code.  Its local costs are
+minimum supports in prescribed cosets, with the target coefficients fixed to
+recover the requested subspace.  These labelled costs compose associatively
+through finite concatenation towers.  Sufficient outer dual distance excludes
+the nonzero functional terms and reduces the answer to
+$M_t(D_P,K_P)+d(I^\perp)$.  Below the resulting helper-cost threshold, restriction and
+zero-extension preserve every normalized recovery equation and its exact
+helper support, not only the minimum cost.  Thus relative weights solve the
+single-block minimum problem, while labelled coset costs provide the finer
+data needed for exact composition.  A companion exact implementation evaluates
+the recursion and returns optimizing coefficient witnesses; no proof depends
+on software.
 \end{abstract}
 
 \section{Introduction}
@@ -77,20 +79,35 @@ exactly when a recovery equation can leave its inner block and that can be
 propagated through another concatenation level.
 
 A linear recovery equation expresses a target combination as a linear
-combination of helper symbols; its cost is the number of distinct helpers used.
+combination of helper symbols; its cost is the number of distinct helpers
+used.  It is \emph{confined} when every coefficient lies in the target's own
+inner block and \emph{nonconfined} when at least one helper lies in another
+block.
+
+The information loss can be seen before any coding notation.  Suppose an
+inner block can realize two intermediate functionals $a$ and $b$ at respective
+costs one and two.  The scalar minimum is one.  If an outer equation forces
+label $b$, however, the relevant cost is two; replacing the labelled table
+$(a\mapsto1,b\mapsto2)$ by its minimum has destroyed the answer.  The exact
+theory below makes this schematic example intrinsic and, in
+Proposition~\ref{prop:functional-label-separation}, realizes it while holding
+the unlabelled recovery data fixed.
 
 Here exact transfer means more than equality of a numerical parameter.  Below
-a helper radius, restriction to one inner block and zero-extension back into
-the concatenation must be inverse bijections on normalized recovery-equation
-systems, preserving their coefficients and exact helper supports.  This is the
-level of structure needed to transport recovery-set overlap, bounded
-reliability, and capacity constraints.
+a helper radius, every global recovery is uniquely the zero-extension of a
+recovery inside the target block.  Formally, restriction to that block and
+zero-extension back into the concatenation are inverse bijections on
+normalized recovery-equation systems, preserving coefficients and exact
+helper supports.  Normalization means that the target coefficients act as the
+identity on the recovered subspace.  This is the structure needed to transport recovery-set
+overlap, bounded reliability, and capacity constraints.
 
 Three projections of the recovery data answer different questions.  Relative
 generalized Hamming weights give the minimum helper union at each recovered
 dimension.  Exact helper-support families retain the overlap data needed for
-reliability.  Labelled prescribed-coset support functions keep the
-intermediate functional labels needed for concatenation.  Figure
+reliability.  Labelled prescribed-coset support functions start from the same
+equations but fix the induced intermediate functional before minimizing, which
+keeps the labels needed for concatenation.  Figure
 \ref{fig:information-hierarchy} shows how these projections meet; neither the
 support-family branch nor the labelled-cost branch contains the other.
 
@@ -102,6 +119,9 @@ $E=P\sqcup J$ into targets and helpers.  The associated nested code pair is
  D_P=\operatorname{punct}_J(I^\perp),
  \qquad K_P=\operatorname{short}_J(I^\perp).
 \]
+Here $\operatorname{punct}_J$ restricts a word to the helper coordinates
+$J$, whereas $\operatorname{short}_J$ first requires the target coordinates
+$P$ to vanish and then restricts to $J$.
 For a full-row-rank encoder $G=(G_P\mid G_J)$, put
 $W_P=\operatorname{im}G_P\cap\operatorname{im}G_J$.
 The exact sequence in Proposition~\ref{prop:associated-pair} identifies
@@ -118,16 +138,41 @@ smaller than $|P|$.
 
 The first layer is classical nested-code support theory in recovery language:
 the minimum helper union for recovered dimension $t$ is
-$M_t(D_P,K_P)$.  Theorem~\ref{thm:relative-weight-recovery} gives the exact
+$M_t(D_P,K_P)$, the $t$th relative generalized Hamming weight of the pair.
+Theorem~\ref{thm:relative-weight-recovery} gives the exact
 support-preserving correspondence.  The principal result begins at the next
 layer, where the outer code can distinguish functional labels having the same
 minimum support.
 
-For an outer code $O$, a fixed target block $j$, and a nonzero recovered
-subspace $T\leq W_P$, Section
-\ref{sec:confinement} defines $\Gamma_{j,T}(O,I)$ by minimizing the
-target-normalized cost in block $j$ and the ordinary prescribed-coset costs in
-the other blocks over the complete outer functional dual.  Put
+For concatenation, identify the message space of $I$ with a finite extension
+field $L/\F_q$ and retain the chosen encoder $L\to I$.  We call this encoder
+together with its image a \emph{represented inner code}; the representation
+matters because it assigns field functionals to coefficient fibres.
+
+For an outer code $O$, let $\operatorname{FD}(O)$ be its functional dual: the
+tuples of $\F_q$-linear functionals on $L$ whose coordinatewise evaluations
+sum to zero on every word of $O$.  For a fixed target block $j$ and a nonzero
+recovered subspace $T\leq W_P$, put
+\[
+ \mathcal B_T(O)=\operatorname{Hom}_{\F_q}
+       \bigl(T,\operatorname{FD}(O)\bigr).
+\]
+Writing $B=(B_h)_{h=1}^N$, let $\mu_{I,P,T}(B_j)$ be the least helper support
+in the target block among systems normalized on $T$ and inducing $B_j$, and
+let $\lambda_{I,T}(B_h)$ be the corresponding least support without target
+normalization in block $h$.  Section~\ref{sec:confinement} defines these
+quantities precisely and proves
+\[
+ \Gamma_{j,T}(O,I)=\min\left\{
+ \mu_{I,P,T}(0)+d(I^\perp),
+ \min_{0\ne B\in\mathcal B_T(O)}
+ \left(\mu_{I,P,T}(B_j)+
+       \sum_{h\ne j}\lambda_{I,T}(B_h)\right)
+ \right\}.
+\]
+The two terms exhaust the possibilities.  A zero outer-functional label gives
+one inner recovery system plus a minimum inner-dual perturbation in another
+block.  A nonzero label prescribes one coset in every selected block.  Put
 $\Gamma_{j,t}(O,I)=\min\{\Gamma_{j,T}(O,I):T\leq W_P,\ \dim T=t\}$.
 
 \begin{theorem}[Main characterization: exact finite transfer]
@@ -138,12 +183,20 @@ Let $\ell=\dim W_P\geq1$ and $1\leq t\leq\ell$.  Let $I$ be used as the
 represented inner code in a concatenation with an
 $L$-linear outer code $O\leq L^N$ with $N\geq2$, where $L$ is the message space of $I$,
 and fix a block $j$ onto which $O$ projects nontrivially.  The minimum cost of a
-nonconfined recovery system in recovered dimension $t$ is
+nonconfined recovery system---one using at least one helper outside block
+$j$---in recovered dimension $t$ is
 $\Gamma_{j,t}(O,I)$.  Hence confinement through radius $r$ holds exactly when
 $r<\Gamma_{j,t}(O,I)$.
 \end{theorem}
 
+The content is the correspondence behind the formula: every global recovery
+system determines exactly one compatible labelled family in one of its two
+terms, and every such family lifts to a global recovery with the displayed
+sum of block supports.
+
 \paragraph{Outer-distance collapse.}
+Sufficient outer dual distance rules out every competing nonzero-label
+sector, leaving the relative-weight cost plus one inner-dual perturbation.
 The exact characterization gives
 \[
  d(O^\perp)\geq M_t(D_P,K_P)+d(I^\perp)+1
@@ -168,27 +221,23 @@ Theorem~\ref{prop:prescribed-coset-composition}: the labelled
 prescribed-coset functions entering $\Gamma_{j,T}$ compose associatively by
 exact min--sum substitution.  The numerical functions retain the minimum in
 each labelled fibre.  If the recursion also stores a minimizing lift in each
-attained fibre, those argmins propagate an optimizing coefficient-level
+attained fibre, those minimizers propagate an optimizing coefficient-level
 witness through the tower.  Transporting the full family instead requires the
 full lift sets used in the proof of the closure theorem.
 
-Three exact consequences sharpen this state description.  Projective line
-probes characterize the rank-one numerical contextual quotient, without
-claiming that the raw labelled table itself is minimal
-(Theorem~\ref{thm:rank-one-contextual-state}).  At target rank $t$, outer
-functional duals of dimension at most $t$ test every outer context
-(Proposition~\ref{prop:rank-bounded-outer-tests}).  Finally, rank-one
-confinement through a fixed radius is equivalent to confinement at every
-recoverable rank, with the complete bounded coefficient and support families
-transported simultaneously (Corollary~\ref{cor:all-rank-bottleneck}).
+Thus three outputs must not be conflated: a fibre minimum is one number, a
+stored minimizer is one recoverable witness, and the full lift set is the complete
+family of coefficient-labelled systems and supports.
 
-The mechanism has two exhaustive sectors.  A zero outer-functional label gives
-one inner recovery system plus a minimum inner-dual perturbation in another
-block.  A nonzero label forces prescribed cosets in the blocks selected by the
-outer functional dual.  The minimum over the zero and nonzero sectors is
-$\Gamma_{j,T}(O,I)$.  Outer dual
-distance does not create the additive RGHW formula; it removes the nonzero
-sector and leaves that formula as the surviving zero-sector cost.
+The rank-one consequence is especially simple: a nonconfined recovery on a
+higher-dimensional target restricts to a nonconfined recovery on a target
+line without increasing its helper support.  Hence confinement through a
+fixed radius holds at every recoverable rank if and only if it holds at rank
+one (Corollary~\ref{cor:all-rank-bottleneck}).  Theorem
+\ref{thm:rank-one-contextual-state} separately identifies which numerical
+label distinctions compatible outer codes can detect, and Proposition
+\ref{prop:rank-bounded-outer-tests} shows that target rank $t$ needs no test
+whose outer functional dual has dimension greater than $t$.
 
 The label loss is already visible over $\F_2\subseteq\F_4$.  Two
 three-column encoders have the same binary image code, dual, abstract nested
@@ -205,7 +254,10 @@ most $r$.  After forgetting coefficients, it also preserves statistics
 determined by inclusion-minimal helper supports, including bounded repair
 reliability and the bounded service-rate region.  This statement is
 block-local: the upward-closed recovery-set family in the full concatenated
-coordinate set also contains irrelevant cross-block supersets.
+coordinate set also contains irrelevant cross-block supersets.  For example,
+a copied minimal support inside block $j$ may be enlarged by an unused helper
+in another block; that larger recovery set changes neither the minimal support
+nor any bounded success event containing it.
 
 The theorem contains the previous one-coordinate criterion.  If $P=\{x\}$
 and $t=1$, then $M_1(D_P,K_P)$ is the least number of helpers in a dual word
@@ -213,32 +265,52 @@ through $x$, and
 \[
  z_x(I)=M_1(D_P,K_P)+1+d(I^\perp).
 \]
-Thus $r<M_1+d(I^\perp)$ is exactly $r+1<z_x(I)$.
+Here $z_x(I)$ is the corresponding total-word-weight threshold: the target
+coordinate contributes one in addition to the helper cost.  Thus
+$r<M_1+d(I^\perp)$ is exactly $r+1<z_x(I)$.
 
 Relative generalized Hamming weights (RGHWs) and relative dimension/length
 profiles (RDLPs) already describe support and access thresholds for nested
 codes in wiretap and ramp-secret-sharing settings
 \cite{LuoEtAl2005,KuriharaUyematsuMatsumoto2012,GeilEtAl2014,SanJose2025,
-Geil2026}.  The identity $\mu_t(P)=M_t(D_P,K_P)$ is this standard invariant
+Geil2026}.  The identity between the minimum helper-union quantity
+$\mu_t(P)$ defined below and $M_t(D_P,K_P)$ is this standard invariant
 specialized to the canonical target/helper pair.  Recovery-set and locality
 formulations retain helper supports but generally discard the normalized
 coefficients and functional labels that couple concatenation blocks
 \cite{RawatMazumdarVishwanath2015,GopalanEtAl2012,PamiesEtAl2013,
-AbdelGhaffarWeber2017,MarquezCorbellaEtAl2019}.  Work on recovering entire
+AbdelGhaffarWeber2017,MarquezCorbellaEtAl2019,GruicaEtAl2026}.  Work on recovering entire
 subspaces from simplex-code columns optimizes disjoint support families, not
 their coefficient-labelled transfer through concatenation
 \cite{CheeEtAl2024}.  Regenerating-code models
 optimize download and subpacketization rather than the scalar helper-support
-cost used here \cite{ShahEtAl2010,YeBarg2016,KurzYaakobi2021}.
+cost used here \cite{ShahEtAl2010,YeBarg2016,GuruswamiWootters2016,
+MatthewsEtAl2026}.
+
+Service-rate regions fractionally allocate requests among recovery sets under
+server-capacity constraints \cite{AktasEtAl2021,AlfaranoEtAl2024}.  Our
+consequence transfers the radius-bounded region generated by the preserved
+helper supports; it does not introduce or characterize the general service-rate
+polytope.  Likewise, after choosing a basis of $T$, the ordinary local cost in
+$\Gamma$ is the fixed-instance minimum union support of representatives of
+prescribed cosets, as in generalized coset weights; generalized covering radii
+maximize the corresponding quantity over coset tuples
+\cite{ZhangEtAl2019,ElimelechFirerSchwartz2021}.  The additional data here are
+target normalization and the labels imposed by the outer functional dual.
 
 Concatenation has long been used to construct locally repairable codes (LRCs)
-with prescribed parameter properties \cite{LiuEtAl2022,JinFu2026}.  Jin and Fu
+with prescribed parameter properties \cite{LiuEtAl2022,GalindoEtAl2023v1,
+JinFu2026}.  Matrix-product constructions can transport recovery structures
+from constituent codes or from the defining matrix, while Jin and Fu
 fix a binary $[3,2,2]$
 inner code and choose $\F_4$ outer codes to obtain parameter-optimal binary
-locality-two codes.  Here the inner code and target split are arbitrary, and the
-question is the exact obstruction to preserving every bounded dual recovery
-equation.  The finite formula is rank-stratified and ungated; the RGHW formula
-is its outer-distance specialization.  We make no minimum-bandwidth claim.
+locality-two codes.  These works give sufficient recovery constructions and
+parameter consequences.  Here the inner code and target split are arbitrary,
+and the question is the exact obstruction to preserving every bounded dual
+recovery equation.  The finite formula treats each recovered dimension separately and
+needs no outer-distance hypothesis; under the stated outer-distance condition,
+it reduces to the RGHW formula.  We make no minimum-bandwidth claim.
+
 The functional-dual decomposition is classical concatenation machinery, and
 min--sum elimination also appears in soft and generalized-concatenated decoding
 \cite{Forney1966,ChenLingXing2005,AjiMcEliece2000,GuruswamiSudan2002,
@@ -261,18 +333,14 @@ no new general automata-minimization claim: Theorem
 \ref{thm:rank-one-contextual-state} identifies the separating outer-code probes
 for this finite coding problem.
 
-ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis) turns
-these reductions into an exact compiler and solver.  It composes labelled
-costs through finite towers, returns recovery witnesses and confinement
-thresholds, and optimizes simultaneous repairs under heterogeneous capacities.
-Its bundled application examples also cover recursive XOR repair, LRC
-batching, repair DAGs, QC-LDPC search, vector repair, and MDS checkpoint
-recovery.  No mathematical result depends on the implementation or its
-measurements.
-Section~\ref{sec:exact-recovery-optimization} gives correctness and complexity
-bounds and compares matched exact controls for the storage, graph, coding, and
-tower examples; CP-SAT is one control and a residual backend, not the sole
-comparison target.
+ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis) is an
+exact compiler and solver derived from these reductions.  From finite linear
+recovery data and optional capacity constraints it composes labelled costs,
+computes confinement thresholds and schedules, and returns replayable
+coefficient-level witnesses.  Section~\ref{sec:exact-recovery-optimization}
+gives correctness and complexity bounds and evaluates representative storage,
+graph, code-design, and tower applications against matched exact controls.
+No mathematical result depends on the implementation or its measurements.
 
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}

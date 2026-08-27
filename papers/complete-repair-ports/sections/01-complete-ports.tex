@@ -19,6 +19,7 @@ Its exact helper support is $\supp(w)\setminus\{x\}$.  Define
 The usual bounded recovery-set family is the upward closure of
 $\cH_x^{(\le r)}(C)$ inside the subsets of $E\setminus\{x\}$ of size at most
 $r$.  Its inclusion-minimal members form the minimal recovery-set clutter.
+Here a clutter is a family of sets none of which contains another.
 Thus exact supports, recovery sets, and minimal recovery sets are distinct
 but determine the same monotone success event.
 
@@ -31,7 +32,7 @@ These normalized recovery equations determine their exact supports, while
 the converse generally fails.  The operational model is scalar exact repair:
 each participating helper supplies one symbol of $\F_q$.  Array-code access,
 subpacketization, and repair bandwidth are different optimization problems
-\cite{ShahEtAl2010,YeBarg2016,KurzYaakobi2021}.
+\cite{ShahEtAl2010,YeBarg2016,GuruswamiWootters2016,MatthewsEtAl2026}.
 
 If $A\subseteq E\setminus\{x\}$ is the surviving helper set, put
 \[
@@ -49,9 +50,11 @@ their minimum cardinality.  Section~\ref{sec:separations} shows that even the
 complete relative-weight hierarchy does not determine the corresponding
 bounded reliability law.
 
-For several target coordinates, a recovery equation is a dual subspace rather
-than one dual word.  Let $P\subseteq E$, $J=E\setminus P$, and let
-$G=(G_P\mid G_J)$ be a full-row-rank generator matrix.  If
+For several target coordinates, a recovery system is a linear family whose
+image is a dual subspace rather than one dual word.  Let $P\subseteq E$,
+$J=E\setminus P$, and let
+$G=(G_P\mid G_J)$ be a full-row-rank generator matrix.  We view its blocks as
+maps $G_P:\F_q^P\to\F_q^k$ and $G_J:\F_q^J\to\F_q^k$.  If
 $T\leq\operatorname{im}G_P$ is a subspace of target linear combinations, a
 normalized recovery system for $T$ consists of linear maps
 \[
@@ -74,7 +77,7 @@ The helper union of the system is the support of $\beta(T)$:
  \supp(\beta(T))=
  \{j\in J:\text{some }t\in T\text{ has }\beta(t)_j\ne0\}.
 \]
-Its helper cost is $|\supp(\beta(T))|$.  We call a target subspace internally
+Its helper cost is $|\supp(\beta(T))|$.  We call a target subspace helper-
 recoverable when it lies in
 \[
  W_P=\operatorname{im}G_P\cap\operatorname{im}G_J.

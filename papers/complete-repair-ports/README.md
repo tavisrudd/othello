@@ -33,10 +33,10 @@ r < M_t(D_P,K_P) + d(I⊥).
 
 Below this threshold, zero-extension preserves every bounded normalized
 recovery equation and its exact helper support. For outer families whose dual
-distance tends to infinity, the finite outer gate is automatic for all
+distance tends to infinity, the outer-distance condition is automatic for all
 sufficiently large lengths at each fixed `r`.
-Across all recoverable target subspaces, the first possible escape already
-occurs in dimension one: restricting a nonconfined higher-rank system to a
+Across all recoverable target subspaces, nonconfinement is already detected
+in dimension one: restricting a nonconfined higher-rank system to a
 line cannot increase its helper support. Thus the rank-one threshold governs
 whether every internally recoverable target subspace is confined at a fixed
 radius.
@@ -52,7 +52,7 @@ together with the target images give the target-normalized recursion, and the
 inner-dual distance obeys a compatible formula. Thus the exact nonconfinement
 cost can be evaluated through any finite tower while retaining the zero and
 nonzero functional sectors. A single scalar threshold is not sufficient input
-for this recursion; in particular, the zero-functional escape cost
+for this recursion; in particular, the zero-functional nonconfinement cost
 `rho_T(I)+d(I⊥)` loses the required functional labels.
 
 ## ergodis companion
@@ -104,7 +104,7 @@ top-level interface; its independent Python reference layer is contained in
   distance.
 - Whenever the exact prescribed-coset threshold holds for each demand, support
   transfer preserves bounded service-rate regions. The outer-dual-distance
-  gate is a sufficient condition and holds eventually in families with growing
+  condition is sufficient and holds eventually in families with growing
   dual distance.
 - Two systems can have identical complete relative-weight hierarchies but
   different bounded repair reliabilities.
@@ -120,9 +120,9 @@ helper. The paper does not make a repair-bandwidth or subpacketization claim.
 
 [`REVIEWER_GUIDE.md`](REVIEWER_GUIDE.md) gives a short route through the
 principal proof and an explicit checklist for hidden hypotheses, quantifier
-changes, convention shifts, and evidence-boundary claims.
+changes, convention shifts, and evidence-scope claims.
 
-## Proof and evidence boundary
+## Proof and evidence scope
 
 The manuscript contains human proofs of the complete theorem chain. The
 paper-owned Lean companion in [`lean/`](lean/), built with Lean 4 against a
@@ -160,7 +160,7 @@ make check
 
 performs a clean deterministic rebuild, checks the tracked PDF and metadata,
 rejects TeX warnings and private-path leakage, and validates the declared
-evidence boundary. The standalone formal companion has its own pinned build and
+evidence scope. The standalone formal companion has its own pinned build and
 axiom-audit instructions in [`lean/README.md`](lean/README.md).
 
 ## Files

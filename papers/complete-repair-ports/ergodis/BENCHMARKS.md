@@ -380,7 +380,7 @@ hashes, work counters, and the exact protocol are in
 `python/run_benchmarks.py --write --transfer-deep-only` after building the release
 benchmark binary with the documented architecture flags.
 
-A paper-native benchmark uses Jin and Fu's published GF(4) cyclic
+A benchmark taken directly from the paper uses Jin and Fu's published GF(4) cyclic
 `[43,36,5]` outer code and binary `[3,2,2]` inner code, which produce their
 binary `[129,72,10;2]` locally repairable code
 ([Example 5.7](https://arxiv.org/abs/2605.04618)). The harness constructs the
@@ -649,7 +649,7 @@ leaving 184 representatives; the moving orbit contributes 530. Thus the full
 semilinear mapping quotient has 714 cases, a `2.969x` reduction from 2,120.
 This quotient applies to the joint carrier--mapping search. For a fixed carrier
 the full mapping pool remains necessary; a companion table transport implements
-`A'(x^(3^j))=A(x)^(3^j)` and tests exact cell-gate equivariance.
+`A'(x^(3^j))=A(x)^(3^j)` and tests exact completion-cell-filter equivariance.
 The catalogue stores 714 asserted eight-byte work items carrying the ratio
 case, local mapping index, and orbit multiplicity; their weights sum exactly to
 2,120 (11 singleton and 703 triple-orbit tasks). Scheduling borrows this
@@ -657,7 +657,7 @@ contiguous slice without rebuilding or allocating a queue.
 
 Each mapping precomputes the three cubed row indices and the three forbidden
 `A` values. A caller-owned `[u16;530]` scratch buffer therefore applies the
-completion-cell avoidance gate with no allocation and no field arithmetic.
+completion-cell avoidance test with no allocation and no field arithmetic.
 The first independent post-quadratic Witt constraint is also precompiled:
 the 17 nonmultiples of three in `1..=25` generate the full spectrum, and a
 1,458-byte table stores `Theta_4(u,t;kappa)^9` for all cells of the two
@@ -696,7 +696,7 @@ The contemporaneous four-worker direct incidence CP-SAT probes remained
 visited 1,947,011 branches with 141,374 conflicts; the moving case visited
 153,691 branches with 10,168 conflicts. The Rust front end is not a competing
 complete solver, so these timings are evidence for compiling the quotient and
-Witt gate ahead of CP-SAT, not a Rust/CP-SAT speedup claim.
+Witt-design filter ahead of CP-SAT, not a Rust/CP-SAT speedup claim.
 The stronger 9,126-option carrier models, with Reed--Solomon and every affine
 direction ledger enabled, also remained `UNKNOWN` at 600 seconds: 413,160
 branches/3,600 conflicts for `kappa=2` and 54,154/103 for `kappa=18`.

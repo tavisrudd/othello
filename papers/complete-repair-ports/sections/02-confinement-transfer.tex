@@ -1,7 +1,8 @@
 \section{Puncturing, shortening, and relative recovery costs}
 \label{sec:relative-weights}
 
-Continue with $G=(G_P\mid G_J)$ and set
+Continue with $G=(G_P\mid G_J)$, viewed as
+$G_P:\F_q^P\to\F_q^k$ and $G_J:\F_q^J\to\F_q^k$, and set
 \[
  U_P=\operatorname{im}G_P,
  \qquad
@@ -51,7 +52,10 @@ With puncturing and shortening taken onto the helper set $J$,
  K_P=\operatorname{short}_J(I^\perp).
  \label{eq:puncture-shorten-pair}
 \end{equation}
-Taking duals inside $\F_q^J$ gives
+Thus $\operatorname{punct}_J$ restricts to $J$, while
+$\operatorname{short}_J$ first requires the coordinates on $P$ to vanish and
+then restricts to $J$.  These operations are dual to one another.  Taking
+duals inside $\F_q^J$ gives
 \begin{equation}
  D_P^\perp=\operatorname{short}_J(I),
  \qquad
@@ -101,8 +105,8 @@ support correspondence stated in recovery language.
 \label{thm:relative-weight-recovery}
 \coverage{absent}%
 Let $\ell=\dim W_P$ and $1\leq t\leq\ell$.  The minimum helper-union size
-among recovery systems for all internally recoverable $t$-dimensional
-subspaces of target linear combinations is
+among recovery systems for all helper-recoverable $t$-dimensional
+subspaces of target linear combinations, denoted $\mu_t(P)$, is
 \[
  \mu_t(P)=M_t(D_P,K_P).
 \]
@@ -113,6 +117,8 @@ with subspaces
  L\leq D_P,\qquad \dim L=t,\qquad L\cap K_P=0,
 \]
 while the target normalization is a linear section through $G_P$.
+More precisely, it is a section of $G_P$ over the chosen recovered subspace
+$T\leq W_P$.
 \end{theorem}
 
 \begin{proof}
@@ -182,7 +188,9 @@ The shortening--puncturing duality behind the relative profiles of nested
 codes is standard in wiretap and ramp-secret-sharing theory
 \cite[Lemma~1 and Theorem~2]{LuoEtAl2005}; see also
 \cite[eqs.~(1)--(2)]{GeilEtAl2014}.  Its recovery interpretation gives the
-failure-side counterpart of Theorem~\ref{thm:relative-weight-recovery}.
+complementary question to Theorem~\ref{thm:relative-weight-recovery}: instead
+of minimizing helpers needed to recover $t$ dimensions, it minimizes failures
+that leave $t$ dimensions ambiguous.
 
 \begin{proposition}[Failures and residual ambiguity]
 \label{prop:dual-failure-threshold}
@@ -216,6 +224,8 @@ For a code $C\leq\F_q^J$, puncturing onto $F$ gives
  =\dim(C|_F)
  =|F|-\dim(C^\perp\cap\F_q^F).
 \]
+The first difference counts exactly the dimensions lost when coordinates in
+$H$ are deleted, namely the quotient by the subcode supported on $H$.
 Apply this identity to $D_P$ and $K_P$ and subtract.  Since
 $\dim D_P-\dim K_P=\ell$, Proposition~\ref{prop:relative-profile} gives
 \eqref{eq:failure-ambiguity}.  The right-hand side is the relative dimension
@@ -235,6 +245,6 @@ The strict inequalities
 therefore say that each additional independent target combination requires a
 strictly larger helper union.  These minima solve the single-block problem but
 do not yet provide recursive state: the next section restores the functional
-labels needed for exact concatenation.  Only after an outer-distance gate
+labels needed for exact concatenation.  Only when an outer-distance condition
 removes every nonzero label does the answer collapse to
 $M_t(D_P,K_P)+d(I^\perp)$.

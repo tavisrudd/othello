@@ -8,19 +8,21 @@
   flow/.style={->, semithick},
 ]
   \node[box, fill=blue!8] (input) {represented codes and towers\\supports, loads, symmetry};
-  \node[box, fill=green!9, right=of input] (compile) {mathematical state synthesis\\labels, spans, shells, ZDDs};
+  \node[box, fill=green!9, right=of input] (compile) {mathematical state synthesis\\labels and quotient spans\\feasible load totals\\compact supports};
   \node[box, fill=orange!10, right=of compile] (solve) {exact engines\\tower composition\\reliability, scheduling\\residual search};
-  \node[box, fill=violet!9, right=of solve] (output) {replayable result\\$\Gamma$, witnesses\\reliability, schedules\\obstructions};
+  \node[box, fill=violet!9, right=of solve] (output) {replayable result\\$\Gamma$, witnesses\\reliability, schedules\\infeasibility reasons};
   \draw[flow] (input) -- (compile);
   \draw[flow] (compile) -- (solve);
   \draw[flow] (solve) -- (output);
 \end{tikzpicture}
 \caption{ergodis synthesizes the exact state exposed by the mathematics before
 search begins.  Labelled coset costs drive tower composition, support families
-drive reliability, and graded load states drive scheduling.  For attained
+drive reliability, and feasible load totals are the states used in
+scheduling.  Large support families may be stored by a zero-suppressed
+decision diagram (ZDD), which shares repeated choices.  For attained
 fibres, stored lifts expand an optimum to a coefficient-level witness or
-obstruction; arbitrary
-remaining side constraints may be passed to CP-SAT.  The mathematical results
+obstruction; supported residual side constraints may be passed to CP-SAT.
+The mathematical results
 do not depend on executing this pipeline.}
 \label{fig:ergodis-pipeline}
 \end{figure}
