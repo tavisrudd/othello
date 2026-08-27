@@ -623,6 +623,38 @@ forms are thereby removed.  The exact surface remainder has 47 forms:
 This is a theorem-derived arithmetic partition, not a list of support
 certificates.
 
+There is a further semilinear compression.  The 42 trace-one values form
+seven Frobenius orbits, represented by the irreducible sextics
+
+\[
+\begin{array}{ll}
+P_1=T^6+T+1,&P_2=T^6+T^4+T^2+T+1,\\
+P_3=T^6+T^3+1,&P_4=T^6+T^4+T^3+T+1,\\
+P_5=T^6+T^5+T^3+T^2+1,&
+P_6=T^6+T^5+T^4+T^2+1,\\
+P_7=T^6+T^5+T^4+T+1.&
+\end{array}
+\]
+
+Frobenius preserves the pointed locator problem and the split chart, so one
+specialization per polynomial suffices.  The collision cubic and denominator
+quadratic are each one Frobenius orbit.  Thus the 47-value remainder is only
+nine proved semilinear cases: seven generic, one cubic, and one quadratic.
+
+The fractional-linear maps
+
+\[
+ T\longmapsto T+1,\qquad T\longmapsto 1/T,
+ \qquad T\longmapsto T/(T+1)
+\]
+
+give a promising but not yet proved marker-change compression.  On roots,
+they connect `P1,P2,P6,P7` in one cluster and `P3,P4,P5` in another; some
+images land in already closed trace-zero strata.  If these transformations
+are induced by legitimate changes of contraction marker while retaining the
+pointed normalization, the seven generic cases reduce to two.  Until that
+equivariance is proved, the rigorous count remains nine, not four.
+
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
 degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
@@ -735,6 +767,8 @@ arguments do not answer that arithmetic question.
 | What closes the `(0,1)` boundary? | a `GF(8)` elliptic specialization with 72 points | closed by `72>52` |
 | What happens when `tau^6+tau^5+1=0`? | `n0n2=tau^9 n1^2` with trace-zero constant | all six forms closed by `130>54` |
 | How far does `a=tau` extend? | factorization (31) closes nine additional noncolliding roots; `tau=0` reuses the endpoint | ten more forms closed |
+| How many semilinear cases are left? | seven sextics, one cubic, one quadratic | nine proved cases |
+| Can cross-ratio transformations reduce the seven sextics? | algebraically they form clusters of four and three | prove marker-change equivariance before using this |
 | Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (32)--(34) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |

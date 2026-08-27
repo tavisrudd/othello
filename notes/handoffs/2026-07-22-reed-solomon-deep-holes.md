@@ -161,6 +161,9 @@ surface remainder is 57 `tau` forms.
 Factoring the constant-cover trace for `a=tau` closes nine further forms, and
 `tau=0` reuses the endpoint.  The exact remainder is 47: 42 trace-one forms,
 three fixed-root-collision forms, and two denominator-degenerate forms.
+Frobenius reduces these to nine proved semilinear cases: seven sextics, one
+cubic, and one quadratic.  Cross-ratio maps cluster the sextics as `4+3`, but
+do not use that reduction until marker-change equivariance is proved.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

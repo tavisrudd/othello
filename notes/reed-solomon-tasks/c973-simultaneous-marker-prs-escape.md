@@ -161,6 +161,11 @@ nine more noncolliding roots, and `tau=0` reuses the endpoint argument.  The
 surface remainder is exactly 47 forms: 42 trace-one values, the three roots
 of `tau^3+tau^2+1` where `a=tau` collides with `H`, and the two roots of
 `tau^2+tau+1` where its denominator vanishes.
+Frobenius compresses those 47 values to nine semilinear cases: seven
+irreducible sextics, the collision cubic, and the denominator quadratic.
+Cross-ratio transformations cluster the seven sextics as `4+3`, but using
+that further reduction requires a still-open marker-change equivariance
+proof.
 
 ## Objective
 
