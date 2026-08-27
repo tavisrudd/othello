@@ -79,9 +79,10 @@ results.
   every smooth quartic del Pezzo surface over a characteristic-zero field
   with a rational point and stably permutation geometric Picard lattice
   becomes rational after adjoining two variables.  Applied to the two
-  Tschinkel--Zhang series, it gives a uniform `P²` bound and produces
-  nonrational smooth projective fourfolds `Y` with `Y × A¹` rational, answering
-  the affine-line stabilization question raised in that paper.
+  Tschinkel--Zhang series, it proves that every member is rational over `Q`
+  after multiplication by `P²` and produces nonrational smooth projective
+  fourfolds `Y` with `Y × A¹` rational, answering the affine-line stabilization
+  question raised in that paper.
   [Sharpness of Irrationality after One Stabilization for Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 - **Integral divisor products on the nonstandard `A₅` cubic pencil.** An
@@ -376,23 +377,22 @@ remains irrational after multiplication by `P¹` is sharp.  Two explicit
 smooth cubic threefolds over `Q` become rational after multiplication by
 `P²`, so their stabilization level is exactly two over both `Q` and `C`.
 
-> *Abstract.* The theorem that every smooth complex cubic threefold remains
-> irrational after multiplication by `P¹` is sharp. We exhibit explicit
-> smooth cubic threefolds `X/Q` for which `X × P²` is rational. Thus the least
-> number of independent variables required to make these threefolds rational
-> is exactly two, over both `Q` and `C`. The rationality statement follows
-> from a general result for quartic del Pezzo surfaces: if `k` has
-> characteristic zero, `S(k)` is nonempty, and `Pic(S_kbar)` is a stably
-> permutation Galois module, then `S × A²` is `k`-rational. Its proof
-> identifies a rational quotient of the projective Cox model by a saturated
-> rank-three subtorus; the residual two-dimensional torus is rational.
-> Applied to the quartic-del-Pezzo fibrations of Tschinkel and Zhang, this
-> proves rationality after adjoining two variables for both of their cubic
-> series, strengthening their stable-rationality conclusion to the uniform
-> bound `P²`. Consequently the stabilization level is two on explicit examples
-> of cubic-threefold moduli and infinite at a very general point. There are
-> also smooth projective nonrational fourfolds `Y/Q` such that `Y × A¹` is
-> rational.
+> *Abstract.* The irrationality of `X × P¹` for every smooth complex cubic
+> threefold `X` is sharp: two explicit smooth cubic threefolds over `Q` are
+> rational after multiplication by `P²`. For each, the least `m` such that
+> `X × P^m` is rational is two, over both `Q` and `C`. We prove more generally
+> that if `k` has characteristic zero, `S` is a smooth quartic del Pezzo
+> surface with `S(k)` nonempty, and `Pic(S_kbar)` is a stably permutation
+> Galois module, then `S × A²` is `k`-rational. We identify a rational quotient
+> of the projective Cox model by a saturated rank-three subtorus; the residual
+> two-dimensional torus is rational. Applying this theorem to the quartic del
+> Pezzo fibrations of Tschinkel and Zhang, we prove that every member of both
+> cubic series is rational over `Q` after multiplication by `P²`, giving a
+> uniform two-dimensional bound for their stable-rationality results.
+> Consequently the stabilization level is two on explicit examples in
+> cubic-threefold moduli and infinite at a very general point. We also obtain
+> smooth projective fourfolds `Y/Q` that remain nonrational over `C` but for
+> which `Y × A¹` is rational over `Q`.
 
 **Delivers.** Exact stabilization level two for two explicit cubic
 threefolds; a two-variable rationality theorem for quartic del Pezzo surfaces;
