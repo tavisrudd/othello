@@ -17,7 +17,7 @@ ell_Q(X) = ell_C(X_C) = 2.
 Equivalently, `X_C × P¹` is irrational while `X × P²` is rational over `Q`.
 The lower bound is the separately cited one-stabilization theorem for every
 smooth complex cubic threefold, pinned here to
-[version 0.15.0](https://doi.org/10.5281/zenodo.22088961); this paper proves
+[version 0.16.0](https://doi.org/10.5281/zenodo.22132303); this paper proves
 the upper bound.
 
 ## Main results and consequences

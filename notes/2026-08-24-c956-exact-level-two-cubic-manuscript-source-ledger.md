@@ -36,6 +36,11 @@ point*, arXiv:math/0210008v1. Read depth: partial (Theorem 4.1 and Corollary
 4.2); cached as `arXiv:math/0210008`, PDF SHA-256
 `aa68b601d43dd24b948fb2931d09a522880f9a4d9785342cc76805b0a0de1a56`.
 
+The lower-bound input, T. Rudd, *Irrationality of cubic threefolds after one
+stabilization*, was read at full-text depth in its paper-local source and
+referee pass. The cited immutable release is Zenodo version 0.16.0, DOI
+`10.5281/zenodo.22132303`; the Zenodo API metadata was checked on 2026-08-27.
+
 The bounded novelty screen and its exact limitations remain in the durable
 research report; the manuscript uses no "first" or "to our knowledge"
 formulation derived from that screen.

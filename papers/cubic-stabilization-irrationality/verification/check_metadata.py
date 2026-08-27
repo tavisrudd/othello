@@ -46,7 +46,7 @@ assert zenodo["creators"] == [{
 }]
 assert {item["identifier"] for item in zenodo["related_identifiers"]} == {
     "https://doi.org/10.48550/arXiv.2608.20029",
-    "https://doi.org/10.5281/zenodo.22088961",
+    "https://doi.org/10.5281/zenodo.22132303",
     "https://doi.org/10.48550/arXiv.2507.15704",
 }
 assert "cubic threefolds" in zenodo["keywords"]

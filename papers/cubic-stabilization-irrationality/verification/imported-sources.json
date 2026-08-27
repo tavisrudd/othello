@@ -54,7 +54,7 @@
         "requirement": "The cited theorem supplies irrationality of X times P1, and no part of the upper-bound argument depends on its quantum-D-module proof."
       }
     ],
-    "pinpoint": "Version 0.15.0, Theorem 1.1",
+    "pinpoint": "Version 0.16.0, Theorem 1.1",
     "used": "Irrationality of X times P1 for the two explicit cubic threefolds."
   },
   "tz-cox-model": {
