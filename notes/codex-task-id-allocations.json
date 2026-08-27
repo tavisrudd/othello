@@ -3617,8 +3617,17 @@
       "last": 974,
       "purpose": "implement C973 simultaneous-marker locator in Projective Reed--Solomon Toolkit, certify it, then return computational evidence to C973",
       "sequence": 402
+    },
+    {
+      "count": 1,
+      "first": 975,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 975,
+      "purpose": "integrate C973 arbitrary-redundancy cofinite-GRS and NMDS results into Beyond4 for coding-theory impact",
+      "sequence": 403
     }
   ],
-  "next_id": 975,
+  "next_id": 976,
   "schema": "codex-task-id-allocations-v1"
 }
