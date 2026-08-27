@@ -276,6 +276,31 @@ three Veronese curve makes these contributions disjoint.  Equations
    is not merely a non-deep verdict but an explicit correction supported on
    at most `r-2` retained coordinates.
 
+### Projective-RS software interface
+
+The current engine already contains the essential operation:
+`search_pointed_simultaneous_marker_locator(request, forbidden, limit)` takes
+typed `Root` values and verifies that the complete locator support avoids
+them.  Therefore the cofinite-GRS negative certificate needs no new search
+algorithm.  A later software item only needs a typed domain/result wrapper:
+
+* `CofiniteGrsDomain { omitted: BTreeSet<Root>, multipliers: ... }`, with the
+  existing full-projective domain represented by an empty set;
+* a shell enum distinguishing `DeepOmittedPoint`, `NextTangent`,
+  `NextConjugateSecant`, `NextIncidentSplitSecant`, and
+  `AtMostRMinusTwo(LocatorCertificate)`; and
+* a verifier which divides each recovered NRC magnitude by the corresponding
+  nonzero column multiplier to obtain the actual GRS error value.
+
+The existing `LocatorCertificate` should remain multiplier-free: it certifies
+the intrinsic NRC span relation, while the domain adapter certifies monomial
+equivalence.  Tests should cover empty `A`, `A={infinity}`, multiple omitted
+points, duplicate rejection, multiplier covariance, every shell variant, and
+the invariant `(q-1)` conversion from projective directions to cosets.  The
+new public types must not add evaluation-set, family, or verdict strings;
+those should be enums or validated newtypes.  This work is outside C973's
+manuscript-frozen and software-frozen ownership.
+
 ### Weak or local transfers
 
 1. **Arbitrary short evaluation sets:** the method loses force when the
@@ -323,6 +348,9 @@ Cheng--Murray classification in the numerical range forced by (1).  Recent
 work on generalized projective RS codes with deleted evaluation points gives
 degree-specific subset-sum characterizations and must be compared against
 any claimed punctured-word formulation.
+The scoped comparison completed after this proof is recorded in
+`c973-2026-08-26-cofinite-grs-literature-preaudit.md`; it licenses the
+classical-input boundary below but not novelty language for the `r-1` shell.
 
 Accordingly:
 
@@ -381,7 +409,7 @@ as necessary for the former.
 | Pointed abundance might lose its leading term | settled by (8a)--(8c) for fixed `r,s` | software exposure is a separate C974 item |
 | Small-characteristic `r-1` shell on the Lucas carrier | open | arithmetic pointed-abundance through the digit-stripping extensions remains owned by C973 |
 | RS-local LDPC witnesses might globalize | open | needs a separate bounded-overlap compatibility theorem; no global LDPC claim is licensed |
-| Prior art for the general cofinite-GRS next-to-deep enumerator | open | claim-specific full-text audit before novelty wording or manuscript integration |
+| Prior art for the general cofinite-GRS next-to-deep enumerator | scoped primary-source preaudit complete; no matching theorem found | finish the citation-graph and finite-geometry audit before novelty wording or manuscript integration |
 
 No further unexplained numerical feature remains in the threshold or shell
 count: the coefficient `6s` is exactly one terminal pencil-member deletion
@@ -390,7 +418,8 @@ points on each incident rational secant.
 
 Open gates:
 
-1. claim-specific literature audit for the full `r-1` shell and its count;
+1. final citation-graph and finite-geometry audit for the full `r-1` shell and
+   its count;
 2. a software-facing cofinite-support schema, only if a later C974 item is
    allocated; and
 3. any global compatibility theorem for RS-local Tanner or lifted codes.

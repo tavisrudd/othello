@@ -71,6 +71,8 @@ high-rate range; the next-to-deep shell and constructive separation require
 a claim-specific prior-art audit.  Generic LDPC does not inherit the theorem,
 but RS-local Tanner and lifted-code compatibility is recorded as a separate
 open direction.
+Its scoped primary-source comparison and exact no-novelty boundary are in
+`c973-2026-08-26-cofinite-grs-literature-preaudit.md`.
 
 ## Objective
 
