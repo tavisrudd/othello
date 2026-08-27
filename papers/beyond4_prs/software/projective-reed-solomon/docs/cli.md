@@ -45,6 +45,20 @@ projective-reed-solomon distance examples/shallow-r5-f7.json \
 projective-reed-solomon verify locator-certificate.json
 ```
 
+### `simultaneous-locator`
+
+Contracts `r-5` distinct marker roots, enumerates the complete resulting R5
+cubic pencil, and emits a replayable degree-`r-2` locator certificate when one
+exists.  It accepts every `r>=6`, `q>=r`.  A returned certificate proves a
+closer word; candidate-budget exhaustion or absence of a locator is not a
+positive deep-hole certificate.
+
+```text
+projective-reed-solomon simultaneous-locator request.json \
+  > locator-certificate.json
+projective-reed-solomon verify locator-certificate.json
+```
+
 ### `classify`
 
 Returns one of four statuses:
@@ -56,11 +70,12 @@ Returns one of four statuses:
 | `UNRESOLVED` | The structural classification is known, but the frozen radius premise is absent |
 | `UNSUPPORTED` | No enabled theorem-domain route justifies a coding verdict |
 
-The general classification input boundary is R5--R10. The separately certified
-even-field diagonal family at `r=q-1` is recognized before that general gate.
-Other requests beyond R10 are rejected as outside the classification input
-domain; use `canonicalize`, `distance`, or `decode` for their structural or
-metric data.
+Classification accepts every `r>=5`, `q>=r`.  Beyond R10 it may return
+`NOT_DEEP` from a replayable locator or recognize a persistent family, but
+positive `DEEP` verdicts remain limited to the frozen registry and the
+separately certified even-field diagonal family at `r=q-1`.  An unregistered
+higher-redundancy family remains `UNSUPPORTED` and receives no positive
+certificate.
 
 The positive certificate is nested under `deep_certificate`. With `jq`, a full
 classification-to-verification pipeline is:

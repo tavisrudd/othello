@@ -45,11 +45,34 @@ fn help_exposes_the_mathematical_commands() {
     let output = binary().arg("--help").output().expect("help must run");
     assert!(output.status.success());
     let help = String::from_utf8(output.stdout).expect("help must be UTF-8");
-    for command in ["canonicalize", "distance", "decode", "classify", "verify"] {
+    for command in [
+        "canonicalize",
+        "distance",
+        "decode",
+        "simultaneous-locator",
+        "classify",
+        "verify",
+    ] {
         assert!(help.contains(command), "missing command {command}");
     }
     assert!(help.contains("Start here:"));
     assert!(help.contains("Positive deep-hole verdicts remain fail-closed"));
+}
+
+#[test]
+fn simultaneous_locator_emits_a_replayable_r6_witness() {
+    let request = r#"{
+      "schema":"projective-reed-solomon-request-v1",
+      "field":{"p":7,"degree":1,"modulus":[0,1],"encoding":"polynomial-basis-base-p-integer-v1"},
+      "redundancy":6,"evaluation":"full-projective-nrc-v1",
+      "syndrome":[4,6,0,1,0,3]
+    }"#;
+    let output = run_with_stdin(&["--compact", "simultaneous-locator"], request);
+    assert!(output.status.success());
+    let certificate: Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(certificate["distance"], 4);
+    let replay = run_with_stdin(&["--compact", "verify"], &certificate.to_string());
+    assert!(replay.status.success());
 }
 
 #[test]
@@ -174,14 +197,10 @@ fn classify_fails_closed_when_the_candidate_budget_is_exhausted() {
 }
 
 #[test]
-fn classify_rejects_requests_beyond_the_theorem_domain() {
+fn classify_fails_closed_beyond_the_positive_theorem_domain() {
     let output = run_with_stdin(&["--compact", "classify"], OUTSIDE_THEOREM_DOMAIN_REQUEST);
-    assert!(!output.status.success());
-    assert_eq!(output.status.code(), Some(2));
-    assert!(output.stdout.is_empty());
-    assert!(
-        String::from_utf8_lossy(&output.stderr).contains("redundancy must lie in 5..=10"),
-        "unexpected rejection: {}",
-        String::from_utf8_lossy(&output.stderr)
-    );
+    assert!(output.status.success());
+    let result: Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(result["status"], "UNSUPPORTED");
+    assert!(result["deep_certificate"].is_null());
 }

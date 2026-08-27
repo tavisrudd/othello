@@ -20,3 +20,20 @@ the defensive full-group oracle alone materializes cubic-order group data.
 
 This is a structural canonicalization bound. It does not extend the paper's
 covering-radius or deep-hole theorem domain.
+
+## Simultaneous-marker locator
+
+At redundancy `r>=6`, the locator route enumerates squarefree marker supports
+of size `r-5`.  For each it constructs one contracted R5 pencil and enumerates
+its projective members, at most `q+1` in the generic rank-two case.  Its
+worst-case search count is therefore
+
+```text
+O(binomial(q+1,r-5) * q)
+```
+
+before field-operation costs for contraction, cubic splitting, magnitude
+recovery, and certificate replay.  Degenerate terminal kernels remain bounded
+by the global candidate limit.  This is a fixed-parameter acceleration over
+direct degree-`r-2` support enumeration, not a uniform polynomial-in-`r`
+algorithm.

@@ -23,7 +23,8 @@ Write `q` for the field order and `r` for the redundancy.
 | `canonicalize` | Which semilinear orbit contains this syndrome? | Every `r >= 5`, `q >= r` |
 | `distance` | What is its exact distance from the code? | Every `r >= 5`, `q >= r`, within the candidate budget |
 | `decode` | What nearest error pattern realizes that distance? | Same exact search as `distance` |
-| `classify` | Does the frozen theorem package prove it deep or not deep? | Registry-gated R5--R10, plus the certified even-field diagonal family at `r=q-1` |
+| `simultaneous-locator` | Can one degree-`r-5` marker contraction exhibit a degree-`r-2` locator? | Every `r >= 6`, `q >= r`, within the candidate budget |
+| `classify` | Does the frozen theorem package prove it deep or not deep? | Certified negative witnesses at every `r>=5`; positive verdicts remain registry-gated |
 | `verify` | Does this locator or positive deep certificate replay? | Every emitted certificate schema |
 
 `canonicalize` never attaches a coding verdict. `classify` is fail-closed: it

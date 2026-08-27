@@ -1767,7 +1767,7 @@ fn classify_q8_r7_exact(
     locator_candidate_limit: u64,
     transporter_limit: u64,
 ) -> Result<Option<ClassificationResult>, Error> {
-    let (field, syndrome) = validate_request(request)?;
+    let (field, syndrome) = validate_canonicalization_request(request)?;
     if !q8_r7_field(&field, request) {
         return Ok(None);
     }
@@ -1843,11 +1843,10 @@ pub fn classify(
     {
         return Ok(result);
     }
-    let (field, syndrome) = validate_request(request)?;
-    let split_degree = request.redundancy - 2;
+    let (field, syndrome) = validate_canonicalization_request(request)?;
     let persistent = persistent_kind(&field, &syndrome);
     if !matches!(persistent, PersistentKind::Tangent | PersistentKind::Sigma) {
-        match search_locator(request, split_degree, locator_candidate_limit) {
+        match search_shallow_locator(request, locator_candidate_limit) {
             Ok(certificate) => {
                 return Ok(ClassificationResult {
                     status: VerdictStatus::NotDeep,
@@ -2294,11 +2293,103 @@ pub fn search_fast_terminal_locator(
     Err(Error::NoLocator(request.redundancy - 1))
 }
 
+/// Search degree-`r-2` locators by contracting `r-5` distinct marker roots to
+/// one redundancy-five cubic pencil.
+///
+/// Every returned locator is independently replayed before it leaves this
+/// function. Exhausting the marker prefixes and their complete projective
+/// terminal pencils is exhaustive for split squarefree degree-`r-2` locators;
+/// candidate-limit exhaustion remains an error and proves nothing.
+pub fn search_simultaneous_marker_locator(
+    request: &Request,
+    candidate_limit: u64,
+) -> Result<LocatorCertificate, Error> {
+    let (field, syndrome) = validate_canonicalization_request(request)?;
+    if request.redundancy < 6 {
+        return Err(Error::NoLocator(request.redundancy.saturating_sub(2)));
+    }
+    let marker_degree = request.redundancy - 5;
+    let mut examined = 0u64;
+    for marker_support in ProjectivePrefixes::new(&field, marker_degree) {
+        examined += 1;
+        if examined > candidate_limit {
+            return Err(Error::CandidateLimit {
+                limit: candidate_limit,
+            });
+        }
+        let marker_locator = locator_from_support(&field, &marker_support)?;
+        let mut terminal_syndrome = vec![0u32; 5];
+        for (j, output) in terminal_syndrome.iter_mut().enumerate() {
+            for (i, &coefficient) in marker_locator.iter().enumerate() {
+                *output = field.add(*output, field.mul(syndrome[i + j], coefficient));
+            }
+        }
+        let terminal_pencil = locator_kernel(&field, &terminal_syndrome, 3);
+        let certificate = find_in_projective_span(
+            &field,
+            &terminal_pencil,
+            candidate_limit,
+            &mut examined,
+            |cubic, candidates_examined| {
+                let Some(cubic_support) = split_support(&field, &cubic) else {
+                    return Ok(None);
+                };
+                if cubic_support.len() != 3
+                    || cubic_support
+                        .iter()
+                        .any(|root| marker_support.contains(root))
+                {
+                    return Ok(None);
+                }
+                let mut support = marker_support.clone();
+                support.extend(cubic_support);
+                support.sort_unstable();
+                let locator = locator_from_support(&field, &support)?;
+                let Some(magnitudes) = recover_magnitudes(&field, &syndrome, &support) else {
+                    return Ok(None);
+                };
+                let certificate = LocatorCertificate {
+                    schema: CERTIFICATE_SCHEMA.into(),
+                    field: request.field.clone(),
+                    redundancy: request.redundancy,
+                    normalized_syndrome: syndrome.clone(),
+                    distance: support.len(),
+                    locator,
+                    support,
+                    magnitudes,
+                    candidates_examined,
+                };
+                verify_certificate(&certificate)?;
+                Ok(Some(certificate))
+            },
+        )?;
+        if let Some(certificate) = certificate {
+            return Ok(certificate);
+        }
+    }
+    Err(Error::NoLocator(request.redundancy - 2))
+}
+
+fn search_shallow_locator(
+    request: &Request,
+    candidate_limit: u64,
+) -> Result<LocatorCertificate, Error> {
+    if request.redundancy == 5 {
+        return search_locator(request, 3, candidate_limit);
+    }
+    match search_locator(request, request.redundancy - 3, candidate_limit) {
+        Ok(certificate) => return Ok(certificate),
+        Err(Error::NoLocator(_)) => {}
+        Err(error) => return Err(error),
+    }
+    search_simultaneous_marker_locator(request, candidate_limit)
+}
+
 pub fn search_exact_locator(
     request: &Request,
     candidate_limit: u64,
 ) -> Result<LocatorCertificate, Error> {
-    match search_locator(request, request.redundancy - 2, candidate_limit) {
+    match search_shallow_locator(request, candidate_limit) {
         Ok(certificate) => return Ok(certificate),
         Err(Error::NoLocator(_)) => {}
         Err(error) => return Err(error),
@@ -2718,6 +2809,25 @@ mod tests {
             syndrome,
             operation: None,
         }
+    }
+
+    fn moment_syndrome(
+        field: &Field,
+        redundancy: usize,
+        support: &[Root],
+        magnitudes: &[u32],
+    ) -> Vec<u32> {
+        let mut syndrome = vec![0u32; redundancy];
+        for (&magnitude, root) in magnitudes.iter().zip(support) {
+            for (i, output) in syndrome.iter_mut().enumerate() {
+                let column = match *root {
+                    Root::Finite(x) => field.pow(x, i as u64),
+                    Root::Infinity => u32::from(i + 1 == redundancy),
+                };
+                *output = field.add(*output, field.mul(magnitude, column));
+            }
+        }
+        syndrome
     }
 
     fn apply_semilinear_direct(
@@ -3203,10 +3313,10 @@ mod tests {
             assert!(reduced.transporters_examined < explicit.transporters_examined);
         }
 
-        assert_eq!(
-            classify(&sigma_request, 3_000, 3_000),
-            Err(Error::BadRedundancy)
-        );
+        let classification = classify(&sigma_request, 3_000, 3_000).unwrap();
+        assert_eq!(classification.status, VerdictStatus::Unsupported);
+        assert_eq!(classification.family.as_deref(), Some("persistent.sigma"));
+        assert!(classification.deep_certificate.is_none());
     }
 
     #[test]
@@ -3309,6 +3419,29 @@ mod tests {
             assert_eq!(certificate.distance, input.redundancy - 1);
             verify_certificate(&certificate).unwrap();
         }
+    }
+
+    #[test]
+    fn simultaneous_marker_locator_replays_at_r11() {
+        let field_spec = prime_field(13);
+        let field = Field::new(field_spec.clone()).unwrap();
+        let support = (0..9).map(Root::Finite).collect::<Vec<_>>();
+        let syndrome = moment_syndrome(&field, 11, &support, &[1; 9]);
+        let input = request(field_spec, 11, syndrome);
+        let certificate = search_simultaneous_marker_locator(&input, 1_000).unwrap();
+        assert_eq!(certificate.distance, 9);
+        verify_certificate(&certificate).unwrap();
+    }
+
+    #[test]
+    fn classify_uses_simultaneous_marker_witness_beyond_r10() {
+        let field_spec = prime_field(13);
+        let field = Field::new(field_spec.clone()).unwrap();
+        let support = (0..9).map(Root::Finite).collect::<Vec<_>>();
+        let syndrome = moment_syndrome(&field, 11, &support, &[1; 9]);
+        let result = classify(&request(field_spec, 11, syndrome), 10_000, 10_000).unwrap();
+        assert_eq!(result.status, VerdictStatus::NotDeep);
+        verify_certificate(result.locator_certificate.as_ref().unwrap()).unwrap();
     }
 
     #[test]

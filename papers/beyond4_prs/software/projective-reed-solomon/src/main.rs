@@ -1,8 +1,9 @@
 use clap::{Parser, Subcommand};
 use projective_reed_solomon::{
-    canonicalize_syndrome, classify, search_exact_locator, verify_certificate,
-    verify_deep_certificate, DeepCertificate, LocatorCertificate, Request, CANONICALIZATION_SCHEMA,
-    CERTIFICATE_SCHEMA, CLASSIFICATION_SCHEMA, DEEP_CERTIFICATE_SCHEMA, VERIFICATION_SCHEMA,
+    canonicalize_syndrome, classify, search_exact_locator, search_simultaneous_marker_locator,
+    verify_certificate, verify_deep_certificate, DeepCertificate, LocatorCertificate, Request,
+    CANONICALIZATION_SCHEMA, CERTIFICATE_SCHEMA, CLASSIFICATION_SCHEMA, DEEP_CERTIFICATE_SCHEMA,
+    VERIFICATION_SCHEMA,
 };
 use std::fs;
 use std::io::{self, Read};
@@ -62,6 +63,12 @@ enum Command {
     /// Returns the same exact locator certificate as `distance`; its support
     /// and magnitudes are the decoded nearest error pattern.
     Decode(SearchArgs),
+
+    /// Construct a degree-r-2 locator through one simultaneous-marker R5 pencil.
+    ///
+    /// A returned locator is independently replayable. Exhausted candidate
+    /// budgets and absent locators are not positive deep-hole verdicts.
+    SimultaneousLocator(SearchArgs),
 
     /// Apply the fail-closed theorem registry and emit a structural verdict.
     ///
@@ -152,6 +159,11 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         Command::Distance(args) | Command::Decode(args) => {
             let request: Request = serde_json::from_str(&read_input(&args.input.input)?)?;
             let certificate = search_exact_locator(&request, cli.candidate_limit)?;
+            print_json(&certificate, cli.compact)?;
+        }
+        Command::SimultaneousLocator(args) => {
+            let request: Request = serde_json::from_str(&read_input(&args.input.input)?)?;
+            let certificate = search_simultaneous_marker_locator(&request, cli.candidate_limit)?;
             print_json(&certificate, cli.compact)?;
         }
         Command::Classify(args) => {
