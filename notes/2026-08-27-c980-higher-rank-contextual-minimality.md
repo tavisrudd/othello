@@ -477,6 +477,43 @@ entry, including `Z_R`, lies in `{0,...,R}`.  Hence there are at most
 contextual classes for the fixed interface.  This is a coarse existence
 bound, not a claim that the state is practically small.
 
+### Sharpness for unconstrained tropical fibre tables
+
+The bounds `dim_L D_B<=r` and `N<=r+1` are simultaneously sharp if the
+labelled fibre values are treated as unconstrained min-plus data.  Work over
+`F2`, take
+`T^*=span(f_1,...,f_r)`, put `b_0=f_1+...+f_r`, and choose a penalty
+`M>r`.  Define the relevant costs by
+
+```text
+lambda(0)=0,
+lambda(f_i)=1,
+lambda(b)=M for every other nonzero b,
+mu(b_0)=0,
+mu(0)=M-1,
+mu(b)=infinity for b notin {0,b_0},
+d=1, so z=mu(0)+d=M.
+```
+
+Take `V_r=F2^r`, use the coordinate covectors as the `r` helper columns, use
+their sum as the target column, and take `X` whose rows are `f_1,...,f_r`.
+This context has response `r`.
+
+Conversely, in any sector of cost at most `r`, every nonzero helper label must
+be one of the `f_i`.  The helper column types span `V_s^vee`, so their images
+under `X` span the row space of `X`; that row space contains the target label
+`b_0`.  A subset of the basis vectors `f_i` spans `b_0` only when it contains
+all `r` of them.  Hence the sector uses at least `r` helper blocks and its
+label image has dimension at least `r`.  Equality follows from the displayed
+construction.
+
+Thus no smaller universal rank or length bound follows from min-plus
+semantics alone.  The displayed assignment is not asserted to satisfy every
+subadditivity and scalar-action identity forced by actual prescribed-coset
+costs.  Sharpness for linear fibre systems, and then for represented codes,
+remains a genuine coding-theoretic question; those extra identities might
+permit a smaller bound.
+
 The nonspanning vectors can be removed in closed form.  In radius notation
 `r=R-1`, Möbius inversion on the full subspace lattice of `V_s^vee` gives the
 exact number
@@ -1302,8 +1339,9 @@ Open mysteries:
    circuit model.
 3. **Tightness — partly settled.**  The caps `R` and `1+k(R-1)` are sharp for
    the abstract scalar and Pareto cost algebras.  Code-realizable sharpness of
-   the `r+1` separating-context bound and contextual-class lower bounds remain
-   open.
+   the `r+1` separating-context bound is not proved; even sharpness under all
+   subadditivity/scalar-action identities of linear fibres remains open.
+   Contextual-class lower bounds are also open.
 4. **Witness semantics.**  Numerical contextual equivalence need not transport
    coefficient argmins.  The bounded witness-cover theorem now proves that all
    coefficient systems and exact supports come from shortenings to at most `r`
