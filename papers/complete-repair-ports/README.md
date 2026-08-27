@@ -4,7 +4,7 @@
 
 ## Read the paper
 
-[**Open the paper (PDF) →**](complete_repair_ports.pdf)
+[**Open the paper (PDF) →**](compositional_recovery.pdf)
 
 **Title:** *Exact Compositional Transfer of Bounded Linear Recovery*
 
@@ -165,7 +165,7 @@ axiom-audit instructions in [`lean/README.md`](lean/README.md).
 
 ## Files
 
-- `complete_repair_ports.tex` is the manuscript driver.
+- `compositional_recovery.tex` is the manuscript driver.
 - `formal-annotations.tex` defines the nonprinting formal-coverage and
   dependency macros used by the manuscript.
 - `sections/` contains the proofs, applications, conclusion, and verification

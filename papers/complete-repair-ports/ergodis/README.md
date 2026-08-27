@@ -196,7 +196,7 @@ The crate is at version 0.1.0; lower-level library interfaces may still evolve.
 
 ## Mathematical and evidence boundary
 
-The companion paper, `../complete_repair_ports.pdf`, proves the labelled
+The companion paper, `../compositional_recovery.pdf`, proves the labelled
 composition and transfer laws from which the recovery compiler is derived.
 ergodis evaluates finite instances and returns replayable witnesses; neither
 its executions nor its benchmarks are premises of those proofs. The Python

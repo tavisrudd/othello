@@ -9,7 +9,7 @@ used to stand in for the relative-weight or concatenation proofs.
 ## A first pass
 
 Read the abstract, the information-hierarchy figure, `thm:main`, and the five-step
-summary following it in [`complete_repair_ports.tex`](complete_repair_ports.tex).
+summary following it in [`compositional_recovery.tex`](compositional_recovery.tex).
 Then read the exact sequence, `prop:puncture-shorten-pair`, and
 `thm:relative-weight-recovery` in
 [`sections/02-confinement-transfer.tex`](sections/02-confinement-transfer.tex),

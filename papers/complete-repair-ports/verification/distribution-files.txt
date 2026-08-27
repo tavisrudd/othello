@@ -3,8 +3,8 @@ LICENSE
 Makefile
 README.md
 REVIEWER_GUIDE.md
-complete_repair_ports.pdf
-complete_repair_ports.tex
+compositional_recovery.pdf
+compositional_recovery.tex
 ergodis/.gitignore
 ergodis/BENCHMARKS.md
 ergodis/Cargo.lock

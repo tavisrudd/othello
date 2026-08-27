@@ -4,7 +4,7 @@ export FORCE_SOURCE_DATE = 1
 TEXSHELL ?= nix develop .\#manuscript --command
 LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
-SOURCE := complete_repair_ports.tex
+SOURCE := compositional_recovery.tex
 
 .PHONY: all check release update-pdf manuscript warnings clean distclean
 
@@ -22,7 +22,7 @@ manuscript: $(SOURCE) refs.bib sections/*.tex figures/*.tex
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 
 warnings: manuscript
-	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' complete_repair_ports.log; then \
+	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' compositional_recovery.log; then \
 		exit 1; \
 	fi
 

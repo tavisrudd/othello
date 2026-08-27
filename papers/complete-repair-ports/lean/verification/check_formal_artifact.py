@@ -75,7 +75,7 @@ def claimed_terminals(data: dict) -> set[str]:
 
 
 def manuscript_environments() -> dict[str, str]:
-    paths = [PAPER_ROOT / "complete_repair_ports.tex"]
+    paths = [PAPER_ROOT / "compositional_recovery.tex"]
     paths.extend(sorted((PAPER_ROOT / "sections").glob("*.tex")))
     result: dict[str, str] = {}
     for path in paths:
@@ -142,7 +142,7 @@ def check_manuscript_annotations(data: dict) -> None:
             )
 
     known_labels = set(environments)
-    all_text = (PAPER_ROOT / "complete_repair_ports.tex").read_text()
+    all_text = (PAPER_ROOT / "compositional_recovery.tex").read_text()
     all_text += "\n".join(
         path.read_text() for path in sorted((PAPER_ROOT / "sections").glob("*.tex"))
     )

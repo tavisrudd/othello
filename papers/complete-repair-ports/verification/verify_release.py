@@ -16,8 +16,8 @@ from pathlib import Path
 
 PAPER = Path(__file__).resolve().parents[1]
 EXPORTER_METADATA = {".gitignore", "PROVENANCE.md", "export-manifest.json"}
-SOURCE = "complete_repair_ports.tex"
-PDF = PAPER / "complete_repair_ports.pdf"
+SOURCE = "compositional_recovery.tex"
+PDF = PAPER / "compositional_recovery.pdf"
 TITLE = "Exact Compositional Transfer of Bounded Linear Recovery"
 DOI = "10.5281/zenodo.22051903"
 DETERMINISTIC_EPOCH = "1767225600"
@@ -85,7 +85,7 @@ def public_text_files() -> list[Path]:
     return [
         PAPER / relative
         for relative in distribution_paths()
-        if relative != "complete_repair_ports.pdf"
+        if relative != "compositional_recovery.pdf"
     ]
 
 

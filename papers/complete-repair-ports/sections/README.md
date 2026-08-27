@@ -1,6 +1,6 @@
 # Section map
 
-`complete_repair_ports.tex` is the active driver. Its modular sources follow
+`compositional_recovery.tex` is the active driver. Its modular sources follow
 the theorem dependency order:
 
 1. `01-complete-ports.tex` — recovery sets, normalized equations, bounded
