@@ -75,31 +75,11 @@
       "source": "sections/03-dictionary.tex",
       "status": "Conditional terminal. The concrete Hankel dictionary and its coding semantics are inputs."
     },
-    "lem:identically-colliding": {
-      "coverage": "absent",
-      "lean": [],
-      "source": "sections/05-polar-tit-interface.tex",
-      "status": "Manuscript reduction to the two inseparable fixed-level calculations."
-    },
-    "lem:linear-modular-pullback": {
-      "coverage": "fragment",
-      "lean": [
-        "PRSPolarInduction.mem_modularContractionKernel_iff"
-      ],
-      "source": "sections/05-polar-tit-interface.tex",
-      "status": "The abstract modular-kernel criterion is checked; the degree-specific linear pullback is a manuscript proof."
-    },
     "lem:marker-collision": {
       "coverage": "absent",
       "lean": [],
       "source": "sections/05-polar-tit-interface.tex",
       "status": "Manuscript marker-collision proof."
-    },
-    "lem:old-marker-fixed-factor": {
-      "coverage": "absent",
-      "lean": [],
-      "source": "sections/05-polar-tit-interface.tex",
-      "status": "Manuscript evaluation-minor and non-identical-vanishing proof; the degree bound enters the formal package as an explicit field."
     },
     "lem:r5-branch": {
       "coverage": "fragment",
@@ -292,7 +272,7 @@
         "CoherentPolarInput.splitFree_implies_persistent_or_modular"
       ],
       "source": "sections/06-redundancies-six-seven.tex",
-      "status": "The conditional interface and its witness use are checked. The two-marker cover, deletion degree `25`, and point-count derivation are manuscript mathematics, not Lean conclusions."
+      "status": "The conditional interface and its witness use are checked. The second-marker scheme degree at most `14` and terminal bad-point bound `24` are manuscript mathematics, not Lean conclusions."
     },
     "prop:recursive-component-selection": {
       "coverage": "fragment",
@@ -405,6 +385,12 @@
       "evidence": [
         "certificate-r7"
       ],
+      "imports": [
+        "ball-de-beule-mds",
+        "duer",
+        "seroussi-roth",
+        "wu-ding-chen"
+      ],
       "lean": [
         "PRSRedundancySixSeven.redundancySevenAllFieldSynthesis",
         "PRSRedundancySixSevenCertificate.redundancySeven_count_exhaustion"
@@ -413,9 +399,10 @@
         "redundancy-seven-classification"
       ],
       "source": "sections/06-redundancies-six-seven.tex",
-      "status": "Conditional synthesis and finite-row arithmetic. The paper-local `q=7,8,9` rows are not promoted by Lean; at `q=8` the separately imported radius and executable exact-distance extraction (diagonal tangent plus central nucleus) lie outside this formal aggregate.",
+      "status": "Conditional synthesis and finite-row arithmetic. The paper-local `q=7,8,9` radius promotion is not proved by Lean: `q=7,9` use the parity-check extension argument and the Ball--De Beule MDS bound, while `q=8` uses the separately imported radius and executable exact-distance extraction.",
       "uses": [
-        "thm:r6"
+        "thm:r6",
+        "cor:one-column-extensions"
       ]
     },
     "thm:recursive-carrier": {

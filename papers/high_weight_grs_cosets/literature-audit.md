@@ -1,6 +1,7 @@
 # Role-based literature and metadata audit
 
-Date: 2026-07-23; dependency pinpoints refreshed 2026-07-25
+Date: 2026-07-23; dependency pinpoints refreshed 2026-07-25; R7 radius
+input refreshed 2026-08-27
 
 ## Opening summary
 
@@ -9,10 +10,11 @@ fixed-level, residual-discriminant, and ordered-Hessian audits made on
 2026-07-22 and 2026-07-23. It does not turn a targeted search into an
 unqualified priority claim.
 
-Of the 33 bibliography entries, ten were read at **full text** or at full
+Of the 34 bibliography entries, eleven were read at **full text** or at full
 text at their load-bearing statements (Kaipa; Zhang--Wan--Kaipa; Wang;
 Ball--Lavrauw; Xu 2023; Wu--Ding--Chen; Wang--Wu--Hu;
-Blokhuis--Pellikaan--Szőnyi; Kaipa--Pradhan 2025; Dür 1994), eleven at **partial**
+Blokhuis--Pellikaan--Szőnyi; Kaipa--Pradhan 2025; Dür 1994;
+Ball--De Beule), eleven at **partial**
 depth (Kaipa--Patanker--Pradhan; Günay--Lavrauw;
 Davydov--Marcugini--Pambianco 2022; Cesaratto--Matera--Pérez;
 Gmainer--Havlicek; Seroussi--Roth; Aubry--Perret; and the four repository
@@ -77,6 +79,11 @@ the cited papers' bibliographies.
   `b28e0b84b00255aadf38d6f6b8d2204a76228f5acc0eacb73066cd40401ed9b1`.
   Theorem 2.4 states the exact completeness--covering-radius biconditional
   consumed here.
+- Ball--De Beule — **full text**, arXiv v1, all sections, with
+  Theorem 5.2 load-bearing; cache key `arXiv:1201.5994`, SHA-256
+  `0060fe492b052afe81822171901750ba7022eb51d70f51dbfc09b4df9eab94a4`.
+  At \(q=9=3^2\) and dimension \(4=2\cdot3-2\), the theorem excludes the
+  length-\(11\) MDS code that a weight-seven R7 syndrome would produce.
 - Kaipa--Patanker--Pradhan — **partial**, current cached v3 abstract,
   introduction, and orbit-classification statements; cache key
   `arXiv:2312.07118`, SHA-256
@@ -160,6 +167,12 @@ literature-audit baseline.  The new labelled mathematical items are
 `prop:higher-lucas-endpoint`; `tab:bottom-ledger-disposition` is their trust
 ledger.  The all-level stable-component and covering-radius headlines were
 also expanded to consume these pieces.
+
+C977 subsequently proved that the exact-linear-gcd branches are empty off the
+persistent carrier and removed `lem:old-marker-fixed-factor` and
+`lem:identically-colliding` from the active submission interface.  They remain
+part of this historical delta only; no active theorem or novelty claim depends
+on them.
 
 The first six additions are proof-local specializations of ingredients
 already covered by the audit: divisibility after specialization, preservation
@@ -394,6 +407,7 @@ Surveys volume 6 (2019).
 |---|---|---|---|
 | SeroussiRoth1986 | `10.1109/TIT.1986.1057188` | partial, Theorem 1 and its corollary | covering-radius/MDS-extension input |
 | Dur1994 | `10.1016/0012-365X(94)90256-9` | full text, especially Theorem 2.4 and the syndrome/deep-hole setup | completeness--covering-radius equivalence |
+| BallDeBeule2012 | `10.1007/s10623-012-9658-6`, `arXiv:1201.5994` | full text, all sections; Theorem 5.2 is load-bearing | MDS length bound closing the \(q=9\) R7 radius gate |
 | Kaipa2017 | `10.1109/TIT.2017.2706677` | full text, sections recorded above | deep-hole/MDS dictionary |
 | ZWK2020 | `10.1109/TIT.2019.2940962` | full text, Sections I--IV | PRS lower-redundancy frontier |
 | ZhangWan2017 | `arXiv:1711.02292` | abstract/metadata only | explicit PRS deep-hole families |

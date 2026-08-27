@@ -33,6 +33,20 @@ $W_f$, the nonsurjectivity of that image, which \emph{syndromes} are thereby
 split-free, and how this pencil becomes the terminal engine of the
 arbitrary-redundancy theorem.
 
+This section therefore has two roles.  The arbitrary-redundancy theorem above
+uses only the exact split-member count and branch budget proved here; the full
+R5 theorem is a sharper terminal classification placed afterward.  Its case
+map is
+\[
+\begin{aligned}
+ \text{quadratic gcd}&\longrightarrow \mathrm T,\mathrm S,\\
+ C_3\text{-cover}&\longrightarrow \mathrm O^\pm,\text{ nucleus/wild},\\
+ S_3\text{-cover}&\longrightarrow\text{small-field sporadics}.
+\end{aligned}
+\]
+The cyclic and wild families belong to this terminal analysis and are not
+induction hypotheses for the arbitrary-redundancy result.
+
 \begin{theorem}[Complete redundancy-five classification]\label{thm:r5}%
 \coverage{conditional_deduction}%
 \lean{PRSRedundancyFiveCertified.redundancyFiveSynthesisWithCertificate,PRSRedundancyFive.FamilyData,PRSRedundancyFiveCertificate}%
@@ -65,9 +79,6 @@ nonsporadic totals are
 according as $q\equiv1\pmod3$ with characteristic not three,
 $q\equiv2\pmod3$, or $\operatorname{char}\F_q=3$.
 \end{theorem}
-
-At \(q=8\) the classification gives \(1116\) deep-hole directions,
-splitting as \(360\) nonsporadic and \(756\) sporadic ones.
 
 \begin{proposition}[Radius gate]\label{prop:r5-radius}%
 \coverage{fragment}%
@@ -196,14 +207,18 @@ $t\mapsto\zeta t$.
 
 For a rational ramification pair, Frobenius fixes the points and the
 deck map descends exactly when $\zeta^q=\zeta$, namely
-$q\equiv1\pmod3$.  Thus its complement is deep exactly for
+$q\equiv1\pmod3$.  In that case any unramified fiber containing a rational
+point is its three-point rational deck orbit, and such split fibers exist;
+without descent no unramified fiber is completely split.  Thus the
+rational-pair pencil is deep exactly for
 $q\equiv2\pmod3$.  The setwise stabilizer of the ordered normal form is
 the split dihedral group of order $2(q-1)$, so the orbit size is
 \[
        \frac{q(q^2-1)}{2(q-1)}=\frac{q(q+1)}2.
 \]
 For a conjugate pair Frobenius interchanges the fixed points and
-inverts the multiplier; descent is instead $q\equiv2\pmod3$.  The
+inverts the multiplier; descent, and hence the split-fiber congruence, is
+instead $q\equiv2\pmod3$.  The
 nonsplit dihedral stabilizer has order $2(q+1)$ and the orbit size is
 $q(q-1)/2$.
 
@@ -282,59 +297,6 @@ perfect cube is met only at its root, where the residual is a square,
 contributing $1$.  A member with one rational root and an irreducible
 quadratic cofactor contributes $0$ there, and a member with no rational
 root is met at no rational $x$.  Summing gives \eqref{eq:r5-count}.
-\end{proof}
-
-The proof exhibits the fiber square as a double cover, and that is what
-identifies it with the genus-one curve of the incidence literature.
-
-\begin{proposition}[The fiber square is the incidence curve]
-\label{prop:r5-fibre-is-elliptic}%
-\coverage{absent}%
-Keep the hypotheses of Proposition~\ref{prop:r5-count}, assume
-$\operatorname{char}\F_q\neq2$, and let
-$D_f(x)=\operatorname{disc}(h_x)/4$.  The restriction is needed here and
-not in Proposition~\ref{prop:r5-count}: in characteristic two the
-quotient by four is undefined, and a separable quadratic cover is
-Artin--Schreier rather than the Kummer cover displayed below.  The first projection realizes
-$Y_f$ as the double cover
-\[
-       w^2=D_f(x)
-\]
-of $\PP^1$, branched where $D_f$ vanishes.  If moreover $W_f$ misses the
-twisted cubic and $\operatorname{char}\F_q\neq2,3$, then $D_f$ is the
-discriminant quartic that Kaipa and Pradhan attach to the line, so the
-normalization of $Y_f$ is their elliptic curve $E_{W_f}$ and
-\[
-       \#Y_f(\F_q)=\#E_{W_f}(\F_q).
-\]
-\end{proposition}
-
-\begin{proof}
-The fiber of $Y_f$ over $x$ under the first projection is the root set
-of the residual quadratic $h_x$, and its two roots are interchanged by
-the choice of a square root of $\operatorname{disc}(h_x)$; so the
-projection is the stated double cover, and it is branched exactly where
-that discriminant vanishes.  Kaipa and Pradhan form the discriminant of
-the same residual quadratic and define $E_L$ as the nonsingular model
-of $w^2=D_L$ \cite[\S4--\S5]{KaipaPradhan2025}, taking as we do one quarter
-of the discriminant of the same residual quadratic.  They therefore differ by
-the square of the nonzero rational function $\lambda\in\F_q(x)^\times$
-that relates the two normalizations of the residual quadratic,
-\[
-       D_f=\lambda^2D_L\quad\text{in }\F_q(x)^\times,
-\]
-with equality when the representative of $g_x$ is normalized as they
-normalize it.  Equality of square classes in the function field, rather
-than pointwise at rational $x$, is what rules out a quadratic twist and
-leaves the cover unchanged.  For the point counts,
-note that on that stratum $D_f$ has nonzero discriminant, so the double
-cover displayed above is already smooth and is its own normalization,
-and $Y_f$ is smooth there as well; the two smooth projective models are
-then isomorphic and their counts agree.  Away from that stratum the
-identification is birational and the counts may differ at a rational
-singularity, which is why the exact count of
-Proposition~\ref{prop:r5-count} is stated for $\#Y_f(\F_q)$ rather than
-for the count on a normalization.
 \end{proof}
 
 \begin{lemma}[Branch budget]\label{lem:r5-branch}%
@@ -465,39 +427,6 @@ only admissible value left is $12$, and by Lemma~\ref{lem:r5-branch}
 that value is attained only at $(d_2,d_3)=(4,0)$.
 \end{proof}
 
-Proposition~\ref{prop:r5-count} is a counting identity valid in every
-characteristic, and the quantitative splitting law of
-Corollary~\ref{cor:r5-equidistribution} follows from it directly.  In
-the tame range it is equivalent to an incidence count in the
-twisted-cubic line literature.  Precisely: when $W_f$ misses the twisted
-cubic, so that $d_3=0$, and $\operatorname{char}\F_q\neq2,3$, the
-quantity $d_2$ is the invariant $\eta_L$ attached to the binary quartic
-of the line and $\#Y_f(\F_q)$ is the point count of the associated
-elliptic curve, so that \eqref{eq:r5-count} reads
-\[
-       N_f=\frac{\#E_L(\F_q)-3\eta_L}{6},
-\]
-which is the incidence count of \cite{KaipaPradhan2025}.  That count
-should be taken in the form derived in their proof, namely
-$|S\cap\mathcal O_3|=(\nu_L-\eta_L)/3$ together with
-$\nu_L=(\#E_L(\F_q)-\eta_L)/2$
-\cite[Prop.~4.5(3) and Thm.~5.1]{KaipaPradhan2025}; the denominator
-printed in their Theorem~1.3(3) differs from this proof consequence.  We use
-the latter, whose denominator $6$ also makes the five incidence counts sum to
-$q+1$.
-Proposition~\ref{prop:r5-count} itself drops
-the restriction $\operatorname{char}\F_q\neq2,3$ altogether, brings in
-lines meeting the curve through the $d_3$ term, and needs no invariant
-theory of quartics: its proof counts rational roots in fibers and uses
-neither a discriminant nor a division by two.  What does stay inside
-$\operatorname{char}\F_q\neq2,3$ is the comparison itself, through
-Proposition~\ref{prop:r5-fibre-is-elliptic}, since the elliptic model is
-built from a discriminant.  An
-exhaustive check of \eqref{eq:r5-count} and of
-Lemma~\ref{lem:r5-branch} over every point of $\mathrm{PG}(4,q)$ for the
-prime powers $4\leq q\leq32$, in every characteristic, is recorded in the
-supplement.
-
 \begin{proposition}[Exhaustion and finite bridge]\label{prop:r5-bridge}%
 \coverage{fragment}%
 \lean{PRSRedundancyFive.requiredBridgeFieldOrders,PRSRedundancyFiveCertified.requiredBridgeFieldOrders_subset_certifiedBridgeFieldOrders,certifiedBridgeFieldOrders_exceed_required_only_at_sixteen,PRSRedundancyFiveCertificate.certified_comparison_band_has_no_sporadic,certified_orbit_summaries_agree_with_sporadic_records,CertificateValidation}%
@@ -528,6 +457,87 @@ settled by Lemmas~\ref{lem:cyclic} and \ref{lem:s3}.  The stated finite
 residue, canonical representatives, stabilizers, histograms, and
 Frobenius links are exactly the domain of Certificate R5.
 \end{proof}
+
+The fiber square is also the genus-one curve of the incidence literature.
+
+\begin{proposition}[The fiber square is the incidence curve]
+\label{prop:r5-fibre-is-elliptic}%
+\coverage{absent}%
+Keep the hypotheses of Proposition~\ref{prop:r5-count}, assume
+$\operatorname{char}\F_q\neq2$.  For each \(x\in\PP^1\), let \(g_x\) be the
+unique pencil member vanishing at \(x\), write \(g_x=\ell_xh_x\), and put
+$D_f(x)=\operatorname{disc}(h_x)/4$.  The restriction is needed here and
+not in Proposition~\ref{prop:r5-count}: in characteristic two the
+quotient by four is undefined, and a separable quadratic cover is
+Artin--Schreier rather than the Kummer cover displayed below.  The first
+projection realizes $Y_f$ as the double cover
+\[
+       w^2=D_f(x)
+\]
+of $\PP^1$, branched where $D_f$ vanishes.  If moreover $W_f$ misses the
+twisted cubic and $\operatorname{char}\F_q\neq2,3$, then $D_f$ is the
+discriminant quartic that Kaipa and Pradhan attach to the line, so the
+normalization of $Y_f$ is their elliptic curve $E_{W_f}$ and
+\[
+       \#Y_f(\F_q)=\#E_{W_f}(\F_q).
+\]
+\end{proposition}
+
+\begin{proof}
+The fiber of $Y_f$ over $x$ under the first projection is the root set
+of the residual quadratic $h_x$, and its two roots are interchanged by
+the choice of a square root of $\operatorname{disc}(h_x)$; so the
+projection is the stated double cover, and it is branched exactly where
+that discriminant vanishes.  Kaipa and Pradhan form the discriminant of
+the same residual quadratic and define $E_L$ as the nonsingular model
+of $w^2=D_L$ \cite[\S4--\S5]{KaipaPradhan2025}, taking as we do one quarter
+of the discriminant of the same residual quadratic.  They therefore differ by
+the square of the nonzero rational function $\lambda\in\F_q(x)^\times$
+that relates the two normalizations of the residual quadratic,
+\[
+       D_f=\lambda^2D_L\quad\text{in }\F_q(x)^\times,
+\]
+with equality when the representative of $g_x$ is normalized as they
+normalize it.  Equality of square classes in the function field, rather
+than pointwise at rational $x$, is what rules out a quadratic twist and
+leaves the cover unchanged.  For the point counts, note that on that
+stratum $D_f$ has nonzero discriminant, so the double cover displayed
+above is already smooth and is its own normalization, and $Y_f$ is
+smooth there as well; the two smooth projective models are then
+isomorphic and their counts agree.  Away from that stratum the
+identification is birational and the counts may differ at a rational
+singularity, which is why the exact count of
+Proposition~\ref{prop:r5-count} is stated for $\#Y_f(\F_q)$ rather than
+for the count on a normalization.
+\end{proof}
+
+Proposition~\ref{prop:r5-count} is a counting identity valid in every
+characteristic, and the quantitative splitting law of
+Corollary~\ref{cor:r5-equidistribution} follows from it directly.  In
+the tame range it is equivalent to an incidence count in the
+twisted-cubic line literature.  Precisely: when $W_f$ misses the twisted
+cubic, so that $d_3=0$, and $\operatorname{char}\F_q\neq2,3$, the
+quantity $d_2$ is the invariant $\eta_L$ attached to the binary quartic
+of the line and $\#Y_f(\F_q)$ is the point count of the associated
+elliptic curve, so that \eqref{eq:r5-count} reads
+\[
+       N_f=\frac{\#E_L(\F_q)-3\eta_L}{6}.
+\]
+This is the incidence count of \cite{KaipaPradhan2025}.  We use the form
+derived in their proof,
+$|L\cap\mathcal O_3|=(\nu_L-\eta_L)/3$ and
+$\nu_L=(\#E_L(\F_q)-\eta_L)/2$
+\cite[Prop.~4.5(3) and Thm.~5.1]{KaipaPradhan2025}; the denominator
+printed in their Theorem~1.3(3) differs from this proof consequence.
+The denominator $6$ also makes the five incidence counts sum to $q+1$.
+
+Proposition~\ref{prop:r5-count} itself drops the restrictions on
+characteristic, includes lines meeting the curve through the $d_3$ term, and
+uses neither invariant theory nor a discriminant.  Only the elliptic-model
+comparison remains restricted to characteristic different from two and three.
+The supplement exhaustively checks \eqref{eq:r5-count} and
+Lemma~\ref{lem:r5-branch} over every point of $\mathrm{PG}(4,q)$ for all prime
+powers $4\leq q\leq32$.
 
 \begin{remark}[Relation to the twisted-cubic line literature]
 \label{rem:r5-line-literature}
@@ -600,27 +610,12 @@ the exact number of planes of each orbit through each line for
 $q\geq5$ \cite[Thm.~3.3]{DMP2022}, building on their line-orbit
 classification \cite{DMP2023,DMP2021}; G\"unay and Lavrauw give the
 point-orbit and plane-orbit distributions of the same classes for odd
-$q$ prime to three \cite{GunayLavrauw2022}.  For the generic class and
-$\operatorname{char}\F_q\neq2,3$, Kaipa and Pradhan attach to a line
-$L$ a binary quartic $\varphi_L$ and an elliptic curve $E_L$, and count
-$|W_f\cap\mathcal O_3|$ in terms of $\#E_L(\F_q)$ and the invariant
-$\eta_L\in\{0,1,2,4\}$ recording the rational factorization type of
-$\varphi_L$.  That count is the specialization of
-Proposition~\ref{prop:r5-count} discussed after
-Corollary~\ref{cor:r5-forced}, and
-Proposition~\ref{prop:r5-fibre-is-elliptic} identifies their curve with
-our fiber square.  By \eqref{eq:r5-orbit-criterion} a generic line is
-split-free exactly when $\#E_L(\F_q)=3\eta_L\leq12$, which the Hasse
-bound $\#E_L(\F_q)\geq q+1-2\sqrt q$ forbids for $q\geq20$ and permits
-only for $q\leq19$.  This is not a second route to
-Lemma~\ref{lem:s3} but the same one in other coordinates:
-Proposition~\ref{prop:r5-fibre-is-elliptic} identifies $E_L$ with $Y_f$,
-so both arguments apply a Weil-type bound to a single genus-one curve.
-What the elliptic form adds is not independence but an explanation, since
-$3\eta_L\leq12$ is visibly a bounded quantity while $\#E_L(\F_q)$ grows
-with $q$.  The generic class is settled in
-characteristic three in \cite{KaipaPradhan2025char3} and in
-characteristic two by Ceria and Pavese \cite{CeriaPavese2023}.
+$q$ prime to three \cite{GunayLavrauw2022}.  For the generic class in
+characteristic different from two and three, Kaipa and Pradhan's elliptic
+formula is exactly the specialization of Proposition~\ref{prop:r5-count}
+established above, not an independent route to Lemma~\ref{lem:s3}.  The
+generic class in characteristics three and two is treated respectively in
+\cite{KaipaPradhan2025char3} and \cite{CeriaPavese2023}.
 
 What this section contributes is therefore not the pencil-level
 classification but its redundancy-five syndrome-level source and

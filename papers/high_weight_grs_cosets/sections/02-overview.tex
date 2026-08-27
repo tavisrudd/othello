@@ -61,9 +61,8 @@ lower witness \(g\).}
 \label{fig:polar-flow}
 \end{figure}
 
-The proof has one recursive spine and six evaluated levels.
-Table~\ref{tab:dependency-map} shows what changes from one level to the next;
-its deletion budget is the number of points excluded from the terminal cover.
+The proof has one recursive spine and three retained fixed-level refinements.
+Table~\ref{tab:dependency-map} shows what changes from R5 through R7.
 Table~\ref{tab:classification-status} separately records which geometric
 classifications promote to code deep-hole classifications.
 
@@ -83,23 +82,18 @@ Level & New obstruction & Main geometric mechanism & Closing gate\\
 R5 & cubic splitting & cubic pencil and off-diagonal \((2,2)\) fiber square;
 exact fiber-square counting identity & branch correction at most \(12\), or \(6\) in
 characteristic two; geometric threshold \(20\) and seven-field certificate\\
-R6 & one retained marker & one contraction to the same R5 curve & deletion
-budget \(19\); geometric threshold \(29\) and finite bridge\\
+R6 & one retained marker & one contraction to the same R5 curve & marker
+scheme degree \(13\), terminal bad-point bound \(18\); geometric threshold
+\(29\) and finite bridge\\
 R7 & two retained markers & two coherent contractions to the same R5 curve &
-deletion budget \(25\); geometric threshold \(37\) and finite bridge\\
-R8 & three retained markers & the same integral \((2,2)\) terminal cover &
-deletion budget \(30\); \(q\geq43\)\\
-R9 & four markers and a characteristic-seven carrier & terminal cover off
-the carrier; residual-quadratic genus-one slice on it & deletion \(36\),
-\(q\geq53\); in characteristic seven, \(q=343\) is geometric and the
-below-range \(q=49\) row is certified\\
-R10 & five markers and the first higher Lucas carrier & odd terminal cover;
-binary ordered-Hessian genus-one slice; final-pair Artin--Schreier trace test
-on the carrier & odd: deletion \(42\), \(q\geq59\); binary: selector bound
-\(40\), deletion \(23\), \(q\geq64\); stated carrier certificates\\
+marker scheme degrees \(12,14\), terminal bad-point bound \(24\); geometric
+threshold \(37\) and finite bridge\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The exact R8--R10 calculations belong to the companion record and are not
+claims of this submission.
 
 \begin{table}[H]
 \centering
@@ -118,12 +112,8 @@ Red. & Field range & Split-free geometry & Deep holes and radius
 \midrule
 \(5\) & \(q\geq7\) & Complete & Complete; \(\rho=4\) & None\\
 \(6\) & \(q\geq7\) & Complete & Complete; \(\rho=5\) & None\\
-\(7\) & \(q\geq7\) & Complete & Complete for \(q\geq11\) and at $q=8$;
-there \(\rho=7\) and exactly ten directions in two orbits are deep & Radius
-at $q=7,9$\\
-\(8\) & \(q\geq43\) & Persistent-only & Complete; \(\rho=7\) & Below range\\
-\(9\) & \(q\geq53\) & Persistent-only & Complete; \(\rho=8\) & Below range\\
-\(10\) & \(q\geq59\) & Persistent-only & Complete; \(\rho=9\) & Below range\\
+\(7\) & \(q\geq7\) & Complete & Complete; \(\rho=6\) except at $q=8$,
+where \(\rho=7\) and exactly ten directions in two orbits are deep & None\\
 \(r\geq6\) & \(q\geq Q_r^*\) & Contained in persistent plus maximal Lucas;
 persistent-only if \(p>r-1\) & Complete if \(p>r-1\) & Lucas arithmetic in
 small characteristic\\

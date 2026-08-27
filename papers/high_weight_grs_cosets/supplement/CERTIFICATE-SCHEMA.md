@@ -74,11 +74,13 @@ record.
 Each field row states the actual searched domain, the classified split-free
 count, the sum of the listed orbit sizes, and whether the resulting exhaustion
 identity holds.  Persistent, modular, split-free, and code-deep flags are
-separate.  In particular, the paper-local R7 code-deep flag is `null`, not
+separate.  In particular, the certificate-local R7 code-deep flag is `null`, not
 `true`, at \(q=7,8,9\).  At \(q=8\) the external radius theorem and companion
 classifier separately extract exact distances: the diagonal tangent and
 central nucleus are deep and every remaining row is shallow. The immutable
-paper-local flags record the older split-free certificate boundary.
+certificate flags record the split-free certificate boundary.  The manuscript
+separately promotes the \(q=7,9\) rows using the parity-check extension
+identity and the corresponding MDS length bounds.
 
 ## Algebra record
 

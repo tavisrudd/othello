@@ -11,6 +11,18 @@
       }
     ]
   },
+  "ball-de-beule-mds": {
+    "citation": "BallDeBeule2012",
+    "pinpoint": "Theorem 5.2",
+    "used": "The MDS length bound at q=9 and dimension four, excluding a linear [11,4,8] code.",
+    "conventions": [
+      {
+        "aspect": "hypothesis",
+        "requirement": "For q=p^h nonprime, the code dimension satisfies k <= 2p-2.",
+        "matched": "Here q=9=3^2 and the dual dimension is k=4=2p-2."
+      }
+    ]
+  },
   "duer": {
     "citation": "Dur1994",
     "pinpoint": "Theorem 2.4",
@@ -44,6 +56,18 @@
         "aspect": "framing",
         "requirement": "Only the endpoint criterion, not the full carrier classification, is imported.",
         "matched": "The manuscript proves the adjacent-zero carrier structure separately."
+      }
+    ]
+  },
+  "wu-ding-chen": {
+    "citation": "WuDingChen2023",
+    "pinpoint": "Theorem 17(1)",
+    "used": "The dimension-two projective Reed--Solomon covering radius at q=8.",
+    "conventions": [
+      {
+        "aspect": "hypothesis",
+        "requirement": "The code is the length-(q+1), dimension-two projective Reed--Solomon code in the theorem's exceptional even-characteristic range.",
+        "matched": "At redundancy seven and q=8, PRS(q-6) is PRS(2) of length nine."
       }
     ]
   }

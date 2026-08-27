@@ -10,13 +10,13 @@ packages, marker and ramification divisors, and explicit adjacent-zero Hankel
 kernels.  These calculations refine the general theorem; they are not its
 induction steps.
 
-The exact exceptional orbits and separate covering-radius gates at
-redundancies six and seven are stated in Theorems~\ref{thm:r6} and
-\ref{thm:r7}.  In each case the geometric
-argument first classifies split-free syndrome directions and only then invokes
-Proposition~\ref{prop:upper-radius}.
+The exceptional-orbit and split-free classifications at redundancies six and
+seven are the fixed-level geometric contribution, stated in
+Theorems~\ref{thm:r6} and~\ref{thm:r7}.  Their proofs separately supply the
+covering-radius promotion; Proposition~\ref{prop:upper-radius} concerns the
+higher fixed levels and the general large-characteristic range.
 
-\begin{theorem}[Redundancy-six deep holes and redundancy-seven split-free syndromes]
+\begin{theorem}[Redundancy-six and redundancy-seven deep holes]
 \label{thm:spine}%
 \coverage{conditional_deduction}%
 \lean{PRSRedundancySixSeven.redundancySixAllFieldSynthesis,redundancySevenAllFieldSynthesis,PRSPolarInduction.fifthPower_sigmaInversionOrbitCount}%
@@ -31,10 +31,10 @@ The following statements hold.
       complete split-free redundancy-seven classification.  For $q\geq13$
       only the persistent families and, when $q=2^m$ with odd $m$, one
       central nucleus point remain.  The result is a deep-hole classification
-      for $q\geq11$.  At $q=8$ the known radius is seven; exact extraction
+      for every $q\geq7$.  The radius is six except at $q=8$, where it is
+      seven; exact extraction
       leaves the nine-direction diagonal tangent orbit and the fixed central
-      nucleus, so the classification is complete there as well.  The radii at
-      $q=7,9$ remain separate.
+      nucleus as the ten deep directions.
 \end{enumerate}
 \end{theorem}
 

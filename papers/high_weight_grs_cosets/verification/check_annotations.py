@@ -38,7 +38,13 @@ LINKS: dict[str, dict[str, list[str]]] = {
     },
     "thm:r7": {
         "evidence": ["certificate-r7"],
-        "uses": ["thm:r6"],
+        "uses": ["thm:r6", "cor:one-column-extensions"],
+        "imports": [
+            "ball-de-beule-mds",
+            "duer",
+            "seroussi-roth",
+            "wu-ding-chen",
+        ],
         "proves": ["redundancy-seven-classification"],
     },
     "thm:r8": {

@@ -93,7 +93,7 @@ with a prominent status note requiring removal before any autonomous release.
 Three independent source reviews accepted the revised proof and exposition
 spines.  The canonical and TIT builds pass at 44 and 32 pages, respectively;
 all affected pages and tables were visually inspected, and the supplement
-verification gate passes with 53 adopted manuscript labels.
+verification gate passes with 50 adopted manuscript labels.
 
 ## Section-level spine pass: coding payoff
 
@@ -122,3 +122,23 @@ sums, but the manuscript uses only “double counting yields” and “the stand
 recurrence gives,” with no priority adjective.  Both PDFs remain at 44 and 32
 pages; all six affected canonical/TIT pages were visually inspected and are
 clean.
+
+## Redundancy-seven radius closure
+
+The apparent \(q=7,9\) radius gap is closed structurally.  A weight-seven
+syndrome for \(\PRS(q-6)\) would make \([H\mid f]\) a parity-check matrix of
+an \([q+2,q-5,8]_q\) MDS code.  At \(q=7\) this would require nine distinct
+points of \(\mathbb P^1(\mathbb F_7)\); at \(q=9\) it would give an
+\([11,4,8]_9\) code,
+excluded at the exact endpoint \(4=2p-2\) by Ball--De Beule, Theorem 5.2.
+The nonempty split-free R7 rows give the matching lower bound, so the radius
+is six in both fields.  Together with the existing \(q=8\) radius-seven
+extraction and the \(q\geq11\) Seroussi--Roth--Dür input, Theorem
+\(\mathrm{R7}\) is now a complete deep-hole classification for every prime
+power \(q\geq7\).  An independent cold red team accepted the parameter
+translation and flagged the shortening-versus-puncturing distinction; the
+manuscript states the argument only through the parity-check matrix.
+The post-integration red team also removed stale R8--R10 submission rows,
+corrected the R6/R7 terminal bounds to \(18/24\), and returned final
+**ACCEPT**.  Both 44-page canonical and 32-page TIT builds and the complete
+supplement gate pass.

@@ -8,6 +8,18 @@ cases must account
 for every polar line.  The resulting structural arguments, together with the
 bounded certificates, prove Theorems~\ref{thm:r6} and~\ref{thm:r7}.
 
+The numerical mechanism is compact:
+\[
+\begin{array}{c|c|c|c|c}
+\text{level}&\text{stages}&\text{marker-scheme degrees}
+ &\text{terminal bad points}&\text{first field gate}\\ \hline
+\mathrm{R6}&1&13&18&29\\
+\mathrm{R7}&2&12,14&24&37.
+\end{array}
+\]
+The corresponding contained residues are the persistent carrier together with
+the binary nucleus line at R6 and its central-point lift at R7.
+
 \subsection{Redundancy six}
 
 For
@@ -92,9 +104,10 @@ Cauchy--Binet gives the secant determinant
 D_f(r)=-\Delta_{012}r^3+\Delta_{013}r^2
        -\Delta_{023}r+\Delta_{123}.
 \]
-It vanishes identically exactly when $\operatorname{rank}C_f\leq2$,
-equivalently when $W_f$ has quadratic gcd.  In the trivial-gcd case it
-therefore has at most three zeros.
+It vanishes identically exactly when $\operatorname{rank}C_f\leq2$.  On the
+rank-two open this is equivalent to $W_f$ having quadratic gcd; rank one is
+the normal-rational-curve boundary.  In the trivial-gcd case it therefore has
+at most three zeros.
 \end{proof}
 
 \begin{proposition}[Complete lower trivial-gcd carrier]
@@ -156,7 +169,7 @@ Proposition~\ref{prop:r5-bridge}.  This proves (iv) and exhausts the
 inseparable case.  The three alternatives are therefore exhaustive.
 \end{proof}
 
-\begin{proposition}[Cyclic and collision degrees]\label{prop:r6-degrees}%
+\begin{proposition}[Cyclic, collision, and terminal bounds]\label{prop:r6-degrees}%
 \coverage{absent}%
 For a trivial-gcd net:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -166,8 +179,9 @@ of degree four and
 contains no polar line;
 \item the pointed ramification condition has degree at most six and
 does not vanish identically;
-\item an $S_3$ lower pencil with the marked root deleted has total
-deletion degree at most nineteen.
+\item on an $S_3$ lower pencil, at most eighteen rational points of the
+off-diagonal fiber square fail to encode a completely split member avoiding a
+specified marked root.
 \end{enumerate}
 \end{proposition}
 
@@ -193,14 +207,15 @@ rows this would require simultaneously
 \]
 contrary to \(f\ne0\).  Thus the bound holds in every characteristic.
 
-Finally the R5 off-diagonal curve has deletion degree thirteen,
-including its possible rational singular point.  The unique cubic
-through a specified marker contributes at most six ordered pairs,
-giving $(g,\delta,\kappa)=(1,19,1)$ and
+Finally, Proposition~\ref{prop:r5-count} and Lemma~\ref{lem:r5-branch} show
+that at most twelve rational points encode nonsplit members.
+Base-point-freeness gives a unique pencil member through the specified marker,
+and it contributes at most six further points.  Thus the terminal bad set has
+size at most \(18\), and a permitted split member exists as soon as
 \[
-       q+1-2\sqrt q>19.
+       q+1-2\sqrt q>18.
 \]
-Its first prime-power solution is $29$.
+The first prime-power solution is $29$.
 \end{proof}
 
 \begin{proposition}[Modular contained components]\label{prop:r6-modular}%
@@ -346,21 +361,16 @@ the excluded parameter scheme therefore has degree
 For every remaining marker, the lower syndrome lies outside \(\cP_5\) and the
 cyclic locus.  Lemma~\ref{lem:basepointfree-off-persistent}
 makes its cubic pencil base-point-free, and Lemma~\ref{lem:s3} supplies the
-geometrically integral off-diagonal curve.  Its singular, diagonal, and branch
-deletions have degree at most thirteen, and deleting the unique cubic
-through the marker removes at most six ordered pairs.  Thus
+geometrically integral off-diagonal curve.  If no split member avoids the
+marker, Proposition~\ref{prop:r6-degrees}(iii) bounds its rational points by
+eighteen.  Aubry--Perret therefore supplies an allowed member when
 \[
- (g,\delta,\kappa)=(1,19,1),\qquad q+1-2\sqrt q>19
+ q+1-2\sqrt q>18,
 \]
-for every \(q\geq29\).  Explicitly,
-\[
-\mathcal H_1(1,19)
- =1+\left\lfloor(1+\sqrt{19})^2\right\rfloor=29,
-\qquad 30-2\sqrt{29}>19.
-\]
-These data form the one-step package of
-Definition~\ref{def:lower-package}, with \(d=13\), so
-Theorem~\ref{thm:induction} produces a split squarefree quartic.
+whose first prime-power solution is \(29\).
+Together with the one-step parameter package above, of degree \(d=13\), this
+terminal bad-point bound meets Theorem~\ref{thm:induction}, which produces a
+split squarefree quartic.
 
 \emph{The modular residue.}
 This is one field-order threshold, not three characteristic-dependent
@@ -467,12 +477,13 @@ Coefficient collection gives
 \[
 (t-r)g\in W_f\quad\Longleftrightarrow\quad g\in W_{b(r)};
 \]
-the lift is squarefree exactly when $g(r)\ne0$.
+the lift is squarefree exactly when \(g\) is squarefree and \(g(r)\ne0\).
 
-The contracted net \(W_{b(r)}\) has quadratic gcd exactly when its
-three-row catalecticant has rank at most two.  Unless the first-polar
-line is contained in that rank-two locus, these parameters form the
-degree-at-most-three intersection of
+On the rank-two Hankel-row open, the contracted net \(W_{b(r)}\) has quadratic
+gcd exactly when its three-row catalecticant has rank at most two.  The
+rank-one boundary is part of the persistent contained case.  Unless the
+first-polar line is contained in that rank-two locus, the remaining parameters
+form the degree-at-most-three intersection of
 Proposition~\ref{prop:r6-secant}; the contained case is
 Corollary~\ref{cor:r7-contained}.
 
@@ -516,12 +527,14 @@ The bottom syndrome lies outside the persistent carrier, so
 Lemma~\ref{lem:basepointfree-off-persistent} makes its pencil base-point-free;
 outside the cyclic locus its cover has geometric monodromy \(S_3\).  Its
 off-diagonal curve is geometrically integral of arithmetic genus one.
-The singular, diagonal, and branch deletions cost at most thirteen,
-and the fibers through \(x\) and \(s\) cost at most six ordered pairs
-each.  Hence
+Proposition~\ref{prop:r5-count} and Lemma~\ref{lem:r5-branch} show that at most
+twelve rational points encode nonsplit members.  Base-point-freeness gives at
+most one pencil member through each of the distinct markers \(x,s\), and these
+contribute at most twelve further points.  Thus at most \(24\) rational points
+of the bottom off-diagonal curve fail to encode a split member avoiding both
+markers.  Aubry--Perret supplies an allowed member when
 \[
- (g,\delta,\kappa)=(1,25,1),\qquad
- q+1-2\sqrt q>25,
+ q+1-2\sqrt q>24,
 \]
 whose first prime-power solution is \(37\).  The cubic
 lifts through \(s\) to a split squarefree quartic in \(W_h\) avoiding
@@ -569,8 +582,9 @@ four affine $\F_4$ roots and the simple root at infinity.
 \begin{corollary}[Exhaustive R7 contained-component classification]
 \label{cor:r7-contained}%
 \coverage{absent}%
-The assertion $\mathrm{CC}(6,1)$ is exhaustive in every
-characteristic.  A noninjective contraction is the shallow rank-one
+The one-step contained-component assertion from redundancy seven to
+redundancy six is exhaustive in every characteristic.  A noninjective
+contraction is the shallow rank-one
 boundary.  Containment in the lower persistent locus gives upper
 catalecticant rank at most two; after the shallow rational secants are
 removed, these are exactly the persistent tangent and conjugate-secant
@@ -598,10 +612,11 @@ so the list is exhaustive.
 \label{thm:r7}%
 \coverage{conditional_deduction}%
 \lean{PRSRedundancySixSeven.redundancySevenAllFieldSynthesis,PRSRedundancySixSevenCertificate.redundancySeven_count_exhaustion}%
-\uses{thm:r6}%
+\uses{thm:r6,cor:one-column-extensions}%
+\imports{ball-de-beule-mds,duer,seroussi-roth,wu-ding-chen}%
 \evidence{certificate-r7}%
 \proves{redundancy-seven-classification}%
-Certificate R7 unconditionally classifies
+Certificate R7 classifies the split-free syndromes for
 \[
 q\in\{7,8,9,11,13,16,17,19,23,25,27,29,31,32\}.
 \]
@@ -612,6 +627,8 @@ at redundancy seven are the persistent locus of size
 central nucleus point when $q=2^m$ and $m$ is odd.  At $q=7,8,9,11$ the additional
 split-free orbit-size profiles, after removing the persistent locus
 and also the central nucleus singleton at \(q=8\), are:
+An exponent records multiplicity, so, for example, \(84^5\) means five
+distinct orbits of size \(84\).
 \[
 \begin{array}{c|l}
 7&56,\ 84^5,\ 112^2,\ 168^{45},\ 336^{141}\\
@@ -621,12 +638,10 @@ and also the central nucleus singleton at \(q=8\), are:
 \end{array}
 \]
 This is the complete split-free classification for all prime powers
-\(q\geq7\). Since
-Seroussi--Roth nonextendability and Dür's equivalence give
-\(\rho(\PRS(q-6))=6\) for every prime power \(q\geq11\), it is also
-the complete deep-hole classification in that
-range.  At $q=7,9$ the table is not promoted without a separate
-covering-radius calculation.  At $q=8$, where
+\(q\geq7\).  Together with the radius and exact-distance statements below,
+it yields the complete code deep-hole classification.
+The covering radius is six for \(q=7,9\) and for every \(q\geq11\).
+At $q=8$, where
 \cite[Thm.~17(1)]{WuDingChen2023} gives radius seven, the diagonal tangent
 orbit (nine directions) and the fixed central nucleus are exactly the
 distance-seven rows; exhaustive replay puts all 45 other frozen representatives
@@ -654,22 +669,37 @@ package: it excludes the persistent and cyclic/wild carriers before applying
 the pointed \(S_3\) cover.
 These first-marker bounds and Proposition~\ref{prop:r7-pointed} are
 exactly the depth-two data of Theorem~\ref{thm:induction}; the terminal
-curve has \((g,\delta,\kappa)=(1,25,1)\).
+genus-one curve has at most \(24\) bad rational points.
 Corollary~\ref{cor:r7-contained} leaves exactly the persistent locus and
 Proposition~\ref{prop:r7-central}.  Certificate R7 covers
 \[
 q\in\{7,8,9,11,13,16,17,19,23,25,27,29,31,32\}
 \]
 by the exact primary quotient enumeration.  A separate replay checks the
-recorded representatives and their orbits.  An independent direct-locus
-replay imports no R7 generator or quotient partition: below \(16\) it
+recorded representatives and their orbits.  A direct-locus replay, independent
+of the R7 generator and quotient partition, imports neither: below \(16\) it
 constructs the literal four-secant complement, from \(16\) onward it
 constructs the classified R6 pointed locus directly, including the
 transient marked orbit at \(q=19\), and in every field it intersects all
 contraction conditions and rebuilds the complete
 \(\PGL_2(q)\)-orbit and Frobenius partition.  It agrees exactly with the
-public record in all fourteen fields.  The radius theorem promotes the
-split-free list only from $q\geq11$.
+public record in all fourteen fields.
+
+For \(q\geq11\), Seroussi--Roth nonextendability and Dür's equivalence give
+\(\rho(\PRS(q-6))=6\).  It remains to close \(q=7,9\).  Here
+\(\PRS(q-6)\) has parameters \([q+1,q-6,8]_q\).  If a syndrome \(f\)
+had weight seven, adjoining \(f\) to its parity-check matrix would, by
+\eqref{eq:extension-distance}, define an
+\([q+2,q-5,8]_q\) MDS code.  At \(q=7\) this would be an
+\([9,2,8]_7\) MDS code, whose generator columns would give nine distinct
+points of \(\PP^1(\F_7)\), although that line has only eight points.  At \(q=9\)
+it would be an \([11,4,8]_9\) MDS code, excluded by
+Ball--De Beule~\cite[Thm.~5.2]{BallDeBeule2012}: here
+\(9=3^2\) and \(4=2\cdot3-2\), the endpoint of their theorem.
+Thus every syndrome has weight at most six in both fields.  The nonempty
+split-free lists above give the reverse inequality, so the radius is six.
+Together with the cited \(q=8\) radius and exact-distance replay, this promotes
+the split-free classification over every prime power \(q\geq7\).
 \end{proof}
 
 For the four finite rows Certificate R7 contains the canonical
@@ -753,9 +783,9 @@ R7 & $7,8,9,11$ & direct split-free census\\
 \end{tabular}
 \end{table}
 
-The R7 rows classify split-free syndromes.  Conversion to code
-deep-hole directions uses the separate covering-radius gate and is
-made only for $q\geq11$.  The public certificate schema and exact
+The R7 rows classify split-free syndromes.  The covering-radius argument in
+Theorem~\ref{thm:r7} promotes them to code deep-hole directions over every
+listed field.  The public certificate schema and exact
 replay boundaries are given in the supplement; the table does not
 promote orbit-size profiles to identifiers.
 
