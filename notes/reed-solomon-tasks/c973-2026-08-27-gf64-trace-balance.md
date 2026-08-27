@@ -528,6 +528,54 @@ Thus a valid pointed locator survives, closing the `(0,1)` boundary without
 a certificate.  The forced-root surface is now reduced to the 63 normal
 forms `(u,v)=(1,tau)` with `tau!=1`.
 
+Six of those forms constitute one more exact constant-cover stratum.  On the
+chart `H(t)(t+a)`, the coefficients for `(u,v)=(1,tau)` are
+
+\[
+\begin{aligned}
+B_0&=\tau a+\tau^2,\\
+B_1&=(\tau^2+1)a+\tau,\\
+B_2&=a+\tau^2+1,\\
+B_3&=(\tau+1)a+1.
+\end{aligned}
+\]
+
+If
+
+\[
+                         \tau^6+\tau^5+1=0,
+\]
+
+direct reduction gives
+
+\[
+                         n_0n_2=\tau^9n_1^2,
+ \qquad \operatorname {Tr}(\tau^9)=0.
+\]
+
+These are precisely six conjugate values in `GF(64)`.  Set `a=tau`.  Then
+
+\[
+ (B_0,B_1,B_2,B_3)
+ =(0,\tau^3,\tau^2+\tau+1,\tau^2+\tau+1).
+\]
+
+The polynomial `H` and `tau^6+tau^5+1` are coprime, so the five fixed roots
+remain distinct and nonzero.  Identity (25) now makes the final-pair cover
+the disjoint union of two rational lines, hence gives 130 rational points.
+Every deletion divisor is proper: putting `b=tau^3` and
+`c=tau^2+tau+1`, the difference between the `x` and `x^2` coefficients of
+`r^2 Delta+rQ+N` is `c^2!=0`, while the final/moving polynomial has leading
+coefficient `c^2`.  The remaining base polynomials are visibly nonzero from
+`bc!=0`.  Thus the same full pointed bound gives
+
+\[
+                              54<130.
+\]
+
+This closes all six roots of `tau^6+tau^5+1` without a certificate.  The
+forced-root surface is reduced to 57 normal forms.
+
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
 degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
@@ -635,9 +683,10 @@ arguments do not answer that arithmetic question.
 | What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
-| How many marked-torus forms remain? | 66 total; `tau=1` and both `u=0` forms are closed | 63 generic `tau!=1` values |
+| How many marked-torus forms remain? | 66 total; `tau=1`, both `u=0` forms, and six constant-cover forms are closed | 57 `tau` values |
 | Does rootlessness close the `(0,0)` boundary? | no; (25) makes the cover empty, but the opposite trace splits it into two rational lines | closed by `130>54` |
 | What closes the `(0,1)` boundary? | a `GF(8)` elliptic specialization with 72 points | closed by `72>52` |
+| What happens when `tau^6+tau^5+1=0`? | `n0n2=tau^9 n1^2` with trace-zero constant | all six forms closed by `130>54` |
 | Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (31)--(33) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |

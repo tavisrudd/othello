@@ -155,6 +155,9 @@ deletions including `N=0`.  Only 63 generic `tau!=1` forms and the `(0,1)`
 boundary remain on the forced-root surface.  The boundary is now closed too:
 a `GF(8)` specialization has 12 elliptic points over `GF(8)`, hence 72 over
 `GF(64)`, against 52 deletions.  Only the 63 generic `tau!=1` forms remain.
+Six more are now closed uniformly: if `tau^6+tau^5+1=0`, choosing `a=tau`
+forces a trace-zero constant cover with 130 points against 54 deletions.  The
+surface remainder is 57 `tau` forms.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

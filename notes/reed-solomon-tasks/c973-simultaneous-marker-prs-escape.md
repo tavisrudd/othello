@@ -152,6 +152,10 @@ and the single `(0,1)` boundary.  That last boundary is also closed: taking
 the added root in `GF(8)` with `a^3+a+1=0` gives a genus-one curve with 12
 points over `GF(8)`, hence 72 over `GF(64)`, against 52 pointed deletions
 including `N=0`.  Only the 63 generic `tau!=1` forms remain on the surface.
+Among them, the six roots of `tau^6+tau^5+1` form another constant-cover
+stratum: taking the added root `a=tau` forces `B0=0` and a trace-zero constant
+cover.  Two rational lines again give 130 points against 54 deletions.  The
+forced-root surface is down to 57 `tau` forms.
 
 ## Objective
 
