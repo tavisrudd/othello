@@ -3662,8 +3662,17 @@
       "last": 979,
       "purpose": "MDS--CSS manuscript exposition revision and standalone README correction",
       "sequence": 407
+    },
+    {
+      "count": 1,
+      "first": 980,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 980,
+      "purpose": "higher-rank contextual minimality and finite-state bounds",
+      "sequence": 408
     }
   ],
-  "next_id": 980,
+  "next_id": 981,
   "schema": "codex-task-id-allocations-v1"
 }
