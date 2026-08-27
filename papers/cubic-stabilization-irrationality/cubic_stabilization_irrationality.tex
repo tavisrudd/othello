@@ -120,9 +120,14 @@ are \(k\)-rational.  In particular, this holds for every stably
 \(k\)-rational smooth quartic del Pezzo surface.
 \end{theorem}
 
-From \cite{TZ} we use the Cox model, tangent-projection theorem, Galois
-classification, and generic splitting of the universal torsor.  We supply a
-rank-three quotient of the projective Cox model.
+The use of universal torsors to prove stable rationality goes back to
+Beauville, Colliot-Th\'el\`ene, Sansuc, and Swinnerton-Dyer
+\cite{BCTSSD}.  Tschinkel and Zhang prove the rationality of universal torsors
+over quartic del Pezzo surfaces and classify the four minimal Galois types
+relevant to stable rationality.  We use their Cox model, tangent-projection
+theorem, Galois classification, and generic splitting of the universal torsor
+\cite{TZ}.  Our additional input is a rank-three quotient of the projective
+Cox model.
 
 When \(S(k)\ne\varnothing\), the hypothesis on \(\Pic(S_{\bar k})\) is
 condition~(1) of \cite[Corollary~4.3]{TZ}.  Manin proves that stable
@@ -130,8 +135,10 @@ rationality implies this condition \cite[Theorem~2.2]{Manin1966};
 \cite[Proposition~4.1 and Lemma~4.2]{TZ} identify the remaining equivalent
 conditions.  We prove that condition~(1) implies the stronger conclusion
 that \(S\times\A^2\) is rational.  The stable-permutation resolution in
-\cite[p.~13]{TZ} gives a uniform bound of eleven variables; the quotient
-construction gives two.
+\cite[p.~13]{TZ} gives a uniform bound of eleven variables.  For type
+\(I_0\), a two-variable bound was already proved by Shepherd-Barron
+\cite{ShepherdBarron}; see also \cite[Remark~4.4]{TZ}.  The quotient
+construction below gives the two-variable bound uniformly for all four types.
 
 For \(r\geq0\), let \(X_{j,r}\subset\PP^{r+4}_{\mathbf Q}\) be obtained
 from equation \eqref{eq:cubic-one} or \eqref{eq:cubic-three} by adding
@@ -695,7 +702,17 @@ and manuscript drafting and revision. The author checked the resulting
 arguments, computations, code, and cited sources, reviewed and edited all
 AI-assisted material, and assumes responsibility for all content.
 
+\begingroup
+\footnotesize
+\emergencystretch=1em
+\raggedright
 \begin{thebibliography}{99}
+\bibitem{BCTSSD} A.~Beauville, J.-L.~Colliot-Th\'el\`ene, J.-J.~Sansuc,
+and P.~Swinnerton-Dyer,
+\emph{Vari\'et\'es stablement rationnelles non rationnelles},
+Ann. of Math. (2) 121 (1985), no.~2, 283--318,
+\href{https://doi.org/10.2307/1971174}{doi:10.2307/1971174}.
+
 \bibitem{EGFS} P.~Engel, O.~de Gaay Fortman, and S.~Schreieder,
 \emph{Matroids and the integral Hodge conjecture for abelian varieties},
 arXiv:2507.15704v3, 2026,
@@ -713,6 +730,10 @@ Publ. Math. IH\'ES 30 (1966), 55--113,
 version 0.15.0, Zenodo, 2026,
 \href{https://doi.org/10.5281/zenodo.22088961}
 {doi:10.5281/zenodo.22088961}.
+
+\bibitem{ShepherdBarron} N.~I.~Shepherd-Barron,
+\emph{Stably rational irrational varieties},
+in The Fano Conference, Univ. Torino, Turin, 2004, 693--700.
 
 \bibitem{TZ} Yu.~Tschinkel and Zh.~Zhang,
 \emph{Universal torsors over quartic del Pezzo surfaces and stable
@@ -733,4 +754,5 @@ Math. USSR-Izv. 1 (1967), 691--696,
 \href{https://doi.org/10.1070/IM1967v001n03ABEH000580}
 {doi:10.1070/IM1967v001n03ABEH000580}.
 \end{thebibliography}
+\endgroup
 \end{document}

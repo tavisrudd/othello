@@ -3,7 +3,7 @@
 ## Source boundary
 
 The theorem statements do not depend on a literature-absence claim.  The
-source audit read two load-bearing references at targeted full-text depth:
+source audit read the two load-bearing references below at targeted depth:
 
 - Yuri Tschinkel and Zhijia Zhang, *Universal torsors over quartic del Pezzo
   surfaces and stable rationality*, arXiv:2608.20029v1. Read depth: partial;
@@ -14,8 +14,21 @@ source audit read two load-bearing references at targeted full-text depth:
   Propositions 5.1--5.2 at the uses made in the paper.
 - Anthony Várilly-Alvarado, *Arithmetic of del Pezzo surfaces*, Theorem 2.1,
   for rationality of degree at least five del Pezzo surfaces with a rational
-  point; PDF SHA-256
+  point. Read depth: partial (Theorem 2.1); PDF SHA-256
   `ed5b1bbade653b7feab309b5d43a775fbc971cead2d904a4f0e94c1aca8271af`.
+
+Two historical citations in the introduction are contextual rather than
+load-bearing:
+
+- Beauville--Colliot-Thélène--Sansuc--Swinnerton-Dyer, *Variétés stablement
+  rationnelles non rationnelles*. Read depth: secondary only, through the
+  discussion of the universal-torsor strategy in Tschinkel--Zhang,
+  Introduction and Section 2; bibliographic metadata checked against the
+  Annals/JSTOR record for DOI `10.2307/1971174`.
+- N. I. Shepherd-Barron, *Stably rational irrational varieties*. Read depth:
+  secondary only, through Tschinkel--Zhang's “Levels of stable rationality”
+  paragraph following Remark 4.4, which attributes the type-`I_0` two-variable bound
+  to this paper; bibliographic metadata taken from their reference list.
 
 The bounded novelty screen and its exact limitations remain in the durable
 research report; the manuscript uses no "first" or "to our knowledge"
