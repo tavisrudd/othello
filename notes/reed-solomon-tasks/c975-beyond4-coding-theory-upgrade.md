@@ -2,6 +2,10 @@
 
 **Lane:** `reed-solomon` · **Status:** active
 
+**Current checkpoint:** theorem-driven spine and framing proposed in
+`c975-2026-08-26-paper-spine-and-framing.md`; manuscript edits await review
+of that architecture.
+
 ## Objective
 
 Make *Projective Reed--Solomon deep holes beyond redundancy four* as strong
