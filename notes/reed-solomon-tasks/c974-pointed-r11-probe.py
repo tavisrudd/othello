@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_BINARY = ROOT / "papers/beyond4_prs/software/projective-reed-solomon/target/release/projective-reed-solomon"
 DEFAULT_OUTPUT = Path(__file__).with_name("c974-pointed-r11-probe.json")
 SCHEMA = "c974-pointed-r11-probe-v1"
-SOFTWARE_AUTHORITY_COMMIT = "0c11aa5cfc6cca18b2ce14d5807033b5d031f092"
+SOFTWARE_AUTHORITY_COMMIT = "f26d751b8339c81cdc3f28ddbcd1f019e264f866"
 
 
 FIELDS = [
@@ -82,21 +82,21 @@ def generate(binary, candidate_limit, selected_fields, representative_count):
                     command.append("--forbid-infinity")
                 else:
                     command.extend(["--forbid-root", str(forbidden)])
-                certificate, error = run_json(command, request)
+                result, error = run_json(command, request)
                 record = {
                     "field": field_name,
                     "representative": representative,
                     "syndrome": request["syndrome"],
                     "forbidden": forbidden,
                 }
-                if certificate is None:
+                if result is None:
                     record.update({"status": "NO_WITNESS_WITHIN_LIMIT", "error": error})
                 else:
+                    if result.get("schema") != "projective-reed-solomon-simultaneous-locator-v1":
+                        raise RuntimeError("unexpected simultaneous-locator result schema")
+                    certificate = result["certificate"]
                     support = certificate["support"]
-                    forbidden_json = (
-                        "infinity" if forbidden == "infinity" else {"finite": forbidden}
-                    )
-                    if forbidden_json in support:
+                    if any(root in support for root in result["forbidden"]):
                         raise RuntimeError("returned support contains the forbidden root")
                     verified, verify_error = run_json(
                         [str(binary), "--compact", "verify"], certificate

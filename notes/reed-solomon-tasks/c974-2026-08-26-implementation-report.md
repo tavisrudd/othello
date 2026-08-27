@@ -33,8 +33,8 @@ avoid any prescribed finite projective roots and/or infinity.
 - Candidate-limit exhaustion and absence of a pointed witness are errors, not
   positive certificates.
 
-Commits `deb136305` and `0c11aa5cf` contain the implementation, tests, and
-public documentation.
+Commits `deb136305`, `0c11aa5cf`, and `f26d751b8` contain the implementation,
+typed pointed-result envelope, tests, and public documentation.
 
 ## Complexity boundary
 
@@ -60,7 +60,7 @@ cargo clippy --locked --all-targets -- -D warnings
 cargo build --release --locked
 ```
 
-The full suite passes with 34 focused library tests, eight compiled-CLI tests,
+The full suite passes with 36 focused library tests, eight compiled-CLI tests,
 five fixed-seed property tests, and doc tests; five ignored exhaustive gates
 were not run.  Focused tests cover R11 locator replay, higher-redundancy
 fail-closed classification, pointed infinity avoidance, CLI replay, and the
@@ -78,8 +78,9 @@ R11 Lucas carrier and every possible forbidden projective root:
 | `GF(49)` | `e_4,e_5,e_6` | 100 | 100 | 11,665 |
 
 Every one of the 190 returned certificates was replayed through the public
-`verify` command, and every support was checked against its forbidden root.
-The candidate limit was 100,000.
+`verify` command.  The typed CLI result returns its `Vec<Root>` forbidden set
+beside the certificate, and the probe compares those server-serialized roots
+directly against the returned support.  The candidate limit was 100,000.
 
 From the repository root, after the release build:
 
@@ -95,10 +96,10 @@ Inputs are fixed polynomial-basis models:
 - `GF(27)=F_3[x]/(x^3+2x+1)`;
 - `GF(49)=F_7[x]/(x^2+1)`.
 
-The generator is 6,688 bytes with SHA-256
-`4e3fae89bf921f8db27dad9c8919e735bab3fa10934a052f0951b69a214c9e37`.
+The generator is 6,801 bytes with SHA-256
+`5834bb622b548466fb5f4ae907649c7741003dda5e34ca2a955bf706e6f7e061`.
 The canonical 155,920-byte JSON is SHA-256
-`b2eb848006e7b80bcdc267e36e3c2b4f631b72f4c2d3908cad9b986be3c792cc`.
+`c129685797e52e7175f4468f94fab611e92f0b606afc7e7700f3fe06cfb93f27`.
 
 ## Trust and theorem boundary
 
