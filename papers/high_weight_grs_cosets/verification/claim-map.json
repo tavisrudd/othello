@@ -55,20 +55,17 @@
       "source": "sections/03-dictionary.tex",
       "status": "Conditional terminal. The concrete dictionary and covering-radius premise are inputs."
     },
+    "lem:basepointfree-off-persistent": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-recursive-carriers.tex",
+      "status": "Characteristic-free manuscript proof that a nonconstant geometric gcd forces second-catalecticant rank at most two; the Hankel normal forms identify the rank-one and rank-two gcd degrees."
+    },
     "lem:cyclic": {
       "coverage": "absent",
       "lean": [],
       "source": "sections/04-redundancy-five.tex",
       "status": "Manuscript proof of the cyclic stratum."
-    },
-    "lem:exact-linear-gcd-transport": {
-      "coverage": "fragment",
-      "lean": [
-        "PRSUniformCoveringRadius.exactLinearFlagParameterBudget_lt_uniformParameterBudget",
-        "UniformIteratedPackageInput.packages_fit_uniform_threshold"
-      ],
-      "source": "sections/05-polar-tit-interface.tex",
-      "status": "The factor-preserving flag\u2019s budget and simultaneous threshold use are kernel checked. Preservation of the concrete gcd under contraction is the displayed manuscript proof and an explicit formal input."
     },
     "lem:hankel": {
       "coverage": "conditional_deduction",
@@ -115,12 +112,6 @@
       ],
       "source": "sections/04-redundancy-five.tex",
       "status": "The tame Riemann--Hurwitz budget is a structure field, and the sharper characteristic-two budget is a hypothesis of the last two theorems; the twelve-point and six-point bounds on a split-free fibre square are kernel checked."
-    },
-    "lem:r6-gcd1": {
-      "coverage": "absent",
-      "lean": [],
-      "source": "sections/06-redundancies-six-seven.tex",
-      "status": "Manuscript proof of exact-linear-gcd shallowness."
     },
     "lem:s3": {
       "coverage": "fragment",
@@ -198,12 +189,6 @@
       "lean": [],
       "source": "sections/04-redundancy-five.tex",
       "status": "Manuscript proof identifying the fibre square with the residual-discriminant double cover and hence with the cited incidence curve."
-    },
-    "prop:r5-gcd1": {
-      "coverage": "absent",
-      "lean": [],
-      "source": "sections/04-redundancy-five.tex",
-      "status": "Manuscript proof, with the finite `q=7` clause supplied by Certificate R5."
     },
     "prop:r5-gcd2": {
       "coverage": "fragment",
@@ -299,12 +284,6 @@
       "lean": [],
       "source": "sections/06-redundancies-six-seven.tex",
       "status": "Manuscript degree computation, supplied as a collision-budget input to Lean."
-    },
-    "prop:r7-gcd1": {
-      "coverage": "absent",
-      "lean": [],
-      "source": "sections/06-redundancies-six-seven.tex",
-      "status": "Manuscript exact-gcd-one avoidance proof; the exactness hypothesis is explicit."
     },
     "prop:r7-pointed": {
       "coverage": "conditional_deduction",

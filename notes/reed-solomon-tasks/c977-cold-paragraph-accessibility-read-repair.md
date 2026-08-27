@@ -56,3 +56,13 @@ theorem-domain change is authorized.
   software checks pass;
 - a cold changed-paragraph/layout review reports no remaining major issue;
 - the deterministic standalone export verifies and remains unpushed.
+
+## Current status
+
+The raw packet read, opening/results/dictionary repair, recursive-carrier
+repair, and simultaneous-escape section checkpoint are complete.  The latter
+includes the correctness-driven removal of the vacuous rank-two
+degree-one-gcd branch recorded in the dated synthesis.  Both manuscript builds
+and the supplement gate pass.  Remaining work is the section-level pass from
+the high-weight-coset theorem through the appendices, followed by one global
+headline/novelty/prior-literature flow pass and the standalone export.

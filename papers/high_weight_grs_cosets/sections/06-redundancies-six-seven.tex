@@ -2,8 +2,9 @@
 \label{sec:r67}
 
 This appendix takes the marked polar-escape theorem as input and discharges
-its first two pointed lower packages.  The bottleneck is exhaustiveness:
-fixed gcd, modular nucleus, self-collision, and transverse cases must account
+its first two pointed lower packages.  The bottleneck is exhaustiveness: the
+persistent rank-two carrier, modular nucleus, self-collision, and transverse
+cases must account
 for every polar line.  The resulting structural arguments, together with the
 bounded certificates, prove Theorems~\ref{thm:r6} and~\ref{thm:r7}.
 
@@ -51,49 +52,6 @@ $T=\{z\in\F_{q^2}^\times:z^{q+1}=1\}$ and acts by fifth powers; the
 normalizer inverts $z$, while coefficient Frobenius multiplies
 $T/T^5$ by the characteristic.  This proves the stated orbit law and
 the characteristic-five tangent splitting.
-\end{proof}
-
-\begin{lemma}[Exact linear gcd is shallow]\label{lem:r6-gcd1}%
-\coverage{absent}%
-Let \(q\geq7\).  If \(\gcd(W_f)\) has degree one, then \(W_f\)
-contains a split squarefree quartic.
-\end{lemma}
-
-\begin{proof}
-Write \(W_f=L V\), where \(L\) is rational and
-\(V\subset\Sym^3E^\vee\) has vector dimension three.  It suffices to
-find in \(V\) a product of three distinct rational factors, none equal
-to \(L\).  Move the root of \(L\) to infinity and let
-\(\ell\) span \(V^\perp\).  On the cubic with distinct finite roots
-\(x,y,z\), write
-\[
- \ell\bigl((T-xU)(T-yU)(T-zU)\bigr)
- =c_0+c_1(x+y+z)+c_2(xy+xz+yz)+c_3xyz=:P(x,y,z).
-\]
-Suppose that this value is nonzero for every distinct triple.  For
-fixed distinct \(x,y\), write \(P=A(x,y)+zB(x,y)\), where
-\[
- B(x,y)=c_1+c_2(x+y)+c_3xy.
-\]
-If \(B(x,y)\ne0\), the unique zero in \(z\) must be \(x\) or \(y\).
-Consequently
-\[
- B(x,y)P(x,y,x)P(x,y,y)=0
-\]
-for every \(x\ne y\); it also vanishes when \(B(x,y)=0\).
-This polynomial has degree at most four in each variable.  Since
-\(q-1>4\), first varying \(y\ne x\) and then \(x\) shows that it is
-the zero polynomial.  The polynomial ring is a domain.  Neither
-\(P(x,y,x)\) nor \(P(x,y,y)\) vanishes identically unless
-\(\ell=0\), as comparison of the coefficients of
-\(1,x,y,x^2,xy,x^2y\) shows.  Hence \(B=0\), so
-\(c_1=c_2=c_3=0\).
-
-Thus \(V\) is the hyperplane of cubics vanishing at infinity, and
-every member of \(V\) is divisible by \(L\).  This would make
-\(\gcd(W_f)\) divisible by \(L^2\), contrary to its exact degree.
-Therefore a required cubic exists, and multiplying it by \(L\)
-gives a split squarefree member of \(W_f\).
 \end{proof}
 
 \begin{proposition}[First-polar line and secant degree]
@@ -332,9 +290,6 @@ Definition~\ref{def:contained} are exhausted as follows:
 \item on the remaining trivial-gcd locus the collision divisor
       is not identically zero.
 \end{enumerate}
-The exact-linear-gcd lower stratum is not a contained component: it is
-the separate quadratic-graph package of
-Proposition~\ref{prop:r5-gcd1}.
 Consequently the complete nonshallow contained list is the persistent
 locus together with \(\cN_3\) in characteristic two.  There is no
 unlisted contained component.
@@ -367,10 +322,10 @@ quadratic-gcd locus or, when \(q=2^m\) with odd \(m\), in
 \emph{Contained nets.}
 The complete contained branch is
 Proposition~\ref{prop:r6-contained}.
-The common-factor trichotomy is exhaustive.  A quadratic gcd gives the
-persistent tangent and conjugate-secant loci, together with the shallow
-rational secant; an exact linear gcd is shallow by
-Lemma~\ref{lem:r6-gcd1}.  It remains to treat a trivial-gcd net.
+Lemma~\ref{lem:basepointfree-off-persistent} puts every common-factor system
+in the persistent rank-two locus or on its shallow rank-one boundary.  Among
+the rank-two points, removing the shallow rational secants leaves exactly the
+tangent and conjugate-secant families.  It remains to treat a trivial-gcd net.
 
 \emph{Transverse exclusions.}
 Its first-polar line is not contained in the lower secant cubic, by
@@ -388,20 +343,10 @@ the excluded parameter scheme therefore has degree
 \]
 
 \emph{Bottom pencils.}
-For every remaining marker, the lower cubic pencil has exact linear
-gcd or geometric monodromy \(S_3\).  In the first case the graph
-argument of Proposition~\ref{prop:r5-gcd1} is pointed as follows:
-besides its eight original deletions, remove the at most two graph
-points whose split quadratic contains the new marker.  Since
-\(q+1>10\), a split squarefree cubic avoiding that marker remains.
-Here the fixed gcd \(\lambda_0\) differs from the marker \(r\).
-Indeed, \(\lambda_0=r\) says that every cubic in \(W_{b(r)}\)
-vanishes at \(r\), so every lifted quartic has a double root there;
-by Lemma~\ref{lem:marker-collision}, this is exactly a point of the
-degree-six collision divisor already placed in \(Z_f\), so no
-additional deletion budget is needed.
-In the \(S_3\) case, Lemma~\ref{lem:s3} supplies the geometrically
-integral off-diagonal curve.  Its singular, diagonal, and branch
+For every remaining marker, the lower syndrome lies outside \(\cP_5\) and the
+cyclic locus.  Lemma~\ref{lem:basepointfree-off-persistent}
+makes its cubic pencil base-point-free, and Lemma~\ref{lem:s3} supplies the
+geometrically integral off-diagonal curve.  Its singular, diagonal, and branch
 deletions have degree at most thirteen, and deleting the unique cubic
 through the marker removes at most six ordered pairs.  Thus
 \[
@@ -556,39 +501,20 @@ Propositions~\ref{prop:r6-degrees} and~\ref{prop:r6-modular}.  In
 characteristic two the cyclic
 replacement is a plane, so its pullback has degree at most one unless
 the polar line is contained in it, the excluded case
-\(h\in\cN_3\), by Proposition~\ref{prop:r6-modular}.  We must also
-exclude the parameters for which the
-lower pencil has fixed factor \(x\).  They are cut out by the
-\(3\)-minors obtained by appending the fixed evaluation row
-\((1,x,x^2,x^3)\) to the two Hankel rows of \(b(s)\), and hence have
-degree at most two in \(s\).  These minors are not all zero.  If they
-vanished identically, then
-\[
-  W_h\cap\{g:g(s)=0\}\subseteq\{g:g(x)=0\}
-\]
-for every geometric \(s\).  Given \(g\in W_h\), choose a geometric
-root \(s\) of \(g\); then \(g(x)=0\).  Thus \(x\) would divide every
-member of \(W_h\), contradicting the trivial-gcd hypothesis.  Hence
+\(h\in\cN_3\), by Proposition~\ref{prop:r6-modular}.  A lower pencil with
+any fixed factor already lies in the degree-three persistent intersection, by
+Lemma~\ref{lem:basepointfree-off-persistent}.  Hence
 the complete second-step parameter
 scheme has degree at most
 \[
-                         1+3+4+6+2=16<q+1.
+                         1+3+4+6=14<q+1.
 \]
 Choose \(s\) outside it.
 
-\emph{The linear-gcd branch.}
-The resulting cubic pencil is neither persistent nor cyclic.  If it
-has exact linear gcd \(\lambda_0\), then
-\(\lambda_0\notin\{x,s\}\): equality with \(x\) is excluded by the
-fixed-factor minors above, while equality with \(s\) is the pointed
-collision excluded by Proposition~\ref{prop:r6-degrees}.  The
-graph proof of Proposition~\ref{prop:r5-gcd1} has eight original deletions; avoiding
-the two additional markers costs at most two graph points each.
-Since \(q+1>12\), a split squarefree cubic avoiding \(x\) and \(s\)
-remains.
-
 \emph{The \(S_3\) branch.}
-Otherwise the bottom cover has geometric monodromy \(S_3\).  Its
+The bottom syndrome lies outside the persistent carrier, so
+Lemma~\ref{lem:basepointfree-off-persistent} makes its pencil base-point-free;
+outside the cyclic locus its cover has geometric monodromy \(S_3\).  Its
 off-diagonal curve is geometrically integral of arithmetic genus one.
 The singular, diagonal, and branch deletions cost at most thirteen,
 and the fibers through \(x\) and \(s\) cost at most six ordered pairs
@@ -597,42 +523,9 @@ each.  Hence
  (g,\delta,\kappa)=(1,25,1),\qquad
  q+1-2\sqrt q>25,
 \]
-whose first prime-power solution is \(37\).  In either case the cubic
+whose first prime-power solution is \(37\).  The cubic
 lifts through \(s\) to a split squarefree quartic in \(W_h\) avoiding
 \(x\).
-\end{proof}
-
-\begin{proposition}[Exact-gcd-one avoidance]\label{prop:r7-gcd1}%
-\coverage{absent}%
-Suppose the lower net is $\ell_xU$, where
-$U=\ker\lambda\subset\Sym^3E^\vee$ has dimension three and
-\(\gcd(U)=1\), so that \(\ell_x\) is the exact gcd of the lower net.
-If \(x=r\),
-the parameter belongs to the collision divisor.  If
-\(x\ne r\) and \(q\geq16\), then \(U\) contains a split cubic avoiding
-both \(x\) and \(r\).
-\end{proposition}
-
-\begin{proof}
-If \(x=r\), every lifted quintic has the repeated factor
-\((t-r)^2\).  Lemma~\ref{lem:marker-collision} identifies this with
-the degree-eight collision divisor of
-Proposition~\ref{prop:r7-collision}.  This is the unavailable branch,
-so assume \(x\ne r\).
-Put $S=\PP^1(\F_q)\setminus\{x,r\}$.  For ordered distinct
-$u,v\in S$, the map
-$w\mapsto\lambda(\ell_u\ell_v\ell_w)$ is linear.  If it vanishes
-identically, choose any remaining $w$; otherwise its homogenization is
-a nonzero linear form on \(\PP^1\), so it has exactly one rational
-projective zero, including the point at infinity when appropriate.
-The equations $w=x,r,u,v$ have respective bidegrees
-$(1,1),(1,1),(2,1),(1,2)$ in $(u,v)$.  None is identically zero:
-the first two would give a common factor of \(U\), contrary to
-\(\gcd(U)=1\), and the last two are excluded
-because double-root cubics span $\Sym^3E^\vee$.  A nonzero
-bidegree-$(a,b)$ divisor on $\PP^1\times\PP^1$ has at most
-$(a+b)(q+1)$ rational points.  Thus the bad pairs number at most
-$10(q+1)$, whereas $(q-1)(q-2)>10(q+1)$ for $q\geq16$.
 \end{proof}
 
 \begin{proposition}[Collision divisor]\label{prop:r7-collision}%
@@ -753,15 +646,12 @@ rational squares.  Hence the persistent count is
 \]
 For \(q\geq37\), choose a first marker outside the at most three
 catalecticant intersections, eight collision parameters, and, in
-characteristic two, one intersection with the nucleus line.  If the
-contracted quartic net has trivial gcd,
-Proposition~\ref{prop:r7-pointed} supplies the complete second
-one-step package: it excludes the cyclic/wild carrier and
-fixed-gcd/marker coincidences before applying either the pointed
-linear-gcd graph or the \(S_3\) cover.  If the contracted net has exact
-linear gcd, write it as \(\ell_xU\).  Exactness gives
-\(\gcd(U)=1\), so Proposition~\ref{prop:r7-gcd1} applies; its excluded
-\(x=r\) case is already among the eight collision parameters.
+characteristic two, one intersection with the nucleus line.  The first-marker
+exclusions put the contracted quartic net outside its persistent intersection;
+Lemma~\ref{lem:basepointfree-off-persistent} therefore gives trivial gcd.
+Proposition~\ref{prop:r7-pointed} supplies the complete second one-step
+package: it excludes the persistent and cyclic/wild carriers before applying
+the pointed \(S_3\) cover.
 These first-marker bounds and Proposition~\ref{prop:r7-pointed} are
 exactly the depth-two data of Theorem~\ref{thm:induction}; the terminal
 curve has \((g,\delta,\kappa)=(1,25,1)\).

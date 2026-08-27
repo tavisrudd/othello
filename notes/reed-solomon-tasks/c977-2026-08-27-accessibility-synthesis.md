@@ -58,3 +58,39 @@ paragraph and affected table or diagram.  The review must specifically check
 that the new dictionary does not collapse support-relative shallowness into
 full-support split-freeness, that covering-radius promotion remains separate,
 and that the second-catalecticant types agree in every characteristic.
+
+## Section-level spine pass: carrier to escape
+
+The second pass reviewed whole sections rather than repairing the raw notes
+paragraph by paragraph.  Its required exposition chain is now explicit:
+
+```text
+recursive carrier -> base-point-free complement -> one terminal selector
+                  -> R5 split-member count -> supported locator -> coset shells
+```
+
+The pass found and removed one vacuous proof branch.  A characteristic-free
+dimension argument shows that any nonconstant geometric gcd of (W_f) forces
+second-catalecticant rank at most two.  At Hankel rank one the gcd has degree
+one and (f) is on the normal rational curve; at Hankel rank two every
+common-factor system has quadratic gcd.  Thus the manuscript's former
+rank-two degree-one-gcd packages were empty.  Removing them:
+
+- deletes the false R5 case split and identifies the ambient unisecant classes
+  (O_4,O_5) as absent from the nonsurjective Hankel image;
+- makes the simultaneous-escape proof pass directly from the persistent
+  carrier complement to a base-point-free separable (S_3) pencil;
+- removes redundant R6/R7 lower branches already contained in the
+  (mathcal P_j) pullbacks;
+- sharpens the R7 inner marker budget from (16) to (14), without changing
+  the (qge37) theorem threshold; and
+- shortens the active manuscript diff by roughly 150 net lines.
+
+The R8--R10 companion sources are not submission claims.  Their now-redundant
+ambient degree-one-gcd calculations are retained only as an archival record,
+with a prominent status note requiring removal before any autonomous release.
+
+Three independent source reviews accepted the revised proof and exposition
+spines.  The canonical and TIT builds pass at 44 and 32 pages, respectively;
+all affected pages and tables were visually inspected, and the supplement
+verification gate passes with 53 adopted manuscript labels.

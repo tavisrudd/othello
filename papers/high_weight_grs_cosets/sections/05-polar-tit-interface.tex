@@ -126,28 +126,6 @@ each nonzero \(g\in W_f\) would force \(x\mid g\) for all \(g\), contrary to
 the trivial-gcd hypothesis.
 \end{proof}
 
-\begin{lemma}[Exact-linear-gcd transport]
-\label{lem:exact-linear-gcd-transport}%
-\coverage{fragment}%
-\lean{PRSUniformCoveringRadius.exactLinearFlagParameterBudget_lt_uniformParameterBudget,UniformIteratedPackageInput.packages_fit_uniform_threshold}%
-If \(W_f=LV\) has exact linear gcd \(L\), contraction at
-\(\lambda\ne L\) preserves the factor \(L\).  Along a coherent flag outside
-the rank-at-most-two carrier, the gcd remains exactly \(L\).
-\end{lemma}
-
-\begin{proof}
-The lifting identity gives
-\[
- \lambda W_{\iota_\lambda f}
- \subset L\Sym^{n-2}E^\vee.
-\]
-Since \(L\) and \(\lambda\) are coprime, every lower member is divisible by
-\(L\).  If the lower gcd grows to degree two, the lower syndrome lies in the
-rank-two terminal carrier; outside that carrier the dimension bound excludes
-a larger gcd.  Induction over the marker list proves exact transport, and
-excluding \(\lambda=L\) keeps the lifted product squarefree.
-\end{proof}
-
 \begin{lemma}[Identically colliding stages]
 \label{lem:identically-colliding}%
 \coverage{absent}%

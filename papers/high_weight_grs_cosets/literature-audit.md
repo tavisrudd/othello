@@ -154,7 +154,7 @@ carrier strata remain unclassified.
 
 This delta compares the manuscript with commit `b77f4683`, the last
 literature-audit baseline.  The new labelled mathematical items are
-`lem:old-marker-fixed-factor`, `lem:exact-linear-gcd-transport`,
+`lem:old-marker-fixed-factor`, `lem:basepointfree-off-persistent`,
 `lem:identically-colliding`, `prop:exact-bottom-ledger`,
 `lem:recursive-bottom-transport`, `prop:uniform-iterated-packages`, and
 `prop:higher-lucas-endpoint`; `tab:bottom-ledger-disposition` is their trust

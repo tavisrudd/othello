@@ -6,11 +6,20 @@ row space is trapped.  We now treat every other syndrome without choosing a
 sequence of intermediate good fibers.  All contracted roots are selected at
 once, and only the terminal R5 pencil is counted.
 
-Let \(E\) be two-dimensional over a field \(k\).  For
-\(f\in\Gamma^{r-1}E\) and \(R\in\Sym^m(E^\vee)\), define the composite
-contraction by
+The contraction identity and finite-field grid lemma below are elementary.
+What is new here is their coupling to the recursive carrier through one
+terminal selector: the selector replaces all intermediate-redundancy casework,
+while the final enumerative input is the redundancy-five split-member count
+and branch budget of
+Section~\ref{sec:r5}.  Its relation to the twisted-cubic line literature is
+spelled out in Remark~\ref{rem:r5-line-literature}.
+
+Let \(E\) be two-dimensional over a field \(F\).  For \(0\leq m\leq r-2\),
+\(f\in\Gamma^{r-1}E\), and \(R\in\Sym^m(E^\vee)\), define
+\(\iota_Rf\in\Gamma^{r-1-m}E\) by
 \begin{equation}\label{eq:composite-contraction}
- \langle\iota_Rf,h\rangle=\langle f,Rh\rangle .
+ \langle\iota_Rf,h\rangle=\langle f,Rh\rangle
+ \qquad\bigl(h\in\Sym^{r-1-m}E^\vee\bigr).
 \end{equation}
 
 \begin{proposition}[Composite contraction]
@@ -70,22 +79,25 @@ Put \(m=r-5\).  If \(R=\lambda_1\cdots\lambda_m\), the coefficient row of
 \begin{lemma}[Terminal selector]
 \label{lem:terminal-selector}%
 \coverage{absent}%
-Let \(L_f\) be the projectivized row space of
-\(\operatorname{Cat}_{m,4}(f)\).  If
-\(f\notin\cP_r\cup\cM^{\max}_{r,p}\), there is a homogeneous polynomial
+Let \(E\) be defined over \(\F_q\), let
+\(0\ne f\in\Gamma^{r-1}E\), and let \(L_f\) be the projectivized row space
+of \(\operatorname{Cat}_{m,4}(f)\).  If
+\([f]\notin\cP_r\cup\cM^{\max}_{r,p}\), there is a homogeneous polynomial
 \(F_f\) over \(\F_q\), of degree at most six (at most four when \(p=2\)),
-which vanishes on the reduced terminal carrier but is nonzero on \(L_f\).
+which vanishes on the reduced terminal carrier but whose restriction to
+\(L_f\) is not the zero polynomial.
 Consequently
 \[
  S_f(\lambda_1,\ldots,\lambda_m)
  =F_f(\iota_{\lambda_1\cdots\lambda_m}f)
 \]
-is a nonzero \(\F_q\)-polynomial of degree at most six, respectively four,
-in each marker.
+is a nonzero multihomogeneous \(\F_q\)-polynomial.  On an affine marker chart,
+its dehomogenization has degree at most six, respectively four, in each marker
+coordinate.
 \end{lemma}
 
 \begin{proof}
-Proposition~\ref{prop:recursive-component-selection} says that \(L_f\) is
+Theorem~\ref{prop:recursive-component-selection} says that \(L_f\) is
 not contained in the reduced terminal carrier.  By
 Proposition~\ref{prop:reduced-terminal-carrier}, that carrier is
 \(V(D)\cup V(I_{\mathrm{res},p})\), where \(D\) has degree three and
@@ -97,10 +109,10 @@ coordinate ring of \(L_f\) is a domain, \(F_f=DG\) is nonzero on \(L_f\),
 vanishes on both components, and has the asserted degree.  It is defined
 over \(\F_q\).
 
-The ordered root-product map
-\((\PP^1)^m\to\PP(\Sym^mE^\vee)\) is geometrically surjective, and the
-linear catalecticant map is surjective onto \(L_f\).  Hence the pullback of
-the nonzero restriction \(F_f|_{L_f}\) is nonzero.  Every
+Over an algebraic closure, the ordered root-product map on affine cones is
+surjective onto \(\Sym^mE^\vee\), and the linear catalecticant map is
+surjective onto the affine cone over \(L_f\).  Hence the pullback of the
+nonzero restriction \(F_f|_{L_f}\) is nonzero.  Every
 coefficient of \(\lambda_1\cdots\lambda_m\) is linear in each marker;
 therefore composition preserves the degree bound separately in every
 marker.
@@ -109,14 +121,16 @@ marker.
 \begin{theorem}[Simultaneous-marker escape]
 \label{thm:simultaneous-marker-escape}%
 \coverage{absent}%
-Let \(r\geq6\), let \(A\subseteq\PP^1(\F_q)\) have size \(s\), and put
+Let \(E\) be defined over \(\F_q\), let \(r\geq6\), let
+\(A\subseteq\PP^1(\F_q)\) have size \(s\), and put
+\(S=\PP^1(\F_q)\setminus A\) and
 \[
  Q^*_{r,s}=6(r+s)-16+
  \left\lfloor2\sqrt{6(r+s)-18}\right\rfloor .
 \]
-If \(q\geq Q^*_{r,s}\) and
-\(f\notin\cP_r\cup\cM^{\max}_{r,p}\), then \(W_f\) contains a split
-squarefree form of degree \(r-2\) whose roots avoid \(A\).  In characteristic
+If \(q\geq Q^*_{r,s}\), \(0\ne f\in\Gamma^{r-1}E\), and
+\([f]\notin\cP_r\cup\cM^{\max}_{r,p}\), then \(W_f\) contains a split
+squarefree form of degree \(r-2\) supported on \(S\).  In characteristic
 two it is enough that
 \[
  q\geq6(r+s)-22+
@@ -134,9 +148,10 @@ the terminal carrier.  The required selector inequality is
 \(q>r+s\), or \(q>r+s-2\) in characteristic two; it is weaker than the
 displayed hypotheses.
 
-By Proposition~\ref{prop:reduced-terminal-carrier}, the terminal system
-\(W_b\) is a base-point-free pencil of cubics with geometric monodromy
-\(S_3\).  Proposition~\ref{prop:r5-count} and its branch
+Because \(b\notin V(D)=\cP_5\),
+Lemma~\ref{lem:basepointfree-off-persistent} makes \(W_b\) base-point-free.
+Proposition~\ref{prop:reduced-terminal-carrier} then places its cubic map in
+the separable \(S_3\) case.  Proposition~\ref{prop:r5-count} and its branch
 budget give at least
 \[
  \frac{q+1-2\sqrt q-B_p}{6},\qquad
@@ -165,14 +180,16 @@ The proof yields many locators rather than one isolated witness.
 \begin{corollary}[Split-witness abundance]
 \label{cor:split-witness-abundance}%
 \coverage{absent}%
-Fix \(r,s\).  Under the hypotheses of
+Fix \(r,s\).  As \(q\) tends to infinity through prime powers satisfying the
+hypotheses of
 Theorem~\ref{thm:simultaneous-marker-escape}, every syndrome outside the two
 carriers has at least
 \[
  \frac{q^{r-4}}{(r-2)!}-O_{r,s}(q^{r-9/2})
 \]
-split squarefree members of \(W_f\) supported on \(S\).  This denotes a lower
-bound, not an asymptotic equality.
+distinct projective split squarefree members of \(W_f\) supported on \(S\),
+equivalently distinct unordered root sets.  This denotes a lower bound, not an
+asymptotic equality.
 \end{corollary}
 
 \begin{proof}
@@ -182,6 +199,7 @@ marker tuples is at least
 \[
  (q-s)_m-6m q^{m-1},
 \]
+where \((q-s)_m=(q-s)(q-s-1)\cdots(q-s-m+1)\),
 with \(6m\) replaced by \(4m\) in characteristic two.  Each has at least
 \[
  \max\!\left(0,
@@ -197,3 +215,7 @@ deterministic construction using at most \((r-5)q\) partial-substitution
 tests and \(q+1\) terminal pencil tests, assuming explicit coefficient access.
 The dense selector has size exponential in \(r\); this is not a uniform
 polynomial-time decoding theorem.
+
+The next section combines this escape theorem with the explicit carrier and
+the independent covering-radius inputs to classify the two highest coset-weight
+shells.

@@ -292,35 +292,6 @@ Thus \(x\) would divide every member of \(W_f\), contrary to the
 trivial-gcd hypothesis.
 \end{proof}
 
-\begin{lemma}[Exact-linear-gcd transport]
-\label{supp:lem:exact-linear-gcd-transport}%
-\coverage{fragment}%
-\lean{PRSUniformCoveringRadius.exactLinearFlagParameterBudget_lt_uniformParameterBudget,UniformIteratedPackageInput.packages_fit_uniform_threshold}%
-Suppose \(W_f=L V\) has exact linear gcd \(L\), and let
-\(\lambda\ne L\).  Then every member of
-\(W_{\iota_\lambda f}\) is divisible by \(L\).  Along a coherent flag
-chosen outside the rank-at-most-two terminal carrier, the gcd remains
-exactly \(L\); thus the flag reaches the R5 quadratic-graph package with
-the same fixed factor.
-\end{lemma}
-
-\begin{proof}
-The lifting identity gives
-\[
- \lambda W_{\iota_\lambda f}
-   =W_f\cap\lambda\Sym^{n-2}E^\vee
-   \subset L\Sym^{n-2}E^\vee .
-\]
-Since \(L\) and \(\lambda\) are coprime, division by \(\lambda\) shows
-that \(L\) divides every lower member.  If the lower gcd grows to
-degree two, the lower syndrome lies in the rank-at-most-two terminal
-carrier and that parameter is excluded.  The dimension bound rules out
-a larger common factor away from the rank-one boundary.  Induction over
-the marker list proves the assertion.  Excluding \(\lambda=L\) is
-exactly the fixed-factor collision needed to keep the final lifted
-product squarefree.
-\end{proof}
-
 \begin{lemma}[Identically colliding stages]
 \label{supp:lem:identically-colliding}%
 \coverage{absent}%
@@ -363,9 +334,7 @@ carrier consisting of the rank-at-most-two Hankel locus, the closure of
 the cyclic carrier on the rank-two open, its true characteristic-two
 cyclic plane and characteristic-three wild cone, the rank-one
 contraction boundary, and the two identically colliding inseparable
-components.  The exact-linear-gcd stratum is not part of this carrier:
-Proposition~\ref{prop:r5-gcd1} supplies its separate quadratic-graph
-lower package.  Ordinary collision points are deletion divisors, not
+components.  Ordinary collision points are deletion divisors, not
 components of \(\mathcal B_5^{\mathrm{red}}\).
 
 Inductively, let

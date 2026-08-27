@@ -177,10 +177,11 @@ examples and exact trust semantics.
 
 - `high-weight-grs-cosets.pdf` is the 44-page archival paper.
 - `high-weight-grs-cosets.tex` is its manuscript driver.
-- `high-weight-grs-cosets-tit.pdf` is the 33-page IEEE TIT version.
+- `high-weight-grs-cosets-tit.pdf` is the 32-page IEEE TIT version.
 - `high-weight-grs-cosets-tit.tex` is the corresponding submission driver.
 - `sections/` contains the common theorem spine and fixed R5--R7 refinements.
-- `supplement/companion-source/` preserves the R8--R10 companion record.
+- `supplement/companion-source/` preserves the R8--R10 companion record; its
+  `README.md` records the status of archival branches not used by this paper.
 - `verification/` contains the claim, evidence, and imported-source maps.
 - `supplement/` contains reproducibility instructions, manifests, exact
   records, replays, and toolchain locks.

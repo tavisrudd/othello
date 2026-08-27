@@ -35,6 +35,40 @@ Its rank-two
 points split into tangent, rational-secant, and conjugate-secant types; only
 the first and third are split-free on full support.
 
+\begin{lemma}[Base-point freeness off the persistent carrier]
+\label{lem:basepointfree-off-persistent}%
+\coverage{absent}%
+For every \(r\geq5\), if \([f]\notin\cP_r\), then \(W_f\) has trivial
+geometric gcd.  If \(W_f\) has nontrivial gcd, its degree is one exactly when
+\(H_f\) has rank one, on the normal rational curve, and is two when \(H_f\)
+has rank two.
+\end{lemma}
+
+\begin{proof}
+Work over an algebraic closure and suppose that a linear form \(L\) divides
+every member of \(W_f\).  Multiplication by \(L\) is injective, and, with
+\[
+ K_L=(LE^\vee)^\perp\subset\Gamma^2E,
+\]
+the perfect pairing gives
+\[
+ \{R\in\Sym^{r-3}E^\vee:LR\in W_f\}
+   =\bigl(C_f^{(2)}\bigr)^{-1}(K_L).
+\]
+Here \(K_L\) is one-dimensional.  Because \(W_f\subset L\Sym^{r-3}E^\vee\),
+multiplication by \(L\) identifies the left-hand side with \(W_f\), so its
+dimension is at least \(r-3\).  If \(C_f^{(2)}\) had rank three, it
+would be surjective and the right-hand side would instead have dimension
+\((r-2-3)+1=r-4\).  Hence \(\operatorname{rank}C_f^{(2)}\leq2\), so
+\([f]\in\cP_r\), a contradiction.
+
+For the final assertion, the rank-one normal form is a curve point and gives
+\(W_f=L\Sym^{r-3}E^\vee\).  At a rank-two secant or tangent point, direct
+substitution in the Hankel matrix gives respectively
+\(W_f=L_1L_2\Sym^{r-4}E^\vee\) or
+\(W_f=L^2\Sym^{r-4}E^\vee\).
+\end{proof}
+
 The next two propositions and one theorem prove the unconditional geometric
 layer: they find every reduced terminal component, merge all modular
 descendants, and select the components that persist up the contraction tower.
@@ -135,8 +169,12 @@ characteristic three it is the cone with \(c_2\) free and prime ideal
 There is no flat reduced integral model having exactly these residual
 fibers.
 
-For a base-point-free separable terminal pencil, lying outside this scheme is
-equivalent to geometric \(S_3\) monodromy of its cubic map.  Thus
+Every terminal point outside this scheme has a base-point-free separable
+pencil: base-point freeness follows from
+Lemma~\ref{lem:basepointfree-off-persistent}, while the only inseparable
+Hankel pencil is the characteristic-three all-cube nucleus, contained in the
+residual prime.  For such a pencil, lying outside the scheme is equivalent to
+geometric \(S_3\) monodromy of its cubic map.  Thus
 Proposition~\ref{prop:r5-count} and Lemma~\ref{lem:r5-branch} apply to every
 terminal point outside \(\mathcal B_{5,p}^{\mathrm{red}}\).
 \end{proposition}
@@ -217,6 +255,13 @@ Hilbert polynomial in a flat projective family rules out the final assertion.
 The exact eliminations and the characteristic-\(2,3,5\) reductions are
 replayed by the stable-component certificates described in
 Section~\ref{sec:verification}.
+
+Lemma~\ref{lem:basepointfree-off-persistent} makes every pencil outside
+\(V(D)\) base-point-free.  An inseparable cubic pencil can occur only in
+characteristic three; after source and target changes it is
+\(\langle X^3,Y^3\rangle\).  The overlapping Hankel rows then give the
+syndrome \(e_2\), whose \(\operatorname{GL}(E)\)-orbit lies in the
+characteristic-three residual prime.
 
 Finally, a base-point-free separable cubic map has transitive geometric
 monodromy \(C_3\) or \(S_3\).  Its off-diagonal ordered-pair curve is
@@ -328,8 +373,7 @@ the collision divisor characterized in Lemma~\ref{lem:marker-collision} at
 every contraction stage.  Let
 \(X\subset\PP(\Gamma^{r-1}E_{\bar k})\) be an irreducible closed subvariety,
 and let \(\bar\eta_X\) be a geometric generic point over an algebraic closure
-of the function field \(\bar k(X)\).  Require that \(W_{\bar\eta_X}\) have no
-exact linear gcd and that
+of the function field \(\bar k(X)\).  Require that
 \[
  \overline{\Psi_{\bar\eta_X}(U^\circ_{\bar\eta_X,m})}
 \]
@@ -338,10 +382,8 @@ lie in one geometric irreducible component of
 \emph{terminal-contained} when it is maximal by inclusion among subvarieties
 satisfying these conditions.  The \emph{reduced recursively contained carrier}
 is their reduced union together with every iterated lift of every intermediate
-nucleus.  The omitted exact-linear-gcd branch is
-transported by Lemma~\ref{lem:exact-linear-gcd-transport}; one-step lower
-packages (Definition~\ref{def:lower-package}) handle it and the collision
-divisors separately.
+nucleus.  Collision divisors remain deletion conditions rather than carrier
+components.
 \end{definition}
 
 \begin{theorem}[Recursive carrier]
@@ -352,15 +394,11 @@ and all intermediate nuclei is exactly
 \begin{equation}\label{eq:recursive-carrier}
                        \cP_r\cup\cM^{\max}_{r,p}.
 \end{equation}
-If \(W_f=LV\) has exact linear gcd, contraction away from \(L\) preserves that
-factor; along the flags covered by
-Lemma~\ref{lem:exact-linear-gcd-transport}, the gcd remains exact and
-reaches the R5 exact-linear-gcd branch.  Proposition~\ref{prop:r5-gcd1} proves
-that branch shallow in its stated field range.  If a retained marker becomes a
+If a retained marker becomes a
 root of a lower locator, the lifted locator has a repeated factor; this is
 exactly the collision divisor of
-Lemma~\ref{lem:marker-collision}.  These two branches are handled by the
-lower packages and deletion bounds, not by \eqref{eq:recursive-carrier}.
+Lemma~\ref{lem:marker-collision}.  This condition is handled by deletion
+bounds, not by \eqref{eq:recursive-carrier}.
 \end{theorem}
 
 \begin{proof}

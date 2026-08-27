@@ -127,32 +127,6 @@ classification
 \cite[Prop.~1]{Kaipa2017} and \cite[Thms.~I.4--I.6]{ZWK2020}.
 \end{proof}
 
-\begin{proposition}[Linear gcd]\label{prop:r5-gcd1}%
-\coverage{absent}%
-Suppose $\deg\gcd(W_f)=1$.  Then $f$ is shallow for $q\geq8$.  At
-$q=7$ the same conclusion is part of Certificate R5.
-\end{proposition}
-
-\begin{proof}
-Write $W_f=\lambda_0V$ with $V$ a base-point-free quadratic pencil.  If
-its degree-two map $\psi:\PP^1\to\PP^1$ is separable, its rational deck
-involution $\iota$ gives the graph
-\[
- \Gamma_\iota(\F_q)=\{(t,\iota(t)):t\in\PP^1(\F_q)\},
-\]
-which has exactly $q+1$ rational points.  A safe union bound deletes at
-most two fixed graph points, at most four graph points over the branch
-fibers, and at most the two graph points
-$(\lambda_0,\iota(\lambda_0))$ and
-$(\iota(\lambda_0),\lambda_0)$.  Thus fewer than $q+1$ graph points
-are deleted when $q\geq8$.  A surviving point gives a split quadratic
-with two distinct roots avoiding $\lambda_0$, and hence a split
-squarefree cubic in $W_f$.  In characteristic two an inseparable
-quadratic pencil is equivalent to $\langle T^2,U^2\rangle$; the two
-overlapping Hankel equations then force $f$ onto the normal rational
-curve, contrary to the rank-two pencil hypothesis.
-\end{proof}
-
 \subsection{The trivial-gcd cubic cover}
 
 Choose a basis $c_1,c_2$ of a trivial-gcd pencil and put
@@ -541,10 +515,13 @@ exactly at $q=7,8,9,11,13,17,19$.
 \end{proposition}
 
 \begin{proof}
-The gcd degree is zero, one, or two.  Propositions
-\ref{prop:r5-gcd2} and \ref{prop:r5-gcd1} settle the positive-gcd
-cases.  In the trivial-gcd case the cubic map is inseparable or
-separable.  The inseparable case occurs only in characteristic three
+If \(H_f\) has rank one, then \(f\) is a normal-rational-curve point and
+\(W_f=L\Sym^2E^\vee\), which contains a split squarefree cubic.  Suppose
+therefore that \(H_f\) has rank two.  By
+Lemma~\ref{lem:basepointfree-off-persistent}, a nontrivial gcd has degree two,
+and Proposition~\ref{prop:r5-gcd2} settles that case.  Thus the remaining
+pencil has trivial gcd, and its cubic map is inseparable or separable.  The
+inseparable case occurs only in characteristic three
 and the overlap equations give the all-cube nucleus pencil.  A
 separable transitive cubic has geometric monodromy $C_3$ or $S_3$,
 settled by Lemmas~\ref{lem:cyclic} and \ref{lem:s3}.  The stated finite
@@ -590,12 +567,14 @@ lines of $\mathrm{PG}(3,q)$ in the sense of Blokhuis, Pellikaan, and
 Sz\H onyi, who partition the lines into classes $O_1,\ldots,O_8$ and
 determine for $q\geq23$, in every characteristic, which classes lie in
 a plane meeting the twisted cubic in three rational points
-\cite[Thm.~8.1 and Prop.~8.4]{BPS2022}.  The correspondence is exact.
+\cite[Thm.~8.1 and Prop.~8.4]{BPS2022}.  This ambient line-class
+correspondence is exact.
 Our quadratic-gcd trichotomy of Proposition~\ref{prop:r5-gcd2} is their
 degree-one case: real chords $O_1$ are shallow, tangents $O_2$ give the
 tangent family, imaginary chords $O_3$ give the conjugate-secant
-family.  The linear-gcd unisecants of
-Proposition~\ref{prop:r5-gcd1} are their $O_4$ and $O_5$.  The two
+family.  Their unisecant classes \(O_4\) and \(O_5\), whose pencils have a
+common factor of degree exactly one, are not realized by a rank-two Hankel
+syndrome, by Lemma~\ref{lem:basepointfree-off-persistent}.  The two
 cyclic cases of Lemma~\ref{lem:cyclic}(i) are their real axes $O_1'$
 and imaginary axes $O_3'$, with the same congruences mod three; the
 characteristic-three nucleus of Lemma~\ref{lem:cyclic}(ii) is their
@@ -651,10 +630,9 @@ language and determine its extended coset-leader weight enumerator;
 their line criterion does not supply the map from a redundancy-five
 syndrome to the pencil classified here.  The
 passage $f\mapsto W_f$ of Lemma~\ref{lem:hankel} is not present in that
-literature, and it is not surjective onto the lines: the
-characteristic-two inseparable unisecants, split-free as lines, are
-realized by no rank-two syndrome, as the proof of
-Proposition~\ref{prop:r5-gcd1} shows.  Neither do incidence
+literature, and it is not surjective onto the lines: in particular, no
+unisecant with gcd of degree one is realized by a rank-two syndrome.  Neither do
+incidence
 distributions produce syndromes; Table~\ref{tab:r5sporadic} records
 canonical representatives in divided-power syndrome coordinates with
 their orbit sizes, stabilizers, and Frobenius fusion, and extracting
@@ -670,8 +648,9 @@ recursion.  Its proof separates those later tasks cleanly: identify the lower
 splitting curve, remove its singular, branch, diagonal, and marker incidences,
 apply a rational-point bound, and read a surviving point as a split witness.
 Higher redundancy changes how one reaches that curve and which polar lines
-remain trapped.  The contained branch instead requires the component
-classification and carrier arithmetic developed below.
+remain trapped.  The general contained branch is classified by
+Theorem~\ref{prop:recursive-component-selection}; Appendix~\ref{sec:r67}
+resolves the first two fixed levels separately.
 
 \pagebreak[4]
 \begin{longtable}{c>{\ttfamily\small}lrrl}

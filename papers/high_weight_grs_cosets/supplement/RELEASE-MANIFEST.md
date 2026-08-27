@@ -48,8 +48,8 @@ undo the completed Version 1 publication record.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `high-weight-grs-cosets.pdf` |
-| Local built PDF SHA-256 | `6df3e45cf003be5af78f29b08edd7eae1cc3c885bbe6f66756bf6c6cd6b0ebae` |
-| Local built PDF bytes | `326213` |
+| Local built PDF SHA-256 | `9228701886e5dac6675fd5bcfa2ee35a62788740c693f332f266880ffed94785` |
+| Local built PDF bytes | `319890` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
@@ -65,10 +65,10 @@ record SHA-256 plus exact byte count.
 
 | Manifest object | SHA-256 | Bytes |
 |---|---|---:|
-| `EVIDENCE-MANIFEST.json` | `068a2117323392335377eea68b5ad6f4ab156d8deb37410d06224bbb33f6bfe0` | 22052 |
-| `EVIDENCE-ROWS.md` | `32c99668b6ea8916ccca99199fc84adfa28ffc43c0de9a3aac32f2cb3ea99eaf` | 14615 |
+| `EVIDENCE-MANIFEST.json` | `2df4361edb0a63e9e4b0ef16c4d8317f8fbad8e72cb80620cd92d4e427ea852e` | 22052 |
+| `EVIDENCE-ROWS.md` | `9616cad27a43703220348d384ad3e221794cf572f7c5471ea19b0b6bfcd47c21` | 14615 |
 | `package_evidence_bundle.py` | `b5c59f2d79170abca1ce305d98acb35a71428d36ab257d9ecd06aa043981037f` | 15213 |
-| `verify.py` | `9ae1379107a4f234c99c8b0f9dda3e4eb8c2e8fd6c0dd582f91b6f2908a8abbf` | 16041 |
+| `verify.py` | `ba22c1569099dfc9149a07846374b8f5d1beaa2be06801f11b2d3becf2759fa3` | 16041 |
 | `build_r6_paper_table.py` | `b46a30752ea17d85093e6181d50ca8dbd6f12386416aedc3e8509406a2060f98` | 3878 |
 | `package_software.py` | `f01c53a315c95ecafc96b4fb2402616cbb67322fd0ecd3adb512b16b60f7b8ef` | 2057 |
 | `SOFTWARE-MANIFEST.json` | `48f879f564a497916d79e6e9836da1fb585d6712ce69a7b528c866406bfe335b` | 4583 |
