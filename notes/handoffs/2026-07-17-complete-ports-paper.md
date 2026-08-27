@@ -100,13 +100,18 @@ Completed preparation:
 Current and completed strengthening:
 
 - [C980 higher-rank contextual minimality](../2026-08-27-c980-higher-rank-contextual-minimality.md)
-  is now a mathematics-only active task.  Its first candidate reduction writes
-  every rank-`t` outer context as a dimension-`s<=t` multiset of finite column
-  types and expresses its response as a finite tropical lower envelope.
-  Zero truncation caps each type multiplicity at `z`, giving a candidate
-  complete outer-length bound `1+z(|L|^s-1)` and one finite higher-rank test
-  family.  The immediate gates are typed proof review, canonical integer-envelope
-  equality, sharp state-complexity bounds, and the Pareto-cost extension.
+  is a mathematics-only active task.  It now proves candidate higher-rank
+  column-type, universality, and congruence theorems together with a bounded
+  small-model theorem: through helper radius `r`, every numerical distinction
+  and every coefficient witness is captured by outer shortenings to the target
+  and at most `r` helpers, so separating contexts have length at most
+  `max(2,r+1)` and functional-dual rank at most `min(t,r)`.  The report gives
+  the exact `GL`-orbit census, the dual-shortening evaluator, the finite
+  transformation-category corollary, finite ordered-monoid and sharp bounded
+  Pareto extensions, and fixed-batch packing and multi-target compression
+  lemmas.  The immediate gates are an independent hostile proof read, the full
+  weighted-automata/tropical/valued-CSP priority audit, and code-realizable
+  sharpness; no manuscript promotion is yet authorized.
 
 - [C962 exact recovery algorithms](../2026-08-25-c962-recovery-algorithms-and-bounds.md)
   now includes a radius-pruned rank-one complete-transfer certificate, lazy
@@ -238,9 +243,13 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 ## Next step
 
 C980 is the active mathematics-only task for the higher-rank contextual
-quotient.  First formalize the column-type response theorem and all-rank
-congruence, then identify the canonical lower hull and its state-complexity
-bounds before testing Pareto-valued bandwidth and simultaneous-request states.
+quotient.  Its scalar, witness-cover, finite-state, and bounded-resource
+candidate proofs are now developed.  Next run an independent hostile proof
+read and the full priority audit, then decide whether the scalar small-model
+core strengthens the current paper and route the dual-shortening/rank-stratified
+algorithmic corollaries to C962.  Keep the Pareto, fixed-batch packing, and
+multi-target-block state algebras as sequel material unless the review finds a
+shorter main-paper consequence.
 C962 remains the parallel private code-and-mathematics task for ergodis algorithm
 development and benchmark evidence.  The C972 contextual-state kernels now
 include forecast/memory-aware direct-versus-cache admission, atomic
