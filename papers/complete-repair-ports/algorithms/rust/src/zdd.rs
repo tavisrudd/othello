@@ -26,15 +26,15 @@ struct UniqueTable {
 }
 
 impl UniqueTable {
-    fn with_capacity(capacity: usize) -> Self {
-        let slots = capacity
+    fn with_capacities(expected_nodes: usize, link_capacity: usize) -> Self {
+        let slots = expected_nodes
             .saturating_mul(10)
             .div_ceil(7)
             .next_power_of_two()
             .max(16);
         Self {
             buckets: vec![EMPTY; slots],
-            links: Vec::with_capacity(capacity),
+            links: Vec::with_capacity(link_capacity),
             grow_at: slots * 7 / 10,
         }
     }
@@ -352,20 +352,30 @@ impl Zdd<FlatMap> {
 }
 
 impl<M: ZddMemo> Zdd<M> {
+    #[cfg(test)]
     pub(crate) fn with_capacity(node_budget: usize, capacity_hint: usize) -> Self {
+        Self::with_capacities(node_budget, capacity_hint, capacity_hint)
+    }
+
+    pub(crate) fn with_capacities(
+        node_budget: usize,
+        node_capacity_hint: usize,
+        memo_capacity_hint: usize,
+    ) -> Self {
         let node_budget = node_budget.min((1 << 24) - 2);
-        let capacity = capacity_hint.min(node_budget);
-        let node_capacity = capacity
-            .saturating_add(capacity / 8)
+        let node_capacity_hint = node_capacity_hint.min(node_budget);
+        let memo_capacity = memo_capacity_hint.min(node_budget);
+        let node_capacity = node_capacity_hint
+            .saturating_add(node_capacity_hint / 8)
             .saturating_add(2)
             .min(node_budget);
         let mut minimal_cache = Vec::with_capacity(node_capacity + 2);
         minimal_cache.extend([EMPTY, UNIT]);
         let nodes = Vec::with_capacity(node_capacity);
-        let unique = UniqueTable::with_capacity(node_capacity);
-        let union_cache = M::with_capacity(capacity);
-        let join_cache = M::with_capacity(M::join_capacity(capacity));
-        let avoid_cache = M::with_capacity(M::avoid_capacity(capacity));
+        let unique = UniqueTable::with_capacities(node_capacity_hint, node_capacity);
+        let union_cache = M::with_capacity(memo_capacity);
+        let join_cache = M::with_capacity(M::join_capacity(memo_capacity));
+        let avoid_cache = M::with_capacity(M::avoid_capacity(memo_capacity));
         let union_stack = Vec::with_capacity(256);
         let unique_capacities = unique.capacities();
         let initial_capacities = [

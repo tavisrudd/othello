@@ -45,6 +45,23 @@ pub struct CephCompressedRepairAnswer {
     pub zdd_storage_grew: bool,
 }
 
+fn ceil_sqrt(value: usize) -> usize {
+    if value < 2 {
+        return value;
+    }
+    let mut low = 1usize;
+    let mut high = 1usize << usize::BITS.div_ceil(2);
+    while low < high {
+        let middle = low + (high - low) / 2;
+        if middle >= value.div_ceil(middle) {
+            high = middle;
+        } else {
+            low = middle + 1;
+        }
+    }
+    low
+}
+
 /// Parse Ceph's low-level layer strings. Each contiguous non-underscore run
 /// must contain one coding coordinate `c` and at least one data coordinate `D`.
 pub fn parse_ceph_xor_layers(
@@ -224,16 +241,36 @@ pub fn ceph_xor_repair_supports_compressed(
         }
         unavailable_mask[coordinate] = true;
     }
-    let capacity_hint = coordinate_count
-        .saturating_mul(layers.len())
-        .saturating_mul(4);
+    let structural_units = layers
+        .iter()
+        .map(|layer| layer.data.len() + 2)
+        .sum::<usize>();
+    let mut parity_multiplicity = [0usize; 256];
+    let mut data_multiplicity = [0usize; 256];
+    for layer in layers {
+        parity_multiplicity[usize::from(layer.parity)] += 1;
+        for &coordinate in &layer.data {
+            data_multiplicity[usize::from(coordinate)] += 1;
+        }
+    }
+    let role_fanout = parity_multiplicity
+        .into_iter()
+        .chain(data_multiplicity)
+        .max()
+        .unwrap_or(0);
+    let capacity_scale_tenths = 8usize.saturating_add(ceil_sqrt(role_fanout.saturating_mul(36)));
+    let memo_capacity_hint = coordinate_count.saturating_mul(structural_units);
+    let node_capacity_hint = memo_capacity_hint
+        .saturating_mul(capacity_scale_tenths)
+        .div_ceil(10);
     ceph_xor_repair_supports_compressed_with::<DirectMemo>(
         coordinate_count,
         layers,
         target,
         &unavailable_mask,
         node_budget,
-        capacity_hint,
+        node_capacity_hint,
+        memo_capacity_hint,
     )
 }
 
@@ -243,7 +280,8 @@ fn ceph_xor_repair_supports_compressed_with<M: ZddMemo>(
     target: usize,
     unavailable: &[bool; 256],
     node_budget: usize,
-    capacity_hint: usize,
+    node_capacity_hint: usize,
+    memo_capacity_hint: usize,
 ) -> Result<CephCompressedRepairAnswer, ApplicationError> {
     let group_coordinates = layers
         .iter()
@@ -266,7 +304,7 @@ fn ceph_xor_repair_supports_compressed_with<M: ZddMemo>(
         group_data[start..].sort_unstable();
         group_offsets.push(group_data.len());
     }
-    let mut zdd = Zdd::<M>::with_capacity(node_budget, capacity_hint);
+    let mut zdd = Zdd::<M>::with_capacities(node_budget, node_capacity_hint, memo_capacity_hint);
     let mut supports = Vec::with_capacity(coordinate_count);
     for (coordinate, &is_unavailable) in unavailable.iter().take(coordinate_count).enumerate() {
         let root = if is_unavailable {
