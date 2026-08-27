@@ -4,6 +4,8 @@
 
 [**Open the manuscript (PDF) →**](cubic_stabilization_irrationality.pdf)
 
+Referees may also use the focused [proof-reading guide](REVIEWER_GUIDE.md).
+
 The theorem that every smooth complex cubic threefold remains irrational
 after multiplication by `P¹` is sharp. For each of two displayed smooth cubic
 threefolds `X/Q`, this paper proves
@@ -105,6 +107,7 @@ nix shell nixpkgs#singular -c uv run --with sympy==1.14.0 python3 \
 
 - `cubic_stabilization_irrationality.tex` — manuscript source;
 - `cubic_stabilization_irrationality.pdf` — generated manuscript;
+- `REVIEWER_GUIDE.md` — a referee's route through the proof and evidence;
 - `formal-annotations.tex` — nonprinting claim annotations;
 - `verification/derive_slice_cover.py` — exact reconstruction program;
 - `verification/generate_groebner_empty_certificates.py` — optional Singular

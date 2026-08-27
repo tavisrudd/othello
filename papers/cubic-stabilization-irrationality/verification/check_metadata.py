@@ -57,6 +57,7 @@ assert "(cubic_stabilization_irrationality.pdf)" in readme
 for relative in (
     "cubic_stabilization_irrationality.tex",
     "cubic_stabilization_irrationality.pdf",
+    "REVIEWER_GUIDE.md",
     "LICENSE",
     "flake.nix",
     "flake.lock",
