@@ -172,14 +172,14 @@ failure-by-survivor graph while still emitting all 384,000 assignments.
 Direct CP-SAT remains as a common stress control rather than the headline
 comparison:
 
-| application / control            | bounded instance                  | ERGO time | CP-SAT time | outcome             |
-| :------------------------------- | :-------------------------------- | --------: | ----------: | :------------------ |
-| Azure LRC / direct CP-SAT        | 100,000 demands, domain cap 100k  |     <1 us |      8.95 s | CP quotient 5,168x  |
-| Azure LRC / counted CP-SAT       | same six-type quotient            |     <1 us |    1,732 us | ERGO 61,799x        |
-| Repair DAG / direct CP-SAT       | 3 layers x 21 tasks               |      2 us |      1.20 s | ERGO 494,061x       |
-| QC-LDPC / direct CP-SAT          | lift 50,000, weight 4             |  1,517 us |      1.52 s | ERGO 1,001x         |
-| vector node span / direct CP-SAT | 64 nodes, 2 symbols per node      |     10 us |      1.21 s | ERGO 117,097x       |
-| GPU MDS / direct CP-SAT          | 10,000 shards, k=6,000, 64 failed |    100 us |     11.82 s | ERGO 118,014x       |
+| application / control            | bounded instance                  | ERGO time | CP-SAT time | outcome           |
+| :------------------------------- | :-------------------------------- | --------: | ----------: | :---------------- |
+| Azure LRC / direct CP-SAT        | 100,000 demands, domain cap 100k  |     <1 us |      8.95 s | ERGO 319,347,596x |
+| Azure LRC / counted CP-SAT       | same six-type quotient            |     <1 us |    1,732 us | ERGO 61,799x      |
+| Repair DAG / direct CP-SAT       | 3 layers x 21 tasks               |      2 us |      1.20 s | ERGO 494,061x     |
+| QC-LDPC / direct CP-SAT          | lift 50,000, weight 4             |  1,517 us |      1.52 s | ERGO 1,001x       |
+| vector node span / direct CP-SAT | 64 nodes, 2 symbols per node      |     10 us |      1.21 s | ERGO 117,097x     |
+| GPU MDS / direct CP-SAT          | 10,000 shards, k=6,000, 64 failed |    100 us |     11.82 s | ERGO 118,014x     |
 
 | application / control      | ERGO RSS | CP-SAT RSS |
 | :------------------------- | -------: | ---------: |
@@ -200,7 +200,9 @@ Azure and GPU rows each use one completed CP-SAT proof; their solves take
 seconds and peak near 1 and 2 GiB respectively. The counted Azure control and
 the other CP-SAT rows use seven rounds, as do all Rust rows. These are
 formulation-specific results, not a universal solver ranking. The matched
-controls use eleven rounds. Raw samples, RSS, checksums, artifact hashes, and
+controls use eleven rounds. Counted CP-SAT is 5,168x faster than direct CP-SAT
+on the Azure instance, but ERGO-comp is faster than both. Raw samples, RSS,
+checksums, artifact hashes, and
 exact package versions are stored in `evidence/benchmarks.json`; replay with:
 
 ```text
