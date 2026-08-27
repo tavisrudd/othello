@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Date:** 2026-08-25
+**Date:** 2026-08-27
 
 > **LIVE MAP ONLY.** This is the routing and state surface for this lane.
 > Per-task detail belongs in the task cards under `notes/cubic-threefolds-tasks/`;
@@ -41,12 +41,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 - **C956 — exact level-two cubic manuscript, referee-accepted candidate.**
   Cross-specialty review repaired the characteristic-zero scope, the
   singular-compatible tangent-projection citation, the relative evaluation
-  construction, and specialist orientation.  A fresh isolated referee returns
-  Accept with no required correction; the eleven-page authority and standalone
-  PDFs are byte-identical, and both gates pass.  The abstract, paper README,
-  and portfolio summary are synchronized at authority commits `563df343f` and
-  `d93878af3`, standalone paper commit `29d8698`, and standalone portfolio
-  commit `13b3ea1`.  The original AI disclosure is restored verbatim.  C956
+  construction, and specialist orientation.  The latest exposition pass
+  makes the rank-three quotient mechanism and weight-space design explicit,
+  explains descent before use, and moves the exact witness machinery behind
+  the conceptual geometry.  The eleven-page authority and standalone PDFs
+  are byte-identical, and both gates pass.  The manuscript and portfolio are
+  synchronized at authority commits `b0241f344` and `d93878af3`, standalone
+  paper commit `c50aa13`, and standalone portfolio commit `13b3ea1`.  The
+  original AI disclosure is restored verbatim.  C956
   remains active by author instruction; do not push, deposit, or close without
   that instruction.  Report and live card:
   `../2026-08-24-c956-exact-level-two-cubic-manuscript.md` and

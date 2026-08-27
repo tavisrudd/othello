@@ -54,8 +54,9 @@ absence assertion.
   no specialization principle.
 - The Proposition 5.2 cubic tail is transcribed as
   `x_3^3 - x_3*x_4^2 + x_4^3`.
-- The coefficient wall is confined to an appendix; the main proof has a
-  compact four-witness table and geometric explanation.
+- The coefficient wall and exact witness table are confined to an appendix;
+  the main proof first explains the geometric open condition and rank
+  argument that the certificates verify.
 - `make check` passes in the authority. The PDF is warning-free, eleven pages,
   and every page has been visually inspected after the exposition repairs.
 - The exact-arithmetic replay reconstructs the Cox weights, saturation,
@@ -71,14 +72,14 @@ absence assertion.
   resolves to the retired manuscript and has been removed from release-facing
   README surfaces until a new version is deposited.
 
-The current manuscript and paper-README authority change is commit
-`563df343f`; portfolio-summary authority commit `d93878af3` carries the same
-abstract.  Standalone paper commit `29d8698` and portfolio-summary commit
-`13b3ea1` record the synchronized exports.  Both paper release gates and
+The current manuscript authority change is commit `b0241f344`; portfolio-
+summary authority commit `d93878af3` carries the same abstract.  Standalone
+paper commit `c50aa13` and portfolio-summary commit `13b3ea1` record the
+synchronized exports.  Both paper release gates and
 export-manifest verification pass, with content digest
-`de59ba1d5fbb5cf5939ea4d96a1b151aaf21c9fce459131fcb39e204ba3fcd4f`.
+`c6e773f83fbf7660c5c91a08acd045e7efcee72a3ff0db9aaffed3334baf288c`.
 The authority and mirror PDFs are byte-identical with SHA-256
-`a90223898c0f8f929187e6d9ecc22424506e21c94660e1e0389b53f9b6cd46cd`.
+`f0e7c845585c15c4130883de86eef0759983264d3c1004c040b8a00319b55dcb`.
 The public GitHub remote has not been pushed. The removed conditional sources
 remain recoverable from Git history.
 
@@ -110,7 +111,7 @@ portfolio's older abstract paraphrase with the current abstract.
 | Is there kernel-checked formal coverage of the new quotient and rationality theorems? | open coverage gap | claim map honestly records `absent`; a future formalization needs its own task and scope |
 | Is any global firstness claim supported? | settled editorially | none is needed or made; the theorem is stated on its mathematical content and exact source chain |
 | Is there a remaining descent, saturation, incidence, characteristic-scope, or function-field gap found by the cold audits? | settled | the relative-open, singular-input, and characteristic-zero repairs passed a fresh isolated referee; no required gap remains |
-| Does the split-coordinate display `H_p -> k^4` need another sentence? | optional exposition only | the final referee found the coordinate convention inferable and identified no mathematical gap; do not reopen without new evidence |
+| Does the split-coordinate display `H_p -> k^4` need another sentence? | settled exposition | the main proof now defines the evaluation map and its open condition before invoking the exact witnesses; the table and certificate are in Appendix A |
 
 No genuine mathematical mystery remains in the present manuscript.  The first
 three rows describe successor work or optional production coverage, not a

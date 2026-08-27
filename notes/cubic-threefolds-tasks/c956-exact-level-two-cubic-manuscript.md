@@ -59,8 +59,9 @@ the mathematical narrative.
   `x_3^3-x_3 x_4^2+x_4^3`.
 - Projective weights are treated up to common translation; the selected weight
   sum and its complement descend, rather than individual coordinate blocks.
-- The tangent-section coefficient wall has moved to an appendix; the main
-  proof gives the geometric rank argument and a compact witness table.
+- The tangent-section coefficient wall and exact witness table have moved to
+  an appendix; the main proof first gives the geometric open-condition and
+  rank argument that explain what those certificates verify.
 - The inverse graph and both compositions are written out in the quotient
   theorem.
 - The quotient theorem isolates the orbit-section component and requires the
@@ -84,14 +85,16 @@ the mathematical narrative.
 
 ## Remaining work
 
-Manuscript/README authority commit `563df343f`, portfolio authority commit
-`d93878af3`, standalone paper commit `29d8698`, and standalone portfolio commit
+Manuscript authority commit `b0241f344`, portfolio authority commit
+`d93878af3`, standalone paper commit `c50aa13`, and standalone portfolio commit
 `13b3ea1` are synchronized.  The paper release gates and export manifest pass,
 all eleven PDF pages have been reviewed, and the PDFs are byte-identical.
 Independent reviews in algebraic geometry, quotient/descent/computation,
 public-repository presentation, and specialist exposition have all been
-completed.  A fresh isolated referee accepted the final repaired candidate
-with no required correction.
+completed.  The latest specialist-exposition repair makes the rank-three
+quotient mechanism explicit, explains the weight-space design and descent
+hypotheses before using them, and puts the geometry before its exact
+certificates.  No mathematical statement was changed.
 
 The task remains active because the author instructed that C956 not be closed.
 The only remaining actions are author-authorized publication of the standalone
