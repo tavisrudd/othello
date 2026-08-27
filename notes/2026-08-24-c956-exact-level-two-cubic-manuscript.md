@@ -72,14 +72,14 @@ absence assertion.
   resolves to the retired manuscript and has been removed from release-facing
   README surfaces until a new version is deposited.
 
-The current manuscript authority change is commit `8dc83709b`; portfolio-
+The current manuscript authority change is commit `cf56c9b44`; portfolio-
 summary authority commit `d93878af3` carries the same abstract.  Standalone
-paper commit `621b355` and portfolio-summary commit `13b3ea1` record the
+paper commit `43a9db8` and portfolio-summary commit `13b3ea1` record the
 synchronized exports.  Both paper release gates and
 export-manifest verification pass, with content digest
-`7cf4e05a3d492517feb825cb92475bfd06fdf71ae3fe9b441329858269766c7d`.
+`85e755865c800ca56d98a64fb91e1f37dda3d2708de53c2d58bc948ddecfe637`.
 The authority and mirror PDFs are byte-identical with SHA-256
-`f649514581a063cfe2ec0d1c76195a90a8aa66f03b8fe828892a43727de73072`.
+`7e11c2ba2659ab285bb9827b9317488e0be0945e0954984eb44ba6bce4a44bf1`.
 The public GitHub remote has not been pushed. The removed conditional sources
 remain recoverable from Git history.
 

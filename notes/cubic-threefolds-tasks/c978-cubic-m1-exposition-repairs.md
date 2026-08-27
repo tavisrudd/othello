@@ -51,7 +51,9 @@ parallelism of the novelty paragraph.  A final five-edit pass then replaced two
 metaphorical stabilization phrases, made the Lax sentence's grammatical
 subject literal, described the marker as retaining less structure, and put the
 Fermat cubic directly in \(\mathbf P^4\) in its display.  No other prose changed.
-It is synchronized at authority `d0eb81402` and standalone `fad29f8`; both gates
-and exporter verification pass with content SHA-256
-`e97fa824ca63d77de82ca39ef7e804b186dccc36f64bc066c1fd41d940109e05`.
+The last optional copy edit tightens the definition of the even QDM and gives
+the novelty sentence parallel verb structure.  It is synchronized at authority
+`cf56c9b44` and standalone `c52be41`; both gates and exporter verification pass
+with content SHA-256
+`b15dbbc7d0c387080ad007c24f62a7df25e2791562ed6b7d6e23c41d2486a892`.
 C978 remains active by author instruction.

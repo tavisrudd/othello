@@ -85,8 +85,8 @@ the mathematical narrative.
 
 ## Remaining work
 
-Manuscript authority commit `8dc83709b`, portfolio authority commit
-`d93878af3`, standalone paper commit `621b355`, and standalone portfolio commit
+Manuscript authority commit `cf56c9b44`, portfolio authority commit
+`d93878af3`, standalone paper commit `43a9db8`, and standalone portfolio commit
 `13b3ea1` are synchronized.  The paper release gates and export manifest pass,
 all eleven PDF pages have been reviewed, and the PDFs are byte-identical.
 Independent reviews in algebraic geometry, quotient/descent/computation,
@@ -95,6 +95,9 @@ completed.  The latest specialist-exposition repair makes the rank-three
 quotient mechanism explicit, explains the weight-space design and descent
 hypotheses before using them, and puts the geometry before its exact
 certificates.  No mathematical statement was changed.
+The final copy edit removes the stray word before the saturation remark, uses
+stabilizing-dimension language consistently, and makes the orbit-intersection
+and nonemptiness sentences literal.
 
 The task remains active because the author instructed that C956 not be closed.
 The only remaining actions are author-authorized publication of the standalone

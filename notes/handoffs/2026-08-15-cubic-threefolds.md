@@ -46,8 +46,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   explains descent before use, and moves the exact witness machinery behind
   the conceptual geometry.  The eleven-page authority and standalone PDFs
   are byte-identical, and both gates pass.  The manuscript and portfolio are
-  synchronized at authority commits `8dc83709b` and `d93878af3`, standalone
-  paper commit `621b355`, and standalone portfolio commit `13b3ea1`.  The
+  synchronized at authority commits `cf56c9b44` and `d93878af3`, standalone
+  paper commit `43a9db8`, and standalone portfolio commit `13b3ea1`.  The
   original AI disclosure is restored verbatim.  C956
   remains active by author instruction; do not push, deposit, or close without
   that instruction.  Report and live card:
@@ -64,7 +64,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   public formal-review prose pass. A later full cold-read protocol accepted the
   manuscript and every PDF page after prose-only cleanup of the public
   claim-map descriptions.  The final five local introduction refinements are
-  synchronized at authority `d0eb81402` and standalone `fad29f8`; both gates
+  synchronized at authority `cf56c9b44` and standalone `c52be41`; both gates
   and exporter verification pass with byte-identical PDFs. C978 remains active
   by author instruction. Card:
   `../cubic-threefolds-tasks/c978-cubic-m1-exposition-repairs.md`.
