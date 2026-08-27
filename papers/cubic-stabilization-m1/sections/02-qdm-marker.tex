@@ -4,7 +4,8 @@
 We prove the theorem by applying the quantum \(D\)-module
 decomposition formulas directly.  The common argument is stated first for an
 arbitrary additive marker.  The rest of the section constructs the smallest
-marker needed for a cubic threefold and verifies its center nullity.
+marker needed for a cubic threefold and proves that it vanishes on every
+possible low-dimensional center.
 
 Here is the concrete invariant before the general construction.  Split the
 generic even quantum \(D\)-module into formal connection blocks.  A block
@@ -151,7 +152,7 @@ zero correction, then \(I_w\) is a birational invariant of smooth projective
 Projective weak factorization writes a birational map of smooth projective
 \(d\)-folds as a zigzag of blowups and blowdowns along smooth centers of
 codimension at least two \cite[Theorem~0.3.1]{AKMW}.  By
-\eqref{eq:marker-blowup} and center nullity, the marker is unchanged at each
+\eqref{eq:marker-blowup} and center vanishing, the marker is unchanged at each
 step; the equalities therefore telescope.  Disconnected centers are treated
 componentwise, while a divisor blowup is an isomorphism.
 \end{proof}
@@ -635,9 +636,9 @@ Its characteristic polynomial is
  \label{eq:cubic-delta}
 \end{equation}
 
-\subsection{Center nullity through dimension two}
+\subsection{Vanishing on centers through dimension two}
 
-\begin{proposition}[Low-dimensional nullity]
+\begin{proposition}[Vanishing on low-dimensional centers]
 \label{prop:atomic-lowdim}
 \coverage{conditional_deduction}%
 \lean{rankTwoResidueMarker_lowDimensionalOccurrenceNullity}%

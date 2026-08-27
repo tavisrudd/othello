@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** queued
+**Status:** active
 
 ## Goal
 
@@ -26,3 +26,12 @@ to follow on a first expert read.
 2. A fresh exposition-focused cold read finds no required clarity repair.
 3. Any standalone synchronization follows the repository's mirror conventions
    and is verified against the authoritative manuscript.
+
+## Current state
+
+The abstract and introduction have been repaired against Section 2's exact
+logical order and terminology. The full deterministic paper gate passes, the
+rebuilt opening pages are visually clean, and a fresh exposition referee
+returns Accept after its two minor findings were repaired. The task remains
+open for further author-directed exposition repairs and final standalone
+synchronization.

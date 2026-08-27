@@ -2,10 +2,11 @@
 
 Let \(X\subset\PP^4\) be a smooth complex cubic threefold.  Clemens and
 Griffiths proved that \(X\) is irrational \cite{CG}, but their
-intermediate-Jacobian obstruction does not directly survive on
-\(X\times\PP^1\): in a factorization of fourfolds, a surface center can
-contribute precisely the weight-three Hodge structure carried by \(X\).  We
-prove that the stabilized fourfold is nevertheless irrational.
+intermediate-Jacobian argument does not directly obstruct the rationality of
+\(X\times\PP^1\): in a weak factorization of a birational map between smooth
+fourfolds, a surface center can contribute, up to the relevant Tate twist, the
+same weight-three Hodge structure as \(H^3(X)\).  We prove that the stabilized
+fourfold is nevertheless irrational.
 
 \begin{theorem}[One-step irrationality]
 \label{thm:every-cubic}
@@ -16,32 +17,37 @@ For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
 
-The proof uses the generic even quantum \(D\)-module (QDM).  Over an algebraic
-closure of its generic coefficient field, Euler multiplication splits the
-formal connection into blocks.  We place those blocks in an effective
-commutative ledger.  Iritani's blowup theorem and Iritani--Koto's
-projective-bundle theorem give additive operation formulas, with each copy of
-a blowup center retained as a separate occurrence.  Weak factorization then
-makes every additive block marker that vanishes on the possible centers a
-birational invariant.
+The proof uses the generic even quantum \(D\)-module (QDM).  After extending
+its generic coefficient field to an algebraic closure, the generalized
+eigenspaces of quantum multiplication by the Euler field decompose the formal
+connection into blocks.  We record their isomorphism classes in a free
+commutative monoid.  Iritani's blowup theorem gives an additive formula for
+these blocks, with the individual center summands retained separately.
+Combined with weak factorization, this formula makes any additive marker that
+vanishes on every possible center in dimension four a birational invariant.
+Iritani--Koto's projective-bundle theorem computes the marker after product
+with projective space.
 
-The marker used here detects a rank-two block whose centered leading Euler
-operator is nonzero square-zero and whose two formal exponent classes are
-distinct modulo the integers.  Pairing horizontality makes the required
-elementary modification regular; flatness moves its residue by conjugation.
-For a cubic threefold, Beauville's quantum products give exponent
-representatives \(-1/6\) and \(-5/6\), with difference \(2/3\).  The marker
-vanishes on points, curves, and surfaces, doubles on product with
-\(\PP^1\), and vanishes on projective space.  This proves the theorem.
+The marker counts rank-two blocks for which the centered leading term \(N\) of
+Euler multiplication is nonzero and satisfies \(N^2=0\).  Horizontality of the
+Poincar\'e pairing makes a canonical elementary modification regular singular,
+while flatness gives a Lax equation for its residue and hence preserves its
+eigenvalues.  We count the block when the two residue eigenvalues, equivalently
+the two formal exponent classes, are distinct modulo \(\Z\).  Using Beauville's
+quantum product formulas, we compute exponent representatives \(-1/6\) and
+\(-5/6\) for the cubic block, with difference \(2/3\).  The resulting marker
+vanishes on points, curves, and surfaces, doubles on product with \(\PP^1\),
+and vanishes on projective space.  This proves the theorem.
 
 The comparison inputs are Iritani's blowup decomposition and
 Iritani--Koto's projective-bundle decomposition
-\cite{IritaniBlowup,IritaniKoto}.  What is new here is their use as an
-occurrence-indexed additive ledger through weak factorization, together with
-the formal-exponent fold and its low-dimensional nullity.  Cai computes the
-cubic quantum differential equation in a compatible normalization
-\cite{Cai}; that calculation neither constructs this birational marker nor
-proves the one-stabilization conclusion.
+\cite{IritaniBlowup,IritaniKoto}.  The new point is to combine these formulas
+with weak factorization while retaining the individual center summands, and
+then to apply an additive rank-two exponent marker that vanishes on every
+center that can occur in dimension four.  Cai independently computes the cubic
+quantum differential equation in a normalization compatible with ours
+\cite{Cai}; the birational marker and stabilization argument are not part of
+that calculation.
 
 The same construction gives a threefold criterion without stabilization.
 
@@ -55,18 +61,18 @@ contains a block marked by \eqref{eq:atomic-fold}, then \(Y\) is irrational.
 
 Indeed, the only centers in a weak factorization of threefolds have dimension
 at most one, where the marker vanishes, while the generic quantum product of
-\(\PP^3\) is semisimple.  This is a QDM-side irrationality criterion.  It is
-not identified here with semiorthogonal components or with a derived
-categorical rationality criterion.
+\(\PP^3\) is semisimple.  This gives an irrationality criterion formulated in
+terms of the quantum \(D\)-module.  We do not claim that this marker coincides
+with a semiorthogonal or derived-categorical rationality obstruction.
 
-The result also propagates through stabilized birational correspondences.
+Kuznetsov's flop gives a further application.
 Kuznetsov's construction applies to an arbitrary smooth prime Fano threefold
 \(V\) of genus eight: it associates a smooth Pfaffian cubic threefold \(X\)
 and rank-two projective bundles over \(V\) and \(X\) related by a flop
 \cite[Theorems~2.17--2.18]{KuznetsovV14}.
 This gives the following consequence.
 
-\begin{corollary}[One stabilization of \(V_{14}\)]
+\begin{corollary}[Irrationality after one stabilization for \(V_{14}\)]
 \label{cor:v14-one-step}
 \coverage{conditional_deduction}%
 \lean{genusEight_oneProjectiveLine_not_rational_of_residueContext}%
@@ -74,12 +80,11 @@ For every smooth prime Fano threefold \(V\) of genus eight,
 \(V\times\PP^1\) is irrational.
 \end{corollary}
 
-The theorem also separates irrationality from universal \(CH_0\)-triviality
-on several known loci of cubic threefolds.  Universal \(CH_0\)-triviality
-passes to a projective bundle by the projective-bundle formula for Chow
-groups.
+The theorem also produces universally \(CH_0\)-trivial fourfolds that are
+irrational.  Universal \(CH_0\)-triviality passes to a projective bundle by
+the projective-bundle formula for Chow groups.
 
-\begin{corollary}[Separation in codimension three]
+\begin{corollary}[Separation in codimension at most three]
 \label{cor:voisin-separation}
 \coverage{fragment}%
 \lean{primitiveMinimalClassFamily_universalCH0_and_irrational_stabilization,%
@@ -92,7 +97,10 @@ member \(X\), both \(X\) and \(X\times\PP^1\) are universally
 \(CH_0\)-trivial, while \(X\times\PP^1\) is irrational.
 \end{corollary}
 
-\begin{corollary}[Fermat]
+In the next statement, the displayed hypersurface lies in \(\PP^4\) and is
+the Fermat cubic threefold.
+
+\begin{corollary}[Fermat cubic]
 \label{cor:fermat-separation}
 \coverage{conditional_deduction}%
 \lean{fermatCubic_universalCH0_and_irrational_stabilization}%
@@ -117,14 +125,15 @@ parametrizations of coprime degrees, is universally \(CH_0\)-trivial, and is
 irrational.
 \end{corollary}
 
-Voisin proves the codimension-three statement
+Voisin proves the codimension-at-most-three statement
 \cite[Theorem~4.5]{Voisin}.  The Fermat case follows from
 Colliot-Th\'el\`ene's separated-variable criterion \cite{CT}.  Yang--Yu--Zhu construct
 the coprime-degree family \cite[Theorems~1.1 and 3.3]{YYZ}.  The last
-corollary settles their question at the first nontrivial stabilization, not
-at every stabilization.
+corollary answers the \(m=1\) case of their question; it does not address all
+stabilizations.
 
-Section~\ref{sec:atomic-one-step} constructs the block ledger, proves its QDM
-operation formulas, defines the formal-exponent marker, computes the cubic
-block, and proves center nullity.  Section~\ref{sec:applications} gives the
+Section~\ref{sec:atomic-one-step} constructs the block monoid and its QDM
+operation formulas, defines the exponent marker, computes the cubic block,
+and proves that the marker vanishes on centers of dimension at most two.
+Section~\ref{sec:applications} gives the
 threefold, genus-eight, and universal-\(CH_0\) consequences.
