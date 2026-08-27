@@ -2,8 +2,8 @@
 
 **Lane:** `reed-solomon` · **Status:** active — arbitrary-`r` escape proved;
 the multi-digit carrier module theorem is proved, characteristic seven is
-pointedly closed, and the exact GF(16) pointed quotient closes binary R11/R12
-there; GF(27), GF(32), GF(64), and external review remain open
+pointedly closed, and exact GF(16)/GF(32) pointed quotients close binary
+R11/R12 there; GF(27), GF(64), and external review remain open
 
 **Current checkpoint:**
 `c973-2026-08-26-simultaneous-marker-theorem.md` proves direct composite
@@ -93,7 +93,15 @@ to infinity reduces the full GF(16) R11 carrier to 317 upper-Borel orbits.
 All 317 have independently replayed finite locators (307 of degree nine and
 10 of degree eight).  Hence GF(16) leaves the possible R11 modular-exception
 set, and one-marker lifting also makes the GF(16) binary R12 carrier shallow.
-The remaining R11 fields are exactly GF(27), GF(32), and GF(64).
+The same marked-root quotient at GF(32) is closed in
+`c973-2026-08-27-r11-gf32-pointed-closure.md`: all 1,129 upper-Borel orbits
+have independently replayed degree-nine locators.  Hence GF(32) also leaves
+the R11 exception set and its binary R12 carrier is shallow.  The exact
+remaining R11 fields are GF(27) and GF(64).  A structural-compression audit
+finds 795 affine support types and proves that the natural affine-three-space
+plus one-root family misses 503 of the 1,129 GF(32) marked orbits.  The next
+binary proof gate is therefore pointed avoidance inside the full C620
+final-pair trace cover, not a small support atlas or a GF(64) in-memory census.
 
 ## Objective
 

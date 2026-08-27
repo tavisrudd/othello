@@ -113,11 +113,16 @@ selector, cofinite GRS transfer, exact one-column MDS/NMDS interpretation,
 family-aggregate enumerator, and digit-stripping carrier module theorem are
 proved.  The first exact small-field pointed quotient now closes every R11
 carrier/root pair over GF(16): 317 upper-Borel orbits have independently
-replayed finite locators, with 307 of degree nine and 10 of degree eight.
-One-marker lifting also closes the binary R12 carrier over GF(16).  The exact
-remaining R11 modular fields are GF(27), GF(32), and GF(64); external seam and
-representation-theory review remain open.  Checkpoint:
-`notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md`.
+replayed finite locators, with 307 of degree nine and 10 of degree eight.  The
+GF(32) quotient has 1,129 marked orbits, all with independently replayed
+degree-nine locators.  One-marker lifting closes binary R12 over both fields.
+The exact remaining R11 modular fields are GF(27) and GF(64); external seam
+and representation-theory review remain open.  An exact compression audit
+rules out both a small affine support atlas and the additive-three-space-plus-
+one family; the structural binary target is pointed avoidance in C620's full
+final-pair trace cover, not a GF(64) census.  Checkpoints:
+`notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
+`notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`.
 
 C974 is complete.  The toolkit now contracts arbitrary degree-`r-5` marker
 supports directly to a complete R5 cubic pencil, returns the resulting
@@ -1252,7 +1257,7 @@ gates remain binding.
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
 | 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, exhaustive persistent-sigma `O(mq^2)`, and exhaustive binary-form lex canonicalizers green, including both degenerate-successor stabilizers, a worst-case `O(m r q^2)` transport bound, and `O(r^2+r log q)` field operations per transport; structural canonicalization supports every `r>=5`, with exhaustive q5/GF8/GF9 R5 projective checks, q13/R11--R13 and GF16/R11 full-orbit regressions, GF16/R16 full-length, and GF32/R17 characteristic-power boundaries, while coding verdicts remain R5--R10 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
-| 3 | C973 | active; arbitrary-`r` escape, deterministic extraction, digit-stripping, cofinite GRS transfer, extension/enumerator consequences, and the exact 317-orbit GF(16) pointed R11 quotient are proved; GF(16) R11/R12 close, while GF(27)/GF(32)/GF(64) and external review remain; manuscript frozen | extend the normalized pointed quotient or prove a uniform abundance theorem for the remaining coherent R11 fields, then propagate through R12; a successful close receives a separately allocated paper-integration successor |
+| 3 | C973 | active; arbitrary-`r` escape, digit-stripping, cofinite GRS transfer, extension/enumerator consequences, and the exact GF(16)/GF(32) pointed R11 quotients are proved; those R11/R12 blocks close, while GF(27)/GF(64) and external review remain; manuscript frozen | prove a structural GF(64) pointed closure and a distinct GF(27) carrier reduction, then finish external review; a successful close receives a separately allocated paper-integration successor |
 
 ## Unallocated level-ups
 
