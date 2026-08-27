@@ -2,6 +2,11 @@
 
 **Exact Recovery, Global Optimization, and Invariant Synthesis**
 
+**Optimization and operations-research readers:** start with
+[ergodis for optimization researchers](OPTIMIZATION.md). It explains the
+mathematical results and solver design in optimization language and assumes no
+coding-theory background.
+
 ergodis is a structure-aware exact finite-domain solver for linear-code
 recovery, capacitated repair scheduling, and finite algebraic search. It
 compiles quotient structure, functional labels, conserved gradings, generated
@@ -18,6 +23,22 @@ general-purpose constraint-programming replacement.
 “Invariant synthesis” means constructing the exact labelled cost state needed
 by later composition; it does not mean conjecturing new mathematical
 invariants.
+
+## Scope and limits
+
+ergodis is designed for exact finite problems with exploitable linear,
+quotient, symmetry, span, syndrome, orbit, or repeated-interface structure. It
+is most useful when many raw assignments collapse to a much smaller exact state
+and an original-space witness must be reconstructed.
+
+It is less suitable when arbitrary side constraints, continuous variables, or
+strong linear relaxations dominate the model, or when no compact algebraic
+state is known. It does not model repair bandwidth, network timing, GPU
+execution, or storage-system dynamics unless those quantities are explicitly
+encoded in the finite input. CP-SAT, MILP, flow, or decision-diagram solvers may
+remain the right backend or the better standalone tool. The
+[optimization guide](OPTIMIZATION.md#scope-and-limits) gives the detailed
+crossover criteria.
 
 ![ergodis compilation pipeline](docs/pipeline.svg)
 

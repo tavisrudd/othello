@@ -199,16 +199,16 @@ half-second measurement window.  Times below are the means of the two reported
 central estimates.  Inputs are deterministic microcases; they establish the
 cost of these kernels, not an end-to-end application speedup.
 
-| operation | baseline | optimized | result |
-| --- | ---: | ---: | ---: |
-| rank-one radius decision | 33.55 us | 26.98 us | 1.24x |
-| complete-transfer check through ranks 1--4 | 194.34 us | 0.300 us | 648x |
-| projective line cache, first query | 15.45 us | 14.36 us | 1.08x |
-| projective line cache, warm query | 14.75 us | 7.226 us | 2.04x |
-| projective auto, one forecast query | 14.95 us | 14.94 us | 1.00x |
-| rank-bounded context cache, first query | 13.90 us | 20.42 us | 0.68x |
-| rank-bounded context cache, warm query | 13.63 us | 2.342 us | 5.82x |
-| rank-bounded auto, one forecast query | 13.85 us | 13.85 us | 1.00x |
+| operation                                  |  baseline | optimized | result |
+| :----------------------------------------- | --------: | --------: | -----: |
+| rank-one radius decision                   |  33.55 us |  26.98 us |  1.24x |
+| complete-transfer check through ranks 1--4 | 194.34 us |  0.300 us |   648x |
+| projective line cache, first query         |  15.45 us |  14.36 us |  1.08x |
+| projective line cache, warm query          |  14.75 us |  7.226 us |  2.04x |
+| projective auto, one forecast query        |  14.95 us |  14.94 us |  1.00x |
+| rank-bounded context cache, first query    |  13.90 us |  20.42 us |  0.68x |
+| rank-bounded context cache, warm query     |  13.63 us |  2.342 us |  5.82x |
+| rank-bounded auto, one forecast query      |  13.85 us |  13.85 us |  1.00x |
 
 The radius certificate examines the same 255 outer vectors in the successful
 case but performs only 256 local lookups after radius pruning.  The all-rank
@@ -234,14 +234,14 @@ canonical reduction of the measured logs is
 The six headline storage kernels above do not call contextual confinement, so
 injecting this cache into those rows would not test the optimization.  It does
 apply directly to the Jin--Fu concatenated-LRC benchmarks, which repeatedly
-evaluate compatible scalar-labelled GF(4) outer contexts.  Eleven pinned-core
+evaluate compatible scalar-labelled GF(4) outer contexts.  Eleven
 rounds were rotated across every variant.  The one-query rows include input
 compilation; the eight-query rows retain state only for the warm variant.
 
-| Jin--Fu workload | exact full result | radius certificate | cold cache | auto, one query | warm cache, 8-query mean |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Ex. 5.7, cyclic `[43,36,5]` | 13.87 ms | 11.55 ms | 2.288 ms | 2.245 ms | 1.578 ms |
-| Cor. 5.4, Hamming `[1365,1359,3]` | 104.30 ms | 75.67 ms | 7.052 ms | 6.996 ms | 6.018 ms |
+| Jin--Fu workload                  | exact full result | radius certificate | cold cache | auto, one query | warm cache, 8-query mean |
+| :-------------------------------- | ----------------: | -----------------: | ---------: | --------------: | -----------------------: |
+| Ex. 5.7, cyclic `[43,36,5]`       |          13.87 ms |           11.55 ms |   2.288 ms |        2.245 ms |                 1.578 ms |
+| Cor. 5.4, Hamming `[1365,1359,3]` |         104.30 ms |           75.67 ms |   7.052 ms |        6.996 ms |                 6.018 ms |
 
 Cold caching is respectively 6.06x and 14.79x faster than exact enumeration;
 eight-query warm reuse is 8.88x and 17.25x faster.  A zero-byte `Auto` budget
