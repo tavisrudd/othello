@@ -137,7 +137,10 @@ Moreover, padding the split quadratic by seven points from an affine
 three-space minus one point is structurally impossible: the two Hankel
 equations force the subspace polynomial's nonzero linear coefficient to
 vanish.  This removes another certificate-shaped support atlas from the
-remaining search.
+remaining search.  The marked torus acts by `(u,v)->(cu,c^2v)`, so the
+surface has only 64 forms `(1,tau)` plus two `u=0` boundaries.  The entire
+63-point curve `v=u^2` is the single `tau=1` form and is already closed by
+the dense genus-zero calculation.
 
 ## Objective
 

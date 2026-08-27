@@ -144,7 +144,9 @@ locus is the explicit surface
 Its slope pencil factors through `t(t^2+ut+u^2+v)` and splits into four exact
 quadratic strata of sizes 1953, 2016, 63, and 64.  The obvious padding of the
 split quadratic by an affine three-space minus one point is provably
-impossible, so do not spend a search on that support family.
+impossible, so do not spend a search on that support family.  Residual torus
+scaling reduces the surface to `(1,tau)` plus two `u=0` boundary forms; the
+whole `tau=1` orbit is already closed by the dense calculation.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

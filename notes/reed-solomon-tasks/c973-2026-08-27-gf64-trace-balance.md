@@ -334,6 +334,22 @@ test for `q_{u,v}` is exactly `Tr(v/u^2)=0`.  This partition is structural;
 it replaces an undifferentiated 4096-point exceptional surface by one
 quadratic trace bit and two boundary lines.
 
+The residual torus preserving the marked pair zero and infinity compresses
+it further.  After projectively normalizing `z3=1`, the change `t -> ct`
+acts by
+
+\[
+                         (u,v)\longmapsto(cu,c^2v).        \tag{24}
+\]
+
+Consequently every point with `u!=0` is equivalent to the unique normal form
+`(u,v)=(1,tau)`, where `tau=v/u^2`; the `u=0`, `v!=0` line is one further
+orbit because squaring is bijective, and `(0,0)` is the last orbit.  Thus the
+surface has only 66 marked-torus orbits: 64 one-parameter normal forms and
+two boundary forms.  More importantly, the whole 63-point curve `v=u^2` has
+`tau=1` and is equivalent to the dense point already closed by (14)--(19).
+Only the 63 values `tau!=1` and the two `u=0` boundary forms remain on (22).
+
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
 degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
@@ -342,7 +358,7 @@ Hankel equations reduce to
 \[
 \begin{aligned}
  k_0+uv^2k_5+(u^6+v^3)k_6&=0,\\
- k_1+uv^2k_6+(u^6+v^3)k_7&=0.                            \tag{24}
+ k_1+uv^2k_6+(u^6+v^3)k_7&=0.                            \tag{25}
 \end{aligned}
 \]
 
@@ -351,7 +367,7 @@ removed.  Write the subspace polynomial as
 
 \[
  L_U(t)=t^8+\alpha t^4+\beta t^2+\gamma t,
- \qquad \gamma\ne0.                                      \tag{25}
+ \qquad \gamma\ne0.                                      \tag{26}
 \]
 
 Synthetic division of `L_U(t)+C` by `t+r` gives
@@ -359,11 +375,11 @@ Synthetic division of `L_U(t)+C` by `t+r` gives
 \[
  k_7=1,\ k_6=r,\ k_5=r^2,\quad
  k_1=\beta+r^6+\alpha r^2,\quad
- k_0=\gamma+r\beta+r^7+\alpha r^3.                       \tag{26}
+ k_0=\gamma+r\beta+r^7+\alpha r^3.                       \tag{27}
 \]
 
-Substitution of (26) into (24) first determines `beta` and then cancels every
-term except `gamma`; hence (24) forces `gamma=0`, contradicting (25).
+Substitution of (27) into (25) first determines `beta` and then cancels every
+term except `gamma`; hence (25) forces `gamma=0`, contradicting (26).
 Therefore the natural `q`-support plus affine-three-space-minus-one padding
 cannot close even the split-quadratic stratum.  This explains a substantial
 part of the earlier support-atlas failure without appealing to its
@@ -386,7 +402,7 @@ is the subspace polynomial of a two-dimensional `F2`-space and `C=L_U(b)` is
 the nonzero value defining a coset disjoint from zero, then
 
 \[
- h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{27}
+ h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{28}
 \]
 
 is automatically split with five distinct nonzero roots when the extra root
@@ -394,10 +410,10 @@ avoids that coset.  Its coefficients are
 
 \[
  (g_0,g_1,g_2,g_3,g_4,g_5)
- =(aC,aB+C,aA+B,A,a,1).                                   \tag{28}
+ =(aC,aB+C,aA+B,A,a,1).                                   \tag{29}
 \]
 
-Equations (27)--(28) give a four-parameter split chart on which the slope-pencil
+Equations (28)--(29) give a four-parameter split chart on which the slope-pencil
 conditions can be imposed explicitly.  The next proof should either:
 
 1. use the slope-pencil gate (6) on the strata where its constant term is not
@@ -409,7 +425,7 @@ endpoint syndrome `e7`, for which `B3=0`, `D=1`, and
 
 \[
  \operatorname {Tr}T
- =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{29}
+ =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{30}
 \]
 
 when `g4!=0`.  This is already an explicit lower-dimensional trace problem,
@@ -441,7 +457,8 @@ arguments do not answer that arithmetic question.
 | What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
-| Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (24)--(26) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
+| How many marked-torus forms remain? | 66 total; the `tau=1` form is already closed | 63 generic `tau` values and two `u=0` boundaries |
+| Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (25)--(27) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |
 
