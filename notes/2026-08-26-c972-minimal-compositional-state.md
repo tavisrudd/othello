@@ -2,11 +2,10 @@
 
 **Lane**: `complete-ports`
 
-**Status**: MATHEMATICS COMPLETE; RANK-ONE COMPLETE-TRANSFER EQUIVALENCE AND THE
-COARSEST RANK-ONE OUTER-OBSERVABLE STATE PROVED; EXISTING BINARY/QUATERNARY
-EXAMPLE UPGRADED TO A FIXED-CODE, FIXED-PAIR LABEL SEPARATION; VALIDATED
-MANUSCRIPT PATCH PREPARED BUT INTENTIONALLY UNCOMMITTED; POST-GOAL EJ/TT ADDS
-THE GENERAL RANK-`t` LOW-DIMENSIONAL OUTER-TEST THEOREM
+**Status**: COMPLETE; RANK-ONE COMPLETE-TRANSFER EQUIVALENCE AND THE COARSEST
+RANK-ONE OUTER-OBSERVABLE COMPOSITIONAL STATE PROVED; GENERAL RANK-`t` OUTER
+TESTS REDUCED TO FUNCTIONAL-DUAL DIMENSION AT MOST `t`; FIXED-CODE, FIXED-PAIR
+LABEL SEPARATION PROVED; MANUSCRIPT INTEGRATED, EXPORTED, AND REVALIDATED
 
 ## Goal
 
@@ -161,6 +160,15 @@ Moreover, the full outer code together with outer codes having
 one-dimensional functional dual forms a complete separating family; larger
 outer duals introduce no additional rank-one tests.
 
+The resulting contextual equivalence is a congruence under further compatible
+concatenation.  Indeed, if two inner representations agree in every outer
+context, then after concatenation with any represented code `A`, testing the
+two composites with a further code `C` is, by associativity, the same as
+testing the original inner representations with the single outer context
+`C circ A`.  Thus the displayed quotient is the coarsest exact numerical
+compositional state at rank one, even though an explicit quotient-level update
+algorithm may still use the larger labelled table.
+
 ### Proof
 
 For one-dimensional `T`, a nonzero map `T -> D` is determined by one nonzero
@@ -205,8 +213,12 @@ and both duals are the same line `span(1,1,0)`.  Thus they have identical
 dual distance two, identical target/helper nested pair
 `K_P=0 <= D_P=span(1,0)`, identical complete RGHW hierarchy `M_1=1`, and
 identical unlabelled normalized helper-support family: the unique minimal
-support is the first helper.  Since `W_P` is one-dimensional, their entire
-scalar profile `rho_T+d(I^perp)` is the same value three.
+support is the first helper.  More strongly, equality of the binary image code
+makes the unlabelled partition of the entire coefficient space into coset
+fibres, with every support filtration retained, literally the same; only the
+assignment of extension-field functional labels to those fibres changes.
+Since `W_P` is one-dimensional, their entire scalar profile
+`rho_T+d(I^perp)` is the same value three.
 
 Only the extension-field labelling differs.  On `(a,b,c)`, the ordinary costs
 are `(1,1,2)` and `(1,2,1)`, while the normalized target costs are `(0,2,1)`
@@ -226,20 +238,26 @@ The existing exact evidence generator independently enumerates this instance
 as `scalar_noncomposition`, and the unit test
 `test_scalar_threshold_noncomposition_example` pins the exact costs `(1,2)`.
 
-The independent replay commands, from
-`papers/complete-repair-ports/algorithms`, are
+The targeted replay commands, from
+`papers/complete-repair-ports/ergodis/python`, are
 
 ```text
 nix shell nixpkgs#python3 --command \
   python3 -m unittest \
   test_algorithms.TargetAndConfinementTests.test_scalar_threshold_noncomposition_example
-nix shell nixpkgs#python3 --command python3 generate_evidence.py --check
+nix shell nixpkgs#python3 --command python3 -c \
+  'import json; import generate_evidence as g; assert g.scalar_noncomposition() == json.load(open("../evidence/results.json"))["scalar_noncomposition"]'
 ```
 
-Both pass.  The generator uses deterministic complete enumeration over the
-two binary length-three functional maps and their two-block outer functional
-dual.  It checks the two exact minima and winning sectors; it does not prove
-the contextual-state theorem, whose proof above is independent of computation.
+Both passed on 2026-08-27.  The generator uses deterministic complete
+enumeration over the two binary length-three functional maps and their
+two-block outer functional dual.  It checks the two exact minima and winning
+sectors; the displayed table gives an independent hand verification.  Neither
+check proves the contextual-state theorem, whose proof above is independent of
+computation.  The bundle-wide `generate_evidence.py --check` currently stops
+on stale hashes for the separately owned ERGO-comp files `BENCHMARKS.md`,
+`Cargo.toml`, and `README.md`; the regenerated C972 entry itself equals the
+tracked `evidence/results.json` entry exactly.
 
 ## First TT / EJ / red-team checkpoint
 
@@ -275,10 +293,9 @@ the contextual-state theorem, whose proof above is independent of computation.
   outer code; this is exactly the represented functional-label distinction the
   theorem measures.
 
-## Uncommitted manuscript patch
+## Manuscript integration
 
-The working tree contains an intentionally uncommitted patch to the paper
-package.  It:
+The accepted manuscript package:
 
 1. promotes the binary/quaternary example to Proposition
    `prop:functional-label-separation` with all fixed data stated explicitly;
@@ -294,10 +311,10 @@ package.  It:
 5. updates the abstract, introduction, conclusion, claim registry, formal
    boundary count, release gate, and generated PDF consistently.
 
-The patch is 31 pages.  The abstract passes the 200-word cap.  The release gate
-passes warning-free with 29 classified claims and the unchanged four Lean
-terminals.  No manuscript, verification, or PDF file in this patch is staged
-or committed.
+The changes were committed before C976's subsequent exposition revision and
+are present in the current 37-page authority and standalone export.  On
+2026-08-27, `make check` again passed warning-free with 29 classified claims,
+the unchanged four Lean terminals, and all 77 public-surface files accepted.
 
 ## Result 4: outer tests of dimension at most the target rank suffice
 
@@ -346,6 +363,9 @@ replace the labelled costs within them.
   dual dimension at most `t` is a complete test family at target rank `t`, and
   generated-span caching is therefore a theorem-level reduction rather than
   only an implementation heuristic.
+- **EJ:** universal contextual equivalence is stable under concatenation by
+  associativity.  The rank-one quotient is therefore a genuine minimal
+  compositional congruence, not only a collection of terminal measurements.
 - **Red team:** the dimension is over `L`, while `T` has dimension `t` over
   `F_q`; `t` image vectors still generate an `L`-space of dimension at most
   `t`.  Passing from `D` to `D_B` preserves every block label and cost.  Target

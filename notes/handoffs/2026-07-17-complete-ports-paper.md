@@ -3,14 +3,12 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: ACTIVE; C961 REPEATED-CONCATENATION COST COMPOSITION PROVED,
-PRIORITY-BOUNDED, HARD-RED-TEAMED, AND EXPORTED; C971 ERGO-COMP PACKAGING AND
-MANUSCRIPT UPDATE COMPLETE; 27-PAGE AUTHORITY AND 99-FILE STANDALONE GATES
-PASS; C962 ALGORITHM/BOUND DEVELOPMENT REMAINS IN PROGRESS; C325 APPENDIX
-VERIFIER AND C953 AGGREGATE REVIEW FOLLOW;
-C955 AMBIENT-REALIZATION SPECTRUM AND C972 COMPOSITIONAL-STATE
-CHARACTERIZATION REMAIN QUEUED; C976 EXPOSITION/LITERATURE/EXPORT CLOSED;
-NO PUSH OR DEPOSIT
+**Status**: ACTIVE; C972 COMPOSITIONAL-STATE CHARACTERIZATION AND C976
+EXPOSITION/LITERATURE/EXPORT CLOSED; 37-PAGE AUTHORITY, 29-CLAIM, FOUR-LEAN-
+TERMINAL, AND 77-FILE PUBLIC-SURFACE GATES PASS; C962 ALGORITHM/BOUND
+DEVELOPMENT REMAINS IN PROGRESS; C325 APPENDIX VERIFIER AND C953 AGGREGATE
+REVIEW FOLLOW; C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR
+DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
@@ -99,6 +97,15 @@ Completed preparation:
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
 Current and completed strengthening:
+
+- [C972 minimal compositional state](../2026-08-26-c972-minimal-compositional-state.md)
+  identifies the zero-truncated projective line-probe profile as the coarsest
+  rank-one numerical state observable in every finite outer context, proves
+  that this contextual equivalence is a concatenation congruence, reduces
+  rank-`t` tests to outer functional-dual dimension at most `t`, upgrades the
+  rank-one bottleneck to complete bounded transfer of coefficient and support
+  systems, and sharpens the binary/quaternary example to a fixed-code,
+  fixed-pair functional-label separation.
 
 - [C976 exposition and literature-positioning closeout](../2026-08-27-c976-sequential-cold-read-repair.md)
   reorganizes the opening around the loss of functional labels, the exact
@@ -212,11 +219,9 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 ## Next step
 
 C962 remains the active private code-and-mathematics task for ergodis algorithm
-development and benchmark evidence.  C972 is the highest-value queued theorem
-upgrade: determine the strongest universality/minimality statement for the
-labelled compositional state, extend the rank-one contextual quotient where
-possible, and sharpen the fixed-outer functional-label separation.  C976 made
-no manuscript claim beyond the already proved rank-one contextual result.
+development and benchmark evidence.  Its bundle-wide evidence check currently
+reports stale hashes for `ergodis/BENCHMARKS.md`, `Cargo.toml`, and `README.md`;
+the regenerated C972 scalar-separation entry still equals the tracked result.
 Continue C962 with the bounded explicit/ZDD/Roaring representation experiment,
 then only for additional paper-owned algorithm and bound development beyond
 the exported ERGO-comp baseline.
