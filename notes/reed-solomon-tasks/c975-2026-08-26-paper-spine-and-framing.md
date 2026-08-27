@@ -225,19 +225,29 @@ or introduction.
 
 Recommended:
 
-> **Top distance layers and near-MDS extensions of generalized
-> Reed--Solomon codes on the projective line**
+> **High-weight cosets of generalized Reed--Solomon codes**
 
-Shorter alternative:
+More explicit alternative:
 
-> **Distance layers and one-column extensions of generalized
+> **High-weight cosets and one-column extensions of generalized
 > Reed--Solomon codes**
 
-The recommended title is more precise.  It names both main coding outputs
-and the actual class in the theorem: arbitrary nonzero GRS multipliers on
-supports
-`S=P1(F_q) minus A` in the stated high-rate range.  Full-length PRS is only
-the specialization `A=empty`, so it should not delimit the title.
+The shorter title is preferred.  “The weight of a coset” and “cosets of
+weight `W`” are standard coding-theory terms for the minimum weight in a
+coset; “high-weight cosets” has also been used in the Reed--Solomon/BCH
+covering literature.  The theorem determines the two highest nonempty coset
+weights and their classes.  The MDS/NMDS extension theorem and enumerators
+then read naturally as consequences in the abstract.
+
+By contrast, “top distance layers” does not appear to be established coding
+terminology.  “Distance partition” is standard, but a title such as “outer
+layers of the distance partition” is longer and is associated especially
+with completely regular/transitive codes.  Use “distance partition” in the
+introduction when defining the sets, not as the short title noun.
+
+The title names the actual code class: arbitrary nonzero GRS multipliers on
+supports `S=P1(F_q) minus A` in the stated high-rate range.  Full-length PRS
+is only the specialization `A=empty`, so it should not delimit the title.
 
 Do not retain “exact classifications through redundancy ten” in the title.
 It makes the strongest arbitrary-redundancy theorem look secondary and
@@ -250,6 +260,24 @@ records the common normal-rational-curve geometry without making PRS the
 outer boundary of the result.  The abstract should state the exact support
 and threshold regime immediately so that “generalized Reed--Solomon” is not
 read as an unsupported all-parameter claim.
+
+### Collision and terminology check
+
+No exact or near-exact collision was found for **High-weight cosets of
+generalized Reed--Solomon codes** in the coding literature searched through
+2026-08-26.  Relevant neighboring titles establish the terminology without
+colliding:
+
+* Wolf's 1969 paper explicitly studies “high weight cosets” in a
+  Reed--Solomon/BCH setting;
+* Davydov--Marcugini--Pambianco use “cosets of weight `W`” and “weight
+  distribution of the cosets of MDS codes”;
+* Helleseth--Mattson use “coset of highest weight” for the simplex code.
+
+Avoid **Deep holes and ... extensions of Reed--Solomon codes** as a title
+pattern.  It is too close to the existing paper *Deep holes and MDS
+extensions of Reed--Solomon codes* (arXiv:1612.05447), and *On MDS extensions
+of generalized Reed--Solomon codes* is the classical Seroussi--Roth title.
 
 ## 5. Replacement and deletion map
 
