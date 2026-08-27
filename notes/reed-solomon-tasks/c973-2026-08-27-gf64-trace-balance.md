@@ -310,6 +310,65 @@ surface
  =(1,u,v,u^3,u^4+v^2+u^2v).                               \tag{22}
 \]
 
+This surface has a second, stronger compression.  Solving (20) on (22), with
+`lambda=p3` and `mu=p4`, gives
+
+\[
+ P(t)=tq_{u,v}(t)\bigl(\lambda+\mu(t+u)\bigr),\qquad
+ q_{u,v}(t)=t^2+ut+(u^2+v).                               \tag{23}
+\]
+
+Thus the forced root zero is accompanied by a fixed quadratic factor.  The
+whole normalized surface of 4096 points has the exact disjoint
+stratification
+
+| condition | quadratic type | number of `(u,v)` |
+|---|---|---:|
+| `u!=0`, `v!=u^2`, `Tr(v/u^2)=0` | two distinct nonzero rational roots | 1953 |
+| `u!=0`, `Tr(v/u^2)=1` | irreducible | 2016 |
+| `u!=0`, `v=u^2` | roots zero and `u` | 63 |
+| `u=0` | one double root | 64 |
+
+Here `Tr(1)=0` because `[GF(64):GF(2)]=6`, so the usual quadratic splitting
+test for `q_{u,v}` is exactly `Tr(v/u^2)=0`.  This partition is structural;
+it replaces an undifferentiated 4096-point exceptional surface by one
+quadratic trace bit and two boundary lines.
+
+There is also an exact warning against the most tempting seven-root padding.
+On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
+degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
+Hankel equations reduce to
+
+\[
+\begin{aligned}
+ k_0+uv^2k_5+(u^6+v^3)k_6&=0,\\
+ k_1+uv^2k_6+(u^6+v^3)k_7&=0.                            \tag{24}
+\end{aligned}
+\]
+
+Now let the seven roots of `k` be an affine three-space with one point `r`
+removed.  Write the subspace polynomial as
+
+\[
+ L_U(t)=t^8+\alpha t^4+\beta t^2+\gamma t,
+ \qquad \gamma\ne0.                                      \tag{25}
+\]
+
+Synthetic division of `L_U(t)+C` by `t+r` gives
+
+\[
+ k_7=1,\ k_6=r,\ k_5=r^2,\quad
+ k_1=\beta+r^6+\alpha r^2,\quad
+ k_0=\gamma+r\beta+r^7+\alpha r^3.                       \tag{26}
+\]
+
+Substitution of (26) into (24) first determines `beta` and then cancels every
+term except `gamma`; hence (24) forces `gamma=0`, contradicting (25).
+Therefore the natural `q`-support plus affine-three-space-minus-one padding
+cannot close even the split-quadratic stratum.  This explains a substantial
+part of the earlier support-atlas failure without appealing to its
+certificates and rules out that family for the continuation.
+
 The dense syndrome is the point `(u,v)=(1,1)` and is closed above.  Off
 (22), the slope kernel contains quartics with nonzero constant term; the
 remaining issue there is complete splitting and selector nonvanishing, not a
@@ -327,7 +386,7 @@ is the subspace polynomial of a two-dimensional `F2`-space and `C=L_U(b)` is
 the nonzero value defining a coset disjoint from zero, then
 
 \[
- h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{23}
+ h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{27}
 \]
 
 is automatically split with five distinct nonzero roots when the extra root
@@ -335,10 +394,10 @@ avoids that coset.  Its coefficients are
 
 \[
  (g_0,g_1,g_2,g_3,g_4,g_5)
- =(aC,aB+C,aA+B,A,a,1).                                   \tag{24}
+ =(aC,aB+C,aA+B,A,a,1).                                   \tag{28}
 \]
 
-Equations (23)--(24) give a four-parameter split chart on which the slope-pencil
+Equations (27)--(28) give a four-parameter split chart on which the slope-pencil
 conditions can be imposed explicitly.  The next proof should either:
 
 1. use the slope-pencil gate (6) on the strata where its constant term is not
@@ -350,7 +409,7 @@ endpoint syndrome `e7`, for which `B3=0`, `D=1`, and
 
 \[
  \operatorname {Tr}T
- =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{25}
+ =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{29}
 \]
 
 when `g4!=0`.  This is already an explicit lower-dimensional trace problem,
@@ -381,6 +440,8 @@ arguments do not answer that arithmetic question.
 | How is the balanced `B0`-line realized by split quintics? | conditionally solved by the slope pencil (6), but not universally | use it only off its forced-root strata |
 | What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
+| Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
+| Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (24)--(26) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |
 

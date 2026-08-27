@@ -141,6 +141,10 @@ syndrome is now pointedly closed without a certificate.  Remaining GF(64)
 work concerns the other slope-degenerate strata.  Their complete forced-zero
 locus is the explicit surface
 `(1,u,v,u^3,u^4+v^2+u^2v)`, reducing that continuation to two parameters.
+Its slope pencil factors through `t(t^2+ut+u^2+v)` and splits into four exact
+quadratic strata of sizes 1953, 2016, 63, and 64.  The obvious padding of the
+split quadratic by an affine three-space minus one point is provably
+impossible, so do not spend a search on that support family.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

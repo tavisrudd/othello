@@ -130,7 +130,14 @@ pointedly closed without a certificate.  The remaining GF(64) work is to
 cover the other slope-degenerate strata by the balanced or cubic-trace charts.
 The rigid slope pencil's entire forced-zero locus is now the explicit surface
 `(1,u,v,u^3,u^4+v^2+u^2v)`.  The dense point `(u,v)=(1,1)` is closed above;
-the next trace calculation is two-parameter only.
+the next trace calculation is two-parameter only.  On that surface the whole
+slope pencil factors through `t(t^2+ut+u^2+v)`, giving an exact
+`1953+2016+63+64` split/irreducible/zero-root/double-root stratification.
+Moreover, padding the split quadratic by seven points from an affine
+three-space minus one point is structurally impossible: the two Hankel
+equations force the subspace polynomial's nonzero linear coefficient to
+vanish.  This removes another certificate-shaped support atlas from the
+remaining search.
 
 ## Objective
 
