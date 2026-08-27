@@ -112,6 +112,31 @@ useful optional results without enough first-pass navigation.
   `2f4a51a3342d3ad75ed50fa16cc607ab2c5fb37097669ef378d07a7c7e2c3330`.
   Export audit, mirror manifest verification, and the standalone `make check`
   gate pass.  Nothing was pushed.
+- 2026-08-27: completed the first manuscript-wide exposition revision for a
+  quantum-information audience.  The abstract and introduction now establish
+  the operational transversal-gate problem, site-dependent convention,
+  nullity-zero/nullity-one theorem, proof mechanism, literature gap, imported
+  inputs, and paper hierarchy before the six-point material.  The main proof
+  is divided into the non-isodual branch, isodual branch, and exactness; lift
+  questions follow as separate refinements.  The conic interpretation now
+  precedes the pencil, whose regular locus and `t -> y -> z` quotient are
+  motivated before the formulas.  The verification wall is an auditable table,
+  and the twelve coordinate-permutation examples are tabulated.
+- 2026-08-27: replaced the conspicuous house vocabulary (`admitted` parameters,
+  `logical phase`, `scalar blindness`, `anchor carrier`, and `transport
+  sheaf`) with defined standard descriptions, renamed the appendix assignment
+  variable from `p` to `eta`, and replaced every hard-coded equation number by
+  a semantic label.  Stable theorem labels and mathematical scope are unchanged.
+- 2026-08-27: the final authority build is warning-free at 26 pages; every page
+  and both figures were inspected; `python3 supplement/verify.py --replay`
+  verified 17 artifacts and replayed all eight bundles.  The updated abstract
+  is in `papers/summary/README.md`.
+- 2026-08-27: authority commit `e7eb05320` exported with zero audit findings to
+  paper mirror commit `53e11c6`, exporter content SHA-256
+  `7cc303ae48057c428b5a50ff970f1f38ab132c1687cfe73309175ad28182685e`.
+  The independently maintained summary was copied byte-for-byte to its mirror
+  and committed as `a353307`.  The standalone paper gate and exporter manifest
+  verification pass.  Nothing was pushed.
 
 ## Lifecycle gate
 
