@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; hostile referee and repair rounds in progress
+**Status:** active by author instruction; referee-accepted release candidate
 
 ## Stable entry point
 
@@ -65,29 +65,36 @@ the mathematical narrative.
   theorem.
 - The quotient theorem isolates the orbit-section component and requires the
   same corrected point to lie in the tangent-projection isomorphism open.  In
-  the Cox application this is enforced by taking the kernel of evaluation at
-  one orbit-test point in that open.
+  the Cox application, evaluation at one orbit-test point gives a linear
+  functional on the four-dimensional space of hyperplanes through the tangent
+  space, and its kernel supplies the required section.
+- Proposition 3.2 is stated uniformly over characteristic-zero fields; its
+  geometric triple lives over the algebraic closure, with a ground-field
+  triple under the stated rational-point and type hypotheses.
+- The singular-compatible tangent-projection input is Tschinkel--Zhang
+  Theorem 2.4.  Ciliberto--Mella--Russo is cited only for the historical smooth
+  case.
+- The full original AI-assistance disclosure is restored verbatim and is not
+  to be shortened or otherwise edited without author instruction.
 - The public derivation program reconstructs the saturated lattice, Cox
   weights, Jacobian minors, and four-witness cover from the transcribed source
   data.  All Python verification entry points reject optimized execution.
 - The new theorem is not formalized in Lean.  Paper metadata must continue to
   record formal coverage as absent.
 
-## Remaining work, in order
+## Remaining work
 
-Authority commit `7e9e1f38f` and standalone commit `f2ad292` pass their
-release gates and the export manifest agrees. The public GitHub remote and
-Zenodo record remain at the retired public version. Remaining acceptance work
-is:
+Authority commit `14599100d` and standalone commit `c54399c` pass their full
+release gates; the export manifest agrees, all eleven PDF pages have been
+reviewed, and the PDFs are byte-identical.  Independent algebraic-geometry,
+quotient/descent/computation, public-repository, and specialist-exposition
+reviews have all been completed.  A fresh isolated referee accepted the final
+repaired candidate with no required correction.
 
-1. independent hostile algebraic-geometry review;
-2. independent hostile quotient/descent/computation review;
-3. independent full-public-repository and expert-exposition review, using the
-   complete `m=1` paper as context only;
-4. rerun fresh referee rounds on the synchronized candidate and close only
-   after all three specialties return clean verdicts;
-5. after acceptance, publish the standalone commit and deposit a new Zenodo
-   version before restoring the concept-DOI badge.
+The task remains active because the author instructed that C956 not be closed.
+The only remaining actions are author-authorized publication of the standalone
+commit and deposit of a new Zenodo version before restoring the concept-DOI
+badge.  Do not push, deposit, or close without that instruction.
 
 ## Acceptance gate
 
@@ -106,6 +113,6 @@ is:
 
 ## Fresh-session first action
 
-Read the dated report, framing note, and the newest referee reports. Resume at
-the highest-severity open finding, then rebuild and re-referee. C958 remains
-queued behind C956.
+Read the dated report and confirm whether the author has authorized publication
+or closure.  Do not reopen accepted prose without a new concrete finding.
+C958 remains queued behind C956.

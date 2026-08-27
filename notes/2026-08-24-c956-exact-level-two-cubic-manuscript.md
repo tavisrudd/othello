@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** release candidate; reopened for multiple hostile referee rounds
+**Status:** referee-accepted release candidate; active by author instruction
 
 ## Result
 
@@ -45,8 +45,10 @@ absence assertion.
 - The quotient proof gives signed-minor orbit correction, isolates the image
   component, makes that same component meet the tangent-projection
   isomorphism open, and records an inverse graph with both composites.
-- The incidence proof chooses one orbit-test point in the tangent-projection
-  open and takes the kernel of evaluation there; this forces the
+- The incidence proof is carried out over the relative frame-bundle open.  In
+  split coordinates, evaluation at one orbit-test point in the
+  tangent-projection open gives a linear functional on the four-dimensional
+  space of hyperplanes through the tangent space; its kernel forces the
   maximal-minor and tangent-open conditions to hold on the same component.
 - The generic-fibre proof is an explicit function-field identity and invokes
   no specialization principle.
@@ -54,8 +56,8 @@ absence assertion.
   `x_3^3 - x_3*x_4^2 + x_4^3`.
 - The coefficient wall is confined to an appendix; the main proof has a
   compact four-witness table and geometric explanation.
-- `make check` passes in the authority. The PDF is warning-free, ten pages,
-  and its revised title and first-page hierarchy have been visually inspected.
+- `make check` passes in the authority. The PDF is warning-free, eleven pages,
+  and every page has been visually inspected after the exposition repairs.
 - The exact-arithmetic replay reconstructs the Cox weights, saturation,
   tangent matrices, eight localized branches, and Bezout identity from the
   transcribed source data. A second checker verifies the resulting
@@ -69,10 +71,14 @@ absence assertion.
   resolves to the retired manuscript and has been removed from release-facing
   README surfaces until a new version is deposited.
 
-The repaired authority is commit `7e9e1f38f`; standalone commit `f2ad292`
-records the synchronized twenty-file export, and both release gates plus the
-export-manifest verification pass.  The public GitHub remote has not been
-pushed. The removed conditional sources remain recoverable from Git history.
+The current authority is commit `14599100d`; standalone commit `c54399c`
+records the synchronized export.  Both release gates and export-manifest
+verification pass, with content digest
+`1c73b2f6bf73eddc18112955de1fb63a26c4b0a2c5309b5944dde236824963fa`.
+The authority and mirror PDFs are byte-identical with SHA-256
+`2142895222b3cc2738188c309406b32e2afb005dbb6e549b3025f1c2e6185221`.
+The public GitHub remote has not been pushed. The removed conditional sources
+remain recoverable from Git history.
 
 ## EJ + TT closeout
 
@@ -82,7 +88,12 @@ maximal minors and the inverse parametrization by elimination. It also
 narrowed the imported torsor dependency from the final universal-torsor
 rationality theorem to the density, splitting, and Cox-embedding statements
 actually used, and expanded the descent incidence as a relative frame-bundle
-open.
+open.  The cross-specialty read then exposed two trust-boundary issues that
+were mathematical rather than cosmetic: the singular-compatible tangent-
+projection input is Tschinkel--Zhang Theorem 2.4, not the smooth historical
+Ciliberto--Mella--Russo result, and Proposition 3.2 must be stated over a
+characteristic-zero field.  Both are now explicit, and a fresh isolated
+referee accepted the repaired source with no required correction.
 
 ## Mystery ledger
 
@@ -92,12 +103,14 @@ open.
 | Does the rational CARAT class `(5,232,15)` with non-retract-rational dual yield a separate torus theorem? | open, independent | requires a dedicated post-2017 source audit and standalone proof packet; excluded from this paper |
 | Is there kernel-checked formal coverage of the new quotient and rationality theorems? | open coverage gap | claim map honestly records `absent`; a future formalization needs its own task and scope |
 | Is any global firstness claim supported? | settled editorially | none is needed or made; the theorem is stated on its mathematical content and exact source chain |
-| Is there a remaining descent, saturation, incidence, or function-field gap found by the cold audits? | under final recheck | the latest same-component gap is repaired in the authority; fresh quotient and geometry reads must accept it before release |
+| Is there a remaining descent, saturation, incidence, characteristic-scope, or function-field gap found by the cold audits? | settled | the relative-open, singular-input, and characteristic-zero repairs passed a fresh isolated referee; no required gap remains |
+| Does the split-coordinate display `H_p -> k^4` need another sentence? | optional exposition only | the final referee found the coordinate convention inferable and identified no mathematical gap; do not reopen without new evidence |
 
-The hostile referee rounds requested after the first release-candidate build
-remain an acceptance gate. Their findings and repairs will be appended here
-before final closure.
+No genuine mathematical mystery remains in the present manuscript.  The first
+three rows describe successor work or optional production coverage, not a
+release defect.  C956 remains active solely because the author instructed that
+it not be closed and because publication and Zenodo synchronization are still
+external actions.
 
-**Vibe:** strong synchronized candidate, not yet releasable. Fresh hostile
-verdicts, the public GitHub push, and a replacement Zenodo version remain
-outstanding.
+**Vibe:** green, synchronized, and referee-ready; no required cross-specialty
+accessibility or correctness defect remains.

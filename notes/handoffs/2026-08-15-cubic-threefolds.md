@@ -38,11 +38,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C956 — exact level-two cubic manuscript, hostile referee rounds active.**
-  The authority and standalone candidate pass their deterministic gates, but
-  closure is withheld pending independent algebraic-geometry,
-  quotient/descent/computation, and public-repository/exposition reviews plus
-  fresh re-referees after every accepted repair.  Report and live card:
+- **C956 — exact level-two cubic manuscript, referee-accepted candidate.**
+  Cross-specialty review repaired the characteristic-zero scope, the
+  singular-compatible tangent-projection citation, the relative evaluation
+  construction, and specialist orientation.  A fresh isolated referee returns
+  Accept with no required correction; the eleven-page authority and standalone
+  PDFs are byte-identical, and both gates pass at authority commit `14599100d`
+  and standalone commit `c54399c`.  The original AI disclosure is restored
+  verbatim.  C956 remains active by author instruction; do not publish, deposit,
+  or close without that instruction.  Report and live card:
   `../2026-08-24-c956-exact-level-two-cubic-manuscript.md` and
   `../cubic-threefolds-tasks/c956-exact-level-two-cubic-manuscript.md`.
 - **C978 — cubic-stabilization `m=1` exposition repairs, active.** The abstract,
