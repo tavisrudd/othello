@@ -35,16 +35,17 @@ calculation and the evidence boundary.
    imports the projective Cox model and the descended form of its birational
    tangent projection from Tschinkel--Zhang; the general tangent-projection
    theorem for varieties with one apparent double point is due to
-   Ciliberto--Mella--Russo.  The section constructs a Galois-stable saturated rank-three
-   subtorus, four selected weight spaces whose differences form a basis, and
-   the complementary subspace `B`.  Proposition `prop:tangent-section`
+   Ciliberto--Mella--Russo.  The section constructs a Galois-stable saturated
+   rank-three subtorus, four selected weight spaces whose weight differences
+   form a basis, and the complementary subspace `B`.  Proposition
+   `prop:tangent-section`
    constructs the required tangent linear section and explains its descent
    for types `I0`--`I3`.
 4. **What does the computation prove?** The four rows in the parameter table
    give evaluation determinants `D_i` and smoothness minors `M_i`.  Appendix A
-   proves that the opens `D_i M_i != 0` cover the entire smooth Cox-moduli
-   chart.  The exact certificate retains the six empty localized cases and
-   the final Bezout identity.  It does not prove the quotient theorem, Galois
+   proves that the opens `D_i M_i != 0` cover the smooth parameter locus
+   `Delta != 0`.  The exact certificate retains the six empty localized cases
+   and the final Bezout identity.  It does not prove the quotient theorem, Galois
    descent, torsor splitting, or the function-field deductions.
 5. **How does the surface result imply the cubic result?** In Section 4, a
    rational section of the universal torsor gives

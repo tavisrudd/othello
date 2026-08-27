@@ -4,7 +4,7 @@
 
 [**Open the manuscript (PDF) →**](cubic_stabilization_irrationality.pdf)
 
-Referees may also use the focused [proof-reading guide](REVIEWER_GUIDE.md).
+Referees may also use the focused [referee guide](REVIEWER_GUIDE.md).
 
 The theorem that every smooth complex cubic threefold remains irrational
 after multiplication by `P¹` is sharp. For each of two displayed smooth cubic
@@ -40,8 +40,8 @@ the upper bound.
   `Y = X × P¹` is nonrational even over `C`, while `Y × A¹` is rational over
   `Q`. This answers the affine-line stabilization question raised by
   Tschinkel and Zhang.
-- On the moduli space of smooth complex cubic threefolds, the stabilization
-  level is two on the classes represented by the displayed examples and
+- On the moduli space of smooth complex cubic threefolds,
+  `ell_C((X_j)_C) = 2` for `j in {1,3}`, while the stabilization level is
   infinite at a very general point.
 
 The paper does not claim that every smooth cubic threefold has finite
@@ -62,12 +62,13 @@ The exact-arithmetic generator
 starts from the transcribed type-`I₃` matrices and twenty Cox quadrics. It
 reconstructs the saturated rank-three lattice, Cox weights, residual rank-two
 quotient, tangent Jacobian, four symbolic evaluation determinants, and the
-four-open cover of the smooth parameter locus. It also constructs the linear section defined by
-the kernel of evaluation at the point \(x\). For each of the six empty localized cases,
+four-open cover of the smooth parameter locus. It also constructs the linear
+section defined by the kernel of evaluation at the point \(x\). For each of
+the six empty localized cases,
 [`verification/groebner-empty-certificates.json`](verification/groebner-empty-certificates.json)
 retains an exact identity expressing a nonzero constant in the corresponding
-localized ideal. The generator renders all computation-derived values printed in
-the manuscript into the checked
+localized ideal. The generator renders all computation-derived values printed
+in the manuscript into the checked
 [`verification/slice-cover-values.tex`](verification/slice-cover-values.tex)
 artifact. A second program,
 [`verification/check_slice_cover.py`](verification/check_slice_cover.py),
@@ -94,8 +95,8 @@ This command reconstructs and independently checks the exact certificate,
 validates the claim and source ledgers, performs a deterministic manuscript
 build, and rejects TeX warnings or stale metadata.
 
-The retained empty-branch identities can be regenerated independently with
-Singular 4.4.1 and then rechecked by the full gate:
+The retained identities for the empty localized cases can be regenerated
+independently with Singular 4.4.1 and then rechecked by the full gate:
 
 ```text
 nix shell nixpkgs#singular -c uv run --with sympy==1.14.0 python3 \
@@ -111,7 +112,7 @@ nix shell nixpkgs#singular -c uv run --with sympy==1.14.0 python3 \
 - `formal-annotations.tex` — nonprinting claim annotations;
 - `verification/derive_slice_cover.py` — exact reconstruction program;
 - `verification/generate_groebner_empty_certificates.py` — optional Singular
-  regeneration of the retained empty-branch identities;
+  regeneration of the retained identities for the empty localized cases;
 - `verification/check_slice_cover.py` — independent consequence checker;
 - `verification/slice-cover-certificate.json` — canonical exact certificate;
 - `verification/groebner-empty-certificates.json` — retained exact identities
