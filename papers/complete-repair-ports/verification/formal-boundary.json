@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "paper": "Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs",
+  "paper": "Exact Compositional Transfer of Bounded Linear Recovery",
   "formal_package": "lean",
   "reviewer_interface": "TavisRuddFiniteGeom.Papers.RecoveryStructures.PaperInterface",
   "axiom_audit": "TavisRuddFiniteGeom.Papers.RecoveryStructures.Verification.AxiomAudit",

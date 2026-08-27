@@ -1,7 +1,7 @@
 # Theorem and evidence map
 
 This internal map follows the current manuscript *Exact Compositional Transfer
-of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs*. It records mathematical
+of Bounded Linear Recovery*. It records mathematical
 dependence and evidence status. It assigns no quality grade.
 
 ## Main proof chain

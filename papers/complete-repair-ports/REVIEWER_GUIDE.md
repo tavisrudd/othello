@@ -1,7 +1,7 @@
 # A referee's route through the proof
 
 The complete mathematical argument for *Exact Compositional Transfer of
-Bounded Linear Recovery: Relative Weights and Labelled Coset Costs* is in the
+Bounded Linear Recovery* is in the
 manuscript. The Lean
 companion checks one linear-algebraic component of that argument; it is not
 used to stand in for the relative-weight or concatenation proofs.

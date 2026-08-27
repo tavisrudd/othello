@@ -1,4 +1,4 @@
-# Lean companion to *Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs*
+# Lean companion to *Exact Compositional Transfer of Bounded Linear Recovery*
 
 This paper-owned formal companion uses Lean 4 with a pinned Mathlib revision.
 Its reviewer-facing entry point is

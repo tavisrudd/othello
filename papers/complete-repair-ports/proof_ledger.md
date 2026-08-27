@@ -1,6 +1,6 @@
 # Proof-integrity ledger
 
-**Paper:** *Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs*
+**Paper:** *Exact Compositional Transfer of Bounded Linear Recovery*
 
 **Purpose:** internal theorem-by-theorem check against hidden assumptions,
 quantifier changes, circularity, and evidence overstatement.

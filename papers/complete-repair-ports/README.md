@@ -1,4 +1,4 @@
-# Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs
+# Exact Compositional Transfer of Bounded Linear Recovery
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
@@ -6,8 +6,7 @@
 
 [**Open the paper (PDF) →**](complete_repair_ports.pdf)
 
-**Title:** *Exact Compositional Transfer of Bounded Linear Recovery: Relative
-Weights and Labelled Coset Costs*
+**Title:** *Exact Compositional Transfer of Bounded Linear Recovery*
 
 Scalar recovery thresholds do not compose: an outer code can select an
 intermediate functional whose cost scalar minimization discarded. The paper

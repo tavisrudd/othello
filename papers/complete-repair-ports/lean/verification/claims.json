@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "paper": "Exact Compositional Transfer of Bounded Linear Recovery: Relative Weights and Labelled Coset Costs",
+  "paper": "Exact Compositional Transfer of Bounded Linear Recovery",
   "claims": [
     {"id": "main-theorem", "manuscript_label": "thm:main", "status": "absent", "statement": "Minimum-support lifts over the complete outer functional dual give the exact finite rank-stratified nonconfinement cost, and confinement through a helper radius holds exactly below that cost.", "terminals": []},
     {"id": "mds-reconstruction", "manuscript_label": "thm:mds-reconstruction", "status": "absent", "statement": "Minimum-weight normalized recovery equations of an MDS code span its dual code.", "terminals": []},
