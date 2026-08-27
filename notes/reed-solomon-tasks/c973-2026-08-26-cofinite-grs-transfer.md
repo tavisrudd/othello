@@ -322,8 +322,11 @@ typed `Root` values and verifies that the complete locator support avoids
 them.  Therefore the cofinite-GRS negative certificate needs no new search
 algorithm.  A later software item only needs a typed domain/result wrapper:
 
-* `CofiniteGrsDomain { omitted: BTreeSet<Root>, multipliers: ... }`, with the
-  existing full-projective domain represented by an empty set;
+* `CofiniteGrsDomain { omitted: BTreeSet<Root>,
+  parity_check_scales: BTreeMap<Root, NonzeroFieldElement> }`, with the
+  existing full-projective domain represented by an empty set and unit
+  scales; a constructor from generator-side GRS multipliers should compute
+  the dual Lagrange scales once rather than conflate the two notions;
 * a shell enum distinguishing `DeepOmittedPoint`, `NextTangent`,
   `NextConjugateSecant`, `NextIncidentSplitSecant`, and
   `AtMostRMinusTwo(LocatorCertificate)`; and
@@ -415,6 +418,16 @@ new application section.
 5. Keep LDPC out of the theorem spine.  At most one outlook sentence should
    mention RS-local Tanner/lifted codes and the unsolved global compatibility
    problem.
+
+The cofinite extension should cost at most `1.0--1.3` pages: roughly `0.2`
+for the multiplier/support dictionary, `0.5` for the theorem and shell count,
+`0.4` for the split-secant/Seroussi--Roth proof, and one short frontmatter
+sentence.  It reuses the pointed theorem instead of adding a new proof
+section.  Against the existing successor map's `2--5` pages of recursive
+package deletions, the revised paper should still become shorter by about
+`1--4` pages.  Do not broaden the title or make the affine result a headline
+until the next-to-deep prior-art audit clears; if the audit finds overlap,
+retain the statement as a unifying corollary with no extra frontmatter.
 
 The manuscript remains frozen in C973.  These edits belong to the separately
 allocated paper-successor item.
