@@ -66,7 +66,9 @@ The cofinite-support transfer is proved in
 deleting `s` projective evaluation points, it gives the pointed threshold
 `6r+6s-16+floor(2 sqrt(6r+6s-18))`, an `r-2` locator avoiding every deletion,
 and, in large characteristic, the exact distance-`r` and distance-`r-1`
-shells and their counts.  The full-affine deep shell is classical in this
+shells and their counts.  In every characteristic it also converts the
+digit-stripping dimension formula into an explicit upper bound for the
+entire next-to-deep population.  The full-affine deep shell is classical in this
 high-rate range; the next-to-deep shell and constructive separation require
 a claim-specific prior-art audit.  Generic LDPC does not inherit the theorem,
 but RS-local Tanner and lifted-code compatibility is recorded as a separate

@@ -83,6 +83,24 @@ extension theory.  The potentially new strengthening is the exact
 next-to-deep shell together with the constructive `r-2` witness outside the
 carrier.  No Cheng--Murray novelty claim is licensed by this note.
 
+In every characteristic, the digit-stripping theorem also makes the
+candidate bound explicit.  Put `d=r-2`, let
+`nu(d)=prod_i(d_i+1)` for the base-`p` digits `d_i`, let `eta(d)` be the
+number of consecutive nonzero runs in Pascal row `d`, and set
+
+\[
+ c_{r,p}=r-\nu(r-2)-\eta(r-2)=\dim C_{r-2}.                \tag{5a}
+\]
+
+Then, for `s>0`,
+
+\[
+ N_{r-1}\le (q+1)(q^2+1)+\frac{q^{c_{r,p}}-1}{q-1}-s.     \tag{5b}
+\]
+
+Thus the Lucas recursion transfers not only as an exceptional locus but as a
+digit-explicit bound on the whole next-to-deep population.
+
 ## 1. Multiplier-free syndrome geometry
 
 Let `C_S(v)` be a GRS code whose redundancy is `r`, with nonzero coordinate
@@ -166,6 +184,26 @@ For fixed `r,s`, this retains the leading lower bound
 `q^(r-4)/(r-2)!-O_(r,s)(q^(r-9/2))`.  This quantitative form is the part of
 the transfer most relevant to compatibility arguments in RS-local sparse
 codes.
+
+### Lucas candidate count in every characteristic
+
+The persistent rank-two locus has
+
+\[
+                         |\mathcal P_r(\mathbf F_q)|
+                         =(q+1)(q^2+1).                    \tag{8d}
+\]
+
+Indeed, uniqueness of the length-two scheme on a degree-at-least-three
+Veronese curve gives a disjoint partition into `q+1` curve points,
+`binom(q+1,2)(q-1)` split-secant interiors, `q(q+1)` tangent points, and
+`q(q-1)(q+1)/2` conjugate-secant points.  The digit-stripping theorem says
+that the maximal Lucas carrier is the projectivization of a vector space of
+dimension `c_(r,p)` from (5a), hence it has
+`(q^c_(r,p)-1)/(q-1)` rational points.  Equation (3) places every syndrome of
+weight at least `r-1` in the union of these two loci, while (11) identifies
+the `s` weight-`r` directions.  The union bound gives (5b).  Intersections can
+only improve it.
 
 ## 3. Covering radius and the deep shell
 
@@ -407,7 +445,7 @@ as necessary for the former.
 | Tangent/conjugate shell is unchanged by any bounded puncture | settled structurally by monotonicity and the exact deep-shell theorem | literature audit only |
 | GRS multipliers might change locators or weights | settled: column scaling is absorbed into error magnitudes in (6) | none |
 | Pointed abundance might lose its leading term | settled by (8a)--(8c) for fixed `r,s` | software exposure is a separate C974 item |
-| Small-characteristic `r-1` shell on the Lucas carrier | open | arithmetic pointed-abundance through the digit-stripping extensions remains owned by C973 |
+| Small-characteristic `r-1` shell on the Lucas carrier | candidate population now bounded explicitly by (5b), exact shell open | arithmetic pointed-abundance through the digit-stripping extensions remains owned by C973 |
 | RS-local LDPC witnesses might globalize | open | needs a separate bounded-overlap compatibility theorem; no global LDPC claim is licensed |
 | Prior art for the general cofinite-GRS next-to-deep enumerator | scoped primary-source preaudit complete; no matching theorem found | finish the citation-graph and finite-geometry audit before novelty wording or manuscript integration |
 
