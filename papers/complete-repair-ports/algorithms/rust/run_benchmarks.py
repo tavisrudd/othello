@@ -22,7 +22,19 @@ BINARY = Path(
 
 def command(variant: str, repetitions: int) -> list[str]:
     cpu_set = "0-23" if "parallel-" in variant else "2"
-    if "cpsat" in variant:
+    if any(
+        backend in variant
+        for backend in ("cpsat", "maxflow", "highs", "cryptominisat", "zdd")
+    ):
+        dependencies = []
+        if "highs" in variant:
+            dependencies.extend(("--with", "scipy==1.16.1"))
+        elif "cryptominisat" in variant:
+            dependencies.extend(("--with", "pycryptosat==5.14.7"))
+        elif "zdd" in variant:
+            dependencies.extend(("--with", "graphillion==2.1"))
+        else:
+            dependencies.extend(("--with", "ortools==9.14.6206"))
         return [
             "taskset",
             "-c",
@@ -34,8 +46,7 @@ def command(variant: str, repetitions: int) -> list[str]:
             "uv",
             "run",
             "--no-project",
-            "--with",
-            "ortools==9.14.6206",
+            *dependencies,
             "python3",
             str(ROOT / "benchmark_python.py"),
             variant,
@@ -203,6 +214,7 @@ def main() -> None:
     parser.add_argument("--ergo-thread-sweep-only", action="store_true")
     parser.add_argument("--streaming-input-only", action="store_true")
     parser.add_argument("--applications-only", action="store_true")
+    parser.add_argument("--application-sota-only", action="store_true")
     parser.add_argument("--baseline-binary", type=Path)
     parser.add_argument("--candidate-binary", type=Path, default=BINARY)
     parser.add_argument("--locality-key", default="scheduler_locality_ab")
@@ -211,6 +223,93 @@ def main() -> None:
         raise SystemExit("pass --write to record a fresh noncanonical benchmark")
     if not BINARY.exists():
         raise SystemExit("build target/release/bench_kernels first")
+
+    if args.application_sota_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --application-sota-only")
+        value = json.loads(OUTPUT.read_text())
+        cases = {
+            "ceph_recursive_xor": (
+                "application:ceph:zdd:8",
+                "application:ceph:rust:8",
+                1,
+                args.ab_rounds,
+            ),
+            "azure_lrc_batch": (
+                "application:azure-counted:highs:100000:100000",
+                None,
+                1,
+                args.ab_rounds,
+            ),
+            "repair_dag": (
+                "application:rdag:interval-cpsat:21:3",
+                None,
+                1,
+                args.ab_rounds,
+            ),
+            "qc_ldpc_codeword": (
+                "application:qc:cryptominisat:50000:4",
+                None,
+                1,
+                args.ab_rounds,
+            ),
+            "vector_node_span": (
+                "application:vector:cryptominisat:64:2",
+                None,
+                1,
+                args.ab_rounds,
+            ),
+            "gpu_checkpoint_mds": (
+                "application:gpu-compiled:maxflow:10000:6000:64",
+                None,
+                1,
+                args.ab_rounds,
+            ),
+        }
+        measurements = {}
+        application_measurements = value["application_comparisons"]["measurements"]
+        for name, (variant, rust_variant, repetitions, rounds) in cases.items():
+            result = run_group((variant,), repetitions, rounds)[variant]
+            rust = (
+                run_group((rust_variant,), repetitions, rounds)[rust_variant]
+                if rust_variant is not None
+                else application_measurements[name]["rust"]
+            )
+            if result["checksum_per_solve"] != rust["checksum_per_solve"]:
+                raise RuntimeError(f"application SOTA checksum mismatch: {name}")
+            measurements[name] = {
+                "rust": rust,
+                "baseline": result,
+                "rust_speedup": ratio(
+                    result["median_ns_per_solve"], rust["median_ns_per_solve"]
+                ),
+                "rounds": {
+                    "rust": len(rust["samples"]),
+                    "baseline": rounds,
+                },
+            }
+        value["application_formulation_specific_comparisons"] = {
+            "protocol": {
+                "common": "pinned-core deterministic exact solves; objective/status agreement required",
+                "scope": "strong open-source formulation-specific baseline, not a universal SOTA claim",
+                "ceph_recursive_xor": "Graphillion 2.1 zero-suppressed decision-diagram family closure",
+                "gpu_checkpoint_mds": "OR-Tools 9.14 SimpleMaxFlow on the full failure-survivor bipartite graph",
+                "azure_lrc_batch": "SciPy 1.16 milp/HiGHS on the same exact six-type counted formulation",
+                "repair_dag": "OR-Tools 9.14 interval variables and NoOverlap constraints",
+                "qc_ldpc_codeword": "CryptoMiniSat 5.14 native XOR clauses plus exact-cardinality automaton",
+                "vector_node_span": "CryptoMiniSat 5.14 native XOR clauses plus sequential helper-cardinality bounds",
+            },
+            "artifacts": {
+                "benchmark_python_sha256": sha256(ROOT / "benchmark_python.py"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+                "verify_baseline_encodings_sha256": sha256(
+                    ROOT / "verify_baseline_encodings.py"
+                ),
+            },
+            "measurements": measurements,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
 
     if args.applications_only:
         if not OUTPUT.exists():

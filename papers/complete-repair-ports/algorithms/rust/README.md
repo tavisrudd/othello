@@ -104,22 +104,79 @@ overlap itself. The QC-LDPC search distinguishes the two predicates exactly:
 trapping sets bound the number of odd neighboring checks, while stopping sets
 forbid neighboring checks of degree one.
 
-A seven-round, pinned-core exact comparison against single-worker OR-Tools
-9.14 CP-SAT gives the following bounded results. Times include construction of
-the application state or CP-SAT model; RSS is process high-water memory. The
-large wins come from mathematical reductions: full-ready-set dominance for
-unit repair DAGs, connected components for degree-two QC parity checks,
-quotienting identical generated node subspaces, and aggregate MDS capacity
-followed by cyclic witness realization.
+A pinned-core exact comparison against stronger formulation-specific
+open-source controls gives the primary bounded results below. Times include
+construction of the application state or control model; RSS is process
+high-water memory. Every control proves the same optimum or infeasibility
+status as ERGO-comp. These are deliberately not described as universal SOTA
+claims: commercial MILP and scheduling solvers and domain-specific LDPC
+enumerators are not included.
 
-| application / control            | bounded instance                  | ERGO time | ERGO RSS | control time | control RSS | outcome                  |
-| :------------------------------- | :-------------------------------- | --------: | -------: | -----------: | ----------: | :----------------------- |
-| Azure LRC / direct CP-SAT        | 100,000 demands, domain cap 100k  |     <1 us |  2.2 MiB |       8.95 s |   916.6 MiB | CP quotient 5,168x       |
-| Azure LRC / counted CP-SAT       | same six-type quotient            |     <1 us |  2.2 MiB |     1,732 us |    75.5 MiB | ERGO 61,799x faster      |
-| Repair DAG / direct CP-SAT       | 3 layers x 21 tasks               |      2 us |  2.3 MiB |       1.20 s |   145.5 MiB | ERGO 494,061x faster     |
-| QC-LDPC / direct CP-SAT          | lift 50,000, weight 4             |  1,517 us |  4.0 MiB |       1.52 s |   381.6 MiB | ERGO 1,001x faster       |
-| vector node span / direct CP-SAT | 64 nodes, 2 symbols per node      |     10 us |  2.2 MiB |       1.21 s |    85.9 MiB | ERGO 117,097x faster     |
-| GPU MDS / direct CP-SAT          | 10,000 shards, k=6,000, 64 failed |    100 us |  3.6 MiB |      11.82 s |     1.9 GiB | ERGO 118,014x faster     |
+| application      | bounded instance                  | matched exact control          | ERGO time | control time | result        |
+| :--------------- | :-------------------------------- | :----------------------------- | --------: | -----------: | :------------ |
+| Ceph XOR         | 8 diamonds, 256 minimal supports  | Graphillion ZDD family closure | 25,339 us |       864 us | ZDD 29x       |
+| Azure LRC        | 100,000 demands, domain cap 100k  | HiGHS counted integer model    |     <1 us |     4,877 us | ERGO 173,996x |
+| Repair DAG       | 3 layers x 21 tasks               | CP-SAT interval scheduling     |      2 us |    19,218 us | ERGO 7,881x   |
+| QC-LDPC          | lift 50,000, weight 4             | CryptoMiniSat native XOR       |  1,517 us |   509,306 us | ERGO 336x     |
+| vector node span | 64 nodes, 2 symbols per node      | CryptoMiniSat native XOR       |     10 us |    48,691 us | ERGO 4,717x   |
+| GPU MDS          | 10,000 shards, k=6,000, 64 failed | OR-Tools bipartite max-flow    |    100 us |   103,061 us | ERGO 1,029x   |
+
+| application      | ERGO RSS | control RSS |
+| :--------------- | -------: | ----------: |
+| Ceph XOR         |  3.0 MiB |    19.4 MiB |
+| Azure LRC        |  2.2 MiB |    61.6 MiB |
+| Repair DAG       |  2.3 MiB |    79.1 MiB |
+| QC-LDPC          |  4.0 MiB |   231.8 MiB |
+| vector node span |  2.2 MiB |    20.8 MiB |
+| GPU MDS          |  3.6 MiB |    69.1 MiB |
+
+The outcome strength is not identical across rows; the comparison requires
+the same optimum or decision, while ERGO-comp often returns a stronger
+application-level object:
+
+| application      | exact control establishes        | additional ERGO-comp output                           |
+| :--------------- | :------------------------------- | :---------------------------------------------------- |
+| Ceph XOR         | compact exact 256-support family | all sorted minimal supports and closure-work counters |
+| Azure LRC        | maximum repaired count           | mode counts, all nine loads, direct capacity check    |
+| Repair DAG       | optimal makespan and schedule    | canonical task batches and ready-state count          |
+| QC-LDPC          | no weight-four codeword          | component reason; normalized witness when feasible    |
+| vector node span | optimum is four nodes            | canonical helpers, span count, transition count       |
+| GPU MDS          | feasible full helper flow        | every helper shard, node/rack loads, cyclic witness   |
+
+The Ceph row is an intentional loss. ERGO-comp materializes the complete
+antichain, whereas Graphillion retains the exponentially branching family as
+a ZDD. This identifies a concrete backend boundary: high-fanout recursive XOR
+closures should use a compressed-family representation when explicit support
+enumeration is not required.
+
+The large wins come from mathematical reductions: six demand types for Azure
+LRC, full-ready-set dominance for unit repair DAGs, connected components for
+degree-two QC parity checks, quotienting identical generated node subspaces,
+and aggregate MDS capacity followed by cyclic witness realization. The GPU
+row is particularly diagnostic: max-flow is the natural general exact model,
+but the symmetric placement theorem removes its complete
+failure-by-survivor graph while still emitting all 384,000 assignments.
+
+Direct CP-SAT remains as a common stress control rather than the headline
+comparison:
+
+| application / control            | bounded instance                  | ERGO time | CP-SAT time | outcome             |
+| :------------------------------- | :-------------------------------- | --------: | ----------: | :------------------ |
+| Azure LRC / direct CP-SAT        | 100,000 demands, domain cap 100k  |     <1 us |      8.95 s | CP quotient 5,168x  |
+| Azure LRC / counted CP-SAT       | same six-type quotient            |     <1 us |    1,732 us | ERGO 61,799x        |
+| Repair DAG / direct CP-SAT       | 3 layers x 21 tasks               |      2 us |      1.20 s | ERGO 494,061x       |
+| QC-LDPC / direct CP-SAT          | lift 50,000, weight 4             |  1,517 us |      1.52 s | ERGO 1,001x         |
+| vector node span / direct CP-SAT | 64 nodes, 2 symbols per node      |     10 us |      1.21 s | ERGO 117,097x       |
+| GPU MDS / direct CP-SAT          | 10,000 shards, k=6,000, 64 failed |    100 us |     11.82 s | ERGO 118,014x       |
+
+| application / control      | ERGO RSS | CP-SAT RSS |
+| :------------------------- | -------: | ---------: |
+| Azure LRC / direct         |  2.2 MiB |  916.6 MiB |
+| Azure LRC / counted        |  2.2 MiB |   75.5 MiB |
+| Repair DAG / direct        |  2.3 MiB |  145.5 MiB |
+| QC-LDPC / direct           |  4.0 MiB |  381.6 MiB |
+| vector node span / direct  |  2.2 MiB |   85.9 MiB |
+| GPU MDS / direct           |  3.6 MiB |    1.9 GiB |
 
 When all replacements share a rack and every survivor is remote from the
 replacement nodes, the GPU compiler first aggregates feasible reads by helper
@@ -130,9 +187,17 @@ assignments. Other placements retain the general exact scheduler. The direct
 Azure and GPU rows each use one completed CP-SAT proof; their solves take
 seconds and peak near 1 and 2 GiB respectively. The counted Azure control and
 the other CP-SAT rows use seven rounds, as do all Rust rows. These are
-formulation-specific results, not a universal solver ranking. Raw samples and
-checksums are stored in `evidence/benchmarks.json`; replay them with
-`run_benchmarks.py --write --applications-only --ab-rounds 7`.
+formulation-specific results, not a universal solver ranking. The matched
+controls use eleven rounds. Raw samples, RSS, checksums, artifact hashes, and
+exact package versions are stored in `evidence/benchmarks.json`; replay with:
+
+```text
+run_benchmarks.py --write --applications-only --ab-rounds 7
+run_benchmarks.py --write --application-sota-only --ab-rounds 11
+nix shell nixpkgs#uv --command uv run --no-project \
+  --with pycryptosat==5.14.7 --with graphillion==2.1 \
+  python3 verify_baseline_encodings.py
+```
 
 For example:
 
@@ -345,13 +410,21 @@ ERGO-comp, then uses one-hot leaf choices and the same parity constraints.
 Every solver proves the same optimum; ERGO-comp additionally expands its
 canonical coefficient witness tree.
 
-| depth / fanout   | leaves   | ERGO time   | ERGO RSS   | direct CP-SAT   | direct RSS   | labelled CP-SAT   | labelled RSS   | speedup: direct / labelled   |
-| :--------------- | -------: | ----------: | ---------: | --------------: | -----------: | ----------------: | -------------: | ---------------------------: |
-|            2 / 2 |        4 |       94 us |    2.3 MiB |        2.983 ms |     74.6 MiB |          4.901 ms |       75.2 MiB |                    32x / 52x |
-|            3 / 3 |       27 |      175 us |    2.3 MiB |       11.578 ms |     75.8 MiB |         27.461 ms |       77.3 MiB |                   66x / 156x |
-|            4 / 3 |       81 |      177 us |    2.4 MiB |       43.054 ms |     78.8 MiB |        112.447 ms |       82.3 MiB |                  243x / 635x |
-|            5 / 4 |    1,024 |      316 us |    2.4 MiB |          8.17 s |    126.5 MiB |            1.58 s |      158.1 MiB |             25,889x / 5,013x |
-|            6 / 4 |    4,096 |      766 us |    2.8 MiB |        263.76 s |    281.4 MiB |            6.19 s |      411.4 MiB |            344,300x / 8,080x |
+| depth / fanout | leaves | ERGO time | direct CP-SAT    | labelled CP-SAT | speedup: direct / labelled   |
+| :------------- | -----: | --------: | ---------------: | --------------: | ---------------------------: |
+| 2 / 2          |      4 |     94 us |         2.983 ms |        4.901 ms |                    32x / 52x |
+| 3 / 3          |     27 |    175 us |        11.578 ms |       27.461 ms |                   66x / 156x |
+| 4 / 3          |     81 |    177 us |        43.054 ms |      112.447 ms |                  243x / 635x |
+| 5 / 4          |  1,024 |    316 us |           8.17 s |          1.58 s |             25,889x / 5,013x |
+| 6 / 4          |  4,096 |    766 us |         263.76 s |          6.19 s |            344,300x / 8,080x |
+
+| depth / fanout | ERGO RSS | direct RSS | labelled RSS |
+| :------------- | -------: | ---------: | -----------: |
+| 2 / 2          |  2.3 MiB |   74.6 MiB |     75.2 MiB |
+| 3 / 3          |  2.3 MiB |   75.8 MiB |     77.3 MiB |
+| 4 / 3          |  2.4 MiB |   78.8 MiB |     82.3 MiB |
+| 5 / 4          |  2.4 MiB |  126.5 MiB |    158.1 MiB |
+| 6 / 4          |  2.8 MiB |  281.4 MiB |    411.4 MiB |
 
 These are bounded single-worker results for the identity-block GF(4) tower
 family, not a general claim about CP-SAT. The first three rows use 21 rounds;
@@ -489,9 +562,9 @@ The frontier-sized thread sweep includes compilation and uses CPUs 0--23 for
 parallel variants. Additional workers act only on the small residual solve,
 so the results are effectively flat; 24 is not the optimum.
 
-| axis                    |      single thread |           best parallel | verdict |
-|:------------------------|-------------------:|------------------------:|:--------|
-| 40,000,000 demands x 4  | 8.25 s / 2,787 MiB | 8.13 s / 2,787 MiB (12) | neutral |
+| axis                    |      single thread |           best parallel | verdict  |
+|:------------------------|-------------------:|------------------------:|:---------|
+| 40,000,000 demands x 4  | 8.25 s / 2,787 MiB | 8.13 s / 2,787 MiB (12) | neutral  |
 | 80 demands x 14,000,000 |   9.15 s / 2.4 MiB |    9.12 s / 2.6 MiB (8) | neutral  |
 
 Parentheses give worker count. These are single frontier probes, not stable

@@ -2,12 +2,12 @@ use std::hint::black_box;
 use std::time::Instant;
 
 use ergo_comp::{
-    azure_lrc_12_2_2_counted, compile_binary_rank_one, compile_binary_target_subspace,
-    confinement_by_generators_field, gpu_checkpoint_mds_recovery,
+    azure_lrc_12_2_2_counted, ceph_xor_repair_supports, compile_binary_rank_one,
+    compile_binary_target_subspace, confinement_by_generators_field, gpu_checkpoint_mds_recovery,
     gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair, schedule_repair_dag,
     ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
-    ternary_orbit_syndrome_search_correlated, CompositionTower, FiniteField, Gf4,
+    ternary_orbit_syndrome_search_correlated, CephXorLayer, CompositionTower, FiniteField, Gf4,
     GpuCheckpointCapacities, Matrix, OrbitOption, Prime, QcLdpcCode, RepairTask, TowerLevel,
     WeightedRepairProblem, WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
@@ -180,6 +180,22 @@ fn repair_dag_fixture(width: usize, layers: usize) -> Vec<RepairTask> {
         }
     }
     tasks
+}
+
+fn ceph_diamond_fixture(levels: usize) -> (usize, Vec<CephXorLayer>, Vec<usize>) {
+    assert!(levels > 0 && 3 * levels < 128);
+    let common = levels;
+    let mut layers = Vec::with_capacity(2 * levels);
+    for level in 0..levels {
+        let previous = if level == 0 { common } else { level - 1 };
+        for branch in 0..2 {
+            layers.push(CephXorLayer {
+                parity: level as u8,
+                data: Box::new([previous as u8, (levels + 1 + 2 * level + branch) as u8]),
+            });
+        }
+    }
+    (3 * levels + 1, layers, (0..levels).collect())
 }
 
 fn transfer_tower_spec(variant: &str) -> Option<(&str, usize, usize)> {
@@ -478,6 +494,22 @@ fn main() {
     if let Some((application, parameters)) = application_spec(&variant) {
         for _ in 0..repetitions {
             match (application, parameters.as_slice()) {
+                ("ceph", &[levels]) => {
+                    let (coordinates, layers, unavailable) = ceph_diamond_fixture(levels);
+                    let answer = ceph_xor_repair_supports(
+                        coordinates,
+                        &layers,
+                        levels - 1,
+                        &unavailable,
+                        1 << 34,
+                    )
+                    .unwrap();
+                    assert_eq!(answer.supports.len(), 1usize << levels);
+                    work += answer.combinations_examined;
+                    peak_states = peak_states.max(answer.supports.len() as u64);
+                    checksum += answer.supports.len() as u64;
+                    black_box(answer);
+                }
                 ("azure", &[demands, capacity]) => {
                     let capacities = black_box([capacity as u32; 9]);
                     let answer = azure_lrc_12_2_2_counted(&capacities, black_box(demands));

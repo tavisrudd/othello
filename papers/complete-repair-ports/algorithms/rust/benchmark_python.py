@@ -67,9 +67,59 @@ def jin_fu_hamming_spec(variant: str):
 
 def application_spec(variant: str):
     fields = variant.split(":")
-    if len(fields) < 4 or fields[0] != "application" or fields[2] != "cpsat":
+    if len(fields) < 4 or fields[0] != "application":
         return None
-    return fields[1], tuple(int(field) for field in fields[3:])
+    return fields[1], fields[2], tuple(int(field) for field in fields[3:])
+
+
+def add_at_most(solver, literals: list[int], bound: int, next_variable: int) -> int:
+    """Add Sinz's sequential at-most-k counter and return the next free variable."""
+    if bound >= len(literals):
+        return next_variable
+    if bound == 0:
+        for literal in literals:
+            solver.add_clause([-literal])
+        return next_variable
+    previous = None
+    for index, literal in enumerate(literals):
+        current = list(range(next_variable, next_variable + bound))
+        next_variable += bound
+        solver.add_clause([-literal, current[0]])
+        if previous is not None:
+            for count in range(bound):
+                solver.add_clause([-previous[count], current[count]])
+            for count in range(1, bound):
+                solver.add_clause([-literal, -previous[count - 1], current[count]])
+            solver.add_clause([-literal, -previous[bound - 1]])
+        previous = current
+    return next_variable
+
+
+def add_exactly_small(
+    solver, literals: list[int], count: int, next_variable: int
+) -> int:
+    """Encode an exact small count with a deterministic one-hot automaton."""
+    states = list(range(next_variable, next_variable + count + 1))
+    next_variable += count + 1
+    solver.add_clause([states[0]])
+    for state in states[1:]:
+        solver.add_clause([-state])
+    for literal in literals:
+        following = list(range(next_variable, next_variable + count + 1))
+        next_variable += count + 1
+        solver.add_clause(following)
+        for left in range(count + 1):
+            for right in range(left + 1, count + 1):
+                solver.add_clause([-following[left], -following[right]])
+        for value in range(count + 1):
+            solver.add_clause([-states[value], literal, following[value]])
+            if value < count:
+                solver.add_clause([-states[value], -literal, following[value + 1]])
+            else:
+                solver.add_clause([-states[value], -literal])
+        states = following
+    solver.add_clause([states[count]])
+    return next_variable
 
 
 def orbit_grid_spec(variant: str):
@@ -203,6 +253,44 @@ def gf4_product_bits(element: int, scalar_bits):
         return ((alpha,), (constant, alpha))
     assert element == 3
     return ((constant, alpha), (constant,))
+
+
+def ceph_diamond_fixture(levels: int):
+    assert 0 < levels and 3 * levels + 1 <= 128
+    common = levels
+    layers = []
+    for level in range(levels):
+        previous = common if level == 0 else level - 1
+        for branch in range(2):
+            layers.append(
+                (level, previous, levels + 1 + 2 * level + branch)
+            )
+    return 3 * levels + 1, tuple(layers), frozenset(range(levels))
+
+
+def ceph_zdd_supports(SetSet, levels: int):
+    coordinate_count, layers, unavailable = ceph_diamond_fixture(levels)
+    SetSet.set_universe(range(coordinate_count))
+    supports = [
+        SetSet() if coordinate in unavailable else SetSet([{coordinate}])
+        for coordinate in range(coordinate_count)
+    ]
+    changed = True
+    closure_rounds = 0
+    while changed:
+        changed = False
+        closure_rounds += 1
+        for group in layers:
+            for destination in group:
+                product_family = SetSet([set()])
+                for source in group:
+                    if source != destination:
+                        product_family = product_family.join(supports[source])
+                updated = supports[destination].union(product_family).minimal()
+                if updated != supports[destination]:
+                    supports[destination] = updated
+                    changed = True
+    return supports[levels - 1], closure_rounds
 
 
 def scheduler_problem(
@@ -359,11 +447,12 @@ def main() -> None:
     application_case = application_spec(variant)
     orbit_grid = orbit_grid_spec(variant)
     cp_model = None
+    application_backend = application_case[1] if application_case is not None else None
     if (
         transfer_tower is not None
         or jin_fu is not None
         or jin_fu_hamming is not None
-        or application_case is not None
+        or application_backend in ("cpsat", "interval-cpsat")
         or orbit_grid is not None
         or variant in ("scheduler-cpsat", "scheduler-cpsat-small")
         or (grid is not None and grid[0] == "cpsat")
@@ -375,14 +464,47 @@ def main() -> None:
         from ortools.sat.python import cp_model as loaded_cp_model
 
         cp_model = loaded_cp_model
+    np = Bounds = LinearConstraint = milp = None
+    CmsSolver = None
+    max_flow = None
+    SetSet = None
+    if application_backend == "highs":
+        import numpy as loaded_np
+        from scipy.optimize import (
+            Bounds as LoadedBounds,
+            LinearConstraint as LoadedLinearConstraint,
+            milp as loaded_milp,
+        )
+
+        np = loaded_np
+        Bounds = LoadedBounds
+        LinearConstraint = LoadedLinearConstraint
+        milp = loaded_milp
+    elif application_backend == "cryptominisat":
+        from pycryptosat import Solver as LoadedCmsSolver
+
+        CmsSolver = LoadedCmsSolver
+    elif application_backend == "maxflow":
+        from ortools.graph.python import max_flow as loaded_max_flow
+
+        max_flow = loaded_max_flow
+    elif application_backend == "zdd":
+        from graphillion import setset as LoadedSetSet
+
+        SetSet = LoadedSetSet
     work = peak_states = checksum = 0
     started = perf_counter_ns()
     if application_case is not None:
-        assert cp_model is not None
-        application, parameters = application_case
-        model = cp_model.CpModel()
+        application, backend, parameters = application_case
+        model = cp_model.CpModel() if cp_model is not None else None
         expected_checksum = 0
-        if application == "azure":
+        if application == "ceph" and backend == "zdd":
+            assert SetSet is not None
+            (levels,) = parameters
+            ceph_family, closure_rounds = ceph_zdd_supports(SetSet, levels)
+            expected_checksum = 1 << levels
+        elif application == "azure" and backend == "cpsat":
+            assert model is not None
             demands, capacity = parameters
             choices = [
                 [model.new_bool_var(f"x_{demand}_{option}") for option in range(4)]
@@ -430,7 +552,8 @@ def main() -> None:
                 )
             )
             expected_checksum = demands
-        elif application == "azure-counted":
+        elif application == "azure-counted" and backend == "cpsat":
+            assert model is not None
             demands, capacity = parameters
             multiplicities = [
                 demands // 6 + int(kind < demands % 6) for kind in range(6)
@@ -456,7 +579,46 @@ def main() -> None:
             model.add(global_one <= capacity)
             model.maximize(local + global_total)
             expected_checksum = demands
-        elif application == "rdag":
+        elif application == "azure-counted" and backend == "highs":
+            assert None not in (np, Bounds, LinearConstraint, milp)
+
+            demands, capacity = parameters
+            multiplicities = np.array(
+                [demands // 6 + int(kind < demands % 6) for kind in range(6)]
+            )
+            variable_count = 18
+            objective = -np.ones(variable_count)
+            upper_bounds = np.repeat(multiplicities, 3)
+            rows = []
+            row_upper = []
+            for kind in range(6):
+                row = np.zeros(variable_count)
+                row[3 * kind : 3 * kind + 3] = 1
+                rows.append(row)
+                row_upper.append(multiplicities[kind])
+            for domain in range(6):
+                row = np.zeros(variable_count)
+                for kind in range(6):
+                    for mode in range(3):
+                        row[3 * kind + mode] = (
+                            (1 if mode == 0 else 2) - int(kind == domain)
+                        )
+                rows.append(row)
+                row_upper.append(capacity)
+            for mode in range(3):
+                row = np.zeros(variable_count)
+                row[mode::3] = 1
+                rows.append(row)
+                row_upper.append(capacity)
+            constraints = LinearConstraint(
+                np.asarray(rows),
+                np.full(len(rows), -np.inf),
+                np.asarray(row_upper),
+            )
+            bounds = Bounds(np.zeros(variable_count), upper_bounds)
+            expected_checksum = demands
+        elif application == "rdag" and backend == "cpsat":
+            assert model is not None
             width, layers = parameters
             task_count = width * layers
             horizon = task_count
@@ -486,7 +648,42 @@ def main() -> None:
             model.add_max_equality(makespan, [start + 1 for start in starts])
             model.minimize(makespan)
             expected_checksum = layers
-        elif application == "qc":
+        elif application == "rdag" and backend == "interval-cpsat":
+            assert model is not None
+            width, layers = parameters
+            task_count = width * layers
+            horizon = task_count
+            starts = [
+                model.new_int_var(0, horizon - 1, f"s_{task}")
+                for task in range(task_count)
+            ]
+            ends = [
+                model.new_int_var(1, horizon, f"e_{task}")
+                for task in range(task_count)
+            ]
+            intervals = [
+                model.new_interval_var(starts[task], 1, ends[task], f"i_{task}")
+                for task in range(task_count)
+            ]
+            for task in range(task_count):
+                layer = task // width
+                if layer:
+                    for predecessor in range((layer - 1) * width, layer * width):
+                        model.add(starts[task] >= ends[predecessor])
+            for resource_index in range(width):
+                model.add_no_overlap(
+                    [
+                        intervals[task]
+                        for task in range(task_count)
+                        if (task % width + task // width) % width == resource_index
+                    ]
+                )
+            makespan = model.new_int_var(1, horizon, "makespan")
+            model.add_max_equality(makespan, ends)
+            model.minimize(makespan)
+            expected_checksum = layers
+        elif application == "qc" and backend == "cpsat":
+            assert model is not None
             lift, size = parameters
             variables = [model.new_bool_var(f"x_{variable}") for variable in range(2 * lift)]
             model.add(sum(variables) == size)
@@ -500,7 +697,27 @@ def main() -> None:
                     half = model.new_int_var(0, 1, f"h_{check_group}_{position}")
                     model.add(sum(active) == 2 * half)
             expected_checksum = 0
-        elif application == "vector":
+        elif application == "qc" and backend == "cryptominisat":
+            assert CmsSolver is not None
+            lift, size = parameters
+            cms_solver = CmsSolver(threads=1)
+            variables = list(range(1, 2 * lift + 1))
+            for position in range(lift):
+                cms_solver.add_xor_clause(
+                    [variables[position], variables[lift + position]], False
+                )
+                cms_solver.add_xor_clause(
+                    [variables[position], variables[lift + (position - 1) % lift]],
+                    False,
+                )
+            cms_solver.add_clause([variables[0], variables[lift]])
+            next_variable = 2 * lift + 1
+            next_variable = add_exactly_small(
+                cms_solver, variables, size, next_variable
+            )
+            expected_checksum = 0
+        elif application == "vector" and backend == "cpsat":
+            assert model is not None
             nodes, subpacketization = parameters
             ambient = 8
             selected = [model.new_bool_var(f"n_{node}") for node in range(nodes)]
@@ -523,7 +740,47 @@ def main() -> None:
                     model.add(sum(active) == int(row == demand) + 2 * half)
             model.minimize(sum(selected))
             expected_checksum = 4
-        elif application in ("gpu", "gpu-compiled"):
+        elif application == "vector" and backend == "cryptominisat":
+            assert CmsSolver is not None
+            nodes, subpacketization = parameters
+            ambient = 8
+
+            def vector_solver(bound: int):
+                solver = CmsSolver(threads=1)
+                selected = list(range(1, nodes + 1))
+                next_variable = nodes + 1
+                coefficients = []
+                for _ in range(ambient):
+                    row = list(
+                        range(
+                            next_variable,
+                            next_variable + nodes * subpacketization,
+                        )
+                    )
+                    next_variable += nodes * subpacketization
+                    coefficients.append(row)
+                for demand in range(ambient):
+                    for node in range(nodes):
+                        for symbol in range(subpacketization):
+                            coefficient = coefficients[demand][
+                                node * subpacketization + symbol
+                            ]
+                            solver.add_clause([-coefficient, selected[node]])
+                    for row in range(ambient):
+                        active = [
+                            coefficients[demand][node * subpacketization + symbol]
+                            for node in range(nodes)
+                            for symbol in range(subpacketization)
+                            if 2 * (node & 3) + (symbol & 1) == row
+                        ]
+                        solver.add_xor_clause(active, row == demand)
+                add_at_most(solver, selected, bound, next_variable)
+                return solver
+
+            vector_solvers = [vector_solver(3), vector_solver(4)]
+            expected_checksum = 4
+        elif application in ("gpu", "gpu-compiled") and backend == "cpsat":
+            assert model is not None
             shards, data_shards, failures = parameters
             survivors = range(failures, shards)
             choices = [
@@ -548,27 +805,95 @@ def main() -> None:
                 <= data_shards * failures
             )
             expected_checksum = failures
+        elif application == "gpu-compiled" and backend == "maxflow":
+            assert max_flow is not None
+            shards, data_shards, failures = parameters
+            source = 0
+            first_failure = 1
+            first_survivor = first_failure + failures
+            sink = first_survivor + shards - failures
+            flow_solver = max_flow.SimpleMaxFlow()
+            for failure in range(failures):
+                flow_solver.add_arc_with_capacity(
+                    source, first_failure + failure, data_shards
+                )
+                for survivor in range(shards - failures):
+                    flow_solver.add_arc_with_capacity(
+                        first_failure + failure, first_survivor + survivor, 1
+                    )
+            for survivor in range(shards - failures):
+                flow_solver.add_arc_with_capacity(
+                    first_survivor + survivor, sink, failures
+                )
+            expected_flow = failures * data_shards
+            expected_checksum = failures
         else:
-            raise RuntimeError(f"unknown application CP-SAT benchmark: {application}")
-        solver = cp_model.CpSolver()
-        solver.parameters.num_workers = 1
-        solver.parameters.random_seed = 0
-        for _ in range(repetitions):
-            status = solver.solve(model)
-            if application == "qc":
-                if status != cp_model.INFEASIBLE:
-                    raise RuntimeError(f"expected infeasibility: {solver.status_name(status)}")
-            elif status != cp_model.OPTIMAL:
-                raise RuntimeError(f"CP-SAT did not prove optimality: {solver.status_name(status)}")
-            objective = (
-                expected_checksum
-                if application in ("gpu", "gpu-compiled", "qc")
-                else round(solver.objective_value)
-            )
-            assert objective == expected_checksum
-            work += solver.num_branches
-            peak_states = max(peak_states, solver.num_conflicts)
-            checksum += expected_checksum
+            raise RuntimeError(f"unknown application benchmark: {application}/{backend}")
+        if backend in ("cpsat", "interval-cpsat"):
+            assert model is not None and cp_model is not None
+            solver = cp_model.CpSolver()
+            solver.parameters.num_workers = 1
+            solver.parameters.random_seed = 0
+            for _ in range(repetitions):
+                status = solver.solve(model)
+                if application == "qc":
+                    if status != cp_model.INFEASIBLE:
+                        raise RuntimeError(
+                            f"expected infeasibility: {solver.status_name(status)}"
+                        )
+                elif status != cp_model.OPTIMAL:
+                    raise RuntimeError(
+                        f"CP-SAT did not prove optimality: {solver.status_name(status)}"
+                    )
+                objective = (
+                    expected_checksum
+                    if application in ("gpu", "gpu-compiled", "qc")
+                    else round(solver.objective_value)
+                )
+                assert objective == expected_checksum
+                work += solver.num_branches
+                peak_states = max(peak_states, solver.num_conflicts)
+                checksum += expected_checksum
+        elif backend == "highs":
+            for _ in range(repetitions):
+                result = milp(
+                    c=objective,
+                    integrality=np.ones(variable_count),
+                    bounds=bounds,
+                    constraints=constraints,
+                    options={"presolve": True},
+                )
+                if not result.success:
+                    raise RuntimeError(f"HiGHS failed: {result.message}")
+                assert round(-result.fun) == expected_checksum
+                work += result.mip_node_count
+                checksum += expected_checksum
+        elif backend == "cryptominisat":
+            for _ in range(repetitions):
+                if application == "qc":
+                    satisfiable, _ = cms_solver.solve()
+                    if satisfiable:
+                        raise RuntimeError("expected CryptoMiniSat infeasibility")
+                else:
+                    lower_satisfiable, _ = vector_solvers[0].solve()
+                    optimum_satisfiable, _ = vector_solvers[1].solve()
+                    if lower_satisfiable or not optimum_satisfiable:
+                        raise RuntimeError("CryptoMiniSat optimum proof mismatch")
+                checksum += expected_checksum
+        elif backend == "maxflow":
+            for _ in range(repetitions):
+                status = flow_solver.solve(source, sink)
+                if status != flow_solver.OPTIMAL:
+                    raise RuntimeError(f"max-flow failed with status {status}")
+                assert flow_solver.optimal_flow() == expected_flow
+                work += flow_solver.num_arcs()
+                checksum += expected_checksum
+        elif backend == "zdd":
+            for _ in range(repetitions):
+                assert len(ceph_family) == expected_checksum
+                work += closure_rounds
+                peak_states = max(peak_states, len(ceph_family))
+                checksum += expected_checksum
     elif orbit_grid is not None:
         assert cp_model is not None
         families, target = orbit_grid_problem(orbit_grid)

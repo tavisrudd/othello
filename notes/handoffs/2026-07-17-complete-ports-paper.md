@@ -202,8 +202,13 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 ## Next step
 
 C961 and C971 are closed. C962 now includes the streamed/narrow Rust kernels,
-the regenerated scaling and TMA evidence, and two paper-native benchmarks from
-Jin--Fu's published concatenated LRCs. On the binary `[129,72,10;2]` example,
+the regenerated scaling and TMA evidence, two paper-native benchmarks from
+Jin--Fu's published concatenated LRCs, and matched open-source exact controls
+for all six application front ends. The latter replace direct CP-SAT as the
+primary comparison: ERGO-comp wins by 336x--173,996x on the five compiled
+classes, while Graphillion's ZDD wins the 256-support recursive-XOR case by
+29x and motivates an adaptive compressed-family backend. On the binary
+`[129,72,10;2]` example,
 ERGO-comp computes exact `Gamma=5` in 20.938 ms versus 4.07 s direct and 4.91 s
 labelled CP-SAT. On the GF(4)-Hamming-outer binary `[4095,2718,6;2]` family
 member, ERGO-comp checks all 4,095 outer functionals in a 21-run median of
@@ -213,8 +218,9 @@ exact models, raw samples, hashes, source-depth audit, and ranked commercial
 storage/LDPC follow-ups are in
 `notes/2026-08-26-c962-published-benchmark-audit.md` and
 `notes/2026-08-26-c962-commercial-benchmark-candidates.md`.
-Continue C962 only for additional paper-owned
-algorithm and bound development beyond the exported ERGO-comp baseline.
+Continue C962 with the bounded explicit/ZDD/Roaring representation experiment,
+then only for additional paper-owned algorithm and bound development beyond
+the exported ERGO-comp baseline.
 Python remains the exact differential oracle, and no Rust performance result is
 accepted before cost/witness/load parity.  Then run C325 appendix-only
 verification, followed by C953
