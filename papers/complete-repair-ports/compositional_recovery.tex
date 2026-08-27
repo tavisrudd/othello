@@ -62,10 +62,11 @@ the nonzero functional terms and reduces the answer to
 $M_t(D_P,K_P)+d(I^\perp)$.  Below the resulting helper-cost threshold, restriction and
 zero-extension preserve every normalized recovery equation and its exact
 helper support, not only the minimum cost.  The labelled costs form a closed
-but generally redundant compositional state.  At rank one, quotienting by
-indistinguishability under all compatible outer contexts gives an exactly
-characterized minimal numerical state.  A companion implementation evaluates
-the recursion and returns witnesses; proofs are software-independent.
+but generally redundant compositional state.  At rank one,
+indistinguishability in all compatible outer contexts gives the minimal
+numerical state; this equivalence is a congruence for concatenation.
+A companion implementation evaluates the recursion and returns witnesses;
+proofs are software-independent.
 \end{abstract}
 
 \section{Introduction}
@@ -129,6 +130,9 @@ nonconfinement cost. \\
 What must pass to the next concatenation level?
 & The same labelled costs compose by exact associative min--sum substitution;
 minimizing lifts propagate a witness. \\
+What is the smallest exact rank-one state?
+& Contextual equivalence identifies exactly the states indistinguishable to
+every compatible outer problem and is preserved by further concatenation. \\
 When is every recovered dimension confined through radius $r$?
 & The rank-one escape cost suffices: every rank is confined if and only if
 rank one is confined. \\
@@ -137,7 +141,7 @@ What determines bounded reliability and capacity sharing?
 block-local statistics preserved by restriction and zero-extension. \\
 \bottomrule
 \end{tabular}
-\caption{Five questions answered by different projections of the recovery data.
+\caption{Six questions answered by different projections of the recovery data.
 The first and last rows discard information needed by the composition rows.}
 \label{tab:intro-question-map}
 \end{table}
@@ -242,7 +246,11 @@ The closed labelled state is generally redundant.  At rank one,
 Theorem~\ref{thm:rank-one-contextual-state} quotients it by indistinguishability
 under every compatible finite outer context and identifies the minimal
 numerical response exactly: the zero-sector cost and the cheapest response to
-each projective functional line an outer code can probe.  At rank $t$,
+each projective functional line an outer code can probe.  In optimization
+language, this is a Myhill--Nerode-type minimization theorem: two rank-one
+states are equivalent exactly when no compatible outer problem distinguishes
+their optimal costs, and the resulting coarsest quotient is a congruence for
+further concatenation.  At rank $t$,
 Proposition~\ref{prop:rank-bounded-outer-tests} bounds the required outer-test
 dimension by $t$; it does not claim a minimal quotient at higher rank.
 
@@ -281,11 +289,11 @@ BlomqvistEtAl2020}.  Their objective is decoding reliability; here the labels
 index exact target-normalized support costs and determine the first
 nonconfined recovery.
 
-Our contextual terminology parallels behavioural minimization for weighted
-automata over semirings \cite{Mohri2009}; no automata-minimization theorem is
-imported.  Section~\ref{sec:related-work} gives the full comparison with these
-and the adjacent repair, service-rate, concatenation, and coset-weight
-literatures.
+The Myhill--Nerode analogy is structural: contextual equivalence parallels
+behavioural minimization for weighted automata over semirings \cite{Mohri2009};
+no automata-minimization theorem is imported.
+Section~\ref{sec:related-work} gives the full comparison with these and the
+adjacent repair, service-rate, concatenation, and coset-weight literatures.
 
 ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis) is an
 exact compiler and solver derived from these reductions.  From finite linear
