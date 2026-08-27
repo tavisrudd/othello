@@ -62,8 +62,8 @@ The exact-arithmetic generator
 starts from the transcribed type-`I₃` matrices and twenty Cox quadrics. It
 reconstructs the saturated rank-three lattice, Cox weights, residual rank-two
 quotient, tangent Jacobian, four symbolic evaluation determinants, and the
-smooth-moduli witness cover. It also constructs the evaluation-kernel slice
-through the evaluation point. For each of the six empty localized branches,
+four-open cover of the smooth parameter locus. It also constructs the linear section defined by
+the kernel of evaluation at the point \(x\). For each of the six empty localized branches,
 [`verification/groebner-empty-certificates.json`](verification/groebner-empty-certificates.json)
 retains an exact identity expressing a nonzero constant in the localized
 branch ideal. The generator renders all computation-derived values printed in

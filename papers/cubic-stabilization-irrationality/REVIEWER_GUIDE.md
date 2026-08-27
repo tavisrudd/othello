@@ -32,13 +32,15 @@ calculation and the evidence boundary.
    equations parametrize a finite cover of an orbit rather than a rational
    section.
 3. **Why does the criterion apply to quartic del Pezzo surfaces?** Section 3
-   imports the projective Cox model and its birational tangent projection
-   from Tschinkel--Zhang.  It constructs a Galois-stable saturated rank-three
+   imports the projective Cox model and the descended form of its birational
+   tangent projection from Tschinkel--Zhang; the general tangent-projection
+   theorem for varieties with one apparent double point is due to
+   Ciliberto--Mella--Russo.  The section constructs a Galois-stable saturated rank-three
    subtorus, four selected weight spaces whose differences form a basis, and
    the complementary subspace `B`.  Proposition `prop:tangent-section`
    constructs the required tangent linear section and explains its descent
    for types `I0`--`I3`.
-4. **What does the computation prove?** The four rows in the witness table
+4. **What does the computation prove?** The four rows in the parameter table
    give evaluation determinants `D_i` and smoothness minors `M_i`.  Appendix A
    proves that the opens `D_i M_i != 0` cover the entire smooth Cox-moduli
    chart.  The exact certificate retains the six empty localized cases and

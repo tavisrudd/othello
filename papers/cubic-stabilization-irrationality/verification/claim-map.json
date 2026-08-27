@@ -31,13 +31,13 @@
   },
   "prop:tangent-section": {
     "cautions": "The subgroup classification is complete only for the four hereditary-H1 types; no classification of all W(D5) subgroups is claimed.",
-    "conclusion": "A codimension-three tangent linear section and an evaluation point on its quotient component and in the tangent-projection isomorphism open exist geometrically, and descend for quartic del Pezzo surfaces with a rational point in each of the four types.",
+    "conclusion": "Geometrically, there is a codimension-three tangent linear section containing a point x on the quotient component where tangent projection is an isomorphism. For each of the four types, the points and the section descend when the surface has a rational point.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "ec4e5b6909e21b395f5bca7f456055f68df891589301dff09f7110881e5845f8",
+    "digest": "3185c31ca3de7f92a618efd2f7122a616a9a4b5267132ac29bcc6c8fb3663667",
     "environment": "proposition",
     "hypotheses": "The Cox parameters lie on the smooth open; for ground-field descent the quartic del Pezzo surface has a rational point and the Galois image has type I0, I1, I2, or I3.",
-    "objects": "The saturated rank-three subtorus, complementary Cox-coordinate subspace, and tangent-frame incidence."
+    "objects": "The saturated rank-three subtorus, complementary Cox-coordinate subspace, and the incidence conditions defining the tangent section."
   },
   "rem:saturation": {
     "cautions": "The degree-two artifact belongs to the parameter isogeny, not the Rosenlicht quotient.",
