@@ -25,10 +25,11 @@ theorem \cite{HassettTschinkel}.  More recently, Engel, de~Gaay Fortman, and
 Schreieder proved that a very general complex cubic threefold is not stably
 rational \cite[Corollary~1.4]{EGFS}, whereas Tschinkel and Zhang constructed
 explicit stably rational smooth cubic threefolds over \(\mathbf Q\)
-\cite[Theorem~1.3]{TschinkelZhangTorsors}.  The theorem above is uniform
-across this divide: it also obstructs the first stabilization of those
-stably rational examples.  A companion paper proves that this bound is sharp:
-it gives two explicit examples for which \(X\times\PP^2\) is rational
+\cite[Theorem~1.3]{TschinkelZhangTorsors}.  The theorem above applies uniformly
+in both situations: it also proves that the first stabilization of those
+stably rational examples is irrational.  A companion paper proves that this
+bound is sharp: it gives two explicit examples for which \(X\times\PP^2\) is
+rational
 \cite{RuddSharpness}.
 
 The proof uses the quantum \(D\)-module (QDM): the cohomology module over the
@@ -54,9 +55,10 @@ invariant.
 The marker counts rank-two blocks for which the centered leading term \(N\) of
 Euler multiplication is nonzero and satisfies \(N^2=0\).  Horizontality of the
 Poincar\'e pairing makes a canonical elementary modification regular singular,
-while flatness gives a Lax equation for its residue and hence preserves its
-eigenvalues.  We count the block when the two residue eigenvalues are distinct
-modulo \(\Z\), equivalently when the two formal exponent classes are distinct.
+while flatness gives a Lax equation for its residue, whose eigenvalues are
+therefore preserved.  We count the block when the two residue eigenvalues are
+distinct modulo \(\Z\), equivalently when the two formal exponent classes are
+distinct.
 Using Beauville's quantum product formulas, we compute the exponent
 representatives \(-1/6\) and \(-5/6\) for the cubic block, with difference
 \(2/3\).  The resulting marker
@@ -76,8 +78,8 @@ include work on cubic, Gushel--Mukai, and K\"uchle fourfolds
 \cite{GuereCubicFourfold,BenedettiManivelPerrin,
 BenedettiFayGuereManivelPerrin}.
 
-The marker used here is narrower: it uses no Hodge structure and records only
-the rank-two formal-exponent condition above.  Its purpose is the
+The marker used here retains less structure: it uses no Hodge structure and
+records only the rank-two formal-exponent condition above.  Its purpose is the
 one-stabilization problem.  The additional ingredients are a specialization
 that keeps the center summands distinct in Iritani's blowup comparison, the
 vanishing of the marker on points, curves, and surfaces, and Iritani--Koto's
@@ -141,20 +143,18 @@ member \(X\), both \(X\) and \(X\times\PP^1\) are universally
 \(CH_0\)-trivial, while \(X\times\PP^1\) is irrational.
 \end{corollary}
 
-In the next statement, the displayed hypersurface lies in \(\PP^4\) and is
-the Fermat cubic threefold.
-
 \begin{corollary}[Fermat cubic]
 \label{cor:fermat-separation}
 \coverage{conditional_deduction}%
 \lean{fermatCubic_universalCH0_and_irrational_stabilization}%
 \uses{thm:every-cubic}%
 \imports{CT:separated-variable-criterion}%
-The fourfold
+Let
 \[
-  \{x_1^3+x_2^3+x_3^3+x_4^3+x_5^3=0\}\times\PP^1
+  X=\{x_1^3+x_2^3+x_3^3+x_4^3+x_5^3=0\}\subset\PP^4.
 \]
-is universally \(CH_0\)-trivial and irrational.
+Then the fourfold \(X\times\PP^1\) is universally \(CH_0\)-trivial and
+irrational.
 \end{corollary}
 
 \begin{corollary}[Coprime-degree cubics]

@@ -82,7 +82,7 @@
       "hypotheses": "The almost-diagonal criterion, in the form that a variety whose defining polynomial admits such a decomposition is universally CH0-trivial; preservation of universal CH0-triviality under product with the projective line; the identification of the defining polynomial of the given variety with the Fermat form; and the hypotheses used in the one-stabilization marker theorem.",
       "conclusion": "The projective-line stabilization of that variety is universally CH0-trivial and is not rational.",
       "cautions": "Lean constructs no hypersurface, no Chow group, and no projective-bundle formula, and proves nothing about smoothness: the criterion enters as a premise about the supplied predicate, and the ground field of the geometric statement is not represented. What is proved rather than assumed is the combinatorial hypothesis of that criterion. Irrationality enters through the same hypotheses of the rank-two formal-exponent marker argument as thm:every-cubic.",
-      "statement_digest": "5181875068f9603708f42592697e31e2853ae3f942b17c5bf6f2df14dbfdbcb2",
+      "statement_digest": "05a19b2b21c8694d055d842ada97351bf4ecc5d613b2fe09a11daf3805b10797",
       "terminal_digest": "709358f4ae2857b3fa8a8ae81b8288ecb3bbf759c74d1b80ca48b06b6b2cd3db"
     },
     {
