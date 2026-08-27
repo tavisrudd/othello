@@ -48,8 +48,8 @@ undo the completed Version 1 publication record.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `high-weight-grs-cosets.pdf` |
-| Local built PDF SHA-256 | `c6409cf1a1fb4bb31619690f59ad389e1b9c1f8902a64514bb8f75382fbde3f9` |
-| Local built PDF bytes | `304900` |
+| Local built PDF SHA-256 | `171826dc1b892d92b078bfa444cfb4b4ae8ff5f68775ab6f203e9ef291c581f1` |
+| Local built PDF bytes | `305153` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |

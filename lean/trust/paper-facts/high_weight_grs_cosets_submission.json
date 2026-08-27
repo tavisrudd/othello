@@ -903,10 +903,10 @@
       "sha256": "44aedca26547f7f77cfbadc9c607d8018fda3e8327f1cb77767594651eb7ea22"
     },
     {
-      "bytes": 304900,
+      "bytes": 305153,
       "pages": 42,
       "path": "papers/high_weight_grs_cosets/high-weight-grs-cosets.pdf",
-      "sha256": "c6409cf1a1fb4bb31619690f59ad389e1b9c1f8902a64514bb8f75382fbde3f9"
+      "sha256": "171826dc1b892d92b078bfa444cfb4b4ae8ff5f68775ab6f203e9ef291c581f1"
     }
   ],
   "schema_version": 1,

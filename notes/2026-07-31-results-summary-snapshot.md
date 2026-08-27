@@ -59,7 +59,7 @@ The results are grouped as follows.
 9. *Integral Secant Distributions and Improved Bounds for Complete
    \((k,n)\)-Arcs* — exact integer degree envelopes and modular-lift
    improvements for complete higher arcs.
-10. *High-weight cosets of generalized and extended Reed–Solomon codes*.
+10. *High-Weight Cosets of Generalized and Extended Reed–Solomon Codes*.
 11. *Exact Transfer of Bounded Linear Recovery and Relative Weight
    Hierarchies* — local memory, exact rank-stratified transfer, and
    compositional recovery costs.
@@ -1980,7 +1980,7 @@ centered incidence descent produces a signed codeword of weight \(4q-6\), with
 no tangents and opposite signs on every support two-secant.  This is a sharp
 structural reduction, not an asymptotic construction or a completed theorem.
 
-## *High-weight cosets of generalized and extended Reed–Solomon codes*
+## *High-Weight Cosets of Generalized and Extended Reed–Solomon Codes*
 
 A projective Reed–Solomon code is the evaluation code of polynomials of bounded
 degree on the rational normal curve.  For every redundancy (r\ge6), the main
@@ -3676,7 +3676,7 @@ are vacuous because a natural number can encode the whole residual.
   programme proves \(t_7(2,9)=39\) structurally and reduces the first
   \(q=27\) target to two Frobenius branches and a signed support codeword; no
   asymptotic construction is yet claimed.
-- ***High-weight cosets of generalized and extended Reed–Solomon codes:***
+- ***High-Weight Cosets of Generalized and Extended Reed–Solomon Codes:***
   exact weight-(r) and weight-((r-1)) shells at arbitrary redundancy in the
   stated field range, with sharp refinements through redundancy seven; not a
   proof of the general deep-hole conjecture.

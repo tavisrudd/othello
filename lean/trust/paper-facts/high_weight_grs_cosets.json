@@ -903,17 +903,17 @@
       "sha256": "44aedca26547f7f77cfbadc9c607d8018fda3e8327f1cb77767594651eb7ea22"
     },
     {
-      "bytes": 304900,
+      "bytes": 305153,
       "pages": 42,
       "path": "papers/high_weight_grs_cosets/high-weight-grs-cosets.pdf",
-      "sha256": "c6409cf1a1fb4bb31619690f59ad389e1b9c1f8902a64514bb8f75382fbde3f9"
+      "sha256": "171826dc1b892d92b078bfa444cfb4b4ae8ff5f68775ab6f203e9ef291c581f1"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/high_weight_grs_cosets/high-weight-grs-cosets.tex",
-      "sha256": "7ff20cd9c6a349668c9faf0085f652b0d2d1af544a9a7d6868779c4a41b80955"
+      "sha256": "44fe4cfc2c92441290bae38ef74dce9f8c764b9e6a4b43027ca29cc9e4328f43"
     },
     {
       "path": "papers/high_weight_grs_cosets/formal-annotations.tex",
@@ -984,7 +984,7 @@
       "sha256": "79e2c4f4838d09344ba9ab55d71327a126e070e70dff8070205e8d05cc7cd51a"
     }
   ],
-  "title": "High-weight cosets of generalized and extended Reed--Solomon codes",
+  "title": "High-Weight Cosets of Generalized and Extended Reed--Solomon Codes",
   "title_normalized": "high-weight cosets of generalized and extended reed-solomon codes",
   "untracked_bibliography": [
     "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl",

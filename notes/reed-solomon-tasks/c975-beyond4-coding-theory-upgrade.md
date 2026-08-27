@@ -20,7 +20,7 @@ final read are complete.  The authority is being renamed to
 
 ## Objective
 
-Make *High-weight cosets of generalized and extended Reed--Solomon codes* as strong
+Make *High-Weight Cosets of Generalized and Extended Reed--Solomon Codes* as strong
 and broadly relevant to modern coding theory as the proved results permit.
 The paper should lead with its arbitrary-redundancy structural theorem and
 the resulting distance-partition/code-extension statements, not with the

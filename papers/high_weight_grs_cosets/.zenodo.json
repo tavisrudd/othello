@@ -1,5 +1,5 @@
 {
-  "title": "High-weight cosets of generalized and extended Reed–Solomon codes",
+  "title": "High-Weight Cosets of Generalized and Extended Reed–Solomon Codes",
   "description": "For every redundancy r≥6, this preprint classifies all cosets of weight at least r−1 for sufficiently long generalized and extended Reed–Solomon codes supported on a projective line with any prescribed finite set of points deleted. The result gives exact deep-hole shells, all MDS and NMDS one-column extensions, family-wise minimum-support counts, and aggregate weight enumerators. Its proof combines coherent polar contraction, an exact computer-assisted terminal decomposition, a recursive carrier theorem, simultaneous finite-field selection, and a genus-one terminal count. Detailed redundancy-five through redundancy-seven results provide sharper fixed-level refinements. The electronic supplement exposes the exact computational and imported-theorem boundaries.",
   "creators": [
     {
