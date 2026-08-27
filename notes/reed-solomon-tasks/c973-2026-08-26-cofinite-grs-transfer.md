@@ -88,6 +88,47 @@ range `q>=2r-1` for odd `q` and `q>=2r-2` for even `q`; the stronger pointed
 threshold is needed for the complete next shell and the `r-2` certificate,
 not for the Cheng--Murray deep-shell conclusion.
 
+Under the same large-characteristic hypotheses, two free consequences sharpen
+the coding interpretation.  For a uniform syndrome in `F_q^r`,
+
+\[
+ \Pr[d_S(f)=r]=\frac{(q-1)s}{q^r},                         \tag{5c}
+\]
+
+and
+
+\[
+ \Pr[d_S(f)\ge r-1]
+ =\frac{q-1}{q^r}\left(
+ s+\frac{q(q+1)^2}{2}
+ +\frac{(q-1)s(2q+1-s)}2\right).                          \tag{5d}
+\]
+
+For fixed `r,s`, the latter is
+`(1/2)q^(4-r)+O_(r,s)(q^(3-r))`, while the deep probability is
+`s q^(1-r)+O_s(q^(-r))`.  In particular, the exact worst and next-to-worst
+tail is sparse for every fixed `r>=6`.  One also gets the average-distance
+upper bound
+
+\[
+ \mathbf E[d_S(f)]\le r-2+
+ \frac{(q-1)(N_{r-1}+2s)}{q^r}.                            \tag{5e}
+\]
+
+Finally, if `N_j(s)` denotes the shell count after deleting `s` points and
+the theorem hypotheses hold at both `s` and `s+1`, then
+
+\[
+ N_r(s+1)-N_r(s)=1,
+ \qquad
+ N_{r-1}(s+1)-N_{r-1}(s)=(q-1)(q-s).                      \tag{5f}
+\]
+
+The second identity says geometrically that the new omitted point has
+`q-s` secants to still-retained curve points which were not already incident
+with the old omitted set, and each contributes `q-1` interior points.  This
+is an exact deletion recursion, not an asymptotic estimate.
+
 The deep shell in this high-rate regime is already forced by classical MDS
 extension theory.  The potentially new strengthening is the exact
 next-to-deep shell together with the constructive `r-2` witness outside the
@@ -356,6 +397,8 @@ the intrinsic NRC span relation, while the domain adapter certifies monomial
 equivalence.  Tests should cover empty `A`, `A={infinity}`, multiple omitted
 points, duplicate rejection, multiplier covariance, every shell variant, and
 the invariant `(q-1)` conversion from projective directions to cosets.  The
+closed shell oracle should also test the deletion difference (5f) and the
+probability normalization (5c)--(5d) without enumerating `PG(r-1,q)`.  The
 new public types must not add evaluation-set, family, or verdict strings;
 those should be enums or validated newtypes.  This work is outside C973's
 manuscript-frozen and software-frozen ownership.
@@ -431,6 +474,8 @@ new application section.
    `q>=Q^*_(r+s)` to make the virtual-redundancy law visible and save notation.
 3. Replace the PRS-only high-characteristic conclusion by the cofinite-GRS
    top-shell theorem.  Display the `s=0` and `s=1` consequences in two lines.
+   Fold (5c)--(5f) into the same count paragraph; they require no new proof
+   subsection and give the software/average-covering interpretation.
 4. Cite Seroussi--Roth for the deep shell and say explicitly that the affine
    Cheng--Murray case is already known in this high-rate range.  Emphasize the
    new distance-`r-1` shell only after its audit clears.
