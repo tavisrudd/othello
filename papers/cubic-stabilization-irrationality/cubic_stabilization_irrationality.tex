@@ -41,12 +41,13 @@ the least \(m\) such that \(X\times\PP^m\) is rational is two, over both
 generally that if \(k\) has characteristic zero, \(S\) is a smooth quartic del
 Pezzo surface with \(S(k)\ne\varnothing\), and \(\Pic(S_{\bar k})\) is a
 stably permutation Galois module, then \(S\times\A^2\) is \(k\)-rational.  We
-identify a rational quotient of the projective Cox model by a saturated
-rank-three subtorus; the residual two-dimensional torus is rational.  Applying
+construct a saturated rank-three subtorus acting on the projective Cox model
+and prove that the resulting quotient is rational; the residual two-dimensional
+torus is rational.  Applying
 this theorem to the quartic del Pezzo fibrations of Tschinkel and Zhang, we
 prove that every member of both cubic series is rational over \(\mathbf Q\)
-after multiplication by \(\PP^2\), giving a uniform two-dimensional bound for
-their stable-rationality results.  Consequently
+after multiplication by \(\PP^2\), showing uniformly that two stabilizing
+variables suffice.  Consequently
 the stabilization level is two on explicit examples in cubic-threefold moduli
 and infinite at a very general point.  We also obtain smooth projective
 fourfolds \(Y/\mathbf Q\) that remain nonrational over \(\mathbf C\) but for
@@ -63,9 +64,9 @@ Tschinkel and Zhang constructed explicit stably rational smooth cubic
 threefolds over \(\mathbf Q\) \cite[Theorem~1.3]{TZ}.  On the other hand, the
 one-stabilization theorem shows that every smooth complex cubic threefold
 remains irrational after multiplication by \(\PP^1\)
-\cite[Theorem~1.1]{RuddM1}.  Thus at least two stabilizing variables are
-needed for the examples of Tschinkel and Zhang.  We prove that this lower
-bound is attained by two of their examples.
+\cite[Theorem~1.1]{RuddM1}.  Thus the stabilization level of the examples of
+Tschinkel and Zhang is at least two.  We prove that this lower bound is
+attained by two of their examples.
 
 For a projective variety \(V/k\), put
 \[
@@ -121,28 +122,30 @@ are \(k\)-rational.  In particular, this holds for every stably
 \(k\)-rational smooth quartic del Pezzo surface.
 \end{theorem}
 
-The use of universal torsors to prove stable rationality goes back to
-Beauville, Colliot-Th\'el\`ene, Sansuc, and Swinnerton-Dyer
-\cite{BCTSSD}.  Tschinkel and Zhang prove the rationality of universal torsors
-over quartic del Pezzo surfaces and classify the four minimal Galois types
-relevant to stable rationality.  We use their Cox model and its
-one-apparent-double-point property, Galois classification, and generic
-splitting of the universal torsor \cite{TZ}.  The tangent-projection theorem
-for smooth varieties with one apparent double point is due to Ciliberto,
-Mella, and Russo \cite[Corollary~4.2]{CMR}.  The projective Cox model may be
-singular, so we use the stronger form proved in \cite[Theorem~2.4]{TZ}.  Our
-additional input is a rank-three quotient of that model.
+Write \(Z=\operatorname{Proj}\operatorname{Cox}(S)\) for the projective Cox
+model.  The new ingredient is a saturated rank-three subtorus \(T_3\) of the
+rank-five torus acting on \(Z\), chosen so that \(Z/T_3\) is rational and the
+residual torus has dimension two.  This is why the construction gives exactly
+a two-variable stabilization bound.
 
-When \(S(k)\ne\varnothing\), the hypothesis on \(\Pic(S_{\bar k})\) is
-condition~(1) of \cite[Corollary~4.3]{TZ}.  Manin proves that stable
-rationality implies this condition \cite[Theorem~2.2]{Manin1966};
-\cite[Proposition~4.1 and Lemma~4.2]{TZ} identify the remaining equivalent
-conditions.  We prove that condition~(1) implies the stronger conclusion
-that \(S\times\A^2\) is rational.  The stable-permutation resolution in
-\cite[p.~13]{TZ} gives a uniform bound of eleven variables.  For type
-\(I_0\), a two-variable bound was already proved by Shepherd-Barron
-\cite{ShepherdBarron}; see also \cite[Remark~4.4]{TZ}.  The quotient
-construction below gives the two-variable bound uniformly for all four types.
+The use of universal torsors to prove stable rationality goes back to
+Beauville, Colliot-Th\'el\`ene, Sansuc, and Swinnerton-Dyer \cite{BCTSSD}.
+Tschinkel and Zhang prove the rationality of universal torsors over quartic del
+Pezzo surfaces and classify the four minimal Galois types relevant to stable
+rationality.  We use their Cox model and its one-apparent-double-point
+property, Galois classification, and generic splitting of the universal torsor
+\cite{TZ}.  The tangent-projection theorem for smooth varieties with one
+apparent double point is due to Ciliberto, Mella, and Russo
+\cite[Corollary~4.2]{CMR}.  Because \(Z\) may be singular, we use the stronger
+form proved in \cite[Theorem~2.4]{TZ}.
+
+When \(S(k)\ne\varnothing\), the stable-permutation hypothesis is condition~(1)
+of \cite[Corollary~4.3]{TZ}; \cite[Proposition~4.1 and Lemma~4.2]{TZ}
+identify its equivalent forms, and stable rationality implies it by
+\cite[Theorem~2.2]{Manin1966}.  The resolution in \cite[p.~13]{TZ} gives a
+uniform bound of eleven variables.  We lower this bound to two for all four
+Galois types.  For type \(I_0\), the two-variable bound was already proved by
+Shepherd-Barron \cite{ShepherdBarron}; see also \cite[Remark~4.4]{TZ}.
 
 For \(r\geq0\), let \(X_{j,r}\subset\PP^{r+4}_{\mathbf Q}\) be obtained
 from equation \eqref{eq:cubic-one} or \eqref{eq:cubic-three} by adding
@@ -189,9 +192,10 @@ On the moduli space of smooth complex cubic threefolds,
 
 Here is the proof of the surface theorem.  Let \(Z\) be the projective Cox
 model of \(S\).  The rank-five torus \(T_0\) acting on \(Z\) contains a
-saturated rank-three subtorus \(T_3\).  Four of its weight spaces form a
-Galois-stable set, and their weight differences form a lattice basis.  A
-codimension-three tangent section meets a general \(T_3\)-orbit once, so
+  saturated rank-three subtorus \(T_3\).  Four of its weight spaces form a
+Galois-stable set, and their weight differences form a \(\mathbf Z\)-basis of
+the character lattice.  A codimension-three tangent section meets a general
+\(T_3\)-orbit once, so
 tangent projection identifies \(Z/T_3\) birationally with \(\PP^4\).
 Generic splitting of the universal torsor also gives
 \(Z/T_3\sim_k S\times(T_0/T_3)\).
@@ -211,6 +215,9 @@ torus orbit that lies in a suitable codimension-\(r\) linear section.  If the
 section contains the centre of a birational tangent projection, that
 projection parametrizes the relevant component of the section, and hence the
 quotient.
+
+The descent hypothesis below is what turns this geometric slice over \(\ks\)
+into a \(k\)-rational quotient.
 
 Let \(Z\subset\PP(V)\) be a geometrically integral \(n\)-fold over an
 infinite field \(k\).  At a smooth point \(p\in Z(k)\), write
@@ -232,7 +239,7 @@ change has one apparent double point and whose \(k\)-points are dense.
 \coverage{absent}%
 Let a rank-\(r\) \(k\)-torus \(T\) act projectively linearly and generically
 freely on \(Z\subset\PP(V)\), and suppose that the generic tangent projection
-\(\pi_p\) is birational to \(\PP^n\).  Choose a diagonal linear lift of the
+\(\pi_p\) is birational onto \(\PP^n\).  Choose a diagonal linear lift of the
 action over \(\ks\).  Its weights are determined up to a common translation.
 Suppose that it has nonzero weight spaces
 \(V_{w_0},\ldots,V_{w_r}\) such that
@@ -294,9 +301,10 @@ Laurent monomials in the displayed ratios.  The construction is
 unchanged if all weights are translated by one character, since only their
 differences occur.  It is also independent of the ordering of the selected
 weight spaces: intrinsically, \(s(q)=t(q)q\) is the unique point of
-\(Tq\cap\Lambda\).  Because \(W\), \(\widehat B\), and \(\Lambda\) descend,
-this uniqueness makes \(s\) Galois equivariant.  Thus \(s\) is a
-\(k\)-rational, orbit-invariant retraction on the open where the action is
+\(Tq\cap\Lambda\).  Because \(W\), \(\widehat B\), and \(\Lambda\) are defined
+over \(k\), Galois conjugation preserves this incidence problem; uniqueness of
+the intersection point therefore makes \(s\) Galois equivariant.  Thus \(s\) is
+a \(k\)-rational, orbit-invariant retraction on the open where the action is
 free and the minors do not vanish.  Let \(C\) be the closure of its image.
 Then \(C\dashrightarrow Z/T\) is birational and
 \(C\subset\Lambda\cap Z\).  Since \(x\in\Lambda\), the vector
@@ -306,12 +314,15 @@ Then \(C\dashrightarrow Z/T\) is birational and
 The image of \(\Lambda\) under \(\pi_p\) is a linear
 \(\PP^{n-r}\subset\PP^n\), because \(\Lambda\) contains the centre of the
 linear projection.  The irreducible variety \(C\) has dimension \(n-r\),
-and \(\pi_p\) is injective on the nonempty open \(C\cap U_p\).  Consequently
+and \(\pi_p\) is injective on the nonempty open \(C\cap U_p\).  Its image
+therefore has dimension \(n-r\) and is dense in the linear \(\PP^{n-r}\).
+Thus
 \begin{equation}
  \pi_p|_C:C\dashrightarrow\PP^{n-r}
  \label{eq:restricted-tangent-projection}
 \end{equation}
-is birational.  Hence \(Z/T\) is \(k\)-rational.
+is dominant and generically injective, hence birational.  Therefore \(Z/T\) is
+\(k\)-rational.
 
 We record the inverse and its domain.  Choose linear forms
 \(\rho_0,\ldots,\rho_{n-r}\) whose restrictions give homogeneous coordinates
@@ -409,8 +420,31 @@ type-\(I_3\) Galois image act on this basis by
  \IThreeActionTwo.
 \]
 Let \(T_3\subset T_0\) be the corresponding rank-three subtorus.  Four
-groups of Cox generators span weight spaces with the following projective
-\(T_3\)-weights:
+\begin{remark}[Saturation and the projective kernel]
+\label{rem:saturation}
+\coverage{absent}%
+In the type-\(I_1\) description, the three visible sign cocharacters in the
+last three coordinates are
+\[
+ (0,1,1),\quad(1,0,1),\quad(1,1,0).
+\]
+They span the even-sum sublattice of \(\Z^3\), of index two.  Its saturation
+is \(\Z^3\), obtained by adjoining
+\[
+ (1,1,1)=\tfrac12\bigl((0,1,1)+(1,0,1)+(1,1,0)\bigr).
+\]
+The map from the three parameter copies of \(\Gm\) to their image in the
+projective torus has kernel \(\boldsymbol\mu_2\).  The degree two obtained
+from the unsaturated parameters counts this kernel; it is not the degree of
+the Rosenlicht quotient.  Saturation gives the integral-basis condition in
+Theorem~\ref{thm:torus-quotient}.
+\end{remark}
+
+We seek four projective weight spaces whose pairwise weight differences
+generate the full rank-three character lattice and whose complement is Galois
+stable.  These conditions supply, respectively, the unique orbit correction
+and the descent required by Theorem~\ref{thm:torus-quotient}.  The following
+four groups of Cox generators span such weight spaces:
 \begin{center}
 \IThreeWeightTable
 \end{center}
@@ -436,26 +470,6 @@ selected weight-space components are nonzero, a projective stabilizer fixes
 their three ratios.  The three weight differences form a basis, so that
 stabilizer is trivial.  In particular, the \(T_3\)-action is generically free.
 
-\begin{remark}[Saturation and the projective kernel]
-\label{rem:saturation}
-\coverage{absent}%
-In the type-\(I_1\) description, the three visible sign cocharacters in the
-last three coordinates are
-\[
- (0,1,1),\quad(1,0,1),\quad(1,1,0).
-\]
-They span the even-sum sublattice of \(\Z^3\), of index two.  Its saturation
-is \(\Z^3\), obtained by adjoining
-\[
- (1,1,1)=\tfrac12\bigl((0,1,1)+(1,0,1)+(1,1,0)\bigr).
-\]
-The map from the three parameter copies of \(\Gm\) to their image in the
-projective torus has kernel \(\boldsymbol\mu_2\).  The degree two obtained
-from the unsaturated parameters counts this kernel; it is not the degree of
-the Rosenlicht quotient.  Saturation gives the integral-basis condition in
-Theorem~\ref{thm:torus-quotient}.
-\end{remark}
-
 \begin{proposition}[A tangent section for the four Galois types]
 \label{prop:tangent-section}
 \coverage{absent}%
@@ -474,36 +488,6 @@ Theorem~\ref{thm:torus-quotient} holds at \(x\) for \(T_3\).  If
 \end{proposition}
 
 \begin{proof}
-Use the standard blowup points
-\begin{equation}
- (1:0:0),(0:1:0),(0:0:1),(1:1:1),(1:a:b),
- \qquad \Delta=ab(a-1)(b-1)(a-b)\ne0.
- \label{eq:moduli-discriminant}
-\end{equation}
-For a tangent point \(p\) parametrized by \(z=(z_1,z_2,z_3)\), the space of
-tangent hyperplanes containing \(B\) has dimension four.  Evaluation on the
-four selected weight spaces gives a \(4\)-by-\(4\) matrix.  The table gives
-four exact witnesses for the open cover \eqref{eq:witness-cover}; its
-individual values play no conceptual role.  In each row, \(z\) specifies
-\(p\), \(e=(e_1,\ldots,e_5)\) gives the five coordinates
-\(E_1,\ldots,E_5\) of \(x\), and the public generator obtains the remaining
-coordinates \(L_{ij}\) and \(Q\) from \(e,z'\) and verifies all twenty Cox
-quadrics.
-\begin{center}
-\SliceWitnessTable
-\end{center}
-
-Let \(D_i\) be the determinant of this evaluation matrix, and let \(M_i\)
-be the fixed \(8\)-by-\(8\) Jacobian minor at the same tangent point.  After
-discarding nonzero rational factors, their numerators are recorded in
-Appendix~\ref{app:slice-certificate}.  Choice \(i\) works on the open
-\(D_iM_i\ne0\), where it certifies the evaluation and smoothness conditions.
-The appendix proves, by eight localized cases and
-one explicit B\'ezout identity, that
-\begin{equation}
- \bigcup_{i=1}^4\{D_iM_i\ne0\}=\{\Delta\ne0\}.
- \label{eq:witness-cover}
-\end{equation}
 For \(p\in Z_{\mathrm{sm}}\), let \(H_p\) be the space of tangent
 hyperplanes containing \(B\).  If \(x=\sum_{j=0}^3x_j+x_B\) is its
 weight-space decomposition, evaluation gives
@@ -515,10 +499,10 @@ weight-space decomposition, evaluation gives
 Let \(\mathcal E_{\mathrm{ev}}\subset Z_{\mathrm{sm}}\times Z\) be the
 open locus where \(H_p\) has dimension four,
 \(\operatorname{ev}_{p,x}\) is an isomorphism, and the \(T_3\)-action is
-free at \(x\).  The four choices above show that this open is nonempty for
-every split Cox model attached to a smooth quartic del Pezzo surface.
+free at \(x\).  These are the open conditions needed to construct the
+codimension-three orbit slice.
 
-We now impose the tangent-projection condition uniformly in \(p\).  Let
+We impose the tangent-projection condition uniformly in \(p\).  Let
 \(G\subset Z_{\mathrm{sm}}\) be the nonempty open over which the tangent
 projection is birational.  The affine tangent spaces form a subbundle
 \(\widehat{\mathcal T}\subset V\otimes\mathcal O_G\).  Put
@@ -535,7 +519,21 @@ restricts to an isomorphism
 between dense open subsets of its source and target.  Denote the source open
 by \(\mathcal U\).  Thus \((p,x)\in\mathcal U\) is a single open condition on
 the pair, and its fibre over \(p\) is an open \(U_p\) on which \(\pi_p\) is
-an isomorphism.  Since \(G\times Z\) is geometrically integral, the open
+an isomorphism.
+
+It remains to show that \(\mathcal E_{\mathrm{ev}}\) is nonempty on every
+split Cox model attached to a smooth quartic del Pezzo surface.  Use the
+standard blowup points
+\begin{equation}
+ (1:0:0),(0:1:0),(0:0:1),(1:1:1),(1:a:b),
+ \qquad \Delta=ab(a-1)(b-1)(a-b)\ne0.
+ \label{eq:moduli-discriminant}
+\end{equation}
+Appendix~\ref{app:slice-certificate} records four exact split-coordinate
+witnesses and proves that their evaluation-and-smoothness opens cover
+\(\{\Delta\ne0\}\), as stated in \eqref{eq:witness-cover}.  Hence
+\(\mathcal E_{\mathrm{ev}}\) is nonempty.  Since \(G\times Z\) is
+geometrically integral, the intersection
 \(\mathcal U\cap(\mathcal E_{\mathrm{ev}}|_{G\times Z})\) is nonempty.
 
 Choose \((p,x)\) in this intersection.  Then \(p\) is general for tangent
@@ -547,9 +545,8 @@ The inverse image under \(\operatorname{ev}_{p,x}\) of the hyperplane
 that vanish at \(x\).  Choose a basis
 \(\lambda_1,\lambda_2,\lambda_3\) and let \(\Lambda\) be their common zero
 locus.  Then \(x\in\Lambda\cap U_p\), and the four maximal minors of the
-three evaluation rows are all nonzero.  Thus the point satisfying the minor
-condition is the same point that lies in the tangent-projection isomorphism
-open.
+three evaluation rows are all nonzero.  Thus the same point \(x\) satisfies
+both the minor condition and the tangent-projection condition.
 
 It remains to obtain \(p\), \(x\), and \(\Lambda\) over the ground field.
 Fix a \(k\)-form whose Galois image has one of the four types.
@@ -575,10 +572,12 @@ For type \(I_3\), stability of \(N_3\), \(B\), and the set of four selected
 Cox weight spaces is checked on the two displayed generators.  Up to conjugacy in
 \(W(D_5)\), the groups of types \(I_0,I_1,I_2\) are subgroups of the group of
 type \(I_3\) \cite[Lemma~4.2]{TZ}.  Restriction and a change of marking
-preserve the same data.  This exhausts the four Galois images allowed by the
-condition that \(H^1\) vanish on every subgroup, which follows here from the
-stable-permutation hypothesis.  It is not a classification of arbitrary
-subgroups of \(W(D_5)\).
+preserve the same data.  The stable-permutation hypothesis implies that
+\(H^1(H,\Pic(S_{\bar k}))=0\) for every subgroup \(H\) of the Galois image.
+In the minimal quartic del Pezzo case, Tschinkel and Zhang show that this
+leaves exactly the four types \(I_0,\ldots,I_3\)
+\cite[Proposition~4.1 and Lemma~4.2]{TZ}.  This is not a classification of
+arbitrary subgroups of \(W(D_5)\).
 \end{proof}
 
 \section{Proofs of the rationality statements}
@@ -602,8 +601,8 @@ in Proposition~\ref{prop:tangent-section}.  Lemma~3.2 and Theorem~2.4 of
 By \cite[Corollary~3.5]{TZ}, let \(\mathcal T\to S\) be a universal torsor
 under the N\'eron--Severi torus \(T\), chosen to have a \(k\)-point above a
 fixed point of \(S(k)\).
-The stable-permutation identity for \(X^*(T_{\bar k})\) expresses \(T\), after
-multiplication by a quasi-trivial torus, as another quasi-trivial torus; here
+The stable-permutation identity for \(X^*(T_{\bar k})\) implies that
+\(T\times Q\simeq Q'\) for suitable quasi-trivial tori \(Q,Q'\); here
 quasi-trivial means that the character lattice is a permutation Galois
 module.
 Hilbert's Theorem~90 therefore gives
@@ -723,20 +722,31 @@ admit a decomposition of the diagonal and hence is not stably rational
 \section{Exact tangent-section certificate}
 \label{app:slice-certificate}
 
-This appendix proves that the four opens used in
-Proposition~\ref{prop:tangent-section} cover the smooth parameter space.
-If the first three products \(D_iM_i\) vanish, choosing one vanishing factor
-from each product gives eight cases.  Exact Gr\"obner computations show that
-six cases are empty.  In each of the other two, the displayed evaluations
-and B\'ezout identity show that \(D_4M_4\ne0\).  The public certificate
-retains, for each empty case, a machine-readable identity expressing a
-nonzero constant in the corresponding localized ideal.
+For a tangent point \(p\) parametrized by \(z=(z_1,z_2,z_3)\), the space
+\(H_p\) of tangent hyperplanes containing \(B\) has dimension four.
+Evaluation on the four selected weight spaces gives a \(4\)-by-\(4\) matrix.
+The following table records four exact witnesses.  In each row, \(z\) specifies
+\(p\), \(e=(e_1,\ldots,e_5)\) gives the five coordinates
+\(E_1,\ldots,E_5\) of \(x\), and the remaining coordinates \(L_{ij}\) and
+\(Q\) are reconstructed from \(e,z'\) and satisfy all twenty Cox quadrics.
+The individual values serve only to certify nonemptiness of the required open.
+\begin{center}
+\SliceWitnessTable
+\end{center}
 
-After discarding nonzero rational factors, the four evaluation determinants
-are
+Let \(D_i\) be the determinant of the evaluation matrix for choice \(i\), and
+let \(M_i\) be the fixed \(8\)-by-\(8\) Jacobian minor at the same tangent
+point.  Choice \(i\) certifies the evaluation and smoothness conditions on
+the open \(D_iM_i\ne0\).  After discarding nonzero rational factors, the four
+evaluation determinants are
 \SliceDeterminants
 and the corresponding smoothness minors are
 \SliceMinors
+The assertion used in Proposition~\ref{prop:tangent-section} is
+\begin{equation}
+ \bigcup_{i=1}^4\{D_iM_i\ne0\}=\{\Delta\ne0\}.
+ \label{eq:witness-cover}
+\end{equation}
 
 To prove \eqref{eq:witness-cover}, suppose first that
 \(D_iM_i=0\) for \(i=1,2,3\).  Choosing one factor from each product gives
@@ -744,20 +754,23 @@ eight cases.  A lexicographic Gr\"obner calculation in
 \(\mathbf Q[a,b,h]/(h\Delta-1)\) gives
 \SliceCoverArithmetic
 Thus \(D_4M_4\ne0\) in both remaining cases.  This proves that the four
-opens \(D_iM_i\ne0\) cover \(\Delta\ne0\).
+opens \(D_iM_i\ne0\) cover \(\Delta\ne0\).  The retained certificate gives,
+for each empty case, an identity expressing a nonzero constant in the
+corresponding localized ideal.
 
 \section{Verification and scope}
 
-Using exact integer and rational arithmetic, the public generator starts from
-the two type-\(I_3\) character matrices and the twenty Cox quadrics in
+Using exact integer and rational arithmetic, the reconstruction program starts
+from the two type-\(I_3\) character matrices and the twenty Cox quadrics in
 \cite[Section~3]{TZ}.  With SymPy~1.14.0, it reconstructs the saturated
 rank-three lattice, residual rank-two quotient, Cox weights, tangent Jacobian,
 four pairs \((D_i,M_i)\), eight localized cases, and B\'ezout identity.  It
 also verifies the weight basis, derives the linear section from the kernel of
 \(H_p\to k\), \(\lambda\mapsto\lambda(x)\), and renders every
-computation-derived value printed in the manuscript into a checked TeX
-artifact.  The certificate retains exact Nullstellensatz identities for the
-six empty cases, which both public programs verify directly; the second
+computation-derived value printed in the manuscript into a generated TeX
+file checked by the verification gate.  The certificate retains exact
+Nullstellensatz identities for the six empty cases, which both verification
+programs verify directly; the second
 program also checks the cover, linear section, and quotient minors.  The
 source transcription, quotient criterion, equivariant generic
 trivialization, descent of the tangent-section conditions, and function-field
@@ -771,8 +784,8 @@ formal-coverage annotations therefore say
 
 We import Tschinkel--Zhang's universal-torsor geometry and their classification
 of the four Galois images for which \(H^1\) vanishes on every subgroup.  We
-construct the rational rank-three quotient and its descended tangent section.
-This construction lowers the number of stabilizing variables to two; no
+construct the rational quotient by a rank-three subtorus and its descended
+tangent section.  This construction lowers the stabilization bound to two; no
 classification beyond those four Galois types is needed here.
 
 \section*{AI assistance disclosure}
