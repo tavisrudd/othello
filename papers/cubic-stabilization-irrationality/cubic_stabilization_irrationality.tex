@@ -58,6 +58,14 @@ point; algebraic torus; rationality after affine-line stabilization.
 
 \section{Introduction and main results}
 
+Tschinkel and Zhang constructed explicit stably rational smooth cubic
+threefolds over \(\mathbf Q\) \cite[Theorem~1.3]{TZ}.  On the other hand, the
+one-stabilization theorem shows that every smooth complex cubic threefold
+remains irrational after multiplication by \(\PP^1\)
+\cite[Theorem~1.1]{RuddM1}.  Thus at least two stabilizing variables are
+needed for the examples of Tschinkel and Zhang.  We prove that two suffice
+for two of them.
+
 For a projective variety \(V/k\), put
 \[
  \ell_k(V)=\min\{m\geq0:V\times\A^m\text{ is }k\text{-rational}\}.
@@ -66,14 +74,8 @@ If the set is empty, put \(\ell_k(V)=\infty\).  Since \(\A^m\) and
 \(\PP^m\) are birational, either factor gives the same invariant.  This is
 the level of stable rationality considered by Tschinkel and Zhang
 \cite[p.~13]{TZ}.
-
-By the one-stabilization theorem \cite[Theorem~1.1]{RuddM1}, every smooth
-complex cubic threefold \(X\) satisfies \(\ell_{\C}(X)\geq2\).  Tschinkel and
-Zhang constructed explicit smooth cubic threefolds over \(\mathbf Q\) that
-are stably rational \cite[Theorem~1.3]{TZ}.  Their levels are finite, and
-rationality after base change gives
-\(\ell_{\mathbf Q}(X)\geq\ell_{\C}(X_{\C})\geq2\).  We prove equality for
-two of these threefolds.
+Rationality is preserved by extension of the ground field, so
+\(\ell_{\mathbf Q}(V)\geq\ell_{\C}(V_{\C})\) for \(V/\mathbf Q\).
 
 Consider the smooth cubic threefolds
 \begin{align}
@@ -98,6 +100,9 @@ Equivalently, \((X_j)_{\C}\times\PP^1\) is irrational, whereas
 
 The following surface theorem supplies the upper bound in
 Theorem~\ref{thm:cubic-level}.
+
+Recall that a Galois lattice \(M\) is stably permutation if
+\(M\oplus P\simeq P'\) for some permutation Galois lattices \(P\) and \(P'\).
 
 \begin{theorem}[Two-dimensional stabilization]
 \label{thm:two-variable}
