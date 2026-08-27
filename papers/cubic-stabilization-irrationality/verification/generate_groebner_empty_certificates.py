@@ -120,4 +120,4 @@ arguments.write_certificate.write_text(
     json.dumps(payload, indent=2, sort_keys=True) + "\n",
     encoding="utf-8",
 )
-print("Groebner empty-branch certificates: written")
+print("Groebner empty localized-case certificates: written")
