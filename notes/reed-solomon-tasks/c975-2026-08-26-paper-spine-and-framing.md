@@ -6,10 +6,11 @@ architecture; no manuscript files edited
 ## Editorial decision
 
 The paper should be about one theorem on normal-rational-curve parity-check
-systems under point deletion.  Projective deep holes, the top two coset
-layers of cofinite-support GRS codes, one-column MDS/NMDS extensions, and the
-family-aggregate NMDS enumerators are four readings of that theorem.  They
-must not be presented as a PRS paper followed by a GRS application.
+systems under point deletion.  It classifies every coset of weight at least
+`r-1`; projective deep holes, the two resulting shells when points are
+deleted, one-column MDS/NMDS extensions, and the family-aggregate NMDS
+enumerators are four readings of that theorem.  They must not be presented as
+a PRS paper followed by a GRS application.
 
 The mathematical spine is
 
@@ -27,7 +28,7 @@ The mathematical spine is
 \\[2mm]
 \Downarrow
 \\[-1mm]
-\text{exact top distance layers of }H_S
+\text{all cosets of weight at least }r-1\text{ for }H_S
 \\[2mm]
 \Downarrow
 \\[-1mm]
@@ -42,7 +43,7 @@ R5, R6, ..., R10 is not a second spine.
 
 ## 1. Headline theorem hierarchy
 
-### Theorem 1 — top distance layers under point deletion
+### Theorem 1 — high-weight cosets under point deletion
 
 Introduce from the start
 
@@ -71,7 +72,8 @@ parts.
    consists exactly of the omitted curve points, while the distance-`r-1`
    shell consists exactly of tangents, conjugate secants, and interiors of
    split secants incident with `A`.
-4. Give the projective shell counts in the statement:
+4. Give both the projective-direction and literal coset counts in the
+   statement.  The projective-direction counts are
 
    \[
    N_r=s,
@@ -79,6 +81,11 @@ parts.
    N_{r-1}=\frac{q(q+1)^2}{2}
       +\frac{(q-1)s(2q+1-s)}2.
    \]
+
+   Hence the numbers of nonzero cosets are `(q-1)N_r` and
+   `(q-1)N_{r-1}`.  The geometry classifies syndrome directions, whereas the
+   title and coding theorem concern cosets; the factor `q-1` cannot remain
+   implicit.
 
 This is the field-facing theorem.  It is stronger and more coherent than a
 theorem headed by “split-free containment,” because it states the coding
@@ -199,9 +206,9 @@ technology:
 > The distance of a syndrome from the column spans simultaneously controls
 > the outer layers of the code's distance partition and the minimum distance
 > obtained by appending that syndrome as a new parity-check column.  We
-> determine the top two layers for the projective evaluation set after an
-> arbitrary prescribed set of points is deleted, in every fixed redundancy
-> over sufficiently large fields.
+> classify every coset of weight at least `r-1` for the projective evaluation
+> set after an arbitrary prescribed set of points is deleted, in every fixed
+> redundancy over sufficiently large fields.
 
 The next paragraph gives the exact theorem and threshold.  The third explains
 the MDS/NMDS consequence.  Only then introduce the geometry: the parity-check
@@ -223,9 +230,9 @@ or introduction.
 
 ## 4. Title recommendation
 
-Recommended:
+Recommended after red-team review:
 
-> **High-weight cosets of generalized Reed--Solomon codes**
+> **High-weight cosets of generalized and extended Reed--Solomon codes**
 
 More explicit alternative:
 
@@ -235,9 +242,10 @@ More explicit alternative:
 The shorter title is preferred.  “The weight of a coset” and “cosets of
 weight `W`” are standard coding-theory terms for the minimum weight in a
 coset; “high-weight cosets” has also been used in the Reed--Solomon/BCH
-covering literature.  The theorem determines the two highest nonempty coset
-weights and their classes.  The MDS/NMDS extension theorem and enumerators
-then read naturally as consequences in the abstract.
+covering literature.  The theorem determines every coset of weight at least
+`r-1`.  When `s>0`, these are the two shells `r` and `r-1`; when `s=0`, only
+the maximum shell `r-1` is classified.  The MDS/NMDS extension theorem and
+enumerators then read naturally as consequences in the abstract.
 
 By contrast, “top distance layers” does not appear to be established coding
 terminology.  “Distance partition” is standard, but a title such as “outer
@@ -245,9 +253,21 @@ layers of the distance partition” is longer and is associated especially
 with completely regular/transitive codes.  Use “distance partition” in the
 introduction when defining the sets, not as the short title noun.
 
-The title names the actual code class: arbitrary nonzero GRS multipliers on
-supports `S=P1(F_q) minus A` in the stated high-rate range.  Full-length PRS
-is only the specialization `A=empty`, so it should not delimit the title.
+The two-family wording is deliberate.  A common modern convention reserves
+GRS for evaluation supports in `F_q`, of length at most `q`, and calls the
+length-`q+1` projective-line code extended GRS or generalized doubly extended
+RS.  If `s>0`, a projective change of coordinate can move one deleted point
+to infinity, making the code monomially equivalent to an ordinary GRS code;
+if `s=0`, the extended family is genuinely needed.  Thus “generalized and
+extended” is standard and convention-robust, whereas unqualified GRS risks
+making the title look broader than the standard definition.
+
+The title does not claim all supports or all parameters.  The exact support
+model and the inequality on `q,r,s` must occur in the first abstract
+paragraph.  Adding “long” would signal the regime but is qualitative rather
+than an exact standard class; adding “cofinite-support” would coin a title
+term.  The cleanest solution is the short family title plus an immediate
+quantified scope sentence.
 
 Do not retain “exact classifications through redundancy ten” in the title.
 It makes the strongest arbitrary-redundancy theorem look secondary and
@@ -264,9 +284,9 @@ read as an unsupported all-parameter claim.
 ### Collision and terminology check
 
 No exact or near-exact collision was found for **High-weight cosets of
-generalized Reed--Solomon codes** in the coding literature searched through
-2026-08-26.  Relevant neighboring titles establish the terminology without
-colliding:
+generalized and extended Reed--Solomon codes** in the coding literature
+searched through 2026-08-26.  Relevant neighboring titles establish the
+terminology without colliding:
 
 * Wolf's 1969 paper explicitly studies “high weight cosets” in a
   Reed--Solomon/BCH setting;
@@ -351,6 +371,11 @@ Sources checked:
 * <https://arxiv.org/abs/2111.03654>
 * <https://arxiv.org/abs/2111.04808>
 * <https://arxiv.org/abs/1812.03616>
+* <https://doi.org/10.1109/TIT.1986.1057188>
+* <https://arxiv.org/abs/1612.05447>
+* <https://arxiv.org/abs/2204.11960>
+* <https://arxiv.org/abs/2007.08798>
+* <https://arxiv.org/abs/2605.10594>
 * <https://datacompressionconference.org/capocelli-prize/>
 * <https://link.springer.com/journal/10623/updates>
 
@@ -376,6 +401,17 @@ Sources checked:
    classification and family aggregation.
 9. Remove enough R5 and stagewise material that the new coding consequences
    strengthen by replacement rather than page growth.
+10. Define “coset weight” on first use.  Do not let readers confuse classifying
+    cosets by their minimum weight with determining every individual coset
+    weight distribution; the latter is not claimed.
+11. State the headline as “all cosets of weight at least `r-1`,” not “the two
+    highest shells.”  The latter is true only when `s>0`.
+12. Do not call the aggregate enumerator result immediate from Theorem 1.  It
+    additionally uses a family-wise double count and the standard NMDS
+    recurrence, so it deserves its own proved corollary or theorem.
+13. Audit the large fixed-level appendices against the broadened title.  They
+    must read as full-support boundary refinements, not as a second PRS paper
+    attached to a GRS headline.
 
 ## 8. Acceptance criterion for the rewrite
 
