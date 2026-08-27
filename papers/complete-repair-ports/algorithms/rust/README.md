@@ -79,6 +79,40 @@ boundaries, and `thiserror` handles checked input failures. `proptest` and
 `serde_json` are development-only. Criterion 0.7 supplies the Rust-1.82-compatible
 statistical locality benchmark target.
 
+## Application front ends
+
+`ergo-comp application` accepts one tagged JSON document and returns an exact
+optimum or inclusion-minimal support together with replayable indices and work
+counters. The front ends deliberately expose different mathematical models
+instead of flattening every application into generic Boolean variables.
+
+| input `kind`       | exact question                                                   | principal reduction                         |
+| :----------------- | :--------------------------------------------------------------- | :------------------------------------------ |
+| `ceph-xor`         | minimal helper supports through recursive XOR coding layers      | monotone antichain closure                  |
+| `azure-lrc`        | simultaneous LRC(12,2,2) repairs across nine upgrade domains      | exact support families plus capacity DP     |
+| `repair-dag`       | minimum unit slots for precedence-constrained repair tasks        | ready-set quotient plus resource capacities |
+| `qc-ldpc`          | bounded trapping-set or stopping-set existence in a QC lift       | cyclic normalization before exact search    |
+| `vector-repair`    | minimum storage nodes spanning a vector/subpacketized target      | generated node-subspace DP                  |
+| `gpu-checkpoint`   | simultaneous MDS checkpoint recovery across node and rack links   | helper-family compilation plus capacity DP  |
+
+The Ceph model uses explicit XOR layers and returns all inclusion-minimal leaf
+supports. The Azure model follows the published 16-fragment placement with six
+paired data upgrade domains, one local-parity domain, and two global-parity
+domains. The GPU model is an MDS/AEC recovery kernel after a DP/PP/TP placement
+has been fixed; it does not claim to model GPU execution or checkpoint-copy
+overlap itself. The QC-LDPC search distinguishes the two predicates exactly:
+trapping sets bound the number of odd neighboring checks, while stopping sets
+forbid neighboring checks of degree one.
+
+For example:
+
+```text
+ergo-comp application --input ceph-repair.json
+ergo-comp application --input azure-repair-batch.json
+ergo-comp application --input qc-ldpc-search.json
+ergo-comp application --input gpu-checkpoint-recovery.json
+```
+
 ## Gates
 
 From this directory, using the repository Nix toolchain:

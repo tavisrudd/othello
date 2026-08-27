@@ -9,6 +9,24 @@ fn example(name: &str) -> PathBuf {
         .join(name)
 }
 
+fn run_application(input: Value) -> Value {
+    let mut child = Command::new(env!("CARGO_BIN_EXE_ergo-comp"))
+        .args(["application", "--input", "-"])
+        .stdin(std::process::Stdio::piped())
+        .stdout(std::process::Stdio::piped())
+        .stderr(std::process::Stdio::piped())
+        .spawn()
+        .unwrap();
+    serde_json::to_writer(child.stdin.take().unwrap(), &input).unwrap();
+    let output = child.wait_with_output().unwrap();
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    serde_json::from_slice(&output.stdout).unwrap()
+}
+
 #[test]
 fn transfer_cli_replays_the_gf4_separation() {
     let output = Command::new(env!("CARGO_BIN_EXE_ergo-comp"))
@@ -127,6 +145,74 @@ fn transfer_tower_cli_expands_leaf_coefficient_witnesses() {
     assert!(
         value["witness"]["children"][0]["children"][0]["coefficient_witness"]["data"].is_array()
     );
+}
+
+#[test]
+fn application_cli_covers_storage_graph_qc_vector_and_gpu_front_ends() {
+    let ceph = run_application(serde_json::json!({
+        "kind": "ceph-xor",
+        "coordinate_count": 8,
+        "layers": [
+            {"parity": 1, "data": [2, 3]},
+            {"parity": 5, "data": [6, 7]},
+            {"parity": 0, "data": [1, 2, 3]},
+            {"parity": 4, "data": [5, 6, 7]}
+        ],
+        "target": 2,
+        "unavailable": [2]
+    }));
+    assert_eq!(ceph["supports"], serde_json::json!([[1, 3]]));
+
+    let azure = run_application(serde_json::json!({
+        "kind": "azure-lrc",
+        "capacities": [6, 6, 6, 6, 6, 6, 3, 0, 0],
+        "demand_count": 3
+    }));
+    assert_eq!(azure["repaired_count"], 3);
+
+    let dag = run_application(serde_json::json!({
+        "kind": "repair-dag",
+        "capacities": [1, 1],
+        "tasks": [
+            {"predecessors": 0, "loads": [1, 0]},
+            {"predecessors": 0, "loads": [0, 1]},
+            {"predecessors": 3, "loads": [1, 1]}
+        ]
+    }));
+    assert_eq!(dag["slots"], 2);
+
+    let qc = run_application(serde_json::json!({
+        "kind": "qc-ldpc",
+        "check_groups": 2,
+        "variable_groups": 2,
+        "lift": 2,
+        "shifts": [0, 0, 0, 1],
+        "objective": "trapping",
+        "size": 4,
+        "maximum_odd_checks": 0
+    }));
+    assert_eq!(qc["found"], true);
+
+    let vector = run_application(serde_json::json!({
+        "kind": "vector-repair",
+        "field": {"kind": "prime", "order": 2},
+        "generator": {"rows": 3, "cols": 5, "data": [1,0,0,1,0, 0,1,0,1,0, 0,0,1,0,1]},
+        "coordinate_nodes": [0,0,1,2,2],
+        "target": {"rows": 3, "cols": 2, "data": [1,0,0,1,0,0]}
+    }));
+    assert_eq!(vector["node_cost"], 1);
+
+    let gpu = run_application(serde_json::json!({
+        "kind": "gpu-checkpoint",
+        "data_shards": 2,
+        "shard_nodes": [0,1,2,3],
+        "node_racks": [0,0,1,1],
+        "failed_shards": [0],
+        "replacement_nodes": [0],
+        "capacities": [2,2,2,2,2,1],
+        "option_budget": 10
+    }));
+    assert_eq!(gpu["repaired_count"], 1);
 }
 
 #[cfg(feature = "parallel")]

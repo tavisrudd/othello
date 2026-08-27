@@ -1,0 +1,5 @@
+{
+  "kind": "azure-lrc",
+  "capacities": [6, 6, 6, 6, 6, 6, 3, 0, 0],
+  "demand_count": 3
+}

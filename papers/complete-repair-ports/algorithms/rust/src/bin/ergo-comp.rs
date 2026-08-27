@@ -1,12 +1,15 @@
 use anyhow::{bail, Context, Result};
 use clap::{Parser, Subcommand};
 use ergo_comp::{
-    compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
-    CoefficientWitness, CompositionTable, CompositionTower, ConfinementSector, CostTable,
-    FiniteField, Gf4, Matrix, MatrixCoefficientWitness, Prime, TowerLevel, TowerWitness,
+    azure_lrc_12_2_2_upgrade_domains, ceph_xor_repair_supports, compile_binary_rank_one,
+    compile_binary_target_subspace, confinement_by_generators_field, gpu_checkpoint_mds_recovery,
+    minimum_node_span_repair, schedule_repair_dag, CephXorLayer, CoefficientWitness,
+    CompositionTable, CompositionTower, ConfinementSector, CostTable, FiniteField, Gf4, Matrix,
+    MatrixCoefficientWitness, Prime, QcLdpcCode, RepairTask, TowerLevel, TowerWitness,
     WeightedRepairProblem, WeightedSchedulerBackend,
 };
 use serde::{Deserialize, Serialize};
+use serde_json::{json, Value};
 use std::io::{self, Read};
 use std::num::NonZeroUsize;
 use std::path::{Path, PathBuf};
@@ -71,6 +74,12 @@ enum Command {
         /// Number of workers; defaults to available parallelism.
         #[arg(long, requires = "parallel")]
         threads: Option<NonZeroUsize>,
+    },
+    /// Run an exact storage, repair-DAG, QC-LDPC, vector-code, or GPU-checkpoint analysis.
+    Application {
+        /// Tagged JSON input file, or '-' for standard input.
+        #[arg(short, long, default_value = "-")]
+        input: PathBuf,
     },
 }
 
@@ -229,6 +238,84 @@ struct TransferTowerInput {
     target_candidate_budget: u64,
     #[serde(default = "default_witness_node_budget")]
     witness_node_budget: u64,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(tag = "kind", rename_all = "kebab-case", deny_unknown_fields)]
+enum ApplicationInput {
+    CephXor {
+        coordinate_count: usize,
+        layers: Vec<CephLayerSpec>,
+        target: usize,
+        unavailable: Vec<usize>,
+        #[serde(default = "default_candidate_budget")]
+        budget: u64,
+    },
+    AzureLrc {
+        capacities: Vec<u32>,
+        demand_count: usize,
+    },
+    RepairDag {
+        capacities: Vec<u16>,
+        tasks: Vec<RepairTaskSpec>,
+        #[serde(default = "default_candidate_budget")]
+        budget: u64,
+    },
+    QcLdpc {
+        check_groups: usize,
+        variable_groups: usize,
+        lift: usize,
+        shifts: Vec<Option<u16>>,
+        objective: QcObjective,
+        size: usize,
+        #[serde(default)]
+        maximum_odd_checks: usize,
+        #[serde(default = "default_candidate_budget")]
+        budget: u64,
+    },
+    VectorRepair {
+        field: FieldSpec,
+        generator: MatrixSpec,
+        coordinate_nodes: Vec<u16>,
+        target: MatrixSpec,
+        #[serde(default = "default_candidate_budget_usize")]
+        state_budget: usize,
+    },
+    GpuCheckpoint {
+        data_shards: usize,
+        shard_nodes: Vec<u16>,
+        node_racks: Vec<u16>,
+        failed_shards: Vec<usize>,
+        replacement_nodes: Vec<u16>,
+        capacities: Vec<u32>,
+        #[serde(default = "default_candidate_budget")]
+        option_budget: u64,
+    },
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct CephLayerSpec {
+    parity: u8,
+    data: Vec<u8>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct RepairTaskSpec {
+    predecessors: u64,
+    loads: Vec<u16>,
+}
+
+#[derive(Clone, Copy, Debug, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+enum QcObjective {
+    Stopping,
+    Trapping,
+}
+
+fn default_candidate_budget_usize() -> usize {
+    1 << 20
 }
 
 #[derive(Debug, Serialize)]
@@ -913,6 +1000,189 @@ fn schedule(input: ScheduleInput, parallel: bool) -> Result<ScheduleOutput> {
     })
 }
 
+fn application_schedule_output(problem: WeightedRepairProblem) -> Result<Value> {
+    let backend = match problem.recommended_backend() {
+        WeightedSchedulerBackend::SparsePareto => "sparse-pareto",
+        WeightedSchedulerBackend::DenseLattice => "dense-lattice",
+    };
+    let answer = problem
+        .solve_adaptive()
+        .context("failed to solve application scheduler")?;
+    Ok(json!({
+        "repaired_count": answer.repaired_count(),
+        "complete": answer.complete(),
+        "assignment": answer.assignment.iter().map(|choice| json!({
+            "demand": choice.demand,
+            "loads": choice.loads,
+        })).collect::<Vec<_>>(),
+        "unmatched_demands": answer.unmatched_demands,
+        "total_loads": answer.total_loads,
+        "backend": backend,
+        "transitions_examined": answer.transitions_examined,
+        "peak_pareto_states": answer.peak_pareto_states,
+    }))
+}
+
+fn node_span_output<F: FiniteField>(
+    generator: MatrixSpec,
+    coordinate_nodes: Vec<u16>,
+    target: MatrixSpec,
+    state_budget: usize,
+) -> Result<Value> {
+    let generator = generator.into_matrix_field::<F>()?;
+    let target = target.into_matrix_field::<F>()?;
+    let answer =
+        minimum_node_span_repair::<F>(&generator, &coordinate_nodes, &target, state_budget)?;
+    Ok(match answer {
+        Some(answer) => json!({
+            "feasible": true,
+            "node_cost": answer.node_cost,
+            "nodes": answer.nodes,
+            "generated_spans": answer.generated_spans,
+            "transitions": answer.transitions,
+        }),
+        None => json!({"feasible": false}),
+    })
+}
+
+fn application(input: ApplicationInput) -> Result<Value> {
+    match input {
+        ApplicationInput::CephXor {
+            coordinate_count,
+            layers,
+            target,
+            unavailable,
+            budget,
+        } => {
+            let layers: Vec<_> = layers
+                .into_iter()
+                .map(|layer| CephXorLayer {
+                    parity: layer.parity,
+                    data: layer.data.into_boxed_slice(),
+                })
+                .collect();
+            let answer =
+                ceph_xor_repair_supports(coordinate_count, &layers, target, &unavailable, budget)?;
+            Ok(json!({
+                "application": "ceph-recursive-lrc",
+                "supports": answer.supports,
+                "closure_rounds": answer.closure_rounds,
+                "combinations_examined": answer.combinations_examined,
+            }))
+        }
+        ApplicationInput::AzureLrc {
+            capacities,
+            demand_count,
+        } => {
+            let capacities: [u32; 9] = capacities
+                .try_into()
+                .map_err(|_| anyhow::anyhow!("Azure LRC needs nine upgrade-domain capacities"))?;
+            application_schedule_output(azure_lrc_12_2_2_upgrade_domains(
+                &capacities,
+                demand_count,
+            )?)
+        }
+        ApplicationInput::RepairDag {
+            capacities,
+            tasks,
+            budget,
+        } => {
+            let tasks: Vec<_> = tasks
+                .into_iter()
+                .map(|task| RepairTask {
+                    predecessors: task.predecessors,
+                    loads: task.loads.into_boxed_slice(),
+                })
+                .collect();
+            let answer = schedule_repair_dag(&capacities, &tasks, budget)?;
+            Ok(json!({
+                "application": "full-node-repair-dag",
+                "slots": answer.slots,
+                "task_batches": answer.task_batches,
+                "states_examined": answer.states_examined,
+            }))
+        }
+        ApplicationInput::QcLdpc {
+            check_groups,
+            variable_groups,
+            lift,
+            shifts,
+            objective,
+            size,
+            maximum_odd_checks,
+            budget,
+        } => {
+            let code = QcLdpcCode::new(check_groups, variable_groups, lift, shifts)?;
+            let answer = match objective {
+                QcObjective::Stopping => code.find_stopping_set(size, budget)?,
+                QcObjective::Trapping => {
+                    code.find_trapping_set(size, maximum_odd_checks, budget)?
+                }
+            };
+            Ok(match answer {
+                Some(answer) => json!({
+                    "application": "qc-ldpc",
+                    "found": true,
+                    "variables": answer.variables,
+                    "odd_checks": answer.odd_checks,
+                    "candidates_examined": answer.candidates_examined,
+                    "cyclic_normalization_factor": answer.cyclic_normalization_factor,
+                }),
+                None => json!({"application": "qc-ldpc", "found": false}),
+            })
+        }
+        ApplicationInput::VectorRepair {
+            field,
+            generator,
+            coordinate_nodes,
+            target,
+            state_budget,
+        } => match field {
+            FieldSpec::Prime { order: 2 } => {
+                node_span_output::<Prime<2>>(generator, coordinate_nodes, target, state_budget)
+            }
+            FieldSpec::Prime { order: 3 } => {
+                node_span_output::<Prime<3>>(generator, coordinate_nodes, target, state_budget)
+            }
+            FieldSpec::Prime { order: 5 } => {
+                node_span_output::<Prime<5>>(generator, coordinate_nodes, target, state_budget)
+            }
+            FieldSpec::Prime { order: 7 } => {
+                node_span_output::<Prime<7>>(generator, coordinate_nodes, target, state_budget)
+            }
+            FieldSpec::Prime { order: 11 } => {
+                node_span_output::<Prime<11>>(generator, coordinate_nodes, target, state_budget)
+            }
+            FieldSpec::Prime { order: 13 } => {
+                node_span_output::<Prime<13>>(generator, coordinate_nodes, target, state_budget)
+            }
+            FieldSpec::BinaryExtension { degree: 2, modulus }
+                if modulus.as_slice() == [1, 1, 1] =>
+            {
+                node_span_output::<Gf4>(generator, coordinate_nodes, target, state_budget)
+            }
+            unsupported => bail!("unsupported vector-repair field {unsupported:?}"),
+        },
+        ApplicationInput::GpuCheckpoint {
+            data_shards,
+            shard_nodes,
+            node_racks,
+            failed_shards,
+            replacement_nodes,
+            capacities,
+            option_budget,
+        } => application_schedule_output(gpu_checkpoint_mds_recovery(
+            data_shards,
+            &shard_nodes,
+            &node_racks,
+            &failed_shards,
+            &replacement_nodes,
+            &capacities,
+            option_budget,
+        )?),
+    }
+}
+
 fn run_with_threads<T: Send>(
     parallel: bool,
     threads: Option<NonZeroUsize>,
@@ -979,6 +1249,10 @@ fn main() -> Result<()> {
             write_json(&run_with_threads(parallel, threads, || {
                 schedule(input, parallel)
             })?)
+        }
+        Command::Application { input } => {
+            let input = read_json(&input)?;
+            write_json(&application(input)?)
         }
     }
 }

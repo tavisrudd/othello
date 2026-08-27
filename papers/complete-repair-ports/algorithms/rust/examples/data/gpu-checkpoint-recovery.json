@@ -1,0 +1,10 @@
+{
+  "kind": "gpu-checkpoint",
+  "data_shards": 2,
+  "shard_nodes": [0, 1, 2, 3],
+  "node_racks": [0, 0, 1, 1],
+  "failed_shards": [0],
+  "replacement_nodes": [0],
+  "capacities": [2, 2, 2, 2, 2, 1],
+  "option_budget": 10
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "vector-repair",
+  "field": { "kind": "prime", "order": 2 },
+  "generator": {
+    "rows": 3,
+    "cols": 5,
+    "data": [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1]
+  },
+  "coordinate_nodes": [0, 0, 1, 2, 2],
+  "target": { "rows": 3, "cols": 2, "data": [1, 0, 0, 1, 0, 0] },
+  "state_budget": 1000
+}
