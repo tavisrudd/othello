@@ -25,13 +25,11 @@ audit, and mirror verification pass.  Preserve theorem scope and trust
 boundaries.  Do not close or archive C979 until the user explicitly directs it.
 Live card: `2026-08-27-c979-mds-css-exposition-revision.md`.
 
-**C981 is running (2026-08-27).**  Explore the mathematical and publication
-potential exposed by the cleaned-up MDS--CSS paper: portability of the
-diagonal-multiplier method beyond MDS codes, the structure replacing the
-nullity dichotomy in broader CSS families, the independent value of the
-six-point and scalar-invariant results, and a current primary-literature audit
-of novelty and framing.  Return ranked, evidence-backed recommendations without
-expanding or closing C979 by default.  Card:
+**C981 completed (2026-08-27).**  Identified the standard conductor/Schur-square
+formulation, proved the portable CSS block equations and exact non-MDS
+obstruction, found a Borel counterexample to the all-CSS dichotomy, verified
+explicit non-GRS prime-field applications, and recommended a separate
+prime-power semilinear successor while leaving C979 open.  Report:
 `2026-08-27-c981-mds-css-mathematical-potential-and-framing.md`.
 
 **Referee edits applied (2026-08-16, unallocated user request).**  Fourteen
