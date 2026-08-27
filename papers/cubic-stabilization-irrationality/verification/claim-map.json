@@ -31,10 +31,10 @@
   },
   "prop:tangent-section": {
     "cautions": "The subgroup classification is complete only for the four hereditary-H1 types; no classification of all W(D5) subgroups is claimed.",
-    "conclusion": "A codimension-three tangent linear section and an orbit-test point on its quotient component and in the tangent-projection isomorphism open exist geometrically, and descend for quartic del Pezzo surfaces with a rational point in each of the four types.",
+    "conclusion": "A codimension-three tangent linear section and an evaluation point on its quotient component and in the tangent-projection isomorphism open exist geometrically, and descend for quartic del Pezzo surfaces with a rational point in each of the four types.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "ec93a04cb21cea643b7a7bacb83d6be2352727f886fa7e5b6c7984a75e1e09e8",
+    "digest": "ec4e5b6909e21b395f5bca7f456055f68df891589301dff09f7110881e5845f8",
     "environment": "proposition",
     "hypotheses": "The Cox parameters lie on the smooth open; for ground-field descent the quartic del Pezzo surface has a rational point and the Galois image has type I0, I1, I2, or I3.",
     "objects": "The saturated rank-three subtorus, complementary Cox-coordinate subspace, and tangent-frame incidence."
@@ -56,7 +56,7 @@
     "declarations": [],
     "digest": "bcb3a41919ba12725a565f17401d54aca428bf3528e10cd126c4d79eea9e7bbd",
     "environment": "theorem",
-    "hypotheses": "A generically free projectively linear rank-r torus action, a rational point in the birational tangent-projection locus, descended complementary sums of projective weight spaces, an integral basis of weight differences, and a nondegenerate tangent linear section whose orbit-section component meets the tangent-projection isomorphism open.",
+    "hypotheses": "A generically free projectively linear rank-r torus action, a rational point in the birational tangent-projection locus, descended complementary sums of projective weight spaces, an integral basis of weight differences, and a nondegenerate tangent linear section whose quotient component meets the tangent-projection isomorphism open.",
     "objects": "A projective torus action on a projective variety and its Rosenlicht quotient."
   },
   "thm:cubic-level": {

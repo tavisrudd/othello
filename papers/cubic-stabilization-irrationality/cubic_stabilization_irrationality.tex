@@ -434,9 +434,10 @@ Theorem~\ref{thm:torus-quotient}.
 \uses{thm:torus-quotient}%
 \imports{tz-cox-model,tz-torsor-splitting,tz-type-classification}%
 \evidence{quartic-del-pezzo-slice-cover}%
-For a smooth geometric quartic del Pezzo Cox model, there exist a general
-tangent point \(p\), an orbit-test point \(x\), and a codimension-three
-linear subspace \(\Lambda\supset\langle T_pZ,B\rangle\) such that
+Over an algebraically closed field, let \(Z\) be the projective Cox model of
+a smooth quartic del Pezzo surface.  There exist a general tangent point
+\(p\), an evaluation point \(x\), and a codimension-three linear subspace
+\(\Lambda\supset\langle T_pZ,B\rangle\) such that
 \(x\in\Lambda\cap U_p\) and the maximal-minor condition of
 Theorem~\ref{thm:torus-quotient} holds at \(x\) for \(T_3\).  If \(Z\) is
 the projective Cox model of a smooth quartic del Pezzo surface \(S/k\) with
@@ -456,7 +457,7 @@ For a tangent point with auxiliary coordinates \(z=(z_1,z_2,z_3)\), the
 space of tangent hyperplanes containing \(B\) has dimension four.  Evaluation
 on the four selected weight spaces gives a \(4\)-by-\(4\) matrix.
 The following exact choices are used; \(e=(e_1,\ldots,e_5)\) and \(z'\)
-specify the orbit-test point at which the evaluation matrix is tested.
+specify the point \(x\) used to evaluate the matrix.
 \begin{center}
 \SliceWitnessTable
 \end{center}
@@ -473,7 +474,7 @@ one explicit B\'ezout identity, that
 \end{equation}
 Thus every smooth geometric Cox model has a witness for which the tangent
 point is smooth and the evaluation map is an isomorphism at the
-orbit-test point.  Invertibility is open in the pair of points.  Since the
+evaluation point.  Invertibility is open in the pair of points.  Since the
 projective Cox model is geometrically integral, this nonempty open meets the
 open where \(p\) is general for tangent projection and, for that \(p\), the
 open \(U_p\) on which \(\pi_p\) is an isomorphism.  We may also require that
@@ -492,14 +493,14 @@ the same point that lies in the tangent-projection isomorphism open.
 It remains to descend a good triple.  Fix a twist of one of the four types.
 Because \(T_3\) and \(B\) are Galois stable, the preceding conditions define
 a nonempty Galois-invariant open in the product of the tangent-point and
-orbit-test loci.  Its projection to the tangent-point factor is dense
-constructible and therefore contains a nonempty open.
+evaluation-point parameter spaces.  Its projection to the tangent-point
+factor is dense constructible and therefore contains a nonempty open.
 
 Corollary~3.5 of \cite{TZ} supplies the universal torsor whose fibre over a
 fixed point of \(S(k)\) is trivial.  Its \(k\)-points are Zariski dense by
 \cite[Lemma~2.1]{TZ}, and the same holds in the projective Cox model.  Hence
 the tangent-point open has a \(k\)-point.  At that point, density again
-supplies a \(k\)-rational orbit-test point in the corresponding
+supplies a \(k\)-rational evaluation point in the corresponding
 nonempty open.  The kernel of evaluation at that point is a
 three-dimensional \(k\)-space, so a \(k\)-basis gives \(\Lambda\).  No
 individual split-coordinate witness is asserted to descend.
@@ -686,10 +687,10 @@ residual rank-two quotient, the tangent Jacobian, all four pairs
 with SymPy~1.14.0.  The certificate retains exact Nullstellensatz identities
 for the six empty branches; both public programs verify those identities
 directly.  The generator also derives the evaluation-kernel slice through the
-orbit-test point and renders every computation-derived matrix, weight-space
+point \(x\) and renders every computation-derived matrix, weight-space
 table, witness, determinant, minor, and B\'ezout coefficient printed in the
-manuscript into a checked TeX artifact.  A second checker independently verifies the resulting
-cover, kernel slice, and quotient minors.  We check the transcription of the
+manuscript into a checked TeX artifact.  A second checker independently
+verifies the resulting cover, kernel slice, and quotient minors.  We check the transcription of the
 source equations, the quotient criterion, equivariant generic trivialization,
 incidence descent, and function-field argument in the text; the programs do
 not address them.

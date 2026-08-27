@@ -27,9 +27,9 @@ the upper bound.
   Pezzo surface.
 - The proof gives a reusable rational-quotient criterion for a generically
   free torus action on a variety with birational generic tangent projection.
-  A saturated unimodular weight window cuts a rational section of the general
-  orbit, and a tangent-projection open identifies that section with projective
-  space.
+  The differences among selected weight spaces form a basis of the character
+  lattice; a tangent linear section then meets a general orbit once and is
+  identified with projective space by tangent projection.
 - For both Tschinkel–Zhang series `X_{j,r}` of smooth cubic hypersurfaces,
   `X_{j,r} × P²` is rational over `Q` for every `r ≥ 0` and `j ∈ {1,3}`.
   Their stable-rationality conclusions therefore hold with a uniform `P²`
@@ -61,7 +61,7 @@ starts from the transcribed type-`I₃` matrices and twenty Cox quadrics. It
 reconstructs the saturated rank-three lattice, Cox weights, residual rank-two
 quotient, tangent Jacobian, four symbolic evaluation determinants, and the
 smooth-moduli witness cover. It also constructs the evaluation-kernel slice
-through the orbit-test point. For each of the six empty localized branches,
+through the evaluation point. For each of the six empty localized branches,
 [`verification/groebner-empty-certificates.json`](verification/groebner-empty-certificates.json)
 retains an exact identity expressing a nonzero constant in the localized
 branch ideal. The generator renders all computation-derived values printed in
