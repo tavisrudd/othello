@@ -5,7 +5,7 @@
 **Date**: 2026-08-27
 **Status**: ACTIVE; C972 COMPOSITIONAL-STATE CHARACTERIZATION AND C976
 EXPOSITION/LITERATURE/EXPORT CLOSED; 37-PAGE AUTHORITY, 29-CLAIM, FOUR-LEAN-
-TERMINAL, AND 83-FILE ERGODIS PUBLIC-SURFACE GATES PASS; C962 ALGORITHM/BOUND
+TERMINAL, AND 84-FILE ERGODIS PUBLIC-SURFACE GATES PASS; C962 ALGORITHM/BOUND
 DEVELOPMENT REMAINS IN PROGRESS WITH C972-DERIVED CONTEXTUAL KERNELS VALIDATED;
 C325 APPENDIX VERIFIER AND C953 AGGREGATE
 REVIEW FOLLOW; C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR
@@ -16,7 +16,7 @@ DEPOSIT
 Recovery*
 **Standalone paper repository**: `tavisrudd/compositional-recovery` at
 `~/src/math-papers/compositional-recovery`
-**Current local standalone commit**: `77dadc3` (37-page revised manuscript;
+**Current local standalone commit**: `90612cd` (37-page revised manuscript;
 verified; no push or deposit)
 **Approved paper license**: MIT
 
@@ -252,6 +252,6 @@ hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
 and is not evidence for or a release dependency of the paper-local companion.
 
-Local standalone synchronization is complete at `77dadc3`. Publication, push,
+Local standalone synchronization is complete at `90612cd`. Publication, push,
 and deposit remain gated on C325 and C953; the approved repository metadata
 does not authorize any of those external actions.
