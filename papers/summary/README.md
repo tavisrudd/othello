@@ -765,21 +765,25 @@ storing minimizing lifts separately returns coefficient-level witnesses. Under
 `r < M_t(D_P,K_P) + d(I^perp)`. ergodis turns these formulas into an exact
 hierarchical optimizer and capacity-aware repair scheduler.
 
-> *Abstract* Bounded linear recovery under concatenation is not determined by
-> scalar helper thresholds: an outer code can force intermediate functionals
-> that scalar minimization forgets. For an inner code `I` with target/helper
-> split `P ⊔ J`, shortening and puncturing `I^perp` onto `J` give a canonical
-> pair `K_P ⊆ D_P`. Its relative generalized Hamming weights are exactly the
-> minimum helper unions for independent target combinations, but not the labels
-> needed for finite transfer. Minimizing labelled prescribed-coset support
-> costs over the complete outer functional dual gives the exact minimum cost
-> `Gamma_{j,t}(O,I)` of a nonconfined recovery system, without a distance
-> hypothesis. These functions compose associatively by min--sum substitution;
-> stored minimizing lifts propagate coefficient witnesses. Outer dual distance
-> can collapse the formula to `M_t(D_P,K_P)+d(I^perp)`. ergodis executes the
-> recursion with replayable argmin witnesses; the proofs are software-independent.
-> Positive-density and bounded service-rate transfer follow, while equal
-> relative-weight hierarchies need not determine bounded repair reliability.
+> *Abstract* In a concatenated linear code, an outer equation selects which
+> inner functional each block must realize. Recording only the least helper
+> count forgets that label and can give the wrong finite threshold. We first
+> show that, within one inner block, relative generalized Hamming weights of the
+> canonical shortening--puncturing pair are exactly the minimum helper unions
+> for recovering each target dimension. For concatenation, we determine the
+> minimum helper cost of a recovery leaving the target block. The answer is a
+> labelled min--sum formula over functionals compatible with the outer code.
+> Its local costs are minimum prescribed-coset supports under target
+> normalization. These labelled costs compose associatively through finite
+> concatenation towers. Sufficient outer dual distance excludes the nonzero
+> functional terms and reduces the answer to
+> `M_t(D_P,K_P) + d(I^perp)`. Below the resulting helper-cost threshold,
+> restriction and zero-extension preserve every normalized recovery equation
+> and its exact helper support, not only the minimum cost. Thus relative weights
+> solve the single-block minimum problem, while labelled coset costs provide the
+> finer data needed for exact composition. A companion exact implementation
+> evaluates the recursion and returns optimizing coefficient witnesses; no
+> proof depends on software.
 
 **Delivers.** The associated nested code pair and its exact relative-weight
 interpretation; an exact ungated arbitrary-rank prescribed-coset theorem;
