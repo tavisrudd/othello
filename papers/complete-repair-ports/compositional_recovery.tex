@@ -2,7 +2,7 @@
 
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{booktabs}
+\usepackage{array,booktabs}
 \usepackage{enumitem}
 \usepackage{float}
 \usepackage{hyperref}
@@ -262,27 +262,42 @@ Proposition~\ref{prop:functional-label-separation} gives the calculation before
 the closure theorem.  Thus every unlabelled and scalar explanation is held
 fixed; only alignment with the intermediate functional labels changes.
 
-The restriction--extension bijection yields the later transfer results.  It preserves every
-block-local statistic determined by normalized recovery systems of cost at
-most $r$.  After forgetting coefficients, it also preserves statistics
-determined by inclusion-minimal helper supports, including bounded repair
-reliability and the bounded service-rate region.  This statement is
-block-local: the upward-closed recovery-set family in the full concatenated
-coordinate set also contains irrelevant cross-block supersets.  For example,
-a copied minimal support inside block $j$ may be enlarged by an unused helper
-in another block; that larger recovery set changes neither the minimal support
-nor any bounded success event containing it.
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.31\linewidth}
+                    >{\raggedright\arraybackslash}p{0.62\linewidth}@{}}
+\toprule
+Question & Retained information and exact result \\
+\midrule
+How many helpers recover a $t$-dimensional subspace inside one block?
+& The associated pair $K_P\subseteq D_P$ gives the relative weight
+$M_t(D_P,K_P)$. \\
+When can a recovery first leave its target block?
+& Minimum support in each induced-functional class gives $\Gamma_{j,T}$,
+including its zero- and nonzero-functional sectors. \\
+What must pass to the next concatenation level?
+& The same labelled costs compose by exact associative min--sum substitution;
+minimizing lifts propagate a witness. \\
+When is every recovered dimension confined through radius $r$?
+& The rank-one escape cost suffices: every rank is confined if and only if
+rank one is confined. \\
+What determines bounded reliability and capacity sharing?
+& Exact minimal helper supports and their overlaps determine the corresponding
+block-local statistics preserved by restriction and zero-extension. \\
+\bottomrule
+\end{tabular}
+\caption{Five questions answered by different projections of the recovery data.
+The first and last rows discard information needed by the composition rows.}
+\label{tab:intro-question-map}
+\end{table}
 
-The theorem contains the previous one-coordinate criterion.  If $P=\{x\}$
-and $t=1$, then $M_1(D_P,K_P)$ is the least number of helpers in a dual word
-through $x$, and
-\[
- z_x(I)=M_1(D_P,K_P)+1+d(I^\perp).
-\]
-Here $z_x(I)$ is the corresponding total-word-weight threshold: the target
-coordinate contributes one in addition to the helper cost.  Thus
-$r<M_1+d(I^\perp)$ is exactly $r+1<z_x(I)$.
+The transfer statements in the last row are block-local: irrelevant
+cross-block supersets do not change a minimal support, bounded success event,
+or bounded allocation problem.  The one-coordinate specialization and its
+total-word-weight convention are recorded after the general transfer theorem.
 
+\paragraph{Relation to existing work and scope.}
 Relative generalized Hamming weights (RGHWs) and relative dimension/length
 profiles (RDLPs) already describe support and access thresholds for nested
 codes in wiretap and ramp-secret-sharing settings
@@ -355,6 +370,11 @@ coefficient-level witnesses.  Section~\ref{sec:exact-recovery-optimization}
 gives correctness and complexity bounds and evaluates representative storage,
 graph, code-design, and tower applications against matched exact controls.
 No mathematical result depends on the implementation or its measurements.
+
+For a first pass, Sections~\ref{sec:recovery-equations}--\ref{sec:confinement}
+give the proof spine, and Section~\ref{sec:separations} shows what its coarser
+summaries lose.  The remaining sections give the executable reduction,
+consequences, a worked family, and the verification scope, in that order.
 
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}
