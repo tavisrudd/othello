@@ -443,6 +443,91 @@ marked-torus boundary without a certificate and shows why the correct local
 strategy is a reducible rational cover rather than a rootless final
 quadratic.
 
+The other `u=0` boundary, normalized to `(u,v)=(0,1)`, also closes on the
+same split quintic.  Its fixed-root coefficients are
+
+\[
+                    (B_0,B_1,B_2,B_3)=(a,a+1,a+1,1).
+\]
+
+Here
+
+\[
+ \frac{n_0n_2}{n_1^2}
+ =\frac{a(a+1)^2}{(a^2+a+1)^2}
+ =\left(\frac{a}{a^2+a+1}\right)^2
+  +\frac{a}{a^2+a+1}.                                    \tag{26}
+\]
+
+Thus `N` always splits when it is nondegenerate; rootlessness is again the
+wrong local demand.  Choose `a in GF(8) subset GF(64)` with
+
+\[
+                         a^3+a+1=0.                       \tag{27}
+\]
+
+Then `a` is nonzero and is not a root of `H`, since (27) gives `H(a)=1`.
+For this specialization,
+
+\[
+\begin{aligned}
+ \Delta&=a^2+a+(a+1)x+x^2,\\
+ Q&=a^2+a+1+(a^2+1)x+(a+1)x^2,\\
+ N&=a+1+(a^2+a+1)x+(a^2+a)x^2.
+\end{aligned}                                             \tag{28}
+\]
+
+The reduced odd-pole numerator modulo `Q` is the nonzero constant
+
+\[
+ \frac{a(a^9+a^8+a^7+a^4+a^3+a^2+1)}{a^2+1};
+\]
+
+modulo (27), the degree-nine factor is `a^2+a+1!=0`.  Hence the cover is
+geometrically integral of genus one.
+
+Its point count is exact and structural.  Over `GF(8)`, direct reduction with
+the basis `1,a,a^2` shows that `Q` has no rational root and that the trace of
+`N Delta/Q^2` is zero at
+
+\[
+       x=0,a^2,a^3,a^4,a^5,a^6,
+\]
+
+and one at `x=1,a` and at infinity.  The curve therefore has 12 points over
+`GF(8)`, so its Frobenius trace is `-3`.  Quadratic base change gives
+
+\[
+ \#C(\mathbf F_{64})
+ =64+1-\bigl((-3)^2-2\cdot8\bigr)=72.                    \tag{29}
+\]
+
+All deletion divisors are proper.  The final/moving polynomial is
+
+\[
+             x^4+(a^2+1)x^2+(a+1),
+\]
+
+so it is nonzero.  For final/fixed collisions it suffices by Frobenius to use
+one root `a` of (27).  On the four roots
+`r=1,a^3,a^6,a^5` of `H`, the coefficient triples of
+`r^2 Delta+rQ+N` are respectively
+
+\[
+ (a,1,a^2),\quad(a,a^5,a^4),\quad(1,a,a^6),\quad(1,a^2,a^5),
+\]
+
+and hence never vanish identically.  Adding the at most four cover points
+above the two roots of `N` to the sharp pointed table gives
+
+\[
+                         48+4=52<72.                      \tag{30}
+\]
+
+Thus a valid pointed locator survives, closing the `(0,1)` boundary without
+a certificate.  The forced-root surface is now reduced to the 63 normal
+forms `(u,v)=(1,tau)` with `tau!=1`.
+
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
 degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
@@ -451,7 +536,7 @@ Hankel equations reduce to
 \[
 \begin{aligned}
  k_0+uv^2k_5+(u^6+v^3)k_6&=0,\\
- k_1+uv^2k_6+(u^6+v^3)k_7&=0.                            \tag{26}
+ k_1+uv^2k_6+(u^6+v^3)k_7&=0.                            \tag{31}
 \end{aligned}
 \]
 
@@ -460,7 +545,7 @@ removed.  Write the subspace polynomial as
 
 \[
  L_U(t)=t^8+\alpha t^4+\beta t^2+\gamma t,
- \qquad \gamma\ne0.                                      \tag{27}
+ \qquad \gamma\ne0.                                      \tag{32}
 \]
 
 Synthetic division of `L_U(t)+C` by `t+r` gives
@@ -468,11 +553,11 @@ Synthetic division of `L_U(t)+C` by `t+r` gives
 \[
  k_7=1,\ k_6=r,\ k_5=r^2,\quad
  k_1=\beta+r^6+\alpha r^2,\quad
- k_0=\gamma+r\beta+r^7+\alpha r^3.                       \tag{28}
+ k_0=\gamma+r\beta+r^7+\alpha r^3.                       \tag{33}
 \]
 
-Substitution of (28) into (26) first determines `beta` and then cancels every
-term except `gamma`; hence (26) forces `gamma=0`, contradicting (27).
+Substitution of (33) into (31) first determines `beta` and then cancels every
+term except `gamma`; hence (31) forces `gamma=0`, contradicting (32).
 Therefore the natural `q`-support plus affine-three-space-minus-one padding
 cannot close even the split-quadratic stratum.  This explains a substantial
 part of the earlier support-atlas failure without appealing to its
@@ -495,7 +580,7 @@ is the subspace polynomial of a two-dimensional `F2`-space and `C=L_U(b)` is
 the nonzero value defining a coset disjoint from zero, then
 
 \[
- h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{29}
+ h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{34}
 \]
 
 is automatically split with five distinct nonzero roots when the extra root
@@ -503,10 +588,10 @@ avoids that coset.  Its coefficients are
 
 \[
  (g_0,g_1,g_2,g_3,g_4,g_5)
- =(aC,aB+C,aA+B,A,a,1).                                   \tag{30}
+ =(aC,aB+C,aA+B,A,a,1).                                   \tag{35}
 \]
 
-Equations (29)--(30) give a four-parameter split chart on which the slope-pencil
+Equations (34)--(35) give a four-parameter split chart on which the slope-pencil
 conditions can be imposed explicitly.  The next proof should either:
 
 1. use the slope-pencil gate (6) on the strata where its constant term is not
@@ -518,7 +603,7 @@ endpoint syndrome `e7`, for which `B3=0`, `D=1`, and
 
 \[
  \operatorname {Tr}T
- =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{31}
+ =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{36}
 \]
 
 when `g4!=0`.  This is already an explicit lower-dimensional trace problem,
@@ -550,9 +635,10 @@ arguments do not answer that arithmetic question.
 | What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
-| How many marked-torus forms remain? | 66 total; the `tau=1` and `(0,0)` forms are closed | 63 generic `tau` values and the `(0,1)` boundary |
+| How many marked-torus forms remain? | 66 total; `tau=1` and both `u=0` forms are closed | 63 generic `tau!=1` values |
 | Does rootlessness close the `(0,0)` boundary? | no; (25) makes the cover empty, but the opposite trace splits it into two rational lines | closed by `130>54` |
-| Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (26)--(28) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
+| What closes the `(0,1)` boundary? | a `GF(8)` elliptic specialization with 72 points | closed by `72>52` |
+| Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (31)--(33) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |
 

@@ -148,7 +148,10 @@ same constant to have trace one.  Reversing the trace choice closes the
 endpoint: trace zero splits the cover into two rational lines with 130
 points, while all collisions including the two roots of `N` delete at most
 54.  The remaining forced-root surface is now the 63 generic `tau!=1` forms
-and the single `(0,1)` boundary.
+and the single `(0,1)` boundary.  That last boundary is also closed: taking
+the added root in `GF(8)` with `a^3+a+1=0` gives a genus-one curve with 12
+points over `GF(8)`, hence 72 over `GF(64)`, against 52 pointed deletions
+including `N=0`.  Only the 63 generic `tau!=1` forms remain on the surface.
 
 ## Objective
 

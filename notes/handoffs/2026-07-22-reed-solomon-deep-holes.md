@@ -152,7 +152,9 @@ final-pair cover becomes the constant equation `y^2+y=1/(a+1)`, and the
 rootless trace condition makes that fibre empty.  The opposite trace choice
 does close it: the cover is two rational lines, with 130 points against 54
 deletions including `N=0`.  Only 63 generic `tau!=1` forms and the `(0,1)`
-boundary remain on the forced-root surface.
+boundary remain on the forced-root surface.  The boundary is now closed too:
+a `GF(8)` specialization has 12 elliptic points over `GF(8)`, hence 72 over
+`GF(64)`, against 52 deletions.  Only the 63 generic `tau!=1` forms remain.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with
