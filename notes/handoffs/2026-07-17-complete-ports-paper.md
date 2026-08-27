@@ -2,21 +2,23 @@
 
 **Lane**: `complete-ports`
 
-**Date**: 2026-08-25
+**Date**: 2026-08-27
 **Status**: ACTIVE; C961 REPEATED-CONCATENATION COST COMPOSITION PROVED,
 PRIORITY-BOUNDED, HARD-RED-TEAMED, AND EXPORTED; C971 ERGO-COMP PACKAGING AND
 MANUSCRIPT UPDATE COMPLETE; 27-PAGE AUTHORITY AND 99-FILE STANDALONE GATES
 PASS; C962 ALGORITHM/BOUND DEVELOPMENT REMAINS IN PROGRESS; C325 APPENDIX
 VERIFIER AND C953 AGGREGATE REVIEW FOLLOW;
-C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR DEPOSIT
+C955 AMBIENT-REALIZATION SPECTRUM AND C972 COMPOSITIONAL-STATE
+CHARACTERIZATION REMAIN QUEUED; C976 EXPOSITION/LITERATURE/EXPORT CLOSED;
+NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
 Recovery*
 **Standalone paper repository**: `tavisrudd/compositional-recovery` at
 `~/src/math-papers/compositional-recovery`
-**Current local standalone commit**: `8a29435` (renamed repository and `compositional_recovery`
-manuscript stem; verified; no push or deposit)
+**Current local standalone commit**: `1fdb00c` (37-page revised manuscript;
+verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
@@ -43,8 +45,7 @@ classical inputs.
 
 ## Current paper spine
 
-Working title: *Exact Transfer of Bounded Linear Recovery and Relative Weight
-Hierarchies*.
+Title: *Exact Compositional Transfer of Bounded Linear Recovery*.
 
 1. recovery sets, normalized recovery equations, and stochastic repair as
    distinct forgetful layers;
@@ -98,6 +99,15 @@ Completed preparation:
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
 Current and completed strengthening:
+
+- [C976 exposition and literature-positioning closeout](../2026-08-27-c976-sequential-cold-read-repair.md)
+  reorganizes the opening around the loss of functional labels, the exact
+  two-sector formula, min--sum closure, and outer-distance collapse; adds
+  section navigation and scoped cross-field explanations; corrects the
+  surrounding GHW, service-rate, exact-repair, concatenated-LRC, and solver
+  literature; and exports the verified 37-page authority as standalone commit
+  `1fdb00c` without push or deposit.  The detailed 30-source audit is
+  [separate](../2026-08-27-c976-recent-literature-positioning-audit.md).
 
 - [C961 repeated-concatenation composition](../2026-08-24-c961-recovery-composition-law.md)
   proves exact min-sum substitution for labelled ordinary prescribed-coset
@@ -201,23 +211,12 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C961 and C971 are closed. C962 now includes the streamed/narrow Rust kernels,
-the regenerated scaling and TMA evidence, two paper-native benchmarks from
-Jin--Fu's published concatenated LRCs, and matched open-source exact controls
-for all six application front ends. The latter replace direct CP-SAT as the
-primary comparison: ERGO-comp wins by 336x--173,996x on the five compiled
-classes, while Graphillion's ZDD wins the 256-support recursive-XOR case by
-29x and motivates an adaptive compressed-family backend. On the binary
-`[129,72,10;2]` example,
-ERGO-comp computes exact `Gamma=5` in 20.938 ms versus 4.07 s direct and 4.91 s
-labelled CP-SAT. On the GF(4)-Hamming-outer binary `[4095,2718,6;2]` family
-member, ERGO-comp checks all 4,095 outer functionals in a 21-run median of
-231 ms versus completed single-worker optimality proofs of 100 s direct and
-82 s labelled CP-SAT, with respective peak RSS of 2.4, 119, and 124 MiB. The
-exact models, raw samples, hashes, source-depth audit, and ranked commercial
-storage/LDPC follow-ups are in
-`notes/2026-08-26-c962-published-benchmark-audit.md` and
-`notes/2026-08-26-c962-commercial-benchmark-candidates.md`.
+C962 remains the active private code-and-mathematics task for ergodis algorithm
+development and benchmark evidence.  C972 is the highest-value queued theorem
+upgrade: determine the strongest universality/minimality statement for the
+labelled compositional state, extend the rank-one contextual quotient where
+possible, and sharpen the fixed-outer functional-label separation.  C976 made
+no manuscript claim beyond the already proved rank-one contextual result.
 Continue C962 with the bounded explicit/ZDD/Roaring representation experiment,
 then only for additional paper-owned algorithm and bound development beyond
 the exported ERGO-comp baseline.

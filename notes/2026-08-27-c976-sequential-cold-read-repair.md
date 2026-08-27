@@ -873,3 +873,51 @@ The thesis was first inferable in the abstract (0002), but not comfortably absor
 The paper has a strong and genuinely coherent core: exact composition requires functional labels, support overlap is a separate information axis, and both insights lead to precise transfer, separation, and optimization results. Once the foundational definitions are established, many proofs are short and elegant. However, the intended cross-field expert reader currently pays a high front-loaded and recurrent notation tax. Too many central notions are announced before being made operational, the composition theorem is overbundled, and several decisive examples are harder to audit than they should be. The software methodology section also needs more disciplined experimental framing.
 
 Overall expert-reader friendliness: **promising but presently demanding (major revision for exposition)**. A coding theorist can reconstruct most of the paper; a finite algebraist or optimization expert will repeatedly stall on imported conventions, while a reader expert in only one of the three areas is unlikely to absorb the first pass without backtracking. The highest-value repair is not more background in bulk, but earlier concrete examples, stable notation, theorem decomposition, and one-sentence operational glosses exactly where disciplines meet.
+
+# Closeout after integrated repair
+
+The exhaustive packet pass above was stopped because it was spending tokens on
+material already superseded by its own later observations.  Its raw notes are
+preserved verbatim.  A fresh reader then reviewed only the revised abstract and
+Introduction, after which the same reader examined the complete manuscript by
+section and globally.  The resulting repairs:
+
+- open with the scalar-label loss and define exact transfer operationally;
+- state and explain the zero/nonzero-sector formula before the main theorem;
+- distinguish relative weights, labelled composition costs, exact support
+  families, and separately retained minimizing lifts;
+- add navigation for contextual equivalence, rank reduction, distance collapse,
+  and bounded transfer;
+- repair the contextual-congruence statement, optimizer theorem scope,
+  positive-density quantifiers, and projective-family threshold notation;
+- replace internal benchmark labels and broad software novelty language by
+  standard descriptions and exact prior-art comparisons; and
+- integrate the separate 30-source literature audit in
+  `notes/2026-08-27-c976-recent-literature-positioning-audit.md`.
+
+The final reread found no remaining global-flow or accessibility defect.  The
+authority release gate passed at 37 pages with 29 annotated claims, four Lean
+terminals, no TeX warnings, and a 77-file ergodis public-surface scan.  Export
+audit found zero private-reference findings.  The standalone release gate and
+export-manifest verification both passed at content SHA-256
+`aa514bdd4bf99feb71e01c5a3c64a2cbc1c8c325cd4e3fe5ec129ecc9e599f2f`;
+standalone commit `1fdb00c` was not pushed or deposited.
+
+## EJ/TT closeout and mystery ledger
+
+- **Settled:** the closest object-level precedent is prescribed-coset support
+  minimization, not the target-normalized outer-functional composition theorem.
+  The Introduction now makes that distinction explicitly.
+- **Settled:** the cleanest nearby construction comparison is the version-1
+  matrix-product LRC paper at arXiv:2310.15703v1.  The identifier was later
+  replaced, so the bibliography pins v1 rather than silently citing the current
+  unrelated record.
+- **Settled:** the previous Kurz--Yaakobi citation was attached to the wrong
+  claim; exact-repair bandwidth, service-rate, cooperative-locality, and solver
+  claims now cite their actual foundations.
+- **Open, owned by C972:** whether the labelled prescribed-coset state has a
+  full arbitrary-rank universality/minimality characterization.  This paper
+  proves the rank-one contextual quotient and sufficiency under repeated
+  composition, but does not claim the stronger converse.
+
+No additional incidental discovery remained for the lane discovery track.
