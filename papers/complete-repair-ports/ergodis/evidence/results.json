@@ -1,0 +1,785 @@
+{
+  "arithmetic": "exact prime-field and integer arithmetic",
+  "best_target_identity_census": {
+    "code_rank_cases": 320,
+    "field": 2,
+    "length": 5,
+    "systematic_presentations": 128
+  },
+  "coefficient_presentation_search": {
+    "best_distance": 3,
+    "best_identification_count": 2,
+    "best_thresholds": [
+      4,
+      6
+    ],
+    "distance_counts": [
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    "field": 2,
+    "helper_length": 3,
+    "identifications_checked": 6,
+    "quotient_dimension": 2,
+    "relative_weights": [
+      1,
+      3
+    ]
+  },
+  "contraction_dominance": {
+    "compressed_transitions": 4,
+    "direct_lifts": 64,
+    "field": 2,
+    "linear_cost_contractions": 9,
+    "outer_blocks": 3,
+    "retained_blocks": 1,
+    "uncompressed_transitions": 36
+  },
+  "cross_paper_transfers": {
+    "collision_identity": {
+      "candidates": 12,
+      "invisible": 2,
+      "legal": 7,
+      "obstructions": 9,
+      "redundancy": 2
+    },
+    "defect_core": {
+      "bad_cliques": 4,
+      "deleted": 4,
+      "edit_charge": 6,
+      "items": 7,
+      "survivors": 3
+    },
+    "feature_separator": {
+      "candidates_examined": 3,
+      "coefficient_dimension": 3,
+      "field": 2,
+      "nullity": 2,
+      "witness": [
+        0,
+        1,
+        1
+      ]
+    },
+    "replacement_graph": {
+      "component_sizes": [
+        2,
+        3
+      ],
+      "configurations": 5
+    },
+    "simultaneous_repair": {
+      "demands": 4,
+      "hall_left": 3,
+      "hall_neighbors": 2,
+      "matched": 3
+    }
+  },
+  "deterministic": true,
+  "gf27_q27_balanced_transversal": {
+    "distinct_pair_count": 2116,
+    "full_semilinear_mapping_orbits": 714,
+    "kappa_two_frobenius_fixed_mappings": 11,
+    "kappa_two_mapping_orbits": 184,
+    "mapping_count": 2120,
+    "mappings_per_fiber": {
+      "2": 530,
+      "18": 530,
+      "23": 530,
+      "26": 530
+    },
+    "normalized_fibers": {
+      "2": [
+        18,
+        23,
+        26
+      ],
+      "18": [
+        4,
+        17,
+        19
+      ],
+      "23": [
+        5,
+        14,
+        21
+      ],
+      "26": [
+        3,
+        10,
+        24
+      ]
+    },
+    "pair_multiplicities": {
+      "1": 2112,
+      "2": 4
+    }
+  },
+  "gf27_q27_t54_defect_shell": {
+    "centered_support_range": [
+      79,
+      136
+    ],
+    "compatible_histogram_pairs": 3435,
+    "distinct_centered_spectra": 1496,
+    "distinct_combined_degree_profiles": 1013,
+    "external_histograms_by_defect": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "field_order": 27,
+    "internal_histograms_by_defect": [
+      1,
+      2,
+      3,
+      6,
+      9,
+      12,
+      20,
+      28,
+      36,
+      52,
+      69,
+      86,
+      117,
+      150,
+      183,
+      237,
+      296,
+      355,
+      446,
+      545
+    ],
+    "maximal_secants": 54,
+    "packed_degree_profile_bytes": 32416,
+    "threshold_bitmap_bytes": 599552,
+    "total_defect": 19
+  },
+  "gf4_composition_crosscheck": {
+    "base_field": 2,
+    "compose_first_span_transitions": 43,
+    "demand_dimension": 2,
+    "direct_lifts": 4096,
+    "dp_transitions": 272,
+    "extension_degree": 2,
+    "labels_checked": 16
+  },
+  "hierarchical_witnesses": {
+    "hierarchical_composition": {
+      "child_supports": [
+        [],
+        [
+          2
+        ]
+      ],
+      "cost": 1,
+      "helper_loads": [
+        [
+          [
+            1,
+            2
+          ],
+          1
+        ]
+      ],
+      "local_labels": [
+        [
+          [
+            0
+          ],
+          [
+            0
+          ]
+        ],
+        [
+          [
+            1
+          ],
+          [
+            1
+          ]
+        ]
+      ],
+      "target": [
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ]
+    },
+    "prescribed_coset": {
+      "cost": 1,
+      "lift": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "support": [
+        2
+      ],
+      "target": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ]
+    },
+    "target_normalized": {
+      "child_supports": [
+        [],
+        [
+          0
+        ]
+      ],
+      "cost": 1,
+      "local_labels": [
+        [
+          [
+            0
+          ]
+        ],
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "target_images": [
+        [
+          [
+            0
+          ]
+        ],
+        [
+          [
+            1
+          ]
+        ]
+      ]
+    }
+  },
+  "incidence_search": {
+    "bounded_threshold": {
+      "alphabet": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "binomial_coefficients": [
+        0,
+        0,
+        0,
+        1,
+        -3,
+        6
+      ],
+      "evaluations": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "threshold": 3
+    },
+    "signed_incidence": {
+      "degrees": [
+        2,
+        2,
+        3,
+        2
+      ],
+      "signed_sums": [
+        0,
+        0,
+        -1,
+        0
+      ],
+      "support_constraints_hold": true
+    },
+    "ternary_orbit_search": {
+      "bound_prunes": 3,
+      "choices": [
+        "0:zero",
+        "1:zero",
+        "2:positive",
+        "3:negative"
+      ],
+      "memo_prunes": 0,
+      "orbits": 4,
+      "residue_prunes": 0,
+      "states_examined": 8,
+      "target_residue": [
+        0,
+        2
+      ],
+      "target_totals": [
+        2,
+        1
+      ]
+    }
+  },
+  "prescribed_coset_operation_counts": [
+    {
+      "closure_transitions": 14,
+      "coordinates": 4,
+      "direct_lifts": 256,
+      "dp_transitions": 43,
+      "generated_spans": 5,
+      "projective_classes": 3,
+      "reachable_labels": 16
+    },
+    {
+      "closure_transitions": 14,
+      "coordinates": 8,
+      "direct_lifts": 65536,
+      "dp_transitions": 43,
+      "generated_spans": 5,
+      "projective_classes": 3,
+      "reachable_labels": 16
+    },
+    {
+      "closure_transitions": 14,
+      "coordinates": 16,
+      "direct_lifts": 4294967296,
+      "dp_transitions": 43,
+      "generated_spans": 5,
+      "projective_classes": 3,
+      "reachable_labels": 16
+    },
+    {
+      "closure_transitions": 14,
+      "coordinates": 32,
+      "direct_lifts": 18446744073709551616,
+      "dp_transitions": 43,
+      "generated_spans": 5,
+      "projective_classes": 3,
+      "reachable_labels": 16
+    },
+    {
+      "closure_transitions": 14,
+      "coordinates": 64,
+      "direct_lifts": 340282366920938463463374607431768211456,
+      "dp_transitions": 43,
+      "generated_spans": 5,
+      "projective_classes": 3,
+      "reachable_labels": 16
+    }
+  ],
+  "projective_reliability": {
+    "budget_inversion_example": {
+      "budget": 240,
+      "m": 8,
+      "maximum_rank": 4,
+      "q": 2
+    },
+    "complete_profile_summands": [
+      {
+        "m": 8,
+        "separate_rank_summands": 120,
+        "shared_exact_span_summands": 36
+      },
+      {
+        "m": 16,
+        "separate_rank_summands": 816,
+        "shared_exact_span_summands": 136
+      },
+      {
+        "m": 32,
+        "separate_rank_summands": 5984,
+        "shared_exact_span_summands": 528
+      },
+      {
+        "m": 64,
+        "separate_rank_summands": 45760,
+        "shared_exact_span_summands": 2080
+      }
+    ],
+    "direct_crosschecks": [
+      {
+        "m": 2,
+        "nonzero_power_terms": 2,
+        "projective_points": 3,
+        "q": 2,
+        "t": 1
+      },
+      {
+        "m": 2,
+        "nonzero_power_terms": 1,
+        "projective_points": 3,
+        "q": 2,
+        "t": 2
+      },
+      {
+        "m": 3,
+        "nonzero_power_terms": 3,
+        "projective_points": 7,
+        "q": 2,
+        "t": 1
+      },
+      {
+        "m": 3,
+        "nonzero_power_terms": 2,
+        "projective_points": 7,
+        "q": 2,
+        "t": 2
+      },
+      {
+        "m": 3,
+        "nonzero_power_terms": 1,
+        "projective_points": 7,
+        "q": 2,
+        "t": 3
+      },
+      {
+        "m": 4,
+        "nonzero_power_terms": 4,
+        "projective_points": 15,
+        "q": 2,
+        "t": 1
+      },
+      {
+        "m": 4,
+        "nonzero_power_terms": 3,
+        "projective_points": 15,
+        "q": 2,
+        "t": 2
+      },
+      {
+        "m": 4,
+        "nonzero_power_terms": 2,
+        "projective_points": 15,
+        "q": 2,
+        "t": 3
+      },
+      {
+        "m": 4,
+        "nonzero_power_terms": 1,
+        "projective_points": 15,
+        "q": 2,
+        "t": 4
+      },
+      {
+        "m": 2,
+        "nonzero_power_terms": 2,
+        "projective_points": 4,
+        "q": 3,
+        "t": 1
+      },
+      {
+        "m": 2,
+        "nonzero_power_terms": 1,
+        "projective_points": 4,
+        "q": 3,
+        "t": 2
+      },
+      {
+        "m": 3,
+        "nonzero_power_terms": 3,
+        "projective_points": 13,
+        "q": 3,
+        "t": 1
+      },
+      {
+        "m": 3,
+        "nonzero_power_terms": 2,
+        "projective_points": 13,
+        "q": 3,
+        "t": 2
+      },
+      {
+        "m": 3,
+        "nonzero_power_terms": 1,
+        "projective_points": 13,
+        "q": 3,
+        "t": 3
+      }
+    ],
+    "large_operation_comparisons": [
+      {
+        "direct_failure_subsets": 57896044618658097711785492504343953926634992332820282019728792003956564819968,
+        "m": 8,
+        "mobius_terms_before_collection": 36,
+        "projective_points": 255,
+        "q": 2,
+        "t": 1,
+        "threshold": 128
+      },
+      {
+        "direct_failure_subsets": 57896044618658097711785492504343953926634992332820282019728792003956564819968,
+        "m": 8,
+        "mobius_terms_before_collection": 15,
+        "projective_points": 255,
+        "q": 2,
+        "t": 4,
+        "threshold": 240
+      },
+      {
+        "direct_failure_subsets": 37576681324381331646231689548629392438010920782533117931316655544515344401833735095419183974156299248510959616,
+        "m": 6,
+        "mobius_terms_before_collection": 10,
+        "projective_points": 364,
+        "q": 3,
+        "t": 3,
+        "threshold": 351
+      },
+      {
+        "direct_failure_subsets": 12718228212127407596740439969484820932664410252219978638451114295509409404406799452822555925124271947370395489870897751704957583721388559494711601357137355892362895163562802426267773219894054460008554489394925312007314201426461145956352,
+        "m": 5,
+        "mobius_terms_before_collection": 10,
+        "projective_points": 781,
+        "q": 5,
+        "t": 2,
+        "threshold": 750
+      }
+    ]
+  },
+  "proportional_block_compression": {
+    "compressed_transitions": 90,
+    "direct_lifts": 6561,
+    "effective_projective_blocks": 2,
+    "field": 3,
+    "outer_blocks": 4,
+    "uncompressed_transitions": 252
+  },
+  "scalar_noncomposition": {
+    "codes": [
+      {
+        "code": "I1",
+        "exact_cost": 1,
+        "persistent_scalar": 3,
+        "winning_sector": "nonzero"
+      },
+      {
+        "code": "I2",
+        "exact_cost": 2,
+        "persistent_scalar": 3,
+        "winning_sector": "nonzero"
+      }
+    ],
+    "field": 2
+  },
+  "schema": "ergodis-evidence-v4",
+  "service_lp_reduction": {
+    "active_helper_constraints": 3,
+    "blocks": 1000,
+    "demands": 2,
+    "flow_variables": 3,
+    "global_helper_coordinates": 4000,
+    "implicit_zero_helper_rows": 3997,
+    "inner_helper_coordinates": 4,
+    "stored_helper_rows_after_extension": 3
+  },
+  "storage_repair": {
+    "dual_word_scalar_supports": [
+      [
+        1
+      ],
+      [
+        2
+      ]
+    ],
+    "joint_materialization": {
+      "desired_columns": 2,
+      "empty_carrier_triangle_example": {
+        "coefficient_plans": [
+          {
+            "coefficients": [
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                2
+              ],
+              [
+                1,
+                3
+              ]
+            ],
+            "support": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "exact_joint_access": 3,
+        "field": 5,
+        "minimal_supports": [
+          [
+            0,
+            1,
+            2
+          ]
+        ]
+      },
+      "minimal_supports": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "materialized_distinct_replacements": {
+      "complete": true,
+      "demands": 2,
+      "repaired": 2
+    },
+    "minimum_round_schedule": {
+      "round_count": 2,
+      "rounds": [
+        [
+          [
+            2,
+            [
+              0
+            ]
+          ]
+        ],
+        [
+          [
+            3,
+            [
+              0
+            ]
+          ],
+          [
+            4,
+            [
+              2
+            ]
+          ]
+        ]
+      ],
+      "states_examined": 15
+    },
+    "normalized_scalar_equations": [
+      {
+        "coefficients": [
+          1
+        ],
+        "support": [
+          1
+        ]
+      },
+      {
+        "coefficients": [
+          1
+        ],
+        "support": [
+          2
+        ]
+      }
+    ],
+    "regenerative_closure": {
+      "arrival_times": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "unreachable": [
+        5
+      ]
+    },
+    "robust_functional_repair_plan_bounds": {
+      "clebsch_residual_six": {
+        "alternate_pairs": 4179,
+        "helper_triples_per_pair": 20,
+        "plans": 83580
+      },
+      "residual_eight_q25": {
+        "alternate_pairs": 3,
+        "helper_triples_per_pair": 56,
+        "plans": 168
+      },
+      "residual_eight_s_ge_7": {
+        "alternate_pairs": 318,
+        "helper_triples_per_pair": 56,
+        "plans": 17808
+      }
+    },
+    "weighted_vs_unit_capacity": {
+      "unit_support_repairs": 2,
+      "weighted_peak_pareto_states": 2,
+      "weighted_repairs": 1
+    }
+  },
+  "syndrome_trellis_comparison": {
+    "automatic_method": "syndrome",
+    "blocks": 8,
+    "demand_dimension": 2,
+    "exact_cost": 1,
+    "field": 2,
+    "functional_dual_dimension": 7,
+    "functional_maps_enumerated": 16383,
+    "generator_candidate_bound": 16383,
+    "syndrome_transition_bound": 256,
+    "trellis_transitions": 140,
+    "winning_sector": "nonzero"
+  }
+}

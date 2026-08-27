@@ -47,21 +47,20 @@ to equal that manifest, apart from the exporter's optional `.gitignore`,
 `PROVENANCE.md`, and `export-manifest.json`.  Those files are scanned when
 present; any other unlisted tracked file fails the release gate.
 
-The release verifier also runs `verification/check_ergo_comp_public.py`. That
-gate scans the complete ERGO-comp package, including code, comments, examples,
+The release verifier also runs `verification/check_ergodis_public.py`. That
+gate scans the complete ergodis package, including code, comments, examples,
 fixtures, benchmark labels, and evidence, for nonpublic identifiers, paths, or
 development residue. The algorithm evidence has an independent canonical
 replay:
 
 ```text
-cd algorithms
-python3 -m unittest -v test_algorithms.py
-python3 generate_evidence.py --check
-cd rust
+cd ergodis
+python3 python/test_algorithms.py
+python3 python/generate_evidence.py --check
 cargo fmt --check
 cargo clippy --all-targets --all-features -- -D warnings
 cargo test --all-features
-python3 generate_fixtures.py --check
+python3 python/generate_fixtures.py --check
 ```
 
 Refresh the tracked PDF only through the deterministic path:

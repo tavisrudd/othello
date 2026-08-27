@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 560" role="img" aria-labelledby="title desc">
+  <title id="title">ergodis parallel speedup by worker count</title>
+  <desc id="desc">Line chart showing composition scaling from 0.94 times at one Rayon worker to about 3.2 times at sixteen to twenty workers, and generic scheduler scaling to 2.44 times at twelve workers. Both decline at twenty-four workers.</desc>
+  <defs>
+    <style>
+      .title { font: 700 26px system-ui, sans-serif; fill: #0f172a; }
+      .subtitle { font: 14px system-ui, sans-serif; fill: #475569; }
+      .axis { stroke: #64748b; stroke-width: 1.5; }
+      .grid { stroke: #cbd5e1; stroke-width: 1; }
+      .baseline { stroke: #64748b; stroke-width: 1.5; stroke-dasharray: 7 6; }
+      .tick { font: 13px system-ui, sans-serif; fill: #475569; }
+      .label { font: 600 14px system-ui, sans-serif; fill: #0f172a; }
+      .composition { stroke: #2563eb; fill: none; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+      .scheduler { stroke: #ea580c; fill: none; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 10 7; }
+    </style>
+  </defs>
+  <rect width="1250" height="560" rx="20" fill="#f8fafc"/>
+  <text x="70" y="44" class="title">Parallel scaling: more cores stop helping before 24</text>
+  <text x="70" y="68" class="subtitle">Criterion point estimates, x86-64-v3; speedup relative to each native sequential kernel</text>
+
+  <line x1="90" y1="420" x2="950" y2="420" class="axis"/>
+  <line x1="90" y1="80" x2="90" y2="420" class="axis"/>
+  <line x1="90" y1="363" x2="950" y2="363" class="baseline"/>
+  <line x1="90" y1="250" x2="950" y2="250" class="grid"/>
+  <line x1="90" y1="137" x2="950" y2="137" class="grid"/>
+  <text x="75" y="368" text-anchor="end" class="tick">1×</text>
+  <text x="75" y="255" text-anchor="end" class="tick">2×</text>
+  <text x="75" y="142" text-anchor="end" class="tick">3×</text>
+
+  <g class="tick" text-anchor="middle">
+    <text x="90" y="447">1</text><text x="127" y="447">2</text>
+    <text x="202" y="447">4</text><text x="277" y="447">6</text>
+    <text x="352" y="447">8</text><text x="501" y="447">12</text>
+    <text x="651" y="447">16</text><text x="800" y="447">20</text>
+    <text x="950" y="447">24</text>
+  </g>
+  <text x="520" y="488" text-anchor="middle" class="label">worker threads</text>
+  <text x="25" y="250" text-anchor="middle" transform="rotate(-90 25 250)" class="label">speedup</text>
+
+  <polyline points="90,370 127,286 202,243 277,193 352,157 501,137 651,119 800,115 950,172" class="composition"/>
+  <polyline points="90,362 127,308 202,222 277,237 352,212 501,200 651,233 800,222 950,235" class="scheduler"/>
+  <g fill="#2563eb">
+    <circle cx="90" cy="370" r="5"/><circle cx="127" cy="286" r="5"/><circle cx="202" cy="243" r="5"/>
+    <circle cx="277" cy="193" r="5"/><circle cx="352" cy="157" r="5"/><circle cx="501" cy="137" r="5"/>
+    <circle cx="651" cy="119" r="6"/><circle cx="800" cy="115" r="5"/><circle cx="950" cy="172" r="5"/>
+  </g>
+  <g fill="#ea580c">
+    <circle cx="90" cy="362" r="5"/><circle cx="127" cy="308" r="5"/><circle cx="202" cy="222" r="5"/>
+    <circle cx="277" cy="237" r="5"/><circle cx="352" cy="212" r="5"/><circle cx="501" cy="200" r="6"/>
+    <circle cx="651" cy="233" r="5"/><circle cx="800" cy="222" r="5"/><circle cx="950" cy="235" r="5"/>
+  </g>
+
+  <line x1="978" y1="94" x2="1024" y2="94" class="composition"/>
+  <circle cx="1001" cy="94" r="5" fill="#2563eb"/>
+  <text x="1039" y="100" class="label">composition (default: 16)</text>
+  <line x1="978" y1="126" x2="1024" y2="126" class="scheduler"/>
+  <rect x="996" y="121" width="10" height="10" fill="#ea580c"/>
+  <text x="1039" y="132" class="label">generic scheduler (default: 12)</text>
+
+  <rect x="70" y="510" width="1110" height="32" rx="8" fill="#e2e8f0"/>
+  <text x="625" y="531" text-anchor="middle" class="subtitle">Small and grading-fused kernels remain serial; --threads N overrides the measured defaults.</text>
+</svg>

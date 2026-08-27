@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">ergodis compilation pipeline</title>
+  <desc id="desc">Structured finite algebraic data passes through certified compilation, then an adaptive exact backend, and produces an optimum with a replayable witness or obstruction.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: 700 28px system-ui, sans-serif; fill: #0f172a; }
+      .heading { font: 700 18px system-ui, sans-serif; fill: #0f172a; }
+      .body { font: 15px system-ui, sans-serif; fill: #334155; }
+      .small { font: 13px system-ui, sans-serif; fill: #475569; }
+      .arrow { stroke: #334155; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1200" height="430" rx="20" fill="#f8fafc"/>
+  <text x="50" y="48" class="title">Structure first, exact optimization second</text>
+
+  <rect x="50" y="92" width="235" height="230" rx="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="75" y="126" class="heading">Algebraic problem</text>
+  <text x="75" y="160" class="body">• local cost tables</text>
+  <text x="75" y="188" class="body">• outer linear blocks</text>
+  <text x="75" y="216" class="body">• helper capacities</text>
+  <text x="75" y="244" class="body">• symmetry / moment data</text>
+  <text x="75" y="282" class="small">Integer and finite-field input</text>
+
+  <path d="M285 207 H345" class="arrow"/>
+
+  <rect x="350" y="72" width="300" height="270" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="375" y="106" class="heading">Structural compilation</text>
+  <text x="375" y="142" class="body">Quotient equivalent choices</text>
+  <text x="375" y="172" class="body">Compress generated spans</text>
+  <text x="375" y="202" class="body">Verify positive gradings</text>
+  <text x="375" y="232" class="body">Pack bounded residues</text>
+  <text x="375" y="262" class="body">Reconstruct coefficient blocks</text>
+  <rect x="375" y="287" width="250" height="34" rx="8" fill="#bbf7d0"/>
+  <text x="500" y="309" text-anchor="middle" class="small">smaller exact state space</text>
+
+  <path d="M650 207 H710" class="arrow"/>
+
+  <rect x="715" y="72" width="205" height="80" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="817" y="105" text-anchor="middle" class="heading">Min-plus DP</text>
+  <text x="817" y="132" text-anchor="middle" class="small">parallel frontiers</text>
+  <rect x="715" y="167" width="205" height="80" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="817" y="200" text-anchor="middle" class="heading">Capacity DP</text>
+  <text x="817" y="227" text-anchor="middle" class="small">adaptive Pareto / lattice</text>
+  <rect x="715" y="262" width="205" height="80" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="817" y="295" text-anchor="middle" class="heading">Residual solver</text>
+  <text x="817" y="322" text-anchor="middle" class="small">enumerator or CP-SAT</text>
+
+  <path d="M920 207 H980" class="arrow"/>
+
+  <rect x="985" y="92" width="165" height="230" rx="16" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="1067" y="126" text-anchor="middle" class="heading">Exact result</text>
+  <text x="1010" y="166" class="body">• optimum cost</text>
+  <text x="1010" y="194" class="body">• helper choices</text>
+  <text x="1010" y="222" class="body">• local labels</text>
+  <text x="1010" y="250" class="body">• load vector</text>
+  <text x="1010" y="278" class="body">• design / obstruction</text>
+
+  <path d="M715 365 H920" stroke="#7c3aed" stroke-width="5" stroke-linecap="round"/>
+  <text x="817" y="394" text-anchor="middle" class="small">canonical replayable witnesses throughout</text>
+</svg>
