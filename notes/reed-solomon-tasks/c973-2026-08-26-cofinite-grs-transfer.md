@@ -455,6 +455,18 @@ Seroussi--Roth theorem.  The tangent/conjugate weight is inherited from the
 paper's proved rank-two arithmetic.  No finite-field census or new software
 output is used to establish the theorem.
 
+As a bounded sanity replay, the pinned digit-stripping checker was re-run:
+
+```text
+cd notes/reed-solomon-tasks
+sha256sum -c c973-digit-stripping-check.sha256
+python3 c973-digit-stripping-check.py
+```
+
+It passed for primes `2,3,5,7,11,13` and lower rows through `24`.  This checks
+the support/dimension recursion consumed in (5a); it is not evidence for the
+structural GRS or shell arguments.
+
 ## 10. `ej` + `tt` closeout and Mystery ledger
 
 The closeout pass asked whether the transfer only restated a known affine
