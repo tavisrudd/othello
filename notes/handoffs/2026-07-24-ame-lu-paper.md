@@ -25,6 +25,15 @@ audit, and mirror verification pass.  Preserve theorem scope and trust
 boundaries.  Do not close or archive C979 until the user explicitly directs it.
 Live card: `2026-08-27-c979-mds-css-exposition-revision.md`.
 
+**C981 is queued (2026-08-27).**  Explore the mathematical and publication
+potential exposed by the cleaned-up MDS--CSS paper: portability of the
+diagonal-multiplier method beyond MDS codes, the structure replacing the
+nullity dichotomy in broader CSS families, the independent value of the
+six-point and scalar-invariant results, and a current primary-literature audit
+of novelty and framing.  Return ranked, evidence-backed recommendations without
+expanding or closing C979 by default.  Card:
+`2026-08-27-c981-mds-css-mathematical-potential-and-framing.md`.
+
 **Referee edits applied (2026-08-16, unallocated user request).**  Fourteen
 edits to Paper I: the Corollary B.19 phase sign and empty-complement corner, the
 Lemma 5.1 `c=0` branch, explicitly constructed traceless local logarithms in the
