@@ -81,6 +81,12 @@ for a one-column extension and its GRS specialization
 `d(ker[H_S|f])=d_S(f)+1`, upgrading the top-shell result to an exact
 classification of MDS and NMDS one-column extensions.  It also isolates the
 family-wise minimum-word/support count as the next enumerator gate.
+That gate is closed in
+`c973-2026-08-26-family-wise-minimum-support-count.md`: individual extension
+columns are exact additive or cyclic-group subset-count problems, while a
+double count gives configuration-free family aggregates and hence aggregate
+minimum-word counts.  Arbitrary-deletion evaluation is exposed as a typed
+group-DP software follow-up, not added to the frozen toolkit here.
 
 ## Objective
 

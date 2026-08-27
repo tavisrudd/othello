@@ -377,6 +377,38 @@ coordinate.  These are not orbit counts under the stabilizer of `S`.  In
 small characteristic, (5b) is an explicit upper bound on the number of NMDS
 projective extension columns.
 
+The minimum-word multiplicity of each NMDS extension is also explicit up to a
+finite abelian-group subset count.  Put `m=r-1`, `N=q+1-s`, and
+
+\[
+ \mu_S(f)=\#\{T\subset S:|T|=m,\ f\in\langle\nu_m(T)\rangle\}.
+\]
+
+Then `A_r(\widehat C_f)=(q-1)\mu_S(f)`.  Although `mu_S(f)` need not be
+constant inside one geometric family, double counting gives the exact,
+deletion-configuration-free identities
+
+\[
+\begin{aligned}
+ \sum_{f\in\mathrm{Tan}}\mu_S(f)
+   &=(q+1-m)\binom Nm,\\
+ \sum_{f\in\mathrm{Conj}}\mu_S(f)
+   &=\frac{q(q-1)}2\binom Nm,\\
+ \sum_{f\in\mathrm{Split}_A}\mu_S(f)
+   &=\left[\binom s2+s(N-m)\right]\binom Nm.              \tag{11d}
+\end{aligned}
+\]
+
+For individual columns, tangents reduce to prescribed subset sums in
+`F_q`, incident split secants to subset products in `F_q^*`, and conjugate
+secants to subset products in the norm-one torus of order `q+1`.  The full
+character formulas, affine specializations, proof, and software-DP boundary
+are recorded in
+`c973-2026-08-26-family-wise-minimum-support-count.md`.
+Because the NMDS weight distribution has only this one free coefficient,
+(11d) also determines the complete family-aggregate weight enumerator by the
+standard NMDS recurrence.
+
 ## 4. Exact next-to-deep shell in large characteristic
 
 Assume `p>r-1`.  Then `M^max_(r,p)` is empty, and the rational points of
@@ -546,6 +578,10 @@ new application section.
    State (11a)--(11c) as the coding dictionary, so the same theorem is visibly
    an exact classification of MDS and NMDS one-column extensions rather than
    a disconnected affine-RS application.
+   Add (11d) as one corollary: it supplies the family-aggregate minimum-word
+   count without adding a new proof section.  Keep the individual character
+   formulas in an appendix or software note unless full enumerators are a
+   frontmatter objective.
 4. Cite Seroussi--Roth for the deep shell and say explicitly that the affine
    Cheng--Murray case is already known in this high-rate range.  Emphasize the
    new distance-`r-1` shell only after its audit clears.

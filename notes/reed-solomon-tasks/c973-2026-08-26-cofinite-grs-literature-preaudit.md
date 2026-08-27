@@ -53,6 +53,18 @@ reframing, not a novelty adjective.  A final audit should search the terms
 `almost MDS extension`, `near MDS extension`, `single-element extension`, and
 `NRC defect-one extension` through those citation graphs.
 
+The subsequent minimum-support theorem has two classical inputs which must
+not be advertised as new.  The current Li--Wan arXiv abstract for *On the
+subset sum problem over finite fields*, arXiv:0708.2456, states its exact and
+asymptotic finite-field subset-count scope and Reed--Solomon application.  The
+Meneghetti--Pellegrini--Sala HTML full text for *A formula on the weight
+distribution of linear codes with applications to AMDS codes*,
+arXiv:2003.14063, Theorem 10, gives the exact one-free-coefficient NMDS
+formula used here.  The claim needing a targeted audit is narrower: the
+additive/base-torus/norm-one-torus reduction for the three cofinite-GRS
+rank-two families and the configuration-free family aggregate (11d) in the
+transfer report.
+
 ## Search boundary
 
 Targeted searches were run for combinations of:

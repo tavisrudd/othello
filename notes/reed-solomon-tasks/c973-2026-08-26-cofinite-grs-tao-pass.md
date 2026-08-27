@@ -130,8 +130,11 @@ the family-wise support count is first proved and its prior art audited.
 | Are the extensions AMDS or NMDS? | settled: dual defect is also one | none |
 | Is the NMDS extension classification already in the literature? | scoped searches found adjacent but not matching work | claim-specific citation-graph audit |
 | Does the projective shell count equal an orbit count? | no; this was a potential category error | compute the support stabilizer action only if orbit enumeration is paper-relevant |
-| Can the full NMDS weight enumerator be recovered cheaply? | reduced to the exact number of `(r-1)`-supports spanning each rank-two family | separate arithmetic support-count theorem |
+| Can the full NMDS weight enumerator be recovered cheaply? | yes: the support theorem computes its one free coefficient by additive/torus subset counts; the family aggregate is closed outright | prior-art audit and optional typed group-DP implementation |
 
-The pass leaves one genuine mathematical mystery: the family-wise
-`(r-1)`-support count.  Everything else above is a structural consequence of
-the proved shell theorem.
+The family-wise `(r-1)`-support mystery is closed in
+`c973-2026-08-26-family-wise-minimum-support-count.md`.  Individual columns
+reduce to additive or torus subset counts, while a configuration-free double
+count gives exact tangent, conjugate-secant, and incident-split-secant
+aggregates.  The remaining gates are its prior-art audit and optional software
+packaging.
