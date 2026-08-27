@@ -45,6 +45,8 @@ pub enum Error {
     BadSyndromeWitness,
     #[error("no split locator was found through degree {0}")]
     NoLocator(usize),
+    #[error("no split locator avoiding the prescribed roots was found through degree {0}")]
+    NoPointedLocator(usize),
     #[error("unsupported request schema or evaluation convention")]
     BadSchema,
     #[error("positive deep certificate failed independent replay")]
@@ -2304,13 +2306,36 @@ pub fn search_simultaneous_marker_locator(
     request: &Request,
     candidate_limit: u64,
 ) -> Result<LocatorCertificate, Error> {
+    search_pointed_simultaneous_marker_locator(request, &[], candidate_limit)
+}
+
+/// Pointed variant of [`search_simultaneous_marker_locator`] whose complete
+/// support must avoid every root in `forbidden`.
+pub fn search_pointed_simultaneous_marker_locator(
+    request: &Request,
+    forbidden: &[Root],
+    candidate_limit: u64,
+) -> Result<LocatorCertificate, Error> {
     let (field, syndrome) = validate_canonicalization_request(request)?;
     if request.redundancy < 6 {
         return Err(Error::NoLocator(request.redundancy.saturating_sub(2)));
     }
+    for root in forbidden {
+        if let Root::Finite(x) = *root {
+            field.check(x)?;
+        }
+    }
+    let forbidden_count = forbidden.len();
+    let forbidden = forbidden.iter().copied().collect::<BTreeSet<_>>();
+    if forbidden.len() != forbidden_count {
+        return Err(Error::BadSupport);
+    }
     let marker_degree = request.redundancy - 5;
     let mut examined = 0u64;
     for marker_support in ProjectivePrefixes::new(&field, marker_degree) {
+        if marker_support.iter().any(|root| forbidden.contains(root)) {
+            continue;
+        }
         examined += 1;
         if examined > candidate_limit {
             return Err(Error::CandidateLimit {
@@ -2337,7 +2362,7 @@ pub fn search_simultaneous_marker_locator(
                 if cubic_support.len() != 3
                     || cubic_support
                         .iter()
-                        .any(|root| marker_support.contains(root))
+                        .any(|root| marker_support.contains(root) || forbidden.contains(root))
                 {
                     return Ok(None);
                 }
@@ -2367,7 +2392,11 @@ pub fn search_simultaneous_marker_locator(
             return Ok(certificate);
         }
     }
-    Err(Error::NoLocator(request.redundancy - 2))
+    if forbidden.is_empty() {
+        Err(Error::NoLocator(request.redundancy - 2))
+    } else {
+        Err(Error::NoPointedLocator(request.redundancy - 2))
+    }
 }
 
 fn search_shallow_locator(
@@ -3430,6 +3459,19 @@ mod tests {
         let input = request(field_spec, 11, syndrome);
         let certificate = search_simultaneous_marker_locator(&input, 1_000).unwrap();
         assert_eq!(certificate.distance, 9);
+        verify_certificate(&certificate).unwrap();
+    }
+
+    #[test]
+    fn pointed_simultaneous_marker_locator_avoids_infinity() {
+        let field_spec = prime_field(13);
+        let field = Field::new(field_spec.clone()).unwrap();
+        let support = (0..9).map(Root::Finite).collect::<Vec<_>>();
+        let syndrome = moment_syndrome(&field, 11, &support, &[1; 9]);
+        let input = request(field_spec, 11, syndrome);
+        let certificate =
+            search_pointed_simultaneous_marker_locator(&input, &[Root::Infinity], 1_000).unwrap();
+        assert!(!certificate.support.contains(&Root::Infinity));
         verify_certificate(&certificate).unwrap();
     }
 

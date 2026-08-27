@@ -1,9 +1,9 @@
 use clap::{Parser, Subcommand};
 use projective_reed_solomon::{
-    canonicalize_syndrome, classify, search_exact_locator, search_simultaneous_marker_locator,
-    verify_certificate, verify_deep_certificate, DeepCertificate, LocatorCertificate, Request,
-    CANONICALIZATION_SCHEMA, CERTIFICATE_SCHEMA, CLASSIFICATION_SCHEMA, DEEP_CERTIFICATE_SCHEMA,
-    VERIFICATION_SCHEMA,
+    canonicalize_syndrome, classify, search_exact_locator,
+    search_pointed_simultaneous_marker_locator, verify_certificate, verify_deep_certificate,
+    DeepCertificate, LocatorCertificate, Request, Root, CANONICALIZATION_SCHEMA,
+    CERTIFICATE_SCHEMA, CLASSIFICATION_SCHEMA, DEEP_CERTIFICATE_SCHEMA, VERIFICATION_SCHEMA,
 };
 use std::fs;
 use std::io::{self, Read};
@@ -68,7 +68,7 @@ enum Command {
     ///
     /// A returned locator is independently replayable. Exhausted candidate
     /// budgets and absent locators are not positive deep-hole verdicts.
-    SimultaneousLocator(SearchArgs),
+    SimultaneousLocator(SimultaneousArgs),
 
     /// Apply the fail-closed theorem registry and emit a structural verdict.
     ///
@@ -88,6 +88,20 @@ enum Command {
 struct SearchArgs {
     #[command(flatten)]
     input: InputArgs,
+}
+
+#[derive(clap::Args)]
+struct SimultaneousArgs {
+    #[command(flatten)]
+    input: InputArgs,
+
+    /// Finite projective roots that the returned locator must avoid.
+    #[arg(long = "forbid-root", value_name = "ENCODED_FIELD_ELEMENT")]
+    forbidden_roots: Vec<u32>,
+
+    /// Require the returned locator to avoid the point at infinity.
+    #[arg(long)]
+    forbid_infinity: bool,
 }
 
 #[derive(clap::Args)]
@@ -163,7 +177,19 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
         }
         Command::SimultaneousLocator(args) => {
             let request: Request = serde_json::from_str(&read_input(&args.input.input)?)?;
-            let certificate = search_simultaneous_marker_locator(&request, cli.candidate_limit)?;
+            let mut forbidden = args
+                .forbidden_roots
+                .into_iter()
+                .map(Root::Finite)
+                .collect::<Vec<_>>();
+            if args.forbid_infinity {
+                forbidden.push(Root::Infinity);
+            }
+            let certificate = search_pointed_simultaneous_marker_locator(
+                &request,
+                &forbidden,
+                cli.candidate_limit,
+            )?;
             print_json(&certificate, cli.compact)?;
         }
         Command::Classify(args) => {

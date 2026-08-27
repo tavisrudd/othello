@@ -51,10 +51,12 @@ Contracts `r-5` distinct marker roots, enumerates the complete resulting R5
 cubic pencil, and emits a replayable degree-`r-2` locator certificate when one
 exists.  It accepts every `r>=6`, `q>=r`.  A returned certificate proves a
 closer word; candidate-budget exhaustion or absence of a locator is not a
-positive deep-hole certificate.
+positive deep-hole certificate.  Repeat `--forbid-root ENCODED_FIELD_ELEMENT`
+and/or pass `--forbid-infinity` to require a pointed witness avoiding those
+projective roots.
 
 ```text
-projective-reed-solomon simultaneous-locator request.json \
+projective-reed-solomon simultaneous-locator --forbid-infinity request.json \
   > locator-certificate.json
 projective-reed-solomon verify locator-certificate.json
 ```

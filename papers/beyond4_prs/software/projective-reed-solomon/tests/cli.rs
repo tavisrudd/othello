@@ -67,10 +67,17 @@ fn simultaneous_locator_emits_a_replayable_r6_witness() {
       "redundancy":6,"evaluation":"full-projective-nrc-v1",
       "syndrome":[4,6,0,1,0,3]
     }"#;
-    let output = run_with_stdin(&["--compact", "simultaneous-locator"], request);
+    let output = run_with_stdin(
+        &["--compact", "simultaneous-locator", "--forbid-infinity"],
+        request,
+    );
     assert!(output.status.success());
     let certificate: Value = serde_json::from_slice(&output.stdout).unwrap();
     assert_eq!(certificate["distance"], 4);
+    assert!(!certificate["support"]
+        .as_array()
+        .unwrap()
+        .contains(&Value::String("Infinity".into())));
     let replay = run_with_stdin(&["--compact", "verify"], &certificate.to_string());
     assert!(replay.status.success());
 }
