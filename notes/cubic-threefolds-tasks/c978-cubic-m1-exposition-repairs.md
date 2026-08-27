@@ -29,9 +29,14 @@ to follow on a first expert read.
 
 ## Current state
 
-The abstract and introduction have been repaired against Section 2's exact
-logical order and terminology. The full deterministic paper gate passes, the
-rebuilt opening pages are visually clean, and a fresh exposition referee
-returns Accept after its two minor findings were repaired. The task remains
-open for further author-directed exposition repairs and final standalone
-synchronization.
+The abstract, introduction, proof roadmaps, technical transitions, and
+consequences now use standard mathematical language for the block
+decomposition, additive marker, coefficient fields, and separate center
+summands.  The introduction defines the quantum D-module operationally and
+explains both “even” and “generic” before using them.  The full deterministic
+paper gate passes; all thirteen rebuilt PDF pages have been reviewed; and a
+fresh exposition referee returned Accept after its two minor findings were
+repaired.  Authority commits `26ed17e86` and `a19ec904f` were exported and
+verified in standalone commits `03d6989` and `5ac9211`, with byte-identical
+PDFs.  The task remains active for the continuing manuscript and public
+formal-review prose pass.

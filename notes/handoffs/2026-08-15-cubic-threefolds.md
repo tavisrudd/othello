@@ -45,12 +45,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   fresh re-referees after every accepted repair.  Report and live card:
   `../2026-08-24-c956-exact-level-two-cubic-manuscript.md` and
   `../cubic-threefolds-tasks/c956-exact-level-two-cubic-manuscript.md`.
-- **C978 — cubic-stabilization `m=1` exposition repairs, active.** The abstract
-  and introduction now use standard prose for the block monoid and exponent
-  marker, separate the blowup and projective-bundle roles, and state the
-  Hodge-theoretic and later-corollary boundaries literally. The full paper gate
-  passes and a fresh exposition referee returns Accept. Further author-directed
-  repairs and final mirror synchronization remain open. Card:
+- **C978 — cubic-stabilization `m=1` exposition repairs, active.** The abstract,
+  introduction, proof roadmaps, technical transitions, and consequences now
+  use standard mathematical language; the QDM, its even restriction, and its
+  generic coefficient field are introduced before the block construction. All
+  thirteen rebuilt pages have been reviewed, the full paper gate passes, and a
+  fresh exposition referee returns Accept. Authority commits `26ed17e86` and
+  `a19ec904f` are verified in standalone commits `03d6989` and `5ac9211` with
+  byte-identical PDFs. The task remains open for the continuing manuscript and
+  public formal-review prose pass. Card:
   `../cubic-threefolds-tasks/c978-cubic-m1-exposition-repairs.md`.
 - **C958 — explicit level-two parametrizations, active.**  The type-`I_1`
   splitting field, sixteen exceptional sections, marked-plane blowdown, and
