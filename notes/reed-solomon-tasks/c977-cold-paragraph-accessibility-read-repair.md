@@ -60,9 +60,12 @@ theorem-domain change is authorized.
 ## Current status
 
 The raw packet read, opening/results/dictionary repair, recursive-carrier
-repair, and simultaneous-escape section checkpoint are complete.  The latter
-includes the correctness-driven removal of the vacuous rank-two
-degree-one-gcd branch recorded in the dated synthesis.  Both manuscript builds
-and the supplement gate pass.  Remaining work is the section-level pass from
-the high-weight-coset theorem through the appendices, followed by one global
-headline/novelty/prior-literature flow pass and the standalone export.
+repair, simultaneous-escape checkpoint, and high-weight-coset/coding-payoff
+checkpoint are complete.  The coding checkpoint prints the full
+family-aggregate NMDS enumerator, received three independent mathematical and
+expository passes, and has a focused novelty delta separating the paper-owned
+family incidence totals from the standard recurrence.  Both manuscript builds
+remain at 44 and 32 pages and the affected pages are visually clean.
+Remaining work is the section-level pass through the fixed-redundancy and
+verification/provenance material, followed by one global
+headline/interest/novelty/prior-literature flow pass and the standalone export.

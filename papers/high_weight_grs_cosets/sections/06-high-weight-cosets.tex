@@ -1,10 +1,22 @@
 \section{High-weight cosets and code extensions}
 \label{sec:high-weight-cosets}
 
-We now prove Theorem~\ref{thm:main} and record its two coding consequences.
-The reader needs only the conclusion of the preceding sections: outside
+We now turn the geometric theorem into its coding payoff: the two highest
+coset-weight shells, equivalently all one-column extensions with Singleton
+defect at most one, followed by family-wise minimum-support counts.  Deleting
+even one evaluation point changes the answer structurally.  The omitted curve
+points create a weight-\(r\) shell, while interiors of split secants incident
+with the deleted set join tangent and conjugate-secant points in weight
+\(r-1\); the placement of the deletions and the GRS multipliers do not affect
+the counts.
+
+The internal input is the carrier-and-escape theorem: outside
 \(\cP_r\cup\cM^{\max}_{r,p}\), there is a degree-\((r-2)\) split squarefree
-locator supported on \(S\).
+locator supported on \(S\).  Promotion to the top shell uses the
+Seroussi--Roth--D\"ur radius and extension results, while the full-support
+rank-two weights come from \cite{ZWK2020}.  What follows is the
+prescribed-deletion synthesis, its exact counts, and its MDS, NMDS, and
+enumerator consequences.
 
 \subsection{Coset weights}
 
@@ -54,7 +66,8 @@ interior point of a rational secant with at least one endpoint in \(A\).  A
 representation of \(f\) by at most \(r-2\) retained columns, combined with
 the secant representation, would give a nontrivial dependence among at most
 \(r\) distinct normal-rational-curve points.  This contradicts the arc
-property.  Hence \(d_S(f)\geq r-1\), and the deep-shell classification gives
+property.  Hence \(d_S(f)\geq r-1\).  Since \(f\) is not an omitted curve
+point, the weight-\(r\) classification gives \(d_S(f)\leq r-1\), and therefore
 equality.  Retained curve points have weight one, and interiors of secants
 whose two endpoints are retained have weight two.  The escape theorem deals
 with every point outside \(\cP_r\), so the list is exhaustive.
@@ -73,8 +86,11 @@ For the full affine support \(A=\{\infty\}\), the theorem reads
 \[
  N_r=1,\qquad N_{r-1}=\frac{q(q^2+4q-1)}2.
 \]
-The first equality is classical in this high-rate range; the second records
-the complete next shell.
+The unique weight-\(r\) direction is classical in this high-rate range; the
+complete weight-\((r-1)\) shell is the point-deleted conclusion proved here.
+By the next corollary, the former gives the unique projective MDS-extension
+direction, up to scaling the appended coordinate, and the latter gives the
+full NMDS-extension family.
 
 \subsection{MDS and NMDS appended columns}
 
@@ -90,7 +106,7 @@ For every \(f\ne0\),
 \begin{equation}\label{eq:extension-distance}
  d(\widehat C_f)=d_S(f)+1.
 \end{equation}
-Under the large-characteristic hypotheses of Theorem~\ref{thm:main}, the
+Under the hypotheses of Theorem~\ref{thm:main}, with \(p>r-1\), the
 omitted curve points give exactly the MDS extensions; the tangent,
 conjugate-secant, and \(A\)-incident split-secant points give exactly the
 NMDS extensions; every other appended column has Singleton defect at least
@@ -104,11 +120,17 @@ has size at least \(r+1\), or contains \(f\); after deleting \(f\), the latter
 is a smallest old-column span of \(f\).  This proves
 \eqref{eq:extension-distance}.
 
+If \(d_S(f)=r\), then \eqref{eq:extension-distance} reaches the Singleton
+bound \(r+1\), so the extension is MDS.  Conversely, an MDS extension forces
+\(d_S(f)=r\).
+
 If \(d_S(f)=r-1\), the primal extension has distance \(r\), one below the
 Singleton bound.  Choose \(r-1\) old columns spanning \(f\).  A nonzero
-functional vanishing on their hyperplane gives a dual word of weight
-\(|S|+1-r\), also one below the dual Singleton bound; the GRS distance of the
-old part gives the reverse inequality.  Hence the extension is NMDS.
+functional vanishing on their hyperplane also vanishes on \(f\), and hence
+gives a dual word of weight at most \(|S|+1-r\).  Its restriction to the old
+coordinates is a nonzero word in a GRS code of distance \(|S|-r+1\), which is
+the reverse bound.  Thus its weight is exactly \(|S|+1-r\), and the extension
+is NMDS.
 Conversely, an NMDS extension has primal distance \(r\), so
 \eqref{eq:extension-distance} forces \(d_S(f)=r-1\).  The theorem now gives
 the stated classes.
@@ -130,12 +152,19 @@ support gives one minimal dependence, unique up to a nonzero scalar.  Thus
 Let \(\mathrm{Tan}\), \(\mathrm{Conj}\), and \(\mathrm{Split}_A\) denote
 the sets of projective tangent, conjugate-secant, and deleted-point-incident
 split-secant directions in this shell.  Sums use one representative of each
-projective direction.
+projective direction.  Put \(M_{\mathcal F}=|\mathcal F|\).  Explicitly,
+\[
+ M_{\mathrm{Tan}}=q(q+1),\qquad
+ M_{\mathrm{Conj}}=\frac{q(q^2-1)}2,\qquad
+ M_{\mathrm{Split}_A}=\frac{(q-1)s(2q+1-s)}2.
+\]
+Here the last factor \(q-1\) counts interior projective points on each
+\(A\)-incident rational secant, not scalar syndrome representatives.
 
-\begin{theorem}[Family-aggregate minimum supports]
+\begin{theorem}[Family-aggregate NMDS enumerators]
 \label{thm:family-aggregate-nmds}%
 \coverage{absent}%
-Under the large-characteristic hypotheses of Theorem~\ref{thm:main},
+Under the hypotheses of Theorem~\ref{thm:main}, with \(p>r-1\),
 \begin{align}
  \sum_{f\in\mathrm{Tan}}\mu_S(f)
    &=(q+1-m)\binom Nm,\label{eq:aggregate-tangent}\\
@@ -145,9 +174,28 @@ Under the large-characteristic hypotheses of Theorem~\ref{thm:main},
    &=\left[\binom s2+s(N-m)\right]\binom Nm.
    \label{eq:aggregate-split}
 \end{align}
-These identities determine the complete family-aggregate and family-average
-NMDS weight enumerators.  They do not assert that individual extensions in
-one family have equal weight distributions.
+For a family \(\mathcal F\) above, put
+\(B_{\mathcal F}=\sum_{[f]\in\mathcal F}\mu_S(f)\), let
+\(L=N+1\), \(K=L-r\), and set
+\(\mathcal A_j^{\mathcal F}=\sum_{[f]\in\mathcal F}
+A_j(\widehat C_f)\).  Then
+\[
+ \mathcal A_0^{\mathcal F}=M_{\mathcal F},\qquad
+ \mathcal A_j^{\mathcal F}=0\ (1\leq j<r),\qquad
+ \mathcal A_r^{\mathcal F}=(q-1)B_{\mathcal F},
+\]
+and, for \(1\leq i\leq K\),
+\begin{align}
+ \mathcal A_{r+i}^{\mathcal F}
+ ={}&M_{\mathcal F}\binom{L}{K-i}
+ \sum_{j=0}^{i-1}(-1)^j\binom{r+i}{j}(q^{i-j}-1)\notag\\
+ &+(-1)^i\binom Ki(q-1)B_{\mathcal F}.
+ \label{eq:aggregate-nmds-enumerator}
+\end{align}
+Thus the displayed data determine the complete family-aggregate NMDS weight
+enumerators and, when \(M_{\mathcal F}>0\), the family averages.  They do not
+assert that individual extensions in one family have equal weight
+distributions.
 \end{theorem}
 
 \begin{proof}
@@ -162,18 +210,8 @@ retained endpoint is outside \(T\).  These give respectively
 \(\binom s2\) and \(s(N-m)\) incidences per \(T\).  Summing over all
 \(\binom Nm\) sets \(T\) proves the three formulas.
 
-If \(\mathcal A_j^{\mathcal F}=\sum_{[f]\in\mathcal F}
-A_j(\widehat C_f)\), then \eqref{eq:nmds-minimum-coefficient} gives
-\begin{align*}
- \mathcal A_r^{\mathrm{Tan}}
-   &=(q-1)(q+1-m)\binom Nm,\\
- \mathcal A_r^{\mathrm{Conj}}
-   &=(q-1)\frac{q(q-1)}2\binom Nm,\\
- \mathcal A_r^{\mathrm{Split}_A}
-   &=(q-1)\left[\binom s2+s(N-m)\right]\binom Nm.
-\end{align*}
-
-Let \(L=N+1\) and \(K=L-r\).  The standard NMDS recurrence
+Equation~\eqref{eq:nmds-minimum-coefficient} gives
+\(\mathcal A_r^{\mathcal F}=(q-1)B_{\mathcal F}\).  The standard NMDS recurrence
 \cite[Thm.~10]{MeneghettiPellegriniSala2020} expresses every coefficient as
 \begin{align*}
  A_{r+i}(\widehat C_f)
@@ -181,6 +219,6 @@ Let \(L=N+1\) and \(K=L-r\).  The standard NMDS recurrence
  \sum_{j=0}^{i-1}(-1)^j\binom{r+i}{j}(q^{i-j}-1)\\
  &+(-1)^i\binom Ki A_r(\widehat C_f),\qquad 1\leq i\leq K.
 \end{align*}
-Summing this identity over a family and applying
-\eqref{eq:nmds-minimum-coefficient} proves the final assertion.
+Summing this identity over the \(M_{\mathcal F}\) directions in a family proves
+\eqref{eq:aggregate-nmds-enumerator} and the final assertion.
 \end{proof}

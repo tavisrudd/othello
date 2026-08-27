@@ -94,3 +94,31 @@ Three independent source reviews accepted the revised proof and exposition
 spines.  The canonical and TIT builds pass at 44 and 32 pages, respectively;
 all affected pages and tables were visually inspected, and the supplement
 verification gate passes with 53 adopted manuscript labels.
+
+## Section-level spine pass: coding payoff
+
+The high-weight-coset section now begins with the coding result rather than
+with proof mechanics: the two top coset-weight shells, the equivalent
+Singleton-defect-at-most-one extension classification, and the family-wise
+minimum-support counts.  It states immediately why prescribed deletion is
+structural and separates the internal carrier/escape input from the imported
+radius, extension, and full-support rank-two inputs.
+
+Three independent reads found no mathematical blocker and prompted four
+precision repairs: the deleted-split-secant lower bound is closed by the
+already proved weight-r classification rather than a circular-sounding shell
+reference; MDS and dual-NMDS distance equalities are explicit; projective
+uniqueness is distinguished from scalar column representatives; and empty
+families are excluded from averages.  The family theorem now prints the
+closed aggregate enumerator instead of leaving it implicit in the standard
+NMDS recurrence.  This is stronger packaging, not a new proof ingredient:
+the paper-owned inputs are the three family incidence totals, while the
+recurrence and its family-wise summation are prior art and linearity.
+
+The claim-specific novelty delta is
+`c977-2026-08-27-family-aggregate-enumerator-novelty-delta.md`.  It confirms
+the C975 boundary: no searched source prints the three cofinite-support family
+sums, but the manuscript uses only “double counting yields” and “the standard
+recurrence gives,” with no priority adjective.  Both PDFs remain at 44 and 32
+pages; all six affected canonical/TIT pages were visually inspected and are
+clean.
