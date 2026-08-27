@@ -3,7 +3,7 @@
 ## Source boundary
 
 The theorem statements do not depend on a literature-absence claim.  The
-source audit read the two load-bearing references below at targeted depth:
+source audit checked the proof inputs at the following depths:
 
 - Yuri Tschinkel and Zhijia Zhang, *Universal torsors over quartic del Pezzo
   surfaces and stable rationality*, arXiv:2608.20029v1. Read depth: partial;
@@ -16,6 +16,28 @@ source audit read the two load-bearing references below at targeted depth:
   for rationality of degree at least five del Pezzo surfaces with a rational
   point. Read depth: partial (Theorem 2.1); PDF SHA-256
   `ed5b1bbade653b7feab309b5d43a775fbc971cead2d904a4f0e94c1aca8271af`.
+- Ciliberto--Mella--Russo, *Varieties with one apparent double point*,
+  arXiv:math/0210008v1. Read depth: partial (Theorem 4.1 and Corollary 4.2);
+  cached as `arXiv:math/0210008`, PDF SHA-256
+  `aa68b601d43dd24b948fb2931d09a522880f9a4d9785342cc76805b0a0de1a56`.
+- Yu. I. Manin, *Rational surfaces over perfect fields*. Read depth: partial
+  (Theorem 2.2 in the English résumé); the theorem gives stable equivalence
+  of the geometric divisor-class lattices after adjoining permutation
+  modules under a birational equivalence of smooth projective surfaces.
+- V. E. Voskresenskii, *On two-dimensional algebraic tori. II*. Read depth:
+  abstract and main-theorem statement on the MathNet record; the stated
+  theorem is that every two-dimensional algebraic torus is rational over its
+  field of definition.
+- T. Rudd, *Irrationality of cubic threefolds after one stabilization*. Read
+  depth: full text in its paper-local source and referee pass. The cited
+  immutable release is Zenodo version 0.16.0, DOI
+  `10.5281/zenodo.22132303`; the Zenodo API metadata was checked on
+  2026-08-27.
+- P. Engel, O. de Gaay Fortman, and S. Schreieder, *Matroids and the integral
+  Hodge conjecture for abelian varieties*, arXiv:2507.15704v3. Read depth:
+  partial (Corollary 1.4 and its stated consequence for very general cubic
+  threefolds); cached as `arXiv:2507.15704`, PDF SHA-256
+  `f0284c8249c07ab5e3d9e5e49504662fad26de205563ab5a48aea27e742741ee`.
 
 Two historical citations in the introduction are contextual rather than
 load-bearing:
@@ -29,17 +51,6 @@ load-bearing:
   secondary only, through Tschinkel--Zhang's “Levels of stable rationality”
   paragraph following Remark 4.4, which attributes the type-`I_0` two-variable bound
   to this paper; bibliographic metadata taken from their reference list.
-
-The historical source for tangent projection from an OADP variety was also
-checked directly: Ciliberto--Mella--Russo, *Varieties with one apparent double
-point*, arXiv:math/0210008v1. Read depth: partial (Theorem 4.1 and Corollary
-4.2); cached as `arXiv:math/0210008`, PDF SHA-256
-`aa68b601d43dd24b948fb2931d09a522880f9a4d9785342cc76805b0a0de1a56`.
-
-The lower-bound input, T. Rudd, *Irrationality of cubic threefolds after one
-stabilization*, was read at full-text depth in its paper-local source and
-referee pass. The cited immutable release is Zenodo version 0.16.0, DOI
-`10.5281/zenodo.22132303`; the Zenodo API metadata was checked on 2026-08-27.
 
 The bounded novelty screen and its exact limitations remain in the durable
 research report; the manuscript uses no "first" or "to our knowledge"
