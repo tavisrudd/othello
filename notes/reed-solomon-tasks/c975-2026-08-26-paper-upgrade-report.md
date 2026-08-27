@@ -2,7 +2,7 @@
 
 **Lane:** `reed-solomon`  
 **Date:** 2026-08-26  
-**Status:** accepted by final cold read after localized repairs; artifact rename in progress
+**Status:** complete
 
 ## Paper spine
 
@@ -135,3 +135,20 @@ paper:
    Version 2 deposit.
 
 No other genuine mystery remains inside C975's theorem and exposition scope.
+
+## Artifact identity and export
+
+The official title capitalization is uniform:
+*High-Weight Cosets of Generalized and Extended Reed--Solomon Codes*.
+The authority is `papers/high_weight_grs_cosets`; both TeX entry points and
+PDFs use the basename `high-weight-grs-cosets`, with the TIT variant suffixed
+`-tit`.  The standalone local repository is
+`~/src/math-papers/high-weight-grs-cosets`, and its origin is configured for
+`tavisrudd/high-weight-grs-cosets`; the user owns the upstream rename.
+
+Authority commits `4008f090f` and `e9b31ee22` contain the mathematical rewrite,
+referee repairs, artifact rename, and title normalization.  The clean
+standalone history records the required explicit old-path deletion in
+`ac38574` and the exporter sync in `abea56d`.  Export verification gives content
+SHA-256 `31e1c48a6846094fe9cad1c03e7ca47a9387d0550cd6f0bc25e4f4964503cb76`
+over 147 tracked files.  No push, tag, DOI deposit, or submission occurred.

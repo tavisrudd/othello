@@ -120,6 +120,23 @@ against every forbidden projective root over GF(16), GF(27), and GF(49):
 calibration, not a carrier census or theorem.  Report:
 `notes/reed-solomon-tasks/c974-2026-08-26-implementation-report.md`.
 
+C975 is complete.  The former Beyond Four manuscript is now
+*High-Weight Cosets of Generalized and Extended Reed--Solomon Codes*.  Its
+headline theorem classifies every projective syndrome direction of weight at
+least (r-1) for arbitrary redundancy (r\ge6), arbitrary multipliers, and
+any prescribed finite deletion from the projective line in the stated explicit
+field range; the deep-hole shells, MDS/NMDS one-column extensions,
+family-minimum-support counts, and aggregate enumerators follow from that
+spine.  R5--R7 are sharp refinements and R8--R10 are companion records only.
+Three PDF-only referee rounds ended at minor revision 8.5/10 with no conceptual
+blocker, and every requested repair is in the 42-page archival and 30-page TIT
+PDFs.  The authority is `papers/high_weight_grs_cosets`; the TeX/PDF basename,
+local standalone directory, exporter repository, and future upstream name are
+`high-weight-grs-cosets`.  Authority commits are `4008f090f` and `e9b31ee22`;
+verified local standalone commits are `ac38574` and `abea56d`.  Nothing was
+pushed or deposited; the user owns the upstream GitHub rename.  Report:
+`notes/reed-solomon-tasks/c975-2026-08-26-paper-upgrade-report.md`.
+
 C886 is complete.  The paper now has a layered two-track exposition: a mature
 generalist can follow the syndrome-to-carrier mechanism without entering every
 elimination, while the specialist proof, exceptional cases, and verification
