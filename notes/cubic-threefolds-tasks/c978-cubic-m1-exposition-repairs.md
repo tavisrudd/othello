@@ -39,4 +39,8 @@ fresh exposition referee returned Accept after its two minor findings were
 repaired.  Authority commits `26ed17e86` and `a19ec904f` were exported and
 verified in standalone commits `03d6989` and `5ac9211`, with byte-identical
 PDFs.  The task remains active for the continuing manuscript and public
-formal-review prose pass.
+formal-review prose pass.  A subsequent full cold-read referee protocol found
+the primary manuscript and all thirteen PDF pages acceptable; its only required
+repairs were legacy terms in public claim-map descriptions.  Those prose-only
+repairs were accepted on rereview and committed as authority `bc39e8509` and
+standalone `2faeb8a`.  C978 remains active by author instruction.
