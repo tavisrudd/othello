@@ -13,6 +13,10 @@ and broadly relevant to modern coding theory as the proved results permit.
 The paper should lead with its arbitrary-redundancy structural theorem and
 the resulting distance-partition/code-extension statements, not with the
 chronology of the redundancy-five through redundancy-ten calculations.
+Because the integrated theorem allows arbitrary nonzero multipliers and
+supports obtained by deleting prescribed points of the projective line, the
+title and opening should name generalized Reed--Solomon codes; full-support
+PRS is a specialization, not the boundary of the paper.
 
 ## Required integration
 

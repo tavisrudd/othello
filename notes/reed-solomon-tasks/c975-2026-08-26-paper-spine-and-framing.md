@@ -225,22 +225,31 @@ or introduction.
 
 Recommended:
 
-> **Deep holes and near-MDS extensions of projective Reed--Solomon codes**
+> **Top distance layers and near-MDS extensions of generalized
+> Reed--Solomon codes on the projective line**
 
-If retaining the existing brand is important, use:
+Shorter alternative:
 
-> **Deep holes and near-MDS extensions of projective Reed--Solomon codes:
-> recursive carriers beyond redundancy four**
+> **Distance layers and one-column extensions of generalized
+> Reed--Solomon codes**
+
+The recommended title is more precise.  It names both main coding outputs
+and the actual class in the theorem: arbitrary nonzero GRS multipliers on
+supports
+`S=P1(F_q) minus A` in the stated high-rate range.  Full-length PRS is only
+the specialization `A=empty`, so it should not delimit the title.
 
 Do not retain “exact classifications through redundancy ten” in the title.
 It makes the strongest arbitrary-redundancy theorem look secondary and
 dates the paper to a stagewise programme it has now superseded.
 
-“Top distance layers of projective Reed--Solomon codes” is mathematically
-cleaner but undersells the extension theorem.  “Generalized
-Reed--Solomon” in the title is defensible, but the recommended title is more
-natural because the full geometry is projective and the GRS multiplier and
-point-deletion generality are stated in the first theorem.
+Avoid “projective Reed--Solomon codes” as the sole code class in the title:
+that narrows a theorem for point-deleted, multiplier-general GRS systems to
+its full-support special case.  The qualification “on the projective line”
+records the common normal-rational-curve geometry without making PRS the
+outer boundary of the result.  The abstract should state the exact support
+and threshold regime immediately so that “generalized Reed--Solomon” is not
+read as an unsupported all-parameter claim.
 
 ## 5. Replacement and deletion map
 
