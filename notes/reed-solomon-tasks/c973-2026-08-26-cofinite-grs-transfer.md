@@ -27,6 +27,11 @@ and, in characteristic two,
  \left\lfloor2\sqrt{6r+6s-24}\right\rfloor.               \tag{2}
 \]
 
+Thus `Q^*_(r,s)=Q^*_(r+s,0)`, and likewise in characteristic two: one
+forbidden evaluation point has exactly the threshold cost of one unit of
+virtual redundancy.  The paper can reuse one threshold function evaluated at
+`r+s` rather than introduce a second notation family.
+
 For `r>=6`, `q>=Q^*_{r,s}` (or the binary bound (2)), and every
 projective syndrome direction `f`,
 
@@ -422,7 +427,8 @@ new application section.
 1. Define `C_S(v)` once, with `A=P1(F_q)\S`, and state multiplier covariance
    immediately after the syndrome dictionary.
 2. State the pointed simultaneous-marker theorem with `s=|A|`; the current
-   PRS theorem is its `s=0` specialization.
+   PRS theorem is its `s=0` specialization.  Write its field hypothesis as
+   `q>=Q^*_(r+s)` to make the virtual-redundancy law visible and save notation.
 3. Replace the PRS-only high-characteristic conclusion by the cofinite-GRS
    top-shell theorem.  Display the `s=0` and `s=1` consequences in two lines.
 4. Cite Seroussi--Roth for the deep shell and say explicitly that the affine
