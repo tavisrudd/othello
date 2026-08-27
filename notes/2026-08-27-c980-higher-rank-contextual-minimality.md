@@ -1,8 +1,9 @@
 # C980 higher-rank contextual minimality and finite-state bounds
 
 **Lane:** `complete-ports`
-**Status:** IN PROGRESS; MATHEMATICS ONLY; BOUNDED HIGHER-RANK FINITE-STATE,
-CONGRUENCE, AND ORDERED-MONOID THEOREMS PROVED AS CANDIDATES
+**Status:** IN PROGRESS; MATHEMATICS ONLY; HIGHER-RANK SMALL-MODEL,
+UNIVERSALITY, CONGRUENCE, EXACT ORBIT-CENSUS, AND ORDERED-MONOID THEOREMS
+PROVED AS CANDIDATES
 **Date:** 2026-08-27
 
 ## Objective
@@ -99,9 +100,10 @@ then makes the family complete.  If two profiles differ on an admissible
 triple, its corresponding outer code separates them; if they agree, the exact
 formula gives the same cost in every context.
 
-This proof is algebraically complete as a candidate lemma.  It still needs a
-typed reread against the paper's trace identification, target normalization,
-and repeated-field-tower conventions before promotion.
+This proof is algebraically complete as a candidate lemma.  A typed reread
+against the paper's trace identification, target normalization, and
+repeated-field-tower formula found no mismatch; the literature and independent
+hostile-proof gates remain before promotion.
 
 ## Radius truncation: one universal finite test family
 
@@ -138,6 +140,67 @@ C_R[s,a_0](n) = C_R[s,a_0](nbar).
 Capping preserves the positive support of `n`, hence the helper-spanning
 condition.  This argument does not require `z` to be finite.
 
+### Rank--radius reduction
+
+The fixed radius sharpens the manuscript's rank-bounded outer-test theorem.
+Suppose a nonzero map `B:T->D` has total cost `c<R`, and put
+`D_B=span_L B(T)`.  Let `A` be the external blocks on which `B_h` is nonzero.
+Every such block costs at least one because `lambda(B_h)=0` only for the zero
+label.  Hence `|A|<=c`.
+
+The coordinate maps indexed by `A` span `D_B^vee`.  Indeed, coordinates
+outside `A` vanish on `B(T)` and therefore on `D_B`.  A vector in `D_B`
+annihilated by the coordinates in `A` would consequently be supported only on
+the target block, which compatibility excludes.  Thus
+
+```text
+dim_L D_B <= |A| <= c <= R-1.
+```
+
+It follows that the response after truncation at `R` is completely determined
+by functional-dual dimensions
+
+```text
+s <= u_R = min(t,R-1).
+```
+
+If no sector of those dimensions has cost below `R`, every omitted sector is
+truncated to `R`.  This is an exact rank--radius reduction, not merely a search
+heuristic.
+
+### Small separating-context theorem
+
+There is a stronger simultaneous reduction.  Suppose two inner problems have
+different `R`-truncated responses in some outer context, and orient them so
+that the first response is `c` and the second is larger.  Then `c<R`.
+
+If the first minimum is in the zero sector, the full outer code (`D=0`)
+already separates the two zero-sector costs.  Otherwise choose a minimizing
+nonzero map `B` for the first problem and put `D_B=span_L B(T)`.  Let `A` be
+the external coordinates on which `B_h` is nonzero.  As above,
+`|A|<=c<=R-1`, and the coordinate maps in `A` span `D_B^vee`.  Puncture
+`D_B` to the target coordinate together with `A`.  This puncturing is
+injective, remains a compatible functional dual, and deletes only coordinates
+that vanish identically on `D_B`.  It therefore preserves every sector cost
+for maps into `D_B`, for either inner problem.
+
+For the first problem, restriction to `D_B` cannot lower the original minimum
+but contains its minimizing map, so its cost remains `c`.  For the second,
+restricting from the original functional dual to `D_B` can only increase its
+minimum, so its cost remains strictly greater than `c`.  The punctured context
+still separates the two states and has
+
+```text
+functional-dual dimension <= min(t,c),
+outer length <= 1+c <= R.
+```
+
+Together with the two-block zero-sector context, every distinction after
+truncation at `R` is therefore witnessed at outer length at most `max(2,R)`.
+This small-model theorem is stronger than coordinatewise multiplicity capping:
+the total helper multiplicity, not merely each type multiplicity, is at most
+`R-1`.
+
 ### Bounded higher-rank contextual-state theorem
 
 Fix `Fq <= L`, an identified target space `T` of dimension `t`, and `R >= 1`.
@@ -149,18 +212,19 @@ they have the same `Z_R` and the same values
 C_R[s,a_0](n)
 ```
 
-for `1 <= s <= t`, every target type `a_0 in V_s^vee`, and every spanning
-multiplicity vector
+for `1 <= s <= u_R`, every target type `a_0 in V_s^vee`, and every spanning
+multiplicity vector of total size at most `R-1`:
 
 ```text
-n in {0,...,R}^(V_s^vee minus {0}).
+n in N^(V_s^vee minus {0}),
+sum_a n_a <= R-1.
 ```
 
 Every distinguishing context may be chosen with functional-dual dimension at
-most `t` and with at most
+most `u_R` and with at most
 
 ```text
-1 + R (Q^t - 1)
+max(2,R)
 ```
 
 blocks.  In particular, exact numerical behaviour through any fixed radius
@@ -170,16 +234,17 @@ untruncated zero-sector cost is infinite.
 To prove necessity, `D=0` exposes `Z_R`.  A differing table entry is realized
 by the outer code whose functional dual is generated by the corresponding
 spanning column list, so it exposes that entry.  For sufficiency, first use
-the rank-bounded outer-test proposition to reduce every map to an outer
-functional dual of dimension at most `t`; the column-type formula then applies,
-and the cap replaces every multiplicity by one in the displayed finite grid.
-This also proves the block bound.  The theorem is therefore a genuine
+the small separating-context theorem: any difference outside the displayed
+family would produce a difference inside it.  The column-type formula
+identifies every member of that family with one displayed table entry.  The
+theorem is therefore a genuine
 coarsest-observable-state statement, not only a sufficient encoding.
 
 The number of raw nonzero-sector probes is at most
 
 ```text
-P_t(R,Q) = sum_{s=1}^t Q^s (R+1)^(Q^s-1),
+P_t(R,Q) = sum_{s=1}^u_R
+             Q^s binom(Q^s+R-2,R-1),
 ```
 
 before removing nonspanning vectors and quotienting by changes of basis.  Each
@@ -199,13 +264,29 @@ remaining multiplicity vectors by the appropriate stabilizer, the number of
 probe orbits is therefore at most
 
 ```text
-Pbar_t(R,Q) = 2 sum_{s=1}^t (R+1)^(Q^s-1).
+Pbar_t(R,Q) = 2 sum_{s=1}^u_R binom(Q^s+R-2,R-1).
 ```
 
 Thus `(R+1)^(1+Pbar_t(R,Q))` is the sharper immediate class bound.  Removing
 nonspanning vectors and taking stabilizer orbits only decreases it.
 
-There is also an exact state-dependent cap.  Put `C=min(R,z)` and, for fixed
+In recovery-radius notation `R=r+1` and `u=min(t,r)`, this gives
+
+```text
+Pbar_t(r+1,Q)
+  = 2 sum_{s=1}^u binom(Q^s+r-1,r)
+  <= 2u binom(Q^u+r-1,r)
+  <= 2r binom(Q^r+r-1,r).
+```
+
+Thus, for fixed field size and radius, both the separating outer length and
+the number of contextual probes are uniform in the target rank once `t>=r`,
+and are independent of the inner block length.  This is a semantic state-size
+bound, not an oracle-time bound: evaluating one prescribed-coset entry may
+still be computationally difficult.
+
+For direct evaluation of a fixed large context, there is also an exact
+state-dependent coordinatewise cap.  Put `C=min(R,z)` and, for fixed
 `(s,a_0,a)`, write `u_X=mu(a_0 X)` and `c_Xa=lambda(a X)`.  Forms with
 `u_X >= C` are already masked.  For every remaining form with finite positive
 slope, the relevant threshold is `ceil((C-u_X)/c_Xa)`; an infinite positive
@@ -214,10 +295,38 @@ threshold, with one included to preserve positive support, gives a cap
 `R_a <= C <= R`.  Replacing the uniform factor `(R+1)` by `(R_a+1)` for each
 type yields the corresponding sharper probe bound.
 
-At `t=1` this strictly strengthens the manuscript's current rank-one theorem:
-the projective probes over all outer arities reduce, through radius `r`, to one
-finite table with outer length at most `1+(r+1)(Q-1)`.  No manuscript change is
-proposed until the typed proof and literature gates close.
+This adaptive cap can accelerate evaluation, but the small-context theorem is
+the stronger canonical-state result.
+
+At `t=1` this strictly strengthens the manuscript's current rank-one theorem.
+For `r=0` the zero sector alone suffices.  For `r>=1`, the projective probes
+over all outer arities reduce to contexts of length at most `r+1`.  No
+manuscript change is proposed until the typed proof and
+literature gates close.
+
+### Exact untruncated corollary for recoverable targets
+
+In the manuscript's setting `T <= W_P`, so `rho_T(I)` is finite.  The inner
+code is proper, hence `I^perp` is nonzero and `d(I^perp)` is finite.  Therefore
+
+```text
+z = rho_T(I) + d(I^perp) < infinity,
+Gamma_T(C[I]) <= z
+```
+
+in every outer context.  Two inner problems with different `z` are separated
+by the zero-functional context.  If their `z`-values agree, apply the bounded
+theorem with `R=z`; truncation then changes no response.  Consequently full,
+untruncated higher-rank contextual equivalence also has one finite complete
+test table.  A distinguishing context has at most
+
+```text
+max(2,z)
+```
+
+blocks (or two blocks when the zero-sector values already differ).  In
+particular, the manuscript's exact rank-one contextual quotient has a finite
+outer-arity-independent realization, not only its bounded-radius shadow.
 
 ## Arity-independent finite representation
 
@@ -239,7 +348,7 @@ by
 sum_{s=1}^t Q^(2s) (Q^(t s)-1).
 ```
 
-The bound is deliberately raw.  The finite capped truth table above is already
+The bound is deliberately raw.  The finite bounded truth table above is already
 canonical as a response function, while the lower-envelope form can be much
 smaller computationally.  Distinct affine descriptions can agree on every
 integer probe, so an ordinary real convex lower hull is not by itself a
@@ -255,11 +364,57 @@ n'_(a o g) = n_a.
 Changing `G` to `G o g` and `X` to `g^(-1)X` shows that `C_R` is constant on
 these orbits.  Conversely, an orbit is exactly the same column-type context
 written in another basis of its functional dual.  Thus the function on the
-orbit set of admissible capped triples is a basis-free canonical contextual
+orbit set of admissible bounded triples is a basis-free canonical contextual
 state.  Choosing one lexicographically least representative per orbit is an
 implementation choice, not additional mathematics.  The raw probe bound may
 therefore be replaced by the exact number of these orbits; Burnside's formula
 computes that number, with the spanning indicator retained.
+
+The orbit count itself has an exact finite formula.  Let
+
+```text
+A_s = V_s^vee minus {0},
+X_s(R) = {n:A_s->N : sum_a n_a<=R-1,
+                     span(supp n)=V_s^vee},
+G_s = GL_s(L),
+P_s = stabilizer in G_s of one fixed nonzero covector epsilon.
+```
+
+The number of rank-`s` probes is exactly
+
+```text
+|X_s(R)/G_s| + |X_s(R)/P_s|.
+```
+
+The first term is the zero-target orbit count.  Transitivity on nonzero target
+types identifies the second term with the nonzero-target orbit count.  Each
+term is given by Burnside.  More explicitly, for `g` in either acting group,
+let `L_g` be the lattice of `g`-invariant `L`-subspaces of `V_s^vee`, and let
+`mob_g` be its Möbius function.  If `Orb_g(H)` is the set of `g`-orbits on
+`H minus {0}`, define
+
+```text
+A_g(H,r) = coefficient sum through degree r of
+           product_{C in Orb_g(H)} (1-x^|C|)^(-1).
+```
+
+A fixed multiplicity function is constant on each orbit `C`; assigning it
+value `m` consumes total multiplicity `m|C|`.  Hence `A_g(H,R-1)` counts the
+fixed functions supported in `H` with total multiplicity at most `R-1`.  The
+number of fixed spanning multiplicity functions is
+
+```text
+Fix_g X_s(R)
+  = sum_{H in L_g} mob_g(H,V_s^vee) A_g(H,R-1).
+```
+
+The span of a fixed function's positive support is `g`-invariant.  Möbius
+inversion removes the functions whose support spans a proper invariant
+subspace.  Averaging these
+fixed-point counts over `G_s` and `P_s` gives the exact basis-free probe census.
+For the Pareto table, which uses a coordinatewise cap rather than the scalar
+total-size reduction, the fixed-point count instead assigns one of
+`K_R,k+1` values independently to each group orbit before imposing spanning.
 
 A unique smallest affine-form presentation does not follow.  On a finite
 integer grid, distinct collections of tied forms can define the same lower
@@ -297,6 +452,66 @@ be the ones supplied by trace transitivity.  The manuscript's existing
 target-normalized composition theorem proves these requirements for its finite
 field towers.  Arbitrary retargeting or a change of cost semantics is not part
 of this congruence.
+
+### Universal property of the bounded contextual state
+
+Let `S_T` be the class of represented inner recovery problems with the fixed
+typed interface, let `Ctx_T` be the compatible outer contexts, and let
+
+```text
+obs_R(C,I) = [Gamma_T(C[I])]_R.
+```
+
+Define `sigma_R(I)` to be `Z_R` together with the orbit-indexed finite response
+table above.  Then:
+
+1. `sigma_R(I_1)=sigma_R(I_2)` if and only if
+   `obs_R(C,I_1)=obs_R(C,I_2)` for every `C in Ctx_T`;
+2. the kernel of `sigma_R` is the largest congruence on `S_T` that preserves
+   every bounded observation; and
+3. if an invariant `eta:S_T->H` predicts every bounded outer response—that
+   is, for each context `C` there is a function `f_C` with
+   `obs_R(C,I)=f_C(eta(I))`—then `sigma_R` factors through `eta` on its image.
+
+For (3), equal `eta`-values force equal observations in every context, hence
+equal `sigma_R`-values by (1).  Therefore
+
+```text
+bar_sigma_R(eta(I)) = sigma_R(I)
+```
+
+is well defined.  So every sufficient invariant refines the finite contextual
+state, while distinctions within one `sigma_R`-fibre are invisible to every
+compatible bounded outer optimization.  If `eta` is also fully abstract—its
+equality is exactly contextual equivalence—then its effective image and the
+image of `sigma_R` are canonically isomorphic as quotient sets, and as typed
+algebras when `eta` respects composition.
+
+This is the precise minimality/universality theorem suggested by the
+Myhill--Nerode analogy.  The semantic kernel statement is formal; the
+substantive coding-theoretic content is that the column-type reduction,
+rank bound, radius cap, and basis quotient realize it by one explicit finite
+test family with a bounded separating context.
+
+### Finite tower-synthesis corollary
+
+Fix finitely many interface sorts and a finite library of compatible outer
+layers between them.  Each layer induces a well-defined map between the finite
+`R`-contextual quotients.  Consequently:
+
+1. all finite towers over the library act through a finite transformation
+   category;
+2. an indefinitely repeated type-preserving layer has an eventually periodic
+   bounded response, with preperiod plus period at most the number of states
+   in its quotient sort; and
+3. reachability of a desired bounded response, and minimum-layer synthesis
+   with nonnegative layer costs, reduce to finite graph reachability and
+   shortest path.
+
+This is an exact mathematical consequence of finite contextuality, not a
+claim that the raw state bound is computationally attractive.  A useful
+compiler still needs orbit reduction or a certified compressed circuit for
+the response function.
 
 ## Finite ordered-monoid and Pareto extensions
 
@@ -404,6 +619,12 @@ coarse class bound is that quantity to the power `1+P^par_t(R,Q,k)`.
 Normalizing the target type to zero or one fixed nonzero covector replaces the
 factor `Q^s` in `P^par_t` by `2`, exactly as in the scalar case.
 
+If one resource coordinate is helper count, truncated at `R_h`, every
+nonzero external label consumes at least one unit in that coordinate.  The
+rank--radius argument then also restricts the Pareto probes to
+`s<=min(t,R_h-1)`.  Without such a positive rank-controlling resource, the
+safe dimension bound remains `s<=t`.
+
 This proves a finite higher-rank contextual algebra for any fixed finite list
 of additive resources—for example helper count together with finitely many
 fixed traffic or energy categories.  It also applies to a max- or
@@ -442,9 +663,9 @@ identity and overlap rather than only a fixed-dimensional cost vector.
 
 - Every admissible scalar probe is realized by the functional dual generated
   by its spanning column list.  The full outer code realizes the zero-sector
-  probe.  The rank-bounded theorem and multiplicity cap prove completeness, so
-  the orbit-indexed response table is the coarsest observable bounded
-  numerical quotient.
+  probe.  The small separating-context theorem proves completeness, so the
+  orbit-indexed response table is the coarsest observable bounded numerical
+  quotient.
 - This is numerical cost semantics only.  Coefficient witnesses and the full
   argmin family are not determined by the quotient; per-helper overlap and
   packing data are also absent.
@@ -466,8 +687,10 @@ identity and overlap rather than only a fixed-dimensional cost vector.
 
 1. **Done as a candidate theorem:** typed column response, bounded
    contextual-state characterization, and all-rank congruence.
-2. **Done:** uniform and adaptive scalar caps, basis-free `GL_s(L)` quotient,
-   outer-length bound, and explicit raw state bounds.
+2. **Done:** the rank--radius and small separating-context theorems replace
+   coordinatewise capping by at most `r` total helpers at radius `r`; the
+   basis-free `GL_s(L)` quotient, exact Burnside--Möbius orbit census, and
+   explicit state bounds follow.
 3. **Partly done:** the scalar and Pareto multiplicity caps are sharp in the
    abstract cost algebra.  Code-realizable and full state-complexity lower
    bounds remain open.
@@ -479,16 +702,20 @@ identity and overlap rather than only a fixed-dimensional cost vector.
 
 ## EJ + TT closeout and mystery ledger
 
-The continuing EJ, TT, and red-team passes settled five points that were not
+The continuing EJ, TT, and red-team passes settled six points that were not
 visible in the initial plan.  First, compatibility means that the helper
 coordinate functionals span the outer-dual coordinate space; nonzero target
 type is neither necessary nor sufficient.  Second, truncation at `R=r+1`, not
 at the inner zero-sector cost, gives a universal finite theorem and also
-handles an infinite zero-sector cost.  Third, the final response
-`min(R,z,F)`, rather than `F` alone, is the minimal observable table.  Fourth,
-the basis action reduces target types to zero and one nonzero representative.
-Fifth, the Pareto cap is the sharp linear value `1+k(R-1)`, and the mechanism
-extends to every finite extensive ordered cost monoid.
+handles an infinite zero-sector cost.  Third, every bounded distinction has a
+separating outer context of length at most `max(2,r+1)` and functional-dual rank at
+most `min(t,r)`.  Fourth, the final response `min(R,z,F)`, rather than `F`
+alone, is the minimal observable table, and the basis action reduces target
+types to zero and one nonzero representative.  Fifth, the response vector has
+the exact universal factorization property of a syntactic quotient and yields
+a finite transformation category for tower synthesis.  Sixth, the Pareto cap
+is the sharp linear value `1+k(R-1)`, and the mechanism extends to every finite
+extensive ordered cost monoid.
 
 Open mysteries:
 
@@ -502,8 +729,9 @@ Open mysteries:
    integer-envelope circuit remains open and may not exist without choosing a
    circuit model.
 3. **Tightness — partly settled.**  The caps `R` and `1+k(R-1)` are sharp for
-   the abstract scalar and Pareto cost algebras.  Code-realizable sharpness,
-   the outer-length bound, and contextual-class lower bounds remain open.
+   the abstract scalar and Pareto cost algebras.  Code-realizable sharpness of
+   the `r+1` separating-context bound and contextual-class lower bounds remain
+   open.
 4. **Witness semantics.**  Numerical contextual equivalence need not transport
    coefficient argmins.  The smallest compositional witness-bearing state may
    be strictly larger.
@@ -515,3 +743,6 @@ Open mysteries:
 6. **Priority.**  The connection with syntactic congruences, tropical series,
    valued CSPs, and weighted tree automata requires a full literature audit
    before any novelty statement.
+7. **Tower dynamics.**  Finite-state iteration is eventually periodic.  It is
+   unknown whether the recovery order forces aperiodicity or convergence to a
+   fixed point for natural type-preserving outer layers.
