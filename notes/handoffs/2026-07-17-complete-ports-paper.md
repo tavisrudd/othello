@@ -6,7 +6,7 @@
 **Status**: ACTIVE; C972 COMPOSITIONAL-STATE CHARACTERIZATION AND C976
 EXPOSITION/LITERATURE/EXPORT CLOSED; 37-PAGE AUTHORITY, 29-CLAIM, FOUR-LEAN-
 TERMINAL, AND 84-FILE ERGODIS PUBLIC-SURFACE GATES PASS; C962 ALGORITHM/BOUND
-DEVELOPMENT REMAINS IN PROGRESS WITH C972-DERIVED CONTEXTUAL KERNELS VALIDATED;
+DEVELOPMENT AND C980 HIGHER-RANK CONTEXTUAL-MINIMALITY RESEARCH ARE IN PROGRESS;
 C325 APPENDIX VERIFIER AND C953 AGGREGATE
 REVIEW FOLLOW; C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR
 DEPOSIT
@@ -16,7 +16,7 @@ DEPOSIT
 Recovery*
 **Standalone paper repository**: `tavisrudd/compositional-recovery` at
 `~/src/math-papers/compositional-recovery`
-**Current local standalone commit**: `90612cd` (37-page revised manuscript;
+**Current local standalone commit**: `6bfc17d` (37-page revised manuscript;
 verified; no push or deposit)
 **Approved paper license**: MIT
 
@@ -98,6 +98,13 @@ Completed preparation:
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
 Current and completed strengthening:
+
+- [C980 higher-rank contextual minimality](../2026-08-27-c980-higher-rank-contextual-minimality.md)
+  is now a mathematics-only active task.  Its first candidate reduction writes
+  every rank-`t` outer context as a dimension-`s<=t` multiset of finite column
+  types and expresses its response as a finite tropical lower envelope.  The
+  immediate gates are typed proof review, canonical lower-hull equality,
+  state-complexity bounds, and the Pareto-cost extension.
 
 - [C962 exact recovery algorithms](../2026-08-25-c962-recovery-algorithms-and-bounds.md)
   now includes a radius-pruned rank-one complete-transfer certificate, lazy
@@ -228,7 +235,11 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C962 remains the active private code-and-mathematics task for ergodis algorithm
+C980 is the active mathematics-only task for the higher-rank contextual
+quotient.  First formalize the column-type response theorem and all-rank
+congruence, then identify the canonical lower hull and its state-complexity
+bounds before testing Pareto-valued bandwidth and simultaneous-request states.
+C962 remains the parallel private code-and-mathematics task for ergodis algorithm
 development and benchmark evidence.  The C972 contextual-state kernels now
 include forecast/memory-aware direct-versus-cache admission, atomic
 rank-bounded fill, allocation-free candidate scans under the Tiger rules, and
@@ -252,6 +263,6 @@ hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
 and is not evidence for or a release dependency of the paper-local companion.
 
-Local standalone synchronization is complete at `90612cd`. Publication, push,
+Local standalone synchronization is complete at `6bfc17d`. Publication, push,
 and deposit remain gated on C325 and C953; the approved repository metadata
 does not authorize any of those external actions.
