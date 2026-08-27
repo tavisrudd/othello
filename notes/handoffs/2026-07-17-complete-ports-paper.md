@@ -13,7 +13,7 @@ C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR DEPOSIT
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Exact Compositional Transfer of Bounded Linear
 Recovery*
-**Standalone paper repository**: `tavisrudd/complete-repair-ports` at
+**Standalone paper repository**: `tavisrudd/compositional-recovery` at
 `~/src/math-papers/compositional-recovery`
 **Current local standalone commit**: `6466849` (subtitle-free title and current exported manuscript;
 verified; no push or deposit)
