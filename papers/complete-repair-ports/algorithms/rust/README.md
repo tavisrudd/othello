@@ -287,7 +287,7 @@ canonical coefficient witness tree.
 |            3 / 3 |       27 |      175 us |    2.3 MiB |       11.578 ms |     75.8 MiB |         27.461 ms |       77.3 MiB |                   66x / 156x |
 |            4 / 3 |       81 |      177 us |    2.4 MiB |       43.054 ms |     78.8 MiB |        112.447 ms |       82.3 MiB |                  243x / 635x |
 |            5 / 4 |    1,024 |      316 us |    2.4 MiB |          8.17 s |    126.5 MiB |            1.58 s |      158.1 MiB |             25,889x / 5,013x |
-| 6 / 4          |  4,096 |    766 us |  2.8 MiB |      263.76 s |  281.4 MiB |          6.19 s |    411.4 MiB |          344,300x / 8,080x |
+|            6 / 4 |    4,096 |      766 us |    2.8 MiB |        263.76 s |    281.4 MiB |            6.19 s |      411.4 MiB |            344,300x / 8,080x |
 
 These are bounded single-worker results for the identity-block GF(4) tower
 family, not a general claim about CP-SAT. The first three rows use 21 rounds;
@@ -298,6 +298,31 @@ hashes, work counters, and the exact protocol are in
 `run_benchmarks.py --write --transfer-only --ab-rounds 21` and the last with
 `run_benchmarks.py --write --transfer-deep-only` after building the release
 benchmark binary with the documented architecture flags.
+
+A paper-native benchmark uses Jin and Fu's published GF(4) cyclic
+`[43,36,5]` outer code and binary `[3,2,2]` inner code, which produce their
+binary `[129,72,10;2]` locally repairable code
+([Example 5.7](https://arxiv.org/abs/2605.04618)). The harness constructs the
+outer dual basis independently from the stated generator polynomial and
+optimizes over all `4^7 - 1 = 16,383` nonzero outer functionals. ERGO-comp
+computes `M_1=2`, zero-functional cost `5`, best nonzero-functional cost `26`,
+and hence `Gamma=5`, so the maximum confined radius is `4`. These recovery
+quantities are new analysis of the published code, not claims made by Jin and
+Fu.
+
+| backend             | exact time   | peak RSS   | relative time   |
+| :------------------ | -----------: | ---------: | --------------: |
+| ERGO-comp           |    20.938 ms |    2.2 MiB |              1x |
+| direct CP-SAT       |       4.07 s |   78.5 MiB |            195x |
+| labelled CP-SAT     |       4.91 s |   79.2 MiB |            235x |
+
+Direct CP-SAT receives binary inner coefficients, the support objective, and
+the exact GF(4) outer-functional parity constraints. Labelled CP-SAT receives
+the same four-entry ordinary and target-normalized cost tables as ERGO-comp.
+Both CP-SAT models prove the nonzero-sector optimum before it is compared with
+the known zero sector; all three backends return the same exact `Gamma`.
+Times are medians of seven rotated, pinned-core, deterministic single-worker
+runs. Replay with `run_benchmarks.py --write --jin-fu-only --ab-rounds 7`.
 
 ERGO-comp alone can be pushed much farther before ten seconds. The following
 are pinned-core single end-to-end solves, including instance compilation and

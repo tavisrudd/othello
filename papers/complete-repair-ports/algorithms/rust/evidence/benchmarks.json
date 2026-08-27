@@ -427,6 +427,255 @@
       "tower-stream-depth-14": "transfer-tower:rust-stream:14:4"
     }
   },
+  "jin_fu_concatenated_lrc": {
+    "artifacts": {
+      "bench_kernels_binary_sha256": "fa76ea3ea5f4a62e28f84328b9c04bbe668d9a56f590826dfc23d5d069d6d445",
+      "bench_kernels_source_sha256": "41ef57936f88374c290528fc93f61257022c29cb6885362097758cfd2c3ce5b8",
+      "benchmark_python_sha256": "f720f7650413fe7d516e4bb0605d8e7a9cd208bd11db7fa3d1dd94b67a5c1f4e",
+      "run_benchmarks_sha256": "762fde36e56f1b9003742edb530158ac5d60a50d357fa9d9debe7508236fa13b"
+    },
+    "exact_result": {
+      "best_nonzero_functional_cost": 26,
+      "gamma": 5,
+      "maximum_confined_radius": 4,
+      "outer_functionals": 16383,
+      "relative_weight": 2,
+      "zero_functional_cost": 5
+    },
+    "measurements": {
+      "jin-fu:cpsat": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 4910249377.0,
+        "median_peak_rss_kib": 81128,
+        "peak_states": 12780,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 4887264606,
+            "peak_rss_kib": 81144,
+            "peak_states": 12780,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat",
+            "work": 58047
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4907817911,
+            "peak_rss_kib": 81128,
+            "peak_states": 12780,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat",
+            "work": 58047
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4910249377,
+            "peak_rss_kib": 81240,
+            "peak_states": 12780,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat",
+            "work": 58047
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4929597007,
+            "peak_rss_kib": 81140,
+            "peak_states": 12780,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat",
+            "work": 58047
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4940723785,
+            "peak_rss_kib": 81120,
+            "peak_states": 12780,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat",
+            "work": 58047
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4940780161,
+            "peak_rss_kib": 81128,
+            "peak_states": 12780,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat",
+            "work": 58047
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4909335044,
+            "peak_rss_kib": 80936,
+            "peak_states": 12780,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat",
+            "work": 58047
+          }
+        ],
+        "work_per_solve": 58047
+      },
+      "jin-fu:cpsat-direct": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 4074848558.0,
+        "median_peak_rss_kib": 80432,
+        "peak_states": 12802,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 4060584684,
+            "peak_rss_kib": 80344,
+            "peak_states": 12802,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat-direct",
+            "work": 62034
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4074848558,
+            "peak_rss_kib": 80432,
+            "peak_states": 12802,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat-direct",
+            "work": 62034
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4069493447,
+            "peak_rss_kib": 80512,
+            "peak_states": 12802,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat-direct",
+            "work": 62034
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4051869896,
+            "peak_rss_kib": 80628,
+            "peak_states": 12802,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat-direct",
+            "work": 62034
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4076100660,
+            "peak_rss_kib": 80400,
+            "peak_states": 12802,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat-direct",
+            "work": 62034
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4075228211,
+            "peak_rss_kib": 80364,
+            "peak_states": 12802,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat-direct",
+            "work": 62034
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 4075198353,
+            "peak_rss_kib": 80432,
+            "peak_states": 12802,
+            "repetitions": 1,
+            "variant": "jin-fu:cpsat-direct",
+            "work": 62034
+          }
+        ],
+        "work_per_solve": 62034
+      },
+      "jin-fu:rust": {
+        "checksum_per_solve": 5,
+        "median_ns_per_solve": 20937519.0,
+        "median_peak_rss_kib": 2248,
+        "peak_states": 0,
+        "samples": [
+          {
+            "checksum": 5,
+            "elapsed_ns": 28336448,
+            "peak_rss_kib": 2212,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 21030422,
+            "peak_rss_kib": 2208,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 20620889,
+            "peak_rss_kib": 2248,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 20324767,
+            "peak_rss_kib": 2372,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 20389127,
+            "peak_rss_kib": 2180,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 20992170,
+            "peak_rss_kib": 2276,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          },
+          {
+            "checksum": 5,
+            "elapsed_ns": 20937519,
+            "peak_rss_kib": 2280,
+            "peak_states": 0,
+            "repetitions": 1,
+            "variant": "jin-fu:rust",
+            "work": 16383
+          }
+        ],
+        "work_per_solve": 16383
+      }
+    },
+    "protocol": {
+      "common": "rotated interleave; deterministic single worker; exact optimum",
+      "direct_cpsat": "binary inner coefficients and support objective; GF(4) outer-functional parity constraints",
+      "rust": "compile GF(4) labelled costs; enumerate the complete outer functional dual; retain a witness",
+      "structured_cpsat": "the same labelled costs as ERGO; one-hot labels and GF(4) outer-functional parity constraints"
+    },
+    "rounds": 7,
+    "rust_speedup_over_direct_cpsat": 194.619,
+    "rust_speedup_over_structured_cpsat": 234.519,
+    "source": {
+      "concatenated_code": "binary [129,72,10;2] LRC",
+      "generator_polynomial": "x^7 + a*x^5 + x^4 + x^3 + a^2*x^2 + 1",
+      "outer_code": "GF(4) cyclic [43,36,5]",
+      "paper": "Jin--Fu (2026), arXiv:2605.04618v1, Example 5.7"
+    }
+  },
   "large_case_tma": {
     "artifacts": {
       "bench_kernels_binary_sha256": "2fe19d04b8bfc7f16d8acdc28a573e7f66d713ee85d6c2b1e8b8c041af782d7e",

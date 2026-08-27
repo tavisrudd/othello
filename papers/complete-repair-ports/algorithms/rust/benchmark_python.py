@@ -39,6 +39,21 @@ def transfer_tower_spec(variant: str):
     return fields[1], int(fields[2]), int(fields[3])
 
 
+def jin_fu_spec(variant: str):
+    fields = variant.split(":")
+    if (
+        len(fields) != 2
+        or fields[0] != "jin-fu"
+        or fields[1]
+        not in (
+            "cpsat",
+            "cpsat-direct",
+        )
+    ):
+        return None
+    return fields[1]
+
+
 def orbit_grid_spec(variant: str):
     fields = variant.split(":")
     if len(fields) != 6 or fields[:2] != ["orbit-grid", "cpsat"]:
@@ -79,9 +94,7 @@ def gf4_target_tables():
         ordinary[label] = min(cost, ordinary.get(label, cost))
     target = {}
     for packed in range(1 << 4):
-        coefficients = (1, 0, 0, 1) + tuple(
-            (packed >> bit) & 1 for bit in range(4)
-        )
+        coefficients = (1, 0, 0, 1) + tuple((packed >> bit) & 1 for bit in range(4))
         label = tuple(
             columns[0] * coefficients[demand]
             ^ columns[1] * coefficients[2 + demand]
@@ -95,6 +108,64 @@ def gf4_target_tables():
         )
         target[label] = min(cost, target.get(label, cost))
     return ordinary, target
+
+
+def gf4_mul(left: int, right: int) -> int:
+    left_constant, left_alpha = left & 1, left >> 1
+    right_constant, right_alpha = right & 1, right >> 1
+    alpha_product = left_alpha & right_alpha
+    constant = (left_constant & right_constant) ^ alpha_product
+    alpha = (
+        (left_constant & right_alpha) ^ (left_alpha & right_constant) ^ alpha_product
+    )
+    return constant | (alpha << 1)
+
+
+def jin_fu_outer_dual_basis():
+    polynomial = (1, 0, 3, 1, 1, 2, 0, 1)
+    rows = [[0] * 43 for _ in range(36)]
+    for shift, row in enumerate(rows):
+        row[shift : shift + len(polynomial)] = polynomial
+    pivots = []
+    pivot_row = 0
+    for column in range(43):
+        found = next((row for row in range(pivot_row, 36) if rows[row][column]), None)
+        if found is None:
+            continue
+        rows[pivot_row], rows[found] = rows[found], rows[pivot_row]
+        inverse = gf4_mul(rows[pivot_row][column], rows[pivot_row][column])
+        rows[pivot_row] = [gf4_mul(inverse, entry) for entry in rows[pivot_row]]
+        normalized = rows[pivot_row]
+        for row_index, row in enumerate(rows):
+            if row_index == pivot_row or not row[column]:
+                continue
+            factor = row[column]
+            rows[row_index] = [
+                entry ^ gf4_mul(factor, pivot) for entry, pivot in zip(row, normalized)
+            ]
+        pivots.append(column)
+        pivot_row += 1
+    assert len(pivots) == 36
+    basis = []
+    for free in (column for column in range(43) if column not in pivots):
+        vector = [0] * 43
+        vector[free] = 1
+        for row, pivot in enumerate(pivots):
+            vector[pivot] = rows[row][free]
+        basis.append(vector)
+    return basis
+
+
+def gf4_product_bits(element: int, scalar_bits):
+    constant, alpha = scalar_bits
+    if element == 0:
+        return ((), ())
+    if element == 1:
+        return ((constant,), (alpha,))
+    if element == 2:
+        return ((alpha,), (constant, alpha))
+    assert element == 3
+    return ((constant, alpha), (constant,))
 
 
 def scheduler_problem(
@@ -136,8 +207,10 @@ def heterogeneous_scheduler_problem(spec: tuple[int, int, int]):
     families = []
     for demand in range(demand_count):
         family = []
-        for resource in range(resource_count):
-            family.append({resource: 1 + int((demand + resource) % 3 == 0)})
+        for resource_index in range(resource_count):
+            family.append(
+                {resource_index: 1 + int((demand + resource_index) % 3 == 0)}
+            )
         families.append(tuple(family))
     return tuple(families), capacities
 
@@ -196,7 +269,10 @@ def canonicalize_weighted_families(families, capacities):
             {
                 tuple(option.get(resource, 0) for resource in resources)
                 for option in family
-                if all(option.get(resource, 0) <= capacities[resource] for resource in resources)
+                if all(
+                    option.get(resource, 0) <= capacities[resource]
+                    for resource in resources
+                )
             }
         )
         minimal = [
@@ -210,11 +286,7 @@ def canonicalize_weighted_families(families, capacities):
         ]
         canonical_families.append(
             tuple(
-                {
-                    resource: load
-                    for resource, load in zip(resources, vector)
-                    if load
-                }
+                {resource: load for resource, load in zip(resources, vector) if load}
                 for vector in minimal
             )
         )
@@ -245,14 +317,19 @@ def main() -> None:
     graded_grid = graded_scheduler_grid_spec(variant)
     heterogeneous_grid = heterogeneous_scheduler_grid_spec(variant)
     transfer_tower = transfer_tower_spec(variant)
+    jin_fu = jin_fu_spec(variant)
     orbit_grid = orbit_grid_spec(variant)
     cp_model = None
-    if transfer_tower is not None or orbit_grid is not None or variant in ("scheduler-cpsat", "scheduler-cpsat-small") or (
-        grid is not None and grid[0] == "cpsat"
-    ) or (
-        graded_grid is not None and graded_grid[0].startswith("cpsat")
-    ) or (
-        heterogeneous_grid is not None and heterogeneous_grid[0].startswith("cpsat")
+    if (
+        transfer_tower is not None
+        or jin_fu is not None
+        or orbit_grid is not None
+        or variant in ("scheduler-cpsat", "scheduler-cpsat-small")
+        or (grid is not None and grid[0] == "cpsat")
+        or (graded_grid is not None and graded_grid[0].startswith("cpsat"))
+        or (
+            heterogeneous_grid is not None and heterogeneous_grid[0].startswith("cpsat")
+        )
     ):
         from ortools.sat.python import cp_model as loaded_cp_model
 
@@ -264,7 +341,10 @@ def main() -> None:
         families, target = orbit_grid_problem(orbit_grid)
         model = cp_model.CpModel()
         choices = [
-            [model.new_bool_var(f"x_{family}_{option}") for option in range(len(options))]
+            [
+                model.new_bool_var(f"x_{family}_{option}")
+                for option in range(len(options))
+            ]
             for family, options in enumerate(families)
         ]
         for family in choices:
@@ -283,10 +363,79 @@ def main() -> None:
         for _ in range(repetitions):
             status = solver.solve(model)
             if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
-                raise RuntimeError(f"CP-SAT did not find a solution: {solver.status_name(status)}")
+                raise RuntimeError(
+                    f"CP-SAT did not find a solution: {solver.status_name(status)}"
+                )
             work += solver.num_branches
             peak_states = max(peak_states, solver.num_conflicts)
             checksum += 1
+    elif jin_fu is not None:
+        assert cp_model is not None
+        basis = jin_fu_outer_dual_basis()
+        model = cp_model.CpModel()
+        functional = [
+            [model.new_bool_var(f"u_{row}_{bit}") for bit in range(2)]
+            for row in range(7)
+        ]
+        model.add_bool_or(variable for row in functional for variable in row)
+        objective = []
+        for block in range(43):
+            outer_terms = [[], []]
+            for row, basis_row in enumerate(basis):
+                product = gf4_product_bits(basis_row[block], functional[row])
+                outer_terms[0].extend(product[0])
+                outer_terms[1].extend(product[1])
+            if jin_fu == "cpsat":
+                costs = (2, 0, 1, 1) if block == 0 else (0, 1, 1, 1)
+                choices = [
+                    model.new_bool_var(f"x_{block}_{label}") for label in range(4)
+                ]
+                model.add_exactly_one(choices)
+                objective.extend(
+                    cost * choices[label] for label, cost in enumerate(costs)
+                )
+                for bit in range(2):
+                    active = outer_terms[bit] + [
+                        choices[label] for label in range(4) if (label >> bit) & 1
+                    ]
+                    half = model.new_int_var(
+                        0, len(active) // 2 + 1, f"h_{block}_{bit}"
+                    )
+                    model.add(sum(active) == 2 * half)
+            else:
+                coefficients = []
+                for coordinate in range(3):
+                    if block == 0 and coordinate == 0:
+                        coefficient = model.new_constant(1)
+                    else:
+                        coefficient = model.new_bool_var(f"a_{block}_{coordinate}")
+                        objective.append(coefficient)
+                    coefficients.append(coefficient)
+                for bit in range(2):
+                    active = outer_terms[bit] + [
+                        coefficients[coordinate]
+                        for coordinate, column in enumerate((1, 2, 3))
+                        if (column >> bit) & 1
+                    ]
+                    half = model.new_int_var(
+                        0, len(active) // 2 + 1, f"h_{block}_{bit}"
+                    )
+                    model.add(sum(active) == 2 * half)
+        model.minimize(sum(objective))
+        solver = cp_model.CpSolver()
+        solver.parameters.num_workers = 1
+        solver.parameters.random_seed = 0
+        for _ in range(repetitions):
+            status = solver.solve(model)
+            if status != cp_model.OPTIMAL:
+                raise RuntimeError(
+                    f"CP-SAT did not prove optimality: {solver.status_name(status)}"
+                )
+            nonzero_cost = round(solver.objective_value)
+            assert nonzero_cost == 26
+            work += solver.num_branches
+            peak_states = max(peak_states, solver.num_conflicts)
+            checksum += min(5, nonzero_cost)
     elif transfer_tower is not None:
         assert cp_model is not None
         backend, depth, fanout = transfer_tower
@@ -347,7 +496,9 @@ def main() -> None:
                         for row, column in enumerate(columns)
                         if (column >> bit) & 1
                     ]
-                    half = model.new_int_var(0, len(active) // 2 + 1, f"half_{demand}_{bit}")
+                    half = model.new_int_var(
+                        0, len(active) // 2 + 1, f"half_{demand}_{bit}"
+                    )
                     model.add(sum(active) == 2 * half)
             model.minimize(sum(supports))
         solver = cp_model.CpSolver()
@@ -356,7 +507,9 @@ def main() -> None:
         for _ in range(repetitions):
             status = solver.solve(model)
             if status != cp_model.OPTIMAL:
-                raise RuntimeError(f"CP-SAT did not prove optimality: {solver.status_name(status)}")
+                raise RuntimeError(
+                    f"CP-SAT did not prove optimality: {solver.status_name(status)}"
+                )
             work += solver.num_branches
             peak_states = max(peak_states, solver.num_conflicts)
             checksum += round(solver.objective_value)
@@ -367,16 +520,19 @@ def main() -> None:
             work += answer.transitions_examined
             peak_states = max(peak_states, answer.peak_pareto_states)
             checksum += answer.repaired_count
-    elif variant in ("scheduler-cpsat", "scheduler-cpsat-small") or (
-        grid is not None and grid[0] == "cpsat"
-    ) or (
-        graded_grid is not None and graded_grid[0].startswith("cpsat")
-    ) or (
-        heterogeneous_grid is not None and heterogeneous_grid[0].startswith("cpsat")
+    elif (
+        variant in ("scheduler-cpsat", "scheduler-cpsat-small")
+        or (grid is not None and grid[0] == "cpsat")
+        or (graded_grid is not None and graded_grid[0].startswith("cpsat"))
+        or (
+            heterogeneous_grid is not None and heterogeneous_grid[0].startswith("cpsat")
+        )
     ):
         assert cp_model is not None
         if heterogeneous_grid is not None:
-            families, capacities = heterogeneous_scheduler_problem(heterogeneous_grid[1])
+            families, capacities = heterogeneous_scheduler_problem(
+                heterogeneous_grid[1]
+            )
             if heterogeneous_grid[0].startswith("cpsat-structured-"):
                 families = canonicalize_weighted_families(families, capacities)
         elif graded_grid is not None:
@@ -389,7 +545,10 @@ def main() -> None:
             )
         model = cp_model.CpModel()
         choices = [
-            [model.new_bool_var(f"x_{demand}_{option}") for option in range(len(family))]
+            [
+                model.new_bool_var(f"x_{demand}_{option}")
+                for option in range(len(family))
+            ]
             for demand, family in enumerate(families)
         ]
         for family in choices:
@@ -406,7 +565,9 @@ def main() -> None:
         model.maximize(sum(variable for family in choices for variable in family))
         if graded_grid is not None and graded_grid[0].startswith("cpsat-structured"):
             resource_count, capacity, demand_count, _, _ = graded_grid[1]
-            weights = tuple(1 if resource % 2 == 0 else 2 for resource in range(resource_count))
+            weights = tuple(
+                1 if resource % 2 == 0 else 2 for resource in range(resource_count)
+            )
             capacity_mass = capacity * sum(weights)
             model.add(
                 sum(variable for family in choices for variable in family)
@@ -422,7 +583,11 @@ def main() -> None:
         backend = (
             heterogeneous_grid[0]
             if heterogeneous_grid is not None
-            else graded_grid[0] if graded_grid is not None else grid[0] if grid is not None else ""
+            else graded_grid[0]
+            if graded_grid is not None
+            else grid[0]
+            if grid is not None
+            else ""
         )
         worker_suffix = backend.rsplit("-", 1)[-1]
         workers = int(worker_suffix) if structured and worker_suffix.isdigit() else 1
@@ -432,7 +597,9 @@ def main() -> None:
             solver.parameters.random_seed = 0
             status = solver.solve(model)
             if status != cp_model.OPTIMAL:
-                raise RuntimeError(f"CP-SAT did not prove optimality: {solver.status_name(status)}")
+                raise RuntimeError(
+                    f"CP-SAT did not prove optimality: {solver.status_name(status)}"
+                )
             selected = sum(
                 solver.value(variable) for family in choices for variable in family
             )

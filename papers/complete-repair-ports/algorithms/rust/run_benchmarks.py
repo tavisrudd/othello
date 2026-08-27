@@ -192,6 +192,7 @@ def main() -> None:
     parser.add_argument("--structured-cpsat-only", action="store_true")
     parser.add_argument("--transfer-only", action="store_true")
     parser.add_argument("--transfer-deep-only", action="store_true")
+    parser.add_argument("--jin-fu-only", action="store_true")
     parser.add_argument("--scheduler-scaling-only", action="store_true")
     parser.add_argument("--orbit-scaling-only", action="store_true")
     parser.add_argument("--orbit-iterative-ab", action="store_true")
@@ -573,6 +574,55 @@ def main() -> None:
                 "single-worker exact stress: 21 Rust samples, seven structured CP-SAT "
                 "samples, and one completed direct CP-SAT solve"
             ),
+            "measurements": measured,
+        }
+        OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+        return
+
+    if args.jin_fu_only:
+        if not OUTPUT.exists():
+            raise SystemExit("run the baseline benchmark before --jin-fu-only")
+        value = json.loads(OUTPUT.read_text())
+        variants = ("jin-fu:rust", "jin-fu:cpsat-direct", "jin-fu:cpsat")
+        measured = run_group(variants, 1, args.ab_rounds)
+        if len({entry["checksum_per_solve"] for entry in measured.values()}) != 1:
+            raise RuntimeError(f"Jin--Fu CP-SAT checksum mismatch: {variants}")
+        value["jin_fu_concatenated_lrc"] = {
+            "source": {
+                "paper": "Jin--Fu (2026), arXiv:2605.04618v1, Example 5.7",
+                "outer_code": "GF(4) cyclic [43,36,5]",
+                "generator_polynomial": "x^7 + a*x^5 + x^4 + x^3 + a^2*x^2 + 1",
+                "concatenated_code": "binary [129,72,10;2] LRC",
+            },
+            "rounds": args.ab_rounds,
+            "exact_result": {
+                "outer_functionals": 16_383,
+                "relative_weight": 2,
+                "zero_functional_cost": 5,
+                "best_nonzero_functional_cost": 26,
+                "gamma": 5,
+                "maximum_confined_radius": 4,
+            },
+            "rust_speedup_over_direct_cpsat": ratio(
+                measured[variants[1]]["median_ns_per_solve"],
+                measured[variants[0]]["median_ns_per_solve"],
+            ),
+            "rust_speedup_over_structured_cpsat": ratio(
+                measured[variants[2]]["median_ns_per_solve"],
+                measured[variants[0]]["median_ns_per_solve"],
+            ),
+            "artifacts": {
+                "bench_kernels_binary_sha256": sha256(BINARY),
+                "bench_kernels_source_sha256": sha256(ROOT / "src/bin/bench_kernels.rs"),
+                "benchmark_python_sha256": sha256(ROOT / "benchmark_python.py"),
+                "run_benchmarks_sha256": sha256(Path(__file__).resolve()),
+            },
+            "protocol": {
+                "common": "rotated interleave; deterministic single worker; exact optimum",
+                "rust": "compile GF(4) labelled costs; enumerate the complete outer functional dual; retain a witness",
+                "direct_cpsat": "binary inner coefficients and support objective; GF(4) outer-functional parity constraints",
+                "structured_cpsat": "the same labelled costs as ERGO; one-hot labels and GF(4) outer-functional parity constraints",
+            },
             "measurements": measured,
         }
         OUTPUT.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
