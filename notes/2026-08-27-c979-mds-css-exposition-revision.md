@@ -7,10 +7,13 @@
 ## Goal
 
 Rework *Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS
-Codes* so that a quantum-information reader who knows stabilizer codes can
-identify the main theorem, understand its importance, and follow its proof
-without already knowing MDS-code rigidity, six-arcs, Gale duality, or
-finite-group extension language.
+Codes* as a polished, conventional paper for specialists in its intended
+publication field: quantum information, with stabilizer-code knowledge
+assumed.  A reader in that field should identify the main theorem, understand
+its importance, and follow its proof without already knowing MDS-code
+rigidity, six-arcs, Gale duality, or finite-group extension language.  This is
+not a multi-audience survey: translate machinery at the disciplinary interface
+only where the primary reader needs it.
 
 The first-pass message is the all-length fixed-party classification.  For an
 odd-prime linear `[2m,m,m+1]_q` MDS code, the diagonal multiplier space
@@ -28,6 +31,13 @@ premises of that theorem.
 - Correct `papers/mds_css_transversal_groups/README.md` so it contains no claim
   that this paper belongs to a Clebsch series or Clebsch portfolio.  The
   Clebsch code may remain accurately described as a worked application.
+- Make the result read like a standard finished quantum-information paper, not
+  onboarding material, a programme map, an internal audit, or a guided tour of
+  several adjacent disciplines.
+- Audit coined terminology and notation against standard quantum-information
+  and coding-theory usage.  Replace house terms and house symbols with standard
+  ones unless a term names a genuinely new object and earns an explicit
+  definition.  Keep any unavoidable translation local and one-time.
 - Begin from the operational quantum-information problem, define the
   fixed-party site-dependent transversal convention immediately, and explain
   why the exact logical group matters.
@@ -88,9 +98,20 @@ useful optional results without enough first-pass navigation.
    accurately describes the paper as standalone.
 5. The theorem/label maps, cross-references, figures, and verification surfaces
    remain synchronized; the warning-free paper gate and evidence replay pass.
-6. Rendered before/after comparison and qualified cold reads separately test
-   specialist confidence and adjacent-field accessibility, followed by a
-   red-team of every new overview, table, and moved qualification.
+6. Rendered before/after comparison and qualified quantum-information cold
+   reads separately test mathematical confidence and first-pass readability,
+   followed by a red-team of every new overview, table, and moved qualification.
+
+## Progress
+
+- 2026-08-27: read the complete TeX manuscript in source order, including both
+  figures and all three appendices, and read the paper README in full.
+- 2026-08-27: removed the README paragraph assigning the paper to a Clebsch
+  portfolio.  Authority commit `cce408feb`; standalone forward commit
+  `2affba3`; exporter content SHA-256
+  `2f4a51a3342d3ad75ed50fa16cc607ab2c5fb37097669ef378d07a7c7e2c3330`.
+  Export audit, mirror manifest verification, and the standalone `make check`
+  gate pass.  Nothing was pushed.
 
 ## Lifecycle gate
 
