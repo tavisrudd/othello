@@ -108,6 +108,18 @@ publication metadata. Publication, pushing, DOI minting, and theorem-domain
 broadening remain out of scope. Card:
 `notes/reed-solomon-tasks/c970-beyond4-prs-software-packaging.md`.
 
+C974 is complete.  The toolkit now contracts arbitrary degree-`r-5` marker
+supports directly to a complete R5 cubic pencil, returns the resulting
+degree-`r-2` witness through the existing locator certificate and verifier,
+supports prescribed finite/infinity avoidance, accelerates exact decoding,
+and permits R11+ `NOT_DEEP` or fail-closed `UNSUPPORTED` classifications
+without broadening positive theorem rows.  A deterministic bounded probe
+replayed pointed witnesses for two dense R11 Lucas-carrier representatives
+against every forbidden projective root over GF(16), GF(27), and GF(49):
+190/190 witnesses, with maximum candidate counts 462/61/11665.  This is
+calibration, not a carrier census or theorem.  Report:
+`notes/reed-solomon-tasks/c974-2026-08-26-implementation-report.md`.
+
 C886 is complete.  The paper now has a layered two-track exposition: a mature
 generalist can follow the syndrome-to-carrier mechanism without entering every
 elimination, while the specialist proof, exceptional cases, and verification
@@ -1198,7 +1210,7 @@ gates remain binding.
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
 | 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, exhaustive persistent-sigma `O(mq^2)`, and exhaustive binary-form lex canonicalizers green, including both degenerate-successor stabilizers, a worst-case `O(m r q^2)` transport bound, and `O(r^2+r log q)` field operations per transport; structural canonicalization supports every `r>=5`, with exhaustive q5/GF8/GF9 R5 projective checks, q13/R11--R13 and GF16/R11 full-orbit regressions, GF16/R16 full-length, and GF32/R17 characteristic-power boundaries, while coding verdicts remain R5--R10 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
-| 3 | C973 | active; both load-bearing seams pass author-side standalone reconstruction, deterministic fixed-`r` extraction is proved, and the first checkpoint proved direct lifting, degree-six selection, threshold `6r-16+floor(2sqrt(6r-18))`, witness abundance, asymptotic R11 closure, and R12 reduction; external review remains; manuscript frozen | obtain external reconstruction of the five inherited inputs, then prove one-extra-root abundance on the R11 coherent constructions; a successful close receives a separately allocated paper-integration successor |
+| 3 | C973 | active; both load-bearing seams pass author-side standalone reconstruction, deterministic fixed-`r` extraction is proved, C974 supplies an exact pointed marker/pencil witness engine, and 190/190 bounded R11 carrier probes over GF(16)/GF(27)/GF(49) succeed; external review remains; manuscript frozen | extract a uniform one-extra-root abundance theorem from the C974 support patterns, then propagate it through the coherent R12 blocks; a successful close receives a separately allocated paper-integration successor |
 
 ## Unallocated level-ups
 
@@ -1258,18 +1270,11 @@ history.
 
 ## Next command
 
-`go C969`
+`go C973`
 
-(Widen the q/extension-field benchmark grid and compare the reference backend
-with external decoder software. The exhaustive binary-form lex chart theorem,
-including characteristic-two simple-root and multiple-root Lucas degenerations,
-gives `O(m r q^2)` exact transports, and adjacent-row evaluation costs
-`O(r^2+r log q)` field operations per transport. Structural canonicalization
-extends to every `r>=5`, with q13/R11--R13 and GF16/R11 full-orbit regressions.
-GF16/R16 also freezes the full-length `r=q` boundary. Preserve the explicit
-enumerator as a reference oracle; GF32/R17 freezes the characteristic-power
-root-existence theorem. Keep coding verdicts
-R5--R10 unless a new covering-radius theorem is separately frozen. Keep the
-general C607 split-factorization exponent theorem separate.  C915's three
-independent Version 2 audits remain the
-higher-EV external-release gate but are a separate active card.)
+(Use C974's pointed marker/pencil certificates to identify and prove a uniform
+one-extra-root abundance statement on the R11 coherent Lucas constructions;
+do not infer a theorem from the two-representative finite probe.  Then apply
+the proved statement to the R12 characteristic `2/3/7` coherent blocks and
+recompute the sharp field thresholds.  Keep positive software verdicts frozen
+until the mathematical and radius gates receive independent review.)

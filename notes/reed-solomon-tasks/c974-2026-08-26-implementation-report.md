@@ -60,8 +60,8 @@ cargo clippy --locked --all-targets -- -D warnings
 cargo build --release --locked
 ```
 
-The full suite passes with 39 focused library tests, eight compiled-CLI tests,
-five fixed-seed property tests, and doc tests; the ignored exhaustive gates
+The full suite passes with 34 focused library tests, eight compiled-CLI tests,
+five fixed-seed property tests, and doc tests; five ignored exhaustive gates
 were not run.  Focused tests cover R11 locator replay, higher-redundancy
 fail-closed classification, pointed infinity avoidance, CLI replay, and the
 old R5--R10 behavior.
@@ -112,6 +112,25 @@ software package rather than a second field-arithmetic implementation.
 The strikingly small candidate counts suggest that the next proof should
 study the first-marker terminal pencils and their support patterns, rather
 than increase the finite sample.  C973 owns that theorem extraction.
+
+## Extra-juice and Tao closeout
+
+The cheap extra value is an exact decision boundary absent from the original
+design note: if the unpointed marker/pencil enumeration finishes, its
+`NoLocator(r-2)` conclusion is exhaustive, because every squarefree
+degree-`r-2` support has an `(r-5)+3` partition.  The pointed version has the
+same exact conclusion inside the open of supports avoiding the prescribed
+roots.  Candidate-limit exhaustion remains logically separate.
+
+The Tao question is why the dense representatives succeed so early despite
+the conservative C973 thresholds.  The records show this is not merely one
+lucky forbidden root: the same syndrome admits witnesses avoiding every point
+of `P^1(F_q)`.  The next high-EV invariant is therefore the minimum number of
+distinct split locators, or at least the union of their supports, on one
+coherent carrier construction.  A support-union equal to all of `P^1` is
+weaker than pointed abundance; the correct condition is that the intersection
+of all witness supports is empty.  C973 should prove this structurally rather
+than extrapolate the finite table.
 
 ## Mystery ledger
 
