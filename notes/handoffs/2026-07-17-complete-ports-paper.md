@@ -15,8 +15,8 @@ C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR DEPOSIT
 Recovery*
 **Standalone paper repository**: `tavisrudd/compositional-recovery` at
 `~/src/math-papers/compositional-recovery`
-**Current local standalone commit**: `6466849` (subtitle-free title and current exported manuscript;
-verified; no push or deposit)
+**Current local standalone commit**: `8a29435` (renamed repository and `compositional_recovery`
+manuscript stem; verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
