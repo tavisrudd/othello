@@ -9,10 +9,12 @@ ergodis/.gitignore
 ergodis/BENCHMARKS.md
 ergodis/Cargo.lock
 ergodis/Cargo.toml
+ergodis/OPTIMIZATION.md
 ergodis/README.md
 ergodis/SHA256SUMS
 ergodis/benches/balanced_frontend.rs
 ergodis/benches/balanced_parallel.rs
+ergodis/benches/contextual_state.rs
 ergodis/benches/defect_augmentation.rs
 ergodis/benches/parallel_kernels.rs
 ergodis/benches/scheduler_locality.rs
@@ -20,6 +22,7 @@ ergodis/docs/benchmark-highlights.svg
 ergodis/docs/parallel-scaling.svg
 ergodis/docs/pipeline.svg
 ergodis/evidence/benchmarks.json
+ergodis/evidence/contextual-state-ab.json
 ergodis/evidence/results.json
 ergodis/examples/data/azure-repair-batch.json
 ergodis/examples/data/ceph-repair.json
@@ -56,8 +59,11 @@ ergodis/python/recovery_algorithms/service.py
 ergodis/python/recovery_algorithms/storage.py
 ergodis/python/recovery_algorithms/transfers.py
 ergodis/python/run_benchmarks.py
+ergodis/python/summarize_contextual_ab.py
 ergodis/python/test_algorithms.py
 ergodis/python/verify_baseline_encodings.py
+ergodis/scripts/contextual-ab.sh
+ergodis/scripts/contextual-memory-ab.sh
 ergodis/src/applications.rs
 ergodis/src/arena.rs
 ergodis/src/balanced.rs
@@ -66,6 +72,7 @@ ergodis/src/bin/ergodis.rs
 ergodis/src/bitset.rs
 ergodis/src/composition.rs
 ergodis/src/confinement.rs
+ergodis/src/contextual.rs
 ergodis/src/defect.rs
 ergodis/src/field.rs
 ergodis/src/incidence.rs
@@ -81,6 +88,7 @@ ergodis/src/transfer.rs
 ergodis/src/witness.rs
 ergodis/src/zdd.rs
 ergodis/tests/cli.rs
+ergodis/tests/contextual_allocations.rs
 ergodis/tests/fixtures/python_span_cases.json
 ergodis/tests/python_parity.rs
 figures/ergodis-benchmark-highlights.tex
@@ -107,6 +115,7 @@ sections/01-complete-ports.tex
 sections/02-confinement-transfer.tex
 sections/03-positive-density.tex
 sections/03a-exact-recovery-optimization.tex
+sections/03b-related-work.tex
 sections/04-reliability-exit.tex
 sections/05-pointed-tutte.tex
 sections/06-geometric-flagships.tex
