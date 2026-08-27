@@ -78,6 +78,11 @@ For the full affine code `A={infinity}`, this specializes to
  N_{r-1}=\frac{q(q^2+4q-1)}2.                              \tag{5}
 \]
 
+The unique affine deep direction needs only the classical Seroussi--Roth
+range `q>=2r-1` for odd `q` and `q>=2r-2` for even `q`; the stronger pointed
+threshold is needed for the complete next shell and the `r-2` certificate,
+not for the Cheng--Murray deep-shell conclusion.
+
 The deep shell in this high-rate regime is already forced by classical MDS
 extension theory.  The potentially new strengthening is the exact
 next-to-deep shell together with the constructive `r-2` witness outside the
