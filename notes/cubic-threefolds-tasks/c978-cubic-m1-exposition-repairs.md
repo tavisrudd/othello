@@ -47,8 +47,11 @@ standalone `2faeb8a`.  The later clarification of the generic QDM convention
 was synchronized at authority `01cf1eddc` and standalone `bc3d52a`.  A final
 minor terminology pass defines the even QDM as a convention, makes the
 center-summand and residue-class sentences literal, and repairs the grammatical
-parallelism of the novelty paragraph.  It is synchronized at authority
-`c11667cca` and standalone `802c030`; both gates and exporter verification pass
-with content SHA-256
-`ba49319c0652ec08d2b629284b32e9e47cb44cd04928e99c684f5e442b7d5ecc`.
+parallelism of the novelty paragraph.  A final five-edit pass then replaced two
+metaphorical stabilization phrases, made the Lax sentence's grammatical
+subject literal, described the marker as retaining less structure, and put the
+Fermat cubic directly in \(\mathbf P^4\) in its display.  No other prose changed.
+It is synchronized at authority `d0eb81402` and standalone `fad29f8`; both gates
+and exporter verification pass with content SHA-256
+`e97fa824ca63d77de82ca39ef7e804b186dccc36f64bc066c1fd41d940109e05`.
 C978 remains active by author instruction.

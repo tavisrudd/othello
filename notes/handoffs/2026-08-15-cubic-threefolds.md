@@ -61,8 +61,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   byte-identical PDFs. The task remains open for the continuing manuscript and
   public formal-review prose pass. A later full cold-read protocol accepted the
   manuscript and every PDF page after prose-only cleanup of the public
-  claim-map descriptions.  The final local terminology refinements are
-  synchronized at authority `c11667cca` and standalone `802c030`; both gates
+  claim-map descriptions.  The final five local introduction refinements are
+  synchronized at authority `d0eb81402` and standalone `fad29f8`; both gates
   and exporter verification pass with byte-identical PDFs. C978 remains active
   by author instruction. Card:
   `../cubic-threefolds-tasks/c978-cubic-m1-exposition-repairs.md`.
