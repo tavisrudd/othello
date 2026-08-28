@@ -2,7 +2,8 @@
 
 **Lane:** `reed-solomon`  
 **Date:** 2026-08-27  
-**Status:** structural theorem proved; GF(27) nucleus saturation open  
+**Status:** structural theorem and quotient-circuit classification proved;
+GF(27) nucleus saturation open
 **Scope:** mathematics and paper-successor map only; no manuscript, software,
 Lean, or certificate edit
 
@@ -218,7 +219,145 @@ replacement quadratic must still split without colliding.  Conversely, (15)
 need not imply that a witness occurs in that switch family.  These statements
 must remain distinct.
 
-## 5. Red-team verdict on the landed compression
+## 5. Frobenius-graph circuits and the relative-code form
+
+Let `K=F_{p^e}`, put `d=p^s`, and let
+
+\[
+ \mathcal G_\sigma
+ =\{([u:v],[u^d:v^d]):[u:v]\in\mathbf P^1(K)\}
+ \subset \mathbf P(E)\times\mathbf P(E^{(s)})\subset\mathbf P^3(K),       \tag{16}
+\]
+
+where the last inclusion is the Segre embedding.  Write
+`k=F_{p^g}` with `g=gcd(s,e)`, the fixed field of `x\mapsto x^d` on `K`.
+
+### Theorem 5.1 (subline circuit theorem)
+
+Four distinct points of `mathcal G_sigma` are coplanar if and only if their
+parameters lie on a projective `k`-subline of `P^1(K)`.  No three graph
+points are dependent.  Consequently the four-column circuits of the quotient
+graph are exactly the quadruples lying on projective `k`-sublines.  When
+`k=F_3`, the circuits are the sublines themselves.
+
+### Proof
+
+For four ordered points of a Segre quadric with distinct first and second
+coordinates, coplanarity is equivalent to equality of the cross-ratios in
+the two factors.  Indeed, apply independent projectivities in the factors
+which send the first three pairs to
+
+\[
+                    (\infty,\infty),\quad(0,0),\quad(1,1).
+\]
+
+If the fourth pair is `(lambda,mu)`, the determinant of the four tensor
+columns is, up to a nonzero factor, `mu-lambda`.  On (16), the second
+cross-ratio is the `d`th power of the first.  Coplanarity is therefore
+
+\[
+                             \lambda^d=\lambda,                        \tag{17}
+\]
+
+or `lambda in k`.  The cross-ratio criterion for a projective subline now
+gives the first assertion.  A line meets a smooth quadric in at most two
+points unless it is a ruling line, while the graph has at most one point on
+each line of either ruling.  Hence no three graph points are collinear, so
+each coplanar quadruple is a circuit.  \(\square\)
+
+This theorem is the two-factor, projective-line specialization of
+Durante--Longobardi--Pepe, *`(d,sigma)`-Veronese variety and some
+applications* (2023), Theorems 2.11 and 3.4
+(<https://doi.org/10.1007/s10623-023-01186-9>).  The cross-ratio proof above
+is useful here because it identifies the exact Frobenius-quadric coordinates,
+but the subline characterization and minimum-word theorem are prior art.
+
+For GF(27), `d=9` and `k=F_3`.  Thus the quotient matroid has a particularly
+rigid first layer: every circuit has size four and is an `F_3`-subline.  The
+number of such sublines is
+
+\[
+       \frac{|\operatorname {PGL}_2(27)|}
+              {|\operatorname {PGL}_2(3)|}
+       =\frac{19656}{24}=819.                                          \tag{18}
+\]
+
+Exactly `819*4/28=117` contain a prescribed point, so 702 avoid the forbidden
+point at infinity.
+
+This has an exact code interpretation.  Let `H_out` be the four-row matrix
+with columns `[1:t:t^9:t^10]` on `P^1(F_27)`, and let `H_full` be the eleven-
+row normal-rational-curve matrix of degree ten.  Then
+
+\[
+ C_{\rm full}=\ker H_{\rm full}\subset C_{\rm out}=\ker H_{\rm out},
+ \qquad [28,17,12]\subset[28,24,4],                                   \tag{19}
+\]
+
+and `C_out/C_full` is the seven-dimensional carrier syndrome space.  The
+GF(27) nucleus-saturation statement (15) is equivalent to:
+
+> every class of `C_out/C_full` has a representative of weight at most nine
+> whose coordinate at the forbidden point is zero.                    \(\tag{20}\)
+
+Thus the last lemma is a pointed relative covering-radius statement, not an
+unstructured search through degree-nine split polynomials.  The 819
+weight-four circuit classes inject projectively into the carrier: two of
+them cannot give the same carrier point, since their difference would be a
+nonzero word of `C_full` of weight at most eight.  They form the
+`PGL_2(27)`-orbit of
+
+\[
+                           [e_2+e_4+e_6+e_8].                           \tag{21}
+\]
+
+Shortening both codes at infinity and then deleting that zero coordinate
+removes even the pointed qualifier.  Denote the resulting affine codes by
+`D_full subset D_out`.  Their parameters and quotient are
+
+\[
+ [27,16,12]=D_{\rm full}\subset D_{\rm out}=[27,23,4],
+ \qquad D_{\rm out}/D_{\rm full}\simeq C_d.                            \tag{22}
+\]
+
+Here the quotient isomorphism is the middle-moment syndrome map.  Therefore
+(15) is exactly the relative covering-radius bound
+
+\[
+ \max_{c\in D_{\rm out}}
+      \min_{w\in D_{\rm full}}\operatorname {wt}(c-w)\leq9.            \tag{23}
+\]
+
+The minimum words of `D_out` are precisely the 702 `F_3`-subline circuits
+which avoid infinity.  Formula (23), rather than a collection of locator
+charts, is the cleanest coding-theoretic statement of the unresolved lemma.
+
+The affine-plane locator now also has a circuit explanation.  Write
+`v(t)=(1,t,t^9,t^10)` and `v(infinity)=(0,0,0,1)`.  For an affine
+`F_3`-line `L=a+uF_3`, direct summation gives the quotient relation
+
+\[
+                  \sum_{t\in L}v(t)+u^{10}v(\infty)=0.                \tag{24}
+\]
+
+An affine plane is the disjoint union of three parallel such lines.  Adding
+their relations cancels the three equal infinity coefficients in
+characteristic three and leaves the nine finite columns, each with
+coefficient one.  Hence the plane at the start of the two-point switch is
+exactly a three-circuit cancellation in the quotient matroid.  This is the
+structural reason its outer four moments vanish.
+
+The compression is sharp but not yet closure.  Theorem 5.1 classifies the
+elementary moves, while (20) asks for a uniformly short affine representative
+in every quotient class.  A proof that the weight-four subline circuits
+generate `C_out` would still not by itself control representative weight or
+cancel the forbidden coordinate; moreover, Theorem 5.1 does not classify the
+larger minimal dependencies.  The remaining useful target is therefore a
+bounded circuit-decomposition theorem: three suitably incident subline
+circuits, or a controlled circuit exchange from the plane relation (24),
+must realize every carrier class with at most nine finite support points.
+
+## 6. Red-team verdict on the landed compression
 
 ### Main-spine material
 
@@ -258,11 +397,16 @@ must remain distinct.
 - The dimension formula for `C_d`, now recognized as a nucleus dimension,
   requires full-text comparison with the classical nucleus literature before
   any standalone novelty claim.
+- The four-point Frobenius-graph circuit classification and associated
+  minimum-word statement are special cases of Durante--Longobardi--Pepe
+  (2023), not paper-owned results.  The C973 contribution is their emergence
+  from the PRS nucleus quotient, the pointed shortening (22)--(23), and the
+  affine-plane three-circuit cancellation (24).
 - The coding application, recursive containment, simultaneous escape, and
   pointed secant saturation are separate claims and retain their own
   literature burden.
 
-## 6. Paper-successor compression map
+## 7. Paper-successor compression map
 
 The clean dependency spine is
 
@@ -273,7 +417,7 @@ The clean dependency spine is
  \longrightarrow
  \text{digit stripping}
  \longrightarrow
- \text{nucleus secant saturation},                                    \tag{16}
+ \text{nucleus secant saturation},                                    \tag{25}
 \]
 
 with simultaneous-marker escape handling the complement of the nucleus.
@@ -286,8 +430,9 @@ Recommended main-text changes for the separately allocated successor:
    coherently lifted lower nuclei land in this single penultimate nucleus.
 3. State digit stripping immediately afterward as a filtration theorem for
    those nuclei.
-4. Give (2)--(10) as one prime-power endpoint proposition, unifying the first
-   binary and ternary carriers and locating the imported subline theorem.
+4. Give (2)--(10) as one prime-power endpoint proposition, followed by the
+   subline circuit theorem (16)--(24); this unifies the first binary and
+   ternary carriers and locates the imported subline theorem.
 5. State the unresolved arithmetic uniformly as (14), rather than as an
    indefinite list of future R11+ orbit problems.
 6. Keep the characteristic-seven one-carry corollary and the GF(64) isogeny
@@ -301,11 +446,11 @@ proof.  If it closes only by the two-point switch, retain the quotient
 identity and final splitting lemma but still omit the abandoned three-line
 tower.
 
-## 7. Highest-value continuation
+## 8. Highest-value continuation
 
 The next mathematical target is not another GF(27) normal-form table.  It is
-to exploit the quotient graph (2) for `d=9` to prove (15).  The outer moment
-cancellation is a dependence among nine points of
+to strengthen Theorem 5.1 into a bounded circuit-exchange theorem proving
+(15).  The outer moment cancellation is a dependence among nine points of
 
 \[
               \{[1:t:t^9:t^{10}]:t\in\mathbf F_{27}\}\subset Q^+(3,27),
@@ -314,17 +459,18 @@ cancellation is a dependence among nine points of
 while the desired nucleus point records the seven middle moments.  The most
 promising routes are:
 
-1. classify the relevant dependencies using the two rulings and semilinear
-   fixed-point equation (10);
-2. obtain an exchange theorem showing that a dependence can be chosen with
-   nine distinct affine support points; or
-3. prove the affine-plane two-point switch is saturating by interpreting its
-   replacement quadratic as the second ruling of the quotient quadric.
+1. show every class of `C_out/C_full` is a sum of at most three subline
+   circuit classes with union of affine supports of size at most nine and
+   zero forbidden coordinate;
+2. prove a circuit exchange from (24) that replaces two plane points while
+   preserving a nine-point affine support; or
+3. interpret the replacement quadratic in the existing switch as the
+   incidence condition for three projective `F_3`-sublines.
 
 The third route would turn the existing switch algebra into quotient
 geometry; the first two could bypass the switch restriction entirely.
 
-## 8. Secondary extension
+## 9. Secondary extension
 
 The fixed-direction matrix lemma itself extends beyond GF(27).  Let
 `K/F_3` have degree `m>=3`, let `H` be a trace hyperplane, let `phi` be a
@@ -332,11 +478,11 @@ nonzero polynomial of degree at most six, and fix `Z in K`.  On the affine
 cosets of `gamma H`, some pair has
 
 \[
- \phi(x)\phi(y)(x-y)+Z\{\phi(y)-\phi(x)\}\ne0.             \tag{17}
+ \phi(x)\phi(y)(x-y)+Z\{\phi(y)-\phi(x)\}\ne0.             \tag{26}
 \]
 
 For `Z=0`, a coset has at least two nonzero values.  For `Z!=0`, failure of
-(17) makes `x+Z/phi(x)` constant on the nonzero values in every coset.  If
+(26) makes `x+Z/phi(x)` constant on the nonzero values in every coset.  If
 `m>3`, the resulting degree-seven polynomial would have too many roots even
 after all six possible zeros of `phi` are removed.  For `m=3`, equality in
 the root count forces two zeros in each coset and the constant-derivative
@@ -344,13 +490,14 @@ argument of the GF(27) proof gives the contradiction.  This generalization
 is clean supplemental material, but (1), (2), and (14) have higher paper
 value.
 
-## 9. Acceptance boundary
+## 10. Acceptance boundary
 
 Proved here: (1), the prime-power quotient (2)--(10), the locator/secant
-dictionary (13), and the generalization (17).
+dictionary (13), the direct specialization proof and relative-code reduction
+(16)--(24), and the generalization (26).  The abstract subline/minimum-word
+theorem within (16)--(21) is also available in the cited 2023 literature.
 
 Not proved here: nucleus saturation (14), its GF(27) instance (15), or the
 split-and-collision assertion for the two-point switch.  No completeness
 theorem for an ambient normal rational curve is used as a substitute for
 these pointed nucleus-incidence statements.
-

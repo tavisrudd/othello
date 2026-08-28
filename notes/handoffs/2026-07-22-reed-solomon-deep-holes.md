@@ -233,6 +233,19 @@ binary `d=8` and ternary `d=9` carrier geometry and recasts the all-level
 arithmetic as pointed nucleus secant saturation.  The theorem, proof,
 red-team evidence boundary, and paper-successor compression map are in
 `notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`.
+The quotient graph's four-column circuits are now classified: four parameters
+are dependent exactly when their cross-ratio is fixed by the `d`-Frobenius.
+For GF(27) these are precisely the 819 projective `F3`-sublines, 702 of which
+avoid infinity.  This specialization is prior art in
+Durante--Longobardi--Pepe's 2023 `(d,sigma)`-Veronese theorem.  The new C973
+compression is the carrier interface and shortening: the last lemma is the
+relative covering-radius bound at most nine for
+`[27,16,12] subset [27,23,4]`, whose quotient is the seven-dimensional
+carrier.  An affine-plane locator is exactly the sum of three parallel
+subline circuits with cancelling infinity coordinate.  Minimum-circuit
+classification does not yet give the required bounded decomposition, so
+nucleus saturation remains open and no certificate-free GF(27) closure is
+claimed.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`,
@@ -1375,7 +1388,7 @@ gates remain binding.
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
 | 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, exhaustive persistent-sigma `O(mq^2)`, and exhaustive binary-form lex canonicalizers green, including both degenerate-successor stabilizers, a worst-case `O(m r q^2)` transport bound, and `O(r^2+r log q)` field operations per transport; structural canonicalization supports every `r>=5`, with exhaustive q5/GF8/GF9 R5 projective checks, q13/R11--R13 and GF16/R11 full-orbit regressions, GF16/R16 full-length, and GF32/R17 characteristic-power boundaries, while coding verdicts remain R5--R10 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
-| 3 | C973 | active; arbitrary-`r` escape, digit-stripping, cofinite GRS transfer, extension/enumerator consequences, and the exact GF(16)/GF(32) pointed R11 quotients are proved; those R11/R12 blocks close, while GF(27)/GF(64) and external review remain; manuscript frozen | prove a structural GF(64) pointed closure and a distinct GF(27) carrier reduction, then finish external review; a successful close receives a separately allocated paper-integration successor |
+| 3 | C973 | active; arbitrary-`r` escape, digit stripping, GF(64), the exact GF(16)/GF(32) pointed R11 quotients, and the carrier--nucleus/Frobenius-quadric reduction are proved; GF(27) is reduced to relative radius at most nine for `[27,16,12] subset [27,23,4]`, while external review remains; manuscript frozen | prove the GF(27) bounded subline-circuit exchange or universal split-switch lemma, then finish external review; a successful close receives a separately allocated paper-integration successor |
 
 ## Unallocated level-ups
 

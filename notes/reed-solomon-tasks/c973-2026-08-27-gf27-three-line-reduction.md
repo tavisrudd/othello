@@ -907,13 +907,47 @@ auxiliary family from the target and identifies the exact finite-geometric
 incidence theorem still required.  No available normal-rational-curve
 completeness result implies this nucleus incidence automatically.
 
+### 8.1 Minimum quotient circuits and shortening
+
+The Frobenius graph in (59) is the two-factor `(1,sigma)`-Veronese curve for
+`sigma:x mapsto x^9`.  Four of its points are coplanar exactly when their
+cross-ratio is fixed by `sigma`, hence lies in `F_3`; equivalently, the four
+parameters form a projective `F_3`-subline.  These are all minimum circuits.
+This is also the `d=2` specialization of Durante--Longobardi--Pepe (2023),
+Theorems 2.11 and 3.4.  There are 819 projective sublines, of which 702 avoid
+infinity.
+
+Let `D_full` and `D_out` be the codes obtained by shortening at infinity the
+degree-ten NRC code and the four-row Frobenius-graph code, respectively.
+Then the last GF(27) lemma is exactly
+
+\[
+ [27,16,12]=D_{\rm full}\subset D_{\rm out}=[27,23,4],
+ \qquad
+ \max_{c\in D_{\rm out}}\min_{w\in D_{\rm full}}
+       \operatorname {wt}(c-w)\leq9.                  \tag{61}
+\]
+
+The quotient has dimension seven and is the carrier via the middle-moment
+syndrome.  Its minimum layer consists of the 702 affine subline circuits.
+Moreover, the nine-column dependence of an affine `F_3`-plane is the sum of
+the three projective-subline circuit relations obtained from its three
+parallel affine lines; their equal infinity coefficients cancel because
+`3=0`.  Thus the plane switch starts from a three-circuit cancellation.  This
+does not prove (61): minimum circuits need not give a bounded decomposition
+of every relative coset, and the larger minimal dependencies remain
+unclassified.  The full proof and novelty boundary are recorded in
+`c973-2026-08-27-carrier-nucleus-compression.md`.
+
 ## 9. Boundary and next gate
 
-The load-bearing next step is now the universal split-switch assertion after
-(55).  It simultaneously covers the dense stratum and every residual Borel
-normal form.  The earlier three-line tower (5)--(11), the three-point `z8`
-intersection (37), and the explicit boundary products remain independent
-audits, but none needs to be the primary closure route.
+The load-bearing next step is either the universal split-switch assertion
+after (55), or alternatively a bounded circuit-exchange theorem proving (61).
+The former simultaneously covers the dense stratum and every residual Borel
+normal form; the latter could bypass those coordinates entirely.  The earlier
+three-line tower (5)--(11), the three-point `z8` intersection (37), and the
+explicit boundary products remain independent audits, but none needs to be
+the primary closure route.
 
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
