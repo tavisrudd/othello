@@ -1069,22 +1069,48 @@ There is one final cohomological reduction.  The seven stabilizer orders in
 
 Whenever the stabilizer order is prime to three, Maschke averaging splits
 the restriction of (25j), equivalently the restricted affine cocycle is a
-coboundary.  Thus four quotient types are tame:
+coboundary.  Thus four quotient types are immediately tame:
 
 \[
  \text{off-graph rank one},\quad(12),\quad(12)(34),\quad(1234).      \tag{25ag}
 \]
 
-Only three types can retain genuinely nonsplit leakage:
+Three types remain after Maschke alone:
 
 \[
  \text{Frobenius graph},\quad1,\quad(123).             \tag{25ah}
 \]
 
-Their stabilizers have orders \(702,24,3\), respectively.  This does not
-prove split-support abundance on the four tame fibres: it linearizes their
-kernel action but does not manufacture locators.  It does show that the
-cohomologically wild frontier consists of three quotient types, not seven.
+Their stabilizers have orders \(702,24,3\), respectively.  The last two also
+split after a cohomology calculation.  For \(C_3=\langle U\rangle\), the
+module \(A\), up to determinant, is one unipotent Jordan block of size three.
+Writing \(U=1+N\) gives
+
+\[
+ 1+U+U^2=N^2,\qquad \ker N^2=\operatorname {im}N,
+\]
+
+so the cyclic cohomology formula yields
+
+\[
+ H^1(C_3,A)=\ker(1+U+U^2)/(U-1)A=0.                  \tag{25ai}
+\]
+
+For the identity Shintani type, restriction from \(S_4\) to a Sylow
+\(C_3\) is injective on first cohomology: restriction followed by
+corestriction is multiplication by the index eight, which is invertible in
+characteristic three.  Hence
+
+\[
+                              H^1(S_4,A)=0.             \tag{25aj}
+\]
+
+Consequently six of the seven quotient stabilizers admit a linear section of
+(25j).  The only genuinely wild affine fibre is the Frobenius-graph
+rank-one type, whose Borel stabilizer contains the full 27-element translation
+group.  This does not prove split-support abundance on the six tame fibres:
+it linearizes their kernel action but does not manufacture locators.  It does
+identify the old Borel residue as the unique cohomological obstruction.
 
 ## 9. Secondary extension
 

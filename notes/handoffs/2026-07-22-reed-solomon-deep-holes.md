@@ -307,14 +307,17 @@ to the five conjugacy classes of `PGL2(3) = S4`, of sizes
 lifting problem over seven intrinsic quotient types, not the earlier Borel
 coordinate list.  The determinant `z3*z7-z4*z6` is the intrinsic rank-one
 boundary; `z3=z6=0` was only a Borel gauge slice.
-Maschke averaging further divides the seven quotient types into four tame
-and three wild lifting problems.  The off-graph rank-one type and the
+Maschke averaging first gives four immediate tame lifting problems.  The off-graph rank-one type and the
 `(12)`, `(12)(34)`, and `(1234)` Shintani types have stabilizer order prime
 to three, so the restricted digit extension splits.  Only the Frobenius
 graph, identity, and `(123)` types, with stabilizer orders `702,24,3`, can
-retain a nontrivial affine leakage cocycle.  Tame splitting does not itself
-produce nine-point locators, but it reduces the genuinely wild frontier to
-three quotient types.
+retain a nontrivial affine leakage cocycle after Maschke alone.  A cyclic
+cohomology calculation gives `H^1(C3,A)=0`, because the quadratic module is
+one size-three unipotent Jordan block with `ker N^2=im N`.  Sylow restriction,
+whose index is eight, also gives `H^1(S4,A)=0`.  Hence six of the seven
+stabilizer actions split; only the Frobenius-graph/Borel fibre is genuinely
+wild.  Tame splitting does not itself produce nine-point locators, but it
+identifies the old Borel residue as the unique cohomological obstruction.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`,
