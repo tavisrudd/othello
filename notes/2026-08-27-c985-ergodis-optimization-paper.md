@@ -462,6 +462,19 @@ by the source-local class representative.  This retains full-alphabet output
 while reducing the now-prominent emission cost; validation and independent
 artifact replay are unchanged.  The final table includes this fast path.
 
+Commit `714dea4ca` adds the discrete-quotient corollary: when both endpoint
+sorts have one quotient class per state, canonicalization is the affine map
+from the concrete sort interval to the class interval.  Equal intervals permit
+a bulk copy of the complete generator transition slice; unequal intervals need
+only the fixed offset.  This removes all representative and target-class
+lookups on discrete sorts without weakening the general collapsed-sort path.
+
+The same window rejected four plausible micro-optimizations after interleaved
+gates: replacing the LIFO `VecDeque` by `Vec`, a separate block-length sidecar,
+unchecked open-address-table indexing, and a discrete branch that still mapped
+targets through the class array.  Each was neutral or slower and is absent from
+the retained code.  No unsafe optimization survived.
+
 On the 131,072-state composed-16 control, eleven paired internal rounds give
 200.055 ms without composition elimination and 22.665 ms with it, an 8.83x
 speedup.  The retained proof has the same 16,204 multiway records as the
@@ -473,12 +486,12 @@ Final eleven-round CPU-2 medians against pinned Boa are:
 
 | deferred family | Ergodis | Boa | Ergodis advantage |
 |---|---:|---:|---:|
-| chain-1 | 7.625 ms | 26.524 ms | 3.479x |
-| irreducible random-4 | 14.884 ms | 24.759 ms | 1.663x |
-| duplicate-context-16 | 17.813 ms | 62.359 ms | 3.501x |
-| composed-context-16 | 18.707 ms | 56.132 ms | 3.001x |
-| power-context-32 | 16.085 ms | 45.093 ms | 2.803x |
-| stable colors-4/256 | 2.638 ms | 8.209 ms | 3.112x |
+| chain-1 | 7.579 ms | 27.192 ms | 3.588x |
+| irreducible random-4 | 15.011 ms | 25.152 ms | 1.676x |
+| duplicate-context-16 | 17.796 ms | 65.295 ms | 3.669x |
+| composed-context-16 | 18.033 ms | 57.902 ms | 3.211x |
+| power-context-32 | 14.511 ms | 45.792 ms | 3.155x |
+| stable colors-4/256 | 2.664 ms | 8.282 ms | 3.109x |
 
 The composed family is a controlled transformation-monoid application shape,
 not a claim about the redundancy distribution of arbitrary inputs.  It shows
@@ -500,7 +513,7 @@ scripts/check-observational-backend-evidence.sh
 
 Hashes:
 
-- final six-family table: `0f22889e46b31b26d95d5d5b61bf883f1fca7c1839000271d47a44fa0580cf84`;
+- final six-family table: `688e54923d97be2d16a50e1d3cfef010e50a3fa48333b888d80850f2a6d00b12`;
 - internal composition A/B: `228112aa3a48fac1e7db83c01713a7925cce5e4d624b67316ffaea240829bc01`;
 - benchmark script: `2c1ce8200d565fa87eceea2d786d60ad6fb0ef7fa6a9e80e0ea7ac0e71931222`;
 - checker: `500ec0398ca0fc9a745e14e4c6587f82794f808c792c74fdbc639f00447e3bdf`;
