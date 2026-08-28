@@ -275,6 +275,9 @@ hands the validated presentation to the proof-carrying compiler.
 witnesses.  Typed end-to-end tests cover contextual separation and witness
 lifting, while malformed target transitions are rejected by the shared
 presentation validator.  Pareto observation IDs feed through this same API.
+The runnable `examples/resource_interface.rs` instantiates the path outside
+coding theory: helper-count/cross-zone tradeoffs, alternative deployment plans,
+a hierarchical transition, exact quotienting, and verified concrete-plan lift.
 
 ## Additional portfolio bridges
 
