@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY THIRTEEN-SOURCE PASS; TWO SOURCES READ AT
-FULL TEXT AND ELEVEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY FOURTEEN-SOURCE PASS; TWO SOURCES READ AT
+FULL TEXT AND TWELVE AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
 
@@ -89,6 +89,7 @@ formal congruence argument.
 | Compile once, answer several algebraic queries | Provenance semirings, algebraic model counting, and semiring-DP solution expressions | Pre-empted in the unrestricted algebraic sense | Test whether an additional contextual quotient shrinks the boundary state or circuit interface while retaining value, count, optimal-count, and witness projections |
 | Compose typed open systems through explicit boundaries | Structured/decorated cospans and related compositional-systems formalisms | Pre-empted as composition syntax | Supply an observation compiler, effective finite carrier, quotient, separator certificate, and optimization/witness semantics |
 | Derive efficient semiring DP from exhaustive specification | Polymorphic semiring shortcut fusion and constraint lifting | Pre-empted as a general derivation pattern | Derive the finite interface/context presentation itself, or add a measurable post-fusion quotient rather than restating fusion |
+| Minimal exact state for bounded-boundary graph/hypergraph composition | Myhill--Nerode methods for boundaried graphs/hypergraphs and finite-state tree-decomposition DP | Strongly pre-empted for Boolean properties | Treat the theory as a graph adapter and pursue quantitative/resource/witness observations only after auditing finite-integer-index and optimization variants |
 
 ## Common kernel candidate
 
@@ -431,6 +432,17 @@ The read depths below are unconditional and describe this preliminary pass.
     shortcut fusion, supports separable algebraic constraints and generic
     backtracing, and explicitly leaves derivation of the recurrence from an
     arbitrary combinatorial generator open.
+14. René van Bevern, Rodney G. Downey, Michael R. Fellows, Serge Gaspers, and
+    Frances A. Rosamond, *Myhill--Nerode Methods for Hypergraphs*.
+    **Read depth: partial** — arXiv v5/published text, cache key
+    `arXiv:1211.1299`, SHA-256
+    `abc2e891785d907596e513232f18a48797d801962e1e54d45f1630d4886da74a`;
+    read the abstract, introduction and related-work survey, formal-language
+    recap, and graph/hypergraph statements through Theorem 3.12.  It gives
+    finite-index canonical gluing congruences as necessary and sufficient for
+    finite tree-automaton recognition on generated bounded-boundary graph and
+    hypergraph universes, and explicitly connects quotient index to the
+    information crossing a graph boundary.
 
 ## Knowledge-compilation and provenance connection
 
@@ -483,6 +495,37 @@ either compile the finite interface/context presentation from domain
 structure, or apply an independently measured observational quotient after a
 fusion/provenance backend.  Merely expressing an existing Bellman recurrence
 over another semiring is pre-empted.
+
+## Boundaried graphs, hypergraphs, and communication complexity
+
+This is the closest application-level pre-emption found in the first batch.
+For fixed boundary size, established Myhill--Nerode methods define two
+boundaried graphs or hypergraphs to be equivalent when gluing every compatible
+continuation preserves property membership.  Finite index is equivalent, on
+the generated small universe, to recognition of parse trees by a finite tree
+automaton.  The literature already uses this both to obtain linear-time
+bounded-width algorithms and to show that some properties admit no such
+finite-state treatment.
+
+The result does not kill the application path; it supplies an unusually clean
+Ergodis adapter and a negative diagnostic:
+
+- Boolean property recognition is a classical backend/corollary.
+- The quotient index measures exact information that must cross the boundary;
+  `ceil(log2 index)` is therefore a natural state-communication metric.
+- Infinite index tells the compiler to seek a bounded observation, enlarge the
+  parameter, accept approximation, or reject finite exact compilation.
+- The open capability question is quantitative: optimal cost, Pareto resource
+  profiles, multiple algebraic queries, and reconstructible solutions under
+  graph gluing, with an automatically generated and minimized transition
+  table rather than a bespoke treewidth DP.
+
+No novelty claim is permitted for that quantitative step until finite integer
+index, protrusion replacement, optimization versions of Courcelle-style
+theorems, and representative-set DP have been audited.  Even if those fully
+pre-empt the mathematics, implementing them behind the same typed
+`SeparatorSystem` would still expand Ergodis into exact bounded-boundary graph
+and network optimization.
 
 ## Coverage gaps and next search
 

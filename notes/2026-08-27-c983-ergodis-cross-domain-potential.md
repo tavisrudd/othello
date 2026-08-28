@@ -258,6 +258,17 @@ new value comes from deriving the finite semantics, reducing it materially,
 supporting richer queries/witnesses, or making a previously bespoke exact
 solver executable through the shared interface.
 
+A missed near-neighbor is now explicit: Myhill--Nerode methods for boundaried
+graphs and hypergraphs already characterize finite-state Boolean property
+recognition under gluing and tie it to bounded-width algorithms and boundary
+communication.  That strongly pre-empts a generic graph-context theorem but
+creates a high-value application adapter.  Ergodis can target quantitative
+cost/resource profiles, multi-query evaluation, minimized generated tables,
+and exact witness recovery; an infinite quotient becomes a compiler diagnostic
+rather than a failed research path.  Finite integer index, protrusion
+replacement, optimization meta-theorems, and representative-set DP remain a
+mandatory hostile audit before any mathematical novelty claim.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary

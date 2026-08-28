@@ -218,6 +218,9 @@ of one compiler contract:
   carrier and then applies the ranked-algebra case;
 - a finite semantics for typed open systems supplies sorts as boundaries and
   generators by serial/parallel plugging with fixed reachable components.
+- finite-state boundaried-graph or hypergraph DP supplies sorts as boundary
+  types and generators as the parse-tree constructors; the Boolean case is
+  the established graph/hypergraph Myhill--Nerode theorem.
 
 The theorem itself is a classical finite-machine fact, not the novelty claim.
 Its value is to isolate what every Ergodis adapter must provide: finite exact
