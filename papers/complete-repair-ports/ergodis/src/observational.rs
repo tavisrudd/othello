@@ -1623,7 +1623,7 @@ pub fn compile_observational_with_policy(
     presentation: &FinitePresentation,
     certificate_policy: CertificatePolicy,
 ) -> Result<CompiledObservation, ObservationalError> {
-    compile_observational_internal(presentation, certificate_policy, true)
+    compile_observational_internal(presentation, certificate_policy, true, None)
 }
 
 /// Compile an exact proof-carrying artifact without replaying its certificate
@@ -1634,34 +1634,46 @@ pub fn compile_observational_with_deferred_verification(
     presentation: &FinitePresentation,
     certificate_policy: CertificatePolicy,
 ) -> Result<CompiledObservation, ObservationalError> {
-    compile_observational_internal(presentation, certificate_policy, false)
+    compile_observational_internal(presentation, certificate_policy, false, None)
 }
 
 fn compile_observational_internal(
     presentation: &FinitePresentation,
     certificate_policy: CertificatePolicy,
     verify_immediately: bool,
+    prepared_refinement: Option<RefinementGenerators>,
 ) -> Result<CompiledObservation, ObservationalError> {
     if certificate_policy == CertificatePolicy::AdaptiveTranscript {
-        let selected = if multiway_is_admitted(presentation) {
-            CertificatePolicy::MultiwayTranscript
-        } else {
-            CertificatePolicy::SplitTranscript
+        let (selected, refinement) = match multiway_admission(presentation)? {
+            MultiwayAdmission::Admitted(refinement) => {
+                (CertificatePolicy::MultiwayTranscript, refinement)
+            }
+            MultiwayAdmission::Rejected => (CertificatePolicy::SplitTranscript, None),
         };
-        return compile_observational_internal(presentation, selected, verify_immediately);
+        return compile_observational_internal(
+            presentation,
+            selected,
+            verify_immediately,
+            refinement,
+        );
     }
     if certificate_policy == CertificatePolicy::QuotientOnly {
         // Quotient-only changes retained evidence, not the proof boundary:
         // construct and independently replay the linear split transcript,
         // then discard it before returning.  This avoids the quadratic
         // synchronous reference refiner on long distinguishing chains.
-        let source_policy = if multiway_is_admitted(presentation) {
-            CertificatePolicy::MultiwayTranscript
-        } else {
-            CertificatePolicy::SplitTranscript
+        let (source_policy, refinement) = match multiway_admission(presentation)? {
+            MultiwayAdmission::Admitted(refinement) => {
+                (CertificatePolicy::MultiwayTranscript, refinement)
+            }
+            MultiwayAdmission::Rejected => (CertificatePolicy::SplitTranscript, None),
         };
-        let mut compiled =
-            compile_observational_internal(presentation, source_policy, verify_immediately)?;
+        let mut compiled = compile_observational_internal(
+            presentation,
+            source_policy,
+            verify_immediately,
+            refinement,
+        )?;
         compiled.split_records = Box::default();
         compiled.multiway_records = Box::default();
         compiled.certificate_policy = CertificatePolicy::QuotientOnly;
@@ -1690,7 +1702,7 @@ fn compile_observational_internal(
         }
         CertificatePolicy::MultiwayTranscript => {
             let (classes, class_ranges, records, _inverse) =
-                minimize_partition_multiway(presentation)?;
+                minimize_partition_multiway_prepared(presentation, prepared_refinement)?;
             (
                 classes,
                 class_ranges,
@@ -1728,18 +1740,23 @@ fn compile_observational_internal(
     )
 }
 
-fn multiway_is_admitted(presentation: &FinitePresentation) -> bool {
+enum MultiwayAdmission {
+    Rejected,
+    Admitted(Option<RefinementGenerators>),
+}
+
+fn multiway_admission(
+    presentation: &FinitePresentation,
+) -> Result<MultiwayAdmission, ObservationalError> {
     if presentation.state_count() < 4_096 {
-        return false;
+        return Ok(MultiwayAdmission::Rejected);
     }
     let refinement = if presentation
         .generator_sort_ranges
         .iter()
         .any(|range| range.len > 4)
     {
-        let Ok(directory) = RefinementGenerators::new(presentation) else {
-            return false;
-        };
+        let directory = RefinementGenerators::new(presentation)?;
         Some(directory)
     } else {
         None
@@ -1754,7 +1771,7 @@ fn multiway_is_admitted(presentation: &FinitePresentation) -> bool {
                 directory.ranges[sort].len
             });
         if outgoing != 0 && !(2..=4).contains(&outgoing) {
-            return false;
+            return Ok(MultiwayAdmission::Rejected);
         }
         let mut first = None;
         let mut second = None;
@@ -1768,11 +1785,19 @@ fn multiway_is_admitted(presentation: &FinitePresentation) -> bool {
             } else if second.is_none() {
                 second = Some(observation);
             } else {
-                return false;
+                return Ok(MultiwayAdmission::Rejected);
             }
         }
     }
-    true
+    Ok(MultiwayAdmission::Admitted(refinement))
+}
+
+#[cfg(test)]
+fn multiway_is_admitted(presentation: &FinitePresentation) -> bool {
+    matches!(
+        multiway_admission(presentation),
+        Ok(MultiwayAdmission::Admitted(_))
+    )
 }
 
 fn minimize_partition(
@@ -2313,12 +2338,24 @@ fn packed_signature4(
 fn minimize_partition_multiway(
     presentation: &FinitePresentation,
 ) -> Result<MultiwayPartition, ObservationalError> {
-    let refinement = presentation
-        .generator_sort_ranges
-        .iter()
-        .any(|range| range.len > 4)
-        .then(|| RefinementGenerators::new(presentation))
-        .transpose()?;
+    minimize_partition_multiway_prepared(presentation, None)
+}
+
+fn minimize_partition_multiway_prepared(
+    presentation: &FinitePresentation,
+    refinement: Option<RefinementGenerators>,
+) -> Result<MultiwayPartition, ObservationalError> {
+    let refinement = match refinement {
+        Some(refinement) => Some(refinement),
+        None if presentation
+            .generator_sort_ranges
+            .iter()
+            .any(|range| range.len > 4) =>
+        {
+            Some(RefinementGenerators::new(presentation)?)
+        }
+        None => None,
+    };
     let block_capacity = presentation.state_count();
     let (mut state_blocks, mut block_sorts, mut members, mut block_ranges) =
         initial_split_workspace(presentation, block_capacity)?;
