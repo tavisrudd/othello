@@ -415,11 +415,17 @@ const _: () = assert!(std::mem::align_of::<InverseTargetRecord>() == 4);
 struct SplitWorkItem {
     block: u32,
     generator: u32,
-    _reserved: [u32; 2],
 }
 
-const _: () = assert!(std::mem::size_of::<SplitWorkItem>() == 16);
+const _: () = assert!(std::mem::size_of::<SplitWorkItem>() == 8);
 const _: () = assert!(std::mem::align_of::<SplitWorkItem>() == 4);
+
+trait PendingDirectory {
+    fn contains(&self, block: u32, generator: u32) -> bool;
+    fn insert(&mut self, block: u32, generator: u32) -> Result<bool, ObservationalError>;
+    fn remove(&mut self, block: u32, generator: u32) -> bool;
+    fn add_block(&mut self, block: u32, sort: u32) -> Result<(), ObservationalError>;
+}
 
 struct PendingSet {
     keys: Box<[u64]>,
@@ -430,15 +436,19 @@ impl PendingSet {
     const EMPTY: u64 = u64::MAX;
 
     fn new(max_items: usize) -> Result<Self, ObservationalError> {
-        let slots = max_items
-            .max(1)
-            .checked_mul(2)
-            .and_then(usize::checked_next_power_of_two)
-            .ok_or(ObservationalError::Overflow)?;
+        let slots = Self::slot_count(max_items)?;
         Ok(Self {
             keys: vec![Self::EMPTY; slots].into_boxed_slice(),
             len: 0,
         })
+    }
+
+    fn slot_count(max_items: usize) -> Result<usize, ObservationalError> {
+        max_items
+            .max(1)
+            .checked_mul(2)
+            .and_then(usize::checked_next_power_of_two)
+            .ok_or(ObservationalError::Overflow)
     }
 
     fn capacity(&self) -> usize {
@@ -512,6 +522,169 @@ impl PendingSet {
         self.keys[hole] = Self::EMPTY;
         true
     }
+}
+
+impl PendingDirectory for PendingSet {
+    fn contains(&self, block: u32, generator: u32) -> bool {
+        self.contains(split_work_key(block, generator))
+    }
+
+    fn insert(&mut self, block: u32, generator: u32) -> Result<bool, ObservationalError> {
+        self.insert(split_work_key(block, generator))
+    }
+
+    fn remove(&mut self, block: u32, generator: u32) -> bool {
+        self.remove(split_work_key(block, generator))
+    }
+
+    fn add_block(&mut self, _block: u32, _sort: u32) -> Result<(), ObservationalError> {
+        Ok(())
+    }
+}
+
+struct DensePending {
+    slots: Box<[u64]>,
+    block_starts: Box<[u32]>,
+    generator_locals: Box<[u32]>,
+    incoming_counts: Box<[u32]>,
+    next_slot: u32,
+}
+
+impl DensePending {
+    fn new(
+        presentation: &FinitePresentation,
+        initial_block_sorts: &[u32],
+    ) -> Result<Self, ObservationalError> {
+        let index = pending_generator_index(presentation)?;
+        let dense_slots = dense_pending_slots(presentation, &index.incoming_counts)?;
+        u32::try_from(dense_slots).map_err(|_| ObservationalError::Overflow)?;
+        let mut pending = Self {
+            slots: bitmap_storage(dense_slots)?.into_boxed_slice(),
+            block_starts: vec![u32::MAX; presentation.state_count()].into_boxed_slice(),
+            generator_locals: index.generator_locals,
+            incoming_counts: index.incoming_counts,
+            next_slot: 0,
+        };
+        for (block, &sort) in initial_block_sorts.iter().enumerate() {
+            pending.add_block(block as u32, sort)?;
+        }
+        Ok(pending)
+    }
+
+    fn slot(&self, block: u32, generator: u32) -> usize {
+        debug_assert_ne!(self.block_starts[block as usize], u32::MAX);
+        (self.block_starts[block as usize] + self.generator_locals[generator as usize]) as usize
+    }
+}
+
+impl PendingDirectory for DensePending {
+    fn contains(&self, block: u32, generator: u32) -> bool {
+        bitmap_contains(&self.slots, self.slot(block, generator))
+    }
+
+    fn insert(&mut self, block: u32, generator: u32) -> Result<bool, ObservationalError> {
+        let slot = self.slot(block, generator);
+        if bitmap_contains(&self.slots, slot) {
+            return Ok(false);
+        }
+        bitmap_insert(&mut self.slots, slot);
+        Ok(true)
+    }
+
+    fn remove(&mut self, block: u32, generator: u32) -> bool {
+        let slot = self.slot(block, generator);
+        if !bitmap_contains(&self.slots, slot) {
+            return false;
+        }
+        bitmap_remove(&mut self.slots, slot);
+        true
+    }
+
+    fn add_block(&mut self, block: u32, sort: u32) -> Result<(), ObservationalError> {
+        let width = self.incoming_counts[sort as usize];
+        let end = self
+            .next_slot
+            .checked_add(width)
+            .ok_or(ObservationalError::Overflow)?;
+        if end as usize > self.slots.len().saturating_mul(64)
+            || self.block_starts[block as usize] != u32::MAX
+        {
+            return Err(ObservationalError::Overflow);
+        }
+        self.block_starts[block as usize] = self.next_slot;
+        self.next_slot = end;
+        Ok(())
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum PendingMode {
+    Dense,
+    Sparse,
+}
+
+struct PendingGeneratorIndex {
+    incoming_counts: Box<[u32]>,
+    generator_locals: Box<[u32]>,
+}
+
+fn pending_generator_index(
+    presentation: &FinitePresentation,
+) -> Result<PendingGeneratorIndex, ObservationalError> {
+    let mut incoming_counts = vec![0_u32; presentation.sorts.len()];
+    let mut generator_locals = vec![0_u32; presentation.generators.len()];
+    for (generator, record) in presentation.generators.iter().copied().enumerate() {
+        let count = &mut incoming_counts[record.target_sort as usize];
+        generator_locals[generator] = *count;
+        *count = count.checked_add(1).ok_or(ObservationalError::Overflow)?;
+    }
+    Ok(PendingGeneratorIndex {
+        incoming_counts: incoming_counts.into_boxed_slice(),
+        generator_locals: generator_locals.into_boxed_slice(),
+    })
+}
+
+fn dense_pending_slots(
+    presentation: &FinitePresentation,
+    incoming_counts: &[u32],
+) -> Result<usize, ObservationalError> {
+    presentation.sorts.iter().zip(incoming_counts).try_fold(
+        0_usize,
+        |slots, (states, &incoming)| {
+            slots
+                .checked_add(
+                    (states.len as usize)
+                        .checked_mul(incoming as usize)
+                        .ok_or(ObservationalError::Overflow)?,
+                )
+                .ok_or(ObservationalError::Overflow)
+        },
+    )
+}
+
+fn pending_mode(presentation: &FinitePresentation) -> Result<PendingMode, ObservationalError> {
+    let index = pending_generator_index(presentation)?;
+    let dense_slots = dense_pending_slots(presentation, &index.incoming_counts)?;
+    let dense_bytes = dense_slots
+        .checked_add(63)
+        .map(|bits| bits / 64)
+        .and_then(|words| words.checked_mul(std::mem::size_of::<u64>()))
+        .and_then(|bytes| {
+            let words = presentation
+                .state_count()
+                .checked_add(presentation.generators.len())?
+                .checked_add(presentation.sorts.len())?;
+            bytes.checked_add(words.checked_mul(std::mem::size_of::<u32>())?)
+        })
+        .ok_or(ObservationalError::Overflow)?;
+    let sparse_bytes = PendingSet::slot_count(presentation.transitions.len())?
+        .checked_mul(std::mem::size_of::<u64>())
+        .ok_or(ObservationalError::Overflow)?;
+    Ok(if dense_bytes <= sparse_bytes {
+        PendingMode::Dense
+    } else {
+        PendingMode::Sparse
+    })
 }
 
 struct InverseIndex {
@@ -1270,7 +1443,7 @@ fn minimize_partition_worklist(
     presentation: &FinitePresentation,
 ) -> Result<WorklistPartition, ObservationalError> {
     let block_capacity = presentation.state_count();
-    let (mut state_blocks, mut block_sorts, mut members, mut block_ranges) =
+    let (state_blocks, block_sorts, members, block_ranges) =
         initial_split_workspace(presentation, block_capacity)?;
     let initial_block_count = block_sorts.len();
     let mut omitted_blocks = vec![u32::MAX; presentation.sorts.len()];
@@ -1296,13 +1469,53 @@ fn minimize_partition_worklist(
         let (classes, class_ranges) = canonicalize_partition(presentation, &state_blocks)?;
         return Ok((classes, class_ranges, Box::default()));
     }
+    match pending_mode(presentation)? {
+        PendingMode::Dense => {
+            let pending = DensePending::new(presentation, &block_sorts)?;
+            minimize_partition_worklist_with_pending(
+                presentation,
+                initial_block_count,
+                &initial_blocks_per_sort,
+                &omitted_blocks,
+                state_blocks,
+                block_sorts,
+                members,
+                block_ranges,
+                pending,
+            )
+        }
+        PendingMode::Sparse => minimize_partition_worklist_with_pending(
+            presentation,
+            initial_block_count,
+            &initial_blocks_per_sort,
+            &omitted_blocks,
+            state_blocks,
+            block_sorts,
+            members,
+            block_ranges,
+            PendingSet::new(presentation.transitions.len())?,
+        ),
+    }
+}
+
+#[allow(clippy::too_many_arguments)]
+fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
+    presentation: &FinitePresentation,
+    initial_block_count: usize,
+    initial_blocks_per_sort: &[u32],
+    omitted_blocks: &[u32],
+    mut state_blocks: Box<[u32]>,
+    mut block_sorts: Vec<u32>,
+    mut members: Vec<u32>,
+    mut block_ranges: Vec<SortRange>,
+    mut pending: P,
+) -> Result<WorklistPartition, ObservationalError> {
     // At most one pending splitter block per forward source edge is useful:
     // for a fixed generator, distinct pending blocks have disjoint nonempty
-    // inverse images. Keep only those active pairs instead of reserving one
-    // bit and one historical queue slot for every target-state/generator pair.
+    // inverse images. The queue therefore needs only one slot per forward edge.
+    let block_capacity = presentation.state_count();
     let pending_capacity = presentation.transitions.len();
     let mut queue = VecDeque::with_capacity(pending_capacity);
-    let mut pending = PendingSet::new(pending_capacity)?;
     let mut pending_counts = vec![0_u32; block_capacity];
     for (generator, record) in presentation.generators.iter().copied().enumerate() {
         if initial_blocks_per_sort[record.target_sort as usize] <= 1 {
@@ -1323,7 +1536,6 @@ fn minimize_partition_worklist(
                 SplitWorkItem {
                     block: state_blocks[target_state as usize],
                     generator: generator as u32,
-                    _reserved: [0; 2],
                 },
             )?;
         }
@@ -1345,7 +1557,7 @@ fn minimize_partition_worklist(
     let mut records = Vec::with_capacity(block_capacity.saturating_sub(initial_block_count));
 
     while let Some(work) = queue.pop_front() {
-        if !pending.remove(split_work_key(work.block, work.generator)) {
+        if !pending.remove(work.block, work.generator) {
             return Err(ObservationalError::Partition);
         }
         pending_counts[work.block as usize] = pending_counts[work.block as usize]
@@ -1509,7 +1721,7 @@ fn initial_split_workspace(
 }
 
 #[allow(clippy::too_many_arguments)]
-fn split_marked_block(
+fn split_marked_block<P: PendingDirectory>(
     inverse: &InverseIndex,
     source_block: u32,
     moved_len: u32,
@@ -1519,7 +1731,7 @@ fn split_marked_block(
     members: &mut [u32],
     block_ranges: &mut Vec<SortRange>,
     queue: &mut VecDeque<SplitWorkItem>,
-    pending: &mut PendingSet,
+    pending: &mut P,
     pending_counts: &mut [u32],
     records: &mut Vec<SplitRecord>,
 ) -> Result<(), ObservationalError> {
@@ -1552,7 +1764,9 @@ fn split_marked_block(
         }
     };
     block_ranges.push(new_range);
-    block_sorts.push(block_sorts[source_block as usize]);
+    let sort = block_sorts[source_block as usize];
+    block_sorts.push(sort);
+    pending.add_block(new_block, sort)?;
     for position in new_range.start as usize..new_range.end() as usize {
         state_blocks[members[position] as usize] = new_block;
     }
@@ -1579,13 +1793,13 @@ fn split_work_key(block: u32, generator: u32) -> u64 {
 }
 
 #[allow(clippy::too_many_arguments)]
-fn schedule_sparse_splitter_block(
+fn schedule_sparse_splitter_block<P: PendingDirectory>(
     inverse: &InverseIndex,
     block: u32,
     block_ranges: &[SortRange],
     members: &[u32],
     queue: &mut VecDeque<SplitWorkItem>,
-    pending: &mut PendingSet,
+    pending: &mut P,
     pending_counts: &mut [u32],
 ) -> Result<(), ObservationalError> {
     let range = block_ranges[block as usize];
@@ -1596,31 +1810,26 @@ fn schedule_sparse_splitter_block(
                 queue,
                 pending,
                 pending_counts,
-                SplitWorkItem {
-                    block,
-                    generator,
-                    _reserved: [0; 2],
-                },
+                SplitWorkItem { block, generator },
             )?;
         }
     }
     Ok(())
 }
 
-fn push_split_work(
+fn push_split_work<P: PendingDirectory>(
     queue: &mut VecDeque<SplitWorkItem>,
-    pending: &mut PendingSet,
+    pending: &mut P,
     pending_counts: &mut [u32],
     work: SplitWorkItem,
 ) -> Result<(), ObservationalError> {
-    let key = split_work_key(work.block, work.generator);
-    if pending.contains(key) {
+    if pending.contains(work.block, work.generator) {
         return Ok(());
     }
     if queue.len() == queue.capacity() {
         return Err(ObservationalError::Overflow);
     }
-    if !pending.insert(key)? {
+    if !pending.insert(work.block, work.generator)? {
         return Ok(());
     }
     pending_counts[work.block as usize] = pending_counts[work.block as usize]
@@ -2547,6 +2756,7 @@ mod tests {
         });
         let presentation =
             FinitePresentation::new([2, TARGET_STATES], observations, generators).unwrap();
+        assert_eq!(pending_mode(&presentation).unwrap(), PendingMode::Sparse);
         let inverse = InverseIndex::new(&presentation).unwrap();
         inverse.verify(&presentation).unwrap();
         assert!(inverse.offsets.is_empty());
@@ -2559,6 +2769,34 @@ mod tests {
         assert_eq!(split.metrics().states, TARGET_STATES as usize + 2);
         assert_eq!(split.metrics().classes, 4);
         assert_eq!(split.split_records().len(), 1);
+        verify_compilation(&presentation, &split).unwrap();
+    }
+
+    #[test]
+    fn dense_pending_directory_is_selected_for_classical_endomap() {
+        const STATES: u32 = 64;
+        let mut observations = vec![0_u32; STATES as usize];
+        observations[0] = 1;
+        let presentation = FinitePresentation::new(
+            [STATES],
+            observations,
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: (0..STATES)
+                    .map(|state| (state + 1) % STATES)
+                    .collect::<Vec<_>>()
+                    .into_boxed_slice(),
+            }],
+        )
+        .unwrap();
+        assert_eq!(pending_mode(&presentation).unwrap(), PendingMode::Dense);
+
+        let split =
+            compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
+                .unwrap();
+        assert_eq!(split.metrics().classes, STATES as usize);
+        assert_eq!(split.split_records().len(), STATES as usize - 2);
         verify_compilation(&presentation, &split).unwrap();
     }
 
@@ -2577,7 +2815,6 @@ mod tests {
                 SplitWorkItem {
                     block,
                     generator: 0,
-                    _reserved: [0; 2],
                 },
             )
             .unwrap();
