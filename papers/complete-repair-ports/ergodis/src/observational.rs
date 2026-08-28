@@ -4718,6 +4718,25 @@ mod tests {
     }
 
     #[test]
+    fn separator_arena_reconstructs_multistep_paths_in_forward_order() {
+        let presentation = FinitePresentation::new(
+            [8],
+            [0, 0, 0, 0, 0, 0, 0, 1],
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: [1, 2, 3, 3, 5, 6, 7, 7].into(),
+            }],
+        )
+        .unwrap();
+        let mut search = SeparatorSearch::with_capacity(8);
+        let (path, left_output, right_output) =
+            distinguishing_path(&presentation, 0, 4, &mut search).unwrap();
+        assert_eq!(path, &[0, 0, 0]);
+        assert_eq!((left_output, right_output), (0, 1));
+    }
+
+    #[test]
     fn quotient_only_uses_the_small_half_kernel_on_a_long_chain() {
         const STATES: u32 = 16_384;
         let mut observations = vec![0_u32; STATES as usize];

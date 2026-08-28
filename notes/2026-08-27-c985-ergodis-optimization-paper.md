@@ -837,3 +837,12 @@ lattice now cover the trust boundaries.  The next high-value algorithmic
 target is rank-stratified full-span envelope aggregation; the generic orbit
 engine should first be instantiated only where profiling shows raw probe
 hashing or storage dominates.
+
+The same review found a separate streaming pathology in the exhaustive audit.
+Although records were written incrementally, each pair search cloned its full
+generator path into every BFS queue entry and rebuilt all search allocations.
+Commit `0eae4c062` replaces this with one sparse predecessor arena, visited
+index, and reconstructed path buffer reused across the entire stream.  The
+stream format and verifier are unchanged; peak scratch now follows the hardest
+single separator search rather than accumulating path copies or emitted
+evidence.
