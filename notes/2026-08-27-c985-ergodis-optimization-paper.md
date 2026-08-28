@@ -876,3 +876,12 @@ papers/complete-repair-ports/ergodis/scripts/check-separator-stream-evidence.sh
 - stream A/B script: `66b6953f773d955aaef9721d8a6f180f8439a15add9446b9a99db9208c2a2433`;
 - stream checker: `0a60ffcaadd93cef403b6a58681b0569389295719b397bfe16ce2fc6a72e9574`;
 - stream TSV: `bae609f5a2eb7050444874ca58427116e80e77a68fdcdd292d15509b3cb1fd0c`.
+
+Commit `69f3615f4` closes the finite family-response gap left by accepted-word
+languages.  It compiles arbitrary minima-defined probe families into exact
+response-vector observation IDs using one flat state matrix, a sorted compact
+state-index vector, and one copy of each distinct response.  Re-observation
+preserves all typed contexts, so subsequent proof-carrying minimization computes
+the family-specific contextual quotient.  Empty families, unknown probes, and
+shape overflow are rejected; an empty observation alphabet correctly merges
+all same-sort states without reserving a sentinel cost.

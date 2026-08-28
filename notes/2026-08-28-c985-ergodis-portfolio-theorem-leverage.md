@@ -50,7 +50,7 @@ typed composition family, and replayable separation/witness evidence.
 
 ## Ranked theorem leverage
 
-### 1. Family-restricted contextual quotients -- implemented first step
+### 1. Family-restricted contextual quotients -- implemented finite cases
 
 C980 proves that an application family may observe a quotient far coarser than
 the universal state.  High-distance MDS-like outer layers see only the zero
@@ -70,10 +70,15 @@ minimization merge equivalent language-control states.  Carrier and transition
 storage are capacity-computed once; there is no product-construction growth in
 the inner loops.
 
-This is not yet the full C980 family response quotient.  A family defined by
-minima over internal probes can be coarser than any admitted-word language, and
-nonregular policies require another finite sufficient recognizer or a direct
-response-vector compiler.
+`compile_minima_family_responses` covers the other finite C980 case directly.
+Given a state-by-probe value matrix and arbitrary nonempty probe families, it
+computes each exact family minimum, sorts state indices by the resulting
+response vectors, and stores every distinct vector once in flat storage.
+`FinitePresentation::reobserve` preserves the complete typed context system
+while replacing its observations with these compact IDs.  Thus a
+minima-defined family can observe a coarser quotient than any accepted-word
+language without being forced into a regular-language encoding.  Truly
+infinite/non-finitely-sufficient policies remain outside this finite compiler.
 
 ### 2. Finite tower synthesis -- implemented
 
@@ -311,8 +316,6 @@ All next kernels should preserve the established constraints:
    measured storage/lookup crossover rather than enabling it universally.
 3. Instantiate the ordered-resource and finite-interface adapters on one
    two-resource repair or network-allocation example with witness replay.
-4. Add a direct minima-defined family-response adapter for the cases not
-   expressible as finite accepted-word languages.
 
 Fixed-batch packing is deliberately not in this list.  C980 proves its bounded
 small-model half, but the typed overlap-preserving batch composition law is
