@@ -7,7 +7,11 @@
 //! contexts distinguishes their observations.
 
 use crate::observational::{
-    CompiledObservation, FinitePresentation, GeneratorSpec, ObservationalError,
+    verify_compilation, CompiledObservation, FinitePresentation, GeneratorSpec, ObservationalError,
+};
+use crate::ordered_resource::{
+    FiniteOrderedMonoid, OrderedResourceError, ParetoFront, ParetoObservationTable,
+    WitnessedParetoFront,
 };
 use thiserror::Error;
 
@@ -43,6 +47,73 @@ pub enum InterfaceCompileError<E> {
     Presentation(#[from] ObservationalError),
     #[error("a finite-interface count or offset exceeds compact storage")]
     Overflow,
+}
+
+#[derive(Debug, Error, PartialEq, Eq)]
+pub enum ParetoInterfaceError {
+    #[error(transparent)]
+    Resource(#[from] OrderedResourceError),
+    #[error(transparent)]
+    Presentation(#[from] ObservationalError),
+}
+
+/// A finite presentation whose semantic observations are deduplicated Pareto
+/// responses and whose concrete states retain witness fronts as a sidecar.
+#[derive(Clone, Debug)]
+pub struct WitnessedParetoPresentation {
+    presentation: FinitePresentation,
+    responses: ParetoObservationTable,
+    state_fronts: Box<[WitnessedParetoFront]>,
+}
+
+impl WitnessedParetoPresentation {
+    pub fn presentation(&self) -> &FinitePresentation {
+        &self.presentation
+    }
+
+    pub fn responses(&self) -> &ParetoObservationTable {
+        &self.responses
+    }
+
+    pub fn state_front(&self, state: u32) -> Option<&WitnessedParetoFront> {
+        self.state_fronts.get(state as usize)
+    }
+
+    pub fn class_witness_front(
+        &self,
+        compiled: &CompiledObservation,
+        class: u32,
+    ) -> Result<Option<&WitnessedParetoFront>, ObservationalError> {
+        verify_compilation(&self.presentation, compiled)?;
+        let Some(&representative) = compiled.class_representatives().get(class as usize) else {
+            return Ok(None);
+        };
+        Ok(self.state_front(representative))
+    }
+}
+
+/// Build a semantic Pareto presentation while keeping witness IDs out of its
+/// observation key. Equal responses can therefore merge despite distinct
+/// concrete plans.
+pub fn present_witnessed_pareto_interface<M: FiniteOrderedMonoid>(
+    monoid: &M,
+    sort_lengths: impl IntoIterator<Item = u32>,
+    state_fronts: impl IntoIterator<Item = WitnessedParetoFront>,
+    contexts: impl IntoIterator<Item = GeneratorSpec>,
+) -> Result<WitnessedParetoPresentation, ParetoInterfaceError> {
+    let state_fronts: Vec<_> = state_fronts.into_iter().collect();
+    let mut semantic_fronts = Vec::with_capacity(state_fronts.len());
+    for front in &state_fronts {
+        semantic_fronts.push(ParetoFront::new(monoid, front.resources())?);
+    }
+    let responses = ParetoObservationTable::new(semantic_fronts)?;
+    let presentation =
+        FinitePresentation::new(sort_lengths, responses.observations().to_vec(), contexts)?;
+    Ok(WitnessedParetoPresentation {
+        presentation,
+        responses,
+        state_fronts: state_fronts.into_boxed_slice(),
+    })
 }
 
 /// Materialize a validated finite presentation with exactly-sized buffers.
@@ -125,6 +196,7 @@ pub fn lift_class_witnesses<A: FiniteInterfaceWitness>(
 mod tests {
     use super::*;
     use crate::observational::{compile_observational, verify_compilation};
+    use crate::ordered_resource::{CappedAdditiveMonoid, ParetoWitness};
     use std::convert::Infallible;
 
     #[derive(Debug, Error, PartialEq, Eq)]
@@ -231,5 +303,48 @@ mod tests {
                 }
             ))
         ));
+    }
+
+    #[test]
+    fn pareto_semantics_merge_states_but_preserve_representative_witnesses() {
+        let monoid = CappedAdditiveMonoid::new([2, 2]).unwrap();
+        let resource = monoid.encode(&[1, 1]).unwrap();
+        let first = WitnessedParetoFront::new(
+            &monoid,
+            [ParetoWitness {
+                resource,
+                witness: 10,
+            }],
+        )
+        .unwrap();
+        let second = WitnessedParetoFront::new(
+            &monoid,
+            [ParetoWitness {
+                resource,
+                witness: 20,
+            }],
+        )
+        .unwrap();
+        let interface =
+            present_witnessed_pareto_interface(&monoid, [2], [first, second], []).unwrap();
+        let compiled = compile_observational(interface.presentation()).unwrap();
+
+        assert_eq!(compiled.class_representatives(), &[0]);
+        assert_eq!(interface.responses().fronts().len(), 1);
+        assert_eq!(
+            interface
+                .class_witness_front(&compiled, 0)
+                .unwrap()
+                .unwrap()
+                .entries()[0],
+            ParetoWitness {
+                resource,
+                witness: 10
+            }
+        );
+
+        let foreign = FinitePresentation::new([2], [0, 1], []).unwrap();
+        let foreign = compile_observational(&foreign).unwrap();
+        assert!(interface.class_witness_front(&foreign, 0).is_err());
     }
 }

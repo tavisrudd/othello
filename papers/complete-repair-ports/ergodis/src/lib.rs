@@ -59,8 +59,9 @@ pub use group_action::{
     OrbitCompileError, OrbitPartition, OrbitQuotientError, OrbitStorage,
 };
 pub use interface::{
-    lift_class_witnesses, present_finite_interface, FiniteInterfaceAdapter, FiniteInterfaceWitness,
-    InterfaceCompileError,
+    lift_class_witnesses, present_finite_interface, present_witnessed_pareto_interface,
+    FiniteInterfaceAdapter, FiniteInterfaceWitness, InterfaceCompileError, ParetoInterfaceError,
+    WitnessedParetoPresentation,
 };
 pub use matrix::{Matrix, MatrixError};
 #[doc(hidden)]
