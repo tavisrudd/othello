@@ -137,6 +137,29 @@ useful optional results without enough first-pass navigation.
   The independently maintained summary was copied byte-for-byte to its mirror
   and committed as `a353307`.  The standalone paper gate and exporter manifest
   verification pass.  Nothing was pushed.
+- 2026-08-27: completed a second local decompression pass from referee feedback.
+  The introduction now defines the split torus operationally, explains the
+  physical meaning of both group branches, distinguishes multiplier inclusion
+  from the MDS equality upgrade, separates prior results from the gap, and
+  collects the formal imported statements under `Imported inputs`.  The
+  six-point preview now translates coding, geometric, and quantum statements
+  separately from lift and verification refinements.
+- 2026-08-27: Section 3 now states the coherent-phasing question before the
+  Weil representation and moves the qutrit uniqueness caveat to a footnote.
+  Section 4 keeps only the conceptual atlas recovery of `-1/z`; the complete
+  450-value multiplicity and collision bookkeeping is in the invariant-
+  certificate appendix.  Section 5 removes party motion from the six-point
+  theorem, isolates it in remarks, and states why the operator-pushing count
+  does not enlarge the fixed-coordinate logical group.  The Lean paragraph is
+  reduced to the formalized, certified, imported, and trusted boundaries;
+  repository-specific entry points and toolchain details remain in repository
+  documentation.
+- 2026-08-27: authority commit `050c02a00` and standalone forward commit
+  `255e2ed` pass warning-free 26-page builds, all-page visual inspection, both
+  complete eight-bundle evidence replays, zero-finding export audit, and mirror
+  manifest verification.  Exporter content SHA-256 is
+  `359a93ef9bec350cb74c9c438444562ae06805d26447aaeee909e8a7960a404b`.
+  Nothing was pushed, and C979 remains open.
 
 ## Lifecycle gate
 

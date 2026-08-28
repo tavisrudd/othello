@@ -10,20 +10,21 @@ Discovery companion:
 
 ## Current status
 
-**C979 is running and user-held open (2026-08-27).**  The first complete
-exposition revision of *Diagonal Isoduality and Transversal Clifford Groups of
-MDS--CSS Codes* is validated and locally exported.  The abstract and
-introduction now lead from the transversal-gate problem to the all-length
-diagonal-multiplier nullity dichotomy; the main proof is split into the two
-branches and exactness; six-point geometry, lifts, finite calculations, and
-formal verification are visibly secondary.  House terminology and hard-coded
-equation numbers were removed, the appendix census is tabulated, and the false
-Clebsch-portfolio affiliation is gone.  Authority `e7eb05320`; paper mirror
-`53e11c6`; summary mirror `a353307`; no push.  The warning-free 26-page gate,
-all-page visual inspection, complete eight-bundle evidence replay, export
-audit, and mirror verification pass.  Preserve theorem scope and trust
-boundaries.  Do not close or archive C979 until the user explicitly directs it.
-Live card: `2026-08-27-c979-mds-css-exposition-revision.md`.
+**C979 is running and user-held open (2026-08-27).**  Two complete exposition
+passes of *Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS
+Codes* are validated and locally exported.  The second pass explains the two
+logical-group branches physically, separates prior results from the paper's
+gap and imported inputs, translates the six-point languages explicitly, moves
+the 450-holonomy collision audit to the certificate appendix, demotes party
+motion from the six-point theorem, and reduces implementation detail in the
+verification section.  Authority `050c02a00`; paper mirror `255e2ed`; exporter
+content SHA-256 `359a93ef9bec350cb74c9c438444562ae06805d26447aaeee909e8a7960a404b`;
+summary mirror remains `a353307`; no push.  The warning-free 26-page gates,
+all-page visual inspection, both complete eight-bundle evidence replays,
+zero-finding export audit, and mirror verification pass.  Preserve theorem
+scope and trust boundaries.  Do not close or archive C979 until the user
+explicitly directs it.  Live card:
+`2026-08-27-c979-mds-css-exposition-revision.md`.
 
 **C981 completed (2026-08-27).**  Identified the standard conductor/Schur-square
 formulation, proved the portable CSS block equations and exact non-MDS
