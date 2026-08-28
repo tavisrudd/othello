@@ -321,8 +321,11 @@ Sequel research:
   verifies the compact transcript internally, discards it before return, and
   has a 16,384-state long-chain regression. Raw MATA and Boa TSV evidence,
   SHA-256 pins, and retained checkers are in-tree.
-  C983 does not block C325 or C953 and makes no manuscript or public-surface
-  change.
+  C983 is closed and does not block C325 or C953. Its remaining adaptive
+  dirty-signature backend, validated-input service boundary, sparse crossover,
+  explicit separator extraction, and artifact-schema questions are successor
+  opportunities rather than acceptance gaps. No manuscript or public-surface
+  change was made.
 
 - [C985 Ergodis exact algebraic optimization paper](../2026-08-27-c985-ergodis-optimization-paper.md)
   is queued after C983.  It targets constraint programming and exact
