@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY TWENTY-TWO-SOURCE PASS; FOUR SOURCES READ
-AT FULL TEXT AND EIGHTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
+**Status**: IN PROGRESS; PRELIMINARY TWENTY-FOUR-SOURCE PASS; FOUR SOURCES READ
+AT FULL TEXT AND TWENTY AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
 LICENSED
 
 ## Executive verdict
@@ -102,6 +102,7 @@ formal congruence argument.
 | Replace exact contextual equivalence by a behavioral pseudometric | Bisimulation metrics and approximate state aggregation for probabilistic systems/MDPs | Strongly pre-empted as a quantitative-equivalence idea | Define the optimization-context metric as the exact target, then prove computable bounds and composition error laws for the chosen domain/context grammar |
 | Interpret quotient size as boundary information | One-way communication complexity and boundaried-graph Myhill--Nerode methods | Pre-empted as an abstract/lower-bound connection | Emit the quotient as an actual serialized component summary and report class bits plus potential/witness payloads |
 | Compose exact multi-resource frontiers and reuse them across objectives | Pareto/antichain dynamic programming over an idempotent semiring | Pre-empted as multiobjective DP | Add a bounded Pareto value backend, scalarization/query projections, contextual minimization, and one witness per selected frontier point |
+| Compile components whose environment and implementation make adversarial choices | Interface automata, alternating simulation/refinement, and open games | Strongly pre-empted as compositional game/interface syntax | Generalize the artifact to typed alternating/relational actions and an explicit solution concept; deterministic Moore refinement is only the cooperative corollary |
 
 ## Common kernel candidate
 
@@ -593,6 +594,21 @@ The read depths below are unconditional and describe this preliminary pass.
     realization, or sufficient for every future test.  Mamba is therefore an
     experimental approximation vehicle here; PSR, automata, and realization
     theory remain the mathematical controls.
+23. Luca de Alfaro and Thomas A. Henzinger, *Interface Automata*. **Read
+    depth: partial** — FSE 2001 primary-paper abstract and institutional
+    metadata, DOI `10.1145/503209.503226`; read the abstract and contribution
+    summary.  It models temporal input assumptions and output guarantees,
+    defines optimistic compatibility, and uses alternating refinement with a
+    game-theoretic basis.  This pre-empts treating adversarial component
+    compatibility as ordinary deterministic context minimization.
+24. Neil Ghani, Jules Hedges, Viktor Winschel, and Philipp Zahn,
+    *Compositional Game Theory*. **Read depth: partial** — primary arXiv
+    abstract, cache key `arXiv:1603.04641`; read the abstract and model summary.
+    Open games form a symmetric monoidal category, compose sequentially and in
+    parallel, and expose play, returned utility, equilibria, and off-equilibrium
+    best responses relative to an environment.  Composition of games is thus
+    established; any Ergodis contribution must compile a finite exact response
+    interface for a declared solution concept, not rediscover open-game syntax.
 
 ## Knowledge-compilation and provenance connection
 
@@ -645,6 +661,60 @@ either compile the finite interface/context presentation from domain
 structure, or apply an independently measured observational quotient after a
 fusion/provenance backend.  Merely expressing an existing Bellman recurrence
 over another semiring is pre-empted.
+
+## Adversarial interfaces, games, and robust composition
+
+The deterministic context-machine theorem assumes that a fixed generator
+maps one state to one successor.  That is not the right common kernel when a
+component chooses outputs, an environment chooses inputs, or a controller and
+disturbance alternate.  Interface automata already give component boundaries
+an optimistic compatibility game and alternating refinement; open games
+already compose game-theoretic components while returning utility and tracking
+equilibrium and off-equilibrium best-response behavior.
+
+This is both new application terrain and a hard generalization boundary.  An
+adversarial Ergodis adapter must declare:
+
+```text
+who controls each action or branch
+the information visible when it is chosen
+the solution concept (winning, worst-case value, Nash, subgame-perfect, ...)
+the response exposed to later composition
+the witness type (strategy, counterstrategy, equilibrium profile, certificate)
+```
+
+Replacing a branch by `min`, `max`, or `min-max` without this typing can change
+the game.  Likewise, preserving only equilibrium values may fail to preserve
+off-equilibrium best responses needed by an outer game.  The finite artifact
+must therefore use alternating or relational transition structure and an
+observation closed under its declared solution concept.  Its exact quotient is
+the largest compatible alternating/behavioral equivalence for that structure,
+not automatically the Moore quotient of Theorem 4.
+
+The general certified-pass law still applies: a domain encoding must commute
+with every controlled constructor and the chosen game-response observation
+must factor through the compiled artifact.  Deterministic context machines,
+min-plus optimization, robust min-max DP, interface compatibility, and finite
+open-game response compilation can then be separate backends/corollaries of
+the same factorization discipline.  What does not generalize for free is the
+partition-refinement algorithm, finite-index theorem, or witness lift.
+
+A first falsification fixture should be a finite robust-planning component
+with environment-labelled disturbances and controller-labelled actions.  Run
+the same domain twice: once under a cooperative existential observation and
+once under an adversarial worst-case observation.  If the quotient, strategy
+witness, and distinguishing continuation do not change, the adapter has likely
+erased control ownership.  This provides a sharp systems test before pursuing
+economic equilibria, whose solution concepts and response objects are much
+larger.
+
+Application framing is strong even under full theoretical pre-emption: a
+single artifact/verifier format spanning deterministic, nondeterministic, and
+alternating interfaces would let Ergodis compile robust schedulers, protocol
+controllers, fault/disturbance plans, and component compatibility checks while
+reusing established solvers underneath.  The measurable claim is generated
+interface size, strategy/proof payload, repeated-composition cost, and exact
+agreement—not invention of compositional games.
 
 ## Boundaried graphs, hypergraphs, and communication complexity
 

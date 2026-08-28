@@ -163,6 +163,52 @@ the operations under which its preservation law is closed, its observation or
 query profile, and its witness/error side condition.  A pass pipeline is exact
 only when these laws compose in the chosen order.
 
+### Theorem 2B: effectful generated contexts
+
+The same law covers nondeterministic, probabilistic, and weighted branching
+once the semantic effect is made explicit.  Let `E` be a typed monad and let a
+context generator have Kleisli semantics
+
+```text
+g_A : A_i -> E(A_j),
+g_B : B_i -> E(B_j).
+```
+
+Require the encoding to be a generator homomorphism
+
+```text
+E(e_j)(g_A(x)) = g_B(e_i(x)).
+```
+
+For every requested terminal sort, require its evaluator on effectful results
+to factor through `E(e_j)`:
+
+```text
+Obs_A(z) = Obs_B(E(e_j)(z)).
+```
+
+Then every finite well-typed Kleisli path has exactly the same terminal
+observation before and after compilation.  Induction on path length uses the
+generator square, functoriality of `E`, naturality of bind, and the monad laws;
+the final factorization supplies the observation equality.
+
+The identity effect recovers Theorem 2A and deterministic Moore/context
+machines.  Finite powerset gives relational or nondeterministic interfaces;
+finite-distribution and weighted-multiset effects give stochastic and weighted
+branching where their evaluator algebras are defined.  Classical automata,
+variable elimination, and finite stochastic predictive machines are therefore
+effect-specific corollaries of the compiler law rather than different notions
+of sound compilation.
+
+This theorem still does not collapse all applications into one minimizer.
+Alternating ownership, imperfect information, and equilibrium response often
+require games, profunctor-like backward information, or nested powerdomains
+rather than one undifferentiated monad.  The law remains the stepping stone:
+choose the correct semantic category, require each constructor square and
+observation triangle to commute, then derive path/context soundness.  The
+finite quotient algorithm, separator theorem, and strategy/witness lift remain
+backend-specific proof obligations.
+
 ## 2. Exact bounded tropical weighted-tree compilation
 
 Let a weighted bottom-up tree automaton have finite state set `Q`, finite ranked
