@@ -1525,6 +1525,39 @@ mod tests {
         assert_eq!(planned.compiled_kernel_payload_bytes(), 0);
     }
 
+    fn rank_two_table<F: FiniteField>() -> CostTable {
+        let mut entries = Vec::with_capacity(F::ORDER as usize * F::ORDER as usize);
+        for left in 0..F::ORDER {
+            for right in 0..F::ORDER {
+                let label = Matrix::new_field::<F>(1, 2, [left, right]).unwrap();
+                let cost = u32::from(left != 0) + u32::from(right != 0) + u32::from(left != right);
+                entries.push((label, cost));
+            }
+        }
+        CostTable::from_entries_field::<F>(1, 2, entries).unwrap()
+    }
+
+    fn assert_rank_two_cached_matches_direct<F: FiniteField>(expected_payload: usize) {
+        let inner = rank_two_table::<F>();
+        let target = inner.clone();
+        let dual = Matrix::new_field::<F>(2, 4, [1, 1, 0, 0, 0, 1, 1, 0]).unwrap();
+        let direct = confinement_by_generators_field::<F>(&dual, 4, &inner, &target, 0, 2).unwrap();
+        let mut cache = RankBoundedContextCache::<F>::new(&inner, &target, 4, 0, 2).unwrap();
+        let cold = cache.context_cost_cached(&dual).unwrap();
+        let warm = cache.context_cost_cached(&dual).unwrap();
+        assert_eq!(cold.cost, direct.cost);
+        assert_eq!(cold.work.generator_candidates, direct.transitions);
+        assert_eq!(warm.cost, direct.cost);
+        assert_eq!(warm.work.cache_hits, warm.work.distinct_subspaces);
+        assert_eq!(cache.compiled_kernel_payload_bytes(), expected_payload);
+    }
+
+    #[test]
+    fn rank_bounded_compiled_kernels_cover_prime_and_extension_fields() {
+        assert_rank_two_cached_matches_direct::<crate::field::Prime<3>>(288);
+        assert_rank_two_cached_matches_direct::<crate::field::Gf4>(886);
+    }
+
     #[test]
     fn auto_skips_cache_when_reuse_or_memory_is_too_small() {
         let inner = scalar_table::<Gf4>(&[0, 1, 1, 2]);
