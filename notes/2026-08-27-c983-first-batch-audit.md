@@ -3,8 +3,9 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY TWENTY-SOURCE PASS; THREE SOURCES READ AT
-FULL TEXT AND SEVENTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY TWENTY-ONE-SOURCE PASS; FOUR SOURCES READ
+AT FULL TEXT AND SEVENTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
+LICENSED
 
 ## Executive verdict
 
@@ -98,6 +99,7 @@ formal congruence argument.
 | Normalize potentials, then minimize a deterministic weighted machine | Weight pushing followed by ordinary automaton minimization | Pre-empted for deterministic weighted automata under the established semiring hypotheses | Make it the unary/sequential corollary and test the typed multiary/context-grammar implementation boundary |
 | Infer a minimal interface by exact queries and distinguishing counterexamples | Angluin-style active automata learning and weighted extensions | Pre-empted as a learning paradigm; weighted feasibility depends strongly on the semiring | Add an oracle-backed domain compiler that learns a finite observational Moore machine, with separator/exhaustive/solver-backed equivalence queries |
 | Represent state by predictions of a finite set of future tests | Predictive state representations and observable-operator models | Strongly pre-empted for controlled stochastic systems | Make core tests/separators the probabilistic corollary; use exact Ergodis states as ground truth for approximate learned response representations only after the exact compiler exists |
+| Replace exact contextual equivalence by a behavioral pseudometric | Bisimulation metrics and approximate state aggregation for probabilistic systems/MDPs | Strongly pre-empted as a quantitative-equivalence idea | Define the optimization-context metric as the exact target, then prove computable bounds and composition error laws for the chosen domain/context grammar |
 
 ## Common kernel candidate
 
@@ -554,6 +556,14 @@ The read depths below are unconditional and describe this preliminary pass.
     action-observation tests, defines sufficiency as predicting every test,
     and proves that every finite-POMDP environment has a linear PSR using no
     more tests than states in a minimal POMDP.
+21. Norm Ferns, Prakash Panangaden, and Doina Precup, *Metrics for Finite
+    Markov Decision Processes*. **Read depth: full text** — UAI 2004/arXiv
+    copy, cache key `arXiv:1207.4114`, SHA-256
+    `15638e92cbe07a7e1bfd8b3071c559a83622846c330c1b9d3e8321410ebb36b4`.
+    It constructs fixed-point bisimulation metrics using reward distance and
+    Kantorovich/total-variation distances between transition laws, proves the
+    zero kernel is bisimulation, and bounds optimal-value and aggregation error
+    by the resulting behavioral distances.
 
 ## Knowledge-compilation and provenance connection
 
@@ -724,6 +734,39 @@ model approximate those future-response functions or their contextual metric.
 “Use Mamba to optimize” remains generic and is not the target; learning an
 approximately closed predictive realization of a known exact compositional
 semantics is the sharper experiment.
+
+## Approximate contextual state: metric, not geometric guesswork
+
+For bounded real-valued observations, the direct relaxation of exact
+contextual equivalence is
+
+```text
+d_C(x,y) = sup over c in C of |Obs(c[x]) - Obs(c[y])|.
+```
+
+This is a pseudometric, and its zero kernel is exactly contextual equivalence.
+If the typed context grammar is closed under prefixing by generator `g`, then
+`d_C(g(x),g(y)) <= d_C(x,y)` for the corresponding source/target context
+families: every future test after `g` is already a future test before it.  Thus
+the exact quotient and nonexpansive transition law are two faces of the same
+definition.
+
+Bisimulation metrics for MDPs strongly pre-empt behavioral distance and
+approximate state aggregation as generic ideas.  They also show what a useful
+Ergodis approximation theorem must add: a computable fixed point, separator or
+relaxation upper-bounding the all-context supremum, plus a bound translating
+state distance into optimization-value and policy/witness degradation.
+Checking only finitely many contexts gives a lower bound on `d_C`, not a safe
+merge certificate, unless a small-model or covering theorem controls the
+unseen contexts.
+
+The learned-state experiment should therefore optimize an observable target:
+preserve core-test/response coordinates or this contextual pseudometric, and
+measure closure error under every generator.  Euclidean closeness of hidden
+vectors is irrelevant without a decoder/error theorem.  Exact Ergodis
+instances provide the rare ground truth needed to compare latent dimension,
+contextual distortion, rollout error, and optimizer/witness failure as the
+exact quotient grows.
 
 ## Coverage gaps and next search
 

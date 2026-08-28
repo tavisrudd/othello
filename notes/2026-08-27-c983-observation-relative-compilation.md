@@ -297,6 +297,38 @@ The earlier coordinate-selector obstruction remains exact for absolute table
 observations; for threshold observations it weakens from raw equality to
 equality up to the permitted potential action.
 
+### Lemma 6: contextual pseudometric and nonexpansive generators
+
+Assume each observation space has a bounded metric `rho`.  For same-sort
+states define
+
+```text
+d_i(x,y) = sup { rho(Obs(c[x]), Obs(c[y])) : c is an admissible context from i }.
+```
+
+Then `d_i` is a pseudometric and `d_i(x,y)=0` is the exact contextual
+equivalence.  If every target-sort context `c` may be prefixed by a typed
+generator `g:i->j`, then
+
+```text
+d_j(g(x),g(y)) <= d_i(x,y).
+```
+
+Both statements follow immediately from the metric axioms and inclusion of
+the prefixed context family.  Consequently any cluster of contextual diameter
+at most `epsilon` changes every admitted future observation by at most
+`epsilon`; this is a semantic error statement, not merely a latent-space
+distance claim.
+
+The computational burden is the supremum.  A finite exact separator computes
+it only when it is also metric-complete; an ordinary equality separator does
+not automatically preserve worst-case distances.  Otherwise the compiler
+needs a sound upper relaxation, a Lipschitz/covering argument, or a coinductive
+fixed-point metric.  Bisimulation metrics for MDPs are the classical control:
+they compute behavioral distances from rewards and transported transition
+metrics and prove optimal-value/aggregation bounds.  Approximate Ergodis work
+must provide analogous domain-specific bounds before merging states.
+
 ## 4. Witness obstruction and the required side-car law
 
 Value contextual equivalence does **not** by itself preserve concrete argmin

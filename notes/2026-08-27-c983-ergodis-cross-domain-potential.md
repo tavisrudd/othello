@@ -336,6 +336,14 @@ use exact Ergodis states, separators, and counterexamples as ground truth, then
 learn an approximately closed recurrent response representation only where the
 exact quotient or provenance carrier becomes too large.
 
+The approximate target is now explicit as well: the supremum, over admissible
+future contexts, of observation-value disagreement.  Its zero kernel is the
+exact quotient and typed context generators are nonexpansive by construction.
+Bisimulation metrics already own this move for probabilistic systems and give
+value/aggregation error bounds.  Ergodis would need a domain-computable upper
+bound and composition/witness degradation theorem; finite sampled contexts or
+geometric latent closeness alone cannot certify an approximate interface.
+
 ## Application framing that survives theorem pre-emption
 
 Ergodis should be evaluated as an exact compositional-optimization compiler,
