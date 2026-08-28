@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY THIRTY-SOURCE PASS; FOUR SOURCES READ AT
-FULL TEXT AND TWENTY-SIX AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
+**Status**: IN PROGRESS; PRELIMINARY THIRTY-TWO-SOURCE PASS; FOUR SOURCES READ
+AT FULL TEXT AND TWENTY-EIGHT AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
 LICENSED
 
 ## Executive verdict
@@ -106,6 +106,7 @@ formal congruence argument.
 | Compile an exact mergeable stream/partition summary | List homomorphisms, monoid folds, and mergeable-summary algorithms | Pre-empted as parallel/streaming architecture | Emit a certified query-relative minimal finite merge carrier, with order/symmetry assumptions and potential/witness payload stated |
 | Treat tropical recurrence as a state-space realization and minimize it | Max-plus discrete-event system realization, reachability, and observability | Strongly pre-empted; minimal realization is a distinct hard classical problem | Start with bounded observation-relative finite abstraction and compare against max-plus realization/observer controls |
 | Compile a dynamic program to an exact reduced optimization graph | Exact decision diagrams for optimization and DP state merging | Strongly pre-empted as an OR systems pattern, including CP/IP integration | Add derived context/query minimization, independent certificates, potential/provenance layers, and black-box solver wrapping; benchmark against DD tools |
+| Represent equivalent/candidate programs and extract an optimum | Equality saturation/e-graphs and version-space algebra | Strongly pre-empted as program-optimization and synthesis architecture | Target open-component future-cost interfaces, certified bounded semantics, or oracle wrapping; benchmark e-graph/synthesis systems |
 
 ## Common kernel candidate
 
@@ -661,6 +662,22 @@ The read depths below are unconditional and describe this preliminary pass.
     optimization technology used inside integer and constraint programming.
     This makes the decision-diagram ecosystem a required implementation and
     benchmark control for the C983 OR path.
+31. Max Willsey, Chandrakana Nandi, Yisu Remy Wang, Oliver Flatt, Zachary
+    Tatlock, and Pavel Panchekha, *egg: Fast and Extensible Equality
+    Saturation*. **Read depth: partial** — primary arXiv/PACMPL abstract and
+    workflow summary, cache key `arXiv:2004.03082`; read the abstract and
+    saturation/extraction overview.  E-graphs compactly represent equivalent
+    expressions, equality saturation accumulates rewrite consequences without
+    destructive ordering, and extraction selects a lowest-cost represented
+    term.  This strongly pre-empts generic “store equivalent components and
+    recover the best program” framing.
+32. Tessa Lau, Steven A. Wolfman, Pedro Domingos, and Daniel S. Weld,
+    *Version Space Algebra and its Application to Programming by
+    Demonstration*. **Read depth: partial** — primary ICML 2000 paper abstract
+    and introduction summary.  It algebraically represents and composes large
+    candidate program sets for synthesis from demonstrations.  Candidate-space
+    factorization and witness-program extraction are therefore established
+    synthesis techniques, distinct from contextual interface minimization.
 
 ## Max-plus control and discrete-event systems
 
@@ -730,6 +747,42 @@ contextual pseudometric supplies a semantic distortion target.  A merge is
 certified exact only by the quotient law; otherwise it must advertise either a
 DD relaxation bound or a proved contextual error modulus.  Learned latent
 states are a third, heuristic tier and do not inherit either guarantee.
+
+## Program optimization and synthesis
+
+Equality saturation already builds compact congruence closures of program
+expressions and extracts a cheapest represented term; version-space algebra
+already factors large candidate program sets and recovers a synthesized
+program.  Ergodis must not relabel either representation as a new provenance or
+contextual-state compiler.
+
+The possible wedge is an **open-component response compiler**.  For a bounded
+DSL or circuit language, treat a program fragment with holes/ports as a
+component, declare which surrounding program contexts and cost/resource
+observations matter, and compile its exact future response.  Equality
+saturation can be the equivalence/provenance producer, an SMT or exhaustive
+interpreter can be the oracle, and Ergodis can attempt an additional finite
+query-relative interface quotient with a concrete optimal-program lift.
+
+This path has unusually sharp failure controls:
+
+- unrestricted semantic contexts can recover the full input/output function,
+  so they may leave no quotient beyond functional equivalence;
+- rewrite equality is only as sound/complete as the rule set and is not the
+  same as contextual equivalence;
+- e-graph size, contextual class count, extraction complexity, and selected
+  program size are four different measures;
+- cost can be noncompositional when sharing, register allocation, layout, or
+  target-dependent effects are postponed; and
+- a bounded test suite is not a proof of program equivalence without a
+  complete finite semantics or solver certificate.
+
+A first experiment, if pursued, should use tiny fixed-width bitvector circuits
+or straight-line programs where exhaustive semantics and exact extraction are
+available.  Compare raw enumerated terms, e-graph/e-classes, full truth-table
+classes, restricted future-response classes, and witness-program bytes.  This
+is a stretch adapter after the finite compiler, not one of the first two
+exemplars.
 
 ## Exact mergeable summaries and parallel folds
 
