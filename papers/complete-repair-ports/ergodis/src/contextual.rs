@@ -561,6 +561,22 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
         self.costs.len()
     }
 
+    /// Payload bytes retained by compiled full-rank maps and dense cost
+    /// directories, excluding container headers and the contextual cost cache.
+    pub fn compiled_kernel_payload_bytes(&self) -> usize {
+        let full_rank = self
+            .full_rank_maps
+            .iter()
+            .map(|maps| maps.len())
+            .sum::<usize>();
+        let dense_words = self
+            .inner_dense_costs
+            .storage
+            .len()
+            .saturating_add(self.target_dense_costs.storage.len());
+        full_rank.saturating_add(dense_words.saturating_mul(std::mem::size_of::<u32>()))
+    }
+
     fn ensure_compiled_kernels(&mut self) -> Result<(), ContextualError> {
         if self.compiled_kernels_initialized {
             return Ok(());
@@ -1478,6 +1494,7 @@ mod tests {
         let bounded = cache.context_cost_cached(&dual).unwrap();
         assert_eq!(bounded.cost, direct.cost);
         assert_eq!(bounded.work.generator_candidates, direct.transitions);
+        assert_eq!(cache.compiled_kernel_payload_bytes(), 70);
         let warm_default = cache
             .context_cost_planned(&dual, ContextStrategy::default())
             .unwrap();
@@ -1501,9 +1518,11 @@ mod tests {
             .unwrap();
         assert_eq!(one_shot.plan.execution, ContextExecution::Direct);
         assert_eq!(planned.cached_context_count(), 0);
+        assert_eq!(planned.compiled_kernel_payload_bytes(), 0);
         let default = planned.context_cost(&dual).unwrap();
         assert_eq!(default.cost, direct.cost);
         assert_eq!(planned.cached_context_count(), 0);
+        assert_eq!(planned.compiled_kernel_payload_bytes(), 0);
     }
 
     #[test]
