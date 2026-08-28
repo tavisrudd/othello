@@ -112,6 +112,105 @@ its public Ergodis surface, or the C325/C953 release path.  Pareto repair
 resources, tensor-network language, probabilistic inference, and program
 synthesis remain optional probes until the three-exemplar gate passes.
 
+## Deferred second batch: realization, observability, and learned state
+
+Open this batch only if the three-exemplar gate establishes a genuine common
+kernel.  The mathematical bridge is minimal realization and observability;
+Mamba or another selective state-space architecture is a possible experimental
+vehicle, not the foundation or the initial claim.
+
+### Exact realization layer
+
+1. Formulate sequential Ergodis composition as a discrete tropical or
+   min-plus state-space system
+
+   ```text
+   s_(t+1) = F(s_t, x_t),
+   y_t     = G(s_t),
+   ```
+
+   and state exactly which component trees can be represented by a scan and
+   which require a more general composition graph.
+2. Compare contextual indistinguishability with observability equivalence:
+   two states agree exactly when every admissible future input/context produces
+   the same optimal value and requested witness observables.
+3. Seek a minimal-realization theorem for a bounded min-plus compositional
+   class.  Separate finite quotient cardinality, tropical module dimension,
+   automaton state complexity, and real vector-space dimension; none may be
+   substituted for another without proof.
+4. Identify the roles, if any, of reachability/controllability and
+   observability.  Determine whether the canonical contextual quotient is a
+   minimal reachable realization, merely a minimal deterministic quotient, or
+   neither.
+5. Compare the exact quotient with predictive-state representations,
+   quantitative bisimulation, and complete abstract domains through a hostile
+   definitions and priority audit.
+
+### Selective exact reduction
+
+Test whether an incoming component or a restricted future-context language
+permits an exact context-dependent projection
+
+```text
+s_t -> Q_(x_t)(s_t)
+```
+
+that discards distinctions no remaining continuation can observe.  Prove
+closure and witness preservation before calling this selective forgetting.
+Measure it against the universal quotient and ordinary reachable-state
+pruning; a relabeling of either is not a result.
+
+### Approximate contextual geometry
+
+Only after the exact realization layer is stable, define a bounded contextual
+pseudometric such as
+
+```text
+d_C(s,s') = sup over C in C of |V(C[s]) - V(C[s'])|,
+```
+
+with an explicit finite or compact context class and finite-value conventions.
+Establish nonexpansiveness or quantified error propagation under composition;
+without such a theorem, local approximation error is not licensed as a global
+guarantee.
+
+Then test whether a learned encoder and recurrence can approximate the exact
+semantics on instances where the exact state grows too large:
+
+```text
+phi : S -> R^d,
+phi(s compose x) approximately equals F_theta(phi(s), x),
+V(s,C) approximately equals G_theta(phi(s), C).
+```
+
+Use exact quotients and continuation responses on tractable instances as
+ground truth.  Hold out context families and composition depths, compare
+against nonrecurrent and generic neural baselines, and report worst-case as
+well as average error.  Mamba earns a named role only if its input-dependent
+state update materially outperforms those controls on continuation behavior or
+state dimension.
+
+### Second-batch acceptance gates
+
+- a correct exact state-space/realization formulation with its scan-versus-tree
+  boundary;
+- a proved or sharply refuted minimal-realization/observability theorem;
+- a literature audit spanning tropical systems, weighted automata, nonlinear
+  realization, predictive-state representations, quantitative bisimulation,
+  and selective state-space models;
+- an exact selective reduction that is stronger than static quotienting and
+  reachable-state pruning, or a bounded negative result;
+- a compositional error theorem for the approximate pseudometric before any ML
+  extrapolation claim; and
+- learned-state experiments only after the exact gates, with exact small-case
+  ground truth, held-out continuations, honest baselines, witness or value
+  error, memory, and scaling evidence.
+
+Possible outcomes must remain separated: an exact realization theorem can
+succeed even if learned compression fails; learned prediction can succeed
+empirically without establishing a new realization theory; and a Mamba analogy
+alone closes no gate.
+
 ## First move
 
 Perform the hostile literature/definitions audit and build a one-page theorem
@@ -119,4 +218,3 @@ matrix contrasting weighted automata, generalized distributive law, valued
 CSP/DP compilation, contextual equivalence, and complete abstract domains.
 From that matrix select the smallest noncoding pair that can exercise one
 common exact interface and witness API without architecture commitment.
-

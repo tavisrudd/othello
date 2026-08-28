@@ -205,7 +205,10 @@ Sequel research:
   a precise contextual quotient theorem boundary, and one common
   witness-preserving kernel used by recovery plus two genuinely noncoding
   exemplars.  It does not block C325 or C953 and makes no manuscript or public-
-  surface change.
+  surface change.  Only after that gate, a deferred second batch tests exact
+  tropical minimal realization and observability, selective context-dependent
+  quotienting, approximate contextual metrics, and learned state compression;
+  Mamba is an experimental vehicle there rather than the mathematical premise.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
