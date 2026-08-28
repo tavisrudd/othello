@@ -571,3 +571,57 @@ classical results as corollaries or compiler backends, push to typed multiary
 contexts, effective separator bounds, quantitative witnesses, and new
 application adapters, and keep theoretical novelty distinct from capability
 expansion.
+
+## Closure audit
+
+C983 passes its registered gates. `FinitePresentation` plus the common
+observational compiler/replayer is exercised by the recovery control,
+weighted-tree automata, resource batches, and hierarchical min-plus
+composition. Every accepted exemplar has an exact Rust fixture and independent
+oracle or exhaustive control; the noncoding adapters preserve concrete
+witness lifts. The contextual congruence, factorization, finiteness, and
+minimality boundaries are stated with their finite typed hypotheses, while the
+priority audit separates classical elimination/minimization machinery from
+Ergodis' interface derivation, typed artifact, and witness contract.
+
+Material exact reductions are recorded in
+`notes/2026-08-27-c983-ergodis-code-architecture-performance-review.md`:
+exhaustive certificate payloads of `1456/57180/2412/2952` bytes reduce to
+`32/416/32/64` byte split transcripts on the four controls. Runtime, RSS, and
+competitor evidence is pinned in
+`notes/2026-08-27-c983-observational-minimization-sota-comparison.md`, with raw
+MATA/Boa TSVs, SHA-256 identities, retained checkers, exact source revisions,
+and replay commands. Independent hostile passes covered theory, scheduler and
+transcript correctness, adversarial hashing, API commonality, comparator
+semantics, and product-boundary fairness.
+
+The resulting verdict is **go** for Ergodis as a cross-domain exact
+compositional-optimization compiler. The broad minimization and realization
+results are classical controls/corollaries; the defensible expansion value is
+the theorem-derived typed interface, exact quotient/proof/witness product,
+adapter reuse, and application-specific state reduction. No manuscript,
+mirror, export, push, deposit, or public-surface change was made.
+
+## Mystery ledger
+
+- **Settled**: the `D >> M` typed asymmetry no longer breaks the storage bound;
+  candidate CSR plus adaptive bitmap/Patricia pending storage is
+  `O(N+M+G)`, iterative, and allocation-free in the hot loop.
+- **Settled**: fixed SplitMix probing did not justify a deterministic bound.
+  The exact collision family is now a regression and the sparse directory has
+  a hard 64-decision Patricia bound.
+- **Settled**: quotient-only still reached the quadratic synchronous refiner.
+  It now proves through the compact worklist transcript and discards evidence
+  before return; the long-chain policy regression passes.
+- **Open, algorithm successor**: Boa remains 2.48x faster on dense random
+  partition-ID work, while ergodis wins chain/native-output controls and emits
+  a richer verified quotient. An adaptive proof-producing dirty-signature
+  backend owns this gap.
+- **Open, systems successor**: stable-partition speedup is 1,100x inside the
+  compiler but about 67x whole-process because input construction validates
+  all edges. Reusable validated or mapped presentations need a separate API
+  and benchmark.
+- **Open, artifact/application successors**: on-demand explicit separators,
+  authenticated/versioned evidence schemas, and a measured large asymmetric
+  Patricia crossover remain unimplemented. They do not weaken the accepted
+  finite compiler theorem or the completed exemplar gates.
