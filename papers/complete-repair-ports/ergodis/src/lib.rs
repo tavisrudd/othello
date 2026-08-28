@@ -12,6 +12,7 @@ pub mod confinement;
 pub mod contextual;
 pub mod defect;
 pub mod field;
+pub mod group_action;
 pub mod incidence;
 pub mod interface;
 pub mod matrix;
@@ -52,6 +53,11 @@ pub use contextual::{
     PlannedContextCost, RankBoundedContextCache, RankOneProbeCache,
 };
 pub use field::{FieldError, FiniteField, Gf4, Prime};
+pub use group_action::{
+    compile_permutation_orbits, compile_permutation_orbits_with_deferred_verification,
+    verify_permutation_orbits, FinitePermutationAction, OrbitCompileError, OrbitPartition,
+    OrbitStorage,
+};
 pub use interface::{
     lift_class_witnesses, present_finite_interface, FiniteInterfaceAdapter, FiniteInterfaceWitness,
     InterfaceCompileError,
