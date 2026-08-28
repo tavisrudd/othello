@@ -283,14 +283,6 @@ impl FinitePresentation {
             .copied()
     }
 
-    #[inline(always)]
-    fn validated_transition(&self, generator: u32, state: u32) -> u32 {
-        let record = self.generators[generator as usize];
-        let source = self.sorts[record.source_sort as usize];
-        debug_assert!(source.contains(state));
-        self.transitions[(record.transition_start + state - source.start) as usize]
-    }
-
     fn generators_from(&self, sort: u32) -> impl Iterator<Item = (u32, GeneratorRecord)> + '_ {
         let range = self.generator_sort_ranges[sort as usize];
         self.generator_ids_by_sort[range.start as usize..range.end() as usize]
@@ -915,6 +907,7 @@ struct RefinementGenerators {
     ranges: Box<[SortRange]>,
     ids: Box<[u32]>,
     aliases: Box<[u32]>,
+    transition_starts: Box<[usize]>,
 }
 
 struct PowerReductionWorkspace {
@@ -960,6 +953,7 @@ impl RefinementGenerators {
         }
 
         let mut ids = Vec::with_capacity(presentation.generators.len());
+        let mut transition_starts = Vec::with_capacity(presentation.generators.len());
         let mut ranges = Vec::with_capacity(presentation.sorts.len());
         let mut aliases = vec![u32::MAX; presentation.generators.len()];
         let mut power = PowerReductionWorkspace {
@@ -1016,6 +1010,7 @@ impl RefinementGenerators {
                     );
                 if duplicate.is_none() && !composite && !power {
                     ids.push(generator);
+                    transition_starts.push(transition_start);
                 }
             }
             ranges.push(SortRange {
@@ -1027,6 +1022,7 @@ impl RefinementGenerators {
             ranges: ranges.into_boxed_slice(),
             ids: ids.into_boxed_slice(),
             aliases: aliases.into_boxed_slice(),
+            transition_starts: transition_starts.into_boxed_slice(),
         })
     }
 
@@ -1034,6 +1030,12 @@ impl RefinementGenerators {
     fn ids_from(&self, sort: u32) -> &[u32] {
         let range = self.ranges[sort as usize];
         &self.ids[range.start as usize..range.end() as usize]
+    }
+
+    #[inline(always)]
+    fn transition_starts_from(&self, sort: u32) -> &[usize] {
+        let range = self.ranges[sort as usize];
+        &self.transition_starts[range.start as usize..range.end() as usize]
     }
 }
 
@@ -2562,13 +2564,16 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
 fn signatures_equal(
     presentation: &FinitePresentation,
     state_blocks: &[u32],
-    generators: &[u32],
+    transition_starts: &[usize],
+    source_start: u32,
     left: u32,
     right: u32,
 ) -> bool {
-    generators.iter().copied().all(|generator| {
-        let left_target = presentation.validated_transition(generator, left);
-        let right_target = presentation.validated_transition(generator, right);
+    let left_local = (left - source_start) as usize;
+    let right_local = (right - source_start) as usize;
+    transition_starts.iter().copied().all(|start| {
+        let left_target = presentation.transitions[start + left_local];
+        let right_target = presentation.transitions[start + right_local];
         state_blocks[left_target as usize] == state_blocks[right_target as usize]
     })
 }
@@ -2577,12 +2582,14 @@ fn signatures_equal(
 fn signature_hash(
     presentation: &FinitePresentation,
     state_blocks: &[u32],
-    generators: &[u32],
+    transition_starts: &[usize],
+    source_start: u32,
     state: u32,
 ) -> u64 {
     let mut hash = 0x9e37_79b9_7f4a_7c15_u64;
-    for &generator in generators {
-        let target = presentation.validated_transition(generator, state);
+    let local = (state - source_start) as usize;
+    for &start in transition_starts {
+        let target = presentation.transitions[start + local];
         hash ^= u64::from(state_blocks[target as usize]).wrapping_add(0x9e37_79b9);
         hash = hash.rotate_left(27).wrapping_mul(0x94d0_49bb_1331_11eb);
     }
@@ -2710,6 +2717,9 @@ fn minimize_partition_multiway_prepared(
         );
         let packed = generators.len() <= 4;
         let source_start = presentation.sorts[sort as usize].start;
+        let wide_transition_starts = refinement
+            .as_ref()
+            .map_or(&[][..], |directory| directory.transition_starts_from(sort));
         let mut transition_starts = [0_usize; 4];
         for (slot, &generator) in transition_starts.iter_mut().zip(generators) {
             *slot = presentation.generators[generator as usize].transition_start as usize;
@@ -2727,7 +2737,13 @@ fn minimize_partition_multiway_prepared(
                 )
             } else {
                 (
-                    signature_hash(presentation, &state_blocks, generators, state),
+                    signature_hash(
+                        presentation,
+                        &state_blocks,
+                        wide_transition_starts,
+                        source_start,
+                        state,
+                    ),
                     0,
                     0,
                 )
@@ -2754,7 +2770,8 @@ fn minimize_partition_multiway_prepared(
                         && signatures_equal(
                             presentation,
                             &state_blocks,
-                            generators,
+                            wide_transition_starts,
+                            source_start,
                             state,
                             group_representatives[candidate as usize],
                         )
