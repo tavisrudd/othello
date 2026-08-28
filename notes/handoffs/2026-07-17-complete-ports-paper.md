@@ -284,9 +284,11 @@ Sequel research:
   wall/RSS harness also pass: the worklist policy is 103.3x faster on the
   256-state long chain and 14.9x faster on 16,384 already-separated states,
   with no stable process-RSS delta (-4.2% to +2.2%). Edge-sparse scheduling is
-  now implemented with target-state candidate CSR, a fixed-capacity flat
-  pending set, and an `O(M)` live-work bound; the adversarial
-  `D=262,144, M=64` typed control and allocation-growth gate pass. Semantic
+  now implemented with target-state candidate CSR, exact-footprint selection
+  between a dense bitmap and fixed-pool binary Patricia directory, and an
+  `O(M)` live-work bound. The Patricia path has at most 64 branch decisions per
+  operation; the adversarial `D=262,144, M=64` typed control, former fixed-hash
+  collision family, and allocation-growth gate pass. Semantic
   witness schemas and provenance compaction remain open; exhaustive pair
   evidence is now a bounded audit mode rather than a scaling dependency. A
   subsequent
@@ -296,14 +298,17 @@ Sequel research:
   comparison exposed a full-block rescan under singleton splits; flat member
   positions and marked counts repair that quadratic pathology without hot-loop
   allocation or recursion, reducing the cold chain from 3.834 s to 14.126 ms.
-  Final seven-round controls put ergodis 1.55x ahead of MATA on that chain and
-  2.36x ahead on a four-generator deterministic random family, even though
+  Final seven-round controls put ergodis 1.61x ahead of MATA on that chain and
+  3.30x ahead on a four-generator deterministic random family, even though
   ergodis emits and verifies a compact split proof. Separate cold peak RSS is
-  8.6--13.2x smaller. A linear initial-stability test gives a 12.1x advantage
+  13.2--16.2x smaller. A linear initial-stability test gives an 11.5x advantage
   on a native 256-output control; largest-splitter omission plus singleton-sort
   congruence gives 547x on a fully reachable/coaccessible 131,072-state,
-  64-generator Boolean stable family, and 1,071x on the 65,536-state,
-  128-generator scaling point with 31.3x lower RSS. The million-state
+  64-generator Boolean stable family, and 1,100x on the 65,536-state,
+  128-generator scaling point with 31.9x lower RSS. A native Boa comparison
+  makes the adaptive frontier precise: ergodis is 1.81x faster on the chain
+  and 1.76x faster on native outputs, while Boa's narrower partition-ID engine
+  is 2.48x faster on random-4. The million-state
   profile selected adaptive counting
   scatter for dense inverse construction, now implemented with one reusable
   source permutation and one in-place target count/cursor array.  Seven
@@ -311,7 +316,11 @@ Sequel research:
   2.065 s to 1.760 s (14.8% less time); non-multiplexed counters show 53.6%
   fewer instructions and 49.8% fewer branches with essentially unchanged
   random-case peak RSS.  Sorted sparse inverse storage remains in place for
-  asymmetric typed systems.
+  asymmetric typed systems. A final policy control found that quotient-only
+  still entered the quadratic synchronous refiner; it now constructs and
+  verifies the compact transcript internally, discards it before return, and
+  has a 16,384-state long-chain regression. Raw MATA and Boa TSV evidence,
+  SHA-256 pins, and retained checkers are in-tree.
   C983 does not block C325 or C953 and makes no manuscript or public-surface
   change.
 

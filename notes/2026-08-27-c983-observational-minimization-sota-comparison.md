@@ -10,29 +10,36 @@ an algorithm/implementation comparison, not a literature-wide priority claim.
 
 Ergodis now belongs in the same practical performance class as a strong
 specialized DFA minimizer on the deterministic finite subcase we can compare
-exactly. After repairing one quadratic block-splitting pathology, it is about
-2x faster than MATA's current C++ Hopcroft/Valmari-style implementation at
-131,072 states on both a unary distinguishing chain and a four-generator
-deterministic random family. It also uses about 12--17x less peak RSS in these
-runs. This is a strong result because ergodis additionally emits a compact
+exactly. After repairing the refinement pathologies and selecting dense or
+sparse pending storage by exact footprint, it is 1.61x faster than MATA's
+current C++ Hopcroft/Valmari-style implementation on a 131,072-state unary
+chain and 3.30x faster on the four-generator random family. It uses 13--16x
+less cold peak RSS on those controls. This is a strong result because ergodis
+additionally emits a compact
 split transcript and verifies it before returning, whereas MATA returns only
 the minimized automaton.
 
 This does **not** yet establish that ergodis is the universally fastest
-minimizer. The defensible comparison has three different frontiers:
+minimizer.  A new native-functor comparison makes that boundary concrete: Boa
+is 2.48x faster on the four-generator random family, while ergodis is 1.81x
+faster on the unary chain and 1.76x faster on the 256-output cyclic family.
+Boa returns partition IDs; ergodis additionally constructs quotient
+transitions, emits a split transcript, and independently verifies it.  The
+defensible comparison therefore has three different frontiers:
 
 | Frontier | Best relevant algorithm/tool found | Relation to ergodis |
 |---|---|---|
 | Deterministic finite machines | Hopcroft/Valmari--Lehtinen style refinement; MATA `minimize_hopcroft` | Closest direct speed comparison, but MATA has only Boolean final-state observations and no typed sorts or proof transcript |
 | General labelled transition systems, including internal actions | Groote--Jansen 2025, `O(m log n)`; the default kernel in mCRL2 202607 | Strictly broader operational semantics than the current deterministic ergodis kernel, but not a direct performance comparator |
-| Generic system types | Jacobs--Wißmann/Boa 2023 for computable Set functors, `O(k m log n)` in the usual bounded-outdegree instances | Closest architectural comparator for cross-domain adapters; broader genericity, but no contextual witness/proof contract like ergodis |
+| Generic system types | Jacobs--Wißmann/Boa 2023 for computable Set functors, `O(k m log n)` in the usual bounded-outdegree instances | Closest generic executable comparator; wins the random control but loses the chain and native-output controls, and returns a narrower partition-ID product with no contextual witness/proof contract |
 
 The immediate theoretical position is therefore: ergodis is a specialized,
 many-sorted, output-initialized strong-bisimulation/DFA refinement kernel with
 extra proof and witness infrastructure. Its implementation now uses the
-refinable-partition operation needed by the classical `O(m log n)` line, but a
-formal complexity proof for the exact typed scheduler and its remaining dense
-pending representation is still owed.
+refinable-partition operation needed by the classical `O(m log n)` line. Its
+dense pending bitmap has exact constant-time operations; its sparse flat
+Patricia directory takes at most 64 branch decisions per operation. A polished
+theorem-facing proof remains to be extracted from the implementation argument.
 
 ## What the current SOTA is
 
@@ -113,8 +120,8 @@ stepping stone, not a reason to abandon the path.
 
 | Family, `n=131,072` | Ergodis median | MATA median | Ergodis speedup |
 |---|---:|---:|---:|
-| Unary chain | 15.977 ms | 24.748 ms | 1.55x |
-| Random, four generators | 89.937 ms | 212.558 ms | 2.36x |
+| Unary chain | 14.643 ms | 23.502 ms | 1.61x |
+| Random, four generators | 61.321 ms | 202.485 ms | 3.30x |
 
 These final numbers include the edge-sparse typed scheduler. Relative to the
 earlier dense-pending checkpoint, the random family improves while the unary
@@ -129,8 +136,8 @@ than a precise allocator decomposition.
 
 | Family, `n=131,072` | Ergodis RSS | MATA RSS | Ratio |
 |---|---:|---:|---:|
-| Unary chain | 16.0 MiB | 210.9 MiB | 13.2x smaller |
-| Random, four generators | 32.0 MiB | 275.5 MiB | 8.6x smaller |
+| Unary chain | 13.0 MiB | 211.0 MiB | 16.2x smaller |
+| Random, four generators | 20.9 MiB | 275.3 MiB | 13.2x smaller |
 
 The likely memory explanation is visible in the sources: ergodis uses flat
 `u32` pools, compact bitmaps, and fixed-width records; MATA uses `size_t`
@@ -164,22 +171,41 @@ and 13.997 ms for 1K, 2K, 4K, 8K, 16K, and 128K states respectively. This is
 consistent with the intended near-linear behavior on this family; it is not
 presented as a proof of the worst-case bound.
 
+Two later hostile controls closed less visible variants of the same problem.
+First, fixed SplitMix hashing with linear probing admitted a realizable
+64-transition family whose live `(block,generator)` keys all had the same home
+slot, giving quadratic probe and backshift work. The sparse directory is now a
+flat preallocated binary Patricia trie: 8-byte leaf keys, 16-byte `repr(C)`
+branches, no hot-loop allocation or recursion, and at most 64 branch decisions
+per operation. Classical endomaps instead select a smaller dense pending
+bitmap by exact backing-pool footprint, with one dispatch before the
+monomorphized refinement loop.
+
+Second, `QuotientOnly` still called the old synchronous reference refiner even
+after split-transcript mode had moved to the small-half kernel. The SOTA driver
+exposed that route on the 131,072-state chain. Quotient-only now constructs and
+independently replays the same linear transcript internally, then discards it
+before returning; a 16,384-state long-chain regression guards the policy. The
+quadratic signature refiner remains only where the explicitly bounded
+exhaustive-pair audit preserves its legacy refinement-round metric.
+
 ## Hardware profile and next scaling move
 
 On the final implementation at 1,048,576 states and four generators, three
-non-multiplexed `perf stat` runs give median internal times of 1.903 s for
-ergodis and 2.534 s for MATA, a 1.33x end-to-end compiler advantage. Counters
+interleaved process runs give median internal times of 1.762 s for ergodis and
+2.554 s for MATA, a 1.45x compiler advantage. Three non-multiplexed
+`perf stat` repetitions give the following process counters; they
 wrap the whole driver process and therefore include deterministic input
 construction for both implementations:
 
 | Counter | Ergodis | MATA |
 |---|---:|---:|
-| Instructions | 5.578 B | 10.328 B |
-| Cycles | 8.345 B | 14.351 B |
-| Branches | 1.147 B | 1.899 B |
-| Branch misses | 20.763 M | 12.000 M |
+| Instructions | 5.511 B | 10.215 B |
+| Cycles | 8.122 B | 13.841 B |
+| Branches | 1.152 B | 1.878 B |
+| Branch misses | 18.219 M | 12.103 M |
 
-Ergodis now retires 46% fewer instructions and 42% fewer cycles, although its
+Ergodis now retires 46% fewer instructions and 41% fewer cycles, although its
 irregular exact-proof bookkeeping incurs more branch misses. An earlier
 sampled checkpoint attributed about 15% of cycles to inverse sorting and 16%
 to independent transcript verification; that profile selected the following
@@ -229,8 +255,8 @@ sink rather than a semantic disagreement.
 The final compiler first tests a rich initial observation partition for
 congruence in one forward pass. If stable, it bypasses inverse construction and
 no-op splitter traversal. At `n=131,072`, four generators, and `k=256`, seven
-interleaved rounds give 4.859 ms for ergodis and 58.583 ms for the pinned MATA
-encoding, a 12.1x product-level speedup. Ergodis returns 256 native classes and
+interleaved rounds give 4.712 ms for ergodis and 54.146 ms for the pinned MATA
+encoding, an 11.5x product-level speedup. Ergodis returns 256 native classes and
 an empty verified transcript; MATA returns 257 classes including its encoding
 sink.
 
@@ -243,16 +269,45 @@ or pending arena.
 | `stable` scale | Edges | Ergodis | MATA | speedup | cold RSS ratio |
 |---|---:|---:|---:|---:|---:|
 | 131,072 states / 64 generators | 8.39 M | 1.240 ms | 678.128 ms | 547x | 30.3x smaller |
-| 65,536 states / 128 generators | 8.39 M | 0.599 ms | 641.557 ms | 1,071x | 31.3x smaller |
+| 65,536 states / 128 generators | 8.39 M | 0.589 ms | 648.201 ms | 1,100x | 31.9x smaller |
 
-The second row's cold RSS is 36,092 versus 1,129,292 KiB. These are genuine
+The second row's cold RSS is 35,416 versus 1,129,368 KiB. These are genuine
 algorithmic early-termination advantages on a scoped stable family, not a
-claim that all DFA minimization is 547--1,071x faster. Input construction is
+claim that all DFA minimization is 547--1,100x faster. Input construction is
 outside both internal timing windows; process RSS includes the inputs.
 
 The retained `scripts/observational-sota-ab.sh` driver runs alternating
 process-level rounds for `chain`, `random`, `colors`, and `stable`, pins both
 binaries to the same CPU, and emits raw TSV.
+
+The final seven-round output is retained as
+`ergodis/evidence/c983-observational-mata.tsv`, SHA-256
+`2f720ba8c47f71ead086eba7c638477384ae90a6024fced4e618c2d16402c72d`.
+Its header, 56 measurements, class/split counts, and eight exact medians replay
+with:
+
+```text
+papers/complete-repair-ports/ergodis/scripts/check-c983-observational-mata-evidence.sh
+```
+
+Exact source/build/replay boundary (run the final three commands from the
+ergodis crate root; the measured ergodis source commit is `2b0a09d64`):
+
+```text
+git clone https://github.com/VeriFIT/mata.git /path/to/mata
+git -C /path/to/mata checkout e8c9310e389b1e62ece7080956550f70ceeed777
+cmake -S /path/to/mata -B /path/to/mata-build -DCMAKE_BUILD_TYPE=Release
+cmake --build /path/to/mata-build --parallel 1
+g++ -O3 -DNDEBUG -std=c++20 \
+  -I/path/to/mata/include -I/path/to/mata/3rdparty/simlib/include \
+  benches/mata_observational_driver.cc /path/to/mata-build/src/libmata.a \
+  -lpthread -o /path/to/mata-observational-driver
+env CARGO_TARGET_DIR=target-codex-193 nix develop --command \
+  cargo build --release --example observational_sota_driver
+scripts/observational-sota-ab.sh \
+  target-codex-193/release/examples/observational_sota_driver \
+  /path/to/mata-observational-driver 7 1 2
+```
 
 This family is useful precisely because it exposes a representational
 difference: a native finite observation partition can finish at initialization,
@@ -260,20 +315,86 @@ whereas a Boolean-acceptance-only API must encode and rediscover it through
 transitions.  It must be labelled a native-output/product comparison, not
 evidence that ergodis has a universally faster Boolean-DFA minimizer.
 
+## Generic Boa executable comparison
+
+Boa is also executable on the same Moore systems without a semantic encoding:
+each state is one `List[observation]{@successor,...}` node.  The official head
+remains `54a556448169a83a369e039b5fa3ba27323ccfde` and builds with the current
+Nix Rust toolchain.  Its CLI already reports parsing and internal refinement
+separately.  The retained `benches/boa-kernel-timing.patch` adds a main-level
+timer around `partref_nlogn`, so the measured kernel also includes Boa's final
+partition-ID renumbering.  Fixtures are generated by
+`benches/boa_observational_fixture.py`; seven process-level rounds were
+alternated by `scripts/observational-boa-ab.sh` on logical CPU 2.
+
+| Family, `n=131,072` | Ergodis median | Boa median | Relative result |
+|---|---:|---:|---:|
+| Unary chain | 10.762 ms | 19.526 ms | Ergodis 1.81x faster |
+| Random, four generators | 62.105 ms | 25.016 ms | Boa 2.48x faster |
+| 256 native outputs, four shifts | 4.725 ms | 8.295 ms | Ergodis 1.76x faster |
+
+All class counts agree: 131,072 for the first two families and 256 for the
+third.  The timing products do not agree, and the relative result is
+family-dependent:
+ergodis constructs quotient transitions, retains a split transcript, and runs
+an independent transcript verifier before returning.  Boa constructs
+backreferences, refines, and canonically renumbers partition IDs, but does not
+return the minimized transition coalgebra, a proof artifact, separating
+contexts, or an independent verification result.  Consequently this is the
+fairest generic semantic comparison available, but not evidence that ergodis'
+current proof-producing compiler beats the best generic partition-ID engine.
+
+Exact replay from a fresh Boa checkout is:
+
+```text
+git clone https://github.com/julesjacobs/boa.git /path/to/boa
+git -C /path/to/boa checkout 54a556448169a83a369e039b5fa3ba27323ccfde
+scripts/observational-boa-ab.sh \
+  target/release/examples/observational_sota_driver /path/to/boa 7 2
+```
+
+The script checks the revision, applies the timing patch exactly once, builds
+Boa release if needed, generates binary fixtures outside the repository, pins
+both executables to the same CPU, and emits raw TSV.  Peak RSS remains
+unmeasured for this comparison.  The retained seven-round output is
+`notes/2026-08-27-c983-observational-boa-ab.tsv`, SHA-256
+`d3b31e0a5998f7a195da44eeb486e7657acbfe976ddcfdf6dff5f3f076d54447`.
+Its six group medians, seven-round cardinalities, and class counts replay with:
+
+```text
+papers/complete-repair-ports/ergodis/scripts/check-observational-boa-evidence.sh
+```
+
+## Why mCRL2 GJ25 is not in the direct executable table
+
+The current mCRL2 head remains
+`0fc9c22820894f8d769c15174795ab0542f1ad4d`, release 202607.0, and contains the
+published GJ25 dispatch.  It is not a lightweight fourth instance of this
+benchmark: GJ25 solves branching bisimulation on LTSs, not deterministic Moore
+minimization; the available route is a full model-checking tool build plus AUT
+generation, parsing, reduction, and output serialization.  A Moore machine can
+be encoded into an LTS, but then both the semantics and state/transition counts
+change, and the CLI wall time is not a library-kernel boundary comparable to
+the retained Rust and MATA drivers.  Adding it responsibly requires a native
+LTS corpus, separate parse/kernel/write timing, and a comparison against the
+broader branching-bisimulation product.  It remains valuable external SOTA,
+but forcing it into the deterministic table would weaken rather than strengthen
+the claim.
+
 ## Gaps before a stronger SOTA claim
 
-- Add Boa to the executable harness on its native deterministic functor, and
-  add mCRL2 GJ25 on native LTS inputs. Tool/file parsing must be reported
-  separately from kernel time.
+- Add a native-LTS mCRL2 GJ25 corpus only as a separate broader-semantics table;
+  tool parsing and output serialization must be reported separately from the
+  reduction kernel.
 - Use several reduction ratios, sparse/partial transitions, many labels,
   multiple sorts, and severely imbalanced source/target sorts. The current
   direct corpus intentionally isolates two fully separated deterministic
   cases.
 - Measure peak live allocation by stage, not just process RSS.
-- Complete a written amortized proof for the implemented edge-bounded pending
-  set and target-state candidate CSR. The implementation and adversarial
-  `D=262,144, M=64` control are present; the prose proof remains to be promoted
-  from the architecture review into the theorem-facing artifact.
+- Promote the architecture argument for the edge-bounded candidate CSR,
+  small-half incidence charging, adaptive dense bitmap, and fixed-width
+  Patricia directory into a theorem-facing proof. The `D=262,144, M=64`
+  control and former fixed-hash collision family are permanent regressions.
 - Compare proof products explicitly. None of the reference implementations
   inspected emits ergodis' replayable split transcript plus contextual witness
   hooks, so quotient-only timing is not the complete product comparison.
@@ -315,7 +436,8 @@ evidence that ergodis has a universally faster Boolean-DFA minimizer.
    Repository: <https://github.com/VeriFIT/mata>.
 7. **Boa source.** Read depth: repository/implementation metadata and paper
    implementation description; current official head
-   `54a556448169a83a369e039b5fa3ba27323ccfde`; not benchmarked in this pass.
+   `54a556448169a83a369e039b5fa3ba27323ccfde`; built and benchmarked on the
+   native List-functor fixtures described above.
    Repository: <https://github.com/julesjacobs/boa>.
 
 ### Coverage limits

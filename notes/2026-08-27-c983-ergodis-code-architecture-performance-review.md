@@ -8,24 +8,41 @@ controls, and their connection to the production composition tower.
 
 ## Verdict
 
-The implementation is a strong exact small-model reference, not yet a
-scale-ready compiler.  The dense quotient kernel, fixed-width records,
-deterministic construction, and separation of quotient state from concrete
-witnesses should be retained.  Scaling is blocked first by exhaustive
-concrete-pair certificates, then by explicit one-hole-context materialization,
-full-signature Moore refinement, and duplicated replay evidence.  Domain
-witness semantics also remain test-local rather than part of the reusable
-verification boundary.
+The observational compiler is now a scale-ready exact deterministic core. It
+has adaptive dense/sparse inverse construction, an edge-bounded typed
+small-half worklist, an independently replayable linear-size transcript,
+allocation-free refinement loops, iterative replay, and direct stability fast
+paths. Exhaustive concrete-pair certificates remain available only as a
+bounded audit policy. The remaining scaling risks sit above or beside the
+kernel: explicit context-family presentation, semantic witness schemas, and
+versioned provenance artifacts.
 
-Relative to classical deterministic automata implementation practice, the
-current refiner is a clear reference algorithm rather than the target backend:
-typed inverse-edge Hopcroft/Paige--Tarjan refinement is the relevant general
-fallback, while acyclic sort graphs admit a sharper reverse-topological pass.
-The proof/witness discipline is stronger than ordinary optimizer prototypes,
-but its current pairwise certificate representation is substantially less
-compact than modern proof-carrying compilation should be.
+### General theorem/algorithm statement
 
-## Ranked findings
+For a finite many-sorted deterministic Moore presentation with `N` states,
+`G` generators, `M = sum_g |source_sort(g)|` supplied transition edges, and
+initial observation partition `P0`, the implemented compiler returns the
+coarsest typed congruence refining `P0`. Its transcript contains exactly
+`|P|-|P0|` 16-byte split records. Adaptive inverse, candidate, and pending
+storage is `O(N+M+G)` even when `D = sum_g |target_sort(g)|` is arbitrarily
+larger than `M`. Deterministic smaller-child orientation gives `O(M log N)`
+inverse/candidate incidence work. Pending membership is either a dense bitmap
+selected only when its exact footprint is no larger than the sparse backend,
+or a flat binary Patricia trie with at most 64 branch decisions per operation.
+Thus the fixed-width word-RAM scheduler has deterministic `O(M log N)` work,
+not an expected-hash qualification.
+
+If `P0` is already stable, one direct congruence pass bypasses inverse and
+worklist construction. If every generator targets a one-class sort, totality
+makes congruence immediate and the minimizer need not inspect transition edges
+at all after presentation validation. A classical complete DFA is the
+one-sort, Boolean-observation specialization with `M=D=|alphabet| |Q|`, so the
+ordinary Hopcroft setting is a corollary rather than the framework boundary.
+
+## Initial ranked findings and their resolution
+
+The findings below record the starting audit. Later sections document which
+were repaired in C983 and which remain upstream/artifact work.
 
 ### 1. Exhaustive pair certificates are the first hard wall
 
@@ -180,8 +197,9 @@ The first scaling slice is implemented with no change to the legacy default:
 - `compile_observational` remains the exhaustive-pair audit path;
 - `compile_observational_with_policy` adds `QuotientOnly`, which emits the
   identical canonical quotient with zero pair records or path words;
-- quotient-only verification deterministically recomputes the minimum
-  partition rather than trusting an uncertified quotient;
+- quotient-only constructs and replays the compact split proof internally,
+  then discards it; later verification deterministically recomputes the same
+  proof-producing quotient rather than trusting an uncertified artifact;
 - class ranges are now checked for bounded contiguous exact coverage before
   any class-indexed access, closing the cross-sort artifact hole; and
 - presentations pre-index generator IDs by source sort, and refinement now
@@ -199,9 +217,9 @@ The first scaling slice is implemented with no change to the legacy default:
 
 Validation passes `cargo fmt --check`, strict all-target/all-feature Clippy,
 the full all-feature Rust suite, the independent Python observational fixture
-oracle, and release compilation of the benchmark.  No timing or memory claim
-is made from this harness yet: an interleaved measured runner with peak-memory
-capture remains the next evidence gate.
+oracle, and release compilation of the benchmark. Interleaved timing, cold
+RSS, and hardware-counter evidence is retained and replayable as described
+below and in the SOTA report.
 
 Streaming changes peak evidence residency from the complete record/path pool
 to the current distinguishing search plus fixed reader/writer state.  It does
@@ -232,7 +250,7 @@ reject exhaustive compiled artifacts.
 - **Settled**: the transcript policy now uses typed inverse CSR and a classical
   pending-aware small-half worklist as its quotient engine.  It does not run
   the synchronous reference minimizer first.  Flat fixed-capacity pools cover
-  work items, pending bits, memberships, marks, touched blocks, and records;
+  work items, pending keys, memberships, marks, touched blocks, and records;
   guarded pushes cannot allocate in the refinement loop.
 - **Settled**: transcript replay now uses an independently checked inverse
   index, flat member positions, and in-place source-block partitions.  The
@@ -240,11 +258,12 @@ reject exhaustive compiled artifacts.
   complete, and agrees with the forward table, closing the common-mode risk.
 - **Settled -- sparse scheduling**: each generator chooses dense offsets or a
   sorted nonempty-target directory. A global target-state CSR contains only
-  generators with nonempty predecessors, and a fixed-capacity flat pending set
-  stores only live `(block,generator)` pairs. Queue and pending capacity are
+  generators with nonempty predecessors, and pending membership uses an
+  exact-footprint-selected dense bitmap or fixed-pool binary Patricia trie.
+  Queue and pending capacity are
   bounded by the forward edge count `M`, not the target-dense envelope `D`.
-  The `D=262,144, M=64` adversarial typed control and allocation-growth gate
-  pass.
+  The `D=262,144, M=64` adversarial typed control, the former SplitMix
+  collision family, and the allocation-growth gate pass.
 - **Open -- separator extraction owner**: a split transcript proves
   inequivalence through nested context-definable blocks.  Deriving a compact
   explicit distinguishing word or Boolean context formula for a requested
@@ -255,9 +274,25 @@ reject exhaustive compiled artifacts.
   different valid separator; the identity tag is noncryptographic; atomic
   temp-file publication, digesting, hostile-input limits, and richer error
   diagnostics remain part of the versioned artifact task.
-- **Open -- evidence runner owner**: no wall/RSS claim exists until the
-  deterministic interleaved runner measures quotient-only, streamed exhaustive,
-  buffered exhaustive, and the future split transcript separately.
+- **Settled -- direct evidence runner**: deterministic interleaved MATA and Boa
+  runners, raw TSVs, hashes, and retained checkers now cover the production
+  split-transcript product. Streaming/buffered exhaustive evidence remains a
+  distinct audit-mode scaling experiment, not a prerequisite for the kernel
+  comparison.
+- **Open -- random-family crossover**: Boa's narrower partition-ID engine is
+  still 2.48x faster on the four-generator random family, although ergodis
+  wins the chain and native-output controls while returning quotient edges and
+  verified evidence. The exact gap between dirty-signature refinement and the
+  inverse small-half kernel is the highest-EV algorithm successor.
+- **Open -- validated-input boundary**: the one-class fast path is 1,100x
+  faster than MATA inside the compiler but only about 67x faster around the
+  whole process because construction validates all 8.39 million input edges.
+  Reusable validated/mapped presentations may expose more of the algorithmic
+  win in streaming services; this has not yet been implemented or measured.
+- **Open -- sparse crossover**: Patricia removes the hash worst case, but no
+  large asymmetric application corpus yet measures its locality cost against
+  the dense bitmap selector. The `D >> M` controls prove shape and allocation
+  bounds, not throughput superiority.
 
 ## Compact split-transcript continuation
 
@@ -289,13 +324,16 @@ of separated concrete pairs.  All four cross-domain controls agree exactly:
 | hierarchical composition | 2,952 | 4 | 64 | 46.1x |
 
 The accepted construction engine precomputes adaptive typed inverse CSR and a
-target-state candidate CSR, then refines with fixed 16-byte work items and the
-classical small-half rule. A 50%-loaded flat open-addressed pending set uses
-SplitMix64 hashing and backshift deletion, so it has neither tombstones nor
-allocator growth. If a split block already has pending work, both relevant
-children are scheduled; otherwise only the smaller child is scheduled. For a
-fixed generator, live blocks have disjoint nonempty inverse images, so queue
-and pending capacity is at most `M = sum_g |source_sort(g)|`. Membership
+target-state candidate CSR, then refines with fixed 8-byte work items and the
+classical small-half rule. One pre-refinement footprint comparison selects a
+dense pending bitmap for compact endomorphic universes or a fixed-pool binary
+Patricia trie for `D >> M`; generic dispatch monomorphizes the hot loop. The
+Patricia representation has 8-byte leaf keys, 16-byte `repr(C)` branch/free
+records, iterative updates, and at most 64 branch decisions per operation. If
+a split block already has pending work, both relevant children are scheduled;
+otherwise only the smaller child is scheduled. For a fixed generator, live
+blocks have disjoint nonempty inverse images, so queue and pending capacity is
+at most `M = sum_g |source_sort(g)|`. Membership
 ranges, marks, touched flags, transcript records, and block arrays are likewise
 preallocated, and every hot push is capacity-guarded.
 There are no owned dynamic containers in hot records and no allocation in the
@@ -304,13 +342,15 @@ chooses the smaller representation from dense offsets or a binary-searched
 directory containing only nonempty target buckets.  The compact choice is
 resolved once in each fixed 16-byte `InverseRecord`; 16-byte
 `InverseTargetRecord` entries and all hot records are `repr(C)` with compile-time
-size/alignment assertions. Candidate offsets cost `O(N)` and candidate IDs at
-most `O(M)`, giving `O(N+M)` scheduler and inverse auxiliary storage even when
-`D = sum_g |target_sort(g)|` is arbitrarily larger.
+size/alignment assertions. Candidate offsets cost `O(N)`, candidate IDs at
+most `O(M)`, and generator metadata `O(G)`, giving `O(N+M+G)` scheduler and
+inverse auxiliary storage even when `D = sum_g |target_sort(g)|` is
+arbitrarily larger.
 
-Large mutable membership sets are packed `u64` bitmaps rather than byte-per-ID
-flags: pending work, predecessor marks, and touched-block membership use one
-bit per logical slot.  Monotone ownership remains range/CSR encoded.  The
+Large dense mutable membership sets are packed `u64` bitmaps rather than
+byte-per-ID flags: dense pending work, predecessor marks, and touched-block
+membership use one bit per logical slot; sparse pending membership uses the
+Patricia pool. Monotone ownership remains range/CSR encoded. The
 allocation gate compares 64-state and 1,024-state distinguishing chains and
 forbids allocation-count growth proportional to the 960 additional splits; it
 also exposed and repaired a geometrically growing quotient-transition vector.
@@ -327,6 +367,7 @@ no speculative AVX branch was added without a channel model and measurement.
 This distinction sharpens the classical automata comparison.  Write
 
 ```text
+G = number of generators,
 M = sum_g |source_sort(g)|,    D = sum_g |target_sort(g)|.
 ```
 
@@ -345,7 +386,9 @@ sorted sparse buckets win. Candidate discovery is constructed in linear time
 from those nonempty buckets into target-state offsets plus generator IDs.
 Scheduling scans only candidate incidences in selected children. Thus ordinary
 endomorphic automata recover the classical `M=D` specialization, while typed
-systems retain the stronger `O(N+M)` storage statement when `D/M` is unbounded.
+systems retain the stronger `O(N+M+G)` storage statement when `D/M` is
+unbounded. The explicit `G` term covers zero-source generators, which need not
+be bounded by `M`.
 
 Every binary split deterministically assigns the new block ID to the smaller
 child (ties assign the marked child). Transcript replay derives the same
@@ -353,16 +396,18 @@ orientation from inverse-image cardinalities, so the 16-byte record needs no
 flag. Candidate discovery therefore scans only a child at most half the size
 of its parent. Charging a `(target state, generator)` incidence whenever its
 containing block becomes that smaller child gives `O(M log N)` candidate work;
-inverse-edge traversal has the same standard small-half charge. The fixed
-SplitMix64 pending directory supplies measured constant-time operations at
-50% load; unlike the incidence bound, its open-addressing probe bound is not
-claimed worst-case against adversarially chosen integer IDs.
+inverse-edge traversal has the same standard small-half charge. Dense pending
+membership is exact constant time. Sparse membership uses the compressed
+binary Patricia directory and therefore takes at most 64 branch decisions per
+operation; the former fixed-hash collision family is a retained regression.
 
 The worklist directly returns the quotient and transcript; `SplitTranscript`
 no longer computes a synchronous reference quotient and then reconstructs its
 proof.  A final linear canonicalization preserves the established class-ID
-order, while quotient-only and exhaustive policies retain the old algorithm as
-an exact differential control.  A hostile review found a genuine stale-queue
+order. Quotient-only now proves through this path and discards the transcript;
+the explicitly bounded exhaustive-pair audit retains the old synchronous
+algorithm and its legacy round metric as a differential control. A hostile
+review found a genuine stale-queue
 bug in the first small-half implementation: a pending retained child could be
 enqueued twice while the moved child was lost.  The independent congruence
 verifier prevented an unsound artifact but compilation failed on a valid
@@ -454,7 +499,7 @@ an explicit cyclic self-split are rejected or replayed as appropriate.
 ## SOTA comparison and large-block repair
 
 The direct comparison is documented in
-[the observational-minimization SOTA report](2026-08-27-c983-observational-minimization-sota-comparison.md).
+`notes/2026-08-27-c983-observational-minimization-sota-comparison.md`.
 The relevant implementation frontiers are MATA's maintained deterministic
 Hopcroft/Valmari-style kernel, mCRL2 202607's default Groote--Jansen 2025
 `O(m log n)` LTS kernel, and Boa's generic coalgebraic minimizer.
@@ -467,14 +512,21 @@ self-splitter, and swaps each marked state to the block boundary exactly once.
 It adds no refinement-loop allocation or recursion.  The cold 131,072-state
 chain fell from 3.834 s to 14.126 ms (271x).
 
-Final seven-round controls at 131,072 states give 15.977 versus 24.748 ms on
-the unary chain and 89.937 versus 212.558 ms on the four-generator random
-family: 1.55x and 2.36x faster than pinned MATA despite transcript emission and
-independent replay. Cold peak RSS is 13.1x and 8.6x smaller. More importantly,
-the theorem-generated early paths give 12.1x on a native 256-output stable
-partition, 547x on 131,072 states with 64 cyclic generators, and 1,071x on
-65,536 states with 128 generators; the latter uses 31.3x less cold RSS. These are
+Final seven-round controls at 131,072 states give 14.643 versus 23.502 ms on
+the unary chain and 61.321 versus 202.485 ms on the four-generator random
+family: 1.61x and 3.30x faster than pinned MATA despite transcript emission and
+independent replay. Cold peak RSS is 16.2x and 13.2x smaller. More importantly,
+the theorem-generated early paths give 11.5x on a native 256-output stable
+partition, 547x on 131,072 states with 64 cyclic generators, and 1,100x on
+65,536 states with 128 generators; the latter uses 31.9x less cold RSS. These are
 scoped algorithmic cases, not a universal fastest-implementation claim.
+
+The native Boa comparison sharpens the limit: ergodis is 1.81x faster on the
+chain and 1.76x faster on 256 native outputs, but Boa's dirty-signature engine
+is 2.48x faster on the random family. Boa returns canonical partition IDs;
+ergodis also builds quotient transitions, retains a transcript, and verifies
+it independently. This is a real adaptive-backend opportunity, not a reason
+to weaken the current exact product.
 
 At one million states and four generators, the initial hardware profile showed
 ergodis executing more instructions but sustaining about 1.3 IPC versus
@@ -496,3 +548,33 @@ within measurement noise at about 178.4 MiB.  The unary chain is neutral in
 time and pays only the reusable target scratch (about 4 MiB at one million
 states).  The change therefore removes the intended sort work without
 sacrificing the sparse directory for `target >> source`.
+
+On the final binary, three interleaved million-state random runs give 1.762 s
+for ergodis versus 2.554 s for MATA, a 1.45x compiler advantage. Three
+non-multiplexed process-counter repetitions give 5.511 versus 10.215 billion
+instructions, 8.122 versus 13.841 billion cycles, and 1.152 versus 1.878
+billion branches. Ergodis pays 18.219 versus 12.103 million branch misses for
+its irregular proof bookkeeping, but retires 46% fewer instructions and 41%
+fewer cycles overall. The profile still assigns about 11% to independent
+transcript replay; the dense random gap to Boa cannot be explained by proof
+verification alone.
+
+## Final EJ + TT closeout
+
+The final cheap upgrades were not cosmetic. Red-team converted the sparse
+hash caveat into an explicit collision family and then into a deterministic
+Patricia backend; the quotient-only benchmark exposed a second quadratic route
+that ordinary transcript benchmarks could not see. Both now have permanent
+regressions. The strongest general statement is consequently about a
+many-sorted Moore congruence with separate `N`, `M`, `G`, and target envelope
+`D`; classical complete DFA minimization is the `M=D` one-sort corollary.
+
+The Tao-style unresolved question is now algorithm selection rather than
+whether the small-half kernel scales. Boa wins the dense random control with a
+dirty-signature method, while ergodis wins the long-chain and native-output
+controls and produces a strictly richer verified artifact. A serious next
+backend should therefore be an adaptive, proof-producing signature/dirty-state
+engine sharing the same canonical quotient and transcript verifier—not a
+replacement of the current kernel. The other genuine mysteries and their
+exact evidence gaps are recorded in the refreshed ledger above; no additional
+unowned mystery was manufactured.

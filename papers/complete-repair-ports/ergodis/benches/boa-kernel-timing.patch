@@ -1,0 +1,19 @@
+diff --git a/src/main.rs b/src/main.rs
+index e8cfa18..936523a 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -115,5 +115,6 @@ fn main() {
+             println!("parsing_time_s: {}", parsing_time.as_secs_f32());
+             // start_time = SystemTime::now();
++            let algorithm_start = SystemTime::now();
+             let ids = if args.action == Action::Naive {
+                 println!("algorithm: naive");
+                 partref_naive(&data, &r)
+@@ -122,6 +123,7 @@ fn main() {
+                 println!("algorithm: nlogn");
+                 partref_nlogn(data, r)
+             };
++            println!("algorithm_time_s: {}", algorithm_start.elapsed().unwrap().as_secs_f64());
+             // let computation_time = start_time.elapsed().unwrap();
+             println!("n_states: {}", ids.len());
+             println!("n_states_min: {}", ids.iter().max().unwrap()+1);
