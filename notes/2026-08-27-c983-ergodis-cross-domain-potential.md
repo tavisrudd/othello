@@ -503,12 +503,15 @@ The first-batch evidence changes the expansion ranking:
 7. **Adversarial/robust interface adapter** — generalize the artifact law to
    controlled branching, strategy witnesses, and alternating compatibility;
    interface automata and open games are controls, not novelty targets.
-8. **Provenance/AMC/database adapter** — useful if contextual minimization adds
+8. **Tropical tensor backend** — feed minimized finite relation/resource
+   indices to existing CPU/GPU contractors; report boundary quotient separately
+   from bond/rank, intermediate volume, order, and witness effects.
+9. **Provenance/AMC/database adapter** — useful if contextual minimization adds
    measurable interface reduction beyond the compiled circuit.
-9. **Bounded program-component adapter** — use e-graphs/version spaces and an
+10. **Bounded program-component adapter** — use e-graphs/version spaces and an
    exact interpreter/SMT oracle as controls; test whether open-fragment future
    responses admit an additional certified interface quotient.
-10. **Predictive-state/SSM approximation laboratory** — high upside, deferred
+11. **Predictive-state/SSM approximation laboratory** — high upside, deferred
    until exact states and contextual metrics provide ground truth.
 
 The neural branch is now a concrete falsification experiment rather than an

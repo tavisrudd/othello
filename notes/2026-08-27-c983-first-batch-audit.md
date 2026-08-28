@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY THIRTY-TWO-SOURCE PASS; FOUR SOURCES READ
-AT FULL TEXT AND TWENTY-EIGHT AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
+**Status**: IN PROGRESS; PRELIMINARY THIRTY-FOUR-SOURCE PASS; FOUR SOURCES READ
+AT FULL TEXT AND THIRTY AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
 LICENSED
 
 ## Executive verdict
@@ -107,6 +107,7 @@ formal congruence argument.
 | Treat tropical recurrence as a state-space realization and minimize it | Max-plus discrete-event system realization, reachability, and observability | Strongly pre-empted; minimal realization is a distinct hard classical problem | Start with bounded observation-relative finite abstraction and compare against max-plus realization/observer controls |
 | Compile a dynamic program to an exact reduced optimization graph | Exact decision diagrams for optimization and DP state merging | Strongly pre-empted as an OR systems pattern, including CP/IP integration | Add derived context/query minimization, independent certificates, potential/provenance layers, and black-box solver wrapping; benchmark against DD tools |
 | Represent equivalent/candidate programs and extract an optimum | Equality saturation/e-graphs and version-space algebra | Strongly pre-empted as program-optimization and synthesis architecture | Target open-component future-cost interfaces, certified bounded semantics, or oracle wrapping; benchmark e-graph/synthesis systems |
+| Contract local optimization tensors over min/max-plus and recover an optimizer | Tropical tensor networks for exact combinatorial optimization | Strongly pre-empted, including values, degeneracy/counts, and configurations | Use as a GPU/factored backend; measure contextual interface reduction separately from bond/rank and contraction-order effects |
 
 ## Common kernel candidate
 
@@ -678,6 +679,21 @@ The read depths below are unconditional and describe this preliminary pass.
     candidate program sets for synthesis from demonstrations.  Candidate-space
     factorization and witness-program extraction are therefore established
     synthesis techniques, distinct from contextual interface minimization.
+33. Jin-Guo Liu, Lei Wang, and Pan Zhang, *Tropical Tensor Network for Ground
+    States of Spin Glasses*. **Read depth: partial** — primary arXiv/PRL
+    abstract and contribution summary, cache key `arXiv:2008.06888`; read the
+    abstract and method summary.  Tropical contraction computes exact ground-
+    state energy, differentiation through the contraction recovers an optimal
+    configuration, and a mixed tropical/ordinary algebra computes degeneracy.
+    Thus value, witness, and counting by tropical tensor contraction are all
+    established capabilities.
+34. Mengyao Hu and Jordi Tura, *Tropical Contraction of Tensor Networks as a
+    Bell Inequality Optimization Toolset*. **Read depth: partial** — primary
+    arXiv abstract, cache key `arXiv:2208.02798`; read the abstract and scope
+    summary.  It expresses classical bounds of broad Bell-inequality families
+    as min-plus tensor contractions and relates translationally invariant
+    limits to tropical eigenvalues/fixed points.  This confirms that tropical
+    tensor contraction is an application backend, not merely a metaphor.
 
 ## Max-plus control and discrete-event systems
 
@@ -783,6 +799,37 @@ available.  Compare raw enumerated terms, e-graph/e-classes, full truth-table
 classes, restricted future-response classes, and witness-program bytes.  This
 is a stretch adapter after the finite compiler, not one of the first two
 exemplars.
+
+## Tropical tensor networks
+
+The tensor-network connection is direct computationally.  Replacing ordinary
+sum/product by min-or-max/add contracts local optimization factors, and primary
+work already computes exact optima, recovers configurations, counts degeneracy,
+and targets GPUs.  This is GDL/variable elimination in tensor language with a
+powerful implementation ecosystem.
+
+The useful Ergodis split is:
+
+```text
+domain/context compiler -> minimized boundary payload
+tropical tensor backend -> factored contraction and accelerator execution
+contraction planner      -> order and intermediate-size optimization
+provenance/differentiation -> optimizer reconstruction
+```
+
+These are not one compression.  Tensor bond dimension or algebraic rank,
+intermediate tensor volume, contextual quotient classes, contraction time, and
+witness storage can move independently.  In particular, merging two boundary
+labels with identical admitted continuation values is not generally a low-rank
+tensor factorization, and truncating a bond by SVD-like approximation has no
+automatic contextual error certificate in tropical semantics.
+
+A later adapter can compile an Ergodis finite relation/Pareto payload into a
+tropical tensor network, compare CPU tables with GPU contraction, and test
+whether query-relative quotienting shrinks boundary indices before contraction.
+Spin-glass/independent-set or Bell-bound fixtures provide established controls.
+The application claim would be a smaller certified interface feeding an
+existing contractor, not invention of tropical contraction or witness recovery.
 
 ## Exact mergeable summaries and parallel folds
 

@@ -218,7 +218,7 @@ Sequel research:
 
 - [C983 Ergodis cross-domain exact compositional optimization](../2026-08-27-c983-ergodis-cross-domain-potential.md)
   is in progress as private research.  Its first concentrated expansion window
-  produced a [90-minute report](../2026-08-27-c983-90m-report.md), a 32-source
+  produced a [90-minute report](../2026-08-27-c983-90m-report.md), a 34-source
   hostile audit, a typed deterministic/effectful compiler-law boundary, two
   exact noncoding fixture contracts, and proof-carrying artifact/Rust design.
   Classical automata, graph, abstract-interpretation, provenance, max-plus
