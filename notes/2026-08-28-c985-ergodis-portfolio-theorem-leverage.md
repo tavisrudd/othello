@@ -172,6 +172,27 @@ for lazy caching; the global envelope crosses over during the third batch,
 after roughly 48 context queries.  Exact costs agree with direct confinement,
 and replay reaches a rank-at-most-two exact source in every checked context.
 
+The scaling fixture now reaches ambient dimension six and context ranks through
+five.  Target-line projection retains 2,451 subspaces and 19,034 adjacent-rank
+restriction edges; exact full-span evaluation uses 3,906 candidates and the
+compiled payload is 209,840 bytes.  Profiling attributed about 27% of envelope
+compilation cycles to sorted child-state lookup.  A fixed-capacity open-address
+directory replaces the binary searches without growth in the edge loop.  The
+diagnostic Criterion midpoint moved compile-plus-first-batch from 1.035 ms to
+0.881 ms (14.9% faster) while payload grew from 187,784 to 209,840 bytes
+(11.7%); query time moved from 9.479 to 9.271 us.
+
+The final 31-round alternating harness compares the optimized
+envelope with the existing warm cached-subspace scan across all 32 admissible
+hyperplanes.  Median batch query time is 181.708 us versus 9.748 us, with an
+18.459x geometric-mean speedup and paired-log `t=500.87`.  Compilation plus
+the first batch is 941.592 us versus 348.759 us for lazy caching; the extra
+592.833 us is repaid after about 3.45 further batches, approximately 110
+context queries.  Raw evidence, driver, and checker SHA-256 values are
+`604f2ffc7603c25343b318d9f377633aeece8ce8df79c6a08eaab3093628779b`,
+`2828305435852169e4bbfb24295d1f4f5478d140412f1723c16c5062569a2049`,
+and `8669059cc766fa0aa393c905664819da3a1486e6782a324db86fe194c0e1719b`.
+
 ### 4. Basis-free GL-orbit quotient
 
 C980 proves that bounded probes are constant on `GL_s(L)` orbits and gives an
@@ -252,6 +273,25 @@ and representatives by bitmap select; it never reconstructs the generic
 point-to-orbit array.  The end-to-end test constructs the explicit transporter
 between generic least-point numbering and RREF numbering, then checks every
 observation and transition through it.
+
+For declared right-linear contexts, scanning the raw presentation is itself
+unnecessary.  `BinaryRightLinearMap` stores each output column as a parity mask;
+right multiplication commutes with the left GL action, so
+`compile_right_linear_presentation` constructs observations and transitions
+only on canonical row spaces.  A concrete-state test independently builds the
+full presentation, checks its compressed quotient, and matches every direct
+transition.
+
+On the measured 3x6 probe with three right-linear contexts, the naïve
+RREF-plus-concrete-scan path exposed a 76 ms pathology.  The final 31-round
+rotating-order harness gives medians of 4.881 ms for generic BFS plus checked
+quotient, 79.172 ms for naïve RREF plus checked quotient, and 0.393 ms for the
+theorem-compiled presentation.  Geometric-mean speedups are 12.777x over the
+generic backend (`t=218.95`) and 205.560x over the naïve RREF route
+(`t=672.24`).  Raw evidence, driver, and checker SHA-256 values are
+`d91b9e7a5cea6a41ce4f1ac7672fdb70d4e1efa5f44aeeb9eeff35b8c962f548`,
+`cfd77e4d1d8ff155c2fc2ad174dd7418f572ba1520771c4e494109c6e3804007`,
+and `aa95bb88b6ad6a04d189ca88e1e20ed1ff16a06184fe3259afca3939a7011a8d`.
 
 Evidence integrity:
 

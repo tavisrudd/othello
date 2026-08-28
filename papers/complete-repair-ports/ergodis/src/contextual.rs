@@ -1069,19 +1069,21 @@ where
         )?;
         debug_assert_eq!(exact_costs.len(), count);
 
-        let mut lookup = Vec::with_capacity(count);
+        let lookup_capacity = count
+            .checked_mul(4)
+            .ok_or(ContextualError::Overflow)?
+            .div_ceil(3)
+            .next_power_of_two();
+        let mut lookup_keys = vec![u64::MAX; lookup_capacity];
+        let mut lookup_states = vec![u32::MAX; lookup_capacity];
         for (state, basis) in bases.chunks_exact(width).enumerate() {
-            lookup.push((
-                encode_subspace::<F>(basis)?,
-                u32::try_from(state).map_err(|_| ContextualError::Overflow)?,
-            ));
-        }
-        lookup.sort_unstable_by_key(|&(key, _)| key);
-        let mut lookup_keys = Vec::with_capacity(count);
-        let mut lookup_states = Vec::with_capacity(count);
-        for (key, state) in lookup {
-            lookup_keys.push(key);
-            lookup_states.push(state);
+            let key = encode_subspace::<F>(basis)?;
+            let mut slot = mix_subspace_key(key) as usize & (lookup_capacity - 1);
+            while lookup_states[slot] != u32::MAX {
+                slot = (slot + 1) & (lookup_capacity - 1);
+            }
+            lookup_keys[slot] = key;
+            lookup_states[slot] = u32::try_from(state).map_err(|_| ContextualError::Overflow)?;
         }
 
         let restrictions_per_state = projective_line_count(F::ORDER, rank)?;
@@ -1229,11 +1231,28 @@ fn encode_subspace<F: FiniteField>(basis: &[u8]) -> Result<u64, ContextualError>
 }
 
 fn lookup_envelope_state(stratum: &RankEnvelopeStratum, key: u64) -> Option<u32> {
-    stratum
-        .lookup_keys
-        .binary_search(&key)
-        .ok()
-        .map(|index| stratum.lookup_states[index])
+    let mask = stratum.lookup_keys.len().checked_sub(1)?;
+    let mut slot = mix_subspace_key(key) as usize & mask;
+    for _ in 0..stratum.lookup_keys.len() {
+        let state = stratum.lookup_states[slot];
+        if state == u32::MAX {
+            return None;
+        }
+        if stratum.lookup_keys[slot] == key {
+            return Some(state);
+        }
+        slot = (slot + 1) & mask;
+    }
+    None
+}
+
+#[inline]
+fn mix_subspace_key(mut key: u64) -> u64 {
+    key ^= key >> 30;
+    key = key.wrapping_mul(0xbf58_476d_1ce4_e5b9);
+    key ^= key >> 27;
+    key = key.wrapping_mul(0x94d0_49bb_1331_11eb);
+    key ^ (key >> 31)
 }
 
 fn multiply_rref_bases_into<F: FiniteField>(

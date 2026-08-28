@@ -64,8 +64,9 @@ pub use group_action::{
     compile_binary_gl_rref, compile_permutation_orbits,
     compile_permutation_orbits_with_deferred_verification, quotient_presentation_by_binary_gl_rref,
     quotient_presentation_by_orbits, verify_binary_gl_rref, verify_permutation_orbits,
-    BinaryGlProbeAction, BinaryGlProbeError, BinaryGlRrefQuotient, FinitePermutationAction,
-    OrbitCompileError, OrbitPartition, OrbitQuotientError, OrbitStorage,
+    BinaryGlPresentationError, BinaryGlProbeAction, BinaryGlProbeError, BinaryGlRrefQuotient,
+    BinaryRightLinearMap, FinitePermutationAction, OrbitCompileError, OrbitPartition,
+    OrbitQuotientError, OrbitStorage,
 };
 pub use interface::{
     lift_class_witnesses, present_finite_interface, present_witnessed_pareto_interface,

@@ -24,6 +24,68 @@ pub enum BinaryGlProbeError {
     Certificate,
 }
 
+#[derive(Debug, Error)]
+pub enum BinaryGlPresentationError {
+    #[error("binary right-linear context and GL quotient have incompatible shapes")]
+    Shape,
+    #[error(transparent)]
+    Presentation(#[from] ObservationalError),
+}
+
+/// A right-linear map on the columns of a packed binary probe.
+///
+/// Each output column is encoded by the input-column mask whose parity forms
+/// that output. Right-linear maps commute with every left row operation.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct BinaryRightLinearMap {
+    columns: u8,
+    forms: Box<[u32]>,
+}
+
+impl BinaryRightLinearMap {
+    pub fn new(columns: usize, forms: impl Into<Box<[u32]>>) -> Result<Self, BinaryGlProbeError> {
+        let forms = forms.into();
+        if columns == 0
+            || columns >= 32
+            || forms.len() != columns
+            || forms.iter().any(|&form| form >= 1_u32 << columns)
+        {
+            return Err(BinaryGlProbeError::Shape);
+        }
+        Ok(Self {
+            columns: columns as u8,
+            forms,
+        })
+    }
+
+    pub fn apply(
+        &self,
+        action: &BinaryGlProbeAction,
+        point: u32,
+    ) -> Result<u32, BinaryGlProbeError> {
+        if self.columns as usize != action.columns() || point >= action.point_count {
+            return Err(BinaryGlProbeError::Index);
+        }
+        Ok(self.apply_unchecked(action.rows(), point))
+    }
+
+    #[inline]
+    fn apply_unchecked(&self, rows: usize, point: u32) -> u32 {
+        let columns = self.columns as usize;
+        let row_mask = (1_u32 << columns) - 1;
+        let mut result = 0_u32;
+        for row in 0..rows {
+            let source = point >> (row * columns) & row_mask;
+            let mut target = 0_u32;
+            for (column, &linear_form) in self.forms.iter().enumerate() {
+                target |= ((source & linear_form).count_ones() & 1) << column;
+            }
+            result |= target << (row * columns);
+        }
+        result
+    }
+}
+
 /// Left row action of `GL_rows(F_2)` on all `rows x columns` binary probes.
 ///
 /// Points are packed row-major in `u32`. Adjacent swaps and both adjacent row
@@ -128,6 +190,52 @@ impl BinaryGlRrefQuotient {
             return Some(((block * 8 + offset) * 64 + word.trailing_zeros() as usize) as u32);
         }
         None
+    }
+
+    /// Compile a one-sort contextual presentation directly on row spaces.
+    ///
+    /// The callback observes canonical row-space representatives. Contexts are
+    /// right-linear maps, so their compatibility with the left GL quotient is
+    /// a theorem of matrix multiplication rather than a concrete-state scan.
+    pub fn compile_right_linear_presentation(
+        &self,
+        contexts: &[BinaryRightLinearMap],
+        mut observation: impl FnMut(u32) -> u32,
+    ) -> Result<FinitePresentation, BinaryGlPresentationError> {
+        if contexts
+            .iter()
+            .any(|context| context.columns as usize != self.action.columns())
+        {
+            return Err(BinaryGlPresentationError::Shape);
+        }
+        let orbit_count = self.orbit_count as usize;
+        let mut representatives = Vec::with_capacity(orbit_count);
+        let mut observations = Vec::with_capacity(orbit_count);
+        for orbit in 0..self.orbit_count {
+            let representative = self
+                .orbit_representative(orbit)
+                .ok_or(BinaryGlPresentationError::Shape)?;
+            representatives.push(representative);
+            observations.push(observation(representative));
+        }
+        let mut generators = Vec::with_capacity(contexts.len());
+        for context in contexts {
+            let mut transitions = Vec::with_capacity(orbit_count);
+            for &representative in &representatives {
+                let target = context.apply_unchecked(self.action.rows(), representative);
+                transitions.push(self.orbit(target).ok_or(BinaryGlPresentationError::Shape)?);
+            }
+            generators.push(GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: transitions.into_boxed_slice(),
+            });
+        }
+        Ok(FinitePresentation::new(
+            [self.orbit_count],
+            observations,
+            generators,
+        )?)
     }
 }
 
@@ -939,6 +1047,41 @@ mod tests {
                 (0..direct.orbit_count()).collect::<Vec<_>>()
             );
             verify_binary_gl_rref(&direct).unwrap();
+        }
+    }
+
+    #[test]
+    fn right_linear_contexts_compile_directly_on_row_spaces() {
+        let action = BinaryGlProbeAction::new(2, 3).unwrap();
+        let quotient = compile_binary_gl_rref(action);
+        let contexts = [
+            BinaryRightLinearMap::new(3, [2, 4, 1]).unwrap(),
+            BinaryRightLinearMap::new(3, [3, 2, 0]).unwrap(),
+        ];
+        let observations = (0..action.point_count())
+            .map(|point| quotient.representative(point).unwrap())
+            .collect::<Vec<_>>();
+        let generators = contexts.iter().map(|context| GeneratorSpec {
+            source_sort: 0,
+            target_sort: 0,
+            transitions: (0..action.point_count())
+                .map(|point| context.apply(&action, point).unwrap())
+                .collect(),
+        });
+        let concrete =
+            FinitePresentation::new([action.point_count()], observations, generators).unwrap();
+        let checked = quotient_presentation_by_binary_gl_rref(&concrete, &quotient).unwrap();
+        let direct = quotient
+            .compile_right_linear_presentation(&contexts, |representative| representative)
+            .unwrap();
+        assert_eq!(checked.observations(), direct.observations());
+        for context in 0..contexts.len() as u32 {
+            for state in 0..quotient.orbit_count() {
+                assert_eq!(
+                    checked.transition(context, state),
+                    direct.transition(context, state)
+                );
+            }
         }
     }
     use crate::observational::{compile_observational, GeneratorSpec};
