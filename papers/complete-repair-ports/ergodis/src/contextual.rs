@@ -99,17 +99,19 @@ struct CacheRecord {
 
 #[derive(Default)]
 struct DenseCostDirectory {
-    costs: Box<[u64]>,
+    storage: Box<[u32]>,
+    cost_len: usize,
 }
 
 impl DenseCostDirectory {
     #[inline(always)]
     fn lookup_index(&self, index: usize) -> Option<u32> {
-        u32::try_from(self.costs[index]).ok()
+        let present = self.storage[self.cost_len + index / 32] & (1_u32 << (index % 32)) != 0;
+        present.then_some(self.storage[index])
     }
 
     fn lookup<F: FiniteField>(&self, label: &[u8]) -> Option<u32> {
-        if self.costs.is_empty() {
+        if self.storage.is_empty() {
             return None;
         }
         let mut index = 0_usize;
@@ -1027,19 +1029,29 @@ fn dense_cost_directory<F: FiniteField>(
     }
     let mut label = vec![0_u8; label_len];
     let entry_count = to_usize(entry_count)?;
-    let mut costs = Vec::with_capacity(entry_count);
+    let presence_words = entry_count
+        .checked_add(31)
+        .ok_or(ContextualError::Overflow)?
+        / 32;
+    let storage_len = entry_count
+        .checked_add(presence_words)
+        .ok_or(ContextualError::Overflow)?;
+    let mut storage = vec![0_u32; storage_len];
+    let mut index = 0_usize;
     loop {
         if let Some(cost) = table.cost_slice(&label) {
-            costs.push(u64::from(cost));
-        } else {
-            costs.push(u64::MAX);
+            storage[index] = cost;
+            storage[entry_count + index / 32] |= 1_u32 << (index % 32);
         }
+        index += 1;
         if !increment_digits::<F>(&mut label) {
             break;
         }
     }
+    debug_assert_eq!(index, entry_count);
     Ok(DenseCostDirectory {
-        costs: costs.into_boxed_slice(),
+        storage: storage.into_boxed_slice(),
+        cost_len: entry_count,
     })
 }
 
@@ -1135,8 +1147,8 @@ fn coefficient_map_cost<F: FiniteField>(
     target_uses_inner_dense_costs: bool,
     block_data: &mut [u8],
 ) -> Result<u32, ContextualError> {
-    if !inner_dense_costs.costs.is_empty()
-        && (target_uses_inner_dense_costs || !target_dense_costs.costs.is_empty())
+    if !inner_dense_costs.storage.is_empty()
+        && (target_uses_inner_dense_costs || !target_dense_costs.storage.is_empty())
     {
         return coefficient_map_dense_cost::<F>(
             subspace,
@@ -1180,7 +1192,7 @@ fn coefficient_map_cost<F: FiniteField>(
         } else {
             inner_dense_costs
         };
-        let local = if dense_costs.costs.is_empty() {
+        let local = if dense_costs.storage.is_empty() {
             table.cost_slice(label)
         } else {
             dense_costs.lookup::<F>(label)
