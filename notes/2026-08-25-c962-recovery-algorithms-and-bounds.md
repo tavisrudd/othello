@@ -2,10 +2,9 @@
 
 **Lane**: `complete-ports`
 
-**Status**: IN PROGRESS; PRIVATE CODE AND MATHEMATICS ONLY; 76 PYTHON TESTS
-PLUS 135 RUST UNIT/CLI/PROPERTY/PARITY TESTS PASS; NO
-MANUSCRIPT, STANDALONE-MIRROR, PUSH, OR DEPOSIT CHANGE; CODE
-COMMIT HELD BY USER
+**Status**: CLOSED 2026-08-27 BY USER DIRECTION; PRIVATE CODE, EVIDENCE, AND
+MATHEMATICS COMMITTED; FURTHER REPRESENTATION/PARITY WORK CANCELLED; NO
+MANUSCRIPT, STANDALONE-MIRROR, PUSH, OR DEPOSIT CHANGE
 
 ## Scope and current verdict
 
@@ -2909,7 +2908,7 @@ dominant.
 Vibe: the theorem-to-search boundary is now sharp and well packed; the open
 work is genuinely spatial, not hidden normalization or representation debt.
 
-C962 remains open, and its private queue row now places the 714-task balanced
+At this checkpoint C962 remained open, and its private queue row placed the 714-task balanced
 hybrid ahead of the older residual-torus `T=54` continuation.  No manuscript,
 standalone mirror, public-facing file, commit, push, export, or deposit was
 made.
@@ -3169,7 +3168,23 @@ The C972 deductions improve repeated bounded queries materially.  Forecasted
 one-shot rank-bounded queries and memory-constrained queries stay direct;
 projective admission is already profitable on the first measured query.  No manuscript,
 standalone mirror, push, export, or deposit changed.  The code and evidence
-remain uncommitted under the user's existing hold.
+were then uncommitted under the user's existing hold.
 
 Vibe: the cold cost is now paid only when the measured payoff and caller's
 memory budget justify it, with allocation-free candidate scans on both paths.
+
+## 39. User-directed closeout
+
+On 2026-08-27 the user accepted the bounded representation work as sufficient,
+cancelled further candidate-parity work, lifted the private commit hold, and
+directed closure of C962.  The task-owned implementation and evidence were
+already committed in the C962/Ergodis commit series, culminating in
+`82751420d`; no task-owned code or evidence remained dirty at closeout.
+
+The cancelled experiments are not acceptance gates and no successor is
+allocated for them.  C962 made no manuscript, standalone-mirror, push, export,
+deposit, or announcement change.  Review against the discovery-track
+discriminator found no incidental observation requiring a new entry.
+
+Vibe: closed cleanly at a useful engineering plateau; the remaining ideas were
+optional optimization work, not correctness or release blockers.

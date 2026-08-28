@@ -6,7 +6,7 @@
 **Status**: ACTIVE; C972 COMPOSITIONAL-STATE CHARACTERIZATION AND C976
 EXPOSITION/LITERATURE/EXPORT CLOSED; 37-PAGE AUTHORITY, 29-CLAIM, FOUR-LEAN-
 TERMINAL, AND 84-FILE ERGODIS PUBLIC-SURFACE GATES PASS; C962 ALGORITHM/BOUND
-DEVELOPMENT AND C980 HIGHER-RANK CONTEXTUAL-MINIMALITY RESEARCH ARE IN PROGRESS;
+DEVELOPMENT IS CLOSED BY USER DIRECTION; C980 HIGHER-RANK CONTEXTUAL-MINIMALITY RESEARCH IS IN PROGRESS;
 C325 APPENDIX VERIFIER AND C953 AGGREGATE
 REVIEW FOLLOW; C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR
 DEPOSIT
@@ -114,7 +114,7 @@ Current and completed strengthening:
   sharpness; no manuscript promotion is yet authorized.
 
 - [C962 exact recovery algorithms](../2026-08-25-c962-recovery-algorithms-and-bounds.md)
-  now includes a radius-pruned rank-one complete-transfer certificate, lazy
+  is closed by user direction.  It includes a radius-pruned rank-one complete-transfer certificate, lazy
   projective line-probe caching, and rank-bounded contextual subspace caching
   with Python/Rust differential fixtures and interleaved cold/warm A/B evidence.
   The certificate is 1.66x faster for the measured exact radius decision and
@@ -246,23 +246,15 @@ C980 is the active mathematics-only task for the higher-rank contextual
 quotient.  Its scalar, witness-cover, finite-state, and bounded-resource
 candidate proofs are now developed.  Next run an independent hostile proof
 read and the full priority audit, then decide whether the scalar small-model
-core strengthens the current paper and route the dual-shortening/rank-stratified
-algorithmic corollaries to C962.  Keep the Pareto, fixed-batch packing, and
+core strengthens the current paper.  Record any dual-shortening/rank-stratified
+algorithmic corollaries as optional future work unless a successor is allocated.
+Keep the Pareto, fixed-batch packing, and
 multi-target-block state algebras as sequel material unless the review finds a
 shorter main-paper consequence.
-C962 remains the parallel private code-and-mathematics task for ergodis algorithm
-development and benchmark evidence.  The C972 contextual-state kernels now
-include forecast/memory-aware direct-versus-cache admission, atomic
-rank-bounded fill, allocation-free candidate scans under the Tiger rules, and
-interleaved cold/warm/auto evidence.  Application-shaped Jin--Fu A/B gives
-6.06x/14.79x cold and 8.88x/17.25x warm speedups on the cyclic/Hamming cases,
-while a zero-byte forecast stays direct; the bundle-wide evidence manifest is
-current.
-Continue C962 with the bounded explicit/ZDD/Roaring representation experiment,
-then only for additional paper-owned algorithm and bound development beyond
-the exported ERGO-comp baseline.
-Python remains the exact differential oracle, and no Rust performance result is
-accepted before cost/witness/load parity.  Then run C325 appendix-only
+C962's bounded representation work was accepted as sufficient, further
+candidate-parity experiments were cancelled, and its private task-owned code
+and evidence are committed.  No successor was allocated for the optional
+optimization work.  After C980, run C325 appendix-only
 verification, followed by C953
 aggregate referee/export review.  C955 owns the later coefficient-presentation
 spectrum. Before nontrivial proof development or
