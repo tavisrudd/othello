@@ -199,6 +199,14 @@ Current and completed strengthening:
 
 Sequel research:
 
+- [C983 Ergodis cross-domain exact compositional optimization](../2026-08-27-c983-ergodis-cross-domain-potential.md)
+  is queued after C980 as private research.  It tests the observational-state
+  thesis through a hostile weighted-automata/inference/formal-semantics audit,
+  a precise contextual quotient theorem boundary, and one common
+  witness-preserving kernel used by recovery plus two genuinely noncoding
+  exemplars.  It does not block C325 or C953 and makes no manuscript or public-
+  surface change.
+
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
   eventual helper-union thresholds reducing to the one-target theorem; C948
@@ -254,7 +262,9 @@ shorter main-paper consequence.
 C962's bounded representation work was accepted as sufficient, further
 candidate-parity experiments were cancelled, and its private task-owned code
 and evidence are committed.  No successor was allocated for the optional
-optimization work.  After C980, run C325 appendix-only
+optimization work.  C983 is queued after C980 for the separate cross-domain
+Ergodis feasibility program; it does not block the paper closeout.  After C980,
+run C325 appendix-only
 verification, followed by C953
 aggregate referee/export review.  C955 owns the later coefficient-presentation
 spectrum. Before nontrivial proof development or
