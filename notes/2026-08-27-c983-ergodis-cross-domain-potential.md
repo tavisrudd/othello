@@ -515,6 +515,16 @@ of the preservation diagram, while approximate passes replace equality by an
 error modulus.  This makes the classical results corollaries of one certified-
 pass framework without falsely identifying their compression mechanisms.
 
+The clean realization schema is the response image.  Map each reachable
+partial object to its vector or function of all admitted future observations.
+In finite sets the image is exactly the contextual quotient; over fields the
+image rank is the Hankel/minimal-linear-realization or PSR control; under a
+suitable categorical factorization system it is functorial minimization.
+Ergodis can expose these as `ResponseRealizer` backends with distinct
+certificates and metrics.  This is a genuine architectural generalization, not
+a claim that finite class count, linear rank, tropical generator count, and
+latent dimension are the same invariant.
+
 Richer operational resources also fit exactly without making scalar tradeoffs
 up front.  Finite antichains of bounded nonnegative resource vectors form the
 standard Pareto semiring under nondominated union and bounded Minkowski sum.

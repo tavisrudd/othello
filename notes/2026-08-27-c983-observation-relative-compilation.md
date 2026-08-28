@@ -209,6 +209,58 @@ observation triangle to commute, then derive path/context soundness.  The
 finite quotient algorithm, separator theorem, and strategy/witness lift remain
 backend-specific proof obligations.
 
+### Theorem 2C: response-image realization schema
+
+For a deterministic typed context presentation, form the full response map at
+sort `i`
+
+```text
+H_i : X_i -> product over typed paths p:i->j of O_j
+H_i(x)(p) = o_j(p(x)).
+```
+
+Its set-theoretic image is a canonical exact realization.  Prefixing response
+coordinates by a generator defines its transition: if `H_i(x)=H_i(y)`, then
+every future after `g` is already a future before `g`, so
+`H_j(g(x))=H_j(g(y))`.  The output is the empty-path coordinate.  Thus the
+response image is isomorphic to the contextual quotient.
+
+It is minimal in the precise factorization sense.  If any exact encoding
+`e_i:X_i->S_i` supports all generated responses, then `H_i=d_i e_i` for a
+decoder `d_i:S_i->Response_i`.  Consequently `e_i(x)=e_i(y)` implies
+`H_i(x)=H_i(y)`, and `e_i(X_i)` maps surjectively onto `im(H_i)`.  In the finite
+case every exact set-state realization has at least `|im(H_i)|` reachable
+states.  A finite separator replaces the full product by coordinates known to
+have the same kernel.
+
+This is the common shape behind several classical results, with the notion of
+“image” changed by the semantic category:
+
+- in finite sets, the image is the Moore/Myhill--Nerode/context quotient;
+- in vector spaces, the image/rank of the Hankel or response map gives minimal
+  linear realization dimension and a basis of tests, including the linear PSR
+  control;
+- in a category with a suitable factorization system, the image-factorization
+  construction is the established functorial automata-minimization pattern;
+- projective response states quotient the set image by an additive group
+  action and carry the chosen gauge; and
+- an approximate realization replaces exact image factorization by a
+  rate--distortion/error factorization of the response object.
+
+The categorical generalization is established theory, not a C983 novelty
+claim.  It nevertheless supplies the right Ergodis backend interface:
+`ResponseRealizer` declares its semantic category, factorization/minimality
+notion, finite representation, separator/basis certificate, and witness lift.
+Set cardinality, vector-space rank, tropical generator count, circuit size, and
+latent dimension are not interchangeable metrics.
+
+Over semirings or tropical semimodules, images need not have field-like bases,
+free finite presentations, or canonical minimal factorizations.  Therefore the
+field-linear and finite-set corollaries do not license a general tropical
+minimal-realization theorem.  The bounded finite evaluator remains the safe
+first implementation, while max-plus and weighted-automata realization
+algorithms serve as backend-specific controls.
+
 ## 2. Exact bounded tropical weighted-tree compilation
 
 Let a weighted bottom-up tree automaton have finite state set `Q`, finite ranked
