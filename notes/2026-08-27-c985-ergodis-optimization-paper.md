@@ -2,7 +2,7 @@
 
 **Lane:** `complete-ports`
 
-**Status:** QUEUED AFTER C983; OPTIMIZATION-FACING PAPER RESEARCH
+**Status:** IN PROGRESS; COMPILER/BOA PERFORMANCE WINDOW
 
 **Date:** 2026-08-27
 
@@ -71,3 +71,23 @@ silently covered by the Pareto theorem.
 - `notes/2026-08-27-c980-structural-compression-hostile-proof-literature-audit.md`
 - `notes/2026-08-27-c983-ergodis-cross-domain-potential.md`
 - `ergodis/`
+
+## 2026-08-28 compiler/Boa performance window
+
+The first implementation window follows C987's application crossover.  Its
+fixed order is:
+
+1. reduce generic compiler peak memory without adding allocation or recursion
+   to refinement hot loops;
+2. separate source-adapter construction from the already-fast generic
+   minimizer and retain exact before/after construction/RSS evidence;
+3. rerun the pinned native Boa comparison after every accepted compiler slice;
+4. use `perf` counters/profiles to select any remaining low-level work rather
+   than speculating about SIMD; and
+5. retain only changes that preserve quotient, transcript, witness-sidecar,
+   and independent-oracle parity.
+
+C987's starting hierarchy medians are 2.061 s raw construction plus 26.144 ms
+generic compilation, 38,332 KiB full compile peak RSS, and 22,500 KiB raw-only
+peak RSS.  The scaled quotient is 2.34x faster than raw random queries after a
+3.96-million-query break-even, but the default recovery path remains unchanged.
