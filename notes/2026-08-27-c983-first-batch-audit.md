@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY TWENTY-SIX-SOURCE PASS; FOUR SOURCES READ
-AT FULL TEXT AND TWENTY-TWO AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
+**Status**: IN PROGRESS; PRELIMINARY TWENTY-EIGHT-SOURCE PASS; FOUR SOURCES READ
+AT FULL TEXT AND TWENTY-FOUR AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
 LICENSED
 
 ## Executive verdict
@@ -104,6 +104,7 @@ formal congruence argument.
 | Compose exact multi-resource frontiers and reuse them across objectives | Pareto/antichain dynamic programming over an idempotent semiring | Pre-empted as multiobjective DP | Add a bounded Pareto value backend, scalarization/query projections, contextual minimization, and one witness per selected frontier point |
 | Compile components whose environment and implementation make adversarial choices | Interface automata, alternating simulation/refinement, and open games | Strongly pre-empted as compositional game/interface syntax | Generalize the artifact to typed alternating/relational actions and an explicit solution concept; deterministic Moore refinement is only the cooperative corollary |
 | Compile an exact mergeable stream/partition summary | List homomorphisms, monoid folds, and mergeable-summary algorithms | Pre-empted as parallel/streaming architecture | Emit a certified query-relative minimal finite merge carrier, with order/symmetry assumptions and potential/witness payload stated |
+| Treat tropical recurrence as a state-space realization and minimize it | Max-plus discrete-event system realization, reachability, and observability | Strongly pre-empted; minimal realization is a distinct hard classical problem | Start with bounded observation-relative finite abstraction and compare against max-plus realization/observer controls |
 
 ## Common kernel candidate
 
@@ -626,6 +627,56 @@ The read depths below are unconditional and describe this preliminary pass.
     randomized as well as deterministic summaries, so exact finite Ergodis
     compilation is a narrower regime, not a replacement for the broader
     streaming literature.
+27. Bart De Schutter, Vincent Blondel, Remco de Vries, and Bart De Moor,
+    *On the Boolean Minimal Realization Problem in the Max-Plus Algebra*.
+    **Read depth: partial** — primary journal abstract and metadata, DOI
+    `10.1016/S0167-6911(98)00035-8`; read the abstract and problem statement.
+    It studies the smallest max-linear discrete-event-system state-space model
+    realizing a given impulse response, characterizes minimal system order in
+    its Boolean regime, and gives a canonical response representation.  This
+    makes tropical minimal realization established specialist territory, not a
+    consequence that C983 can claim from finite contextual minimization.
+28. Michael J. Gazarik and Edward W. Kamen, *Reachability and Observability of
+    Linear Systems over Max-Plus*. **Read depth: partial** — primary journal
+    summary and metadata, *Kybernetika* 35(1), 1999; read the abstract/summary.
+    It develops weak reachability and weak observability conditions for
+    max-plus linear systems and uses residuation both to generate controls and
+    to estimate states.  The control-theoretic observability bridge is therefore
+    literal and classical; Ergodis must specify its restricted query semantics,
+    finite abstraction, and witness/certificate additions.
+
+## Max-plus control and discrete-event systems
+
+The tropical SSM analogy has a direct classical ancestor.  Max-plus linear
+discrete-event systems use recurrences of the form
+
+```text
+x(k+1) = A tensor x(k) plus B tensor u(k)
+y(k)   = C tensor x(k),
+```
+
+and already study reachability, observability, state estimation, and minimal
+realization from input/output behavior.  This is a stronger and more relevant
+mathematical control than Mamba for Ergodis' min-plus recurrence.  It also
+blocks the ambitious claim that observational tropical state or minimal
+tropical realization is newly introduced here.
+
+The surviving application is discrete-event planning: manufacturing/event
+timing, transport, queues, and synchronization networks naturally expose
+max-plus/min-plus recurrences.  An Ergodis adapter can bound or type the event
+interface, compile only the requested deadline/resource observations, minimize
+the resulting finite exact machine, retain schedule/control witnesses, and
+ship a verifier.  Its controls are the original max-plus realization and
+observer where applicable, plus the unquotiented bounded evaluator.
+
+This distinction may be productive theoretically.  Classical realization
+minimizes a model for the full impulse/input-output behavior under its algebraic
+hypotheses.  Ergodis deliberately asks for the coarsest exact state relative to
+a restricted context grammar and query profile, possibly after capacity or
+deadline truncation.  Neither state count need dominate the other: linear or
+tropical realization dimension, finite quotient cardinality, and circuit size
+are different measures.  The experiment must report all applicable measures
+and must not call a bounded quotient a realization of the unbounded system.
 
 ## Exact mergeable summaries and parallel folds
 
