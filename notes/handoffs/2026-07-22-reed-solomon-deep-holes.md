@@ -168,6 +168,10 @@ pair, whose torus fixes `tau`; do not use that false symmetry reduction.
 The cubic and quadratic cases are now closed by `GF(8)` and `GF(4)` elliptic
 specializations, giving `72>52` and `54>52`.  Only the 42 trace-one values,
 or seven Frobenius sextics in one common family, remain.
+The restricted selector is now uniformly nonzero, and parity-sharpened Hasse
+closes five sextics.  Only the twelve roots of `tau^6+tau+1` and
+`tau^6+tau^5+tau^4+tau+1` remain; these are exactly where both rootlessness
+curve poles and infinity are rational, leaving a one-point Hasse deficit.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

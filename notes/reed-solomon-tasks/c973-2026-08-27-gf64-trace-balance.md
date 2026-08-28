@@ -720,6 +720,55 @@ and is nonzero.  Again `N` splits and `54>52` closes both conjugates.  The
 entire GF(64) forced-root surface is now reduced to the 42 trace-one values,
 or seven Frobenius sextics, with no cubic or quadratic residue.
 
+On all 42 values, the restricted C620 selector is nonzero for a uniform
+reason.  On the chart above,
+
+\[
+ Q'=a^2+\tau^4+1,
+\]
+
+while the `a^2`-coefficient of `[x^2]Q` is `tau+1`.  The quadratic
+pseudo-remainder of
+
+\[
+ ((N\Delta)')^2+(Q')^2N\Delta
+\]
+
+modulo `Q` is a polynomial of degree at most 14 in `a`; its leading
+coefficient is
+
+\[
+                 \tau(\tau+1)^3(\tau^3+\tau+1)^3.         \tag{32}
+\]
+
+Every zero of (32) belongs to a trace-zero stratum already closed.  Hence
+none of the three selector factors vanishes identically on a trace-one form.
+Multiplying by the four-root collision polynomial `H(a)` gives exactly the
+old degree bound `14+2+2+4=22`, now with proved nonvanishing on this split
+line.  Requiring `a!=0` raises the forbidden-parameter budget to 23.
+
+The rootlessness parameter curve is geometrically integral of genus one.
+Its finite poles are the roots of `n1(a)`, which is squarefree on the
+trace-one locus.  Apply Hasse to the trace-one twist.  Its point count is
+even, hence at least 50 rather than merely 49.  Apart from finite parameters,
+the only rational points occur above rational poles of `n1` and above
+infinity, in packets of respectively zero or two points.  Unless both packets
+occur, at most two points are lost, leaving at least 48 affine points and
+therefore at least 24 rootless values of `a`.  Since `24>23`, the selector
+then leaves an admissible parameter.
+
+Direct quadratic and absolute-trace reduction shows that both packets occur
+simultaneously exactly when `tau` is a root of
+
+\[
+ (\tau^6+\tau+1)(\tau^6+\tau^5+\tau^4+\tau+1).           \tag{33}
+\]
+
+These are `P1` and `P7`.  Thus the uniform Hasse-selector argument closes the
+other five sextics, or 30 of the 42 trace-one values.  Only the twelve roots
+of (33) retain the one-point numerical gap: Hasse alone permits 23 rootless
+parameters there, while the selector budget is 23.
+
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
 degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
@@ -728,7 +777,7 @@ Hankel equations reduce to
 \[
 \begin{aligned}
  k_0+uv^2k_5+(u^6+v^3)k_6&=0,\\
- k_1+uv^2k_6+(u^6+v^3)k_7&=0.                            \tag{32}
+ k_1+uv^2k_6+(u^6+v^3)k_7&=0.                            \tag{34}
 \end{aligned}
 \]
 
@@ -737,7 +786,7 @@ removed.  Write the subspace polynomial as
 
 \[
  L_U(t)=t^8+\alpha t^4+\beta t^2+\gamma t,
- \qquad \gamma\ne0.                                      \tag{33}
+ \qquad \gamma\ne0.                                      \tag{35}
 \]
 
 Synthetic division of `L_U(t)+C` by `t+r` gives
@@ -745,11 +794,11 @@ Synthetic division of `L_U(t)+C` by `t+r` gives
 \[
  k_7=1,\ k_6=r,\ k_5=r^2,\quad
  k_1=\beta+r^6+\alpha r^2,\quad
- k_0=\gamma+r\beta+r^7+\alpha r^3.                       \tag{34}
+ k_0=\gamma+r\beta+r^7+\alpha r^3.                       \tag{36}
 \]
 
-Substitution of (34) into (32) first determines `beta` and then cancels every
-term except `gamma`; hence (32) forces `gamma=0`, contradicting (33).
+Substitution of (36) into (34) first determines `beta` and then cancels every
+term except `gamma`; hence (34) forces `gamma=0`, contradicting (35).
 Therefore the natural `q`-support plus affine-three-space-minus-one padding
 cannot close even the split-quadratic stratum.  This explains a substantial
 part of the earlier support-atlas failure without appealing to its
@@ -772,7 +821,7 @@ is the subspace polynomial of a two-dimensional `F2`-space and `C=L_U(b)` is
 the nonzero value defining a coset disjoint from zero, then
 
 \[
- h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{35}
+ h(t)=(t+a)(t^4+At^2+Bt+C)                                \tag{37}
 \]
 
 is automatically split with five distinct nonzero roots when the extra root
@@ -780,10 +829,10 @@ avoids that coset.  Its coefficients are
 
 \[
  (g_0,g_1,g_2,g_3,g_4,g_5)
- =(aC,aB+C,aA+B,A,a,1).                                   \tag{36}
+ =(aC,aB+C,aA+B,A,a,1).                                   \tag{38}
 \]
 
-Equations (35)--(36) give a four-parameter split chart on which the slope-pencil
+Equations (37)--(38) give a four-parameter split chart on which the slope-pencil
 conditions can be imposed explicitly.  The next proof should either:
 
 1. use the slope-pencil gate (6) on the strata where its constant term is not
@@ -795,7 +844,7 @@ endpoint syndrome `e7`, for which `B3=0`, `D=1`, and
 
 \[
  \operatorname {Tr}T
- =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{37}
+ =\operatorname {Tr}\left(1+g_3/g_4^2\right)              \tag{39}
 \]
 
 when `g4!=0`.  This is already an explicit lower-dimensional trace problem,
@@ -827,12 +876,13 @@ arguments do not answer that arithmetic question.
 | What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
-| How many marked-torus forms remain? | 66 total; the constant and subfield elliptic charts leave 42 | seven trace-one sextics |
+| How many marked-torus forms remain? | 66 total; selector nonvanishing plus Hasse leaves 12 | the two sextics in (33) |
 | Does rootlessness close the `(0,0)` boundary? | no; (25) makes the cover empty, but the opposite trace splits it into two rational lines | closed by `130>54` |
 | What closes the `(0,1)` boundary? | a `GF(8)` elliptic specialization with 72 points | closed by `72>52` |
 | What happens when `tau^6+tau^5+1=0`? | `n0n2=tau^9 n1^2` with trace-zero constant | all six forms closed by `130>54` |
 | How far does `a=tau` extend? | factorization (31) closes nine additional noncolliding roots; `tau=0` reuses the endpoint | ten more forms closed |
-| How many semilinear cases are left? | seven trace-one sextics | one common genus-one family, seven Frobenius specializations |
+| How many semilinear cases are left? | two trace-one sextics | the simultaneous rational-poles/infinity locus |
+| Is the restricted degree-22 selector nonzero? | yes; (32) is its load-bearing pseudo-remainder coefficient | proved uniformly on all trace-one forms |
 | Can cross-ratio transformations reduce the seven sextics? | no at the contracted pointed level; the ordered-pair torus fixes `tau` | `4+3` is not a valid symmetry quotient |
 | Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (32)--(34) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |

@@ -172,6 +172,14 @@ specializations with `a=tau+1`: their curves have respectively 12 points
 over `GF(8)` and 6 over `GF(4)`, hence 72 and 54 over `GF(64)`, both above the
 52-point budget including `N=0`.  Only the 42 trace-one values, seven
 Frobenius sextics in one common genus-one family, remain.
+The selector on that family is now proved nonzero: its pseudo-remainder has
+leading coefficient `tau(tau+1)^3(tau^3+tau+1)^3`, which never vanishes on a
+trace-one form.  Parity sharpens Hasse from 49 to 50 points.  Unless both
+finite poles and infinity are rational, this yields at least 24 rootless
+parameters against the 23-parameter selector/zero budget.  The simultaneous
+exception is exactly the two sextics `tau^6+tau+1` and
+`tau^6+tau^5+tau^4+tau+1`.  Thirty values close uniformly; only their twelve
+roots remain.
 
 ## Objective
 
