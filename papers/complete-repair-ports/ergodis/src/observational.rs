@@ -1727,7 +1727,6 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
     let block_capacity = presentation.state_count();
     let pending_capacity = presentation.transitions.len();
     let mut queue = VecDeque::with_capacity(pending_capacity);
-    let mut pending_counts = vec![0_u32; block_capacity];
     for (generator, record) in presentation.generators.iter().copied().enumerate() {
         if initial_blocks_per_sort[record.target_sort as usize] <= 1 {
             continue;
@@ -1743,7 +1742,6 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
             push_split_work(
                 &mut queue,
                 &mut pending,
-                &mut pending_counts,
                 SplitWorkItem {
                     block: state_blocks[target_state as usize],
                     generator: generator as u32,
@@ -1772,9 +1770,6 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
         if !pending.remove(work.block, work.generator) {
             return Err(ObservationalError::Partition);
         }
-        pending_counts[work.block as usize] = pending_counts[work.block as usize]
-            .checked_sub(1)
-            .ok_or(ObservationalError::Partition)?;
         let splitter = block_ranges[work.block as usize];
         for position in splitter.start..splitter.end() {
             let target_state = members[position as usize];
@@ -1823,7 +1818,6 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
                     &mut block_ranges,
                     &mut queue,
                     &mut pending,
-                    &mut pending_counts,
                     &mut records,
                 )?;
             }
@@ -1973,7 +1967,6 @@ fn split_marked_block<P: PendingDirectory>(
     block_ranges: &mut Vec<SortRange>,
     queue: &mut VecDeque<SplitWorkItem>,
     pending: &mut P,
-    pending_counts: &mut [u32],
     records: &mut Vec<SplitRecord>,
 ) -> Result<(), ObservationalError> {
     let range = block_ranges[source_block as usize];
@@ -2027,7 +2020,6 @@ fn split_marked_block<P: PendingDirectory>(
         members,
         queue,
         pending,
-        pending_counts,
     )?;
     Ok(())
 }
@@ -2048,7 +2040,6 @@ fn schedule_sparse_splitter_block<P: PendingDirectory>(
     members: &[u32],
     queue: &mut VecDeque<SplitWorkItem>,
     pending: &mut P,
-    pending_counts: &mut [u32],
 ) -> Result<(), ObservationalError> {
     let range = block_ranges[block as usize];
     match target_generators {
@@ -2064,12 +2055,7 @@ fn schedule_sparse_splitter_block<P: PendingDirectory>(
                     {
                         continue;
                     }
-                    push_split_work(
-                        queue,
-                        pending,
-                        pending_counts,
-                        SplitWorkItem { block, generator },
-                    )?;
+                    push_split_work(queue, pending, SplitWorkItem { block, generator })?;
                 }
             }
         }
@@ -2082,12 +2068,7 @@ fn schedule_sparse_splitter_block<P: PendingDirectory>(
                 let start = offsets[target_state as usize] as usize;
                 let end = offsets[target_state as usize + 1] as usize;
                 for &generator in &generators[start..end] {
-                    push_split_work(
-                        queue,
-                        pending,
-                        pending_counts,
-                        SplitWorkItem { block, generator },
-                    )?;
+                    push_split_work(queue, pending, SplitWorkItem { block, generator })?;
                 }
             }
         }
@@ -2099,7 +2080,6 @@ fn schedule_sparse_splitter_block<P: PendingDirectory>(
 fn push_split_work<P: PendingDirectory>(
     queue: &mut VecDeque<SplitWorkItem>,
     pending: &mut P,
-    pending_counts: &mut [u32],
     work: SplitWorkItem,
 ) -> Result<(), ObservationalError> {
     if queue.len() == queue.capacity() {
@@ -2111,9 +2091,6 @@ fn push_split_work<P: PendingDirectory>(
     if !pending.insert(work.block, work.generator)? {
         return Ok(());
     }
-    pending_counts[work.block as usize] = pending_counts[work.block as usize]
-        .checked_add(1)
-        .ok_or(ObservationalError::Overflow)?;
     queue.push_back(work);
     Ok(())
 }
@@ -3167,14 +3144,12 @@ mod tests {
     fn sparse_pending_work_never_grows_its_reserved_storage() {
         let mut queue = VecDeque::with_capacity(4);
         let mut pending = PatriciaPending::new(4).unwrap();
-        let mut pending_counts = [0_u32; 4];
         let queue_capacity = queue.capacity();
         let pending_capacity = pending.capacity();
         for block in 0..4 {
             push_split_work(
                 &mut queue,
                 &mut pending,
-                &mut pending_counts,
                 SplitWorkItem {
                     block,
                     generator: 0,
@@ -3186,7 +3161,6 @@ mod tests {
         assert_eq!(pending.capacity(), pending_capacity);
         assert_eq!(queue.len(), 4);
         assert_eq!(pending.len, 4);
-        assert_eq!(pending_counts, [1; 4]);
     }
 
     #[test]
