@@ -172,6 +172,10 @@ The restricted selector is now uniformly nonzero, and parity-sharpened Hasse
 closes five sextics.  Only the twelve roots of `tau^6+tau+1` and
 `tau^6+tau^5+tau^4+tau+1` remain; these are exactly where both rootlessness
 curve poles and infinity are rational, leaving a one-point Hasse deficit.
+That deficit is now a single torsion gate: exhibit rational order three on
+the trace-zero companion for the two sextics.  The twist then has order
+`1 mod 3`, so even Hasse count at least 50 improves to at least 52 and closes
+the selector inequality.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

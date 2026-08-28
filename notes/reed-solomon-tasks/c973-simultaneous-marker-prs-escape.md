@@ -180,6 +180,12 @@ parameters against the 23-parameter selector/zero budget.  The simultaneous
 exception is exactly the two sextics `tau^6+tau+1` and
 `tau^6+tau^5+tau^4+tau+1`.  Thirty values close uniformly; only their twelve
 roots remain.
+The final one-point deficit is equivalent to one torsion lemma.  If the
+trace-zero companion on either remaining sextic has a rational point of order
+three, then its rootlessness twist has order `1 mod 3`; parity and Hasse force
+at least 52 points, hence 24 rootless parameters after removing the two pole
+fibres and infinity.  This beats the 23-parameter selector budget and closes
+all twelve values without a point-count certificate.
 
 ## Objective
 

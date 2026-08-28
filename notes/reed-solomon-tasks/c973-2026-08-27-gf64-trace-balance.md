@@ -769,6 +769,30 @@ other five sextics, or 30 of the 42 trace-one values.  Only the twelve roots
 of (33) retain the one-point numerical gap: Hasse alone permits 23 rootless
 parameters there, while the selector budget is 23.
 
+That one-point gap has an exact torsion reformulation.  Let `C0` be the
+trace-zero Artin--Schreier curve for `n0 n2/n1^2`, and let `C1` be its
+trace-one quadratic twist, whose affine points count rootless parameters.
+Then
+
+\[
+                         \#C_0+\#C_1=2(64+1)=130.
+\]
+
+If `C0` has a rational point of order three, then `3 | #C0`, so
+`#C1=1 mod 3`.  On (33), `C1` is even and Hasse gives `#C1>=50`.  The
+smallest even integer at least 50 congruent to one modulo three is 52.
+Therefore
+
+\[
+                       \#C_1\ge52,
+ \qquad (\#C_1-4)/2\ge24>23,
+\]
+
+where the four removed points are the two rational pole fibres and the two
+points above infinity.  Thus a rational order-three divisor on `C0`, uniform
+for `P1` and `P7`, would close all twelve values without a point-count
+certificate.  This is the sharp structural next gate.
+
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
 degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
@@ -883,8 +907,9 @@ arguments do not answer that arithmetic question.
 | How far does `a=tau` extend? | factorization (31) closes nine additional noncolliding roots; `tau=0` reuses the endpoint | ten more forms closed |
 | How many semilinear cases are left? | two trace-one sextics | the simultaneous rational-poles/infinity locus |
 | Is the restricted degree-22 selector nonzero? | yes; (32) is its load-bearing pseudo-remainder coefficient | proved uniformly on all trace-one forms |
+| What repairs the last one-point Hasse deficit? | rational order three on the trace-zero companion | twist order `1 mod 3` forces `52`, hence 24 parameters |
 | Can cross-ratio transformations reduce the seven sextics? | no at the contracted pointed level; the ordered-pair torus fixes `tau` | `4+3` is not a valid symmetry quotient |
-| Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (32)--(34) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
+| Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (34)--(36) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |
 
