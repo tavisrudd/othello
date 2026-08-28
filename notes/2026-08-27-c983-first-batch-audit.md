@@ -703,10 +703,10 @@ The read depths below are unconditional and describe this preliminary pass.
     InsideOut solves them by semiring-aware variable elimination and optimizes
     semantically valid variable orders.  This pre-empts a broad database/
     inference unification claim more directly than GDL alone.
-36. Dan Olteanu and Maximilian Schleich, *Factorized Databases*. **Read depth:
-    partial** — primary SIGMOD Record abstract and institutional manuscript
-    metadata, DOI `10.1145/3003665.3003667`; read the abstract and scope
-    summary.  It avoids redundancy in query computation/results through
+36. Dan Olteanu and Maximilian Schleich, *Factorized Databases*.
+    **Read depth: partial** — primary SIGMOD Record abstract and institutional
+    manuscript metadata, DOI `10.1145/3003665.3003667`; read the abstract and
+    scope summary.  It avoids redundancy in query computation/results through
     factorized representations and supports subsequent analytics.  Database
     factorization is therefore another independent compression layer and
     required systems control.
