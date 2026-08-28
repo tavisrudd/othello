@@ -7,6 +7,18 @@ R11/R12 there; GF(64) is structurally closed; GF(27) and external review remain
 open
 
 **Current checkpoint:**
+`c973-2026-08-28-gf27-switch-probe.md` is a bounded calibration of the
+GF(27) two-point affine-plane switch, not a census-based closure: exhaustive
+over every carrier class with quotient rank at most one (the wild
+Frobenius-graph fibre, the off-graph fibre, and the kernel plane) and a
+20,000-class sample of rank two, no class has fewer than 78 good switches
+among 1404 candidates.  The three Frobenius-conjugate planes through each
+removed line suffice everywhere measured; the distinguished `lambda=1` plane
+and the one-point sections do not.  The 27 minimizers are exactly the upper
+unipotent translation orbit of `e_3`, with the constant profile
+`1326/156/546/78` (nonsingular, zero discriminant, split-distinct, good), so
+the remaining lemma is a translation-invariant statement whose extremal
+case is one explicit syndrome.
 `c973-2026-08-27-carrier-nucleus-compression.md` identifies every maximal
 adjacent-zero carrier `C_d` with the penultimate osculating nucleus
 `N^(d-1) Gamma_(d+1)`.  At prime-power `d=p^s`, projection from that nucleus

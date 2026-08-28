@@ -318,6 +318,12 @@ whose index is eight, also gives `H^1(S4,A)=0`.  Hence six of the seven
 stabilizer actions split; only the Frobenius-graph/Borel fibre is genuinely
 wild.  Tame splitting does not itself produce nine-point locators, but it
 identifies the old Borel residue as the unique cohomological obstruction.
+A bounded switch calibration, exhaustive over every rank-at-most-one
+quotient class and sampled on rank two, finds at least 78 good two-point
+switches per class; the three conjugate planes through each removed line
+suffice alone, and the 27 minimizers are the translation orbit of `e_3`
+(`c973-2026-08-28-gf27-switch-probe.md`).  The switch lemma is therefore the
+right target; its proof must be translation-invariant with `e_3` extremal.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`,
