@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY ELEVEN-SOURCE PASS; TWO SOURCES READ AT
-FULL TEXT AND NINE AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY THIRTEEN-SOURCE PASS; TWO SOURCES READ AT
+FULL TEXT AND ELEVEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
 
@@ -87,6 +87,8 @@ formal congruence argument.
 | Contextual equivalence is a congruence | Syntactic congruence/functorial semantics | Formally routine once contexts compose | The result must be a small-model, effective-compilation, or state-complexity theorem |
 | Witness-preserving quotient | Provenance semirings, algebraic model counting, and backpointer variants of dynamic programming | Pre-empted as a universal symbolic-evaluation idea; open as an independently compressed sidecar | Specify whether witnesses are canonical, existential, or observed only through a projection; literal witness identity can destroy quotienting |
 | Compile once, answer several algebraic queries | Provenance semirings, algebraic model counting, and semiring-DP solution expressions | Pre-empted in the unrestricted algebraic sense | Test whether an additional contextual quotient shrinks the boundary state or circuit interface while retaining value, count, optimal-count, and witness projections |
+| Compose typed open systems through explicit boundaries | Structured/decorated cospans and related compositional-systems formalisms | Pre-empted as composition syntax | Supply an observation compiler, effective finite carrier, quotient, separator certificate, and optimization/witness semantics |
+| Derive efficient semiring DP from exhaustive specification | Polymorphic semiring shortcut fusion and constraint lifting | Pre-empted as a general derivation pattern | Derive the finite interface/context presentation itself, or add a measurable post-fusion quotient rather than restating fusion |
 
 ## Common kernel candidate
 
@@ -410,6 +412,25 @@ The read depths below are unconditional and describe this preliminary pass.
     polynomial semiring records how source tuples contribute to a positive
     relational-algebra result and is universal for subsequent commutative-
     semiring valuations.
+12. John C. Baez, Kenny Courser, and Christina Vasilakopoulou, *Structured
+    versus Decorated Cospans*. **Read depth: partial** — arXiv v4/published
+    text, cache key `arXiv:2101.09363`, SHA-256
+    `979e69fc230230f4b44c68406d6a46fb4c589bce8686ea2a4fb3100d0d8d6455`;
+    read the abstract, contents, introduction, contribution map, and
+    conclusion.  It constructs symmetric monoidal double categories for two
+    interface-explicit presentations of open systems, compares them under
+    stated hypotheses, and illustrates the syntax across circuits, Petri nets,
+    dynamical systems, and epidemiological models.
+13. Max A. Little, Xi He, and Ugur Kayas, *Dynamic programming by polymorphic
+    semiring algebraic shortcut fusion*. **Read depth: partial** — arXiv v5,
+    cache key `arXiv:2107.01752`, SHA-256
+    `a0655fd6433cb72a06bed4f42138e60fc841add8b82352a500358c48e4d95b29`;
+    read the abstract, introduction, Sections 2.1--2.2 through the fusion and
+    constraint-lifting setup, related-work boundary, and conclusion.  It
+    derives exact DP algorithms from semiring-polymorphic generators by
+    shortcut fusion, supports separable algebraic constraints and generic
+    backtracing, and explicitly leaves derivation of the recurrence from an
+    arbitrary combinatorial generator open.
 
 ## Knowledge-compilation and provenance connection
 
@@ -435,6 +456,33 @@ This opens two concrete application adapters missed by the initial ranking:
 database-query provenance and knowledge-compiled exact inference.  They count
 as Ergodis expansion only if the interface quotient or witness/query plumbing
 adds a measurable capability beyond the existing circuit compiler.
+
+## Open-system and constructive-DP connection
+
+Structured and decorated cospans supply a mature typed syntax for composing
+open systems in series and parallel.  They make explicit what Ergodis needs at
+its front end—objects as interfaces and morphism-like cells as components—but
+do not by themselves derive an optimization observation, a finite sufficient
+carrier, or its minimal context-relative quotient.  The useful adapter split
+is therefore:
+
+```text
+open-system syntax (cospan/operad/domain tree)
+    -> exact finite observational semantics
+    -> reachable carrier
+    -> contextual minimizer + separator certificate
+    -> value/query/witness projection.
+```
+
+Likewise, polymorphic semiring shortcut fusion already derives efficient DP
+evaluation from an exhaustive semiring-polymorphic generator and supports
+separable constraints and generic backtracing.  Its stated limitation—relying
+on a domain recurrence rather than deriving one from arbitrary combinatorial
+specification—clarifies a potential Ergodis capability boundary.  Ergodis can
+either compile the finite interface/context presentation from domain
+structure, or apply an independently measured observational quotient after a
+fusion/provenance backend.  Merely expressing an existing Bellman recurrence
+over another semiring is pre-empted.
 
 ## Coverage gaps and next search
 

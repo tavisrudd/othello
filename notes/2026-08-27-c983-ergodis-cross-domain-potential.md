@@ -246,6 +246,18 @@ from application novelty and makes pre-emption productive: a classical result
 can become a backend or corollary while Ergodis expands the executable query
 surface or materially reduces state, circuit, or witness cost.
 
+The common theorem has now been lifted from a one-sorted ranked algebra to a
+finite multi-sorted context machine.  Interface types are sorts and admissible
+one-hole constructions are typed generators; partition refinement computes
+the coarsest exact quotient and emits typed distinguishing paths.  Ordinary
+Moore/Myhill--Nerode minimization, finite ranked algebras, bounded weighted-tree
+evaluation, and finite semantics for open systems are compiler corollaries.
+This is intentionally classical as mathematics.  Its purpose is a stable
+cross-domain backend whose application claim can survive theorem pre-emption:
+new value comes from deriving the finite semantics, reducing it materially,
+supporting richer queries/witnesses, or making a previously bespoke exact
+solver executable through the shared interface.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary
