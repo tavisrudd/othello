@@ -914,6 +914,7 @@ struct CombinedInverse {
 struct RefinementGenerators {
     ranges: Box<[SortRange]>,
     ids: Box<[u32]>,
+    aliases: Box<[u32]>,
 }
 
 struct PowerReductionWorkspace {
@@ -960,6 +961,7 @@ impl RefinementGenerators {
 
         let mut ids = Vec::with_capacity(presentation.generators.len());
         let mut ranges = Vec::with_capacity(presentation.sorts.len());
+        let mut aliases = vec![u32::MAX; presentation.generators.len()];
         let mut power = PowerReductionWorkspace {
             redundant: bitmap_storage(presentation.generators.len())?,
             expanded: bitmap_storage(presentation.generators.len())?,
@@ -989,7 +991,7 @@ impl RefinementGenerators {
                 {
                     continue;
                 }
-                let duplicate = ids[start as usize..].iter().copied().any(|prior| {
+                let duplicate = ids[start as usize..].iter().copied().find(|&prior| {
                     let prior_record = presentation.generators[prior as usize];
                     let prior_start = prior_record.transition_start as usize;
                     prior_record.target_sort == record.target_sort
@@ -997,9 +999,12 @@ impl RefinementGenerators {
                             [prior_start..prior_start + prior_record.transition_len as usize]
                             == *transitions
                 });
-                let composite = !duplicate
+                if let Some(prior) = duplicate {
+                    aliases[generator as usize] = prior;
+                }
+                let composite = duplicate.is_none()
                     && generator_is_retained_composite(presentation, record, transitions, &ids);
-                let power = !duplicate
+                let power = duplicate.is_none()
                     && !composite
                     && generator_is_retained_power(
                         presentation,
@@ -1009,7 +1014,7 @@ impl RefinementGenerators {
                         &ids,
                         &mut power,
                     );
-                if !duplicate && !composite && !power {
+                if duplicate.is_none() && !composite && !power {
                     ids.push(generator);
                 }
             }
@@ -1021,6 +1026,7 @@ impl RefinementGenerators {
         Ok(Self {
             ranges: ranges.into_boxed_slice(),
             ids: ids.into_boxed_slice(),
+            aliases: aliases.into_boxed_slice(),
         })
     }
 
@@ -1885,6 +1891,20 @@ fn compile_observational_internal(
         compiled.metrics.refinement_splits = 0;
         return Ok(compiled);
     }
+    let prepared_refinement = match prepared_refinement {
+        Some(refinement) => Some(refinement),
+        None if matches!(
+            certificate_policy,
+            CertificatePolicy::SplitTranscript | CertificatePolicy::MultiwayTranscript
+        ) && presentation
+            .generator_sort_ranges
+            .iter()
+            .any(|range| range.len > 4) =>
+        {
+            Some(RefinementGenerators::new(presentation)?)
+        }
+        None => None,
+    };
     let (
         classes,
         class_ranges,
@@ -1895,7 +1915,7 @@ fn compile_observational_internal(
     ) = match certificate_policy {
         CertificatePolicy::SplitTranscript => {
             let (classes, class_ranges, split_records, inverse) =
-                minimize_partition_worklist_prepared(presentation, prepared_refinement)?;
+                minimize_partition_worklist_prepared(presentation, prepared_refinement.as_ref())?;
             (
                 classes,
                 class_ranges,
@@ -1907,7 +1927,7 @@ fn compile_observational_internal(
         }
         CertificatePolicy::MultiwayTranscript => {
             let (classes, class_ranges, records, _inverse) =
-                minimize_partition_multiway_prepared(presentation, prepared_refinement)?;
+                minimize_partition_multiway_prepared(presentation, prepared_refinement.as_ref())?;
             (
                 classes,
                 class_ranges,
@@ -1940,6 +1960,7 @@ fn compile_observational_internal(
         certificate_policy,
         split_records,
         multiway_records,
+        prepared_refinement.as_ref(),
         verification_inverse.as_ref(),
         verify_immediately,
     )
@@ -2031,6 +2052,7 @@ fn emit_compilation(
     certificate_policy: CertificatePolicy,
     split_records: Box<[SplitRecord]>,
     multiway_records: Box<[MultiwayRecord]>,
+    refinement: Option<&RefinementGenerators>,
     verification_inverse: Option<&InverseIndex>,
     verify_immediately: bool,
 ) -> Result<CompiledObservation, ObservationalError> {
@@ -2045,17 +2067,21 @@ fn emit_compilation(
         }
     }
 
-    let transition_capacity = presentation.generators.iter().try_fold(
+    let transition_capacity = presentation.generators.iter().enumerate().try_fold(
         0_usize,
-        |capacity, generator| -> Result<usize, ObservationalError> {
+        |capacity, (generator_id, generator)| -> Result<usize, ObservationalError> {
+            if refinement.is_some_and(|directory| directory.aliases[generator_id] != u32::MAX) {
+                return Ok(capacity);
+            }
             capacity
                 .checked_add(class_ranges[generator.source_sort as usize].len as usize)
                 .ok_or(ObservationalError::Overflow)
         },
     )?;
-    let mut generator_records = Vec::with_capacity(presentation.generators.len());
+    let mut generator_records: Vec<GeneratorRecord> =
+        Vec::with_capacity(presentation.generators.len());
     let mut generator_transitions = Vec::with_capacity(transition_capacity);
-    for generator in presentation.generators.iter().copied() {
+    for (generator_id, generator) in presentation.generators.iter().copied().enumerate() {
         let source_states = presentation.sorts[generator.source_sort as usize];
         let target_states = presentation.sorts[generator.target_sort as usize];
         let source_classes = class_ranges[generator.source_sort as usize];
@@ -2063,6 +2089,17 @@ fn emit_compilation(
         let transition_start_in_presentation = generator.transition_start as usize;
         let transitions = &presentation.transitions[transition_start_in_presentation
             ..transition_start_in_presentation + generator.transition_len as usize];
+        let alias = refinement.map_or(u32::MAX, |directory| directory.aliases[generator_id]);
+        if alias != u32::MAX {
+            let prior = generator_records[alias as usize];
+            generator_records.push(GeneratorRecord {
+                source_sort: generator.source_sort,
+                target_sort: generator.target_sort,
+                transition_start: prior.transition_start,
+                transition_len: prior.transition_len,
+            });
+            continue;
+        }
         let transition_start =
             u32::try_from(generator_transitions.len()).map_err(|_| ObservationalError::Overflow)?;
         if source_classes.len == source_states.len && target_classes.len == target_states.len {
@@ -2303,19 +2340,8 @@ fn minimize_partition_worklist(
 
 fn minimize_partition_worklist_prepared(
     presentation: &FinitePresentation,
-    refinement: Option<RefinementGenerators>,
+    refinement: Option<&RefinementGenerators>,
 ) -> Result<WorklistPartition, ObservationalError> {
-    let refinement = match refinement {
-        Some(refinement) => Some(refinement),
-        None if presentation
-            .generator_sort_ranges
-            .iter()
-            .any(|range| range.len > 4) =>
-        {
-            Some(RefinementGenerators::new(presentation)?)
-        }
-        None => None,
-    };
     let block_capacity = presentation.state_count();
     let (state_blocks, block_sorts, members, block_ranges) =
         initial_split_workspace(presentation, block_capacity)?;
@@ -2343,24 +2369,19 @@ fn minimize_partition_worklist_prepared(
         let class_ranges = initial_class_ranges(presentation.sorts.len(), &block_sorts)?;
         return Ok((state_blocks, class_ranges, Box::default(), None));
     }
-    let pending_capacity =
-        refinement
-            .as_ref()
-            .map_or(presentation.transitions.len(), |directory| {
-                directory
-                    .ids
-                    .iter()
-                    .map(|&generator| {
-                        presentation.generators[generator as usize].transition_len as usize
-                    })
-                    .sum()
-            });
-    match pending_mode(presentation, refinement.as_ref())? {
+    let pending_capacity = refinement.map_or(presentation.transitions.len(), |directory| {
+        directory
+            .ids
+            .iter()
+            .map(|&generator| presentation.generators[generator as usize].transition_len as usize)
+            .sum()
+    });
+    match pending_mode(presentation, refinement)? {
         PendingMode::Dense => {
-            let pending = DensePending::new(presentation, &block_sorts, refinement.as_ref())?;
+            let pending = DensePending::new(presentation, &block_sorts, refinement)?;
             minimize_partition_worklist_with_pending(
                 presentation,
-                refinement.as_ref(),
+                refinement,
                 initial_block_count,
                 &initial_blocks_per_sort,
                 &omitted_blocks,
@@ -2373,7 +2394,7 @@ fn minimize_partition_worklist_prepared(
         }
         PendingMode::Sparse => minimize_partition_worklist_with_pending(
             presentation,
-            refinement.as_ref(),
+            refinement,
             initial_block_count,
             &initial_blocks_per_sort,
             &omitted_blocks,
@@ -2609,24 +2630,19 @@ fn packed_signature4(
 fn minimize_partition_multiway(
     presentation: &FinitePresentation,
 ) -> Result<MultiwayPartition, ObservationalError> {
-    minimize_partition_multiway_prepared(presentation, None)
+    let refinement = presentation
+        .generator_sort_ranges
+        .iter()
+        .any(|range| range.len > 4)
+        .then(|| RefinementGenerators::new(presentation))
+        .transpose()?;
+    minimize_partition_multiway_prepared(presentation, refinement.as_ref())
 }
 
 fn minimize_partition_multiway_prepared(
     presentation: &FinitePresentation,
-    refinement: Option<RefinementGenerators>,
+    refinement: Option<&RefinementGenerators>,
 ) -> Result<MultiwayPartition, ObservationalError> {
-    let refinement = match refinement {
-        Some(refinement) => Some(refinement),
-        None if presentation
-            .generator_sort_ranges
-            .iter()
-            .any(|range| range.len > 4) =>
-        {
-            Some(RefinementGenerators::new(presentation)?)
-        }
-        None => None,
-    };
     let block_capacity = presentation.state_count();
     let (mut state_blocks, mut block_sorts, mut members, mut block_ranges) =
         initial_split_workspace(presentation, block_capacity)?;
@@ -2636,7 +2652,7 @@ fn minimize_partition_multiway_prepared(
         return Ok((state_blocks, ranges, Box::default(), None));
     }
 
-    let inverse = CombinedInverse::new(presentation, refinement.as_ref())?;
+    let inverse = CombinedInverse::new(presentation, refinement)?;
     let mut positions = vec![0_u32; block_capacity];
     for (position, &state) in members.iter().enumerate() {
         positions[state as usize] = position as u32;
@@ -4230,6 +4246,10 @@ mod tests {
         assert_eq!(
             compiled.certificate_policy(),
             CertificatePolicy::SplitTranscript
+        );
+        assert_eq!(
+            compiled.generator_transitions.len(),
+            bases.len() * STATES as usize
         );
         verify_compilation(&presentation, &compiled).unwrap();
     }
