@@ -1118,6 +1118,21 @@ that the model is heuristic.  This makes exact Ergodis compilation the
 benchmark generator and safety envelope rather than a disposable prelude to
 neural approximation.
 
+A safer operational hybrid is proposal plus certification.  The learned
+recurrence proposes a response state, branch ordering, or concrete solution;
+the domain verifier checks feasibility and realized cost.  That gives only an
+upper bound for minimization.  Exact optimality additionally needs a matching
+lower bound from the compiled quotient, a relaxed decision diagram, a dual or
+cut certificate, or an exact fallback.  Accept automatically only when the two
+bounds meet; otherwise continue exact search or report a heuristic result.
+
+This protocol is architecture-independent and remains valuable if Mamba loses
+the predictive comparison.  Certified failures become distinguishing
+contexts/counterexamples for active retraining, while the proposal can still
+improve branch order or warm starts without entering the trusted state.  The
+benchmark must separate proposal speedup, verifier cost, fallback frequency,
+and certified-optimal versus merely feasible rates.
+
 ## Coverage gaps and next search
 
 No absence claim is licensed.  The next pass must cover primary work on
