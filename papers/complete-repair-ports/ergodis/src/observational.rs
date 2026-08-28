@@ -1956,17 +1956,30 @@ fn emit_compilation(
     let mut generator_transitions = Vec::with_capacity(transition_capacity);
     for generator in presentation.generators.iter().copied() {
         let source_states = presentation.sorts[generator.source_sort as usize];
+        let target_states = presentation.sorts[generator.target_sort as usize];
         let source_classes = class_ranges[generator.source_sort as usize];
+        let target_classes = class_ranges[generator.target_sort as usize];
         let transition_start_in_presentation = generator.transition_start as usize;
         let transitions = &presentation.transitions[transition_start_in_presentation
             ..transition_start_in_presentation + generator.transition_len as usize];
         let transition_start =
             u32::try_from(generator_transitions.len()).map_err(|_| ObservationalError::Overflow)?;
-        for class in source_classes.start..source_classes.end() {
-            let representative = representatives[class as usize];
-            let local = (representative - source_states.start) as usize;
-            let target = transitions[local];
-            generator_transitions.push(classes[target as usize]);
+        if source_classes.len == source_states.len && target_classes.len == target_states.len {
+            if target_classes.start == target_states.start {
+                generator_transitions.extend_from_slice(transitions);
+            } else {
+                for &target in transitions {
+                    generator_transitions
+                        .push(target_classes.start + (target - target_states.start));
+                }
+            }
+        } else {
+            for class in source_classes.start..source_classes.end() {
+                let representative = representatives[class as usize];
+                let local = (representative - source_states.start) as usize;
+                let target = transitions[local];
+                generator_transitions.push(classes[target as usize]);
+            }
         }
         generator_records.push(GeneratorRecord {
             source_sort: generator.source_sort,
