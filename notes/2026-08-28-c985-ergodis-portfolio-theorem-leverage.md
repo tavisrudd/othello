@@ -241,6 +241,9 @@ certificate so large resource spaces do not accidentally enter the generic
 cubic law audit.  Boolean dimensions use their exact bitset realization:
 composition is word OR and dominance is the subset test `a & !b == 0`, avoiding
 the mixed-radix division loop.
+Consuming handoff splits state observation IDs from the distinct-front
+dictionary, so a witnessed presentation moves the IDs into its contextual
+carrier instead of retaining a second four-byte-per-state copy.
 
 ### 7. Abstract finite-interface adapter
 

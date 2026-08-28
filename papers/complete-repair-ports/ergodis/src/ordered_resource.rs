@@ -252,6 +252,12 @@ pub struct ParetoObservationTable {
     fronts: Box<[ParetoFront]>,
 }
 
+/// Distinct Pareto payloads after moving state observation IDs elsewhere.
+#[derive(Clone, Debug)]
+pub struct ParetoResponseDictionary {
+    fronts: Box<[ParetoFront]>,
+}
+
 /// Reusable, allocation-free scratch space for Pareto choice and composition.
 ///
 /// Size once from the maximum input-front sum or product on the hot path.
@@ -502,6 +508,25 @@ impl ParetoObservationTable {
         &self.observations
     }
 
+    pub fn fronts(&self) -> &[ParetoFront] {
+        &self.fronts
+    }
+
+    pub fn front(&self, observation: u32) -> Option<&ParetoFront> {
+        self.fronts.get(observation as usize)
+    }
+
+    pub fn into_parts(self) -> (Box<[u32]>, ParetoResponseDictionary) {
+        (
+            self.observations,
+            ParetoResponseDictionary {
+                fronts: self.fronts,
+            },
+        )
+    }
+}
+
+impl ParetoResponseDictionary {
     pub fn fronts(&self) -> &[ParetoFront] {
         &self.fronts
     }

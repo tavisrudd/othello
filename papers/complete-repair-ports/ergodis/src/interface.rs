@@ -11,7 +11,7 @@ use crate::observational::{
 };
 use crate::ordered_resource::{
     FiniteOrderedMonoid, OrderedResourceError, ParetoFront, ParetoObservationTable,
-    WitnessedParetoFront,
+    ParetoResponseDictionary, WitnessedParetoFront,
 };
 use thiserror::Error;
 
@@ -62,7 +62,7 @@ pub enum ParetoInterfaceError {
 #[derive(Clone, Debug)]
 pub struct WitnessedParetoPresentation {
     presentation: FinitePresentation,
-    responses: ParetoObservationTable,
+    responses: ParetoResponseDictionary,
     state_fronts: Box<[WitnessedParetoFront]>,
 }
 
@@ -71,7 +71,7 @@ impl WitnessedParetoPresentation {
         &self.presentation
     }
 
-    pub fn responses(&self) -> &ParetoObservationTable {
+    pub fn responses(&self) -> &ParetoResponseDictionary {
         &self.responses
     }
 
@@ -107,8 +107,8 @@ pub fn present_witnessed_pareto_interface<M: FiniteOrderedMonoid>(
         semantic_fronts.push(ParetoFront::new(monoid, front.resources())?);
     }
     let responses = ParetoObservationTable::new(semantic_fronts)?;
-    let presentation =
-        FinitePresentation::new(sort_lengths, responses.observations().to_vec(), contexts)?;
+    let (observations, responses) = responses.into_parts();
+    let presentation = FinitePresentation::new(sort_lengths, observations, contexts)?;
     Ok(WitnessedParetoPresentation {
         presentation,
         responses,
