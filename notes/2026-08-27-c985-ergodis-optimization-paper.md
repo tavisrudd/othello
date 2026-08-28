@@ -758,6 +758,11 @@ papers/complete-repair-ports/ergodis/scripts/check-contextual-binary-evidence.sh
 - binary checker: `2054a4d17a56a7fba5680bf56d1e0e084e217dac72678d4b3dbf2a2e69ae553e`, 757 bytes;
 - binary TSV: `4cc0e9194a7ac9c190b76b64034b5acee6a95e7207d31fd9f747527eb076b94c`, 403 bytes.
 
+Commit `e595a7c0d` packs the dense directory into one `u32` allocation: `N`
+cost words followed by a `ceil(N/32)`-word presence bitmap.  This represents
+missing labels separately from values, retains the complete `u32` cost range,
+and reduces admitted payload from 8 bytes per label to asymptotically 4.125.
+
 The complete theorem-to-compiler work order, classical-corollary framing, and
 negative boundaries are recorded in
 `notes/2026-08-28-c985-ergodis-portfolio-theorem-leverage.md`.

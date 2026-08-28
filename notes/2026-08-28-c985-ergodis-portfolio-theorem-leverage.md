@@ -126,6 +126,11 @@ generic kernel.  Multiplying the four paired stage ratios gives a 4.67x
 cumulative cold-path speedup; a full Criterion baseline/final comparison gives
 22.053 us versus 4.515 us (4.88x).
 
+The final directory layout stores `N` exact `u32` costs followed by a
+`ceil(N/32)`-word presence bitmap in one allocation.  This preserves missing
+labels and all `u32` costs while reducing admitted payload from 8 bytes per
+label to asymptotically 4.125 bytes per label.
+
 The larger remaining win is to store exact-rank envelopes once and aggregate
 them upward along subspace restrictions, rather than reevaluating lower-rank
 maps inside every higher-rank context.  A good implementation should combine:
