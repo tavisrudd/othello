@@ -254,14 +254,22 @@ constructor is additively homogeneous, replacing `x` by `y` shifts every
 result by the same `delta`; consequently a compiled state may consist of a
 normalized response class plus a scalar potential.
 
-For a complete finite separator `B`, let `m(f)` be the minimum finite entry of
-`f|_B`, with a distinguished convention for the all-infinite response, and
-normalize every finite entry by `f(b)-m(f)`.  Two responses are projectively
-equivalent exactly when they have the same infinite support and the same
-normalized separator vector.  Composition computes an unnormalized result,
-extracts its new minimum, and carries the extracted scalar as a potential.
-Thus the absolute bound `|V|^|B|` can be replaced by the number of reachable
-normalized shapes, while exact absolute answers remain recoverable.
+For a **projectively complete** finite separator `B`—meaning agreement up to
+one common shift on `B` implies agreement by that shift on every context—let
+`m(f)` be the minimum finite entry of `f|_B`, with a distinguished convention
+for the all-infinite response, and normalize every finite entry by
+`f(b)-m(f)`.  Two responses are projectively equivalent exactly when they have
+the same infinite support and the same normalized separator vector.
+Composition computes an unnormalized result, extracts its new minimum, and
+carries the extracted scalar as a potential.  Thus the absolute bound
+`|V|^|B|` can be replaced by the number of reachable normalized shapes, while
+exact absolute answers remain recoverable.
+
+An equality-complete separator is not automatically projectively complete:
+the shifted comparison function need not itself be the response of a reachable
+component.  A domain compiler must prove the projective separator property or
+work with the full finite context family; normalization observed on an
+arbitrary test set is not an exact certificate.
 
 Finite integer index for parameterized graph problems is a Boolean-threshold
 corollary.  If
@@ -460,3 +468,5 @@ first stretch application after these two controls.
 7. For compile-once/multi-query claims, compare against the unquotiented
    provenance or knowledge-compiled DAG and report whether quotienting reduces
    an external interface, merely evaluation memoization, or neither.
+8. Do not infer projective completeness from an equality separator; certify
+   that one common shift on the tests forces that shift on all contexts.
