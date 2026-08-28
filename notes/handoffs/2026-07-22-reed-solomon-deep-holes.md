@@ -108,7 +108,10 @@ publication metadata. Publication, pushing, DOI minting, and theorem-domain
 broadening remain out of scope. Card:
 `notes/reed-solomon-tasks/c970-high-weight-grs-cosets-software-packaging.md`.
 
-C973 is active.  Its arbitrary-`r` simultaneous-marker theorem, deterministic
+C973 is complete (2026-08-28); its paper integration is C988
+(`notes/reed-solomon-tasks/c988-paper-integration.md`).  The closeout and
+mystery ledger are `c973-2026-08-28-review-closeout.md`.  The paragraph below
+is the closed record.  Its arbitrary-`r` simultaneous-marker theorem, deterministic
 selector, cofinite GRS transfer, exact one-column MDS/NMDS interpretation,
 family-aggregate enumerator, and digit-stripping carrier module theorem are
 proved.  The first exact small-field pointed quotient now closes every R11
@@ -1490,7 +1493,7 @@ gates remain binding.
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
 | 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, exhaustive persistent-sigma `O(mq^2)`, and exhaustive binary-form lex canonicalizers green, including both degenerate-successor stabilizers, a worst-case `O(m r q^2)` transport bound, and `O(r^2+r log q)` field operations per transport; structural canonicalization supports every `r>=5`, with exhaustive q5/GF8/GF9 R5 projective checks, q13/R11--R13 and GF16/R11 full-orbit regressions, GF16/R16 full-length, and GF32/R17 characteristic-power boundaries, while coding verdicts remain R5--R10 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
-| 3 | C973 | active; arbitrary-`r` escape, digit stripping, GF(64), the exact GF(16)/GF(32) pointed R11 quotients, and the carrier--nucleus/Frobenius-quadric reduction are proved; GF(27) is closed by the authorized 402M-class two-point-switch certificate, while the certificate-free switch lemma and external review remain; manuscript frozen | finish external review of the load-bearing geometry, selection, and coding promotion; the structural GF(27) switch lemma is optional; a successful close receives a separately allocated paper-integration successor |
+| 3 | C988 | queued; C973 is closed with the strengthened all-characteristic containment (15'), three applied cold reads, rebuilt GF(16)/GF(32) certificates, and the pointed GF(27) certificate | replace Theorem 1.1's `p>r-1` clause by (15') after the persistent-locus check, demote the modular machinery, register the below-threshold evidence, and run the manuscript gates |
 
 ## Unallocated level-ups
 
@@ -1550,12 +1553,9 @@ history.
 
 ## Next command
 
-`go C973`
+`go C988`
 
-(GF(16), GF(32), GF(64), and GF(27) are all closed for R11.  Run the
-independent specialist review of the load-bearing geometry, finite-field
-selection, and coding promotion required by the card's acceptance rule 8,
-then the `ej`+`tt` closeout and mystery ledger, and hand the paper-successor
-map to a newly reserved integration task.  The certificate-free GF(27)
-switch lemma is optional follow-on work, not a blocker.  Keep positive
-software verdicts frozen until that review lands.)
+(Start with the blocking persistent-locus check on the card, then edit
+Theorem 1.1 and its proof; read `papers/style-guide.md` completely before
+any prose edit.  C973's positive software verdicts stay frozen until the
+manuscript gates pass.)
