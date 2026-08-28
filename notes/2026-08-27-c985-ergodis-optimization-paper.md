@@ -575,3 +575,26 @@ and 6.0% cycles, with no stable composed-family gain.  No part of that
 experiment remains.  The architectural successor is an explicit compressed
 artifact policy whose consumers understand provenance; adding metadata to the
 ordinary full-table compile path is the wrong scaling boundary.
+
+Commit `83aa94863` obtains the first such compression without a new schema or
+runtime provenance.  Generator records already address immutable quotient
+transition slices, so exact duplicate concrete generators now share the prior
+generator's slice.  The full verifier still checks every original generator
+against the addressed quotient table.  On the same 32-generator control this
+stores five tables instead of 32, an 84.4% reduction in transition payload.
+Seven paired CPU-2 rounds against `0c34db882` give a neutral-to-positive time
+ratio (61.490 ms versus 60.910 ms, 1.010x) and reduce median peak RSS from
+49,636 KiB to 34,884 KiB, or 29.72%.  The evidence uses the existing A/B
+script; its historical `basis_replay` candidate label denotes the shared-slice
+binary in this second TSV.
+
+```sh
+ERGODIS_ROUNDS=7 \
+  papers/complete-repair-ports/ergodis/scripts/observational-basis-replay-ab.sh \
+  "$REPLAY_REUSE_DRIVER" "$SHARED_SLICE_DRIVER" \
+  > papers/complete-repair-ports/ergodis/evidence/c985-shared-slices-final.tsv
+papers/complete-repair-ports/ergodis/scripts/check-observational-shared-slices-evidence.sh
+```
+
+- shared-slice checker: `0a1629c5f9db589aa318afd7f79c158779faa6c038bbce016327f01554777658`, 1,078 bytes;
+- shared-slice TSV: `3954f12cf8f6b4de3f4fb6f5efe48d3132aa770f4f06f5bc3ebf805483703039`, 440 bytes.
