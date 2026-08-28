@@ -164,6 +164,40 @@ operations into the presentation, but they remain optimized domain data
 structures.  The generic compiler should not replace their matrix arenas or
 witness representation.
 
+### External backend bridge
+
+Do not reimplement a mature decision-diagram, tensor-contraction, automata, or
+game engine merely to make it look native.  A cold bridge can import or export:
+
+```text
+typed boundary/index schema
+flat node/state/tensor IDs
+terminal observations and infinity/overflow conventions
+transition, arc, or factor tables
+backend-native certificate or replay handle
+witness/provenance locator
+backend version and semantic-law ID
+```
+
+The bridge wraps this payload in the common envelope and supplies a dedicated
+verifier adapter.  On small instances, independently enumerate the original
+presentation and compare every declared observation; on larger instances,
+retain the backend's native proof/bound object and make its trust status
+visible.  Never translate a relaxed decision diagram, floating tensor
+contraction, or sampled equivalence run into an `Exact` payload tag.
+
+Tropical tensor export should keep exact integer/infinity semantics until the
+external contractor explicitly proves its numeric representation safe.  GPU
+floating-point execution is not exact merely because the mathematical semiring
+is tropical.  Configuration recovery by differentiation and Ergodis
+provenance replay are alternative witness backends and must be cross-checked,
+not silently identified.
+
+The core crate should not acquire heavyweight solver/GPU dependencies for this
+bridge.  Use a feature-gated or companion adapter at the cold boundary, with a
+small dependency-free schema/verifier core.  Benchmark data-copy and format-
+conversion cost as part of repeated-query break-even.
+
 ## Exemplar placement
 
 1. The bounded tropical weighted-tree control should live as a small adapter
