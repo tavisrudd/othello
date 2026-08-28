@@ -660,18 +660,104 @@ There are no remaining trace-plane image conditions: only the quadratic
 discriminant and the seven-point collision test.  This is the exact
 certificate-free two-point-switch gate for the whole Borel boundary.
 
+The boundary discriminant has a denominator-free symmetric form.  Put
+`d=x1-x2`, `f=phi_1`, and `g=phi_2`.  From (44)--(45), if
+`Disc(S)` denotes the quadratic discriminant, direct simplification gives
+
+\[
+\begin{aligned}
+(dfg)^2\operatorname {Disc}(S)
+={}&d^4f^2g^2-d^2\mathcal Rfg(f+g)\\
+   &+\mathcal R^2(f-g)^2.                               \tag{47}
+\end{aligned}
+\]
+
+The prefactor on the left is a nonzero square.  Hence splitting is governed
+only by the quadratic character of the polynomial on the right; all quotient
+denominators have disappeared.  Moreover, (41) has degree at most six and is
+not the zero polynomial, so every nine-point affine plane contains at least
+three points with `phi!=0`.  On the Borel boundary any two such distinct
+points make the switch matrix nonsingular.  The remaining proof can therefore
+target (47) directly, followed by collision with the seven retained points.
+
+The same switch identity absorbs the dense stratum as well.  For an arbitrary
+syndrome `z=(z2,...,z8)`, replace (41) by
+
+\[
+\begin{aligned}
+\phi_{\gamma,z}(x)
+={}&z_2(x^6+\gamma^6)+z_3x^5+z_4x^4+z_5x^3\\
+   &+z_6x^2+z_7x+z_8.                                  \tag{48}
+\end{aligned}
+\]
+
+The division recurrence `P_i=(Q_x)_{i-1}-x(Q_x)_i` gives
+
+\[
+ L_2(Q_x)=\phi_{\gamma,z}(x),
+ \qquad
+ L_1(Q_x)-xL_2(Q_x)=z_3\gamma^6.                       \tag{49}
+\]
+
+Meanwhile the affine-plane locator itself has residual
+
+\[
+ (L_1,L_2)(P)=(\mathcal R,\mathcal Z),
+ \quad
+ \mathcal R=z_2\gamma^8+z_4\gamma^6,
+ \quad
+ \mathcal Z=z_3\gamma^6.                               \tag{50}
+\]
+
+For two distinct points `x1,x2` of one affine plane, put
+`phi_i=phi_{gamma,z}(x_i)`.  The two quotient columns are
+
+\[
+ v_i=(x_i\phi_i+\mathcal Z,\phi_i),
+\]
+
+with determinant
+
+\[
+ \mathcal D
+ =\phi_1\phi_2(x_1-x_2)+\mathcal Z(\phi_2-\phi_1).      \tag{51}
+\]
+
+If `(mathcal R,mathcal Z)=(0,0)`, the affine plane already closes the
+syndrome.  Otherwise, whenever `mathcal D!=0`, there is a unique pair
+`c1,c2` satisfying
+
+\[
+ \begin{pmatrix}
+ x_1\phi_1+\mathcal Z&x_2\phi_2+\mathcal Z\\
+ \phi_1&\phi_2
+ \end{pmatrix}
+ \binom{c_1}{c_2}
+ =-\binom{\mathcal R}{\mathcal Z}.                       \tag{52}
+\]
+
+Define `S` from these scalars by the same formula (45).  Then the partial
+fraction calculation gives
+
+\[
+                              (L_1,L_2)(SQ)=(0,0).        \tag{53}
+\]
+
+Consequently both the dense three-line cover tower and its Borel boundary
+have a common structural replacement: choose one affine-plane direction and
+two points for which (51) is nonzero, then prove the explicit quadratic (45)
+splits into two distinct roots away from the retained seven.  The only open
+GF(27) lemma is this universal split-switch assertion.  It contains no
+linearized-cubic image condition and needs no point-count certificate in its
+statement.
+
 ## 8. Boundary and next gate
 
-The load-bearing next step is to choose `p!=r` uniformly from the thirteen
-directions and prove that some `u in W_p` survives (7)--(11) on the dense
-stratum.  Equation (12) transports every syndrome outside (14) into that
-stratum.  The two-coordinate endpoint is closed by (16)--(18), the `z7`
-chart by (19)--(21), and the entire `z5` chart by (24)--(29).  The only
-separate open boundary is now the pair of torus strata (33) inside the
-`z8!=0` chart, with their generic solve reduced to the three-point affine
-intersection (37).  Within those strata, (38)--(40) uniformly remove the
-zero pair and the nonsquare-ratio half of all nonzero `(a,b)`; the complement
-has the two-point-switch reduction (41)--(46).
+The load-bearing next step is now the universal split-switch assertion after
+(53).  It simultaneously covers the dense stratum and every residual Borel
+normal form.  The earlier three-line tower (5)--(11), the three-point `z8`
+intersection (37), and the explicit boundary products remain independent
+audits, but none needs to be the primary closure route.
 
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
@@ -694,3 +780,4 @@ certificate supports this reduction.
 | What remains of the residual `z8` chart? | its three-orbit `z4=z5=0` endpoint is closed; two torus strata remain, and their first image condition generically leaves exactly three `u` values | close the quadratic split and collision tests on (37) |
 | Does one construction cover multiple Borel charts? | yes: the affine-plane locator (38) closes every `(z2,z4)=(0,0)` syndrome and the nonsquare-ratio half of every nonzero pair, independently of the other boundary coordinates | retain only the two coordinate axes and square-ratio half for transverse analysis |
 | What replaces the cover tower on the complementary boundary ratio? | switching two points of an affine plane solves both Hankel equations uniquely | prove the quadratic (45) splits away from the seven retained plane points |
+| Does the two-point switch extend off the Borel boundary? | yes; the quotient recurrence gives the general matrix (51) | prove one universal split-switch lemma for all nonzero syndromes |

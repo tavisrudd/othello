@@ -229,7 +229,12 @@ independently of `z5,z7,z8`.  On the complementary ratio, a one-point switch
 is structurally rank one and cannot help, while a two-point switch gives two
 independent vectors `(x1,1),(x2,1)` and solves both Hankel equations uniquely.
 The entire Borel residue is thereby reduced to one explicit quadratic split
-and a seven-point collision test, with no trace-plane covers left.
+and a seven-point collision test, with no trace-plane covers left.  The
+quotient recurrence extends this verbatim to arbitrary `z3,z6`: two quotient
+vectors form an explicit `2x2` matrix, and its unique solution again produces
+one replacement quadratic.  Thus dense abundance and the Borel boundary now
+share one universal split-switch gate; the cubic-cover tower is retained only
+as an independent audit.
 
 ## Objective
 

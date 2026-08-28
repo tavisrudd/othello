@@ -212,7 +212,10 @@ with `(z2,z4)=(0,0)` and the nonsquare-ratio half of all nonzero pairs,
 independently of the other coordinates.  The complementary ratio now has a
 two-point-switch formula: two independent quotient vectors solve the Hankel
 pair uniquely, leaving only one explicit quadratic discriminant and collision
-against the seven retained plane points.  No finite census is authorized.
+against the seven retained plane points.  The quotient recurrence extends the
+same `2x2` switch matrix to arbitrary syndromes, so the dense and boundary
+problems have merged into one universal split-switch lemma.  No finite census
+is authorized.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md`, and
