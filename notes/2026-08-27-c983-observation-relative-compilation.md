@@ -452,6 +452,31 @@ separator height, and transient witness bytes.  Boolean/unweighted and unary
 weighted machines are regression corollaries; the unary potential mode must
 agree with weight-push-then-minimize where its hypotheses hold.
 
+An exhaustive temporary fixture confirms that refinement does more than group
+equal final values.  Take radius `r=4`, three WTA states, three nullary
+valuation vectors
+
+```text
+(3,infinity,1), (1,3,0), (3,3,4),
+```
+
+final weights `(1,1,3)`, and one binary symbol with transitions listed as
+`(left_state,right_state,weight)` by output state:
+
+```text
+out 0: (0,1,1) (1,0,1) (2,0,2) (2,2,1)
+out 1: (0,1,0) (1,0,2)
+out 2: (0,2,2) (1,1,0) (1,2,0) (2,1,2) (2,2,2)
+```
+
+Reachable closure has 13 vectors and four final-observation fibres.  One
+refinement round yields six contextual classes, of sizes `6,3,1,1,1,1`.
+For a replayable split example, `(1,3,0)` and `(1,4,2)` both have final value
+two, but using `(1,3,0)` as the right coargument gives final values two and
+four.  The fixture is small enough for an independent exhaustive regression
+test and exercises reachability, a genuine context split, a nontrivial merge,
+and a height-one separator.
+
 ### Exact contract for exemplar B: symmetric resource batches
 
 Fix `m` identical machines, integral load cap `r`, a finite job-size alphabet,

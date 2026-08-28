@@ -250,6 +250,13 @@ that gains are query-profile dependent.  This does not yet prove the adapter:
 job placement is nondeterministic, so the compiled state must be a min-plus
 relation or residual response, not a continuation-blind chosen profile.
 
+The weighted-tree control now has a deterministic 13-state fixture as well:
+four raw final-observation fibres refine to six contextual classes, including
+a recorded height-one context that separates equal-final-value vectors, while
+two nontrivial classes remain merged.  It is small enough to serve as the
+independent first regression for reachability, refinement, quotient replay,
+and separator reconstruction.
+
 The repository-specific design map is
 `notes/2026-08-27-c983-rust-extension-surface.md`.  It preserves the current
 compact composition, contextual-cache, scheduler, and witness hot paths and
