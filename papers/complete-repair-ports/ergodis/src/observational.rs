@@ -22,7 +22,12 @@ use thiserror::Error;
 
 type Partition = (Box<[u32]>, Box<[SortRange]>);
 type MinimizedPartition = (Box<[u32]>, Box<[SortRange]>, usize);
-type WorklistPartition = (Box<[u32]>, Box<[SortRange]>, Box<[SplitRecord]>);
+type WorklistPartition = (
+    Box<[u32]>,
+    Box<[SortRange]>,
+    Box<[SplitRecord]>,
+    Option<InverseIndex>,
+);
 type SeparatorPool = (Box<[SeparatorRecord]>, Box<[u32]>);
 type GeneratorSortIndex = (Box<[SortRange]>, Box<[u32]>);
 type SplitWorkspace = (Box<[u32]>, Vec<u32>, Vec<u32>, Vec<SortRange>);
@@ -1024,6 +1029,7 @@ impl InverseIndex {
         })
     }
 
+    #[inline(always)]
     fn predecessors(
         &self,
         presentation: &FinitePresentation,
@@ -1357,17 +1363,25 @@ pub fn compile_observational_with_policy(
         compiled.metrics.refinement_splits = 0;
         return Ok(compiled);
     }
-    let (classes, class_ranges, refinement_rounds, split_records) = match certificate_policy {
-        CertificatePolicy::SplitTranscript => {
-            let (classes, class_ranges, split_records) = minimize_partition_worklist(presentation)?;
-            (classes, class_ranges, 0, split_records)
-        }
-        CertificatePolicy::ExhaustivePairAudit => {
-            let (classes, class_ranges, refinement_rounds) = minimize_partition(presentation)?;
-            (classes, class_ranges, refinement_rounds, Box::default())
-        }
-        CertificatePolicy::QuotientOnly => unreachable!("handled above"),
-    };
+    let (classes, class_ranges, refinement_rounds, split_records, verification_inverse) =
+        match certificate_policy {
+            CertificatePolicy::SplitTranscript => {
+                let (classes, class_ranges, split_records, inverse) =
+                    minimize_partition_worklist(presentation)?;
+                (classes, class_ranges, 0, split_records, inverse)
+            }
+            CertificatePolicy::ExhaustivePairAudit => {
+                let (classes, class_ranges, refinement_rounds) = minimize_partition(presentation)?;
+                (
+                    classes,
+                    class_ranges,
+                    refinement_rounds,
+                    Box::default(),
+                    None,
+                )
+            }
+            CertificatePolicy::QuotientOnly => unreachable!("handled above"),
+        };
 
     emit_compilation(
         presentation,
@@ -1376,6 +1390,7 @@ pub fn compile_observational_with_policy(
         refinement_rounds,
         certificate_policy,
         split_records,
+        verification_inverse.as_ref(),
     )
 }
 
@@ -1402,6 +1417,7 @@ fn emit_compilation(
     refinement_rounds: usize,
     certificate_policy: CertificatePolicy,
     split_records: Box<[SplitRecord]>,
+    verification_inverse: Option<&InverseIndex>,
 ) -> Result<CompiledObservation, ObservationalError> {
     let class_count = class_ranges.last().map_or(0, |range| range.end() as usize);
     let mut class_outputs = vec![u32::MAX; class_count];
@@ -1474,7 +1490,7 @@ fn emit_compilation(
         certificate_policy,
         metrics,
     };
-    verify_compilation(presentation, &compiled)?;
+    verify_compilation_with_inverse(presentation, &compiled, verification_inverse)?;
     Ok(compiled)
 }
 
@@ -1661,13 +1677,13 @@ fn minimize_partition_worklist(
         .all(|record| initial_blocks_per_sort[record.target_sort as usize] <= 1)
     {
         let class_ranges = initial_class_ranges(presentation.sorts.len(), &block_sorts)?;
-        return Ok((state_blocks, class_ranges, Box::default()));
+        return Ok((state_blocks, class_ranges, Box::default(), None));
     }
     if initial_block_count > 2
         && partition_is_stable(presentation, &state_blocks, initial_block_count)
     {
         let class_ranges = initial_class_ranges(presentation.sorts.len(), &block_sorts)?;
-        return Ok((state_blocks, class_ranges, Box::default()));
+        return Ok((state_blocks, class_ranges, Box::default(), None));
     }
     match pending_mode(presentation)? {
         PendingMode::Dense => {
@@ -1742,7 +1758,7 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
     }
     if queue.is_empty() {
         let class_ranges = initial_class_ranges(presentation.sorts.len(), &block_sorts)?;
-        return Ok((state_blocks, class_ranges, Box::default()));
+        return Ok((state_blocks, class_ranges, Box::default(), None));
     }
     let inverse = InverseIndex::new(presentation)?;
     let target_generators = TargetGeneratorDirectory::new(presentation, &inverse)?;
@@ -1831,7 +1847,12 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
     }
     let (classes, class_ranges) =
         canonicalize_partition(presentation, state_blocks, block_sorts.len())?;
-    Ok((classes, class_ranges, records.into_boxed_slice()))
+    Ok((
+        classes,
+        class_ranges,
+        records.into_boxed_slice(),
+        Some(inverse),
+    ))
 }
 
 fn partition_is_stable(
@@ -2136,6 +2157,17 @@ fn verify_split_transcript(
     }
     let inverse = InverseIndex::new(presentation)?;
     inverse.verify(presentation)?;
+    verify_split_transcript_with_inverse(presentation, compiled, &inverse)
+}
+
+fn verify_split_transcript_with_inverse(
+    presentation: &FinitePresentation,
+    compiled: &CompiledObservation,
+    inverse: &InverseIndex,
+) -> Result<(), ObservationalError> {
+    if compiled.split_records.is_empty() {
+        return verify_split_transcript(presentation, compiled);
+    }
     let (mut state_blocks, mut block_sorts, mut members, mut block_ranges) =
         initial_split_workspace(presentation, compiled.class_outputs.len())?;
     let mut member_positions = vec![0_u32; presentation.state_count()];
@@ -2581,6 +2613,14 @@ pub fn verify_compilation(
     presentation: &FinitePresentation,
     compiled: &CompiledObservation,
 ) -> Result<(), ObservationalError> {
+    verify_compilation_with_inverse(presentation, compiled, None)
+}
+
+fn verify_compilation_with_inverse(
+    presentation: &FinitePresentation,
+    compiled: &CompiledObservation,
+    verification_inverse: Option<&InverseIndex>,
+) -> Result<(), ObservationalError> {
     if compiled.class_ranges.len() != presentation.sorts.len()
         || compiled.state_classes.len() != presentation.state_count()
         || compiled.generator_records.len() != presentation.generators.len()
@@ -2705,7 +2745,12 @@ pub fn verify_compilation(
             if !compiled.separators.is_empty() || !compiled.separator_paths.is_empty() {
                 return Err(ObservationalError::CompiledShape);
             }
-            return verify_split_transcript(presentation, compiled);
+            return if let Some(inverse) = verification_inverse {
+                inverse.verify(presentation)?;
+                verify_split_transcript_with_inverse(presentation, compiled, inverse)
+            } else {
+                verify_split_transcript(presentation, compiled)
+            };
         }
         CertificatePolicy::ExhaustivePairAudit => {
             if !compiled.split_records.is_empty() {
