@@ -9,8 +9,9 @@ of all nonzero GRS column multipliers.
 \begin{table}[H]
 \centering
 \small
-\caption{The high-weight cosets when \(p>r-1\) and the field-size hypothesis
-of Theorem~\ref{thm:main} holds.  Counts are projective syndrome directions;
+\caption{The high-weight cosets in the classification range of
+Theorem~\ref{thm:main}: \(q\geq Q^*_{r,s}\), and \(p\) odd or \(p=2\)
+with \(r\geq8\).  Counts are projective syndrome directions;
 literal nonzero coset counts are larger by a factor of \(q-1\).}
 \label{tab:headline-shells}
 \setlength{\tabcolsep}{5pt}
@@ -42,17 +43,15 @@ r-1&r&\text{NMDS}\\
 Theorem~\ref{thm:family-aggregate-nmds} then counts the minimum supports in
 each NMDS family and determines its complete aggregate weight enumerator.
 
-In arbitrary characteristic the exact Lucas-carrier arithmetic can be more
-complicated, but the general conclusion remains short:
+In the two remaining binary cases the general conclusion is
 \[
  d_S(f)\geq r-1
  \quad\Longrightarrow\quad
- f\in\cP_r\cup\cM^{\max}_{r,p}.
+ f\in\cP_r\cup\cM^{\max}_{r,2},\qquad r\in\{6,7\},
 \]
-The carrier is explicit from adjacent zero entries in Pascal row \(r-2\).
-The fixed R5--R7 classifications decide its arithmetic in the ranges stated
-in Section~\ref{sec:fixed-level-roadmap}; they sharpen the uniform theorem in
-small fields but are not inputs to it.
+and, for full support, Theorems~\ref{thm:r6} and~\ref{thm:r7} decide the
+arithmetic of that carrier over every prime power \(q\geq7\).  The fixed R5--R7 classifications
+sharpen the uniform theorem in small fields but are not inputs to it.
 
 \subsection{Why the classification closes}
 
@@ -72,8 +71,7 @@ pencil count supplies a split squarefree cubic avoiding those factors and \(A\).
 \begin{array}{c}
 f\notin
 \underbrace{\cP_r}_{\text{persistent rank-two locus}}
-\cup
-\underbrace{\cM^{\max}_{r,p}}_{\text{small-characteristic Lucas locus}}\\[1mm]
+\ \bigl(\cup\ \cM^{\max}_{r,2}\text{ at }(r,p)\in\{(6,2),(7,2)\}\bigr)\\[1mm]
 \Downarrow\quad\text{simultaneous selection and contraction}\\[1mm]
 \substack{\text{one split squarefree cubic in the terminal Hankel pencil,}\\
           \text{avoiding the markers and }A}\\[1mm]

@@ -224,8 +224,8 @@ def check_formal_scope() -> None:
             "Lean statement map differs from the manuscript labels: "
             f"missing [{missing}]; obsolete [{obsolete}]"
         )
-    if len(labels) != 50:
-        raise SystemExit(f"expected 50 adopted manuscript labels, found {len(labels)}")
+    if len(labels) != 52:
+        raise SystemExit(f"expected 52 adopted manuscript labels, found {len(labels)}")
 
     formal_sources = (AGGREGATE.is_file(), AXIOM_AUDIT.is_file())
     if formal_sources == (False, False):
@@ -416,6 +416,22 @@ def replay() -> None:
         (
             "lucas-m9",
             ["2026-08-02-higher-lucas-modular-carriers-replay.py"],
+        ),
+        (
+            "r11-binary-quotients",
+            ["2026-08-28-r11-gf16-pointed-quotient-replay.py"],
+        ),
+        (
+            "r11-binary-quotients",
+            ["2026-08-28-r11-gf32-pointed-quotient-replay.py"],
+        ),
+        (
+            "r11-gf27-switch-sweep",
+            ["2026-08-28-r11-gf27-witness-replay.py"],
+        ),
+        (
+            "r11-char7-pointed-orbits",
+            ["2026-08-28-r11-char7-pointed-orbits-replay.py"],
         ),
     )
     for directory, arguments in python_jobs:

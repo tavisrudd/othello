@@ -81,6 +81,12 @@
       "source": "sections/05-polar-tit-interface.tex",
       "status": "Manuscript marker-collision proof."
     },
+    "lem:polar-rank-two": {
+      "coverage": "absent",
+      "lean": [],
+      "source": "sections/07-recursive-carriers.tex",
+      "status": "Manuscript multilinear expansion of the polar catalecticant minors over the integers, uniform in the degree; the degree-five instance is also checked by the coherent-Fano part of Certificate SC."
+    },
     "lem:r5-branch": {
       "coverage": "fragment",
       "lean": [
@@ -289,6 +295,20 @@
       "source": "sections/07-recursive-carriers.tex",
       "status": "Manuscript prime-decomposition proof plus the stable-component elimination certificates. Lean does not prove the concrete primary ideals or exceptional-fibre equations."
     },
+    "prop:trapped-row-space": {
+      "coverage": "absent",
+      "evidence": [
+        "certificate-stable-components"
+      ],
+      "lean": [],
+      "source": "sections/07-recursive-carriers.tex",
+      "status": "Manuscript branchwise reading of the recursive component table: the persistent branch by the polar rank lemma, the residual branches by the certified terminal decomposition and consecutive-row substitutions. No Lean declaration carries the exceptional-locus statement.",
+      "uses": [
+        "prop:reduced-terminal-carrier",
+        "prop:recursive-component-selection",
+        "lem:polar-rank-two"
+      ]
+    },
     "prop:upper-radius": {
       "coverage": "fragment",
       "imports": [
@@ -336,7 +356,7 @@
       "status": "Manuscript synthesis of the pointed simultaneous-marker theorem, reduced carrier, rank-two arithmetic, and imported radius/extension gate. Lean does not formalize the point-deleted-support shell classification or its counts.",
       "uses": [
         "thm:simultaneous-marker-escape",
-        "prop:recursive-component-selection"
+        "prop:trapped-row-space"
       ]
     },
     "thm:polar-construction": {
@@ -426,7 +446,8 @@
       "source": "sections/07-recursive-carriers.tex",
       "status": "Manuscript consequence of the reduced recursive carrier and simultaneous-marker theorem. The prior stagewise conditional Lean synthesis is strictly weaker and is not cited as coverage.",
       "uses": [
-        "thm:simultaneous-marker-escape"
+        "thm:simultaneous-marker-escape",
+        "prop:trapped-row-space"
       ]
     },
     "thm:simultaneous-marker-escape": {
@@ -435,7 +456,7 @@
       "source": "sections/05-simultaneous-contraction.tex",
       "status": "Manuscript proof from the concrete reduced-carrier converse, the degree-six selector, the Vandermonde grid lemma, and the exact R5 count. No computation or Lean theorem supplies the arbitrary-redundancy escape.",
       "uses": [
-        "prop:recursive-component-selection",
+        "prop:trapped-row-space",
         "prop:reduced-terminal-carrier",
         "prop:r5-count",
         "lem:r5-branch"

@@ -1,6 +1,7 @@
 # C988 — paper integration of the strengthened all-characteristic containment
 
-**Lane:** `reed-solomon` · **Status:** queued
+**Lane:** `reed-solomon` · **Status:** complete 2026-08-28; report
+`c988-2026-08-28-paper-integration-report.md`
 
 ## Objective
 

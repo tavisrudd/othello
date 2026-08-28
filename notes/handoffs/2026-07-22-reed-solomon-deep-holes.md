@@ -108,8 +108,15 @@ publication metadata. Publication, pushing, DOI minting, and theorem-domain
 broadening remain out of scope. Card:
 `notes/reed-solomon-tasks/c970-high-weight-grs-cosets-software-packaging.md`.
 
-C973 is complete (2026-08-28); its paper integration is C988
-(`notes/reed-solomon-tasks/c988-paper-integration.md`).  The closeout and
+C973 is complete (2026-08-28), and C988 has integrated it into the paper:
+Theorem 1.1 now classifies the two highest coset-weight shells for `p` odd
+or `p=2, r>=8`, with the binary `r in {6,7}` carriers left to the fixed-level
+theorems; the mechanism is the printed polar rank lemma and trapped-row-space
+proposition.  The R11 finite closures over GF(16), GF(27), GF(32), GF(49) are
+registered as supplement-only companion bundles.  Report:
+`notes/reed-solomon-tasks/c988-2026-08-28-paper-integration-report.md`.
+Standalone export and math-papers synchronization of this revision are not
+yet done.  The C973 closeout and
 mystery ledger are `c973-2026-08-28-review-closeout.md`.  The paragraph below
 is the closed record.  Its arbitrary-`r` simultaneous-marker theorem, deterministic
 selector, cofinite GRS transfer, exact one-column MDS/NMDS interpretation,
@@ -1493,7 +1500,6 @@ gates remain binding.
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
 | 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, exhaustive persistent-sigma `O(mq^2)`, and exhaustive binary-form lex canonicalizers green, including both degenerate-successor stabilizers, a worst-case `O(m r q^2)` transport bound, and `O(r^2+r log q)` field operations per transport; structural canonicalization supports every `r>=5`, with exhaustive q5/GF8/GF9 R5 projective checks, q13/R11--R13 and GF16/R11 full-orbit regressions, GF16/R16 full-length, and GF32/R17 characteristic-power boundaries, while coding verdicts remain R5--R10 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
-| 3 | C988 | queued; C973 is closed with the strengthened all-characteristic containment (15'), three applied cold reads, rebuilt GF(16)/GF(32) certificates, and the pointed GF(27) certificate | replace Theorem 1.1's `p>r-1` clause by (15') after the persistent-locus check, demote the modular machinery, register the below-threshold evidence, and run the manuscript gates |
 
 ## Unallocated level-ups
 
@@ -1553,9 +1559,9 @@ history.
 
 ## Next command
 
-`go C988`
+`go reed-solomon`
 
-(Start with the blocking persistent-locus check on the card, then edit
-Theorem 1.1 and its proof; read `papers/style-guide.md` completely before
-any prose edit.  C973's positive software verdicts stay frozen until the
-manuscript gates pass.)
+(C988 is closed.  The next lane step needs a newly reserved ID: standalone
+export and math-papers synchronization of the C988 revision under
+`notes/export-and-mirror-conventions.md`, then the C915 referee package.
+C973's positive software verdicts remain frozen until that export passes.)

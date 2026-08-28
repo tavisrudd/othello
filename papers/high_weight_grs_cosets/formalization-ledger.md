@@ -47,7 +47,8 @@ containing sorry.
 | simultaneous escape | no direct theorem | composite contraction, degree-six selector, simultaneous marker choice, and terminal point count are printed proofs |
 | finite-depth escape | contraction/lifting algebra and conditional interface checked | retained only for supplementary fixed-level refinements |
 | reduced recursive carrier | density, closure, component selection, and recursive implication checked | exact fibrewise primes, Pascal nesting, rowspace identification, and consecutive-row exclusions are printed/certified geometry |
-| high-weight-coset theorem | no direct theorem | carrier geometry, pointed escape, rank-two shell proof, and cited coding theorem remain explicit |
+| trapped row spaces | no direct theorem | the level-uniform polar rank identity and the branchwise residual reading are printed proofs; the degree-five Fano instance and terminal decomposition are certified |
+| high-weight-coset theorem | no direct theorem | carrier geometry, pointed escape, rank-two shell proof, and cited coding theorem remain explicit; the classification clause carries no characteristic hypothesis beyond the binary r in {6,7} cases |
 | MDS/NMDS extensions and aggregate enumerators | no direct theorem | circuit and dual-distance arguments, family incidence double count, and cited NMDS recurrence are printed/imported |
 | R5--R7 | conditional terminals in the paper-facing aggregate | concrete proofs and certificates retain their separate trust routes |
 | R8 | existing companion conditional terminal | omitted from the submission; companion source and Certificate R8 remain in the evidence record |
@@ -55,7 +56,7 @@ containing sorry.
 | first higher Lucas carrier | no carrier-exhaustion Lean theorem | omitted from the submission; final-pair source and finite carrier certificates remain companion material |
 | R10 | conditional composition uses shared recursive/radius interfaces | omitted from the submission; retained only in the companion source/evidence record |
 
-The row-by-row reconciliation for all 55 numbered manuscript labels is
+The row-by-row reconciliation for every numbered manuscript label is
 supplement/LEAN-STATEMENTS.md. That map distinguishes kernel algebra,
 conditional terminals, manuscript proofs, cited results, and external
 certificates for every label.

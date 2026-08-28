@@ -65,12 +65,20 @@ LINKS: dict[str, dict[str, list[str]]] = {
     },
     "thm:recursive-carrier": {
         "evidence": ["certificate-stable-components"],
-        "uses": ["thm:simultaneous-marker-escape"],
+        "uses": ["thm:simultaneous-marker-escape", "prop:trapped-row-space"],
         "proves": ["recursive-carrier-classification"],
+    },
+    "prop:trapped-row-space": {
+        "evidence": ["certificate-stable-components"],
+        "uses": [
+            "prop:reduced-terminal-carrier",
+            "prop:recursive-component-selection",
+            "lem:polar-rank-two",
+        ],
     },
     "thm:simultaneous-marker-escape": {
         "uses": [
-            "prop:recursive-component-selection",
+            "prop:trapped-row-space",
             "prop:reduced-terminal-carrier",
             "prop:r5-count",
             "lem:r5-branch",
@@ -82,7 +90,7 @@ LINKS: dict[str, dict[str, list[str]]] = {
         "proves": ["degree-nine-lucas-shallowness"],
     },
     "thm:main": {
-        "uses": ["thm:simultaneous-marker-escape", "prop:recursive-component-selection"],
+        "uses": ["thm:simultaneous-marker-escape", "prop:trapped-row-space"],
         "imports": ["duer", "seroussi-roth", "zwk-full-support-rank-two"],
         "proves": ["main-fixed-level-classification-package"],
     },

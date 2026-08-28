@@ -32,8 +32,10 @@ manifest:
 - `export-flake.lock` and `export-flake.nix`;
 - `Cargo.lock`.
 
-The Python replays use only the standard library.  The two Rust generators
-require a Rust compiler compatible with the copied lock.  External repository,
+The Python replays use only the standard library.  The Rust generators
+require a Rust compiler compatible with the copied lock; the GF(27) sweep
+generator carries its own `Cargo.toml` and `Cargo.lock` and has no
+dependencies.  External repository,
 tag, archive, and DOI fields belong to the immutable publication step and are
 listed separately in `RELEASE-MANIFEST.md`.
 
@@ -101,6 +103,9 @@ described as an independent derivation.
 | Certificate R9 | residual-quadratic and characteristic-seven bridge data | generator, independent residual replay, and exact q=49 Rust record |
 | Certificate R10 | threshold and persistent orbit arithmetic | generator plus independent cyclic-orbit replay |
 | Certificate Lucas M9 | full carrier at q=16,32; invariant-block rank-two twists at q=64 | exact quotient certificates plus independent action/Hankel replay; the q=64 complement and all larger fields are mathematical |
+| Certificate R11 binary quotients | complete degree-ten divided-power upper-Borel quotients of the carrier at q=16,32 | two toolkit-free replays that rebuild the field, the action, every orbit, and every Hankel equation, each behind a fail-closed 1,000-pair equivariance gate |
+| Certificate R11 GF(27) sweep | all 402,321,277 projective classes of PG(6,27); zero fallback invocations, zero unsaturated classes | frozen sweep outputs plus an independent Python replay of the seeded 200-class witness sample; the 26-minute Rust sweep is a separate rederive |
+| Certificate R11 characteristic seven | seven pointed orbit representatives over q=49 | generator plus an independently written replay that shares no code with the toolkit or the generator |
 
 ## Exact replay commands
 
@@ -133,8 +138,46 @@ separate checks in the same evidence bundle.
 (cd supplement/evidence/stable-components && python3 2026-07-24-r10-integral-bad-scheme-sc11.py --check)
 (cd supplement/evidence/stable-components && python3 2026-07-24-stable-component-fano-elimination.py --check)
 (cd supplement/evidence/stable-components && Singular -q 2026-07-24-r10-integral-bad-scheme-sc11.sing)
-(cd supplement/evidence/stable-components && Singular -q 2026-07-24-stable-component-fano-elimination.sing)
+(cd supplement/evidence/r11-binary-quotients && python3 2026-08-28-r11-gf16-pointed-quotient-replay.py)
+(cd supplement/evidence/r11-binary-quotients && python3 2026-08-28-r11-gf32-pointed-quotient-replay.py)
+(cd supplement/evidence/r11-gf27-switch-sweep && python3 2026-08-28-r11-gf27-witness-replay.py)
+(cd supplement/evidence/r11-char7-pointed-orbits && python3 2026-08-28-r11-char7-pointed-orbits-replay.py)
 ```
+
+## Redundancy-eleven companion bundles
+
+The three redundancy-eleven bundles are companion records; the manuscript
+claims nothing at redundancy eleven and no adopted statement depends on them.
+Their four Python replays are in the list above and in `verify.py --replay`.
+They need no compiler, no toolkit, and no network.
+
+Their generators are separate.  Each rederives its certificate but needs the
+compiled Projective Reed--Solomon Toolkit or a Rust compiler, so none of them
+belongs to the quick Python replay:
+
+```text
+(cd supplement/evidence/r11-binary-quotients && python3 2026-08-28-r11-gf16-pointed-quotient.py --check --binary ../../../software/projective-reed-solomon/target/release/projective-reed-solomon --output 2026-08-28-r11-gf16-pointed-quotient.json)
+(cd supplement/evidence/r11-binary-quotients && python3 2026-08-28-r11-gf32-pointed-quotient.py --check)
+(cd supplement/evidence/r11-char7-pointed-orbits && python3 2026-08-28-r11-char7-pointed-orbits.py --check)
+(cd supplement/evidence/r11-gf27-switch-sweep && cargo build --release --locked --manifest-path 2026-08-28-r11-gf27-switch-sweep/Cargo.toml && PROBE_THREADS=8 2026-08-28-r11-gf27-switch-sweep/target/release/probe certify)
+(cd supplement/evidence/r11-gf27-switch-sweep && python3 2026-08-28-r11-gf27-witness-replay.py 2026-08-28-r11-gf27-switch-sweep/out/certify-witness-sample.tsv)
+```
+
+The two binary-field generators reproduce their certificates only against the
+pinned toolkit build recorded in each certificate's `binary_sha256`; the GF(32)
+certificate additionally pins the GF(16) generator source in
+`base_source_sha256`, so that generator is bundled byte-for-byte and is invoked
+with explicit `--binary` and `--output` rather than through patched defaults.
+The GF(16) quotient generator takes about 17 seconds and the GF(32) one about
+95 seconds.  The characteristic-seven generator takes about 34 seconds.
+
+The GF(27) sweep is the one long rerun: about 26 minutes on eight threads.  It
+writes into `2026-08-28-r11-gf27-switch-sweep/out/`, beside the crate and never
+over the frozen dated copies in the bundle root, so a rerun is compared against
+them rather than replacing them.  `PROBE_QLIMIT=<n>` truncates the sweep to the
+first `n` quotient points for a smoke test.  What that sweep certifies is a
+closure of the redundancy-eleven carrier `PG(6,27)`, not of the ambient
+`PG(10,27)`; the certificate-free switch lemma remains open.
 
 The public R5--R7 orbit tables are a deterministic projection of the
 hash-pinned frozen certificates.  From the paper directory run:

@@ -121,6 +121,43 @@ BUNDLES = (
         ),
     ),
     (
+        "Certificate R11 binary quotients",
+        "r11-binary-quotients",
+        (
+            ("gf16-generator", "2026-08-28-r11-gf16-pointed-quotient.py", "2026-08-28-r11-gf16-pointed-quotient.py", "rederive"),
+            ("gf16-certificate", "2026-08-28-r11-gf16-pointed-quotient.json", "2026-08-28-r11-gf16-pointed-quotient.json", "compare"),
+            ("gf16-replay", "2026-08-28-r11-gf16-pointed-quotient-replay.py", "2026-08-28-r11-gf16-pointed-quotient-replay.py", "reconstruct"),
+            ("gf32-generator", "2026-08-28-r11-gf32-pointed-quotient.py", "2026-08-28-r11-gf32-pointed-quotient.py", "rederive"),
+            ("gf32-certificate", "2026-08-28-r11-gf32-pointed-quotient.json", "2026-08-28-r11-gf32-pointed-quotient.json", "compare"),
+            ("gf32-replay", "2026-08-28-r11-gf32-pointed-quotient-replay.py", "2026-08-28-r11-gf32-pointed-quotient-replay.py", "reconstruct"),
+        ),
+    ),
+    (
+        "Certificate R11 GF(27) sweep",
+        "r11-gf27-switch-sweep",
+        (
+            ("generator", "2026-08-28-r11-gf27-switch-sweep/src/main.rs", "2026-08-28-r11-gf27-switch-sweep/src/main.rs", "rederive"),
+            ("generator-manifest", "2026-08-28-r11-gf27-switch-sweep/Cargo.toml", "2026-08-28-r11-gf27-switch-sweep/Cargo.toml", "compare"),
+            ("generator-lock", "2026-08-28-r11-gf27-switch-sweep/Cargo.lock", "2026-08-28-r11-gf27-switch-sweep/Cargo.lock", "compare"),
+            ("witness-replay", "2026-08-28-r11-gf27-witness-replay.py", "2026-08-28-r11-gf27-witness-replay.py", "reconstruct"),
+            ("summary", "2026-08-28-r11-gf27-certify-summary.txt", "2026-08-28-r11-gf27-certify-summary.txt", "compare"),
+            ("histogram", "2026-08-28-r11-gf27-certify-histogram.tsv", "2026-08-28-r11-gf27-certify-histogram.tsv", "compare"),
+            ("unsaturated-classes", "2026-08-28-r11-gf27-certify-unsaturated.tsv", "2026-08-28-r11-gf27-certify-unsaturated.tsv", "compare"),
+            ("witness-sample", "2026-08-28-r11-gf27-certify-witness-sample.tsv", "2026-08-28-r11-gf27-certify-witness-sample.tsv", "compare"),
+            ("quotient-rows", "2026-08-28-r11-gf27-certify-quotient-rows.tsv", "2026-08-28-r11-gf27-certify-quotient-rows.tsv", "compare"),
+            ("progress-trace", "2026-08-28-r11-gf27-certify-progress.txt", "2026-08-28-r11-gf27-certify-progress.txt", "compare"),
+        ),
+    ),
+    (
+        "Certificate R11 characteristic seven",
+        "r11-char7-pointed-orbits",
+        (
+            ("generator", "2026-08-28-r11-char7-pointed-orbits.py", "2026-08-28-r11-char7-pointed-orbits.py", "rederive"),
+            ("certificate", "2026-08-28-r11-char7-pointed-orbits.json", "2026-08-28-r11-char7-pointed-orbits.json", "compare"),
+            ("replay", "2026-08-28-r11-char7-pointed-orbits-replay.py", "2026-08-28-r11-char7-pointed-orbits-replay.py", "reconstruct"),
+        ),
+    ),
+    (
         "Certificate SC",
         "stable-components",
         (

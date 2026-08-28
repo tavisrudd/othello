@@ -32,18 +32,28 @@
         "aspect": "normalization",
         "requirement": "Length, dimension, redundancy, and projective-arc conventions must be translated consistently.",
         "matched": "The manuscript fixes r=q+1-k and the degree-(r-1) normal rational curve before invoking the equivalence."
+      },
+      {
+        "aspect": "hypothesis",
+        "requirement": "No characteristic hypothesis; the equivalence is between completeness of the normal rational curve as an arc and covering radius r-1.",
+        "matched": "Applied in every characteristic within the stated field range."
       }
     ]
   },
   "seroussi-roth": {
     "citation": "SeroussiRoth1986",
-    "pinpoint": "Theorem 1",
-    "used": "High-rate generalized Reed--Solomon nonextendability in the stated dimension range.",
+    "pinpoint": "Theorem 1 and Corollary 1",
+    "used": "High-rate generalized Reed--Solomon nonextendability: Theorem 1 (unique extension for 2 <= r <= |S| - floor((q-1)/2)) in the point-deleted shell proof, Corollary 1 (r <= floor(q/2)+2) in the fixed-level radius proposition.",
     "conventions": [
       {
         "aspect": "hypothesis",
         "requirement": "The code parameters lie in the theorem's high-rate range.",
         "matched": "Each radius application records and checks the corresponding q and redundancy inequality separately."
+      },
+      {
+        "aspect": "hypothesis",
+        "requirement": "The only exception is q even with dual dimension three (the conic and its nucleus); no characteristic hypothesis is imposed.",
+        "matched": "Every application has r >= 6, and the manuscript imposes no characteristic hypothesis when invoking the theorem."
       }
     ]
   },
@@ -73,13 +83,18 @@
   },
   "zwk-full-support-rank-two": {
     "citation": "ZWK2020",
-    "pinpoint": "Theorems I.5--I.7 and Section III",
+    "pinpoint": "Theorems I.4--I.6 and Section III",
     "used": "Full-support tangent and conjugate-secant syndrome weights in the applicable projective Reed--Solomon range.",
     "conventions": [
       {
         "aspect": "normalization",
         "requirement": "The support and coordinate conventions agree with the full projective support and the degree-(r-1) normal rational curve.",
         "matched": "The manuscript uses the same full projective support after monomial normalization and its divided-power parity-check columns parametrize that normal rational curve."
+      },
+      {
+        "aspect": "hypothesis",
+        "requirement": "2 <= k <= q-3, i.e. 4 <= r <= q-1, and covering radius q-k; the proofs use no characteristic hypothesis, and the only role of p is the orbit split p | k versus p does not divide k.",
+        "matched": "The classification range has r >= 6 and q >= Q*_{r,s} > r+1; the orbit split is recorded separately in the persistent-count proposition and does not enter the weight or count."
       }
     ]
   }

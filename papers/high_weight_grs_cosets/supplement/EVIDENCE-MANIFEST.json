@@ -89,6 +89,158 @@
       "sha256": "bac6b55f19aa3d0f86eb76285c78e78bc4f21605dabf79b32e8882cc54f7248d"
     },
     {
+      "bytes": 2453,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-certify-histogram.tsv",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "compare",
+      "role": "histogram",
+      "sha256": "aa456c3d2d310064a781e83acccb648c631901948a4bd30d626f331510f37c56"
+    },
+    {
+      "bytes": 1029,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-certify-progress.txt",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "compare",
+      "role": "progress-trace",
+      "sha256": "c138052a9e654f7a0689c60027549c2789e282da2c883af6eb8f3ba82db1066b"
+    },
+    {
+      "bytes": 840844,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-certify-quotient-rows.tsv",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "compare",
+      "role": "quotient-rows",
+      "sha256": "63bd14bcf01db2f17ff63293fd8fcecb48ac7df10f64bfeee18ae6e8c7f376d4"
+    },
+    {
+      "bytes": 532,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-certify-summary.txt",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "compare",
+      "role": "summary",
+      "sha256": "f7d3ade14aca0e6112b146c13e3d67a663b37fcdf716e234aa7083c4b5ac7c0a"
+    },
+    {
+      "bytes": 21,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-certify-unsaturated.tsv",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "compare",
+      "role": "unsaturated-classes",
+      "sha256": "6d70875f05005089e5258180f7e635e53a62a04c23eb1243e261ad5e0dd6354f"
+    },
+    {
+      "bytes": 8378,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-certify-witness-sample.tsv",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "compare",
+      "role": "witness-sample",
+      "sha256": "5dc58017fd6e0fe48140f515caa742a8491d8999272b5836c2304a9f46cdfa6a"
+    },
+    {
+      "bytes": 166,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-switch-sweep/Cargo.lock",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "compare",
+      "role": "generator-lock",
+      "sha256": "45cc5f2d41b4377bdbeb2f3d63cc99af584bb06fc4f6775d6216d575d94f68f2"
+    },
+    {
+      "bytes": 213,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-switch-sweep/Cargo.toml",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "compare",
+      "role": "generator-manifest",
+      "sha256": "5c1d8c53c3bb7413355bc5be2d6d83cc8d02cd0088eb9b1f0ee18451b7f9b893"
+    },
+    {
+      "bytes": 79031,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-switch-sweep/src/main.rs",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "b7c7fdfae6440c59c93940653606fda82f899f2df7898cbd1a19ff4fe8d8c829"
+    },
+    {
+      "bytes": 5291,
+      "path": "evidence/r11-gf27-switch-sweep/2026-08-28-r11-gf27-witness-replay.py",
+      "public_label": "Certificate R11 GF(27) sweep",
+      "replay_class": "reconstruct",
+      "role": "witness-replay",
+      "sha256": "05d68f7374751f178bbfb6daf67e1a2ae4b3df4aca47488c57cff87bd84c08fc"
+    },
+    {
+      "bytes": 15348,
+      "path": "evidence/r11-binary-quotients/2026-08-28-r11-gf16-pointed-quotient-replay.py",
+      "public_label": "Certificate R11 binary quotients",
+      "replay_class": "reconstruct",
+      "role": "gf16-replay",
+      "sha256": "afb00c1d5ef6f455a41aeea4c6e0465c2850bf0a7016a29aa9a2c4e4e3bd3d02"
+    },
+    {
+      "bytes": 45515,
+      "path": "evidence/r11-binary-quotients/2026-08-28-r11-gf16-pointed-quotient.json",
+      "public_label": "Certificate R11 binary quotients",
+      "replay_class": "compare",
+      "role": "gf16-certificate",
+      "sha256": "fa7a8c21511bb923ba52ef983d5626851de78943409d684476a23072dd08268f"
+    },
+    {
+      "bytes": 24057,
+      "path": "evidence/r11-binary-quotients/2026-08-28-r11-gf16-pointed-quotient.py",
+      "public_label": "Certificate R11 binary quotients",
+      "replay_class": "rederive",
+      "role": "gf16-generator",
+      "sha256": "81d2faa0679077fb007353dce5803768d9ee2a5e4bdc9b1d2edbfff6fe85498f"
+    },
+    {
+      "bytes": 1363,
+      "path": "evidence/r11-binary-quotients/2026-08-28-r11-gf32-pointed-quotient-replay.py",
+      "public_label": "Certificate R11 binary quotients",
+      "replay_class": "reconstruct",
+      "role": "gf32-replay",
+      "sha256": "8761a37b31ccab8faf921cae51f68a6e36c3d12d9f2cbb5f87bc3cd0fff938ce"
+    },
+    {
+      "bytes": 159731,
+      "path": "evidence/r11-binary-quotients/2026-08-28-r11-gf32-pointed-quotient.json",
+      "public_label": "Certificate R11 binary quotients",
+      "replay_class": "compare",
+      "role": "gf32-certificate",
+      "sha256": "4b7ff0d8eddcd71819657b7cd3cd724ecd6ceedd83c6a36acb67601633c7979f"
+    },
+    {
+      "bytes": 3480,
+      "path": "evidence/r11-binary-quotients/2026-08-28-r11-gf32-pointed-quotient.py",
+      "public_label": "Certificate R11 binary quotients",
+      "replay_class": "rederive",
+      "role": "gf32-generator",
+      "sha256": "1a83fdcd592298cb0b2e1eb5e7cdc9148cb9a8142a881de7ec42d8cf6f70dae1"
+    },
+    {
+      "bytes": 16938,
+      "path": "evidence/r11-char7-pointed-orbits/2026-08-28-r11-char7-pointed-orbits-replay.py",
+      "public_label": "Certificate R11 characteristic seven",
+      "replay_class": "reconstruct",
+      "role": "replay",
+      "sha256": "db55825d5b6724a356d46262a74e388246124e03c513b4bc67054ac4d5de03f3"
+    },
+    {
+      "bytes": 16041,
+      "path": "evidence/r11-char7-pointed-orbits/2026-08-28-r11-char7-pointed-orbits.json",
+      "public_label": "Certificate R11 characteristic seven",
+      "replay_class": "compare",
+      "role": "certificate",
+      "sha256": "fa9c02f5662785f15acfea3500a84548b36efb189ab8957e887a1dd8699a6c0d"
+    },
+    {
+      "bytes": 5955,
+      "path": "evidence/r11-char7-pointed-orbits/2026-08-28-r11-char7-pointed-orbits.py",
+      "public_label": "Certificate R11 characteristic seven",
+      "replay_class": "rederive",
+      "role": "generator",
+      "sha256": "534d773f0ba0806611300b886648039f5e02b515f71afc911f410eee2bf32c5c"
+    },
+    {
       "bytes": 62118,
       "path": "evidence/r5/2026-07-22-prs-deep-hole-census.json",
       "public_label": "Certificate R5",
@@ -449,12 +601,12 @@
       "sha256": "232849ccd9b502308075d1d50c396dc2c34a51d2858dcbdfc39172055f3b3606"
     },
     {
-      "bytes": 6528,
+      "bytes": 12345,
       "path": "CERTIFICATE-SCHEMA.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Certificate schema",
-      "sha256": "532f95b4c2a2609f4d9f7bb25dc5cae114c9bb57d92a472e61798abc280d08c5"
+      "sha256": "172a42ec4e530bc4e8f63bc7eb447017e2c55d7c64742c01238005823885cb81"
     },
     {
       "bytes": 545936,
@@ -481,20 +633,20 @@
       "sha256": "b315418d7323eb9979aa60b12bbe4e72116fc751d9b2caa42e487c568cdd4231"
     },
     {
-      "bytes": 16918,
+      "bytes": 17488,
       "path": "LEAN-STATEMENTS.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Lean statement-adequacy source",
-      "sha256": "b6dce8f2a783e6be2edb11aacc7670352c85594e57bf33d20b287aa570abfcce"
+      "sha256": "0bdc151fe367504266237becfa300aed02f21227fe484f08e1e2b1bd2e2b2ddd"
     },
     {
-      "bytes": 9407,
+      "bytes": 12979,
       "path": "REPRODUCING.md",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Reproduction guide",
-      "sha256": "24748b1b8a5fa0b7e05a2758b582aaf8090ab971498e6f3ba01f5eb2f15c1180"
+      "sha256": "1d89e2ade056a74cdc587c80c30c0bfb605c276faf653c4e90d9640fa64b0d0e"
     },
     {
       "bytes": 4583,
@@ -529,12 +681,12 @@
       "sha256": "04ca5952db5f167a38dffe9b70d5e083dd024eab7c8b69f81763d50e099766c7"
     },
     {
-      "bytes": 15213,
+      "bytes": 18102,
       "path": "package_evidence_bundle.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Bundle verifier",
-      "sha256": "b5c59f2d79170abca1ce305d98acb35a71428d36ab257d9ecd06aa043981037f"
+      "sha256": "a63ec1899ee81dd2b0ab5bad1e1ff82a29231032178f1f66bbdc8158e5c710c2"
     },
     {
       "bytes": 2057,
@@ -545,12 +697,12 @@
       "sha256": "f01c53a315c95ecafc96b4fb2402616cbb67322fd0ecd3adb512b16b60f7b8ef"
     },
     {
-      "bytes": 16041,
+      "bytes": 16520,
       "path": "verify.py",
       "public_label": "Supplement",
       "replay_class": "compare",
       "role": "Top-level verifier",
-      "sha256": "a2a87d766c04f6c03b5466e965b47fb29d8c20d0d80ca96258e859b53a9fa86e"
+      "sha256": "90d77a001600fb06899243345f2ad25973d01859c1382e316dae4ce5f7444c09"
     },
     {
       "bytes": 17225,

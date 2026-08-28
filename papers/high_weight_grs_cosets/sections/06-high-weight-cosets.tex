@@ -11,7 +11,7 @@ with the deleted set join tangent and conjugate-secant points in weight
 the counts.
 
 The internal input is the carrier-and-escape theorem: outside
-\(\cP_r\cup\cM^{\max}_{r,p}\), there is a degree-\((r-2)\) split squarefree
+\(\cE_{r,p}\), there is a degree-\((r-2)\) split squarefree
 locator supported on \(S\).  Promotion to the top shell uses the
 Seroussi--Roth--D\"ur radius and extension results, while the full-support
 rank-two weights come from \cite{ZWK2020}.  What follows is the
@@ -33,17 +33,17 @@ squarefree member of \(W_f\), supported on \(S\), with a representation in
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
 The pointed simultaneous-marker theorem gives
-\(d_S(f)\leq r-2\) outside
-\(\cP_r\cup\cM^{\max}_{r,p}\), with the two stated thresholds.  If
-\(p>r-1\), no two adjacent entries of Pascal row \(r-2\) vanish, so the Lucas
-carrier is empty.
+\(d_S(f)\leq r-2\) outside \(\cE_{r,p}\), with the two stated thresholds,
+and \(\cE_{r,p}=\cP_r\) under the classification hypothesis.  Nothing below
+uses the characteristic: the strata of \(\cP_r\), the imported weights, and
+the counts are the same in every characteristic.
 
 The rational points of \(\cP_r\) have four disjoint strata: curve points,
 interiors of rational split secants, off-curve tangent points, and rational
 points of conjugate secants.  When \(s=0\), the Seroussi--Roth--D\"ur radius
 gate gives radius \(r-1\).  Curve points and split-secant interiors have
 weights one and two, while the full-support rank-two calculation
-\cite[Thms.~I.5--I.6]{ZWK2020} gives weight \(r-1\) on every off-curve tangent
+\cite[Thms.~I.4--I.6]{ZWK2020} gives weight \(r-1\) on every off-curve tangent
 point and rational point of a conjugate secant.  These are therefore exactly
 the maximum-weight strata.
 
@@ -106,7 +106,8 @@ For every \(f\ne0\),
 \begin{equation}\label{eq:extension-distance}
  d(\widehat C_f)=d_S(f)+1.
 \end{equation}
-Under the hypotheses of Theorem~\ref{thm:main}, with \(p>r-1\), the
+In the classification range of Theorem~\ref{thm:main}, that is with
+\(p\) odd or \(p=2\) and \(r\geq8\), the
 omitted curve points give exactly the MDS extensions; the tangent,
 conjugate-secant, and \(A\)-incident split-secant points give exactly the
 NMDS extensions; every other appended column has Singleton defect at least
@@ -164,7 +165,7 @@ Here the last factor \(q-1\) counts interior projective points on each
 \begin{theorem}[Family-aggregate NMDS enumerators]
 \label{thm:family-aggregate-nmds}%
 \coverage{absent}%
-Under the hypotheses of Theorem~\ref{thm:main}, with \(p>r-1\),
+In the classification range of Theorem~\ref{thm:main},
 \begin{align}
  \sum_{f\in\mathrm{Tan}}\mu_S(f)
    &=(q+1-m)\binom Nm,\label{eq:aggregate-tangent}\\

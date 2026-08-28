@@ -1,9 +1,9 @@
 \section{Simultaneous contraction and escape}
 \label{sec:simultaneous-contraction}
 
-The recursive carrier theorem identifies the syndromes whose entire terminal
-row space is trapped.  We now treat every other syndrome without choosing a
-sequence of intermediate good fibers.  All contracted roots are selected at
+Proposition~\ref{prop:trapped-row-space} identifies the syndromes whose
+entire terminal row space is trapped.  We now treat every other syndrome
+without choosing a sequence of intermediate good fibers.  All contracted roots are selected at
 once, and only the terminal R5 pencil is counted.
 
 The contraction identity and finite-field grid lemma below are elementary.
@@ -82,7 +82,7 @@ Put \(m=r-5\).  If \(R=\lambda_1\cdots\lambda_m\), the coefficient row of
 Let \(E\) be defined over \(\F_q\), let
 \(0\ne f\in\Gamma^{r-1}E\), and let \(L_f\) be the projectivized row space
 of \(\operatorname{Cat}_{m,4}(f)\).  If
-\([f]\notin\cP_r\cup\cM^{\max}_{r,p}\), there is a homogeneous polynomial
+\([f]\notin\cE_{r,p}\), there is a homogeneous polynomial
 \(F_f\) over \(\F_q\), of degree at most six (at most four when \(p=2\)),
 which vanishes on the reduced terminal carrier but whose restriction to
 \(L_f\) is not the zero polynomial.
@@ -97,7 +97,7 @@ coordinate.
 \end{lemma}
 
 \begin{proof}
-Theorem~\ref{prop:recursive-component-selection} says that \(L_f\) is
+Proposition~\ref{prop:trapped-row-space} says that \(L_f\) is
 not contained in the reduced terminal carrier.  By
 Proposition~\ref{prop:reduced-terminal-carrier}, that carrier is
 \(V(D)\cup V(I_{\mathrm{res},p})\), where \(D\) has degree three and
@@ -121,7 +121,7 @@ marker.
 \begin{theorem}[Simultaneous-marker escape]
 \label{thm:simultaneous-marker-escape}%
 \coverage{absent}%
-\uses{prop:recursive-component-selection,prop:reduced-terminal-carrier,prop:r5-count,lem:r5-branch}%
+\uses{prop:trapped-row-space,prop:reduced-terminal-carrier,prop:r5-count,lem:r5-branch}%
 Let \(E\) be defined over \(\F_q\), let \(r\geq6\), let
 \(A\subseteq\PP^1(\F_q)\) have size \(s\), and put
 \(S=\PP^1(\F_q)\setminus A\) and
@@ -130,7 +130,8 @@ Let \(E\) be defined over \(\F_q\), let \(r\geq6\), let
  \left\lfloor2\sqrt{6(r+s)-18}\right\rfloor .
 \]
 If \(q\geq Q^*_{r,s}\), \(0\ne f\in\Gamma^{r-1}E\), and
-\([f]\notin\cP_r\cup\cM^{\max}_{r,p}\), then \(W_f\) contains a split
+\([f]\notin\cE_{r,p}\), where \(\cE_{r,p}\) is the locus
+\eqref{eq:exceptional-locus}, then \(W_f\) contains a split
 squarefree form of degree \(r-2\) supported on \(S\).  In characteristic
 two it is enough that
 \[
@@ -183,8 +184,8 @@ The proof yields many locators rather than one isolated witness.
 \coverage{absent}%
 Fix \(r,s\).  As \(q\) tends to infinity through prime powers satisfying the
 hypotheses of
-Theorem~\ref{thm:simultaneous-marker-escape}, every syndrome outside the two
-carriers has at least
+Theorem~\ref{thm:simultaneous-marker-escape}, every syndrome outside
+\(\cE_{r,p}\) has at least
 \[
  \frac{q^{r-4}}{(r-2)!}-O_{r,s}(q^{r-9/2})
 \]

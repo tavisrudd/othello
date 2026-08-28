@@ -19,44 +19,48 @@ For a syndrome \(f\), let \(d_S(f)\) be the least number of columns of \(H_S\)
 whose span contains \(f\); this is the weight of the corresponding coset.
 Column multipliers do not change these projective spans.
 
-In small characteristic, a second explicitly linear obstruction can appear:
-adjacent zeros in Pascal row \(r-2\) determine what we call the maximal Lucas
-carrier.
+In characteristic two, at redundancies six and seven only, a second linear
+locus appears: adjacent zeros in Pascal row \(r-2\) determine what we call
+the maximal Lucas carrier.
 
 \begin{theorem}[High-weight cosets]
 \label{thm:main}%
 \coverage{absent}%
-\uses{thm:simultaneous-marker-escape,prop:recursive-component-selection}%
+\uses{thm:simultaneous-marker-escape,prop:trapped-row-space}%
 \imports{duer,seroussi-roth,zwk-full-support-rank-two}%
 \proves{main-fixed-level-classification-package}%
-Let \(r\geq6\), let \(A\subseteq\PP^1(\F_q)\) have size \(s\), and assume
-\(r\leq q+1-s\).  Put
+Let \(r\geq6\), let \(A\subseteq\PP^1(\F_q)\) have size \(s\), let
+\(p=\operatorname{char}\F_q\), and assume \(r\leq q+1-s\).  Put
 \[
  Q^*_{r,s}=6(r+s)-16+
  \left\lfloor2\sqrt{6(r+s)-18}\right\rfloor .
 \]
-If \(q\geq Q^*_{r,s}\), then
-\[
- f\notin \cP_r\cup\cM^{\max}_{r,p}
- \quad\Longrightarrow\quad d_S(f)\leq r-2,
- \qquad p=\operatorname{char}\F_q,
- \autoeqtag{eq:main-carrier-containment}
-\]
-where \(\cP_r\) is the rank-at-most-two locus of the consecutive
-three-row Hankel (second catalecticant) matrix of \(f\), and
+Let \(\cP_r\) be the rank-at-most-two locus of the consecutive
+three-row Hankel (second catalecticant) matrix of \(f\), and let
+\(\cE_{r,p}=\cP_r\), except that
+\(\cE_{r,2}=\cP_r\cup\cM^{\max}_{r,2}\) for \(r\in\{6,7\}\), where
 \[
  \cM^{\max}_{r,p}=
  \PP\!\left\langle e_j:
  0\leq j\leq r-1,\quad
- \binom{r-2}{j}=\binom{r-2}{j-1}=0\pmod p\right\rangle ,
+ \binom{r-2}{j}=\binom{r-2}{j-1}=0\pmod p\right\rangle
 \]
-where \(e_0,\ldots,e_{r-1}\) is the standard divided-power coordinate
-basis and \(\binom nk=0\) for \(k\notin\{0,\ldots,n\}\).
+in the standard divided-power coordinate basis \(e_0,\ldots,e_{r-1}\), with
+\(\binom nk=0\) for \(k\notin\{0,\ldots,n\}\); explicitly
+\(\cM^{\max}_{6,2}=\PP\langle e_2,e_3\rangle\) and
+\(\cM^{\max}_{7,2}=\{[e_3]\}\).
+If \(q\geq Q^*_{r,s}\), then
+\[
+ f\notin \cE_{r,p}
+ \quad\Longrightarrow\quad d_S(f)\leq r-2.
+ \autoeqtag{eq:main-carrier-containment}
+\]
 In characteristic two the same conclusion holds with
 \(6(r+s)-22+\lfloor2\sqrt{6(r+s)-24}\rfloor\) in place of
 \(Q^*_{r,s}\).
 
-Assume in addition that \(p>r-1\).  If \(s=0\), the covering radius is
+Assume in addition that \(p\) is odd, or that \(p=2\) and \(r\geq8\), so
+that \(\cE_{r,p}=\cP_r\).  If \(s=0\), the covering radius is
 \(r-1\), and the cosets of weight \(r-1\) are exactly the tangent and
 conjugate-secant directions.  If \(s>0\), the covering radius is \(r\): the
 weight-\(r\) directions are the omitted curve points, and the weight-\(r-1\)
@@ -76,13 +80,18 @@ Geometrically, \(\cP_r\) is the second secant variety of
 \(\NRC_{r-1}\).  Its \(\F_q\)-points comprise the curve itself and the
 rational-secant, tangent, and conjugate-secant strata.
 
-Here \(Q^*_{r,s}=6(r+s)+O(\sqrt{r+s})\).  The conclusion has three levels:
-in every characteristic the field-size hypothesis confines all
-weight-at-least-\((r-1)\) syndromes to
-\(\cP_r\cup\cM^{\max}_{r,p}\); if \(p>r-1\), the Lucas carrier vanishes and
-the shells are completely classified; in small characteristic, the only
-unresolved arbitrary-redundancy arithmetic is confined to the explicit Lucas
-carrier \(\cM^{\max}_{r,p}\).  In the complete-classification range, deleting
+Here \(Q^*_{r,s}=6(r+s)+O(\sqrt{r+s})\).  The classification has no
+characteristic hypothesis beyond the two binary cases \(r\in\{6,7\}\).
+For full support, Theorems~\ref{thm:r6} and~\ref{thm:r7} settle those over
+every prime power \(q\geq7\): the carrier contributes one nucleus orbit,
+respectively one central nucleus point, exactly when \(q=2^m\) with \(m\)
+odd; the exclusion is therefore a phenomenon, not a limitation of the
+method.  For \(s>0\) in those two cases, \eqref{eq:main-carrier-containment}
+still holds and only the arithmetic of the carrier is left open.  The Lucas carrier \(\cM^{\max}_{r,p}\) is nonempty for many other
+pairs \((r,p)\) and is a genuine component of the recursively contained
+carrier of Theorem~\ref{prop:recursive-component-selection}, but a
+branchwise reading of that theorem shows that it traps no syndrome above
+the threshold (Proposition~\ref{prop:trapped-row-space}).  Deleting
 even one point is substantive: the radius jumps from \(r-1\) to \(r\), and the
 omitted points become exactly the new weight-\(r\) shell.
 
@@ -135,8 +144,9 @@ intermediate redundancy, the proof selects \(r-5\) of these linear factors
 simultaneously.  Contraction leaves a redundancy-five (R5) pencil of binary
 cubics, and any split squarefree member avoiding the selected roots and \(A\)
 completes the desired form.  The carrier theorem confines the cases in which
-every such contraction is trapped to the persistent rank-two locus \(\cP_r\)
-or the small-characteristic Lucas locus \(\cM^{\max}_{r,p}\); outside that union, a
+every such contraction is trapped to the persistent rank-two locus \(\cP_r\),
+together with the line \(\PP\langle e_2,e_3\rangle\) at \((r,p)=(6,2)\)
+and the point \([e_3]\) at \((7,2)\); outside that locus, a
 degree-six selector, a Vandermonde choice, and the exact R5 count produce the
 cubic.  The witnesses are abundant: there are at least
 \(q^{r-4}/(r-2)!-O_{r,s}(q^{r-9/2})\) split locators supported on \(S\).

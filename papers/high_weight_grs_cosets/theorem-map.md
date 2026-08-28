@@ -12,7 +12,7 @@ boundaries remain separate.
 | Stagewise polar interface | Finite-depth coherent marked contraction | fixed-level refinements under explicit stagewise data | appendix mechanism only; not an input to the arbitrary-redundancy theorem | self-contained printed proofs; contraction/lifting algebra partly kernel checked |
 | Recursive carrier | Exact reduced contained carrier | every r >= 6, fibrewise over each characteristic | persistent scheme plus one maximal adjacent-zero Lucas carrier; no uniform nilpotent integral model | explicitly defined terminal elimination scheme, computer-assisted prime decomposition, printed Pascal/density/generic-point proofs, and kernel-checked density/selection |
 | Simultaneous escape | Pointed split-squarefree locator outside the carrier | every r >= 6 and q >= 6(r+s)-16+floor(2 sqrt(6(r+s)-18)); sharper binary bound | avoids any prescribed deleted set of size s; no intermediate lower packages | composite contraction, degree-six selector, Vandermonde grid, and exact R5 pencil count |
-| High-weight cosets | Every coset of weight at least r-1 for point-deleted GRS/EGRS support | same pointed range; exact classification when char(F_q) > r-1 | s=0 has only the r-1 shell; s>0 has the r and r-1 shells | simultaneous escape, rank-two stratification, arc independence, and Seroussi--Roth deep-shell input |
+| High-weight cosets | Every coset of weight at least r-1 for point-deleted GRS/EGRS support | same pointed range; exact classification in every characteristic except the binary cases r in {6,7}, which the R6/R7 rows settle | s=0 has only the r-1 shell; s>0 has the r and r-1 shells | simultaneous escape, rank-two stratification, arc independence, and Seroussi--Roth deep-shell input |
 | One-column extensions | Complete MDS/NMDS appended-column classification | high-weight-coset range | full support has no MDS extension; other columns have defect at least two | circuit identity d(ker[H_S|f])=d_S(f)+1 and dual-distance argument |
 | Family-aggregate NMDS enumerators | Exact tangent, conjugate-secant, and incident-split-secant aggregate enumerators | high-weight-coset range | aggregates and averages, not equality of individual coset distributions | family-wise hyperplane incidence count plus the standard NMDS recurrence |
 | Lean boundary | Algebra, arithmetic, density, selection, and conditional synthesis | exact declarations in formalization-ledger.md and supplement/LEAN-STATEMENTS.md | concrete carrier primes, group actions, cited theorems, and external certificate semantics remain explicit | 17-file paper-facing aggregate plus separately identified companion terminals |
@@ -27,11 +27,14 @@ boundaries remain separate.
 - cor:one-column-extensions, thm:family-aggregate-nmds: coding consequences.
 - thm:r5, thm:r6, thm:r7: all-field R5--R7 statements.
 - thm:induction: supplementary stagewise fixed-level interface.
+- lem:polar-rank-two, prop:trapped-row-space: level-uniform polar rank
+  containment and the branchwise exceptional locus E_{r,p} (persistent locus,
+  plus the binary Lucas carriers at r in {6,7} only).
 - thm:recursive-carrier: all-level reduced carrier and uniform consequence.
 - R8--R10 fixed-level calculations remain in the companion source/evidence
   record and are not claims of this submission.
 
-The complete set of 55 numbered labels is reconciled mechanically against
+The complete set of numbered labels is reconciled mechanically against
 supplement/LEAN-STATEMENTS.md.
 
 ## Boundaries
