@@ -892,13 +892,129 @@ struct CombinedInverse {
     sources: Box<[u32]>,
 }
 
-impl CombinedInverse {
+struct RefinementGenerators {
+    ranges: Box<[SortRange]>,
+    ids: Box<[u32]>,
+}
+
+impl RefinementGenerators {
     fn new(presentation: &FinitePresentation) -> Result<Self, ObservationalError> {
+        // A sort in this greatest fixed point is observationally singleton:
+        // its immediate observation is constant and every outgoing context
+        // remains inside the fixed point.  Generators into such a sort cannot
+        // distinguish source states.  Identity, constant, and pointwise-
+        // duplicate generators are likewise refinement-neutral.
+        let mut singleton = presentation
+            .sorts
+            .iter()
+            .copied()
+            .map(|states| {
+                let observations =
+                    &presentation.observations[states.start as usize..states.end() as usize];
+                observations
+                    .first()
+                    .is_none_or(|first| observations.iter().all(|value| value == first))
+            })
+            .collect::<Vec<_>>();
+        loop {
+            let mut changed = false;
+            for sort in 0..presentation.sorts.len() {
+                if singleton[sort]
+                    && presentation
+                        .generators_from(sort as u32)
+                        .any(|(_, record)| !singleton[record.target_sort as usize])
+                {
+                    singleton[sort] = false;
+                    changed = true;
+                }
+            }
+            if !changed {
+                break;
+            }
+        }
+
+        let mut ids = Vec::with_capacity(presentation.generators.len());
+        let mut ranges = Vec::with_capacity(presentation.sorts.len());
+        for sort in 0..presentation.sorts.len() {
+            let start = u32::try_from(ids.len()).map_err(|_| ObservationalError::Overflow)?;
+            let source = presentation.sorts[sort];
+            for (generator, record) in presentation.generators_from(sort as u32) {
+                if singleton[record.target_sort as usize] {
+                    continue;
+                }
+                let transition_start = record.transition_start as usize;
+                let transitions = &presentation.transitions
+                    [transition_start..transition_start + record.transition_len as usize];
+                if transitions
+                    .first()
+                    .is_none_or(|first| transitions.iter().all(|target| target == first))
+                {
+                    continue;
+                }
+                if record.source_sort == record.target_sort
+                    && transitions
+                        .iter()
+                        .enumerate()
+                        .all(|(local, &target)| target == source.start + local as u32)
+                {
+                    continue;
+                }
+                let duplicate = ids[start as usize..].iter().copied().any(|prior| {
+                    let prior_record = presentation.generators[prior as usize];
+                    let prior_start = prior_record.transition_start as usize;
+                    prior_record.target_sort == record.target_sort
+                        && presentation.transitions
+                            [prior_start..prior_start + prior_record.transition_len as usize]
+                            == *transitions
+                });
+                if !duplicate {
+                    ids.push(generator);
+                }
+            }
+            ranges.push(SortRange {
+                start,
+                len: u32::try_from(ids.len()).map_err(|_| ObservationalError::Overflow)? - start,
+            });
+        }
+        Ok(Self {
+            ranges: ranges.into_boxed_slice(),
+            ids: ids.into_boxed_slice(),
+        })
+    }
+
+    #[inline(always)]
+    fn ids_from(&self, sort: u32) -> &[u32] {
+        let range = self.ranges[sort as usize];
+        &self.ids[range.start as usize..range.end() as usize]
+    }
+}
+
+impl CombinedInverse {
+    fn new(
+        presentation: &FinitePresentation,
+        refinement: Option<&RefinementGenerators>,
+    ) -> Result<Self, ObservationalError> {
         let mut counts = vec![0_u32; presentation.state_count()];
-        for &target in &presentation.transitions {
-            counts[target as usize] = counts[target as usize]
-                .checked_add(1)
-                .ok_or(ObservationalError::Overflow)?;
+        let mut source_count = 0_usize;
+        for sort in 0..presentation.sorts.len() {
+            let generators = refinement.map_or_else(
+                || presentation.generator_ids_from(sort as u32),
+                |directory| directory.ids_from(sort as u32),
+            );
+            for &generator in generators {
+                let record = presentation.generators[generator as usize];
+                let start = record.transition_start as usize;
+                let transitions =
+                    &presentation.transitions[start..start + record.transition_len as usize];
+                source_count = source_count
+                    .checked_add(transitions.len())
+                    .ok_or(ObservationalError::Overflow)?;
+                for &target in transitions {
+                    counts[target as usize] = counts[target as usize]
+                        .checked_add(1)
+                        .ok_or(ObservationalError::Overflow)?;
+                }
+            }
         }
         let mut offsets = Vec::with_capacity(presentation.state_count().saturating_add(1));
         let mut total = 0_u32;
@@ -910,16 +1026,23 @@ impl CombinedInverse {
             *count = offsets[offsets.len() - 1];
         }
         offsets.push(total);
-        let mut sources = vec![0_u32; presentation.transitions.len()];
-        for record in presentation.generators.iter().copied() {
-            let source = presentation.sorts[record.source_sort as usize];
-            let start = record.transition_start as usize;
-            let transitions =
-                &presentation.transitions[start..start + record.transition_len as usize];
-            for (local, &target) in transitions.iter().enumerate() {
-                let cursor = &mut counts[target as usize];
-                sources[*cursor as usize] = source.start + local as u32;
-                *cursor += 1;
+        let mut sources = vec![0_u32; source_count];
+        for sort in 0..presentation.sorts.len() {
+            let generators = refinement.map_or_else(
+                || presentation.generator_ids_from(sort as u32),
+                |directory| directory.ids_from(sort as u32),
+            );
+            let source = presentation.sorts[sort];
+            for &generator in generators {
+                let record = presentation.generators[generator as usize];
+                let start = record.transition_start as usize;
+                let transitions =
+                    &presentation.transitions[start..start + record.transition_len as usize];
+                for (local, &target) in transitions.iter().enumerate() {
+                    let cursor = &mut counts[target as usize];
+                    sources[*cursor as usize] = source.start + local as u32;
+                    *cursor += 1;
+                }
             }
         }
         Ok(Self {
@@ -936,7 +1059,13 @@ impl CombinedInverse {
     }
 
     fn verify(&self, presentation: &FinitePresentation) -> Result<(), ObservationalError> {
-        let rebuilt = Self::new(presentation)?;
+        let refinement = presentation
+            .generator_sort_ranges
+            .iter()
+            .any(|range| range.len > 4)
+            .then(|| RefinementGenerators::new(presentation))
+            .transpose()?;
+        let rebuilt = Self::new(presentation, refinement.as_ref())?;
         if self.offsets != rebuilt.offsets || self.sources != rebuilt.sources {
             return Err(ObservationalError::CompiledShape);
         }
@@ -1553,12 +1682,28 @@ fn multiway_is_admitted(presentation: &FinitePresentation) -> bool {
     if presentation.state_count() < 4_096 {
         return false;
     }
+    let refinement = if presentation
+        .generator_sort_ranges
+        .iter()
+        .any(|range| range.len > 4)
+    {
+        let Ok(directory) = RefinementGenerators::new(presentation) else {
+            return false;
+        };
+        Some(directory)
+    } else {
+        None
+    };
     for (sort, states) in presentation.sorts.iter().copied().enumerate() {
         if states.len <= 1 {
             continue;
         }
-        let outgoing = presentation.generator_sort_ranges[sort].len;
-        if !(2..=4).contains(&outgoing) {
+        let outgoing = refinement
+            .as_ref()
+            .map_or(presentation.generator_sort_ranges[sort].len, |directory| {
+                directory.ranges[sort].len
+            });
+        if outgoing != 0 && !(2..=4).contains(&outgoing) {
             return false;
         }
         let mut first = None;
@@ -2050,11 +2195,11 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
 fn signatures_equal(
     presentation: &FinitePresentation,
     state_blocks: &[u32],
-    sort: u32,
+    generators: &[u32],
     left: u32,
     right: u32,
 ) -> bool {
-    presentation.generators_from(sort).all(|(generator, _)| {
+    generators.iter().copied().all(|generator| {
         let left_target = presentation.validated_transition(generator, left);
         let right_target = presentation.validated_transition(generator, right);
         state_blocks[left_target as usize] == state_blocks[right_target as usize]
@@ -2065,11 +2210,11 @@ fn signatures_equal(
 fn signature_hash(
     presentation: &FinitePresentation,
     state_blocks: &[u32],
-    sort: u32,
+    generators: &[u32],
     state: u32,
 ) -> u64 {
     let mut hash = 0x9e37_79b9_7f4a_7c15_u64;
-    for (generator, _) in presentation.generators_from(sort) {
+    for &generator in generators {
         let target = presentation.validated_transition(generator, state);
         hash ^= u64::from(state_blocks[target as usize]).wrapping_add(0x9e37_79b9);
         hash = hash.rotate_left(27).wrapping_mul(0x94d0_49bb_1331_11eb);
@@ -2081,23 +2226,35 @@ fn signature_hash(
 fn packed_signature4(
     presentation: &FinitePresentation,
     state_blocks: &[u32],
-    sort: u32,
+    transition_starts: &[usize; 4],
+    generator_count: usize,
+    source_start: u32,
     state: u32,
 ) -> (u64, u64, u64) {
-    let generators = presentation.generator_ids_from(sort);
-    debug_assert!(generators.len() <= 4);
-    let source_start = presentation.sorts[sort as usize].start;
+    debug_assert!(generator_count <= 4);
     let local = (state - source_start) as usize;
-    let mut words = [0_u64; 2];
-    for (index, &generator) in generators.iter().enumerate() {
-        let record = presentation.generators[generator as usize];
-        let target = presentation.transitions[record.transition_start as usize + local];
-        words[index / 2] |= u64::from(state_blocks[target as usize]) << (32 * (index % 2));
-    }
-    let mut hash = words[0].wrapping_mul(0x9e37_79b9_7f4a_7c15);
-    hash ^= words[1].rotate_left(29).wrapping_mul(0x94d0_49bb_1331_11eb);
+    let class = |index: usize| {
+        let target = presentation.transitions[transition_starts[index] + local];
+        state_blocks[target as usize]
+    };
+    let (low, high) = match generator_count {
+        0 => (0, 0),
+        1 => (u64::from(class(0)), 0),
+        2 => (u64::from(class(0)) | u64::from(class(1)) << 32, 0),
+        3 => (
+            u64::from(class(0)) | u64::from(class(1)) << 32,
+            u64::from(class(2)),
+        ),
+        4 => (
+            u64::from(class(0)) | u64::from(class(1)) << 32,
+            u64::from(class(2)) | u64::from(class(3)) << 32,
+        ),
+        _ => unreachable!(),
+    };
+    let mut hash = low.wrapping_mul(0x9e37_79b9_7f4a_7c15);
+    hash ^= high.rotate_left(29).wrapping_mul(0x94d0_49bb_1331_11eb);
     hash ^= hash >> 31;
-    (hash, words[0], words[1])
+    (hash, low, high)
 }
 
 /// Dirty-block multiway refinement. All workspace is allocated before the
@@ -2106,6 +2263,12 @@ fn packed_signature4(
 fn minimize_partition_multiway(
     presentation: &FinitePresentation,
 ) -> Result<MultiwayPartition, ObservationalError> {
+    let refinement = presentation
+        .generator_sort_ranges
+        .iter()
+        .any(|range| range.len > 4)
+        .then(|| RefinementGenerators::new(presentation))
+        .transpose()?;
     let block_capacity = presentation.state_count();
     let (mut state_blocks, mut block_sorts, mut members, mut block_ranges) =
         initial_split_workspace(presentation, block_capacity)?;
@@ -2115,7 +2278,7 @@ fn minimize_partition_multiway(
         return Ok((state_blocks, ranges, Box::default(), None));
     }
 
-    let inverse = CombinedInverse::new(presentation)?;
+    let inverse = CombinedInverse::new(presentation, refinement.as_ref())?;
     let mut positions = vec![0_u32; block_capacity];
     for (position, &state) in members.iter().enumerate() {
         positions[state as usize] = position as u32;
@@ -2167,14 +2330,30 @@ fn minimize_partition_multiway(
         refiner_scratch[..refiner_len]
             .copy_from_slice(&members[refiner_start as usize..range.end() as usize]);
         let sort = block_sorts[block as usize];
-        let packed = presentation.generator_ids_from(sort).len() <= 4;
+        let generators = refinement.as_ref().map_or_else(
+            || presentation.generator_ids_from(sort),
+            |directory| directory.ids_from(sort),
+        );
+        let packed = generators.len() <= 4;
+        let source_start = presentation.sorts[sort as usize].start;
+        let mut transition_starts = [0_usize; 4];
+        for (slot, &generator) in transition_starts.iter_mut().zip(generators) {
+            *slot = presentation.generators[generator as usize].transition_start as usize;
+        }
         let mut group_count = 0_usize;
         for &state in &refiner_scratch[..refiner_len] {
             let (hash, key_low, key_high) = if packed {
-                packed_signature4(presentation, &state_blocks, sort, state)
+                packed_signature4(
+                    presentation,
+                    &state_blocks,
+                    &transition_starts,
+                    generators.len(),
+                    source_start,
+                    state,
+                )
             } else {
                 (
-                    signature_hash(presentation, &state_blocks, sort, state),
+                    signature_hash(presentation, &state_blocks, generators, state),
                     0,
                     0,
                 )
@@ -2201,7 +2380,7 @@ fn minimize_partition_multiway(
                         && signatures_equal(
                             presentation,
                             &state_blocks,
-                            sort,
+                            generators,
                             state,
                             group_representatives[candidate as usize],
                         )
@@ -2275,10 +2454,10 @@ fn minimize_partition_multiway(
             }
         }
         for &group_block in group_blocks.iter().take(group_count) {
+            let group_range = block_ranges[group_block as usize];
             if group_block == block {
                 continue;
             }
-            let group_range = block_ranges[group_block as usize];
             for position in group_range.start..group_range.end() {
                 state_blocks[members[position as usize] as usize] = group_block;
             }
@@ -3589,6 +3768,70 @@ mod tests {
             adaptive.certificate_policy(),
             CertificatePolicy::SplitTranscript
         );
+    }
+
+    #[test]
+    fn theorem_reduction_removes_refinement_neutral_generators() {
+        const STATES: u32 = 4_096;
+        let shift = |amount| GeneratorSpec {
+            source_sort: 0,
+            target_sort: 0,
+            transitions: (0..STATES)
+                .map(|state| (state + amount) % STATES)
+                .collect::<Vec<_>>()
+                .into_boxed_slice(),
+        };
+        let mut observations = vec![0_u32; STATES as usize + 2];
+        observations[STATES as usize - 1] = 1;
+        let presentation = FinitePresentation::new(
+            [STATES, 2],
+            observations,
+            [
+                shift(1),
+                shift(2),
+                shift(1),
+                shift(0),
+                GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 0,
+                    transitions: vec![0; STATES as usize].into_boxed_slice(),
+                },
+                GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 1,
+                    transitions: (0..STATES)
+                        .map(|state| STATES + state % 2)
+                        .collect::<Vec<_>>()
+                        .into_boxed_slice(),
+                },
+                GeneratorSpec {
+                    source_sort: 1,
+                    target_sort: 1,
+                    transitions: vec![STATES + 1, STATES].into_boxed_slice(),
+                },
+            ],
+        )
+        .unwrap();
+
+        let refinement = RefinementGenerators::new(&presentation).unwrap();
+        assert_eq!(refinement.ids_from(0), &[0, 1]);
+        assert!(refinement.ids_from(1).is_empty());
+        assert!(multiway_is_admitted(&presentation));
+
+        let (multiway_classes, multiway_ranges, _, _) =
+            minimize_partition_multiway(&presentation).unwrap();
+        let (worklist_classes, worklist_ranges, _, _) =
+            minimize_partition_worklist(&presentation).unwrap();
+        assert_eq!(multiway_classes, worklist_classes);
+        assert_eq!(multiway_ranges, worklist_ranges);
+        let compiled =
+            compile_observational_with_policy(&presentation, CertificatePolicy::AdaptiveTranscript)
+                .unwrap();
+        assert_eq!(
+            compiled.certificate_policy(),
+            CertificatePolicy::MultiwayTranscript
+        );
+        verify_compilation(&presentation, &compiled).unwrap();
     }
 
     #[test]

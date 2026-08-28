@@ -17,7 +17,7 @@ def next_random(state: int) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("family", choices=("chain", "random", "colors"))
+    parser.add_argument("family", choices=("chain", "random", "redundant", "colors"))
     parser.add_argument("states", type=int)
     parser.add_argument("generators", type=int)
     parser.add_argument("outputs", type=int)
@@ -29,7 +29,8 @@ def main() -> None:
         parser.error("colors requires outputs to divide states")
 
     random_states = [
-        0x9E37_79B9_7F4A_7C15 ^ generator
+        0x9E37_79B9_7F4A_7C15
+        ^ (generator % 4 if args.family == "redundant" else generator)
         for generator in range(args.generators)
     ]
     with args.destination.open("w", encoding="ascii") as output:
@@ -39,9 +40,10 @@ def main() -> None:
             )
             targets = []
             for generator in range(args.generators):
+                effective_generator = generator % 4 if args.family == "redundant" else generator
                 if args.family == "colors":
-                    target = (state + generator + 1) % args.states
-                elif args.family == "chain" or generator == 0:
+                    target = (state + effective_generator + 1) % args.states
+                elif args.family == "chain" or effective_generator == 0:
                     target = min(state + 1, args.states - 1)
                 else:
                     random_states[generator] = next_random(random_states[generator])
