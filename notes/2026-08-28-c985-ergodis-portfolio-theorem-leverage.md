@@ -468,6 +468,42 @@ small-model half, but the typed overlap-preserving batch composition law is
 still missing.  Pre-emption here means using the proved scalar/Pareto path as a
 stepping stone, not abandoning batch repair or claiming an unproved congruence.
 
+## Extra-juice/Tao closeout and mystery ledger
+
+The strongest simplification is that “compile a symmetry action” should not
+name one algorithm.  It is a proof-directed dispatch:
+
+1. a canonical-form theorem (RREF here) gives direct representative
+   enumeration and a succinct rank/select quotient;
+2. a declared but otherwise opaque action uses generator BFS plus a spanning
+   certificate; and
+3. an irregular relational object uses individualization/refinement with
+   transporters and stabilizers.
+
+Generic BFS and graph canonization are therefore fallbacks/corollaries of the
+same observational interface, not algorithms that the theorem-specialized
+path must imitate.  Likewise, successive specialization is the general
+extraction theorem; PRS marker selection is one adapter supplying its nonzero
+selector.
+
+| question | status | consequence |
+|---|---|---|
+| Does RREF numbering have to equal generic least-point numbering? | settled: no | retain/check the explicit transporter; compare semantics, not raw IDs |
+| Can binary direct enumeration extend to `GF(q)`? | open, high value | use canonical RREF subspace generation plus a field-aware succinct dictionary; benchmark first |
+| Can dense selectors scale uniformly in marker count? | settled: no | coefficient slots remain exponential; no polynomial-in-`r` claim |
+| Which sparse residual representation preserves exact zero testing cheaply? | open | benchmark arithmetic circuits, trie/ZDD monomials, and dense tensors behind one API |
+| Does digit stripping define a generic contextual quotient? | open/domain-gated | import only for certified modular symmetric-power adapters |
+| Are transporters/stabilizers first-class across all Ergodis quotients? | open | adopt the sparse-shadow contract rather than exposing canonical IDs alone |
+| Is the direct RREF speedup a universal GL claim? | settled: no | it is shape/action specific; retain raw alternating rounds and generic fallback |
+
+The red-team boundary matters.  C973's review found that several finite-field
+closures survived only after repairing genus, budget, and status-claim errors.
+Ergodis must import reviewed theorem statements and exact domains, never
+narrative proof routes or superseded certificate groups.  The dense selector
+accepts only an explicitly nonzero polynomial with coordinate degree below the
+field order; failed construction, sink failure, malformed coefficients, and
+workspace mismatch all fail closed.
+
 ## Remaining scaling boundaries after review
 
 - The generic ordered-monoid validator is deliberately cubic in carrier size.
