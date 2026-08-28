@@ -24,6 +24,43 @@ sensitive to host and process noise.  The QC-LDPC and vector rows are closest
 to flat; GPU MDS improves slightly; Ceph, Azure, and Repair DAG warrant a
 saved-binary A/B before attributing their larger deltas to code changes.
 
+## Powered saved-binary head-to-head
+
+A follow-up comparison builds the evidence-landing revision `82751420d` and
+HEAD with the same compiler and runs 101 independent paired rounds. Baseline
+and candidate processes are adjacent, their order alternates, and the case
+order rotates. Every process retains the original row's repetition count.
+Short rows use an odd number of fresh processes per pair and the pair median,
+rather than increasing in-process repetitions and accidentally amortizing
+one-time construction. All result checksums and work counts agree.
+
+The primary effect is the geometric mean of the paired candidate/baseline
+ratios. Values below one favor HEAD. The primary t-score is a paired t-test on
+log ratios; the raw-difference t-score is also shown. Both have 100 degrees of
+freedom, and the unadjusted two-sided 5% critical magnitude is 1.984.
+
+| Application | HEAD/base ratio (95% CI) | Change | Raw t | Log-ratio t | 80% MDE |
+| :-- | --: | --: | --: | --: | --: |
+| Ceph XOR | 1.00295 [1.00130, 1.00460] | 0.295% slower | +3.562 | +3.557 | 0.235% |
+| Azure LRC | 1.00299 [0.99932, 1.00668] | unresolved | +1.593 | +1.617 | 0.524% |
+| Repair DAG | 0.98338 [0.97887, 0.98791] | 1.662% faster | -6.443 | -7.231 | 0.657% |
+| QC-LDPC | 0.98477 [0.97912, 0.99045] | 1.523% faster | -5.061 | -5.296 | 0.822% |
+| Vector node span | 1.01042 [1.00639, 1.01446] | 1.042% slower | +5.102 | +5.147 | 0.571% |
+| GPU MDS | 1.00721 [0.99834, 1.01617] | unresolved | +1.283 | +1.612 | 1.268% |
+
+The first historical rerun's double-digit Ceph/Azure/Repair-DAG deltas were
+therefore environmental noise, not reproducible regressions. The powered
+head-to-head resolves four small effects and leaves Azure and GPU compatible
+with no change at this power. The four resolved rows have log-ratio t-score
+magnitudes above 3.55, so their classification also survives a conservative
+six-test Bonferroni threshold; Azure and GPU do not cross even the unadjusted
+threshold.
+
+There is one provenance limitation. The historical JSON's recorded source
+hash is not reachable in Git, so its exact historical binary cannot be rebuilt.
+The auditable baseline here is the revision that landed that evidence,
+`82751420d`; the evidence records both revision and saved-binary hashes.
+
 Reproduce and check with:
 
 ```text
@@ -34,4 +71,11 @@ python3 python/rerun_original_rust_benchmarks.py \
   --output evidence/c985-original-rust-rerun.json --rounds 11 --cpu 2
 python3 python/check_original_rust_rerun.py \
   evidence/c985-original-rust-rerun.json
+python3 python/head_to_head_original_rust_benchmarks.py \
+  --baseline-binary /home/tavis/.cache/ergodis-c985-h2h-baseline-target/release/bench_kernels \
+  --candidate-binary /home/tavis/.cache/ergodis-c985-original-rerun/release/bench_kernels \
+  --baseline-revision 82751420da5952f1354432e3c6144bacbf107167 \
+  --output evidence/c985-original-rust-head-to-head.json --rounds 101 --cpu 2
+python3 python/check_original_rust_head_to_head.py \
+  evidence/c985-original-rust-head-to-head.json
 ```
