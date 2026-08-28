@@ -181,15 +181,22 @@ parameters against the 23-parameter selector/zero budget.  The simultaneous
 exception is exactly the two sextics `tau^6+tau+1` and
 `tau^6+tau^5+tau^4+tau+1`.  Thirty values close uniformly; only their twelve
 roots remain.
-The final one-point deficit is closed by an explicit torsion lemma.  Inverting
-at one rational pole converts each trace-zero companion to a two-row
-Weierstrass model; direct substitution in the characteristic-two 3-division
-polynomial gives a rational point of exact order three.  Hence the rootlessness
-twist has order `1 mod 3`; parity and Hasse force at least 52 points, or 24
-rootless parameters after removing the two pole fibres and infinity.  This
-beats the 23-parameter selector budget and closes all twelve values without a
-point-count certificate.  The original quartic divisor is explicit in
+The final one-point deficit is closed by a uniform torsion lemma.  Every
+generic trace-zero companion is the Berlekamp sign-resolvent of the same cubic
+pencil.  Its connected triple-root-free Galois root cover is an étale cyclic
+cubic cover.  Its rational deck translation has order three, and the two
+isogenous genus-one curves have equal finite-field point counts.  Thus all
+seven sextics acquire rational order three at once, with no semilinear case
+split.  The rootlessness twist has order `1 mod 3`; parity
+and Hasse force at least 52 points, or 24 rootless parameters after removing
+the two pole fibres and infinity.  This beats the 23-parameter selector budget
+without a point-count certificate.  Explicit quartic divisors on the two
+worst fibres remain as an independent audit in
 `c973-2026-08-27-gf64-trace-balance.md`.
+The isogeny core is characteristic-free.  The first GF(27) discriminator is
+therefore a connected separable `S3` cubic carrier with genus-one sign cover
+and no 3-cycle inertia; the binary Artin--Schreier coordinates themselves do
+not transfer.
 
 ## Objective
 

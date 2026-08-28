@@ -171,13 +171,20 @@ or seven Frobenius sextics in one common family, remain.
 The restricted selector is uniformly nonzero, and parity-sharpened Hasse
 closes five sextics.  The twelve roots of `tau^6+tau+1` and
 `tau^6+tau^5+tau^4+tau+1` are exactly where both rootlessness-curve poles and
-infinity are rational, leaving a one-point Hasse deficit.  A rational-pole
-inversion now converts each trace-zero companion to an explicit Weierstrass
-model, and a two-row substitution in the characteristic-two 3-division
-polynomial exhibits rational order three.  The twist therefore has order
+infinity are rational, leaving a one-point Hasse deficit.  A stronger uniform
+compression identifies every generic trace-zero companion as the Berlekamp
+sign-resolvent of one cubic pencil.  Its connected triple-root-free Galois
+root cover is an étale cyclic cubic cover.  The rational deck translation and
+equal point counts of isogenous elliptic curves force rational order three on all
+seven sextics at once, without the semilinear case split.  The twist has order
 `1 mod 3`; its even Hasse count improves from at least 50 to at least 52 and
-closes the selector inequality.  Thus GF(64) is structurally closed with no
+closes the selector inequality.  Explicit Weierstrass points on the two worst
+fibres give an independent audit.  Thus GF(64) is structurally closed with no
 point-count certificate.  GF(27) and external review remain.
+The cover/isogeny lemma is characteristic-free: the first GF(27) discriminator
+is now whether its carrier admits a connected separable `S3` cubic pencil with
+genus-one sign cover and no 3-cycle inertia.  Do not copy the binary
+Artin--Schreier coordinates.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

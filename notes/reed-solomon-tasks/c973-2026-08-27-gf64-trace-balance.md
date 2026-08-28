@@ -747,6 +747,104 @@ Multiplying by the four-root collision polynomial `H(a)` gives exactly the
 old degree bound `14+2+2+4=22`, now with proved nonvanishing on this split
 line.  Requiring `a!=0` raises the forbidden-parameter budget to 23.
 
+There is a stronger compression than the seven-sextic Hasse split.  Form the
+cubic pencil
+
+\[
+ G_a(T)=B_0(a)T^3+B_1(a)T^2+B_2(a)T+B_3(a).              \tag{32a}
+\]
+
+Its three Hankel minors are exactly `n0,n1,n2`.  After normalizing by `B0`
+and writing the cubic as `T^3+bT^2+cT+d`, its classical Berlekamp
+discriminant is
+
+\[
+ \operatorname {Berl}(G)
+ =\frac{b^3d+bcd+c^3+d^2}{(d+bc)^2}.
+\]
+
+On the other hand,
+
+\[
+ \frac{n_0n_2}{n_1^2}
+ =\operatorname {Berl}(G)+1.                             \tag{32b}
+\]
+
+Choose `rho in GF(4)` with `rho^2+rho=1`.  Since `GF(4)` lies in `GF(64)`,
+translation of the Artin--Schreier coordinate by `rho` identifies `C0` with
+the quadratic sign-resolvent of the cubic pencil.  Thus `C0` is not merely an
+unrelated Artin--Schreier curve.
+
+For the present split line, (32a) has the form `aA(T)+C(T)`, where
+
+\[
+\begin{aligned}
+A(T)&=\tau T^3+(\tau^2+1)T^2+T+\tau+1,\\
+C(T)&=\tau^2T^3+\tau T^2+(\tau^2+1)T+1.
+\end{aligned}                                             \tag{32c}
+\]
+
+Direct elimination gives
+
+\[
+ \operatorname {Res}_T(A,C)
+ =\tau^2(\tau^9+\tau^8+\tau^7+\tau^6+\tau^5+\tau+1).
+                                                               \tag{32d}
+\]
+
+The degree-nine factor is irreducible over `F2`, so it has no root in
+`GF(64)`.  Hence the root curve of `G` is a connected degree-three cover of
+the `a`-line.  On the 42 generic trace-one values,
+
+\[
+ \partial_a n_1=(\tau+1)(\tau^3+\tau+1),
+\quad
+ \operatorname {Res}_a(n_1,n_0n_2)
+ =\tau^5(\tau^2+\tau+1)(\tau^6+\tau^5+1)^4              \tag{32e}
+\]
+
+are nonzero.  The leading coefficient of `n1` is `tau+1`, also nonzero.
+Consequently the cubic pencil has no triple-root ramification, including at
+infinity.
+
+Let `D` be the normalization of the cubic pencil's Galois closure.  Equation
+(32b) identifies `C0` with the quotient by `A3`.  Therefore
+
+\[
+                         D\longrightarrow C_0             \tag{32f}
+\]
+
+is a connected étale cyclic cover of degree three.  Since `C0` has genus one,
+so does `D`.  Every genus-one curve over a finite field has a rational point.
+After choosing one on `D`, a deck generator is a fixed-point-free rational
+automorphism of order three, hence translation by a rational point of exact
+order three.  Thus `3` divides `#D(GF(64))`.  The map (32f) induces a
+3-isogeny of Jacobians, and isogenous elliptic curves over a finite field have
+the same point count.  Therefore `3` divides `#C0(GF(64))`, and Cauchy's
+theorem gives rational order three on `C0` for every one of the 42 generic
+trace-one values.  Over `GF(2^m)`, (32b) identifies the sign cover with `C0`
+when `m` is even and with its constant-one twist when `m` is odd.  The
+isogeny argument itself does not require rational cube roots of unity.
+
+More generally, the cover-theoretic part is characteristic-free.  For a
+connected separable `S3` cubic pencil over any finite field, if its sign cover
+has genus one and no inertia group contains a 3-cycle, the Galois closure over
+the sign cover is again an étale cyclic cubic cover and the same isogeny
+argument forces rational 3-torsion.  In odd characteristic the sign cover is
+the usual discriminant double cover rather than (32b).  Thus the right GF(27)
+test is whether its still-unbuilt carrier reduction is such a cubic pencil;
+one should not copy the binary Artin--Schreier coordinates.
+
+This removes the semilinear case split altogether.  For every such value,
+`#C1=130-#C0` is congruent to one modulo three.  It is even and Hasse gives
+`#C1>=50`, hence uniformly `#C1>=52`.  At most four rational points lie over
+the poles and infinity, so at least `(52-4)/2=24` finite parameters are
+rootless.  Since `24>23`, all seven sextics close simultaneously.  Neither
+the factorization (33) nor separate representatives `P1,...,P7` are needed
+for the load-bearing proof.  The remainder of this subsection records the
+earlier sharp boundary localization and a redundant coordinate audit of the
+two worst fibres.
+
 The rootlessness parameter curve is geometrically integral of genus one.
 Its finite poles are the roots of `n1(a)`, which is squarefree on the
 trace-one locus.  Apply Hasse to the trace-one twist.  Its point count is
@@ -764,9 +862,9 @@ simultaneously exactly when `tau` is a root of
  (\tau^6+\tau+1)(\tau^6+\tau^5+\tau^4+\tau+1).           \tag{33}
 \]
 
-These are `P1` and `P7`.  Thus the uniform Hasse-selector argument closes the
-other five sextics, or 30 of the 42 trace-one values.  Only the twelve roots
-of (33) retain the one-point numerical gap: Hasse alone permits 23 rootless
+These are `P1` and `P7`.  Before the uniform isogeny argument (32a)--(32f),
+plain Hasse plus parity closed the other five sextics and left precisely these
+twelve roots with a one-point numerical gap: Hasse alone permits 23 rootless
 parameters there, while the selector budget is 23.
 
 That one-point gap has an exact torsion reformulation.  Let `C0` be the
@@ -789,9 +887,10 @@ Therefore
 \]
 
 where the four removed points are the two rational pole fibres and the two
-points above infinity.  The required order-three divisor is explicit.  The
-following calculation also compresses both exceptional sextics to one
-standard construction.  Write
+points above infinity.  Independently of the uniform isogeny, the
+order-three divisor on these two worst fibres is explicit.  The following
+coordinate audit compresses both exceptional sextics to one standard
+construction.  Write
 
 \[
  K_i=\mathbf F_2[\tau]/(P_i),\qquad h=n_1,\qquad f=n_0n_2,
@@ -972,21 +1071,24 @@ not evidence for a new modular family.
 
 ## 4. Boundary
 
-This checkpoint now closes the GF(64) pointed R11 problem.  The final
-exceptional step uses only the rational-pole inversion (33b), two explicit
-Weierstrass rows, and the universal 3-division polynomial (33f).  It does not
-use the discovered point counts `54` and `76`, an ambient census, or a finite
-certificate.  GF(27) and the independent reviews remain outside this
-checkpoint.
+This checkpoint now closes the GF(64) pointed R11 problem.  Its final
+compression identifies `C0` as the Berlekamp sign-resolvent of the cubic
+pencil (32a).  The connected étale cyclic root cover, its rational deck
+translation, and isogeny point-count equality give rational order three
+uniformly on all 42 generic trace-one forms.  The
+two explicit Weierstrass rows (33d) remain only an independent coordinate
+audit.  The proof does not use the discovered point counts `54` and `76`, an
+ambient census, or a finite certificate.  GF(27) and the independent reviews
+remain outside this checkpoint.
 
 No manuscript or software edit supports this theorem.
 
 ## 5. `ej` + `tt` and mystery ledger
 
-The `ej` pass converts rootlessness from an opaque trace condition into an
-exact balanced affine direction.  The `tt` pass asks where that affine line
-lives inside the split-quintic cover; composition-factor or dimension
-arguments do not answer that arithmetic question.
+The first `ej` pass converts rootlessness from an opaque trace condition into
+an exact balanced affine direction.  The closing `tt` pass recognizes its
+Artin--Schreier companion as a cubic sign-resolvent.  This replaces seven
+semilinear elliptic cases by one étale-cover/isogeny argument.
 
 | mystery | status | exact next gate |
 |---|---|---|
@@ -997,14 +1099,15 @@ arguments do not answer that arithmetic question.
 | What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
-| How many marked-torus forms remain? | 66 total; selector nonvanishing plus Hasse leaves 12 | the two sextics in (33) |
+| How many marked-torus forms remain? | none; the uniform 3-isogeny closes all 42 generic trace-one values at once | settled by (32a)--(32f) |
 | Does rootlessness close the `(0,0)` boundary? | no; (25) makes the cover empty, but the opposite trace splits it into two rational lines | closed by `130>54` |
 | What closes the `(0,1)` boundary? | a `GF(8)` elliptic specialization with 72 points | closed by `72>52` |
 | What happens when `tau^6+tau^5+1=0`? | `n0n2=tau^9 n1^2` with trace-zero constant | all six forms closed by `130>54` |
 | How far does `a=tau` extend? | factorization (31) closes nine additional noncolliding roots; `tau=0` reuses the endpoint | ten more forms closed |
-| How many semilinear cases are left? | two trace-one sextics | the simultaneous rational-poles/infinity locus |
+| How many semilinear cases are left? | none; `P1,...,P7` are no longer load-bearing cases | the factorization remains diagnostic only |
 | Is the restricted degree-22 selector nonzero? | yes; (32) is its load-bearing pseudo-remainder coefficient | proved uniformly on all trace-one forms |
-| What repairs the last one-point Hasse deficit? | the rational-pole inversion (33b) exposes the order-three points (33e) | settled structurally; twist order `1 mod 3` forces `52`, hence 24 parameters |
+| What repairs the last one-point Hasse deficit? | the Berlekamp root cover gives rational deck 3-torsion and an isogeny uniformly; (33b)--(33g) audit the two worst fibres | settled structurally; twist order `1 mod 3` forces `52`, hence 24 parameters |
+| Does the torsion mechanism extend? | yes: for any finite-field connected `S3` cubic pencil with genus-one sign cover and no 3-cycle inertia, the sign cover has rational 3-torsion; in binary fields (32b) places it on `C0` for even extension degree and the constant-one twist for odd degree | reusable structural lemma; test it at future C620 deficits and as the first GF(27) carrier discriminator |
 | Can cross-ratio transformations reduce the seven sextics? | no at the contracted pointed level; the ordered-pair torus fixes `tau` | `4+3` is not a valid symmetry quotient |
 | Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (34)--(36) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
