@@ -22,9 +22,8 @@ This map covers Paper I after the two-paper split. Results owned by
 
 | Source | Appendix result | Disposition |
 |---|---|---|
-| C804/C807 | partial-Weyl marginal recognition, generation criterion, minimal-support realization, prime-field CSS corollary, and integer-modulus extension | retained as Appendix A; sufficient criterion, not a competing AME headline |
-| C774--C777 | 2-uniform discreteness, local quadratic stability, and 2-unitary gauge corollary | retained in Appendix B as mechanism comparisons |
-| C786/C795 | stabilizer overlap gap and balanced-cut residual stability; `k`-uniform generator-coordinate radius, ceiling, and single-marginal explicit threshold | the two load-bearing estimates are proved in Section 5; the alternative routes remain in Appendix B |
+| C774--C777 | 2-uniform discreteness, local quadratic stability, and 2-unitary gauge corollary | retained in Appendix A as mechanism comparisons |
+| C786/C795 | stabilizer overlap gap and balanced-cut residual stability; `k`-uniform generator-coordinate radius, ceiling, and single-marginal explicit threshold | the two load-bearing estimates are proved in Section 5; the alternative routes remain in Appendix A |
 | C796 | stability under per-site spectral control from a balanced cut | retained as the residual estimate used by the cleaning theorem |
 | C581/C795 | quantitative one-marginal axis recovery and two-state Clifford rounding | retained as the exponentially diluted comparison route |
 | C830 | aggregate minimum-support rounding at `Theta_q(m^-3/4(2/q)^m)` | retained as the orthogonal-support-sector comparison; superseded globally by cleaning |

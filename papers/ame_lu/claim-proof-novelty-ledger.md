@@ -10,8 +10,7 @@
 | Uniform scaling | complete closed-form deduction from `R_clean` | no optimality or existence claim | state `Theta(min{p^-1,q^-1/2,n^-1/2})` and the two Reed--Solomon regimes |
 | Robust transition compatibility and stabilizer-character obstruction | complete manuscript proof | no novelty adjective and no claim of a global-radius improvement | body proposition; state explicitly that product-Pauli correction can remain locally far |
 | Logical Clifford rounding | complete one-corollary deduction from robust transition compatibility, input-plane surjectivity, and stabilizer cancellation | no separate novelty claim; presented as a consequence of the leakage-aware quantitative result | body corollary; controls the induced logical action without claiming a nearby exact physical symmetry |
-| Partial-Weyl recognition | complete manuscript proof; no Lean or certificate coverage | qubit theorem and classical tensor-uniqueness ancestry credited; no priority claim in local dimension two | restrained Appendix A |
-| Two-/`k`-uniform stability and alternative rounding routes | complete manuscript proofs; only the generator/second-moment core is kernel checked | Wirthmüller and Tan conceded for stabilizer discreteness subcases; Fisher and tensor-perturbation sources credited; no optimality claim | restrained Appendix B as mechanism comparisons |
+| Two-/`k`-uniform stability and alternative rounding routes | complete manuscript proofs; only the generator/second-moment core is kernel checked | Wirthmüller and Tan conceded for stabilizer discreteness subcases; Fisher and tensor-perturbation sources credited; no optimality claim | restrained Appendix A as mechanism comparisons |
 
 ## Novelty boundary
 

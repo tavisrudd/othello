@@ -61,9 +61,9 @@ dimension-only radius, the rounded symplectic maps already satisfy the exact
 transition system. Localized commutators do not see the stabilizer character, so
 the remaining product-Pauli correction need not be locally small.
 
-The appendices retain partial-Weyl recognition, detailed two- and `k`-uniform
-stability, and the single-marginal and aggregate rounding routes as mechanism
-comparisons. They are not competing headline theorems.
+The appendices retain detailed two- and `k`-uniform stability and the
+single-marginal and aggregate rounding routes as mechanism comparisons. They
+are not competing headline theorems.
 
 ## Formal boundary
 

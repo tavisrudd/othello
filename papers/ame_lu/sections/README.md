@@ -15,7 +15,6 @@ hierarchy:
 
 The appendices contain material that is not needed for a first reading:
 
-- partial-Weyl recognition beyond AME states;
 - alternative two- and `k`-uniform stability mechanisms, weaker
   single-marginal and aggregate rounding routes, and the two-unitary-gate
   translation; and

@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 319751,
+        "bytes": 301989,
         "path": "ame-lu.pdf",
-        "sha256": "59b3cf5b10361de98747574a41fdecdf14e0222bf83d15a2f58c31e22f98fe3a"
+        "sha256": "a1d6720e35f8971d3bfca6f813420b1e313630a117929c07517aa5e072cb8007"
       },
       {
         "bytes": 2652,
@@ -41,9 +41,9 @@
         "sha256": "187e03eb0106383ebcd2aebcd0c728bb0a265591ca1ceffda277c90302044723"
       },
       {
-        "bytes": 5033,
+        "bytes": 4989,
         "path": "main.tex",
-        "sha256": "340e9ce97380dff9d40b884b8df01c4dbe04b9ceffc742349d86f0f2693980eb"
+        "sha256": "7a6c2cf8cb151a04dd868bc6b94e60b5e8c3f799850f231a826dcb7f995edfee"
       },
       {
         "bytes": 22705,
@@ -56,9 +56,9 @@
         "sha256": "9188f8fa51317eea3babed82c650d5fff1249dac566ef52c4b20b8b60971a82e"
       },
       {
-        "bytes": 11960,
+        "bytes": 11839,
         "path": "sections/01-introduction.tex",
-        "sha256": "58dcd7f87264fdf420fd7bff2b3878fcfe86a2d50f255f93845d1980e0d8d3f8"
+        "sha256": "24dff0d6b2cbcc1b265b0be68ccffaee659438370c1f2d099e5ab447a7265583"
       },
       {
         "bytes": 3101,
@@ -81,22 +81,17 @@
         "sha256": "23a548769c4d7b2afd0871368cb58ec606c3798975af2e180a160a0a938862a4"
       },
       {
-        "bytes": 4277,
+        "bytes": 4146,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "dce4e96d3afb15c7ca9d4cda3c08ad1232a5fc7560f48dff9d3f9cdf9d2fb845"
-      },
-      {
-        "bytes": 11892,
-        "path": "sections/A-partial-weyl-recognition.tex",
-        "sha256": "8e15acbb2a2fb43c809021ed7db2d7823b916dac8bd9db91089324f7ea535865"
+        "sha256": "72736b9e3273ad5c4a3305fcd0d0a04762bf11bcd1b5c9ee7cf9546288fe7dd1"
       },
       {
         "bytes": 59058,
-        "path": "sections/B-secondary-quantitative.tex",
+        "path": "sections/A-secondary-quantitative.tex",
         "sha256": "27cd2ba65fc61b6961ead29f3da8d437ecdb50249b838cadc8a3bea1f2a73472"
       }
     ],
-    "tree_sha256": "10b41edf87f18eac5c35423b0a653f1f72aa48f37c02a5fb4582b45dbde4aedb"
+    "tree_sha256": "4e313859271323e3da4d463a653ff06b67f91f94e681acec40657ea25d0c97b0"
   },
   "formal_companion": {
     "artifacts": [
