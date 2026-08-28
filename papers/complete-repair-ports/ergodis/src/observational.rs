@@ -1813,6 +1813,63 @@ impl CompiledObservation {
             .copied()
     }
 
+    /// Return a shortest typed generator word from `start_class` to
+    /// `target_class`, together with its concrete generator IDs.
+    pub fn shortest_generator_word(
+        &self,
+        start_class: u32,
+        target_class: u32,
+    ) -> Result<Option<Box<[u32]>>, ObservationalError> {
+        let class_count = self.class_outputs.len();
+        if start_class as usize >= class_count || target_class as usize >= class_count {
+            return Err(ObservationalError::CompiledShape);
+        }
+        if start_class == target_class {
+            return Ok(Some(Box::default()));
+        }
+        let (generator_ranges, generator_ids) =
+            index_generators_by_sort(self.class_ranges.len(), &self.generator_records, false)?;
+        let mut parent_classes = vec![u32::MAX; class_count];
+        let mut parent_generators = vec![u32::MAX; class_count];
+        let mut queue = VecDeque::with_capacity(class_count);
+        parent_classes[start_class as usize] = start_class;
+        queue.push_back(start_class);
+        while let Some(class) = queue.pop_front() {
+            let sort = self
+                .class_ranges
+                .partition_point(|range| range.end() <= class);
+            let Some(range) = self.class_ranges.get(sort).copied() else {
+                return Err(ObservationalError::CompiledShape);
+            };
+            if !range.contains(class) {
+                return Err(ObservationalError::CompiledShape);
+            }
+            let generators = generator_ranges[sort];
+            for &generator in &generator_ids[generators.start as usize..generators.end() as usize] {
+                let next = self
+                    .transition(generator, class)
+                    .ok_or(ObservationalError::CompiledShape)?;
+                if parent_classes[next as usize] != u32::MAX {
+                    continue;
+                }
+                parent_classes[next as usize] = class;
+                parent_generators[next as usize] = generator;
+                if next == target_class {
+                    let mut word = Vec::new();
+                    let mut cursor = target_class;
+                    while cursor != start_class {
+                        word.push(parent_generators[cursor as usize]);
+                        cursor = parent_classes[cursor as usize];
+                    }
+                    word.reverse();
+                    return Ok(Some(word.into_boxed_slice()));
+                }
+                queue.push_back(next);
+            }
+        }
+        Ok(None)
+    }
+
     pub fn separators(&self) -> impl Iterator<Item = (SeparatorRecord, &[u32])> {
         self.separators.iter().copied().map(|record| {
             let start = record.path_start as usize;
@@ -4337,6 +4394,50 @@ mod tests {
         assert_eq!(deferred.state_classes(), immediate.state_classes());
         assert_eq!(deferred.multiway_records(), immediate.multiway_records());
         verify_compilation(&presentation, &deferred).unwrap();
+    }
+
+    #[test]
+    fn compiled_quotient_synthesizes_a_shortest_typed_generator_word() {
+        let presentation = FinitePresentation::new(
+            [5, 1],
+            vec![0, 1, 2, 3, 4, 9],
+            [
+                GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 0,
+                    transitions: vec![1, 2, 3, 4, 4].into_boxed_slice(),
+                },
+                GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 0,
+                    transitions: vec![2, 3, 4, 4, 4].into_boxed_slice(),
+                },
+            ],
+        )
+        .unwrap();
+        let compiled =
+            compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
+                .unwrap();
+        let start = compiled.state_classes()[0];
+        let target = compiled.state_classes()[4];
+        let word = compiled
+            .shortest_generator_word(start, target)
+            .unwrap()
+            .unwrap();
+        assert_eq!(&*word, &[1, 1]);
+        let reached = word
+            .iter()
+            .try_fold(start, |class, &generator| {
+                compiled.transition(generator, class)
+            })
+            .unwrap();
+        assert_eq!(reached, target);
+        assert_eq!(
+            compiled
+                .shortest_generator_word(start, compiled.state_classes()[5])
+                .unwrap(),
+            None
+        );
     }
 
     #[test]
