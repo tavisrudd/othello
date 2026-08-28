@@ -8,7 +8,7 @@
 | The cleaning theorem is presented as a new qualitative obstruction | The introduction and Section 5 credit the exact three-cleanable-region Clifford theorem and isolate the local contribution as leakage control, Fourier rounding, and AME composition. |
 | The `8ε` estimate assumes the localized commutator preserves the code | The proof uses only scalar compression on the correctable third region and separately controls leakage in the encoded implementation metric. |
 | A local Clifford rounded independently at each party is assumed to be an exact symmetry | The proof invokes stabilizer-overlap quantization only after bounding the product branch; robust linear atlas compatibility is stated separately and is not used as affine branch selection. |
-| Robust atlas compatibility is overstated as a global-radius improvement | The proposition and conclusion state that commutators cancel Weyl phases, leaving an uncontrolled product-Pauli character correction. |
+| Robust transition compatibility is overstated as a global-radius improvement | The proposition and conclusion state that commutators cancel Weyl phases, leaving an uncontrolled product-Pauli character correction. |
 | `Theta(n^-1/2)` is read as an unconditional AME existence result | Every asymptotic statement says “over existing states” or names the explicit Reed--Solomon family. |
 | Generator-coordinate stability is confused with a defect-ball radius | Appendix B and the introduction distinguish the two; only cleaning supplies the defect-only entry theorem. |
 | Secondary quantitative routes compete with the headline | They occur only in Appendix B and are introduced as mechanism comparisons. |
@@ -21,11 +21,11 @@ The cold read must answer all three questions without using the ledgers:
 
 1. Are exact rigidity and cleaning-based quantitative rounding identifiable
    by page two?
-2. Can the reader state both proof mechanisms: full-Weyl marginal axis
+2. Can the reader state both proof mechanisms: complete Weyl-basis marginal axis
    recovery and cleaning followed by Weyl--Fourier concentration and the
    stabilizer gap?
 3. Does the reader identify the affine stabilizer character, rather than the
-   symplectic atlas, as the remaining branch-selection obstruction?
+   symplectic transition system, as the remaining branch-selection obstruction?
 
 Any negative answer reopens the introduction or theorem ordering. Page count
 alone is not a reason to add material.
@@ -34,7 +34,7 @@ alone is not a reason to add material.
 
 **PASS.** The exact theorem begins on page 1 and the quantitative theorem on
 page 2. The intervening prose states the two mechanisms without relying on
-later notation: full-Weyl marginal axis recovery for exact rigidity, and
+later notation: complete Weyl-basis marginal axis recovery for exact rigidity, and
 three-region cleaning followed by Weyl--Fourier concentration and the
 stabilizer overlap gap for rounding. The abstract, introduction, robust-atlas
 paragraph, and conclusion all identify the affine stabilizer character as the

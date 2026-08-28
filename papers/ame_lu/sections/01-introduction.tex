@@ -1,14 +1,27 @@
 \section{Introduction}
 
 An absolutely maximally entangled state has maximally mixed reductions on
-every subsystem no larger than half the parties.  Fix a prime power
-\(q=p^e\) and the standard additive Weyl system on \(\mathbb C^q\).  We
-ask how much of those local Weyl coordinates survives an arbitrary
-single-party change of basis.
+every set containing at most half of its parties.  Such states are also
+called perfect tensors and, after one party is designated as an input, give
+quantum maximum-distance-separable encoders.  They therefore sit at the
+intersection of multipartite entanglement, stabilizer codes, transversal
+gates, and tensor-network constructions.
 
-Local-unitary (LU) equivalence does not imply local-Clifford (LC)
-equivalence for general stabilizer states \cite{JiChenWeiYing2008}.
-Maximal entanglement changes the answer completely.
+This paper asks how rigid their local coordinates are.  With the party labels
+fixed, two states are \emph{local-unitary (LU) equivalent} if a tensor product
+of one-party unitaries maps one state ray to the other.  We say \emph{LU up to
+party relabelling} when a party permutation is also allowed.  The analogous
+relations are \emph{local-Clifford (LC) equivalence} and LC equivalence up to
+party relabelling, with every one-party factor required to normalize the
+chosen Weyl, or Pauli, system.  The theorem below uses the latter convention;
+setting the permutation to the identity gives the fixed-label statement.
+Local-Clifford equivalence is
+discrete and can be studied through finite symplectic linear algebra;
+local-unitary equivalence is a priori continuous and much larger.  The two
+relations do not coincide for general stabilizer states
+\cite{JiChenWeiYing2008}.
+
+Maximal entanglement removes that difference.
 
 \begin{theorem}[Local-unitary rigidity]\label{thm:lu-lc-rigidity}
 Let \(q=p^e\), let \(m\geq2\), and let
@@ -24,38 +37,68 @@ Then every \(U_i\) normalizes the Weyl system.  Thus the displayed
 equivalence is local Clifford.
 \end{theorem}
 
-The proof reads one \((m+1)\)-party reduced operator.  Stabilizer labels
-supported there form a group of order \(q^2\), and projection to the
-label space at any retained party is bijective.  The nonidentity part of
-the marginal is therefore diagonal on the complete local Weyl basis, with
-no missing axis.  Rank-one contractions recover those axes intrinsically,
-so product conjugation must permute them.  The argument is independent of
-CSS form, equal phases, classical linearity, and \(\F_q\)-linearity of the
-stabilizer labels:
+The theorem converts a continuous equivalence problem into a finite one.
+It is valid for every prime power, for arbitrary additive stabilizers, and
+does not assume CSS form, equal stabilizer phases, classical linearity over
+\(\F_q\), or a particular construction of the AME state.  The restriction
+\(m\geq2\) is sharp: a Bell pair has the continuous symmetry
+\(U\otimes\overline U\).
+
+The proof uses one elementary support calculation.  On any \((m+1)\)-party
+set, the stabilizer labels supported there form a group of order \(q^2\).
+Projection onto the two-dimensional Weyl-label space of any retained party
+is bijective.  Consequently the reduced operator contains every local Weyl
+axis exactly once in a matched diagonal decomposition.  The uniqueness of
+that decomposition forces each local unitary to permute the Weyl axes and
+hence to be Clifford.  In ordinary language,
 \[
- \text{AME support squeeze}\ \Longrightarrow\
- \text{full-Weyl marginal}\ \Longrightarrow\
- \text{intrinsic axes}\ \Longrightarrow\
- \text{Clifford factors}.                              \tag{1.1}
+ \text{AME support counting}\ \Longrightarrow\
+ \text{all local Weyl axes appear}\ \Longrightarrow\
+ \text{every local factor is Clifford}.                 \tag{1.1}
 \]
 
-The approximate fixed-state symmetry problem cannot use this proof naively.
-The nonidentity part of one minimum-support marginal has exponentially small
-Hilbert--Schmidt norm.  Instead, choose one tensor leg as the logical input of
-the associated \([[2m-1,1,m]]_q\) code.  Its physical parties split into
-three correctable regions.  A nested commutator localizes on one region,
-scalar compression controls leakage, and Weyl--Fourier concentration recovers
-a Clifford on the logical leg.  Repeating this with each party as input gives
-the following global statement.
+The operational code consequence follows by treating one party as the
+logical input of the associated quantum MDS encoder.  Throughout,
+\emph{transversal} means a tensor product of one-site physical operators
+with the physical coordinates fixed.
+
+\begin{corollary}[Factorwise transversal rigidity]
+\label{cor:transversal-clifford}
+Let \(V_\psi,V_\phi:\mathbb C^q\to
+(\mathbb C^q)^{\otimes(2m-1)}\) be encoders whose normalized Choi states
+are stabilizer \(\AME(2m,q)\) states.  If
+\[
+ (U_1\otimes\cdots\otimes U_{2m-1})V_\psi=V_\phi L,
+\]
+then \(L\) and every \(U_i\) are Clifford.  In particular, no code in
+this family admits a transversal non-Clifford logical unitary.
+\end{corollary}
+
+\subsection*{Quantitative question}
+
+Exact rigidity does not by itself say what happens when a product unitary
+only approximately preserves the state.  For
+\(U=\bigotimes_iU_i\), define its state-vector defect by
+\[
+ \varepsilon(U)=\min_{|z|=1}
+   \lVert U\lvert\psi\rangle-z\lvert\psi\rangle\rVert.
+\]
+The direct marginal proof is poorly conditioned for this problem: the
+nonidentity part of one minimum-support marginal has exponentially small
+Hilbert--Schmidt norm.  We instead regard each party in turn as the logical
+leg of the associated \([[2m-1,1,m]]_q\) code.  Its physical parties can be
+partitioned into three correctable regions.  A leakage-aware cleaning
+argument tests the induced logical action by nested commutators, and a
+finite Fourier argument rounds that action to a Clifford.
+
+The exact constants are useful for applications, so we state them once in
+the introduction.  Their scaling and proof mechanism are the main points.
+Write \(G(\psi)\) for the group of product unitaries that preserve the ray
+of \(\lvert\psi\rangle\).
 
 \begin{theorem}[Quantitative rounding]\label{thm:quantitative-rounding}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(n,q)\) state with
-\(n=2m\), \(m\geq2\), and let \(U=\bigotimes_iU_i\).  Write
-\[
- \varepsilon(U)=\min_{|z|=1}
-   \lVert U\lvert\psi\rangle-z\lvert\psi\rangle\rVert
-\]
-and put
+\(n=2m\), \(m\geq2\), and let \(U=\bigotimes_iU_i\).  Put
 \[
  \tau_p=\min\left\{\frac13,\frac{\sin(\pi/p)}{2\sqrt2}\right\},
  \qquad d_p=(2-2p^{-1/2})^{1/2},
@@ -73,126 +116,129 @@ If \(\varepsilon(U)<R^{\mathrm{clean}}_{n,q}\), then, up to phase,
  \left(\sum_i\lVert h_i\rVert_F^2\right)^{1/2}
    \leq\pi\sqrt q\,\varepsilon(U),                     \tag{1.3}
 \]
-where the \(h_i\) are traceless Hermitian with spectral spread at most
-\(\pi\).  Before the exact branch is selected, each \(U_i\) is within
-normalized Hilbert--Schmidt distance \(8\varepsilon(U)\) of a one-qudit
-Clifford.  Uniformly over prime powers and existing AME states,
+where the \(h_i\) are traceless Hermitian with spectral spread
+\(\lambda_{\max}(h_i)-\lambda_{\min}(h_i)\) at most \(\pi\).  Before the
+exact symmetry \(g\) is selected, each \(U_i\) is
+within normalized Hilbert--Schmidt distance \(8\varepsilon(U)\) of a
+one-qudit Clifford.  Uniformly over prime powers and existing AME states,
 \[
  R^{\mathrm{clean}}_{n,q}
  =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right).
 \]
 \end{theorem}
 
-The exact three-cleanable-region Clifford obstruction is due to
-Pastawski and Yoshida \cite[Lemma~5]{PastawskiYoshida2015}, building on
-stabilizer cleaning \cite[Lemma~1]{BravyiTerhal2009} and the localization
-method behind transversal-gate hierarchy bounds
-\cite{BravyiKonig2013,JochymOConnorKubicaYoder2018}.  The paper makes this
-mechanism quantitative: an implementation with leakage \(\varepsilon\) puts every
-nested logical Weyl commutator within \(8\varepsilon\) of a scalar; a
-finite Fourier argument then rounds it to a Clifford.  Quantized overlaps
-of stabilizer states separate distinct product-Clifford branches by
-\(d_p\), after which the AME second moment gives the collective residual
-bound in \((1.3)\).  The theorem is a certified lower bound on the
-rounding radius, not an optimality claim.
-An exact base intertwiner transfers this theorem verbatim to two states:
-Corollary~\ref{cor:relative-intertwiner-rounding} has the same
-party-count-independent constants on every fixed exact orbit.  Without that
-base hypothesis, Proposition~\ref{prop:quantitative-intertwiner} first detects
-the orbit at the weaker single-marginal scale \(q^{-(m+1)/2}\).
+The proof has three stages.  First, quantitative cleaning places every
+nested logical Weyl commutator within \(8\varepsilon\) of a scalar.
+Second, Fourier concentration on the finite Weyl group produces a nearby
+local Clifford at each party.  Third, the quantized overlap of stabilizer
+states separates distinct product-Clifford branches by the uniform gap
+\(d_p\).  Once the correct exact branch is known, the AME second moment
+gives the collective residual estimate in \((1.3)\).  The radius is a
+certified lower bound, not an optimality claim.
 
-The support bijections retain more than the individual Weyl axes.  For an
-\((m+1)\)-party support \(A\), projection at party \(i\) gives a
-bijection \(p_i:L_\psi(A)\to\F_q^2\).  The transition maps
-\(M_A(i,j)=p_jp_i^{-1}\) form the \emph{minimum-support atlas}.  Their
-holonomies record how the recovered frames fit together.
+An exact product-unitary intertwiner between two states transfers this
+result without changing the constants
+(Corollary~\ref{cor:relative-intertwiner-rounding}).  Without such a base
+intertwiner, Proposition~\ref{prop:quantitative-intertwiner} detects the
+correct orbit only at the weaker scale \(q^{-(m+1)/2}\), because that route
+must read the small nonidentity signal of one marginal.
 
-\begin{theorem}[Minimum-support atlas classification]
+\subsection*{Transition maps and the remaining obstruction}
+
+The support bijections retain how the local Weyl frames are related.  For an
+\((m+1)\)-party support \(A\), projection at party \(i\) gives a bijection
+\(p_i:L_\psi(A)\to\F_q^2\).  The maps
+\[
+ M_A(i,j)=p_jp_i^{-1}
+\]
+are the usual operator-pushing maps between the local Weyl-label spaces.
+Their compositions around closed paths are holonomies.
+
+\begin{theorem}[Classification by minimum-support transition maps]
 \label{thm:atlas-classification}
 After a fixed party relabelling, two stabilizer \(\AME(2m,q)\) states are
-LU equivalent exactly when their minimum-support atlases are equivalent by
-local trace-symplectic changes of Weyl frame.  For one state, if
-\(\mathcal G_\psi\) is the group of compatible local symplectic gauges and
-\(\Gamma_\psi\) its fixed-party projective product-unitary symmetry group,
-then
+LU equivalent exactly when their systems of minimum-support transition maps
+are equivalent by local trace-symplectic changes of Weyl frame.  For one
+state, if \(\operatorname{Aut}_{\mathrm{tr}}(\psi)\) is the group of
+compatible local symplectic automorphisms of the transition system and
+\(\Gamma_\psi\) its fixed-party projective
+product-unitary symmetry group, then
 \[
  1\longrightarrow L_\psi\longrightarrow\Gamma_\psi
-  \longrightarrow\mathcal G_\psi\longrightarrow1
+  \longrightarrow\operatorname{Aut}_{\mathrm{tr}}(\psi)\longrightarrow1
 \]
-is exact.  When \(q\) is prime, \(\mathcal G_\psi\) is the centralizer in
-\(\mathrm{SL}_2(q)\) of the atlas holonomies after base transports are
-chosen.
+is exact.  When \(q\) is prime, \(\operatorname{Aut}_{\mathrm{tr}}(\psi)\)
+is the centralizer in
+\(\mathrm{SL}_2(q)\) of the transition holonomies after base transports
+are chosen.
 \end{theorem}
 
-The stabilizer hypothesis is essential to this discrete atlas.  General AME
-families can contain infinitely many LU classes; Ramadas and Lakshminarayan
-give an orthogonal-array criterion producing such families
-\cite[Theorem~1 and Corollary~1]{RamadasLakshminarayan2025}.
-
-At the dimension-only radius
+At the dimension-dependent radius
 \[
  \min\left\{\frac{\tau_p}{8},
    \frac{2\sin(\pi/p)}{4+64\sqrt q}\right\},           \tag{1.4}
 \]
-the symplectic maps recovered by cleaning already satisfy every exact
-atlas transition.  This still does not select the exact affine branch.
-Localized commutators cancel Weyl-translation phases, so they see the
-stabilizer label space but not its character.  The resulting exact
-product-Pauli correction need not be locally close to the rounded product
-Clifford.  This affine-character obstruction is the precise missing input
-between robust linear compatibility and a party-count-independent global
-entry radius.
+the symplectic maps recovered by cleaning already preserve every transition
+map exactly.  This does not yet identify the exact product symmetry.
+Localized commutators cancel Weyl-translation phases, so they determine the
+stabilizer label space but not its character.  The resulting product-Pauli
+correction need not be close to the rounded product Clifford.  We refer to
+this standard linear-versus-affine distinction as the
+\emph{stabilizer-character obstruction}.  It is the missing ingredient in a
+party-count-independent global entry radius.
 
-The encoder consequence of exact rigidity is immediate and operational.
-Throughout, \emph{transversal} means a tensor product of one-site physical
-operators with party labels fixed.
+\subsection*{Relation to prior work and contribution}
 
-\begin{corollary}[Factorwise transversal rigidity]
-\label{cor:transversal-clifford}
-Let \(V_\psi,V_\phi:\mathbb C^q\to
-(\mathbb C^q)^{\otimes(2m-1)}\) be encoders whose normalized Choi states
-are stabilizer \(\AME(2m,q)\) states.  If
-\[
- (U_1\otimes\cdots\otimes U_{2m-1})V_\psi=V_\phi L,
-\]
-then \(L\) and every \(U_i\) are Clifford.  In particular, no code in
-this family admits a transversal non-Clifford logical unitary.
-\end{corollary}
+The exact three-cleanable-region Clifford obstruction is due to Pastawski
+and Yoshida \cite[Lemma~5]{PastawskiYoshida2015}, building on stabilizer
+cleaning \cite[Lemma~1]{BravyiTerhal2009} and the localization method behind
+transversal-gate hierarchy bounds
+\cite{BravyiKonig2013,JochymOConnorKubicaYoder2018}.  We use only the exact
+cleaning and localization consequences and prove the leakage estimate,
+finite Weyl--Fourier rounding, and explicit AME composition here.
 
-Rains recovered the three Pauli axes from a diagonal correlation tensor, and
-Van den Nest, Dehaene, and De Moor used that mechanism in a minimum-support
-LU-to-LC criterion for qubit stabilizer states
+For exact LU rigidity, Rains recovered the three Pauli axes from a diagonal
+correlation tensor, and Van den Nest, Dehaene, and De Moor used that mechanism
+in a minimum-support criterion for qubit stabilizer states
 \cite[Theorem~13]{Rains1999}
-\cite[Theorem~1 and Corollary~1]{VanDenNestDehaeneDeMoor2005}.  For qubits,
-Theorem~\ref{thm:lu-lc-rigidity} follows directly: Proposition~\ref{prop:stabilizer-ame-support}
-supplies all three Pauli axes on every minimum support.  Englbrecht and Kraus
-classify all qubit stabilizer local symmetries \cite{EnglbrechtKraus2020},
-while graphical and algorithmic descriptions of qubit stabilizer LU
-equivalence are now available
-\cite{ClaudetPerdrix2024,BurchardtDeJongVandre2024}.  Here the AME support
-squeeze gives a short additive-Weyl proof at every prime power and drives the
-atlas and quantitative results.
+\cite[Theorem~1 and Corollary~1]{VanDenNestDehaeneDeMoor2005}.
+Englbrecht and Kraus classify all qubit stabilizer local symmetries
+\cite{EnglbrechtKraus2020}; graphical and algorithmic descriptions of qubit
+stabilizer LU equivalence are also available
+\cite{ClaudetPerdrix2024,BurchardtDeJongVandre2024}.  The present support
+argument extends the axis-recovery mechanism to arbitrary additive
+prime-power stabilizers and, because every minimum support contains the full
+local Weyl basis, requires no additional minimum-support hypothesis.
 
-Tan proves the general AME--QMDS orbit and symmetry--transversal
-correspondences \cite[Theorems~3.5 and 3.6]{Tan2026}, and computes the
-four-qutrit \cite[Theorem~5.3]{Tan2026} and six-qubit
-\cite[Section~3.4]{TanFiveQubit2026} symmetry/transversal groups.
-Corollary~\ref{cor:transversal-clifford} instead gives factorwise Cliffordness
-for conversions between stabilizer-QMDS encoders; no new qualitative
-hierarchy obstruction is claimed.  Perfect-tensor
+Tan proves the general AME--quantum-MDS orbit and
+symmetry--transversal correspondences \cite[Theorems~3.5 and~3.6]{Tan2026}
+and computes particular four-qutrit and five-qubit symmetry groups
+\cite[Theorem~5.3]{Tan2026,TanFiveQubit2026}.  Our exact conclusion
+is factorwise Cliffordness for every conversion in the stabilizer-AME
+family, together with the complete transition-map invariant.  The new
+quantitative conclusion is the explicit cleaning-based rounding theorem and
+its separation of symplectic compatibility from the remaining stabilizer
+character.  No new qualitative transversal-hierarchy obstruction is claimed.
+
+The stabilizer assumption is essential to the discrete transition system.
+General AME families can contain infinitely many LU classes; Ramadas and
+Lakshminarayan give an orthogonal-array criterion producing such families
+\cite[Theorem~1 and Corollary~1]{RamadasLakshminarayan2025}.  Perfect-tensor
 operator pushing and the encoder interpretation are used explicitly in
-holographic codes \cite[Eq.~(2.3) and Section~5.7]{PastawskiYoshidaHarlowPreskill2015};
-the atlas makes those maps a complete invariant here.  The Bell-pair boundary
-is sharp because \(U\otimes\overline U\) supplies non-Clifford symmetries.
+holographic codes \cite[Eq.~(2.3) and Section~5.7]{PastawskiYoshidaHarlowPreskill2015}.
 
-The proof is organized around the two causal chains just described.
+\subsection*{Organization}
+
 Section~\ref{sec:dictionary} fixes the additive stabilizer conventions and
 derives the AME support formula.  Sections~\ref{sec:rigidity} and
-\ref{sec:atlas} prove exact rigidity, the atlas classification, and the
-encoder corollary.  Section~\ref{sec:quantitative} proves cleaning-based
-rounding, robust atlas compatibility, and the affine-character obstruction.
-Section~\ref{sec:verification} states the trust boundary, and
-Section~\ref{sec:conclusion} records the scaling consequences.  The
-appendices contain partial-Weyl recognition, detailed two- and
-\(k\)-uniform stability, and the weaker single-marginal and aggregate
-rounding mechanisms.
+\ref{sec:atlas} prove exact rigidity, the transition-map classification, and
+the encoder corollary.  Section~\ref{sec:quantitative} proves cleaning-based
+rounding, robust transition compatibility, and the stabilizer-character
+obstruction.  Section~\ref{sec:conclusion} summarizes the scaling and open
+problem.
+
+The appendices are independent of the headline proofs unless explicitly
+cited.  Appendix~\ref{subsec:recognition} gives a partial-Weyl recognition
+criterion beyond AME states.  Appendix~\ref{sec:two-uniform} develops
+alternative stability mechanisms and weaker comparison radii.  The final appendix
+states the formal and citation trust boundary.

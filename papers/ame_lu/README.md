@@ -9,21 +9,21 @@
 **Title:** *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer
 AME States.*
 
-For every prime power \(q=p^e\) and \(m\geq2\), every product-unitary intertwiner
-between stabilizer \(\operatorname{AME}(2m,q)\) states is Clifford on each
-party.  The proof reconstructs the complete local Weyl frame from any
-\((m+1)\)-party marginal; the resulting minimum-support atlas also classifies
-local-unitary equivalence up to local symplectic frame changes.  Transversal
-conversions between the associated \([[2m-1,1,m]]_q\) stabilizer encoders are
-therefore Clifford factor by factor.
+For every prime power \(q=p^e\) and \(m\geq2\), every product unitary mapping
+one stabilizer \(\operatorname{AME}(2m,q)\) state to another is Clifford on
+each party.  Any \((m+1)\)-party marginal determines the complete local Weyl
+frame.  The transition maps between those frames classify local-unitary
+equivalence, and every transversal conversion between the associated
+\([[2m-1,1,m]]_q\) stabilizer encoders is Clifford factor by factor.
 
 A leakage-aware three-region cleaning argument gives a quantitative theorem:
 defect \(\varepsilon\) puts every local factor within \(8\varepsilon\) of a
 Clifford throughout the certified radius
 \(\Theta(\min\{p^{-1},q^{-1/2},n^{-1/2}\})\).  Weyl--Fourier concentration and
-the stabilizer overlap gap select an exact symmetry.  The sharp remaining
-boundary is affine: localized commutators recover the symplectic atlas but
-cannot control the product-Pauli correction.  Exact MDS--CSS logical groups
+the stabilizer overlap gap select an exact symmetry.  At the larger
+dimension-dependent radius, localized commutators recover the linear
+transition data but cannot control the stabilizer character, equivalently the
+product-Pauli correction.  Exact MDS--CSS logical groups
 and six-point applications belong to the separate
 `mds_css_transversal_groups` paper.
 
@@ -42,8 +42,8 @@ paper has no computational supplement or certificate dependency.
 
 For every prime power `q=p^e` and every `m≥2`, each product-unitary
 intertwiner between additive stabilizer `AME(2m,q)` states is Clifford on
-every party. The support bijections on `(m+1)`-party marginals form a
-minimum-support atlas which classifies the residual local symplectic frames.
+every party. The support bijections on `(m+1)`-party marginals define
+transition maps that classify the residual local symplectic frames.
 The Choi interpretation gives factorwise transversal Clifford rigidity for
 conversions between the associated stabilizer `[[2m-1,1,m]]_q` encoders.
 
@@ -58,7 +58,7 @@ Theta(min{p^-1, q^-1/2, n^-1/2}),  n=2m,
 
 with collective residual generator norm at most `pi sqrt(q) ε`. At a
 dimension-only radius, the rounded symplectic maps already satisfy the exact
-atlas. Localized commutators do not see the affine stabilizer character, so
+transition system. Localized commutators do not see the stabilizer character, so
 the remaining product-Pauli correction need not be locally small.
 
 The appendices retain partial-Weyl recognition, detailed two- and `k`-uniform
@@ -70,8 +70,9 @@ comparisons. They are not competing headline theorems.
 Selected finite-coordinate, support-profile, diagonal-axis, holonomy,
 stabilizer-character, Choi, and second-moment cores are kernel checked in the
 shared `RelativeConicArcs.AMELU` namespace. The cleaning constants, Fourier
-rounding, global quantitative theorem, robust atlas compatibility, and affine
-obstruction are manuscript proofs without Lean or certificate coverage. The
+rounding, global quantitative theorem, robust transition compatibility, and
+stabilizer-character obstruction are manuscript proofs without Lean or
+certificate coverage. The
 corrected local release surface now includes the repaired (m=2) proof bridge,
 the phase-convention clarification, and the current related-work boundary.
 The standalone mirror is synchronized locally but remains unpushed; public

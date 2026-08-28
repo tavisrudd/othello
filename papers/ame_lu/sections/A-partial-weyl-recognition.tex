@@ -1,7 +1,7 @@
-\section{Partial-Weyl recognition beyond AME states}
+\section{Recognition from incomplete Weyl data beyond AME states}
 \label{subsec:recognition}
 
-The full-Weyl criterion recovers the entire local Weyl basis from one
+The complete-support criterion recovers the entire local Weyl basis from one
 marginal.  More generally, several marginals may each recover only part of
 that basis, while their labels together generate it.  The following
 criterion isolates this mechanism.  It uses only a finite abelian label
@@ -14,7 +14,7 @@ a finite index set \(P\) with a distinguished element \(0\), injections
  R=\sum_{v\in P}\lambda_v\bigotimes_{i=1}^{r}W_{f_i(v)},
  \qquad \lambda_v\ne0.
 \]
-Write \(N=|P|\).  The full-Weyl condition \((3.2)\) is the case
+Write \(N=|P|\).  The complete-local-support condition \((3.2)\) is the case
 \(N=q^2\), where the injections are forced to be bijections.
 
 \begin{proposition}[Partial-Weyl marginal criterion]
@@ -70,9 +70,9 @@ up to phase, after absorbing any party permutation by relabelling
  \Lambda_i=\{a\in\F_q^2:\ U_iW_aU_i^\dagger\in\mathbb C^\times W_b
    \text{ for some }b\},
 \]
-the \emph{recognition group} at \(i\).
+the subgroup of \emph{recognized Weyl labels} at \(i\).
 
-\begin{lemma}[Recognition group]\label{lem:recognition-group}
+\begin{lemma}[Recognized-label subgroup]\label{lem:recognition-group}
 \(\Lambda_i\) is a subgroup of \(\F_q^2\), the induced map \(a\mapsto b\)
 is an injective additive homomorphism, and \(U_i\) is Clifford if and only
 if \(\Lambda_i=\F_q^2\).
@@ -89,7 +89,7 @@ finite group, hence bijective, so conjugation permutes all projective Weyl
 axes, which is the Clifford condition.  The converse is immediate.
 \end{proof}
 
-When \(q=2\), a recognition group containing a nonzero label is either a
+When \(q=2\), a recognized-label subgroup containing a nonzero label is either a
 line or all of \(\F_2^2\).  The criterion below assembles labels recovered
 from different marginals; in larger local dimension it also accommodates
 intermediate subgroups that have no qubit analogue.

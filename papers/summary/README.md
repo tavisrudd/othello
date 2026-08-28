@@ -13,7 +13,7 @@
 This programme studies **what survives information loss**. Across geometry,
 coding theory, and quantum information, a rich object is replaced by a sparse
 shadow. Examples include deep-hole loci, minimum-word layers, recovery equations,
-marginal atlases, and marked spectral packets. The central question is whether
+marginal transition systems, and marked spectral packets. The central question is whether
 the shadow still determines its source, or whether failure of generic behaviour
 forces the source onto a **rigid exceptional carrier**.
 
@@ -38,7 +38,7 @@ examples.
 |---|---|---|
 | Cubic stabilization | Rank-two formal block and saturated Cox-torus quotient | Universal irrationality after `P¹`, with exact level-two examples |
 | High-weight Reed–Solomon cosets | Recursive syndrome carriers | Arbitrary-redundancy top-two-shell classification and exact code-extension consequences |
-| Stabilizer AME states | Marginal Weyl atlas | Local-Clifford rigidity and quantitative rounding |
+| Stabilizer AME states | Marginal Weyl transition maps | Local-Clifford rigidity and quantitative rounding |
 | Bounded linear recovery | Relative weights and normalized recovery equations | Exact costs, compositional optimization, and capacity-aware scheduling |
 | Finite planes and codes | Deep-hole or minimum-word data | Recovery of the marked geometry |
 | Complete higher arcs | Integral maximal-secant degree distributions | Arithmetic lower-bound corrections and bounded modular repair |
@@ -179,7 +179,7 @@ results.
   between stabilizer `AME(2m,q)` states is local Clifford for every prime power
   `q` and `m ≥ 2`. A separate quantitative argument places sufficiently
   approximate local symmetries near exact Clifford symmetries; its rounding and
-  robust-atlas arguments remain manuscript-level, as stated in the paper's
+  robust transition-map arguments remain manuscript-level, as stated in the paper's
   formal boundary. [Local-Unitary Rigidity and Quantitative Rounding](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf).
 
 - **A Schur-square test determines MDS–CSS transversal groups.** For odd-prime
@@ -507,9 +507,9 @@ same syndrome geometry into exact MDS/NMDS extension data.
 states is local Clifford. A quantitative rounding theorem also places
 sufficiently approximate symmetries near exact Clifford symmetries.
 
-> *Abstract* Let q = pᵉ and m ≥ 2. Every product-unitary intertwiner between two stabilizer AME(2m,q) states is Clifford on each party. The proof recovers the complete local Weyl frame from any (m + 1)-party marginal: the supported stabilizer labels form a q²-element group and project bijectively onto the local Weyl labels. These support bijections also form a minimum-support atlas which classifies local-unitary equivalence up to local symplectic changes of frame. As an encoder consequence, every transversal conversion between the associated [[2m−1,1,m]]q stabilizer codes is Clifford on every physical and logical factor.
+> *Abstract* Let q = pᵉ and m ≥ 2. We prove that every product unitary mapping one stabilizer AME(2m,q) state to another is Clifford on each party. The key support-counting statement is that the stabilizers contained in any (m + 1)-party set project bijectively onto the complete Weyl-label space at each retained party. The corresponding reduced operator therefore determines every local Weyl axis. It follows that local-unitary and local-Clifford equivalence coincide for these states. Equivalently, every transversal conversion between the associated [[2m−1,1,m]]q stabilizer encoders is Clifford on every physical and logical factor. The same support data give a complete classification by the transition maps between local Weyl-label spaces.
 >
-> We prove a quantitative counterpart without reading the exponentially small Weyl signal of one marginal. Viewing each party as the logical leg of the associated code, a leakage-aware three-region cleaning argument and Weyl–Fourier concentration round every local factor within 8ε of a Clifford. The uniform stabilizer overlap gap then selects an exact symmetry and gives a defect-only decomposition radius Θ(min{p⁻¹, q⁻¹ᐟ², n⁻¹ᐟ²}), n = 2m, with residual generator norm at most π√q ε. At a dimension-only radius the rounded symplectic maps already satisfy the exact minimum-support atlas. The remaining obstruction is affine: localized commutators cancel the stabilizer-character phases and therefore cannot control the product-Pauli correction. On generalized and extended Reed–Solomon AME families the certified scale is Θ(q⁻¹) over prime fields and Θ(q⁻¹ᐟ²) at extension degree at least two.
+> We also prove a quantitative result for approximate product symmetries. Three-region cleaning and a finite Weyl–Fourier argument place every local factor within normalized Hilbert–Schmidt distance 8ε of a Clifford. A uniform gap between distinct stabilizer states then selects an exact symmetry and yields an explicit decomposition radius of order min{p⁻¹, q⁻¹ᐟ², n⁻¹ᐟ²}, n = 2m, with collective residual generator norm at most π√q ε. At a larger, dimension-dependent radius the rounded symplectic maps already preserve all minimum-support transitions; the remaining difficulty is to control the stabilizer character, or equivalently the required product-Pauli correction.
 >
 **Delivers.** Exact product-unitary changes between a broad class of highly
 entangled quantum states must come from the code's discrete symmetry group;

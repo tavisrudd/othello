@@ -76,33 +76,31 @@ Stabilizer AME States}
 \maketitle
 
 \begin{abstract}
-Let \(q=p^e\) and \(m\geq2\).  Every product-unitary intertwiner between
-two stabilizer \(\AME(2m,q)\) states is Clifford on each party.  The proof
-recovers the complete local Weyl frame from any \((m+1)\)-party marginal:
-the supported stabilizer labels form a \(q^2\)-element group and project
-bijectively onto the local Weyl labels.  These support bijections also form
-a minimum-support atlas which classifies local-unitary equivalence up to
-local symplectic changes of frame.  As an encoder consequence, every
+Let \(q=p^e\) and \(m\geq2\).  We prove that every product unitary mapping
+one stabilizer \(\AME(2m,q)\) state to another is Clifford on each party.
+The key support-counting statement is that the stabilizers contained in any
+\((m+1)\)-party set project bijectively onto the complete Weyl-label space at
+each retained party.  The corresponding reduced operator therefore
+determines every local Weyl axis.  It follows that local-unitary and
+local-Clifford equivalence coincide for these states.  Equivalently, every
 transversal conversion between the associated
-\([[2m-1,1,m]]_q\) stabilizer codes is Clifford on every physical and
-logical factor.
+\([[2m-1,1,m]]_q\) stabilizer encoders is Clifford on every physical and
+logical factor.  The same support data give a complete classification by
+the transition maps between local Weyl-label spaces.
 
-We prove a quantitative symmetry counterpart for one fixed state without
-reading the exponentially small Weyl signal of one marginal.  Viewing each
-party as the logical leg of the associated code, a leakage-aware three-region
-cleaning argument and Weyl--Fourier concentration round every local factor
-within \(8\varepsilon\) of a Clifford.  The uniform stabilizer overlap gap
-then selects an exact symmetry and gives a defect-only decomposition radius
+We also prove a quantitative result for approximate product symmetries.
+Three-region cleaning and a finite Weyl--Fourier argument place every local
+factor within normalized Hilbert--Schmidt distance \(8\varepsilon\) of a
+Clifford.  A uniform gap between distinct stabilizer states then selects an
+exact symmetry and yields an explicit decomposition radius of order
 \[
- \Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),\qquad n=2m,
+ \min\{p^{-1},q^{-1/2},n^{-1/2}\},\qquad n=2m,
 \]
-with residual generator norm at most \(\pi\sqrt q\,\varepsilon\).
-At a dimension-only radius the rounded symplectic maps already satisfy the
-exact minimum-support atlas.  The remaining obstruction is affine: localized
-commutators cancel the stabilizer-character phases and therefore cannot
-control the product-Pauli correction.  On generalized and extended
-Reed--Solomon AME families the certified scale is \(\Theta(q^{-1})\) over
-prime fields and \(\Theta(q^{-1/2})\) at extension degree at least two.
+with collective residual generator norm at most
+\(\pi\sqrt q\,\varepsilon\).  At a larger, dimension-dependent radius the
+rounded symplectic maps already preserve all minimum-support transitions;
+the remaining difficulty is to control the stabilizer character, or
+equivalently the required product-Pauli correction.
 \end{abstract}
 \noindent\textbf{Index Terms---}\input{frontmatter/index-terms}
 
@@ -111,11 +109,12 @@ prime fields and \(\Theta(q^{-1/2})\) at extension degree at least two.
 \input{sections/02-geometry-ame-dictionary}
 \input{sections/03-exact-rigidity-atlas}
 \input{sections/05-quantitative-rounding}
-\input{sections/08-verification-boundary}
 \input{sections/07-conclusion}
 \appendix
 \input{sections/A-partial-weyl-recognition}
 \input{sections/B-secondary-quantitative}
+\input{sections/08-verification-boundary}
+\clearpage
 
 \section*{AI assistance disclosure}
 

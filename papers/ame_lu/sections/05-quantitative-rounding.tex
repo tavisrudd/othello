@@ -1,12 +1,18 @@
 \section{Cleaning-based quantitative rounding}
 \label{sec:quantitative}
 
-There is a stronger global route which does not estimate support sectors at
-all.  Choose one AME party as a logical input.  The other \(2m-1\) parties
-form an \([[2m-1,1,m]]_q\) stabilizer code, and the product of their local
-factors approximately implements the transpose-inverse of the factor on the
-chosen party.  Three correctable regions then test that logical action by a
-nested commutator.  The exact mechanism is standard: the qubit stabilizer
+We now turn from exact equivalence to approximate symmetry.  Estimating one
+reduced operator would lose the exponentially small nonidentity signal of a
+minimum-support marginal.  The global argument avoids that loss.  Choose one
+AME party as a logical input.  The other \(2m-1\) parties form an
+\([[2m-1,1,m]]_q\) stabilizer code, and the product of their local factors
+approximately implements the transpose-inverse of the factor on the chosen
+party.  Three correctable regions then test that logical action by a nested
+commutator.  Indeed, distance \(m\) makes every set of at most \(m-1\)
+erased physical parties correctable, and the \(2m-1\) physical parties split
+into regions of sizes \(m-1,m-1,1\).
+
+The exact mechanism is standard: the qubit stabilizer
 cleaning lemma is due to Bravyi and Terhal
 \cite[Lemma~1]{BravyiTerhal2009}; in the additive prime-power setting used
 here, the same cleaning step is the elementary symplectic statement recorded
@@ -123,7 +129,116 @@ it within \(\eta\) of a Weyl; multiplying that Weyl into \(K_0\) gives
 the required Clifford.
 \end{proof}
 
-At \(\varepsilon=0\), the preceding two lemmas recover the
+Two further estimates turn local Clifford frames into the stated global
+decomposition.  The first separates distinct Clifford images of a stabilizer
+state by a uniform gap.
+
+\begin{lemma}[Quantized stabilizer overlap]
+\label{lem:stabilizer-overlap-gap}
+Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer states on \(n\)
+qudits of local dimension \(q=p^e\), with label groups
+\(L_\psi,L_\phi\) and stabilizer characters \(\chi_\psi,\chi_\phi\).  Then
+\[
+ \lvert\langle\psi\vert\phi\rangle\rvert^2=
+ \begin{cases}
+  \lvert L_\psi\cap L_\phi\rvert/q^n,
+   &\text{if \(\chi_\psi=\chi_\phi\) on \(L_\psi\cap L_\phi\)},\\
+  0,&\text{otherwise.}
+ \end{cases}
+\]
+In particular, a product Clifford \(K\) either preserves the ray of
+\(\psi\), or
+\[
+ \varepsilon(K)\geq d_p:=\bigl(2-2p^{-1/2}\bigr)^{1/2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Weyl orthogonality and the stabilizer expansions give
+\[
+ \lvert\langle\psi\vert\phi\rangle\rvert^2
+ =q^{-n}\sum_{\ell\in L_\psi\cap L_\phi}
+   (\chi_\psi\overline{\chi_\phi})(\ell).
+\]
+The summand is a character of the intersection, so the sum is its order when
+the character is trivial and zero otherwise.  Since the intersection has
+\(p\)-power order, every nonunit overlap has modulus at most \(p^{-1/2}\).
+Apply this to \(\phi=K\psi\), which is again a stabilizer state.
+\end{proof}
+
+The second estimate controls all residual generators at once.  Its proof is
+included because it is a load-bearing part of the headline quantitative
+theorem; Appendix~\ref{sec:two-uniform} gives stronger variants under other
+hypotheses.
+
+\begin{proposition}[Residual stability]
+\label{prop:main-residual-stability}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
+\(m\geq2\), and let \(V=\bigotimes_je^{ih_j}\), where every \(h_j\) is
+traceless Hermitian of spectral spread at most \(s\leq\pi\).  Put
+\[
+ c(s)=\max\left\{1-\frac{s^2}{12},\frac4{\pi^2}\right\}.
+\]
+If \(D^2=\sum_j\lVert h_j\rVert_F^2\leq q/4\), then
+\[
+ D\leq2\sqrt{q/c(s)}\,\varepsilon(V)
+ \leq\pi\sqrt q\,\varepsilon(V).
+\]
+\end{proposition}
+
+\begin{proof}
+Expand each factor in the normalized Weyl basis as
+\(e^{ih_j}=\sum_va_j(v)W_v\), and put
+\(\eta_j=1-|a_j(0)|^2\) and \(H=\sum_j\eta_j\).  Choose an \(m\)-party set
+\(A\).  The AME support formula makes restriction of the stabilizer label
+group \(L\) to either \(A\) or \(A^c\) a bijection.  Hence the vectors
+\[
+ u(\ell)=\prod_{j\in A}|a_j(\ell_j)|,
+ \qquad
+ v(\ell)=\prod_{j\notin A}|a_j(\ell_j)|
+ \quad(\ell\in L)
+\]
+are unit vectors.  Expanding the stabilizer expectation and taking moduli
+termwise gives \(\varepsilon(V)^2\geq\lVert u-v\rVert^2\).
+
+For each \(j\notin A\) and Weyl label \(w\), let \(\ell^{j,w}\) be the
+unique stabilizer label supported on \(A\cup\{j\}\) whose \(j\)-coordinate
+is \(w\).  The support formula makes this parametrization bijective and gives
+\[
+ \sum_{w\ne0}v(\ell^{j,w})^2
+ \geq\eta_j(1-H),
+ \qquad
+ \sum_{w\ne0}u(\ell^{j,w})^2
+ \leq\prod_{i\in A}\eta_i.
+\]
+The corresponding families are disjoint as \(j\) varies.  Applying
+\((x-y)^2\geq x^2/2-y^2\), and then repeating the estimate with \(A\) and
+\(A^c\) exchanged, yields
+\[
+ \lVert u-v\rVert^2
+ \geq\bigl(\tfrac12(1-H)-\eta^{m-1}\bigr)H,
+ \qquad \eta=\max_j\eta_j.
+\]
+For \(m\geq3\) and \(H\leq1/4\), the coefficient is at least \(5/16\).
+For \(m=2\), retaining the four pair products before the maximum estimate
+gives \(H/2-3P\), where \(P\leq H^2/4\), again at least \(5H/16\).
+Thus in all cases \(\varepsilon(V)^2\geq H/4\).
+
+It remains to compare \(H\) with \(D\).  If \(X\) is uniform on the
+eigenvalues of \(h_j\), then
+\[
+ \eta_j=1-|\mathbb E e^{iX}|^2
+ =\mathbb E[1-\cos(X-X')]
+ \geq c(s)\frac{\lVert h_j\rVert_F^2}{q},
+\]
+using both \(\cos x\leq1-x^2/2+x^4/24\) for \(|x|\leq s\) and
+\(1-\cos x\geq2x^2/\pi^2\) for \(|x|\leq\pi\).  Conversely
+\(\eta_j\leq\lVert h_j\rVert_F^2/q\), so \(H\leq D^2/q\leq1/4\).
+Combining the inequalities gives
+\(\varepsilon(V)^2\geq c(s)D^2/(4q)\), which proves the claim.
+\end{proof}
+
+At \(\varepsilon=0\), the first two lemmas in this section recover the
 three-cleanable-region Clifford conclusion of
 \cite[Lemma~5]{PastawskiYoshida2015}.  Their quantitative combination, and
 the constants in (5.1), are what will be used here.
@@ -164,6 +279,7 @@ conditional on existence of the stated AME states.
 \end{theorem}
 
 \begin{proof}
+\medskip\noindent\emph{Local Clifford frames.}
 Choose party \(i\) as the logical leg and write the AME Choi form as
 \(q^{-1/2}\sum_a|a\rangle\otimes V_i|a\rangle\).  The other local
 factors form a transversal physical unitary \(T_i\), and vectorization
@@ -173,6 +289,7 @@ inverse, with \(E(T_i,L_i)=\varepsilon(U)\).  Lemmas
 \ref{lem:nested-weyl-rounding}, with \(\eta=8\varepsilon(U)\), give
 (5.5); transpose and inverse preserve the additive Clifford group.
 
+\medskip\noindent\emph{Centered residual generators.}
 Put \(K=\bigotimes_iK_i\).  For each \(i\), choose a phase \(z_i\)
 attaining the minimum in (5.5), and let \(a_i\) be the principal Hermitian
 logarithm defined by
@@ -193,13 +310,15 @@ increase its Frobenius norm, and its spectral spread is unchanged.  Let
  \leq16\pi^2qn\varepsilon(U)^2.                      \tag{5.6}
 \]
 The second clause of (5.3) puts every spectrum in an arc of length
-\(\pi\); the third gives \(D\leq\sqrt q/2\).  Two-uniformity gives
+\(\pi\); the third gives \(D\leq\sqrt q/2\).
+
+\medskip\noindent\emph{Exact branch selection.}
+Two-uniformity gives
 \(\lVert(K^\dagger U-I)\psi\rVert\leq D/\sqrt q
 \leq4\pi\sqrt n\,\varepsilon(U)\).  The fourth clause and the triangle
 inequality put \(K\psi\) less than \(d_p\) from \(\psi\), so
-Corollary~\ref{cor:uniform-separation} makes \(K\) an exact symmetry.
-Apply Theorem~\ref{thm:budget-free-stability} to the residual to obtain
-(5.4).
+Lemma~\ref{lem:stabilizer-overlap-gap} makes \(K\) an exact symmetry.
+Apply Proposition~\ref{prop:main-residual-stability} to obtain (5.4).
 \end{proof}
 
 The theorem already contains a genuinely collective estimate once the
@@ -284,13 +403,13 @@ not a sharper final norm summation.
 The linear part of that compatibility can in fact be recovered without a
 party-count loss.
 
-\begin{proposition}[Robust symplectic-atlas compatibility]
+\begin{proposition}[Robust compatibility of the transition maps]
 \label{prop:robust-linear-atlas}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
 \(q=p^e\), and let \(U=\bigotimes_iU_i\) be a product unitary.  Suppose
 \[
  \varepsilon(U)<
- R_q^{\mathrm{atlas}}
+ R_q^{\mathrm{trans}}
  :=\min\left\{\frac{\tau_p}{8},
    \frac{2\sin(\pi/p)}{4+64\sqrt q}\right\}.
 \]
@@ -309,7 +428,7 @@ Fix \(A\), distinct \(i,j\in A\), and put
 \(B=A^c\cup\{i,j\}\).  Both \(A\) and \(B\) have size \(m+1\), while
 \(A\cap B=\{i,j\}\).  Choose \(\ell\in L(A)\) and \(r\in L(B)\).
 Using the stabilizer lifts \(\widetilde W_\ell\) and
-\(\widetilde W_r\) from \((2.1)\), set
+\(\widetilde W_r\) from \((2.2)\), set
 \[
  C=[U\widetilde W_\ell U^\dagger,\widetilde W_r]
   =[UW_\ell U^\dagger,W_r],
@@ -351,8 +470,8 @@ gives
  [F_i a,b]+[M_A(i,j)F_i a,M_B(i,j)b]=0.
 \]
 Subtracting this from (5.9), using surjectivity of \(M_B(i,j)\) and
-nondegeneracy of the pairing, proves the atlas equation.
-The exact atlas theorem gives \(FL=L\), and
+nondegeneracy of the pairing, proves the transition equation.
+The exact transition-map theorem gives \(FL=L\), and
 Lemma~\ref{lem:pauli-phase-correction} supplies \(W_v\).
 \end{proof}
 
@@ -389,7 +508,7 @@ displayed bound.
 The Pauli correction in the proposition is essential.  All localized
 commutators are unchanged when a recovered \(K_i\) is multiplied by a
 local Weyl: that multiplication changes conjugation phases, and the
-commutator cancels them.  Equivalently, the symplectic atlas sees \(L\)
+commutator cancels them.  Equivalently, the transition maps see \(L\)
 but not its stabilizer character.  The correction \(v\) can therefore be
 nonzero modulo \(L\), in which case \(W_vK\) need not be locally close to
 \(U\).  Exact affine compatibility cannot be obtained from these

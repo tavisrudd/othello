@@ -1,6 +1,18 @@
 \section{Secondary quantitative routes and local stability}
 \label{sec:two-uniform}
 
+This appendix compares mechanisms that are not needed to prove the main
+cleaning argument.  It first derives discreteness and local quadratic
+stability from two-uniformity alone.  It then shows how higher uniformity
+enlarges the certified generator-coordinate region, strengthens the residual
+estimate proved directly in Section~\ref{sec:quantitative}, and
+records weaker single-marginal and aggregate rounding routes.  The final
+subsection translates the results to local gauge transformations of
+two-unitary gates.  Readers interested only in the headline exact and
+quantitative theorems may skip the comparisons.
+
+\subsection{Discreteness from two-party maximal mixing}
+
 The rigidity theorem uses the stabilizer hypothesis to identify the
 symmetry group.  Finiteness of that group needs far less: two-party
 marginals alone, at any local dimension, with no stabilizer structure.
@@ -200,7 +212,7 @@ needs strictly more than the first.  Let \(q=2\) and
 \(C=\mathrm{RM}(1,4)\leq\F_2^{16}\), whose nonzero codeword weights are
 \(8\) and \(16\) and whose dual \(\mathrm{RM}(2,4)\) has minimum distance
 \(4\).  The equal-phase CSS state of \(C\) has label group
-\(C_X\oplus C^\perp_Z\), so by \((2.2)\) a marginal fails to be maximally
+\(C_X\oplus C^\perp_Z\), so by \((2.3)\) a marginal fails to be maximally
 mixed only when a nonzero word of \(C\) or of \(C^\perp\) is supported
 inside it; both distances exceed \(2\), so the state is \(2\)-uniform and
 Theorem~\ref{thm:two-uniform-discrete} makes its symmetry group finite.
@@ -276,6 +288,8 @@ definition, a group-homomorphic right inverse; arbitrary or
 generator-by-generator lifts do not provide one.
 \end{proof}
 
+
+\subsection{Local quadratic stability}
 
 Discreteness makes the exact symmetries isolated.  The same identity
 \((B.1)\) says how fast the defect grows away from them, with a constant
@@ -364,6 +378,8 @@ That size is fixed by the higher moments of \(M\), and
 Theorem~\ref{thm:k-uniform-stability} and
 Proposition~\ref{prop:stability-region} below determine it.
 \end{remark}
+
+\subsection{Higher uniformity and the generator-coordinate region}
 
 The size of the certified region is controlled by the state's uniformity
 order, not by the number of parties.  Call
@@ -534,8 +550,8 @@ uniformity order is \(3\), for every \(\ell\).  Take
 \]
 The last ratio does not depend on \(N\) and increases on \((0,2\pi)\); it
 passes \(\sqrt{6/5}\) at the unique \(\theta^*=1.46562\ldots\).  Hence the
-conclusion of Theorem~\ref{thm:two-uniform-stability} fails at
-\(t=\theta^*\), for every length.  At uniformity order three the exact
+conclusion of Theorem~\ref{thm:two-uniform-stability} fails for every
+\(t>\theta^*\), for every length.  At uniformity order three the supremal
 radius for the constant \(\sqrt{6q/5}\) therefore lies between
 \(R_3=1/\sqrt2\) and \(\theta^*\).
 \end{proposition}
@@ -545,7 +561,7 @@ The nonzero weights of \(\mathrm{RM}(1,\ell)\) are \(N/2\) and \(N\), and
 \(C^\perp=\mathrm{RM}(\ell-2,\ell)\) has minimum distance \(4\).  A
 marginal of the equal-phase CSS state fails to be maximally mixed only when
 a nonzero word of \(C\) or of \(C^\perp\) is supported inside it, so by
-\((2.2)\) the uniformity order is
+\((2.3)\) the uniformity order is
 \(\min(N/2,4)-1=3\) whenever \(N\geq8\).  Since
 \(Z(1)\lvert x\rangle=(-1)^x\lvert x\rangle\) at a single site,
 \(U\lvert x\rangle=e^{ic(N-2\operatorname{wt}(x))}\lvert x\rangle\), and
@@ -555,8 +571,8 @@ the weight distribution \(1,\,2N-2,\,1\) on weights \(0,\,N/2,\,N\) gives
 \(\lVert cZ(1)\rVert_F^2=2c^2\) and
 \(\lVert cZ(1)\rVert_{\mathrm{op}}=c\), giving the displayed \(D\) and
 \(\theta\).  Finally \(\theta/(2\sin(\theta/2))=u/\sin u\) with
-\(u=\theta/2\in(0,\pi)\), which increases from \(1\) to \(\infty\); at
-\(\theta^*\) the ratio exceeds the constant of
+\(u=\theta/2\in(0,\pi)\), which increases from \(1\) to \(\infty\); for
+every \(\theta>\theta^*\) the ratio exceeds the constant of
 Theorem~\ref{thm:two-uniform-stability} while the defect is
 \(2\sin(\theta^*/2)N^{-1/2}\).
 \end{proof}
@@ -566,8 +582,8 @@ Theorem~\ref{thm:two-uniform-stability} while the defect is
 Two consequences.  The smallness hypothesis of
 Theorem~\ref{thm:two-uniform-stability} is load-bearing, and its constant
 \(\frac12\) is within a factor of about three of sharp, since the family
-leaves the hypothesis at \(\theta=\frac12\) and violates the conclusion at
-\(\theta^*\).  And the party count is not what governs the region.  The
+leaves the hypothesis at \(\theta=\frac12\) and violates the conclusion
+immediately above \(\theta^*\).  And the party count is not what governs the
 family has \(N\) parties and uniformity order three at every length, so
 what it bounds is the radius at order three; the defect at which it breaks
 the conclusion is \(1.3379\ldots N^{-1/2}\) only because a bounded
@@ -581,6 +597,8 @@ constant-radius defect ball has such coordinates.  Both statements concern
 a known state acted on by product unitaries of bounded generator norm;
 neither certifies an unknown device.
 
+\subsection{Residual stability from a balanced bipartition}
+
 For stabilizer AME states there is a second route to a stability estimate,
 which buys the same conclusion with a different hypothesis set.  It gives
 up the global \(\ell^1\) budget on \(\sum_j\lVert h_j\rVert_{\mathrm{op}}\)
@@ -589,7 +607,7 @@ and pays only in the constant.  The mechanism is a bipartition bound in
 which the Weyl amplitudes of the two halves are compared directly, so no
 Taylor remainder appears and no budget is needed to control one.
 
-\begin{proposition}[Half-splitting bound]\label{prop:half-splitting}
+\begin{proposition}[Balanced-bipartition bound]\label{prop:half-splitting}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with label
 group \(L\) and character \(\chi\), let \(U=\bigotimes_jU_j\) be a product
 unitary, and put \(a_j(v)=q^{-1}\Tr(W_v^\dagger U_j)\), so that
@@ -611,7 +629,7 @@ supported on the complementary \(m\)-set, which by \((4.1)\) is trivial;
 both sides have \(q^{2m}\) elements, so \(\pi_A\) is a bijection, and
 likewise for \(\pi_{A^c}\).  Hence
 \(\lVert u\rVert^2=\sum_{x\in(\F_q^2)^A}\prod_{j\in A}p_j(x_j)=1\), and the
-same for \(v\).  From \((2.2)\) and
+same for \(v\).  From \((2.3)\) and
 \(\Tr(W_\ell U)=\prod_j\Tr(W_{\ell_j}U_j)\), taking moduli termwise gives
 \(\lvert\langle\psi\rvert U\lvert\psi\rangle\rvert
 \leq\sum_{\ell\in L}\prod_j\lvert a_j(\ell_j)\rvert=\langle u,v\rangle\),
@@ -641,7 +659,7 @@ a set of that size.  For \(i\in A\cup\{j\}\) the kernel of
 parties, hence is trivial, and the two sets have the same cardinality.
 \end{proof}
 
-\begin{theorem}[Stability without a generator budget]
+\begin{theorem}[Stability under per-site spectral control]
 \label{thm:budget-free-stability}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
 \(m\geq2\), let \(U=\bigotimes_jU_j\) be a product unitary, and put
@@ -659,55 +677,12 @@ with \(c=c(s)\) as in Lemma~\ref{lem:site-contraction}.  No bound on
 \end{theorem}
 
 \begin{proof}
-Fix an \(m\)-set \(A\) and write \(\eta=\max_j\eta_j\leq H\).  For
-\(j\notin A\) and \(w\in\F_q^2\) let \(\ell^{j,w}\) be the label of
-Lemma~\ref{lem:cut-transversal} with \(j\)-coordinate \(w\).  Since
-\(\ell^{j,w}\) vanishes off \(A\cup\{j\}\),
-\[
- \sum_{w\ne0}v(\ell^{j,w})^2
-  =\eta_j\prod_{i\notin A\cup\{j\}}(1-\eta_i)\geq\eta_j(1-H).
-\]
-Every \(A\)-coordinate of \(\ell^{j,w}\) is nonzero, so
-\(p_i(\ell_i^{j,w})\leq\eta_i\) for \(i\in A\); fixing one \(i_0\in A\) and
-using injectivity of \(w\mapsto\ell_{i_0}^{j,w}\),
-\(\sum_{w\ne0}u(\ell^{j,w})^2\leq\prod_{i\in A}\eta_i\).  Summing over the
-\(m\) choices of \(j\) and using
-\(\prod_{i\in A}\eta_i\leq\eta^{m-1}m^{-1}\sum_{i\in A}\eta_i\) bounds the
-total by \(\eta^{m-1}\sum_{i\in A}\eta_i\).  All terms of
-\(\lVert u-v\rVert^2\) are nonnegative, and \((x-y)^2\geq x^2/2-y^2\), so
-this family contributes at least
-\(\frac12(1-H)\sum_{j\notin A}\eta_j-\eta^{m-1}\sum_{i\in A}\eta_i\).  The
-mirror family, supported on \(A^c\cup\{i\}\) for \(i\in A\), is disjoint
-from it for \(m\geq2\) and contributes the reflected bound.  Adding,
-\[
- \varepsilon(U)^2\geq\lVert u-v\rVert^2
-   \geq\Bigl(\tfrac12(1-H)-\eta^{m-1}\Bigr)H .
-\]
-For \(m\geq3\), the assumptions give
-\(\eta^{m-1}\leq H^2\leq\frac1{16}\), so the bracket is at least
-\(\frac5{16}\).  It remains to retain the sharper terms when \(m=2\).
-Write \(A=\{a_1,a_2\}\), \(A^c=\{b_1,b_2\}\), and
-\(P=\eta_{a_1}\eta_{a_2}+\eta_{b_1}\eta_{b_2}\).  Before the estimates
-by \(1-H\) and \(\eta^{m-1}\), the four disjoint minimum-support families
-above contribute at least
-\[
- \frac12\bigl(\eta_{a_1}(1-\eta_{a_2})
-  +\eta_{a_2}(1-\eta_{a_1})
-  +\eta_{b_1}(1-\eta_{b_2})
-  +\eta_{b_2}(1-\eta_{b_1})\bigr)-2P
- =\frac H2-3P.
-\]
-If \(\sigma=\eta_{a_1}+\eta_{a_2}\), then
-\[
- P\leq\frac{\sigma^2+(H-\sigma)^2}{4}\leq\frac{H^2}{4}.
-\]
-Thus at \(H\leq\frac14\) the last display is at least
-\((\frac12-\frac3{16})H=\frac5{16}H\).  In both cases this is at least
-\(H/4\).  For the second statement,
-Lemma~\ref{lem:site-contraction} gives
-\(\eta_j\geq c\lVert h_j\rVert_F^2/q\), hence \(H\geq cD^2/q\); and
-\(1-\lvert\mathbb E\,e^{iX}\rvert^2\leq\frac12\mathbb E(X-X')^2
-=\lVert h_j\rVert_F^2/q\) gives \(H\leq D^2/q\leq\frac14\).
+The balanced-cut calculation in the proof of
+Proposition~\ref{prop:main-residual-stability} establishes
+\(\varepsilon(U)^2\geq H/4\) before the generator estimates are introduced.
+Lemma~\ref{lem:site-contraction} then gives
+\(H\geq cD^2/q\), while
+\(H\leq D^2/q\leq\frac14\), proving the second statement.
 \end{proof}
 
 The two routes are a choice of hypothesis set.
@@ -724,7 +699,7 @@ spread \(2\pi\), exactly where \(c(s)\leq0\) and the second bound is empty
 too.  The spread condition is the residue of the ceiling.
 
 One configuration is worth recording, because it is the natural candidate
-for a product unitary that Proposition~\ref{prop:half-splitting} might fail
+for a product unitary that the balanced-bipartition bound might fail
 to see.  At \(q=2\) take \(U_j=H\) at every site, so that each \(p_j\) is
 uniform on \(\{X,Z\}\); then \(u(\ell)v(\ell)=2^{-m}\) when every
 \(\ell_j\in\{X,Z\}\) and vanishes otherwise, so
@@ -741,9 +716,11 @@ therefore forces \(m\leq1\).  Hence \(\langle u,v\rangle\leq\frac12\) and
 \(\varepsilon(H^{\otimes2m})^2\geq1\) for every stabilizer
 \(\AME(2m,2)\) state with \(m\geq2\).  The bound is not merely nonvacuous
 there; it is within \(\sqrt2\) of the largest possible defect.  What the
-half-splitting bound discards is phase information, but the mechanism that
+balanced-bipartition bound discards is phase information, but the mechanism that
 detects this configuration is a count of codewords in a structured subset
 of \(L\), and the MDS constraints force that count down.
+
+\subsection{From local stability to exact branch selection}
 
 \begin{corollary}[Approximate symmetries decompose]
 \label{cor:approximate-decomposition}
@@ -887,7 +864,7 @@ this is the bound \(2\sqrt2\,q^2\varepsilon\) under \(2q^2\varepsilon<\tau_p\).
 \end{proposition}
 
 \begin{proof}
-Fix an \((m+1)\)-party set \(S\).  By \((2.2)\) and
+Fix an \((m+1)\)-party set \(S\).  By \((2.3)\) and
 Proposition~\ref{prop:stabilizer-ame-support} the supported label group
 \(L_\psi(S)\) has \(q^2\) elements and projects bijectively onto
 \(\F_q^2\) at every party of \(S\), so the nonidentity part of the reduced
@@ -921,7 +898,7 @@ phase-minimized distance \(\sqrt2\), so \(\delta<\frac13\) forces
 the four factors of a commutator by matched axes costs at most
 \(4\kappa\), and distinct \(p\)-th root commutator phases are separated by
 \(2\sin(\pi/p)\), so \(\delta<\sin(\pi/p)/(2\sqrt2)\) forces \(\pi\) to
-preserve the prime-field symplectic form.  By \((2.0)\) it is realized by
+preserve the prime-field symplectic form.  By \((2.1)\) it is realized by
 an exact Clifford \(K_i\).
 
 Finally the phases.  Put \(V=K_i^\dagger U_i\) and expand
@@ -953,86 +930,11 @@ subgroup, that intertwiner has positive distance from the finite closed
 subgroup, so taking \(\varepsilon=0\) falsifies every uniform estimate
 toward it.
 
-Rounding a product unitary to a nearby product Clifford is only half of a
-decomposition.  The other half is deciding whether that Clifford is an
-exact symmetry, and for stabilizer states it needs no approximation
-argument at all, because their overlaps take only finitely many values.
+The exact branch-selection step is Lemma~\ref{lem:stabilizer-overlap-gap}:
+on the Clifford locus the defect has no small nonzero values.  Thus a nearby
+product Clifford becomes an exact symmetry without a compactness argument.
 
-\begin{lemma}[Quantized stabilizer overlap]
-\label{lem:stabilizer-overlap-gap}
-Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer states on \(n\)
-qudits of local dimension \(q=p^e\), with label groups \(L_\psi,L_\phi\)
-and stabilizer characters \(\chi_\psi,\chi_\phi\).  Then
-\[
- \lvert\langle\psi\vert\phi\rangle\rvert^2=
- \begin{cases}
-  \lvert L_\psi\cap L_\phi\rvert/q^n,
-   &\text{if \(\chi_\psi=\chi_\phi\) on \(L_\psi\cap L_\phi\)},\\
-  0,&\text{otherwise.}
- \end{cases}
-\]
-In particular
-\(\lvert\langle\psi\vert\phi\rangle\rvert^2\in\{0\}\cup\{p^{-j}:j\geq0\}\),
-so \(\lvert\langle\psi\vert\phi\rangle\rvert>p^{-1/2}\) forces
-\(\lvert\phi\rangle\in\mathbb C\lvert\psi\rangle\).
-\end{lemma}
-
-\begin{proof}
-By \((2.2)\), \(\rho_\psi=q^{-n}\sum_{\ell\in L_\psi}\chi_\psi(\ell)W_\ell\)
-and likewise for \(\phi\).  Weyl orthogonality
-\(\Tr(W_\ell^\dagger W_{\ell'})=q^n\delta_{\ell,\ell'}\) gives
-\[
- \lvert\langle\psi\vert\phi\rangle\rvert^2=\Tr(\rho_\psi\rho_\phi)
-  =q^{-n}\sum_{\ell\in L_\psi\cap L_\phi}
-    (\chi_\psi\overline{\chi_\phi})(\ell).
-\]
-The summand is a character of the group \(L_\psi\cap L_\phi\), so the sum
-is \(\lvert L_\psi\cap L_\phi\rvert\) when that character is trivial and
-\(0\) otherwise.  The group has \(p\)-power order and \(q^n=p^{en}\), which
-gives the quantization; the value \(1\) occurs only when \(L_\psi=L_\phi\)
-and the characters agree, that is, when the two states span the same ray.
-\end{proof}
-
-The quantization has a consequence about the symmetry group that is
-stronger, and easier to remember, than any threshold formula.
-Theorem~\ref{thm:two-uniform-discrete} makes \(G(\psi)\) finite, hence its
-elements isolated; on the Clifford locus they are isolated by a fixed
-amount that no parameter of the problem can erode.
-
-\begin{corollary}[Uniform separation of the exact symmetries]
-\label{cor:uniform-separation}
-Let \(\lvert\psi\rangle\) be a stabilizer state on \(n\) qudits of local
-dimension \(q=p^e\), and let \(K\) be a product Clifford.  Then either
-\(K\in G(\psi)\) or
-\[
- \varepsilon(K)\geq\bigl(2-2p^{-1/2}\bigr)^{1/2}\geq\bigl(2-\sqrt2\bigr)^{1/2}
-  =0.7653\ldots
-\]
-Equivalently, if \(K\) and \(K'\) are product Cliffords in different cosets
-of \(G(\psi)\), then \(K^\dagger K'\) has defect at least this much.  The
-bound depends on the characteristic alone: not on the number of parties,
-not on the state, and not on the local dimension beyond its
-characteristic.
-\end{corollary}
-
-\begin{proof}
-\(K\lvert\psi\rangle\) is a stabilizer state, so
-Lemma~\ref{lem:stabilizer-overlap-gap} applies to the pair
-\(\lvert\psi\rangle,K\lvert\psi\rangle\): either
-\(\lvert\langle\psi\rvert K\lvert\psi\rangle\rvert\leq p^{-1/2}\), whence
-\(\varepsilon(K)^2=2-2\lvert\langle\psi\rvert K\lvert\psi\rangle\rvert
-\geq2-2p^{-1/2}\), or the overlap exceeds \(p^{-1/2}\) and
-\(K\lvert\psi\rangle\in\mathbb C\lvert\psi\rangle\).  For two product
-Cliffords apply this to \(K^\dagger K'\), which is again one.  Since
-\(p\geq2\), the bound is least at \(p=2\).
-\end{proof}
-
-So on the Clifford locus the defect has no small nonzero values.  This is
-what removes the compactness step from
-Corollary~\ref{cor:approximate-decomposition}: a product unitary with small
-defect is first rounded to a product Clifford by
-Proposition~\ref{prop:quantitative-intertwiner}, and the rounded operator
-is then an exact symmetry outright, because a near-miss is impossible.
+\subsection{Aggregate minimum-support rounding}
 
 The rounding need not inspect one minimum-support marginal in isolation.
 All such marginals are projections of orthogonal exact-support sectors of
@@ -1157,7 +1059,7 @@ Put \(K=\bigotimes_iK_i\) and
 \]
 Together with (B.12), the fourth clause of (B.9) puts the rays of
 \(K\psi\) and \(\psi\) less than \(d_p\) apart.  Corollary
-\ref{cor:uniform-separation} forces \(K\in G(\psi)\).  Apply
+\ref{lem:stabilizer-overlap-gap} forces \(K\in G(\psi)\).  Apply
 Theorem~\ref{thm:budget-free-stability} to the residual \(V\): its
 constant has \(c\geq4/\pi^2\), giving (B.10).
 
@@ -1220,7 +1122,7 @@ Summing over the \(n\) parties gives
 \(\varepsilon\leq\tau_p/(2q^{(m+1)/2})\leq1/(6\cdot2^{3/2})<0.06\) because
 \(q\geq2\) and \(m\geq2\), so the right side exceeds
 \(1-0.0018-0.1592>1/\sqrt2\geq p^{-1/2}\).  By
-Corollary~\ref{cor:uniform-separation}, \(K\in G(\psi)\); set \(g=K\).
+Lemma~\ref{lem:stabilizer-overlap-gap}, \(K\in G(\psi)\); set \(g=K\).
 
 \emph{The residual generators are small.}  Each factor of
 \(V=g^\dagger U\) satisfies
@@ -1246,7 +1148,7 @@ to \(V\) on its hypothesis and gives
 Nothing in this proof is a compactness argument: the finite zero set is
 never enumerated and no minimum over a compact remainder is taken.  What
 compactness supplied in Corollary~\ref{cor:approximate-decomposition} is
-supplied here by Corollary~\ref{cor:uniform-separation}, in closed form.
+supplied here by Lemma~\ref{lem:stabilizer-overlap-gap}, in closed form.
 The factorization is also constructive in the sense that matters: \(g\) is
 produced from \(U\) by rounding each local factor to a Clifford, and an
 \((m+1)\)-party marginal certifies the rounding.

@@ -1,7 +1,7 @@
-\section{Full-Weyl marginals and LU rigidity}\label{sec:rigidity}
+\section{Complete Weyl-basis marginals and LU rigidity}\label{sec:rigidity}
 
 We first isolate the linear-algebra statement that recovers a diagonal
-tensor's coordinate axes.  It is the full-Weyl counterpart of the
+tensor's coordinate axes.  It is the complete-Weyl-basis counterpart of the
 three-Pauli argument in \cite{Rains1999,VanDenNestDehaeneDeMoor2005}.
 The statement itself is classical: it is Jennrich's uniqueness theorem for
 trilinear decompositions, published in \cite[\S V]{Harshman1970} and there
@@ -44,7 +44,8 @@ Apply the same argument in every factor.
 
 \AMEFigureTwo
 
-Call an operator on \(r\geq3\) qudits \emph{full-Weyl diagonal} if there
+To avoid repeatedly stating the matched-basis condition, call an operator on
+\(r\geq3\) qudits \emph{Weyl-diagonal with complete local support} if there
 is a \(q^2\)-element set \(P\), a distinguished element \(0\in P\), and
 bijections \(f_i:P\to\F_q^2\) with \(f_i(0)=0\), for which
 \[
@@ -56,9 +57,10 @@ The coefficients need not be equal.  What matters is that the same
 Weyl basis at every party.  Neither \(P\) nor the bijections need be
 \(\F_q\)-linear.
 
-\begin{proposition}[Full-Weyl marginal criterion]
+\begin{proposition}[Complete Weyl-basis marginal criterion]
 \label{prop:full-weyl-marginal}
-Let \(R\) and \(R'\) be full-Weyl diagonal operators on the same
+Let \(R\) and \(R'\) be Weyl-diagonal operators with complete local support
+on the same
 \(r\geq3\) parties, possibly with different indexing sets, bijections,
 and coefficients.  If
 \[
@@ -79,7 +81,7 @@ It therefore permutes the nonidentity projective Weyl operators, which
 is exactly the single-qudit Clifford condition.
 \end{proof}
 
-\begin{corollary}[Full-Weyl marginal-cover rigidity]
+\begin{corollary}[Marginal-cover rigidity]
 \label{cor:full-weyl-cover}
 Let \(\lvert\psi\rangle,\lvert\phi\rangle\) be \(n\)-qudit states and
 suppose a product unitary carries \(\lvert\psi\rangle\) to
@@ -87,8 +89,8 @@ suppose a product unitary carries \(\lvert\psi\rangle\) to
 absorbed by relabelling \(\lvert\phi\rangle\), so that the two states are
 indexed by the same parties.  If every
 party belongs to a set \(S\) of at least three parties for which both
-reduced operators \(\rho^\psi_S\) and \(\rho^\phi_S\) are full-Weyl
-diagonal, then every local factor is Clifford.
+reduced operators \(\rho^\psi_S\) and \(\rho^\phi_S\) are Weyl-diagonal
+with complete local support, then every local factor is Clifford.
 \end{corollary}
 
 \begin{proof}
@@ -121,7 +123,7 @@ labels to the \(m-1\) parties outside \(A\).  The target has order
  |L(A)|\geq q^{2m}/q^{2(m-1)}=q^2.                    \tag{3.3}
 \]
 Fix \(i\in A\).  A label in the kernel of \(p_i\) is supported on the
-\(m\)-set \(A\setminus\{i\}\).  The AME condition and \((2.2)\) exclude
+\(m\)-set \(A\setminus\{i\}\).  The AME condition and \((2.3)\) exclude
 every such nonidentity stabilizer, so \(p_i\) is injective.  Its codomain
 has order \(q^2\), giving the reverse inequality in \((3.3)\) and hence
 bijectivity.  The same no-small-support argument shows that every
@@ -137,7 +139,7 @@ carries \(\rho^\psi_A\) to \(\rho^\phi_A\), then every local factor on
 \end{proposition}
 
 \begin{proof}
-By \((2.2)\),
+By \((2.3)\),
 \[
  \rho^\psi_A=q^{-|A|}
    \sum_{\ell\in L_\psi(A)}\widetilde W_\ell .
@@ -146,8 +148,8 @@ Index this sum by \(P=L_\psi(A)\).  Proposition
 \ref{prop:stabilizer-ame-support} says that every coordinate projection
 \(P\to\F_q^2\) is bijective.  Relative to the fixed Weyl convention, each
 stabilizer lift contributes a nonzero coefficient.  Thus
-\(\rho^\psi_A\) is full-Weyl diagonal in the sense of \((3.2)\), and the
-same holds for \(\rho^\phi_A\).  Apply
+\(\rho^\psi_A\) is Weyl-diagonal with complete local support in the sense of
+\((3.2)\), and the same holds for \(\rho^\phi_A\).  Apply
 Proposition~\ref{prop:full-weyl-marginal}.
 \end{proof}
 
@@ -159,14 +161,14 @@ party \(i\), choose such a set containing it and apply
 Proposition~\ref{prop:marginal-axes}.  Thus every \(U_i\) is Clifford.
 \end{proof}
 
-\section{Minimum-support atlases and encoder consequences}
+\section{Minimum-support transition maps and encoder consequences}
 \label{sec:atlas}
 
 The same support calculation recovers standard quantum-MDS structure.
 If \(|A|\leq m\), the AME condition gives \(L(A)=\{0\}\).  If
 \(|A|>m\), then \(\rho^\psi_{A^c}\) is maximally mixed, so purity of the
 global state gives
-\(\Tr((\rho^\psi_A)^2)=q^{-(2m-|A|)}\).  On the other hand, \((2.2)\)
+\(\Tr((\rho^\psi_A)^2)=q^{-(2m-|A|)}\).  On the other hand, \((2.3)\)
 and Weyl orthogonality give
 \(\Tr((\rho^\psi_A)^2)=q^{-|A|}|L(A)|\).  Hence, for every party set
 \(A\),
@@ -192,8 +194,8 @@ Descending induction shows that the \((m+1)\)-supported subgroups span
 the full label group.  This is the additive quantum-MDS form of
 minimum-weight generation, not a separate weight-enumerator claim.
 
-We now prove the atlas classification stated in the introduction.  Regard
-each local label group
+We now prove the transition-map classification stated in the introduction.
+Regard each local label group
 \[
  P_i=\F_q^2
 \]
@@ -206,7 +208,7 @@ operator-pushing transition
 \AMEFigureOne
 
 For two states \(\psi,\phi\) on the same labelled parties, a
-\emph{symplectic atlas equivalence} is a tuple
+\emph{symplectic equivalence of the transition systems} is a tuple
 \(F_i\in\operatorname{Sp}(P_i)\) satisfying
 \[
  F_jM_A^\psi(i,j)=M_A^\phi(i,j)F_i
@@ -224,15 +226,16 @@ For one state, define
   &=\{[U]\in\operatorname{PU}(q^{2m}):
        U=U_1\otimes\cdots\otimes U_{2m},\
        U\lvert\psi\rangle\in\mathbb C\lvert\psi\rangle\},\\
- \mathcal G_\psi
+ \operatorname{Aut}_{\mathrm{tr}}(\psi)
   &=\{(F_i)\in\prod_i\operatorname{Sp}(P_i):
        F_jM_A(i,j)=M_A(i,j)F_i\ \text{for all }A,i,j\in A\}.
 \end{split}
 \]
-Theorem~\ref{thm:lu-lc-rigidity} and the Clifford sequence \((2.0)\)
+Theorem~\ref{thm:lu-lc-rigidity} and the Clifford sequence \((2.1)\)
 give a well-defined homomorphism
 \[
- \lambda_\psi:\Gamma_\psi\longrightarrow\mathcal G_\psi,\qquad
+ \lambda_\psi:\Gamma_\psi\longrightarrow
+ \operatorname{Aut}_{\mathrm{tr}}(\psi),\qquad
  [U_1\otimes\cdots\otimes U_{2m}]\longmapsto(\overline U_i)_i,
 \]
 where \(\overline U_i\) is the induced symplectic label map.  A product
@@ -274,16 +277,17 @@ unique element of \(L_\phi(A)\) with \(i\)-coordinate \(F_i p_i(\ell)\).
 Thus \(F L_\psi(A)=L_\phi(A)\).  Since the \((m+1)\)-supported subgroups
 generate the full label groups, \(F L_\psi=L_\phi\).
 
-Sequence \((2.0)\) supplies local Clifford lifts of the \(F_i\), and
+Sequence \((2.1)\) supplies local Clifford lifts of the \(F_i\), and
 Lemma~\ref{lem:pauli-phase-correction} supplies the product-Pauli
-correction.  Hence an atlas equivalence lifts to an LC equivalence.
+correction.  Hence an equivalence of transition systems lifts to an LC
+equivalence.
 The reverse implication follows
 from the induced label action, and Theorem~\ref{thm:lu-lc-rigidity}
 replaces LC by LU.  A party permutation is absorbed by relabelling first.
 
 For automorphisms, \(\lambda_\psi\) is surjective by the same lifting and
 phase-correction argument.  Its kernel consists of projective product
-Paulis by \((2.0)\).  Such a Pauli fixes the state ray exactly when its
+Paulis by \((2.1)\).  Such a Pauli fixes the state ray exactly when its
 label lies in \(L_\psi^\perp=L_\psi\).  Thus the displayed injection of
 \(L_\psi\) identifies it with \(\ker\lambda_\psi\), proving exactness.
 
@@ -302,7 +306,7 @@ when \(F_b\) commutes with \(H_A(i,j)\).  Since
 \(\operatorname{Sp}_2(\F_q)=\mathrm{SL}_2(q)\) is normal in
 \(\mathrm{GL}_2(q)\), every propagated block remains symplectic.
 Evaluation at the base therefore identifies
-\(\mathcal G_\psi\) with the holonomy centralizer inside
+\(\operatorname{Aut}_{\mathrm{tr}}(\psi)\) with the holonomy centralizer inside
 \(\mathrm{SL}_2(q)\).  Different spanning trees generate the same based
 holonomy subgroup; changing the base conjugates that subgroup, and hence
 its centralizer, by a chosen transport.
