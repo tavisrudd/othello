@@ -667,7 +667,7 @@ The boundary discriminant has a denominator-free symmetric form.  Put
 \[
 \begin{aligned}
 (dfg)^2\operatorname {Disc}(S)
-={}&d^4f^2g^2-d^2\mathcal Rfg(f+g)\\
+={}&d^4f^2g^2-d^2\mathcal R f g(f+g)\\
    &+\mathcal R^2(f-g)^2.                               \tag{47}
 \end{aligned}
 \]
@@ -679,6 +679,22 @@ not the zero polynomial, so every nine-point affine plane contains at least
 three points with `phi!=0`.  On the Borel boundary any two such distinct
 points make the switch matrix nonsingular.  The remaining proof can therefore
 target (47) directly, followed by collision with the seven retained points.
+
+For a symmetric pair `x1=m+h`, `x2=m-h`, write
+
+\[
+                    \phi(m+h)=E+O,\qquad \phi(m-h)=E-O,
+                    \qquad W=E^2-O^2.
+\]
+
+Since `d^2=h^2` and `2=-1`, the right side of (47) has the norm form
+
+\[
+              (h^2W-\mathcal R E)^2-\mathcal R^2W.      \tag{47a}
+\]
+
+Thus the final character question is a quadratic norm expression in the even
+and odd parts of `phi`, rather than an arbitrary rational discriminant.
 
 The same switch identity absorbs the dense stratum as well.  For an arbitrary
 syndrome `z=(z2,...,z8)`, replace (41) by
@@ -736,25 +752,74 @@ syndrome.  Otherwise, whenever `mathcal D!=0`, there is a unique pair
  =-\binom{\mathcal R}{\mathcal Z}.                       \tag{52}
 \]
 
+Such a nonsingular pair always exists, for every fixed plane direction
+`gamma H`.  Indeed, (48) is a nonzero polynomial of degree at most six for
+every nonzero syndrome.  If `mathcal Z=0`, choose any two of its nonzero
+values in one plane coset; then (51) is visibly nonzero.
+
+Suppose instead that `mathcal Z!=0` and every usable pair in every coset of
+`gamma H` makes (51) vanish.  On the set where `phi!=0`, put
+
+\[
+                              \psi(x)=x+\frac{\mathcal Z}{\phi(x)}.
+\]
+
+Equation (51) says that `psi` is constant, say `k_j`, on the nonzero values
+of `phi` in each of the three cosets `C_j`.  If `r_j` is the number of zeros
+of `phi` in `C_j`, then
+
+\[
+                         (X-k_j)\phi(X)+\mathcal Z       \tag{53}
+\]
+
+has `9-r_j` roots.  Its degree is at most seven, so `r_j>=2`.  Since `phi`
+has at most six roots altogether, it follows that `deg(phi)=6` and every
+`r_j=2`.  Let `a` be its leading coefficient and let the two zeros in `C_j`
+be `r,s`.  The coset polynomial has the form
+
+\[
+ P_j(X)=X^9+\gamma^6X^3+\gamma^8X+C_j,
+ \qquad P'_j=\gamma^8.
+\]
+
+Both sides of
+
+\[
+ (X-k_j)\phi(X)+\mathcal Z
+       =a\frac{P_j(X)}{(X-r)(X-s)}                      \tag{54}
+\]
+
+are degree seven with the same leading coefficient and the same seven roots.
+Evaluating first at `r` and then at `s` gives
+
+\[
+ \mathcal Z=\frac{a\gamma^8}{r-s},
+ \qquad
+ \mathcal Z=\frac{a\gamma^8}{s-r}=-\mathcal Z,
+\]
+
+which contradicts `mathcal Z!=0`.  This proves the fixed-direction
+nonsingularity assertion.
+
 Define `S` from these scalars by the same formula (45).  Then the partial
 fraction calculation gives
 
 \[
-                              (L_1,L_2)(SQ)=(0,0).        \tag{53}
+                              (L_1,L_2)(SQ)=(0,0).        \tag{55}
 \]
 
 Consequently both the dense three-line cover tower and its Borel boundary
-have a common structural replacement: choose one affine-plane direction and
-two points for which (51) is nonzero, then prove the explicit quadratic (45)
-splits into two distinct roots away from the retained seven.  The only open
-GF(27) lemma is this universal split-switch assertion.  It contains no
-linearized-cubic image condition and needs no point-count certificate in its
-statement.
+have a common structural replacement.  Fix any affine-plane direction; the
+argument above supplies two points for which (51) is nonzero.  It remains only
+to prove that some such pair makes the explicit quadratic (45) split into two
+distinct roots away from the retained seven.  The only open GF(27) lemma is
+this split-and-collision assertion.  It contains no linearized-cubic image
+condition and needs no point-count certificate in its statement.
 
 ## 8. Boundary and next gate
 
 The load-bearing next step is now the universal split-switch assertion after
-(53).  It simultaneously covers the dense stratum and every residual Borel
+(55).  It simultaneously covers the dense stratum and every residual Borel
 normal form.  The earlier three-line tower (5)--(11), the three-point `z8`
 intersection (37), and the explicit boundary products remain independent
 audits, but none needs to be the primary closure route.
@@ -780,4 +845,4 @@ certificate supports this reduction.
 | What remains of the residual `z8` chart? | its three-orbit `z4=z5=0` endpoint is closed; two torus strata remain, and their first image condition generically leaves exactly three `u` values | close the quadratic split and collision tests on (37) |
 | Does one construction cover multiple Borel charts? | yes: the affine-plane locator (38) closes every `(z2,z4)=(0,0)` syndrome and the nonsquare-ratio half of every nonzero pair, independently of the other boundary coordinates | retain only the two coordinate axes and square-ratio half for transverse analysis |
 | What replaces the cover tower on the complementary boundary ratio? | switching two points of an affine plane solves both Hankel equations uniquely | prove the quadratic (45) splits away from the seven retained plane points |
-| Does the two-point switch extend off the Borel boundary? | yes; the quotient recurrence gives the general matrix (51) | prove one universal split-switch lemma for all nonzero syndromes |
+| Does the two-point switch extend off the Borel boundary? | yes; the quotient recurrence gives the general matrix (52), and (53)--(54) prove a nonsingular pair exists in every fixed plane direction | prove only split and collision for one such pair |

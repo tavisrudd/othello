@@ -234,7 +234,10 @@ quotient recurrence extends this verbatim to arbitrary `z3,z6`: two quotient
 vectors form an explicit `2x2` matrix, and its unique solution again produces
 one replacement quadratic.  Thus dense abundance and the Borel boundary now
 share one universal split-switch gate; the cubic-cover tower is retained only
-as an independent audit.
+as an independent audit.  A degree-six coset argument proves that the switch
+matrix is nonsingular for some pair in every fixed affine-plane direction.
+Only splitting of the replacement quadratic and collision against the seven
+retained plane points remain.
 
 ## Objective
 
