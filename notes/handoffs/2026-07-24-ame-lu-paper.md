@@ -33,6 +33,12 @@ explicit non-GRS prime-field applications, and recommended a separate
 prime-power semilinear successor while leaving C979 open.  Report:
 `2026-08-27-c981-mds-css-mathematical-potential-and-framing.md`.
 
+**C982 is running (2026-08-27).**  Pursue the further mathematical compression
+without touching C979: general MDS conductor bounds, the coordinatewise CSS
+endomorphism algebra, its two MDS algebra types and norm-one unit groups, and
+the algebraic structure of partial-support conductor exceptions.  Card:
+`2026-08-27-c982-mds-conductor-endomorphism-algebra.md`.
+
 **Referee edits applied (2026-08-16, unallocated user request).**  Fourteen
 edits to Paper I: the Corollary B.19 phase sign and empty-complement corner, the
 Lemma 5.1 `c=0` branch, explicitly constructed traceless local logarithms in the
