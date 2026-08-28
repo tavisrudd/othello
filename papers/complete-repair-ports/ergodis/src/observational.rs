@@ -14,7 +14,7 @@
 //! replayable refinement transcript, or an explicit separator for every
 //! separated same-sort concrete pair.
 
-use rustc_hash::FxHashSet;
+use rustc_hash::{FxHashMap, FxHashSet};
 use std::collections::BTreeMap;
 use std::collections::VecDeque;
 use std::io::{Read, Write};
@@ -4223,6 +4223,13 @@ fn visit_separators<E>(
     mut sink: impl FnMut(SeparatorRecord, &[u32]) -> Result<(), E>,
 ) -> Result<SeparatorStreamMetrics, SeparatorStreamError<E>> {
     let mut metrics = SeparatorStreamMetrics::default();
+    let initial_capacity = presentation
+        .sorts
+        .iter()
+        .map(|sort| sort.len as usize)
+        .max()
+        .unwrap_or(0);
+    let mut search = SeparatorSearch::with_capacity(initial_capacity);
     for sort in presentation.sorts.iter().copied() {
         for left in sort.start..sort.end() {
             for right in left + 1..sort.end() {
@@ -4230,7 +4237,7 @@ fn visit_separators<E>(
                     continue;
                 }
                 let (path, left_output, right_output) =
-                    distinguishing_path(presentation, left, right)
+                    distinguishing_path(presentation, left, right, &mut search)
                         .ok_or(ObservationalError::MissingSeparator { left, right })
                         .map_err(SeparatorStreamError::Compilation)?;
                 let path_len = u32::try_from(path.len())
@@ -4243,7 +4250,7 @@ fn visit_separators<E>(
                     left_output,
                     right_output,
                 };
-                sink(record, &path).map_err(SeparatorStreamError::Sink)?;
+                sink(record, path).map_err(SeparatorStreamError::Sink)?;
                 metrics.separators =
                     metrics
                         .separators
@@ -4260,33 +4267,91 @@ fn visit_separators<E>(
     Ok(metrics)
 }
 
-fn distinguishing_path(
+#[derive(Clone, Copy)]
+struct SeparatorSearchNode {
+    left: u32,
+    right: u32,
+    parent: u32,
+    generator: u32,
+}
+
+struct SeparatorSearch {
+    nodes: Vec<SeparatorSearchNode>,
+    visited: FxHashMap<u64, u32>,
+    path: Vec<u32>,
+}
+
+impl SeparatorSearch {
+    fn with_capacity(capacity: usize) -> Self {
+        Self {
+            nodes: Vec::with_capacity(capacity),
+            visited: FxHashMap::with_capacity_and_hasher(capacity, Default::default()),
+            path: Vec::with_capacity(capacity),
+        }
+    }
+
+    fn clear(&mut self) {
+        self.nodes.clear();
+        self.visited.clear();
+        self.path.clear();
+    }
+}
+
+#[inline]
+fn pair_key(left: u32, right: u32) -> u64 {
+    (u64::from(left) << 32) | u64::from(right)
+}
+
+fn distinguishing_path<'a>(
     presentation: &FinitePresentation,
     left: u32,
     right: u32,
-) -> Option<(Vec<u32>, u32, u32)> {
-    let mut queue = VecDeque::from([(left, right, Vec::new())]);
-    let mut visited = FxHashSet::default();
-    visited.insert((left, right));
-    while let Some((current_left, current_right, path)) = queue.pop_front() {
-        let left_output = presentation.observations[current_left as usize];
-        let right_output = presentation.observations[current_right as usize];
+    search: &'a mut SeparatorSearch,
+) -> Option<(&'a [u32], u32, u32)> {
+    search.clear();
+    search.nodes.push(SeparatorSearchNode {
+        left,
+        right,
+        parent: u32::MAX,
+        generator: u32::MAX,
+    });
+    search.visited.insert(pair_key(left, right), 0);
+    let mut head = 0_usize;
+    while head < search.nodes.len() {
+        let node = search.nodes[head];
+        let left_output = presentation.observations[node.left as usize];
+        let right_output = presentation.observations[node.right as usize];
         if left_output != right_output {
-            return Some((path, left_output, right_output));
+            let mut cursor = head as u32;
+            while search.nodes[cursor as usize].parent != u32::MAX {
+                let certificate = search.nodes[cursor as usize];
+                search.path.push(certificate.generator);
+                cursor = certificate.parent;
+            }
+            search.path.reverse();
+            return Some((&search.path, left_output, right_output));
         }
-        let sort = state_sort(&presentation.sorts, current_left)?;
-        if state_sort(&presentation.sorts, current_right)? != sort {
+        let sort = state_sort(&presentation.sorts, node.left)?;
+        if state_sort(&presentation.sorts, node.right)? != sort {
             return None;
         }
         for (generator, _) in presentation.generators_from(sort) {
-            let next_left = presentation.transition(generator, current_left)?;
-            let next_right = presentation.transition(generator, current_right)?;
-            if visited.insert((next_left, next_right)) {
-                let mut next_path = path.clone();
-                next_path.push(generator);
-                queue.push_back((next_left, next_right, next_path));
+            let next_left = presentation.transition(generator, node.left)?;
+            let next_right = presentation.transition(generator, node.right)?;
+            let next = u32::try_from(search.nodes.len()).ok()?;
+            if let std::collections::hash_map::Entry::Vacant(entry) =
+                search.visited.entry(pair_key(next_left, next_right))
+            {
+                entry.insert(next);
+                search.nodes.push(SeparatorSearchNode {
+                    left: next_left,
+                    right: next_right,
+                    parent: head as u32,
+                    generator,
+                });
             }
         }
+        head += 1;
     }
     None
 }
