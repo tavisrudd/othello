@@ -3,6 +3,7 @@ use ergodis::observational::{
 };
 use ergodis::{
     CostTable, DenseSelector, Gf4, Matrix, Prime, RankBoundedContextCache, RankOneProbeCache,
+    SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -212,5 +213,18 @@ fn successive_selector_allocates_only_its_returned_assignment() {
     assert!(
         allocations <= 1,
         "selector hot path allocated {allocations} times"
+    );
+}
+
+#[test]
+fn sparse_selector_allocates_only_its_returned_assignment() {
+    let selector = SparseSelector::<Prime<5>>::new([1, 1], vec![(1, 1), (2, 1)]).unwrap();
+    let mut workspace = selector.workspace();
+    let (answer, allocations) =
+        tracked_allocations(|| selector.select_nonzero(&mut workspace).unwrap());
+    assert_eq!(&*answer.assignment, &[0, 1]);
+    assert!(
+        allocations <= 1,
+        "sparse selector hot path allocated {allocations} times"
     );
 }

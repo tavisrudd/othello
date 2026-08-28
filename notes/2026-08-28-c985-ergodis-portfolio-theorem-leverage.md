@@ -404,6 +404,42 @@ instance.
    evaluation is not a substitute.  Sparse arithmetic circuits/ZDDs are the
    next representation backend and should be admitted by measured residual
    size; dense coefficient tensors remain the exact fallback.
+
+   That sparse backend is now implemented as `SparseSelector`.  Monomial
+   indices and coefficients occupy one packed `u64`; construction sorts and
+   combines duplicate terms, while specialization scans equal-tail runs into
+   two fixed-capacity term buffers.  It shares the dense sink, witness, and
+   direct-evaluation contract.  Exhaustive comparison on all nonzero
+   bivariate quadratics over `F_3` returns identical assignments and test
+   counts.  Both dense and sparse allocation gates permit only the returned
+   assignment allocation.
+
+   A CPU-0-pinned 31-round alternating A/B on five variables of degree four
+   (3,125 dense slots) gives the representation crossover below.  Each round
+   batches 64 complete extractions and the paired statistic uses log ratios.
+
+   | nonzero density | dense median | sparse median | sparse speedup | paired-log t | dense bytes | sparse bytes |
+   |---:|---:|---:|---:|---:|---:|---:|
+   | 1.024% | 7.149 us | 0.212 us | 32.61x | 76.45 | 3,130 | 261 |
+   | 10.016% | 7.150 us | 1.528 us | 4.68x | 1322.50 | 3,130 | 2,509 |
+   | 50.016% | 7.224 us | 5.846 us | 1.23x | 194.76 | 3,130 | 12,509 |
+   | 100% | 7.151 us | 10.874 us | 0.657x | -353.46 | 3,130 | 25,005 |
+
+   The conservative automatic admission boundary should be the storage
+   crossover (roughly 12.5% density for the current one-byte dense coefficient
+   and eight-byte sparse term), not the machine-specific speed crossover.
+   Below it sparse wins both time and memory on this fixture; above it callers
+   may explicitly choose sparse for speed or dense for memory.  Raw evidence,
+   benchmark source, and checker SHA-256 values are respectively
+   `8f332c9a30cb4141270885ef21ee9f7959790cbefba39661befb3f1a6f68ed85`,
+   `d7ebfdbb782ad491a6d8390875cd8f943f23effce8cfe19737e853a69d3818aa`,
+   and `4491815539e8dfe48156e0cd98eebe29ecc885871f59a665a395b9e5ecbc2e52`.
+
+   `CompiledSelector` now enforces that conservative rule: `Auto` selects the
+   sparse backend only at or below the exact storage crossover, while explicit
+   `Dense` and `Sparse` strategies support application-specific latency goals.
+   Backend-tagged workspaces reject mismatches, and both variants return the
+   same replayable assignment contract.
 3. **Composite contraction and pointed avoidance -- general interface law.**
    PRS contracts all retained markers at once and charges a forbidden set in
    one terminal budget.  For Ergodis this suggests compiling a composite
@@ -455,12 +491,9 @@ All next kernels should preserve the established constraints:
 
 ## Immediate work order
 
-1. Add a sparse arithmetic-circuit residual-selector backend and benchmark its
-   crossover against the dense exact tensor; keep both behind the same sink and
-   replay contract.
-2. Add sparse-shadow-style first-class transporters/separators and frozen
+1. Add sparse-shadow-style first-class transporters/separators and frozen
    adapter contracts to the finite-interface boundary.
-3. Instantiate the ordered-resource and finite-interface adapters on one
+2. Instantiate the ordered-resource and finite-interface adapters on one
    two-resource repair or network-allocation example with witness replay.
 
 Fixed-batch packing is deliberately not in this list.  C980 proves its bounded

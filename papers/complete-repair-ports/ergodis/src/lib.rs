@@ -97,8 +97,9 @@ pub use scheduler::{
     WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
 pub use selector::{
-    DenseSelector, DenseSelectorWorkspace, SelectorAnswer, SelectorError, SelectorRunError,
-    SelectorStep,
+    CompiledSelector, CompiledSelectorWorkspace, DenseSelector, DenseSelectorWorkspace,
+    SelectorAnswer, SelectorBackend, SelectorError, SelectorRunError, SelectorStep,
+    SelectorStrategy, SparseSelector, SparseSelectorWorkspace,
 };
 pub use span::{CanonicalTargetImage, GeneratedSpanTable, SpanAnswer, SpanError};
 pub use transfer::{
