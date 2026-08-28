@@ -326,6 +326,16 @@ counterexample search provides exact equivalence.  This would expand Ergodis
 from a DP library into a black-box interface compiler while preserving an
 auditable observation table and counterexample certificate.
 
+The deferred realization/SSM batch now has a firmer stepping stone:
+predictive-state representations already define controlled stochastic state by
+a sufficient finite set of future-test predictions.  Core tests are separator
+coordinates; their prediction vector is the observational response state.
+This pre-empts “state as future predictions” and makes PSR/realization—not
+Mamba itself—the mathematical bridge.  The worthwhile hybrid is narrower:
+use exact Ergodis states, separators, and counterexamples as ground truth, then
+learn an approximately closed recurrent response representation only where the
+exact quotient or provenance carrier becomes too large.
+
 ## Application framing that survives theorem pre-emption
 
 Ergodis should be evaluated as an exact compositional-optimization compiler,

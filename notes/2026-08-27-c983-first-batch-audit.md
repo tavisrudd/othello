@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY NINETEEN-SOURCE PASS; TWO SOURCES READ AT
+**Status**: IN PROGRESS; PRELIMINARY TWENTY-SOURCE PASS; THREE SOURCES READ AT
 FULL TEXT AND SEVENTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
@@ -97,6 +97,7 @@ formal congruence argument.
 | Compress a family of weighted partial solutions while preserving every completion optimum | Rank-based representative sets for connectivity DP | Strongly pre-empted for partition-connectivity operators, including weighted solutions and one retained optimizer | Treat representative-family reduction as a separate backend layer; do not misreport it as quotient-state minimization |
 | Normalize potentials, then minimize a deterministic weighted machine | Weight pushing followed by ordinary automaton minimization | Pre-empted for deterministic weighted automata under the established semiring hypotheses | Make it the unary/sequential corollary and test the typed multiary/context-grammar implementation boundary |
 | Infer a minimal interface by exact queries and distinguishing counterexamples | Angluin-style active automata learning and weighted extensions | Pre-empted as a learning paradigm; weighted feasibility depends strongly on the semiring | Add an oracle-backed domain compiler that learns a finite observational Moore machine, with separator/exhaustive/solver-backed equivalence queries |
+| Represent state by predictions of a finite set of future tests | Predictive state representations and observable-operator models | Strongly pre-empted for controlled stochastic systems | Make core tests/separators the probabilistic corollary; use exact Ergodis states as ground truth for approximate learned response representations only after the exact compiler exists |
 
 ## Common kernel candidate
 
@@ -544,6 +545,15 @@ The read depths below are unconditional and describe this preliminary pass.
     setup.  It classifies limits of Angluin-style weighted hypotheses over
     arbitrary semirings through levels of guessability and literal/residual
     automata, emphasizing that existence and effective discovery are distinct.
+20. Michael L. Littman, Richard S. Sutton, and Satinder Singh, *Predictive
+    Representations of State*. **Read depth: full text** — NeurIPS 2001
+    proceedings copy, cache key
+    `NIPS:2001:1e4d36177d71bbb3558e43af9577d70e`, SHA-256
+    `0d9199d40bab3dc468fb95e52d5e4bf9a78e07c6a63250397d336bda215d17b8`.
+    It represents controlled stochastic state by predictions of selected
+    action-observation tests, defines sufficiency as predicting every test,
+    and proves that every finite-POMDP environment has a linear PSR using no
+    more tests than states in a minimal POMDP.
 
 ## Knowledge-compilation and provenance connection
 
@@ -683,6 +693,37 @@ compile a reusable minimal interface without first rewriting its internal DP.
 The artifact should retain the observation table, all counterexample contexts,
 and the final equivalence certificate so black-box compilation remains
 auditable.
+
+## Predictive state, realization, and the deferred SSM bridge
+
+Predictive state representations make the second-batch analogy precise without
+mentioning a neural architecture.  A controlled stochastic system is
+represented by predictions of a finite set of future action-observation tests;
+the set is sufficient when it determines every test prediction.  In C983
+language, tests are contexts, their prediction vector is a response signature,
+and a core test set is a linear separator/basis.  The finite-POMDP-to-linear-PSR
+theorem is therefore a probabilistic/field-linear corollary of the broad
+observation-first viewpoint, with stronger classical realization machinery
+than the finite-set backend developed here.
+
+The comparison also exposes material differences:
+
+- PSR state updates condition on observations and therefore normalize by a
+  predicted probability; tropical/min-plus optimization uses different
+  algebra and may need potential normalization instead.
+- A linear core-test basis minimizes linear dimension, not necessarily finite
+  quotient cardinality, circuit size, or witness memory.
+- PSRs represent stochastic input/output behavior; Ergodis currently targets
+  exact optimum and solution reconstruction.
+
+The SSM/Mamba path should use PSRs and realization theory as its mathematical
+foundation.  An exact Ergodis compiler can provide ground-truth response
+coordinates, exact separator tests, and distinguishing counterexamples on
+small instances.  Only when exact state explodes should a learned recurrent
+model approximate those future-response functions or their contextual metric.
+“Use Mamba to optimize” remains generic and is not the target; learning an
+approximately closed predictive realization of a known exact compositional
+semantics is the sharper experiment.
 
 ## Coverage gaps and next search
 
