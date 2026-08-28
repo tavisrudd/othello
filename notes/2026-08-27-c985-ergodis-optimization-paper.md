@@ -885,3 +885,9 @@ preserves all typed contexts, so subsequent proof-carrying minimization computes
 the family-specific contextual quotient.  Empty families, unknown probes, and
 shape overflow are rejected; an empty observation alphabet correctly merges
 all same-sort states without reserving a sentinel cost.
+Consuming `into_reobserved` and response-dictionary handoffs move the state IDs
+into the presentation without cloning context transitions or retaining a
+second ID vector.  The witnessed Pareto path has the same split.  For batch
+witness recovery, `VerifiedParetoWitnesses` replays the artifact once and then
+maps every quotient class to its representative front in O(1) without further
+allocation or verification passes.
