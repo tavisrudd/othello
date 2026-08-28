@@ -520,3 +520,58 @@ Hashes:
 - fixture generator: `9016bf311489ae6324fc20e78817e6f928d47a6388725361bf5053a3ea085991`;
 - internal A/B script: `1fa9c584f8928676ad6253d81327681be1c7014f5021075d6a177b34f699dd8e`;
 - exact baseline patch: `35c249c0c11b61604a3a1694c1ebe7ecabb61d46c9185848fe62a640fb5d01ca`.
+
+## Binary theorem basis and replay reuse
+
+Commits `0b37eb364` and `0c34db882` extend the same exact generator-basis
+theorem to the binary split backend.  Split records retain original generator
+IDs, but inverse edges, target-generator scheduling, dense pending slots, the
+Patricia capacity, and the queue capacity are built only for the retained
+basis.  The permanent 4,096-state typed regression presents twenty generators
+with five exact independent transformations and checks that the prepared
+inverse contains `5 * 4096`, rather than `20 * 4096`, source edges.  It also
+replays the resulting split artifact through the public full-alphabet
+verifier.
+
+Immediate compilation previously discarded that basis inverse and rebuilt the
+full inverse alphabet solely to replay the split proof.  This was unnecessary:
+the generic verifier has already checked every original quotient edge for
+typing, totality, observation constancy, and congruence, while each proof
+record names a retained generator whose inverse was constructed from the
+validated presentation.  Immediate replay now reuses that basis inverse.
+Standalone `verify_compilation` remains the independent trust boundary and
+still rebuilds and audits the full alphabet.
+
+Seven paired CPU-2 rounds on the deterministic 131,072-state, 32-generator
+duplicate-context family compare committed baseline `0b37eb364` with
+`0c34db882`.  Each process performs two immediate split-transcript compiles.
+Median time falls from 126.526 ms to 64.467 ms, a 1.963x speedup; median peak
+RSS falls from 83,476 KiB to 49,712 KiB, a 40.45% reduction.  The evidence is
+host-specific wall/RSS data, not an asymptotic claim.  The full 149-test suite,
+doc tests, and all-target clippy gate pass, including independent public replay
+and corruption tests.
+
+Exact replay from the repository root, after building the two named commits'
+`observational_sota_driver` release examples into cache-backed target
+directories, is:
+
+```sh
+ERGODIS_ROUNDS=7 \
+  papers/complete-repair-ports/ergodis/scripts/observational-basis-replay-ab.sh \
+  "$BASELINE_DRIVER" "$BASIS_REPLAY_DRIVER" \
+  > papers/complete-repair-ports/ergodis/evidence/c985-basis-replay-final.tsv
+papers/complete-repair-ports/ergodis/scripts/check-observational-basis-replay-evidence.sh
+```
+
+Bundle hashes and byte counts:
+
+- A/B script: `79145ea3905a30008615b785cc3541af97204a217670f16c7e64102b728fcce1`, 887 bytes;
+- checker: `582a75c54a0c99f8aa9529dfe9fdead18dcde51d9a326747eee4082b131a318d`, 1,111 bytes;
+- TSV: `717a256260f4c0bc611a904effd4e1065bc8cc4fc2845ed886ee331f5232a317`, 447 bytes.
+
+A compact derivation plan for reconstructing eliminated generator tables was
+also profiled and rejected.  On the same wide case it added 2.8% instructions
+and 6.0% cycles, with no stable composed-family gain.  No part of that
+experiment remains.  The architectural successor is an explicit compressed
+artifact policy whose consumers understand provenance; adding metadata to the
+ordinary full-table compile path is the wrong scaling boundary.
