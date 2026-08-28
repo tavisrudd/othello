@@ -15,7 +15,8 @@
 //! separated same-sort concrete pair.
 
 use rustc_hash::FxHashSet;
-use std::collections::{BTreeMap, VecDeque};
+use std::collections::BTreeMap;
+use std::collections::VecDeque;
 use std::io::{Read, Write};
 use thiserror::Error;
 
@@ -1306,15 +1307,28 @@ pub fn compile_observational_with_policy(
     presentation: &FinitePresentation,
     certificate_policy: CertificatePolicy,
 ) -> Result<CompiledObservation, ObservationalError> {
+    if certificate_policy == CertificatePolicy::QuotientOnly {
+        // Quotient-only changes retained evidence, not the proof boundary:
+        // construct and independently replay the linear split transcript,
+        // then discard it before returning.  This avoids the quadratic
+        // synchronous reference refiner on long distinguishing chains.
+        let mut compiled =
+            compile_observational_with_policy(presentation, CertificatePolicy::SplitTranscript)?;
+        compiled.split_records = Box::default();
+        compiled.certificate_policy = CertificatePolicy::QuotientOnly;
+        compiled.metrics.refinement_splits = 0;
+        return Ok(compiled);
+    }
     let (classes, class_ranges, refinement_rounds, split_records) = match certificate_policy {
         CertificatePolicy::SplitTranscript => {
             let (classes, class_ranges, split_records) = minimize_partition_worklist(presentation)?;
             (classes, class_ranges, 0, split_records)
         }
-        CertificatePolicy::QuotientOnly | CertificatePolicy::ExhaustivePairAudit => {
+        CertificatePolicy::ExhaustivePairAudit => {
             let (classes, class_ranges, refinement_rounds) = minimize_partition(presentation)?;
             (classes, class_ranges, refinement_rounds, Box::default())
         }
+        CertificatePolicy::QuotientOnly => unreachable!("handled above"),
     };
 
     emit_compilation(
@@ -2556,8 +2570,16 @@ pub fn verify_compilation(
             {
                 return Err(ObservationalError::CompiledShape);
             }
-            let (classes, ranges, _) = minimize_partition(presentation)?;
-            if classes != compiled.state_classes || ranges != compiled.class_ranges {
+            let reference = compile_observational_with_policy(
+                presentation,
+                CertificatePolicy::SplitTranscript,
+            )?;
+            if reference.state_classes != compiled.state_classes
+                || reference.class_ranges != compiled.class_ranges
+                || reference.class_outputs != compiled.class_outputs
+                || reference.generator_records != compiled.generator_records
+                || reference.generator_transitions != compiled.generator_transitions
+            {
                 return Err(ObservationalError::Partition);
             }
             return Ok(());
@@ -2682,6 +2704,11 @@ mod tests {
         assert_eq!(quotient_only.class_outputs(), exhaustive.class_outputs());
         assert_eq!(quotient_only.storage().certificate_bytes, 0);
         assert_eq!(quotient_only.metrics().separators, 0);
+        let (reference_classes, reference_ranges, reference_rounds) =
+            minimize_partition(&presentation).unwrap();
+        assert_eq!(quotient_only.state_classes(), &reference_classes[..]);
+        assert_eq!(quotient_only.class_ranges(), &reference_ranges[..]);
+        assert_eq!(reference_rounds, 1);
         verify_compilation(&presentation, &quotient_only).unwrap();
         assert_eq!(split.state_classes(), exhaustive.state_classes());
         assert_eq!(split.split_records().len(), 1);
@@ -2748,6 +2775,32 @@ mod tests {
             write_exhaustive_separator_stream(&presentation, &exhaustive, &mut Vec::new()),
             Err(SeparatorFileError::Policy)
         ));
+    }
+
+    #[test]
+    fn quotient_only_uses_the_small_half_kernel_on_a_long_chain() {
+        const STATES: u32 = 16_384;
+        let mut observations = vec![0_u32; STATES as usize];
+        observations[STATES as usize - 1] = 1;
+        let presentation = FinitePresentation::new(
+            [STATES],
+            observations,
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: (0..STATES)
+                    .map(|state| (state + 1).min(STATES - 1))
+                    .collect::<Vec<_>>()
+                    .into_boxed_slice(),
+            }],
+        )
+        .unwrap();
+        let compiled =
+            compile_observational_with_policy(&presentation, CertificatePolicy::QuotientOnly)
+                .unwrap();
+        assert_eq!(compiled.class_outputs().len(), STATES as usize);
+        assert!(compiled.split_records().is_empty());
+        verify_compilation(&presentation, &compiled).unwrap();
     }
 
     #[test]
