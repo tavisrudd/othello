@@ -903,6 +903,85 @@ struct CombinedInverse {
     sources: Box<[u32]>,
 }
 
+struct IndexedMinHeap {
+    classes: Vec<u32>,
+    positions: Box<[u32]>,
+}
+
+impl IndexedMinHeap {
+    fn new(class_count: usize) -> Self {
+        Self {
+            classes: Vec::with_capacity(class_count),
+            positions: vec![u32::MAX; class_count].into_boxed_slice(),
+        }
+    }
+
+    fn push_or_decrease(
+        &mut self,
+        class: u32,
+        distances: &[u64],
+    ) -> Result<(), ObservationalError> {
+        let position = self.positions[class as usize];
+        let mut child = if position == u32::MAX {
+            if self.classes.len() == self.classes.capacity() {
+                return Err(ObservationalError::Overflow);
+            }
+            self.classes.push(class);
+            let position = self.classes.len() - 1;
+            self.positions[class as usize] = position as u32;
+            position
+        } else {
+            position as usize
+        };
+        while child != 0 {
+            let parent = (child - 1) / 2;
+            if distances[self.classes[parent] as usize] <= distances[class as usize] {
+                break;
+            }
+            let displaced = self.classes[parent];
+            self.classes[child] = displaced;
+            self.positions[displaced as usize] = child as u32;
+            child = parent;
+        }
+        self.classes[child] = class;
+        self.positions[class as usize] = child as u32;
+        Ok(())
+    }
+
+    fn pop_min(&mut self, distances: &[u64]) -> Option<u32> {
+        let minimum = *self.classes.first()?;
+        let last = self.classes.pop().expect("nonempty heap");
+        self.positions[minimum as usize] = u32::MAX;
+        if self.classes.is_empty() {
+            return Some(minimum);
+        }
+        let mut parent = 0_usize;
+        while let Some(left) = parent.checked_mul(2).and_then(|value| value.checked_add(1)) {
+            if left >= self.classes.len() {
+                break;
+            }
+            let right = left + 1;
+            let child = if right < self.classes.len()
+                && distances[self.classes[right] as usize] < distances[self.classes[left] as usize]
+            {
+                right
+            } else {
+                left
+            };
+            if distances[last as usize] <= distances[self.classes[child] as usize] {
+                break;
+            }
+            let displaced = self.classes[child];
+            self.classes[parent] = displaced;
+            self.positions[displaced as usize] = parent as u32;
+            parent = child;
+        }
+        self.classes[parent] = last;
+        self.positions[last as usize] = parent as u32;
+        Some(minimum)
+    }
+}
+
 struct RefinementGenerators {
     ranges: Box<[SortRange]>,
     ids: Box<[u32]>,
@@ -1717,6 +1796,12 @@ pub struct SeparatorStreamMetrics {
     pub separator_steps: usize,
 }
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct WeightedGeneratorWord {
+    pub cost: u64,
+    pub generators: Box<[u32]>,
+}
+
 #[derive(Debug, PartialEq, Eq)]
 pub enum SeparatorStreamError<E> {
     Compilation(ObservationalError),
@@ -1865,6 +1950,85 @@ impl CompiledObservation {
                     return Ok(Some(word.into_boxed_slice()));
                 }
                 queue.push_back(next);
+            }
+        }
+        Ok(None)
+    }
+
+    /// Return a minimum-cost typed generator word for nonnegative generator
+    /// costs.
+    pub fn shortest_weighted_generator_word(
+        &self,
+        start_class: u32,
+        target_class: u32,
+        generator_costs: &[u64],
+    ) -> Result<Option<WeightedGeneratorWord>, ObservationalError> {
+        let class_count = self.class_outputs.len();
+        if start_class as usize >= class_count
+            || target_class as usize >= class_count
+            || generator_costs.len() != self.generator_records.len()
+        {
+            return Err(ObservationalError::CompiledShape);
+        }
+        if start_class == target_class {
+            return Ok(Some(WeightedGeneratorWord {
+                cost: 0,
+                generators: Box::default(),
+            }));
+        }
+        let (generator_ranges, generator_ids) =
+            index_generators_by_sort(self.class_ranges.len(), &self.generator_records, false)?;
+        let mut distances = vec![u64::MAX; class_count];
+        let mut parent_classes = vec![u32::MAX; class_count];
+        let mut parent_generators = vec![u32::MAX; class_count];
+        let mut settled = bitmap_storage(class_count)?;
+        let mut heap = IndexedMinHeap::new(class_count);
+        distances[start_class as usize] = 0;
+        heap.push_or_decrease(start_class, &distances)?;
+        while let Some(class) = heap.pop_min(&distances) {
+            if bitmap_contains(&settled, class as usize) {
+                continue;
+            }
+            bitmap_insert(&mut settled, class as usize);
+            if class == target_class {
+                let mut word = Vec::new();
+                let mut cursor = target_class;
+                while cursor != start_class {
+                    word.push(parent_generators[cursor as usize]);
+                    cursor = parent_classes[cursor as usize];
+                }
+                word.reverse();
+                return Ok(Some(WeightedGeneratorWord {
+                    cost: distances[class as usize],
+                    generators: word.into_boxed_slice(),
+                }));
+            }
+            let sort = self
+                .class_ranges
+                .partition_point(|range| range.end() <= class);
+            let Some(range) = self.class_ranges.get(sort).copied() else {
+                return Err(ObservationalError::CompiledShape);
+            };
+            if !range.contains(class) {
+                return Err(ObservationalError::CompiledShape);
+            }
+            let generators = generator_ranges[sort];
+            for &generator in &generator_ids[generators.start as usize..generators.end() as usize] {
+                let next = self
+                    .transition(generator, class)
+                    .ok_or(ObservationalError::CompiledShape)?;
+                if bitmap_contains(&settled, next as usize) {
+                    continue;
+                }
+                let candidate = distances[class as usize]
+                    .checked_add(generator_costs[generator as usize])
+                    .ok_or(ObservationalError::Overflow)?;
+                if candidate < distances[next as usize] {
+                    distances[next as usize] = candidate;
+                    parent_classes[next as usize] = class;
+                    parent_generators[next as usize] = generator;
+                    heap.push_or_decrease(next, &distances)?;
+                }
             }
         }
         Ok(None)
@@ -4432,6 +4596,12 @@ mod tests {
             })
             .unwrap();
         assert_eq!(reached, target);
+        let weighted = compiled
+            .shortest_weighted_generator_word(start, target, &[1, 3])
+            .unwrap()
+            .unwrap();
+        assert_eq!(weighted.cost, 4);
+        assert_eq!(&*weighted.generators, &[0, 0, 0, 0]);
         assert_eq!(
             compiled
                 .shortest_generator_word(start, compiled.state_classes()[5])
