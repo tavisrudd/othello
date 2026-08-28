@@ -1060,6 +1060,32 @@ full-rank Shintani stabilizers are finite, so group normalization alone
 cannot sweep their three-dimensional affine fibres; an additional split
 support family is still required there.
 
+There is one final cohomological reduction.  The seven stabilizer orders in
+(25y) and (25ab) are
+
+\[
+                         702, 26, 24, 4, 8, 3, 4.  \tag{25af}
+\]
+
+Whenever the stabilizer order is prime to three, Maschke averaging splits
+the restriction of (25j), equivalently the restricted affine cocycle is a
+coboundary.  Thus four quotient types are tame:
+
+\[
+ \text{off-graph rank one},\quad(12),\quad(12)(34),\quad(1234).      \tag{25ag}
+\]
+
+Only three types can retain genuinely nonsplit leakage:
+
+\[
+ \text{Frobenius graph},\quad1,\quad(123).             \tag{25ah}
+\]
+
+Their stabilizers have orders \(702,24,3\), respectively.  This does not
+prove split-support abundance on the four tame fibres: it linearizes their
+kernel action but does not manufacture locators.  It does show that the
+cohomologically wild frontier consists of three quotient types, not seven.
+
 ## 9. Secondary extension
 
 Although it is no longer the preferred GF(27) proof, the fixed-direction
