@@ -80,7 +80,33 @@ is stored in Git.
 
 ## Review record
 
-Pending.
+### Pre-edit mathematical red team
+
+Conditional go.  The algebra/centralizer theorem, five-type classification,
+low-party commutativity theorem, and module interpretations are sound,
+including in characteristic two.  Repairs adopted before manuscript editing:
+
+- theorem-local prime dimension for the determinant-one, five-type,
+  low-party, and module conclusions;
+- locally framed CSS language;
+- compatible-coordinate, weighted Hermitian language;
+- module-theoretic dual-number language only; and
+- exclusive use of `E \cong k \times k` in the split row.
+
+The conditional genericity statement is geometric only.  The exact
+`AME(8,7)` witness was independently verified but is withheld from the paper
+until it has the required committed evidence bundle.
+
+### Pre-edit architecture red team
+
+The integration wins only as replacement/consolidation.  A raw A--E sequence
+would add an estimated 5--7 pages and compete with robust rigidity.  The
+adopted target is 2.5--3.5 pages: replace the current common-centralizer tail,
+merge the five group types and their code meanings, state the low-party
+theorem separately, and keep detailed module proofs outside the theorem-only
+route.  Exact LU rigidity and quantitative rounding remain the two headlines.
+
+Post-edit cold reviews and A/B remain pending.
 
 ## Mystery ledger
 

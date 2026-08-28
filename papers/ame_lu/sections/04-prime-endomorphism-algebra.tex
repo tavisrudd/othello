@@ -1,0 +1,203 @@
+\section{The local endomorphism algebra}
+\label{sec:endomorphism-algebra}
+
+The preceding results solve LU equivalence for every prime power.  This
+section extracts additional structure from the same systematic matrix.  The
+algebraic description below is valid over the underlying prime field; the
+five-type classification and its code interpretations specialize explicitly
+to prime local dimension.  None of this section is needed for the robust
+rounding theorem.
+
+Let \(L\subseteq\bigoplus_iP_i\) be the label space of a stabilizer
+\(\AME(2m,q)\) state, where each \(P_i\) is regarded as a
+\(2e\)-dimensional \(\F_p\)-space.  Define
+\[
+ \mathcal E_L=
+ \left\{(T_i)_i\in\prod_i\operatorname{End}_{\F_p}(P_i):
+   \left(\bigoplus_iT_i\right)L\subseteq L\right\}.       \tag{5.1}
+\]
+Thus \(\mathcal E_L\) is the algebra of block-diagonal, one-party label
+endomorphisms preserving \(L\).
+
+\begin{theorem}[Endomorphism algebra from fundamental cycles]
+\label{thm:local-endomorphism-algebra}
+Fix a half-set \(B\sqcup B^c\), write \(G=K_B\), and choose
+\(b\in B\) and \(c\in B^c\).  For \(i\ne b\) and \(j\ne c\), put
+\[
+ Q_{ij}=G_{bj}G_{ij}^{-1}G_{ic}G_{bc}^{-1}
+   \in\operatorname{GL}_{2e}(\F_p).
+\]
+Evaluation at party \(b\) is an algebra isomorphism
+\[
+ \mathcal E_L\ \cong\
+ \operatorname{Cent}_{\operatorname{End}_{\F_p}(P_b)}
+       \{Q_{ij}:i\ne b,\ j\ne c\}.                    \tag{5.2}
+\]
+Under this isomorphism, the compatible local symplectic automorphisms are
+the units whose propagated components preserve the symplectic form at every
+party.  If \(q=p\), this condition is simply
+\[
+ \operatorname{Aut}_{\mathrm{tr}}(\psi)
+ \cong\{A\in\mathcal E_L:\det A=1\}.                  \tag{5.3}
+\]
+In particular, the abstract algebra does not depend on the chosen half-set
+or base parties.
+\end{theorem}
+
+\begin{proof}
+A block-diagonal endomorphism, written as \((A_i)_{i\in B}\) and
+\((D_j)_{j\in B^c}\), preserves the graph of \(G\) exactly when
+\[
+ A_iG_{ij}=G_{ij}D_j\qquad(i\in B,\ j\in B^c).         \tag{5.4}
+\]
+Every block \(G_{ij}\) is invertible by
+Proposition~\ref{prop:half-set-direct-sum}.  Once \(A_b=A\) is fixed, the
+base row and column force
+\[
+ D_j=G_{bj}^{-1}AG_{bj},\qquad
+ A_i=G_{ic}D_cG_{ic}^{-1}.                             \tag{5.5}
+\]
+The remaining equations are precisely \(AQ_{ij}=Q_{ij}A\).  Evaluation
+at \(b\) is therefore bijective onto the common centralizer, and
+\((5.5)\) shows that it respects addition and multiplication.
+
+An automorphism is compatible exactly when every propagated component in
+\((5.5)\) is symplectic.  For \(q=p\), all components are conjugate
+\(2\times2\) matrices and \(\operatorname{Sp}_2(q)=\operatorname{SL}_2(q)\),
+so this is equivalent to \(\det A=1\).  For \(e>1\), one must retain all
+transported symplectic-form conditions; a single determinant condition is
+not sufficient.  Finally, the definition in \((5.1)\) is independent of
+the systematic presentation.
+\end{proof}
+
+For prime dimension, Theorem~\ref{thm:local-endomorphism-algebra} replaces
+the former list of unrelated group orders by a classification of one
+algebra.  It also explains what additional code structure each nonscalar
+case supplies.
+
+\begin{corollary}[Five prime-field algebra types]
+\label{cor:endomorphism-types}
+Assume \(q=p\), and put \(d=\gcd(2,q-1)\).  Exactly one row of
+Table~\ref{tab:endomorphism-types} applies.  The middle two columns give
+\(\operatorname{Aut}_{\mathrm{tr}}(\psi)\) and its order, and
+\[
+ |\Gamma_\psi|=q^{2m}|\operatorname{Aut}_{\mathrm{tr}}(\psi)|.
+\]
+After compatible local coordinates are chosen, the last column gives the
+code or module structure forced by \(\mathcal E_L\).
+\end{corollary}
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}L{23mm}L{27mm}L{16mm}L{67mm}@{}}
+\toprule
+\(\mathcal E_L\) & compatible group & order & resulting structure \\
+\midrule
+\(M_2(\F_q)\) & \(\operatorname{SL}_2(q)\) & \(q(q^2-1)\) &
+  \(\F_q^2\otimes C\), where \(C\) is a weighted self-dual classical MDS
+  code; locally framed MDS--CSS form \\
+\(\F_q I\) & center of \(\operatorname{SL}_2(q)\) & \(d\) &
+  no additional linear structure is forced \\
+\(\F_q\times\F_q\) & split norm-one torus & \(q-1\) &
+  two weighted-dual classical MDS codes on complementary local axes;
+  locally framed MDS--CSS form \\
+\(\F_{q^2}\) & field norm-one torus & \(q+1\) &
+  an \(\F_{q^2}\)-linear MDS code, weighted Hermitian self-dual in
+  compatible coordinates \\
+\(\F_q[\epsilon]/(\epsilon^2)\) & determinant-one units & \(qd\) &
+  a free rank-\(m\) dual-number module for which every half-set projection
+  is an isomorphism \\
+\bottomrule
+\end{tabular}
+\caption{The five prime-field endomorphism algebras, their determinant-one
+unit groups, and the code structures they force.}
+\label{tab:endomorphism-types}
+\end{table}
+
+\begin{proof}[Proof of Corollary~\ref{cor:endomorphism-types}]
+If every fundamental holonomy is scalar, its common centralizer is
+\(M_2(\F_q)\).  Otherwise choose a nonscalar holonomy \(Q\).  Its
+centralizer is the quadratic algebra \(\F_q[Q]\).  If another holonomy
+does not commute with \(Q\), the common centralizer is scalar; if all
+holonomies commute, the common centralizer remains \(\F_q[Q]\).  The three
+quadratic possibilities are the split algebra, the quadratic field, and
+the dual numbers.  The determinant restricts respectively to the product,
+the field norm, and \(\det(aI+bN)=a^2\) for \(N^2=0\).  This gives the
+five groups and orders in the table, including characteristic two.
+
+The code interpretations follow from the action of \(\mathcal E_L\) on
+the local planes and the fact that every half-set projection of \(L\) is
+an isomorphism.  Appendix~\ref{app:endomorphism-code-structures} gives the
+module argument.
+\end{proof}
+
+The constituent CSS and Hermitian code constructions are standard; see,
+for example, \cite{KetkarKlappeneckerKumarSarvepalli2006}.  In the qubit
+case, invariance under a uniform order-three local Clifford was already
+identified with \(\F_4\)-linearity
+\cite[Theorem~2]{VanDenNestDehaeneDeMoor2005}.  Our use of the table is the
+converse organization specific to stabilizer AME states: the intrinsic
+endomorphism algebra determines both the compatible group and the code
+structure.  We do not call the dual-number row an MDS code over a ring.
+
+The algebra formulation also reveals a restriction at small party number
+that is absent from the five-row list.
+
+\begin{theorem}[Forced endomorphisms for four and six parties]
+\label{thm:low-party-endomorphisms}
+Let \(q=p\).  For every stabilizer \(\AME(2m,q)\) state with
+\(m=2\) or \(m=3\),
+\[
+ \dim_{\F_q}\mathcal E_L\geq2.                         \tag{5.6}
+\]
+Equivalently, all fundamental four-cycle holonomies commute, so the scalar
+row of Table~\ref{tab:endomorphism-types} cannot occur.  If \(q\geq5\),
+the state consequently has a noncentral compatible local symplectic
+automorphism.
+\end{theorem}
+
+\begin{proof}
+For \(m=2\) there is only one fundamental holonomy, whose centralizer has
+dimension at least two.
+
+Let \(m=3\).  Independent invertible changes of block row and column bases
+put the \(3\times3\) block matrix \(G\) in the form
+\[
+ N=\begin{pmatrix}
+ I&I&I\\ I&A&B\\ I&C&D
+ \end{pmatrix}.                                      \tag{5.7}
+\]
+These basis changes need not be symplectic.  In dimension two, however,
+every invertible change rescales the alternating form.  The anti-symplectic
+identity for \(G\), and the corresponding identity for \(G^{-1}\), therefore
+give nonzero weights \(r_i,t_j\) such that distinct block columns and rows
+of \(N\) are orthogonal for the weighted alternating forms.
+
+Orthogonality of the first two block rows gives
+\[
+ t_0I+t_1A^{\mathsf T}+t_2B^{\mathsf T}=0,
+\]
+so \(B\in\operatorname{span}_{\F_q}\{I,A\}\).  The first and third rows
+similarly give \(D\in\operatorname{span}\{I,C\}\).  Orthogonality of the
+first two block columns gives
+\[
+ r_0I+r_1A+r_2C=0,
+\]
+so \(C\), and hence \(D\), also lies in
+\(\operatorname{span}\{I,A\}\).  All four non-tree blocks commute.  In
+the normalization \((5.7)\), the fundamental holonomies are their inverses,
+so they commute as well.  The common centralizer is therefore at least
+two-dimensional.
+
+For \(q\geq5\), every determinant-one group attached to a nonscalar row of
+Table~\ref{tab:endomorphism-types} has order strictly larger than
+\(d=\gcd(2,q-1)\), which proves the final assertion.  At \(q=3\), for
+example, the split norm-one group can coincide with the center; this is why
+the qualification is necessary.
+\end{proof}
+
+Thus extra label-space linearity is forced through six parties.  The result
+does not assert that every remaining algebra type occurs, and it makes no
+genericity claim for eight or more parties.

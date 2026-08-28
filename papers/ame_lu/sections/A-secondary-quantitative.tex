@@ -59,7 +59,7 @@ Put \(M=\sum_jh_j^{(j)}\) and \(M'=\sum_jh_j'^{(j)}\).  Then
 \(\langle\psi\rvert M\lvert\psi\rangle=0\) and
 \[
  \bigl\langle M\lvert\psi\rangle,\,M'\lvert\psi\rangle\bigr\rangle
-  =\frac1q\sum_{j=1}^n\Tr(h_jh'_j).                      \tag{B.1}
+  =\frac1q\sum_{j=1}^n\Tr(h_jh'_j).                      \tag{A.1}
 \]
 In particular \(\lVert M\lvert\psi\rangle\rVert^2
  =q^{-1}\sum_j\lVert h_j\rVert_F^2\), so
@@ -110,7 +110,7 @@ compact Lie groups, its image \(P\) is a closed subgroup of \(U(q^n)\), and
 \[
  \operatorname{Lie}(P)
   =\Bigl\{i\textstyle\sum_{j}H_j^{(j)}:
-    H_j=H_j^\dagger\ \text{on }\mathbb C^q\Bigr\}.       \tag{B.2}
+    H_j=H_j^\dagger\ \text{on }\mathbb C^q\Bigr\}.       \tag{A.2}
 \]
 Hence every one-parameter subgroup of a closed subgroup of \(P\) has a
 generator of that form.
@@ -292,7 +292,7 @@ generator-by-generator lifts do not provide one.
 \subsection{Local quadratic stability}
 
 Discreteness makes the exact symmetries isolated.  The same identity
-\((B.1)\) says how fast the defect grows away from them, with a constant
+\((A.1)\) says how fast the defect grows away from them, with a constant
 that does not involve the number of parties.
 
 \begin{theorem}[Local stability]\label{thm:two-uniform-stability}
@@ -306,7 +306,7 @@ Hermitian on \(\mathbb C^q\), and put
 If \(t\leq\frac12\) then
 \[
  \frac{D^2}q\Bigl(1-\frac t3\Bigr)\leq\varepsilon(U)^2
- \leq\frac{D^2}q\Bigl(1+\frac t3\Bigr).                  \tag{B.3}
+ \leq\frac{D^2}q\Bigl(1+\frac t3\Bigr).                  \tag{A.3}
 \]
 In particular \(D\leq\sqrt{6q/5}\,\varepsilon(U)<1.096\sqrt q\,
 \varepsilon(U)\), and \(\varepsilon(U)^2/D^2\to q^{-1}\) as \(t\to0\),
@@ -340,7 +340,7 @@ Also \(\langle M^2\rangle\leq t^2\leq\frac14\), so
 using \(\lvert\langle e^{iM}\rangle\rvert\geq
 \operatorname{Re}\langle e^{iM}\rangle\) for the lower estimate.  Since
 \(\varepsilon(U)^2=2-2\lvert\langle e^{iM}\rangle\rvert\), this is exactly
-\((B.3)\).  At \(t\leq\frac12\) the left inequality reads
+\((A.3)\).  At \(t\leq\frac12\) the left inequality reads
 \(\varepsilon^2\geq\frac56D^2/q\), and the two-sided form gives the
 limit.
 \end{proof}
@@ -351,7 +351,7 @@ the cubic Taylor cutoff, not structure.
 
 \begin{remark}[The stability constant is a Fisher metric]
 \label{rem:fisher-isotropy}
-Identity \((B.1)\) also explains why the constant does not involve \(n\).
+Identity \((A.1)\) also explains why the constant does not involve \(n\).
 For the family \(U(s)=\bigotimes_je^{ish_j}=e^{isM}\), the quantum Fisher
 information of a pure state is \(4\operatorname{Var}_\psi(M)\)
 \cite{BraunsteinCaves1994}, so
@@ -363,7 +363,7 @@ variances and cross-party covariances is the standard framework for
 metrologically useful entanglement
 \cite{HyllusEtAl2012,Toth2012}; \(2\)-uniformity is exactly the hypothesis
 that annihilates every covariance and pins every single-party variance.  On
-traceless local generators --- and only there, since \((B.1)\) says
+traceless local generators --- and only there, since \((A.1)\) says
 nothing about generators that are not sums of one-site terms --- the Fisher
 form is a flat multiple of the Euclidean one.  A degenerate direction would
 be a continuous product symmetry, which
@@ -674,7 +674,7 @@ some \(g\in Z\), and the first step applies at that \(g\).
 The stabilizer hypothesis enters this corollary only in the last sentence
 of its statement.  The factorization itself holds for every \(2\)-uniform
 state, with \(g\) an exact product-unitary symmetry; and finiteness of the
-zero set is a consequence of \((B.1)\) rather than a separate input, since
+zero set is a consequence of \((A.1)\) rather than a separate input, since
 quadratic growth already isolates the zeros of \(f\) on a compact manifold.
 The threshold this proof produces comes from compactness and is not
 exhibited; Theorem~\ref{thm:explicit-threshold} below replaces it by a
@@ -708,7 +708,7 @@ Then in each factor there is a unique permutation \(\pi_i\) with
 \[
  \min_{\lvert\alpha\rvert=1}
  \lVert A_ie_{ij}-\alpha e'_{i,\pi_i(j)}\rVert\leq\sqrt2\,\delta
- \qquad(1\leq j\leq N).                                  \tag{B.4}
+ \qquad(1\leq j\leq N).                                  \tag{A.4}
 \]
 \end{lemma}
 
@@ -728,7 +728,7 @@ dominant column, and the overlap matrix is square, so the selections form a
 permutation \(\pi_1\).  Each matched column also has total squared mass one
 and contains that coefficient, so its off-axis mass is at most
 \(\delta^2\), and \(2\bigl(1-\sqrt{1-\delta^2}\bigr)\leq2\delta^2\) gives
-\((B.4)\).  Repeat in every factor.
+\((A.4)\).  Repeat in every factor.
 \end{proof}
 
 \begin{proposition}[Quantitative intertwiner rigidity]
@@ -751,7 +751,7 @@ and that \(\delta<\tau_p\).  Then for every party \(i\) there is a
 single-qudit Clifford \(K_i\) with
 \[
  q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}
-  \leq\sqrt2\,\delta=2\sqrt2\,q^{(m+1)/2}\varepsilon .    \tag{B.5}
+  \leq\sqrt2\,\delta=2\sqrt2\,q^{(m+1)/2}\varepsilon .    \tag{A.5}
 \]
 For \(m=3\) and equal-phase CSS states of linear \([6,3,4]_q\) MDS codes
 this is the bound \(2\sqrt2\,q^2\varepsilon\) under \(2q^2\varepsilon<\tau_p\).
@@ -802,7 +802,7 @@ gives \(\lvert q^{-1}\Tr(W_v^\dagger VW_vV^\dagger)\rvert\geq
 \(\sum_x\lvert c_x\rvert^4\geq(1-\kappa^2/2)^2\).  Hence some
 \(\lvert c_x\rvert\geq1-\kappa^2/2\), so \(V\) lies within \(\kappa\) of a
 phase times \(W_x\); absorbing that displacement into \(K_i\) gives
-\((B.5)\).  Every party lies in some \((m+1)\)-set, as in
+\((A.5)\).  Every party lies in some \((m+1)\)-set, as in
 Corollary~\ref{cor:full-weyl-cover}.
 \end{proof}
 
@@ -843,14 +843,14 @@ Let \(\rho=\lvert\psi\rangle\langle\psi\rvert\),
  \sum_{\substack{A\subseteq[n]\\|A|=r}}
  q^r\lVert\Delta_A\rVert_{\mathrm{HS}}^2
  \leq q^n\lVert\Delta\rVert_{\mathrm{HS}}^2
- \leq2q^n\varepsilon(U)^2.                       \tag{B.7}
+ \leq2q^n\varepsilon(U)^2.                       \tag{A.7}
 \]
 Writing \(\delta_A=q^{r/2}\lVert\Delta_A\rVert_{\mathrm{HS}}\) and
 \(N_m=\binom{2m}{m+1}\), there are two \(r\)-sets \(A,B\) with
 \(A\cup B=[n]\) and
 \[
  \delta_A^2+\delta_B^2
- \leq \frac{4q^n}{N_m}\varepsilon(U)^2.          \tag{B.8}
+ \leq \frac{4q^n}{N_m}\varepsilon(U)^2.          \tag{A.8}
 \]
 \end{lemma}
 
@@ -866,14 +866,14 @@ If that component is \(D_A\otimes I_{A^c}\), then
  =q^{-(n-r)}\lVert\Delta_A\rVert_{\mathrm{HS}}^2.
 \]
 Exact-support subspaces are mutually orthogonal, which gives the first
-inequality in (B.7).  The second follows from
+inequality in (A.7).  The second follows from
 \(\lVert\Delta\rVert_{\mathrm{HS}}^2
 =2(1-|\langle\psi|U|\psi\rangle|^2)\leq2\varepsilon(U)^2\).
 
 Join two \(r\)-sets when their union is \([n]\).  This graph is regular:
 for fixed \(A\), the complement of a neighbor is any \((m-1)\)-subset of
 \(A\).  Averaging \(\delta_A^2+\delta_B^2\) over its edges gives twice
-the vertex average.  One edge therefore satisfies (B.8).
+the vertex average.  One edge therefore satisfies (A.8).
 \end{proof}
 
 The two good sets cover every party, so the quantitative-axis argument can
@@ -895,7 +895,7 @@ Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
  \frac{\sqrt{N_m}}{2q^{m+1/2}},
  \frac{\sqrt{N_m}}{2\pi\sqrt{2r}\,q^m},
  \frac{d_p}{1+\pi\sqrt{2r q^{2m}/N_m}}
- \right\}.                                             \tag{B.9}
+ \right\}.                                             \tag{A.9}
  \end{gathered}
 \]
 If \(\varepsilon(U)<R_{m,q}\), then, up to a global phase,
@@ -906,7 +906,7 @@ where the \(h_i\) are traceless Hermitian, have spectral spread at most
 \(\pi\), and satisfy
 \[
  \left(\sum_i\lVert h_i\rVert_F^2\right)^{1/2}
- \leq\pi\sqrt q\,\varepsilon(U).                       \tag{B.10}
+ \leq\pi\sqrt q\,\varepsilon(U).                       \tag{A.10}
 \]
 Moreover \(R_{m,q}=\Theta_q(m^{-3/4}(2/q)^m)\).  Thus this route is
 polynomial in \(m\) at \(q=2\), whenever the stated AME state exists,
@@ -926,10 +926,10 @@ party with
  \leq\sqrt2\delta_i,\qquad
  \sum_i\delta_i^2
  \leq r(\delta_A^2+\delta_B^2)
- \leq\frac{4rq^n}{N_m}\varepsilon(U)^2,          \tag{B.11}
+ \leq\frac{4rq^n}{N_m}\varepsilon(U)^2,          \tag{A.11}
 \]
 where \(\delta_i=\delta_A\) on \(A\) and \(\delta_i=\delta_B\) on
-\(A^c\subset B\).  The first clause of (B.9) supplies the axis threshold
+\(A^c\subset B\).  The first clause of (A.9) supplies the axis threshold
 \(\tau_p\).
 
 Choose principal eigenangles of \(K_i^\dagger U_i\) after optimizing its
@@ -938,9 +938,9 @@ Since \(|x|\leq(\pi/2)|e^{ix}-1|\) for \(|x|\leq\pi\),
 \[
  D^2:=\sum_i\lVert h_i\rVert_F^2
  \leq\frac{\pi^2q}{2}\sum_i\delta_i^2
- \leq\frac{2\pi^2qrq^n}{N_m}\varepsilon(U)^2.   \tag{B.12}
+ \leq\frac{2\pi^2qrq^n}{N_m}\varepsilon(U)^2.   \tag{A.12}
 \]
-The second clause of (B.9) puts all eigenangles in an arc of length
+The second clause of (A.9) puts all eigenangles in an arc of length
 \(\pi\); the third gives \(D\leq\sqrt q/2\).
 
 Put \(K=\bigotimes_iK_i\) and
@@ -951,14 +951,14 @@ Put \(K=\bigotimes_iK_i\) and
  \lVert(V-I)\psi\rVert^2
  =\langle2-2\cos M\rangle\leq\langle M^2\rangle=D^2/q.
 \]
-Together with (B.12), the fourth clause of (B.9) puts the rays of
+Together with (A.12), the fourth clause of (A.9) puts the rays of
 \(K\psi\) and \(\psi\) less than \(d_p\) apart.  Lemma
 \ref{lem:stabilizer-overlap-gap} forces \(K\in G(\psi)\).  Apply
 Proposition~\ref{prop:main-residual-stability} to the residual \(V\): its
-constant has \(c\geq4/\pi^2\), giving (B.10).
+constant has \(c\geq4/\pi^2\), giving (A.10).
 
 Finally \(N_m\sim4^m/\sqrt{\pi m}\).  The third and fourth clauses of
-(B.9) have order \(m^{-3/4}(2/q)^m\), and the other two are larger by a
+(A.9) have order \(m^{-3/4}(2/q)^m\), and the other two are larger by a
 polynomial factor.  Comparison with the
 \(q^{-(m+2)/2}/m\) scale below gives the stated boundary at \(q=4\).
 \end{proof}
@@ -972,9 +972,9 @@ covering pair and a telescoping estimate give it below
   \frac{\tau_p\sqrt{N_m}}{2q^m},
   \frac{\sqrt{N_m}}
        {4\pi\sqrt{2q}\sqrt{(m+1)^2+(m-1)^2}\,q^m}
- \right\}.                                           \tag{B.13}
+ \right\}.                                           \tag{A.13}
 \]
-At \(q=2\) this is of order \(m^{-5/4}\).  The loss relative to (B.9)
+At \(q=2\) this is of order \(m^{-5/4}\).  The loss relative to (A.9)
 comes from imposing a global generator \(\ell^1\) budget after the frames
 are known; it is not a remaining marginal-dilution loss.
 

@@ -226,7 +226,7 @@ center.  ∎
 ### Importance
 
 This is not merely a proof compression.  It says that six-party AME
-stabilizer states are forced onto the exceptional-symmetry locus.  The
+stabilizer states necessarily have a nonscalar endomorphism algebra.  The
 “generic state has only central symmetry” heuristic begins, if at all, at
 eight parties.  Any genericity statement in the earlier literature memo
 must therefore exclude $m\le3$.
@@ -239,12 +239,12 @@ $E$-linear after transporting this action between parties.  Projection
 onto any half-set is an $E$-linear isomorphism.  This gives the following
 standard interpretations.
 
-### Theorem D (exceptional symmetry is extra code linearity)
+### Theorem D (code structures determined by the local endomorphism algebra)
 
 Assume $q$ is prime.
 
-1. If $E$ contains a split quadratic algebra $k\times k$, then after
-   choosing its two local eigendirections,
+1. If $E\cong k\times k$, then after compatible local symplectic basis
+   choices and choosing the two local eigendirections,
    
    \[
    L=L_X\oplus L_Z,
@@ -252,12 +252,13 @@ Assume $q$ is prime.
    
    where $L_X$ and $L_Z$ are classical $[2m,m,m+1]_q$ MDS codes on
    complementary local axes.  Lagrangian isotropy makes them weighted
-   duals.  This is exactly a locally framed MDS–CSS structure.
+   duals.  This is a locally framed MDS–CSS structure.
 
 2. If $E\cong\mathbf F_{q^2}$, then each $P_i$ is a one-dimensional
    $E$-space and $L$ is an $E$-linear
-   $[2m,m,m+1]_{q^2}$ MDS code.  Its trace-symplectic self-duality is
-   equivalent to weighted Hermitian self-duality.
+   $[2m,m,m+1]_{q^2}$ MDS code.  After compatible local $E$-coordinates
+   are chosen, its trace-symplectic self-duality is equivalent to weighted
+   Hermitian self-duality.
 
 3. If $E\cong k[\epsilon]/(\epsilon^2)$, then each $P_i$ is the regular
    rank-one module over the dual numbers and $L$ is a free rank-$m$
@@ -352,17 +353,21 @@ the condition
 
 is closed after clearing the block-determinant denominators.  Therefore:
 
-### Proposition E (conditional generic-center theorem)
+### Proposition E (conditional geometric generic-center theorem)
 
-On any nonempty irreducible AME family containing one point with two
-noncommuting fundamental holonomies, the locus
+After base change to an algebraic closure, on any nonempty irreducible AME
+family containing one point with two noncommuting fundamental holonomies, the
+locus
 $\operatorname{End}_{\mathrm{loc}}(L)=k$ is nonempty Zariski open and
 dense.  Equivalently, central fixed-party symmetry is generic on that
 family.
 
+This is geometric density.  It does not imply that a positive proportion of
+the rational points over any fixed finite field lies in this locus.
+
 Theorem C shows that the hypothesis is impossible for $m\le3$.
 
-### Exact eight-party witness
+### Exact eight-party witness (research-note evidence only)
 
 For $m=4$ over $\mathbf F_7$, take $J_4=\operatorname{diag}(J,J,J,J)$
 and
@@ -409,6 +414,11 @@ and
 
 Thus the generic-center phenomenon is genuinely present by eight parties;
 it is not merely allowed by the abstract five-case classification.
+
+The matrix and counts were independently replayed during C989, but this note
+is not a paper-facing certificate bundle.  The manuscript must omit the
+witness until a committed generator, compact certificate, checksum manifest,
+and independent replay are linked under the repository evidence protocol.
 
 ## 5. Extension-field boundary
 
@@ -459,3 +469,14 @@ The best next checks are:
 No new hypothesis has been inserted into the all-length theorem.  The only
 specialization is explicit: Theorems A–D use prime local dimension when
 identifying local symplectic maps with determinant-one $2\times2$ matrices.
+
+## 7. C989 red-team disposition
+
+Two independent pre-edit reads found Theorems A--D sound, including in
+characteristic two, subject to the prime-field and local-coordinate wording
+now recorded above.  They also confirmed the conditional geometric statement
+in Proposition E.  The exact $\operatorname{AME}(8,7)$ matrix was independently
+checked, but remains outside the manuscript because its paper-facing evidence
+bundle has not been created.  The adopted integration therefore uses A--D as
+a replacement and compression of the existing prime-field centralizer
+discussion, not as a second narrative center.

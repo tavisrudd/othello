@@ -218,9 +218,7 @@ Conversely, a maximal isotropic subspace of the form
 exactly when all these party-aligned square block maps are isomorphisms.
 Moreover, \(K_{I,J}\) is invertible if and only if the complementary block
 \(K_{B\setminus I,B^c\setminus J}\) is invertible.  Thus it suffices to test
-one representative of each complementary pair: after the graph form is
-known, there are exactly
-\(\bigl(\binom{2m}{m}-2\bigr)/2\) nontrivial block tests.
+one representative of each complementary pair.
 
 For each \(j\notin B\), put
 \(A_j=B\cup\{j\}\).  The inverse image of the \(j\)-th coordinate
@@ -262,9 +260,6 @@ For complementarity, \(K_{I,J}\) is invertible exactly when
 \(\bigoplus_{i\in B\setminus I}P_i\).  Taking symplectic orthogonal
 complements and using the anti-symplectic identity for \(K_B\) gives the
 same condition for \(K_{B\setminus I,B^c\setminus J}\).
-There are \(\sum_r\binom mr^2=\binom{2m}{m}\) square block maps; removing
-the two automatic extreme cases and quotienting the remaining free
-complement involution gives the stated count.
 
 The inverse image of the \(j\)-th coordinate
 summand consists exactly of the labels supported on \(B\cup\{j\}\).
@@ -484,27 +479,9 @@ Thus prime-field recognition reduces to homogeneous linear equations in
 the four entries of \(A\), followed by the single quadratic condition
 \(\det A=1\).  Equivalently, the block-determinant array together with the
 simultaneous \(\mathrm{SL}_2(q)\)-conjugacy class of the ordered fundamental
-holonomies is a complete fixed-party LU invariant.  For one state,
-\(\operatorname{Aut}_{\mathrm{tr}}(\psi)\) is the centralizer in
-\(\mathrm{SL}_2(q)\) of these \((m-1)^2\) fundamental four-cycle
-holonomies.  According to the five cases below, this group is respectively
-\(\mathrm{SL}_2(q)\), its center, a split torus, a nonsplit norm-one torus,
-or a determinant-one Jordan centralizer.  Put \(d=\gcd(2,q-1)\).  Its
-order is exactly
-\[
-\left|\operatorname{Aut}_{\mathrm{tr}}(\psi)\right|
-=
-\begin{cases}
- q(q^2-1),&\text{all holonomies are scalar},\\
- d,&\text{two holonomies do not commute},\\
- q-1,&\text{otherwise, a nonscalar holonomy is split semisimple},\\
- q+1,&\text{otherwise, its characteristic polynomial is irreducible},\\
- qd,&\text{otherwise, it has nontrivial Jordan form}.
-\end{cases}
-\]
-In every case \(|\Gamma_\psi|=q^{2m}
-|\operatorname{Aut}_{\mathrm{tr}}(\psi)|\).  In particular, two
-noncommuting holonomies certify the smallest possible linear image.
+holonomies is a complete fixed-party LU invariant.  The corresponding
+symmetry algebra and its five prime-field types are identified intrinsically
+in Section~\ref{sec:endomorphism-algebra}.
 \end{corollary}
 
 \begin{proof}
@@ -530,18 +507,6 @@ equivalent, after substitution, to
 symplectically equivalent, and Corollary~\ref{cor:finite-recognition}
 lifts this to LU equivalence.  Taking \(G=H\) gives the centralizer
 statement.
-
-Finally, the centralizer of a nonscalar \(2\times2\) matrix is the
-commutative algebra that it generates.  Thus two noncommuting holonomies
-have only scalar common centralizer, whose intersection with
-\(\mathrm{SL}_2(q)\) is its center of order \(d\).  If all holonomies are
-scalar, their centralizer is all of \(\mathrm{SL}_2(q)\).  In the remaining
-case they commute and a nonscalar member \(Q\) is present; every holonomy
-lies in the commutative algebra \(\F_q[Q]\), so the common centralizer is
-the centralizer of \(Q\).  Its determinant-one units have order \(q-1\)
-in the split semisimple case, \(q+1\) in the nonsplit case, and \(qd\) in
-the nontrivial Jordan case.  The formula for \(|\Gamma_\psi|\) follows from
-Theorem~\ref{thm:atlas-classification}.
 \end{proof}
 
 \subsection{Encoder consequences}

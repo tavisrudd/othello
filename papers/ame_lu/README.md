@@ -19,7 +19,11 @@ square blocks are all invertible, and only \(m\) minimum supports are needed
 for recognition.  With party labels fixed, equivalence reduces to testing at
 most \(\lvert\operatorname{Sp}_{2e}(\mathbb F_p)\rvert\) base frames.  Over a
 prime field it reduces further to linear intertwining equations for
-\((m-1)^2\) fundamental four-cycles and one determinant equation.
+\((m-1)^2\) fundamental four-cycles and one determinant equation.  The
+common centralizer of these cycles is an intrinsic local endomorphism
+algebra.  In prime local dimension it has five possible types, determines
+the associated code structure, and is necessarily nonscalar through six
+parties.
 
 A leakage-aware three-region cleaning argument gives a quantitative theorem:
 defect \(\varepsilon\) puts every local factor within \(8\varepsilon\) of a
@@ -51,6 +55,11 @@ every party. The support bijections on `(m+1)`-party marginals define
 transition maps that classify the residual local symplectic frames.
 For prime local dimension, their block determinants and simultaneous
 four-cycle holonomy conjugacy class form a complete fixed-party invariant.
+The common holonomy centralizer is the algebra of block-diagonal one-party
+label endomorphisms preserving the stabilizer space.  Its determinant-one
+units give the compatible symmetry group; for four and six parties the
+algebra has dimension at least two.  These refinements are explicitly
+prime-dimensional and do not narrow the all-prime-power LU theorem.
 The Choi interpretation gives factorwise transversal Clifford rigidity for
 conversions between the associated stabilizer `[[2m-1,1,m]]_q` encoders.
 
@@ -68,9 +77,9 @@ dimension-only radius, the rounded symplectic maps already satisfy the exact
 transition system. Localized commutators do not see the stabilizer character, so
 the remaining product-Pauli correction need not be locally small.
 
-The appendices retain detailed two- and `k`-uniform stability and the
-single-marginal and aggregate rounding routes as mechanism comparisons. They
-are not competing headline theorems.
+The appendices retain detailed two- and `k`-uniform stability, the
+single-marginal and aggregate rounding routes, and the module proof behind
+the prime-field algebra table. They are not competing headline theorems.
 
 ## Formal boundary
 

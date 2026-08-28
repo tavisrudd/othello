@@ -202,8 +202,8 @@ product-unitary symmetry group, then
   \longrightarrow\operatorname{Aut}_{\mathrm{tr}}(\psi)\longrightarrow1
 \]
 is exact.  When \(q\) is prime, \(\operatorname{Aut}_{\mathrm{tr}}(\psi)\)
-has the explicit fundamental-holonomy description and five-case order
-classification given in Corollary~\ref{cor:prime-systematic-recognition}.
+is the determinant-one unit group of the local endomorphism algebra described
+in Section~\ref{sec:endomorphism-algebra}.
 \end{theorem}
 
 The invariant is also effective.  After fixing any half-set of parties,
@@ -219,12 +219,16 @@ candidate count and the separate cost of unknown party relabelling.
 Over a prime field, Corollary~\ref{cor:prime-systematic-recognition}
 replaces enumeration by linear intertwining equations for
 \((m-1)^2\) fundamental four-cycles and the single condition
-\(\det A=1\).  Their characteristic-polynomial types and pairwise
-commutativity give a complete five-case classification of the compatible
-linear-symmetry order (some values coincide over the smallest fields).
-In particular, two noncommuting holonomies force the smallest possible image,
-the center of \(\mathrm{SL}_2(q)\), and exact projective product-symmetry order
-\(q^{2m}\gcd(2,q-1)\).
+\(\det A=1\).  The common centralizer of these cycles is intrinsic: it is
+the algebra of block-diagonal one-party label endomorphisms preserving the
+stabilizer space.  In prime local dimension this algebra has five possible
+types.  Its determinant-one units give the compatible symmetry group, while
+its module action explains the corresponding CSS, Hermitian, and
+nonsemisimple code structures.  A further rigidity phenomenon occurs at low
+party number: for four and six parties the algebra is necessarily nonscalar.
+For \(q\geq5\), every such state therefore has a noncentral compatible
+symplectic symmetry.  These prime-dimensional refinements do not restrict the
+all-prime-power LU theorem.
 
 At the dimension-dependent radius
 \[
@@ -280,8 +284,12 @@ and computes the four-qutrit symmetry and transversal groups
 uniform statement was that every factor in an arbitrary additive
 prime-power stabilizer-AME conversion is Clifford, at every even length for
 which such a state exists.  Our exact result supplies that factorwise
-statement, a complete
-transition-map invariant, and the finite recognition bound above.  The
+statement, a complete transition-map invariant, and the finite recognition
+bound above.  It also identifies, in prime dimension, the intrinsic
+endomorphism algebra behind the symmetry calculation.  To our knowledge, no
+earlier result forces this algebra to be nonscalar for every four- or
+six-party stabilizer AME state; Tan's four-qutrit computation is an important
+special case.  The
 quantitative result supplies an explicit neighborhood in which an
 approximate product symmetry can be assigned to an exact Clifford branch,
 while distinguishing symplectic compatibility from the remaining
@@ -310,11 +318,16 @@ holographic codes \cite[Eq.~(2.3) and Section~5.7]{PastawskiYoshidaHarlowPreskil
 Section~\ref{sec:dictionary} fixes the additive stabilizer conventions and
 derives the AME support formula.  Sections~\ref{sec:rigidity} and
 \ref{sec:atlas} prove exact rigidity, the transition-map classification, and
-the encoder corollary.  Section~\ref{sec:quantitative} proves cleaning-based
+the encoder corollary.  Section~\ref{sec:endomorphism-algebra} gives the
+endomorphism-algebra refinement and the low-party theorem in prime dimension.
+Section~\ref{sec:quantitative} proves cleaning-based
 rounding, robust transition compatibility, and the stabilizer-character
 obstruction.  Section~\ref{sec:conclusion} summarizes the scaling and open
 problem.
 
-The appendices are independent of the headline proofs.  Appendix~\ref{sec:two-uniform}
-develops alternative stability mechanisms and weaker comparison radii.  The final appendix
-states the formal and citation trust boundary.
+The appendices are independent of the headline proofs.
+Appendix~\ref{sec:two-uniform} develops alternative stability mechanisms and
+weaker comparison radii, and
+Appendix~\ref{app:endomorphism-code-structures} proves the module
+interpretations in the five-type table.  The final appendix states the formal
+and citation trust boundary.

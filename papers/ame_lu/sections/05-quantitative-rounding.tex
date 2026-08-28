@@ -45,7 +45,7 @@ operators \(P,Q\),
 \[
  q^{-1/2}\min_{|z|=1}
  \lVert [[L,P],Q]-zI\rVert_{\mathrm{HS}}
- \leq8\varepsilon,                                  \tag{5.1}
+ \leq8\varepsilon,                                  \tag{6.1}
 \]
 where \([A,B]=ABA^\dagger B^\dagger\).
 \end{lemma}
@@ -63,16 +63,16 @@ Transversality makes \([T,\widetilde P]\) supported outside \(R_1\), so
 \(C=[[T,\widetilde P],\widetilde Q]\) is supported on
 \(R_1^c\cap R_2^c=R_3\).  The composition rules give
 \[
- E(C,[[L,P],Q])\leq4\varepsilon.                      \tag{5.2}
+ E(C,[[L,P],Q])\leq4\varepsilon.                      \tag{6.2}
 \]
 Knill--Laflamme correction on \(R_3\) gives
 \(V^\dagger C V=cI\).  Hence the logical nested commutator lies within
 \(4\varepsilon\) of \(cI\).  Its normalized Hilbert--Schmidt norm is one,
 so \(|c|\geq1-4\varepsilon\).  If \(c=0\), then \(\varepsilon\geq1/4\), and
-(5.1) is immediate because its left-hand side is at most
-\(2\leq8\varepsilon\).  Otherwise, replacing \(c\) by \(c/|c|\) proves (5.1).
+(6.1) is immediate because its left-hand side is at most
+\(2\leq8\varepsilon\).  Otherwise, replacing \(c\) by \(c/|c|\) proves (6.1).
 Notice that \(C\) need not preserve the code.  Only its scalar compression
-is used, while (5.2) controls leakage.
+is used, while (6.2) controls leakage.
 \end{proof}
 
 The remaining step is finite-dimensional Fourier concentration.  It is
@@ -308,7 +308,7 @@ Combining the inequalities gives
 At \(\varepsilon=0\), the first two lemmas in this section recover the
 three-cleanable-region Clifford conclusion of
 \cite[Lemma~5]{PastawskiYoshida2015}.  Their quantitative combination, and
-the constants in (5.1), are what will be used here.
+the constants in (6.1), are what will be used here.
 
 \begin{theorem}[Cleaning-based global rounding]
 \label{thm:cleaning-global-rounding}
@@ -323,7 +323,7 @@ and
   \frac{\tau_p}{8},\frac1{4\sqrt{2q}},
   \frac1{8\pi\sqrt n},
   \frac{d_p}{1+4\pi\sqrt n}
- \right\}.                                           \tag{5.3}
+ \right\}.                                           \tag{6.3}
 \]
 If \(\varepsilon(U)<R^{\mathrm{clean}}_{n,q}\), then, up to a global
 phase,
@@ -334,14 +334,14 @@ where the \(h_i\) are traceless Hermitian, have spectral spread at most
 \(\pi\), and satisfy
 \[
  \left(\sum_i\lVert h_i\rVert_F^2\right)^{1/2}
- \leq\pi\sqrt q\,\varepsilon(U).                     \tag{5.4}
+ \leq\pi\sqrt q\,\varepsilon(U).                     \tag{6.4}
 \]
 Before the exact-symmetry step, the recovered local Cliffords obey
 \[
  q^{-1/2}\min_{|z|=1}\lVert U_i-zK_i\rVert_{\mathrm{HS}}
- \leq8\varepsilon(U)                                 \tag{5.5}
+ \leq8\varepsilon(U)                                 \tag{6.5}
 \]
-at every party.  For fixed \(q\), (5.3) has order \(n^{-1/2}\),
+at every party.  For fixed \(q\), (6.3) has order \(n^{-1/2}\),
 conditional on existence of the stated AME states.
 \end{theorem}
 
@@ -354,11 +354,11 @@ gives a logical unitary \(L_i\), obtained from \(U_i\) by transpose and
 inverse, with \(E(T_i,L_i)=\varepsilon(U)\).  Lemmas
 \ref{lem:quantitative-cleaning-commutator} and
 \ref{lem:nested-weyl-rounding}, with \(\eta=8\varepsilon(U)\), give
-(5.5); transpose and inverse preserve the additive Clifford group.
+(6.5); transpose and inverse preserve the additive Clifford group.
 
 \medskip\noindent\emph{Centered residual generators.}
 Put \(K=\bigotimes_iK_i\).  For each \(i\), choose a phase \(z_i\)
-attaining the minimum in (5.5), and let \(a_i\) be the principal Hermitian
+attaining the minimum in (6.5), and let \(a_i\) be the principal Hermitian
 logarithm defined by
 \[
  z_i^{-1}K_i^\dagger U_i=e^{ia_i}.
@@ -374,9 +374,9 @@ increase its Frobenius norm, and its spectral spread is unchanged.  Let
  D^2\leq\frac{\pi^2q}{4}\sum_i
   \left(q^{-1/2}\min_{|z|=1}
    \lVert U_i-zK_i\rVert_{\mathrm{HS}}\right)^2
- \leq16\pi^2qn\varepsilon(U)^2.                      \tag{5.6}
+ \leq16\pi^2qn\varepsilon(U)^2.                      \tag{6.6}
 \]
-The second clause of (5.3) puts every spectrum in an arc of length
+The second clause of (6.3) puts every spectrum in an arc of length
 \(\pi\); the third gives \(D\leq\sqrt q/2\).
 
 \medskip\noindent\emph{Exact branch selection.}
@@ -385,7 +385,7 @@ Two-uniformity gives
 \leq4\pi\sqrt n\,\varepsilon(U)\).  The fourth clause and the triangle
 inequality put \(K\psi\) less than \(d_p\) from \(\psi\), so
 Lemma~\ref{lem:stabilizer-overlap-gap} makes \(K\) an exact symmetry.
-Apply Proposition~\ref{prop:main-residual-stability} to obtain (5.4).
+Apply Proposition~\ref{prop:main-residual-stability} to obtain (6.4).
 \end{proof}
 
 The theorem already contains a genuinely collective estimate once the
@@ -395,7 +395,7 @@ factorization above,
  \sum_i\left(q^{-1/2}\min_{|z|=1}
    \lVert U_i-zg_i\rVert_{\mathrm{HS}}\right)^2
  \leq \frac{D^2}{q}
- \leq \pi^2\varepsilon(U)^2.                         \tag{5.7}
+ \leq \pi^2\varepsilon(U)^2.                         \tag{6.7}
 \]
 The first inequality is the elementary chord bound
 \(\lVert e^{ih_i}-I\rVert_{\mathrm{HS}}\leq\lVert h_i\rVert_F\).
@@ -447,7 +447,7 @@ Set \(W=B^\dagger U=\bigotimes_iB_i^\dagger U_i\).  Since \(B\psi\) and
 \(\varepsilon(W)=\varepsilon_{\psi\to\phi}(U)\).  The first paragraph of
 the proof of Theorem~\ref{thm:cleaning-global-rounding} gives the local
 \(8\varepsilon\) estimate under \(\varepsilon(W)<\tau_p/8\).  Under the
-stronger radius hypothesis, apply the theorem and (5.7) to \(W\).  If
+stronger radius hypothesis, apply the theorem and (6.7) to \(W\).  If
 \(W=g\bigotimes_i e^{ih_i}\) with \(g\in G(\psi)\), then \(H=Bg\) is an
 exact intertwiner from \(\psi\) to \(\phi\), and left multiplication by
 each \(B_i\) preserves normalized Hilbert--Schmidt distance.  This proves
@@ -455,8 +455,8 @@ all three estimates.  Exact rigidity also makes every \(B_i\) Clifford, but
 that fact is not needed for the reduction.
 \end{proof}
 
-This does not enlarge the entry radius in (5.3).  Before the branch is
-known, cleaning supplies only the separate bounds (5.5) for locally
+This does not enlarge the entry radius in (6.3).  Before the branch is
+known, cleaning supplies only the separate bounds (6.5) for locally
 chosen Cliffords \(K_i\).  The \(n\) encoded implementation errors are
 unitary reshapings of the same global defect vector, not projections onto
 orthogonal sectors, so their squared bounds cannot be summed by a Bessel
@@ -481,7 +481,7 @@ Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
    \frac{2\sin(\pi/p)}{4+64\sqrt q}\right\}.
 \]
 The cleaning and Fourier lemmas give local Cliffords \(K_i\) satisfying
-(5.5).  Let \(F_i\) be their symplectic maps.  Then
+(6.5).  Let \(F_i\) be their symplectic maps.  Then
 \[
  F_jM_A(i,j)=M_A(i,j)F_i
 \]
@@ -509,7 +509,7 @@ After choosing the phase of \(U\) realizing its defect,
 \leq2\varepsilon(U)\), and the same holds with the adjoint.  Since
 \(\widetilde W_r\psi=\psi\),
 \[
- \lVert(C-I)\psi\rVert\leq4\varepsilon(U).             \tag{5.8}
+ \lVert(C-I)\psi\rVert\leq4\varepsilon(U).             \tag{6.8}
 \]
 
 The commutator is supported only on \(A\cap B=\{i,j\}\).
@@ -520,7 +520,7 @@ most \(16\sqrt q\,\varepsilon(U)\) in operator norm, and replacing its
 commutator with \(W_{r_s}\) costs at most twice that.  On the two sites,
 the total cost is therefore at most
 \(64\sqrt q\,\varepsilon(U)\).  The Clifford commutator is a scalar
-\(p\)-th root \(\zeta\), so (5.8) gives
+\(p\)-th root \(\zeta\), so (6.8) gives
 \[
  |\zeta-1|\leq(4+64\sqrt q)\varepsilon(U)<2\sin(\pi/p).
 \]
@@ -530,7 +530,7 @@ Write \(a=\ell_i\), \(b=r_i\),
 \(\ell_j=M_A(i,j)a\), and \(r_j=M_B(i,j)b\).
 The identity \(\zeta=1\), for all \(a,b\), says
 \[
- [F_i a,b]+[F_jM_A(i,j)a,M_B(i,j)b]=0.                \tag{5.9}
+ [F_i a,b]+[F_jM_A(i,j)a,M_B(i,j)b]=0.                \tag{6.9}
 \]
 Here brackets denote the trace-symplectic pairing.  Isotropy of \(L\),
 applied to the element of \(L(A)\) whose \(i\)-coordinate is \(F_i a\),
@@ -538,7 +538,7 @@ gives
 \[
  [F_i a,b]+[M_A(i,j)F_i a,M_B(i,j)b]=0.
 \]
-Subtracting this from (5.9), using surjectivity of \(M_B(i,j)\) and
+Subtracting this from (6.9), using surjectivity of \(M_B(i,j)\) and
 nondegeneracy of the pairing, proves the transition equation.
 The exact transition-map theorem gives \(FL=L\), and
 Lemma~\ref{lem:pauli-phase-correction} supplies \(W_v\).
@@ -570,7 +570,7 @@ product-Clifford symmetry, and its factor at \(i\) is projectively \(K_i\).
 The Choi correspondence therefore makes its other factors an exact
 transversal implementation of
 \(L_i'=(K_i^{\mathsf T})^{-1}\).  The logical unitary \(L_i\) is the same
-transpose--inverse transform of \(U_i\), up to phase, so (5.5) proves the
+transpose--inverse transform of \(U_i\), up to phase, so (6.5) proves the
 displayed bound.
 \end{proof}
 
@@ -584,7 +584,7 @@ nonzero modulo \(L\), in which case \(W_vK\) need not be locally close to
 does not bound its distance from the identity.  Exact affine compatibility
 cannot be obtained from these commutator tests, and
 Proposition~\ref{prop:robust-linear-atlas} alone
-does not improve (5.3).  Controlling the character discrepancy is the
+does not improve (6.3).  Controlling the character discrepancy is the
 same remaining branch-selection problem isolated by the collective
 estimate above.
 
@@ -592,11 +592,11 @@ The exact formula, rather than a fixed-dimension slogan, controls scaling.
 Uniformly over prime powers \(q=p^e\) and existing tensors,
 \[
  R^{\mathrm{clean}}_{n,q}
- =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),              \tag{5.10}
+ =\Theta\!\left(\min\{p^{-1},q^{-1/2},n^{-1/2}\}\right),              \tag{6.10}
 \]
 with absolute implied constants.  Indeed
 \(\sin(\pi/p)=\Theta(p^{-1})\), while \(d_p\) is bounded above and below
-by positive absolute constants.  An asymptotic use of (5.10) must specify
+by positive absolute constants.  An asymptotic use of (6.10) must specify
 an existing family.
 
 For the explicit generalized and extended generalized Reed--Solomon
@@ -609,7 +609,7 @@ than the local-dimension term.  Hence
  =\begin{cases}
    \Theta(q^{-1}),&q=p,\\
    \Theta(q^{-1/2}),&q=p^e,\ e\geq2.
-  \end{cases}                                                        \tag{5.11}
+  \end{cases}                                                        \tag{6.11}
 \]
 On a length-saturating subfamily \(n\asymp q\), these are
 \(\Theta(n^{-1})\) and \(\Theta(n^{-1/2})\), respectively.  For fixed
@@ -623,9 +623,9 @@ Corollary~\ref{cor:approximate-decomposition} under
 \[
  \varepsilon(U)<\min\left\{
   \frac{\tau_p}{8},\frac1{16\pi n\sqrt q}
- \right\}.                                           \tag{5.12}
+ \right\}.                                           \tag{6.12}
 \]
-Indeed (5.5), the operator-norm bound by Hilbert--Schmidt norm, and the
+Indeed (6.5), the operator-norm bound by Hilbert--Schmidt norm, and the
 principal logarithm give
 \(\sum_i\lVert h_i\rVert_{\mathrm{op}}
 \leq8\pi n\sqrt q\,\varepsilon(U)<1/2\); the sharp local theorem then
@@ -637,4 +637,4 @@ boundary at \(q=4\).  The earlier theorems remain useful because they expose the
 cost of reading one marginal and of aggregating orthogonal minimum-support
 sectors.  The new \(n^{-1/2}\) scale is a proved lower bound, not an
 optimality claim; no product-unitary family is known to saturate the
-collective frame-error estimate (5.6).
+collective frame-error estimate (6.6).
