@@ -193,7 +193,8 @@ quadratic split test, two linearized-cubic image tests, and two explicit
 collision factors.  On the dense `z2z3!=0` stratum the determinant loses at
 most one parameter.  The degree-nine upper-Borel action moves every syndrome
 with `(z3,z6)!=(0,0)` into that dense chart, so the true separate boundary is
-only the invariant five-space `z3=z6=0`.  Its residual unipotent action gives
+only the upper-Borel five-space slice `z3=z6=0` (the intrinsic quotient
+boundary is identified below).  Its residual unipotent action gives
 three affine normal-form charts and one two-coordinate torus endpoint.
 The endpoint has four square-class orbits and is closed by four explicit
 products of three affine-line cubics.  The residual `z7` chart has only two
@@ -283,6 +284,29 @@ locators.  The obvious coordinate four-space cannot do this: divisibility by
 of the 39 affine-plane locators, yielding only 13 Hankel lines.  Thus any
 spread proof must be genuinely non-coordinate; this is a structural route,
 not a completed GF(27) proof.
+The next pass both obstructs and refines that route.  The full `PGL2` orbit
+of an affine-plane Hankel line has at most 364 members because its stabilizer
+contains all 27 translations and two direction scalars, still below the
+sharp 730-line blocking bound.  More intrinsically, digit stripping gives
+the nonsplit sequence `0 -> <e2,e5,e8> -> C9 -> Q -> 0`, with `dim Q=4`.
+Its dual canonical four-space contains no split locator line: membership
+forces `g=t^9+g6*t^6+g3*t^3+g0`, hence `g'=0`.  For every odd `p` and
+`d=pD`, the same argument kills all locator coefficients outside multiples
+of `p`; split abundance is invisible on the quotient side of the associated
+graded and must use extension leakage.
+There is nevertheless a new certificate-free positive theorem: the whole
+kernel plane `P<e2,e5,e8>` is nine-affine-secant saturated.  Affine planes
+cover its isotropic binary-quadratic types.  For the anisotropic type, two
+parallel lines with offsets `+-eta` and a transverse line through zero give
+an external projected Hankel line; the nonsplit torus gives 28 transforms,
+exactly nine non-pointed and nineteen affine.  Finally the quotient is, up
+to determinant, `E tensor E^(1)` for cube Frobenius.  It has two rank-one
+orbits of sizes 28 and 756 and five full-rank Shintani orbits, corresponding
+to the five conjugacy classes of `PGL2(3) = S4`, of sizes
+`819,4914,2457,6552,4914`.  Thus the remaining theorem is an affine-kernel
+lifting problem over seven intrinsic quotient types, not the earlier Borel
+coordinate list.  The determinant `z3*z7-z4*z6` is the intrinsic rank-one
+boundary; `z3=z6=0` was only a Borel gauge slice.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`,

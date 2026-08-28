@@ -726,6 +726,340 @@ spread.  Any spread proof must therefore use a genuinely non-coordinate
 four-space (or a different blocking-line family); a low-coefficient
 perturbation of the affine planes cannot work.
 
+There is a second exact obstruction to making the affine planes global by
+projective transport.  For a fixed affine-plane direction, all 27
+translations of the parameter and the two scalars in \(\mathbf F_3^*\)
+preserving the direction fix its Hankel line.  Its stabilizer in
+\(\mathrm{PGL}_2(27)\) therefore has order at least 54, so its complete
+projective orbit has at most
+
+\[
+             \frac{|\mathrm{PGL}_2(27)|}{54}
+             =\frac{27(27^2-1)}{54}=364               \tag{25h}
+\]
+
+distinct Hankel lines.  This is below the unconditional lower bound 730 in
+(25c').  Hence even all Möbius transforms of the affine-plane Hankel line
+cannot be hyperplane-blocking.  Pointedness can only shrink the usable part
+of this orbit.
+
+The corresponding positive orbit target must start from a genuinely
+non-plane split nine-set with small stabilizer.  For such a locator line
+\(\ell\), the incidence condition
+
+\[
+                         h\ell\subset z^\perp,
+             \qquad h\in\mathrm{PGL}_2(27),            \tag{25i}
+\]
+
+is two matrix-coefficient equations on the three-dimensional group and is
+therefore generically a curve.  A free orbit has 19,656 group elements, so
+its heuristic incidence count is about
+\(|\mathrm{PGL}_2(27)|/27^2\approx27\), before deleting transforms whose
+support contains infinity.  A union of three nonparallel affine
+\(\mathbf F_3\)-lines is a natural split seed because its transformed
+locator retains characteristic-three cubic factorization.  The next
+structural calculation is the genus and boundary divisor of (25i), not
+another four-point pencil character table.  No abundance claim is made here:
+irreducibility, rational points, and the nine pole exclusions all remain to
+be proved.
+
+The digit-stripping filtration gives an even sharper obstruction to the
+most natural spread.  Since \(9=3\cdot3+0\), sequence (1) specializes to the
+nonsplit exact sequence
+
+\[
+ 0\longrightarrow
+   \det^2\otimes(\Gamma^2E)^{(1)}
+ \longrightarrow C_9
+ \longrightarrow E\otimes(Z_3)^{(1)}
+ \longrightarrow0,                                      \tag{25j}
+\]
+
+whose dimensions are \(3,7,4\).  The left submodule has coordinate support
+\(e_2,e_5,e_8\).  After dualizing, the annihilator of that submodule is a
+canonical four-dimensional submodule
+
+\[
+ \Sigma_0=\langle e_3^*,e_4^*,e_6^*,e_7^*\rangle
+                              \subset C_9^*.             \tag{25k}
+\]
+
+This is the representation-theoretically preferred \(\mathrm{PG}(3)\), but
+it contains no split-locator Hankel line.  Indeed, (25a) gives
+
+\[
+ \ell_g\subset\mathbf P(\Sigma_0)
+ \quad\Longrightarrow\quad
+ g_1=g_2=g_4=g_5=g_7=g_8=0,
+\]
+
+and hence
+
+\[
+                    g=t^9+g_6t^6+g_3t^3+g_0.           \tag{25l}
+\]
+
+Its derivative is identically zero, so it cannot be squarefree.  Thus the
+canonical four-space suggested by the four-dimensional quotient is entirely
+evacuated by the split locus.  This is the locator-line shadow of the
+nonsplitting in (25j): a successful spread must be non-invariant, while an
+inductive proof must transport pointed abundance through the extension
+rather than choose an equivariant complement.
+
+This inseparability obstruction is uniform.  Let \(p\) be odd and
+\(d=pD\).  In the zero-terminal-digit instance of sequence (1), its left
+submodule has coordinate support
+
+\[
+             j=ph+b,\qquad 0\le h\le D-1,\quad2\le b\le p-1.         \tag{25m}
+\]
+
+Let \(Q^*\subset C_d^*\) be the annihilator of that submodule.  The two
+locator windows evaluate on coordinate \(e_j\) as \(g_{j-1}\) and \(g_j\).
+Therefore
+
+\[
+ \ell_g\subset\mathbf P(Q^*)
+ \quad\Longrightarrow\quad
+ g_{ph+b-1}=g_{ph+b}=0
+ \quad(2\le b\le p-1).                                  \tag{25n}
+\]
+
+As \(b\) varies, (25n) kills every coefficient \(g_i\) with
+\(i\not\equiv0\pmod p\).  Thus \(g\in K[t^p]\), so \(g'=0\) and no
+positive-degree such locator is squarefree.  The binary case is excluded
+because the left term is empty when \(p=2,a=0=p-2\).
+
+Hence, in every odd-characteristic zero-terminal-digit carrier, pointed
+split abundance is invisible on the quotient side of the associated graded.
+It necessarily uses the leakage across the nonsplit extension.  This is a
+general obstruction to proving the carrier theorem by independent abundance
+statements on the digit-stripping factors.
+
+### 8.2 The three-dimensional digit submodule is saturated
+
+The same filtration nevertheless closes one intrinsic GF(27) stratum.  Put
+
+\[
+                         A=\langle e_2,e_5,e_8\rangle\subset C_9.     \tag{25o}
+\]
+
+Restriction gives an equivariant map \(C_9^*\to A^*\).  For a locator line
+its two projected vectors are
+
+\[
+              \bar a_g=(g_1,g_4,g_7),\qquad
+              \bar b_g=(g_2,g_5,g_8).                 \tag{25p}
+\]
+
+If \(z\in\mathbf P(A)\), condition (25b) depends only on these vectors:
+
+\[
+              \ell_g\subset z^\perp
+       \quad\Longleftrightarrow\quad
+              \langle\bar a_g,\bar b_g\rangle
+                         \subset z^\perp\subset A^*.   \tag{25q}
+\]
+
+As an \(\mathrm{SL}_2\)-module, \(A\) is a determinant twist of the
+Frobenius twist of \(\Gamma^2E\).  Thus \(\mathbf P(A^*)\) has its usual
+conic, which in the coordinates (25p) may be written
+
+\[
+                               Y^2=XZ.                 \tag{25r}
+\]
+
+The projected Hankel point of an affine-plane locator
+\(t^9+Bt^3+Dt+C\) lies on this conic, and projective transport supplies all
+its rational points.  Consequently every \(z\in\mathbf P(A)\) whose polar
+line meets (25r) is covered by a projective transform of an affine plane.
+The transform can be chosen affine.  Indeed, its remaining freedom contains
+the Borel stabilizer of the chosen conic point.  That stabilizer fixes one
+parameter point, omitted by the starting affine plane, and is transitive on
+the other 27; hence some transform keeps infinity out of the nine-point
+support.
+
+It remains only the anisotropic quadratic orbit, whose polar lines are the
+external lines to (25r).  This orbit has a uniform split seed.  Write
+
+\[
+                         L_p(t)=t^3+pt.
+\]
+
+The direction parameters \(p=-\alpha^2\) are nonsquares because
+\(-1\) is a nonsquare in \(K\).  Choose a square \(c\ne1\) for which
+\(c-1\) is also a square, and put \(r=cp\).  Such choices exist: the standard
+quadratic-character sum gives exactly
+
+\[
+ \#\{c:\chi(c)=\chi(c-1)=1\}=\frac{27-3}{4}=6.         \tag{25s}
+\]
+
+Let \(W_p=\operatorname {im}L_p\).  The image under \(L_p\) of the
+one-dimensional line \(\ker L_r\) is a nonzero one-dimensional subspace of
+\(W_p\).  Choose \(\eta\in W_p\) outside it and set
+
+\[
+                    g=(L_p+\eta)(L_p-\eta)L_r.         \tag{25t}
+\]
+
+The three affine \(\mathbf F_3\)-lines in (25t) are pairwise disjoint, so
+\(g\) is a split squarefree affine nonic.  In the three-line coefficient
+formulas its parameters are \(u=s=0\) and \(v=-\eta^2\).  Therefore (25p)
+is the line spanned by
+
+\[
+                 (rv,0,r-p),\qquad(0,p(p-r),0).        \tag{25u}
+\]
+
+A point obtained by adding \(\lambda\) times the second vector to the first
+lies on (25r) exactly when
+
+\[
+                    \lambda^2=\frac{rv}{p^2(r-p)}.     \tag{25v}
+\]
+
+Here \(r\) and \(v=-\eta^2\) are both nonsquares, while
+\(r-p=p(c-1)\) is a nonsquare.  The right side of (25v) is consequently a
+nonsquare.  The line (25u) is external to the conic.
+
+By transitivity, projective transforms of (25t) cover the entire anisotropic
+orbit in \(\mathbf P(A)\).  Pointedness costs nothing: a nonsplit torus in
+the stabilizer of an anisotropic quadratic acts regularly on the 28 points
+of \(\mathbf P^1(K)\).  Among the 28 transforms in this torus fibre, exactly
+the nine whose pole lies in the support of (25t) are forbidden, leaving 19
+affine transforms.  Combining this with the isotropic case proves
+
+\[
+ \boxed{\quad
+   \mathbf P(A)(K)\subseteq
+   \bigcup_{|S|=9,\ S\subset K}\langle\Gamma_{10}(S)\rangle .
+ \quad}                                                \tag{25w}
+\]
+
+Thus the full three-dimensional digit submodule is certificate-free
+saturated.  The unresolved GF(27) theorem is now confined to points with
+nonzero image in the four-dimensional quotient of (25j), where the
+nonsplit leakage remains essential.
+
+### 8.3 The four-dimensional quotient has seven intrinsic orbits
+
+Since \(Z_3\simeq\det\otimes E\), the quotient in (25j) is, up to a
+determinant character,
+
+\[
+                         Q\simeq E\otimes E^{(1)},      \tag{25x}
+\]
+
+where \((1)\) denotes the cube Frobenius \(\sigma:x\mapsto x^3\).
+This gives a short intrinsic orbit inventory for the remaining lifting
+problem.
+
+Rank-one tensors form the Segre quadric
+\(\mathbf P(E)\times\mathbf P(E^{(1)})\).  After untwisting the second
+factor, the diagonal action is the ordinary diagonal action on ordered pairs
+of projective-line points.  It therefore has exactly two orbits:
+
+\[
+ \begin{array}{c|c|c}
+ \text{rank-one type}&\text{size}&\text{stabilizer size}\\ \hline
+ \text{Frobenius graph}&28&702,\\
+ \text{off graph}&28\cdot27=756&26.
+ \end{array}                                                       \tag{25y}
+\]
+
+For an invertible tensor, use the alternating form on \(E\) to identify its
+projective class with an element of \(G=\mathrm{PGL}_2(27)\).  The tensor
+action becomes, up to the discarded determinant scalar,
+
+\[
+                         M\longmapsto gM\sigma(g)^{-1}. \tag{25z}
+\]
+
+Thus its orbits are the \(\sigma\)-twisted conjugacy classes of \(G\).
+Shintani descent identifies these with the ordinary conjugacy classes of the
+fixed group
+
+\[
+                         G^\sigma=\mathrm{PGL}_2(3)\cong S_4.        \tag{25aa}
+\]
+
+There are exactly five.  Labelled by the cycle types in \(S_4\), their
+twisted centralizer and orbit sizes are
+
+\[
+\begin{array}{c|c|c}
+1&24&819\\
+(12)&4&4914\\
+(12)(34)&8&2457\\
+(123)&3&6552\\
+(1234)&4&4914.
+\end{array}                                                         \tag{25ab}
+\]
+
+The checksum
+
+\[
+ 28+756+819+4914+2457+6552+4914
+   =20440=|\mathrm{PG}(3,27)|                                      \tag{25ac}
+\]
+
+accounts for every quotient point.  Hence the open part of the GF(27)
+theorem is a lifting problem over seven quotient types: two rank-one types
+and five Shintani types.  This is substantially smaller and more intrinsic
+than a Borel coordinate inventory, but it is not seven carrier orbits.  The
+fibre over a normalized quotient point is an affine copy of the
+three-dimensional kernel \(A\), and its stabilizer acts through the
+nonsplit cocycle in (25j).  Controlling those affine fibres while retaining
+nine-point support is precisely the remaining leakage problem.
+
+In the digit coordinates the quotient tensor may be arranged as
+
+\[
+                       M_z=\begin{pmatrix}
+                              z_3&z_6\\ z_4&z_7
+                            \end{pmatrix},
+ \qquad             \det M_z=z_3z_7-z_4z_6.            \tag{25ad}
+\]
+
+This gives the intrinsic meaning of the earlier Borel inventory.  The true
+quotient boundary is the rank-one quadric \(\det M_z=0\).  The condition
+\(z_3=z_6=0\) used in the three-line reduction is only a Borel gauge slice
+through that quadric, not an intrinsic carrier boundary.  Its projective
+rank-one points belong to the two orbits in (25y), while the complement of
+the quadric decomposes into the five Shintani types in (25ab).  Future
+normal-form work should therefore be indexed by these seven quotient types
+and the affine kernel cocycle, not by the accidental vanishing of one tensor
+row.
+
+That cocycle is already explicit.  Use the coordinate section
+\(Q=\langle e_3,e_4,e_6,e_7\rangle\) of (25j).  Upper translation by
+\(u\) sends a divided-power coordinate by
+
+\[
+                  e_j\longmapsto
+                  \sum_{k\ge j}{k\choose j}u^{k-j}e_k.
+\]
+
+For \(q=q_3e_3+q_4e_4+q_6e_6+q_7e_7\), its component in the kernel
+\(A\) is therefore
+
+\[
+ \kappa_u(q)=
+   (q_3u^2-q_4u)e_5
+  +(-q_3u^5+q_4u^4+q_6u^2-q_7u)e_8.                  \tag{25ae}
+\]
+
+The missing \(e_2\)-motion is supplied by the opposite unipotent, obtained
+by conjugating (25ae) with inversion.  Thus the remaining leakage is a
+concrete Frobenius-weighted polynomial cocycle of degrees \(1,2,4,5\), not
+an unspecified extension class.  On the rank-one quotient stabilizers this
+is the intrinsic source of the earlier Borel normal forms.  The five
+full-rank Shintani stabilizers are finite, so group normalization alone
+cannot sweep their three-dimensional affine fibres; an additional split
+support family is still required there.
+
 ## 9. Secondary extension
 
 Although it is no longer the preferred GF(27) proof, the fixed-direction
@@ -751,10 +1085,16 @@ value.
 
 Proved here: (1), the prime-power quotient (2)--(10), the locator/secant
 dictionary (13), the direct specialization proof and relative-code reduction
-(16)--(24), and the generalization (26).  The abstract subline/minimum-word
-theorem within (16)--(21) is also available in the cited 2023 literature.
+(16)--(24), the dual blocking-line equivalence and optimal lower bound
+(25a)--(25c'), the inseparable associated-graded obstruction
+(25j)--(25n), saturation of the full digit kernel (25w), the seven-type
+quotient orbit inventory (25x)--(25ad), and the generalization (26).  The
+abstract subline/minimum-word theorem within (16)--(21) is also available in
+the cited 2023 literature.
 
-Not proved here: nucleus saturation (14), its GF(27) instance (15), or the
-split-and-collision assertion for the two-point switch.  No completeness
-theorem for an ambient normal rational curve is used as a substitute for
-these pointed nucleus-incidence statements.
+Not proved here: full nucleus saturation (14), the points of its GF(27)
+instance (15) with nonzero four-dimensional quotient, the seven corresponding
+affine-kernel lifting statements, or the split-and-collision assertion for
+the two-point switch.  No completeness theorem for an ambient normal
+rational curve is used as a substitute for these pointed nucleus-incidence
+statements.

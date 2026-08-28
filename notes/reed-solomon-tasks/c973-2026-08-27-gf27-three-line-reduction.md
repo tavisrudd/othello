@@ -980,6 +980,18 @@ character count.  The carrier note also gives the exact dual reformulation:
 split locator Hankel lines must block all hyperplanes of `PG(6,27)`, and one
 realized line spread in a `PG(3,27)` would suffice.
 
+The subsequent digit-filtration pass sharpens the intrinsic boundary.  The
+kernel `A=<e2,e5,e8>` is now proved saturated without a certificate: affine
+planes cover the isotropic quadratic types, and the product of two parallel
+lines with offsets `+-eta` and one transverse zero-offset line supplies an
+external projected Hankel line for the anisotropic type.  The quotient
+`C9/A` is `E tensor E^(1)` for cube Frobenius.  Its rank-one quadric has two
+`PGL2` orbits and its invertible locus has five Shintani orbits corresponding
+to the conjugacy classes of `PGL2(3)`.  In particular, the intrinsic quotient
+boundary is `z3*z7-z4*z6=0`; the slice `z3=z6=0` used above is only a Borel
+normal form.  The open problem is lifting the seven quotient types through
+the nonsplit affine `A`-fibres while retaining nine-point support.
+
 ## 10. `ej` + `tt` ledger
 
 | question | status | exact continuation |
@@ -990,7 +1002,7 @@ realized line spread in a `PG(3,27)` would suffice.
 | What replaces the Artin--Schreier trace bit? | membership in `W_p,W_r`, each a linearized cubic image | cyclic cubic covers above |
 | What is the complete collision boundary? | two explicit cubic factors | equation (11) |
 | Does the GF(64) sign-cover lemma directly close GF(27)? | not yet; the natural family gives a cubic-cover tower rather than one identified genus-one sign cover | analyze the dense `z2z3!=0` tower first |
-| Is `z2z3=0` the true Borel boundary? | no; (12) moves every orbit with `(z3,z6)!=(0,0)` into the dense chart | only the invariant five-space `z3=z6=0` remains |
+| Is `z2z3=0` the true Borel boundary? | no; (12) moves every orbit with `(z3,z6)!=(0,0)` into the dense chart | `z3=z6=0` is only an upper-Borel slice; intrinsically use `z3*z7-z4*z6=0` |
 | How many boundary charts remain after the Borel action? | three affine normal forms and one two-coordinate torus endpoint | the four strata following (15) |
 | Does the torus endpoint survive? | no; its four square-class orbits have the explicit three-line products (17) | closed by the coefficient identities (18) |
 | Does the residual `z7` chart survive? | no; relative torus weight five is invertible modulo 26, leaving two orbits | closed by the explicit root partitions (20)--(21) |
@@ -1005,3 +1017,5 @@ realized line spread in a `PG(3,27)` would suffice.
 | Do minimum subline circuits alone prove radius nine? | no; they classify only the weight-four layer, and bounded affine circuit decomposition is still open | require a three-circuit support theorem, not mere generation |
 | Is the affine plane the whole parallel-line family? | no; it is the zero-sum offset slice of 84 triples per direction | use the two-trace-bit gate on `z2z3!=0` |
 | Do ordinary binary Waring rank or plain NRC completeness land the last lemma? | no; ordinary tenth powers retain only coordinates `0,1,9,10` in characteristic three, while completeness does not impose incidence with the prescribed nucleus point | do not cite either as a split-switch proof |
+| Does the digit-kernel plane remain open? | no; affine planes cover its isotropic quadratic types and one three-line external Hankel line covers the anisotropic type | equation (25w) of the carrier note |
+| How many intrinsic quotient types remain? | seven: two rank-one tensor orbits and five full-rank Shintani types | analyze their affine `A`-fibres through the nonsplit cocycle |
