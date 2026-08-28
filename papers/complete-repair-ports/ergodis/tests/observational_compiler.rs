@@ -431,6 +431,109 @@ fn context_language_product_masks_disallowed_continuations_exactly() {
     );
 }
 
+#[test]
+fn context_language_product_preserves_typed_two_sort_words() {
+    let presentation = FinitePresentation::new(
+        [2, 2],
+        [0, 1, 0, 1],
+        [
+            GeneratorSpec {
+                source_sort: 0,
+                target_sort: 1,
+                transitions: [2, 3].into(),
+            },
+            GeneratorSpec {
+                source_sort: 1,
+                target_sort: 0,
+                transitions: [0, 0].into(),
+            },
+        ],
+    )
+    .unwrap();
+    // Accept exactly the typed word [0, 1].
+    let language = FiniteContextLanguage::new(4, 0, &[2], 2, [1, 3, 3, 2, 3, 3, 3, 3]).unwrap();
+    let product = presentation
+        .product_with_context_language(&language)
+        .unwrap();
+    let compiled = compile_observational(product.presentation()).unwrap();
+    let left = product.initial_product_state(0).unwrap();
+    let right = product.initial_product_state(1).unwrap();
+    assert_eq!(
+        compiled.state_classes()[left as usize],
+        compiled.state_classes()[right as usize]
+    );
+    let after_first = product.presentation().transition(0, left).unwrap();
+    assert_eq!(product.decode_product_state(after_first), Some((2, 1)));
+    let accepted = product.presentation().transition(1, after_first).unwrap();
+    assert_eq!(product.decode_product_state(accepted), Some((0, 2)));
+}
+
+#[test]
+fn quotient_word_search_matches_all_two_state_transition_systems() {
+    for first_code in 0_u32..4 {
+        for second_code in 0_u32..4 {
+            let transitions = |code: u32| [code & 1, (code >> 1) & 1].into();
+            let presentation = FinitePresentation::new(
+                [2],
+                [0, 1],
+                [
+                    GeneratorSpec {
+                        source_sort: 0,
+                        target_sort: 0,
+                        transitions: transitions(first_code),
+                    },
+                    GeneratorSpec {
+                        source_sort: 0,
+                        target_sort: 0,
+                        transitions: transitions(second_code),
+                    },
+                ],
+            )
+            .unwrap();
+            let compiled = compile_observational(&presentation).unwrap();
+            let costs = [1_u64, 3];
+            for start in 0_u32..2 {
+                let start = compiled.state_classes()[start as usize];
+                let mut unit = [u64::MAX; 2];
+                let mut weighted = [u64::MAX; 2];
+                unit[start as usize] = 0;
+                weighted[start as usize] = 0;
+                for _ in 0..2 {
+                    for class in 0_u32..2 {
+                        for generator in 0_u32..2 {
+                            let next = compiled.transition(generator, class).unwrap();
+                            unit[next as usize] =
+                                unit[next as usize].min(unit[class as usize].saturating_add(1));
+                            weighted[next as usize] = weighted[next as usize].min(
+                                weighted[class as usize].saturating_add(costs[generator as usize]),
+                            );
+                        }
+                    }
+                }
+                for target in 0_u32..2 {
+                    let shortest = compiled.shortest_generator_word(start, target).unwrap();
+                    assert_eq!(shortest.as_ref().map(|word| word.len() as u64), {
+                        (unit[target as usize] != u64::MAX).then_some(unit[target as usize])
+                    });
+                    let minimum = compiled
+                        .shortest_weighted_generator_word(start, target, &costs)
+                        .unwrap();
+                    assert_eq!(minimum.as_ref().map(|word| word.cost), {
+                        (weighted[target as usize] != u64::MAX).then_some(weighted[target as usize])
+                    });
+                    if let Some(minimum) = minimum {
+                        let mut replay = start;
+                        for &generator in minimum.generators.iter() {
+                            replay = compiled.transition(generator, replay).unwrap();
+                        }
+                        assert_eq!(replay, target);
+                    }
+                }
+            }
+        }
+    }
+}
+
 type Profile = [u8; 3];
 
 fn resource_profiles() -> Vec<Profile> {
