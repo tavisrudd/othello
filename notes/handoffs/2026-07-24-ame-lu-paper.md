@@ -10,6 +10,16 @@ Discovery companion:
 
 ## Current status
 
+**C991 completed (2026-08-28).**  The 37-page Paper I revision is synchronized
+to the standalone `ame-lu` repository at forward commit `667a2d0`, with
+exporter content SHA-256
+`f07fe6401fa51854c8f01f849ffa9f82bb4699a9989d14fb9aa093b630b300ec`.
+The mirror build, exporter verification, and release gate pass.  The portfolio
+summary's result description and quoted abstract now include the intrinsic
+endomorphism algebra and low-party theorem; its mirror is at `d1cceee`.
+Nothing was pushed, deposited, tagged, uploaded, or submitted.  Report:
+`2026-08-28-c991-ame-lu-export.md`.
+
 **C990 completed (2026-08-28).**  Appendix B is reduced from roughly nine to
 seven rendered pages while retaining all twelve theorem-like statements, both
 figures, and every substantive two-/`k`-uniform conclusion.  Two resumed cold
