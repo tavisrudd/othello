@@ -427,114 +427,264 @@ trait PendingDirectory {
     fn add_block(&mut self, block: u32, sort: u32) -> Result<(), ObservationalError>;
 }
 
-struct PendingSet {
-    keys: Box<[u64]>,
+#[repr(C)]
+#[derive(Clone, Copy)]
+struct PatriciaBranch {
+    children: [u32; 2],
+    critical_bit: u32,
+    next_free: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<PatriciaBranch>() == 16);
+const _: () = assert!(std::mem::align_of::<PatriciaBranch>() == 4);
+
+struct PatriciaPending {
+    leaf_keys: Box<[u64]>,
+    branches: Box<[PatriciaBranch]>,
+    root: u32,
+    free_leaf: u32,
+    free_branch: u32,
     len: usize,
 }
 
-impl PendingSet {
-    const EMPTY: u64 = u64::MAX;
+impl PatriciaPending {
+    const NONE: u32 = u32::MAX;
+    const LEAF_TAG: u32 = 1 << 31;
+    const INDEX_MASK: u32 = Self::LEAF_TAG - 1;
 
     fn new(max_items: usize) -> Result<Self, ObservationalError> {
-        let slots = Self::slot_count(max_items)?;
+        if max_items >= Self::LEAF_TAG as usize {
+            return Err(ObservationalError::Overflow);
+        }
+        let mut leaf_keys = vec![0_u64; max_items];
+        for (index, next) in leaf_keys.iter_mut().enumerate() {
+            *next = if index + 1 == max_items {
+                u64::from(Self::NONE)
+            } else {
+                (index + 1) as u64
+            };
+        }
+        let branch_count = max_items.saturating_sub(1);
+        let mut branches = vec![
+            PatriciaBranch {
+                children: [Self::NONE; 2],
+                critical_bit: u32::MAX,
+                next_free: Self::NONE,
+            };
+            branch_count
+        ];
+        for (index, branch) in branches.iter_mut().enumerate() {
+            branch.next_free = if index + 1 == branch_count {
+                Self::NONE
+            } else {
+                (index + 1) as u32
+            };
+        }
         Ok(Self {
-            keys: vec![Self::EMPTY; slots].into_boxed_slice(),
+            leaf_keys: leaf_keys.into_boxed_slice(),
+            branches: branches.into_boxed_slice(),
+            root: Self::NONE,
+            free_leaf: if max_items == 0 { Self::NONE } else { 0 },
+            free_branch: if branch_count == 0 { Self::NONE } else { 0 },
             len: 0,
         })
     }
 
-    fn slot_count(max_items: usize) -> Result<usize, ObservationalError> {
+    fn storage_bytes(max_items: usize) -> Result<usize, ObservationalError> {
+        if max_items >= Self::LEAF_TAG as usize {
+            return Err(ObservationalError::Overflow);
+        }
         max_items
-            .max(1)
-            .checked_mul(2)
-            .and_then(usize::checked_next_power_of_two)
+            .checked_mul(std::mem::size_of::<u64>())
+            .and_then(|bytes| {
+                max_items
+                    .saturating_sub(1)
+                    .checked_mul(std::mem::size_of::<PatriciaBranch>())
+                    .and_then(|branches| bytes.checked_add(branches))
+            })
             .ok_or(ObservationalError::Overflow)
     }
 
     fn capacity(&self) -> usize {
-        self.keys.len() / 2
+        self.leaf_keys.len()
     }
 
-    fn home(&self, key: u64) -> usize {
-        let mut mixed = key.wrapping_add(0x9e37_79b9_7f4a_7c15);
-        mixed = (mixed ^ (mixed >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
-        mixed = (mixed ^ (mixed >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
-        mixed ^= mixed >> 31;
-        (mixed as usize) & (self.keys.len() - 1)
+    fn is_leaf(node: u32) -> bool {
+        node & Self::LEAF_TAG != 0
     }
 
-    fn contains(&self, key: u64) -> bool {
-        let mut slot = self.home(key);
-        loop {
-            let found = self.keys[slot];
-            if found == key {
-                return true;
-            }
-            if found == Self::EMPTY {
-                return false;
-            }
-            slot = (slot + 1) & (self.keys.len() - 1);
+    fn leaf(index: u32) -> u32 {
+        Self::LEAF_TAG | index
+    }
+
+    fn leaf_index(node: u32) -> usize {
+        (node & Self::INDEX_MASK) as usize
+    }
+
+    fn direction(key: u64, critical_bit: u32) -> usize {
+        ((key >> (63 - critical_bit)) & 1) as usize
+    }
+
+    fn contains_key(&self, key: u64) -> bool {
+        let mut node = self.root;
+        if node == Self::NONE {
+            return false;
         }
+        while !Self::is_leaf(node) {
+            let branch = self.branches[node as usize];
+            node = branch.children[Self::direction(key, branch.critical_bit)];
+        }
+        self.leaf_keys[Self::leaf_index(node)] == key
     }
 
-    fn insert(&mut self, key: u64) -> Result<bool, ObservationalError> {
+    fn insert_key(&mut self, key: u64) -> Result<bool, ObservationalError> {
+        if self.root == Self::NONE {
+            let leaf = self.allocate_leaf(key)?;
+            self.root = leaf;
+            self.len = 1;
+            return Ok(true);
+        }
+        let mut path_nodes = [Self::NONE; 64];
+        let mut path_directions = [0_u8; 64];
+        let mut depth = 0_usize;
+        let mut leaf = self.root;
+        while !Self::is_leaf(leaf) {
+            let branch = self.branches[leaf as usize];
+            let direction = Self::direction(key, branch.critical_bit);
+            path_nodes[depth] = leaf;
+            path_directions[depth] = direction as u8;
+            depth += 1;
+            leaf = branch.children[direction];
+        }
+        let old_key = self.leaf_keys[Self::leaf_index(leaf)];
+        if old_key == key {
+            return Ok(false);
+        }
         if self.len == self.capacity() {
             return Err(ObservationalError::Overflow);
         }
-        let mut slot = self.home(key);
-        loop {
-            let found = self.keys[slot];
-            if found == key {
-                return Ok(false);
-            }
-            if found == Self::EMPTY {
-                self.keys[slot] = key;
-                self.len += 1;
-                return Ok(true);
-            }
-            slot = (slot + 1) & (self.keys.len() - 1);
+        let critical_bit = (key ^ old_key).leading_zeros();
+        let insertion_depth = path_nodes[..depth]
+            .iter()
+            .position(|&node| self.branches[node as usize].critical_bit >= critical_bit)
+            .unwrap_or(depth);
+        let (parent, parent_direction) = if insertion_depth == 0 {
+            (Self::NONE, 0)
+        } else {
+            (
+                path_nodes[insertion_depth - 1],
+                path_directions[insertion_depth - 1] as usize,
+            )
+        };
+        let displaced = if insertion_depth == depth {
+            leaf
+        } else {
+            path_nodes[insertion_depth]
+        };
+        let new_leaf = self.allocate_leaf(key)?;
+        let new_branch = self.allocate_branch()?;
+        let direction = Self::direction(key, critical_bit);
+        self.branches[new_branch as usize] = PatriciaBranch {
+            children: if direction == 0 {
+                [new_leaf, displaced]
+            } else {
+                [displaced, new_leaf]
+            },
+            critical_bit,
+            next_free: Self::NONE,
+        };
+        if parent == Self::NONE {
+            self.root = new_branch;
+        } else {
+            self.branches[parent as usize].children[parent_direction] = new_branch;
         }
+        self.len += 1;
+        Ok(true)
     }
 
-    fn remove(&mut self, key: u64) -> bool {
-        let mask = self.keys.len() - 1;
-        let mut hole = self.home(key);
-        loop {
-            let found = self.keys[hole];
-            if found == Self::EMPTY {
+    fn remove_key(&mut self, key: u64) -> bool {
+        if self.root == Self::NONE {
+            return false;
+        }
+        if Self::is_leaf(self.root) {
+            if self.leaf_keys[Self::leaf_index(self.root)] != key {
                 return false;
             }
-            if found == key {
-                break;
-            }
-            hole = (hole + 1) & mask;
+            let leaf = self.root;
+            self.root = Self::NONE;
+            self.release_leaf(leaf);
+            self.len = 0;
+            return true;
         }
+        let mut grandparent = Self::NONE;
+        let mut grandparent_direction = 0_usize;
+        let mut parent = Self::NONE;
+        let mut direction = 0_usize;
+        let mut node = self.root;
+        while !Self::is_leaf(node) {
+            grandparent = parent;
+            grandparent_direction = direction;
+            parent = node;
+            direction = Self::direction(key, self.branches[node as usize].critical_bit);
+            node = self.branches[node as usize].children[direction];
+        }
+        if self.leaf_keys[Self::leaf_index(node)] != key {
+            return false;
+        }
+        let sibling = self.branches[parent as usize].children[1 - direction];
+        if grandparent == Self::NONE {
+            self.root = sibling;
+        } else {
+            self.branches[grandparent as usize].children[grandparent_direction] = sibling;
+        }
+        self.release_leaf(node);
+        self.release_branch(parent);
         self.len -= 1;
-        let mut next = (hole + 1) & mask;
-        while self.keys[next] != Self::EMPTY {
-            let home = self.home(self.keys[next]);
-            if (next.wrapping_sub(home) & mask) > (hole.wrapping_sub(home) & mask) {
-                self.keys[hole] = self.keys[next];
-                hole = next;
-            }
-            next = (next + 1) & mask;
-        }
-        self.keys[hole] = Self::EMPTY;
         true
+    }
+
+    fn allocate_leaf(&mut self, key: u64) -> Result<u32, ObservationalError> {
+        let leaf = self.free_leaf;
+        if leaf == Self::NONE {
+            return Err(ObservationalError::Overflow);
+        }
+        self.free_leaf = self.leaf_keys[leaf as usize] as u32;
+        self.leaf_keys[leaf as usize] = key;
+        Ok(Self::leaf(leaf))
+    }
+
+    fn release_leaf(&mut self, leaf: u32) {
+        let index = Self::leaf_index(leaf);
+        self.leaf_keys[index] = u64::from(self.free_leaf);
+        self.free_leaf = index as u32;
+    }
+
+    fn allocate_branch(&mut self) -> Result<u32, ObservationalError> {
+        let branch = self.free_branch;
+        if branch == Self::NONE {
+            return Err(ObservationalError::Overflow);
+        }
+        self.free_branch = self.branches[branch as usize].next_free;
+        Ok(branch)
+    }
+
+    fn release_branch(&mut self, branch: u32) {
+        self.branches[branch as usize].next_free = self.free_branch;
+        self.free_branch = branch;
     }
 }
 
-impl PendingDirectory for PendingSet {
+impl PendingDirectory for PatriciaPending {
     fn contains(&self, block: u32, generator: u32) -> bool {
-        self.contains(split_work_key(block, generator))
+        self.contains_key(split_work_key(block, generator))
     }
 
     fn insert(&mut self, block: u32, generator: u32) -> Result<bool, ObservationalError> {
-        self.insert(split_work_key(block, generator))
+        self.insert_key(split_work_key(block, generator))
     }
 
     fn remove(&mut self, block: u32, generator: u32) -> bool {
-        self.remove(split_work_key(block, generator))
+        self.remove_key(split_work_key(block, generator))
     }
 
     fn add_block(&mut self, _block: u32, _sort: u32) -> Result<(), ObservationalError> {
@@ -677,9 +827,7 @@ fn pending_mode(presentation: &FinitePresentation) -> Result<PendingMode, Observ
             bytes.checked_add(words.checked_mul(std::mem::size_of::<u32>())?)
         })
         .ok_or(ObservationalError::Overflow)?;
-    let sparse_bytes = PendingSet::slot_count(presentation.transitions.len())?
-        .checked_mul(std::mem::size_of::<u64>())
-        .ok_or(ObservationalError::Overflow)?;
+    let sparse_bytes = PatriciaPending::storage_bytes(presentation.transitions.len())?;
     Ok(if dense_bytes <= sparse_bytes {
         PendingMode::Dense
     } else {
@@ -1493,7 +1641,7 @@ fn minimize_partition_worklist(
             block_sorts,
             members,
             block_ranges,
-            PendingSet::new(presentation.transitions.len())?,
+            PatriciaPending::new(presentation.transitions.len())?,
         ),
     }
 }
@@ -1823,10 +1971,10 @@ fn push_split_work<P: PendingDirectory>(
     pending_counts: &mut [u32],
     work: SplitWorkItem,
 ) -> Result<(), ObservationalError> {
-    if pending.contains(work.block, work.generator) {
-        return Ok(());
-    }
     if queue.len() == queue.capacity() {
+        if pending.contains(work.block, work.generator) {
+            return Ok(());
+        }
         return Err(ObservationalError::Overflow);
     }
     if !pending.insert(work.block, work.generator)? {
@@ -2803,7 +2951,7 @@ mod tests {
     #[test]
     fn sparse_pending_work_never_grows_its_reserved_storage() {
         let mut queue = VecDeque::with_capacity(4);
-        let mut pending = PendingSet::new(4).unwrap();
+        let mut pending = PatriciaPending::new(4).unwrap();
         let mut pending_counts = [0_u32; 4];
         let queue_capacity = queue.capacity();
         let pending_capacity = pending.capacity();
@@ -2827,23 +2975,54 @@ mod tests {
     }
 
     #[test]
-    fn fixed_pending_set_backshift_deletion_preserves_probe_chains() {
-        let mut pending = PendingSet::new(64).unwrap();
-        for key in 0..64_u64 {
-            assert!(pending.insert(key << 32).unwrap());
+    fn patricia_pending_handles_the_fixed_hash_collision_family() {
+        let generators = [
+            92, 188, 250, 287, 342, 365, 426, 484, 505, 814, 836, 923, 967, 1_144, 1_172, 1_408,
+            1_429, 1_710, 1_963, 1_993, 2_024, 2_283, 2_287, 2_633, 2_671, 2_676, 2_698, 2_959,
+            3_264, 3_290, 3_406, 3_517, 3_619, 3_686, 3_887, 4_116, 4_146, 4_178, 4_320, 4_350,
+            4_405, 4_863, 4_864, 4_879, 5_182, 5_185, 5_805, 6_043, 6_307, 6_340, 6_380, 6_444,
+            6_463, 6_885, 7_009, 7_128, 7_200, 7_299, 7_494, 7_541, 7_565, 7_632, 7_768, 7_850,
+        ];
+        let mut pending = PatriciaPending::new(generators.len()).unwrap();
+        for &generator in &generators {
+            assert!(pending.insert(2, generator).unwrap());
         }
-        for key in (0..64_u64).step_by(2) {
-            assert!(pending.remove(key << 32));
+        assert_eq!(pending.len, generators.len());
+        for &generator in &generators {
+            assert!(pending.contains(2, generator));
+            assert!(pending.remove(2, generator));
         }
-        for key in (1..64_u64).step_by(2) {
-            assert!(pending.contains(key << 32));
-        }
-        for key in 64..96_u64 {
-            assert!(pending.insert(key << 32).unwrap());
-        }
-        assert_eq!(pending.len, 64);
-        for key in (1..96_u64).step_by(2) {
-            assert!(pending.contains(key << 32));
+        assert_eq!(pending.len, 0);
+    }
+
+    #[test]
+    fn patricia_pending_matches_btree_set_under_random_updates() {
+        let mut pending = PatriciaPending::new(128).unwrap();
+        let mut reference = std::collections::BTreeSet::new();
+        let mut fixture = 0x5eed_1234_89ab_cdef_u64;
+        for _ in 0..20_000 {
+            fixture = fixture
+                .wrapping_mul(6_364_136_223_846_793_005)
+                .wrapping_add(1_442_695_040_888_963_407);
+            let block = (fixture >> 40) as u32 % 32;
+            let generator = (fixture >> 8) as u32 % 64;
+            let key = split_work_key(block, generator);
+            match fixture & 3 {
+                0 => {
+                    let expected = if reference.contains(&key) {
+                        Ok(false)
+                    } else if reference.len() == 128 {
+                        Err(ObservationalError::Overflow)
+                    } else {
+                        reference.insert(key);
+                        Ok(true)
+                    };
+                    assert_eq!(pending.insert(block, generator), expected);
+                }
+                1 => assert_eq!(pending.remove(block, generator), reference.remove(&key)),
+                _ => assert_eq!(pending.contains(block, generator), reference.contains(&key)),
+            }
+            assert_eq!(pending.len, reference.len());
         }
     }
 
