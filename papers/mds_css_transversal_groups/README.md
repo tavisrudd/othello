@@ -22,8 +22,9 @@ self-association of the six-arc and hence the conic boundary.  On an explicit no
 degree-eight quotient classifies projective and monomial-code equivalence over
 odd fields and local-Clifford and local-unitary equivalence over odd prime
 fields.  A separate worked example distinguishes error-syndrome geometry from
-the parity-check conic criterion.  Exact certificates cover the finite
-six-point calculations; the all-length
+the parity-check conic criterion.  Orbit and double-coset lemmas replace the
+largest finite searches in the pencil and transport arguments; exact
+certificates independently replay the remaining six-point calculations.  The all-length
 multiplier and group theorems are conceptual.
 
 Build and verify from this directory:
@@ -45,7 +46,7 @@ axiom dependencies of every declaration the paper cites are printed by
 record of that closure — its modules, imports, terminal names, axiom facts,
 exporter digest, and toolchain identity — is kept with the Lean development and
 is summarized in `supplement/EVIDENCE.md`. The dictionary, multiplier-line,
-syndrome, pencil quotient, Frobenius-sector, and party-splitting statements are
+syndrome, pencil quotient, Frobenius-sector, and abstract party-splitting statements are
 checked by kernel reduction; the exact-carrier, classification, logical-phase,
 separator, and transport terminals derive their conclusions from structures
 whose fields state the inputs the manuscript proves or certifies separately; three six-party graph cardinalities use

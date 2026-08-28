@@ -1,31 +1,76 @@
-\section{Explicit invariant certificates}\label{sec:scalar-certificates}
+\section{Explicit invariant calculations}\label{sec:scalar-certificates}
 
-This appendix records the multiplicity bookkeeping for the minimum-support
-holonomy invariant and two explicit scalar LU separators.  The holonomy
+This appendix derives the orbit formula for the minimum-support holonomy
+invariant and gives two explicit scalar LU separators.  The holonomy
 calculation supports the pencil classification.  The scalar separators are
 not used in the rigidity or logical-group results; they show what finite-copy
 contractions can detect on exceptional strata despite the generic-constancy
 result in Section~\ref{sec:invariants}.
 
-\subsection{Minimum-support holonomy bookkeeping}
+\subsection{The holonomy orbit formula}
 \label{sec:holonomy-certificate}
 
-For the atlas in the proof of Theorem~\ref{thm:lc-pencil}, substitute the
-shortened generators into \eqref{eq:minimum-support-holonomy}.  Simplifying
-the \(15\cdot6\cdot5=450\) rational functions exactly and collecting equal
-functions gives
+Let
+\[
+ \mathcal P=\{\{1,2\},\{3,4\},\{5,6\}\},\qquad
+ W=\operatorname{Stab}_{S_6}(\mathcal P)\cong C_2\wr S_3.
+\]
+The three pairs in \(\mathcal P\) are visible in the displayed columns of
+\(H_t\).  They reduce the apparent \(450\)-case calculation to ten orbit
+representatives.
+
+\begin{lemma}[Holonomy orbit formula]\label{lem:holonomy-orbit-formula}
+On the regular pencil locus, the minimum-support holonomy multiset is
 \begin{equation}\label{eq:holonomy-invariant-multiset}
-\begin{array}{c|c}
-\text{value of \(r(M)\)}&\text{multiplicity}\\
-\hline
-4&90\\
--1/z&144\\
-(2z+1)^2/z^2&24\\
-\text{each root of }X^2-8X+(8-16z-1/z)&96.
-\end{array}
+ \{4^{[90]},\ (-1/z)^{[144]},\ ((2z+1)^2/z^2)^{[24]},\
+   \lambda_+^{[96]},\lambda_-^{[96]}\},
 \end{equation}
-The certificate replays this symbolic enumeration and an independent
-direct-Lagrangian reconstruction.
+where multiplicity is written in brackets and \(\lambda_\pm\) are the two
+roots, over an algebraic closure, of
+\[
+ X^2-8X+(8-16z-1/z).
+\]
+\end{lemma}
+
+\begin{proof}
+An unoriented holonomy loop is indexed by a pair of coordinates \(e\) and an
+unordered pair of distinct four-supports containing \(e\).  Equivalently,
+write it as \((ij;ab,cd)\), where \(ij=e\) and \(ab,cd\) are the two omitted
+pairs, each disjoint from \(e\).  There are
+\(15\binom62=225\) such loops.  The group \(W\) has ten orbits on them.
+Subscripts below give their orbit sizes:
+\[
+\begin{aligned}
+4:\quad&
+ (12;56,34)_{3},\ (12;46,35)_{6},\
+ (13;46,25)_{24},\ (13;24,56)_{12};\\
+-1/z:\quad&
+ (12;56,36)_{24},\ (13;46,45)_{24},\ (13;45,25)_{24};\\
+(2z+1)^2/z^2:\quad& (12;46,45)_{12};\\
+\lambda_+:\quad& (13;56,25)_{48};\\
+\lambda_-:\quad& (13;24,46)_{48}.
+\end{aligned}
+\]
+This orbit decomposition is purely combinatorial.  The incidences of
+\(ij,ab,cd\) with the three blocks of \(\mathcal P\) distinguish the ten
+representatives, and orbit--stabilizer gives the displayed sizes; their sum
+is \(225\).
+
+Substitution of the shortened \(X\)- and \(Z\)-generators into
+\eqref{eq:minimum-support-holonomy} shows first, on generators of \(W\), that
+the rational function \(r(M)\) is constant on each displayed orbit.
+Evaluating one representative of each orbit then gives the displayed values.
+For the final two representatives, their sum is
+\(8\) and their product is \(8-16z-1/z\), which gives the stated quadratic.
+Reversing the two four-supports replaces the holonomy by its inverse and
+does not change \(r(M)=\Tr(M)^2/\det M\).  Each unoriented orbit is therefore
+counted twice in the ordered \(15\cdot6\cdot5=450\) multiset.  The orbit sizes
+give \(90,144,24,96,96\), proving \eqref{eq:holonomy-invariant-multiset}.
+\end{proof}
+
+The paper-local certificate independently replays the ten representative
+substitutions and reconstructs the same multiset directly from the CSS
+Lagrangian.
 
 Because \(A,B\ne0\) on \(\mathcal U\), we have \(z\ne0\).  The two quadratic
 roots in \eqref{eq:holonomy-invariant-multiset} are taken over an algebraic
@@ -112,22 +157,10 @@ Dickson's classification, including the \(p\)-regular cases
 \cite[\S\S239--261]{Dickson1901}, and Faber's \(p\)-irregular
 classification \cite[Theorem~1.1]{Faber2023} are used only to obtain a
 uniform upper bound of six; no classification of the six-sets is needed.
-They leave the following
-possibilities.  The last column bounds involutions having no fixed point
-on this six-set:
-\[
-\begin{array}{c|c}
-H&\text{fixed-point-free involutions}\\ \hline
-\text{cyclic}&\leq1\\
-\text{dihedral}&\leq6\\
-A_4&\leq3\\
-S_4&\leq6\\
-A_5\text{ in its faithful degree-six action}&0\\
-C_3\text{ or }S_3\quad(\operatorname{char}k=3)&\leq3.
-\end{array}
-\]
-For the \(A_5\) row, each involution fixes two of the six points.  In
-the dihedral row, if the rotation order exceeded six, every orbit away
+The possible cyclic, dihedral, \(A_4\), \(S_4\), and faithful degree-six
+\(A_5\) cases contribute at most \(1,6,3,6,0\) fixed-point-free
+involutions, respectively.  For \(A_5\), each involution fixes two of the
+six points.  In the dihedral case, if the rotation order exceeded six, every orbit away
 from the two rotation-fixed points would have size at least that order,
 so no invariant six-set could exist; for rotation order at most six the
 two reflection classes together contribute at most six fixed-point-free
@@ -140,7 +173,7 @@ The subfield groups whose order divides \(120\) are
 \(\mathrm{PSL}_2(3)\cong A_4\) and
 \(\mathrm{PGL}_2(3)\cong S_4\), already listed.  The remaining
 characteristic-five subfield possibilities are excluded by the
-hypothesis.  Every row is therefore bounded by six.
+hypothesis.  Thus every case is bounded by six.
 \end{proof}
 
 \begin{theorem}[Uniform \(H_3\)/GRS separation]\label{thm:lu-h3-grs}
@@ -218,9 +251,10 @@ over all tensor-factor permutations:
  J_{\boldsymbol\sigma}(\Psi)
    =\sum_{\pi\in S_6}I_{\pi\boldsymbol\sigma}(\Psi).
 \]
-Over \(\F_{13}\), the \(z=4\) class has rank \(21\) for all \(720\)
-terms.  The \(z=12\) class has rank \(20\) for \(192\) terms and rank
-\(21\) for \(528\).
+In \(\F_{13}\), one has \(4/9=12\), while \(4\) lies on neither component
+of the transport divisor.  Theorem~\ref{thm:transport-divisor} therefore
+gives rank \(21\) for all \(720\) terms at \(z=4\), and ranks \(20\) and
+\(21\) with multiplicities \(192\) and \(528\) at \(z=12\).
 Therefore
 \begin{equation}\label{eq:q13-values}
  J_{\boldsymbol\sigma}(z=4)=720\cdot13^{-9},\qquad

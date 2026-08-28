@@ -1,4 +1,4 @@
-\section{Computed coordinate-permutation extensions}
+\section{Coordinate-permutation extensions}
 \label{sec:party-extensions}
 
 This optional appendix records the splitting obstruction for the projective
@@ -45,21 +45,85 @@ preserves multiplication, so the extension splits exactly when \(f_s\) can
 be changed to the constant identity factor set by such a normalized \(b\).
 That criterion is what the computed rows below verify.
 
+\subsection*{A uniform complement for the icosahedral family}
+
+The repeated \(H_3\) rows are reductions of one integral construction, so
+they admit a theorem rather than a field-by-field census.
+
+\begin{theorem}[Uniform \(H_3\) coordinate-permutation extension]
+\label{thm:h3-party-extension}
+Let \(k\) be an odd prime field containing
+\(\tau\) with \(\tau^2=\tau+1\), and suppose the reduction of the integral
+sextuple in Theorem~\ref{thm:lu-h3-grs} is a non-GRS six-arc.  Its realized
+coordinate-permutation image is the exceptional degree-six action of
+\(S_5\), and the projective coordinate-permutation extension splits.  Even
+coordinate permutations centralize the fixed split torus \(T\), while odd
+ones invert it.
+\end{theorem}
+
+\begin{proof}
+Put \(\bar\tau=1-\tau\) and
+\[
+ J=\begin{pmatrix}0&1\\-1&0\end{pmatrix},\qquad
+ K=\begin{pmatrix}0&\bar\tau\\\tau&0\end{pmatrix},\qquad
+ L=\begin{pmatrix}0&\tau-2\\\tau+1&0\end{pmatrix}.
+\]
+The identities \(\tau\bar\tau=-1\) and
+\((\tau-2)(\tau+1)=-1\) put all three matrices in
+\(\mathrm{SL}_2(k)\).  In the semidirect-product convention of this
+appendix, consider
+\[
+ \widehat x=((34)(56);-I,-I,I,I,I,I),\qquad
+ \widehat y=((1\,2\,3\,4\,6\,5);J,J,J,K,K,L).
+\]
+Substitution in the four CSS block equations of
+Section~\ref{sec:exact-logical} shows that both elements preserve the label
+space.  This calculation uses only \(\tau^2=\tau+1\), so it holds before
+reduction over \(\mathbb Z[\tau]\).
+
+Let \(x,y\) be the two displayed coordinate permutations, and set
+\[
+ u=xyxy^{-1},\qquad v=y^{-1}xy^2.
+\]
+The elements \(u,v\) fix coordinate \(1\), have orders \(5,4\), and satisfy
+\(v^{-1}uv=u^3\).  They therefore generate the Frobenius group
+\(C_5\rtimes C_4\) of order \(20\).  Since \(y\) is transitive, while the
+one-factorization recovered by the marginal incidence has stabilizer
+\(S_5\) of order \(120\), the permutations \(x,y\) generate exactly that
+\(S_5\).
+
+The same relations hold for the lifts
+\(\widehat u=\widehat x\widehat y\widehat x\widehat y^{-1}\) and
+\(\widehat v=\widehat y^{-1}\widehat x\widehat y^2\): direct multiplication
+over \(\mathbb Z[\tau]/(\tau^2-\tau-1)\) gives
+\[
+ \widehat x^2=\widehat y^6=\widehat u^5=\widehat v^4=1,
+ \qquad \widehat v^{-1}\widehat u\widehat v=\widehat u^3.
+\]
+Schreier rewriting with transversal
+\(1,\widehat y,\ldots,\widehat y^5\) reduces the stabilizer of coordinate
+\(1\) to \(\langle\widehat u,\widehat v\rangle\).  Hence the generated lift
+group has at most \(6\cdot20=120\) elements.  Its coordinate projection is
+the \(120\)-element group just found, so projection is an isomorphism.  This
+gives the required label-space complement, and the phase-correction lemma
+lifts it to projective Clifford symmetries.  Finally, diagonal local blocks
+centralize \(T\), whereas antidiagonal blocks invert it; for the displayed
+generators this distinction is exactly coordinate-permutation parity.
+\end{proof}
+
 \subsection*{Computed rows}
 
 \begin{corollary}[Computed coordinate-permutation splittings]
 \label{cor:computed-party-splitting}
-The realized projective coordinate-permutation extension splits for both
-non-GRS \(q=11\) pencil classes, the \(q=11\) GRS evaluation-set
+The realized projective coordinate-permutation extension splits for the
+non-GRS \(q=11\) pencil class \(t=10,z=9\), the \(q=11\) GRS evaluation-set
 representatives
 \[
 \{0,1,2,3,4,5\},\ \{0,1,2,3,4,6\},\
 \{0,1,2,3,5,6\},\ \{0,1,2,3,5,9\},
 \]
-the enhanced-symmetry \(t=-1\) rows over \(\F_{17}\) and \(\F_{31}\),
-and the \(H_3\) representatives
-\((q,\tau)=(11,4),(19,5),(29,6),(31,13)\).
-For every listed non-GRS or \(H_3\) row, permutation parity acts on the fixed
+and the enhanced-symmetry \(t=-1\) row over \(\F_{17}\).
+For the listed non-GRS row, permutation parity acts on the fixed
 split torus \(T\) by inversion.  Thus, after choosing an input coordinate and
 allowing coordinate permutations to compare the corresponding encoder views,
 a realized odd permutation enlarges the possible input symplectic blocks from
@@ -69,8 +133,8 @@ a realized odd permutation enlarges the possible input symplectic blocks from
  J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
  J^2=-I,\qquad J\diag(a,a^{-1})J^{-1}=\diag(a^{-1},a).
 \]
-For the fields in the table, all of which have \(q>3\), this is the full
-normalizer of \(T\), and \(N(T)/T\cong C_2\).  More precisely, the extension
+Because \(q=11>3\), this is the full normalizer of \(T\), and
+\(N(T)/T\cong C_2\).  More precisely, the extension
 \(1\to T\to N(T)\to C_2\to1\) inside \(\mathrm{SL}_2(q)\) does not split in
 odd characteristic because every representative of the nontrivial coset has
 square \(-I\).  After passing instead to the matrix projectivization
@@ -89,14 +153,13 @@ and checks the propagated local symplectic blocks against the full CSS
 Lagrangian.  After quotienting by the fixed-coordinate group identified in
 Theorem~\ref{thm:logical-phase}, it is enough to test input block \(I\)
 on the GRS locus and input blocks \(I,J\) off it; this discards no
-candidate.  In the order in which the six \(q=11\) rows are listed above,
+candidate.  In the order in which the five \(q=11\) rows are listed above,
 their permutation images are
 \[
- S_5,\quad S_4,\quad V_4,\quad C_5,\quad S_3,\quad D_{12},
+ S_4,\quad V_4,\quad C_5,\quad S_3,\quad D_{12},
 \]
-where \(D_{12}\) has order \(12\).  The \(q=17\) and \(q=31\)
-enhanced rows have permutation images \(S_4\) and \(S_5\), respectively, and
-each listed \(H_3\) image is \(S_5\).
+where \(D_{12}\) has order \(12\).  The \(q=17\) enhanced row has
+permutation image \(S_4\).
 
 The certificate records the complete normalized factor set for each
 section.  It also closes a complement of order \(\lvert\Pi\rvert\) whose
@@ -109,37 +172,13 @@ coordinate-permutation extension group; its determinant-one input block is \(J\)
 square is \(-I\).
 \end{proof}
 
-\begin{table}[htbp]
-\centering
-\scriptsize
-\begin{tabular}{@{}L{.25\textwidth}cL{.20\textwidth}cL{.16\textwidth}@{}}
-\toprule
-Field and representative & GRS & Fixed-coordinate group & Permutation image & Extension \\
-\midrule
-\(q=11,\ t=2,\ z=1\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
-\(q=11,\ t=10,\ z=9\) & no & \(\F_q^2\rtimes T\) & \(S_4\) & splits; \(T\to N(T)\) \\
-\(q=11,\{0,1,2,3,4,5\}\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(V_4\) & splits \\
-\(q=11,\{0,1,2,3,4,6\}\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(C_5\) & splits \\
-\(q=11,\{0,1,2,3,5,6\}\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(S_3\) & splits \\
-\(q=11,\{0,1,2,3,5,9\}\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(D_{12}\) & splits \\
-\(q=17,\ t=-1\) & yes & \(\F_q^2\rtimes\mathrm{SL}_2(q)\) & \(S_4\) & splits \\
-\(q=31,\ t=-1\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
-\(H_3:(q,\tau)=(11,4)\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
-\(H_3:(q,\tau)=(19,5)\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
-\(H_3:(q,\tau)=(29,6)\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
-\(H_3:(q,\tau)=(31,13)\) & no & \(\F_q^2\rtimes T\) & \(S_5\) & splits; \(T\to N(T)\) \\
-\bottomrule
-\end{tabular}
-\caption{The twelve certificate-checked coordinate-permutation extensions.
-Here \(D_{12}\) has order \(12\), and \(T\to N(T)\) means that odd
-coordinate permutations supply the nontrivial coset of \(N(T)/T\) when
-encoder views are compared at a chosen input coordinate.}
-\label{tab:party-extension-census}
-\end{table}
-
-At \(q=11\), the \(t=2,z=1\) Clebsch/\(H_3\) class has permutation image
+When \(\tau^2=\tau+1\), the quotient theorem identifies every regular
+\(z=1\) pencil member with the corresponding integral \(H_3\) reduction.
+At \(q=11\), the \(t=2,z=1\) class therefore has permutation image
 \(S_5\), while the \(t=10,z=9\) non-GRS class has permutation image \(S_4\).
-Both extensions split, and odd coordinate permutations invert \(T\).
+Their extensions split by Theorem~\ref{thm:h3-party-extension} and
+Corollary~\ref{cor:computed-party-splitting}, respectively, and odd
+coordinate permutations invert \(T\).
 After choosing an input coordinate, the possible one-qudit projective groups
 across the resulting encoder views therefore form
 \(\F_q^2\rtimes N(T)\).  This is the logical group of a fixed encoder
@@ -152,5 +191,6 @@ applies.  The characteristic-\(17\) tetrahedral specialization lies on the GRS
 locus and retains the full \(\mathrm{SL}_2(17)\) fixed-coordinate image; its permutation
 image is \(S_4\), and the computed extension splits.  The
 characteristic-\(31\) \(A_5\) specialization is non-GRS, so its
-fixed-coordinate image is the split torus; its \(S_5\) permutation image also
-splits, and odd permutations enlarge the possible input blocks to \(N(T)\).
+fixed-coordinate image is the split torus; Theorem~\ref{thm:h3-party-extension}
+gives its split \(S_5\) permutation image, and odd permutations enlarge the
+possible input blocks to \(N(T)\).

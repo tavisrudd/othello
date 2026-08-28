@@ -61,6 +61,71 @@ free systematic coordinates.  Multiplying the resulting operator by
 the unit \(2(t-1)\) does not change its rank.  All steps are invertible
 on the regular non-GRS six-arc locus.
 
+The remaining calculation has an internal group symmetry.  The next lemma
+reduces the \(720\) coordinate assignments to four double cosets for each
+rank-drop question.  Cycles act on the coordinate labels \(1,\ldots,6\).
+
+\begin{lemma}[Double-coset reduction]\label{lem:transport-double-cosets}
+Define
+\[
+\begin{aligned}
+H_s&=\langle(34)(56),(3546),(12)(56),(13)(24)(56)\rangle,&
+K_s&=\langle(36),(23)(46),(12)(45)\rangle,\\
+H_a&=\langle(56),(34),(35)(46),(12),(13)(24)\rangle,&
+K_a&=\langle(36),(23)(46),(15)\rangle.
+\end{aligned}
+\]
+Then \((|H_s|,|K_s|)=(24,48)\) and
+\((|H_a|,|K_a|)=(48,16)\).  The signed double cosets
+\[
+ H_s\backslash S_6/K_s
+ \quad\text{have representatives}\quad
+ 1,(56),(456),(235)
+\]
+have sizes \(192,192,288,48\), respectively.  The axial double cosets
+\[
+ H_a\backslash S_6/K_a
+ \quad\text{have representatives}\quad
+ 1,(456),(2345),(235)
+\]
+have sizes \(384,192,96,48\), respectively.
+
+At a generic point of \(3B-2A=0\), the reduced transport operator has rank
+eight exactly on \(H_sK_s\).  At a generic point of \(3B+2A=0\), it has
+rank eight exactly on \(H_s(56)K_s\).  At a generic point of
+\(B^2-2A^2=0\), it has rank eight exactly on
+\(H_a(2345)K_a\).  On all other double cosets its rank is nine.
+\end{lemma}
+
+\begin{proof}
+The displayed generators act on \(\widetilde T_\eta\) by invertible row and
+column operations on the indicated divisor, so rank is constant on the
+corresponding double cosets.  Multiplying the generators gives subgroup
+orders \(24,48,48,16\).  Their intersections at the listed representatives
+have orders \(6,6,4,24\) in the signed case and \(2,4,8,16\) in the axial
+case.  The formula
+\[
+ |HrK|=|H||K|/|H\cap rKr^{-1}|
+\]
+therefore gives the displayed sizes; in each case the four sizes sum to
+\(|S_6|=720\), so the lists are exhaustive.
+
+It remains to evaluate one \(9\)-by-\(9\) operator per double coset.  Using
+\(a=b+c\), \(d^2=-2a\), \(A=a(c-b)\), and \(B=bc\), fraction-free
+elimination gives, at the three rank-dropping representatives,
+\[
+\begin{aligned}
+\det\widetilde T_1&=64d^3AB(3B-2A),\\
+\det\widetilde T_{(56)}&=64d^3AB(3B+2A),\\
+\det\widetilde T_{(2345)}&=64d^3A(B^2-2A^2).
+\end{aligned}
+\]
+The representative determinants on the other double cosets are nonzero
+modulo the corresponding factor.  A nonzero \(8\)-minor remains on each of
+the three components, so every stated rank drop is exactly from nine to
+eight.
+\end{proof}
+
 \begin{theorem}[Transport rank-drop locus]\label{thm:transport-divisor}
 For a parameter on the regular odd non-GRS pencil, there exists a coordinate
 assignment \(\eta\in S_6\) for which the transport system
@@ -79,87 +144,49 @@ Every other assignment has rank \(21\).
 \end{theorem}
 
 \begin{proof}
-Call an assignment a \emph{boundary type} when the reduced block matrix has
-an immediately invertible block.  Among the remaining assignments, the two
-\emph{signed types} are the double-coset families whose determinant contains
-\(3B-2A\) or \(3B+2A\); the \emph{axial type} is the family whose determinant
-contains \(B^2-2A^2\).  The calculation below proves that these families are
-exhaustive.
-
-For the identity systematic chart, the coefficients satisfy
-\[
- a=b+c,\qquad d^2=-2a,\qquad A=a(c-b),\qquad B=bc.
-\]
-Common copy relabelling, a change of basis in \(V\), and rescaling a
-coordinate covector act on \(\widetilde T_\eta\) by invertible row and column
-operations.  Modulo these operations, the \(720\) coordinate assignments
-split into cases with an immediately invertible boundary block and three
-nonboundary cases determined by the six relative copy permutations
-\(\rho_j^{-1}\rho_i\), equivalently the even-cycle pattern in each pair
-of colored matchings.  Expanding a representative determinant by signed
-cycle covers gives
-\[
-\begin{split}
-P_-&=AB(3B-2A),\\
-P_+&=AB(3B+2A),\\
-P_2&=A(B^2-2A^2).
-\end{split}
-\]
-With integral bases the determinants are respectively
-\[
-64d^3AB(3B-2A),\quad
-64d^3AB(3B+2A),\quad
-64d^3A(B^2-2A^2).
-\]
-All omitted factors are units on the regular odd non-GRS pencil.  Every
-assignment outside these three types has a determinant that is a unit
-there.  The signed cycle-cover ledger, the exhaustion of the \(720\)
-assignments, and a fraction-free determinant path are recorded in the
-paper-local certificate.  The two signed types lie above
-\(w=B/A=\pm2/3\), hence \(z=4/9\); the axial type lies above \(z=2\).
-Fraction-free elimination also gives a nonzero \(8\)-minor on each
-component, so the generic kernel is exactly one-dimensional.
-
-The row/column equivalences organize the exceptional assignments into
-double cosets.  The axial stabilizers have orders \(48\) and \(16\),
-with intersection of order \(8\), so its support has size
-\[
- 48\cdot16/8=96.
-\]
-For either signed type the corresponding orders are \(24\), \(48\), and
-\(6\), giving
-\[
- 24\cdot48/6=192.
-\]
-The two signed types are distinguished by the sign of \(w\), while the
-axial cycle pattern differs from both; hence their support sets are
-disjoint.  Explicit representatives, stabilizer intersections, and
-complete support sets are in the certificate.
-Equation~\eqref{eq:transport-rank-bridge} turns
-the one-dimensional transport kernels into rank \(20\) of the matching
-matrix.
+Lemma~\ref{lem:transport-double-cosets} shows that the only generic rank-drop
+components are \(3B\pm2A=0\) and \(B^2-2A^2=0\).  The first two are the two
+sheets \(B/A=\mp2/3\) above \(z=4/9\), and each supports \(192\) coordinate
+assignments.  The last is \(z=2\) and supports \(96\) assignments.  The
+nonzero \(8\)-minors make every reduced kernel one-dimensional.
+Equation~\eqref{eq:transport-rank-bridge} turns these kernels into rank
+\(20\) of the matching matrix and gives rank \(21\) everywhere else.
 \end{proof}
 
 The exceptional arithmetic belongs to this detector, not to
-Theorem~\ref{thm:lu-lc-rigidity}.  The identity
-\(4B^2+A^2=4G^2\) gives, respectively,
+Theorem~\ref{thm:lu-lc-rigidity}.
+
+\begin{corollary}[Exceptional characteristics]\label{cor:transport-characteristics}
+On the regular locus, characteristic \(3\) has no rank-drop component.  In
+characteristic \(5\), only the \(z=4/9\) component disappears, because it is
+GRS.  In characteristic \(7\), the two components merge; exactly \(288\)
+assignments then have rank \(20\), and the remaining \(432\) have rank
+\(21\).  In every other odd characteristic the two components and their
+generic multiplicities remain as in Theorem~\ref{thm:transport-divisor}.
+\end{corollary}
+
+\begin{proof}
+The identity \(4B^2+A^2=4G^2\) specializes to
 \[
-\begin{array}{c|c}
-\operatorname{char}k&\text{specialized identities}\\ \hline
-3&B^2-2A^2=G^2,\quad 9B^2-4A^2=-A^2,\\
-5&9B^2-4A^2=4G^2,\\
-7&9B^2-4A^2=2(B^2-2A^2).
-\end{array}
+\begin{aligned}
+\operatorname{char}k=3:&\quad
+B^2-2A^2=G^2,\qquad 9B^2-4A^2=-A^2;\\
+\operatorname{char}k=5:&\quad 9B^2-4A^2=4G^2;\\
+\operatorname{char}k=7:&\quad
+9B^2-4A^2=2(B^2-2A^2).
+\end{aligned}
 \]
-Thus in characteristic \(3\) both regular components disappear; in
-characteristic \(5\) the \(z=4/9\) component lies on the excluded GRS
-boundary; and in characteristic \(7\) the two components merge.  The
-disjoint \(96\)- and \(192\)-element supports then give the exact rank
-histogram: \(288\) assignments have rank \(20\), and \(432\) have rank
-\(21\).
-Characteristics \(11,13,41\) introduce only pullback ramification, with
-no further rank drop.  These reductions and the nonzero \(8\)-minors
-that control them are replayed in the certificate.
+The regular-locus exclusions give the first two claims.  In characteristic
+\(7\), the disjoint \(96\)- and \(192\)-element double cosets of
+Lemma~\ref{lem:transport-double-cosets} give the stated histogram.  The only
+other primes in the resultants of the representative determinants with the
+excluded boundary factors are \(11,13,41\); direct reduction of the displayed
+nonzero \(8\)-minors shows that these cause ramification but no further rank
+drop.
+\end{proof}
+
+The paper-local certificate independently replays the representative
+determinants and their reductions.
 
 The divisor records where one scalar contraction changes rank.  It is
 not an LU-orbit boundary and, by

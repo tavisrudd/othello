@@ -135,7 +135,7 @@
       "evidence": [
         "evidence/2026-07-23-holonomy-completeness.json"
       ],
-      "boundary": "The algebraic quotient is unconditional; the classification terminal names its projectivity, bracket-invariance, and local-Clifford holonomy inputs as structure fields."
+      "boundary": "The algebraic quotient is unconditional; the manuscript derives the holonomy spectrum from ten paired-coordinate orbits. The classification terminal names its projectivity, bracket-invariance, and local-Clifford holonomy inputs as structure fields, and the certificate independently replays them."
     },
     {
       "label": "cor:lu-lc-pencil",
@@ -225,7 +225,7 @@
     {
       "label": "thm:q13-lu",
       "statement": "At q=13 the classes z=4 and z=12 are separated by an exact four-copy contraction, hence are inequivalent under arbitrary local unitaries.",
-      "route": "certificate-checked",
+      "route": "conceptual-with-independent-replay",
       "lean_terminals": [
         "RelativeConicArcs.AMELU.contractionMatchingRank_normalizeContractionPattern",
         "RelativeConicArcs.AMELU.contractionRankOrbitSum_permuteContractionPattern",
@@ -234,7 +234,7 @@
       "evidence": [
         "evidence/2026-07-23-ame-perfect-tensor-physics.json"
       ],
-      "boundary": "The Lean terminal derives inequivalence from the two certified orbit sums 720/13^9 and 3024/13^9; the certificate exhausts all 720 party permutations."
+      "boundary": "The manuscript derives the two orbit sums from the transport double-coset theorem: over F_13, z=12 is the z=4/9 component and z=4 is off the divisor. The Lean terminal takes the two sums as inputs, and the certificate independently replays them."
     },
     {
       "label": "thm:fixed-copy-boundary",
@@ -270,11 +270,22 @@
         "evidence/2026-07-23-four-copy-cover-holonomy.json",
         "evidence/2026-07-23-contraction-rank-drop-divisor.json"
       ],
-      "boundary": "The cycle-polynomial algebra is unconditional; the determinant expansion, systematic rank bridge, and double-coset orbit counts enter as structure fields backed by the certificates."
+      "boundary": "The manuscript proves the systematic rank bridge, gives explicit double-coset decompositions, and evaluates one representative determinant per coset. In Lean these enter as structure fields; the certificates independently replay them."
+    },
+    {
+      "label": "thm:h3-party-extension",
+      "statement": "For every odd-prime non-GRS six-arc reduction of the integral H3 sextuple, the realized coordinate-permutation image is the exceptional degree-six S_5, the projective extension splits, and permutation parity acts on the fixed split torus by inversion.",
+      "route": "conceptual",
+      "lean_terminals": [],
+      "evidence": [
+        "evidence/2026-07-23-h3-pentad-orientation-lu.json",
+        "evidence/2026-07-25-ame-lu-party-extension-examples.json"
+      ],
+      "boundary": "The proof uses two integral label-space lifts over Z[tau]/(tau^2-tau-1), exact Frobenius-group relations in a point stabilizer, and the S_5 stabilizer of the recovered one-factorization. The listed finite reductions are independent checks, not proof inputs."
     },
     {
       "label": "cor:computed-party-splitting",
-      "statement": "For the twelve listed rows the realized party-permutation extension splits, with explicit complements.",
+      "statement": "For the six listed residual rows the realized party-permutation extension splits, with explicit complements.",
       "route": "certificate-checked",
       "lean_terminals": [
         "RelativeConicArcs.AMELU.GroupExtension.factorSet_change",
@@ -291,7 +302,7 @@
       "evidence": [
         "evidence/2026-07-25-ame-lu-party-extension-examples.json"
       ],
-      "boundary": "Exactly the twelve named rows. The abstract splitting consequences are unconditional once a complement is supplied; the complements are certificate-checked."
+      "boundary": "Exactly the six named residual rows. The abstract splitting consequences are unconditional once a complement is supplied; these complements are certificate-checked. The integral H3 family is handled separately by thm:h3-party-extension."
     },
     {
       "label": "lem:conic-matchings",

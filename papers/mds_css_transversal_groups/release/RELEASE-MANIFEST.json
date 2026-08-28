@@ -14,9 +14,9 @@
         "sha256": "f95873cbec94d7d6d626b2b72985747216937c8ab84a1fc5d7da8792405a8b03"
       },
       {
-        "bytes": 1516,
+        "bytes": 1511,
         "path": "figures/03-symmetry-groups.tex",
-        "sha256": "e1ed52d607bac3d5e1b3bef9885063e87a0bf2878740e062bd5bca1c72bb5f8d"
+        "sha256": "f5d4bed4dbbcf93c97a395c96c215ec01025eac031ca2afd1ae6aa93ce186270"
       },
       {
         "bytes": 2074,
@@ -34,9 +34,9 @@
         "sha256": "96a58d8d9a6c85ba6cafd8a26a24d15ecc6e9cc9855e6719069d271e5bcc7bfd"
       },
       {
-        "bytes": 246756,
+        "bytes": 252804,
         "path": "mds-css-transversal-groups.pdf",
-        "sha256": "bb6a274ece7117281c493deebf2f2460bb14848f7dc8a63e49db8eda5554235f"
+        "sha256": "9f9e13135179e5986d4693381e8a7cda85d9418750522a3dae5f2b22ad39042e"
       },
       {
         "bytes": 23431,
@@ -49,9 +49,9 @@
         "sha256": "de5c0d284eb673d72d003b894eee13306d294415c9e236203bef7cb9fc8eb76a"
       },
       {
-        "bytes": 11437,
+        "bytes": 11447,
         "path": "sections/01-introduction.tex",
-        "sha256": "8eecf6b3ad9d898bfe523c4ce21511b323ed24b84e5aa77fc21a04b0f2649185"
+        "sha256": "ce856afa1934ce7996f776b22aeba2606a9ab4429e94c4d1575b15ca0ca04f06"
       },
       {
         "bytes": 7535,
@@ -64,9 +64,9 @@
         "sha256": "434fd9ed08e0bf5689bedb3cb4968b83d1e584494097f8d75cb6129b44e02f96"
       },
       {
-        "bytes": 5552,
+        "bytes": 5555,
         "path": "sections/04-pencil-classification.tex",
-        "sha256": "413f466067ed290a0dad55ab36b5bb99a3291c182716d702e849e8cd2609c6c2"
+        "sha256": "667909968207db11f434eccf6b16d776a4a41d1ead6911518203cb05c0013d5d"
       },
       {
         "bytes": 5371,
@@ -79,34 +79,34 @@
         "sha256": "ea5d5ac30f5354e1062db70616b370f10befaa3fff8b055f1700e0307a97f9e4"
       },
       {
-        "bytes": 1744,
+        "bytes": 1839,
         "path": "sections/07-conclusion.tex",
-        "sha256": "13407ab590e4844341e6824a4284937dbc51be3300a257c2377b4c60d34d2076"
+        "sha256": "a074cada7bfd9a648e68a30bf4a3bc364b83621b548a42bd7ca690ef72d54ac5"
       },
       {
-        "bytes": 6993,
+        "bytes": 8014,
         "path": "sections/07-transport-sheaf.tex",
-        "sha256": "6f8a6f60b0fe2109b5bea41eaa3a653d21a0094797d2908bf1c693f360456b61"
+        "sha256": "937218c855ae5dd511e7f1f398b80b25494e12a4faa334b6149e0f5521c993b1"
       },
       {
-        "bytes": 3945,
+        "bytes": 3898,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "fac484446ff4205766486a001eb5b78d130cb2a372c2db580c206bbe0985ae2a"
+        "sha256": "405721f9e36dd12d235ffa987cac1c6fdc61c0deb5f4ba5264f4fe2622afe372"
       },
       {
-        "bytes": 7963,
+        "bytes": 9307,
         "path": "sections/09-party-extensions.tex",
-        "sha256": "96deb20faef9f4b9c8267248eda7f642ada90175a60503b7e43aa83347dd6d95"
+        "sha256": "7337eb9c6169a2aaf200a70c94d5f3ca74e1b07f9293c958c5e4249086bc908a"
       },
       {
-        "bytes": 10988,
+        "bytes": 12845,
         "path": "sections/10-scalar-certificates.tex",
-        "sha256": "4add5534a0940e1497d612d3ed00468db1f958411c1f2b25a080a513c0e7d144"
+        "sha256": "e3a22d25cb651b59794ccec391f11a9d86a5818890af0703647193fc2839fbfc"
       },
       {
-        "bytes": 4070,
+        "bytes": 4117,
         "path": "sections/11-lift-refinements.tex",
-        "sha256": "3385ac8b9712c62d01e62f9f053ee0a37144571ebbe2132b887deb1071b52b63"
+        "sha256": "ebdc427dd9b4d8bd570f1afa8dc0a690b23934677e1523a08587b68fe88174b4"
       },
       {
         "bytes": 6035,
@@ -114,12 +114,12 @@
         "sha256": "9456c7835f94f17bd7fb9c77d2734a3cd44d70bbaf7c6e536d9abc28d338f308"
       },
       {
-        "bytes": 7609,
+        "bytes": 7513,
         "path": "sections/13-pencil-calculations.tex",
-        "sha256": "932bc09bf3bd374068be34343d8a820aa1015e778f7ea4a5a194d87a140635cf"
+        "sha256": "c349cd2f569b25c012aa72809c3962ff5629f0f9140fda3f6a2334731d5f45d0"
       }
     ],
-    "tree_sha256": "2134882a65356bd4193fc326fba6fddd732b4d280e6a5b9c5f12fbe8819f853a"
+    "tree_sha256": "3a995369657d050703cbcf4aeb7455b75f36047e096b88d3ee7f2cabb160d14d"
   },
   "formal_companion": {
     "artifacts": [
