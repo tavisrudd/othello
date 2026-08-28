@@ -1997,7 +1997,7 @@ fn multiway_admission(
                 directory.ranges[sort].len
             });
         let raw_outgoing = presentation.generator_sort_ranges[sort].len;
-        if (outgoing == 1 && raw_outgoing == 1) || outgoing > 4 {
+        if outgoing == 1 && raw_outgoing == 1 {
             return Ok(MultiwayAdmission::Rejected(refinement));
         }
         let mut first = None;
@@ -4233,7 +4233,7 @@ mod tests {
         let presentation = FinitePresentation::new([STATES], observations, generators).unwrap();
         let refinement = RefinementGenerators::new(&presentation).unwrap();
         assert_eq!(refinement.ids.len(), bases.len());
-        assert!(!multiway_is_admitted(&presentation));
+        assert!(multiway_is_admitted(&presentation));
 
         let full_inverse = InverseIndex::new(&presentation).unwrap();
         let basis_inverse = InverseIndex::new_prepared(&presentation, Some(&refinement)).unwrap();
@@ -4241,7 +4241,7 @@ mod tests {
         assert_eq!(basis_inverse.sources.len(), bases.len() * STATES as usize);
 
         let compiled =
-            compile_observational_with_policy(&presentation, CertificatePolicy::AdaptiveTranscript)
+            compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
                 .unwrap();
         assert_eq!(
             compiled.certificate_policy(),
