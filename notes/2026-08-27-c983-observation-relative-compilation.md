@@ -469,42 +469,52 @@ messages; the signed potential must also be encoded, so its range/bit cost must
 be reported.  Approximate contextual metrics lead instead to covering/one-way
 sketching questions and require an explicit error budget.
 
-### Corollary 9: bounded Pareto-resource semantics
+### Corollary 9: Pareto-resource semantics and bounded truncation
 
-Fix a finite nonnegative resource box
-
-```text
-L_R = product_i {0,...,R_i}
-```
-
-with componentwise order.  Let `S_R` be the finite antichains in `L_R` and
-write `minimals(X)` for removal of dominated vectors.  Define
+Let `S` be the finite antichains of `N^d` under componentwise order and write
+`minimals(X)` for removal of dominated vectors.  Define
 
 ```text
 A plus B  = minimals(A union B)
-A times B = minimals({a+b : a in A, b in B, a+b <= R})
+A times B = minimals({a+b : a in A, b in B})
 zero      = empty antichain
 one       = {zero vector}.
 ```
 
-This is a finite commutative idempotent semiring.  Union and vector addition
-are associative/commutative, nonnegative overflow can never become feasible
-after a later addition, and taking minimal elements before or after union or
-Minkowski sum gives the same minimal result.  These facts prove the semiring
-laws and distributivity.
-
-Consequently every min-sum/GDL or relation backend can be evaluated once over
-exact bounded Pareto frontiers.  The nonempty projection gives Boolean
-feasibility.  For every nonnegative weight vector `w`,
+This is a commutative idempotent semiring.  Union and vector addition are
+associative/commutative, and taking minimal elements before or after union or
+Minkowski sum gives the same minimal result.  For every nonnegative weight
+vector `w`,
 
 ```text
 A -> min { dot(w,a) : a in A }
 ```
 
-is a homomorphism to min-plus, so one compiled frontier supports every such
-linear scalarization.  In one resource dimension the construction collapses
-to ordinary bounded min-plus.  Retaining one provenance lift per nondominated
-vector reconstructs a concrete plan for any selected frontier point.
+(with the empty minimum `infinity`) is a homomorphism to min-plus.  Thus an
+unbounded exact frontier supports every such linear scalarization.
+
+For an exact finite backend, fix a resource box
+
+```text
+L_R = product_i {0,...,R_i}
+```
+
+and add one overflow element `top`.  Truncated vector addition returns the
+ordinary sum inside `L_R` and `top` otherwise; `top` remains absorbing.
+Antichains of this finite ordered monoid, with `top` dominated by every finite
+vector, form a finite semiring by the same minimal-union/Minkowski
+construction.  Nonnegative resource use makes truncated addition associative:
+once a partial sum overflows, no later addition can make it feasible again.
+In one dimension this recovers bounded tropical min-plus.
+
+Hard capacity truncation changes the projection law.  “Contains a finite
+vector” gives final feasibility, and minimizing `dot(w,a)` over finite frontier
+points gives the capacity-constrained scalar objective, but these projections
+are **not generally semiring homomorphisms**: individually cheapest partial
+vectors may overflow when combined.  They must be applied after exact bounded-
+frontier composition unless an adapter proves that the capacity never binds or
+supplies a stronger factorization law.  Retaining one provenance lift per
+nondominated finite vector reconstructs a concrete plan for a selected point.
 
 This is classical multiobjective DP, not a novelty claim.  It is nevertheless
 a direct Ergodis capability expansion for repair bandwidth, helper count,

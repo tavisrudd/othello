@@ -455,9 +455,13 @@ pass framework without falsely identifying their compression mechanisms.
 Richer operational resources also fit exactly without making scalar tradeoffs
 up front.  Finite antichains of bounded nonnegative resource vectors form the
 standard Pareto semiring under nondominated union and bounded Minkowski sum.
-Boolean feasibility, one-dimensional min-plus, and every nonnegative linear
-scalarization are projections/corollaries; a provenance lift reconstructs the
-chosen frontier plan.  This would let Ergodis expose helpers, bandwidth, I/O,
+Before truncation, every nonnegative linear scalarization is a min-plus
+homomorphism.  Under a hard capacity box, feasibility and scalarization remain
+exact terminal projections but are not generally homomorphisms—partial
+scalarization can discard a costlier vector needed to avoid later overflow.
+One-dimensional bounded min-plus remains a corollary, and a provenance lift
+reconstructs the chosen frontier plan.  This would let Ergodis expose helpers,
+bandwidth, I/O,
 link load, and latency buckets through one compiled object.  Frontier
 explosion is the gate, so candidate, nondominated, contextual-state, and
 witness sizes must be reported separately.
