@@ -24,10 +24,11 @@ For an encoder view, the \emph{fixed-coordinate logical symplectic image} means
 the image of \(\mathcal K_C\) on its input block.
 Theorem~\ref{thm:diagonal-isodual-transversal-group} identifies the
 all-length dichotomy by diagonal isoduality.  Geometrically, the same condition
-is called fixed-label Gale self-association: the labeled six-point
-configuration is projectively equivalent to its Gale transform without
-permuting the labels.  The next lemma identifies this condition with the conic
-locus.
+is called fixed-label Gale self-association.  The labeled Gale transform is
+the six-point configuration formed by the columns of any generator matrix for
+\(\ker H\).  Fixed-label self-association means that this configuration is
+projectively equivalent to the columns of \(H\) without permuting the labels.
+The next lemma identifies this condition with the conic locus.
 
 \begin{lemma}[Fixed-label self-association]\label{lem:six-arc-self-association}
 Let \(H\) be a rank-three \(3\times6\) matrix whose columns are a
@@ -57,9 +58,9 @@ and let \(V\) be the \(6\)-by-\(6\) matrix with rows \(V_i\).
 The six entries are the degree-two monomials in three variables, equivalently
 the independent coefficients of a symmetric \(3\)-by-\(3\) matrix.  Thus a
 vector in the kernel of \(V\) is a quadratic form vanishing on all six
-points, and \(\det V=0\) is exactly the conic condition.  Every five rows of
-\(V\) are independent: a relation
-supported on at most five points would give
+points, and \(\det V=0\) is exactly the conic condition.  Any five arc points
+impose independent conditions on conics.  Indeed, a relation among five rows
+of \(V\), or fewer, would be supported on at most five points and would give
 \(H_I D H_I^T=0\) for a nonsingular diagonal \(D\) on its support \(I\);
 for \(|I|\geq3\), this would put the three-dimensional row space of
 \(H_I D\) inside \(\ker H_I\), which has dimension at most two, while
@@ -113,6 +114,13 @@ This is an operational distinction, not a classical automorphism count.
 The fixed-party non-GRS group has order \(q^2(q-1)\), while the GRS
 group has order \(q^2\lvert\mathrm{SL}_2(q)\rvert\).
 
+We now change from transversal gates to translated-state error geometry.  The
+relevant conic lies in the error-syndrome plane and must not be confused with
+the conic criterion for the six parity-check columns.  The Clebsch example
+also belongs to the pencil in Section~\ref{sec:pencil}: over \(\F_{11}\), the
+parameter \(t=2\) has \(z=1\) and gives the icosahedral Clebsch/\(H_3\) class.
+The next lemma supplies the coding-theoretic syndrome dictionary.
+
 \begin{lemma}[Coset states and three-party syndrome charts]
 \label{lem:coset-syndrome-charts}
 Let \(H\) be a rank-three parity-check matrix whose six columns form an
@@ -151,13 +159,6 @@ coordinates vanished, the same syndrome would have a representative of
 weight at most two.  A minimum weight-three syndrome therefore uses all
 three coordinates.
 \end{proof}
-
-The Clebsch example also belongs to the pencil studied in
-Section~\ref{sec:pencil}: over
-\(\F_{11}\), the parameter \(t=2\) has \(z=1\) and gives the
-Clebsch/\(H_3\) class.  Its syndrome geometry illustrates why a conic in the
-error-syndrome space must not be confused with the conic criterion for the
-six parity-check columns.
 
 \begin{proposition}[Clebsch extremal \(X\)-syndrome conic]
 \label{prop:clebsch-x-syndrome}
