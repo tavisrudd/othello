@@ -66,7 +66,7 @@ pub use group_action::{
 pub use interface::{
     lift_class_witnesses, present_finite_interface, present_witnessed_pareto_interface,
     FiniteInterfaceAdapter, FiniteInterfaceWitness, InterfaceCompileError, ParetoInterfaceError,
-    WitnessedParetoPresentation,
+    VerifiedParetoWitnesses, WitnessedParetoPresentation,
 };
 pub use matrix::{Matrix, MatrixError};
 #[doc(hidden)]

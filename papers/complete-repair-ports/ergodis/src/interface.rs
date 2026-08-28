@@ -66,6 +66,28 @@ pub struct WitnessedParetoPresentation {
     state_fronts: Box<[WitnessedParetoFront]>,
 }
 
+/// Artifact-checked, allocation-free view for repeated witness lifting.
+#[derive(Clone, Copy, Debug)]
+pub struct VerifiedParetoWitnesses<'a> {
+    state_fronts: &'a [WitnessedParetoFront],
+    class_representatives: &'a [u32],
+}
+
+impl<'a> VerifiedParetoWitnesses<'a> {
+    pub fn len(&self) -> usize {
+        self.class_representatives.len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.class_representatives.is_empty()
+    }
+
+    pub fn class_front(&self, class: u32) -> Option<&'a WitnessedParetoFront> {
+        let representative = *self.class_representatives.get(class as usize)?;
+        self.state_fronts.get(representative as usize)
+    }
+}
+
 impl WitnessedParetoPresentation {
     pub fn presentation(&self) -> &FinitePresentation {
         &self.presentation
@@ -89,6 +111,18 @@ impl WitnessedParetoPresentation {
             return Ok(None);
         };
         Ok(self.state_front(representative))
+    }
+
+    /// Verify once, then lift any number of quotient classes in constant time.
+    pub fn verified_witnesses<'a>(
+        &'a self,
+        compiled: &'a CompiledObservation,
+    ) -> Result<VerifiedParetoWitnesses<'a>, ObservationalError> {
+        verify_compilation(&self.presentation, compiled)?;
+        Ok(VerifiedParetoWitnesses {
+            state_fronts: &self.state_fronts,
+            class_representatives: compiled.class_representatives(),
+        })
     }
 }
 
@@ -342,6 +376,9 @@ mod tests {
                 witness: 10
             }
         );
+        let verified = interface.verified_witnesses(&compiled).unwrap();
+        assert_eq!(verified.len(), 1);
+        assert_eq!(verified.class_front(0).unwrap().entries()[0].witness, 10);
 
         let foreign = FinitePresentation::new([2], [0, 1], []).unwrap();
         let foreign = compile_observational(&foreign).unwrap();
