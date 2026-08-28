@@ -217,6 +217,51 @@ measured certification cost.  Known linear actions should still enumerate
 canonical RREF representatives directly, as the rank-envelope compiler does;
 the generic orbit path is for supplied actions and independent certificates.
 
+That specialization is now implemented as `BinaryGlRrefQuotient`.  It uses
+the row-space theorem twice: compilation enumerates the unique RREF basis of
+each subspace directly rather than visiting raw probes, while lookup reduces
+one packed probe to its canonical basis.  Representatives occupy a bitmap and
+a 512-point rank directory, so a dense orbit ID needs at most seven popcounts
+after canonicalization.  There is no allocation or container growth in the
+RREF enumeration loop, no recursion, and no point-sized predecessor forest.
+Independent replay checks the Gaussian-binomial census, canonical idempotence,
+bitmap membership, and invariance under every supplied row generator.
+
+A CPU-0-pinned, 31-round alternating A/B harness measures generic deferred
+orbit compilation against direct RREF enumeration.  It writes raw per-round
+times directly to `evidence/c985-gl-rref-ab.json`; the paired statistic is
+computed on log time ratios.
+
+| shape | generic median | RREF median | geometric-mean speedup | paired-log t | generic bytes | RREF bytes | storage reduction |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 2x8 | 583.835 us | 313.700 us | 1.899x | 96.58 | 1,092,780 | 8,708 | 125.49x |
+| 3x6 | 4.221 ms | 37.590 us | 131.743x | 101.88 | 4,202,744 | 34,820 | 120.70x |
+
+The shape dependence is algorithmic: the 3x6 quotient has only 2,110 states
+from 262,144 raw probes, while the 2x8 quotient retains 11,051 states from
+65,536.  This gives the admission rule a theorem-derived predictor: prefer
+direct RREF for a declared linear row action, especially when the
+Gaussian-binomial census is far below the raw carrier; retain generic BFS for
+opaque supplied actions or when its spanning-word certificate is required.
+The A/B t scores quantify stability of these alternating rounds, not
+independence across machines.
+
+The compact quotient also feeds contextual reduction directly.
+`quotient_presentation_by_binary_gl_rref` obtains orbit IDs by bitmap rank
+and representatives by bitmap select; it never reconstructs the generic
+point-to-orbit array.  The end-to-end test constructs the explicit transporter
+between generic least-point numbering and RREF numbering, then checks every
+observation and transition through it.
+
+Evidence integrity:
+
+- benchmark source: SHA-256
+  `3a4ad261d332cf87d38fac0db93ea6570bf971a52ebfe2dcf03fcc1eff5fc440`;
+- raw A/B record: SHA-256
+  `405ec931b4cad5c2a92f3ca6d7b9c3ee2ad436ed23e3a17f035892623d6be68d`;
+- checker: SHA-256
+  `3dda38456132e7d47caf0d52429e647dff5903c7efcf851dc7cf269540d243c2`.
+
 ### 5. Scalar-demand image collapse and representable lift objects
 
 `2026-08-22-c947-recovery-cost-lattice-theory.md` shows that scalar-demand
@@ -333,6 +378,61 @@ bridges:
   series island.  General same-radius deletion--contraction is false and must
   not become an unchecked rewrite.
 
+## PRS/C973 and sparse-shadow imports
+
+The PRS paper contributes several compiler principles beyond the binary GL
+instance.
+
+1. **Equivariant quotient before census -- imported now.**  C973's repaired
+   GF(16), GF(32), q=49, and GF(27) closures distinguish structural orbit
+   reduction from the finite witness check and require fail-closed
+   equivariance.  `BinaryGlRrefQuotient` is the first direct Ergodis import:
+   the theorem supplies canonical row spaces and the verifier separately
+   checks generator invariance.  This is stronger and much smaller than
+   retaining a generic BFS transcript when the action is known linear.
+2. **Successive specialization -- high-value next import.**  A nonzero
+   multivariate selector with each coordinate degree below `q` needs at most
+   `mq` symbolic partial-substitution/zero tests, not `q^m` complete tuples.
+   The safe Ergodis abstraction is an exact residual-selector adapter with
+   fail-closed zero testing and streamed rejection evidence.  Black-box point
+   evaluation is not a substitute.  Sparse arithmetic circuits/ZDDs should be
+   admitted by measured residual size; dense coefficient tensors remain the
+   exact fallback.
+3. **Composite contraction and pointed avoidance -- general interface law.**
+   PRS contracts all retained markers at once and charges a forbidden set in
+   one terminal budget.  For Ergodis this suggests compiling a composite
+   boundary map before staged elimination and treating forbidden resources as
+   one typed constraint product.  Classical stage-by-stage DP is then the
+   unary-factor boundary case.
+4. **Digit-stripping modules -- valuable but domain-gated.**  The exact
+   sequences turn base-`p` digits into carrier dimension, empty-carrier tests,
+   typed tensor/nucleus quotients, and recursion on the stripped degree.  This
+   is an excellent presolver for modular symmetric-power adapters, not a
+   generic rewrite.  Import it only behind a typed theorem certificate; use
+   the empty-carrier criterion to delete whole branches before enumeration.
+5. **Witness abundance -- sampling policy, not correctness.**  The PRS lower
+   bound on split witnesses can choose between deterministic extraction and
+   exact random probing with a certified failure budget.  It must never turn a
+   failed sample into nonexistence.
+6. **Shell and family double counts -- batch aggregation.**  Exact
+   family-aggregate enumerators show when many objectwise queries can be
+   replaced by one incidence count.  A future adapter should accept such an
+   aggregate only with a checked fibre-uniformity/double-count certificate.
+
+`sparse-shadow` contributes the trust and canonicalization architecture:
+typed paper-owned adapters; canonical transporters, automorphism generators,
+orbits, and point stabilizers as first-class outputs; explicit equivalence
+witnesses or inequivalence separators; a proof producer structurally separate
+from its checker; corruption tests; and external canonicalizers used only as
+versioned cross-checks.  Ergodis already has producer/replay separation for
+observational and orbit certificates, but should next make quotient
+transporters and stabilizers first-class and freeze adapter schemas/golden
+contracts.  Its individualization/refinement engine is useful for irregular
+symmetry actions, while RREF/stabilizer theorems remain preferable whenever
+they avoid search entirely.  Nauty/Traces, bliss, Vole, Feulner-style
+projective canonicalization, and isocert are therefore comparison and checker
+baselines, not algorithms Ergodis should reimplement generically.
+
 ## Scaling rules
 
 All next kernels should preserve the established constraints:
@@ -349,11 +449,10 @@ All next kernels should preserve the established constraints:
 
 ## Immediate work order
 
-1. Extend the full-rank-map hoist into rank-stratified full-span envelopes and
-   benchmark restriction aggregation against the atomic-subspace path.
-2. Instantiate the generic orbit compiler on C980 probes at the first
-   rank/field pair where raw probe storage dominates, then select it from a
-   measured storage/lookup crossover rather than enabling it universally.
+1. Prototype an exact residual-selector interface and test successive
+   specialization on a small non-coding adapter before importing PRS formulas.
+2. Add sparse-shadow-style first-class transporters/separators and frozen
+   adapter contracts to the finite-interface boundary.
 3. Instantiate the ordered-resource and finite-interface adapters on one
    two-resource repair or network-allocation example with witness replay.
 

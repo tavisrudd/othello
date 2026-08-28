@@ -20,6 +20,8 @@ pub enum BinaryGlProbeError {
     Index,
     #[error("binary GL probe orbit census overflows u64")]
     Overflow,
+    #[error("binary GL RREF quotient failed independent replay")]
+    Certificate,
 }
 
 /// Left row action of `GL_rows(F_2)` on all `rows x columns` binary probes.
@@ -32,6 +34,101 @@ pub struct BinaryGlProbeAction {
     rows: u8,
     columns: u8,
     point_count: u32,
+}
+
+/// The theorem-specialized quotient for the left binary general-linear action.
+///
+/// A row space has one reduced-row-echelon basis, so its canonical packed
+/// representative can be recomputed from a point without a lookup table. The
+/// bitmap stores only which packed points are representatives; unlike a
+/// generic orbit certificate, storage is one bit per concrete point.
+#[derive(Clone, Debug)]
+pub struct BinaryGlRrefQuotient {
+    action: BinaryGlProbeAction,
+    representative_bits: Box<[u64]>,
+    rank_superblocks: Box<[u32]>,
+    orbit_count: u32,
+}
+
+impl BinaryGlRrefQuotient {
+    pub fn orbit_count(&self) -> u32 {
+        self.orbit_count
+    }
+
+    pub fn storage_bytes(&self) -> usize {
+        std::mem::size_of_val(&*self.representative_bits)
+            + std::mem::size_of_val(&*self.rank_superblocks)
+    }
+
+    /// Return the canonical representative of the point's row space.
+    #[inline]
+    pub fn representative(&self, point: u32) -> Option<u32> {
+        (point < self.action.point_count).then(|| self.action.rref_representative(point))
+    }
+
+    pub fn is_representative(&self, point: u32) -> bool {
+        if point >= self.action.point_count {
+            return false;
+        }
+        self.representative_bits[point as usize / 64] & (1_u64 << (point % 64)) != 0
+    }
+
+    pub fn representatives(&self) -> impl Iterator<Item = u32> + '_ {
+        (0..self.action.point_count).filter(|&point| self.is_representative(point))
+    }
+
+    /// Return the dense canonical orbit ID, ordered by representative.
+    #[inline]
+    pub fn orbit(&self, point: u32) -> Option<u32> {
+        let representative = self.representative(point)?;
+        let word_index = representative as usize / 64;
+        let block = word_index / 8;
+        let mut rank = self.rank_superblocks[block];
+        for &word in &self.representative_bits[block * 8..word_index] {
+            rank += word.count_ones();
+        }
+        let bit_index = representative % 64;
+        let below = if bit_index == 0 {
+            0
+        } else {
+            self.representative_bits[word_index] & ((1_u64 << bit_index) - 1)
+        };
+        Some(rank + below.count_ones())
+    }
+
+    /// Select the representative with the given dense orbit ID.
+    pub fn orbit_representative(&self, orbit: u32) -> Option<u32> {
+        if orbit >= self.orbit_count {
+            return None;
+        }
+        let upper = self
+            .rank_superblocks
+            .partition_point(|&prefix| prefix <= orbit);
+        let block = upper.saturating_sub(1).min(
+            self.representative_bits
+                .len()
+                .saturating_sub(1)
+                .div_euclid(8),
+        );
+        let mut remaining = orbit - self.rank_superblocks[block];
+        for (offset, &stored_word) in self.representative_bits[block * 8..]
+            .iter()
+            .take(8)
+            .enumerate()
+        {
+            let population = stored_word.count_ones();
+            if remaining >= population {
+                remaining -= population;
+                continue;
+            }
+            let mut word = stored_word;
+            for _ in 0..remaining {
+                word &= word - 1;
+            }
+            return Some(((block * 8 + offset) * 64 + word.trailing_zeros() as usize) as u32);
+        }
+        None
+    }
 }
 
 impl BinaryGlProbeAction {
@@ -87,6 +184,162 @@ impl BinaryGlProbeAction {
         }
         Ok(total)
     }
+
+    /// Canonicalize by the exact row-space theorem, with no allocation.
+    ///
+    /// The reduced basis is stored in descending packed-row order. This is a
+    /// stable encoding choice; equality of representatives is exactly equality
+    /// of row spaces.
+    #[inline]
+    fn rref_representative(&self, point: u32) -> u32 {
+        let rows = self.rows();
+        let columns = self.columns();
+        let mask = (1_u32 << columns) - 1;
+        let mut basis = [0_u32; 31];
+        for (row, slot) in basis.iter_mut().enumerate().take(rows) {
+            *slot = point >> (row * columns) & mask;
+        }
+
+        let mut rank = 0;
+        for column in 0..columns {
+            let bit = 1_u32 << column;
+            let Some(pivot) = (rank..rows).find(|&row| basis[row] & bit != 0) else {
+                continue;
+            };
+            basis.swap(rank, pivot);
+            for row in 0..rows {
+                if row != rank && basis[row] & bit != 0 {
+                    basis[row] ^= basis[rank];
+                }
+            }
+            rank += 1;
+            if rank == rows {
+                break;
+            }
+        }
+        self.pack_basis(&mut basis, rank)
+    }
+
+    #[inline]
+    fn pack_basis(&self, basis: &mut [u32; 31], rank: usize) -> u32 {
+        basis[..rank].sort_unstable_by(|left, right| right.cmp(left));
+        basis[rank..self.rows()].fill(0);
+        basis[..self.rows()]
+            .iter()
+            .enumerate()
+            .fold(0_u32, |packed, (row, &value)| {
+                packed | (value << (row * self.columns()))
+            })
+    }
+}
+
+/// Compile the binary GL quotient by direct row-space canonicalization.
+///
+/// This is the preferred backend when the supplied action really is the left
+/// row action. It enumerates the unique RREF basis of each row space directly,
+/// performs no allocation in the enumeration loop, and stores one bit per raw
+/// point instead of a generic spanning forest.
+pub fn compile_binary_gl_rref(action: BinaryGlProbeAction) -> BinaryGlRrefQuotient {
+    let mut representative_bits = vec![0_u64; (action.point_count as usize).div_ceil(64)];
+    let mut orbit_count = 0_u32;
+    let columns = action.columns();
+    let maximum_rank = action.rows().min(columns);
+    for pivots in 0_u32..1_u32 << columns {
+        let rank = pivots.count_ones() as usize;
+        if rank > maximum_rank {
+            continue;
+        }
+        let mut pivot_columns = [0_u8; 31];
+        let mut pivot_count = 0;
+        for column in 0..columns {
+            if pivots & (1_u32 << column) != 0 {
+                pivot_columns[pivot_count] = column as u8;
+                pivot_count += 1;
+            }
+        }
+        let mut free_rows = [0_u8; 31];
+        let mut free_columns = [0_u8; 31];
+        let mut free_count = 0;
+        for column in 0..columns {
+            if pivots & (1_u32 << column) != 0 {
+                continue;
+            }
+            for (row, &pivot) in pivot_columns.iter().enumerate().take(rank) {
+                if usize::from(pivot) < column {
+                    free_rows[free_count] = row as u8;
+                    free_columns[free_count] = column as u8;
+                    free_count += 1;
+                }
+            }
+        }
+        for assignment in 0_u32..1_u32 << free_count {
+            let mut basis = [0_u32; 31];
+            for row in 0..rank {
+                basis[row] = 1_u32 << pivot_columns[row];
+            }
+            for free in 0..free_count {
+                if assignment & (1_u32 << free) != 0 {
+                    basis[free_rows[free] as usize] |= 1_u32 << free_columns[free];
+                }
+            }
+            let representative = action.pack_basis(&mut basis, rank);
+            let word = &mut representative_bits[representative as usize / 64];
+            let bit = 1_u64 << (representative % 64);
+            debug_assert_eq!(*word & bit, 0);
+            *word |= bit;
+            orbit_count += 1;
+        }
+    }
+    let block_count = representative_bits.len().div_ceil(8);
+    let mut rank_superblocks = Vec::with_capacity(block_count + 1);
+    let mut rank = 0_u32;
+    for block in representative_bits.chunks(8) {
+        rank_superblocks.push(rank);
+        rank += block.iter().map(|word| word.count_ones()).sum::<u32>();
+    }
+    rank_superblocks.push(rank);
+    debug_assert_eq!(rank, orbit_count);
+    BinaryGlRrefQuotient {
+        action,
+        representative_bits: representative_bits.into_boxed_slice(),
+        rank_superblocks: rank_superblocks.into_boxed_slice(),
+        orbit_count,
+    }
+}
+
+/// Replay the row-space quotient independently against the supplied action.
+pub fn verify_binary_gl_rref(quotient: &BinaryGlRrefQuotient) -> Result<(), BinaryGlProbeError> {
+    let action = quotient.action;
+    let expected =
+        u32::try_from(action.expected_orbit_count()?).map_err(|_| BinaryGlProbeError::Overflow)?;
+    if quotient.orbit_count != expected {
+        return Err(BinaryGlProbeError::Certificate);
+    }
+    let mut counted = 0_u32;
+    for point in 0..action.point_count {
+        let representative = action.rref_representative(point);
+        if action.rref_representative(representative) != representative
+            || !quotient.is_representative(representative)
+        {
+            return Err(BinaryGlProbeError::Certificate);
+        }
+        if quotient.is_representative(point) {
+            if representative != point {
+                return Err(BinaryGlProbeError::Certificate);
+            }
+            counted += 1;
+        }
+        for generator in 0..action.generator_count() {
+            let target = action.apply(generator, point)?;
+            if action.rref_representative(target) != representative {
+                return Err(BinaryGlProbeError::Certificate);
+            }
+        }
+    }
+    if counted != quotient.orbit_count {
+        return Err(BinaryGlProbeError::Certificate);
+    }
+    Ok(())
 }
 
 impl FinitePermutationAction for BinaryGlProbeAction {
@@ -208,6 +461,49 @@ impl OrbitPartition {
     }
 }
 
+trait OrbitPartitionView {
+    fn point_count(&self) -> usize;
+    fn orbit_count(&self) -> usize;
+    fn orbit_at(&self, point: u32) -> Option<u32>;
+    fn representative_at(&self, orbit: u32) -> Option<u32>;
+}
+
+impl OrbitPartitionView for OrbitPartition {
+    fn point_count(&self) -> usize {
+        self.point_orbits.len()
+    }
+
+    fn orbit_count(&self) -> usize {
+        self.representatives.len()
+    }
+
+    fn orbit_at(&self, point: u32) -> Option<u32> {
+        self.orbit(point)
+    }
+
+    fn representative_at(&self, orbit: u32) -> Option<u32> {
+        self.representatives.get(orbit as usize).copied()
+    }
+}
+
+impl OrbitPartitionView for BinaryGlRrefQuotient {
+    fn point_count(&self) -> usize {
+        self.action.point_count as usize
+    }
+
+    fn orbit_count(&self) -> usize {
+        self.orbit_count as usize
+    }
+
+    fn orbit_at(&self, point: u32) -> Option<u32> {
+        self.orbit(point)
+    }
+
+    fn representative_at(&self, orbit: u32) -> Option<u32> {
+        self.orbit_representative(orbit)
+    }
+}
+
 /// Quotient a finite interface by a sort-preserving, observation-invariant,
 /// context-equivariant orbit partition.
 ///
@@ -217,16 +513,34 @@ pub fn quotient_presentation_by_orbits(
     presentation: &FinitePresentation,
     partition: &OrbitPartition,
 ) -> Result<FinitePresentation, OrbitQuotientError> {
+    quotient_presentation_by_partition(presentation, partition)
+}
+
+/// Quotient a finite presentation through the compressed binary row-space
+/// partition without materializing a point-to-orbit array.
+pub fn quotient_presentation_by_binary_gl_rref(
+    presentation: &FinitePresentation,
+    partition: &BinaryGlRrefQuotient,
+) -> Result<FinitePresentation, OrbitQuotientError> {
+    quotient_presentation_by_partition(presentation, partition)
+}
+
+fn quotient_presentation_by_partition<P: OrbitPartitionView>(
+    presentation: &FinitePresentation,
+    partition: &P,
+) -> Result<FinitePresentation, OrbitQuotientError> {
     let point_count = presentation.observations().len();
-    if partition.point_orbits.len() != point_count {
+    if partition.point_count() != point_count {
         return Err(OrbitQuotientError::PointCount);
     }
-    let orbit_count = partition.representatives.len();
+    let orbit_count = partition.orbit_count();
     let mut orbit_sorts = vec![u32::MAX; orbit_count];
     let mut sort_orbit_counts = vec![0_usize; presentation.sorts().len()];
     for (sort, range) in presentation.sorts().iter().copied().enumerate() {
         for state in range.start..range.start + range.len {
-            let orbit = partition.point_orbits[state as usize];
+            let orbit = partition
+                .orbit_at(state)
+                .ok_or(OrbitQuotientError::OrbitIndex)?;
             let Some(orbit_sort) = orbit_sorts.get_mut(orbit as usize) else {
                 return Err(OrbitQuotientError::OrbitIndex);
             };
@@ -236,9 +550,8 @@ pub fn quotient_presentation_by_orbits(
             } else if *orbit_sort != sort as u32 {
                 return Err(OrbitQuotientError::Sort { orbit });
             }
-            let representative = *partition
-                .representatives
-                .get(orbit as usize)
+            let representative = partition
+                .representative_at(orbit)
                 .ok_or(OrbitQuotientError::OrbitIndex)?;
             if representative as usize >= point_count {
                 return Err(OrbitQuotientError::OrbitIndex);
@@ -268,7 +581,9 @@ pub fn quotient_presentation_by_orbits(
         for &orbit in orbits {
             orbit_states[orbit as usize] = next_state;
             next_state += 1;
-            let representative = partition.representatives[orbit as usize];
+            let representative = partition
+                .representative_at(orbit)
+                .ok_or(OrbitQuotientError::OrbitIndex)?;
             observations.push(presentation.observations()[representative as usize]);
         }
     }
@@ -279,14 +594,18 @@ pub fn quotient_presentation_by_orbits(
         targets_by_orbit.fill(u32::MAX);
         let source = presentation.sorts()[generator.source_sort as usize];
         for state in source.start..source.start + source.len {
-            let source_orbit = partition.point_orbits[state as usize];
+            let source_orbit = partition
+                .orbit_at(state)
+                .ok_or(OrbitQuotientError::OrbitIndex)?;
             let target_state = presentation.transition(context as u32, state).ok_or(
                 OrbitQuotientError::Context {
                     context: context as u32,
                     orbit: source_orbit,
                 },
             )?;
-            let target_orbit = partition.point_orbits[target_state as usize];
+            let target_orbit = partition
+                .orbit_at(target_state)
+                .ok_or(OrbitQuotientError::OrbitIndex)?;
             let expected = &mut targets_by_orbit[source_orbit as usize];
             if *expected == u32::MAX {
                 *expected = target_orbit;
@@ -521,11 +840,106 @@ mod tests {
     fn binary_gl_probe_orbits_are_exact_row_spaces() {
         let action = BinaryGlProbeAction::new(2, 3).unwrap();
         let partition = compile_permutation_orbits(&action).unwrap();
+        let rref = compile_binary_gl_rref(action);
         assert_eq!(action.point_count(), 64);
         assert_eq!(action.generator_count(), 3);
         assert_eq!(action.expected_orbit_count().unwrap(), 15);
         assert_eq!(partition.representatives().len(), 15);
+        assert_eq!(rref.orbit_count(), 15);
+        assert_eq!(rref.storage_bytes(), 16);
+        assert_eq!(rref.representatives().count(), 15);
+        let selected = rref.representatives().collect::<Vec<_>>();
+        for orbit in 0..rref.orbit_count() {
+            assert_eq!(
+                rref.orbit_representative(orbit),
+                selected.get(orbit as usize).copied()
+            );
+        }
+        for point in 0..action.point_count() {
+            assert_eq!(
+                rref.representative(point),
+                Some(action.rref_representative(point))
+            );
+        }
+        verify_binary_gl_rref(&rref).unwrap();
         verify_permutation_orbits(&action, &partition).unwrap();
+
+        let observations = (0..action.point_count())
+            .map(|point| rref.orbit(point).unwrap())
+            .collect::<Vec<_>>();
+        let generators = (0..action.generator_count())
+            .map(|generator| GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: (0..action.point_count())
+                    .map(|point| action.apply(generator, point).unwrap())
+                    .collect(),
+            })
+            .collect::<Vec<_>>();
+        let presentation =
+            FinitePresentation::new([action.point_count()], observations, generators).unwrap();
+        let generic = quotient_presentation_by_orbits(&presentation, &partition).unwrap();
+        let compressed = quotient_presentation_by_binary_gl_rref(&presentation, &rref).unwrap();
+        assert_eq!(generic.sorts(), compressed.sorts());
+        let compressed_to_generic = (0..rref.orbit_count())
+            .map(|orbit| {
+                partition
+                    .orbit(rref.orbit_representative(orbit).unwrap())
+                    .unwrap()
+            })
+            .collect::<Vec<_>>();
+        for (compressed_state, &generic_state) in compressed_to_generic.iter().enumerate() {
+            assert_eq!(
+                compressed.observations()[compressed_state],
+                generic.observations()[generic_state as usize]
+            );
+        }
+        for context in 0..action.generator_count() {
+            for (compressed_state, &generic_state) in compressed_to_generic.iter().enumerate() {
+                let compressed_target = compressed
+                    .transition(context, compressed_state as u32)
+                    .unwrap();
+                let generic_target = generic.transition(context, generic_state).unwrap();
+                assert_eq!(
+                    compressed_to_generic[compressed_target as usize],
+                    generic_target
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn direct_rref_matches_generic_gl_orbits_across_small_shapes() {
+        for (rows, columns) in [(1, 4), (2, 4), (3, 4)] {
+            let action = BinaryGlProbeAction::new(rows, columns).unwrap();
+            let generic = compile_permutation_orbits_with_deferred_verification(&action).unwrap();
+            let direct = compile_binary_gl_rref(action);
+            assert_eq!(
+                direct.orbit_count() as usize,
+                generic.representatives().len()
+            );
+            assert_eq!(
+                u64::from(direct.orbit_count()),
+                action.expected_orbit_count().unwrap()
+            );
+            let mut generic_to_direct = vec![u32::MAX; generic.representatives().len()];
+            for point in 0..action.point_count() {
+                let generic_orbit = generic.orbit(point).unwrap() as usize;
+                let direct_orbit = direct.orbit(point).unwrap();
+                let expected = &mut generic_to_direct[generic_orbit];
+                if *expected == u32::MAX {
+                    *expected = direct_orbit;
+                } else {
+                    assert_eq!(*expected, direct_orbit);
+                }
+            }
+            generic_to_direct.sort_unstable();
+            assert_eq!(
+                generic_to_direct,
+                (0..direct.orbit_count()).collect::<Vec<_>>()
+            );
+            verify_binary_gl_rref(&direct).unwrap();
+        }
     }
     use crate::observational::{compile_observational, GeneratorSpec};
     use std::convert::Infallible;

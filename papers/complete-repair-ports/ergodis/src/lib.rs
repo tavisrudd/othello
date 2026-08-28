@@ -60,10 +60,11 @@ pub use family_response::{
 };
 pub use field::{FieldError, FiniteField, Gf4, Prime};
 pub use group_action::{
-    compile_permutation_orbits, compile_permutation_orbits_with_deferred_verification,
-    quotient_presentation_by_orbits, verify_permutation_orbits, BinaryGlProbeAction,
-    BinaryGlProbeError, FinitePermutationAction, OrbitCompileError, OrbitPartition,
-    OrbitQuotientError, OrbitStorage,
+    compile_binary_gl_rref, compile_permutation_orbits,
+    compile_permutation_orbits_with_deferred_verification, quotient_presentation_by_binary_gl_rref,
+    quotient_presentation_by_orbits, verify_binary_gl_rref, verify_permutation_orbits,
+    BinaryGlProbeAction, BinaryGlProbeError, BinaryGlRrefQuotient, FinitePermutationAction,
+    OrbitCompileError, OrbitPartition, OrbitQuotientError, OrbitStorage,
 };
 pub use interface::{
     lift_class_witnesses, present_finite_interface, present_witnessed_pareto_interface,
