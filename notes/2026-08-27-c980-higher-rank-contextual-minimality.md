@@ -1,10 +1,15 @@
 # C980 higher-rank contextual minimality and finite-state bounds
 
 **Lane:** `complete-ports`
-**Status:** IN PROGRESS; MATHEMATICS ONLY; HIGHER-RANK SMALL-MODEL,
-UNIVERSALITY, CONGRUENCE, EXACT ORBIT-CENSUS, AND ORDERED-MONOID THEOREMS
-PROVED AS CANDIDATES
+**Status:** IN PROGRESS; MATHEMATICS ONLY; SCALAR HIGHER-RANK SMALL-MODEL,
+UNIVERSALITY, CONGRUENCE, AND EXACT ORBIT-CENSUS THEOREMS SURVIVED STRUCTURAL
+COMPRESSION AND HOSTILE PROOF REVIEW; ORDERED-MONOID PROOF REPAIRED; BATCH
+CONGRUENCE AND CODE-REALIZABLE SHARPNESS REMAIN OPEN
 **Date:** 2026-08-27
+
+The structural compression, hostile proof review, and literature audit are
+recorded in
+`notes/2026-08-27-c980-structural-compression-hostile-proof-literature-audit.md`.
 
 ## Objective
 
@@ -45,7 +50,7 @@ proof, literature, and hostile-review gates.
    monoid has a finite contextual quotient.  For `k` additive resources the
    sharp universal repetition cap is `1+k(R-1)`; when helper count is tracked,
    the stronger radius-`r_h` small model has length at most `max(2,r_h+1)`.
-6. **Fixed-batch packing.**  A batch with per-request budgets `r_i` and
+6. **Fixed-batch packing compression (not yet a full state theorem).**  A batch with per-request budgets `r_i` and
    per-helper capacities has a relational small model on at most
    `max(2,p+sum_i r_i)` blocks, retaining exact load and overlap patterns.
 7. **Multi-target-block compression.**  With `p` target blocks and surjective
@@ -322,9 +327,15 @@ minimum-support or pointed-GHW information can prune empty ranks and subsets.
 Define the numerical radius-`r` outer signature at target `j` by
 
 ```text
-Sig_r,j(D) = set of GL-orbits of the punctured shortenings
+Sig_r,j(D) = set of pointed column-type orbits of the punctured shortenings
              D intersect L^({j} union S),  |S|<=r.
 ```
+
+Here a pointed column-type orbit means the orbit of the target covector and
+the helper-column multiplicity function under change of basis in the
+shortened dual; helper permutations are forgotten, but the target coordinate
+is not.  Merely recording an unpointed subspace-isomorphism type would not
+determine the response.
 
 Duplicates are irrelevant for a minimum.  The dual-shortening formula becomes
 the exact pairing
@@ -798,12 +809,13 @@ E_s(a_0,n) = min over X:T->V_s with span_L X(T)=V_s of
              mu(a_0 X) + sum_a n_a lambda(a X).
 ```
 
-If a nonzero `X:T->V_s` has image span `H<V_s`, restricting every target and
-helper covector to `H` gives a lower-dimensional column context, and the same
-cost is an exact-span term there.  Therefore
+If a nonzero `X:T->V_s` has image span `H<V_s`, restrict every target and
+helper covector to `H`.  Helper types whose restrictions agree must have
+their multiplicities added, and types restricting to zero are deleted.  If
+`res_H K` denotes this aggregated restricted context, then
 
 ```text
-F_s(K) = min_{0 != H <= V_s} E_dim(H)(K restricted to H),
+F_s(K) = min_{0 != H <= V_s} E_dim(H)(res_H K),
 ```
 
 after choosing a basis of each `H` and deleting zero helper columns.  The
@@ -998,11 +1010,14 @@ fibre value `A`, its powers satisfy
 up(A^(n+1)) subseteq up(A^n),
 ```
 
-by extensivity.  If `A` is nonempty, every power remains nonempty, so a chain
-starting at all of `M` can make at most `|M|-1` strict drops; if `A` is empty,
-all positive powers are already empty.  Equality of consecutive powers
-propagates under multiplication by `A`.  Thus every column-type multiplicity
-can be capped at
+by extensivity.  The identity `0_M` is a least element, since extensivity
+applied to `0_M plus_M x=x` gives `0_M<=x`.  If the first upward closure is
+all of `M`, then it contains `0_M`, hence `0_M in A`, and every power is
+already equal.  Otherwise the first upward closure has at most `|M|-1`
+elements.  If `A` is nonempty, every power remains nonempty, so its descending
+chain stabilizes by exponent `|M|-1`; if `A` is empty, all positive powers are
+already empty.  Equality of consecutive powers propagates under
+multiplication by `A`.  Thus every column-type multiplicity can be capped at
 
 ```text
 K_M = max(1,|M|-1).
@@ -1102,10 +1117,11 @@ safe dimension bound remains `s<=t`.
 
 There is a stronger budget-box version.  Let `r=(r_h,r_2,...,r_k)` be a
 componentwise resource budget, with the first coordinate counting helpers.
-Observe a context by the set of attainable cost vectors dominated by `r`
-(equivalently, by its Pareto frontier inside that finite box).  If two inner
-problems have different observations, choose `b<=r` attainable in the first
-and not the second, and a first-state witness of cost at most `b`.
+Observe a context by its upward-closed feasible-budget set inside the box
+`[0,r]` (equivalently, by the Pareto frontier of attainable costs in that
+box).  If two inner problems have different observations, choose a budget
+`b<=r` feasible in the first and not the second, then choose a first-state
+witness whose attainable cost is dominated by `b`.
 
 If this witness is in the zero sector, the zero-functional context separates
 the states.  Otherwise its nonzero external blocks number at most `b_h<=r_h`.
@@ -1200,18 +1216,20 @@ max(2,p+R_sum).
 ```
 
 If the batch has one total union budget `R_union`, replace `R_sum` by
-`R_union`.  This gives a finite relational contextual state for fixed batch
-size and budgets.  It does not give a uniform fixed-dimensional Pareto state
-as `m` or the budgets grow; the state must retain the labeled helper-overlap
-and load patterns on those bounded active blocks.
+`R_union`.  This gives the small-context half of a finite relational state
+theorem for fixed batch size and budgets.  Completing that theorem requires
+an explicit finite quotient of the bounded coefficient/overlap patterns
+(including inner-helper relabeling) and a typed batch-composition law.  It
+does not give a uniform fixed-dimensional Pareto state as `m` or the budgets
+grow; the state must retain the labelled helper-overlap and load patterns on
+those bounded active blocks.
 
 Define two inner models to be batch-equivalent when every compatible context
-has the same feasible bounded load patterns.  The compression above gives a
-finite test family, and the continuation-composition argument makes this
-equivalence a congruence.  Thus fixed-batch capacitated repair has the same
-finite syntactic-state architecture as the scalar problem, but its state is a
-finite relation on labeled overlap patterns rather than a min-plus value
-function.
+has the same feasible bounded load patterns.  The compression above proves
+that any distinction has a small separating context.  A congruence theorem
+should follow only after the missing typed batch-composition law is stated
+and proved; the scalar continuation argument cannot simply be imported
+without that law.
 
 ## Extensions requested by the research feedback
 
@@ -1339,9 +1357,15 @@ not.
   sufficient state.  It is the coarsest state only under the additional
   probe-separation condition; otherwise the family observes only minima over
   probe signatures.
-- Audit weighted automata, tropical rational series, valued CSPs, tensor
-  networks, and algebraic dynamic programming before making a Myhill--Nerode or
-  priority claim.
+- The literature audit found close abstract precedents in weighted-tree
+  Myhill--Nerode theory, finite-field matroid decomposition width, canonical
+  minimal tree realizations of linear codes, generalized distributive-law
+  elimination, generalized covering radii, and service-rate recovery
+  polytopes.  Therefore the abstract contextual-kernel and min--sum ideas are
+  not priority claims.  The bounded search found no predecessor for the
+  explicit recovery-cost state together with the `max(2,r+1)` separator and
+  dual-shortening/witness-cover formulas; any novelty wording must remain
+  scoped and qualified by the audit's coverage limits.
 
 ## Proof-dependency audit
 
@@ -1354,10 +1378,12 @@ map; no computation or classification theorem enters.
 
 The orbit census additionally uses only Burnside's lemma and Möbius inversion
 on a finite invariant-subspace lattice.  The ordered-monoid and Pareto results
-are finite-poset arguments.  Literature is needed for priority and terminology,
-not to close a missing proof step.  An independent hostile proof read remains
-required because all proofs in this report were developed and audited in one
-research thread.
+are finite-poset arguments.  The hostile review repaired the identity-element
+step in the finite-monoid stabilization proof and the aggregation step in the
+rank-stratified recursion.  It also demoted the fixed-batch congruence to a
+compression lemma pending a typed composition law.  No defect was found in
+the scalar column-type, bounded separator, dual-shortening, witness-cover,
+universality, congruence, or orbit-census proofs.
 
 ## Work order
 
@@ -1373,8 +1399,11 @@ research thread.
 4. **Done at fixed cost dimension:** finite ordered-monoid closure and a sharp
    `1+k(R-1)` cap for bounded additive Pareto costs.  Growing per-helper
    resource dimensions and interface-valued subpacketization remain open.
-5. Run the full literature and hostile-referee gates, then decide whether the
-   result belongs in the current paper or a separate sequel.
+5. **Done:** structural compression, hostile proof review, and the scoped
+   weighted-automata/matroid/coding/optimization literature audit.  Next seek
+   one independent theorem reread and decide whether the four-theorem scalar
+   spine belongs in the current paper.  Code-realizable sharpness remains a
+   strengthening, not a correctness gate for the scalar theorem.
 
 ## Promotion recommendation after the remaining gates
 
@@ -1448,9 +1477,14 @@ Open mysteries:
    `max(2,p+sum r_i)`; unbounded batch size still has growing dimension and
    requires labelled overlap state.  Subpacketization is covered only when it is an
    interface-independent finite monoid cost.
-6. **Priority.**  The connection with syntactic congruences, tropical series,
-   valued CSPs, and weighted tree automata requires a full literature audit
-   before any novelty statement.
+6. **Priority — settled at bounded-audit strength.**  The semantic
+   Myhill--Nerode pattern, semiring elimination, finite separator states for
+   represented matroids, and canonical minimal code realizations all have
+   clear predecessors.  No located source gives the recovery-specific
+   labelled response, the radius-`r` separator of length `r+1`, or the exact
+   dual-shortening/witness cover.  MathSciNet, Google Scholar, and complete
+   citation-graph closure were not available, so every absence statement
+   remains qualified.
 7. **Tower dynamics.**  Finite-state iteration is eventually periodic.  It is
    unknown whether the recovery order forces aperiodicity or convergence to a
    fixed point for natural type-preserving outer layers.
