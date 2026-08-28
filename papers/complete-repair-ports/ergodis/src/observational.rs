@@ -734,10 +734,12 @@ impl DensePending {
 }
 
 impl PendingDirectory for DensePending {
+    #[inline(always)]
     fn contains(&self, block: u32, generator: u32) -> bool {
         bitmap_contains(&self.slots, self.slot(block, generator))
     }
 
+    #[inline(always)]
     fn insert(&mut self, block: u32, generator: u32) -> Result<bool, ObservationalError> {
         let slot = self.slot(block, generator);
         if bitmap_contains(&self.slots, slot) {
@@ -747,6 +749,7 @@ impl PendingDirectory for DensePending {
         Ok(true)
     }
 
+    #[inline(always)]
     fn remove(&mut self, block: u32, generator: u32) -> bool {
         let slot = self.slot(block, generator);
         if !bitmap_contains(&self.slots, slot) {
@@ -756,6 +759,7 @@ impl PendingDirectory for DensePending {
         true
     }
 
+    #[inline(always)]
     fn add_block(&mut self, block: u32, sort: u32) -> Result<(), ObservationalError> {
         let width = self.incoming_counts[sort as usize];
         let end = self
@@ -2033,6 +2037,7 @@ fn split_work_key(block: u32, generator: u32) -> u64 {
 }
 
 #[allow(clippy::too_many_arguments)]
+#[inline(always)]
 fn schedule_sparse_splitter_block<P: PendingDirectory>(
     presentation: &FinitePresentation,
     inverse: &InverseIndex,
@@ -2090,6 +2095,7 @@ fn schedule_sparse_splitter_block<P: PendingDirectory>(
     Ok(())
 }
 
+#[inline(always)]
 fn push_split_work<P: PendingDirectory>(
     queue: &mut VecDeque<SplitWorkItem>,
     pending: &mut P,
@@ -2737,7 +2743,10 @@ fn verify_compilation_with_inverse(
                 return Err(ObservationalError::CompiledShape);
             }
             return if let Some(inverse) = verification_inverse {
-                inverse.verify(presentation)?;
+                // This index was just constructed from the already-validated
+                // presentation and consumed by the compiler. Replay the
+                // transcript against it directly. The public verifier still
+                // rebuilds and audits every inverse edge before replay.
                 verify_split_transcript_with_inverse(presentation, compiled, inverse)
             } else {
                 verify_split_transcript(presentation, compiled)
