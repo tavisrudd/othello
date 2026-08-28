@@ -810,6 +810,17 @@ workspace, eliminating allocation and capacity growth from repeated Pareto
 choice/composition loops.  Commit `66faadef4` checks every subset and all 256
 pairs of subsets of the `2 x 2` resource lattice against an independent brute
 definition.
+Commit `5713d137f` completes the exact optimizer boundary by retaining a compact
+domain witness ID at every Pareto point.  Its pre-sized composition workspace
+creates witness-arena nodes only for currently nondominated resource products,
+so repeated elimination remains allocation-free in the library hot loop while
+still returning a concrete optimizer.
+Commit `e627647f8` then separates semantics from provenance at the adapter
+boundary: resource-identical fronts share one observation ID even when their
+concrete plans differ, while a per-state sidecar retains each plan.  Witness
+lifting first verifies the compiled artifact against the originating
+presentation, preventing a same-shaped foreign quotient from selecting a
+plausible but incorrect witness.
 
 Commit `9b6b1c733` adds the domain-independent finite-interface adapter.  Typed
 state counts, observations, and total one-hole contexts compile into the same

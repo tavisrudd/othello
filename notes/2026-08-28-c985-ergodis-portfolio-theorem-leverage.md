@@ -227,6 +227,10 @@ independent brute-force definition.  `ParetoWorkspace` makes repeated choice
 and composition allocation-free after exact pre-sizing.
 `ParetoObservationTable` deduplicates large response payloads by sorting and
 moving them once rather than retaining duplicate hash keys.
+`WitnessedParetoFront` and its pre-sized workspace retain one concrete replay
+ID per nondominated resource point; composition calls the caller's witness
+arena only for candidates that survive current dominance.  Thus the generic
+multi-resource layer returns an optimizer, not only its value.
 
 ### 7. Abstract finite-interface adapter
 
