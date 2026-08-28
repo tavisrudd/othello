@@ -223,6 +223,14 @@ Sequel research:
   quotienting, approximate contextual metrics, and learned state compression;
   Mamba is an experimental vehicle there rather than the mathematical premise.
 
+- [C985 Ergodis exact algebraic optimization paper](../2026-08-27-c985-ergodis-optimization-paper.md)
+  is queued after C983.  It targets constraint programming and exact
+  combinatorial optimization with contextual quotient compilation, the C980
+  finite ordered-monoid/Pareto theorem, witness-preserving composition, and
+  C983's two admitted noncoding exemplars.  Recovery remains the deepest
+  motivating application, but the paper proceeds only if C983 demonstrates
+  one genuine shared kernel and material cross-domain state reduction.
+
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
   eventual helper-union thresholds reducing to the one-target theorem; C948
@@ -283,6 +291,9 @@ aggregate referee/export review.  C955 owns the later coefficient-presentation
 spectrum. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
+
+C985 follows C983 as a separate optimization-facing paper research task and
+does not block C984, C325, or C953.
 
 The prior monolithic draft and its cold reads remain inputs, not acceptance of the modular
 hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
