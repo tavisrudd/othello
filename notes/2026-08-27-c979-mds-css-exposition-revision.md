@@ -160,20 +160,6 @@ useful optional results without enough first-pass navigation.
   manifest verification.  Exporter content SHA-256 is
   `359a93ef9bec350cb74c9c438444562ae06805d26447aaeee909e8a7960a404b`.
   Nothing was pushed, and C979 remains open.
-- 2026-08-27: a fresh quantum-information cold reader returned `MINOR`, with
-  no correctness blocker, theorem-level overclaim, or structural finding.  The
-  local repairs now expose the encoder/state Choi bridge before the central
-  block calculation, define the Gale transform at first use, introduce the
-  Clebsch syndrome question before changing mathematical languages, and state
-  the pencil's field scope exactly in the abstract.  The pass also separates
-  compact-witness checking from deterministic recomputation, explains party-
-  extension splitting operationally, and repairs four sentence-level points.
-- 2026-08-27: the cold-read repairs are committed at authority `bc90ea994` and
-  standalone `5573f59`.  Both warning-free 26-page builds, full rendered-page
-  inspection, complete eight-bundle evidence replays, zero-finding export
-  audit, and mirror manifest verification pass.  Exporter content SHA-256 is
-  `ac429dfd687ac451770476708077d48eda124b315aed6dadd124e229b8780f46`.
-  Nothing was pushed, and C979 remains open.
 
 ## Lifecycle gate
 
