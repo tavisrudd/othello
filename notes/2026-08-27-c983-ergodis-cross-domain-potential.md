@@ -240,6 +240,16 @@ terminal-query grammars must show either reduction beyond permutation sorting
 or a concrete reusable-composition/multi-query capability gain.  Quantitative
 boundaried-network optimization is the first stretch adapter.
 
+A first exhaustive cheap test found real semantic room beyond sorting.  For
+three machines of cap four, jobs `{1,2}`, and every future word through length
+two, 35 sorted load profiles induce 22 absolute minimum-makespan response
+classes and 14 potential-normalized classes.  A larger cap-five/job-`{1,2,3}`
+case gives 56, 42, and 31 respectively.  Increasing the two-machine horizon
+from one to two refines 9 absolute classes back to all 10 profiles, confirming
+that gains are query-profile dependent.  This does not yet prove the adapter:
+job placement is nondeterministic, so the compiled state must be a min-plus
+relation or residual response, not a continuation-blind chosen profile.
+
 The repository-specific design map is
 `notes/2026-08-27-c983-rust-extension-surface.md`.  It preserves the current
 compact composition, contextual-cache, scheduler, and witness hot paths and

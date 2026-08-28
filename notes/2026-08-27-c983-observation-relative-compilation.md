@@ -487,6 +487,32 @@ future jobs are part of the specification, and witness memory is not value-
 state memory.  The boundaried-network adapter found in the later audit is the
 first stretch application after these two controls.
 
+### Exemplar B cheap test
+
+A temporary exhaustive oracle enumerated sorted load profiles, every future
+job word through a fixed horizon, and the minimum attainable terminal makespan
+(`infinity` when infeasible).  It produced:
+
+| machines | cap | job alphabet | horizon | sorted profiles | absolute response classes | potential-normalized classes |
+|---:|---:|---|---:|---:|---:|---:|
+| 2 | 3 | `{1,2}` | 1 | 10 | 9 | 6 |
+| 2 | 3 | `{1,2}` | 2 | 10 | 10 | 9 |
+| 3 | 4 | `{1,2}` | 2 | 35 | 22 | 14 |
+| 3 | 5 | `{1,2,3}` | 2 | 56 | 42 | 31 |
+
+Thus the restricted application observations can merge profiles beyond
+machine-permutation sorting, and projective normalization can merge more.  The
+two-machine horizon comparison also confirms the monotonicity gate: adding
+future contexts splits classes and can erase most of the apparent gain.
+
+This is not yet the adapter proof.  Assigning a job has several possible
+successor profiles, so a concrete profile is not a deterministic generator
+state.  The exact adapter must use min-plus batch relations or determinized
+residual response functions, with remaining horizon/query grammar represented
+as a sort.  Selecting one locally optimal successor would be unsound because
+the best choice can depend on the continuation.  The cheap test validates the
+presence of semantic compression, not closure, witnesses, or runtime benefit.
+
 ## 6. Red-team gates
 
 1. Do not call a finite observation quotient a determinization of the full
@@ -508,3 +534,5 @@ first stretch application after these two controls.
    that one common shift on the tests forces that shift on all contexts.
 9. For oracle compilation, state the reachable target universe and require
    counterexample search over that universe, not only the sampled components.
+10. In optimizing adapters, determinize the whole residual/cost relation; do
+    not turn an input into a single successor by a continuation-blind argmin.
