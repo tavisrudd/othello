@@ -427,6 +427,14 @@ state/table bytes, certificate and witness bytes, repeated-query break-even,
 and exact-oracle agreement.  Failure on any axis is useful architecture
 evidence and does not require a novelty claim to publish as a systems result.
 
+Exact decision diagrams are now the required OR systems control.  They already
+compile DP transition graphs, merge equivalent states, support controlled
+relaxations, and integrate with CP/IP/branch-and-bound.  The Ergodis comparison
+must isolate incremental query-relative quotienting, proof artifacts,
+potential/representative/provenance pass composition, witness accounting, or
+black-box oracle compilation.  A custom-DP-versus-CP-SAT win by itself no
+longer establishes the cross-domain compiler wedge.
+
 The exact state is also query-profile relative.  Adding contexts or output
 projections intersects equivalences and can only split classes, so a retained
 finite presentation supports monotone incremental refinement with the same

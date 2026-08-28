@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY TWENTY-EIGHT-SOURCE PASS; FOUR SOURCES READ
-AT FULL TEXT AND TWENTY-FOUR AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
+**Status**: IN PROGRESS; PRELIMINARY THIRTY-SOURCE PASS; FOUR SOURCES READ AT
+FULL TEXT AND TWENTY-SIX AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
 LICENSED
 
 ## Executive verdict
@@ -105,6 +105,7 @@ formal congruence argument.
 | Compile components whose environment and implementation make adversarial choices | Interface automata, alternating simulation/refinement, and open games | Strongly pre-empted as compositional game/interface syntax | Generalize the artifact to typed alternating/relational actions and an explicit solution concept; deterministic Moore refinement is only the cooperative corollary |
 | Compile an exact mergeable stream/partition summary | List homomorphisms, monoid folds, and mergeable-summary algorithms | Pre-empted as parallel/streaming architecture | Emit a certified query-relative minimal finite merge carrier, with order/symmetry assumptions and potential/witness payload stated |
 | Treat tropical recurrence as a state-space realization and minimize it | Max-plus discrete-event system realization, reachability, and observability | Strongly pre-empted; minimal realization is a distinct hard classical problem | Start with bounded observation-relative finite abstraction and compare against max-plus realization/observer controls |
+| Compile a dynamic program to an exact reduced optimization graph | Exact decision diagrams for optimization and DP state merging | Strongly pre-empted as an OR systems pattern, including CP/IP integration | Add derived context/query minimization, independent certificates, potential/provenance layers, and black-box solver wrapping; benchmark against DD tools |
 
 ## Common kernel candidate
 
@@ -644,6 +645,22 @@ The read depths below are unconditional and describe this preliminary pass.
     to estimate states.  The control-theoretic observability bridge is therefore
     literal and classical; Ergodis must specify its restricted query semantics,
     finite abstraction, and witness/certificate additions.
+29. Willem-Jan van Hoeve, *An Introduction to Decision Diagrams for
+    Optimization*. **Read depth: partial** — primary INFORMS tutorial abstract
+    and accessible tutorial text, DOI `10.1287/educ.2024.0276`; read the
+    abstract and exact top-down compilation summary.  It presents decision
+    diagrams as scalable representations of state-based dynamic programs,
+    builds exact diagrams by expanding the transition graph while merging
+    equivalent states, and integrates them with constraint programming,
+    integer programming, network flow, and branch-and-bound.
+30. Alejandro A. T. Castro, Andre A. Cire, and J. Christopher Beck,
+    *Decision Diagrams for Discrete Optimization: A Survey of Recent
+    Advances*. **Read depth: partial** — primary arXiv abstract and survey
+    metadata, cache key `arXiv:2201.11536`; read the abstract and scope summary.
+    It surveys exact and approximate decision diagrams as an established
+    optimization technology used inside integer and constraint programming.
+    This makes the decision-diagram ecosystem a required implementation and
+    benchmark control for the C983 OR path.
 
 ## Max-plus control and discrete-event systems
 
@@ -677,6 +694,42 @@ deadline truncation.  Neither state count need dominate the other: linear or
 tropical realization dimension, finite quotient cardinality, and circuit size
 are different measures.  The experiment must report all applicable measures
 and must not call a bounded quotient a realization of the unbounded system.
+
+## Decision diagrams and the OR compiler boundary
+
+Decision diagrams are the closest mature systems competitor to the proposed
+operations-research expansion.  They already compile a sequential DP model
+into a layered graph, merge equivalent states in exact diagrams, deliberately
+merge or drop states for relaxed/restricted approximations, and integrate the
+result with CP, IP, network-flow, and branch-and-bound methods.  Therefore the
+claim “compile a structured optimization problem into a smaller reusable DP”
+is not merely broad—it is already a working OR paradigm.
+
+The Ergodis wedge must be testably different:
+
+1. derive an observation/context-relative equivalence rather than accept only
+   the state-equivalence supplied by a DP formulation;
+2. emit a coarsest finite quotient certificate for the declared presentation;
+3. keep potential normalization, representative-family reduction, and
+   provenance factorization as typed passes instead of one generic node merge;
+4. refine an artifact as new query profiles arrive;
+5. reconstruct and validate domain witnesses with separately measured memory;
+6. learn the interface from a black-box exact optimizer when no explicit DP is
+   supplied; and
+7. serialize the same verifier-facing artifact across non-OR adapters.
+
+If a decision-diagram package already provides those features for an exemplar,
+Ergodis should use or wrap it.  A head-to-head systems gate compares node/arc
+count, bytes, compile time, repeated-query time, witness memory, and solver
+integration effort against exact DD compilation.  “Beats CP-SAT” without this
+control is no longer an adequate practical claim.
+
+This also gives approximation a safer route.  Relaxed decision diagrams can
+supply admissible optimization bounds and branch-and-bound controls, while the
+contextual pseudometric supplies a semantic distortion target.  A merge is
+certified exact only by the quotient law; otherwise it must advertise either a
+DD relaxation bound or a proved contextual error modulus.  Learned latent
+states are a third, heuristic tier and do not inherit either guarantee.
 
 ## Exact mergeable summaries and parallel folds
 
