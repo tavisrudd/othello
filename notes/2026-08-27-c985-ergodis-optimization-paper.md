@@ -225,3 +225,32 @@ and tree-automata instances are corollaries.  The application boundary includes
 typed resource and recovery states, witness lifting, streaming separator
 evidence, and downstream min-plus/Pareto composition--capabilities neither Boa
 nor MATA exposes as a common exact interface.
+
+## Final locality tail
+
+Two final measured slices landed after the first report freeze:
+
+- `8025a00d1` removes a state-sized `pending_counts` array whose values were
+  maintained on every queue operation but never read.  At 131,072 states this
+  saves 512 KiB and two scattered counter operations per queued item.  Random
+  cycles improve by 1.043x and instructions by 1.009x.
+- `e3b0bcef5` changes the semantically free work discipline from FIFO to LIFO.
+  Recently created small splitter blocks then revisit hot member and block
+  metadata.  Eleven-round FIFO/LIFO A/B improves random 66.932 -> 62.358 ms
+  (1.073x), chain 13.446 -> 13.093 ms (1.027x), and colors 5.598 -> 5.512 ms
+  (1.016x).  The quotient and 131,070-record random transcript are unchanged.
+
+The final alternating Boa run, taken after both locality slices, is the SOTA
+result to quote; it supersedes the earlier absolute-time table (frequency state
+changed, so only within-run ratios are compared):
+
+| family | Ergodis | Boa | winner |
+|---|---:|---:|---:|
+| chain | 12.870 ms | 35.604 ms | Ergodis, 2.766x |
+| random | 61.730 ms | 40.707 ms | Boa, 1.516x |
+| colors | 5.449 ms | 14.161 ms | Ergodis, 2.599x |
+
+The final raw table is `c985-boa-lifo-final.tsv`, SHA-256
+`f66a4496952b977055069e385cef5a5249ab37b2890939347a511fa1bcfe0246`;
+the FIFO/LIFO A/B is `c985-fifo-lifo.tsv`, SHA-256
+`97ea3b6b1132623017d406eb0084eef78da848ea766203ccde1e65af06b4e409`.
