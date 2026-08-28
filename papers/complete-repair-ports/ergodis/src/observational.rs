@@ -745,8 +745,9 @@ impl DensePending {
     fn new(
         presentation: &FinitePresentation,
         initial_block_sorts: &[u32],
+        refinement: Option<&RefinementGenerators>,
     ) -> Result<Self, ObservationalError> {
-        let index = pending_generator_index(presentation)?;
+        let index = pending_generator_index(presentation, refinement)?;
         let dense_slots = dense_pending_slots(presentation, &index.incoming_counts)?;
         u32::try_from(dense_slots).map_err(|_| ObservationalError::Overflow)?;
         let mut pending = Self {
@@ -825,13 +826,21 @@ struct PendingGeneratorIndex {
 
 fn pending_generator_index(
     presentation: &FinitePresentation,
+    refinement: Option<&RefinementGenerators>,
 ) -> Result<PendingGeneratorIndex, ObservationalError> {
     let mut incoming_counts = vec![0_u32; presentation.sorts.len()];
-    let mut generator_locals = vec![0_u32; presentation.generators.len()];
-    for (generator, record) in presentation.generators.iter().copied().enumerate() {
-        let count = &mut incoming_counts[record.target_sort as usize];
-        generator_locals[generator] = *count;
-        *count = count.checked_add(1).ok_or(ObservationalError::Overflow)?;
+    let mut generator_locals = vec![u32::MAX; presentation.generators.len()];
+    for sort in 0..presentation.sorts.len() {
+        let generators = refinement.map_or_else(
+            || presentation.generator_ids_from(sort as u32),
+            |directory| directory.ids_from(sort as u32),
+        );
+        for &generator in generators {
+            let record = presentation.generators[generator as usize];
+            let count = &mut incoming_counts[record.target_sort as usize];
+            generator_locals[generator as usize] = *count;
+            *count = count.checked_add(1).ok_or(ObservationalError::Overflow)?;
+        }
     }
     Ok(PendingGeneratorIndex {
         incoming_counts: incoming_counts.into_boxed_slice(),
@@ -857,8 +866,11 @@ fn dense_pending_slots(
     )
 }
 
-fn pending_mode(presentation: &FinitePresentation) -> Result<PendingMode, ObservationalError> {
-    let index = pending_generator_index(presentation)?;
+fn pending_mode(
+    presentation: &FinitePresentation,
+    refinement: Option<&RefinementGenerators>,
+) -> Result<PendingMode, ObservationalError> {
+    let index = pending_generator_index(presentation, refinement)?;
     let dense_slots = dense_pending_slots(presentation, &index.incoming_counts)?;
     let dense_bytes = dense_slots
         .checked_add(63)
@@ -872,7 +884,14 @@ fn pending_mode(presentation: &FinitePresentation) -> Result<PendingMode, Observ
             bytes.checked_add(words.checked_mul(std::mem::size_of::<u32>())?)
         })
         .ok_or(ObservationalError::Overflow)?;
-    let sparse_bytes = PatriciaPending::storage_bytes(presentation.transitions.len())?;
+    let active_transitions = refinement.map_or(presentation.transitions.len(), |directory| {
+        directory
+            .ids
+            .iter()
+            .map(|&generator| presentation.generators[generator as usize].transition_len as usize)
+            .sum()
+    });
+    let sparse_bytes = PatriciaPending::storage_bytes(active_transitions)?;
     Ok(if dense_bytes <= sparse_bytes {
         PendingMode::Dense
     } else {
@@ -1241,18 +1260,37 @@ enum TargetGeneratorDirectory {
 impl InverseIndex {
     const DENSE: u32 = 0;
     const SPARSE: u32 = 1;
+    const INACTIVE: u32 = 2;
 
     fn new(presentation: &FinitePresentation) -> Result<Self, ObservationalError> {
+        Self::new_prepared(presentation, None)
+    }
+
+    fn new_prepared(
+        presentation: &FinitePresentation,
+        refinement: Option<&RefinementGenerators>,
+    ) -> Result<Self, ObservationalError> {
+        let active = |sort: usize| {
+            refinement.map_or_else(
+                || presentation.generator_ids_from(sort as u32),
+                |directory| directory.ids_from(sort as u32),
+            )
+        };
         let max_source = presentation
-            .generators
+            .sorts
             .iter()
-            .map(|record| presentation.sorts[record.source_sort as usize].len as usize)
+            .enumerate()
+            .filter(|&(sort, _)| !active(sort).is_empty())
+            .map(|(_, range)| range.len as usize)
             .max()
             .unwrap_or(0);
         let max_counting_target = presentation
-            .generators
+            .sorts
             .iter()
-            .filter_map(|record| {
+            .enumerate()
+            .flat_map(|(sort, _)| active(sort).iter().copied())
+            .filter_map(|generator| {
+                let record = presentation.generators[generator as usize];
                 let source_len = presentation.sorts[record.source_sort as usize].len as usize;
                 let target_len = presentation.sorts[record.target_sort as usize].len as usize;
                 (target_len <= source_len.saturating_mul(4)).then_some(target_len)
@@ -1263,133 +1301,157 @@ impl InverseIndex {
         // Counting scatter only needs one target-sized array: counts are
         // consumed in place into write cursors before the stable scatter.
         let mut target_cursors = vec![0_u32; max_counting_target];
-        let mut records = Vec::with_capacity(presentation.generators.len());
+        let mut records = vec![
+            InverseRecord {
+                index_start: 0,
+                index_len: 0,
+                mode: Self::INACTIVE,
+                _pad: 0,
+            };
+            presentation.generators.len()
+        ];
         let mut offsets = Vec::new();
         let mut targets = Vec::new();
-        let mut sources: Vec<u32> = Vec::with_capacity(presentation.transitions.len());
-        for record in presentation.generators.iter().copied() {
-            let source = presentation.sorts[record.source_sort as usize];
-            let target = presentation.sorts[record.target_sort as usize];
-            let transition_start = record.transition_start as usize;
-            let transition_table = &presentation.transitions
-                [transition_start..transition_start + record.transition_len as usize];
-            let use_counting_scatter =
-                target.len as usize <= (source.len as usize).saturating_mul(4);
-            let distinct_targets = if use_counting_scatter {
-                let cursors = &mut target_cursors[..target.len as usize];
-                cursors.fill(0);
-                for &target_state in transition_table {
-                    cursors[(target_state - target.start) as usize] += 1;
-                }
-                let mut next = 0_u32;
-                let mut distinct = 0_usize;
-                for cursor in cursors.iter_mut() {
-                    let count = *cursor;
-                    *cursor = next;
-                    next += count;
-                    distinct += usize::from(count != 0);
-                }
-                for (local, &target_state) in transition_table.iter().enumerate() {
-                    let cursor = &mut target_cursors[(target_state - target.start) as usize];
-                    source_scratch[*cursor as usize] = source.start + local as u32;
-                    *cursor += 1;
-                }
-                distinct
-            } else {
-                for (local, slot) in source_scratch[..source.len as usize].iter_mut().enumerate() {
-                    *slot = source.start + local as u32;
-                }
-                source_scratch[..source.len as usize].sort_unstable_by_key(|&state| {
-                    (transition_table[(state - source.start) as usize], state)
-                });
-                source_scratch[..source.len as usize]
-                    .iter()
-                    .enumerate()
-                    .filter(|&(position, &state)| {
-                        position == 0
-                            || transition_table[(state - source.start) as usize]
-                                != transition_table
-                                    [(source_scratch[position - 1] - source.start) as usize]
-                    })
-                    .count()
-            };
-            let dense_bytes = (target.len as usize)
-                .checked_add(1)
-                .and_then(|len| len.checked_mul(std::mem::size_of::<u32>()))
-                .ok_or(ObservationalError::Overflow)?;
-            let sparse_bytes = distinct_targets
-                .checked_mul(std::mem::size_of::<InverseTargetRecord>())
-                .ok_or(ObservationalError::Overflow)?;
-            let mut position = 0_usize;
-            let (index_start, index_len, mode) = if dense_bytes <= sparse_bytes {
-                offsets.reserve_exact(
-                    (target.len as usize)
-                        .checked_add(1)
-                        .ok_or(ObservationalError::Overflow)?,
-                );
-                let index_start =
-                    u32::try_from(offsets.len()).map_err(|_| ObservationalError::Overflow)?;
-                for target_state in target.start..target.end() {
+        let source_capacity = refinement.map_or(presentation.transitions.len(), |directory| {
+            directory
+                .ids
+                .iter()
+                .map(|&generator| {
+                    presentation.generators[generator as usize].transition_len as usize
+                })
+                .sum()
+        });
+        let mut sources: Vec<u32> = Vec::with_capacity(source_capacity);
+        for sort in 0..presentation.sorts.len() {
+            for &generator in active(sort) {
+                let record = presentation.generators[generator as usize];
+                let source = presentation.sorts[record.source_sort as usize];
+                let target = presentation.sorts[record.target_sort as usize];
+                let transition_start = record.transition_start as usize;
+                let transition_table = &presentation.transitions
+                    [transition_start..transition_start + record.transition_len as usize];
+                let use_counting_scatter =
+                    target.len as usize <= (source.len as usize).saturating_mul(4);
+                let distinct_targets = if use_counting_scatter {
+                    let cursors = &mut target_cursors[..target.len as usize];
+                    cursors.fill(0);
+                    for &target_state in transition_table {
+                        cursors[(target_state - target.start) as usize] += 1;
+                    }
+                    let mut next = 0_u32;
+                    let mut distinct = 0_usize;
+                    for cursor in cursors.iter_mut() {
+                        let count = *cursor;
+                        *cursor = next;
+                        next += count;
+                        distinct += usize::from(count != 0);
+                    }
+                    for (local, &target_state) in transition_table.iter().enumerate() {
+                        let cursor = &mut target_cursors[(target_state - target.start) as usize];
+                        source_scratch[*cursor as usize] = source.start + local as u32;
+                        *cursor += 1;
+                    }
+                    distinct
+                } else {
+                    for (local, slot) in
+                        source_scratch[..source.len as usize].iter_mut().enumerate()
+                    {
+                        *slot = source.start + local as u32;
+                    }
+                    source_scratch[..source.len as usize].sort_unstable_by_key(|&state| {
+                        (transition_table[(state - source.start) as usize], state)
+                    });
+                    source_scratch[..source.len as usize]
+                        .iter()
+                        .enumerate()
+                        .filter(|&(position, &state)| {
+                            position == 0
+                                || transition_table[(state - source.start) as usize]
+                                    != transition_table
+                                        [(source_scratch[position - 1] - source.start) as usize]
+                        })
+                        .count()
+                };
+                let dense_bytes = (target.len as usize)
+                    .checked_add(1)
+                    .and_then(|len| len.checked_mul(std::mem::size_of::<u32>()))
+                    .ok_or(ObservationalError::Overflow)?;
+                let sparse_bytes = distinct_targets
+                    .checked_mul(std::mem::size_of::<InverseTargetRecord>())
+                    .ok_or(ObservationalError::Overflow)?;
+                let mut position = 0_usize;
+                let (index_start, index_len, mode) = if dense_bytes <= sparse_bytes {
+                    offsets.reserve_exact(
+                        (target.len as usize)
+                            .checked_add(1)
+                            .ok_or(ObservationalError::Overflow)?,
+                    );
+                    let index_start =
+                        u32::try_from(offsets.len()).map_err(|_| ObservationalError::Overflow)?;
+                    for target_state in target.start..target.end() {
+                        offsets.push(
+                            u32::try_from(sources.len())
+                                .map_err(|_| ObservationalError::Overflow)?,
+                        );
+                        while position < source.len as usize
+                            && transition_table[(source_scratch[position] - source.start) as usize]
+                                == target_state
+                        {
+                            sources.push(source_scratch[position]);
+                            position += 1;
+                        }
+                    }
                     offsets.push(
                         u32::try_from(sources.len()).map_err(|_| ObservationalError::Overflow)?,
                     );
-                    while position < source.len as usize
-                        && transition_table[(source_scratch[position] - source.start) as usize]
-                            == target_state
-                    {
-                        sources.push(source_scratch[position]);
-                        position += 1;
+                    (
+                        index_start,
+                        target
+                            .len
+                            .checked_add(1)
+                            .ok_or(ObservationalError::Overflow)?,
+                        Self::DENSE,
+                    )
+                } else {
+                    // Grow only when a generator actually uses the sparse directory.
+                    // Amortized growth avoids copying the accumulated directory once
+                    // per sparse generator while dense-only presentations reserve none.
+                    targets.reserve(distinct_targets);
+                    let index_start =
+                        u32::try_from(targets.len()).map_err(|_| ObservationalError::Overflow)?;
+                    while position < source.len as usize {
+                        let target_state =
+                            transition_table[(source_scratch[position] - source.start) as usize];
+                        let source_start = u32::try_from(sources.len())
+                            .map_err(|_| ObservationalError::Overflow)?;
+                        let group_start = position;
+                        while position < source.len as usize
+                            && transition_table[(source_scratch[position] - source.start) as usize]
+                                == target_state
+                        {
+                            sources.push(source_scratch[position]);
+                            position += 1;
+                        }
+                        targets.push(InverseTargetRecord {
+                            target_state,
+                            source_start,
+                            source_len: u32::try_from(position - group_start)
+                                .map_err(|_| ObservationalError::Overflow)?,
+                            _pad: 0,
+                        });
                     }
-                }
-                offsets
-                    .push(u32::try_from(sources.len()).map_err(|_| ObservationalError::Overflow)?);
-                (
+                    let index_len = u32::try_from(targets.len())
+                        .map_err(|_| ObservationalError::Overflow)?
+                        - index_start;
+                    (index_start, index_len, Self::SPARSE)
+                };
+                records[generator as usize] = InverseRecord {
                     index_start,
-                    target
-                        .len
-                        .checked_add(1)
-                        .ok_or(ObservationalError::Overflow)?,
-                    Self::DENSE,
-                )
-            } else {
-                // Grow only when a generator actually uses the sparse directory.
-                // Amortized growth avoids copying the accumulated directory once
-                // per sparse generator while dense-only presentations reserve none.
-                targets.reserve(distinct_targets);
-                let index_start =
-                    u32::try_from(targets.len()).map_err(|_| ObservationalError::Overflow)?;
-                while position < source.len as usize {
-                    let target_state =
-                        transition_table[(source_scratch[position] - source.start) as usize];
-                    let source_start =
-                        u32::try_from(sources.len()).map_err(|_| ObservationalError::Overflow)?;
-                    let group_start = position;
-                    while position < source.len as usize
-                        && transition_table[(source_scratch[position] - source.start) as usize]
-                            == target_state
-                    {
-                        sources.push(source_scratch[position]);
-                        position += 1;
-                    }
-                    targets.push(InverseTargetRecord {
-                        target_state,
-                        source_start,
-                        source_len: u32::try_from(position - group_start)
-                            .map_err(|_| ObservationalError::Overflow)?,
-                        _pad: 0,
-                    });
-                }
-                let index_len = u32::try_from(targets.len())
-                    .map_err(|_| ObservationalError::Overflow)?
-                    - index_start;
-                (index_start, index_len, Self::SPARSE)
-            };
-            records.push(InverseRecord {
-                index_start,
-                index_len,
-                mode,
-                _pad: 0,
-            });
+                    index_len,
+                    mode,
+                    _pad: 0,
+                };
+            }
         }
         Ok(Self {
             records: records.into_boxed_slice(),
@@ -1530,9 +1592,38 @@ impl TargetGeneratorDirectory {
     fn new(
         presentation: &FinitePresentation,
         inverse: &InverseIndex,
+        refinement: Option<&RefinementGenerators>,
     ) -> Result<Self, ObservationalError> {
-        let (ranges, generators) =
-            index_generators_by_sort(presentation.sorts.len(), &presentation.generators, true)?;
+        let (ranges, generators) = if let Some(directory) = refinement {
+            let mut counts = vec![0_u32; presentation.sorts.len()];
+            for &generator in directory.ids.iter() {
+                let target = presentation.generators[generator as usize].target_sort as usize;
+                counts[target] = counts[target]
+                    .checked_add(1)
+                    .ok_or(ObservationalError::Overflow)?;
+            }
+            let mut ranges = Vec::with_capacity(presentation.sorts.len());
+            let mut total = 0_u32;
+            for &count in &counts {
+                ranges.push(SortRange {
+                    start: total,
+                    len: count,
+                });
+                total = total
+                    .checked_add(count)
+                    .ok_or(ObservationalError::Overflow)?;
+            }
+            let mut cursors = ranges.iter().map(|range| range.start).collect::<Vec<_>>();
+            let mut generators = vec![0_u32; total as usize];
+            for &generator in directory.ids.iter() {
+                let target = presentation.generators[generator as usize].target_sort as usize;
+                generators[cursors[target] as usize] = generator;
+                cursors[target] += 1;
+            }
+            (ranges.into_boxed_slice(), generators.into_boxed_slice())
+        } else {
+            index_generators_by_sort(presentation.sorts.len(), &presentation.generators, true)?
+        };
         if ranges
             .iter()
             .all(|range| range.len <= Self::SORT_SCAN_MAX_GENERATORS)
@@ -1542,6 +1633,9 @@ impl TargetGeneratorDirectory {
 
         let mut counts = vec![0_u32; presentation.state_count()];
         for (generator, record) in inverse.records.iter().copied().enumerate() {
+            if record.mode == InverseIndex::INACTIVE {
+                continue;
+            }
             if record.mode == InverseIndex::DENSE {
                 let generator_record = presentation.generators[generator];
                 let target = presentation.sorts[generator_record.target_sort as usize];
@@ -1577,6 +1671,9 @@ impl TargetGeneratorDirectory {
         offsets.push(total);
         let mut generators = vec![0_u32; total as usize];
         for (generator, record) in inverse.records.iter().copied().enumerate() {
+            if record.mode == InverseIndex::INACTIVE {
+                continue;
+            }
             if record.mode == InverseIndex::DENSE {
                 let generator_record = presentation.generators[generator];
                 let target = presentation.sorts[generator_record.target_sort as usize];
@@ -1752,7 +1849,9 @@ fn compile_observational_internal(
             MultiwayAdmission::Admitted(refinement) => {
                 (CertificatePolicy::MultiwayTranscript, refinement)
             }
-            MultiwayAdmission::Rejected => (CertificatePolicy::SplitTranscript, None),
+            MultiwayAdmission::Rejected(refinement) => {
+                (CertificatePolicy::SplitTranscript, refinement)
+            }
         };
         return compile_observational_internal(
             presentation,
@@ -1770,7 +1869,9 @@ fn compile_observational_internal(
             MultiwayAdmission::Admitted(refinement) => {
                 (CertificatePolicy::MultiwayTranscript, refinement)
             }
-            MultiwayAdmission::Rejected => (CertificatePolicy::SplitTranscript, None),
+            MultiwayAdmission::Rejected(refinement) => {
+                (CertificatePolicy::SplitTranscript, refinement)
+            }
         };
         let mut compiled = compile_observational_internal(
             presentation,
@@ -1794,7 +1895,7 @@ fn compile_observational_internal(
     ) = match certificate_policy {
         CertificatePolicy::SplitTranscript => {
             let (classes, class_ranges, split_records, inverse) =
-                minimize_partition_worklist(presentation)?;
+                minimize_partition_worklist_prepared(presentation, prepared_refinement)?;
             (
                 classes,
                 class_ranges,
@@ -1845,7 +1946,7 @@ fn compile_observational_internal(
 }
 
 enum MultiwayAdmission {
-    Rejected,
+    Rejected(Option<RefinementGenerators>),
     Admitted(Option<RefinementGenerators>),
 }
 
@@ -1853,7 +1954,7 @@ fn multiway_admission(
     presentation: &FinitePresentation,
 ) -> Result<MultiwayAdmission, ObservationalError> {
     if presentation.state_count() < 4_096 {
-        return Ok(MultiwayAdmission::Rejected);
+        return Ok(MultiwayAdmission::Rejected(None));
     }
     let refinement = if presentation
         .generator_sort_ranges
@@ -1876,7 +1977,7 @@ fn multiway_admission(
             });
         let raw_outgoing = presentation.generator_sort_ranges[sort].len;
         if (outgoing == 1 && raw_outgoing == 1) || outgoing > 4 {
-            return Ok(MultiwayAdmission::Rejected);
+            return Ok(MultiwayAdmission::Rejected(refinement));
         }
         let mut first = None;
         let mut second = None;
@@ -1890,7 +1991,7 @@ fn multiway_admission(
             } else if second.is_none() {
                 second = Some(observation);
             } else {
-                return Ok(MultiwayAdmission::Rejected);
+                return Ok(MultiwayAdmission::Rejected(refinement));
             }
         }
     }
@@ -2193,9 +2294,28 @@ fn state_sort(sorts: &[SortRange], state: u32) -> Option<u32> {
         .and_then(|sort| u32::try_from(sort).ok())
 }
 
+#[cfg(test)]
 fn minimize_partition_worklist(
     presentation: &FinitePresentation,
 ) -> Result<WorklistPartition, ObservationalError> {
+    minimize_partition_worklist_prepared(presentation, None)
+}
+
+fn minimize_partition_worklist_prepared(
+    presentation: &FinitePresentation,
+    refinement: Option<RefinementGenerators>,
+) -> Result<WorklistPartition, ObservationalError> {
+    let refinement = match refinement {
+        Some(refinement) => Some(refinement),
+        None if presentation
+            .generator_sort_ranges
+            .iter()
+            .any(|range| range.len > 4) =>
+        {
+            Some(RefinementGenerators::new(presentation)?)
+        }
+        None => None,
+    };
     let block_capacity = presentation.state_count();
     let (state_blocks, block_sorts, members, block_ranges) =
         initial_split_workspace(presentation, block_capacity)?;
@@ -2223,11 +2343,24 @@ fn minimize_partition_worklist(
         let class_ranges = initial_class_ranges(presentation.sorts.len(), &block_sorts)?;
         return Ok((state_blocks, class_ranges, Box::default(), None));
     }
-    match pending_mode(presentation)? {
+    let pending_capacity =
+        refinement
+            .as_ref()
+            .map_or(presentation.transitions.len(), |directory| {
+                directory
+                    .ids
+                    .iter()
+                    .map(|&generator| {
+                        presentation.generators[generator as usize].transition_len as usize
+                    })
+                    .sum()
+            });
+    match pending_mode(presentation, refinement.as_ref())? {
         PendingMode::Dense => {
-            let pending = DensePending::new(presentation, &block_sorts)?;
+            let pending = DensePending::new(presentation, &block_sorts, refinement.as_ref())?;
             minimize_partition_worklist_with_pending(
                 presentation,
+                refinement.as_ref(),
                 initial_block_count,
                 &initial_blocks_per_sort,
                 &omitted_blocks,
@@ -2240,6 +2373,7 @@ fn minimize_partition_worklist(
         }
         PendingMode::Sparse => minimize_partition_worklist_with_pending(
             presentation,
+            refinement.as_ref(),
             initial_block_count,
             &initial_blocks_per_sort,
             &omitted_blocks,
@@ -2247,7 +2381,7 @@ fn minimize_partition_worklist(
             block_sorts,
             members,
             block_ranges,
-            PatriciaPending::new(presentation.transitions.len())?,
+            PatriciaPending::new(pending_capacity)?,
         ),
     }
 }
@@ -2255,6 +2389,7 @@ fn minimize_partition_worklist(
 #[allow(clippy::too_many_arguments)]
 fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
     presentation: &FinitePresentation,
+    refinement: Option<&RefinementGenerators>,
     initial_block_count: usize,
     initial_blocks_per_sort: &[u32],
     omitted_blocks: &[u32],
@@ -2268,36 +2403,51 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
     // for a fixed generator, distinct pending blocks have disjoint nonempty
     // inverse images. The queue therefore needs only one slot per forward edge.
     let block_capacity = presentation.state_count();
-    let pending_capacity = presentation.transitions.len();
+    let pending_capacity = refinement.map_or(presentation.transitions.len(), |directory| {
+        directory
+            .ids
+            .iter()
+            .map(|&generator| presentation.generators[generator as usize].transition_len as usize)
+            .sum()
+    });
     let mut queue = VecDeque::with_capacity(pending_capacity);
-    for (generator, record) in presentation.generators.iter().copied().enumerate() {
-        if initial_blocks_per_sort[record.target_sort as usize] <= 1 {
-            continue;
-        }
-        let source = presentation.sorts[record.source_sort as usize];
-        for source_state in source.start..source.end() {
-            let target_state = presentation
-                .transition(generator as u32, source_state)
-                .expect("validated total generator");
-            if state_blocks[target_state as usize] == omitted_blocks[record.target_sort as usize] {
+    for sort in 0..presentation.sorts.len() {
+        let generators = refinement.map_or_else(
+            || presentation.generator_ids_from(sort as u32),
+            |directory| directory.ids_from(sort as u32),
+        );
+        for &generator in generators {
+            let record = presentation.generators[generator as usize];
+            if initial_blocks_per_sort[record.target_sort as usize] <= 1 {
                 continue;
             }
-            push_split_work(
-                &mut queue,
-                &mut pending,
-                SplitWorkItem {
-                    block: state_blocks[target_state as usize],
-                    generator: generator as u32,
-                },
-            )?;
+            let source = presentation.sorts[record.source_sort as usize];
+            for source_state in source.start..source.end() {
+                let target_state = presentation
+                    .transition(generator, source_state)
+                    .expect("validated total generator");
+                if state_blocks[target_state as usize]
+                    == omitted_blocks[record.target_sort as usize]
+                {
+                    continue;
+                }
+                push_split_work(
+                    &mut queue,
+                    &mut pending,
+                    SplitWorkItem {
+                        block: state_blocks[target_state as usize],
+                        generator,
+                    },
+                )?;
+            }
         }
     }
     if queue.is_empty() {
         let class_ranges = initial_class_ranges(presentation.sorts.len(), &block_sorts)?;
         return Ok((state_blocks, class_ranges, Box::default(), None));
     }
-    let inverse = InverseIndex::new(presentation)?;
-    let target_generators = TargetGeneratorDirectory::new(presentation, &inverse)?;
+    let inverse = InverseIndex::new_prepared(presentation, refinement)?;
+    let target_generators = TargetGeneratorDirectory::new(presentation, &inverse, refinement)?;
     let mut marked = bitmap_storage(presentation.state_count())?;
     let mut marked_sources = Vec::with_capacity(presentation.state_count());
     let mut member_positions = vec![0_u32; presentation.state_count()];
@@ -2383,7 +2533,7 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
         classes,
         class_ranges,
         records.into_boxed_slice(),
-        Some(inverse),
+        refinement.is_none().then_some(inverse),
     ))
 }
 
@@ -4044,6 +4194,47 @@ mod tests {
     }
 
     #[test]
+    fn binary_backend_indexes_only_the_exact_generator_basis() {
+        const STATES: u32 = 4_096;
+        let affine = |multiplier: u32, offset: u32| GeneratorSpec {
+            source_sort: 0,
+            target_sort: 0,
+            transitions: (0..STATES)
+                .map(|state| (state.wrapping_mul(multiplier) + offset) & (STATES - 1))
+                .collect::<Vec<_>>()
+                .into_boxed_slice(),
+        };
+        let bases = [(3, 1), (5, 7), (9, 11), (13, 17), (17, 19)];
+        let generators = bases
+            .into_iter()
+            .cycle()
+            .take(20)
+            .map(|(multiplier, offset)| affine(multiplier, offset))
+            .collect::<Vec<_>>();
+        let observations = (0..STATES)
+            .map(|state| u32::from(state == STATES - 1))
+            .collect::<Vec<_>>();
+        let presentation = FinitePresentation::new([STATES], observations, generators).unwrap();
+        let refinement = RefinementGenerators::new(&presentation).unwrap();
+        assert_eq!(refinement.ids.len(), bases.len());
+        assert!(!multiway_is_admitted(&presentation));
+
+        let full_inverse = InverseIndex::new(&presentation).unwrap();
+        let basis_inverse = InverseIndex::new_prepared(&presentation, Some(&refinement)).unwrap();
+        assert_eq!(full_inverse.sources.len(), 20 * STATES as usize);
+        assert_eq!(basis_inverse.sources.len(), bases.len() * STATES as usize);
+
+        let compiled =
+            compile_observational_with_policy(&presentation, CertificatePolicy::AdaptiveTranscript)
+                .unwrap();
+        assert_eq!(
+            compiled.certificate_policy(),
+            CertificatePolicy::SplitTranscript
+        );
+        verify_compilation(&presentation, &compiled).unwrap();
+    }
+
+    #[test]
     fn deferred_verification_retains_replayable_adaptive_evidence() {
         let presentation = FinitePresentation::new(
             [8],
@@ -4189,7 +4380,10 @@ mod tests {
         });
         let presentation =
             FinitePresentation::new([2, TARGET_STATES], observations, generators).unwrap();
-        assert_eq!(pending_mode(&presentation).unwrap(), PendingMode::Sparse);
+        assert_eq!(
+            pending_mode(&presentation, None).unwrap(),
+            PendingMode::Sparse
+        );
         let inverse = InverseIndex::new(&presentation).unwrap();
         inverse.verify(&presentation).unwrap();
         assert!(inverse.offsets.is_empty());
@@ -4223,7 +4417,10 @@ mod tests {
             }],
         )
         .unwrap();
-        assert_eq!(pending_mode(&presentation).unwrap(), PendingMode::Dense);
+        assert_eq!(
+            pending_mode(&presentation, None).unwrap(),
+            PendingMode::Dense
+        );
 
         let split =
             compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
@@ -4400,7 +4597,7 @@ mod tests {
         assert_eq!(dense_inverse.offsets.len(), 9);
         assert!(dense_inverse.targets.is_empty());
         assert!(matches!(
-            TargetGeneratorDirectory::new(&dense, &dense_inverse).unwrap(),
+            TargetGeneratorDirectory::new(&dense, &dense_inverse, None).unwrap(),
             TargetGeneratorDirectory::BySort { .. }
         ));
         dense_inverse.verify(&dense).unwrap();
@@ -4417,7 +4614,7 @@ mod tests {
         .unwrap();
         let high_fan_in_inverse = InverseIndex::new(&high_fan_in).unwrap();
         assert!(matches!(
-            TargetGeneratorDirectory::new(&high_fan_in, &high_fan_in_inverse).unwrap(),
+            TargetGeneratorDirectory::new(&high_fan_in, &high_fan_in_inverse, None).unwrap(),
             TargetGeneratorDirectory::ByState { .. }
         ));
 
