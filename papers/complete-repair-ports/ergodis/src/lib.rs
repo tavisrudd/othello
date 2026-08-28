@@ -13,6 +13,7 @@ pub mod contextual;
 pub mod defect;
 pub mod field;
 pub mod incidence;
+pub mod interface;
 pub mod matrix;
 pub mod observational;
 pub mod orbit;
@@ -51,6 +52,10 @@ pub use contextual::{
     PlannedContextCost, RankBoundedContextCache, RankOneProbeCache,
 };
 pub use field::{FieldError, FiniteField, Gf4, Prime};
+pub use interface::{
+    lift_class_witnesses, present_finite_interface, FiniteInterfaceAdapter, FiniteInterfaceWitness,
+    InterfaceCompileError,
+};
 pub use matrix::{Matrix, MatrixError};
 #[doc(hidden)]
 pub use orbit::ternary_orbit_syndrome_meet_in_middle_unreserved;
