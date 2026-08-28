@@ -513,6 +513,122 @@ pub struct RankBoundedContextCache<'a, F: FiniteField> {
     _field: PhantomData<F>,
 }
 
+const EXACT_ENVELOPE_PARENT: u32 = u32::MAX;
+
+#[derive(Debug)]
+struct RankEnvelopeStratum {
+    bases: Box<[u8]>,
+    exact_costs: Box<[u32]>,
+    envelope_costs: Box<[u32]>,
+    envelope_parents: Box<[u32]>,
+    restriction_offsets: Box<[u32]>,
+    restriction_targets: Box<[u32]>,
+    lookup_keys: Box<[u64]>,
+    lookup_states: Box<[u32]>,
+}
+
+/// Exact full-span costs aggregated upward through the subspace lattice.
+///
+/// Each rank is contiguous. Adjacent-rank restriction edges and envelope
+/// parents use compact local state IDs; query-time lookup performs no lattice
+/// traversal and allocates only while canonicalizing an untrusted matrix.
+#[derive(Debug)]
+pub struct RankStratifiedEnvelope {
+    field_order: u8,
+    ambient_dimension: usize,
+    target_block: usize,
+    strata: Box<[RankEnvelopeStratum]>,
+    compilation_work: ContextWork,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct RankEnvelopeStorage {
+    pub states: u64,
+    pub restriction_edges: u64,
+    pub payload_bytes: u64,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct RankEnvelopeAnswer {
+    pub cost: u32,
+    pub context_rank: u16,
+    pub exact_rank: u16,
+    pub exact_state: u32,
+}
+
+impl RankStratifiedEnvelope {
+    pub fn compilation_work(&self) -> ContextWork {
+        self.compilation_work
+    }
+
+    pub fn storage(&self) -> RankEnvelopeStorage {
+        let mut states = 0_u64;
+        let mut restriction_edges = 0_u64;
+        let mut payload_bytes = 0_u64;
+        for stratum in &self.strata {
+            states += stratum.exact_costs.len() as u64;
+            restriction_edges += stratum.restriction_targets.len() as u64;
+            payload_bytes += (stratum.bases.len()
+                + std::mem::size_of_val(&*stratum.exact_costs)
+                + std::mem::size_of_val(&*stratum.envelope_costs)
+                + std::mem::size_of_val(&*stratum.envelope_parents)
+                + std::mem::size_of_val(&*stratum.restriction_offsets)
+                + std::mem::size_of_val(&*stratum.restriction_targets)
+                + std::mem::size_of_val(&*stratum.lookup_keys)
+                + std::mem::size_of_val(&*stratum.lookup_states))
+                as u64;
+        }
+        RankEnvelopeStorage {
+            states,
+            restriction_edges,
+            payload_bytes,
+        }
+    }
+
+    pub fn context_cost<F: FiniteField>(
+        &self,
+        functional_dual_basis: &Matrix,
+    ) -> Result<RankEnvelopeAnswer, ContextualError> {
+        if self.field_order != F::ORDER {
+            return Err(ContextualError::Shape);
+        }
+        let basis = validate_context::<F>(
+            functional_dual_basis,
+            self.ambient_dimension,
+            self.target_block,
+        )?;
+        let rank = basis.rows();
+        let stratum = self.strata.get(rank).ok_or(ContextualError::Shape)?;
+        let key = encode_subspace::<F>(basis.as_slice())?;
+        let state = lookup_envelope_state(stratum, key).ok_or(ContextualError::Shape)?;
+        let mut exact_rank = rank;
+        let mut exact_state = state;
+        while exact_rank != 0 {
+            let parent = self.strata[exact_rank].envelope_parents[exact_state as usize];
+            if parent == EXACT_ENVELOPE_PARENT {
+                break;
+            }
+            exact_rank -= 1;
+            exact_state = parent;
+        }
+        Ok(RankEnvelopeAnswer {
+            cost: stratum.envelope_costs[state as usize],
+            context_rank: rank.try_into().map_err(|_| ContextualError::Overflow)?,
+            exact_rank: exact_rank
+                .try_into()
+                .map_err(|_| ContextualError::Overflow)?,
+            exact_state,
+        })
+    }
+
+    pub fn exact_basis(&self, rank: usize, state: u32) -> Option<&[u8]> {
+        let stratum = self.strata.get(rank)?;
+        let width = rank.checked_mul(self.ambient_dimension)?;
+        let start = (state as usize).checked_mul(width)?;
+        stratum.bases.get(start..start.checked_add(width)?)
+    }
+}
+
 impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
     pub fn new(
         inner: &'a CostTable,
@@ -823,6 +939,326 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
             }
         };
         Ok(PlannedContextCost { result, plan })
+    }
+
+    /// Compile all exact full-span responses once, then propagate their minima
+    /// through precomputed adjacent-rank restriction edges.
+    ///
+    /// This is intended for many contexts in a small ambient space. The state
+    /// budget is checked before any stratum is materialized.
+    pub fn compile_full_span_envelope(
+        &mut self,
+        maximum_context_rank: usize,
+        state_budget: usize,
+    ) -> Result<RankStratifiedEnvelope, ContextualError> {
+        if maximum_context_rank > self.block_count || state_budget == 0 {
+            return Err(ContextualError::Shape);
+        }
+        self.ensure_compiled_kernels()?;
+        let mut coefficients = vec![0u8; self.target_rank * self.target_rank];
+        let mut rank_scratch = vec![0u8; self.target_rank * self.target_rank];
+        let mut block_data = vec![0u8; self.block_count * self.target_rank];
+        let mut work = ContextWork::default();
+        let mut envelope = compile_rank_stratified_envelope::<F, _>(
+            self.block_count,
+            self.target_block,
+            maximum_context_rank,
+            state_budget,
+            self.zero_cost,
+            |rank, subspace| {
+                work.distinct_subspaces = work
+                    .distinct_subspaces
+                    .checked_add(1)
+                    .ok_or(ContextualError::Overflow)?;
+                if rank > self.target_rank {
+                    return Ok(u32::MAX);
+                }
+                atomic_subspace_cost::<F>(
+                    subspace,
+                    rank,
+                    self.block_count,
+                    self.target_rank,
+                    self.inner,
+                    self.target,
+                    self.target_block,
+                    self.zero_cost,
+                    &mut coefficients[..rank * self.target_rank],
+                    &mut rank_scratch[..rank * self.target_rank],
+                    &self.full_rank_maps[rank],
+                    &self.inner_dense_costs,
+                    &self.target_dense_costs,
+                    self.target_uses_inner_dense_costs,
+                    &mut block_data,
+                    &mut work,
+                )
+            },
+        )?;
+        envelope.compilation_work = work;
+        Ok(envelope)
+    }
+}
+
+#[allow(clippy::too_many_arguments)]
+fn compile_rank_stratified_envelope<F: FiniteField, C>(
+    ambient_dimension: usize,
+    target_block: usize,
+    maximum_rank: usize,
+    state_budget: usize,
+    zero_cost: u32,
+    mut exact_cost: C,
+) -> Result<RankStratifiedEnvelope, ContextualError>
+where
+    C: FnMut(usize, &[u8]) -> Result<u32, ContextualError>,
+{
+    let mut state_count = 1_u64;
+    for rank in 1..=maximum_rank {
+        state_count = state_count
+            .checked_add(valid_context_subspace_count(
+                F::ORDER,
+                ambient_dimension,
+                rank,
+            )?)
+            .ok_or(ContextualError::Overflow)?;
+    }
+    if state_count > state_budget as u64 || state_count > u64::from(u32::MAX) {
+        return Err(ContextualError::Overflow);
+    }
+    let mut strata = Vec::with_capacity(maximum_rank + 1);
+    strata.push(RankEnvelopeStratum {
+        bases: Box::default(),
+        exact_costs: Box::from([zero_cost]),
+        envelope_costs: Box::from([zero_cost]),
+        envelope_parents: Box::from([EXACT_ENVELOPE_PARENT]),
+        restriction_offsets: Box::from([0, 0]),
+        restriction_targets: Box::default(),
+        lookup_keys: Box::from([0]),
+        lookup_states: Box::from([0]),
+    });
+
+    let mut pivots = Vec::with_capacity(maximum_rank);
+    let mut basis_scratch = vec![0u8; maximum_rank * ambient_dimension];
+    let mut free = Vec::with_capacity(maximum_rank * ambient_dimension);
+    let mut digits = vec![0u8; maximum_rank * ambient_dimension];
+    for rank in 1..=maximum_rank {
+        let count = to_usize(valid_context_subspace_count(
+            F::ORDER,
+            ambient_dimension,
+            rank,
+        )?)?;
+        let width = rank
+            .checked_mul(ambient_dimension)
+            .ok_or(ContextualError::Overflow)?;
+        let mut bases =
+            Vec::with_capacity(count.checked_mul(width).ok_or(ContextualError::Overflow)?);
+        let mut exact_costs = Vec::with_capacity(count);
+        enumerate_rref_subspaces::<F, _>(
+            ambient_dimension,
+            rank,
+            &mut pivots,
+            &mut basis_scratch,
+            &mut free,
+            &mut digits,
+            |basis| {
+                if rref_contains_coordinate_line(basis, rank, ambient_dimension, target_block) {
+                    return Ok(());
+                }
+                bases.extend_from_slice(basis);
+                exact_costs.push(exact_cost(rank, basis)?);
+                Ok(())
+            },
+        )?;
+        debug_assert_eq!(exact_costs.len(), count);
+
+        let mut lookup = Vec::with_capacity(count);
+        for (state, basis) in bases.chunks_exact(width).enumerate() {
+            lookup.push((
+                encode_subspace::<F>(basis)?,
+                u32::try_from(state).map_err(|_| ContextualError::Overflow)?,
+            ));
+        }
+        lookup.sort_unstable_by_key(|&(key, _)| key);
+        let mut lookup_keys = Vec::with_capacity(count);
+        let mut lookup_states = Vec::with_capacity(count);
+        for (key, state) in lookup {
+            lookup_keys.push(key);
+            lookup_states.push(state);
+        }
+
+        let restrictions_per_state = projective_line_count(F::ORDER, rank)?;
+        let edge_capacity = u64::try_from(count)
+            .map_err(|_| ContextualError::Overflow)?
+            .checked_mul(restrictions_per_state)
+            .ok_or(ContextualError::Overflow)?;
+        if edge_capacity > u64::from(u32::MAX) {
+            return Err(ContextualError::Overflow);
+        }
+        let mut restriction_offsets = Vec::with_capacity(count + 1);
+        let mut restriction_targets = Vec::with_capacity(to_usize(edge_capacity)?);
+        let mut envelope_costs = exact_costs.clone();
+        let mut envelope_parents = vec![EXACT_ENVELOPE_PARENT; count];
+        if rank == 1 {
+            for state in 0..count {
+                restriction_offsets.push(restriction_targets.len() as u32);
+                restriction_targets.push(0);
+                if strata[0].envelope_costs[0] < envelope_costs[state] {
+                    envelope_costs[state] = strata[0].envelope_costs[0];
+                    envelope_parents[state] = 0;
+                }
+            }
+        } else {
+            let child_rank = rank - 1;
+            let child_width = child_rank * ambient_dimension;
+            let mut coefficient_pivots = Vec::with_capacity(child_rank);
+            let mut coefficient_basis = vec![0u8; child_rank * rank];
+            let mut coefficient_free = Vec::with_capacity(child_rank * rank);
+            let mut coefficient_digits = vec![0u8; child_rank * rank];
+            let mut child_basis = vec![0u8; child_width];
+            let previous = &strata[child_rank];
+            for (state, basis) in bases.chunks_exact(width).enumerate() {
+                restriction_offsets.push(restriction_targets.len() as u32);
+                enumerate_rref_subspaces::<F, _>(
+                    rank,
+                    child_rank,
+                    &mut coefficient_pivots,
+                    &mut coefficient_basis,
+                    &mut coefficient_free,
+                    &mut coefficient_digits,
+                    |coefficients| {
+                        multiply_rref_bases_into::<F>(
+                            coefficients,
+                            child_rank,
+                            basis,
+                            rank,
+                            ambient_dimension,
+                            &mut child_basis,
+                        );
+                        let key = encode_subspace::<F>(&child_basis)?;
+                        let child =
+                            lookup_envelope_state(previous, key).ok_or(ContextualError::Shape)?;
+                        restriction_targets.push(child);
+                        let child_cost = previous.envelope_costs[child as usize];
+                        if child_cost < envelope_costs[state] {
+                            envelope_costs[state] = child_cost;
+                            envelope_parents[state] = child;
+                        }
+                        Ok(())
+                    },
+                )?;
+            }
+        }
+        restriction_offsets.push(restriction_targets.len() as u32);
+        debug_assert_eq!(restriction_targets.len(), to_usize(edge_capacity)?);
+        strata.push(RankEnvelopeStratum {
+            bases: bases.into_boxed_slice(),
+            exact_costs: exact_costs.into_boxed_slice(),
+            envelope_costs: envelope_costs.into_boxed_slice(),
+            envelope_parents: envelope_parents.into_boxed_slice(),
+            restriction_offsets: restriction_offsets.into_boxed_slice(),
+            restriction_targets: restriction_targets.into_boxed_slice(),
+            lookup_keys: lookup_keys.into_boxed_slice(),
+            lookup_states: lookup_states.into_boxed_slice(),
+        });
+    }
+    Ok(RankStratifiedEnvelope {
+        field_order: F::ORDER,
+        ambient_dimension,
+        target_block,
+        strata: strata.into_boxed_slice(),
+        compilation_work: ContextWork::default(),
+    })
+}
+
+fn gaussian_subspace_count(
+    order: u8,
+    dimension: usize,
+    rank: usize,
+) -> Result<u64, ContextualError> {
+    if rank > dimension {
+        return Ok(0);
+    }
+    let mut numerator = 1u128;
+    let mut denominator = 1u128;
+    for index in 0..rank {
+        numerator = numerator
+            .checked_mul(u128::from(
+                checked_pow(u64::from(order), dimension - index)? - 1,
+            ))
+            .ok_or(ContextualError::Overflow)?;
+        denominator = denominator
+            .checked_mul(u128::from(checked_pow(u64::from(order), rank - index)? - 1))
+            .ok_or(ContextualError::Overflow)?;
+    }
+    u64::try_from(numerator / denominator).map_err(|_| ContextualError::Overflow)
+}
+
+fn valid_context_subspace_count(
+    order: u8,
+    dimension: usize,
+    rank: usize,
+) -> Result<u64, ContextualError> {
+    gaussian_subspace_count(order, dimension, rank)?
+        .checked_sub(gaussian_subspace_count(order, dimension - 1, rank - 1)?)
+        .ok_or(ContextualError::Overflow)
+}
+
+fn rref_contains_coordinate_line(
+    basis: &[u8],
+    rank: usize,
+    ambient_dimension: usize,
+    coordinate: usize,
+) -> bool {
+    (0..rank).any(|row| {
+        let row = &basis[row * ambient_dimension..(row + 1) * ambient_dimension];
+        row[coordinate] == 1
+            && row
+                .iter()
+                .enumerate()
+                .all(|(column, &entry)| column == coordinate || entry == 0)
+    })
+}
+
+fn encode_subspace<F: FiniteField>(basis: &[u8]) -> Result<u64, ContextualError> {
+    let mut key = 0_u64;
+    for &entry in basis {
+        key = key
+            .checked_mul(u64::from(F::ORDER))
+            .and_then(|value| value.checked_add(u64::from(entry)))
+            .ok_or(ContextualError::Overflow)?;
+    }
+    Ok(key)
+}
+
+fn lookup_envelope_state(stratum: &RankEnvelopeStratum, key: u64) -> Option<u32> {
+    stratum
+        .lookup_keys
+        .binary_search(&key)
+        .ok()
+        .map(|index| stratum.lookup_states[index])
+}
+
+fn multiply_rref_bases_into<F: FiniteField>(
+    coefficients: &[u8],
+    output_rows: usize,
+    basis: &[u8],
+    basis_rows: usize,
+    ambient_dimension: usize,
+    output: &mut [u8],
+) {
+    output.fill(0);
+    for row in 0..output_rows {
+        for middle in 0..basis_rows {
+            let scalar = coefficients[row * basis_rows + middle];
+            if scalar == 0 {
+                continue;
+            }
+            for col in 0..ambient_dimension {
+                let output_index = row * ambient_dimension + col;
+                output[output_index] = F::add(
+                    output[output_index],
+                    F::mul(scalar, basis[middle * ambient_dimension + col]),
+                );
+            }
+        }
     }
 }
 
@@ -1523,6 +1959,44 @@ mod tests {
         assert_eq!(default.cost, direct.cost);
         assert_eq!(planned.cached_context_count(), 0);
         assert_eq!(planned.compiled_kernel_payload_bytes(), 0);
+    }
+
+    #[test]
+    fn rank_stratified_envelope_matches_direct_contexts_and_replays_parent() {
+        let inner = rank_two_table::<crate::field::Prime<2>>();
+        let target = inner.clone();
+        let mut cache =
+            RankBoundedContextCache::<crate::field::Prime<2>>::new(&inner, &target, 4, 0, 2)
+                .unwrap();
+        let envelope = cache.compile_full_span_envelope(3, 51).unwrap();
+        let storage = envelope.storage();
+        assert_eq!(storage.states, 51);
+        assert_eq!(storage.restriction_edges, 154);
+        assert_eq!(envelope.compilation_work().distinct_subspaces, 50);
+
+        let mut contexts = vec![Matrix::new::<2>(2, 4, vec![1, 1, 0, 0, 0, 1, 1, 0]).unwrap()];
+        for tail in 0..8usize {
+            let mut data = vec![0u8; 12];
+            for row in 0..3 {
+                data[row * 4] = ((tail >> row) & 1) as u8;
+                data[row * 4 + row + 1] = 1;
+            }
+            contexts.push(Matrix::new::<2>(3, 4, data).unwrap());
+        }
+        for context in contexts {
+            let direct = confinement_by_generators_field::<crate::field::Prime<2>>(
+                &context, 4, &inner, &target, 0, 2,
+            )
+            .unwrap();
+            let answer = envelope
+                .context_cost::<crate::field::Prime<2>>(&context)
+                .unwrap();
+            assert_eq!(answer.cost, direct.cost);
+            assert!(answer.exact_rank <= 2);
+            assert!(envelope
+                .exact_basis(answer.exact_rank as usize, answer.exact_state)
+                .is_some());
+        }
     }
 
     fn rank_two_table<F: FiniteField>() -> CostTable {

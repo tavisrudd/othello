@@ -51,7 +51,8 @@ pub use confinement::{
 };
 pub use contextual::{
     ContextCost, ContextExecution, ContextPlan, ContextStrategy, ContextWork, ContextualError,
-    PlannedContextCost, RankBoundedContextCache, RankOneProbeCache,
+    PlannedContextCost, RankBoundedContextCache, RankEnvelopeAnswer, RankEnvelopeStorage,
+    RankOneProbeCache, RankStratifiedEnvelope,
 };
 pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
@@ -60,8 +61,9 @@ pub use family_response::{
 pub use field::{FieldError, FiniteField, Gf4, Prime};
 pub use group_action::{
     compile_permutation_orbits, compile_permutation_orbits_with_deferred_verification,
-    quotient_presentation_by_orbits, verify_permutation_orbits, FinitePermutationAction,
-    OrbitCompileError, OrbitPartition, OrbitQuotientError, OrbitStorage,
+    quotient_presentation_by_orbits, verify_permutation_orbits, BinaryGlProbeAction,
+    BinaryGlProbeError, FinitePermutationAction, OrbitCompileError, OrbitPartition,
+    OrbitQuotientError, OrbitStorage,
 };
 pub use interface::{
     lift_class_witnesses, present_finite_interface, present_witnessed_pareto_interface,

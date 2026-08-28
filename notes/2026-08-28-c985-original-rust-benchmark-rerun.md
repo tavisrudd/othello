@@ -61,6 +61,20 @@ hash is not reachable in Git, so its exact historical binary cannot be rebuilt.
 The auditable baseline here is the revision that landed that evidence,
 `82751420d`; the evidence records both revision and saved-binary hashes.
 
+### Focused regression diagnosis
+
+Neither the Ceph ZDD implementation nor the vector-node application kernel
+changed between the saved baseline and HEAD.  Twenty-repeat pinned `perf stat`
+runs confirm a layout-level effect rather than extra algorithmic work.  Ceph
+retires essentially the same 572.0 million instructions over 500 solves, while
+HEAD uses about 0.94% more cycles and records about 3.5% more branch misses.
+Vector HEAD uses about 0.15% more instructions/cycles over 5,000 solves and has
+more branch misses.  The many newly linked compiler modules changed release
+code generation/placement even though these hot paths are source-identical.
+The effects are too small to justify application-specific surgery; future
+release comparisons should use fixed codegen units or profile-guided layout if
+sub-percent stability matters.
+
 Reproduce and check with:
 
 ```text

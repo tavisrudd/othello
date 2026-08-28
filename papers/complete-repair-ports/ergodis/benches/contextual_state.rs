@@ -45,6 +45,19 @@ fn binary_rank_table(rank: usize) -> CostTable {
     .unwrap()
 }
 
+fn binary_hyperplanes_avoiding_first_coordinate(dimension: usize) -> Vec<Matrix> {
+    let mut contexts = Vec::with_capacity(1 << (dimension - 1));
+    for tail in 0..1usize << (dimension - 1) {
+        let mut data = vec![0u8; (dimension - 1) * dimension];
+        for row in 0..dimension - 1 {
+            data[row * dimension] = ((tail >> row) & 1) as u8;
+            data[row * dimension + row + 1] = 1;
+        }
+        contexts.push(Matrix::new::<2>(dimension - 1, dimension, data).unwrap());
+    }
+    contexts
+}
+
 fn benchmark_contextual_state(c: &mut Criterion) {
     let binary_basis = chain_basis::<Prime<2>>(8);
     let inner = scalar_table::<Prime<2>>(0);
@@ -387,6 +400,84 @@ fn benchmark_contextual_state(c: &mut Criterion) {
         })
     });
     rank_auto.finish();
+
+    let contexts = binary_hyperplanes_avoiding_first_coordinate(5);
+    let mut envelope_cache =
+        RankBoundedContextCache::<Prime<2>>::new(&rank_two_table, &rank_two_table, 5, 0, 2)
+            .unwrap();
+    let envelope = envelope_cache.compile_full_span_envelope(4, 307).unwrap();
+    for context in &contexts {
+        assert_eq!(
+            envelope.context_cost::<Prime<2>>(context).unwrap().cost,
+            rank_cache.context_cost_cached(context).unwrap().cost
+        );
+    }
+    let envelope_storage = envelope.storage();
+    eprintln!(
+        "CONTEXT_WORK rank_envelope states={} edges={} bytes={} candidates={} contexts={}",
+        envelope_storage.states,
+        envelope_storage.restriction_edges,
+        envelope_storage.payload_bytes,
+        envelope.compilation_work().generator_candidates,
+        contexts.len()
+    );
+    let mut envelope_query = c.benchmark_group("rank_stratified_envelope_query");
+    envelope_query.bench_function("A_cached_subspace_scan", |b| {
+        b.iter(|| {
+            let mut checksum = 0u32;
+            for context in &contexts {
+                checksum += rank_cache
+                    .context_cost_cached(black_box(context))
+                    .unwrap()
+                    .cost;
+            }
+            black_box(checksum)
+        })
+    });
+    envelope_query.bench_function("B_precomputed_restriction_envelope", |b| {
+        b.iter(|| {
+            let mut checksum = 0u32;
+            for context in &contexts {
+                checksum += envelope
+                    .context_cost::<Prime<2>>(black_box(context))
+                    .unwrap()
+                    .cost;
+            }
+            black_box(checksum)
+        })
+    });
+    envelope_query.finish();
+
+    let mut envelope_compile = c.benchmark_group("rank_stratified_envelope_compile_batch");
+    envelope_compile.bench_function("A_lazy_cache_all_contexts", |b| {
+        b.iter(|| {
+            let mut cache =
+                RankBoundedContextCache::<Prime<2>>::new(&rank_two_table, &rank_two_table, 5, 0, 2)
+                    .unwrap();
+            let mut checksum = 0u32;
+            for context in &contexts {
+                checksum += cache.context_cost_cached(black_box(context)).unwrap().cost;
+            }
+            black_box(checksum)
+        })
+    });
+    envelope_compile.bench_function("B_compile_envelope_then_query", |b| {
+        b.iter(|| {
+            let mut cache =
+                RankBoundedContextCache::<Prime<2>>::new(&rank_two_table, &rank_two_table, 5, 0, 2)
+                    .unwrap();
+            let envelope = cache.compile_full_span_envelope(4, 307).unwrap();
+            let mut checksum = 0u32;
+            for context in &contexts {
+                checksum += envelope
+                    .context_cost::<Prime<2>>(black_box(context))
+                    .unwrap()
+                    .cost;
+            }
+            black_box(checksum)
+        })
+    });
+    envelope_compile.finish();
 }
 
 criterion_group!(benches, benchmark_contextual_state);

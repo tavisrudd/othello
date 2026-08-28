@@ -152,6 +152,26 @@ maps inside every higher-rank context.  A good implementation should combine:
 This is the best theorem-driven route to scaling higher-rank recovery beyond
 the current direct atomic-subspace kernel.
 
+That route is now instantiated by `RankStratifiedEnvelope`.  It compiles exact
+full-span responses only through the target rank, omits every subspace that
+contains the forbidden target coordinate line, and propagates minima upward
+through precomputed adjacent-rank restriction edges.  Rank strata, bases,
+costs, lookup keys, edge offsets, edge targets, and replay parents are all
+contiguous; capacities come from Gaussian-binomial and projective-line counts.
+The compiler is iterative and its enumeration/edge hot loops do not grow a
+container.  A query canonicalizes once, performs one compact-key lookup, and
+follows parent IDs only when the exact-rank source is requested.
+
+On the binary ambient-5, target-rank-2 fixture, target projection reduces the
+global lattice from 373 states/2,046 edges to 307 states/1,530 edges and full-
+span evaluation from 1,023 to 930 candidates.  The retained payload is 18,406
+bytes.  Across all sixteen valid rank-four contexts, a warm cached subspace
+scan takes 24.655 us while envelope lookup takes 3.414 us, a 7.22x query
+speedup.  Compilation plus the first batch takes 72.089 us versus 50.562 us
+for lazy caching; the global envelope crosses over during the third batch,
+after roughly 48 context queries.  Exact costs agree with direct confinement,
+and replay reaches a rank-at-most-two exact source in every checked context.
+
 ### 4. Basis-free GL-orbit quotient
 
 C980 proves that bounded probes are constant on `GL_s(L)` orbits and gives an
@@ -181,7 +201,21 @@ compilation.  It accepts a reduction only after checking sort preservation,
 observation invariance, and context equivariance on every concrete state, then
 emits one state and transition per orbit while preserving the context alphabet.
 This is the exact infrastructure needed for the C980 `GL_s(L)` probe quotient;
-the recovery-specific action and measured crossover remain to be instantiated.
+the first recovery-adjacent action is now instantiated by
+`BinaryGlProbeAction`.  It packs every binary `s x t` probe into `u32` and uses
+adjacent swaps plus both adjacent row transvections, a generator set for
+`GL_s(F_2)`.  Generator application is allocation-free packed XOR/permutation;
+the independently computed Gaussian-binomial census must equal the generic
+orbit compiler's result.
+
+For `s=2,t=8`, 65,536 raw probes become 11,051 row-space orbits (5.930x) in
+576.87 us with deferred replay or 1.0918 ms with immediate verification.  For
+`s=3,t=6`, 262,144 probes become 2,110 orbits (124.239x) in 4.1783 ms deferred
+or 8.0644 ms verified.  The latter retains 1,057,016 quotient bytes and
+3,145,728 certificate bytes.  This establishes the generic GL adapter and its
+measured certification cost.  Known linear actions should still enumerate
+canonical RREF representatives directly, as the rank-envelope compiler does;
+the generic orbit path is for supplied actions and independent certificates.
 
 ### 5. Scalar-demand image collapse and representable lift objects
 

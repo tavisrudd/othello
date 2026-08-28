@@ -12,6 +12,119 @@ pub trait FinitePermutationAction {
     fn apply(&self, generator: u32, point: u32) -> Result<u32, Self::Error>;
 }
 
+#[derive(Clone, Copy, Debug, Error, PartialEq, Eq)]
+pub enum BinaryGlProbeError {
+    #[error("binary GL probe dimensions must be positive and use fewer than 32 bits")]
+    Shape,
+    #[error("binary GL probe point or generator is out of range")]
+    Index,
+    #[error("binary GL probe orbit census overflows u64")]
+    Overflow,
+}
+
+/// Left row action of `GL_rows(F_2)` on all `rows x columns` binary probes.
+///
+/// Points are packed row-major in `u32`. Adjacent swaps and both adjacent row
+/// transvections generate the full general linear group; applying a generator
+/// is branch-bounded arithmetic with no allocation.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct BinaryGlProbeAction {
+    rows: u8,
+    columns: u8,
+    point_count: u32,
+}
+
+impl BinaryGlProbeAction {
+    pub fn new(rows: usize, columns: usize) -> Result<Self, BinaryGlProbeError> {
+        let bits = rows.checked_mul(columns).ok_or(BinaryGlProbeError::Shape)?;
+        if rows == 0 || columns == 0 || bits >= 32 || rows > u8::MAX as usize {
+            return Err(BinaryGlProbeError::Shape);
+        }
+        Ok(Self {
+            rows: rows as u8,
+            columns: columns as u8,
+            point_count: 1_u32 << bits,
+        })
+    }
+
+    pub fn rows(&self) -> usize {
+        self.rows as usize
+    }
+
+    pub fn columns(&self) -> usize {
+        self.columns as usize
+    }
+
+    /// Burnside/row-space census: one orbit per subspace of rank at most rows.
+    pub fn expected_orbit_count(&self) -> Result<u64, BinaryGlProbeError> {
+        let maximum_rank = self.rows().min(self.columns());
+        let mut total = 0_u64;
+        for rank in 0..=maximum_rank {
+            let mut numerator = 1_u128;
+            let mut denominator = 1_u128;
+            for index in 0..rank {
+                numerator = numerator
+                    .checked_mul(
+                        (1_u128 << (self.columns() - index))
+                            .checked_sub(1)
+                            .ok_or(BinaryGlProbeError::Overflow)?,
+                    )
+                    .ok_or(BinaryGlProbeError::Overflow)?;
+                denominator = denominator
+                    .checked_mul(
+                        (1_u128 << (rank - index))
+                            .checked_sub(1)
+                            .ok_or(BinaryGlProbeError::Overflow)?,
+                    )
+                    .ok_or(BinaryGlProbeError::Overflow)?;
+            }
+            total = total
+                .checked_add(
+                    u64::try_from(numerator / denominator)
+                        .map_err(|_| BinaryGlProbeError::Overflow)?,
+                )
+                .ok_or(BinaryGlProbeError::Overflow)?;
+        }
+        Ok(total)
+    }
+}
+
+impl FinitePermutationAction for BinaryGlProbeAction {
+    type Error = BinaryGlProbeError;
+
+    fn point_count(&self) -> u32 {
+        self.point_count
+    }
+
+    fn generator_count(&self) -> u32 {
+        3 * u32::from(self.rows.saturating_sub(1))
+    }
+
+    #[inline(always)]
+    fn apply(&self, generator: u32, point: u32) -> Result<u32, Self::Error> {
+        if point >= self.point_count || generator >= self.generator_count() {
+            return Err(BinaryGlProbeError::Index);
+        }
+        let adjacent = u32::from(self.rows - 1);
+        let edge = (generator % adjacent) as usize;
+        let columns = self.columns();
+        let mask = (1_u32 << columns) - 1;
+        let left_shift = edge * columns;
+        let right_shift = (edge + 1) * columns;
+        let left = point >> left_shift & mask;
+        let right = point >> right_shift & mask;
+        let result = if generator < adjacent {
+            let cleared = point & !(mask << left_shift) & !(mask << right_shift);
+            cleared | (right << left_shift) | (left << right_shift)
+        } else if generator < 2 * adjacent {
+            point ^ (right << left_shift)
+        } else {
+            point ^ (left << right_shift)
+        };
+        Ok(result)
+    }
+}
+
 #[derive(Debug, Error, PartialEq, Eq)]
 pub enum OrbitCompileError<E> {
     #[error("permutation-action adapter failed: {0}")]
@@ -403,6 +516,17 @@ fn validate_generators<A: FinitePermutationAction>(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn binary_gl_probe_orbits_are_exact_row_spaces() {
+        let action = BinaryGlProbeAction::new(2, 3).unwrap();
+        let partition = compile_permutation_orbits(&action).unwrap();
+        assert_eq!(action.point_count(), 64);
+        assert_eq!(action.generator_count(), 3);
+        assert_eq!(action.expected_orbit_count().unwrap(), 15);
+        assert_eq!(partition.representatives().len(), 15);
+        verify_permutation_orbits(&action, &partition).unwrap();
+    }
     use crate::observational::{compile_observational, GeneratorSpec};
     use std::convert::Infallible;
 

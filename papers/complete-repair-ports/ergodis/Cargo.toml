@@ -69,6 +69,10 @@ harness = false
 name = "ordered_resource"
 harness = false
 
+[[bench]]
+name = "gl_probe"
+harness = false
+
 
 [profile.release]
 opt-level = 3
