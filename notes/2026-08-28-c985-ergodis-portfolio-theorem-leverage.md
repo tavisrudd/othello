@@ -249,8 +249,8 @@ carrier instead of retaining a second four-byte-per-state copy.
 
 C980 isolates four sufficient hypotheses: finite linear labels, target
 surjectivity, independent fixed-label lifts with finite ordered composition,
-and positive budget consumption by every active block.  These should become an
-adapter contract with theorem obligations rather than recovery-specific code.
+and positive budget consumption by every active block.  These define the
+adapter's theorem obligations rather than recovery-specific implementation.
 Likely first external domains are hierarchical resource allocation, exact
 factor-graph component compilation, and finite-interface network design.
 
