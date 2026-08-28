@@ -939,6 +939,21 @@ of every relative coset, and the larger minimal dependencies remain
 unclassified.  The full proof and novelty boundary are recorded in
 `c973-2026-08-27-carrier-nucleus-compression.md`.
 
+Shortening also identifies every carrier class with a unique polynomial tail
+`a_18t^18+...+a_24t^24` modulo the degree-at-most-15 RS code.  Hence (61) is
+equivalently an 18-agreement theorem for these seven-term tails.  This model
+extends uniformly to every prime-power carrier and is proved in the same
+companion note.
+
+A second exact dense-stratum family is recorded in
+`c973-2026-08-27-gf27-parallel-line-trace-gate.md`.  Three arbitrary parallel
+affine `F_3`-lines reduce (3) to two equations in the first two elementary
+symmetric functions of their offsets.  For `z_2z_3!=0`, those functions are
+rational in a norm-minus-one direction `p`; at least ten of the 13 directions
+are nonexceptional, and splitness is exactly two ternary trace conditions.
+This family generically misses `z_2=0`, so it is an alternative dense attack,
+not a replacement for the universal switch.
+
 ## 9. Boundary and next gate
 
 The load-bearing next step is either the universal split-switch assertion
@@ -972,4 +987,7 @@ certificate supports this reduction.
 | What replaces the cover tower on the complementary boundary ratio? | switching two points of an affine plane solves both Hankel equations uniquely | prove the quadratic (45) splits away from the seven retained plane points |
 | Does the two-point switch extend off the Borel boundary? | yes; the quotient recurrence gives the general matrix (52), and (53)--(54) prove a nonsingular pair exists in every fixed plane direction | prove only split and collision for one such pair |
 | Is the seven-coordinate carrier an intrinsic finite-geometric object? | yes; Lucas and the osculating-nucleus criterion identify it with the eighth nucleus of the degree-ten normal rational curve | prove the equivalent nine-affine-secant incidence statement in Section 8 |
+| What is the shortened polynomial model? | carrier classes are exactly the consecutive tails `t^18,...,t^24` modulo degree at most 15 | prove that every tail has an 18-point agreement set |
+| Do minimum subline circuits alone prove radius nine? | no; they classify only the weight-four layer, and bounded affine circuit decomposition is still open | require a three-circuit support theorem, not mere generation |
+| Is the affine plane the whole parallel-line family? | no; it is the zero-sum offset slice of 84 triples per direction | use the two-trace-bit gate on `z2z3!=0` |
 | Do ordinary binary Waring rank or plain NRC completeness land the last lemma? | no; ordinary tenth powers retain only coordinates `0,1,9,10` in characteristic three, while completeness does not impose incidence with the prescribed nucleus point | do not cite either as a split-switch proof |

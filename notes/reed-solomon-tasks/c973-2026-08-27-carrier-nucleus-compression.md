@@ -332,6 +332,112 @@ The minimum words of `D_out` are precisely the 702 `F_3`-subline circuits
 which avoid infinity.  Formula (23), rather than a collection of locator
 charts, is the cleanest coding-theoretic statement of the unresolved lemma.
 
+There is also a canonical polynomial model for this shortening.  Represent
+every function on `F_27` uniquely by a polynomial of degree at most 26.  The
+power-sum identity
+
+\[
+ \sum_{t\in F_{27}}t^m=0\quad(0\leq m<26),
+ \qquad \sum_{t\in F_{27}}t^{26}=-1                         \tag{23a}
+\]
+
+shows that
+
+\[
+\begin{aligned}
+D_{\rm full}&=\{(h(t))_t:\deg h\leq15\},\\
+D_{\rm out}&=\{(f(t))_t:[t^{16}]f=[t^{17}]f
+                         =[t^{25}]f=[t^{26}]f=0\}.          \tag{23b}
+\end{aligned}
+\]
+
+Every relative coset therefore has the unique consecutive-tail
+representative
+
+\[
+                         f(t)=\sum_{j=18}^{24}a_jt^j.       \tag{23c}
+\]
+
+The radius bound (23) says that every such seven-term tail agrees with a
+degree-at-most-15 polynomial at 18 field points.  Equivalently, there must be
+a squarefree split degree-18 polynomial `A` and a polynomial `ell` of degree
+at most six such that the coefficients of `A ell` in degrees 18 through 24
+are the prescribed `a_j`, while its degree-16 and degree-17 coefficients
+vanish.  This is the complementary agreement-locator form of the original
+degree-nine error locator.  It exposes the two missing coefficients directly
+and may be preferable for polynomial-approximation or interpolation attacks.
+Gao's prescribed-leading-coefficient framework
+(<https://arxiv.org/abs/2105.12845>) is the relevant general counting
+language for this formulation.  Its readily simplified one- and two-
+coefficient cases do not imply positivity here: (23c) prescribes seven
+leading coefficients and then imposes the two lower vanishings.  The large
+average number of degree-18 root sets per tail is therefore heuristic only,
+not a substitute for uniform nucleus saturation.
+
+### Theorem 5.2 (universal prime-power tail)
+
+The polynomial model extends verbatim.  Let `K=F_q`, let `d=p^s`, and assume
+`q>=d+2`.  Shorten at infinity both the degree-`d+1` NRC code and its
+four-row Frobenius-graph quotient.  Then
+
+\[
+\begin{aligned}
+D_{\rm full}
+ &=\{(h(t))_{t\in K}:\deg h\leq q-d-3\},\\
+D_{\rm out}
+ &=\{(f(t))_{t\in K}:
+ [t^{q-1}]f=[t^{q-2}]f
+ =[t^{q-d-1}]f=[t^{q-d-2}]f=0\},                     \tag{23d}
+\end{aligned}
+\]
+
+and every quotient class has the unique representative
+
+\[
+                \sum_{j=q-d}^{q-3}a_jt^j.              \tag{23e}
+\]
+
+In particular,
+
+\[
+ \dim(D_{\rm out}/D_{\rm full})=d-2=\dim C_d,          \tag{23f}
+\]
+
+and the middle-moment syndrome identifies this quotient with the
+penultimate nucleus `C_d`.  Nucleus saturation `NS(d,K)` is exactly
+
+\[
+ \max_{c\in D_{\rm out}}
+      \min_{w\in D_{\rm full}}\operatorname {wt}(c-w)\leq d.           \tag{23g}
+\]
+
+The proof is the power-sum calculation (23a): the four outer moment rows
+select the four missing coefficients in (23d), while all `d+2` NRC rows
+leave precisely the degree bound for `D_full`.  An affine support of size at
+most `d` is the same as agreement at at least `q-d` evaluation points.
+
+Equivalently, every tail (23e) must differ from a low-degree polynomial by
+`A ell`, where `A` is a squarefree split polynomial of degree `q-d` and
+`deg ell<=d-3`; the top `d-2` coefficients are prescribed and the next two
+coefficients vanish.  Thus the error-locator and complementary agreement-
+locator pictures are a uniform dual pair for every prime-power carrier.
+
+No uniform minimum-distance claim for `D_out` is added here.  Its first
+circuits depend on the fixed field of the `d`-Frobenius as in Theorem 5.1;
+the GF(27) parameters in (22) are the `Fix(sigma)=F_3` specialization.
+
+One apparent shortcut is invalid.  For GF(27), the vector-space quotient
+`D_full^perp/D_out^perp` has representatives in the seven middle monomials
+`t^2,...,t^8`, and a nonzero polynomial of degree at most eight has only nine
+possible root counts.  This does **not** let one apply Delsarte's external-
+distance bound with value nine.  The relative Hamming metric is the minimum
+weight of representatives inside `D_out`; its Fourier characters are cosets
+modulo `D_out^perp`, whose weight spectra change after adding the four outer
+rows.  Applying the ordinary external-distance theorem to `D_full` sees the
+eleven nonzero dual weights of its MDS dual and recovers only the standard
+radius bound 11.  A relative nine-weight theorem would itself require proof
+of the missing quotient association scheme; it cannot be assumed.
+
 The affine-plane locator now also has a circuit explanation.  Write
 `v(t)=(1,t,t^9,t^10)` and `v(infinity)=(0,0,0,1)`.  For an affine
 `F_3`-line `L=a+uF_3`, direct summation gives the quotient relation

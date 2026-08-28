@@ -246,6 +246,18 @@ subline circuits with cancelling infinity coordinate.  Minimum-circuit
 classification does not yet give the required bounded decomposition, so
 nucleus saturation remains open and no certificate-free GF(27) closure is
 claimed.
+The shortened pair has a canonical polynomial model: the full code is the
+degree-at-most-15 evaluation code, the outer code consists of degree-at-most-
+26 functions with coefficients `16,17,25,26` missing, and every relative
+coset is represented uniquely by the consecutive tail `t^18,...,t^24`.
+The radius-nine theorem is therefore an 18-agreement theorem for these
+seven-term tails.  A second dense-stratum attack now uses three arbitrary
+parallel affine `F3`-lines.  Their Hankel equations depend only on the first
+two offset symmetric functions; on `z2z3!=0` those are rational functions of
+one of the 13 norm-minus-one directions, with at least ten nonexceptional
+directions and exactly two residual trace bits.  The exact split criterion,
+and the hostile warning that the family generically misses `z2=0`, are in
+`notes/reed-solomon-tasks/c973-2026-08-27-gf27-parallel-line-trace-gate.md`.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`,
