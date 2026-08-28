@@ -392,6 +392,38 @@ generates witnesses/certificates, or makes an exact solver reusable under a
 stable interface.  A research theorem is extra upside, not the sole reason for
 the software to exist.
 
+### Product surfaces whose value does not depend on theorem priority
+
+The application case should be decomposed into independently testable tools,
+so discovering a classical theorem changes attribution and implementation but
+does not erase the deliverable:
+
+| Product surface | User supplies | Ergodis returns | Success independent of novelty |
+|---|---|---|---|
+| Interface compiler SDK | Finite explicit component algebra and query profile | Small typed evaluator, lift, and exact schema | Two unrelated adapters share the engine and beat their raw interface size |
+| Oracle wrapper | Legacy exact solver plus constructors and counterexample oracle | Learned reusable finite machine | Repeated queries amortize the oracle and replay exactly |
+| Artifact/verifier format | Domain-lift certificate and finite presentation | Portable quotient, split proof, schema hash, metrics | An independent process verifies and evaluates without the compiler |
+| Profile-serving runtime | One compiled domain plus evolving query families | Monotonically refined value/count/resource/witness tiers | Refinement is cheaper than independent recompilation and never answers outside its schema |
+| Boundary protocol compiler | Component and permitted remote continuations | Minimal structural message IDs plus explicit potential/provenance payload | The emitted protocol attains the exact one-way class bound |
+| Exact-to-approximate lab | Certified large state machine | Training data, counterexamples, rollout monitor, exact fallback | It measures a real rate--distortion frontier regardless of which learned model wins |
+| Feasibility diagnostic | Domain grammar and requested observation | Finite artifact or a reproducible failed gate/counterexample family | It prevents false exactness and suggests a bound, parameter, or query restriction |
+
+These surfaces also identify plausible adopters more clearly than a generic
+“cross-domain optimizer”: authors of bespoke dynamic programs, operators of
+repeated exact planning services, formal-verification pipelines, distributed
+systems with narrow boundary APIs, and researchers studying learned recurrent
+compression.  The first release need not claim a new minimization theorem.  It
+must demonstrate that an existing theorem can be absorbed behind a common
+artifact without losing exact witnesses, certificates, or hot-loop control.
+
+The minimum convincing application package is therefore three-axis rather
+than three-new-theorems: one automata/algebra control, one operational
+allocation or network adapter, and one legacy-oracle integration.  Each must
+produce the same inspectable artifact and report compile time, raw and quotient
+state/table bytes, certificate and witness bytes, repeated-query break-even,
+and exact-oracle agreement.  Failure on any axis is useful architecture
+evidence and does not require a novelty claim to publish as a systems result.
+
 The exact state is also query-profile relative.  Adding contexts or output
 projections intersects equivalences and can only split classes, so a retained
 finite presentation supports monotone incremental refinement with the same
