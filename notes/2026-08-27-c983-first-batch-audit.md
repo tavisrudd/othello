@@ -599,8 +599,8 @@ The read depths below are unconditional and describe this preliminary pass.
     realization, or sufficient for every future test.  Mamba is therefore an
     experimental approximation vehicle here; PSR, automata, and realization
     theory remain the mathematical controls.
-23. Luca de Alfaro and Thomas A. Henzinger, *Interface Automata*. **Read
-    depth: partial** — FSE 2001 primary-paper abstract and institutional
+23. Luca de Alfaro and Thomas A. Henzinger, *Interface Automata*.
+    **Read depth: partial** — FSE 2001 primary-paper abstract and institutional
     metadata, DOI `10.1145/503209.503226`; read the abstract and contribution
     summary.  It models temporal input assumptions and output guarantees,
     defines optimistic compatibility, and uses alternating refinement with a
