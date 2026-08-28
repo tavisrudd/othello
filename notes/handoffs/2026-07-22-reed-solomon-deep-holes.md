@@ -185,8 +185,17 @@ The cover/isogeny lemma is characteristic-free: the first GF(27) discriminator
 is now whether its carrier admits a connected separable `S3` cubic pencil with
 genus-one sign cover and no 3-cycle inertia.  Do not copy the binary
 Artin--Schreier coordinates.
+The first ternary reduction is now exact.  Write a degree-nine locator as two
+parallel affine `F3`-lines and one transverse line.  Its two R11 Hankel
+equations become one `2x2` linear solve in the pair product and transverse
+offset.  The remaining conditions are one parameter in a trace plane, one
+quadratic split test, two linearized-cubic image tests, and two explicit
+collision factors.  On the dense `z2z3!=0` stratum the determinant loses at
+most one parameter.  The rational-point closure and the `z2z3=0` Borel
+boundary remain; no finite census is authorized.
 Checkpoints:
-`notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
+`notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
+`notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md`, and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with
 the structural frontier in
 `notes/reed-solomon-tasks/c973-2026-08-27-gf64-pointed-trace-gate.md` and

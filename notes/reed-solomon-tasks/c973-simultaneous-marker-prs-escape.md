@@ -197,6 +197,14 @@ The isogeny core is characteristic-free.  The first GF(27) discriminator is
 therefore a connected separable `S3` cubic carrier with genus-one sign cover
 and no 3-cycle inertia; the binary Artin--Schreier coordinates themselves do
 not transfer.
+The first ternary carrier chart is now explicit in
+`c973-2026-08-27-gf27-three-line-reduction.md`.  Two parallel affine
+`F3`-lines plus one transverse line give a degree-nine split locator, and the
+two Hankel equations reduce to a `2x2` linear solve in two elementary
+parameters.  What remains is a one-parameter tower of two linearized-cubic
+image conditions and one quadratic split condition, with two explicit
+collision factors.  The dense determinant loses at most one parameter;
+rational abundance and the `z2z3=0` Borel boundary are open.
 
 ## Objective
 
