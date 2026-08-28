@@ -232,6 +232,65 @@ The intended Ergodis abstraction is consequently not “all contexts.”  It is 
 typed `SeparatorSystem` whose completeness proof can be finite exhaustive,
 linear-algebraic, orbit/symmetry based, logical, or domain-theoretic.
 
+### Theorem 5: potential-bearing or projective response quotients
+
+Absolute observation is not the only exact notion.  Let a component `x` have
+an integer extended-cost response
+
+```text
+R_x(c) = Opt(c[x]) in Z union {infinity}
+```
+
+over its admissible contexts.  Define projective contextual equivalence by
+
+```text
+x ~=pot y  iff  there exists delta in Z such that
+                R_x(c) = delta + R_y(c) for every c,
+```
+
+with `delta + infinity = infinity`.  This is an equivalence relation (the
+all-infinite class merely has a non-unique offset).  Whenever every context
+constructor is additively homogeneous, replacing `x` by `y` shifts every
+result by the same `delta`; consequently a compiled state may consist of a
+normalized response class plus a scalar potential.
+
+For a complete finite separator `B`, let `m(f)` be the minimum finite entry of
+`f|_B`, with a distinguished convention for the all-infinite response, and
+normalize every finite entry by `f(b)-m(f)`.  Two responses are projectively
+equivalent exactly when they have the same infinite support and the same
+normalized separator vector.  Composition computes an unnormalized result,
+extracts its new minimum, and carries the extracted scalar as a potential.
+Thus the absolute bound `|V|^|B|` can be replaced by the number of reachable
+normalized shapes, while exact absolute answers remain recoverable.
+
+Finite integer index for parameterized graph problems is a Boolean-threshold
+corollary.  If
+
+```text
+(G,k) is YES  iff  Opt(G) <= k,
+```
+
+then the established graph equivalence
+
+```text
+(G1 glue F,k) is YES  iff  (G2 glue F,k+c) is YES
+```
+
+for every `F,k` is, by equality of all integer threshold cuts, equivalent to
+`R_G1(F) = R_G2(F)-c` (including the common-infinite case).  Hence finite
+integer index is finiteness of the projective contextual response quotient for
+this threshold observation.  Its progressive representative is a choice of
+gauge/canonical potential representative.
+
+This theorem both generalizes the classical shift relation and narrows the
+research burden.  Additive gauge is established territory in graph
+kernelization and tropical computation.  The Ergodis capability is to expose
+potential-bearing quotienting uniformly across adapters, combine it with
+typed separators and provenance, and measure normalized-state reduction.
+The earlier coordinate-selector obstruction remains exact for absolute table
+observations; for threshold observations it weakens from raw equality to
+equality up to the permitted potential action.
+
 ## 4. Witness obstruction and the required side-car law
 
 Value contextual equivalence does **not** by itself preserve concrete argmin

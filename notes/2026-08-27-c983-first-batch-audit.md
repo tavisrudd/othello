@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY FOURTEEN-SOURCE PASS; TWO SOURCES READ AT
-FULL TEXT AND TWELVE AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY FIFTEEN-SOURCE PASS; TWO SOURCES READ AT
+FULL TEXT AND THIRTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
 
@@ -44,7 +44,10 @@ K and L are contextually equivalent iff K = L entrywise.
 Indeed, the context consisting of the `i` left selector and `j` right selector
 observes exactly `K(i,j)`.  The reverse implication is immediate from
 compositionality.  Thus unrestricted exact contexts yield no nontrivial
-semantic compression beyond representation-level factorization.
+semantic compression beyond representation-level factorization **when the
+observation requires absolute scalar equality**.  For integer threshold
+observations with a transported budget, finite-integer-index equivalence shows
+that the exact obstruction is only equality up to an additive potential.
 
 A nontrivial Ergodis quotient must therefore expose at least one of the
 following explicitly:
@@ -90,6 +93,7 @@ formal congruence argument.
 | Compose typed open systems through explicit boundaries | Structured/decorated cospans and related compositional-systems formalisms | Pre-empted as composition syntax | Supply an observation compiler, effective finite carrier, quotient, separator certificate, and optimization/witness semantics |
 | Derive efficient semiring DP from exhaustive specification | Polymorphic semiring shortcut fusion and constraint lifting | Pre-empted as a general derivation pattern | Derive the finite interface/context presentation itself, or add a measurable post-fusion quotient rather than restating fusion |
 | Minimal exact state for bounded-boundary graph/hypergraph composition | Myhill--Nerode methods for boundaried graphs/hypergraphs and finite-state tree-decomposition DP | Strongly pre-empted for Boolean properties | Treat the theory as a graph adapter and pursue quantitative/resource/witness observations only after auditing finite-integer-index and optimization variants |
+| Quotient quantitative responses up to additive cost shift | Finite integer index and progressive representatives in protrusion replacement; tropical normalization | Strongly pre-empted as a graph equivalence and algebraic gauge | Generalize it as a typed potential-bearing backend, prove threshold/FII as a corollary, and test state reduction plus witness/potential replay across domains |
 
 ## Common kernel candidate
 
@@ -472,6 +476,16 @@ The read depths below are unconditional and describe this preliminary pass.
     finite tree-automaton recognition on generated bounded-boundary graph and
     hypergraph universes, and explicitly connects quotient index to the
     information crossing a graph boundary.
+15. Hans L. Bodlaender, Fedor V. Fomin, Daniel Lokshtanov, Eelko Penninkx,
+    Saket Saurabh, and Dimitrios M. Thilikos, *(Meta) Kernelization*.
+    **Read depth: partial** — arXiv v3/full-paper text, cache key
+    `arXiv:0904.0727`, SHA-256
+    `046ea4c3b7a10752f3e501f70c2d4e5abcbe09af5b6dca06608d2d25e601b385`;
+    read the abstract, contents, introduction/result map, boundaried-graph
+    gluing definitions, and Section 2.3 through Definition 2.8.  Its finite
+    integer index identifies boundaried parameterized instances when all
+    glued continuations agree after one integer parameter transposition and
+    uses progressive class representatives for protrusion replacement.
 
 ## Knowledge-compilation and provenance connection
 
@@ -555,6 +569,15 @@ theorems, and representative-set DP have been audited.  Even if those fully
 pre-empt the mathematics, implementing them behind the same typed
 `SeparatorSystem` would still expand Ergodis into exact bounded-boundary graph
 and network optimization.
+
+The first finite-integer-index source closes part of that gap and supplies a
+stronger bridge.  Its transposition constant is an additive gauge: for a
+threshold problem `(G,k)` defined by `Opt(G) <= k`, equality of all glued
+threshold queries after shifting `k` is equivalent to equality of the entire
+integer optimum response up to the opposite constant shift.  Thus progressive
+representatives are canonical projective response states with a carried
+potential.  This becomes a general Ergodis backend theorem, with FII as a
+classical graph corollary, rather than a graph-only exception.
 
 ## Coverage gaps and next search
 

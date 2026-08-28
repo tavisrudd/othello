@@ -276,6 +276,17 @@ rather than a failed research path.  Finite integer index, protrusion
 replacement, optimization meta-theorems, and representative-set DP remain a
 mandatory hostile audit before any mathematical novelty claim.
 
+The finite-integer-index audit produced a genuine sharpening.  Parameter
+transposition under every graph continuation is tropical gauge equivalence of
+the optimum response: response tables differ by one additive constant.  The
+common backend can therefore minimize normalized response shapes while
+carrying an exact scalar potential.  FII/progressive representatives become a
+classical threshold-query corollary of this potential-bearing construction.
+This weakens the coordinate-selector obstruction from entrywise equality to
+projective equality whenever the application observes thresholds with a
+transported budget, and gives Ergodis another measurable compression mode
+beyond symmetry and restricted contexts.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary
