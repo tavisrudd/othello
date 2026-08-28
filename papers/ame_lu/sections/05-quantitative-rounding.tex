@@ -171,41 +171,76 @@ included because it is a load-bearing part of the headline quantitative
 theorem; Appendix~\ref{sec:two-uniform} gives stronger variants under other
 hypotheses.
 
+\begin{lemma}[Balanced-cut comparison]
+\label{lem:balanced-cut-comparison}
+Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with label
+group \(L\), let \(U=\bigotimes_jU_j\) be any product unitary, and write
+\(a_j(v)=q^{-1}\Tr(W_v^\dagger U_j)\).  For an \(m\)-party set \(A\), define
+vectors indexed by \(L\) by
+\[
+ u_A(\ell)=\prod_{j\in A}|a_j(\ell_j)|,
+ \qquad
+ v_A(\ell)=\prod_{j\notin A}|a_j(\ell_j)|.
+\]
+Then \(\lVert u_A\rVert=\lVert v_A\rVert=1\) and
+\[
+ |\langle\psi|U|\psi\rangle|\leq\langle u_A,v_A\rangle,
+ \qquad
+ \varepsilon(U)^2\geq\lVert u_A-v_A\rVert^2.
+\]
+\end{lemma}
+
+\begin{proof}
+The AME support formula makes restriction of \(L\) to either half a
+bijection, so Weyl Parseval gives unit norms.  Expanding the stabilizer
+expectation and taking absolute values termwise gives
+\(|\langle\psi|U|\psi\rangle|\leq\langle u_A,v_A\rangle\).  Since the two
+vectors are unit, the asserted defect bound follows.
+\end{proof}
+
 \begin{proposition}[Residual stability]
 \label{prop:main-residual-stability}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
-\(m\geq2\), and let \(V=\bigotimes_je^{ih_j}\), where every \(h_j\) is
-traceless Hermitian of spectral spread at most \(s\leq\pi\).  Put
+\(m\geq2\), and let \(U=\bigotimes_jU_j\) be any product unitary.  Put
+\[
+ \eta_j=1-\left|q^{-1}\Tr U_j\right|^2,
+ \qquad H=\sum_j\eta_j.
+\]
+If \(H\leq1/4\), then
+\[
+ \varepsilon(U)^2\geq H/4.
+\]
+Consequently, suppose \(U=\bigotimes_je^{ih_j}\), where every \(h_j\) is
+traceless Hermitian of spectral spread at most \(s\leq\pi\), and put
 \[
  c(s)=\max\left\{1-\frac{s^2}{12},\frac4{\pi^2}\right\}.
 \]
 If \(D^2=\sum_j\lVert h_j\rVert_F^2\leq q/4\), then
 \[
- D\leq2\sqrt{q/c(s)}\,\varepsilon(V)
- \leq\pi\sqrt q\,\varepsilon(V).
+ D\leq2\sqrt{q/c(s)}\,\varepsilon(U)
+ \leq\pi\sqrt q\,\varepsilon(U).
 \]
+No bound on \(\sum_j\lVert h_j\rVert_{\mathrm{op}}\) is assumed.
 \end{proposition}
 
 \begin{proof}
 \medskip\noindent\emph{Weyl amplitudes and the balanced cut.}
-Use the Weyl expansion
-\(e^{ih_j}=\sum_va_j(v)W_v\), and put
-\(\eta_j=1-|a_j(0)|^2\) and \(H=\sum_j\eta_j\).  Choose an \(m\)-party set
-\(A\).  The AME support formula makes restriction of the stabilizer label
-group \(L\) to either \(A\) or \(A^c\) a bijection.  Hence the vectors
-\[
- u(\ell)=\prod_{j\in A}|a_j(\ell_j)|,
- \qquad
- v(\ell)=\prod_{j\notin A}|a_j(\ell_j)|
- \quad(\ell\in L)
-\]
-are unit vectors.  Expanding the stabilizer expectation and taking moduli
-termwise gives \(\varepsilon(V)^2\geq\lVert u-v\rVert^2\).
+Choose an \(m\)-party set \(A\), use the notation of
+Lemma~\ref{lem:balanced-cut-comparison}, and abbreviate
+\(u=u_A\), \(v=v_A\).  Then \(\eta_j=1-|a_j(0)|^2\), and the lemma gives
+\(\varepsilon(U)^2\geq\lVert u-v\rVert^2\).
 
 \medskip\noindent\emph{Minimum-support witnesses.}
-For each \(j\notin A\) and Weyl label \(w\), let \(\ell^{j,w}\) be the
-unique stabilizer label supported on \(A\cup\{j\}\) whose \(j\)-coordinate
-is \(w\).  The support formula makes this parametrization bijective and gives
+For each \(j\notin A\), labels supported on \(A\cup\{j\}\) form the kernel
+of projection to \(A^c\setminus\{j\}\).  Projection onto \(A^c\) is a
+bijection, so this kernel has order \(q^2\).  Moreover, evaluation at any
+coordinate in \(A\cup\{j\}\) is injective: an element in its kernel would
+be supported on at most \(m\) parties and hence would vanish by the AME
+support formula.  Evaluation is therefore bijective, and every nonzero
+label in the kernel has support exactly \(A\cup\{j\}\).
+
+For a Weyl label \(w\), let \(\ell^{j,w}\) be the unique such label whose
+\(j\)-coordinate is \(w\).  These bijections give
 \[
  \sum_{w\ne0}v(\ell^{j,w})^2
  \geq\eta_j(1-H),
@@ -224,7 +259,7 @@ The corresponding families are disjoint as \(j\) varies.  Applying
 For \(m\geq3\) and \(H\leq1/4\), the coefficient is at least \(5/16\).
 For \(m=2\), retaining the four pair products before the maximum estimate
 gives \(H/2-3P\), where \(P\leq H^2/4\), again at least \(5H/16\).
-Thus in all cases \(\varepsilon(V)^2\geq H/4\).
+Thus in all cases \(\varepsilon(U)^2\geq H/4\), proving the first statement.
 
 \medskip\noindent\emph{Spectral contraction.}
 It remains to compare \(H\) with \(D\).  If \(X\) is uniform on the
@@ -238,7 +273,7 @@ using both \(\cos x\leq1-x^2/2+x^4/24\) for \(|x|\leq s\) and
 \(1-\cos x\geq2x^2/\pi^2\) for \(|x|\leq\pi\).  Conversely
 \(\eta_j\leq\lVert h_j\rVert_F^2/q\), so \(H\leq D^2/q\leq1/4\).
 Combining the inequalities gives
-\(\varepsilon(V)^2\geq c(s)D^2/(4q)\), which proves the claim.
+\(\varepsilon(U)^2\geq c(s)D^2/(4q)\), which proves the consequence.
 \end{proof}
 
 At \(\varepsilon=0\), the first two lemmas in this section recover the

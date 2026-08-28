@@ -599,16 +599,19 @@ neither certifies an unknown device.
 
 \paragraph{Comparison with the balanced-cut estimate.}
 Proposition~\ref{prop:main-residual-stability} gives the complementary
-hypothesis tradeoff used below: it removes the global \(\ell^1\) generator
-budget, permits per-site spectral spread up to \(\pi\), and gives
+hypothesis tradeoff used below.  For an arbitrary product unitary it first
+shows that \(H\leq1/4\) implies \(\varepsilon(U)^2\geq H/4\).  For specified
+generators it removes the global \(\ell^1\) budget, permits per-site spectral
+spread up to \(\pi\), and gives
 \[
  D\leq2\sqrt{q/c(s)}\,\varepsilon(U),
  \qquad
  c(s)=\max\left\{1-\frac{s^2}{12},\frac4{\pi^2}\right\}.
 \]
-Its proof contains the full balanced-bipartition argument, including the
-separate \(m=2\) estimate.  We cite that proposition directly whenever this
-budget-free bound is used.
+Lemma~\ref{lem:balanced-cut-comparison} retains the unconditional comparison
+for arbitrary product unitaries.  The proposition's proof contains the full
+minimum-support argument, including the separate \(m=2\) estimate.  We cite
+that proposition directly whenever the budget-free bound is used.
 
 \subsection{From local stability to exact branch selection}
 

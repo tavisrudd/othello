@@ -54,8 +54,10 @@ This map covers Paper I after the two-paper split. Results owned by
   encoder action despite the uncontrolled global Pauli correction.
 - `lem:stabilizer-overlap-gap`: exact branch separation used by every
   defect-only route.
-- `prop:main-residual-stability`: balanced-cut control of the collective
-  residual generators in the headline quantitative theorem.
+- `lem:balanced-cut-comparison`, `prop:main-residual-stability`:
+  unconditional balanced-cut comparison for arbitrary product unitaries,
+  followed by collective residual control in the headline quantitative
+  theorem.
 
 ## Deliberate exclusions
 

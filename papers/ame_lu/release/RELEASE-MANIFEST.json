@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 293353,
+        "bytes": 295646,
         "path": "ame-lu.pdf",
-        "sha256": "70796e974680247bd9efa14d297123625bce06da26f58b536e439c82841788cd"
+        "sha256": "87ff13545b7493602a64eb821f8ba31cfc9609e330eeeafbc87a420976587354"
       },
       {
         "bytes": 2652,
@@ -71,9 +71,9 @@
         "sha256": "b8c8ecb393b7922eb9fc9066d9fbfbf42fd68704575779bdf6a653e2d457cbe5"
       },
       {
-        "bytes": 23982,
+        "bytes": 25327,
         "path": "sections/05-quantitative-rounding.tex",
-        "sha256": "e08eb1f2bea3443454b180455433429fc1c17c411288641574994fce3a669753"
+        "sha256": "f3f91fa011d36868ff7053670b1e5f4d66cc787b483ade2dcb96655e54eae014"
       },
       {
         "bytes": 1887,
@@ -86,12 +86,12 @@
         "sha256": "72736b9e3273ad5c4a3305fcd0d0a04762bf11bcd1b5c9ee7cf9546288fe7dd1"
       },
       {
-        "bytes": 53150,
+        "bytes": 53386,
         "path": "sections/A-secondary-quantitative.tex",
-        "sha256": "593c84c30e9e88f8e5748f65db5e9a61c5269631cef773fada17ec23fdfc9f58"
+        "sha256": "39edae5584a27971b0389cedc32c2a1dc5de695a7eb192cc48e9ca3aaa8cf9b7"
       }
     ],
-    "tree_sha256": "89048c75c1117d7dad840bc5177719ec4976953aff479481c208d3c4280c9442"
+    "tree_sha256": "be183fa4c0b51a67f1a0fa6f27d6238abe07b26481ab0f77db9f29c2a3f02789"
   },
   "formal_companion": {
     "artifacts": [
