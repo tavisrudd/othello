@@ -10,13 +10,44 @@
 //! enumerate each admissible one-hole context (including its coarguments) as a
 //! generator; grammar or horizon restrictions belong in the sorts.  The
 //! compiler proves exactness only for the supplied finite presentation.
+//! Minimality evidence is policy-selected: canonical recomputation, a compact
+//! replayable refinement transcript, or an explicit separator for every
+//! separated same-sort concrete pair.
 
-use rustc_hash::{FxHashMap, FxHashSet};
+use rustc_hash::FxHashSet;
 use std::collections::{BTreeMap, VecDeque};
+use std::io::{Read, Write};
 use thiserror::Error;
 
 type Partition = (Box<[u32]>, Box<[SortRange]>);
+type MinimizedPartition = (Box<[u32]>, Box<[SortRange]>, usize);
+type WorklistPartition = (Box<[u32]>, Box<[SortRange]>, Box<[SplitRecord]>);
 type SeparatorPool = (Box<[SeparatorRecord]>, Box<[u32]>);
+type GeneratorSortIndex = (Box<[SortRange]>, Box<[u32]>);
+type SplitWorkspace = (Box<[u32]>, Vec<u32>, Vec<u32>, Vec<SortRange>);
+
+fn bitmap_storage(bits: usize) -> Result<Vec<u64>, ObservationalError> {
+    let words = bits.checked_add(63).ok_or(ObservationalError::Overflow)? / 64;
+    Ok(vec![0_u64; words])
+}
+
+#[inline]
+fn bitmap_contains(bitmap: &[u64], index: usize) -> bool {
+    debug_assert!(index / 64 < bitmap.len());
+    bitmap[index / 64] & (1_u64 << (index % 64)) != 0
+}
+
+#[inline]
+fn bitmap_insert(bitmap: &mut [u64], index: usize) {
+    debug_assert!(index / 64 < bitmap.len());
+    bitmap[index / 64] |= 1_u64 << (index % 64);
+}
+
+#[inline]
+fn bitmap_remove(bitmap: &mut [u64], index: usize) {
+    debug_assert!(index / 64 < bitmap.len());
+    bitmap[index / 64] &= !(1_u64 << (index % 64));
+}
 
 #[derive(Debug, Error, PartialEq, Eq)]
 pub enum ObservationalError {
@@ -98,6 +129,8 @@ pub struct FinitePresentation {
     observations: Box<[u32]>,
     generators: Box<[GeneratorRecord]>,
     transitions: Box<[u32]>,
+    generator_sort_ranges: Box<[SortRange]>,
+    generator_ids_by_sort: Box<[u32]>,
 }
 
 #[repr(C)]
@@ -169,11 +202,15 @@ impl FinitePresentation {
                 transition_len,
             });
         }
+        let (generator_sort_ranges, generator_ids_by_sort) =
+            index_generators_by_sort(sorts.len(), &generators, false)?;
         Ok(Self {
             sorts: sorts.into_boxed_slice(),
             observations,
             generators: generators.into_boxed_slice(),
             transitions: transitions.into_boxed_slice(),
+            generator_sort_ranges,
+            generator_ids_by_sort,
         })
     }
 
@@ -235,13 +272,50 @@ impl FinitePresentation {
     }
 
     fn generators_from(&self, sort: u32) -> impl Iterator<Item = (u32, GeneratorRecord)> + '_ {
-        self.generators
+        let range = self.generator_sort_ranges[sort as usize];
+        self.generator_ids_by_sort[range.start as usize..range.end() as usize]
             .iter()
             .copied()
-            .enumerate()
-            .filter(move |(_, generator)| generator.source_sort == sort)
-            .map(|(index, generator)| (index as u32, generator))
+            .map(|generator| (generator, self.generators[generator as usize]))
     }
+}
+
+fn index_generators_by_sort(
+    sort_count: usize,
+    generators: &[GeneratorRecord],
+    by_target: bool,
+) -> Result<GeneratorSortIndex, ObservationalError> {
+    let mut counts = vec![0_u32; sort_count];
+    for record in generators {
+        let sort = if by_target {
+            record.target_sort
+        } else {
+            record.source_sort
+        };
+        counts[sort as usize] = counts[sort as usize]
+            .checked_add(1)
+            .ok_or(ObservationalError::Overflow)?;
+    }
+    let mut next = 0_u32;
+    let mut ranges = Vec::with_capacity(sort_count);
+    for &len in &counts {
+        ranges.push(SortRange { start: next, len });
+        next = next.checked_add(len).ok_or(ObservationalError::Overflow)?;
+    }
+    let mut cursors = ranges.iter().map(|range| range.start).collect::<Vec<_>>();
+    let mut ids = vec![0_u32; generators.len()];
+    for (generator, record) in generators.iter().enumerate() {
+        let sort = if by_target {
+            record.target_sort
+        } else {
+            record.source_sort
+        };
+        let cursor = &mut cursors[sort as usize];
+        ids[*cursor as usize] =
+            u32::try_from(generator).map_err(|_| ObservationalError::Overflow)?;
+        *cursor += 1;
+    }
+    Ok((ranges.into_boxed_slice(), ids.into_boxed_slice()))
 }
 
 fn fingerprint_word(hash: &mut [u64; 2], word: u32) {
@@ -272,7 +346,10 @@ pub struct CompilationMetrics {
     pub states: usize,
     pub classes: usize,
     pub generators: usize,
+    /// Completed synchronous Moore rounds; zero for the worklist backend.
     pub refinement_rounds: usize,
+    /// Binary block splits performed by the inverse-worklist backend.
+    pub refinement_splits: usize,
     pub separators: usize,
     pub separator_steps: usize,
 }
@@ -285,6 +362,540 @@ pub struct CompilationStorage {
     pub certificate_bytes: usize,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum CertificatePolicy {
+    /// Recompute the canonical minimum partition during verification without
+    /// retaining a distinguishing word for every separated concrete pair.
+    QuotientOnly,
+    /// Retain one replayable record per binary partition split.
+    SplitTranscript,
+    /// Retain the bounded-control certificate with one separator per
+    /// separated same-sort concrete pair.
+    ExhaustivePairAudit,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct SplitRecord {
+    pub source_block: u32,
+    pub generator: u32,
+    pub splitter_block: u32,
+    pub new_block: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<SplitRecord>() == 16);
+const _: () = assert!(std::mem::align_of::<SplitRecord>() == 4);
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct InverseRecord {
+    index_start: u32,
+    index_len: u32,
+    mode: u32,
+    _pad: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<InverseRecord>() == 16);
+const _: () = assert!(std::mem::align_of::<InverseRecord>() == 4);
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct InverseTargetRecord {
+    target_state: u32,
+    source_start: u32,
+    source_len: u32,
+    _pad: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<InverseTargetRecord>() == 16);
+const _: () = assert!(std::mem::align_of::<InverseTargetRecord>() == 4);
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct SplitWorkItem {
+    block: u32,
+    generator: u32,
+    _reserved: [u32; 2],
+}
+
+const _: () = assert!(std::mem::size_of::<SplitWorkItem>() == 16);
+const _: () = assert!(std::mem::align_of::<SplitWorkItem>() == 4);
+
+struct PendingSet {
+    keys: Box<[u64]>,
+    len: usize,
+}
+
+impl PendingSet {
+    const EMPTY: u64 = u64::MAX;
+
+    fn new(max_items: usize) -> Result<Self, ObservationalError> {
+        let slots = max_items
+            .max(1)
+            .checked_mul(2)
+            .and_then(usize::checked_next_power_of_two)
+            .ok_or(ObservationalError::Overflow)?;
+        Ok(Self {
+            keys: vec![Self::EMPTY; slots].into_boxed_slice(),
+            len: 0,
+        })
+    }
+
+    fn capacity(&self) -> usize {
+        self.keys.len() / 2
+    }
+
+    fn home(&self, key: u64) -> usize {
+        let mut mixed = key.wrapping_add(0x9e37_79b9_7f4a_7c15);
+        mixed = (mixed ^ (mixed >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+        mixed = (mixed ^ (mixed >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
+        mixed ^= mixed >> 31;
+        (mixed as usize) & (self.keys.len() - 1)
+    }
+
+    fn contains(&self, key: u64) -> bool {
+        let mut slot = self.home(key);
+        loop {
+            let found = self.keys[slot];
+            if found == key {
+                return true;
+            }
+            if found == Self::EMPTY {
+                return false;
+            }
+            slot = (slot + 1) & (self.keys.len() - 1);
+        }
+    }
+
+    fn insert(&mut self, key: u64) -> Result<bool, ObservationalError> {
+        if self.len == self.capacity() {
+            return Err(ObservationalError::Overflow);
+        }
+        let mut slot = self.home(key);
+        loop {
+            let found = self.keys[slot];
+            if found == key {
+                return Ok(false);
+            }
+            if found == Self::EMPTY {
+                self.keys[slot] = key;
+                self.len += 1;
+                return Ok(true);
+            }
+            slot = (slot + 1) & (self.keys.len() - 1);
+        }
+    }
+
+    fn remove(&mut self, key: u64) -> bool {
+        let mask = self.keys.len() - 1;
+        let mut hole = self.home(key);
+        loop {
+            let found = self.keys[hole];
+            if found == Self::EMPTY {
+                return false;
+            }
+            if found == key {
+                break;
+            }
+            hole = (hole + 1) & mask;
+        }
+        self.len -= 1;
+        let mut next = (hole + 1) & mask;
+        while self.keys[next] != Self::EMPTY {
+            let home = self.home(self.keys[next]);
+            if (next.wrapping_sub(home) & mask) > (hole.wrapping_sub(home) & mask) {
+                self.keys[hole] = self.keys[next];
+                hole = next;
+            }
+            next = (next + 1) & mask;
+        }
+        self.keys[hole] = Self::EMPTY;
+        true
+    }
+}
+
+struct InverseIndex {
+    records: Box<[InverseRecord]>,
+    offsets: Box<[u32]>,
+    targets: Box<[InverseTargetRecord]>,
+    sources: Box<[u32]>,
+    target_generator_offsets: Box<[u32]>,
+    target_generators: Box<[u32]>,
+}
+
+impl InverseIndex {
+    const DENSE: u32 = 0;
+    const SPARSE: u32 = 1;
+
+    fn new(presentation: &FinitePresentation) -> Result<Self, ObservationalError> {
+        let max_source = presentation
+            .generators
+            .iter()
+            .map(|record| presentation.sorts[record.source_sort as usize].len as usize)
+            .max()
+            .unwrap_or(0);
+        let max_counting_target = presentation
+            .generators
+            .iter()
+            .filter_map(|record| {
+                let source_len = presentation.sorts[record.source_sort as usize].len as usize;
+                let target_len = presentation.sorts[record.target_sort as usize].len as usize;
+                (target_len <= source_len.saturating_mul(4)).then_some(target_len)
+            })
+            .max()
+            .unwrap_or(0);
+        let mut source_scratch = vec![0_u32; max_source];
+        // Counting scatter only needs one target-sized array: counts are
+        // consumed in place into write cursors before the stable scatter.
+        let mut target_cursors = vec![0_u32; max_counting_target];
+        let mut records = Vec::with_capacity(presentation.generators.len());
+        let mut offsets = Vec::new();
+        let mut targets = Vec::new();
+        let mut sources: Vec<u32> = Vec::with_capacity(presentation.transitions.len());
+        let mut target_generator_counts = vec![0_u32; presentation.state_count()];
+        for (generator, record) in presentation.generators.iter().copied().enumerate() {
+            let source = presentation.sorts[record.source_sort as usize];
+            let target = presentation.sorts[record.target_sort as usize];
+            let use_counting_scatter =
+                target.len as usize <= (source.len as usize).saturating_mul(4);
+            let distinct_targets = if use_counting_scatter {
+                let cursors = &mut target_cursors[..target.len as usize];
+                cursors.fill(0);
+                for state in source.start..source.end() {
+                    let target_state = presentation
+                        .transition(generator as u32, state)
+                        .expect("validated total generator");
+                    cursors[(target_state - target.start) as usize] += 1;
+                }
+                let mut next = 0_u32;
+                let mut distinct = 0_usize;
+                for cursor in cursors.iter_mut() {
+                    let count = *cursor;
+                    *cursor = next;
+                    next += count;
+                    distinct += usize::from(count != 0);
+                }
+                for state in source.start..source.end() {
+                    let target_state = presentation
+                        .transition(generator as u32, state)
+                        .expect("validated total generator");
+                    let cursor = &mut target_cursors[(target_state - target.start) as usize];
+                    source_scratch[*cursor as usize] = state;
+                    *cursor += 1;
+                }
+                distinct
+            } else {
+                for (local, slot) in source_scratch[..source.len as usize].iter_mut().enumerate() {
+                    *slot = source.start + local as u32;
+                }
+                source_scratch[..source.len as usize].sort_unstable_by_key(|&state| {
+                    (
+                        presentation
+                            .transition(generator as u32, state)
+                            .expect("validated total generator"),
+                        state,
+                    )
+                });
+                source_scratch[..source.len as usize]
+                    .iter()
+                    .enumerate()
+                    .filter(|&(position, &state)| {
+                        position == 0
+                            || presentation.transition(generator as u32, state)
+                                != presentation
+                                    .transition(generator as u32, source_scratch[position - 1])
+                    })
+                    .count()
+            };
+            let dense_bytes = (target.len as usize)
+                .checked_add(1)
+                .and_then(|len| len.checked_mul(std::mem::size_of::<u32>()))
+                .ok_or(ObservationalError::Overflow)?;
+            let sparse_bytes = distinct_targets
+                .checked_mul(std::mem::size_of::<InverseTargetRecord>())
+                .ok_or(ObservationalError::Overflow)?;
+            let mut position = 0_usize;
+            let (index_start, index_len, mode) = if dense_bytes <= sparse_bytes {
+                offsets.reserve_exact(
+                    (target.len as usize)
+                        .checked_add(1)
+                        .ok_or(ObservationalError::Overflow)?,
+                );
+                let index_start =
+                    u32::try_from(offsets.len()).map_err(|_| ObservationalError::Overflow)?;
+                for target_state in target.start..target.end() {
+                    offsets.push(
+                        u32::try_from(sources.len()).map_err(|_| ObservationalError::Overflow)?,
+                    );
+                    while position < source.len as usize
+                        && presentation.transition(generator as u32, source_scratch[position])
+                            == Some(target_state)
+                    {
+                        sources.push(source_scratch[position]);
+                        position += 1;
+                    }
+                    if offsets.last().copied()
+                        != Some(
+                            u32::try_from(sources.len())
+                                .map_err(|_| ObservationalError::Overflow)?,
+                        )
+                    {
+                        target_generator_counts[target_state as usize] += 1;
+                    }
+                }
+                offsets
+                    .push(u32::try_from(sources.len()).map_err(|_| ObservationalError::Overflow)?);
+                (
+                    index_start,
+                    target
+                        .len
+                        .checked_add(1)
+                        .ok_or(ObservationalError::Overflow)?,
+                    Self::DENSE,
+                )
+            } else {
+                // Grow only when a generator actually uses the sparse directory.
+                // Amortized growth avoids copying the accumulated directory once
+                // per sparse generator while dense-only presentations reserve none.
+                targets.reserve(distinct_targets);
+                let index_start =
+                    u32::try_from(targets.len()).map_err(|_| ObservationalError::Overflow)?;
+                while position < source.len as usize {
+                    let target_state = presentation
+                        .transition(generator as u32, source_scratch[position])
+                        .ok_or(ObservationalError::CompiledShape)?;
+                    let source_start =
+                        u32::try_from(sources.len()).map_err(|_| ObservationalError::Overflow)?;
+                    let group_start = position;
+                    while position < source.len as usize
+                        && presentation.transition(generator as u32, source_scratch[position])
+                            == Some(target_state)
+                    {
+                        sources.push(source_scratch[position]);
+                        position += 1;
+                    }
+                    targets.push(InverseTargetRecord {
+                        target_state,
+                        source_start,
+                        source_len: u32::try_from(position - group_start)
+                            .map_err(|_| ObservationalError::Overflow)?,
+                        _pad: 0,
+                    });
+                    target_generator_counts[target_state as usize] += 1;
+                }
+                let index_len = u32::try_from(targets.len())
+                    .map_err(|_| ObservationalError::Overflow)?
+                    - index_start;
+                (index_start, index_len, Self::SPARSE)
+            };
+            records.push(InverseRecord {
+                index_start,
+                index_len,
+                mode,
+                _pad: 0,
+            });
+        }
+        let mut target_generator_offsets =
+            Vec::with_capacity(presentation.state_count().saturating_add(1));
+        let mut target_generator_total = 0_u32;
+        for count in &mut target_generator_counts {
+            target_generator_offsets.push(target_generator_total);
+            target_generator_total = target_generator_total
+                .checked_add(*count)
+                .ok_or(ObservationalError::Overflow)?;
+            *count = target_generator_offsets[target_generator_offsets.len() - 1];
+        }
+        target_generator_offsets.push(target_generator_total);
+        let mut target_generators = vec![0_u32; target_generator_total as usize];
+        for (generator, record) in records.iter().copied().enumerate() {
+            if record.mode == Self::DENSE {
+                let generator_record = presentation.generators[generator];
+                let target = presentation.sorts[generator_record.target_sort as usize];
+                let start = record.index_start as usize;
+                for local in 0..target.len as usize {
+                    if offsets[start + local] == offsets[start + local + 1] {
+                        continue;
+                    }
+                    let cursor = &mut target_generator_counts[target.start as usize + local];
+                    target_generators[*cursor as usize] = generator as u32;
+                    *cursor += 1;
+                }
+            } else {
+                let start = record.index_start as usize;
+                let end = start + record.index_len as usize;
+                for entry in &targets[start..end] {
+                    let cursor = &mut target_generator_counts[entry.target_state as usize];
+                    target_generators[*cursor as usize] = generator as u32;
+                    *cursor += 1;
+                }
+            }
+        }
+        Ok(Self {
+            records: records.into_boxed_slice(),
+            offsets: offsets.into_boxed_slice(),
+            targets: targets.into_boxed_slice(),
+            sources: sources.into_boxed_slice(),
+            target_generator_offsets: target_generator_offsets.into_boxed_slice(),
+            target_generators: target_generators.into_boxed_slice(),
+        })
+    }
+
+    fn predecessors(
+        &self,
+        presentation: &FinitePresentation,
+        generator: u32,
+        target_state: u32,
+    ) -> &[u32] {
+        let record = self.records[generator as usize];
+        let generator_record = presentation.generators[generator as usize];
+        let target = presentation.sorts[generator_record.target_sort as usize];
+        debug_assert!(target.contains(target_state));
+        if record.mode == Self::DENSE {
+            let local = (target_state - target.start) as usize;
+            let start = self.offsets[record.index_start as usize + local] as usize;
+            let end = self.offsets[record.index_start as usize + local + 1] as usize;
+            &self.sources[start..end]
+        } else {
+            debug_assert_eq!(record.mode, Self::SPARSE);
+            let targets = &self.targets
+                [record.index_start as usize..(record.index_start + record.index_len) as usize];
+            let Ok(local) = targets.binary_search_by_key(&target_state, |entry| entry.target_state)
+            else {
+                return &[];
+            };
+            let entry = targets[local];
+            &self.sources
+                [entry.source_start as usize..(entry.source_start + entry.source_len) as usize]
+        }
+    }
+
+    fn generators_with_predecessors(&self, target_state: u32) -> &[u32] {
+        let start = self.target_generator_offsets[target_state as usize] as usize;
+        let end = self.target_generator_offsets[target_state as usize + 1] as usize;
+        &self.target_generators[start..end]
+    }
+
+    fn verify(&self, presentation: &FinitePresentation) -> Result<(), ObservationalError> {
+        let max_source = presentation
+            .generators
+            .iter()
+            .map(|record| presentation.sorts[record.source_sort as usize].len as usize)
+            .max()
+            .unwrap_or(0);
+        let mut seen = vec![0_u8; max_source];
+        for (generator, record) in presentation.generators.iter().copied().enumerate() {
+            let inverse = self
+                .records
+                .get(generator)
+                .ok_or(ObservationalError::CompiledShape)?;
+            let source = presentation.sorts[record.source_sort as usize];
+            let target = presentation.sorts[record.target_sort as usize];
+            seen[..source.len as usize].fill(0);
+            let mut check = |target_state: u32,
+                             predecessors: &[u32]|
+             -> Result<(), ObservationalError> {
+                for &state in predecessors {
+                    if !source.contains(state)
+                        || presentation.transition(generator as u32, state) != Some(target_state)
+                    {
+                        return Err(ObservationalError::CompiledShape);
+                    }
+                    let seen = &mut seen[(state - source.start) as usize];
+                    if *seen != 0 {
+                        return Err(ObservationalError::CompiledShape);
+                    }
+                    *seen = 1;
+                }
+                Ok(())
+            };
+            if inverse.mode == Self::DENSE {
+                if inverse.index_len
+                    != target
+                        .len
+                        .checked_add(1)
+                        .ok_or(ObservationalError::CompiledShape)?
+                {
+                    return Err(ObservationalError::CompiledShape);
+                }
+                let end = inverse
+                    .index_start
+                    .checked_add(inverse.index_len)
+                    .ok_or(ObservationalError::CompiledShape)?;
+                let offsets = self
+                    .offsets
+                    .get(inverse.index_start as usize..end as usize)
+                    .ok_or(ObservationalError::CompiledShape)?;
+                for (local, pair) in offsets.windows(2).enumerate() {
+                    let predecessors = self
+                        .sources
+                        .get(pair[0] as usize..pair[1] as usize)
+                        .ok_or(ObservationalError::CompiledShape)?;
+                    check(target.start + local as u32, predecessors)?;
+                }
+            } else if inverse.mode == Self::SPARSE {
+                let target_end = inverse
+                    .index_start
+                    .checked_add(inverse.index_len)
+                    .ok_or(ObservationalError::CompiledShape)?;
+                let targets = self
+                    .targets
+                    .get(inverse.index_start as usize..target_end as usize)
+                    .ok_or(ObservationalError::CompiledShape)?;
+                let mut previous_target = None;
+                for entry in targets {
+                    if !target.contains(entry.target_state)
+                        || previous_target.is_some_and(|previous| previous >= entry.target_state)
+                    {
+                        return Err(ObservationalError::CompiledShape);
+                    }
+                    previous_target = Some(entry.target_state);
+                    let end = entry
+                        .source_start
+                        .checked_add(entry.source_len)
+                        .ok_or(ObservationalError::CompiledShape)?;
+                    let predecessors = self
+                        .sources
+                        .get(entry.source_start as usize..end as usize)
+                        .ok_or(ObservationalError::CompiledShape)?;
+                    check(entry.target_state, predecessors)?;
+                }
+            } else {
+                return Err(ObservationalError::CompiledShape);
+            }
+            if seen[..source.len as usize].contains(&0) {
+                return Err(ObservationalError::CompiledShape);
+            }
+        }
+        Ok(())
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct SeparatorStreamMetrics {
+    pub separators: usize,
+    pub separator_steps: usize,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+pub enum SeparatorStreamError<E> {
+    Compilation(ObservationalError),
+    Sink(E),
+}
+
+#[derive(Debug, Error)]
+pub enum SeparatorFileError {
+    #[error(transparent)]
+    Compilation(#[from] ObservationalError),
+    #[error("separator stream I/O failed")]
+    Io(#[from] std::io::Error),
+    #[error("separator stream is malformed")]
+    Format,
+    #[error("streaming evidence requires a quotient-only compiled artifact")]
+    Policy,
+}
+
+const SEPARATOR_STREAM_MAGIC: &[u8; 8] = b"ERGSEP01";
+
 #[derive(Clone, Debug)]
 pub struct CompiledObservation {
     class_ranges: Box<[SortRange]>,
@@ -293,8 +904,10 @@ pub struct CompiledObservation {
     class_representatives: Box<[u32]>,
     generator_records: Box<[GeneratorRecord]>,
     generator_transitions: Box<[u32]>,
+    split_records: Box<[SplitRecord]>,
     separators: Box<[SeparatorRecord]>,
     separator_paths: Box<[u32]>,
+    certificate_policy: CertificatePolicy,
     metrics: CompilationMetrics,
 }
 
@@ -319,6 +932,14 @@ impl CompiledObservation {
         self.metrics
     }
 
+    pub fn certificate_policy(&self) -> CertificatePolicy {
+        self.certificate_policy
+    }
+
+    pub fn split_records(&self) -> &[SplitRecord] {
+        &self.split_records
+    }
+
     pub fn storage(&self) -> CompilationStorage {
         CompilationStorage {
             quotient_bytes: std::mem::size_of_val(&*self.class_ranges)
@@ -328,7 +949,8 @@ impl CompiledObservation {
                 + std::mem::size_of_val(&*self.generator_records)
                 + std::mem::size_of_val(&*self.generator_transitions),
             certificate_bytes: std::mem::size_of_val(&*self.separators)
-                + std::mem::size_of_val(&*self.separator_paths),
+                + std::mem::size_of_val(&*self.separator_paths)
+                + std::mem::size_of_val(&*self.split_records),
         }
     }
 
@@ -356,6 +978,37 @@ impl CompiledObservation {
 pub fn compile_observational(
     presentation: &FinitePresentation,
 ) -> Result<CompiledObservation, ObservationalError> {
+    compile_observational_with_policy(presentation, CertificatePolicy::ExhaustivePairAudit)
+}
+
+pub fn compile_observational_with_policy(
+    presentation: &FinitePresentation,
+    certificate_policy: CertificatePolicy,
+) -> Result<CompiledObservation, ObservationalError> {
+    let (classes, class_ranges, refinement_rounds, split_records) = match certificate_policy {
+        CertificatePolicy::SplitTranscript => {
+            let (classes, class_ranges, split_records) = minimize_partition_worklist(presentation)?;
+            (classes, class_ranges, 0, split_records)
+        }
+        CertificatePolicy::QuotientOnly | CertificatePolicy::ExhaustivePairAudit => {
+            let (classes, class_ranges, refinement_rounds) = minimize_partition(presentation)?;
+            (classes, class_ranges, refinement_rounds, Box::default())
+        }
+    };
+
+    emit_compilation(
+        presentation,
+        classes,
+        class_ranges,
+        refinement_rounds,
+        certificate_policy,
+        split_records,
+    )
+}
+
+fn minimize_partition(
+    presentation: &FinitePresentation,
+) -> Result<MinimizedPartition, ObservationalError> {
     let (mut classes, _) = initial_partition(presentation)?;
     let mut refinement_rounds = 0;
     let class_ranges = loop {
@@ -366,7 +1019,17 @@ pub fn compile_observational(
         classes = next_classes;
         refinement_rounds += 1;
     };
+    Ok((classes, class_ranges, refinement_rounds))
+}
 
+fn emit_compilation(
+    presentation: &FinitePresentation,
+    classes: Box<[u32]>,
+    class_ranges: Box<[SortRange]>,
+    refinement_rounds: usize,
+    certificate_policy: CertificatePolicy,
+    split_records: Box<[SplitRecord]>,
+) -> Result<CompiledObservation, ObservationalError> {
     let class_count = class_ranges.last().map_or(0, |range| range.end() as usize);
     let mut class_outputs = vec![u32::MAX; class_count];
     let mut representatives = vec![u32::MAX; class_count];
@@ -378,8 +1041,16 @@ pub fn compile_observational(
         }
     }
 
+    let transition_capacity = presentation.generators.iter().try_fold(
+        0_usize,
+        |capacity, generator| -> Result<usize, ObservationalError> {
+            capacity
+                .checked_add(class_ranges[generator.source_sort as usize].len as usize)
+                .ok_or(ObservationalError::Overflow)
+        },
+    )?;
     let mut generator_records = Vec::with_capacity(presentation.generators.len());
-    let mut generator_transitions = Vec::new();
+    let mut generator_transitions = Vec::with_capacity(transition_capacity);
     for generator in presentation.generators.iter().copied() {
         let source_classes = class_ranges[generator.source_sort as usize];
         let transition_start =
@@ -399,12 +1070,21 @@ pub fn compile_observational(
         });
     }
 
-    let (separators, separator_paths) = build_separators(presentation, &classes)?;
+    let (separators, separator_paths) = match certificate_policy {
+        CertificatePolicy::QuotientOnly | CertificatePolicy::SplitTranscript => {
+            (Box::default(), Box::default())
+        }
+        CertificatePolicy::ExhaustivePairAudit => {
+            let (records, paths) = build_separators(presentation, &classes)?;
+            (records, paths)
+        }
+    };
     let metrics = CompilationMetrics {
         states: presentation.state_count(),
         classes: class_count,
         generators: presentation.generators.len(),
         refinement_rounds,
+        refinement_splits: split_records.len(),
         separators: separators.len(),
         separator_steps: separator_paths.len(),
     };
@@ -415,8 +1095,10 @@ pub fn compile_observational(
         class_representatives: representatives.into_boxed_slice(),
         generator_records: generator_records.into_boxed_slice(),
         generator_transitions: generator_transitions.into_boxed_slice(),
+        split_records,
         separators,
         separator_paths,
+        certificate_policy,
         metrics,
     };
     verify_compilation(presentation, &compiled)?;
@@ -424,40 +1106,138 @@ pub fn compile_observational(
 }
 
 fn initial_partition(presentation: &FinitePresentation) -> Result<Partition, ObservationalError> {
-    assign_signatures(presentation, |_| Vec::new())
+    let mut classes = vec![u32::MAX; presentation.state_count()];
+    let mut ranges = Vec::with_capacity(presentation.sorts.len());
+    let max_sort = presentation
+        .sorts
+        .iter()
+        .map(|range| range.len as usize)
+        .max()
+        .unwrap_or(0);
+    let mut state_scratch = vec![0_u32; max_sort];
+    let mut canonical = vec![u32::MAX; max_sort];
+    let mut next_class = 0_u32;
+    for states in presentation.sorts.iter().copied() {
+        let class_start = next_class;
+        let mut observation_mask = 0_u32;
+        for (local, slot) in state_scratch[..states.len as usize].iter_mut().enumerate() {
+            *slot = states.start + local as u32;
+            observation_mask |= presentation.observations[*slot as usize];
+        }
+        radix_sort_states_by_observation(
+            &presentation.observations,
+            &mut state_scratch[..states.len as usize],
+            &mut canonical[..states.len as usize],
+            observation_mask,
+        );
+        let mut group_count = 0_usize;
+        let mut previous = None;
+        for &state in &state_scratch[..states.len as usize] {
+            let observation = presentation.observations[state as usize];
+            if previous != Some(observation) {
+                previous = Some(observation);
+                group_count += 1;
+            }
+            classes[state as usize] = (group_count - 1) as u32;
+        }
+        canonical[..group_count].fill(u32::MAX);
+        for state in states.start..states.end() {
+            let local = classes[state as usize] as usize;
+            if canonical[local] == u32::MAX {
+                canonical[local] = next_class;
+                next_class = next_class
+                    .checked_add(1)
+                    .ok_or(ObservationalError::Overflow)?;
+            }
+            classes[state as usize] = canonical[local];
+        }
+        ranges.push(SortRange {
+            start: class_start,
+            len: next_class - class_start,
+        });
+    }
+    Ok((classes.into_boxed_slice(), ranges.into_boxed_slice()))
+}
+
+fn radix_sort_states_by_observation(
+    observations: &[u32],
+    states: &mut [u32],
+    scratch: &mut [u32],
+    observation_mask: u32,
+) {
+    debug_assert_eq!(states.len(), scratch.len());
+    let passes = if observation_mask <= u32::from(u8::MAX) {
+        1
+    } else if observation_mask <= u32::from(u16::MAX) {
+        2
+    } else if observation_mask <= 0x00ff_ffff {
+        3
+    } else {
+        4
+    };
+    for pass in 0..passes {
+        let shift = pass * 8;
+        let mut counts = [0_usize; 256];
+        let source: &[u32] = if pass % 2 == 0 { states } else { scratch };
+        for &state in source {
+            counts[((observations[state as usize] >> shift) & 0xff) as usize] += 1;
+        }
+        let mut next = 0_usize;
+        for count in &mut counts {
+            let len = *count;
+            *count = next;
+            next += len;
+        }
+        if pass % 2 == 0 {
+            for &state in states.iter() {
+                let bucket = ((observations[state as usize] >> shift) & 0xff) as usize;
+                scratch[counts[bucket]] = state;
+                counts[bucket] += 1;
+            }
+        } else {
+            for &state in scratch.iter() {
+                let bucket = ((observations[state as usize] >> shift) & 0xff) as usize;
+                states[counts[bucket]] = state;
+                counts[bucket] += 1;
+            }
+        }
+    }
+    if passes % 2 != 0 {
+        states.copy_from_slice(scratch);
+    }
 }
 
 fn refine_partition(
     presentation: &FinitePresentation,
     classes: &[u32],
 ) -> Result<Partition, ObservationalError> {
-    assign_signatures(presentation, |state| {
-        let sort = state_sort(&presentation.sorts, state).expect("validated state");
-        std::iter::once(classes[state as usize])
-            .chain(presentation.generators_from(sort).map(|(generator, _)| {
-                let target = presentation
-                    .transition(generator, state)
-                    .expect("typed total generator");
-                classes[target as usize]
-            }))
-            .collect()
+    assign_signatures(presentation, |sort, state, signature| {
+        signature.push(classes[state as usize]);
+        signature.extend(presentation.generators_from(sort).map(|(generator, _)| {
+            let target = presentation
+                .transition(generator, state)
+                .expect("typed total generator");
+            classes[target as usize]
+        }));
     })
 }
 
 fn assign_signatures(
     presentation: &FinitePresentation,
-    continuation: impl Fn(u32) -> Vec<u32>,
+    continuation: impl Fn(u32, u32, &mut Vec<u32>),
 ) -> Result<Partition, ObservationalError> {
     let mut classes = vec![u32::MAX; presentation.state_count()];
     let mut ranges = Vec::with_capacity(presentation.sorts.len());
     let mut next_class = 0_u32;
-    for range in presentation.sorts.iter().copied() {
+    for (sort, range) in presentation.sorts.iter().copied().enumerate() {
+        let sort = u32::try_from(sort).map_err(|_| ObservationalError::Overflow)?;
         let class_start = next_class;
         let mut signatures: BTreeMap<Vec<u32>, u32> = BTreeMap::new();
+        let outgoing = presentation.generator_sort_ranges[sort as usize].len as usize;
         for state in range.start..range.end() {
-            let mut signature = Vec::with_capacity(1 + presentation.generators.len());
+            let mut signature = Vec::with_capacity(2 + outgoing);
             signature.push(presentation.observations[state as usize]);
-            signature.extend(continuation(state));
+            continuation(sort, state, &mut signature);
             let class = match signatures.get(&signature) {
                 Some(&class) => class,
                 None => {
@@ -486,12 +1266,761 @@ fn state_sort(sorts: &[SortRange], state: u32) -> Option<u32> {
         .and_then(|sort| u32::try_from(sort).ok())
 }
 
+fn minimize_partition_worklist(
+    presentation: &FinitePresentation,
+) -> Result<WorklistPartition, ObservationalError> {
+    let block_capacity = presentation.state_count();
+    let (mut state_blocks, mut block_sorts, mut members, mut block_ranges) =
+        initial_split_workspace(presentation, block_capacity)?;
+    let initial_block_count = block_sorts.len();
+    let mut omitted_blocks = vec![u32::MAX; presentation.sorts.len()];
+    let mut initial_blocks_per_sort = vec![0_u32; presentation.sorts.len()];
+    for (block, &sort) in block_sorts.iter().enumerate() {
+        initial_blocks_per_sort[sort as usize] += 1;
+        let omitted = &mut omitted_blocks[sort as usize];
+        if *omitted == u32::MAX || block_ranges[block].len > block_ranges[*omitted as usize].len {
+            *omitted = block as u32;
+        }
+    }
+    if presentation
+        .generators
+        .iter()
+        .all(|record| initial_blocks_per_sort[record.target_sort as usize] <= 1)
+    {
+        let (classes, class_ranges) = canonicalize_partition(presentation, &state_blocks)?;
+        return Ok((classes, class_ranges, Box::default()));
+    }
+    if initial_block_count > 2
+        && partition_is_stable(presentation, &state_blocks, initial_block_count)
+    {
+        let (classes, class_ranges) = canonicalize_partition(presentation, &state_blocks)?;
+        return Ok((classes, class_ranges, Box::default()));
+    }
+    // At most one pending splitter block per forward source edge is useful:
+    // for a fixed generator, distinct pending blocks have disjoint nonempty
+    // inverse images. Keep only those active pairs instead of reserving one
+    // bit and one historical queue slot for every target-state/generator pair.
+    let pending_capacity = presentation.transitions.len();
+    let mut queue = VecDeque::with_capacity(pending_capacity);
+    let mut pending = PendingSet::new(pending_capacity)?;
+    let mut pending_counts = vec![0_u32; block_capacity];
+    for (generator, record) in presentation.generators.iter().copied().enumerate() {
+        if initial_blocks_per_sort[record.target_sort as usize] <= 1 {
+            continue;
+        }
+        let source = presentation.sorts[record.source_sort as usize];
+        for source_state in source.start..source.end() {
+            let target_state = presentation
+                .transition(generator as u32, source_state)
+                .expect("validated total generator");
+            if state_blocks[target_state as usize] == omitted_blocks[record.target_sort as usize] {
+                continue;
+            }
+            push_split_work(
+                &mut queue,
+                &mut pending,
+                &mut pending_counts,
+                SplitWorkItem {
+                    block: state_blocks[target_state as usize],
+                    generator: generator as u32,
+                    _reserved: [0; 2],
+                },
+            )?;
+        }
+    }
+    if queue.is_empty() {
+        let (classes, class_ranges) = canonicalize_partition(presentation, &state_blocks)?;
+        return Ok((classes, class_ranges, Box::default()));
+    }
+    let inverse = InverseIndex::new(presentation)?;
+    let mut marked = bitmap_storage(presentation.state_count())?;
+    let mut marked_sources = Vec::with_capacity(presentation.state_count());
+    let mut member_positions = vec![0_u32; presentation.state_count()];
+    for (position, &state) in members.iter().enumerate() {
+        member_positions[state as usize] = position as u32;
+    }
+    let mut marked_counts = vec![0_u32; block_capacity];
+    let mut touched = Vec::with_capacity(block_capacity);
+    let mut touched_flags = bitmap_storage(block_capacity)?;
+    let mut records = Vec::with_capacity(block_capacity.saturating_sub(initial_block_count));
+
+    while let Some(work) = queue.pop_front() {
+        if !pending.remove(split_work_key(work.block, work.generator)) {
+            return Err(ObservationalError::Partition);
+        }
+        pending_counts[work.block as usize] = pending_counts[work.block as usize]
+            .checked_sub(1)
+            .ok_or(ObservationalError::Partition)?;
+        let splitter = block_ranges[work.block as usize];
+        for position in splitter.start..splitter.end() {
+            let target_state = members[position as usize];
+            for &source_state in inverse.predecessors(presentation, work.generator, target_state) {
+                if bitmap_contains(&marked, source_state as usize) {
+                    continue;
+                }
+                bitmap_insert(&mut marked, source_state as usize);
+                marked_sources.push(source_state);
+                let source_block = state_blocks[source_state as usize] as usize;
+                if !bitmap_contains(&touched_flags, source_block) {
+                    bitmap_insert(&mut touched_flags, source_block);
+                    touched.push(source_block as u32);
+                }
+            }
+        }
+        // Keep the splitter's member range immutable while its inverse image
+        // is enumerated.  Afterwards each marked source is moved exactly once
+        // to the end of its current block.
+        for &source_state in &marked_sources {
+            let source_block = state_blocks[source_state as usize] as usize;
+            let marked_count = &mut marked_counts[source_block];
+            let source_position = member_positions[source_state as usize] as usize;
+            let marked_position = (block_ranges[source_block].end() - *marked_count - 1) as usize;
+            let displaced_state = members[marked_position];
+            members.swap(source_position, marked_position);
+            member_positions[source_state as usize] = marked_position as u32;
+            member_positions[displaced_state as usize] = source_position as u32;
+            *marked_count += 1;
+        }
+        for pass in 0..2 {
+            for &source_block in &touched {
+                if (source_block == work.block) != (pass == 1) {
+                    continue;
+                }
+                split_marked_block(
+                    &inverse,
+                    source_block,
+                    marked_counts[source_block as usize],
+                    work,
+                    &mut state_blocks,
+                    &mut block_sorts,
+                    &mut members,
+                    &mut block_ranges,
+                    &mut queue,
+                    &mut pending,
+                    &mut pending_counts,
+                    &mut records,
+                )?;
+            }
+        }
+        for source_state in marked_sources.drain(..) {
+            bitmap_remove(&mut marked, source_state as usize);
+        }
+        for source_block in touched.drain(..) {
+            marked_counts[source_block as usize] = 0;
+            bitmap_remove(&mut touched_flags, source_block as usize);
+        }
+    }
+
+    if records.len() != block_sorts.len().saturating_sub(initial_block_count) {
+        return Err(ObservationalError::Partition);
+    }
+    let (classes, class_ranges) = canonicalize_partition(presentation, &state_blocks)?;
+    Ok((classes, class_ranges, records.into_boxed_slice()))
+}
+
+fn partition_is_stable(
+    presentation: &FinitePresentation,
+    state_blocks: &[u32],
+    block_count: usize,
+) -> bool {
+    let mut expected_targets = vec![u32::MAX; block_count];
+    let mut touched = Vec::with_capacity(block_count);
+    for (generator, record) in presentation.generators.iter().copied().enumerate() {
+        let source = presentation.sorts[record.source_sort as usize];
+        for state in source.start..source.end() {
+            let source_block = state_blocks[state as usize] as usize;
+            let target_state = presentation
+                .transition(generator as u32, state)
+                .expect("validated total generator");
+            let target_block = state_blocks[target_state as usize];
+            let expected = &mut expected_targets[source_block];
+            if *expected == u32::MAX {
+                *expected = target_block;
+                touched.push(source_block as u32);
+            } else if *expected != target_block {
+                return false;
+            }
+        }
+        for block in touched.drain(..) {
+            expected_targets[block as usize] = u32::MAX;
+        }
+    }
+    true
+}
+
+fn canonicalize_partition(
+    presentation: &FinitePresentation,
+    state_blocks: &[u32],
+) -> Result<Partition, ObservationalError> {
+    let mut classes = vec![u32::MAX; presentation.state_count()];
+    let mut old_to_new = vec![u32::MAX; presentation.state_count()];
+    let mut ranges = Vec::with_capacity(presentation.sorts.len());
+    let mut next_class = 0_u32;
+    for states in presentation.sorts.iter().copied() {
+        let class_start = next_class;
+        for state in states.start..states.end() {
+            let old = state_blocks[state as usize] as usize;
+            if old_to_new[old] == u32::MAX {
+                old_to_new[old] = next_class;
+                next_class = next_class
+                    .checked_add(1)
+                    .ok_or(ObservationalError::Overflow)?;
+            }
+            classes[state as usize] = old_to_new[old];
+        }
+        ranges.push(SortRange {
+            start: class_start,
+            len: next_class - class_start,
+        });
+    }
+    Ok((classes.into_boxed_slice(), ranges.into_boxed_slice()))
+}
+
+fn initial_split_workspace(
+    presentation: &FinitePresentation,
+    block_capacity: usize,
+) -> Result<SplitWorkspace, ObservationalError> {
+    let (state_blocks, block_sorts) = initial_split_state(presentation, block_capacity)?;
+    let block_count = block_sorts.len();
+    let mut counts = vec![0_u32; block_count];
+    for &block in &state_blocks {
+        counts[block as usize] += 1;
+    }
+    let mut block_ranges = Vec::with_capacity(block_capacity.max(block_count));
+    let mut next = 0_u32;
+    for count in counts {
+        block_ranges.push(SortRange {
+            start: next,
+            len: count,
+        });
+        next += count;
+    }
+    let mut cursors = block_ranges
+        .iter()
+        .map(|range| range.start)
+        .collect::<Vec<_>>();
+    let mut members = vec![0_u32; presentation.state_count()];
+    for (state, &block) in state_blocks.iter().enumerate() {
+        let cursor = &mut cursors[block as usize];
+        members[*cursor as usize] = state as u32;
+        *cursor += 1;
+    }
+    Ok((state_blocks, block_sorts, members, block_ranges))
+}
+
+#[allow(clippy::too_many_arguments)]
+fn split_marked_block(
+    inverse: &InverseIndex,
+    source_block: u32,
+    moved_len: u32,
+    work: SplitWorkItem,
+    state_blocks: &mut [u32],
+    block_sorts: &mut Vec<u32>,
+    members: &mut [u32],
+    block_ranges: &mut Vec<SortRange>,
+    queue: &mut VecDeque<SplitWorkItem>,
+    pending: &mut PendingSet,
+    pending_counts: &mut [u32],
+    records: &mut Vec<SplitRecord>,
+) -> Result<(), ObservationalError> {
+    let range = block_ranges[source_block as usize];
+    let retained_len = range.len - moved_len;
+    if retained_len == 0 || moved_len == 0 {
+        return Ok(());
+    }
+    if block_sorts.len() == block_sorts.capacity()
+        || block_ranges.len() == block_ranges.capacity()
+        || records.len() == records.capacity()
+    {
+        return Err(ObservationalError::Overflow);
+    }
+    let new_block = u32::try_from(block_sorts.len()).map_err(|_| ObservationalError::Overflow)?;
+    let new_range = if moved_len <= retained_len {
+        block_ranges[source_block as usize].len = retained_len;
+        SortRange {
+            start: range.start + retained_len,
+            len: moved_len,
+        }
+    } else {
+        block_ranges[source_block as usize] = SortRange {
+            start: range.start + retained_len,
+            len: moved_len,
+        };
+        SortRange {
+            start: range.start,
+            len: retained_len,
+        }
+    };
+    block_ranges.push(new_range);
+    block_sorts.push(block_sorts[source_block as usize]);
+    for position in new_range.start as usize..new_range.end() as usize {
+        state_blocks[members[position] as usize] = new_block;
+    }
+    records.push(SplitRecord {
+        source_block,
+        generator: work.generator,
+        splitter_block: work.block,
+        new_block,
+    });
+    schedule_sparse_splitter_block(
+        inverse,
+        new_block,
+        block_ranges,
+        members,
+        queue,
+        pending,
+        pending_counts,
+    )?;
+    Ok(())
+}
+
+fn split_work_key(block: u32, generator: u32) -> u64 {
+    (u64::from(block) << 32) | u64::from(generator)
+}
+
+#[allow(clippy::too_many_arguments)]
+fn schedule_sparse_splitter_block(
+    inverse: &InverseIndex,
+    block: u32,
+    block_ranges: &[SortRange],
+    members: &[u32],
+    queue: &mut VecDeque<SplitWorkItem>,
+    pending: &mut PendingSet,
+    pending_counts: &mut [u32],
+) -> Result<(), ObservationalError> {
+    let range = block_ranges[block as usize];
+    for position in range.start..range.end() {
+        let target_state = members[position as usize];
+        for &generator in inverse.generators_with_predecessors(target_state) {
+            push_split_work(
+                queue,
+                pending,
+                pending_counts,
+                SplitWorkItem {
+                    block,
+                    generator,
+                    _reserved: [0; 2],
+                },
+            )?;
+        }
+    }
+    Ok(())
+}
+
+fn push_split_work(
+    queue: &mut VecDeque<SplitWorkItem>,
+    pending: &mut PendingSet,
+    pending_counts: &mut [u32],
+    work: SplitWorkItem,
+) -> Result<(), ObservationalError> {
+    let key = split_work_key(work.block, work.generator);
+    if pending.contains(key) {
+        return Ok(());
+    }
+    if queue.len() == queue.capacity() {
+        return Err(ObservationalError::Overflow);
+    }
+    if !pending.insert(key)? {
+        return Ok(());
+    }
+    pending_counts[work.block as usize] = pending_counts[work.block as usize]
+        .checked_add(1)
+        .ok_or(ObservationalError::Overflow)?;
+    queue.push_back(work);
+    Ok(())
+}
+
+fn verify_split_transcript(
+    presentation: &FinitePresentation,
+    compiled: &CompiledObservation,
+) -> Result<(), ObservationalError> {
+    // The generic verifier has already established observation constancy and
+    // generator congruence of the compiled partition. Starting from the typed
+    // observation partition, every recorded inverse-image split is therefore
+    // forced in every stable refinement. Agreement after replay proves that
+    // the compiled stable partition is the coarsest one.
+    if compiled.split_records.is_empty() {
+        let (initial_classes, initial_ranges) = initial_partition(presentation)?;
+        if initial_classes != compiled.state_classes || initial_ranges != compiled.class_ranges {
+            return Err(ObservationalError::Partition);
+        }
+        return Ok(());
+    }
+    let inverse = InverseIndex::new(presentation)?;
+    inverse.verify(presentation)?;
+    let (mut state_blocks, mut block_sorts, mut members, mut block_ranges) =
+        initial_split_workspace(presentation, compiled.class_outputs.len())?;
+    let mut member_positions = vec![0_u32; presentation.state_count()];
+    for (position, &state) in members.iter().enumerate() {
+        member_positions[state as usize] = position as u32;
+    }
+    let mut moved_sources = Vec::with_capacity(presentation.state_count());
+    for &record in &compiled.split_records {
+        if record.new_block as usize != block_sorts.len() {
+            return Err(ObservationalError::CompiledShape);
+        }
+        let source_sort = *block_sorts
+            .get(record.source_block as usize)
+            .ok_or(ObservationalError::CompiledShape)?;
+        let splitter_sort = *block_sorts
+            .get(record.splitter_block as usize)
+            .ok_or(ObservationalError::CompiledShape)?;
+        let generator = *presentation
+            .generators
+            .get(record.generator as usize)
+            .ok_or(ObservationalError::CompiledShape)?;
+        if generator.source_sort != source_sort || generator.target_sort != splitter_sort {
+            return Err(ObservationalError::CompiledShape);
+        }
+        let source_range = block_ranges[record.source_block as usize];
+        let splitter_range = block_ranges[record.splitter_block as usize];
+        moved_sources.clear();
+        for position in splitter_range.start..splitter_range.end() {
+            let target_state = members[position as usize];
+            for &source_state in inverse.predecessors(presentation, record.generator, target_state)
+            {
+                if state_blocks[source_state as usize] == record.source_block {
+                    moved_sources.push(source_state);
+                }
+            }
+        }
+        if moved_sources.is_empty() || moved_sources.len() == source_range.len as usize {
+            return Err(ObservationalError::Partition);
+        }
+        let mut boundary = source_range.end() as usize;
+        for &source_state in &moved_sources {
+            boundary -= 1;
+            let position = member_positions[source_state as usize] as usize;
+            let displaced = members[boundary];
+            members.swap(position, boundary);
+            member_positions[source_state as usize] = boundary as u32;
+            member_positions[displaced as usize] = position as u32;
+        }
+        if block_sorts.len() == block_sorts.capacity()
+            || block_ranges.len() == block_ranges.capacity()
+        {
+            return Err(ObservationalError::Overflow);
+        }
+        let retained_len = boundary as u32 - source_range.start;
+        let moved_len = source_range.len - retained_len;
+        let new_range = if moved_len <= retained_len {
+            block_ranges[record.source_block as usize].len = retained_len;
+            SortRange {
+                start: boundary as u32,
+                len: moved_len,
+            }
+        } else {
+            block_ranges[record.source_block as usize] = SortRange {
+                start: boundary as u32,
+                len: moved_len,
+            };
+            SortRange {
+                start: source_range.start,
+                len: retained_len,
+            }
+        };
+        for position in new_range.start..new_range.end() {
+            state_blocks[members[position as usize] as usize] = record.new_block;
+        }
+        block_ranges.push(new_range);
+        block_sorts.push(source_sort);
+    }
+    if block_sorts.len() != compiled.class_outputs.len()
+        || !partitions_agree(&state_blocks, &compiled.state_classes)
+    {
+        return Err(ObservationalError::Partition);
+    }
+    Ok(())
+}
+
+fn initial_split_state(
+    presentation: &FinitePresentation,
+    block_capacity: usize,
+) -> Result<(Box<[u32]>, Vec<u32>), ObservationalError> {
+    let (state_blocks, initial_ranges) = initial_partition(presentation)?;
+    let initial_count = initial_ranges
+        .last()
+        .map_or(0, |range| range.end() as usize);
+    let mut block_sorts = Vec::with_capacity(block_capacity.max(initial_count));
+    block_sorts.resize(initial_count, u32::MAX);
+    for (sort, range) in presentation.sorts.iter().copied().enumerate() {
+        let sort = u32::try_from(sort).map_err(|_| ObservationalError::Overflow)?;
+        for state in range.start..range.end() {
+            block_sorts[state_blocks[state as usize] as usize] = sort;
+        }
+    }
+    Ok((state_blocks, block_sorts))
+}
+
+fn partitions_agree(left: &[u32], right: &[u32]) -> bool {
+    if left.len() != right.len() {
+        return false;
+    }
+    let left_count = left
+        .iter()
+        .copied()
+        .max()
+        .map_or(0, |block| block as usize + 1);
+    let right_count = right
+        .iter()
+        .copied()
+        .max()
+        .map_or(0, |block| block as usize + 1);
+    if left_count != right_count {
+        return false;
+    }
+    let mut left_to_right = vec![u32::MAX; left_count];
+    let mut right_to_left = vec![u32::MAX; right_count];
+    for (&left_block, &right_block) in left.iter().zip(right) {
+        let left_slot = &mut left_to_right[left_block as usize];
+        let right_slot = &mut right_to_left[right_block as usize];
+        if (*left_slot != u32::MAX && *left_slot != right_block)
+            || (*right_slot != u32::MAX && *right_slot != left_block)
+        {
+            return false;
+        }
+        *left_slot = right_block;
+        *right_slot = left_block;
+    }
+    true
+}
+
 fn build_separators(
     presentation: &FinitePresentation,
     classes: &[u32],
 ) -> Result<SeparatorPool, ObservationalError> {
     let mut records = Vec::new();
     let mut paths = Vec::new();
+    match visit_separators(presentation, classes, |mut record, path| {
+        record.path_start = u32::try_from(paths.len()).map_err(|_| ObservationalError::Overflow)?;
+        paths.extend_from_slice(path);
+        records.push(record);
+        Ok::<_, ObservationalError>(())
+    }) {
+        Ok(_) => {}
+        Err(SeparatorStreamError::Compilation(error)) | Err(SeparatorStreamError::Sink(error)) => {
+            return Err(error)
+        }
+    }
+    Ok((records.into_boxed_slice(), paths.into_boxed_slice()))
+}
+
+/// Emit the exhaustive concrete-pair audit in canonical sort/left/right order
+/// without retaining its records or paths in the compiled quotient.
+///
+/// This bounds evidence-generation residency but not the quadratic number of
+/// records or the cost of finding each distinguishing path.
+pub fn stream_exhaustive_separators<E>(
+    presentation: &FinitePresentation,
+    compiled: &CompiledObservation,
+    sink: impl FnMut(SeparatorRecord, &[u32]) -> Result<(), E>,
+) -> Result<SeparatorStreamMetrics, SeparatorStreamError<E>> {
+    verify_compilation(presentation, compiled).map_err(SeparatorStreamError::Compilation)?;
+    visit_separators(presentation, &compiled.state_classes, sink)
+}
+
+/// Compile a quotient without retaining pair evidence and stream the exhaustive
+/// audit directly to an output such as `BufWriter<File>`.
+pub fn compile_observational_to_separator_stream(
+    presentation: &FinitePresentation,
+    output: &mut impl Write,
+) -> Result<(CompiledObservation, SeparatorStreamMetrics), SeparatorFileError> {
+    let compiled =
+        compile_observational_with_policy(presentation, CertificatePolicy::QuotientOnly)?;
+    let metrics = write_verified_separator_stream(presentation, &compiled, output)?;
+    Ok((compiled, metrics))
+}
+
+/// Write a framed, append-only exhaustive separator stream directly to an
+/// output such as `BufWriter<File>`.
+///
+/// The stream has an eight-byte `ERGSEP01` header, presentation identity and
+/// dimensions, one framed record/path at a time, and a zero-tagged terminal
+/// count footer. An interrupted stream has no valid footer. The presentation
+/// fingerprint is a fast identity tag, not a cryptographic authentication
+/// mechanism.
+pub fn write_exhaustive_separator_stream(
+    presentation: &FinitePresentation,
+    compiled: &CompiledObservation,
+    output: &mut impl Write,
+) -> Result<SeparatorStreamMetrics, SeparatorFileError> {
+    if compiled.certificate_policy != CertificatePolicy::QuotientOnly {
+        return Err(SeparatorFileError::Policy);
+    }
+    verify_compilation(presentation, compiled)?;
+    write_verified_separator_stream(presentation, compiled, output)
+}
+
+fn write_verified_separator_stream(
+    presentation: &FinitePresentation,
+    compiled: &CompiledObservation,
+    output: &mut impl Write,
+) -> Result<SeparatorStreamMetrics, SeparatorFileError> {
+    let fingerprint = presentation.fingerprint();
+    output.write_all(SEPARATOR_STREAM_MAGIC)?;
+    output.write_all(&fingerprint.low.to_le_bytes())?;
+    output.write_all(&fingerprint.high.to_le_bytes())?;
+    write_stream_u32(
+        output,
+        u32::try_from(presentation.state_count()).map_err(|_| ObservationalError::Overflow)?,
+    )?;
+    write_stream_u32(
+        output,
+        u32::try_from(compiled.class_outputs.len()).map_err(|_| ObservationalError::Overflow)?,
+    )?;
+
+    let metrics = match visit_separators(
+        presentation,
+        &compiled.state_classes,
+        |record, path| -> Result<(), std::io::Error> {
+            output.write_all(&[1])?;
+            write_stream_u32(output, record.left_state)?;
+            write_stream_u32(output, record.right_state)?;
+            write_stream_u32(output, record.path_len)?;
+            write_stream_u32(output, record.left_output)?;
+            write_stream_u32(output, record.right_output)?;
+            for &generator in path {
+                write_stream_u32(output, generator)?;
+            }
+            Ok(())
+        },
+    ) {
+        Ok(metrics) => metrics,
+        Err(SeparatorStreamError::Compilation(error)) => return Err(error.into()),
+        Err(SeparatorStreamError::Sink(error)) => return Err(error.into()),
+    };
+    output.write_all(&[0])?;
+    output.write_all(
+        &u64::try_from(metrics.separators)
+            .map_err(|_| ObservationalError::Overflow)?
+            .to_le_bytes(),
+    )?;
+    output.write_all(
+        &u64::try_from(metrics.separator_steps)
+            .map_err(|_| ObservationalError::Overflow)?
+            .to_le_bytes(),
+    )?;
+    Ok(metrics)
+}
+
+fn write_stream_u32(output: &mut impl Write, word: u32) -> Result<(), std::io::Error> {
+    output.write_all(&word.to_le_bytes())
+}
+
+/// Verify a canonical exhaustive separator stream directly from a reader
+/// without retaining its records or generator paths.
+pub fn verify_exhaustive_separator_stream(
+    presentation: &FinitePresentation,
+    compiled: &CompiledObservation,
+    input: &mut impl Read,
+) -> Result<SeparatorStreamMetrics, SeparatorFileError> {
+    if compiled.certificate_policy != CertificatePolicy::QuotientOnly {
+        return Err(SeparatorFileError::Policy);
+    }
+    verify_compilation(presentation, compiled)?;
+    let mut magic = [0_u8; 8];
+    input.read_exact(&mut magic)?;
+    if &magic != SEPARATOR_STREAM_MAGIC {
+        return Err(SeparatorFileError::Format);
+    }
+    let fingerprint = presentation.fingerprint();
+    if read_stream_u64(input)? != fingerprint.low
+        || read_stream_u64(input)? != fingerprint.high
+        || read_stream_u32(input)? as usize != presentation.state_count()
+        || read_stream_u32(input)? as usize != compiled.class_outputs.len()
+    {
+        return Err(SeparatorFileError::Format);
+    }
+
+    let mut metrics = SeparatorStreamMetrics::default();
+    for sort in presentation.sorts.iter().copied() {
+        for expected_left in sort.start..sort.end() {
+            for expected_right in expected_left + 1..sort.end() {
+                if compiled.state_classes[expected_left as usize]
+                    == compiled.state_classes[expected_right as usize]
+                {
+                    continue;
+                }
+                if read_stream_byte(input)? != 1 {
+                    return Err(SeparatorFileError::Format);
+                }
+                let left = read_stream_u32(input)?;
+                let right = read_stream_u32(input)?;
+                let path_len = read_stream_u32(input)?;
+                let claimed_left_output = read_stream_u32(input)?;
+                let claimed_right_output = read_stream_u32(input)?;
+                if left != expected_left || right != expected_right {
+                    return Err(SeparatorFileError::Format);
+                }
+                let mut terminal_left = left;
+                let mut terminal_right = right;
+                for _ in 0..path_len {
+                    let generator = read_stream_u32(input)?;
+                    terminal_left = presentation
+                        .transition(generator, terminal_left)
+                        .ok_or(SeparatorFileError::Format)?;
+                    terminal_right = presentation
+                        .transition(generator, terminal_right)
+                        .ok_or(SeparatorFileError::Format)?;
+                }
+                let left_output = presentation.observations[terminal_left as usize];
+                let right_output = presentation.observations[terminal_right as usize];
+                if left_output == right_output
+                    || left_output != claimed_left_output
+                    || right_output != claimed_right_output
+                {
+                    return Err(SeparatorFileError::Format);
+                }
+                metrics.separators = metrics
+                    .separators
+                    .checked_add(1)
+                    .ok_or(ObservationalError::Overflow)?;
+                metrics.separator_steps = metrics
+                    .separator_steps
+                    .checked_add(path_len as usize)
+                    .ok_or(ObservationalError::Overflow)?;
+            }
+        }
+    }
+    if read_stream_byte(input)? != 0
+        || read_stream_u64(input)?
+            != u64::try_from(metrics.separators).map_err(|_| ObservationalError::Overflow)?
+        || read_stream_u64(input)?
+            != u64::try_from(metrics.separator_steps).map_err(|_| ObservationalError::Overflow)?
+    {
+        return Err(SeparatorFileError::Format);
+    }
+    let mut trailing = [0_u8; 1];
+    if input.read(&mut trailing)? != 0 {
+        return Err(SeparatorFileError::Format);
+    }
+    Ok(metrics)
+}
+
+fn read_stream_byte(input: &mut impl Read) -> Result<u8, std::io::Error> {
+    let mut byte = [0_u8; 1];
+    input.read_exact(&mut byte)?;
+    Ok(byte[0])
+}
+
+fn read_stream_u32(input: &mut impl Read) -> Result<u32, std::io::Error> {
+    let mut bytes = [0_u8; 4];
+    input.read_exact(&mut bytes)?;
+    Ok(u32::from_le_bytes(bytes))
+}
+
+fn read_stream_u64(input: &mut impl Read) -> Result<u64, std::io::Error> {
+    let mut bytes = [0_u8; 8];
+    input.read_exact(&mut bytes)?;
+    Ok(u64::from_le_bytes(bytes))
+}
+
+fn visit_separators<E>(
+    presentation: &FinitePresentation,
+    classes: &[u32],
+    mut sink: impl FnMut(SeparatorRecord, &[u32]) -> Result<(), E>,
+) -> Result<SeparatorStreamMetrics, SeparatorStreamError<E>> {
+    let mut metrics = SeparatorStreamMetrics::default();
     for sort in presentation.sorts.iter().copied() {
         for left in sort.start..sort.end() {
             for right in left + 1..sort.end() {
@@ -500,24 +2029,33 @@ fn build_separators(
                 }
                 let (path, left_output, right_output) =
                     distinguishing_path(presentation, left, right)
-                        .ok_or(ObservationalError::MissingSeparator { left, right })?;
-                let path_start =
-                    u32::try_from(paths.len()).map_err(|_| ObservationalError::Overflow)?;
-                let path_len =
-                    u32::try_from(path.len()).map_err(|_| ObservationalError::Overflow)?;
-                paths.extend_from_slice(&path);
-                records.push(SeparatorRecord {
+                        .ok_or(ObservationalError::MissingSeparator { left, right })
+                        .map_err(SeparatorStreamError::Compilation)?;
+                let path_len = u32::try_from(path.len())
+                    .map_err(|_| SeparatorStreamError::Compilation(ObservationalError::Overflow))?;
+                let record = SeparatorRecord {
                     left_state: left,
                     right_state: right,
-                    path_start,
+                    path_start: 0,
                     path_len,
                     left_output,
                     right_output,
-                });
+                };
+                sink(record, &path).map_err(SeparatorStreamError::Sink)?;
+                metrics.separators =
+                    metrics
+                        .separators
+                        .checked_add(1)
+                        .ok_or(SeparatorStreamError::Compilation(
+                            ObservationalError::Overflow,
+                        ))?;
+                metrics.separator_steps = metrics.separator_steps.checked_add(path.len()).ok_or(
+                    SeparatorStreamError::Compilation(ObservationalError::Overflow),
+                )?;
             }
         }
     }
-    Ok((records.into_boxed_slice(), paths.into_boxed_slice()))
+    Ok(metrics)
 }
 
 fn distinguishing_path(
@@ -563,6 +2101,19 @@ pub fn verify_compilation(
         return Err(ObservationalError::CompiledShape);
     }
     let class_count = compiled.class_outputs.len();
+    let mut next_class = 0_u32;
+    for range in compiled.class_ranges.iter().copied() {
+        let Some(end) = range.start.checked_add(range.len) else {
+            return Err(ObservationalError::CompiledShape);
+        };
+        if range.start != next_class || end as usize > class_count {
+            return Err(ObservationalError::CompiledShape);
+        }
+        next_class = end;
+    }
+    if next_class as usize != class_count {
+        return Err(ObservationalError::CompiledShape);
+    }
     let mut seen_classes = vec![false; class_count];
     for (sort_index, state_range) in presentation.sorts.iter().copied().enumerate() {
         let class_range = compiled.class_ranges[sort_index];
@@ -598,30 +2149,71 @@ pub fn verify_compilation(
         {
             return Err(ObservationalError::CompiledShape);
         }
+        let source_classes = compiled.class_ranges[generator.source_sort as usize];
+        let target_classes = compiled.class_ranges[generator.target_sort as usize];
+        if target_classes.len == 1 {
+            for class in source_classes.start..source_classes.end() {
+                if compiled.transition(generator_index as u32, class) != Some(target_classes.start)
+                {
+                    return Err(ObservationalError::QuotientTransition {
+                        generator: generator_index as u32,
+                        class,
+                    });
+                }
+            }
+            continue;
+        }
         let source = presentation.sorts[generator.source_sort as usize];
-        let mut expected: FxHashMap<u32, u32> = FxHashMap::default();
+        let mut expected = vec![u32::MAX; source_classes.len as usize];
         for state in source.start..source.end() {
             let class = compiled.state_classes[state as usize];
             let target = presentation
                 .transition(generator_index as u32, state)
                 .ok_or(ObservationalError::CompiledShape)?;
             let target_class = compiled.state_classes[target as usize];
-            if expected
-                .insert(class, target_class)
-                .is_some_and(|old| old != target_class)
-            {
+            let slot = &mut expected[(class - source_classes.start) as usize];
+            if *slot != u32::MAX && *slot != target_class {
                 return Err(ObservationalError::GeneratorMismatch {
                     generator: generator_index as u32,
                     class,
                 });
             }
+            *slot = target_class;
         }
-        for (class, target) in expected {
+        for (local, target) in expected.into_iter().enumerate() {
+            let class = source_classes.start + local as u32;
             if compiled.transition(generator_index as u32, class) != Some(target) {
                 return Err(ObservationalError::QuotientTransition {
                     generator: generator_index as u32,
                     class,
                 });
+            }
+        }
+    }
+
+    match compiled.certificate_policy {
+        CertificatePolicy::QuotientOnly => {
+            if !compiled.split_records.is_empty()
+                || !compiled.separators.is_empty()
+                || !compiled.separator_paths.is_empty()
+            {
+                return Err(ObservationalError::CompiledShape);
+            }
+            let (classes, ranges, _) = minimize_partition(presentation)?;
+            if classes != compiled.state_classes || ranges != compiled.class_ranges {
+                return Err(ObservationalError::Partition);
+            }
+            return Ok(());
+        }
+        CertificatePolicy::SplitTranscript => {
+            if !compiled.separators.is_empty() || !compiled.separator_paths.is_empty() {
+                return Err(ObservationalError::CompiledShape);
+            }
+            return verify_split_transcript(presentation, compiled);
+        }
+        CertificatePolicy::ExhaustivePairAudit => {
+            if !compiled.split_records.is_empty() {
+                return Err(ObservationalError::CompiledShape);
             }
         }
     }
@@ -702,6 +2294,499 @@ mod tests {
         assert_eq!(compiled.state_classes()[0], compiled.state_classes()[2]);
         assert_ne!(compiled.state_classes()[0], compiled.state_classes()[1]);
         verify_compilation(&presentation, &compiled).unwrap();
+    }
+
+    #[test]
+    fn quotient_only_matches_exhaustive_without_pair_evidence() {
+        let presentation = FinitePresentation::new(
+            [3, 2],
+            vec![0, 0, 0, 0, 1],
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 1,
+                transitions: vec![3, 4, 3].into_boxed_slice(),
+            }],
+        )
+        .unwrap();
+        let exhaustive = compile_observational(&presentation).unwrap();
+        let quotient_only =
+            compile_observational_with_policy(&presentation, CertificatePolicy::QuotientOnly)
+                .unwrap();
+        let split =
+            compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
+                .unwrap();
+
+        assert_eq!(
+            quotient_only.certificate_policy(),
+            CertificatePolicy::QuotientOnly
+        );
+        assert_eq!(quotient_only.state_classes(), exhaustive.state_classes());
+        assert_eq!(quotient_only.class_ranges(), exhaustive.class_ranges());
+        assert_eq!(quotient_only.class_outputs(), exhaustive.class_outputs());
+        assert_eq!(quotient_only.storage().certificate_bytes, 0);
+        assert_eq!(quotient_only.metrics().separators, 0);
+        verify_compilation(&presentation, &quotient_only).unwrap();
+        assert_eq!(split.state_classes(), exhaustive.state_classes());
+        assert_eq!(split.split_records().len(), 1);
+        assert_eq!(split.storage().certificate_bytes, 16);
+        verify_compilation(&presentation, &split).unwrap();
+
+        let mut corrupt_split = split.clone();
+        corrupt_split.split_records[0].new_block += 1;
+        assert!(matches!(
+            verify_compilation(&presentation, &corrupt_split),
+            Err(ObservationalError::CompiledShape)
+        ));
+        let mut missing_split = split.clone();
+        missing_split.split_records = Box::default();
+        assert!(matches!(
+            verify_compilation(&presentation, &missing_split),
+            Err(ObservationalError::Partition)
+        ));
+        let mut unknown_generator = split.clone();
+        unknown_generator.split_records[0].generator = u32::MAX;
+        assert!(matches!(
+            verify_compilation(&presentation, &unknown_generator),
+            Err(ObservationalError::CompiledShape)
+        ));
+
+        let mut stream = Vec::new();
+        let (streamed_compiled, streamed) =
+            compile_observational_to_separator_stream(&presentation, &mut stream).unwrap();
+        assert_eq!(
+            streamed_compiled.state_classes(),
+            exhaustive.state_classes()
+        );
+        assert_eq!(streamed_compiled.storage().certificate_bytes, 0);
+        assert_eq!(streamed.separators, exhaustive.metrics().separators);
+        assert_eq!(
+            streamed.separator_steps,
+            exhaustive.metrics().separator_steps
+        );
+        assert!(stream.starts_with(SEPARATOR_STREAM_MAGIC));
+        let mut footer = vec![0];
+        footer.extend_from_slice(&(streamed.separators as u64).to_le_bytes());
+        footer.extend_from_slice(&(streamed.separator_steps as u64).to_le_bytes());
+        assert!(stream.ends_with(&footer));
+        assert_eq!(
+            verify_exhaustive_separator_stream(
+                &presentation,
+                &streamed_compiled,
+                &mut stream.as_slice(),
+            )
+            .unwrap(),
+            streamed
+        );
+        let last = stream.len() - 1;
+        stream[last] ^= 1;
+        assert!(matches!(
+            verify_exhaustive_separator_stream(
+                &presentation,
+                &streamed_compiled,
+                &mut stream.as_slice(),
+            ),
+            Err(SeparatorFileError::Format)
+        ));
+        assert!(matches!(
+            write_exhaustive_separator_stream(&presentation, &exhaustive, &mut Vec::new()),
+            Err(SeparatorFileError::Policy)
+        ));
+    }
+
+    #[test]
+    fn verifier_rejects_classes_shared_across_sorts() {
+        let presentation = FinitePresentation::new([1, 1], vec![0, 0], []).unwrap();
+        let mut compiled =
+            compile_observational_with_policy(&presentation, CertificatePolicy::QuotientOnly)
+                .unwrap();
+        compiled.class_ranges = vec![
+            SortRange { start: 0, len: 1 },
+            SortRange { start: 0, len: 1 },
+        ]
+        .into_boxed_slice();
+        compiled.state_classes = vec![0, 0].into_boxed_slice();
+        compiled.class_outputs = vec![0].into_boxed_slice();
+        compiled.class_representatives = vec![0].into_boxed_slice();
+
+        assert_eq!(
+            verify_compilation(&presentation, &compiled),
+            Err(ObservationalError::CompiledShape)
+        );
+    }
+
+    #[test]
+    fn split_transcript_handles_cycles_and_empty_sorts() {
+        let cycle = FinitePresentation::new(
+            [3],
+            vec![1, 0, 0],
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: vec![1, 2, 0].into_boxed_slice(),
+            }],
+        )
+        .unwrap();
+        let compiled =
+            compile_observational_with_policy(&cycle, CertificatePolicy::SplitTranscript).unwrap();
+        assert_eq!(compiled.metrics().classes, 3);
+        assert_eq!(compiled.split_records().len(), 1);
+        verify_compilation(&cycle, &compiled).unwrap();
+
+        let empty_sort = FinitePresentation::new([0, 2], vec![0, 1], []).unwrap();
+        let compiled =
+            compile_observational_with_policy(&empty_sort, CertificatePolicy::SplitTranscript)
+                .unwrap();
+        assert_eq!(compiled.metrics().classes, 2);
+        assert!(compiled.split_records().is_empty());
+        verify_compilation(&empty_sort, &compiled).unwrap();
+    }
+
+    #[test]
+    fn split_transcript_matches_bounded_cyclic_corpus() {
+        for seed in 0_u64..128 {
+            let mut state = seed + 1;
+            let states = 1 + (next_fixture_word(&mut state) % 8);
+            let generator_count = 1 + (next_fixture_word(&mut state) % 3);
+            let observations = (0..states)
+                .map(|_| next_fixture_word(&mut state) % 3)
+                .collect::<Vec<_>>();
+            let generators = (0..generator_count)
+                .map(|_| GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 0,
+                    transitions: (0..states)
+                        .map(|_| next_fixture_word(&mut state) % states)
+                        .collect::<Vec<_>>()
+                        .into_boxed_slice(),
+                })
+                .collect::<Vec<_>>();
+            let presentation = FinitePresentation::new([states], observations, generators).unwrap();
+            let exhaustive = compile_observational(&presentation).unwrap();
+            let split = compile_observational_with_policy(
+                &presentation,
+                CertificatePolicy::SplitTranscript,
+            )
+            .unwrap();
+            let quotient =
+                compile_observational_with_policy(&presentation, CertificatePolicy::QuotientOnly)
+                    .unwrap();
+            assert_eq!(split.state_classes(), exhaustive.state_classes());
+            assert_eq!(quotient.state_classes(), exhaustive.state_classes());
+            assert!(split.split_records().len() <= split.metrics().classes);
+            verify_compilation(&presentation, &split).unwrap();
+        }
+    }
+
+    #[test]
+    fn split_transcript_matches_bounded_typed_corpus() {
+        for seed in 128_u64..384 {
+            let mut fixture = seed + 1;
+            let sort_count = 1 + (next_fixture_word(&mut fixture) % 4);
+            let sort_sizes = (0..sort_count)
+                .map(|_| next_fixture_word(&mut fixture) % 5)
+                .collect::<Vec<_>>();
+            let state_count = sort_sizes.iter().sum::<u32>();
+            let observations = (0..state_count)
+                .map(|_| next_fixture_word(&mut fixture) % 4)
+                .collect::<Vec<_>>();
+            let starts = sort_sizes
+                .iter()
+                .scan(0_u32, |start, &len| {
+                    let current = *start;
+                    *start += len;
+                    Some(current)
+                })
+                .collect::<Vec<_>>();
+            let mut generators = Vec::new();
+            for _ in 0..1 + (next_fixture_word(&mut fixture) % 8) {
+                let source_sort = next_fixture_word(&mut fixture) % sort_count;
+                let target_sort = next_fixture_word(&mut fixture) % sort_count;
+                let source_len = sort_sizes[source_sort as usize];
+                let target_len = sort_sizes[target_sort as usize];
+                if source_len != 0 && target_len == 0 {
+                    continue;
+                }
+                let target_start = starts[target_sort as usize];
+                let transitions = (0..source_len)
+                    .map(|_| target_start + next_fixture_word(&mut fixture) % target_len.max(1))
+                    .collect::<Vec<_>>()
+                    .into_boxed_slice();
+                generators.push(GeneratorSpec {
+                    source_sort,
+                    target_sort,
+                    transitions,
+                });
+            }
+            let presentation =
+                FinitePresentation::new(sort_sizes, observations, generators).unwrap();
+            let reference =
+                compile_observational_with_policy(&presentation, CertificatePolicy::QuotientOnly)
+                    .unwrap();
+            let split = compile_observational_with_policy(
+                &presentation,
+                CertificatePolicy::SplitTranscript,
+            )
+            .unwrap();
+            assert_eq!(split.state_classes(), reference.state_classes());
+            assert_eq!(split.class_ranges(), reference.class_ranges());
+            verify_compilation(&presentation, &split).unwrap();
+        }
+    }
+
+    #[test]
+    fn sparse_scheduler_handles_target_domain_far_larger_than_edge_set() {
+        const TARGET_STATES: u32 = 1 << 18;
+        const GENERATORS: usize = 32;
+        let mut observations = vec![0_u32; 2 + TARGET_STATES as usize];
+        let last_observation = observations.len() - 1;
+        observations[last_observation] = 1;
+        let generators = (0..GENERATORS).map(|_| GeneratorSpec {
+            source_sort: 0,
+            target_sort: 1,
+            transitions: vec![2, TARGET_STATES + 1].into_boxed_slice(),
+        });
+        let presentation =
+            FinitePresentation::new([2, TARGET_STATES], observations, generators).unwrap();
+        let inverse = InverseIndex::new(&presentation).unwrap();
+        inverse.verify(&presentation).unwrap();
+        assert!(inverse.offsets.is_empty());
+        assert_eq!(inverse.targets.len(), 2 * GENERATORS);
+        assert_eq!(inverse.sources.len(), 2 * GENERATORS);
+
+        let split =
+            compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
+                .unwrap();
+        assert_eq!(split.metrics().states, TARGET_STATES as usize + 2);
+        assert_eq!(split.metrics().classes, 4);
+        assert_eq!(split.split_records().len(), 1);
+        verify_compilation(&presentation, &split).unwrap();
+    }
+
+    #[test]
+    fn sparse_pending_work_never_grows_its_reserved_storage() {
+        let mut queue = VecDeque::with_capacity(4);
+        let mut pending = PendingSet::new(4).unwrap();
+        let mut pending_counts = [0_u32; 4];
+        let queue_capacity = queue.capacity();
+        let pending_capacity = pending.capacity();
+        for block in 0..4 {
+            push_split_work(
+                &mut queue,
+                &mut pending,
+                &mut pending_counts,
+                SplitWorkItem {
+                    block,
+                    generator: 0,
+                    _reserved: [0; 2],
+                },
+            )
+            .unwrap();
+        }
+        assert_eq!(queue.capacity(), queue_capacity);
+        assert_eq!(pending.capacity(), pending_capacity);
+        assert_eq!(queue.len(), 4);
+        assert_eq!(pending.len, 4);
+        assert_eq!(pending_counts, [1; 4]);
+    }
+
+    #[test]
+    fn fixed_pending_set_backshift_deletion_preserves_probe_chains() {
+        let mut pending = PendingSet::new(64).unwrap();
+        for key in 0..64_u64 {
+            assert!(pending.insert(key << 32).unwrap());
+        }
+        for key in (0..64_u64).step_by(2) {
+            assert!(pending.remove(key << 32));
+        }
+        for key in (1..64_u64).step_by(2) {
+            assert!(pending.contains(key << 32));
+        }
+        for key in 64..96_u64 {
+            assert!(pending.insert(key << 32).unwrap());
+        }
+        assert_eq!(pending.len, 64);
+        for key in (1..96_u64).step_by(2) {
+            assert!(pending.contains(key << 32));
+        }
+    }
+
+    #[test]
+    fn split_transcript_requeues_both_children_of_pending_splitter() {
+        let observations = vec![2, 0, 2, 2, 1, 1, 1, 0, 2, 1];
+        let transitions = [
+            [3, 2, 5, 8, 5, 8, 7, 0, 1, 8],
+            [1, 0, 3, 8, 3, 6, 3, 2, 1, 4],
+            [5, 6, 1, 6, 3, 2, 5, 8, 3, 6],
+            [5, 6, 7, 2, 7, 2, 5, 6, 5, 0],
+        ];
+        let generators = transitions.map(|states| GeneratorSpec {
+            source_sort: 0,
+            target_sort: 0,
+            transitions: states.into(),
+        });
+        let presentation = FinitePresentation::new([10], observations, generators).unwrap();
+        let reference =
+            compile_observational_with_policy(&presentation, CertificatePolicy::QuotientOnly)
+                .unwrap();
+        let split =
+            compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
+                .unwrap();
+
+        assert_eq!(split.state_classes(), reference.state_classes());
+        assert_eq!(split.metrics().classes, 10);
+        verify_compilation(&presentation, &split).unwrap();
+    }
+
+    #[test]
+    fn split_transcript_verifier_rejects_field_corruption_and_truncation() {
+        let presentation = FinitePresentation::new(
+            [3],
+            vec![1, 0, 0],
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: vec![1, 2, 0].into_boxed_slice(),
+            }],
+        )
+        .unwrap();
+        let compiled =
+            compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
+                .unwrap();
+        assert_eq!(compiled.split_records.len(), 1);
+
+        for corrupt in [
+            SplitRecord {
+                source_block: u32::MAX,
+                ..compiled.split_records[0]
+            },
+            SplitRecord {
+                generator: u32::MAX,
+                ..compiled.split_records[0]
+            },
+            SplitRecord {
+                splitter_block: u32::MAX,
+                ..compiled.split_records[0]
+            },
+            SplitRecord {
+                new_block: u32::MAX,
+                ..compiled.split_records[0]
+            },
+        ] {
+            let mut malformed = compiled.clone();
+            malformed.split_records = vec![corrupt].into_boxed_slice();
+            assert!(verify_compilation(&presentation, &malformed).is_err());
+        }
+
+        let mut truncated = compiled;
+        truncated.split_records = Box::default();
+        assert_eq!(
+            verify_compilation(&presentation, &truncated),
+            Err(ObservationalError::Partition)
+        );
+    }
+
+    #[test]
+    fn inverse_index_selects_compact_dense_and_sparse_directories() {
+        let dense = FinitePresentation::new(
+            [8],
+            vec![0; 8],
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: (0..8).collect::<Vec<_>>().into_boxed_slice(),
+            }],
+        )
+        .unwrap();
+        let dense_inverse = InverseIndex::new(&dense).unwrap();
+        assert_eq!(dense_inverse.records[0].mode, InverseIndex::DENSE);
+        assert_eq!(dense_inverse.offsets.len(), 9);
+        assert!(dense_inverse.targets.is_empty());
+        dense_inverse.verify(&dense).unwrap();
+
+        let sparse = FinitePresentation::new(
+            [2, 1_024],
+            vec![0; 1_026],
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 1,
+                transitions: vec![2, 1_025].into_boxed_slice(),
+            }],
+        )
+        .unwrap();
+        let sparse_inverse = InverseIndex::new(&sparse).unwrap();
+        assert_eq!(sparse_inverse.records[0].mode, InverseIndex::SPARSE);
+        assert!(sparse_inverse.offsets.is_empty());
+        assert_eq!(sparse_inverse.targets.len(), 2);
+        sparse_inverse.verify(&sparse).unwrap();
+    }
+
+    #[test]
+    fn observation_radix_partition_matches_comparison_sort_at_every_byte_width() {
+        let observations = vec![
+            0xff00_0001,
+            0,
+            0x0001_0002,
+            0x0000_0103,
+            0xff00_0001,
+            7,
+            0x0001_0002,
+            0x0000_0103,
+        ];
+        let mut states = (0..observations.len() as u32).rev().collect::<Vec<_>>();
+        let mut expected = states.clone();
+        expected.sort_unstable_by_key(|&state| observations[state as usize]);
+        let mut scratch = vec![0_u32; states.len()];
+        radix_sort_states_by_observation(
+            &observations,
+            &mut states,
+            &mut scratch,
+            observations
+                .iter()
+                .copied()
+                .fold(0, |mask, value| mask | value),
+        );
+        assert_eq!(
+            states
+                .iter()
+                .map(|&state| observations[state as usize])
+                .collect::<Vec<_>>(),
+            expected
+                .iter()
+                .map(|&state| observations[state as usize])
+                .collect::<Vec<_>>()
+        );
+        states.sort_unstable();
+        assert_eq!(states, (0..observations.len() as u32).collect::<Vec<_>>());
+    }
+
+    #[test]
+    fn stable_initial_observation_partition_skips_split_transcript() {
+        let presentation = FinitePresentation::new(
+            [16],
+            (0..16).map(|state| state % 4).collect::<Vec<_>>(),
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: (0..16)
+                    .map(|state| (state + 1) % 16)
+                    .collect::<Vec<_>>()
+                    .into_boxed_slice(),
+            }],
+        )
+        .unwrap();
+        let compiled =
+            compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
+                .unwrap();
+        assert_eq!(compiled.class_outputs.len(), 4);
+        assert!(compiled.split_records.is_empty());
+        verify_compilation(&presentation, &compiled).unwrap();
+    }
+
+    fn next_fixture_word(state: &mut u64) -> u32 {
+        *state = state
+            .wrapping_mul(6_364_136_223_846_793_005)
+            .wrapping_add(1_442_695_040_888_963_407);
+        (*state >> 32) as u32
     }
 
     #[test]

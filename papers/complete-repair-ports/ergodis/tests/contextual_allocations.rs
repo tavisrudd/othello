@@ -1,3 +1,6 @@
+use ergodis::observational::{
+    compile_observational_with_policy, CertificatePolicy, FinitePresentation, GeneratorSpec,
+};
 use ergodis::{CostTable, Gf4, Matrix, Prime, RankBoundedContextCache, RankOneProbeCache};
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -71,6 +74,41 @@ fn gf4_scalar_table(costs: &[u32]) -> CostTable {
         }),
     )
     .unwrap()
+}
+
+fn distinguishing_chain(states: u32) -> FinitePresentation {
+    let mut observations = vec![0; states as usize];
+    observations[states as usize - 1] = 1;
+    FinitePresentation::new(
+        [states],
+        observations,
+        [GeneratorSpec {
+            source_sort: 0,
+            target_sort: 0,
+            transitions: (0..states)
+                .map(|state| (state + 1).min(states - 1))
+                .collect::<Vec<_>>()
+                .into_boxed_slice(),
+        }],
+    )
+    .unwrap()
+}
+
+#[test]
+fn observational_worklist_has_no_per_split_allocation_growth() {
+    let small = distinguishing_chain(64);
+    let large = distinguishing_chain(1_024);
+    let (_, small_allocations) = tracked_allocations(|| {
+        compile_observational_with_policy(&small, CertificatePolicy::SplitTranscript).unwrap()
+    });
+    let (_, large_allocations) = tracked_allocations(|| {
+        compile_observational_with_policy(&large, CertificatePolicy::SplitTranscript).unwrap()
+    });
+
+    assert!(
+        large_allocations <= small_allocations + 2,
+        "worklist allocations grew from {small_allocations} to {large_allocations}"
+    );
 }
 
 #[test]

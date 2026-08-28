@@ -1,6 +1,6 @@
 use ergodis::observational::{
-    compile_observational, verify_compilation, CompiledObservation, FinitePresentation,
-    GeneratorSpec,
+    compile_observational, compile_observational_with_policy, verify_compilation,
+    CertificatePolicy, CompiledObservation, FinitePresentation, GeneratorSpec,
 };
 use ergodis::provenance::{ProvenanceArena, ProvenanceId, ReplaySidecar};
 use ergodis::{CompositionAnswer, CompositionTable, CostTable, GeneratedSpanTable, Matrix};
@@ -216,11 +216,29 @@ fn replay_all_paths(
     }
 }
 
+fn assert_split_transcript(
+    presentation: &FinitePresentation,
+    exhaustive: &CompiledObservation,
+    expected_splits: usize,
+) -> CompiledObservation {
+    let split = compile_observational_with_policy(presentation, CertificatePolicy::SplitTranscript)
+        .unwrap();
+    assert_eq!(split.state_classes(), exhaustive.state_classes());
+    assert_eq!(split.class_ranges(), exhaustive.class_ranges());
+    assert_eq!(split.class_outputs(), exhaustive.class_outputs());
+    assert!(split.storage().certificate_bytes < exhaustive.storage().certificate_bytes);
+    assert_eq!(split.split_records().len(), expected_splits);
+    assert_eq!(split.storage().certificate_bytes, 16 * expected_splits);
+    verify_compilation(presentation, &split).unwrap();
+    split
+}
+
 #[test]
 fn weighted_tree_automaton_compiles_to_six_exact_states() {
     let (presentation, states, trees) = wta_fixture();
     let compiled = compile_observational(&presentation).unwrap();
     verify_compilation(&presentation, &compiled).unwrap();
+    let _split = assert_split_transcript(&presentation, &compiled, 2);
 
     assert_eq!(presentation.state_count(), 13);
     assert_eq!(presentation.generators().len(), 26);
@@ -493,6 +511,7 @@ fn resource_batches_compile_and_replay_through_the_same_api() {
     let fixture = resource_fixture();
     let compiled = compile_observational(&fixture.presentation).unwrap();
     verify_compilation(&fixture.presentation, &compiled).unwrap();
+    let _split = assert_split_transcript(&fixture.presentation, &compiled, 26);
 
     assert_eq!(fixture.subsets.each_ref().map(Vec::len), [35, 51, 44]);
     assert_eq!(compiled.metrics().states, 130);
@@ -740,6 +759,7 @@ fn triangle_recovery_compiles_with_concrete_witness_lifts() {
     let (presentation, spans) = recovery_fixture();
     let compiled = compile_observational(&presentation).unwrap();
     verify_compilation(&presentation, &compiled).unwrap();
+    let _split = assert_split_transcript(&presentation, &compiled, 2);
     assert_eq!(compiled.metrics().states, 16);
     assert_eq!(compiled.metrics().classes, 5);
     assert_eq!(compiled.metrics().refinement_rounds, 1);
@@ -1063,6 +1083,7 @@ fn hierarchical_recovery_tables_use_actual_min_sum_composition() {
     let fixture = hierarchy_fixture();
     let compiled = compile_observational(&fixture.presentation).unwrap();
     verify_compilation(&fixture.presentation, &compiled).unwrap();
+    let _split = assert_split_transcript(&fixture.presentation, &compiled, 4);
     assert_eq!(fixture.profiles.each_ref().map(Vec::len), [9, 12, 12]);
     assert_eq!(
         compiled

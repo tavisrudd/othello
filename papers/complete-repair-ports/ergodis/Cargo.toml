@@ -61,6 +61,10 @@ required-features = ["parallel"]
 name = "contextual_state"
 harness = false
 
+[[bench]]
+name = "observational_compiler"
+harness = false
+
 
 [profile.release]
 opt-level = 3
