@@ -132,6 +132,7 @@ pub struct CappedAdditiveMonoid {
     caps: Box<[u16]>,
     strides: Box<[u32]>,
     element_count: u32,
+    boolean_dimensions: bool,
 }
 
 impl CappedAdditiveMonoid {
@@ -146,6 +147,7 @@ impl CappedAdditiveMonoid {
                 .ok_or(OrderedResourceError::Overflow)?;
         }
         Ok(Self {
+            boolean_dimensions: caps.iter().all(|&cap| cap == 1),
             caps,
             strides: strides.into_boxed_slice(),
             element_count: count,
@@ -154,6 +156,16 @@ impl CappedAdditiveMonoid {
 
     pub fn caps(&self) -> &[u16] {
         &self.caps
+    }
+
+    /// Constant-time certificate for this proof-by-construction monoid.
+    ///
+    /// Generic adapters need [`validate_finite_ordered_monoid`], whose
+    /// exhaustive cubic audit is intended only for small opaque algebras.
+    pub fn certificate(&self) -> OrderedMonoidCertificate {
+        OrderedMonoidCertificate {
+            elements: self.element_count,
+        }
     }
 
     pub fn encode(&self, resources: &[u16]) -> Result<u32, OrderedResourceError> {
@@ -194,6 +206,9 @@ impl FiniteOrderedMonoid for CappedAdditiveMonoid {
 
     fn combine(&self, left: u32, right: u32) -> u32 {
         debug_assert!(left < self.element_count && right < self.element_count);
+        if self.boolean_dimensions {
+            return left | right;
+        }
         let mut result = 0_u32;
         for (&cap, &stride) in self.caps.iter().zip(self.strides.iter()) {
             let radix = u32::from(cap) + 1;
@@ -207,6 +222,9 @@ impl FiniteOrderedMonoid for CappedAdditiveMonoid {
 
     fn leq(&self, left: u32, right: u32) -> bool {
         debug_assert!(left < self.element_count && right < self.element_count);
+        if self.boolean_dimensions {
+            return left & !right == 0;
+        }
         self.caps
             .iter()
             .zip(self.strides.iter())
@@ -862,5 +880,23 @@ mod tests {
                 },
             ]
         );
+    }
+
+    #[test]
+    fn boolean_resources_use_bitset_union_and_constant_time_certificate() {
+        let monoid = CappedAdditiveMonoid::new([1; 16]).unwrap();
+        assert_eq!(
+            monoid.certificate(),
+            OrderedMonoidCertificate { elements: 1 << 16 }
+        );
+        let left = monoid
+            .encode(&[1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            .unwrap();
+        let right = monoid
+            .encode(&[0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0])
+            .unwrap();
+        assert_eq!(monoid.combine(left, right), left | right);
+        assert!(monoid.leq(left, left | right));
+        assert!(!monoid.leq(left | right, left));
     }
 }
