@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY SIXTEEN-SOURCE PASS; TWO SOURCES READ AT
-FULL TEXT AND FOURTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY SEVENTEEN-SOURCE PASS; TWO SOURCES READ AT
+FULL TEXT AND FIFTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
 
@@ -95,6 +95,7 @@ formal congruence argument.
 | Minimal exact state for bounded-boundary graph/hypergraph composition | Myhill--Nerode methods for boundaried graphs/hypergraphs and finite-state tree-decomposition DP | Strongly pre-empted for Boolean properties | Treat the theory as a graph adapter and pursue quantitative/resource/witness observations only after auditing finite-integer-index and optimization variants |
 | Quotient quantitative responses up to additive cost shift | Finite integer index and progressive representatives in protrusion replacement; tropical normalization | Strongly pre-empted as a graph equivalence and algebraic gauge | Generalize it as a typed potential-bearing backend, prove threshold/FII as a corollary, and test state reduction plus witness/potential replay across domains |
 | Compress a family of weighted partial solutions while preserving every completion optimum | Rank-based representative sets for connectivity DP | Strongly pre-empted for partition-connectivity operators, including weighted solutions and one retained optimizer | Treat representative-family reduction as a separate backend layer; do not misreport it as quotient-state minimization |
+| Normalize potentials, then minimize a deterministic weighted machine | Weight pushing followed by ordinary automaton minimization | Pre-empted for deterministic weighted automata under the established semiring hypotheses | Make it the unary/sequential corollary and test the typed multiary/context-grammar implementation boundary |
 
 ## Common kernel candidate
 
@@ -517,6 +518,14 @@ The read depths below are unconditional and describe this preliminary pass.
     proves its DP operators preserve representation, and reduces a family to
     at most `2^|U|` retained partial solutions while preserving the optimal
     value and at least one optimizer (explicitly not all optimizers).
+17. Mehryar Mohri, *Weighted Automata Algorithms*. **Read depth: partial** —
+    cached handbook chapter, DOI `10.1007/978-3-642-01492-5_6`, SHA-256
+    `f7976bf3d934654c2f56af38637e11a526b8d3201803b8c77b9c53ad5472399d`;
+    read the introduction, semiring setup, and Sections 6.3--6.4 on weight
+    pushing and minimization.  Under its stated semiring/shortest-distance
+    hypotheses, weight pushing normalizes path-weight distribution without
+    changing accepted weights, after which ordinary labelled-automaton
+    minimization yields a minimal deterministic weighted automaton.
 
 ## Knowledge-compilation and provenance connection
 

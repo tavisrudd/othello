@@ -284,7 +284,13 @@ gauge/canonical potential representative.
 
 This theorem both generalizes the classical shift relation and narrows the
 research burden.  Additive gauge is established territory in graph
-kernelization and tropical computation.  The Ergodis capability is to expose
+kernelization and tropical computation.  In the unary deterministic weighted-
+automaton case, shortest-distance weight pushing followed by ordinary
+labelled-automaton minimization is already an effective normalization-and-
+quotient algorithm under established semiring hypotheses.  It is another
+classical corollary/control, not an Ergodis novelty claim.
+
+The Ergodis capability is to expose
 potential-bearing quotienting uniformly across adapters, combine it with
 typed separators and provenance, and measure normalized-state reduction.
 The earlier coordinate-selector obstruction remains exact for absolute table

@@ -287,6 +287,14 @@ projective equality whenever the application observes thresholds with a
 transported budget, and gives Ergodis another measurable compression mode
 beyond symmetry and restricted contexts.
 
+Weighted-automata weight pushing then supplies the sequential executable
+corollary: normalize potentials by shortest distances and minimize the
+resulting labelled deterministic machine.  This fully pre-empts novelty for
+the unary case and gives the common backend a gold-standard control.  The
+remaining capability boundary is typed/multiary admissible contexts,
+domain-derived finite semantics, witnesses, and composition with the other
+three reduction layers.
+
 The weighted-connectivity audit also prevents a category error.  Rank-based
 treewidth DP already preserves every completion optimum by reducing a *family*
 of weighted partitions to representative partial solutions, retaining at
