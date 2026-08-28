@@ -102,6 +102,12 @@ matroid finite-interface equivalence without importing their theorems.
 - Pages 1 and 14--18 were rendered and inspected.  The abstract fits cleanly;
   theorem statements are not orphaned; equations, proof continuations, and the
   transition into the rank-one bottleneck are readable.
+- The guarded exporter found no public-surface issue and synchronized the
+  standalone paper as commit `80c600f`; its clean 133-file manifest and full
+  release gate pass with content hash
+  `cd7343c42f9b04910b0c214d55683f55929db1086e89da27a2c5bcaf32de0782`.
+  The portfolio summary was synchronized separately as commit `8184709`.
+  Nothing was pushed, deposited, submitted, tagged, or announced.
 
 ## Deliberately retained for sequel work
 

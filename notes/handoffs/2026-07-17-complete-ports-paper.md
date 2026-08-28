@@ -16,7 +16,7 @@ DEPOSIT
 Recovery*
 **Standalone paper repository**: `tavisrudd/compositional-recovery` at
 `~/src/math-papers/compositional-recovery`
-**Current local standalone commit**: `6bfc17d` (37-page revised manuscript;
+**Current local standalone commit**: `80c600f` (40-page revised manuscript;
 verified; no push or deposit)
 **Approved paper license**: MIT
 
