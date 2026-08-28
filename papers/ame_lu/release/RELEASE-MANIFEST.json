@@ -2,7 +2,7 @@
   "schema": "ame-lu-release-manifest-v1",
   "release": "ame-lu-2026-08-03",
   "date": "2026-08-03",
-  "title": "Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States",
+  "title": "Robust Local-Unitary Rigidity of Stabilizer AME States",
   "public_export": {
     "artifacts": [
       {
@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 295646,
+        "bytes": 310732,
         "path": "ame-lu.pdf",
-        "sha256": "87ff13545b7493602a64eb821f8ba31cfc9609e330eeeafbc87a420976587354"
+        "sha256": "4dd46c911136379f8b9c0f83ccecd64c2a0282f09997c041d94a321b629a353f"
       },
       {
         "bytes": 2652,
@@ -41,24 +41,24 @@
         "sha256": "187e03eb0106383ebcd2aebcd0c728bb0a265591ca1ceffda277c90302044723"
       },
       {
-        "bytes": 4989,
+        "bytes": 4931,
         "path": "main.tex",
-        "sha256": "7a6c2cf8cb151a04dd868bc6b94e60b5e8c3f799850f231a826dcb7f995edfee"
+        "sha256": "0f95068a0b87d671342a22f1f8689ad5212a8b8cb3a6f1eb935ef5ecac364418"
       },
       {
-        "bytes": 22705,
+        "bytes": 25428,
         "path": "refs.bib",
-        "sha256": "64123299de0281f2029136b13a91e57c239a3c7d1628ef0a13e992e1fa7426fd"
+        "sha256": "3dc9bf091ae8bd23a66d36aa9b2f7e2ff263748ff1a6174c0404a48053227481"
       },
       {
-        "bytes": 8724,
+        "bytes": 8689,
         "path": "release/verify_release.py",
-        "sha256": "9188f8fa51317eea3babed82c650d5fff1249dac566ef52c4b20b8b60971a82e"
+        "sha256": "942457a6080e47c70e0157d208cc79dda0c122a8701cf32d8229b551dbca8033"
       },
       {
-        "bytes": 11839,
+        "bytes": 15951,
         "path": "sections/01-introduction.tex",
-        "sha256": "24dff0d6b2cbcc1b265b0be68ccffaee659438370c1f2d099e5ab447a7265583"
+        "sha256": "b9543d7f6a9d331ec7b41567b2410d4153336dc8d3dfe36374efb6ec04c1435c"
       },
       {
         "bytes": 3101,
@@ -66,32 +66,32 @@
         "sha256": "0f5f42eb9f281a171c67cb5a2985da49976091aee0af9fae941157e5402e6c17"
       },
       {
-        "bytes": 15126,
+        "bytes": 18439,
         "path": "sections/03-exact-rigidity-atlas.tex",
-        "sha256": "b8c8ecb393b7922eb9fc9066d9fbfbf42fd68704575779bdf6a653e2d457cbe5"
+        "sha256": "c9c7c5bceab4296861ecdb1446647df59757667f78dd8638addee3a02c2a09ec"
       },
       {
-        "bytes": 25327,
+        "bytes": 26336,
         "path": "sections/05-quantitative-rounding.tex",
-        "sha256": "f3f91fa011d36868ff7053670b1e5f4d66cc787b483ade2dcb96655e54eae014"
+        "sha256": "1bb087e496cab99ad22689e18c4dba15b34cd2183a060d3c1b14584d37ae2256"
       },
       {
-        "bytes": 1887,
+        "bytes": 2361,
         "path": "sections/07-conclusion.tex",
-        "sha256": "23a548769c4d7b2afd0871368cb58ec606c3798975af2e180a160a0a938862a4"
+        "sha256": "3a1286589339f5ea1538567cf525dcb08e3e15f2b6c0808b73645934c5055ed1"
       },
       {
-        "bytes": 4146,
+        "bytes": 4227,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "72736b9e3273ad5c4a3305fcd0d0a04762bf11bcd1b5c9ee7cf9546288fe7dd1"
+        "sha256": "7b5ad47e9e1b84cad5a75759ce22d41f321bb80bb707394fbe27717aa2fab658"
       },
       {
-        "bytes": 53386,
+        "bytes": 53430,
         "path": "sections/A-secondary-quantitative.tex",
-        "sha256": "39edae5584a27971b0389cedc32c2a1dc5de695a7eb192cc48e9ca3aaa8cf9b7"
+        "sha256": "46cb0d783cb90a660607a4b89fbe3ecc7b42c1122f0dfe98d354c24faf20cb78"
       }
     ],
-    "tree_sha256": "be183fa4c0b51a67f1a0fa6f27d6238abe07b26481ab0f77db9f29c2a3f02789"
+    "tree_sha256": "25c2f8d93db4c454aafa11e1ffee1b81892cbb5d54e882197da7ccb9ba20dfe9"
   },
   "formal_companion": {
     "artifacts": [

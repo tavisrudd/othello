@@ -10,7 +10,7 @@ hierarchy:
 4. classification by minimum-support transition maps and the encoder
    consequence;
 5. cleaning-based quantitative rounding, robust transition compatibility,
-   and the stabilizer-character obstruction; and
+   and the unresolved stabilizer-character correction; and
 6. conclusions and open quantitative questions.
 
 The appendices contain material that is not needed for a first reading:

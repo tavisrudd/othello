@@ -1,8 +1,8 @@
 # Provenance
 
-This root retains the `ame_lu` paper identity and becomes *Local-Unitary
-Rigidity and Quantitative Rounding for Stabilizer AME States* after the
-two-paper split. The pre-split combined baseline is preserved by:
+This root retains the `ame_lu` paper identity and is now titled
+*Robust Local-Unitary Rigidity of Stabilizer AME States*. The
+pre-split combined baseline is preserved by:
 
 - monorepo checkpoint `3400ff6ed6056b0a5ef52512619b30dae3adafa4`;
 - public paper tree

@@ -180,7 +180,7 @@ results.
   `q` and `m ≥ 2`. A separate quantitative argument places sufficiently
   approximate local symmetries near exact Clifford symmetries; its rounding and
   robust transition-map arguments remain manuscript-level, as stated in the paper's
-  formal boundary. [Local-Unitary Rigidity and Quantitative Rounding](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf).
+  formal boundary. [Robust Local-Unitary Rigidity](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf).
 
 - **A Schur-square test determines MDS–CSS transversal groups.** For odd-prime
   `[2m,m,m+1]q` MDS codes, the code conductor `Cond(C,C⊥)=(C^(star 2))⊥` has
@@ -253,7 +253,7 @@ the theorem column.
 | High-Weight Cosets of Generalized and Extended Reed–Solomon Codes | Every projective syndrome direction of weight at least `r−1` is classified: omitted curve points form the weight-`r` shell, while tangents, conjugate secants, and deleted-point-incident split secants form the weight-`r−1` shell. | `r ≥ 6`, `char F_q > r−1`, arbitrary multipliers and finite deletion set `A`, under the paper's explicit bound `q ≥ 6(r+|A|)−16+floor(2 sqrt(6(r+|A|)−18))`. |
 | High-Weight Cosets of Generalized and Extended Reed–Solomon Codes | The two shells classify all MDS and NMDS one-column extensions; exact family-wise minimum-support counts determine their aggregate weight enumerators. | The same point-deleted GRS/EGRS family and field range. |
 | High-Weight Cosets of Generalized and Extended Reed–Solomon Codes | Outside the catalecticant rank-two locus and one explicit Lucas carrier, every syndrome has weight at most `r−2`; the paper also proves `#Y = 6N + 3d₂ + d₃` for the terminal cubic pencil. | Carrier containment for every characteristic and `r ≥ 6` in the stated field range; the terminal identity holds in every characteristic. |
-| Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
+| Robust Local-Unitary Rigidity of Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
 | Exact Transversal Logical Groups of Quantum MDS–CSS Codes | The code-conductor dimension fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
 | Exact Compositional Transfer of Bounded Linear Recovery | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
@@ -273,7 +273,7 @@ boundary, and reproducible entry points.
 | Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Algebraic geometry / algebraic cycles | Every smooth member of the non-isotrivial pencil is universally `CH₀`-trivial; after multiplication by `P¹`, it remains universally `CH₀`-trivial and is irrational. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Framed Formal Monodromy of Cubic Threefolds | Algebraic geometry / quantum cohomology | The unconditional count is `ν₆(X) = 2` and satisfies the projective-space product formula; its operation formulas and birational invariance remain conditional on two explicit hypotheses. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | High-Weight Cosets of Generalized and Extended Reed–Solomon Codes | Coding theory | Arbitrary-redundancy classification of the top two coset-weight shells for point-deleted GRS/EGRS codes, with exact deep-hole, MDS/NMDS extension, and aggregate enumerator consequences. | [PDF](https://github.com/tavisrudd/high-weight-grs-cosets/blob/main/high-weight-grs-cosets.pdf) · [repo](https://github.com/tavisrudd/high-weight-grs-cosets) |
-| Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
+| Robust Local-Unitary Rigidity of Stabilizer AME States | Quantum information | Exact local-unitary rigidity has a quantitative stability theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
 | Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus | Finite geometry / coding | Deep-hole data recognize the Clebsch code and recover its conference matrix up to switching and global negation. | [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [repo](https://github.com/tavisrudd/clebsch-rigidity) |
 | Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients | Algebraic combinatorics | On the matching carrier, a two-valued quadratic trade classifies two exceptional geometries and a cubic orients their sheets. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
 | The Clebsch Cubic: Hitchin’s Icosahedral Double Cover and Conference-Matrix Rigidity | Algebraic geometry / combinatorics | An exact arithmetic incidence cover labels its sheets by opposite marked conference pairs; cubic realizations, exchange rigidity, and two-graph reconstruction follow. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
@@ -499,17 +499,18 @@ same syndrome geometry into exact MDS/NMDS extension data.
 
 ---
 
-#### Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States
+#### Robust Local-Unitary Rigidity of Stabilizer AME States
 
 [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [Repository](https://github.com/tavisrudd/ame-lu) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21681856-blue.svg)](https://doi.org/10.5281/zenodo.21681856)
 
 **Standout results.** Every product-unitary equivalence between stabilizer AME
-states is local Clifford. A quantitative rounding theorem also places
-sufficiently approximate symmetries near exact Clifford symmetries.
+states is local Clifford. Only `m` minimum supports are needed for a
+finite recognition test. A quantitative rounding theorem places sufficiently
+approximate symmetries near exact Clifford symmetries.
 
-> *Abstract* Let q = pᵉ and m ≥ 2. We prove that every product unitary mapping one stabilizer AME(2m,q) state to another is Clifford on each party. The key support-counting statement is that the stabilizers contained in any (m + 1)-party set project bijectively onto the complete Weyl-label space at each retained party. The corresponding reduced operator therefore determines every local Weyl axis. It follows that local-unitary and local-Clifford equivalence coincide for these states. Equivalently, every transversal conversion between the associated [[2m−1,1,m]]q stabilizer encoders is Clifford on every physical and logical factor. The same support data give a complete classification by the transition maps between local Weyl-label spaces.
+> *Abstract* Let q = pᵉ and m ≥ 2. We prove that every product unitary mapping one stabilizer AME(2m,q) state to another is Clifford on each party, and the same holds when a party relabelling is allowed. The result covers arbitrary additive stabilizers. Thus local-unitary and local-Clifford equivalence coincide for these states. The proof is a support count: stabilizers contained in any (m + 1)-party set project bijectively onto the full Weyl-label space at each retained party, so the corresponding reduced operator determines every local Weyl axis. Via the Choi-state correspondence, every transversal conversion between the associated [[2m−1,1,m]]q encoders is therefore Clifford on every physical and logical factor. Their transition maps between local Weyl-label spaces form a complete LU invariant, modulo local trace-symplectic frame changes and party relabelling.
 >
-> We also prove a quantitative result for approximate product symmetries. Three-region cleaning and a finite Weyl–Fourier argument place every local factor within normalized Hilbert–Schmidt distance 8ε of a Clifford. A uniform gap between distinct stabilizer states then selects an exact symmetry and yields an explicit decomposition radius of order min{p⁻¹, q⁻¹ᐟ², n⁻¹ᐟ²}, n = 2m, with collective residual generator norm at most π√q ε. At a larger, dimension-dependent radius the rounded symplectic maps already preserve all minimum-support transitions; the remaining difficulty is to control the stabilizer character, or equivalently the required product-Pauli correction.
+> We also prove robust rigidity for approximate product symmetries. If the state-vector defect ε is below an explicit threshold of order min{p⁻¹, q⁻¹ᐟ², (2m)⁻¹ᐟ²}, every local factor lies within normalized Hilbert–Schmidt distance 8ε of a Clifford, and the product unitary decomposes into an exact symmetry and a residual whose collective generator norm is at most π√q ε. The proof combines three-region cleaning, finite Weyl–Fourier concentration, the quantized overlap of stabilizer states, and a balanced-cut estimate.
 >
 **Delivers.** Exact product-unitary changes between a broad class of highly
 entangled quantum states must come from the code's discrete symmetry group;

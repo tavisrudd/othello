@@ -5,7 +5,10 @@ every set containing at most half of its parties.  Such states are also
 called perfect tensors and, after one party is designated as an input, give
 quantum maximum-distance-separable encoders.  They therefore sit at the
 intersection of multipartite entanglement, stabilizer codes, transversal
-gates, and tensor-network constructions.
+gates, and tensor-network constructions.  Operationally, AME states serve as
+resources for quantum error correction, threshold secret sharing, and
+multi-user teleportation; a recent survey reviews these applications and
+the known local-unitary classes \cite{RajchelMieldziocEtAl2026}.
 
 This paper asks how rigid their local coordinates are.  With the party labels
 fixed, two states are \emph{local-unitary (LU) equivalent} if a tensor product
@@ -21,7 +24,18 @@ local-unitary equivalence is a priori continuous and much larger.  The two
 relations do not coincide for general stabilizer states
 \cite{JiChenWeiYing2008}.
 
-Maximal entanglement removes that difference.
+The distinction is both structural and operational.  LU equivalence asks
+whether two preparations represent the same multipartite entanglement
+resource after independent changes of local basis.  LC equivalence reduces
+that question to finite symplectic data and is directly compatible with the
+stabilizer description used for encoding and fault-tolerant gates.  For an
+AME state viewed as an encoder Choi state, the same question asks whether a
+transversal conversion can contain a genuinely non-Clifford factor.  A
+quantitative version is needed when the conversion or symmetry is only
+approximately realized.
+
+Within the stabilizer AME class on at least four parties, maximal
+entanglement removes that difference.
 
 \begin{theorem}[Local-unitary rigidity]\label{thm:lu-lc-rigidity}
 Let \(q=p^e\), let \(m\geq2\), and let
@@ -60,7 +74,12 @@ hence to be Clifford.  In ordinary language,
 The operational code consequence follows by treating one party as the
 logical input of the associated quantum MDS encoder.  Throughout,
 \emph{transversal} means a tensor product of one-site physical operators
-with the physical coordinates fixed.
+with the physical coordinates fixed.  Such gates limit the direct spread
+of errors between physical subsystems, which makes them central to
+fault-tolerant constructions.  The Eastin--Knill theorem rules out a
+universal transversal gate set for an exact finite-dimensional code
+\cite{EastinKnill2009}; the natural family-specific question is therefore
+which transversal gates remain.
 
 \begin{corollary}[Factorwise transversal rigidity]
 \label{cor:transversal-clifford}
@@ -73,6 +92,14 @@ are stabilizer \(\AME(2m,q)\) states.  If
 then \(L\) and every \(U_i\) are Clifford.  In particular, no code in
 this family admits a transversal non-Clifford logical unitary.
 \end{corollary}
+
+General cleaning arguments already constrain the \emph{logical} action of
+a transversal gate \cite[Lemma~5]{PastawskiYoshida2015}.
+Corollary~\ref{cor:transversal-clifford} is stronger in
+a different direction: it identifies every physical one-site factor as
+Clifford as well as the induced logical gate.  This factorwise conclusion
+is what turns LU equivalence of the Choi states into finite local
+symplectic data.
 
 \subsection*{Quantitative question}
 
@@ -136,6 +163,12 @@ states separates distinct product-Clifford branches by the uniform gap
 gives the collective residual estimate in \((1.3)\).  The radius is a
 certified lower bound, not an optimality claim.
 
+Here approximation refers to the state-vector defect of a product unitary
+acting on an exact code state.  This differs from approximate
+Eastin--Knill results, where error correction itself is relaxed; see, for
+example, \cite{Alexander2025}.  The two questions share the same
+fault-tolerance motivation but control different errors.
+
 An exact product-unitary intertwiner between two states transfers this
 result without changing the constants
 (Corollary~\ref{cor:relative-intertwiner-rounding}).  Without such a base
@@ -156,8 +189,9 @@ Their compositions around closed paths are holonomies.
 
 \begin{theorem}[Classification by minimum-support transition maps]
 \label{thm:atlas-classification}
-After a fixed party relabelling, two stabilizer \(\AME(2m,q)\) states are
-LU equivalent exactly when their systems of minimum-support transition maps
+Let \(m\geq2\).  After a fixed party relabelling, two stabilizer
+\(\AME(2m,q)\) states are LU equivalent exactly when their systems of
+minimum-support transition maps
 are equivalent by local trace-symplectic changes of Weyl frame.  For one
 state, if \(\operatorname{Aut}_{\mathrm{tr}}(\psi)\) is the group of
 compatible local symplectic automorphisms of the transition system and
@@ -173,6 +207,16 @@ is the centralizer in
 are chosen.
 \end{theorem}
 
+The invariant is also effective.  After fixing any half-set of parties,
+only the \(m\) minimum supports obtained by adjoining one complementary
+party are needed: their supported label groups form a direct sum equal to
+the full stabilizer label space
+(Proposition~\ref{prop:half-set-direct-sum}).  Fixed-label recognition then
+enumerates one base symplectic frame and checks each candidate by finite
+linear algebra.  In particular, it is polynomial in \(m\) for fixed local
+dimension.  Corollary~\ref{cor:finite-recognition} gives the explicit
+candidate count and the separate cost of unknown party relabelling.
+
 At the dimension-dependent radius
 \[
  \min\left\{\frac{\tau_p}{8},
@@ -183,8 +227,8 @@ map exactly.  This does not yet identify the exact product symmetry.
 Localized commutators cancel Weyl-translation phases, so they determine the
 stabilizer label space but not its character.  The resulting product-Pauli
 correction need not be close to the rounded product Clifford.  We refer to
-this standard linear-versus-affine distinction as the
-\emph{stabilizer-character obstruction}.  It is the missing ingredient in a
+this as the unresolved stabilizer-character, or product-Pauli phase,
+correction.  Controlling it is the missing ingredient in a
 party-count-independent global entry radius.
 
 \subsection*{Relation to prior work and contribution}
@@ -202,23 +246,48 @@ correlation tensor, and Van den Nest, Dehaene, and De Moor used that mechanism
 in a minimum-support criterion for qubit stabilizer states
 \cite[Theorem~13]{Rains1999}
 \cite[Theorem~1 and Corollary~1]{VanDenNestDehaeneDeMoor2005}.
+Subsequent work developed further sufficient conditions and exposed the
+limits of the LU--LC conjecture
+\cite{ZengChungCrossChuang2007,GrossVanDenNest2008,JiChenWeiYing2008}.
 Englbrecht and Kraus classify all qubit stabilizer local symmetries
-\cite{EnglbrechtKraus2020}; graphical and algorithmic descriptions of qubit
-stabilizer LU equivalence are also available
-\cite{ClaudetPerdrix2024,BurchardtDeJongVandre2024}.  The present support
-argument extends the axis-recovery mechanism to arbitrary additive
-prime-power stabilizers and, because every minimum support contains the full
-local Weyl basis, requires no additional minimum-support hypothesis.
+\cite{EnglbrechtKraus2020}.  More recently, Claudet and Perdrix gave a
+graphical characterization using generalized local complementation and a
+quasi-polynomial decision algorithm, while Burchardt, de Jong, and Vandr\'e
+reduced verification to modular linear equations
+\cite{ClaudetPerdrix2024,ClaudetPerdrix2025Algorithm,
+BurchardtDeJongVandre2024}.  The general qubit problem is now sharply
+separated from the AME case: LU and LC agree through 26 qubits but already
+differ at 27 \cite{Claudet2026Minimal}.  The present support argument
+instead uses the AME condition to extend the axis-recovery mechanism to
+arbitrary additive prime-power stabilizers.  Because every minimum support
+contains the full local Weyl basis, no additional minimum-support
+hypothesis is required.
 
 Tan proves the general AME--quantum-MDS orbit and
 symmetry--transversal correspondences \cite[Theorems~3.5 and~3.6]{Tan2026}
-and computes particular four-qutrit and five-qubit symmetry groups
-\cite[Theorem~5.3]{Tan2026,TanFiveQubit2026}.  Our exact conclusion
-is factorwise Cliffordness for every conversion in the stabilizer-AME
-family, together with the complete transition-map invariant.  The new
-quantitative conclusion is the explicit cleaning-based rounding theorem and
-its separation of symplectic compatibility from the remaining stabilizer
-character.  No new qualitative transversal-hierarchy obstruction is claimed.
+and computes the four-qutrit symmetry and transversal groups
+\cite[Theorem~5.3]{Tan2026}; separate work classifies five-qubit AME states
+\cite{TanFiveQubit2026}.  To our knowledge, the missing
+uniform statement was that every factor in an arbitrary additive
+prime-power stabilizer-AME conversion is Clifford, at every even length for
+which such a state exists.  Our exact result supplies that factorwise
+statement, a complete
+transition-map invariant, and the finite recognition bound above.  The
+quantitative result supplies an explicit neighborhood in which an
+approximate product symmetry can be assigned to an exact Clifford branch,
+while distinguishing symplectic compatibility from the remaining
+stabilizer-character correction.  No new qualitative
+transversal-hierarchy obstruction is claimed.
+
+The class continues to acquire nontrivial examples: recent self-dual MDS
+constructions establish stabilizer \(\AME(12,5)\), \(\AME(18,11)\), and
+\(\AME(18,13)\) states \cite{BevinsBidav2026}.  Our results apply to such
+states without selecting a CSS, graph-state, or \(\F_q\)-linear
+presentation.  Recent work classifies diagonal transversal Clifford groups
+and characterizes code-preserving Clifford circuits for broader binary code
+families and circuit models \cite{DasuBurton2025,Albert2026}; here the input
+is instead the maximal entanglement of one stabilizer state, and the
+conclusion begins with an arbitrary product unitary.
 
 The stabilizer assumption is essential to the discrete transition system.
 General AME families can contain infinitely many LU classes; Ramadas and

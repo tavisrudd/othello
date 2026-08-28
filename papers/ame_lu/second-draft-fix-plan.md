@@ -5,8 +5,8 @@
 - Paper II independently builds, verifies all 17 inherited artifacts, and
   owns every MDS--CSS exact-group, six-point, scalar, transport, and
   party-extension theorem.
-- Paper I now has the title *Local-Unitary Rigidity and Quantitative Rounding
-  for Stabilizer AME States*.
+- Paper I now has the title *Robust Local-Unitary Rigidity of Stabilizer
+  AME States*.
 - The abstract and first two pages lead with exact rigidity and the
   cleaning-based quantitative theorem.
 - The body order is support geometry, exact rigidity, atlas/encoder

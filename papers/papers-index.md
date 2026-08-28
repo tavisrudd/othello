@@ -202,8 +202,7 @@ extended Reed--Solomon codes*
 - *Boundary:* R8--R10 computations remain companion records and are not claims of the submission;
   the general Reed--Solomon deep-hole conjecture is not claimed.
 
-**Active unnumbered candidate · `ame_lu`** — *Local-Unitary Rigidity and Quantitative Rounding for
-Stabilizer AME States*
+**Active unnumbered candidate · `ame_lu`** — *Robust Local-Unitary Rigidity of Stabilizer AME States*
 - *Lane:* `ame-lu`.
 - *Status:* 35-page candidate, deposited as DOI `10.5281/zenodo.21681856`, with a standalone mirror;
   no submission has occurred.
@@ -211,7 +210,7 @@ Stabilizer AME States*
   to every stabilizer AME state (CSS, equal phase, classical linearity, and MDS are all unnecessary
   for rigidity), the factorwise transversal no-go, the Pauli phase-correction lemma, the
   minimum-support atlas, and the cleaning-based quantitative rounding chain with its uniform scale
-  and the affine stabilizer-character obstruction.
+  and the unresolved affine stabilizer-character correction.
 - *Trust:* the marginal-to-rigidity chain is in the formal aggregate; the quantitative rounding and
   two-uniform estimates are manuscript proofs, and the Choi/encoder construction remains one.
 

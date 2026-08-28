@@ -118,8 +118,7 @@ def create_manifest() -> dict[str, object]:
         "release": "ame-lu-2026-08-03",
         "date": "2026-08-03",
         "title": (
-            "Local-Unitary Rigidity and Quantitative Rounding for "
-            "Stabilizer AME States"
+            "Robust Local-Unitary Rigidity of Stabilizer AME States"
         ),
         "public_export": {
             "artifacts": public,

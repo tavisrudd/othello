@@ -1,4 +1,4 @@
-# Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States
+# Robust Local-Unitary Rigidity of Stabilizer AME States
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21681856-blue.svg)](https://doi.org/10.5281/zenodo.21681856)
 
@@ -6,8 +6,7 @@
 
 [**Open the paper (PDF) →**](ame-lu.pdf)
 
-**Title:** *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer
-AME States.*
+**Title:** *Robust Local-Unitary Rigidity of Stabilizer AME States.*
 
 For every prime power \(q=p^e\) and \(m\geq2\), every product unitary mapping
 one stabilizer \(\operatorname{AME}(2m,q)\) state to another is Clifford on
@@ -15,15 +14,18 @@ each party.  Any \((m+1)\)-party marginal determines the complete local Weyl
 frame.  The transition maps between those frames classify local-unitary
 equivalence, and every transversal conversion between the associated
 \([[2m-1,1,m]]_q\) stabilizer encoders is Clifford factor by factor.
+Only \(m\) minimum supports are needed for recognition; with party labels
+fixed, equivalence reduces to testing at most
+\(\lvert\operatorname{Sp}_{2e}(\mathbb F_p)\rvert\) base frames.
 
 A leakage-aware three-region cleaning argument gives a quantitative theorem:
 defect \(\varepsilon\) puts every local factor within \(8\varepsilon\) of a
 Clifford throughout the certified radius
 \(\Theta(\min\{p^{-1},q^{-1/2},n^{-1/2}\})\).  Weyl--Fourier concentration and
-the stabilizer overlap gap select an exact symmetry.  At the larger
-dimension-dependent radius, localized commutators recover the linear
-transition data but cannot control the stabilizer character, equivalently the
-product-Pauli correction.  Exact MDS--CSS logical groups
+the stabilizer overlap gap select an exact symmetry.  At a separate
+local-dimension-dependent radius, localized commutators recover the linear
+transition data but do not control the stabilizer-character, or
+product-Pauli phase, correction.  Exact MDS--CSS logical groups
 and six-point applications belong to the separate
 `mds_css_transversal_groups` paper.
 
@@ -71,7 +73,7 @@ Selected finite-coordinate, support-profile, diagonal-axis, holonomy,
 stabilizer-character, Choi, and second-moment cores are kernel checked in the
 shared `RelativeConicArcs.AMELU` namespace. The cleaning constants, Fourier
 rounding, global quantitative theorem, robust transition compatibility, and
-stabilizer-character obstruction are manuscript proofs without Lean or
+stabilizer-character correction are manuscript proofs without Lean or
 certificate coverage. The
 corrected local release surface now includes the repaired (m=2) proof bridge,
 the phase-convention clarification, and the current related-work boundary.

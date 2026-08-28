@@ -10,6 +10,7 @@ This map covers Paper I after the two-paper split. Results owned by
 |---|---|---|---|
 | C649 | every product-unitary intertwiner between additive stabilizer `AME(2m,q)` states is Clifford factor by factor | every prime power `q=p^e`, every `m≥2`, standard additive Weyl system; Bell pairs excluded sharply | AME support counting, complete Weyl-basis marginal, intrinsic tensor axes; manuscript proof with kernel-checked cores |
 | C649 | minimum-support transition maps classify LU equivalence up to local trace-symplectic frames; exact sequence for the fixed-party projective symmetry group | same state class; holonomy-centralizer description stated over prime fields | minimum-support generation, transition equations, product-Pauli character correction |
+| current revision | `m` minimum-support subgroups form a direct sum equal to the full stabilizer label group; fixed-label LU recognition tests at most `|Sp_{2e}(F_p)|` base frames | additive stabilizer check matrices; polynomial work per candidate in the displayed input size; unknown party relabelling adds at most `(2m)!` | direct-sum support proof and finite symplectic enumeration; manuscript only |
 | C649 | every transversal conversion between associated `[[2m-1,1,m]]_q` encoders is Clifford on every physical and logical factor | every prime power and `m≥2`; one logical qudit | AME Choi correspondence and transpose/inverse Clifford closure |
 | C833 | cleaning-based global rounding at explicit radius `R_clean`, with local `8ε` Clifford rounding and residual `D≤π√q ε` | every stabilizer `AME(2m,q)`, `m≥2`; asymptotics conditional on AME existence | leakage-aware three-region commutator, Weyl--Fourier concentration, stabilizer overlap gap, AME second moment; no computation |
 | C787 | relative two-state rounding over an exact base intertwiner, with the same local `8ε` and collective `π√q ε` constants | two stabilizer `AME(2m,q)` states on one exact product-unitary orbit; radius remains `R_clean` | exact-base line transport, defect identity, product-intertwiner torsor, and lossless conditional decomposition are kernel checked; the cleaning radius and coefficient remain manuscript inputs |
@@ -37,6 +38,8 @@ This map covers Paper I after the two-paper split. Results owned by
   `prop:marginal-axes`: reusable complete Weyl-basis axis recovery.
 - `thm:atlas-classification`: exact minimum-support transition-map classification and
   symmetry-group extension.
+- `prop:half-set-direct-sum`, `cor:finite-recognition`: linear-size support
+  reduction, explicit recognition bound, and symmetry-group order bound.
 - `lem:pauli-phase-correction`: product-Pauli correction after the label
   Lagrangian is matched.
 - `cor:transversal-clifford`: factorwise transversal rigidity for encoder

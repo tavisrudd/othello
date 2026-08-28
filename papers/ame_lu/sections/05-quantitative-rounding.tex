@@ -191,11 +191,13 @@ Then \(\lVert u_A\rVert=\lVert v_A\rVert=1\) and
 \end{lemma}
 
 \begin{proof}
-The AME support formula makes restriction of \(L\) to either half a
-bijection, so Weyl Parseval gives unit norms.  Expanding the stabilizer
-expectation and taking absolute values termwise gives
-\(|\langle\psi|U|\psi\rangle|\leq\langle u_A,v_A\rangle\).  Since the two
-vectors are unit, the asserted defect bound follows.
+Restriction of \(L\) to either half is injective because a kernel label
+would be supported on at most \(m\) parties; it is bijective because both
+groups have order \(q^{2m}\).  Weyl Parseval then gives the unit norms.
+Expanding the stabilizer expectation and taking absolute values termwise
+gives \(|\langle\psi|U|\psi\rangle|\leq\langle u_A,v_A\rangle\); the Weyl
+index is \(-\ell\), up to phase, and \(\ell\mapsto-\ell\) is a bijection of
+\(L\).  Since the two vectors are unit, the asserted defect bound follows.
 \end{proof}
 
 \begin{proposition}[Residual stability]
@@ -240,25 +242,52 @@ support formula.  Evaluation is therefore bijective, and every nonzero
 label in the kernel has support exactly \(A\cup\{j\}\).
 
 For a Weyl label \(w\), let \(\ell^{j,w}\) be the unique such label whose
-\(j\)-coordinate is \(w\).  These bijections give
+\(j\)-coordinate is \(w\).  Put
+\(\mu_i(v)=|a_i(v)|^2\).  The first sum below is exact, while the second is
+the diagonal part of a product of nonnegative sums:
 \[
+\begin{split}
  \sum_{w\ne0}v(\ell^{j,w})^2
- \geq\eta_j(1-H),
- \qquad
+ &=\eta_j\prod_{k\in A^c\setminus\{j\}}(1-\eta_k)
+ \geq\eta_j(1-H),\\
  \sum_{w\ne0}u(\ell^{j,w})^2
- \leq\prod_{i\in A}\eta_i.
+ &=\sum_{w\ne0}\prod_{i\in A}\mu_i(\ell_i^{j,w})
+ \leq\prod_{i\in A}\sum_{w\ne0}\mu_i(\ell_i^{j,w})
+ =\prod_{i\in A}\eta_i.
+\end{split}
 \]
-The corresponding families are disjoint as \(j\) varies.  Applying
-\((x-y)^2\geq x^2/2-y^2\), and then repeating the estimate with \(A\) and
-\(A^c\) exchanged, yields
+The corresponding families are disjoint as \(j\) varies.  The families
+obtained after exchanging \(A\) and \(A^c\) also have different supports,
+so their contributions may be added.  Applying
+\((x-y)^2\geq x^2/2-y^2\), first to the families indexed by
+\(j\in A^c\) and then to those indexed by \(i\in A\), gives
 \[
  \lVert u-v\rVert^2
- \geq\bigl(\tfrac12(1-H)-\eta^{m-1}\bigr)H,
- \qquad \eta=\max_j\eta_j.
+ \geq\tfrac12(1-H)H-m\left(
+      \prod_{i\in A}\eta_i+\prod_{j\in A^c}\eta_j\right).
+\]
+For either half \(S\),
+\(m\prod_{i\in S}\eta_i\leq
+  \eta^{m-1}\sum_{i\in S}\eta_i\), where
+\(\eta=\max_j\eta_j\).  Hence
+\[
+ \lVert u-v\rVert^2
+ \geq\bigl(\tfrac12(1-H)-\eta^{m-1}\bigr)H.
 \]
 For \(m\geq3\) and \(H\leq1/4\), the coefficient is at least \(5/16\).
-For \(m=2\), retaining the four pair products before the maximum estimate
-gives \(H/2-3P\), where \(P\leq H^2/4\), again at least \(5H/16\).
+For \(m=2\), write \(A=\{1,2\}\), \(A^c=\{3,4\}\), and
+\(P=\eta_1\eta_2+\eta_3\eta_4\).  Using the exact first identity above in
+the two cut directions gives
+\[
+ \lVert u-v\rVert^2\geq H/2-3P,
+\]
+while
+\[
+ P\leq\frac{(\eta_1+\eta_2)^2+(\eta_3+\eta_4)^2}{4}
+ \leq\frac{H^2}{4}.
+\]
+Therefore
+\(H/2-3P\geq H/2-3H^2/4\geq5H/16\).
 Thus in all cases \(\varepsilon(U)^2\geq H/4\), proving the first statement.
 
 \medskip\noindent\emph{Spectral contraction.}

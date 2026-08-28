@@ -62,13 +62,11 @@
 \newcommand{\AMEFigureFive}{%
   \ifdefined\AMEHideFigureFive\else\input{figures/05-stability-radius}\fi}
 
-\title{Local-Unitary Rigidity and Quantitative Rounding for
-Stabilizer AME States}
+\title{Robust Local-Unitary Rigidity of Stabilizer AME States}
 \author{Tavis Rudd}
-\date{July 2026}
+\date{August 2026}
 \hypersetup{
-  pdftitle={Local-Unitary Rigidity and Quantitative Rounding for
-    Stabilizer AME States},
+  pdftitle={Robust Local-Unitary Rigidity of Stabilizer AME States},
   pdfauthor={Tavis Rudd}
 }
 
@@ -77,30 +75,27 @@ Stabilizer AME States}
 
 \begin{abstract}
 Let \(q=p^e\) and \(m\geq2\).  We prove that every product unitary mapping
-one stabilizer \(\AME(2m,q)\) state to another is Clifford on each party.
-The key support-counting statement is that the stabilizers contained in any
-\((m+1)\)-party set project bijectively onto the complete Weyl-label space at
-each retained party.  The corresponding reduced operator therefore
-determines every local Weyl axis.  It follows that local-unitary and
-local-Clifford equivalence coincide for these states.  Equivalently, every
-transversal conversion between the associated
-\([[2m-1,1,m]]_q\) stabilizer encoders is Clifford on every physical and
-logical factor.  The same support data give a complete classification by
-the transition maps between local Weyl-label spaces.
+one stabilizer \(\AME(2m,q)\) state to another is Clifford on each party,
+and the same holds when a party relabelling is allowed.  The result covers
+arbitrary additive stabilizers.  Thus local-unitary and local-Clifford
+equivalence coincide for these states.  The proof is a support count:
+stabilizers contained in any
+\((m+1)\)-party set project bijectively onto the full Weyl-label space at
+each retained party, so the corresponding reduced operator determines every
+local Weyl axis.  Via the Choi-state correspondence, every transversal
+conversion between the associated \([[2m-1,1,m]]_q\) encoders is therefore
+Clifford on every physical and logical factor.  Their transition maps
+between local Weyl-label spaces form a complete LU invariant, modulo local
+trace-symplectic frame changes and party relabelling.
 
-We also prove a quantitative result for approximate product symmetries.
-Three-region cleaning and a finite Weyl--Fourier argument place every local
-factor within normalized Hilbert--Schmidt distance \(8\varepsilon\) of a
-Clifford.  A uniform gap between distinct stabilizer states then selects an
-exact symmetry and yields an explicit decomposition radius of order
-\[
- \min\{p^{-1},q^{-1/2},n^{-1/2}\},\qquad n=2m,
-\]
-with collective residual generator norm at most
-\(\pi\sqrt q\,\varepsilon\).  At a larger, dimension-dependent radius the
-rounded symplectic maps already preserve all minimum-support transitions;
-the remaining difficulty is to control the stabilizer character, or
-equivalently the required product-Pauli correction.
+We also prove robust rigidity for approximate product symmetries.  If the
+state-vector defect \(\varepsilon\) is below an explicit threshold of order
+\(\min\{p^{-1},q^{-1/2},(2m)^{-1/2}\}\), every local factor lies within
+normalized Hilbert--Schmidt distance \(8\varepsilon\) of a Clifford, and the
+product unitary decomposes into an exact symmetry and a residual whose
+collective generator norm is at most \(\pi\sqrt q\,\varepsilon\).  The proof
+combines three-region cleaning, finite Weyl--Fourier concentration, the
+quantized overlap of stabilizer states, and a balanced-cut estimate.
 \end{abstract}
 \noindent\textbf{Index Terms---}\input{frontmatter/index-terms}
 

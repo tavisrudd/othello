@@ -194,6 +194,33 @@ Descending induction shows that the \((m+1)\)-supported subgroups span
 the full label group.  This is the additive quantum-MDS form of
 minimum-weight generation, not a separate weight-enumerator claim.
 
+For recognition, one does not need all
+\(\binom{2m}{m+1}\) minimum supports.  The following direct-sum refinement
+reduces the data to \(m\) supports.
+
+\begin{proposition}[Minimum-support direct-sum decomposition]
+\label{prop:half-set-direct-sum}
+Fix an \(m\)-party set \(B\).  For each \(j\notin B\), put
+\(A_j=B\cup\{j\}\).  Then
+\[
+ L=\bigoplus_{j\notin B}L(A_j).
+\]
+Thus these \(m\) minimum-support subgroups determine the full stabilizer
+label group.
+\end{proposition}
+
+\begin{proof}
+Each summand has order \(q^2\) by
+Proposition~\ref{prop:stabilizer-ame-support}.  Suppose
+\(\sum_{j\notin B}\ell^{(j)}=0\), with
+\(\ell^{(j)}\in L(A_j)\).  At the coordinate \(j\notin B\), only
+\(\ell^{(j)}\) can be nonzero.  Its \(j\)-coordinate therefore vanishes,
+and the support theorem says that projection
+\(L(A_j)\to\F_q^2\) is injective.  Hence \(\ell^{(j)}=0\) for every \(j\).
+The sum is direct, and its order is \((q^2)^m=q^{2m}=|L|\), so it equals
+\(L\).
+\end{proof}
+
 We now prove the transition-map classification stated in the introduction.
 Regard each local label group
 \[
@@ -310,6 +337,59 @@ Evaluation at the base therefore identifies
 \(\mathrm{SL}_2(q)\).  Different spanning trees generate the same based
 holonomy subgroup; changing the base conjugates that subgroup, and hence
 its centralizer, by a chosen transport.
+\end{proof}
+
+\begin{corollary}[Finite recognition bound]
+\label{cor:finite-recognition}
+Let \(\psi\) and \(\phi\) be stabilizer \(\AME(2m,q)\) states,
+\(q=p^e\) and \(m\geq2\), given by check matrices for their additive
+label spaces.  With the party labels fixed, choose any \(m\)-party set
+\(B\).  LU equivalence can be
+decided by computing the \(m\) supported subgroups in
+Proposition~\ref{prop:half-set-direct-sum} and testing at most
+\[
+ |\operatorname{Sp}_{2e}(\F_p)|
+ =p^{e^2}\prod_{r=1}^e(p^{2r}-1)
+\]
+base symplectic frames.  In the arithmetic-operation model over \(\F_p\),
+each candidate requires polynomial work in the check-matrix size.  The
+stabilizer phases need not be supplied: Lemma~\ref{lem:pauli-phase-correction}
+repairs the character after the label spaces are matched.  For prime \(q\),
+the number of base candidates is
+\(|\mathrm{SL}_2(q)|=q(q^2-1)\).
+In particular, fixed-label recognition is polynomial in \(m\) for fixed
+local dimension \(q\).
+
+If the party relabelling is unknown, exhaustive search introduces at most a
+factor \((2m)!\).  For one state,
+\[
+ |\Gamma_\psi|
+ =q^{2m}|\operatorname{Aut}_{\mathrm{tr}}(\psi)|
+ \leq q^{2m}|\operatorname{Sp}_{2e}(\F_p)|.
+\]
+When \(q\) is prime,
+\[
+ |\Gamma_\psi|=q^{2m}
+ |C_{\mathrm{SL}_2(q)}(\langle H_A(i,j)\rangle)|
+\]
+for the based holonomies in Theorem~\ref{thm:atlas-classification}.
+\end{corollary}
+
+\begin{proof}
+Choose \(b\in B\).  On each support \(A_j=B\cup\{j\}\), the compatibility
+equations determine every local frame from its value \(F_b\) at the base.
+Enumerate \(F_b\in\operatorname{Sp}_{2e}(\F_p)\), propagate it through the
+operator-pushing maps of the two states, and check that the propagated maps
+are symplectic and satisfy the remaining support equations.  A successful
+candidate maps every \(L_\psi(A_j)\) to \(L_\phi(A_j)\), hence maps
+\(L_\psi\) to \(L_\phi\) by the direct-sum proposition; the Pauli phase
+correction then produces an LU equivalence.  Conversely, every LU
+equivalence supplies one of the tested base frames.  Kernels, transition
+maps, propagation, and compatibility are finite-field linear algebra of
+polynomial size in \(m\).  Enumerating party permutations gives the stated
+factor.  The group-order bound follows from the exact sequence in
+Theorem~\ref{thm:atlas-classification} and injectivity of evaluation at the
+base frame.
 \end{proof}
 
 \subsection{Encoder consequences}
