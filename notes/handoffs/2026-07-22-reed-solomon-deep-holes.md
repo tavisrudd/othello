@@ -168,14 +168,16 @@ pair, whose torus fixes `tau`; do not use that false symmetry reduction.
 The cubic and quadratic cases are now closed by `GF(8)` and `GF(4)` elliptic
 specializations, giving `72>52` and `54>52`.  Only the 42 trace-one values,
 or seven Frobenius sextics in one common family, remain.
-The restricted selector is now uniformly nonzero, and parity-sharpened Hasse
-closes five sextics.  Only the twelve roots of `tau^6+tau+1` and
-`tau^6+tau^5+tau^4+tau+1` remain; these are exactly where both rootlessness
-curve poles and infinity are rational, leaving a one-point Hasse deficit.
-That deficit is now a single torsion gate: exhibit rational order three on
-the trace-zero companion for the two sextics.  The twist then has order
-`1 mod 3`, so even Hasse count at least 50 improves to at least 52 and closes
-the selector inequality.
+The restricted selector is uniformly nonzero, and parity-sharpened Hasse
+closes five sextics.  The twelve roots of `tau^6+tau+1` and
+`tau^6+tau^5+tau^4+tau+1` are exactly where both rootlessness-curve poles and
+infinity are rational, leaving a one-point Hasse deficit.  A rational-pole
+inversion now converts each trace-zero companion to an explicit Weierstrass
+model, and a two-row substitution in the characteristic-two 3-division
+polynomial exhibits rational order three.  The twist therefore has order
+`1 mod 3`; its even Hasse count improves from at least 50 to at least 52 and
+closes the selector inequality.  Thus GF(64) is structurally closed with no
+point-count certificate.  GF(27) and external review remain.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

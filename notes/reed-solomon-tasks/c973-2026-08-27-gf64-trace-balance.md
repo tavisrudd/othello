@@ -1,7 +1,7 @@
 # C973 checkpoint — exact GF(64) trace balance
 
-**Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** coefficient-space
-abundance proved; conditional slope chart and its first exact obstruction identified
+**Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** GF(64) pointed
+closure proved structurally; no finite census or point-count certificate remains
 
 ## 1. Balance theorem
 
@@ -789,9 +789,105 @@ Therefore
 \]
 
 where the four removed points are the two rational pole fibres and the two
-points above infinity.  Thus a rational order-three divisor on `C0`, uniform
-for `P1` and `P7`, would close all twelve values without a point-count
-certificate.  This is the sharp structural next gate.
+points above infinity.  The required order-three divisor is explicit.  The
+following calculation also compresses both exceptional sextics to one
+standard construction.  Write
+
+\[
+ K_i=\mathbf F_2[\tau]/(P_i),\qquad h=n_1,\qquad f=n_0n_2,
+\]
+
+where `P1=tau^6+tau+1` and
+`P7=tau^6+tau^5+tau^4+tau+1`.  For each row below, `h(r)=0` and
+`d^2=f(r)`.
+
+\[
+\begin{array}{c|c|c|c}
+ &r&d&c\\ \hline
+P_1&\tau^5+\tau^2+\tau+1&\tau^5+\tau^4+\tau^3+\tau
+   &\tau^5+\tau^4+\tau^3\\
+P_7&\tau^4+\tau^2+\tau+1&\tau^5+\tau^2+\tau+1
+   &\tau^4+\tau^3+\tau^2+\tau
+\end{array}                                                \tag{33a}
+\]
+
+The rational-pole inversion
+
+\[
+ a=r+\frac1{cx},\qquad
+ Y=d+\frac{y}{cx^2}                                      \tag{33b}
+\]
+
+takes `C0: Y^2+h(a)Y=f(a)` to
+
+\[
+ E_i:\quad y^2+a_1xy+a_3y=x^3+a_2x^2+a_4x+a_6.           \tag{33c}
+\]
+
+The two coefficient rows, in the order
+`(a1,a2,a3,a4,a6)`, are
+
+\[
+\begin{array}{c|ccccc}
+P_1&
+ \tau^4+\tau^3+\tau^2+1&
+ \tau^5+\tau^3+\tau+1&
+ \tau^5+\tau^3+\tau^2+\tau+1&
+ \tau^5+\tau^4+\tau^3+\tau^2+1&
+ \tau^3+\tau^2+1\\
+P_7&
+ \tau^4+\tau^3+\tau^2+1&
+ \tau^5+\tau^2+\tau&
+ \tau^3+\tau^2+1&
+ \tau^5+\tau^4+\tau^2+1&
+ \tau^4+\tau^3+\tau^2+1
+\end{array}                                                \tag{33d}
+\]
+
+Indeed, after substituting (33b), the left side of the original equation,
+multiplied by `c^2x^4`, is identically the left side minus the right side of
+(33c), reduced only by `P_i(tau)=0`.  Thus this is a direct birational
+identification, not a point-count inference.  It sends the rational point over
+`a=r` to the Weierstrass origin.
+
+Now the points
+
+\[
+\begin{array}{c|c}
+P_1&(\tau^4,\ \tau^3+\tau^2)\\
+P_7&(\tau^5+\tau^4+\tau^2,\ \tau^3+\tau^2+\tau+1)
+\end{array}                                                \tag{33e}
+\]
+
+lie on their respective curves.  In characteristic two the 3-division
+polynomial of (33c) is
+
+\[
+ \psi _3(X)=X^4+a_1^2X^3+a_1a_3X^2+a_3^2X
+ +a_1^2a_6+a_1a_3a_4+a_2a_3^2+a_4^2.                    \tag{33f}
+\]
+
+Substitution of the two `x`-coordinates in (33e) gives zero modulo `P1` and
+`P7`, respectively; substitution of both coordinates in (33c) also gives
+zero.  Both points are nonidentity.  Since the characteristic is not three,
+each therefore has exact order three.  This proves the torsion gate, forces
+`#C1>=52`, and supplies at least 24 admissible rootless parameters against 23
+exclusions.  All twelve roots of (33), and hence the complete GF(64)
+forced-root surface, are closed without a point-count certificate.
+
+Equivalently, directly on `C0`, take `R_i=(r,d)` from (33a) as origin.  The
+order-three divisor is `Q_i-R_i`, where
+
+\[
+\begin{array}{c|c}
+P_1&Q_1=(\tau^4+\tau^2,\ \tau^4+\tau^3+\tau^2+\tau)\\
+P_7&Q_7=(\tau^5+\tau^2+1,\ \tau^3+\tau^2+\tau).
+\end{array}                                                \tag{33g}
+\]
+
+Thus the load-bearing object is an explicit two-point divisor on the original
+Artin--Schreier quartic; the Weierstrass rows only verify its order through one
+universal polynomial.
 
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
@@ -876,13 +972,14 @@ not evidence for a new modular family.
 
 ## 4. Boundary
 
-This checkpoint proves coefficient-space trace abundance only.  An arbitrary
-coefficient quintic need not split, so the theorem does not yet close GF(64).
-Conversely, a future proof must not discard the exact half-density by paying a
-generic high-degree character-sum constant.  The split chart (4) or an
-equivalent rational family should preserve it directly.
+This checkpoint now closes the GF(64) pointed R11 problem.  The final
+exceptional step uses only the rational-pole inversion (33b), two explicit
+Weierstrass rows, and the universal 3-division polynomial (33f).  It does not
+use the discovered point counts `54` and `76`, an ambient census, or a finite
+certificate.  GF(27) and the independent reviews remain outside this
+checkpoint.
 
-No computation, manuscript edit, or software edit supports this theorem.
+No manuscript or software edit supports this theorem.
 
 ## 5. `ej` + `tt` and mystery ledger
 
@@ -907,7 +1004,7 @@ arguments do not answer that arithmetic question.
 | How far does `a=tau` extend? | factorization (31) closes nine additional noncolliding roots; `tau=0` reuses the endpoint | ten more forms closed |
 | How many semilinear cases are left? | two trace-one sextics | the simultaneous rational-poles/infinity locus |
 | Is the restricted degree-22 selector nonzero? | yes; (32) is its load-bearing pseudo-remainder coefficient | proved uniformly on all trace-one forms |
-| What repairs the last one-point Hasse deficit? | rational order three on the trace-zero companion | twist order `1 mod 3` forces `52`, hence 24 parameters |
+| What repairs the last one-point Hasse deficit? | the rational-pole inversion (33b) exposes the order-three points (33e) | settled structurally; twist order `1 mod 3` forces `52`, hence 24 parameters |
 | Can cross-ratio transformations reduce the seven sextics? | no at the contracted pointed level; the ordered-pair torus fixes `tau` | `4+3` is not a valid symmetry quotient |
 | Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (34)--(36) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |

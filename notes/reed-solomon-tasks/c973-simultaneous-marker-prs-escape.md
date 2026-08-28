@@ -3,7 +3,8 @@
 **Lane:** `reed-solomon` · **Status:** active — arbitrary-`r` escape proved;
 the multi-digit carrier module theorem is proved, characteristic seven is
 pointedly closed, and exact GF(16)/GF(32) pointed quotients close binary
-R11/R12 there; GF(27), GF(64), and external review remain open
+R11/R12 there; GF(64) is structurally closed; GF(27) and external review remain
+open
 
 **Current checkpoint:**
 `c973-2026-08-26-simultaneous-marker-theorem.md` proves direct composite
@@ -180,12 +181,15 @@ parameters against the 23-parameter selector/zero budget.  The simultaneous
 exception is exactly the two sextics `tau^6+tau+1` and
 `tau^6+tau^5+tau^4+tau+1`.  Thirty values close uniformly; only their twelve
 roots remain.
-The final one-point deficit is equivalent to one torsion lemma.  If the
-trace-zero companion on either remaining sextic has a rational point of order
-three, then its rootlessness twist has order `1 mod 3`; parity and Hasse force
-at least 52 points, hence 24 rootless parameters after removing the two pole
-fibres and infinity.  This beats the 23-parameter selector budget and closes
-all twelve values without a point-count certificate.
+The final one-point deficit is closed by an explicit torsion lemma.  Inverting
+at one rational pole converts each trace-zero companion to a two-row
+Weierstrass model; direct substitution in the characteristic-two 3-division
+polynomial gives a rational point of exact order three.  Hence the rootlessness
+twist has order `1 mod 3`; parity and Hasse force at least 52 points, or 24
+rootless parameters after removing the two pole fibres and infinity.  This
+beats the 23-parameter selector budget and closes all twelve values without a
+point-count certificate.  The original quartic divisor is explicit in
+`c973-2026-08-27-gf64-trace-balance.md`.
 
 ## Objective
 
