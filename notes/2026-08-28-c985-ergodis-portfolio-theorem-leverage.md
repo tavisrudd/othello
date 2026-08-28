@@ -390,14 +390,20 @@ instance.
    the theorem supplies canonical row spaces and the verifier separately
    checks generator invariance.  This is stronger and much smaller than
    retaining a generic BFS transcript when the action is known linear.
-2. **Successive specialization -- high-value next import.**  A nonzero
+2. **Successive specialization -- dense exact core imported.**  A nonzero
    multivariate selector with each coordinate degree below `q` needs at most
    `mq` symbolic partial-substitution/zero tests, not `q^m` complete tuples.
-   The safe Ergodis abstraction is an exact residual-selector adapter with
-   fail-closed zero testing and streamed rejection evidence.  Black-box point
-   evaluation is not a substitute.  Sparse arithmetic circuits/ZDDs should be
-   admitted by measured residual size; dense coefficient tensors remain the
-   exact fallback.
+   `DenseSelector` implements that theorem over every Ergodis finite field.
+   Its first-variable-fast tensor alternates between two exactly sized scratch
+   buffers, pre-sizes the assignment, and streams every accepted/rejected
+   residual decision through a caller sink.  The measured allocation gate
+   permits only the returned assignment allocation; the specialization loop
+   itself does not grow or allocate.  Direct evaluation independently replays
+   the witness, and exhaustive testing covers all 19,682 nonzero bivariate
+   quadratics over `F_3`, each within the `mq=6` bound.  Black-box point
+   evaluation is not a substitute.  Sparse arithmetic circuits/ZDDs are the
+   next representation backend and should be admitted by measured residual
+   size; dense coefficient tensors remain the exact fallback.
 3. **Composite contraction and pointed avoidance -- general interface law.**
    PRS contracts all retained markers at once and charges a forbidden set in
    one terminal budget.  For Ergodis this suggests compiling a composite
@@ -449,8 +455,9 @@ All next kernels should preserve the established constraints:
 
 ## Immediate work order
 
-1. Prototype an exact residual-selector interface and test successive
-   specialization on a small non-coding adapter before importing PRS formulas.
+1. Add a sparse arithmetic-circuit residual-selector backend and benchmark its
+   crossover against the dense exact tensor; keep both behind the same sink and
+   replay contract.
 2. Add sparse-shadow-style first-class transporters/separators and frozen
    adapter contracts to the finite-interface boundary.
 3. Instantiate the ordered-resource and finite-interface adapters on one

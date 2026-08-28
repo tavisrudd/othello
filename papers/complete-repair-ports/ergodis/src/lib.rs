@@ -25,6 +25,7 @@ pub mod packed_ternary;
 pub mod projective;
 pub mod provenance;
 pub mod scheduler;
+pub mod selector;
 pub mod span;
 pub mod transfer;
 pub mod witness;
@@ -94,6 +95,10 @@ pub use scheduler::{
     maximum_parallel_repairs, CapacityCut, ParallelRepairResult, PositiveGradingCertificate,
     RepairSupportChoice, SchedulerError, WeightedParallelRepairResult, WeightedRepairProblem,
     WeightedRepairWorkspace, WeightedSchedulerBackend,
+};
+pub use selector::{
+    DenseSelector, DenseSelectorWorkspace, SelectorAnswer, SelectorError, SelectorRunError,
+    SelectorStep,
 };
 pub use span::{CanonicalTargetImage, GeneratedSpanTable, SpanAnswer, SpanError};
 pub use transfer::{

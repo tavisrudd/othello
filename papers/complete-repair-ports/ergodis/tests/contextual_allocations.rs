@@ -1,7 +1,9 @@
 use ergodis::observational::{
     compile_observational_with_policy, CertificatePolicy, FinitePresentation, GeneratorSpec,
 };
-use ergodis::{CostTable, Gf4, Matrix, Prime, RankBoundedContextCache, RankOneProbeCache};
+use ergodis::{
+    CostTable, DenseSelector, Gf4, Matrix, Prime, RankBoundedContextCache, RankOneProbeCache,
+};
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
 
@@ -197,5 +199,18 @@ fn contextual_cache_scans_have_constant_allocation_envelopes() {
     assert!(
         warm_allocations <= 10,
         "rank-bounded warm scan allocated {warm_allocations} times"
+    );
+}
+
+#[test]
+fn successive_selector_allocates_only_its_returned_assignment() {
+    let selector = DenseSelector::<Prime<5>>::new([1, 1], [0, 1, 1, 0]).unwrap();
+    let mut workspace = selector.workspace();
+    let (answer, allocations) =
+        tracked_allocations(|| selector.select_nonzero(&mut workspace).unwrap());
+    assert_eq!(&*answer.assignment, &[0, 1]);
+    assert!(
+        allocations <= 1,
+        "selector hot path allocated {allocations} times"
     );
 }
