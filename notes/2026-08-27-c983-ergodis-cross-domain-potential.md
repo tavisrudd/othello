@@ -326,6 +326,29 @@ counterexample search provides exact equivalence.  This would expand Ergodis
 from a DP library into a black-box interface compiler while preserving an
 auditable observation table and counterexample certificate.
 
+## Application framing that survives theorem pre-emption
+
+Ergodis should be evaluated as an exact compositional-optimization compiler,
+not as ownership of any one minimization theorem.  Its durable product claims
+can be stated independently of mathematical novelty:
+
+| Capability | Established machinery absorbed | Ergodis deliverable | Acceptance metric |
+|---|---|---|---|
+| Explicit domain compilation | Semiring DP, automata/ranked-algebra minimization | Domain object to typed finite interface, generated evaluator, and lift | Adapter code size; oracle agreement; generated-state/time reduction |
+| Certified minimization | Myhill--Nerode, weight pushing, FII | Quotient/potential tables plus distinguishing contexts and normalization trace | Minimal class count; certificate replay; absolute value recovery |
+| Exact solution recovery | Backpointers, provenance semirings, representative sets | Chosen witness or requested provenance projection | Witness validity; witness bytes separated from value-state bytes |
+| Compile once, query several ways | AMC, provenance, semiring polymorphism | Value/count/optimal-count/witness projections over one domain artifact | Reuse versus separate compiles; circuit and query time |
+| Black-box compilation | Active automata learning | Legacy optimizer or simulator to learned finite interface | Query count; counterexample depth; exact equivalence certificate |
+| Bounded-boundary graph/network solving | Graph/hypergraph Nerode, FII, rank-based DP | Generated/minimized exact network adapter behind the same API | Performance versus bespoke and generic exact solvers |
+| Negative diagnostics | Infinite-index/non-determinization and learning limitations | Precise failed gate and suggested bound/observation/parameter change | No false exactness claim; reproducible counterexample family |
+
+This framing makes priority judo concrete.  A pre-empted theorem becomes a
+backend with a known contract and a regression oracle.  Progress is still real
+when Ergodis adds a domain front end, combines previously separate reductions,
+generates witnesses/certificates, or makes an exact solver reusable under a
+stable interface.  A research theorem is extra upside, not the sole reason for
+the software to exist.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary
