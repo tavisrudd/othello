@@ -1,8 +1,8 @@
 # C973 checkpoint — GF(27) three-line carrier reduction
 
 **Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** exact
-one-parameter reduction, Borel endpoint, one residual boundary chart, and a
-second chart's affine-plane slice closed; abundance open
+one-parameter reduction, Borel endpoint, and two residual boundary charts
+closed; abundance open
 
 ## 1. Split family
 
@@ -405,15 +405,60 @@ of sum zero form an affine `F3`-line with pair sum `-h^2`, whereas `p^3` is a
 nonsquare because `p=-alpha^2` and `-1` is a nonsquare in `K`.  A transverse
 line is genuinely necessary there.
 
+That transverse construction closes every value of `lambda`.  Frobenius
+acts by `lambda -> lambda^3` and preserves the normal form `(1,lambda)`.  The
+following eleven elements represent all its orbits on `K`:
+
+\[
+\begin{gathered}
+0,1,2,\quad \theta^2+\theta+1,\quad 2\theta^2+2\theta+2,
+\quad\theta+1,\quad\theta^2+2,\\
+2\theta^2+1,\quad2\theta+1,\quad\theta^2+1,
+\quad2\theta^2+2\theta+1.                               \tag{27}
+\end{gathered}
+\]
+
+For each representative, a locator is the product of the three displayed
+factors:
+
+\[
+\begin{array}{c|ccc}
+0&F_{2\theta^2+1,0}&F_{2\theta^2+1,\theta}&F_{2\theta,2\theta^2+2}\\
+1&F_{2\theta^2,0}&F_{2\theta^2,\theta^2+2}&F_{2\theta+1,2\theta+2}\\
+2&F_{2\theta^2,0}&F_{2\theta^2,2\theta^2+2\theta}&F_{2\theta,2\theta+1}\\
+\theta^2+\theta+1&F_{2,2\theta+1}&F_{2,\theta}&F_{2\theta,0}\\
+2\theta^2+2\theta+2&F_{2,\theta+2}&F_{2,1}&F_{\theta^2+1,0}\\
+\theta+1&F_{2,2\theta}&F_{2,\theta+1}&F_{2\theta^2,0}\\
+\theta^2+2&F_{2\theta,0}&F_{2\theta,\theta^2+\theta}&F_{2\theta^2+1,2\theta}\\
+2\theta^2+1&F_{2\theta,0}&F_{2\theta,\theta+2}&F_{2\theta^2+\theta,\theta^2}\\
+2\theta+1&F_{2\theta^2,0}&F_{2\theta^2,\theta+1}&F_{2,\theta}\\
+\theta^2+1&F_{2,0}&F_{2,2\theta}&F_{2\theta^2,2\theta^2+2\theta}\\
+2\theta^2+2\theta+1&F_{2,\theta}&F_{2,2}&F_{2\theta^2,\theta^2+\theta}.
+\end{array}                                                \tag{28}
+\]
+
+In every row, the first two lines are parallel, the third is transverse,
+each offset belongs to the appropriate `W_p`, and the two collision factors
+(10) are nonzero.  Thus each product has nine distinct roots in `K`.  Direct
+multiplication gives
+
+\[
+                 g_3+g_4+\lambda g_6=0,
+                 \qquad g_4+g_5+\lambda g_7=0,           \tag{29}
+\]
+
+which are exactly (3) for `(x,y)=(1,lambda)`.  Applying Frobenius to a row
+of (28) cubes both its roots and `lambda`, so (27)--(29) close all 27 values.
+Together with (24), the entire `z5` chart is therefore closed.
+
 ## 7. Boundary and next gate
 
 The load-bearing next step is to choose `p!=r` uniformly from the thirteen
 directions and prove that some `u in W_p` survives (7)--(11) on the dense
 stratum.  Equation (12) transports every syndrome outside (14) into that
 stratum.  The two-coordinate endpoint is closed by (16)--(18), the `z7`
-chart by (19)--(21), and the `x=0` part of the `z5` chart by (24)--(25).  The
-separate open boundary is the `z8!=0` chart and the one-parameter transverse
-line (26); no finite enumeration is needed to define either.
+chart by (19)--(21), and the entire `z5` chart by (24)--(29).  The only
+separate open boundary is now the `z8!=0` chart.
 
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
@@ -432,4 +477,4 @@ certificate supports this reduction.
 | How many boundary charts remain after the Borel action? | three affine normal forms and one two-coordinate torus endpoint | the four strata following (15) |
 | Does the torus endpoint survive? | no; its four square-class orbits have the explicit three-line products (17) | closed by the coefficient identities (18) |
 | Does the residual `z7` chart survive? | no; relative torus weight five is invertible modulo 26, leaving two orbits | closed by the explicit root partitions (20)--(21) |
-| What remains of the residual `z5` chart? | its `z4=0` slice closes uniformly by one affine-plane product; the complement has the single torus invariant `lambda` | use one transverse line on the normal form `(x,y)=(1,lambda)` |
+| What remains of the residual `z5` chart? | nothing: its `z4=0` slice closes uniformly by one affine-plane product, and Frobenius reduces the complementary `lambda`-line to the eleven direct products (28) | closed by (24)--(29) |

@@ -211,10 +211,11 @@ action leaves three affine normal-form charts and one two-coordinate torus
 endpoint.  The endpoint has four torus square-class orbits, all closed by
 explicit products of three affine-line cubics.  The `z7` residual chart has
 relative torus weight five and hence only two orbits; two further explicit
-three-line products close both.  Only dense abundance and the first two
-affine boundary charts remain.  In the `z5` chart, the entire `z4=0` slice
-closes uniformly as three parallel lines, and its complement reduces under
-the torus to the single invariant `lambda=(z4/z5)^2(z7/z5)`.
+three-line products close both.  In the `z5` chart, the entire `z4=0` slice
+closes uniformly as three parallel lines, while the complement reduces to
+the torus invariant `lambda=(z4/z5)^2(z7/z5)`.  Frobenius has eleven orbits
+on that parameter line; eleven explicit transverse products close them.
+Only the dense abundance problem and the `z8!=0` boundary chart remain.
 
 ## Objective
 
