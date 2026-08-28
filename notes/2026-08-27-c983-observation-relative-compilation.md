@@ -516,6 +516,14 @@ frontier composition unless an adapter proves that the capacity never binds or
 supplies a stronger factorization law.  Retaining one provenance lift per
 nondominated finite vector reconstructs a concrete plan for a selected point.
 
+For a concrete counterexample, take `R=(2,2)`,
+`A={(0,2),(1,0)}`, `B={(0,1)}`, and scalar weight `w=(1,0)`.  The separate
+scalar minima sum to zero, but `(0,2)+(0,1)` overflows; the bounded product has
+frontier `{(1,1)}` and scalar value one.  A temporary exhaustive check of the
+same two-resource box enumerated all 21 antichains (including the overflow
+point) and verified both associativities, both identities, and distributivity
+over all 9,261 triples.
+
 This is classical multiobjective DP, not a novelty claim.  It is nevertheless
 a direct Ergodis capability expansion for repair bandwidth, helper count,
 I/O, link load, latency buckets, or unrelated scheduling resources.  The hard
