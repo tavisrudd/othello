@@ -164,3 +164,33 @@ The architecture gate fails if the two first adapters require special cases in
 the minimizer itself, if certificates cannot replay independently, or if the
 generic artifact adds hot-loop indirection without a compensating state or
 capability gain.
+
+## Staged implementation order
+
+1. **Reference compiler and verifier.** Implement finite multi-sorted total
+   generators, absolute observations, synchronous refinement, transcript
+   replay, and the 13-state weighted-tree fixture.  No performance claim.
+2. **Two adapter gate.** Add bounded WTA closure and the resource-batch
+   relation/residual adapter with exhaustive witnesses.  The minimizer API may
+   not acquire domain-specific branches.
+3. **Artifact and query profiles.** Add stable serialization/schema hashes,
+   incremental observation/context refinement, and repeated-query replay.
+4. **Potential specialization.** Add checked signed potentials only with a
+   projectively complete context certificate; compare unary controls with
+   weight pushing and graph controls with finite integer index.
+5. **Measured refinement engine.** Profile `N`, `T`, compile time, bytes, and
+   break-even.  Introduce worklist/inverse transitions or sparse tables only
+   where the reference implementation proves the need.
+6. **Oracle front end.** Learn the same artifact from effective constructors
+   and an exact counterexample oracle.  Keep sampled testing visibly
+   noncertifying.
+7. **Stretch adapters.** Add boundaried network optimization, then
+   provenance/AMC and representative-family reducers as separate layers.
+8. **Approximate laboratory.** Only after exact ground truth exists, train a
+   recurrent/SSM encoder against response coordinates and contextual distance;
+   require rollout and value/witness error reports.
+
+This order lets classical algorithms become executable controls at every
+stage.  A newly found pre-emption changes attribution or swaps a backend; it
+does not invalidate the compiler milestone unless it also removes the measured
+cross-domain capability gain.

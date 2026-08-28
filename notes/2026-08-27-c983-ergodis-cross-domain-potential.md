@@ -420,6 +420,29 @@ signed offset, and witness/provenance payloads remain separate.  This turns
 the same compiler artifact into a minimal exact boundary protocol for the
 declared application queries.
 
+## Updated priority order
+
+The first-batch evidence changes the expansion ranking:
+
+1. **Finite typed compiler + proof artifact** — implementable now, with WTA
+   and resource fixtures and classical minimization controls.
+2. **Potential/query-profile specialization** — exact additional compression
+   and incremental application queries, with FII/weight-pushing controls.
+3. **Black-box exact interface learning** — the largest near-term capability
+   expansion because it can wrap legacy optimizers without rewriting their DP.
+4. **Boundaried graph/network adapter** — application-rich but heavily
+   pre-empted theoretically; value lies in generated tables, layer composition,
+   certificates, and solver integration.
+5. **Provenance/AMC/database adapter** — useful if contextual minimization adds
+   measurable interface reduction beyond the compiled circuit.
+6. **Predictive-state/SSM approximation laboratory** — high upside, deferred
+   until exact states and contextual metrics provide ground truth.
+
+The best remaining theorem targets are domain-specific: effective restricted-
+context separator bounds, projectively complete separators, witness-lift laws,
+and compositional approximation bounds.  The broad universal statements have
+been absorbed as classical corollaries or backends.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary
