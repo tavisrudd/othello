@@ -1955,14 +1955,17 @@ fn emit_compilation(
     let mut generator_records = Vec::with_capacity(presentation.generators.len());
     let mut generator_transitions = Vec::with_capacity(transition_capacity);
     for generator in presentation.generators.iter().copied() {
+        let source_states = presentation.sorts[generator.source_sort as usize];
         let source_classes = class_ranges[generator.source_sort as usize];
+        let transition_start_in_presentation = generator.transition_start as usize;
+        let transitions = &presentation.transitions[transition_start_in_presentation
+            ..transition_start_in_presentation + generator.transition_len as usize];
         let transition_start =
             u32::try_from(generator_transitions.len()).map_err(|_| ObservationalError::Overflow)?;
         for class in source_classes.start..source_classes.end() {
             let representative = representatives[class as usize];
-            let target = presentation
-                .transition(generator_records.len() as u32, representative)
-                .ok_or(ObservationalError::CompiledShape)?;
+            let local = (representative - source_states.start) as usize;
+            let target = transitions[local];
             generator_transitions.push(classes[target as usize]);
         }
         generator_records.push(GeneratorRecord {
