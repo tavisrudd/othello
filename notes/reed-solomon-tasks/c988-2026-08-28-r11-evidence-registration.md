@@ -354,12 +354,67 @@ R6 manuscript table: PASS
 verified classification-record hashes
 ```
 
-All four newly registered replays were run individually from their bundle
-directories and pass; see sections 2.2, 3, and 4.1. The full `replay()` list was
-additionally driven directly to confirm no ordering or path regression in the
-existing jobs.
+All four newly registered replays were driven through `verify.py`'s own `run()`
+helper with the exact working directory and argument vector registered in
+`python_jobs`, after asserting that each `(directory, script)` pair really is
+present in `replay()`'s source. All four pass:
 
-Not committed, as instructed. Nothing was staged.
+```
+2026-08-28-r11-gf16-pointed-quotient-replay.py    317 orbits, 317 finite witnesses,
+                                                  degrees {8: 2, 9: 315}, 1000 equivariance pairs
+2026-08-28-r11-gf32-pointed-quotient-replay.py    1129 orbits, 1129 finite witnesses,
+                                                  degrees {9: 1129}, 1000 equivariance pairs
+2026-08-28-r11-gf27-witness-replay.py             200 witness rows, 0 failing
+2026-08-28-r11-char7-pointed-orbits-replay.py     7 orbits over GF(49), {11: 5, 12: 2},
+                                                  two Hankel windows each
+```
+
+### 6.1 Pre-existing failure in a foreign bundle: `r7-direct-locus-v2`
+
+Driving the complete `replay()` list directly (bypassing the stale release
+manifest) aborts before reaching the redundancy-eleven jobs, at
+
+```
+2026-08-02-r7-direct-locus-generator.py --check   ->  AssertionError, exit 1
+```
+
+This is **not** caused by this task. `Certificate R7 direct locus` is clean
+against `HEAD` and was not touched here. Diffing the regenerated document
+against the frozen certificate structurally shows exactly one differing key:
+
+```
+/engine_sha256   regenerated 619ea2591ece8871e445dbe910a7913ee9be7a6aa144812f1f8d031fb1705d2a
+                 frozen      658126d67e53707f29a2482d6cba8ef7cef28fe20f9298af585ebba6af180586
+```
+
+`engine_sha256` is the hash of the shared direct-locus engine
+`supplement/evidence/r7/2026-07-26-r7-direct-locus-replay.py`, which the
+generator imports via `ENGINE_PATH`. That file currently hashes to
+`619ea25...`. Both it and the certificate were last written by commit
+`4008f090f`, "Strengthen and rename high-weight GRS cosets paper", so the engine
+source was edited during the paper rename without regenerating the direct-locus
+certificate that pins it. Every mathematical field agrees; only the provenance
+pin is stale.
+
+This is the same failure mode as the GF(32) `base_source_sha256` pin discussed
+in §2.1, which is why the GF(16) generator here is bundled byte-for-byte. Raised
+for the owning lane; not repaired here, and not staged.
+
+### 6.2 The work was committed by the concurrent agent, not by this task
+
+Nothing here was staged or committed by this task. While the validation runs
+were in flight, the concurrent manuscript agent committed the working tree as
+`8ac89f324`, "paper(high-weight-grs-cosets): C988 all-characteristic
+classification, R11 companion evidence", which swept in all nineteen bundle
+files and all eight supplement/verification-map edits listed in §7, together
+with their own manuscript work. The committed bundle content is byte-identical
+to what is described here, `package_evidence_bundle.py --check` still reports
+`verified 93 bundled evidence artifacts` against it, and
+`git status` is clean for every path in §7.
+
+Two things still need a follow-up commit: this report, which was committed at an
+earlier draft state and has been extended since, and any release-manifest
+refresh once the manuscript PDF settles.
 
 ## 7. Files
 
@@ -414,12 +469,21 @@ last, which refreshes the PDF fields and all seven artifact rows together.
 
 ## 8. Open items for the caller
 
-1. Nothing is staged or committed, as instructed. The three bundle directories
-   are untracked and are absent from every reproducibility claim until committed.
-2. `verify.py --replay` cannot reach its replay list while the release manifest
-   is stale, because `check_release_manifest()` runs first. Rerun it after the
-   manuscript PDF settles.
-3. The GF(16) quotient generator is the one script bundled with unpatched path
+1. This task staged and committed nothing. The concurrent manuscript agent
+   committed the tree as `8ac89f324` mid-run, so the three bundle directories
+   are now tracked anyway (§6.2). This report itself is the one path still
+   dirty, having been extended after that commit.
+2. `verify.py --replay` currently cannot reach the redundancy-eleven jobs for
+   two reasons, both foreign to this task: the stale local PDF hash aborts
+   `check_bundle()` before `replay()` starts, and the stale `engine_sha256` in
+   the `Certificate R7 direct locus` bundle (§6.1) aborts `replay()` partway
+   through. Both need their owning agent. The four new jobs were verified
+   directly through `verify.py`'s own runner.
+3. The `Certificate R7 direct locus` defect is a committed reproducibility
+   regression from commit `4008f090f` and should get its own task: regenerate
+   `2026-08-02-r7-direct-locus-certificate.json` and its public comparison so
+   the `engine_sha256` pin matches the current engine source.
+4. The GF(16) quotient generator is the one script bundled with unpatched path
    defaults, for the `base_source_sha256` reason in §2.1. Its documented command
    in `REPRODUCING.md` passes `--binary` and `--output` explicitly. If a future
    change makes patching it acceptable, the GF(32) certificate must be
