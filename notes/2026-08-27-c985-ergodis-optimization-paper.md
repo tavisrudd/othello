@@ -783,6 +783,12 @@ cost words followed by a `ceil(N/32)`-word presence bitmap.  This represents
 missing labels separately from values, retains the complete `u32` cost range,
 and reduces admitted payload from 8 bytes per label to asymptotically 4.125.
 
+Commit `20654574b` transfers C947's scalar-demand image theorem into the public
+span API.  `CanonicalTargetImage` is an opaque canonical column-space basis
+tagged by field and ambient dimension.  Callers can normalize a demand once and
+reuse it across exact span queries without repeating transpose and elimination;
+coefficient-aware presentations remain untouched.
+
 The complete theorem-to-compiler work order, classical-corollary framing, and
 negative boundaries are recorded in
 `notes/2026-08-28-c985-ergodis-portfolio-theorem-leverage.md`.

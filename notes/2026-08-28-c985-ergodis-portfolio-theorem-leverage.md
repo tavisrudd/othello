@@ -178,8 +178,9 @@ The scalar query path already contains the core normalization:
 `GeneratedSpanTable::query` transposes the demand and takes its canonical row
 basis, hence queries by the demand's column-space image rather than its chosen
 matrix presentation.  C947 upgrades that implementation fact to a theorem
-boundary.  The next engineering step is to expose the canonical image as a
-reusable cache key so batches do not repeat transpose/elimination work.
+boundary.  `CanonicalTargetImage` now exposes that quotient as an opaque,
+field-checked reusable value; repeated queries can skip transpose and row
+elimination, while a mismatched field or ambient space is rejected.
 
 This can reduce duplicate scalar states before observational refinement.  It
 must not be applied blindly to coefficient-aware APIs: raw coefficient vectors
