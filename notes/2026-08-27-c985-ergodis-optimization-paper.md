@@ -91,3 +91,137 @@ C987's starting hierarchy medians are 2.061 s raw construction plus 26.144 ms
 generic compilation, 38,332 KiB full compile peak RSS, and 22,500 KiB raw-only
 peak RSS.  The scaled quotient is 2.34x faster than raw random queries after a
 3.96-million-query break-even, but the default recovery path remains unchanged.
+
+## Compiler result, 2026-08-28
+
+The accepted implementation slices are `f14a85699`, `2c57c14bc`,
+`9967959de`, and `4c5ebffd3`.  Together they:
+
+- canonicalize the final partition in its owned state array;
+- select a sort-local or state-local target-generator directory by fan-in;
+- bypass state-sized recanonicalization and transcript reconstruction when the
+  initial observation partition is already stable;
+- reuse the compiler's by-construction inverse index for immediate transcript
+  replay, while the public verifier continues to rebuild and audit its index;
+- index the validated flat transition table directly during inverse-CSR
+  construction; and
+- force-inline only the measured compact dense-pending and sparse-scheduling
+  operations.  Force-inlining the large split routine regressed cycles and was
+  rejected.
+
+There is no allocation in a refinement iteration or binary split.  State,
+member, position, mark, touched-block, pending, queue, and transcript storage is
+capacity-planned before the loop.  The implementation remains iterative, with
+no recursion proportional to states, classes, generators, or evidence size.
+
+An eleven-round alternating old/new run on CPU 2 compares the C987 compiler at
+`ac54ce112` with the final C985 compiler:
+
+| family | C987 median | C985 median | speedup |
+|---|---:|---:|---:|
+| chain, 131072 states, 1 generator | 11.169 ms | 9.152 ms | 1.220x |
+| random, 131072 states, 4 generators | 62.457 ms | 46.816 ms | 1.334x |
+| 256 stable colors, 131072 states, 4 generators | 4.708 ms | 3.737 ms | 1.260x |
+
+Hardware-counter A/B isolates the final inverse/scheduler work from frequency
+drift.  Relative to the saved pre-inline compiler, random-family compilation
+falls from 582.3 M to 478.5 M retired instructions (1.217x) and from 254.3 M to
+222.9 M cycles (1.141x).  `perf` moved inverse-index construction from 28.4% of
+cycles before direct indexing to 8.9%; the remaining profile is dominated by
+partition refinement (46.3%), exact transcript replay (13.6%), and scheduling
+new small splitter blocks (11.8%).
+
+Seven hierarchy RSS rounds give a 31,748 KiB full median and 22,484 KiB
+raw-build median.  Against C987's 38,332/22,500 KiB, total peak RSS is 20.2%
+lower and compiler-added peak memory is approximately 15,832 -> 9,264 KiB,
+or 41.5% lower.  The range across the seven final full runs is only
+31,716--31,768 KiB.
+
+The raw evidence remains outside tmpfs under `/home/tavis/.cache/ergodis-sota`:
+
+- `c985-old-final-ab.tsv`, SHA-256
+  `27ccf2889508e46f9a8ccd23247fa23b834a77d0e9f84706320b874b5ab5d309`;
+- `c985-boa-streamlined.tsv`, SHA-256
+  `9d571f38c8f4d727861f075c254ca12859211a7f33de07c1bc41ee94f161b38e`;
+- `c985-hierarchy-memory-final.tsv`, SHA-256
+  `68932c319e33670ba8573640a9e390ce4d867f0b9961a2021583fd14f40e0287`.
+
+All 144 library tests, five observational integration tests, the allocation
+regression, CLI tests, Python parity, doc tests, formatting, and strict
+all-target/all-feature clippy pass.  A toolchain switch left incompatible
+artifacts in the repository-local Cargo target during one lint invocation; the
+clean cache-backed target passed and no destructive clean was applied to the
+shared workspace.
+
+## Native SOTA comparison and algorithmic reading
+
+The pinned Boa revision `54a556448169a83a369e039b5fa3ba27323ccfde` is the
+strongest directly comparable generic native implementation in this window.
+Its timing patch encloses `partref_nlogn` only.  Ergodis' boundary includes
+quotient construction and immediate exact split-transcript replay.  Eleven
+alternating rounds give:
+
+| family | Ergodis | Boa | winner |
+|---|---:|---:|---:|
+| chain | 12.210 ms | 26.653 ms | Ergodis, 2.183x |
+| random | 47.937 ms | 25.688 ms | Boa, 1.866x |
+| colors | 3.786 ms | 8.446 ms | Ergodis, 2.231x |
+
+The older MATA adapter measurements are 70 ms chain, 300 ms random, 140 ms
+colors, and 2.01 s stable.  Even without rerunning that coarser process-level
+boundary, final Ergodis is about 5.7x, 6.3x, and 37x faster on the first three
+families; the previously measured stable case is roughly three orders of
+magnitude faster.  MATA remains a highly optimized C++ automata library, but
+its natural automaton construction/reduction boundary is less general and is
+not an evidence-producing typed contextual compiler.
+
+Algorithmically, Ergodis and the classical best-known algorithms occupy the
+same `O(m log n)` partition-refinement class for fixed generator alphabets.
+This is the complexity established by generic coalgebraic refinement and, for
+deterministic automata, matches Hopcroft.  Ergodis generalizes the interface to
+typed many-sorted presentations, arbitrary finite observations, quotient
+transition emission, and replayable minimality evidence.  Thus classical DFA
+minimization is a one-sort Boolean-observation corollary, not the definition of
+the algorithm.  This is consistent with the general coalgebraic results in
+[Dorsch--Milius--Schroeder--Wissmann](https://arxiv.org/abs/1705.08362) and
+their [modular extension](https://arxiv.org/abs/1806.05654), including weighted
+and composite transition types.
+
+Boa's random advantage is not from tighter asymptotics.  Its kernel batches a
+dirty subset of a block, hashes complete state signatures, and can create many
+blocks at once.  The current Ergodis proof backend performs one forced binary
+inverse-image split per transcript record; the random fixture therefore emits
+131,070 records.  Boa also allocates temporary vectors in its hot refinement
+loop and uses unsafe pointer parsing, choices excluded by the Ergodis
+performance contract.  Ergodis wins the chain and already-stable regimes
+because small-half inverse scheduling and exact stable-partition exits avoid
+full-signature work.
+
+## Rejected and next algorithms
+
+An allocation-free flat radix Moore probe used pre-sized state, scratch, and
+class arrays plus stack-resident 256-bin histograms.  On the target random
+fixture it reached the correct 131,072 singleton classes, but the lone initial
+distinguished state required eleven synchronous rounds.  Its 37.05 ms median
+was 1.39x faster than proof-inclusive Ergodis but 1.49x slower than Boa before
+adding replay.  It is therefore not a sound default replacement.
+
+The next serious backend is a hybrid dirty-block/multiway refiner: retain the
+inverse CSR and small-half accounting, but batch all newly dirty states of a
+block and assign exact full-signature groups in one operation.  Its workspace
+must be flat and pre-sized; signature grouping must resolve collisions exactly;
+and evidence should be a replayable multiway refinement record, not 131,070
+synthetic binary records.  Dispatch belongs outside the hot loop and should use
+measured partition entropy, dirty fraction, and expected split multiplicity.
+The binary transcript backend remains the fallback for chains and sparse typed
+systems.  This is the plausible route to erase Boa's random advantage; a 10x
+Boa win is not supported by current evidence and must not be claimed before the
+new certificate/backend is implemented and measured.
+
+The broader paper framing is strengthened rather than pre-empted by this
+comparison.  The implementation target is an exact compositional-state
+compiler whose classical DFA, weighted-automata, coalgebraic, color-refinement,
+and tree-automata instances are corollaries.  The application boundary includes
+typed resource and recovery states, witness lifting, streaming separator
+evidence, and downstream min-plus/Pareto composition--capabilities neither Boa
+nor MATA exposes as a common exact interface.
