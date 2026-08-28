@@ -371,9 +371,11 @@ The pre-change deferred random profile attributed 83.1% of samples to
 4.6% to artifact emission.  Source-line profiling identified repeated
 generator-record loads and dynamic two-word packing in the signature kernel.
 Specializing the exact 0--4 generator signature reduced an interleaved median
-from about 23.4 ms to 21.8 ms (1.07x).  A proposed bitmap for rejecting
-singleton predecessors earlier was neutral over fifteen interleaved rounds
-and was removed rather than retaining extra state.  Final nonmultiplexed
+from about 23.4 ms to 21.8 ms (1.07x).  Source-state and cache-resident
+block-ID bitmap variants for rejecting singleton predecessors earlier were
+neutral or slightly slower over fifteen and twenty-one interleaved pairs,
+respectively, and were removed rather than retaining extra state.  Final
+nonmultiplexed
 random counters are 93.7 M cycles and 148.3 M instructions, versus 97.5 M and
 162.2 M before specialization: 3.9% fewer cycles and 8.6% fewer instructions.
 
