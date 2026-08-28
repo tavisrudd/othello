@@ -3,12 +3,21 @@
 **Lane:** `reed-solomon` · **Status:** active — arbitrary-`r` escape proved;
 the multi-digit carrier module theorem is proved, characteristic seven is
 pointedly closed, and exact GF(16)/GF(32) pointed quotients close binary
-R11/R12 there; GF(64) is structurally closed; GF(27) and external review remain
-open
+R11/R12 there; GF(64) is structurally closed; GF(27) is closed by a
+user-authorized compressed certificate; only the certificate-free GF(27)
+switch lemma and external review remain open
 
 **Current checkpoint:**
-`c973-2026-08-28-gf27-switch-probe.md` is a bounded calibration of the
-GF(27) two-point affine-plane switch, not a census-based closure: exhaustive
+`c973-2026-08-28-gf27-switch-probe.md` §8 certifies GF(27)/R11: every one of
+the 402,321,277 projective carrier classes of `PG(6,27)` is closed by a
+degree-nine locator with nine distinct roots in GF(27), always realizable as
+a two-point affine-plane switch, with at least 78 witnesses per class and
+mean 339.  The sweep took 26.5 minutes on eight threads; a stdlib-only Python
+replay re-verifies a seeded 200-class witness sample, and the fibre-specialized
+scan agrees with the reference scan on 2,000 cross-checked classes.  This is
+a certificate closure authorized on 2026-08-28 under the C578 `q=64`
+precedent; the structural switch lemma stays open as a named problem.
+The same report's §4--§7 are the bounded calibration behind it: exhaustive
 over every carrier class with quotient rank at most one (the wild
 Frobenius-graph fibre, the off-graph fibre, and the kernel plane) and a
 20,000-class sample of rank two, no class has fewer than 78 good switches
