@@ -766,6 +766,37 @@ structure, or apply an independently measured observational quotient after a
 fusion/provenance backend.  Merely expressing an existing Bellman recurrence
 over another semiring is pre-empted.
 
+## Proof-carrying abstract interpreters and model checkers
+
+Correctness kernels already formalize simplification of an abstract domain
+while preserving the behavior of selected abstract semantic functions.  That
+pre-empts “derive the least state distinctions relevant to an analysis” at the
+abstract level and gives Ergodis a direct formal-methods backend.
+
+The application product is a finite analysis compiler.  It accepts a finite
+abstract carrier, typed transfer functions, and an assertion/cost query
+profile; computes the coarsest stable observational quotient; and emits dense
+transformer tables, a refinement certificate, and optional trace provenance.
+Adding assertions or transfers refines the artifact monotonically.  The same
+schema can serve finite protocol model checking, resource-aware static
+analysis, runtime monitors, and repeated verification of component instances.
+
+The trust boundary must be explicit.  The generic quotient certificate proves
+only that the minimized abstract machine preserves the supplied abstract
+transformers and observations.  Concrete soundness, completeness, or best-
+correct-approximation claims belong to the input abstract interpreter and need
+a separate proof.  Likewise, a value/reachability quotient does not
+automatically reconstruct a concrete counterexample trace; transient
+provenance or a witness-liftable abstraction is required.
+
+This is a particularly clean pre-emption-proof application: even if every
+mathematical step is a correctness-kernel or automata-minimization instance,
+Ergodis can still provide a common serialized artifact, independent verifier,
+query-profile refinement, quantitative/Pareto observations, and exact trace
+plumbing.  Acceptance is measured by abstract-state/table reduction,
+certificate replay, repeated-check latency, and agreement with the original
+analyzer—not by claiming new abstract-interpretation theory.
+
 ## Adversarial interfaces, games, and robust composition
 
 The deterministic context-machine theorem assumes that a fixed generator
