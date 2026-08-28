@@ -116,3 +116,31 @@ transformation-category consequences, ordered-monoid/Pareto theorem,
 fixed-batch packing, multi-target compression, and abstract finite-interface
 criterion remain outside this manuscript and are routed to the optimization
 sequel.  No mathematical claim in this paper depends on those extensions.
+
+## Mystery ledger (`ej` + `tt` closeout)
+
+The closeout pass asked whether the finite quotient could be made more
+canonical or smaller without increasing the paper's load, and whether witness
+compression hid a zero-label failure.
+
+- **Settled here:** the context-size and dual-rank bounds cover coefficient
+  witnesses as well as scalar optima.  Defining active blocks by `Y_h != 0`,
+  rather than by the induced label, preserves inner-dual lifts with zero label.
+- **Settled here:** the higher-rank quotient is genuinely coarsest as an
+  observational equivalence, while only rank one receives an explicit
+  projective coordinate description.  The manuscript no longer conflates
+  those two strengths.
+- **Open, owned by C985 after C983:** determine canonical minimal
+  representatives and algorithms for higher-rank contextual classes, and test
+  whether the response-vector coordinates admit further theorem-backed
+  compression on noncoding exemplars.
+- **Open, owned by C985:** determine when the bounds `max(2,r+1)` and
+  `min(t,r)` are simultaneously sharp for realizable code contexts, rather
+  than merely universal.
+- **Open, excluded on purpose:** extend congruence to typed batch, multi-target,
+  or ordered-monoid/Pareto objectives.  C980 supplies scalar and finite-monoid
+  ingredients, but the required composition laws belong to the optimization
+  sequel.
+
+No unresolved issue remains in the scalar theorem package admitted to this
+paper.
