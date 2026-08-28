@@ -435,6 +435,24 @@ potential/representative/provenance pass composition, witness accounting, or
 black-box oracle compilation.  A custom-DP-versus-CP-SAT win by itself no
 longer establishes the cross-domain compiler wedge.
 
+### Pre-registered outcome ladder
+
+Pre-emption should change the achieved rung, not retroactively change the
+question:
+
+| Rung | Required evidence | Result |
+|---|---|---|
+| Backend assimilation | Established algorithm implemented or wrapped behind the artifact and independently replayed | Useful infrastructure/control; no research novelty claimed |
+| Cross-domain architecture | At least two unrelated explicit adapters and one oracle-wrapped solver share compiler/verifier code with no domain branch | Reusable exact-interface toolchain |
+| Application gain | Against the best domain control, measurable reduction in state/table bytes, repeated-query cost, boundary payload, certification burden, or integration effort | Standalone systems/application contribution |
+| New domain theorem | Effective separator, projective completeness, witness lift, or error law survives the scoped literature gate | Mathematical contribution in that domain |
+| General realization result | One theorem genuinely improves the established categorical/weighted/control boundary across domains | High-upside general theory; not required for the project to be worthwhile |
+
+A domain that offers neither architectural reuse nor a measured application
+gain is a negative result even if its demo runs.  Conversely, a classical
+backend that unlocks oracle wrapping, portable certificates, or a minimal
+boundary protocol clears an application rung without any novelty language.
+
 The exact state is also query-profile relative.  Adding contexts or output
 projections intersects equivalences and can only split classes, so a retained
 finite presentation supports monotone incremental refinement with the same
