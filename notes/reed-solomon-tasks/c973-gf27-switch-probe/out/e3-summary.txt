@@ -1,0 +1,12 @@
+e3 = (0,1,0,0,0,0,0): closes iff g_2 = g_3 = 0, i.e. e_6(S) = e_7(S) = 0
+lambda labels: 1 -> "1"; conjugates [9, 13, 16] -> l1,l2,l3
+candidates: nonsingular 1326 zero-disc 156 split-distinct 546 good 78 colliding 468
+torus orbits of the 78 good candidates: 3 (sizes [26, 26, 26])
+distinct nine-sets among the good candidates: 78
+good candidates by lambda: {"l1": 26, "l2": 26, "l3": 26}
+collision breakdown (type, n_colliding_roots) -> count: {("offline_retained", 1): 390, ("third_point_x3", 1): 78}
+collision breakdown by lambda [lambda=1, conjugate]: {"offline_retained": [156, 234], "third_point_x3": [0, 78]}
+nine-sets closing e3: 6890 in 266 torus orbits
+category -> (orbits, sets): {"c2-plane-two-point-switch": (3, 78), "d-none": (263, 6812)}
+max plane intersection -> (orbits, sets): {5: (155, 4004), 6: (108, 2808), 7: (3, 78)}
+torus orbit size -> number of orbits: {13: 2, 26: 264}

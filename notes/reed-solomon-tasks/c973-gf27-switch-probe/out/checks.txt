@@ -9,4 +9,4 @@ sanity switch solve: Q*S closes z in 20000 cases, fails in 0
 sanity n_good semantics: 5000 good candidates verified as split 9-distinct-root locators closing z, 0 bad
 rank-one projective quotient points: 784; graph-convention counts [row=sigma(col), row=J.sigma(col), row=sigma^2(col), row=J.sigma^2(col)] = [28, 28, 28, 28]
 total syndromes with n_good = 0 across strata: 0
-wall time: 144.23 s, threads 8
+wall time: 147.38 s, threads 8

@@ -459,6 +459,72 @@ fn scan(t: &Tab, cands: &[Cand], planes: &[Plane], z: &[u8; 7]) -> Stat {
 
 // ----------------------------------------------------- exhaustive search ---
 
+/// All 9-subsets of K (as 27-bit masks) whose monic locator closes z.
+fn all_nine_sets(t: &Tab, z: &[u8; 7]) -> Vec<u32> {
+    fn rec(t: &Tab, z: &[u8; 7], depth: usize, start: u8, h: &[u8; 10], m: u32, out: &mut Vec<u32>) {
+        if depth == 8 {
+            let mut p0 = 0u8;
+            let mut p1 = 0u8;
+            let mut p2 = 0u8;
+            for k in 0..7 {
+                p0 = ad(t, p0, ml(t, z[k], h[k]));
+                p1 = ad(t, p1, ml(t, z[k], h[k + 1]));
+                p2 = ad(t, p2, ml(t, z[k], h[k + 2]));
+            }
+            for x in start..27u8 {
+                if sb(t, p0, ml(t, x, p1)) == 0 && sb(t, p1, ml(t, x, p2)) == 0 {
+                    out.push(m | (1 << x));
+                }
+            }
+            return;
+        }
+        let xmax = 18u8 + depth as u8;
+        let mut x = start;
+        while x <= xmax {
+            let mut dst = [0u8; 10];
+            for i in 0..=depth {
+                dst[i + 1] = ad(t, dst[i + 1], h[i]);
+                dst[i] = sb(t, dst[i], ml(t, h[i], x));
+            }
+            rec(t, z, depth + 1, x + 1, &dst, m | (1 << x), out);
+            x += 1;
+        }
+    }
+    let mut h = [0u8; 10];
+    h[0] = 1;
+    let mut out = Vec::new();
+    rec(t, z, 0, 0, &h, 0, &mut out);
+    out
+}
+
+fn scale_mask(t: &Tab, m: u32, a: u8) -> u32 {
+    let mut r = 0u32;
+    for s in 0..27u8 {
+        if (m >> s) & 1 == 1 {
+            r |= 1 << ml(t, a, s);
+        }
+    }
+    r
+}
+
+fn frob_mask(t: &Tab, m: u32) -> u32 {
+    let mut r = 0u32;
+    for s in 0..27u8 {
+        if (m >> s) & 1 == 1 {
+            r |= 1 << pow(t, s, 3);
+        }
+    }
+    r
+}
+
+fn fmt_mask(m: u32) -> String {
+    (0..27u8)
+        .filter(|s| (m >> s) & 1 == 1)
+        .map(|s| s.to_string())
+        .collect::<Vec<_>>()
+        .join(",")
+}
+
 /// Full count over all 9-subsets of K of split nine-affine locators closing z,
 /// and over all 8-subsets under the natural degree-8 reading (g_9 = 0, g_8 = 1).
 fn exhaustive(t: &Tab, z: &[u8; 7]) -> (u64, u64) {
@@ -944,6 +1010,279 @@ fn main() {
         let t2 = Instant::now();
         let r = exhaustive(t, &[1, 0, 0, 0, 0, 0, 0]);
         println!("bench exhaustive: {:?} in {:?}", r, t2.elapsed());
+        return;
+    }
+
+    if mode == "e3" {
+        let z = [0u8, 1, 0, 0, 0, 0, 0];
+        let mut lamvals: Vec<u8> =
+            cands.iter().map(|c| c.lambda).filter(|&v| v != 1).collect();
+        lamvals.sort();
+        lamvals.dedup();
+        let lab = |v: u8| -> String {
+            if v == 1 {
+                "1".to_string()
+            } else {
+                format!("l{}", lamvals.iter().position(|&w| w == v).unwrap() + 1)
+            }
+        };
+        let mut dirs: Vec<u8> = lines.iter().map(|l| l.dir).collect();
+        dirs.sort();
+        dirs.dedup();
+
+        // ---- switch candidates for e3 ----
+        let mut good: Vec<(usize, u8, u8)> = Vec::new();
+        let mut coll: Vec<(usize, u8, u8, &'static str, u32)> = Vec::new();
+        let (mut n_ns, mut n_zero, mut n_sq) = (0u32, 0u32, 0u32);
+        for (ci, c) in cands.iter().enumerate() {
+            let a11 = dot(t, &z, &c.w11);
+            let a21 = dot(t, &z, &c.w12);
+            let a12 = dot(t, &z, &c.w21);
+            let a22 = dot(t, &z, &c.w22);
+            let det = sb(t, ml(t, a11, a22), ml(t, a12, a21));
+            if det == 0 {
+                continue;
+            }
+            n_ns += 1;
+            let r1 = ng(t, dot(t, &z, &c.b1));
+            let r2 = ng(t, dot(t, &z, &c.b2));
+            let di = iv(t, det);
+            let c1 = ml(t, sb(t, ml(t, r1, a22), ml(t, a12, r2)), di);
+            let c2 = ml(t, sb(t, ml(t, a11, r2), ml(t, r1, a21)), di);
+            let beta = sb(t, ad(t, c1, c2), ad(t, c.x1, c.x2));
+            let gamma = sb(t, ml(t, c.x1, c.x2), ad(t, ml(t, c1, c.x2), ml(t, c2, c.x1)));
+            let disc = sb(t, ml(t, beta, beta), gamma);
+            if disc == 0 {
+                n_zero += 1;
+                continue;
+            }
+            if !t.issq[disc as usize] {
+                continue;
+            }
+            n_sq += 1;
+            let s = t.sqrt[disc as usize];
+            let ra = sb(t, beta, s);
+            let rb = ad(t, beta, s);
+            let x3 = ng(t, ad(t, c.x1, c.x2));
+            let hit3 = (ra == x3) || (rb == x3);
+            let offmask = c.qmask & !(1u32 << x3);
+            let na = ((offmask >> ra) & 1) + ((offmask >> rb) & 1);
+            if !hit3 && na == 0 {
+                good.push((ci, ra, rb));
+            } else {
+                let ty = if hit3 && na > 0 {
+                    "both"
+                } else if hit3 {
+                    "third_point_x3"
+                } else {
+                    "offline_retained"
+                };
+                let nc = (hit3 as u32) + na;
+                coll.push((ci, ra, rb, ty, nc));
+            }
+        }
+
+        // ---- orbit machinery ----
+        let torus: Vec<u8> = (1..27u8).collect();
+        let canon3 = |p: u32, q: u32, y: u32| -> (u32, u32, u32) {
+            let mut best = (u32::MAX, u32::MAX, u32::MAX);
+            for &a in &torus {
+                let k = (scale_mask(t, p, a), scale_mask(t, q, a), scale_mask(t, y, a));
+                if k < best {
+                    best = k;
+                }
+            }
+            best
+        };
+        let canon_t = |m: u32| -> u32 { torus.iter().map(|&a| scale_mask(t, m, a)).min().unwrap() };
+        let canon_tf = |m: u32| -> u32 {
+            let mut b = u32::MAX;
+            let mut cur = m;
+            for _ in 0..3 {
+                let v = canon_t(cur);
+                if v < b {
+                    b = v;
+                }
+                cur = frob_mask(t, cur);
+            }
+            b
+        };
+
+        // ---- file 1: the good candidates ----
+        let mut f1 = String::new();
+        writeln!(f1, "cand_idx\tdir_d\tline_q\tline_points\tx1\tx2\tx3\tkappa\tlambda\tlambda_label\tplane_points\ty1\ty2\tnine_set\ttorus_orbit_id\ttorus_orbit_size").unwrap();
+        let mut keys: Vec<(u32, u32, u32)> = Vec::new();
+        let mut oid: Vec<usize> = Vec::new();
+        for &(ci, ra, rb) in &good {
+            let c = &cands[ci];
+            let pm = planes[c.plane as usize].mask;
+            let qm = (1u32 << c.x1) | (1u32 << c.x2);
+            let ym = (1u32 << ra) | (1u32 << rb);
+            let k = canon3(pm, qm, ym);
+            let id = match keys.iter().position(|x| *x == k) {
+                Some(i) => i,
+                None => {
+                    keys.push(k);
+                    keys.len() - 1
+                }
+            };
+            oid.push(id);
+        }
+        let mut osize = vec![0usize; keys.len()];
+        for &i in &oid {
+            osize[i] += 1;
+        }
+        for (j, &(ci, ra, rb)) in good.iter().enumerate() {
+            let c = &cands[ci];
+            let l = &lines[c.line as usize];
+            let pl = &planes[c.plane as usize];
+            let x3 = ng(t, ad(t, c.x1, c.x2));
+            let nine = c.qmask | (1u32 << ra) | (1u32 << rb);
+            writeln!(
+                f1,
+                "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
+                ci,
+                l.dir,
+                l.q,
+                fmt_mask(l.pts.iter().map(|&p| 1u32 << p).fold(0, |a, b| a | b)),
+                c.x1,
+                c.x2,
+                x3,
+                c.kappa,
+                c.lambda,
+                lab(c.lambda),
+                fmt_mask(pl.mask),
+                ra.min(rb),
+                ra.max(rb),
+                fmt_mask(nine),
+                oid[j],
+                osize[oid[j]]
+            )
+            .unwrap();
+        }
+
+        // ---- file 2: the colliding split-distinct candidates ----
+        let mut f2 = String::new();
+        writeln!(f2, "cand_idx\tdir_d\tline_q\tx1\tx2\tx3\tlambda_label\ty1\ty2\tcollision_type\tn_colliding_roots").unwrap();
+        let mut cnt: std::collections::BTreeMap<(&str, u32), u32> = Default::default();
+        let mut cnt_lam: std::collections::BTreeMap<&str, [u32; 2]> = Default::default();
+        for &(ci, ra, rb, ty, nc) in &coll {
+            let c = &cands[ci];
+            let l = &lines[c.line as usize];
+            let x3 = ng(t, ad(t, c.x1, c.x2));
+            writeln!(
+                f2,
+                "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
+                ci, l.dir, l.q, c.x1, c.x2, x3, lab(c.lambda),
+                ra.min(rb), ra.max(rb), ty, nc
+            )
+            .unwrap();
+            *cnt.entry((ty, nc)).or_insert(0) += 1;
+            let e = cnt_lam.entry(ty).or_insert([0, 0]);
+            e[if c.lam1 { 0 } else { 1 }] += 1;
+        }
+
+        // ---- file 3: all nine-sets closing e3, by torus orbit ----
+        let sets = all_nine_sets(t, &z);
+        let linemasks: Vec<u32> = lines
+            .iter()
+            .map(|l| l.pts.iter().map(|&p| 1u32 << p).fold(0, |a, b| a | b))
+            .collect();
+        let mut orb: std::collections::BTreeMap<u32, u32> = Default::default();
+        for &s in &sets {
+            *orb.entry(canon_t(s)).or_insert(0) += 1;
+        }
+        let mut f3 = String::new();
+        writeln!(f3, "orbit_rep\torbit_size\ttorus_frobenius_rep\tcategory\tmax_plane_intersection\tn_lines_contained\tparallel_directions\tnine_set").unwrap();
+        let mut catcount: std::collections::BTreeMap<String, (u32, u32)> = Default::default();
+        let mut maxint_count: std::collections::BTreeMap<u32, (u32, u32)> = Default::default();
+        let mut reps: Vec<(u32, u32)> = orb.iter().map(|(&k, &v)| (k, v)).collect();
+        reps.sort();
+        for &(rep, size) in &reps {
+            let is_plane = planes.iter().any(|p| p.mask == rep);
+            let maxint = planes
+                .iter()
+                .map(|p| (p.mask & rep).count_ones())
+                .max()
+                .unwrap();
+            let nlines = linemasks.iter().filter(|&&lm| lm & rep == lm).count() as u32;
+            let pardirs: Vec<u8> = dirs
+                .iter()
+                .cloned()
+                .filter(|&d| {
+                    (0..27u8).all(|s| (rep >> s) & 1 == 0 || (rep >> ml(t, 1, ad(t, s, d))) & 1 == 1)
+                })
+                .collect();
+            let cat = if is_plane {
+                "a-affine-plane"
+            } else if !pardirs.is_empty() {
+                "b-three-parallel-lines"
+            } else if maxint == 8 {
+                "c1-plane-one-point-switch"
+            } else if maxint == 7 {
+                "c2-plane-two-point-switch"
+            } else {
+                "d-none"
+            };
+            let e = catcount.entry(cat.to_string()).or_insert((0, 0));
+            e.0 += 1;
+            e.1 += size;
+            let e2 = maxint_count.entry(maxint).or_insert((0, 0));
+            e2.0 += 1;
+            e2.1 += size;
+            writeln!(
+                f3,
+                "{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
+                rep,
+                size,
+                canon_tf(rep),
+                cat,
+                maxint,
+                nlines,
+                if pardirs.is_empty() {
+                    "-".to_string()
+                } else {
+                    pardirs.iter().map(|d| d.to_string()).collect::<Vec<_>>().join(";")
+                },
+                fmt_mask(rep)
+            )
+            .unwrap();
+        }
+
+        fs::write(outdir.join("e3-good78.tsv"), &f1).unwrap();
+        fs::write(outdir.join("e3-collisions.tsv"), &f2).unwrap();
+        fs::write(outdir.join("e3-ninesets.tsv"), &f3).unwrap();
+
+        let mut rep = String::new();
+        writeln!(rep, "e3 = (0,1,0,0,0,0,0): closes iff g_2 = g_3 = 0, i.e. e_6(S) = e_7(S) = 0").unwrap();
+        writeln!(rep, "lambda labels: 1 -> \"1\"; conjugates {:?} -> l1,l2,l3", lamvals).unwrap();
+        writeln!(rep, "candidates: nonsingular {} zero-disc {} split-distinct {} good {} colliding {}", n_ns, n_zero, n_sq, good.len(), coll.len()).unwrap();
+        writeln!(rep, "torus orbits of the {} good candidates: {} (sizes {:?})", good.len(), keys.len(), osize).unwrap();
+        let mut ninesets_of_good: Vec<u32> = good
+            .iter()
+            .map(|&(ci, ra, rb)| cands[ci].qmask | (1 << ra) | (1 << rb))
+            .collect();
+        ninesets_of_good.sort();
+        ninesets_of_good.dedup();
+        writeln!(rep, "distinct nine-sets among the good candidates: {}", ninesets_of_good.len()).unwrap();
+        let mut gt: std::collections::BTreeMap<String, u32> = Default::default();
+        for &(ci, _, _) in &good {
+            *gt.entry(lab(cands[ci].lambda)).or_insert(0) += 1;
+        }
+        writeln!(rep, "good candidates by lambda: {:?}", gt).unwrap();
+        writeln!(rep, "collision breakdown (type, n_colliding_roots) -> count: {:?}", cnt).unwrap();
+        writeln!(rep, "collision breakdown by lambda [lambda=1, conjugate]: {:?}", cnt_lam).unwrap();
+        writeln!(rep, "nine-sets closing e3: {} in {} torus orbits", sets.len(), reps.len()).unwrap();
+        writeln!(rep, "category -> (orbits, sets): {:?}", catcount).unwrap();
+        writeln!(rep, "max plane intersection -> (orbits, sets): {:?}", maxint_count).unwrap();
+        let orbsizes: std::collections::BTreeMap<u32, u32> =
+            reps.iter().fold(Default::default(), |mut m, &(_, s)| {
+                *m.entry(s).or_insert(0) += 1;
+                m
+            });
+        writeln!(rep, "torus orbit size -> number of orbits: {:?}", orbsizes).unwrap();
+        fs::write(outdir.join("e3-summary.txt"), &rep).unwrap();
+        print!("{}", rep);
         return;
     }
 

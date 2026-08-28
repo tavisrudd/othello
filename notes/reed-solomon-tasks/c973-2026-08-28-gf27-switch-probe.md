@@ -181,7 +181,7 @@ sanity n_good semantics: 5000 good candidates verified as split 9-distinct-root
 rank-one projective quotient points: 784; graph-convention counts
   [row=sigma(col), row=J.sigma(col), row=sigma^2(col), row=J.sigma^2(col)] = [28, 28, 28, 28]
 total syndromes with n_good = 0 across strata: 0
-wall time: 144.23 s, threads 8
+wall time: 147.38 s, threads 8
 ```
 
 1. **The one-point identity (16c) is confirmed.**  On 200,000 random triples
@@ -420,13 +420,18 @@ All in `notes/reed-solomon-tasks/c973-gf27-switch-probe/out/` (75 KB total).
 | `quotient_points.tsv` |  36678 | `731a280bbb71bb478803598c25bfaad6eb431d6a17413e53eb78efd1e656634e` |
 | `extremes.tsv`        | 246435 | `b74072f6359b8b8f27b8c788ecc6a87201ed43f554d9331153738cb2eb26a34e` |
 | `failures.tsv`        |    107 | `9c037c55318769bc1561bceb2341f13b28abd87db0098426c28c98645f484421` |
-| `checks.txt`          |    923 | `70c9f62645b747fdb227f7c2c57370a400ab0852c218584a699b434233197f8d` |
+| `checks.txt`          |    923 | `b1153a87c1c1f8f6746d3d0edd53154700de8af354601e16c3b94574d1cc0456` |
 
 Generator: `notes/reed-solomon-tasks/c973-gf27-switch-probe/src/main.rs`,
-sha256 `afd1929df72a0f07cc262ecd9fa2258c85cc43d69ec6430ee556b5680c74293a`;
+sha256 `278d4257ce31c9e3ef0c9d0d9ca3891be6e84a6b5a848ef23c15387dee06dc68`
+(the version including the §7 `e3` mode; the `full` and `dump` code paths are
+unchanged from the runs above, and re-running `full` with it reproduces
+`summary.tsv`, `histograms.tsv` and `quotient_points.tsv` byte-for-byte);
 `Cargo.toml` sha256
 `5c1d8c53c3bb7413355bc5be2d6d83cc8d02cd0088eb9b1f0ee18451b7f9b893`.
-`failures.tsv` is header-only by construction: no syndrome failed.
+`failures.tsv` is header-only by construction: no syndrome failed.  The only
+run-to-run variation in these outputs is the wall-time line of `checks.txt`;
+the four TSVs are byte-stable across reruns.
 
 `extremes.tsv` is produced by the second mode
 
@@ -446,10 +451,161 @@ Single machine, 8 worker threads, `choom -n 1000`, resident set under 130 MB.
 
 | pass | wall time |
 |---|---|
-| geometry + sanity checks + `full` strata scan | 144.23 s |
+| geometry + sanity checks + `full` strata scan | 147.38 s |
 | `dump` rescan with exhaustive counts on 3,656 classes | 294.68 s |
 
 Measured throughput: 72.3 microseconds per syndrome for the 1404-candidate
 switch scan plus the 39-plane one-point scan, and 51.8 ms for one full
 `C(27,9)` exhaustive sweep.
+
+## 7. The single syndrome `z = e_3`
+
+Replay: `PROBE_THREADS=8 <binary> e3`.  Deterministic, no sampling.  Outputs
+`out/e3-good78.tsv`, `out/e3-collisions.tsv`, `out/e3-ninesets.tsv`,
+`out/e3-summary.txt`.
+
+### 7.1 The closure condition
+
+For `z = e_3 = (0,1,0,0,0,0,0)` the two Hankel equations collapse to
+`E1(g) = g_2 = 0` and `E2(g) = g_3 = 0`.  With
+`g(t) = prod_{s in S}(t-s) = sum_k (-1)^{9-k} e_{9-k}(S) t^k` this is
+`e_7(S) = e_6(S) = 0`, as stated.  The switch profile is
+`n_nonsingular = 1326`, `n_zero_disc = 156`, `n_split_distinct = 546`,
+`n_good = 78`, `n_good_lambda1 = 0`, `n_onepoint = 0`.
+
+### 7.2 The 78 good switch candidates
+
+`out/e3-good78.tsv` lists all 78 rows, each with the line direction `d`
+(canonical projective representative), the line offset `q` from
+`R(t) = t^3 + p t + q`, the three line points, the removed pair `{x1,x2}` and
+the retained third point `x3 = -x1-x2`, the pencil parameter `kappa` and its
+`lambda = kappa/d^6` with label, the nine points of the plane, the replacement
+roots `{y1,y2}`, and the resulting nine-set `S`.  Field elements are the
+base-three digit encoding of §1.
+
+Two structural facts fall out immediately.
+
+* **The good candidates carry no `lambda = 1` plane.**  By label the split is
+  `l1: 26, l2: 26, l3: 26` with `lambda = 1` contributing 0, where
+  `l1 = 9, l2 = 13, l3 = 16` are the three roots of
+  `lambda^3 + lambda^2 + lambda + 2` and `lambda = 1` is the fourth root of
+  `lambda^4 + lambda + 1`.
+* **All 78 nine-sets are distinct**, so the good candidates and the good
+  nine-sets are in bijection here.
+
+Under the multiplicative torus `x -> a x`, `a in K^*` (order 26, and containing
+`x -> -x` as the element `a = -1 = 2`, so that map contributes no extra
+identifications), the 78 candidates fall into **exactly 3 orbits, each of size
+26** — one per conjugate `lambda`.  Orbit representatives, with all fields:
+
+| orbit | cand | `d` | `q` | line | `{x1,x2}` | `x3` | `kappa` | `lambda` | plane | `{y1,y2}` | nine-set `S` |
+|---:|---:|---:|---:|---|---|---:|---:|---|---|---|---|
+| 0 | 40 | 1 | 5 | `9,10,11`  | `{9,11}`  | 10 | 13 | `l2 = 13` | `0,1,2,9,10,11,18,19,20`  | `{8,15}`  | `0,1,2,8,10,15,18,19,20` |
+| 1 | 54 | 1 | 4 | `12,13,14` | `{12,13}` | 14 | 16 | `l3 = 16` | `0,1,2,12,13,14,24,25,26` | `{6,11}`  | `0,1,2,6,11,14,24,25,26` |
+| 2 | 69 | 1 | 3 | `15,16,17` | `{15,16}` | 17 | 9  | `l1 = 9`  | `0,1,2,15,16,17,21,22,23` | `{7,12}`  | `0,1,2,7,12,17,21,22,23` |
+
+The three torus orbits are permuted by the cube Frobenius: all three have the
+same torus-and-Frobenius canonical form (mask `18811`), so under the group of
+order 78 generated by the torus and `sigma` the 78 good candidates form a
+**single orbit**.
+
+### 7.3 Collision breakdown of the 468 split-distinct-but-colliding candidates
+
+Of the 546 candidates whose replacement quadratic splits with distinct roots,
+`546 - 78 = 468` are discarded because a root lands in the seven retained roots
+of `Q`.  Classifying each by which retained points are hit
+(`out/e3-collisions.tsv`):
+
+| collision type | candidates | colliding roots per candidate |
+|---|---:|---:|
+| retained third point `x3 = -x1-x2` | 78  | 1 |
+| one of the six off-line retained points | 390 | 1 |
+| both kinds simultaneously | 0 | — |
+| two colliding roots | 0 | — |
+| total | 468 | |
+
+Every discarded candidate loses exactly one root, never two, and never one of
+each kind.  By pencil label:
+
+| collision type | `lambda = 1` | conjugate `l1,l2,l3` |
+|---|---:|---:|
+| retained third point `x3` | 0   | 78  |
+| off-line retained point   | 156 | 234 |
+
+All 156 split-distinct `lambda = 1` candidates collide, always with an off-line
+retained point and never with `x3`; the 78 `x3` collisions are entirely on the
+conjugate planes.  The conjugate planes account for `546 - 156 = 390`
+split-distinct candidates, splitting as `78` good, `78` colliding at `x3` and
+`234` colliding off-line.
+
+### 7.4 All 6,890 nine-sets closing `e_3`
+
+The exhaustive `C(27,9)` sweep returns 6,890 nine-point sets `S` with
+`e_6(S) = e_7(S) = 0`.  Under the torus they form **266 orbits**: 264 of size
+26 and 2 of size 13 (`264*26 + 2*13 = 6890`).  The two short orbits are the
+sets with a nontrivial stabilizer, i.e. `S = -S`; their representatives are
+`{0,3,5,6,7,10,11,19,20}` and `{0,4,5,7,8,11,17,19,22}`.  Under the order-78
+group generated by the torus and `sigma` there are 92 classes: 87 fusing three
+torus orbits and 5 Frobenius-stable single orbits.
+
+Classification of the orbit representatives (`out/e3-ninesets.tsv`), by the
+maximal intersection of `S` with one of the 39 affine planes:
+
+| max plane intersection | orbits | sets | reading |
+|---:|---:|---:|---|
+| 9 | 0   | 0    | `S` is an affine `F3`-plane |
+| 8 | 0   | 0    | `S` is a one-point switch of a plane |
+| 7 | 3   | 78   | `S` is a two-point switch of a plane |
+| 6 | 108 | 2808 | — |
+| 5 | 155 | 4004 | — |
+
+so in the requested categories:
+
+| category | orbits | sets |
+|---|---:|---:|
+| (a) affine `F3`-plane | 0 | 0 |
+| (b) union of three parallel `F3`-lines (not a plane) | 0 | 0 |
+| (c) affine plane with a two-point switch | 3 | 78 |
+| (d) none of those | 263 | 6812 |
+
+The 78 sets of category (c) are exactly the 78 nine-sets produced by the good
+switch candidates of §7.2, so for `e_3` the two-point switch mechanism finds
+every set that is within two points of a plane and, necessarily, nothing else:
+it reaches 78 of the 6,890 solutions, `1.1%`.
+
+Categories (a) and (b) are empty for a short reason, which the computation
+confirms rather than discovers.  For three parallel lines
+`g = prod_{i}(L_p(t) + q_i)` with `u = t^3 + pt` one gets
+`g = u^3 + e_1 u^2 + e_2 u + e_3`, hence `g_2 = p^2 e_1` and `g_3 = p^3 + e_2`.
+Closure forces `e_1 = 0` and `e_2 = -p^3`, so the three `q_i` are the roots of
+the `F3`-linear polynomial `X^3 - p^3 X - e_3`.  Its kernel is
+`{X : X^2 = p^3}` and `p^3 = -(d^3)^2`, so a nonzero kernel element would make
+`-1` a square in `GF(27)`; the squares form the subgroup of odd order 13, which
+contains no element of order two, so `-1` is a nonsquare.  The kernel is trivial,
+the polynomial has a single root, and three distinct `q_i` cannot exist.  Every
+affine plane is a union of three parallel lines, so (a) is empty as well —
+equivalently, every plane locator `t^9 + A t^3 + B t + C` has `A = -f^2 - d^6`
+with `f, d != 0`, which is nonzero for the same reason.
+
+One further measurement: every one of the 6,890 sets contains at least one
+affine `F3`-line, and none contains more than five.  By orbit:
+
+| lines contained in `S` | orbits | sets |
+|---:|---:|---:|
+| 1 | 30 |  780 |
+| 2 | 76 | 1976 |
+| 3 | 73 | 1898 |
+| 4 | 54 | 1378 |
+| 5 | 33 |  858 |
+
+### 7.5 Outputs
+
+| file | bytes | sha256 |
+|---|---:|---|
+| `e3-good78.tsv`     |  7185 | `07e4b937b59a8e3b3b054c5eaec08d4fc15dbc95c66a3bbabf6a89aca5c3c5bc` |
+| `e3-collisions.tsv` | 20718 | `1cef7f2c32f5106b0c5597506c0f7be755cede9e482e92e27b83db96097727dd` |
+| `e3-ninesets.tsv`   | 14132 | `d18c89b10ea4606bdbd7ee0714a14f64dd57c2757e0956f8431fd383f251328a` |
+| `e3-summary.txt`    |   893 | `b22c55d2fed1579a09a017495121022c8bca002af8a61c49e7094bde184381c1` |
+
+Generator hash and the reproducibility check for the earlier passes are in §5.
 
