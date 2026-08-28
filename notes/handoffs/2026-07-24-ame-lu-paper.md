@@ -10,6 +10,14 @@ Discovery companion:
 
 ## Current status
 
+**C989 is in progress (2026-08-28).**  Integrate Paper I's intrinsic
+block-diagonal endomorphism algebra, low-party non-scalar-commutant theorem,
+symmetry-induced code structures, and eight-party sharpness without obscuring
+the exact-to-quantitative spine.  The task begins with a hypothesis and
+architecture red team, then edits, review, and a blind comparison against the
+frozen 41-page baseline.  Card:
+`2026-08-28-c989-ame-lu-commutant-integration.md`.
+
 **C979 is running and user-held open (2026-08-27).**  Two complete exposition
 passes of *Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS
 Codes* are validated and locally exported.  The second pass explains the two
