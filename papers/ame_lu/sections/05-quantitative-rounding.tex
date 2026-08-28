@@ -438,9 +438,19 @@ most \(\pi\).  Let \(D^2=\sum_i\lVert h_i\rVert_F^2\).  The same lemma gives
 The third clause of (6.3) gives \(D\leq\sqrt q/2\).
 
 \medskip\noindent\emph{Exact branch selection.}
-Two-uniformity gives
-\(\lVert(K^\dagger U-I)\psi\rVert\leq D/\sqrt q
-\leq4\pi\sqrt n\,\varepsilon(U)\).  The fourth clause and the triangle
+Put \(M=\sum_i h_i^{(i)}\), so that
+\(K^\dagger U=e^{iM}\).  Two-uniformity and tracelessness give
+\[
+ \lVert M\psi\rVert^2=\langle\psi\rvert M^2\lvert\psi\rangle
+ =D^2/q.
+\]
+The integral identity
+\((e^{iM}-I)\psi=i\int_0^1e^{itM}M\psi\,dt\) therefore gives
+\[
+ \lVert(K^\dagger U-I)\psi\rVert\leq D/\sqrt q
+ \leq4\pi\sqrt n\,\varepsilon(U).
+\]
+The fourth clause and the triangle
 inequality put \(K\psi\) less than \(d_p\) from \(\psi\), so
 Lemma~\ref{lem:stabilizer-overlap-gap} makes \(K\) an exact symmetry.
 Apply Proposition~\ref{prop:main-residual-stability} to obtain (6.4).
