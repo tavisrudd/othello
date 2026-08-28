@@ -3779,8 +3779,17 @@
       "last": 992,
       "purpose": "implement external referee clarifications in AME-LU quantitative and low-party proofs",
       "sequence": 420
+    },
+    {
+      "count": 1,
+      "first": 993,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 993,
+      "purpose": "compress Appendix B to its two-uniform rigidity and local-stability core",
+      "sequence": 421
     }
   ],
-  "next_id": 993,
+  "next_id": 994,
   "schema": "codex-task-id-allocations-v1"
 }
