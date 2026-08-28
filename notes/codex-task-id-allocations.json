@@ -3725,8 +3725,17 @@
       "last": 986,
       "purpose": "develop the torus-Borel-SL2 CSS projection theorem into a standalone coordinatewise Clifford classification package",
       "sequence": 414
+    },
+    {
+      "count": 1,
+      "first": 987,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 987,
+      "purpose": "integrate observational quotient compilation into an existing ergodis application path and measure reuse break-even",
+      "sequence": 415
     }
   ],
-  "next_id": 987,
+  "next_id": 988,
   "schema": "codex-task-id-allocations-v1"
 }
