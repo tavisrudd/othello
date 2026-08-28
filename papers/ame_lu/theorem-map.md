@@ -26,11 +26,9 @@ This map covers Paper I after the two-paper split. Results owned by
 
 | Source | Appendix result | Disposition |
 |---|---|---|
-| C774--C777 | 2-uniform discreteness, local quadratic stability, and 2-unitary gauge corollary | retained in Appendix B as mechanism comparisons |
-| C786/C795 | stabilizer overlap gap and balanced-cut residual stability; `k`-uniform generator-coordinate radius, ceiling, and single-marginal explicit threshold | the two load-bearing estimates are proved in Section 6; the alternative routes remain in Appendix B |
+| C774--C777 | 2-uniform discreteness and local quadratic stability | retained in Appendix B as mechanism comparisons; the two-unitary interpretation is recorded briefly |
+| C786/C795 | stabilizer overlap gap and balanced-cut residual stability; `k`-uniform generator-coordinate radius and ceiling | the two load-bearing estimates are proved in Section 6; the `k`-uniform comparison remains in Appendix B |
 | C796 | stability under per-site spectral control from a balanced cut | canonical statement and proof are Proposition 6.4; Appendix B cites it directly |
-| C581/C795 | quantitative one-marginal axis recovery and two-state Clifford rounding | retained as the exponentially diluted comparison route |
-| C830 | aggregate minimum-support rounding at `Theta_q(m^-3/4(2/q)^m)` | retained as the orthogonal-support-sector comparison; superseded globally by cleaning |
 
 ## Stable body labels
 

@@ -77,9 +77,9 @@ dimension-only radius, the rounded symplectic maps already satisfy the exact
 transition system. Localized commutators do not see the stabilizer character, so
 the remaining product-Pauli correction need not be locally small.
 
-The appendices retain detailed two- and `k`-uniform stability, the
-single-marginal and aggregate rounding routes, and the module proof behind
-the prime-field algebra table. They are not competing headline theorems.
+The appendices retain detailed two- and `k`-uniform stability and the module
+proof behind the prime-field algebra table. They are not competing headline
+theorems.
 
 ## Formal boundary
 

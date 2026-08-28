@@ -15,7 +15,6 @@ Paper II.
 | `prop:robust-linear-atlas`, `cor:logical-clifford-rounding` | complete in Section 6 | input-plane surjectivity and inverse-transpose orientation have kernel-checked cores | robust compatibility, unique half-supported phase normalization, stabilizer cancellation, and the quantitative logical corollary are manuscript compositions |
 | `lem:local-generator-isometry`, `lem:product-lie`, `thm:two-uniform-discrete`, and related Appendix B stability results | complete in Appendix B | generator splitting, single-exponential identity, polarized second moment, and absence of nonscalar continuous symmetry are kernel checked | all quantitative constants, topological finiteness step, and inverse estimates are manuscript only |
 | `lem:stabilizer-overlap-gap`, `lem:balanced-cut-comparison`, `prop:main-residual-stability` | complete in Section 6 | none | load-bearing closed-form manuscript proofs for branch selection and collective residual control |
-| `lem:quantitative-axes`, `prop:quantitative-intertwiner`, `lem:collective-support-energy`, `thm:aggregate-global-rounding`, `thm:explicit-threshold` | complete in Appendix B | none | alternative closed-form manuscript proofs; no numerical table or replay is cited |
 
 ## Pending formal boundary
 

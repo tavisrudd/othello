@@ -1,7 +1,7 @@
 # C989 — AME-LU commutant-algebra integration
 
 **Lane:** `ame-lu`  
-**Status:** in progress  
+**Status:** complete
 **Scope:** Paper I only; no Lean edits, mirror synchronization, push, deposit, or submission
 
 ## Objective
@@ -143,14 +143,83 @@ sentence was rewritten in plain dimensional language before the final A/B.
 
 - baseline: 41 A4 pages, SHA-256
   `2d73381a9be5a42a109272f38ac2a01f6618e2e592d6d2b68e8c94365206d339`;
-- revised: 44 A4 pages, SHA-256
-  `8e999b3c7988c4dafb6531fb57279706b29c861e2f6458e9168659c89479dded`;
+- integrated pre-strip revision: 44 A4 pages;
+- final revised paper: 39 A4 pages, SHA-256
+  `b7fa88d3efd4eb78a7bd9126987031c8c17fca1aba052e23d09f6b8e9b85b7b7`;
 - `make check`: warning-free;
 - rendered inspection: abstract, Section 5, the Section 5--6 transition,
-  Appendix A, and the trust table inspected at original resolution.
+  Appendices A--C, the trust table, and the disclosure/bibliography transition
+  inspected at original resolution.
 
-Final blind A/B and closeout remain pending.
+### Final subtraction pass
+
+The 44-page integrated draft still carried three superseded quantitative
+routes in Appendix B: one-marginal tensor-axis rounding, aggregate
+minimum-support rounding, and their explicit but weaker thresholds.  None was
+used by the cleaning theorem or any exact result.  They and their theorem-map
+rows were removed.  The broader two- and `k`-uniform discreteness and local
+stability results remain, and the two-unitary consequence is compressed to a
+short standard interpretation.  Removing an unnecessary forced page break at
+the trust boundary recovered one further page.  The final revision is five
+pages shorter than the integrated pre-strip draft and two pages shorter than
+the frozen baseline, with no change to a surviving theorem's hypotheses or
+conclusion.
+
+The final anonymous comparison again preferred the integrated version, with
+confidence `0.82`.  Its scores were `4/5` spine clarity, `5/5` adjacent-field
+accessibility, `5/5` memorability, `4/5` verifiability, `5/5` title alignment,
+and `4/5` page economy, versus `5/3/4/5/5/5` for the baseline.  The sole
+blocking navigation comment was that the organization paragraph omitted the
+trust-boundary appendix; this is repaired without reintroducing the rendered
+page-break orphan.  No blocking mathematical, accessibility, sequencing, or
+rendering finding remains.
+
+A final blind comparison tested the 39-page subtraction pass directly against
+the 44-page integrated draft.  It preferred the shorter version with
+confidence `0.84`: the theorem spine tied `5/5`, economy improved from `3/5`
+to `5/5`, and accessibility, audit retention, and appendix flow each moved
+from `5/5` to `4/5` because the superseded proofs were no longer available as
+optional detail.  The reader found no stale reference or headline-proof loss.
+Its sole audit concern was the compressed two-unitary consequence; the final
+text now cites the exact discreteness theorem and phase-quotient remark that
+imply it, while leaving it as an unnumbered interpretation rather than an
+advertised theorem.
+
+## `ej` + `tt` closeout
+
+**Extra juice.**  The common-centralizer computation does more than identify
+the symmetry group.  It is a homogeneous linear system in four unknowns;
+dimension and one characteristic polynomial determine the algebra type.
+Section 5 now states the resulting constructive consequence: the recognition
+calculation also returns the symmetry type and the associated code-structure
+row without finite-group enumeration.
+
+**Tao pass.**  The invariant to remember is the algebra, not its unit group.
+The five group rows are shadows of three possible algebra dimensions
+`1, 2, 4`, and the low-party theorem is fundamentally the exclusion of
+dimension `1`.  This viewpoint keeps the theorem compositional and explains
+why the module interpretations belong to the same result rather than to a
+separate coding-theory digression.
 
 ## Mystery ledger
 
-Pending the required `ej` and `tt` closeout after the acceptance gates.
+- **Settled:** why the former five symmetry orders looked unrelated.  They are
+  determinant-one unit groups of the five possible common-centralizer
+  algebras.
+- **Settled:** whether characteristic two or an unspoken odd-prime hypothesis
+  breaks the result.  Both independent mathematical reads found no such
+  restriction; the displayed proofs retain characteristic two.
+- **Settled:** whether the new result narrows the all-prime-power LU theorem.
+  It does not.  The intrinsic algebra is stated over the underlying prime
+  field, while every `2 x 2` type/group/module conclusion is theorem-locally
+  restricted to `q=p`.
+- **Open, outside C989:** which nonscalar algebra types occur for each prime
+  at six parties.  This requires a separate occurrence/classification task.
+- **Open, evidence-gated:** the exact `AME(8,7)` center-only witness and the
+  conditional geometric genericity statement remain in the research note.
+  A paper-facing use requires a committed generator, certificate, checksum
+  manifest, independent replay, and evidence linkage.
+- **Open, extension-field research:** for `q=p^e`, the symmetry group must
+  preserve the full transported family of alternating forms.  Classifying
+  those unit groups, and then adding semilinear equivalence, is a separate
+  theorem rather than a free generalization of the five prime-field rows.

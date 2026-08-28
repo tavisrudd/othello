@@ -10,12 +10,19 @@ Discovery companion:
 
 ## Current status
 
-**C989 is in progress (2026-08-28).**  Integrate Paper I's intrinsic
-block-diagonal endomorphism algebra, low-party non-scalar-commutant theorem,
-symmetry-induced code structures, and eight-party sharpness without obscuring
-the exact-to-quantitative spine.  The task begins with a hypothesis and
-architecture red team, then edits, review, and a blind comparison against the
-frozen 41-page baseline.  Card:
+**C989 completed (2026-08-28).**  Paper I now identifies the intrinsic
+block-diagonal endomorphism algebra with the common transition-map
+centralizer, classifies its five prime-field types and determinant-one unit
+groups, proves that four- and six-party states have nonscalar endomorphisms,
+and derives the corresponding module/code structures in Appendix A.  A final
+subtraction pass removed three superseded quantitative routes while retaining
+the broader two- and `k`-uniform stability results.  The warning-free final
+paper is 39 A4 pages (two below the frozen baseline), SHA-256
+`b7fa88d3efd4eb78a7bd9126987031c8c17fca1aba052e23d09f6b8e9b85b7b7`.
+The evidence-gated eight-party witness remains in the research note, not the
+manuscript.  Cold mathematical and exposition reads and blind comparisons
+prefer the revision.  No Lean, mirror, export, push, deposit, or submission
+action was taken.  Report:
 `2026-08-28-c989-ame-lu-commutant-integration.md`.
 
 **C979 is running and user-held open (2026-08-27).**  Two complete exposition

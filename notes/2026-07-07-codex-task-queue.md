@@ -35,7 +35,6 @@ numerical claim must be regenerated here under
 
 - **C986 `[ame-lu]` [QUEUED; CSS BOREL CLASSIFICATION AND REALIZABILITY]** — develop C982's torus/Borel/full-`SL_2` projection theorem into a possible standalone classification package: classify global coordinatewise Clifford stabilizers of pure CSS states, determine realizable square-zero conductor bimodules and construct nontrivial Borel families, give a recognition algorithm, pursue the full prime-power semilinear sectors and positive-rate logical quotient, and complete a graph-state/endomorphism-algebra novelty audit. Stop at a corollary or outlook result if no substantive realizability or semilinear layer emerges; do not touch C979 → `notes/2026-08-27-c986-css-borel-classification.md`.
 
-- **C989 `[ame-lu]` [IN PROGRESS; PAPER-I COMMUTANT INTEGRATION]** — integrate the intrinsic block-diagonal endomorphism algebra, its five algebra types, the four/six-party non-scalar-commutant theorem, symmetry-induced code module structures, and eight-party sharpness into *Robust Local-Unitary Rigidity of Stabilizer AME States* without obscuring the exact-to-quantitative spine; red-team the plan and hypotheses before editing, update the claim/verification/literature surfaces, build and review the result, then freeze and blind A/B the revised paper against the current 41-page baseline → `notes/2026-08-28-c989-ame-lu-commutant-integration.md`.
 
 
 

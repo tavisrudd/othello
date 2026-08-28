@@ -12,9 +12,8 @@
 - The body order is support geometry, exact rigidity, atlas/encoder
   consequence, cleaning-based rounding, robust atlas compatibility, trust
   boundary, and conclusion.
-- Partial-Weyl recognition, two-/`k`-uniform stability, the budget-free
-  residual estimate, and the single-marginal and aggregate routes are
-  appendices.
+- Partial-Weyl recognition and two-/`k`-uniform stability remain appendices;
+  superseded one-marginal and aggregate rounding routes have been removed.
 - Paper II source sections, figures, and the computational supplement have
   been removed from this root.
 - The manuscript, README, provenance, Zenodo metadata, and internal theorem,
