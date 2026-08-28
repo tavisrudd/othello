@@ -410,6 +410,16 @@ It deliberately does not prove the domain-to-presentation lift; that remains a
 separate theorem or exhaustive-oracle certificate.  This is a concrete formal-
 methods application rather than another analogy.
 
+The quotient has a distributed-systems interpretation too.  If one process
+owns a component, another owns its future context, and one exact message must
+support the observation, the minimum message alphabet is exactly the
+contextual quotient: inequivalent components need different messages, while a
+class ID suffices.  The structural payload lower bound is therefore the log of
+the class count.  Potential-bearing summaries must additionally transmit the
+signed offset, and witness/provenance payloads remain separate.  This turns
+the same compiler artifact into a minimal exact boundary protocol for the
+declared application queries.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary

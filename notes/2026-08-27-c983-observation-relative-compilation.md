@@ -396,6 +396,36 @@ retains the new distinguishing context/observation coordinate.  Coarsening
 after query removal generally requires recomputation or retained refinement
 history; merely hiding output columns does not justify merging states.
 
+### Corollary 8: exact one-way boundary communication
+
+Fix one interface sort.  In the deterministic one-way problem, Alice receives
+a component state `x`, Bob receives an admissible future context `c`, and after
+one message from Alice Bob must output `Obs(c[x])` exactly.  The minimum number
+of distinct messages is precisely the number of contextual equivalence
+classes.
+
+For the upper bound, Alice sends the quotient class and Bob evaluates the
+class under `c`.  For the lower bound, if two contextually inequivalent states
+sent the same message, their distinguishing context would force Bob to return
+two different observations from the same message/context pair.  Therefore
+every inequivalent pair needs distinct messages.  A fixed-length encoding
+needs at least
+
+```text
+ceil(log2(number of quotient classes))
+```
+
+bits, and the quotient class ID attains that structural bound up to integer
+rounding.
+
+This makes state minimization an operational interface result for distributed
+systems, not only a DP optimization: it computes the smallest exact summary a
+component must transmit across its boundary for the declared query profile.
+For a potential-bearing quotient, the class count measures only structural
+messages; the signed potential must also be encoded, so its range/bit cost must
+be reported.  Approximate contextual metrics lead instead to covering/one-way
+sketching questions and require an explicit error budget.
+
 ## 4. Witness obstruction and the required side-car law
 
 Value contextual equivalence does **not** by itself preserve concrete argmin

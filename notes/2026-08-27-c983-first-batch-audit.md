@@ -100,6 +100,7 @@ formal congruence argument.
 | Infer a minimal interface by exact queries and distinguishing counterexamples | Angluin-style active automata learning and weighted extensions | Pre-empted as a learning paradigm; weighted feasibility depends strongly on the semiring | Add an oracle-backed domain compiler that learns a finite observational Moore machine, with separator/exhaustive/solver-backed equivalence queries |
 | Represent state by predictions of a finite set of future tests | Predictive state representations and observable-operator models | Strongly pre-empted for controlled stochastic systems | Make core tests/separators the probabilistic corollary; use exact Ergodis states as ground truth for approximate learned response representations only after the exact compiler exists |
 | Replace exact contextual equivalence by a behavioral pseudometric | Bisimulation metrics and approximate state aggregation for probabilistic systems/MDPs | Strongly pre-empted as a quantitative-equivalence idea | Define the optimization-context metric as the exact target, then prove computable bounds and composition error laws for the chosen domain/context grammar |
+| Interpret quotient size as boundary information | One-way communication complexity and boundaried-graph Myhill--Nerode methods | Pre-empted as an abstract/lower-bound connection | Emit the quotient as an actual serialized component summary and report class bits plus potential/witness payloads |
 
 ## Common kernel candidate
 
