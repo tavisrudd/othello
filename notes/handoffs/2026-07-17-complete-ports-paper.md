@@ -327,6 +327,18 @@ Sequel research:
   opportunities rather than acceptance gaps. No manuscript or public-surface
   change was made.
 
+- [C987 observational application integration](../2026-08-28-c987-observational-application-integration.md)
+  is closed as a conditional positive control.  On the existing hierarchical
+  labelled-recovery composition path, a 328,704-state raw presentation reduces
+  to 2,049 observational classes; the retained artifact is 3.26x smaller and
+  random-start queries are 2.34x faster after about 3.96 million queries.
+  Sequential and tiny cases do not improve, and compilation peak RSS is 70.36%
+  higher because the source and transient compiler workspaces coexist.  The
+  benchmark/evidence remain private; there is no default recovery, manuscript,
+  mirror, or public-surface change.  C985 owns direct algebraic construction,
+  adaptive inverse scheduling, consuming input, frozen evaluation artifacts,
+  workload admission, and witness-bearing compiled services.
+
 - [C985 Ergodis exact algebraic optimization paper](../2026-08-27-c985-ergodis-optimization-paper.md)
   is queued after C983.  It targets constraint programming and exact
   combinatorial optimization with contextual quotient compilation, the C980
@@ -378,19 +390,17 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C980 is closed after structural compression, hostile proof review, a scoped
-priority audit, and an independent reread.  C984 is next: promote only its
-accepted scalar small-model block, update the formal claim records, obtain an
-independent cold read, and pass the existing authority/export gates.  Keep the
-probe census, rank-stratified algorithms, Pareto, fixed-batch packing, and
-multi-target state algebras outside the manuscript.
+C980 and C984 are closed after structural compression, manuscript promotion,
+and independent review.  Keep the probe census, rank-stratified algorithms,
+Pareto, fixed-batch packing, and multi-target state algebras outside the primary
+manuscript.
 C962's bounded representation work was accepted as sufficient, further
 candidate-parity experiments were cancelled, and its private task-owned code
 and evidence are committed.  No successor was allocated for the optional
-optimization work.  C983 is active for the separate cross-domain
-Ergodis feasibility program; it does not block the paper closeout.  After C984,
-run C325 appendix-only
-verification, followed by C953
+optimization work.  C983 and its C987 application crossover control are
+closed; neither blocks the paper closeout.  C985 is the next optimization-facing
+research task.  The primary-paper route remains C325 appendix-only verification,
+followed by C953
 aggregate referee/export review.  C955 owns the later coefficient-presentation
 spectrum. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier

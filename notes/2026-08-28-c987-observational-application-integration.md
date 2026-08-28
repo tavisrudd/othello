@@ -94,9 +94,10 @@ precomputation, not quotienting.
 
 Peak RSS is a negative result: raw construction has a 22,500 KiB median and
 full quotient compilation has a 38,332 KiB median, 70.36% higher, because both
-representations coexist.  The 3.26-times retained-artifact reduction applies
-after compilation; it is not a peak-build-memory claim.  A streaming or
-direct-construction compiler would be required to reduce both.
+the source presentation and transient refinement/inverse-index workspaces must
+coexist before the quotient is emitted.  The 3.26-times retained-artifact
+reduction applies after compilation; it is not a peak-build-memory claim.  A
+streaming or direct-construction compiler would be required to reduce both.
 
 ## Architecture and scaling verdict
 
@@ -125,9 +126,77 @@ is not indicated here because IDs are dense; compact fixed-width arrays or a
 bit-packed class map are the more natural representations.  The implementation
 already avoids recursive evaluation and allocation in the measured hot loops.
 
+### Compiler improvement order
+
+The application control makes the next engineering order unusually clear.
+
+1. **Construct the algebraic quotient directly.**  Generic quotient compilation
+   is only 26.144 ms; the quadratic raw hierarchy construction is 2.061 s.
+   Removing the raw presentation dominates micro-optimizing the minimizer.
+2. **Choose inverse scheduling by target-sort fan-in.**  The current inverse
+   index retains a per-state target-to-generator CSR.  With only three incoming
+   generators per hierarchy sort, scanning the tiny sort-local generator list
+   is cheaper and removes a state-proportional directory.  Keep the current CSR
+   for high-fan-in sparse presentations.
+3. **Add a consuming/streamed presentation boundary.**  Build inverse groups
+   from generator transition streams and compute the fingerprint in the same
+   pass, so the full forward table need not coexist with the inverse index.
+4. **Canonicalize in place and reuse arenas.**  The worklist already owns a
+   `u32[N]` state-block array, but canonicalization currently allocates another
+   `u32[N]` class array plus an old-to-new map.  Remapping the owned state-block
+   array in place removes one full-state allocation; the old-to-new map need
+   only match the number of live blocks.
+5. **Separate proof, entry map, and frozen evaluator.**  In the scaled control,
+   1,314,816 of 1,352,944 quotient bytes are the raw-state-to-class `u32` map.
+   A `u16` map would make quotient plus certificate 711,856 B (6.28x smaller
+   than raw), and a 12-bit map 547,504 B (8.16x).  A typed evaluator entered by
+   class ID can drop the map, representatives, and certificate after external
+   verification, leaving 29,932 B (149.3x smaller than raw).  Width dispatch
+   must occur outside the hot loop.
+
+SIMD is not the first lever: refinement is dominated by irregular gathers and
+partition movement.  It becomes relevant only after profiles/transitions have
+been flattened enough for radix/counting passes; the structural allocations
+above have much higher expected value.
+
 ## Disposition
 
 **Conditional positive, no default integration.**  C983's quotient accelerates
 a scaled version of an existing recovery hierarchy, but only for a large,
 random-access, heavily reused compiled service.  C987 records that boundary
 and does not turn a benchmark crossover into a general recovery-speed claim.
+
+## EJ/TT closeout and mystery ledger
+
+- **Quadratic-to-linear collapse — open, C985.**  The observed depth-four
+  family has about quadratic raw growth but exactly `8b + 1` quotient classes
+  at the measured power-of-two bounds.  C987 did not prove this for all bounds
+  or depths.  C985 owns the algebraic derivation/direct constructor gate.
+- **160-fold classes versus 3.26-fold bytes — mechanism settled, upgrade open
+  in C985.**  The retained raw-state-to-class entry map dominates the frozen
+  quotient.  A typed evaluation-only artifact may drop it only when callers
+  enter by class ID; witness/raw-state entry must remain a distinct artifact.
+- **Sequential/random divergence — settled for this control.**  Equal
+  transition counts and flat allocation-free loops isolate locality as the
+  cause.  A production admission threshold remains hardware/workload specific
+  and requires a cache-size and query-locality sweep under C985.
+- **Peak-build regression — settled, successor route identified.**  The 70.36%
+  peak increase is coexistence of source presentation and transient compiler
+  workspaces.  Direct algebraic construction or a streaming source-consumer
+  boundary is required to remove it; serialization alone cannot.
+- **Witness-bearing quotient service — open, C985.**  C987 preserves and tests
+  the existing exact witness route but does not make the quotient itself own a
+  witness lift.  That is a hard gate before production integration.
+
+All of these observations were found while looking for C987's application
+crossover and are task-owned, so the discovery-track discriminator produces no
+incidental entry.
+
+## Validation
+
+- `cargo fmt --all -- --check`
+- `cargo clippy --all-targets --all-features -- -D warnings`
+- `cargo test --all-features`: 144 library tests plus all binary, CLI,
+  allocation, observational-compiler, Python-parity, and doc-test targets pass
+- both replay scripts pass `bash -n`
+- retained evidence checker passes both pinned SHA-256 files and exact medians
