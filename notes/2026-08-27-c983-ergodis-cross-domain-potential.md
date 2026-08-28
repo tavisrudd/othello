@@ -6,6 +6,9 @@
 BLOCK C325 OR C953; NO MANUSCRIPT, MIRROR, PUSH, EXPORT, DEPOSIT, OR GENERAL
 NOVELTY CLAIM AUTHORIZED
 
+The first concentrated expansion window is summarized in the
+[90-minute cross-domain report](2026-08-27-c983-90m-report.md).
+
 ## Goal
 
 Test the hypothesis that Ergodis is not intrinsically a coding-theory solver,
