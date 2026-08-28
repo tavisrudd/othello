@@ -44,6 +44,8 @@ pub enum OrderedResourceError {
     Overflow,
     #[error("resource vector has the wrong dimension or exceeds its cap")]
     ResourceShape,
+    #[error("Pareto workspace needs capacity {required}, but has {capacity}")]
+    WorkspaceCapacity { required: usize, capacity: usize },
 }
 
 /// Exhaustively certify the laws needed by the finite ordered-monoid theorem.
@@ -219,6 +221,136 @@ impl FiniteOrderedMonoid for CappedAdditiveMonoid {
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct ParetoFront {
     elements: Box<[u32]>,
+}
+
+/// Dense observation IDs for a batch of canonical resource fronts.
+///
+/// Equal fronts share one stored payload. Construction sorts indices once and
+/// moves each payload into its unique slot, so it does not retain a duplicate
+/// hash-table key for every potentially large front.
+#[derive(Clone, Debug)]
+pub struct ParetoObservationTable {
+    observations: Box<[u32]>,
+    fronts: Box<[ParetoFront]>,
+}
+
+/// Reusable, allocation-free scratch space for Pareto choice and composition.
+///
+/// Size once from the maximum input-front sum or product on the hot path.
+/// Operations return an error rather than growing the buffer.
+#[derive(Clone, Debug)]
+pub struct ParetoWorkspace {
+    elements: Vec<u32>,
+}
+
+impl ParetoWorkspace {
+    pub fn with_capacity(capacity: usize) -> Self {
+        Self {
+            elements: Vec::with_capacity(capacity),
+        }
+    }
+
+    pub fn capacity(&self) -> usize {
+        self.elements.capacity()
+    }
+
+    pub fn choice<'a, M: FiniteOrderedMonoid>(
+        &'a mut self,
+        monoid: &M,
+        left: &ParetoFront,
+        right: &ParetoFront,
+    ) -> Result<&'a [u32], OrderedResourceError> {
+        let required = left
+            .elements
+            .len()
+            .checked_add(right.elements.len())
+            .ok_or(OrderedResourceError::Overflow)?;
+        self.prepare(required)?;
+        for &candidate in left.elements.iter().chain(right.elements.iter()) {
+            insert_minimal(monoid, &mut self.elements, candidate);
+        }
+        self.elements.sort_unstable();
+        Ok(&self.elements)
+    }
+
+    pub fn compose<'a, M: FiniteOrderedMonoid>(
+        &'a mut self,
+        monoid: &M,
+        left: &ParetoFront,
+        right: &ParetoFront,
+    ) -> Result<&'a [u32], OrderedResourceError> {
+        let required = left
+            .elements
+            .len()
+            .checked_mul(right.elements.len())
+            .ok_or(OrderedResourceError::Overflow)?;
+        self.prepare(required)?;
+        for &left_element in &left.elements {
+            for &right_element in &right.elements {
+                let candidate = monoid.combine(left_element, right_element);
+                validate_element(monoid.element_count(), candidate)?;
+                insert_minimal(monoid, &mut self.elements, candidate);
+            }
+        }
+        self.elements.sort_unstable();
+        Ok(&self.elements)
+    }
+
+    fn prepare(&mut self, required: usize) -> Result<(), OrderedResourceError> {
+        let capacity = self.elements.capacity();
+        if required > capacity {
+            return Err(OrderedResourceError::WorkspaceCapacity { required, capacity });
+        }
+        self.elements.clear();
+        Ok(())
+    }
+}
+
+impl ParetoObservationTable {
+    pub fn new(
+        fronts: impl IntoIterator<Item = ParetoFront>,
+    ) -> Result<Self, OrderedResourceError> {
+        let iterator = fronts.into_iter();
+        let capacity = iterator.size_hint().1.unwrap_or(iterator.size_hint().0);
+        let mut indexed = Vec::with_capacity(capacity);
+        for (state, front) in iterator.enumerate() {
+            indexed.push((state, front));
+        }
+        let state_count = indexed.len();
+        if state_count > u32::MAX as usize {
+            return Err(OrderedResourceError::Overflow);
+        }
+        indexed.sort_unstable_by(|left, right| left.1.elements.cmp(&right.1.elements));
+
+        let mut observations = vec![0_u32; state_count];
+        let mut unique = Vec::with_capacity(state_count);
+        for (state, front) in indexed {
+            if unique.last() != Some(&front) {
+                if unique.len() == u32::MAX as usize {
+                    return Err(OrderedResourceError::Overflow);
+                }
+                unique.push(front);
+            }
+            observations[state] = (unique.len() - 1) as u32;
+        }
+        unique.shrink_to_fit();
+        Ok(Self {
+            observations: observations.into_boxed_slice(),
+            fronts: unique.into_boxed_slice(),
+        })
+    }
+
+    pub fn observations(&self) -> &[u32] {
+        &self.observations
+    }
+
+    pub fn fronts(&self) -> &[ParetoFront] {
+        &self.fronts
+    }
+
+    pub fn front(&self, observation: u32) -> Option<&ParetoFront> {
+        self.fronts.get(observation as usize)
+    }
 }
 
 impl ParetoFront {
@@ -433,6 +565,58 @@ mod tests {
                 .unwrap()
                 .choice(&monoid, &a.compose(&monoid, &c).unwrap())
                 .unwrap()
+        );
+    }
+
+    #[test]
+    fn pareto_observations_deduplicate_payloads_without_losing_state_order() {
+        let monoid = CappedAdditiveMonoid::new([2, 2]).unwrap();
+        let front = |points: &[[u16; 2]]| {
+            ParetoFront::new(
+                &monoid,
+                points.iter().map(|point| monoid.encode(point).unwrap()),
+            )
+            .unwrap()
+        };
+        let a = front(&[[1, 0], [0, 1]]);
+        let b = front(&[[2, 0], [0, 2]]);
+        let table = ParetoObservationTable::new([a.clone(), b.clone(), a]).unwrap();
+
+        assert_eq!(table.fronts().len(), 2);
+        assert_eq!(table.observations()[0], table.observations()[2]);
+        assert_ne!(table.observations()[0], table.observations()[1]);
+        assert_eq!(
+            table.front(table.observations()[1]).unwrap().elements(),
+            b.elements()
+        );
+    }
+
+    #[test]
+    fn pre_sized_workspace_reuses_storage_and_rejects_growth() {
+        let monoid = CappedAdditiveMonoid::new([2, 2]).unwrap();
+        let front = |points: &[[u16; 2]]| {
+            ParetoFront::new(
+                &monoid,
+                points.iter().map(|point| monoid.encode(point).unwrap()),
+            )
+            .unwrap()
+        };
+        let a = front(&[[1, 0], [0, 1]]);
+        let mut workspace = ParetoWorkspace::with_capacity(4);
+        let first = workspace.compose(&monoid, &a, &a).unwrap();
+        let storage = first.as_ptr();
+        assert_eq!(first, a.compose(&monoid, &a).unwrap().elements());
+        let second = workspace.choice(&monoid, &a, &a).unwrap();
+        assert_eq!(second.as_ptr(), storage);
+        assert_eq!(second, a.elements());
+
+        let mut undersized = ParetoWorkspace::with_capacity(3);
+        assert_eq!(
+            undersized.compose(&monoid, &a, &a),
+            Err(OrderedResourceError::WorkspaceCapacity {
+                required: 4,
+                capacity: 3
+            })
         );
     }
 }

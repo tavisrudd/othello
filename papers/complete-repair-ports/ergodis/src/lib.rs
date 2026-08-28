@@ -71,7 +71,8 @@ pub use orbit_compile::{
 };
 pub use ordered_resource::{
     validate_finite_ordered_monoid, CappedAdditiveMonoid, FiniteOrderedMonoid,
-    OrderedMonoidCertificate, OrderedResourceError, ParetoFront,
+    OrderedMonoidCertificate, OrderedResourceError, ParetoFront, ParetoObservationTable,
+    ParetoWorkspace,
 };
 pub use scheduler::{
     maximum_parallel_repairs, CapacityCut, ParallelRepairResult, PositiveGradingCertificate,
