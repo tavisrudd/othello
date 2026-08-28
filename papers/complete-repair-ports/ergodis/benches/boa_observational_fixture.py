@@ -18,7 +18,8 @@ def next_random(state: int) -> int:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "family", choices=("chain", "random", "redundant", "composed", "colors")
+        "family",
+        choices=("chain", "random", "redundant", "composed", "powers", "colors"),
     )
     parser.add_argument("states", type=int)
     parser.add_argument("generators", type=int)
@@ -55,7 +56,9 @@ def main() -> None:
             targets = []
             for generator in range(args.generators):
                 effective_generator = generator % 4 if args.family == "redundant" else generator
-                if args.family == "composed":
+                if args.family == "powers":
+                    target = min(state + generator + 1, args.states - 1)
+                elif args.family == "composed":
                     if generator < 4:
                         target = composed_bases[generator][state]
                     else:

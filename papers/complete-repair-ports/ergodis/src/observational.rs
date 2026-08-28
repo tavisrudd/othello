@@ -897,6 +897,12 @@ struct RefinementGenerators {
     ids: Box<[u32]>,
 }
 
+struct PowerReductionWorkspace {
+    redundant: Vec<u64>,
+    expanded: Vec<u64>,
+    scratch: Vec<u32>,
+}
+
 impl RefinementGenerators {
     fn new(presentation: &FinitePresentation) -> Result<Self, ObservationalError> {
         // A sort in this greatest fixed point is observationally singleton:
@@ -935,6 +941,11 @@ impl RefinementGenerators {
 
         let mut ids = Vec::with_capacity(presentation.generators.len());
         let mut ranges = Vec::with_capacity(presentation.sorts.len());
+        let mut power = PowerReductionWorkspace {
+            redundant: bitmap_storage(presentation.generators.len())?,
+            expanded: bitmap_storage(presentation.generators.len())?,
+            scratch: Vec::new(),
+        };
         for sort in 0..presentation.sorts.len() {
             let start = u32::try_from(ids.len()).map_err(|_| ObservationalError::Overflow)?;
             let source = presentation.sorts[sort];
@@ -969,7 +980,17 @@ impl RefinementGenerators {
                 });
                 let composite = !duplicate
                     && generator_is_retained_composite(presentation, record, transitions, &ids);
-                if !duplicate && !composite {
+                let power = !duplicate
+                    && !composite
+                    && generator_is_retained_power(
+                        presentation,
+                        generator,
+                        record,
+                        transitions,
+                        &ids,
+                        &mut power,
+                    );
+                if !duplicate && !composite && !power {
                     ids.push(generator);
                 }
             }
@@ -991,6 +1012,97 @@ impl RefinementGenerators {
     }
 }
 
+fn retained_source_width(
+    presentation: &FinitePresentation,
+    retained: &[u32],
+    source_sort: u32,
+) -> usize {
+    retained
+        .iter()
+        .filter(|&&generator| {
+            presentation.generators[generator as usize].source_sort == source_sort
+        })
+        .take(5)
+        .count()
+}
+
+fn generator_is_retained_power(
+    presentation: &FinitePresentation,
+    candidate_generator: u32,
+    candidate: GeneratorRecord,
+    candidate_transitions: &[u32],
+    retained: &[u32],
+    workspace: &mut PowerReductionWorkspace,
+) -> bool {
+    const MAX_POWER: usize = 32;
+    if bitmap_contains(&workspace.redundant, candidate_generator as usize) {
+        return true;
+    }
+    if retained_source_width(presentation, retained, candidate.source_sort) >= 5
+        || candidate.source_sort != candidate.target_sort
+    {
+        return false;
+    }
+    let source = presentation.sorts[candidate.source_sort as usize];
+    for base in retained.iter().copied() {
+        let record = presentation.generators[base as usize];
+        if record.source_sort != candidate.source_sort
+            || record.target_sort != candidate.target_sort
+        {
+            continue;
+        }
+        let transition_start = record.transition_start as usize;
+        if bitmap_contains(&workspace.expanded, base as usize) {
+            continue;
+        }
+        let mut representative = source.start;
+        let representative_target = candidate_transitions[0];
+        let mut plausible = false;
+        for power in 1..=MAX_POWER {
+            representative = presentation.transitions
+                [transition_start + (representative - source.start) as usize];
+            plausible |= power >= 3 && representative == representative_target;
+        }
+        if !plausible {
+            continue;
+        }
+
+        if workspace.scratch.len() < source.len as usize {
+            workspace.scratch.resize(source.len as usize, 0);
+        }
+        let current = &mut workspace.scratch[..source.len as usize];
+        for (local, target) in current.iter_mut().enumerate() {
+            *target = source.start + local as u32;
+        }
+        for power in 1..=MAX_POWER {
+            for target in current.iter_mut() {
+                *target =
+                    presentation.transitions[transition_start + (*target - source.start) as usize];
+            }
+            if power < 3 {
+                continue;
+            }
+            for (generator, candidate_record) in presentation.generators_from(candidate.source_sort)
+            {
+                if candidate_record.target_sort != candidate.target_sort {
+                    continue;
+                }
+                let start = candidate_record.transition_start as usize;
+                let transitions = &presentation.transitions
+                    [start..start + candidate_record.transition_len as usize];
+                if transitions.first() == current.first() && transitions == current {
+                    bitmap_insert(&mut workspace.redundant, generator as usize);
+                }
+            }
+        }
+        bitmap_insert(&mut workspace.expanded, base as usize);
+        if bitmap_contains(&workspace.redundant, candidate_generator as usize) {
+            return true;
+        }
+    }
+    false
+}
+
 fn generator_is_retained_composite(
     presentation: &FinitePresentation,
     candidate: GeneratorRecord,
@@ -1001,15 +1113,7 @@ fn generator_is_retained_composite(
     // backend. Once five independent generators from this source survive,
     // no later removal can restore admission, so do not grow preprocessing
     // quadratically on wide irreducible alphabets.
-    if retained
-        .iter()
-        .filter(|&&generator| {
-            presentation.generators[generator as usize].source_sort == candidate.source_sort
-        })
-        .take(5)
-        .count()
-        >= 5
-    {
+    if retained_source_width(presentation, retained, candidate.source_sort) >= 5 {
         return false;
     }
     retained.iter().copied().any(|first| {
@@ -1770,7 +1874,8 @@ fn multiway_admission(
             .map_or(presentation.generator_sort_ranges[sort].len, |directory| {
                 directory.ranges[sort].len
             });
-        if outgoing != 0 && !(2..=4).contains(&outgoing) {
+        let raw_outgoing = presentation.generator_sort_ranges[sort].len;
+        if (outgoing == 1 && raw_outgoing == 1) || outgoing > 4 {
             return Ok(MultiwayAdmission::Rejected);
         }
         let mut first = None;
@@ -3902,7 +4007,7 @@ mod tests {
         .unwrap();
 
         let refinement = RefinementGenerators::new(&presentation).unwrap();
-        assert_eq!(refinement.ids_from(0), &[0, 3]);
+        assert_eq!(refinement.ids_from(0), &[0]);
         assert!(refinement.ids_from(1).is_empty());
         assert!(multiway_is_admitted(&presentation));
 
