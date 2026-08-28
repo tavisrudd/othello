@@ -30,3 +30,19 @@ group bookkeeping and extended commentary, and compress the manuscript-only
 - PDF: 39 A4 pages
 - SHA-256: `b7fa88d3efd4eb78a7bd9126987031c8c17fca1aba052e23d09f6b8e9b85b7b7`
 
+## Compression pass
+
+Appendix B is reduced from roughly nine rendered pages to seven while
+retaining all twelve named lemmas, theorems, propositions, and corollaries.
+The pass:
+
+- shortens the product-Lie and local-generator proofs without changing their
+  statements;
+- condenses the literature, non-Clifford counterexample, Fisher-metric, and
+  exact-sequence discussions;
+- preserves the full `k`-uniform moment theorem, radius corollary, linear
+  ceiling, Reed--Muller obstruction, and both explanatory figures; and
+- compresses the compactness argument for exact branch selection.
+
+The warning-free build is 37 A4 pages. Cold mathematical and exposition
+reads are pending.
