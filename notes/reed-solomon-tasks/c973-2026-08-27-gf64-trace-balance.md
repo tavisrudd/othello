@@ -1,7 +1,7 @@
 # C973 checkpoint — exact GF(64) trace balance
 
-**Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** GF(64) pointed
-closure proved structurally; no finite census or point-count certificate remains
+**Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** forced-root
+surface (22) closed; generic stratum and `B_3 D = 0` open (2026-08-28 review)
 
 ## 1. Balance theorem
 
@@ -256,7 +256,10 @@ simple-pole test is
 \]
 
 Thus the normalized Artin--Schreier curve is geometrically integral of genus
-zero and has exactly 65 rational points.  Every deletion divisor is proper.
+zero and has exactly 65 rational points.
+[withdrawn 2026-08-28; see Review repairs: it is genus one with 54, 60, 66 or
+78 points, and the closure runs through Hasse instead.]
+Every deletion divisor is proper.
 For a fixed coset root `r`, the identity
 `r^2 Delta+rQ+N=0` would force `r=1/a` and then `a^4=1`, hence `a=1`, already
 excluded by `H(a)=0`.  The moving-root collision polynomial is
@@ -405,6 +408,9 @@ The right side is exactly the quadratic rootlessness trace argument
 trace zero makes `N` split but the normalized cover the disjoint union of two
 rational lines.  The latter has `2(64+1)=130` rational points, enough to pay
 for the zeros of `N` rather than forbid them globally.
+[withdrawn 2026-08-28; see Review repairs: (25) is the `B_4=0` specialization
+and `B_4=1` on the chart used below, so the cover is an integral genus-one
+curve, not two rational lines.]
 
 Use the explicit split quintic from the dense chart, so
 
@@ -442,6 +448,9 @@ Therefore a valid pointed locator survives.  This closes the `(u,v)=(0,0)`
 marked-torus boundary without a certificate and shows why the correct local
 strategy is a reducible rational cover rather than a rootless final
 quadratic.
+[withdrawn 2026-08-28; see Review repairs: the counts are 60, 66, 72 and 130,
+not 130 throughout, and the boundary closes by `>=60 > 52` on an integral
+genus-one cover.]
 
 The other `u=0` boundary, normalized to `(u,v)=(0,1)`, also closes on the
 same split quintic.  Its fixed-root coefficients are
@@ -575,6 +584,8 @@ coefficient `c^2`.  The remaining base polynomials are visibly nonzero from
 
 This closes all six roots of `tau^6+tau^5+1` without a certificate.  The
 forced-root surface is reduced to 57 normal forms.
+[the `130` is withdrawn 2026-08-28; see Review repairs: the true count is 72,
+and `72 > 52` closes these six forms.]
 
 The specialization `a=tau` is useful beyond that sextic.  It always gives
 
@@ -609,7 +620,9 @@ apart from that one collision cubic, they are also coprime to `H`.
 
 Consequently `a=tau` and the same `130>54` constant-cover proof close the
 three roots of `tau^3+tau+1` and the six roots of
-`tau^6+tau^5+tau^2+tau+1`, in addition to the sextic already treated.  At
+`tau^6+tau^5+tau^2+tau+1`, in addition to the sextic already treated.
+[the `130>54` is withdrawn 2026-08-28; see Review repairs: the true counts are
+72 and 54 respectively, against the corrected budget 52.]  At
 `tau=0`, the coefficient tuple is the one from the `(0,0)` boundary, so its
 earlier trace-zero choice with `a!=0` closes this form too.  Ten of the 57
 forms are thereby removed.  The exact surface remainder has 47 forms:
@@ -1071,7 +1084,10 @@ not evidence for a new modular family.
 
 ## 4. Boundary
 
-This checkpoint now closes the GF(64) pointed R11 problem.  Its final
+This checkpoint now closes the GF(64) pointed R11 problem.
+[withdrawn 2026-08-28; see Review repairs: only the forced-root surface (22) is
+closed.  The generic stratum and `B_3 D = 0` remain open.]
+Its final
 compression identifies `C0` as the Berlekamp sign-resolvent of the cubic
 pencil (32a).  The connected étale cyclic root cover, its rational deck
 translation, and isogeny point-count equality give rational order three
@@ -1100,19 +1116,160 @@ semilinear elliptic cases by one étale-cover/isogeny argument.
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
 | How many marked-torus forms remain? | none; the uniform 3-isogeny closes all 42 generic trace-one values at once | settled by (32a)--(32f) |
-| Does rootlessness close the `(0,0)` boundary? | no; (25) makes the cover empty, but the opposite trace splits it into two rational lines | closed by `130>54` |
+| Does rootlessness close the `(0,0)` boundary? | no; (25) makes the cover empty, but the opposite trace splits it into two rational lines [withdrawn 2026-08-28; see Review repairs] | closed by `130>54` [withdrawn; closed by `>=60 > 52`] |
 | What closes the `(0,1)` boundary? | a `GF(8)` elliptic specialization with 72 points | closed by `72>52` |
-| What happens when `tau^6+tau^5+1=0`? | `n0n2=tau^9 n1^2` with trace-zero constant | all six forms closed by `130>54` |
-| How far does `a=tau` extend? | factorization (31) closes nine additional noncolliding roots; `tau=0` reuses the endpoint | ten more forms closed |
+| What happens when `tau^6+tau^5+1=0`? | `n0n2=tau^9 n1^2` with trace-zero constant | all six forms closed by `130>54` [withdrawn 2026-08-28; closed by `72>52`] |
+| How far does `a=tau` extend? | factorization (31) closes nine additional noncolliding roots; `tau=0` reuses the endpoint | ten more forms closed [counts corrected 2026-08-28; see Review repairs] |
 | How many semilinear cases are left? | none; `P1,...,P7` are no longer load-bearing cases | the factorization remains diagnostic only |
 | Is the restricted degree-22 selector nonzero? | yes; (32) is its load-bearing pseudo-remainder coefficient | proved uniformly on all trace-one forms |
 | What repairs the last one-point Hasse deficit? | the Berlekamp root cover gives rational deck 3-torsion and an isogeny uniformly; (33b)--(33g) audit the two worst fibres | settled structurally; twist order `1 mod 3` forces `52`, hence 24 parameters |
 | Does the torsion mechanism extend? | yes: for any finite-field connected `S3` cubic pencil with genus-one sign cover and no 3-cycle inertia, the sign cover has rational 3-torsion; in binary fields (32b) places it on `C0` for even extension degree and the constant-one twist for odd degree | reusable structural lemma; test it at future C620 deficits and as the first GF(27) carrier discriminator |
 | Can cross-ratio transformations reduce the seven sextics? | no at the contracted pointed level; the ordered-pair torus fixes `tau` | `4+3` is not a valid symmetry quotient |
 | Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (34)--(36) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
-| Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |
+| Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions [withdrawn 2026-08-28; genus one, `>=49` against 44 deletions] | transfer the mechanism to the remaining forced-root strata |
 | What owns `B3D=0`? | same C973 proof, by explicit lower-dimensional charts beginning with (6) | stratified trace calculation |
 
 Vibe: the trace obstruction is abundant, not exceptional; the last binary
 difficulty is now precisely the compatibility between that balanced line and
 complete splitting.
+
+## 6. Review repairs (2026-08-28)
+
+An independent cold read recomputed every point count and identity in this
+note.  The trace-balance theorem of sections 1--2, the Berlekamp
+identification (32a)--(32f), the isogeny torsion argument, the Weierstrass
+audit (33a)--(33g), the `(0,1)` boundary, and the two subfield strata all
+stand exactly as written.  Three things do not.  Everything below is
+reproduced by `c973-gf64-review-recount.py`, whose captured output and hashes
+are `c973-gf64-review-recount.out` and `c973-gf64-review-recount.sha256`; the
+full review is `c973-2026-08-28-review-selection.md`.
+
+### 6.1 The dense chart is genus one, not genus zero
+
+The sentence after (17) concludes genus zero and exactly 65 rational points
+from the linear denominator alone.  The pole at infinity is missed:
+`deg(N Delta)=4` while `deg(Q^2)=2`, so `N Delta/Q^2` has a double pole there,
+and Artin--Schreier reduction leaves a *simple* pole for every admissible `a`.
+With the ramified `Q`-root that is two rational ramified places, so
+Riemann--Hurwitz gives `2g-2=-4+2+2=0` and the cover has genus one.  The
+recount confirms one point above the root of `Q` and one above infinity, and
+point counts
+
+\[
+ \#C\in\{54,60,66,78\},
+\]
+
+six of the 24 admissible `a` in each class --- never 65.
+
+The closure is unaffected and in fact gets slightly cheaper.  Because infinity
+is ramified it carries one point, not two, so the deletion budget (19) is
+
+\[
+ 10+1+2+20+8+1+2=44,
+\]
+
+for moving/fixed collisions, the ramified `Q`-root, `Delta=0`, final/fixed
+collisions, final/moving collision, the ramified point at infinity, and moving
+root zero.  Genus-one Hasse at `q=64` gives `#C>=64+1-16=49`, so
+
+\[
+ 44<49\le\#C ,
+\]
+
+and the dense syndrome closes exactly as intended.  Direct search confirms it:
+every admissible `a` admits between 18 and 30 moving roots `x` whose octic has
+eight distinct nonzero roots and satisfies both Hankel equations.
+
+### 6.2 Identity (25) is the `B_4 = 0` specialization
+
+In the final-pair formalism `A_j=B_j+xB_{j+1}` for `j=0,...,3`, so
+`Delta=A_1A_3+A_2^2` and `Q=A_0A_3+A_1A_2` both involve the fifth functional
+value `B_4=\sum_i z_i g_i`; only `N=A_1^2+A_0A_2` does not.  The displayed
+`Delta=bd+c^2+cdx+d^2x^2` and `Q=bc+c^2x+cdx^2` are the `B_4=0` forms, and the
+cleared identity
+
+\[
+ c^2N\Delta+c^6x^2+c^4xQ+(c^2+bd)Q^2=0
+\]
+
+is an identity in `F_2[b,c,d,x]` only for those forms; carrying `B_4=e` it
+fails.  On the chart `H(t)(t+a)` with `H=t^4+t^2+t+1` one has `B_4=1`, both at
+the `(0,0)` boundary (syndrome `e_3`, `B_4=g_3=1`) and at every `a=tau`
+specialization on `(u,v)=(1,tau)` (`B_4=1+a+tau`, hence `1` at `a=tau`).  So
+the "constant cover, hence two rational lines, hence 130 points" conclusion is
+not available at any of the places where this note uses it.  The true counts
+are
+
+| stratum | claimed | true |
+|---|---:|---|
+| `(0,0)` boundary, 27 parameters with `Tr(1/(a+1))=0` | 130 | 60 (x6), 66 (x12), 72 (x6), 130 (x3) |
+| six roots of `tau^6+tau^5+1`, `a=tau` | 130 | 72 |
+| three roots of `tau^3+tau+1`, `a=tau` | 130 | 72 |
+| six roots of `tau^6+tau^5+tau^2+tau+1`, `a=tau` | 130 | 54 |
+
+The last row also shows that the *inequality* fails and not only the count:
+54 does not exceed the budget 54 quoted for the reducible cover.
+
+The repair is to charge these strata the same way as the `(0,1)` boundary.
+They are integral genus-one covers on which `N` splits, so the correct budget
+is the sharp pointed table 48 plus at most four cover points over the two
+roots of `N`,
+
+\[
+ 48+4=52 ,
+\]
+
+not the reducible-cover budget 54.  Every true count above exceeds 52, so all
+four strata close --- by the integral genus-one mechanism, not by a constant
+cover.  Direct search again confirms the conclusion: 15 to 56 valid moving
+roots on the `(0,0)` boundary and 24 on each of the three `a=tau` families.
+The reading "the correct local strategy is a reducible rational cover rather
+than a rootless final quadratic" is therefore wrong; the correct reading is
+that trace zero makes `N` split, one pays 4 for its two roots, and the
+genus-one count covers it.
+
+### 6.3 The GF(64) closure claim is withdrawn
+
+Section 4 asserts that this checkpoint closes the GF(64) pointed R11 problem.
+It does not.  What is closed is the forced-root surface (22): all 64
+normalized `(u,v)` forms, via the dense chart, the two `u=0` boundaries, the
+collision cubic, the denominator quadratic, and the uniform 3-isogeny on the
+42 trace-one forms.  Off that surface this note falls back on the slope-pencil
+gate (6), which section 3 itself leaves as a to-prove ("prove that this slope
+pencil contains a split squarefree quartic avoiding zero with `U0!=0`").  That
+gate is not merely unproved --- it is false on a positive-density set.
+Enumerating the kernel of (20) and searching all of its monic quartics:
+
+* `z=e_4` (`z_4=1`, rest zero): the kernel is `{p_1=p_2=p_3=0}`, so every
+  element is a fourth power `p_4(t+c)^4` and none is squarefree;
+* `z=e_5`: the kernel is `{p_2=p_3=p_4=0}` and contains no element of degree
+  four at all;
+* `z=e_7`: the kernel is `{p_4=0}`, of dimension four, and again contains no
+  quartic --- this is exactly the degenerate chart `B_3D=0` of (39);
+* 19 of the 27 zero-one syndromes off (22) admit no usable quartic;
+* 102 of 1500 deterministically sampled random syndromes off (22), about 6.8
+  per cent, admit none.
+
+So two disjoint pieces of the syndrome space are outstanding: the generic
+stratum off (22), for which no proof is offered here, and `B_3D=0`, which the
+ledger already lists as owned but not done.  The next gate is a
+moving-coefficient chart for the generic stratum in the style of
+(32a)--(32f), not another attempt at the rigid slope pencil.
+
+### 6.4 What did not change
+
+The load-bearing arithmetic of sections 1--3 is confirmed independently:
+`Tr(a^3)=1` holds for exactly 24 values; the trace-zero factorization (31)
+reproduces exactly the 20 trace-zero `tau`; the seven sextics `P_1,...,P_7`
+account for exactly the 42 trace-one values; `Res_T(A,C)` and the two
+resultants of (32e) hold as identities in `F_2[tau]`, the degree-nine cofactor
+being irreducible; and on all 42 trace-one forms `3 | #C_0`, `#C_1` is even,
+`#C_1 = 1 mod 3`, `#C_0+#C_1=130`, with
+
+\[
+ (\#C_0,\#C_1)\in\{(54,76),(60,70),(66,64),(72,58)\}
+\]
+
+and a minimum of 29 rootless parameters against the selector budget 23.  The
+Weierstrass rows (33d), the points (33e) and (33g), and the division
+polynomial (33f) check out for all six conjugates of both `P_1` and `P_7`.

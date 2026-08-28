@@ -1,0 +1,42 @@
+C973 GF(64) review recount  (deterministic; stdlib only)
+field: GF(64) = F2[t]/(t^6+t+1)
+
+-- point counter validation --
+   y^2+y=x^3   /GF(64) =  81 (expected  81) ok
+   y^2+y=x^3+x /GF(64) =  65 (expected  65) ok
+   y^2+y=x^3   /GF(8)  =   9 (expected   9) ok
+   y^2+y=x^3+x /GF(4)  =   5 (expected   5) ok
+   y^2+y=x     /GF(64) =  65 (expected  65) ok
+
+-- F1: dense syndrome z = (1,1,1,1,1), chart H(t)(t+a) --
+   #{a : Tr(a^3)=1} = 24 ; admissible a (a!=0, H(a)!=0, a^4+a^3+1!=0) = 24
+   cover point counts over GF(64): {54: 6, 60: 6, 66: 6, 78: 6}   (note claimed: genus 0, 65)
+   points above the root of Q: [1] ; above infinity: [1]  (both ramified => genus 1)
+   end-to-end valid moving roots per admissible a: min 18, max 30
+
+-- F2: identity (25) is the B_4 = 0 specialization --
+   (0,0) boundary, syndrome e_3: B_4 = [1] for all a  (identity (25) needs B_4 = 0)
+   parameters with Tr(1/(a+1))=0, a!=0, H(a)!=0 : 27
+   true cover point counts: {60: 6, 66: 12, 72: 6, 130: 3}   (note claimed: 130 for all)
+   end-to-end valid moving roots: min 15, max 56
+   a = tau on tau^6+tau^5+1           : counts [72] (claimed 130), B_4 [1], valid x [24]
+   a = tau on tau^3+tau+1             : counts [72] (claimed 130), B_4 [1], valid x [24]
+   a = tau on tau^6+tau^5+tau^2+tau+1 : counts [54] (claimed 130), B_4 [1], valid x [24]
+
+-- strata that were already correct --
+   (0,1) boundary, a^3+a+1=0 : #C(GF(8)) = 12, #C(GF(64)) = 72  (note 12, 72)
+   tau^3+tau^2+1 , a = tau+1 : #C(GF(2^3)) = 12, #C(GF(64)) = 72  (note 12, 72)
+   tau^2+tau+1   , a = tau+1 : #C(GF(2^2)) = 6, #C(GF(64)) = 54  (note 6, 54)
+
+-- the 42 trace-one forms (unchanged by the review) --
+   |trace-one| = 42 ; (#C0,#C1,#rootless a) multiplicities: {(54, 76, 36): 12, (54, 76, 37): 6, (54, 76, 38): 6, (60, 70, 35): 6, (66, 64, 31): 6, (72, 58, 29): 6}
+   3 | #C0 always: True ; #C1 even: True ; #C1 = 1 mod 3: True ; #C0+#C1 = 130: True
+   minimum rootless parameter count = 29 (selector budget 23)
+
+-- F3: the slope-pencil gate off the forced-root surface (22) --
+   z = e_4 : kernel dim 2, contains a degree-4 element: True, usable quartic: False
+   z = e_5 : kernel dim 2, contains a degree-4 element: False, usable quartic: False
+   z = e_7 : kernel dim 4, contains a degree-4 element: False, usable quartic: False
+   zero-one syndromes off (22): 27 tested, 19 with no usable quartic
+   random syndromes off (22) (LCG seed 20260828): 1500 tested, 102 failures (6.8%)
+   first failing sample z3..z7 = [38, 25, 48, 37, 25]

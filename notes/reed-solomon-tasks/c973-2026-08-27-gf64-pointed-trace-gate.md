@@ -50,6 +50,13 @@ and a final quadratic.  Retain C620's notation
  N=A_1^2+A_0A_2.                                          \tag{2}
 \]
 
+Here `B_j=\sum_{i=3}^{7}z_ig_{i+j-4}` is the syndrome functional applied to the
+five-root quintic `g`, and `j` runs from 0 to **four**: `Delta` and `Q` both
+depend on `B_4=\sum_{i=3}^{7}z_ig_i`, which is not zero in general, and only
+`N` is a function of `B_0,\ldots,B_3` alone.  Always display `B_4` alongside
+`(B_0,B_1,B_2,B_3)` when specializing a chart; omitting it is what produced the
+error repaired in section 6.2 of the companion trace-balance note.
+
 On `Delta Q != 0`, the final-pair sum and product are
 
 \[
@@ -105,8 +112,12 @@ Therefore a rational point survives every collision and both occurrences of
 the prescribed root.  Its finite octic avoids zero and infinity; multiplying
 by the retained infinity marker gives the required pointed nonic.
 
-The refinement from 48 to 46 in the old unpointed part is structural: it uses
-ramification at the two simple poles, not a favorable finite-field count.
+The sharpening of the table above --- charging the zeros of `Q` one cover point
+each instead of the two that C620's unpointed table charged, so that the two
+`Q`-fibres contribute 2 rather than 4 --- is structural: it uses ramification at
+the simple poles, not a favorable finite-field count.  The same remark applies
+to a rational ramified point at infinity when one occurs, which lowers the
+`infinity` row from 2 to 1.
 
 ## 4. The one-bit selector
 
