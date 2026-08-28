@@ -584,13 +584,22 @@ E(C1 union C2, O) = E(C1,O) intersection E(C2,O)
 E(C, O1 union O2) = E(C,O1) intersection E(C,O2).
 ```
 
-Therefore adding admissible futures or requested query projections can only
-split interface classes; removing them can only merge classes.  On a finite
-presentation, partition refinement may start from an already compiled
-quotient and add new observation fibres or generator/context tests.  Because
-the stable result is the largest compatible equivalence contained in all
-requested kernels, incremental refinement reaches the same partition as a
-fresh compile for the union profile.
+Therefore, on a fixed component universe, adding admissible futures or
+requested query projections can only split interface classes; removing them
+can only merge classes.  On a finite presentation already closed under the
+union of the old and new generator sets, partition refinement may start from
+an already compiled quotient and add new observation fibres or
+generator/context tests.  Because the stable result is the largest compatible
+equivalence contained in all requested kernels, incremental refinement reaches
+the same partition as a fresh compile for the union profile.
+
+If a newly admitted generator, sort, or constructor expands reachable closure,
+the old carrier is not a presentation of the union profile.  Enumerate and add
+the new reachable states/actions first, extend the old partition conservatively
+(at least by their observation fibres), and only then refine.  Class splitting
+alone cannot discover states absent from the artifact.  Likewise, changing the
+domain semantics or truncation bound is schema migration, not incremental
+query refinement.
 
 This supplies an application-level feature: compile a small interface for the
 queries actually requested, then refine it monotonically when a caller adds

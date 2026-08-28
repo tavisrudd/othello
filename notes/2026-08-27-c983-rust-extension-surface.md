@@ -58,8 +58,11 @@ artifact uses integer IDs and contiguous boxed slices; evaluating it requires
 no `dyn` dispatch, hash lookup, allocation, or domain object traversal in the
 transition loop.
 
-If the original finite presentation is retained, adding observations or
-context generators can refine the existing partition incrementally.  The
+If the original finite presentation is retained and is already closed under
+the union generator set, adding observations or context generators can refine
+the existing partition incrementally.  A generator/sort that expands reachable
+closure requires carrier/action extension before refinement; a changed
+truncation or domain semantics requires a new schema/compile.  The
 artifact version must name its exact query profile; a value-only quotient
 cannot silently answer a later count or witness-sensitive query.  Coarsening
 is a cold recompilation unless full refinement history is deliberately kept.
