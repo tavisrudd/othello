@@ -44,6 +44,7 @@ ergodis/proptest-regressions/scheduler.txt
 ergodis/python/README.md
 ergodis/python/benchmark_algorithms.py
 ergodis/python/benchmark_python.py
+ergodis/python/check_observational_fixtures.py
 ergodis/python/generate_evidence.py
 ergodis/python/generate_fixtures.py
 ergodis/python/gf27_defect_cpsat.py
@@ -79,10 +80,12 @@ ergodis/src/field.rs
 ergodis/src/incidence.rs
 ergodis/src/lib.rs
 ergodis/src/matrix.rs
+ergodis/src/observational.rs
 ergodis/src/orbit.rs
 ergodis/src/orbit_compile.rs
 ergodis/src/packed_ternary.rs
 ergodis/src/projective.rs
+ergodis/src/provenance.rs
 ergodis/src/scheduler.rs
 ergodis/src/span.rs
 ergodis/src/transfer.rs
@@ -90,7 +93,9 @@ ergodis/src/witness.rs
 ergodis/src/zdd.rs
 ergodis/tests/cli.rs
 ergodis/tests/contextual_allocations.rs
+ergodis/tests/fixtures/observational_compilation.json
 ergodis/tests/fixtures/python_span_cases.json
+ergodis/tests/observational_compiler.rs
 ergodis/tests/python_parity.rs
 figures/ergodis-benchmark-highlights.tex
 figures/ergodis-pipeline.tex
