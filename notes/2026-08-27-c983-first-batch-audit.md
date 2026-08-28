@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY TWENTY-FOUR-SOURCE PASS; FOUR SOURCES READ
-AT FULL TEXT AND TWENTY AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
+**Status**: IN PROGRESS; PRELIMINARY TWENTY-SIX-SOURCE PASS; FOUR SOURCES READ
+AT FULL TEXT AND TWENTY-TWO AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
 LICENSED
 
 ## Executive verdict
@@ -103,6 +103,7 @@ formal congruence argument.
 | Interpret quotient size as boundary information | One-way communication complexity and boundaried-graph Myhill--Nerode methods | Pre-empted as an abstract/lower-bound connection | Emit the quotient as an actual serialized component summary and report class bits plus potential/witness payloads |
 | Compose exact multi-resource frontiers and reuse them across objectives | Pareto/antichain dynamic programming over an idempotent semiring | Pre-empted as multiobjective DP | Add a bounded Pareto value backend, scalarization/query projections, contextual minimization, and one witness per selected frontier point |
 | Compile components whose environment and implementation make adversarial choices | Interface automata, alternating simulation/refinement, and open games | Strongly pre-empted as compositional game/interface syntax | Generalize the artifact to typed alternating/relational actions and an explicit solution concept; deterministic Moore refinement is only the cooperative corollary |
+| Compile an exact mergeable stream/partition summary | List homomorphisms, monoid folds, and mergeable-summary algorithms | Pre-empted as parallel/streaming architecture | Emit a certified query-relative minimal finite merge carrier, with order/symmetry assumptions and potential/witness payload stated |
 
 ## Common kernel candidate
 
@@ -609,6 +610,58 @@ The read depths below are unconditional and describe this preliminary pass.
     best responses relative to an environment.  Composition of games is thus
     established; any Ergodis contribution must compile a finite exact response
     interface for a declared solution concept, not rediscover open-game syntax.
+25. Sergei Gorlatch, *Extracting and Implementing List Homomorphisms in
+    Parallel Program Development*. **Read depth: partial** — primary journal
+    abstract and metadata, DOI `10.1016/S0167-6423(97)00014-2`; read the
+    abstract and contribution summary.  It treats homomorphic list functions
+    as the divide-and-conquer parallel pattern, systematically extracts
+    homomorphic representations (including embeddings of almost-homomorphic
+    functions), and derives parallel implementations by equational reasoning.
+26. Pankaj K. Agarwal, Graham Cormode, Zengfeng Huang, Jeff M. Phillips,
+    Zhewei Wei, and Ke Yi, *Mergeable Summaries*. **Read depth: partial** —
+    primary PODS/full-paper copy; read the abstract/model summary and opening
+    definition.  A mergeable summary combines independently computed summaries
+    of data partitions and then answers queries; restricting one partition to
+    a single item recovers streaming updates.  It develops approximate and
+    randomized as well as deterministic summaries, so exact finite Ergodis
+    compilation is a narrower regime, not a replacement for the broader
+    streaming literature.
+
+## Exact mergeable summaries and parallel folds
+
+Sequential contexts and tree constructors already imply a streaming/parallel
+interpretation, but the application contract should say when arbitrary
+partitioning is legal.  For an ordered stream, a summary map `S` is exactly
+mergeable when
+
+```text
+S(u ++ v) = merge(S(u), S(v))
+```
+
+with associative `merge` and an empty-stream identity.  This is a list/monoid
+homomorphism, an established parallel-programming pattern.  If the input is an
+unordered multiset or partitions may be permuted, `merge` must additionally be
+commutative or the artifact must retain order.  A one-item streaming update is
+weaker than arbitrary mergeability; an adapter must not infer the latter from
+the former.
+
+Ergodis can contribute an application product without claiming this algebra:
+given a finite segment algebra and a declared family of suffix/prefix or merge
+contexts, compute its smallest certified exact query-relative quotient and
+emit `summarize`, `merge`, `query`, and optional witness/provenance replay.  The
+ordinary syntactic monoid/list-homomorphism construction is the classical
+control.  Potential-bearing summaries add an explicit offset, and query-profile
+refinement lets the same stream service add exact outputs without silently
+using an under-specified state schema.
+
+This terrain connects the compiler to parallel data processing, distributed
+telemetry, incremental analytics, and exact cache/materialized-view summaries.
+The convincing metric is not asymptotic novelty: compare raw segment state,
+minimal exact merge state, merge-table bytes, partition-order restrictions,
+certificate size, and the break-even over repeated distributed queries.
+Approximate sketches remain a later metric/covering backend and must retain
+their probability and error guarantees rather than being described as an
+exact quotient.
 
 ## Knowledge-compilation and provenance connection
 

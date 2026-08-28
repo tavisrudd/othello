@@ -468,12 +468,15 @@ The first-batch evidence changes the expansion ranking:
 4. **Boundaried graph/network adapter** — application-rich but heavily
    pre-empted theoretically; value lies in generated tables, layer composition,
    certificates, and solver integration.
-5. **Adversarial/robust interface adapter** — generalize the artifact law to
+5. **Exact mergeable-summary adapter** — compile certified query-relative
+   monoid states for parallel/streaming analytics; list homomorphisms and
+   mergeable summaries are controls.
+6. **Adversarial/robust interface adapter** — generalize the artifact law to
    controlled branching, strategy witnesses, and alternating compatibility;
    interface automata and open games are controls, not novelty targets.
-6. **Provenance/AMC/database adapter** — useful if contextual minimization adds
+7. **Provenance/AMC/database adapter** — useful if contextual minimization adds
    measurable interface reduction beyond the compiled circuit.
-7. **Predictive-state/SSM approximation laboratory** — high upside, deferred
+8. **Predictive-state/SSM approximation laboratory** — high upside, deferred
    until exact states and contextual metrics provide ground truth.
 
 The neural branch is now a concrete falsification experiment rather than an
