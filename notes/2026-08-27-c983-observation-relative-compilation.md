@@ -397,6 +397,9 @@ observational machine through context/value queries and exact distinguishing-
 context counterexamples.  The latter is an application of established active
 automata learning; it is useful because a legacy optimizer can become an
 Ergodis adapter before its internal recurrence has been reimplemented.
+It still requires effective access constructors for the target component
+universe and a finite typed generator presentation; arbitrary sampled
+component/context pairs do not certify a closed machine.
 
 The first adapter is bounded tropical weighted-tree evaluation.  The second is
 a symmetric finite resource-allocation/scheduling algebra, so a successful
@@ -421,7 +424,9 @@ agree with weight-push-then-minimize where its hypotheses hold.
 ### Exact contract for exemplar B: symmetric resource batches
 
 Fix `m` identical machines, integral load cap `r`, a finite job-size alphabet,
-and an additive assignment/penalty rule.  Let `P` be sorted load profiles in
+and an additive Markov assignment/penalty rule whose increment depends only on
+the current load profile, chosen machine, and incoming job.  Let `P` be sorted
+load profiles in
 `{0,...,r}^m`.  A finite job batch `B` compiles to the min-plus relation
 
 ```text
@@ -470,3 +475,5 @@ first stretch application after these two controls.
    an external interface, merely evaluation memoization, or neither.
 8. Do not infer projective completeness from an equality separator; certify
    that one common shift on the tests forces that shift on all contexts.
+9. For oracle compilation, state the reachable target universe and require
+   counterexample search over that universe, not only the sampled components.

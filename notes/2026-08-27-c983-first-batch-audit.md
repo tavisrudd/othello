@@ -684,6 +684,14 @@ reachable observational interface.  Exact equivalence can come from a proved
 finite separator, exhaustive bounded contexts, or a solver-backed search; an
 untested heuristic is not an exact compiler certificate.
 
+This requires effective access sequences or constructors for reachable
+components and a finite typed generator presentation (partial actions may be
+totalized with typed sink states).  A bare oracle for unrelated
+component/context pairs is insufficient to synthesize closed transitions, and
+an equivalence oracle restricted to sampled components certifies only that
+sample.  The target universe and counterexample search domain must be part of
+the compiler contract.
+
 Angluin-style active learning and weighted extensions strongly pre-empt the
 generic idea.  The semiring audit also supplies a hard gate: field/PID cases
 have positive weighted results, while general semirings can fail termination
