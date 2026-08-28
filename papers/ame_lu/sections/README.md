@@ -17,8 +17,7 @@ hierarchy:
 The appendices contain material that is not needed for a first reading:
 
 - module proofs for the prime-field algebra/code table;
-- alternative two- and `k`-uniform stability mechanisms, with a brief
-  two-unitary-gate interpretation; and
+- stabilizer-independent two-uniform discreteness and local stability; and
 - the verification and formalization boundary.
 
 The exact MDS--CSS group classification and six-point finite-geometry

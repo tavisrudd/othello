@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 303014,
+        "bytes": 280925,
         "path": "ame-lu.pdf",
-        "sha256": "6be97fa496cf0236b2cf7516a3bddcfbd47e1d29a31e1e4a7cead473dd661247"
+        "sha256": "2bbb76fee28ee4762ad65fd19a3f7eabcdea8ed18dbb6b7937850db0186324d1"
       },
       {
         "bytes": 2650,
@@ -26,14 +26,9 @@
         "sha256": "4f092394e22d1b4df56b7580d4ff32a76f32524d51f7e89f12072b1b8a42d755"
       },
       {
-        "bytes": 2587,
+        "bytes": 2585,
         "path": "figures/04-defect-landscape.tex",
-        "sha256": "1696d5c3c4f48a52b017f6d399fcb974463c03116cbc2e58db99b681cb54b54d"
-      },
-      {
-        "bytes": 1994,
-        "path": "figures/05-stability-radius.tex",
-        "sha256": "503422cef854d588b0642d1ff6ea6b62f944433a04aab840f8bb0ef15afc1b65"
+        "sha256": "bd0287174a8cf8d8ba1bd535b0a4a7e81be85ceb8f7dd8d74b0519f818696fe4"
       },
       {
         "bytes": 186,
@@ -41,9 +36,9 @@
         "sha256": "187e03eb0106383ebcd2aebcd0c728bb0a265591ca1ceffda277c90302044723"
       },
       {
-        "bytes": 5336,
+        "bytes": 5405,
         "path": "main.tex",
-        "sha256": "c8f76fb483f37925e0155f1000e52a1a3f25476ea62fcebbb0103662dbe07c5e"
+        "sha256": "67c288940dcb804866bf96eaa9cedced6cf48fab280edfc4da68ca11cc5ef86c"
       },
       {
         "bytes": 25428,
@@ -56,9 +51,9 @@
         "sha256": "942457a6080e47c70e0157d208cc79dda0c122a8701cf32d8229b551dbca8033"
       },
       {
-        "bytes": 17169,
+        "bytes": 17908,
         "path": "sections/01-introduction.tex",
-        "sha256": "d7ee532b584b7bcc8f60f78ef1ff4417d4e4abd1a9bdf7ac4d8944957a58b611"
+        "sha256": "e0f757bfb2dcba164a29a7c7282bb9d11da777d55dd702c104a373026bee0419"
       },
       {
         "bytes": 3101,
@@ -71,14 +66,14 @@
         "sha256": "16b7c4b14efd04936177880cd61c64665b76b35fc2b9dbf36a9493423410f2d2"
       },
       {
-        "bytes": 9701,
+        "bytes": 10079,
         "path": "sections/04-prime-endomorphism-algebra.tex",
-        "sha256": "f44669235323147316399747af0b9b1f2e79e23a15f4b3836021c6c1f8f61070"
+        "sha256": "22fff229abf8419d0523822aa2b1e5f14f726df8aa1f937bcaf65e576303b158"
       },
       {
-        "bytes": 26374,
+        "bytes": 28008,
         "path": "sections/05-quantitative-rounding.tex",
-        "sha256": "c59e20d1afb27227f2b653df4e50884a3b5b7cd862e1af1f6be2ed0793304529"
+        "sha256": "ab0e98cd82a7bd61ceb138447348e47daaee9fd0956d7205035ac6749a9911b2"
       },
       {
         "bytes": 2537,
@@ -86,14 +81,14 @@
         "sha256": "36a4a684bb1bcb8acad69d3d973c3dfedd0579b8694056dd3cc6d4b2ca8da3c9"
       },
       {
-        "bytes": 4533,
+        "bytes": 4526,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "ee8ebd71cde5c6978d49b6ed3f45f19977e3a60fa320ccdf70227e77b2e1abd5"
+        "sha256": "e52d568763ac91a74a5369635da5d1528ec572d4f48be24d4f47617a614c586e"
       },
       {
-        "bytes": 23721,
+        "bytes": 11772,
         "path": "sections/A-secondary-quantitative.tex",
-        "sha256": "129fb3ff4720470b171d579473b7a01066357a8df491cb47e1fe57237c6ec3d3"
+        "sha256": "db159c62d95e8487bbc1f7ebcdd6ef57c780d8df55c0c84332acdf80af42b752"
       },
       {
         "bytes": 2850,
@@ -101,7 +96,7 @@
         "sha256": "f5747e9f3a2eac151eea1a7d766f7b96b3f56c6f18667e348c634351d3bacfd8"
       }
     ],
-    "tree_sha256": "48e8af4f703d7e81691f1618fa42e3a36fa35c863c869b8f33fbb5a525eadd1a"
+    "tree_sha256": "5f7f353e029939ec42280b643db12fcc0c6ca587636586185be6dd7266586149"
   },
   "formal_companion": {
     "artifacts": [

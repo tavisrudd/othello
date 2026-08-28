@@ -26,9 +26,9 @@ This map covers Paper I after the two-paper split. Results owned by
 
 | Source | Appendix result | Disposition |
 |---|---|---|
-| C774--C777 | 2-uniform discreteness and local quadratic stability | retained in Appendix B as mechanism comparisons; the two-unitary interpretation is recorded briefly |
-| C786/C795 | stabilizer overlap gap and balanced-cut residual stability; `k`-uniform generator-coordinate radius and ceiling | the two load-bearing estimates are proved in Section 6; the `k`-uniform comparison remains in Appendix B |
-| C796 | stability under per-site spectral control from a balanced cut | canonical statement and proof are Proposition 6.4; Appendix B cites it directly |
+| C774--C777 | 2-uniform discreteness and local quadratic stability | retained in Appendix B as the stabilizer-independent infinitesimal mechanism |
+| C786/C795 | stabilizer overlap gap and balanced-cut residual stability; former `k`-uniform generator-coordinate comparison | the two load-bearing estimates are proved in Section 6; the independent `k`-uniform radius study was retired in C993 |
+| C796 | stability under per-site spectral control from a balanced cut | canonical statement and proof are Proposition 6.4 in Section 6 |
 
 ## Stable body labels
 

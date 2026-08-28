@@ -28,6 +28,8 @@ an implementation with leakage error \(\varepsilon\) forces every nested
 logical Weyl commutator within \(8\varepsilon\) of a scalar, after which a
 Fourier argument gives an explicit Clifford distance.
 
+\AMEFigureFour
+
 For an encoding isometry \(V:\mathbb C^q\to\mathcal H\), write
 \[
  E(T,L)=q^{-1/2}\lVert TV-VL\rVert_{\mathrm{HS}}.
@@ -189,8 +191,8 @@ Apply this to \(\phi=K\psi\), which is again a stabilizer state.
 
 The second estimate controls all residual generators at once.  Its proof is
 included because it is a load-bearing part of the headline quantitative
-theorem; Appendix~\ref{sec:two-uniform} gives stronger variants under other
-hypotheses.
+theorem.  Appendix~\ref{sec:two-uniform} instead explains the infinitesimal
+stability supplied by pairwise maximal mixing alone.
 
 \begin{lemma}[Balanced-cut comparison]
 \label{lem:balanced-cut-comparison}
@@ -673,22 +675,7 @@ characteristic and growing extension degree, the second line applies.
 The earlier fixed-\(q\), \(n^{-1/2}\) reading of the exact minimum remains
 a conditional formal slice only; it is not an AME-existence claim.
 
-If the sharper local constant and the old global generator budget are
-needed, the same proof gives the conclusion of
-Corollary~\ref{cor:approximate-decomposition} under
-\[
- \varepsilon(U)<\min\left\{
-  \frac{\tau_p}{8},\frac1{16\pi n\sqrt q}
- \right\}.                                           \tag{6.12}
-\]
-Indeed (6.5), the operator-norm bound by Hilbert--Schmidt norm, and the
-principal logarithm give
-\(\sum_i\lVert h_i\rVert_{\mathrm{op}}
-\leq8\pi n\sqrt q\,\varepsilon(U)<1/2\); the sharp local theorem then
-gives \(D\leq\sqrt{6q/5}\,\varepsilon(U)\).
-
-The cleaning radius is the governing bound; (6.12) is useful only when its
-sharper local constant and global generator budget are needed.  The
-\(n^{-1/2}\) scale is a proved lower bound, not an optimality claim; no
+The cleaning radius is the governing bound.  Its \(n^{-1/2}\) scale is a
+proved lower bound, not an optimality claim; no
 product-unitary family is known to saturate the collective frame-error
 estimate (6.6).
