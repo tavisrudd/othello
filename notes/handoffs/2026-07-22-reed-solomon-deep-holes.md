@@ -225,8 +225,17 @@ statement that every rational point of that nucleus lies on a nine-affine-
 point eight-secant.  Ordinary degree-ten Waring rank is invalid in this bad
 characteristic, and plain NRC completeness does not impose the required
 nucleus incidence.  No finite census is authorized.
+This identification is universal, not peculiar to GF(27): for every `d`,
+the maximal adjacent-zero carrier `C_d` is the penultimate osculating nucleus
+`N^(d-1) Gamma_(d+1)`, by Pascal's identity.  When `d=p^s`, its quotient is
+the Frobenius graph `[1:t:t^d:t^(d+1)]` on a split quadric.  This unifies the
+binary `d=8` and ternary `d=9` carrier geometry and recasts the all-level
+arithmetic as pointed nucleus secant saturation.  The theorem, proof,
+red-team evidence boundary, and paper-successor compression map are in
+`notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
+`notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md`, and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with
 the structural frontier in

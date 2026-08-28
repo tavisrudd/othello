@@ -7,6 +7,13 @@ R11/R12 there; GF(64) is structurally closed; GF(27) and external review remain
 open
 
 **Current checkpoint:**
+`c973-2026-08-27-carrier-nucleus-compression.md` identifies every maximal
+adjacent-zero carrier `C_d` with the penultimate osculating nucleus
+`N^(d-1) Gamma_(d+1)`.  At prime-power `d=p^s`, projection from that nucleus
+is the Frobenius graph `[1:t:t^d:t^(d+1)]` on a split quadric, unifying the
+first binary and ternary higher carriers.  The remaining carrier arithmetic
+is intrinsically a pointed rational secant-saturation problem; GF(27)/R11 is
+its first open nine-affine-secant instance.
 `c973-2026-08-26-simultaneous-marker-theorem.md` proves direct composite
 lifting, a degree-six Vandermonde selector, unconditional arbitrary-`r`
 containment at

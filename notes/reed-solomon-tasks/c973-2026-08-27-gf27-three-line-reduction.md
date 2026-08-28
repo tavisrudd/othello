@@ -819,7 +819,10 @@ condition and needs no point-count certificate in its statement.
 ## 8. The carrier is the eighth nucleus
 
 There is a further representation-free compression of the whole GF(27)
-problem.  Let
+problem.  The universal carrier--nucleus theorem and its prime-power
+Frobenius-quadric quotient are proved separately in
+`c973-2026-08-27-carrier-nucleus-compression.md`; the present specialization
+is as follows.  Let
 
 \[
  \Gamma_{10}=\{[1:t:t^2:\cdots:t^{10}]:t\in K\}\cup\{e_{10}\}
