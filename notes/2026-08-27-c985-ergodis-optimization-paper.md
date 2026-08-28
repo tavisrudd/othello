@@ -643,3 +643,23 @@ papers/complete-repair-ports/ergodis/scripts/check-observational-wide-directory-
 
 - directory checker: `2b5b93f50f957e9bd2e9bfe34877759c03f1340ef77e75aefe980dbb0db4a645`, 819 bytes;
 - directory TSV: `40ac0f020227b74b45542bd5fa235c6e0f416810800cc511cfea035093e69fed`, 1,045 bytes.
+
+Commit `cc32d374c` changes the remaining wide signature kernel from
+state-major to generator-major traversal for dirty refiners of at least 64
+states.  One preallocated state-sized hash array carries the independent hash
+accumulators; every generator transition slice is therefore read with local
+spatial locality, while exact collision equality remains unchanged.  Smaller
+refiners retain the scalar path, and neither path allocates in the refinement
+loop.  Seven paired rounds against `795590ce1` improve random-32 from 102.429
+to 83.339 ms (1.229x) and random-128 from 170.881 to 130.754 ms (1.307x).
+Median RSS rises by 2.22% and 0.97%, respectively, for the reusable hash
+workspace.
+
+The TSV reuses the tracked wide A/B generator and directory checker:
+
+```sh
+papers/complete-repair-ports/ergodis/scripts/check-observational-wide-directory-evidence.sh \
+  papers/complete-repair-ports/ergodis/evidence/c985-wide-batched-final.tsv
+```
+
+- batched-signature TSV: `089844910ea65dab4f648c5acfd598dd8676d482ecccb45420a180a194a919d3`, 1,042 bytes.
