@@ -3698,8 +3698,17 @@
       "last": 983,
       "purpose": "test Ergodis as a cross-domain exact compositional-optimization compiler via weighted automata, exact inference, and constraint-programming exemplars",
       "sequence": 411
+    },
+    {
+      "count": 1,
+      "first": 984,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 984,
+      "purpose": "promote the C980 scalar higher-rank small-model theorem into the manuscript with formal-claim, cold-read, and export gates",
+      "sequence": 412
     }
   ],
-  "next_id": 984,
+  "next_id": 985,
   "schema": "codex-task-id-allocations-v1"
 }
