@@ -355,6 +355,37 @@ The intended Ergodis abstraction is consequently not “all contexts.”  It is 
 typed `SeparatorSystem` whose completeness proof can be finite exhaustive,
 linear-algebraic, orbit/symmetry based, logical, or domain-theoretic.
 
+### Corollary 4A: exact mergeable summaries
+
+Let `M` be a finite monoid of segment semantics with observation `o:M->V`.
+Define the two-sided observational relation
+
+```text
+x ~=merge y  iff  o(a x b) = o(a y b) for every a,b in M.
+```
+
+It is the largest monoid congruence contained in `ker(o)`.  Therefore
+`M/~=merge`, with the induced product, is the smallest quotient of this
+reachable segment monoid that supports exact arbitrary ordered partition
+merging and the requested terminal observation.  The proof is Theorem 1 for a
+signature containing the monoid product and identity; fixed left and right
+coarguments generate the one-hole contexts.
+
+This makes ordinary finite syntactic monoids and exact list-homomorphic
+summaries classical corollaries of the typed compiler.  It also exposes a
+deployment-critical distinction.  Equality under every future suffix only is
+a right congruence and gives a minimal left-to-right streaming machine, but it
+need not support merging two independently summarized segments.  Exact
+arbitrary ordered merging requires the two-sided congruence above.  Permuting
+partitions additionally requires a commutative quotient product or an explicit
+order-restoration protocol; associativity alone does not license reordering.
+
+A potential-bearing summary replaces the homomorphism square by the cocycle
+law of Theorem 5, and a witness-bearing summary still requires the side-car law
+of Section 4.  Thus the quotient class ID can be minimal structural merge state
+while offset and provenance payloads remain larger and are measured
+separately.
+
 ### Theorem 5: potential-bearing or projective response quotients
 
 Absolute observation is not the only exact notion.  Let a component `x` have
