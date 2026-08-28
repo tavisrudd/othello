@@ -3752,8 +3752,17 @@
       "last": 989,
       "purpose": "Integrate the intrinsic endomorphism algebra, low-party symmetry, code-linearity, and eight-party sharpness results into Paper I; red-team, review, and A/B against the frozen 41-page baseline",
       "sequence": 417
+    },
+    {
+      "count": 1,
+      "first": 990,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 990,
+      "purpose": "compress Appendix B conservatively and cold-read for essential losses",
+      "sequence": 418
     }
   ],
-  "next_id": 990,
+  "next_id": 991,
   "schema": "codex-task-id-allocations-v1"
 }
