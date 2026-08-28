@@ -3806,8 +3806,17 @@
       "last": 995,
       "purpose": "resume C994 cold reader for repair verification and final release verdict",
       "sequence": 423
+    },
+    {
+      "count": 1,
+      "first": 996,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 996,
+      "purpose": "export current 34-page Paper I authority to standalone repository",
+      "sequence": 424
     }
   ],
-  "next_id": 996,
+  "next_id": 997,
   "schema": "codex-task-id-allocations-v1"
 }
