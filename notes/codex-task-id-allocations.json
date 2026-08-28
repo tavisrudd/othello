@@ -3734,8 +3734,17 @@
       "last": 987,
       "purpose": "integrate observational quotient compilation into an existing ergodis application path and measure reuse break-even",
       "sequence": 415
+    },
+    {
+      "count": 1,
+      "first": 988,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 988,
+      "purpose": "C973 paper integration: strengthened all-characteristic containment into high_weight_grs_cosets",
+      "sequence": 416
     }
   ],
-  "next_id": 988,
+  "next_id": 989,
   "schema": "codex-task-id-allocations-v1"
 }
