@@ -597,128 +597,18 @@ constant-radius defect ball has such coordinates.  Both statements concern
 a known state acted on by product unitaries of bounded generator norm;
 neither certifies an unknown device.
 
-\subsection{Residual stability from a balanced bipartition}
-
-For stabilizer AME states there is a second route to a stability estimate,
-which buys the same conclusion with a different hypothesis set.  It gives
-up the global \(\ell^1\) budget on \(\sum_j\lVert h_j\rVert_{\mathrm{op}}\)
-entirely, keeps a per-site condition and the global \(\ell^2\) condition,
-and pays only in the constant.  The mechanism is a bipartition bound in
-which the Weyl amplitudes of the two halves are compared directly, so no
-Taylor remainder appears and no budget is needed to control one.
-
-\begin{proposition}[Balanced-bipartition bound]\label{prop:half-splitting}
-Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with label
-group \(L\) and character \(\chi\), let \(U=\bigotimes_jU_j\) be a product
-unitary, and put \(a_j(v)=q^{-1}\Tr(W_v^\dagger U_j)\), so that
-\(p_j=\lvert a_j\rvert^2\) is a probability distribution on \(\F_q^2\) for
-each \(j\).  For a set \(A\) of \(m\) parties define \(u,v\in\mathbb R^L\)
-by
+\paragraph{Comparison with the balanced-cut estimate.}
+Proposition~\ref{prop:main-residual-stability} gives the complementary
+hypothesis tradeoff used below: it removes the global \(\ell^1\) generator
+budget, permits per-site spectral spread up to \(\pi\), and gives
 \[
- u(\ell)=\prod_{j\in A}\lvert a_j(\ell_j)\rvert,\qquad
- v(\ell)=\prod_{j\notin A}\lvert a_j(\ell_j)\rvert .
+ D\leq2\sqrt{q/c(s)}\,\varepsilon(U),
+ \qquad
+ c(s)=\max\left\{1-\frac{s^2}{12},\frac4{\pi^2}\right\}.
 \]
-Then \(\lVert u\rVert=\lVert v\rVert=1\) and
-\(\lvert\langle\psi\rvert U\lvert\psi\rangle\rvert\leq\langle u,v\rangle\),
-so \(\varepsilon(U)^2\geq\lVert u-v\rVert^2\).
-\end{proposition}
-
-\begin{proof}
-The coordinate restriction \(\pi_A:L\to(\F_q^2)^A\) has kernel the labels
-supported on the complementary \(m\)-set, which by \((4.1)\) is trivial;
-both sides have \(q^{2m}\) elements, so \(\pi_A\) is a bijection, and
-likewise for \(\pi_{A^c}\).  Hence
-\(\lVert u\rVert^2=\sum_{x\in(\F_q^2)^A}\prod_{j\in A}p_j(x_j)=1\), and the
-same for \(v\).  From \((2.3)\) and
-\(\Tr(W_\ell U)=\prod_j\Tr(W_{\ell_j}U_j)\), taking moduli termwise gives
-\(\lvert\langle\psi\rvert U\lvert\psi\rangle\rvert
-\leq\sum_{\ell\in L}\prod_j\lvert a_j(\ell_j)\rvert=\langle u,v\rangle\),
-the relabelling \(\ell\mapsto-\ell\) being a bijection of \(L\).  For unit
-vectors \(\langle u,v\rangle=1-\frac12\lVert u-v\rVert^2\).
-\end{proof}
-
-The AME condition supplies more than the two bijections: it pins down a
-family of labels of minimum weight that straddles the cut, and those are
-the labels on which \(u\) and \(v\) are forced apart.
-
-\begin{lemma}[Cut-transversal labels]\label{lem:cut-transversal}
-With \(A\) as above and \(j\notin A\), let
-\(L_j=\{\ell\in L:\supp\ell\subseteq A\cup\{j\}\}\).  Then
-\(\lvert L_j\rvert=q^2\), every nonzero \(\ell\in L_j\) has support exactly
-\(A\cup\{j\}\), and for every \(i\in A\cup\{j\}\) the evaluation
-\(\ell\mapsto\ell_i\) is a bijection \(L_j\to\F_q^2\).
-\end{lemma}
-
-\begin{proof}
-\(L_j\) is the kernel of the projection of \(L\) to the coordinates
-\(A^c\setminus\{j\}\), which is surjective because it factors the bijection
-\(\pi_{A^c}\); so \(\lvert L_j\rvert=q^{2m}/q^{2(m-1)}=q^2\).  A nonzero
-\(\ell\in L_j\) has weight at least \(m+1\) by \((4.1)\) and support inside
-a set of that size.  For \(i\in A\cup\{j\}\) the kernel of
-\(\ell\mapsto\ell_i\) on \(L_j\) consists of labels supported on \(m\)
-parties, hence is trivial, and the two sets have the same cardinality.
-\end{proof}
-
-\begin{theorem}[Stability under per-site spectral control]
-\label{thm:budget-free-stability}
-Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state with
-\(m\geq2\), let \(U=\bigotimes_jU_j\) be a product unitary, and put
-\(\eta_j=1-\lvert q^{-1}\Tr U_j\rvert^2\) and \(H=\sum_j\eta_j\).  If
-\(H\leq\frac14\) then \(\varepsilon(U)^2\geq H/4\).  Consequently, if
-\(U=\bigotimes_je^{ih_j}\) with each \(h_j\) traceless Hermitian of
-spectral spread at most \(s\leq\pi\) and \(D\leq\sqrt q/2\), then
-\[
- \varepsilon(U)^2\geq\frac{c\,D^2}{4q},
- \qquad\text{that is}\qquad
- D\leq2\sqrt{q/c}\;\varepsilon(U),
-\]
-with \(c=c(s)\) as in Lemma~\ref{lem:site-contraction}.  No bound on
-\(\sum_j\lVert h_j\rVert_{\mathrm{op}}\) is assumed.
-\end{theorem}
-
-\begin{proof}
-The balanced-cut calculation in the proof of
-Proposition~\ref{prop:main-residual-stability} establishes
-\(\varepsilon(U)^2\geq H/4\) before the generator estimates are introduced.
-Lemma~\ref{lem:site-contraction} then gives
-\(H\geq cD^2/q\), while
-\(H\leq D^2/q\leq\frac14\), proving the second statement.
-\end{proof}
-
-The two routes are a choice of hypothesis set.
-Corollary~\ref{cor:k-uniform-region} assumes per-site spread \(\frac12\),
-\(D\leq\sqrt q/2\), and the \(\ell^1\) budget \(t\leq R_k\), and delivers
-the constant \(\sqrt{6q/5}\).  Theorem~\ref{thm:budget-free-stability}
-keeps \(D\leq\sqrt q/2\), relaxes the spread hypothesis to \(\pi\), deletes
-the budget, and pays \(2\sqrt{q/c}\), which is \(\pi\sqrt q\) at spread
-\(\pi\) and \(2.02\sqrt q\) at spread \(\frac12\).  Its per-site spread
-condition is not decorative: the family of
-Proposition~\ref{prop:region-ceiling} has \(e^{ih_j}\) scalar, so every
-\(\eta_j\) vanishes and the first bound is empty, and those \(h_j\) have
-spread \(2\pi\), exactly where \(c(s)\leq0\) and the second bound is empty
-too.  The spread condition is the residue of the ceiling.
-
-One configuration is worth recording, because it is the natural candidate
-for a product unitary that the balanced-bipartition bound might fail
-to see.  At \(q=2\) take \(U_j=H\) at every site, so that each \(p_j\) is
-uniform on \(\{X,Z\}\); then \(u(\ell)v(\ell)=2^{-m}\) when every
-\(\ell_j\in\{X,Z\}\) and vanishes otherwise, so
-\(\langle u,v\rangle=2^{-m}\lvert L\cap\{X,Z\}^{2m}\rvert\).  Writing
-\(\{X,Z\}=X+\{0,Y\}\), the set \(L\cap\{X,Z\}^{2m}\) is empty or a coset of
-\(L\cap\{0,Y\}^{2m}\), and the latter is a binary linear code of length
-\(2m\) whose nonzero words have weight at least \(m+1\).  Singleton bounds
-its dimension by \(m\).  Equality would give a binary
-\([2m,m,m+1]\) MDS code.  In systematic form \(G=[I_m\mid A]\), the MDS
-property forces every square minor of \(A\) to be nonsingular.  The
-\(1\times1\) minors therefore force every entry of \(A\) to be \(1\),
-whereas for \(m\geq2\) any \(2\times2\) minor is singular.  Equality
-therefore forces \(m\leq1\).  Hence \(\langle u,v\rangle\leq\frac12\) and
-\(\varepsilon(H^{\otimes2m})^2\geq1\) for every stabilizer
-\(\AME(2m,2)\) state with \(m\geq2\).  The bound is not merely nonvacuous
-there; it is within \(\sqrt2\) of the largest possible defect.  What the
-balanced-bipartition bound discards is phase information, but the mechanism that
-detects this configuration is a count of codewords in a structured subset
-of \(L\), and the MDS constraints force that count down.
+Its proof contains the full balanced-bipartition argument, including the
+separate \(m=2\) estimate.  We cite that proposition directly whenever this
+budget-free bound is used.
 
 \subsection{From local stability to exact branch selection}
 
@@ -1058,9 +948,9 @@ Put \(K=\bigotimes_iK_i\) and
  =\langle2-2\cos M\rangle\leq\langle M^2\rangle=D^2/q.
 \]
 Together with (B.12), the fourth clause of (B.9) puts the rays of
-\(K\psi\) and \(\psi\) less than \(d_p\) apart.  Corollary
+\(K\psi\) and \(\psi\) less than \(d_p\) apart.  Lemma
 \ref{lem:stabilizer-overlap-gap} forces \(K\in G(\psi)\).  Apply
-Theorem~\ref{thm:budget-free-stability} to the residual \(V\): its
+Proposition~\ref{prop:main-residual-stability} to the residual \(V\): its
 constant has \(c\geq4/\pi^2\), giving (B.10).
 
 Finally \(N_m\sim4^m/\sqrt{\pi m}\).  The third and fourth clauses of
@@ -1170,7 +1060,7 @@ any threshold valid across states of uniformity order three; an
 \(\AME(2m,q)\) state has uniformity order \(m\), and for such states
 Corollary~\ref{cor:k-uniform-region} certifies the quadratic estimate on a
 generator-coordinate region whose \(\ell^1\) radius grows with \(m\), while
-Theorem~\ref{thm:budget-free-stability} removes that budget for every
+Proposition~\ref{prop:main-residual-stability} removes that budget for every
 \(m\geq2\).  Those
 estimates control defect from specified generators; they do not put a
 defect ball inside that coordinate region.  The cleaning theorem supplies
