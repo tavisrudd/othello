@@ -423,10 +423,11 @@ All in `notes/reed-solomon-tasks/c973-gf27-switch-probe/out/` (75 KB total).
 | `checks.txt`          |    923 | `b1153a87c1c1f8f6746d3d0edd53154700de8af354601e16c3b94574d1cc0456` |
 
 Generator: `notes/reed-solomon-tasks/c973-gf27-switch-probe/src/main.rs`,
-sha256 `278d4257ce31c9e3ef0c9d0d9ca3891be6e84a6b5a848ef23c15387dee06dc68`
-(the version including the §7 `e3` mode; the `full` and `dump` code paths are
-unchanged from the runs above, and re-running `full` with it reproduces
-`summary.tsv`, `histograms.tsv` and `quotient_points.tsv` byte-for-byte);
+sha256 `b7c7fdfae6440c59c93940653606fda82f899f2df7898cbd1a19ff4fe8d8c829`
+(the final version, including the §7 `e3` and §8 `certify` modes; the `full` and
+`dump` code paths are unchanged from the runs above, and re-running `full`
+reproduced `summary.tsv`, `histograms.tsv` and `quotient_points.tsv`
+byte-for-byte);
 `Cargo.toml` sha256
 `5c1d8c53c3bb7413355bc5be2d6d83cc8d02cd0088eb9b1f0ee18451b7f9b893`.
 `failures.tsv` is header-only by construction: no syndrome failed.  The only
@@ -608,4 +609,157 @@ affine `F3`-line, and none contains more than five.  By orbit:
 | `e3-summary.txt`    |   893 | `b22c55d2fed1579a09a017495121022c8bca002af8a61c49e7094bde184381c1` |
 
 Generator hash and the reproducibility check for the earlier passes are in §5.
+
+## 8. Complete GF(27) certificate sweep
+
+Every projective carrier class was scanned, not a stratified sample.
+
+### 8.1 What was certified
+
+> For `K = GF(27) = F3[x]/(x^3 - x - 1)`, every one of the
+> **402,321,277** projective classes `z in PG(6,27)`, i.e. every
+> `z = (z_2,...,z_8) in K^7 \ {0}` up to scaling, admits a monic degree-nine
+> locator `g` with **nine distinct roots in `K`** satisfying both Hankel
+> equations `sum_{i=2}^{8} z_i g_{i-1} = 0` and `sum_{i=2}^{8} z_i g_i = 0`.
+> Moreover every such `g` produced here is a **two-point affine-plane switch**,
+> and every class admits at least **78** distinct ones.
+
+`402,321,277 = (27^7 - 1)/26`, so the sweep is the whole projective space; no
+carrier-membership condition was imposed, so the statement holds a fortiori on
+the maximal carrier `N^(8) Gamma_10(F_27)` of eq (15) of the compression note.
+The `C(27,9)` exhaustive fallback was wired in for any class the switch failed
+on and was **invoked zero times**, because the switch never failed.
+
+### 8.2 Method
+
+Mode `certify` enumerates the 20,440 projective quotient points
+`(z_3,z_4,z_6,z_7)` of `PG(3,27)` (normalized so the first nonzero quotient
+coordinate is 1), and for each one scans all `27^3 = 19,683` kernel values
+`(z_2,z_5,z_8)`; the 757 classes of the rank-zero kernel plane are scanned
+separately.  `20440 * 19683 + 757 = 402,321,277`.
+
+Inside a fibre the quotient coordinates are constant, so each of the six Hankel
+functionals per switch candidate is an affine function of the kernel with a
+constant folded once per fibre; the three kernel coordinates are then peeled off
+in nested loops so the innermost step costs two table lookups per functional.
+This fibre-specialised scan was cross-checked against the general `scan()` of
+§1 on 2,000 random classes of one fibre: **2,000 agree, 0 differ**.  It made the
+sweep about 2.5 times faster than the §4 scan (`72.3 us` down to `28 us` per
+class of single-thread work).
+
+Progress was written to `out/certify-progress.txt` every 500 quotient points
+(quotient points done, elapsed seconds, classes done, unsaturated so far), so an
+interruption would have left an auditable partial record.
+
+### 8.3 Result
+
+From `out/certify-summary.txt`:
+
+```
+quotient points scanned: 20440
+total projective carrier classes: 402321277
+(27^7 - 1)/26 = 402321277
+global min n_good: 78 at z = 0,1,0,0,0,0,0
+classes with n_good = 0 (fallback invocations): 0
+unsaturated classes (no split nine-affine locator at all): 0
+mean n_good over all classes: 339.3223
+wall time: 1588.17 s, threads 8
+```
+
+By quotient type:
+
+| type | quotient points | classes | min `n_good` |
+|---|---:|---:|---:|
+| `rank0-kernel`   |      1 |         757 | 222 |
+| `rank1-graph`    |     28 |     551,124 |  78 |
+| `rank1-offgraph` |    756 |  14,880,348 |  78 |
+| `rank2`          | 19,656 | 386,889,048 | 195 |
+| total            | 20,441 | 402,321,277 |  78 |
+
+The exhaustive rank-zero and rank-one figures agree exactly with §4.2, which is
+an independent-path check: those strata were rescanned here by the
+fibre-specialised code and reproduced the same minima.
+
+Low tail of the global `n_good` distribution (`out/certify-histogram.tsv`):
+
+| `n_good` | classes | where |
+|---:|---:|---|
+| 78  |    27 | the 27 rank-one classes of §4.4 and §7 |
+| 195 |   702 | 351 rank-two quotient points, e.g. `(z3,z4,z6,z7) = (0,1,2,0)` with kernel `(0,1,2)` |
+| 209 | 2,106 | 234 rank-two quotient points, e.g. `(0,1,3,1)` with kernel `(0,2,13)` |
+| ... | | |
+| 1404 | 6,904 | every switch candidate good |
+
+so the global minimum 78 is attained only by the 27 syndromes already isolated
+in §4.4, and the best possible worst case on the rank-two bulk is 195.  Minima
+of the per-quotient-point rows in the low tail:
+
+| min over fibre | quotient points | rank | example quotient point |
+|---:|---:|---:|---|
+|  78 |   1 | 1 (`graph_sigma`) | `1,0,0,0` |
+|  78 |  26 | 1 (off graph)     | `1,2,1,2` |
+| 195 | 351 | 2                 | `0,1,2,0` |
+| 209 | 234 | 2                 | `0,1,3,1` |
+| 222 | 117 | 2                 | `0,1,1,0` |
+| 227 |  27 | 1 (off graph)     | `0,1,0,0` |
+
+`out/certify-unsaturated.tsv` is header-only: **no unsaturated class exists.**
+
+### 8.4 Independent replay of the witnesses
+
+The sweep also dumped, for a seeded sample of 200 classes drawn uniformly from
+all 402,321,277 (splitmix64, seed `0xC973_CE47_1F1C`, index-space sampling so the
+kernel plane is included at its true weight), the explicit witness nine-set from
+the first good switch candidate.  `verify_witnesses.py` re-derives `GF(27)` from
+scratch, shares no code with the Rust program, rebuilds each monic locator from
+its root set and checks that the support has nine distinct elements of `K`, that
+the locator is monic of degree nine, that both Hankel equations vanish, and that
+each listed point really is a root of the rebuilt polynomial:
+
+```
+witness rows checked: 200
+rows failing: 0
+all witnesses verified: nine distinct roots in GF(27) and both Hankel equations hold
+```
+
+### 8.5 Replay
+
+```
+CARGO_TARGET_DIR=/home/tavis/.cache/c973-gf27-switch-probe-target \
+  cargo build --release \
+  --manifest-path notes/reed-solomon-tasks/c973-gf27-switch-probe/Cargo.toml
+PROBE_THREADS=8 choom -n 1000 -- \
+  /home/tavis/.cache/c973-gf27-switch-probe-target/release/probe certify
+python3 notes/reed-solomon-tasks/c973-gf27-switch-probe/verify_witnesses.py
+```
+
+`PROBE_QLIMIT=<n>` truncates the sweep to the first `n` quotient points for a
+smoke test.  Deterministic apart from the wall-time lines; the witness sample is
+seeded, so `certify-witness-sample.tsv` is reproducible.
+
+Runtime 1,588.17 s (26.5 min) on 8 threads.  Memory is bounded by construction:
+each worker holds a 19,683-entry `u16` fibre counter, a 1,405-entry histogram
+and a 1,404-entry candidate table, under 100 KB per thread, plus a single
+output buffer under 1 MB.
+
+### 8.6 Outputs
+
+| file | bytes | sha256 |
+|---|---:|---|
+| `certify-summary.txt`        |    532 | `f7d3ade14aca0e6112b146c13e3d67a663b37fcdf716e234aa7083c4b5ac7c0a` |
+| `certify-quotient-rows.tsv`  | 840844 | `63bd14bcf01db2f17ff63293fd8fcecb48ac7df10f64bfeee18ae6e8c7f376d4` |
+| `certify-histogram.tsv`      |   2453 | `aa456c3d2d310064a781e83acccb648c631901948a4bd30d626f331510f37c56` |
+| `certify-unsaturated.tsv`    |     21 | `6d70875f05005089e5258180f7e635e53a62a04c23eb1243e261ad5e0dd6354f` |
+| `certify-witness-sample.tsv` |   8378 | `5dc58017fd6e0fe48140f515caa742a8491d8999272b5836c2304a9f46cdfa6a` |
+| `certify-progress.txt`       |   1029 | `c138052a9e654f7a0689c60027549c2789e282da2c883af6eb8f3ba82db1066b` |
+
+Verifier `verify_witnesses.py`, 5,204 bytes, sha256
+`fee500e1fd55f4c7ca3f9409b1dc4b95d2f3b8c17b2eea4b1b0bd7121cfd4d73`.
+Generator `src/main.rs` sha256 as in §5.
+
+`certify-quotient-rows.tsv` has one row per quotient point: index, the quotient
+point, its rank and `graph_sigma` flag, the fibre size 19,683, the minimum
+`n_good` over the fibre, the kernel value attaining it, the number of fallback
+invocations, and the number of unsaturated classes.  The last two columns are
+zero in all 20,440 rows.
 

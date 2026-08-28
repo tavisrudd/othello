@@ -459,6 +459,131 @@ fn scan(t: &Tab, cands: &[Cand], planes: &[Plane], z: &[u8; 7]) -> Stat {
 
 // ----------------------------------------------------- exhaustive search ---
 
+// ------------------------------------------------- fibre-specialised scan --
+//
+// Within one quotient point the coordinates (z3,z4,z6,z7) are fixed and only
+// the kernel (z2,z5,z8) varies, so every Hankel functional is an affine
+// function of the kernel with a constant folded once per fibre.  The kernel
+// index is  idx = 729*z2 + 27*z5 + z8.
+
+struct FTab {
+    w: Vec<[u8; 16]>, // per candidate: [c,k0,k1,k2] for w11, w12, w21, w22
+    b: Vec<[u8; 8]>,  // per candidate: [c,k0,k1,k2] for base rows b1, b2
+    qmask: Vec<u32>,
+    xx: Vec<[u8; 2]>,
+}
+
+fn build_ftab(t: &Tab, cands: &[Cand], q: [u8; 4]) -> FTab {
+    let pack = |v: &[u8; 7]| -> [u8; 4] {
+        let c = ad(
+            t,
+            ad(t, ml(t, q[0], v[1]), ml(t, q[1], v[2])),
+            ad(t, ml(t, q[2], v[4]), ml(t, q[3], v[5])),
+        );
+        [c, v[0], v[3], v[6]]
+    };
+    let mut f = FTab { w: Vec::with_capacity(cands.len()), b: Vec::with_capacity(cands.len()), qmask: Vec::with_capacity(cands.len()), xx: Vec::with_capacity(cands.len()) };
+    for c in cands {
+        let (a, b2, cc, d) = (pack(&c.w11), pack(&c.w12), pack(&c.w21), pack(&c.w22));
+        f.w.push([a[0], a[1], a[2], a[3], b2[0], b2[1], b2[2], b2[3], cc[0], cc[1], cc[2], cc[3], d[0], d[1], d[2], d[3]]);
+        let (e, g) = (pack(&c.b1), pack(&c.b2));
+        f.b.push([e[0], e[1], e[2], e[3], g[0], g[1], g[2], g[3]]);
+        f.qmask.push(c.qmask);
+        f.xx.push([c.x1, c.x2]);
+    }
+    f
+}
+
+/// n_good for every kernel value of one fibre; `cnt` must be 19683 zeros.
+fn fibre_counts(t: &Tab, f: &FTab, cnt: &mut [u16]) {
+    for i in 0..f.w.len() {
+        let w = f.w[i];
+        let b = f.b[i];
+        let qm = f.qmask[i];
+        let (x1, x2) = (f.xx[i][0], f.xx[i][1]);
+        let x1x2 = ml(t, x1, x2);
+        let x12 = ad(t, x1, x2);
+        for z2 in 0..27u8 {
+            let q0 = [
+                ad(t, w[0], ml(t, z2, w[1])),
+                ad(t, w[4], ml(t, z2, w[5])),
+                ad(t, w[8], ml(t, z2, w[9])),
+                ad(t, w[12], ml(t, z2, w[13])),
+            ];
+            let qb = [ad(t, b[0], ml(t, z2, b[1])), ad(t, b[4], ml(t, z2, b[5]))];
+            for z5 in 0..27u8 {
+                let p = [
+                    ad(t, q0[0], ml(t, z5, w[2])),
+                    ad(t, q0[1], ml(t, z5, w[6])),
+                    ad(t, q0[2], ml(t, z5, w[10])),
+                    ad(t, q0[3], ml(t, z5, w[14])),
+                ];
+                let pb = [ad(t, qb[0], ml(t, z5, b[2])), ad(t, qb[1], ml(t, z5, b[6]))];
+                let base = (z2 as usize) * 729 + (z5 as usize) * 27;
+                for z8 in 0..27u8 {
+                    let a11 = ad(t, p[0], ml(t, z8, w[3]));
+                    let a22 = ad(t, p[3], ml(t, z8, w[15]));
+                    let a12 = ad(t, p[2], ml(t, z8, w[11]));
+                    let a21 = ad(t, p[1], ml(t, z8, w[7]));
+                    let det = sb(t, ml(t, a11, a22), ml(t, a12, a21));
+                    if det == 0 {
+                        continue;
+                    }
+                    let r1 = ng(t, ad(t, pb[0], ml(t, z8, b[3])));
+                    let r2 = ng(t, ad(t, pb[1], ml(t, z8, b[7])));
+                    let di = iv(t, det);
+                    let c1 = ml(t, sb(t, ml(t, r1, a22), ml(t, a12, r2)), di);
+                    let c2 = ml(t, sb(t, ml(t, a11, r2), ml(t, r1, a21)), di);
+                    let beta = sb(t, ad(t, c1, c2), x12);
+                    let gamma = sb(t, x1x2, ad(t, ml(t, c1, x2), ml(t, c2, x1)));
+                    let disc = sb(t, ml(t, beta, beta), gamma);
+                    if disc == 0 || !t.issq[disc as usize] {
+                        continue;
+                    }
+                    let s = t.sqrt[disc as usize];
+                    let ra = sb(t, beta, s);
+                    let rb = ad(t, beta, s);
+                    if (qm >> ra) & 1 == 0 && (qm >> rb) & 1 == 0 {
+                        cnt[base + z8 as usize] += 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// First good switch candidate for z, as (candidate index, nine-set mask).
+fn first_witness(t: &Tab, cands: &[Cand], z: &[u8; 7]) -> Option<(usize, u32)> {
+    for (ci, c) in cands.iter().enumerate() {
+        let a11 = dot(t, z, &c.w11);
+        let a21 = dot(t, z, &c.w12);
+        let a12 = dot(t, z, &c.w21);
+        let a22 = dot(t, z, &c.w22);
+        let det = sb(t, ml(t, a11, a22), ml(t, a12, a21));
+        if det == 0 {
+            continue;
+        }
+        let r1 = ng(t, dot(t, z, &c.b1));
+        let r2 = ng(t, dot(t, z, &c.b2));
+        let di = iv(t, det);
+        let c1 = ml(t, sb(t, ml(t, r1, a22), ml(t, a12, r2)), di);
+        let c2 = ml(t, sb(t, ml(t, a11, r2), ml(t, r1, a21)), di);
+        let beta = sb(t, ad(t, c1, c2), ad(t, c.x1, c.x2));
+        let gamma = sb(t, ml(t, c.x1, c.x2), ad(t, ml(t, c1, c.x2), ml(t, c2, c.x1)));
+        let disc = sb(t, ml(t, beta, beta), gamma);
+        if disc == 0 || !t.issq[disc as usize] {
+            continue;
+        }
+        let s = t.sqrt[disc as usize];
+        let ra = sb(t, beta, s);
+        let rb = ad(t, beta, s);
+        if (c.qmask >> ra) & 1 == 0 && (c.qmask >> rb) & 1 == 0 {
+            return Some((ci, c.qmask | (1 << ra) | (1 << rb)));
+        }
+    }
+    None
+}
+
 /// All 9-subsets of K (as 27-bit masks) whose monic locator closes z.
 fn all_nine_sets(t: &Tab, z: &[u8; 7]) -> Vec<u32> {
     fn rec(t: &Tab, z: &[u8; 7], depth: usize, start: u8, h: &[u8; 10], m: u32, out: &mut Vec<u32>) {
@@ -1010,6 +1135,325 @@ fn main() {
         let t2 = Instant::now();
         let r = exhaustive(t, &[1, 0, 0, 0, 0, 0, 0]);
         println!("bench exhaustive: {:?} in {:?}", r, t2.elapsed());
+        return;
+    }
+
+    if mode == "certify" {
+        use std::sync::atomic::{AtomicUsize, Ordering};
+        use std::sync::Mutex;
+
+        // ---- all 20440 projective quotient points, first nonzero = 1 ----
+        let mut qlist: Vec<[u8; 4]> = Vec::with_capacity(20440);
+        for piv in 0..4usize {
+            let free = 3 - piv;
+            let total = 27usize.pow(free as u32);
+            for n in 0..total {
+                let mut q = [0u8; 4];
+                q[piv] = 1;
+                let mut m = n;
+                for j in (piv + 1)..4 {
+                    q[j] = (m % 27) as u8;
+                    m /= 27;
+                }
+                qlist.push(q);
+            }
+        }
+        assert_eq!(qlist.len(), 20440);
+        let qlimit: usize = std::env::var("PROBE_QLIMIT")
+            .ok()
+            .and_then(|s| s.parse().ok())
+            .unwrap_or(qlist.len());
+        let qlist = &qlist[..qlimit.min(qlist.len())];
+
+        // ---- cross-check the fibre-specialised scan against scan() ----
+        {
+            let f = build_ftab(t, &cands, qlist[qlist.len() / 3]);
+            let mut cnt = vec![0u16; 19683];
+            fibre_counts(t, &f, &mut cnt);
+            let q = qlist[qlist.len() / 3];
+            let mut rng = Rng(0x11FF_2200);
+            let (mut ok, mut bad) = (0u32, 0u32);
+            for _ in 0..2000 {
+                let (z2, z5, z8) = (rng.f(), rng.f(), rng.f());
+                let z = [z2, q[0], q[1], z5, q[2], q[3], z8];
+                let idx = (z2 as usize) * 729 + (z5 as usize) * 27 + z8 as usize;
+                if scan(t, &cands, &planes, &z).n_good == cnt[idx] {
+                    ok += 1;
+                } else {
+                    bad += 1;
+                }
+            }
+            writeln!(log, "certify cross-check of the fibre-specialised scan: {} agree, {} differ", ok, bad).unwrap();
+            println!("certify cross-check: {} agree, {} differ", ok, bad);
+            assert_eq!(bad, 0);
+        }
+
+        // ---- seeded witness sample of 200 classes over the whole space ----
+        let total_classes: u64 = 757 + 19683u64 * qlist.len() as u64;
+        let mut rng = Rng(0xC973_CE47_1F1C);
+        let mut samp_kernel: Vec<u32> = Vec::new();
+        let mut samp: std::collections::HashMap<u32, Vec<u32>> = Default::default();
+        for _ in 0..200 {
+            let idx = rng.next() % total_classes;
+            if idx < 757 {
+                samp_kernel.push(idx as u32);
+            } else {
+                let j = idx - 757;
+                samp.entry((j / 19683) as u32).or_default().push((j % 19683) as u32);
+            }
+        }
+        let sampled_q: Vec<bool> = (0..qlist.len()).map(|i| samp.contains_key(&(i as u32))).collect();
+
+        let progress_path = outdir.join("certify-progress.txt");
+        fs::write(&progress_path, "quotient_points_done\telapsed_s\tclasses_done\tunsaturated_so_far\n").unwrap();
+        let done = AtomicUsize::new(0);
+        let unsat_ct = AtomicUsize::new(0);
+        let plock = Mutex::new(());
+
+        struct QRow {
+            qi: u32,
+            q: [u8; 4],
+            rank: u8,
+            graph: bool,
+            min_good: u16,
+            argmin: u32,
+            n_fallback: u32,
+            n_unsat: u32,
+        }
+
+        let nq = qlist.len();
+        let parts: Vec<(Vec<QRow>, Vec<u64>, Vec<[u8; 7]>, Vec<([u8; 7], usize, u32)>)> =
+            std::thread::scope(|sc| {
+                let handles: Vec<_> = (0..nthreads)
+                    .map(|wid| {
+                        let cands = &cands;
+                        let qlist = &qlist;
+                        let samp = &samp;
+                        let sampled_q = &sampled_q;
+                        let done = &done;
+                        let unsat_ct = &unsat_ct;
+                        let plock = &plock;
+                        let progress_path = &progress_path;
+                        sc.spawn(move || {
+                            let mut rows: Vec<QRow> = Vec::new();
+                            let mut hist = vec![0u64; MAXC];
+                            let mut unsat: Vec<[u8; 7]> = Vec::new();
+                            let mut wit: Vec<([u8; 7], usize, u32)> = Vec::new();
+                            let mut cnt = vec![0u16; 19683];
+                            let mut qi = wid;
+                            while qi < nq {
+                                let q = qlist[qi];
+                                let f = build_ftab(t, cands, q);
+                                for v in cnt.iter_mut() {
+                                    *v = 0;
+                                }
+                                fibre_counts(t, &f, &mut cnt);
+                                let mut mn = u16::MAX;
+                                let mut argmin = 0u32;
+                                let mut nfb = 0u32;
+                                let mut nus = 0u32;
+                                for (i, &v) in cnt.iter().enumerate() {
+                                    hist[v as usize] += 1;
+                                    if v < mn {
+                                        mn = v;
+                                        argmin = i as u32;
+                                    }
+                                    if v == 0 {
+                                        nfb += 1;
+                                        let z = [
+                                            (i / 729) as u8, q[0], q[1], ((i / 27) % 27) as u8,
+                                            q[2], q[3], (i % 27) as u8,
+                                        ];
+                                        let (c9, _) = exhaustive(t, &z);
+                                        if c9 == 0 {
+                                            nus += 1;
+                                            unsat.push(z);
+                                            unsat_ct.fetch_add(1, Ordering::Relaxed);
+                                        }
+                                    }
+                                }
+                                if sampled_q[qi] {
+                                    for &ki in samp.get(&(qi as u32)).unwrap() {
+                                        let i = ki as usize;
+                                        let z = [
+                                            (i / 729) as u8, q[0], q[1], ((i / 27) % 27) as u8,
+                                            q[2], q[3], (i % 27) as u8,
+                                        ];
+                                        if let Some((ci, m)) = first_witness(t, cands, &z) {
+                                            wit.push((z, ci, m));
+                                        }
+                                    }
+                                }
+                                let det = sb(t, ml(t, q[0], q[3]), ml(t, q[2], q[1]));
+                                let rank = if det == 0 { 1u8 } else { 2u8 };
+                                let graph = if rank == 1 {
+                                    let (a, c, b, d) = (q[0], q[1], q[2], q[3]);
+                                    let col = if a != 0 || c != 0 { p1_norm(t, a, c) } else { p1_norm(t, b, d) };
+                                    let row = if a != 0 || b != 0 { p1_norm(t, a, b) } else { p1_norm(t, c, d) };
+                                    row == p1_norm(t, pow(t, col.0, 3), pow(t, col.1, 3))
+                                } else {
+                                    false
+                                };
+                                rows.push(QRow { qi: qi as u32, q, rank, graph, min_good: mn, argmin, n_fallback: nfb, n_unsat: nus });
+                                let d = done.fetch_add(1, Ordering::Relaxed) + 1;
+                                if d % 500 == 0 || d == nq {
+                                    let _g = plock.lock().unwrap();
+                                    if let Ok(mut fh) = fs::OpenOptions::new().append(true).open(progress_path) {
+                                        let _ = writeln!(
+                                            fh,
+                                            "{}\t{:.1}\t{}\t{}",
+                                            d,
+                                            t0.elapsed().as_secs_f64(),
+                                            d as u64 * 19683,
+                                            unsat_ct.load(Ordering::Relaxed)
+                                        );
+                                    }
+                                }
+                                qi += nthreads;
+                            }
+                            (rows, hist, unsat, wit)
+                        })
+                    })
+                    .collect();
+                handles.into_iter().map(|h| h.join().unwrap()).collect()
+            });
+
+        // ---- kernel plane, 757 classes ----
+        let mut kmin = u16::MAX;
+        let mut kargmin = [0u8; 7];
+        let mut kfb = 0u32;
+        let mut kunsat = 0u32;
+        let mut khist = vec![0u64; MAXC];
+        let mut kernel_classes: Vec<[u8; 7]> = Vec::new();
+        for z2 in 0..27u8 {
+            for z5 in 0..27u8 {
+                for z8 in 0..27u8 {
+                    let ord = [z2, z5, z8];
+                    if ord.iter().find(|&&x| x != 0).cloned() != Some(1) {
+                        continue;
+                    }
+                    let z = [z2, 0, 0, z5, 0, 0, z8];
+                    kernel_classes.push(z);
+                    let g = scan(t, &cands, &planes, &z).n_good;
+                    khist[g as usize] += 1;
+                    if g < kmin {
+                        kmin = g;
+                        kargmin = z;
+                    }
+                    if g == 0 {
+                        kfb += 1;
+                        if exhaustive(t, &z).0 == 0 {
+                            kunsat += 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        // ---- merge ----
+        let mut rows: Vec<QRow> = Vec::new();
+        let mut hist = khist.clone();
+        let mut unsat: Vec<[u8; 7]> = Vec::new();
+        let mut wit: Vec<([u8; 7], usize, u32)> = Vec::new();
+        for (r, h, u, w) in parts {
+            rows.extend(r);
+            for i in 0..MAXC {
+                hist[i] += h[i];
+            }
+            unsat.extend(u);
+            wit.extend(w);
+        }
+        rows.sort_by_key(|r| r.qi);
+
+        for &ki in &samp_kernel {
+            let z = kernel_classes[ki as usize];
+            if let Some((ci, m)) = first_witness(t, &cands, &z) {
+                wit.push((z, ci, m));
+            }
+        }
+
+        // ---- outputs ----
+        let mut qtsv = String::with_capacity(2 << 20);
+        writeln!(qtsv, "qi\tz3,z4,z6,z7\trank\tgraph_sigma\tn_classes\tmin_n_good\targmin_z2,z5,z8\tn_fallback\tn_unsaturated").unwrap();
+        let mut gmin = kmin;
+        let mut gargmin = kargmin;
+        let mut tot_fb = kfb as u64;
+        let mut tot_us = kunsat as u64;
+        let mut by_type: std::collections::BTreeMap<&str, (u64, u64, u16)> = Default::default();
+        by_type.insert("rank0-kernel", (1, 757, kmin));
+        for r in &rows {
+            writeln!(
+                qtsv,
+                "{}\t{},{},{},{}\t{}\t{}\t19683\t{}\t{},{},{}\t{}\t{}",
+                r.qi, r.q[0], r.q[1], r.q[2], r.q[3], r.rank, r.graph as u8,
+                r.min_good,
+                r.argmin / 729, (r.argmin / 27) % 27, r.argmin % 27,
+                r.n_fallback, r.n_unsat
+            )
+            .unwrap();
+            if r.min_good < gmin {
+                gmin = r.min_good;
+                gargmin = [
+                    (r.argmin / 729) as u8, r.q[0], r.q[1], ((r.argmin / 27) % 27) as u8,
+                    r.q[2], r.q[3], (r.argmin % 27) as u8,
+                ];
+            }
+            tot_fb += r.n_fallback as u64;
+            tot_us += r.n_unsat as u64;
+            let key = if r.rank == 2 { "rank2" } else if r.graph { "rank1-graph" } else { "rank1-offgraph" };
+            let e = by_type.entry(key).or_insert((0, 0, u16::MAX));
+            e.0 += 1;
+            e.1 += 19683;
+            if r.min_good < e.2 {
+                e.2 = r.min_good;
+            }
+        }
+        fs::write(outdir.join("certify-quotient-rows.tsv"), &qtsv).unwrap();
+
+        let mut htsv = String::new();
+        writeln!(htsv, "n_good\tn_classes").unwrap();
+        for (v, &c) in hist.iter().enumerate() {
+            if c > 0 {
+                writeln!(htsv, "{}\t{}", v, c).unwrap();
+            }
+        }
+        fs::write(outdir.join("certify-histogram.tsv"), &htsv).unwrap();
+
+        let mut utsv = String::new();
+        writeln!(utsv, "z2,z3,z4,z5,z6,z7,z8").unwrap();
+        for z in &unsat {
+            writeln!(utsv, "{}", zstr(z)).unwrap();
+        }
+        fs::write(outdir.join("certify-unsaturated.tsv"), &utsv).unwrap();
+
+        wit.sort_by_key(|w| w.0);
+        let mut wtsv = String::new();
+        writeln!(wtsv, "z2,z3,z4,z5,z6,z7,z8\tcand_idx\tnine_set").unwrap();
+        for (z, ci, m) in &wit {
+            writeln!(wtsv, "{}\t{}\t{}", zstr(z), ci, fmt_mask(*m)).unwrap();
+        }
+        fs::write(outdir.join("certify-witness-sample.tsv"), &wtsv).unwrap();
+
+        let el = t0.elapsed().as_secs_f64();
+        let total: u64 = 757 + 19683u64 * rows.len() as u64;
+        let mut s = String::new();
+        writeln!(s, "field: GF(27) = F3[x]/(x^3 - x - 1)").unwrap();
+        writeln!(s, "quotient points scanned: {}", rows.len()).unwrap();
+        writeln!(s, "total projective carrier classes: {}", total).unwrap();
+        writeln!(s, "(27^7 - 1)/26 = {}", (27u64.pow(7) - 1) / 26).unwrap();
+        writeln!(s, "global min n_good: {} at z = {}", gmin, zstr(&gargmin)).unwrap();
+        writeln!(s, "classes with n_good = 0 (fallback invocations): {}", tot_fb).unwrap();
+        writeln!(s, "unsaturated classes (no split nine-affine locator at all): {}", tot_us).unwrap();
+        writeln!(s, "witness sample rows: {}", wit.len()).unwrap();
+        writeln!(s, "type\tquotient_points\tclasses\tmin_n_good").unwrap();
+        for (k, v) in &by_type {
+            writeln!(s, "{}\t{}\t{}\t{}", k, v.0, v.1, v.2).unwrap();
+        }
+        let mean: f64 = hist.iter().enumerate().map(|(v, &c)| v as f64 * c as f64).sum::<f64>() / total as f64;
+        writeln!(s, "mean n_good over all classes: {:.4}", mean).unwrap();
+        writeln!(s, "wall time: {:.2} s, threads {}", el, nthreads).unwrap();
+        fs::write(outdir.join("certify-summary.txt"), &s).unwrap();
+        print!("{}", s);
         return;
     }
 

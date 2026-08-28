@@ -1,0 +1,15 @@
+field: GF(27) = F3[x]/(x^3 - x - 1)
+quotient points scanned: 20440
+total projective carrier classes: 402321277
+(27^7 - 1)/26 = 402321277
+global min n_good: 78 at z = 0,1,0,0,0,0,0
+classes with n_good = 0 (fallback invocations): 0
+unsaturated classes (no split nine-affine locator at all): 0
+witness sample rows: 200
+type	quotient_points	classes	min_n_good
+rank0-kernel	1	757	222
+rank1-graph	28	551124	78
+rank1-offgraph	756	14880348	78
+rank2	19656	386889048	195
+mean n_good over all classes: 339.3223
+wall time: 1588.17 s, threads 8
