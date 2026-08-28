@@ -1,6 +1,7 @@
 use ergodis::observational::{
     compile_observational, compile_observational_with_policy, verify_compilation,
-    CertificatePolicy, CompiledObservation, FinitePresentation, GeneratorSpec,
+    CertificatePolicy, CompiledObservation, FiniteContextLanguage, FinitePresentation,
+    GeneratorSpec,
 };
 use ergodis::provenance::{ProvenanceArena, ProvenanceId, ReplaySidecar};
 use ergodis::{CompositionAnswer, CompositionTable, CostTable, GeneratedSpanTable, Matrix};
@@ -366,6 +367,68 @@ fn repeated_generator_reports_exact_preperiod_and_cycle() {
     assert_eq!(orbit.prefix(), [0, 1]);
     assert_eq!(orbit.cycle(), [2, 3]);
     assert!(orbit.states.len() <= compiled.class_ranges()[0].len as usize);
+}
+
+#[test]
+fn context_language_product_masks_disallowed_continuations_exactly() {
+    let presentation = FinitePresentation::new(
+        [2],
+        [0, 1],
+        [
+            GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: [0, 1].into(),
+            },
+            GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: [0, 0].into(),
+            },
+        ],
+    )
+    .unwrap();
+    assert_ne!(
+        compile_observational(&presentation)
+            .unwrap()
+            .state_classes()[0],
+        compile_observational(&presentation)
+            .unwrap()
+            .state_classes()[1]
+    );
+
+    // Three recognizer states: initial, accept-exactly-`1`, and dead.
+    // Rows are language states and columns are original generator IDs.
+    let language = FiniteContextLanguage::new(3, 0, &[1], 2, [2, 1, 2, 2, 2, 2]).unwrap();
+    let product = presentation
+        .product_with_context_language(&language)
+        .unwrap();
+    assert_eq!(product.presentation().generators().len(), 2);
+    assert_eq!(product.presentation().state_count(), 6);
+    for original in 0..2 {
+        for language_state in 0..3 {
+            let state = product.product_state(original, language_state).unwrap();
+            assert_eq!(
+                product.decode_product_state(state),
+                Some((original, language_state))
+            );
+        }
+    }
+
+    let compiled = compile_observational(product.presentation()).unwrap();
+    verify_compilation(product.presentation(), &compiled).unwrap();
+    let initial_left = product.initial_product_state(0).unwrap();
+    let initial_right = product.initial_product_state(1).unwrap();
+    assert_eq!(
+        compiled.state_classes()[initial_left as usize],
+        compiled.state_classes()[initial_right as usize]
+    );
+    let accepted_left = product.presentation().transition(1, initial_left).unwrap();
+    let accepted_right = product.presentation().transition(1, initial_right).unwrap();
+    assert_eq!(
+        product.presentation().observations()[accepted_left as usize],
+        product.presentation().observations()[accepted_right as usize]
+    );
 }
 
 type Profile = [u8; 3];

@@ -83,6 +83,16 @@ pub enum ObservationalError {
     UnknownGenerator { generator: u32 },
     #[error("restricted presentation repeats generator {generator}")]
     DuplicateGenerator { generator: u32 },
+    #[error("a context language needs at least one state")]
+    NoLanguageStates,
+    #[error("context-language initial state {state} is out of range")]
+    LanguageInitialState { state: u32 },
+    #[error("context-language accepting state {state} is out of range")]
+    LanguageAcceptingState { state: u32 },
+    #[error("context language has {actual} transitions, expected {expected}")]
+    LanguageTransitionCount { expected: usize, actual: usize },
+    #[error("context-language transition {transition} targets an unknown state")]
+    LanguageTransitionTarget { transition: usize },
     #[error("compiled artifact has an invalid shape")]
     CompiledShape,
     #[error("compiled artifact does not define a sort-respecting partition")]
@@ -157,6 +167,125 @@ pub struct FinitePresentation {
 pub struct RestrictedPresentation {
     presentation: FinitePresentation,
     original_generator_ids: Box<[u32]>,
+}
+
+/// A deterministic finite recognizer for admissible generator words.
+#[derive(Clone, Debug)]
+pub struct FiniteContextLanguage {
+    state_count: u32,
+    initial_state: u32,
+    accepting: Box<[u64]>,
+    transitions: Box<[u32]>,
+}
+
+impl FiniteContextLanguage {
+    pub fn new(
+        state_count: u32,
+        initial_state: u32,
+        accepting_states: &[u32],
+        generator_count: u32,
+        transitions: impl Into<Box<[u32]>>,
+    ) -> Result<Self, ObservationalError> {
+        if state_count == 0 {
+            return Err(ObservationalError::NoLanguageStates);
+        }
+        if initial_state >= state_count {
+            return Err(ObservationalError::LanguageInitialState {
+                state: initial_state,
+            });
+        }
+        let expected = (state_count as usize)
+            .checked_mul(generator_count as usize)
+            .ok_or(ObservationalError::Overflow)?;
+        let transitions = transitions.into();
+        if transitions.len() != expected {
+            return Err(ObservationalError::LanguageTransitionCount {
+                expected,
+                actual: transitions.len(),
+            });
+        }
+        for (transition, &target) in transitions.iter().enumerate() {
+            if target >= state_count {
+                return Err(ObservationalError::LanguageTransitionTarget { transition });
+            }
+        }
+        let mut accepting = bitmap_storage(state_count as usize)?;
+        for &state in accepting_states {
+            if state >= state_count {
+                return Err(ObservationalError::LanguageAcceptingState { state });
+            }
+            bitmap_insert(&mut accepting, state as usize);
+        }
+        Ok(Self {
+            state_count,
+            initial_state,
+            accepting: accepting.into_boxed_slice(),
+            transitions,
+        })
+    }
+
+    pub fn state_count(&self) -> u32 {
+        self.state_count
+    }
+
+    pub fn initial_state(&self) -> u32 {
+        self.initial_state
+    }
+
+    pub fn is_accepting(&self, state: u32) -> bool {
+        state < self.state_count && bitmap_contains(&self.accepting, state as usize)
+    }
+}
+
+/// Product presentation whose observations expose the underlying output only
+/// after a word accepted by the supplied finite context language.
+#[derive(Clone, Debug)]
+pub struct ContextLanguageProduct {
+    presentation: FinitePresentation,
+    original_sorts: Box<[SortRange]>,
+    language_state_count: u32,
+    initial_language_state: u32,
+}
+
+impl ContextLanguageProduct {
+    pub fn presentation(&self) -> &FinitePresentation {
+        &self.presentation
+    }
+
+    pub fn product_state(&self, original_state: u32, language_state: u32) -> Option<u32> {
+        if language_state >= self.language_state_count {
+            return None;
+        }
+        let sort = self
+            .original_sorts
+            .partition_point(|range| range.end() <= original_state);
+        let original = self.original_sorts.get(sort).copied()?;
+        if !original.contains(original_state) {
+            return None;
+        }
+        let product = self.presentation.sorts[sort];
+        Some(product.start + language_state * original.len + original_state - original.start)
+    }
+
+    pub fn initial_product_state(&self, original_state: u32) -> Option<u32> {
+        self.product_state(original_state, self.initial_language_state)
+    }
+
+    pub fn decode_product_state(&self, product_state: u32) -> Option<(u32, u32)> {
+        let sort = self
+            .presentation
+            .sorts
+            .partition_point(|range| range.end() <= product_state);
+        let product = self.presentation.sorts.get(sort).copied()?;
+        if !product.contains(product_state) {
+            return None;
+        }
+        let original = self.original_sorts[sort];
+        let local = product_state - product.start;
+        let language_state = local / original.len;
+        let original_state = original.start + local % original.len;
+        Some((original_state, language_state))
+    }
 }
 
 impl RestrictedPresentation {
@@ -324,6 +453,117 @@ impl FinitePresentation {
                 generator_ids_by_sort,
             },
             original_generator_ids: generator_ids.into(),
+        })
+    }
+
+    /// Form the exact product with a finite recognizer for admissible context
+    /// words. Nonaccepting recognizer states expose one masked observation;
+    /// accepting states expose the original observation equality classes.
+    pub fn product_with_context_language(
+        &self,
+        language: &FiniteContextLanguage,
+    ) -> Result<ContextLanguageProduct, ObservationalError> {
+        let expected_language_transitions = (language.state_count as usize)
+            .checked_mul(self.generators.len())
+            .ok_or(ObservationalError::Overflow)?;
+        if language.transitions.len() != expected_language_transitions {
+            return Err(ObservationalError::LanguageTransitionCount {
+                expected: expected_language_transitions,
+                actual: language.transitions.len(),
+            });
+        }
+
+        let mut next = 0_u32;
+        let mut sorts = Vec::with_capacity(self.sorts.len());
+        for original in self.sorts.iter().copied() {
+            let len = original
+                .len
+                .checked_mul(language.state_count)
+                .ok_or(ObservationalError::Overflow)?;
+            sorts.push(SortRange { start: next, len });
+            next = next.checked_add(len).ok_or(ObservationalError::Overflow)?;
+        }
+
+        let mut distinct_outputs = self.observations.to_vec();
+        distinct_outputs.sort_unstable();
+        distinct_outputs.dedup();
+        if distinct_outputs.len() >= u32::MAX as usize {
+            return Err(ObservationalError::Overflow);
+        }
+        let mut observations = Vec::with_capacity(next as usize);
+        for original_sort in self.sorts.iter().copied() {
+            for language_state in 0..language.state_count {
+                if language.is_accepting(language_state) {
+                    for original_state in original_sort.start..original_sort.end() {
+                        let output = self.observations[original_state as usize];
+                        let dense = distinct_outputs
+                            .binary_search(&output)
+                            .expect("output came from the dense output directory");
+                        observations.push(
+                            u32::try_from(dense + 1).map_err(|_| ObservationalError::Overflow)?,
+                        );
+                    }
+                } else {
+                    observations.resize(
+                        observations
+                            .len()
+                            .checked_add(original_sort.len as usize)
+                            .ok_or(ObservationalError::Overflow)?,
+                        0,
+                    );
+                }
+            }
+        }
+
+        let transition_capacity = self
+            .transitions
+            .len()
+            .checked_mul(language.state_count as usize)
+            .ok_or(ObservationalError::Overflow)?;
+        let mut generators = Vec::with_capacity(self.generators.len());
+        let mut transitions = Vec::with_capacity(transition_capacity);
+        for (generator_id, original_generator) in self.generators.iter().copied().enumerate() {
+            let source = self.sorts[original_generator.source_sort as usize];
+            let target = self.sorts[original_generator.target_sort as usize];
+            let product_target = sorts[original_generator.target_sort as usize];
+            let transition_start =
+                u32::try_from(transitions.len()).map_err(|_| ObservationalError::Overflow)?;
+            let old_start = original_generator.transition_start as usize;
+            let old_end = old_start + original_generator.transition_len as usize;
+            let original_transitions = &self.transitions[old_start..old_end];
+            for language_state in 0..language.state_count {
+                let next_language = language.transitions
+                    [language_state as usize * self.generators.len() + generator_id];
+                for &original_target in original_transitions {
+                    let target_local = original_target - target.start;
+                    transitions
+                        .push(product_target.start + next_language * target.len + target_local);
+                }
+            }
+            generators.push(GeneratorRecord {
+                source_sort: original_generator.source_sort,
+                target_sort: original_generator.target_sort,
+                transition_start,
+                transition_len: source
+                    .len
+                    .checked_mul(language.state_count)
+                    .ok_or(ObservationalError::Overflow)?,
+            });
+        }
+        let (generator_sort_ranges, generator_ids_by_sort) =
+            index_generators_by_sort(sorts.len(), &generators, false)?;
+        Ok(ContextLanguageProduct {
+            presentation: Self {
+                sorts: sorts.into_boxed_slice(),
+                observations: observations.into_boxed_slice(),
+                generators: generators.into_boxed_slice(),
+                transitions: transitions.into_boxed_slice(),
+                generator_sort_ranges,
+                generator_ids_by_sort,
+            },
+            original_sorts: self.sorts.clone(),
+            language_state_count: language.state_count,
+            initial_language_state: language.initial_state,
         })
     }
 
