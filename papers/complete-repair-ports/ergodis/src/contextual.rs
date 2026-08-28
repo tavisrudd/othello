@@ -84,6 +84,7 @@ pub struct PlannedContextCost {
 const PROJECTIVE_AMORTIZATION_QUERIES: u32 = 1;
 const RANK_BOUNDED_AMORTIZATION_QUERIES: u32 = 2;
 const CACHE_RECORD_AND_INDEX_BYTES: u64 = 32;
+const FULL_RANK_MAP_CACHE_BYTES: usize = 8 * 1024 * 1024;
 
 const EMPTY_SLOT: u32 = u32::MAX;
 
@@ -478,6 +479,8 @@ pub struct RankBoundedContextCache<'a, F: FiniteField> {
     target_rank: usize,
     zero_cost: u32,
     costs: FlatCostCache,
+    full_rank_maps: Box<[Box<[u8]>]>,
+    full_rank_maps_initialized: bool,
     _field: PhantomData<F>,
 }
 
@@ -516,12 +519,34 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
             target_rank,
             zero_cost,
             costs: FlatCostCache::new(target_rank * block_count),
+            full_rank_maps: vec![Box::default(); target_rank + 1].into_boxed_slice(),
+            full_rank_maps_initialized: false,
             _field: PhantomData,
         })
     }
 
     pub fn cached_context_count(&self) -> usize {
         self.costs.len()
+    }
+
+    fn ensure_full_rank_maps(&mut self) -> Result<(), ContextualError> {
+        if self.full_rank_maps_initialized {
+            return Ok(());
+        }
+        let mut remaining = FULL_RANK_MAP_CACHE_BYTES;
+        for rank in 1..=self.target_rank {
+            let Some(bytes) = full_rank_map_storage_bytes::<F>(rank, self.target_rank)? else {
+                continue;
+            };
+            if bytes > remaining {
+                continue;
+            }
+            let maps = enumerate_full_rank_maps::<F>(rank, self.target_rank, bytes);
+            remaining -= maps.len();
+            self.full_rank_maps[rank] = maps;
+        }
+        self.full_rank_maps_initialized = true;
+        Ok(())
     }
 
     fn cached_context_cost_if_complete(
@@ -591,6 +616,7 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
         if let Some(cached) = self.cached_context_cost_if_complete(&basis)? {
             return Ok(cached);
         }
+        self.ensure_full_rank_maps()?;
         let mut work = ContextWork::default();
         let mut best = self.zero_cost;
         let max_rank = self.target_rank.min(basis.rows());
@@ -637,6 +663,7 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
                             self.zero_cost,
                             &mut coefficients[..rank * self.target_rank],
                             &mut rank_scratch[..rank * self.target_rank],
+                            &self.full_rank_maps[rank],
                             &mut block_data,
                             &mut work,
                         )?;
@@ -886,6 +913,46 @@ where
     Ok(())
 }
 
+fn full_rank_map_storage_bytes<F: FiniteField>(
+    rank: usize,
+    target_rank: usize,
+) -> Result<Option<usize>, ContextualError> {
+    let vector_count = checked_pow(u64::from(F::ORDER), target_rank)?;
+    let mut map_count = 1_u64;
+    for dimension in 0..rank {
+        let dependent = checked_pow(u64::from(F::ORDER), dimension)?;
+        map_count = match map_count.checked_mul(vector_count - dependent) {
+            Some(count) => count,
+            None => return Ok(None),
+        };
+    }
+    let width = match rank.checked_mul(target_rank) {
+        Some(width) => width,
+        None => return Ok(None),
+    };
+    Ok(map_count
+        .checked_mul(width as u64)
+        .and_then(|bytes| usize::try_from(bytes).ok()))
+}
+
+fn enumerate_full_rank_maps<F: FiniteField>(
+    rank: usize,
+    target_rank: usize,
+    expected_bytes: usize,
+) -> Box<[u8]> {
+    let width = rank * target_rank;
+    let mut maps = Vec::with_capacity(expected_bytes);
+    let mut coefficients = vec![0_u8; width];
+    let mut rank_scratch = vec![0_u8; width];
+    while increment_digits::<F>(&mut coefficients) {
+        if matrix_rank::<F>(&coefficients, rank, target_rank, &mut rank_scratch) == rank {
+            maps.extend_from_slice(&coefficients);
+        }
+    }
+    debug_assert_eq!(maps.len(), expected_bytes);
+    maps.into_boxed_slice()
+}
+
 #[allow(clippy::too_many_arguments)]
 fn atomic_subspace_cost<F: FiniteField>(
     subspace: &[u8],
@@ -898,11 +965,35 @@ fn atomic_subspace_cost<F: FiniteField>(
     zero_cost: u32,
     coefficients: &mut [u8],
     rank_scratch: &mut [u8],
+    full_rank_maps: &[u8],
     block_data: &mut [u8],
     work: &mut ContextWork,
 ) -> Result<u32, ContextualError> {
-    coefficients.fill(0);
     let mut best = zero_cost;
+    if !full_rank_maps.is_empty() {
+        for coefficients in full_rank_maps.chunks_exact(rank * target_rank) {
+            work.generator_candidates = work
+                .generator_candidates
+                .checked_add(1)
+                .ok_or(ContextualError::Overflow)?;
+            let cost = coefficient_map_cost::<F>(
+                subspace,
+                rank,
+                block_count,
+                target_rank,
+                inner,
+                target,
+                target_block,
+                best,
+                coefficients,
+                block_data,
+            )?;
+            best = best.min(cost);
+        }
+        return Ok(best);
+    }
+
+    coefficients.fill(0);
     while increment_digits::<F>(coefficients) {
         if matrix_rank::<F>(coefficients, rank, target_rank, rank_scratch) != rank {
             continue;
@@ -911,38 +1002,66 @@ fn atomic_subspace_cost<F: FiniteField>(
             .generator_candidates
             .checked_add(1)
             .ok_or(ContextualError::Overflow)?;
-        block_data.fill(0);
-        for block in 0..block_count {
-            let label = &mut block_data[block * target_rank..(block + 1) * target_rank];
-            for row in 0..rank {
-                let outer = subspace[row * block_count + block];
-                if outer == 0 {
-                    continue;
-                }
-                for col in 0..target_rank {
-                    label[col] = F::add(
-                        label[col],
-                        F::mul(outer, coefficients[row * target_rank + col]),
-                    );
-                }
-            }
-        }
-        let mut cost = 0u32;
-        for block in 0..block_count {
-            let label = &block_data[block * target_rank..(block + 1) * target_rank];
-            let table = if block == target_block { target } else { inner };
-            let Some(local) = table.cost_slice(label) else {
-                cost = best;
-                break;
-            };
-            cost = cost.checked_add(local).ok_or(ContextualError::Overflow)?;
-            if cost >= best {
-                break;
-            }
-        }
+        let cost = coefficient_map_cost::<F>(
+            subspace,
+            rank,
+            block_count,
+            target_rank,
+            inner,
+            target,
+            target_block,
+            best,
+            coefficients,
+            block_data,
+        )?;
         best = best.min(cost);
     }
     Ok(best)
+}
+
+#[allow(clippy::too_many_arguments)]
+#[inline]
+fn coefficient_map_cost<F: FiniteField>(
+    subspace: &[u8],
+    rank: usize,
+    block_count: usize,
+    target_rank: usize,
+    inner: &CostTable,
+    target: &CostTable,
+    target_block: usize,
+    cutoff: u32,
+    coefficients: &[u8],
+    block_data: &mut [u8],
+) -> Result<u32, ContextualError> {
+    block_data.fill(0);
+    for block in 0..block_count {
+        let label = &mut block_data[block * target_rank..(block + 1) * target_rank];
+        for row in 0..rank {
+            let outer = subspace[row * block_count + block];
+            if outer == 0 {
+                continue;
+            }
+            for col in 0..target_rank {
+                label[col] = F::add(
+                    label[col],
+                    F::mul(outer, coefficients[row * target_rank + col]),
+                );
+            }
+        }
+    }
+    let mut cost = 0u32;
+    for block in 0..block_count {
+        let label = &block_data[block * target_rank..(block + 1) * target_rank];
+        let table = if block == target_block { target } else { inner };
+        let Some(local) = table.cost_slice(label) else {
+            return Ok(cutoff);
+        };
+        cost = cost.checked_add(local).ok_or(ContextualError::Overflow)?;
+        if cost >= cutoff {
+            return Ok(cost);
+        }
+    }
+    Ok(cost)
 }
 
 fn matrix_rank<F: FiniteField>(data: &[u8], rows: usize, cols: usize, scratch: &mut [u8]) -> usize {
