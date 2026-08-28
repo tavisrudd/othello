@@ -443,6 +443,15 @@ context separator bounds, projectively complete separators, witness-lift laws,
 and compositional approximation bounds.  The broad universal statements have
 been absorbed as classical corollaries or backends.
 
+The broadest honest theorem is now a compiler-factorization law: typed
+encodings commute with every constructor and requested observations factor
+through the compiled carrier, so all contexts agree by induction.  The
+contextual quotient is the coarsest surjective instance.  Potential states,
+representative families, and provenance circuits satisfy different variants
+of the preservation diagram, while approximate passes replace equality by an
+error modulus.  This makes the classical results corollaries of one certified-
+pass framework without falsely identifying their compression mechanisms.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary

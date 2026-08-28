@@ -177,6 +177,22 @@ a small provenance DAG need not have few observational states, and a small
 state quotient need not give a small witness DAG.  The compiler report must
 attribute every reduction to the layer that caused it.
 
+The shared generalization is a compiler-law schema, not a shared data
+structure.  Every pass declares the equation it must preserve:
+
+```text
+state quotient:       encode(g(x)) = g_bar(encode(x))
+potential quotient:   encode(g(x)) = g_bar(encode(x)) + carried cocycle
+family reduction:     Opt(q, reduce(A)) = Opt(q, A) for every completion q
+provenance circuit:   evaluate(phi(DAG)) = phi(evaluate_free(DAG))
+approximate pass:     error(g(x), g(y)) <= declared composition modulus
+```
+
+Classical algorithms become verified implementations of one row.  A pipeline
+may compose them only where the output object and preservation law of one pass
+meet the input law of the next.  This is the more general Ergodis work that can
+remain useful even if every individual row is pre-empted.
+
 ## First exemplar decision
 
 The first pair should be deliberately modest and hostile to overclaiming.

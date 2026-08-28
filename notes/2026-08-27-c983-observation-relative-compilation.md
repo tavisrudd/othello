@@ -120,6 +120,49 @@ turns “formal methods” into a concrete application feature: an exact optimiz
 can ship a replayable compilation/minimality certificate even when its domain
 front end is not formally verified.
 
+### Theorem 2A: exact compiler soundness by factorization
+
+The quotient theorem is one case of a more general typed compiler law.  Let
+`A_i` be domain carriers and `B_i` compiled carriers by sort, with encodings
+`e_i : A_i -> B_i`.  For every typed constructor or generator `g:i->j`, require
+
+```text
+e_j(g_A(x)) = g_B(e_i(x)),
+```
+
+and require every requested observation to factor as
+
+```text
+Obs_A(x) = Obs_B(e_i(x)).
+```
+
+Then every well-typed generated context evaluates identically before and
+after compilation.  The proof is induction on the context construction.  If
+the compiled artifact also provides representative-domain lifts or witness
+callbacks commuting with constructors, the induction reconstructs a valid
+domain witness as well.
+
+This theorem is elementary and carries no novelty claim, but it broadens the
+backend contract correctly:
+
+- a surjective `e` is an exact quotient; the contextual quotient is coarsest
+  among observation-exact congruence quotients;
+- an injective/factored `e` may be a circuit or alternative representation
+  with no semantic state merge;
+- a potential compiler uses a compiled shape plus a scalar cocycle whose
+  combined observation diagram commutes;
+- a representative-family reducer does not encode individual states; instead
+  it proves the analogous commuting law for aggregate optimum under each
+  family operation; and
+- an approximate compiler replaces equality by a quantified error diagram and
+  must compose its error moduli.
+
+Thus Ergodis can host several classical reduction passes without pretending
+they are the same construction.  Each pass must state the object it reduces,
+the operations under which its preservation law is closed, its observation or
+query profile, and its witness/error side condition.  A pass pipeline is exact
+only when these laws compose in the chosen order.
+
 ## 2. Exact bounded tropical weighted-tree compilation
 
 Let a weighted bottom-up tree automaton have finite state set `Q`, finite ranked
