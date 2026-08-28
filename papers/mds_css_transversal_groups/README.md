@@ -21,8 +21,9 @@ For six coordinates, nonzero code-to-dual conductor is exactly
 self-association of the six-arc and hence the conic boundary.  On an explicit non-GRS pencil, one
 degree-eight quotient classifies projective and monomial-code equivalence over
 odd fields and local-Clifford and local-unitary equivalence over odd prime
-fields.  The Clebsch code supplies the worked syndrome-geometric example.
-Exact certificates cover the finite six-point calculations; the all-length
+fields.  A separate worked example distinguishes error-syndrome geometry from
+the parity-check conic criterion.  Exact certificates cover the finite
+six-point calculations; the all-length
 multiplier and group theorems are conceptual.
 
 Build and verify from this directory:

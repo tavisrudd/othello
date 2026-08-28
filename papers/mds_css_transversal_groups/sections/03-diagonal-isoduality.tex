@@ -1,4 +1,4 @@
-\section{Exact MDS--CSS logical images and lifts}
+\section{Exact MDS--CSS transversal logical groups}
 \label{sec:exact-logical}
 
 The classification rests on one standard MDS conductor statement.  It
@@ -89,17 +89,13 @@ D_\beta C^\perp\subseteq C,&D_\delta C^\perp\subseteq C^\perp.
 These are respectively the \(X\mathbin\to X\), \(X\mathbin\to Z\),
 \(Z\mathbin\to X\), and \(Z\mathbin\to Z\) preservation conditions.
 
-Put
-\[
- A_C=\Cond(C,C),\qquad
- B_C=\Cond(C^\perp,C),\qquad D_C=\Cond(C,C^\perp),
-\]
-and define the \emph{coordinatewise endomorphism algebra}
+To collect the four standard conductor spaces in one object, define the
+\emph{algebra of coordinatewise endomorphisms}
 \begin{equation}\label{eq:css-endomorphism-algebra}
  \mathcal A_C=
  \begin{pmatrix}
-  A_C&B_C\\
-  D_C&\Cond(C^\perp,C^\perp)
+  \Cond(C,C)&\Cond(C^\perp,C)\\
+  \Cond(C,C^\perp)&\Cond(C^\perp,C^\perp)
  \end{pmatrix}
  \subseteq M_2(\F_q^{2m}),
 \end{equation}
@@ -111,7 +107,7 @@ The algebra \(\mathcal A_C\) is exactly the algebra of sitewise
 \(\F_q\)-linear Pauli-label maps preserving
 \(L_C=C_X\oplus C_Z^\perp\), and
 \[
- A_C=\Cond(C^\perp,C^\perp)=\F_q\mathbf1.
+ \Cond(C,C)=\Cond(C^\perp,C^\perp)=\F_q\mathbf1.
 \]
 If \(\Cond(C,C^\perp)=0\), then
 \(\mathcal A_C\cong\F_q\times\F_q\).  Otherwise, after choosing
@@ -131,20 +127,23 @@ The coordinatewise determinant-one units are respectively \(T\) and
 The four entries in \eqref{eq:css-endomorphism-algebra} are precisely the
 four inclusions in \eqref{eq:block-preservation}.  They are closed under
 coordinatewise matrix multiplication: for example,
-\(B_C\star D_C\subseteq A_C\), because multiplication first
-sends \(C\) into \(C^\perp\) and then back into \(C\).  The other products
-are identical.  The conductor identity \eqref{eq:conductor-schur-dual} gives
 \[
- A_C=(C\star C^\perp)^\perp
+ \Cond(C^\perp,C)\star\Cond(C,C^\perp)\subseteq\Cond(C,C),
+\]
+because multiplication first sends \(C\) into \(C^\perp\) and then back
+into \(C\).  The other products are identical.  The conductor identity
+\eqref{eq:conductor-schur-dual} gives
+\[
+ \Cond(C,C)=(C\star C^\perp)^\perp
  =\Cond(C^\perp,C^\perp),
 \]
 and Proposition~\ref{prop:diagonal-multiplier-line} makes this common algebra
-the scalar line.  If \(D_C=\F_qs\) is nonzero, then \(s\) has full support
-and \(B_C=\F_qs^{-1}\); the converse follows in the same way.  Thus the two
-off-diagonal conductors either both vanish or are these two inverse lines.
-This gives the two displayed algebra types.  In the matrix-algebra case the
-determinant at every coordinate is \(ad-bc\); in the split case it is
-\(ad\).  Imposing determinant one proves the final statement.
+the scalar line.  If \(\Cond(C,C^\perp)=\F_qs\) is nonzero, then \(s\) has
+full support and \(\Cond(C^\perp,C)=\F_qs^{-1}\); the converse follows in
+the same way.  Thus the two off-diagonal conductors either both vanish or are
+these two inverse lines.  This gives the two displayed algebra types.  In the
+matrix-algebra case the determinant at every coordinate is \(ad-bc\); in the
+split case it is \(ad\).  Imposing determinant one proves the final statement.
 \end{proof}
 
 The proposition packages the block calculation into the split-algebra versus
@@ -216,13 +215,8 @@ evaluation point at length \(q+1\)
 branch diagonally equivalent to its dual, although the proof uses no
 evaluation structure.
 
-\subsection{Twisted diagonal realization}
-
-The classification allows different one-qudit Clifford factors at different
-coordinates.  We now ask when local changes of Clifford frame can make the
-physical implementation uniform.
-
-There are two refinements of this projective statement.
+\begin{proposition}[Site-dependent realization]
+\label{prop:site-dependent-realization}
 Fix an input coordinate \(j\), put \(t_i=s_i/s_j\), and write
 \[
  A=\begin{pmatrix}a&b\\c&d\end{pmatrix}\in\mathrm{SL}_2(q).
@@ -236,78 +230,29 @@ Propagation to coordinate \(i\) is the twisted diagonal embedding
  A
  \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.
 \end{equation}
-Thus every \(\phi_i\) is a homomorphism, \(\phi_j\) is the identity,
-and the elementary matrices in \eqref{eq:duality-shears} satisfy all
-\(\mathrm{SL}_2(q)\) relations coordinatewise.  This calculation also
-applies at the extended evaluation point.  It uses only the diagonal
-duality \(SC=C^\perp\), not the evaluation formula for a GRS code.
-Conjugation by \(\diag(1,t_i)\) is inner on \(\mathrm{SL}_2(q)\) exactly
-when \(t_i\) is a square: the centralizer of \(\mathrm{SL}_2(q)\) in
-\(\mathrm{GL}_2(q)\) is scalar, and a scalar multiple of this diagonal
-matrix has determinant one exactly in the square case.  Since \(t_j=1\), if
-some \(t_i\) is nonsquare then the propagated action cannot be made uniform
-by fixed local Clifford frame changes; its \(i\)-th factor represents the
-diagonal outer automorphism.  Equivalently, the obstruction is the relative
-class of \(t_i\) in
+The realization can be made uniform by fixed local Clifford frame changes if
+and only if every ratio \(t_i\) is a square.  Equivalently, its obstruction is
+the determinant square class, recorded by the relative classes in
 \[
  \mathrm{PGL}_2(q)/\mathrm{PSL}_2(q)
  \cong\F_q^\times/(\F_q^\times)^2.
 \]
-Thus fixed local Clifford frames make the realization uniform exactly when
-all ratios \(s_i/s_j\) are squares.  Indeed, a change of local Clifford frame
-conjugates \(\phi_i\) by an element of \(\mathrm{SL}_2(q)\), so \(\phi_i\)
-can be changed to the input embedding precisely when its outer-automorphism
-class is trivial.
+Here \(\mathrm{PGL}_2(q)=\mathrm{GL}_2(q)/\F_q^\times\), and
+\(\mathrm{PSL}_2(q)\) is the image of \(\mathrm{SL}_2(q)\) in that quotient.
+\end{proposition}
 
-\subsection{Coherent lifts and the affine obstruction}
+\begin{proof}
+A fixed local Clifford frame change conjugates \(\phi_i\) by an element of
+\(\mathrm{SL}_2(q)\).  Conjugation by \(\diag(1,t_i)\) is inner precisely
+when that matrix is scalar-equivalent to an element of
+\(\mathrm{SL}_2(q)\), equivalently when \(t_i\) is a square.  Since
+\(t_j=1\), all propagated embeddings can be matched to the input embedding
+exactly when every ratio has trivial determinant square class.
+\end{proof}
 
-The projective classification records how a logical gate acts on Pauli labels,
-but a physical implementation must choose actual unitary phases.  We now ask
-whether the projective \(\mathrm{SL}_2(q)\) action admits physical
-representatives whose phases can be chosen coherently, so that multiplication
-of logical gates is respected exactly.
-
-For the present odd prime \(q\), and more generally for any odd prime
-power, the finite Stone--von Neumann representation of the Heisenberg
-group \(H_q\) extends to a genuine representation of
-\(\mathrm{SL}_2(q)\ltimes H_q\)
-\cite[Theorem~1]{Gerardin1976}.\footnote{The exceptional uniqueness clause at
-\(q=3\) in G\'erardin's theorem does not affect existence.}  Apply its Weil factor to each
-\(\phi_i(A)\).  The resulting tensor product is multiplicative in
-\(A\).  In the symmetric Weyl convention
-\(D_{a,b}=\chi(ab/2)X(a)Z(b)\), a CSS label \((c,h)\in C\oplus C^\perp\)
-has tensor lift
-\[
- \bigotimes_iD_{c_i,h_i}
- =\chi(c\mathbin{\cdot}h/2)X(c)Z(h)=X(c)Z(h),
-\]
-because \(c\mathbin{\cdot}h=0\).  Exact Egorov covariance therefore
-preserves the CSS stabilizer group with its trivial character, and hence
-the state ray, rather than only its projective label space.
-Consequently the one-qudit Clifford scalar extension, restricted to the
-linear \(\mathrm{SL}_2(q)\) factor, splits coherently with the propagated
-tensor symmetries.
-
-The affine extension does not split.  Choose \(a,b\in\F_q\) with
-\(\chi(ab)\ne1\), and put \(X=X(a)\), \(Z=Z(b)\).  Their projective
-classes commute, whereas every choice of unitary representatives
-satisfies
-\[
- ZX=\chi(ab)XZ,\qquad \chi(ab)\ne1 .
-\]
-Scalar changes of \(X\) and \(Z\) do not change their commutator.
-Hence the translation subgroup
-\(\F_q^2\) has no homomorphic lift to the one-qudit unitary Clifford
-group.  The coherent lift above is therefore
-\(H_q\rtimes\mathrm{SL}_2(q)\), not a section of
-\(\F_q^2\rtimes\mathrm{SL}_2(q)\) through the scalar quotient.
-This is the Heisenberg central extension, not a residual metaplectic
-or Schur-multiplier obstruction on \(\mathrm{SL}_2(q)\).
-
-\begin{remark}[Coordinate permutations]
-Neither lift question decides what happens when physical coordinates may be
-permuted.  That is a separate extension of the fixed-coordinate projective
-group by the realized coordinate-permutation group.  Appendix
-\ref{sec:party-extensions} states its splitting criterion and gives computed
-examples.
-\end{remark}
+The formula is the reason for allowing the one-qudit factor to depend on the
+coordinate: a common logical matrix generally propagates through inequivalent
+local Clifford frames.  Appendix~\ref{sec:lift-refinements} gives further
+details and records two phase refinements.  The linear
+\(\mathrm{SL}_2(q)\) factor admits coherent Weil lifts, whereas adjoining
+logical Pauli translations gives the nonsplit Heisenberg central extension.

@@ -153,7 +153,7 @@ of the integral \(H_3\) (icosahedral) sextuple
 \]
 is a six-arc.  Write \(k=\mathbb Z[\tau]/\mathfrak p\).  If the reduced
 arc is non-GRS, put \(q=\lvert k\rvert\).  Its
-equal-phase state is not LU-equivalent, even after party permutation, to
+equal-phase state is not LU-equivalent, even after a tensor-factor permutation, to
 any six-point GRS state over \(k\).  (The hypothesis is vacuous in
 characteristic five, where the reduction is itself GRS.)
 \end{theorem}
@@ -186,8 +186,9 @@ The marginal incidence recovers its \(S_5\) stabilizer but forgets the
 even \(A_5\) orientation.  This is necessary: full local Fourier
 transform sends \(\Psi_C\) to \(\Psi_{C^\perp}\), and an integral
 diagonal equivalence to the dual returns the \(H_3\) code through an odd pentad permutation in every
-odd reduction.  The orientation is an LC-forgettable CSS
-electric/magnetic marking, not a separate LU class.
+odd reduction.  The orientation records which CSS summand is designated
+\(X\) and which is designated \(Z\); local Clifford equivalence forgets this
+choice, so it does not define a separate local-unitary class.
 
 \subsection{The exact dimension-thirteen four-copy witness}
 
@@ -199,7 +200,7 @@ Use the permutation contraction
 \begin{theorem}[Exact four-copy separator at \(q=13\)]
 \label{thm:q13-lu}
 The two regular \(q=13\) pencil classes with \(z=4\) and \(z=12\) are
-not local-unitary equivalent, even after arbitrary party permutation.
+not local-unitary equivalent, even after an arbitrary tensor-factor permutation.
 \end{theorem}
 
 \begin{proof}
@@ -212,7 +213,7 @@ Use the explicit four-copy pattern
 For \(\pi\in S_6\), put
 \((\pi\boldsymbol\sigma)_i=\sigma_{\pi^{-1}(i)}\), and sum
 \eqref{eq:permutation-contraction}
-over all party permutations:
+over all tensor-factor permutations:
 \[
  J_{\boldsymbol\sigma}(\Psi)
    =\sum_{\pi\in S_6}I_{\pi\boldsymbol\sigma}(\Psi).

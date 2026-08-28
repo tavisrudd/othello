@@ -1,0 +1,119 @@
+\section{Syndrome geometry of a six-point example}
+\label{sec:six-point-example}
+
+This appendix changes from transversal gates to translated-state error
+geometry.  Its conic lies in an error-syndrome plane and must not be confused
+with the parity-check conic of Section~\ref{sec:logical}.  The example occurs
+in the pencil of Section~\ref{sec:pencil}: over \(\F_{11}\), the parameter
+\(t=2\) has \(z=1\) and gives the code called the Clebsch or \(H_3\) code in
+\cite{RuddClebsch2026}.  The following lemma supplies the coding-theoretic
+dictionary.
+
+\begin{lemma}[Coset states and three-party syndrome charts]
+\label{lem:coset-syndrome-charts}
+Let \(H\) be a rank-three parity-check matrix whose six columns form an
+arc, put \(C=\ker H\), and set
+\[
+ |\Psi_e\rangle=X(e)|\Psi_C\rangle,
+ \qquad
+ |\Psi_C\rangle=q^{-3/2}\sum_{c\in C}|c\rangle .
+\]
+Then \(|\Psi_e\rangle=|\Psi_f\rangle\) if and only if \(e-f\in C\),
+and states from distinct cosets are orthogonal.  In the row basis of
+\(H\), the \(Z(C^\perp)\)-stabilizer syndrome of
+\(|\Psi_e\rangle\) is \(He^{\mathsf T}\).
+Consequently the least support of an \(X\)-operator producing
+\(|\Psi_e\rangle\) is the minimum Hamming weight in \(e+C\).
+
+For every syndrome \(s\in\F_q^3\) and every three-party set \(I\),
+there is a unique representative \(e\) supported in \(I\) with
+\(He^{\mathsf T}=s\).  If the coset with syndrome \(s\) has minimum
+weight three, this representative has support exactly \(I\).
+\end{lemma}
+
+\begin{proof}
+Translation replaces the computational support \(C\) by the affine coset
+\(e+C\).  Two such supports are equal precisely when \(e-f\in C\);
+otherwise they are disjoint, which also proves orthogonality.  If \(h\) is
+a row of \(H\), then \(h\in C^\perp\), and \(Z(h)\) acts on the entire
+coset \(e+C\) by the character \(\chi(h\mathbin\cdot e)\).  Reading this
+for the three rows of \(H\) gives \(He^{\mathsf T}\).
+
+Now fix \(I\).  The arc condition says exactly that the three columns in
+\(I\) form an invertible matrix \(H_I\).  Thus
+\(H_Ie_I^{\mathsf T}=s\) has one solution, and extension by zero gives
+the unique representative supported in \(I\).  If one of its three
+coordinates vanished, the same syndrome would have a representative of
+weight at most two.  A minimum weight-three syndrome therefore uses all
+three coordinates.
+\end{proof}
+
+\begin{proposition}[Extremal \(X\)-syndrome conic]
+\label{prop:clebsch-x-syndrome}
+Let \(H\) be a parity-check matrix whose columns are the Clebsch six-arc
+in \(\PP^2(\F_{11})\), put \(C=\ker H\), and write
+\[
+ |\Psi_e\rangle=X(e)|\Psi_C\rangle,
+ \qquad
+ |\Psi_C\rangle=11^{-3/2}\sum_{c\in C}|c\rangle .
+\]
+The syndromes whose cosets have minimum \(X\)-support three are the 120
+nonzero vectors on twelve projective rays forming a nonsingular conic in
+\(\PP^2(\F_{11})\).  Each such syndrome has exactly one weight-three
+representative on each of the \(\binom63=20\) three-party supports.  The
+monomial automorphism group
+\(C_{10}\times A_5\) is transitive on the 120 syndromes: \(A_5\) is
+transitive on the twelve rays with point stabilizer \(C_5\), and
+\(C_{10}\) is transitive on the ten nonzero vectors of each ray.
+Nevertheless, the defining six-arc is nonconic, so the fixed-coordinate
+logical symplectic image of every encoder view is the split torus \(T\),
+not \(\mathrm{SL}_2(11)\).
+\end{proposition}
+
+\begin{proof}
+Lemma~\ref{lem:coset-syndrome-charts} identifies minimum \(X\)-support
+with coset-leader weight and gives one representative on every
+three-party support.  The Clebsch deep-hole theorem identifies the covering
+radius as three and the twelve projective maximum-distance syndromes with a
+nonsingular conic; it also gives the transitive \(C_{10}\times A_5\) action
+\cite[Proposition~6.2, Corollary~6.3, and Proposition~6.4]{RuddClebsch2026}.
+Finally, the defining arc is non-GRS and hence nonconic.  The last assertion
+is therefore Theorem~\ref{thm:logical-phase} at \(q=11\).
+\end{proof}
+
+\begin{remark}[Error symmetry without fixed-coordinate duality]
+\label{rem:clebsch-x-syndrome-boundary}
+The one-per-support statement means that the same extremal translated state
+can be created by a minimum \(X\)-operator on either side of every balanced
+\(3\mid3\) cut.  The conic belongs to the \(X\)-error syndrome plane; it
+does not put the six parity-check columns on a conic.  Thus a highly symmetric
+error shell need not supply a Fourier block exchanging \(X\) and \(Z\) in the
+fixed-coordinate transversal group.
+
+Changing the row basis of \(H\) changes the displayed conic by a projective
+coordinate transformation.  The covering radius concerns only
+generalized-\(X\) translates of the six-leg AME state; it does not say that
+the associated \([[5,1,3]]_{11}\) output code corrects arbitrary weight-three
+errors.  Theorem~\ref{thm:lu-lc-rigidity} supplies the separate exact rigidity
+statement: every product-unitary intertwiner from this tensor to a stabilizer
+AME tensor is Clifford factor by factor.
+\end{remark}
+
+\begin{remark}[Coordinate permutations]
+In the corresponding row of Corollary~\ref{cor:computed-party-splitting}, the
+factor \(C_{10}\) scales the ten nonzero syndrome vectors on each ray and
+disappears after projectivization.  The remaining \(A_5\) is the projective
+monomial quotient, whereas \(S_5\) is the larger realized coordinate image.
+Odd coordinate motion inverts \(T\) and supplies the nontrivial class of
+\(N(T)/T\).
+\end{remark}
+
+A different MDS uniformity governs operator pushing.  Fix an input coordinate
+and a nonidentity Pauli label.  Each of the ten four-sets containing that
+coordinate carries a unique stabilizer representative with that support;
+removing the input leaves a weight-three output Pauli.  Thus a fixed input
+Pauli has ten minimum-support pushes.  Lemma~\ref{lem:coset-syndrome-charts}
+instead fixes an \(X\)-syndrome and varies over all twenty three-coordinate
+supports.  The comparison separates two uses of MDS uniformity and explains
+why symmetry of the error-syndrome shell does not enlarge the
+fixed-coordinate logical group.

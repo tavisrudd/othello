@@ -1,10 +1,10 @@
 \section{Verification and scope}\label{sec:verification}
 
-The all-length conductor lemma and transversal-group dichotomy are proved
-in the text and use no finite enumeration.  Exactness invokes the imported
-transversal Clifford no-go, the encoder consequence of stabilizer-AME
-rigidity.  The construction also uses the imported stabilizer-character
-correction \cite{RuddAMEStabilizerRigidity2026}.
+This appendix audits proof dependencies; it is not needed to follow the
+all-length classification.  The conductor lemma and group dichotomy are
+proved in the text without finite enumeration.  Exactness uses the imported
+transversal Clifford no-go, and the construction uses the imported
+stabilizer-character correction \cite{RuddAMEStabilizerRigidity2026}.
 
 \begin{table}[H]
 \centering
@@ -18,7 +18,7 @@ Exact fixed-coordinate group & proved here & block preservation, explicit unipot
 Six-point conic criterion & proved here & MDS--CSS dictionary and Gale-transform argument & none \\
 Pencil quotient & proved here; finite step certificate-assisted & symbolic bracket identities and exact transition-map enumeration & imported minimum-support transition theorem; certificate replay for the enumeration \\
 Frobenius-sector formulas & proved here & direct finite-field algebra & no complete extension-field orbit classification \\
-Clebsch application & consequence & syndrome lemma composed with the cited Clebsch deep-hole theorem & cited conic, count, and orbit result \\
+Six-point syndrome example & consequence & syndrome lemma composed with a cited deep-hole theorem & cited conic, count, and orbit result \\
 Scalar separators and transport divisor & proved here; certificate-assisted & exact generators, compact witnesses, and independent replay & finite exact computation \\
 Coordinate-permutation extensions & computed; certificate-assisted & exhaustive permutation checks and explicit complements & no general classification beyond the listed cases \\
 Formalization & partial & Lean kernel checking & hypothesis-explicit interfaces and three trusted finite cardinality evaluations \\

@@ -1,11 +1,12 @@
-\section{The non-GRS pencil and its quotient}\label{sec:pencil}
+\section{A non-GRS pencil and its quotient}
+\label{sec:pencil}
 
-We now study a one-parameter family of six-point MDS codes for which the
-projective equivalence problem can be solved explicitly.  The family contains
-the Clebsch example over \(\F_{11}\), meets the conic/GRS locus in a visible
-divisor, and retains nontrivial projective variation away from that divisor.
-It therefore gives a concrete test of how the all-length group theorem
-interacts with six-point geometry.
+We next give a substantial six-point application.  The family below contains
+both conic and nonconic members and retains nontrivial projective variation
+away from the conic divisor.  It is useful because its projective equivalence
+problem has an explicit one-dimensional quotient, so the geometric branch of
+the all-length theorem can be seen in a complete family rather than at an
+isolated code.
 
 Over a finite field of odd order, put
 \[
@@ -24,36 +25,39 @@ intermediate coordinate
  y(t)=\frac{(t-1)^2}{t}
 \]
 is generically two-to-one in \(t\), and projective equivalence identifies
-\(y\) with \(\pm y^{\pm1}\).  The function
-\(z=(y-y^{-1})^2/16\) is invariant under these four transformations, so the
-map \(t\mapsto z\) is generically eight-to-one.  The proof below shows that
-these are all projective identifications.
+\(y\) with \(\pm y^{\pm1}\).  Since
+\(z=(y-y^{-1})^2/16\), the map \(t\mapsto z\) is generically eight-to-one.
 
-Also put
+The admissibility conditions have separate meanings.  The factors
+\(t(t-1)(t^2-t+1)(t^2-3t+1)\) exclude arc degenerations and singularities of
+the displayed quotient coordinates.  The factor
 \[
-G(t)=t^4-4t^3+7t^2-4t+1.
+ G(t)=t^4-4t^3+7t^2-4t+1
 \]
-The factors have two distinct roles.  The conditions
-\(t(t-1)(t^2-t+1)(t^2-3t+1)\ne0\) keep the six columns in arc position and
-make the displayed quotient coordinates nonzero and defined.  The remaining
-condition \(G(t)\ne0\) removes the conic, equivalently GRS, locus.  Define the
-regular non-GRS parameter set
+cuts out the conic, equivalently GRS, locus.  Define the regular non-GRS set
 \begin{equation}\label{eq:regular-pencil-locus}
  \mathcal U=
  \{t:t(t-1)(t^2-t+1)(t^2-3t+1)G(t)\ne0\}.
 \end{equation}
-Indeed, factoring the twenty \(3\)-by-\(3\) column minors gives the first four
+Factoring the twenty \(3\)-by-\(3\) column minors gives the first four
 factors, while the determinant for a conic through the six columns is a unit
 times \(G\).  For \(t\in\mathcal U\), write
 \(C_t=\ker H_t\) and \(\Psi_t=\Psi_{C_t}\).
 
-\begin{theorem}[Projective and Clifford quotient]\label{thm:lc-pencil}
+Here \(\sim_{\mathrm{proj}}\) means projective equivalence of the six-point
+configurations after independent column rescaling and coordinate permutation;
+\(\sim_{\mathrm{mon}}\) is monomial code equivalence; and
+\(\sim_{\LC}\), \(\sim_{\LU}\) allow tensor-factor permutations followed by
+products of one-qudit Clifford or unitary operators, respectively.
+
+\begin{theorem}[Projective and Clifford quotient]
+\label{thm:lc-pencil}
 For \(t,u\in\mathcal U\), the following are equivalent:
 \[
 H_t\sim_{\mathrm{proj}}H_u,\qquad
 C_t\sim_{\mathrm{mon}}C_u,\qquad z(t)=z(u),
 \]
-allowing arbitrary party permutations.  If \(q\) is prime, these are
+allowing arbitrary relabelings of the six coordinates.  If \(q\) is prime, these are
 also equivalent to \(\Psi_t\sim_{\LC}\Psi_u\).
 \end{theorem}
 
@@ -67,186 +71,60 @@ If \(q\) is an odd prime and \(t,u\in\mathcal U\), then
  \Longleftrightarrow \Psi_t\sim_{\LU}\Psi_u
  \Longleftrightarrow z(t)=z(u),
 \]
-where every equivalence allows a party permutation.
+where the code and point relabeling is the corresponding tensor-factor
+permutation for the quantum states.
 \end{corollary}
 
 \AMEFigureSix
 
-\begin{proof}
-\medskip\noindent\emph{Projective quotient.}
-With \(y=(t-1)^2/t\), one has
-\(A=-4t^2y\), \(B=t^2(y^2-1)\), and
+\begin{proof}[Proof of Theorem~\ref{thm:lc-pencil}]
+The proof has two independent recovery steps.  First, equality of \(z\) is
+equivalent to the residual orbit relation
+\(y(u)\in\{\pm y(t)^{\pm1}\}\).  Each of these four relations is realized by
+an explicit projectivity and coordinate permutation.  For the converse,
+write \([ijk]\) for the determinant of columns \(i,j,k\).  The ten signed
+products \([ijk][\ell mn]\) over complementary triples have multiplicity
+pattern
 \[
- z=\frac{(y-y^{-1})^2}{16}.
+ \{+A,+A,+A,-A,-A,-A,+B,+B,-B,-B\},
 \]
-It follows that \(z(t)=z(u)\) exactly when
-\begin{equation}\label{eq:pencil-y-orbit}
- y(u)\in\{y(t),-y(t),y(t)^{-1},-y(t)^{-1}\}.
-\end{equation}
-Each of the four relations is realized by a direct projectivity and a
-party permutation.  In order, one may use
+which recovers \((B/A)^2=z\), including the collision \(z=1\).  This proves
+the projective classification and, through the MDS dictionary of
+Section~\ref{sec:dictionary}, the monomial-code classification.  These
+claims are Proposition~\ref{prop:pencil-projective-recovery}, whose proof in
+Appendix~\ref{sec:pencil-calculations} lists all four projectivities and
+checks the bracket invariant.
+
+For prime \(q\), Theorem~\ref{thm:minimum-support-transitions} assigns a
+two-dimensional stabilizer-label space to every four-coordinate support.
+Projection identifies that space with the Pauli-label plane at each retained
+coordinate.  Composing one such identification with the inverse of another
+gives a transition map, and closed chains of transitions give endomorphisms
+\(M\) of a local Pauli-label plane.  Their projective conjugacy invariant is
 \[
-\begin{array}{c|c}
-\text{relation}&\text{projectivity}\\ \hline
-y(u)=y(t)&\diag(1,(1-u)/(1-t),u/t)\\
-y(u)=-y(t)&\diag(1,(1-u)/(1-t),-u/t)\\
-y(u)=y(t)^{-1}&
-\begin{psmallmatrix}1&0&0\\0&0&(u-1)/t\\0&-u/(1-t)&0\end{psmallmatrix}\\
-y(u)=-y(t)^{-1}&
-\begin{psmallmatrix}1&0&0\\0&0&(1-u)/t\\0&-u/(1-t)&0\end{psmallmatrix}.
-\end{array}
+ r(M)=\Tr(M)^2/\det M,
 \]
-The corresponding permutations are respectively the identity,
-\((5\,6)\), \((3\,5)(4\,6)\), and \((3\,5\,4\,6)\).
-All denominators and determinants are nonzero on \(\mathcal U\).
-
-Conversely, the ten signed products of complementary \(3\)-by-\(3\)
-brackets of \(H_t\) form the multiset
-\begin{equation}\label{eq:complementary-bracket-multiset}
-\{+A,+A,+A,-A,-A,-A,+B,+B,-B,-B\}.
-\end{equation}
-Projectivity and independent column rescaling multiply all ten products
-by one common scalar; party permutation changes at most their common
-sign.  On \(\mathcal U\), \(A,B\ne0\).  If \(A^2\ne B^2\), the
-multiplicities three and two in
-\eqref{eq:complementary-bracket-multiset} distinguish the two opposite
-pairs and recover \((B/A)^2=z\).  If \(A^2=B^2\), the multiset instead
-collapses to two opposite values, each of multiplicity five.  That
-collapsed pattern is itself invariant under the common scaling and sign,
-and it is equivalent to \(z=1\).  Thus the multiset recovers \(z\) in
-both cases, and projective equivalence forces equality of \(z\).
-The equivalence with monomial codes follows from
-Section~\ref{sec:dictionary}, and projective equivalence supplies an LC
-equivalence.
-
-\medskip\noindent\emph{Recovery from minimum-support transitions.}
-We now specialize the imported minimum-support transition theorem to \(m=3\).
-Its contribution is a canonical atlas of two-dimensional stabilizer planes,
-one for each four-party support.  Each plane identifies with the local
-Pauli-label plane at any party in its support, and the supported planes
-generate the full stabilizer label group.  Overlaps therefore supply
-coordinate changes between local Weyl frames.  Composing two such changes
-gives holonomy data intrinsic up to local symplectic conjugacy.
-
-For the remaining direction assume that \(q\) is prime.  Then a local
-Clifford induces a block \(F_i\in\mathrm{SL}_2(q)\) on each local
-Pauli-label plane.  Put \(K_T=L_{C_t}(T)\) for every four-set
-\(T\).  If \(i,j\in T\), the imported minimum-support theorem says that projection
-\(p_i:K_T\to\F_q^2\) onto the Pauli-label plane at \(i\) is an isomorphism.
-Define the transition
-\[
- M_T(i,j)=p_jp_i^{-1}:(\F_q^2)_i\longrightarrow(\F_q^2)_j
-\]
-and, for distinct four-sets \(T,U\) containing \(i,j\), the holonomy
-\begin{equation}\label{eq:minimum-support-holonomy}
- \operatorname{Hol}(T,U;i,j)=M_U(j,i)M_T(i,j).
-\end{equation}
-Local symplectic blocks \(F_i\) send this endomorphism to
-\(F_i\operatorname{Hol}F_i^{-1}\).  Reversing \(T,U\) takes its inverse,
-and a party permutation only relabels the data.  Thus the multiset of
-\[
- r(M)=\Tr(M)^2/\det M
-\]
-over the \(15\cdot6\cdot5=450\) choices is an LC and party-permutation
-invariant: it is unchanged by conjugation and scalar multiplication, and it
-also agrees for \(M\) and \(M^{-1}\).  It is therefore the right quantity for
-the atlas: it survives a change of local frame, a rescaling of a transition,
-and a reversal of the loop.
-
-Exact substitution in \eqref{eq:minimum-support-holonomy} puts these values
-into finitely many symbolic families.  Their complete multiplicity and
-collision bookkeeping is recorded in Appendix
-\ref{sec:holonomy-certificate} and replayed by the paper-local certificate.
-One family has value \(-1/z\), and its multiplicity identifies that value
-canonically even after specializations cause families to collide.  The atlas
-therefore recovers \(-1/z\), so LC equivalence forces equality of \(z\).
+which is unchanged by conjugation, scalar multiplication, and inversion.
+Its multiplicity data recover \(-1/z\), so local-Clifford equivalence also
+forces equality of \(z\).  This is
+Proposition~\ref{prop:pencil-holonomy-recovery}; its proof in
+Appendix~\ref{sec:pencil-calculations} defines the transition maps, and
+Appendix~\ref{sec:holonomy-certificate} records the exact collision
+bookkeeping and certificate boundary.  Projective equivalence directly
+supplies a local-Clifford equivalence.
 \end{proof}
-
-The map \(t\mapsto z\) has degree eight: the four transformations in
-\eqref{eq:pencil-y-orbit}, followed by the quadratic relation
-\(t+t^{-1}=y+2\), account for its eight sheets.  The signed refinement
-\(w=B/A\), \(z=w^2\), is not quantum data.  Both even and odd explicit
-party permutations reverse \(w\), and their projectivities lift to
-monomial local Cliffords.
 
 \begin{proof}[Proof of Corollary~\ref{cor:lu-lc-pencil}]
-Theorem~\ref{thm:lc-pencil} gives all equivalences except LU.  Every LC is
-an LU, while Theorem~\ref{thm:lu-lc-rigidity} turns every LU intertwiner
-between the states \(\Psi_t,\Psi_u\) into an LC intertwiner.
+Theorem~\ref{thm:lc-pencil} gives all equivalences except local-unitary
+equivalence.  Every local Clifford is local unitary, while
+Theorem~\ref{thm:lu-lc-rigidity} turns every product-unitary intertwiner
+between \(\Psi_t\) and \(\Psi_u\) into a product-Clifford intertwiner.
 \end{proof}
 
-\subsection{Extension-field caveat}
-
-The projective quotient remains field-theoretic over odd extensions, but the
-prime-field LC/LU statement does not: Frobenius maps are additional local
-Clifford operations.  The following proposition records the scalar conditions
-for the two Frobenius sectors without asserting a complete extension-field
-classification.
-
-\begin{proposition}[Frobenius-sector divisors]
-\label{prop:frobenius-sector-divisors}
-Let \(\sigma\) be an automorphism of a finite field of odd order and let
-\(t\in\mathcal U\).  Put
-\[
- E_\sigma(t)=(\sigma(t)-t)(1-\sigma(t)t),\qquad
- D_\sigma(t)=((1-\sigma(t))(1-t))^2+\sigma(t)t.
-\]
-Then
-\begin{equation}\label{eq:frobenius-diagonal-sector}
- \frac{\sigma(t)}{(1-\sigma(t))^2}
-   =\frac{t}{(1-t)^2}
- \quad\Longleftrightarrow\quad E_\sigma(t)=0.
-\end{equation}
-If \(h=(1-\sigma(t))(1-t)\) and
-\(w=(-h,-h,1,1,-1,-1)\), then
-\begin{equation}\label{eq:frobenius-gale-sector}
- H_{\sigma(t)}\diag(w)H_t^{\mathsf T}=0
- \quad\Longleftrightarrow\quad D_\sigma(t)=0.
-\end{equation}
-Also \(D_{\mathrm{id}}(t)=G(t)\), and
-\begin{equation}\label{eq:frobenius-sector-disjointness}
- E_\sigma(t)=0\quad\Longrightarrow\quad D_\sigma(t)\ne0.
-\end{equation}
-Finally \(G,A,B,z\) commute with \(\sigma\), and \(\sigma\) preserves the
-regular non-GRS locus \(\mathcal U\).
-\end{proposition}
-
-\begin{proof}
-Membership in \(\mathcal U\) gives \(t\ne1\), and injectivity of \(\sigma\) gives
-\(\sigma(t)\ne1\).  Cross multiplication in
-\eqref{eq:frobenius-diagonal-sector} gives
-\[
- s(1-t)^2-t(1-s)^2=(s-t)(1-st)
-\]
-with \(s=\sigma(t)\).  Direct multiplication in
-\eqref{eq:frobenius-gale-sector} makes eight
-entries vanish identically and leaves \(-2D_\sigma(t)\) in the last
-entry; odd characteristic gives the equivalence.  Setting \(\sigma\) to
-the identity yields \(D_{\mathrm{id}}=G\).
-
-If \(E_\sigma(t)=0\), then either \(\sigma(t)=t\) or
-\(\sigma(t)t=1\).  In the first case \(D_\sigma(t)=G(t)\).  In the
-second, multiplying \(D_\sigma(t)\) by \(t^2\) gives \(G(t)\).
-Membership in \(\mathcal U\) excludes \(t=0\) and \(G(t)=0\), proving
-\eqref{eq:frobenius-sector-disjointness}.
-The equivariance statements follow by applying \(\sigma\) to the
-defining polynomial and rational expressions.
-\end{proof}
-
-The prime-field hypothesis is necessary for this scalar classification.
-Over \(\F_{p^e}\), the basis permutation
-\(\lvert x\rangle\mapsto\lvert x^p\rangle\) is a local Clifford and sends
-\(\Psi_t\) to \(\Psi_{t^p}\), while \(z(t^p)=z(t)^p\) need not equal
-\(z(t)\).  Concretely, in
-\(\F_{25}=\F_5[s]/(s^2-2)\), both \(s\) and \(-s=s^5\) lie in
-\(\mathcal U\), but
-\[
- z(s)=3+3s,\qquad z(-s)=3+2s.
-\]
-For each field automorphism \(\sigma\),
-Proposition~\ref{prop:frobenius-sector-divisors} gives the collision and
-diagonal-equivalence divisors relating \(t\) to \(\sigma(t)\).  It does not
-show that an arbitrary additive local Clifford determines a nontrivial
-field automorphism, nor does it construct a local Clifford from a Galois
-match of \(z\).  Those two representation-theoretic bridges are not
-claimed here, so neither is a full extension-field LC/LU classification.
+The projective quotient remains valid over odd extension fields, but the
+local-Clifford and local-unitary conclusion is intentionally restricted to
+prime fields.  Frobenius maps are already additional local Clifford
+operations, and \(z(t^p)=z(t)^p\) need not equal \(z(t)\).
+Appendix~\ref{sec:pencil-calculations} records the Frobenius-sector divisors
+and a concrete \(\F_{25}\) example; no complete extension-field orbit
+classification is claimed.

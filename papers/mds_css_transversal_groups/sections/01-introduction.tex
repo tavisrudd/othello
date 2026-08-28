@@ -118,7 +118,7 @@ actions on blocks of qubit stabilizer codes and classify the associated
 endomorphism-algebra types; their result does not give the odd-prime,
 site-dependent MDS specialization here.  The compatible-basis result for
 self-dual CSS codes gives constructions rather than the exact image for an
-arbitrary member of the present family.  None of these comparisons supplies
+arbitrary member of the present family.  None of these cited results supplies
 the product-unitary exactness conclusion, which here comes from the imported
 stabilizer-AME rigidity theorem.
 
@@ -172,14 +172,19 @@ product-Clifford map of their stabilizer label groups can be corrected by a
 product Pauli to map one state ray to the other.
 \end{lemma}
 
-The six-coordinate applications also use the minimum-support transition
-theorem.  For a stabilizer \(\AME(2m,q)\) state, the Pauli labels supported on
-any \((m+1)\)-coordinate set project bijectively onto the local Pauli-label
-plane at each retained coordinate.  These supported subgroups span the full
-stabilizer label group.  Hence transitions between overlapping supports
-determine local Clifford equivalence up to local trace-symplectic changes of
-basis.  We use only this statement, not the companion paper's quantitative
-results.
+\begin{theorem}[Imported minimum-support transitions
+\cite{RuddAMEStabilizerRigidity2026}]
+\label{thm:minimum-support-transitions}
+For a stabilizer \(\AME(2m,q)\) state, projection from the Pauli labels
+supported on any \((m+1)\)-coordinate set to the local Pauli-label plane at
+each retained coordinate is bijective.  These supported subgroups span the
+full stabilizer label group.  Under local-Clifford equivalence, the resulting
+transition maps transform by the corresponding local trace-symplectic changes
+of basis.
+\end{theorem}
+
+This is the consequence of Section~4 of the cited paper used here.  We do not
+use its quantitative results.
 
 \paragraph{Six-point applications.}
 At length six, the coding-theoretic statement is that
@@ -191,8 +196,9 @@ the fixed-coordinate logical symplectic image from \(T\) to
 \(\mathrm{SL}_2(q)\).  For an explicit non-GRS pencil, a degree-eight
 invariant \(z\) classifies projective and monomial-code equivalence over odd
 fields.  Over odd prime fields it also classifies local-Clifford and
-local-unitary equivalence.  The Clebsch \([6,3,4]_{11}\) code gives a worked
-syndrome-geometric example.
+local-unitary equivalence.  A worked six-point example, deferred to an
+appendix, illustrates the distinction between syndrome geometry and the
+fixed-coordinate transversal group.
 
 \paragraph{Lift, verification, and invariant refinements.}
 The linear \(\mathrm{SL}_2(q)\) action has coherent Weil lifts, whereas the
@@ -204,11 +210,10 @@ rigidity theorem.  The finite six-point calculations have exact certificate
 replays, but no finite enumeration enters the all-length theorem.
 
 Section~\ref{sec:dictionary} fixes the stabilizer and MDS--CSS conventions.
-Section~\ref{sec:exact-logical} proves the conductor lemma and exact group,
-then treats the lift refinements.  Section~\ref{sec:logical} translates the
-criterion into six-point geometry.  Section~\ref{sec:pencil} classifies the
-one-parameter family, and Section~\ref{sec:invariants} gives the limitation on
-fixed-copy scalar invariants.  The appendices contain the explicit invariant
-certificates, transport calculation, and coordinate-permutation extensions.
-Section~\ref{sec:verification} states the computational and formal trust
-boundaries.
+Section~\ref{sec:exact-logical} proves the conductor lemma and exact group;
+Section~\ref{sec:logical} gives the six-point conic criterion; and
+Section~\ref{sec:pencil} classifies the one-parameter family.
+Section~\ref{sec:invariants} explains the limitation of fixed-copy scalar
+invariants.  The appendices collect lift refinements, a worked syndrome
+example, explicit certificates, transport and coordinate-permutation
+calculations, and the verification boundary.

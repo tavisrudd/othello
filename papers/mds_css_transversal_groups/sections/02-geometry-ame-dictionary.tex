@@ -52,11 +52,43 @@ In particular, \(\rho^\psi_A\) is maximally mixed exactly when
 when it has no nonidentity stabilizer label supported on at most \(m\)
 parties.
 
+For a linear code \(C\leq\F_q^{2m}\), the equal-phase state
+\eqref{eq:equal-phase-css-state} has the exact stabilizer lifts
+\[
+ W_{(c,h)}=X(c)Z(h)=\bigotimes_{i=1}^{2m}X(c_i)Z(h_i),
+ \qquad(c,h)\in C\oplus C^\perp .
+\]
+They commute and multiply without a residual phase because
+\(h\mathbin\cdot c=0\).
+
+\begin{proposition}[MDS--CSS AME dictionary]
+\label{prop:mds-css-ame-dictionary}
+Let \(C\leq\F_q^{2m}\) be a linear \([2m,m,m+1]_q\) MDS code.  Then
+\(\lvert\Psi_C\rangle\) is a minimal-support stabilizer
+\(\AME(2m,q)\) state with projective Pauli-label Lagrangian
+\[
+ L_C=(C\oplus0)\oplus(0\oplus C^\perp).
+\]
+For every \(m\)-coordinate set \(I\), puncturing \(C\) to \(I\) is
+bijective, and the reduced state on \(I\) is \(q^{-m}I\).
+\end{proposition}
+
+\begin{proof}
+The operators \(X(c)\), \(c\in C\), and \(Z(h)\), \(h\in C^\perp\),
+fix the equal superposition.  Their label space has dimension \(2m\) and is
+Lagrangian.  Puncturing \(C\) to any \(m\)-coordinate set is injective by
+the distance \(m+1\), and hence bijective by dimension.  In the corresponding
+partial trace, equality on the complementary \(m\) coordinates forces
+equality of the codewords, while projection to the retained coordinates runs
+once through \(\F_q^m\).  The reduction is therefore \(q^{-m}I\); smaller
+reductions are maximally mixed by tracing again.  The computational support
+has size \(q^m\), which is minimal for an \(\AME(2m,q)\) state.
+\end{proof}
+
 The rigidity and minimum-support transition theorems use only
 \eqref{eq:projective-clifford-sequence}--\eqref{eq:reduced-stabilizer-state}.
-For the
-geometric classification and explicit six-party applications, we now
-specialize to the MDS--CSS model.
+For the geometric classification, we now specialize this dictionary to six
+coordinates.
 
 A six-arc is an ordered sextuple of points of \(\PP^2(\F_q)\) with no
 three collinear.  Choose nonzero column representatives and collect them
@@ -75,14 +107,6 @@ a six-arc the five joining lines are distinct, so \(q+1\geq5\).  For
 \(q=4\), a conic together with its nucleus is a six-arc; for \(q\geq5\),
 any six points of a nonsingular conic form a six-arc.
 
-For the resulting CSS stabilizer we use the exact lift
-\[
- W_{(c,h)}=X(c)Z(h)=\bigotimes_{i=1}^6X(c_i)Z(h_i),
- \qquad(c,h)\in C\oplus C^\perp .
-\]
-Since \(h\cdot c'=0\) for \(h\in C^\perp\) and \(c'\in C\), these lifts
-multiply without a residual phase and fix \(\lvert\Psi_C\rangle\).
-
 \begin{proposition}[Arc--AME dictionary]\label{thm:dictionary}
 For a six-arc with kernel \(C\), the state \(\lvert\Psi_C\rangle\) in
 \eqref{eq:equal-phase-css-state} is a minimal-support stabilizer
@@ -93,26 +117,14 @@ projective Pauli-label Lagrangian is
 \]
 Conversely, for a linear \([6,3]_q\) code \(C\) the state
 \(\lvert\Psi_C\rangle\) is \(\AME(6,q)\) only if \(C\) has minimum distance
-four, so the dictionary is an equivalence.  Monomial code equivalence,
-together with a party permutation, induces local-Clifford equivalence of the
-corresponding states.
+four, so the dictionary is an equivalence.  A monomial code equivalence
+induces local-Clifford equivalence of the corresponding states, with its
+permutation component permuting tensor factors.
 \end{proposition}
 
 \begin{proof}
-The operators \(X(c)\), \(c\in C\), fix the equal superposition.
-The operators \(Z(h)\), \(h\in C^\perp\), fix it because
-\(\chi(h\cdot c)=1\).  The two subgroups commute, and their label space
-has dimension six and is Lagrangian.
-
-For any three-coordinate set \(I\), puncturing \(C\) to \(I\) is
-bijective: injectivity follows from distance four and both spaces have
-dimension three.  In the partial trace of
-\(\lvert\Psi_C\rangle\langle\Psi_C\rvert\), equality on the complementary
-three coordinates therefore forces equality of the codewords, while the
-projection to \(I\) runs once through \(\F_q^3\).  Hence every
-three-party reduction is \(q^{-3}I\).  Smaller reductions are maximally
-mixed by tracing again, so the state is \(\AME(6,q)\).  Its support has
-the minimum possible size \(q^3\).
+The forward direction is Proposition~\ref{prop:mds-css-ame-dictionary} with
+\(m=3\).
 
 For the converse, suppose the linear \([6,3]_q\) code \(C\) has a nonzero word
 \(c\) of weight at most three, and choose a three-party set \(A\) containing

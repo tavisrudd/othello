@@ -1,0 +1,179 @@
+\section{Pencil quotient calculations and extension fields}
+\label{sec:pencil-calculations}
+
+This appendix supplies the explicit calculations used in
+Theorem~\ref{thm:lc-pencil}.  The theorem's conceptual reduction appears in
+Section~\ref{sec:pencil}; the formulas below make that reduction auditable.
+
+\subsection{The projective quotient}
+
+\begin{proposition}[Residual orbit and bracket recovery]
+\label{prop:pencil-projective-recovery}
+For \(t,u\in\mathcal U\), equality \(z(t)=z(u)\) holds exactly when
+\(y(u)\in\{\pm y(t)^{\pm1}\}\).  Every such relation is realized by a
+projectivity and a coordinate permutation, while the complementary-bracket
+multiset of \(H_t\) determines \(z(t)\).
+\end{proposition}
+
+\begin{proof}
+With \(y=(t-1)^2/t\), one has \(A=-4t^2y\), \(B=t^2(y^2-1)\), and
+\[
+ z=\frac{(y-y^{-1})^2}{16}.
+\]
+It follows that \(z(t)=z(u)\) exactly when
+\begin{equation}\label{eq:pencil-y-orbit}
+ y(u)\in\{y(t),-y(t),y(t)^{-1},-y(t)^{-1}\}.
+\end{equation}
+Each relation is realized by a projectivity and a coordinate permutation:
+\[
+\begin{array}{c|c}
+\text{relation}&\text{projectivity}\\ \hline
+y(u)=y(t)&\diag(1,(1-u)/(1-t),u/t)\\
+y(u)=-y(t)&\diag(1,(1-u)/(1-t),-u/t)\\
+y(u)=y(t)^{-1}&
+\begin{psmallmatrix}1&0&0\\0&0&(u-1)/t\\0&-u/(1-t)&0\end{psmallmatrix}\\
+y(u)=-y(t)^{-1}&
+\begin{psmallmatrix}1&0&0\\0&0&(1-u)/t\\0&-u/(1-t)&0\end{psmallmatrix}.
+\end{array}
+\]
+The corresponding permutations are the identity, \((5\,6)\),
+\((3\,5)(4\,6)\), and \((3\,5\,4\,6)\).  All denominators and
+determinants are nonzero on \(\mathcal U\).
+
+Conversely, the ten signed products of complementary \(3\)-by-\(3\) brackets
+of \(H_t\) form the multiset
+\begin{equation}\label{eq:complementary-bracket-multiset}
+\{+A,+A,+A,-A,-A,-A,+B,+B,-B,-B\}.
+\end{equation}
+Projectivity and independent column rescaling multiply all ten products by
+one common scalar; a coordinate permutation changes at most their common
+sign.  On \(\mathcal U\), \(A,B\ne0\).  If \(A^2\ne B^2\), the
+multiplicities three and two distinguish the two opposite pairs and recover
+\((B/A)^2=z\).  If \(A^2=B^2\), the multiset collapses to two opposite
+values of multiplicity five, which is equivalent to \(z=1\).  Thus the
+multiset recovers \(z\) in every case.
+\end{proof}
+
+The map \(t\mapsto z\) has degree eight: the four transformations in
+\eqref{eq:pencil-y-orbit}, followed by the quadratic relation
+\(t+t^{-1}=y+2\), account for its eight sheets.  The signed refinement
+\(w=B/A\), \(z=w^2\), is not quantum data.  Both even and odd explicit
+coordinate permutations reverse \(w\), and their projectivities lift to
+monomial local Cliffords.
+
+\subsection{Recovery from minimum-support transitions}
+
+\begin{proposition}[Holonomy recovery]
+\label{prop:pencil-holonomy-recovery}
+For prime \(q\), the projective conjugacy invariants of the
+minimum-support transition loops of \(\Psi_t\), counted with multiplicity,
+determine \(z(t)\) on \(\mathcal U\).
+\end{proposition}
+
+\begin{proof}
+Specialize the imported minimum-support transition theorem to \(m=3\).  It
+gives a canonical atlas of two-dimensional stabilizer planes, one for each
+four-coordinate support.  Each plane identifies with the local Pauli-label
+plane at any coordinate in its support, and the supported planes generate the
+full stabilizer label group.  Overlaps therefore give coordinate changes
+between local Weyl frames; compositions give holonomy data intrinsic up to
+local symplectic conjugacy.
+
+For prime \(q\), put \(K_T=L_{C_t}(T)\) for every four-set \(T\).  If
+\(i,j\in T\), projection \(p_i:K_T\to\F_q^2\) is an isomorphism.  Define
+\[
+ M_T(i,j)=p_jp_i^{-1}:(\F_q^2)_i\longrightarrow(\F_q^2)_j
+\]
+and, for distinct four-sets \(T,U\) containing \(i,j\), define
+\begin{equation}\label{eq:minimum-support-holonomy}
+ \operatorname{Hol}(T,U;i,j)=M_U(j,i)M_T(i,j).
+\end{equation}
+A local Clifford sends this endomorphism to a conjugate.  Reversing \(T,U\)
+takes its inverse, and a coordinate permutation only relabels the data.
+Hence the multiset of
+\[
+ r(M)=\Tr(M)^2/\det M
+\]
+over the \(15\cdot6\cdot5=450\) choices is invariant under local Cliffords
+and coordinate permutations: \(r\) is unchanged by conjugation, scalar
+multiplication, and inversion.
+
+Exact substitution in \eqref{eq:minimum-support-holonomy} puts the values into
+finitely many symbolic families.  Appendix~\ref{sec:holonomy-certificate}
+records their multiplicities and collision bookkeeping, which the paper-local
+certificate replays.  One family has value \(-1/z\), and its multiplicity
+identifies that value canonically even when specializations make families
+collide.  The atlas therefore recovers \(-1/z\).
+\end{proof}
+
+\subsection{Extension-field caveat}
+
+The projective quotient remains valid over odd extension fields, but the
+prime-field local-Clifford and local-unitary statement does not: Frobenius
+maps are additional local Clifford operations.  The next proposition records
+the scalar conditions for two Frobenius sectors without asserting a complete
+extension-field classification.
+
+\begin{proposition}[Frobenius-sector divisors]
+\label{prop:frobenius-sector-divisors}
+Let \(\sigma\) be an automorphism of a finite field of odd order and let
+\(t\in\mathcal U\).  Put
+\[
+ E_\sigma(t)=(\sigma(t)-t)(1-\sigma(t)t),\qquad
+ D_\sigma(t)=((1-\sigma(t))(1-t))^2+\sigma(t)t.
+\]
+Then
+\begin{equation}\label{eq:frobenius-diagonal-sector}
+ \frac{\sigma(t)}{(1-\sigma(t))^2}
+   =\frac{t}{(1-t)^2}
+ \quad\Longleftrightarrow\quad E_\sigma(t)=0.
+\end{equation}
+If \(h=(1-\sigma(t))(1-t)\) and
+\(w=(-h,-h,1,1,-1,-1)\), then
+\begin{equation}\label{eq:frobenius-gale-sector}
+ H_{\sigma(t)}\diag(w)H_t^{\mathsf T}=0
+ \quad\Longleftrightarrow\quad D_\sigma(t)=0.
+\end{equation}
+Also \(D_{\mathrm{id}}(t)=G(t)\), and
+\begin{equation}\label{eq:frobenius-sector-disjointness}
+ E_\sigma(t)=0\quad\Longrightarrow\quad D_\sigma(t)\ne0.
+\end{equation}
+Finally \(G,A,B,z\) commute with \(\sigma\), and \(\sigma\) preserves the
+regular non-GRS locus \(\mathcal U\).
+\end{proposition}
+
+\begin{proof}
+Membership in \(\mathcal U\) gives \(t\ne1\), and injectivity of \(\sigma\)
+gives \(\sigma(t)\ne1\).  Cross multiplication in
+\eqref{eq:frobenius-diagonal-sector} gives
+\[
+ s(1-t)^2-t(1-s)^2=(s-t)(1-st)
+\]
+with \(s=\sigma(t)\).  Direct multiplication in
+\eqref{eq:frobenius-gale-sector} makes eight entries vanish identically and
+leaves \(-2D_\sigma(t)\) in the last entry; odd characteristic gives the
+equivalence.  Setting \(\sigma\) to the identity yields
+\(D_{\mathrm{id}}=G\).
+
+If \(E_\sigma(t)=0\), then either \(\sigma(t)=t\) or
+\(\sigma(t)t=1\).  In the first case \(D_\sigma(t)=G(t)\).  In the second,
+multiplying \(D_\sigma(t)\) by \(t^2\) gives \(G(t)\).  Membership in
+\(\mathcal U\) excludes \(t=0\) and \(G(t)=0\), proving
+\eqref{eq:frobenius-sector-disjointness}.  The equivariance statements follow
+by applying \(\sigma\) to the defining polynomial and rational expressions.
+\end{proof}
+
+Over \(\F_{p^e}\), the basis permutation
+\(\lvert x\rangle\mapsto\lvert x^p\rangle\) is a local Clifford and sends
+\(\Psi_t\) to \(\Psi_{t^p}\), while \(z(t^p)=z(t)^p\) need not equal
+\(z(t)\).  For example, in \(\F_{25}=\F_5[s]/(s^2-2)\), both \(s\) and
+\(-s=s^5\) lie in \(\mathcal U\), but
+\[
+ z(s)=3+3s,\qquad z(-s)=3+2s.
+\]
+Proposition~\ref{prop:frobenius-sector-divisors} gives the collision and
+diagonal-equivalence divisors relating \(t\) to \(\sigma(t)\).  It does not
+show that an arbitrary additive local Clifford determines a field
+automorphism or construct a local Clifford from a Galois match of \(z\).
+Neither a complete extension-field local-Clifford nor local-unitary
+classification is claimed.
