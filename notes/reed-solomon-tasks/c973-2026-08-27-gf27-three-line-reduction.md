@@ -1,7 +1,8 @@
 # C973 checkpoint — GF(27) three-line carrier reduction
 
 **Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** exact
-one-parameter reduction proved; rational-point closure open
+one-parameter reduction, Borel endpoint, and one residual boundary chart
+closed; abundance open
 
 ## 1. Split family
 
@@ -153,18 +154,215 @@ This is the characteristic-three descendant of the GF(64) cubic-resolvent
 mechanism.  It is not yet proved to collapse to a single genus-one sign
 cover, so no GF(27) closure is claimed here.
 
-## 4. Boundary and next gate
+## 4. Upper-Borel compression
+
+The applicable earlier result is the upper-Borel slice method in the Lucas
+carrier supplement: outside its invariant block, projective transport first
+normalizes a quotient coordinate and then retains only the upper-Borel
+stabilizer.  The Borel statement in the MDS--CSS work instead classifies
+one-coordinate conductor images as torus/Borel/full `SL2`; it is not an orbit
+normal-form theorem.  Complete Repair Ports contains no separate Borel orbit
+result.
+
+For the present carrier, the unipotent element `t -> t+b` acts in the ordered
+coordinates `(z2,...,z8)` by
+
+\[
+\begin{aligned}
+z'_2&=z_2+bz_3-b^3z_5-b^4z_6+b^6z_8,\\
+z'_3&=z_3-b^3z_6,\\
+z'_4&=z_4-bz_5+b^2z_6+b^3z_7-b^4z_8,\\
+z'_5&=z_5+bz_6+b^3z_8,\\
+z'_6&=z_6,\\
+z'_7&=z_7-bz_8,\\
+z'_8&=z_8.                                                \tag{12}
+\end{aligned}
+\]
+
+This is the degree-nine divided-power action reduced by Lucas modulo three.
+The torus `t -> ct` has weights
+
+\[
+                         (7,6,5,4,3,2,1)                 \tag{13}
+\]
+
+on `(z2,...,z8)`, up to common projective scaling.
+
+Equation (12) sharply reduces the boundary of the dense three-line chart.
+If `z6!=0`, then `z3-b^3z6` vanishes for exactly one `b`, while `z2'` is a
+nonzero polynomial of degree at most six because its `b^4` coefficient is
+`-z6`.  At most seven of the 27 translations therefore fail to make both
+`z2'` and `z3'` nonzero.  If `z6=0` but `z3!=0`, then `z3'=z3` and `z2'` is a
+nonzero polynomial with linear coefficient `z3`, so at most six translations
+fail.  Consequently every Borel orbit outside
+
+\[
+                              z_3=z_6=0                  \tag{14}
+\]
+
+has a representative in the dense stratum `z2z3!=0` of Section 2.  The true
+Borel-stable boundary is the codimension-two five-space (14), not the union
+of the two coordinate hyperplanes suggested by (7).
+
+On (14), the residual unipotent action is
+
+\[
+\begin{aligned}
+z'_2&=z_2-b^3z_5+b^6z_8,\\
+z'_4&=z_4-bz_5+b^3z_7-b^4z_8,\\
+z'_5&=z_5+b^3z_8,\\
+z'_7&=z_7-bz_8,
+\end{aligned}                                             \tag{15}
+\]
+
+with `z8` fixed.  This gives four exact normal-form strata:
+
+1. If `z8!=0`, choose the unique `b=z7/z8` which makes `z7'=0`, then use
+   projective scaling to set `z8=1`.  The residual torus has weights
+   `(6,4,3)` on `(z2,z4,z5)`.
+2. If `z8=0` and `z5!=0`, choose the unique cube root of `z2/z5`; it makes
+   `z2'=0`.
+3. If `z8=z5=0` and `z7!=0`, choose the unique cube root of `-z4/z7`; it
+   makes `z4'=0`.
+4. If `z8=z5=z7=0`, the unipotent radical fixes the remaining pair
+   `(z2,z4)` pointwise, and only the torus weights `(7,5)` remain.
+
+Thus the apparent two-hyperplane boundary has compressed to three affine
+normal-form charts and one two-coordinate torus endpoint.
+
+The torus endpoint closes explicitly.  Let `theta^3-theta-1=0` and put
+`nu=2theta+1`, a primitive element of `K`.  On
+`z3=z5=z6=z7=z8=0`, the projective ratio `[z2:z4]` has exactly four torus
+orbits:
+
+\[
+                    [1:0],\quad[0:1],\quad[1:1],\quad[1:\nu]. \tag{16}
+\]
+
+Indeed, away from the coordinate points the ratio changes by a square under
+(13), and `K^*/K^{*2}` has order two.  For a pair `(p,q)`, abbreviate
+`F_{p,q}(t)=t^3+pt+q`.  Split locators for the four rows of (16) are the
+products of the following three factors:
+
+\[
+\begin{array}{c|ccc}
+[1:0]&
+F_{2\theta^2+\theta+2,\,2\theta^2+\theta}&
+F_{2\theta+2,\,\theta^2+\theta+2}&
+F_{2\theta^2,\,2\theta^2+\theta+2}\\
+[0:1]&
+F_{2\theta+2,\,\theta^2+\theta+2}&
+F_{2\theta^2+1,\,2\theta^2+\theta+2}&
+F_{2,\,2\theta+2}\\
+[1:1]&
+F_{2\theta+2,\,\theta}&
+F_{2\theta+2,\,2\theta}&
+F_{2\theta^2+\theta+2,\,0}\\
+[1:\nu]&
+F_{2\theta+2,\,\theta}&
+F_{2\theta+2,\,2\theta}&
+F_{2\theta+1,\,0}.
+\end{array}                                                \tag{17}
+\]
+
+For every factor in (17), `-p` is a nonzero square and `q` lies in `W_p`,
+so it has three rational roots.  The three root lines in each row are
+pairwise disjoint, as direct substitution in (10) shows.  Thus every product
+has nine distinct roots.  Reducing modulo `theta^3-theta-1`, their first four
+coefficients satisfy respectively
+
+\[
+ (g_1,g_2)=(0,0),\quad (g_3,g_4)=(0,0),\quad
+ (g_1+g_3,g_2+g_4)=(0,0),\quad
+ (g_1+\nu g_3,g_2+\nu g_4)=(0,0).                        \tag{18}
+\]
+
+These are exactly the two Hankel equations for the four endpoint syndromes.
+Hence the two-coordinate torus endpoint contributes no pointed obstruction.
+
+## 5. The `z7` boundary chart
+
+The third residual chart in the list following (15) also closes without a
+count.  There `z5=z8=0`, `z7!=0`, and translation has already made `z4=0`.
+Thus only `(z2,z7)` remains.  After projectively setting `z7=1`, the torus
+changes `z2/z7` by `c^5`.  Since
+
+\[
+                         \gcd(5,|K^*|)=\gcd(5,26)=1,
+\]
+
+every nonzero ratio is equivalent to one.  The whole chart therefore has
+only the two orbits
+
+\[
+                              [z_2:z_7]=[0:1],\quad[1:1]. \tag{19}
+\]
+
+They admit the following split locators:
+
+\[
+\begin{array}{c|ccc}
+[0:1]&
+F_{2\theta^2+2\theta,\,0}&
+F_{2\theta^2+2\theta,\,2\theta^2}&
+F_{2\theta^2+2\theta,\,\theta^2}\\
+[1:1]&
+F_{2\theta^2+2\theta,\,0}&
+F_{2\theta^2+2\theta,\,\theta^2+2\theta+1}&
+F_{2\theta,\,\theta^2+1}.
+\end{array}                                                \tag{20}
+\]
+
+This splitting and disjointness can be read directly from the root triples.
+For the first row of (20), they are
+
+\[
+\begin{gathered}
+\{0,\theta^2,2\theta^2\},\\
+\{2\theta,\theta^2+2\theta,2\theta^2+2\theta\},\\
+\{\theta,\theta^2+\theta,2\theta^2+\theta\};
+\end{gathered}
+\]
+
+for the second row, they are
+
+\[
+\begin{gathered}
+\{0,\theta^2,2\theta^2\},\\
+\{2\theta+2,\theta^2+2\theta+2,2\theta^2+2\theta+2\},\\
+\{\theta^2+2\theta,\theta+1,2\theta^2+2\}.
+\end{gathered}
+\]
+
+Each displayed row consists of nine distinct elements of `K`.  If `g` is
+the corresponding product in (20), its relevant coefficients are
+
+\[
+\begin{array}{c|cccc}
+&g_1&g_2&g_6&g_7\\ \hline
+[0:1]&2\theta^2+2&0&0&0\\
+[1:1]&\theta^2+\theta+1&2\theta^2&2\theta^2+2\theta+2&\theta^2.
+\end{array}                                                \tag{21}
+\]
+
+Thus the first row has `(g6,g7)=(0,0)`, while the second has
+`(g1+g6,g2+g7)=(0,0)`.  These are precisely (3) for the two syndromes in
+(19).  Hence this entire residual Borel chart contributes no obstruction.
+
+## 6. Boundary and next gate
 
 The load-bearing next step is to choose `p!=r` uniformly from the thirteen
-directions and prove that some `u in W_p` survives (7)--(11).  The best first
-split is the dense stratum `z2z3!=0`, where only one `u` is lost to the linear
-determinant.  The strata `z2=0` or `z3=0` should be reduced by the affine
-Borel action before introducing any finite enumeration.
+directions and prove that some `u in W_p` survives (7)--(11) on the dense
+stratum.  Equation (12) transports every syndrome outside (14) into that
+stratum.  The two-coordinate endpoint is closed by (16)--(18), and the `z7`
+chart is closed by (19)--(21).  The only separate open boundary consists of
+the first two affine normal forms following (15); no finite enumeration is
+needed to define them.
 
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
 
-## 5. `ej` + `tt` ledger
+## 7. `ej` + `tt` ledger
 
 | question | status | exact continuation |
 |---|---|---|
@@ -174,3 +372,7 @@ certificate supports this reduction.
 | What replaces the Artin--Schreier trace bit? | membership in `W_p,W_r`, each a linearized cubic image | cyclic cubic covers above |
 | What is the complete collision boundary? | two explicit cubic factors | equation (11) |
 | Does the GF(64) sign-cover lemma directly close GF(27)? | not yet; the natural family gives a cubic-cover tower rather than one identified genus-one sign cover | analyze the dense `z2z3!=0` tower first |
+| Is `z2z3=0` the true Borel boundary? | no; (12) moves every orbit with `(z3,z6)!=(0,0)` into the dense chart | only the invariant five-space `z3=z6=0` remains |
+| How many boundary charts remain after the Borel action? | three affine normal forms and one two-coordinate torus endpoint | the four strata following (15) |
+| Does the torus endpoint survive? | no; its four square-class orbits have the explicit three-line products (17) | closed by the coefficient identities (18) |
+| Does the residual `z7` chart survive? | no; relative torus weight five is invertible modulo 26, leaving two orbits | closed by the explicit root partitions (20)--(21) |

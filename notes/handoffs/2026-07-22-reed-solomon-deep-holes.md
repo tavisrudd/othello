@@ -191,8 +191,16 @@ equations become one `2x2` linear solve in the pair product and transverse
 offset.  The remaining conditions are one parameter in a trace plane, one
 quadratic split test, two linearized-cubic image tests, and two explicit
 collision factors.  On the dense `z2z3!=0` stratum the determinant loses at
-most one parameter.  The rational-point closure and the `z2z3=0` Borel
-boundary remain; no finite census is authorized.
+most one parameter.  The degree-nine upper-Borel action moves every syndrome
+with `(z3,z6)!=(0,0)` into that dense chart, so the true separate boundary is
+only the invariant five-space `z3=z6=0`.  Its residual unipotent action gives
+three affine normal-form charts and one two-coordinate torus endpoint.
+The endpoint has four square-class orbits and is closed by four explicit
+products of three affine-line cubics.  The residual `z7` chart has only two
+torus orbits and is likewise closed by explicit split locators.  Rational-point
+abundance on the dense chart and the first two affine residual normal forms
+remain; no finite census is
+authorized.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md`, and

@@ -204,7 +204,15 @@ two Hankel equations reduce to a `2x2` linear solve in two elementary
 parameters.  What remains is a one-parameter tower of two linearized-cubic
 image conditions and one quadratic split condition, with two explicit
 collision factors.  The dense determinant loses at most one parameter;
-rational abundance and the `z2z3=0` Borel boundary are open.
+rational abundance is open.  The exact upper-Borel action now moves every
+syndrome with `(z3,z6)!=(0,0)` into the dense chart.  Thus the true separate
+boundary is only the invariant five-space `z3=z6=0`; its residual unipotent
+action leaves three affine normal-form charts and one two-coordinate torus
+endpoint.  The endpoint has four torus square-class orbits, all closed by
+explicit products of three affine-line cubics.  The `z7` residual chart has
+relative torus weight five and hence only two orbits; two further explicit
+three-line products close both.  Only dense abundance and the first two
+affine boundary charts remain.
 
 ## Objective
 
