@@ -630,6 +630,17 @@ the maximal carrier `N^(8) Gamma_10(F_27)` of eq (15) of the compression note.
 The `C(27,9)` exhaustive fallback was wired in for any class the switch failed
 on and was **invoked zero times**, because the switch never failed.
 
+**Pointed strengthening (2026-08-28 coding review).**  Every witness above has
+nine roots in `K`, so it avoids infinity.  The carrier `P<e_2,...,e_8>` is
+`PGL_2(27)`-stable and the Hankel system is `PGL_2`-equivariant, so moving any
+prescribed root to infinity turns the sweep into the pointed statement: every
+class admits a split locator avoiding any one prescribed projective root.
+One-marker lifting then closes the characteristic-three R12 carrier over
+`GF(27)` exactly as the binary bundles close binary R12.  The evidence is the
+zero-unsaturated line of `out/certify-summary.txt`, the header-only
+`out/certify-unsaturated.tsv`, and the per-fibre minimum column of
+`out/certify-quotient-rows.tsv` (at least 78 in all 20,440 rows).
+
 ### 8.2 Method
 
 Mode `certify` enumerates the 20,440 projective quotient points

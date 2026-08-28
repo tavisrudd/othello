@@ -3,9 +3,12 @@
 **Lane:** `reed-solomon` · **Status:** active — arbitrary-`r` escape proved;
 the multi-digit carrier module theorem is proved, characteristic seven is
 pointedly closed, and exact GF(16)/GF(32) pointed quotients close binary
-R11/R12 there; GF(64) is structurally closed; GF(27) is closed by a
-user-authorized compressed certificate; only the certificate-free GF(27)
-switch lemma and external review remain open
+R11/R12 there (certificates rebuilt 2026-08-28 under the correct degree-ten
+Borel action); the 2026-08-28 review strengthened the containment theorem to
+`SplitFree_r subset P_r` for odd `p` and binary `r>=8`, which closes binary
+R11 at `q>=56` and hence GF(64) by theorem; GF(27) is closed at certificate
+level, pointed, and lifts to R12; three independent cold reads are applied;
+remaining items are the closeout ledger and the paper-successor handoff
 
 **Current checkpoint:**
 `c973-2026-08-28-gf27-switch-probe.md` §8 certifies GF(27)/R11: every one of
@@ -445,6 +448,10 @@ The task must produce a dated theorem/proof report with:
 
 No ambient `PG(r-1,q)` census, fixed list of R11/R12/R13 experiments, or
 restatement of C820's carrier theorem counts as progress on the primary gate.
+Exception recorded 2026-08-28: the user authorized one compressed
+certificate sweep of `PG(6,27)` for R11 under the C578 `q=64` precedent; it
+closes GF(27) at certificate level and leaves the certificate-free switch
+lemma an open structural problem, not a task gate.
 
 ## Paper-successor interface — no manuscript edits in C973
 

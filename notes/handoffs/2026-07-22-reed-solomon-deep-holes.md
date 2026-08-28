@@ -113,11 +113,11 @@ selector, cofinite GRS transfer, exact one-column MDS/NMDS interpretation,
 family-aggregate enumerator, and digit-stripping carrier module theorem are
 proved.  The first exact small-field pointed quotient now closes every R11
 carrier/root pair over GF(16): 317 upper-Borel orbits have independently
-replayed finite locators, with 307 of degree nine and 10 of degree eight.  The
+replayed finite locators, 315 of degree nine and 2 of degree eight (rebuilt
+2026-08-28 under the correct degree-ten Borel action after a cold read found
+the original certificates used a non-equivariant truncated R10 action).  The
 GF(32) quotient has 1,129 marked orbits, all with independently replayed
-degree-nine locators.  One-marker lifting closes binary R12 over both fields.
-The exact remaining R11 modular fields are GF(27) and GF(64); external seam
-and representation-theory review remain open.  An exact compression audit
+degree-nine locators.  One-marker lifting closes binary R12 over both fields.  An exact compression audit
 rules out both a small affine support atlas and the additive-three-space-plus-
 one family; the structural binary target is pointed avoidance in C620's full
 final-pair trace cover, not a GF(64) census.  The exact reduction now sharpens
@@ -179,8 +179,17 @@ equal point counts of isogenous elliptic curves force rational order three on al
 seven sextics at once, without the semilinear case split.  The twist has order
 `1 mod 3`; its even Hasse count improves from at least 50 to at least 52 and
 closes the selector inequality.  Explicit Weierstrass points on the two worst
-fibres give an independent audit.  Thus GF(64) is structurally closed with no
-point-count certificate.  GF(27) and external review remain.
+fibres give an independent audit.  A 2026-08-28 cold read corrected that
+chain: the dense-chart cover is genus one, identity (25) was a `B_4=0`
+specialization, and the slope-pencil gate fails off the forced-root surface,
+so only that surface is closed by this route.  GF(64) is nevertheless closed
+by theorem: the same review strengthened the containment theorem to
+`SplitFree_r subset P_r` for odd `p` and binary `r>=8` (carrier term only at
+binary `r in {6,7}`), so binary R11 closes at `q>=56` and GF(64) falls inside
+it, plain and pointed (`49>48`).  The repaired notes and recount script are
+`c973-2026-08-27-gf64-trace-balance.md` §6 and
+`c973-gf64-review-recount.py`; the strengthened statement (15') is in
+`c973-2026-08-26-simultaneous-marker-theorem.md`.
 The cover/isogeny lemma is characteristic-free: the first GF(27) discriminator
 is now whether its carrier admits a connected separable `S3` cubic pencil with
 genus-one sign cover and no 3-cycle inertia.  Do not copy the binary
@@ -328,10 +337,17 @@ With user authorization under the C578 `q=64` precedent, the same probe's
 `certify` mode then swept all 402,321,277 projective classes of `PG(6,27)`:
 every class has at least 78 two-point-switch witnesses and none needed the
 exhaustive fallback, so GF(27)/R11 is closed by a compressed certificate
-(§8 of the same report, with an independent Python witness replay).  The
-exact remaining R11 modular gates are the certificate-free GF(27) switch
-lemma, now an open structural problem rather than a blocker, and external
-review.
+(§8 of the same report, with an independent Python witness replay).  The sweep
+is pointed for free (carrier and Hankel system are `PGL_2`-equivariant) and
+one-marker lifting closes characteristic-three R12 over GF(27).  Three
+independent cold reads (geometry, finite-field selection, coding promotion)
+are applied: `c973-2026-08-28-review-geometry.md`,
+`c973-2026-08-28-review-selection.md`, `c973-2026-08-28-review-coding.md`,
+with the level-uniform polar lemma citation repair and the Finding-1
+verification alongside.  The certificate-free GF(27) switch lemma is an open
+structural problem, not a gate; primary-source verification of
+Seroussi--Roth and Dür and an implementation-independent `q=49` replay pass
+to the paper successor.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`,
