@@ -504,11 +504,13 @@ same syndrome geometry into exact MDS/NMDS extension data.
 [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [Repository](https://github.com/tavisrudd/ame-lu) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21681856-blue.svg)](https://doi.org/10.5281/zenodo.21681856)
 
 **Standout results.** Every product-unitary equivalence between stabilizer AME
-states is local Clifford. Only `m` minimum supports are needed for a
-finite recognition test. A quantitative rounding theorem places sufficiently
-approximate symmetries near exact Clifford symmetries.
+states is local Clifford. A half-set systematic form reduces recognition to
+`m` minimum supports; over prime fields, a block-determinant array and the
+simultaneous conjugacy class of `(m-1)^2` four-cycle holonomies are complete.
+A quantitative rounding theorem places sufficiently approximate symmetries
+near exact Clifford symmetries.
 
-> *Abstract* Let q = pᵉ and m ≥ 2. We prove that every product unitary mapping one stabilizer AME(2m,q) state to another is Clifford on each party, and the same holds when a party relabelling is allowed. The result covers arbitrary additive stabilizers. Thus local-unitary and local-Clifford equivalence coincide for these states. The proof is a support count: stabilizers contained in any (m + 1)-party set project bijectively onto the full Weyl-label space at each retained party, so the corresponding reduced operator determines every local Weyl axis. Via the Choi-state correspondence, every transversal conversion between the associated [[2m−1,1,m]]q encoders is therefore Clifford on every physical and logical factor. Their transition maps between local Weyl-label spaces form a complete LU invariant, modulo local trace-symplectic frame changes and party relabelling.
+> *Abstract* Let q = pᵉ and m ≥ 2. We prove that every product unitary mapping one stabilizer AME(2m,q) state to another is Clifford on each party, and the same holds when a party relabelling is allowed. The result covers arbitrary additive stabilizers. Thus local-unitary and local-Clifford equivalence coincide for these states. The proof is a support count: stabilizers contained in any (m + 1)-party set project bijectively onto the full Weyl-label space at each retained party, so the corresponding reduced operator determines every local Weyl axis. Via the Choi-state correspondence, every transversal conversion between the associated [[2m−1,1,m]]q encoders is therefore Clifford on every physical and logical factor. Their transition maps between local Weyl-label spaces form a complete LU invariant, modulo local trace-symplectic frame changes and party relabelling. A half-set systematic form compresses this invariant to m minimum supports and gives a constructive fixed-label recognition algorithm that is polynomial in m for fixed q.
 >
 > We also prove robust rigidity for approximate product symmetries. If the state-vector defect ε is below an explicit threshold of order min{p⁻¹, q⁻¹ᐟ², (2m)⁻¹ᐟ²}, every local factor lies within normalized Hilbert–Schmidt distance 8ε of a Clifford, and the product unitary decomposes into an exact symmetry and a residual whose collective generator norm is at most π√q ε. The proof combines three-region cleaning, finite Weyl–Fourier concentration, the quantized overlap of stabilizer states, and a balanced-cut estimate.
 >

@@ -202,20 +202,29 @@ product-unitary symmetry group, then
   \longrightarrow\operatorname{Aut}_{\mathrm{tr}}(\psi)\longrightarrow1
 \]
 is exact.  When \(q\) is prime, \(\operatorname{Aut}_{\mathrm{tr}}(\psi)\)
-is the centralizer in
-\(\mathrm{SL}_2(q)\) of the transition holonomies after base transports
-are chosen.
+has the explicit fundamental-holonomy description and five-case order
+classification given in Corollary~\ref{cor:prime-systematic-recognition}.
 \end{theorem}
 
 The invariant is also effective.  After fixing any half-set of parties,
 only the \(m\) minimum supports obtained by adjoining one complementary
 party are needed: their supported label groups form a direct sum equal to
-the full stabilizer label space
+the full stabilizer label space, and no smaller collection of
+minimum-support subgroups can span it
 (Proposition~\ref{prop:half-set-direct-sum}).  Fixed-label recognition then
 enumerates one base symplectic frame and checks each candidate by finite
 linear algebra.  In particular, it is polynomial in \(m\) for fixed local
 dimension.  Corollary~\ref{cor:finite-recognition} gives the explicit
 candidate count and the separate cost of unknown party relabelling.
+Over a prime field, Corollary~\ref{cor:prime-systematic-recognition}
+replaces enumeration by linear intertwining equations for
+\((m-1)^2\) fundamental four-cycles and the single condition
+\(\det A=1\).  Their characteristic-polynomial types and pairwise
+commutativity give a complete five-case classification of the compatible
+linear-symmetry order (some values coincide over the smallest fields).
+In particular, two noncommuting holonomies force the smallest possible image,
+the center of \(\mathrm{SL}_2(q)\), and exact projective product-symmetry order
+\(q^{2m}\gcd(2,q-1)\).
 
 At the dimension-dependent radius
 \[

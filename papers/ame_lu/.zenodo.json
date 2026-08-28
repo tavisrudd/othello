@@ -1,6 +1,6 @@
 {
   "title": "Robust Local-Unitary Rigidity of Stabilizer AME States",
-  "description": "For every prime power q and m≥2, this preprint proves that every product unitary mapping one stabilizer AME(2m,q) state to another is Clifford on each party, also when party relabelling is allowed. The result covers arbitrary additive stabilizers. Support bijections classify local-unitary equivalence and imply factorwise rigidity for transversal encoder conversions. Below an explicit threshold Θ(min{p⁻¹,q⁻¹ᐟ²,n⁻¹ᐟ²}), a quantitative stability theorem places every local factor within normalized Hilbert–Schmidt distance 8ε of a Clifford and bounds the collective residual generator norm by π√q ε.",
+  "description": "For every prime power q and m≥2, this preprint proves that every product unitary mapping one stabilizer AME(2m,q) state to another is Clifford on each party, also when party relabelling is allowed. The result covers arbitrary additive stabilizers. A half-set systematic form compresses a complete local-unitary invariant to m minimum supports and gives constructive fixed-label recognition polynomial in m for fixed q. The same support geometry implies factorwise rigidity for transversal encoder conversions. Below an explicit threshold Θ(min{p⁻¹,q⁻¹ᐟ²,n⁻¹ᐟ²}), a quantitative stability theorem places every local factor within normalized Hilbert–Schmidt distance 8ε of a Clifford and bounds the collective residual generator norm by π√q ε.",
   "creators": [
     {
       "name": "Rudd, Tavis",

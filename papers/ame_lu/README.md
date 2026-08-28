@@ -14,9 +14,12 @@ each party.  Any \((m+1)\)-party marginal determines the complete local Weyl
 frame.  The transition maps between those frames classify local-unitary
 equivalence, and every transversal conversion between the associated
 \([[2m-1,1,m]]_q\) stabilizer encoders is Clifford factor by factor.
-Only \(m\) minimum supports are needed for recognition; with party labels
-fixed, equivalence reduces to testing at most
-\(\lvert\operatorname{Sp}_{2e}(\mathbb F_p)\rvert\) base frames.
+Every half-set gives a systematic stabilizer matrix whose party-aligned
+square blocks are all invertible, and only \(m\) minimum supports are needed
+for recognition.  With party labels fixed, equivalence reduces to testing at
+most \(\lvert\operatorname{Sp}_{2e}(\mathbb F_p)\rvert\) base frames.  Over a
+prime field it reduces further to linear intertwining equations for
+\((m-1)^2\) fundamental four-cycles and one determinant equation.
 
 A leakage-aware three-region cleaning argument gives a quantitative theorem:
 defect \(\varepsilon\) puts every local factor within \(8\varepsilon\) of a
@@ -46,6 +49,8 @@ For every prime power `q=p^e` and every `m≥2`, each product-unitary
 intertwiner between additive stabilizer `AME(2m,q)` states is Clifford on
 every party. The support bijections on `(m+1)`-party marginals define
 transition maps that classify the residual local symplectic frames.
+For prime local dimension, their block determinants and simultaneous
+four-cycle holonomy conjugacy class form a complete fixed-party invariant.
 The Choi interpretation gives factorwise transversal Clifford rigidity for
 conversions between the associated stabilizer `[[2m-1,1,m]]_q` encoders.
 

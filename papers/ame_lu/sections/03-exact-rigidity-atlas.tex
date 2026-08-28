@@ -179,46 +179,101 @@ M\"obius inversion is the stabilizer-state specialization of the
 quantum-MDS Shor--Laflamme distribution of Huber and Grassl
 \cite[Theorems~8 and 9]{HuberGrassl2020}; in particular the number of
 weight-\(m+1\) projective stabilizers is
-\(\binom{2m}{m+1}(q^2-1)\).  We use one further consequence.  If
-\(|A|\geq m+2\) and \(i\ne j\) lie in \(A\), then the dimensions in
-\((4.1)\), together with
-\[
- L(A\setminus\{i\})\cap L(A\setminus\{j\})
-   =L(A\setminus\{i,j\}),
-\]
-give
-\[
- L(A)=L(A\setminus\{i\})+L(A\setminus\{j\}).             \tag{4.2}
-\]
-Descending induction shows that the \((m+1)\)-supported subgroups span
-the full label group.  This is the additive quantum-MDS form of
-minimum-weight generation, not a separate weight-enumerator claim.
+\(\binom{2m}{m+1}(q^2-1)\).  The following systematic form strengthens
+minimum-weight generation: recognition needs only \(m\) of these supports,
+and that number is optimal among spanning families of minimum-support
+subgroups.
 
-For recognition, one does not need all
-\(\binom{2m}{m+1}\) minimum supports.  The following direct-sum refinement
-reduces the data to \(m\) supports.
-
-\begin{proposition}[Minimum-support direct-sum decomposition]
+\begin{proposition}[Half-set systematic decomposition]
 \label{prop:half-set-direct-sum}
-Fix an \(m\)-party set \(B\).  For each \(j\notin B\), put
-\(A_j=B\cup\{j\}\).  Then
+Fix an \(m\)-party set \(B\), and let \(P_j=\F_q^2\) be the local label
+space at party \(j\).  The coordinate projection
+\[
+ \operatorname{pr}_{B^c}:L\longrightarrow
+ \bigoplus_{j\notin B}P_j
+\]
+is an isomorphism of additive groups.  Hence there is a unique
+\(\F_p\)-linear map
+\[
+ K_B:\bigoplus_{j\notin B}P_j\longrightarrow
+     \bigoplus_{i\in B}P_i
+\]
+whose graph is \(L\).  For the direct-sum trace-symplectic forms it
+satisfies
+\[
+ [K_Bx,K_By]_B=-[x,y]_{B^c}.
+\]
+After local \(\F_p\)-bases are chosen, row reduction therefore puts any
+row-generator check matrix for \(L\), ordered as \(B,B^c\), in systematic
+form \([K_B^{\mathsf T}\mid I]\); here \(K_B\) acts on column vectors.
+Moreover, if \(I\subseteq B\), \(J\subseteq B^c\), and
+\(|I|=|J|\), then the party-block submatrix
+\[
+ K_{I,J}:\bigoplus_{j\in J}P_j\longrightarrow
+          \bigoplus_{i\in I}P_i
+\]
+is an isomorphism.
+Conversely, a maximal isotropic subspace of the form
+\(\operatorname{graph}(K_B)\) is the label space of a stabilizer AME state
+exactly when all these party-aligned square block maps are isomorphisms.
+Moreover, \(K_{I,J}\) is invertible if and only if the complementary block
+\(K_{B\setminus I,B^c\setminus J}\) is invertible.  Thus it suffices to test
+one representative of each complementary pair: after the graph form is
+known, there are exactly
+\(\bigl(\binom{2m}{m}-2\bigr)/2\) nontrivial block tests.
+
+For each \(j\notin B\), put
+\(A_j=B\cup\{j\}\).  The inverse image of the \(j\)-th coordinate
+summand is \(L(A_j)\), and therefore
 \[
  L=\bigoplus_{j\notin B}L(A_j).
 \]
 Thus these \(m\) minimum-support subgroups determine the full stabilizer
-label group.
+label group.  Moreover, no collection of fewer than \(m\)
+minimum-support subgroups can span \(L\).
 \end{proposition}
 
 \begin{proof}
-Each summand has order \(q^2\) by
-Proposition~\ref{prop:stabilizer-ame-support}.  Suppose
-\(\sum_{j\notin B}\ell^{(j)}=0\), with
-\(\ell^{(j)}\in L(A_j)\).  At the coordinate \(j\notin B\), only
-\(\ell^{(j)}\) can be nonzero.  Its \(j\)-coordinate therefore vanishes,
-and the support theorem says that projection
-\(L(A_j)\to\F_q^2\) is injective.  Hence \(\ell^{(j)}=0\) for every \(j\).
-The sum is direct, and its order is \((q^2)^m=q^{2m}=|L|\), so it equals
-\(L\).
+The kernel of \(\operatorname{pr}_{B^c}\) is \(L(B)=\{0\}\) by the AME
+support condition.  Its domain and codomain both have order \(q^{2m}\),
+so it is an isomorphism.  This gives the graph map \(K_B\) and the
+systematic check-matrix form.  Since \(L\) is isotropic, evaluating the
+ambient direct-sum symplectic form on \((K_Bx,x)\) and \((K_By,y)\) gives
+the displayed identity.
+
+For the block statement, let
+\(S=I\cup(B^c\setminus J)\), so \(|S|=m\).  Projection \(L\to
+\bigoplus_{s\in S}P_s\) is an isomorphism by the same kernel-and-order
+argument.  If \(x\) is supported on \(J\) and \(K_{I,J}x=0\), then
+\((K_Bx,x)\in L\) projects to zero on \(S\).  Thus \(x=0\).
+The source and target of \(K_{I,J}\) have equal dimension, so the block
+map is an isomorphism.
+
+Conversely, every \(m\)-party set has the form
+\(I\cup(B^c\setminus J)\) with \(|I|=|J|\).  The kernel of projection
+from \(\operatorname{graph}(K_B)\) to this set is naturally
+\(\ker K_{I,J}\).  If all the displayed block maps are isomorphisms, every
+half-set projection is therefore injective and hence bijective.  Equivalently,
+there is no nonzero stabilizer label supported on at most \(m\) parties,
+which is the stabilizer AME condition.
+
+For complementarity, \(K_{I,J}\) is invertible exactly when
+\(K_B(\bigoplus_{j\in J}P_j)\) is transverse to
+\(\bigoplus_{i\in B\setminus I}P_i\).  Taking symplectic orthogonal
+complements and using the anti-symplectic identity for \(K_B\) gives the
+same condition for \(K_{B\setminus I,B^c\setminus J}\).
+There are \(\sum_r\binom mr^2=\binom{2m}{m}\) square block maps; removing
+the two automatic extreme cases and quotienting the remaining free
+complement involution gives the stated count.
+
+The inverse image of the \(j\)-th coordinate
+summand consists exactly of the labels supported on \(B\cup\{j\}\).
+Pulling back the coordinate direct sum gives the displayed decomposition.
+
+Every minimum-support subgroup has order \(q^2\) by
+Proposition~\ref{prop:stabilizer-ame-support}.  A sum of \(r\) such
+subgroups has order at most \(q^{2r}\), whereas \(|L|=q^{2m}\).
+Spanning \(L\) therefore requires \(r\geq m\).
 \end{proof}
 
 We now prove the transition-map classification stated in the introduction.
@@ -239,7 +294,7 @@ For two states \(\psi,\phi\) on the same labelled parties, a
 \(F_i\in\operatorname{Sp}(P_i)\) satisfying
 \[
  F_jM_A^\psi(i,j)=M_A^\phi(i,j)F_i
- \quad\text{for every \(A\) and \(i,j\in A\)}.           \tag{4.3}
+ \quad\text{for every \(A\) and \(i,j\in A\)}.           \tag{4.2}
 \]
 Here
 \(\operatorname{Sp}(P_i)=\operatorname{Sp}_{2e}(\F_p)\) is the action
@@ -277,6 +332,11 @@ Let \(\psi\) and \(\phi\) be stabilizer states with Lagrangian label groups
 symplectic label map carrying \(L_\psi\) onto \(L_\phi\), then there is a
 product Pauli \(W_v\) such that
 \(W_vU\lvert\psi\rangle\in\mathbb C\lvert\phi\rangle\).
+If \(L_\phi\) is the label space of a stabilizer \(\AME(2m,q)\) state,
+then for any prescribed \(m\)-party set \(C\), the correcting label
+\(v\) may be chosen uniquely with support contained in \(C\).  No prescribed
+set of fewer than \(m\) parties can support corrections for every possible
+character discrepancy.
 \end{lemma}
 
 \begin{proof}
@@ -288,6 +348,16 @@ The trace-symplectic pairing identifies the ambient label space modulo
 Conjugation by the product Pauli \(W_v\) cancels it.  The corrected state
 and \(\lvert\phi\rangle\) therefore lie in the same one-dimensional joint
 stabilizer eigenspace.
+
+For the final statement, projection \(L_\phi\to\bigoplus_{i\in C}P_i\)
+is an isomorphism by Proposition~\ref{prop:half-set-direct-sum}.  The
+trace-symplectic form on the latter space is nondegenerate.  Hence pairing
+with labels supported on \(C\) identifies
+\(\bigoplus_{i\in C}P_i\) with the full character dual of \(L_\phi\).
+Exactly one such label realizes the inverse discrepancy.
+If a prescribed support has \(r<m\) parties, its label space has only
+\(q^{2r}\) elements, whereas the character group of \(L_\phi\) has
+\(q^{2m}\).  It therefore cannot realize every discrepancy.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:atlas-classification}]
@@ -295,14 +365,15 @@ First fix the party labels.  A block symplectic map
 \(F=\bigoplus_iF_i\) carrying \(L_\psi\) to \(L_\phi\) carries every
 supported subgroup \(L_\psi(A)\) to \(L_\phi(A)\).  Writing these
 subgroups as graphs through any projection \(p_i\) gives exactly
-\((4.3)\).
+\((4.2)\).
 
-Conversely, suppose \((4.3)\) holds.  Fix \(A\) and \(i\in A\).  Every
+Conversely, suppose \((4.2)\) holds.  Fix \(A\) and \(i\in A\).  Every
 element of \(L_\psi(A)\) is uniquely determined by its \(i\)-coordinate,
 and the equations with \(j\in A\) show that its image under \(F\) is the
 unique element of \(L_\phi(A)\) with \(i\)-coordinate \(F_i p_i(\ell)\).
 Thus \(F L_\psi(A)=L_\phi(A)\).  Since the \((m+1)\)-supported subgroups
-generate the full label groups, \(F L_\psi=L_\phi\).
+generate the full label groups by
+Proposition~\ref{prop:half-set-direct-sum}, \(F L_\psi=L_\phi\).
 
 Sequence \((2.1)\) supplies local Clifford lifts of the \(F_i\), and
 Lemma~\ref{lem:pauli-phase-correction} supplies the product-Pauli
@@ -318,25 +389,6 @@ Paulis by \((2.1)\).  Such a Pauli fixes the state ray exactly when its
 label lies in \(L_\psi^\perp=L_\psi\).  Thus the displayed injection of
 \(L_\psi\) identifies it with \(\ker\lambda_\psi\), proving exactness.
 
-Finally suppose \(q=p\).  Form the directed multigraph with vertices the
-parties and an edge \((A,i,j)\) carrying \(M_A(i,j)\).  Every pair of
-parties belongs to an \((m+1)\)-set, so the graph is connected.  Choose a
-base \(b\), a spanning tree, and tree transports
-\(T_i:P_b\to P_i\), with \(T_b=I\).  For every edge define its based
-holonomy
-\[
- H_A(i,j)=T_j^{-1}M_A(i,j)T_i\in\operatorname{GL}_2(q).
-\]
-Compatibility propagates a base block \(F_b\) uniquely as
-\(F_i=T_iF_bT_i^{-1}\); the edge \((A,i,j)\) is then compatible exactly
-when \(F_b\) commutes with \(H_A(i,j)\).  Since
-\(\operatorname{Sp}_2(\F_q)=\mathrm{SL}_2(q)\) is normal in
-\(\mathrm{GL}_2(q)\), every propagated block remains symplectic.
-Evaluation at the base therefore identifies
-\(\operatorname{Aut}_{\mathrm{tr}}(\psi)\) with the holonomy centralizer inside
-\(\mathrm{SL}_2(q)\).  Different spanning trees generate the same based
-holonomy subgroup; changing the base conjugates that subgroup, and hence
-its centralizer, by a chosen transport.
 \end{proof}
 
 \begin{corollary}[Finite recognition bound]
@@ -344,21 +396,36 @@ its centralizer, by a chosen transport.
 Let \(\psi\) and \(\phi\) be stabilizer \(\AME(2m,q)\) states,
 \(q=p^e\) and \(m\geq2\), given by check matrices for their additive
 label spaces.  With the party labels fixed, choose any \(m\)-party set
-\(B\).  LU equivalence can be
-decided by computing the \(m\) supported subgroups in
-Proposition~\ref{prop:half-set-direct-sum} and testing at most
+\(B\), and write their half-set systematic maps as
+\(K_B^\psi,K_B^\phi\).  The states are LU equivalent if and only if
+there are \(F_i\in\operatorname{Sp}_{2e}(\F_p)\) satisfying
+\[
+ \left(\bigoplus_{i\in B}F_i\right)K_B^\psi
+ =K_B^\phi\left(\bigoplus_{j\notin B}F_j\right).       \tag{4.3}
+\]
+This can be decided by testing at most
 \[
  |\operatorname{Sp}_{2e}(\F_p)|
  =p^{e^2}\prod_{r=1}^e(p^{2r}-1)
 \]
 base symplectic frames.  In the arithmetic-operation model over \(\F_p\),
 each candidate requires polynomial work in the check-matrix size.  The
-stabilizer phases need not be supplied: Lemma~\ref{lem:pauli-phase-correction}
-repairs the character after the label spaces are matched.  For prime \(q\),
+stabilizer phases need not be supplied for this decision:
+Lemma~\ref{lem:pauli-phase-correction} guarantees a character repair after
+the label spaces are matched.  If the two characters are supplied, then for
+any chosen \(m\)-party set the repair is the unique Pauli label on that
+carrier realizing their discrepancy, and it is found by one linear solve.
+For prime \(q\),
 the number of base candidates is
 \(|\mathrm{SL}_2(q)|=q(q^2-1)\).
 In particular, fixed-label recognition is polynomial in \(m\) for fixed
 local dimension \(q\).
+With classical cubic matrix arithmetic, a concrete bound is
+\[
+ O\!\left((me)^3+
+ |\operatorname{Sp}_{2e}(\F_p)|\,m^2e^3\right)
+\]
+\(\F_p\)-operations.
 
 If the party relabelling is unknown, exhaustive search introduces at most a
 factor \((2m)!\).  For one state,
@@ -367,29 +434,114 @@ factor \((2m)!\).  For one state,
  =q^{2m}|\operatorname{Aut}_{\mathrm{tr}}(\psi)|
  \leq q^{2m}|\operatorname{Sp}_{2e}(\F_p)|.
 \]
-When \(q\) is prime,
-\[
- |\Gamma_\psi|=q^{2m}
- |C_{\mathrm{SL}_2(q)}(\langle H_A(i,j)\rangle)|
-\]
-for the based holonomies in Theorem~\ref{thm:atlas-classification}.
 \end{corollary}
 
 \begin{proof}
-Choose \(b\in B\).  On each support \(A_j=B\cup\{j\}\), the compatibility
-equations determine every local frame from its value \(F_b\) at the base.
-Enumerate \(F_b\in\operatorname{Sp}_{2e}(\F_p)\), propagate it through the
-operator-pushing maps of the two states, and check that the propagated maps
-are symplectic and satisfy the remaining support equations.  A successful
-candidate maps every \(L_\psi(A_j)\) to \(L_\phi(A_j)\), hence maps
-\(L_\psi\) to \(L_\phi\) by the direct-sum proposition; the Pauli phase
-correction then produces an LU equivalence.  Conversely, every LU
-equivalence supplies one of the tested base frames.  Kernels, transition
-maps, propagation, and compatibility are finite-field linear algebra of
-polynomial size in \(m\).  Enumerating party permutations gives the stated
-factor.  The group-order bound follows from the exact sequence in
+Mapping the two graph subspaces into one another is exactly the block
+equation \((4.3)\).  By Theorem~\ref{thm:atlas-classification} and
+Lemma~\ref{lem:pauli-phase-correction}, its locally symplectic solutions
+are exactly the LU equivalences.
+
+Write \(K^\psi_{ij}\) and \(K^\phi_{ij}\) for the party blocks.  They are
+invertible by Proposition~\ref{prop:half-set-direct-sum}.  Choose
+\(i_0\in B\) and \(j_0\notin B\).  Once \(F_{j_0}\) is fixed, the
+\((i,j_0)\)-blocks of \((4.3)\) determine every \(F_i\), and the
+\((i_0,j)\)-blocks then determine every remaining \(F_j\).  Enumerate
+\(F_{j_0}\in\operatorname{Sp}_{2e}(\F_p)\), test that the propagated
+frames are symplectic, and check all \(m^2\) block equations.  Forming the
+systematic maps and carrying out these checks is finite-field linear
+algebra polynomial in the input size and gives the displayed arithmetic
+bound.  The \(2m-1\) propagation equations form a spanning tree in the
+complete bipartite party graph; the remaining
+\(m^2-(2m-1)=(m-1)^2\) checks are its fundamental four-cycles.
+Enumerating party permutations gives the stated factor.  The group-order
+bound follows from the exact sequence in
 Theorem~\ref{thm:atlas-classification} and injectivity of evaluation at the
 base frame.
+\end{proof}
+
+\begin{corollary}[Prime-field recognition by fundamental cycles]
+\label{cor:prime-systematic-recognition}
+Let \(\psi,\phi\) be stabilizer \(\AME(2m,q)\) states with \(m\geq2\),
+assume \(q=p\), and fix a labelled split \(B\sqcup B^c\).  Write
+\(G=K_B^\psi\), \(H=K_B^\phi\), and choose
+\(b\in B\) and \(c\in B^c\).  For \(i\ne b\) and \(j\ne c\), define
+\[
+ Q^G_{ij}
+ =G_{bj}G_{ij}^{-1}G_{ic}G_{bc}^{-1}\in\operatorname{GL}_2(q),
+\]
+and define \(Q^H_{ij}\) similarly.  Then \(\psi\) and \(\phi\) are
+fixed-party LU equivalent if and only if
+\[
+ \det G_{ij}=\det H_{ij}\quad\text{for all \(i,j\)}
+\]
+and there is an \(A\in\mathrm{SL}_2(q)\) such that
+\[
+ A Q^G_{ij}=Q^H_{ij}A
+ \quad\text{for all \(i\ne b,\ j\ne c\)}.
+\]
+Thus prime-field recognition reduces to homogeneous linear equations in
+the four entries of \(A\), followed by the single quadratic condition
+\(\det A=1\).  Equivalently, the block-determinant array together with the
+simultaneous \(\mathrm{SL}_2(q)\)-conjugacy class of the ordered fundamental
+holonomies is a complete fixed-party LU invariant.  For one state,
+\(\operatorname{Aut}_{\mathrm{tr}}(\psi)\) is the centralizer in
+\(\mathrm{SL}_2(q)\) of these \((m-1)^2\) fundamental four-cycle
+holonomies.  According to the five cases below, this group is respectively
+\(\mathrm{SL}_2(q)\), its center, a split torus, a nonsplit norm-one torus,
+or a determinant-one Jordan centralizer.  Put \(d=\gcd(2,q-1)\).  Its
+order is exactly
+\[
+\left|\operatorname{Aut}_{\mathrm{tr}}(\psi)\right|
+=
+\begin{cases}
+ q(q^2-1),&\text{all holonomies are scalar},\\
+ d,&\text{two holonomies do not commute},\\
+ q-1,&\text{otherwise, a nonscalar holonomy is split semisimple},\\
+ q+1,&\text{otherwise, its characteristic polynomial is irreducible},\\
+ qd,&\text{otherwise, it has nontrivial Jordan form}.
+\end{cases}
+\]
+In every case \(|\Gamma_\psi|=q^{2m}
+|\operatorname{Aut}_{\mathrm{tr}}(\psi)|\).  In particular, two
+noncommuting holonomies certify the smallest possible linear image.
+\end{corollary}
+
+\begin{proof}
+Suppose first that
+\[
+ A_iG_{ij}=H_{ij}D_j
+\]
+for local \(A_i,D_j\in\mathrm{SL}_2(q)\).  Taking determinants gives the
+block-determinant equalities.  Multiplying around the displayed four-cycle
+gives \(Q^H_{ij}=A_bQ^G_{ij}A_b^{-1}\), so \(A=A_b\) satisfies the
+intertwining equations.
+
+Conversely, start from such an \(A\) and set
+\[
+ D_j=H_{bj}^{-1}AG_{bj},\qquad
+ A_i=H_{ic}D_cG_{ic}^{-1}.
+\]
+The determinant equalities put every \(D_j\) and \(A_i\) in
+\(\mathrm{SL}_2(q)\).  The base row and base column equations hold by
+construction.  Each remaining equation \(A_iG_{ij}=H_{ij}D_j\) is
+equivalent, after substitution, to
+\(AQ^G_{ij}=Q^H_{ij}A\).  Hence the systematic matrices are locally
+symplectically equivalent, and Corollary~\ref{cor:finite-recognition}
+lifts this to LU equivalence.  Taking \(G=H\) gives the centralizer
+statement.
+
+Finally, the centralizer of a nonscalar \(2\times2\) matrix is the
+commutative algebra that it generates.  Thus two noncommuting holonomies
+have only scalar common centralizer, whose intersection with
+\(\mathrm{SL}_2(q)\) is its center of order \(d\).  If all holonomies are
+scalar, their centralizer is all of \(\mathrm{SL}_2(q)\).  In the remaining
+case they commute and a nonscalar member \(Q\) is present; every holonomy
+lies in the commutative algebra \(\F_q[Q]\), so the common centralizer is
+the centralizer of \(Q\).  Its determinant-one units have order \(q-1\)
+in the split semisimple case, \(q+1\) in the nonsplit case, and \(qd\) in
+the nontrivial Jordan case.  The formula for \(|\Gamma_\psi|\) follows from
+Theorem~\ref{thm:atlas-classification}.
 \end{proof}
 
 \subsection{Encoder consequences}
@@ -429,3 +581,17 @@ normalizer.  Taking adjoints preserves the normalizer as well, and
 \(U^T=(\overline U)^\dagger\).  Thus transposition preserves the
 finite-field Clifford group, and \(L\) is Clifford.
 \end{proof}
+
+The recognition procedure is constructive for these encoders.  Given check
+matrices for the two normalized Choi states,
+Corollary~\ref{cor:finite-recognition} decides whether a transversal conversion
+exists and returns compact symplectic-frame witnesses within the same
+arithmetic bound.  If full stabilizer tableaux and chosen Clifford lifts are
+also supplied, one further linear solve returns a compact Clifford--Pauli
+conversion: the reference frame \(R\) gives logical frame
+\((R^{\mathsf T})^{-1}\), and
+Lemma~\ref{lem:pauli-phase-correction} allows the character repair to be
+supported on any prescribed \(m\) physical outputs.  Thus the repair need not
+alter the logical factor.  Moreover, \(m\) is the smallest size of a
+prescribed carrier that works uniformly for every discrepancy.  This bound
+does not include expansion into dense unitary matrices.
