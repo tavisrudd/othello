@@ -65,6 +65,10 @@ harness = false
 name = "observational_compiler"
 harness = false
 
+[[bench]]
+name = "ordered_resource"
+harness = false
+
 
 [profile.release]
 opt-level = 3
