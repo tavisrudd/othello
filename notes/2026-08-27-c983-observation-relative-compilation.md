@@ -358,6 +358,52 @@ adapter is a novelty claim.  The research claim, if one survives, must concern
 effective restricted-context separators, witness-liftable quotients, or a new
 domain small-model theorem.
 
+### Exact contract for exemplar A: bounded tropical weighted trees
+
+Inputs are a finite ranked alphabet, a tropical WTA with `Q` states, and a
+radius `r`.  The domain compiler constructs the reachable valuation vectors
+in `{0,...,r,infinity}^Q`, the ranked operations, the final observation, and a
+minimizing-run callback.  The generic engine must reproduce the direct WTA
+oracle, minimize the reachable algebra, and emit a distinguishing tree context
+for every split.  The report records original run-state count, ambient vector
+bound `(r+2)^|Q|`, reachable vectors, quotient classes, transition-table bytes,
+separator height, and transient witness bytes.  Boolean/unweighted and unary
+weighted machines are regression corollaries; the unary potential mode must
+agree with weight-push-then-minimize where its hypotheses hold.
+
+### Exact contract for exemplar B: symmetric resource batches
+
+Fix `m` identical machines, integral load cap `r`, a finite job-size alphabet,
+and an additive assignment/penalty rule.  Let `P` be sorted load profiles in
+`{0,...,r}^m`.  A finite job batch `B` compiles to the min-plus relation
+
+```text
+K_B(p,q) = minimum cost of assigning every job of B,
+           starting at profile p and ending at profile q,
+```
+
+with `infinity` for infeasibility and a concrete assignment backpointer for
+each attained entry.  Concatenating batches is exactly min-plus relation
+composition.  Labelled machine loads provide the deliberately redundant raw
+control; sorting supplies the known permutation-orbit reduction.
+
+The semantic experiment then fixes independently a finite grammar of future
+job batches and terminal observations (for example feasibility and convex
+terminal load penalty).  It compiles relation states into the multi-sorted
+context presentation, applies absolute or potential-bearing minimization, and
+replays an assignment witness.  Full initial/final coordinate selectors are a
+negative control and must return entrywise matrix equality.  A claimed gain
+requires a restricted application query family to merge more states than
+sorting alone, or a capability gain from reusable batch composition and
+multi-query/witness evaluation.  Compare against exhaustive assignment on
+small instances and a generic exact solver on the benchmark envelope.
+
+This exemplar forces all important boundaries at once: symmetry is not
+contextual minimization, relation representation is not quotienting, bounded
+future jobs are part of the specification, and witness memory is not value-
+state memory.  The boundaried-network adapter found in the later audit is the
+first stretch application after these two controls.
+
 ## 6. Red-team gates
 
 1. Do not call a finite observation quotient a determinization of the full

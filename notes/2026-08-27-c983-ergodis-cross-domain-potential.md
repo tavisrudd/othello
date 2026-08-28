@@ -230,6 +230,16 @@ bounds, an effective domain-to-interface compiler, exact witnesses, and
 cross-domain evidence.  Unrestricted coordinate-selector contexts distinguish
 every raw kernel entry, so they admit no nontrivial semantic quotient.
 
+The first two executable noncoding exemplars are now fixed.  The control is a
+bounded tropical weighted-tree automaton compiled through its finite reachable
+valuation algebra.  The engineering falsifier is symmetric finite resource
+allocation: job batches compile to min-plus relations on sorted machine-load
+profiles, compose exactly, and replay assignment witnesses.  Full coordinate
+queries are the required no-compression control; restricted future-job and
+terminal-query grammars must show either reduction beyond permutation sorting
+or a concrete reusable-composition/multi-query capability gain.  Quantitative
+boundaried-network optimization is the first stretch adapter.
+
 The first exact theorem/backend design is
 `notes/2026-08-27-c983-observation-relative-compilation.md`.  It proves the
 finite ranked observational-algebra quotient and separator-refinement core,
