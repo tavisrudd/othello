@@ -17,7 +17,9 @@ def next_random(state: int) -> int:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("family", choices=("chain", "random", "redundant", "colors"))
+    parser.add_argument(
+        "family", choices=("chain", "random", "redundant", "composed", "colors")
+    )
     parser.add_argument("states", type=int)
     parser.add_argument("generators", type=int)
     parser.add_argument("outputs", type=int)
@@ -33,6 +35,18 @@ def main() -> None:
         ^ (generator % 4 if args.family == "redundant" else generator)
         for generator in range(args.generators)
     ]
+    composed_bases = []
+    if args.family == "composed":
+        for generator in range(4):
+            if generator == 0:
+                transitions = [min(state + 1, args.states - 1) for state in range(args.states)]
+            else:
+                random_state = 0x9E37_79B9_7F4A_7C15 ^ generator
+                transitions = []
+                for _ in range(args.states):
+                    random_state = next_random(random_state)
+                    transitions.append(random_state % args.states)
+            composed_bases.append(transitions)
     with args.destination.open("w", encoding="ascii") as output:
         for state in range(args.states):
             observation = state % args.outputs if args.family == "colors" else int(
@@ -41,7 +55,14 @@ def main() -> None:
             targets = []
             for generator in range(args.generators):
                 effective_generator = generator % 4 if args.family == "redundant" else generator
-                if args.family == "colors":
+                if args.family == "composed":
+                    if generator < 4:
+                        target = composed_bases[generator][state]
+                    else:
+                        first = (generator - 4) % 4
+                        second = ((generator - 4) // 4) % 4
+                        target = composed_bases[second][composed_bases[first][state]]
+                elif args.family == "colors":
                     target = (state + effective_generator + 1) % args.states
                 elif args.family == "chain" or effective_generator == 0:
                     target = min(state + 1, args.states - 1)

@@ -967,7 +967,9 @@ impl RefinementGenerators {
                             [prior_start..prior_start + prior_record.transition_len as usize]
                             == *transitions
                 });
-                if !duplicate {
+                let composite = !duplicate
+                    && generator_is_retained_composite(presentation, record, transitions, &ids);
+                if !duplicate && !composite {
                     ids.push(generator);
                 }
             }
@@ -987,6 +989,54 @@ impl RefinementGenerators {
         let range = self.ranges[sort as usize];
         &self.ids[range.start as usize..range.end() as usize]
     }
+}
+
+fn generator_is_retained_composite(
+    presentation: &FinitePresentation,
+    candidate: GeneratorRecord,
+    candidate_transitions: &[u32],
+    retained: &[u32],
+) -> bool {
+    // This reduction exists to recover the exact packed (arity <= 4)
+    // backend. Once five independent generators from this source survive,
+    // no later removal can restore admission, so do not grow preprocessing
+    // quadratically on wide irreducible alphabets.
+    if retained
+        .iter()
+        .filter(|&&generator| {
+            presentation.generators[generator as usize].source_sort == candidate.source_sort
+        })
+        .take(5)
+        .count()
+        >= 5
+    {
+        return false;
+    }
+    retained.iter().copied().any(|first| {
+        let first_record = presentation.generators[first as usize];
+        if first_record.source_sort != candidate.source_sort {
+            return false;
+        }
+        let first_start = first_record.transition_start as usize;
+        let first_transitions = &presentation.transitions
+            [first_start..first_start + first_record.transition_len as usize];
+        retained.iter().copied().any(|second| {
+            let second_record = presentation.generators[second as usize];
+            if second_record.source_sort != first_record.target_sort
+                || second_record.target_sort != candidate.target_sort
+            {
+                return false;
+            }
+            let intermediate = presentation.sorts[second_record.source_sort as usize];
+            let second_start = second_record.transition_start as usize;
+            first_transitions.iter().zip(candidate_transitions).all(
+                |(&middle_state, &candidate_target)| {
+                    let middle_local = (middle_state - intermediate.start) as usize;
+                    presentation.transitions[second_start + middle_local] == candidate_target
+                },
+            )
+        })
+    })
 }
 
 impl CombinedInverse {
@@ -3790,6 +3840,7 @@ mod tests {
                 shift(1),
                 shift(2),
                 shift(1),
+                shift(3),
                 shift(0),
                 GeneratorSpec {
                     source_sort: 0,
@@ -3814,7 +3865,7 @@ mod tests {
         .unwrap();
 
         let refinement = RefinementGenerators::new(&presentation).unwrap();
-        assert_eq!(refinement.ids_from(0), &[0, 1]);
+        assert_eq!(refinement.ids_from(0), &[0, 3]);
         assert!(refinement.ids_from(1).is_empty());
         assert!(multiway_is_admitted(&presentation));
 

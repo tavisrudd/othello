@@ -26,8 +26,23 @@ fn presentation(states: u32, generators: u32, outputs: u32, family: &str) -> Fin
         observations[states as usize - 1] = 1;
         observations
     };
-    let mut specs = Vec::with_capacity(generators as usize);
+    let mut specs: Vec<GeneratorSpec> = Vec::with_capacity(generators as usize);
     for generator in 0..generators {
+        if family == "composed" && generator >= 4 {
+            let first = ((generator - 4) % 4) as usize;
+            let second = (((generator - 4) / 4) % 4) as usize;
+            let transitions = specs[first]
+                .transitions
+                .iter()
+                .map(|&middle| specs[second].transitions[middle as usize])
+                .collect::<Vec<_>>();
+            specs.push(GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: transitions.into_boxed_slice(),
+            });
+            continue;
+        }
         let effective_generator = if family == "redundant" {
             generator % 4
         } else {
@@ -66,6 +81,7 @@ fn main() {
         family == "chain"
             || family == "random"
             || family == "redundant"
+            || family == "composed"
             || family == "colors"
             || family == "stable"
     );
