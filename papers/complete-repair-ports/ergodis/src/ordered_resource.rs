@@ -196,14 +196,17 @@ impl CappedAdditiveMonoid {
 }
 
 impl FiniteOrderedMonoid for CappedAdditiveMonoid {
+    #[inline]
     fn element_count(&self) -> u32 {
         self.element_count
     }
 
+    #[inline]
     fn identity(&self) -> u32 {
         0
     }
 
+    #[inline]
     fn combine(&self, left: u32, right: u32) -> u32 {
         debug_assert!(left < self.element_count && right < self.element_count);
         if self.boolean_dimensions {
@@ -220,6 +223,7 @@ impl FiniteOrderedMonoid for CappedAdditiveMonoid {
         result
     }
 
+    #[inline]
     fn leq(&self, left: u32, right: u32) -> bool {
         debug_assert!(left < self.element_count && right < self.element_count);
         if self.boolean_dimensions {
@@ -392,6 +396,7 @@ impl WitnessedParetoWorkspace {
     }
 }
 
+#[inline]
 fn insert_witnessed<M: FiniteOrderedMonoid>(
     monoid: &M,
     entries: &mut Vec<ParetoWitness>,
@@ -613,6 +618,7 @@ impl ParetoFront {
     }
 }
 
+#[inline]
 fn insert_minimal<M: FiniteOrderedMonoid>(monoid: &M, elements: &mut Vec<u32>, candidate: u32) {
     if elements
         .iter()
