@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY TWENTY-ONE-SOURCE PASS; FOUR SOURCES READ
-AT FULL TEXT AND SEVENTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
+**Status**: IN PROGRESS; PRELIMINARY TWENTY-TWO-SOURCE PASS; FOUR SOURCES READ
+AT FULL TEXT AND EIGHTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
 LICENSED
 
 ## Executive verdict
@@ -582,6 +582,17 @@ The read depths below are unconditional and describe this preliminary pass.
     Kantorovich/total-variation distances between transition laws, proves the
     zero kernel is bisimulation, and bounds optimal-value and aggregation error
     by the resulting behavioral distances.
+22. Albert Gu and Tri Dao, *Mamba: Linear-Time Sequence Modeling with
+    Selective State Spaces*. **Read depth: partial** — arXiv abstract and
+    primary-paper metadata, cache key `arXiv:2312.00752`; read the abstract and
+    contribution summary.  The paper makes selected SSM parameters functions
+    of the input, so the recurrence can selectively propagate or forget
+    information, and supplies a hardware-aware parallel algorithm for the
+    resulting recurrent computation.  It does not claim that its learned
+    hidden state is an exact contextual quotient, a behaviorally minimal
+    realization, or sufficient for every future test.  Mamba is therefore an
+    experimental approximation vehicle here; PSR, automata, and realization
+    theory remain the mathematical controls.
 
 ## Knowledge-compilation and provenance connection
 
@@ -793,6 +804,40 @@ vectors is irrelevant without a decoder/error theorem.  Exact Ergodis
 instances provide the rare ground truth needed to compare latent dimension,
 contextual distortion, rollout error, and optimizer/witness failure as the
 exact quotient grows.
+
+### Falsifiable learned-realization experiment
+
+The SSM connection becomes an Ergodis capability only through a controlled
+comparison against an exact compiled machine.  For a family of instances whose
+exact quotient grows through a useful range, construct a transition corpus
+
+```text
+(class s, typed generator x, successor s', response vector r(s))
+```
+
+from the certified artifact.  Train an encoder `phi`, typed recurrent update
+`F`, and response decoder `D` with four independently reported losses:
+
+1. response error `D(phi(s))` against exact separator/core-test coordinates;
+2. closure error `F(phi(s),x)` against `phi(s')`;
+3. contextual distortion on certified equivalent and distinguishing pairs;
+4. multi-step rollout value error, including contexts deeper than training.
+
+The comparison set is deliberately architecture-neutral: the tabular exact
+quotient, a linear/SVD or PSR-style realization where meaningful, an MLP
+transition model, a GRU, and a selective SSM/Mamba-style recurrence receive the
+same states, generators, and output budget.  Mamba earns relevance only if its
+input-conditioned update improves the rate--distortion or rollout frontier;
+the experiment remains useful if another architecture wins.
+
+Witnesses are evaluated rather than assumed.  A decoded choice must replay to
+a valid domain solution, and the report separates invalid-witness rate,
+suboptimality, and value-prediction error.  No finite training context set
+certifies all-context error.  Certification requires a domain-specific cover,
+Lipschitz/error-propagation theorem, exact fallback, or an explicit statement
+that the model is heuristic.  This makes exact Ergodis compilation the
+benchmark generator and safety envelope rather than a disposable prelude to
+neural approximation.
 
 ## Coverage gaps and next search
 

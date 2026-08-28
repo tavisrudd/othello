@@ -438,6 +438,17 @@ The first-batch evidence changes the expansion ranking:
 6. **Predictive-state/SSM approximation laboratory** — high upside, deferred
    until exact states and contextual metrics provide ground truth.
 
+The neural branch is now a concrete falsification experiment rather than an
+analogy.  A certified exact quotient generates state/generator/successor and
+future-response data; linear/PSR, MLP, GRU, and selective-SSM updates compete
+under the same latent budget on response preservation, transition closure,
+out-of-depth rollout, contextual distortion, and decoded-witness validity.
+Mamba's primary contribution supports input-dependent retention and efficient
+recurrent execution, not exact sufficiency or minimality.  It is therefore one
+replaceable backend.  Whatever architecture wins, Ergodis retains the valuable
+roles of exact ground-truth compiler, counterexample generator, error monitor,
+and fallback solver.
+
 The best remaining theorem targets are domain-specific: effective restricted-
 context separator bounds, projectively complete separators, witness-lift laws,
 and compositional approximation bounds.  The broad universal statements have
