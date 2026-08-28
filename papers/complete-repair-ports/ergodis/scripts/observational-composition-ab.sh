@@ -11,6 +11,7 @@ repo_root=$(git -C "${ergodis_root}" rev-parse --show-toplevel)
 relative_root=${ergodis_root#"${repo_root}"/}
 patch_file=${ergodis_root}/benches/disable_composition_reduction.patch
 target_dir=${cache_root}/composition-baseline-target
+source_revision=693d00037
 
 if [[ ! -x ${optimized_bin} || ${relative_root} == "${ergodis_root}" ]]; then
   echo "expected an optimized executable inside the ergodis repository" >&2
@@ -25,7 +26,7 @@ esac
 cleanup() { rm -rf -- "${snapshot}"; }
 trap cleanup EXIT
 
-git -C "${repo_root}" archive HEAD "${relative_root}" | tar -x -C "${snapshot}"
+git -C "${repo_root}" archive "${source_revision}" "${relative_root}" | tar -x -C "${snapshot}"
 baseline_root=${snapshot}/${relative_root}
 patch -s -d "${baseline_root}" -p1 < "${patch_file}"
 CARGO_TARGET_DIR=${target_dir} cargo build --quiet --release \

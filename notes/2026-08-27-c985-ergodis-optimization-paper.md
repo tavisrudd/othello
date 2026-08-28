@@ -439,6 +439,12 @@ composition reductions relevant to adaptive admission.  The permanent typed
 test now also eliminates a cyclic shift expressed as a retained composition
 and agrees with the independent worklist quotient.
 
+Follow-on commit `f7f241a0a` passes the already proved refinement directory
+from adaptive admission into the selected compiler instead of deriving it a
+second time.  Public verification continues to rebuild independently.  The
+tables below predate that follow-on optimization and are not relabelled as
+post-change measurements.
+
 On the 131,072-state composed-16 control, eleven paired internal rounds give
 200.055 ms without composition elimination and 22.665 ms with it, an 8.83x
 speedup.  The retained proof has the same 16,204 multiway records as the
@@ -481,5 +487,5 @@ Hashes:
 - benchmark script: `296acc6b0c272d5d9b418bf7c9bf34e598689fb5ff524c8d243174f1b1c4d8f9`;
 - checker: `cbc0b60a7c496e68fc397d8cbd6e804cfb743aa448d1a1d4e6f625ba3eef6d1e`;
 - fixture generator: `62706b93661468df760970614ce47c1c6de12b00e0d436b4e8542b0bda3234a8`;
-- internal A/B script: `1166d0fbb1b2a107cbf8fd10ecc9dd92a32932e2c790b5c0474e91f0a9d57af0`;
+- internal A/B script: `1fa9c584f8928676ad6253d81327681be1c7014f5021075d6a177b34f699dd8e`;
 - exact baseline patch: `35c249c0c11b61604a3a1694c1ebe7ecabb61d46c9185848fe62a640fb5d01ca`.
