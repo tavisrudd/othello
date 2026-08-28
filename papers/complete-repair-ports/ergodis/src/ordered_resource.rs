@@ -619,4 +619,66 @@ mod tests {
             })
         );
     }
+
+    #[test]
+    fn all_small_resource_subsets_and_pairs_match_brute_force() {
+        let monoid = CappedAdditiveMonoid::new([1, 1]).unwrap();
+        let canonical = |candidates: &[u32]| {
+            let mut expected: Vec<_> = candidates
+                .iter()
+                .copied()
+                .filter(|&candidate| {
+                    !candidates
+                        .iter()
+                        .copied()
+                        .any(|other| other != candidate && monoid.leq(other, candidate))
+                })
+                .collect();
+            expected.sort_unstable();
+            expected.dedup();
+            expected
+        };
+        let mut fronts = Vec::with_capacity(16);
+        let mut subsets = Vec::with_capacity(16);
+        for mask in 0_u32..16 {
+            let subset: Vec<_> = (0_u32..4)
+                .filter(|&element| mask & (1 << element) != 0)
+                .collect();
+            let front = ParetoFront::new(&monoid, subset.iter().copied()).unwrap();
+            assert_eq!(front.elements(), canonical(&subset));
+            subsets.push(subset);
+            fronts.push(front);
+        }
+        for left in 0..fronts.len() {
+            for right in 0..fronts.len() {
+                let choice_candidates: Vec<_> = subsets[left]
+                    .iter()
+                    .chain(subsets[right].iter())
+                    .copied()
+                    .collect();
+                assert_eq!(
+                    fronts[left]
+                        .choice(&monoid, &fronts[right])
+                        .unwrap()
+                        .elements(),
+                    canonical(&choice_candidates)
+                );
+
+                let mut compose_candidates =
+                    Vec::with_capacity(subsets[left].len() * subsets[right].len());
+                for &left_element in &subsets[left] {
+                    for &right_element in &subsets[right] {
+                        compose_candidates.push(monoid.combine(left_element, right_element));
+                    }
+                }
+                assert_eq!(
+                    fronts[left]
+                        .compose(&monoid, &fronts[right])
+                        .unwrap()
+                        .elements(),
+                    canonical(&compose_candidates)
+                );
+            }
+        }
+    }
 }

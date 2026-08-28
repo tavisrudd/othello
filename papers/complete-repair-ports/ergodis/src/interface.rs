@@ -127,6 +127,10 @@ mod tests {
     use crate::observational::{compile_observational, verify_compilation};
     use std::convert::Infallible;
 
+    #[derive(Debug, Error, PartialEq, Eq)]
+    #[error("adapter sentinel")]
+    struct AdapterSentinel;
+
     struct TypedAdapter;
 
     impl FiniteInterfaceAdapter for TypedAdapter {
@@ -184,5 +188,48 @@ mod tests {
         for (&witness, &representative) in witnesses.iter().zip(compiled.class_representatives()) {
             assert_eq!(witness, representative + 10);
         }
+    }
+
+    struct InvalidTargetAdapter;
+
+    impl FiniteInterfaceAdapter for InvalidTargetAdapter {
+        type Error = AdapterSentinel;
+
+        fn sort_count(&self) -> u32 {
+            1
+        }
+
+        fn sort_len(&self, _sort: u32) -> Result<u32, Self::Error> {
+            Ok(1)
+        }
+
+        fn observation(&self, _state: u32) -> Result<u32, Self::Error> {
+            Ok(0)
+        }
+
+        fn context_count(&self) -> u32 {
+            1
+        }
+
+        fn context_sorts(&self, _context: u32) -> Result<(u32, u32), Self::Error> {
+            Ok((0, 0))
+        }
+
+        fn transition(&self, _context: u32, _state: u32) -> Result<u32, Self::Error> {
+            Ok(1)
+        }
+    }
+
+    #[test]
+    fn adapter_boundary_rejects_transitions_outside_the_target_sort() {
+        assert!(matches!(
+            present_finite_interface(&InvalidTargetAdapter),
+            Err(InterfaceCompileError::Presentation(
+                ObservationalError::TransitionTarget {
+                    generator: 0,
+                    transition: 0
+                }
+            ))
+        ));
     }
 }
