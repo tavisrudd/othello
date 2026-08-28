@@ -403,7 +403,7 @@ fn validate_generators<A: FinitePermutationAction>(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::observational::GeneratorSpec;
+    use crate::observational::{compile_observational, GeneratorSpec};
     use std::convert::Infallible;
 
     struct TableAction<const N: usize, const G: usize>([[u32; N]; G]);
@@ -496,6 +496,18 @@ mod tests {
         for context in 0..2 {
             assert_eq!(quotient.transition(context, 0), Some(0));
             assert_eq!(quotient.transition(context, 1), Some(1));
+        }
+        let direct = compile_observational(&presentation).unwrap();
+        let reduced = compile_observational(&quotient).unwrap();
+        for left in 0..6 {
+            for right in 0..6 {
+                let direct_equal = direct.state_classes()[left] == direct.state_classes()[right];
+                let left_orbit = partition.point_orbits()[left] as usize;
+                let right_orbit = partition.point_orbits()[right] as usize;
+                let reduced_equal =
+                    reduced.state_classes()[left_orbit] == reduced.state_classes()[right_orbit];
+                assert_eq!(direct_equal, reduced_equal);
+            }
         }
     }
 
