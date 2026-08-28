@@ -61,6 +61,11 @@ fn main() {
     let generators = args.next().expect("generators").parse::<u32>().unwrap();
     let repetitions = args.next().expect("repetitions").parse::<u32>().unwrap();
     let outputs = args.next().map_or(2, |value| value.parse::<u32>().unwrap());
+    let policy = match args.next().as_deref() {
+        None | Some("transcript") => CertificatePolicy::SplitTranscript,
+        Some("quotient") => CertificatePolicy::QuotientOnly,
+        Some(value) => panic!("unknown policy {value}: expected transcript or quotient"),
+    };
     assert!(args.next().is_none());
 
     let input = presentation(states, generators, outputs, &family);
@@ -68,11 +73,7 @@ fn main() {
     let mut classes = 0_usize;
     let mut splits = 0_usize;
     for _ in 0..repetitions {
-        let compiled = compile_observational_with_policy(
-            black_box(&input),
-            CertificatePolicy::SplitTranscript,
-        )
-        .unwrap();
+        let compiled = compile_observational_with_policy(black_box(&input), policy).unwrap();
         classes = black_box(compiled.class_outputs().len());
         splits = black_box(compiled.metrics().refinement_splits);
     }
