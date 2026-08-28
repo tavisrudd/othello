@@ -93,8 +93,30 @@ formal congruence argument.
 
 ## Common kernel candidate
 
-The smallest honest first-batch API is a typed finite weighted relation with
-provenance:
+The theorem pass shows that a typed finite weighted relation is one useful
+evaluation representation, but too narrow to be the kernel: ranked operations,
+tree constructors, and graph gluing need not arrive as binary serial matrices.
+The smallest honest cross-domain API is instead a finite typed context
+presentation:
+
+```text
+FiniteContextPresentation<Sort, State, Generator, Obs>:
+    finite sorts and reachable states by sort
+    typed generator action State[i] -> State[j]
+    observation State[i] -> Obs[i]
+    domain-state lift / canonical representative
+    optional symmetry normalization
+    optional witness-composition callbacks
+
+CompiledQuotient:
+    class_of(state)
+    quotient generator tables
+    distinguishing typed path for every separated pair
+    observation projection
+    witness replay sidecar
+```
+
+A typed finite weighted relation remains a backend and adapter convenience:
 
 ```text
 Component<I,J,S,W>:
@@ -104,6 +126,13 @@ Component<I,J,S,W>:
 serial(C,D)(i,k):
     aggregate over j of C(i,j) combine D(j,k)
 ```
+
+The relation backend compiles its admissible one-hole operations into typed
+generators before minimization.  A ranked algebra does the same by fixing all
+coarguments except the hole.  A boundaried-graph parser uses its finite graph
+constructors.  Thus the classical automata, ranked-algebra, and graph-gluing
+results are instances of the presentation rather than privileged branches in
+the engine.
 
 Domain compilers, not the kernel, provide:
 

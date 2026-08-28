@@ -258,6 +258,13 @@ new value comes from deriving the finite semantics, reducing it materially,
 supporting richer queries/witnesses, or making a previously bespoke exact
 solver executable through the shared interface.
 
+This also sharpens the proposed API.  A binary weighted relation is a useful
+backend, not the universal kernel.  The kernel consumes a finite typed context
+presentation—sorts, reachable carriers, typed generator actions,
+observations, domain lifts, and optional witness callbacks—and emits quotient
+tables plus distinguishing-path certificates.  Relations, ranked algebras,
+open-system syntax, and graph parsers compile into that presentation.
+
 A missed near-neighbor is now explicit: Myhill--Nerode methods for boundaried
 graphs and hypergraphs already characterize finite-state Boolean property
 recognition under gluing and tie it to bounded-width algorithms and boundary
