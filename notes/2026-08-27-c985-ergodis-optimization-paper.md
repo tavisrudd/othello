@@ -627,3 +627,19 @@ papers/complete-repair-ports/ergodis/scripts/check-observational-wide-adaptive-e
 - wide A/B script: `685758524804938c3496dddfca32baea7111b070497651faa99ddc11796e6ade`, 1,038 bytes;
 - wide checker: `38ea9225b2b6d6cd66260435d7e2cc6031a646baaf88bfeb4c9873f4cfacbbdb`, 1,101 bytes;
 - wide TSV: `6eaf24d90ba8e93770513b4736ed41b0547dfdd868ac5d42438fa5964bbfc8df`, 1,057 bytes.
+
+Commit `795590ce1` then stores each retained generator's validated transition
+start beside the basis ID.  Wide signature hashing and collision checks index
+those starts directly, eliminating a generator-record load and source-offset
+reconstruction for every signature component.  Seven paired rounds against
+`6f0dfa9dc` improve random-32 from 111.379 to 99.330 ms (1.121x) and
+random-128 from 184.453 to 167.147 ms (1.104x), with median RSS within 0.5%.
+The directory is pre-sized during basis construction and adds no hot-loop
+allocation.
+
+```sh
+papers/complete-repair-ports/ergodis/scripts/check-observational-wide-directory-evidence.sh
+```
+
+- directory checker: `2b5b93f50f957e9bd2e9bfe34877759c03f1340ef77e75aefe980dbb0db4a645`, 819 bytes;
+- directory TSV: `40ac0f020227b74b45542bd5fa235c6e0f416810800cc511cfea035093e69fed`, 1,045 bytes.
