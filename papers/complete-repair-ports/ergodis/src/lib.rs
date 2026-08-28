@@ -11,6 +11,7 @@ pub mod composition;
 pub mod confinement;
 pub mod contextual;
 pub mod defect;
+pub mod family_response;
 pub mod field;
 pub mod group_action;
 pub mod incidence;
@@ -51,6 +52,9 @@ pub use confinement::{
 pub use contextual::{
     ContextCost, ContextExecution, ContextPlan, ContextStrategy, ContextWork, ContextualError,
     PlannedContextCost, RankBoundedContextCache, RankOneProbeCache,
+};
+pub use family_response::{
+    compile_minima_family_responses, FamilyResponseError, FamilyResponseTable,
 };
 pub use field::{FieldError, FiniteField, Gf4, Prime};
 pub use group_action::{

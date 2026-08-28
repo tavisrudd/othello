@@ -583,10 +583,8 @@ mod tests {
                         }
                     }
                 }
-                for point in 0..4 {
-                    let expected = (0..4)
-                        .find(|&candidate| reachable[point][candidate])
-                        .unwrap() as u32;
+                for (point, row) in reachable.iter().enumerate() {
+                    let expected = (0..4).find(|&candidate| row[candidate]).unwrap() as u32;
                     assert_eq!(partition.representative(point as u32), Some(expected));
                 }
             }

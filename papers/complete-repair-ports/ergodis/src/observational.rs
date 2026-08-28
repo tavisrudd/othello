@@ -392,6 +392,28 @@ impl FinitePresentation {
         &self.observations
     }
 
+    /// Preserve the typed context system while replacing its observations.
+    pub fn reobserve(
+        &self,
+        observations: impl Into<Box<[u32]>>,
+    ) -> Result<Self, ObservationalError> {
+        let observations = observations.into();
+        if observations.len() != self.observations.len() {
+            return Err(ObservationalError::ObservationCount {
+                expected: self.observations.len(),
+                actual: observations.len(),
+            });
+        }
+        Ok(Self {
+            sorts: self.sorts.clone(),
+            observations,
+            generators: self.generators.clone(),
+            transitions: self.transitions.clone(),
+            generator_sort_ranges: self.generator_sort_ranges.clone(),
+            generator_ids_by_sort: self.generator_ids_by_sort.clone(),
+        })
+    }
+
     pub fn generators(&self) -> &[GeneratorRecord] {
         &self.generators
     }
