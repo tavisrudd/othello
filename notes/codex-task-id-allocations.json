@@ -3761,8 +3761,17 @@
       "last": 990,
       "purpose": "compress Appendix B conservatively and cold-read for essential losses",
       "sequence": 418
+    },
+    {
+      "count": 1,
+      "first": 991,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 991,
+      "purpose": "export C990 Paper I compression to standalone and refresh portfolio summary",
+      "sequence": 419
     }
   ],
-  "next_id": 991,
+  "next_id": 992,
   "schema": "codex-task-id-allocations-v1"
 }
