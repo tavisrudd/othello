@@ -663,3 +663,56 @@ papers/complete-repair-ports/ergodis/scripts/check-observational-wide-directory-
 ```
 
 - batched-signature TSV: `089844910ea65dab4f648c5acfd598dd8676d482ecccb45420a180a194a919d3`, 1,042 bytes.
+
+## Portfolio-theorem transfer
+
+The performance work now feeds a broader exact compositional engine rather
+than ending at observational minimization.  The finite tower-synthesis
+corollary from C980 is executable through three quotient operations:
+
+- commit `57623e09d` adds shortest typed generator-word synthesis;
+- commit `cabf4e675` adds minimum-cost synthesis for nonnegative generator
+  costs using a preallocated indexed heap; and
+- commit `bc063825d` adds exact preperiod/cycle analysis for an indefinitely
+  repeated type-preserving layer.
+
+Commit `aa7b39423` implements the generator-alphabet case of C980's
+family-restricted contextual quotients.  It constructs an exact restricted
+presentation and retains the map to original generator IDs, so synthesized
+words remain replayable.  Commit `337b35e98` extends this to arbitrary regular
+context-word policies by taking the typed product with a finite deterministic
+recognizer and masking observations outside its accepting states.  The product
+keeps original generator IDs and exact minimization can merge equivalent
+recognizer-control states.  Minima-defined application families may still
+require the coarser response-vector quotient described in C980.
+
+Commit `fbdca7185` removes recursive pivot selection from the rank-bounded
+recovery-context cache.  RREF pivot sets are now walked lexicographically in
+fixed preallocated storage, eliminating stack-depth dependence while retaining
+the radius-bounded exact enumeration.
+
+Commit `c11ce2cc3` applies the rank-stratified theorem one step further: exact
+full-row-rank coefficient maps are rank-tested once and stored contiguously for
+reuse across every outer subspace.  Cache admission is bounded to 8 MiB per
+instance; inadmissible strata use the prior exact on-the-fly path.  Seven paired
+CPU-2 rounds on the binary rank-2 cold build-and-query benchmark reduce the
+median from 21,327 ns to 11,391 ns (1.872x).  The candidate count remains 255.
+Median process peak RSS is 10,784 versus 11,916 KiB; at this small workload the
+1,132 KiB process-level increase is much larger than the 30-byte coefficient
+payload and includes separate benchmark-binary/runtime variation.
+
+```sh
+ERGODIS_ROUNDS=7 \
+  papers/complete-repair-ports/ergodis/scripts/contextual-rank-map-ab.sh \
+  "$BASELINE_BENCH" "$FULL_RANK_CACHE_BENCH" \
+  > papers/complete-repair-ports/ergodis/evidence/c985-full-rank-map-final.tsv
+papers/complete-repair-ports/ergodis/scripts/check-contextual-rank-map-evidence.sh
+```
+
+- rank-map A/B script: `54a3237eec9c2cacb56f1274b91317631395c1a34ef5b97c05f8dda618f05961`, 991 bytes;
+- rank-map checker: `f25a412055b9743199785cc4a034f942ee081b84151009e395ac3ebfdc4ef3ad`, 762 bytes;
+- rank-map TSV: `91cf18bdcf19b25dd6c5f01bcbeaee6e154922a1b32f8627974857b00729fe3d`, 417 bytes.
+
+The complete theorem-to-compiler work order, classical-corollary framing, and
+negative boundaries are recorded in
+`notes/2026-08-28-c985-ergodis-portfolio-theorem-leverage.md`.
