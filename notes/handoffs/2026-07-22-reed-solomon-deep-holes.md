@@ -203,8 +203,10 @@ uniformly closed by an affine-plane product; its complement reduces to one
 torus-invariant affine parameter, and eleven Frobenius-orbit products close
 that line too.  In the `z8!=0` chart, the three-orbit `z4=z5=0` endpoint is
 also explicitly closed.  Its exact residue is one two-affine-coordinate
-torus stratum and two one-affine-coordinate square-class strata.  No finite
-census is authorized.
+torus stratum and two one-affine-coordinate square-class strata.  There the
+three-line determinant is `p(ra+b)(pa-b)`, so at most two directions and no
+`u` are exceptional; the first image condition is generically a three-point
+affine-plane intersection.  No finite census is authorized.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md`, and

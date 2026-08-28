@@ -218,7 +218,11 @@ on that parameter line; eleven explicit transverse products close them.
 The `z8!=0` chart's `z4=z5=0` endpoint has only three torus orbits, all now
 closed.  Its exact residue is `z5=1` with two affine coordinates, or
 `z5=0,z4 in {1,nu}` with one affine coordinate.  Only those strata and the
-dense abundance problem remain.
+dense abundance problem remain.  On those `z8` strata the determinant factors
+as `p(ra+b)(pa-b)`, excluding at most two directions and no `u`; the condition
+`s in W_r` is generically an affine-plane intersection of exactly three
+points.  The residual gate is only the quadratic split and collision tests on
+that three-point line.
 
 ## Objective
 

@@ -503,6 +503,52 @@ torus strata
                  c=0,\ b\in\{1,\nu\},\ a\in K.          \tag{33}
 \]
 
+On these strata the three-line solve simplifies further.  Substituting
+`z=(a,0,b,c,0,0,1)` into (5) gives
+
+\[
+\begin{aligned}
+A&=ra+b,&D&=0,&E&=p(pa-b),\\
+B&=u(pa+b)-pc,\\
+C&=u(p+r)c+p^2rb+(r-p),\\
+F&=u\{pra+(p+r)b\}+p(p-r)c.
+\end{aligned}                                             \tag{34}
+\]
+
+Hence
+
+\[
+                              \Delta=p(ra+b)(pa-b).       \tag{35}
+\]
+
+For `a!=0`, at most one `p` and one `r` among the thirteen directions make
+(35) vanish; if `a=0`, it is nonzero throughout the open stratum `b!=0`.
+There is no exceptional `u`.  When (35) is nonzero,
+
+\[
+ s=-\kappa u-\eta,
+ \quad
+ \kappa=\frac{pra+(p+r)b}{p(pa-b)},
+ \quad
+ \eta=\frac{(p-r)c}{pa-b},
+ \qquad
+ v=-\frac{Bs+C}{ra+b}.                                  \tag{36}
+\]
+
+Thus the first image condition is the intersection
+
+\[
+                              \kappa W_p\cap(-\eta+W_r). \tag{37}
+\]
+
+The two spaces are affine planes in the three-dimensional `F3`-space `K`.
+If their directions differ, (37) is automatically an affine line of three
+points; if the directions agree, it has either zero or nine points according
+as the translate misses or equals that plane.  Consequently the generic
+`z8` residue has already fallen from a nine-value `u` search to exactly three
+explicit candidates.  Only the quadratic split test and the two collision
+factors remain on that affine line.
+
 ## 8. Boundary and next gate
 
 The load-bearing next step is to choose `p!=r` uniformly from the thirteen
@@ -511,7 +557,8 @@ stratum.  Equation (12) transports every syndrome outside (14) into that
 stratum.  The two-coordinate endpoint is closed by (16)--(18), the `z7`
 chart by (19)--(21), and the entire `z5` chart by (24)--(29).  The only
 separate open boundary is now the pair of torus strata (33) inside the
-`z8!=0` chart.
+`z8!=0` chart, with their generic solve reduced to the three-point affine
+intersection (37).
 
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
@@ -531,4 +578,4 @@ certificate supports this reduction.
 | Does the torus endpoint survive? | no; its four square-class orbits have the explicit three-line products (17) | closed by the coefficient identities (18) |
 | Does the residual `z7` chart survive? | no; relative torus weight five is invertible modulo 26, leaving two orbits | closed by the explicit root partitions (20)--(21) |
 | What remains of the residual `z5` chart? | nothing: its `z4=0` slice closes uniformly by one affine-plane product, and Frobenius reduces the complementary `lambda`-line to the eleven direct products (28) | closed by (24)--(29) |
-| What remains of the residual `z8` chart? | its three-orbit `z4=z5=0` endpoint is closed; two torus strata remain | analyze the normal forms (33) with the same three-line cover |
+| What remains of the residual `z8` chart? | its three-orbit `z4=z5=0` endpoint is closed; two torus strata remain, and their first image condition generically leaves exactly three `u` values | close the quadratic split and collision tests on (37) |
