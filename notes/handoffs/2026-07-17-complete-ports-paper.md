@@ -233,9 +233,18 @@ Sequel research:
   and determinized resource-batch adapters.  Exact controls give `13 -> 6` and
   `35/51/44 -> 22/14/5`; typed separators, WTA tree/run replay, exhaustive
   resource-assignment replay, artifact-corruption tests, and an independent
-  Python oracle pass.  This accepts implementation stages 1/2, not C983: a
-  recovery control through the same artifact, common witness sidecar, measured
-  reuse economics, schema fingerprint, and cold hostile review remain open.
+  Python oracle pass.  That accepted implementation stages 1/2, not C983.
+  The follow-on [recovery/sidecar control](../2026-08-27-c983-recovery-sidecar-control.md)
+  closes the recovery, common-sidecar, and presentation-fingerprint architecture
+  gaps: all 16 raw triangle-gauge
+  `2 x 2` demands compile `16 -> 5` under the complete stated request-projection
+  schema, with exact coefficient/support/helper-load replay and an independent
+  Python oracle.  Recovery, WTA, and resources now share one presentation-bound
+  concrete-trace/provenance sidecar.  An incompatible-equivalent-witness
+  regression forbids class-representative substitution.  This passes the
+  three-exemplar architecture gate; actual hierarchical `CostTable`
+  composition, measured reuse economics, versioned payload schemas, and a cold
+  implementation review remain C983 gates.
   C983 does not block C325 or C953 and makes no manuscript or public-surface
   change.
 

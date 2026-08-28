@@ -19,6 +19,7 @@ pub mod orbit;
 pub mod orbit_compile;
 pub mod packed_ternary;
 pub mod projective;
+pub mod provenance;
 pub mod scheduler;
 pub mod span;
 pub mod transfer;

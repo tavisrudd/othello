@@ -229,11 +229,72 @@ def resource_oracle() -> dict[str, object]:
     }
 
 
+RECOVERY_COLUMNS = ((1, 0), (0, 1), (1, 1))
+
+
+def recovery_solution(state: int) -> tuple[int, list[int], list[int], list[int]]:
+    demand = tuple((state >> bit) & 1 for bit in range(4))
+    for support_mask in sorted(range(8), key=lambda mask: (mask.bit_count(), mask)):
+        support = [helper for helper in range(3) if support_mask & (1 << helper)]
+        for coefficient_bits in range(1 << (2 * len(support))):
+            coefficients = [
+                (coefficient_bits >> bit) & 1 for bit in range(2 * len(support))
+            ]
+            if any(
+                not any(coefficients[2 * index : 2 * index + 2])
+                for index in range(len(support))
+            ):
+                continue
+            rebuilt = []
+            for row in range(2):
+                for column in range(2):
+                    value = 0
+                    for index, helper in enumerate(support):
+                        value ^= RECOVERY_COLUMNS[helper][row] * coefficients[2 * index + column]
+                    rebuilt.append(value)
+            if tuple(rebuilt) == demand:
+                loads = [int(helper in support) for helper in range(3)]
+                return len(support), support, coefficients, loads
+    raise AssertionError("every triangle-gauge demand must be recoverable")
+
+
+def recovery_oracle() -> dict[str, object]:
+    observations = [[recovery_solution(state)[0] for state in range(16)]]
+    generators = [
+        [(0, 0, state & mask) for state in range(16)] for mask in (0b0101, 0b1010)
+    ]
+    classes, rounds = refine([list(range(16))], observations, generators)
+    separators, separator_steps = shortest_separator_stats(observations, generators, classes)
+    witnesses = []
+    for state in (0, 3, 12, 15, 9):
+        cost, support, coefficients, loads = recovery_solution(state)
+        witnesses.append(
+            {
+                "state": state,
+                "cost": cost,
+                "support": support,
+                "coefficients": coefficients,
+                "helper_loads": loads,
+            }
+        )
+    return {
+        "carrier": 16,
+        "observation_fibres": len(set(observations[0])),
+        "quotient": len(set(classes[0])),
+        "class_sizes": sorted(Counter(classes[0]).values(), reverse=True),
+        "refinement_rounds": rounds,
+        "separators": separators,
+        "separator_steps": separator_steps,
+        "witnesses": witnesses,
+    }
+
+
 def main() -> None:
     expected = {
-        "schema": "ergodis-observational-v1",
+        "schema": "ergodis-observational-v2",
         "wta": wta_oracle(),
         "resource": resource_oracle(),
+        "recovery": recovery_oracle(),
     }
     actual = json.loads(FIXTURE.read_text())
     if actual != expected:

@@ -1,5 +1,5 @@
 {
-  "schema": "ergodis-observational-v1",
+  "schema": "ergodis-observational-v2",
   "wta": {
     "carrier": 13,
     "observation_fibres": 4,
@@ -22,6 +22,22 @@
       {"profile": [2, 3, 4], "jobs": [1, 2], "cost": 4, "slots": [1, 0]},
       {"profile": [0, 3, 3], "jobs": [2, 2], "cost": 4, "slots": [0, 0]},
       {"profile": [4, 4, 4], "jobs": [1], "cost": 5, "slots": null}
+    ]
+  },
+  "recovery": {
+    "carrier": 16,
+    "observation_fibres": 3,
+    "quotient": 5,
+    "class_sizes": [6, 3, 3, 3, 1],
+    "refinement_rounds": 1,
+    "separators": 96,
+    "separator_steps": 27,
+    "witnesses": [
+      {"state": 0, "cost": 0, "support": [], "coefficients": [], "helper_loads": [0, 0, 0]},
+      {"state": 3, "cost": 1, "support": [0], "coefficients": [1, 1], "helper_loads": [1, 0, 0]},
+      {"state": 12, "cost": 1, "support": [1], "coefficients": [1, 1], "helper_loads": [0, 1, 0]},
+      {"state": 15, "cost": 1, "support": [2], "coefficients": [1, 1], "helper_loads": [0, 0, 1]},
+      {"state": 9, "cost": 2, "support": [0, 1], "coefficients": [1, 0, 0, 1], "helper_loads": [1, 1, 0]}
     ]
   }
 }

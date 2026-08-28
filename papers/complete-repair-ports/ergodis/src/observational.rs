@@ -100,6 +100,16 @@ pub struct FinitePresentation {
     transitions: Box<[u32]>,
 }
 
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct PresentationFingerprint {
+    pub low: u64,
+    pub high: u64,
+}
+
+const _: () = assert!(std::mem::size_of::<PresentationFingerprint>() == 16);
+const _: () = assert!(std::mem::align_of::<PresentationFingerprint>() == 8);
+
 impl FinitePresentation {
     pub fn new(
         sort_lengths: impl IntoIterator<Item = u32>,
@@ -183,6 +193,35 @@ impl FinitePresentation {
         self.observations.len()
     }
 
+    /// Stable non-cryptographic identity for the exact sorts, observations,
+    /// generators, and transition tables supplied to the compiler.
+    pub fn fingerprint(&self) -> PresentationFingerprint {
+        let mut hash = [0xcbf2_9ce4_8422_2325_u64, 0x6c62_272e_07bb_0142_u64];
+        fingerprint_word(&mut hash, self.sorts.len() as u32);
+        for range in &self.sorts {
+            fingerprint_word(&mut hash, range.start);
+            fingerprint_word(&mut hash, range.len);
+        }
+        fingerprint_word(&mut hash, self.observations.len() as u32);
+        for &observation in &self.observations {
+            fingerprint_word(&mut hash, observation);
+        }
+        fingerprint_word(&mut hash, self.generators.len() as u32);
+        for generator in &self.generators {
+            fingerprint_word(&mut hash, generator.source_sort);
+            fingerprint_word(&mut hash, generator.target_sort);
+            fingerprint_word(&mut hash, generator.transition_len);
+        }
+        fingerprint_word(&mut hash, self.transitions.len() as u32);
+        for &transition in &self.transitions {
+            fingerprint_word(&mut hash, transition);
+        }
+        PresentationFingerprint {
+            low: hash[0],
+            high: hash[1],
+        }
+    }
+
     pub fn transition(&self, generator: u32, state: u32) -> Option<u32> {
         let record = *self.generators.get(generator as usize)?;
         let source = self.sorts[record.source_sort as usize];
@@ -202,6 +241,15 @@ impl FinitePresentation {
             .enumerate()
             .filter(move |(_, generator)| generator.source_sort == sort)
             .map(|(index, generator)| (index as u32, generator))
+    }
+}
+
+fn fingerprint_word(hash: &mut [u64; 2], word: u32) {
+    for byte in word.to_le_bytes() {
+        hash[0] ^= u64::from(byte);
+        hash[0] = hash[0].wrapping_mul(0x0000_0100_0000_01b3);
+        hash[1] ^= u64::from(byte).wrapping_add(0x9d);
+        hash[1] = hash[1].wrapping_mul(0x0000_0100_0000_01e7);
     }
 }
 
