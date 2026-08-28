@@ -336,3 +336,77 @@ automata or coalgebra encodings.  Independent checking consists of equality
 with the exhaustive reference on the bounded corpora, independent public
 certificate replay, corruption rejection, and comparison with Boa's pinned
 native result.
+
+## Theorem-driven context elimination and kernel profile
+
+Commit `bc1410739` adds a refinement-only generator basis.  It uses four exact
+reductions before constructing the predecessor relation:
+
+1. an identity endocontext is refinement-neutral;
+2. a constant context cannot distinguish two source states;
+3. pointwise-identical contexts induce the same refinement constraint;
+4. a context targeting an observationally singleton sort is neutral.
+
+The singleton sorts are the greatest fixed point among observation-constant
+sorts whose outgoing contexts remain in that set.  This is a coinductive
+closure, not a syntactic singleton-state test: mutually recursive uniform
+sorts are recognized.  If `R` is the retained basis, every omitted generator
+is constant on every block stable under `R`; consequently stability under
+`R` implies stability under the full generator family.  The emitted artifact
+nevertheless includes quotient transitions for every original generator, and
+the public verifier checks congruence against the full presentation.  A typed
+4,098-state regression combines identity, constant, duplicate, and
+coinductively singleton-target cases; the two-generator reduced result equals
+the independent worklist result and passes replay.
+
+This reduction is unavailable to Boa's generic encoded-alphabet refiner.  It
+also changes backend selection: a presentation with more than four supplied
+contexts can remain in the exact packed multiway kernel when its semantic
+basis has width at most four.  Preprocessing is iterative, occurs outside the
+hot loop, and uses compact sort/generator directories.  Refinement itself
+remains allocation-free and nonrecursive.
+
+The pre-change deferred random profile attributed 83.1% of samples to
+`minimize_partition_multiway`, 5.8% to combined-inverse construction, and
+4.6% to artifact emission.  Source-line profiling identified repeated
+generator-record loads and dynamic two-word packing in the signature kernel.
+Specializing the exact 0--4 generator signature reduced an interleaved median
+from about 23.4 ms to 21.8 ms (1.07x).  A proposed bitmap for rejecting
+singleton predecessors earlier was neutral over fifteen interleaved rounds
+and was removed rather than retaining extra state.  Final nonmultiplexed
+random counters are 93.7 M cycles and 148.3 M instructions, versus 97.5 M and
+162.2 M before specialization: 3.9% fewer cycles and 8.6% fewer instructions.
+
+The final eleven-round CPU-2 A/B medians at pinned Boa revision
+`54a556448169a83a369e039b5fa3ba27323ccfde` are:
+
+| deferred family | Ergodis | Boa | Ergodis advantage |
+|---|---:|---:|---:|
+| chain-1 | 8.302 ms | 35.320 ms | 4.254x |
+| random-4 | 22.043 ms | 40.060 ms | 1.818x |
+| random basis-4 exposed as 16 contexts | 27.431 ms | 86.603 ms | 3.157x |
+| stable colors-4/256 | 2.704 ms | 14.010 ms | 5.180x |
+
+Each paired case returns the same quotient size (131,072 except 256 for the
+stable-color quotient).  The redundant
+case retains the same 16,204 multiway records as random-4; its remaining cost
+increase is the unavoidable exact scan needed to validate the larger input
+and emit its full quotient alphabet.  These are bounded implementation
+results, not a claim that real applications contain a particular redundancy
+ratio.  They demonstrate the application-framing point: Ergodis can accept a
+richer contextual language without paying for every semantically redundant
+context in the refinement kernel.
+
+Regeneration:
+
+```sh
+ERGODIS_CERTIFICATE_POLICY=adaptive-deferred \
+  scripts/observational-boa-ab.sh "$ERGODIS_BIN" "$BOA_SOURCE" 11 2 \
+  "$FIXTURE_DIR" > evidence/c985-theorem-final.tsv
+```
+
+Hashes after adding the redundant-context fixture are:
+
+- final raw table: `bab8159d0c7eacce71b1aadae9e8e7dca7cf4f87788982794a93158799859716`;
+- benchmark script: `34544e7d5eb05972fdf8511338ad79d44e46b34975c42a48981037a75a538bef`;
+- fixture generator: `2f9344fc94db5f8846663adeff9027c41fd857181c7678e8177846591f77dc97`.

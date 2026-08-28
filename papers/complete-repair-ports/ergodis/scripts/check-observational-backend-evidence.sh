@@ -6,6 +6,7 @@ root=$(cd -- "${script_dir}/.." && pwd)
 immediate=${root}/evidence/c985-backend-immediate.tsv
 deferred=${root}/evidence/c985-backend-deferred.tsv
 rss=${root}/evidence/c985-backend-rss.tsv
+theorem=${root}/evidence/c985-theorem-final.tsv
 
 check_timing() {
   local file=$1 boundary=$2
@@ -54,6 +55,47 @@ check_timing() {
 
 check_timing "${immediate}" immediate
 check_timing "${deferred}" deferred
+awk -F '\t' '
+  NR == 1 {
+    expected = "implementation\tfamily\tstates\tgenerators\toutputs\trepetitions\tns_per_op\tclasses\tsplits_optional"
+    if ($0 != expected) exit 2
+    next
+  }
+  {
+    if ($1 != "ergodis" && $1 != "boa") exit 3
+    if ($2 != "chain" && $2 != "random" && $2 != "redundant" && $2 != "colors") exit 4
+    generators = ($2 == "chain" ? 1 : ($2 == "redundant" ? 16 : 4))
+    outputs = ($2 == "colors" ? 256 : 2)
+    classes = ($2 == "colors" ? 256 : 131072)
+    if ($3 != 131072 || $4 != generators || $5 != outputs || $6 != 1 || $7 !~ /^[0-9]+$/ || $8 != classes) exit 5
+    key = $1 SUBSEP $2
+    count[key]++
+    value[key, count[key]] = $7 + 0
+    rows++
+  }
+  END {
+    if (rows != 88) exit 6
+    for (key in count) {
+      if (count[key] != 11) exit 7
+      for (i = 1; i <= 11; i++) sorted[i] = value[key, i]
+      for (i = 1; i <= 11; i++) for (j = i + 1; j <= 11; j++) {
+        if (sorted[j] < sorted[i]) {
+          temporary = sorted[i]; sorted[i] = sorted[j]; sorted[j] = temporary
+        }
+      }
+      median[key] = sorted[6]
+      delete sorted
+    }
+    for (i = 1; i <= 4; i++) {
+      family = (i == 1 ? "chain" : (i == 2 ? "random" : (i == 3 ? "redundant" : "colors")))
+      if (!(median["ergodis" SUBSEP family] < median["boa" SUBSEP family])) exit 8
+      printf "%s%s=%.3f/%.3fms", (i == 1 ? "theorem\t" : "\t"), family,
+        median["ergodis" SUBSEP family] / 1000000,
+        median["boa" SUBSEP family] / 1000000
+    }
+    printf "\n"
+  }
+' "${theorem}"
 awk -F '\t' '
   NF != 2 || $1 !~ /^(transcript|adaptive|adaptive-deferred)$/ || $2 !~ /^[0-9]+$/ { exit 2 }
   { count[$1]++; value[$1, count[$1]] = $2 + 0 }
