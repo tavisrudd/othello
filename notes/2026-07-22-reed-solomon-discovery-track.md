@@ -184,3 +184,21 @@ five-marker package.
 **Evidence:** manuscript theorem scope was narrowed to the explicit package
 hypothesis; R8--R10 remain unconditional after fixed-level discharge.
 **Status:** open structural lead; no task allocated by the synthesis.
+
+### 2026-08-28 — the affine-plane switch sees one percent of the GF(27) witnesses
+
+**Provenance:** C973 switch calibration, `reed-solomon-tasks/c973-2026-08-28-gf27-switch-probe.md` §7.
+**Was I looking for this?:** no — the probe measured good-switch counts, not the shape of all closing nine-sets.
+**Observed / musing:** the syndrome `e_3` has 6,890 closing nine-affine sets in 266 torus orbits; none is an affine `F_3`-plane or a union of three parallel `F_3`-lines, only the 78 two-point plane switches meet a plane in seven points, and every other witness meets every plane in at most six points.  The plane and three-line families are empty for a parity reason: the three line constants would be the roots of the `F_3`-linear `X^3-p^3X-e_3`, whose kernel needs `-1` to be a square in GF(27), and it is not.
+**Why it may matter / strongest question:** every structured witness family used so far is additive-subspace-based, and the witnesses are overwhelmingly non-additive.  A certificate-free GF(27) proof probably needs a non-additive family (multiplicative cosets of the order-13 subgroup, or Frobenius-twisted supports) rather than more plane bookkeeping.
+**Evidence:** CHECKED (exhaustive `C(27,9)` count for `e_3`; exact orbit dump in `c973-gf27-switch-probe/out/e3-ninesets.tsv`).
+**Status:** open lead.
+
+### 2026-08-28 — structured support plus bounded exchange as a solver primitive
+
+**Provenance:** user question during C973 about reuse in `papers/complete-repair-ports/ergodis`.
+**Was I looking for this?:** no — cross-lane musing.
+**Observed / musing:** the GF(27) switch mechanism (take a structured support, delete two points, solve a `2x2` linear system for the unique replacement pair, test split/collision) is a generic candidate generator for coset-leader and relative-covering-radius questions: it replaces `C(n,w)` enumeration by a small structured family plus local exchange, and the seven-type quotient stratification is a module-derived orbit reduction.  The GF(27) instance itself (relative radius of `[27,16] subset [27,23]`, 4.7 million supports against 4e8 syndromes, compiled to 1404 candidates per class) is a natural ergodis benchmark once the gate is closed.
+**Discriminator / falsifier:** worth pursuing only if some other coset-leader instance in the ergodis corpus has a structured family whose exchanges are provably nonsingular; otherwise it is an application list, not a mechanism.
+**Evidence:** REASONED.
+**Status:** open lead; cross-lane, requires `complete-ports` routing.
