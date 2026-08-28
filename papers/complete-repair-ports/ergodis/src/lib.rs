@@ -17,6 +17,7 @@ pub mod matrix;
 pub mod observational;
 pub mod orbit;
 pub mod orbit_compile;
+pub mod ordered_resource;
 pub mod packed_ternary;
 pub mod projective;
 pub mod provenance;
@@ -62,6 +63,10 @@ pub use orbit_compile::{
     compile_integer_affine_constraints, compile_ternary_affine_constraints,
     IntegerAffineCompilation, IntegerAffineProblem, IntegerLatticeObstruction,
     TernaryAffineCompilation, TernaryAffineObstruction, TernaryAffineProblem,
+};
+pub use ordered_resource::{
+    validate_finite_ordered_monoid, CappedAdditiveMonoid, FiniteOrderedMonoid,
+    OrderedMonoidCertificate, OrderedResourceError, ParetoFront,
 };
 pub use scheduler::{
     maximum_parallel_repairs, CapacityCut, ParallelRepairResult, PositiveGradingCertificate,
