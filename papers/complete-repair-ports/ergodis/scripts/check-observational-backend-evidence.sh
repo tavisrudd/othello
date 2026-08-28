@@ -102,14 +102,14 @@ awk -F '\t' '
   NR == 1 { next }
   {
     if ($1 != "ergodis" && $1 != "boa") exit 2
-    if ($2 != "chain" && $2 != "random" && $2 != "redundant" && $2 != "composed" && $2 != "colors") exit 3
+    if ($2 != "chain" && $2 != "random" && $2 != "redundant" && $2 != "composed" && $2 != "powers" && $2 != "colors") exit 3
     key = $1 SUBSEP $2
     count[key]++
     value[key, count[key]] = $7 + 0
     rows++
   }
   END {
-    if (rows != 110) exit 4
+    if (rows != 132) exit 4
     for (key in count) {
       if (count[key] != 11) exit 5
       for (i = 1; i <= 11; i++) sorted[i] = value[key, i]
@@ -119,8 +119,8 @@ awk -F '\t' '
       median[key] = sorted[6]
       delete sorted
     }
-    for (i = 1; i <= 5; i++) {
-      family = (i == 1 ? "chain" : (i == 2 ? "random" : (i == 3 ? "redundant" : (i == 4 ? "composed" : "colors"))))
+    for (i = 1; i <= 6; i++) {
+      family = (i == 1 ? "chain" : (i == 2 ? "random" : (i == 3 ? "redundant" : (i == 4 ? "composed" : (i == 5 ? "powers" : "colors")))))
       if (!(median["ergodis" SUBSEP family] < median["boa" SUBSEP family])) exit 6
       printf "%s%s=%.3f/%.3fms", (i == 1 ? "monoid\t" : "\t"), family,
         median["ergodis" SUBSEP family] / 1000000, median["boa" SUBSEP family] / 1000000

@@ -442,8 +442,25 @@ and agrees with the independent worklist quotient.
 Follow-on commit `f7f241a0a` passes the already proved refinement directory
 from adaptive admission into the selected compiler instead of deriving it a
 second time.  Public verification continues to rebuild independently.  The
-tables below predate that follow-on optimization and are not relabelled as
-post-change measurements.
+final six-family table below includes this reuse optimization.
+
+Commit `5574ad92a` adds a second exact monoid corollary for endomorphism powers.
+If a supplied generator is `f^k` for retained `f`, congruence for `f` implies
+congruence for that generator.  The detector is bounded at exponent 32.  A
+representative-state orbit is only a cheap trigger; acceptance requires exact
+equality of the complete transition table.  Once triggered, all powers are
+built together by 32 sequential passes and every matching supplied generator
+is marked, reducing the former repeated transition chasing by roughly an
+order of magnitude.  Scratch allocation is lazy and remains outside the
+refinement loop.  A raw high-arity sort reduced to one generator may use the
+multiway backend, while a genuinely unary raw sort retains the faster binary
+chain policy.
+
+Commit `2ed766799` removes the checked public-transition call from full
+quotient emission.  It indexes the already validated generator slice directly
+by the source-local class representative.  This retains full-alphabet output
+while reducing the now-prominent emission cost; validation and independent
+artifact replay are unchanged.  The final table includes this fast path.
 
 On the 131,072-state composed-16 control, eleven paired internal rounds give
 200.055 ms without composition elimination and 22.665 ms with it, an 8.83x
@@ -456,11 +473,12 @@ Final eleven-round CPU-2 medians against pinned Boa are:
 
 | deferred family | Ergodis | Boa | Ergodis advantage |
 |---|---:|---:|---:|
-| chain-1 | 5.738 ms | 19.745 ms | 3.442x |
-| irreducible random-4 | 15.599 ms | 25.610 ms | 1.642x |
-| duplicate-context-16 | 19.358 ms | 63.335 ms | 3.272x |
-| composed-context-16 | 20.384 ms | 56.919 ms | 2.792x |
-| stable colors-4/256 | 2.656 ms | 8.313 ms | 3.130x |
+| chain-1 | 7.625 ms | 26.524 ms | 3.479x |
+| irreducible random-4 | 14.884 ms | 24.759 ms | 1.663x |
+| duplicate-context-16 | 17.813 ms | 62.359 ms | 3.501x |
+| composed-context-16 | 18.707 ms | 56.132 ms | 3.001x |
+| power-context-32 | 16.085 ms | 45.093 ms | 2.803x |
+| stable colors-4/256 | 2.638 ms | 8.209 ms | 3.112x |
 
 The composed family is a controlled transformation-monoid application shape,
 not a claim about the redundancy distribution of arbitrary inputs.  It shows
@@ -482,10 +500,10 @@ scripts/check-observational-backend-evidence.sh
 
 Hashes:
 
-- final five-family table: `ff1bb05f9eb0c173c279656917bf5a9f66916025b2a69602261b291e73d1d30a`;
+- final six-family table: `0f22889e46b31b26d95d5d5b61bf883f1fca7c1839000271d47a44fa0580cf84`;
 - internal composition A/B: `228112aa3a48fac1e7db83c01713a7925cce5e4d624b67316ffaea240829bc01`;
-- benchmark script: `296acc6b0c272d5d9b418bf7c9bf34e598689fb5ff524c8d243174f1b1c4d8f9`;
-- checker: `cbc0b60a7c496e68fc397d8cbd6e804cfb743aa448d1a1d4e6f625ba3eef6d1e`;
-- fixture generator: `62706b93661468df760970614ce47c1c6de12b00e0d436b4e8542b0bda3234a8`;
+- benchmark script: `2c1ce8200d565fa87eceea2d786d60ad6fb0ef7fa6a9e80e0ea7ac0e71931222`;
+- checker: `500ec0398ca0fc9a745e14e4c6587f82794f808c792c74fdbc639f00447e3bdf`;
+- fixture generator: `9016bf311489ae6324fc20e78817e6f928d47a6388725361bf5053a3ea085991`;
 - internal A/B script: `1fa9c584f8928676ad6253d81327681be1c7014f5021075d6a177b34f699dd8e`;
 - exact baseline patch: `35c249c0c11b61604a3a1694c1ebe7ecabb61d46c9185848fe62a640fb5d01ca`.

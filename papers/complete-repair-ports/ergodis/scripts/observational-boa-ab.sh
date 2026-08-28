@@ -42,6 +42,7 @@ cases=(
   "random 131072 4 2"
   "redundant 131072 16 2"
   "composed 131072 16 2"
+  "powers 131072 32 2"
   "colors 131072 4 256"
 )
 
