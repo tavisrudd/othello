@@ -103,6 +103,11 @@ struct DenseCostDirectory {
 }
 
 impl DenseCostDirectory {
+    #[inline(always)]
+    fn lookup_index(&self, index: usize) -> Option<u32> {
+        u32::try_from(self.costs[index]).ok()
+    }
+
     fn lookup<F: FiniteField>(&self, label: &[u8]) -> Option<u32> {
         if self.costs.is_empty() {
             return None;
@@ -111,7 +116,7 @@ impl DenseCostDirectory {
         for &entry in label {
             index = index * F::ORDER as usize + entry as usize;
         }
-        u32::try_from(self.costs[index]).ok()
+        self.lookup_index(index)
     }
 }
 
@@ -1116,6 +1121,22 @@ fn coefficient_map_cost<F: FiniteField>(
     target_uses_inner_dense_costs: bool,
     block_data: &mut [u8],
 ) -> Result<u32, ContextualError> {
+    if !inner_dense_costs.costs.is_empty()
+        && (target_uses_inner_dense_costs || !target_dense_costs.costs.is_empty())
+    {
+        return coefficient_map_dense_cost::<F>(
+            subspace,
+            rank,
+            block_count,
+            target_rank,
+            target_block,
+            cutoff,
+            coefficients,
+            inner_dense_costs,
+            target_dense_costs,
+            target_uses_inner_dense_costs,
+        );
+    }
     block_data.fill(0);
     for block in 0..block_count {
         let label = &mut block_data[block * target_rank..(block + 1) * target_rank];
@@ -1151,6 +1172,50 @@ fn coefficient_map_cost<F: FiniteField>(
             dense_costs.lookup::<F>(label)
         };
         let Some(local) = local else {
+            return Ok(cutoff);
+        };
+        cost = cost.checked_add(local).ok_or(ContextualError::Overflow)?;
+        if cost >= cutoff {
+            return Ok(cost);
+        }
+    }
+    Ok(cost)
+}
+
+#[allow(clippy::too_many_arguments)]
+#[inline]
+fn coefficient_map_dense_cost<F: FiniteField>(
+    subspace: &[u8],
+    rank: usize,
+    block_count: usize,
+    target_rank: usize,
+    target_block: usize,
+    cutoff: u32,
+    coefficients: &[u8],
+    inner_dense_costs: &DenseCostDirectory,
+    target_dense_costs: &DenseCostDirectory,
+    target_uses_inner_dense_costs: bool,
+) -> Result<u32, ContextualError> {
+    let mut cost = 0_u32;
+    for block in 0..block_count {
+        let mut index = 0_usize;
+        for col in 0..target_rank {
+            let mut value = 0_u8;
+            for row in 0..rank {
+                let outer = subspace[row * block_count + block];
+                if outer == 0 {
+                    continue;
+                }
+                value = F::add(value, F::mul(outer, coefficients[row * target_rank + col]));
+            }
+            index = index * F::ORDER as usize + value as usize;
+        }
+        let directory = if block == target_block && !target_uses_inner_dense_costs {
+            target_dense_costs
+        } else {
+            inner_dense_costs
+        };
+        let Some(local) = directory.lookup_index(index) else {
             return Ok(cutoff);
         };
         cost = cost.checked_add(local).ok_or(ContextualError::Overflow)?;
