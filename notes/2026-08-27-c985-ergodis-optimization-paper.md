@@ -598,3 +598,32 @@ papers/complete-repair-ports/ergodis/scripts/check-observational-shared-slices-e
 
 - shared-slice checker: `0a1629c5f9db589aa318afd7f79c158779faa6c038bbce016327f01554777658`, 1,078 bytes;
 - shared-slice TSV: `3954f12cf8f6b4de3f4fb6f5efe48d3132aa770f4f06f5bc3ebf805483703039`, 440 bytes.
+
+## Wide adaptive multiway frontier
+
+Commit `6f0dfa9dc` removes the adaptive policy's artificial width-four ceiling.
+Four is the packed-signature fast-path width, not a semantic or algorithmic
+limit: the same allocation-free dirty-block engine already has an exact hashed
+signature path for wider alphabets.  Genuinely unary raw presentations still
+select the binary chain backend, and callers may still request an explicit
+split transcript.  All other two-output wide presentations may now select
+multiway refinement after exact generator-basis reduction.
+
+Seven paired deferred CPU-2 rounds compare `83aa94863` with `6f0dfa9dc`.
+Random-32 falls from 502.956 ms to 111.130 ms (4.526x) and median peak RSS from
+90,360 to 45,260 KiB (49.91%).  Random-128 at 65,536 states falls from 968.062
+ms to 184.324 ms (5.252x) and RSS from 169,148 to 72,784 KiB (56.97%).  Both
+families are deterministic; these measurements establish the policy crossover
+on the stated controls, not universal dominance for every wide presentation.
+
+```sh
+ERGODIS_ROUNDS=7 \
+  papers/complete-repair-ports/ergodis/scripts/observational-wide-adaptive-ab.sh \
+  "$BASELINE_DRIVER" "$WIDE_DRIVER" \
+  > papers/complete-repair-ports/ergodis/evidence/c985-wide-adaptive-final.tsv
+papers/complete-repair-ports/ergodis/scripts/check-observational-wide-adaptive-evidence.sh
+```
+
+- wide A/B script: `685758524804938c3496dddfca32baea7111b070497651faa99ddc11796e6ade`, 1,038 bytes;
+- wide checker: `38ea9225b2b6d6cd66260435d7e2cc6031a646baaf88bfeb4c9873f4cfacbbdb`, 1,101 bytes;
+- wide TSV: `6eaf24d90ba8e93770513b4736ed41b0547dfdd868ac5d42438fa5964bbfc8df`, 1,057 bytes.
