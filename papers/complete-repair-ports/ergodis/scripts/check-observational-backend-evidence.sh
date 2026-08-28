@@ -7,6 +7,8 @@ immediate=${root}/evidence/c985-backend-immediate.tsv
 deferred=${root}/evidence/c985-backend-deferred.tsv
 rss=${root}/evidence/c985-backend-rss.tsv
 theorem=${root}/evidence/c985-theorem-final.tsv
+monoid=${root}/evidence/c985-monoid-final.tsv
+composition_internal=${root}/evidence/c985-composition-internal.tsv
 
 check_timing() {
   local file=$1 boundary=$2
@@ -96,6 +98,59 @@ awk -F '\t' '
     printf "\n"
   }
 ' "${theorem}"
+awk -F '\t' '
+  NR == 1 { next }
+  {
+    if ($1 != "ergodis" && $1 != "boa") exit 2
+    if ($2 != "chain" && $2 != "random" && $2 != "redundant" && $2 != "composed" && $2 != "colors") exit 3
+    key = $1 SUBSEP $2
+    count[key]++
+    value[key, count[key]] = $7 + 0
+    rows++
+  }
+  END {
+    if (rows != 110) exit 4
+    for (key in count) {
+      if (count[key] != 11) exit 5
+      for (i = 1; i <= 11; i++) sorted[i] = value[key, i]
+      for (i = 1; i <= 11; i++) for (j = i + 1; j <= 11; j++) if (sorted[j] < sorted[i]) {
+        temporary = sorted[i]; sorted[i] = sorted[j]; sorted[j] = temporary
+      }
+      median[key] = sorted[6]
+      delete sorted
+    }
+    for (i = 1; i <= 5; i++) {
+      family = (i == 1 ? "chain" : (i == 2 ? "random" : (i == 3 ? "redundant" : (i == 4 ? "composed" : "colors"))))
+      if (!(median["ergodis" SUBSEP family] < median["boa" SUBSEP family])) exit 6
+      printf "%s%s=%.3f/%.3fms", (i == 1 ? "monoid\t" : "\t"), family,
+        median["ergodis" SUBSEP family] / 1000000, median["boa" SUBSEP family] / 1000000
+    }
+    printf "\n"
+  }
+' "${monoid}"
+awk -F '\t' '
+  NR == 1 { next }
+  {
+    if ($1 != "ergodis" || $2 != "composed" || $3 != 131072 || $4 != 16 || $8 != 131072) exit 2
+    side = (NR % 2 == 0 ? "baseline" : "reduced")
+    count[side]++
+    value[side, count[side]] = $7 + 0
+    rows++
+  }
+  END {
+    if (rows != 22 || count["baseline"] != 11 || count["reduced"] != 11) exit 3
+    for (side in count) {
+      for (i = 1; i <= 11; i++) sorted[i] = value[side, i]
+      for (i = 1; i <= 11; i++) for (j = i + 1; j <= 11; j++) if (sorted[j] < sorted[i]) {
+        temporary = sorted[i]; sorted[i] = sorted[j]; sorted[j] = temporary
+      }
+      median[side] = sorted[6]
+      delete sorted
+    }
+    if (!(median["reduced"] * 5 < median["baseline"])) exit 4
+    printf "composition-internal\tbaseline=%.3fms\treduced=%.3fms\n", median["baseline"] / 1000000, median["reduced"] / 1000000
+  }
+' "${composition_internal}"
 awk -F '\t' '
   NF != 2 || $1 !~ /^(transcript|adaptive|adaptive-deferred)$/ || $2 !~ /^[0-9]+$/ { exit 2 }
   { count[$1]++; value[$1, count[$1]] = $2 + 0 }

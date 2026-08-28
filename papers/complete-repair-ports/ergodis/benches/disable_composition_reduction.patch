@@ -1,0 +1,10 @@
+diff --git a/src/observational.rs b/src/observational.rs
+--- a/src/observational.rs
++++ b/src/observational.rs
+@@ -970,5 +970,4 @@ impl RefinementGenerators {
+-                let composite = !duplicate
+-                    && generator_is_retained_composite(presentation, record, transitions, &ids);
++                let composite = false;
+                 if !duplicate && !composite {
+                     ids.push(generator);
+                 }

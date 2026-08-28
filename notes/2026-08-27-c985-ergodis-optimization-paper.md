@@ -412,3 +412,74 @@ Hashes after adding the redundant-context fixture are:
 - final raw table: `bab8159d0c7eacce71b1aadae9e8e7dca7cf4f87788982794a93158799859716`;
 - benchmark script: `34544e7d5eb05972fdf8511338ad79d44e46b34975c42a48981037a75a538bef`;
 - fixture generator: `2f9344fc94db5f8846663adeff9027c41fd857181c7678e8177846591f77dc97`.
+
+## Exact transformation-monoid reduction
+
+Commit `693d00037` extends the refinement basis from syntactic neutralities to
+typed length-two composition.  If an original generator satisfies
+
+```text
+g = h ; k
+```
+
+pointwise, with both `h` and `k` already retained and well typed, then every
+partition congruent for `h` and `k` is congruent for `g`.  The compiler can
+therefore omit `g` from signatures and the inverse relation without changing
+the coarsest observational quotient.  Greedy retention makes every omission
+an acyclic word over the retained basis, so induction recovers congruence for
+the full supplied generator family.  Original quotient transitions and the
+public full-alphabet verifier remain unchanged.
+
+The exact detector compares concrete compositions and never trusts hashes.
+It runs outside refinement and allocates no hot-loop state.  Once five
+independent generators from a source sort survive, detection stops for later
+generators from that source: the width-four packed backend can no longer be
+recovered.  This bounds work on wide irreducible alphabets while retaining all
+composition reductions relevant to adaptive admission.  The permanent typed
+test now also eliminates a cyclic shift expressed as a retained composition
+and agrees with the independent worklist quotient.
+
+On the 131,072-state composed-16 control, eleven paired internal rounds give
+200.055 ms without composition elimination and 22.665 ms with it, an 8.83x
+speedup.  The retained proof has the same 16,204 multiway records as the
+four-generator basis.  The observed crossover is already positive at five
+supplied contexts; irreducible random controls at widths 5, 8, and 16 showed
+about one percent or less overhead/noise.
+
+Final eleven-round CPU-2 medians against pinned Boa are:
+
+| deferred family | Ergodis | Boa | Ergodis advantage |
+|---|---:|---:|---:|
+| chain-1 | 5.738 ms | 19.745 ms | 3.442x |
+| irreducible random-4 | 15.599 ms | 25.610 ms | 1.642x |
+| duplicate-context-16 | 19.358 ms | 63.335 ms | 3.272x |
+| composed-context-16 | 20.384 ms | 56.919 ms | 2.792x |
+| stable colors-4/256 | 2.656 ms | 8.313 ms | 3.130x |
+
+The composed family is a controlled transformation-monoid application shape,
+not a claim about the redundancy distribution of arbitrary inputs.  It shows
+that theorem-derived context bases can change backend admissibility and yield
+an order-of-magnitude internal improvement that generic alphabet refinement
+does not discover.
+
+Replay the external table with the existing pinned-Boa command.  The internal
+harness archives the committed Ergodis source into a cache-backed temporary
+tree, applies the tracked one-line baseline patch, builds it in a persistent
+cache target, and alternates that binary with the supplied final release
+binary:
+
+```sh
+scripts/observational-composition-ab.sh "$ERGODIS_BIN" 11 2 \
+  "$ERGODIS_BENCH_CACHE" > evidence/c985-composition-internal.tsv
+scripts/check-observational-backend-evidence.sh
+```
+
+Hashes:
+
+- final five-family table: `ff1bb05f9eb0c173c279656917bf5a9f66916025b2a69602261b291e73d1d30a`;
+- internal composition A/B: `228112aa3a48fac1e7db83c01713a7925cce5e4d624b67316ffaea240829bc01`;
+- benchmark script: `296acc6b0c272d5d9b418bf7c9bf34e598689fb5ff524c8d243174f1b1c4d8f9`;
+- checker: `cbc0b60a7c496e68fc397d8cbd6e804cfb743aa448d1a1d4e6f625ba3eef6d1e`;
+- fixture generator: `62706b93661468df760970614ce47c1c6de12b00e0d436b4e8542b0bda3234a8`;
+- internal A/B script: `1166d0fbb1b2a107cbf8fd10ecc9dd92a32932e2c790b5c0474e91f0a9d57af0`;
+- exact baseline patch: `35c249c0c11b61604a3a1694c1ebe7ecabb61d46c9185848fe62a640fb5d01ca`.
