@@ -5,6 +5,7 @@
 
 pub mod applications;
 mod arena;
+pub mod automata;
 pub mod balanced;
 pub mod bitset;
 pub mod composition;
@@ -41,6 +42,7 @@ pub use applications::{
     GpuCheckpointCapacities, NodeSpanRepairAnswer, QcLdpcCode, QcSearchResult, QcTrappingSetAnswer,
     RepairDagAnswer, RepairTask,
 };
+pub use automata::{ExplicitMataDfa, ExplicitMataError};
 pub use composition::{
     CompositionAnswer, CompositionError, CompositionTable, CompositionTower, CostTable,
     TowerAnswer, TowerLevel, TowerWitness,

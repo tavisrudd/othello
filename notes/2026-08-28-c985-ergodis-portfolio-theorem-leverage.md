@@ -24,6 +24,15 @@ The underlying wide observational compiler also crosses the pinned Boa
 baseline at 128 generators on the tracked random control: 130.393 ms versus
 136.850 ms median while retaining replayable transcript evidence.
 
+The one-sort Boolean boundary case now has external application evidence as
+well.  A first-class explicit-MATA DFA adapter was run on all 169 inputs from
+the exact TACAS'24 explicit Presburger-complement list after common MATA
+determinization and trimming.  Ergodis' proof-carrying compiler is 2.699x
+faster than MATA Hopcroft in geometric mean (`t=26.20` across instances), wins
+158/169 overall, and wins every prepared DFA with at least 13 states.  This is
+a minimization-subproblem comparison on official application-derived inputs,
+not an end-to-end complement claim.
+
 This realizes the computational content of the finite tower-synthesis and two
 important cases of the family-restricted quotient results in
 `2026-08-27-c980-higher-rank-contextual-minimality.md`.
@@ -594,7 +603,7 @@ workspace mismatch all fail closed.
   point-sized proof arrays.  It avoids group enumeration, but the C980 probe
   action can still have a large point carrier; GL/stabilizer admission therefore
   remains a measured state-count/storage crossover.
-- The highest-value recovery-specific algorithm still outstanding is the
-  rank-stratified full-span envelope: compute each exact-rank sector once and
-  aggregate along precomputed restriction edges instead of re-entering lower
-  sectors from higher-rank contexts.
+- The rank-stratified full-span envelope is now implemented through ambient
+  dimension six with exact-rank sectors and precomputed restriction edges; the
+  remaining question is how far compact rank/select or field-specific
+  directories move the state-count/storage crossover.

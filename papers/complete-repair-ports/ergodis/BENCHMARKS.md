@@ -269,6 +269,34 @@ hashes are in `evidence/benchmarks.json` under `jin_fu_contextual_state_ab`;
 replay with `python/run_benchmarks.py --write --jin-fu-contextual-only
 --ab-rounds 11`.
 
+## Official MATA-corpus minimization
+
+The external-validity benchmark uses all 169 entries in MATA's exact TACAS'24
+`bench-single-presburger-explicit-complement.input` list.  Pinned MATA first
+determinizes and trims each official Presburger NFA.  MATA Hopcroft and
+ergodis then minimize the identical serialized DFA; parsing and the common
+preparation are outside both timed regions.  Ergodis uses `SplitTranscript`,
+so its time includes quotient construction, compact evidence emission, and
+independent replay.
+
+Across fifteen alternating process rounds per instance, ergodis wins 158/169
+and every DFA with at least 13 states.  The suite geometric-mean speedup is
+2.699x with instance-level log `t=26.20`; the median instance speedup is
+2.809x.  This establishes the classical deterministic boundary case on
+official application-derived inputs.  It is not an end-to-end comparison of
+the original complement operation or MATA's NFA algorithms.
+
+Reproduce with:
+
+```text
+scripts/mata-official-ab.sh MATA_ROOT NFA_BENCH_ROOT MATA_COMPARISON_ROOT
+```
+
+The script checks all three pinned revisions, keeps derived DFAs and builds in
+the cache, and validates `evidence/c985-mata-official-ab.json`.  Full scope,
+hashes, state-stratified results, and limitations are recorded in
+`notes/2026-08-28-c985-official-mata-external-validity.md`.
+
 ## Bounded performance evidence
 
 The GF(27) balanced Criterion target additionally measures two new compiled
