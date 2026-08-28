@@ -49,6 +49,7 @@ CompiledContextMachine:
     flat generator transition tables
     representative state per class
     split traces / distinguishing typed paths
+    query-profile/schema identifier
     optional potential normalization data
 ```
 
@@ -56,6 +57,12 @@ Adapter traits, if any, remain cold and generic/monomorphized.  The compiled
 artifact uses integer IDs and contiguous boxed slices; evaluating it requires
 no `dyn` dispatch, hash lookup, allocation, or domain object traversal in the
 transition loop.
+
+If the original finite presentation is retained, adding observations or
+context generators can refine the existing partition incrementally.  The
+artifact version must name its exact query profile; a value-only quotient
+cannot silently answer a later count or witness-sensitive query.  Coarsening
+is a cold recompilation unless full refinement history is deliberately kept.
 
 Do not reuse `projective.rs` for additive gauge: that module means finite-
 geometry projective space.  A potential backend should use a name such as
@@ -148,4 +155,3 @@ The architecture gate fails if the two first adapters require special cases in
 the minimizer itself, if certificates cannot replay independently, or if the
 generic artifact adds hot-loop indirection without a compensating state or
 capability gain.
-

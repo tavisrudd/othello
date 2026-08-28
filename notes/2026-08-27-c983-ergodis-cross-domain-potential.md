@@ -375,6 +375,15 @@ generates witnesses/certificates, or makes an exact solver reusable under a
 stable interface.  A research theorem is extra upside, not the sole reason for
 the software to exist.
 
+The exact state is also query-profile relative.  Adding contexts or output
+projections intersects equivalences and can only split classes, so a retained
+finite presentation supports monotone incremental refinement with the same
+result as recompiling the union profile.  This suggests a practical tiered
+artifact: begin with value-only/bounded futures, then refine on demand for
+counts, resource coordinates, witnesses, or a larger continuation grammar.
+Each split carries the newly distinguishing test.  Removing a query does not
+permit blind merging; coarsening needs recomputation or retained history.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary

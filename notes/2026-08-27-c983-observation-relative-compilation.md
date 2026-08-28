@@ -228,6 +228,12 @@ reachable carriers, typed generator closure, observations, and a lift back to
 domain components.  Structured/decorated cospans or operads can supply the
 composition syntax; they do not supply the finite observational compiler.
 
+Partial generator actions fit the same theorem only after definedness is made
+observable.  Totalize each partial `g:i->j` with a typed undefined sink whose
+output records failure; then a context defined for one state and not another
+distinguishes them.  Silently dropping undefined paths can merge states whose
+admissible future languages differ and is not an exact implementation.
+
 The intended Ergodis abstraction is consequently not “all contexts.”  It is a
 typed `SeparatorSystem` whose completeness proof can be finite exhaustive,
 linear-algebraic, orbit/symmetry based, logical, or domain-theoretic.
@@ -336,6 +342,31 @@ fixed-point metric.  Bisimulation metrics for MDPs are the classical control:
 they compute behavioral distances from rewards and transported transition
 metrics and prove optimal-value/aggregation bounds.  Approximate Ergodis work
 must provide analogous domain-specific bounds before merging states.
+
+### Lemma 7: query-profile monotonicity and incremental refinement
+
+Write `E(C,O)` for equality under every context in `C` and every observation
+coordinate in `O`.  Directly from the definition,
+
+```text
+E(C1 union C2, O) = E(C1,O) intersection E(C2,O)
+E(C, O1 union O2) = E(C,O1) intersection E(C,O2).
+```
+
+Therefore adding admissible futures or requested query projections can only
+split interface classes; removing them can only merge classes.  On a finite
+presentation, partition refinement may start from an already compiled
+quotient and add new observation fibres or generator/context tests.  Because
+the stable result is the largest compatible equivalence contained in all
+requested kernels, incremental refinement reaches the same partition as a
+fresh compile for the union profile.
+
+This supplies an application-level feature: compile a small interface for the
+queries actually requested, then refine it monotonically when a caller adds
+counting, a resource coordinate, or a larger future grammar.  Every refinement
+retains the new distinguishing context/observation coordinate.  Coarsening
+after query removal generally requires recomputation or retained refinement
+history; merely hiding output columns does not justify merging states.
 
 ## 4. Witness obstruction and the required side-car law
 
