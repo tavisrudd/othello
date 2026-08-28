@@ -502,4 +502,38 @@ mod tests {
             Err(OrbitQuotientError::Observation { orbit: 0 })
         ));
     }
+
+    #[test]
+    fn quotient_rejects_contexts_that_do_not_descend_to_orbits() {
+        let action = TableAction([[1, 0, 2]]);
+        let partition = compile_permutation_orbits(&action).unwrap();
+        let presentation = FinitePresentation::new(
+            [3],
+            [0, 0, 0],
+            [GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: [0, 2, 2].into(),
+            }],
+        )
+        .unwrap();
+        assert!(matches!(
+            quotient_presentation_by_orbits(&presentation, &partition),
+            Err(OrbitQuotientError::Context {
+                context: 0,
+                orbit: 0
+            })
+        ));
+    }
+
+    #[test]
+    fn quotient_rejects_orbits_crossing_typed_sorts() {
+        let action = TableAction([[1, 0]]);
+        let partition = compile_permutation_orbits(&action).unwrap();
+        let presentation = FinitePresentation::new([1, 1], [0, 0], []).unwrap();
+        assert!(matches!(
+            quotient_presentation_by_orbits(&presentation, &partition),
+            Err(OrbitQuotientError::Sort { orbit: 0 })
+        ));
+    }
 }
