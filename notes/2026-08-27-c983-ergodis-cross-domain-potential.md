@@ -240,6 +240,14 @@ terminal-query grammars must show either reduction beyond permutation sorting
 or a concrete reusable-composition/multi-query capability gain.  Quantitative
 boundaried-network optimization is the first stretch adapter.
 
+The repository-specific design map is
+`notes/2026-08-27-c983-rust-extension-surface.md`.  It preserves the current
+compact composition, contextual-cache, scheduler, and witness hot paths and
+places the general minimizer behind a cold `observational` compiler boundary.
+The compiled artifact is flat integer tables plus independently replayable
+separator traces; potential normalization and oracle learning are separate
+front ends/backends.  No Rust code was changed in this research window.
+
 The first exact theorem/backend design is
 `notes/2026-08-27-c983-observation-relative-compilation.md`.  It proves the
 finite ranked observational-algebra quotient and separator-refinement core,
