@@ -888,18 +888,18 @@ impl InverseIndex {
         let mut offsets = Vec::new();
         let mut targets = Vec::new();
         let mut sources: Vec<u32> = Vec::with_capacity(presentation.transitions.len());
-        for (generator, record) in presentation.generators.iter().copied().enumerate() {
+        for record in presentation.generators.iter().copied() {
             let source = presentation.sorts[record.source_sort as usize];
             let target = presentation.sorts[record.target_sort as usize];
+            let transition_start = record.transition_start as usize;
+            let transition_table = &presentation.transitions
+                [transition_start..transition_start + record.transition_len as usize];
             let use_counting_scatter =
                 target.len as usize <= (source.len as usize).saturating_mul(4);
             let distinct_targets = if use_counting_scatter {
                 let cursors = &mut target_cursors[..target.len as usize];
                 cursors.fill(0);
-                for state in source.start..source.end() {
-                    let target_state = presentation
-                        .transition(generator as u32, state)
-                        .expect("validated total generator");
+                for &target_state in transition_table {
                     cursors[(target_state - target.start) as usize] += 1;
                 }
                 let mut next = 0_u32;
@@ -910,12 +910,9 @@ impl InverseIndex {
                     next += count;
                     distinct += usize::from(count != 0);
                 }
-                for state in source.start..source.end() {
-                    let target_state = presentation
-                        .transition(generator as u32, state)
-                        .expect("validated total generator");
+                for (local, &target_state) in transition_table.iter().enumerate() {
                     let cursor = &mut target_cursors[(target_state - target.start) as usize];
-                    source_scratch[*cursor as usize] = state;
+                    source_scratch[*cursor as usize] = source.start + local as u32;
                     *cursor += 1;
                 }
                 distinct
@@ -924,21 +921,16 @@ impl InverseIndex {
                     *slot = source.start + local as u32;
                 }
                 source_scratch[..source.len as usize].sort_unstable_by_key(|&state| {
-                    (
-                        presentation
-                            .transition(generator as u32, state)
-                            .expect("validated total generator"),
-                        state,
-                    )
+                    (transition_table[(state - source.start) as usize], state)
                 });
                 source_scratch[..source.len as usize]
                     .iter()
                     .enumerate()
                     .filter(|&(position, &state)| {
                         position == 0
-                            || presentation.transition(generator as u32, state)
-                                != presentation
-                                    .transition(generator as u32, source_scratch[position - 1])
+                            || transition_table[(state - source.start) as usize]
+                                != transition_table
+                                    [(source_scratch[position - 1] - source.start) as usize]
                     })
                     .count()
             };
@@ -963,8 +955,8 @@ impl InverseIndex {
                         u32::try_from(sources.len()).map_err(|_| ObservationalError::Overflow)?,
                     );
                     while position < source.len as usize
-                        && presentation.transition(generator as u32, source_scratch[position])
-                            == Some(target_state)
+                        && transition_table[(source_scratch[position] - source.start) as usize]
+                            == target_state
                     {
                         sources.push(source_scratch[position]);
                         position += 1;
@@ -988,15 +980,14 @@ impl InverseIndex {
                 let index_start =
                     u32::try_from(targets.len()).map_err(|_| ObservationalError::Overflow)?;
                 while position < source.len as usize {
-                    let target_state = presentation
-                        .transition(generator as u32, source_scratch[position])
-                        .ok_or(ObservationalError::CompiledShape)?;
+                    let target_state =
+                        transition_table[(source_scratch[position] - source.start) as usize];
                     let source_start =
                         u32::try_from(sources.len()).map_err(|_| ObservationalError::Overflow)?;
                     let group_start = position;
                     while position < source.len as usize
-                        && presentation.transition(generator as u32, source_scratch[position])
-                            == Some(target_state)
+                        && transition_table[(source_scratch[position] - source.start) as usize]
+                            == target_state
                     {
                         sources.push(source_scratch[position]);
                         position += 1;
