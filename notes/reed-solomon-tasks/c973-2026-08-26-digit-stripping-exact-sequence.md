@@ -72,10 +72,12 @@ exactly for the additional full blocks when row `D` itself has zero entries.
 
 ## 3. Coordinate proof for 0<=a<=p-2
 
-Write an index as `j=ph+b`, with `0<=b<p`.  Lucas gives
+Write an index as `j=ph+b`, with `0<=b<p`.  Lucas gives the digit congruence
+`(Lu)` (labelled separately so that the numbered sequence (1)--(6) refers only
+to the exact sequences and support formulas):
 
 ```
-binom(pD+a,ph+b) = binom(D,h) binom(a,b) mod p.            (3)
+binom(pD+a,ph+b) = binom(D,h) binom(a,b) mod p.           (Lu)
 ```
 
 For `b>0`, both the coefficient at `j` and the coefficient at `j-1` vanish
@@ -173,8 +175,8 @@ raised to its `p`th power.  The quotient is therefore `(C_D)^(1)`, proving
 
 ## 5. Consequences for the research programme
 
-For completeness, (3) follows from the same calculation.  The zero support in
-row `pD+a` is the disjoint union
+For completeness, the nucleus sequence (3) of §2 follows from the same
+calculation.  The zero support in row `pD+a` is the disjoint union
 
 ```
 {ph+b : 0<=h<=D-1, a+1<=b<=p-1}
@@ -255,7 +257,13 @@ Since the ambient syndrome vector space has dimension `d+2`, (7) also gives
 codim(C_d in Gamma^(d+1) E) = nu(d)+eta(d).                (7a)
 ```
 
-For every nonempty carrier with `d>=1`, this codimension is at least three.
+For every nonempty carrier with `d>=1`, this codimension is at least four.
+Indeed `d>=1` forces some digit `d_i>=1`, so `nu(d)=prod_i(d_i+1)>=2`; and a
+nonempty carrier forces at least one zero run, i.e. `eta(d)-1>=1`, so
+`eta(d)>=2` (when `eta(d)=1` there are no zero positions at all and
+`dim C_d = d+1-nu(d) = dim Z_d = 0`).  The bound is sharp: `p=3`, `d=9=100_3`
+gives `nu=2`, `eta=2`, codimension exactly four, with
+`dim C_9 = 7` matching `M^max_(11,3)=P<e_2,...,e_8>`.
 Over `F_q` its projective point count and ambient density are exactly
 
 ```
@@ -266,7 +274,8 @@ Over `F_q` its projective point count and ambient density are exactly
 
 Thus the simultaneous-marker classifier's unresolved modular branch is an
 explicitly counted linear set of asymptotic density
-`q^(-nu(d)-eta(d))`, before any carrier arithmetic is attempted.
+`q^(-nu(d)-eta(d))`, at most `q^(-4)` by the sharpened bound above, before any
+carrier arithmetic is attempted.
 
 It also gives an exact empty-carrier classification.  For `d>=p`, write
 `d=pD+a`.  If `a<=p-3`, the explicit left term of (1) is nonzero.  If

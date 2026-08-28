@@ -905,13 +905,32 @@ one-dimensional line \(\ker L_r\) is a nonzero one-dimensional subspace of
 \]
 
 The three affine \(\mathbf F_3\)-lines in (25t) are pairwise disjoint, so
-\(g\) is a split squarefree affine nonic.  In the three-line coefficient
-formulas its parameters are \(u=s=0\) and \(v=-\eta^2\).  Therefore (25p)
-is the line spanned by
+\(g\) is a split squarefree affine nonic.  Its coefficients are immediate from
+(25t) and need no import from the three-line reduction.  Put \(v=-\eta^2\);
+since \(L_p(t)=t^3+pt\) is additive and \(\operatorname {char}K=3\),
 
 \[
-                 (rv,0,r-p),\qquad(0,p(p-r),0).        \tag{25u}
+ (L_p+\eta)(L_p-\eta)=(t^3+pt)^2-\eta^2
+  =t^6+2pt^4+p^2t^2+v,
 \]
+
+and multiplying by \(L_r(t)=t^3+rt\), using \(2=-1\),
+
+\[
+ g=t^9+(r-p)\,t^7+p(p-r)\,t^5+(p^2r+v)\,t^3+rv\,t,
+\]
+
+so \(g_9=1\), \(g_7=r-p\), \(g_5=p(p-r)\), \(g_3=p^2r+v\), \(g_1=rv\), and
+\(g_i=0\) for every even \(i\).  (These are the three-line coefficient formulas
+at parameters \(u=s=0\), \(v=-\eta^2\); the derivation above replaces that
+citation.)  Substituting into (25p), the projected pair is
+
+\[
+ \bar a_g=(g_1,g_4,g_7)=(rv,0,r-p),\qquad
+ \bar b_g=(g_2,g_5,g_8)=(0,p(p-r),0),                  \tag{25u}
+\]
+
+and (25p) is the line they span.
 
 A point obtained by adding \(\lambda\) times the second vector to the first
 lies on (25r) exactly when

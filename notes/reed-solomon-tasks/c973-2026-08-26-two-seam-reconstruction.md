@@ -105,21 +105,70 @@ The projective linear space `L_f` is irreducible.  Containment in the union
 
 #### Persistent component
 
-Assume `L_f subset V(D)`.  Every geometric degree-`m` contraction lies in the
-R5 rank-at-most-two catalecticant locus.  Fix `m-1` marker factors.  The
-remaining contractions form the first-polar line of the resulting degree-five
-syndrome, and that line is contained in the lower rank-two locus.  C536's
-integral coherent-Fano identity says that such containment forces the
-degree-five syndrome itself into the upper rank-two locus.  Vary the fixed
-`m-1` factors and use density as in (4).  Repeating this argument upward one
-level at a time gives
+Write `Sigma_(2,n) subset P(Gamma^n E)` for the rank-at-most-two catalecticant
+scheme, cut out by the `3x3` minors of the `3 x (n-1)` Hankel matrix with
+columns `v_i=(a_i,a_(i+1),a_(i+2))`.  Then `P_r = Sigma_(2,m+4)` and, since at
+`n=4` that Hankel matrix is `3 x 3` with determinant `D`, `V(D) = Sigma_(2,4)`
+exactly.
+
+Assume `L_f subset V(D)`.  Because `V(D)` is a cone and every `iota_R f`,
+`R in Sym^m(E^vee)`, is a vector of `im T_f`, this says `iota_R f in
+Sigma_(2,4)` for every `R in Sym^m(E^vee)`.  The lift is supplied by the
+level-uniform polar lemma:
+
+> **Lemma (F_n).**  Let `n >= 5` and let `g = (a_0,...,a_n) in Gamma^n E`
+> over any commutative ring (in particular any field, of any characteristic,
+> including two and three).  Suppose that for every
+> `lambda = sX+tY` the polar `iota_lambda g` lies in `Sigma_(2,n-1)`
+> *coefficientwise*: every coefficient of `s` and `t` in every consecutive
+> `3x3` Hankel minor of `iota_lambda g` vanishes.  Then
+> `g in Sigma_(2,n)`.
+
+This is exactly C536,
+`notes/2026-07-23-c536-coherent-polar-flag-fano-boundary.md`, §2 "Integral
+rank-two secant theorem", equations (5)--(7), together with its Result (1):
+the ideal identity `J_n = I_n` holds over `Z`, and hence after arbitrary base
+change, for **every** `n >= 5` simultaneously rather than at the single level
+`n = 5`.  It is restated and reproved self-contained, with a `{0,+1,-1}`
+elimination valid over `Z` and an exhaustive finite-field check, in
+`notes/reed-solomon-tasks/c973-2026-08-28-level-uniform-polar-lemma.md` §§2--5.
+
+Two features of that statement are load-bearing.  The hypothesis is
+coefficientwise, in the sense of C536 §1 (4), so the polar family need not be
+a line and the degenerate cases `iota_lambda g = 0` and rank-one
+`lambda |-> iota_lambda g` require no separate treatment: the zero vector
+satisfies every minor equation and the `s,t`-expansion never mentions the
+projective image.  And the hypothesis is to be read over the algebraically
+closed `k` fixed in §1; the weaker "for every `F_q`-rational `lambda`" form is
+false over `F_2`, where `g = (0,1,1,...,1,0)` has all three rational polars of
+Hankel rank at most two while `g` itself has rank three.
+
+Now run the level induction.  For `4 <= d <= m+4` let
 
 \[
-                              f\in\mathcal P_r.             \tag{7}
+ (\ast_d):\qquad \iota_Rf\in\Sigma_{2,d}\ \text{ for every }
+ R\in\operatorname{Sym}^{\,m+4-d}(E^\vee).
 \]
 
-This is induction on the number of retained marker factors, not an appeal to
-a finite-depth arithmetic package.
+`(*_4)` is the hypothesis just established.  Given `(*_(d-1))` with `d >= 5`
+and any `R in Sym^(m+4-d)(E^vee)`, put `g = iota_R f in Gamma^d E`.  For every
+`lambda in E^vee` the adjunction defining composite contraction gives
+`iota_lambda g = iota_(lambda R) f`, and `lambda R in Sym^(m+5-d)(E^vee)`, so
+`iota_lambda g in Sigma_(2,d-1)` by `(*_(d-1))`.  Lemma `(F_d)` then gives
+`g in Sigma_(2,d)`, which is `(*_d)`.  Taking `d = m+4` and `R = 1`,
+
+\[
+                              f\in\Sigma_{2,m+4}=\mathcal P_r. \tag{7}
+\]
+
+This is a level-indexed induction on `d`, each step quantified over all of
+`Sym^(m+4-d)(E^vee)`; the inductive step feeds the lemma `lambda R`, again an
+arbitrary element of the next symmetric power, so neither the density
+statement (4) nor a finite-depth arithmetic package is used here.  The bound
+`n >= 5` is sharp: `(F_4)` is false, since the lower Hankel matrix at `n = 4`
+has only two columns and no `3x3` minor, so `J_4 = 0` while `I_4 = (D)`.  This
+is why the induction must start at the terminal level and lift, never the
+reverse.
 
 #### Residual component away from characteristics two and three
 
@@ -307,7 +356,10 @@ hypotheses.  No additional geometric assertion is hidden between them.
 
 The following inputs are inherited rather than reproved here:
 
-- C536's coherent-Fano identity for the persistent component;
+- C536's integral coherent-Fano ideal identity `J_n = I_n` for every
+  `n >= 5`, i.e. Lemma `(F_n)` of §2, cited as C536 §2 (5)--(7) and reproved
+  in `c973-2026-08-28-level-uniform-polar-lemma.md` §5 (so the input is
+  level-uniform, not a single-level fact reused informally);
 - the no-line property of the projected Veronese;
 - C597's linear-space classification in the characteristic-three wild cone;
 - the exact characteristic-wise cyclic/inseparable terminal classification;
