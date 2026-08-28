@@ -254,3 +254,85 @@ The final raw table is `c985-boa-lifo-final.tsv`, SHA-256
 `f66a4496952b977055069e385cef5a5249ab37b2890939347a511fa1bcfe0246`;
 the FIFO/LIFO A/B is `c985-fifo-lifo.tsv`, SHA-256
 `97ea3b6b1132623017d406eb0084eef78da848ea766203ccde1e65af06b4e409`.
+
+## Adaptive dirty-block/multiway backend
+
+Commits `50a84ec9a` and `9ac64bc40` implement the successor backend rather
+than leaving it as a design sketch.  The engine retains the typed observation
+partition, processes dirty blocks iteratively, groups a dirty suffix plus one
+clean representative by the complete outgoing signature, retains the largest
+child, and marks predecessors only through smaller children.  It has the usual
+small-half `O(m log n)` accounting.  All queues, positions, group tables,
+scratch arrays, and transcript storage are pre-sized before refinement; there
+is no hot-loop allocation and no scaling recursion.
+
+For sorts of width at most four, the complete signature is packed exactly into
+two `u64` words, so hash collisions cannot merge states.  Wider sorts retain a
+hashed directory but compare every candidate generator by generator.  Dirty
+marking uses a separate combined predecessor CSR because the generator label is
+needed for the forward signature but not for the fact that a source state has
+become dirty.  A `MultiwayRecord` stores each forced dirty-block split; public
+verification independently rebuilds the scheduler and requires identical
+events and canonical quotient.  Corruption tests, 128 cyclic and 256 typed
+random differential presentations, and the allocation-envelope gate pass.
+
+`AdaptiveTranscript` admits the backend only for at least 4,096 states, two or
+fewer observation fibers per nontrivial sort, and two through four outgoing
+generators.  Otherwise it retains the binary transcript backend.  The compiled
+artifact records the actual selected policy.  The separate
+`compile_observational_with_deferred_verification` API constructs the same
+proof-carrying artifact once and leaves replay to an explicit trust,
+persistence, or process boundary; the default API still replays immediately.
+
+Final eleven-round CPU-2 A/B medians against pinned Boa revision
+`54a556448169a83a369e039b5fa3ba27323ccfde` are:
+
+| boundary/family | Ergodis | Boa | ratio |
+|---|---:|---:|---:|
+| immediate chain | 11.914 ms | 26.856 ms | Ergodis 2.254x |
+| immediate random-4 | 35.964 ms | 25.001 ms | Boa 1.438x |
+| immediate colors | 3.850 ms | 8.309 ms | Ergodis 2.158x |
+| deferred chain | 5.648 ms | 19.586 ms | Ergodis 3.468x |
+| deferred random-4 | 16.842 ms | 24.897 ms | Ergodis 1.478x |
+| deferred colors | 2.649 ms | 8.240 ms | Ergodis 3.110x |
+
+Median cold peak RSS is 18,556 KiB for the binary immediate transcript,
+19,320 KiB for adaptive immediate replay, and 14,956 KiB for adaptive deferred
+replay.  Thus the service boundary is 19.4% below the former binary process
+peak.  Nonmultiplexed counters give 97.5 M cycles and 162.2 M instructions for
+deferred random compilation versus 218.6 M cycles and 365.3 M instructions
+when the same artifact is immediately replayed.
+
+The tracked evidence is checked with:
+
+```sh
+cd papers/complete-repair-ports/ergodis
+scripts/check-observational-backend-evidence.sh
+```
+
+Regeneration uses the release `observational_sota_driver`, pinned Boa checkout,
+fixed fixture directory, eleven rounds, and CPU 2:
+
+```sh
+ERGODIS_CERTIFICATE_POLICY=adaptive scripts/observational-boa-ab.sh \
+  "$ERGODIS_BIN" "$BOA_SOURCE" 11 2 "$FIXTURE_DIR" \
+  > evidence/c985-backend-immediate.tsv
+ERGODIS_CERTIFICATE_POLICY=adaptive-deferred \
+  scripts/observational-boa-ab.sh "$ERGODIS_BIN" "$BOA_SOURCE" 11 2 \
+  "$FIXTURE_DIR" > evidence/c985-backend-deferred.tsv
+```
+
+The exact evidence hashes are:
+
+- benchmark script: `886792e67b4d69d0de3cbadb9464a841fb3febe4cc885f52b2f4495b9bef630c`;
+- checker: `fe5c237a53ec84a0f15226456cacb66d805677b83f1971b9ca68198bdbbd4ba7`;
+- immediate table: `19aab444cbe6c9466595deb1ad23cc309f8ef5117a73fe39a0c8798f7c1c3341`;
+- deferred table: `259d51ad0c5f6258488e86c8187b8087148316ac2e83476784f28b9bc54af482`;
+- RSS table: `b7d122a05c5eb07dcba2b80b37feb02cdf0791cd8ac96d12f09123598086895a`.
+
+These experiments establish bounded performance on the three deterministic
+131,072-state fixtures; they do not establish a universal ordering over
+automata or coalgebra encodings.  Independent checking consists of equality
+with the exhaustive reference on the bounded corpora, independent public
+certificate replay, corruption rejection, and comparison with Boa's pinned
+native result.
