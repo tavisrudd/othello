@@ -324,3 +324,25 @@ Fixed-batch packing is deliberately not in this list.  C980 proves its bounded
 small-model half, but the typed overlap-preserving batch composition law is
 still missing.  Pre-emption here means using the proved scalar/Pareto path as a
 stepping stone, not abandoning batch repair or claiming an unproved congruence.
+
+## Remaining scaling boundaries after review
+
+- The generic ordered-monoid validator is deliberately cubic in carrier size.
+  Opaque adapters should audit only small algebras; proof-by-construction
+  built-ins use constant-time certificates.
+- Generic Pareto insertion is linear in the current antichain, so a Cartesian
+  composition can be antichain-quadratic after candidate generation.  Dense
+  capped products need a separately benchmarked bitmap/dominance-index kernel;
+  the generic path must remain the exact sparse fallback.
+- Minima-family canonicalization stores a flat state-response matrix while
+  sorting compact state indices.  For very wide response vectors, a
+  collision-checked streaming interner may reduce peak memory, but it must
+  preserve deterministic exact IDs and avoid per-vector heap objects.
+- Orbit compilation is linear in points times supplied generators and retains
+  point-sized proof arrays.  It avoids group enumeration, but the C980 probe
+  action can still have a large point carrier; GL/stabilizer admission therefore
+  remains a measured state-count/storage crossover.
+- The highest-value recovery-specific algorithm still outstanding is the
+  rank-stratified full-span envelope: compute each exact-rank sector once and
+  aggregate along precomputed restriction edges instead of re-entering lower
+  sectors from higher-rank contexts.
