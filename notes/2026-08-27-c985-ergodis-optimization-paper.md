@@ -795,3 +795,45 @@ coefficient-aware presentations remain untouched.
 The complete theorem-to-compiler work order, classical-corollary framing, and
 negative boundaries are recorded in
 `notes/2026-08-28-c985-ergodis-portfolio-theorem-leverage.md`.
+
+## Generic finite-interface and orbit layer
+
+The August 28 code/test review imported three general C980 consequences rather
+than adding recovery-only special cases.
+
+Commit `460b7df53` adds finite ordered commutative resource monoids and
+canonical Pareto antichains.  The validator exhaustively certifies every law
+used by the theorem, including closure of intermediate products; invalid
+budget IDs are errors rather than silent infeasibility.  Commit `d8423090b`
+adds compact batch observation interning and a strictly pre-sized reusable
+workspace, eliminating allocation and capacity growth from repeated Pareto
+choice/composition loops.  Commit `66faadef4` checks every subset and all 256
+pairs of subsets of the `2 x 2` resource lattice against an independent brute
+definition.
+
+Commit `9b6b1c733` adds the domain-independent finite-interface adapter.  Typed
+state counts, observations, and total one-hole contexts compile into the same
+`FinitePresentation` used by the evidence-streaming minimizer; quotient
+representatives lift through an optional domain witness interface.  The
+adapter is deliberately semantic and finite: it does not claim an unbounded
+domain has a finite quotient without a supplied bound or theorem.
+
+Commits `493b8c0e8` and `eb9b54a50` add a proof-carrying finite
+permutation-action compiler and connect its orbit partition to typed
+presentations.  Orbit search is iterative, uses a reusable point-sized queue,
+and depends on points times supplied generators rather than group order.
+Independent replay validates permutations, spanning edges, closure, and least
+representatives.  Presentation compression is admitted only after checking
+sort preservation, observation invariance, and context equivariance on every
+concrete state.  Standard automaton symmetry reduction and the future
+`GL_s(L)` probe quotient are therefore instances of the same checked operation.
+
+The review found and fixed two API-level pathologies before release: an
+invalid monoid product could be reused before its range was checked, and an
+invalid Pareto budget was silently mapped to `false`.  Higher-rank GF(3) and
+GF(4) kernel tests, exhaustive two-state theorem-API tests, corrupted orbit
+certificate tests, malformed adapter tests, and the complete small Pareto
+lattice now cover the trust boundaries.  The next high-value algorithmic
+target is rank-stratified full-span envelope aggregation; the generic orbit
+engine should first be instantiated only where profiling shows raw probe
+hashing or storage dominates.

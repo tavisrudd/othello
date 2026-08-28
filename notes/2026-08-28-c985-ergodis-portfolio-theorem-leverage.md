@@ -162,6 +162,22 @@ shared group-action adapter: exact orbit representatives, stabilizer-aware
 transition generation, and independent orbit certificates.  It also supplies
 an exact analogue of bond-dimension reduction in tropical tensor contraction.
 
+The shared first stage is now implemented.  `FinitePermutationAction` compiles
+generator-defined orbits without enumerating group elements.  Iterative BFS
+uses one pre-sized queue and point-sized compact arrays; the retained
+certificate gives a predecessor generator and strictly decreasing discovery
+rank for every nonrepresentative.  Independent replay checks permutations,
+certificate edges, orbit closure, and least representatives.  Deferred
+verification avoids duplicate replay when a later trust boundary already
+performs it, and quotient/certificate payload bytes are reported separately.
+
+`quotient_presentation_by_orbits` connects the action theorem to contextual
+compilation.  It accepts a reduction only after checking sort preservation,
+observation invariance, and context equivariance on every concrete state, then
+emits one state and transition per orbit while preserving the context alphabet.
+This is the exact infrastructure needed for the C980 `GL_s(L)` probe quotient;
+the recovery-specific action and measured crossover remain to be instantiated.
+
 ### 5. Scalar-demand image collapse and representable lift objects
 
 `2026-08-22-c947-recovery-cost-lattice-theory.md` shows that scalar-demand
@@ -200,6 +216,18 @@ antichains, bitmaps for dense finite products, and sparse monotone indexes for
 large grids.  Elias--Fano is appropriate only when monotone integer IDs are
 dense enough to amortize its select structure; it is not a default.
 
+This theorem now has an executable generic core.  `FiniteOrderedMonoid`
+supports compact resource elements, and its exhaustive validator certifies
+range closure, identity, commutativity, associativity, partial order,
+monotonicity, and extensivity.  `CappedAdditiveMonoid` supplies mixed-radix
+coordinate vectors with saturating addition.  `ParetoFront` implements
+canonical choice and monoid-product composition; all 256 pairs of subsets of
+the two-dimensional Boolean resource lattice are checked against an
+independent brute-force definition.  `ParetoWorkspace` makes repeated choice
+and composition allocation-free after exact pre-sizing.
+`ParetoObservationTable` deduplicates large response payloads by sorting and
+moving them once rather than retaining duplicate hash keys.
+
 ### 7. Abstract finite-interface adapter
 
 C980 isolates four sufficient hypotheses: finite linear labels, target
@@ -221,6 +249,15 @@ context-family recognizer
 
 The generic compiler then supplies quotienting, evidence streaming, synthesis,
 cycle analysis, and persistence.
+
+The first boundary is now implemented as `FiniteInterfaceAdapter`.
+Applications enumerate typed states, observations, and total one-hole
+contexts; `present_finite_interface` materializes exactly-sized arrays and
+hands the validated presentation to the proof-carrying compiler.
+`FiniteInterfaceWitness` lifts quotient representatives back to domain
+witnesses.  Typed end-to-end tests cover contextual separation and witness
+lifting, while malformed target transitions are rejected by the shared
+presentation validator.  Pareto observation IDs feed through this same API.
 
 ## Additional portfolio bridges
 
@@ -260,12 +297,12 @@ All next kernels should preserve the established constraints:
 
 1. Extend the full-rank-map hoist into rank-stratified full-span envelopes and
    benchmark restriction aggregation against the atomic-subspace path.
-2. Prototype GL-orbit canonicalization at the first rank/field pair where the
-   raw probe cache dominates runtime or memory.
-3. Add scalar-demand image normalization at the recovery adapter boundary.
-4. Define the finite ordered-monoid adapter and instantiate one two-resource
-   repair example with witness replay.
-5. Add a direct minima-defined family-response adapter for the cases not
+2. Instantiate the generic orbit compiler on C980 probes at the first
+   rank/field pair where raw probe storage dominates, then select it from a
+   measured storage/lookup crossover rather than enabling it universally.
+3. Instantiate the ordered-resource and finite-interface adapters on one
+   two-resource repair or network-allocation example with witness replay.
+4. Add a direct minima-defined family-response adapter for the cases not
    expressible as finite accepted-word languages.
 
 Fixed-batch packing is deliberately not in this list.  C980 proves its bounded
