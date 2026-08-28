@@ -824,58 +824,28 @@ where
     pivots.clear();
     let data = &mut data[..rank * ambient_dimension];
     let digits = &mut digits[..rank * ambient_dimension];
-    choose_pivots::<F, C>(
-        ambient_dimension,
-        rank,
-        0,
-        pivots,
-        data,
-        free,
-        digits,
-        &mut callback,
-    )
-}
-
-#[allow(clippy::too_many_arguments)]
-fn choose_pivots<F: FiniteField, C>(
-    ambient_dimension: usize,
-    rank: usize,
-    next: usize,
-    pivots: &mut Vec<usize>,
-    data: &mut [u8],
-    free: &mut Vec<(usize, usize)>,
-    digits: &mut [u8],
-    callback: &mut C,
-) -> Result<(), ContextualError>
-where
-    C: FnMut(&[u8]) -> Result<(), ContextualError>,
-{
-    if pivots.len() == rank {
-        return enumerate_free_entries::<F, C>(
+    pivots.extend(0..rank);
+    loop {
+        enumerate_free_entries::<F, C>(
             ambient_dimension,
             pivots,
             data,
             free,
             digits,
-            callback,
-        );
-    }
-    let needed = rank - pivots.len();
-    for pivot in next..=ambient_dimension - needed {
-        pivots.push(pivot);
-        choose_pivots::<F, C>(
-            ambient_dimension,
-            rank,
-            pivot + 1,
-            pivots,
-            data,
-            free,
-            digits,
-            callback,
+            &mut callback,
         )?;
-        pivots.pop();
+
+        let Some(index) = (0..rank)
+            .rev()
+            .find(|&index| pivots[index] < ambient_dimension - rank + index)
+        else {
+            return Ok(());
+        };
+        pivots[index] += 1;
+        for suffix in index + 1..rank {
+            pivots[suffix] = pivots[suffix - 1] + 1;
+        }
     }
-    Ok(())
 }
 
 fn enumerate_free_entries<F: FiniteField, C>(
