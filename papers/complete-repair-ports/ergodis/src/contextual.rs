@@ -872,6 +872,20 @@ fn multiply_bases_into<F: FiniteField>(
     output: &mut [u8],
 ) {
     output.fill(0);
+    if F::ORDER == 2 {
+        for row in 0..rank {
+            for middle in 0..ambient.rows() {
+                if coefficients[row * ambient.rows() + middle] == 0 {
+                    continue;
+                }
+                let output = &mut output[row * ambient.cols()..(row + 1) * ambient.cols()];
+                for (entry, &addend) in output.iter_mut().zip(ambient.row(middle)) {
+                    *entry ^= addend;
+                }
+            }
+        }
+        return;
+    }
     for row in 0..rank {
         for middle in 0..ambient.rows() {
             let scalar = coefficients[row * ambient.rows() + middle];
@@ -1201,12 +1215,20 @@ fn coefficient_map_dense_cost<F: FiniteField>(
         let mut index = 0_usize;
         for col in 0..target_rank {
             let mut value = 0_u8;
-            for row in 0..rank {
-                let outer = subspace[row * block_count + block];
-                if outer == 0 {
-                    continue;
+            if F::ORDER == 2 {
+                for row in 0..rank {
+                    if subspace[row * block_count + block] != 0 {
+                        value ^= coefficients[row * target_rank + col];
+                    }
                 }
-                value = F::add(value, F::mul(outer, coefficients[row * target_rank + col]));
+            } else {
+                for row in 0..rank {
+                    let outer = subspace[row * block_count + block];
+                    if outer == 0 {
+                        continue;
+                    }
+                    value = F::add(value, F::mul(outer, coefficients[row * target_rank + col]));
+                }
             }
             index = index * F::ORDER as usize + value as usize;
         }
