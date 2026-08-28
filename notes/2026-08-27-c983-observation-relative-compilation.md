@@ -204,6 +204,14 @@ Three honest implementation modes remain:
    and then apply value, count, optimal-count, or selected-witness measures.
    This is strongest semantically but may make the compiled object much larger.
 
+Provenance semirings, algebraic model counting, and semiring-DP solution
+expressions already establish the broad compile-once/evaluate-many idea.  They
+should be used as backends, not relabelled as an Ergodis theorem.  The possible
+Ergodis addition is a second, observation-relative compilation pass that
+minimizes the reachable interface for an explicit context grammar and query
+family.  Circuit factorization and contextual state minimization are distinct:
+neither size bound implies the other.
+
 For the weighted-tree control, valuation-vector evaluation can retain, for
 each tree occurrence and original state `q`, one minimizing transition and its
 child states.  This reconstructs an exact optimal run.  Further quotienting the
@@ -246,4 +254,6 @@ domain small-model theorem.
    systems contribution claim.
 6. Require an independent exhaustive oracle for both values and reconstructed
    witnesses on the first two adapters.
-
+7. For compile-once/multi-query claims, compare against the unquotiented
+   provenance or knowledge-compiled DAG and report whether quotienting reduces
+   an external interface, merely evaluation memoization, or neither.

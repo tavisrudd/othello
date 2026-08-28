@@ -237,6 +237,15 @@ derives bounded tropical weighted-tree evaluation as a classical capability
 corollary, and isolates the witness obstruction: value minimization needs a
 separate provenance side-car or a proved witness-lift law.
 
+The next capability layer treats provenance semirings, algebraic model
+counting, and semiring-DP solution DAGs as established compiler backends.  The
+Ergodis question is sharper: can a second context-relative pass reduce the
+reachable external interface while retaining several requested projections
+(value, count, optimal count, and a witness)?  This separates theorem novelty
+from application novelty and makes pre-emption productive: a classical result
+can become a backend or corollary while Ergodis expands the executable query
+surface or materially reduces state, circuit, or witness cost.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary

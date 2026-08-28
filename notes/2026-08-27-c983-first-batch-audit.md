@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY NINE-SOURCE PASS; ONE SOURCE READ AT FULL
-TEXT AND EIGHT AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY ELEVEN-SOURCE PASS; TWO SOURCES READ AT
+FULL TEXT AND NINE AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
 
@@ -85,7 +85,8 @@ formal congruence argument.
 | Simplify an abstract state domain while preserving exact analyzed behavior | Correctness kernels and complete abstract domains | Pre-empted abstractly | Show the Ergodis quotient is a useful computable instance with quantitative optimization and witnesses |
 | Every tropical behavior has a finite deterministic exact state | Tropical weighted-automata determinization | False in general; deciding existence was a long-standing problem resolved only recently, without a complexity bound in the consulted version | State determinization/finiteness hypotheses explicitly and prefer bounded context languages at first |
 | Contextual equivalence is a congruence | Syntactic congruence/functorial semantics | Formally routine once contexts compose | The result must be a small-model, effective-compilation, or state-complexity theorem |
-| Witness-preserving quotient | Provenance/backpointer variants of dynamic programming; detailed audit not yet run | Open positioning | Specify whether witnesses are canonical, existential, or observed only through a projection; literal witness identity can destroy quotienting |
+| Witness-preserving quotient | Provenance semirings, algebraic model counting, and backpointer variants of dynamic programming | Pre-empted as a universal symbolic-evaluation idea; open as an independently compressed sidecar | Specify whether witnesses are canonical, existential, or observed only through a projection; literal witness identity can destroy quotienting |
+| Compile once, answer several algebraic queries | Provenance semirings, algebraic model counting, and semiring-DP solution expressions | Pre-empted in the unrestricted algebraic sense | Test whether an additional contextual quotient shrinks the boundary state or circuit interface while retaining value, count, optimal-count, and witness projections |
 
 ## Common kernel candidate
 
@@ -392,6 +393,48 @@ The read depths below are unconditional and describe this preliminary pass.
    It constructs crisp-deterministic WTA from finite Nerode algebras or finite-
    order hypotheses, gives algorithms, and proves the relevant unrestricted
    finiteness and determinization questions undecidable.
+10. Angelika Kimmig, Guy Van den Broeck, and Luc De Raedt, *Algebraic Model
+    Counting*.
+    **Read depth: full text** — arXiv version, cache key `arXiv:1211.4475`,
+    SHA-256
+    `85f68356e86627aa1929b35381a42e9aff106e129565e8a6528856c52267466c`.
+    The paper evaluates semiring-labelled models over knowledge-compiled
+    circuits, states the circuit/semiring conditions needed for soundness, and
+    covers Boolean satisfaction, counting, weighted/probabilistic evaluation,
+    MPE, shortest paths, and provenance as instances.
+11. Todd J. Green, Gregory Karvounarakis, and Val Tannen, *Provenance
+    Semirings*. **Read depth: partial** — cached published PDF, DOI
+    `10.1145/1265530.1265535`, SHA-256
+    `74e092700ff6bfc383c2049801dbe71b3dd51f38ecc4109df7073097e28c4a31`;
+    read the abstract, introduction, and Section 4 through Theorem 4.3.  The
+    polynomial semiring records how source tuples contribute to a positive
+    relational-algebra result and is universal for subsequent commutative-
+    semiring valuations.
+
+## Knowledge-compilation and provenance connection
+
+The provenance audit changes the witness design from an analogy into a
+backend boundary.  A factorized solution/provenance DAG can be evaluated under
+several observations, while the Ergodis quotient can minimize the reachable
+boundary behavior for a chosen family of future contexts.  The two
+compressions are orthogonal:
+
+1. knowledge compilation factors the derivation or model set;
+2. contextual quotienting merges interface states with the same admissible
+   future behavior.
+
+The useful capability target is therefore not the already-established claim
+that one symbolic object supports many semiring evaluations.  It is an
+adapter that compiles a domain object into a factorized provenance carrier,
+then proves or computes a smaller context-relative interface without losing
+the requested value/count/optimal-count/witness projections.  Experiments
+must report solution-DAG size, reachable raw response count, minimal quotient
+count, transition/circuit size, and runtime provenance memory separately.
+
+This opens two concrete application adapters missed by the initial ranking:
+database-query provenance and knowledge-compiled exact inference.  They count
+as Ergodis expansion only if the interface quotient or witness/query plumbing
+adds a measurable capability beyond the existing circuit compiler.
 
 ## Coverage gaps and next search
 
