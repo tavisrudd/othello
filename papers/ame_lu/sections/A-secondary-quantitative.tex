@@ -189,9 +189,10 @@ homomorphic choice of projective product-unitary lifts.
 \begin{proof}
 Theorem~\ref{thm:lu-lc-rigidity} puts every local factor in the finite
 projective Clifford group.  Projectivization has kernel \(T\), so its image
-is finite and discrete and \(T\) is the identity component.  Forgetting the
-party permutation gives the third sequence.  Its splitting criterion is the
-definition of a split extension.
+is finite and discrete and \(T\) is the identity component.  Retaining the
+party permutation defines the quotient map
+\(\widetilde\Gamma\to\Pi\); its kernel is \(\Gamma\), giving the displayed
+sequence.  Its splitting criterion is the definition of a split extension.
 \end{proof}
 
 
@@ -496,9 +497,9 @@ while the generator norm does not.
 On \(X=\mathrm{PU}(q)^{2m}\), put \(f(U)=\varepsilon(U)^2\).  Let
 \(B\subseteq X\) be the image of
 \(\{(h_j)\ \text{traceless}:\sum_j\lVert h_j\rVert_{\mathrm{op}}
-\leq\frac12\}\) under \((h_j)\mapsto[\bigotimes_je^{ih_j}]\).  That map is
-a local diffeomorphism at the origin, so \(B\) is a neighbourhood of the
-identity coset.  Theorem~\ref{thm:two-uniform-stability} gives
+<\frac12\}\) under \((h_j)\mapsto[\bigotimes_je^{ih_j}]\).  On this
+principal-logarithm neighbourhood the map is a diffeomorphism, so \(B\) is
+open.  Theorem~\ref{thm:two-uniform-stability} gives
 \[
  f\geq\frac5{6q}\sum_j\lVert h_j\rVert_F^2
 \]
@@ -509,7 +510,8 @@ The zero set \(Z\) of \(f\) is finite by
 Theorem~\ref{thm:two-uniform-discrete} and
 Remark~\ref{rem:local-phase-torus}.  So \(\bigcup_{g\in Z}gB\) is a
 neighbourhood of \(Z\).  On its compact complement \(K\), either
-\(K=\varnothing\) or \(\min_Kf>0\).  Taking
+\(K=\varnothing\) or \(\min_Kf>0\).  In the first case the factorization
+holds for every \(U\), so choose any \(\varepsilon_0>0\).  Taking
 \(\varepsilon_0^2<\min_Kf\) in the latter case forces \(U\in gB\) for some
 \(g\in Z\), and the translated quadratic estimate gives the conclusion.
 \end{proof}

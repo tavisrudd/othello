@@ -10,6 +10,17 @@ Discovery companion:
 
 ## Current status
 
+**C990 completed (2026-08-28).**  Appendix B is reduced from roughly nine to
+seven rendered pages while retaining all twelve theorem-like statements, both
+figures, and every substantive two-/`k`-uniform conclusion.  Two resumed cold
+readers found no essential accessibility or proof loss and exposed three
+repairs: an open principal-logarithm neighborhood closes a latent compactness
+gap, the party-permutation quotient direction is now correct, and the empty
+complement is explicit.  The warning-free paper is 37 A4 pages, SHA-256
+`6be97fa496cf0236b2cf7516a3bddcfbd47e1d29a31e1e4a7cead473dd661247`.
+No Lean, mirror, export, push, deposit, or submission action was taken.
+Report: `2026-08-28-c990-ame-lu-appendix-compression.md`.
+
 **C989 completed (2026-08-28).**  Paper I now identifies the intrinsic
 block-diagonal endomorphism algebra with the common transition-map
 centralizer, classifies its five prime-field types and determinant-one unit
