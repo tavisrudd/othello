@@ -282,23 +282,13 @@ total-word-weight convention are recorded after the general transfer theorem.
 \paragraph{Closest precedents.}
 RGHWs and RDLPs describe single-block support and access thresholds for nested
 codes \cite{LuoEtAl2005,KuriharaUyematsuMatsumoto2012,GeilEtAl2014}; our first
-identity specializes that theory to the canonical target/helper pair.
-Recovery-set formulations retain helper supports and their overlaps but
-generally discard the normalized coefficients and functional labels that
-couple concatenation blocks
-\cite{GopalanEtAl2012,PamiesEtAl2013,RawatMazumdarVishwanath2015}.
-
-Soft and generalized-concatenated decoding also propagate symbol-indexed data
-by min--sum elimination \cite{AjiMcEliece2000,GuruswamiSudan2002,
-BlomqvistEtAl2020}.  Their objective is decoding reliability; here the labels
-index exact target-normalized support costs and determine the first
-nonconfined recovery.
-
-The Myhill--Nerode analogy is structural: contextual equivalence parallels
-behavioural minimization for weighted automata over semirings \cite{Mohri2009};
-no automata-minimization theorem is imported.
-Section~\ref{sec:related-work} gives the full comparison with these and the
-adjacent repair, service-rate, concatenation, and coset-weight literatures.
+identity specializes that theory to the canonical target/helper pair.  Unlike
+recovery-set summaries, the compositional state retains functional labels; its
+min--sum propagation has a different objective from concatenated decoding, and
+its contextual quotient is analogous to, but not derived from, weighted
+automata minimization
+\cite{GopalanEtAl2012,AjiMcEliece2000,BlomqvistEtAl2020,Mohri2009}.
+Section~\ref{sec:related-work} gives the detailed comparisons and citations.
 
 ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis) is an
 exact compiler and solver derived from these reductions.  From finite linear

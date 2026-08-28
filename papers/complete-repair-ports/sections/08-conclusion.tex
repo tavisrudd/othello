@@ -1,63 +1,27 @@
 \section{Conclusion}
 
-The central question is compositional: which recovery information must be
-retained before an inner code is placed inside an outer one?  The canonical
-shortening--puncturing pair answers the single-block minimum-cost question.
-Its relative generalized Hamming weights are exactly the minimum helper unions
-for recovered subspaces of each dimension.  They are not, however, sufficient
-recursive state for finite concatenation.
+The answer to the paper's compositional question is layered.  Relative
+generalized Hamming weights of the canonical shortening--puncturing pair give
+the exact single-block minimum helper unions, but finite concatenation requires
+prescribed-coset costs indexed by the intermediate functional.  These labelled
+costs compose by min--sum through finite towers, with backpointers recovering
+coefficient-level witnesses.  Through any fixed helper radius, bounded-length
+and bounded-dual-dimension outer contexts give the coarsest exact numerical
+quotient; at rank one this quotient has an explicit projective description.
+Rank-one confinement nevertheless controls every recoverable rank.  When
+outer dual distance excludes the nonzero-functional sectors, the exact cost
+collapses to $M_t(D_P,K_P)+d(I^\perp)$, and restriction and zero-extension
+preserve the bounded coefficient systems and exact helper supports.
 
-Exact finite transfer is captured by the prescribed-coset support functions
-indexed by the intermediate functional each block must realize.  Minimizing
-their blockwise costs over all compatible outer labels gives
-$\Gamma_{j,T}(O,I)$, the minimum cost of a normalized recovery that leaves the
-target block.  The same labelled costs compose by min--sum through finite
-towers.  The numerical table stores one minimum per label; storing a
-backpointer as well recovers an optimizing coefficient-level witness.  At
-rank one, tests by outer dual lines distinguish exactly what any outer code can
-observe; their zero-truncated response profile is the coarsest numerical
-compositional state, while the full labelled table remains a convenient closed
-representation.  More generally, through any fixed helper radius, a finite
-family of bounded-length, bounded-dual-dimension outer contexts detects every
-higher-rank numerical distinction.  Its response vector is the coarsest exact
-bounded contextual quotient and remains a congruence under compatible further
-composition.  Moreover, any higher-rank nonconfinement witness contains a rank-one
-nonconfinement witness of no
-larger cost.  Thus rank-one confinement controls every recoverable rank, and
-below that threshold restriction and zero-extension preserve all bounded
-coefficient and support families and the reliability or scheduling laws
-defined from them.
-
-The additive threshold
-\[
- M_t(D_P,K_P)+d(I^\perp)
-\]
-is the zero-functional sector of the exact formula.  Outer dual distance makes
-it exact by excluding every nonzero-functional sector below the chosen radius.
-Restriction and zero-extension then preserve normalized equations and exact
-helper supports, not only a locality value.  This coefficient-level bijection
-yields the positive-density and bounded service-rate transfers; the
-one-coordinate weighted formula can remain exact even when the ordinary
-outer-distance condition fails.
-
-The separations identify the cost of each projection.  The complete RGHW
-hierarchy determines minimum helper unions but not the overlap law governing
-bounded reliability.  Even the binary image code, its dual, the abstract
-nested pair, the complete relative-weight hierarchy, and the unlabelled helper
-supports can agree while one fixed outer code distinguishes two extension-field
-presentations through their functional labels.  A separate
-ambient-presentation example shows that $d(I^\perp)$ supplies another degree
-of freedom invisible to the abstract pair.  The
-projective-simplex family exhibits all three levels explicitly: RGHWs give its
+The separations mark the limits of each projection.  Complete RGHW data do not
+determine the overlap law governing bounded reliability, while even the same
+abstract nested pair and unlabelled helper supports can hide different
+functional-label alignments or ambient dual distances.  The projective-simplex
+family displays the distinction in one model: relative weights give its
 minimum costs, ambient dual distance gives its collapsed thresholds, and the
-projective rank distribution gives its reliability polynomial.
-
-ergodis evaluates the closure theorem rather than serving as evidence for it.
-Its min--sum compiler stores labelled minima and predecessor lifts, returning
-exact hierarchical costs and replayable witnesses; its scheduler then optimizes
-the resulting recovery choices under heterogeneous capacities.  The recorded
-matched exact-control comparisons measure this tradeoff on declared instances
-and do not enter any proof.
+projective rank distribution gives its reliability polynomial.  ergodis makes
+the compositional branch executable with reconstructible witnesses; it is not
+part of any proof.
 
 Two extensions require different state.  Disjoint simultaneous service is an
 integral packing problem rather than a minimum-union or fractional service-rate
