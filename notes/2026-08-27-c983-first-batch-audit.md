@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY FIVE-SOURCE PASS; ONE SOURCE READ AT FULL
-TEXT AND FOUR AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY EIGHT-SOURCE PASS; ONE SOURCE READ AT FULL
+TEXT AND SEVEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
 
@@ -151,6 +151,133 @@ the resource instance has no quotient beyond obvious symmetry.
    component distinguishable.
 6. Derive both exemplar compilers before changing the Ergodis architecture.
 
+## Priority-judo extraction
+
+The generic-minimization crown is pre-empted, but it is retained as the base
+case rather than abandoned.  This bounded extraction pass follows the
+repository novelty-extraction convention and identifies exactly three adjacent
+gaps.
+
+### Exact pre-emption and surviving result
+
+- GDL pre-empts generic exact semiring elimination.
+- weighted-series, categorical/coalgebraic minimization, and correctness
+  kernels pre-empt a generic minimal-behavior quotient theorem.
+- recent semiring-DP work already compiles solution sets into reusable
+  join/union expressions and can combine optimization with counting.
+
+What survives is an effective **observational interface compiler** whose input
+is a proved finite separator system for a restricted typed context language,
+whose output is a minimal response quotient plus distinguishing-context and
+optimal-witness certificates, and whose cross-domain value comes from deriving
+the separator system mathematically rather than asking the user to invent a DP
+state.
+
+### Three adjacent gaps
+
+1. **Effective bounded separators for multiary quantitative contexts.**  The
+   categorical theory supplies existence and minimization patterns, but not the
+   domain-specific finite separator radius or state-count bound.  The new
+   weighted-tree-automata result shows why branching cannot be waved away:
+   under initial-algebra semantics, one rank-at-least-two symbol can generate
+   the entire finitely generated strong bimonoid, and hence infinitely many
+   values when that bimonoid is infinite.
+2. **A compiler contract joining minimization to exact provenance.**  Semiring
+   DP can encode complete solution sets and evaluate many measures, while
+   minimization theory identifies behavioral quotients.  The open C983 target
+   is a reusable boundary between these layers: quotient the observable state,
+   retain a derivation DAG as side-car provenance, and emit both an optimal
+   witness and a distinguishing context without letting literal witness
+   identity destroy value-state compression.
+3. **Restricted-context quantitative kernels as a capability.**  Correctness
+   kernels simplify an abstract domain for fixed semantic functions, and
+   syntactic quotients minimize all-context behavior.  Ergodis needs the middle
+   operational case: a typed grammar of admissible future components, bounded
+   observations, dynamic restriction of that grammar, and exact incremental
+   recompilation.  Whether this yields stronger mathematics is open; it is
+   already a concrete software-expansion target.
+
+### Six candidate extensions
+
+1. A typed multiary bounded-observation compilation theorem with an explicit
+   finite separator bound and quotient cardinality bound.
+2. A separator-basis API accepting finite tests, linear/Hankel bases,
+   orbit representatives, or abstract-domain extrema through one response-
+   signature compiler.
+3. A provenance side-car theorem reconstructing one/all/counts of optimal
+   witnesses over the same value quotient.
+4. Exact selective recompilation when the allowed future-context grammar
+   shrinks after an input component.
+5. A positive-activity theorem making bounded-cost weighted tree/context
+   systems finite after zero-cost closure, with an explicit counterexample
+   when activity is not extensive.
+6. A decorated/structured-open-system adapter separating interface gluing from
+   the quantitative observational semantics before minimization.
+
+No new C-item is allocated: these are C983 work packages, not independent
+frontiers.
+
+### Cheap test of the top two
+
+**Candidate 1 survives only in a sharpened form.**  Pure contextual congruence
+is formal and pre-empted.  Add a finite observation set `V`, an explicitly
+certified separator family `B_(I,J)`, and a domain theorem bounding `|B_(I,J)|`.
+Then every component has the response signature
+
+```text
+sig(x) = (obs(R compose x compose L))_(L,R in B_(I,J)),
+```
+
+the exact quotient has at most `|V|^|B_(I,J)|` states, and a separating
+coordinate is a machine-checkable distinguishing context.  The abstract bound
+is elementary; the nontrivial theorem in each domain is that its small `B`
+really separates all admissible contexts.  DFA suffixes, field-weighted Hankel
+bases, correctness-kernel extrema, and C980 outer-code probes become supplied
+separator certificates.  This is a plausible general compiler theorem, but its
+mathematical novelty rests entirely on new separator bounds.
+
+**Candidate 2 survives as the strongest application architecture.**  A
+`SeparatorSystem` need expose: typed tests, finite response values, response
+evaluation, completeness evidence, and a distinguisher.  The quotient compiler
+deduplicates signatures and constructs transition tables.  A separate
+`ProvenanceAlgebra` stores derivation DAG nodes for chosen or all optimum
+transitions.  This cleanly subsumes dense Ergodis tables, projective/orbit
+probes, field-linear Hankel bases, and finite partition refinement at the API
+level.  It is not a new minimization theorem; it is a falsifiable route to
+cross-domain capability.
+
+The next cheap test is weighted branching.  Candidate 1 must either derive a
+positive-activity/zero-closure separator bound for a useful weighted-tree class
+or retreat to user-supplied finite separators.  The 2026 value-generation
+theorem rules out generic finiteness from bi-local finiteness alone.
+
+## General theorem schema v0
+
+Let `A` be a typed category or multicategory of components, let `V` be a finite
+observation set, and let each hom-set have a well-typed family of closing
+contexts.  A separator certificate for `(I,J)` is a finite context family
+`B_(I,J)` such that equality of observations on `B_(I,J)` implies equality in
+every admissible closing context.
+
+Then:
+
+1. response-signature equality is the exact contextual equivalence;
+2. it is a congruence whenever admissible contexts are closed under plugging;
+3. the quotient size is at most `|V|^|B_(I,J)|`;
+4. every unequal pair has a distinguishing context in `B_(I,J)`;
+5. any invariant predicting all admissible observations factors uniquely
+   through the response signature; and
+6. if each concrete composition step carries an exact derivation pointer, one
+   chosen optimal witness replays inductively without refining the value
+   quotient.  Observing the set or identity of witnesses instead requires the
+   corresponding refined observation algebra.
+
+This schema is deliberately presented as a compiler correctness theorem, not a
+novel minimization theorem.  Its classical corollaries arise by supplying their
+known separator constructions.  New C983 mathematics must provide a separator
+bound for a domain where the classical frameworks do not already make it
+effective.
+
 ## Sources consulted
 
 The read depths below are unconditional and describe this preliminary pass.
@@ -192,6 +319,32 @@ The read depths below are unconditional and describe this preliminary pass.
    read the abstract and Sections 1--2 through the determinization definition.
    The consulted version proves decidability, states that not every tropical
    WFA is determinizable, and gives no complexity bound for its algorithm.
+6. Manfred Droste, Zoltan Fulop, Andreja Tepavcevic, and Heiko Vogler, *The
+   Value Generating Power of Weighted Tree Automata with Initial Algebra
+   Semantics*.  **Read depth: partial** — AFL 2026/arXiv version, cache key
+   `arXiv:2608.24247`, SHA-256
+   `ac3c53f23690e296d6e665d3017ca73fbeb8a677dc374ddae9360ce607437548`;
+   read the abstract and introduction through both main-theorem statements and
+   consequences.  The paper sharply separates string from branching value
+   generation and shows that bi-local finiteness does not ensure finite initial-
+   algebra behavior for weighted tree automata.
+7. Ambroise Baril, Miguel Couceiro, and Victor Lagerkvist, *New Perspectives
+   on Semiring Applications to Dynamic Programming*.  **Read depth: partial**
+   — arXiv v1 (2025), cache key `arXiv:2512.03916`, SHA-256
+   `84caf8499e0464471b1f651281e9577aab4d8d0a058af0672ae0132514777a1a`;
+   read the abstract, Sections 1.1--1.2, the Semiring-Problem setup in Section
+   3.1, and join/union expressions and measures in Sections 3.4--3.5.  It
+   compiles solution sets for arbitrary NP problems into semiring-evaluable
+   expressions and combines optimal cost with solution counting via its
+   Delta-product.
+8. Nick Bezhanishvili, Marcello Bonsangue, Helle Hvid Hansen, Dexter Kozen,
+   Clemens Kupke, Prakash Panangaden, and Alexandra Silva, *Minimisation in
+   Logical Form*.  **Read depth: partial** — arXiv v1 (2020), cache key
+   `arXiv:2005.11551`, SHA-256
+   `bc419d1bf5d489116c5cd90c53d015a75f3c37c92a46a983ab30fc96a15c6fd6`;
+   read the introduction and contribution map.  It unifies reachability and
+   observability minimization through categorical dualities and extends a
+   field-weighted result to principal ideal domains.
 
 ## Coverage gaps and next search
 
@@ -199,7 +352,7 @@ No absence claim is licensed.  The next pass must cover primary work on
 tropical rational-series realization and minimization, subsequential
 transducer residuals, valued-CSP and tree-decomposition compilation,
 quantitative/syntactic congruences, provenance-preserving dynamic programming,
-and observational completeness.  The promised C980 structural-compression
+observational completeness, and compositional open-system interfaces.  The promised C980 structural-compression
 audit file named by the C980 report was not present at its recorded path during
 this pass; its missing state must be resolved before treating C980's literature
 gate as reusable evidence.
@@ -207,4 +360,3 @@ gate as reusable evidence.
 MathSciNet is not covered.  zbMATH, Crossref, OpenAlex, and Semantic Scholar
 have not yet been queried.  No citation-graph negative is attempted in this
 preliminary pass.
-

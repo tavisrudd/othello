@@ -229,3 +229,10 @@ claims are pre-empted; C983 must contribute restricted-context small-model
 bounds, an effective domain-to-interface compiler, exact witnesses, and
 cross-domain evidence.  Unrestricted coordinate-selector contexts distinguish
 every raw kernel entry, so they admit no nontrivial semantic quotient.
+
+User direction after the first checkpoint makes priority judo part of the
+method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
+classical results as corollaries or compiler backends, push to typed multiary
+contexts, effective separator bounds, quantitative witnesses, and new
+application adapters, and keep theoretical novelty distinct from capability
+expansion.
