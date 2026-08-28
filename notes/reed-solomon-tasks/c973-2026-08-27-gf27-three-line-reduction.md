@@ -816,7 +816,95 @@ distinct roots away from the retained seven.  The only open GF(27) lemma is
 this split-and-collision assertion.  It contains no linearized-cubic image
 condition and needs no point-count certificate in its statement.
 
-## 8. Boundary and next gate
+## 8. The carrier is the eighth nucleus
+
+There is a further representation-free compression of the whole GF(27)
+problem.  Let
+
+\[
+ \Gamma_{10}=\{[1:t:t^2:\cdots:t^{10}]:t\in K\}\cup\{e_{10}\}
+ \subset {\rm PG}(10,K)
+\]
+
+be the degree-ten normal rational curve, in divided-power coordinates.  Its
+eighth nucleus is the intersection of all eighth osculating spaces.  The
+standard nucleus criterion says that its coordinate support consists of the
+indices `j` for which
+
+\[
+                 {9\choose j}={10\choose j}=0\pmod 3.   \tag{56}
+\]
+
+For completeness, this criterion follows directly from the Hasse-derivative
+matrix of `Gamma_10`: the last two columns missing from an eighth osculating
+space have entries `{9\choose j}t^{9-j}` and
+`{10\choose j}t^{10-j}`.  Intersecting over `t in K` is coefficientwise
+because `|K|=27>10`, so a coordinate axis survives exactly when both displayed
+binomial coefficients vanish.
+
+Lucas' theorem makes (56) completely explicit.  The base-three expansions
+are `9=(100)_3` and `10=(101)_3`; hence both binomial coefficients vanish
+exactly for
+
+\[
+                              2\leq j\leq8.             \tag{57}
+\]
+
+Consequently
+
+\[
+ N^{(8)}\Gamma_{10}=\mathbf P\langle e_2,e_3,\ldots,e_8\rangle,             \tag{58}
+\]
+
+which is exactly the seven-dimensional R11 carrier used above.  This
+identification is intrinsic and explains why the coordinate block is stable
+under `PGL_2`: it is an osculating nucleus, not an accidental coordinate
+slice.
+
+Projection from this nucleus retains only coordinates `0,1,9,10`.  On the
+curve it is
+
+\[
+ t\longmapsto[1:t:t^9:t^{10}],                           \tag{59}
+\]
+
+and its image lies on the split quadric
+
+\[
+                              X_0X_3=X_1X_2.             \tag{60}
+\]
+
+Equivalently, (59) is the graph of the ninth-power Frobenius on
+`P^1 x P^1`.  Thus the four vanished outer moments of a carrier
+representation are the four coordinates of one Frobenius-graph quotient;
+the two Hankel equations for a degree-nine locator are the residual incidence
+condition back in the nucleus.
+
+This also rules out two tempting but invalid shortcuts.  Ordinary Waring
+rank in degree ten is not applicable: in characteristic three, Lucas gives
+`(X+tY)^10` only the four ordinary-power coordinates `0,1,9,10`, so it loses
+the carrier coordinates rather than parametrizing them.  Completeness of the
+degree-nine or degree-ten normal rational curve supplies an unpointed secant
+of the ambient curve, but does not force its span to meet the particular
+nucleus point (58) in nine finite, distinct points.  Neither theorem proves
+the split-switch assertion after (55).
+
+The useful new formulation is therefore:
+
+> **Nucleus form of the last GF(27) lemma.** Every rational point of the
+> eighth nucleus (58) lies in an eight-space spanned by nine distinct affine
+> points of `Gamma_10`.
+
+By the moment recurrence, this statement is equivalent to the existence of
+a split squarefree degree-nine locator satisfying (3).  The split-and-
+collision assertion following (55) is a sufficient, more structured way to
+prove it, but need not be logically equivalent because it restricts the
+locator to one two-point switch family.  The nucleus formulation removes that
+auxiliary family from the target and identifies the exact finite-geometric
+incidence theorem still required.  No available normal-rational-curve
+completeness result implies this nucleus incidence automatically.
+
+## 9. Boundary and next gate
 
 The load-bearing next step is now the universal split-switch assertion after
 (55).  It simultaneously covers the dense stratum and every residual Borel
@@ -827,7 +915,7 @@ audits, but none needs to be the primary closure route.
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
 
-## 9. `ej` + `tt` ledger
+## 10. `ej` + `tt` ledger
 
 | question | status | exact continuation |
 |---|---|---|
@@ -846,3 +934,5 @@ certificate supports this reduction.
 | Does one construction cover multiple Borel charts? | yes: the affine-plane locator (38) closes every `(z2,z4)=(0,0)` syndrome and the nonsquare-ratio half of every nonzero pair, independently of the other boundary coordinates | retain only the two coordinate axes and square-ratio half for transverse analysis |
 | What replaces the cover tower on the complementary boundary ratio? | switching two points of an affine plane solves both Hankel equations uniquely | prove the quadratic (45) splits away from the seven retained plane points |
 | Does the two-point switch extend off the Borel boundary? | yes; the quotient recurrence gives the general matrix (52), and (53)--(54) prove a nonsingular pair exists in every fixed plane direction | prove only split and collision for one such pair |
+| Is the seven-coordinate carrier an intrinsic finite-geometric object? | yes; Lucas and the osculating-nucleus criterion identify it with the eighth nucleus of the degree-ten normal rational curve | prove the equivalent nine-affine-secant incidence statement in Section 8 |
+| Do ordinary binary Waring rank or plain NRC completeness land the last lemma? | no; ordinary tenth powers retain only coordinates `0,1,9,10` in characteristic three, while completeness does not impose incidence with the prescribed nucleus point | do not cite either as a split-switch proof |

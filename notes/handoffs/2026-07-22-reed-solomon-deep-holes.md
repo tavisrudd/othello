@@ -216,8 +216,15 @@ against the seven retained plane points.  The quotient recurrence extends the
 same `2x2` switch matrix to arbitrary syndromes, so the dense and boundary
 problems have merged into one universal split-switch lemma.  A degree-six
 coset argument proves fixed-direction matrix nonsingularity; only quadratic
-splitting and collision against the seven retained points remain.  No finite
-census is authorized.
+splitting and collision against the seven retained points remain.  The whole
+seven-coordinate carrier is intrinsically the eighth osculating nucleus of
+the degree-ten normal rational curve: Lucas gives exactly the coordinate
+block `e2,...,e8`, and projection from it is the ninth-power Frobenius graph
+`[1:t:t^9:t^10]` on a split quadric.  Thus the last gate is equivalently the
+statement that every rational point of that nucleus lies on a nine-affine-
+point eight-secant.  Ordinary degree-ten Waring rank is invalid in this bad
+characteristic, and plain NRC completeness does not impose the required
+nucleus incidence.  No finite census is authorized.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md`, and
