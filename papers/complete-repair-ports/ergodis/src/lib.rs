@@ -68,7 +68,7 @@ pub use scheduler::{
     RepairSupportChoice, SchedulerError, WeightedParallelRepairResult, WeightedRepairProblem,
     WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
-pub use span::{GeneratedSpanTable, SpanAnswer, SpanError};
+pub use span::{CanonicalTargetImage, GeneratedSpanTable, SpanAnswer, SpanError};
 pub use transfer::{
     compile_binary_inner_dual, compile_binary_rank_one, compile_binary_target_subspace,
     BinaryRankOneProfile, BinaryTargetProfile, CoefficientWitness, MatrixCoefficientWitness,

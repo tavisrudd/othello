@@ -11,6 +11,8 @@ pub enum SpanError {
     Matrix(#[from] MatrixError),
     #[error("the generator has too many coordinates for u32 witness IDs")]
     CoordinateOverflow,
+    #[error("canonical target image uses field order {actual}, expected {expected}")]
+    ImageField { expected: u8, actual: u8 },
 }
 
 #[repr(C)]
@@ -37,6 +39,20 @@ struct ColumnRep {
 pub struct SpanAnswer {
     pub cost: u16,
     pub support: Box<[u32]>,
+}
+
+/// Canonical column-space image of a scalar demand, reusable across queries.
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub struct CanonicalTargetImage {
+    field_order: u8,
+    ambient: u16,
+    basis: Matrix,
+}
+
+impl CanonicalTargetImage {
+    pub fn basis(&self) -> &Matrix {
+        &self.basis
+    }
 }
 
 /// Generated-span closure with fixed-size hot states and arena witnesses.
@@ -120,19 +136,52 @@ impl GeneratedSpanTable {
     }
 
     pub fn query<const P: u8>(&self, target: &Matrix) -> Result<Option<SpanAnswer>, SpanError> {
+        let image = self.canonical_target_image::<P>(target)?;
+        self.query_canonical_target_image::<P>(&image)
+    }
+
+    /// Compile a scalar demand to its canonical message-space image.
+    pub fn canonical_target_image<const P: u8>(
+        &self,
+        target: &Matrix,
+    ) -> Result<CanonicalTargetImage, SpanError> {
+        Prime::<P>::validate().map_err(MatrixError::from)?;
         if target.rows() != self.ambient as usize {
             return Err(MatrixError::Shape.into());
         }
-        let target_basis = target.transpose::<P>()?.canonical_row_basis::<P>()?;
+        let basis = target.transpose::<P>()?.canonical_row_basis::<P>()?;
+        Ok(CanonicalTargetImage {
+            field_order: P,
+            ambient: self.ambient,
+            basis,
+        })
+    }
+
+    /// Query a previously canonicalized scalar-demand image without repeating
+    /// transpose and row elimination.
+    pub fn query_canonical_target_image<const P: u8>(
+        &self,
+        target_image: &CanonicalTargetImage,
+    ) -> Result<Option<SpanAnswer>, SpanError> {
+        Prime::<P>::validate().map_err(MatrixError::from)?;
+        if target_image.field_order != P {
+            return Err(SpanError::ImageField {
+                expected: P,
+                actual: target_image.field_order,
+            });
+        }
+        if target_image.ambient != self.ambient {
+            return Err(MatrixError::Shape.into());
+        }
         let mut scratch = Vec::new();
         for state in &self.states {
             let basis = self.bases.get(state.basis);
             scratch.clear();
             scratch.extend_from_slice(basis.data);
-            scratch.extend_from_slice(target_basis.as_slice());
+            scratch.extend_from_slice(target_image.basis.as_slice());
             let joined_rank = canonicalize_rows_in_place::<P>(
                 &mut scratch,
-                basis.rows + target_basis.rows(),
+                basis.rows + target_image.basis.rows(),
                 basis.cols,
             )?;
             if joined_rank == basis.rows {
@@ -184,6 +233,29 @@ mod tests {
         let full = Matrix::new::<2>(2, 2, vec![1, 0, 0, 1]).unwrap();
         assert_eq!(table.query::<2>(&one).unwrap().unwrap().cost, 1);
         assert_eq!(table.query::<2>(&full).unwrap().unwrap().cost, 2);
+    }
+
+    #[test]
+    fn canonical_target_images_are_reusable_across_presentations() {
+        let generator = Matrix::new::<2>(2, 3, vec![1, 0, 1, 0, 1, 1]).unwrap();
+        let table = GeneratedSpanTable::build::<2>(&generator).unwrap();
+        let one_column = Matrix::new::<2>(2, 1, vec![1, 1]).unwrap();
+        let repeated_column = Matrix::new::<2>(2, 2, vec![1, 1, 1, 1]).unwrap();
+        let one_image = table.canonical_target_image::<2>(&one_column).unwrap();
+        let repeated_image = table.canonical_target_image::<2>(&repeated_column).unwrap();
+        assert_eq!(one_image, repeated_image);
+        let answer = table
+            .query_canonical_target_image::<2>(&one_image)
+            .unwrap()
+            .unwrap();
+        assert_eq!(answer.cost, 1);
+        assert!(matches!(
+            table.query_canonical_target_image::<3>(&one_image),
+            Err(SpanError::ImageField {
+                expected: 3,
+                actual: 2
+            })
+        ));
     }
 
     #[test]
