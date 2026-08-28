@@ -3680,8 +3680,26 @@
       "last": 981,
       "purpose": "Explore mathematical extensions and publication framing exposed by the MDS--CSS exposition revision",
       "sequence": 409
+    },
+    {
+      "count": 1,
+      "first": 982,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 982,
+      "purpose": "pursue the MDS conductor and endomorphism-algebra compression beyond C981 without touching C979",
+      "sequence": 410
+    },
+    {
+      "count": 1,
+      "first": 983,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 983,
+      "purpose": "test Ergodis as a cross-domain exact compositional-optimization compiler via weighted automata, exact inference, and constraint-programming exemplars",
+      "sequence": 411
     }
   ],
-  "next_id": 982,
+  "next_id": 984,
   "schema": "codex-task-id-allocations-v1"
 }
