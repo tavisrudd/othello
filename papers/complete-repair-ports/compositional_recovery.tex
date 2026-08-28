@@ -48,25 +48,24 @@
 
 \begin{abstract}
 In a concatenated linear code, an outer equation selects which inner
-functional each block must realize.  Recording only the least helper count
-forgets that label and can give the wrong finite threshold.  We first show
-that, within one inner block, relative generalized Hamming weights of the
-canonical shortening--puncturing pair are exactly the minimum helper unions
-for recovering each target dimension.  For concatenation, we determine the
-minimum helper cost of a recovery leaving the target block.  The answer is a
-labelled min--sum formula over functionals compatible with the outer code.  Its
-local costs are minimum prescribed-coset supports under target normalization.
-These labelled costs compose associatively
-through finite concatenation towers.  Sufficient outer dual distance excludes
-the nonzero functional terms and reduces the answer to
-$M_t(D_P,K_P)+d(I^\perp)$.  Below the resulting helper-cost threshold, restriction and
-zero-extension preserve every normalized recovery equation and its exact
-helper support, not only the minimum cost.  The labelled costs form a closed
-but generally redundant compositional state.  At rank one,
-indistinguishability in all compatible outer contexts gives the minimal
-numerical state; this equivalence is a congruence for concatenation.
-A companion implementation evaluates the recursion and returns witnesses;
-proofs are software-independent.
+functional each block must realize.  The least helper count forgets that label
+and can give the wrong finite threshold.  Within one block,
+relative generalized Hamming weights of the canonical
+shortening--puncturing pair are exactly the minimum helper unions for each
+dimension.  For concatenation, the minimum cost of a recovery
+leaving the target block is instead a labelled min--sum formula whose local
+terms are target-normalized prescribed-coset support costs.  These costs
+compose associatively through finite towers.  Sufficient outer dual distance
+excludes the nonzero-label terms and recovers the scalar formula
+$M_t(D_P,K_P)+d(I^\perp)$.  Below this threshold, restriction and
+zero-extension preserve every normalized recovery equation and exact helper
+support.  The labelled costs form a closed but redundant state.  Through
+helper radius $r$, every numerical distinction is witnessed by an outer
+context of length at most $\max\{2,r+1\}$ and functional-dual dimension at
+most $\min\{t,r\}$.  The resulting finite contextual quotient is the coarsest
+exact bounded numerical state and a congruence; at rank one it has an explicit
+projective description.  An exact companion implementation evaluates the
+recursion and reconstructs witnesses; no proof depends on it.
 \end{abstract}
 
 \section{Introduction}
@@ -130,9 +129,10 @@ nonconfinement cost. \\
 What must pass to the next concatenation level?
 & The same labelled costs compose by exact associative min--sum substitution;
 minimizing lifts propagate a witness. \\
-What is the smallest exact rank-one state?
-& Contextual equivalence identifies exactly the states indistinguishable to
-every compatible outer problem and is preserved by further concatenation. \\
+What is the smallest exact bounded state?
+& A finite contextual response vector identifies exactly the states
+indistinguishable to every compatible outer problem; at rank one it has an
+explicit projective description. \\
 When is every recovered dimension confined through radius $r$?
 & The rank-one escape cost suffices: every rank is confined if and only if
 rank one is confined. \\
@@ -250,9 +250,14 @@ each projective functional line an outer code can probe.  In optimization
 language, this is a Myhill--Nerode-type minimization theorem: two rank-one
 states are equivalent exactly when no compatible outer problem distinguishes
 their optimal costs, and the resulting coarsest quotient is a congruence for
-further concatenation.  At rank $t$,
-Proposition~\ref{prop:rank-bounded-outer-tests} bounds the required outer-test
-dimension by $t$; it does not claim a minimal quotient at higher rank.
+further concatenation.  The higher-rank statement is finite but less explicit.
+Through helper radius $r$, Theorem~\ref{prop:rank-bounded-outer-tests} shows
+that contexts of length at most $\max\{2,r+1\}$ and functional-dual dimension
+at most $\min\{t,r\}$ detect every distinction.  Their finite response vector
+therefore gives the coarsest exact bounded numerical quotient at rank $t$, and
+the same semantic argument makes it a congruence.  Thus the closed labelled
+state supplies a convenient recursion, whereas contextual equivalence removes
+exactly the numerical information that no compatible outer problem can see.
 
 The rank-one consequence is especially simple: a nonconfined recovery on a
 higher-dimensional target restricts to a nonconfined recovery on a target

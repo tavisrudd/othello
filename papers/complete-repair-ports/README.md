@@ -51,7 +51,12 @@ functions compose by exact min-sum substitution. Helper-restriction costs
 together with the target images give the target-normalized recursion, and the
 inner-dual distance obeys a compatible formula. Thus the exact nonconfinement
 cost can be evaluated through any finite tower while retaining the zero and
-nonzero functional sectors. A single scalar threshold is not sufficient input
+nonzero functional sectors. Through helper radius `r`, every numerical
+distinction is detected by an outer context of length at most `max(2,r+1)` and
+functional-dual dimension at most `min(t,r)`. The resulting finite response
+vector is the coarsest exact bounded numerical state and is preserved by
+further compatible concatenation; at rank one it has an explicit projective
+description. A single scalar threshold is not sufficient input
 for this recursion; in particular, the zero-functional nonconfinement cost
 `rho_T(I)+d(I⊥)` loses the required functional labels.
 

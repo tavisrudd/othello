@@ -36,7 +36,17 @@ AjiMcEliece2000,GuruswamiSudan2002,BlomqvistEtAl2020}.  Symbol-indexed soft
 information, presentation-dependent input--output enumerators, and message
 weights retain labels for decoding or enumeration
 \cite{LoskotBeaulieu2006,Nogin2005}; our target-normalized costs instead
-identify the first nonconfined support.  Contextual equivalence parallels
-weighted-automata minimization \cite{Mohri2009}, but no automata theorem is
-imported: Theorem~\ref{thm:rank-one-contextual-state} constructs the separating
-outer-code probes directly.
+identify the first nonconfined support.
+
+Contextual equivalence and congruence are established ideas in automata and
+finite-interface decomposition.  Weighted-automata minimization identifies
+states by their future weighted behaviour \cite{Mohri2009}, and analogous
+Myhill--Nerode statements exist for recognizable tree series
+\cite{Maletti2008}.  In coding and represented-matroid settings, minimal tree
+realizations and finite equivalence across bounded-width separations likewise
+compress interface information \cite{Kashyap2007,FunkMayhewNewman2019}.
+We import none of those theorems.  Here the contexts are outer linear codes,
+the response is the exact target-normalized recovery-support cost, and
+Theorem~\ref{prop:rank-bounded-outer-tests} proves a radius-controlled
+separator bound and bounded witness cover.  The witness-propagating min--sum
+composition is Theorem~\ref{prop:prescribed-coset-composition}.

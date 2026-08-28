@@ -194,9 +194,11 @@ results.
   nonzero target-message subspace, prescribed-coset costs over the complete
   outer functional dual give the exact first nonconfined cost without a
   distance hypothesis. The labelled costs compose associatively through
-  compatible finite concatenation towers. At rank one, their zero-truncated
-  projective line-probe profile is the coarsest numerical state observable by
-  all compatible outer codes. Under `d(O⊥) > r + 1`, confinement
+  compatible finite concatenation towers. Through helper radius `r`, contexts
+  of length at most `max(2,r+1)` and functional-dual dimension at most
+  `min(t,r)` detect every numerical distinction; their finite response vector
+  is the coarsest exact bounded numerical state. At rank one this quotient has
+  an explicit projective line-probe description. Under `d(O⊥) > r + 1`, confinement
   through radius `r` is equivalent to `r < M_t(D_P,K_P) + d(I⊥)`.
   ergodis (Exact Recovery, Global Optimization, and Invariant Synthesis)
   executes this recursion, stores minimizing lifts to return witnesses, and
@@ -768,29 +770,30 @@ storing minimizing lifts separately returns coefficient-level witnesses. Under
 hierarchical optimizer and capacity-aware repair scheduler.
 
 > *Abstract* In a concatenated linear code, an outer equation selects which
-> inner functional each block must realize. Recording only the least helper
-> count forgets that label and can give the wrong finite threshold. We first
-> show that, within one inner block, relative generalized Hamming weights of the
-> canonical shortening--puncturing pair are exactly the minimum helper unions
-> for recovering each target dimension. For concatenation, we determine the
-> minimum helper cost of a recovery leaving the target block. The answer is a
-> labelled min--sum formula over functionals compatible with the outer code.
-> Its local costs are minimum prescribed-coset supports under target
-> normalization. These labelled costs compose associatively through finite
-> concatenation towers. Sufficient outer dual distance excludes the nonzero
-> functional terms and reduces the answer to
-> `M_t(D_P,K_P) + d(I^perp)`. Below the resulting helper-cost threshold,
+> inner functional each block must realize. The least helper count forgets that
+> label and can give the wrong finite threshold. Within one block, relative
+> generalized Hamming weights of the canonical shortening–puncturing pair are
+> exactly the minimum helper unions for each dimension. For concatenation, the
+> minimum cost of a recovery leaving the target block is instead a labelled
+> min–sum formula whose local terms are target-normalized prescribed-coset
+> support costs. These costs compose associatively through finite towers.
+> Sufficient outer dual distance excludes the nonzero-label terms and recovers
+> the scalar formula `M_t(D_P,K_P) + d(I^perp)`. Below this threshold,
 > restriction and zero-extension preserve every normalized recovery equation
-> and its exact helper support, not only the minimum cost. Relative weights
-> solve the single-block minimum; labelled coset costs form a closed
-> compositional state. At rank one, we characterize exactly which numerical
-> distinctions any outer code can observe. A companion implementation evaluates
-> the recursion and returns witnesses; proofs are software-independent.
+> and exact helper support. The labelled costs form a closed but redundant
+> state. Through helper radius `r`, every numerical distinction is witnessed by
+> an outer context of length at most `max(2,r+1)` and functional-dual dimension
+> at most `min(t,r)`. The resulting finite contextual quotient is the coarsest
+> exact bounded numerical state and a congruence; at rank one it has an explicit
+> projective description. An exact companion implementation evaluates the
+> recursion and reconstructs witnesses; no proof depends on it.
 
 **Delivers.** The associated nested code pair and its exact relative-weight
 interpretation; an exact ungated arbitrary-rank prescribed-coset theorem;
 finite and eventual rank-stratified confinement after the outer-distance gate;
 best-target generalized-weight and cooperative-locality consequences; an MDS
+finite small-context tests and the coarsest bounded contextual quotient at
+every target rank;
 staircase and rigidity theorem; positive-density and bounded service-rate
 transfer; reliability and coefficient-sensitive separations; and explicit
 projective-simplex formulas; exact min--sum composition through finite
