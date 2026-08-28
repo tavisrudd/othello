@@ -227,8 +227,17 @@ Sequel research:
   oracle-wrapped legacy solvers, networks, bounded discrete-event systems,
   exact mergeable analytics, robust interfaces, finite analysis, boundary
   protocols, and an exact-to-learned realization laboratory.  Mamba remains
-  one experimental vehicle, not the mathematical premise.  C983 remains open,
-  does not block C325 or C953, and makes no manuscript or public-surface change.
+  one experimental vehicle, not the mathematical premise.  The subsequent
+  [deterministic reference-compiler spike](../2026-08-27-c983-reference-compiler-spike.md)
+  implements one unchanged Rust minimizer/verifier for the bounded tropical-WTA
+  and determinized resource-batch adapters.  Exact controls give `13 -> 6` and
+  `35/51/44 -> 22/14/5`; typed separators, WTA tree/run replay, exhaustive
+  resource-assignment replay, artifact-corruption tests, and an independent
+  Python oracle pass.  This accepts implementation stages 1/2, not C983: a
+  recovery control through the same artifact, common witness sidecar, measured
+  reuse economics, schema fingerprint, and cold hostile review remain open.
+  C983 does not block C325 or C953 and makes no manuscript or public-surface
+  change.
 
 - [C985 Ergodis exact algebraic optimization paper](../2026-08-27-c985-ergodis-optimization-paper.md)
   is queued after C983.  It targets constraint programming and exact

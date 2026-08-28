@@ -14,6 +14,7 @@ pub mod defect;
 pub mod field;
 pub mod incidence;
 pub mod matrix;
+pub mod observational;
 pub mod orbit;
 pub mod orbit_compile;
 pub mod packed_ternary;
