@@ -3743,8 +3743,17 @@
       "last": 988,
       "purpose": "C973 paper integration: strengthened all-characteristic containment into high_weight_grs_cosets",
       "sequence": 416
+    },
+    {
+      "count": 1,
+      "first": 989,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 989,
+      "purpose": "Integrate the intrinsic endomorphism algebra, low-party symmetry, code-linearity, and eight-party sharpness results into Paper I; red-team, review, and A/B against the frozen 41-page baseline",
+      "sequence": 417
     }
   ],
-  "next_id": 989,
+  "next_id": 990,
   "schema": "codex-task-id-allocations-v1"
 }
