@@ -217,15 +217,18 @@ Current and completed strengthening:
 Sequel research:
 
 - [C983 Ergodis cross-domain exact compositional optimization](../2026-08-27-c983-ergodis-cross-domain-potential.md)
-  is in progress alongside C980 as private research.  It tests the observational-state
-  thesis through a hostile weighted-automata/inference/formal-semantics audit,
-  a precise contextual quotient theorem boundary, and one common
-  witness-preserving kernel used by recovery plus two genuinely noncoding
-  exemplars.  It does not block C325 or C953 and makes no manuscript or public-
-  surface change.  Only after that gate, a deferred second batch tests exact
-  tropical minimal realization and observability, selective context-dependent
-  quotienting, approximate contextual metrics, and learned state compression;
-  Mamba is an experimental vehicle there rather than the mathematical premise.
+  is in progress as private research.  Its first concentrated expansion window
+  produced a [90-minute report](../2026-08-27-c983-90m-report.md), a 28-source
+  hostile audit, a typed deterministic/effectful compiler-law boundary, two
+  exact noncoding fixture contracts, and proof-carrying artifact/Rust design.
+  Classical automata, graph, abstract-interpretation, provenance, max-plus
+  control, mergeable-summary, and game results are treated as corollaries or
+  backends rather than abandoned paths.  Application targets now include
+  oracle-wrapped legacy solvers, networks, bounded discrete-event systems,
+  exact mergeable analytics, robust interfaces, finite analysis, boundary
+  protocols, and an exact-to-learned realization laboratory.  Mamba remains
+  one experimental vehicle, not the mathematical premise.  C983 remains open,
+  does not block C325 or C953, and makes no manuscript or public-surface change.
 
 - [C985 Ergodis exact algebraic optimization paper](../2026-08-27-c985-ergodis-optimization-paper.md)
   is queued after C983.  It targets constraint programming and exact
@@ -287,7 +290,7 @@ multi-target state algebras outside the manuscript.
 C962's bounded representation work was accepted as sufficient, further
 candidate-parity experiments were cancelled, and its private task-owned code
 and evidence are committed.  No successor was allocated for the optional
-optimization work.  C983 is active alongside C980 for the separate cross-domain
+optimization work.  C983 is active for the separate cross-domain
 Ergodis feasibility program; it does not block the paper closeout.  After C984,
 run C325 appendix-only
 verification, followed by C953
