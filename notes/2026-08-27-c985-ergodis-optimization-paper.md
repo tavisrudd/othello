@@ -782,6 +782,9 @@ Commit `e595a7c0d` packs the dense directory into one `u32` allocation: `N`
 cost words followed by a `ceil(N/32)`-word presence bitmap.  This represents
 missing labels separately from values, retains the complete `u32` cost range,
 and reduces admitted payload from 8 bytes per label to asymptotically 4.125.
+Commit `b7e07f274` exposes the exact retained map-and-directory payload through
+`compiled_kernel_payload_bytes`; the binary rank-2 test retains 70 bytes with
+distinct inner/target tables and zero bytes on the memory-budgeted direct path.
 
 Commit `20654574b` transfers C947's scalar-demand image theorem into the public
 span API.  `CanonicalTargetImage` is an opaque canonical column-space basis
