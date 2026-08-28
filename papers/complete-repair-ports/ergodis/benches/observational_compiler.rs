@@ -1,7 +1,7 @@
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
 use ergodis::observational::{
-    compile_observational, compile_observational_with_policy, CertificatePolicy,
-    FinitePresentation, GeneratorSpec,
+    compile_observational, compile_observational_with_policy, write_exhaustive_separator_stream,
+    CertificatePolicy, FinitePresentation, GeneratorSpec,
 };
 use std::hint::black_box;
 
@@ -113,6 +113,32 @@ fn benchmark_observational_compiler(c: &mut Criterion) {
         );
     }
     chain.finish();
+
+    let mut streaming = c.benchmark_group("observational_separator_stream");
+    for states in [32_u32, 64, 128] {
+        let presentation = chain_presentation(states);
+        let compiled =
+            compile_observational_with_policy(&presentation, CertificatePolicy::QuotientOnly)
+                .unwrap();
+        streaming.throughput(Throughput::Elements(
+            u64::from(states) * u64::from(states - 1) / 2,
+        ));
+        streaming.bench_with_input(
+            BenchmarkId::new("long_chain", states),
+            &presentation,
+            |b, presentation| {
+                b.iter(|| {
+                    write_exhaustive_separator_stream(
+                        black_box(presentation),
+                        black_box(&compiled),
+                        &mut std::io::sink(),
+                    )
+                    .unwrap()
+                });
+            },
+        );
+    }
+    streaming.finish();
 }
 
 criterion_group!(benches, benchmark_observational_compiler);
