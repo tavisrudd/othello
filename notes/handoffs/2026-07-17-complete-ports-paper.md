@@ -6,8 +6,8 @@
 **Status**: ACTIVE; C972 COMPOSITIONAL-STATE CHARACTERIZATION AND C976
 EXPOSITION/LITERATURE/EXPORT CLOSED; 37-PAGE AUTHORITY, 29-CLAIM, FOUR-LEAN-
 TERMINAL, AND 84-FILE ERGODIS PUBLIC-SURFACE GATES PASS; C962 ALGORITHM/BOUND
-DEVELOPMENT IS CLOSED BY USER DIRECTION; C980 HIGHER-RANK CONTEXTUAL-MINIMALITY RESEARCH IS IN PROGRESS;
-C325 APPENDIX VERIFIER AND C953 AGGREGATE
+DEVELOPMENT AND C980 HIGHER-RANK CONTEXTUAL-MINIMALITY RESEARCH ARE CLOSED;
+C984 SMALL-MODEL MANUSCRIPT PROMOTION, C325 APPENDIX VERIFIER, AND C953 AGGREGATE
 REVIEW FOLLOW; C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR
 DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
@@ -100,7 +100,7 @@ Completed preparation:
 Current and completed strengthening:
 
 - [C980 higher-rank contextual minimality](../2026-08-27-c980-higher-rank-contextual-minimality.md)
-  is a mathematics-only active task.  It now proves candidate higher-rank
+  is closed as a mathematics-only task.  It proves higher-rank
   column-type, universality, and congruence theorems together with a bounded
   small-model theorem: through helper radius `r`, every numerical distinction
   and every coefficient witness is captured by outer shortenings to the target
@@ -116,8 +116,15 @@ Current and completed strengthening:
   rank-restriction aggregation steps, and demotes fixed-batch congruence until
   a typed composition law is proved.  The next gate is an independent reread
   of the compressed scalar spine; code-realizable sharpness is a possible
-  strengthening rather than a correctness gate.  No manuscript promotion is
-  yet authorized.
+  strengthening rather than a correctness gate.  Its independent reread found
+  and repaired the omitted nonzero-target hypothesis, found no further scalar
+  defect, and selected the small-model core for C984 manuscript promotion.
+
+- [C984 higher-rank small-model manuscript promotion](../2026-08-27-c984-higher-rank-small-model-manuscript-promotion.md)
+  is queued to add the pointed column-type lemma, radius-bounded separator and
+  dual-shortening theorem, finite contextual quotient and typed congruence,
+  and recoverable-target exact corollary.  It may retain the witness cover only
+  if compact, and excludes the probe census and all sequel extensions.
 
 - [C962 exact recovery algorithms](../2026-08-25-c962-recovery-algorithms-and-bounds.md)
   is closed by user direction.  It includes a radius-pruned rank-one complete-transfer certificate, lazy
@@ -259,22 +266,17 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C980 is the active mathematics-only task for the higher-rank contextual
-quotient.  Its scalar, witness-cover, finite-state, and bounded-resource
-candidate proofs are now developed.  The structural compression, hostile
-proof review, and scoped priority audit are complete.  Next obtain an
-independent theorem reread of the compressed four-theorem scalar spine, then
-decide whether that small-model core strengthens the current paper.  Record
-any dual-shortening/rank-stratified
-algorithmic corollaries as optional future work unless a successor is allocated.
-Keep the Pareto, fixed-batch packing, and
-multi-target-block state algebras as sequel material unless the review finds a
-shorter main-paper consequence.
+C980 is closed after structural compression, hostile proof review, a scoped
+priority audit, and an independent reread.  C984 is next: promote only its
+accepted scalar small-model block, update the formal claim records, obtain an
+independent cold read, and pass the existing authority/export gates.  Keep the
+probe census, rank-stratified algorithms, Pareto, fixed-batch packing, and
+multi-target state algebras outside the manuscript.
 C962's bounded representation work was accepted as sufficient, further
 candidate-parity experiments were cancelled, and its private task-owned code
 and evidence are committed.  No successor was allocated for the optional
 optimization work.  C983 is active alongside C980 for the separate cross-domain
-Ergodis feasibility program; it does not block the paper closeout.  After C980,
+Ergodis feasibility program; it does not block the paper closeout.  After C984,
 run C325 appendix-only
 verification, followed by C953
 aggregate referee/export review.  C955 owns the later coefficient-presentation

@@ -3,8 +3,9 @@
 **Lane:** `complete-ports`
 **Status:** IN PROGRESS; MATHEMATICS ONLY; SCALAR HIGHER-RANK SMALL-MODEL,
 UNIVERSALITY, CONGRUENCE, AND EXACT ORBIT-CENSUS THEOREMS SURVIVED STRUCTURAL
-COMPRESSION AND HOSTILE PROOF REVIEW; ORDERED-MONOID PROOF REPAIRED; BATCH
-CONGRUENCE AND CODE-REALIZABLE SHARPNESS REMAIN OPEN
+COMPRESSION, HOSTILE PROOF REVIEW, AND AN INDEPENDENT REREAD; THE OMITTED
+NONZERO-TARGET HYPOTHESIS AND ORDERED-MONOID PROOF ARE REPAIRED; MANUSCRIPT
+PROMOTION OF THE SCALAR SMALL-MODEL CORE IS RECOMMENDED
 **Date:** 2026-08-27
 
 The structural compression, hostile proof review, and literature audit are
@@ -43,7 +44,7 @@ proof, literature, and hostile-review gates.
    outer responses factors through this quotient, and the quotient is a
    congruence for compatible concatenation.  A finite layer library therefore
    acts through a finite transformation category.
-4. **Exact state census.**  `GL_s(L)` reduces the target type to zero or one
+4. **Exact probe-orbit census.**  `GL_s(L)` reduces the target type to zero or one
    nonzero covector; Burnside averaging and Möbius inversion on invariant
    subspaces give the exact number of basis-free probes.
 5. **Ordered-monoid and Pareto closure.**  Every finite extensive ordered cost
@@ -64,8 +65,8 @@ proof, literature, and hostile-review gates.
 
 ## Starting point
 
-For a fixed target space `T` of dimension `t`, the paper assigns an inner
-presentation two labelled functions on the finite alphabet
+For a fixed nonzero target space `T` of dimension `t>=1`, the paper assigns an
+inner presentation two labelled functions on the finite alphabet
 
 ```text
 A_T = Hom_Fq(T, L*):
@@ -438,8 +439,10 @@ profile replaces the labelled cost evaluation on the surviving subspaces.
 
 ### Bounded higher-rank contextual-state theorem
 
-Fix `Fq <= L`, an identified target space `T` of dimension `t`, and `R >= 1`.
-Two represented inner recovery problems have the same truncated exact
+Under the manuscript conventions, fix `Fq <= L`, a proper represented inner
+code, an identified nonzero target space `T` of dimension `t>=1`, and
+`R >= 1`.  Outer contexts have at least two blocks and nonzero projection onto
+the distinguished target block.  Two represented inner recovery problems have the same truncated exact
 nonconfinement cost in every compatible finite outer context if and only if
 they have the same `Z_R` and the same values
 
@@ -914,8 +917,9 @@ table above.  Then:
 
 1. `sigma_R(I_1)=sigma_R(I_2)` if and only if
    `obs_R(C,I_1)=obs_R(C,I_2)` for every `C in Ctx_T`;
-2. the kernel of `sigma_R` is the largest congruence on `S_T` that preserves
-   every bounded observation; and
+2. the kernel of `sigma_R` is the largest congruence on `S_T`, for the typed
+   compatible layer operations just specified, that preserves every bounded
+   observation; and
 3. if an invariant `eta:S_T->H` predicts every bounded outer response—that
    is, for each context `C` there is a function `f_C` with
    `obs_R(C,I)=f_C(eta(I))`—then `sigma_R` factors through `eta` on its image.
@@ -1385,6 +1389,36 @@ compression lemma pending a typed composition law.  No defect was found in
 the scalar column-type, bounded separator, dual-shortening, witness-cover,
 universality, congruence, or orbit-census proofs.
 
+## Independent reread and manuscript-promotion decision
+
+An independent reread checked the scalar package against the manuscript's
+two-sector formula, rank-bounded restriction, target normalization, and typed
+composition law.  It found one exact edge-case defect: the bounded
+higher-rank contextual-state theorem did not explicitly require `t>=1`.  For
+`T=0` there is no nonzero map from `T` to `I^perp`, so the stated zero-sector
+cost need not be the least nonconfined cost.  The theorem now inherits the
+manuscript's nonzero-target, proper-inner-code, at-least-two-block, and
+nonzero-target-projection hypotheses.  No proof change is needed for `t>=1`,
+and no other scalar defect was found.
+
+The scalar core is ready for manuscript promotion, but the complete research
+package is not the right unit to import.  The smallest coherent manuscript
+upgrade is:
+
+1. a short pointed column-type normal-form and realizability lemma;
+2. one radius-`r` small-context theorem combining the separating-context and
+   dual-shortening formulas;
+3. the finite coarsest contextual-quotient corollary, with typed congruence;
+4. the short exact untruncated corollary for `0!=T<=W_P`.
+
+This block should replace the current all-arities qualification and strengthen
+the existing rank-bounded outer-test proposition.  The bounded witness cover
+is correct and can be included as a short operational corollary if it does not
+increase the exposition burden.  The exact probe-orbit census,
+rank-stratified evaluator, finite transformation-category consequences,
+ordered-monoid/Pareto theory, and batch/multi-target extensions should remain
+outside the current manuscript.
+
 ## Work order
 
 1. **Done as a candidate theorem:** typed column response, bounded
@@ -1399,11 +1433,10 @@ universality, congruence, or orbit-census proofs.
 4. **Done at fixed cost dimension:** finite ordered-monoid closure and a sharp
    `1+k(R-1)` cap for bounded additive Pareto costs.  Growing per-helper
    resource dimensions and interface-valued subpacketization remain open.
-5. **Done:** structural compression, hostile proof review, and the scoped
-   weighted-automata/matroid/coding/optimization literature audit.  Next seek
-   one independent theorem reread and decide whether the four-theorem scalar
-   spine belongs in the current paper.  Code-realizable sharpness remains a
-   strengthening, not a correctness gate for the scalar theorem.
+5. **Done:** structural compression, hostile proof review, scoped literature
+   audit, and independent theorem reread.  The scalar small-model core is
+   accepted for a separate manuscript-promotion task.  Code-realizable
+   sharpness remains a strengthening, not a correctness gate.
 
 ## Promotion recommendation after the remaining gates
 

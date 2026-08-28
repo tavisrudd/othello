@@ -19,9 +19,12 @@ report:
    and congruence under further composition;
 4. exact state counts and rank-stratified evaluation algorithms.
 
-The hostile read found no defect in this scalar spine.  It did find two proof
-omissions that are now repaired in the development report and one extension
-that was stated too strongly.  The fixed-batch result is presently a
+The hostile read found no defect in this scalar spine for nonzero targets.  It
+did find two proof omissions that are now repaired in the development report
+and one extension that was stated too strongly.  A later independent reread
+found that the bounded theorem had not explicitly inherited the manuscript's
+nonzero-target hypothesis; that exact edge case is also repaired.  The
+fixed-batch result is presently a
 small-context compression lemma, not yet a finite-state congruence theorem.
 The abstract finite-interface discussion remains a criterion and research
 program, not a theorem of comparable completeness.
@@ -80,7 +83,7 @@ congruence is its closure under continuation.
 | Exact dual-shortening formula                     | proved                      | completeness certificate   |
 | Bounded witness cover                             | proved                      | operational consequence    |
 | Finite quotient, universality, and congruence     | proved                      | headline theorem           |
-| Orbit census and rank-stratified recursion        | proved                      | algorithmic appendix       |
+| Probe-orbit census and rank-stratified recursion  | proved                      | algorithmic appendix       |
 | Finite extensive ordered-monoid closure           | proved after repair         | sequel                     |
 | Fixed-dimensional Pareto cap                      | proved in abstract algebra  | sequel                     |
 | Fixed-batch packing                               | compression only            | research direction         |
@@ -146,6 +149,21 @@ identifies sufficient ingredients—finite interface labels, local independent
 lifting, a finite or truncated cost algebra, and a typed associative
 composition—but it does not prove a general representation or minimality
 theorem.
+
+### Independent reread
+
+The independent check found one omitted hypothesis and no load-bearing proof
+defect.  The bounded contextual-state theorem must assume
+`1<=t=dim_Fq(T)`.  At `T=0`, no nonzero map `T->I^perp` exists, so the usual
+zero-sector expression is not the least nonconfined cost.  The manuscript
+already works with nonzero targets; the development statement now says so
+explicitly and also inherits its proper-inner-code, `N>=2`, and nonzero outer
+target-projection conventions.
+
+The reader also confirmed that the Burnside--Möbius formula counts
+orbit-indexed probe coordinates exactly, not realized contextual states.  The
+latter receive an upper bound because the response-table image may satisfy
+additional identities.  The report now uses “exact probe-orbit census.”
 
 ## Literature audit
 
@@ -254,13 +272,16 @@ serve as exhaustive negative evidence.  The audit therefore supports careful
 positioning and a bounded “no located predecessor” statement, not an absolute
 priority claim.
 
-## Recommended next gate
+## Manuscript-promotion decision
 
-Have an independent reader reread only the four-theorem scalar spine against
-the definitions in the current manuscript.  If it survives, promote the
-small-context and contextual-quotient theorems to the manuscript; keep the
-ordered-monoid/Pareto results for a sequel and the batch/multi-target/abstract
-extensions in the research queue.
+The independent reread passed after the nonzero-target repair.  Promote a
+short pointed column-type lemma, the radius-bounded separator and
+dual-shortening theorem, the finite contextual-quotient/congruence corollary,
+and the exact untruncated corollary for recoverable targets.  The witness cover
+is an optional short operational corollary.  Keep the probe census,
+rank-stratified algorithms, transformation-category consequences,
+ordered-monoid/Pareto results, and batch/multi-target/abstract extensions out
+of the current manuscript.
 
 ## Vibe check
 
