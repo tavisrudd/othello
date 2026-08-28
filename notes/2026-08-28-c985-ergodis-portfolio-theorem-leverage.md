@@ -174,6 +174,13 @@ compiler consequence is:
 - retain the full lift presentation only when coefficients or gauge-sensitive
   witnesses are requested.
 
+The scalar query path already contains the core normalization:
+`GeneratedSpanTable::query` transposes the demand and takes its canonical row
+basis, hence queries by the demand's column-space image rather than its chosen
+matrix presentation.  C947 upgrades that implementation fact to a theorem
+boundary.  The next engineering step is to expose the canonical image as a
+reusable cache key so batches do not repeat transpose/elimination work.
+
 This can reduce duplicate scalar states before observational refinement.  It
 must not be applied blindly to coefficient-aware APIs: raw coefficient vectors
 depend on presentation, while the lift object and its observable response do
