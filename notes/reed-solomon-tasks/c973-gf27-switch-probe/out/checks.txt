@@ -1,0 +1,12 @@
+field: GF(27) = F3[x]/(x^3 - x - 1), elements 0..26 as base-3 digit vectors
+lines: 117   planes: 39
+pencil check: kappa/d^6 satisfies lambda^4+lambda+1=0 in 468/468 (line,plane) pairs; lines with exactly one lambda=1 plane: 117/117; lambda=1 plane direction equals span_F3(d, d*x) in 117 cases
+switch candidates |B| = 1404
+candidates with lambda = 1: 351   conjugate: 1053
+distinct lambda values over all (line,plane): [1, 9, 13, 16]
+sanity (16c) one-point identity: pass 200000 fail 0 (random z, plane, root; Z != 0)
+sanity switch solve: Q*S closes z in 20000 cases, fails in 0
+sanity n_good semantics: 5000 good candidates verified as split 9-distinct-root locators closing z, 0 bad
+rank-one projective quotient points: 784; graph-convention counts [row=sigma(col), row=J.sigma(col), row=sigma^2(col), row=J.sigma^2(col)] = [28, 28, 28, 28]
+total syndromes with n_good = 0 across strata: 0
+wall time: 144.23 s, threads 8

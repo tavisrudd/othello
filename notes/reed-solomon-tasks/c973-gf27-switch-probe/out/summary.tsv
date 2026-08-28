@@ -1,0 +1,5 @@
+stratum	n_syndromes	min_n_good	mean_n_good	min_n_good_lam1	mean_n_good_lam1	mean_n_good_conj	min_n_onept	mean_n_onept	mean_n_nonsingular	mean_n_zero_disc	mean_n_split_distinct	n_good_zero_count	argmin_n_good	argmin_n_good_lam1	argmin_n_onept
+rank0-kernel	757	222	331.9894	57	82.9974	248.9921	0	0.0000	1301.9921	46.3672	604.6288	0	1,0,0,0,0,0,1	1,0,0,0,0,0,1	0,0,0,0,0,0,1
+rank1-graph	551124	78	339.3324	0	84.8331	254.4993	0	8.3571	1352.0688	50.0792	626.8838	0	0,1,0,0,0,0,0	0,1,0,0,0,0,0	0,0,0,0,0,1,0
+rank1-offgraph	14880348	78	339.0598	0	84.7649	254.2948	0	8.0476	1350.2116	49.9416	626.0584	0	0,1,4,16,7,19,18	0,1,4,16,7,19,18	0,0,1,0,0,7,0
+rank2-random	20000	209	339.5661	44	84.8949	254.6712	0	8.3505	1351.8387	50.1180	627.0023	0	0,0,1,0,9,17,2	3,0,1,5,12,13,15	26,0,1,20,9,20,25
