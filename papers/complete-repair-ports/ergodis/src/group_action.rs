@@ -536,4 +536,60 @@ mod tests {
             Err(OrbitQuotientError::Sort { orbit: 0 })
         ));
     }
+
+    fn next_permutation(values: &mut [u32]) -> bool {
+        let Some(pivot) = (0..values.len().saturating_sub(1))
+            .rev()
+            .find(|&index| values[index] < values[index + 1])
+        else {
+            return false;
+        };
+        let successor = (pivot + 1..values.len())
+            .rev()
+            .find(|&index| values[pivot] < values[index])
+            .unwrap();
+        values.swap(pivot, successor);
+        values[pivot + 1..].reverse();
+        true
+    }
+
+    #[test]
+    fn all_pairs_of_four_point_permutations_match_transitive_closure() {
+        let mut permutations = Vec::with_capacity(24);
+        let mut permutation = [0, 1, 2, 3];
+        loop {
+            permutations.push(permutation);
+            if !next_permutation(&mut permutation) {
+                break;
+            }
+        }
+        assert_eq!(permutations.len(), 24);
+
+        for &first in &permutations {
+            for &second in &permutations {
+                let action = TableAction([first, second]);
+                let partition = compile_permutation_orbits(&action).unwrap();
+                let mut reachable = [[false; 4]; 4];
+                for point in 0..4 {
+                    reachable[point][point] = true;
+                    reachable[point][first[point] as usize] = true;
+                    reachable[point][second[point] as usize] = true;
+                }
+                for middle in 0..4 {
+                    for left in 0..4 {
+                        for right in 0..4 {
+                            reachable[left][right] |=
+                                reachable[left][middle] && reachable[middle][right];
+                        }
+                    }
+                }
+                for point in 0..4 {
+                    let expected = (0..4)
+                        .find(|&candidate| reachable[point][candidate])
+                        .unwrap() as u32;
+                    assert_eq!(partition.representative(point as u32), Some(expected));
+                }
+            }
+        }
+    }
 }
