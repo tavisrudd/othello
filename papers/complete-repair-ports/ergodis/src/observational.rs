@@ -2533,7 +2533,7 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
         classes,
         class_ranges,
         records.into_boxed_slice(),
-        refinement.is_none().then_some(inverse),
+        Some(inverse),
     ))
 }
 
