@@ -3797,8 +3797,17 @@
       "last": 994,
       "purpose": "context-clean cold referee read of the 34-page Appendix-B-compressed paper",
       "sequence": 422
+    },
+    {
+      "count": 1,
+      "first": 995,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 995,
+      "purpose": "resume C994 cold reader for repair verification and final release verdict",
+      "sequence": 423
     }
   ],
-  "next_id": 995,
+  "next_id": 996,
   "schema": "codex-task-id-allocations-v1"
 }
