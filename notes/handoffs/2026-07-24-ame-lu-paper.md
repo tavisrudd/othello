@@ -24,7 +24,7 @@ Gale definition, Clebsch language transition, abstract field scope,
 certificate taxonomy, and optional splitting gloss.  Current authority
 `bc90ea994`; paper mirror `5573f59`; exporter content SHA-256
 `ac429dfd687ac451770476708077d48eda124b315aed6dadd124e229b8780f46`;
-summary mirror remains `a353307`; no push.  The warning-free 26-page gates,
+summary mirror `cd306ab`; no push.  The warning-free 26-page gates,
 all-page visual inspection, both complete eight-bundle evidence replays,
 zero-finding export audit, and mirror verification pass.  Preserve theorem
 scope and trust boundaries.  Do not close or archive C979 until the user

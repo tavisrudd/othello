@@ -174,6 +174,10 @@ useful optional results without enough first-pass navigation.
   audit, and mirror manifest verification pass.  Exporter content SHA-256 is
   `ac429dfd687ac451770476708077d48eda124b315aed6dadd124e229b8780f46`.
   Nothing was pushed, and C979 remains open.
+- 2026-08-27: synchronized the revised abstract's split-torus definition and
+  exact six-point field scope to `papers/summary/README.md`.  Authority summary
+  commit `790416059` and byte-identical summary mirror commit `cd306ab`; no
+  push.
 
 ## Lifecycle gate
 
