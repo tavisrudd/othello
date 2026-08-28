@@ -2,7 +2,7 @@
 //!
 //! An adapter enumerates typed internal states, their observable responses,
 //! and every admissible one-hole context.  The resulting presentation can be
-//! minimized by [`crate::compile_observational`].  Consequently, two states
+//! minimized by [`crate::observational::compile_observational`]. Consequently, two states
 //! share a quotient class exactly when no well-typed word of supplied
 //! contexts distinguishes their observations.
 
