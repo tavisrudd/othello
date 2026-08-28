@@ -3707,8 +3707,17 @@
       "last": 984,
       "purpose": "promote the C980 scalar higher-rank small-model theorem into the manuscript with formal-claim, cold-read, and export gates",
       "sequence": 412
+    },
+    {
+      "count": 1,
+      "first": 985,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 985,
+      "purpose": "develop an optimization-facing ergodis paper around contextual quotient compilation, exact Pareto states, witnesses, and C983 cross-domain exemplars",
+      "sequence": 413
     }
   ],
-  "next_id": 985,
+  "next_id": 986,
   "schema": "codex-task-id-allocations-v1"
 }
