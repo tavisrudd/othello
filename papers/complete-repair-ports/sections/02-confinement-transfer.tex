@@ -183,59 +183,11 @@ weights; it also follows directly from Theorem~\ref{thm:relative-weight-recovery
 \proves{prop:relative-profile}%
 \end{proof}
 
-The shortening--puncturing duality behind the relative profiles of nested
-codes is standard in wiretap and ramp-secret-sharing theory
-\cite[Lemma~1 and Theorem~2]{LuoEtAl2005}; see also
-\cite[eqs.~(1)--(2)]{GeilEtAl2014}.  Its recovery interpretation gives the
-complementary question to Theorem~\ref{thm:relative-weight-recovery}: instead
-of minimizing helpers needed to recover $t$ dimensions, it minimizes failures
-that leave $t$ dimensions ambiguous.
-
-\begin{proposition}[Failures and residual ambiguity]
-\label{prop:dual-failure-threshold}
-\coverage{absent}%
-Let $\ell=\dim W_P$.  By~\eqref{eq:dual-puncture-shorten-pair}, the dual
-nested pair is
-$\operatorname{short}_J(I)\subseteq\operatorname{punct}_J(I)$.
-If the helpers in $H\subseteq J$ survive and those in
-$F=J\setminus H$ fail, then the unrecovered target dimension is
-\begin{equation}
- \ell-\dim\bigl(W_P\cap\operatorname{span}(G_H)\bigr)
- =\dim(K_P^\perp\cap\F_q^F)-\dim(D_P^\perp\cap\F_q^F).
- \label{eq:failure-ambiguity}
-\end{equation}
-Consequently, for $1\leq t\leq\ell$,
-\begin{equation}
- M_t(K_P^\perp,D_P^\perp)
- =\min\left\{|F|:
- \dim\bigl(W_P\cap\operatorname{span}(G_{J\setminus F})\bigr)
- \leq\ell-t\right\}.
- \label{eq:dual-failure-threshold}
-\end{equation}
-Thus the dual relative weight is the minimum number of helper failures that
-leave at least $t$ target dimensions ambiguous.
-\end{proposition}
-
-\begin{proof}
-For a code $C\leq\F_q^J$, puncturing onto $F$ gives
-\[
- \dim C-\dim(C\cap\F_q^H)
- =\dim(C|_F)
- =|F|-\dim(C^\perp\cap\F_q^F).
-\]
-The first difference counts exactly the dimensions lost when coordinates in
-$H$ are deleted, namely the quotient by the subcode supported on $H$.
-Apply this identity to $D_P$ and $K_P$ and subtract.  Since
-$\dim D_P-\dim K_P=\ell$, Proposition~\ref{prop:relative-profile} gives
-\eqref{eq:failure-ambiguity}.  The right-hand side is the relative dimension
-of the dual pair $D_P^\perp\subseteq K_P^\perp$ on $F$.  Its least support
-size at value at least $t$ is $M_t(K_P^\perp,D_P^\perp)$: a subspace attaining
-the relative weight is supported on such an $F$, while any relative dimension
-at least $t$ admits a $t$-dimensional subspace disjoint from
-$D_P^\perp\cap\F_q^F$.  This proves~\eqref{eq:dual-failure-threshold}.
-\uses{prop:associated-pair, prop:relative-profile}%
-\proves{prop:dual-failure-threshold}%
-\end{proof}
+Standard shortening--puncturing duality gives the complementary failure
+interpretation: the relative weights of
+$D_P^\perp\subseteq K_P^\perp$ are the minimum numbers of helper failures
+that leave prescribed dimensions of $W_P$ ambiguous
+\cite{LuoEtAl2005,GeilEtAl2014}.
 
 The strict inequalities
 \[

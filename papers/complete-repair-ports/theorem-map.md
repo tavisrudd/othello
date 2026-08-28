@@ -37,7 +37,6 @@ dependence and evidence status. It assigns no quality grade.
 | `prop:coefficient-presentation` | Different ambient inner-dual realizations of the same abstract nested helper pair can have different additive confinement thresholds. | Three nonzero graph-code words computed explicitly. | none. | absent |
 | `thm:projective-thresholds` | Exact simplex RGHWs, inner-dual distance, and confinement thresholds. | Count projective points outside an annihilator. | standard projective-space counts. | absent |
 | `thm:projective-reliability` | Exact recovery probability and endpoint coefficients. | Failed-set rank criterion, subspace-lattice Möbius inversion, and projective-frame counts. | none. | absent |
-| `prop:projective-uniqueness` | Equality in the first helper-cost bound characterizes the projective-simplex multiset. | Averaging followed by nonsingularity of the point--hyperplane incidence matrix over the reals. | standard projective incidence parameters. | absent |
 
 ## Formal coverage
 

@@ -193,45 +193,7 @@ its span and then its unordered projective bases gives $B_{m,m-t+1}$.
 \proves{thm:projective-reliability}%
 \end{proof}
 
-At the same helper length, the simplex presentation is characterized by its
-first recovery cost: equality means that minimum cost is $q^{m-1}$.  This is
-the length-$N$, multiplicity-one specialization of Bonisoli's classification
-of linear equidistant codes, whose nonzero words all have the same weight,
-\cite{Bonisoli1984}; the proof below records the precise zero-column and
-projective-multiplicity conventions used here.
-
-\begin{proposition}[Equality in the first projective bound]
-\label{prop:projective-uniqueness}
-\coverage{absent}%
-Let $B$ be any full-row-rank $m\times N$ matrix over $\F_q$, with
-$N=(q^m-1)/(q-1)$.  Then
-\[
- \min_{0\ne a\in\F_q^m}\wt(aB)\leq q^{m-1}.
-\]
-Equality holds if and only if, up to column scaling and permutation, the
-columns of $B$ represent every point of $\operatorname{PG}(m-1,q)$ exactly
-once.
-\end{proposition}
-
-\begin{proof}
-For each nonzero column, the fraction of nonzero $a\in\F_q^m$ for which its
-entry in $aB$ is nonzero is
-\[
- \frac{q^{m-1}(q-1)}{q^m-1}.
-\]
-Averaging $\wt(aB)$ over $a\ne0$ gives at most $q^{m-1}$, strictly less if
-$B$ has a zero column.  If the minimum attains this average, every nonzero
-linear combination has weight $q^{m-1}$ and every projective hyperplane
-contains total column multiplicity
-$(q^{m-1}-1)/(q-1)$.
-
-Let $c$ be the vector of projective column multiplicities.  The
-point--hyperplane incidence matrix is square, and its real Gram matrix has
-the form $(r-\lambda)I+\lambda J$: here $r$ is the number of hyperplanes
-through one point and $\lambda$ the number through two distinct points, with
-$r>\lambda$.  It is nonsingular, so
-the constant hyperplane-sum equations have the unique solution
-$c=\mathbf1$.  Conversely, the simplex matrix has constant nonzero weight
-$q^{m-1}$.
-\proves{prop:projective-uniqueness}%
-\end{proof}
+At the same helper length, attaining first recovery cost $q^{m-1}$
+characterizes the projective-simplex column multiset up to scaling and
+permutation.  This is the length-$N$, multiplicity-one specialization of
+Bonisoli's classification of linear equidistant codes~\cite{Bonisoli1984}.
