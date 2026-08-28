@@ -1766,7 +1766,7 @@ fn minimize_partition_worklist_with_pending<P: PendingDirectory>(
     let mut touched_flags = bitmap_storage(block_capacity)?;
     let mut records = Vec::with_capacity(block_capacity.saturating_sub(initial_block_count));
 
-    while let Some(work) = queue.pop_front() {
+    while let Some(work) = queue.pop_back() {
         if !pending.remove(work.block, work.generator) {
             return Err(ObservationalError::Partition);
         }
