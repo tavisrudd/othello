@@ -857,3 +857,22 @@ index, and reconstructed path buffer reused across the entire stream.  The
 stream format and verifier are unchanged; peak scratch now follows the hardest
 single separator search rather than accumulating path copies or emitted
 evidence.
+
+Seven paired CPU-2 rounds on a 64-state long-chain stream (2,016 separator
+records per iteration) compare pre-arena commit `cd1a2d1ff` with `0eae4c062`.
+Median time falls from 1,748,284 ns to 373,043 ns, a 4.687x speedup; median
+process peak RSS is 11,768 versus 11,600 KiB.  A profiled dense epoch table was
+discarded after regressing the one-generator control: the sparse predecessor
+arena is the retained representation, and a future dense mode needs a
+separately dispatched branching kernel rather than a per-edge mode branch.
+
+```sh
+papers/complete-repair-ports/ergodis/scripts/separator-stream-ab.sh \
+  "$BASELINE_BENCH" "$ARENA_BENCH" \
+  > papers/complete-repair-ports/ergodis/evidence/c985-separator-stream-final.tsv
+papers/complete-repair-ports/ergodis/scripts/check-separator-stream-evidence.sh
+```
+
+- stream A/B script: `66b6953f773d955aaef9721d8a6f180f8439a15add9446b9a99db9208c2a2433`;
+- stream checker: `0a60ffcaadd93cef403b6a58681b0569389295719b397bfe16ce2fc6a72e9574`;
+- stream TSV: `bae609f5a2eb7050444874ca58427116e80e77a68fdcdd292d15509b3cb1fd0c`.
