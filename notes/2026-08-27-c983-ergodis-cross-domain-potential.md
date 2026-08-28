@@ -316,6 +316,16 @@ cross-domain systems contribution can survive complete theorem pre-emption if
 one compiler coordinates those layers, certifies their contracts, and makes
 their separate state/time/witness effects visible.
 
+A fifth capability is compilation by queries.  Angluin-style learning is
+classical and weighted variants have semiring-specific feasibility limits, so
+there is no generic learning novelty claim.  But Ergodis can learn a bounded
+finite observational Moore machine from a legacy exact solver: context/value
+queries populate the table and failed hypotheses return distinguishing
+contexts.  A separator theorem, bounded exhaustive oracle, or solver-backed
+counterexample search provides exact equivalence.  This would expand Ergodis
+from a DP library into a black-box interface compiler while preserving an
+auditable observation table and counterexample certificate.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary

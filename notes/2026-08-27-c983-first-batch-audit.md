@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY SEVENTEEN-SOURCE PASS; TWO SOURCES READ AT
-FULL TEXT AND FIFTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY NINETEEN-SOURCE PASS; TWO SOURCES READ AT
+FULL TEXT AND SEVENTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
 
@@ -96,6 +96,7 @@ formal congruence argument.
 | Quotient quantitative responses up to additive cost shift | Finite integer index and progressive representatives in protrusion replacement; tropical normalization | Strongly pre-empted as a graph equivalence and algebraic gauge | Generalize it as a typed potential-bearing backend, prove threshold/FII as a corollary, and test state reduction plus witness/potential replay across domains |
 | Compress a family of weighted partial solutions while preserving every completion optimum | Rank-based representative sets for connectivity DP | Strongly pre-empted for partition-connectivity operators, including weighted solutions and one retained optimizer | Treat representative-family reduction as a separate backend layer; do not misreport it as quotient-state minimization |
 | Normalize potentials, then minimize a deterministic weighted machine | Weight pushing followed by ordinary automaton minimization | Pre-empted for deterministic weighted automata under the established semiring hypotheses | Make it the unary/sequential corollary and test the typed multiary/context-grammar implementation boundary |
+| Infer a minimal interface by exact queries and distinguishing counterexamples | Angluin-style active automata learning and weighted extensions | Pre-empted as a learning paradigm; weighted feasibility depends strongly on the semiring | Add an oracle-backed domain compiler that learns a finite observational Moore machine, with separator/exhaustive/solver-backed equivalence queries |
 
 ## Common kernel candidate
 
@@ -526,6 +527,23 @@ The read depths below are unconditional and describe this preliminary pass.
     hypotheses, weight pushing normalizes path-weight distribution without
     changing accepted weights, after which ordinary labelled-automaton
     minimization yields a minimal deterministic weighted automaton.
+18. Gerco van Heerdt, Clemens Kupke, Jurriaan Rot, and Alexandra Silva,
+    *Learning Weighted Automata over Principal Ideal Domains*.
+    **Read depth: partial** — arXiv v2, cache key `arXiv:1911.04404`, SHA-256
+    `a8e6410d2a12e6b2b3163b2aa734fff11bbe8536776d24b66b19ea0b78954c92`;
+    read the abstract, introduction/contribution map, and overview of the
+    membership/equivalence-query algorithm.  It gives a semiring-parametric
+    weighted `L*` variant with termination conditions, proves termination for
+    principal ideal domains, and exhibits nontermination over the natural
+    numbers.
+19. Laure Daviaud and Marianne Johnson, *Feasibility of Learning Weighted
+    Automata on a Semiring*. **Read depth: partial** — published LMCS/arXiv v6
+    text, cache key `arXiv:2309.07806`, SHA-256
+    `f33008219542b4b47c4215be2bdf50c146d48462f98481ba89b05049fc7aef6d`;
+    read the abstract, introduction/contribution map, and semiring/automaton
+    setup.  It classifies limits of Angluin-style weighted hypotheses over
+    arbitrary semirings through levels of guessability and literal/residual
+    automata, emphasizing that existence and effective discovery are distinct.
 
 ## Knowledge-compilation and provenance connection
 
@@ -629,6 +647,42 @@ make this a `RepresentativeReducer` backend beside—not inside—the contextual
 state minimizer.  A graph adapter can then test whether typed state quotient,
 potential normalization, rank reduction, and provenance factorization compose
 cleanly and improve an actual exact solver without bespoke plumbing.
+
+## Active interface learning from an exact oracle
+
+The compiler need not always receive an explicit transition algebra.  An
+exact domain solver can answer a membership-style query
+
+```text
+observe(component, typed_context) -> value
+```
+
+and an equivalence oracle can either certify a proposed interface machine or
+return a distinguishing context.  This turns every counterexample directly
+into a separator coordinate and permits incremental compilation of the
+reachable observational interface.  Exact equivalence can come from a proved
+finite separator, exhaustive bounded contexts, or a solver-backed search; an
+untested heuristic is not an exact compiler certificate.
+
+Angluin-style active learning and weighted extensions strongly pre-empt the
+generic idea.  The semiring audit also supplies a hard gate: field/PID cases
+have positive weighted results, while general semirings can fail termination
+or even the prescribed finite-hypothesis construction.  Ergodis should avoid
+claiming a semiring-generic weighted learner.
+
+A safer and broader systems path is to learn the already-finite observational
+context machine as a deterministic Moore-style machine, treating the bounded
+observation as an output label.  This works independently of linear semiring
+hypothesis construction, though its quotient may be larger.  Potential and
+representative-family backends can be applied only after their extra laws are
+verified.
+
+This adds a materially new application frame: wrap a legacy exact optimizer,
+CP/MILP model, simulator, or theorem-backed enumerator as a query oracle and
+compile a reusable minimal interface without first rewriting its internal DP.
+The artifact should retain the observation table, all counterexample contexts,
+and the final equivalence certificate so black-box compilation remains
+auditable.
 
 ## Coverage gaps and next search
 

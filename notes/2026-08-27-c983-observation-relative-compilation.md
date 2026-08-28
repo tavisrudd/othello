@@ -351,6 +351,13 @@ distinguishing-context traces
 optional transient provenance callbacks.
 ```
 
+It should support two front ends.  The explicit front end receives reachable
+carriers and typed generator actions.  The oracle front end learns the finite
+observational machine through context/value queries and exact distinguishing-
+context counterexamples.  The latter is an application of established active
+automata learning; it is useful because a legacy optimizer can become an
+Ergodis adapter before its internal recurrence has been reimplemented.
+
 The first adapter is bounded tropical weighted-tree evaluation.  The second is
 a symmetric finite resource-allocation/scheduling algebra, so a successful
 common backend cannot be dismissed as an automata-only refactoring.  Neither
