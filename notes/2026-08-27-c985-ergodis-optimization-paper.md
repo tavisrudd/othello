@@ -664,6 +664,26 @@ papers/complete-repair-ports/ergodis/scripts/check-observational-wide-directory-
 
 - batched-signature TSV: `089844910ea65dab4f648c5acfd598dd8676d482ecccb45420a180a194a919d3`, 1,042 bytes.
 
+A focused seven-round CPU-2 comparison against Boa revision
+`54a556448169a83a369e039b5fa3ba27323ccfde` closes the width-128 SOTA loop.
+On the deterministic 65,536-state, 128-generator, two-output random family,
+Ergodis adaptive-deferred returns the same 65,536 quotient classes while
+retaining its replayable transcript.  Its median is 130.393 ms versus Boa's
+136.850 ms, making Ergodis 1.050x faster on this control.  The first alternating
+round is cold for both tools and does not affect the median.
+
+```sh
+ERGODIS_ROUNDS=7 \
+  papers/complete-repair-ports/ergodis/scripts/observational-wide-boa-ab.sh \
+  "$ERGODIS_DRIVER" "$PINNED_BOA_SOURCE" "$RANDOM_128_FIXTURE" \
+  > papers/complete-repair-ports/ergodis/evidence/c985-wide-boa-final.tsv
+papers/complete-repair-ports/ergodis/scripts/check-observational-wide-boa-evidence.sh
+```
+
+- wide Boa A/B script: `7175f902e9ad1011e73a10f339b148457a78a681cb24fc0b65151057bb02f8ca`, 1,436 bytes;
+- wide Boa checker: `fa2c3bbfbc6766aa85072d71e4b216e2fee22875b8fcf88da64468a81f456de3`, 750 bytes;
+- wide Boa TSV: `789d66d185874837bd17efe9025ff5209c77056e9ee683428220043f2137cf4a`, 462 bytes.
+
 ## Portfolio-theorem transfer
 
 The performance work now feeds a broader exact compositional engine rather

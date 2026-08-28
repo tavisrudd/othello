@@ -20,6 +20,10 @@ current C985 slice now supports:
 - iterative, allocation-free pivot-combination enumeration in the
   rank-bounded recovery-context compiler.
 
+The underlying wide observational compiler also crosses the pinned Boa
+baseline at 128 generators on the tracked random control: 130.393 ms versus
+136.850 ms median while retaining replayable transcript evidence.
+
 This realizes the computational content of the finite tower-synthesis and two
 important cases of the family-restricted quotient results in
 `2026-08-27-c980-higher-rank-contextual-minimality.md`.
