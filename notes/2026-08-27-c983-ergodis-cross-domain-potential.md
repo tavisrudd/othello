@@ -506,8 +506,10 @@ The first-batch evidence changes the expansion ranking:
 8. **Tropical tensor backend** — feed minimized finite relation/resource
    indices to existing CPU/GPU contractors; report boundary quotient separately
    from bond/rank, intermediate volume, order, and witness effects.
-9. **Provenance/AMC/database adapter** — useful if contextual minimization adds
-   measurable interface reduction beyond the compiled circuit.
+9. **Provenance/FAQ/database adapter** — useful only if contextual minimization
+   adds a measured external interface or multi-query capability beyond
+   InsideOut elimination, factorized results, and the compiled provenance
+   circuit.
 10. **Bounded program-component adapter** — use e-graphs/version spaces and an
    exact interpreter/SMT oracle as controls; test whether open-fragment future
    responses admit an additional certified interface quotient.

@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY THIRTY-FOUR-SOURCE PASS; FOUR SOURCES READ
-AT FULL TEXT AND THIRTY AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
+**Status**: IN PROGRESS; PRELIMINARY THIRTY-SIX-SOURCE PASS; FOUR SOURCES READ
+AT FULL TEXT AND THIRTY-TWO AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT
 LICENSED
 
 ## Executive verdict
@@ -108,6 +108,7 @@ formal congruence argument.
 | Compile a dynamic program to an exact reduced optimization graph | Exact decision diagrams for optimization and DP state merging | Strongly pre-empted as an OR systems pattern, including CP/IP integration | Add derived context/query minimization, independent certificates, potential/provenance layers, and black-box solver wrapping; benchmark against DD tools |
 | Represent equivalent/candidate programs and extract an optimum | Equality saturation/e-graphs and version-space algebra | Strongly pre-empted as program-optimization and synthesis architecture | Target open-component future-cost interfaces, certified bounded semantics, or oracle wrapping; benchmark e-graph/synthesis systems |
 | Contract local optimization tensors over min/max-plus and recover an optimizer | Tropical tensor networks for exact combinatorial optimization | Strongly pre-empted, including values, degeneracy/counts, and configurations | Use as a GPU/factored backend; measure contextual interface reduction separately from bond/rank and contraction-order effects |
+| Unify joins, CSP, inference, and aggregates by semiring elimination and factor results | FAQ/InsideOut and factorized databases | Strongly pre-empted as query/evaluation and representation architecture | Add a query-relative component boundary quotient or certified multi-query service beyond existing factorization; benchmark database engines |
 
 ## Common kernel candidate
 
@@ -694,6 +695,21 @@ The read depths below are unconditional and describe this preliminary pass.
     as min-plus tensor contractions and relates translationally invariant
     limits to tropical eigenvalues/fixed points.  This confirms that tropical
     tensor contraction is an application backend, not merely a metaphor.
+35. Mahmoud Abo Khamis, Hung Q. Ngo, and Atri Rudra, *FAQ: Questions Asked
+    Frequently*. **Read depth: partial** — primary arXiv abstract and
+    contribution summary, cache key `arXiv:1504.04044`; read the abstract and
+    framework/algorithm summary.  Functional Aggregate Queries unify CSP,
+    databases, matrix operations, probabilistic graphical models, and logic;
+    InsideOut solves them by semiring-aware variable elimination and optimizes
+    semantically valid variable orders.  This pre-empts a broad database/
+    inference unification claim more directly than GDL alone.
+36. Dan Olteanu and Maximilian Schleich, *Factorized Databases*. **Read depth:
+    partial** — primary SIGMOD Record abstract and institutional manuscript
+    metadata, DOI `10.1145/3003665.3003667`; read the abstract and scope
+    summary.  It avoids redundancy in query computation/results through
+    factorized representations and supports subsequent analytics.  Database
+    factorization is therefore another independent compression layer and
+    required systems control.
 
 ## Max-plus control and discrete-event systems
 
@@ -866,6 +882,29 @@ certificate size, and the break-even over repeated distributed queries.
 Approximate sketches remain a later metric/covering backend and must retain
 their probability and error guarantees rather than being described as an
 exact quotient.
+
+## Database queries, FAQ, and factorization
+
+FAQ/InsideOut already unifies database joins, CSP, graphical inference, matrix
+operations, and logic as semiring aggregate elimination, including semantic
+constraints on variable order.  Factorized databases already avoid redundant
+query computation and result materialization while supporting downstream
+analytics.  Together they pre-empt most of the advertised database analogy.
+
+The remaining Ergodis experiment is narrower: treat a repeated subquery,
+materialized component, or data-service partition as an open component; declare
+the future join/aggregate/query profile; then test whether its external
+response admits a smaller certified quotient than the existing factorized
+result or provenance circuit.  Query-profile refinement and minimal boundary
+messages may be useful for a multi-tenant service, but only if they reduce an
+actual external interface rather than duplicate InsideOut memoization.
+
+The benchmark must include the database-native controls: FAQ/InsideOut-style
+elimination order, factorized result size, provenance/circuit size, update or
+recompile cost, enumeration/query latency, and the best available query engine.
+The database adapter is rejected if contextual minimization adds no measured
+interface/query capability.  Dynamic factorized view maintenance remains a
+specific next-search gap before any incremental-database claim.
 
 ## Knowledge-compilation and provenance connection
 
