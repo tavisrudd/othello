@@ -244,7 +244,15 @@ Sequel research:
   regression forbids class-representative substitution.  This passes the
   three-exemplar architecture gate; actual hierarchical `CostTable`
   composition, measured reuse economics, versioned payload schemas, and a cold
-  implementation review remain C983 gates.
+  implementation review remain C983 gates.  The subsequent
+  [hierarchical composition control](../2026-08-27-c983-hierarchical-composition-control.md)
+  routes bounded ordinary/target scalar profiles through the production
+  `CompositionTable` algebra: raw sorts `9/12/12` compile to `3/6/4`, and all
+  117 admitted depth-two queries replay complete local-label witness trees.
+  An independent Python min-plus convolution agrees.  Hierarchical API closure
+  therefore passes; concrete-code leaf generation, measured economics,
+  certificate/provenance compaction, versioned payload schemas, and cold review
+  remain C983 gates.
   C983 does not block C325 or C953 and makes no manuscript or public-surface
   change.
 

@@ -3,7 +3,7 @@ use ergodis::observational::{
     GeneratorSpec,
 };
 use ergodis::provenance::{ProvenanceArena, ProvenanceId, ReplaySidecar};
-use ergodis::{GeneratedSpanTable, Matrix};
+use ergodis::{CompositionAnswer, CompositionTable, CostTable, GeneratedSpanTable, Matrix};
 use std::collections::{BTreeMap, BTreeSet};
 
 const LIMIT: u32 = 4;
@@ -13,9 +13,12 @@ const WTA_LEAF: u32 = 1_001;
 const WTA_NODE: u32 = 1_002;
 const RESOURCE_ASSIGNMENT: u32 = 2_001;
 const RECOVERY_EQUATION: u32 = 3_001;
+const HIERARCHY_LEAF: u32 = 3_002;
+const HIERARCHY_NODE: u32 = 3_003;
 const WTA_ADAPTER: u32 = 101;
 const RESOURCE_ADAPTER: u32 = 102;
 const RECOVERY_ADAPTER: u32 = 103;
+const HIERARCHY_ADAPTER: u32 = 104;
 
 type Valuation = [u32; 3];
 
@@ -847,6 +850,323 @@ fn triangle_recovery_compiles_with_concrete_witness_lifts() {
     ));
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+struct RecoveryProfile([u32; 4]);
+
+fn profile_table(costs: [u32; 2]) -> CostTable {
+    CostTable::from_entries::<2>(
+        1,
+        1,
+        (0_u8..2).map(|label| {
+            (
+                Matrix::new::<2>(1, 1, vec![label]).unwrap(),
+                costs[label as usize],
+            )
+        }),
+    )
+    .unwrap()
+}
+
+fn hierarchy_blocks(context: usize) -> [Matrix; 2] {
+    let coefficients = [(1_u8, 0_u8), (0, 1), (1, 1)][context];
+    [
+        Matrix::new::<2>(1, 1, vec![coefficients.0]).unwrap(),
+        Matrix::new::<2>(1, 1, vec![coefficients.1]).unwrap(),
+    ]
+}
+
+fn hierarchy_answer(
+    profile: RecoveryProfile,
+    context: usize,
+    target_mode: bool,
+    label: u8,
+) -> CompositionAnswer {
+    let ordinary = profile_table([profile.0[0], profile.0[1]]);
+    let target = profile_table([profile.0[2], profile.0[3]]);
+    let blocks = hierarchy_blocks(context);
+    let composed = if target_mode {
+        CompositionTable::compose_with_target::<2>(&blocks, &ordinary, &target, 0).unwrap()
+    } else {
+        CompositionTable::compose::<2>(&blocks, &ordinary).unwrap()
+    };
+    composed
+        .answer::<2>(&Matrix::new::<2>(1, 1, vec![label]).unwrap())
+        .unwrap()
+        .unwrap()
+}
+
+fn hierarchy_step(profile: RecoveryProfile, context: usize) -> RecoveryProfile {
+    RecoveryProfile([
+        hierarchy_answer(profile, context, false, 0).cost,
+        hierarchy_answer(profile, context, false, 1).cost,
+        hierarchy_answer(profile, context, true, 0).cost,
+        hierarchy_answer(profile, context, true, 1).cost,
+    ])
+}
+
+struct HierarchyFixture {
+    presentation: FinitePresentation,
+    profiles: [Vec<RecoveryProfile>; 3],
+}
+
+fn hierarchy_fixture() -> HierarchyFixture {
+    let first: Vec<_> = (1..=3)
+        .flat_map(|ordinary| {
+            (1..=3).map(move |zero_sector| RecoveryProfile([0, ordinary, zero_sector, 0]))
+        })
+        .collect();
+    let mut profiles = [first, Vec::new(), Vec::new()];
+    for depth in 0..2 {
+        profiles[depth + 1] = profiles[depth]
+            .iter()
+            .flat_map(|&profile| (0..3).map(move |context| hierarchy_step(profile, context)))
+            .collect::<BTreeSet<_>>()
+            .into_iter()
+            .collect();
+    }
+    let offsets = [
+        0_usize,
+        profiles[0].len(),
+        profiles[0].len() + profiles[1].len(),
+    ];
+    let ids: [BTreeMap<RecoveryProfile, u32>; 3] = std::array::from_fn(|depth| {
+        profiles[depth]
+            .iter()
+            .copied()
+            .enumerate()
+            .map(|(index, profile)| (profile, (offsets[depth] + index) as u32))
+            .collect()
+    });
+    let mut generators = Vec::new();
+    for depth in 0..2 {
+        for context in 0..3 {
+            generators.push(GeneratorSpec {
+                source_sort: depth as u32,
+                target_sort: depth as u32 + 1,
+                transitions: profiles[depth]
+                    .iter()
+                    .map(|&profile| ids[depth + 1][&hierarchy_step(profile, context)])
+                    .collect(),
+            });
+        }
+    }
+    let observations: Vec<_> = profiles
+        .iter()
+        .flat_map(|sort| sort.iter().map(|profile| profile.0[3]))
+        .collect();
+    let presentation = FinitePresentation::new(
+        profiles.iter().map(|sort| sort.len() as u32),
+        observations,
+        generators,
+    )
+    .unwrap();
+    HierarchyFixture {
+        presentation,
+        profiles,
+    }
+}
+
+fn profile_after(mut profile: RecoveryProfile, contexts: &[usize]) -> RecoveryProfile {
+    for &context in contexts {
+        profile = hierarchy_step(profile, context);
+    }
+    profile
+}
+
+fn export_hierarchy_witness(
+    arena: &mut ProvenanceArena,
+    seed: RecoveryProfile,
+    contexts: &[usize],
+    target_mode: bool,
+    label: u8,
+) -> ProvenanceId {
+    if contexts.is_empty() {
+        let offset = if target_mode { 2 } else { 0 };
+        let cost = seed.0[offset + label as usize];
+        return arena
+            .push(
+                HIERARCHY_LEAF,
+                &[u32::from(target_mode), u32::from(label), cost, u32::MAX],
+                &[],
+            )
+            .unwrap();
+    }
+    let (&context, prefix) = contexts.split_last().unwrap();
+    let input = profile_after(seed, prefix);
+    let answer = hierarchy_answer(input, context, target_mode, label);
+    let local: Vec<u8> = answer
+        .local_labels
+        .iter()
+        .map(|matrix| matrix.as_slice()[0])
+        .collect();
+    assert_eq!(local.len(), 2);
+    let left = export_hierarchy_witness(arena, seed, prefix, target_mode, local[0]);
+    let right = export_hierarchy_witness(arena, seed, prefix, false, local[1]);
+    arena
+        .push(
+            HIERARCHY_NODE,
+            &[
+                u32::from(target_mode),
+                u32::from(label),
+                answer.cost,
+                context as u32,
+            ],
+            &[left, right],
+        )
+        .unwrap()
+}
+
+fn replay_hierarchy_witness(
+    arena: &ProvenanceArena,
+    root: ProvenanceId,
+    seed: RecoveryProfile,
+    contexts: &[usize],
+    target_mode: bool,
+    label: u8,
+) -> u32 {
+    let view = arena.get(root).unwrap();
+    let payload = view.payload();
+    assert_eq!(payload.len(), 4);
+    assert_eq!(payload[0], u32::from(target_mode));
+    assert_eq!(payload[1], u32::from(label));
+    if contexts.is_empty() {
+        assert_eq!(view.kind(), HIERARCHY_LEAF);
+        assert_eq!(payload[3], u32::MAX);
+        assert_eq!(view.children().len(), 0);
+        let offset = if target_mode { 2 } else { 0 };
+        assert_eq!(payload[2], seed.0[offset + label as usize]);
+        return payload[2];
+    }
+    assert_eq!(view.kind(), HIERARCHY_NODE);
+    let (&context, prefix) = contexts.split_last().unwrap();
+    assert_eq!(payload[3], context as u32);
+    let children: Vec<_> = view.children().collect();
+    assert_eq!(children.len(), 2);
+    let left_view = arena.get(children[0]).unwrap();
+    let right_view = arena.get(children[1]).unwrap();
+    let left_label = left_view.payload()[1] as u8;
+    let right_label = right_view.payload()[1] as u8;
+    let coefficients = [(1_u8, 0_u8), (0, 1), (1, 1)][context];
+    assert_eq!(
+        (coefficients.0 * left_label) ^ (coefficients.1 * right_label),
+        label
+    );
+    let left_cost =
+        replay_hierarchy_witness(arena, children[0], seed, prefix, target_mode, left_label);
+    let right_cost = replay_hierarchy_witness(arena, children[1], seed, prefix, false, right_label);
+    assert_eq!(payload[2], left_cost + right_cost);
+    payload[2]
+}
+
+#[test]
+fn hierarchical_recovery_tables_use_actual_min_sum_composition() {
+    let fixture = hierarchy_fixture();
+    let compiled = compile_observational(&fixture.presentation).unwrap();
+    verify_compilation(&fixture.presentation, &compiled).unwrap();
+    assert_eq!(fixture.profiles.each_ref().map(Vec::len), [9, 12, 12]);
+    assert_eq!(
+        compiled
+            .class_ranges()
+            .iter()
+            .map(|range| range.len)
+            .collect::<Vec<_>>(),
+        [3, 6, 4]
+    );
+    assert_eq!(compiled.metrics().states, 33);
+    assert_eq!(compiled.metrics().classes, 13);
+    assert_eq!(compiled.metrics().refinement_rounds, 1);
+    assert_eq!(compiled.metrics().separators, 114);
+    assert_eq!(compiled.metrics().separator_steps, 54);
+    assert_eq!(compiled.storage().quotient_bytes, 464);
+    assert_eq!(compiled.storage().certificate_bytes, 2_952);
+
+    let paths = [
+        Vec::new(),
+        vec![0],
+        vec![1],
+        vec![2],
+        vec![0, 0],
+        vec![0, 1],
+        vec![0, 2],
+        vec![1, 0],
+        vec![1, 1],
+        vec![1, 2],
+        vec![2, 0],
+        vec![2, 1],
+        vec![2, 2],
+    ];
+    let mut sidecar = ReplaySidecar::new(
+        fixture.presentation.fingerprint(),
+        HIERARCHY_ADAPTER,
+        u32::MAX,
+    );
+    for (start, &seed) in fixture.profiles[0].iter().enumerate() {
+        for contexts in &paths {
+            let generator_path: Vec<_> = contexts
+                .iter()
+                .enumerate()
+                .map(|(depth, &context)| 3 * depth as u32 + context as u32)
+                .collect();
+            let mut terminal = start as u32;
+            for &generator in &generator_path {
+                terminal = fixture
+                    .presentation
+                    .transition(generator, terminal)
+                    .unwrap();
+            }
+            let root = export_hierarchy_witness(sidecar.arena_mut(), seed, contexts, true, 1);
+            let observation =
+                replay_hierarchy_witness(sidecar.arena(), root, seed, contexts, true, 1);
+            assert_eq!(
+                observation,
+                fixture.presentation.observations()[terminal as usize]
+            );
+            sidecar
+                .bind(
+                    start as u32,
+                    &generator_path,
+                    terminal,
+                    observation,
+                    Some(root),
+                )
+                .unwrap();
+        }
+    }
+    sidecar
+        .verify(HIERARCHY_ADAPTER, &fixture.presentation, &compiled)
+        .unwrap();
+    let storage = sidecar.arena().storage();
+    assert_eq!(
+        (
+            storage.node_bytes,
+            storage.payload_bytes,
+            storage.child_bytes
+        ),
+        (21_024, 10_512, 2_160)
+    );
+    assert_eq!(sidecar.replay_storage_bytes(), 4_500);
+    for replay in sidecar.records() {
+        let seed = fixture.profiles[0][replay.record.start_state as usize];
+        let contexts: Vec<_> = replay
+            .path
+            .iter()
+            .enumerate()
+            .map(|(depth, &generator)| generator as usize - 3 * depth)
+            .collect();
+        assert_eq!(
+            replay_hierarchy_witness(
+                sidecar.arena(),
+                replay.provenance.unwrap(),
+                seed,
+                &contexts,
+                true,
+                1,
+            ),
+            replay.record.observation
+        );
+    }
+}
+
 #[test]
 fn checked_in_python_oracle_agrees_with_rust_metrics_and_witnesses() {
     let oracle: serde_json::Value =
@@ -915,5 +1235,31 @@ fn checked_in_python_oracle_agrees_with_rust_metrics_and_witnesses() {
         assert_eq!(case["support"], serde_json::json!(answer.support));
         assert_eq!(case["coefficients"], serde_json::json!(coefficients));
         assert_eq!(case["helper_loads"], serde_json::json!(loads));
+    }
+
+    let hierarchy = hierarchy_fixture();
+    let hierarchy_compiled = compile_observational(&hierarchy.presentation).unwrap();
+    assert_eq!(
+        oracle["hierarchy"]["carrier_by_sort"],
+        serde_json::json!(hierarchy.profiles.each_ref().map(Vec::len))
+    );
+    assert_eq!(
+        oracle["hierarchy"]["quotient_by_sort"],
+        serde_json::json!(hierarchy_compiled
+            .class_ranges()
+            .iter()
+            .map(|range| range.len)
+            .collect::<Vec<_>>())
+    );
+    assert_eq!(
+        oracle["hierarchy"]["separator_steps"],
+        hierarchy_compiled.metrics().separator_steps
+    );
+    for case in oracle["hierarchy"]["response_cases"].as_array().unwrap() {
+        let seed = RecoveryProfile(serde_json::from_value(case["seed"].clone()).unwrap());
+        let contexts: Vec<usize> = serde_json::from_value(case["contexts"].clone()).unwrap();
+        let profile = profile_after(seed, &contexts);
+        assert_eq!(case["profile"], serde_json::json!(profile.0));
+        assert_eq!(case["observation"], profile.0[3]);
     }
 }

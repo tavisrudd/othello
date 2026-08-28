@@ -289,12 +289,92 @@ def recovery_oracle() -> dict[str, object]:
     }
 
 
+HIERARCHY_CONTEXTS = ((1, 0), (0, 1), (1, 1))
+
+
+def hierarchy_step(profile: tuple[int, ...], context: int) -> tuple[int, ...]:
+    ordinary = profile[:2]
+    target = profile[2:]
+    left, right = HIERARCHY_CONTEXTS[context]
+
+    def compose(first, second, output):
+        return min(
+            first[x] + second[y]
+            for x in range(2)
+            for y in range(2)
+            if (left * x) ^ (right * y) == output
+        )
+
+    return tuple(compose(ordinary, ordinary, output) for output in range(2)) + tuple(
+        compose(target, ordinary, output) for output in range(2)
+    )
+
+
+def hierarchy_oracle() -> dict[str, object]:
+    sorts = [
+        sorted((0, ordinary, zero_sector, 0) for ordinary in range(1, 4) for zero_sector in range(1, 4))
+    ]
+    for _ in range(2):
+        sorts.append(
+            sorted(
+                {
+                    hierarchy_step(profile, context)
+                    for profile in sorts[-1]
+                    for context in range(3)
+                }
+            )
+        )
+    ids = [{profile: index for index, profile in enumerate(sort)} for sort in sorts]
+    generators = []
+    for depth in range(2):
+        for context in range(3):
+            generators.append(
+                [
+                    (depth, depth + 1, ids[depth + 1][hierarchy_step(profile, context)])
+                    for profile in sorts[depth]
+                ]
+            )
+    observations = [[profile[3] for profile in sort] for sort in sorts]
+    classes, rounds = refine(sorts, observations, generators)
+    separators, separator_steps = shortest_separator_stats(observations, generators, classes)
+    cases = [
+        ((0, 1, 1, 0), ()),
+        ((0, 2, 3, 0), (0,)),
+        ((0, 2, 3, 0), (1,)),
+        ((0, 2, 3, 0), (2,)),
+        ((0, 3, 2, 0), (2, 2)),
+        ((0, 1, 3, 0), (0, 1)),
+    ]
+    response_cases = []
+    for seed, contexts in cases:
+        profile = seed
+        for context in contexts:
+            profile = hierarchy_step(profile, context)
+        response_cases.append(
+            {
+                "seed": list(seed),
+                "contexts": list(contexts),
+                "profile": list(profile),
+                "observation": profile[3],
+            }
+        )
+    return {
+        "carrier_by_sort": [len(sort) for sort in sorts],
+        "quotient_by_sort": [len(set(partition)) for partition in classes],
+        "refinement_rounds": rounds,
+        "separators": separators,
+        "separator_steps": separator_steps,
+        "response_cases": response_cases,
+    }
+
+
 def main() -> None:
     expected = {
         "schema": "ergodis-observational-v2",
         "wta": wta_oracle(),
         "resource": resource_oracle(),
         "recovery": recovery_oracle(),
+        "hierarchy": hierarchy_oracle(),
     }
     actual = json.loads(FIXTURE.read_text())
     if actual != expected:

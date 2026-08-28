@@ -39,5 +39,20 @@
       {"state": 15, "cost": 1, "support": [2], "coefficients": [1, 1], "helper_loads": [0, 0, 1]},
       {"state": 9, "cost": 2, "support": [0, 1], "coefficients": [1, 0, 0, 1], "helper_loads": [1, 1, 0]}
     ]
+  },
+  "hierarchy": {
+    "carrier_by_sort": [9, 12, 12],
+    "quotient_by_sort": [3, 6, 4],
+    "refinement_rounds": 1,
+    "separators": 114,
+    "separator_steps": 54,
+    "response_cases": [
+      {"seed": [0, 1, 1, 0], "contexts": [], "profile": [0, 1, 1, 0], "observation": 0},
+      {"seed": [0, 2, 3, 0], "contexts": [0], "profile": [0, 2, 3, 0], "observation": 0},
+      {"seed": [0, 2, 3, 0], "contexts": [1], "profile": [0, 2, 0, 2], "observation": 2},
+      {"seed": [0, 2, 3, 0], "contexts": [2], "profile": [0, 2, 2, 0], "observation": 0},
+      {"seed": [0, 3, 2, 0], "contexts": [2, 2], "profile": [0, 3, 2, 0], "observation": 0},
+      {"seed": [0, 1, 3, 0], "contexts": [0, 1], "profile": [0, 1, 0, 1], "observation": 1}
+    ]
   }
 }
