@@ -18,6 +18,8 @@ fn presentation(states: u32, generators: u32, outputs: u32, family: &str) -> Fin
     let observations = if family == "colors" {
         assert_eq!(states % outputs, 0);
         (0..states).map(|state| state % outputs).collect()
+    } else if family == "stable" {
+        vec![1_u32; states as usize]
     } else {
         let mut observations = vec![0_u32; states as usize];
         observations[states as usize - 1] = 1;
@@ -25,7 +27,7 @@ fn presentation(states: u32, generators: u32, outputs: u32, family: &str) -> Fin
     };
     let mut specs = Vec::with_capacity(generators as usize);
     for generator in 0..generators {
-        let transitions = if family == "colors" {
+        let transitions = if family == "colors" || family == "stable" {
             let shift = generator + 1;
             (0..states)
                 .map(|state| (state + shift) % states)
@@ -51,8 +53,10 @@ fn presentation(states: u32, generators: u32, outputs: u32, family: &str) -> Fin
 
 fn main() {
     let mut args = std::env::args().skip(1);
-    let family = args.next().expect("family: chain, random, or colors");
-    assert!(family == "chain" || family == "random" || family == "colors");
+    let family = args
+        .next()
+        .expect("family: chain, random, colors, or stable");
+    assert!(family == "chain" || family == "random" || family == "colors" || family == "stable");
     let states = args.next().expect("states").parse::<u32>().unwrap();
     let generators = args.next().expect("generators").parse::<u32>().unwrap();
     let repetitions = args.next().expect("repetitions").parse::<u32>().unwrap();

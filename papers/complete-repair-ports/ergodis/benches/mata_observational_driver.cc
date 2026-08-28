@@ -29,16 +29,27 @@ int main(int argc, char** argv) {
     const auto repetitions = std::stoull(argv[4]);
     const auto outputs = argc == 6 ? std::stoull(argv[5]) : 2;
     const bool colors = family == "colors";
-    if ((family != "chain" && family != "random" && !colors) || outputs < 2
+    const bool stable = family == "stable";
+    if ((family != "chain" && family != "random" && !colors && !stable) || outputs < 2
         || (colors && states % outputs != 0)) {
         return 2;
     }
     const auto sink = states;
-    Nfa input(colors ? states + 1 : states, {0}, {colors ? sink : states - 1});
+    mata::utils::SparseSet<mata::nfa::State> final_states{};
+    if (colors) {
+        final_states.insert(sink);
+    } else if (stable) {
+        for (mata::nfa::State state = 0; state < states; ++state) {
+            final_states.insert(state);
+        }
+    } else {
+        final_states.insert(states - 1);
+    }
+    Nfa input(colors ? states + 1 : states, {0}, final_states);
     for (mata::Symbol generator = 0; generator < generators; ++generator) {
         std::uint64_t random = 0x9e3779b97f4a7c15ULL ^ generator;
         for (mata::nfa::State state = 0; state < states; ++state) {
-            const auto target = colors
+            const auto target = colors || stable
                 ? static_cast<mata::nfa::State>((state + generator + 1) % states)
                 : family == "chain" || generator == 0
                     ? std::min(state + 1, states - 1)

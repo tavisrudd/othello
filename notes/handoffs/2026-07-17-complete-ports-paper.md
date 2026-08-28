@@ -253,6 +253,65 @@ Sequel research:
   therefore passes; concrete-code leaf generation, measured economics,
   certificate/provenance compaction, versioned payload schemas, and cold review
   remain C983 gates.
+  The subsequent [code/architecture/performance review](../2026-08-27-c983-ergodis-code-architecture-performance-review.md)
+  identifies exhaustive concrete-pair certificates and explicit one-hole
+  context materialization as the first scaling walls, followed by synchronous
+  refinement, witness duplication, and the test-local adapter/schema boundary.
+  Its accepted first scaling slice preserves exhaustive audit as the default,
+  adds a quotient-only canonical-recomputation policy with zero pair-certificate
+  bytes, closes the cross-sort class-range verifier hole, and adds separated
+  and long-chain benchmark families.  The next continuation pre-indexes
+  generators by source sort and removes redundant per-signature allocation;
+  exhaustive evidence can now stream directly through `Write` (normally a
+  buffered file) and be verified through `Read` without retaining records or
+  paths.  A hostile pass found that the legacy exhaustive-default compile API
+  could defeat streaming before the writer ran; the accepted integrated
+  compile-to-writer path now constructs quotient-only state directly, and the
+  lower-level stream boundary rejects exhaustive artifacts.  Streaming controls
+  aggregate evidence residency but not per-separator product-BFS memory or
+  quadratic output/work.  The following compact split-transcript mode now
+  derives the quotient from the typed observation partition using one 16-byte
+  record per legal binary refinement split.  Exact controls reduce certificate
+  payloads from `1456/57180/2412/2952` bytes to `32/416/32/64` for WTA,
+  resources, recovery, and hierarchy respectively, with independent replay
+  and identical partitions.  Rust and independent Python controls pass.  The
+  transcript policy now uses typed inverse CSR and a pending-aware small-half
+  worklist directly as its quotient engine, with range-bounded flat pools and
+  no allocation in the refinement loop.  A hostile pass supplied a valid
+  stale-queue counterexample; the pending-bit repair, permanent regression,
+  256-presentation typed corpus, and second hostile review all pass.  The
+  independently checked inverse-indexed replayer and five-round interleaved
+  wall/RSS harness also pass: the worklist policy is 103.3x faster on the
+  256-state long chain and 14.9x faster on 16,384 already-separated states,
+  with no stable process-RSS delta (-4.2% to +2.2%). Edge-sparse scheduling is
+  now implemented with target-state candidate CSR, a fixed-capacity flat
+  pending set, and an `O(M)` live-work bound; the adversarial
+  `D=262,144, M=64` typed control and allocation-growth gate pass. Semantic
+  witness schemas and provenance compaction remain open; exhaustive pair
+  evidence is now a bounded audit mode rather than a scaling dependency. A
+  subsequent
+  [SOTA comparison](../2026-08-27-c983-observational-minimization-sota-comparison.md)
+  pins MATA, mCRL2's Groote--Jansen 2025 kernel, and Boa as the specialized,
+  general-LTS, and generic-coalgebraic frontiers.  The first 131,072-state MATA
+  comparison exposed a full-block rescan under singleton splits; flat member
+  positions and marked counts repair that quadratic pathology without hot-loop
+  allocation or recursion, reducing the cold chain from 3.834 s to 14.126 ms.
+  Final seven-round controls put ergodis 1.55x ahead of MATA on that chain and
+  2.36x ahead on a four-generator deterministic random family, even though
+  ergodis emits and verifies a compact split proof. Separate cold peak RSS is
+  8.6--13.2x smaller. A linear initial-stability test gives a 12.1x advantage
+  on a native 256-output control; largest-splitter omission plus singleton-sort
+  congruence gives 547x on a fully reachable/coaccessible 131,072-state,
+  64-generator Boolean stable family, and 1,071x on the 65,536-state,
+  128-generator scaling point with 31.3x lower RSS. The million-state
+  profile selected adaptive counting
+  scatter for dense inverse construction, now implemented with one reusable
+  source permutation and one in-place target count/cursor array.  Seven
+  interleaved old/new rounds reduce the four-generator random median from
+  2.065 s to 1.760 s (14.8% less time); non-multiplexed counters show 53.6%
+  fewer instructions and 49.8% fewer branches with essentially unchanged
+  random-case peak RSS.  Sorted sparse inverse storage remains in place for
+  asymmetric typed systems.
   C983 does not block C325 or C953 and makes no manuscript or public-surface
   change.
 

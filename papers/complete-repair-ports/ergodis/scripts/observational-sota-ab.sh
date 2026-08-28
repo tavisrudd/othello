@@ -19,6 +19,7 @@ cases=(
   "chain 131072 1 2"
   "random 131072 4 2"
   "colors 131072 4 256"
+  "stable 65536 128 2"
 )
 
 run_one() {

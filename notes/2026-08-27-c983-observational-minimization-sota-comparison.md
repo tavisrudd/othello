@@ -113,8 +113,14 @@ stepping stone, not a reason to abandon the path.
 
 | Family, `n=131,072` | Ergodis median | MATA median | Ergodis speedup |
 |---|---:|---:|---:|
-| Unary chain | 10.031 ms | 21.071 ms | 2.10x |
-| Random, four generators | 100.720 ms | 205.127 ms | 2.04x |
+| Unary chain | 15.977 ms | 24.748 ms | 1.55x |
+| Random, four generators | 89.937 ms | 212.558 ms | 2.36x |
+
+These final numbers include the edge-sparse typed scheduler. Relative to the
+earlier dense-pending checkpoint, the random family improves while the unary
+chain gives back some constant factor for the more general candidate index.
+Both still include transcript emission and independent replay; the table is
+retained as the conservative classical-specialization control.
 
 Peak RSS was measured separately with `/usr/bin/time -v` around one cold
 process. It includes each executable's input and runtime footprint and is less
@@ -123,8 +129,8 @@ than a precise allocator decomposition.
 
 | Family, `n=131,072` | Ergodis RSS | MATA RSS | Ratio |
 |---|---:|---:|---:|
-| Unary chain | 12.604 MB | 213.936 MB | 17.0x smaller |
-| Random, four generators | 23.740 MB | 279.988 MB | 11.8x smaller |
+| Unary chain | 16.0 MiB | 210.9 MiB | 13.2x smaller |
+| Random, four generators | 32.0 MiB | 275.5 MiB | 8.6x smaller |
 
 The likely memory explanation is visible in the sources: ergodis uses flat
 `u32` pools, compact bitmaps, and fixed-width records; MATA uses `size_t`
@@ -160,24 +166,24 @@ presented as a proof of the worst-case bound.
 
 ## Hardware profile and next scaling move
 
-At 1,048,576 states and four generators, three `perf stat -d` runs gave median
-internal times of about 2.10 s for ergodis and 2.61 s for MATA. The counters
-were multiplexed at roughly 43%, so their absolute values are directional:
+On the final implementation at 1,048,576 states and four generators, three
+non-multiplexed `perf stat` runs give median internal times of 1.903 s for
+ergodis and 2.534 s for MATA, a 1.33x end-to-end compiler advantage. Counters
+wrap the whole driver process and therefore include deterministic input
+construction for both implementations:
 
 | Counter | Ergodis | MATA |
 |---|---:|---:|
-| Instructions | 13.27 B | 10.34 B |
-| Cycles | 10.26 B | 13.95 B |
-| IPC | 1.3 | 0.7 |
-| L1D miss rate | 2.9% | 3.2% |
-| Page faults | 70,359 | 553,903 |
+| Instructions | 5.578 B | 10.328 B |
+| Cycles | 8.345 B | 14.351 B |
+| Branches | 1.147 B | 1.899 B |
+| Branch misses | 20.763 M | 12.000 M |
 
-Ergodis wins through locality and compact representation, not lower
-instruction count. A sampled profile of the same ergodis random case attributes
-about 47% to compilation/refinement, 16% to independent split-transcript
-verification, and 15% to inverse-index sorting. Within refinement,
-`bitmap_contains` is the largest inlined leaf. The one-generator chain shifts
-more weight to verifier replay and inverse lookup.
+Ergodis now retires 46% fewer instructions and 42% fewer cycles, although its
+irregular exact-proof bookkeeping incurs more branch misses. An earlier
+sampled checkpoint attributed about 15% of cycles to inverse sorting and 16%
+to independent transcript verification; that profile selected the following
+adaptive construction change.
 
 The profile-justified adaptive inverse construction is now implemented:
 
@@ -220,15 +226,33 @@ transition labelled `generators + (i mod k)` to a fresh accepting sink.  Thus
 its minimized DFA has `k+1` states, with the extra state being the encoding
 sink rather than a semantic disagreement.
 
-The checked Rust control at `n=131,072`, four generators, and `k=256` returns
-256 classes and an empty split transcript because the supplied observation
-partition is already stable.  Two smoke invocations reported 31--40 ms; these
-are functional checks, not an interleaved measurement.  The matching MATA
-dependency was not present in the current environment, so no
-cross-tool timing is claimed.  The new `scripts/observational-sota-ab.sh`
-driver runs seven alternating process-level rounds for `chain`, `random`, and
-`colors`, pins both binaries to the same CPU, and emits raw TSV for a later
-median/RSS analysis.
+The final compiler first tests a rich initial observation partition for
+congruence in one forward pass. If stable, it bypasses inverse construction and
+no-op splitter traversal. At `n=131,072`, four generators, and `k=256`, seven
+interleaved rounds give 4.859 ms for ergodis and 58.583 ms for the pinned MATA
+encoding, a 12.1x product-level speedup. Ergodis returns 256 native classes and
+an empty verified transcript; MATA returns 257 classes including its encoding
+sink.
+
+The harness also contains a strictly Boolean `stable` control: all states are
+accepting, cyclic-shift generators make every state reachable, and the
+quotient has one state. Totality into a one-class target makes congruence
+immediate, so ergodis omits the sole initial splitter and allocates no inverse
+or pending arena.
+
+| `stable` scale | Edges | Ergodis | MATA | speedup | cold RSS ratio |
+|---|---:|---:|---:|---:|---:|
+| 131,072 states / 64 generators | 8.39 M | 1.240 ms | 678.128 ms | 547x | 30.3x smaller |
+| 65,536 states / 128 generators | 8.39 M | 0.599 ms | 641.557 ms | 1,071x | 31.3x smaller |
+
+The second row's cold RSS is 36,092 versus 1,129,292 KiB. These are genuine
+algorithmic early-termination advantages on a scoped stable family, not a
+claim that all DFA minimization is 547--1,071x faster. Input construction is
+outside both internal timing windows; process RSS includes the inputs.
+
+The retained `scripts/observational-sota-ab.sh` driver runs alternating
+process-level rounds for `chain`, `random`, `colors`, and `stable`, pins both
+binaries to the same CPU, and emits raw TSV.
 
 This family is useful precisely because it exposes a representational
 difference: a native finite observation partition can finish at initialization,
@@ -246,9 +270,10 @@ evidence that ergodis has a universally faster Boolean-DFA minimizer.
   direct corpus intentionally isolates two fully separated deterministic
   cases.
 - Measure peak live allocation by stage, not just process RSS.
-- Prove the exact typed worklist bound, including the remaining target-dense
-  pending scheduler, or replace that scheduler with a fixed-capacity sparse
-  directory before claiming edge-linear auxiliary space.
+- Complete a written amortized proof for the implemented edge-bounded pending
+  set and target-state candidate CSR. The implementation and adversarial
+  `D=262,144, M=64` control are present; the prose proof remains to be promoted
+  from the architecture review into the theorem-facing artifact.
 - Compare proof products explicitly. None of the reference implementations
   inspected emits ergodis' replayable split transcript plus contextual witness
   hooks, so quotient-only timing is not the complete product comparison.
