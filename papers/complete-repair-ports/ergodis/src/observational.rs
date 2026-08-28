@@ -91,6 +91,8 @@ pub enum ObservationalError {
     ObservationMismatch { class: u32 },
     #[error("generator {generator} is not compatible with class {class}")]
     GeneratorMismatch { generator: u32, class: u32 },
+    #[error("generator {generator} is not type-preserving and cannot be iterated")]
+    GeneratorNotEndomorphism { generator: u32 },
     #[error("compiled transition table disagrees at generator {generator}, class {class}")]
     QuotientTransition { generator: u32, class: u32 },
     #[error("separator certificate {certificate} is malformed")]
@@ -1889,6 +1891,23 @@ pub struct WeightedGeneratorWord {
     pub generators: Box<[u32]>,
 }
 
+/// The unique finite orbit of an indefinitely repeated type-preserving layer.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct GeneratorOrbit {
+    pub states: Box<[u32]>,
+    pub cycle_start: u32,
+}
+
+impl GeneratorOrbit {
+    pub fn prefix(&self) -> &[u32] {
+        &self.states[..self.cycle_start as usize]
+    }
+
+    pub fn cycle(&self) -> &[u32] {
+        &self.states[self.cycle_start as usize..]
+    }
+}
+
 #[derive(Debug, PartialEq, Eq)]
 pub enum SeparatorStreamError<E> {
     Compilation(ObservationalError),
@@ -1983,6 +2002,50 @@ impl CompiledObservation {
         self.generator_transitions
             .get((record.transition_start + local) as usize)
             .copied()
+    }
+
+    /// Compute the exact preperiod and period of a repeated type-preserving
+    /// generator. The transition loop is iterative and allocation-free.
+    pub fn repeated_generator_orbit(
+        &self,
+        start_class: u32,
+        generator: u32,
+    ) -> Result<GeneratorOrbit, ObservationalError> {
+        let Some(record) = self.generator_records.get(generator as usize).copied() else {
+            return Err(ObservationalError::UnknownGenerator { generator });
+        };
+        if record.source_sort != record.target_sort {
+            return Err(ObservationalError::GeneratorNotEndomorphism { generator });
+        }
+        let Some(range) = self.class_ranges.get(record.source_sort as usize).copied() else {
+            return Err(ObservationalError::CompiledShape);
+        };
+        if !range.contains(start_class) {
+            return Err(ObservationalError::CompiledShape);
+        }
+
+        let mut first_seen = vec![u32::MAX; range.len as usize];
+        let mut states = Vec::with_capacity(range.len as usize);
+        let mut current = start_class;
+        loop {
+            if !range.contains(current) {
+                return Err(ObservationalError::CompiledShape);
+            }
+            let local = (current - range.start) as usize;
+            let seen = first_seen[local];
+            if seen != u32::MAX {
+                return Ok(GeneratorOrbit {
+                    states: states.into_boxed_slice(),
+                    cycle_start: seen,
+                });
+            }
+            first_seen[local] =
+                u32::try_from(states.len()).map_err(|_| ObservationalError::Overflow)?;
+            states.push(current);
+            current = self
+                .transition(generator, current)
+                .ok_or(ObservationalError::CompiledShape)?;
+        }
     }
 
     /// Return a shortest typed generator word from `start_class` to

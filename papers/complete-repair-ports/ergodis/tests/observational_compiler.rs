@@ -348,6 +348,26 @@ fn generator_restriction_builds_the_exact_context_family_quotient() {
     assert!(presentation.restrict_generators(&[2]).is_err());
 }
 
+#[test]
+fn repeated_generator_reports_exact_preperiod_and_cycle() {
+    let presentation = FinitePresentation::new(
+        [4],
+        [0, 1, 2, 3],
+        [GeneratorSpec {
+            source_sort: 0,
+            target_sort: 0,
+            transitions: [1, 2, 3, 2].into(),
+        }],
+    )
+    .unwrap();
+    let compiled = compile_observational(&presentation).unwrap();
+    let orbit = compiled.repeated_generator_orbit(0, 0).unwrap();
+    assert_eq!(orbit.states.as_ref(), [0, 1, 2, 3]);
+    assert_eq!(orbit.prefix(), [0, 1]);
+    assert_eq!(orbit.cycle(), [2, 3]);
+    assert!(orbit.states.len() <= compiled.class_ranges()[0].len as usize);
+}
+
 type Profile = [u8; 3];
 
 fn resource_profiles() -> Vec<Profile> {
