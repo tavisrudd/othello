@@ -54,7 +54,8 @@ pub use contextual::{
     PlannedContextCost, RankBoundedContextCache, RankOneProbeCache,
 };
 pub use family_response::{
-    compile_minima_family_responses, FamilyResponseError, FamilyResponseTable,
+    compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
+    FamilyResponseTable,
 };
 pub use field::{FieldError, FiniteField, Gf4, Prime};
 pub use group_action::{

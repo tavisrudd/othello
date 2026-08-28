@@ -414,6 +414,22 @@ impl FinitePresentation {
         })
     }
 
+    /// Replace observations while moving all context storage unchanged.
+    pub fn into_reobserved(
+        mut self,
+        observations: impl Into<Box<[u32]>>,
+    ) -> Result<Self, ObservationalError> {
+        let observations = observations.into();
+        if observations.len() != self.observations.len() {
+            return Err(ObservationalError::ObservationCount {
+                expected: self.observations.len(),
+                actual: observations.len(),
+            });
+        }
+        self.observations = observations;
+        Ok(self)
+    }
+
     pub fn generators(&self) -> &[GeneratorRecord] {
         &self.generators
     }

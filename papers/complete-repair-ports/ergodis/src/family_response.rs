@@ -22,6 +22,14 @@ pub struct FamilyResponseTable {
     unique_responses: Box<[u32]>,
 }
 
+/// Distinct response payloads after moving state observation IDs elsewhere.
+#[derive(Clone, Debug)]
+pub struct FamilyResponseDictionary {
+    family_count: u32,
+    response_count: u32,
+    unique_responses: Box<[u32]>,
+}
+
 impl FamilyResponseTable {
     pub fn observations(&self) -> &[u32] {
         &self.observations
@@ -40,13 +48,58 @@ impl FamilyResponseTable {
     }
 
     pub fn response(&self, observation: u32) -> Option<&[u32]> {
-        if observation as usize >= self.response_count() {
-            return None;
-        }
-        let width = self.family_count as usize;
-        let start = (observation as usize).checked_mul(width)?;
-        self.unique_responses.get(start..start + width)
+        response(
+            &self.unique_responses,
+            self.family_count,
+            self.response_count() as u32,
+            observation,
+        )
     }
+
+    pub fn into_parts(self) -> (Box<[u32]>, FamilyResponseDictionary) {
+        let response_count = self.response_count() as u32;
+        (
+            self.observations,
+            FamilyResponseDictionary {
+                family_count: self.family_count,
+                response_count,
+                unique_responses: self.unique_responses,
+            },
+        )
+    }
+}
+
+impl FamilyResponseDictionary {
+    pub fn family_count(&self) -> u32 {
+        self.family_count
+    }
+
+    pub fn response_count(&self) -> usize {
+        self.response_count as usize
+    }
+
+    pub fn response(&self, observation: u32) -> Option<&[u32]> {
+        response(
+            &self.unique_responses,
+            self.family_count,
+            self.response_count,
+            observation,
+        )
+    }
+}
+
+fn response(
+    responses: &[u32],
+    family_count: u32,
+    response_count: u32,
+    observation: u32,
+) -> Option<&[u32]> {
+    let width = family_count as usize;
+    if observation >= response_count {
+        return None;
+    }
+    let start = (observation as usize).checked_mul(width)?;
+    responses.get(start..start + width)
 }
 
 /// Compile exact application observations
@@ -160,9 +213,11 @@ mod tests {
         assert_eq!(table.response(table.observations()[0]), Some(&[2, 9][..]));
 
         let base = FinitePresentation::new([3], [0, 1, 2], []).unwrap();
-        let observed = base.reobserve(table.observations().to_vec()).unwrap();
+        let (observations, dictionary) = table.into_parts();
+        let observed = base.into_reobserved(observations).unwrap();
         let compiled = compile_observational(&observed).unwrap();
         assert_eq!(compiled.state_classes()[0], compiled.state_classes()[2]);
+        assert_eq!(dictionary.response_count(), 2);
     }
 
     #[test]
@@ -195,5 +250,10 @@ mod tests {
         assert_eq!(table.response_count(), 1);
         assert_eq!(table.response(0), Some(&[][..]));
         assert_eq!(table.response(1), None);
+        let (observations, dictionary) = table.into_parts();
+        assert_eq!(&*observations, &[0, 0]);
+        assert_eq!(dictionary.response_count(), 1);
+        assert_eq!(dictionary.response(0), Some(&[][..]));
+        assert_eq!(dictionary.response(1), None);
     }
 }
