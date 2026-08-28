@@ -3788,8 +3788,17 @@
       "last": 993,
       "purpose": "compress Appendix B to its two-uniform rigidity and local-stability core",
       "sequence": 421
+    },
+    {
+      "count": 1,
+      "first": 994,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 994,
+      "purpose": "context-clean cold referee read of the 34-page Appendix-B-compressed paper",
+      "sequence": 422
     }
   ],
-  "next_id": 994,
+  "next_id": 995,
   "schema": "codex-task-id-allocations-v1"
 }
