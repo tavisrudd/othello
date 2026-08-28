@@ -956,16 +956,29 @@ not a replacement for the universal switch.
 
 ## 9. Boundary and next gate
 
-The load-bearing next step is either the universal split-switch assertion
-after (55), or alternatively a bounded circuit-exchange theorem proving (61).
-The former simultaneously covers the dense stratum and every residual Borel
-normal form; the latter could bypass those coordinates entirely.  The earlier
+The four-plane pencil through the removed affine line now supersedes the
+matrix-nonsingularity part of the universal switch after (55): for every
+syndrome, a suitable pair has at least two nonsingular containing planes.
+The exact proof and quartic resultant gate are in
+`c973-2026-08-27-gf27-four-plane-switch-pencil.md`.  The load-bearing next
+step is therefore only the split-and-collision assertion for one of those
+four pencil values, or alternatively a bounded circuit-exchange theorem
+proving (61).  The latter could bypass the switch coordinates entirely.  The earlier
 three-line tower (5)--(11), the three-point `z8` intersection (37), and the
 explicit boundary products remain independent audits, but none needs to be
 the primary closure route.
 
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
+
+The collision language in the first version of the pencil note was too
+strong.  If a replacement root is `x1` or `x2`, it retains a point deleted
+before forming `Q` and is admissible; only a repeated root or one of the seven
+roots of `Q` is a collision.  The two corresponding discriminant-square
+sections are the dense one-point-switch branch, not terms to subtract from a
+character count.  The carrier note also gives the exact dual reformulation:
+split locator Hankel lines must block all hyperplanes of `PG(6,27)`, and one
+realized line spread in a `PG(3,27)` would suffice.
 
 ## 10. `ej` + `tt` ledger
 
@@ -986,6 +999,7 @@ certificate supports this reduction.
 | Does one construction cover multiple Borel charts? | yes: the affine-plane locator (38) closes every `(z2,z4)=(0,0)` syndrome and the nonsquare-ratio half of every nonzero pair, independently of the other boundary coordinates | retain only the two coordinate axes and square-ratio half for transverse analysis |
 | What replaces the cover tower on the complementary boundary ratio? | switching two points of an affine plane solves both Hankel equations uniquely | prove the quadratic (45) splits away from the seven retained plane points |
 | Does the two-point switch extend off the Borel boundary? | yes; the quotient recurrence gives the general matrix (52), and (53)--(54) prove a nonsingular pair exists in every fixed plane direction | prove only split and collision for one such pair |
+| Can matrix nonsingularity be compressed further? | yes; the four planes through the removed affine line form the pencil `P_kappa=R(R^2-kappa)`, and a suitable pair has at least two nonsingular pencil values for every syndrome | discard the fixed-direction coset proof from the main route; prove the quartic split/collision gate |
 | Is the seven-coordinate carrier an intrinsic finite-geometric object? | yes; Lucas and the osculating-nucleus criterion identify it with the eighth nucleus of the degree-ten normal rational curve | prove the equivalent nine-affine-secant incidence statement in Section 8 |
 | What is the shortened polynomial model? | carrier classes are exactly the consecutive tails `t^18,...,t^24` modulo degree at most 15 | prove that every tail has an 18-point agreement set |
 | Do minimum subline circuits alone prove radius nine? | no; they classify only the weight-four layer, and bounded affine circuit decomposition is still open | require a three-circuit support theorem, not mere generation |

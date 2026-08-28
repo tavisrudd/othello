@@ -463,6 +463,24 @@ bounded circuit-decomposition theorem: three suitably incident subline
 circuits, or a controlled circuit exchange from the plane relation (24),
 must realize every carrier class with at most nine finite support points.
 
+There is a sharp counting obstruction to the most obvious version.  The 117
+subline circuits through infinity correspond to the affine `F_3`-lines of
+`F_27`.  Normalize their infinity coefficients to one.  A sum of three such
+circuits cancels infinity only when its three coefficients sum to zero,
+leaving one projective coefficient parameter.  Hence all such triples produce
+at most
+
+\[
+                   {117\choose3}(27+1)=7,283,640         \tag{24a}
+\]
+
+projective carrier directions, before accounting for repetitions, whereas
+`PG(6,27)` has 402,321,277 points.  This family cannot prove (23).
+Geometrically, a fixed nine-point support meets the carrier in a `P^4`, but
+the canonical sum of its three line circuits explores only a `P^2` slice.
+Any viable circuit proof must retain the full five-dimensional outer-
+dependence space rather than only the distinguished circuit sum.
+
 ## 6. Red-team verdict on the landed compression
 
 ### Main-spine material
@@ -480,8 +498,10 @@ must realize every carrier class with at most nine finite support points.
 - The GF(27) three-line tower is an exact audit, not the preferred proof.
 - The upper-Borel slice `z_3=z_6=0` is a boundary of that chosen chart and is
   only upper-Borel stable; it is not an intrinsic boundary of the carrier.
-- The affine-plane quotient identities and fixed-direction matrix-
-  nonsingularity lemma are structural, but they stop before root splitting.
+- The affine-plane quotient identities are structural.  The GF(27) fixed-
+  direction matrix lemma is now superseded by the four-plane pencil through
+  the removed affine line, which proves universal nonsingularity and stops
+  only at root splitting and collision.
 - The denominator-free discriminant and its norm form sharpen the remaining
   switch gate but do not supply abundance.
 
@@ -511,6 +531,15 @@ must realize every carrier class with at most nine finite support points.
 - The coding application, recursive containment, simultaneous escape, and
   pointed secant saturation are separate claims and retain their own
   literature burden.
+
+The same paper's Borel-normalized arc argument does not supply the missing
+certificate-free GF(27) step.  Its Theorem 3.6 proves the twisted-cubic-track
+statement structurally only in the stated `et>4` range; the text immediately
+after the proof says that the orders 27 and 81 were checked with MAGMA.
+Moreover that theorem concerns the six-coordinate
+`(1,1,sigma)`-Veronese track, not the hyperplane-blocking family (25b).
+Thus it is useful precedent for the normalization strategy, but importing its
+GF(27) endpoint would restore a finite computation rather than prove (15).
 
 ## 7. Paper-successor compression map
 
@@ -576,9 +605,131 @@ promising routes are:
 The third route would turn the existing switch algebra into quotient
 geometry; the first two could bypass the switch restriction entirely.
 
+### 8.1 Exact dual blocking-line formulation
+
+There is a sharper syndrome-independent form of the target.  For a monic
+degree-nine locator
+
+\[
+                        g(t)=\sum_{i=0}^9g_it^i
+\]
+
+put
+
+\[
+ a_g=(g_1,g_2,\ldots,g_7),\qquad
+ b_g=(g_2,g_3,\ldots,g_8)\in C_9^*,                   \tag{25a}
+\]
+
+and let \(\ell_g=\mathbf P\langle a_g,b_g\rangle\), with the evident
+point interpretation if the rank drops.  The two equations (13) say exactly
+
+\[
+             z\in\langle\Gamma_{10}(S)\rangle
+       \quad\Longleftrightarrow\quad
+             \ell_g\subset z^\perp,                  \tag{25b}
+\]
+
+where \(g=\prod_{x\in S}(t-x)\).  Consequently (15) is equivalent to the
+following finite-geometric statement:
+
+> The lines \(\ell_g\) belonging to split squarefree affine nonics form a
+> hyperplane-blocking family in \(\mathbf P(C_9^*)=\mathrm{PG}(6,27)\):
+> every hyperplane contains at least one of them.
+
+This duality removes the syndrome and all switch coordinates from the
+statement.  It also gives a particularly economical sufficient lemma.  If
+the split-locator lines contain a line spread of some
+\(\Sigma\cong\mathrm{PG}(3,27)\subset\mathrm{PG}(6,27)\), then (15) holds.
+A line spread of \(\Sigma\) has only
+
+\[
+                              27^2+1=730               \tag{25c}
+\]
+
+lines.  Every hyperplane of \(\mathrm{PG}(6,27)\) meets \(\Sigma\) in at
+least a plane.  Every plane of \(\Sigma\) contains exactly one spread line:
+if it contained none, the \(27^2+1\) spread lines would contribute only
+\(27^2+1\) intersection points, fewer than the \(27^2+27+1\) points of the
+plane; and two contained spread lines cannot be disjoint inside a plane.
+Thus (25b) proves the claim.
+
+The number in (25c) is optimal for any blocking-line package, without a
+spread hypothesis.  In \(\mathrm{PG}(6,q)\) there are
+
+\[
+ H_6=q^6+q^5+q^4+q^3+q^2+q+1
+\]
+
+hyperplanes, and one line is contained in
+
+\[
+ H_4=q^4+q^3+q^2+q+1
+\]
+
+of them.  Hence an incidence count gives
+
+\[
+ |\mathcal L|\ge \left\lceil\frac{H_6}{H_4}\right\rceil
+ =\left\lceil q^2+\frac{q+1}{H_4}\right\rceil=q^2+1.   \tag{25c'}
+\]
+
+An embedded line spread therefore realizes the smallest possible
+syndrome-independent proof package of this type.
+
+The spread package is not yet constructed.  It is nevertheless a strict
+compression of the desired certificate-free endpoint: instead of selecting
+a locator separately for 402,321,277 projective syndromes, it is enough to
+realize one structured set of 730 Hankel lines by split affine nonics.  The
+overlap in (25a) is load-bearing; an arbitrary abstract spread cannot be
+imported without proving that its lines have consecutive-window form and
+split locators.
+
+The most obvious coordinate realization is impossible for a structural
+reason.  If both windows (25a) lie in the coordinate four-space supported in
+their first four positions, then
+
+\[
+             g=t^9+at^4+bt^3+ct^2+dt+e.               \tag{25d}
+\]
+
+If this monic polynomial is split and squarefree over \(K=\mathbf F_{27}\),
+then \(g\mid t^{27}-t\).  Write the lower part of (25d) as \(h\).  Modulo
+\(g=t^9+h\), the divisibility condition is
+
+\[
+                         h^3+t\equiv0\pmod g.          \tag{25e}
+\]
+
+Reducing the terms \(t^{12}=t^3t^9\) and \(t^9\), the remainder is
+
+\[
+ -a^3t^3h-b^3h+c^3t^6+d^3t^3+e^3+t.                  \tag{25f}
+\]
+
+Its \(t^7\)-coefficient is \(-a^4\), so \(a=0\); its resulting
+\(t^6\)-coefficient is \(c^3\), so \(c=0\).  The three remaining
+coefficients give
+
+\[
+             d^3=b^4,\qquad b^3d=1,
+             \qquad e^3=b^3e.                          \tag{25g}
+\]
+
+Thus \(b\ne0\), \(b^{13}=1\), \(d=b^{-3}\), and
+\(e(e^2-b^3)=0\).  Conversely these conditions make (25e) vanish; the
+derivative \(d\) is nonzero, so the polynomial is squarefree and all nine
+roots lie in \(K\).  The 13 choices of \(b\) and three choices of \(e\) are
+exactly the 39 affine-plane locators.  Their Hankel lines depend only on
+\(b,d\), hence give only 13 lines in a coordinate plane, not a 730-line
+spread.  Any spread proof must therefore use a genuinely non-coordinate
+four-space (or a different blocking-line family); a low-coefficient
+perturbation of the affine planes cannot work.
+
 ## 9. Secondary extension
 
-The fixed-direction matrix lemma itself extends beyond GF(27).  Let
+Although it is no longer the preferred GF(27) proof, the fixed-direction
+matrix lemma itself extends beyond GF(27).  Let
 `K/F_3` have degree `m>=3`, let `H` be a trace hyperplane, let `phi` be a
 nonzero polynomial of degree at most six, and fix `Z in K`.  On the affine
 cosets of `gamma H`, some pair has

@@ -258,6 +258,31 @@ one of the 13 norm-minus-one directions, with at least ten nonexceptional
 directions and exactly two residual trace bits.  The exact split criterion,
 and the hostile warning that the family generically misses `z2=0`, are in
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-parallel-line-trace-gate.md`.
+The universal switch has compressed again.  For a removed affine `F3`-line,
+the four containing planes have locators
+`P_kappa=R(R^2-kappa)`, where the four parameters satisfy one quartic
+`kappa^4+a kappa+b=0`.  The switch determinant has degree at most two in
+`kappa`.  A suitable removed pair gives at least two nonsingular planes for
+every carrier syndrome, including `z2=0`; this supersedes the fixed-direction
+coset argument.  After clearing denominators, splitting is one degree-at-most-
+four discriminant on the same quartic pencil, and the off-line retained sets
+partition the 24 points outside the common line.  The sole switch gate is now
+quartic splitting plus collision, recorded in
+`notes/reed-solomon-tasks/c973-2026-08-27-gf27-four-plane-switch-pencil.md`.
+The red-team pass corrects the collision ledger: `n1=0` and `n2=0` retain
+one of the two deleted points and are admissible rational sections, not
+collisions.  On `Z!=0` they are exactly one-point switches, with forced
+incoming point `y=R/Z` and degree-seven gate
+`(x-y)phi(x)+Z=0`; only the other seven plane points and repeated roots are
+bad.  Dually, every split nonic defines the Hankel line spanned by its two
+overlapping coefficient windows in `PG(6,27)^dual`, and nucleus saturation is
+exactly the assertion that these lines block every hyperplane.  Realizing a
+line spread of one `PG(3,27)` would suffice with only 730 syndrome-independent
+locators.  The obvious coordinate four-space cannot do this: divisibility by
+`t^27-t` proves that every split nonic `t^9+a t^4+b t^3+c t^2+d t+e` is one
+of the 39 affine-plane locators, yielding only 13 Hankel lines.  Thus any
+spread proof must be genuinely non-coordinate; this is a structural route,
+not a completed GF(27) proof.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-carrier-nucleus-compression.md`,
