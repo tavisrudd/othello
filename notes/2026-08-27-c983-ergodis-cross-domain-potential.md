@@ -230,6 +230,13 @@ bounds, an effective domain-to-interface compiler, exact witnesses, and
 cross-domain evidence.  Unrestricted coordinate-selector contexts distinguish
 every raw kernel entry, so they admit no nontrivial semantic quotient.
 
+The first exact theorem/backend design is
+`notes/2026-08-27-c983-observation-relative-compilation.md`.  It proves the
+finite ranked observational-algebra quotient and separator-refinement core,
+derives bounded tropical weighted-tree evaluation as a classical capability
+corollary, and isolates the witness obstruction: value minimization needs a
+separate provenance side-car or a proved witness-lift law.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary

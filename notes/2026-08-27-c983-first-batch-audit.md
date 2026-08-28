@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY EIGHT-SOURCE PASS; ONE SOURCE READ AT FULL
-TEXT AND SEVEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY NINE-SOURCE PASS; ONE SOURCE READ AT FULL
+TEXT AND EIGHT AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
 
@@ -118,12 +118,16 @@ semantic quotient.
 
 The first pair should be deliberately modest and hostile to overclaiming.
 
-1. **Tropical weighted automaton control.**  Use a small determinizable
-   min-plus weighted automaton and compile normalized residual response states.
-   Compare raw run/subset states, residual functions, and a minimal exact
-   realization; retain a distinguishing word or optimal run as witness.  This
-   tests the automata/minimal-realization bridge where the prior theory is
-   strongest.
+1. **Observation-relative weighted tree automaton control.**  Use a small
+   min-plus weighted tree automaton whose full value image is not assumed
+   finite, apply an exact finite observation such as a nonnegative radius
+   truncation, and compile the resulting finite bottom-up response algebra.
+   Compare raw run states, valuation vectors, the reachable algebra, and its
+   contextual quotient; retain a distinguishing tree context and optimal run
+   as witnesses.  Boolean string/tree determinization and bounded tropical
+   string behavior become control special cases.  This tests multiary
+   branching where the prior theory is strongest and its finiteness boundary
+   is now explicit.
 2. **Symmetric weighted resource allocation.**  Use a finite repeated-machine
    assignment or scheduling component whose syntactic boundary labels are
    machine identities but whose allowed future jobs and objective are
@@ -251,6 +255,40 @@ positive-activity/zero-closure separator bound for a useful weighted-tree class
 or retreat to user-supplied finite separators.  The 2026 value-generation
 theorem rules out generic finiteness from bi-local finiteness alone.
 
+### Weighted-tree cheap-test result
+
+The obvious full-semantics determinization route is pre-empted precisely.
+Fülöp--Kószó--Vogler define the Nerode algebra of a weighted tree automaton,
+construct an equivalent crisp-deterministic automaton when that algebra is
+finite, give algorithms under sufficient finiteness hypotheses, and prove
+undecidability of general crisp-determinizability and Nerode-algebra finiteness.
+Therefore C983 must not claim a new weighted-tree Nerode construction.
+
+The useful step past it is **observation-relative exact compilation**.  For a
+nonnegative tropical automaton and radius `r`, the truncation
+
+```text
+T_r = {0,1,...,r,infinity},
+a plus_r b = min(r+1, a+b),
+a min_r b  = min(a,b)
+```
+
+is a finite semiring quotient when `r+1` is represented by `infinity`.
+Bottom-up evaluation gives each subtree a vector in `T_r^Q`, one coordinate per
+original state, so at most `(r+2)^|Q|` raw deterministic states exist.  The
+reachable subalgebra can then be minimized by contextual partition refinement.
+This is an application corollary of finite-Nerode/crisp-determinization theory,
+not a new automata theorem, but it expands Ergodis from string-like min-plus
+elimination to ranked branching and produces exact bounded values,
+distinguishing contexts, and optimal-run provenance.
+
+The potential theoretical extension is to replace a global algebra quotient by
+a **typed restricted-context observation** that is compositional only for the
+admissible future grammar.  This can remain finite even when full semantics and
+the full Nerode algebra are infinite.  Its burden is to prove closure of the
+restricted grammar and an effective separator bound; merely applying a finite
+semiring homomorphism is classical.
+
 ## General theorem schema v0
 
 Let `A` be a typed category or multicategory of components, let `V` be a finite
@@ -345,6 +383,15 @@ The read depths below are unconditional and describe this preliminary pass.
    read the introduction and contribution map.  It unifies reachability and
    observability minimization through categorical dualities and extends a
    field-weighted result to principal ideal domains.
+9. Zoltan Fülöp, David Kószó, and Heiko Vogler,
+   *Crisp-determinization of Weighted Tree Automata over Strong Bimonoids*.
+   **Read depth: partial** — published DMTCS/arXiv v3 (2021), cache key
+   `arXiv:1912.02660`, SHA-256
+   `db7648afb21f4767c5d1b6e607eed90eccf7db8f2a061a17a8f5b415b47d7e12`;
+   read the abstract and Section 1, including its complete contribution map.
+   It constructs crisp-deterministic WTA from finite Nerode algebras or finite-
+   order hypotheses, gives algorithms, and proves the relevant unrestricted
+   finiteness and determinization questions undecidable.
 
 ## Coverage gaps and next search
 
