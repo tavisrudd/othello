@@ -713,6 +713,27 @@ papers/complete-repair-ports/ergodis/scripts/check-contextual-rank-map-evidence.
 - rank-map checker: `f25a412055b9743199785cc4a034f942ee081b84151009e395ac3ebfdc4ef3ad`, 762 bytes;
 - rank-map TSV: `91cf18bdcf19b25dd6c5f01bcbeaee6e154922a1b32f8627974857b00729fe3d`, 417 bytes.
 
+`perf record` on the hoisted kernel attributes 50.29% of sampled cycles to
+coefficient-label construction and 14.85% to generic `CostTable` lookup.
+Commit `f521272bf` therefore lazily compiles small finite label spaces to a
+dense exact cost directory for explicit cached execution.  A `u64` sentinel
+keeps `u32::MAX` available as a real cost; equal inner/target table objects
+share the directory, admission is capped at 262,144 labels, and
+memory-budgeted `Auto` execution retains the prior allocation model.
+
+Seven paired CPU-2 rounds against `c11ce2cc3` improve cold build-and-query from
+11,359 ns to 9,321 ns (1.219x), with median peak RSS 10,804 versus 11,680 KiB.
+Against the original short-protocol baseline, the combined rank-map and dense
+directory changes are 2.288x faster.  The existing rank-map A/B driver produced
+the TSV; the dense checker uses a 1.10x time and 1.15x RSS gate.
+
+```sh
+papers/complete-repair-ports/ergodis/scripts/check-contextual-dense-cost-evidence.sh
+```
+
+- dense-cost checker: `5c005b6cf06d7c116e5147eb14819f87a776c1b0b6bcc0deed9f6583efee4c5b`, 757 bytes;
+- dense-cost TSV: `892b58ccaf095d78d6cb637b24ffcab2f36dcf257ac2d9ae60eb302c3f7be6d7`, 410 bytes.
+
 The complete theorem-to-compiler work order, classical-corollary framing, and
 negative boundaries are recorded in
 `notes/2026-08-28-c985-ergodis-portfolio-theorem-leverage.md`.

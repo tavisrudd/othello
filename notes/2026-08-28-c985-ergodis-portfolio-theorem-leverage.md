@@ -107,6 +107,16 @@ allocation-free fallback.  On the existing binary rank-2 cold build-and-query
 benchmark this reduces the seven-round median from 21,327 ns to 11,391 ns
 (1.872x), with identical 255 full-rank candidates and answers.
 
+Profiling the hoisted kernel then attributed 50.3% of cycles to coefficient
+label formation and another 14.9% to generic `CostTable` hash lookup.  C985 now
+lazily compiles small finite label spaces into a dense cost directory on
+explicit cached execution.  Missing labels use a widened sentinel, so every
+`u32` cost remains representable.  The directory is capped at 262,144 labels,
+shares storage when inner and target tables are the same object, and is not
+enabled by memory-budgeted `Auto` planning.  This improves the full-rank-cache
+median from 11,359 ns to 9,321 ns (1.219x); the two theorem/compiler reductions
+together are 2.288x faster than the original short-protocol baseline.
+
 The larger remaining win is to store exact-rank envelopes once and aggregate
 them upward along subspace restrictions, rather than reevaluating lower-rank
 maps inside every higher-rank context.  A good implementation should combine:
