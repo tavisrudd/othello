@@ -110,7 +110,7 @@ pub fn quotient_presentation_by_orbits(
     }
     let orbit_count = partition.representatives.len();
     let mut orbit_sorts = vec![u32::MAX; orbit_count];
-    let mut sort_orbits = vec![Vec::new(); presentation.sorts().len()];
+    let mut sort_orbit_counts = vec![0_usize; presentation.sorts().len()];
     for (sort, range) in presentation.sorts().iter().copied().enumerate() {
         for state in range.start..range.start + range.len {
             let orbit = partition.point_orbits[state as usize];
@@ -119,7 +119,7 @@ pub fn quotient_presentation_by_orbits(
             };
             if *orbit_sort == u32::MAX {
                 *orbit_sort = sort as u32;
-                sort_orbits[sort].push(orbit);
+                sort_orbit_counts[sort] += 1;
             } else if *orbit_sort != sort as u32 {
                 return Err(OrbitQuotientError::Sort { orbit });
             }
@@ -139,6 +139,13 @@ pub fn quotient_presentation_by_orbits(
     }
     if orbit_sorts.contains(&u32::MAX) {
         return Err(OrbitQuotientError::OrbitIndex);
+    }
+    let mut sort_orbits: Vec<_> = sort_orbit_counts
+        .into_iter()
+        .map(Vec::with_capacity)
+        .collect();
+    for (orbit, &sort) in orbit_sorts.iter().enumerate() {
+        sort_orbits[sort as usize].push(orbit as u32);
     }
 
     let mut orbit_states = vec![u32::MAX; orbit_count];
