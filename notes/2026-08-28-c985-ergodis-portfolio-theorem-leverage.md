@@ -117,6 +117,15 @@ enabled by memory-budgeted `Auto` planning.  This improves the full-rank-cache
 median from 11,359 ns to 9,321 ns (1.219x); the two theorem/compiler reductions
 together are 2.288x faster than the original short-protocol baseline.
 
+The dense path now fuses label formation with cost lookup instead of writing
+and rereading `block_data`; its paired median falls from 9,308 ns to 5,640 ns
+(1.650x) with flat RSS.  A compile-time characteristic-2 branch then replaces
+generic field products by XOR row accumulation for binary subspace projection
+and labels, improving 5,635 ns to 4,542 ns (1.241x).  Other fields retain the
+generic kernel.  Multiplying the four paired stage ratios gives a 4.67x
+cumulative cold-path speedup; a full Criterion baseline/final comparison gives
+22.053 us versus 4.515 us (4.88x).
+
 The larger remaining win is to store exact-rank envelopes once and aggregate
 them upward along subspace restrictions, rather than reevaluating lower-rank
 maps inside every higher-rank context.  A good implementation should combine:

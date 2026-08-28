@@ -734,6 +734,30 @@ papers/complete-repair-ports/ergodis/scripts/check-contextual-dense-cost-evidenc
 - dense-cost checker: `5c005b6cf06d7c116e5147eb14819f87a776c1b0b6bcc0deed9f6583efee4c5b`, 757 bytes;
 - dense-cost TSV: `892b58ccaf095d78d6cb637b24ffcab2f36dcf257ac2d9ae60eb302c3f7be6d7`, 410 bytes.
 
+Commit `d46b17ab3` fuses label formation and dense lookup.  When every required
+table has an admitted dense directory, the kernel computes the mixed-radix
+label index directly and never materializes or rereads `block_data`; the exact
+sparse/hash fallback is unchanged.  Seven paired rounds improve 9,308 ns to
+5,640 ns (1.650x), with median peak RSS 11,816 versus 11,856 KiB.
+
+Commit `d251f1cc3` then specializes the field-order-two projection and label
+kernels to XOR row accumulation.  The branch is constant after monomorphization
+and all other fields retain generic finite-field arithmetic.  Seven paired
+rounds improve 5,635 ns to 4,542 ns (1.241x), with median peak RSS 10,812 versus
+11,804 KiB.  Across the four paired rank-kernel stages, the multiplied median
+speedup is 4.67x; full Criterion medians move from 22.053 us to 4.515 us
+(4.88x).
+
+```sh
+papers/complete-repair-ports/ergodis/scripts/check-contextual-fused-dense-evidence.sh
+papers/complete-repair-ports/ergodis/scripts/check-contextual-binary-evidence.sh
+```
+
+- fused-dense checker: `533b332518851ef7c07faa1de023470fdd7cf2767ee9afbf4af2fa30ae31d865`, 759 bytes;
+- fused-dense TSV: `3c4e5e97b2613901fd9594304fbca7c686e43ce891d8e7665339a4f858c51be6`, 404 bytes;
+- binary checker: `2054a4d17a56a7fba5680bf56d1e0e084e217dac72678d4b3dbf2a2e69ae553e`, 757 bytes;
+- binary TSV: `4cc0e9194a7ac9c190b76b64034b5acee6a95e7207d31fd9f747527eb076b94c`, 403 bytes.
+
 The complete theorem-to-compiler work order, classical-corollary framing, and
 negative boundaries are recorded in
 `notes/2026-08-28-c985-ergodis-portfolio-theorem-leverage.md`.
