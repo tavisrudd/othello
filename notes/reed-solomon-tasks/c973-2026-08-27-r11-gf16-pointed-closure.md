@@ -1,7 +1,15 @@
 # C973 checkpoint — pointed GF(16) R11 Lucas closure
 
 **Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** exact normalized
-quotient and independent replay complete; manuscript frozen
+quotient and independent replay complete; **quotient rebuilt 2026-08-28 after
+external review found the wrong group action — see "Review repair" below**;
+manuscript frozen
+
+> **Reading order.**  Every count in §2--§4 below is the superseded 2026-08-27
+> version.  Superseded figures are tagged `[corrected 2026-08-28]` inline and
+> the corrected quotient, tables, and hashes are in the closing
+> **Review repair (2026-08-28)** section.  The result of §1 is unchanged and is
+> now supported by an exhaustive proof rather than by the 2026-08-27 quotient.
 
 ## 1. Result
 
@@ -58,17 +66,32 @@ The carrier has
 points.  Closing them under the two displayed generators gives exactly 317
 orbits.  For each canonical representative the certificate stores a finite
 split support, hence a locator avoiding infinity.  The degree distribution is
+`[corrected 2026-08-28: the orbit count 317 is right but this partition was
+computed with the wrong action; the corrected distribution is 315 of degree
+nine and 2 of degree eight]`
 
-| locator degree | pointed orbits |
+| locator degree | pointed orbits `[corrected 2026-08-28]` |
 |---:|---:|
 | 9 | 307 |
 | 8 | 10 |
 
 The largest public simultaneous/classifier search count stored in a
-certificate is 856,832, below the fixed limit 2,000,000.  The final exceptional
-degree-eight support is found by deterministic enumeration of finite supports;
-the independent replay checks it directly from the root polynomial and
-Hankel equations.
+certificate is 856,832 `[corrected 2026-08-28: 333,918]`, below the fixed limit
+2,000,000.  The final exceptional degree-eight support is found by
+deterministic enumeration of finite supports; the independent replay checks it
+directly from the root polynomial and Hankel equations.
+
+**Convention for a degree-deficient witness.**  A stored support of size
+`d < r-2 = 9` is a genuine degree-`d` apolar form: the replay holds it to the
+*full* system `iota_g f = 0` in `Gamma^(10-d)`, which is `11-d` equations, not
+to the two degree-nine equations.  It therefore certifies a coset
+representation on `d` finite evaluation points with no infinity column, and it
+pads to degree exactly nine by adjoining any further distinct finite points
+(`GF(16)` leaves eight spares after eight are used).  This is a different
+object from a degree-nine binary form that vanishes at infinity, which
+satisfies only two equations, carries infinity in its support, and is
+inadmissible for the pointed statement.  The GF(27) probe report's §4.4 rules
+out that second object; it does not bear on the degree-eight records here.
 
 Transport by `PGL2` proves the statement for every carrier syndrome and every
 prescribed projective root.
@@ -102,7 +125,10 @@ The tracked checksum gate is
  sha256sum -c c973-r11-gf16-pointed-quotient.sha256)
 ```
 
-| artifact | bytes | SHA-256 |
+`[corrected 2026-08-28: all three artifacts were replaced; the current hashes
+are in the Review repair section.]`
+
+| artifact | bytes | SHA-256 (superseded) |
 |---|---:|---|
 | generator | 12,029 | `38581660c2188e2735b3ea2143c5408ba2b95b3de701d744ca45be4abc1ab492` |
 | independent replay | 5,196 | `1481710ca836112dab6855d7f10c0451d77cd473887c929a06c5778cf456cf04` |
@@ -125,15 +151,18 @@ pointed obstruction.
 The `tt` pass challenged the apparent ten failures of the degree-nine route.
 Nine have public degree-eight locators and the tenth has a directly enumerated
 finite degree-eight locator.  Thus the failures were a degree-exactness
-artifact, not a new arithmetic family.
+artifact, not a new arithmetic family.  `[corrected 2026-08-28: on the
+corrected quotient there are two such orbits, not ten, and both are answered by
+the public classifier; the conclusion that they are a degree-exactness artifact
+is unchanged.]`
 
 ## Mystery ledger
 
 | mystery | status | exact next gate |
 |---|---|---|
-| Do degree-nine simultaneous locators cover every pointed orbit? | no; ten orbits require degree eight | settled by retaining all degrees at most `r-2` |
-| Is the apparent tenth failure a genuine pointed obstruction? | no; finite support `[1,2,3,4,7,9,11,12]` is an exact degree-eight locator | independently replayed Hankel equations |
-| Does GF(16) contain a new R11 modular split-free family? | no | exact 317-orbit pointed closure |
+| Do degree-nine simultaneous locators cover every pointed orbit? | no; ten orbits require degree eight `[corrected 2026-08-28: two orbits]` | settled by retaining all degrees at most `r-2` |
+| Is the apparent tenth failure a genuine pointed obstruction? | no; finite support `[1,2,3,4,7,9,11,12]` is an exact degree-eight locator `[corrected 2026-08-28: that support belonged to the superseded quotient; the two corrected degree-eight orbits are `e_7` with support `[8..15]` and `(0,0,1,1,8)` with support `[6..13]`]` | independently replayed Hankel equations |
+| Does GF(16) contain a new R11 modular split-free family? | no | exact 317-orbit pointed closure `[corrected 2026-08-28: the 317 orbits are now the true Borel orbits, and the statement is independently proved by exhaustion over all 69,905 carrier points]` |
 | Does the same evidence close R12? | yes for ordinary shallowness, by one-marker lifting | two-pointed abundance would be needed only for a pointed R12 statement |
 | Are GF(32) and GF(64) analogous? | open; the same Borel quotient is structurally available but not yet certified | extend the normalized quotient, not an ambient census |
 | What remains in characteristic three? | GF(27) remains open and its seven-dimensional carrier needs a different structural reduction | C973 mathematical continuation |
@@ -141,3 +170,117 @@ artifact, not a new arithmetic family.
 Vibe: strong local win—the first exceptional field disappears, and the same
 pointed certificate closes the next coherent binary level without any new
 manuscript or software surface.
+
+## Review repair (2026-08-28)
+
+An independent cold read (`c973-2026-08-28-review-coding.md`) found that the
+2026-08-27 quotient was taken by the wrong group.  The certificate has been
+rebuilt; the result of §1 is unchanged and is now proved by exhaustion as well.
+
+### What was wrong
+
+The generator and the replay both built their "upper Borel" matrices by calling
+C531's `action_entry` and restricting `source` and `target` to `e_3..e_7`.
+`action_entry` is the PGL_2 action on **degree-nine** binary forms — the R10
+syndrome space, whose carrier is `P<e_2,...,e_7>` — and the slice `e_3..e_7` is
+not invariant under it: under `[[1,1],[0,1]]` it sends `e_3` to `e_2 + e_3` and
+`e_7` to `e_2 + e_3 + e_6 + e_7`.  Truncating those images discards the `e_2`
+component and produces matrices that are not symmetries of the R11 Hankel
+system that the same scripts verify against.
+
+The R11 syndrome is a divided-power form of degree `n = r - 1 = 10`, so the
+correct translation action is `e_j -> sum_{i>=j} binom(i,j) a^(i-j) e_i`, and
+`<e_3,...,e_7>` is invariant because `binom(i,j) = 0 mod 2` for every
+`i in {8,9,10}` and `j in {3,...,7}`.  Measured on 1,200 `(syndrome, support)`
+pairs generated independently of the certificate:
+
+| translation matrix | equivariant with `t -> t+1` |
+|---|---|
+| degree-ten divided-power (correct) | 1200 / 1200 |
+| C531 truncated to `e_3..e_7` (used on 2026-08-27) | 9 / 1200 |
+
+Consequently the 317 stored representatives met only **75 of the 317** true
+Borel orbits, and valid projective transport from them reached **12,125 of the
+69,905** carrier points, i.e. 17.3 %.
+
+The mistake survived review because of a coincidence: the wrong group has
+**exactly the same number of orbits**, 317, even though it is not conjugate to
+the true Borel — the orbit-size multisets are `{1:3, 5:3, 15:17, 16:2, 80:3,
+240:289}` for the wrong group and `{1:1, 16:4, 20:1, 60:9, 80:5, 120:20,
+240:277}` for the true one.  **Never validate a change to this action against
+the number 317.**  Validate it against equivariance.
+
+### Why the conclusion survives
+
+The §1 statement was re-established without using the quotient at all.  For
+every subset `S` of `GF(16)` with `|S| <= 9`, solving the full apolarity system
+and accumulating the projective solutions covers **all 69,905 carrier points**
+(10,840 already at degree at most seven, 51,473 at degree at most eight, all
+69,905 at degree nine).  Every witness is finite, so this is exactly the
+pointed-at-infinity statement; since `<e_3,...,e_7>` is `PGL_2`-stable
+(`j -> 10-j` maps `{3,...,7}` to itself), projective transport gives pointed
+shallowness for every carrier syndrome and every prescribed projective root.
+The R12 lift of §1 is unaffected.  Separately, all 317 supports stored on
+2026-08-27 do satisfy the complete apolarity system: only the quotient and the
+transport step were wrong, never the individual witnesses.
+
+### The corrected quotient
+
+Regenerated with the degree-ten divided-power action.  The generator and the
+replay each now run a fail-closed, seeded 1,000-pair equivariance gate
+(`splitmix64`, seed `0xC973_2026_0828`) asserting
+`is_locator(z, S) == is_locator(z.M, phi(S))` for both generators, on a
+syndrome drawn from the kernel of `S` and on an independent uniform syndrome;
+the generator additionally asserts `binom(i,j) = 0 mod 2` for `i in {8,9,10}`,
+`j in {3,...,7}`.  The gate rejects the 2026-08-27 action.
+
+| quantity | 2026-08-27 (superseded) | 2026-08-28 (current) |
+|---|---:|---:|
+| projective carrier points | 69,905 | 69,905 |
+| marked orbits | 317 (wrong group) | 317 (true Borel) |
+| orbits with a verified finite witness | 317 | 317 |
+| orbits with no pointed locator | 0 | 0 |
+| degree-nine witnesses | 307 | 315 |
+| degree-eight witnesses | 10 | 2 |
+| largest stored search count | 856,832 | 333,918 |
+| equivariance pairs asserted | 0 | 1,000 |
+
+Witness provenance on the corrected quotient: 314 orbits from the public
+`simultaneous-locator --forbid-infinity`, 2 from the public `classify`
+locator certificate, and 1 from the generator's own deterministic two-point
+switch.  The two degree-eight orbits are `e_7` with support `[8,…,15]` and
+`(0,0,1,1,8)` with support `[6,…,13]`; both are affine three-space cosets and
+both satisfy the three-equation degree-eight apolarity system, per the
+convention stated in §2.
+
+### Replay
+
+```text
+nix shell nixpkgs#python3 -c python3 \
+  notes/reed-solomon-tasks/c973-r11-gf16-pointed-quotient.py --check
+nix shell nixpkgs#python3 -c python3 \
+  notes/reed-solomon-tasks/c973-r11-gf16-pointed-quotient-replay.py
+(cd notes/reed-solomon-tasks && \
+ sha256sum -c c973-r11-gf16-pointed-quotient.sha256)
+```
+
+The replay shares no code with the generator, does not call the toolkit,
+rebuilds the field and the action from scratch, recomputes the full orbit
+partition, requires the stored representatives to be exactly the orbit minima,
+and re-verifies every stored support against the complete apolarity system.
+Deterministic regeneration takes 17 s; the replay takes 1 s.
+
+| artifact | bytes | SHA-256 |
+|---|---:|---|
+| generator | 24,057 | `81d2faa0679077fb007353dce5803768d9ee2a5e4bdc9b1d2edbfff6fe85498f` |
+| independent replay | 15,342 | `3b4995e57f670ba98b7f774059733f41ee08807ecc64a45234dccf344e5c8b01` |
+| canonical certificate | 45,515 | `fa7a8c21511bb923ba52ef983d5626851de78943409d684476a23072dd08268f` |
+
+### Trust boundary after the repair
+
+The universal transport statement trusts the divided-power action, which is now
+asserted rather than imported, plus the elementary Borel-stabiliser reduction.
+The finite existence layer trusts the stored supports only through the
+independent polynomial/apolarity replay.  The computation proves exactly the
+fixed field `GF(16)` and makes no claim by interpolation for `GF(32)` or
+`GF(64)`.  The certificate no longer depends on C531 in any way.

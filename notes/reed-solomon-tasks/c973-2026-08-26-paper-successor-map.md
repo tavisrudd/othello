@@ -1,7 +1,17 @@
 # C973 checkpoint — paper-successor integration map
 
 **Lane:** `reed-solomon` · **Date:** 2026-08-26 · **Status:** draft interface
-for a separately allocated manuscript successor; no paper files edited
+for a separately allocated manuscript successor; no paper files edited;
+**partly revised 2026-08-28 after external review**
+
+> **Staleness warning (2026-08-28).**  The manuscript has moved ahead of §1 of
+> this map: `thm:main` already carries the cofinite threshold `Q*_{r,s}` for a
+> deleted set `A` of size `s`, with `r <= q+1-s`, and already classifies the
+> `s>0` weight-`r` and weight-`(r-1)` shells with counts `N_r=s` and
+> `N_{r-1}=q(q+1)^2/2+(q-1)s(2q+1-s)/2`.  The proposed replacement below is the
+> `s=0` specialization of what is now written.  A successor must diff against
+> the manuscript, not adopt §1 verbatim.  The evidence-registry and retention
+> instructions in §4 and §6 were corrected on 2026-08-28 and are current.
 
 ## Editorial outcome
 
@@ -160,6 +170,13 @@ repeat it.
   dimension formula, and the length-neutral one-carry corollary.
 - The seven q=49 pointed locator certificates, in the supplement only, which
   close the five quadratic and two standard-module orbit representatives.
+- The repaired GF(16) and GF(32) marked-quotient certificates (317 and 1,129
+  true upper-Borel orbits, each with a verified finite locator), in the
+  supplement only, and the authorized GF(27) carrier sweep.  Cite the
+  2026-08-28 rebuild, never the 2026-08-27 bundles.  Any prose reporting an
+  orbit count from these bundles must say which group the quotient is by: the
+  superseded and corrected groups have the same orbit counts at both fields, so
+  the count alone identifies nothing.
 - The Seroussi--Roth--Dür radius gate as a visibly separate proposition.
 - All trust, imported-literature, certificate, and formalization boundaries.
 
@@ -215,10 +232,29 @@ The paper successor should update:
 - **Formalization ledger:** do not claim kernel coverage for the geometric
   selector converse.  Existing contraction and arithmetic terminals may be
   reused only after exact statement comparison.
-- **Evidence registry:** no computation supports the arbitrary-`r` escape or
-  digit-stripping theorems.  Register the q=49 locator bundle only for the
-  finite characteristic-seven pointed corollary; distinguish its structural
-  orbit reduction from its seven computational existence witnesses.
+- **Evidence registry:** no computation supports the digit-stripping theorems.
+  The arbitrary-`r` escape theorem has exactly one computational dependency and
+  it must stay registered: the exact reduced terminal-carrier decomposition
+  (`prop:reduced-terminal-carrier`), verified by the registered
+  Gröbner-elimination certificate, is what makes the degree-six terminal
+  selector nonzero off the carrier.  Everything else in that proof — recursive
+  component selection, simultaneous finite-field selection, shell transfer, and
+  the enumerative double counts — is a mathematical argument.  Register the
+  q=49 locator bundle only for the finite characteristic-seven pointed
+  corollary; distinguish its structural orbit reduction from its seven
+  computational existence witnesses.
+- **Evidence registry, finite small-field closures:** register the repaired
+  GF(16) and GF(32) marked-quotient bundles (rebuilt 2026-08-28 on the
+  degree-`r-1` divided-power Borel action; the 2026-08-27 versions used the
+  wrong group and must not be cited) and the authorized GF(27) two-point-switch
+  sweep as three separate finite-field entries, each carrying its own replay
+  command and hashes.  State for each whether the quantifier comes from a
+  structural orbit reduction plus transport (GF(16), GF(32), q=49) or from an
+  exhaustive carrier sweep (GF(27)).  The GF(27) entry must record that it is a
+  user-authorized certificate closure under the C578 `q=64` precedent, and that
+  it is a sweep of the carrier `PG(6,27)`, not of the ambient `PG(10,27)` that
+  the task's no-census rule forbids; the certificate-free switch lemma remains
+  open and must be listed as such rather than as a discharged gate.
 - **Verification boundary:** add a fail-closed check that no headline theorem
   still contains the removed package hypothesis and that the strict threshold
   arithmetic is reconciled.
@@ -259,7 +295,16 @@ Before manuscript adoption:
 7. current coding-theory literature delta for the PRS application;
 8. statement-map, annotation, evidence, and formal-boundary reconciliation;
 9. both manuscript builds, complete verifier, and clean standalone export;
-10. cold specialist and generalist reads of the compressed architecture.
+10. cold specialist and generalist reads of the compressed architecture; and
+11. an equivariance gate on every orbit-quotient certificate the paper cites.
+    Any bundle whose quantifier comes from "close the carrier under a group and
+    test one representative per orbit" must assert, fail-closed, that each
+    recorded generator carries the verified relation to its own image — for the
+    binary bundles, `is_locator(z,S) == is_locator(z.M, phi(S))` on seeded
+    random pairs.  The 2026-08-27 GF(16)/GF(32) bundles used an action from the
+    wrong syndrome degree, truncated to a non-invariant slice, and reproduced
+    the correct orbit count anyway; an orbit count is not evidence that the
+    group is right.
 
 The seam reconstruction sharpens Gate 1: the external reader must check
 C536's coherent-Fano identity, the projected-Veronese no-line property,
