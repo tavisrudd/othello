@@ -120,6 +120,37 @@ turns “formal methods” into a concrete application feature: an exact optimiz
 can ship a replayable compilation/minimality certificate even when its domain
 front end is not formally verified.
 
+### Certificate stack and compositional trust
+
+A deployed compiler should not flatten all exactness claims into one “verified”
+bit.  The artifact records a chain of independently typed obligations:
+
+1. **Domain-lift certificate**: the concrete constructors/queries are modeled
+   by the finite presentation.  This may be a theorem reference, exhaustive
+   finite comparison, solver certificate, or explicitly unverified adapter.
+2. **Presentation-to-payload certificate**: the generic refinement transcript,
+   potential cocycle proof, decision-diagram equivalence/relaxation proof, or
+   other backend-specific pass law.
+3. **Payload-composition certificate**: schema hashes and preservation-law IDs
+   show that adjacent compiler passes have compatible objects, observations,
+   and witness/error contracts.
+4. **Query certificate**: a quotient transition trace and potential total for
+   the value, plus a concrete witness/provenance replay.  Optimality needs a
+   lower-bound or exhaustive certificate as well as a feasible witness.
+
+Every layer hashes or otherwise identifies its input and output schemas.  An
+independent verifier may accept layers 2--4 while reporting layer 1 as an
+assumption; this is still more informative than trusting the whole compiler.
+Likewise, an approximate or relaxed layer explicitly terminates the exact
+chain and begins an error/bound chain.  No downstream exact pass can silently
+upgrade it back to exactness.
+
+The trusted core can remain small: integer/table parsing, schema/hash checks,
+the finite generator laws, backend certificate checkers, and domain witness
+validators.  Search, learning, partition construction, and performance
+specializations stay untrusted producers.  This is the proof-carrying-compiler
+application of the factorization framework.
+
 ### Theorem 2A: exact compiler soundness by factorization
 
 The quotient theorem is one case of a more general typed compiler law.  Let
