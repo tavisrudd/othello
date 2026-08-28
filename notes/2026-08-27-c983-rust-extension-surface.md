@@ -64,6 +64,43 @@ artifact version must name its exact query profile; a value-only quotient
 cannot silently answer a later count or witness-sensitive query.  Coarsening
 is a cold recompilation unless full refinement history is deliberately kept.
 
+## Artifact envelope, not a universal transition table
+
+“One artifact across domains” means one versioned envelope and verification
+workflow, not one payload semantics.  The envelope can share:
+
+```text
+format/backend version
+sort and query-profile schema hashes
+domain adapter/lift identifier
+observation and witness schema
+declared preservation law
+size/work metrics
+certificate manifest
+```
+
+The payload is backend-specific.  The first version contains only the dense
+`DeterministicQuotient` described above.  Later versions may add separate
+payload kinds for potential-bearing quotients, finite relation/Kleisli
+machines, alternating controlled interfaces, representative-family reducers,
+or provenance circuits.  Each kind names its own verifier and lift law.  It is
+an error to deserialize an alternating game as an unlabelled relation or a
+family reducer as a state quotient merely because both use integer tables.
+
+Select the payload kind once at the cold API boundary and enter a specialized
+loop.  Do not add an enum match, trait object, certificate branch, or query-
+profile switch to every transition.  Generic adapter/compiler traits may be
+monomorphized; persisted payloads should be flat integer arrays with checked
+schema IDs.  A `ResponseRealizer` is therefore a cold backend contract—semantic
+category, factorization/minimality notion, separator or basis certificate, and
+witness lift—not a hot polymorphic state interface.
+
+This split preserves the application promise honestly.  Existing decision-
+diagram, automata, game, max-plus, or provenance engines can be wrapped as
+payload producers while reusing schema, metrics, certificate dispatch, and
+query orchestration.  They need not be reimplemented by the deterministic
+minimizer to count as Ergodis capability.
+
 The verifier should be a cold, dependency-free path separate from compilation.
 It checks partition coverage, output constancy, generator compatibility,
 quotient-table replay, every split justification against an earlier certified
