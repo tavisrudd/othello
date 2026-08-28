@@ -85,6 +85,7 @@ const PROJECTIVE_AMORTIZATION_QUERIES: u32 = 1;
 const RANK_BOUNDED_AMORTIZATION_QUERIES: u32 = 2;
 const CACHE_RECORD_AND_INDEX_BYTES: u64 = 32;
 const FULL_RANK_MAP_CACHE_BYTES: usize = 8 * 1024 * 1024;
+const DENSE_COST_DIRECTORY_ENTRIES: u64 = 1 << 18;
 
 const EMPTY_SLOT: u32 = u32::MAX;
 
@@ -94,6 +95,24 @@ struct CacheRecord {
     hash: u64,
     cost: u32,
     seen_generation: u32,
+}
+
+#[derive(Default)]
+struct DenseCostDirectory {
+    costs: Box<[u64]>,
+}
+
+impl DenseCostDirectory {
+    fn lookup<F: FiniteField>(&self, label: &[u8]) -> Option<u32> {
+        if self.costs.is_empty() {
+            return None;
+        }
+        let mut index = 0_usize;
+        for &entry in label {
+            index = index * F::ORDER as usize + entry as usize;
+        }
+        u32::try_from(self.costs[index]).ok()
+    }
 }
 
 const _: () = assert!(std::mem::size_of::<CacheRecord>() == 16);
@@ -480,7 +499,10 @@ pub struct RankBoundedContextCache<'a, F: FiniteField> {
     zero_cost: u32,
     costs: FlatCostCache,
     full_rank_maps: Box<[Box<[u8]>]>,
-    full_rank_maps_initialized: bool,
+    inner_dense_costs: DenseCostDirectory,
+    target_dense_costs: DenseCostDirectory,
+    target_uses_inner_dense_costs: bool,
+    compiled_kernels_initialized: bool,
     _field: PhantomData<F>,
 }
 
@@ -520,7 +542,10 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
             zero_cost,
             costs: FlatCostCache::new(target_rank * block_count),
             full_rank_maps: vec![Box::default(); target_rank + 1].into_boxed_slice(),
-            full_rank_maps_initialized: false,
+            inner_dense_costs: DenseCostDirectory::default(),
+            target_dense_costs: DenseCostDirectory::default(),
+            target_uses_inner_dense_costs: std::ptr::eq(inner, target),
+            compiled_kernels_initialized: false,
             _field: PhantomData,
         })
     }
@@ -529,8 +554,8 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
         self.costs.len()
     }
 
-    fn ensure_full_rank_maps(&mut self) -> Result<(), ContextualError> {
-        if self.full_rank_maps_initialized {
+    fn ensure_compiled_kernels(&mut self) -> Result<(), ContextualError> {
+        if self.compiled_kernels_initialized {
             return Ok(());
         }
         let mut remaining = FULL_RANK_MAP_CACHE_BYTES;
@@ -545,7 +570,11 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
             remaining -= maps.len();
             self.full_rank_maps[rank] = maps;
         }
-        self.full_rank_maps_initialized = true;
+        self.inner_dense_costs = dense_cost_directory::<F>(self.inner, self.target_rank)?;
+        if !self.target_uses_inner_dense_costs {
+            self.target_dense_costs = dense_cost_directory::<F>(self.target, self.target_rank)?;
+        }
+        self.compiled_kernels_initialized = true;
         Ok(())
     }
 
@@ -613,10 +642,20 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
     ) -> Result<ContextCost, ContextualError> {
         let basis =
             validate_context::<F>(functional_dual_basis, self.block_count, self.target_block)?;
-        if let Some(cached) = self.cached_context_cost_if_complete(&basis)? {
+        self.context_cost_cached_validated(&basis, true)
+    }
+
+    fn context_cost_cached_validated(
+        &mut self,
+        basis: &Matrix,
+        compile_kernels: bool,
+    ) -> Result<ContextCost, ContextualError> {
+        if let Some(cached) = self.cached_context_cost_if_complete(basis)? {
             return Ok(cached);
         }
-        self.ensure_full_rank_maps()?;
+        if compile_kernels {
+            self.ensure_compiled_kernels()?;
+        }
         let mut work = ContextWork::default();
         let mut best = self.zero_cost;
         let max_rank = self.target_rank.min(basis.rows());
@@ -645,7 +684,7 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
                 &mut free,
                 &mut digits,
                 |coefficient_basis| {
-                    multiply_bases_into::<F>(coefficient_basis, rank, &basis, &mut ambient_key);
+                    multiply_bases_into::<F>(coefficient_basis, rank, basis, &mut ambient_key);
                     work.distinct_subspaces += 1;
                     let hash = hash_key(&ambient_key);
                     let cost = if let Some(record_id) = self.costs.lookup(&ambient_key, hash) {
@@ -664,6 +703,9 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
                             &mut coefficients[..rank * self.target_rank],
                             &mut rank_scratch[..rank * self.target_rank],
                             &self.full_rank_maps[rank],
+                            &self.inner_dense_costs,
+                            &self.target_dense_costs,
+                            self.target_uses_inner_dense_costs,
                             &mut block_data,
                             &mut work,
                         )?;
@@ -737,6 +779,7 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
                 .checked_mul(self.block_count)
                 .ok_or(ContextualError::Overflow)?,
         )?;
+        let compile_kernels = matches!(strategy, ContextStrategy::Cached);
         let plan = choose_plan(
             strategy,
             RANK_BOUNDED_AMORTIZATION_QUERIES,
@@ -752,7 +795,9 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
                 self.target_block,
                 self.inner_dual_distance,
             )?,
-            ContextExecution::Cached => self.context_cost_cached(&basis)?,
+            ContextExecution::Cached => {
+                self.context_cost_cached_validated(&basis, compile_kernels)?
+            }
         };
         Ok(PlannedContextCost { result, plan })
     }
@@ -953,6 +998,32 @@ fn enumerate_full_rank_maps<F: FiniteField>(
     maps.into_boxed_slice()
 }
 
+fn dense_cost_directory<F: FiniteField>(
+    table: &CostTable,
+    label_len: usize,
+) -> Result<DenseCostDirectory, ContextualError> {
+    let entry_count = checked_pow(u64::from(F::ORDER), label_len)?;
+    if entry_count > DENSE_COST_DIRECTORY_ENTRIES {
+        return Ok(DenseCostDirectory::default());
+    }
+    let mut label = vec![0_u8; label_len];
+    let entry_count = to_usize(entry_count)?;
+    let mut costs = Vec::with_capacity(entry_count);
+    loop {
+        if let Some(cost) = table.cost_slice(&label) {
+            costs.push(u64::from(cost));
+        } else {
+            costs.push(u64::MAX);
+        }
+        if !increment_digits::<F>(&mut label) {
+            break;
+        }
+    }
+    Ok(DenseCostDirectory {
+        costs: costs.into_boxed_slice(),
+    })
+}
+
 #[allow(clippy::too_many_arguments)]
 fn atomic_subspace_cost<F: FiniteField>(
     subspace: &[u8],
@@ -966,6 +1037,9 @@ fn atomic_subspace_cost<F: FiniteField>(
     coefficients: &mut [u8],
     rank_scratch: &mut [u8],
     full_rank_maps: &[u8],
+    inner_dense_costs: &DenseCostDirectory,
+    target_dense_costs: &DenseCostDirectory,
+    target_uses_inner_dense_costs: bool,
     block_data: &mut [u8],
     work: &mut ContextWork,
 ) -> Result<u32, ContextualError> {
@@ -986,6 +1060,9 @@ fn atomic_subspace_cost<F: FiniteField>(
                 target_block,
                 best,
                 coefficients,
+                inner_dense_costs,
+                target_dense_costs,
+                target_uses_inner_dense_costs,
                 block_data,
             )?;
             best = best.min(cost);
@@ -1012,6 +1089,9 @@ fn atomic_subspace_cost<F: FiniteField>(
             target_block,
             best,
             coefficients,
+            inner_dense_costs,
+            target_dense_costs,
+            target_uses_inner_dense_costs,
             block_data,
         )?;
         best = best.min(cost);
@@ -1031,6 +1111,9 @@ fn coefficient_map_cost<F: FiniteField>(
     target_block: usize,
     cutoff: u32,
     coefficients: &[u8],
+    inner_dense_costs: &DenseCostDirectory,
+    target_dense_costs: &DenseCostDirectory,
+    target_uses_inner_dense_costs: bool,
     block_data: &mut [u8],
 ) -> Result<u32, ContextualError> {
     block_data.fill(0);
@@ -1053,7 +1136,21 @@ fn coefficient_map_cost<F: FiniteField>(
     for block in 0..block_count {
         let label = &block_data[block * target_rank..(block + 1) * target_rank];
         let table = if block == target_block { target } else { inner };
-        let Some(local) = table.cost_slice(label) else {
+        let dense_costs = if block == target_block {
+            if target_uses_inner_dense_costs {
+                inner_dense_costs
+            } else {
+                target_dense_costs
+            }
+        } else {
+            inner_dense_costs
+        };
+        let local = if dense_costs.costs.is_empty() {
+            table.cost_slice(label)
+        } else {
+            dense_costs.lookup::<F>(label)
+        };
+        let Some(local) = local else {
             return Ok(cutoff);
         };
         cost = cost.checked_add(local).ok_or(ContextualError::Overflow)?;
