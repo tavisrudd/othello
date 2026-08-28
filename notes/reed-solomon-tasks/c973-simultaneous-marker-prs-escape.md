@@ -215,7 +215,10 @@ three-line products close both.  In the `z5` chart, the entire `z4=0` slice
 closes uniformly as three parallel lines, while the complement reduces to
 the torus invariant `lambda=(z4/z5)^2(z7/z5)`.  Frobenius has eleven orbits
 on that parameter line; eleven explicit transverse products close them.
-Only the dense abundance problem and the `z8!=0` boundary chart remain.
+The `z8!=0` chart's `z4=z5=0` endpoint has only three torus orbits, all now
+closed.  Its exact residue is `z5=1` with two affine coordinates, or
+`z5=0,z4 in {1,nu}` with one affine coordinate.  Only those strata and the
+dense abundance problem remain.
 
 ## Objective
 

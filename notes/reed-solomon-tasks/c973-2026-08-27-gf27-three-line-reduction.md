@@ -1,8 +1,8 @@
 # C973 checkpoint — GF(27) three-line carrier reduction
 
 **Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** exact
-one-parameter reduction, Borel endpoint, and two residual boundary charts
-closed; abundance open
+one-parameter reduction, two residual boundary charts, and the last chart's
+torus endpoint closed; abundance open
 
 ## 1. Split family
 
@@ -451,19 +451,72 @@ which are exactly (3) for `(x,y)=(1,lambda)`.  Applying Frobenius to a row
 of (28) cubes both its roots and `lambda`, so (27)--(29) close all 27 values.
 Together with (24), the entire `z5` chart is therefore closed.
 
-## 7. Boundary and next gate
+## 7. The `z8` chart and its torus endpoint
+
+It remains to sharpen the first residual chart in the list following (15).
+After setting `z8=1` and `z7=0`, write
+
+\[
+                              (a,b,c)=(z_2,z_4,z_5).
+\]
+
+The residual torus acts with weights `(6,4,3)`.  Since cubing is bijective on
+`K^*`, the stratum `c!=0` normalizes to `c=1`, leaving `(a,b)`.  If `c=0`
+and `b!=0`, fourth powers are precisely the squares, so `b` normalizes to
+one of `1,nu` and `a` remains.  The endpoint `b=c=0` has just three orbits:
+
+\[
+                              a=0,\qquad a=1,\qquad a=\nu. \tag{30}
+\]
+
+Indeed, the sixth powers in `K^*` are also precisely the squares.  The zero
+orbit is closed by any product (24), for which `g7=g8=0`.  For the other two
+orbits, use
+
+\[
+\begin{array}{c|ccc}
+a=1&F_{\theta^2+1,\theta^2}&F_{\theta^2+1,2\theta^2}&F_{2\theta,0}\\
+a=\nu&F_{2,1}&F_{2,2}&F_{2\theta^2+1,0}.
+\end{array}                                                \tag{31}
+\]
+
+Every factor splits, and the three root lines in each row are disjoint, by
+the same `W_p` and collision tests (9)--(10).  The relevant coefficients are
+
+\[
+\begin{array}{c|ccc}
+&g_1&g_2&g_7\\ \hline
+a=1&\theta^2+\theta+1&0&2\theta^2+2\theta+2\\
+a=\nu&\theta^2+2&0&2\theta^2+2.
+\end{array}                                                \tag{32}
+\]
+
+Thus `a g1+g7=0` and `a g2+g8=0` in both rows.  These are exactly (3) on
+the endpoint, so all three orbits (30) are closed.
+
+Consequently the open part of the `z8` chart consists exactly of the two
+torus strata
+
+\[
+                 c=1\text{ with }(a,b)\in K^2,
+                 \qquad
+                 c=0,\ b\in\{1,\nu\},\ a\in K.          \tag{33}
+\]
+
+## 8. Boundary and next gate
 
 The load-bearing next step is to choose `p!=r` uniformly from the thirteen
 directions and prove that some `u in W_p` survives (7)--(11) on the dense
 stratum.  Equation (12) transports every syndrome outside (14) into that
 stratum.  The two-coordinate endpoint is closed by (16)--(18), the `z7`
 chart by (19)--(21), and the entire `z5` chart by (24)--(29).  The only
-separate open boundary is now the `z8!=0` chart.
+separate open boundary is now the pair of torus strata (33) inside the
+`z8!=0` chart.
 
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
 
-## 8. `ej` + `tt` ledger
+## 9. `ej` + `tt` ledger
 
 | question | status | exact continuation |
 |---|---|---|
@@ -478,3 +531,4 @@ certificate supports this reduction.
 | Does the torus endpoint survive? | no; its four square-class orbits have the explicit three-line products (17) | closed by the coefficient identities (18) |
 | Does the residual `z7` chart survive? | no; relative torus weight five is invertible modulo 26, leaving two orbits | closed by the explicit root partitions (20)--(21) |
 | What remains of the residual `z5` chart? | nothing: its `z4=0` slice closes uniformly by one affine-plane product, and Frobenius reduces the complementary `lambda`-line to the eleven direct products (28) | closed by (24)--(29) |
+| What remains of the residual `z8` chart? | its three-orbit `z4=z5=0` endpoint is closed; two torus strata remain | analyze the normal forms (33) with the same three-line cover |
