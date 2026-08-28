@@ -13,7 +13,7 @@ This map covers Paper I after the two-paper split. Results owned by
 | current revision | every half-set gives a systematic graph `[K_B^T|I]`; AME is equivalent to invertibility of one block from every complementary pair of party-aligned square submatrices; `m` minimum-support subgroups form an optimal spanning direct sum | arbitrary additive label spaces over `F_p`; optimal only among spanning families of minimum-support subgroups | half-set projection, isotropy, symplectic complementarity, and block-kernel argument; manuscript only |
 | current revision | fixed-label LU recognition is the block orbit equation `F_B K_psi = K_phi F_C`, with an explicit field-operation bound; over prime fields it reduces to `(m-1)^2` four-cycle intertwining equations and `det A=1` | `m≥2`; polynomial in `m` for fixed `q`; unknown party relabelling adds at most `(2m)!`; no bit-complexity claim | systematic reduction, tree propagation, and fundamental-cycle proof; manuscript only |
 | C989 | the algebra of block-diagonal one-party label-space endomorphisms preserving `L` is intrinsically the common holonomy centralizer; in prime dimension its determinant-one units are the fixed-party linear symmetry group and have five possible algebra types | algebra/centralizer identification over the underlying `F_p` spaces for every prime power; determinant-one and five-type conclusions only for `q=p` | graph propagation and elementary subalgebras of `M_2(F_q)`; manuscript only |
-| C989 | for prime-dimensional stabilizer `AME(4,q)` and `AME(6,q)` states the local endomorphism algebra has dimension at least two; its algebra type determines locally framed CSS, weighted Hermitian, dual-number module, or multiplicity-code structure | `q=p`; noncentral-group corollary only for `q>=5`; no MDS-over-rings terminology or genericity claim | weighted block anti-isometry and standard finite-dimensional module theory; manuscript only |
+| C989 | for prime-dimensional stabilizer `AME(4,q)` and `AME(6,q)` states the local endomorphism algebra has dimension at least two; its algebra type determines CSS form after local symplectic coordinate changes, weighted Hermitian form, dual-number module, or multiplicity-code structure | `q=p`; noncentral-group corollary only for `q>=5`; no MDS-over-rings terminology or genericity claim | weighted block anti-isometry and standard finite-dimensional module theory; manuscript only |
 | C649 | every transversal conversion between associated `[[2m-1,1,m]]_q` encoders is Clifford on every physical and logical factor; check matrices return symplectic witnesses, while full tableaux construct compact Clifford--Pauli data whose phase repair can be confined to any chosen `m` physical outputs | every prime power and `m≥2`; one logical qudit; no dense-matrix output bound | AME Choi correspondence, transpose/inverse Clifford closure, finite recognition, and half-supported character correction |
 | C833 | cleaning-based global rounding at explicit radius `R_clean`, with local `8ε` Clifford rounding and residual `D≤π√q ε` | every stabilizer `AME(2m,q)`, `m≥2`; asymptotics conditional on AME existence | leakage-aware three-region commutator, Weyl--Fourier concentration, stabilizer overlap gap, AME second moment; no computation |
 | C787 | relative two-state rounding over an exact base intertwiner, with the same local `8ε` and collective `π√q ε` constants | two stabilizer `AME(2m,q)` states on one exact product-unitary orbit; radius remains `R_clean` | exact-base line transport, defect identity, product-intertwiner torsor, and lossless conditional decomposition are kernel checked; the cleaning radius and coefficient remain manuscript inputs |
@@ -26,9 +26,9 @@ This map covers Paper I after the two-paper split. Results owned by
 
 | Source | Appendix result | Disposition |
 |---|---|---|
-| C774--C777 | 2-uniform discreteness, local quadratic stability, and 2-unitary gauge corollary | retained in Appendix A as mechanism comparisons |
-| C786/C795 | stabilizer overlap gap and balanced-cut residual stability; `k`-uniform generator-coordinate radius, ceiling, and single-marginal explicit threshold | the two load-bearing estimates are proved in Section 6; the alternative routes remain in Appendix A |
-| C796 | stability under per-site spectral control from a balanced cut | canonical statement and proof are Proposition 6.4; Appendix A cites it directly |
+| C774--C777 | 2-uniform discreteness, local quadratic stability, and 2-unitary gauge corollary | retained in Appendix B as mechanism comparisons |
+| C786/C795 | stabilizer overlap gap and balanced-cut residual stability; `k`-uniform generator-coordinate radius, ceiling, and single-marginal explicit threshold | the two load-bearing estimates are proved in Section 6; the alternative routes remain in Appendix B |
+| C796 | stability under per-site spectral control from a balanced cut | canonical statement and proof are Proposition 6.4; Appendix B cites it directly |
 | C581/C795 | quantitative one-marginal axis recovery and two-state Clifford rounding | retained as the exponentially diluted comparison route |
 | C830 | aggregate minimum-support rounding at `Theta_q(m^-3/4(2/q)^m)` | retained as the orthogonal-support-sector comparison; superseded globally by cleaning |
 
@@ -49,8 +49,8 @@ This map covers Paper I after the two-paper split. Results owned by
   `thm:low-party-endomorphisms`: intrinsic algebra/centralizer identification,
   five prime-field algebra types and unit groups, and the four-/six-party
   dimension bound.
-- The last column of Table 1 and Appendix B give the locally framed code and
-  module structures forced by the four nonscalar prime-field algebra types.
+- The last column of Table 1 and Appendix A give the code and module
+  structures forced by the four nonscalar prime-field algebra types.
 - `lem:pauli-phase-correction`: product-Pauli correction after the label
   Lagrangian is matched, uniquely supported on any prescribed half for an
   AME target; fewer parties cannot support all character repairs.

@@ -10,26 +10,15 @@ three-region correctability.  Cleaning and Weyl--Fourier concentration
 then recover the same discrete Clifford frame without paying the
 exponentially small amplitude of a single marginal.
 
-The exact classification is finite and constructive.  A direct-sum
-decomposition reduces the minimum-support data from
-\(\binom{2m}{m+1}\) supports to \(m\).  With party labels fixed, recognition
-tests at most \(|\operatorname{Sp}_{2e}(\F_p)|\) base frames and uses
-polynomial work per frame.  It is therefore polynomial in the number of
-parties for fixed local dimension.  Unknown party relabelling remains a
-separate combinatorial search, bounded here only by \((2m)!\).
-The support reduction is dimensionally optimal: fewer than \(m\)
-minimum-support subgroups cannot span the stabilizer label space.
-Over prime fields, the fixed-label test further reduces to linear
-intertwining equations for \((m-1)^2\) fundamental four-cycle holonomies
-and one determinant equation.  Their common centralizer is the intrinsic
-algebra of block-diagonal one-party label endomorphisms preserving the
-stabilizer.  Its five possible prime-field types determine both the symmetry
-group and the additional code structure.  For four and six parties this
-algebra is necessarily nonscalar; when \(q\geq5\), a noncentral compatible
-symplectic symmetry follows.  Applied to normalized Choi states, the same
-procedure decides transversal encoder conversion from check matrices and,
-given full stabilizer tableaux, constructs compact conversion data.  Its Pauli
-phase repair may be confined to any chosen \(m\) physical outputs.
+The exact classification is finite and constructive.  A half-set direct sum
+reduces the data to the dimensionally optimal \(m\) minimum supports and gives
+fixed-label recognition in polynomial time for fixed local dimension.  Over
+prime fields, the common centralizer of the fundamental cycles is the
+intrinsic algebra of block-diagonal one-party label endomorphisms preserving
+the stabilizer.  Its five possible types determine both the symmetry group
+and the additional code structure.  For four and six parties this algebra is
+necessarily nonscalar.  The same recognition procedure decides transversal
+conversion between the associated encoders.
 
 The quantitative conclusion is uniform only when all varying parameters
 are displayed:

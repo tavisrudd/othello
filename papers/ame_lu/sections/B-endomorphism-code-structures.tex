@@ -3,7 +3,7 @@
 
 This appendix proves the last column of
 Table~\ref{tab:endomorphism-types}.  It is not needed for LU rigidity,
-recognition, or robust rounding.  Throughout, \(q=p\) and
+recognition, or robust rounding.  Throughout, \(m\geq2\), \(q=p\), and
 \(E=\mathcal E_L\).
 
 For every half-set \(S\), projection
@@ -15,8 +15,8 @@ plane into two lines and split \(L=L_X\oplus L_Z\).  Half-set bijectivity
 restricts to each summand, so \(L_X\) and \(L_Z\) are classical
 \([2m,m,m+1]_q\) MDS codes.  After compatible local symplectic bases are
 chosen, the ambient alternating form pairs the two axis systems; isotropy
-and dimension identify the codes as weighted duals.  This is the locally
-framed MDS--CSS row.
+and dimension identify the codes as weighted duals.  This gives an MDS--CSS
+stabilizer after local symplectic coordinate changes.
 
 If \(E\cong\F_{q^2}\), every local plane is its one-dimensional regular
 module.  Thus \(L\cong E^m\), and the half-set isomorphisms make it an
@@ -26,15 +26,19 @@ has the form
 \[
  (x,y)\longmapsto
  \operatorname{Tr}_{E/\F_q}(\kappa_i x y^q),
- \qquad \kappa_i^q=-\kappa_i\ne0.                     \tag{B.1}
+ \qquad \kappa_i^q=-\kappa_i\ne0.                     \tag{A.1}
 \]
 Applying isotropy to \(ax,y\) for all \(a\in E\), then using the
 nondegenerate trace pairing, gives
 \[
  \sum_i\kappa_i x_i y_i^q=0\qquad(x,y\in L).
 \]
-The trace-zero elements form a one-dimensional \(\F_q\)-space, so this is
-weighted Hermitian self-duality.  The argument includes characteristic two.
+The trace-zero elements form a one-dimensional \(\F_q\)-space.  After one
+nonzero trace-zero \(\kappa\) is fixed, write
+\(\kappa_i=w_i\kappa\) with \(w_i\in\F_q^\times\).  The displayed relation
+then becomes \(\sum_iw_i x_i y_i^q=0\) after division by \(\kappa\), which
+is weighted Hermitian self-duality.  The argument includes
+characteristic two.
 
 If \(E\cong\F_q[\epsilon]/(\epsilon^2)\), a faithful two-dimensional
 \(\F_q\)-module has a nonzero square-zero action and is therefore the regular
@@ -56,4 +60,4 @@ isotropy becomes
  \sum_i w_i c_i d_i=0\qquad(c,d\in C).
 \]
 Thus \(C\) is self-dual for the weighted coordinate pairing, giving the
-maximally symmetric locally framed MDS--CSS row.
+maximally symmetric MDS--CSS row after local symplectic coordinate changes.

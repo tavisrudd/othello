@@ -8,8 +8,8 @@ five-type classification and its code interpretations specialize explicitly
 to prime local dimension.  None of this section is needed for the robust
 rounding theorem.
 
-Let \(L\subseteq\bigoplus_iP_i\) be the label space of a stabilizer
-\(\AME(2m,q)\) state, where each \(P_i\) is regarded as a
+Let \(m\geq2\), and let \(L\subseteq\bigoplus_iP_i\) be the label space of
+a stabilizer \(\AME(2m,q)\) state, where each \(P_i\) is regarded as a
 \(2e\)-dimensional \(\F_p\)-space.  Define
 \[
  \mathcal E_L=
@@ -38,7 +38,7 @@ the units whose propagated components preserve the symplectic form at every
 party.  If \(q=p\), this condition is simply
 \[
  \operatorname{Aut}_{\mathrm{tr}}(\psi)
- \cong\{A\in\mathcal E_L:\det A=1\}.                  \tag{5.3}
+ \cong\{T\in\mathcal E_L:\det T_b=1\}.               \tag{5.3}
 \]
 In particular, the abstract algebra does not depend on the chosen half-set
 or base parties.
@@ -64,7 +64,7 @@ at \(b\) is therefore bijective onto the common centralizer, and
 An automorphism is compatible exactly when every propagated component in
 \((5.5)\) is symplectic.  For \(q=p\), all components are conjugate
 \(2\times2\) matrices and \(\operatorname{Sp}_2(q)=\operatorname{SL}_2(q)\),
-so this is equivalent to \(\det A=1\).  For \(e>1\), one must retain all
+so this is equivalent to \(\det T_b=1\).  For \(e>1\), one must retain all
 transported symplectic-form conditions; a single determinant condition is
 not sufficient.  Finally, the definition in \((5.1)\) is independent of
 the systematic presentation.
@@ -77,7 +77,7 @@ case supplies.
 
 \begin{corollary}[Five prime-field algebra types]
 \label{cor:endomorphism-types}
-Assume \(q=p\), and put \(d=\gcd(2,q-1)\).  Exactly one row of
+Assume \(m\geq2\) and \(q=p\), and put \(d=\gcd(2,q-1)\).  Exactly one row of
 Table~\ref{tab:endomorphism-types} applies.  The middle two columns give
 \(\operatorname{Aut}_{\mathrm{tr}}(\psi)\) and its order, and
 \[
@@ -97,12 +97,12 @@ code or module structure forced by \(\mathcal E_L\).
 \midrule
 \(M_2(\F_q)\) & \(\operatorname{SL}_2(q)\) & \(q(q^2-1)\) &
   \(\F_q^2\otimes C\), where \(C\) is a weighted self-dual classical MDS
-  code; locally framed MDS--CSS form \\
+  code; an MDS--CSS stabilizer after local symplectic coordinate changes \\
 \(\F_q I\) & center of \(\operatorname{SL}_2(q)\) & \(d\) &
   no additional linear structure is forced \\
 \(\F_q\times\F_q\) & split norm-one torus & \(q-1\) &
   two weighted-dual classical MDS codes on complementary local axes;
-  locally framed MDS--CSS form \\
+  an MDS--CSS stabilizer after local symplectic coordinate changes \\
 \(\F_{q^2}\) & field norm-one torus & \(q+1\) &
   an \(\F_{q^2}\)-linear MDS code, weighted Hermitian self-dual in
   compatible coordinates \\
@@ -170,10 +170,21 @@ put the \(3\times3\) block matrix \(G\) in the form
  \end{pmatrix}.                                      \tag{5.7}
 \]
 These basis changes need not be symplectic.  In dimension two, however,
-every invertible change rescales the alternating form.  The anti-symplectic
-identity for \(G\), and the corresponding identity for \(G^{-1}\), therefore
-give nonzero weights \(r_i,t_j\) such that distinct block columns and rows
-of \(N\) are orthogonal for the weighted alternating forms.
+every invertible change rescales the alternating form.  Pulling the domain
+and codomain forms through the block-diagonal basis changes therefore turns
+the anti-symplectic identity for \(G\) into
+\[
+ N^{\mathsf T}\operatorname{diag}(r_0J,r_1J,r_2J)N
+   =-\operatorname{diag}(s_0J,s_1J,s_2J)              \tag{5.8}
+\]
+for nonzero weights \(r_i,s_j\).  Applying the same observation to
+\(N^{-1}\) gives nonzero \(t_j\) such that distinct block rows satisfy
+\[
+ \sum_{j=0}^2t_jN_{ij}JN_{kj}^{\mathsf T}=0
+ \qquad(i\ne k).                                     \tag{5.9}
+\]
+Thus \((5.8)\) gives weighted column orthogonality and \((5.9)\) gives
+weighted row orthogonality.
 
 Orthogonality of the first two block rows gives
 \[
@@ -198,6 +209,5 @@ example, the split norm-one group can coincide with the center; this is why
 the qualification is necessary.
 \end{proof}
 
-Thus extra label-space linearity is forced through six parties.  The result
-does not assert that every remaining algebra type occurs, and it makes no
-genericity claim for eight or more parties.
+Thus extra label-space linearity is forced through six parties, without an
+occurrence or genericity claim for the remaining types.

@@ -10,8 +10,8 @@
 | A local Clifford rounded independently at each party is assumed to be an exact symmetry | The proof invokes stabilizer-overlap quantization only after bounding the product branch; robust linear atlas compatibility is stated separately and is not used as affine branch selection. |
 | Robust transition compatibility is overstated as a global-radius improvement | The proposition and conclusion state that commutators cancel Weyl phases, leaving an uncontrolled product-Pauli character correction. |
 | `Theta(n^-1/2)` is read as an unconditional AME existence result | Every asymptotic statement says “over existing states” or names the explicit Reed--Solomon family. |
-| Generator-coordinate stability is confused with a defect-ball radius | Appendix A and the introduction distinguish the two; only cleaning supplies the defect-only entry theorem. |
-| Secondary quantitative routes compete with the headline | They occur only in Appendix A and are introduced as mechanism comparisons. |
+| Generator-coordinate stability is confused with a defect-ball radius | Appendix B and the introduction distinguish the two; only cleaning supplies the defect-only entry theorem. |
+| Secondary quantitative routes compete with the headline | They occur only in Appendix B and are introduced as mechanism comparisons. |
 | Paper I retains Paper II theorem or certificate dependencies | The exact-group, pencil, Clebsch, scalar, transport, party-extension sections, figures, and complete computational supplement have been removed after Paper II's independent replay passed. |
 | Formal coverage is overstated | Section 6 and the ledgers separate kernel-checked cores from manuscript composition and say that no Paper I semantic gate exists yet. |
 

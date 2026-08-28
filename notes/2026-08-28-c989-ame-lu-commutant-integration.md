@@ -106,7 +106,50 @@ merge the five group types and their code meanings, state the low-party
 theorem separately, and keep detailed module proofs outside the theorem-only
 route.  Exact LU rigidity and quantitative rounding remain the two headlines.
 
-Post-edit cold reviews and A/B remain pending.
+### Post-edit mathematical referee
+
+Conditional go, repaired.  The referee found no defect in the
+algebra--centralizer identification, the five exhaustive types and orders,
+the characteristic-two cases, the four-/six-party commutativity proof, or
+the module interpretations.  The one blocker was an inherited but unstated
+`m >= 2` hypothesis before the projective symmetry-order formula; it is now
+explicit in Section 5 and Appendix A.  The revision also makes evaluation in
+the determinant condition explicit, restores the block-determinant comparison
+to the algorithm summary, and expands the weighted Hermitian normalization.
+
+### Post-edit exposition referee
+
+Keep, with local repairs completed.  The referee judged the exact-to-robust
+spine intact and Section 5 a useful structural refinement rather than a
+second narrative center.  Accepted repairs:
+
+- move the one-page module proof to Appendix A, immediately after the body;
+- display the weighted row/column orthogonality identities in the low-party
+  proof;
+- replace “locally framed” by standard local symplectic-coordinate language;
+- explain the `tr` subscript on the compatible transition-system group;
+- compress the repeated implementation details in the conclusion; and
+- remove the rendered page-break orphan in the organization paragraph.
+
+### Blind A/B
+
+The first anonymous comparison preferred the integrated version with
+confidence `0.8`.  It scored higher on theorem-spine clarity and mathematical
+memorability, tied on verifiability, title alignment, and page economy, and
+showed a small nonblocking abstract-accessibility regression.  The abstract
+sentence was rewritten in plain dimensional language before the final A/B.
+
+### Current build
+
+- baseline: 41 A4 pages, SHA-256
+  `2d73381a9be5a42a109272f38ac2a01f6618e2e592d6d2b68e8c94365206d339`;
+- revised: 44 A4 pages, SHA-256
+  `8e999b3c7988c4dafb6531fb57279706b29c861e2f6458e9168659c89479dded`;
+- `make check`: warning-free;
+- rendered inspection: abstract, Section 5, the Section 5--6 transition,
+  Appendix A, and the trust table inspected at original resolution.
+
+Final blind A/B and closeout remain pending.
 
 ## Mystery ledger
 
