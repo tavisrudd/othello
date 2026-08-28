@@ -665,6 +665,61 @@ one-parameter quotient.  The `4+3` clustering is an arithmetic coincidence
 unless a parent-level correspondence is supplied.  The sharp currently
 proved symmetry quotient is nine cases.
 
+The cubic and quadratic cases close over their native subfields.  First let
+`tau^3+tau^2+1=0` and choose `a=tau+1`.  Then
+
+\[
+ (B_0,B_1,B_2,B_3)=(\tau,0,\tau^2+\tau,\tau^2).
+\]
+
+The final-pair curve is geometrically integral of genus one: its odd-pole
+resultant reduces modulo the cubic to `tau!=0`.  Direct reduction in the
+basis `1,tau,tau^2` shows that over `GF(8)` the Artin--Schreier trace is zero
+at
+
+\[
+ x=0,1,\tau,\tau^3,\tau^4,\tau^6,
+\]
+
+that `Q` has no rational root, and that infinity contributes no rational
+point.  Hence the curve has 12 points over `GF(8)`, Frobenius trace `-3`, and
+therefore 72 points over `GF(64)` by the quadratic-base-change formula (29).
+
+The collision checks are uniform.  If a root `r` of `H` made
+`r^2 Delta+rQ+N` identically zero, its constant and linear coefficients,
+viewed as two linear equations in `r^2,r`, would have determinant `tau` and
+would force simultaneously `r=0` and `r^2=tau^2`, impossible.  The
+final/moving polynomial has nonzero leading coefficient.  Since `N` splits,
+the complete pointed deletion budget is 52, and `72>52` closes all three
+Frobenius conjugates.
+
+Next let `tau^2+tau+1=0`, again with `a=tau+1`.  Then
+
+\[
+ (B_0,B_1,B_2,B_3)=(\tau,\tau+1,1,\tau+1).
+\]
+
+The odd-pole resultant reduces to `tau+1!=0`.  Over `GF(4)`, the cover has
+two Artin--Schreier points above `x=0`, two above `x=tau`, one ramified point
+above each of `x=1,tau^2`, and none at infinity.  Thus it has 6 points and
+Frobenius trace `-1`.  Cubic base change gives
+
+\[
+ \#C(\mathbf F_{64})=64+1-((-1)^3-3\cdot4(-1))=54.
+\]
+
+For a fixed root `r` of `H`, the first two collision coefficients force
+`r=tau+1`; substitution in the third gives `tau!=0`, so the collision cannot
+be identical.  The final/moving polynomial is
+
+\[
+                         \tau x^4+x^2,
+\]
+
+and is nonzero.  Again `N` splits and `54>52` closes both conjugates.  The
+entire GF(64) forced-root surface is now reduced to the 42 trace-one values,
+or seven Frobenius sextics, with no cubic or quadratic residue.
+
 There is also an exact warning against the most tempting seven-root padding.
 On the first row of the table suppose `q=q_{u,v}` splits, and write a monic
 degree-nine candidate as `g=qk`, with `k` monic of degree seven.  The two R11
@@ -772,12 +827,12 @@ arguments do not answer that arithmetic question.
 | What is the first exact slope obstruction? | dense `z=(1,1,1,1,1)` forces `p0=p1=0` | settled by the cubic-trace chart (14)--(19) |
 | How large is the complete forced-root locus? | the explicit surface (22) | extend the cubic-trace chart in `(u,v)` |
 | Does that surface have internal structure? | yes; the fixed quadratic (23) gives exact counts `1953+2016+63+64` | treat the four quadratic strata separately |
-| How many marked-torus forms remain? | 66 total; the constant-cover trace factorization (31) leaves 47 | three explicit arithmetic strata above |
+| How many marked-torus forms remain? | 66 total; the constant and subfield elliptic charts leave 42 | seven trace-one sextics |
 | Does rootlessness close the `(0,0)` boundary? | no; (25) makes the cover empty, but the opposite trace splits it into two rational lines | closed by `130>54` |
 | What closes the `(0,1)` boundary? | a `GF(8)` elliptic specialization with 72 points | closed by `72>52` |
 | What happens when `tau^6+tau^5+1=0`? | `n0n2=tau^9 n1^2` with trace-zero constant | all six forms closed by `130>54` |
 | How far does `a=tau` extend? | factorization (31) closes nine additional noncolliding roots; `tau=0` reuses the endpoint | ten more forms closed |
-| How many semilinear cases are left? | seven sextics, one cubic, one quadratic | nine proved cases |
+| How many semilinear cases are left? | seven trace-one sextics | one common genus-one family, seven Frobenius specializations |
 | Can cross-ratio transformations reduce the seven sextics? | no at the contracted pointed level; the ordered-pair torus fixes `tau` | `4+3` is not a valid symmetry quotient |
 | Can the split-quadratic stratum be padded by an affine three-space minus one point? | no; (32)--(34) force the subspace-polynomial coefficient `gamma` to vanish | use a genuinely different seven-root family |
 | Does the affine-plane-plus-one chart help? | yes; `beta=1` closes the dense obstruction with 65 points against 45 deletions | transfer the mechanism to the remaining forced-root strata |

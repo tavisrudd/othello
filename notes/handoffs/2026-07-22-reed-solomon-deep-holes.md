@@ -165,6 +165,9 @@ Frobenius reduces these to nine proved semilinear cases: seven sextics, one
 cubic, and one quadratic.  Cross-ratio maps cluster the sextics as `4+3`
 only arithmetically.  They do not preserve the ordered forbidden-root/marker
 pair, whose torus fixes `tau`; do not use that false symmetry reduction.
+The cubic and quadratic cases are now closed by `GF(8)` and `GF(4)` elliptic
+specializations, giving `72>52` and `54>52`.  Only the 42 trace-one values,
+or seven Frobenius sextics in one common family, remain.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md` and
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf32-pointed-closure.md`, with

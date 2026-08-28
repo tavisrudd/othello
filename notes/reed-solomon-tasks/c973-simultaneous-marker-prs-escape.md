@@ -167,6 +167,11 @@ Cross-ratio transformations cluster the seven sextics as `4+3` arithmetically
 but do not act on the ordered pointed contraction problem: its residual torus
 fixes `tau`, and a new marker depends on parent-syndrome data lost under
 contraction.  Nine is therefore the sharp proved symmetry quotient.
+The cubic and quadratic residual orbits are now closed by subfield elliptic
+specializations with `a=tau+1`: their curves have respectively 12 points
+over `GF(8)` and 6 over `GF(4)`, hence 72 and 54 over `GF(64)`, both above the
+52-point budget including `N=0`.  Only the 42 trace-one values, seven
+Frobenius sextics in one common genus-one family, remain.
 
 ## Objective
 
