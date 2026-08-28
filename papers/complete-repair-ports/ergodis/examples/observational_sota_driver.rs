@@ -1,5 +1,6 @@
 use ergodis::observational::{
-    compile_observational_with_policy, CertificatePolicy, FinitePresentation, GeneratorSpec,
+    compile_observational_with_deferred_verification, compile_observational_with_policy,
+    CertificatePolicy, FinitePresentation, GeneratorSpec,
 };
 use std::hint::black_box;
 use std::time::Instant;
@@ -61,13 +62,15 @@ fn main() {
     let generators = args.next().expect("generators").parse::<u32>().unwrap();
     let repetitions = args.next().expect("repetitions").parse::<u32>().unwrap();
     let outputs = args.next().map_or(2, |value| value.parse::<u32>().unwrap());
-    let policy = match args.next().as_deref() {
+    let policy_arg = args.next();
+    let deferred = policy_arg.as_deref() == Some("adaptive-deferred");
+    let policy = match policy_arg.as_deref() {
         None | Some("transcript") => CertificatePolicy::SplitTranscript,
-        Some("adaptive") => CertificatePolicy::AdaptiveTranscript,
+        Some("adaptive" | "adaptive-deferred") => CertificatePolicy::AdaptiveTranscript,
         Some("multiway") => CertificatePolicy::MultiwayTranscript,
         Some("quotient") => CertificatePolicy::QuotientOnly,
         Some(value) => {
-            panic!("unknown policy {value}: expected transcript, adaptive, multiway, or quotient")
+            panic!("unknown policy {value}: expected transcript, adaptive[-deferred], multiway, or quotient")
         }
     };
     assert!(args.next().is_none());
@@ -77,7 +80,11 @@ fn main() {
     let mut classes = 0_usize;
     let mut splits = 0_usize;
     for _ in 0..repetitions {
-        let compiled = compile_observational_with_policy(black_box(&input), policy).unwrap();
+        let compiled = if deferred {
+            compile_observational_with_deferred_verification(black_box(&input), policy).unwrap()
+        } else {
+            compile_observational_with_policy(black_box(&input), policy).unwrap()
+        };
         classes = black_box(compiled.class_outputs().len());
         splits = black_box(
             if compiled.certificate_policy() == CertificatePolicy::MultiwayTranscript {

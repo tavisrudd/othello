@@ -17,8 +17,9 @@ if [[ ! -x ${ergodis_bin} || ! -d ${boa_source}/.git ]]; then
   exit 2
 fi
 if [[ ${ergodis_policy} != transcript && ${ergodis_policy} != adaptive \
-  && ${ergodis_policy} != multiway && ${ergodis_policy} != quotient ]]; then
-  echo "ERGODIS_CERTIFICATE_POLICY must be transcript, adaptive, multiway, or quotient" >&2
+  && ${ergodis_policy} != adaptive-deferred && ${ergodis_policy} != multiway \
+  && ${ergodis_policy} != quotient ]]; then
+  echo "ERGODIS_CERTIFICATE_POLICY must be transcript, adaptive[-deferred], multiway, or quotient" >&2
   exit 2
 fi
 if [[ $(git -C "${boa_source}" rev-parse HEAD) != 54a556448169a83a369e039b5fa3ba27323ccfde ]]; then

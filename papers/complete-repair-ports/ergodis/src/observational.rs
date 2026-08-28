@@ -1444,22 +1444,47 @@ pub fn compile_observational_with_policy(
     presentation: &FinitePresentation,
     certificate_policy: CertificatePolicy,
 ) -> Result<CompiledObservation, ObservationalError> {
+    compile_observational_internal(presentation, certificate_policy, true)
+}
+
+/// Compile an exact proof-carrying artifact without replaying its certificate
+/// in the same call. Call [`verify_compilation`] at the persistence, process,
+/// or trust boundary. This avoids duplicate work in validated in-process
+/// services while retaining independently replayable evidence.
+pub fn compile_observational_with_deferred_verification(
+    presentation: &FinitePresentation,
+    certificate_policy: CertificatePolicy,
+) -> Result<CompiledObservation, ObservationalError> {
+    compile_observational_internal(presentation, certificate_policy, false)
+}
+
+fn compile_observational_internal(
+    presentation: &FinitePresentation,
+    certificate_policy: CertificatePolicy,
+    verify_immediately: bool,
+) -> Result<CompiledObservation, ObservationalError> {
     if certificate_policy == CertificatePolicy::AdaptiveTranscript {
         let selected = if multiway_is_admitted(presentation) {
             CertificatePolicy::MultiwayTranscript
         } else {
             CertificatePolicy::SplitTranscript
         };
-        return compile_observational_with_policy(presentation, selected);
+        return compile_observational_internal(presentation, selected, verify_immediately);
     }
     if certificate_policy == CertificatePolicy::QuotientOnly {
         // Quotient-only changes retained evidence, not the proof boundary:
         // construct and independently replay the linear split transcript,
         // then discard it before returning.  This avoids the quadratic
         // synchronous reference refiner on long distinguishing chains.
+        let source_policy = if multiway_is_admitted(presentation) {
+            CertificatePolicy::MultiwayTranscript
+        } else {
+            CertificatePolicy::SplitTranscript
+        };
         let mut compiled =
-            compile_observational_with_policy(presentation, CertificatePolicy::SplitTranscript)?;
+            compile_observational_internal(presentation, source_policy, verify_immediately)?;
         compiled.split_records = Box::default();
+        compiled.multiway_records = Box::default();
         compiled.certificate_policy = CertificatePolicy::QuotientOnly;
         compiled.metrics.refinement_splits = 0;
         return Ok(compiled);
@@ -1520,6 +1545,7 @@ pub fn compile_observational_with_policy(
         split_records,
         multiway_records,
         verification_inverse.as_ref(),
+        verify_immediately,
     )
 }
 
@@ -1580,6 +1606,7 @@ fn emit_compilation(
     split_records: Box<[SplitRecord]>,
     multiway_records: Box<[MultiwayRecord]>,
     verification_inverse: Option<&InverseIndex>,
+    verify_immediately: bool,
 ) -> Result<CompiledObservation, ObservationalError> {
     let class_count = class_ranges.last().map_or(0, |range| range.end() as usize);
     let mut class_outputs = vec![u32::MAX; class_count];
@@ -1658,7 +1685,9 @@ fn emit_compilation(
         certificate_policy,
         metrics,
     };
-    verify_compilation_with_inverse(presentation, &compiled, verification_inverse)?;
+    if verify_immediately {
+        verify_compilation_with_inverse(presentation, &compiled, verification_inverse)?;
+    }
     Ok(compiled)
 }
 
@@ -2112,12 +2141,10 @@ fn minimize_partition_multiway(
     let hash_mask = hash_capacity - 1;
     let mut hash_slots = vec![u32::MAX; hash_capacity];
     let mut touched_slots = Vec::with_capacity(block_capacity);
-    let mut group_hashes = vec![0_u64; block_capacity];
     let mut group_keys_low = vec![0_u64; block_capacity];
     let mut group_keys_high = vec![0_u64; block_capacity];
     let mut group_representatives = vec![0_u32; block_capacity];
     let mut group_counts = vec![0_u32; block_capacity];
-    let mut group_starts = vec![0_u32; block_capacity];
     let mut group_cursors = vec![0_u32; block_capacity];
     let mut group_blocks = vec![0_u32; block_capacity];
     let mut state_groups = vec![0_u32; block_capacity];
@@ -2159,30 +2186,28 @@ fn minimize_partition_multiway(
                     let group = group_count as u32;
                     hash_slots[slot] = group;
                     touched_slots.push(slot as u32);
-                    group_hashes[group_count] = hash;
-                    group_keys_low[group_count] = key_low;
+                    group_keys_low[group_count] = if packed { key_low } else { hash };
                     group_keys_high[group_count] = key_high;
                     group_representatives[group_count] = state;
                     group_counts[group_count] = 0;
                     group_count += 1;
                     break group;
                 }
-                if group_hashes[candidate as usize] == hash {
-                    let exact = if packed {
-                        group_keys_low[candidate as usize] == key_low
-                            && group_keys_high[candidate as usize] == key_high
-                    } else {
-                        signatures_equal(
+                let exact = if packed {
+                    group_keys_low[candidate as usize] == key_low
+                        && group_keys_high[candidate as usize] == key_high
+                } else {
+                    group_keys_low[candidate as usize] == hash
+                        && signatures_equal(
                             presentation,
                             &state_blocks,
                             sort,
                             state,
                             group_representatives[candidate as usize],
                         )
-                    };
-                    if exact {
-                        break candidate;
-                    }
+                };
+                if exact {
+                    break candidate;
                 }
                 slot = (slot + 1) & hash_mask;
             };
@@ -2209,7 +2234,6 @@ fn minimize_partition_multiway(
         }
         let mut next = range.start;
         for group in 0..group_count {
-            group_starts[group] = next;
             group_cursors[group] = next;
             next = next
                 .checked_add(group_counts[group])
@@ -2229,7 +2253,7 @@ fn minimize_partition_multiway(
         let mut next_block = new_block_start;
         for group in 0..group_count {
             let group_range = SortRange {
-                start: group_starts[group],
+                start: group_cursors[group] - group_counts[group],
                 len: group_counts[group],
             };
             if group == largest_group {
@@ -3565,6 +3589,38 @@ mod tests {
             adaptive.certificate_policy(),
             CertificatePolicy::SplitTranscript
         );
+    }
+
+    #[test]
+    fn deferred_verification_retains_replayable_adaptive_evidence() {
+        let presentation = FinitePresentation::new(
+            [8],
+            vec![0, 0, 0, 0, 0, 0, 0, 1],
+            [
+                GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 0,
+                    transitions: vec![1, 2, 3, 4, 5, 6, 7, 7].into_boxed_slice(),
+                },
+                GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 0,
+                    transitions: vec![2, 3, 4, 5, 6, 7, 7, 7].into_boxed_slice(),
+                },
+            ],
+        )
+        .unwrap();
+        let immediate =
+            compile_observational_with_policy(&presentation, CertificatePolicy::MultiwayTranscript)
+                .unwrap();
+        let deferred = compile_observational_with_deferred_verification(
+            &presentation,
+            CertificatePolicy::MultiwayTranscript,
+        )
+        .unwrap();
+        assert_eq!(deferred.state_classes(), immediate.state_classes());
+        assert_eq!(deferred.multiway_records(), immediate.multiway_records());
+        verify_compilation(&presentation, &deferred).unwrap();
     }
 
     #[test]
