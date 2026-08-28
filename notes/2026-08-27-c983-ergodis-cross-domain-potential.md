@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 
-**Status**: QUEUED AFTER C980; PRIVATE RESEARCH AND PROTOTYPING ONLY; DOES NOT
+**Status**: IN PROGRESS ALONGSIDE C980; PRIVATE RESEARCH AND PROTOTYPING ONLY; DOES NOT
 BLOCK C325 OR C953; NO MANUSCRIPT, MIRROR, PUSH, EXPORT, DEPOSIT, OR GENERAL
 NOVELTY CLAIM AUTHORIZED
 
@@ -218,3 +218,14 @@ matrix contrasting weighted automata, generalized distributive law, valued
 CSP/DP compilation, contextual equivalence, and complete abstract domains.
 From that matrix select the smallest noncoding pair that can exercise one
 common exact interface and witness API without architecture commitment.
+
+Work began on 2026-08-27 under a user-directed 90-minute research window with
+15-minute hostile-review, `ej`/`tt`, and vibe checkpoints.
+
+The preliminary theorem matrix and hostile source audit are recorded in
+`notes/2026-08-27-c983-first-batch-audit.md`.  Its first verdict is narrowing:
+generic semiring elimination, abstract minimization, and correctness-kernel
+claims are pre-empted; C983 must contribute restricted-context small-model
+bounds, an effective domain-to-interface compiler, exact witnesses, and
+cross-domain evidence.  Unrestricted coordinate-selector contexts distinguish
+every raw kernel entry, so they admit no nontrivial semantic quotient.

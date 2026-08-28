@@ -109,9 +109,15 @@ Current and completed strengthening:
   the exact `GL`-orbit census, the dual-shortening evaluator, the finite
   transformation-category corollary, finite ordered-monoid and sharp bounded
   Pareto extensions, and fixed-batch packing and multi-target compression
-  lemmas.  The immediate gates are an independent hostile proof read, the full
-  weighted-automata/tropical/valued-CSP priority audit, and code-realizable
-  sharpness; no manuscript promotion is yet authorized.
+  lemmas.  Its [structural compression, hostile proof review, and literature
+  audit](../2026-08-27-c980-structural-compression-hostile-proof-literature-audit.md)
+  reduce the load-bearing scalar package to four theorems and find no defect
+  in that core.  The review repairs the finite-monoid stabilization and
+  rank-restriction aggregation steps, and demotes fixed-batch congruence until
+  a typed composition law is proved.  The next gate is an independent reread
+  of the compressed scalar spine; code-realizable sharpness is a possible
+  strengthening rather than a correctness gate.  No manuscript promotion is
+  yet authorized.
 
 - [C962 exact recovery algorithms](../2026-08-25-c962-recovery-algorithms-and-bounds.md)
   is closed by user direction.  It includes a radius-pruned rank-one complete-transfer certificate, lazy
@@ -200,7 +206,7 @@ Current and completed strengthening:
 Sequel research:
 
 - [C983 Ergodis cross-domain exact compositional optimization](../2026-08-27-c983-ergodis-cross-domain-potential.md)
-  is queued after C980 as private research.  It tests the observational-state
+  is in progress alongside C980 as private research.  It tests the observational-state
   thesis through a hostile weighted-automata/inference/formal-semantics audit,
   a precise contextual quotient theorem boundary, and one common
   witness-preserving kernel used by recovery plus two genuinely noncoding
@@ -255,9 +261,11 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 C980 is the active mathematics-only task for the higher-rank contextual
 quotient.  Its scalar, witness-cover, finite-state, and bounded-resource
-candidate proofs are now developed.  Next run an independent hostile proof
-read and the full priority audit, then decide whether the scalar small-model
-core strengthens the current paper.  Record any dual-shortening/rank-stratified
+candidate proofs are now developed.  The structural compression, hostile
+proof review, and scoped priority audit are complete.  Next obtain an
+independent theorem reread of the compressed four-theorem scalar spine, then
+decide whether that small-model core strengthens the current paper.  Record
+any dual-shortening/rank-stratified
 algorithmic corollaries as optional future work unless a successor is allocated.
 Keep the Pareto, fixed-batch packing, and
 multi-target-block state algebras as sequel material unless the review finds a
@@ -265,7 +273,7 @@ shorter main-paper consequence.
 C962's bounded representation work was accepted as sufficient, further
 candidate-parity experiments were cancelled, and its private task-owned code
 and evidence are committed.  No successor was allocated for the optional
-optimization work.  C983 is queued after C980 for the separate cross-domain
+optimization work.  C983 is active alongside C980 for the separate cross-domain
 Ergodis feasibility program; it does not block the paper closeout.  After C980,
 run C325 appendix-only
 verification, followed by C953
