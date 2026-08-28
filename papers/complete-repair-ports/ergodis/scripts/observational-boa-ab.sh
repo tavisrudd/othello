@@ -16,8 +16,9 @@ if [[ ! -x ${ergodis_bin} || ! -d ${boa_source}/.git ]]; then
   echo "expected an ergodis executable and a Boa git checkout" >&2
   exit 2
 fi
-if [[ ${ergodis_policy} != transcript && ${ergodis_policy} != quotient ]]; then
-  echo "ERGODIS_CERTIFICATE_POLICY must be transcript or quotient" >&2
+if [[ ${ergodis_policy} != transcript && ${ergodis_policy} != adaptive \
+  && ${ergodis_policy} != multiway && ${ergodis_policy} != quotient ]]; then
+  echo "ERGODIS_CERTIFICATE_POLICY must be transcript, adaptive, multiway, or quotient" >&2
   exit 2
 fi
 if [[ $(git -C "${boa_source}" rev-parse HEAD) != 54a556448169a83a369e039b5fa3ba27323ccfde ]]; then

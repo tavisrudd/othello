@@ -94,6 +94,31 @@ fn distinguishing_chain(states: u32) -> FinitePresentation {
     .unwrap()
 }
 
+fn four_generator_fixture(states: u32) -> FinitePresentation {
+    let mut observations = vec![0; states as usize];
+    observations[states as usize - 1] = 1;
+    let generators = (0..4_u64)
+        .map(|generator| {
+            let mut random = 0x9e37_79b9_7f4a_7c15_u64 ^ generator;
+            let transitions = (0..states)
+                .map(|_| {
+                    random ^= random << 13;
+                    random ^= random >> 7;
+                    random ^= random << 17;
+                    (random % u64::from(states)) as u32
+                })
+                .collect::<Vec<_>>()
+                .into_boxed_slice();
+            GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions,
+            }
+        })
+        .collect::<Vec<_>>();
+    FinitePresentation::new([states], observations, generators).unwrap()
+}
+
 #[test]
 fn observational_worklist_has_no_per_split_allocation_growth() {
     let small = distinguishing_chain(64);
@@ -108,6 +133,23 @@ fn observational_worklist_has_no_per_split_allocation_growth() {
     assert!(
         large_allocations <= small_allocations + 2,
         "worklist allocations grew from {small_allocations} to {large_allocations}"
+    );
+}
+
+#[test]
+fn observational_multiway_has_no_per_event_allocation_growth() {
+    let small = four_generator_fixture(64);
+    let large = four_generator_fixture(1_024);
+    let (_, small_allocations) = tracked_allocations(|| {
+        compile_observational_with_policy(&small, CertificatePolicy::MultiwayTranscript).unwrap()
+    });
+    let (_, large_allocations) = tracked_allocations(|| {
+        compile_observational_with_policy(&large, CertificatePolicy::MultiwayTranscript).unwrap()
+    });
+
+    assert!(
+        large_allocations <= small_allocations + 2,
+        "multiway allocations grew from {small_allocations} to {large_allocations}"
     );
 }
 

@@ -63,8 +63,12 @@ fn main() {
     let outputs = args.next().map_or(2, |value| value.parse::<u32>().unwrap());
     let policy = match args.next().as_deref() {
         None | Some("transcript") => CertificatePolicy::SplitTranscript,
+        Some("adaptive") => CertificatePolicy::AdaptiveTranscript,
+        Some("multiway") => CertificatePolicy::MultiwayTranscript,
         Some("quotient") => CertificatePolicy::QuotientOnly,
-        Some(value) => panic!("unknown policy {value}: expected transcript or quotient"),
+        Some(value) => {
+            panic!("unknown policy {value}: expected transcript, adaptive, multiway, or quotient")
+        }
     };
     assert!(args.next().is_none());
 
@@ -75,7 +79,13 @@ fn main() {
     for _ in 0..repetitions {
         let compiled = compile_observational_with_policy(black_box(&input), policy).unwrap();
         classes = black_box(compiled.class_outputs().len());
-        splits = black_box(compiled.metrics().refinement_splits);
+        splits = black_box(
+            if compiled.certificate_policy() == CertificatePolicy::MultiwayTranscript {
+                compiled.multiway_records().len()
+            } else {
+                compiled.metrics().refinement_splits
+            },
+        );
     }
     let elapsed = start.elapsed();
     println!(
