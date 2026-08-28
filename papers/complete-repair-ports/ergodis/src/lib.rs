@@ -55,8 +55,8 @@ pub use contextual::{
 pub use field::{FieldError, FiniteField, Gf4, Prime};
 pub use group_action::{
     compile_permutation_orbits, compile_permutation_orbits_with_deferred_verification,
-    verify_permutation_orbits, FinitePermutationAction, OrbitCompileError, OrbitPartition,
-    OrbitStorage,
+    quotient_presentation_by_orbits, verify_permutation_orbits, FinitePermutationAction,
+    OrbitCompileError, OrbitPartition, OrbitQuotientError, OrbitStorage,
 };
 pub use interface::{
     lift_class_witnesses, present_finite_interface, FiniteInterfaceAdapter, FiniteInterfaceWitness,
