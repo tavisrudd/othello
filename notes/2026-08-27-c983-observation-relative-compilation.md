@@ -92,6 +92,34 @@ The worst-case refinement signature is large—each `k`-ary operation examines
 all fixed tuples in `R^(k-1)`—so domain compilers should supply symmetry,
 sparsity, generators, or separator bases rather than materializing it blindly.
 
+### Proof-carrying quotient artifact
+
+The compiled table can carry a small independently checkable proof transcript.
+For the finite generator presentation, a verifier checks:
+
+1. sort ranges and state/class maps form a partition;
+2. observations are constant on each proposed class;
+3. every generator maps each class to a single target class and the emitted
+   quotient table matches that action;
+4. the recorded refinement transcript starts from observation fibres, and
+   every later split is justified by a generator whose target states were
+   separated at an earlier certified stage; and
+5. the final partition is stable.
+
+Items 1--3 prove sound exact evaluation.  Items 4--5 prove that the partition
+is the coarsest compatible observation quotient rather than an arbitrary finer
+congruence.  The split transcript reconstructs a distinguishing typed context
+on demand by following its justification chain; storing a separate full
+context for every state pair is unnecessary.
+
+This certificate verifies the generic minimizer against its finite input.  It
+does not prove that a domain compiler's finite presentation correctly models
+the original problem; that lift needs an exhaustive small oracle, a theorem,
+or its own adapter certificate.  Keeping those two trust boundaries separate
+turns “formal methods” into a concrete application feature: an exact optimizer
+can ship a replayable compilation/minimality certificate even when its domain
+front end is not formally verified.
+
 ## 2. Exact bounded tropical weighted-tree compilation
 
 Let a weighted bottom-up tree automaton have finite state set `Q`, finite ranked

@@ -401,6 +401,15 @@ counts, resource coordinates, witnesses, or a larger continuation grammar.
 Each split carries the newly distinguishing test.  Removing a query does not
 permit blind merging; coarsening needs recomputation or retained history.
 
+The generic quotient can also be proof-carrying.  A compact refinement
+transcript lets an independent verifier check observation fibres, every
+generator-induced split, quotient transition compatibility, and final
+stability, then reconstruct distinguishing contexts on demand.  This proves
+minimality relative to the finite presentation without trusting the compiler.
+It deliberately does not prove the domain-to-presentation lift; that remains a
+separate theorem or exhaustive-oracle certificate.  This is a concrete formal-
+methods application rather than another analogy.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary

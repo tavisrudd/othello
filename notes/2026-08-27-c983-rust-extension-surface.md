@@ -48,7 +48,7 @@ CompiledContextMachine:
     quotient outputs
     flat generator transition tables
     representative state per class
-    split traces / distinguishing typed paths
+    compact refinement transcript / distinguishing typed paths
     query-profile/schema identifier
     optional potential normalization data
 ```
@@ -63,6 +63,13 @@ context generators can refine the existing partition incrementally.  The
 artifact version must name its exact query profile; a value-only quotient
 cannot silently answer a later count or witness-sensitive query.  Coarsening
 is a cold recompilation unless full refinement history is deliberately kept.
+
+The verifier should be a cold, dependency-free path separate from compilation.
+It checks partition coverage, output constancy, generator compatibility,
+quotient-table replay, every split justification against an earlier certified
+partition, and final stability.  This establishes exactness and minimality
+relative to the finite presentation.  Adapter correctness remains a separate
+domain theorem/oracle gate; the generic certificate must not imply more.
 
 Do not reuse `projective.rs` for additive gauge: that module means finite-
 geometry projective space.  A potential backend should use a name such as
@@ -139,6 +146,8 @@ witness representation.
   small state/context pair.
 - Replay every split certificate and verify it actually distinguishes its
   recorded pair.
+- Rebuild the refinement partition from the transcript and reject an
+  unjustified split or an unstable final partition.
 - Replay absolute answers after potential normalization, including overflow,
   all-infinite, and mixed finite/infinite cases.
 - Validate chosen witnesses in the original domain; report witness memory
