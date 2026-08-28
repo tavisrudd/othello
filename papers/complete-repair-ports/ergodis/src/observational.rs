@@ -2596,6 +2596,28 @@ fn signature_hash(
     hash
 }
 
+fn signature_hash_batch(
+    presentation: &FinitePresentation,
+    state_blocks: &[u32],
+    transition_starts: &[usize],
+    source_start: u32,
+    states: &[u32],
+    hashes: &mut [u64],
+) {
+    debug_assert_eq!(states.len(), hashes.len());
+    hashes.fill(0x9e37_79b9_7f4a_7c15);
+    for &start in transition_starts {
+        for (&state, hash) in states.iter().zip(hashes.iter_mut()) {
+            let target = presentation.transitions[start + (state - source_start) as usize];
+            *hash ^= u64::from(state_blocks[target as usize]).wrapping_add(0x9e37_79b9);
+            *hash = hash.rotate_left(27).wrapping_mul(0x94d0_49bb_1331_11eb);
+        }
+    }
+    for hash in hashes {
+        *hash ^= *hash >> 31;
+    }
+}
+
 #[inline(always)]
 fn packed_signature4(
     presentation: &FinitePresentation,
@@ -2692,6 +2714,7 @@ fn minimize_partition_multiway_prepared(
     let mut group_cursors = vec![0_u32; block_capacity];
     let mut group_blocks = vec![0_u32; block_capacity];
     let mut state_groups = vec![0_u32; block_capacity];
+    let mut wide_hashes = vec![0_u64; block_capacity];
     let mut refiner_scratch = vec![0_u32; block_capacity];
     let mut records = Vec::with_capacity(block_capacity.saturating_sub(initial_block_count));
 
@@ -2724,8 +2747,19 @@ fn minimize_partition_multiway_prepared(
         for (slot, &generator) in transition_starts.iter_mut().zip(generators) {
             *slot = presentation.generators[generator as usize].transition_start as usize;
         }
+        let batched = !packed && refiner_len >= 64;
+        if batched {
+            signature_hash_batch(
+                presentation,
+                &state_blocks,
+                wide_transition_starts,
+                source_start,
+                &refiner_scratch[..refiner_len],
+                &mut wide_hashes[..refiner_len],
+            );
+        }
         let mut group_count = 0_usize;
-        for &state in &refiner_scratch[..refiner_len] {
+        for (refiner_index, &state) in refiner_scratch[..refiner_len].iter().enumerate() {
             let (hash, key_low, key_high) = if packed {
                 packed_signature4(
                     presentation,
@@ -2735,6 +2769,8 @@ fn minimize_partition_multiway_prepared(
                     source_start,
                     state,
                 )
+            } else if batched {
+                (wide_hashes[refiner_index], 0, 0)
             } else {
                 (
                     signature_hash(
