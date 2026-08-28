@@ -243,6 +243,146 @@ pub struct ParetoWorkspace {
     elements: Vec<u32>,
 }
 
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct ParetoWitness {
+    pub resource: u32,
+    pub witness: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<ParetoWitness>() == 8);
+
+/// Canonical resource antichain retaining one concrete witness per point.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct WitnessedParetoFront {
+    entries: Box<[ParetoWitness]>,
+}
+
+impl WitnessedParetoFront {
+    pub fn new<M: FiniteOrderedMonoid>(
+        monoid: &M,
+        candidates: impl IntoIterator<Item = ParetoWitness>,
+    ) -> Result<Self, OrderedResourceError> {
+        let candidates = candidates.into_iter();
+        let capacity = candidates.size_hint().1.unwrap_or(candidates.size_hint().0);
+        let mut entries = Vec::with_capacity(capacity);
+        for candidate in candidates {
+            validate_element(monoid.element_count(), candidate.resource)?;
+            insert_witnessed(monoid, &mut entries, candidate);
+        }
+        entries.sort_unstable_by_key(|entry| entry.resource);
+        Ok(Self {
+            entries: entries.into_boxed_slice(),
+        })
+    }
+
+    pub fn entries(&self) -> &[ParetoWitness] {
+        &self.entries
+    }
+
+    pub fn resources(&self) -> impl ExactSizeIterator<Item = u32> + '_ {
+        self.entries.iter().map(|entry| entry.resource)
+    }
+
+    pub fn choice<M: FiniteOrderedMonoid>(
+        &self,
+        monoid: &M,
+        other: &Self,
+    ) -> Result<Self, OrderedResourceError> {
+        let mut entries = Vec::with_capacity(self.entries.len() + other.entries.len());
+        for &candidate in self.entries.iter().chain(other.entries.iter()) {
+            insert_witnessed(monoid, &mut entries, candidate);
+        }
+        entries.sort_unstable_by_key(|entry| entry.resource);
+        Ok(Self {
+            entries: entries.into_boxed_slice(),
+        })
+    }
+}
+
+#[derive(Debug, Error, PartialEq, Eq)]
+pub enum ParetoWitnessError<E> {
+    #[error(transparent)]
+    Resource(#[from] OrderedResourceError),
+    #[error("witness composition failed: {0}")]
+    Witness(E),
+}
+
+/// Pre-sized, allocation-free workspace for witness-preserving composition.
+#[derive(Clone, Debug)]
+pub struct WitnessedParetoWorkspace {
+    entries: Vec<ParetoWitness>,
+}
+
+impl WitnessedParetoWorkspace {
+    pub fn with_capacity(capacity: usize) -> Self {
+        Self {
+            entries: Vec::with_capacity(capacity),
+        }
+    }
+
+    pub fn capacity(&self) -> usize {
+        self.entries.capacity()
+    }
+
+    pub fn compose<'a, M, E>(
+        &'a mut self,
+        monoid: &M,
+        left: &WitnessedParetoFront,
+        right: &WitnessedParetoFront,
+        mut compose_witness: impl FnMut(u32, u32) -> Result<u32, E>,
+    ) -> Result<&'a [ParetoWitness], ParetoWitnessError<E>>
+    where
+        M: FiniteOrderedMonoid,
+    {
+        let required = left
+            .entries
+            .len()
+            .checked_mul(right.entries.len())
+            .ok_or(OrderedResourceError::Overflow)?;
+        let capacity = self.entries.capacity();
+        if required > capacity {
+            return Err(OrderedResourceError::WorkspaceCapacity { required, capacity }.into());
+        }
+        self.entries.clear();
+        for &left_entry in &left.entries {
+            for &right_entry in &right.entries {
+                let resource = monoid.combine(left_entry.resource, right_entry.resource);
+                validate_element(monoid.element_count(), resource)?;
+                if self
+                    .entries
+                    .iter()
+                    .any(|entry| monoid.leq(entry.resource, resource))
+                {
+                    continue;
+                }
+                let witness = compose_witness(left_entry.witness, right_entry.witness)
+                    .map_err(ParetoWitnessError::Witness)?;
+                self.entries
+                    .retain(|entry| !monoid.leq(resource, entry.resource));
+                self.entries.push(ParetoWitness { resource, witness });
+            }
+        }
+        self.entries.sort_unstable_by_key(|entry| entry.resource);
+        Ok(&self.entries)
+    }
+}
+
+fn insert_witnessed<M: FiniteOrderedMonoid>(
+    monoid: &M,
+    entries: &mut Vec<ParetoWitness>,
+    candidate: ParetoWitness,
+) {
+    if entries
+        .iter()
+        .any(|entry| monoid.leq(entry.resource, candidate.resource))
+    {
+        return;
+    }
+    entries.retain(|entry| !monoid.leq(candidate.resource, entry.resource));
+    entries.push(candidate);
+}
+
 impl ParetoWorkspace {
     pub fn with_capacity(capacity: usize) -> Self {
         Self {
@@ -680,5 +820,47 @@ mod tests {
                 );
             }
         }
+    }
+
+    #[test]
+    fn witnessed_fronts_compose_without_allocating_or_losing_replay_ids() {
+        let monoid = CappedAdditiveMonoid::new([2, 2]).unwrap();
+        let left = WitnessedParetoFront::new(
+            &monoid,
+            [
+                ParetoWitness {
+                    resource: monoid.encode(&[1, 0]).unwrap(),
+                    witness: 10,
+                },
+                ParetoWitness {
+                    resource: monoid.encode(&[0, 1]).unwrap(),
+                    witness: 20,
+                },
+            ],
+        )
+        .unwrap();
+        let mut workspace = WitnessedParetoWorkspace::with_capacity(4);
+        let storage = workspace.entries.as_ptr();
+        let composed = workspace
+            .compose(&monoid, &left, &left, |a, b| Ok::<_, ()>(a * 10 + b))
+            .unwrap();
+        assert_eq!(composed.as_ptr(), storage);
+        assert_eq!(
+            composed,
+            &[
+                ParetoWitness {
+                    resource: monoid.encode(&[2, 0]).unwrap(),
+                    witness: 110,
+                },
+                ParetoWitness {
+                    resource: monoid.encode(&[1, 1]).unwrap(),
+                    witness: 120,
+                },
+                ParetoWitness {
+                    resource: monoid.encode(&[0, 2]).unwrap(),
+                    witness: 220,
+                },
+            ]
+        );
     }
 }
