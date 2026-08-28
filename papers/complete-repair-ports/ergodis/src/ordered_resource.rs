@@ -899,4 +899,40 @@ mod tests {
         assert!(monoid.leq(left, left | right));
         assert!(!monoid.leq(left | right, left));
     }
+
+    #[test]
+    fn all_small_capped_products_match_coordinate_arithmetic() {
+        for dimensions in 0_u32..=3 {
+            let cap_vectors = 3_u32.pow(dimensions);
+            for mut encoded_caps in 0..cap_vectors {
+                let mut caps = Vec::with_capacity(dimensions as usize);
+                for _ in 0..dimensions {
+                    caps.push((encoded_caps % 3) as u16);
+                    encoded_caps /= 3;
+                }
+                let monoid = CappedAdditiveMonoid::new(caps.clone()).unwrap();
+                assert_eq!(
+                    validate_finite_ordered_monoid(&monoid).unwrap(),
+                    monoid.certificate()
+                );
+                for left in 0..monoid.element_count() {
+                    let left_coordinates = monoid.decode(left).unwrap();
+                    assert_eq!(monoid.encode(&left_coordinates).unwrap(), left);
+                    for right in 0..monoid.element_count() {
+                        let right_coordinates = monoid.decode(right).unwrap();
+                        let expected: Vec<_> = left_coordinates
+                            .iter()
+                            .zip(right_coordinates.iter())
+                            .zip(caps.iter())
+                            .map(|((&a, &b), &cap)| a.saturating_add(b).min(cap))
+                            .collect();
+                        assert_eq!(
+                            monoid.decode(monoid.combine(left, right)).unwrap().as_ref(),
+                            expected
+                        );
+                    }
+                }
+            }
+        }
+    }
 }

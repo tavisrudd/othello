@@ -231,6 +231,11 @@ moving them once rather than retaining duplicate hash keys.
 ID per nondominated resource point; composition calls the caller's witness
 arena only for candidates that survive current dominance.  Thus the generic
 multi-resource layer returns an optimizer, not only its value.
+For built-in capped products, construction now supplies an O(1) algebra
+certificate so large resource spaces do not accidentally enter the generic
+cubic law audit.  Boolean dimensions use their exact bitset realization:
+composition is word OR and dominance is the subset test `a & !b == 0`, avoiding
+the mixed-radix division loop.
 
 ### 7. Abstract finite-interface adapter
 
