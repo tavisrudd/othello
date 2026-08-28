@@ -3770,8 +3770,17 @@
       "last": 991,
       "purpose": "export C990 Paper I compression to standalone and refresh portfolio summary",
       "sequence": 419
+    },
+    {
+      "count": 1,
+      "first": 992,
+      "kind": "reservation",
+      "lane": "ame-lu",
+      "last": 992,
+      "purpose": "implement external referee clarifications in AME-LU quantitative and low-party proofs",
+      "sequence": 420
     }
   ],
-  "next_id": 992,
+  "next_id": 993,
   "schema": "codex-task-id-allocations-v1"
 }
