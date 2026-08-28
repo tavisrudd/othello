@@ -43,7 +43,6 @@ The order of the factors is essential because \(\Gamma\) need not be
 abelian.  The factor set is identically one precisely when the section
 preserves multiplication, so the extension splits exactly when \(f_s\) can
 be changed to the constant identity factor set by such a normalized \(b\).
-That criterion is what the computed rows below verify.
 
 \subsection*{A uniform complement for the icosahedral family}
 
@@ -111,86 +110,7 @@ centralize \(T\), whereas antidiagonal blocks invert it; for the displayed
 generators this distinction is exactly coordinate-permutation parity.
 \end{proof}
 
-\subsection*{Computed rows}
-
-\begin{corollary}[Computed coordinate-permutation splittings]
-\label{cor:computed-party-splitting}
-The realized projective coordinate-permutation extension splits for the
-non-GRS \(q=11\) pencil class \(t=10,z=9\), the \(q=11\) GRS evaluation-set
-representatives
-\[
-\{0,1,2,3,4,5\},\ \{0,1,2,3,4,6\},\
-\{0,1,2,3,5,6\},\ \{0,1,2,3,5,9\},
-\]
-and the enhanced-symmetry \(t=-1\) row over \(\F_{17}\).
-For the listed non-GRS row, permutation parity acts on the fixed
-split torus \(T\) by inversion.  Thus, after choosing an input coordinate and
-allowing coordinate permutations to compare the corresponding encoder views,
-a realized odd permutation enlarges the possible input symplectic blocks from
-\(T\) to
-\[
- N(T)=\langle T,J\rangle,\qquad
- J=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\qquad
- J^2=-I,\qquad J\diag(a,a^{-1})J^{-1}=\diag(a^{-1},a).
-\]
-Because \(q=11>3\), this is the full normalizer of \(T\), and
-\(N(T)/T\cong C_2\).  More precisely, the extension
-\(1\to T\to N(T)\to C_2\to1\) inside \(\mathrm{SL}_2(q)\) does not split in
-odd characteristic because every representative of the nontrivial coset has
-square \(-I\).  After passing instead to the matrix projectivization
-\(\mathrm{PSL}_2(q)=\mathrm{SL}_2(q)/\{\pm I\}\), the induced extension
-splits.  This quotient is distinct from quotienting Clifford unitaries by
-global phase.  If the coordinate permutation fixes the input
-of a chosen encoder, these blocks act as an actual logical enlargement;
-otherwise the permutation compares two encoder
-views of the same six-leg tensor.
-\end{corollary}
-
-\begin{proof}
-For each row, an exact finite computation reconstructs the fifteen
-four-support shortened planes, exhausts all \(720\) coordinate permutations,
-and checks the propagated local symplectic blocks against the full CSS
-Lagrangian.  After quotienting by the fixed-coordinate group identified in
-Theorem~\ref{thm:logical-phase}, it is enough to test input block \(I\)
-on the GRS locus and input blocks \(I,J\) off it; this discards no
-candidate.  In the order in which the five \(q=11\) rows are listed above,
-their permutation images are
-\[
- S_4,\quad V_4,\quad C_5,\quad S_3,\quad D_{12},
-\]
-where \(D_{12}\) has order \(12\).  The \(q=17\) enhanced row has
-permutation image \(S_4\).
-
-The certificate records the complete normalized factor set for each
-section.  It also closes a complement of order \(\lvert\Pi\rvert\) whose
-projection to \(\Pi\) is bijective, and verifies that the associated
-normalized cochain changes the factor set to the identity.  Hence every
-listed extension splits.  Conjugating the fixed torus by the stored lifts
-gives the sign action; any odd lift therefore induces the nontrivial
-class of \(N(T)/T\).  The complement is an involution in the projective
-coordinate-permutation extension group; its determinant-one input block is \(J\), whose
-square is \(-I\).
-\end{proof}
-
-When \(\tau^2=\tau+1\), the quotient theorem identifies every regular
-\(z=1\) pencil member with the corresponding integral \(H_3\) reduction.
-At \(q=11\), the \(t=2,z=1\) class therefore has permutation image
-\(S_5\), while the \(t=10,z=9\) non-GRS class has permutation image \(S_4\).
-Their extensions split by Theorem~\ref{thm:h3-party-extension} and
-Corollary~\ref{cor:computed-party-splitting}, respectively, and odd
-coordinate permutations invert \(T\).
-After choosing an input coordinate, the possible one-qudit projective groups
-across the resulting encoder views therefore form
-\(\F_q^2\rtimes N(T)\).  This is the logical group of a fixed encoder
-only for the subgroup fixing its input; a general coordinate permutation
-compares different encoder views.  The GRS fixed-coordinate logical group and
-this non-GRS group have orders \(159720\) and \(2420\), respectively.
-
-Arithmetic symmetry jumps do not change which branch of the group theorem
-applies.  The characteristic-\(17\) tetrahedral specialization lies on the GRS
-locus and retains the full \(\mathrm{SL}_2(17)\) fixed-coordinate image; its permutation
-image is \(S_4\), and the computed extension splits.  The
-characteristic-\(31\) \(A_5\) specialization is non-GRS, so its
-fixed-coordinate image is the split torus; Theorem~\ref{thm:h3-party-extension}
-gives its split \(S_5\) permutation image, and odd permutations enlarge the
-possible input blocks to \(N(T)\).
+The supplement records exact finite computations for six additional
+prime-field examples.  They illustrate the factor-set criterion but are not
+used in any theorem of the paper.  No classification of arbitrary
+coordinate-permutation extensions is claimed.

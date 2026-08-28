@@ -284,8 +284,8 @@
       "boundary": "The proof uses two integral label-space lifts over Z[tau]/(tau^2-tau-1), exact Frobenius-group relations in a point stabilizer, and the S_5 stabilizer of the recovered one-factorization. The listed finite reductions are independent checks, not proof inputs."
     },
     {
-      "label": "cor:computed-party-splitting",
-      "statement": "For the six listed residual rows the realized party-permutation extension splits, with explicit complements.",
+      "label": "supplementary-party-splitting-examples",
+      "statement": "For six supplementary examples the realized party-permutation extension splits, with explicit complements.",
       "route": "certificate-checked",
       "lean_terminals": [
         "RelativeConicArcs.AMELU.GroupExtension.factorSet_change",
@@ -302,7 +302,7 @@
       "evidence": [
         "evidence/2026-07-25-ame-lu-party-extension-examples.json"
       ],
-      "boundary": "Exactly the six named residual rows. The abstract splitting consequences are unconditional once a complement is supplied; these complements are certificate-checked. The integral H3 family is handled separately by thm:h3-party-extension."
+      "boundary": "These are supplementary examples, not a manuscript theorem. The abstract splitting consequences are unconditional once a complement is supplied; the six complements are certificate-checked. The integral H3 family is handled separately by thm:h3-party-extension."
     },
     {
       "label": "lem:conic-matchings",

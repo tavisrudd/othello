@@ -11,7 +11,7 @@
 | Clebsch syndrome application | coset/syndrome lemma plus cited deep-hole theorem | no new computation; party row covered below | syndrome core unconditional |
 | H3 and q=13 separators | marginal moment and four-copy contraction | manifest-pinned exact certificates and independent replay | conditional interfaces expose finite evaluations |
 | Transport divisor | double-coset reduction and representative determinants | independent exact determinant/rank/orbit replay | algebra unconditional; rank/orbit bridges explicit |
-| Party extensions | integral `S_5` complement for the icosahedral family; nonabelian factor sets for the remainder | all 720 permutations for each of six residual rows and explicit complements | abstract consequences unconditional after a complement is supplied |
+| Party extensions | integral `S_5` complement for the icosahedral family; nonabelian factor-set criterion | supplementary replay of all 720 permutations for each of six examples | abstract consequences unconditional after a complement is supplied |
 
 The deterministic entry point is `python3 supplement/verify.py --replay`.
 The evidence manifest pins every generator, certificate, and load-bearing

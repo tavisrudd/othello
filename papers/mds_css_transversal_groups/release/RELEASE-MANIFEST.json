@@ -34,9 +34,9 @@
         "sha256": "96a58d8d9a6c85ba6cafd8a26a24d15ecc6e9cc9855e6719069d271e5bcc7bfd"
       },
       {
-        "bytes": 252804,
+        "bytes": 246945,
         "path": "mds-css-transversal-groups.pdf",
-        "sha256": "9f9e13135179e5986d4693381e8a7cda85d9418750522a3dae5f2b22ad39042e"
+        "sha256": "2d0ee04d8a84d6aed17e6819907fd60db5885ac2b566c435ac7b5ff9baea6988"
       },
       {
         "bytes": 23431,
@@ -59,9 +59,9 @@
         "sha256": "134e64980c72dc9101cc00798d3d8148d1475dcffe4881de51405e3f2af679f9"
       },
       {
-        "bytes": 10846,
+        "bytes": 10163,
         "path": "sections/03-diagonal-isoduality.tex",
-        "sha256": "434fd9ed08e0bf5689bedb3cb4968b83d1e584494097f8d75cb6129b44e02f96"
+        "sha256": "bf130685e702eddc51e464c5d61c183faba1d33f17baea13f6bd5870af90888a"
       },
       {
         "bytes": 5555,
@@ -79,9 +79,9 @@
         "sha256": "ea5d5ac30f5354e1062db70616b370f10befaa3fff8b055f1700e0307a97f9e4"
       },
       {
-        "bytes": 1839,
+        "bytes": 1765,
         "path": "sections/07-conclusion.tex",
-        "sha256": "a074cada7bfd9a648e68a30bf4a3bc364b83621b548a42bd7ca690ef72d54ac5"
+        "sha256": "ca97a141a3a342b0bc12e40948a8071c392c6f62373256d8bfa21fc9dd01cd93"
       },
       {
         "bytes": 8014,
@@ -89,14 +89,14 @@
         "sha256": "937218c855ae5dd511e7f1f398b80b25494e12a4faa334b6149e0f5521c993b1"
       },
       {
-        "bytes": 3898,
+        "bytes": 3866,
         "path": "sections/08-verification-boundary.tex",
-        "sha256": "405721f9e36dd12d235ffa987cac1c6fdc61c0deb5f4ba5264f4fe2622afe372"
+        "sha256": "8e6a4e739595d2dfe3159669d67a7b51aa562bafcda84682e75c67f1ba986c28"
       },
       {
-        "bytes": 9307,
+        "bytes": 5176,
         "path": "sections/09-party-extensions.tex",
-        "sha256": "7337eb9c6169a2aaf200a70c94d5f3ca74e1b07f9293c958c5e4249086bc908a"
+        "sha256": "396150d410f94e5e92c329c4fbc12468e8e6b00ded2566db333988f4f57be796"
       },
       {
         "bytes": 12845,
@@ -104,14 +104,14 @@
         "sha256": "e3a22d25cb651b59794ccec391f11a9d86a5818890af0703647193fc2839fbfc"
       },
       {
-        "bytes": 4117,
+        "bytes": 4842,
         "path": "sections/11-lift-refinements.tex",
-        "sha256": "ebdc427dd9b4d8bd570f1afa8dc0a690b23934677e1523a08587b68fe88174b4"
+        "sha256": "c3f8520f7da7b509e0241e67cf7a4f71b6671b3df28c40e5e026bd48a3a59e5f"
       },
       {
-        "bytes": 6035,
+        "bytes": 5933,
         "path": "sections/12-six-point-syndrome-example.tex",
-        "sha256": "9456c7835f94f17bd7fb9c77d2734a3cd44d70bbaf7c6e536d9abc28d338f308"
+        "sha256": "94e73d404623d5f590b760673cd29c7898d8449db0d1b6111f6e99c7d657ffc1"
       },
       {
         "bytes": 7513,
@@ -119,7 +119,7 @@
         "sha256": "c349cd2f569b25c012aa72809c3962ff5629f0f9140fda3f6a2334731d5f45d0"
       }
     ],
-    "tree_sha256": "3a995369657d050703cbcf4aeb7455b75f36047e096b88d3ee7f2cabb160d14d"
+    "tree_sha256": "bbc18ee03c575da7e4a5e8f035981bd017fd46a0962ca26cd79764c85f3d2108"
   },
   "formal_companion": {
     "artifacts": [

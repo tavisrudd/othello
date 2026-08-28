@@ -29,6 +29,23 @@ and the elementary matrices in \eqref{eq:duality-shears} satisfy all
 the extended evaluation point and uses only diagonal equivalence
 \(SC=C^\perp\), not the evaluation formula for a GRS code.
 
+The following refinement is not needed for the transversal-group
+classification; it answers whether the site-dependent actions can be made
+identical by changing the local Clifford frame at each coordinate.
+
+\begin{proposition}[Uniform local frames]
+\label{prop:uniform-local-frames}
+The realization in Proposition~\ref{prop:site-dependent-realization} can be
+made uniform by fixed local Clifford frame changes if and only if every ratio
+\(t_i=s_i/s_j\) is a square.  Equivalently, the obstruction is the collection
+of relative determinant square classes in
+\[
+ \mathrm{PGL}_2(q)/\mathrm{PSL}_2(q)
+ \cong\F_q^\times/(\F_q^\times)^2.
+\]
+\end{proposition}
+
+\begin{proof}
 Conjugation by \(\diag(1,t_i)\) is inner on \(\mathrm{SL}_2(q)\) exactly
 when \(t_i\) is a square.  Indeed, the centralizer of
 \(\mathrm{SL}_2(q)\) in \(\mathrm{GL}_2(q)\) is scalar, and a scalar
@@ -41,8 +58,9 @@ outer automorphism.  Equivalently, the obstruction is the relative class of
  \mathrm{PGL}_2(q)/\mathrm{PSL}_2(q)
  \cong\F_q^\times/(\F_q^\times)^2.
 \]
-This proves the square-class criterion stated in
-Proposition~\ref{prop:site-dependent-realization}.
+Here \(\mathrm{PGL}_2(q)=\mathrm{GL}_2(q)/\F_q^\times\), and
+\(\mathrm{PSL}_2(q)\) is the image of \(\mathrm{SL}_2(q)\) in that quotient.
+\end{proof}
 
 \subsection{Coherent lifts and the affine obstruction}
 
@@ -89,5 +107,5 @@ Neither lift question decides what happens when physical coordinates may be
 permuted.  That is a separate extension of the fixed-coordinate projective
 group by the realized coordinate-permutation group.  Appendix
 \ref{sec:party-extensions} states its splitting criterion, proves a uniform
-icosahedral family, and gives residual computed examples.
+icosahedral family, and points to supplementary finite examples.
 \end{remark}

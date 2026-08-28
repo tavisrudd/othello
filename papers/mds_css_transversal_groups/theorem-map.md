@@ -18,7 +18,7 @@ the four imported companion-paper dependencies.
 | `lem:conic-matchings` | Paper II appendix; adopted | six points on a conic over an odd field; concurrency of the three matching lines | manuscript proof; no certificate and no Lean terminal |
 | `thm:lu-h3-grs`, `thm:q13-lu`, `lem:transport-double-cosets`, `thm:transport-divisor` | Paper II appendices; adopted | exact domains in their statements | concurrence theorem, double-coset reduction, representative determinants, and independent certificate replay |
 | `thm:h3-party-extension` | Paper II appendix; adopted | odd prime reductions of the integral icosahedral sextuple that remain non-GRS six-arcs | explicit integral lifts and an exact `S_5` complement |
-| `cor:computed-party-splitting` | Paper II appendix; adopted | exactly six listed rows | certificate-checked complements; abstract splitting consequences in Lean |
+| Supplementary party-extension examples | supplement only; not a paper theorem | exactly six listed rows | certificate-checked complements; abstract splitting consequences in Lean |
 
 The paper imports exactly four companion-paper results: the arbitrary-additive
 rigidity theorem, the transversal Clifford no-go, the Pauli phase-correction

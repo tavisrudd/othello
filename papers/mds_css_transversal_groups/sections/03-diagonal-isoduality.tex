@@ -215,7 +215,7 @@ evaluation point at length \(q+1\)
 branch diagonally equivalent to its dual, although the proof uses no
 evaluation structure.
 
-\begin{proposition}[Site-dependent realization]
+\begin{proposition}[Site-dependent propagation]
 \label{prop:site-dependent-realization}
 Fix an input coordinate \(j\), put \(t_i=s_i/s_j\), and write
 \[
@@ -230,29 +230,17 @@ Propagation to coordinate \(i\) is the twisted diagonal embedding
  A
  \begin{pmatrix}1&0\\0&t_i^{-1}\end{pmatrix}.
 \end{equation}
-The realization can be made uniform by fixed local Clifford frame changes if
-and only if every ratio \(t_i\) is a square.  Equivalently, its obstruction is
-the determinant square class, recorded by the relative classes in
-\[
- \mathrm{PGL}_2(q)/\mathrm{PSL}_2(q)
- \cong\F_q^\times/(\F_q^\times)^2.
-\]
-Here \(\mathrm{PGL}_2(q)=\mathrm{GL}_2(q)/\F_q^\times\), and
-\(\mathrm{PSL}_2(q)\) is the image of \(\mathrm{SL}_2(q)\) in that quotient.
 \end{proposition}
 
 \begin{proof}
-A fixed local Clifford frame change conjugates \(\phi_i\) by an element of
-\(\mathrm{SL}_2(q)\).  Conjugation by \(\diag(1,t_i)\) is inner precisely
-when that matrix is scalar-equivalent to an element of
-\(\mathrm{SL}_2(q)\), equivalently when \(t_i\) is a square.  Since
-\(t_j=1\), all propagated embeddings can be matched to the input embedding
-exactly when every ratio has trivial determinant square class.
+The formula follows from the upper and lower elementary matrices in
+\eqref{eq:duality-shears}, which generate \(\mathrm{SL}_2(q)\).
 \end{proof}
 
 The formula is the reason for allowing the one-qudit factor to depend on the
-coordinate: a common logical matrix generally propagates through inequivalent
-local Clifford frames.  Appendix~\ref{sec:lift-refinements} gives further
-details and records two phase refinements.  The linear
+coordinate: a common logical matrix generally propagates differently at
+different sites.  Appendix~\ref{sec:lift-refinements} asks when fixed local
+frame changes can make these actions uniform and records two phase
+refinements.  The linear
 \(\mathrm{SL}_2(q)\) factor admits coherent Weil lifts, whereas adjoining
 logical Pauli translations gives the nonsplit Heisenberg central extension.
