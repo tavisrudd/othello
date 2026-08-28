@@ -185,7 +185,9 @@ capability gain.
    and an exact counterexample oracle.  Keep sampled testing visibly
    noncertifying.
 7. **Stretch adapters.** Add boundaried network optimization, then
-   provenance/AMC and representative-family reducers as separate layers.
+   bounded Pareto-resource values, provenance/AMC, and representative-family
+   reducers as separate layers.  Reuse scheduler Pareto controls without
+   forcing their hot state representation into the generic compiler.
 8. **Approximate laboratory.** Only after exact ground truth exists, train a
    recurrent/SSM encoder against response coordinates and contextual distance;
    require rollout and value/witness error reports.

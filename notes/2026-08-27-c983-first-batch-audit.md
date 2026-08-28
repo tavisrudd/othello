@@ -101,6 +101,7 @@ formal congruence argument.
 | Represent state by predictions of a finite set of future tests | Predictive state representations and observable-operator models | Strongly pre-empted for controlled stochastic systems | Make core tests/separators the probabilistic corollary; use exact Ergodis states as ground truth for approximate learned response representations only after the exact compiler exists |
 | Replace exact contextual equivalence by a behavioral pseudometric | Bisimulation metrics and approximate state aggregation for probabilistic systems/MDPs | Strongly pre-empted as a quantitative-equivalence idea | Define the optimization-context metric as the exact target, then prove computable bounds and composition error laws for the chosen domain/context grammar |
 | Interpret quotient size as boundary information | One-way communication complexity and boundaried-graph Myhill--Nerode methods | Pre-empted as an abstract/lower-bound connection | Emit the quotient as an actual serialized component summary and report class bits plus potential/witness payloads |
+| Compose exact multi-resource frontiers and reuse them across objectives | Pareto/antichain dynamic programming over an idempotent semiring | Pre-empted as multiobjective DP | Add a bounded Pareto value backend, scalarization/query projections, contextual minimization, and one witness per selected frontier point |
 
 ## Common kernel candidate
 

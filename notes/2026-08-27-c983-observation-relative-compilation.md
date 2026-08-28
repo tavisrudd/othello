@@ -469,6 +469,50 @@ messages; the signed potential must also be encoded, so its range/bit cost must
 be reported.  Approximate contextual metrics lead instead to covering/one-way
 sketching questions and require an explicit error budget.
 
+### Corollary 9: bounded Pareto-resource semantics
+
+Fix a finite nonnegative resource box
+
+```text
+L_R = product_i {0,...,R_i}
+```
+
+with componentwise order.  Let `S_R` be the finite antichains in `L_R` and
+write `minimals(X)` for removal of dominated vectors.  Define
+
+```text
+A plus B  = minimals(A union B)
+A times B = minimals({a+b : a in A, b in B, a+b <= R})
+zero      = empty antichain
+one       = {zero vector}.
+```
+
+This is a finite commutative idempotent semiring.  Union and vector addition
+are associative/commutative, nonnegative overflow can never become feasible
+after a later addition, and taking minimal elements before or after union or
+Minkowski sum gives the same minimal result.  These facts prove the semiring
+laws and distributivity.
+
+Consequently every min-sum/GDL or relation backend can be evaluated once over
+exact bounded Pareto frontiers.  The nonempty projection gives Boolean
+feasibility.  For every nonnegative weight vector `w`,
+
+```text
+A -> min { dot(w,a) : a in A }
+```
+
+is a homomorphism to min-plus, so one compiled frontier supports every such
+linear scalarization.  In one resource dimension the construction collapses
+to ordinary bounded min-plus.  Retaining one provenance lift per nondominated
+vector reconstructs a concrete plan for any selected frontier point.
+
+This is classical multiobjective DP, not a novelty claim.  It is nevertheless
+a direct Ergodis capability expansion for repair bandwidth, helper count,
+I/O, link load, latency buckets, or unrelated scheduling resources.  The hard
+gate is frontier explosion: report raw candidate vectors, nondominated vectors,
+contextual classes, and provenance bytes separately, and use bounded resource
+boxes as part of the exact problem statement.
+
 ## 4. Witness obstruction and the required side-car law
 
 Value contextual equivalence does **not** by itself preserve concrete argmin

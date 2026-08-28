@@ -452,6 +452,16 @@ of the preservation diagram, while approximate passes replace equality by an
 error modulus.  This makes the classical results corollaries of one certified-
 pass framework without falsely identifying their compression mechanisms.
 
+Richer operational resources also fit exactly without making scalar tradeoffs
+up front.  Finite antichains of bounded nonnegative resource vectors form the
+standard Pareto semiring under nondominated union and bounded Minkowski sum.
+Boolean feasibility, one-dimensional min-plus, and every nonnegative linear
+scalarization are projections/corollaries; a provenance lift reconstructs the
+chosen frontier plan.  This would let Ergodis expose helpers, bandwidth, I/O,
+link load, and latency buckets through one compiled object.  Frontier
+explosion is the gate, so candidate, nondominated, contextual-state, and
+witness sizes must be reported separately.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary
