@@ -17,8 +17,13 @@ logical-group branches physically, separates prior results from the paper's
 gap and imported inputs, translates the six-point languages explicitly, moves
 the 450-holonomy collision audit to the certificate appendix, demotes party
 motion from the six-point theorem, and reduces implementation detail in the
-verification section.  Authority `050c02a00`; paper mirror `255e2ed`; exporter
-content SHA-256 `359a93ef9bec350cb74c9c438444562ae06805d26447aaeee909e8a7960a404b`;
+verification section.  A fresh quantum-information cold read returned
+`MINOR` with no blocker or
+overclaim; every finding is repaired, including the Choi bridge, first-use
+Gale definition, Clebsch language transition, abstract field scope,
+certificate taxonomy, and optional splitting gloss.  Current authority
+`bc90ea994`; paper mirror `5573f59`; exporter content SHA-256
+`ac429dfd687ac451770476708077d48eda124b315aed6dadd124e229b8780f46`;
 summary mirror remains `a353307`; no push.  The warning-free 26-page gates,
 all-page visual inspection, both complete eight-bundle evidence replays,
 zero-finding export audit, and mirror verification pass.  Preserve theorem
@@ -39,6 +44,13 @@ endomorphism algebras, and extended the field-linear pure-CSS classification
 to matrix or square-zero-radical components with torus/Borel/full-`SL_2`
 one-coordinate images, without touching C979.  Report:
 `2026-08-27-c982-mds-conductor-endomorphism-algebra.md`.
+
+**C986 is queued (2026-08-27).**  Test whether C982's torus/Borel/full-
+`SL_2` theorem supports a standalone coordinatewise CSS Clifford
+classification by closing realizability, global-group, recognition,
+prime-power, positive-rate, and novelty gaps.  It must stop at outlook if no
+substantive layer beyond the short trichotomy proof emerges, and must not touch
+C979.  Card: `2026-08-27-c986-css-borel-classification.md`.
 
 **Referee edits applied (2026-08-16, unallocated user request).**  Fourteen
 edits to Paper I: the Corollary B.19 phase sign and empty-complement corner, the
