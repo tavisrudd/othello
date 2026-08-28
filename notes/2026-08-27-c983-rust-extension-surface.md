@@ -139,6 +139,11 @@ witness representation.
 3. Quantitative boundaried networks are the first stretch application.  They
    should arrive only after the finite-integer-index and rank-representative
    backends are cleanly separated from state quotienting.
+4. A robust-interface control uses the two-bit min-max fixture from the audit.
+   Its identical payoff table but different move order must produce values one
+   and zero and differently typed strategy witnesses.  This stays outside the
+   deterministic minimizer until controlled branching has its own artifact
+   contract.
 
 ## Validation and acceptance gates
 
@@ -155,6 +160,9 @@ witness representation.
 - Compare the weighted-tree control with its direct vector evaluator and the
   scheduling adapter with exhaustive assignments plus the existing exact
   scheduler where applicable.
+- Reject any controlled-branching artifact that loses action ownership,
+  observation timing, or policy dependence; replay both sides of the min-max
+  fixture against exhaustive game trees.
 - Report `N`, `T`, quotient classes, table bytes, split/certificate bytes,
   provenance bytes, compile time, and repeated-query break-even.
 - Use interleaved A/B only after correctness and a channel-Fermi estimate show
@@ -184,10 +192,11 @@ capability gain.
 6. **Oracle front end.** Learn the same artifact from effective constructors
    and an exact counterexample oracle.  Keep sampled testing visibly
    noncertifying.
-7. **Stretch adapters.** Add boundaried network optimization, then
-   bounded Pareto-resource values, provenance/AMC, and representative-family
-   reducers as separate layers.  Reuse scheduler Pareto controls without
-   forcing their hot state representation into the generic compiler.
+7. **Stretch adapters.** Add boundaried network optimization, then robust
+   controlled interfaces, bounded Pareto-resource values, provenance/AMC, and
+   representative-family reducers as separate layers.  Reuse established
+   game solvers and scheduler Pareto controls without forcing their hot state
+   representations into the deterministic generic compiler.
 8. **Approximate laboratory.** Only after exact ground truth exists, train a
    recurrent/SSM encoder against response coordinates and contextual distance;
    require rollout and value/witness error reports.

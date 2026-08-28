@@ -708,6 +708,27 @@ erased control ownership.  This provides a sharp systems test before pursuing
 economic equilibria, whose solution concepts and response objects are much
 larger.
 
+The smallest exact regression is a one-bit matching disturbance.  Let the
+controller choose `a in {0,1}`, let the environment choose `d in {0,1}`, and
+let terminal cost be `1[a != d]`.  If the controller commits before seeing the
+disturbance,
+
+```text
+min_a max_d 1[a != d] = 1.
+```
+
+If the environment moves first and the controller observes it,
+
+```text
+max_d min_a 1[a != d] = 0.
+```
+
+The payoff table and available labels are identical; only ownership,
+information, and order differ.  Any artifact that stores an unlabelled
+relation or freely swaps `min` and `max` fails this fixture.  A valid witness is
+a committed action in the first game and a contingent policy `a(d)=d` in the
+second, so it simultaneously tests strategy-witness typing.
+
 Application framing is strong even under full theoretical pre-emption: a
 single artifact/verifier format spanning deterministic, nondeterministic, and
 alternating interfaces would let Ergodis compile robust schedulers, protocol
