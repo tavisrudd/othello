@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-27
-**Status**: IN PROGRESS; PRELIMINARY FIFTEEN-SOURCE PASS; TWO SOURCES READ AT
-FULL TEXT AND THIRTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
+**Status**: IN PROGRESS; PRELIMINARY SIXTEEN-SOURCE PASS; TWO SOURCES READ AT
+FULL TEXT AND FOURTEEN AT PARTIAL DEPTH; NO NOVELTY OR ABSENCE VERDICT LICENSED
 
 ## Executive verdict
 
@@ -94,6 +94,7 @@ formal congruence argument.
 | Derive efficient semiring DP from exhaustive specification | Polymorphic semiring shortcut fusion and constraint lifting | Pre-empted as a general derivation pattern | Derive the finite interface/context presentation itself, or add a measurable post-fusion quotient rather than restating fusion |
 | Minimal exact state for bounded-boundary graph/hypergraph composition | Myhill--Nerode methods for boundaried graphs/hypergraphs and finite-state tree-decomposition DP | Strongly pre-empted for Boolean properties | Treat the theory as a graph adapter and pursue quantitative/resource/witness observations only after auditing finite-integer-index and optimization variants |
 | Quotient quantitative responses up to additive cost shift | Finite integer index and progressive representatives in protrusion replacement; tropical normalization | Strongly pre-empted as a graph equivalence and algebraic gauge | Generalize it as a typed potential-bearing backend, prove threshold/FII as a corollary, and test state reduction plus witness/potential replay across domains |
+| Compress a family of weighted partial solutions while preserving every completion optimum | Rank-based representative sets for connectivity DP | Strongly pre-empted for partition-connectivity operators, including weighted solutions and one retained optimizer | Treat representative-family reduction as a separate backend layer; do not misreport it as quotient-state minimization |
 
 ## Common kernel candidate
 
@@ -150,6 +151,25 @@ Domain compilers, not the kernel, provide:
 The engine may store a dense table, sparse table, decision diagram, automaton,
 or factored circuit.  Representation compression must not be conflated with a
 semantic quotient.
+
+## Four distinct compression layers
+
+The graph and provenance audits expose four operations that an expanded
+Ergodis should keep separate even when a domain uses several together:
+
+| Layer | What is reduced | Preservation contract | Canonical prior art/control |
+|---|---|---|---|
+| Contextual state quotient | Individual reachable states | Every admitted future observation | Myhill--Nerode/observational minimization |
+| Potential or gauge quotient | Response shapes | Every future value plus a carried additive offset | Finite integer index/tropical normalization |
+| Representative-family reduction | A set of competing partial solutions | Aggregate optimum for every completion, with at least one optimizer | Rank-based connectivity DP |
+| Circuit/provenance factorization | Shared derivation syntax | Selected algebraic evaluations or witness projections | Provenance semirings/AMC/semiring DP |
+
+Representative-family reduction is strictly not ordinary quotienting: two
+partial solutions may remain distinguishable one by one, while one becomes
+redundant in the linear span or lower envelope of a whole family.  Similarly,
+a small provenance DAG need not have few observational states, and a small
+state quotient need not give a small witness DAG.  The compiler report must
+attribute every reduction to the layer that caused it.
 
 ## First exemplar decision
 
@@ -486,6 +506,17 @@ The read depths below are unconditional and describe this preliminary pass.
     integer index identifies boundaried parameterized instances when all
     glued continuations agree after one integer parameter transposition and
     uses progressive class representatives for protrusion replacement.
+16. Hans L. Bodlaender, Marek Cygan, Stefan Kratsch, and Jesper Nederlof,
+    *Solving Weighted and Counting Variants of Connectivity Problems
+    Parameterized by Treewidth Deterministically in Single Exponential Time*.
+    **Read depth: partial** — arXiv text, cache key `arXiv:1211.1505`, SHA-256
+    `26a214e72d440e11c83e8d062a22456bda5b6e8050e4321a5d2772c6b929065a`;
+    read the abstract, introduction and contribution map, and Section 3 through
+    Theorem 3.7.  It defines contextual representation of weighted partition
+    families by equality of the optimum under every completion partition,
+    proves its DP operators preserve representation, and reduces a family to
+    at most `2^|U|` retained partial solutions while preserving the optimal
+    value and at least one optimizer (explicitly not all optimizers).
 
 ## Knowledge-compilation and provenance connection
 
@@ -578,6 +609,17 @@ integer optimum response up to the opposite constant shift.  Thus progressive
 representatives are canonical projective response states with a carried
 potential.  This becomes a general Ergodis backend theorem, with FII as a
 classical graph corollary, rather than a graph-only exception.
+
+The rank-based connectivity source closes another advertised gap even more
+directly.  It already defines a family of weighted boundary partitions by its
+optimal value under every completion partition, proves a reusable operator
+set preserves that representation, reduces the family by linear algebra, and
+retains one optimal solution.  Therefore “quantitative graph contexts plus a
+witness” is also pre-empted as a broad claim.  The priority-judo move is to
+make this a `RepresentativeReducer` backend beside—not inside—the contextual
+state minimizer.  A graph adapter can then test whether typed state quotient,
+potential normalization, rank reduction, and provenance factorization compose
+cleanly and improve an actual exact solver without bespoke plumbing.
 
 ## Coverage gaps and next search
 

@@ -287,6 +287,17 @@ projective equality whenever the application observes thresholds with a
 transported budget, and gives Ergodis another measurable compression mode
 beyond symmetry and restricted contexts.
 
+The weighted-connectivity audit also prevents a category error.  Rank-based
+treewidth DP already preserves every completion optimum by reducing a *family*
+of weighted partitions to representative partial solutions, retaining at
+least one optimizer.  That is not an individual-state quotient.  The emerging
+Ergodis architecture therefore has four explicit, composable reduction
+layers: contextual state quotient, potential/gauge normalization,
+representative-family reduction, and provenance/circuit factorization.  A
+cross-domain systems contribution can survive complete theorem pre-emption if
+one compiler coordinates those layers, certifies their contracts, and makes
+their separate state/time/witness effects visible.
+
 User direction after the first checkpoint makes priority judo part of the
 method: pre-emption is a stepping stone, not an abandonment trigger.  Absorb
 classical results as corollaries or compiler backends, push to typed multiary
