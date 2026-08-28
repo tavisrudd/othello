@@ -198,9 +198,10 @@ three affine normal-form charts and one two-coordinate torus endpoint.
 The endpoint has four square-class orbits and is closed by four explicit
 products of three affine-line cubics.  The residual `z7` chart has only two
 torus orbits and is likewise closed by explicit split locators.  Rational-point
-abundance on the dense chart and the first two affine residual normal forms
-remain; no finite census is
-authorized.
+abundance on the dense chart remains.  Of the first two affine residual normal
+forms, the `z5` chart's `z4=0` slice is uniformly closed by an affine-plane
+product and its complement is reduced to one torus-invariant affine parameter;
+the `z8!=0` chart also remains.  No finite census is authorized.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md`, and

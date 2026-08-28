@@ -1,8 +1,8 @@
 # C973 checkpoint — GF(27) three-line carrier reduction
 
 **Lane:** `reed-solomon` · **Date:** 2026-08-27 · **Status:** exact
-one-parameter reduction, Borel endpoint, and one residual boundary chart
-closed; abundance open
+one-parameter reduction, Borel endpoint, one residual boundary chart, and a
+second chart's affine-plane slice closed; abundance open
 
 ## 1. Split family
 
@@ -349,20 +349,76 @@ Thus the first row has `(g6,g7)=(0,0)`, while the second has
 `(g1+g6,g2+g7)=(0,0)`.  These are precisely (3) for the two syndromes in
 (19).  Hence this entire residual Borel chart contributes no obstruction.
 
-## 6. Boundary and next gate
+## 6. The `z5` chart and its affine-plane slice
+
+The second residual chart in the list following (15) has
+
+\[
+                 z_2=z_3=z_6=z_8=0,\qquad z_5\ne0.       \tag{22}
+\]
+
+Projectively set `z5=1` and write `x=z4/z5`, `y=z7/z5`.  Under the residual
+torus,
+
+\[
+                              (x,y)\longmapsto(cx,c^{-2}y). \tag{23}
+\]
+
+The whole slice `x=0` closes uniformly.  Fix any direction `p=-alpha^2`,
+choose `q in W_p` and `0!=h in W_p`, and put
+
+\[
+ g(t)=\prod_{\epsilon\in\mathbf F_3}
+       \bigl(L_p(t)+q+\epsilon h\bigr).
+\]
+
+The three factors are distinct parallel affine lines, so their roots are
+nine distinct elements of `K`.  In characteristic three,
+
+\[
+\begin{aligned}
+g(t)&=(L_p(t)+q)^3-h^2(L_p(t)+q)\\
+    &=t^9+(p^3-h^2)t^3-ph^2t+q^3-h^2q.                 \tag{24}
+\end{aligned}
+\]
+
+In particular
+
+\[
+                              g_4=g_5=g_6=g_7=0.         \tag{25}
+\]
+
+For (22) with `x=0`, equations (3) are exactly
+`g4+y g6=0` and `g5+y g7=0`; hence (25) closes every `y` at once.
+
+If `x!=0`, choose `c=x^{-1}` in (23).  This leaves the single invariant
+
+\[
+                              \lambda=x^2y\in K          \tag{26}
+\]
+
+and gives the normal form `(x,y)=(1,lambda)`.  Thus the unclosed part of this
+chart is one affine parameter line, not a three-coordinate residue.  The
+all-parallel construction cannot close that line: (3) would force the three
+offsets to sum to zero and their pair sum to `-p^3`; three distinct offsets
+of sum zero form an affine `F3`-line with pair sum `-h^2`, whereas `p^3` is a
+nonsquare because `p=-alpha^2` and `-1` is a nonsquare in `K`.  A transverse
+line is genuinely necessary there.
+
+## 7. Boundary and next gate
 
 The load-bearing next step is to choose `p!=r` uniformly from the thirteen
 directions and prove that some `u in W_p` survives (7)--(11) on the dense
 stratum.  Equation (12) transports every syndrome outside (14) into that
-stratum.  The two-coordinate endpoint is closed by (16)--(18), and the `z7`
-chart is closed by (19)--(21).  The only separate open boundary consists of
-the first two affine normal forms following (15); no finite enumeration is
-needed to define them.
+stratum.  The two-coordinate endpoint is closed by (16)--(18), the `z7`
+chart by (19)--(21), and the `x=0` part of the `z5` chart by (24)--(25).  The
+separate open boundary is the `z8!=0` chart and the one-parameter transverse
+line (26); no finite enumeration is needed to define either.
 
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
 
-## 7. `ej` + `tt` ledger
+## 8. `ej` + `tt` ledger
 
 | question | status | exact continuation |
 |---|---|---|
@@ -376,3 +432,4 @@ certificate supports this reduction.
 | How many boundary charts remain after the Borel action? | three affine normal forms and one two-coordinate torus endpoint | the four strata following (15) |
 | Does the torus endpoint survive? | no; its four square-class orbits have the explicit three-line products (17) | closed by the coefficient identities (18) |
 | Does the residual `z7` chart survive? | no; relative torus weight five is invertible modulo 26, leaving two orbits | closed by the explicit root partitions (20)--(21) |
+| What remains of the residual `z5` chart? | its `z4=0` slice closes uniformly by one affine-plane product; the complement has the single torus invariant `lambda` | use one transverse line on the normal form `(x,y)=(1,lambda)` |
