@@ -118,9 +118,30 @@ label \(F(v)\).  The exact identity
 \(A_{v+u}\in\mathbb C A_vA_u\) puts the axes labelled by \(F(v+u)\) and
 \(F(v)+F(u)\) within \(3\eta\).  Distinct Weyl axes have phase-optimized
 distance \(\sqrt2\), so \(\eta<1/3\) makes \(F\) additive.  Comparing
-the exact commutator phases of \(A_v,A_u\) with those of their nearby
-Weyls costs at most \(4\eta\).  The least nontrivial \(p\)-th-root chord
-is \(2\sin(\pi/p)\), so the stated bound makes \(F\) trace-symplectic.
+the exact commutator phases is equally direct.  Write
+\(\lVert X\rVert_2=q^{-1/2}\lVert X\rVert_{\mathrm{HS}}\), and choose phases
+\(\alpha,\beta\) so that
+\(\lVert A_v-\alpha W_{F(v)}\rVert_2\leq\eta\) and
+\(\lVert A_u-\beta W_{F(u)}\rVert_2\leq\eta\).  Unitary invariance and a
+four-factor telescoping estimate give
+\[
+\begin{aligned}
+ &\bigl\lVert A_vA_uA_v^\dagger A_u^\dagger
+   -W_{F(v)}W_{F(u)}W_{F(v)}^\dagger W_{F(u)}^\dagger\bigr\rVert_2\\
+ &\qquad\leq
+ \lVert A_v-\alpha W_{F(v)}\rVert_2
+ +\lVert A_u-\beta W_{F(u)}\rVert_2
+ +\lVert A_v^\dagger-\overline\alpha W_{F(v)}^\dagger\rVert_2
+ +\lVert A_u^\dagger-\overline\beta W_{F(u)}^\dagger\rVert_2
+ \leq4\eta .
+\end{aligned}
+\]
+The phases \(\alpha,\beta\) cancel in the commutator.  Its two sides are
+scalar \(p\)-th roots of unity: the first has the original Weyl commutator
+phase, while the second has the phase determined by \(F(v),F(u)\).  The
+least nontrivial \(p\)-th-root chord is \(2\sin(\pi/p)\), whereas the stated
+bound gives \(4\eta<\sqrt2\sin(\pi/p)<2\sin(\pi/p)\).  The two phases must
+therefore agree, so \(F\) is trace-symplectic.
 
 Choose an additive Clifford \(K_0\) inducing \(F\).  Then
 \(K_0^\dagger L\) approximately fixes every Weyl axis, so all its Weyl
@@ -310,6 +331,40 @@ three-cleanable-region Clifford conclusion of
 \cite[Lemma~5]{PastawskiYoshida2015}.  Their quantitative combination, and
 the constants in (6.1), are what will be used here.
 
+The next elementary estimate records the conversion from a nearby unitary
+axis to a centered Hermitian generator.
+
+\begin{lemma}[Chords and centered logarithms]
+\label{lem:chord-centered-logarithm}
+Let \(V\in U(q)\), and put
+\[
+ \delta=q^{-1/2}\min_{|z|=1}\lVert V-zI\rVert_{\mathrm{HS}}.
+\]
+If \(\delta<\sqrt{2/q}\), choose a minimizing phase \(z\), write
+\(z^{-1}V=e^{ia}\) using the principal Hermitian logarithm, and set
+\(h=a-q^{-1}\operatorname{Tr}(a)I\).  Then the spectrum of \(a\) lies in
+\((-\pi/2,\pi/2)\), the spectral spread of \(h\) is at most \(\pi\), and
+\[
+ \lVert h\rVert_F\leq\lVert a\rVert_F
+ \leq\frac{\pi}{2}\sqrt q\,\delta .
+\]
+\end{lemma}
+
+\begin{proof}
+Since the operator norm is at most the Hilbert--Schmidt norm,
+\[
+ \lVert z^{-1}V-I\rVert_{\mathrm{op}}
+ \leq\lVert z^{-1}V-I\rVert_{\mathrm{HS}}
+ =\sqrt q\,\delta<\sqrt2.
+\]
+Thus every eigenvalue \(e^{i\theta}\) satisfies
+\(|e^{i\theta}-1|<\sqrt2\), so its principal angle obeys
+\(|\theta|<\pi/2\).  Centering is orthogonal projection onto the traceless
+Hermitian matrices and does not change spectral spread.  Finally,
+\(|\theta|\leq(\pi/2)|e^{i\theta}-1|\) for \(|\theta|\leq\pi/2\); summing
+its square over the eigenvalues proves the norm bound.
+\end{proof}
+
 \begin{theorem}[Cleaning-based global rounding]
 \label{thm:cleaning-global-rounding}
 Let \(\lvert\psi\rangle\) be a stabilizer \(\AME(2m,q)\) state,
@@ -368,16 +423,17 @@ Rephase \(K_i\) by \(z_ie^{i\bar a_i}\); this changes
 \(K=\bigotimes_iK_i\) only by a global phase and does not change its
 projective Clifford action.  After this rephasing,
 \(K_i^\dagger U_i=e^{ih_i}\), each \(h_i\) is traceless, centering does not
-increase its Frobenius norm, and its spectral spread is unchanged.  Let
-\(D^2=\sum_i\lVert h_i\rVert_F^2\).  The chord--angle bound gives
+increase its Frobenius norm, and its spectral spread is unchanged.  By the
+second clause of (6.3), the bound (6.5) satisfies the hypothesis of
+Lemma~\ref{lem:chord-centered-logarithm}; hence every spectral spread is at
+most \(\pi\).  Let \(D^2=\sum_i\lVert h_i\rVert_F^2\).  The same lemma gives
 \[
  D^2\leq\frac{\pi^2q}{4}\sum_i
   \left(q^{-1/2}\min_{|z|=1}
    \lVert U_i-zK_i\rVert_{\mathrm{HS}}\right)^2
  \leq16\pi^2qn\varepsilon(U)^2.                      \tag{6.6}
 \]
-The second clause of (6.3) puts every spectrum in an arc of length
-\(\pi\); the third gives \(D\leq\sqrt q/2\).
+The third clause of (6.3) gives \(D\leq\sqrt q/2\).
 
 \medskip\noindent\emph{Exact branch selection.}
 Two-uniformity gives

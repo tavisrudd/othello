@@ -37,6 +37,11 @@ approximately realized.
 Within the stabilizer AME class on at least four parties, maximal
 entanglement removes that difference.
 
+For \(q=p^e\), ``Clifford'' below always means the normalizer of the
+additive Weyl system.  Its action on one-party labels lies in
+\(\operatorname{Sp}_{2e}(\F_p)\); it need not be an \(\F_q\)-linear
+\(2\times2\) transformation.
+
 \begin{theorem}[Local-unitary rigidity]\label{thm:lu-lc-rigidity}
 Let \(q=p^e\), let \(m\geq2\), and let
 \(\lvert\psi\rangle,\lvert\phi\rangle\) be stabilizer
@@ -172,6 +177,13 @@ fault-tolerance motivation but control different errors.
 An exact product-unitary intertwiner between two states transfers this
 result without changing the constants
 (Corollary~\ref{cor:relative-intertwiner-rounding}).
+
+The two headline proof branches are independent.  Support geometry first
+recovers every Weyl axis, which yields exact rigidity and then the
+transition-map and endomorphism structure.  Separately, the same support
+geometry gives correctable regions, which feed the robust rounding theorem.
+The comparison estimates in Appendix~\ref{sec:two-uniform} are supplementary
+and are not used to prove either branch.
 
 \subsection*{Transition maps and the remaining obstruction}
 
@@ -325,5 +337,6 @@ problem.
 
 The appendices prove the five-type module claims
 (Appendix~\ref{app:endomorphism-code-structures}), collect comparison bounds
-(Appendix~\ref{sec:two-uniform}), and state the trust boundary
+(Appendix~\ref{sec:two-uniform}; not needed for the main theorems), and state
+the trust boundary
 (Appendix~\ref{sec:verification}).

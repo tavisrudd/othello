@@ -10,7 +10,9 @@
 
 For every prime power \(q=p^e\) and \(m\geq2\), every product unitary mapping
 one stabilizer \(\operatorname{AME}(2m,q)\) state to another is Clifford on
-each party.  Any \((m+1)\)-party marginal determines the complete local Weyl
+each party, in the additive prime-field sense: its one-party label action is
+in \(\operatorname{Sp}_{2e}(\mathbb F_p)\), with no \(\mathbb F_q\)-linearity
+assumption.  Any \((m+1)\)-party marginal determines the complete local Weyl
 frame.  The transition maps between those frames classify local-unitary
 equivalence, and every transversal conversion between the associated
 \([[2m-1,1,m]]_q\) stabilizer encoders is Clifford factor by factor.

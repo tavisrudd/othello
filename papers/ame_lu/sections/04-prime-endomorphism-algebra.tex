@@ -181,13 +181,24 @@ put the \(3\times3\) block matrix \(G\) in the form
 These basis changes need not be symplectic.  In dimension two, however,
 every invertible change rescales the alternating form.  Pulling the domain
 and codomain forms through the block-diagonal basis changes therefore turns
-the anti-symplectic identity for \(G\) into
+the anti-symplectic identity for \(G\) into the following weighted one.
+Explicitly, if \(N=PGQ\), with \(P=\operatorname{diag}(P_i)\) and
+\(Q=\operatorname{diag}(Q_j)\), then
+\[
+ S^{\mathsf T}JS=(\det S)J
+ \quad\Longrightarrow\quad
+ P_i^{-\mathsf T}JP_i^{-1}=(\det P_i)^{-1}J,
+ \qquad Q_j^{\mathsf T}JQ_j=(\det Q_j)J.
+\]
+Substitution in \(G^{\mathsf T}\operatorname{diag}(J)G
+=-\operatorname{diag}(J)\) gives
 \[
  N^{\mathsf T}\operatorname{diag}(r_0J,r_1J,r_2J)N
    =-\operatorname{diag}(s_0J,s_1J,s_2J)              \tag{5.8}
 \]
-for nonzero weights \(r_i,s_j\).  Applying the same observation to
-\(N^{-1}\) gives nonzero \(t_j\) such that distinct block rows satisfy
+with \(r_i=(\det P_i)^{-1}\) and \(s_j=\det Q_j\).  Applying the same
+observation to \(N^{-1}\) gives \(t_j=s_j^{-1}\), so distinct block rows
+satisfy
 \[
  \sum_{j=0}^2t_jN_{ij}JN_{kj}^{\mathsf T}=0
  \qquad(i\ne k).                                     \tag{5.9}
