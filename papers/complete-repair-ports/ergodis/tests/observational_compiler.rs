@@ -300,6 +300,54 @@ fn weighted_tree_automaton_compiles_to_six_exact_states() {
     );
 }
 
+#[test]
+fn generator_restriction_builds_the_exact_context_family_quotient() {
+    let presentation = FinitePresentation::new(
+        [4],
+        [0, 0, 1, 1],
+        [
+            GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: [0, 0, 2, 2].into(),
+            },
+            GeneratorSpec {
+                source_sort: 0,
+                target_sort: 0,
+                transitions: [0, 2, 0, 2].into(),
+            },
+        ],
+    )
+    .unwrap();
+    assert_eq!(
+        compile_observational(&presentation)
+            .unwrap()
+            .metrics()
+            .classes,
+        4
+    );
+
+    let restricted = presentation.restrict_generators(&[0]).unwrap();
+    assert_eq!(restricted.original_generator_ids(), [0]);
+    let compiled = compile_observational(restricted.presentation()).unwrap();
+    verify_compilation(restricted.presentation(), &compiled).unwrap();
+    assert_eq!(compiled.metrics().classes, 2);
+    assert_eq!(compiled.transition(0, 0), Some(0));
+    assert_eq!(compiled.transition(0, 1), Some(1));
+
+    let distinguishing = presentation.restrict_generators(&[1]).unwrap();
+    assert_eq!(distinguishing.original_generator_ids(), [1]);
+    assert_eq!(
+        compile_observational(distinguishing.presentation())
+            .unwrap()
+            .metrics()
+            .classes,
+        4
+    );
+    assert!(presentation.restrict_generators(&[0, 0]).is_err());
+    assert!(presentation.restrict_generators(&[2]).is_err());
+}
+
 type Profile = [u8; 3];
 
 fn resource_profiles() -> Vec<Profile> {
