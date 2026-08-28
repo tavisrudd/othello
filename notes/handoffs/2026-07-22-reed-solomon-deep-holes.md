@@ -206,7 +206,13 @@ also explicitly closed.  Its exact residue is one two-affine-coordinate
 torus stratum and two one-affine-coordinate square-class strata.  There the
 three-line determinant is `p(ra+b)(pa-b)`, so at most two directions and no
 `u` are exceptional; the first image condition is generically a three-point
-affine-plane intersection.  No finite census is authorized.
+affine-plane intersection.  The uniform locator
+`t^9+gamma^6 t^3+gamma^8 t+C` additionally closes every boundary syndrome
+with `(z2,z4)=(0,0)` and the nonsquare-ratio half of all nonzero pairs,
+independently of the other coordinates.  The complementary ratio now has a
+two-point-switch formula: two independent quotient vectors solve the Hankel
+pair uniquely, leaving only one explicit quadratic discriminant and collision
+against the seven retained plane points.  No finite census is authorized.
 Checkpoints:
 `notes/reed-solomon-tasks/c973-2026-08-27-gf27-three-line-reduction.md`,
 `notes/reed-solomon-tasks/c973-2026-08-27-r11-gf16-pointed-closure.md`, and

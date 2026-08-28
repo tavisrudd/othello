@@ -222,7 +222,14 @@ dense abundance problem remain.  On those `z8` strata the determinant factors
 as `p(ra+b)(pa-b)`, excluding at most two directions and no `u`; the condition
 `s in W_r` is generically an affine-plane intersection of exactly three
 points.  The residual gate is only the quadratic split and collision tests on
-that three-point line.
+that three-point line.  More globally, the affine-plane locator
+`t^9+gamma^6 t^3+gamma^8 t+C` closes every Borel-boundary syndrome with
+`(z2,z4)=(0,0)` and the nonsquare-ratio half of all nonzero `(z2,z4)`,
+independently of `z5,z7,z8`.  On the complementary ratio, a one-point switch
+is structurally rank one and cannot help, while a two-point switch gives two
+independent vectors `(x1,1),(x2,1)` and solves both Hankel equations uniquely.
+The entire Borel residue is thereby reduced to one explicit quadratic split
+and a seven-point collision test, with no trace-plane covers left.
 
 ## Objective
 

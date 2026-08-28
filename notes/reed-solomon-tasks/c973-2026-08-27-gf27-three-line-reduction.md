@@ -549,6 +549,117 @@ as the translate misses or equals that plane.  Consequently the generic
 explicit candidates.  Only the quadratic split test and the two collision
 factors remain on that affine line.
 
+There is also a uniform closure covering half of this residue and, in fact,
+half of the entire Borel boundary.  Let
+
+\[
+                         H=\ker\operatorname {Tr}_{K/\mathbf F_3}.
+\]
+
+Since `x^9+x^3+x` is the trace polynomial, the monic locator of the affine
+plane `t0+gamma H`, for `gamma!=0`, is
+
+\[
+ g_{t_0,\gamma}(t)
+   =t^9+\gamma^6t^3+\gamma^8t+C_{t_0,\gamma}.            \tag{38}
+\]
+
+It has nine distinct roots by construction.  On the Borel boundary
+`z3=z6=0`, its two Hankel equations reduce to
+
+\[
+             z_2\gamma^8+z_4\gamma^6=0,
+             \qquad 0=0,                                \tag{39}
+\]
+
+or simply
+
+\[
+                              z_2\gamma^2+z_4=0.         \tag{40}
+\]
+
+Thus every boundary syndrome with `(z2,z4)=(0,0)` closes by an arbitrary
+affine plane.  If both coordinates are nonzero, it closes whenever
+`-z4/z2` is a square.  Because `-1` is a nonsquare in `K`, this is exactly
+the nonsquare-ratio half of the nonzero pairs.  The construction is
+independent of `z5,z7,z8`; it structurally subsumes the corresponding slices
+of all four normal forms following (15).
+
+The complementary ratio has an equally explicit two-point-switch reduction.
+For a root `x` of the affine-plane locator (38), put
+
+\[
+                              Q_x(t)=\frac{g_{t_0,\gamma}(t)}{t-x}.
+\]
+
+Writing `A=gamma^6` and `B=gamma^8`, direct division gives the coefficients
+of `Q_x` from degree eight down to degree zero as
+
+\[
+ 1,x,x^2,x^3,x^4,x^5,x^6+A,x^7+Ax,x^8+Ax^2+B.
+\]
+
+For a boundary syndrome `z`, define
+
+\[
+ \phi_{\gamma,z}(x)
+ =z_2(x^6+\gamma^6)+z_4x^4+z_5x^3+z_7x+z_8.             \tag{41}
+\]
+
+If `L_1,L_2` denote the two Hankel functionals in (3), the displayed
+quotient coefficients give the exact identity
+
+\[
+                 \bigl(L_1(Q_x),L_2(Q_x)\bigr)
+                    =\phi_{\gamma,z}(x)(x,1).           \tag{42}
+\]
+
+This explains why replacing only one point of a failing affine plane cannot
+help: the second Hankel equation forces its scalar contribution to vanish,
+leaving the first residual unchanged.
+
+Now choose distinct `x1,x2` in the same affine plane and write
+
+\[
+ P=g_{t_0,\gamma},\quad
+ R_0=(t-x_1)(t-x_2),\quad
+ Q=P/R_0,\quad
+ \mathcal R=L_1(P)=\gamma^6(z_2\gamma^2+z_4).            \tag{43}
+\]
+
+Assume `mathcal R!=0` and `phi_i=phi_{gamma,z}(x_i)!=0`.  There are unique
+scalars
+
+\[
+ c_1=-\frac{\mathcal R}{(x_1-x_2)\phi_1},
+ \qquad
+ c_2= \frac{\mathcal R}{(x_1-x_2)\phi_2}.               \tag{44}
+\]
+
+Let the monic quadratic `S` be determined by
+
+\[
+ S-R_0=c_1(t-x_2)+c_2(t-x_1).                           \tag{45}
+\]
+
+Partial fractions and (42) then give
+
+\[
+\begin{aligned}
+(L_1,L_2)(SQ)
+ &=(\mathcal R,0)
+   +c_1\phi_1(x_1,1)+c_2\phi_2(x_2,1)\\
+ &=(0,0).                                                \tag{46}
+\end{aligned}
+\]
+
+Thus every failing affine-plane ratio is reduced to choosing a direction
+`gamma H` and two plane points with nonzero (41) such that the explicit
+quadratic (45) has two distinct roots outside the other seven plane points.
+There are no remaining trace-plane image conditions: only the quadratic
+discriminant and the seven-point collision test.  This is the exact
+certificate-free two-point-switch gate for the whole Borel boundary.
+
 ## 8. Boundary and next gate
 
 The load-bearing next step is to choose `p!=r` uniformly from the thirteen
@@ -558,7 +669,9 @@ stratum.  The two-coordinate endpoint is closed by (16)--(18), the `z7`
 chart by (19)--(21), and the entire `z5` chart by (24)--(29).  The only
 separate open boundary is now the pair of torus strata (33) inside the
 `z8!=0` chart, with their generic solve reduced to the three-point affine
-intersection (37).
+intersection (37).  Within those strata, (38)--(40) uniformly remove the
+zero pair and the nonsquare-ratio half of all nonzero `(a,b)`; the complement
+has the two-point-switch reduction (41)--(46).
 
 No manuscript or software edit is made, and no census or point-count
 certificate supports this reduction.
@@ -579,3 +692,5 @@ certificate supports this reduction.
 | Does the residual `z7` chart survive? | no; relative torus weight five is invertible modulo 26, leaving two orbits | closed by the explicit root partitions (20)--(21) |
 | What remains of the residual `z5` chart? | nothing: its `z4=0` slice closes uniformly by one affine-plane product, and Frobenius reduces the complementary `lambda`-line to the eleven direct products (28) | closed by (24)--(29) |
 | What remains of the residual `z8` chart? | its three-orbit `z4=z5=0` endpoint is closed; two torus strata remain, and their first image condition generically leaves exactly three `u` values | close the quadratic split and collision tests on (37) |
+| Does one construction cover multiple Borel charts? | yes: the affine-plane locator (38) closes every `(z2,z4)=(0,0)` syndrome and the nonsquare-ratio half of every nonzero pair, independently of the other boundary coordinates | retain only the two coordinate axes and square-ratio half for transverse analysis |
+| What replaces the cover tower on the complementary boundary ratio? | switching two points of an affine plane solves both Hankel equations uniquely | prove the quadratic (45) splits away from the seven retained plane points |
