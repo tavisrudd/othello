@@ -45,6 +45,7 @@
 \newcommand{\supp}{\operatorname{supp}}
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Cond}{\operatorname{Cond}}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \newcommand{\AMEFigureThree}{%
@@ -52,13 +53,11 @@
 \newcommand{\AMEFigureSix}{%
   \ifdefined\AMEHideFigureSix\else\input{figures/06-pencil-quotient}\fi}
 
-\title{Diagonal Isoduality and Transversal Clifford Groups of
-MDS--CSS Codes}
+\title{Exact Transversal Logical Groups of Quantum MDS--CSS Codes}
 \author{Tavis Rudd}
 \date{August 2026}
 \hypersetup{
-  pdftitle={Diagonal Isoduality and Transversal Clifford Groups of
-    MDS--CSS Codes},
+  pdftitle={Exact Transversal Logical Groups of Quantum MDS--CSS Codes},
   pdfauthor={Tavis Rudd}
 }
 
@@ -69,30 +68,35 @@ MDS--CSS Codes}
 Transversal gates implement encoded operations by tensor products of
 single-qudit unitaries.  We determine the exact projective transversal
 logical group for the quantum MDS--CSS codes associated with linear
-\([2m,m,m+1]_q\) maximum-distance-separable codes over odd prime fields,
+\([2m,m,m+1]_q\) maximum distance separable codes over odd prime fields,
 allowing the one-qudit gate to depend on the coordinate.  The classification
-reduces to the diagonal multiplier space
+reduces to the code conductor
 \[
- \mathcal D(C,C^\perp)
- =\{s\in\F_q^{2m}:\diag(s)C\subseteq C^\perp\}.
+ \Cond(C,C^\perp)
+ =\{s\in\F_q^{2m}:s\star C\subseteq C^\perp\}
+ =(C^{\star2})^\perp,
 \]
-The MDS property forces this space to have dimension zero or one.  The exact
+where \(\star\) denotes coordinatewise multiplication and code products are
+linearly spanned.  The
+half-rate MDS hypotheses
+force this space to have dimension zero or one.  The exact
 logical group is \(\F_q^2\rtimes T\) in the zero-dimensional case and
 \(\F_q^2\rtimes\mathrm{SL}_2(q)\) in the one-dimensional case, where
 \(T=\{\diag(a,a^{-1}):a\in\F_q^\times\}\) is the diagonal
-determinant-one subgroup, also called a split torus.  Thus a linear-algebraic nullity test on the
-classical code determines all transversal logical unitaries.  The
+determinant-one subgroup, also called a split torus.  Thus the codimension of
+the Schur square determines
+all transversal logical unitaries.  The corresponding coordinatewise CSS
+endomorphism algebra is \(\F_q\times\F_q\) or \(M_2(\F_q)\).  The
 construction is explicit, and an imported rigidity theorem for stabilizer
 absolutely maximally entangled states excludes non-Clifford product
 implementations.
 
-For length six, the nonzero-multiplier condition is equivalent to the six
-projective points lying on a conic.  For an explicit non-GRS one-parameter
-family, a degree-eight invariant classifies projective and monomial-code
-equivalence over odd fields, and local-Clifford and local-unitary equivalence
-over odd prime fields.  We also analyze the Clebsch \([6,3,4]_{11}\) code as
-an example.  These six-point results and their exact certificate checks are
-applications of the all-length classification, not premises of it.
+For length six, the nonzero-conductor branch is equivalent to the six
+parity-check points lying on a conic.  On a stated regular locus of an explicit
+non-GRS pencil, a degree-eight invariant classifies projective and monomial-code
+equivalence over odd fields and local-Clifford and local-unitary equivalence
+over odd prime fields.  The Clebsch \([6,3,4]_{11}\) code is a worked example.
+These geometric applications are independent of the all-length proof.
 \end{abstract}
 \noindent\textbf{Index Terms---}\input{frontmatter/index-terms}
 

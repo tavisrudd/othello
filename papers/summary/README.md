@@ -182,10 +182,11 @@ results.
   robust-atlas arguments remain manuscript-level, as stated in the paper's
   formal boundary. [Local-Unitary Rigidity and Quantitative Rounding](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf).
 
-- **A nullity test determines MDS–CSS transversal groups.** For odd-prime
-  `[2m,m,m+1]q` MDS codes, the diagonal multiplier space has dimension zero or
-  one. Its nullity determines whether the projective transversal group is
-  `Fq² ⋊ SL₂(q)` or the smaller split-torus branch. [Diagonal Isoduality and Transversal Clifford Groups](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
+- **A Schur-square test determines MDS–CSS transversal groups.** For odd-prime
+  `[2m,m,m+1]q` MDS codes, the code conductor `Cond(C,C⊥)=(C^(star 2))⊥` has
+  dimension zero or one. Its dimension determines whether the projective
+  transversal group is `Fq² ⋊ SL₂(q)` or the smaller split-torus branch.
+  [Exact Transversal Logical Groups of Quantum MDS–CSS Codes](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
 
 - **Relative weights are exact local recovery costs, and the labelled cost
   functions compose.** Shortening and puncturing the inner dual onto the helpers give
@@ -253,7 +254,7 @@ the theorem column.
 | High-Weight Cosets of Generalized and Extended Reed–Solomon Codes | The two shells classify all MDS and NMDS one-column extensions; exact family-wise minimum-support counts determine their aggregate weight enumerators. | The same point-deleted GRS/EGRS family and field range. |
 | High-Weight Cosets of Generalized and Extended Reed–Solomon Codes | Outside the catalecticant rank-two locus and one explicit Lucas carrier, every syndrome has weight at most `r−2`; the paper also proves `#Y = 6N + 3d₂ + d₃` for the terminal cubic pencil. | Carrier containment for every characteristic and `r ≥ 6` in the stated field range; the terminal identity holds in every characteristic. |
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
-| Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
+| Exact Transversal Logical Groups of Quantum MDS–CSS Codes | The code-conductor dimension fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
 | Exact Compositional Transfer of Bounded Linear Recovery | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
 | Exact Compositional Transfer of Bounded Linear Recovery | `K_P=short_J(I⊥) ⊆ D_P=punct_J(I⊥)`, and `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. For any fixed nonzero target-message subspace, joint prescribed-coset support costs over the complete outer functional dual give the exact finite first nonconfined cost. Under `N ≥ 2` and `d(O⊥)>r+1`, this reduces to `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer. The labelled ordinary coset-support functions compose exactly under repeated concatenation; helper-restriction costs and target images give the normalized recursion. | Every proper inner code and every nonzero target-message subspace, for outer codes with at least two blocks and nonzero projection onto the target block; the RGHW specialization uses `1 ≤ t ≤ dim W_P`, and the composition law applies to every finite field tower. |
@@ -282,7 +283,7 @@ boundary, and reproducible entry points.
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | Integral Secant Distributions and Line-Code Obstructions for Complete `(k,n)`-Arcs | Finite geometry / designs / coding theory | Integer maximal-secant distributions and a ternary three-line obstruction give `t_{2q/3+1}(2,q) ≥ q²/3+5q/3-o(q)`. | [PDF](https://github.com/tavisrudd/integral-secant-arcs/blob/main/integral_secant_arcs.pdf) · [repo](https://github.com/tavisrudd/integral-secant-arcs) |
-| Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | Quantum coding / finite geometry | A diagonal-isoduality nullity test determines the projective transversal group. | [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [repo](https://github.com/tavisrudd/mds-css-transversal-groups) |
+| Exact Transversal Logical Groups of Quantum MDS–CSS Codes | Quantum coding / finite geometry | The code-conductor dimension, equivalently the codimension of the Schur square, determines the projective transversal group. | [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [repo](https://github.com/tavisrudd/mds-css-transversal-groups) |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Matrix theory / algebraic combinatorics / mathematical physics | Order six is the unique nontrivial cut-independent case; Hermitian triangle holonomy controls the degree-three frontier and rigidity. | [PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [repo](https://github.com/tavisrudd/conference-cut-spectra) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
@@ -791,9 +792,9 @@ hierarchical optimizer and capacity-aware repair scheduler.
 **Delivers.** The associated nested code pair and its exact relative-weight
 interpretation; an exact ungated arbitrary-rank prescribed-coset theorem;
 finite and eventual rank-stratified confinement after the outer-distance gate;
-best-target generalized-weight and cooperative-locality consequences; an MDS
 finite small-context tests and the coarsest bounded contextual quotient at
 every target rank;
+best-target generalized-weight and cooperative-locality consequences; an MDS
 staircase and rigidity theorem; positive-density and bounded service-rate
 transfer; reliability and coefficient-sensitive separations; and explicit
 projective-simplex formulas; exact min--sum composition through finite
@@ -982,16 +983,16 @@ maximal-secant family from the high-character lines.
 ---
 
 
-#### Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes
+#### Exact Transversal Logical Groups of Quantum MDS–CSS Codes
 
 [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [Repository](https://github.com/tavisrudd/mds-css-transversal-groups) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21766797-blue.svg)](https://doi.org/10.5281/zenodo.21766797)
 
-**Standout result.** A zero-or-one-dimensional nullity test determines which
+**Standout result.** A zero-or-one-dimensional code-conductor test determines which
 projective transversal logical group an odd-prime MDS–CSS code supports.
 
-> *Abstract* Transversal gates implement encoded operations by tensor products of single-qudit unitaries. We determine the exact projective transversal logical group for the quantum MDS–CSS codes associated with linear [2m,m,m+1]q maximum-distance-separable codes over odd prime fields, allowing the one-qudit gate to depend on the coordinate. The classification reduces to the diagonal multiplier space D(C,C⊥) = {s ∈ Fq²ᵐ : diag(s)C ⊆ C⊥}. The MDS property forces this space to have dimension zero or one. The exact logical group is Fq² ⋊ T in the zero-dimensional case and Fq² ⋊ SL₂(q) in the one-dimensional case, where T = {diag(a,a⁻¹) : a ∈ Fq×} is the diagonal determinant-one subgroup, also called a split torus. Thus a linear-algebraic nullity test on the classical code determines all transversal logical unitaries. The construction is explicit, and an imported rigidity theorem for stabilizer absolutely maximally entangled states excludes non-Clifford product implementations.
+> *Abstract* Transversal gates implement encoded operations by tensor products of single-qudit unitaries. We determine the exact projective transversal logical group for the quantum MDS–CSS codes associated with linear [2m,m,m+1]q maximum distance separable codes over odd prime fields, allowing the one-qudit gate to depend on the coordinate. The classification reduces to the code conductor Cond(C,C⊥) = {s ∈ Fq²ᵐ : s⋆C ⊆ C⊥} = (C^(⋆2))⊥, where ⋆ denotes coordinatewise multiplication and code products are linearly spanned. The half-rate MDS hypotheses force this space to have dimension zero or one. The exact logical group is Fq² ⋊ T in the zero-dimensional case and Fq² ⋊ SL₂(q) in the one-dimensional case, where T = {diag(a,a⁻¹) : a ∈ Fq×} is the diagonal determinant-one subgroup, also called a split torus. Thus the codimension of the Schur square determines all transversal logical unitaries. The corresponding coordinatewise CSS endomorphism algebra is Fq×Fq or M₂(Fq). The construction is explicit, and an imported rigidity theorem for stabilizer absolutely maximally entangled states excludes non-Clifford product implementations.
 >
-> For length six, the nonzero-multiplier condition is equivalent to the six projective points lying on a conic. For an explicit non-GRS one-parameter family, a degree-eight invariant classifies projective and monomial-code equivalence over odd fields, and local-Clifford and local-unitary equivalence over odd prime fields. We also analyze the Clebsch [6,3,4]₁₁ code as an example. These six-point results and their exact certificate checks are applications of the all-length classification, not premises of it.
+> For length six, the nonzero-conductor branch is equivalent to the six parity-check points lying on a conic. On a stated regular locus of an explicit non-GRS pencil, a degree-eight invariant classifies projective and monomial-code equivalence over odd fields and local-Clifford and local-unitary equivalence over odd prime fields. The Clebsch [6,3,4]₁₁ code is a worked example. These geometric applications are independent of the all-length proof.
 >
 **Delivers.** A classification of the diagonal rescalings that make a code
 match its dual, together with the logical operations that can then be performed

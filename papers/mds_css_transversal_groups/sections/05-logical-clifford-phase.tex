@@ -3,8 +3,8 @@
 
 Section~\ref{sec:exact-logical} already determines the fixed-coordinate
 transversal logical group at every length.  In the six-coordinate case, the
-same coding-theoretic test has a classical geometric interpretation: a
-diagonal multiplier from \(C\) to \(C^\perp\) exists exactly when the six
+same coding-theoretic test has a classical geometric interpretation: the
+conductor \(\Cond(C,C^\perp)\) is nonzero exactly when the six
 projective points lie on a conic.
 
 Throughout this section \(q\) is an odd prime.  Regard any one party of
@@ -23,7 +23,7 @@ group is then not the full local Clifford kernel.
 For an encoder view, the \emph{fixed-coordinate logical symplectic image} means
 the image of \(\mathcal K_C\) on its input block.
 Theorem~\ref{thm:diagonal-isodual-transversal-group} identifies the
-all-length dichotomy by diagonal isoduality.  Geometrically, the same condition
+all-length dichotomy by diagonal equivalence to the dual.  Geometrically, the same condition
 is called fixed-label Gale self-association.  The labeled Gale transform is
 the six-point configuration formed by the columns of any generator matrix for
 \(\ker H\).  Fixed-label self-association means that this configuration is
@@ -94,13 +94,13 @@ the fixed-coordinate logical symplectic image is the split torus.
 
 \begin{proof}
 Theorem~\ref{thm:diagonal-isodual-transversal-group} gives
-\(\mathrm{SL}_2(q)\) exactly on the diagonally isodual branch and \(T\)
-otherwise.  Lemma~\ref{lem:six-arc-self-association} identifies diagonal
-isoduality with the conic locus.
+\(\mathrm{SL}_2(q)\) exactly when \(C\) is diagonally equivalent to its dual,
+and \(T\) otherwise.  Lemma~\ref{lem:six-arc-self-association} identifies
+this condition with the conic locus.
 \end{proof}
 
 \begin{remark}[Allowing coordinate permutations]
-At a chosen input coordinate, a coordinate-permuting isoduality that exchanges
+At a chosen input coordinate, a coordinate permutation that exchanges
 the CSS \(X\)- and \(Z\)-spaces represents the nontrivial Weyl-group element
 normalizing \(T\).  Together with \(T\), the possible input blocks therefore
 generate the normalizer of \(T\).  This gives an action on one fixed encoder
@@ -239,4 +239,4 @@ and counts its minimum-weight physical representatives, while the other fixes
 an \(X\)-syndrome and varies the support of a translating operator.  This
 distinction matters here because the large symmetry of the error-syndrome
 shell does not enlarge the fixed-coordinate logical group: the latter is
-controlled by diagonal isoduality of the code.
+controlled by diagonal equivalence of the code to its dual.

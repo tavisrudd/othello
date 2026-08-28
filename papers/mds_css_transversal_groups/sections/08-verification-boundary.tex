@@ -1,19 +1,19 @@
 \section{Verification and scope}\label{sec:verification}
 
-The all-length multiplier theorem and transversal-group dichotomy are proved
+The all-length conductor lemma and transversal-group dichotomy are proved
 in the text and use no finite enumeration.  Exactness invokes the imported
 transversal Clifford no-go, the encoder consequence of stabilizer-AME
 rigidity.  The construction also uses the imported stabilizer-character
 correction \cite{RuddAMEStabilizerRigidity2026}.
 
-\begin{table}[p]
+\begin{table}[H]
 \centering
 \small
 \begin{tabular}{@{}L{.20\textwidth}L{.17\textwidth}L{.27\textwidth}L{.25\textwidth}@{}}
 \toprule
 Claim family & Status & Verification method & Imported or trusted input \\
 \midrule
-Multiplier nullity & proved here & MDS distance and a vanishing-coordinate argument & none \\
+Conductor dimension & proved here & MDS rank functions and a vanishing-coordinate argument & standard product-code interpretation \\
 Exact fixed-coordinate group & proved here & block preservation, explicit unipotents, and logical Paulis & imported product-unitary rigidity and phase correction \\
 Six-point conic criterion & proved here & MDS--CSS dictionary and Gale-transform argument & none \\
 Pencil quotient & proved here; finite step certificate-assisted & symbolic bracket identities and exact transition-map enumeration & imported minimum-support transition theorem; certificate replay for the enumeration \\
@@ -40,7 +40,7 @@ records each finite domain, stopping condition, independent replay, and
 negative scope statement.  Repository documentation gives the exact replay
 command.
 
-The Lean development formalizes the MDS--CSS dictionary, multiplier nullity,
+The Lean development formalizes the MDS--CSS dictionary, conductor dimension,
 pencil quotient, extension-field formulas, syndrome geometry, contraction and
 transport algebra, and abstract consequences of a supplied
 coordinate-permutation complement.  The finite classifications and explicit

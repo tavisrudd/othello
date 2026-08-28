@@ -1,23 +1,24 @@
-# Diagonal isoduality and transversal Clifford groups
+# Exact transversal logical groups of quantum MDS--CSS codes
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21766797-blue.svg)](https://doi.org/10.5281/zenodo.21766797)
 
-This source tree contains *Diagonal Isoduality and Transversal Clifford Groups
-of MDS--CSS Codes* and its paper-local verification package.
+This source tree contains *Exact Transversal Logical Groups of Quantum
+MDS--CSS Codes* and its paper-local verification package.
 
 [Read the paper (PDF).](mds-css-transversal-groups.pdf)
 
 For an odd-prime linear `[2m,m,m+1]_q` MDS code, the paper proves that the
-space of diagonal code-to-dual multipliers has nullity zero or one and that
-this nullity selects the exact fixed-coordinate, site-dependent projective
-transversal logical group: `F_q^2 ⋊ SL_2(q)` on the diagonally isodual branch and `F_q^2 ⋊ T`
-otherwise.  Stabilizer-AME rigidity supplies the converse: every
+code conductor `Cond(C,C⊥) = (C^(star 2))⊥` has dimension zero or one and that
+this dimension selects the exact fixed-coordinate, site-dependent projective
+transversal logical group: `F_q^2 ⋊ SL_2(q)` when the conductor is nonzero and
+`F_q^2 ⋊ T` otherwise.  Equivalently, the coordinatewise CSS endomorphism
+algebra is `M_2(F_q)` or `F_q × F_q`.  Stabilizer-AME rigidity supplies the converse: every
 tensor-product logical implementation is Clifford factor by factor.  The
 linear `SL_2(q)` action has coherent Weil lifts, while its affine extension
 retains the Heisenberg obstruction to scalar splitting.
 
-For six coordinates, diagonal isoduality is exactly self-association of the
-six-arc and hence the conic boundary.  On an explicit non-GRS pencil, one
+For six coordinates, nonzero code-to-dual conductor is exactly
+self-association of the six-arc and hence the conic boundary.  On an explicit non-GRS pencil, one
 degree-eight quotient classifies projective and monomial-code equivalence over
 odd fields and local-Clifford and local-unitary equivalence over odd prime
 fields.  The Clebsch code supplies the worked syndrome-geometric example.

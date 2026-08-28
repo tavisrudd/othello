@@ -1,6 +1,6 @@
 {
-  "title": "Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes",
-  "description": "For an odd-prime linear [2m,m,m+1]_q MDS code, this preprint proves that the diagonal code-to-dual multiplier space has dimension zero or one and exactly selects the projective transversal logical group: F_q²⋊SL₂(q) on the diagonally isodual branch and F_q²⋊T otherwise. Stabilizer-AME rigidity supplies the factorwise-Clifford converse; coherent Weil lifts and the Heisenberg obstruction delimit linear from affine splitting. For six coordinates, self-association gives the conic boundary and one degree-eight quotient classifies an explicit non-GRS pencil.",
+  "title": "Exact Transversal Logical Groups of Quantum MDS–CSS Codes",
+  "description": "For an odd-prime linear [2m,m,m+1]_q MDS code, this preprint proves that the code conductor Cond(C,C⊥)=(C^(star 2))⊥ has dimension zero or one and exactly selects the projective transversal logical group: F_q²⋊SL₂(q) when the conductor is nonzero and F_q²⋊T otherwise. Equivalently, the coordinatewise CSS endomorphism algebra is M₂(F_q) or F_q×F_q. Stabilizer-AME rigidity supplies the factorwise-Clifford converse; coherent Weil lifts and the Heisenberg obstruction delimit linear from affine splitting. For six coordinates, the nonzero-conductor condition gives the conic boundary and one degree-eight quotient classifies an explicit non-GRS pencil.",
   "creators": [
     {
       "name": "Rudd, Tavis",

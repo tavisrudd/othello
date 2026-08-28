@@ -10,7 +10,7 @@ code family is therefore a natural structural problem.
 
 This paper solves that problem for a family of one-logical-qudit quantum MDS
 codes.  Let \(C\leq\F_q^{2m}\) be a linear
-\([2m,m,m+1]_q\) maximum-distance-separable (MDS) code.  Its equal-phase CSS
+\([2m,m,m+1]_q\) maximum distance separable (MDS) code.  Its equal-phase CSS
 state is
 \begin{equation}\label{eq:equal-phase-css-state}
  |\Psi_C\rangle=q^{-m/2}\sum_{c\in C}|c\rangle.
@@ -28,35 +28,39 @@ The factors may differ from one coordinate to another.  This convention is
 strictly broader than the uniform form \(U^{\otimes n}\).  The distinction is
 essential here: on one branch of the classification, a logical symplectic
 matrix is realized at different sites through conjugations determined by
-coordinatewise multiplier ratios.  Logical groups are projective, so global
+coordinatewise conductor ratios.  Logical groups are projective, so global
 scalar phases are divided out.  Permutations of physical coordinates are not
 included unless stated explicitly.
 
-The classification is controlled by a standard coding-theoretic object.  A
-vector \(s\in\F_q^{2m}\) is a diagonal code-to-dual multiplier when
-\(\diag(s)C\subseteq C^\perp\).  Write
+The classification is controlled by a standard coding-theoretic object.  For
+linear codes \(E,F\leq\F_q^n\), their \emph{conductor} is
 \[
- \mathcal D(C,C^\perp)
- =\{s\in\F_q^{2m}:\diag(s)C\subseteq C^\perp\}.
+ \Cond(E,F)=\{s\in\F_q^n:s\star E\subseteq F\}.
 \]
-The definition asks only for inclusion.  Proposition
+We write \(E\star F\) for the linear span of all coordinatewise products
+\(e\star f\), and \(C^{\star2}=C\star C\).  In the present problem,
+\[
+ \Cond(C,C^\perp)=(C^{\star2})^\perp.
+\]
+Thus the test may be computed either as a conductor or as the codimension of
+the Schur square.  The definition of the conductor asks only for inclusion.  Proposition
 \ref{prop:diagonal-multiplier-line} shows that the MDS property upgrades every
-nonzero inclusion to the equality \(\diag(s)C=C^\perp\).  It also shows that
-the multiplier space has dimension zero or one.  We call the latter case
-\emph{diagonal isoduality}.
+nonzero inclusion to the equality \(s\star C=C^\perp\).  It also shows that
+the conductor has dimension zero or one.  In the latter case, \(C\) is
+diagonally equivalent to its dual with the coordinate order fixed.
 
 \begin{theorem}[Exact transversal logical group]
 \label{thm:diagonal-isodual-transversal-group}
 Let \(q\) be an odd prime, let \(m\geq2\), and let
 \(C\leq\F_q^{2m}\) be a linear \([2m,m,m+1]_q\) MDS code.  Then
-\(\dim\mathcal D(C,C^\perp)\) is zero or one, and the projective group of
+\(\dim\Cond(C,C^\perp)\) is zero or one, and the projective group of
 logical unitaries with fixed-coordinate transversal implementations is
 \[
 \begin{cases}
  \F_q^2\rtimes T,
-   &\dim\mathcal D(C,C^\perp)=0,\\
+   &\dim\Cond(C,C^\perp)=0,\\
  \F_q^2\rtimes\mathrm{SL}_2(q),
-   &\dim\mathcal D(C,C^\perp)=1,
+   &\dim\Cond(C,C^\perp)=1,
 \end{cases}
 \qquad
 T=\{\diag(a,a^{-1}):a\in\F_q^\times\}.
@@ -75,9 +79,9 @@ Fourier-like transformations exchanging logical \(X\) and \(Z\).
 The proof has three steps.  First, represent each one-qudit Clifford by a
 \(2\)-by-\(2\) symplectic matrix.  Preservation of the CSS stabilizer gives
 four block equations involving \(C\) and \(C^\perp\).  Any nonzero
-off-diagonal block is a diagonal multiplier from one code to the other.
-Second, the MDS distance forces every such multiplier to have full support and
-forces the multiplier space to be at most one-dimensional.  If the space is
+off-diagonal block belongs to a conductor from one code to the other.
+Second, the MDS distance forces every such conductor element to have full
+support and forces the conductor to be at most one-dimensional.  If the space is
 zero, all local symplectic matrices are diagonal and the linear logical image
 is \(T\).  If it is one-dimensional, its generator constructs upper and lower
 unipotent matrices, which generate \(\mathrm{SL}_2(q)\).  Finally, the
@@ -89,6 +93,10 @@ are exact.
 The result fits into a broad study of transversal and automorphism-induced
 logical gates.  Rains organizes coordinatewise symplectic symmetries through
 code-invariance algebras \cite[Theorems~4 and~14]{RainsNonbinary1999}.
+In classical coding theory, conductors are standard Schur-product objects
+\cite[Section~2]{CouvreurMarquezCorbellaPellikaan2017}, and the product
+Singleton bound controls their dimensions for MDS codes
+\cite{MirandolaZemor2015}.
 Compatible symplectic bases describe transversal Clifford structure for
 self-dual CSS codes \cite[Theorem~1]{TansuwannontTakadaFujii2025}, while
 uniform diagonal multiblock actions and endomorphism algebras constrain qubit
@@ -101,15 +109,32 @@ odd-prime one-logical-qudit codes with a complete transversal Clifford set
 \cite[Section~IV.C]{PrakashSinghal2026}; Albert gives related normal forms for
 binary CSS codes \cite[Sections~III--V]{Albert2026}.
 
+The closest algebraic predecessors have different outputs and conventions.
+Rains's invariance algebra supplies the general container for the block
+preservation calculation, but does not specialize half-rate MDS--CSS label
+spaces or identify their fixed-coordinate logical image as exactly \(T\) or
+\(\mathrm{SL}_2(q)\).  Dasu and Burton treat diagonal transversal Clifford
+actions on blocks of qubit stabilizer codes and classify the associated
+endomorphism-algebra types; their result does not give the odd-prime,
+site-dependent MDS specialization here.  The compatible-basis result for
+self-dual CSS codes gives constructions rather than the exact image for an
+arbitrary member of the present family.  None of these comparisons supplies
+the product-unitary exactness conclusion, which here comes from the imported
+stabilizer-AME rigidity theorem.
+
 \paragraph{Gap and contribution.}
 What is missing from these results is the exact fixed-coordinate,
 site-dependent group for the present MDS--CSS family.  Theorem
 \ref{thm:diagonal-isodual-transversal-group} supplies it by reducing the
-problem to \(\mathcal D(C,C^\perp)\).  The MDS multiplier theorem and both
-group constructions are proved here.  Tan's general AME--QMDS correspondence
+problem to \(\Cond(C,C^\perp)\).  We give a short self-contained proof of the
+needed equal-parameter MDS conductor lemma, although it is also a standard
+consequence of product-code theory.  The new step is to use this conductor to
+collapse the CSS invariance algebra to two types, construct both resulting
+logical groups, and prove exactness for all product-unitary implementations.
+Tan's general AME--QMDS correspondence
 relates state symmetries and transversal encoder gates
-\cite[Theorems~3.5--3.6]{Tan2026}.  The new step here is to compute the exact
-fixed-coordinate subgroup for this family.
+\cite[Theorems~3.5--3.6]{Tan2026}; here it transfers the state-symmetry
+calculation to each encoder view.
 
 \subsection*{Imported inputs}
 
@@ -158,7 +183,8 @@ results.
 
 \paragraph{Six-point applications.}
 At length six, the coding-theoretic statement is that
-\(C\) is diagonally isodual.  Its geometric equivalent is that the six
+\(C\) is diagonally equivalent to its dual with the labels fixed.  Its
+geometric equivalent is that the six
 projective columns lie on a conic, or equivalently are fixed-label Gale
 self-associated.  Its quantum-information consequence is the enlargement of
 the fixed-coordinate logical symplectic image from \(T\) to
@@ -178,7 +204,7 @@ rigidity theorem.  The finite six-point calculations have exact certificate
 replays, but no finite enumeration enters the all-length theorem.
 
 Section~\ref{sec:dictionary} fixes the stabilizer and MDS--CSS conventions.
-Section~\ref{sec:exact-logical} proves the multiplier theorem and exact group,
+Section~\ref{sec:exact-logical} proves the conductor lemma and exact group,
 then treats the lift refinements.  Section~\ref{sec:logical} translates the
 criterion into six-point geometry.  Section~\ref{sec:pencil} classifies the
 one-parameter family, and Section~\ref{sec:invariants} gives the limitation on

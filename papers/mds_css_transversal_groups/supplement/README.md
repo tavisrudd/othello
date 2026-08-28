@@ -1,8 +1,8 @@
 # Evidence supplement
 
 This directory is the paper-local reproducibility package for every
-computational result retained by *Diagonal Isoduality and Transversal
-Clifford Groups of MDS--CSS Codes*.  `EVIDENCE.md` gives the
+computational result retained by *Exact Transversal Logical Groups of Quantum
+MDS--CSS Codes*.  `EVIDENCE.md` gives the
 claim, exact domain, certificate meaning, independent check, and trust boundary
 for each bundle.  The imported generators and canonical JSON certificates are
 under `evidence/`.  They are byte-identical to the frozen source artifacts

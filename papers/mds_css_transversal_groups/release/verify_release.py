@@ -120,7 +120,7 @@ def create_manifest() -> dict[str, object]:
     return {
         "schema": "mds-css-transversal-groups-release-manifest-v1",
         "title": (
-            "Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes"
+            "Exact Transversal Logical Groups of Quantum MDS--CSS Codes"
         ),
         "public_export": {
             "artifacts": public,
