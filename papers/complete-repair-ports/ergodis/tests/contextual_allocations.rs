@@ -2,8 +2,8 @@ use ergodis::observational::{
     compile_observational_with_policy, CertificatePolicy, FinitePresentation, GeneratorSpec,
 };
 use ergodis::{
-    CostTable, DenseSelector, Gf4, Matrix, Prime, RankBoundedContextCache, RankOneProbeCache,
-    SparseSelector,
+    CanonicalContextBasis, CostTable, DenseSelector, Gf4, Matrix, Prime, RankBoundedContextCache,
+    RankOneProbeCache, SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -201,6 +201,30 @@ fn contextual_cache_scans_have_constant_allocation_envelopes() {
         warm_allocations <= 10,
         "rank-bounded warm scan allocated {warm_allocations} times"
     );
+}
+
+#[test]
+fn frozen_envelope_canonical_query_allocates_nothing() {
+    let entries = (0u8..4).map(|bits| {
+        let label = Matrix::new::<2>(1, 2, vec![bits & 1, (bits >> 1) & 1]).unwrap();
+        let cost = label.as_slice().iter().filter(|&&value| value != 0).count() as u32;
+        (label, cost)
+    });
+    let rank_two = CostTable::from_entries::<2>(1, 2, entries).unwrap();
+    let mut cache =
+        RankBoundedContextCache::<Prime<2>>::new(&rank_two, &rank_two, 5, 0, 2).unwrap();
+    let envelope = cache.compile_frozen_full_span_envelope(4, 307).unwrap();
+    let context = Matrix::new::<2>(
+        4,
+        5,
+        vec![0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+    )
+    .unwrap();
+    let canonical = CanonicalContextBasis::new::<Prime<2>>(&context, 5, 0).unwrap();
+    let (answer, allocations) =
+        tracked_allocations(|| envelope.context_cost_canonical(&canonical).unwrap());
+    assert_eq!(answer.context_rank, 4);
+    assert_eq!(allocations, 0);
 }
 
 #[test]

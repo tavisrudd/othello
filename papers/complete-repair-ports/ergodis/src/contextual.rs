@@ -515,6 +515,38 @@ pub struct RankBoundedContextCache<'a, F: FiniteField> {
 
 const EXACT_ENVELOPE_PARENT: u32 = u32::MAX;
 
+/// Validated canonical row-space representative for repeated context queries.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct CanonicalContextBasis {
+    field_order: u8,
+    ambient_dimension: usize,
+    target_block: usize,
+    encoded_key: u64,
+    basis: Matrix,
+}
+
+impl CanonicalContextBasis {
+    pub fn new<F: FiniteField>(
+        basis: &Matrix,
+        ambient_dimension: usize,
+        target_block: usize,
+    ) -> Result<Self, ContextualError> {
+        let basis = validate_context::<F>(basis, ambient_dimension, target_block)?;
+        let encoded_key = encode_subspace::<F>(basis.as_slice())?;
+        Ok(Self {
+            field_order: F::ORDER,
+            ambient_dimension,
+            target_block,
+            encoded_key,
+            basis,
+        })
+    }
+
+    pub fn basis(&self) -> &Matrix {
+        &self.basis
+    }
+}
+
 #[derive(Debug)]
 struct RankEnvelopeStratum {
     bases: Box<[u8]>,
@@ -538,6 +570,29 @@ pub struct RankStratifiedEnvelope {
     ambient_dimension: usize,
     target_block: usize,
     strata: Box<[RankEnvelopeStratum]>,
+    compilation_work: ContextWork,
+}
+
+#[derive(Debug)]
+struct FrozenRankEnvelopeStratum {
+    bases: Box<[u8]>,
+    envelope_costs: Box<[u32]>,
+    envelope_parents: Box<[u32]>,
+    lookup_keys: Box<[u64]>,
+    lookup_states: Box<[u32]>,
+}
+
+/// Query-only rank-stratified envelope with exact witnesses.
+///
+/// Construction-only exact costs and restriction edges are discarded.  The
+/// retained parent chain still identifies an exact minimizing basis, while
+/// queries require no allocation beyond canonicalizing an untrusted matrix.
+#[derive(Debug)]
+pub struct FrozenRankStratifiedEnvelope {
+    field_order: u8,
+    ambient_dimension: usize,
+    target_block: usize,
+    strata: Box<[FrozenRankEnvelopeStratum]>,
     compilation_work: ContextWork,
 }
 
@@ -589,18 +644,133 @@ impl RankStratifiedEnvelope {
         &self,
         functional_dual_basis: &Matrix,
     ) -> Result<RankEnvelopeAnswer, ContextualError> {
-        if self.field_order != F::ORDER {
-            return Err(ContextualError::Shape);
-        }
-        let basis = validate_context::<F>(
+        let basis = CanonicalContextBasis::new::<F>(
             functional_dual_basis,
             self.ambient_dimension,
             self.target_block,
         )?;
+        self.context_cost_canonical(&basis)
+    }
+
+    /// Query a prevalidated context without allocation or elimination.
+    pub fn context_cost_canonical(
+        &self,
+        context: &CanonicalContextBasis,
+    ) -> Result<RankEnvelopeAnswer, ContextualError> {
+        if self.field_order != context.field_order
+            || self.ambient_dimension != context.ambient_dimension
+            || self.target_block != context.target_block
+        {
+            return Err(ContextualError::Shape);
+        }
+        let basis = &context.basis;
         let rank = basis.rows();
         let stratum = self.strata.get(rank).ok_or(ContextualError::Shape)?;
-        let key = encode_subspace::<F>(basis.as_slice())?;
-        let state = lookup_envelope_state(stratum, key).ok_or(ContextualError::Shape)?;
+        let state =
+            lookup_envelope_state(stratum, context.encoded_key).ok_or(ContextualError::Shape)?;
+        let mut exact_rank = rank;
+        let mut exact_state = state;
+        while exact_rank != 0 {
+            let parent = self.strata[exact_rank].envelope_parents[exact_state as usize];
+            if parent == EXACT_ENVELOPE_PARENT {
+                break;
+            }
+            exact_rank -= 1;
+            exact_state = parent;
+        }
+        Ok(RankEnvelopeAnswer {
+            cost: stratum.envelope_costs[state as usize],
+            context_rank: rank.try_into().map_err(|_| ContextualError::Overflow)?,
+            exact_rank: exact_rank
+                .try_into()
+                .map_err(|_| ContextualError::Overflow)?,
+            exact_state,
+        })
+    }
+
+    pub fn exact_basis(&self, rank: usize, state: u32) -> Option<&[u8]> {
+        let stratum = self.strata.get(rank)?;
+        let width = rank.checked_mul(self.ambient_dimension)?;
+        let start = (state as usize).checked_mul(width)?;
+        stratum.bases.get(start..start.checked_add(width)?)
+    }
+
+    pub fn into_frozen(self) -> FrozenRankStratifiedEnvelope {
+        let strata = self
+            .strata
+            .into_vec()
+            .into_iter()
+            .map(|stratum| FrozenRankEnvelopeStratum {
+                bases: stratum.bases,
+                envelope_costs: stratum.envelope_costs,
+                envelope_parents: stratum.envelope_parents,
+                lookup_keys: stratum.lookup_keys,
+                lookup_states: stratum.lookup_states,
+            })
+            .collect::<Vec<_>>()
+            .into_boxed_slice();
+        FrozenRankStratifiedEnvelope {
+            field_order: self.field_order,
+            ambient_dimension: self.ambient_dimension,
+            target_block: self.target_block,
+            strata,
+            compilation_work: self.compilation_work,
+        }
+    }
+}
+
+impl FrozenRankStratifiedEnvelope {
+    pub fn compilation_work(&self) -> ContextWork {
+        self.compilation_work
+    }
+
+    pub fn storage(&self) -> RankEnvelopeStorage {
+        let mut states = 0_u64;
+        let mut payload_bytes = 0_u64;
+        for stratum in &self.strata {
+            states += stratum.envelope_costs.len() as u64;
+            payload_bytes += (stratum.bases.len()
+                + std::mem::size_of_val(&*stratum.envelope_costs)
+                + std::mem::size_of_val(&*stratum.envelope_parents)
+                + std::mem::size_of_val(&*stratum.lookup_keys)
+                + std::mem::size_of_val(&*stratum.lookup_states))
+                as u64;
+        }
+        RankEnvelopeStorage {
+            states,
+            restriction_edges: 0,
+            payload_bytes,
+        }
+    }
+
+    pub fn context_cost<F: FiniteField>(
+        &self,
+        functional_dual_basis: &Matrix,
+    ) -> Result<RankEnvelopeAnswer, ContextualError> {
+        let basis = CanonicalContextBasis::new::<F>(
+            functional_dual_basis,
+            self.ambient_dimension,
+            self.target_block,
+        )?;
+        self.context_cost_canonical(&basis)
+    }
+
+    /// Query a prevalidated context without allocation or elimination.
+    pub fn context_cost_canonical(
+        &self,
+        context: &CanonicalContextBasis,
+    ) -> Result<RankEnvelopeAnswer, ContextualError> {
+        if self.field_order != context.field_order
+            || self.ambient_dimension != context.ambient_dimension
+            || self.target_block != context.target_block
+        {
+            return Err(ContextualError::Shape);
+        }
+        let basis = &context.basis;
+        let rank = basis.rows();
+        let stratum = self.strata.get(rank).ok_or(ContextualError::Shape)?;
+        let state = lookup_frozen_envelope_state(stratum, context.encoded_key)
+            .ok_or(ContextualError::Shape)?;
         let mut exact_rank = rank;
         let mut exact_state = state;
         while exact_rank != 0 {
@@ -951,6 +1121,27 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
         maximum_context_rank: usize,
         state_budget: usize,
     ) -> Result<RankStratifiedEnvelope, ContextualError> {
+        self.compile_full_span_envelope_retaining(maximum_context_rank, state_budget, true)
+    }
+
+    /// Compile a query-only envelope directly, retaining exact minimizing
+    /// bases but never materializing the restriction-edge certificate.
+    pub fn compile_frozen_full_span_envelope(
+        &mut self,
+        maximum_context_rank: usize,
+        state_budget: usize,
+    ) -> Result<FrozenRankStratifiedEnvelope, ContextualError> {
+        Ok(self
+            .compile_full_span_envelope_retaining(maximum_context_rank, state_budget, false)?
+            .into_frozen())
+    }
+
+    fn compile_full_span_envelope_retaining(
+        &mut self,
+        maximum_context_rank: usize,
+        state_budget: usize,
+        retain_evidence: bool,
+    ) -> Result<RankStratifiedEnvelope, ContextualError> {
         if maximum_context_rank > self.block_count || state_budget == 0 {
             return Err(ContextualError::Shape);
         }
@@ -965,6 +1156,7 @@ impl<'a, F: FiniteField> RankBoundedContextCache<'a, F> {
             maximum_context_rank,
             state_budget,
             self.zero_cost,
+            retain_evidence,
             |rank, subspace| {
                 work.distinct_subspaces = work
                     .distinct_subspaces
@@ -1005,6 +1197,7 @@ fn compile_rank_stratified_envelope<F: FiniteField, C>(
     maximum_rank: usize,
     state_budget: usize,
     zero_cost: u32,
+    retain_evidence: bool,
     mut exact_cost: C,
 ) -> Result<RankStratifiedEnvelope, ContextualError>
 where
@@ -1086,22 +1279,41 @@ where
             lookup_states[slot] = u32::try_from(state).map_err(|_| ContextualError::Overflow)?;
         }
 
-        let restrictions_per_state = projective_line_count(F::ORDER, rank)?;
-        let edge_capacity = u64::try_from(count)
-            .map_err(|_| ContextualError::Overflow)?
-            .checked_mul(restrictions_per_state)
-            .ok_or(ContextualError::Overflow)?;
-        if edge_capacity > u64::from(u32::MAX) {
+        let edge_capacity = if retain_evidence {
+            let restrictions_per_state = projective_line_count(F::ORDER, rank)?;
+            Some(
+                u64::try_from(count)
+                    .map_err(|_| ContextualError::Overflow)?
+                    .checked_mul(restrictions_per_state)
+                    .ok_or(ContextualError::Overflow)?,
+            )
+        } else {
+            None
+        };
+        if edge_capacity.is_some_and(|edges| edges > u64::from(u32::MAX)) {
             return Err(ContextualError::Overflow);
         }
-        let mut restriction_offsets = Vec::with_capacity(count + 1);
-        let mut restriction_targets = Vec::with_capacity(to_usize(edge_capacity)?);
-        let mut envelope_costs = exact_costs.clone();
+        let mut restriction_offsets = if retain_evidence {
+            Vec::with_capacity(count + 1)
+        } else {
+            Vec::new()
+        };
+        let mut restriction_targets = match edge_capacity {
+            Some(edges) => Vec::with_capacity(to_usize(edges)?),
+            None => Vec::new(),
+        };
+        let mut envelope_costs = if retain_evidence {
+            exact_costs.clone()
+        } else {
+            std::mem::take(&mut exact_costs)
+        };
         let mut envelope_parents = vec![EXACT_ENVELOPE_PARENT; count];
         if rank == 1 {
             for state in 0..count {
-                restriction_offsets.push(restriction_targets.len() as u32);
-                restriction_targets.push(0);
+                if retain_evidence {
+                    restriction_offsets.push(restriction_targets.len() as u32);
+                    restriction_targets.push(0);
+                }
                 if strata[0].envelope_costs[0] < envelope_costs[state] {
                     envelope_costs[state] = strata[0].envelope_costs[0];
                     envelope_parents[state] = 0;
@@ -1117,7 +1329,9 @@ where
             let mut child_basis = vec![0u8; child_width];
             let previous = &strata[child_rank];
             for (state, basis) in bases.chunks_exact(width).enumerate() {
-                restriction_offsets.push(restriction_targets.len() as u32);
+                if retain_evidence {
+                    restriction_offsets.push(restriction_targets.len() as u32);
+                }
                 enumerate_rref_subspaces::<F, _>(
                     rank,
                     child_rank,
@@ -1137,7 +1351,9 @@ where
                         let key = encode_subspace::<F>(&child_basis)?;
                         let child =
                             lookup_envelope_state(previous, key).ok_or(ContextualError::Shape)?;
-                        restriction_targets.push(child);
+                        if retain_evidence {
+                            restriction_targets.push(child);
+                        }
                         let child_cost = previous.envelope_costs[child as usize];
                         if child_cost < envelope_costs[state] {
                             envelope_costs[state] = child_cost;
@@ -1148,8 +1364,10 @@ where
                 )?;
             }
         }
-        restriction_offsets.push(restriction_targets.len() as u32);
-        debug_assert_eq!(restriction_targets.len(), to_usize(edge_capacity)?);
+        if let Some(edge_capacity) = edge_capacity {
+            restriction_offsets.push(restriction_targets.len() as u32);
+            debug_assert_eq!(restriction_targets.len(), to_usize(edge_capacity)?);
+        }
         strata.push(RankEnvelopeStratum {
             bases: bases.into_boxed_slice(),
             exact_costs: exact_costs.into_boxed_slice(),
@@ -1220,10 +1438,14 @@ fn rref_contains_coordinate_line(
 }
 
 fn encode_subspace<F: FiniteField>(basis: &[u8]) -> Result<u64, ContextualError> {
+    encode_subspace_order(F::ORDER, basis)
+}
+
+fn encode_subspace_order(order: u8, basis: &[u8]) -> Result<u64, ContextualError> {
     let mut key = 0_u64;
     for &entry in basis {
         key = key
-            .checked_mul(u64::from(F::ORDER))
+            .checked_mul(u64::from(order))
             .and_then(|value| value.checked_add(u64::from(entry)))
             .ok_or(ContextualError::Overflow)?;
     }
@@ -1231,14 +1453,22 @@ fn encode_subspace<F: FiniteField>(basis: &[u8]) -> Result<u64, ContextualError>
 }
 
 fn lookup_envelope_state(stratum: &RankEnvelopeStratum, key: u64) -> Option<u32> {
-    let mask = stratum.lookup_keys.len().checked_sub(1)?;
+    lookup_envelope_arrays(&stratum.lookup_keys, &stratum.lookup_states, key)
+}
+
+fn lookup_frozen_envelope_state(stratum: &FrozenRankEnvelopeStratum, key: u64) -> Option<u32> {
+    lookup_envelope_arrays(&stratum.lookup_keys, &stratum.lookup_states, key)
+}
+
+fn lookup_envelope_arrays(lookup_keys: &[u64], lookup_states: &[u32], key: u64) -> Option<u32> {
+    let mask = lookup_keys.len().checked_sub(1)?;
     let mut slot = mix_subspace_key(key) as usize & mask;
-    for _ in 0..stratum.lookup_keys.len() {
-        let state = stratum.lookup_states[slot];
+    for _ in 0..lookup_keys.len() {
+        let state = lookup_states[slot];
         if state == u32::MAX {
             return None;
         }
-        if stratum.lookup_keys[slot] == key {
+        if lookup_keys[slot] == key {
             return Some(state);
         }
         slot = (slot + 1) & mask;
@@ -2016,6 +2246,37 @@ mod tests {
                 .exact_basis(answer.exact_rank as usize, answer.exact_state)
                 .is_some());
         }
+
+        let retained_payload = envelope.storage().payload_bytes;
+        let frozen = envelope.into_frozen();
+        assert_eq!(frozen.compilation_work().distinct_subspaces, 50);
+        assert_eq!(frozen.storage().states, 51);
+        assert_eq!(frozen.storage().restriction_edges, 0);
+        assert!(frozen.storage().payload_bytes < retained_payload);
+        let context = Matrix::new::<2>(2, 4, vec![1, 1, 0, 0, 0, 1, 1, 0]).unwrap();
+        let answer = frozen
+            .context_cost::<crate::field::Prime<2>>(&context)
+            .unwrap();
+        let canonical =
+            CanonicalContextBasis::new::<crate::field::Prime<2>>(&context, 4, 0).unwrap();
+        assert_eq!(frozen.context_cost_canonical(&canonical).unwrap(), answer);
+        assert!(frozen
+            .exact_basis(answer.exact_rank as usize, answer.exact_state)
+            .is_some());
+
+        let mut direct_cache =
+            RankBoundedContextCache::<crate::field::Prime<2>>::new(&inner, &target, 4, 0, 2)
+                .unwrap();
+        let direct_frozen = direct_cache
+            .compile_frozen_full_span_envelope(3, 51)
+            .unwrap();
+        assert_eq!(direct_frozen.storage(), frozen.storage());
+        assert_eq!(
+            direct_frozen
+                .context_cost::<crate::field::Prime<2>>(&context)
+                .unwrap(),
+            answer
+        );
     }
 
     fn rank_two_table<F: FiniteField>() -> CostTable {

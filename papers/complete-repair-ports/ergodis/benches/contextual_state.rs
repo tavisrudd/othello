@@ -1,8 +1,8 @@
 use criterion::{criterion_group, criterion_main, Criterion};
 use ergodis::{
     certify_rank_one_transfer_by_generators, confinement_by_generators,
-    confinement_by_generators_field, ContextStrategy, CostTable, FiniteField, Gf4, Matrix, Prime,
-    RankBoundedContextCache, RankOneProbeCache,
+    confinement_by_generators_field, CanonicalContextBasis, ContextStrategy, CostTable,
+    FiniteField, Gf4, Matrix, Prime, RankBoundedContextCache, RankOneProbeCache,
 };
 use std::hint::black_box;
 
@@ -402,6 +402,10 @@ fn benchmark_contextual_state(c: &mut Criterion) {
     rank_auto.finish();
 
     let contexts = binary_hyperplanes_avoiding_first_coordinate(5);
+    let canonical_contexts = contexts
+        .iter()
+        .map(|context| CanonicalContextBasis::new::<Prime<2>>(context, 5, 0).unwrap())
+        .collect::<Vec<_>>();
     let mut envelope_cache =
         RankBoundedContextCache::<Prime<2>>::new(&rank_two_table, &rank_two_table, 5, 0, 2)
             .unwrap();
@@ -446,6 +450,24 @@ fn benchmark_contextual_state(c: &mut Criterion) {
             black_box(checksum)
         })
     });
+    let mut frozen_cache =
+        RankBoundedContextCache::<Prime<2>>::new(&rank_two_table, &rank_two_table, 5, 0, 2)
+            .unwrap();
+    let frozen = frozen_cache
+        .compile_frozen_full_span_envelope(4, 307)
+        .unwrap();
+    envelope_query.bench_function("C_frozen_canonical", |b| {
+        b.iter(|| {
+            let mut checksum = 0u32;
+            for context in &canonical_contexts {
+                checksum += frozen
+                    .context_cost_canonical(black_box(context))
+                    .unwrap()
+                    .cost;
+            }
+            black_box(checksum)
+        })
+    });
     envelope_query.finish();
 
     let mut envelope_compile = c.benchmark_group("rank_stratified_envelope_compile_batch");
@@ -477,9 +499,29 @@ fn benchmark_contextual_state(c: &mut Criterion) {
             black_box(checksum)
         })
     });
+    envelope_compile.bench_function("C_compile_frozen_then_query", |b| {
+        b.iter(|| {
+            let mut cache =
+                RankBoundedContextCache::<Prime<2>>::new(&rank_two_table, &rank_two_table, 5, 0, 2)
+                    .unwrap();
+            let envelope = cache.compile_frozen_full_span_envelope(4, 307).unwrap();
+            let mut checksum = 0u32;
+            for context in &canonical_contexts {
+                checksum += envelope
+                    .context_cost_canonical(black_box(context))
+                    .unwrap()
+                    .cost;
+            }
+            black_box(checksum)
+        })
+    });
     envelope_compile.finish();
 
     let contexts6 = binary_hyperplanes_avoiding_first_coordinate(6);
+    let canonical_contexts6 = contexts6
+        .iter()
+        .map(|context| CanonicalContextBasis::new::<Prime<2>>(context, 6, 0).unwrap())
+        .collect::<Vec<_>>();
     let mut envelope_cache6 =
         RankBoundedContextCache::<Prime<2>>::new(&rank_two_table, &rank_two_table, 6, 0, 2)
             .unwrap();
@@ -526,6 +568,24 @@ fn benchmark_contextual_state(c: &mut Criterion) {
             black_box(checksum)
         })
     });
+    let mut frozen_cache6 =
+        RankBoundedContextCache::<Prime<2>>::new(&rank_two_table, &rank_two_table, 6, 0, 2)
+            .unwrap();
+    let frozen6 = frozen_cache6
+        .compile_frozen_full_span_envelope(5, 2_451)
+        .unwrap();
+    envelope6_query.bench_function("C_frozen_canonical", |b| {
+        b.iter(|| {
+            let mut checksum = 0u32;
+            for context in &canonical_contexts6 {
+                checksum += frozen6
+                    .context_cost_canonical(black_box(context))
+                    .unwrap()
+                    .cost;
+            }
+            black_box(checksum)
+        })
+    });
     envelope6_query.finish();
 
     let mut envelope6_compile = c.benchmark_group("rank_stratified_envelope6_compile_batch");
@@ -551,6 +611,22 @@ fn benchmark_contextual_state(c: &mut Criterion) {
             for context in &contexts6 {
                 checksum += envelope
                     .context_cost::<Prime<2>>(black_box(context))
+                    .unwrap()
+                    .cost;
+            }
+            black_box(checksum)
+        })
+    });
+    envelope6_compile.bench_function("C_compile_frozen_then_query", |b| {
+        b.iter(|| {
+            let mut cache =
+                RankBoundedContextCache::<Prime<2>>::new(&rank_two_table, &rank_two_table, 6, 0, 2)
+                    .unwrap();
+            let envelope = cache.compile_frozen_full_span_envelope(5, 2_451).unwrap();
+            let mut checksum = 0u32;
+            for context in &canonical_contexts6 {
+                checksum += envelope
+                    .context_cost_canonical(black_box(context))
                     .unwrap()
                     .cost;
             }

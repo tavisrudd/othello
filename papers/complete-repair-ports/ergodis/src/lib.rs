@@ -54,9 +54,10 @@ pub use confinement::{
     ConfinementAnswer, ConfinementError, ConfinementSector, RankOneTransferCertificate,
 };
 pub use contextual::{
-    ContextCost, ContextExecution, ContextPlan, ContextStrategy, ContextWork, ContextualError,
-    PlannedContextCost, RankBoundedContextCache, RankEnvelopeAnswer, RankEnvelopeStorage,
-    RankOneProbeCache, RankStratifiedEnvelope,
+    CanonicalContextBasis, ContextCost, ContextExecution, ContextPlan, ContextStrategy,
+    ContextWork, ContextualError, FrozenRankStratifiedEnvelope, PlannedContextCost,
+    RankBoundedContextCache, RankEnvelopeAnswer, RankEnvelopeStorage, RankOneProbeCache,
+    RankStratifiedEnvelope,
 };
 pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
