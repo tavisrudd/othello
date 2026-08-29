@@ -1360,10 +1360,10 @@ control; warm generic evaluation has no statistically resolved gap from the
 exact separator solver on the former and is 19.9% ahead on the latter.  The
 initial hardware-counter pass predates this final change and remains diagnostic
 rather than a separate paper claim.  A final isolated 100,000-evaluation
-coupled pass after the full change measured 2,354,831,517 cycles and
-8,653,743,683 instructions for generic evaluation, versus 2,940,060,578 cycles
-and 15,372,561,793 instructions for the specialized join: 1.249x fewer cycles
-and 1.776x fewer instructions.  This single counter
+coupled pass after the full change measured 2,444,080,562 cycles and
+9,102,790,519 instructions for generic evaluation, versus 2,860,736,925 cycles
+and 15,372,712,181 instructions for the specialized join: 1.170x fewer cycles
+and 1.689x fewer instructions.  This single counter
 pass is diagnostic; the alternating nine-round timing above remains the
 retained statistical claim.
 
@@ -1407,8 +1407,8 @@ retained statistical claim.
 - **Open -- unbounded witness and flat-front storage.**  The control packs short
   words into `u32`, and the generic result still allocates one box per reachable
   class.  After the singleton insertion specialization, the final coupled
-  profile attributes 77.77% of samples to the query evaluator, 7.56% to
-  AVX-512 `memmove`, 6.24% to `_int_free`, 3.46% to `malloc`, and 2.78% to
+  profile attributes 78.13% of samples to the query evaluator, 7.22% to
+  `_int_free`, 5.72% to AVX-512 `memmove`, 4.23% to `malloc`, and 2.34% to
   `cfree`.  A reusable
   evaluation workspace with per-live-sort flat front-entry pools/ranges, dense
   reachable-class slots, and a separate compact global witness/backpointer
