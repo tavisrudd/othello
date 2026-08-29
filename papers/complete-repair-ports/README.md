@@ -192,5 +192,6 @@ archive of this rewrite.
 
 ## License
 
-The contents of this repository are licensed under the MIT License; see
-`LICENSE`.
+The contents of this repository are licensed under the GNU Affero General
+Public License, version 3.0 (AGPL-3.0); see `LICENSE`. Contact the author for
+commercial licensing.
