@@ -1,8 +1,9 @@
 use ergodis::observational::{
+    compile_layered_frozen_chain_audited, compile_layered_frozen_chain_observational,
     compile_layered_observational, compile_observational_with_policy, read_frozen_observation,
-    verify_frozen_layered_audit, write_frozen_observation, write_layered_audit, CertificatePolicy,
-    CompiledObservation, FinitePresentation, FrozenObservationLimits, GeneratorSpec,
-    LayeredGeneratorSpec,
+    verify_frozen_layered_audit, verify_frozen_layered_chain_audit, write_frozen_observation,
+    write_layered_audit, CertificatePolicy, CompiledObservation, FinitePresentation,
+    FrozenObservation, FrozenObservationLimits, GeneratorSpec, LayeredGeneratorSpec,
 };
 #[cfg(test)]
 use ergodis::{CompositionTable, CostTable, Matrix};
@@ -264,6 +265,21 @@ fn compile_layered_hierarchy(
     )
 }
 
+fn compile_frozen_hierarchy(
+    depth: usize,
+    seed_bound: u32,
+) -> Result<FrozenObservation, ergodis::observational::ObservationalError> {
+    let generators = hierarchy_generators(depth);
+    let state_counts = hierarchy_state_counts(depth, seed_bound);
+    compile_layered_frozen_chain_observational(
+        &state_counts,
+        &generators,
+        &[0],
+        |sort, state| hierarchy_observation(seed_bound, sort, state),
+        |generator, state| layered_transition_id(seed_bound, generator, state),
+    )
+}
+
 fn hierarchy_generators(depth: usize) -> Vec<LayeredGeneratorSpec> {
     (0..depth)
         .flat_map(|level| {
@@ -450,12 +466,17 @@ fn main() {
         Some(value) => panic!("unknown order {value}"),
     };
     let mode = args.next().unwrap_or_else(|| "full".to_owned());
-    let frozen_path = (mode == "layered-artifacts" || mode == "layered-artifacts-verify")
-        .then(|| args.next().expect("layered-artifacts needs a frozen path"));
+    let frozen_path = (mode == "layered-artifacts"
+        || mode == "layered-artifacts-verify"
+        || mode == "layered-chain-artifacts"
+        || mode == "layered-chain-artifacts-verify")
+        .then(|| args.next().expect("layered artifacts needs a frozen path"));
     let audit_path = (mode == "layered-audit"
         || mode == "layered-audit-verify"
         || mode == "layered-artifacts"
-        || mode == "layered-artifacts-verify")
+        || mode == "layered-artifacts-verify"
+        || mode == "layered-chain-artifacts"
+        || mode == "layered-chain-artifacts-verify")
         .then(|| args.next().expect("layered audit needs an output path"));
     assert!(
         mode == "full"
@@ -466,9 +487,58 @@ fn main() {
             || mode == "layered-audit-verify"
             || mode == "layered-artifacts"
             || mode == "layered-artifacts-verify"
+            || mode == "layered-chain-artifacts"
+            || mode == "layered-chain-artifacts-verify"
     );
     assert!(depth >= 1 && seed_bound >= 1);
     assert!(args.next().is_none());
+
+    if mode == "layered-chain-artifacts" || mode == "layered-chain-artifacts-verify" {
+        let state_counts = hierarchy_state_counts(depth, seed_bound);
+        let generators = hierarchy_generators(depth);
+        let frozen_path = frozen_path.as_ref().unwrap();
+        let audit_path = audit_path.as_ref().unwrap();
+        let compile_start = Instant::now();
+        let frozen = if mode == "layered-chain-artifacts-verify" {
+            let file = std::fs::File::open(frozen_path).unwrap();
+            let mut reader = std::io::BufReader::with_capacity(64 * 1024, file);
+            read_frozen_observation(&mut reader, hierarchy_frozen_limits(depth, seed_bound))
+                .unwrap()
+        } else {
+            let file = std::fs::File::create(audit_path).unwrap();
+            let mut writer = std::io::BufWriter::with_capacity(64 * 1024, file);
+            let frozen = compile_layered_frozen_chain_audited(
+                &state_counts,
+                &generators,
+                &[0],
+                |sort, state| hierarchy_observation(seed_bound, sort, state),
+                |generator, state| layered_transition_id(seed_bound, generator, state),
+                &mut writer,
+            )
+            .unwrap();
+            writer.flush().unwrap();
+            frozen
+        };
+        let compile_ns = compile_start.elapsed().as_nanos();
+        if mode == "layered-chain-artifacts" {
+            let file = std::fs::File::create(frozen_path).unwrap();
+            let mut writer = std::io::BufWriter::with_capacity(64 * 1024, file);
+            write_frozen_observation(&frozen, &mut writer).unwrap();
+            writer.flush().unwrap();
+        }
+        let file = std::fs::File::open(audit_path).unwrap();
+        let mut reader = std::io::BufReader::with_capacity(64 * 1024, file);
+        let verify_start = Instant::now();
+        verify_frozen_layered_chain_audit(&frozen, &mut reader).unwrap();
+        let verify_ns = verify_start.elapsed().as_nanos();
+        println!(
+            "layered-chain-audit\t{depth}\t{seed_bound}\t{}\t{}\t{compile_ns}\t{verify_ns}\t{}",
+            frozen.storage().payload_bytes,
+            std::fs::metadata(audit_path).unwrap().len(),
+            std::fs::metadata(frozen_path).unwrap().len()
+        );
+        return;
+    }
 
     if let Some(audit_path) = audit_path {
         let state_counts = hierarchy_state_counts(depth, seed_bound);
@@ -536,13 +606,11 @@ fn main() {
 
     if mode == "layered-build-only" {
         let start = Instant::now();
-        let compiled = compile_layered_hierarchy(depth, seed_bound).unwrap();
+        let frozen = compile_frozen_hierarchy(depth, seed_bound).unwrap();
         let compile_ns = start.elapsed().as_nanos();
-        let states = compiled.metrics().states;
-        let classes = compiled.class_outputs().len();
-        let compiled_bytes = compiled.storage().quotient_bytes;
-        let state_counts = hierarchy_state_counts(depth, seed_bound);
-        let frozen = compiled.into_frozen(&state_counts, &[0]).unwrap();
+        let states = frozen.metrics().states;
+        let classes = frozen.storage().classes;
+        let compiled_bytes = frozen.storage().payload_bytes;
         let total_ns = start.elapsed().as_nanos();
         println!(
             "layered-only\t{depth}\t{seed_bound}\t{states}\t{classes}\t{compiled_bytes}\t{}\t{compile_ns}\t{total_ns}",

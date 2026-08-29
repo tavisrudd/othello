@@ -2387,7 +2387,65 @@ pub enum LayeredAuditError {
 
 const SEPARATOR_STREAM_MAGIC: &[u8; 8] = b"ERGSEP01";
 const LAYERED_AUDIT_MAGIC: &[u8; 8] = b"ERGLAY01";
-const FROZEN_OBSERVATION_MAGIC: &[u8; 8] = b"ERGFRZ01";
+const LAYERED_CHAIN_AUDIT_MAGIC: &[u8; 8] = b"ERGLAY02";
+const FROZEN_OBSERVATION_MAGIC: &[u8; 8] = b"ERGFRZ02";
+const LAYERED_CHAIN_AUDIT_BUFFER_BYTES: usize = 64 * 1024;
+
+trait LayeredChainAuditSink {
+    fn word(&mut self, value: u32) -> std::io::Result<()>;
+}
+
+struct NoLayeredChainAudit;
+
+impl LayeredChainAuditSink for NoLayeredChainAudit {
+    #[inline(always)]
+    fn word(&mut self, _value: u32) -> std::io::Result<()> {
+        Ok(())
+    }
+}
+
+struct BufferedLayeredChainAudit<'a> {
+    writer: &'a mut dyn Write,
+    buffer: Box<[u8]>,
+    len: usize,
+}
+
+impl<'a> BufferedLayeredChainAudit<'a> {
+    fn new(writer: &'a mut dyn Write) -> Self {
+        Self {
+            writer,
+            buffer: vec![0_u8; LAYERED_CHAIN_AUDIT_BUFFER_BYTES].into_boxed_slice(),
+            len: 0,
+        }
+    }
+
+    fn flush(&mut self) -> std::io::Result<()> {
+        self.writer.write_all(&self.buffer[..self.len])?;
+        self.len = 0;
+        Ok(())
+    }
+}
+
+impl LayeredChainAuditSink for BufferedLayeredChainAudit<'_> {
+    #[inline]
+    fn word(&mut self, mut value: u32) -> std::io::Result<()> {
+        if self.buffer.len() - self.len < 5 {
+            self.flush()?;
+        }
+        loop {
+            let mut byte = (value & 0x7f) as u8;
+            value >>= 7;
+            if value != 0 {
+                byte |= 0x80;
+            }
+            self.buffer[self.len] = byte;
+            self.len += 1;
+            if value == 0 {
+                return Ok(());
+            }
+        }
+    }
+}
 
 #[derive(Clone, Debug)]
 pub struct CompiledObservation {
@@ -2407,7 +2465,7 @@ pub struct CompiledObservation {
 
 /// Query artifact retaining quotient transitions, concrete class witnesses,
 /// and only the explicitly selected concrete entry-state maps.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct FrozenObservation {
     class_ranges: Box<[SortRange]>,
     entry_ranges: Box<[SortRange]>,
@@ -2564,6 +2622,78 @@ pub struct LayeredGeneratorSpec {
     pub target_sort: u32,
 }
 
+#[inline]
+fn layered_signature_hash(signature: &[u32]) -> u64 {
+    let mut hash = 0x9e37_79b9_7f4a_7c15_u64;
+    for &word in signature {
+        hash ^= u64::from(word).wrapping_add(0x9e37_79b9);
+        hash = hash.rotate_left(27).wrapping_mul(0x94d0_49bb_1331_11eb);
+    }
+    hash ^ (hash >> 31)
+}
+
+type LayeredInterning = (Box<[u32]>, Vec<u32>, Vec<u32>);
+
+fn intern_layered_signatures(
+    signatures: &[u32],
+    count: usize,
+    width: usize,
+) -> Result<LayeredInterning, ObservationalError> {
+    let lookup_capacity = if count == 0 {
+        1
+    } else {
+        count
+            .checked_mul(4)
+            .ok_or(ObservationalError::Overflow)?
+            .div_ceil(3)
+            .checked_next_power_of_two()
+            .ok_or(ObservationalError::Overflow)?
+    };
+    let mut lookup_hashes = vec![0_u64; lookup_capacity];
+    let mut lookup_representatives = vec![u32::MAX; lookup_capacity];
+    let lookup_mask = lookup_capacity - 1;
+    let mut state_classes = vec![0_u32; count];
+    let mut next_class = 0_u32;
+    for state in 0..count as u32 {
+        let start = state as usize * width;
+        let signature = &signatures[start..start + width];
+        let hash = layered_signature_hash(signature);
+        let mut slot = hash as usize & lookup_mask;
+        let class = loop {
+            let representative = lookup_representatives[slot];
+            if representative == u32::MAX {
+                lookup_hashes[slot] = hash;
+                lookup_representatives[slot] = state;
+                let class = next_class;
+                next_class = next_class
+                    .checked_add(1)
+                    .ok_or(ObservationalError::Overflow)?;
+                break class;
+            }
+            let representative_start = representative as usize * width;
+            if lookup_hashes[slot] == hash
+                && signatures[representative_start..representative_start + width]
+                    == signatures[start..start + width]
+            {
+                break state_classes[representative as usize];
+            }
+            slot = (slot + 1) & lookup_mask;
+        };
+        state_classes[state as usize] = class;
+    }
+    let mut outputs = Vec::with_capacity(next_class as usize);
+    let mut representatives = Vec::with_capacity(next_class as usize);
+    for state in 0..count as u32 {
+        let class = state_classes[state as usize];
+        if class as usize == outputs.len() {
+            outputs.push(signatures[state as usize * width]);
+            representatives.push(state);
+        }
+    }
+    debug_assert_eq!(outputs.len(), next_class as usize);
+    Ok((state_classes.into_boxed_slice(), outputs, representatives))
+}
+
 /// Compile the exact minimal quotient of a finite layered deterministic
 /// system without materializing its observation or transition tables.
 ///
@@ -2622,6 +2752,7 @@ where
     let mut class_counts = vec![0_u32; state_counts.len()];
     let mut local_class_outputs = vec![Vec::<u32>::new(); state_counts.len()];
     let mut local_class_representatives = vec![Vec::<u32>::new(); state_counts.len()];
+    let mut local_generator_transitions = vec![Vec::<u32>::new(); generators.len()];
     for sort in (0..state_counts.len()).rev() {
         let count = state_counts[sort] as usize;
         let width = outgoing[sort]
@@ -2652,66 +2783,22 @@ where
             }
         }
         let range = raw_ranges[sort];
-        let lookup_capacity = if count == 0 {
-            1
-        } else {
-            count
-                .checked_mul(4)
-                .ok_or(ObservationalError::Overflow)?
-                .div_ceil(3)
-                .checked_next_power_of_two()
-                .ok_or(ObservationalError::Overflow)?
-        };
-        let mut lookup_hashes = vec![0_u64; lookup_capacity];
-        let mut lookup_representatives = vec![u32::MAX; lookup_capacity];
-        let lookup_mask = lookup_capacity - 1;
-        let mut next_class = 0_u32;
-        for state in 0..count as u32 {
-            let start = state as usize * width;
-            let signature = &signatures[start..start + width];
-            let hash = layered_signature_hash(signature);
-            let mut slot = hash as usize & lookup_mask;
-            let class = loop {
-                let representative = lookup_representatives[slot];
-                if representative == u32::MAX {
-                    lookup_hashes[slot] = hash;
-                    lookup_representatives[slot] = state;
-                    let class = next_class;
-                    next_class = next_class
-                        .checked_add(1)
-                        .ok_or(ObservationalError::Overflow)?;
-                    break class;
-                }
-                let representative_start = representative as usize * width;
-                if lookup_hashes[slot] == hash
-                    && signatures[representative_start..representative_start + width] == *signature
-                {
-                    break local_state_classes[(range.start + representative) as usize];
-                }
-                slot = (slot + 1) & lookup_mask;
-            };
-            local_state_classes[(range.start + state) as usize] = class;
+        let (classes, outputs, representatives) =
+            intern_layered_signatures(&signatures, count, width)?;
+        for (slot, &generator) in outgoing[sort].iter().enumerate() {
+            let targets = &mut local_generator_transitions[generator as usize];
+            targets.reserve_exact(representatives.len());
+            targets.extend(
+                representatives
+                    .iter()
+                    .map(|&representative| signatures[representative as usize * width + slot + 1]),
+            );
         }
-        local_class_outputs[sort] = Vec::with_capacity(next_class as usize);
-        local_class_representatives[sort] = Vec::with_capacity(next_class as usize);
-        for state in 0..count as u32 {
-            let class = local_state_classes[(range.start + state) as usize];
-            if class as usize == local_class_outputs[sort].len() {
-                local_class_outputs[sort].push(signatures[state as usize * width]);
-                local_class_representatives[sort].push(state);
-            }
-        }
-        debug_assert_eq!(local_class_outputs[sort].len(), next_class as usize);
-        class_counts[sort] = next_class;
-    }
-
-    fn layered_signature_hash(signature: &[u32]) -> u64 {
-        let mut hash = 0x9e37_79b9_7f4a_7c15_u64;
-        for &word in signature {
-            hash ^= u64::from(word).wrapping_add(0x9e37_79b9);
-            hash = hash.rotate_left(27).wrapping_mul(0x94d0_49bb_1331_11eb);
-        }
-        hash ^ (hash >> 31)
+        local_state_classes[range.start as usize..range.end() as usize].copy_from_slice(&classes);
+        class_counts[sort] =
+            u32::try_from(outputs.len()).map_err(|_| ObservationalError::Overflow)?;
+        local_class_outputs[sort] = outputs;
+        local_class_representatives[sort] = representatives;
     }
 
     let mut class_ranges = Vec::with_capacity(state_counts.len());
@@ -2757,18 +2844,12 @@ where
         let target_sort = spec.target_sort as usize;
         let transition_start =
             u32::try_from(generator_transitions.len()).map_err(|_| ObservationalError::Overflow)?;
-        for &representative in &local_class_representatives[source_sort] {
-            let target_state = transition(generator as u32, representative);
-            let target_range = raw_ranges[target_sort];
-            if target_state >= target_range.len {
-                return Err(ObservationalError::TransitionTarget {
-                    generator,
-                    transition: representative as usize,
-                });
-            }
-            generator_transitions
-                .push(local_state_classes[(target_range.start + target_state) as usize]);
-        }
+        let target_start = class_ranges[target_sort].start;
+        generator_transitions.extend(
+            local_generator_transitions[generator]
+                .iter()
+                .map(|&class| target_start + class),
+        );
         generator_records.push(GeneratorRecord {
             source_sort: spec.source_sort,
             target_sort: spec.target_sort,
@@ -2800,6 +2881,318 @@ where
             separator_steps: 0,
         },
     })
+}
+
+/// Compile a layered chain directly to a frozen artifact while consuming
+/// concrete class maps as soon as their sole predecessor stratum is fixed.
+/// Every generator must target `source_sort + 1`.
+pub fn compile_layered_frozen_chain_observational<O, T>(
+    state_counts: &[u32],
+    generators: &[LayeredGeneratorSpec],
+    entry_sorts: &[u32],
+    observation: O,
+    transition: T,
+) -> Result<FrozenObservation, ObservationalError>
+where
+    O: FnMut(u32, u32) -> u32,
+    T: FnMut(u32, u32) -> u32,
+{
+    let mut audit = NoLayeredChainAudit;
+    match compile_layered_frozen_chain_impl(
+        state_counts,
+        generators,
+        entry_sorts,
+        observation,
+        transition,
+        &mut audit,
+    ) {
+        Ok(frozen) => Ok(frozen),
+        Err(LayeredAuditError::Compilation(error)) => Err(error),
+        Err(LayeredAuditError::Io(_) | LayeredAuditError::Format) => {
+            unreachable!("the unaudited compiler performs no I/O")
+        }
+    }
+}
+
+/// Compile a layered chain directly to its frozen quotient while streaming the
+/// exact oracle transcript in reverse-stratum order. The transcript never
+/// retains a concrete state map beyond the compiler's live frontier.
+pub fn compile_layered_frozen_chain_audited<W, O, T>(
+    state_counts: &[u32],
+    generators: &[LayeredGeneratorSpec],
+    entry_sorts: &[u32],
+    observation: O,
+    transition: T,
+    writer: &mut W,
+) -> Result<FrozenObservation, LayeredAuditError>
+where
+    W: Write,
+    O: FnMut(u32, u32) -> u32,
+    T: FnMut(u32, u32) -> u32,
+{
+    writer.write_all(LAYERED_CHAIN_AUDIT_MAGIC)?;
+    write_var_u32(
+        writer,
+        u32::try_from(state_counts.len()).map_err(|_| ObservationalError::Overflow)?,
+    )?;
+    write_var_u32(
+        writer,
+        u32::try_from(generators.len()).map_err(|_| ObservationalError::Overflow)?,
+    )?;
+    for &count in state_counts {
+        write_var_u32(writer, count)?;
+    }
+    for spec in generators {
+        write_var_u32(writer, spec.source_sort)?;
+        write_var_u32(writer, spec.target_sort)?;
+    }
+    let frozen = {
+        let mut audit = BufferedLayeredChainAudit::new(writer);
+        let frozen = compile_layered_frozen_chain_impl(
+            state_counts,
+            generators,
+            entry_sorts,
+            observation,
+            transition,
+            &mut audit,
+        )?;
+        audit.flush()?;
+        frozen
+    };
+    let fingerprint =
+        frozen_observation_fingerprint(&frozen).map_err(|_| LayeredAuditError::Format)?;
+    for word in fingerprint {
+        writer.write_all(&word.to_le_bytes())?;
+    }
+    Ok(frozen)
+}
+
+fn compile_layered_frozen_chain_impl<O, T, A>(
+    state_counts: &[u32],
+    generators: &[LayeredGeneratorSpec],
+    entry_sorts: &[u32],
+    mut observation: O,
+    mut transition: T,
+    audit: &mut A,
+) -> Result<FrozenObservation, LayeredAuditError>
+where
+    O: FnMut(u32, u32) -> u32,
+    T: FnMut(u32, u32) -> u32,
+    A: LayeredChainAuditSink,
+{
+    if state_counts.is_empty() {
+        return Err(ObservationalError::NoSorts.into());
+    }
+    let mut raw_ranges = Vec::with_capacity(state_counts.len());
+    let mut total_states = 0_u32;
+    for &len in state_counts {
+        raw_ranges.push(SortRange {
+            start: total_states,
+            len,
+        });
+        total_states = total_states
+            .checked_add(len)
+            .ok_or(ObservationalError::Overflow)?;
+    }
+    let mut outgoing_counts = vec![0_usize; state_counts.len()];
+    for (generator, spec) in generators.iter().enumerate() {
+        let source = spec.source_sort as usize;
+        let target = spec.target_sort as usize;
+        if source >= state_counts.len() || target >= state_counts.len() {
+            return Err(ObservationalError::GeneratorSort { generator }.into());
+        }
+        if target != source + 1 {
+            return Err(ObservationalError::LayeredGeneratorOrder { generator }.into());
+        }
+        outgoing_counts[source] = outgoing_counts[source]
+            .checked_add(1)
+            .ok_or(ObservationalError::Overflow)?;
+    }
+    let mut outgoing = outgoing_counts
+        .into_iter()
+        .map(Vec::with_capacity)
+        .collect::<Vec<Vec<u32>>>();
+    for (generator, spec) in generators.iter().enumerate() {
+        outgoing[spec.source_sort as usize]
+            .push(u32::try_from(generator).map_err(|_| ObservationalError::Overflow)?);
+    }
+    let mut selected = vec![false; state_counts.len()];
+    for &sort in entry_sorts {
+        let Some(slot) = selected.get_mut(sort as usize) else {
+            return Err(ObservationalError::CompiledShape.into());
+        };
+        if *slot {
+            return Err(ObservationalError::CompiledShape.into());
+        }
+        *slot = true;
+    }
+
+    let mut class_counts = vec![0_u32; state_counts.len()];
+    let mut local_outputs = vec![Vec::<u32>::new(); state_counts.len()];
+    let mut local_representatives = vec![Vec::<u32>::new(); state_counts.len()];
+    let mut local_generator_transitions = vec![Vec::<u32>::new(); generators.len()];
+    let mut entry_maps = vec![None::<Box<[u32]>>; state_counts.len()];
+    let mut next_map = None::<(usize, Box<[u32]>)>;
+    for sort in (0..state_counts.len()).rev() {
+        let count = state_counts[sort] as usize;
+        audit.word(u32::try_from(sort).map_err(|_| ObservationalError::Overflow)?)?;
+        audit.word(state_counts[sort])?;
+        let width = outgoing[sort]
+            .len()
+            .checked_add(1)
+            .ok_or(ObservationalError::Overflow)?;
+        let mut signatures = vec![
+            0_u32;
+            count
+                .checked_mul(width)
+                .ok_or(ObservationalError::Overflow)?
+        ];
+        for state in 0..count {
+            let signature = &mut signatures[state * width..(state + 1) * width];
+            let output = observation(sort as u32, state as u32);
+            signature[0] = output;
+            audit.word(output)?;
+            for (slot, &generator) in outgoing[sort].iter().enumerate() {
+                let target_state = transition(generator, state as u32);
+                if target_state >= state_counts[sort + 1] {
+                    return Err(ObservationalError::TransitionTarget {
+                        generator: generator as usize,
+                        transition: state,
+                    }
+                    .into());
+                }
+                audit.word(target_state)?;
+                let Some((target_sort, target_classes)) = next_map.as_ref() else {
+                    return Err(ObservationalError::CompiledShape.into());
+                };
+                if *target_sort != sort + 1 {
+                    return Err(ObservationalError::CompiledShape.into());
+                }
+                signature[slot + 1] = target_classes[target_state as usize];
+            }
+        }
+        let (classes, outputs, representatives) =
+            intern_layered_signatures(&signatures, count, width)?;
+        class_counts[sort] =
+            u32::try_from(outputs.len()).map_err(|_| ObservationalError::Overflow)?;
+        for (slot, &generator) in outgoing[sort].iter().enumerate() {
+            let targets = &mut local_generator_transitions[generator as usize];
+            targets.reserve_exact(representatives.len());
+            for &representative in &representatives {
+                targets.push(signatures[representative as usize * width + slot + 1]);
+            }
+        }
+        if let Some((target_sort, target_classes)) = next_map.take() {
+            if selected[target_sort] {
+                entry_maps[target_sort] = Some(target_classes);
+            }
+        }
+        next_map = Some((sort, classes));
+        local_outputs[sort] = outputs;
+        local_representatives[sort] = representatives;
+    }
+    if let Some((sort, classes)) = next_map {
+        if selected[sort] {
+            entry_maps[sort] = Some(classes);
+        }
+    }
+
+    let mut class_ranges = Vec::with_capacity(state_counts.len());
+    let mut total_classes = 0_u32;
+    for &len in &class_counts {
+        class_ranges.push(SortRange {
+            start: total_classes,
+            len,
+        });
+        total_classes = total_classes
+            .checked_add(len)
+            .ok_or(ObservationalError::Overflow)?;
+    }
+    let retained_entries = entry_sorts.iter().try_fold(0_usize, |count, &sort| {
+        count
+            .checked_add(state_counts[sort as usize] as usize)
+            .ok_or(ObservationalError::Overflow)
+    })?;
+    let mut entry_ranges = Vec::with_capacity(state_counts.len());
+    let mut entry_classes = Vec::with_capacity(retained_entries);
+    for sort in 0..state_counts.len() {
+        let start = u32::try_from(entry_classes.len()).map_err(|_| ObservationalError::Overflow)?;
+        if selected[sort] {
+            let classes = entry_maps[sort]
+                .take()
+                .ok_or(ObservationalError::CompiledShape)?;
+            let class_start = class_ranges[sort].start;
+            entry_classes.extend(
+                classes
+                    .into_vec()
+                    .into_iter()
+                    .map(|class| class_start + class),
+            );
+            entry_ranges.push(SortRange {
+                start,
+                len: state_counts[sort],
+            });
+        } else {
+            entry_ranges.push(SortRange { start, len: 0 });
+        }
+    }
+    let mut class_outputs = Vec::with_capacity(total_classes as usize);
+    let mut class_representatives = Vec::with_capacity(total_classes as usize);
+    for sort in 0..state_counts.len() {
+        class_outputs.extend_from_slice(&local_outputs[sort]);
+        let raw_start = raw_ranges[sort].start;
+        class_representatives.extend(
+            local_representatives[sort]
+                .iter()
+                .map(|&state| raw_start + state),
+        );
+    }
+    let transition_count =
+        local_generator_transitions
+            .iter()
+            .try_fold(0_usize, |count, targets| {
+                count
+                    .checked_add(targets.len())
+                    .ok_or(ObservationalError::Overflow)
+            })?;
+    let mut generator_records = Vec::with_capacity(generators.len());
+    let mut generator_transitions = Vec::with_capacity(transition_count);
+    for (generator, spec) in generators.iter().enumerate() {
+        let transition_start =
+            u32::try_from(generator_transitions.len()).map_err(|_| ObservationalError::Overflow)?;
+        let target_start = class_ranges[spec.target_sort as usize].start;
+        generator_transitions.extend(
+            local_generator_transitions[generator]
+                .iter()
+                .map(|&class| target_start + class),
+        );
+        generator_records.push(GeneratorRecord {
+            source_sort: spec.source_sort,
+            target_sort: spec.target_sort,
+            transition_start,
+            transition_len: class_counts[spec.source_sort as usize],
+        });
+    }
+    let frozen = FrozenObservation {
+        class_ranges: class_ranges.into_boxed_slice(),
+        entry_ranges: entry_ranges.into_boxed_slice(),
+        entry_classes: entry_classes.into_boxed_slice(),
+        class_outputs: class_outputs.into_boxed_slice(),
+        class_representatives: class_representatives.into_boxed_slice(),
+        generator_records: generator_records.into_boxed_slice(),
+        generator_transitions: generator_transitions.into_boxed_slice(),
+        metrics: CompilationMetrics {
+            states: total_states as usize,
+            classes: total_classes as usize,
+            generators: generators.len(),
+            refinement_rounds: state_counts.len(),
+            refinement_splits: 0,
+            separators: 0,
+            separator_steps: 0,
+        },
+    };
+    validate_frozen_observation(&frozen).map_err(|_| ObservationalError::CompiledShape)?;
+    Ok(frozen)
 }
 
 /// Independently verify the reverse-induction theorem for a layered artifact
@@ -2987,7 +3380,7 @@ where
     Ok(())
 }
 
-fn write_var_u32<W: Write>(writer: &mut W, mut value: u32) -> std::io::Result<()> {
+fn write_var_u32<W: Write + ?Sized>(writer: &mut W, mut value: u32) -> std::io::Result<()> {
     let mut bytes = [0_u8; 5];
     let mut len = 0;
     loop {
@@ -3056,6 +3449,41 @@ fn quotient_fingerprint(
         fingerprint_word(&mut hash, word);
     }
     hash
+}
+
+fn frozen_observation_fingerprint(
+    frozen: &FrozenObservation,
+) -> Result<[u64; 2], FrozenObservationFileError> {
+    let mut hash = quotient_fingerprint(
+        &frozen.class_ranges,
+        &frozen.class_outputs,
+        &frozen.class_representatives,
+        &frozen.generator_records,
+        &frozen.generator_transitions,
+    );
+    fingerprint_word(&mut hash, 0x454e_5452);
+    fingerprint_word(&mut hash, frozen_u32(frozen.entry_ranges.len())?);
+    for range in &frozen.entry_ranges {
+        fingerprint_word(&mut hash, range.start);
+        fingerprint_word(&mut hash, range.len);
+    }
+    fingerprint_word(&mut hash, frozen_u32(frozen.entry_classes.len())?);
+    for &class in &frozen.entry_classes {
+        fingerprint_word(&mut hash, class);
+    }
+    fingerprint_word(&mut hash, 0x4d45_5452);
+    for metric in [
+        frozen.metrics.states,
+        frozen.metrics.classes,
+        frozen.metrics.generators,
+        frozen.metrics.refinement_rounds,
+        frozen.metrics.refinement_splits,
+        frozen.metrics.separators,
+        frozen.metrics.separator_steps,
+    ] {
+        fingerprint_word(&mut hash, frozen_u32(metric)?);
+    }
+    Ok(hash)
 }
 
 fn frozen_u32(value: usize) -> Result<u32, FrozenObservationFileError> {
@@ -3144,13 +3572,7 @@ pub fn write_frozen_observation<W: Write>(
     for &target in &frozen.generator_transitions {
         write_var_u32(writer, target)?;
     }
-    let fingerprint = quotient_fingerprint(
-        &frozen.class_ranges,
-        &frozen.class_outputs,
-        &frozen.class_representatives,
-        &frozen.generator_records,
-        &frozen.generator_transitions,
-    );
+    let fingerprint = frozen_observation_fingerprint(frozen)?;
     for word in fingerprint {
         writer.write_all(&word.to_le_bytes())?;
     }
@@ -3311,16 +3733,6 @@ pub fn read_frozen_observation<R: Read>(
     if reader.read(&mut trailing)? != 0 {
         return Err(FrozenObservationFileError::Format);
     }
-    let actual_fingerprint = quotient_fingerprint(
-        &class_ranges,
-        &class_outputs,
-        &class_representatives,
-        &generator_records,
-        &generator_transitions,
-    );
-    if expected_fingerprint != actual_fingerprint {
-        return Err(FrozenObservationFileError::Format);
-    }
     let frozen = FrozenObservation {
         class_ranges: class_ranges.into_boxed_slice(),
         entry_ranges: entry_ranges.into_boxed_slice(),
@@ -3340,6 +3752,9 @@ pub fn read_frozen_observation<R: Read>(
         },
     };
     validate_frozen_observation(&frozen)?;
+    if expected_fingerprint != frozen_observation_fingerprint(&frozen)? {
+        return Err(FrozenObservationFileError::Format);
+    }
     Ok(frozen)
 }
 
@@ -3596,6 +4011,181 @@ pub fn verify_frozen_layered_audit<R: Read>(
     if frozen.metrics.classes != frozen.class_outputs.len()
         || frozen.metrics.generators != generator_count
     {
+        return Err(LayeredAuditError::Format);
+    }
+    Ok(())
+}
+
+/// Replay a reverse-stratum chain transcript using only the current signature
+/// workspace and the next stratum's concrete class map. Signature groups are
+/// reconstructed by sorting, independently of the compiler's hash interner.
+pub fn verify_frozen_layered_chain_audit<R: Read>(
+    frozen: &FrozenObservation,
+    reader: &mut R,
+) -> Result<(), LayeredAuditError> {
+    let mut magic = [0_u8; 8];
+    reader.read_exact(&mut magic)?;
+    if &magic != LAYERED_CHAIN_AUDIT_MAGIC {
+        return Err(LayeredAuditError::Format);
+    }
+    let sort_count = read_var_u32(reader)? as usize;
+    let generator_count = read_var_u32(reader)? as usize;
+    if sort_count == 0
+        || sort_count != frozen.class_ranges.len()
+        || sort_count != frozen.entry_ranges.len()
+        || generator_count != frozen.generator_records.len()
+    {
+        return Err(LayeredAuditError::Format);
+    }
+    let mut state_counts = Vec::with_capacity(sort_count);
+    let mut raw_ranges = Vec::with_capacity(sort_count);
+    let mut total_states = 0_u32;
+    for _ in 0..sort_count {
+        let count = read_var_u32(reader)?;
+        raw_ranges.push(SortRange {
+            start: total_states,
+            len: count,
+        });
+        total_states = total_states
+            .checked_add(count)
+            .ok_or(LayeredAuditError::Format)?;
+        state_counts.push(count);
+    }
+    if total_states as usize != frozen.metrics.states {
+        return Err(LayeredAuditError::Format);
+    }
+    let mut generators = Vec::with_capacity(generator_count);
+    let mut outgoing = vec![Vec::<u32>::new(); sort_count];
+    for generator in 0..generator_count {
+        let spec = LayeredGeneratorSpec {
+            source_sort: read_var_u32(reader)?,
+            target_sort: read_var_u32(reader)?,
+        };
+        let source = spec.source_sort as usize;
+        let target = spec.target_sort as usize;
+        if source >= sort_count || target != source + 1 {
+            return Err(LayeredAuditError::Format);
+        }
+        let record = frozen.generator_records[generator];
+        if record.source_sort != spec.source_sort || record.target_sort != spec.target_sort {
+            return Err(LayeredAuditError::Format);
+        }
+        outgoing[source].push(u32::try_from(generator).map_err(|_| LayeredAuditError::Format)?);
+        generators.push(spec);
+    }
+
+    let mut next_map = None::<(usize, Box<[u32]>)>;
+    for sort in (0..sort_count).rev() {
+        if read_var_u32(reader)? as usize != sort || read_var_u32(reader)? != state_counts[sort] {
+            return Err(LayeredAuditError::Format);
+        }
+        let count = state_counts[sort] as usize;
+        let width = outgoing[sort]
+            .len()
+            .checked_add(1)
+            .ok_or(LayeredAuditError::Format)?;
+        let mut signatures =
+            vec![0_u32; count.checked_mul(width).ok_or(LayeredAuditError::Format)?];
+        for state in 0..count {
+            let signature = &mut signatures[state * width..(state + 1) * width];
+            signature[0] = read_var_u32(reader)?;
+            for (slot, &generator) in outgoing[sort].iter().enumerate() {
+                let target_state = read_var_u32(reader)?;
+                let Some((target_sort, target_classes)) = next_map.as_ref() else {
+                    return Err(LayeredAuditError::Format);
+                };
+                if *target_sort != sort + 1 || target_state as usize >= target_classes.len() {
+                    return Err(LayeredAuditError::Format);
+                }
+                debug_assert_eq!(
+                    generators[generator as usize].target_sort as usize,
+                    sort + 1
+                );
+                signature[slot + 1] = target_classes[target_state as usize];
+            }
+        }
+
+        let mut order = (0..count as u32).collect::<Vec<_>>();
+        order.sort_unstable_by(|&left, &right| {
+            let left_start = left as usize * width;
+            let right_start = right as usize * width;
+            signatures[left_start..left_start + width]
+                .cmp(&signatures[right_start..right_start + width])
+                .then_with(|| left.cmp(&right))
+        });
+        let mut group_of_state = vec![0_u32; count];
+        let mut group_representatives = Vec::<u32>::new();
+        let mut previous = None::<u32>;
+        for state in order {
+            let new_group = previous.is_none_or(|prior| {
+                let prior_start = prior as usize * width;
+                let state_start = state as usize * width;
+                signatures[prior_start..prior_start + width]
+                    != signatures[state_start..state_start + width]
+            });
+            if new_group {
+                group_representatives.push(state);
+            }
+            group_of_state[state as usize] = (group_representatives.len() - 1) as u32;
+            previous = Some(state);
+        }
+        let class_range = frozen.class_ranges[sort];
+        if group_representatives.len() != class_range.len as usize {
+            return Err(LayeredAuditError::Format);
+        }
+        let mut groups_by_representative =
+            (0..group_representatives.len() as u32).collect::<Vec<_>>();
+        groups_by_representative
+            .sort_unstable_by_key(|&group| group_representatives[group as usize]);
+        let mut class_of_group = vec![0_u32; group_representatives.len()];
+        for (local_class, group) in groups_by_representative.into_iter().enumerate() {
+            class_of_group[group as usize] = local_class as u32;
+            let representative = group_representatives[group as usize];
+            let signature_start = representative as usize * width;
+            let class = class_range.start + local_class as u32;
+            if frozen.class_outputs[class as usize] != signatures[signature_start]
+                || frozen.class_representatives[class as usize]
+                    != raw_ranges[sort].start + representative
+            {
+                return Err(LayeredAuditError::Format);
+            }
+            for (slot, &generator) in outgoing[sort].iter().enumerate() {
+                if frozen.transition(generator, class)
+                    != Some(signatures[signature_start + slot + 1])
+                {
+                    return Err(LayeredAuditError::Format);
+                }
+            }
+        }
+        let classes = group_of_state
+            .into_iter()
+            .map(|group| class_range.start + class_of_group[group as usize])
+            .collect::<Vec<_>>()
+            .into_boxed_slice();
+        let entry_range = frozen.entry_ranges[sort];
+        if entry_range.len != 0
+            && (entry_range.len != state_counts[sort]
+                || frozen.entry_classes[entry_range.start as usize..entry_range.end() as usize]
+                    != classes[..])
+        {
+            return Err(LayeredAuditError::Format);
+        }
+        next_map = Some((sort, classes));
+    }
+
+    let mut expected_fingerprint = [0_u64; 2];
+    for word in &mut expected_fingerprint {
+        let mut bytes = [0_u8; 8];
+        reader.read_exact(&mut bytes)?;
+        *word = u64::from_le_bytes(bytes);
+    }
+    if expected_fingerprint
+        != frozen_observation_fingerprint(frozen).map_err(|_| LayeredAuditError::Format)?
+    {
+        return Err(LayeredAuditError::Format);
+    }
+    let mut trailing = [0_u8; 1];
+    if reader.read(&mut trailing)? != 0 {
         return Err(LayeredAuditError::Format);
     }
     Ok(())
@@ -6154,6 +6744,75 @@ mod tests {
             &corrupted,
         )
         .is_err());
+        let chain_generators = &layered_generators[..3];
+        let expected_frozen =
+            compile_layered_observational(&counts, chain_generators, observation, local_transition)
+                .unwrap()
+                .into_frozen(&counts, &[0])
+                .unwrap();
+        let direct_frozen = compile_layered_frozen_chain_observational(
+            &counts,
+            chain_generators,
+            &[0],
+            observation,
+            local_transition,
+        )
+        .unwrap();
+        assert_eq!(direct_frozen, expected_frozen);
+        let mut chain_audit = Vec::new();
+        let audited_frozen = compile_layered_frozen_chain_audited(
+            &counts,
+            chain_generators,
+            &[0],
+            observation,
+            local_transition,
+            &mut chain_audit,
+        )
+        .unwrap();
+        assert_eq!(audited_frozen, direct_frozen);
+        verify_frozen_layered_chain_audit(&audited_frozen, &mut std::io::Cursor::new(&chain_audit))
+            .unwrap();
+        let mut corrupted_chain_audit = chain_audit.clone();
+        let last = corrupted_chain_audit.len() - 1;
+        corrupted_chain_audit[last] ^= 1;
+        assert!(verify_frozen_layered_chain_audit(
+            &audited_frozen,
+            &mut std::io::Cursor::new(corrupted_chain_audit),
+        )
+        .is_err());
+        let mut full_transition_calls = 0_usize;
+        compile_layered_observational(
+            &counts,
+            &layered_generators,
+            observation,
+            |generator, state| {
+                full_transition_calls += 1;
+                local_transition(generator, state)
+            },
+        )
+        .unwrap();
+        assert_eq!(full_transition_calls, 17);
+        let mut chain_transition_calls = 0_usize;
+        compile_layered_frozen_chain_observational(
+            &counts,
+            chain_generators,
+            &[0],
+            observation,
+            |generator, state| {
+                chain_transition_calls += 1;
+                local_transition(generator, state)
+            },
+        )
+        .unwrap();
+        assert_eq!(chain_transition_calls, 13);
+        assert!(compile_layered_frozen_chain_observational(
+            &counts,
+            &layered_generators,
+            &[0],
+            observation,
+            local_transition,
+        )
+        .is_err());
 
         let raw_ranges = [0_u32, 4, 9];
         let observations = counts
@@ -6237,6 +6896,22 @@ mod tests {
         let loaded =
             read_frozen_observation(&mut std::io::Cursor::new(&frozen_bytes), limits).unwrap();
         assert_eq!(loaded.storage(), frozen.storage());
+        let original_fingerprint = frozen_observation_fingerprint(&loaded).unwrap();
+        let mut changed_entry = loaded.clone();
+        let entry_class = &mut changed_entry.entry_classes[0];
+        let entry_range = changed_entry.class_ranges[0];
+        assert!(entry_range.len > 1);
+        *entry_class = entry_range.start + (*entry_class - entry_range.start + 1) % entry_range.len;
+        assert_ne!(
+            frozen_observation_fingerprint(&changed_entry).unwrap(),
+            original_fingerprint
+        );
+        let mut changed_metrics = loaded.clone();
+        changed_metrics.metrics.refinement_rounds += 1;
+        assert_ne!(
+            frozen_observation_fingerprint(&changed_metrics).unwrap(),
+            original_fingerprint
+        );
         verify_frozen_layered_audit(&loaded, &mut std::io::Cursor::new(&audit)).unwrap();
         let too_small = FrozenObservationLimits {
             maximum_classes: limits.maximum_classes - 1,
