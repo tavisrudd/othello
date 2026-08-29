@@ -2388,6 +2388,7 @@ pub enum LayeredAuditError {
 const SEPARATOR_STREAM_MAGIC: &[u8; 8] = b"ERGSEP01";
 const LAYERED_AUDIT_MAGIC: &[u8; 8] = b"ERGLAY01";
 const LAYERED_CHAIN_AUDIT_MAGIC: &[u8; 8] = b"ERGLAY02";
+const LAYERED_DAG_AUDIT_MAGIC: &[u8; 8] = b"ERGLAY03";
 const FROZEN_OBSERVATION_MAGIC: &[u8; 8] = b"ERGFRZ02";
 const LAYERED_CHAIN_AUDIT_BUFFER_BYTES: usize = 64 * 1024;
 
@@ -3006,6 +3007,58 @@ where
         writer.write_all(&word.to_le_bytes())?;
     }
     Ok(frozen)
+}
+
+/// Compile an acyclic typed presentation for the supplied topological sort
+/// order while streaming an independently replayable reverse-stratum audit.
+pub fn compile_layered_frozen_dag_audited<W, O, T>(
+    state_counts: &[u32],
+    generators: &[LayeredGeneratorSpec],
+    entry_sorts: &[u32],
+    observation: O,
+    transition: T,
+    writer: &mut W,
+) -> Result<(FrozenObservation, LayeredFrontierMetrics), LayeredAuditError>
+where
+    W: Write,
+    O: FnMut(u32, u32) -> u32,
+    T: FnMut(u32, u32) -> u32,
+{
+    writer.write_all(LAYERED_DAG_AUDIT_MAGIC)?;
+    write_var_u32(
+        writer,
+        u32::try_from(state_counts.len()).map_err(|_| ObservationalError::Overflow)?,
+    )?;
+    write_var_u32(
+        writer,
+        u32::try_from(generators.len()).map_err(|_| ObservationalError::Overflow)?,
+    )?;
+    for &count in state_counts {
+        write_var_u32(writer, count)?;
+    }
+    for spec in generators {
+        write_var_u32(writer, spec.source_sort)?;
+        write_var_u32(writer, spec.target_sort)?;
+    }
+    let (frozen, frontier) = {
+        let mut audit = BufferedLayeredChainAudit::new(writer);
+        let result = compile_layered_frozen_dag_impl::<_, _, _, false>(
+            state_counts,
+            generators,
+            entry_sorts,
+            observation,
+            transition,
+            &mut audit,
+        )?;
+        audit.flush()?;
+        result
+    };
+    let fingerprint =
+        frozen_observation_fingerprint(&frozen).map_err(|_| LayeredAuditError::Format)?;
+    for word in fingerprint {
+        writer.write_all(&word.to_le_bytes())?;
+    }
+    Ok((frozen, frontier))
 }
 
 fn compile_layered_frozen_dag_impl<O, T, A, const CHAIN_ONLY: bool>(
@@ -4151,9 +4204,30 @@ pub fn verify_frozen_layered_chain_audit<R: Read>(
     frozen: &FrozenObservation,
     reader: &mut R,
 ) -> Result<(), LayeredAuditError> {
+    verify_frozen_layered_dag_audit_impl::<R, true>(frozen, reader)
+}
+
+/// Replay an arbitrary acyclic reverse-stratum transcript, independently
+/// reconstructing signatures and releasing concrete maps at their last use.
+pub fn verify_frozen_layered_dag_audit<R: Read>(
+    frozen: &FrozenObservation,
+    reader: &mut R,
+) -> Result<(), LayeredAuditError> {
+    verify_frozen_layered_dag_audit_impl::<R, false>(frozen, reader)
+}
+
+fn verify_frozen_layered_dag_audit_impl<R: Read, const CHAIN_ONLY: bool>(
+    frozen: &FrozenObservation,
+    reader: &mut R,
+) -> Result<(), LayeredAuditError> {
     let mut magic = [0_u8; 8];
     reader.read_exact(&mut magic)?;
-    if &magic != LAYERED_CHAIN_AUDIT_MAGIC {
+    let expected_magic = if CHAIN_ONLY {
+        LAYERED_CHAIN_AUDIT_MAGIC
+    } else {
+        LAYERED_DAG_AUDIT_MAGIC
+    };
+    if &magic != expected_magic {
         return Err(LayeredAuditError::Format);
     }
     let sort_count = read_var_u32(reader)? as usize;
@@ -4191,7 +4265,11 @@ pub fn verify_frozen_layered_chain_audit<R: Read>(
         };
         let source = spec.source_sort as usize;
         let target = spec.target_sort as usize;
-        if source >= sort_count || target != source + 1 {
+        if source >= sort_count
+            || target >= sort_count
+            || source >= target
+            || (CHAIN_ONLY && target != source + 1)
+        {
             return Err(LayeredAuditError::Format);
         }
         let record = frozen.generator_records[generator];
@@ -4202,7 +4280,25 @@ pub fn verify_frozen_layered_chain_audit<R: Read>(
         generators.push(spec);
     }
 
+    let mut dependency_targets = vec![Vec::<usize>::new(); sort_count];
+    let mut remaining_predecessors = vec![0_usize; sort_count];
+    if !CHAIN_ONLY {
+        for sort in 0..sort_count {
+            for &generator in &outgoing[sort] {
+                dependency_targets[sort].push(generators[generator as usize].target_sort as usize);
+            }
+            dependency_targets[sort].sort_unstable();
+            dependency_targets[sort].dedup();
+            for &target in &dependency_targets[sort] {
+                remaining_predecessors[target] = remaining_predecessors[target]
+                    .checked_add(1)
+                    .ok_or(LayeredAuditError::Format)?;
+            }
+        }
+    }
+
     let mut next_map = None::<(usize, Box<[u32]>)>;
+    let mut live_maps = vec![None::<Box<[u32]>>; sort_count];
     for sort in (0..sort_count).rev() {
         if read_var_u32(reader)? as usize != sort || read_var_u32(reader)? != state_counts[sort] {
             return Err(LayeredAuditError::Format);
@@ -4219,16 +4315,28 @@ pub fn verify_frozen_layered_chain_audit<R: Read>(
             signature[0] = read_var_u32(reader)?;
             for (slot, &generator) in outgoing[sort].iter().enumerate() {
                 let target_state = read_var_u32(reader)?;
-                let Some((target_sort, target_classes)) = next_map.as_ref() else {
-                    return Err(LayeredAuditError::Format);
+                let target_sort = if CHAIN_ONLY {
+                    sort + 1
+                } else {
+                    generators[generator as usize].target_sort as usize
                 };
-                if *target_sort != sort + 1 || target_state as usize >= target_classes.len() {
+                let target_classes = if CHAIN_ONLY {
+                    let Some((next_sort, target_classes)) = next_map.as_ref() else {
+                        return Err(LayeredAuditError::Format);
+                    };
+                    if *next_sort != target_sort {
+                        return Err(LayeredAuditError::Format);
+                    }
+                    target_classes
+                } else {
+                    let Some(target_classes) = live_maps[target_sort].as_ref() else {
+                        return Err(LayeredAuditError::Format);
+                    };
+                    target_classes
+                };
+                if target_state as usize >= target_classes.len() {
                     return Err(LayeredAuditError::Format);
                 }
-                debug_assert_eq!(
-                    generators[generator as usize].target_sort as usize,
-                    sort + 1
-                );
                 signature[slot + 1] = target_classes[target_state as usize];
             }
         }
@@ -4298,7 +4406,27 @@ pub fn verify_frozen_layered_chain_audit<R: Read>(
         {
             return Err(LayeredAuditError::Format);
         }
-        next_map = Some((sort, classes));
+        if CHAIN_ONLY {
+            next_map = Some((sort, classes));
+        } else {
+            for &target_sort in &dependency_targets[sort] {
+                remaining_predecessors[target_sort] = remaining_predecessors[target_sort]
+                    .checked_sub(1)
+                    .ok_or(LayeredAuditError::Format)?;
+                if remaining_predecessors[target_sort] == 0
+                    && live_maps[target_sort].take().is_none()
+                {
+                    return Err(LayeredAuditError::Format);
+                }
+            }
+            if remaining_predecessors[sort] != 0 {
+                live_maps[sort] = Some(classes);
+            }
+        }
+    }
+
+    if !CHAIN_ONLY && live_maps.iter().any(Option::is_some) {
+        return Err(LayeredAuditError::Format);
     }
 
     let mut expected_fingerprint = [0_u64; 2];
@@ -6951,6 +7079,27 @@ mod tests {
                 peak_signature_words: 16,
             }
         );
+        let mut dag_audit = Vec::new();
+        let (audited_dag_frozen, audited_frontier) = compile_layered_frozen_dag_audited(
+            &counts,
+            &layered_generators,
+            &[0, 1],
+            observation,
+            local_transition,
+            &mut dag_audit,
+        )
+        .unwrap();
+        assert_eq!(audited_dag_frozen, dag_frozen);
+        assert_eq!(audited_frontier, frontier);
+        verify_frozen_layered_dag_audit(&audited_dag_frozen, &mut std::io::Cursor::new(&dag_audit))
+            .unwrap();
+        let mut corrupted_dag_audit = dag_audit.clone();
+        corrupted_dag_audit[0] ^= 1;
+        assert!(verify_frozen_layered_dag_audit(
+            &audited_dag_frozen,
+            &mut std::io::Cursor::new(corrupted_dag_audit),
+        )
+        .is_err());
         assert!(compile_layered_frozen_chain_observational(
             &counts,
             &layered_generators,
@@ -7115,6 +7264,91 @@ mod tests {
             );
             assert!(frozen.representative(target).is_some());
         }
+    }
+
+    #[test]
+    fn dag_frontier_compiler_matches_random_small_presentations() {
+        for seed in 0_u32..48 {
+            let sort_count = 2 + seed as usize % 5;
+            let counts = (0..sort_count)
+                .map(|sort| 1 + (seed.wrapping_mul(17) + sort as u32 * 11) % 6)
+                .collect::<Vec<_>>();
+            let mut generators = Vec::new();
+            let mut random = seed.wrapping_add(0x9e37_79b9);
+            for source in 0..sort_count {
+                for target in source + 1..sort_count {
+                    random = random.wrapping_mul(1_664_525).wrapping_add(1_013_904_223);
+                    if random & 3 != 0 {
+                        continue;
+                    }
+                    for _ in 0..=random as usize % 2 {
+                        generators.push(LayeredGeneratorSpec {
+                            source_sort: source as u32,
+                            target_sort: target as u32,
+                        });
+                    }
+                }
+            }
+            let observation = |sort: u32, state: u32| (seed + sort * 3 + state * state) % 5;
+            let transition = |generator: u32, state: u32| {
+                let spec = generators[generator as usize];
+                let target_count = counts[spec.target_sort as usize];
+                (state
+                    .wrapping_mul(7 + generator * 2)
+                    .wrapping_add(seed + spec.source_sort + spec.target_sort))
+                    % target_count
+            };
+            let entry_sorts = (0..sort_count as u32).collect::<Vec<_>>();
+            let expected =
+                compile_layered_observational(&counts, &generators, observation, transition)
+                    .unwrap()
+                    .into_frozen(&counts, &entry_sorts)
+                    .unwrap();
+            let mut audit = Vec::new();
+            let (actual, frontier) = compile_layered_frozen_dag_audited(
+                &counts,
+                &generators,
+                &entry_sorts,
+                observation,
+                transition,
+                &mut audit,
+            )
+            .unwrap();
+            assert_eq!(actual, expected, "seed={seed}");
+            assert!(frontier.peak_live_state_classes <= counts.iter().sum::<u32>() as usize);
+            verify_frozen_layered_dag_audit(&actual, &mut std::io::Cursor::new(audit)).unwrap();
+        }
+
+        let counts = [0_u32, 0, 0];
+        let generators = [
+            LayeredGeneratorSpec {
+                source_sort: 0,
+                target_sort: 2,
+            },
+            LayeredGeneratorSpec {
+                source_sort: 1,
+                target_sort: 2,
+            },
+        ];
+        let mut audit = Vec::new();
+        let (frozen, frontier) = compile_layered_frozen_dag_audited(
+            &counts,
+            &generators,
+            &[0, 1, 2],
+            |_, _| unreachable!(),
+            |_, _| unreachable!(),
+            &mut audit,
+        )
+        .unwrap();
+        assert_eq!(
+            frontier,
+            LayeredFrontierMetrics {
+                peak_live_state_classes: 0,
+                peak_live_class_maps: 2,
+                peak_signature_words: 0,
+            }
+        );
+        verify_frozen_layered_dag_audit(&frozen, &mut std::io::Cursor::new(audit)).unwrap();
     }
 
     #[test]
