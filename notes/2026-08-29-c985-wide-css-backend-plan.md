@@ -293,6 +293,24 @@ check coordinates chosen to strengthen the deterministic greedy packing
 without changing the valid lower bound; it needs rank-stratified controls
 because it also changes first-odd branching order.
 
+The post-frame branch-stack profile records 2.566 billion branches and 99.0
+million misses (3.86%). Mispredictions concentrate in the greedy-packing
+backedge and transitions between its three syndrome words; the short-
+completion probes are negligible. A branchless three-word selector is a
+decisive negative control: it lowers branches by 23.4%, misses by 53.0%, and
+instructions by 0.73%, but extends the address dependency chain and raises
+cycles from 7.2108 to 13.4952 billion (87.1%). Reversing the greedy order is
+also rejected: it raises the candidate count from 66.0 to 70.5 million and
+one-worker wall time from about 1.46 to 2.36 seconds. The kernel is therefore
+dependent-load-latency-bound, not branch-throughput-bound. The next credible
+reduction must remove packing iterations or make each dependent conflict load
+prove more, most plausibly through measured compile-time check permutation or
+budget-stratified restriction edges; generic branchless conversion is closed.
+Reversing coordinate moves independently is also negative: highest-first
+raises candidates from 66.0 to 73.3 million and wall time to 1.675 seconds.
+Any further move ordering must be a compiler-derived physical permutation with
+an inverse witness map, not a hot-loop scoring pass or generic reversal.
+
 ## Matched Gurobi comparison
 
 The audited global parity model was regenerated from the same BB288 source,
