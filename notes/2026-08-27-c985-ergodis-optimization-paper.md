@@ -6,6 +6,39 @@
 
 **Date:** 2026-08-27
 
+## Four-hour direct-envelope compiler plan, 2026-08-28
+
+The next implementation slice targets source construction rather than another
+generic-refinement micro-optimization.  The current hierarchy path spends about
+2.06 seconds and 22.5 MiB constructing 328,704 raw states before a minimizer
+that needs only tens of milliseconds.  The intended compiler will construct
+rank-stratified full-span envelopes and their restriction edges directly,
+consume transient strata as soon as their successors are fixed, and emit the
+same canonical quotient without retaining the raw presentation.
+
+Acceptance requires:
+
+1. exact quotient, transition, observation, and witness parity with the current
+   raw-presentation path on exhaustive small controls and the scaled hierarchy;
+2. a versioned frozen artifact whose loader checks schema, dimensions, hashes,
+   range invariants, congruence, and witness provenance before serving queries;
+3. pre-sized contiguous pools, no allocation in construction/refinement hot
+   loops, and no recursion proportional to ranks, states, contexts, or evidence;
+4. line-buffered or directly written large evidence rather than an in-memory
+   transcript;
+5. interleaved cold time and peak-RSS measurements, retained artifact size,
+   random and sequential query cost, and a recomputed compile/query crossover;
+6. a target of at least 10x less cold compiler work or a comparably decisive
+   memory/crossover improvement, with a clean negative recorded if direct
+   construction cannot reach that gate; and
+7. profile-led optimization after exactness passes, followed by the highest-EV
+   remaining application or theorem slice for any unused goal window.
+
+The generic compiler remains the differential oracle and fallback.  GL/orbit
+compression is admitted only if profiling shows probe hashing or storage still
+dominates after direct construction.  C995 results may alter the final
+follow-on choice, but not this acceptance boundary.
+
 ## Objective
 
 Develop a follow-on paper presenting ergodis as a structure-aware compiler and
