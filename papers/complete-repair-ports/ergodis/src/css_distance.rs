@@ -20,6 +20,8 @@ const MAX_CHECKS: usize = 128;
 const MAX_LOGICALS: usize = 64;
 const SUPPORT_WORDS: usize = MAX_COORDINATES / 64;
 const SYNDROME_WORDS: usize = MAX_CHECKS / 64;
+const WIDE_SUPPORT_WORDS: usize = 5;
+const WIDE_SYNDROME_WORDS: usize = 3;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
 const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
 const ARTIFACT_VERSION: u16 = 1;
@@ -174,6 +176,16 @@ impl PackedSyndrome<2> {
     }
 }
 
+impl PackedSyndrome<3> {
+    #[inline]
+    fn weight(&self) -> u32 {
+        self.words[0].count_ones() + self.words[1].count_ones() + self.words[2].count_ones()
+    }
+}
+
+type WidePackedSupport = PackedSupport<WIDE_SUPPORT_WORDS>;
+type WidePackedColumn = PackedColumn<WIDE_SYNDROME_WORDS>;
+
 #[repr(C)]
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 struct PackedColumn<const CHECK_WORDS: usize = SYNDROME_WORDS> {
@@ -281,6 +293,177 @@ struct CompiledStructure {
     neighbors: Box<[PackedSupport]>,
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
+}
+
+struct WideCompiledStructure {
+    columns: Box<[WidePackedColumn]>,
+    neighbors: Box<[WidePackedSupport]>,
+    check_count: u16,
+    maximum_column_check_weight: u8,
+    kernel_weights_even: bool,
+}
+
+/// Precompiled exact state for CSS instances up to 320 coordinates and rank 192.
+#[derive(Clone, Debug)]
+pub struct CompiledWideCssDistance {
+    columns: Box<[WidePackedColumn]>,
+    neighbors: Box<[WidePackedSupport]>,
+    coordinate_count: u16,
+    check_count: u16,
+    logical_count: u8,
+    maximum_column_check_weight: u8,
+    kernel_weights_even: bool,
+}
+
+/// Select original rows forming a basis, preserving sparse presentation rows.
+fn independent_row_indices(matrix: &Matrix) -> Vec<usize> {
+    let word_count = matrix.cols().div_ceil(64);
+    let mut pivots: Vec<(usize, Box<[u64]>)> = Vec::with_capacity(matrix.rows());
+    let mut indices = Vec::with_capacity(matrix.rows());
+    for row_index in 0..matrix.rows() {
+        let mut words = vec![0u64; word_count];
+        for (column, &entry) in matrix.row(row_index).iter().enumerate() {
+            if entry != 0 {
+                words[column / 64] |= 1u64 << (column % 64);
+            }
+        }
+        for &(pivot, ref basis) in &pivots {
+            if words[pivot / 64] & (1u64 << (pivot % 64)) != 0 {
+                for (left, &right) in words.iter_mut().zip(basis.iter()) {
+                    *left ^= right;
+                }
+            }
+        }
+        let Some(pivot) = words
+            .iter()
+            .rposition(|&word| word != 0)
+            .map(|word| word * 64 + (63 - words[word].leading_zeros() as usize))
+        else {
+            continue;
+        };
+        let insertion = pivots.partition_point(|&(existing, _)| existing > pivot);
+        pivots.insert(insertion, (pivot, words.into_boxed_slice()));
+        indices.push(row_index);
+    }
+    indices
+}
+
+fn compile_wide_structure(
+    physical: &Matrix,
+    logical: &Matrix,
+) -> Result<WideCompiledStructure, CssDistanceError> {
+    const MAX_WIDE_COORDINATES: usize = WIDE_SUPPORT_WORDS * 64;
+    const MAX_WIDE_CHECKS: usize = WIDE_SYNDROME_WORDS * 64;
+    let coordinate_count = physical.cols();
+    if coordinate_count > MAX_WIDE_COORDINATES {
+        return Err(CssDistanceError::TooManyCoordinates);
+    }
+    if logical.rows() > MAX_LOGICALS {
+        return Err(CssDistanceError::TooManyLogicals);
+    }
+    if logical.cols() != coordinate_count {
+        return Err(CssDistanceError::CoordinateMismatch);
+    }
+    if coordinate_count == 0 || logical.rows() == 0 {
+        return Err(CssDistanceError::EmptyProblem);
+    }
+    let basis = independent_row_indices(physical);
+    if basis.len() > MAX_WIDE_CHECKS {
+        return Err(CssDistanceError::TooManyChecks);
+    }
+    let mut basis_positions = vec![u16::MAX; physical.rows()];
+    for (position, &row) in basis.iter().enumerate() {
+        basis_positions[row] = position as u16;
+    }
+    let mut columns = vec![WidePackedColumn::default(); coordinate_count];
+    let mut neighbors = vec![WidePackedSupport::default(); coordinate_count];
+    for (check, &basis_position) in basis_positions.iter().enumerate() {
+        let row = physical.row(check);
+        let mut row_support = WidePackedSupport::default();
+        for (coordinate, &entry) in row.iter().enumerate() {
+            if entry != 0 {
+                row_support.insert(coordinate);
+                let position = basis_position;
+                if position != u16::MAX {
+                    let position = usize::from(position);
+                    columns[coordinate].syndrome.words[position / 64] |= 1u64 << (position % 64);
+                }
+            }
+        }
+        for (coordinate, &entry) in row.iter().enumerate() {
+            if entry != 0 {
+                neighbors[coordinate].union_assign(row_support);
+            }
+        }
+    }
+    for logical_row in 0..logical.rows() {
+        for (coordinate, &entry) in logical.row(logical_row).iter().enumerate() {
+            if entry != 0 {
+                columns[coordinate].logical |= 1u64 << logical_row;
+            }
+        }
+    }
+    let mut maximum_column_check_weight = 0u8;
+    let mut kernel_weights_even = true;
+    for (coordinate, column) in columns.iter().enumerate() {
+        neighbors[coordinate].remove(coordinate);
+        maximum_column_check_weight = maximum_column_check_weight
+            .max(u8::try_from(column.syndrome.weight()).expect("wide check count is bounded"));
+        kernel_weights_even &= column.syndrome.weight() & 1 == 1;
+    }
+    Ok(WideCompiledStructure {
+        columns: columns.into_boxed_slice(),
+        neighbors: neighbors.into_boxed_slice(),
+        check_count: basis.len() as u16,
+        maximum_column_check_weight,
+        kernel_weights_even,
+    })
+}
+
+impl CompiledWideCssDistance {
+    pub fn compile(physical: &Matrix, logical: &Matrix) -> Result<Self, CssDistanceError> {
+        let structure = compile_wide_structure(physical, logical)?;
+        Ok(Self {
+            columns: structure.columns,
+            neighbors: structure.neighbors,
+            coordinate_count: physical.cols() as u16,
+            check_count: structure.check_count,
+            logical_count: logical.rows() as u8,
+            maximum_column_check_weight: structure.maximum_column_check_weight,
+            kernel_weights_even: structure.kernel_weights_even,
+        })
+    }
+
+    #[inline]
+    pub fn coordinate_count(&self) -> usize {
+        self.coordinate_count as usize
+    }
+
+    #[inline]
+    pub fn check_count(&self) -> usize {
+        self.check_count as usize
+    }
+
+    #[inline]
+    pub fn logical_count(&self) -> usize {
+        self.logical_count as usize
+    }
+
+    #[inline]
+    pub fn maximum_column_check_weight(&self) -> u8 {
+        self.maximum_column_check_weight
+    }
+
+    #[inline]
+    pub fn kernel_weights_even(&self) -> bool {
+        self.kernel_weights_even
+    }
+
+    #[inline]
+    pub fn packed_storage_bytes(&self) -> usize {
+        self.columns.len() * std::mem::size_of::<WidePackedColumn>()
+            + self.neighbors.len() * std::mem::size_of::<WidePackedSupport>()
+    }
 }
 
 struct HashingWriter<W> {
@@ -487,7 +670,7 @@ impl BranchWorkspace {
             supports: vec![PackedSupport::default(); frame_count],
             boundaries: vec![PackedSupport::default(); frame_count],
             candidates: vec![PackedSupport::default(); frame_count],
-            syndromes: vec![PackedSyndrome::default(); frame_count],
+            syndromes: vec![PackedSyndrome::<2>::default(); frame_count],
             logicals: vec![0; frame_count],
         }
     }
@@ -563,7 +746,7 @@ impl CompiledCssDistance {
             return Err(CssDistanceError::EmptyProblem);
         }
 
-        let mut columns = vec![PackedColumn::default(); coordinate_count];
+        let mut columns = vec![PackedColumn::<2>::default(); coordinate_count];
         let mut neighbors = vec![PackedSupport::default(); coordinate_count];
         let mut maximum_column_check_weight = 0u8;
         let mut kernel_weights_even = true;
@@ -787,7 +970,7 @@ impl CompiledCssDistance {
         if column_len != usize::from(coordinate_count) {
             return Err(CssDistanceArtifactError::Shape);
         }
-        let mut columns = vec![PackedColumn::default(); column_len];
+        let mut columns = vec![PackedColumn::<2>::default(); column_len];
         for column in &mut columns {
             column.syndrome.words[0] = read_u64(&mut reader)?;
             column.syndrome.words[1] = read_u64(&mut reader)?;
@@ -924,7 +1107,7 @@ impl CompiledCssDistance {
         let mut supports = vec![PackedSupport::default(); frame_count];
         let mut boundaries = vec![PackedSupport::default(); frame_count];
         let mut candidates = vec![PackedSupport::default(); frame_count];
-        let mut syndromes = vec![PackedSyndrome::default(); frame_count];
+        let mut syndromes = vec![PackedSyndrome::<2>::default(); frame_count];
         let mut logicals = vec![0u64; frame_count];
         let mut best_weight = searched_maximum_weight.saturating_add(1);
         let mut best_support = PackedSupport::default();
@@ -1424,7 +1607,7 @@ impl CompiledCssDistance {
             return Err(CssDistanceError::InvalidIncumbentSupport);
         }
         let mut support: PackedSupport = PackedSupport::default();
-        let mut syndrome = PackedSyndrome::default();
+        let mut syndrome = PackedSyndrome::<2>::default();
         let mut logical = 0u64;
         for &coordinate in incumbent {
             let coordinate = usize::from(coordinate);
@@ -1607,6 +1790,64 @@ mod tests {
             CompiledCssDistance::read_artifact(&physical, &logical, &*artifact),
             Err(CssDistanceArtifactError::TrailingBytes)
         ));
+    }
+
+    #[test]
+    fn wide_compiler_separates_presented_connectivity_from_syndrome_rank() {
+        let columns = 288;
+        let rows = 144;
+        let mut physical_data = vec![0u8; rows * columns];
+        for row in 0..rows {
+            let pattern = row & 1;
+            physical_data[row * columns + pattern] = 1;
+            physical_data[row * columns + 2 + pattern] = 1;
+        }
+        let physical = Matrix::new::<2>(rows, columns, physical_data).unwrap();
+        let mut logical_data = vec![0u8; columns];
+        logical_data[0] = 1;
+        let logical = Matrix::new::<2>(1, columns, logical_data).unwrap();
+        assert_eq!(independent_row_indices(&physical).len(), 2);
+        let compiled = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+        assert_eq!(compiled.coordinate_count(), 288);
+        assert_eq!(compiled.check_count(), 2);
+        assert_eq!(compiled.logical_count(), 1);
+        assert_eq!(compiled.maximum_column_check_weight(), 1);
+        assert!(!compiled.kernel_weights_even());
+        assert_eq!(
+            compiled.packed_storage_bytes(),
+            columns
+                * (std::mem::size_of::<WidePackedColumn>()
+                    + std::mem::size_of::<WidePackedSupport>())
+        );
+    }
+
+    #[test]
+    fn wide_compiler_reaches_the_official_bb288_shape() {
+        let ell = 12;
+        let m = 12;
+        let block = ell * m;
+        let mut data = vec![0u8; block * 2 * block];
+        for row_r in 0..ell {
+            for row_s in 0..m {
+                let row = row_r * m + row_s;
+                let coordinates = [
+                    ((row_r + 3) % ell) * m + row_s,
+                    row_r * m + (row_s + 2) % m,
+                    row_r * m + (row_s + 7) % m,
+                    block + row_r * m + (row_s + 3) % m,
+                    block + ((row_r + 1) % ell) * m + row_s,
+                    block + ((row_r + 2) % ell) * m + row_s,
+                ];
+                for coordinate in coordinates {
+                    data[row * 2 * block + coordinate] ^= 1;
+                }
+            }
+        }
+        let physical = Matrix::new::<2>(block, 2 * block, data).unwrap();
+        let logical = Matrix::new::<2>(1, 2 * block, vec![0; 2 * block]).unwrap();
+        let compiled = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+        assert_eq!(compiled.coordinate_count(), 288);
+        assert_eq!(compiled.check_count(), 138);
     }
 
     #[cfg(feature = "parallel")]
