@@ -1,0 +1,216 @@
+{
+  "A_exponents": [
+    3,
+    1,
+    2
+  ],
+  "B_exponents": [
+    3,
+    1,
+    2
+  ],
+  "code": "[[144,12,12]] bivariate bicycle gross code",
+  "ell": 12,
+  "hx_sha256": "195d5586a406f0194b89649b6a2499ec2b481edb81c91293daf1745d8b806641",
+  "k": 12,
+  "lx_sha256": "b0bb05805ccb41b0ae495d899a7ffdea43f5f5b8f00b318bf995dfbfca32415e",
+  "m": 6,
+  "max_seconds": 600.0,
+  "min_objective": 12.0,
+  "mode": "per-logical",
+  "n": 144,
+  "solver": "CBC via python-mip",
+  "solves": [
+    {
+      "iterations": 2463205,
+      "log_bytes": 39438,
+      "logical": 0,
+      "nodes": 792925,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty: 260 orbits (144 useful covering 288 variables), 1 generators, group size: 2 - sparse size 2788 - took 0.00093 seconds",
+        "Cbc0045I Orbital branching succeeded 20 times - average extra   0.050, fixing (5,  20.800)"
+      ],
+      "wall_seconds": 246.813
+    },
+    {
+      "iterations": 2576302,
+      "log_bytes": 39951,
+      "logical": 1,
+      "nodes": 861267,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty: 260 orbits (144 useful covering 288 variables), 1 generators, group size: 2 - sparse size 2788 - took 0.000881 seconds",
+        "Cbc0045I Orbital branching succeeded 23 times - average extra   0.043, fixing (6,  23.333)"
+      ],
+      "wall_seconds": 250.679
+    },
+    {
+      "iterations": 2510014,
+      "log_bytes": 39626,
+      "logical": 2,
+      "nodes": 832797,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty: 260 orbits (144 useful covering 288 variables), 1 generators, group size: 2 - sparse size 2788 - took 0.000874 seconds",
+        "Cbc0045I Orbital branching succeeded 12 times - average extra   0.083, fixing (4,  17.000)"
+      ],
+      "wall_seconds": 248.313
+    },
+    {
+      "iterations": 2551533,
+      "log_bytes": 38183,
+      "logical": 3,
+      "nodes": 770302,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty: 260 orbits (144 useful covering 288 variables), 1 generators, group size: 2 - sparse size 2788 - took 0.000878 seconds",
+        "Cbc0045I Orbital branching succeeded 23 times - average extra   0.043, fixing (6,  18.333)"
+      ],
+      "wall_seconds": 239.335
+    },
+    {
+      "iterations": 2793834,
+      "log_bytes": 41431,
+      "logical": 4,
+      "nodes": 838382,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty: 260 orbits (144 useful covering 288 variables), 1 generators, group size: 2 - sparse size 2788 - took 0.000874 seconds",
+        "Cbc0045I Orbital branching succeeded 19 times - average extra   0.053, fixing (4,  21.000)"
+      ],
+      "wall_seconds": 261.356
+    },
+    {
+      "iterations": 3197291,
+      "log_bytes": 48896,
+      "logical": 5,
+      "nodes": 1055936,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty: 260 orbits (144 useful covering 288 variables), 1 generators, group size: 2 - sparse size 2788 - took 0.000881 seconds",
+        "Cbc0045I Orbital branching succeeded 19 times - average extra   0.053, fixing (5,  17.200)"
+      ],
+      "wall_seconds": 317.263
+    },
+    {
+      "iterations": 2063405,
+      "log_bytes": 35335,
+      "logical": 6,
+      "nodes": 688440,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty: 260 orbits (144 useful covering 288 variables), 1 generators, group size: 2 - sparse size 2788 - took 0.000606 seconds",
+        "Cbc0045I Orbital branching succeeded 15 times - average extra   0.067, fixing (3,  25.333)"
+      ],
+      "wall_seconds": 216.177
+    },
+    {
+      "iterations": 2371223,
+      "log_bytes": 40508,
+      "logical": 7,
+      "nodes": 836560,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty: 260 orbits (144 useful covering 288 variables), 1 generators, group size: 2 - sparse size 2788 - took 0.000621 seconds",
+        "Cbc0045I Orbital branching succeeded 24 times - average extra   0.042, fixing (9,  21.111)"
+      ],
+      "wall_seconds": 253.689
+    },
+    {
+      "iterations": 3898764,
+      "log_bytes": 50560,
+      "logical": 8,
+      "nodes": 1290451,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty did not find any useful orbits in time 0.000582"
+      ],
+      "wall_seconds": 330.741
+    },
+    {
+      "iterations": 4313368,
+      "log_bytes": 56296,
+      "logical": 9,
+      "nodes": 1561180,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty did not find any useful orbits in time 0.000584"
+      ],
+      "wall_seconds": 372.762
+    },
+    {
+      "iterations": 4395100,
+      "log_bytes": 69366,
+      "logical": 10,
+      "nodes": 2010404,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty did not find any useful orbits in time 0.000595"
+      ],
+      "wall_seconds": 466.444
+    },
+    {
+      "iterations": 4793268,
+      "log_bytes": 62284,
+      "logical": 11,
+      "nodes": 1689483,
+      "num_constraints": 73,
+      "num_vars": 364,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty did not find any useful orbits in time 0.000594"
+      ],
+      "wall_seconds": 413.728
+    }
+  ],
+  "threads": 1,
+  "total_nodes": 13228127,
+  "total_wall_seconds": 3617.3
+}

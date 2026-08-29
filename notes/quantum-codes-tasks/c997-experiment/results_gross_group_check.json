@@ -1,0 +1,33 @@
+{
+  "A_exponents": [
+    3,
+    1,
+    2
+  ],
+  "B_exponents": [
+    3,
+    1,
+    2
+  ],
+  "code": "[[144,12,12]] bivariate bicycle gross code",
+  "ell": 12,
+  "group_check": {
+    "action_free_on_qubits": true,
+    "group_order": 72,
+    "orbit_size": 72,
+    "orbits_on_qubits": 2,
+    "rank_hx": 66,
+    "rank_hz": 66,
+    "rowspace_hx_invariant": true
+  },
+  "hx_sha256": "195d5586a406f0194b89649b6a2499ec2b481edb81c91293daf1745d8b806641",
+  "k": 12,
+  "lx_sha256": "b0bb05805ccb41b0ae495d899a7ffdea43f5f5b8f00b318bf995dfbfca32415e",
+  "m": 6,
+  "max_seconds": 900.0,
+  "mode": "check-group",
+  "n": 144,
+  "solver": "CBC via python-mip",
+  "solves": [],
+  "threads": 1
+}

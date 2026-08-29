@@ -1,0 +1,55 @@
+{
+  "sha": "fa77e3333d3ec44c79d8f914dd24c040d1da471b",
+  "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/git/trees/fa77e3333d3ec44c79d8f914dd24c040d1da471b",
+  "tree": [
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "size": 11357,
+      "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/git/blobs/261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "097bc1de532dfe29ce11e30e401cd5f5472db510",
+      "size": 2122,
+      "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/git/blobs/097bc1de532dfe29ce11e30e401cd5f5472db510"
+    },
+    {
+      "path": "circuit_distance.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "22cf386130add284944f2983672e4e9f324a2455",
+      "size": 3683,
+      "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/git/blobs/22cf386130add284944f2983672e4e9f324a2455"
+    },
+    {
+      "path": "decoder_run.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3a43088cccceccd48f886412d7e645c762747da1",
+      "size": 11273,
+      "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/git/blobs/3a43088cccceccd48f886412d7e645c762747da1"
+    },
+    {
+      "path": "decoder_setup.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7ec5a36732a2a6dd229ab74405dedf36139ccda4",
+      "size": 17632,
+      "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/git/blobs/7ec5a36732a2a6dd229ab74405dedf36139ccda4"
+    },
+    {
+      "path": "distance_test.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a8f2706a21bb623dae8afa5d13a6ddd61e6afb42",
+      "size": 2962,
+      "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/git/blobs/a8f2706a21bb623dae8afa5d13a6ddd61e6afb42"
+    }
+  ],
+  "truncated": false
+}

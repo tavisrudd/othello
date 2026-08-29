@@ -1,0 +1,43 @@
+{
+  "A_exponents": [
+    3,
+    1,
+    2
+  ],
+  "B_exponents": [
+    3,
+    1,
+    2
+  ],
+  "code": "[[144,12,12]] bivariate bicycle gross code",
+  "ell": 12,
+  "hx_sha256": "195d5586a406f0194b89649b6a2499ec2b481edb81c91293daf1745d8b806641",
+  "k": 12,
+  "lx_sha256": "b0bb05805ccb41b0ae495d899a7ffdea43f5f5b8f00b318bf995dfbfca32415e",
+  "m": 6,
+  "max_seconds": 2400.0,
+  "min_objective": 12.0,
+  "mode": "global",
+  "n": 144,
+  "solver": "CBC via python-mip",
+  "solves": [
+    {
+      "fix_index": null,
+      "iterations": 12410422,
+      "log_bytes": 114863,
+      "nodes": 4236816,
+      "num_constraints": 85,
+      "num_vars": 420,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty did not find any useful orbits in time 0.000505"
+      ],
+      "wall_seconds": 797.237
+    }
+  ],
+  "threads": 1,
+  "total_nodes": 4236816,
+  "total_wall_seconds": 797.237
+}

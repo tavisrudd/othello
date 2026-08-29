@@ -1,0 +1,50 @@
+{
+  "G_sha256": "5e385571a00d16576e22274ecc1ad005d29d47b31b0ee4fb3b77aa2b2a2509d8",
+  "H_sha256": "5e385571a00d16576e22274ecc1ad005d29d47b31b0ee4fb3b77aa2b2a2509d8",
+  "code": "[78,36,12]_2 q=13 passant code",
+  "group_check": {
+    "code_invariant_on_generators": true,
+    "generated_subgroup_order": 2184,
+    "group_order": 2184,
+    "num_orbit_minima_excluding_0": 6,
+    "num_point_orbits": 1,
+    "point_orbit_sizes": [
+      78
+    ],
+    "rank_G": 42,
+    "stab0_orbit_sizes": [
+      7,
+      14,
+      14,
+      14,
+      14,
+      14
+    ],
+    "stabiliser_order": 28
+  },
+  "k": 36,
+  "max_seconds": 1800.0,
+  "min_objective": 12.0,
+  "mode": "symbreak2",
+  "n": 78,
+  "parity_rows": 78,
+  "solver": "CBC via python-mip",
+  "solves": [
+    {
+      "iterations": 410674,
+      "nodes": 37796,
+      "num_constraints": 150,
+      "num_vars": 312,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty did not find any useful orbits in time 0.000589"
+      ],
+      "wall_seconds": 11.891
+    }
+  ],
+  "threads": 1,
+  "total_nodes": 37796,
+  "total_wall_seconds": 11.891
+}

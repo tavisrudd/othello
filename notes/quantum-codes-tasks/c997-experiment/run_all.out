@@ -1,0 +1,17 @@
+=== gross global (no symmetry breaking) ===
+global: obj=12.0 nodes=3242968 t=600.319s
+{"mode": "global", "min_objective": 12.0, "total_nodes": 3242968, "total_wall_seconds": 600.319}
+=== gross symbreak ===
+symbreak fix=0: obj=12.0 nodes=305827 t=49.755s
+symbreak fix=72: obj=12.0 nodes=704664 t=108.394s
+{"mode": "symbreak", "min_objective": 12.0, "total_nodes": 1010491, "total_wall_seconds": 158.149}
+=== passant group check ===
+Installed 5 packages in 159ms
+{"group_order": 2184, "generated_subgroup_order": 2184, "code_invariant_on_generators": true, "rank_G": 42, "num_point_orbits": 1, "point_orbit_sizes": [78], "stabiliser_order": 28, "stab0_orbit_sizes": [7, 14, 14, 14, 14, 14], "num_orbit_minima_excluding_0": 6}
+=== passant baseline ===
+{"mode": "baseline", "min_objective": 7.0, "total_nodes": 198695, "total_wall_seconds": 67.154}
+=== passant symbreak ===
+{"mode": "symbreak", "min_objective": 7.0, "total_nodes": 37109, "total_wall_seconds": 12.179}
+=== passant symbreak2 ===
+{"mode": "symbreak2", "min_objective": 7.0, "total_nodes": 45733, "total_wall_seconds": 15.817}
+=== done ===

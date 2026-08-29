@@ -1,0 +1,12 @@
+=== passant group check ===
+{"group_order": 2184, "generated_subgroup_order": 2184, "code_invariant_on_generators": true, "rank_G": 42, "num_point_orbits": 1, "point_orbit_sizes": [78], "stabiliser_order": 28, "stab0_orbit_sizes": [7, 14, 14, 14, 14, 14], "num_orbit_minima_excluding_0": 6}
+=== passant baseline ===
+{"mode": "baseline", "min_objective": 12.0, "total_nodes": 244087, "total_wall_seconds": 65.429}
+=== passant symbreak ===
+{"mode": "symbreak", "min_objective": 12.0, "total_nodes": 98018, "total_wall_seconds": 27.149}
+=== passant symbreak2 ===
+{"mode": "symbreak2", "min_objective": 12.0, "total_nodes": 37796, "total_wall_seconds": 11.891}
+=== gross global control, longer cap ===
+global: obj=12.0 nodes=4236816 t=797.237s
+{"mode": "global", "min_objective": 12.0, "total_nodes": 4236816, "total_wall_seconds": 797.237}
+=== done ===

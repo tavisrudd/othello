@@ -1,0 +1,31 @@
+{
+  "G_sha256": "5e385571a00d16576e22274ecc1ad005d29d47b31b0ee4fb3b77aa2b2a2509d8",
+  "H_sha256": "5e385571a00d16576e22274ecc1ad005d29d47b31b0ee4fb3b77aa2b2a2509d8",
+  "code": "[78,36,12]_2 q=13 passant code",
+  "k": 36,
+  "max_seconds": 1800.0,
+  "min_objective": 12.0,
+  "mode": "symbreak",
+  "n": 78,
+  "parity_rows": 78,
+  "solver": "CBC via python-mip",
+  "solves": [
+    {
+      "iterations": 1186107,
+      "nodes": 98018,
+      "num_constraints": 79,
+      "num_vars": 312,
+      "objective": 12.0,
+      "objective_bound": 12.0,
+      "status": "OptimizationStatus.OPTIMAL",
+      "symmetry_log_lines": [
+        "Cbc0045I Nauty: 42 orbits (18 useful covering 231 variables), 3 generators, group size: 28 - sparse size 2792 - took 0.000429 seconds",
+        "Cbc0045I Orbital branching succeeded 14 times - average extra   0.500, fixing (7,  42.286)"
+      ],
+      "wall_seconds": 27.149
+    }
+  ],
+  "threads": 1,
+  "total_nodes": 98018,
+  "total_wall_seconds": 27.149
+}

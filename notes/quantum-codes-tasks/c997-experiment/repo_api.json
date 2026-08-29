@@ -1,0 +1,84 @@
+[
+  {
+    "sha": "fa77e3333d3ec44c79d8f914dd24c040d1da471b",
+    "node_id": "C_kwDOK4--0NoAKGZhNzdlMzMzM2QzZWM0NGM3OWQ4ZjkxNGRkMjRjMDQwZDFkYTQ3MWI",
+    "commit": {
+      "author": {
+        "name": "sbravyi",
+        "email": "38170421+sbravyi@users.noreply.github.com",
+        "date": "2024-04-29T12:03:41Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2024-04-29T12:03:41Z"
+      },
+      "message": "Add files via upload",
+      "tree": {
+        "sha": "5f1d1c12694b1e29907172c239ee46c263c7f7e6",
+        "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/git/trees/5f1d1c12694b1e29907172c239ee46c263c7f7e6"
+      },
+      "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/git/commits/fa77e3333d3ec44c79d8f914dd24c040d1da471b",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJmL4ydCRC1aQ7uu5UhlAAAqiYQABZ4bbg1d1wN+L0lRRCADOK4\nAG1NTvqpV0L5MxMV9GvLYatRY+5kVwhGOkTG1fbH/1duvwLMdKO6zKsA+et/UMQf\nG+GvJQleEctAO1N+a1hCy8xSCfjf3lxE75hkegnoj98kSt34G+TlytzIh7eCxh88\nBfAGHcsmIl9SQoUJOlPafCdaE4UWCYR/GN6N76znfcaSa9EblDVnI/4h4L2UXamN\nx0rvl7EzgB3/REtXneL3mZnN+skNkLFfZ/KVnpiBxXi997Ura7QTQ8RJS/mH5M37\nu70wnjlhmra4qW2ktTAzBvHQz6mQacGoxIQHXOOQXwKVx9+Pup1l8ka1dvzcPpLA\n8O3Q6cSbKK452TQrUHzbPOWeByC1/wDaThi6TdaukDHadViHW1rEdVS5aJRE4ieq\nBQmKywU1ZgnpodPZkhxwTavgbelTnBmDwo+eq9ozC29OflulqNnxesfbBvIiNDoJ\n94Re+SvZSkTF3uI0hpQNIvai9u4zrIQbjtQ8QbWCiwvNZSkm37UI2ARODsv6Rh6m\n7P5z+Sv7AlmofzA4KoTIDitqMXLPgYhl4uzWD//pqzz3ImXoYG7GGDkDdiOP0srF\n+tmpuv5XATdEUb8XRi3elQZFee9qsL0RyRAS9ucUq3XpxU9IKSH7q9PvHlToiuwb\nNF8LnW/jzwdiGKycBkVh\n=adNb\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 5f1d1c12694b1e29907172c239ee46c263c7f7e6\nparent 001789cbef601a56d9f4e2e2daf156d1f64226b7\nauthor sbravyi <38170421+sbravyi@users.noreply.github.com> 1714392221 -0400\ncommitter GitHub <noreply@github.com> 1714392221 -0400\n\nAdd files via upload",
+        "verified_at": "2024-11-07T15:20:57Z"
+      }
+    },
+    "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/commits/fa77e3333d3ec44c79d8f914dd24c040d1da471b",
+    "html_url": "https://github.com/sbravyi/BivariateBicycleCodes/commit/fa77e3333d3ec44c79d8f914dd24c040d1da471b",
+    "comments_url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/commits/fa77e3333d3ec44c79d8f914dd24c040d1da471b/comments",
+    "author": {
+      "login": "sbravyi",
+      "id": 38170421,
+      "node_id": "MDQ6VXNlcjM4MTcwNDIx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38170421?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/sbravyi",
+      "html_url": "https://github.com/sbravyi",
+      "followers_url": "https://api.github.com/users/sbravyi/followers",
+      "following_url": "https://api.github.com/users/sbravyi/following{/other_user}",
+      "gists_url": "https://api.github.com/users/sbravyi/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/sbravyi/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/sbravyi/subscriptions",
+      "organizations_url": "https://api.github.com/users/sbravyi/orgs",
+      "repos_url": "https://api.github.com/users/sbravyi/repos",
+      "events_url": "https://api.github.com/users/sbravyi/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/sbravyi/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "001789cbef601a56d9f4e2e2daf156d1f64226b7",
+        "url": "https://api.github.com/repos/sbravyi/BivariateBicycleCodes/commits/001789cbef601a56d9f4e2e2daf156d1f64226b7",
+        "html_url": "https://github.com/sbravyi/BivariateBicycleCodes/commit/001789cbef601a56d9f4e2e2daf156d1f64226b7"
+      }
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "block_swap_exchanges_hx_hz": false,
+  "block_swap_preserves_rowspace_hx": false,
+  "block_swap_preserves_rowspace_hz": false,
+  "distinct_induced_maps_on_classes": 36,
+  "nonzero_classes": 4095,
+  "orbit_sizes_present": [
+    3,
+    9,
+    12,
+    36
+  ],
+  "orbits_on_nonzero_classes": 687,
+  "translation_group_order": 72
+}
