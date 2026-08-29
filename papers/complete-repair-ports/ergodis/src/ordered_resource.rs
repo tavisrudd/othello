@@ -438,7 +438,10 @@ pub struct FrozenParetoQueryPlan<'plan, 'frozen> {
     single_sort: Option<usize>,
     selected_counts: Box<[usize]>,
     selected_indices: Box<[usize]>,
-    reachable: Box<[u64]>,
+    reachable_offsets: Box<[usize]>,
+    reachable_class_ids: Box<[u32]>,
+    target_offsets: Box<[usize]>,
+    target_locals: Box<[u32]>,
     release_offsets: Box<[usize]>,
     release_targets: Box<[u32]>,
     reachable_classes: usize,
@@ -642,13 +645,53 @@ impl<'a> FrozenParetoPlan<'a> {
             release_cursor[release_sort] += 1;
         }
 
+        let mut reachable_offsets = vec![0_usize; sort_count + 1];
+        let mut reachable_class_ids = Vec::with_capacity(reachable_classes);
+        for sort in 0..sort_count {
+            let range = self
+                .frozen
+                .class_range(sort as u32)
+                .ok_or(FrozenParetoError::Artifact)?;
+            for class in range.start..range.start + range.len {
+                if reachable[class as usize / 64] & (1_u64 << (class as usize % 64)) != 0 {
+                    reachable_class_ids.push(class);
+                }
+            }
+            reachable_offsets[sort + 1] = reachable_class_ids.len();
+        }
+        let mut target_offsets = Vec::with_capacity(reachable_classes + 1);
+        let mut target_locals = Vec::new();
+        target_offsets.push(0);
+        for sort in 0..sort_count {
+            for &class in &reachable_class_ids[reachable_offsets[sort]..reachable_offsets[sort + 1]]
+            {
+                for &generator in &self.outgoing[self.offsets[sort]..self.offsets[sort + 1]] {
+                    let target = self
+                        .frozen
+                        .transition(generator, class)
+                        .ok_or(FrozenParetoError::Artifact)?;
+                    let target_sort = self.generator_targets[generator as usize] as usize;
+                    let target_classes = &reachable_class_ids
+                        [reachable_offsets[target_sort]..reachable_offsets[target_sort + 1]];
+                    let target_local = target_classes
+                        .binary_search(&target)
+                        .map_err(|_| FrozenParetoError::Artifact)?;
+                    target_locals.push(target_local as u32);
+                }
+                target_offsets.push(target_locals.len());
+            }
+        }
+
         Ok(FrozenParetoQueryPlan {
             plan: self,
             entry_classes: entry_classes.into(),
             single_sort,
             selected_counts: selected_counts.into_boxed_slice(),
             selected_indices: selected_indices.into_boxed_slice(),
-            reachable: reachable.into_boxed_slice(),
+            reachable_offsets: reachable_offsets.into_boxed_slice(),
+            reachable_class_ids: reachable_class_ids.into_boxed_slice(),
+            target_offsets: target_offsets.into_boxed_slice(),
+            target_locals: target_locals.into_boxed_slice(),
             release_offsets: release_offsets.into_boxed_slice(),
             release_targets: release_targets.into_boxed_slice(),
             reachable_classes,
@@ -727,17 +770,10 @@ impl FrozenParetoQueryPlan<'_, '_> {
         let mut live_entries = 0_usize;
 
         for sort in (0..sort_count).rev() {
-            let range = self
-                .plan
-                .frozen
-                .class_range(sort as u32)
-                .ok_or(FrozenParetoError::Artifact)?;
-            let mut sort_fronts = Vec::with_capacity(range.len as usize);
-            for class in range.start..range.start + range.len {
-                if self.reachable[class as usize / 64] & (1_u64 << (class as usize % 64)) == 0 {
-                    sort_fronts.push(None);
-                    continue;
-                }
+            let reachable_classes = &self.reachable_class_ids
+                [self.reachable_offsets[sort]..self.reachable_offsets[sort + 1]];
+            let mut sort_fronts = Vec::with_capacity(reachable_classes.len());
+            for (class_local, &class) in reachable_classes.iter().enumerate() {
                 let output = self
                     .plan
                     .frozen
@@ -753,25 +789,16 @@ impl FrozenParetoQueryPlan<'_, '_> {
                 }
                 accumulator.clear();
                 accumulator.extend_from_slice(&output_front.entries);
-                for &generator in
-                    &self.plan.outgoing[self.plan.offsets[sort]..self.plan.offsets[sort + 1]]
+                let global_local = self.reachable_offsets[sort] + class_local;
+                let target_locals = &self.target_locals
+                    [self.target_offsets[global_local]..self.target_offsets[global_local + 1]];
+                for (edge_local, &generator) in self.plan.outgoing
+                    [self.plan.offsets[sort]..self.plan.offsets[sort + 1]]
+                    .iter()
+                    .enumerate()
                 {
-                    let target = self
-                        .plan
-                        .frozen
-                        .transition(generator, class)
-                        .ok_or(FrozenParetoError::Artifact)?;
                     let target_sort = self.plan.generator_targets[generator as usize] as usize;
-                    let target_range = self
-                        .plan
-                        .frozen
-                        .class_range(target_sort as u32)
-                        .ok_or(FrozenParetoError::Artifact)?;
-                    let target_local = target
-                        .checked_sub(target_range.start)
-                        .filter(|&local| local < target_range.len)
-                        .ok_or(FrozenParetoError::Artifact)?
-                        as usize;
+                    let target_local = target_locals[edge_local] as usize;
                     let child = live[target_sort]
                         .as_ref()
                         .and_then(|fronts| fronts.get(target_local))
@@ -798,11 +825,9 @@ impl FrozenParetoQueryPlan<'_, '_> {
             }
 
             let local_for_index = |index: usize| -> Result<usize, FrozenParetoError> {
-                self.entry_classes[index]
-                    .checked_sub(range.start)
-                    .filter(|&local| local < range.len)
-                    .map(|local| local as usize)
-                    .ok_or(FrozenParetoError::Artifact)
+                reachable_classes
+                    .binary_search(&self.entry_classes[index])
+                    .map_err(|_| FrozenParetoError::Artifact)
             };
             match self.single_sort {
                 Some(selected_sort) if selected_sort == sort => {
