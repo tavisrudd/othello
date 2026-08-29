@@ -91,10 +91,11 @@ pub use orbit_compile::{
     TernaryAffineCompilation, TernaryAffineObstruction, TernaryAffineProblem,
 };
 pub use ordered_resource::{
-    validate_finite_ordered_monoid, CappedAdditiveMonoid, FiniteOrderedMonoid,
-    OrderedMonoidCertificate, OrderedResourceError, ParetoFront, ParetoObservationTable,
-    ParetoResponseDictionary, ParetoWitness, ParetoWitnessError, ParetoWorkspace,
-    WitnessedParetoFront, WitnessedParetoWorkspace,
+    evaluate_frozen_pareto_dag, validate_finite_ordered_monoid, CappedAdditiveMonoid,
+    FiniteOrderedMonoid, FrozenParetoError, FrozenParetoPlan, OrderedMonoidCertificate,
+    OrderedResourceError, ParetoFront, ParetoObservationTable, ParetoResponseDictionary,
+    ParetoWitness, ParetoWitnessError, ParetoWorkspace, WitnessedParetoFront,
+    WitnessedParetoWorkspace,
 };
 pub use scheduler::{
     maximum_parallel_repairs, CapacityCut, ParallelRepairResult, PositiveGradingCertificate,

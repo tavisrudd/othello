@@ -1,5 +1,6 @@
 //! Exact finite ordered-resource algebras and Pareto composition.
 
+use crate::observational::FrozenObservation;
 use thiserror::Error;
 
 /// Finite ordered commutative monoid with compact elements `0..element_count`.
@@ -336,6 +337,18 @@ pub enum ParetoWitnessError<E> {
     Witness(E),
 }
 
+#[derive(Debug, Error, PartialEq, Eq)]
+pub enum FrozenParetoError {
+    #[error(transparent)]
+    Resource(#[from] OrderedResourceError),
+    #[error("the frozen quotient and edge-front table have different generator counts")]
+    EdgeFrontCount,
+    #[error("the frozen quotient output has no supplied Pareto interpretation")]
+    Output,
+    #[error("the frozen quotient DAG is malformed or not forward-topological")]
+    Artifact,
+}
+
 /// Pre-sized, allocation-free workspace for witness-preserving composition.
 #[derive(Clone, Debug)]
 pub struct WitnessedParetoWorkspace {
@@ -394,6 +407,151 @@ impl WitnessedParetoWorkspace {
         self.entries.sort_unstable_by_key(|entry| entry.resource);
         Ok(&self.entries)
     }
+}
+
+/// Evaluate a forward-topological frozen feasibility quotient over a
+/// witness-bearing Pareto algebra without recompiling the quotient.
+///
+/// `edge_fronts[g]` interprets generator `g`, while `output_fronts[o]`
+/// interprets observation `o`. All topology is taken from the frozen artifact.
+/// The caller owns the pre-sized composition workspace, so the evaluator never
+/// grows scratch storage in its class/generator loops.
+pub struct FrozenParetoPlan<'a> {
+    frozen: &'a FrozenObservation,
+    offsets: Box<[usize]>,
+    outgoing: Box<[u32]>,
+}
+
+impl<'a> FrozenParetoPlan<'a> {
+    pub fn new(frozen: &'a FrozenObservation) -> Result<Self, FrozenParetoError> {
+        let sort_count = frozen.sort_count();
+        let mut offsets = vec![0_usize; sort_count + 1];
+        for generator in 0..frozen.generator_count() {
+            let spec = frozen
+                .generator_spec(generator as u32)
+                .ok_or(FrozenParetoError::Artifact)?;
+            if spec.source_sort as usize >= sort_count
+                || spec.target_sort as usize >= sort_count
+                || spec.source_sort >= spec.target_sort
+            {
+                return Err(FrozenParetoError::Artifact);
+            }
+            offsets[spec.source_sort as usize + 1] += 1;
+        }
+        for sort in 0..sort_count {
+            offsets[sort + 1] += offsets[sort];
+        }
+        let mut cursor = offsets[..sort_count].to_vec();
+        let mut outgoing = vec![0_u32; frozen.generator_count()];
+        for generator in 0..frozen.generator_count() {
+            let source = frozen
+                .generator_spec(generator as u32)
+                .ok_or(FrozenParetoError::Artifact)?
+                .source_sort as usize;
+            outgoing[cursor[source]] = generator as u32;
+            cursor[source] += 1;
+        }
+        Ok(Self {
+            frozen,
+            offsets: offsets.into_boxed_slice(),
+            outgoing: outgoing.into_boxed_slice(),
+        })
+    }
+
+    pub fn evaluate<M: FiniteOrderedMonoid>(
+        &self,
+        monoid: &M,
+        output_fronts: &[WitnessedParetoFront],
+        edge_fronts: &[WitnessedParetoFront],
+        workspace: &mut WitnessedParetoWorkspace,
+        mut compose_witness: impl FnMut(u32, u32, u32) -> u32,
+    ) -> Result<Vec<Option<WitnessedParetoFront>>, FrozenParetoError> {
+        if edge_fronts.len() != self.frozen.generator_count() {
+            return Err(FrozenParetoError::EdgeFrontCount);
+        }
+        let mut fronts: Vec<Option<WitnessedParetoFront>> =
+            vec![None; self.frozen.storage().classes];
+        let capacity = workspace.capacity();
+        let mut accumulator = Vec::with_capacity(capacity);
+        for sort in (0..self.frozen.sort_count()).rev() {
+            let range = self
+                .frozen
+                .class_range(sort as u32)
+                .ok_or(FrozenParetoError::Artifact)?;
+            for class in range.start..range.start + range.len {
+                let output = self
+                    .frozen
+                    .output(class)
+                    .ok_or(FrozenParetoError::Artifact)? as usize;
+                let output_front = output_fronts.get(output).ok_or(FrozenParetoError::Output)?;
+                if output_front.entries.len() > capacity {
+                    return Err(OrderedResourceError::WorkspaceCapacity {
+                        required: output_front.entries.len(),
+                        capacity,
+                    }
+                    .into());
+                }
+                accumulator.clear();
+                accumulator.extend_from_slice(&output_front.entries);
+                for &generator in &self.outgoing[self.offsets[sort]..self.offsets[sort + 1]] {
+                    let target =
+                        self.frozen
+                            .transition(generator, class)
+                            .ok_or(FrozenParetoError::Artifact)? as usize;
+                    let child = fronts
+                        .get(target)
+                        .and_then(Option::as_ref)
+                        .ok_or(FrozenParetoError::Artifact)?;
+                    for &edge in &edge_fronts[generator as usize].entries {
+                        for &suffix in &child.entries {
+                            let resource = monoid.combine(edge.resource, suffix.resource);
+                            validate_element(monoid.element_count(), resource)?;
+                            if accumulator
+                                .iter()
+                                .any(|entry| monoid.leq(entry.resource, resource))
+                            {
+                                continue;
+                            }
+                            accumulator.retain(|entry| !monoid.leq(resource, entry.resource));
+                            if accumulator.len() == capacity {
+                                return Err(OrderedResourceError::WorkspaceCapacity {
+                                    required: capacity.saturating_add(1),
+                                    capacity,
+                                }
+                                .into());
+                            }
+                            accumulator.push(ParetoWitness {
+                                resource,
+                                witness: compose_witness(generator, edge.witness, suffix.witness),
+                            });
+                        }
+                    }
+                }
+                accumulator.sort_unstable_by_key(|entry| entry.resource);
+                fronts[class as usize] = Some(WitnessedParetoFront {
+                    entries: Box::from(accumulator.as_slice()),
+                });
+            }
+        }
+        Ok(fronts)
+    }
+}
+
+pub fn evaluate_frozen_pareto_dag<M: FiniteOrderedMonoid>(
+    frozen: &FrozenObservation,
+    monoid: &M,
+    output_fronts: &[WitnessedParetoFront],
+    edge_fronts: &[WitnessedParetoFront],
+    workspace: &mut WitnessedParetoWorkspace,
+    compose_witness: impl FnMut(u32, u32, u32) -> u32,
+) -> Result<Vec<Option<WitnessedParetoFront>>, FrozenParetoError> {
+    FrozenParetoPlan::new(frozen)?.evaluate(
+        monoid,
+        output_fronts,
+        edge_fronts,
+        workspace,
+        compose_witness,
+    )
 }
 
 #[inline]
@@ -965,5 +1123,98 @@ mod tests {
                 }
             }
         }
+    }
+
+    #[test]
+    fn frozen_pareto_plan_matches_all_tiny_local_interpretations() {
+        use std::convert::Infallible;
+
+        use crate::observational::{compile_layered_frozen_dag_audited, LayeredGeneratorSpec};
+
+        let mut audit = Vec::new();
+        let (frozen, _) = compile_layered_frozen_dag_audited(
+            &[3, 2],
+            &[LayeredGeneratorSpec {
+                source_sort: 0,
+                target_sort: 1,
+            }],
+            &[0],
+            |sort, state| if sort == 0 { 0 } else { state + 1 },
+            |_, state| if state < 2 { 0 } else { 1 },
+            &mut audit,
+        )
+        .unwrap();
+        assert_eq!(frozen.entry_class(0, 0), frozen.entry_class(0, 1));
+        assert_ne!(frozen.entry_class(0, 0), frozen.entry_class(0, 2));
+
+        let monoid = CappedAdditiveMonoid::new([1]).unwrap();
+        let empty = WitnessedParetoFront::new(&monoid, []).unwrap();
+        let identity = WitnessedParetoFront::new(
+            &monoid,
+            [ParetoWitness {
+                resource: monoid.identity(),
+                witness: 0,
+            }],
+        )
+        .unwrap();
+        let plan = FrozenParetoPlan::new(&frozen).unwrap();
+        for output_mask in 0_u32..8 {
+            let outputs = [0, 1, 2].map(|output| {
+                if output_mask & (1 << output) == 0 {
+                    empty.clone()
+                } else {
+                    identity.clone()
+                }
+            });
+            for edge_resource in 0..monoid.element_count() {
+                let edges = [WitnessedParetoFront::new(
+                    &monoid,
+                    [ParetoWitness {
+                        resource: edge_resource,
+                        witness: 1,
+                    }],
+                )
+                .unwrap()];
+                let mut workspace = WitnessedParetoWorkspace::with_capacity(2);
+                let quotient = plan
+                    .evaluate(
+                        &monoid,
+                        &outputs,
+                        &edges,
+                        &mut workspace,
+                        |_, edge, child| edge | (child << 1),
+                    )
+                    .unwrap();
+                for state in 0..3 {
+                    let target = if state < 2 { 0 } else { 1 };
+                    let entries = workspace
+                        .compose(
+                            &monoid,
+                            &edges[0],
+                            &outputs[target as usize + 1],
+                            |edge, child| Ok::<_, Infallible>(edge | (child << 1)),
+                        )
+                        .unwrap();
+                    let extension =
+                        WitnessedParetoFront::new(&monoid, entries.iter().copied()).unwrap();
+                    let raw = outputs[0].choice(&monoid, &extension).unwrap();
+                    let class = frozen.entry_class(0, state).unwrap();
+                    assert_eq!(
+                        quotient[class as usize]
+                            .as_ref()
+                            .unwrap()
+                            .resources()
+                            .collect::<Vec<_>>(),
+                        raw.resources().collect::<Vec<_>>()
+                    );
+                }
+            }
+        }
+
+        let mut workspace = WitnessedParetoWorkspace::with_capacity(2);
+        assert_eq!(
+            plan.evaluate(&monoid, &[empty], &[], &mut workspace, |_, _, _| 0),
+            Err(FrozenParetoError::EdgeFrontCount)
+        );
     }
 }

@@ -1,15 +1,16 @@
 //! Quotient-first exact Pareto DP for a finite-state fork/join workflow.
 
 use ergodis::observational::{
-    compile_layered_frozen_dag_audited, verify_frozen_layered_dag_audit, FrozenObservation,
-    LayeredGeneratorSpec,
+    compile_layered_frozen_dag_audited, verify_frozen_layered_dag_audit, LayeredGeneratorSpec,
 };
 use ergodis::{
-    CappedAdditiveMonoid, FiniteOrderedMonoid, ParetoWitness, WitnessedParetoFront,
-    WitnessedParetoWorkspace,
+    CappedAdditiveMonoid, FiniteOrderedMonoid, FrozenParetoPlan, ParetoWitness,
+    WitnessedParetoFront, WitnessedParetoWorkspace,
 };
 use std::io::Write;
 use std::time::Instant;
+
+const DEFAULT_WEIGHTS: [[u16; 2]; 4] = [[1, 4], [4, 1], [2, 5], [5, 2]];
 
 #[derive(Clone, Copy)]
 struct Action {
@@ -128,12 +129,15 @@ fn singleton_front(
     .unwrap()
 }
 
-fn edge_fronts(resources: &CappedAdditiveMonoid) -> [WitnessedParetoFront; 4] {
+fn edge_fronts(
+    resources: &CappedAdditiveMonoid,
+    weights: &[[u16; 2]; 4],
+) -> [WitnessedParetoFront; 4] {
     [
-        singleton_front(resources, [1, 4], 1),
-        singleton_front(resources, [4, 1], 2),
-        singleton_front(resources, [2, 5], 3),
-        singleton_front(resources, [5, 2], 4),
+        singleton_front(resources, weights[0], 1),
+        singleton_front(resources, weights[1], 2),
+        singleton_front(resources, weights[2], 3),
+        singleton_front(resources, weights[3], 4),
     ]
 }
 
@@ -155,7 +159,7 @@ fn raw_pareto_dp(
     workflow: &Workflow,
     resources: &CappedAdditiveMonoid,
 ) -> Vec<Vec<WitnessedParetoFront>> {
-    let edges = edge_fronts(resources);
+    let edges = edge_fronts(resources, &DEFAULT_WEIGHTS);
     let mut workspace = WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
     let mut fronts = vec![Vec::new(); workflow.state_counts.len()];
     for sort in (0..workflow.state_counts.len()).rev() {
@@ -188,36 +192,29 @@ fn raw_pareto_dp(
 
 fn quotient_pareto_dp(
     workflow: &Workflow,
-    frozen: &FrozenObservation,
+    plan: &FrozenParetoPlan<'_>,
     resources: &CappedAdditiveMonoid,
+    weights: &[[u16; 2]; 4],
 ) -> Vec<Option<WitnessedParetoFront>> {
-    let edges = edge_fronts(resources);
-    let mut workspace = WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
-    let mut fronts = vec![None; frozen.storage().classes];
-    for sort in (0..workflow.state_counts.len()).rev() {
-        let range = frozen.class_range(sort as u32).unwrap();
-        for class in range.start..range.start + range.len {
-            let mut front = if frozen.output(class) == Some(1) {
-                singleton_front(resources, [0, 0], 0)
-            } else {
-                empty_front(resources)
-            };
-            for &generator in &workflow.outgoing[sort] {
-                let target = frozen.transition(generator, class).unwrap();
-                let action = workflow.actions[generator as usize];
-                let edge = &edges[(2 * action.branch + action.symbol) as usize];
-                let candidate = extend_front(
-                    resources,
-                    &mut workspace,
-                    edge,
-                    fronts[target as usize].as_ref().unwrap(),
-                );
-                front = front.choice(resources, &candidate).unwrap();
-            }
-            fronts[class as usize] = Some(front);
-        }
+    let edges = edge_fronts(resources, weights);
+    let outputs = [
+        empty_front(resources),
+        singleton_front(resources, [0, 0], 0),
+        empty_front(resources),
+    ];
+    let mut generator_edges = Vec::with_capacity(workflow.generators.len());
+    for &action in &workflow.actions {
+        generator_edges.push(edges[(2 * action.branch + action.symbol) as usize].clone());
     }
-    fronts
+    let mut workspace = WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
+    plan.evaluate(
+        resources,
+        &outputs,
+        &generator_edges,
+        &mut workspace,
+        |_, edge, suffix| edge | (suffix << 3),
+    )
+    .unwrap()
 }
 
 fn factorized_pareto_dp(
@@ -225,7 +222,7 @@ fn factorized_pareto_dp(
     resources: &CappedAdditiveMonoid,
     initial_state: u32,
 ) -> WitnessedParetoFront {
-    let edges = edge_fronts(resources);
+    let edges = edge_fronts(resources, &DEFAULT_WEIGHTS);
     let state_count = workflow.automaton_states as usize;
     let initial_left = initial_state / workflow.automaton_states;
     let initial_right = initial_state % workflow.automaton_states;
@@ -286,8 +283,8 @@ fn verify_witness(
     resources: &CappedAdditiveMonoid,
     initial_state: u32,
     entry: ParetoWitness,
+    weights: &[[u16; 2]; 4],
 ) {
-    let weights = [[1_u16, 4_u16], [4, 1], [2, 5], [5, 2]];
     let mut left_steps = 0;
     let mut right_steps = 0;
     let mut left_state = initial_state / workflow.automaton_states;
@@ -325,6 +322,7 @@ fn brute_force_entry(
     workflow: &Workflow,
     resources: &CappedAdditiveMonoid,
     initial_state: u32,
+    weights: &[[u16; 2]; 4],
 ) -> WitnessedParetoFront {
     let steps = 2 * workflow.length;
     let mut candidates = Vec::new();
@@ -354,7 +352,7 @@ fn brute_force_entry(
                 right_steps += 1;
                 right_state = (2 * right_state + symbol as u32 + 1) % workflow.automaton_states;
             }
-            let weight = [[1_u16, 4_u16], [4, 1], [2, 5], [5, 2]][action];
+            let weight = weights[action];
             resource[0] += weight[0];
             resource[1] += weight[1];
             witness |= (action as u32 + 1) << (3 * step);
@@ -417,7 +415,9 @@ fn run(
     length: usize,
     automaton_states: u32,
     audit_path: Option<&str>,
+    repetitions: u128,
 ) -> (usize, usize, usize, u128, u128, u128, u128, u64) {
+    assert!(repetitions != 0);
     let workflow = Workflow::new(length, automaton_states);
     let compile_start = Instant::now();
     let (frozen, audit) = if let Some(path) = audit_path {
@@ -461,15 +461,35 @@ fn run(
     };
 
     let resources = CappedAdditiveMonoid::new([64, 64]).unwrap();
+    let plan = FrozenParetoPlan::new(&frozen).unwrap();
+    let mut raw = None;
     let raw_start = Instant::now();
-    let raw = raw_pareto_dp(&workflow, &resources);
-    let raw_ns = raw_start.elapsed().as_nanos();
+    for _ in 0..repetitions {
+        raw = Some(std::hint::black_box(raw_pareto_dp(&workflow, &resources)));
+    }
+    let raw_ns = raw_start.elapsed().as_nanos() / repetitions;
+    let raw = raw.unwrap();
+    let mut quotient = None;
     let quotient_start = Instant::now();
-    let quotient = quotient_pareto_dp(&workflow, &frozen, &resources);
-    let quotient_ns = quotient_start.elapsed().as_nanos();
+    for _ in 0..repetitions {
+        quotient = Some(std::hint::black_box(quotient_pareto_dp(
+            &workflow,
+            &plan,
+            &resources,
+            &DEFAULT_WEIGHTS,
+        )));
+    }
+    let quotient_ns = quotient_start.elapsed().as_nanos() / repetitions;
+    let quotient = quotient.unwrap();
+    let mut factorized = None;
     let factorized_start = Instant::now();
-    let factorized = factorized_pareto_dp(&workflow, &resources, 0);
-    let factorized_ns = factorized_start.elapsed().as_nanos();
+    for _ in 0..repetitions {
+        factorized = Some(std::hint::black_box(factorized_pareto_dp(
+            &workflow, &resources, 0,
+        )));
+    }
+    let factorized_ns = factorized_start.elapsed().as_nanos() / repetitions;
+    let factorized = factorized.unwrap();
     let entry_class = frozen.entry_class(0, 0).unwrap();
     let raw_entry = &raw[0][0];
     let quotient_entry = quotient[entry_class as usize].as_ref().unwrap();
@@ -482,10 +502,10 @@ fn run(
         factorized.resources().collect::<Vec<_>>()
     );
     for &entry in quotient_entry.entries() {
-        verify_witness(&workflow, &resources, 0, entry);
+        verify_witness(&workflow, &resources, 0, entry, &DEFAULT_WEIGHTS);
     }
     for &entry in factorized.entries() {
-        verify_witness(&workflow, &resources, 0, entry);
+        verify_witness(&workflow, &resources, 0, entry, &DEFAULT_WEIGHTS);
     }
     (
         workflow
@@ -505,10 +525,14 @@ fn run(
 
 fn main() {
     let audit_path = "/home/tavis/.cache/ergodis/fork-join-cost-regular.audit";
+    let repetitions = std::env::var("ERGODIS_BENCH_REPETITIONS")
+        .ok()
+        .and_then(|value| value.parse::<u128>().ok())
+        .unwrap_or(1000);
     let (raw_states, classes, front, compile_ns, raw_ns, quotient_ns, factorized_ns, audit_bytes) =
-        run(5, 12, Some(audit_path));
+        run(5, 12, Some(audit_path), repetitions);
     println!(
-        "fork-join-cost-regular\traw_states={raw_states}\tclasses={classes}\tfront={front}\tcompile_ns={compile_ns}\traw_pareto_ns={raw_ns}\tquotient_pareto_ns={quotient_ns}\tfactorized_pareto_ns={factorized_ns}\traw_quotient_ratio={:.3}\tquotient_factorized_ratio={:.3}\taudit_bytes={}",
+        "fork-join-cost-regular\trepetitions={repetitions}\traw_states={raw_states}\tclasses={classes}\tfront={front}\tcompile_ns={compile_ns}\traw_pareto_ns={raw_ns}\tquotient_pareto_ns={quotient_ns}\tfactorized_pareto_ns={factorized_ns}\traw_quotient_ratio={:.3}\tquotient_factorized_ratio={:.3}\taudit_bytes={}",
         raw_ns as f64 / quotient_ns as f64,
         quotient_ns as f64 / factorized_ns as f64,
         audit_bytes
@@ -523,7 +547,7 @@ mod tests {
     fn quotient_pareto_matches_raw_and_lifts_words() {
         // Since gcd(2^3, 6) = 2, the bounded continuation has a
         // non-trivial kernel without erasing every initial distinction.
-        let (raw_states, classes, front, _, _, _, _, _) = run(3, 6, None);
+        let (raw_states, classes, front, _, _, _, _, _) = run(3, 6, None, 1);
         assert!(classes < raw_states);
         assert!(front != 0);
 
@@ -541,12 +565,13 @@ mod tests {
             &mut audit,
         )
         .unwrap();
-        let quotient = quotient_pareto_dp(&workflow, &frozen, &resources);
+        let plan = FrozenParetoPlan::new(&frozen).unwrap();
+        let quotient = quotient_pareto_dp(&workflow, &plan, &resources, &DEFAULT_WEIGHTS);
         let mut signatures = Vec::with_capacity(workflow.state_counts[0] as usize);
         for state in 0..workflow.state_counts[0] {
             let class = frozen.entry_class(0, state).unwrap();
             let quotient_entry = quotient[class as usize].as_ref().unwrap();
-            let brute = brute_force_entry(&workflow, &resources, state);
+            let brute = brute_force_entry(&workflow, &resources, state, &DEFAULT_WEIGHTS);
             assert_eq!(
                 raw[0][state as usize].resources().collect::<Vec<_>>(),
                 brute.resources().collect::<Vec<_>>()
@@ -556,9 +581,26 @@ mod tests {
                 quotient_entry.resources().collect::<Vec<_>>()
             );
             for &entry in quotient_entry.entries() {
-                verify_witness(&workflow, &resources, state, entry);
+                verify_witness(&workflow, &resources, state, entry, &DEFAULT_WEIGHTS);
             }
             signatures.push(acceptance_signature(&workflow, state));
+        }
+
+        // Reuse the identical feasibility quotient under a second objective;
+        // only the generator-local interpretation changes.
+        let alternate_weights = [[1, 1], [3, 0], [0, 2], [4, 1]];
+        let alternate = quotient_pareto_dp(&workflow, &plan, &resources, &alternate_weights);
+        for state in 0..workflow.state_counts[0] {
+            let class = frozen.entry_class(0, state).unwrap();
+            let quotient_entry = alternate[class as usize].as_ref().unwrap();
+            let brute = brute_force_entry(&workflow, &resources, state, &alternate_weights);
+            assert_eq!(
+                quotient_entry.resources().collect::<Vec<_>>(),
+                brute.resources().collect::<Vec<_>>()
+            );
+            for &entry in quotient_entry.entries() {
+                verify_witness(&workflow, &resources, state, entry, &alternate_weights);
+            }
         }
 
         let mut saw_merge = false;

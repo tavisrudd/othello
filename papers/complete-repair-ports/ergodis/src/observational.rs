@@ -2504,6 +2504,22 @@ pub enum FrozenObservationFileError {
 }
 
 impl FrozenObservation {
+    pub fn sort_count(&self) -> usize {
+        self.class_ranges.len()
+    }
+
+    pub fn generator_count(&self) -> usize {
+        self.generator_records.len()
+    }
+
+    pub fn generator_spec(&self, generator: u32) -> Option<LayeredGeneratorSpec> {
+        let record = *self.generator_records.get(generator as usize)?;
+        Some(LayeredGeneratorSpec {
+            source_sort: record.source_sort,
+            target_sort: record.target_sort,
+        })
+    }
+
     pub fn class_range(&self, sort: u32) -> Option<SortRange> {
         self.class_ranges.get(sort as usize).copied()
     }
