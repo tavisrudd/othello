@@ -188,6 +188,10 @@ residual-syndrome filters; `--evidence` writes one create-only JSONL record.
 matches the supplied matrices. Artifact and evidence output never overwrite.
 With the `parallel` feature, `--threads N` statically partitions anchors across
 workers with disjoint DFS workspaces and deterministic post-join reduction.
+Direct optimization uses parity-aware iterative deepening and anchor-level
+Young-Brothers-Wait. Rare verified bound improvements use cache-line-separated
+worker mailboxes; `--pulse-interval` controls coarse polling without adding
+per-support synchronization.
 
 ### Contextual-state library APIs
 

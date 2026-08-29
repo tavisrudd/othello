@@ -56,6 +56,7 @@ def main() -> int:
     if record["schema"] not in {
         "ergodis-css-distance-native-v1",
         "ergodis-css-distance-native-v2",
+        "ergodis-css-distance-native-v3",
     }:
         raise ValueError("native schema mismatch")
     if record["mode"] != "certify-incumbent" or record["maximum_weight"] != 12:

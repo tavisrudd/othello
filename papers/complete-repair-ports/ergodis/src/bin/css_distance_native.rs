@@ -29,6 +29,9 @@ struct Args {
     /// Static anchor-search worker count (requires the `parallel` feature above one).
     #[arg(long, default_value_t = 1)]
     threads: usize,
+    /// Worker-local bound mailbox polling interval; zero disables mid-branch polling.
+    #[arg(long, default_value_t = 16384)]
+    pulse_interval: u64,
 }
 
 #[derive(Debug, Deserialize)]
@@ -58,7 +61,9 @@ struct RunRecord<'a> {
     artifact_write_seconds: Option<f64>,
     artifact_payload_blake3: Option<String>,
     threads: usize,
+    pulse_interval: u64,
     search_seconds: &'a [f64],
+    round_stats: &'a [ergodis::ConnectedSearchStats],
     result: &'a ergodis::BoundedCssDistanceResult,
 }
 
@@ -152,13 +157,9 @@ fn main() -> Result<()> {
         bail!("thread counts above one require the `parallel` feature");
     }
     #[cfg(feature = "parallel")]
-    let thread_pool = (args.threads > 1)
-        .then(|| {
-            rayon::ThreadPoolBuilder::new()
-                .num_threads(args.threads)
-                .build()
-        })
-        .transpose()?;
+    let thread_pool = rayon::ThreadPoolBuilder::new()
+        .num_threads(args.threads)
+        .build()?;
     let certify_incumbent = args.maximum_weight.is_none() && !problem.incumbent_support.is_empty();
     let mode = if certify_incumbent {
         "certify-incumbent"
@@ -166,24 +167,26 @@ fn main() -> Result<()> {
         "bounded-search"
     };
     let mut search_seconds = Vec::with_capacity(usize::from(args.rounds));
-    let mut result = None;
+    let mut round_stats = Vec::with_capacity(usize::from(args.rounds));
+    let mut result: Option<ergodis::BoundedCssDistanceResult> = None;
     for _ in 0..args.rounds {
         let search_start = Instant::now();
         #[cfg(feature = "parallel")]
-        let round_result = if let Some(pool) = &thread_pool {
-            pool.install(|| {
-                if certify_incumbent {
-                    compiled
-                        .certify_incumbent_parallel(&problem.anchors, &problem.incumbent_support)
-                } else {
-                    compiled.search_bounded_parallel(&problem.anchors, maximum_weight)
-                }
-            })?
-        } else if certify_incumbent {
-            compiled.certify_incumbent(&problem.anchors, &problem.incumbent_support)?
-        } else {
-            compiled.search_bounded(&problem.anchors, maximum_weight)?
-        };
+        let round_result = thread_pool.install(|| {
+            if certify_incumbent {
+                compiled.certify_incumbent_parallel_pulsed(
+                    &problem.anchors,
+                    &problem.incumbent_support,
+                    args.pulse_interval,
+                )
+            } else {
+                compiled.search_bounded_parallel_pulsed(
+                    &problem.anchors,
+                    maximum_weight,
+                    args.pulse_interval,
+                )
+            }
+        })?;
         #[cfg(not(feature = "parallel"))]
         let round_result = if certify_incumbent {
             compiled.certify_incumbent(&problem.anchors, &problem.incumbent_support)?
@@ -191,9 +194,13 @@ fn main() -> Result<()> {
             compiled.search_bounded(&problem.anchors, maximum_weight)?
         };
         search_seconds.push(search_start.elapsed().as_secs_f64());
+        round_stats.push(round_result.stats);
         if let Some(reference) = &result {
-            if reference != &round_result {
-                bail!("native search returned different results across rounds");
+            if reference.distance != round_result.distance
+                || reference.witness != round_result.witness
+                || reference.searched_maximum_weight != round_result.searched_maximum_weight
+            {
+                bail!("native search returned different exact answers across rounds");
             }
         } else {
             result = Some(round_result);
@@ -201,7 +208,7 @@ fn main() -> Result<()> {
     }
     let result = result.expect("positive round count checked above");
     let record = RunRecord {
-        schema: "ergodis-css-distance-native-v2",
+        schema: "ergodis-css-distance-native-v3",
         label: &problem.label,
         coordinate_count: problem.coordinate_count,
         physical_checks: problem.physical_checks.len(),
@@ -214,7 +221,9 @@ fn main() -> Result<()> {
         artifact_write_seconds,
         artifact_payload_blake3,
         threads: args.threads,
+        pulse_interval: args.pulse_interval,
         search_seconds: &search_seconds,
+        round_stats: &round_stats,
         result: &result,
     };
     emit(&record, args.evidence.as_ref())

@@ -9,6 +9,7 @@ import json
 from itertools import combinations
 from pathlib import Path
 
+from recovery_algorithms.balanced import q27_balanced_transversal_oracle
 from recovery_algorithms.costs import (
     compose_cost_table,
     compose_cost_table_with_witnesses,
@@ -28,22 +29,20 @@ from recovery_algorithms.costs import (
     verify_composition_witness,
     verify_leaf_witness,
 )
-from recovery_algorithms.balanced import q27_balanced_transversal_oracle
+from recovery_algorithms.defect import (
+    convex_shell_histograms,
+    gf27_q27_t54_centered_spectra,
+    gf27_q27_t54_histogram_pairs,
+)
 from recovery_algorithms.design import (
     coefficient_presentation_spectrum,
     cooperative_helper_cost,
     relative_weights,
 )
-from recovery_algorithms.defect import (
-    gf27_q27_t54_centered_spectra,
-    gf27_q27_t54_histogram_pairs,
-    convex_shell_histograms,
-)
 from recovery_algorithms.finite import (
     LinearMap,
     all_matrices,
     extension_multiplication_matrix,
-    flatten,
     mat_add,
     mat_mul,
     nullspace_basis,
@@ -72,8 +71,8 @@ from recovery_algorithms.storage import (
     maximum_parallel_repairs,
     maximum_weighted_parallel_repairs,
     minimum_round_repair_schedule,
-    scalar_recovery_sets_from_dual,
     scalar_recovery_equations_from_dual,
+    scalar_recovery_sets_from_dual,
 )
 from recovery_algorithms.transfers import (
     collision_correction,
@@ -109,6 +108,14 @@ HASHED_PATHS = (
     "evidence/c985-c997-native-distance.jsonl",
     "evidence/c985-c997-native-cached-distance.jsonl",
     "evidence/c985-c997-native-parallel-distance.jsonl",
+    "evidence/c985-c997-certify-scale-v3-t1.jsonl",
+    "evidence/c985-c997-certify-scale-v3-t2.jsonl",
+    "evidence/c985-c997-certify-scale-v3-t4.jsonl",
+    "evidence/c985-c997-certify-scale-v3-t8.jsonl",
+    "evidence/c985-c997-direct24-scale-v3-t1.jsonl",
+    "evidence/c985-c997-direct24-scale-v3-t2.jsonl",
+    "evidence/c985-c997-direct24-scale-v3-t4.jsonl",
+    "evidence/c985-c997-direct24-scale-v3-t8.jsonl",
     "evidence/c985-c997-native-input.json",
     "evidence/c997-gurobi-13.0.2-global-seed1.jsonl",
     "evidence/c997-gurobi-13.0.2-per-logical-seed1.jsonl",

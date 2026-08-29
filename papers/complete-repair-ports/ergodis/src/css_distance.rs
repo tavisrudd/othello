@@ -11,6 +11,8 @@ use crate::matrix::Matrix;
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 use std::io::{self, Read, Write};
+#[cfg(feature = "parallel")]
+use std::sync::atomic::{AtomicU16, Ordering};
 use thiserror::Error;
 
 const MAX_COORDINATES: usize = 256;
@@ -39,6 +41,8 @@ pub enum CssDistanceError {
     AnchorOutOfRange { anchor: u16 },
     #[error("maximum weight must be positive and no greater than the coordinate count")]
     InvalidMaximumWeight,
+    #[error("parallel bound-pulse interval must be zero or a power of two")]
+    InvalidPulseInterval,
     #[error("incumbent support is empty, repeated, or outside the coordinate range")]
     InvalidIncumbentSupport,
     #[error("incumbent support does not have zero physical syndrome")]
@@ -413,6 +417,8 @@ pub struct ConnectedSearchStats {
     pub kernel_supports: u64,
     pub nontrivial_supports: u64,
     pub maximum_depth: u16,
+    pub bound_improvements_published: u64,
+    pub bound_pulses_observed: u64,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize)]
@@ -426,11 +432,52 @@ pub struct BoundedCssDistanceResult {
 }
 
 #[cfg(feature = "parallel")]
-#[repr(C, align(128))]
-struct CachePaddedSearchResult(BoundedCssDistanceResult);
+#[derive(Clone, Copy)]
+struct RootBranch {
+    root: u16,
+    added: u16,
+    remaining_root_candidates: PackedSupport,
+}
 
 #[cfg(feature = "parallel")]
-const _: () = assert!(std::mem::align_of::<CachePaddedSearchResult>() == 128);
+#[repr(C, align(128))]
+struct CachePaddedBranchResult {
+    best_weight: u16,
+    best_support: PackedSupport,
+    stats: ConnectedSearchStats,
+}
+
+#[cfg(feature = "parallel")]
+const _: () = assert!(std::mem::align_of::<CachePaddedBranchResult>() == 128);
+
+#[cfg(feature = "parallel")]
+#[repr(C, align(128))]
+struct BoundMailbox(AtomicU16);
+
+#[cfg(feature = "parallel")]
+const _: () = assert!(std::mem::align_of::<BoundMailbox>() == 128);
+
+#[cfg(feature = "parallel")]
+struct BranchWorkspace {
+    supports: Vec<PackedSupport>,
+    boundaries: Vec<PackedSupport>,
+    candidates: Vec<PackedSupport>,
+    syndromes: Vec<PackedSyndrome>,
+    logicals: Vec<u64>,
+}
+
+#[cfg(feature = "parallel")]
+impl BranchWorkspace {
+    fn new(frame_count: usize) -> Self {
+        Self {
+            supports: vec![PackedSupport::default(); frame_count],
+            boundaries: vec![PackedSupport::default(); frame_count],
+            candidates: vec![PackedSupport::default(); frame_count],
+            syndromes: vec![PackedSyndrome::default(); frame_count],
+            logicals: vec![0; frame_count],
+        }
+    }
+}
 
 #[cfg(feature = "parallel")]
 fn merge_search_stats(left: &mut ConnectedSearchStats, right: ConnectedSearchStats) {
@@ -442,6 +489,26 @@ fn merge_search_stats(left: &mut ConnectedSearchStats, right: ConnectedSearchSta
     left.kernel_supports += right.kernel_supports;
     left.nontrivial_supports += right.nontrivial_supports;
     left.maximum_depth = left.maximum_depth.max(right.maximum_depth);
+    left.bound_improvements_published += right.bound_improvements_published;
+    left.bound_pulses_observed += right.bound_pulses_observed;
+}
+
+#[cfg(feature = "parallel")]
+fn publish_bound(mailboxes: &[BoundMailbox], bound: u16) -> bool {
+    let mut improved = false;
+    for mailbox in mailboxes {
+        improved |= mailbox.0.fetch_min(bound, Ordering::Relaxed) > bound;
+    }
+    improved
+}
+
+#[cfg(feature = "parallel")]
+fn poll_bound(mailbox: &BoundMailbox, pruning_bound: &mut u16, stats: &mut ConnectedSearchStats) {
+    let received = mailbox.0.load(Ordering::Relaxed);
+    if received < *pruning_bound {
+        *pruning_bound = received;
+        stats.bound_pulses_observed += 1;
+    }
 }
 
 impl CompiledCssDistance {
@@ -953,22 +1020,336 @@ impl CompiledCssDistance {
         })
     }
 
-    /// Search static anchor partitions in parallel with no shared hot-loop writes.
-    ///
-    /// Each partition owns its DFS frames, counters, incumbent, and witness.
-    /// Results occupy separate cache lines and are reduced in anchor order only
-    /// after all workers complete. Because incumbents are partition-local, work
-    /// counters can exceed the sequential search when an early partition finds
-    /// a strong incumbent.
+    #[cfg(feature = "parallel")]
+    fn search_root_branch_partition(
+        &self,
+        branches: &[RootBranch],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+        pulse_interval: u64,
+    ) -> CachePaddedBranchResult {
+        let mut workspace = BranchWorkspace::new(usize::from(searched_maximum_weight));
+        let mut best_weight = searched_maximum_weight.saturating_add(1);
+        let worker_index = rayon::current_thread_index().unwrap_or(0) % mailboxes.len();
+        let mailbox = &mailboxes[worker_index];
+        let mut pruning_bound = best_weight;
+        let mut best_support = PackedSupport::default();
+        let mut stats = ConnectedSearchStats::default();
+
+        for branch in branches {
+            poll_bound(mailbox, &mut pruning_bound, &mut stats);
+            let root = usize::from(branch.root);
+            let added = usize::from(branch.added);
+            workspace.supports[0] = PackedSupport::singleton(root);
+            workspace.boundaries[0] = self.neighbors[root];
+            workspace.candidates[0] = branch.remaining_root_candidates;
+            workspace.syndromes[0] = self.columns[root].syndrome;
+            workspace.logicals[0] = self.columns[root].logical;
+
+            stats.candidates += 1;
+            let mut child_support = workspace.supports[0];
+            child_support.insert(added);
+            stats.connected_supports += 1;
+            stats.maximum_depth = stats.maximum_depth.max(2);
+            let mut child_syndrome = workspace.syndromes[0];
+            child_syndrome.toggle(self.columns[added].syndrome);
+            let child_logical = workspace.logicals[0] ^ self.columns[added].logical;
+            if child_syndrome.is_zero() {
+                stats.kernel_supports += 1;
+                if child_logical != 0 {
+                    stats.nontrivial_supports += 1;
+                    if best_weight > 2 {
+                        best_weight = 2;
+                        best_support = child_support;
+                        pruning_bound = pruning_bound.min(2);
+                        stats.bound_improvements_published +=
+                            u64::from(publish_bound(mailboxes, 2));
+                    }
+                }
+            }
+            let improvement_budget = pruning_bound.saturating_sub(3);
+            let cheap_bound = self.syndrome_completion_lower_bound(child_syndrome);
+            let four_completion_reject =
+                improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
+            if searched_maximum_weight <= 2
+                || cheap_bound > improvement_budget
+                || (improvement_budget <= 3
+                    && !self.has_short_completion(child_syndrome, improvement_budget))
+                || four_completion_reject
+            {
+                stats.syndrome_bound_prunes += 1;
+                stats.four_completion_prunes += u64::from(four_completion_reject);
+                continue;
+            }
+
+            workspace.supports[1] = child_support;
+            workspace.syndromes[1] = child_syndrome;
+            workspace.logicals[1] = child_logical;
+            let mut exclusive = self.neighbors[added];
+            exclusive.difference_assign(workspace.boundaries[0]);
+            exclusive.difference_assign(child_support);
+            let mut child_boundary = workspace.boundaries[0];
+            child_boundary.union_assign(self.neighbors[added]);
+            child_boundary.difference_assign(child_support);
+            workspace.boundaries[1] = child_boundary;
+            let mut child_candidates = workspace.candidates[0];
+            child_candidates.union_assign(exclusive);
+            stats.exclusive_extensions += 1;
+            workspace.candidates[1] = child_candidates;
+            let mut depth = 1usize;
+
+            loop {
+                let Some(added) = workspace.candidates[depth].pop_lowest() else {
+                    if depth == 1 {
+                        break;
+                    }
+                    depth -= 1;
+                    continue;
+                };
+                stats.candidates += 1;
+                if pulse_interval != 0 && stats.candidates & (pulse_interval - 1) == 0 {
+                    poll_bound(mailbox, &mut pruning_bound, &mut stats);
+                }
+                let child_depth = depth + 1;
+                let child_weight = (child_depth + 1) as u16;
+                let mut child_support = workspace.supports[depth];
+                child_support.insert(added);
+                stats.connected_supports += 1;
+                stats.maximum_depth = stats.maximum_depth.max(child_weight);
+                let mut child_syndrome = workspace.syndromes[depth];
+                child_syndrome.toggle(self.columns[added].syndrome);
+                let child_logical = workspace.logicals[depth] ^ self.columns[added].logical;
+                if child_syndrome.is_zero() {
+                    stats.kernel_supports += 1;
+                    if child_logical != 0 {
+                        stats.nontrivial_supports += 1;
+                        if child_weight < best_weight {
+                            best_weight = child_weight;
+                            best_support = child_support;
+                            pruning_bound = pruning_bound.min(child_weight);
+                            stats.bound_improvements_published +=
+                                u64::from(publish_bound(mailboxes, child_weight));
+                        }
+                    }
+                }
+                let improvement_budget = pruning_bound.saturating_sub(child_weight + 1);
+                let cheap_bound = self.syndrome_completion_lower_bound(child_syndrome);
+                let four_completion_reject =
+                    improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
+                if child_weight >= searched_maximum_weight
+                    || cheap_bound > improvement_budget
+                    || (improvement_budget <= 3
+                        && !self.has_short_completion(child_syndrome, improvement_budget))
+                    || four_completion_reject
+                {
+                    stats.syndrome_bound_prunes += 1;
+                    stats.four_completion_prunes += u64::from(four_completion_reject);
+                    continue;
+                }
+
+                workspace.supports[child_depth] = child_support;
+                workspace.syndromes[child_depth] = child_syndrome;
+                workspace.logicals[child_depth] = child_logical;
+                let mut exclusive = self.neighbors[added];
+                exclusive.difference_assign(workspace.boundaries[depth]);
+                exclusive.difference_assign(child_support);
+                let mut child_boundary = workspace.boundaries[depth];
+                child_boundary.union_assign(self.neighbors[added]);
+                child_boundary.difference_assign(child_support);
+                workspace.boundaries[child_depth] = child_boundary;
+                let mut child_candidates = workspace.candidates[depth];
+                child_candidates.union_assign(exclusive);
+                stats.exclusive_extensions += 1;
+                workspace.candidates[child_depth] = child_candidates;
+                depth = child_depth;
+            }
+        }
+
+        CachePaddedBranchResult {
+            best_weight,
+            best_support,
+            stats,
+        }
+    }
+
+    #[cfg(feature = "parallel")]
+    fn search_bounded_root_parallel(
+        &self,
+        anchors: &[u16],
+        searched_maximum_weight: u16,
+        pulse_interval: u64,
+    ) -> BoundedCssDistanceResult {
+        use rayon::prelude::*;
+
+        let mut best_weight = searched_maximum_weight.saturating_add(1);
+        let mut best_support = PackedSupport::default();
+        let mut stats = ConnectedSearchStats::default();
+        let mut branches =
+            Vec::with_capacity(anchors.len().saturating_mul(self.coordinate_count()));
+        for &anchor in anchors {
+            let root = usize::from(anchor);
+            let support = PackedSupport::singleton(root);
+            let syndrome = self.columns[root].syndrome;
+            let logical = self.columns[root].logical;
+            stats.connected_supports += 1;
+            stats.maximum_depth = stats.maximum_depth.max(1);
+            if syndrome.is_zero() {
+                stats.kernel_supports += 1;
+                if logical != 0 {
+                    stats.nontrivial_supports += 1;
+                    if best_weight > 1 {
+                        best_weight = 1;
+                        best_support = support;
+                    }
+                }
+            }
+            let mut remaining = self.neighbors[root];
+            while let Some(added) = remaining.pop_lowest() {
+                branches.push(RootBranch {
+                    root: anchor,
+                    added: added as u16,
+                    remaining_root_candidates: remaining,
+                });
+            }
+        }
+        if best_weight == 1 || branches.is_empty() {
+            return self.finish_packed_search(
+                best_weight,
+                best_support,
+                searched_maximum_weight,
+                stats,
+            );
+        }
+        let partition_count = rayon::current_num_threads().min(branches.len());
+        let partition_capacity = branches.len().div_ceil(partition_count);
+        let mut partitions = (0..partition_count)
+            .map(|_| Vec::with_capacity(partition_capacity))
+            .collect::<Vec<_>>();
+        for (index, branch) in branches.into_iter().enumerate() {
+            partitions[index % partition_count].push(branch);
+        }
+        let mailboxes = (0..rayon::current_num_threads())
+            .map(|_| BoundMailbox(AtomicU16::new(searched_maximum_weight.saturating_add(1))))
+            .collect::<Vec<_>>();
+        let partials = partitions
+            .par_iter()
+            .map(|partition| {
+                self.search_root_branch_partition(
+                    partition,
+                    searched_maximum_weight,
+                    &mailboxes,
+                    pulse_interval,
+                )
+            })
+            .collect::<Vec<_>>();
+        for partial in partials {
+            merge_search_stats(&mut stats, partial.stats);
+            if partial.best_weight < best_weight {
+                best_weight = partial.best_weight;
+                best_support = partial.best_support;
+            }
+        }
+        self.finish_packed_search(best_weight, best_support, searched_maximum_weight, stats)
+    }
+
+    #[cfg(feature = "parallel")]
+    fn finish_packed_search(
+        &self,
+        best_weight: u16,
+        best_support: PackedSupport,
+        searched_maximum_weight: u16,
+        stats: ConnectedSearchStats,
+    ) -> BoundedCssDistanceResult {
+        let witness = if best_weight <= searched_maximum_weight {
+            let mut witness = Vec::with_capacity(best_weight as usize);
+            for coordinate in 0..self.coordinate_count() {
+                if best_support.contains(coordinate) {
+                    witness.push(coordinate as u16);
+                }
+            }
+            witness.into_boxed_slice()
+        } else {
+            Box::default()
+        };
+        BoundedCssDistanceResult {
+            distance: (best_weight <= searched_maximum_weight).then_some(best_weight),
+            witness,
+            searched_maximum_weight,
+            stats,
+        }
+    }
+
+    /// Search static anchor partitions with a 16384-candidate bound-pulse interval.
     #[cfg(feature = "parallel")]
     pub fn search_bounded_parallel(
         &self,
         anchors: &[u16],
         maximum_weight: u16,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
-        use rayon::prelude::*;
+        self.search_bounded_parallel_pulsed(anchors, maximum_weight, 16384)
+    }
 
-        if anchors.is_empty() || rayon::current_num_threads() == 1 {
+    /// Iterative exact search with cache-line-separated bound pulses.
+    ///
+    /// Each worker polls only its own mailbox. A verified improvement performs a
+    /// rare monotone broadcast; stale reads can add work but cannot affect exactness.
+    /// Zero disables mid-branch polling. Nonzero intervals must be powers of two.
+    #[cfg(feature = "parallel")]
+    pub fn search_bounded_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        if pulse_interval != 0 && !pulse_interval.is_power_of_two() {
+            return Err(CssDistanceError::InvalidPulseInterval);
+        }
+        if maximum_weight == 0 || usize::from(maximum_weight) > self.coordinate_count() {
+            return Err(CssDistanceError::InvalidMaximumWeight);
+        }
+        for &anchor in anchors {
+            if usize::from(anchor) >= self.coordinate_count() {
+                return Err(CssDistanceError::AnchorOutOfRange { anchor });
+            }
+        }
+        let searched_maximum_weight = if self.kernel_weights_even && maximum_weight & 1 == 1 {
+            maximum_weight - 1
+        } else {
+            maximum_weight
+        };
+        let step = if self.kernel_weights_even { 2 } else { 1 };
+        let mut cumulative_stats = ConnectedSearchStats::default();
+        let mut limit = step;
+        while limit <= searched_maximum_weight {
+            let mut result =
+                self.search_bounded_parallel_single_pulsed(anchors, limit, pulse_interval)?;
+            merge_search_stats(&mut cumulative_stats, result.stats);
+            if result.distance.is_some() {
+                result.searched_maximum_weight = searched_maximum_weight;
+                result.stats = cumulative_stats;
+                return Ok(result);
+            }
+            limit += step;
+        }
+        Ok(BoundedCssDistanceResult {
+            distance: None,
+            witness: Box::default(),
+            searched_maximum_weight,
+            stats: cumulative_stats,
+        })
+    }
+
+    #[cfg(feature = "parallel")]
+    fn search_bounded_parallel_single_pulsed(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        if pulse_interval != 0 && !pulse_interval.is_power_of_two() {
+            return Err(CssDistanceError::InvalidPulseInterval);
+        }
+        if anchors.is_empty() {
             return self.search_bounded(anchors, maximum_weight);
         }
         if maximum_weight == 0 || usize::from(maximum_weight) > self.coordinate_count() {
@@ -979,23 +1360,24 @@ impl CompiledCssDistance {
                 return Err(CssDistanceError::AnchorOutOfRange { anchor });
             }
         }
-        let partition_count = rayon::current_num_threads().min(anchors.len());
-        let anchors_per_partition = anchors.len().div_ceil(partition_count);
-        let partials = anchors
-            .par_chunks(anchors_per_partition)
-            .map(|partition| {
-                self.search_bounded(partition, maximum_weight)
-                    .map(CachePaddedSearchResult)
-            })
-            .collect::<Result<Vec<_>, _>>()?;
-
+        let searched_maximum_weight = if self.kernel_weights_even && maximum_weight & 1 == 1 {
+            maximum_weight - 1
+        } else {
+            maximum_weight
+        };
+        if searched_maximum_weight < 2 {
+            return self.search_bounded(anchors, maximum_weight);
+        }
         let mut combined = BoundedCssDistanceResult {
             distance: None,
             witness: Box::default(),
-            searched_maximum_weight: partials[0].0.searched_maximum_weight,
+            searched_maximum_weight,
             stats: ConnectedSearchStats::default(),
         };
-        for CachePaddedSearchResult(partial) in partials {
+        let mut active_maximum = searched_maximum_weight;
+        for &anchor in anchors {
+            let partial =
+                self.search_bounded_root_parallel(&[anchor], active_maximum, pulse_interval);
             merge_search_stats(&mut combined.stats, partial.stats);
             let improves = match (partial.distance, combined.distance) {
                 (Some(partial), Some(current)) => partial < current,
@@ -1005,6 +1387,14 @@ impl CompiledCssDistance {
             if improves {
                 combined.distance = partial.distance;
                 combined.witness = partial.witness;
+                let distance = combined.distance.expect("improving result has a distance");
+                active_maximum = distance.saturating_sub(1);
+                if self.kernel_weights_even && active_maximum & 1 == 1 {
+                    active_maximum -= 1;
+                }
+                if active_maximum == 0 {
+                    break;
+                }
             }
         }
         Ok(combined)
@@ -1061,11 +1451,26 @@ impl CompiledCssDistance {
         anchors: &[u16],
         incumbent: &[u16],
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.certify_incumbent_parallel_pulsed(anchors, incumbent, 16384)
+    }
+
+    /// Parallel incumbent certification with a configurable bound-pulse interval.
+    #[cfg(feature = "parallel")]
+    pub fn certify_incumbent_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        incumbent: &[u16],
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
         let replay = self.certify_incumbent(&[], incumbent)?;
         if incumbent.len() == 1 {
             return Ok(replay);
         }
-        let mut result = self.search_bounded_parallel(anchors, incumbent.len() as u16 - 1)?;
+        let mut result = self.search_bounded_parallel_single_pulsed(
+            anchors,
+            incumbent.len() as u16 - 1,
+            pulse_interval,
+        )?;
         if result.distance.is_none() {
             result.distance = replay.distance;
             result.witness = replay.witness;
@@ -1213,6 +1618,37 @@ mod tests {
             .install(|| absent.search_bounded_parallel(&anchors, 5))
             .unwrap();
         let sequential = absent.search_bounded(&anchors, 5).unwrap();
-        assert_eq!(parallel, sequential);
+        assert_eq!(parallel.distance, sequential.distance);
+        assert_eq!(parallel.witness, sequential.witness);
+
+        let wide_pool = rayon::ThreadPoolBuilder::new()
+            .num_threads(8)
+            .build()
+            .unwrap();
+        let root_partitioned = wide_pool
+            .install(|| absent.search_bounded_parallel(&anchors, 5))
+            .unwrap();
+        assert_eq!(root_partitioned.distance, sequential.distance);
+        assert_eq!(root_partitioned.witness, sequential.witness);
+        let root_partitioned = wide_pool
+            .install(|| compiled.search_bounded_parallel(&anchors, 5))
+            .unwrap();
+        assert_eq!(root_partitioned.distance, Some(1));
+        assert_eq!(&*root_partitioned.witness, &[4]);
+
+        assert!(matches!(
+            wide_pool.install(|| compiled.search_bounded_parallel_pulsed(&anchors, 5, 3)),
+            Err(CssDistanceError::InvalidPulseInterval)
+        ));
+
+        let physical = Matrix::new::<2>(1, 8, vec![1; 8]).unwrap();
+        let logical = Matrix::new::<2>(1, 8, vec![1, 0, 1, 1, 1, 1, 1, 1]).unwrap();
+        let pulsed = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let answer = wide_pool
+            .install(|| pulsed.search_bounded_parallel_pulsed(&[0], 4, 1))
+            .unwrap();
+        assert_eq!(answer.distance, Some(2));
+        assert_eq!(&*answer.witness, &[0, 1]);
+        assert!(answer.stats.bound_improvements_published >= 1);
     }
 }

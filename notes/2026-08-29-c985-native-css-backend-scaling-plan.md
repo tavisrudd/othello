@@ -77,6 +77,46 @@ IBS load-latency event under the host's `perf_event_paranoid=2`, so direct HITM
 sampling remains an optional privileged confirmation rather than a release
 gate.
 
+### Root splitting, YBWC, and bound-pulse checkpoint
+
+The first direct weight-12 parallelization reproduced the Queens solver's
+classic cutoff failure: independent local incumbents inflated eight-thread work
+from 134.4 million to 258.3 million candidates. The corrected scheduler uses
+three layers:
+
+1. exact first-extension ESU branches, statically round-robin partitioned;
+2. anchor-level Young-Brothers-Wait, fully resolving the elder anchor before
+   searching younger anchors against its frozen bound;
+3. rare monotone bound pulses through one 128-byte mailbox per worker, polled
+   every 16,384 candidates and at branch boundaries.
+
+Only a verified scalar bound is broadcast. Witnesses, DFS frames, counters, and
+results remain worker-local. Relaxed mailbox ordering is safe because a stale
+bound can only add work. A 1K/4K/16K/disabled sweep found that 16K retained the
+work reduction with roughly 1% no-update polling overhead.
+
+Iterative deepening over admissible parity makes direct optimization insensitive
+to a loose caller bound: maximum weights 12 and 24 both terminate at distance 12
+after about 85.9 million candidates. Retained 11-round pinned results are:
+
+| workload | threads | median search | speedup | median candidates | Welch t vs 1t |
+|---|---:|---:|---:|---:|---:|
+| certify weight 12 | 1 | 0.157539 s | 1.00x | 12,268,521 | -- |
+| certify weight 12 | 2 | 0.085615 s | 1.84x | 12,268,521 | 52.93 |
+| certify weight 12 | 4 | 0.045352 s | 3.47x | 12,268,521 | 74.83 |
+| certify weight 12 | 8 | 0.039009 s | 4.04x | 12,268,521 | 90.25 |
+| direct, initial bound 24 | 1 | 1.072201 s | 1.00x | 85,922,184 | -- |
+| direct, initial bound 24 | 2 | 0.553233 s | 1.94x | 85,922,184 | 151.81 |
+| direct, initial bound 24 | 4 | 0.299110 s | 3.59x | 85,953,731 | 238.07 |
+| direct, initial bound 24 | 8 | 0.242861 s | 4.42x | 86,004,025 | 212.86 |
+
+The eight-thread direct run has about 0.10% work inflation, down from 92% in the
+negative control. Five-round perf runs retired within 0.10% of the one-thread
+instruction count, added about 2% cache misses, and recorded zero context
+switches or CPU migrations. CPUs 0--3 are physical performance cores; the
+eight-thread point adds their SMT siblings 12--15, so the modest gain beyond
+four threads is a hardware topology result rather than a scheduler ceiling.
+
 ## Parallel search discipline
 
 Gurobi 13.0.2 supports parallel MIP. Every parallel comparison therefore runs
