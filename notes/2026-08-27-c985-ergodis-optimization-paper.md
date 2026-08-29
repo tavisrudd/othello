@@ -1253,9 +1253,11 @@ verified artifact, permitting many objectives to reuse one topology plan.
 one caller-capacity-checked accumulator: compose and Pareto choice are fused,
 witnesses are created only for admitted nondominated products, and class/
 generator loops do not grow heap storage.  `evaluate_entries` additionally
-computes each target sort's final predecessor at plan construction, retains only
-requested result classes, and drops every live sort slab at that exact last use.
-On the control quotient it peaks at 34 of 153 classes and 75 Pareto entries.
+computes a packed-bitmap forward closure from requested classes, skips
+unreachable quotient classes, computes each target sort's final predecessor at
+plan construction, and drops every live sort slab at that exact last use.  On
+the separable control, 96 of 153 classes are reachable and evaluation peaks at
+22 classes / 26 Pareto entries.
 The all-class convenience result still retains one front per quotient class.
 
 The strongest classical control is retained as a negative.  In this separable
@@ -1263,16 +1265,18 @@ shuffle product, an exact factorized solver evaluates the two branch languages
 independently and combines their fronts once.  Nine CPU-2 processes, each
 amortizing 1,000 solves, give:
 
-- raw Cartesian DP / quotient DP: 35.796x geometric mean, log-ratio
-  t = 1455.08;
-- quotient DP / exact factorized DP: 2.356x geometric mean, log-ratio
-  t = 209.82.
+- identity quotient / minimized quotient: 6.731x geometric mean, log-ratio
+  t = 1773.35;
+- minimized quotient / exact factorized DP: 1.165x geometric mean, log-ratio
+  t = 18.80.
 
-Thus quotienting trounces the intentionally Cartesian raw formulation but is
-still 2.36x slower than the theorem-specialized factorization.  This is a
-shuffle-product control, not evidence of superiority on general fork/join
-scheduling.  A genuinely coupled shared-capacity or mode-transition instance
-is required for that application claim.
+The identity artifact gives every concrete state a distinct observation but
+maps those observations back to the same base fronts at evaluation.  It uses
+the identical consuming algorithm, retained-entry obligation, objective
+tables, and witness operation; the 6.73x ratio isolates contextual
+minimization.  The minimized engine is only 16.5% slower than the stronger
+branch-factorized solver.  The legacy Cartesian DP remains an independent
+correctness oracle and is not used for the quotient speedup claim.
 
 ```sh
 cd papers/complete-repair-ports/ergodis
@@ -1282,6 +1286,32 @@ scripts/check-shuffle-product-control.sh \
   evidence/c985-shuffle-product-control.tsv
 ```
 
-- benchmark script: `b8b2bcda258f4d84d8706dfa7cd5032014e9c2a063416848721c80568de06698`;
-- checker: `70de6d93cc130e6c9cc99cc13a6b3a91f0c165c524d9b150e3be4566631b7fa5`;
-- evidence TSV: `6f52c9ee2c34b036f41c7857a67f643fa92fb0f8d063fbe6362efdfdf6340a44`.
+- benchmark script: `0a6d016385d63b96fcd1289b06b65b06a0e39272af5db7509ec1eb285e88be3a`;
+- checker: `4a4139050d7f7aefcc2d318a9ef1c64576bd499bad1e5b903d713d07e3c437e9`;
+- evidence TSV: `7e144140a395d5b92577be6b71889692da52e70fd0dd14a79d0a49ec1641eee9`.
+
+The coupled control adds a shared mode selected by each branch's first symbol
+and requires the modes to agree at the join.  Unlike the discarded switch-
+count monitor, this excludes some branch-word pairs under every interleaving.
+An exhaustive small test proves the coupled front differs strictly from the
+independent branch product, while raw DP, minimized evaluation, identity
+evaluation, brute force, and witness replay agree.
+
+At length five with 12 local DFA states, the identity artifact has 46,656
+classes, contextual minimization has 349, and only 101 minimized classes are
+reachable from the requested entry.  The consuming frontier peaks at 23
+classes / 23 Pareto entries.  Nine CPU-2 processes of 1,000 evaluations give a
+23.034x identity/minimized geometric speedup with log-ratio t = 967.61.  The
+one-time minimized compile cost crosses over after 10.34 such entry evaluations
+geometrically.  This
+is a synthetic but genuinely nonfactorizable finite-state join-compatibility
+application; it is not yet a public workflow-suite or SOTA claim.
+
+```sh
+scripts/bench-coupled-workflow.sh > evidence/c985-coupled-workflow.tsv
+scripts/check-coupled-workflow.sh evidence/c985-coupled-workflow.tsv
+```
+
+- coupled benchmark: `0027d32f34b444abc4c7f84b0a02e5c7c80c0f12f97e512d984775c8eb9fea85`;
+- coupled checker: `7015dd9e380e1a318f7c7393a57ec5361cfc565d91fa2198fc4be39f6e03ed10`;
+- coupled evidence: `118a0f84467e35eb0615ef15595afaea471d33cb26ec2b5297423c3f4ca6923e`.

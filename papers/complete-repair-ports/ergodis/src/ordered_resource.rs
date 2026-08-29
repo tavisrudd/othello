@@ -427,6 +427,7 @@ pub struct FrozenParetoPlan<'a> {
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct FrozenParetoEvaluationMetrics {
+    pub reachable_classes: usize,
     pub peak_live_classes: usize,
     pub peak_live_entries: usize,
     pub retained_entries: usize,
@@ -603,11 +604,51 @@ impl<'a> FrozenParetoPlan<'a> {
             selected_cursor[sort] += 1;
         }
 
+        let class_count = self.frozen.storage().classes;
+        let mut reachable = vec![0_u64; class_count.div_ceil(64)];
+        let mut reachable_classes = 0_usize;
+        for &class in entry_classes {
+            let word = &mut reachable[class as usize / 64];
+            let mask = 1_u64 << (class as usize % 64);
+            if *word & mask == 0 {
+                *word |= mask;
+                reachable_classes += 1;
+            }
+        }
+        for sort in 0..sort_count {
+            let range = self
+                .frozen
+                .class_range(sort as u32)
+                .ok_or(FrozenParetoError::Artifact)?;
+            for class in range.start..range.start + range.len {
+                if reachable[class as usize / 64] & (1_u64 << (class as usize % 64)) == 0 {
+                    continue;
+                }
+                for &generator in &self.outgoing[self.offsets[sort]..self.offsets[sort + 1]] {
+                    let target =
+                        self.frozen
+                            .transition(generator, class)
+                            .ok_or(FrozenParetoError::Artifact)? as usize;
+                    let word = reachable
+                        .get_mut(target / 64)
+                        .ok_or(FrozenParetoError::Artifact)?;
+                    let mask = 1_u64 << (target % 64);
+                    if *word & mask == 0 {
+                        *word |= mask;
+                        reachable_classes += 1;
+                    }
+                }
+            }
+        }
+
         let capacity = workspace.capacity();
         let mut accumulator = Vec::with_capacity(capacity);
-        let mut live: Vec<Option<Vec<WitnessedParetoFront>>> = vec![None; sort_count];
+        let mut live: Vec<Option<Vec<Option<WitnessedParetoFront>>>> = vec![None; sort_count];
         let mut retained: Vec<Option<WitnessedParetoFront>> = vec![None; entry_classes.len()];
-        let mut metrics = FrozenParetoEvaluationMetrics::default();
+        let mut metrics = FrozenParetoEvaluationMetrics {
+            reachable_classes,
+            ..FrozenParetoEvaluationMetrics::default()
+        };
         let mut live_classes = 0_usize;
         let mut live_entries = 0_usize;
 
@@ -618,6 +659,10 @@ impl<'a> FrozenParetoPlan<'a> {
                 .ok_or(FrozenParetoError::Artifact)?;
             let mut sort_fronts = Vec::with_capacity(range.len as usize);
             for class in range.start..range.start + range.len {
+                if reachable[class as usize / 64] & (1_u64 << (class as usize % 64)) == 0 {
+                    sort_fronts.push(None);
+                    continue;
+                }
                 let output = self
                     .frozen
                     .output(class)
@@ -650,6 +695,7 @@ impl<'a> FrozenParetoPlan<'a> {
                     let child = live[target_sort]
                         .as_ref()
                         .and_then(|fronts| fronts.get(target_local))
+                        .and_then(Option::as_ref)
                         .ok_or(FrozenParetoError::Artifact)?;
                     for &edge in &edge_fronts[generator as usize].entries {
                         for &suffix in &child.entries {
@@ -677,9 +723,9 @@ impl<'a> FrozenParetoPlan<'a> {
                     }
                 }
                 accumulator.sort_unstable_by_key(|entry| entry.resource);
-                sort_fronts.push(WitnessedParetoFront {
+                sort_fronts.push(Some(WitnessedParetoFront {
                     entries: Box::from(accumulator.as_slice()),
-                });
+                }));
             }
 
             for &index in &selected_indices[selected_counts[sort]..selected_counts[sort + 1]] {
@@ -687,13 +733,17 @@ impl<'a> FrozenParetoPlan<'a> {
                     .checked_sub(range.start)
                     .filter(|&local| local < range.len)
                     .ok_or(FrozenParetoError::Artifact)? as usize;
-                let front = sort_fronts[local].clone();
+                let front = sort_fronts[local]
+                    .as_ref()
+                    .ok_or(FrozenParetoError::Artifact)?
+                    .clone();
                 metrics.retained_entries += front.entries.len();
                 retained[index] = Some(front);
             }
-            live_classes += sort_fronts.len();
+            live_classes += sort_fronts.iter().filter(|front| front.is_some()).count();
             live_entries += sort_fronts
                 .iter()
+                .filter_map(Option::as_ref)
                 .map(|front| front.entries.len())
                 .sum::<usize>();
             live[sort] = Some(sort_fronts);
@@ -704,9 +754,10 @@ impl<'a> FrozenParetoPlan<'a> {
                 &self.release_targets[self.release_offsets[sort]..self.release_offsets[sort + 1]]
             {
                 if let Some(fronts) = live[target as usize].take() {
-                    live_classes -= fronts.len();
+                    live_classes -= fronts.iter().filter(|front| front.is_some()).count();
                     live_entries -= fronts
                         .iter()
+                        .filter_map(Option::as_ref)
                         .map(|front| front.entries.len())
                         .sum::<usize>();
                 }

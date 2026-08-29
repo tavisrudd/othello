@@ -21,6 +21,7 @@ struct Action {
 struct Workflow {
     length: usize,
     automaton_states: u32,
+    monitor_states: u32,
     state_counts: Vec<u32>,
     generators: Vec<LayeredGeneratorSpec>,
     actions: Vec<Action>,
@@ -29,8 +30,9 @@ struct Workflow {
 }
 
 impl Workflow {
-    fn new(length: usize, automaton_states: u32) -> Self {
+    fn new(length: usize, automaton_states: u32, monitor_states: u32) -> Self {
         assert!(length != 0 && 6 * length <= 30 && automaton_states != 0);
+        assert!(monitor_states == 1 || monitor_states == 7 || monitor_states == 9);
         let mut sort_of = vec![vec![usize::MAX; length + 1]; length + 1];
         let mut coordinates = Vec::with_capacity((length + 1) * (length + 1));
         for diagonal in 0..=2 * length {
@@ -44,7 +46,10 @@ impl Workflow {
                 }
             }
         }
-        let local_states = automaton_states * automaton_states;
+        let local_states = automaton_states
+            .checked_mul(automaton_states)
+            .and_then(|states| states.checked_mul(monitor_states))
+            .unwrap();
         let state_counts = vec![local_states; coordinates.len()];
         let mut generators = Vec::new();
         let mut actions = Vec::new();
@@ -73,6 +78,7 @@ impl Workflow {
         Self {
             length,
             automaton_states,
+            monitor_states,
             state_counts,
             generators,
             actions,
@@ -83,8 +89,11 @@ impl Workflow {
 
     fn transition(&self, generator: u32, state: u32) -> u32 {
         let action = self.actions[generator as usize];
-        let mut left = state / self.automaton_states;
-        let mut right = state % self.automaton_states;
+        self.transition_action(action, state)
+    }
+
+    fn transition_action(&self, action: Action, state: u32) -> u32 {
+        let (mut left, mut right, monitor) = self.decode_state(state);
         let selected = if action.branch == 0 {
             &mut left
         } else {
@@ -92,7 +101,29 @@ impl Workflow {
         };
         *selected =
             (selected.wrapping_mul(2) + u32::from(action.symbol) + 1) % self.automaton_states;
-        left * self.automaton_states + right
+        let next_monitor = if self.monitor_states == 1 {
+            0
+        } else if self.monitor_states == 9 {
+            let mut left_mode = monitor / 3;
+            let mut right_mode = monitor % 3;
+            let selected_mode = if action.branch == 0 {
+                &mut left_mode
+            } else {
+                &mut right_mode
+            };
+            if *selected_mode == 0 {
+                *selected_mode = u32::from(action.symbol) + 1;
+            }
+            3 * left_mode + right_mode
+        } else if monitor == 0 {
+            1 + u32::from(action.branch) * 3
+        } else {
+            let previous_branch = (monitor - 1) / 3;
+            let switches = (monitor - 1) % 3;
+            1 + u32::from(action.branch) * 3
+                + (switches + u32::from(previous_branch != u32::from(action.branch))) % 3
+        };
+        self.encode_state(left, right, next_monitor)
     }
 
     fn observation(&self, sort: u32, state: u32) -> u32 {
@@ -100,13 +131,35 @@ impl Workflow {
         if left_steps != self.length || right_steps != self.length {
             return 0;
         }
-        let left = state / self.automaton_states;
-        let right = state % self.automaton_states;
-        if left == self.automaton_states - 1 && right == self.automaton_states - 1 {
+        let (left, right, monitor) = self.decode_state(state);
+        let monitor_accepts = match self.monitor_states {
+            1 => true,
+            7 => monitor != 0 && (monitor - 1) % 3 == 1,
+            9 => monitor / 3 != 0 && monitor / 3 == monitor % 3,
+            _ => unreachable!(),
+        };
+        if left == self.automaton_states - 1
+            && right == self.automaton_states - 1
+            && monitor_accepts
+        {
             1
         } else {
             2
         }
+    }
+
+    fn decode_state(&self, state: u32) -> (u32, u32, u32) {
+        let monitor = state % self.monitor_states;
+        let pair = state / self.monitor_states;
+        (
+            pair / self.automaton_states,
+            pair % self.automaton_states,
+            monitor,
+        )
+    }
+
+    fn encode_state(&self, left: u32, right: u32, monitor: u32) -> u32 {
+        (left * self.automaton_states + right) * self.monitor_states + monitor
     }
 }
 
@@ -219,29 +272,19 @@ fn quotient_pareto_dp(
 }
 
 fn quotient_entry_pareto_dp(
-    workflow: &Workflow,
     plan: &FrozenParetoPlan<'_>,
     resources: &CappedAdditiveMonoid,
-    weights: &[[u16; 2]; 4],
+    outputs: &[WitnessedParetoFront],
+    generator_edges: &[WitnessedParetoFront],
     entry_class: u32,
 ) -> (WitnessedParetoFront, FrozenParetoEvaluationMetrics) {
-    let edges = edge_fronts(resources, weights);
-    let outputs = [
-        empty_front(resources),
-        singleton_front(resources, [0, 0], 0),
-        empty_front(resources),
-    ];
-    let mut generator_edges = Vec::with_capacity(workflow.generators.len());
-    for &action in &workflow.actions {
-        generator_edges.push(edges[(2 * action.branch + action.symbol) as usize].clone());
-    }
     let mut workspace = WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
     let (mut fronts, metrics) = plan
         .evaluate_entries(
             &[entry_class],
             resources,
-            &outputs,
-            &generator_edges,
+            outputs,
+            generator_edges,
             &mut workspace,
             |_, edge, suffix| edge | (suffix << 3),
         )
@@ -254,6 +297,7 @@ fn factorized_pareto_dp(
     resources: &CappedAdditiveMonoid,
     initial_state: u32,
 ) -> WitnessedParetoFront {
+    assert_eq!(workflow.monitor_states, 1);
     let edges = edge_fronts(resources, &DEFAULT_WEIGHTS);
     let state_count = workflow.automaton_states as usize;
     let initial_left = initial_state / workflow.automaton_states;
@@ -319,8 +363,7 @@ fn verify_witness(
 ) {
     let mut left_steps = 0;
     let mut right_steps = 0;
-    let mut left_state = initial_state / workflow.automaton_states;
-    let mut right_state = initial_state % workflow.automaton_states;
+    let mut state = initial_state;
     let mut resource = [0_u16; 2];
     let mut witness = entry.witness;
     while left_steps != workflow.length || right_steps != workflow.length {
@@ -333,19 +376,26 @@ fn verify_witness(
         if branch == 0 {
             assert!(left_steps < workflow.length);
             left_steps += 1;
-            left_state = (2 * left_state + symbol as u32 + 1) % workflow.automaton_states;
         } else {
             assert!(right_steps < workflow.length);
             right_steps += 1;
-            right_state = (2 * right_state + symbol as u32 + 1) % workflow.automaton_states;
         }
+        state = workflow.transition_action(
+            Action {
+                branch: branch as u8,
+                symbol: symbol as u8,
+            },
+            state,
+        );
         for coordinate in 0..2 {
             resource[coordinate] += weights[action][coordinate];
         }
     }
     assert_eq!(witness, 0);
-    assert_eq!(left_state, workflow.automaton_states - 1);
-    assert_eq!(right_state, workflow.automaton_states - 1);
+    assert_eq!(
+        workflow.observation((workflow.coordinates.len() - 1) as u32, state),
+        1
+    );
     assert_eq!(resources.encode(&resource).unwrap(), entry.resource);
 }
 
@@ -361,8 +411,7 @@ fn brute_force_entry(
     for mut sequence in 0..4_u64.pow(steps as u32) {
         let mut left_steps = 0;
         let mut right_steps = 0;
-        let mut left_state = initial_state / workflow.automaton_states;
-        let mut right_state = initial_state % workflow.automaton_states;
+        let mut state = initial_state;
         let mut resource = [0_u16; 2];
         let mut witness = 0_u32;
         let mut valid = true;
@@ -379,20 +428,22 @@ fn brute_force_entry(
             }
             if branch == 0 {
                 left_steps += 1;
-                left_state = (2 * left_state + symbol as u32 + 1) % workflow.automaton_states;
             } else {
                 right_steps += 1;
-                right_state = (2 * right_state + symbol as u32 + 1) % workflow.automaton_states;
             }
+            state = workflow.transition_action(
+                Action {
+                    branch: branch as u8,
+                    symbol: symbol as u8,
+                },
+                state,
+            );
             let weight = weights[action];
             resource[0] += weight[0];
             resource[1] += weight[1];
             witness |= (action as u32 + 1) << (3 * step);
         }
-        if valid
-            && left_state == workflow.automaton_states - 1
-            && right_state == workflow.automaton_states - 1
-        {
+        if valid && workflow.observation((workflow.coordinates.len() - 1) as u32, state) == 1 {
             candidates.push(ParetoWitness {
                 resource: resources.encode(&resource).unwrap(),
                 witness,
@@ -411,8 +462,7 @@ fn acceptance_signature(workflow: &Workflow, initial_state: u32) -> Vec<u64> {
         let mut sequence = sequence_index;
         let mut left_steps = 0;
         let mut right_steps = 0;
-        let mut left_state = initial_state / workflow.automaton_states;
-        let mut right_state = initial_state % workflow.automaton_states;
+        let mut state = initial_state;
         let mut valid = true;
         for _ in 0..steps {
             let action = sequence & 3;
@@ -427,41 +477,49 @@ fn acceptance_signature(workflow: &Workflow, initial_state: u32) -> Vec<u64> {
             }
             if branch == 0 {
                 left_steps += 1;
-                left_state = (2 * left_state + symbol as u32 + 1) % workflow.automaton_states;
             } else {
                 right_steps += 1;
-                right_state = (2 * right_state + symbol as u32 + 1) % workflow.automaton_states;
             }
+            state = workflow.transition_action(
+                Action {
+                    branch: branch as u8,
+                    symbol: symbol as u8,
+                },
+                state,
+            );
         }
-        if valid
-            && left_state == workflow.automaton_states - 1
-            && right_state == workflow.automaton_states - 1
-        {
+        if valid && workflow.observation((workflow.coordinates.len() - 1) as u32, state) == 1 {
             signature[sequence_index / 64] |= 1_u64 << (sequence_index % 64);
         }
     }
     signature
 }
 
+struct RunResult {
+    raw_states: usize,
+    classes: usize,
+    identity_classes: usize,
+    front: usize,
+    reachable_classes: usize,
+    peak_live_classes: usize,
+    peak_live_entries: usize,
+    compile_ns: u128,
+    legacy_raw_ns: u128,
+    identity_ns: u128,
+    quotient_ns: u128,
+    factorized_ns: u128,
+    audit_bytes: u64,
+}
+
 fn run(
     length: usize,
     automaton_states: u32,
+    monitor_states: u32,
     audit_path: Option<&str>,
     repetitions: u128,
-) -> (
-    usize,
-    usize,
-    usize,
-    usize,
-    usize,
-    u128,
-    u128,
-    u128,
-    u128,
-    u64,
-) {
+) -> RunResult {
     assert!(repetitions != 0);
-    let workflow = Workflow::new(length, automaton_states);
+    let workflow = Workflow::new(length, automaton_states, monitor_states);
     let compile_start = Instant::now();
     let (frozen, audit) = if let Some(path) = audit_path {
         let file = std::fs::File::create(path).unwrap();
@@ -506,6 +564,44 @@ fn run(
     let resources = CappedAdditiveMonoid::new([64, 64]).unwrap();
     let plan = FrozenParetoPlan::new(&frozen).unwrap();
     let entry_class = frozen.entry_class(0, 0).unwrap();
+    let edges = edge_fronts(&resources, &DEFAULT_WEIGHTS);
+    let quotient_outputs = [
+        empty_front(&resources),
+        singleton_front(&resources, [0, 0], 0),
+        empty_front(&resources),
+    ];
+    let mut generator_edges = Vec::with_capacity(workflow.generators.len());
+    for &action in &workflow.actions {
+        generator_edges.push(edges[(2 * action.branch + action.symbol) as usize].clone());
+    }
+
+    let mut state_offsets = Vec::with_capacity(workflow.state_counts.len());
+    let mut state_offset = 0_u32;
+    for &count in &workflow.state_counts {
+        state_offsets.push(state_offset);
+        state_offset = state_offset.checked_add(count).unwrap();
+    }
+    let (identity, _) = compile_layered_frozen_dag_audited(
+        &workflow.state_counts,
+        &workflow.generators,
+        &[0],
+        |sort, state| state_offsets[sort as usize] + state,
+        |generator, state| workflow.transition(generator, state),
+        &mut std::io::sink(),
+    )
+    .unwrap();
+    let identity_plan = FrozenParetoPlan::new(&identity).unwrap();
+    let identity_entry = identity.entry_class(0, 0).unwrap();
+    let mut identity_outputs = Vec::with_capacity(state_offset as usize);
+    for (sort, &count) in workflow.state_counts.iter().enumerate() {
+        for state in 0..count {
+            identity_outputs.push(if workflow.observation(sort as u32, state) == 1 {
+                singleton_front(&resources, [0, 0], 0)
+            } else {
+                empty_front(&resources)
+            });
+        }
+    }
     let mut raw = None;
     let raw_start = Instant::now();
     for _ in 0..repetitions {
@@ -517,24 +613,43 @@ fn run(
     let quotient_start = Instant::now();
     for _ in 0..repetitions {
         quotient = Some(std::hint::black_box(quotient_entry_pareto_dp(
-            &workflow,
             &plan,
             &resources,
-            &DEFAULT_WEIGHTS,
+            &quotient_outputs,
+            &generator_edges,
             entry_class,
         )));
     }
     let quotient_ns = quotient_start.elapsed().as_nanos() / repetitions;
     let (quotient_entry, quotient_metrics) = quotient.unwrap();
-    let mut factorized = None;
-    let factorized_start = Instant::now();
+    let mut identity_result = None;
+    let identity_start = Instant::now();
     for _ in 0..repetitions {
-        factorized = Some(std::hint::black_box(factorized_pareto_dp(
-            &workflow, &resources, 0,
+        identity_result = Some(std::hint::black_box(quotient_entry_pareto_dp(
+            &identity_plan,
+            &resources,
+            &identity_outputs,
+            &generator_edges,
+            identity_entry,
         )));
     }
-    let factorized_ns = factorized_start.elapsed().as_nanos() / repetitions;
-    let factorized = factorized.unwrap();
+    let identity_ns = identity_start.elapsed().as_nanos() / repetitions;
+    let (identity_entry_front, _) = identity_result.unwrap();
+    let (factorized, factorized_ns) = if workflow.monitor_states == 1 {
+        let mut factorized = None;
+        let factorized_start = Instant::now();
+        for _ in 0..repetitions {
+            factorized = Some(std::hint::black_box(factorized_pareto_dp(
+                &workflow, &resources, 0,
+            )));
+        }
+        (
+            factorized,
+            factorized_start.elapsed().as_nanos() / repetitions,
+        )
+    } else {
+        (None, 0)
+    };
     let raw_entry = &raw[0][0];
     assert_eq!(
         raw_entry.resources().collect::<Vec<_>>(),
@@ -542,54 +657,89 @@ fn run(
     );
     assert_eq!(
         raw_entry.resources().collect::<Vec<_>>(),
-        factorized.resources().collect::<Vec<_>>()
+        identity_entry_front.resources().collect::<Vec<_>>()
     );
+    if let Some(factorized) = &factorized {
+        assert_eq!(
+            raw_entry.resources().collect::<Vec<_>>(),
+            factorized.resources().collect::<Vec<_>>()
+        );
+    }
     for &entry in quotient_entry.entries() {
         verify_witness(&workflow, &resources, 0, entry, &DEFAULT_WEIGHTS);
     }
-    for &entry in factorized.entries() {
-        verify_witness(&workflow, &resources, 0, entry, &DEFAULT_WEIGHTS);
+    if let Some(factorized) = &factorized {
+        for &entry in factorized.entries() {
+            verify_witness(&workflow, &resources, 0, entry, &DEFAULT_WEIGHTS);
+        }
     }
-    (
-        workflow
+    RunResult {
+        raw_states: workflow
             .state_counts
             .iter()
             .map(|&count| count as usize)
             .sum(),
-        frozen.storage().classes,
-        quotient_entry.entries().len(),
-        quotient_metrics.peak_live_classes,
-        quotient_metrics.peak_live_entries,
+        classes: frozen.storage().classes,
+        identity_classes: identity.storage().classes,
+        front: quotient_entry.entries().len(),
+        reachable_classes: quotient_metrics.reachable_classes,
+        peak_live_classes: quotient_metrics.peak_live_classes,
+        peak_live_entries: quotient_metrics.peak_live_entries,
         compile_ns,
-        raw_ns,
+        legacy_raw_ns: raw_ns,
+        identity_ns,
         quotient_ns,
         factorized_ns,
         audit_bytes,
-    )
+    }
 }
 
 fn main() {
-    let audit_path = "/home/tavis/.cache/ergodis/fork-join-cost-regular.audit";
+    let coupled = std::env::var_os("ERGODIS_COUPLED").is_some();
+    let audit_path = if coupled {
+        "/home/tavis/.cache/ergodis/coupled-fork-join-cost-regular.audit"
+    } else {
+        "/home/tavis/.cache/ergodis/fork-join-cost-regular.audit"
+    };
     let repetitions = std::env::var("ERGODIS_BENCH_REPETITIONS")
         .ok()
         .and_then(|value| value.parse::<u128>().ok())
         .unwrap_or(1000);
-    let (
+    let RunResult {
         raw_states,
         classes,
+        identity_classes,
         front,
+        reachable_classes,
         peak_live_classes,
         peak_live_entries,
         compile_ns,
-        raw_ns,
+        legacy_raw_ns,
+        identity_ns,
         quotient_ns,
         factorized_ns,
         audit_bytes,
-    ) = run(5, 12, Some(audit_path), repetitions);
+    } = run(
+        5,
+        12,
+        if coupled { 9 } else { 1 },
+        Some(audit_path),
+        repetitions,
+    );
+    let label = if coupled {
+        "coupled-fork-join-cost-regular"
+    } else {
+        "shuffle-product-cost-regular"
+    };
+    let quotient_factorized_ratio = if factorized_ns == 0 {
+        0.0
+    } else {
+        quotient_ns as f64 / factorized_ns as f64
+    };
     println!(
-        "fork-join-cost-regular\trepetitions={repetitions}\traw_states={raw_states}\tclasses={classes}\tfront={front}\tpeak_live_classes={peak_live_classes}\tpeak_live_entries={peak_live_entries}\tcompile_ns={compile_ns}\traw_pareto_ns={raw_ns}\tquotient_pareto_ns={quotient_ns}\tfactorized_pareto_ns={factorized_ns}\traw_quotient_ratio={:.3}\tquotient_factorized_ratio={:.3}\taudit_bytes={}",
-        raw_ns as f64 / quotient_ns as f64,
-        quotient_ns as f64 / factorized_ns as f64,
+        "{label}\trepetitions={repetitions}\traw_states={raw_states}\tclasses={classes}\tidentity_classes={identity_classes}\tfront={front}\treachable_classes={reachable_classes}\tpeak_live_classes={peak_live_classes}\tpeak_live_entries={peak_live_entries}\tcompile_ns={compile_ns}\tlegacy_raw_pareto_ns={legacy_raw_ns}\tidentity_pareto_ns={identity_ns}\tquotient_pareto_ns={quotient_ns}\tfactorized_pareto_ns={factorized_ns}\tidentity_quotient_ratio={:.3}\tquotient_factorized_ratio={:.3}\taudit_bytes={}",
+        identity_ns as f64 / quotient_ns as f64,
+        quotient_factorized_ratio,
         audit_bytes
     );
 }
@@ -602,11 +752,11 @@ mod tests {
     fn quotient_pareto_matches_raw_and_lifts_words() {
         // Since gcd(2^3, 6) = 2, the bounded continuation has a
         // non-trivial kernel without erasing every initial distinction.
-        let (raw_states, classes, front, _, _, _, _, _, _, _) = run(3, 6, None, 1);
-        assert!(classes < raw_states);
-        assert!(front != 0);
+        let result = run(3, 6, 1, None, 1);
+        assert!(result.classes < result.raw_states);
+        assert!(result.front != 0);
 
-        let workflow = Workflow::new(3, 6);
+        let workflow = Workflow::new(3, 6, 1);
         let resources = CappedAdditiveMonoid::new([64, 64]).unwrap();
         let raw = raw_pareto_dp(&workflow, &resources);
 
@@ -672,5 +822,76 @@ mod tests {
             }
         }
         assert!(saw_merge && saw_distinction);
+    }
+
+    #[test]
+    fn shared_mode_monitor_prevents_branch_factorization() {
+        let result = run(3, 5, 9, None, 1);
+        assert!(result.front != 0 && result.peak_live_classes < result.classes);
+        assert_eq!(result.factorized_ns, 0);
+
+        let workflow = Workflow::new(3, 5, 9);
+        let incompatible = [
+            Action {
+                branch: 0,
+                symbol: 0,
+            },
+            Action {
+                branch: 0,
+                symbol: 1,
+            },
+            Action {
+                branch: 0,
+                symbol: 0,
+            },
+            Action {
+                branch: 1,
+                symbol: 1,
+            },
+            Action {
+                branch: 1,
+                symbol: 1,
+            },
+            Action {
+                branch: 1,
+                symbol: 1,
+            },
+        ];
+        let compatible = [
+            incompatible[0],
+            incompatible[1],
+            incompatible[2],
+            Action {
+                branch: 1,
+                symbol: 0,
+            },
+            Action {
+                branch: 1,
+                symbol: 1,
+            },
+            Action {
+                branch: 1,
+                symbol: 0,
+            },
+        ];
+        let terminal_sort = (workflow.coordinates.len() - 1) as u32;
+        let execute = |actions: &[Action]| {
+            actions.iter().fold(0, |state, &action| {
+                workflow.transition_action(action, state)
+            })
+        };
+        assert_eq!(workflow.observation(terminal_sort, execute(&compatible)), 1);
+        assert_eq!(
+            workflow.observation(terminal_sort, execute(&incompatible)),
+            2
+        );
+
+        let resources = CappedAdditiveMonoid::new([64, 64]).unwrap();
+        let coupled = brute_force_entry(&workflow, &resources, 0, &DEFAULT_WEIGHTS);
+        let independent = factorized_pareto_dp(&Workflow::new(3, 5, 1), &resources, 0);
+        assert_ne!(
+            coupled.resources().collect::<Vec<_>>(),
+            independent.resources().collect::<Vec<_>>()
+        );
     }
 }
