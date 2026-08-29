@@ -192,6 +192,7 @@ archive of this rewrite.
 
 ## License
 
-The contents of this repository are licensed under the GNU Affero General
-Public License, version 3.0 (AGPL-3.0); see `LICENSE`. Contact the author for
-commercial licensing.
+The `ergodis/` software is licensed under the GNU Affero General Public
+License, version 3.0 (AGPL-3.0); see `ergodis/LICENSE`. Contact the author for
+commercial licensing of ergodis. Everything else in this repository is licensed
+under the MIT License; see `LICENSE`.

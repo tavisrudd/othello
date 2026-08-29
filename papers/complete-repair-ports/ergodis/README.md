@@ -331,5 +331,6 @@ accepted only after exact output and witness parity.
 
 ## License
 
-ergodis is distributed under the repository's GNU Affero General Public
-License, version 3.0 (AGPL-3.0). Contact the author for commercial licensing.
+ergodis is distributed under the GNU Affero General Public License, version
+3.0 (AGPL-3.0); see `LICENSE` in this directory. Contact the author for
+commercial licensing.
