@@ -105,3 +105,24 @@ replayed nontrivial kernel witness.  Eleven rounds each searched exactly
 and sample standard deviation 0.034734.  Compile took 1.81 seconds.  The next
 performance step is to port the proven YBWC/pulse split to this much smaller
 constraint-driven tree, then persist the wide completion filters.
+
+## Wide parallel checkpoint
+
+The compact backend's anti-repeat-work design now applies to the
+constraint-driven tree: first-true root branches are static, workers own
+pre-sized iterative workspaces, results and mailboxes are cache-line separated,
+and anchors run Young-Brothers-Wait so the younger orbit sees the elder's
+verified bound.  Eleven-round results were:
+
+| threads | median search (s) | speedup vs same-schedule 1t | Welch t | candidate span |
+|---:|---:|---:|---:|---:|
+| 1 | 2.927675 | 1.000x | -- | 53,086,371 |
+| 2 | 1.783145 | 1.642x | 71.12 | 53,086,428 |
+| 4 | 1.176405 | 2.489x | 125.87 | 53,108,590 |
+| 8 | 0.712633 | 4.108x | 130.95 | 53,108,590--53,119,567 |
+
+The fastest sequential path remains 2.564973 seconds, so the end-user 8-thread
+gain against that best baseline is 3.60x.  At eight SMT threads speculative
+work grows by at most 0.063%.  The current split exposes five first-level
+branches per anchor, so only five workers can be busy at once; compiling one
+more disjoint fail-first level is the next load-balance improvement.

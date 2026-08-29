@@ -202,7 +202,9 @@ search remain follow-up work.  Wide search branches fail-first on an odd check
 and uses a disjoint first-true chain over its incident coordinates, rather than
 enumerating every connected boundary extension.  The retained official
 BB `[[288,12,18]]` run closes the exact distance in about 2.6 seconds of warm
-single-core search after a roughly 1.8-second compile.
+single-core search after a roughly 1.8-second compile.  The wide parallel path
+uses the same cache-line-separated bound pulses and anchor-level
+Young-Brothers-Wait; its retained eight-thread median is about 0.71 seconds.
 
 ### Contextual-state library APIs
 

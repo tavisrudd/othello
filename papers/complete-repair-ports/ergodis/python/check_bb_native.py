@@ -41,8 +41,10 @@ def main() -> int:
     candidates = [stats["candidates"] for stats in record["round_stats"]]
     if len(candidates) != len(record["search_seconds"]) or len(candidates) < 3:
         raise RuntimeError("multi-round evidence is incomplete")
-    if len(set(candidates)) != 1 or any(seconds <= 0 for seconds in record["search_seconds"]):
-        raise RuntimeError("round work is nondeterministic or timing is invalid")
+    if any(seconds <= 0 for seconds in record["search_seconds"]):
+        raise RuntimeError("round timing is invalid")
+    if record["threads"] == 1 and len(set(candidates)) != 1:
+        raise RuntimeError("single-threaded round work is nondeterministic")
     output = {
         "schema": "ergodis-bb-native-check-v1",
         "label": problem["label"],
@@ -50,7 +52,7 @@ def main() -> int:
         "physical_syndrome_zero": True,
         "logical_observation": logical,
         "rounds": len(candidates),
-        "candidates_per_round": candidates[0],
+        "candidate_span": [min(candidates), max(candidates)],
     }
     print(json.dumps(output, separators=(",", ":"), sort_keys=True))
     return 0

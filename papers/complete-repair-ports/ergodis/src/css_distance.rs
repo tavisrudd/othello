@@ -773,6 +773,290 @@ impl CompiledWideCssDistance {
         })
     }
 
+    #[cfg(feature = "parallel")]
+    fn search_syndrome_branch_partition(
+        &self,
+        branches: &[WideRootBranch],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+        pulse_interval: u64,
+    ) -> CachePaddedWideBranchResult {
+        let mut workspace = WideBranchWorkspace::new(usize::from(searched_maximum_weight));
+        let worker_index = rayon::current_thread_index().unwrap_or(0) % mailboxes.len();
+        let mailbox = &mailboxes[worker_index];
+        let mut pruning_bound = mailbox.0.load(Ordering::Relaxed);
+        let mut best_weight = searched_maximum_weight.saturating_add(1);
+        let mut best_support = WidePackedSupport::default();
+        let mut stats = ConnectedSearchStats::default();
+        for branch in branches {
+            poll_bound(mailbox, &mut pruning_bound, &mut stats);
+            let root = usize::from(branch.root);
+            let added = usize::from(branch.added);
+            let mut child_support = WidePackedSupport::singleton(root);
+            child_support.insert(added);
+            let mut child_syndrome = self.columns[root].syndrome;
+            child_syndrome.toggle(self.columns[added].syndrome);
+            let child_logical = self.columns[root].logical ^ self.columns[added].logical;
+            stats.candidates += 1;
+            stats.connected_supports += 1;
+            stats.maximum_depth = stats.maximum_depth.max(2);
+            if child_syndrome.is_zero() {
+                stats.kernel_supports += 1;
+                if child_logical != 0 {
+                    stats.nontrivial_supports += 1;
+                    if best_weight > 2 {
+                        best_weight = 2;
+                        best_support = child_support;
+                        pruning_bound = pruning_bound.min(2);
+                        stats.bound_improvements_published +=
+                            u64::from(publish_bound(mailboxes, 2));
+                    }
+                }
+                continue;
+            }
+            let improvement_budget = pruning_bound.saturating_sub(3);
+            let lower_bound = self
+                .syndrome_completion_lower_bound(child_syndrome)
+                .max(self.syndrome_packing_lower_bound(child_syndrome));
+            if searched_maximum_weight <= 2 || lower_bound > improvement_budget {
+                stats.syndrome_bound_prunes += 1;
+                continue;
+            }
+            let child_options =
+                self.syndrome_branch_options(child_syndrome, child_support, branch.forbidden);
+            if child_options.is_empty() {
+                stats.syndrome_bound_prunes += 1;
+                continue;
+            }
+            workspace.supports[1] = child_support;
+            workspace.forbidden[1] = branch.forbidden;
+            workspace.options[1] = child_options;
+            workspace.rejected[1] = WidePackedSupport::default();
+            workspace.syndromes[1] = child_syndrome;
+            workspace.logicals[1] = child_logical;
+            stats.exclusive_extensions += 1;
+            let mut depth = 1usize;
+            loop {
+                let Some(added) = workspace.options[depth].pop_lowest() else {
+                    if depth == 1 {
+                        break;
+                    }
+                    depth -= 1;
+                    continue;
+                };
+                stats.candidates += 1;
+                if pulse_interval != 0 && stats.candidates & (pulse_interval - 1) == 0 {
+                    poll_bound(mailbox, &mut pruning_bound, &mut stats);
+                }
+                let prior_rejected = workspace.rejected[depth];
+                workspace.rejected[depth].insert(added);
+                let child_depth = depth + 1;
+                let child_weight = (child_depth + 1) as u16;
+                let mut child_support = workspace.supports[depth];
+                child_support.insert(added);
+                let mut child_forbidden = workspace.forbidden[depth];
+                child_forbidden.union_assign(prior_rejected);
+                let mut child_syndrome = workspace.syndromes[depth];
+                child_syndrome.toggle(self.columns[added].syndrome);
+                let child_logical = workspace.logicals[depth] ^ self.columns[added].logical;
+                stats.connected_supports += 1;
+                stats.maximum_depth = stats.maximum_depth.max(child_weight);
+                if child_syndrome.is_zero() {
+                    stats.kernel_supports += 1;
+                    if child_logical != 0 {
+                        stats.nontrivial_supports += 1;
+                        if child_weight < best_weight {
+                            best_weight = child_weight;
+                            best_support = child_support;
+                            pruning_bound = pruning_bound.min(child_weight);
+                            stats.bound_improvements_published +=
+                                u64::from(publish_bound(mailboxes, child_weight));
+                        }
+                    }
+                    continue;
+                }
+                let improvement_budget = pruning_bound.saturating_sub(child_weight + 1);
+                let lower_bound = self
+                    .syndrome_completion_lower_bound(child_syndrome)
+                    .max(self.syndrome_packing_lower_bound(child_syndrome));
+                let four_completion_reject =
+                    improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
+                if child_weight >= searched_maximum_weight
+                    || lower_bound > improvement_budget
+                    || (improvement_budget <= 3
+                        && !self.has_short_completion(child_syndrome, improvement_budget))
+                    || four_completion_reject
+                {
+                    stats.syndrome_bound_prunes += 1;
+                    stats.four_completion_prunes += u64::from(four_completion_reject);
+                    continue;
+                }
+                let child_options =
+                    self.syndrome_branch_options(child_syndrome, child_support, child_forbidden);
+                if child_options.is_empty() {
+                    stats.syndrome_bound_prunes += 1;
+                    continue;
+                }
+                workspace.supports[child_depth] = child_support;
+                workspace.forbidden[child_depth] = child_forbidden;
+                workspace.options[child_depth] = child_options;
+                workspace.rejected[child_depth] = WidePackedSupport::default();
+                workspace.syndromes[child_depth] = child_syndrome;
+                workspace.logicals[child_depth] = child_logical;
+                stats.exclusive_extensions += 1;
+                depth = child_depth;
+            }
+        }
+        CachePaddedWideBranchResult {
+            best_weight,
+            best_support,
+            stats,
+        }
+    }
+
+    #[cfg(feature = "parallel")]
+    fn search_syndrome_anchor_parallel(
+        &self,
+        anchor: u16,
+        searched_maximum_weight: u16,
+        initial_bound: u16,
+        pulse_interval: u64,
+    ) -> CachePaddedWideBranchResult {
+        use rayon::prelude::*;
+
+        let root = usize::from(anchor);
+        let root_support = WidePackedSupport::singleton(root);
+        let mut root_options = self.syndrome_branch_options(
+            self.columns[root].syndrome,
+            root_support,
+            WidePackedSupport::default(),
+        );
+        let mut rejected = WidePackedSupport::default();
+        let mut branches = Vec::with_capacity(root_options.count() as usize);
+        while let Some(added) = root_options.pop_lowest() {
+            branches.push(WideRootBranch {
+                root: anchor,
+                added: added as u16,
+                forbidden: rejected,
+            });
+            rejected.insert(added);
+        }
+        if branches.is_empty() {
+            return CachePaddedWideBranchResult {
+                best_weight: searched_maximum_weight.saturating_add(1),
+                best_support: WidePackedSupport::default(),
+                stats: ConnectedSearchStats::default(),
+            };
+        }
+        let partition_count = rayon::current_num_threads().min(branches.len());
+        let partition_capacity = branches.len().div_ceil(partition_count);
+        let mut partitions = (0..partition_count)
+            .map(|_| Vec::with_capacity(partition_capacity))
+            .collect::<Vec<_>>();
+        for (index, branch) in branches.into_iter().enumerate() {
+            partitions[index % partition_count].push(branch);
+        }
+        let mailboxes = (0..rayon::current_num_threads())
+            .map(|_| BoundMailbox(AtomicU16::new(initial_bound)))
+            .collect::<Vec<_>>();
+        let partials = partitions
+            .par_iter()
+            .map(|partition| {
+                self.search_syndrome_branch_partition(
+                    partition,
+                    searched_maximum_weight,
+                    &mailboxes,
+                    pulse_interval,
+                )
+            })
+            .collect::<Vec<_>>();
+        let mut combined = CachePaddedWideBranchResult {
+            best_weight: searched_maximum_weight.saturating_add(1),
+            best_support: WidePackedSupport::default(),
+            stats: ConnectedSearchStats::default(),
+        };
+        for partial in partials {
+            merge_search_stats(&mut combined.stats, partial.stats);
+            if partial.best_weight < combined.best_weight {
+                combined.best_weight = partial.best_weight;
+                combined.best_support = partial.best_support;
+            }
+        }
+        combined
+    }
+
+    #[cfg(feature = "parallel")]
+    pub fn search_bounded_syndrome_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        if pulse_interval != 0 && !pulse_interval.is_power_of_two() {
+            return Err(CssDistanceError::InvalidPulseInterval);
+        }
+        if maximum_weight == 0 || usize::from(maximum_weight) > self.coordinate_count() {
+            return Err(CssDistanceError::InvalidMaximumWeight);
+        }
+        for &anchor in anchors {
+            if usize::from(anchor) >= self.coordinate_count() {
+                return Err(CssDistanceError::AnchorOutOfRange { anchor });
+            }
+        }
+        let searched_maximum_weight = if self.kernel_weights_even && maximum_weight & 1 == 1 {
+            maximum_weight - 1
+        } else {
+            maximum_weight
+        };
+        let mut best_weight = searched_maximum_weight.saturating_add(1);
+        let mut best_support = WidePackedSupport::default();
+        let mut stats = ConnectedSearchStats::default();
+        for &anchor in anchors {
+            let root = usize::from(anchor);
+            let syndrome = self.columns[root].syndrome;
+            let logical = self.columns[root].logical;
+            stats.connected_supports += 1;
+            stats.maximum_depth = stats.maximum_depth.max(1);
+            if syndrome.is_zero() {
+                stats.kernel_supports += 1;
+                if logical != 0 {
+                    stats.nontrivial_supports += 1;
+                    best_weight = 1;
+                    best_support = WidePackedSupport::singleton(root);
+                }
+                continue;
+            }
+            let partial = self.search_syndrome_anchor_parallel(
+                anchor,
+                searched_maximum_weight,
+                best_weight,
+                pulse_interval,
+            );
+            merge_search_stats(&mut stats, partial.stats);
+            if partial.best_weight < best_weight {
+                best_weight = partial.best_weight;
+                best_support = partial.best_support;
+            }
+        }
+        let witness = if best_weight <= searched_maximum_weight {
+            let mut witness = Vec::with_capacity(best_weight as usize);
+            for coordinate in 0..self.coordinate_count() {
+                if best_support.contains(coordinate) {
+                    witness.push(coordinate as u16);
+                }
+            }
+            witness.into_boxed_slice()
+        } else {
+            Box::default()
+        };
+        Ok(BoundedCssDistanceResult {
+            distance: (best_weight <= searched_maximum_weight).then_some(best_weight),
+            witness,
+            searched_maximum_weight,
+            stats,
+        })
+    }
+
     #[inline]
     fn has_short_completion(&self, syndrome: PackedSyndrome<3>, additions: u16) -> bool {
         if syndrome.is_zero() {
@@ -1159,6 +1443,49 @@ struct BranchWorkspace {
     candidates: Vec<PackedSupport>,
     syndromes: Vec<PackedSyndrome>,
     logicals: Vec<u64>,
+}
+
+#[cfg(feature = "parallel")]
+#[derive(Clone, Copy)]
+struct WideRootBranch {
+    root: u16,
+    added: u16,
+    forbidden: WidePackedSupport,
+}
+
+#[cfg(feature = "parallel")]
+#[repr(C, align(128))]
+struct CachePaddedWideBranchResult {
+    best_weight: u16,
+    best_support: WidePackedSupport,
+    stats: ConnectedSearchStats,
+}
+
+#[cfg(feature = "parallel")]
+const _: () = assert!(std::mem::align_of::<CachePaddedWideBranchResult>() == 128);
+
+#[cfg(feature = "parallel")]
+struct WideBranchWorkspace {
+    supports: Vec<WidePackedSupport>,
+    forbidden: Vec<WidePackedSupport>,
+    options: Vec<WidePackedSupport>,
+    rejected: Vec<WidePackedSupport>,
+    syndromes: Vec<PackedSyndrome<3>>,
+    logicals: Vec<u64>,
+}
+
+#[cfg(feature = "parallel")]
+impl WideBranchWorkspace {
+    fn new(frame_count: usize) -> Self {
+        Self {
+            supports: vec![WidePackedSupport::default(); frame_count],
+            forbidden: vec![WidePackedSupport::default(); frame_count],
+            options: vec![WidePackedSupport::default(); frame_count],
+            rejected: vec![WidePackedSupport::default(); frame_count],
+            syndromes: vec![PackedSyndrome::<3>::default(); frame_count],
+            logicals: vec![0; frame_count],
+        }
+    }
 }
 
 #[cfg(feature = "parallel")]
@@ -2367,6 +2694,18 @@ mod tests {
         let driven = wide.search_bounded_syndrome_driven(&anchors, 5).unwrap();
         assert_eq!(driven.distance, Some(1));
         assert_eq!(&*driven.witness, &[4]);
+        #[cfg(feature = "parallel")]
+        {
+            let pool = rayon::ThreadPoolBuilder::new()
+                .num_threads(3)
+                .build()
+                .unwrap();
+            let parallel = pool
+                .install(|| wide.search_bounded_syndrome_parallel_pulsed(&anchors, 5, 1))
+                .unwrap();
+            assert_eq!(parallel.distance, driven.distance);
+            assert_eq!(parallel.witness, driven.witness);
+        }
     }
 
     #[cfg(feature = "parallel")]

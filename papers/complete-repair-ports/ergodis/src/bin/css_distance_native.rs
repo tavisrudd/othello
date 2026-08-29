@@ -177,9 +177,6 @@ fn main() -> Result<()> {
     if args.threads == 0 {
         bail!("thread count must be positive");
     }
-    if wide_problem && args.threads != 1 {
-        bail!("the wide CSS backend is currently single-threaded");
-    }
     #[cfg(not(feature = "parallel"))]
     if args.threads != 1 {
         bail!("thread counts above one require the `parallel` feature");
@@ -216,9 +213,13 @@ fn main() -> Result<()> {
                     )
                 }
             })?,
-            Backend::Wide(compiled) => {
-                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
-            }
+            Backend::Wide(compiled) => thread_pool.install(|| {
+                compiled.search_bounded_syndrome_parallel_pulsed(
+                    &problem.anchors,
+                    maximum_weight,
+                    args.pulse_interval,
+                )
+            })?,
         };
         #[cfg(not(feature = "parallel"))]
         let round_result = match &compiled {
