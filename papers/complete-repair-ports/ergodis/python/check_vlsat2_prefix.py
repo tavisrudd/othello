@@ -142,10 +142,13 @@ def main() -> None:
     manifest = json.loads(args.manifest.read_text())
     if document["schema"] != "ergodis-vlsat2-prefix-ab-v1":
         raise SystemExit("unexpected evidence schema")
-    if document["method"]["canonical_host"] and not document["host"][
-        "stable_frequency_policy"
-    ]:
-        raise SystemExit("canonical evidence records an unstable frequency policy")
+    host = document["host"]
+    if host.get("canonical_host_ready") != (
+        host.get("stable_frequency_policy") and host.get("physical_core_isolated")
+    ):
+        raise SystemExit("inconsistent canonical-host metadata")
+    if document["method"]["canonical_host"] and not host["canonical_host_ready"]:
+        raise SystemExit("canonical evidence records an uncontrolled host")
     artifacts = document["artifacts"]
     expected_hashes = {
         "manifest_sha256": sha256(args.manifest),
@@ -196,6 +199,11 @@ def main() -> None:
         ergodis_ns = [int(record["elapsed_ns"]) for record in ergodis]
         if summary["ergodis_distribution"] != distribution(ergodis_ns):
             raise SystemExit(f"Ergodis distribution mismatch: {filename}")
+        ergodis_rss = [int(record["peak_rss_kb"] or 0) for record in ergodis]
+        if summary["ergodis_rss_distribution"] != distribution(ergodis_rss):
+            raise SystemExit(f"Ergodis RSS distribution mismatch: {filename}")
+        if summary["ergodis_peak_rss_kb"] != max(ergodis_rss):
+            raise SystemExit(f"Ergodis peak RSS mismatch: {filename}")
         if entry["expected"] == "unsat":
             if any(record["status"] != "completed" or record["exit_code"] != 0 for record in ergodis):
                 raise SystemExit(f"failed certificate process: {filename}")
@@ -228,6 +236,12 @@ def main() -> None:
             raise SystemExit(f"false certificate: {filename}")
 
         completed = [record for record in kissat if record["status"] == "completed"]
+        if completed:
+            kissat_rss = [int(record["peak_rss_kb"] or 0) for record in completed]
+            if summary["kissat_rss_distribution"] != distribution(kissat_rss):
+                raise SystemExit(f"Kissat RSS distribution mismatch: {filename}")
+            if summary["kissat_peak_rss_kb"] != max(kissat_rss):
+                raise SystemExit(f"Kissat peak RSS mismatch: {filename}")
         if summary["kissat_status"] == "timeout":
             if not any(record["status"] == "timeout" for record in kissat):
                 raise SystemExit(f"missing timeout: {filename}")

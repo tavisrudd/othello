@@ -28,23 +28,27 @@ the older asymmetric warm-loop comparison:
 - the CNF page cache is warmed by the same SHA-256 pass before either command;
 - commands are pinned to one recorded logical CPU and their order rotates;
 - completed baselines receive seven paired rounds; the short certificate path
-  receives fifteen fresh-process rounds;
+  receives fifteen fresh-process rounds, but only matching within-round pairs
+  enter a speedup or t-score;
 - a first Kissat timeout is retained as censored evidence and stops further
   baseline rounds; censored cases produce only lower bounds and never enter a
   t-score;
 - raw records stream directly to JSONL and include wall time, process CPU time,
   context switches, sampled CPU frequency, and peak RSS;
 - summaries report min, Q1, median, Q3, max, normalized time per clause, paired
-  geometric-mean ratios, and paired log t-scores;
-- the report records CPU topology, SMT sibling, governor, boost state, load,
-  Rust toolchain and flags, Kissat compiler/build strings, revisions, and hashes;
+  geometric-mean ratios, paired log t-scores, and RSS distributions;
+- the report records CPU topology, online and isolated SMT siblings, governor,
+  boost state, scaling driver and preference, load, Rust toolchain and flags,
+  Kissat compiler/build strings, revisions, and hashes;
 - a separate checker recomputes every statistic and independently verifies
   every clique against the original CNF.
 
 Canonical evidence refuses to run unless the pinned CPU uses the `performance`
-governor and boost/turbo is disabled.  On 2026-08-28 the host had `powersave`
-and boost enabled, so all sizing measurements from that state are diagnostic
-and are intentionally not checked in as benchmark evidence.
+governor, boost/turbo is disabled, and every online SMT sibling of its physical
+core is in the kernel's isolated-CPU set.  On 2026-08-28 the host had
+`powersave`, boost enabled, and no isolated CPUs, so all sizing measurements
+from that state are diagnostic and are intentionally not checked in as
+benchmark evidence.
 
 Replay after configuring a stable host with:
 
@@ -53,6 +57,11 @@ ERGODIS_BENCH_CPU=3 scripts/vlsat2-prefix-ab.sh
 ```
 
 Set `ERGODIS_DIAGNOSTIC_HOST=1` only for uncommitted sizing runs.
+The replay script defaults to explicit generic `x86-64` Rust code generation,
+matching the recorded generic `-O3 -DNDEBUG` Kissat build rather than silently
+giving either side a host-native ISA advantage.  `ERGODIS_RUSTFLAGS` may override
+this only as a separately labelled configuration; the exact effective flags and
+both executable hashes are retained.
 
 ## Next strata
 
@@ -70,3 +79,12 @@ Set `ERGODIS_DIAGNOSTIC_HOST=1` only for uncommitted sizing runs.
 The target metric is not a cherry-picked maximum speedup.  It is theorem-hit
 coverage, clean-miss overhead, end-to-end time and memory by family, with generic
 fallback parity on the controls.
+
+The full-suite coverage path is deliberately separate from performance evidence:
+it records logical hits, misses, errors, and timeouts, while marking all elapsed
+fields diagnostic.  It streams one record per instance and independently replays
+each certificate without retaining the CNF or clause set in memory:
+
+```sh
+ERGODIS_BENCH_CPU=3 scripts/vlsat2-full-coverage.sh
+```

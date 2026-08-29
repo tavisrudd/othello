@@ -38,9 +38,10 @@ def main() -> None:
         raise SystemExit("require ergodis rounds >= Kissat rounds >= 3")
 
     host = host_metadata(args.cpu)
-    if not host["stable_frequency_policy"] and not args.diagnostic_host:
+    if not host["canonical_host_ready"] and not args.diagnostic_host:
         raise SystemExit(
-            "refusing canonical evidence: require performance governor with boost disabled "
+            "refusing canonical evidence: require performance governor, boost disabled, "
+            "and every online SMT sibling of the pinned CPU isolated "
             "(or pass --diagnostic-host for uncommitted sizing only)"
         )
     manifest = json.loads(args.manifest.read_text())
@@ -114,6 +115,9 @@ def main() -> None:
                 "ergodis_peak_rss_kb": max(
                     int(sample["peak_rss_kb"] or 0) for sample in certificate_samples
                 ),
+                "ergodis_rss_distribution": distribution(
+                    [int(sample["peak_rss_kb"] or 0) for sample in certificate_samples]
+                ),
                 "certificate": certificate_json[0] if certificate_json else None,
                 "kissat_status": (
                     "completed"
@@ -136,6 +140,9 @@ def main() -> None:
                 )
                 summary["kissat_peak_rss_kb"] = max(
                     int(sample["peak_rss_kb"] or 0) for sample in completed_kissat
+                )
+                summary["kissat_rss_distribution"] = distribution(
+                    [int(sample["peak_rss_kb"] or 0) for sample in completed_kissat]
                 )
             if entry["expected"] == "unsat":
                 if summary["kissat_status"] == "timeout":
@@ -174,9 +181,12 @@ def main() -> None:
         "method": {
             "ergodis_rounds": args.ergodis_rounds,
             "kissat_rounds": args.kissat_rounds,
+            "paired_rounds": args.kissat_rounds,
+            "extra_ergodis_rounds": args.ergodis_rounds - args.kissat_rounds,
             "timeout_s": args.timeout,
             "timeout_policy": "stop Kissat after its first timeout; continue certificate rounds",
             "order": "rotated interleave while both commands remain active",
+            "speedup_estimator": "geometric mean of paired within-round external wall-clock ratios; extra Ergodis rounds affect only its marginal distribution",
             "raw_samples": str(args.raw_jsonl),
             "timing_boundary": "fresh solver process; CNF page cache warmed by hash pass; process launch included",
             "canonical_host": not args.diagnostic_host,

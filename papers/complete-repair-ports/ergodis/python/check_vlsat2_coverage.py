@@ -33,6 +33,9 @@ def main() -> None:
         "clique_replay_sha256": sha256(
             Path(__file__).with_name("check_vlsat2_prefix.py")
         ),
+        "process_runner_sha256": sha256(
+            Path(__file__).with_name("run_satcomp24_portfolio.py")
+        ),
         "ergodis_sha256": sha256(args.ergodis),
     }
     for key, expected in expected_hashes.items():

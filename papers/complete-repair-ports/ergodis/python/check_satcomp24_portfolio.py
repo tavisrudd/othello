@@ -69,10 +69,13 @@ def main() -> None:
     document = json.loads(args.evidence.read_text())
     if document["schema"] != "ergodis-satcomp24-portfolio-ab-v1":
         raise SystemExit("unexpected evidence schema")
-    if document["method"]["canonical_host"] and not document["host"][
-        "stable_frequency_policy"
-    ]:
-        raise SystemExit("canonical evidence records an unstable frequency policy")
+    host = document["host"]
+    if host.get("canonical_host_ready") != (
+        host.get("stable_frequency_policy") and host.get("physical_core_isolated")
+    ):
+        raise SystemExit("inconsistent canonical-host metadata")
+    if document["method"]["canonical_host"] and not host["canonical_host_ready"]:
+        raise SystemExit("canonical evidence records an uncontrolled host")
     artifacts = document["artifacts"]
     expected_hashes = {
         "manifest_sha256": sha256(args.manifest),
@@ -135,6 +138,18 @@ def main() -> None:
             raise SystemExit(f"distribution mismatch for {filename}: Kissat")
         if summary["ergodis_distribution"] != distribution(portfolio):
             raise SystemExit(f"distribution mismatch for {filename}: Ergodis")
+        direct_rss = [int(case["kissat"][index]["peak_rss_kb"] or 0) for index in range(rounds)]
+        portfolio_rss = [
+            int(case["ergodis"][index]["peak_rss_kb"] or 0) for index in range(rounds)
+        ]
+        if summary["kissat_rss_distribution"] != distribution(direct_rss):
+            raise SystemExit(f"RSS distribution mismatch for {filename}: Kissat")
+        if summary["ergodis_rss_distribution"] != distribution(portfolio_rss):
+            raise SystemExit(f"RSS distribution mismatch for {filename}: Ergodis")
+        if summary["kissat_peak_rss_kb"] != max(direct_rss):
+            raise SystemExit(f"peak RSS mismatch for {filename}: Kissat")
+        if summary["ergodis_peak_rss_kb"] != max(portfolio_rss):
+            raise SystemExit(f"peak RSS mismatch for {filename}: Ergodis")
     if records:
         raise SystemExit("raw evidence has instances absent from summary")
     if document["paired_instances"] != len(suite_logs):

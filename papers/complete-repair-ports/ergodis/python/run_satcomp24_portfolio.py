@@ -49,6 +49,18 @@ def read_optional(path: Path) -> str | None:
         return None
 
 
+def parse_cpu_list(value: str | None) -> set[int]:
+    cpus: set[int] = set()
+    if not value:
+        return cpus
+    for field in value.split(","):
+        bounds = field.split("-", 1)
+        start = int(bounds[0])
+        stop = int(bounds[-1])
+        cpus.update(range(start, stop + 1))
+    return cpus
+
+
 def cpu_frequency_khz(cpu: int | None) -> int | None:
     if cpu is None:
         return None
@@ -74,16 +86,34 @@ def host_metadata(cpu: int) -> dict[str, object]:
     lscpu = subprocess.run(
         ["lscpu", "-J"], check=True, text=True, stdout=subprocess.PIPE
     ).stdout
+    thread_siblings = read_optional(cpu_root / "topology/thread_siblings_list")
+    isolated_cpus = read_optional(Path("/sys/devices/system/cpu/isolated"))
+    online_cpus = read_optional(Path("/sys/devices/system/cpu/online"))
+    active_siblings = parse_cpu_list(thread_siblings) & parse_cpu_list(online_cpus)
+    physical_core_isolated = bool(active_siblings) and active_siblings <= parse_cpu_list(
+        isolated_cpus
+    )
     stable = governor == "performance" and (boost == "0" or no_turbo == "1")
+    canonical_ready = stable and physical_core_isolated
     return {
         "platform": platform.platform(),
         "cpu": cpu,
         "cpu_model": model,
-        "thread_siblings": read_optional(cpu_root / "topology/thread_siblings_list"),
+        "thread_siblings": thread_siblings,
+        "active_thread_siblings": sorted(active_siblings),
+        "online_cpus": online_cpus,
+        "isolated_cpus": isolated_cpus,
+        "nohz_full_cpus": read_optional(Path("/sys/devices/system/cpu/nohz_full")),
         "governor": governor,
+        "scaling_driver": read_optional(cpu_root / "cpufreq/scaling_driver"),
+        "energy_performance_preference": read_optional(
+            cpu_root / "cpufreq/energy_performance_preference"
+        ),
         "boost": boost,
         "intel_no_turbo": no_turbo,
         "stable_frequency_policy": stable,
+        "physical_core_isolated": physical_core_isolated,
+        "canonical_host_ready": canonical_ready,
         "loadavg_before": Path("/proc/loadavg").read_text().strip(),
         "rustc_vv": rustc,
         "rustflags": os.environ.get("RUSTFLAGS", ""),
@@ -199,9 +229,10 @@ def main() -> None:
         raise SystemExit("need at least three rounds and a positive timeout")
 
     host = host_metadata(args.cpu)
-    if not host["stable_frequency_policy"] and not args.diagnostic_host:
+    if not host["canonical_host_ready"] and not args.diagnostic_host:
         raise SystemExit(
-            "refusing canonical evidence: require performance governor with boost disabled "
+            "refusing canonical evidence: require performance governor, boost disabled, "
+            "and every online SMT sibling of the pinned CPU isolated "
             "(or pass --diagnostic-host for uncommitted sizing only)"
         )
     manifest = json.loads(args.manifest.read_text())
@@ -286,6 +317,12 @@ def main() -> None:
                             "ergodis_peak_rss_kb": max(
                                 int(sample["peak_rss_kb"] or 0) for sample in samples["ergodis"]
                             ),
+                            "kissat_rss_distribution": distribution(
+                                [int(sample["peak_rss_kb"] or 0) for sample in samples["kissat"]]
+                            ),
+                            "ergodis_rss_distribution": distribution(
+                                [int(sample["peak_rss_kb"] or 0) for sample in samples["ergodis"]]
+                            ),
                         }
                     )
                 summaries.append(summary)
@@ -306,6 +343,8 @@ def main() -> None:
             "rounds": args.rounds,
             "timeout_s": args.timeout,
             "order": "rotated interleave per instance",
+            "speedup_estimator": "geometric mean of paired within-round external wall-clock ratios",
+            "suite_estimator": "geometric mean of per-instance median paired log ratios",
             "raw_samples": str(args.raw_jsonl),
             "input": "identical uncompressed CNF for both commands",
             "timing_boundary": "cold solver process; warm file page cache; process launch included",

@@ -10,6 +10,7 @@ manifest="$root/evidence/c985-vlsat2-prefix-manifest.json"
 raw="$root/evidence/c985-vlsat2-prefix.raw.jsonl"
 output="$root/evidence/c985-vlsat2-prefix-ab.json"
 diagnostic=()
+export RUSTFLAGS=${ERGODIS_RUSTFLAGS:-${RUSTFLAGS:--C target-cpu=x86-64}}
 if [[ ${ERGODIS_DIAGNOSTIC_HOST:-0} == 1 ]]; then
   diagnostic=(--diagnostic-host)
 fi
