@@ -354,7 +354,7 @@ Sequel research:
   657.88x with log-ratio `t=49.09`.  The README, benchmark guide, figures, and
   37-page manuscript use only the corrected evidence; the release gate passes.
   Its subsequent
-  [Gurobi product-boundary memo](../2026-08-29-ergodis-gurobi-boundary-and-semantic-symmetry-spike.md)
+  [Gurobi product-boundary memo](../2026-08-29-c985-ergodis-gurobi-boundary-and-semantic-symmetry-spike.md)
   positions Ergodis as a theorem-aware semantic compiler and certifier in front
   of Gurobi, SCIP, Kissat, or its native backend, rather than as a generic MIP
   competitor.  The first C997-derived Rust spike compiles and independently

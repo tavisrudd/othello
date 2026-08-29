@@ -1,4 +1,4 @@
-# Ergodis and Gurobi: product boundary and semantic-symmetry spike
+# C985 Ergodis and Gurobi: product boundary and semantic-symmetry spike
 
 **Date:** 2026-08-29
 

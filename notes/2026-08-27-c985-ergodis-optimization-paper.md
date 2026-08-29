@@ -9,7 +9,7 @@
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
 The product boundary is now explicit in
-[`2026-08-29-ergodis-gurobi-boundary-and-semantic-symmetry-spike.md`](2026-08-29-ergodis-gurobi-boundary-and-semantic-symmetry-spike.md).
+[`2026-08-29-c985-ergodis-gurobi-boundary-and-semantic-symmetry-spike.md`](2026-08-29-c985-ergodis-gurobi-boundary-and-semantic-symmetry-spike.md).
 Ergodis does not attempt to reproduce a generic mixed-integer optimizer.  It
 compiles source-level algebra and contextual structure into a smaller certified
 model, delegates generic search to Gurobi, SCIP, Kissat, or the native exact
