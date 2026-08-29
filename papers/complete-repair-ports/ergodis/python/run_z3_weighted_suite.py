@@ -168,7 +168,13 @@ def main() -> None:
                 "ergodis_rounds": ergodis_rounds,
                 "z3_rounds": z3_rounds,
             }
-            if terminal_status == "optimal" and len(z3_rounds) == args.rounds:
+            if (
+                terminal_status == "optimal"
+                and len(z3_rounds) == args.rounds
+                and int(ergodis_rounds[0]["optimum"]) == 0
+            ):
+                record["timing_excluded"] = "initial state already exposes the accepting output"
+            elif terminal_status == "optimal" and len(z3_rounds) == args.rounds:
                 ergodis_total = [
                     int(item["compile_ns"]) + int(item["plan_ns"]) + int(item["query_ns"])
                     for item in ergodis_rounds

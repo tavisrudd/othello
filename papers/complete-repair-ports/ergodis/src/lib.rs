@@ -25,6 +25,7 @@ pub mod ordered_resource;
 pub mod packed_ternary;
 pub mod projective;
 pub mod provenance;
+pub mod sat;
 pub mod scheduler;
 pub mod selector;
 pub mod span;
