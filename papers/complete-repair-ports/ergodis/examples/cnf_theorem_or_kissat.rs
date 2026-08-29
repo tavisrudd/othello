@@ -26,7 +26,10 @@ fn main() -> anyhow::Result<ExitCode> {
             println!("s UNSATISFIABLE");
             Ok(ExitCode::from(20))
         }
-        Ok(None) | Err(StructuredSatError::Encoding | StructuredSatError::Width) => {
+        Ok(None)
+        | Err(
+            StructuredSatError::Encoding | StructuredSatError::Width | StructuredSatError::Capacity,
+        ) => {
             eprintln!(
                 "c ergodis theorem_miss_ns={}",
                 theorem_start.elapsed().as_nanos()

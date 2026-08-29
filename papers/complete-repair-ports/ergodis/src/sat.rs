@@ -6,7 +6,6 @@
 //! graphs. More parts than colors yields a replayable clique/pigeonhole UNSAT
 //! certificate without CDCL search.
 
-use rustc_hash::FxHashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::path::Path;
@@ -20,6 +19,8 @@ pub enum StructuredSatError {
     Format,
     #[error("the structured recognizer supports at most 64 vertices and colors")]
     Width,
+    #[error("the structured recognizer's dense edge table would exceed 64 MiB")]
+    Capacity,
     #[error("the CNF is not a direct block-structured coloring encoding")]
     Encoding,
 }
@@ -165,6 +166,7 @@ pub fn certify_coloring_clique_unsat(
 }
 
 fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredSatError> {
+    const MAX_EDGE_TABLE_BYTES: usize = 64 << 20;
     let mut maximum_positive_clause = 0_usize;
     let (variables, clauses) = scan_dimacs(path, |clause| {
         if clause.iter().all(|&literal| literal > 0) {
@@ -185,9 +187,10 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
     let vertices = variables as usize / colors;
     let words = vertices.div_ceil(64);
     let maximum_edges = vertices.saturating_mul(vertices.saturating_sub(1)) / 2;
-    let expected_edge_capacity = (clauses as usize).min(maximum_edges);
-    let mut edge_colors =
-        FxHashMap::<u64, u64>::with_capacity_and_hasher(expected_edge_capacity, Default::default());
+    if maximum_edges.saturating_mul(std::mem::size_of::<u64>()) > MAX_EDGE_TABLE_BYTES {
+        return Err(StructuredSatError::Capacity);
+    }
+    let mut edge_colors = vec![0_u64; maximum_edges];
     let mut domains = vec![0_u64; vertices];
     let mut domain_seen = vec![0_u64; words];
     scan_dimacs(path, |clause| {
@@ -228,8 +231,7 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
         } else {
             (right_vertex, left_vertex)
         };
-        let key = ((low as u64) << 32) | high as u64;
-        let colors_seen = edge_colors.entry(key).or_default();
+        let colors_seen = &mut edge_colors[triangular_pair_index(vertices, low, high)];
         let bit = 1_u64 << left_color;
         if *colors_seen & bit != 0 {
             return Err(StructuredSatError::Encoding);
@@ -250,8 +252,7 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
     let mut adjacency = vec![0_u64; vertices * words];
     for low in 0..vertices {
         for high in low + 1..vertices {
-            let key = ((low as u64) << 32) | high as u64;
-            let seen = edge_colors.get(&key).copied().unwrap_or(0);
+            let seen = edge_colors[triangular_pair_index(vertices, low, high)];
             let shared_domain = domains[low] & domains[high];
             if seen & shared_domain != shared_domain {
                 continue;
@@ -268,6 +269,12 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
         words,
         adjacency: adjacency.into_boxed_slice(),
     })
+}
+
+#[inline(always)]
+fn triangular_pair_index(vertices: usize, low: usize, high: usize) -> usize {
+    debug_assert!(low < high && high < vertices);
+    low * (2 * vertices - low - 1) / 2 + high - low - 1
 }
 
 fn scan_dimacs(
