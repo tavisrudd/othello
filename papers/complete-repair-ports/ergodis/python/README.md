@@ -35,6 +35,12 @@ transfer witnesses, orbit search, and capacitated scheduling.
 - `verify_baseline_encodings.py` checks that the formulation-specific controls
   encode the same bounded application examples.
 - `gf27_defect_cpsat.py` is the conditioned GF(27) comparison model.
+- `run_c997_gurobi.py` replays the three committed C997 Gross-code
+  formulations with single-threaded Gurobi, streams logs/evidence to files,
+  validates the source action and quotient algebra, and exactly replays every
+  returned witness. `check_c997_gurobi.py` checks the retained JSONL evidence
+  and reports same-backend node, work, iteration, and wall-time ratios without
+  requiring Gurobi.
 
 For normal use, installation, commands, JSON examples, and output semantics,
 start with `../README.md`.
