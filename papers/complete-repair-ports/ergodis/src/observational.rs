@@ -2393,6 +2393,140 @@ pub struct CompiledObservation {
     metrics: CompilationMetrics,
 }
 
+/// Query artifact retaining quotient transitions, concrete class witnesses,
+/// and only the explicitly selected concrete entry-state maps.
+#[derive(Clone, Debug)]
+pub struct FrozenObservation {
+    class_ranges: Box<[SortRange]>,
+    entry_ranges: Box<[SortRange]>,
+    entry_classes: Box<[u32]>,
+    class_outputs: Box<[u32]>,
+    class_representatives: Box<[u32]>,
+    generator_records: Box<[GeneratorRecord]>,
+    generator_transitions: Box<[u32]>,
+    metrics: CompilationMetrics,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct FrozenObservationStorage {
+    pub entry_states: usize,
+    pub classes: usize,
+    pub payload_bytes: usize,
+}
+
+impl FrozenObservation {
+    pub fn entry_class(&self, sort: u32, local_state: u32) -> Option<u32> {
+        let range = *self.entry_ranges.get(sort as usize)?;
+        if local_state >= range.len {
+            return None;
+        }
+        self.entry_classes
+            .get((range.start + local_state) as usize)
+            .copied()
+    }
+
+    pub fn output(&self, class: u32) -> Option<u32> {
+        self.class_outputs.get(class as usize).copied()
+    }
+
+    pub fn representative(&self, class: u32) -> Option<u32> {
+        self.class_representatives.get(class as usize).copied()
+    }
+
+    pub fn transition(&self, generator: u32, class: u32) -> Option<u32> {
+        let record = *self.generator_records.get(generator as usize)?;
+        let source = self.class_ranges[record.source_sort as usize];
+        if !source.contains(class) {
+            return None;
+        }
+        self.generator_transitions
+            .get((record.transition_start + class - source.start) as usize)
+            .copied()
+    }
+
+    pub fn metrics(&self) -> CompilationMetrics {
+        self.metrics
+    }
+
+    pub fn storage(&self) -> FrozenObservationStorage {
+        FrozenObservationStorage {
+            entry_states: self.entry_classes.len(),
+            classes: self.class_outputs.len(),
+            payload_bytes: std::mem::size_of_val(&*self.class_ranges)
+                + std::mem::size_of_val(&*self.entry_ranges)
+                + std::mem::size_of_val(&*self.entry_classes)
+                + std::mem::size_of_val(&*self.class_outputs)
+                + std::mem::size_of_val(&*self.class_representatives)
+                + std::mem::size_of_val(&*self.generator_records)
+                + std::mem::size_of_val(&*self.generator_transitions),
+        }
+    }
+}
+
+impl CompiledObservation {
+    /// Consume a verified compiler result and retain concrete-state lookup only
+    /// for the selected entry sorts. Quotient witnesses remain global raw IDs.
+    pub fn into_frozen(
+        self,
+        state_counts: &[u32],
+        entry_sorts: &[u32],
+    ) -> Result<FrozenObservation, ObservationalError> {
+        if state_counts.len() != self.class_ranges.len() {
+            return Err(ObservationalError::CompiledShape);
+        }
+        let mut raw_ranges = Vec::with_capacity(state_counts.len());
+        let mut next = 0_u32;
+        for &len in state_counts {
+            raw_ranges.push(SortRange { start: next, len });
+            next = next.checked_add(len).ok_or(ObservationalError::Overflow)?;
+        }
+        if next as usize != self.state_classes.len() {
+            return Err(ObservationalError::CompiledShape);
+        }
+        let mut selected = vec![false; state_counts.len()];
+        let mut retained = 0_usize;
+        for &sort in entry_sorts {
+            let Some(slot) = selected.get_mut(sort as usize) else {
+                return Err(ObservationalError::CompiledShape);
+            };
+            if *slot {
+                return Err(ObservationalError::CompiledShape);
+            }
+            *slot = true;
+            retained = retained
+                .checked_add(state_counts[sort as usize] as usize)
+                .ok_or(ObservationalError::Overflow)?;
+        }
+        let mut entry_ranges = Vec::with_capacity(state_counts.len());
+        let mut entry_classes = Vec::with_capacity(retained);
+        for (sort, raw_range) in raw_ranges.into_iter().enumerate() {
+            let start =
+                u32::try_from(entry_classes.len()).map_err(|_| ObservationalError::Overflow)?;
+            if selected[sort] {
+                entry_classes.extend_from_slice(
+                    &self.state_classes[raw_range.start as usize..raw_range.end() as usize],
+                );
+                entry_ranges.push(SortRange {
+                    start,
+                    len: raw_range.len,
+                });
+            } else {
+                entry_ranges.push(SortRange { start, len: 0 });
+            }
+        }
+        Ok(FrozenObservation {
+            class_ranges: self.class_ranges,
+            entry_ranges: entry_ranges.into_boxed_slice(),
+            entry_classes: entry_classes.into_boxed_slice(),
+            class_outputs: self.class_outputs,
+            class_representatives: self.class_representatives,
+            generator_records: self.generator_records,
+            generator_transitions: self.generator_transitions,
+            metrics: self.metrics,
+        })
+    }
+}
+
 /// Generator metadata for an acyclic typed presentation supplied by oracles.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct LayeredGeneratorSpec {
@@ -5223,6 +5357,19 @@ mod tests {
             );
         }
         verify_compilation(&presentation, &direct).unwrap();
+        let frozen = direct.into_frozen(&counts, &[0]).unwrap();
+        assert_eq!(frozen.storage().entry_states, counts[0] as usize);
+        assert!(frozen.storage().payload_bytes < generic.storage().quotient_bytes);
+        for state in 0..counts[0] {
+            let class = frozen.entry_class(0, state).unwrap();
+            assert_eq!(class, generic.state_classes()[state as usize]);
+            let target = frozen.transition(0, class).unwrap();
+            assert_eq!(
+                frozen.output(target),
+                Some(generic.class_outputs()[target as usize])
+            );
+            assert!(frozen.representative(target).is_some());
+        }
     }
 
     #[test]

@@ -259,16 +259,7 @@ fn compile_layered_hierarchy(
             })
         })
         .collect::<Vec<_>>();
-    let mut state_counts = Vec::with_capacity(depth + 1);
-    state_counts.push(
-        seed_bound
-            .checked_mul(seed_bound)
-            .expect("hierarchy state count overflow"),
-    );
-    let repeated_count = seed_bound
-        .checked_mul(seed_bound + 1)
-        .expect("hierarchy state count overflow");
-    state_counts.resize(depth + 1, repeated_count);
+    let state_counts = hierarchy_state_counts(depth, seed_bound);
     compile_layered_observational(
         &state_counts,
         &generators,
@@ -281,6 +272,20 @@ fn compile_layered_hierarchy(
         },
         |generator, state| layered_transition_id(seed_bound, generator, state),
     )
+}
+
+fn hierarchy_state_counts(depth: usize, seed_bound: u32) -> Vec<u32> {
+    let mut state_counts = Vec::with_capacity(depth + 1);
+    state_counts.push(
+        seed_bound
+            .checked_mul(seed_bound)
+            .expect("hierarchy state count overflow"),
+    );
+    let repeated_count = seed_bound
+        .checked_mul(seed_bound + 1)
+        .expect("hierarchy state count overflow");
+    state_counts.resize(depth + 1, repeated_count);
+    state_counts
 }
 
 fn words(depth: usize) -> Vec<Box<[u8]>> {
@@ -421,7 +426,12 @@ fn main() {
         Some(value) => panic!("unknown order {value}"),
     };
     let mode = args.next().unwrap_or_else(|| "full".to_owned());
-    assert!(mode == "full" || mode == "raw-build-only" || mode == "layered-build-only");
+    assert!(
+        mode == "full"
+            || mode == "raw-build-only"
+            || mode == "generic-build-only"
+            || mode == "layered-build-only"
+    );
     assert!(depth >= 1 && seed_bound >= 1);
     assert!(args.next().is_none());
 
@@ -429,13 +439,17 @@ fn main() {
         let start = Instant::now();
         let compiled = compile_layered_hierarchy(depth, seed_bound).unwrap();
         let compile_ns = start.elapsed().as_nanos();
+        let states = compiled.metrics().states;
+        let classes = compiled.class_outputs().len();
+        let compiled_bytes = compiled.storage().quotient_bytes;
+        let state_counts = hierarchy_state_counts(depth, seed_bound);
+        let frozen = compiled.into_frozen(&state_counts, &[0]).unwrap();
+        let total_ns = start.elapsed().as_nanos();
         println!(
-            "layered-only\t{depth}\t{seed_bound}\t{}\t{}\t{}\t{compile_ns}",
-            compiled.metrics().states,
-            compiled.class_outputs().len(),
-            compiled.storage().quotient_bytes
+            "layered-only\t{depth}\t{seed_bound}\t{states}\t{classes}\t{compiled_bytes}\t{}\t{compile_ns}\t{total_ns}",
+            frozen.storage().payload_bytes
         );
-        black_box(compiled);
+        black_box(frozen);
         return;
     }
 
@@ -453,6 +467,17 @@ fn main() {
     )
     .unwrap();
     let quotient_build_ns = compile_start.elapsed().as_nanos();
+    if mode == "generic-build-only" {
+        println!(
+            "generic-only\t{depth}\t{seed_bound}\t{}\t{}\t{raw_build_ns}\t{quotient_build_ns}\t{}\t{}",
+            machine.presentation.state_count(),
+            compiled.class_outputs().len(),
+            compiled.storage().quotient_bytes,
+            compiled.storage().certificate_bytes
+        );
+        black_box(compiled);
+        return;
+    }
     let layered_compile_start = Instant::now();
     let layered = compile_layered_hierarchy(depth, seed_bound).unwrap();
     let layered_compile_ns = layered_compile_start.elapsed().as_nanos();
