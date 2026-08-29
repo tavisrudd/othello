@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import bz2
 import json
+import lzma
 import math
 import statistics
 from collections import defaultdict
@@ -69,7 +71,13 @@ def replay_clique(path: Path, certificate: dict[str, object]) -> None:
         if left in clique_set and right in clique_set:
             relevant_conflicts.add((min(left, right), max(left, right), left_color))
 
-    with path.open() as source:
+    if path.suffix == ".xz":
+        source_context = lzma.open(path, "rt")
+    elif path.suffix == ".bz2":
+        source_context = bz2.open(path, "rt")
+    else:
+        source_context = path.open()
+    with source_context as source:
         for line in source:
             stripped = line.lstrip()
             if not stripped or stripped.startswith("c"):

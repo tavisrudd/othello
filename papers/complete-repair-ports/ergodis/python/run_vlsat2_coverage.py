@@ -10,6 +10,8 @@ from pathlib import Path
 
 from run_satcomp24_portfolio import host_metadata, run, sha256
 
+OUTCOMES = ("hit", "miss", "official_label_conflict", "timeout", "error")
+
 
 def main() -> None:
     parser = argparse.ArgumentParser()
@@ -38,9 +40,9 @@ def main() -> None:
                 certificate = json.loads(result["stdout_tail"])
                 if certificate.get("status") != "unsat":
                     raise RuntimeError(f"bad certificate output: {entry['filename']}")
-                if entry["expected"] == "sat":
-                    raise RuntimeError(f"false UNSAT certificate: {entry['filename']}")
-                outcome = "hit"
+                outcome = (
+                    "hit" if entry["expected"] == "unsat" else "official_label_conflict"
+                )
             elif "no coloring-clique obstruction found" in result["stderr_tail"]:
                 certificate = None
                 outcome = "miss"
@@ -64,13 +66,12 @@ def main() -> None:
             )
     summary = {
         expected: {
-            outcome: counts[(expected, outcome)]
-            for outcome in ("hit", "miss", "timeout", "error")
+            outcome: counts[(expected, outcome)] for outcome in OUTCOMES
         }
         for expected in ("sat", "unsat")
     }
     document = {
-        "schema": "ergodis-vlsat2-full-coverage-v1",
+        "schema": "ergodis-vlsat2-full-coverage-v2",
         "scope": "all 100 official VLSAT-2 instances in table order",
         "method": {
             "purpose": "logical theorem coverage only; elapsed fields are diagnostic, not benchmark claims",

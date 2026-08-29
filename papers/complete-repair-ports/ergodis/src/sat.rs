@@ -1,7 +1,7 @@
 //! Exact theorem certificates for structured CNF instances.
 //!
-//! The current recognizer targets direct graph-coloring CNFs with at most 64
-//! vertices and colors. It streams DIMACS clauses through a fixed buffer,
+//! The current recognizer targets direct graph-coloring CNFs with bounded
+//! clause width. It streams DIMACS clauses through a fixed buffer,
 //! reconstructs the incompatibility graph, and recognizes complete multipartite
 //! graphs. More parts than colors yields a replayable clique/pigeonhole UNSAT
 //! certificate without CDCL search.
@@ -17,7 +17,7 @@ pub enum StructuredSatError {
     Io(#[from] std::io::Error),
     #[error("malformed DIMACS CNF")]
     Format,
-    #[error("the structured recognizer supports at most 64 vertices and colors")]
+    #[error("the structured recognizer exceeded a fixed-width limit")]
     Width,
     #[error("the structured recognizer's dense edge table would exceed 64 MiB")]
     Capacity,
@@ -177,7 +177,6 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
         Ok(())
     })?;
     if maximum_positive_clause == 0
-        || maximum_positive_clause > 64
         || variables == 0
         || variables as usize % maximum_positive_clause != 0
     {
@@ -186,12 +185,16 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
     let colors = maximum_positive_clause;
     let vertices = variables as usize / colors;
     let words = vertices.div_ceil(64);
+    let color_words = colors.div_ceil(64);
     let maximum_edges = vertices.saturating_mul(vertices.saturating_sub(1)) / 2;
-    if maximum_edges.saturating_mul(std::mem::size_of::<u64>()) > MAX_EDGE_TABLE_BYTES {
+    let edge_color_words = maximum_edges
+        .checked_mul(color_words)
+        .ok_or(StructuredSatError::Capacity)?;
+    if edge_color_words.saturating_mul(std::mem::size_of::<u64>()) > MAX_EDGE_TABLE_BYTES {
         return Err(StructuredSatError::Capacity);
     }
-    let mut edge_colors = vec![0_u64; maximum_edges];
-    let mut domains = vec![0_u64; vertices];
+    let mut edge_colors = vec![0_u64; edge_color_words];
+    let mut domains = vec![0_u64; vertices.saturating_mul(color_words)];
     let mut domain_seen = vec![0_u64; words];
     scan_dimacs(path, |clause| {
         if clause.iter().all(|&literal| literal > 0) {
@@ -199,19 +202,19 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
             if first >= vertices || domain_seen[first / 64] & (1_u64 << (first % 64)) != 0 {
                 return Err(StructuredSatError::Encoding);
             }
-            let mut domain = 0_u64;
             for &literal in clause {
                 let variable = literal as usize - 1;
                 if variable / colors != first {
                     return Err(StructuredSatError::Encoding);
                 }
-                let bit = 1_u64 << (variable % colors);
-                if domain & bit != 0 {
+                let color = variable % colors;
+                let domain_word = &mut domains[first * color_words + color / 64];
+                let bit = 1_u64 << (color % 64);
+                if *domain_word & bit != 0 {
                     return Err(StructuredSatError::Encoding);
                 }
-                domain |= bit;
+                *domain_word |= bit;
             }
-            domains[first] = domain;
             domain_seen[first / 64] |= 1_u64 << (first % 64);
             return Ok(());
         }
@@ -231,8 +234,9 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
         } else {
             (right_vertex, left_vertex)
         };
-        let colors_seen = &mut edge_colors[triangular_pair_index(vertices, low, high)];
-        let bit = 1_u64 << left_color;
+        let colors_seen = &mut edge_colors
+            [triangular_pair_index(vertices, low, high) * color_words + left_color / 64];
+        let bit = 1_u64 << (left_color % 64);
         if *colors_seen & bit != 0 {
             return Err(StructuredSatError::Encoding);
         }
@@ -244,21 +248,46 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
         .iter()
         .any(|&word| word != u64::MAX)
         || vertices % 64 != 0 && domain_seen[complete_words] != (1_u64 << (vertices % 64)) - 1
-        || domains.contains(&0)
+        || domains
+            .chunks_exact(color_words)
+            .any(|domain| domain.iter().all(|&word| word == 0))
     {
         return Err(StructuredSatError::Encoding);
     }
 
     let mut adjacency = vec![0_u64; vertices * words];
-    for low in 0..vertices {
-        for high in low + 1..vertices {
-            let seen = edge_colors[triangular_pair_index(vertices, low, high)];
-            let shared_domain = domains[low] & domains[high];
-            if seen & shared_domain != shared_domain {
-                continue;
+    if color_words == 1 {
+        for low in 0..vertices {
+            for high in low + 1..vertices {
+                let seen = edge_colors[triangular_pair_index(vertices, low, high)];
+                let shared_domain = domains[low] & domains[high];
+                if seen & shared_domain != shared_domain {
+                    continue;
+                }
+                adjacency[low * words + high / 64] |= 1_u64 << (high % 64);
+                adjacency[high * words + low / 64] |= 1_u64 << (low % 64);
             }
-            adjacency[low * words + high / 64] |= 1_u64 << (high % 64);
-            adjacency[high * words + low / 64] |= 1_u64 << (low % 64);
+        }
+    } else {
+        for low in 0..vertices {
+            for high in low + 1..vertices {
+                let edge_base = triangular_pair_index(vertices, low, high) * color_words;
+                let low_domain = &domains[low * color_words..(low + 1) * color_words];
+                let high_domain = &domains[high * color_words..(high + 1) * color_words];
+                let mut complete = true;
+                for color_word in 0..color_words {
+                    let shared_domain = low_domain[color_word] & high_domain[color_word];
+                    if edge_colors[edge_base + color_word] & shared_domain != shared_domain {
+                        complete = false;
+                        break;
+                    }
+                }
+                if !complete {
+                    continue;
+                }
+                adjacency[low * words + high / 64] |= 1_u64 << (high % 64);
+                adjacency[high * words + low / 64] |= 1_u64 << (low % 64);
+            }
         }
     }
     Ok(DirectColoringGraph {
@@ -284,7 +313,7 @@ fn scan_dimacs(
     let mut reader = BufReader::new(File::open(path)?);
     let mut header = None;
     let mut observed_clauses = 0_u32;
-    let mut clause = [0_i32; 64];
+    let mut clause = [0_i32; 1_024];
     let mut clause_len = 0_usize;
     let mut line = String::with_capacity(4_096);
     loop {
@@ -393,6 +422,29 @@ mod tests {
         let error = certify_multipartite_coloring_unsat(&path).unwrap_err();
         std::fs::remove_file(path).unwrap();
         assert!(matches!(error, StructuredSatError::Encoding));
+    }
+
+    #[test]
+    fn accepts_direct_coloring_domains_wider_than_one_word() {
+        let cache = std::env::var_os("XDG_CACHE_HOME")
+            .map(std::path::PathBuf::from)
+            .unwrap_or_else(|| std::path::PathBuf::from("/home/tavis/.cache"));
+        let path = cache.join(format!(
+            "ergodis-wide-coloring-{}-{}.cnf",
+            std::process::id(),
+            std::thread::current().name().unwrap_or("test")
+        ));
+        let mut file = File::create(&path).unwrap();
+        writeln!(file, "p cnf 130 2").unwrap();
+        for first in [1, 66] {
+            for literal in first..first + 65 {
+                write!(file, "{literal} ").unwrap();
+            }
+            writeln!(file, "0").unwrap();
+        }
+        drop(file);
+        assert!(certify_coloring_clique_unsat(&path).unwrap().is_none());
+        std::fs::remove_file(path).unwrap();
     }
 
     #[test]

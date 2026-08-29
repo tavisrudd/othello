@@ -88,3 +88,9 @@ each certificate without retaining the CNF or clause set in memory:
 ```sh
 ERGODIS_BENCH_CPU=3 scripts/vlsat2-full-coverage.sh
 ```
+
+The checked full-suite result is reported in
+`notes/2026-08-28-c985-vlsat2-full-coverage.md`: all 50 officially UNSAT rows
+receive exact certificates, 49 officially SAT rows are clean misses, and one
+current official download receives a replayed 90-clique/89-color certificate
+despite its SAT table label.  There are no recognizer errors or timeouts.

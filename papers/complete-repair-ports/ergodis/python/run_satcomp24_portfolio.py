@@ -208,6 +208,18 @@ def t_score(samples: list[float]) -> float | None:
     return statistics.mean(samples) / (deviation / math.sqrt(len(samples)))
 
 
+def theorem_certificate(sample: dict[str, object]) -> dict[str, object] | None:
+    if "ergodis theorem=" not in str(sample["stdout_tail"]):
+        return None
+    for line in str(sample["stdout_tail"]).splitlines():
+        if line.startswith("{"):
+            certificate = json.loads(line)
+            if certificate.get("status") != "unsat":
+                raise RuntimeError("bad theorem certificate output")
+            return certificate
+    raise RuntimeError("theorem hit omitted its certificate")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", type=Path, required=True)
@@ -288,16 +300,28 @@ def main() -> None:
                 }
                 if completed and (not result_codes <= {10, 20} or len(result_codes) != 1):
                     raise RuntimeError(f"solver result mismatch on {entry['filename']}")
+                certificates = [theorem_certificate(sample) for sample in samples["ergodis"]]
+                hit_flags = [certificate is not None for certificate in certificates]
+                if any(hit_flags) and not all(hit_flags):
+                    raise RuntimeError(f"unstable theorem dispatch on {entry['filename']}")
+                stable_certificate = None
+                if all(hit_flags):
+                    semantics = [
+                        {key: value for key, value in certificate.items() if key != "elapsed_ns"}
+                        for certificate in certificates
+                        if certificate is not None
+                    ]
+                    if any(certificate != semantics[0] for certificate in semantics):
+                        raise RuntimeError(f"unstable theorem certificate on {entry['filename']}")
+                    stable_certificate = semantics[0]
                 summary = {
                     **entry,
                     "cnf_sha256": cnf_hash,
                     "uncompressed_bytes": cnf.stat().st_size,
                     "status": "paired" if completed else "timeout",
                     "result_code": next(iter(result_codes)) if completed else None,
-                    "theorem_hit": any(
-                        "ergodis theorem=" in sample["stdout_tail"]
-                        for sample in samples["ergodis"]
-                    ),
+                    "theorem_hit": all(hit_flags),
+                    "certificate": stable_certificate,
                 }
                 if completed:
                     direct = [int(sample["elapsed_ns"]) for sample in samples["kissat"]]

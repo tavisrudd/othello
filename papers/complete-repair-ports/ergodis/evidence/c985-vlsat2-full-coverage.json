@@ -1,0 +1,246 @@
+{
+  "schema": "ergodis-vlsat2-full-coverage-v2",
+  "scope": "all 100 official VLSAT-2 instances in table order",
+  "method": {
+    "purpose": "logical theorem coverage only; elapsed fields are diagnostic, not benchmark claims",
+    "timeout_s": 120.0,
+    "raw_samples": "/home/tavis/src/othello/papers/complete-repair-ports/ergodis/evidence/c985-vlsat2-full-coverage.raw.jsonl"
+  },
+  "host": {
+    "platform": "Linux-7.0.9-x86_64-with-glibc2.40",
+    "cpu": 3,
+    "cpu_model": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M",
+    "thread_siblings": "3,15",
+    "active_thread_siblings": [
+      3,
+      15
+    ],
+    "online_cpus": "0-23",
+    "isolated_cpus": "",
+    "nohz_full_cpus": "",
+    "governor": "powersave",
+    "scaling_driver": "amd-pstate-epp",
+    "energy_performance_preference": "balance_performance",
+    "boost": "1",
+    "intel_no_turbo": null,
+    "stable_frequency_policy": false,
+    "physical_core_isolated": false,
+    "canonical_host_ready": false,
+    "loadavg_before": "0.72 0.84 1.08 2/938 114573",
+    "rustc_vv": "rustc 1.93.1 (01f6ddf75 2026-02-11)\nbinary: rustc\ncommit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf\ncommit-date: 2026-02-11\nhost: x86_64-unknown-linux-gnu\nrelease: 1.93.1\nLLVM version: 21.1.8\n",
+    "rustflags": "-C target-cpu=x86-64",
+    "lscpu_json": {
+      "lscpu": [
+        {
+          "field": "Architecture:",
+          "data": "x86_64"
+        },
+        {
+          "field": "CPU op-mode(s):",
+          "data": "32-bit, 64-bit"
+        },
+        {
+          "field": "Address sizes:",
+          "data": "48 bits physical, 48 bits virtual"
+        },
+        {
+          "field": "Byte Order:",
+          "data": "Little Endian"
+        },
+        {
+          "field": "CPU(s):",
+          "data": "24"
+        },
+        {
+          "field": "On-line CPU(s) list:",
+          "data": "0-23"
+        },
+        {
+          "field": "Vendor ID:",
+          "data": "AuthenticAMD"
+        },
+        {
+          "field": "Model name:",
+          "data": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M"
+        },
+        {
+          "field": "CPU family:",
+          "data": "26"
+        },
+        {
+          "field": "Model:",
+          "data": "36"
+        },
+        {
+          "field": "Thread(s) per core:",
+          "data": "2"
+        },
+        {
+          "field": "Core(s) per socket:",
+          "data": "12"
+        },
+        {
+          "field": "Socket(s):",
+          "data": "1"
+        },
+        {
+          "field": "Stepping:",
+          "data": "0"
+        },
+        {
+          "field": "Frequency boost:",
+          "data": "enabled"
+        },
+        {
+          "field": "CPU(s) scaling MHz:",
+          "data": "47%"
+        },
+        {
+          "field": "CPU max MHz:",
+          "data": "5157.8950"
+        },
+        {
+          "field": "CPU min MHz:",
+          "data": "605.2640"
+        },
+        {
+          "field": "BogoMIPS:",
+          "data": "3992.53"
+        },
+        {
+          "field": "Flags:",
+          "data": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze"
+        },
+        {
+          "field": "Virtualization:",
+          "data": "AMD-V"
+        },
+        {
+          "field": "L1d cache:",
+          "data": "576 KiB (12 instances)"
+        },
+        {
+          "field": "L1i cache:",
+          "data": "384 KiB (12 instances)"
+        },
+        {
+          "field": "L2 cache:",
+          "data": "12 MiB (12 instances)"
+        },
+        {
+          "field": "L3 cache:",
+          "data": "24 MiB (2 instances)"
+        },
+        {
+          "field": "NUMA node(s):",
+          "data": "1"
+        },
+        {
+          "field": "NUMA node0 CPU(s):",
+          "data": "0-23"
+        },
+        {
+          "field": "Vulnerability Gather data sampling:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Ghostwrite:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Indirect target selection:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Itlb multihit:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability L1tf:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Mds:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Meltdown:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Mmio stale data:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Old microcode:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Reg file data sampling:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Retbleed:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Spec rstack overflow:",
+          "data": "Mitigation; IBPB on VMEXIT only"
+        },
+        {
+          "field": "Vulnerability Spec store bypass:",
+          "data": "Mitigation; Speculative Store Bypass disabled via prctl"
+        },
+        {
+          "field": "Vulnerability Spectre v1:",
+          "data": "Mitigation; usercopy/swapgs barriers and __user pointer sanitization"
+        },
+        {
+          "field": "Vulnerability Spectre v2:",
+          "data": "Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected"
+        },
+        {
+          "field": "Vulnerability Srbds:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Tsa:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Tsx async abort:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Vmscape:",
+          "data": "Mitigation; IBPB on VMEXIT"
+        }
+      ]
+    }
+  },
+  "artifacts": {
+    "manifest_sha256": "f96a5efefb01e5c3dd777040e7cb8dabc2b4fc86305cd6a991b1112b67655abf",
+    "raw_jsonl_sha256": "ad7406f008ee369f0d310f3e87e7d34ee10080acf4f014a290d0ce03d08cd24f",
+    "runner_sha256": "717b5ca81a82a97e9b2c8c5063b2cf39207e5b14dc7454ec410b71e76f47c065",
+    "checker_sha256": "f20322762a3774fa4bd39ff31a40c73f4d6be5e2ae283473c6d04993f1b3b49e",
+    "clique_replay_sha256": "f6aa3bdde57a2f0f47aa705a15720eff751a04bc14e790c4efe72d297ae44094",
+    "process_runner_sha256": "82b4f0968bba02d778cedb7635757ef8365b7bda47de88c715a721723734239e",
+    "ergodis_sha256": "53efb2980b204a0d22b1de1ffeb4559acab45702d82f901e2647573cce028911"
+  },
+  "summary": {
+    "sat": {
+      "hit": 0,
+      "miss": 49,
+      "official_label_conflict": 1,
+      "timeout": 0,
+      "error": 0
+    },
+    "unsat": {
+      "hit": 50,
+      "miss": 0,
+      "official_label_conflict": 0,
+      "timeout": 0,
+      "error": 0
+    }
+  }
+}

@@ -11,6 +11,8 @@ from pathlib import Path
 from check_vlsat2_prefix import replay_clique
 from run_satcomp24_portfolio import sha256
 
+OUTCOMES = ("hit", "miss", "official_label_conflict", "timeout", "error")
+
 
 def main() -> None:
     parser = argparse.ArgumentParser()
@@ -22,7 +24,7 @@ def main() -> None:
     args = parser.parse_args()
     document = json.loads(args.evidence.read_text())
     manifest = json.loads(args.manifest.read_text())
-    if document["schema"] != "ergodis-vlsat2-full-coverage-v1":
+    if document["schema"] != "ergodis-vlsat2-full-coverage-v2":
         raise SystemExit("unexpected evidence schema")
     artifacts = document["artifacts"]
     expected_hashes = {
@@ -62,9 +64,12 @@ def main() -> None:
             if sha256(cnf) != record["cnf_sha256"]:
                 raise SystemExit(f"CNF hash mismatch: {filename}")
             outcome = record["outcome"]
+            if outcome not in OUTCOMES:
+                raise SystemExit(f"unknown outcome: {filename}")
             counts[(entry["expected"], outcome)] += 1
-            if outcome == "hit":
-                if entry["expected"] != "unsat" or record["certificate"] is None:
+            if outcome in {"hit", "official_label_conflict"}:
+                expected = "unsat" if outcome == "hit" else "sat"
+                if entry["expected"] != expected or record["certificate"] is None:
                     raise SystemExit(f"invalid theorem hit: {filename}")
                 replay_clique(cnf, record["certificate"])
             elif record["certificate"] is not None:
@@ -73,15 +78,16 @@ def main() -> None:
         raise SystemExit("coverage evidence does not span the manifest")
     expected_summary = {
         expected: {
-            outcome: counts[(expected, outcome)]
-            for outcome in ("hit", "miss", "timeout", "error")
+            outcome: counts[(expected, outcome)] for outcome in OUTCOMES
         }
         for expected in ("sat", "unsat")
     }
     if document["summary"] != expected_summary:
         raise SystemExit("coverage summary mismatch")
-    if expected_summary["sat"]["hit"]:
-        raise SystemExit("a SAT instance received an UNSAT certificate")
+    if expected_summary["sat"]["hit"] or expected_summary["unsat"][
+        "official_label_conflict"
+    ]:
+        raise SystemExit("outcome label is inconsistent with official metadata")
     print(json.dumps(expected_summary, sort_keys=True))
 
 

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import bz2
 import hashlib
 import json
 import lzma
@@ -11,6 +12,8 @@ import math
 import statistics
 from collections import defaultdict
 from pathlib import Path
+
+from check_vlsat2_prefix import replay_clique
 
 
 def sha256(path: Path) -> str:
@@ -23,7 +26,12 @@ def sha256(path: Path) -> str:
 
 def uncompressed_sha256(path: Path) -> str:
     digest = hashlib.sha256()
-    opener = lzma.open if path.suffix == ".xz" else open
+    if path.suffix == ".xz":
+        opener = lzma.open
+    elif path.suffix == ".bz2":
+        opener = bz2.open
+    else:
+        opener = open
     with opener(path, "rb") as source:
         while block := source.read(1 << 20):
             digest.update(block)
@@ -54,6 +62,20 @@ def distribution(samples: list[int]) -> dict[str, float | int]:
         "q3_ns": quartiles[2],
         "max_ns": max(samples),
     }
+
+
+def raw_certificate(stdout: object) -> dict[str, object] | None:
+    text = str(stdout)
+    if "ergodis theorem=" not in text:
+        return None
+    for line in text.splitlines():
+        if line.startswith("{"):
+            certificate = json.loads(line)
+            if certificate.get("status") != "unsat":
+                raise SystemExit("bad theorem certificate output")
+            certificate.pop("elapsed_ns", None)
+            return certificate
+    raise SystemExit("theorem hit omitted its certificate")
 
 
 def main() -> None:
@@ -114,6 +136,20 @@ def main() -> None:
         if any(set(case[solver]) != set(range(rounds)) for solver in case):
             raise SystemExit(f"missing rounds: {filename}")
         all_records = [record for solver in case.values() for record in solver.values()]
+        certificates = [
+            raw_certificate(case["ergodis"][index]["stdout_tail"]) for index in range(rounds)
+        ]
+        hit_flags = [certificate is not None for certificate in certificates]
+        if summary["theorem_hit"] != all(hit_flags) or (any(hit_flags) and not all(hit_flags)):
+            raise SystemExit(f"theorem dispatch mismatch: {filename}")
+        if summary["theorem_hit"]:
+            if summary["certificate"] is None:
+                raise SystemExit(f"missing theorem certificate: {filename}")
+            if any(certificate != summary["certificate"] for certificate in certificates):
+                raise SystemExit(f"theorem certificate mismatch: {filename}")
+            replay_clique(source, summary["certificate"])
+        elif summary["certificate"] is not None:
+            raise SystemExit(f"certificate on theorem miss: {filename}")
         completed = all(record["status"] == "completed" for record in all_records)
         expected_status = "paired" if completed else "timeout"
         if summary["status"] != expected_status:
@@ -159,9 +195,10 @@ def main() -> None:
         raise SystemExit("suite speedup mismatch")
     if not close(document["suite_instance_log_t"], t_score(suite_logs)):
         raise SystemExit("suite t-score mismatch")
+    speedup_text = "none" if suite_speedup is None else f"{suite_speedup:.6g}x"
     print(
         f"ok: {len(suite_logs)}/{document['selected_instances']} paired; "
-        f"speedup={suite_speedup:.6g}x; t={t_score(suite_logs)}"
+        f"speedup={speedup_text}; t={t_score(suite_logs)}"
     )
 
 
