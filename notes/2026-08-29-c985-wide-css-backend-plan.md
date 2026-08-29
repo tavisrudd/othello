@@ -236,6 +236,37 @@ CLI now defaults to 4,096 to issue four times fewer mailbox loads. The final
 retained run has mean 0.172461 seconds, sample standard deviation 0.006042,
 and a 14.70x speedup over the original single-worker baseline.
 
+The next cost pass retained three exact reductions. First,
+`ceil(weight / degree) > budget` is evaluated as
+`weight > budget * degree`, removing the hot integer division. Second, the
+five-word child support and forbidden masks are materialized only after the
+syndrome and short-completion bounds pass; 66.0 million candidate syndromes
+are tested, but only 14.8 million children descend. Retaining the selected
+coordinate in the child's forbidden accumulator is observationally inert
+because that coordinate is already removed by the child support. Third, each
+worker's connected-support count is assigned from its candidate accumulator
+at exit instead of incrementing both counters in every iteration.
+
+Against the retained first-odd one-worker counters, the combined slice lowers
+retired instructions from 21.038 to 19.489 billion (7.36%) and cycles from
+7.8107 to 7.4774 billion (4.27%), with identical sequential search and result
+counters. The fresh 16-worker eleven-round median is 0.164733 seconds, mean
+0.165603, and sample standard deviation 0.003713: 1.030x by medians and 1.041x
+by means over the prior retained run, with Welch t = 3.21. This is 15.15x
+against the original 2.494941-second one-worker baseline. The evidence is
+`evidence/c985-bb288-native-cost-trim-t16.jsonl`, SHA-256
+`8b128ba29ce73d8d25e6ec23aab232238996f043ff183d821ea7a9788a8e7f1b`.
+
+Rejected exact controls remain useful boundaries. A zero-word conflict tag
+made the same search 30.5% slower; returning the first packed check to avoid a
+duplicate `tzcnt` was 12.2% slower; deriving prune counts at worker exit cut
+instructions but increased cycles 0.64%; and an explicit incumbent cutoff was
+wall-neutral to slightly negative. The next sampled systems cost is the six
+separate depth-indexed workspace vectors and their repeated bounds checks.
+Packing them into one fixed-layout frame is the highest-EV implementation
+experiment; theorem-side static check permutations remain the higher-risk
+route to improve greedy-packing quality itself.
+
 ## Matched Gurobi comparison
 
 The audited global parity model was regenerated from the same BB288 source,

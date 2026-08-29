@@ -224,7 +224,13 @@ t = 19.57). Replacing the full fail-first odd-check scan with exact first-odd
 branching deliberately visits 24.1% more candidates but avoids all hot-path
 option cardinalities. With a 4,096-candidate bound pulse, the retained median
 is 0.169677 seconds: another 1.044x (Welch t = 2.99) and 14.70x against the
-retained original single-worker run.
+retained original single-worker run. Three subsequent exact cost reductions
+replace a ceiling division by its multiplication predicate, defer five-word
+child-state construction until after syndrome pruning, and derive each
+worker's connected-support count from its candidate accumulator. They reduce
+single-worker retired instructions by 7.36% and cycles by 4.27%. The retained
+16-worker median is 0.164733 seconds (1.030x, Welch t = 3.21), or 15.15x
+against the original single-worker run.
 On the same BB288 input and two verified translation anchors, an 8-thread
 Gurobi binary-slack control remained unresolved after two 60-second orbit
 limits (both lower bounds 13).  The retained Ergodis cached-cold exact run is

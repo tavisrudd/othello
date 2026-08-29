@@ -714,12 +714,12 @@ impl CompiledWideCssDistance {
     }
 
     #[inline]
-    fn syndrome_completion_lower_bound(&self, syndrome: PackedSyndrome<3>) -> u16 {
+    fn syndrome_degree_bound_exceeds(&self, syndrome: PackedSyndrome<3>, budget: u16) -> bool {
         let degree = u32::from(self.maximum_column_check_weight);
         if degree == 0 {
-            return u16::from(!syndrome.is_zero()) * u16::MAX;
+            return !syndrome.is_zero() && budget != u16::MAX;
         }
-        syndrome.weight().div_ceil(degree) as u16
+        syndrome.weight() > u32::from(budget) * degree
     }
 
     /// Test whether greedy packing finds more disjoint neighborhoods than the budget.
@@ -739,7 +739,7 @@ impl CompiledWideCssDistance {
     /// Test the cheap degree bound before paying for greedy conflict packing.
     #[inline]
     fn completion_lower_bound_exceeds(&self, syndrome: PackedSyndrome<3>, budget: u16) -> bool {
-        self.syndrome_completion_lower_bound(syndrome) > budget
+        self.syndrome_degree_bound_exceeds(syndrome, budget)
             || self.syndrome_packing_exceeds(syndrome, budget)
     }
 
@@ -957,18 +957,12 @@ fn search_syndrome_branch_partition(
             if pulse_interval != 0 && stats.candidates & (pulse_interval - 1) == 0 {
                 poll_bound(mailbox, &mut pruning_bound, &mut stats);
             }
-            let prior_rejected = workspace.rejected[depth];
             workspace.rejected[depth].insert(added);
             let child_depth = depth + 1;
             let child_weight = (child_depth + 1) as u16;
-            let mut child_support = workspace.supports[depth];
-            child_support.insert(added);
-            let mut child_forbidden = workspace.forbidden[depth];
-            child_forbidden.union_assign(prior_rejected);
             let mut child_syndrome = workspace.syndromes[depth];
             child_syndrome.toggle(compiled.columns[added].syndrome);
             let child_logical = workspace.logicals[depth] ^ compiled.columns[added].logical;
-            stats.connected_supports += 1;
             stats.maximum_depth = stats.maximum_depth.max(child_weight);
             if child_syndrome.is_zero() {
                 stats.kernel_supports += 1;
@@ -976,6 +970,8 @@ fn search_syndrome_branch_partition(
                     stats.nontrivial_supports += 1;
                     if child_weight < best_weight {
                         best_weight = child_weight;
+                        let mut child_support = workspace.supports[depth];
+                        child_support.insert(added);
                         best_support = child_support;
                         pruning_bound = pruning_bound.min(child_weight);
                         stats.bound_improvements_published +=
@@ -1001,6 +997,12 @@ fn search_syndrome_branch_partition(
                 stats.four_completion_prunes += u64::from(four_completion_reject);
                 continue;
             }
+            let mut child_support = workspace.supports[depth];
+            child_support.insert(added);
+            let mut child_forbidden = workspace.forbidden[depth];
+            // `added` is already in `child_support`, so retaining it in the
+            // forbidden set leaves every descendant option set unchanged.
+            child_forbidden.union_assign(workspace.rejected[depth]);
             let child_options =
                 compiled.syndrome_branch_options(child_syndrome, child_support, child_forbidden);
             if child_options.is_empty() {
@@ -1017,6 +1019,7 @@ fn search_syndrome_branch_partition(
             depth = child_depth;
         }
     }
+    stats.connected_supports = stats.candidates;
     CachePaddedWideBranchResult {
         best_weight,
         best_support,
