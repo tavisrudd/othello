@@ -22,7 +22,7 @@ const SUPPORT_WORDS: usize = MAX_COORDINATES / 64;
 const SYNDROME_WORDS: usize = MAX_CHECKS / 64;
 const WIDE_SUPPORT_WORDS: usize = 5;
 const EXTRA_WIDE_SUPPORT_WORDS: usize = 6;
-const LARGE_SUPPORT_WORDS: usize = 12;
+const LARGE_SUPPORT_WORDS: usize = 13;
 const WIDE_SYNDROME_WORDS: usize = 3;
 const LARGE_SYNDROME_WORDS: usize = 6;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
@@ -33,7 +33,7 @@ const WIDE_ARTIFACT_VERSION: u16 = 1;
 const EXTRA_WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSX1";
 const EXTRA_WIDE_ARTIFACT_VERSION: u16 = 1;
 const LARGE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSL1";
-const LARGE_ARTIFACT_VERSION: u16 = 1;
+const LARGE_ARTIFACT_VERSION: u16 = 2;
 const MAX_ARTIFACT_BLOOM_WORDS: usize = FOUR_COMPLETION_BLOOM_BITS / 64;
 
 fn wide_artifact_identity<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
@@ -3289,6 +3289,42 @@ mod tests {
         .unwrap();
         assert_eq!(compiled.columns.len(), 756);
         assert_eq!(compiled.check_count, 370);
+        assert_eq!(compiled.maximum_column_check_weight, 3);
+        assert!(compiled.kernel_weights_even);
+    }
+
+    #[cfg(feature = "large-css")]
+    #[test]
+    fn large_compiler_reaches_the_official_bb784_shape() {
+        let ell = 28;
+        let m = 14;
+        let block = ell * m;
+        let columns = 2 * block;
+        let mut data = vec![0u8; block * columns];
+        for x in 0..ell {
+            for y in 0..m {
+                let row = x * m + y;
+                let coordinates = [
+                    ((x + 26) % ell) * m + y,
+                    x * m + (y + 6) % m,
+                    x * m + (y + 8) % m,
+                    block + x * m + (y + 7) % m,
+                    block + ((x + 9) % ell) * m + y,
+                    block + ((x + 20) % ell) * m + y,
+                ];
+                for coordinate in coordinates {
+                    data[row * columns + coordinate] ^= 1;
+                }
+            }
+        }
+        let physical = Matrix::new::<2>(block, columns, data).unwrap();
+        let logical = Matrix::new::<2>(1, columns, vec![0; columns]).unwrap();
+        let compiled = compile_wide_structure::<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>(
+            &physical, &logical,
+        )
+        .unwrap();
+        assert_eq!(compiled.columns.len(), 784);
+        assert_eq!(compiled.check_count, 380);
         assert_eq!(compiled.maximum_column_check_weight, 3);
         assert!(compiled.kernel_weights_even);
     }
