@@ -54,7 +54,11 @@ def close(left: float | None, right: float | None) -> bool:
 
 
 def distribution(samples: list[int]) -> dict[str, float | int]:
-    quartiles = statistics.quantiles(samples, n=4, method="inclusive")
+    quartiles = (
+        statistics.quantiles(samples, n=4, method="inclusive")
+        if len(samples) > 1
+        else [samples[0], samples[0], samples[0]]
+    )
     return {
         "min_ns": min(samples),
         "q1_ns": quartiles[0],
@@ -62,6 +66,11 @@ def distribution(samples: list[int]) -> dict[str, float | int]:
         "q3_ns": quartiles[2],
         "max_ns": max(samples),
     }
+
+
+def rss_distribution(samples: list[int]) -> dict[str, float | int]:
+    timing = distribution(samples)
+    return {key.replace("_ns", "_kb"): value for key, value in timing.items()}
 
 
 def raw_certificate(stdout: object) -> dict[str, object] | None:
@@ -89,12 +98,11 @@ def main() -> None:
     args = parser.parse_args()
 
     document = json.loads(args.evidence.read_text())
+    manifest = json.loads(args.manifest.read_text())
     if document["schema"] != "ergodis-satcomp24-portfolio-ab-v1":
         raise SystemExit("unexpected evidence schema")
     host = document["host"]
-    if host.get("canonical_host_ready") != (
-        host.get("stable_frequency_policy") and host.get("physical_core_isolated")
-    ):
+    if host.get("canonical_host_ready") != host.get("stable_frequency_policy"):
         raise SystemExit("inconsistent canonical-host metadata")
     if document["method"]["canonical_host"] and not host["canonical_host_ready"]:
         raise SystemExit("canonical evidence records an uncontrolled host")
@@ -114,6 +122,7 @@ def main() -> None:
     records: dict[str, dict[str, dict[int, dict[str, object]]]] = defaultdict(
         lambda: defaultdict(dict)
     )
+    raw_sequence = []
     with args.raw_jsonl.open() as source:
         for line_number, line in enumerate(source, 1):
             record = json.loads(line)
@@ -122,11 +131,37 @@ def main() -> None:
             if round_index in solver_rounds:
                 raise SystemExit(f"duplicate raw record at line {line_number}")
             solver_rounds[round_index] = record
+            raw_sequence.append(
+                (
+                    record["instance"],
+                    int(record["case_index"]),
+                    round_index,
+                    int(record["order_position"]),
+                    record["solver"],
+                )
+            )
 
     suite_logs = []
     rounds = int(document["method"]["rounds"])
-    for summary in document["instances"]:
+    manifest_entries = {entry["filename"]: entry for entry in manifest["instances"]}
+    expected_sequence = []
+    observed_summaries = set()
+    for case_index, summary in enumerate(document["instances"]):
         filename = summary["filename"]
+        if filename in observed_summaries or filename not in manifest_entries:
+            raise SystemExit(f"duplicate or unknown summary: {filename}")
+        observed_summaries.add(filename)
+        entry = manifest_entries[filename]
+        if any(summary.get(key) != value for key, value in entry.items()):
+            raise SystemExit(f"manifest metadata mismatch: {filename}")
+        for round_index in range(rounds):
+            order = ["kissat", "ergodis"]
+            if (case_index + round_index) & 1:
+                order.reverse()
+            expected_sequence.extend(
+                (filename, case_index, round_index, position, solver)
+                for position, solver in enumerate(order)
+            )
         source = args.cache_dir / filename
         if not source.exists() or uncompressed_sha256(source) != summary["cnf_sha256"]:
             raise SystemExit(f"CNF hash mismatch: {filename}")
@@ -136,6 +171,13 @@ def main() -> None:
         if any(set(case[solver]) != set(range(rounds)) for solver in case):
             raise SystemExit(f"missing rounds: {filename}")
         all_records = [record for solver in case.values() for record in solver.values()]
+        if any(
+            record.get("family") != summary["family"]
+            or record.get("stratum") != summary["stratum"]
+            or record.get("cnf_sha256") != summary["cnf_sha256"]
+            for record in all_records
+        ):
+            raise SystemExit(f"raw metadata mismatch: {filename}")
         certificates = [
             raw_certificate(case["ergodis"][index]["stdout_tail"]) for index in range(rounds)
         ]
@@ -178,9 +220,9 @@ def main() -> None:
         portfolio_rss = [
             int(case["ergodis"][index]["peak_rss_kb"] or 0) for index in range(rounds)
         ]
-        if summary["kissat_rss_distribution"] != distribution(direct_rss):
+        if summary["kissat_rss_distribution"] != rss_distribution(direct_rss):
             raise SystemExit(f"RSS distribution mismatch for {filename}: Kissat")
-        if summary["ergodis_rss_distribution"] != distribution(portfolio_rss):
+        if summary["ergodis_rss_distribution"] != rss_distribution(portfolio_rss):
             raise SystemExit(f"RSS distribution mismatch for {filename}: Ergodis")
         if summary["kissat_peak_rss_kb"] != max(direct_rss):
             raise SystemExit(f"peak RSS mismatch for {filename}: Kissat")
@@ -188,6 +230,8 @@ def main() -> None:
             raise SystemExit(f"peak RSS mismatch for {filename}: Ergodis")
     if records:
         raise SystemExit("raw evidence has instances absent from summary")
+    if raw_sequence != expected_sequence:
+        raise SystemExit("raw execution order does not match rotated interleave")
     if document["paired_instances"] != len(suite_logs):
         raise SystemExit("paired instance count mismatch")
     suite_speedup = math.exp(statistics.mean(suite_logs)) if suite_logs else None

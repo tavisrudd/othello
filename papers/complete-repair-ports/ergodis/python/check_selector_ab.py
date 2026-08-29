@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed replay of the C985 dense/sparse selector A/B evidence."""
+"""Fail-closed replay of the dense/sparse selector A/B evidence."""
 
 from __future__ import annotations
 

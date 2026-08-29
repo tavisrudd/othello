@@ -57,8 +57,8 @@ ERGODIS_BENCH_CPU=3 scripts/vlsat2-full-coverage.sh
 Committed evidence:
 
 - manifest SHA-256: `f96a5efefb01e5c3dd777040e7cb8dabc2b4fc86305cd6a991b1112b67655abf`;
-- raw JSONL SHA-256: `94675a7ca6f5a088c618947ed9c51743f7d0f017b2527aec83777b1152646231`;
-- coverage JSON SHA-256: `b4324efda96e7bd5a4457900dc1a7100533bc7d451604f5fa4d737fef8a5bf8f`;
+- raw JSONL SHA-256: `734e5a45a58e030584765704aaf8554055c5eb81b8b81c34bf726b343af23295`;
+- coverage JSON SHA-256: `7c52ec5bd41393366c58f6fc6ac0829847bc8e2352f0bbb26c1538f8c6948287`;
 - checked Ergodis binary SHA-256:
   `e3fd9d83f84ecc5eef92cf915d607e8ae0069e4e27e75abccb1baa1beb4d6d1f`.
 
@@ -70,9 +70,8 @@ and its independent checker pass.
 
 ## Performance boundary
 
-No elapsed value from this run is a benchmark claim.  The shared canonical
-timing harness now requires a performance governor, disabled boost/turbo, and
-kernel isolation of every online SMT sibling of the pinned physical core.  The
-current host fails all three conditions.  Canonical A/B evidence therefore
-remains blocked until a controlled host is configured; diagnostic-host output
-is not committed as timing evidence.
+No elapsed value from this logical-coverage run is a benchmark claim.  The
+shared timing harness requires a performance governor and disabled boost/turbo,
+and records the CPU topology and isolation state.  By explicit user direction,
+isolation is not a refusal condition on this quiet host; timing reports must
+state that the pinned physical core was not kernel-isolated.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed replay of the compact C985 GL/RREF performance evidence."""
+"""Fail-closed replay of the compact GL/RREF performance evidence."""
 
 from __future__ import annotations
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay the C985 consuming GL quotient A/B statistics."""
+"""Replay the consuming GL quotient A/B statistics."""
 
 from __future__ import annotations
 

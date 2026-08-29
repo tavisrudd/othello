@@ -4,7 +4,7 @@
   "method": {
     "purpose": "logical theorem coverage only; elapsed fields are diagnostic, not benchmark claims",
     "timeout_s": 120.0,
-    "raw_samples": "/home/tavis/src/othello/papers/complete-repair-ports/ergodis/evidence/c985-vlsat2-full-coverage.raw.jsonl"
+    "raw_samples": "c985-vlsat2-full-coverage.raw.jsonl"
   },
   "host": {
     "platform": "Linux-7.0.9-x86_64-with-glibc2.40",
@@ -18,15 +18,15 @@
     "online_cpus": "0-23",
     "isolated_cpus": "",
     "nohz_full_cpus": "",
-    "governor": "powersave",
+    "governor": "performance",
     "scaling_driver": "amd-pstate-epp",
-    "energy_performance_preference": "balance_performance",
-    "boost": "1",
+    "energy_performance_preference": "performance",
+    "boost": "0",
     "intel_no_turbo": null,
-    "stable_frequency_policy": false,
+    "stable_frequency_policy": true,
     "physical_core_isolated": false,
-    "canonical_host_ready": false,
-    "loadavg_before": "0.96 0.97 1.11 1/937 135755",
+    "canonical_host_ready": true,
+    "loadavg_before": "2.07 1.76 1.91 5/1077 274608",
     "rustc_vv": "rustc 1.93.1 (01f6ddf75 2026-02-11)\nbinary: rustc\ncommit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf\ncommit-date: 2026-02-11\nhost: x86_64-unknown-linux-gnu\nrelease: 1.93.1\nLLVM version: 21.1.8\n",
     "rustflags": "-C target-cpu=x86-64",
     "lscpu_json": {
@@ -89,15 +89,15 @@
         },
         {
           "field": "Frequency boost:",
-          "data": "enabled"
+          "data": "disabled"
         },
         {
           "field": "CPU(s) scaling MHz:",
-          "data": "55%"
+          "data": "68%"
         },
         {
           "field": "CPU max MHz:",
-          "data": "5157.8950"
+          "data": "2000.0000"
         },
         {
           "field": "CPU min MHz:",
@@ -220,11 +220,11 @@
   },
   "artifacts": {
     "manifest_sha256": "f96a5efefb01e5c3dd777040e7cb8dabc2b4fc86305cd6a991b1112b67655abf",
-    "raw_jsonl_sha256": "94675a7ca6f5a088c618947ed9c51743f7d0f017b2527aec83777b1152646231",
-    "runner_sha256": "717b5ca81a82a97e9b2c8c5063b2cf39207e5b14dc7454ec410b71e76f47c065",
-    "checker_sha256": "f20322762a3774fa4bd39ff31a40c73f4d6be5e2ae283473c6d04993f1b3b49e",
-    "clique_replay_sha256": "f6aa3bdde57a2f0f47aa705a15720eff751a04bc14e790c4efe72d297ae44094",
-    "process_runner_sha256": "82b4f0968bba02d778cedb7635757ef8365b7bda47de88c715a721723734239e",
+    "raw_jsonl_sha256": "734e5a45a58e030584765704aaf8554055c5eb81b8b81c34bf726b343af23295",
+    "runner_sha256": "31ccdd92546f896fcfea7a2357c1a0dc579412a3dc53d1fd04bd68be026cda4a",
+    "checker_sha256": "d4ae3164eaafb81b7fd5613e352678716f8c7b0198056a1bab04203e16bc461f",
+    "clique_replay_sha256": "5556e5d42c76bc79891a0f11b3bddc7b4e0ef7abc6424fab83ff66f00f7828c4",
+    "process_runner_sha256": "d952f33365a9f0a90def23e0e91e0034a49b45261c33750a5503ef472ce5fc04",
     "ergodis_sha256": "e3fd9d83f84ecc5eef92cf915d607e8ae0069e4e27e75abccb1baa1beb4d6d1f"
   },
   "summary": {

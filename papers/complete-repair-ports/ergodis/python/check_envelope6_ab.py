@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay the C985 ambient-six rank-envelope A/B evidence."""
+"""Replay the ambient-six rank-envelope A/B evidence."""
 
 from __future__ import annotations
 

@@ -30,8 +30,8 @@ the older asymmetric warm-loop comparison:
 - completed baselines receive seven paired rounds; the short certificate path
   receives fifteen fresh-process rounds, but only matching within-round pairs
   enter a speedup or t-score;
-- a first Kissat timeout is retained as censored evidence and stops further
-  baseline rounds; censored cases produce only lower bounds and never enter a
+- a first Kissat timeout is retained as a timeout lower-bound case and stops
+  further baseline rounds; timeout cases produce only lower bounds and never enter a
   t-score;
 - raw records stream directly to JSONL and include wall time, process CPU time,
   context switches, sampled CPU frequency, and peak RSS;
@@ -44,11 +44,10 @@ the older asymmetric warm-loop comparison:
   every clique against the original CNF.
 
 Canonical evidence refuses to run unless the pinned CPU uses the `performance`
-governor, boost/turbo is disabled, and every online SMT sibling of its physical
-core is in the kernel's isolated-CPU set.  On 2026-08-28 the host had
-`powersave`, boost enabled, and no isolated CPUs, so all sizing measurements
-from that state are diagnostic and are intentionally not checked in as
-benchmark evidence.
+governor and boost/turbo is disabled.  CPU/SMT isolation remains recorded but,
+by explicit user direction for this quiet host, is not a refusal condition.
+Earlier sizing measurements made under `powersave` with boost enabled remain
+diagnostic and are not benchmark evidence.
 
 Replay after configuring a stable host with:
 
@@ -94,3 +93,10 @@ The checked full-suite result is reported in
 receive exact certificates, 49 officially SAT rows are clean misses, and one
 current official download receives a replayed 90-clique/89-color certificate
 despite its SAT table label.  There are no recognizer errors or timeouts.
+
+The corrected-protocol first-ten Kissat A/B is reported in
+`notes/2026-08-28-c985-vlsat2-kissat-corrected-ab.md`.  Four paired UNSAT rows
+give a `381.13x` geometric mean with instance-log `t=22.56`; five further UNSAT
+rows give ten-second timeout lower bounds above `2051x`.  The user-approved
+quiet host used the performance governor with boost disabled; its lack of
+kernel CPU isolation is recorded explicitly.

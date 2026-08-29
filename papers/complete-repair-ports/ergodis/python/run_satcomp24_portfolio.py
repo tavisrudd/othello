@@ -94,7 +94,7 @@ def host_metadata(cpu: int) -> dict[str, object]:
         isolated_cpus
     )
     stable = governor == "performance" and (boost == "0" or no_turbo == "1")
-    canonical_ready = stable and physical_core_isolated
+    canonical_ready = stable
     return {
         "platform": platform.platform(),
         "cpu": cpu,
@@ -138,7 +138,11 @@ def kissat_metadata(binary: Path) -> dict[str, str]:
 
 
 def distribution(samples: list[int]) -> dict[str, float | int]:
-    quartiles = statistics.quantiles(samples, n=4, method="inclusive")
+    quartiles = (
+        statistics.quantiles(samples, n=4, method="inclusive")
+        if len(samples) > 1
+        else [samples[0], samples[0], samples[0]]
+    )
     return {
         "min_ns": min(samples),
         "q1_ns": quartiles[0],
@@ -146,6 +150,11 @@ def distribution(samples: list[int]) -> dict[str, float | int]:
         "q3_ns": quartiles[2],
         "max_ns": max(samples),
     }
+
+
+def rss_distribution(samples: list[int]) -> dict[str, float | int]:
+    timing = distribution(samples)
+    return {key.replace("_ns", "_kb"): value for key, value in timing.items()}
 
 
 def run(command: list[str], timeout_s: float, cpu: int | None = None) -> dict[str, object]:
@@ -243,8 +252,7 @@ def main() -> None:
     host = host_metadata(args.cpu)
     if not host["canonical_host_ready"] and not args.diagnostic_host:
         raise SystemExit(
-            "refusing canonical evidence: require performance governor, boost disabled, "
-            "and every online SMT sibling of the pinned CPU isolated "
+            "refusing canonical evidence: require performance governor and boost disabled "
             "(or pass --diagnostic-host for uncommitted sizing only)"
         )
     manifest = json.loads(args.manifest.read_text())
@@ -270,7 +278,7 @@ def main() -> None:
                     order = ("kissat", "ergodis")
                     if (case_index + round_index) & 1:
                         order = tuple(reversed(order))
-                    for solver in order:
+                    for order_position, solver in enumerate(order):
                         if solver == "kissat":
                             command = [str(args.kissat), "--quiet", str(cnf)]
                         else:
@@ -282,6 +290,8 @@ def main() -> None:
                             "stratum": entry["stratum"],
                             "cnf_sha256": cnf_hash,
                             "round": round_index,
+                            "case_index": case_index,
+                            "order_position": order_position,
                             "solver": solver,
                             **result,
                         }
@@ -341,10 +351,10 @@ def main() -> None:
                             "ergodis_peak_rss_kb": max(
                                 int(sample["peak_rss_kb"] or 0) for sample in samples["ergodis"]
                             ),
-                            "kissat_rss_distribution": distribution(
+                            "kissat_rss_distribution": rss_distribution(
                                 [int(sample["peak_rss_kb"] or 0) for sample in samples["kissat"]]
                             ),
-                            "ergodis_rss_distribution": distribution(
+                            "ergodis_rss_distribution": rss_distribution(
                                 [int(sample["peak_rss_kb"] or 0) for sample in samples["ergodis"]]
                             ),
                         }
@@ -369,10 +379,11 @@ def main() -> None:
             "order": "rotated interleave per instance",
             "speedup_estimator": "geometric mean of paired within-round external wall-clock ratios",
             "suite_estimator": "geometric mean of per-instance median paired log ratios",
-            "raw_samples": str(args.raw_jsonl),
+            "raw_samples": args.raw_jsonl.name,
             "input": "identical uncompressed CNF for both commands",
             "timing_boundary": "cold solver process; warm file page cache; process launch included",
             "canonical_host": not args.diagnostic_host,
+            "isolation_policy": "recorded but not required; benchmark host was user-confirmed quiet",
             "certificates": "decision comparison; Kissat proof emission disabled; theorem-hit certificate construction included",
             "memory": "peak RSS includes executable/runtime/process overhead for both native binaries",
         },

@@ -76,7 +76,7 @@ def main() -> None:
         "method": {
             "purpose": "logical theorem coverage only; elapsed fields are diagnostic, not benchmark claims",
             "timeout_s": args.timeout,
-            "raw_samples": str(args.raw_jsonl),
+            "raw_samples": args.raw_jsonl.name,
         },
         "host": host_metadata(args.cpu),
         "artifacts": {

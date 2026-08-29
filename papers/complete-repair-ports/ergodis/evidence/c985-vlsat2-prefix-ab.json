@@ -1,0 +1,924 @@
+{
+  "schema": "ergodis-vlsat2-prefix-ab-v2",
+  "scope": "first ten official VLSAT-2 rows",
+  "method": {
+    "ergodis_rounds": 15,
+    "kissat_rounds": 7,
+    "paired_rounds": 7,
+    "extra_ergodis_rounds": 8,
+    "timeout_s": 10.0,
+    "timeout_policy": "stop Kissat after its first timeout; continue certificate rounds",
+    "order": "rotated interleave while both commands remain active",
+    "speedup_estimator": "geometric mean of paired within-round external wall-clock ratios; extra Ergodis rounds affect only its marginal distribution",
+    "raw_samples": "c985-vlsat2-prefix.raw.jsonl",
+    "timing_boundary": "fresh solver process; CNF page cache warmed by hash pass; process launch included",
+    "canonical_host": true,
+    "isolation_policy": "recorded but not required; benchmark host was user-confirmed quiet",
+    "certificates": "Ergodis certificate construction and JSON emission are timed; Kissat proof emission is disabled, favoring the baseline; independent replay is outside the timed region",
+    "memory": "peak RSS includes executable/runtime/process overhead for both native binaries"
+  },
+  "host": {
+    "platform": "Linux-7.0.9-x86_64-with-glibc2.40",
+    "cpu": 3,
+    "cpu_model": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M",
+    "thread_siblings": "3,15",
+    "active_thread_siblings": [
+      3,
+      15
+    ],
+    "online_cpus": "0-23",
+    "isolated_cpus": "",
+    "nohz_full_cpus": "",
+    "governor": "performance",
+    "scaling_driver": "amd-pstate-epp",
+    "energy_performance_preference": "performance",
+    "boost": "0",
+    "intel_no_turbo": null,
+    "stable_frequency_policy": true,
+    "physical_core_isolated": false,
+    "canonical_host_ready": true,
+    "loadavg_before": "1.09 1.66 1.85 2/1077 278110",
+    "rustc_vv": "rustc 1.93.1 (01f6ddf75 2026-02-11)\nbinary: rustc\ncommit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf\ncommit-date: 2026-02-11\nhost: x86_64-unknown-linux-gnu\nrelease: 1.93.1\nLLVM version: 21.1.8\n",
+    "rustflags": "-C target-cpu=x86-64",
+    "lscpu_json": {
+      "lscpu": [
+        {
+          "field": "Architecture:",
+          "data": "x86_64"
+        },
+        {
+          "field": "CPU op-mode(s):",
+          "data": "32-bit, 64-bit"
+        },
+        {
+          "field": "Address sizes:",
+          "data": "48 bits physical, 48 bits virtual"
+        },
+        {
+          "field": "Byte Order:",
+          "data": "Little Endian"
+        },
+        {
+          "field": "CPU(s):",
+          "data": "24"
+        },
+        {
+          "field": "On-line CPU(s) list:",
+          "data": "0-23"
+        },
+        {
+          "field": "Vendor ID:",
+          "data": "AuthenticAMD"
+        },
+        {
+          "field": "Model name:",
+          "data": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M"
+        },
+        {
+          "field": "CPU family:",
+          "data": "26"
+        },
+        {
+          "field": "Model:",
+          "data": "36"
+        },
+        {
+          "field": "Thread(s) per core:",
+          "data": "2"
+        },
+        {
+          "field": "Core(s) per socket:",
+          "data": "12"
+        },
+        {
+          "field": "Socket(s):",
+          "data": "1"
+        },
+        {
+          "field": "Stepping:",
+          "data": "0"
+        },
+        {
+          "field": "Frequency boost:",
+          "data": "disabled"
+        },
+        {
+          "field": "CPU(s) scaling MHz:",
+          "data": "79%"
+        },
+        {
+          "field": "CPU max MHz:",
+          "data": "2000.0000"
+        },
+        {
+          "field": "CPU min MHz:",
+          "data": "605.2640"
+        },
+        {
+          "field": "BogoMIPS:",
+          "data": "3992.53"
+        },
+        {
+          "field": "Flags:",
+          "data": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze"
+        },
+        {
+          "field": "Virtualization:",
+          "data": "AMD-V"
+        },
+        {
+          "field": "L1d cache:",
+          "data": "576 KiB (12 instances)"
+        },
+        {
+          "field": "L1i cache:",
+          "data": "384 KiB (12 instances)"
+        },
+        {
+          "field": "L2 cache:",
+          "data": "12 MiB (12 instances)"
+        },
+        {
+          "field": "L3 cache:",
+          "data": "24 MiB (2 instances)"
+        },
+        {
+          "field": "NUMA node(s):",
+          "data": "1"
+        },
+        {
+          "field": "NUMA node0 CPU(s):",
+          "data": "0-23"
+        },
+        {
+          "field": "Vulnerability Gather data sampling:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Ghostwrite:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Indirect target selection:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Itlb multihit:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability L1tf:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Mds:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Meltdown:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Mmio stale data:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Old microcode:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Reg file data sampling:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Retbleed:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Spec rstack overflow:",
+          "data": "Mitigation; IBPB on VMEXIT only"
+        },
+        {
+          "field": "Vulnerability Spec store bypass:",
+          "data": "Mitigation; Speculative Store Bypass disabled via prctl"
+        },
+        {
+          "field": "Vulnerability Spectre v1:",
+          "data": "Mitigation; usercopy/swapgs barriers and __user pointer sanitization"
+        },
+        {
+          "field": "Vulnerability Spectre v2:",
+          "data": "Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected"
+        },
+        {
+          "field": "Vulnerability Srbds:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Tsa:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Tsx async abort:",
+          "data": "Not affected"
+        },
+        {
+          "field": "Vulnerability Vmscape:",
+          "data": "Mitigation; IBPB on VMEXIT"
+        }
+      ]
+    },
+    "loadavg_after": "1.12 1.46 1.75 1/1059 279974"
+  },
+  "builds": {
+    "ergodis": "Cargo release profile: opt-level=3, thin LTO, one codegen unit, panic=abort",
+    "kissat": {
+      "version": "4.0.4",
+      "compiler": "gcc (GCC) 14.3.0 -W -Wall -O3 -DNDEBUG",
+      "build": "Version 4.0.4 8af8e56f174b778aef3aa45af9f739b2a5f492c2\ngcc (GCC) 14.3.0 -W -Wall -O3 -DNDEBUG\nFri Aug 28 05:14:49 PM PDT 2026 Linux grover 7.0.9 x86_64"
+    }
+  },
+  "artifacts": {
+    "manifest_sha256": "59a92cc37222e73f83acae1fcd713d42c5230b4b3c71a9c901b72268fd17e919",
+    "raw_jsonl_sha256": "f9848026223d7cb9fd913cd5676aed9c63736cfc563ed3176f087843f2f7dfd2",
+    "runner_sha256": "bf03f071b3cfd4491db93681beace090f50431a624ab3f4cb227d71cc1cde3c6",
+    "checker_sha256": "5556e5d42c76bc79891a0f11b3bddc7b4e0ef7abc6424fab83ff66f00f7828c4",
+    "process_runner_sha256": "d952f33365a9f0a90def23e0e91e0034a49b45261c33750a5503ef472ce5fc04",
+    "ergodis_sha256": "e3fd9d83f84ecc5eef92cf915d607e8ae0069e4e27e75abccb1baa1beb4d6d1f",
+    "kissat_sha256": "638b9d6a476c83ee30330bfe9f020af2cd4d2c9bb582b63ef96d9be988ebe6d4",
+    "kissat_revision": "8af8e56f174b778aef3aa45af9f739b2a5f492c2"
+  },
+  "paired_instances": 4,
+  "suite_geometric_mean_speedup": 381.125037943248,
+  "suite_instance_log_t": 22.561084168205756,
+  "instances": [
+    {
+      "filename": "vlsat2_544_8738.cnf",
+      "archive": "vlsat2_544_8738.cnf.bz2",
+      "variables": 544,
+      "clauses": 8738,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_544_8738.cnf.bz2",
+      "cnf_sha256": "d95953c8104e4b61a10e45f4365c9d5391e4358e3841795e848553bce6a42e8a",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 3399460,
+        "q1_ns": 3505286.5,
+        "median_ns": 3527378,
+        "q3_ns": 3799099.5,
+        "max_ns": 5691037
+      },
+      "ergodis_peak_rss_kb": 1960,
+      "ergodis_rss_distribution": {
+        "min_kb": 1784,
+        "q1_kb": 1890.0,
+        "median_kb": 1924,
+        "q3_kb": 1954.0,
+        "max_kb": 1960
+      },
+      "certificate": {
+        "clauses": 8738,
+        "clique_vertices": [
+          0,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14,
+          16,
+          18,
+          20,
+          22,
+          24,
+          26,
+          28,
+          30,
+          32
+        ],
+        "colors": 16,
+        "elapsed_ns": 1277679,
+        "status": "unsat",
+        "theorem": "a clique requires pairwise-distinct colors",
+        "variables": 544,
+        "vertices": 34
+      },
+      "kissat_status": "timeout",
+      "kissat_samples": 1,
+      "ergodis_internal_distribution": {
+        "min_ns": 1235281,
+        "q1_ns": 1244407.5,
+        "median_ns": 1249677,
+        "q3_ns": 1279252.0,
+        "max_ns": 1575985
+      },
+      "ergodis_internal_ns_per_clause": 143.0163653009842,
+      "speedup_lower_bound": 2834.966935780628,
+      "paired_geometric_mean_speedup": null,
+      "paired_log_t": null
+    },
+    {
+      "filename": "vlsat2_600_11440.cnf",
+      "archive": "vlsat2_600_11440.cnf.bz2",
+      "variables": 600,
+      "clauses": 11440,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_600_11440.cnf.bz2",
+      "cnf_sha256": "2339dbf36e3253502709f62a8e5bee72d5de98c661e83a4c1424151cb5cfaded",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 3816807,
+        "q1_ns": 3877355.0,
+        "median_ns": 4053448,
+        "q3_ns": 4405618.5,
+        "max_ns": 5821820
+      },
+      "ergodis_peak_rss_kb": 1960,
+      "ergodis_rss_distribution": {
+        "min_kb": 1840,
+        "q1_kb": 1886.0,
+        "median_kb": 1900,
+        "q3_kb": 1952.0,
+        "max_kb": 1960
+      },
+      "certificate": {
+        "clauses": 11440,
+        "clique_vertices": [
+          0,
+          2,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14,
+          16,
+          18,
+          20,
+          22,
+          24,
+          26,
+          28,
+          30
+        ],
+        "colors": 15,
+        "elapsed_ns": 1688344,
+        "status": "unsat",
+        "theorem": "a clique requires pairwise-distinct colors",
+        "variables": 600,
+        "vertices": 40
+      },
+      "kissat_status": "timeout",
+      "kissat_samples": 1,
+      "ergodis_internal_distribution": {
+        "min_ns": 1630917,
+        "q1_ns": 1649852.0,
+        "median_ns": 1667886,
+        "q3_ns": 1678535.5,
+        "max_ns": 1698533
+      },
+      "ergodis_internal_ns_per_clause": 145.79423076923078,
+      "speedup_lower_bound": 2467.035472022831,
+      "paired_geometric_mean_speedup": null,
+      "paired_log_t": null
+    },
+    {
+      "filename": "vlsat2_684_9417.cnf",
+      "archive": "vlsat2_684_9417.cnf.bz2",
+      "variables": 684,
+      "clauses": 9417,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_684_9417.cnf.bz2",
+      "cnf_sha256": "1cd8212eec2b7824c5d807b5527851b6dbe91dd498d524b903a5533bc3896698",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 3702906,
+        "q1_ns": 3883146.0,
+        "median_ns": 4289738,
+        "q3_ns": 5195164.0,
+        "max_ns": 5748894
+      },
+      "ergodis_peak_rss_kb": 1960,
+      "ergodis_rss_distribution": {
+        "min_kb": 1792,
+        "q1_kb": 1900.0,
+        "median_kb": 1924,
+        "q3_kb": 1946.0,
+        "max_kb": 1960
+      },
+      "certificate": {
+        "clauses": 9417,
+        "clique_vertices": [
+          44,
+          50,
+          4,
+          13,
+          15,
+          17,
+          19,
+          21,
+          23,
+          25,
+          27,
+          29,
+          31
+        ],
+        "colors": 12,
+        "elapsed_ns": 1443638,
+        "status": "unsat",
+        "theorem": "a clique requires pairwise-distinct colors",
+        "variables": 684,
+        "vertices": 57
+      },
+      "kissat_status": "completed",
+      "kissat_samples": 7,
+      "ergodis_internal_distribution": {
+        "min_ns": 1376473,
+        "q1_ns": 1395769.0,
+        "median_ns": 1427008,
+        "q3_ns": 1442481.0,
+        "max_ns": 1451142
+      },
+      "ergodis_internal_ns_per_clause": 151.53530848465542,
+      "kissat_distribution": {
+        "min_ns": 1497062361,
+        "q1_ns": 1501385963.5,
+        "median_ns": 1504086829,
+        "q3_ns": 1505014463.0,
+        "max_ns": 1505900934
+      },
+      "kissat_process_ns_per_clause": 159720.38111925242,
+      "kissat_peak_rss_kb": 6144,
+      "kissat_rss_distribution": {
+        "min_kb": 5896,
+        "q1_kb": 5954.0,
+        "median_kb": 5992,
+        "q3_kb": 6074.0,
+        "max_kb": 6144
+      },
+      "speedup_lower_bound": null,
+      "paired_geometric_mean_speedup": 322.3906438099306,
+      "paired_log_t": 94.85798268001652
+    },
+    {
+      "filename": "vlsat2_684_13953.cnf",
+      "archive": "vlsat2_684_13953.cnf.bz2",
+      "variables": 684,
+      "clauses": 13953,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_684_13953.cnf.bz2",
+      "cnf_sha256": "1a8e61e242ebd40cf7ddba0f506810fea11f44fcf5dff76595539854bd9e7e83",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 3919779,
+        "q1_ns": 4600285.5,
+        "median_ns": 5226232,
+        "q3_ns": 5823779.0,
+        "max_ns": 6529729
+      },
+      "ergodis_peak_rss_kb": 1960,
+      "ergodis_rss_distribution": {
+        "min_kb": 1776,
+        "q1_kb": 1906.0,
+        "median_kb": 1928,
+        "q3_kb": 1950.0,
+        "max_kb": 1960
+      },
+      "certificate": {
+        "clauses": 13953,
+        "clique_vertices": [
+          2,
+          11,
+          13,
+          15,
+          17,
+          19,
+          21,
+          23,
+          25,
+          27,
+          29,
+          31,
+          33
+        ],
+        "colors": 12,
+        "elapsed_ns": 2096804,
+        "status": "unsat",
+        "theorem": "a clique requires pairwise-distinct colors",
+        "variables": 684,
+        "vertices": 57
+      },
+      "kissat_status": "completed",
+      "kissat_samples": 7,
+      "ergodis_internal_distribution": {
+        "min_ns": 1982772,
+        "q1_ns": 1999478.0,
+        "median_ns": 2024029,
+        "q3_ns": 2060557.0,
+        "max_ns": 2128153
+      },
+      "ergodis_internal_ns_per_clause": 145.0604887837741,
+      "kissat_distribution": {
+        "min_ns": 1693834959,
+        "q1_ns": 1697775895.0,
+        "median_ns": 1702868223,
+        "q3_ns": 1708133142.5,
+        "max_ns": 1719981304
+      },
+      "kissat_process_ns_per_clause": 122043.1608256289,
+      "kissat_peak_rss_kb": 6480,
+      "kissat_rss_distribution": {
+        "min_kb": 6324,
+        "q1_kb": 6334.0,
+        "median_kb": 6340,
+        "q3_kb": 6348.0,
+        "max_kb": 6480
+      },
+      "speedup_lower_bound": null,
+      "paired_geometric_mean_speedup": 290.6722344009725,
+      "paired_log_t": 133.34615300735584
+    },
+    {
+      "filename": "vlsat2_708_10259.cnf",
+      "archive": "vlsat2_708_10259.cnf.bz2",
+      "variables": 708,
+      "clauses": 10259,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_708_10259.cnf.bz2",
+      "cnf_sha256": "941c668bff52b9356ea2a0a7d44243699bf700d6417cbd27d3c331c3261f6c28",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 3379723,
+        "q1_ns": 3489392.0,
+        "median_ns": 4046234,
+        "q3_ns": 5167412.5,
+        "max_ns": 5841287
+      },
+      "ergodis_peak_rss_kb": 1956,
+      "ergodis_rss_distribution": {
+        "min_kb": 1776,
+        "q1_kb": 1870.0,
+        "median_kb": 1904,
+        "q3_kb": 1922.0,
+        "max_kb": 1956
+      },
+      "certificate": {
+        "clauses": 10259,
+        "clique_vertices": [
+          42,
+          48,
+          4,
+          13,
+          15,
+          17,
+          19,
+          21,
+          23,
+          25,
+          27,
+          29,
+          31
+        ],
+        "colors": 12,
+        "elapsed_ns": 1471209,
+        "status": "unsat",
+        "theorem": "a clique requires pairwise-distinct colors",
+        "variables": 708,
+        "vertices": 59
+      },
+      "kissat_status": "completed",
+      "kissat_samples": 7,
+      "ergodis_internal_distribution": {
+        "min_ns": 1465819,
+        "q1_ns": 1487109.0,
+        "median_ns": 1508569,
+        "q3_ns": 1530660.0,
+        "max_ns": 2134415
+      },
+      "ergodis_internal_ns_per_clause": 147.04834779218248,
+      "kissat_distribution": {
+        "min_ns": 1272979525,
+        "q1_ns": 1275642362.0,
+        "median_ns": 1277056959,
+        "q3_ns": 1278085102.5,
+        "max_ns": 1280629393
+      },
+      "kissat_process_ns_per_clause": 124481.62189297202,
+      "kissat_peak_rss_kb": 6684,
+      "kissat_rss_distribution": {
+        "min_kb": 6384,
+        "q1_kb": 6408.0,
+        "median_kb": 6452,
+        "q3_kb": 6560.0,
+        "max_kb": 6684
+      },
+      "speedup_lower_bound": null,
+      "paired_geometric_mean_speedup": 270.07426879608056,
+      "paired_log_t": 77.26891283606537
+    },
+    {
+      "filename": "vlsat2_736_11022.cnf",
+      "archive": "vlsat2_736_11022.cnf.bz2",
+      "variables": 736,
+      "clauses": 11022,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_736_11022.cnf.bz2",
+      "cnf_sha256": "d52dadb7f04dc9964b70e387b3eef40a5fb8abba853bbe33d18303e0a91b971f",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 3773857,
+        "q1_ns": 3853620.0,
+        "median_ns": 3888260,
+        "q3_ns": 4041746.0,
+        "max_ns": 5319425
+      },
+      "ergodis_peak_rss_kb": 1960,
+      "ergodis_rss_distribution": {
+        "min_kb": 1776,
+        "q1_kb": 1890.0,
+        "median_kb": 1924,
+        "q3_kb": 1948.0,
+        "max_kb": 1960
+      },
+      "certificate": {
+        "clauses": 11022,
+        "clique_vertices": [
+          2,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14,
+          16,
+          18,
+          20,
+          22,
+          24,
+          26,
+          28,
+          30,
+          32,
+          34
+        ],
+        "colors": 16,
+        "elapsed_ns": 1639363,
+        "status": "unsat",
+        "theorem": "a clique requires pairwise-distinct colors",
+        "variables": 736,
+        "vertices": 46
+      },
+      "kissat_status": "timeout",
+      "kissat_samples": 1,
+      "ergodis_internal_distribution": {
+        "min_ns": 1602865,
+        "q1_ns": 1615488.0,
+        "median_ns": 1640044,
+        "q3_ns": 1666132.5,
+        "max_ns": 1691710
+      },
+      "ergodis_internal_ns_per_clause": 148.7973144619851,
+      "speedup_lower_bound": 2571.844475420882,
+      "paired_geometric_mean_speedup": null,
+      "paired_log_t": null
+    },
+    {
+      "filename": "vlsat2_798_17543.cnf",
+      "archive": "vlsat2_798_17543.cnf.bz2",
+      "variables": 798,
+      "clauses": 17543,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_798_17543.cnf.bz2",
+      "cnf_sha256": "774d48d2ccd1f9d23a4add4ecbf0421fe214518daf4427ddb3c14fdffd6c15c3",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 4680595,
+        "q1_ns": 4745476.0,
+        "median_ns": 4812822,
+        "q3_ns": 4929874.5,
+        "max_ns": 6696869
+      },
+      "ergodis_peak_rss_kb": 1960,
+      "ergodis_rss_distribution": {
+        "min_kb": 1832,
+        "q1_kb": 1862.0,
+        "median_kb": 1908,
+        "q3_kb": 1940.0,
+        "max_kb": 1960
+      },
+      "certificate": {
+        "clauses": 17543,
+        "clique_vertices": [
+          42,
+          43,
+          44,
+          3,
+          13,
+          51,
+          28,
+          45,
+          46,
+          47,
+          0,
+          16,
+          20,
+          24,
+          25
+        ],
+        "colors": 14,
+        "elapsed_ns": 2509493,
+        "status": "unsat",
+        "theorem": "a clique requires pairwise-distinct colors",
+        "variables": 798,
+        "vertices": 57
+      },
+      "kissat_status": "timeout",
+      "kissat_samples": 1,
+      "ergodis_internal_distribution": {
+        "min_ns": 2473897,
+        "q1_ns": 2501453.0,
+        "median_ns": 2518569,
+        "q3_ns": 2535741.5,
+        "max_ns": 2562692
+      },
+      "ergodis_internal_ns_per_clause": 143.5654677079177,
+      "speedup_lower_bound": 2077.7830553467384,
+      "paired_geometric_mean_speedup": null,
+      "paired_log_t": null
+    },
+    {
+      "filename": "vlsat2_1000_22250.cnf",
+      "archive": "vlsat2_1000_22250.cnf.bz2",
+      "variables": 1000,
+      "clauses": 22250,
+      "expected": "sat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_1000_22250.cnf.bz2",
+      "cnf_sha256": "7fa1dcc2579120d44355a0a2e397b5ffb7afa71ef00ee2a7a7b0ea2de10bd304",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 5412518,
+        "q1_ns": 5514853.5,
+        "median_ns": 5761338,
+        "q3_ns": 6725483.5,
+        "max_ns": 7565948
+      },
+      "ergodis_peak_rss_kb": 1956,
+      "ergodis_rss_distribution": {
+        "min_kb": 1832,
+        "q1_kb": 1844.0,
+        "median_kb": 1888,
+        "q3_kb": 1924.0,
+        "max_kb": 1956
+      },
+      "certificate": null,
+      "kissat_status": "timeout",
+      "kissat_samples": 1
+    },
+    {
+      "filename": "vlsat2_1022_14955.cnf",
+      "archive": "vlsat2_1022_14955.cnf.bz2",
+      "variables": 1022,
+      "clauses": 14955,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_1022_14955.cnf.bz2",
+      "cnf_sha256": "3f4f596fc911aead5fe857a58e55e0ab85171632c2e378ad11d362825cf5e123",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 4370708,
+        "q1_ns": 4596578.5,
+        "median_ns": 5267047,
+        "q3_ns": 6370907.5,
+        "max_ns": 7025812
+      },
+      "ergodis_peak_rss_kb": 1956,
+      "ergodis_rss_distribution": {
+        "min_kb": 1784,
+        "q1_kb": 1880.0,
+        "median_kb": 1896,
+        "q3_kb": 1954.0,
+        "max_kb": 1956
+      },
+      "certificate": {
+        "clauses": 14955,
+        "clique_vertices": [
+          32,
+          26,
+          4,
+          15,
+          7,
+          11,
+          18,
+          22,
+          35,
+          0,
+          59,
+          69,
+          57,
+          47,
+          33
+        ],
+        "colors": 14,
+        "elapsed_ns": 2211798,
+        "status": "unsat",
+        "theorem": "a clique requires pairwise-distinct colors",
+        "variables": 1022,
+        "vertices": 73
+      },
+      "kissat_status": "completed",
+      "kissat_samples": 7,
+      "ergodis_internal_distribution": {
+        "min_ns": 2186140,
+        "q1_ns": 2209534.0,
+        "median_ns": 2227097,
+        "q3_ns": 2236289.0,
+        "max_ns": 2538607
+      },
+      "ergodis_internal_ns_per_clause": 148.91989301237044,
+      "kissat_distribution": {
+        "min_ns": 4944336023,
+        "q1_ns": 4953646523.5,
+        "median_ns": 4960626031,
+        "q3_ns": 4967612224.5,
+        "max_ns": 4981233232
+      },
+      "kissat_process_ns_per_clause": 331703.5126044801,
+      "kissat_peak_rss_kb": 9860,
+      "kissat_rss_distribution": {
+        "min_kb": 9528,
+        "q1_kb": 9590.0,
+        "median_kb": 9748,
+        "q3_kb": 9800.0,
+        "max_kb": 9860
+      },
+      "speedup_lower_bound": null,
+      "paired_geometric_mean_speedup": 833.6825953391019,
+      "paired_log_t": 118.63617808762635
+    },
+    {
+      "filename": "vlsat2_1125_15795.cnf",
+      "archive": "vlsat2_1125_15795.cnf.bz2",
+      "variables": 1125,
+      "clauses": 15795,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_1125_15795.cnf.bz2",
+      "cnf_sha256": "63209abf1b9136cd8cab95e5aad735ec114bb33b46121834377b9372a18c4764",
+      "ergodis_samples": 15,
+      "ergodis_distribution": {
+        "min_ns": 4566843,
+        "q1_ns": 4606331.5,
+        "median_ns": 4749323,
+        "q3_ns": 5122262.5,
+        "max_ns": 6106400
+      },
+      "ergodis_peak_rss_kb": 1960,
+      "ergodis_rss_distribution": {
+        "min_kb": 1784,
+        "q1_kb": 1882.0,
+        "median_kb": 1904,
+        "q3_kb": 1936.0,
+        "max_kb": 1960
+      },
+      "certificate": {
+        "clauses": 15795,
+        "clique_vertices": [
+          49,
+          66,
+          4,
+          15,
+          26,
+          7,
+          11,
+          18,
+          22,
+          36,
+          0,
+          56,
+          60,
+          71,
+          32,
+          34
+        ],
+        "colors": 15,
+        "elapsed_ns": 2408755,
+        "status": "unsat",
+        "theorem": "a clique requires pairwise-distinct colors",
+        "variables": 1125,
+        "vertices": 75
+      },
+      "kissat_status": "timeout",
+      "kissat_samples": 1,
+      "ergodis_internal_distribution": {
+        "min_ns": 2356037,
+        "q1_ns": 2363185.5,
+        "median_ns": 2395991,
+        "q3_ns": 2421313.5,
+        "max_ns": 2449070
+      },
+      "ergodis_internal_ns_per_clause": 151.69300411522633,
+      "speedup_lower_bound": 2105.563256068286,
+      "paired_geometric_mean_speedup": null,
+      "paired_log_t": null
+    }
+  ]
+}

@@ -13,6 +13,7 @@ from run_satcomp24_portfolio import (
     distribution,
     host_metadata,
     kissat_metadata,
+    rss_distribution,
     run,
     sha256,
     t_score,
@@ -40,8 +41,7 @@ def main() -> None:
     host = host_metadata(args.cpu)
     if not host["canonical_host_ready"] and not args.diagnostic_host:
         raise SystemExit(
-            "refusing canonical evidence: require performance governor, boost disabled, "
-            "and every online SMT sibling of the pinned CPU isolated "
+            "refusing canonical evidence: require performance governor and boost disabled "
             "(or pass --diagnostic-host for uncommitted sizing only)"
         )
     manifest = json.loads(args.manifest.read_text())
@@ -62,7 +62,7 @@ def main() -> None:
                     order = ["ergodis", "kissat"]
                     if (case_index + round_index) & 1:
                         order.reverse()
-                for solver in order:
+                for order_position, solver in enumerate(order):
                     command = (
                         [str(args.ergodis), str(cnf)]
                         if solver == "ergodis"
@@ -74,6 +74,8 @@ def main() -> None:
                         "expected": entry["expected"],
                         "cnf_sha256": cnf_hash,
                         "round": round_index,
+                        "case_index": case_index,
+                        "order_position": order_position,
                         "solver": solver,
                         **result,
                     }
@@ -115,7 +117,7 @@ def main() -> None:
                 "ergodis_peak_rss_kb": max(
                     int(sample["peak_rss_kb"] or 0) for sample in certificate_samples
                 ),
-                "ergodis_rss_distribution": distribution(
+                "ergodis_rss_distribution": rss_distribution(
                     [int(sample["peak_rss_kb"] or 0) for sample in certificate_samples]
                 ),
                 "certificate": certificate_json[0] if certificate_json else None,
@@ -141,7 +143,7 @@ def main() -> None:
                 summary["kissat_peak_rss_kb"] = max(
                     int(sample["peak_rss_kb"] or 0) for sample in completed_kissat
                 )
-                summary["kissat_rss_distribution"] = distribution(
+                summary["kissat_rss_distribution"] = rss_distribution(
                     [int(sample["peak_rss_kb"] or 0) for sample in completed_kissat]
                 )
             if entry["expected"] == "unsat":
@@ -175,8 +177,13 @@ def main() -> None:
             )
 
     host["loadavg_after"] = Path("/proc/loadavg").read_text().strip()
+    paired_instance_logs = [
+        math.log(float(summary["paired_geometric_mean_speedup"]))
+        for summary in summaries
+        if summary.get("paired_geometric_mean_speedup") is not None
+    ]
     document = {
-        "schema": "ergodis-vlsat2-prefix-ab-v1",
+        "schema": "ergodis-vlsat2-prefix-ab-v2",
         "scope": "first ten official VLSAT-2 rows",
         "method": {
             "ergodis_rounds": args.ergodis_rounds,
@@ -187,9 +194,10 @@ def main() -> None:
             "timeout_policy": "stop Kissat after its first timeout; continue certificate rounds",
             "order": "rotated interleave while both commands remain active",
             "speedup_estimator": "geometric mean of paired within-round external wall-clock ratios; extra Ergodis rounds affect only its marginal distribution",
-            "raw_samples": str(args.raw_jsonl),
+            "raw_samples": args.raw_jsonl.name,
             "timing_boundary": "fresh solver process; CNF page cache warmed by hash pass; process launch included",
             "canonical_host": not args.diagnostic_host,
+            "isolation_policy": "recorded but not required; benchmark host was user-confirmed quiet",
             "certificates": "Ergodis certificate construction and JSON emission are timed; Kissat proof emission is disabled, favoring the baseline; independent replay is outside the timed region",
             "memory": "peak RSS includes executable/runtime/process overhead for both native binaries",
         },
@@ -210,6 +218,13 @@ def main() -> None:
             "kissat_sha256": sha256(args.kissat),
             "kissat_revision": args.kissat_revision,
         },
+        "paired_instances": len(paired_instance_logs),
+        "suite_geometric_mean_speedup": (
+            math.exp(statistics.mean(paired_instance_logs))
+            if paired_instance_logs
+            else None
+        ),
+        "suite_instance_log_t": t_score(paired_instance_logs),
         "instances": summaries,
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -470,11 +470,15 @@ mod tests {
     use super::*;
     use std::io::Write;
 
+    fn test_cache() -> std::path::PathBuf {
+        std::env::var_os("XDG_CACHE_HOME")
+            .map(std::path::PathBuf::from)
+            .unwrap_or_else(|| std::env::current_dir().unwrap().join("target"))
+    }
+
     #[test]
     fn certifies_triangle_with_two_colors() {
-        let cache = std::env::var_os("XDG_CACHE_HOME")
-            .map(std::path::PathBuf::from)
-            .unwrap_or_else(|| std::path::PathBuf::from("/home/tavis/.cache"));
+        let cache = test_cache();
         let path = cache.join(format!(
             "ergodis-coloring-{}-{}.cnf",
             std::process::id(),
@@ -496,9 +500,7 @@ mod tests {
 
     #[test]
     fn rejects_non_coloring_clause_shapes() {
-        let cache = std::env::var_os("XDG_CACHE_HOME")
-            .map(std::path::PathBuf::from)
-            .unwrap_or_else(|| std::path::PathBuf::from("/home/tavis/.cache"));
+        let cache = test_cache();
         let path = cache.join(format!(
             "ergodis-non-coloring-{}-{}.cnf",
             std::process::id(),
@@ -515,9 +517,7 @@ mod tests {
 
     #[test]
     fn accepts_direct_coloring_domains_wider_than_one_word() {
-        let cache = std::env::var_os("XDG_CACHE_HOME")
-            .map(std::path::PathBuf::from)
-            .unwrap_or_else(|| std::path::PathBuf::from("/home/tavis/.cache"));
+        let cache = test_cache();
         let path = cache.join(format!(
             "ergodis-wide-coloring-{}-{}.cnf",
             std::process::id(),
@@ -538,9 +538,7 @@ mod tests {
 
     #[test]
     fn certifies_clique_without_multipartite_graph() {
-        let cache = std::env::var_os("XDG_CACHE_HOME")
-            .map(std::path::PathBuf::from)
-            .unwrap_or_else(|| std::path::PathBuf::from("/home/tavis/.cache"));
+        let cache = test_cache();
         let path = cache.join(format!(
             "ergodis-clique-{}-{}.cnf",
             std::process::id(),

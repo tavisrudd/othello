@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import bz2
+import hashlib
 import json
 import lzma
 import math
@@ -12,7 +13,42 @@ import statistics
 from collections import defaultdict
 from pathlib import Path
 
-from run_satcomp24_portfolio import distribution, sha256, t_score
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        while block := source.read(1 << 20):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def distribution(samples: list[int]) -> dict[str, float | int]:
+    quartiles = (
+        statistics.quantiles(samples, n=4, method="inclusive")
+        if len(samples) > 1
+        else [samples[0], samples[0], samples[0]]
+    )
+    return {
+        "min_ns": min(samples),
+        "q1_ns": quartiles[0],
+        "median_ns": statistics.median(samples),
+        "q3_ns": quartiles[2],
+        "max_ns": max(samples),
+    }
+
+
+def rss_distribution(samples: list[int]) -> dict[str, float | int]:
+    timing = distribution(samples)
+    return {key.replace("_ns", "_kb"): value for key, value in timing.items()}
+
+
+def t_score(samples: list[float]) -> float | None:
+    if len(samples) < 2:
+        return None
+    deviation = statistics.stdev(samples)
+    if deviation == 0:
+        return None
+    return statistics.mean(samples) / (deviation / math.sqrt(len(samples)))
 
 
 def close(left: float | None, right: float | None) -> bool:
@@ -148,12 +184,10 @@ def main() -> None:
     args = parser.parse_args()
     document = json.loads(args.evidence.read_text())
     manifest = json.loads(args.manifest.read_text())
-    if document["schema"] != "ergodis-vlsat2-prefix-ab-v1":
+    if document["schema"] != "ergodis-vlsat2-prefix-ab-v2":
         raise SystemExit("unexpected evidence schema")
     host = document["host"]
-    if host.get("canonical_host_ready") != (
-        host.get("stable_frequency_policy") and host.get("physical_core_isolated")
-    ):
+    if host.get("canonical_host_ready") != host.get("stable_frequency_policy"):
         raise SystemExit("inconsistent canonical-host metadata")
     if document["method"]["canonical_host"] and not host["canonical_host_ready"]:
         raise SystemExit("canonical evidence records an uncontrolled host")
@@ -180,16 +214,33 @@ def main() -> None:
     records: dict[str, dict[str, list[dict[str, object]]]] = defaultdict(
         lambda: defaultdict(list)
     )
+    raw_sequence = []
     with args.raw_jsonl.open() as source:
-        for line in source:
+        for line_number, line in enumerate(source, 1):
             record = json.loads(line)
+            if record["solver"] not in {"ergodis", "kissat"}:
+                raise SystemExit(f"bad solver in raw record at line {line_number}")
             records[record["instance"]][record["solver"]].append(record)
+            raw_sequence.append(
+                (
+                    record["instance"],
+                    int(record["case_index"]),
+                    int(record["round"]),
+                    int(record["order_position"]),
+                    record["solver"],
+                )
+            )
     manifest_entries = {entry["filename"]: entry for entry in manifest["instances"]}
     if set(manifest_entries) != {entry["filename"] for entry in document["instances"]}:
         raise SystemExit("manifest/evidence instance mismatch")
 
+    expected_names = [entry["filename"] for entry in manifest["instances"]]
+    if [summary["filename"] for summary in document["instances"]] != expected_names:
+        raise SystemExit("summary order does not match manifest")
     certified = paired = censored = 0
-    for summary in document["instances"]:
+    paired_instance_logs = []
+    expected_sequence = []
+    for case_index, summary in enumerate(document["instances"]):
         filename = summary["filename"]
         entry = manifest_entries[filename]
         if summary["expected"] != entry["expected"]:
@@ -202,13 +253,35 @@ def main() -> None:
             raise SystemExit(f"missing raw records: {filename}")
         ergodis = sorted(case["ergodis"], key=lambda record: record["round"])
         kissat = sorted(case["kissat"], key=lambda record: record["round"])
+        all_records = [*ergodis, *kissat]
+        if any(
+            record.get("expected") != summary["expected"]
+            or record.get("cnf_sha256") != summary["cnf_sha256"]
+            for record in all_records
+        ):
+            raise SystemExit(f"raw metadata mismatch: {filename}")
+        kissat_by_round = {int(record["round"]): record for record in kissat}
+        kissat_active = True
+        for round_index in range(document["method"]["ergodis_rounds"]):
+            order = ["ergodis"]
+            if round_index < document["method"]["kissat_rounds"] and kissat_active:
+                order.append("kissat")
+                if (case_index + round_index) & 1:
+                    order.reverse()
+            expected_sequence.extend(
+                (filename, case_index, round_index, position, solver)
+                for position, solver in enumerate(order)
+            )
+            kissat_record = kissat_by_round.get(round_index)
+            if kissat_record is not None and kissat_record["status"] == "timeout":
+                kissat_active = False
         if len(ergodis) != document["method"]["ergodis_rounds"]:
             raise SystemExit(f"Ergodis round mismatch: {filename}")
         ergodis_ns = [int(record["elapsed_ns"]) for record in ergodis]
         if summary["ergodis_distribution"] != distribution(ergodis_ns):
             raise SystemExit(f"Ergodis distribution mismatch: {filename}")
         ergodis_rss = [int(record["peak_rss_kb"] or 0) for record in ergodis]
-        if summary["ergodis_rss_distribution"] != distribution(ergodis_rss):
+        if summary["ergodis_rss_distribution"] != rss_distribution(ergodis_rss):
             raise SystemExit(f"Ergodis RSS distribution mismatch: {filename}")
         if summary["ergodis_peak_rss_kb"] != max(ergodis_rss):
             raise SystemExit(f"Ergodis peak RSS mismatch: {filename}")
@@ -246,7 +319,7 @@ def main() -> None:
         completed = [record for record in kissat if record["status"] == "completed"]
         if completed:
             kissat_rss = [int(record["peak_rss_kb"] or 0) for record in completed]
-            if summary["kissat_rss_distribution"] != distribution(kissat_rss):
+            if summary["kissat_rss_distribution"] != rss_distribution(kissat_rss):
                 raise SystemExit(f"Kissat RSS distribution mismatch: {filename}")
             if summary["kissat_peak_rss_kb"] != max(kissat_rss):
                 raise SystemExit(f"Kissat peak RSS mismatch: {filename}")
@@ -284,9 +357,21 @@ def main() -> None:
                     math.exp(statistics.mean(logs)),
                 ) or not close(summary["paired_log_t"], t_score(logs)):
                     raise SystemExit(f"paired statistic mismatch: {filename}")
+                paired_instance_logs.append(statistics.mean(logs))
                 paired += 1
     if records:
         raise SystemExit("raw records contain unknown instances")
+    if raw_sequence != expected_sequence:
+        raise SystemExit("raw execution order does not match rotated interleave")
+    if document["paired_instances"] != len(paired_instance_logs):
+        raise SystemExit("paired instance count mismatch")
+    suite_speedup = (
+        math.exp(statistics.mean(paired_instance_logs)) if paired_instance_logs else None
+    )
+    if not close(document["suite_geometric_mean_speedup"], suite_speedup):
+        raise SystemExit("suite speedup mismatch")
+    if not close(document["suite_instance_log_t"], t_score(paired_instance_logs)):
+        raise SystemExit("suite t-score mismatch")
     print(f"ok: certified={certified}; paired={paired}; censored={censored}")
 
 

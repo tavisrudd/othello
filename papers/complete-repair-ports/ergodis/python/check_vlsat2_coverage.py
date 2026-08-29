@@ -4,14 +4,22 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from collections import Counter
 from pathlib import Path
 
 from check_vlsat2_prefix import replay_clique
-from run_satcomp24_portfolio import sha256
 
 OUTCOMES = ("hit", "miss", "official_label_conflict", "timeout", "error")
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        while block := source.read(1 << 20):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def main() -> None:
