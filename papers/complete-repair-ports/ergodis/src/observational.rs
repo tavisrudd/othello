@@ -2622,6 +2622,16 @@ pub struct LayeredGeneratorSpec {
     pub target_sort: u32,
 }
 
+/// Transient concrete-map and signature bounds observed during a direct
+/// reverse-topological compilation. Retained entry maps and the final quotient
+/// are outputs rather than live-frontier workspace.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct LayeredFrontierMetrics {
+    pub peak_live_state_classes: usize,
+    pub peak_live_class_maps: usize,
+    pub peak_signature_words: usize,
+}
+
 #[inline]
 fn layered_signature_hash(signature: &[u32]) -> u64 {
     let mut hash = 0x9e37_79b9_7f4a_7c15_u64;
@@ -2898,7 +2908,7 @@ where
     T: FnMut(u32, u32) -> u32,
 {
     let mut audit = NoLayeredChainAudit;
-    match compile_layered_frozen_chain_impl(
+    match compile_layered_frozen_dag_impl::<_, _, _, true>(
         state_counts,
         generators,
         entry_sorts,
@@ -2906,7 +2916,38 @@ where
         transition,
         &mut audit,
     ) {
-        Ok(frozen) => Ok(frozen),
+        Ok((frozen, _)) => Ok(frozen),
+        Err(LayeredAuditError::Compilation(error)) => Err(error),
+        Err(LayeredAuditError::Io(_) | LayeredAuditError::Format) => {
+            unreachable!("the unaudited compiler performs no I/O")
+        }
+    }
+}
+
+/// Compile an arbitrary acyclic typed presentation directly to a frozen
+/// quotient. Concrete target maps are reclaimed immediately after their last
+/// predecessor sort has consumed them.
+pub fn compile_layered_frozen_observational<O, T>(
+    state_counts: &[u32],
+    generators: &[LayeredGeneratorSpec],
+    entry_sorts: &[u32],
+    observation: O,
+    transition: T,
+) -> Result<(FrozenObservation, LayeredFrontierMetrics), ObservationalError>
+where
+    O: FnMut(u32, u32) -> u32,
+    T: FnMut(u32, u32) -> u32,
+{
+    let mut audit = NoLayeredChainAudit;
+    match compile_layered_frozen_dag_impl::<_, _, _, false>(
+        state_counts,
+        generators,
+        entry_sorts,
+        observation,
+        transition,
+        &mut audit,
+    ) {
+        Ok(result) => Ok(result),
         Err(LayeredAuditError::Compilation(error)) => Err(error),
         Err(LayeredAuditError::Io(_) | LayeredAuditError::Format) => {
             unreachable!("the unaudited compiler performs no I/O")
@@ -2948,7 +2989,7 @@ where
     }
     let frozen = {
         let mut audit = BufferedLayeredChainAudit::new(writer);
-        let frozen = compile_layered_frozen_chain_impl(
+        let (frozen, _) = compile_layered_frozen_dag_impl::<_, _, _, true>(
             state_counts,
             generators,
             entry_sorts,
@@ -2967,14 +3008,14 @@ where
     Ok(frozen)
 }
 
-fn compile_layered_frozen_chain_impl<O, T, A>(
+fn compile_layered_frozen_dag_impl<O, T, A, const CHAIN_ONLY: bool>(
     state_counts: &[u32],
     generators: &[LayeredGeneratorSpec],
     entry_sorts: &[u32],
     mut observation: O,
     mut transition: T,
     audit: &mut A,
-) -> Result<FrozenObservation, LayeredAuditError>
+) -> Result<(FrozenObservation, LayeredFrontierMetrics), LayeredAuditError>
 where
     O: FnMut(u32, u32) -> u32,
     T: FnMut(u32, u32) -> u32,
@@ -3001,7 +3042,7 @@ where
         if source >= state_counts.len() || target >= state_counts.len() {
             return Err(ObservationalError::GeneratorSort { generator }.into());
         }
-        if target != source + 1 {
+        if source >= target || (CHAIN_ONLY && target != source + 1) {
             return Err(ObservationalError::LayeredGeneratorOrder { generator }.into());
         }
         outgoing_counts[source] = outgoing_counts[source]
@@ -3015,6 +3056,22 @@ where
     for (generator, spec) in generators.iter().enumerate() {
         outgoing[spec.source_sort as usize]
             .push(u32::try_from(generator).map_err(|_| ObservationalError::Overflow)?);
+    }
+    let mut dependency_targets = vec![Vec::<usize>::new(); state_counts.len()];
+    let mut remaining_predecessors = vec![0_usize; state_counts.len()];
+    if !CHAIN_ONLY {
+        for sort in 0..state_counts.len() {
+            for &generator in &outgoing[sort] {
+                dependency_targets[sort].push(generators[generator as usize].target_sort as usize);
+            }
+            dependency_targets[sort].sort_unstable();
+            dependency_targets[sort].dedup();
+            for &target in &dependency_targets[sort] {
+                remaining_predecessors[target] = remaining_predecessors[target]
+                    .checked_add(1)
+                    .ok_or(ObservationalError::Overflow)?;
+            }
+        }
     }
     let mut selected = vec![false; state_counts.len()];
     for &sort in entry_sorts {
@@ -3032,7 +3089,11 @@ where
     let mut local_representatives = vec![Vec::<u32>::new(); state_counts.len()];
     let mut local_generator_transitions = vec![Vec::<u32>::new(); generators.len()];
     let mut entry_maps = vec![None::<Box<[u32]>>; state_counts.len()];
+    let mut live_maps = vec![None::<Box<[u32]>>; state_counts.len()];
+    let mut live_state_classes = 0_usize;
+    let mut live_class_maps = 0_usize;
     let mut next_map = None::<(usize, Box<[u32]>)>;
+    let mut frontier = LayeredFrontierMetrics::default();
     for sort in (0..state_counts.len()).rev() {
         let count = state_counts[sort] as usize;
         audit.word(u32::try_from(sort).map_err(|_| ObservationalError::Overflow)?)?;
@@ -3047,14 +3108,20 @@ where
                 .checked_mul(width)
                 .ok_or(ObservationalError::Overflow)?
         ];
+        frontier.peak_signature_words = frontier.peak_signature_words.max(signatures.len());
         for state in 0..count {
             let signature = &mut signatures[state * width..(state + 1) * width];
             let output = observation(sort as u32, state as u32);
             signature[0] = output;
             audit.word(output)?;
             for (slot, &generator) in outgoing[sort].iter().enumerate() {
+                let target_sort = if CHAIN_ONLY {
+                    sort + 1
+                } else {
+                    generators[generator as usize].target_sort as usize
+                };
                 let target_state = transition(generator, state as u32);
-                if target_state >= state_counts[sort + 1] {
+                if target_state >= state_counts[target_sort] {
                     return Err(ObservationalError::TransitionTarget {
                         generator: generator as usize,
                         transition: state,
@@ -3062,12 +3129,20 @@ where
                     .into());
                 }
                 audit.word(target_state)?;
-                let Some((target_sort, target_classes)) = next_map.as_ref() else {
-                    return Err(ObservationalError::CompiledShape.into());
+                let target_classes = if CHAIN_ONLY {
+                    let Some((next_sort, target_classes)) = next_map.as_ref() else {
+                        return Err(ObservationalError::CompiledShape.into());
+                    };
+                    if *next_sort != target_sort {
+                        return Err(ObservationalError::CompiledShape.into());
+                    }
+                    target_classes
+                } else {
+                    let Some(target_classes) = live_maps[target_sort].as_ref() else {
+                        return Err(ObservationalError::CompiledShape.into());
+                    };
+                    target_classes
                 };
-                if *target_sort != sort + 1 {
-                    return Err(ObservationalError::CompiledShape.into());
-                }
                 signature[slot + 1] = target_classes[target_state as usize];
             }
         }
@@ -3082,19 +3157,72 @@ where
                 targets.push(signatures[representative as usize * width + slot + 1]);
             }
         }
-        if let Some((target_sort, target_classes)) = next_map.take() {
-            if selected[target_sort] {
-                entry_maps[target_sort] = Some(target_classes);
+        if CHAIN_ONLY {
+            let next_words = next_map.as_ref().map_or(0, |(_, classes)| classes.len());
+            frontier.peak_live_state_classes = frontier
+                .peak_live_state_classes
+                .max(next_words + classes.len());
+            frontier.peak_live_class_maps = frontier
+                .peak_live_class_maps
+                .max(usize::from(next_map.is_some()) + 1);
+            if let Some((target_sort, target_classes)) = next_map.take() {
+                if selected[target_sort] {
+                    entry_maps[target_sort] = Some(target_classes);
+                }
+            }
+            next_map = Some((sort, classes));
+        } else {
+            frontier.peak_live_state_classes = frontier
+                .peak_live_state_classes
+                .max(live_state_classes + classes.len());
+            frontier.peak_live_class_maps = frontier.peak_live_class_maps.max(live_class_maps + 1);
+            for &target_sort in &dependency_targets[sort] {
+                remaining_predecessors[target_sort] = remaining_predecessors[target_sort]
+                    .checked_sub(1)
+                    .ok_or(ObservationalError::CompiledShape)?;
+                if remaining_predecessors[target_sort] == 0 {
+                    let target_classes = live_maps[target_sort]
+                        .take()
+                        .ok_or(ObservationalError::CompiledShape)?;
+                    live_state_classes = live_state_classes
+                        .checked_sub(target_classes.len())
+                        .ok_or(ObservationalError::CompiledShape)?;
+                    live_class_maps = live_class_maps
+                        .checked_sub(1)
+                        .ok_or(ObservationalError::CompiledShape)?;
+                    if selected[target_sort] {
+                        entry_maps[target_sort] = Some(target_classes);
+                    }
+                }
+            }
+            if remaining_predecessors[sort] == 0 {
+                if selected[sort] {
+                    entry_maps[sort] = Some(classes);
+                }
+            } else {
+                live_state_classes = live_state_classes
+                    .checked_add(classes.len())
+                    .ok_or(ObservationalError::Overflow)?;
+                live_class_maps = live_class_maps
+                    .checked_add(1)
+                    .ok_or(ObservationalError::Overflow)?;
+                live_maps[sort] = Some(classes);
             }
         }
-        next_map = Some((sort, classes));
         local_outputs[sort] = outputs;
         local_representatives[sort] = representatives;
     }
-    if let Some((sort, classes)) = next_map {
-        if selected[sort] {
-            entry_maps[sort] = Some(classes);
+    if CHAIN_ONLY {
+        if let Some((sort, classes)) = next_map {
+            if selected[sort] {
+                entry_maps[sort] = Some(classes);
+            }
         }
+    } else if live_state_classes != 0
+        || live_class_maps != 0
+        || live_maps.iter().any(Option::is_some)
+    {
+        return Err(ObservationalError::CompiledShape.into());
     }
 
     let mut class_ranges = Vec::with_capacity(state_counts.len());
@@ -3192,7 +3320,7 @@ where
         },
     };
     validate_frozen_observation(&frozen).map_err(|_| ObservationalError::CompiledShape)?;
-    Ok(frozen)
+    Ok((frozen, frontier))
 }
 
 /// Independently verify the reverse-induction theorem for a layered artifact
@@ -6805,6 +6933,24 @@ mod tests {
         )
         .unwrap();
         assert_eq!(chain_transition_calls, 13);
+        let expected_dag_frozen = direct.clone().into_frozen(&counts, &[0, 1]).unwrap();
+        let (dag_frozen, frontier) = compile_layered_frozen_observational(
+            &counts,
+            &layered_generators,
+            &[0, 1],
+            observation,
+            local_transition,
+        )
+        .unwrap();
+        assert_eq!(dag_frozen, expected_dag_frozen);
+        assert_eq!(
+            frontier,
+            LayeredFrontierMetrics {
+                peak_live_state_classes: 12,
+                peak_live_class_maps: 3,
+                peak_signature_words: 16,
+            }
+        );
         assert!(compile_layered_frozen_chain_observational(
             &counts,
             &layered_generators,
