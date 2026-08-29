@@ -230,7 +230,11 @@ child-state construction until after syndrome pruning, and derive each
 worker's connected-support count from its candidate accumulator. They reduce
 single-worker retired instructions by 7.36% and cycles by 4.27%. The retained
 16-worker median is 0.164733 seconds (1.030x, Welch t = 3.21), or 15.15x
-against the original single-worker run.
+against the original single-worker run. Consolidating six depth-indexed
+workspace vectors into one 192-byte frame removes five worker-setup
+allocations and repeated hot indexing. The retained median falls again to
+0.153666 seconds (1.072x, Welch t = 7.51), reaching 16.24x against the
+original single-worker run.
 On the same BB288 input and two verified translation anchors, an 8-thread
 Gurobi binary-slack control remained unresolved after two 60-second orbit
 limits (both lower bounds 13).  The retained Ergodis cached-cold exact run is

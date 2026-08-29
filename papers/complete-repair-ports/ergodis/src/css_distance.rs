@@ -937,16 +937,19 @@ fn search_syndrome_branch_partition(
             continue;
         }
         let branch_depth = usize::from(branch.weight - 1);
-        workspace.supports[branch_depth] = branch.support;
-        workspace.forbidden[branch_depth] = branch.forbidden;
-        workspace.options[branch_depth] = branch_options;
-        workspace.rejected[branch_depth] = WidePackedSupport::default();
-        workspace.syndromes[branch_depth] = branch.syndrome;
-        workspace.logicals[branch_depth] = branch.logical;
+        workspace.frames[branch_depth] = WideBranchFrame {
+            support: branch.support,
+            forbidden: branch.forbidden,
+            options: branch_options,
+            rejected: WidePackedSupport::default(),
+            syndrome: branch.syndrome,
+            logical: branch.logical,
+        };
         stats.exclusive_extensions += 1;
         let mut depth = branch_depth;
         loop {
-            let Some(added) = workspace.options[depth].pop_lowest() else {
+            let frame = &mut workspace.frames[depth];
+            let Some(added) = frame.options.pop_lowest() else {
                 if depth == branch_depth {
                     break;
                 }
@@ -957,12 +960,12 @@ fn search_syndrome_branch_partition(
             if pulse_interval != 0 && stats.candidates & (pulse_interval - 1) == 0 {
                 poll_bound(mailbox, &mut pruning_bound, &mut stats);
             }
-            workspace.rejected[depth].insert(added);
+            frame.rejected.insert(added);
             let child_depth = depth + 1;
             let child_weight = (child_depth + 1) as u16;
-            let mut child_syndrome = workspace.syndromes[depth];
+            let mut child_syndrome = frame.syndrome;
             child_syndrome.toggle(compiled.columns[added].syndrome);
-            let child_logical = workspace.logicals[depth] ^ compiled.columns[added].logical;
+            let child_logical = frame.logical ^ compiled.columns[added].logical;
             stats.maximum_depth = stats.maximum_depth.max(child_weight);
             if child_syndrome.is_zero() {
                 stats.kernel_supports += 1;
@@ -970,7 +973,7 @@ fn search_syndrome_branch_partition(
                     stats.nontrivial_supports += 1;
                     if child_weight < best_weight {
                         best_weight = child_weight;
-                        let mut child_support = workspace.supports[depth];
+                        let mut child_support = frame.support;
                         child_support.insert(added);
                         best_support = child_support;
                         pruning_bound = pruning_bound.min(child_weight);
@@ -997,24 +1000,26 @@ fn search_syndrome_branch_partition(
                 stats.four_completion_prunes += u64::from(four_completion_reject);
                 continue;
             }
-            let mut child_support = workspace.supports[depth];
+            let mut child_support = frame.support;
             child_support.insert(added);
-            let mut child_forbidden = workspace.forbidden[depth];
+            let mut child_forbidden = frame.forbidden;
             // `added` is already in `child_support`, so retaining it in the
             // forbidden set leaves every descendant option set unchanged.
-            child_forbidden.union_assign(workspace.rejected[depth]);
+            child_forbidden.union_assign(frame.rejected);
             let child_options =
                 compiled.syndrome_branch_options(child_syndrome, child_support, child_forbidden);
             if child_options.is_empty() {
                 stats.syndrome_bound_prunes += 1;
                 continue;
             }
-            workspace.supports[child_depth] = child_support;
-            workspace.forbidden[child_depth] = child_forbidden;
-            workspace.options[child_depth] = child_options;
-            workspace.rejected[child_depth] = WidePackedSupport::default();
-            workspace.syndromes[child_depth] = child_syndrome;
-            workspace.logicals[child_depth] = child_logical;
+            workspace.frames[child_depth] = WideBranchFrame {
+                support: child_support,
+                forbidden: child_forbidden,
+                options: child_options,
+                rejected: WidePackedSupport::default(),
+                syndrome: child_syndrome,
+                logical: child_logical,
+            };
             stats.exclusive_extensions += 1;
             depth = child_depth;
         }
@@ -1649,25 +1654,26 @@ struct CachePaddedWideBranchResult {
 const _: () = assert!(std::mem::align_of::<CachePaddedWideBranchResult>() == 128);
 
 #[cfg(feature = "parallel")]
+#[derive(Clone, Copy, Default)]
+struct WideBranchFrame {
+    support: WidePackedSupport,
+    forbidden: WidePackedSupport,
+    options: WidePackedSupport,
+    rejected: WidePackedSupport,
+    syndrome: PackedSyndrome<3>,
+    logical: u64,
+}
+
+#[cfg(feature = "parallel")]
 struct WideBranchWorkspace {
-    supports: Vec<WidePackedSupport>,
-    forbidden: Vec<WidePackedSupport>,
-    options: Vec<WidePackedSupport>,
-    rejected: Vec<WidePackedSupport>,
-    syndromes: Vec<PackedSyndrome<3>>,
-    logicals: Vec<u64>,
+    frames: Vec<WideBranchFrame>,
 }
 
 #[cfg(feature = "parallel")]
 impl WideBranchWorkspace {
     fn new(frame_count: usize) -> Self {
         Self {
-            supports: vec![WidePackedSupport::default(); frame_count],
-            forbidden: vec![WidePackedSupport::default(); frame_count],
-            options: vec![WidePackedSupport::default(); frame_count],
-            rejected: vec![WidePackedSupport::default(); frame_count],
-            syndromes: vec![PackedSyndrome::<3>::default(); frame_count],
-            logicals: vec![0; frame_count],
+            frames: vec![WideBranchFrame::default(); frame_count],
         }
     }
 }

@@ -267,6 +267,32 @@ Packing them into one fixed-layout frame is the highest-EV implementation
 experiment; theorem-side static check permutations remain the higher-risk
 route to improve greedy-packing quality itself.
 
+That workspace experiment passes. One 192-byte `WideBranchFrame` now holds
+the support, forbidden accumulator, options, rejected accumulator, syndrome,
+and logical observation for each active depth. Worker setup makes one sized
+allocation instead of six, and the DFS obtains one checked frame reference
+instead of indexing six independent base pointers. There is still no
+allocation or recursion in the search loop.
+
+The one-worker control retires 17.840 billion instructions and 7.2108 billion
+cycles: 8.46% and 3.57% below the immediately prior committed kernel, and
+15.20% and 7.68% below the retained first-odd baseline. Its seven-round median
+is 1.462988 seconds with identical sequential counters. The retained
+16-worker median is 0.153666 seconds, mean 0.154241, and sample standard
+deviation 0.003376. This is 1.072x by medians and 1.074x by means over the
+cost-trim commit, with Welch t = 7.51; it is 1.104x over the first-odd median
+and 16.24x over the original 2.494941-second one-worker baseline. Independent
+replay passes. The evidence is
+`evidence/c985-bb288-native-frame-t16.jsonl`, SHA-256
+`b69a171805ebb7f0420ab2a5435266cd2f09d9a86a7c6a2f98bb1ebf6a99124f`.
+
+After frame consolidation, the next implementation profile should determine
+whether the remaining cost is still dependent greedy-packing loads or frame
+traffic. The next theorem-side experiment is a compile-time permutation of
+check coordinates chosen to strengthen the deterministic greedy packing
+without changing the valid lower bound; it needs rank-stratified controls
+because it also changes first-odd branching order.
+
 ## Matched Gurobi comparison
 
 The audited global parity model was regenerated from the same BB288 source,
