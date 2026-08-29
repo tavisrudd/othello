@@ -51,12 +51,13 @@ unless a later, explicitly authorized placement task decides otherwise.
 1. **C967 -- jet-quotient quantum-code compiler.** Freeze the construction and
    normalization, emit exact checks/logicals/certificates, replay `q=11` and
    `q=13`, and decide the transversal-phase gate without manuscript edits.
-2. **C997 -- symmetry-reduction gate for exact qLDPC distance solvers.** Add
-   automorphism-orbit symmetry breaking to the public gross-code integer
-   program and to the passant code, count branch-and-bound nodes, and pass or
-   close the proposal at roughly 5x. Research gate only; no ergodis or
-   manuscript edits. Card:
-   `notes/quantum-codes-tasks/c997-qldpc-distance-symmetry-reduction-gate.md`.
+
+Closed: C997 symmetry-reduction gate passed (gross code 13.1x, passant 6.5x
+node reduction on CBC) →
+`notes/quantum-codes-reports/2026-08-28-c997-symmetry-reduction-gate.md`.
+Its stated next step, before any product task is opened, is rerunning the three
+gross-code formulations on a solver with orbital branching (SCIP or Gurobi);
+that is not yet allocated.
 
 ## Entry action
 

@@ -2,7 +2,11 @@
 
 **Lane:** quantum-codes
 
-**Status:** queued; research gate; no ergodis edits, no manuscript edits
+**Status:** closed 2026-08-28, gate passed; report
+`notes/quantum-codes-reports/2026-08-28-c997-symmetry-reduction-gate.md`.
+Correction: `arXiv:1102.5715` (cited below as a symmetry-in-distance paper) is
+Wirthmüller on automorphisms of stabilizer codes and transversal gates, not
+distance computation; the report records the corrected pre-emption reading.
 
 ## Placement
 

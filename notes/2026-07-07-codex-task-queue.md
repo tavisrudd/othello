@@ -252,7 +252,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 ### `quantum-codes`
 
 - **C967 `[quantum-codes]` [QUEUED; STANDALONE COMPILER/RESEARCH GATE]** — build an exact jet-quotient quantum-code compiler for the odd-prime-power family `[[q+1,2,(q-5,4)]]_q`, emitting check matrices, logical jet quotients, Pauli pairings, and independently replayable distance certificates; certify the `q=11` and `q=13` specializations, and separately test whether the Schur-algebra structure yields a transversal non-Clifford logical phase, without assigning the construction to the Clebsch or AME manuscripts or claiming novelty before a dedicated audit → `notes/quantum-codes-tasks/c967-jet-quotient-quantum-code-compiler.md`.
-- **C997 `[quantum-codes]` [QUEUED; RESEARCH GATE]** — test whether automorphism-group symmetry breaking materially shrinks the exact integer-program distance computation for quantum LDPC codes: add `Z_l x Z_m` orbit constraints to Bravyi et al.'s public `distance_test.py` for the `[[144,12,12]]` gross code, and repeat on the `[78,36,12]_2` passant code with `PGL(2,13)`, measuring branch-and-bound node counts; pass at roughly 5x reduction, otherwise close the symmetry-reduction proposal from `notes/2026-08-28-ergodis-ldpc-quantum-angle.md`; no ergodis or manuscript edits → `notes/quantum-codes-tasks/c997-qldpc-distance-symmetry-reduction-gate.md`.
 
 ### `reed-solomon`
 
