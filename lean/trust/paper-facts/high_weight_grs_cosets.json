@@ -13,6 +13,12 @@
       "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
     },
     {
+      "key": "BallDeBeule2012",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
       "key": "CeriaPavese2023",
       "kind": "bibitem",
       "self_authored": false,
@@ -50,6 +56,12 @@
     },
     {
       "key": "FerragutiMicheli2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
+    },
+    {
+      "key": "GmainerHavlicek2013",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.bbl"
@@ -139,6 +151,12 @@
       "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
     },
     {
+      "key": "BallDeBeule2012",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
       "key": "CeriaPavese2023",
       "kind": "bibitem",
       "self_authored": false,
@@ -176,6 +194,12 @@
     },
     {
       "key": "FerragutiMicheli2020",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
+    },
+    {
+      "key": "GmainerHavlicek2013",
       "kind": "bibitem",
       "self_authored": false,
       "source": "papers/high_weight_grs_cosets/high-weight-grs-cosets.bbl"
@@ -265,6 +289,13 @@
       "self_authored": false,
       "source": "papers/high_weight_grs_cosets/refs.bib",
       "title": "The Extended Coset Leader Weight Enumerator of a Twisted Cubic Code"
+    },
+    {
+      "key": "BallDeBeule2012",
+      "kind": "bibtex",
+      "self_authored": false,
+      "source": "papers/high_weight_grs_cosets/refs.bib",
+      "title": "On Sets of Vectors of a Finite Vector Space in Which Every Subset of Basis Size Is a Basis {II}"
     },
     {
       "key": "BallLavrauw2019",
@@ -509,7 +540,7 @@
   "environment_counts": {
     "corollary": 7,
     "definition": 5,
-    "lemma": 13,
+    "lemma": 10,
     "proposition": 24,
     "remark": 2,
     "theorem": 11
@@ -565,6 +596,10 @@
     },
     {
       "environment": "align",
+      "label": "eq:aggregate-nmds-enumerator"
+    },
+    {
+      "environment": "align",
       "label": "eq:aggregate-split"
     },
     {
@@ -574,6 +609,10 @@
     {
       "environment": "equation",
       "label": "eq:composite-contraction"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:exceptional-locus"
     },
     {
       "environment": "equation",
@@ -617,11 +656,11 @@
     },
     {
       "environment": "lemma",
-      "label": "lem:cyclic"
+      "label": "lem:basepointfree-off-persistent"
     },
     {
       "environment": "lemma",
-      "label": "lem:exact-linear-gcd-transport"
+      "label": "lem:cyclic"
     },
     {
       "environment": "lemma",
@@ -629,27 +668,15 @@
     },
     {
       "environment": "lemma",
-      "label": "lem:identically-colliding"
-    },
-    {
-      "environment": "lemma",
-      "label": "lem:linear-modular-pullback"
-    },
-    {
-      "environment": "lemma",
       "label": "lem:marker-collision"
     },
     {
       "environment": "lemma",
-      "label": "lem:old-marker-fixed-factor"
+      "label": "lem:polar-rank-two"
     },
     {
       "environment": "lemma",
       "label": "lem:r5-branch"
-    },
-    {
-      "environment": "lemma",
-      "label": "lem:r6-gcd1"
     },
     {
       "environment": "lemma",
@@ -677,6 +704,10 @@
     },
     {
       "environment": "proposition",
+      "label": "prop:persistent-count-orbits"
+    },
+    {
+      "environment": "proposition",
       "label": "prop:r5-bridge"
     },
     {
@@ -686,10 +717,6 @@
     {
       "environment": "proposition",
       "label": "prop:r5-fibre-is-elliptic"
-    },
-    {
-      "environment": "proposition",
-      "label": "prop:r5-gcd1"
     },
     {
       "environment": "proposition",
@@ -745,10 +772,6 @@
     },
     {
       "environment": "proposition",
-      "label": "prop:r7-gcd1"
-    },
-    {
-      "environment": "proposition",
       "label": "prop:r7-pointed"
     },
     {
@@ -758,6 +781,10 @@
     {
       "environment": "proposition",
       "label": "prop:reduced-terminal-carrier"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:trapped-row-space"
     },
     {
       "environment": "proposition",
@@ -848,6 +875,10 @@
       "label": "tab:r6-exceptional"
     },
     {
+      "environment": "table",
+      "label": "tab:recursive-vocabulary"
+    },
+    {
       "environment": "proposition",
       "label": "thm:composite-contraction"
     },
@@ -897,23 +928,23 @@
   "paper": "high_weight_grs_cosets",
   "pdfs": [
     {
-      "bytes": 467233,
-      "pages": 30,
+      "bytes": 521056,
+      "pages": 33,
       "path": "papers/high_weight_grs_cosets/high-weight-grs-cosets-tit.pdf",
-      "sha256": "44aedca26547f7f77cfbadc9c607d8018fda3e8327f1cb77767594651eb7ea22"
+      "sha256": "324d35ed57672899054303b6e0abc7bea64623580a25d81f3343b067419ecb40"
     },
     {
-      "bytes": 305153,
-      "pages": 42,
+      "bytes": 341421,
+      "pages": 47,
       "path": "papers/high_weight_grs_cosets/high-weight-grs-cosets.pdf",
-      "sha256": "171826dc1b892d92b078bfa444cfb4b4ae8ff5f68775ab6f203e9ef291c581f1"
+      "sha256": "3697c81417509d172967b47964439e2bb055dc0bc864a0194e226174fedb3c97"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/high_weight_grs_cosets/high-weight-grs-cosets.tex",
-      "sha256": "44fe4cfc2c92441290bae38ef74dce9f8c764b9e6a4b43027ca29cc9e4328f43"
+      "sha256": "e4525b8434f23c02b0d8fd5fcf6ce70e87095a59b57be304a0e584008fd32469"
     },
     {
       "path": "papers/high_weight_grs_cosets/formal-annotations.tex",
@@ -921,7 +952,7 @@
     },
     {
       "path": "papers/high_weight_grs_cosets/frontmatter/abstract.tex",
-      "sha256": "c67e4233a3fa9e36e0ce4c74caf5a1257b393c574ce59b54d2087bfe7c9d788b"
+      "sha256": "519427c7e70cac81be46706a3c177fe5f9e2c52d6aa55bfb0fc5f019a49d663c"
     },
     {
       "path": "papers/high_weight_grs_cosets/frontmatter/index-terms.tex",
@@ -929,39 +960,39 @@
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/01-introduction.tex",
-      "sha256": "c720539690fb8a2af618e107bcf77adaf50e24ee5f1c0e825d88329bba88507f"
+      "sha256": "0eb7958b00f11de3643125a507f3ebfba4c431009b7a70317588e20afdb3069b"
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/02-results-map.tex",
-      "sha256": "e18283357e6744b73d87f46947cea79236089ee4bb9149c95bdc50e8ed2a750a"
+      "sha256": "1b35ed458509ec745381aa193cd7a6ac1b61f5e35105d580901c3bc1e3447efc"
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/03-dictionary.tex",
-      "sha256": "385b63a40ab8596838bcc2bd8d29cc37b73e2b65e9a1b639c72e9d74d590590d"
+      "sha256": "d7d1428834fbd4e5a9df094c2ddf53642f3f424fe24af5a77a0ab2261679e076"
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/07-recursive-carriers.tex",
-      "sha256": "22d89a7e5a5b2ef0355e3d386cb3bf951396daf75a79c796620d767308b46595"
+      "sha256": "dbe0f7868fd5426314b8ed960f251ff5d87a6597d169cbe28e9457497c6399d2"
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/05-simultaneous-contraction.tex",
-      "sha256": "9c28192a5e2a1827d4f2d634d9ddf1b903ccd8f5391a9d234371bfce2f23d46b"
+      "sha256": "6e2bb6b5f431d9288701725e3503d4238e1a490782a3095625ecd7911004e952"
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/06-high-weight-cosets.tex",
-      "sha256": "f94145566ab309b8079d773c4179120da040fc1e3f40519247df94fbff6c5215"
+      "sha256": "826cd1f122ce69e0130f90c151c4fcef5087304c937aa556f68c2bafd681a66a"
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/04-redundancy-five.tex",
-      "sha256": "a869dbde8e510d3b4bc5eb3dbd9d99d5ed84f721178d39bbe5d8cce0f49eb081"
+      "sha256": "e691667d562647d3a8bbcd71d48f1a09705e197c560cacf5ee96f567c30c8931"
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/08-fixed-level-roadmap.tex",
-      "sha256": "67639e57cf2697c4e952663a4202b9e46c4281bee739592353a0c7c0501793e8"
+      "sha256": "7b24f89b231cd22e6a90a3cdf1288bc0ef41a193f20a8de2bf0bcc178a239722"
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/11-provenance-boundary.tex",
-      "sha256": "601d32d0f20130ec3ce3bc3c72c4787389f28e82ed92f90dd53c8f6632dd85fb"
+      "sha256": "00c1b00704539f74bc4ea4df3b66c019be793365fe9e54399965890a8f55fcbc"
     },
     {
       "path": "papers/high_weight_grs_cosets/frontmatter/acknowledgment.tex",
@@ -969,11 +1000,11 @@
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/05-polar-tit-interface.tex",
-      "sha256": "845cf97fe56071e3d9c427695fc3a0e22d5d372aac2b7adfa279d450435522e0"
+      "sha256": "2579392f8e7430e48ea3de4a0fe5f90a61e76d0196dadaf1eb350e34dbd81fe8"
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/06-redundancies-six-seven.tex",
-      "sha256": "bfbf03ff7180a6597407a865d33c773a990bd88cbfb1f00f04859cb4868e623a"
+      "sha256": "cf435beacc7f931f9803a7d2753724c4fad3a0cfd412315b0442f0700abd3f16"
     },
     {
       "path": "papers/high_weight_grs_cosets/frontmatter/r6-exceptional-table.tex",
@@ -981,7 +1012,7 @@
     },
     {
       "path": "papers/high_weight_grs_cosets/sections/10-verification.tex",
-      "sha256": "79e2c4f4838d09344ba9ab55d71327a126e070e70dff8070205e8d05cc7cd51a"
+      "sha256": "50c909f460ac891b5507942402491c57de7f1eab3478268a342ac03076bfba86"
     }
   ],
   "title": "High-Weight Cosets of Generalized and Extended Reed--Solomon Codes",
