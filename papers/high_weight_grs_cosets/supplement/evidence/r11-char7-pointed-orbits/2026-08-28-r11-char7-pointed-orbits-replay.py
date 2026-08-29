@@ -56,7 +56,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_CERTIFICATE = HERE / "2026-08-28-r11-char7-pointed-orbits.json"
-SCHEMA = "c973-char7-pointed-orbits-v1"
+SCHEMA = "prs-char7-pointed-orbits-v1"
 CERTIFICATE_SCHEMA = "projective-reed-solomon-locator-certificate-v1"
 ENCODING = "polynomial-basis-base-p-integer-v1"
 

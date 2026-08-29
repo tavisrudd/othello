@@ -1,7 +1,7 @@
 [workspace]
 
 [package]
-name = "c973-gf27-switch-probe"
+name = "prs-gf27-switch-probe"
 version = "0.1.0"
 edition = "2021"
 

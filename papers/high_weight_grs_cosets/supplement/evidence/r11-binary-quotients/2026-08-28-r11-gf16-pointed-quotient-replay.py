@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent quotient and Hankel replay for C973's pointed GF(16) certificate.
+"""Independent quotient and Hankel replay for the pointed GF(16) certificate.
 
 Repaired 2026-08-28.  This file shares no code with the generator and does not
 call the projective-Reed--Solomon toolkit.  It rebuilds GF(16), the degree-ten
@@ -7,7 +7,7 @@ divided-power action of the stabiliser of infinity, the full marked-root orbit
 partition, and the complete apolarity system, then re-verifies every stored
 witness from its root set alone.
 
-The predecessor of this file imported C531's degree-NINE (R10) action and
+The predecessor of this file imported an earlier degree-NINE (R10) action and
 truncated it to the non-invariant slice ``e_3..e_7``.  That truncation is not a
 symmetry of the R11 Hankel system, so the recorded quotient was a quotient by
 the wrong group.  Section ``check_equivariance`` below now fails closed on
@@ -25,13 +25,13 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 CERTIFICATE = HERE / "2026-08-28-r11-gf16-pointed-quotient.json"
-SCHEMA = "c973-r11-gf16-pointed-quotient-v2"
+SCHEMA = "prs-r11-gf16-pointed-quotient-v2"
 Q = 16
 MODULUS = 0b10011
 CARRIER_SUPPORT = tuple(range(3, 8))
 REDUNDANCY = 11
 EQUIVARIANCE_PAIRS = 1000
-EQUIVARIANCE_SEED = 0xC973_2026_0828
+EQUIVARIANCE_SEED = 221496297785384
 
 
 def width() -> int:
@@ -426,7 +426,7 @@ def main() -> None:
         raise SystemExit("replay: declared negative count disagrees")
 
     print(
-        f"C973 independent GF({Q}) replay: PASS "
+        f"Independent GF({Q}) replay: PASS "
         f"({len(recorded)} pointed orbits, {witnesses} verified finite witnesses, "
         f"degrees {degrees}, {checked} equivariance pairs)"
     )

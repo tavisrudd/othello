@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent re-verification of the C973 GF(27) certificate witnesses.
+"""Independent re-verification of the GF(27) certificate witnesses.
 
 Reads 2026-08-28-r11-gf27-certify-witness-sample.tsv, which the Rust `certify`
 mode writes (as out/certify-witness-sample.tsv) for a

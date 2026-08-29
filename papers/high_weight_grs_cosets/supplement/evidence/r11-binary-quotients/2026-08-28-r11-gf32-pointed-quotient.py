@@ -4,7 +4,7 @@
 Repair, 2026-08-28.  This generator delegates every step to the repaired
 GF(16) generator with the field constants rebound, so it inherits the
 degree-ten divided-power upper-Borel action and the fail-closed 1000-pair
-equivariance gate.  The superseded v1 quotient used C531's degree-nine R10
+equivariance gate.  The superseded v1 quotient used an earlier degree-nine R10
 action truncated to the non-invariant slice ``e_3..e_7``; see the sibling file
 for the full diagnosis.  Do not validate a future change against the orbit
 count 1129: the discarded wrong group has the same number of orbits.
@@ -27,16 +27,16 @@ DEFAULT_BINARY = (
     / "software/projective-reed-solomon/target/release/projective-reed-solomon"
 )
 DEFAULT_OUTPUT = HERE / "2026-08-28-r11-gf32-pointed-quotient.json"
-SCHEMA = "c973-r11-gf32-pointed-quotient-v2"
+SCHEMA = "prs-r11-gf32-pointed-quotient-v2"
 REPAIR = (
     "2026-08-28: rebuilt on the degree-ten divided-power upper-Borel action; "
-    "the superseded v1 quotient used C531's degree-nine R10 action truncated "
+    "the superseded v1 quotient used an earlier degree-nine R10 action truncated "
     "to a non-invariant slice"
 )
 Q = 32
 MODULUS = 0b100101
 
-SPEC = importlib.util.spec_from_file_location("c973_gf16_generator", BASE_PATH)
+SPEC = importlib.util.spec_from_file_location("prs_gf16_generator", BASE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 BASE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(BASE)
@@ -73,7 +73,7 @@ def main() -> None:
     if args.check:
         if not args.output.exists() or args.output.read_text() != encoded:
             raise SystemExit("tracked output differs from deterministic regeneration")
-        print(f"C973 GF(32) pointed quotient: PASS ({result['orbit_count']} orbits)")
+        print(f"GF(32) pointed quotient: PASS ({result['orbit_count']} orbits)")
     else:
         args.output.write_text(encoded)
         print(

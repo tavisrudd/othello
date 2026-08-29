@@ -16,7 +16,7 @@ DEFAULT_BINARY = (
     / "software/projective-reed-solomon/target/release/projective-reed-solomon"
 )
 DEFAULT_OUTPUT = Path(__file__).with_name("2026-08-28-r11-char7-pointed-orbits.json")
-SCHEMA = "c973-char7-pointed-orbits-v1"
+SCHEMA = "prs-char7-pointed-orbits-v1"
 RESULT_SCHEMA = "projective-reed-solomon-simultaneous-locator-v1"
 SOFTWARE_AUTHORITY_COMMIT = "f26d751b8339c81cdc3f28ddbcd1f019e264f866"
 

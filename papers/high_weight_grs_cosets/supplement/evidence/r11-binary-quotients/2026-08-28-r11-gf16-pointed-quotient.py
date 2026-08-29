@@ -2,7 +2,7 @@
 """Generate the exact pointed GF(16) R11 Lucas-carrier quotient certificate.
 
 Repair, 2026-08-28.  The first version of this generator built its
-"upper Borel" action by calling C531's ``action_entry`` -- the PGL_2 action on
+"upper Borel" action by calling an earlier ``action_entry`` implementation---the PGL_2 action on
 degree-NINE binary forms, i.e. the R10 syndrome space -- and truncating it to
 the coordinate slice ``e_3..e_7``, which is not invariant under that action
 (``e_3 -> e_2 + e_3``).  The truncated matrices are not symmetries of the R11
@@ -21,7 +21,8 @@ seeded 1000-pair equivariance test fails closed if the action ever stops
 matching the Hankel system.  Do not validate a future change against the orbit
 count: the discarded wrong group happens to have the same number of orbits.
 
-This file has no dependency on C531 and computes its own field arithmetic.
+This file has no dependency on that earlier implementation and computes its
+own field arithmetic.
 """
 
 from __future__ import annotations
@@ -35,17 +36,17 @@ from math import comb
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[2]
+PAPER = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 DEFAULT_BINARY = (
-    ROOT
-    / "papers/high_weight_grs_cosets/software/projective-reed-solomon/target/release/projective-reed-solomon"
+    PAPER
+    / "software/projective-reed-solomon/target/release/projective-reed-solomon"
 )
-DEFAULT_OUTPUT = HERE / "c973-r11-gf16-pointed-quotient.json"
-SCHEMA = "c973-r11-gf16-pointed-quotient-v2"
+DEFAULT_OUTPUT = HERE / "2026-08-28-r11-gf16-pointed-quotient.json"
+SCHEMA = "prs-r11-gf16-pointed-quotient-v2"
 REPAIR = (
     "2026-08-28: rebuilt on the degree-ten divided-power upper-Borel action; "
-    "the superseded v1 quotient used C531's degree-nine R10 action truncated "
+    "the superseded v1 quotient used an earlier degree-nine R10 action truncated "
     "to a non-invariant slice"
 )
 Q = 16
@@ -63,7 +64,7 @@ SYNDROME_DEGREE = REDUNDANCY - 1
 LOCATOR_DEGREE = REDUNDANCY - 2
 WIDTH = len(CARRIER_SUPPORT)
 EQUIVARIANCE_PAIRS = 1000
-EQUIVARIANCE_SEED = 0xC973_2026_0828
+EQUIVARIANCE_SEED = 221496297785384
 SWITCH_BASE_LIMIT = 200_000
 
 
@@ -634,7 +635,7 @@ def main() -> None:
     if args.check:
         if not args.output.exists() or args.output.read_text() != encoded:
             raise SystemExit("tracked output differs from deterministic regeneration")
-        print(f"C973 GF(16) pointed quotient: PASS ({result['orbit_count']} orbits)")
+        print(f"GF(16) pointed quotient: PASS ({result['orbit_count']} orbits)")
     else:
         args.output.write_text(encoded)
         print(
