@@ -25,6 +25,8 @@ const WIDE_SYNDROME_WORDS: usize = 3;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
 const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
 const ARTIFACT_VERSION: u16 = 1;
+const WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSW1";
+const WIDE_ARTIFACT_VERSION: u16 = 1;
 const MAX_ARTIFACT_BLOOM_WORDS: usize = FOUR_COMPLETION_BLOOM_BITS / 64;
 
 #[derive(Debug, Clone, PartialEq, Eq, Error)]
@@ -448,6 +450,8 @@ pub struct CompiledWideCssDistance {
     four_completion_bloom: CompletionBloom,
     check_conflicts: Box<[PackedSyndrome<3>]>,
     check_neighbors: Box<[WidePackedSupport]>,
+    source_sha256: [u8; 32],
+    artifact_payload_blake3: Option<[u8; 32]>,
 }
 
 /// Select original rows forming a basis, preserving sparse presentation rows.
@@ -584,7 +588,123 @@ impl CompiledWideCssDistance {
             four_completion_bloom,
             check_conflicts: structure.check_conflicts,
             check_neighbors: structure.check_neighbors,
+            source_sha256: CompiledCssDistance::source_sha256(physical, logical),
+            artifact_payload_blake3: None,
         })
+    }
+
+    /// Persist the expensive projected completion filters for a wide instance.
+    pub fn write_artifact<W: Write>(&self, mut writer: W) -> Result<(), CssDistanceArtifactError> {
+        writer.write_all(WIDE_ARTIFACT_MAGIC)?;
+        let mut writer = HashingWriter {
+            inner: writer,
+            hasher: blake3::Hasher::new(),
+        };
+        write_u16(&mut writer, WIDE_ARTIFACT_VERSION)?;
+        writer.bytes(&self.source_sha256)?;
+        write_u16(&mut writer, self.coordinate_count)?;
+        write_u16(&mut writer, self.check_count)?;
+        writer.bytes(&[
+            self.logical_count,
+            self.maximum_column_check_weight,
+            u8::from(self.kernel_weights_even),
+            0,
+        ])?;
+        for syndromes in &self.short_completion_syndromes {
+            write_len(&mut writer, syndromes.len())?;
+            for &syndrome in syndromes.iter() {
+                writer.bytes(&syndrome.to_le_bytes())?;
+            }
+        }
+        for bloom in [&self.three_completion_bloom, &self.four_completion_bloom] {
+            write_len(&mut writer, bloom.words.len())?;
+            write_u64_slice(&mut writer, &bloom.words)?;
+        }
+        let mut writer = writer.finish()?;
+        writer.flush()?;
+        Ok(())
+    }
+
+    /// Load source-bound wide filters and independently rebuild sparse search state.
+    pub fn read_artifact<R: Read>(
+        physical: &Matrix,
+        logical: &Matrix,
+        mut reader: R,
+    ) -> Result<Self, CssDistanceArtifactError> {
+        let mut magic = [0u8; 8];
+        reader.read_exact(&mut magic)?;
+        if &magic != WIDE_ARTIFACT_MAGIC {
+            return Err(CssDistanceArtifactError::Format);
+        }
+        let mut reader = HashingReader {
+            inner: reader,
+            hasher: blake3::Hasher::new(),
+        };
+        if read_u16(&mut reader)? != WIDE_ARTIFACT_VERSION {
+            return Err(CssDistanceArtifactError::Format);
+        }
+        let mut source_sha256 = [0u8; 32];
+        reader.bytes(&mut source_sha256)?;
+        if source_sha256 != CompiledCssDistance::source_sha256(physical, logical) {
+            return Err(CssDistanceArtifactError::SourceMismatch);
+        }
+        let coordinate_count = read_u16(&mut reader)?;
+        let check_count = read_u16(&mut reader)?;
+        let mut flags = [0u8; 4];
+        reader.bytes(&mut flags)?;
+        let logical_count = flags[0];
+        let maximum_column_check_weight = flags[1];
+        let kernel_weights_even = match flags[2] {
+            0 => false,
+            1 => true,
+            _ => return Err(CssDistanceArtifactError::Shape),
+        };
+        if flags[3] != 0
+            || usize::from(coordinate_count) != physical.cols()
+            || usize::from(logical_count) != logical.rows()
+        {
+            return Err(CssDistanceArtifactError::Shape);
+        }
+        let maximum_pairs = physical
+            .cols()
+            .saturating_mul(physical.cols().saturating_sub(1))
+            / 2;
+        let one_completion = read_syndromes(&mut reader, physical.cols())?;
+        let two_completion = read_syndromes(&mut reader, maximum_pairs)?;
+        let three_completion_bloom = read_bloom(&mut reader)?;
+        let four_completion_bloom = read_bloom(&mut reader)?;
+        let artifact_payload_blake3 = reader.finish()?;
+        if !strictly_sorted(&one_completion) || !strictly_sorted(&two_completion) {
+            return Err(CssDistanceArtifactError::Shape);
+        }
+        let structure = compile_wide_structure(physical, logical)?;
+        if check_count != structure.check_count
+            || maximum_column_check_weight != structure.maximum_column_check_weight
+            || kernel_weights_even != structure.kernel_weights_even
+        {
+            return Err(CssDistanceArtifactError::Shape);
+        }
+        Ok(Self {
+            columns: structure.columns,
+            neighbors: structure.neighbors,
+            coordinate_count,
+            check_count,
+            logical_count,
+            maximum_column_check_weight,
+            kernel_weights_even,
+            short_completion_syndromes: [one_completion, two_completion],
+            three_completion_bloom,
+            four_completion_bloom,
+            check_conflicts: structure.check_conflicts,
+            check_neighbors: structure.check_neighbors,
+            source_sha256,
+            artifact_payload_blake3: Some(artifact_payload_blake3),
+        })
+    }
+
+    #[inline]
+    pub fn artifact_payload_blake3(&self) -> Option<[u8; 32]> {
+        self.artifact_payload_blake3
     }
 
     #[inline]
@@ -2738,6 +2858,18 @@ mod tests {
         let driven = wide.search_bounded_syndrome_driven(&anchors, 5).unwrap();
         assert_eq!(driven.distance, Some(1));
         assert_eq!(&*driven.witness, &[4]);
+        let mut artifact = Vec::new();
+        wide.write_artifact(&mut artifact).unwrap();
+        let loaded =
+            CompiledWideCssDistance::read_artifact(&physical, &logical, &*artifact).unwrap();
+        assert!(loaded.artifact_payload_blake3().is_some());
+        assert_eq!(
+            loaded
+                .search_bounded_syndrome_driven(&anchors, 5)
+                .unwrap()
+                .distance,
+            driven.distance
+        );
         #[cfg(feature = "parallel")]
         {
             let pool = rayon::ThreadPoolBuilder::new()

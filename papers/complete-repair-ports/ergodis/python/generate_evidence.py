@@ -103,6 +103,7 @@ HASHED_PATHS = (
     "evidence/benchmarks.json",
     "evidence/c985-bb288-native-input.json",
     "evidence/c985-bb288-native-distance.jsonl",
+    "evidence/c985-bb288-native-cached-t8.jsonl",
     "evidence/c985-bb288-native-deepsplit-t1.jsonl",
     "evidence/c985-bb288-native-deepsplit-t2.jsonl",
     "evidence/c985-bb288-native-deepsplit-t4.jsonl",

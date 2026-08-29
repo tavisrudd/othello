@@ -117,21 +117,29 @@ fn main() -> Result<()> {
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
     let wide_problem = columns > 256 || physical.rows() > 128;
-    if wide_problem && (args.compiled_in.is_some() || args.compiled_out.is_some()) {
-        bail!("compiled artifacts are not yet supported by the wide CSS backend");
-    }
     let preparation_start = Instant::now();
     let (compiled, preparation_mode) = if let Some(path) = &args.compiled_in {
         let file = File::open(path)
             .with_context(|| format!("opening compiled artifact {}", path.display()))?;
-        (
-            Backend::Compact(CompiledCssDistance::read_artifact(
-                &physical,
-                &logical,
-                BufReader::new(file),
-            )?),
-            "artifact-load",
-        )
+        if wide_problem {
+            (
+                Backend::Wide(CompiledWideCssDistance::read_artifact(
+                    &physical,
+                    &logical,
+                    BufReader::new(file),
+                )?),
+                "wide-artifact-load",
+            )
+        } else {
+            (
+                Backend::Compact(CompiledCssDistance::read_artifact(
+                    &physical,
+                    &logical,
+                    BufReader::new(file),
+                )?),
+                "artifact-load",
+            )
+        }
     } else if wide_problem {
         (
             Backend::Wide(CompiledWideCssDistance::compile(&physical, &logical)?),
@@ -151,17 +159,17 @@ fn main() -> Result<()> {
             .create_new(true)
             .open(path)
             .with_context(|| format!("creating compiled artifact {}", path.display()))?;
-        let Backend::Compact(compiled) = &compiled else {
-            unreachable!("wide artifacts were rejected before compilation")
-        };
-        compiled.write_artifact(BufWriter::new(file))?;
+        match &compiled {
+            Backend::Compact(compiled) => compiled.write_artifact(BufWriter::new(file))?,
+            Backend::Wide(compiled) => compiled.write_artifact(BufWriter::new(file))?,
+        }
         Some(start.elapsed().as_secs_f64())
     } else {
         None
     };
     let artifact_payload_blake3 = match &compiled {
         Backend::Compact(compiled) => compiled.artifact_payload_blake3(),
-        Backend::Wide(_) => None,
+        Backend::Wide(compiled) => compiled.artifact_payload_blake3(),
     }
     .map(|digest| {
         let mut encoded = String::with_capacity(64);

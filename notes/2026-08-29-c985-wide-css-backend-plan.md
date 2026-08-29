@@ -143,3 +143,32 @@ between coarse exact subtrees.  The final eleven-round envelope is:
 The 8-thread path is 6.52x faster than the earlier 2.564973-second best
 sequential record, with at most 0.149% additional candidates.  Wide compile
 now dominates end-to-end latency, making artifact persistence the next target.
+
+## Wide persistence checkpoint
+
+Wide artifacts persist only the expensive projected completion tables and
+Bloom filters.  They are bound to the exact physical/logical matrices by
+SHA-256 and protect the payload with BLAKE3.  Loading independently rebuilds
+the sparse row basis, connectivity graph, check-conflict masks, and check
+neighborhoods, then verifies dimensions and structural flags before admitting
+the filters.
+
+The BB288 artifact is 21 MB, writes in about 6 ms, and loaded in 12--25 ms in
+the measured runs versus about 1.75 seconds to compile: a 70--144x preparation
+speedup.  The retained 8-thread cached run has 0.400654-second median search
+over eleven rounds and payload digest
+`e11ab3e9f5c11b06e9de7311f3d70f0b82a4f232bb5918736fb267cf859eeee2`.
+Effective cold exact distance is therefore about 0.43 seconds, roughly 5x
+faster than compile plus search.
+
+Replay without writing to RAM-backed `/tmp`:
+
+```bash
+artifact_dir=$(mktemp -d -p /home/tavis/.cache/ergodis bb288-replay.XXXXXX)
+target/release/css_distance_native \
+  --input evidence/c985-bb288-native-input.json --maximum-weight 2 \
+  --compiled-out "$artifact_dir/bb288.bin"
+target/release/css_distance_native \
+  --input evidence/c985-bb288-native-input.json --maximum-weight 18 \
+  --threads 8 --compiled-in "$artifact_dir/bb288.bin"
+```

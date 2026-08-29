@@ -205,7 +205,9 @@ BB `[[288,12,18]]` run closes the exact distance in about 2.6 seconds of warm
 single-core search after a roughly 1.8-second compile.  The wide parallel path
 uses the same cache-line-separated bound pulses and anchor-level
 Young-Brothers-Wait.  Disjoint deeper seeds feed coarse work-stealing tasks;
-the retained eight-thread median is about 0.39 seconds.
+the retained eight-thread median is about 0.39 seconds.  Wide compiled
+artifacts persist the 21 MB completion-filter payload with the same
+source-binding and checksum discipline; measured reload is about 12--25 ms.
 
 ### Contextual-state library APIs
 
