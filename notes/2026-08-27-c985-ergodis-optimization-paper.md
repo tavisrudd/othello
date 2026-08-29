@@ -1341,6 +1341,12 @@ construction is 3.4 us on the shuffle control and 4.6 us on the coupled
 control; warm generic evaluation is 9.0% behind the exact separator solver on
 the former and 18.8% ahead on the latter.  The hardware-counter pass predates
 this final change and remains diagnostic rather than a separate paper claim.
+A final isolated 100,000-evaluation coupled pass after the full change measured
+2,688,640,668 cycles and 10,891,364,155 instructions for generic evaluation,
+versus 2,939,393,801 cycles and 15,373,528,447 instructions for the specialized
+join: 1.093x fewer cycles and 1.411x fewer instructions.  This single counter
+pass is diagnostic; the alternating nine-round timing above remains the
+retained statistical claim.
 
 ## Mystery ledger
 
