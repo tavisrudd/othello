@@ -126,3 +126,20 @@ gain against that best baseline is 3.60x.  At eight SMT threads speculative
 work grows by at most 0.063%.  The current split exposes five first-level
 branches per anchor, so only five workers can be busy at once; compiling one
 more disjoint fail-first level is the next load-balance improvement.
+
+That improvement is now implemented.  Breadth compilation continues through
+whole disjoint fail-first levels until it exposes at least four seeds per
+worker, then places at most one seed in each of up to sixteen Rayon tasks per
+worker.  Each task still owns one pre-sized workspace; stealing happens only
+between coarse exact subtrees.  The final eleven-round envelope is:
+
+| threads | median search (s) | speedup | Welch t | candidate span |
+|---:|---:|---:|---:|---:|
+| 1 | 2.494941 | 1.000x | -- | 53,086,371 |
+| 2 | 1.220207 | 2.045x | 125.45 | 53,097,401 |
+| 4 | 0.662472 | 3.766x | 195.32 | 53,119,121--53,119,910 |
+| 8 | 0.393274 | 6.344x | 305.15 | 53,152,951--53,165,481 |
+
+The 8-thread path is 6.52x faster than the earlier 2.564973-second best
+sequential record, with at most 0.149% additional candidates.  Wide compile
+now dominates end-to-end latency, making artifact persistence the next target.
