@@ -150,19 +150,25 @@ in the state loop and writes only large sequential blocks.  Quotient
 transitions are taken from the already-interned representative signatures, so
 each transition oracle is evaluated exactly once per concrete source edge.
 
-Replay reads strata in reverse order and retains only the current signature
-workspace and the next stratum's concrete class map.  It deliberately does not
+Replay reads strata in reverse order and retains bounded linear work arrays for
+the current stratum plus the next stratum's concrete class map; its independent
+sorting pass is `O(n log n)` rather than the compiler's expected-time hash path.
+It deliberately does not
 reuse the compiler's hash interner: an independent sort reconstructs signature
 groups, canonical representative order, outputs, transitions, entry maps, and
 witness provenance.  `ERGFRZ02` also repairs the deployment trust boundary by
 binding entry ranges, entry classes, and all metrics in addition to the
-quotient tables.  The old `ERGLAY01`/`ERGFRZ01` files remain historical
-evidence; the current checker targets version 2.
+quotient tables.  Replay certifies semantics relative to the recorded oracle
+transcript; the recorded external SHA-256, not the internal noncryptographic
+fingerprint alone, binds committed evidence.  The old `ERGLAY01`/`ERGFRZ01`
+files remain historical evidence; the current checker targets version 2.
 
 The scaling result is strongest at depth 64 and `b=256`: 4,276,224 concrete
-states compile to 32,769 classes.  Nine interleaved CPU-2 rounds compare equal
-products--compile plus streamed evidence plus independent replay--rather than
-the earlier unequal full-map/frozen outputs.  The frontier-one path is 1.754x
+states compile to 32,769 classes.  Nine interleaved CPU-2 rounds compare a
+byte-equal frozen result and equivalent certification obligation, not identical
+audit encodings: version 1 writes an explicit class map in a second oracle pass,
+whereas version 2 fuses the transcript and reconstructs the map on replay.  The
+frontier-one certified pipeline is 1.754x
 faster end to end (`t=134.02` on paired log ratios), 4.989x faster in its
 compile-and-stream phase, and 3.607x lower in peak RSS (`t=252.27`).  Its
 independent sorting replay is 0.665x the old replay speed, an intentional cost
@@ -195,8 +201,9 @@ MATA is the relevant high-performance generic automata implementation.  The
 honest general statement is a typed contextual minimal-realization theorem:
 for finite carriers `X_s`, observations `o_s`, and deterministic typed
 generators `g : s -> t`, equality under every well-typed continuation is the
-greatest typed congruence refining observations, and its quotient is the
-unique smallest typed realization up to typed isomorphism.  DFA
+greatest typed congruence refining observations.  When every concrete state is
+an admitted entry (or unreachable quotient classes are trimmed), its quotient
+is the unique smallest typed realization up to typed isomorphism.  DFA
 Myhill--Nerode, Moore-machine minimization, colored deterministic transition
 systems, and acyclic-DAG hash-consing are recovered as special presentations.
 
@@ -206,7 +213,10 @@ as input; compilation retains concrete optimizing witnesses; and the same
 quotient is emitted as a bounded frozen evaluator with independently replayable
 evidence.  This statement does **not** subsume unrestricted nondeterministic or
 tropical weighted-automata minimization, whose equivalence theory is materially
-different.
+different.  The current collision-checked open-address interner is exact but
+has only an expected-time performance claim; a public fixed hash can be driven
+to quadratic probing, so Revuz's worst-case linear bound is not borrowed for
+this implementation.
 
 For a general acyclic sort-dependency DAG and reverse topological schedule
 `pi`, each concrete class map is live only from compilation of its sort until
@@ -231,6 +241,53 @@ so generality adds no chain hot-path tax.  The remaining general problem is
 schedule selection when the supplied topological order is not fixed; that
 connects to pebbling, register allocation, pathwidth/cutwidth, variable
 elimination, and tensor-contraction ordering.
+
+Commit `cafb79f0b` extends the fused transcript and independent replay to those
+arbitrary forward-edge DAGs as `ERGLAY03`.  The verifier reconstructs distinct
+predecessor-sort counts from the transcript, releases maps independently at
+last use, and uses sorting rather than the compiler's interner.  Forty-eight
+deterministic randomized DAGs plus parallel edges, skip edges, disconnected
+components, selected sinks, corruption, and empty strata are differential
+controls against full compilation.
+
+A retained three-family benchmark fixes 32 sorts and 32,768 concrete states per
+sort while varying only dependency geometry.  It compares the old full-map
+certified pipeline against the consuming `ERGLAY03` pipeline over nine
+interleaved CPU-2 rounds and requires byte-identical frozen artifacts after
+every pair.  The observed structural counters match exactly:
+
+| DAG | peak live class words | live maps | peak signature words | certified time ratio | RSS ratio |
+|---|---:|---:|---:|---:|---:|
+| chain | 65,536 | 2 | 65,536 | 1.917x | 2.078x |
+| distance-4 window | 163,840 | 5 | 163,840 | 1.995x | 1.761x |
+| full span | 1,048,576 | 32 | 1,048,576 | 1.905x | 0.932x |
+
+The full-span RSS result is the important negative: when every later map stays
+live until sort zero, last-use reclamation cannot reduce map residency, and
+the consuming verifier is about 7% heavier at process resolution.  Thus the
+frontier counter predicts where memory improves rather than manufacturing a
+universal win.  Time still improves because fused evidence removes the second
+oracle pass and explicit class-map stream; this is a certified-pipeline and
+format result, not an isolated reclamation speedup.
+
+These counters are structural, not a complete byte/RSS model.  They exclude
+retained entries and quotient output, hash-interner tables, verifier sort
+arrays, directories, and allocator/runtime overhead, and signature and live-map
+maxima are reported separately.  They certify the supplied numeric topological
+order, not the minimum over all orders.
+
+```sh
+ERGODIS_ROUNDS=9 ERGODIS_CPU=2 \
+  papers/complete-repair-ports/ergodis/scripts/layered-dag-certified-ab.sh \
+  /home/tavis/.cache/ergodis/nix-target/release/examples/layered_dag_driver \
+  > papers/complete-repair-ports/ergodis/evidence/c985-layered-dag-certified-final.tsv
+papers/complete-repair-ports/ergodis/scripts/check-layered-dag-evidence.sh
+```
+
+- DAG driver: `de546d490ba2d2c8be2036393dee249dbdad63809eaad7047874685385e831dd`;
+- DAG A/B script: `7be696e19d8e77e3a7783ded429697af3b1375779d9409927f95bf52e009021b`;
+- DAG checker: `77061cadd68830e279177fc1355559506426740f82e21c2794521836e04292b9`;
+- DAG evidence: `a15fab754788456c055e4fb31ca11ef116cecda72e2310aaa9aa633b53f3323a`.
 
 Primary references:
 
