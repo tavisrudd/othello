@@ -519,6 +519,9 @@ impl<'a> FrozenParetoPlan<'a> {
                     }
                     .into());
                 }
+                for entry in &output_front.entries {
+                    validate_element(monoid.element_count(), entry.resource)?;
+                }
                 accumulator.clear();
                 accumulator.extend_from_slice(&output_front.entries);
                 for &generator in &self.outgoing[self.offsets[sort]..self.offsets[sort + 1]] {
@@ -531,6 +534,7 @@ impl<'a> FrozenParetoPlan<'a> {
                         .and_then(Option::as_ref)
                         .ok_or(FrozenParetoError::Artifact)?;
                     for &edge in &edge_fronts[generator as usize].entries {
+                        validate_element(monoid.element_count(), edge.resource)?;
                         for &suffix in &child.entries {
                             let resource = monoid.combine(edge.resource, suffix.resource);
                             validate_element(monoid.element_count(), resource)?;
@@ -787,6 +791,9 @@ impl FrozenParetoQueryPlan<'_, '_> {
                     }
                     .into());
                 }
+                for entry in &output_front.entries {
+                    validate_element(monoid.element_count(), entry.resource)?;
+                }
                 accumulator.clear();
                 accumulator.extend_from_slice(&output_front.entries);
                 let global_local = self.reachable_offsets[sort] + class_local;
@@ -805,6 +812,7 @@ impl FrozenParetoQueryPlan<'_, '_> {
                         .and_then(Option::as_ref)
                         .ok_or(FrozenParetoError::Artifact)?;
                     for &edge in &edge_fronts[generator as usize].entries {
+                        validate_element(monoid.element_count(), edge.resource)?;
                         for &suffix in &child.entries {
                             let resource = monoid.combine(edge.resource, suffix.resource);
                             validate_element(monoid.element_count(), resource)?;
@@ -1669,5 +1677,28 @@ mod tests {
             plan.evaluate(&monoid, &[empty], &[], &mut workspace, |_, _, _| 0),
             Err(FrozenParetoError::EdgeFrontCount)
         );
+        let larger = CappedAdditiveMonoid::new([2]).unwrap();
+        let foreign = WitnessedParetoFront::new(
+            &larger,
+            [ParetoWitness {
+                resource: 2,
+                witness: 0,
+            }],
+        )
+        .unwrap();
+        let foreign_outputs = [foreign.clone(), foreign.clone(), foreign];
+        let valid_edges = [identity];
+        assert!(matches!(
+            selected_query.evaluate(
+                &monoid,
+                &foreign_outputs,
+                &valid_edges,
+                &mut workspace,
+                |_, _, _| 0,
+            ),
+            Err(FrozenParetoError::Resource(OrderedResourceError::Element {
+                element: 2
+            }))
+        ));
     }
 }
