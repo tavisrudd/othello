@@ -1,0 +1,88 @@
+{
+  "schema": "ergodis-vlsat2-prefix-manifest-v1",
+  "official_index": "https://cadp.inria.fr/resources/vlsat/2.html",
+  "selection": "the first ten rows of the official size-ordered table",
+  "builder_sha256": "4402aff4e28bdd76b1fdb57c954bcbf1f8c52d9b5475d2c3a371946388018f47",
+  "instances": [
+    {
+      "filename": "vlsat2_544_8738.cnf",
+      "archive": "vlsat2_544_8738.cnf.bz2",
+      "variables": 544,
+      "clauses": 8738,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_544_8738.cnf.bz2"
+    },
+    {
+      "filename": "vlsat2_600_11440.cnf",
+      "archive": "vlsat2_600_11440.cnf.bz2",
+      "variables": 600,
+      "clauses": 11440,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_600_11440.cnf.bz2"
+    },
+    {
+      "filename": "vlsat2_684_9417.cnf",
+      "archive": "vlsat2_684_9417.cnf.bz2",
+      "variables": 684,
+      "clauses": 9417,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_684_9417.cnf.bz2"
+    },
+    {
+      "filename": "vlsat2_684_13953.cnf",
+      "archive": "vlsat2_684_13953.cnf.bz2",
+      "variables": 684,
+      "clauses": 13953,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_684_13953.cnf.bz2"
+    },
+    {
+      "filename": "vlsat2_708_10259.cnf",
+      "archive": "vlsat2_708_10259.cnf.bz2",
+      "variables": 708,
+      "clauses": 10259,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_708_10259.cnf.bz2"
+    },
+    {
+      "filename": "vlsat2_736_11022.cnf",
+      "archive": "vlsat2_736_11022.cnf.bz2",
+      "variables": 736,
+      "clauses": 11022,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_736_11022.cnf.bz2"
+    },
+    {
+      "filename": "vlsat2_798_17543.cnf",
+      "archive": "vlsat2_798_17543.cnf.bz2",
+      "variables": 798,
+      "clauses": 17543,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_798_17543.cnf.bz2"
+    },
+    {
+      "filename": "vlsat2_1000_22250.cnf",
+      "archive": "vlsat2_1000_22250.cnf.bz2",
+      "variables": 1000,
+      "clauses": 22250,
+      "expected": "sat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_1000_22250.cnf.bz2"
+    },
+    {
+      "filename": "vlsat2_1022_14955.cnf",
+      "archive": "vlsat2_1022_14955.cnf.bz2",
+      "variables": 1022,
+      "clauses": 14955,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_1022_14955.cnf.bz2"
+    },
+    {
+      "filename": "vlsat2_1125_15795.cnf",
+      "archive": "vlsat2_1125_15795.cnf.bz2",
+      "variables": 1125,
+      "clauses": 15795,
+      "expected": "unsat",
+      "official_url": "https://cadp.inria.fr/ftp/benchmarks/vlsat/vlsat2_1125_15795.cnf.bz2"
+    }
+  ]
+}

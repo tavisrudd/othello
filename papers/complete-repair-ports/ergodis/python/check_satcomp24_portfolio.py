@@ -45,6 +45,17 @@ def close(left: float | None, right: float | None) -> bool:
     return math.isclose(left, right, rel_tol=1e-12, abs_tol=1e-12)
 
 
+def distribution(samples: list[int]) -> dict[str, float | int]:
+    quartiles = statistics.quantiles(samples, n=4, method="inclusive")
+    return {
+        "min_ns": min(samples),
+        "q1_ns": quartiles[0],
+        "median_ns": statistics.median(samples),
+        "q3_ns": quartiles[2],
+        "max_ns": max(samples),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("evidence", type=Path)
@@ -58,6 +69,10 @@ def main() -> None:
     document = json.loads(args.evidence.read_text())
     if document["schema"] != "ergodis-satcomp24-portfolio-ab-v1":
         raise SystemExit("unexpected evidence schema")
+    if document["method"]["canonical_host"] and not document["host"][
+        "stable_frequency_policy"
+    ]:
+        raise SystemExit("canonical evidence records an unstable frequency policy")
     artifacts = document["artifacts"]
     expected_hashes = {
         "manifest_sha256": sha256(args.manifest),
@@ -110,14 +125,16 @@ def main() -> None:
         logs = [math.log(a / b) for a, b in zip(direct, portfolio)]
         suite_logs.append(statistics.median(logs))
         checks = {
-            "kissat_median_ns": statistics.median(direct),
-            "ergodis_median_ns": statistics.median(portfolio),
             "paired_geometric_mean_speedup": math.exp(statistics.mean(logs)),
             "paired_log_t": t_score(logs),
         }
         for key, expected in checks.items():
             if not close(summary[key], expected):
                 raise SystemExit(f"summary mismatch for {filename}: {key}")
+        if summary["kissat_distribution"] != distribution(direct):
+            raise SystemExit(f"distribution mismatch for {filename}: Kissat")
+        if summary["ergodis_distribution"] != distribution(portfolio):
+            raise SystemExit(f"distribution mismatch for {filename}: Ergodis")
     if records:
         raise SystemExit("raw evidence has instances absent from summary")
     if document["paired_instances"] != len(suite_logs):
