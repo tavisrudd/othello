@@ -216,6 +216,13 @@ Current and completed strengthening:
 
 Sequel research:
 
+- [C998 ergodis public/private partition design](../2026-08-29-c998-ergodis-partition-design.md)
+  and [patent landscape by vertical](../2026-08-29-c998-patent-landscape.md)
+  are closed as design-only commercialization inputs (AGPL + commercial dual
+  license; five-tier split; narrow quantum provisional recommended before C997
+  publishes; storage needs paid FTO; certified compiler alone is not
+  patentable per the [VeriPB prior-art note](../2026-08-29-ergodis-certificate-prior-art-veripb.md)).
+  No code moves, push, or filing has been made.
 - [C983 Ergodis cross-domain exact compositional optimization](../2026-08-27-c983-ergodis-cross-domain-potential.md)
   is in progress as private research.  Its first concentrated expansion window
   produced a [90-minute report](../2026-08-27-c983-90m-report.md), a 36-source
