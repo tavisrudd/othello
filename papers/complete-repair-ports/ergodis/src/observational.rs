@@ -2594,8 +2594,6 @@ where
     let mut local_class_representatives = vec![Vec::<u32>::new(); state_counts.len()];
     for sort in (0..state_counts.len()).rev() {
         let count = state_counts[sort] as usize;
-        local_class_outputs[sort].reserve_exact(count);
-        local_class_representatives[sort].reserve_exact(count);
         let width = outgoing[sort]
             .len()
             .checked_add(1)
@@ -2637,6 +2635,7 @@ where
         let mut lookup_hashes = vec![0_u64; lookup_capacity];
         let mut lookup_representatives = vec![u32::MAX; lookup_capacity];
         let lookup_mask = lookup_capacity - 1;
+        let mut next_class = 0_u32;
         for state in 0..count as u32 {
             let start = state as usize * width;
             let signature = &signatures[start..start + width];
@@ -2647,10 +2646,10 @@ where
                 if representative == u32::MAX {
                     lookup_hashes[slot] = hash;
                     lookup_representatives[slot] = state;
-                    let class = u32::try_from(local_class_outputs[sort].len())
-                        .map_err(|_| ObservationalError::Overflow)?;
-                    local_class_outputs[sort].push(signature[0]);
-                    local_class_representatives[sort].push(state);
+                    let class = next_class;
+                    next_class = next_class
+                        .checked_add(1)
+                        .ok_or(ObservationalError::Overflow)?;
                     break class;
                 }
                 let representative_start = representative as usize * width;
@@ -2663,14 +2662,17 @@ where
             };
             local_state_classes[(range.start + state) as usize] = class;
         }
-        class_counts[sort] = u32::try_from(local_class_outputs[sort].len())
-            .map_err(|_| ObservationalError::Overflow)?;
-        local_class_outputs[sort] = std::mem::take(&mut local_class_outputs[sort])
-            .into_boxed_slice()
-            .into_vec();
-        local_class_representatives[sort] = std::mem::take(&mut local_class_representatives[sort])
-            .into_boxed_slice()
-            .into_vec();
+        local_class_outputs[sort] = Vec::with_capacity(next_class as usize);
+        local_class_representatives[sort] = Vec::with_capacity(next_class as usize);
+        for state in 0..count as u32 {
+            let class = local_state_classes[(range.start + state) as usize];
+            if class as usize == local_class_outputs[sort].len() {
+                local_class_outputs[sort].push(signatures[state as usize * width]);
+                local_class_representatives[sort].push(state);
+            }
+        }
+        debug_assert_eq!(local_class_outputs[sort].len(), next_class as usize);
+        class_counts[sort] = next_class;
     }
 
     fn layered_signature_hash(signature: &[u32]) -> u64 {

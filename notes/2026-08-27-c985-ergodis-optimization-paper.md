@@ -39,6 +39,89 @@ compression is admitted only if profiling shows probe hashing or storage still
 dominates after direct construction.  C995 results may alter the final
 follow-on choice, but not this acceptance boundary.
 
+## Direct layered compiler result, 2026-08-28
+
+Commits `a5c64abd9` and `e41a83b60` implement the general acyclic case of the
+contextual quotient theorem.  A layered typed system no longer needs a raw
+`FinitePresentation` or generic partition refinement: reverse induction
+interns each flat signature
+
+\[
+  (\operatorname{obs}(x),[g_1x],\ldots,[g_kx])
+\]
+
+after the target strata are fixed.  Exact collision-checked open addressing
+assigns canonical classes in concrete-state order.  Signature, lookup, and
+class buffers are pre-sized; there is no per-state allocation, recursion, or
+raw transition table.  The resulting `CompiledObservation` is compatible with
+the generic compiler's canonical class numbering on the independent layered
+control and passes the existing verifier.
+
+The hierarchy adapter additionally proves and exhaustively checks two closed
+forms against the production composition oracle.  After the first layer every
+profile is either `[0,o,c,0]` or `[0,o,0,o]`; its local state ID and all three
+successors are arithmetic functions of `(o,c)`.  This explains the stable
+`b(b+1)` stratum size.  Reverse signatures then give class counts `b`, `2b`,
+`2b`, `2b`, and `b+1`, explaining the previously empirical total `8b+1`.
+Neither profiles nor transition maps are constructed on the direct path.
+
+`FrozenObservation::into_frozen` consumes the verified result and retains raw
+state-to-class lookup only for nominated entry sorts.  Quotient transitions,
+outputs, global concrete representative IDs, and metrics remain available.
+For the depth-4, `b=256` hierarchy this keeps all 65,536 entry states and 2,049
+classes in 300,312 payload bytes, versus 1,352,944 bytes for the full direct
+artifact and 4,469,760 bytes for the former raw evaluator.
+
+Nine CPU-2 paired rounds, with generic/direct process order alternated, compare
+the optimized raw-presentation plus split-transcript compiler against direct
+layered compilation plus freezing.  The geometric time ratio is 12.476x and
+the median paired ratio is 12.618x (paired log-ratio `t=193.53`).  Peak RSS is
+4.651x lower geometrically and 4.637x lower by the median paired ratio
+(`t=280.58`).  The older 2.061-second raw construction is not used as the A
+side: theorem-specializing the scalar hierarchy transition already reduced
+that construction to roughly 40--45 ms, so the recorded comparison is against
+the corrected optimized baseline.
+
+```sh
+ERGODIS_ROUNDS=9 ERGODIS_CPU=2 \
+  papers/complete-repair-ports/ergodis/scripts/layered-hierarchy-ab.sh \
+  /home/tavis/.cache/ergodis/nix-target/release/examples/observational_hierarchy_driver \
+  > papers/complete-repair-ports/ergodis/evidence/c985-layered-hierarchy-final.tsv
+papers/complete-repair-ports/ergodis/scripts/check-layered-hierarchy-evidence.sh
+```
+
+- A/B script: `736afdd1353a35fd25189d53930e7fb1e13c667a82c6ccfcf9c6526dccfc9375`;
+- checker: `8a0a64651a9cae295c8e44e9966478383be26493ba2e2afa008eab11ad18ee51`;
+- evidence TSV: `bf8f3ee695bb186778046c5bd788ec6e9d2ae6f770a52644198493df1830a9d5`.
+
+The deliberate boundary is evidence policy.  The generic A side retains a
+split transcript; the direct compiler is exact by acyclic reverse induction
+and freezes a query artifact, but does not yet emit an independently replayed
+layered transcript.  A streaming per-stratum transcript is therefore the next
+trust upgrade, not part of the speed claim.
+
+### Deliberate `ej` / `tt` / red-team checkpoints
+
+1. The first frozen-envelope pass exposed an allocation in repeated context
+   canonicalization.  An opaque canonical context now precomputes its exact
+   subspace key; the frozen query loop allocates zero times.  Dimension-5 and
+   dimension-6 batches measured 360x and 1,124x faster than cached subspace
+   scans, respectively.  Treating this as the hierarchy solution was rejected:
+   it was only an enabling primitive.
+2. The first layered compiler saved memory but was time-neutral because it
+   sorted signatures and the adapter binary-searched profile sets.  Reverse
+   induction needs neither.  Collision-checked interning removed sorting, and
+   the closed profile-family theorem removed lookup entirely.
+3. Pre-sizing class outputs to the raw-state upper bound obeyed the allocation
+   rule but damaged cold time and cache locality.  The retained design assigns
+   scalar class IDs in the zero-allocation state loop, then allocates the exact
+   small output/witness arrays once and fills them in a linear post-pass.
+4. The apparent `8b+1` pattern is no longer a mystery or an empirical capacity
+   hint: it is the sum of the five proved stratum counts above.  The unresolved
+   issue is how much of this hierarchy-specific normal-form discovery can be
+   automated for other adapters without asking users to hand-supply the state
+   coordinate system.
+
 ## Objective
 
 Develop a follow-on paper presenting ergodis as a structure-aware compiler and

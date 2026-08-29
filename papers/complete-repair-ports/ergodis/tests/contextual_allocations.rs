@@ -1,5 +1,6 @@
 use ergodis::observational::{
-    compile_observational_with_policy, CertificatePolicy, FinitePresentation, GeneratorSpec,
+    compile_layered_observational, compile_observational_with_policy, CertificatePolicy,
+    FinitePresentation, GeneratorSpec, LayeredGeneratorSpec,
 };
 use ergodis::{
     CanonicalContextBasis, CostTable, DenseSelector, Gf4, Matrix, Prime, RankBoundedContextCache,
@@ -153,6 +154,36 @@ fn observational_multiway_has_no_per_event_allocation_growth() {
     assert!(
         large_allocations <= small_allocations + 2,
         "multiway allocations grew from {small_allocations} to {large_allocations}"
+    );
+}
+
+#[test]
+fn layered_compiler_has_no_per_state_allocation_growth() {
+    let generators = [LayeredGeneratorSpec {
+        source_sort: 0,
+        target_sort: 1,
+    }];
+    let (_, small_allocations) = tracked_allocations(|| {
+        compile_layered_observational(
+            &[64, 64],
+            &generators,
+            |_, state| state % 7,
+            |_, state| state,
+        )
+        .unwrap()
+    });
+    let (_, large_allocations) = tracked_allocations(|| {
+        compile_layered_observational(
+            &[4_096, 4_096],
+            &generators,
+            |_, state| state % 7,
+            |_, state| state,
+        )
+        .unwrap()
+    });
+    assert!(
+        large_allocations <= small_allocations + 2,
+        "layered allocations grew from {small_allocations} to {large_allocations}"
     );
 }
 
