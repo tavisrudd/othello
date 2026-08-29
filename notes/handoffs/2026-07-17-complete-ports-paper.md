@@ -376,9 +376,20 @@ Sequel research:
   one-hot LP, source-plus-cover identity, and allocation-free single/complete
   result replay with omission, duplication, identity, claim, feasibility, and
   optimality rejection.  It is not a scaling representation, and no installed
-  Gurobi/SCIP/HiGHS executable was available for a parser round trip.  Compact
-  parity/relative-code emission with row-space invariance certificates is the
-  next gate before a Gross CSS adapter.
+  Gurobi/SCIP/HiGHS executable was available for a parser round trip.  The
+  native parity path now extends through an isolated six-word specialization
+  to the official QDistSAT `BB_360_12_?` matrices.  Both CSS directions
+  independently certify exact distance 24 after a combined 192,001,784,180
+  candidates and 469.322088944 seconds of search; block-swap plus torus
+  inversion independently proves their equivalence.  The published radius-20
+  portfolio completed 0/46 configurations at 7,200 seconds, whereas Ergodis
+  closes both directions in 12.470892325 seconds warm.  The prior five-word
+  BB288 layout and artifact format are unchanged, and its post-change control
+  shows no slowdown.  The atomic report is
+  [C985 BB360 exact distance](../2026-08-29-c985-qdist-bb360-exact-distance.md).
+  The next gate is an algebraically prefiltered weight-six discovery search for
+  a Pareto survivor with `k d^2 / n > 19.2`; a broad generic-SAT claim remains
+  out of scope.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

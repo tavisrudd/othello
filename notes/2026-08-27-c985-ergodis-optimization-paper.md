@@ -1514,3 +1514,29 @@ compiler impact.
   separately by finalized provenance nodes, and a retained multiround speedup.
   Current length-five evidence does not exercise the unbounded-witness half of
   this successor.
+
+## 2026-08-29 QDistSAT BB360 exact-distance extension
+
+The official QDistSAT `BB_360_12_?` instance is now certified as
+`[[360,12,24]]`; the atomic report and replay boundary are
+[`2026-08-29-c985-qdist-bb360-exact-distance.md`](2026-08-29-c985-qdist-bb360-exact-distance.md).
+Both CSS directions independently exhaust radius 24 and retain distinct
+weight-24 witnesses.  Combined search is 192,001,784,180 candidates in
+469.322088944 seconds on 24 pinned hardware threads.  The published radius-20
+portfolio completed 0/46 configurations at 7,200 seconds; Ergodis closes that
+same two-direction radius in 12.470892325 seconds warm, a conservative
+cross-machine lower bound of 577.34x.
+
+The implementation adds a six-word support specialization for 321--384
+coordinates.  It does not widen the prior five-word BB288 path: both are
+separate const-generic monomorphizations with distinct artifact magic, and the
+hot recursion remains iterative and allocation-free.  A post-change BB288
+control is 2.69% faster than the retained median rather than slower.  The
+importer verifies the two torus generators on physical row space and quotient
+observability, and the independent paired checker proves block-swap plus torus
+inversion is an exact X/Z isomorphism.
+
+This establishes a specialized exact-quantum-distance result, not a generic
+SAT or MIP claim.  The highest-EV scientific successor is an algebraically
+prefiltered weight-six code search whose exact stage admits only Pareto
+survivors capable of exceeding `k d^2 / n = 19.2`.

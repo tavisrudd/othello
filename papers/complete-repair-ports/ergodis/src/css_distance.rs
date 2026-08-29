@@ -21,13 +21,24 @@ const MAX_LOGICALS: usize = 64;
 const SUPPORT_WORDS: usize = MAX_COORDINATES / 64;
 const SYNDROME_WORDS: usize = MAX_CHECKS / 64;
 const WIDE_SUPPORT_WORDS: usize = 5;
+const EXTRA_WIDE_SUPPORT_WORDS: usize = 6;
 const WIDE_SYNDROME_WORDS: usize = 3;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
 const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
 const ARTIFACT_VERSION: u16 = 1;
 const WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSW1";
 const WIDE_ARTIFACT_VERSION: u16 = 1;
+const EXTRA_WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSX1";
+const EXTRA_WIDE_ARTIFACT_VERSION: u16 = 1;
 const MAX_ARTIFACT_BLOOM_WORDS: usize = FOUR_COMPLETION_BLOOM_BITS / 64;
+
+fn wide_artifact_identity<const SUPPORT_WORDS: usize>() -> (&'static [u8; 8], u16) {
+    match SUPPORT_WORDS {
+        WIDE_SUPPORT_WORDS => (WIDE_ARTIFACT_MAGIC, WIDE_ARTIFACT_VERSION),
+        EXTRA_WIDE_SUPPORT_WORDS => (EXTRA_WIDE_ARTIFACT_MAGIC, EXTRA_WIDE_ARTIFACT_VERSION),
+        _ => unreachable!("unsupported fixed support width"),
+    }
+}
 
 #[derive(Debug, Clone, PartialEq, Eq, Error)]
 pub enum CssDistanceError {
@@ -236,7 +247,6 @@ fn wide_syndrome_key(syndrome: PackedSyndrome<3>) -> u128 {
     u128::from(low) | (u128::from(high) << 64)
 }
 
-type WidePackedSupport = PackedSupport<WIDE_SUPPORT_WORDS>;
 type WidePackedColumn = PackedColumn<WIDE_SYNDROME_WORDS>;
 
 #[repr(C)]
@@ -420,14 +430,14 @@ struct CompiledStructure {
     kernel_weights_even: bool,
 }
 
-struct WideCompiledStructure {
+struct WideCompiledStructure<const SUPPORT_WORDS: usize> {
     columns: Box<[WidePackedColumn]>,
-    neighbors: Box<[WidePackedSupport]>,
+    neighbors: Box<[PackedSupport<SUPPORT_WORDS>]>,
     check_count: u16,
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
     check_conflicts: Box<[AlignedConflict]>,
-    check_neighbors: Box<[WidePackedSupport]>,
+    check_neighbors: Box<[PackedSupport<SUPPORT_WORDS>]>,
 }
 
 #[repr(C, align(32))]
@@ -441,9 +451,9 @@ const _: () = assert!(std::mem::size_of::<AlignedConflict>() == 32);
 
 /// Precompiled exact state for CSS instances up to 320 coordinates and rank 192.
 #[derive(Clone, Debug)]
-pub struct CompiledWideCssDistance {
+pub struct CompiledWideCssDistanceImpl<const SUPPORT_WORDS: usize> {
     columns: Box<[WidePackedColumn]>,
-    neighbors: Box<[WidePackedSupport]>,
+    neighbors: Box<[PackedSupport<SUPPORT_WORDS>]>,
     coordinate_count: u16,
     check_count: u16,
     logical_count: u8,
@@ -453,10 +463,13 @@ pub struct CompiledWideCssDistance {
     three_completion_bloom: CompletionBloom,
     four_completion_bloom: CompletionBloom,
     check_conflicts: Box<[AlignedConflict]>,
-    check_neighbors: Box<[WidePackedSupport]>,
+    check_neighbors: Box<[PackedSupport<SUPPORT_WORDS>]>,
     source_sha256: [u8; 32],
     artifact_payload_blake3: Option<[u8; 32]>,
 }
+
+pub type CompiledWideCssDistance = CompiledWideCssDistanceImpl<WIDE_SUPPORT_WORDS>;
+pub type CompiledExtraWideCssDistance = CompiledWideCssDistanceImpl<EXTRA_WIDE_SUPPORT_WORDS>;
 
 /// Select original rows forming a basis, preserving sparse presentation rows.
 fn independent_row_indices(matrix: &Matrix) -> Vec<usize> {
@@ -491,14 +504,14 @@ fn independent_row_indices(matrix: &Matrix) -> Vec<usize> {
     indices
 }
 
-fn compile_wide_structure(
+fn compile_wide_structure<const SUPPORT_WORDS: usize>(
     physical: &Matrix,
     logical: &Matrix,
-) -> Result<WideCompiledStructure, CssDistanceError> {
-    const MAX_WIDE_COORDINATES: usize = WIDE_SUPPORT_WORDS * 64;
+) -> Result<WideCompiledStructure<SUPPORT_WORDS>, CssDistanceError> {
+    let maximum_wide_coordinates = SUPPORT_WORDS * 64;
     const MAX_WIDE_CHECKS: usize = WIDE_SYNDROME_WORDS * 64;
     let coordinate_count = physical.cols();
-    if coordinate_count > MAX_WIDE_COORDINATES {
+    if coordinate_count > maximum_wide_coordinates {
         return Err(CssDistanceError::TooManyCoordinates);
     }
     if logical.rows() > MAX_LOGICALS {
@@ -519,10 +532,10 @@ fn compile_wide_structure(
         basis_positions[row] = position as u16;
     }
     let mut columns = vec![WidePackedColumn::default(); coordinate_count];
-    let mut neighbors = vec![WidePackedSupport::default(); coordinate_count];
+    let mut neighbors = vec![PackedSupport::<SUPPORT_WORDS>::default(); coordinate_count];
     for (check, &basis_position) in basis_positions.iter().enumerate() {
         let row = physical.row(check);
-        let mut row_support = WidePackedSupport::default();
+        let mut row_support = PackedSupport::<SUPPORT_WORDS>::default();
         for (coordinate, &entry) in row.iter().enumerate() {
             if entry != 0 {
                 row_support.insert(coordinate);
@@ -555,7 +568,7 @@ fn compile_wide_structure(
         kernel_weights_even &= column.syndrome.weight() & 1 == 1;
     }
     let mut check_conflicts = vec![AlignedConflict::default(); basis.len()];
-    let mut check_neighbors = vec![WidePackedSupport::default(); basis.len()];
+    let mut check_neighbors = vec![PackedSupport::<SUPPORT_WORDS>::default(); basis.len()];
     for (coordinate, column) in columns.iter().enumerate() {
         let mut checks = column.syndrome;
         while let Some(check) = checks.pop_lowest() {
@@ -576,7 +589,7 @@ fn compile_wide_structure(
     })
 }
 
-impl CompiledWideCssDistance {
+impl<const SUPPORT_WORDS: usize> CompiledWideCssDistanceImpl<SUPPORT_WORDS> {
     pub fn compile(physical: &Matrix, logical: &Matrix) -> Result<Self, CssDistanceError> {
         let structure = compile_wide_structure(physical, logical)?;
         let (short_completion_syndromes, three_completion_bloom, four_completion_bloom) =
@@ -601,12 +614,13 @@ impl CompiledWideCssDistance {
 
     /// Persist the expensive projected completion filters for a wide instance.
     pub fn write_artifact<W: Write>(&self, mut writer: W) -> Result<(), CssDistanceArtifactError> {
-        writer.write_all(WIDE_ARTIFACT_MAGIC)?;
+        let (magic, version) = wide_artifact_identity::<SUPPORT_WORDS>();
+        writer.write_all(magic)?;
         let mut writer = HashingWriter {
             inner: writer,
             hasher: blake3::Hasher::new(),
         };
-        write_u16(&mut writer, WIDE_ARTIFACT_VERSION)?;
+        write_u16(&mut writer, version)?;
         writer.bytes(&self.source_sha256)?;
         write_u16(&mut writer, self.coordinate_count)?;
         write_u16(&mut writer, self.check_count)?;
@@ -637,16 +651,17 @@ impl CompiledWideCssDistance {
         logical: &Matrix,
         mut reader: R,
     ) -> Result<Self, CssDistanceArtifactError> {
+        let (expected_magic, expected_version) = wide_artifact_identity::<SUPPORT_WORDS>();
         let mut magic = [0u8; 8];
         reader.read_exact(&mut magic)?;
-        if &magic != WIDE_ARTIFACT_MAGIC {
+        if &magic != expected_magic {
             return Err(CssDistanceArtifactError::Format);
         }
         let mut reader = HashingReader {
             inner: reader,
             hasher: blake3::Hasher::new(),
         };
-        if read_u16(&mut reader)? != WIDE_ARTIFACT_VERSION {
+        if read_u16(&mut reader)? != expected_version {
             return Err(CssDistanceArtifactError::Format);
         }
         let mut source_sha256 = [0u8; 32];
@@ -747,11 +762,11 @@ impl CompiledWideCssDistance {
     fn syndrome_branch_options(
         &self,
         mut syndrome: PackedSyndrome<3>,
-        support: WidePackedSupport,
-        forbidden: WidePackedSupport,
-    ) -> WidePackedSupport {
+        support: PackedSupport<SUPPORT_WORDS>,
+        forbidden: PackedSupport<SUPPORT_WORDS>,
+    ) -> PackedSupport<SUPPORT_WORDS> {
         let Some(check) = syndrome.pop_lowest() else {
-            return WidePackedSupport::default();
+            return PackedSupport::<SUPPORT_WORDS>::default();
         };
         let mut options = self.check_neighbors[check];
         options.difference_assign(support);
@@ -787,19 +802,19 @@ impl CompiledWideCssDistance {
             });
         }
         let frame_count = usize::from(searched_maximum_weight.max(1));
-        let mut supports = vec![WidePackedSupport::default(); frame_count];
-        let mut forbidden = vec![WidePackedSupport::default(); frame_count];
-        let mut options = vec![WidePackedSupport::default(); frame_count];
-        let mut rejected = vec![WidePackedSupport::default(); frame_count];
+        let mut supports = vec![PackedSupport::<SUPPORT_WORDS>::default(); frame_count];
+        let mut forbidden = vec![PackedSupport::<SUPPORT_WORDS>::default(); frame_count];
+        let mut options = vec![PackedSupport::<SUPPORT_WORDS>::default(); frame_count];
+        let mut rejected = vec![PackedSupport::<SUPPORT_WORDS>::default(); frame_count];
         let mut syndromes = vec![PackedSyndrome::<3>::default(); frame_count];
         let mut logicals = vec![0u64; frame_count];
         let mut best_weight = searched_maximum_weight.saturating_add(1);
-        let mut best_support = WidePackedSupport::default();
+        let mut best_support = PackedSupport::<SUPPORT_WORDS>::default();
         let mut stats = ConnectedSearchStats::default();
         for &anchor in anchors {
             let root = usize::from(anchor);
-            supports[0] = WidePackedSupport::singleton(root);
-            forbidden[0] = WidePackedSupport::default();
+            supports[0] = PackedSupport::<SUPPORT_WORDS>::singleton(root);
+            forbidden[0] = PackedSupport::<SUPPORT_WORDS>::default();
             syndromes[0] = self.columns[root].syndrome;
             logicals[0] = self.columns[root].logical;
             stats.connected_supports += 1;
@@ -814,7 +829,7 @@ impl CompiledWideCssDistance {
                 continue;
             }
             options[0] = self.syndrome_branch_options(syndromes[0], supports[0], forbidden[0]);
-            rejected[0] = WidePackedSupport::default();
+            rejected[0] = PackedSupport::<SUPPORT_WORDS>::default();
             let mut depth = 0usize;
             loop {
                 let Some(added) = options[depth].pop_lowest() else {
@@ -877,7 +892,7 @@ impl CompiledWideCssDistance {
                 syndromes[child_depth] = child_syndrome;
                 logicals[child_depth] = child_logical;
                 options[child_depth] = child_options;
-                rejected[child_depth] = WidePackedSupport::default();
+                rejected[child_depth] = PackedSupport::<SUPPORT_WORDS>::default();
                 stats.exclusive_extensions += 1;
                 depth = child_depth;
             }
@@ -903,23 +918,21 @@ impl CompiledWideCssDistance {
 }
 
 #[cfg(feature = "parallel")]
-#[multiversion::multiversion(
-    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
-    dispatcher = "indirect"
-)]
-fn search_syndrome_branch_partition(
-    compiled: &CompiledWideCssDistance,
-    branches: &[WideRootBranch],
+#[inline(always)]
+fn search_syndrome_branch_partition_impl<const SUPPORT_WORDS: usize>(
+    compiled: &CompiledWideCssDistanceImpl<SUPPORT_WORDS>,
+    branches: &[WideRootBranch<SUPPORT_WORDS>],
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
-) -> CachePaddedWideBranchResult {
-    let mut workspace = WideBranchWorkspace::new(usize::from(searched_maximum_weight));
+) -> CachePaddedWideBranchResult<SUPPORT_WORDS> {
+    let mut workspace =
+        WideBranchWorkspace::<SUPPORT_WORDS>::new(usize::from(searched_maximum_weight));
     let worker_index = rayon::current_thread_index().unwrap_or(0) % mailboxes.len();
     let mailbox = &mailboxes[worker_index];
     let mut pruning_bound = mailbox.0.load(Ordering::Relaxed);
     let mut best_weight = searched_maximum_weight.saturating_add(1);
-    let mut best_support = WidePackedSupport::default();
+    let mut best_support = PackedSupport::<SUPPORT_WORDS>::default();
     let mut stats = ConnectedSearchStats::default();
     for branch in branches {
         poll_bound(mailbox, &mut pruning_bound, &mut stats);
@@ -941,7 +954,7 @@ fn search_syndrome_branch_partition(
             support: branch.support,
             forbidden: branch.forbidden,
             options: branch_options,
-            rejected: WidePackedSupport::default(),
+            rejected: PackedSupport::<SUPPORT_WORDS>::default(),
             syndrome: branch.syndrome,
             logical: branch.logical,
         };
@@ -1016,7 +1029,7 @@ fn search_syndrome_branch_partition(
                 support: child_support,
                 forbidden: child_forbidden,
                 options: child_options,
-                rejected: WidePackedSupport::default(),
+                rejected: PackedSupport::<SUPPORT_WORDS>::default(),
                 syndrome: child_syndrome,
                 logical: child_logical,
             };
@@ -1032,7 +1045,100 @@ fn search_syndrome_branch_partition(
     }
 }
 
-impl CompiledWideCssDistance {
+#[cfg(feature = "parallel")]
+trait WidePartitionKernel<const SUPPORT_WORDS: usize> {
+    fn search_partition(
+        &self,
+        branches: &[WideRootBranch<SUPPORT_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+        pulse_interval: u64,
+    ) -> CachePaddedWideBranchResult<SUPPORT_WORDS>;
+}
+
+#[cfg(feature = "parallel")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition_wide(
+    compiled: &CompiledWideCssDistance,
+    branches: &[WideRootBranch<WIDE_SUPPORT_WORDS>],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+    pulse_interval: u64,
+) -> CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS> {
+    search_syndrome_branch_partition_impl(
+        compiled,
+        branches,
+        searched_maximum_weight,
+        mailboxes,
+        pulse_interval,
+    )
+}
+
+#[cfg(feature = "parallel")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition_extra_wide(
+    compiled: &CompiledExtraWideCssDistance,
+    branches: &[WideRootBranch<EXTRA_WIDE_SUPPORT_WORDS>],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+    pulse_interval: u64,
+) -> CachePaddedWideBranchResult<EXTRA_WIDE_SUPPORT_WORDS> {
+    search_syndrome_branch_partition_impl(
+        compiled,
+        branches,
+        searched_maximum_weight,
+        mailboxes,
+        pulse_interval,
+    )
+}
+
+#[cfg(feature = "parallel")]
+impl WidePartitionKernel<WIDE_SUPPORT_WORDS> for CompiledWideCssDistance {
+    #[inline]
+    fn search_partition(
+        &self,
+        branches: &[WideRootBranch<WIDE_SUPPORT_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+        pulse_interval: u64,
+    ) -> CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS> {
+        search_syndrome_branch_partition_wide(
+            self,
+            branches,
+            searched_maximum_weight,
+            mailboxes,
+            pulse_interval,
+        )
+    }
+}
+
+#[cfg(feature = "parallel")]
+impl WidePartitionKernel<EXTRA_WIDE_SUPPORT_WORDS> for CompiledExtraWideCssDistance {
+    #[inline]
+    fn search_partition(
+        &self,
+        branches: &[WideRootBranch<EXTRA_WIDE_SUPPORT_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+        pulse_interval: u64,
+    ) -> CachePaddedWideBranchResult<EXTRA_WIDE_SUPPORT_WORDS> {
+        search_syndrome_branch_partition_extra_wide(
+            self,
+            branches,
+            searched_maximum_weight,
+            mailboxes,
+            pulse_interval,
+        )
+    }
+}
+
+impl<const SUPPORT_WORDS: usize> CompiledWideCssDistanceImpl<SUPPORT_WORDS> {
     #[cfg(feature = "parallel")]
     fn search_syndrome_anchor_parallel(
         &self,
@@ -1040,29 +1146,32 @@ impl CompiledWideCssDistance {
         searched_maximum_weight: u16,
         initial_bound: u16,
         pulse_interval: u64,
-    ) -> CachePaddedWideBranchResult {
+    ) -> CachePaddedWideBranchResult<SUPPORT_WORDS>
+    where
+        Self: WidePartitionKernel<SUPPORT_WORDS>,
+    {
         use rayon::prelude::*;
 
         let root = usize::from(anchor);
-        let root_support = WidePackedSupport::singleton(root);
+        let root_support = PackedSupport::<SUPPORT_WORDS>::singleton(root);
         let mut branches = vec![WideRootBranch {
             support: root_support,
             syndrome: self.columns[root].syndrome,
             logical: self.columns[root].logical,
-            forbidden: WidePackedSupport::default(),
+            forbidden: PackedSupport::<SUPPORT_WORDS>::default(),
             weight: 1,
         }];
         let target_branches = rayon::current_num_threads().saturating_mul(4);
         let mut prefix_stats = ConnectedSearchStats::default();
         let mut prefix_best_weight = searched_maximum_weight.saturating_add(1);
-        let mut prefix_best_support = WidePackedSupport::default();
+        let mut prefix_best_support = PackedSupport::<SUPPORT_WORDS>::default();
         let mut active_bound = initial_bound;
         while branches.len() < target_branches {
             let mut next = Vec::with_capacity(branches.len().saturating_mul(5));
             for branch in branches {
                 let mut branch_options =
                     self.syndrome_branch_options(branch.syndrome, branch.support, branch.forbidden);
-                let mut rejected = WidePackedSupport::default();
+                let mut rejected = PackedSupport::<SUPPORT_WORDS>::default();
                 while let Some(added) = branch_options.pop_lowest() {
                     let mut child_support = branch.support;
                     child_support.insert(added);
@@ -1147,8 +1256,7 @@ impl CompiledWideCssDistance {
         let partials = partitions
             .par_iter()
             .map(|partition| {
-                search_syndrome_branch_partition(
-                    self,
+                self.search_partition(
                     partition,
                     searched_maximum_weight,
                     &mailboxes,
@@ -1172,12 +1280,15 @@ impl CompiledWideCssDistance {
     }
 
     #[cfg(feature = "parallel")]
-    pub fn search_bounded_syndrome_parallel_pulsed(
+    fn search_bounded_syndrome_parallel_pulsed_impl(
         &self,
         anchors: &[u16],
         maximum_weight: u16,
         pulse_interval: u64,
-    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError>
+    where
+        Self: WidePartitionKernel<SUPPORT_WORDS>,
+    {
         if pulse_interval != 0 && !pulse_interval.is_power_of_two() {
             return Err(CssDistanceError::InvalidPulseInterval);
         }
@@ -1195,7 +1306,7 @@ impl CompiledWideCssDistance {
             maximum_weight
         };
         let mut best_weight = searched_maximum_weight.saturating_add(1);
-        let mut best_support = WidePackedSupport::default();
+        let mut best_support = PackedSupport::<SUPPORT_WORDS>::default();
         let mut stats = ConnectedSearchStats::default();
         for &anchor in anchors {
             let root = usize::from(anchor);
@@ -1208,7 +1319,7 @@ impl CompiledWideCssDistance {
                 if logical != 0 {
                     stats.nontrivial_supports += 1;
                     best_weight = 1;
-                    best_support = WidePackedSupport::singleton(root);
+                    best_support = PackedSupport::<SUPPORT_WORDS>::singleton(root);
                 }
                 continue;
             }
@@ -1293,17 +1404,17 @@ impl CompiledWideCssDistance {
             });
         }
         let frame_count = usize::from(searched_maximum_weight);
-        let mut supports = vec![WidePackedSupport::default(); frame_count];
-        let mut boundaries = vec![WidePackedSupport::default(); frame_count];
-        let mut candidates = vec![WidePackedSupport::default(); frame_count];
+        let mut supports = vec![PackedSupport::<SUPPORT_WORDS>::default(); frame_count];
+        let mut boundaries = vec![PackedSupport::<SUPPORT_WORDS>::default(); frame_count];
+        let mut candidates = vec![PackedSupport::<SUPPORT_WORDS>::default(); frame_count];
         let mut syndromes = vec![PackedSyndrome::<3>::default(); frame_count];
         let mut logicals = vec![0u64; frame_count];
         let mut best_weight = searched_maximum_weight.saturating_add(1);
-        let mut best_support = WidePackedSupport::default();
+        let mut best_support = PackedSupport::<SUPPORT_WORDS>::default();
         let mut stats = ConnectedSearchStats::default();
         for &anchor in anchors {
             let root = usize::from(anchor);
-            supports[0] = WidePackedSupport::singleton(root);
+            supports[0] = PackedSupport::<SUPPORT_WORDS>::singleton(root);
             boundaries[0] = self.neighbors[root];
             candidates[0] = boundaries[0];
             syndromes[0] = self.columns[root].syndrome;
@@ -1431,7 +1542,31 @@ impl CompiledWideCssDistance {
     #[inline]
     pub fn packed_storage_bytes(&self) -> usize {
         self.columns.len() * std::mem::size_of::<WidePackedColumn>()
-            + self.neighbors.len() * std::mem::size_of::<WidePackedSupport>()
+            + self.neighbors.len() * std::mem::size_of::<PackedSupport<SUPPORT_WORDS>>()
+    }
+}
+
+#[cfg(feature = "parallel")]
+impl CompiledWideCssDistanceImpl<WIDE_SUPPORT_WORDS> {
+    pub fn search_bounded_syndrome_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+    }
+}
+
+#[cfg(feature = "parallel")]
+impl CompiledWideCssDistanceImpl<EXTRA_WIDE_SUPPORT_WORDS> {
+    pub fn search_bounded_syndrome_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
     }
 }
 
@@ -1634,43 +1769,44 @@ struct BranchWorkspace {
 
 #[cfg(feature = "parallel")]
 #[derive(Clone, Copy)]
-struct WideRootBranch {
-    support: WidePackedSupport,
+struct WideRootBranch<const SUPPORT_WORDS: usize> {
+    support: PackedSupport<SUPPORT_WORDS>,
     syndrome: PackedSyndrome<3>,
     logical: u64,
-    forbidden: WidePackedSupport,
+    forbidden: PackedSupport<SUPPORT_WORDS>,
     weight: u16,
 }
 
 #[cfg(feature = "parallel")]
 #[repr(C, align(128))]
-struct CachePaddedWideBranchResult {
+struct CachePaddedWideBranchResult<const SUPPORT_WORDS: usize> {
     best_weight: u16,
-    best_support: WidePackedSupport,
+    best_support: PackedSupport<SUPPORT_WORDS>,
     stats: ConnectedSearchStats,
 }
 
 #[cfg(feature = "parallel")]
-const _: () = assert!(std::mem::align_of::<CachePaddedWideBranchResult>() == 128);
+const _: () =
+    assert!(std::mem::align_of::<CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS>>() == 128);
 
 #[cfg(feature = "parallel")]
 #[derive(Clone, Copy, Default)]
-struct WideBranchFrame {
-    support: WidePackedSupport,
-    forbidden: WidePackedSupport,
-    options: WidePackedSupport,
-    rejected: WidePackedSupport,
+struct WideBranchFrame<const SUPPORT_WORDS: usize> {
+    support: PackedSupport<SUPPORT_WORDS>,
+    forbidden: PackedSupport<SUPPORT_WORDS>,
+    options: PackedSupport<SUPPORT_WORDS>,
+    rejected: PackedSupport<SUPPORT_WORDS>,
     syndrome: PackedSyndrome<3>,
     logical: u64,
 }
 
 #[cfg(feature = "parallel")]
-struct WideBranchWorkspace {
-    frames: Vec<WideBranchFrame>,
+struct WideBranchWorkspace<const SUPPORT_WORDS: usize> {
+    frames: Vec<WideBranchFrame<SUPPORT_WORDS>>,
 }
 
 #[cfg(feature = "parallel")]
-impl WideBranchWorkspace {
+impl<const SUPPORT_WORDS: usize> WideBranchWorkspace<SUPPORT_WORDS> {
     fn new(frame_count: usize) -> Self {
         Self {
             frames: vec![WideBranchFrame::default(); frame_count],
@@ -2828,17 +2964,18 @@ mod tests {
         logical_data[0] = 1;
         let logical = Matrix::new::<2>(1, columns, logical_data).unwrap();
         assert_eq!(independent_row_indices(&physical).len(), 2);
-        let compiled = compile_wide_structure(&physical, &logical).unwrap();
+        let compiled = compile_wide_structure::<WIDE_SUPPORT_WORDS>(&physical, &logical).unwrap();
         assert_eq!(compiled.columns.len(), 288);
         assert_eq!(compiled.check_count, 2);
         assert_eq!(compiled.maximum_column_check_weight, 1);
         assert!(!compiled.kernel_weights_even);
         assert_eq!(
             compiled.columns.len() * std::mem::size_of::<WidePackedColumn>()
-                + compiled.neighbors.len() * std::mem::size_of::<WidePackedSupport>(),
+                + compiled.neighbors.len()
+                    * std::mem::size_of::<PackedSupport<WIDE_SUPPORT_WORDS>>(),
             columns
                 * (std::mem::size_of::<WidePackedColumn>()
-                    + std::mem::size_of::<WidePackedSupport>())
+                    + std::mem::size_of::<PackedSupport<WIDE_SUPPORT_WORDS>>())
         );
     }
 
@@ -2866,9 +3003,28 @@ mod tests {
         }
         let physical = Matrix::new::<2>(block, 2 * block, data).unwrap();
         let logical = Matrix::new::<2>(1, 2 * block, vec![0; 2 * block]).unwrap();
-        let compiled = compile_wide_structure(&physical, &logical).unwrap();
+        let compiled = compile_wide_structure::<WIDE_SUPPORT_WORDS>(&physical, &logical).unwrap();
         assert_eq!(compiled.columns.len(), 288);
         assert_eq!(compiled.check_count, 138);
+    }
+
+    #[test]
+    fn extra_wide_compiler_reaches_the_official_bb360_shape() {
+        let columns = 360;
+        let rows = 180;
+        let mut physical_data = vec![0u8; rows * columns];
+        for row in 0..rows {
+            physical_data[row * columns + row] = 1;
+            physical_data[row * columns + (row + 1) % rows] = 1;
+            physical_data[row * columns + rows + row] = 1;
+        }
+        let physical = Matrix::new::<2>(rows, columns, physical_data).unwrap();
+        let mut logical_data = vec![0u8; columns];
+        logical_data[0] = 1;
+        let logical = Matrix::new::<2>(1, columns, logical_data).unwrap();
+        let compiled = CompiledExtraWideCssDistance::compile(&physical, &logical).unwrap();
+        assert_eq!(compiled.coordinate_count(), columns);
+        assert_eq!(compiled.check_count(), rows);
     }
 
     #[test]

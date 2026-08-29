@@ -1,6 +1,6 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
-use ergodis::{CompiledCssDistance, CompiledWideCssDistance, Matrix};
+use ergodis::{CompiledCssDistance, CompiledExtraWideCssDistance, CompiledWideCssDistance, Matrix};
 use serde::{Deserialize, Serialize};
 use std::fmt::Write as _;
 use std::fs::{File, OpenOptions};
@@ -79,6 +79,7 @@ struct RunRecord<'a> {
 enum Backend {
     Compact(CompiledCssDistance),
     Wide(CompiledWideCssDistance),
+    ExtraWide(CompiledExtraWideCssDistance),
 }
 
 fn search_kernel(wide: bool) -> &'static str {
@@ -157,11 +158,21 @@ fn main() -> Result<()> {
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
     let wide_problem = columns > 256 || physical.rows() > 128;
+    let extra_wide_problem = columns > 320;
     let preparation_start = Instant::now();
     let (compiled, preparation_mode) = if let Some(path) = &args.compiled_in {
         let file = File::open(path)
             .with_context(|| format!("opening compiled artifact {}", path.display()))?;
-        if wide_problem {
+        if extra_wide_problem {
+            (
+                Backend::ExtraWide(CompiledExtraWideCssDistance::read_artifact(
+                    &physical,
+                    &logical,
+                    BufReader::new(file),
+                )?),
+                "extra-wide-artifact-load",
+            )
+        } else if wide_problem {
             (
                 Backend::Wide(CompiledWideCssDistance::read_artifact(
                     &physical,
@@ -180,6 +191,11 @@ fn main() -> Result<()> {
                 "artifact-load",
             )
         }
+    } else if extra_wide_problem {
+        (
+            Backend::ExtraWide(CompiledExtraWideCssDistance::compile(&physical, &logical)?),
+            "extra-wide-compile",
+        )
     } else if wide_problem {
         (
             Backend::Wide(CompiledWideCssDistance::compile(&physical, &logical)?),
@@ -202,6 +218,7 @@ fn main() -> Result<()> {
         match &compiled {
             Backend::Compact(compiled) => compiled.write_artifact(BufWriter::new(file))?,
             Backend::Wide(compiled) => compiled.write_artifact(BufWriter::new(file))?,
+            Backend::ExtraWide(compiled) => compiled.write_artifact(BufWriter::new(file))?,
         }
         Some(start.elapsed().as_secs_f64())
     } else {
@@ -210,6 +227,7 @@ fn main() -> Result<()> {
     let artifact_payload_blake3 = match &compiled {
         Backend::Compact(compiled) => compiled.artifact_payload_blake3(),
         Backend::Wide(compiled) => compiled.artifact_payload_blake3(),
+        Backend::ExtraWide(compiled) => compiled.artifact_payload_blake3(),
     }
     .map(|digest| {
         let mut encoded = String::with_capacity(64);
@@ -312,6 +330,13 @@ fn main() -> Result<()> {
                     args.pulse_interval,
                 )
             })?,
+            Backend::ExtraWide(compiled) => thread_pool.install(|| {
+                compiled.search_bounded_syndrome_parallel_pulsed(
+                    &problem.anchors,
+                    maximum_weight,
+                    args.pulse_interval,
+                )
+            })?,
         };
         #[cfg(not(feature = "parallel"))]
         let round_result = match &compiled {
@@ -323,6 +348,9 @@ fn main() -> Result<()> {
                 }?
             }
             Backend::Wide(compiled) => {
+                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+            }
+            Backend::ExtraWide(compiled) => {
                 compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
             }
         };
