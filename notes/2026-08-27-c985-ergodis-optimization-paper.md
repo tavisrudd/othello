@@ -52,9 +52,22 @@ allocations under the counting allocator.  The adapter is an exhaustive
 small-model trust oracle, not a scaling representation; deterministic binary
 linear-model emission and result replay are next.
 
+The next external-boundary slice streams a deterministic one-hot LP for every
+certified anchor and replays flat 48-byte backend result claims.  Artifact
+identity binds both the canonical source model and orbit cover.  Replay checks
+model identity, canonical anchor, candidate provenance, support, cost,
+feasibility, and exact local optimality; complete replay rejects missing or
+duplicate anchor results and returns the independently recomputed global
+optimum.  LP writing and both replay paths allocate nothing after construction.
+This remains a bounded enumerative oracle, and its 128-bit stable fingerprint
+is non-cryptographic.  No Gurobi, SCIP, or HiGHS executable is installed on the
+machine, so deterministic golden LP text is established but actual backend
+parser compatibility is not yet measured.  A compact parity/relative-code
+schema with row-space invariance certificates is the next scaling gate.
+
 Validation passes under the repository Nix toolchain: `cargo fmt --check`,
 Clippy over all targets and features with warnings denied, all-feature Rust
-tests (201 library tests plus every integration suite), and the independent
+tests (204 library tests plus every integration suite), and the independent
 Python fixture parity check.
 
 ## Four-hour direct-envelope compiler plan, 2026-08-28

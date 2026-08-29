@@ -9,6 +9,7 @@ use crate::group_action::{
     compile_permutation_orbits, verify_permutation_orbits, FinitePermutationAction,
     OrbitCompileError, OrbitPartition, OrbitStorage,
 };
+use std::io::Write;
 use thiserror::Error;
 
 /// One external-solver subproblem, anchored at a canonical coordinate.
@@ -195,6 +196,52 @@ impl ExplicitBinarySupportProblem {
             .copied()
             .min_by_key(|candidate| (candidate.cost, candidate.support))
     }
+
+    /// Stable non-cryptographic identity for the exact explicit model.
+    pub fn fingerprint(&self) -> SemanticModelFingerprint {
+        let mut hash = [0xcbf2_9ce4_8422_2325_u64, 0x6c62_272e_07bb_0142_u64];
+        semantic_fingerprint_word(&mut hash, 0x4553_4250);
+        semantic_fingerprint_word(&mut hash, 1);
+        semantic_fingerprint_word(&mut hash, u64::from(self.point_count()));
+        semantic_fingerprint_word(&mut hash, self.candidates.len() as u64);
+        for candidate in &self.candidates {
+            semantic_fingerprint_word(&mut hash, candidate.support);
+            semantic_fingerprint_word(&mut hash, candidate.cost);
+        }
+        SemanticModelFingerprint {
+            low: hash[0],
+            high: hash[1],
+        }
+    }
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct SemanticModelFingerprint {
+    low: u64,
+    high: u64,
+}
+
+const _: () = assert!(std::mem::size_of::<SemanticModelFingerprint>() == 16);
+const _: () = assert!(std::mem::align_of::<SemanticModelFingerprint>() == 8);
+
+impl SemanticModelFingerprint {
+    pub fn low(self) -> u64 {
+        self.low
+    }
+
+    pub fn high(self) -> u64 {
+        self.high
+    }
+}
+
+fn semantic_fingerprint_word(hash: &mut [u64; 2], word: u64) {
+    for byte in word.to_le_bytes() {
+        hash[0] ^= u64::from(byte);
+        hash[0] = hash[0].wrapping_mul(0x0000_0100_0000_01b3);
+        hash[1] ^= u64::from(byte).wrapping_add(0x9d);
+        hash[1] = hash[1].wrapping_mul(0x0000_0100_0000_01e7);
+    }
 }
 
 #[derive(Debug, Error)]
@@ -248,6 +295,92 @@ pub struct AnchoredBinarySupportOptimum {
     subproblem: AnchoredSupportSubproblem,
 }
 
+#[derive(Debug, Error)]
+pub enum AnchoredModelWriteError {
+    #[error("the requested anchored subproblem is not in the certified cover")]
+    Subproblem,
+    #[error("the anchored model could not be written")]
+    Io(#[from] std::io::Error),
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct AnchoredBackendResult {
+    fingerprint: SemanticModelFingerprint,
+    support: u64,
+    cost: u64,
+    orbit: u32,
+    anchor: u32,
+    candidate: u32,
+    _reserved: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<AnchoredBackendResult>() == 48);
+const _: () = assert!(std::mem::align_of::<AnchoredBackendResult>() == 8);
+
+impl AnchoredBackendResult {
+    pub fn new(
+        fingerprint: SemanticModelFingerprint,
+        subproblem: AnchoredSupportSubproblem,
+        candidate: u32,
+        support: u64,
+        cost: u64,
+    ) -> Self {
+        Self {
+            fingerprint,
+            support,
+            cost,
+            orbit: subproblem.orbit,
+            anchor: subproblem.anchor,
+            candidate,
+            _reserved: 0,
+        }
+    }
+
+    pub fn fingerprint(self) -> SemanticModelFingerprint {
+        self.fingerprint
+    }
+
+    pub fn subproblem(self) -> AnchoredSupportSubproblem {
+        AnchoredSupportSubproblem {
+            orbit: self.orbit,
+            anchor: self.anchor,
+        }
+    }
+
+    pub fn candidate(self) -> u32 {
+        self.candidate
+    }
+
+    pub fn support(self) -> u64 {
+        self.support
+    }
+
+    pub fn cost(self) -> u64 {
+        self.cost
+    }
+}
+
+#[derive(Clone, Copy, Debug, Error, PartialEq, Eq)]
+pub enum AnchoredBackendResultError {
+    #[error("the backend result is bound to a different semantic model")]
+    Fingerprint,
+    #[error("the backend result names a noncanonical anchored subproblem")]
+    Subproblem,
+    #[error("the backend result names an unknown candidate")]
+    Candidate,
+    #[error("the backend result's support or cost does not match its candidate")]
+    Claim,
+    #[error("the backend result's candidate does not satisfy the anchor")]
+    Anchor,
+    #[error("the backend result is feasible but is not the exact anchored optimum")]
+    Optimality,
+    #[error("a feasible anchored subproblem has no backend result")]
+    MissingSubproblem,
+    #[error("an anchored subproblem has more than one backend result")]
+    DuplicateSubproblem,
+}
+
 impl AnchoredBinarySupportOptimum {
     pub fn candidate(self) -> BinarySupportCandidate {
         self.candidate
@@ -265,6 +398,27 @@ impl VerifiedExplicitBinarySupportProblem {
 
     pub fn cover(&self) -> &NonemptySupportOrbitCover {
         &self.cover
+    }
+
+    pub fn fingerprint(&self) -> SemanticModelFingerprint {
+        let source = self.problem.fingerprint();
+        let mut hash = [0xcbf2_9ce4_8422_2325_u64, 0x6c62_272e_07bb_0142_u64];
+        semantic_fingerprint_word(&mut hash, 0x4553_4252);
+        semantic_fingerprint_word(&mut hash, 1);
+        semantic_fingerprint_word(&mut hash, source.low);
+        semantic_fingerprint_word(&mut hash, source.high);
+        semantic_fingerprint_word(&mut hash, self.cover.point_count().into());
+        semantic_fingerprint_word(&mut hash, self.cover.subproblem_count().into());
+        for &orbit in self.cover.partition.point_orbits() {
+            semantic_fingerprint_word(&mut hash, u64::from(orbit));
+        }
+        for &anchor in self.cover.anchors() {
+            semantic_fingerprint_word(&mut hash, u64::from(anchor));
+        }
+        SemanticModelFingerprint {
+            low: hash[0],
+            high: hash[1],
+        }
     }
 
     /// Independently replay both the generic orbit certificate and the
@@ -311,6 +465,177 @@ impl VerifiedExplicitBinarySupportProblem {
             }
         }
         best
+    }
+
+    /// Stream a deterministic LP model for one certified anchor.
+    ///
+    /// Candidate variable `z_i` selects the `i`th canonical explicit support.
+    /// A fixed-zero dummy makes even an infeasible anchor syntactically valid.
+    pub fn write_anchored_lp<W: Write + ?Sized>(
+        &self,
+        subproblem: AnchoredSupportSubproblem,
+        writer: &mut W,
+    ) -> Result<(), AnchoredModelWriteError> {
+        self.validate_subproblem(subproblem)
+            .ok_or(AnchoredModelWriteError::Subproblem)?;
+        let fingerprint = self.fingerprint();
+        writeln!(writer, "\\ Ergodis explicit-support LP v1")?;
+        writeln!(
+            writer,
+            "\\ fingerprint {:016x}{:016x}",
+            fingerprint.high, fingerprint.low
+        )?;
+        writeln!(
+            writer,
+            "\\ orbit {} anchor {}",
+            subproblem.orbit, subproblem.anchor
+        )?;
+        writeln!(writer, "Minimize")?;
+        write!(writer, " obj: 0 dummy")?;
+        for (candidate, entry) in self.problem.candidates.iter().enumerate() {
+            write!(writer, " + {} z_{}", entry.cost, candidate)?;
+        }
+        writeln!(writer)?;
+        writeln!(writer, "Subject To")?;
+        write!(writer, " choose_one: dummy")?;
+        for candidate in 0..self.problem.candidates.len() {
+            write!(writer, " + z_{candidate}")?;
+        }
+        writeln!(writer, " = 1")?;
+        writeln!(writer, " fix_dummy: dummy = 0")?;
+        write!(writer, " anchor_hit: dummy")?;
+        let anchor_bit = 1_u64 << subproblem.anchor;
+        for (candidate, entry) in self.problem.candidates.iter().enumerate() {
+            if entry.support & anchor_bit != 0 {
+                write!(writer, " + z_{candidate}")?;
+            }
+        }
+        writeln!(writer, " = 1")?;
+        writeln!(writer, "Binary")?;
+        writeln!(writer, " dummy")?;
+        for candidate in 0..self.problem.candidates.len() {
+            writeln!(writer, " z_{candidate}")?;
+        }
+        writeln!(writer, "End")?;
+        Ok(())
+    }
+
+    /// Construct the exact small-model result corresponding to a candidate.
+    /// External adapters should populate the same record from solver output.
+    pub fn backend_result(
+        &self,
+        subproblem: AnchoredSupportSubproblem,
+        candidate: u32,
+    ) -> Option<AnchoredBackendResult> {
+        self.validate_subproblem(subproblem)?;
+        let entry = *self.problem.candidates.get(candidate as usize)?;
+        Some(AnchoredBackendResult::new(
+            self.fingerprint(),
+            subproblem,
+            candidate,
+            entry.support,
+            entry.cost,
+        ))
+    }
+
+    /// Replay model identity, feasibility, objective, and exact small-model
+    /// optimality without trusting the external backend.
+    pub fn verify_backend_result(
+        &self,
+        result: AnchoredBackendResult,
+    ) -> Result<BinarySupportCandidate, AnchoredBackendResultError> {
+        if result._reserved != 0 || result.fingerprint != self.fingerprint() {
+            return Err(AnchoredBackendResultError::Fingerprint);
+        }
+        let subproblem = result.subproblem();
+        self.validate_subproblem(subproblem)
+            .ok_or(AnchoredBackendResultError::Subproblem)?;
+        let candidate = *self
+            .problem
+            .candidates
+            .get(result.candidate as usize)
+            .ok_or(AnchoredBackendResultError::Candidate)?;
+        if candidate.support != result.support || candidate.cost != result.cost {
+            return Err(AnchoredBackendResultError::Claim);
+        }
+        if candidate.support & (1_u64 << subproblem.anchor) == 0 {
+            return Err(AnchoredBackendResultError::Anchor);
+        }
+        let optimum = self
+            .anchored_candidate(subproblem)
+            .ok_or(AnchoredBackendResultError::Optimality)?;
+        if candidate != optimum {
+            return Err(AnchoredBackendResultError::Optimality);
+        }
+        Ok(candidate)
+    }
+
+    /// Replay a complete set of independent anchored solves and return the
+    /// exact global optimum. Infeasible anchors have no result record and are
+    /// checked directly against the bounded explicit model.
+    pub fn verify_complete_backend_results(
+        &self,
+        results: &[AnchoredBackendResult],
+    ) -> Result<Option<AnchoredBinarySupportOptimum>, AnchoredBackendResultError> {
+        for &result in results {
+            self.verify_backend_result(result)?;
+        }
+        let mut global = None;
+        for subproblem in self.cover.subproblems() {
+            let mut matches = results
+                .iter()
+                .copied()
+                .filter(|result| result.subproblem() == subproblem);
+            let first = matches.next();
+            if matches.next().is_some() {
+                return Err(AnchoredBackendResultError::DuplicateSubproblem);
+            }
+            let local = self.anchored_candidate(subproblem);
+            match (local, first) {
+                (Some(_), None) => return Err(AnchoredBackendResultError::MissingSubproblem),
+                (None, Some(_)) => return Err(AnchoredBackendResultError::Optimality),
+                (None, None) => {}
+                (Some(candidate), Some(_)) => {
+                    let answer = AnchoredBinarySupportOptimum {
+                        candidate,
+                        subproblem,
+                    };
+                    if global.is_none_or(|current: AnchoredBinarySupportOptimum| {
+                        (candidate.cost, candidate.support, subproblem.orbit)
+                            < (
+                                current.candidate.cost,
+                                current.candidate.support,
+                                current.subproblem.orbit,
+                            )
+                    }) {
+                        global = Some(answer);
+                    }
+                }
+            }
+        }
+        Ok(global)
+    }
+
+    fn validate_subproblem(
+        &self,
+        subproblem: AnchoredSupportSubproblem,
+    ) -> Option<AnchoredSupportSubproblem> {
+        self.cover
+            .subproblems()
+            .find(|&candidate| candidate == subproblem)
+    }
+
+    fn anchored_candidate(
+        &self,
+        subproblem: AnchoredSupportSubproblem,
+    ) -> Option<BinarySupportCandidate> {
+        let anchor_bit = 1_u64 << subproblem.anchor;
+        self.problem
+            .candidates
+            .iter()
+            .copied()
+            .filter(|candidate| candidate.support & anchor_bit != 0)
+            .min_by_key(|candidate| (candidate.cost, candidate.support))
     }
 }
 
@@ -577,5 +902,168 @@ mod tests {
                 OrbitCompileError::NotPermutation { .. }
             ))
         ));
+    }
+
+    #[test]
+    fn anchored_lp_is_deterministic_and_streamed() {
+        let action = TableAction([[1, 2, 0]]);
+        let problem = ExplicitBinarySupportProblem::new(
+            3,
+            vec![
+                BinarySupportCandidate::new(0b100, 7),
+                BinarySupportCandidate::new(0b001, 7),
+                BinarySupportCandidate::new(0b010, 7),
+                BinarySupportCandidate::new(0b111, 11),
+            ],
+        )
+        .unwrap();
+        let verified = compile_verified_explicit_binary_support(&action, problem).unwrap();
+        let subproblem = verified.cover().subproblems().next().unwrap();
+        let mut bytes = Vec::new();
+        verified.write_anchored_lp(subproblem, &mut bytes).unwrap();
+        let text = String::from_utf8(bytes).unwrap();
+        let fingerprint = verified.fingerprint();
+        let expected = format!(
+            "\\ Ergodis explicit-support LP v1\n\\ fingerprint {:016x}{:016x}\n\\ orbit 0 anchor 0\nMinimize\n obj: 0 dummy + 7 z_0 + 7 z_1 + 7 z_2 + 11 z_3\nSubject To\n choose_one: dummy + z_0 + z_1 + z_2 + z_3 = 1\n fix_dummy: dummy = 0\n anchor_hit: dummy + z_0 + z_3 = 1\nBinary\n dummy\n z_0\n z_1\n z_2\n z_3\nEnd\n",
+            fingerprint.high(),
+            fingerprint.low()
+        );
+        assert_eq!(text, expected);
+
+        let invalid = AnchoredSupportSubproblem {
+            orbit: 0,
+            anchor: 1,
+        };
+        assert!(matches!(
+            verified.write_anchored_lp(invalid, &mut Vec::new()),
+            Err(AnchoredModelWriteError::Subproblem)
+        ));
+    }
+
+    #[test]
+    fn backend_result_replay_rejects_identity_claim_and_optimality_corruption() {
+        let action = TableAction([[1, 2, 0]]);
+        let problem = ExplicitBinarySupportProblem::new(
+            3,
+            vec![
+                BinarySupportCandidate::new(0b001, 7),
+                BinarySupportCandidate::new(0b010, 7),
+                BinarySupportCandidate::new(0b100, 7),
+                BinarySupportCandidate::new(0b011, 9),
+                BinarySupportCandidate::new(0b110, 9),
+                BinarySupportCandidate::new(0b101, 9),
+            ],
+        )
+        .unwrap();
+        let verified = compile_verified_explicit_binary_support(&action, problem).unwrap();
+        let subproblem = verified.cover().subproblems().next().unwrap();
+        let result = verified.backend_result(subproblem, 0).unwrap();
+        assert_eq!(
+            verified.verify_backend_result(result).unwrap(),
+            BinarySupportCandidate::new(0b001, 7)
+        );
+        assert_eq!(
+            verified
+                .verify_complete_backend_results(&[result])
+                .unwrap()
+                .unwrap()
+                .candidate(),
+            BinarySupportCandidate::new(0b001, 7)
+        );
+        assert_eq!(
+            verified.verify_complete_backend_results(&[]),
+            Err(AnchoredBackendResultError::MissingSubproblem)
+        );
+        assert_eq!(
+            verified.verify_complete_backend_results(&[result, result]),
+            Err(AnchoredBackendResultError::DuplicateSubproblem)
+        );
+
+        let mut wrong_fingerprint = result;
+        wrong_fingerprint.fingerprint.low ^= 1;
+        assert_eq!(
+            verified.verify_backend_result(wrong_fingerprint),
+            Err(AnchoredBackendResultError::Fingerprint)
+        );
+
+        let mut wrong_claim = result;
+        wrong_claim.cost += 1;
+        assert_eq!(
+            verified.verify_backend_result(wrong_claim),
+            Err(AnchoredBackendResultError::Claim)
+        );
+
+        let unanchored = verified.backend_result(subproblem, 1).unwrap();
+        assert_eq!(
+            verified.verify_backend_result(unanchored),
+            Err(AnchoredBackendResultError::Anchor)
+        );
+
+        let suboptimal_index = verified
+            .problem()
+            .candidates()
+            .iter()
+            .position(|candidate| candidate.support() == 0b011)
+            .unwrap() as u32;
+        let suboptimal = verified
+            .backend_result(subproblem, suboptimal_index)
+            .unwrap();
+        assert_eq!(
+            verified.verify_backend_result(suboptimal),
+            Err(AnchoredBackendResultError::Optimality)
+        );
+
+        let mut wrong_subproblem = result;
+        wrong_subproblem.anchor = 1;
+        assert_eq!(
+            verified.verify_backend_result(wrong_subproblem),
+            Err(AnchoredBackendResultError::Subproblem)
+        );
+    }
+
+    #[test]
+    fn complete_backend_replay_covers_multiple_orbits_and_binds_the_cover() {
+        let candidates = || {
+            vec![
+                BinarySupportCandidate::new(0b0001, 5),
+                BinarySupportCandidate::new(0b0010, 5),
+                BinarySupportCandidate::new(0b0100, 7),
+                BinarySupportCandidate::new(0b1000, 7),
+            ]
+        };
+        let two_orbits = TableAction([[1, 0, 3, 2]]);
+        let verified = compile_verified_explicit_binary_support(
+            &two_orbits,
+            ExplicitBinarySupportProblem::new(4, candidates()).unwrap(),
+        )
+        .unwrap();
+        assert_eq!(verified.cover().anchors(), &[0, 2]);
+        let mut subproblems = verified.cover().subproblems();
+        let first = subproblems.next().unwrap();
+        let second = subproblems.next().unwrap();
+        let results = [
+            verified.backend_result(first, 0).unwrap(),
+            verified.backend_result(second, 2).unwrap(),
+        ];
+        assert_eq!(
+            verified
+                .verify_complete_backend_results(&results)
+                .unwrap()
+                .unwrap()
+                .candidate(),
+            BinarySupportCandidate::new(0b0001, 5)
+        );
+
+        let identity = TableAction([[0, 1, 2, 3]]);
+        let identity_verified = compile_verified_explicit_binary_support(
+            &identity,
+            ExplicitBinarySupportProblem::new(4, candidates()).unwrap(),
+        )
+        .unwrap();
+        assert_ne!(verified.fingerprint(), identity_verified.fingerprint());
+        assert_eq!(
+            identity_verified.verify_backend_result(results[0]),
+            Err(AnchoredBackendResultError::Fingerprint)
+        );
     }
 }

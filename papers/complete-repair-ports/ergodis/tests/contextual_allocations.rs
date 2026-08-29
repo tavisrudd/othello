@@ -102,6 +102,17 @@ fn verified_semantic_symmetry_evaluation_allocates_nothing() {
     let (answer, allocations) = tracked_allocations(|| verified.anchored_minimum());
     assert_eq!(answer.unwrap().candidate().cost(), 7);
     assert_eq!(allocations, 0);
+
+    let subproblem = verified.cover().subproblems().next().unwrap();
+    let result = verified.backend_result(subproblem, 0).unwrap();
+    let (_, boundary_allocations) = tracked_allocations(|| {
+        verified
+            .write_anchored_lp(subproblem, &mut std::io::sink())
+            .unwrap();
+        verified.verify_backend_result(result).unwrap();
+        verified.verify_complete_backend_results(&[result]).unwrap();
+    });
+    assert_eq!(boundary_allocations, 0);
 }
 
 fn gf4_scalar_table(costs: &[u32]) -> CostTable {

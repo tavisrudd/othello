@@ -365,7 +365,13 @@ Sequel research:
   generator preservation and exact cost invariance, replays both obligations,
   and rejects malformed models or changed actions.  Direct and anchored minima
   agree, and anchored evaluation allocates nothing.  Binary linear-model
-  emission and result replay are the next gate before a Gross CSS adapter.
+  emission now has a bounded external-boundary control: deterministic streamed
+  one-hot LP, source-plus-cover identity, and allocation-free single/complete
+  result replay with omission, duplication, identity, claim, feasibility, and
+  optimality rejection.  It is not a scaling representation, and no installed
+  Gurobi/SCIP/HiGHS executable was available for a parser round trip.  Compact
+  parity/relative-code emission with row-space invariance certificates is the
+  next gate before a Gross CSS adapter.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

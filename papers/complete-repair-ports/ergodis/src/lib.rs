@@ -111,9 +111,10 @@ pub use selector::{
 pub use semantic_symmetry::{
     compile_nonempty_support_orbit_cover, compile_verified_explicit_binary_support,
     verify_explicit_binary_support_invariance, verify_nonempty_support_orbit_cover,
-    AnchoredBinarySupportOptimum, AnchoredSupportSubproblem, BinarySupportCandidate,
+    AnchoredBackendResult, AnchoredBackendResultError, AnchoredBinarySupportOptimum,
+    AnchoredModelWriteError, AnchoredSupportSubproblem, BinarySupportCandidate,
     ExplicitBinarySupportError, ExplicitBinarySupportProblem, ExplicitSupportSymmetryError,
-    NonemptySupportOrbitCover, VerifiedExplicitBinarySupportProblem,
+    NonemptySupportOrbitCover, SemanticModelFingerprint, VerifiedExplicitBinarySupportProblem,
 };
 pub use span::{CanonicalTargetImage, GeneratedSpanTable, SpanAnswer, SpanError};
 pub use transfer::{

@@ -210,6 +210,43 @@ and result replay.  It must preserve the same consumed-verification boundary;
 the eventual Gross adapter must prove its global non-stabilizer formulation is
 equivariant without enumerating feasible supports.
 
+## Streamed external-solver boundary
+
+The third Rust slice exercises model emission and result replay without adding
+a proprietary runtime dependency.  For each certified anchor, the bounded
+explicit oracle streams a deterministic LP model through `Write`.  One binary
+variable selects each canonical feasible support; a fixed-zero dummy keeps
+infeasible anchored models syntactically explicit.  The objective, unique
+selection constraint, anchor constraint, binary declarations, semantic-model
+fingerprint, orbit, and anchor are emitted in canonical order.  The writer,
+single-result verifier, and complete-result verifier allocate nothing after the
+verified model is constructed.
+
+`AnchoredBackendResult` is a flat 48-byte claim record binding the reduction
+fingerprint, orbit, anchor, candidate ID, concrete support, and exact cost.
+The reduction fingerprint covers both the canonical source candidates and the
+compiled orbit partition, so an identical source model compiled under a
+different action is a different artifact.  Replay rejects a mismatched
+fingerprint, noncanonical anchor, unknown candidate, altered support or cost,
+anchor violation, or suboptimal candidate.  Complete replay additionally
+requires exactly one result for every feasible anchored subproblem, rejects
+duplicates and omissions, checks infeasible anchors directly, and returns the
+exact global optimum.
+
+This remains a bounded trust oracle: its one-hot LP enumerates feasible
+supports and its verifier can recompute local optima.  It is not the scaling
+qLDPC representation.  No `gurobi_cl`, SCIP, or HiGHS executable is installed
+on the current machine, so the retained control establishes deterministic LP
+text and exact internal replay, not yet parser compatibility with one of those
+backends.  The next slice is a compact parity/relative-code model whose
+invariance checker works from row-space certificates rather than feasible-set
+enumeration, followed by an actual solver round trip when a backend is
+available.
+
+The 128-bit identity used inside this in-memory spike is explicitly stable and
+non-cryptographic.  A persisted or adversarial artifact boundary must replace
+or supplement it with a cryptographic digest; it is not an authenticity claim.
+
 ## Success and kill criteria
 
 Continue only if the implementation maintains these separations:
