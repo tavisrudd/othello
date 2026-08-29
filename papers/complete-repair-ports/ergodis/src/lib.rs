@@ -28,6 +28,7 @@ pub mod provenance;
 pub mod sat;
 pub mod scheduler;
 pub mod selector;
+pub mod semantic_symmetry;
 pub mod span;
 pub mod transfer;
 pub mod witness;
@@ -106,6 +107,10 @@ pub use selector::{
     CompiledSelector, CompiledSelectorWorkspace, DenseSelector, DenseSelectorWorkspace,
     SelectorAnswer, SelectorBackend, SelectorError, SelectorRunError, SelectorStep,
     SelectorStrategy, SparseSelector, SparseSelectorWorkspace,
+};
+pub use semantic_symmetry::{
+    compile_nonempty_support_orbit_cover, verify_nonempty_support_orbit_cover,
+    AnchoredSupportSubproblem, NonemptySupportOrbitCover,
 };
 pub use span::{CanonicalTargetImage, GeneratedSpanTable, SpanAnswer, SpanError};
 pub use transfer::{

@@ -6,6 +6,45 @@
 
 **Date:** 2026-08-27
 
+## Gurobi boundary and semantic-symmetry spike, 2026-08-29
+
+The product boundary is now explicit in
+[`2026-08-29-ergodis-gurobi-boundary-and-semantic-symmetry-spike.md`](2026-08-29-ergodis-gurobi-boundary-and-semantic-symmetry-spike.md).
+Ergodis does not attempt to reproduce a generic mixed-integer optimizer.  It
+compiles source-level algebra and contextual structure into a smaller certified
+model, delegates generic search to Gurobi, SCIP, Kissat, or the native exact
+backend, and independently lifts and checks the returned witness.  A proposed
+reduction is durable Ergodis territory only when it requires information that
+is absent from the emitted coefficient matrix or constraint graph.
+
+C997 supplies the first measured semantic-symmetry case.  On the Gross code,
+the conventional per-logical encoding retains only an order-2 matrix symmetry
+from the source translation group of order 72.  The class-independent global
+re-encoding restores the action; one anchored solve per coordinate orbit then
+gives the reported CBC reductions.  Those measurements remain C997/CBC
+evidence, not Ergodis or Gurobi evidence, and the SCIP/Gurobi rerun remains the
+external-claim gate.
+
+The first Rust spike adds `semantic_symmetry.rs`.  It compiles any
+`FinitePermutationAction` into a `NonemptySupportOrbitCover`, exposes one flat
+eight-byte `AnchoredSupportSubproblem` per coordinate orbit without allocating
+during iteration, maps every coordinate to its covering anchor, and replays the
+existing permutation-orbit certificate independently.  The Gross action shape
+`Z_12 x Z_6` on two 72-coordinate blocks compiles 144 possible first-support
+anchors to exactly `[0, 72]`.
+
+The API intentionally certifies only the generic orbit-cover obligation.  It
+does not assert that an opaque domain feasible family or objective is invariant
+under the supplied action.  The next spike must introduce a concrete small
+binary domain adapter that checks those obligations and rejects corrupted
+invariance evidence before any LP/MPS emitter or Gross CSS adapter is admitted.
+This keeps backend adapters free of mathematical soundness assumptions.
+
+Validation passes under the repository Nix toolchain: `cargo fmt --check`,
+Clippy over all targets and features with warnings denied, all-feature Rust
+tests (197 library tests plus every integration suite), and the independent
+Python fixture parity check.
+
 ## Four-hour direct-envelope compiler plan, 2026-08-28
 
 The next implementation slice targets source construction rather than another

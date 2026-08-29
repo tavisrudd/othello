@@ -353,6 +353,16 @@ Sequel research:
   the represented tower is >87,743x, and the published Hamming-outer LRC is
   657.88x with log-ratio `t=49.09`.  The README, benchmark guide, figures, and
   37-page manuscript use only the corrected evidence; the release gate passes.
+  Its subsequent
+  [Gurobi product-boundary memo](../2026-08-29-ergodis-gurobi-boundary-and-semantic-symmetry-spike.md)
+  positions Ergodis as a theorem-aware semantic compiler and certifier in front
+  of Gurobi, SCIP, Kissat, or its native backend, rather than as a generic MIP
+  competitor.  The first C997-derived Rust spike compiles and independently
+  verifies nonempty-support coordinate-orbit covers; the Gross two-block
+  translation control reduces 144 anchors to `[0, 72]`.  Domain invariance is
+  deliberately not trusted by that generic layer.  A concrete small binary
+  invariance adapter and corruption controls are the next gate before model
+  emission or a Gross CSS adapter.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
