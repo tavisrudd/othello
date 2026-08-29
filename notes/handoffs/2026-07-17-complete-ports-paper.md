@@ -401,6 +401,14 @@ Sequel research:
   open pending stronger completion pruning and a replayable weight-34
   incumbent; the installed restricted Gurobi license cannot instantiate the
   756-qubit model.
+  The next larger published control is now closed as well: the
+  [BB784 exact-distance certificate](../2026-08-29-c985-bb784-exact-distance.md)
+  widens only the opt-in large backend to 13 support words and certifies the
+  published `[[784,24,24]]` code.  The 16-thread exact radius-24 run examines
+  29,319,071,014 candidates in 127.077243335 seconds at 23.4 MiB peak RSS;
+  an independent replay validates its weight-24 logical witness.  This is a
+  larger-code result, not a new-code claim.  The next discovery gate remains
+  an algebraically deduplicated weight-six sweep with direct-sum rejection.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
