@@ -12,13 +12,19 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
 using mata::nfa::Nfa;
 
-static Nfa load_automaton(const std::string& filename) {
+struct LoadedAutomaton {
+    std::unique_ptr<mata::OnTheFlyAlphabet> alphabet;
+    Nfa automaton;
+};
+
+static LoadedAutomaton load_automaton(const std::string& filename) {
     std::ifstream input{filename};
     if (!input) {
         throw std::runtime_error("cannot open input");
@@ -28,12 +34,13 @@ static Nfa load_automaton(const std::string& filename) {
         throw std::runtime_error("expected one NFA section");
     }
     std::vector<mata::IntermediateAut> intermediates = mata::IntermediateAut::parse_from_mf(parsed);
-    mata::OnTheFlyAlphabet alphabet{};
+    auto alphabet = std::make_unique<mata::OnTheFlyAlphabet>();
     if (intermediates[0].alphabet_type == mata::IntermediateAut::AlphabetType::Bitvector) {
         mata::Mintermization mintermization;
         intermediates[0] = mintermization.mintermize(intermediates[0]);
     }
-    return mata::nfa::builder::construct(intermediates[0], &alphabet);
+    Nfa automaton = mata::nfa::builder::construct(intermediates[0], alphabet.get());
+    return LoadedAutomaton{std::move(alphabet), std::move(automaton)};
 }
 
 int main(int argc, char** argv) {
@@ -45,15 +52,16 @@ int main(int argc, char** argv) {
         if (argc != 4) {
             return 2;
         }
-        Nfa source = load_automaton(argv[2]);
-        Nfa dfa = mata::nfa::determinize(source);
+        LoadedAutomaton loaded = load_automaton(argv[2]);
+        Nfa dfa = mata::nfa::determinize(loaded.automaton);
         dfa.trim();
         if (!dfa.is_deterministic() || dfa.initial.size() != 1
             || dfa.get_useful_states().count() != dfa.num_of_states()) {
             throw std::runtime_error("prepared automaton is not a trimmed DFA");
         }
-        dfa.print_to_mata(argv[3]);
-        std::cout << "prepared\t" << source.num_of_states() << '\t' << source.delta.num_of_transitions()
+        dfa.print_to_mata(argv[3], loaded.alphabet.get());
+        std::cout << "prepared\t" << loaded.automaton.num_of_states() << '\t'
+                  << loaded.automaton.delta.num_of_transitions()
                   << '\t' << dfa.num_of_states() << '\t' << dfa.delta.num_of_transitions() << '\n';
         return 0;
     }
@@ -61,7 +69,8 @@ int main(int argc, char** argv) {
         if (argc != 4) {
             return 2;
         }
-        Nfa dfa = load_automaton(argv[2]);
+        LoadedAutomaton loaded = load_automaton(argv[2]);
+        Nfa& dfa = loaded.automaton;
         if (!dfa.is_deterministic() || dfa.initial.size() != 1
             || dfa.get_useful_states().count() != dfa.num_of_states()) {
             throw std::runtime_error("benchmark input is not a trimmed DFA");

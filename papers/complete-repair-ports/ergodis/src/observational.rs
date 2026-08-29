@@ -1270,6 +1270,7 @@ struct CombinedInverse {
     sources: Box<[u32]>,
 }
 
+#[derive(Debug)]
 struct IndexedMinHeap {
     classes: Vec<u32>,
     positions: Box<[u32]>,
@@ -1281,6 +1282,11 @@ impl IndexedMinHeap {
             classes: Vec::with_capacity(class_count),
             positions: vec![u32::MAX; class_count].into_boxed_slice(),
         }
+    }
+
+    fn clear(&mut self) {
+        self.classes.clear();
+        self.positions.fill(u32::MAX);
     }
 
     fn push_or_decrease(
@@ -2169,6 +2175,169 @@ pub struct WeightedGeneratorWord {
     pub generators: Box<[u32]>,
 }
 
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct WeightedQuotientEdge {
+    target: u32,
+    generator: u32,
+    cost: u64,
+}
+
+const _: () = assert!(std::mem::size_of::<WeightedQuotientEdge>() == 16);
+
+/// A theorem-reduced weighted quotient graph reusable across output queries.
+///
+/// For each source class, generators with the same target class are
+/// observationally interchangeable for every continuation. Only the cheapest
+/// generator (then the least generator ID) is retained exactly.
+#[derive(Clone, Debug)]
+pub struct WeightedGeneratorPlan {
+    class_outputs: Box<[u32]>,
+    offsets: Box<[u32]>,
+    edges: Box<[WeightedQuotientEdge]>,
+    uncollapsed_edge_count: usize,
+}
+
+#[derive(Debug)]
+pub struct WeightedGeneratorWorkspace {
+    distances: Box<[u64]>,
+    parent_classes: Box<[u32]>,
+    parent_generators: Box<[u32]>,
+    settled: Box<[u64]>,
+    heap: IndexedMinHeap,
+    generators: Vec<u32>,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct WeightedGeneratorWordRef<'a> {
+    pub cost: u64,
+    pub generators: &'a [u32],
+}
+
+impl WeightedGeneratorPlan {
+    pub fn class_count(&self) -> usize {
+        self.class_outputs.len()
+    }
+
+    pub fn uncollapsed_edge_count(&self) -> usize {
+        self.uncollapsed_edge_count
+    }
+
+    pub fn edge_count(&self) -> usize {
+        self.edges.len()
+    }
+
+    pub fn workspace(&self) -> Result<WeightedGeneratorWorkspace, ObservationalError> {
+        let class_count = self.class_outputs.len();
+        Ok(WeightedGeneratorWorkspace {
+            distances: vec![u64::MAX; class_count].into_boxed_slice(),
+            parent_classes: vec![u32::MAX; class_count].into_boxed_slice(),
+            parent_generators: vec![u32::MAX; class_count].into_boxed_slice(),
+            settled: bitmap_storage(class_count)?.into_boxed_slice(),
+            heap: IndexedMinHeap::new(class_count),
+            generators: Vec::with_capacity(class_count),
+        })
+    }
+
+    /// Find a minimum-cost generator word from `start_class` to any class
+    /// exposing `target_output`. The query allocates fixed-size workspaces once
+    /// and performs no allocation or growth in its edge-relaxation loop.
+    pub fn shortest_word_to_output(
+        &self,
+        start_class: u32,
+        target_output: u32,
+    ) -> Result<Option<WeightedGeneratorWord>, ObservationalError> {
+        let mut workspace = self.workspace()?;
+        Ok(self
+            .shortest_word_to_output_in(start_class, target_output, &mut workspace)?
+            .map(|word| WeightedGeneratorWord {
+                cost: word.cost,
+                generators: word.generators.into(),
+            }))
+    }
+
+    /// Workspace-reusing form of [`Self::shortest_word_to_output`]. There is
+    /// no allocation or capacity growth after the workspace has been created.
+    pub fn shortest_word_to_output_in<'a>(
+        &self,
+        start_class: u32,
+        target_output: u32,
+        workspace: &'a mut WeightedGeneratorWorkspace,
+    ) -> Result<Option<WeightedGeneratorWordRef<'a>>, ObservationalError> {
+        let class_count = self.class_outputs.len();
+        if start_class as usize >= class_count
+            || self.offsets.len() != class_count + 1
+            || workspace.distances.len() != class_count
+            || workspace.parent_classes.len() != class_count
+            || workspace.parent_generators.len() != class_count
+        {
+            return Err(ObservationalError::CompiledShape);
+        }
+        workspace.distances.fill(u64::MAX);
+        workspace.parent_classes.fill(u32::MAX);
+        workspace.parent_generators.fill(u32::MAX);
+        workspace.settled.fill(0);
+        workspace.heap.clear();
+        workspace.generators.clear();
+        if self.class_outputs[start_class as usize] == target_output {
+            return Ok(Some(WeightedGeneratorWordRef {
+                cost: 0,
+                generators: &workspace.generators,
+            }));
+        }
+
+        workspace.distances[start_class as usize] = 0;
+        workspace
+            .heap
+            .push_or_decrease(start_class, &workspace.distances)?;
+        while let Some(class) = workspace.heap.pop_min(&workspace.distances) {
+            if bitmap_contains(&workspace.settled, class as usize) {
+                continue;
+            }
+            bitmap_insert(&mut workspace.settled, class as usize);
+            if self.class_outputs[class as usize] == target_output {
+                let mut cursor = class;
+                while cursor != start_class {
+                    if workspace.generators.len() == workspace.generators.capacity() {
+                        return Err(ObservationalError::Overflow);
+                    }
+                    workspace
+                        .generators
+                        .push(workspace.parent_generators[cursor as usize]);
+                    cursor = workspace.parent_classes[cursor as usize];
+                }
+                workspace.generators.reverse();
+                return Ok(Some(WeightedGeneratorWordRef {
+                    cost: workspace.distances[class as usize],
+                    generators: &workspace.generators,
+                }));
+            }
+            let start = self.offsets[class as usize] as usize;
+            let end = self.offsets[class as usize + 1] as usize;
+            let Some(outgoing) = self.edges.get(start..end) else {
+                return Err(ObservationalError::CompiledShape);
+            };
+            for edge in outgoing {
+                if bitmap_contains(&workspace.settled, edge.target as usize) {
+                    continue;
+                }
+                let candidate = workspace.distances[class as usize]
+                    .checked_add(edge.cost)
+                    .ok_or(ObservationalError::Overflow)?;
+                if candidate < workspace.distances[edge.target as usize] {
+                    workspace.distances[edge.target as usize] = candidate;
+                    workspace.parent_classes[edge.target as usize] = class;
+                    workspace.parent_generators[edge.target as usize] = edge.generator;
+                    workspace
+                        .heap
+                        .push_or_decrease(edge.target, &workspace.distances)?;
+                }
+            }
+        }
+        Ok(None)
+    }
+}
+
 /// The unique finite orbit of an indefinitely repeated type-preserving layer.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct GeneratorOrbit {
@@ -2280,6 +2449,94 @@ impl CompiledObservation {
         self.generator_transitions
             .get((record.transition_start + local) as usize)
             .copied()
+    }
+
+    /// Compile a reusable weighted quotient graph, exactly removing parallel
+    /// generator edges whose future behavior is identical.
+    pub fn compile_weighted_generator_plan(
+        &self,
+        generator_costs: &[u64],
+    ) -> Result<WeightedGeneratorPlan, ObservationalError> {
+        if generator_costs.len() != self.generator_records.len() {
+            return Err(ObservationalError::CompiledShape);
+        }
+        let class_count = self.class_outputs.len();
+        let (generator_ranges, generator_ids) =
+            index_generators_by_sort(self.class_ranges.len(), &self.generator_records, false)?;
+        let maximum_out_degree = generator_ranges
+            .iter()
+            .map(|range| range.len as usize)
+            .max()
+            .unwrap_or(0);
+        let uncollapsed_edge_count =
+            self.generator_records
+                .iter()
+                .try_fold(0_usize, |total, generator| {
+                    total
+                        .checked_add(generator.transition_len as usize)
+                        .ok_or(ObservationalError::Overflow)
+                })?;
+        let mut offsets = Vec::with_capacity(class_count + 1);
+        let mut edges = Vec::with_capacity(uncollapsed_edge_count);
+        let mut stamps = vec![u32::MAX; class_count];
+        let mut best_costs = vec![u64::MAX; class_count];
+        let mut best_generators = vec![u32::MAX; class_count];
+        let mut touched = Vec::with_capacity(maximum_out_degree);
+        offsets.push(0_u32);
+
+        for class_index in 0..class_count {
+            let class = u32::try_from(class_index).map_err(|_| ObservationalError::Overflow)?;
+            let sort = self
+                .class_ranges
+                .partition_point(|range| range.end() <= class);
+            let Some(range) = self.class_ranges.get(sort).copied() else {
+                return Err(ObservationalError::CompiledShape);
+            };
+            if !range.contains(class) {
+                return Err(ObservationalError::CompiledShape);
+            }
+            touched.clear();
+            let generators = generator_ranges[sort];
+            for &generator in &generator_ids[generators.start as usize..generators.end() as usize] {
+                let target = self
+                    .transition(generator, class)
+                    .ok_or(ObservationalError::CompiledShape)?;
+                let target_index = target as usize;
+                let cost = generator_costs[generator as usize];
+                if stamps[target_index] != class {
+                    if touched.len() == touched.capacity() {
+                        return Err(ObservationalError::Overflow);
+                    }
+                    stamps[target_index] = class;
+                    best_costs[target_index] = cost;
+                    best_generators[target_index] = generator;
+                    touched.push(target);
+                } else if (cost, generator)
+                    < (best_costs[target_index], best_generators[target_index])
+                {
+                    best_costs[target_index] = cost;
+                    best_generators[target_index] = generator;
+                }
+            }
+            touched.sort_unstable();
+            for &target in &touched {
+                if edges.len() == edges.capacity() {
+                    return Err(ObservationalError::Overflow);
+                }
+                edges.push(WeightedQuotientEdge {
+                    target,
+                    generator: best_generators[target as usize],
+                    cost: best_costs[target as usize],
+                });
+            }
+            offsets.push(u32::try_from(edges.len()).map_err(|_| ObservationalError::Overflow)?);
+        }
+        Ok(WeightedGeneratorPlan {
+            class_outputs: self.class_outputs.clone(),
+            offsets: offsets.into_boxed_slice(),
+            edges: edges.into_boxed_slice(),
+            uncollapsed_edge_count,
+        })
     }
 
     /// Compute the exact preperiod and period of a repeated type-preserving
@@ -5120,6 +5377,53 @@ mod tests {
                 .unwrap(),
             None
         );
+    }
+
+    #[test]
+    fn weighted_plan_collapses_parallel_contexts_and_targets_an_output() {
+        let presentation = FinitePresentation::new(
+            [4],
+            vec![0, 0, 0, 1],
+            [
+                GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 0,
+                    transitions: vec![1, 2, 3, 3].into_boxed_slice(),
+                },
+                GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 0,
+                    transitions: vec![1, 2, 3, 3].into_boxed_slice(),
+                },
+                GeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 0,
+                    transitions: vec![2, 3, 3, 3].into_boxed_slice(),
+                },
+            ],
+        )
+        .unwrap();
+        let compiled =
+            compile_observational_with_policy(&presentation, CertificatePolicy::SplitTranscript)
+                .unwrap();
+        let plan = compiled
+            .compile_weighted_generator_plan(&[9, 2, 5])
+            .unwrap();
+        assert_eq!(plan.uncollapsed_edge_count(), 12);
+        assert!(plan.edge_count() < plan.uncollapsed_edge_count());
+
+        let start = compiled.state_classes()[0];
+        let word = plan.shortest_word_to_output(start, 1).unwrap().unwrap();
+        assert_eq!(word.cost, 6);
+        assert_eq!(&*word.generators, &[1, 1, 1]);
+        let final_state = word
+            .generators
+            .iter()
+            .try_fold(0_u32, |state, &generator| {
+                presentation.transition(generator, state)
+            })
+            .unwrap();
+        assert_eq!(presentation.observations()[final_state as usize], 1);
     }
 
     #[test]
