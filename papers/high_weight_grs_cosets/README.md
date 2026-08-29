@@ -23,9 +23,13 @@ coset of weight at least `r−1` for arbitrary redundancy `r ≥ 6` under the
 explicit bound
 
 ```text
-q ≥ 6(r+s) − 16 + floor(2 sqrt(6(r+s) − 18)),
-char F_q > r−1.
+q ≥ 6(r+s) − 16 + floor(2 sqrt(6(r+s) − 18)).
 ```
+
+The complete shell classification holds in odd characteristic and in
+characteristic two for `r ≥ 8`. At binary redundancies six and seven it is
+complete for full support; for deleted support the paper proves containment
+in an explicit linear carrier.
 
 The support may therefore be the full projective line or may have any
 prescribed finite set of points deleted; the answer depends on the size of the
@@ -72,7 +76,8 @@ kernel. The proof constructs such a form in three stages:
 1. **Recursive carrier theorem.** Coherent polar contraction reduces all
    redundancies to a terminal pencil of binary cubics. Every contraction
    trapped in the terminal bad locus comes from the catalecticant rank-two
-   scheme or one explicit characteristic-dependent Lucas carrier.
+   scheme, except for the explicit binary carriers at redundancies six and
+   seven.
 2. **Simultaneous finite-field selection.** A degree-six selector chooses all
    `r−5` contraction roots at once while avoiding the deleted set and marker
    collisions. In characteristic two the selector has degree four and gives
@@ -82,11 +87,11 @@ kernel. The proof constructs such a form in three stages:
    avoiding the selected roots and `A`. Multiplying it by the marker form
    produces the required degree-`r−2` locator.
 
-In every characteristic, before the tame-characteristic shell arithmetic is
-used, the proof gives the structural containment
+In every characteristic the proof gives the structural containment
 
 ```text
-d_S(f) ≥ r−1  =>  f lies in the rank-two locus or the maximal Lucas carrier.
+d_S(f) ≥ r−1  =>  f lies in the rank-two locus,
+                   or in the stated binary carrier when r is 6 or 7.
 ```
 
 Exact redundancy-five through redundancy-seven results provide sharper
@@ -96,7 +101,7 @@ companion records but are not included in the paper's theorem set.
 ## Main consequences
 
 - Complete top-two-shell and covering-radius descriptions for the stated
-  point-deleted GRS/EGRS family.
+  point-deleted GRS/EGRS family in the complete-classification range.
 - Exact projective and literal-coset counts for both shells.
 - Classification of every MDS and NMDS one-column extension in the family.
 - Family-wise minimum-support counts and complete aggregate NMDS weight
@@ -190,12 +195,14 @@ examples and exact trust semantics.
 
 ## Scope
 
-The complete shell classification assumes `char F_q > r−1`. In smaller
-characteristic the paper proves carrier containment but does not classify
-every high-weight point inside later Lucas carriers. It does not claim an
-optimal field threshold, equality of individual NMDS extension enumerators,
-nilpotent structure for an integral terminal model, or the general
-Reed--Solomon deep-hole conjecture.
+The complete shell classification assumes odd characteristic, or
+characteristic two with `r ≥ 8`. At binary `r ∈ {6,7}` the full-support case
+is complete, while point-deleted carrier arithmetic remains open. Below the
+field threshold, arithmetic on later Lucas carriers is open outside the
+finite companion calculations. The paper does not claim an optimal field
+threshold, equality of individual NMDS extension enumerators, nilpotent
+structure for an integral terminal model, or the general Reed--Solomon
+deep-hole conjecture.
 
 ## Citation
 

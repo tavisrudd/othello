@@ -404,7 +404,7 @@ component; the last column gives the resulting upper-syndrome locus.
 \text{terminal component}&\text{contained row space }R&\text{upper locus}\\ \hline
 V(D)&\text{point or line }(\dim R\leq1)&\cP_r\\
 \text{Veronese }(p\ne2,3)&\text{point}&\text{rank one}\\
-\text{wild cone }(p=3)&\text{point or ruling through }e_2&\text{rank one}\\
+\text{residual cone }(p=3)&\text{point or ruling through }e_2&\text{rank one}\\
 V(c_0,c_4)\ (p=2)&\text{binary-plane subspace}&
    \cM^{\max}_{r,2}
 \end{array}
@@ -421,7 +421,7 @@ exactly the \(3\times3\) minors of
  \begin{pmatrix}d_0&d_1&d_2&d_3\\d_1&d_2&d_3&d_4\\
  d_2&d_3&d_4&d_5\end{pmatrix},
 \]
-which is the consecutive Fano identity.  Thus a polar image contained in
+which is the consecutive-minor identity.  Thus a polar image contained in
 \(V(D)\) has upper syndrome in \(\cP_6\); iteration gives \(\cP_r\).
 
 \emph{Generic residual component.}
@@ -433,7 +433,8 @@ so the upper syndrome has rank one.  Equivalently, the projected Veronese
 contains no projective line.
 
 \emph{Characteristic-three residual component.}
-For a ruling of the wild cone through \(e_2\), the coefficient ideal is again
+For a ruling of the characteristic-three residual cone through \(e_2\), the
+coefficient ideal is again
 the same rank-one ideal.  Hence every positive-dimensional ruling lifts into
 \(\cP_r\) and creates no new upper component.
 
@@ -459,8 +460,8 @@ Equation~\eqref{eq:lucas-support-lift} identifies this chain with the Lucas
 lifts.  Together with Proposition~\ref{prop:maximal-lucas-union}, it places
 every surviving modular lift in \(\cM^{\max}_{r,2}\).
 
-The coherent-Fano part of Certificate SC verifies these consecutive-row
-substitutions, including the characteristic-three ruling and the
+The consecutive-row part of Certificate SC verifies these substitutions,
+including the characteristic-three ruling and the
 characteristic-two successive supports, against the same incidence ideal.
 This exhausts every component and proves \eqref{eq:recursive-carrier} by
 induction on the flag length.
@@ -597,12 +598,20 @@ has vertex \([e_2]\) and base the irreducible quartic curve
 \((s^4:s^3t:st^3:t^4)\); projecting a linear subspace of the cone from the
 vertex gives a linear subspace of that curve, hence a point.  So a linear
 subspace of the cone is a point or a ruling through the vertex.  The point
-case is as above.  For a ruling, every polar family of
-every \((m-1)\)-fold contraction \(g\) lies in that ruling, and the
-consecutive-row calculation in the proof of
-Theorem~\ref{prop:recursive-component-selection} shows that \(g\) then has
-rank at most one; the rank-one clause of Lemma~\ref{lem:polar-rank-two}
-again gives \([f]\in\cP_r\).
+case is as above.  For a ruling, every polar family of every
+\((m-1)\)-fold contraction \(g=(d_0:\cdots:d_5)\) lies in that ruling.
+Writing its base point as
+\(b_{s,t}=(s^4:s^3t:0:st^3:t^4)\), the ruling is
+\(\PP\langle e_2,b_{s,t}\rangle\).  Comparing the overlapping coordinates
+of the two consecutive rows gives
+\[
+ (d_0,\ldots,d_4)=\alpha(s^4,s^3t,s^2t^2,st^3,t^4),\qquad
+ (d_1,\ldots,d_5)=\beta(s^4,s^3t,s^2t^2,st^3,t^4),
+ \quad s\beta=t\alpha .
+\]
+The same formula includes \(s=0\) and \(t=0\), so the two-row
+catalecticant of \(g\) has rank at most one.  The rank-one clause of
+Lemma~\ref{lem:polar-rank-two} again gives \([f]\in\cP_r\).
 
 \emph{Residual branch, \(p=2\).}  Every row \((a_i,\ldots,a_{i+4})\) of
 \(\operatorname{Cat}_{m,4}(f)\) lies in the plane \(V(c_0,c_4)\), so
