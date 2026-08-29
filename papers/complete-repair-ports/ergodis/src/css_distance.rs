@@ -70,15 +70,22 @@ pub enum CssDistanceArtifactError {
 }
 
 #[repr(C)]
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-struct PackedSupport {
-    words: [u64; SUPPORT_WORDS],
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct PackedSupport<const WORDS: usize = SUPPORT_WORDS> {
+    words: [u64; WORDS],
+}
+
+impl<const WORDS: usize> Default for PackedSupport<WORDS> {
+    #[inline]
+    fn default() -> Self {
+        Self { words: [0; WORDS] }
+    }
 }
 
 const _: () = assert!(std::mem::size_of::<PackedSupport>() == 32);
 const _: () = assert!(std::mem::align_of::<PackedSupport>() == 8);
 
-impl PackedSupport {
+impl<const WORDS: usize> PackedSupport<WORDS> {
     #[inline]
     fn singleton(index: usize) -> Self {
         let mut result = Self::default();
@@ -129,15 +136,22 @@ impl PackedSupport {
 }
 
 #[repr(C)]
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-struct PackedSyndrome {
-    words: [u64; SYNDROME_WORDS],
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct PackedSyndrome<const WORDS: usize = SYNDROME_WORDS> {
+    words: [u64; WORDS],
+}
+
+impl<const WORDS: usize> Default for PackedSyndrome<WORDS> {
+    #[inline]
+    fn default() -> Self {
+        Self { words: [0; WORDS] }
+    }
 }
 
 const _: () = assert!(std::mem::size_of::<PackedSyndrome>() == 16);
 const _: () = assert!(std::mem::align_of::<PackedSyndrome>() == 8);
 
-impl PackedSyndrome {
+impl PackedSyndrome<2> {
     #[inline]
     fn toggle(&mut self, right: Self) {
         self.words[0] ^= right.words[0];
@@ -162,8 +176,8 @@ impl PackedSyndrome {
 
 #[repr(C)]
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-struct PackedColumn {
-    syndrome: PackedSyndrome,
+struct PackedColumn<const CHECK_WORDS: usize = SYNDROME_WORDS> {
+    syndrome: PackedSyndrome<CHECK_WORDS>,
     logical: u64,
 }
 
@@ -1409,7 +1423,7 @@ impl CompiledCssDistance {
         if incumbent.is_empty() || incumbent.len() > self.coordinate_count() {
             return Err(CssDistanceError::InvalidIncumbentSupport);
         }
-        let mut support = PackedSupport::default();
+        let mut support: PackedSupport = PackedSupport::default();
         let mut syndrome = PackedSyndrome::default();
         let mut logical = 0u64;
         for &coordinate in incumbent {
