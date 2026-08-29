@@ -9,6 +9,7 @@ use crate::group_action::{
     compile_permutation_orbits, verify_permutation_orbits, FinitePermutationAction,
     OrbitCompileError, OrbitPartition, OrbitStorage,
 };
+use thiserror::Error;
 
 /// One external-solver subproblem, anchored at a canonical coordinate.
 #[repr(C)]
@@ -96,6 +97,289 @@ pub fn verify_nonempty_support_orbit_cover<A: FinitePermutationAction>(
     verify_permutation_orbits(action, &cover.partition)
 }
 
+/// One feasible support and its exact objective value.
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct BinarySupportCandidate {
+    support: u64,
+    cost: u64,
+}
+
+const _: () = assert!(std::mem::size_of::<BinarySupportCandidate>() == 16);
+const _: () = assert!(std::mem::align_of::<BinarySupportCandidate>() == 8);
+
+impl BinarySupportCandidate {
+    pub const fn new(support: u64, cost: u64) -> Self {
+        Self { support, cost }
+    }
+
+    pub fn support(self) -> u64 {
+        self.support
+    }
+
+    pub fn cost(self) -> u64 {
+        self.cost
+    }
+}
+
+#[derive(Clone, Copy, Debug, Error, PartialEq, Eq)]
+pub enum ExplicitBinarySupportError {
+    #[error("explicit binary support models are limited to 64 coordinates")]
+    Shape,
+    #[error("feasible candidate {candidate} has empty support")]
+    EmptySupport { candidate: u32 },
+    #[error("feasible candidate {candidate} has a coordinate outside the model")]
+    SupportOutOfRange { candidate: u32 },
+    #[error("explicit binary support {support:#x} occurs more than once")]
+    DuplicateSupport { support: u64 },
+}
+
+/// A small, exhaustively checkable semantic model used to test the trust
+/// boundary before admitting theorem-specific domain adapters.
+#[derive(Debug)]
+pub struct ExplicitBinarySupportProblem {
+    point_count: u8,
+    candidates: Box<[BinarySupportCandidate]>,
+}
+
+impl ExplicitBinarySupportProblem {
+    pub fn new(
+        point_count: u32,
+        mut candidates: Vec<BinarySupportCandidate>,
+    ) -> Result<Self, ExplicitBinarySupportError> {
+        if point_count > 64 {
+            return Err(ExplicitBinarySupportError::Shape);
+        }
+        let valid_mask = if point_count == 64 {
+            u64::MAX
+        } else {
+            (1_u64 << point_count) - 1
+        };
+        for (candidate, entry) in candidates.iter().enumerate() {
+            if entry.support == 0 {
+                return Err(ExplicitBinarySupportError::EmptySupport {
+                    candidate: candidate as u32,
+                });
+            }
+            if entry.support & !valid_mask != 0 {
+                return Err(ExplicitBinarySupportError::SupportOutOfRange {
+                    candidate: candidate as u32,
+                });
+            }
+        }
+        candidates.sort_unstable_by_key(|candidate| candidate.support);
+        for pair in candidates.windows(2) {
+            if pair[0].support == pair[1].support {
+                return Err(ExplicitBinarySupportError::DuplicateSupport {
+                    support: pair[0].support,
+                });
+            }
+        }
+        Ok(Self {
+            point_count: point_count as u8,
+            candidates: candidates.into_boxed_slice(),
+        })
+    }
+
+    pub fn point_count(&self) -> u32 {
+        u32::from(self.point_count)
+    }
+
+    pub fn candidates(&self) -> &[BinarySupportCandidate] {
+        &self.candidates
+    }
+
+    pub fn direct_minimum(&self) -> Option<BinarySupportCandidate> {
+        self.candidates
+            .iter()
+            .copied()
+            .min_by_key(|candidate| (candidate.cost, candidate.support))
+    }
+}
+
+#[derive(Debug, Error)]
+pub enum ExplicitSupportSymmetryError<E> {
+    #[error(transparent)]
+    Orbit(#[from] OrbitCompileError<E>),
+    #[error("the semantic model and coordinate action have different point counts")]
+    PointCount,
+    #[error("generator {generator} failed on coordinate {point}")]
+    Action {
+        generator: u32,
+        point: u32,
+        error: E,
+    },
+    #[error("generator {generator} mapped coordinate {point} outside the model")]
+    Target {
+        generator: u32,
+        point: u32,
+        target: u32,
+    },
+    #[error(
+        "generator {generator} maps feasible support {support:#x} to absent support {image:#x}"
+    )]
+    MissingImage {
+        generator: u32,
+        support: u64,
+        image: u64,
+    },
+    #[error(
+        "generator {generator} changes the cost of support {support:#x} from {cost} to {image_cost}"
+    )]
+    CostChanged {
+        generator: u32,
+        support: u64,
+        cost: u64,
+        image_cost: u64,
+    },
+}
+
+/// A consumed semantic model whose nonempty-support and generator-invariance
+/// obligations have both been checked.
+#[derive(Debug)]
+pub struct VerifiedExplicitBinarySupportProblem {
+    problem: ExplicitBinarySupportProblem,
+    cover: NonemptySupportOrbitCover,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct AnchoredBinarySupportOptimum {
+    candidate: BinarySupportCandidate,
+    subproblem: AnchoredSupportSubproblem,
+}
+
+impl AnchoredBinarySupportOptimum {
+    pub fn candidate(self) -> BinarySupportCandidate {
+        self.candidate
+    }
+
+    pub fn subproblem(self) -> AnchoredSupportSubproblem {
+        self.subproblem
+    }
+}
+
+impl VerifiedExplicitBinarySupportProblem {
+    pub fn problem(&self) -> &ExplicitBinarySupportProblem {
+        &self.problem
+    }
+
+    pub fn cover(&self) -> &NonemptySupportOrbitCover {
+        &self.cover
+    }
+
+    /// Independently replay both the generic orbit certificate and the
+    /// explicit domain-invariance obligation.
+    pub fn verify<A: FinitePermutationAction>(
+        &self,
+        action: &A,
+    ) -> Result<(), ExplicitSupportSymmetryError<A::Error>> {
+        if action.point_count() != self.problem.point_count() {
+            return Err(ExplicitSupportSymmetryError::PointCount);
+        }
+        verify_nonempty_support_orbit_cover(action, &self.cover)?;
+        verify_explicit_binary_support_invariance(action, &self.problem)
+    }
+
+    /// Mimic independent backend solves, one per anchor, without allocating.
+    pub fn anchored_minimum(&self) -> Option<AnchoredBinarySupportOptimum> {
+        let mut best = None;
+        for subproblem in self.cover.subproblems() {
+            let anchor_bit = 1_u64 << subproblem.anchor();
+            let local = self
+                .problem
+                .candidates
+                .iter()
+                .copied()
+                .filter(|candidate| candidate.support & anchor_bit != 0)
+                .min_by_key(|candidate| (candidate.cost, candidate.support));
+            let Some(candidate) = local else {
+                continue;
+            };
+            let answer = AnchoredBinarySupportOptimum {
+                candidate,
+                subproblem,
+            };
+            if best.is_none_or(|current: AnchoredBinarySupportOptimum| {
+                (candidate.cost, candidate.support, subproblem.orbit)
+                    < (
+                        current.candidate.cost,
+                        current.candidate.support,
+                        current.subproblem.orbit,
+                    )
+            }) {
+                best = Some(answer);
+            }
+        }
+        best
+    }
+}
+
+/// Consume a small explicit model only after checking every semantic premise
+/// needed by the orbit-cover theorem.
+pub fn compile_verified_explicit_binary_support<A: FinitePermutationAction>(
+    action: &A,
+    problem: ExplicitBinarySupportProblem,
+) -> Result<VerifiedExplicitBinarySupportProblem, ExplicitSupportSymmetryError<A::Error>> {
+    if action.point_count() != problem.point_count() {
+        return Err(ExplicitSupportSymmetryError::PointCount);
+    }
+    let cover = compile_nonempty_support_orbit_cover(action)?;
+    verify_explicit_binary_support_invariance(action, &problem)?;
+    Ok(VerifiedExplicitBinarySupportProblem { problem, cover })
+}
+
+pub fn verify_explicit_binary_support_invariance<A: FinitePermutationAction>(
+    action: &A,
+    problem: &ExplicitBinarySupportProblem,
+) -> Result<(), ExplicitSupportSymmetryError<A::Error>> {
+    if action.point_count() != problem.point_count() {
+        return Err(ExplicitSupportSymmetryError::PointCount);
+    }
+    for generator in 0..action.generator_count() {
+        for candidate in &problem.candidates {
+            let mut source = candidate.support;
+            let mut image = 0_u64;
+            while source != 0 {
+                let point = source.trailing_zeros();
+                source &= source - 1;
+                let target = action.apply(generator, point).map_err(|error| {
+                    ExplicitSupportSymmetryError::Action {
+                        generator,
+                        point,
+                        error,
+                    }
+                })?;
+                if target >= problem.point_count() {
+                    return Err(ExplicitSupportSymmetryError::Target {
+                        generator,
+                        point,
+                        target,
+                    });
+                }
+                image |= 1_u64 << target;
+            }
+            let image_index = problem
+                .candidates
+                .binary_search_by_key(&image, |entry| entry.support)
+                .map_err(|_| ExplicitSupportSymmetryError::MissingImage {
+                    generator,
+                    support: candidate.support,
+                    image,
+                })?;
+            let image_cost = problem.candidates[image_index].cost;
+            if image_cost != candidate.cost {
+                return Err(ExplicitSupportSymmetryError::CostChanged {
+                    generator,
+                    support: candidate.support,
+                    cost: candidate.cost,
+                    image_cost,
+                });
+            }
+        }
+    }
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -106,6 +390,24 @@ mod tests {
         width: u32,
         height: u32,
         blocks: u32,
+    }
+
+    struct TableAction<const N: usize, const G: usize>([[u32; N]; G]);
+
+    impl<const N: usize, const G: usize> FinitePermutationAction for TableAction<N, G> {
+        type Error = Infallible;
+
+        fn point_count(&self) -> u32 {
+            N as u32
+        }
+
+        fn generator_count(&self) -> u32 {
+            G as u32
+        }
+
+        fn apply(&self, generator: u32, point: u32) -> Result<u32, Self::Error> {
+            Ok(self.0[generator as usize][point as usize])
+        }
     }
 
     impl FinitePermutationAction for ProductTranslation {
@@ -170,5 +472,110 @@ mod tests {
             expected_anchor += 6;
         }
         assert_eq!(expected_orbit, 3);
+    }
+
+    #[test]
+    fn verified_binary_model_matches_direct_and_anchored_minima() {
+        let action = TableAction([[1, 2, 0]]);
+        let candidates = vec![
+            BinarySupportCandidate::new(0b001, 7),
+            BinarySupportCandidate::new(0b010, 7),
+            BinarySupportCandidate::new(0b100, 7),
+            BinarySupportCandidate::new(0b011, 9),
+            BinarySupportCandidate::new(0b110, 9),
+            BinarySupportCandidate::new(0b101, 9),
+            BinarySupportCandidate::new(0b111, 11),
+        ];
+        let problem = ExplicitBinarySupportProblem::new(3, candidates).unwrap();
+        let verified = compile_verified_explicit_binary_support(&action, problem).unwrap();
+
+        assert_eq!(verified.cover().anchors(), &[0]);
+        assert_eq!(
+            verified.problem().direct_minimum(),
+            Some(BinarySupportCandidate::new(0b001, 7))
+        );
+        let anchored = verified.anchored_minimum().unwrap();
+        assert_eq!(
+            anchored.candidate(),
+            verified.problem().direct_minimum().unwrap()
+        );
+        assert_eq!(anchored.subproblem().anchor(), 0);
+        verified.verify(&action).unwrap();
+
+        let corrupted_action = TableAction([[0, 1, 2]]);
+        assert!(verified.verify(&corrupted_action).is_err());
+    }
+
+    #[test]
+    fn explicit_model_rejects_empty_out_of_range_and_duplicate_supports() {
+        assert_eq!(
+            ExplicitBinarySupportProblem::new(2, vec![BinarySupportCandidate::new(0, 1)])
+                .unwrap_err(),
+            ExplicitBinarySupportError::EmptySupport { candidate: 0 }
+        );
+        assert_eq!(
+            ExplicitBinarySupportProblem::new(2, vec![BinarySupportCandidate::new(0b100, 1)])
+                .unwrap_err(),
+            ExplicitBinarySupportError::SupportOutOfRange { candidate: 0 }
+        );
+        assert_eq!(
+            ExplicitBinarySupportProblem::new(
+                2,
+                vec![
+                    BinarySupportCandidate::new(0b01, 1),
+                    BinarySupportCandidate::new(0b01, 2),
+                ],
+            )
+            .unwrap_err(),
+            ExplicitBinarySupportError::DuplicateSupport { support: 0b01 }
+        );
+    }
+
+    #[test]
+    fn invariance_verifier_rejects_missing_images_and_changed_costs() {
+        let swap = TableAction([[1, 0]]);
+        let missing =
+            ExplicitBinarySupportProblem::new(2, vec![BinarySupportCandidate::new(0b01, 1)])
+                .unwrap();
+        assert!(matches!(
+            compile_verified_explicit_binary_support(&swap, missing),
+            Err(ExplicitSupportSymmetryError::MissingImage {
+                generator: 0,
+                support: 0b01,
+                image: 0b10,
+            })
+        ));
+
+        let changed = ExplicitBinarySupportProblem::new(
+            2,
+            vec![
+                BinarySupportCandidate::new(0b01, 1),
+                BinarySupportCandidate::new(0b10, 2),
+            ],
+        )
+        .unwrap();
+        assert!(matches!(
+            compile_verified_explicit_binary_support(&swap, changed),
+            Err(ExplicitSupportSymmetryError::CostChanged {
+                generator: 0,
+                support: 0b01,
+                cost: 1,
+                image_cost: 2,
+            })
+        ));
+    }
+
+    #[test]
+    fn semantic_compiler_rejects_a_nonpermutation_before_domain_checks() {
+        let malformed = TableAction([[0, 0]]);
+        let problem =
+            ExplicitBinarySupportProblem::new(2, vec![BinarySupportCandidate::new(0b01, 1)])
+                .unwrap();
+        assert!(matches!(
+            compile_verified_explicit_binary_support(&malformed, problem),
+            Err(ExplicitSupportSymmetryError::Orbit(
+                OrbitCompileError::NotPermutation { .. }
+            ))
+        ));
     }
 }

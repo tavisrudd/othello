@@ -361,8 +361,11 @@ Sequel research:
   verifies nonempty-support coordinate-orbit covers; the Gross two-block
   translation control reduces 144 anchors to `[0, 72]`.  Domain invariance is
   deliberately not trusted by that generic layer.  A concrete small binary
-  invariance adapter and corruption controls are the next gate before model
-  emission or a Gross CSS adapter.
+  invariance adapter now consumes canonical flat support/cost records, verifies
+  generator preservation and exact cost invariance, replays both obligations,
+  and rejects malformed models or changed actions.  Direct and anchored minima
+  agree, and anchored evaluation allocates nothing.  Binary linear-model
+  emission and result replay are the next gate before a Gross CSS adapter.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

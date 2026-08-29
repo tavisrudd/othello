@@ -3,11 +3,13 @@ use ergodis::observational::{
     FinitePresentation, GeneratorSpec, LayeredGeneratorSpec,
 };
 use ergodis::{
-    CanonicalContextBasis, CostTable, DenseSelector, Gf4, Matrix, Prime, RankBoundedContextCache,
-    RankOneProbeCache, SparseSelector,
+    compile_verified_explicit_binary_support, BinarySupportCandidate, CanonicalContextBasis,
+    CostTable, DenseSelector, ExplicitBinarySupportProblem, FinitePermutationAction, Gf4, Matrix,
+    Prime, RankBoundedContextCache, RankOneProbeCache, SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
+use std::convert::Infallible;
 
 struct CountingAllocator;
 
@@ -64,6 +66,42 @@ fn tracked_allocations<T>(operation: impl FnOnce() -> T) -> (T, usize) {
     drop(guard);
     let count = ALLOCATIONS.with(Cell::get);
     (result, count)
+}
+
+struct ThreeCycle;
+
+impl FinitePermutationAction for ThreeCycle {
+    type Error = Infallible;
+
+    fn point_count(&self) -> u32 {
+        3
+    }
+
+    fn generator_count(&self) -> u32 {
+        1
+    }
+
+    fn apply(&self, _generator: u32, point: u32) -> Result<u32, Self::Error> {
+        Ok((point + 1) % 3)
+    }
+}
+
+#[test]
+fn verified_semantic_symmetry_evaluation_allocates_nothing() {
+    let candidates = vec![
+        BinarySupportCandidate::new(0b001, 7),
+        BinarySupportCandidate::new(0b010, 7),
+        BinarySupportCandidate::new(0b100, 7),
+        BinarySupportCandidate::new(0b011, 9),
+        BinarySupportCandidate::new(0b110, 9),
+        BinarySupportCandidate::new(0b101, 9),
+    ];
+    let problem = ExplicitBinarySupportProblem::new(3, candidates).unwrap();
+    let verified = compile_verified_explicit_binary_support(&ThreeCycle, problem).unwrap();
+
+    let (answer, allocations) = tracked_allocations(|| verified.anchored_minimum());
+    assert_eq!(answer.unwrap().candidate().cost(), 7);
+    assert_eq!(allocations, 0);
 }
 
 fn gf4_scalar_table(costs: &[u32]) -> CostTable {

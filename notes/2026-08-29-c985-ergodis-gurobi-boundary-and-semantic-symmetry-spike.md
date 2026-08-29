@@ -183,6 +183,33 @@ invariance can be checked exhaustively, followed by an LP/MPS emitter and
 backend result/witness replay.  The Gross CSS adapter comes only after that
 trust boundary is tested.
 
+## Consumed binary-domain control
+
+The second Rust slice closes that immediate trust-boundary gate for small
+explicit models.  `ExplicitBinarySupportProblem` stores a canonical sorted
+array of 16-byte `(support, cost)` records over at most 64 coordinates.  Its
+constructor rejects empty supports, out-of-range coordinates, and duplicate
+support semantics.  `compile_verified_explicit_binary_support` consumes the
+model, verifies the coordinate action first, and then checks for every
+generator and every feasible support that the image support exists with the
+same exact cost.  Only after both checks does it return a
+`VerifiedExplicitBinarySupportProblem`.
+
+The consumed artifact has a single independent `verify` entry point that
+replays both the orbit certificate and domain invariance.  It rejects a changed
+action, a nonpermutation, an absent image support, or a changed objective.
+Direct enumeration and one-solve-per-anchor evaluation return the same
+canonical optimum on the cyclic control.  The anchored evaluation performs
+zero allocations under the repository counting allocator.
+
+This adapter is deliberately an exhaustive small-model oracle, not the qLDPC
+representation.  Its role is to make the trust boundary executable before a
+theorem-specific adapter is admitted.  The next implementation slice is a
+backend-neutral binary linear-model schema plus deterministic LP/MPS emission
+and result replay.  It must preserve the same consumed-verification boundary;
+the eventual Gross adapter must prove its global non-stabilizer formulation is
+equivariant without enumerating feasible supports.
+
 ## Success and kill criteria
 
 Continue only if the implementation maintains these separations:

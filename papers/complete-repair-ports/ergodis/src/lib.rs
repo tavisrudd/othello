@@ -109,8 +109,11 @@ pub use selector::{
     SelectorStrategy, SparseSelector, SparseSelectorWorkspace,
 };
 pub use semantic_symmetry::{
-    compile_nonempty_support_orbit_cover, verify_nonempty_support_orbit_cover,
-    AnchoredSupportSubproblem, NonemptySupportOrbitCover,
+    compile_nonempty_support_orbit_cover, compile_verified_explicit_binary_support,
+    verify_explicit_binary_support_invariance, verify_nonempty_support_orbit_cover,
+    AnchoredBinarySupportOptimum, AnchoredSupportSubproblem, BinarySupportCandidate,
+    ExplicitBinarySupportError, ExplicitBinarySupportProblem, ExplicitSupportSymmetryError,
+    NonemptySupportOrbitCover, VerifiedExplicitBinarySupportProblem,
 };
 pub use span::{CanonicalTargetImage, GeneratedSpanTable, SpanAnswer, SpanError};
 pub use transfer::{

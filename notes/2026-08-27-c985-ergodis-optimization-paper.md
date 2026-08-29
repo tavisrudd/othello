@@ -40,9 +40,21 @@ binary domain adapter that checks those obligations and rejects corrupted
 invariance evidence before any LP/MPS emitter or Gross CSS adapter is admitted.
 This keeps backend adapters free of mathematical soundness assumptions.
 
+The immediate follow-on implements that small consumed adapter.
+`ExplicitBinarySupportProblem` uses canonical flat `(u64 support, u64 cost)`
+records and rejects empty, out-of-range, and duplicate supports.  Compilation
+first verifies the coordinate permutations and then checks that every
+generator maps every feasible support to a present support of identical cost.
+The resulting owned artifact independently replays both obligations, rejects
+changed actions, missing images, changed costs, and nonpermutations, and gives
+equal direct and anchored exact minima.  Its anchored evaluation performs zero
+allocations under the counting allocator.  The adapter is an exhaustive
+small-model trust oracle, not a scaling representation; deterministic binary
+linear-model emission and result replay are next.
+
 Validation passes under the repository Nix toolchain: `cargo fmt --check`,
 Clippy over all targets and features with warnings denied, all-feature Rust
-tests (197 library tests plus every integration suite), and the independent
+tests (201 library tests plus every integration suite), and the independent
 Python fixture parity check.
 
 ## Four-hour direct-envelope compiler plan, 2026-08-28
