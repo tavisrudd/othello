@@ -37,7 +37,7 @@ struct Args {
     #[arg(long, value_delimiter = ',')]
     worker_cpus: Vec<usize>,
     /// Worker-local bound mailbox polling interval; zero disables mid-branch polling.
-    #[arg(long, default_value_t = 16384)]
+    #[arg(long, default_value_t = 4096)]
     pulse_interval: u64,
 }
 

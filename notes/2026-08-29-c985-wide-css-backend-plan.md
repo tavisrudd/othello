@@ -223,6 +223,19 @@ automaton increased cycles by 6.7%, while moving random completion-filter
 probes ahead of packing reduced instructions but increased cache misses about
 8.6x and slowed the proof by roughly 20%.
 
+The next profile showed that minimum-remaining-options branching itself had
+become overengineered: it rescanned every odd check and popcounted a five-word
+option mask. Exact first-odd branching removes those cardinalities. It visits
+24.1% more candidates, but the retained 16-worker median improves from
+0.177196 to 0.169677 seconds (1.044x, Welch t = 2.99); its one-worker control
+fell from about 1.75 to 1.59 seconds. A two-check lookahead was slower than the
+zero-lookahead rule. Bound pulses remain worthwhile: disabling them caused
+10.5% speculative work and a 7.8% slowdown. Intervals 1,024 and 4,096 were
+statistically tied in an 11-pair interleaved control (paired t = -1.01), so the
+CLI now defaults to 4,096 to issue four times fewer mailbox loads. The final
+retained run has mean 0.172461 seconds, sample standard deviation 0.006042,
+and a 14.70x speedup over the original single-worker baseline.
+
 ## Matched Gurobi comparison
 
 The audited global parity model was regenerated from the same BB288 source,

@@ -118,11 +118,6 @@ impl<const WORDS: usize> PackedSupport<WORDS> {
     }
 
     #[inline]
-    fn count(&self) -> u32 {
-        self.words.iter().map(|word| word.count_ones()).sum()
-    }
-
-    #[inline]
     fn union_assign(&mut self, right: Self) {
         for (left, right) in self.words.iter_mut().zip(right.words) {
             *left |= right;
@@ -755,22 +750,13 @@ impl CompiledWideCssDistance {
         support: WidePackedSupport,
         forbidden: WidePackedSupport,
     ) -> WidePackedSupport {
-        let mut best = WidePackedSupport::default();
-        let mut best_count = u32::MAX;
-        while let Some(check) = syndrome.pop_lowest() {
-            let mut options = self.check_neighbors[check];
-            options.difference_assign(support);
-            options.difference_assign(forbidden);
-            let count = options.count();
-            if count < best_count {
-                best = options;
-                best_count = count;
-                if count == 0 {
-                    break;
-                }
-            }
-        }
-        best
+        let Some(check) = syndrome.pop_lowest() else {
+            return WidePackedSupport::default();
+        };
+        let mut options = self.check_neighbors[check];
+        options.difference_assign(support);
+        options.difference_assign(forbidden);
+        options
     }
 
     /// Exact fail-first search branching on a currently unsatisfied check.

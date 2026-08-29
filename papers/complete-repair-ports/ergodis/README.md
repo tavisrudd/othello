@@ -199,7 +199,7 @@ Inputs with 257--320 coordinates dispatch to a separately monomorphized wide
 backend. It preserves exact three-word syndromes, removes redundant check rows
 for syndrome tracking while retaining the original sparse connectivity graph,
 and applies precomputed odd-check neighborhood packings as exact lower bounds.
-The compact hot layout is unchanged. Wide search branches fail-first on an odd check
+The compact hot layout is unchanged. Wide search branches on the first odd check
 and uses a disjoint first-true chain over its incident coordinates, rather than
 enumerating every connected boundary extension.  The retained official
 BB `[[288,12,18]]` run closes the exact distance in about 2.6 seconds of warm
@@ -220,7 +220,11 @@ x86-64 hosts supporting AVX2, BMI1/2, LZCNT, and POPCNT it selects the tuned
 kernel, otherwise it retains the generic implementation. A 32-byte conflict
 record avoids split dependent loads. The final retained 16-worker median is
 0.177196 seconds, 1.325x faster than the post-cutoff portable kernel (Welch
-t = 19.57) and 14.08x faster than the retained original single-worker run.
+t = 19.57). Replacing the full fail-first odd-check scan with exact first-odd
+branching deliberately visits 24.1% more candidates but avoids all hot-path
+option cardinalities. With a 4,096-candidate bound pulse, the retained median
+is 0.169677 seconds: another 1.044x (Welch t = 2.99) and 14.70x against the
+retained original single-worker run.
 On the same BB288 input and two verified translation anchors, an 8-thread
 Gurobi binary-slack control remained unresolved after two 60-second orbit
 limits (both lower bounds 13).  The retained Ergodis cached-cold exact run is
