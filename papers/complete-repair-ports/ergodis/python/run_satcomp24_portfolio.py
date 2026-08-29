@@ -164,8 +164,8 @@ def run(command: list[str], timeout_s: float, cpu: int | None = None) -> dict[st
         "voluntary_context_switches": voluntary_context_switches,
         "cpu_frequency_before_khz": frequency_before,
         "cpu_frequency_after_khz": frequency_after,
-        "stdout_tail": stdout[-512:],
-        "stderr_tail": "\n".join(retained_stderr)[-512:],
+        "stdout_tail": stdout[-4096:],
+        "stderr_tail": "\n".join(retained_stderr)[-4096:],
     }
 
 

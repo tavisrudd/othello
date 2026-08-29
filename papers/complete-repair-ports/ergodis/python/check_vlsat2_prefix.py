@@ -20,62 +20,113 @@ def close(left: float | None, right: float | None) -> bool:
 
 
 def replay_clique(path: Path, certificate: dict[str, object]) -> None:
-    clauses = []
+    colors = int(certificate["colors"])
+    clique = [int(vertex) for vertex in certificate["clique_vertices"]]
+    clique_set = set(clique)
     variables = declared_clauses = None
+    observed_clauses = 0
+    maximum_positive_clause = 0
+    domains: list[int] | None = None
+    domain_seen: list[bool] | None = None
+    relevant_conflicts = set()
+    clause: list[int] = []
+
+    def consume() -> None:
+        nonlocal observed_clauses, maximum_positive_clause
+        if variables is None or domains is None or domain_seen is None or not clause:
+            raise SystemExit(f"bad DIMACS clause: {path}")
+        observed_clauses += 1
+        if all(literal > 0 for literal in clause):
+            maximum_positive_clause = max(maximum_positive_clause, len(clause))
+            vertex = (clause[0] - 1) // colors
+            if vertex >= len(domains) or domain_seen[vertex]:
+                raise SystemExit(f"bad coloring domain: {path}")
+            domain = 0
+            for literal in clause:
+                variable = literal - 1
+                if variable // colors != vertex:
+                    raise SystemExit(f"cross-vertex coloring domain: {path}")
+                bit = 1 << (variable % colors)
+                if domain & bit:
+                    raise SystemExit(f"duplicate coloring literal: {path}")
+                domain |= bit
+            domains[vertex] = domain
+            domain_seen[vertex] = True
+            return
+        if len(clause) != 2 or clause[0] >= 0 or clause[1] >= 0:
+            raise SystemExit(f"non-coloring clause: {path}")
+        left_variable = -clause[0] - 1
+        right_variable = -clause[1] - 1
+        left, left_color = divmod(left_variable, colors)
+        right, right_color = divmod(right_variable, colors)
+        if (
+            left >= len(domains)
+            or right >= len(domains)
+            or left == right
+            or left_color != right_color
+        ):
+            raise SystemExit(f"non-color conflict: {path}")
+        if left in clique_set and right in clique_set:
+            relevant_conflicts.add((min(left, right), max(left, right), left_color))
+
     with path.open() as source:
         for line in source:
             stripped = line.lstrip()
             if not stripped or stripped.startswith("c"):
                 continue
             if stripped.startswith("p"):
+                if variables is not None or clause:
+                    raise SystemExit(f"duplicate DIMACS header: {path}")
                 _, kind, variables_text, clauses_text = stripped.split()
                 if kind != "cnf":
                     raise SystemExit(f"bad DIMACS header: {path}")
                 variables = int(variables_text)
                 declared_clauses = int(clauses_text)
+                if variables % colors:
+                    raise SystemExit(f"bad direct-coloring dimensions: {path}")
+                vertices = variables // colors
+                domains = [0] * vertices
+                domain_seen = [False] * vertices
                 continue
-            literals = [int(word) for word in stripped.split()]
-            if not literals or literals[-1] != 0:
-                raise SystemExit(f"bad DIMACS clause: {path}")
-            clauses.append(literals[:-1])
-    if variables is None or len(clauses) != declared_clauses:
+            for word in stripped.split():
+                literal = int(word)
+                if literal == 0:
+                    consume()
+                    clause.clear()
+                else:
+                    clause.append(literal)
+    if (
+        variables is None
+        or domains is None
+        or domain_seen is None
+        or clause
+        or observed_clauses != declared_clauses
+    ):
         raise SystemExit(f"bad DIMACS counts: {path}")
-    positive = [clause for clause in clauses if all(literal > 0 for literal in clause)]
-    colors = max(map(len, positive))
-    if variables % colors:
-        raise SystemExit(f"bad direct-coloring dimensions: {path}")
     vertices = variables // colors
-    domains = [set() for _ in range(vertices)]
-    conflicts = set()
-    for clause in clauses:
-        if all(literal > 0 for literal in clause):
-            vertex = (clause[0] - 1) // colors
-            domains[vertex].update((literal - 1) % colors for literal in clause)
-        elif len(clause) == 2 and clause[0] < 0 and clause[1] < 0:
-            left = (-clause[0] - 1) // colors
-            right = (-clause[1] - 1) // colors
-            color = (-clause[0] - 1) % colors
-            if (-clause[1] - 1) % colors != color:
-                raise SystemExit(f"non-color conflict: {path}")
-            conflicts.add((min(left, right), max(left, right), color))
-        else:
-            raise SystemExit(f"non-coloring clause: {path}")
-    clique = [int(vertex) for vertex in certificate["clique_vertices"]]
     if (
         certificate["variables"] != variables
         or certificate["clauses"] != declared_clauses
         or certificate["vertices"] != vertices
-        or certificate["colors"] != colors
+        or maximum_positive_clause != colors
         or len(clique) <= colors
         or len(set(clique)) != len(clique)
         or any(vertex < 0 or vertex >= vertices for vertex in clique)
+        or not all(domain_seen)
     ):
         raise SystemExit(f"invalid certificate metadata: {path}")
     for position, left in enumerate(clique):
         for right in clique[position + 1 :]:
-            for color in domains[left] & domains[right]:
-                if (min(left, right), max(left, right), color) not in conflicts:
+            shared = domains[left] & domains[right]
+            while shared:
+                color = (shared & -shared).bit_length() - 1
+                if (
+                    min(left, right),
+                    max(left, right),
+                    color,
+                ) not in relevant_conflicts:
                     raise SystemExit(f"invalid clique edge: {path}")
+                shared &= shared - 1
 
 
 def main() -> None:
