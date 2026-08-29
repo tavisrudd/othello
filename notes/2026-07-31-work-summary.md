@@ -13,7 +13,10 @@ games, backed by:
 
 - a fleet of exact solvers (Rust + Go + Python),
 - a bespoke game-tablebase + query/mining toolchain,
-- a `sorry`-free **Lean 4 / Mathlib** formalization layer.
+- a `sorry`-free **Lean 4 / Mathlib** formalization layer,
+- and, newest, an exact compositional optimization compiler (`ergodis`) that turns the recovery
+  theory's quotient theorems into a general tool and is being prepared for release under a dual
+  licence.
 
 The open research center of gravity is the **projective cap ("Nofil") program** and its **odd
 projective-plane kernel**, with the Lean layer certifying results as they land. But the cap machinery
@@ -796,6 +799,62 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   definition no such nonzero witness can exist, so its proof established nothing — and it was deleted
   rather than restated, and a coefficient layer described as projective tuples was corrected to
   ordinary target-normalized vectors, the ratios already being scale-invariant.
+
+- **The coarsest observational quotient, and the compiler that computes it** (`complete-ports`) — the
+  transfer and composition theorems above say that a large finite search state is redundant in an
+  exactly describable way. That statement was isolated as a theorem in its own right: **the finite
+  many-sorted Moore contextual quotient is the coarsest typed congruence**, with classical
+  deterministic-automaton minimization as its one-sort corollary. Its minimality half is sharp —
+  rank-one outer contexts observe exactly the zero-sector cost and the zero-truncated projective
+  line-probe profile, so equality of those two readings is the coarsest numerical contextual
+  congruence, and nothing coarser preserves the admitted observations. A companion higher-rank
+  small-model package supplies the pointed column-type response theorem, separating contexts of
+  length at most `max(2, r+1)` at radius `r`, functional-dual dimension at most `min(t, r)`, and an
+  exact dual-shortening identity.
+
+  **`ergodis`** is the executable form of that theorem: a compiler and exact solver for finite
+  algebraic optimization problems whose raw combinatorial state admits a much smaller mathematically
+  derived quotient. It compiles functional labels, conserved gradings, generated spans, symmetries
+  and reconstructible coefficient blocks *before* optimization, delegates generic search to an exact
+  backend, and independently lifts and re-checks the returned witness rather than trusting it. The
+  same code path has been exercised across linear-code recovery, weighted-tree, resource-allocation
+  and hierarchical min-plus control problems against independent oracles. It deliberately does not
+  reimplement a generic mixed-integer optimizer: a reduction is in scope only when it needs
+  information absent from the emitted coefficient matrix or constraint graph.
+
+  **The automaton corollary is what makes it externally testable.** On the complete published
+  explicit Presburger-complement input list of the MATA automata library (TACAS'24) — both systems
+  minimizing the same derived, trimmed deterministic automaton, with determinization, trimming and
+  parsing outside the timed region — `ergodis` is **2.699x faster in geometric mean** than MATA's C++
+  `minimize_hopcroft`, with an instance-level paired-log statistic of `26.20`. It wins every instance
+  of at least thirteen states; all losses are on automata of two to twelve. On the development
+  controls it is 1.61–3.30x faster than the same implementation with 13–38x lower cold peak resident
+  memory, while additionally emitting a compact split transcript and verifying it before returning.
+  A native-functor competitor, Boa, remains 2.48x faster on the four-generator random family; that
+  crossover is recorded, and no universally-fastest claim is made. **Trust tier:** the quotient
+  theorems are human proofs; the benchmark figures are reproducible measurements against pinned
+  upstream revisions and a published input list, specific to one machine and to the isolated
+  minimization subproblem, and are not an end-to-end claim on the comparison tool's own benchmark.
+  Application-level crossover was measured separately and found absent on small and sequential-query
+  workloads, so that control is retained as conditional rather than advertised.
+
+  **The same principle transfers to exact quantum-code distance.** Computing the minimum distance of
+  a CSS code exactly is an integer program over its coordinates, and two distinct effects were
+  separated and measured on the bivariate-bicycle gross code `[[144,12,12]]`. The conventional
+  per-logical-class encoding destroys the code's own symmetry, leaving only an order-two matrix
+  symmetry out of a source translation group of order 72; a class-independent global re-encoding
+  restores the `Z₁₂ × Z₆` action as a genuine symmetry of the model, worth 3.1x by itself.
+  Automorphism-orbit symmetry-breaking constraints on top of that give a further 4.2x, for a
+  branch-and-bound tree cut from 13,228,127 to 1,010,491 nodes — **13.1x**. The binary passant code
+  `[78,36,12]₂` gives 6.5x on top of a solver that already recovers `PGL(2,13)` unaided. Every
+  program closed at gap zero, so the distances are certified: `d_Z = 12` for the gross code, matching
+  the published value, and `d = 12` for the passant code, matching the independent committed
+  computation. **Trust boundary:** the distances rest on the solver's own optimality proof plus
+  explicit `GF(2)` invariance checks, and nothing is machine-checked beyond that; the node counts are
+  a property of one solver's search — deterministic and exactly replayable from committed logs, but
+  reproducible rather than verifiable — and every ratio is specific to that solver and instance.
+  Whether the reduction survives on solvers with built-in orbital branching is the open gate on any
+  external claim. This result is not assigned to a manuscript.
 
 - **Repair ports as a theory in their own right** (`repairports` → `rp-next`) — the completed repair
   machinery turned into a deliberate search engine, run under a discipline that each round must yield
@@ -1698,6 +1757,19 @@ in place.
   `q ≥ 6r−15 + floor(2 sqrt(6r−17))`. This is a uniform high-field containment theorem, not a
   general solution of the Reed–Solomon deep-hole conjecture.
 
+- **All characteristics, and the maximal-carrier discriminator.** The main classification theorem's
+  characteristic restriction `p > r−1` is replaced by "`p` odd, or `p = 2` and `r ≥ 8`", proved via a
+  level-uniform polar rank lemma together with a trapped-row-space proposition read branchwise off
+  the recursive component table, and the containment itself is strengthened to split-free subset
+  persistence. The imported radius and weight theorems the argument consumes were re-verified to
+  carry no characteristic hypothesis of their own, so the strengthening is genuine rather than
+  inherited; `GF(64)` is now closed by theorem rather than by computation. Separately, the
+  maximal-carrier discriminator resolves at every level: each maximal Lucas carrier is the
+  penultimate nucleus of the next rational normal curve, with a prime-power Frobenius-quadric
+  quotient. `GF(27)` is closed in pointed form by an authorized large two-point-switch certificate
+  rather than structurally, and the `GF(16)`/`GF(32)` certificates were rebuilt under the correct
+  degree-ten action after the originals were found to use the wrong group.
+
 - **Redundancies eight through ten — field-ranged closure.** The fixed-level package now proves
   exact deep-hole classifications at redundancy eight for `q ≥ 43`, redundancy nine for `q ≥ 53`,
   and redundancy ten for `q ≥ 59`. At each level only the persistent tangent and conjugate-secant
@@ -1773,12 +1845,29 @@ empty-complement corner in the quadratic-growth corollary, the `c = 0` branch of
 explicit traceless local logarithms in the main rounding theorem, a direct binary-MDS argument
 replacing an appeal to the general case, and five attribution and bibliography corrections.
 
-C889 also proves, but does not yet promote, the stronger fixed-party inter-code theorem: for
+A stronger fixed-party inter-code theorem is proved but not yet promoted into the manuscript: for
 odd-prime `[2m,m,m+1]` MDS codes, equal-phase CSS states are LU-equivalent exactly when the target
 code is diagonally equivalent to the source or its dual. Its code/dual criterion matches all
 twelve earlier party-image rows. The high-distance multiplier line and the five prime-field
 holonomy-centralizer types are likewise settled and banked; the proposed extension-field and
 affine programmes remain negative or structurally blocked.
+
+**The quantitative tail has been replaced by intrinsic structure.** In place of a five-order case
+list, the paper now carries the intrinsic block-diagonal endomorphism algebra together with a
+common-holonomy-centralizer theorem, with its five prime-field algebra types and determinant-one
+unit-group types classified, forced nonscalar endomorphisms through six parties, and the induced CSS,
+Hermitian, dual-number and multiplicity-code module structures identified; a four-entry constructive
+classifier makes it usable rather than only descriptive. The multiplier space of the companion
+manuscript was identified as the standard code conductor and Schur-square defect, which supplied the
+exact general CSS conductor block equations and sharp dimension and support bounds for conductors
+between unequal-dimension MDS codes — the manuscript's own lemma is their equal-dimension
+product-Singleton endpoint. Three superseded quantitative routes were deleted rather than
+weakened, the secondary quantitative appendix was compressed to its stabilizer-independent structural
+core (the two-uniform local-generator isometry, projective discreteness, the local quadratic
+stability estimate, and the Fisher interpretation), and every surviving statement kept its hypotheses
+and its exact-to-robust spine. Two independent readings of the complete paper reconstructed the exact
+and quantitative theorem chains end to end with no scope, constant, characteristic, or
+field-linearity failure.
 
 **A generic coset/syndrome dictionary underlies the finite examples.** Translated equal-phase states
 are classified by code cosets, distinct cosets are orthogonal, dual-code phase stabilizers read the
@@ -2218,6 +2307,23 @@ boundary control, and a full priority audit. The `ν₆` route survives as a sec
 and its genus-eight corollary is unconditional on the birational half. Nothing from the surrounding
 research programme may enter the frozen numbered manuscripts before those gates close.
 
+**The optimization compiler's next gates.** `ergodis` has cleared its automata-minimization gate
+against published state-of-the-art tooling and its first quantum gate, and both frontiers are now
+about *external* validity rather than about the mathematics. Three things are open. The
+symmetry-reduction factors on exact quantum-code distance were measured on one solver's
+branch-and-bound tree; solvers with built-in orbital branching may already recover part of the
+reduction, and rerunning there is the gate on any claim outside this programme. The certified
+semantic-symmetry frontend currently discharges only the generic orbit-cover obligation — it does not
+yet check that a supplied feasible family or objective is genuinely invariant under the given action,
+so a domain adapter that verifies those obligations and rejects corrupted invariance evidence has to
+land before any external solver emitter is admitted, keeping soundness assumptions out of the
+backends. And application-level crossover on hierarchical labelled-recovery workloads is measured
+absent on small and sequential-query problems, so the workload class where compilation pays is
+bounded from below but not yet characterized. A prior-art assessment against pseudo-Boolean proof
+logging and the certified-automata-minimization literature found that the two literatures together
+anticipate every individual component of the compiler's certificate bundle; what is unoccupied is the
+pipeline, not any piece of it, which shapes how the work can be positioned.
+
 **Adjacent problems, opened deliberately and bounded.** For Hadamard order 668, 25 of the 30
 mod-3-compatible fixed common multiplier subgroups are impossible — a published 21-subgroup
 proof-carrying baseline reproduced, then extended by a nine-compression congruence and a shift-111
@@ -2286,6 +2392,23 @@ spectral decomposition, line-pencil/fan-orbit/concurrence verifiers, off-conic m
 top-k replay. **The binary count overstates this**: these are entry points over one shared solver
 core and one canonical-key implementation, not independent programs, and the list is long because
 the mining surface is wide rather than because the engineering is.
+
+**`ergodis`** (Rust library + CLI, with a Python differential-parity harness) — the exact
+compositional optimization compiler described in §3, and the first tool here built to be used by
+people outside this programme rather than only inside it. It compiles a finite algebraic optimization
+problem's functional labels, conserved gradings, generated spans, symmetries and reconstructible
+coefficient blocks into a smaller certified model, delegates generic search to an exact backend, and
+independently lifts and re-checks the returned witness. Kernels cover linear-code recovery,
+hierarchical composition, capacitated scheduling, and finite algebraic search; a certified
+semantic-symmetry frontend compiles a finite permutation action into an orbit cover with one anchored
+subproblem per coordinate orbit and no allocation during iteration, and a native exact CSS-distance
+backend with parallel and persisted anchor search sits alongside the external solver adapters.
+Unlike the mining toolchain above, it ships an optimization-reader entry document that assumes no
+coding-theory background, fair pinned competitor benchmarks, and public-surface hygiene, and it is
+being prepared for release under a dual licence with the observational compiler — and therefore the
+published speed claim — in the freely available part. Its engineering discipline is the same as the
+rest of the repo's: every run emits a compact certificate that is independently replayed and verified
+before a result is returned, so a wrong quotient is detected rather than trusted.
 
 **Sum-free solvers:** Rust (`sumfree.rs` cyclic Grundy; `capset2/5.rs` u128/256-bit AGL-canonical),
 Go (`sumfree.go` full-`Aut(G)` negamax; `sumfree_par.go` sharded-parallel + pairing verifier;
@@ -2815,6 +2938,21 @@ waiting on it. The blocker is no longer an engineering task: the extracted repos
 their own gates, and are deliberately left **without remotes**, because repository creation, pushes,
 releases, identifiers and author/affiliation metadata are all reserved for an explicit authorization
 that has not been given. One authorized publication unblocks them together.
+
+**A software deliverable now sits alongside the manuscripts.** `ergodis` is not a paper artifact in
+the sense the rest of this section uses — it is a general tool whose primary audience is optimization
+and verification practitioners, and its speed claim is checkable by anyone with the published
+comparison inputs. It is licensed AGPL-3.0 (the surrounding manuscript stays MIT) and is being
+prepared for release under a dual licence, split so that the observational compiler — the part the
+published benchmark exercises — is in the freely available half and depends on nothing withheld, with
+no dependency edge from the public part into the reserved one. Two pieces of homework were done
+before that split was designed. A per-vertical intellectual-property review found the quantum
+application area free of relevant patents, the storage area the only one warranting paid
+freedom-to-operate work, and patent-eligibility the dominant risk overall. A prior-art assessment
+against pseudo-Boolean proof logging and the certified-automata-minimization literature then found
+that between them those two literatures anticipate every individual component of the compiler's
+certificate bundle; only the assembled pipeline is unoccupied, which is a positioning constraint
+rather than a defect.
 
 ---
 

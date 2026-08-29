@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-08-25**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
+Activity spans **2026-06-14 → 2026-08-29**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -1207,7 +1207,7 @@ marking rather than absolute.
   comparison, and the chordal twelve-point icosahedral certificate; hostile re-review accepted the
   repaired paper and a closeout pass added the eta-quotient formula for `t`. C937 rebuilt the
   Frobenius-equivariant completion paper in layers and C938's bounded conceptual scout confirmed
-  that its residual `PG(2,25)` certificate still has no honest global replacement. C939 proved the
+  that its residual `PG(2,25)` certificate still has no genuine global replacement. C939 proved the
   matched-availability seed pair and its positive-density asymptotically good lift for the recovery
   paper. C942 finished the public reviewer guide for the one-stabilization epilogue after formal,
   mathematical, and hostile cold reads.
@@ -1253,6 +1253,84 @@ marking rather than absolute.
   `q=27` construction gate without completing it. C962 was allocated for paper-owned recovery
   algorithms and bounds, explicitly excluding manuscript and formalization work until the mathematics
   is ready.
+
+## Week 15 — Aug 26–29 · A compiler leaves the paper, beats published tooling, and reaches quantum codes
+
+This is the week the recovery programme stopped being only a manuscript. The algorithms C962 was
+allocated for turned into **ergodis**, a standalone Rust library and CLI living under
+`papers/complete-repair-ports/ergodis`, and by Aug 28 it was being benchmarked against published
+state-of-the-art tools rather than against itself. In parallel the `ame-lu` lane ran a seven-task
+referee-and-compression chain to a verified export, `reed-solomon` closed its characteristic
+hypothesis, and the new `quantum-codes` lane reported its first result.
+
+- **Aug 26 — the recovery algorithms close and the compiler's mathematical object is identified.**
+  C962 `[complete-ports]` closed exact prescribed-coset, composition, confinement, reliability,
+  service-region, and contextual-state algorithms with independent Python/Rust cross-checks and
+  bounded benchmarks. C972 then characterized the *universal minimal compositional state*: rank-one
+  outer contexts observe exactly the zero-sector cost and the zero-truncated projective line-probe
+  profile, so their equality is the coarsest numerical contextual congruence — the theorem that
+  licenses quotienting before search. In `reed-solomon`, C974 implemented arbitrary-redundancy
+  simultaneous and pointed locators and C975 rebuilt *High-Weight Cosets of Generalized and Extended
+  Reed–Solomon Codes* around the arbitrary-redundancy point-deleted top-two-shell theorem. C949
+  `[relconic]` excluded the proposed `4/3` linear coefficient, raised the structural lower
+  coefficient to `5/3`, showed the exact `5/3` endpoint is also absent, and froze its accumulated
+  proof ledger into a routing snapshot so future sessions start from the shorter card. C815
+  `[clebsch]` closed four algebraic and finite-linear-algebra pieces of Paper III's Lean surface
+  without claiming the geometric identifications they are built to receive.
+
+- **Aug 27 — C983 is the largest single research run of the week.** It reframed ergodis as a *finite
+  analysis compiler*, grounded it in max-plus control theory, red-teamed the framing against
+  optimization diagrams and against exact mergeable summaries, pre-registered an outcome ladder and
+  a terrain ledger before measuring anything, and only then built the certified observational
+  compiler spike with recovery/replay sidecars and hierarchical composition control. Its theorem is
+  that the finite many-sorted Moore contextual quotient is the coarsest typed congruence, with
+  classical DFA minimization falling out as the one-sort corollary — which is what made a comparison
+  against automata tooling legitimate rather than opportunistic. Alongside it, C971 stabilized the
+  paper-owned library and CLI with Python differential parity, public documentation, and fair
+  competitor benchmarks; C980 and C984 proved and then integrated the higher-rank small-model package
+  (pointed column-type response theorem, radius-`r` separating contexts of length at most
+  `max(2,r+1)`, exact dual-shortening identity); C976 replaced an aborted packet-by-packet review
+  with an introduction-only cold read followed by section-level and global rereads. In `ame-lu`,
+  C981 and C982 identified the manuscript's multiplier space as the standard code conductor and
+  Schur-square defect and proved sharp dimension and support bounds for conductors between
+  unequal-dimension MDS codes. C977 `[reed-solomon]` completed a 263-paragraph cold read; C973 drove
+  `GF(27)` through Borel-boundary compression, three-line cover, and torus endpoint closure. C978
+  `[cubic-threefolds]` repaired the sharpness manuscript's exposition to a full cold-read accept.
+
+- **Aug 28 — external benchmarks, a licence change, and the first `quantum-codes` result.** C983
+  closed with pinned MATA/Boa evidence (1.61–3.30x direct wins over MATA's C++ Hopcroft/Valmari
+  implementation on shared controls, 13–38x lower cold peak RSS, and the recorded 2.48x Boa
+  crossover on the four-generator random family, published rather than suppressed). C985 then ran the
+  external-validity benchmark that matters: all 169 instances of MATA's published TACAS'24 explicit
+  Presburger-complement input list, both systems minimizing the same derived trimmed DFA, giving a
+  **2.699x geometric-mean speedup** with paired-log `t = 26.20`, 158 wins and 11 losses, every loss
+  on an automaton of 2–12 states and every instance of at least 13 states won. C987 measured
+  application crossover and found no tiny or sequential-query win, retaining the control as
+  conditional rather than claiming one.
+  The repository and ergodis were relicensed to AGPL-3.0 with MIT retained for the paper, and the
+  README and `Cargo.toml` were pointed at a standalone ergodis repository. C997 `[quantum-codes]` —
+  the first task of that lane to report — passed its symmetry-reduction gate. C988
+  `[reed-solomon]` integrated the all-characteristic classification and C973 closed. The `ame-lu`
+  lane ran C989 → C995 as one chain: the intrinsic block-diagonal endomorphism algebra and
+  common-holonomy-centralizer theorem replaced a five-order tail, referee clarifications became an
+  exact four-factor telescoping inequality, Appendix B was compressed to its structural core, and two
+  independent context-clean cold reads returned `GO` before C991 verified the Paper I export.
+
+- **Aug 29 — commercialization design and the next compiler frontier.** C998 `[complete-ports]`
+  designed (and deliberately did not execute) a five-tier public/private split of ergodis for AGPL
+  plus commercial dual licensing, with zero public→private module edges and the observational
+  compiler shipping public so the MATA/Boa claim stays verifiable. Its per-vertical patent landscape
+  found the quantum vertical patent-empty, the storage vertical the only one warranting paid
+  freedom-to-operate work, and §101 the dominant risk. A separate prior-art assessment against
+  VeriPB-style pseudo-Boolean proof logging *and* the certified-automata-minimization literature
+  reversed the initial read and returned **do not file** on the certified compiler alone: the
+  pipeline is unoccupied, but every individual component is anticipated. On the engineering side C985
+  opened the certified semantic-symmetry frontend (`semantic_symmetry.rs`, compiling a
+  `FinitePermutationAction` into a `NonemptySupportOrbitCover`), wrote the Gurobi boundary memo that
+  fixes the product line — ergodis compiles and lifts, generic search is delegated — and added a
+  native exact CSS distance backend with parallel and persisted anchor search. C925
+  `[cubic-threefolds]` added rank-seven lattice probes (sign-permutation, sign-type exhaust, torus
+  splitting, root-stable level) to the modular direct-QDM packet.
 
 ---
 

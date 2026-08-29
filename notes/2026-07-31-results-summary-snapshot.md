@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-08-25
+**Date:** 2026-08-29
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -2128,6 +2128,24 @@ once
 This is a uniform high-field containment theorem, not a general solution of the
 Reed–Solomon deep-hole conjecture.
 
+The characteristic hypothesis has since been removed in all but one corner. The
+main classification theorem's restriction to \(p>r-1\) is replaced by "\(p\)
+odd, or \(p=2\) and \(r\ge8\)", via a level-uniform polar rank lemma together
+with a trapped-row-space proposition read branchwise off the recursive
+component table. The containment itself is strengthened to split-free subset
+persistence. The imported radius and weight theorems the argument uses were
+re-checked and carry no characteristic hypothesis of their own, so the
+strengthening is genuine rather than inherited. One consequence is that
+\(GF(64)\) is now closed by theorem rather than by computation.
+
+Independently, the maximal-carrier discriminator resolves at every level:
+each maximal Lucas carrier is the penultimate nucleus of the next rational
+normal curve, with a prime-power Frobenius-quadric quotient. \(GF(27)\) is
+closed in pointed form, by an authorized large two-point-switch certificate
+rather than structurally, and the \(GF(16)\) and \(GF(32)\) certificates were
+rebuilt under the correct degree-ten action after the earlier ones were found to
+use the wrong group.
+
 The fixed-level programme now reaches redundancy ten at its stated field
 ranges. Redundancy eight is exact for \(q\ge43\), redundancy nine for
 \(q\ge53\), and redundancy ten for \(q\ge59\); at each level the deep
@@ -2442,6 +2460,89 @@ Stichtenoth self-dual TVZ theorem.
   O(n^{-1/4}),\qquad O(n^{-1/3}).
   \]
 
+### The compiler the theory licenses: ergodis
+
+The transfer and composition theorems above say that a large finite search
+state is redundant in an exactly describable way: the coarsest congruence that
+preserves every admitted observation is computable, and composing along it
+preserves the witness. *ergodis* is the implementation of that statement — a
+compiler and exact solver for finite algebraic optimization problems whose raw
+combinatorial state admits a much smaller mathematically derived quotient. It
+compiles functional labels, conserved gradings, generated spans, symmetries and
+reconstructible coefficient blocks *before* optimization, delegates generic
+search to an exact backend, and independently lifts and re-checks the returned
+witness. It is not a reimplementation of a generic mixed-integer optimizer, and
+a reduction belongs to it only when it requires information absent from the
+emitted coefficient matrix or constraint graph.
+
+Its governing theorem is that the finite many-sorted Moore contextual quotient
+is the coarsest typed congruence, with classical deterministic-automaton
+minimization as the one-sort corollary. That corollary is what makes the
+implementation externally testable: the same code path that quotients a
+recovery, weighted-tree, resource-allocation or hierarchical min-plus problem
+also minimizes a deterministic finite automaton, so it can be raced against
+specialized minimizers on their own published inputs.
+
+**Measured against published tooling.** On the complete published explicit
+Presburger-complement input list of the MATA automata library (TACAS'24), with
+both systems minimizing the same derived, trimmed deterministic automaton and
+determinization, trimming and parsing excluded from the timed region, ergodis
+achieved a **2.699x geometric-mean speedup** over MATA's C++
+`minimize_hopcroft`, with an instance-level paired-log statistic of `26.20`. It
+won every instance of at least thirteen states; the losses were all on automata
+of two to twelve states. On the smaller controls used during development it is
+1.61–3.30x faster than the same MATA implementation with 13–38x lower cold peak
+resident memory, while additionally emitting a compact split transcript and
+verifying it before returning — the comparison tool returns only the minimized
+automaton. A native-functor competitor, Boa, remains 2.48x faster on the
+four-generator random family; that crossover is recorded rather than omitted,
+and no claim of universally fastest minimization is made.
+
+**Trust tier.** The theorems are human proofs. The benchmark numbers are
+reproducible measurements against pinned upstream revisions and a published
+input list, not machine-checked facts, and they are specific to the machine and
+the isolated minimization subproblem; they are not an end-to-end claim on the
+comparison tool's original benchmark. The compiler's own outputs carry a
+different and stronger guarantee: each run emits a certificate that is
+independently replayed and verified before a result is returned, so a wrong
+quotient is detected rather than trusted.
+
+The library is being prepared for release under a dual licence, with the
+observational compiler — and therefore the benchmark claim above — in the
+freely available part.
+
+### Symmetry reduction in exact quantum-code distance computation
+
+The same "compile the symmetry, then search" principle applies to computing the
+minimum distance of a quantum CSS code exactly, which is an integer program
+over the code's coordinates. Two effects were separated and measured on the
+bivariate-bicycle *gross code* \([[144,12,12]]\).
+
+First, the conventional per-logical-class encoding destroys the code's own
+symmetry: only an order-two matrix symmetry survives from a source translation
+group of order \(72\). A class-independent global re-encoding restores the
+\(\mathbf Z_{12}\times\mathbf Z_6\) translation action as a genuine symmetry of
+the model, worth \(3.1\)x on its own. Second, adding automorphism-orbit
+symmetry-breaking constraints on top of that gives a further \(4.2\)x. The
+combined effect is a branch-and-bound tree reduced from \(13{,}228{,}127\) to
+\(1{,}010{,}491\) nodes, a factor of \(13.1\). The same treatment on the binary
+passant code \([78,36,12]_2\) gives \(6.5\)x, on top of a solver that already
+recovers \(\operatorname{PGL}(2,13)\) unaided.
+
+Every integer program closed at gap zero, so the distances themselves are
+certified: \(d_Z=12\) for the gross code, matching the published value, and
+\(d=12\) for the passant code, matching the independent committed computation
+in the binary-conic-code work.
+
+**Trust tier and boundary.** The distances are certified by the solver's own
+optimality proof together with explicit \(GF(2)\) invariance checks; nothing
+here is machine-checked beyond that. The *node counts* are a property of one
+solver's search: they are deterministic and replay exactly from committed logs,
+but they are reproducible rather than verifiable, and every ratio quoted is
+specific to that solver and that instance. Whether the reduction survives on
+solvers with built-in orbital branching is untested and is the gate on any
+external claim. This result is not assigned to a manuscript.
+
 ### Material outside the current manuscript
 
 The paper deliberately omits extended EXIT theory, deletion--contraction,
@@ -2455,7 +2556,7 @@ enters the body only with an exact stable statement, a complete human proof
 exposing the mechanism, an explicit claim-by-claim formal-coverage
 classification, and exact attribution of imported inputs. Computations and
 certificates may support appendices but do not carry a body theorem. Formal
-absence is allowed only when it is stated honestly; it is not silently
+absence is allowed only when it is stated plainly; it is not silently
 promoted to verification.
 
 ### Related negatives
@@ -3679,7 +3780,10 @@ are vacuous because a natural number can encode the whole residual.
 - ***High-Weight Cosets of Generalized and Extended Reed–Solomon Codes:***
   exact weight-(r) and weight-((r-1)) shells at arbitrary redundancy in the
   stated field range, with sharp refinements through redundancy seven; not a
-  proof of the general deep-hole conjecture.
+  proof of the general deep-hole conjecture. The characteristic restriction is
+  now gone in all but one corner — the main theorem holds for \(p\) odd and for
+  \(p=2\) with \(r\ge8\) — which closes \(GF(64)\) by theorem, and the
+  maximal-carrier discriminator is resolved at every level.
 - ***Exact Transfer of Bounded Linear Recovery and Relative Weight
   Hierarchies:*** the associated shortening--puncturing pair's relative
   generalized Hamming weights are the exact rank-stratified helper costs; an
@@ -3688,7 +3792,13 @@ are vacuous because a natural number can encode the whole residual.
   associatively by min-plus substitution through repeated concatenation. The
   twenty-four-page authority and verified standalone gates pass. Human proofs
   carry the main spine; the paper-local Lean package verifies four terminals
-  and explicitly does not cover the stronger new theorems.
+  and explicitly does not cover the stronger new theorems. The theory now has a
+  working implementation, *ergodis*, whose governing quotient theorem is proved
+  and whose speedup over the strongest published comparison tool on that tool's
+  own input list is measured, not projected; it is being prepared for release
+  under a dual licence. The symmetry-reduction result for exact quantum-code
+  distance computation is a measured consequence of the same principle and is
+  not assigned to a manuscript.
 - ***Local-Unitary Rigidity of Stabilizer AME States:*** rigidity proved for
   every stabilizer AME state, not only the MDS–CSS family, and stable under
   approximate equality with explicit constants; the \(m=2\) proof bridge is
@@ -3702,7 +3812,15 @@ are vacuous because a natural number can encode the whole residual.
   empty-complement correction in the quadratic-growth corollary, the missing
   \(c=0\) branch of the rounding lemma, explicit traceless local logarithms in
   the main rounding theorem, a direct binary-MDS argument replacing an appeal to
-  the general case, and five attribution and bibliography corrections.
+  the general case, and five attribution and bibliography corrections. The
+  quantitative tail has since been replaced by an intrinsic block-diagonal
+  endomorphism algebra and a common-holonomy-centralizer theorem, with its
+  prime-field algebra and determinant-one unit-group types classified, forced
+  nonscalar endomorphisms through six parties, and a constructive classifier;
+  the secondary quantitative appendix is compressed to its
+  stabilizer-independent structural core, and two independent readings of the
+  complete paper reconstructed the exact and quantitative theorem chains end to
+  end with no scope, constant, characteristic, or field-linearity failure.
 - ***Frobenius-equivariant pair extension and robust repair of eight-arcs:*** foundational
   theorem chain and the exact minimum for \(PG(2,25)\) proved; the
   orbit-replacement graph remains future work.
