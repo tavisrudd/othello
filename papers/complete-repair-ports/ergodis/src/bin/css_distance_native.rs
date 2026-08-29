@@ -216,7 +216,9 @@ fn main() -> Result<()> {
                     )
                 }
             })?,
-            Backend::Wide(compiled) => compiled.search_bounded(&problem.anchors, maximum_weight)?,
+            Backend::Wide(compiled) => {
+                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+            }
         };
         #[cfg(not(feature = "parallel"))]
         let round_result = match &compiled {
@@ -227,7 +229,9 @@ fn main() -> Result<()> {
                     compiled.search_bounded(&problem.anchors, maximum_weight)
                 }?
             }
-            Backend::Wide(compiled) => compiled.search_bounded(&problem.anchors, maximum_weight)?,
+            Backend::Wide(compiled) => {
+                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+            }
         };
         search_seconds.push(search_start.elapsed().as_secs_f64());
         round_stats.push(round_result.stats);

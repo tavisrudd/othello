@@ -111,6 +111,16 @@ impl<const WORDS: usize> PackedSupport<WORDS> {
     }
 
     #[inline]
+    fn is_empty(&self) -> bool {
+        self.words.iter().all(|&word| word == 0)
+    }
+
+    #[inline]
+    fn count(&self) -> u32 {
+        self.words.iter().map(|word| word.count_ones()).sum()
+    }
+
+    #[inline]
     fn union_assign(&mut self, right: Self) {
         for (left, right) in self.words.iter_mut().zip(right.words) {
             *left |= right;
@@ -420,6 +430,7 @@ struct WideCompiledStructure {
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
     check_conflicts: Box<[PackedSyndrome<3>]>,
+    check_neighbors: Box<[WidePackedSupport]>,
 }
 
 /// Precompiled exact state for CSS instances up to 320 coordinates and rank 192.
@@ -436,6 +447,7 @@ pub struct CompiledWideCssDistance {
     three_completion_bloom: CompletionBloom,
     four_completion_bloom: CompletionBloom,
     check_conflicts: Box<[PackedSyndrome<3>]>,
+    check_neighbors: Box<[WidePackedSupport]>,
 }
 
 /// Select original rows forming a basis, preserving sparse presentation rows.
@@ -535,10 +547,12 @@ fn compile_wide_structure(
         kernel_weights_even &= column.syndrome.weight() & 1 == 1;
     }
     let mut check_conflicts = vec![PackedSyndrome::<3>::default(); basis.len()];
-    for column in &columns {
+    let mut check_neighbors = vec![WidePackedSupport::default(); basis.len()];
+    for (coordinate, column) in columns.iter().enumerate() {
         let mut checks = column.syndrome;
         while let Some(check) = checks.pop_lowest() {
             check_conflicts[check].union_assign(column.syndrome);
+            check_neighbors[check].insert(coordinate);
         }
     }
     Ok(WideCompiledStructure {
@@ -548,6 +562,7 @@ fn compile_wide_structure(
         maximum_column_check_weight,
         kernel_weights_even,
         check_conflicts: check_conflicts.into_boxed_slice(),
+        check_neighbors: check_neighbors.into_boxed_slice(),
     })
 }
 
@@ -568,6 +583,7 @@ impl CompiledWideCssDistance {
             three_completion_bloom,
             four_completion_bloom,
             check_conflicts: structure.check_conflicts,
+            check_neighbors: structure.check_neighbors,
         })
     }
 
@@ -589,6 +605,172 @@ impl CompiledWideCssDistance {
             syndrome.difference_assign(self.check_conflicts[check]);
         }
         packed
+    }
+
+    #[inline]
+    fn syndrome_branch_options(
+        &self,
+        mut syndrome: PackedSyndrome<3>,
+        support: WidePackedSupport,
+        forbidden: WidePackedSupport,
+    ) -> WidePackedSupport {
+        let mut best = WidePackedSupport::default();
+        let mut best_count = u32::MAX;
+        while let Some(check) = syndrome.pop_lowest() {
+            let mut options = self.check_neighbors[check];
+            options.difference_assign(support);
+            options.difference_assign(forbidden);
+            let count = options.count();
+            if count < best_count {
+                best = options;
+                best_count = count;
+                if count == 0 {
+                    break;
+                }
+            }
+        }
+        best
+    }
+
+    /// Exact fail-first search branching on a currently unsatisfied check.
+    pub fn search_bounded_syndrome_driven(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        if maximum_weight == 0 || usize::from(maximum_weight) > self.coordinate_count() {
+            return Err(CssDistanceError::InvalidMaximumWeight);
+        }
+        for &anchor in anchors {
+            if usize::from(anchor) >= self.coordinate_count() {
+                return Err(CssDistanceError::AnchorOutOfRange { anchor });
+            }
+        }
+        let searched_maximum_weight = if self.kernel_weights_even && maximum_weight & 1 == 1 {
+            maximum_weight - 1
+        } else {
+            maximum_weight
+        };
+        if searched_maximum_weight == 0 {
+            return Ok(BoundedCssDistanceResult {
+                distance: None,
+                witness: Box::default(),
+                searched_maximum_weight,
+                stats: ConnectedSearchStats::default(),
+            });
+        }
+        let frame_count = usize::from(searched_maximum_weight.max(1));
+        let mut supports = vec![WidePackedSupport::default(); frame_count];
+        let mut forbidden = vec![WidePackedSupport::default(); frame_count];
+        let mut options = vec![WidePackedSupport::default(); frame_count];
+        let mut rejected = vec![WidePackedSupport::default(); frame_count];
+        let mut syndromes = vec![PackedSyndrome::<3>::default(); frame_count];
+        let mut logicals = vec![0u64; frame_count];
+        let mut best_weight = searched_maximum_weight.saturating_add(1);
+        let mut best_support = WidePackedSupport::default();
+        let mut stats = ConnectedSearchStats::default();
+        for &anchor in anchors {
+            let root = usize::from(anchor);
+            supports[0] = WidePackedSupport::singleton(root);
+            forbidden[0] = WidePackedSupport::default();
+            syndromes[0] = self.columns[root].syndrome;
+            logicals[0] = self.columns[root].logical;
+            stats.connected_supports += 1;
+            stats.maximum_depth = stats.maximum_depth.max(1);
+            if syndromes[0].is_zero() {
+                stats.kernel_supports += 1;
+                if logicals[0] != 0 {
+                    stats.nontrivial_supports += 1;
+                    best_weight = 1;
+                    best_support = supports[0];
+                }
+                continue;
+            }
+            options[0] = self.syndrome_branch_options(syndromes[0], supports[0], forbidden[0]);
+            rejected[0] = WidePackedSupport::default();
+            let mut depth = 0usize;
+            loop {
+                let Some(added) = options[depth].pop_lowest() else {
+                    if depth == 0 {
+                        break;
+                    }
+                    depth -= 1;
+                    continue;
+                };
+                stats.candidates += 1;
+                let prior_rejected = rejected[depth];
+                rejected[depth].insert(added);
+                let child_depth = depth + 1;
+                let child_weight = (child_depth + 1) as u16;
+                let mut child_support = supports[depth];
+                child_support.insert(added);
+                let mut child_forbidden = forbidden[depth];
+                child_forbidden.union_assign(prior_rejected);
+                let mut child_syndrome = syndromes[depth];
+                child_syndrome.toggle(self.columns[added].syndrome);
+                let child_logical = logicals[depth] ^ self.columns[added].logical;
+                stats.connected_supports += 1;
+                stats.maximum_depth = stats.maximum_depth.max(child_weight);
+                if child_syndrome.is_zero() {
+                    stats.kernel_supports += 1;
+                    if child_logical != 0 {
+                        stats.nontrivial_supports += 1;
+                        if child_weight < best_weight {
+                            best_weight = child_weight;
+                            best_support = child_support;
+                        }
+                    }
+                    continue;
+                }
+                let improvement_budget = best_weight.saturating_sub(child_weight + 1);
+                let lower_bound = self
+                    .syndrome_completion_lower_bound(child_syndrome)
+                    .max(self.syndrome_packing_lower_bound(child_syndrome));
+                let four_completion_reject =
+                    improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
+                if child_weight >= searched_maximum_weight
+                    || lower_bound > improvement_budget
+                    || (improvement_budget <= 3
+                        && !self.has_short_completion(child_syndrome, improvement_budget))
+                    || four_completion_reject
+                {
+                    stats.syndrome_bound_prunes += 1;
+                    stats.four_completion_prunes += u64::from(four_completion_reject);
+                    continue;
+                }
+                let child_options =
+                    self.syndrome_branch_options(child_syndrome, child_support, child_forbidden);
+                if child_options.is_empty() {
+                    stats.syndrome_bound_prunes += 1;
+                    continue;
+                }
+                supports[child_depth] = child_support;
+                forbidden[child_depth] = child_forbidden;
+                syndromes[child_depth] = child_syndrome;
+                logicals[child_depth] = child_logical;
+                options[child_depth] = child_options;
+                rejected[child_depth] = WidePackedSupport::default();
+                stats.exclusive_extensions += 1;
+                depth = child_depth;
+            }
+        }
+        let witness = if best_weight <= searched_maximum_weight {
+            let mut witness = Vec::with_capacity(best_weight as usize);
+            for coordinate in 0..self.coordinate_count() {
+                if best_support.contains(coordinate) {
+                    witness.push(coordinate as u16);
+                }
+            }
+            witness.into_boxed_slice()
+        } else {
+            Box::default()
+        };
+        Ok(BoundedCssDistanceResult {
+            distance: (best_weight <= searched_maximum_weight).then_some(best_weight),
+            witness,
+            searched_maximum_weight,
+            stats,
+        })
     }
 
     #[inline]
@@ -2041,7 +2223,13 @@ mod tests {
                 .unwrap();
                 let compiled = CompiledCssDistance::compile(&physical, &logical).unwrap();
                 let result = compiled.search_bounded(&[0, 1, 2, 3], 4).unwrap();
-                assert_eq!(result.distance, brute_force(&physical, &logical, 4));
+                let expected = brute_force(&physical, &logical, 4);
+                assert_eq!(result.distance, expected);
+                let wide = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+                let driven = wide
+                    .search_bounded_syndrome_driven(&[0, 1, 2, 3], 4)
+                    .unwrap();
+                assert_eq!(driven.distance, expected);
             }
         }
     }
@@ -2176,6 +2364,9 @@ mod tests {
             wide.search_bounded(&anchors, 5).unwrap(),
             compact.search_bounded(&anchors, 5).unwrap()
         );
+        let driven = wide.search_bounded_syndrome_driven(&anchors, 5).unwrap();
+        assert_eq!(driven.distance, Some(1));
+        assert_eq!(&*driven.witness, &[4]);
     }
 
     #[cfg(feature = "parallel")]

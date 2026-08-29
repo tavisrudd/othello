@@ -198,7 +198,11 @@ backend. It preserves exact three-word syndromes, removes redundant check rows
 for syndrome tracking while retaining the original sparse connectivity graph,
 and applies precomputed odd-check neighborhood packings as exact lower bounds.
 The compact hot layout is unchanged; wide artifact persistence and parallel
-search remain follow-up work.
+search remain follow-up work.  Wide search branches fail-first on an odd check
+and uses a disjoint first-true chain over its incident coordinates, rather than
+enumerating every connected boundary extension.  The retained official
+BB `[[288,12,18]]` run closes the exact distance in about 2.6 seconds of warm
+single-core search after a roughly 1.8-second compile.
 
 ### Contextual-state library APIs
 

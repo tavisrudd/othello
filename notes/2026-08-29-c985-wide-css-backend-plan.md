@@ -79,3 +79,29 @@ was still unfinished after three minutes; the strengthened version remained
 unfinished at a 30-second bounded probe.  The next reduction is a
 future-domain-restricted packing envelope, followed by the already validated
 YBWC root split and monotone bound pulses.
+
+## Constraint-driven breakthrough
+
+Generic connected-support growth was the remaining pathology.  The exact
+replacement chooses a currently odd physical check and branches only on
+coordinates incident to it.  Every completion must take at least one such
+coordinate, and every choice remains connected because the odd check already
+meets the partial support.  A first-true exclusion chain makes sibling branches
+disjoint; minimum-remaining-options selection supplies fail-first branching.
+If a partial support already has zero syndrome and zero logical observation,
+expansion stops: a minimum nontrivial support cannot properly contain a
+nonempty kernel support, since deleting it leaves a smaller nontrivial support.
+
+Exhaustive overlap tests against brute force cover every two-check/four-column
+binary physical matrix and every nonzero one-row logical observation.  On
+BB288, weight 10 fell again from 20,118,660 candidates / 0.532 seconds to
+19,412 / 0.00104 seconds (1,036x work, 512x wall).  Weight 14 closed in 0.100
+seconds / 1,825,766 candidates, versus more than 30 seconds after packing and
+more than three minutes before it.
+
+The official weight-18 search completed on one core with an independently
+replayed nontrivial kernel witness.  Eleven rounds each searched exactly
+53,086,371 candidates; warm search median was 2.564973 seconds, mean 2.562569,
+and sample standard deviation 0.034734.  Compile took 1.81 seconds.  The next
+performance step is to port the proven YBWC/pulse split to this much smaller
+constraint-driven tree, then persist the wide completion filters.
