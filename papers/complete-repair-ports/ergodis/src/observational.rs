@@ -2633,6 +2633,154 @@ pub struct LayeredFrontierMetrics {
     pub peak_signature_words: usize,
 }
 
+/// A deterministic weighted-live-frontier schedule. Frozen artifacts compiled
+/// under the plan use scheduled sort IDs; `order[new]` gives the original sort
+/// and `original_to_scheduled[old]` gives its scheduled ID.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct LayeredSchedulePlan {
+    pub order: Box<[u32]>,
+    pub original_to_scheduled: Box<[u32]>,
+    pub frontier: LayeredFrontierMetrics,
+}
+
+/// Choose sinks in reverse topological order by the smallest immediate
+/// weighted live-set bound, breaking ties by post-release live weight and sort
+/// ID. This is a deterministic heuristic, not an optimal-width algorithm.
+pub fn plan_layered_greedy_schedule(
+    state_counts: &[u32],
+    generators: &[LayeredGeneratorSpec],
+) -> Result<LayeredSchedulePlan, ObservationalError> {
+    if state_counts.is_empty() {
+        return Err(ObservationalError::NoSorts);
+    }
+    let sort_count = state_counts.len();
+    let mut dependencies = vec![Vec::<usize>::new(); sort_count];
+    let mut predecessors = vec![Vec::<usize>::new(); sort_count];
+    let mut generator_outdegree = vec![0_usize; sort_count];
+    for (generator, spec) in generators.iter().enumerate() {
+        let source = spec.source_sort as usize;
+        let target = spec.target_sort as usize;
+        if source >= sort_count || target >= sort_count {
+            return Err(ObservationalError::GeneratorSort { generator });
+        }
+        if source == target {
+            return Err(ObservationalError::LayeredGeneratorOrder { generator });
+        }
+        generator_outdegree[source] = generator_outdegree[source]
+            .checked_add(1)
+            .ok_or(ObservationalError::Overflow)?;
+        dependencies[source].push(target);
+        predecessors[target].push(source);
+    }
+    for targets in &mut dependencies {
+        targets.sort_unstable();
+        targets.dedup();
+    }
+    for sources in &mut predecessors {
+        sources.sort_unstable();
+        sources.dedup();
+    }
+    let mut remaining_successors = dependencies.iter().map(Vec::len).collect::<Vec<_>>();
+    let mut remaining_predecessors = predecessors.iter().map(Vec::len).collect::<Vec<_>>();
+    let mut processed = vec![false; sort_count];
+    let mut live = vec![false; sort_count];
+    let mut live_words = 0_usize;
+    let mut live_maps = 0_usize;
+    let mut frontier = LayeredFrontierMetrics::default();
+    let mut reverse_order = Vec::with_capacity(sort_count);
+
+    for _ in 0..sort_count {
+        let mut choice = None::<(usize, usize, usize)>;
+        for sort in 0..sort_count {
+            if processed[sort] || remaining_successors[sort] != 0 {
+                continue;
+            }
+            let current_words = state_counts[sort] as usize;
+            let immediate = live_words
+                .checked_add(current_words)
+                .ok_or(ObservationalError::Overflow)?;
+            let mut released = 0_usize;
+            for &target in &dependencies[sort] {
+                if remaining_predecessors[target] == 1 && live[target] {
+                    released = released
+                        .checked_add(state_counts[target] as usize)
+                        .ok_or(ObservationalError::Overflow)?;
+                }
+            }
+            let retained = if remaining_predecessors[sort] == 0 {
+                0
+            } else {
+                current_words
+            };
+            let post = live_words
+                .checked_sub(released)
+                .and_then(|words| words.checked_add(retained))
+                .ok_or(ObservationalError::Overflow)?;
+            let score = immediate.max(post);
+            if choice.is_none_or(|best| (score, post, sort) < best) {
+                choice = Some((score, post, sort));
+            }
+        }
+        let Some((_, _, sort)) = choice else {
+            return Err(ObservationalError::LayeredGeneratorOrder { generator: 0 });
+        };
+        let current_words = state_counts[sort] as usize;
+        frontier.peak_live_state_classes = frontier
+            .peak_live_state_classes
+            .max(live_words + current_words);
+        frontier.peak_live_class_maps = frontier.peak_live_class_maps.max(live_maps + 1);
+        frontier.peak_signature_words = frontier.peak_signature_words.max(
+            current_words
+                .checked_mul(
+                    generator_outdegree[sort]
+                        .checked_add(1)
+                        .ok_or(ObservationalError::Overflow)?,
+                )
+                .ok_or(ObservationalError::Overflow)?,
+        );
+        for &target in &dependencies[sort] {
+            remaining_predecessors[target] = remaining_predecessors[target]
+                .checked_sub(1)
+                .ok_or(ObservationalError::CompiledShape)?;
+            if remaining_predecessors[target] == 0 && live[target] {
+                live[target] = false;
+                live_words -= state_counts[target] as usize;
+                live_maps -= 1;
+            }
+        }
+        if remaining_predecessors[sort] != 0 {
+            live[sort] = true;
+            live_words = live_words
+                .checked_add(current_words)
+                .ok_or(ObservationalError::Overflow)?;
+            live_maps = live_maps
+                .checked_add(1)
+                .ok_or(ObservationalError::Overflow)?;
+        }
+        processed[sort] = true;
+        reverse_order.push(sort as u32);
+        for &source in &predecessors[sort] {
+            remaining_successors[source] = remaining_successors[source]
+                .checked_sub(1)
+                .ok_or(ObservationalError::CompiledShape)?;
+        }
+    }
+    if live_words != 0 || live_maps != 0 {
+        return Err(ObservationalError::CompiledShape);
+    }
+    reverse_order.reverse();
+    let mut original_to_scheduled = vec![0_u32; sort_count];
+    for (scheduled, &original) in reverse_order.iter().enumerate() {
+        original_to_scheduled[original as usize] =
+            u32::try_from(scheduled).map_err(|_| ObservationalError::Overflow)?;
+    }
+    Ok(LayeredSchedulePlan {
+        order: reverse_order.into_boxed_slice(),
+        original_to_scheduled: original_to_scheduled.into_boxed_slice(),
+        frontier,
+    })
+}
+
 #[inline]
 fn layered_signature_hash(signature: &[u32]) -> u64 {
     let mut hash = 0x9e37_79b9_7f4a_7c15_u64;
@@ -7317,6 +7465,36 @@ mod tests {
             assert_eq!(actual, expected, "seed={seed}");
             assert!(frontier.peak_live_state_classes <= counts.iter().sum::<u32>() as usize);
             verify_frozen_layered_dag_audit(&actual, &mut std::io::Cursor::new(audit)).unwrap();
+
+            let plan = plan_layered_greedy_schedule(&counts, &generators).unwrap();
+            for spec in &generators {
+                assert!(
+                    plan.original_to_scheduled[spec.source_sort as usize]
+                        < plan.original_to_scheduled[spec.target_sort as usize]
+                );
+            }
+            let scheduled_counts = plan
+                .order
+                .iter()
+                .map(|&original| counts[original as usize])
+                .collect::<Vec<_>>();
+            let scheduled_generators = generators
+                .iter()
+                .map(|spec| LayeredGeneratorSpec {
+                    source_sort: plan.original_to_scheduled[spec.source_sort as usize],
+                    target_sort: plan.original_to_scheduled[spec.target_sort as usize],
+                })
+                .collect::<Vec<_>>();
+            let scheduled_entries = (0..sort_count as u32).collect::<Vec<_>>();
+            let (_, scheduled_frontier) = compile_layered_frozen_observational(
+                &scheduled_counts,
+                &scheduled_generators,
+                &scheduled_entries,
+                |scheduled_sort, state| observation(plan.order[scheduled_sort as usize], state),
+                transition,
+            )
+            .unwrap();
+            assert_eq!(scheduled_frontier, plan.frontier, "seed={seed}");
         }
 
         let counts = [0_u32, 0, 0];
@@ -7349,6 +7527,21 @@ mod tests {
             }
         );
         verify_frozen_layered_dag_audit(&frozen, &mut std::io::Cursor::new(audit)).unwrap();
+
+        assert!(plan_layered_greedy_schedule(
+            &[1, 1],
+            &[
+                LayeredGeneratorSpec {
+                    source_sort: 0,
+                    target_sort: 1,
+                },
+                LayeredGeneratorSpec {
+                    source_sort: 1,
+                    target_sort: 0,
+                },
+            ],
+        )
+        .is_err());
     }
 
     #[test]
