@@ -409,6 +409,19 @@ Sequel research:
   an independent replay validates its weight-24 logical witness.  This is a
   larger-code result, not a new-code claim.  The next discovery gate remains
   an algebraically deduplicated weight-six sweep with direct-sum rejection.
+  A broader search found a higher-value target outside the BB family.  The
+  [SCE R2Elite01 certificate](../2026-08-29-c985-sce-r2elite01-distance.md)
+  reconstructs the published non-abelian lifted-product `[[1496,194,<=20]]`
+  candidate and, without assuming any coordinate symmetry, exhausts both CSS
+  directions through radius 14.  Odd physical-column degree excludes odd
+  kernel weights, so the quantum distance is at least 16 and the certified
+  lower figure of merit is `6208/187 = 33.19786...`, 1.729x the prior 19.2
+  frontier.  A separate huge specialization keeps BB756/784 at their original
+  13-word width and artifact version; logical observations above 64 live in a
+  cold flat side table consulted only at kernel leaves.  Exact distance remains
+  in `{16,18,20}` conditional on reproducing the source's randomized weight-20
+  upper bound; verified non-abelian coordinate actions and full decomposition
+  classification are the main theorem-driven acceleration gates.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

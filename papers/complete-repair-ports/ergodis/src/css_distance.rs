@@ -23,8 +23,11 @@ const SYNDROME_WORDS: usize = MAX_CHECKS / 64;
 const WIDE_SUPPORT_WORDS: usize = 5;
 const EXTRA_WIDE_SUPPORT_WORDS: usize = 6;
 const LARGE_SUPPORT_WORDS: usize = 13;
+const HUGE_SUPPORT_WORDS: usize = 24;
 const WIDE_SYNDROME_WORDS: usize = 3;
 const LARGE_SYNDROME_WORDS: usize = 6;
+const HUGE_SYNDROME_WORDS: usize = 11;
+const HUGE_LOGICAL_WORDS: usize = 4;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
 const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
 const ARTIFACT_VERSION: u16 = 1;
@@ -34,6 +37,8 @@ const EXTRA_WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSX1";
 const EXTRA_WIDE_ARTIFACT_VERSION: u16 = 1;
 const LARGE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSL1";
 const LARGE_ARTIFACT_VERSION: u16 = 2;
+const HUGE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSH1";
+const HUGE_ARTIFACT_VERSION: u16 = 1;
 const MAX_ARTIFACT_BLOOM_WORDS: usize = FOUR_COMPLETION_BLOOM_BITS / 64;
 
 fn wide_artifact_identity<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
@@ -46,6 +51,7 @@ fn wide_artifact_identity<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
         (LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS) => {
             (LARGE_ARTIFACT_MAGIC, LARGE_ARTIFACT_VERSION)
         }
+        (HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS) => (HUGE_ARTIFACT_MAGIC, HUGE_ARTIFACT_VERSION),
         _ => unreachable!("unsupported fixed support width"),
     }
 }
@@ -56,7 +62,7 @@ pub enum CssDistanceError {
     TooManyCoordinates,
     #[error("CSS distance search currently supports at most 128 physical checks")]
     TooManyChecks,
-    #[error("CSS distance search currently supports at most 64 logical observations")]
+    #[error("CSS distance search exceeds this backend's logical-observation limit")]
     TooManyLogicals,
     #[error("physical and logical matrices have different coordinate counts")]
     CoordinateMismatch,
@@ -259,6 +265,51 @@ impl WideSyndrome for PackedSyndrome<3> {
 }
 
 impl WideSyndrome for PackedSyndrome<6> {
+    #[inline]
+    fn toggle(&mut self, right: Self) {
+        for (left, right) in self.words.iter_mut().zip(right.words) {
+            *left ^= right;
+        }
+    }
+
+    #[inline]
+    fn is_zero(&self) -> bool {
+        self.words.iter().all(|&word| word == 0)
+    }
+
+    #[inline]
+    fn weight(&self) -> u32 {
+        self.words.iter().map(|word| word.count_ones()).sum()
+    }
+
+    #[inline]
+    fn difference_assign(&mut self, right: Self) {
+        for (left, right) in self.words.iter_mut().zip(right.words) {
+            *left &= !right;
+        }
+    }
+
+    #[inline]
+    fn union_assign(&mut self, right: Self) {
+        for (left, right) in self.words.iter_mut().zip(right.words) {
+            *left |= right;
+        }
+    }
+
+    #[inline]
+    fn pop_lowest(&mut self) -> Option<usize> {
+        for (word_index, word) in self.words.iter_mut().enumerate() {
+            if *word != 0 {
+                let bit = word.trailing_zeros() as usize;
+                *word &= *word - 1;
+                return Some(64 * word_index + bit);
+            }
+        }
+        None
+    }
+}
+
+impl WideSyndrome for PackedSyndrome<11> {
     #[inline]
     fn toggle(&mut self, right: Self) {
         for (left, right) in self.words.iter_mut().zip(right.words) {
@@ -552,8 +603,13 @@ struct CompiledStructure {
     kernel_weights_even: bool,
 }
 
-struct WideCompiledStructure<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
+struct WideCompiledStructure<
+    const SUPPORT_WORDS: usize,
+    const CHECK_WORDS: usize,
+    const LOGICAL_WORDS: usize,
+> {
     columns: Box<[PackedColumn<CHECK_WORDS>]>,
+    extra_logical_columns: Box<[u64]>,
     neighbors: Box<[PackedSupport<SUPPORT_WORDS>]>,
     check_count: u16,
     maximum_column_check_weight: u8,
@@ -573,8 +629,13 @@ const _: () = assert!(std::mem::size_of::<AlignedConflict<WIDE_SYNDROME_WORDS>>(
 
 /// Precompiled exact state for CSS instances up to 320 coordinates and rank 192.
 #[derive(Clone, Debug)]
-pub struct CompiledWideCssDistanceImpl<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
+pub struct CompiledWideCssDistanceImpl<
+    const SUPPORT_WORDS: usize,
+    const CHECK_WORDS: usize,
+    const LOGICAL_WORDS: usize = 1,
+> {
     columns: Box<[PackedColumn<CHECK_WORDS>]>,
+    extra_logical_columns: Box<[u64]>,
     neighbors: Box<[PackedSupport<SUPPORT_WORDS>]>,
     coordinate_count: u16,
     check_count: u16,
@@ -591,12 +652,15 @@ pub struct CompiledWideCssDistanceImpl<const SUPPORT_WORDS: usize, const CHECK_W
 }
 
 pub type CompiledWideCssDistance =
-    CompiledWideCssDistanceImpl<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>;
+    CompiledWideCssDistanceImpl<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1>;
 pub type CompiledExtraWideCssDistance =
-    CompiledWideCssDistanceImpl<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>;
+    CompiledWideCssDistanceImpl<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1>;
 #[cfg(feature = "large-css")]
 pub type CompiledLargeCssDistance =
-    CompiledWideCssDistanceImpl<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>;
+    CompiledWideCssDistanceImpl<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1>;
+#[cfg(feature = "large-css")]
+pub type CompiledHugeCssDistance =
+    CompiledWideCssDistanceImpl<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS, HUGE_LOGICAL_WORDS>;
 
 /// Select original rows forming a basis, preserving sparse presentation rows.
 fn independent_row_indices(matrix: &Matrix) -> Vec<usize> {
@@ -631,10 +695,14 @@ fn independent_row_indices(matrix: &Matrix) -> Vec<usize> {
     indices
 }
 
-fn compile_wide_structure<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
+fn compile_wide_structure<
+    const SUPPORT_WORDS: usize,
+    const CHECK_WORDS: usize,
+    const LOGICAL_WORDS: usize,
+>(
     physical: &Matrix,
     logical: &Matrix,
-) -> Result<WideCompiledStructure<SUPPORT_WORDS, CHECK_WORDS>, CssDistanceError>
+) -> Result<WideCompiledStructure<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>, CssDistanceError>
 where
     PackedSyndrome<CHECK_WORDS>: WideSyndrome,
 {
@@ -644,7 +712,7 @@ where
     if coordinate_count > maximum_wide_coordinates {
         return Err(CssDistanceError::TooManyCoordinates);
     }
-    if logical.rows() > MAX_LOGICALS {
+    if logical.rows() > 64 * LOGICAL_WORDS || logical.rows() > usize::from(u8::MAX) {
         return Err(CssDistanceError::TooManyLogicals);
     }
     if logical.cols() != coordinate_count {
@@ -662,6 +730,8 @@ where
         basis_positions[row] = position as u16;
     }
     let mut columns = vec![PackedColumn::<CHECK_WORDS>::default(); coordinate_count];
+    let mut extra_logical_columns =
+        vec![0u64; coordinate_count.saturating_mul(LOGICAL_WORDS.saturating_sub(1))];
     let mut neighbors = vec![PackedSupport::<SUPPORT_WORDS>::default(); coordinate_count];
     for (check, &basis_position) in basis_positions.iter().enumerate() {
         let row = physical.row(check);
@@ -685,7 +755,13 @@ where
     for logical_row in 0..logical.rows() {
         for (coordinate, &entry) in logical.row(logical_row).iter().enumerate() {
             if entry != 0 {
-                columns[coordinate].logical |= 1u64 << logical_row;
+                if logical_row < 64 {
+                    columns[coordinate].logical |= 1u64 << logical_row;
+                } else {
+                    let word = logical_row / 64 - 1;
+                    extra_logical_columns[coordinate * LOGICAL_WORDS.saturating_sub(1) + word] |=
+                        1u64 << (logical_row % 64);
+                }
             }
         }
     }
@@ -715,6 +791,7 @@ where
     }
     Ok(WideCompiledStructure {
         columns: columns.into_boxed_slice(),
+        extra_logical_columns: extra_logical_columns.into_boxed_slice(),
         neighbors: neighbors.into_boxed_slice(),
         check_count: basis.len() as u16,
         maximum_column_check_weight,
@@ -725,13 +802,14 @@ where
 }
 
 #[allow(private_bounds)]
-impl<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>
-    CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS>
+impl<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize, const LOGICAL_WORDS: usize>
+    CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>
 where
     PackedSyndrome<CHECK_WORDS>: WideSyndrome,
 {
     pub fn compile(physical: &Matrix, logical: &Matrix) -> Result<Self, CssDistanceError> {
-        let structure = compile_wide_structure::<SUPPORT_WORDS, CHECK_WORDS>(physical, logical)?;
+        let structure =
+            compile_wide_structure::<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>(physical, logical)?;
         let (short_completion_syndromes, three_completion_bloom, four_completion_bloom) =
             if CHECK_WORDS > WIDE_SYNDROME_WORDS {
                 compile_large_completion_filters(&structure.columns, wide_syndrome_key)
@@ -740,6 +818,7 @@ where
             };
         Ok(Self {
             columns: structure.columns,
+            extra_logical_columns: structure.extra_logical_columns,
             neighbors: structure.neighbors,
             coordinate_count: physical.cols() as u16,
             check_count: structure.check_count,
@@ -843,7 +922,8 @@ where
         if !strictly_sorted(&one_completion) || !strictly_sorted(&two_completion) {
             return Err(CssDistanceArtifactError::Shape);
         }
-        let structure = compile_wide_structure::<SUPPORT_WORDS, CHECK_WORDS>(physical, logical)?;
+        let structure =
+            compile_wide_structure::<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>(physical, logical)?;
         if check_count != structure.check_count
             || maximum_column_check_weight != structure.maximum_column_check_weight
             || kernel_weights_even != structure.kernel_weights_even
@@ -852,6 +932,7 @@ where
         }
         Ok(Self {
             columns: structure.columns,
+            extra_logical_columns: structure.extra_logical_columns,
             neighbors: structure.neighbors,
             coordinate_count,
             check_count,
@@ -871,6 +952,27 @@ where
     #[inline]
     pub fn artifact_payload_blake3(&self) -> Option<[u8; 32]> {
         self.artifact_payload_blake3
+    }
+
+    /// Test all logical observations without widening the per-candidate hot state.
+    /// Observations above the first word are consulted only at zero-syndrome leaves.
+    #[inline]
+    fn logical_is_nonzero(&self, support: PackedSupport<SUPPORT_WORDS>, first_word: u64) -> bool {
+        if first_word != 0 {
+            return true;
+        }
+        let extra_words = LOGICAL_WORDS.saturating_sub(1);
+        for word in 0..extra_words {
+            let mut value = 0u64;
+            let mut remaining = support;
+            while let Some(coordinate) = remaining.pop_lowest() {
+                value ^= self.extra_logical_columns[coordinate * extra_words + word];
+            }
+            if value != 0 {
+                return true;
+            }
+        }
+        false
     }
 
     #[inline]
@@ -978,7 +1080,7 @@ where
             stats.maximum_depth = stats.maximum_depth.max(1);
             if syndromes[0].is_zero() {
                 stats.kernel_supports += 1;
-                if logicals[0] != 0 {
+                if self.logical_is_nonzero(supports[0], logicals[0]) {
                     stats.nontrivial_supports += 1;
                     best_weight = 1;
                     best_support = supports[0];
@@ -1012,7 +1114,7 @@ where
                 stats.maximum_depth = stats.maximum_depth.max(child_weight);
                 if child_syndrome.is_zero() {
                     stats.kernel_supports += 1;
-                    if child_logical != 0 {
+                    if self.logical_is_nonzero(child_support, child_logical) {
                         stats.nontrivial_supports += 1;
                         if child_weight < best_weight {
                             best_weight = child_weight;
@@ -1076,8 +1178,12 @@ where
 
 #[cfg(feature = "parallel")]
 #[inline(always)]
-fn search_syndrome_branch_partition_impl<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
-    compiled: &CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS>,
+fn search_syndrome_branch_partition_impl<
+    const SUPPORT_WORDS: usize,
+    const CHECK_WORDS: usize,
+    const LOGICAL_WORDS: usize,
+>(
+    compiled: &CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>,
     branches: &[WideRootBranch<SUPPORT_WORDS, CHECK_WORDS>],
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
@@ -1143,12 +1249,12 @@ where
             stats.maximum_depth = stats.maximum_depth.max(child_weight);
             if child_syndrome.is_zero() {
                 stats.kernel_supports += 1;
-                if child_logical != 0 {
+                let mut child_support = frame.support;
+                child_support.insert(added);
+                if compiled.logical_is_nonzero(child_support, child_logical) {
                     stats.nontrivial_supports += 1;
                     if child_weight < best_weight {
                         best_weight = child_weight;
-                        let mut child_support = frame.support;
-                        child_support.insert(added);
                         best_support = child_support;
                         pruning_bound = pruning_bound.min(child_weight);
                         stats.bound_improvements_published +=
@@ -1282,6 +1388,28 @@ fn search_syndrome_branch_partition_large(
 }
 
 #[cfg(feature = "parallel")]
+#[cfg(feature = "large-css")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition_huge(
+    compiled: &CompiledHugeCssDistance,
+    branches: &[WideRootBranch<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+    pulse_interval: u64,
+) -> CachePaddedWideBranchResult<HUGE_SUPPORT_WORDS> {
+    search_syndrome_branch_partition_impl(
+        compiled,
+        branches,
+        searched_maximum_weight,
+        mailboxes,
+        pulse_interval,
+    )
+}
+
+#[cfg(feature = "parallel")]
 impl WidePartitionKernel<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> for CompiledWideCssDistance {
     #[inline]
     fn search_partition(
@@ -1344,9 +1472,30 @@ impl WidePartitionKernel<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS> for Compiled
     }
 }
 
+#[cfg(feature = "parallel")]
+#[cfg(feature = "large-css")]
+impl WidePartitionKernel<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS> for CompiledHugeCssDistance {
+    #[inline]
+    fn search_partition(
+        &self,
+        branches: &[WideRootBranch<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+        pulse_interval: u64,
+    ) -> CachePaddedWideBranchResult<HUGE_SUPPORT_WORDS> {
+        search_syndrome_branch_partition_huge(
+            self,
+            branches,
+            searched_maximum_weight,
+            mailboxes,
+            pulse_interval,
+        )
+    }
+}
+
 #[allow(private_bounds)]
-impl<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>
-    CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS>
+impl<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize, const LOGICAL_WORDS: usize>
+    CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>
 where
     PackedSyndrome<CHECK_WORDS>: WideSyndrome,
 {
@@ -1398,7 +1547,7 @@ where
                     prefix_stats.maximum_depth = prefix_stats.maximum_depth.max(child_weight);
                     if child_syndrome.is_zero() {
                         prefix_stats.kernel_supports += 1;
-                        if child_logical != 0 {
+                        if self.logical_is_nonzero(child_support, child_logical) {
                             prefix_stats.nontrivial_supports += 1;
                             if child_weight < prefix_best_weight {
                                 prefix_best_weight = child_weight;
@@ -1527,7 +1676,8 @@ where
             stats.maximum_depth = stats.maximum_depth.max(1);
             if syndrome.is_zero() {
                 stats.kernel_supports += 1;
-                if logical != 0 {
+                if self.logical_is_nonzero(PackedSupport::<SUPPORT_WORDS>::singleton(root), logical)
+                {
                     stats.nontrivial_supports += 1;
                     best_weight = 1;
                     best_support = PackedSupport::<SUPPORT_WORDS>::singleton(root);
@@ -1634,7 +1784,7 @@ where
             stats.maximum_depth = stats.maximum_depth.max(1);
             if syndromes[0].is_zero() {
                 stats.kernel_supports += 1;
-                if logicals[0] != 0 {
+                if self.logical_is_nonzero(supports[0], logicals[0]) {
                     stats.nontrivial_supports += 1;
                     best_weight = 1;
                     best_support = supports[0];
@@ -1664,7 +1814,7 @@ where
                 let child_logical = logicals[depth] ^ self.columns[added].logical;
                 if child_syndrome.is_zero() {
                     stats.kernel_supports += 1;
-                    if child_logical != 0 {
+                    if self.logical_is_nonzero(child_support, child_logical) {
                         stats.nontrivial_supports += 1;
                         if child_weight < best_weight {
                             best_weight = child_weight;
@@ -1753,6 +1903,7 @@ where
     #[inline]
     pub fn packed_storage_bytes(&self) -> usize {
         self.columns.len() * std::mem::size_of::<PackedColumn<CHECK_WORDS>>()
+            + self.extra_logical_columns.len() * std::mem::size_of::<u64>()
             + self.neighbors.len() * std::mem::size_of::<PackedSupport<SUPPORT_WORDS>>()
     }
 }
@@ -1783,7 +1934,20 @@ impl CompiledWideCssDistanceImpl<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> 
 
 #[cfg(feature = "parallel")]
 #[cfg(feature = "large-css")]
-impl CompiledWideCssDistanceImpl<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS> {
+impl CompiledWideCssDistanceImpl<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1> {
+    pub fn search_bounded_syndrome_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+    }
+}
+
+#[cfg(feature = "parallel")]
+#[cfg(feature = "large-css")]
+impl CompiledWideCssDistanceImpl<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS, HUGE_LOGICAL_WORDS> {
     pub fn search_bounded_syndrome_parallel_pulsed(
         &self,
         anchors: &[u16],
@@ -3190,9 +3354,10 @@ mod tests {
         logical_data[0] = 1;
         let logical = Matrix::new::<2>(1, columns, logical_data).unwrap();
         assert_eq!(independent_row_indices(&physical).len(), 2);
-        let compiled =
-            compile_wide_structure::<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>(&physical, &logical)
-                .unwrap();
+        let compiled = compile_wide_structure::<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1>(
+            &physical, &logical,
+        )
+        .unwrap();
         assert_eq!(compiled.columns.len(), 288);
         assert_eq!(compiled.check_count, 2);
         assert_eq!(compiled.maximum_column_check_weight, 1);
@@ -3231,9 +3396,10 @@ mod tests {
         }
         let physical = Matrix::new::<2>(block, 2 * block, data).unwrap();
         let logical = Matrix::new::<2>(1, 2 * block, vec![0; 2 * block]).unwrap();
-        let compiled =
-            compile_wide_structure::<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>(&physical, &logical)
-                .unwrap();
+        let compiled = compile_wide_structure::<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1>(
+            &physical, &logical,
+        )
+        .unwrap();
         assert_eq!(compiled.columns.len(), 288);
         assert_eq!(compiled.check_count, 138);
     }
@@ -3283,7 +3449,7 @@ mod tests {
         }
         let physical = Matrix::new::<2>(block, columns, data).unwrap();
         let logical = Matrix::new::<2>(1, columns, vec![0; columns]).unwrap();
-        let compiled = compile_wide_structure::<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>(
+        let compiled = compile_wide_structure::<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1>(
             &physical, &logical,
         )
         .unwrap();
@@ -3319,7 +3485,7 @@ mod tests {
         }
         let physical = Matrix::new::<2>(block, columns, data).unwrap();
         let logical = Matrix::new::<2>(1, columns, vec![0; columns]).unwrap();
-        let compiled = compile_wide_structure::<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>(
+        let compiled = compile_wide_structure::<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1>(
             &physical, &logical,
         )
         .unwrap();
@@ -3327,6 +3493,19 @@ mod tests {
         assert_eq!(compiled.check_count, 380);
         assert_eq!(compiled.maximum_column_check_weight, 3);
         assert!(compiled.kernel_weights_even);
+    }
+
+    #[cfg(feature = "large-css")]
+    #[test]
+    fn large_search_checks_logicals_above_the_first_word() {
+        let physical = Matrix::new::<2>(1, 1, vec![0]).unwrap();
+        let mut logical_data = vec![0; 194];
+        logical_data[193] = 1;
+        let logical = Matrix::new::<2>(194, 1, logical_data).unwrap();
+        let compiled = CompiledHugeCssDistance::compile(&physical, &logical).unwrap();
+        let result = compiled.search_bounded_syndrome_driven(&[0], 1).unwrap();
+        assert_eq!(result.distance, Some(1));
+        assert_eq!(&*result.witness, &[0]);
     }
 
     #[test]

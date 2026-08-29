@@ -1,8 +1,8 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
-#[cfg(feature = "large-css")]
-use ergodis::CompiledLargeCssDistance;
 use ergodis::{CompiledCssDistance, CompiledExtraWideCssDistance, CompiledWideCssDistance, Matrix};
+#[cfg(feature = "large-css")]
+use ergodis::{CompiledHugeCssDistance, CompiledLargeCssDistance};
 use serde::{Deserialize, Serialize};
 use std::fmt::Write as _;
 use std::fs::{File, OpenOptions};
@@ -84,6 +84,8 @@ enum Backend {
     ExtraWide(CompiledExtraWideCssDistance),
     #[cfg(feature = "large-css")]
     Large(CompiledLargeCssDistance),
+    #[cfg(feature = "large-css")]
+    Huge(CompiledHugeCssDistance),
 }
 
 fn search_kernel(wide: bool) -> &'static str {
@@ -135,6 +137,34 @@ fn dense_matrix(rows: &[Vec<u16>], columns: usize) -> Result<Matrix> {
     Matrix::new::<2>(rows.len(), columns, data).context("constructing binary matrix")
 }
 
+fn binary_rank(rows: &[Vec<u16>], columns: usize) -> usize {
+    let word_count = columns.div_ceil(64);
+    let mut pivots: Vec<Option<Box<[u64]>>> = vec![None; columns];
+    let mut rank = 0usize;
+    for row in rows {
+        let mut words = vec![0u64; word_count];
+        for &coordinate in row {
+            let coordinate = usize::from(coordinate);
+            words[coordinate / 64] ^= 1u64 << (coordinate % 64);
+        }
+        while let Some(pivot) = words
+            .iter()
+            .rposition(|&word| word != 0)
+            .map(|word| 64 * word + 63 - words[word].leading_zeros() as usize)
+        {
+            let Some(prior) = &pivots[pivot] else {
+                pivots[pivot] = Some(words.into_boxed_slice());
+                rank += 1;
+                break;
+            };
+            for (left, &right) in words.iter_mut().zip(prior.iter()) {
+                *left ^= right;
+            }
+        }
+    }
+    rank
+}
+
 fn emit(record: &RunRecord<'_>, path: Option<&PathBuf>) -> Result<()> {
     serde_json::to_writer(std::io::stdout().lock(), record)?;
     println!();
@@ -161,14 +191,32 @@ fn main() -> Result<()> {
     let columns = usize::from(problem.coordinate_count);
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
-    let wide_problem = columns > 256 || physical.rows() > 128;
-    let large_problem = columns > 384 || physical.rows() > 192;
+    let physical_rank = binary_rank(&problem.physical_checks, columns);
+    let wide_problem = columns > 256 || physical_rank > 128;
+    let huge_problem = columns > 832 || physical_rank > 384 || logical.rows() > 64;
+    let large_problem = !huge_problem && (columns > 384 || physical_rank > 192);
     let extra_wide_problem = !large_problem && columns > 320;
     let preparation_start = Instant::now();
     let (compiled, preparation_mode) = if let Some(path) = &args.compiled_in {
         let file = File::open(path)
             .with_context(|| format!("opening compiled artifact {}", path.display()))?;
-        if large_problem {
+        if huge_problem {
+            #[cfg(feature = "large-css")]
+            {
+                (
+                    Backend::Huge(CompiledHugeCssDistance::read_artifact(
+                        &physical,
+                        &logical,
+                        BufReader::new(file),
+                    )?),
+                    "huge-artifact-load",
+                )
+            }
+            #[cfg(not(feature = "large-css"))]
+            {
+                bail!("huge CSS instances require --features large-css")
+            }
+        } else if large_problem {
             #[cfg(feature = "large-css")]
             {
                 (
@@ -212,6 +260,18 @@ fn main() -> Result<()> {
                 "artifact-load",
             )
         }
+    } else if huge_problem {
+        #[cfg(feature = "large-css")]
+        {
+            (
+                Backend::Huge(CompiledHugeCssDistance::compile(&physical, &logical)?),
+                "huge-compile",
+            )
+        }
+        #[cfg(not(feature = "large-css"))]
+        {
+            bail!("huge CSS instances require --features large-css")
+        }
     } else if large_problem {
         #[cfg(feature = "large-css")]
         {
@@ -254,6 +314,8 @@ fn main() -> Result<()> {
             Backend::ExtraWide(compiled) => compiled.write_artifact(BufWriter::new(file))?,
             #[cfg(feature = "large-css")]
             Backend::Large(compiled) => compiled.write_artifact(BufWriter::new(file))?,
+            #[cfg(feature = "large-css")]
+            Backend::Huge(compiled) => compiled.write_artifact(BufWriter::new(file))?,
         }
         Some(start.elapsed().as_secs_f64())
     } else {
@@ -265,6 +327,8 @@ fn main() -> Result<()> {
         Backend::ExtraWide(compiled) => compiled.artifact_payload_blake3(),
         #[cfg(feature = "large-css")]
         Backend::Large(compiled) => compiled.artifact_payload_blake3(),
+        #[cfg(feature = "large-css")]
+        Backend::Huge(compiled) => compiled.artifact_payload_blake3(),
     }
     .map(|digest| {
         let mut encoded = String::with_capacity(64);
@@ -382,6 +446,14 @@ fn main() -> Result<()> {
                     args.pulse_interval,
                 )
             })?,
+            #[cfg(feature = "large-css")]
+            Backend::Huge(compiled) => thread_pool.install(|| {
+                compiled.search_bounded_syndrome_parallel_pulsed(
+                    &problem.anchors,
+                    maximum_weight,
+                    args.pulse_interval,
+                )
+            })?,
         };
         #[cfg(not(feature = "parallel"))]
         let round_result = match &compiled {
@@ -400,6 +472,10 @@ fn main() -> Result<()> {
             }
             #[cfg(feature = "large-css")]
             Backend::Large(compiled) => {
+                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+            }
+            #[cfg(feature = "large-css")]
+            Backend::Huge(compiled) => {
                 compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
             }
         };
