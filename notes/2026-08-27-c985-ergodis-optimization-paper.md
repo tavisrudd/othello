@@ -1253,10 +1253,14 @@ verified artifact, permitting many objectives to reuse one topology plan.
 one caller-capacity-checked accumulator: compose and Pareto choice are fused,
 witnesses are created only for admitted nondominated products, and class/
 generator loops do not grow scratch storage; one final front is allocated per
-reachable class.  `evaluate_entries` additionally
-computes a packed-bitmap forward closure from requested classes, skips
-unreachable quotient classes, computes each target sort's final predecessor at
-plan construction, and drops every live sort slab at that exact last use.  On
+reachable class.  `FrozenParetoQueryPlan` additionally compiles a packed-bitmap
+forward closure from requested classes, selected-output ordering, and exact
+reachable last-use buckets once, then reuses that immutable topology across
+objective families.  `evaluate_entries` remains one-shot sugar.  Evaluation
+skips unreachable quotient classes and drops every live sort slab at its exact
+last use.  The caller-owned Pareto workspace is now the actual accumulator
+rather than merely a capacity oracle, removing a redundant 33.8 KiB allocation
+at these bounds.  On
 the separable control, 96 of 153 classes are reachable and evaluation peaks at
 22 classes / 26 Pareto entries.
 The all-class convenience result still retains one front per quotient class.
@@ -1266,16 +1270,16 @@ shuffle product, an exact factorized solver evaluates the two branch languages
 independently and combines their fronts once.  Nine CPU-2 processes, each
 amortizing 1,000 solves, give:
 
-- identity quotient / minimized quotient: 6.749x geometric mean, log-ratio
-  t = 796.37;
-- minimized quotient / exact factorized DP: 1.216x geometric mean, log-ratio
-  t = 101.36.
+- identity quotient / minimized quotient: 6.196x geometric mean, log-ratio
+  t = 174.58;
+- minimized quotient / exact factorized DP: 1.090x geometric mean, log-ratio
+  t = 8.43.
 
 The identity artifact gives every concrete state a distinct observation but
 maps those observations back to the same base fronts at evaluation.  It uses
 the identical consuming algorithm, retained-entry obligation, objective
-tables, and witness operation; the 6.73x ratio isolates contextual
-minimization.  The minimized engine is only 21.6% slower than the stronger
+tables, and witness operation; the 6.196x ratio isolates contextual
+minimization.  The minimized engine is only 9.0% slower than the stronger
 branch-factorized solver.  The legacy Cartesian DP remains an independent
 correctness oracle and is not used for the quotient speedup claim.
 
@@ -1287,9 +1291,9 @@ scripts/check-shuffle-product-control.sh \
   evidence/c985-shuffle-product-control.tsv
 ```
 
-- benchmark script: `c44333bc484d8aacd11a66bbd08b9f54cccb92decda69c472de554ca63e08742`;
-- checker: `1c10e493c98864c9efeb3e3365c7065b2c9f6b1af31d1d3d2040abd652806d2a`;
-- evidence TSV: `81bf704bb18117ad0fb4abbe2684d599fe1910c9cd15a9fcea8c3cccc543d5c7`.
+- benchmark script: `0375db708d1741a21c1be72e653d36c25931625ccf8234ebb2858bbdb6f80ce6`;
+- checker: `a13d1a5da32b70a6cc563cf95fd1b9114383db4715685f7b7315240ac1949bc2`;
+- evidence TSV: `59923bad2bd4755425523f495a12563e5a40ad97efb613c1d36c829069213106`.
 
 The coupled control adds a shared mode selected by each branch's first symbol
 and requires the modes to agree at the join.  Unlike the discarded switch-
@@ -1302,10 +1306,11 @@ At length five with 12 local DFA states, the identity artifact has 46,656
 classes, contextual minimization has 349, and only 101 minimized classes are
 reachable from the requested entry.  The consuming frontier peaks at 23
 classes / 23 Pareto entries.  Nine CPU-2 processes of 1,000 evaluations give a
-21.917x identity/minimized geometric speedup with log-ratio t = 771.14.  The
-exact mode-conditioned branch join is only 1.076x faster than generic minimized
-evaluation (log-ratio t = 15.14).  The one-time minimized compile cost crosses
-over after 10.48 such entry evaluations
+22.667x identity/minimized geometric speedup with log-ratio t = 77.62.  The
+generic minimized evaluator is 1.188x faster than the exact mode-conditioned
+branch join (generic/specialized ratio 0.842, log-ratio t = -2.82).  The
+one-time minimized compile plus entry-plan cost crosses over after 12.62 such
+entry evaluations
 geometrically.  This synthetic finite-state join-compatibility application is
 genuinely coupled and differs from the unconditioned branch product, but it
 still factorizes through a two-value shared-mode interface.  The measured
@@ -1317,17 +1322,25 @@ scripts/bench-coupled-workflow.sh > evidence/c985-coupled-workflow.tsv
 scripts/check-coupled-workflow.sh evidence/c985-coupled-workflow.tsv
 ```
 
-- coupled benchmark: `54b514da2c157d267eb0e901184b28b3a022d774c4cab1ad92113a68cd341148`;
-- coupled checker: `fc8b6a5812797a2d46eab545dda39c29b8225658e337627490aa45ca090b65ef`;
-- coupled evidence: `8e11f514c4c69f91b4dddd9417857c6c4ad301dca7c34948bba5445379210c90`.
+- coupled benchmark: `6fa41ddb0891d3cac2ceb580648059cba4a7b1da42afce25dccb998ee0377f3e`;
+- coupled checker: `161cb733a28b752e98c2da5d87963e633219cda3b33a87c7b8775a81417f5bc0`;
+- coupled evidence: `f8553b84a9f370abf93fa24e5290c9735d7bd252891e6a34101e8d4635a60eb5`.
 
 An isolated `perf stat` pass then showed that generic evaluation executed fewer
 instructions than the mode-conditioned solver but lost IPC in repeated small
-query-selection setup.  The single-entry path now bypasses four CSR/helper
+query-selection setup.  The single-entry path first bypassed four CSR/helper
 allocations.  Over 100,000 isolated coupled evaluations, cycles fell from
 3,416,356,645 to 3,316,527,686 (1.030x) and instructions from 15,112,029,698 to
-14,633,115,635 (1.033x).  The multiround evidence above is post-optimization;
-the hardware-counter pass is diagnostic rather than a separate paper claim.
+14,633,115,635 (1.033x).  The reusable query-plan boundary then moved all
+remaining reachability and release scheduling outside the objective loop and
+reused the caller's accumulator.  The common single-entry path also moves its
+result rather than cloning its witness box.  Both generic and specialized
+controls now reuse prebuilt objective fronts and workspaces, and their stages
+run in separate pinned processes with alternating round order.  Mean entry-plan
+construction is 3.4 us on the shuffle control and 4.6 us on the coupled
+control; warm generic evaluation is 9.0% behind the exact separator solver on
+the former and 18.8% ahead on the latter.  The hardware-counter pass predates
+this final change and remains diagnostic rather than a separate paper claim.
 
 ## Mystery ledger
 
@@ -1335,7 +1348,7 @@ the hardware-counter pass is diagnostic rather than a separate paper claim.
   algorithms and retention obligations.  Identity and minimized artifacts now
   use the same plan, objective tables, reachability pruning, last-use release,
   witness operation, and selected entry.  The retained quotient-only gains are
-  6.749x on the shuffle control and 21.917x on the shared-mode control.
+  6.196x on the shuffle control and 22.667x on the shared-mode control.
 - **Settled -- apparent nonfactorization.**  A switch-count monitor constrained
   schedules without changing the attainable additive cost set and was
   discarded.  Shared-mode compatibility changes the front relative to the
@@ -1344,8 +1357,9 @@ the hardware-counter pass is diagnostic rather than a separate paper claim.
   witness parity, and measured as the strongest specialized baseline.
 - **Settled -- selected-entry residency.**  Structural lifetimes could retain a
   target past its final reachable predecessor.  Release buckets are now derived
-  from the packed reachable-class closure for each evaluation.  The coupled
-  control certifies 101 reachable classes and a 23-class / 23-entry peak.
+  from a packed reachable-class closure compiled once per selected query.  The
+  coupled control certifies 101 reachable classes and a 23-class / 23-entry
+  peak; repeated objectives no longer rebuild this topology.
 - **Open -- objective-family minimality.**  The feasibility/right-language
   quotient is universal over local ordered-monoid interpretations but can be
   finer than the coarsest quotient for one fixed objective family after cost

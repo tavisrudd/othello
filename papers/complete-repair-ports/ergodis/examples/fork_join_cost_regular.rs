@@ -5,7 +5,7 @@ use ergodis::observational::{
 };
 use ergodis::{
     CappedAdditiveMonoid, FiniteOrderedMonoid, FrozenParetoEvaluationMetrics, FrozenParetoPlan,
-    ParetoWitness, WitnessedParetoFront, WitnessedParetoWorkspace,
+    FrozenParetoQueryPlan, ParetoWitness, WitnessedParetoFront, WitnessedParetoWorkspace,
 };
 use std::io::Write;
 use std::time::Instant;
@@ -272,20 +272,18 @@ fn quotient_pareto_dp(
 }
 
 fn quotient_entry_pareto_dp(
-    plan: &FrozenParetoPlan<'_>,
+    query: &FrozenParetoQueryPlan<'_, '_>,
     resources: &CappedAdditiveMonoid,
     outputs: &[WitnessedParetoFront],
     generator_edges: &[WitnessedParetoFront],
-    entry_class: u32,
+    workspace: &mut WitnessedParetoWorkspace,
 ) -> (WitnessedParetoFront, FrozenParetoEvaluationMetrics) {
-    let mut workspace = WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
-    let (mut fronts, metrics) = plan
-        .evaluate_entries(
-            &[entry_class],
+    let (mut fronts, metrics) = query
+        .evaluate(
             resources,
             outputs,
             generator_edges,
-            &mut workspace,
+            workspace,
             |_, edge, suffix| edge | (suffix << 3),
         )
         .unwrap();
@@ -295,14 +293,14 @@ fn quotient_entry_pareto_dp(
 fn factorized_pareto_dp(
     workflow: &Workflow,
     resources: &CappedAdditiveMonoid,
+    edges: &[WitnessedParetoFront; 4],
+    workspace: &mut WitnessedParetoWorkspace,
     initial_state: u32,
 ) -> WitnessedParetoFront {
     assert_eq!(workflow.monitor_states, 1);
-    let edges = edge_fronts(resources, &DEFAULT_WEIGHTS);
     let state_count = workflow.automaton_states as usize;
     let initial_left = initial_state / workflow.automaton_states;
     let initial_right = initial_state % workflow.automaton_states;
-    let mut workspace = WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
     let mut branch_fronts = [empty_front(resources), empty_front(resources)];
 
     for branch in 0..2 {
@@ -323,7 +321,7 @@ fn factorized_pareto_dp(
                     let target = (2 * state + symbol + 1) % workflow.automaton_states;
                     let candidate = extend_front(
                         resources,
-                        &mut workspace,
+                        workspace,
                         &edges[2 * branch + symbol as usize],
                         &next[target as usize],
                     );
@@ -357,12 +355,12 @@ fn factorized_pareto_dp(
 fn mode_conditioned_factorized_pareto_dp(
     workflow: &Workflow,
     resources: &CappedAdditiveMonoid,
+    edges: &[WitnessedParetoFront; 4],
+    workspace: &mut WitnessedParetoWorkspace,
     initial_state: u32,
 ) -> WitnessedParetoFront {
     assert_eq!(workflow.monitor_states, 9);
-    let edges = edge_fronts(resources, &DEFAULT_WEIGHTS);
     let (initial_left, initial_right, _) = workflow.decode_state(initial_state);
-    let mut workspace = WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
     let mut result = empty_front(resources);
     for first_symbol in 0..2 {
         let mut mode_fronts = [empty_front(resources), empty_front(resources)];
@@ -384,7 +382,7 @@ fn mode_conditioned_factorized_pareto_dp(
                         let target = (2 * state + symbol + 1) % workflow.automaton_states;
                         let candidate = extend_front(
                             resources,
-                            &mut workspace,
+                            workspace,
                             &edges[2 * branch + symbol as usize],
                             &next[target as usize],
                         );
@@ -402,7 +400,7 @@ fn mode_conditioned_factorized_pareto_dp(
             let target = (2 * initial + first_symbol + 1) % workflow.automaton_states;
             mode_fronts[branch] = extend_front(
                 resources,
-                &mut workspace,
+                workspace,
                 &edges[2 * branch + first_symbol as usize],
                 &next[target as usize],
             );
@@ -573,6 +571,7 @@ struct RunResult {
     peak_live_classes: usize,
     peak_live_entries: usize,
     compile_ns: u128,
+    query_plan_ns: u128,
     legacy_raw_ns: u128,
     identity_ns: u128,
     quotient_ns: u128,
@@ -642,8 +641,11 @@ fn run(
     };
 
     let resources = CappedAdditiveMonoid::new([64, 64]).unwrap();
-    let plan = FrozenParetoPlan::new(&frozen).unwrap();
     let entry_class = frozen.entry_class(0, 0).unwrap();
+    let query_plan_start = Instant::now();
+    let plan = FrozenParetoPlan::new(&frozen).unwrap();
+    let query = plan.query(&[entry_class]).unwrap();
+    let query_plan_ns = query_plan_start.elapsed().as_nanos();
     let edges = edge_fronts(&resources, &DEFAULT_WEIGHTS);
     let quotient_outputs = [
         empty_front(&resources),
@@ -672,6 +674,7 @@ fn run(
     .unwrap();
     let identity_plan = FrozenParetoPlan::new(&identity).unwrap();
     let identity_entry = identity.entry_class(0, 0).unwrap();
+    let identity_query = identity_plan.query(&[identity_entry]).unwrap();
     let mut identity_outputs = Vec::with_capacity(state_offset as usize);
     for (sort, &count) in workflow.state_counts.iter().enumerate() {
         for state in 0..count {
@@ -691,52 +694,65 @@ fn run(
     let raw_ns = raw_start.elapsed().as_nanos() / raw_repetitions;
     let raw = raw.unwrap();
     let mut quotient = None;
+    let mut quotient_workspace =
+        WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
     let quotient_repetitions = stage_repetitions("quotient");
     let quotient_start = Instant::now();
     for _ in 0..quotient_repetitions {
         quotient = Some(std::hint::black_box(quotient_entry_pareto_dp(
-            &plan,
+            &query,
             &resources,
             &quotient_outputs,
             &generator_edges,
-            entry_class,
+            &mut quotient_workspace,
         )));
     }
     let quotient_ns = quotient_start.elapsed().as_nanos() / quotient_repetitions;
     let (quotient_entry, quotient_metrics) = quotient.unwrap();
     let mut identity_result = None;
+    let mut identity_workspace =
+        WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
     let identity_repetitions = stage_repetitions("identity");
     let identity_start = Instant::now();
     for _ in 0..identity_repetitions {
         identity_result = Some(std::hint::black_box(quotient_entry_pareto_dp(
-            &identity_plan,
+            &identity_query,
             &resources,
             &identity_outputs,
             &generator_edges,
-            identity_entry,
+            &mut identity_workspace,
         )));
     }
     let identity_ns = identity_start.elapsed().as_nanos() / identity_repetitions;
     let (identity_entry_front, _) = identity_result.unwrap();
-    let (factorized, factorized_ns) =
-        if workflow.monitor_states == 1 || workflow.monitor_states == 9 {
-            let mut factorized = None;
-            let factorized_repetitions = stage_repetitions("factorized");
-            let factorized_start = Instant::now();
-            for _ in 0..factorized_repetitions {
-                factorized = Some(std::hint::black_box(if workflow.monitor_states == 1 {
-                    factorized_pareto_dp(&workflow, &resources, 0)
-                } else {
-                    mode_conditioned_factorized_pareto_dp(&workflow, &resources, 0)
-                }));
-            }
-            (
-                factorized,
-                factorized_start.elapsed().as_nanos() / factorized_repetitions,
-            )
-        } else {
-            (None, 0)
-        };
+    let mut factorized_workspace =
+        WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
+    let (factorized, factorized_ns) = if workflow.monitor_states == 1
+        || workflow.monitor_states == 9
+    {
+        let mut factorized = None;
+        let factorized_repetitions = stage_repetitions("factorized");
+        let factorized_start = Instant::now();
+        for _ in 0..factorized_repetitions {
+            factorized = Some(std::hint::black_box(if workflow.monitor_states == 1 {
+                factorized_pareto_dp(&workflow, &resources, &edges, &mut factorized_workspace, 0)
+            } else {
+                mode_conditioned_factorized_pareto_dp(
+                    &workflow,
+                    &resources,
+                    &edges,
+                    &mut factorized_workspace,
+                    0,
+                )
+            }));
+        }
+        (
+            factorized,
+            factorized_start.elapsed().as_nanos() / factorized_repetitions,
+        )
+    } else {
+        (None, 0)
+    };
     let raw_entry = &raw[0][0];
     assert_eq!(
         raw_entry.resources().collect::<Vec<_>>(),
@@ -773,6 +789,7 @@ fn run(
         peak_live_classes: quotient_metrics.peak_live_classes,
         peak_live_entries: quotient_metrics.peak_live_entries,
         compile_ns,
+        query_plan_ns,
         legacy_raw_ns: raw_ns,
         identity_ns,
         quotient_ns,
@@ -801,6 +818,7 @@ fn main() {
         peak_live_classes,
         peak_live_entries,
         compile_ns,
+        query_plan_ns,
         legacy_raw_ns,
         identity_ns,
         quotient_ns,
@@ -824,7 +842,7 @@ fn main() {
         quotient_ns as f64 / factorized_ns as f64
     };
     println!(
-        "{label}\trepetitions={repetitions}\traw_states={raw_states}\tclasses={classes}\tidentity_classes={identity_classes}\tfront={front}\treachable_classes={reachable_classes}\tpeak_live_classes={peak_live_classes}\tpeak_live_entries={peak_live_entries}\tcompile_ns={compile_ns}\tlegacy_raw_pareto_ns={legacy_raw_ns}\tidentity_pareto_ns={identity_ns}\tquotient_pareto_ns={quotient_ns}\tfactorized_pareto_ns={factorized_ns}\tidentity_quotient_ratio={:.3}\tquotient_factorized_ratio={:.3}\taudit_bytes={}",
+        "{label}\trepetitions={repetitions}\traw_states={raw_states}\tclasses={classes}\tidentity_classes={identity_classes}\tfront={front}\treachable_classes={reachable_classes}\tpeak_live_classes={peak_live_classes}\tpeak_live_entries={peak_live_entries}\tcompile_ns={compile_ns}\tquery_plan_ns={query_plan_ns}\tlegacy_raw_pareto_ns={legacy_raw_ns}\tidentity_pareto_ns={identity_ns}\tquotient_pareto_ns={quotient_ns}\tfactorized_pareto_ns={factorized_ns}\tidentity_quotient_ratio={:.3}\tquotient_factorized_ratio={:.3}\taudit_bytes={}",
         identity_ns as f64 / quotient_ns as f64,
         quotient_factorized_ratio,
         audit_bytes
@@ -1006,7 +1024,16 @@ mod tests {
             coupled.resources().collect::<Vec<_>>(),
             raw[0][0].resources().collect::<Vec<_>>()
         );
-        let independent = factorized_pareto_dp(&Workflow::new(3, 5, 1), &resources, 0);
+        let independent_edges = edge_fronts(&resources, &DEFAULT_WEIGHTS);
+        let mut independent_workspace =
+            WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
+        let independent = factorized_pareto_dp(
+            &Workflow::new(3, 5, 1),
+            &resources,
+            &independent_edges,
+            &mut independent_workspace,
+            0,
+        );
         assert!(independent
             .resources()
             .any(|resource| !coupled.resources().any(|candidate| candidate == resource)));

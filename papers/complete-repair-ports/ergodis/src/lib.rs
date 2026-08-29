@@ -93,9 +93,9 @@ pub use orbit_compile::{
 pub use ordered_resource::{
     evaluate_frozen_pareto_dag, validate_finite_ordered_monoid, CappedAdditiveMonoid,
     FiniteOrderedMonoid, FrozenParetoError, FrozenParetoEvaluationMetrics, FrozenParetoPlan,
-    OrderedMonoidCertificate, OrderedResourceError, ParetoFront, ParetoObservationTable,
-    ParetoResponseDictionary, ParetoWitness, ParetoWitnessError, ParetoWorkspace,
-    WitnessedParetoFront, WitnessedParetoWorkspace,
+    FrozenParetoQueryPlan, OrderedMonoidCertificate, OrderedResourceError, ParetoFront,
+    ParetoObservationTable, ParetoResponseDictionary, ParetoWitness, ParetoWitnessError,
+    ParetoWorkspace, WitnessedParetoFront, WitnessedParetoWorkspace,
 };
 pub use scheduler::{
     maximum_parallel_repairs, CapacityCut, ParallelRepairResult, PositiveGradingCertificate,

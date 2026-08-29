@@ -431,6 +431,19 @@ pub struct FrozenParetoEvaluationMetrics {
     pub retained_entries: usize,
 }
 
+/// Entry-specific topology compiled once and reused across objective families.
+pub struct FrozenParetoQueryPlan<'plan, 'frozen> {
+    plan: &'plan FrozenParetoPlan<'frozen>,
+    entry_classes: Box<[u32]>,
+    single_sort: Option<usize>,
+    selected_counts: Box<[usize]>,
+    selected_indices: Box<[usize]>,
+    reachable: Box<[u64]>,
+    release_offsets: Box<[usize]>,
+    release_targets: Box<[u32]>,
+    reachable_classes: usize,
+}
+
 impl<'a> FrozenParetoPlan<'a> {
     pub fn new(frozen: &'a FrozenObservation) -> Result<Self, FrozenParetoError> {
         let sort_count = frozen.sort_count();
@@ -484,7 +497,7 @@ impl<'a> FrozenParetoPlan<'a> {
         let mut fronts: Vec<Option<WitnessedParetoFront>> =
             vec![None; self.frozen.storage().classes];
         let capacity = workspace.capacity();
-        let mut accumulator = Vec::with_capacity(capacity);
+        let accumulator = &mut workspace.entries;
         for sort in (0..self.frozen.sort_count()).rev() {
             let range = self
                 .frozen
@@ -548,20 +561,11 @@ impl<'a> FrozenParetoPlan<'a> {
         Ok(fronts)
     }
 
-    /// Evaluate only selected quotient classes while reclaiming every sort
-    /// slab immediately after its last predecessor sort has been processed.
-    pub fn evaluate_entries<M: FiniteOrderedMonoid>(
-        &self,
+    /// Compile entry-specific reachability and reclamation topology once.
+    pub fn query<'plan>(
+        &'plan self,
         entry_classes: &[u32],
-        monoid: &M,
-        output_fronts: &[WitnessedParetoFront],
-        edge_fronts: &[WitnessedParetoFront],
-        workspace: &mut WitnessedParetoWorkspace,
-        mut compose_witness: impl FnMut(u32, u32, u32) -> u32,
-    ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
-        if edge_fronts.len() != self.frozen.generator_count() {
-            return Err(FrozenParetoError::EdgeFrontCount);
-        }
+    ) -> Result<FrozenParetoQueryPlan<'plan, 'a>, FrozenParetoError> {
         let sort_count = self.frozen.sort_count();
         let single_sort = if let [class] = entry_classes {
             Some(
@@ -649,12 +653,85 @@ impl<'a> FrozenParetoPlan<'a> {
             release_cursor[release_sort] += 1;
         }
 
-        let capacity = workspace.capacity();
-        let mut accumulator = Vec::with_capacity(capacity);
-        let mut live: Vec<Option<Vec<Option<WitnessedParetoFront>>>> = vec![None; sort_count];
-        let mut retained: Vec<Option<WitnessedParetoFront>> = vec![None; entry_classes.len()];
-        let mut metrics = FrozenParetoEvaluationMetrics {
+        Ok(FrozenParetoQueryPlan {
+            plan: self,
+            entry_classes: entry_classes.into(),
+            single_sort,
+            selected_counts: selected_counts.into_boxed_slice(),
+            selected_indices: selected_indices.into_boxed_slice(),
+            reachable: reachable.into_boxed_slice(),
+            release_offsets: release_offsets.into_boxed_slice(),
+            release_targets: release_targets.into_boxed_slice(),
             reachable_classes,
+        })
+    }
+
+    /// Evaluate selected quotient classes with one-shot topology preparation.
+    pub fn evaluate_entries<M: FiniteOrderedMonoid>(
+        &self,
+        entry_classes: &[u32],
+        monoid: &M,
+        output_fronts: &[WitnessedParetoFront],
+        edge_fronts: &[WitnessedParetoFront],
+        workspace: &mut WitnessedParetoWorkspace,
+        compose_witness: impl FnMut(u32, u32, u32) -> u32,
+    ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
+        self.query(entry_classes)?.evaluate(
+            monoid,
+            output_fronts,
+            edge_fronts,
+            workspace,
+            compose_witness,
+        )
+    }
+
+    fn sort_for_class(&self, class: u32) -> Option<usize> {
+        let mut low = 0_usize;
+        let mut high = self.frozen.sort_count();
+        while low < high {
+            let middle = low + (high - low) / 2;
+            let range = self.frozen.class_range(middle as u32)?;
+            if class < range.start {
+                high = middle;
+            } else if class >= range.start + range.len {
+                low = middle + 1;
+            } else {
+                return Some(middle);
+            }
+        }
+        None
+    }
+}
+
+impl FrozenParetoQueryPlan<'_, '_> {
+    /// Evaluate only the prepared classes while reclaiming every sort slab at
+    /// its exact last reachable predecessor.
+    pub fn evaluate<M: FiniteOrderedMonoid>(
+        &self,
+        monoid: &M,
+        output_fronts: &[WitnessedParetoFront],
+        edge_fronts: &[WitnessedParetoFront],
+        workspace: &mut WitnessedParetoWorkspace,
+        mut compose_witness: impl FnMut(u32, u32, u32) -> u32,
+    ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
+        if edge_fronts.len() != self.plan.frozen.generator_count() {
+            return Err(FrozenParetoError::EdgeFrontCount);
+        }
+        if self.entry_classes.is_empty() {
+            return Ok((Vec::new(), FrozenParetoEvaluationMetrics::default()));
+        }
+        let sort_count = self.plan.frozen.sort_count();
+        let capacity = workspace.capacity();
+        let accumulator = &mut workspace.entries;
+        let mut live: Vec<Option<Vec<Option<WitnessedParetoFront>>>> = vec![None; sort_count];
+        let mut retained = if self.single_sort.is_some() {
+            Vec::new()
+        } else {
+            vec![None; self.entry_classes.len()]
+        };
+        let mut single_retained = None;
+        let mut metrics = FrozenParetoEvaluationMetrics {
+            reachable_classes: self.reachable_classes,
             ..FrozenParetoEvaluationMetrics::default()
         };
         let mut live_classes = 0_usize;
@@ -662,16 +739,18 @@ impl<'a> FrozenParetoPlan<'a> {
 
         for sort in (0..sort_count).rev() {
             let range = self
+                .plan
                 .frozen
                 .class_range(sort as u32)
                 .ok_or(FrozenParetoError::Artifact)?;
             let mut sort_fronts = Vec::with_capacity(range.len as usize);
             for class in range.start..range.start + range.len {
-                if reachable[class as usize / 64] & (1_u64 << (class as usize % 64)) == 0 {
+                if self.reachable[class as usize / 64] & (1_u64 << (class as usize % 64)) == 0 {
                     sort_fronts.push(None);
                     continue;
                 }
                 let output = self
+                    .plan
                     .frozen
                     .output(class)
                     .ok_or(FrozenParetoError::Artifact)? as usize;
@@ -685,13 +764,17 @@ impl<'a> FrozenParetoPlan<'a> {
                 }
                 accumulator.clear();
                 accumulator.extend_from_slice(&output_front.entries);
-                for &generator in &self.outgoing[self.offsets[sort]..self.offsets[sort + 1]] {
+                for &generator in
+                    &self.plan.outgoing[self.plan.offsets[sort]..self.plan.offsets[sort + 1]]
+                {
                     let target = self
+                        .plan
                         .frozen
                         .transition(generator, class)
                         .ok_or(FrozenParetoError::Artifact)?;
-                    let target_sort = self.generator_targets[generator as usize] as usize;
+                    let target_sort = self.plan.generator_targets[generator as usize] as usize;
                     let target_range = self
+                        .plan
                         .frozen
                         .class_range(target_sort as u32)
                         .ok_or(FrozenParetoError::Artifact)?;
@@ -736,27 +819,33 @@ impl<'a> FrozenParetoPlan<'a> {
                 }));
             }
 
-            let mut retain_index = |index: usize| -> Result<(), FrozenParetoError> {
-                let local = entry_classes[index]
+            let local_for_index = |index: usize| -> Result<usize, FrozenParetoError> {
+                self.entry_classes[index]
                     .checked_sub(range.start)
                     .filter(|&local| local < range.len)
-                    .ok_or(FrozenParetoError::Artifact)? as usize;
-                let front = sort_fronts[local]
-                    .as_ref()
-                    .ok_or(FrozenParetoError::Artifact)?
-                    .clone();
-                metrics.retained_entries += front.entries.len();
-                retained[index] = Some(front);
-                Ok(())
+                    .map(|local| local as usize)
+                    .ok_or(FrozenParetoError::Artifact)
             };
-            match single_sort {
-                Some(selected_sort) if selected_sort == sort => retain_index(0)?,
+            match self.single_sort {
+                Some(selected_sort) if selected_sort == sort => {
+                    let local = local_for_index(0)?;
+                    let front = sort_fronts[local]
+                        .take()
+                        .ok_or(FrozenParetoError::Artifact)?;
+                    metrics.retained_entries = front.entries.len();
+                    single_retained = Some(front);
+                }
                 Some(_) => {}
                 None => {
-                    for &index in
-                        &selected_indices[selected_counts[sort]..selected_counts[sort + 1]]
+                    for &index in &self.selected_indices
+                        [self.selected_counts[sort]..self.selected_counts[sort + 1]]
                     {
-                        retain_index(index)?;
+                        let front = sort_fronts[local_for_index(index)?]
+                            .as_ref()
+                            .ok_or(FrozenParetoError::Artifact)?
+                            .clone();
+                        metrics.retained_entries += front.entries.len();
+                        retained[index] = Some(front);
                     }
                 }
             }
@@ -770,7 +859,9 @@ impl<'a> FrozenParetoPlan<'a> {
             metrics.peak_live_classes = metrics.peak_live_classes.max(live_classes);
             metrics.peak_live_entries = metrics.peak_live_entries.max(live_entries);
 
-            for &target in &release_targets[release_offsets[sort]..release_offsets[sort + 1]] {
+            for &target in
+                &self.release_targets[self.release_offsets[sort]..self.release_offsets[sort + 1]]
+            {
                 if let Some(fronts) = live[target as usize].take() {
                     live_classes -= fronts.iter().filter(|front| front.is_some()).count();
                     live_entries -= fronts
@@ -782,28 +873,18 @@ impl<'a> FrozenParetoPlan<'a> {
             }
         }
 
-        retained
-            .into_iter()
-            .map(|front| front.ok_or(FrozenParetoError::Artifact))
-            .collect::<Result<Vec<_>, _>>()
-            .map(|fronts| (fronts, metrics))
-    }
-
-    fn sort_for_class(&self, class: u32) -> Option<usize> {
-        let mut low = 0_usize;
-        let mut high = self.frozen.sort_count();
-        while low < high {
-            let middle = low + (high - low) / 2;
-            let range = self.frozen.class_range(middle as u32)?;
-            if class < range.start {
-                high = middle;
-            } else if class >= range.start + range.len {
-                low = middle + 1;
-            } else {
-                return Some(middle);
-            }
+        if self.single_sort.is_some() {
+            Ok((
+                vec![single_retained.ok_or(FrozenParetoError::Artifact)?],
+                metrics,
+            ))
+        } else {
+            retained
+                .into_iter()
+                .map(|front| front.ok_or(FrozenParetoError::Artifact))
+                .collect::<Result<Vec<_>, _>>()
+                .map(|fronts| (fronts, metrics))
         }
-        None
     }
 }
 
@@ -1428,6 +1509,21 @@ mod tests {
         )
         .unwrap();
         let plan = FrozenParetoPlan::new(&frozen).unwrap();
+        let selected_classes: Vec<_> = (0..3)
+            .map(|state| frozen.entry_class(0, state).unwrap())
+            .collect();
+        let selected_query = plan.query(&selected_classes).unwrap();
+        let mixed_classes = [
+            selected_classes[0],
+            frozen.class_range(1).unwrap().start,
+            selected_classes[0],
+        ];
+        let mixed_query = plan.query(&mixed_classes).unwrap();
+        let empty_query = plan.query(&[]).unwrap();
+        assert!(matches!(
+            plan.query(&[frozen.storage().classes as u32]),
+            Err(FrozenParetoError::Artifact)
+        ));
         for output_mask in 0_u32..8 {
             let outputs = [0, 1, 2].map(|output| {
                 if output_mask & (1 << output) == 0 {
@@ -1446,6 +1542,13 @@ mod tests {
                 )
                 .unwrap()];
                 let mut workspace = WitnessedParetoWorkspace::with_capacity(2);
+                let (empty_selected, empty_metrics) = empty_query
+                    .evaluate(&monoid, &[], &edges, &mut workspace, |_, _, _| {
+                        unreachable!("an empty query must not compose witnesses")
+                    })
+                    .unwrap();
+                assert!(empty_selected.is_empty());
+                assert_eq!(empty_metrics, FrozenParetoEvaluationMetrics::default());
                 let quotient = plan
                     .evaluate(
                         &monoid,
@@ -1455,12 +1558,8 @@ mod tests {
                         |_, edge, child| edge | (child << 1),
                     )
                     .unwrap();
-                let selected_classes: Vec<_> = (0..3)
-                    .map(|state| frozen.entry_class(0, state).unwrap())
-                    .collect();
-                let (selected, selected_metrics) = plan
-                    .evaluate_entries(
-                        &selected_classes,
+                let (selected, selected_metrics) = selected_query
+                    .evaluate(
                         &monoid,
                         &outputs,
                         &edges,
@@ -1468,6 +1567,27 @@ mod tests {
                         |_, edge, child| edge | (child << 1),
                     )
                     .unwrap();
+                let (mixed, _) = mixed_query
+                    .evaluate(
+                        &monoid,
+                        &outputs,
+                        &edges,
+                        &mut workspace,
+                        |_, edge, child| edge | (child << 1),
+                    )
+                    .unwrap();
+                assert_eq!(
+                    mixed[0].resources().collect::<Vec<_>>(),
+                    mixed[2].resources().collect::<Vec<_>>()
+                );
+                assert_eq!(
+                    mixed[1].resources().collect::<Vec<_>>(),
+                    quotient[mixed_classes[1] as usize]
+                        .as_ref()
+                        .unwrap()
+                        .resources()
+                        .collect::<Vec<_>>()
+                );
                 assert!(selected_metrics.peak_live_classes <= frozen.storage().classes);
                 for state in 0..3 {
                     let target = if state < 2 { 0 } else { 1 };

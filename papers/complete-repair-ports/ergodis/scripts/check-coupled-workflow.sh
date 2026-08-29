@@ -4,14 +4,14 @@ set -euo pipefail
 evidence=${1:-evidence/c985-coupled-workflow.tsv}
 awk -F '\t' '
     NR == 1 {
-        if ($0 != "round\traw_states\tclasses\tidentity_classes\treachable_classes\tpeak_live_classes\tpeak_live_entries\tcompile_ns\tidentity_ns\tquotient_ns\tfactorized_ns\tidentity_quotient\tquotient_factorized") exit 2
+        if ($0 != "round\traw_states\tclasses\tidentity_classes\treachable_classes\tpeak_live_classes\tpeak_live_entries\tcompile_ns\tquery_plan_ns\tidentity_ns\tquotient_ns\tfactorized_ns\tidentity_quotient\tquotient_factorized\torder\trepetitions") exit 2
         next
     }
     {
-        if ($2 != 46656 || $3 != 349 || $4 != 46656 || $5 != 101 || $6 != 23 || $7 != 23 || $8 <= 0 || $9 <= $10 || $10 <= 0 || $11 <= 0) exit 3
-        x = log($9 / $10)
-        y = log($10 / $11)
-        crossover_log += log($8 / ($9 - $10))
+        if ($2 != 46656 || $3 != 349 || $4 != 46656 || $5 != 101 || $6 != 23 || $7 != 23 || $8 <= 0 || $9 <= 0 || $10 <= $11 || $11 <= 0 || $12 <= 0 || $16 != 1000) exit 3
+        x = log($10 / $11)
+        y = log($11 / $12)
+        crossover_log += log(($8 + $9) / ($10 - $11))
         sx += x; sxx += x * x
         sy += y; syy += y * y; n++
     }
