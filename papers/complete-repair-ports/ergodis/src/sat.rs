@@ -34,106 +34,50 @@ pub struct MultipartiteColoringCertificate {
     pub clique_vertices: Box<[u32]>,
 }
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct ColoringCliqueCertificate {
+    pub variables: u32,
+    pub clauses: u32,
+    pub vertices: u32,
+    pub colors: u32,
+    pub clique_vertices: Box<[u32]>,
+}
+
+struct DirectColoringGraph {
+    variables: u32,
+    clauses: u32,
+    vertices: usize,
+    colors: usize,
+    words: usize,
+    adjacency: Box<[u64]>,
+}
+
 /// Recognize a complete-multipartite graph-coloring CNF and, when the number
 /// of parts exceeds the number of colors, return an exact UNSAT certificate.
 pub fn certify_multipartite_coloring_unsat(
     path: impl AsRef<Path>,
 ) -> Result<Option<MultipartiteColoringCertificate>, StructuredSatError> {
-    let path = path.as_ref();
-    let mut maximum_positive_clause = 0_usize;
-    let (variables, clauses) = scan_dimacs(path, |clause| {
-        if clause.iter().all(|&literal| literal > 0) {
-            maximum_positive_clause = maximum_positive_clause.max(clause.len());
-        }
-        Ok(())
-    })?;
-    if maximum_positive_clause == 0
-        || maximum_positive_clause > 64
-        || variables == 0
-        || variables as usize % maximum_positive_clause != 0
-    {
-        return Err(StructuredSatError::Encoding);
-    }
-    let colors = maximum_positive_clause;
-    let vertices = variables as usize / colors;
+    let graph = parse_direct_coloring(path.as_ref())?;
+    let DirectColoringGraph {
+        variables,
+        clauses,
+        vertices,
+        colors,
+        words,
+        adjacency: pooled_adjacency,
+    } = graph;
     if vertices > 64 {
         return Err(StructuredSatError::Width);
     }
-
-    let expected_edge_capacity = clauses as usize / colors;
-    let mut edge_colors =
-        FxHashMap::<u64, u64>::with_capacity_and_hasher(expected_edge_capacity, Default::default());
-    let mut domains = vec![0_u64; vertices];
-    let mut domain_seen = 0_u64;
-    scan_dimacs(path, |clause| {
-        if clause.iter().all(|&literal| literal > 0) {
-            let first = (clause[0] as usize - 1) / colors;
-            if first >= vertices || domain_seen & (1_u64 << first) != 0 {
-                return Err(StructuredSatError::Encoding);
-            }
-            let mut domain = 0_u64;
-            for &literal in clause {
-                let variable = literal as usize - 1;
-                if variable / colors != first {
-                    return Err(StructuredSatError::Encoding);
-                }
-                domain |= 1_u64 << (variable % colors);
-            }
-            domains[first] = domain;
-            domain_seen |= 1_u64 << first;
-            return Ok(());
-        }
-        if clause.len() != 2 || clause[0] >= 0 || clause[1] >= 0 {
-            return Err(StructuredSatError::Encoding);
-        }
-        let left = (-clause[0] - 1) as usize;
-        let right = (-clause[1] - 1) as usize;
-        let (left_vertex, left_color) = (left / colors, left % colors);
-        let (right_vertex, right_color) = (right / colors, right % colors);
-        if left_vertex >= vertices
-            || right_vertex >= vertices
-            || left_vertex == right_vertex
-            || left_color != right_color
-        {
-            return Err(StructuredSatError::Encoding);
-        }
-        let (low, high) = if left_vertex < right_vertex {
-            (left_vertex, right_vertex)
-        } else {
-            (right_vertex, left_vertex)
-        };
-        let key = ((low as u64) << 32) | high as u64;
-        let colors_seen = edge_colors.entry(key).or_default();
-        let bit = 1_u64 << left_color;
-        if *colors_seen & bit != 0 {
-            return Err(StructuredSatError::Encoding);
-        }
-        *colors_seen |= bit;
-        Ok(())
-    })?;
     let vertex_mask = if vertices == 64 {
         u64::MAX
     } else {
         (1_u64 << vertices) - 1
     };
-    if domain_seen != vertex_mask || domains.contains(&0) {
-        return Err(StructuredSatError::Encoding);
-    }
-    let color_mask = if colors == 64 {
-        u64::MAX
-    } else {
-        (1_u64 << colors) - 1
-    };
-    let mut adjacency = vec![0_u64; vertices];
-    for (key, seen) in edge_colors {
-        if seen != color_mask {
-            return Err(StructuredSatError::Encoding);
-        }
-        let low = (key >> 32) as usize;
-        let high = key as u32 as usize;
-        adjacency[low] |= 1_u64 << high;
-        adjacency[high] |= 1_u64 << low;
-    }
+    debug_assert_eq!(words, 1);
+    let adjacency = (0..vertices)
+        .map(|vertex| pooled_adjacency[vertex])
+        .collect::<Vec<_>>();
 
     let mut remaining = vertex_mask;
     let mut parts = Vec::with_capacity(vertices);
@@ -167,6 +111,163 @@ pub fn certify_multipartite_coloring_unsat(
         parts: parts.into_boxed_slice(),
         clique_vertices: clique.into_boxed_slice(),
     }))
+}
+
+/// Recognize a direct graph-coloring encoding and return any explicit clique
+/// whose cardinality exceeds the available color count. The clique alone is a
+/// replayable pigeonhole UNSAT certificate; the graph need not be multipartite.
+pub fn certify_coloring_clique_unsat(
+    path: impl AsRef<Path>,
+) -> Result<Option<ColoringCliqueCertificate>, StructuredSatError> {
+    let graph = parse_direct_coloring(path.as_ref())?;
+    if graph.vertices <= graph.colors {
+        return Ok(None);
+    }
+
+    let mut degrees = vec![0_u32; graph.vertices];
+    for (vertex, degree) in degrees.iter_mut().enumerate() {
+        let row = &graph.adjacency[vertex * graph.words..(vertex + 1) * graph.words];
+        *degree = row.iter().map(|word| word.count_ones()).sum();
+    }
+    let mut order = (0..graph.vertices as u32).collect::<Vec<_>>();
+    order.sort_unstable_by_key(|&vertex| (std::cmp::Reverse(degrees[vertex as usize]), vertex));
+
+    let mut candidates = vec![0_u64; graph.words];
+    let mut clique = Vec::with_capacity(graph.colors + 1);
+    for &start in &order {
+        clique.clear();
+        clique.push(start);
+        let start = start as usize;
+        candidates
+            .copy_from_slice(&graph.adjacency[start * graph.words..(start + 1) * graph.words]);
+        for &vertex in &order {
+            let vertex = vertex as usize;
+            if candidates[vertex / 64] & (1_u64 << (vertex % 64)) == 0 {
+                continue;
+            }
+            clique.push(vertex as u32);
+            if clique.len() > graph.colors {
+                return Ok(Some(ColoringCliqueCertificate {
+                    variables: graph.variables,
+                    clauses: graph.clauses,
+                    vertices: graph.vertices as u32,
+                    colors: graph.colors as u32,
+                    clique_vertices: clique.into_boxed_slice(),
+                }));
+            }
+            let row = &graph.adjacency[vertex * graph.words..(vertex + 1) * graph.words];
+            for (candidate, adjacent) in candidates.iter_mut().zip(row) {
+                *candidate &= adjacent;
+            }
+        }
+    }
+    Ok(None)
+}
+
+fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredSatError> {
+    let mut maximum_positive_clause = 0_usize;
+    let (variables, clauses) = scan_dimacs(path, |clause| {
+        if clause.iter().all(|&literal| literal > 0) {
+            maximum_positive_clause = maximum_positive_clause.max(clause.len());
+        } else if clause.len() != 2 || clause.iter().any(|&literal| literal >= 0) {
+            return Err(StructuredSatError::Encoding);
+        }
+        Ok(())
+    })?;
+    if maximum_positive_clause == 0
+        || maximum_positive_clause > 64
+        || variables == 0
+        || variables as usize % maximum_positive_clause != 0
+    {
+        return Err(StructuredSatError::Encoding);
+    }
+    let colors = maximum_positive_clause;
+    let vertices = variables as usize / colors;
+    let words = vertices.div_ceil(64);
+    let maximum_edges = vertices.saturating_mul(vertices.saturating_sub(1)) / 2;
+    let expected_edge_capacity = (clauses as usize).min(maximum_edges);
+    let mut edge_colors =
+        FxHashMap::<u64, u64>::with_capacity_and_hasher(expected_edge_capacity, Default::default());
+    let mut domains = vec![0_u64; vertices];
+    let mut domain_seen = vec![0_u64; words];
+    scan_dimacs(path, |clause| {
+        if clause.iter().all(|&literal| literal > 0) {
+            let first = (clause[0] as usize - 1) / colors;
+            if first >= vertices || domain_seen[first / 64] & (1_u64 << (first % 64)) != 0 {
+                return Err(StructuredSatError::Encoding);
+            }
+            let mut domain = 0_u64;
+            for &literal in clause {
+                let variable = literal as usize - 1;
+                if variable / colors != first {
+                    return Err(StructuredSatError::Encoding);
+                }
+                let bit = 1_u64 << (variable % colors);
+                if domain & bit != 0 {
+                    return Err(StructuredSatError::Encoding);
+                }
+                domain |= bit;
+            }
+            domains[first] = domain;
+            domain_seen[first / 64] |= 1_u64 << (first % 64);
+            return Ok(());
+        }
+        let left = (-clause[0] - 1) as usize;
+        let right = (-clause[1] - 1) as usize;
+        let (left_vertex, left_color) = (left / colors, left % colors);
+        let (right_vertex, right_color) = (right / colors, right % colors);
+        if left_vertex >= vertices
+            || right_vertex >= vertices
+            || left_vertex == right_vertex
+            || left_color != right_color
+        {
+            return Err(StructuredSatError::Encoding);
+        }
+        let (low, high) = if left_vertex < right_vertex {
+            (left_vertex, right_vertex)
+        } else {
+            (right_vertex, left_vertex)
+        };
+        let key = ((low as u64) << 32) | high as u64;
+        let colors_seen = edge_colors.entry(key).or_default();
+        let bit = 1_u64 << left_color;
+        if *colors_seen & bit != 0 {
+            return Err(StructuredSatError::Encoding);
+        }
+        *colors_seen |= bit;
+        Ok(())
+    })?;
+    let complete_words = vertices / 64;
+    if domain_seen[..complete_words]
+        .iter()
+        .any(|&word| word != u64::MAX)
+        || vertices % 64 != 0 && domain_seen[complete_words] != (1_u64 << (vertices % 64)) - 1
+        || domains.contains(&0)
+    {
+        return Err(StructuredSatError::Encoding);
+    }
+
+    let mut adjacency = vec![0_u64; vertices * words];
+    for low in 0..vertices {
+        for high in low + 1..vertices {
+            let key = ((low as u64) << 32) | high as u64;
+            let seen = edge_colors.get(&key).copied().unwrap_or(0);
+            let shared_domain = domains[low] & domains[high];
+            if seen & shared_domain != shared_domain {
+                continue;
+            }
+            adjacency[low * words + high / 64] |= 1_u64 << (high % 64);
+            adjacency[high * words + low / 64] |= 1_u64 << (low % 64);
+        }
+    }
+    Ok(DirectColoringGraph {
+        variables,
+        clauses,
+        vertices,
+        colors,
+        words,
+        adjacency: adjacency.into_boxed_slice(),
+    })
 }
 
 fn scan_dimacs(
@@ -266,5 +367,67 @@ mod tests {
         assert_eq!(certificate.colors, 2);
         assert_eq!(certificate.vertices, 3);
         assert_eq!(&*certificate.clique_vertices, &[0, 1, 2]);
+    }
+
+    #[test]
+    fn rejects_non_coloring_clause_shapes() {
+        let cache = std::env::var_os("XDG_CACHE_HOME")
+            .map(std::path::PathBuf::from)
+            .unwrap_or_else(|| std::path::PathBuf::from("/home/tavis/.cache"));
+        let path = cache.join(format!(
+            "ergodis-non-coloring-{}-{}.cnf",
+            std::process::id(),
+            std::thread::current().name().unwrap_or("test")
+        ));
+        let mut file = File::create(&path).unwrap();
+        writeln!(file, "p cnf 3 1").unwrap();
+        writeln!(file, "-1 2 -3 0").unwrap();
+        drop(file);
+        let error = certify_multipartite_coloring_unsat(&path).unwrap_err();
+        std::fs::remove_file(path).unwrap();
+        assert!(matches!(error, StructuredSatError::Encoding));
+    }
+
+    #[test]
+    fn certifies_clique_without_multipartite_graph() {
+        let cache = std::env::var_os("XDG_CACHE_HOME")
+            .map(std::path::PathBuf::from)
+            .unwrap_or_else(|| std::path::PathBuf::from("/home/tavis/.cache"));
+        let path = cache.join(format!(
+            "ergodis-clique-{}-{}.cnf",
+            std::process::id(),
+            std::thread::current().name().unwrap_or("test")
+        ));
+        let mut file = File::create(&path).unwrap();
+        writeln!(file, "p cnf 15 26").unwrap();
+        for vertex in 0..5 {
+            writeln!(
+                file,
+                "{} {} {} 0",
+                vertex * 3 + 1,
+                vertex * 3 + 2,
+                vertex * 3 + 3
+            )
+            .unwrap();
+        }
+        for (left, right) in [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3), (0, 4)] {
+            for color in 0..3 {
+                writeln!(
+                    file,
+                    "-{} -{} 0",
+                    left * 3 + color + 1,
+                    right * 3 + color + 1
+                )
+                .unwrap();
+            }
+        }
+        drop(file);
+        assert!(certify_multipartite_coloring_unsat(&path)
+            .unwrap()
+            .is_none());
+        let certificate = certify_coloring_clique_unsat(&path).unwrap().unwrap();
+        std::fs::remove_file(path).unwrap();
+        assert_eq!(certificate.colors, 3);
+        assert_eq!(certificate.clique_vertices.len(), 4);
     }
 }

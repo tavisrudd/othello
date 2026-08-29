@@ -1,4 +1,4 @@
-use ergodis::sat::{certify_multipartite_coloring_unsat, StructuredSatError};
+use ergodis::sat::{certify_coloring_clique_unsat, StructuredSatError};
 use std::process::{Command, ExitCode};
 use std::time::Instant;
 
@@ -15,11 +15,11 @@ fn main() -> anyhow::Result<ExitCode> {
     }
 
     let theorem_start = Instant::now();
-    match certify_multipartite_coloring_unsat(&cnf) {
+    match certify_coloring_clique_unsat(&cnf) {
         Ok(Some(certificate)) => {
             println!(
-                "c ergodis theorem=complete-multipartite parts={} colors={} elapsed_ns={}",
-                certificate.parts.len(),
+                "c ergodis theorem=coloring-clique clique={} colors={} elapsed_ns={}",
+                certificate.clique_vertices.len(),
                 certificate.colors,
                 theorem_start.elapsed().as_nanos()
             );
@@ -31,7 +31,7 @@ fn main() -> anyhow::Result<ExitCode> {
                 "c ergodis theorem_miss_ns={}",
                 theorem_start.elapsed().as_nanos()
             );
-            let status = Command::new(kissat).arg(cnf).status()?;
+            let status = Command::new(kissat).arg("--quiet").arg(cnf).status()?;
             let code = status
                 .code()
                 .and_then(|code| u8::try_from(code).ok())
