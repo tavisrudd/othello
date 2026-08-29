@@ -1367,6 +1367,22 @@ and 1.689x fewer instructions.  This single counter
 pass is diagnostic; the alternating nine-round timing above remains the
 retained statistical claim.
 
+### Highest-EV continuation order
+
+1. Add the branded, once-validated objective wrapper described below, then
+   move operand/canonicality checks out of repeated evaluation without weakening
+   the safe API.
+2. Instantiate the same frozen/query-plan engine on a public workflow,
+   MDD/CostRegular, or resource-constrained path suite with its strongest native
+   separator-aware baseline.
+3. Develop objective-family residual equivalence and a certified minimizer;
+   treat classical weighted-automata and semiring factorization as corollaries,
+   not novelty claims.
+4. Attempt reusable flat front-entry pools only if profiling after steps 1--2
+   still shows allocator/locality pressure.  Preserve a separate persistent
+   provenance arena and gate the change on whole-portfolio, not single-control,
+   performance.
+
 ## Mystery ledger
 
 - **Settled -- source of the speedup.**  The original raw/quotient timing mixed
