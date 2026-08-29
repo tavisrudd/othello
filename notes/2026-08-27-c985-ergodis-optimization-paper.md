@@ -1396,7 +1396,13 @@ retained statistical claim.
   larger-universe regression returns `Element` rather than reaching `combine`.
   A front still carries unbranded `u32` resource IDs, however; safely caching
   canonicality across distinct same-cardinality orders requires a validated
-  objective wrapper bound to the monoid and frozen generator table.
+  objective wrapper bound to the monoid and frozen generator table.  The next
+  API should construct `ValidatedParetoObjective` once from the monoid plus
+  immutable output/edge fronts, checking generator count, range, strict resource
+  ordering, uniqueness, and pairwise antichain canonicality under that order;
+  repeated evaluation should accept only that wrapper.  Its hostile gate uses
+  two same-cardinality monoids with different orders as well as the retained
+  larger-universe case.
 - **Open -- cyclic semantics.**  The theorem and evaluator are acyclic.  No
   least-fixed-point, convergence, or negative-cycle claim is made; a cyclic
   extension needs a separately specified algebra and certificate.
