@@ -172,3 +172,38 @@ target/release/css_distance_native \
   --input evidence/c985-bb288-native-input.json --maximum-weight 18 \
   --threads 8 --compiled-in "$artifact_dir/bb288.bin"
 ```
+
+## Matched Gurobi comparison
+
+The audited global parity model was regenerated from the same BB288 source,
+checked against the sparse native input, and given the same two translation
+anchors.  Gurobi 13.0.2 used eight threads, zero MIP gap, seed 1, exact
+binary-slack parities, and a 60-second limit per orbit.  Binary slack was used
+because the local non-production license rejects the larger cascaded extended
+formulation before solving; this is a license constraint, not a cascaded timing
+result.
+
+Both valid binary-slack solves reached the bounded timeout:
+
+| anchor | incumbent | proved lower bound | nodes | solver seconds |
+|---:|---:|---:|---:|---:|
+| 0 | 20 | 13 | 325,878 | 60.004 |
+| 144 | 18 | 13 | 281,106 | 60.004 |
+
+Thus Gurobi had not proved distance 18 after 120.007 aggregate solver seconds.
+Against the retained Ergodis cached-cold exact time of 0.425457 seconds, this is
+a conservative **greater than 282.1x time-to-proof lower bound**; against the
+0.400654-second warm median it is greater than 299.5x.  Gurobi model-building
+time is excluded, making the comparison conservative in Gurobi's favor.
+
+Replay/check:
+
+```bash
+uv run --with gurobipy --with bposd --with numpy python/run_bb_gurobi.py \
+  --input evidence/c985-bb288-native-input.json --code bb288 --mode symbreak \
+  --physical-parity-encoding binary-slack --threads 8 --seed 1 \
+  --time-limit 60 --out bb288-gurobi.jsonl --log-dir bb288-gurobi-logs
+python/check_bb_gurobi.py --input evidence/c985-bb288-native-input.json \
+  --gurobi evidence/c985-bb288-gurobi-binary-t8.jsonl \
+  --native evidence/c985-bb288-native-cached-t8.jsonl
+```

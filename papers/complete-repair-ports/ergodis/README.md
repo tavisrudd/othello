@@ -208,6 +208,10 @@ Young-Brothers-Wait.  Disjoint deeper seeds feed coarse work-stealing tasks;
 the retained eight-thread median is about 0.39 seconds.  Wide compiled
 artifacts persist the 21 MB completion-filter payload with the same
 source-binding and checksum discipline; measured reload is about 12--25 ms.
+On the same BB288 input and two verified translation anchors, an 8-thread
+Gurobi binary-slack control remained unresolved after two 60-second orbit
+limits (both lower bounds 13).  The retained Ergodis cached-cold exact run is
+therefore more than 282x faster in time to proof on this protocol.
 
 ### Contextual-state library APIs
 
