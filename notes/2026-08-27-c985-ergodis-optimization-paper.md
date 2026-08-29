@@ -74,10 +74,10 @@ artifact and 4,469,760 bytes for the former raw evaluator.
 
 Nine CPU-2 paired rounds, with generic/direct process order alternated, compare
 the optimized raw-presentation plus split-transcript compiler against direct
-layered compilation plus freezing.  The geometric time ratio is 12.476x and
-the median paired ratio is 12.618x (paired log-ratio `t=193.53`).  Peak RSS is
-4.651x lower geometrically and 4.637x lower by the median paired ratio
-(`t=280.58`).  The older 2.061-second raw construction is not used as the A
+layered compilation plus freezing.  The geometric time ratio is 14.711x and
+the median paired ratio is 14.546x (paired log-ratio `t=233.11`).  Peak RSS is
+5.275x lower geometrically and 5.242x lower by the median paired ratio
+(`t=322.42`).  The older 2.061-second raw construction is not used as the A
 side: theorem-specializing the scalar hierarchy transition already reduced
 that construction to roughly 40--45 ms, so the recorded comparison is against
 the corrected optimized baseline.
@@ -92,7 +92,15 @@ papers/complete-repair-ports/ergodis/scripts/check-layered-hierarchy-evidence.sh
 
 - A/B script: `736afdd1353a35fd25189d53930e7fb1e13c667a82c6ccfcf9c6526dccfc9375`;
 - checker: `8a0a64651a9cae295c8e44e9966478383be26493ba2e2afa008eab11ad18ee51`;
-- evidence TSV: `bf8f3ee695bb186778046c5bd788ec6e9d2ae6f770a52644198493df1830a9d5`.
+- evidence TSV: `29139f82995d895d5551335be7c23920b6e8daa373dbc7b206aa15cb02ab6a6f`.
+
+The final B side uses the consuming chain specialization.  When every
+generator targets the adjacent stratum, a concrete class map is released as
+soon as its sole predecessor has been compiled; selected entry maps move into
+the artifact only after their last semantic use.  The full and consuming
+compilers produce exactly equal frozen artifacts on the independent control.
+At `b=256` the consuming path compiles and freezes in about 3.6 ms and peaks at
+5.6 MiB, versus the earlier direct path's roughly 4.2 ms and 6.4 MiB.
 
 Commit `ec34f2c10` adds an independent reverse-induction verifier against the
 domain observation and transition oracles.  The subsequent `ERGLAY01` audit
@@ -109,7 +117,7 @@ The full `b=256` sidecar is 3,005,633 bytes and the frozen evaluator remains
 300,312 bytes.  A CPU-2 write-and-replay control peaks at 6.4 MiB, indistinguishable
 at process resolution from compilation alone; representative phase times were
 4.2 ms compile, 8.7 ms independently verify and write, and 9.4 ms replay.
-The 12.476x compiler A/B excludes this optional durable audit on the direct
+The 14.711x compiler A/B excludes this optional durable audit on the direct
 side; the evidence timings are reported separately rather than conflated.
 
 `ERGFRZ01` is the deployment artifact paired with that audit.  Its required
@@ -130,6 +138,102 @@ papers/complete-repair-ports/ergodis/scripts/check-layered-audit-evidence.sh
 - artifact checker: `d034d233c39b382eeb7d3ca1c23e9280dc010a69369e4c709af61e87578ab4c9`;
 - frozen artifact: `af6d000ec8d205e5250f7d1bfec3543f9c4f1aecfcd80ab0c795061faad9ac50`;
 - streamed audit: `742b7e0860d927ff0b4b4521e065b14eecb8bf7885cb7db5367fb3e26e63af50`.
+
+### Frontier-bounded certified compilation
+
+Commit `ecf1296ac` closes the mismatch between the low-memory compiler and the
+proof-carrying path.  `ERGLAY02` is emitted during the same reverse-stratum
+pass that constructs the frozen quotient.  It records the observation and raw
+target IDs returned by each oracle call before the corresponding concrete map
+is released.  A preallocated 64 KiB varint block encoder performs no allocation
+in the state loop and writes only large sequential blocks.  Quotient
+transitions are taken from the already-interned representative signatures, so
+each transition oracle is evaluated exactly once per concrete source edge.
+
+Replay reads strata in reverse order and retains only the current signature
+workspace and the next stratum's concrete class map.  It deliberately does not
+reuse the compiler's hash interner: an independent sort reconstructs signature
+groups, canonical representative order, outputs, transitions, entry maps, and
+witness provenance.  `ERGFRZ02` also repairs the deployment trust boundary by
+binding entry ranges, entry classes, and all metrics in addition to the
+quotient tables.  The old `ERGLAY01`/`ERGFRZ01` files remain historical
+evidence; the current checker targets version 2.
+
+The scaling result is strongest at depth 64 and `b=256`: 4,276,224 concrete
+states compile to 32,769 classes.  Nine interleaved CPU-2 rounds compare equal
+products--compile plus streamed evidence plus independent replay--rather than
+the earlier unequal full-map/frozen outputs.  The frontier-one path is 1.729x
+faster end to end (`t=32.21` on paired log ratios), 4.990x faster in its
+compile-and-stream phase, and 3.607x lower in peak RSS (`t=354.43`).  Its
+independent sorting replay is 0.644x the old replay speed, an intentional cost
+for algorithmic independence; the total still wins.  The audit is 38,984,421
+bytes rather than 46,401,954 bytes, a 1.190x reduction.  A representative run
+used 6.2 MiB versus 22.8 MiB peak RSS.
+
+```sh
+ERGODIS_ROUNDS=9 ERGODIS_CPU=2 \
+  papers/complete-repair-ports/ergodis/scripts/layered-certified-ab.sh \
+  /home/tavis/.cache/ergodis/nix-target/release/examples/observational_hierarchy_driver \
+  > papers/complete-repair-ports/ergodis/evidence/c985-layered-certified-final.tsv
+papers/complete-repair-ports/ergodis/scripts/check-layered-certified-evidence.sh
+papers/complete-repair-ports/ergodis/scripts/check-layered-audit-evidence.sh
+```
+
+- certified A/B script: `010d3742a953efff5b131be999b7e7ff48604d6602980842d50dfcfb82b753b6`;
+- certified checker: `e1b2460728da591fc9cb206a71e19e75366749ecce1fcef5a9062c2f3018f616`;
+- certified evidence: `fd3983d27cfff2665eb7072eb31216e2095e47e5037e4d2511b7f06c0c651f55`;
+- artifact checker: `583e97ba47ad1a62006f0ac99cc07b1f5b908ad91173f19859b8349d1e07cc2b`;
+- `ERGFRZ02`: `99a93ca87566291ca33e0e7b4bd66e18d32cf95bb7a1a23bb1eda27caf377bd0`;
+- `ERGLAY02`: `5295518ae0565b86aff9a54a7cd938032b804accb977fb1105abd61f1d656b7d`.
+
+### Classical results as corollaries, and the actual extension
+
+The acyclic reverse-signature backend is not presented as a new automata
+minimizer.  Revuz's linear-time acyclic-DFA minimization and Daciuk et al.'s
+incremental minimal-DAFSA construction already establish the classical core;
+MATA is the relevant high-performance generic automata implementation.  The
+honest general statement is a typed contextual minimal-realization theorem:
+for finite carriers `X_s`, observations `o_s`, and deterministic typed
+generators `g : s -> t`, equality under every well-typed continuation is the
+greatest typed congruence refining observations, and its quotient is the
+unique smallest typed realization up to typed isomorphism.  DFA
+Myhill--Nerode, Moore-machine minimization, colored deterministic transition
+systems, and acyclic-DAG hash-consing are recovered as special presentations.
+
+Ergodis's additional payload is elsewhere: an optimization theorem derives
+the finite observable interface rather than accepting an alphabet/state model
+as input; compilation retains concrete optimizing witnesses; and the same
+quotient is emitted as a bounded frozen evaluator with independently replayable
+evidence.  This statement does **not** subsume unrestricted nondeterministic or
+tropical weighted-automata minimization, whose equivalence theory is materially
+different.
+
+For a general acyclic sort-dependency DAG and reverse topological schedule
+`pi`, each concrete class map is live only from compilation of its sort until
+the last predecessor in `pi` has consumed it.  Consequently the transient
+class-map space is bounded by the maximum weighted live frontier
+
+\[
+  \max_i \sum_{s\in L_i} |X_s|,
+\]
+
+plus the current stratum's `|X_s|(1+outdeg(s))` signature workspace and the
+final quotient.  The implemented chain compiler is the frontier-one
+corollary.  This identifies the next general backend: reference-counted
+last-use consumption for arbitrary DAGs, with schedule selection connected to
+pebbling, register allocation, pathwidth/cutwidth, variable elimination, and
+tensor-contraction ordering.
+
+Primary references:
+
+- Dominique Revuz, *Minimisation of acyclic deterministic automata in linear
+  time*, Theoretical Computer Science 92 (1992),
+  <https://doi.org/10.1016/0304-3975(92)90142-3>;
+- Jan Daciuk et al., *Incremental Construction of Minimal Acyclic Finite-State
+  Automata*, Computational Linguistics 26 (2000),
+  <https://aclanthology.org/J00-1002/>;
+- MATA official implementation and paper,
+  <https://github.com/VeriFIT/mata> and <https://arxiv.org/abs/2310.10136>.
 
 ### Deliberate `ej` / `tt` / red-team checkpoints
 
@@ -152,6 +256,15 @@ papers/complete-repair-ports/ergodis/scripts/check-layered-audit-evidence.sh
    issue is how much of this hierarchy-specific normal-form discovery can be
    automated for other adapters without asking users to hand-supply the state
    coordinate system.
+5. A width-1--4 scalar signature comparison removed `memcmp` from the profile
+   but raised instructions by about 2.0% and cycles by about 1.7%; it was
+   rejected.  The retained vectorized slice comparison is faster.  The profile
+   correctly redirected work toward eliminating duplicate oracle probes and
+   per-word evidence writes instead.
+6. Red-team review found that the version-1 frozen fingerprint omitted entry
+   maps and metrics, and that the audited path forfeited consuming compilation.
+   Both were correctness/architecture issues, not documentation nits; version
+   2 fixes them and adds adversarial regression coverage.
 
 ## Objective
 
