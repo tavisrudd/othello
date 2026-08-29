@@ -390,6 +390,17 @@ Sequel research:
   The next gate is an algebraically prefiltered weight-six discovery search for
   a Pareto survivor with `k d^2 / n > 19.2`; a broad generic-SAT claim remains
   out of scope.
+  The follow-on [BB756 large-code spike](../2026-08-29-c985-bb756-large-code-spike.md)
+  adds an opt-in 12-support-word/6-syndrome-word backend and directly generates
+  the published `[[756,16,<=34]]` construction.  It certifies `d >= 24` through
+  radius 22 in 32.793410331 seconds on 16 threads at 23.6 MiB RSS.  Its
+  large-only streaming completion compiler finishes cold in 1.538285858
+  seconds, versus an interrupted >90-second old path.  A 40-run interleaved
+  BB288 A/B gives current/old ratio 0.997266 and `t=-0.1229`, so the large
+  extension does not measurably hurt smaller solves.  Exact distance remains
+  open pending stronger completion pruning and a replayable weight-34
+  incumbent; the installed restricted Gurobi license cannot instantiate the
+  756-qubit model.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

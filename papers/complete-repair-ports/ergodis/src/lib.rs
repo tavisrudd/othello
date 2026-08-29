@@ -61,6 +61,8 @@ pub use contextual::{
     RankBoundedContextCache, RankEnvelopeAnswer, RankEnvelopeStorage, RankOneProbeCache,
     RankStratifiedEnvelope,
 };
+#[cfg(feature = "large-css")]
+pub use css_distance::CompiledLargeCssDistance;
 pub use css_distance::{
     BoundedCssDistanceResult, CompiledCssDistance, CompiledExtraWideCssDistance,
     CompiledWideCssDistance, ConnectedSearchStats, CssDistanceArtifactError, CssDistanceError,

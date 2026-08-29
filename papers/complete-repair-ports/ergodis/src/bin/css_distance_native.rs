@@ -1,5 +1,7 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
+#[cfg(feature = "large-css")]
+use ergodis::CompiledLargeCssDistance;
 use ergodis::{CompiledCssDistance, CompiledExtraWideCssDistance, CompiledWideCssDistance, Matrix};
 use serde::{Deserialize, Serialize};
 use std::fmt::Write as _;
@@ -80,6 +82,8 @@ enum Backend {
     Compact(CompiledCssDistance),
     Wide(CompiledWideCssDistance),
     ExtraWide(CompiledExtraWideCssDistance),
+    #[cfg(feature = "large-css")]
+    Large(CompiledLargeCssDistance),
 }
 
 fn search_kernel(wide: bool) -> &'static str {
@@ -158,12 +162,29 @@ fn main() -> Result<()> {
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
     let wide_problem = columns > 256 || physical.rows() > 128;
-    let extra_wide_problem = columns > 320;
+    let large_problem = columns > 384 || physical.rows() > 192;
+    let extra_wide_problem = !large_problem && columns > 320;
     let preparation_start = Instant::now();
     let (compiled, preparation_mode) = if let Some(path) = &args.compiled_in {
         let file = File::open(path)
             .with_context(|| format!("opening compiled artifact {}", path.display()))?;
-        if extra_wide_problem {
+        if large_problem {
+            #[cfg(feature = "large-css")]
+            {
+                (
+                    Backend::Large(CompiledLargeCssDistance::read_artifact(
+                        &physical,
+                        &logical,
+                        BufReader::new(file),
+                    )?),
+                    "large-artifact-load",
+                )
+            }
+            #[cfg(not(feature = "large-css"))]
+            {
+                bail!("instances above 384 coordinates or rank 192 require --features large-css")
+            }
+        } else if extra_wide_problem {
             (
                 Backend::ExtraWide(CompiledExtraWideCssDistance::read_artifact(
                     &physical,
@@ -190,6 +211,18 @@ fn main() -> Result<()> {
                 )?),
                 "artifact-load",
             )
+        }
+    } else if large_problem {
+        #[cfg(feature = "large-css")]
+        {
+            (
+                Backend::Large(CompiledLargeCssDistance::compile(&physical, &logical)?),
+                "large-compile",
+            )
+        }
+        #[cfg(not(feature = "large-css"))]
+        {
+            bail!("instances above 384 coordinates or rank 192 require --features large-css")
         }
     } else if extra_wide_problem {
         (
@@ -219,6 +252,8 @@ fn main() -> Result<()> {
             Backend::Compact(compiled) => compiled.write_artifact(BufWriter::new(file))?,
             Backend::Wide(compiled) => compiled.write_artifact(BufWriter::new(file))?,
             Backend::ExtraWide(compiled) => compiled.write_artifact(BufWriter::new(file))?,
+            #[cfg(feature = "large-css")]
+            Backend::Large(compiled) => compiled.write_artifact(BufWriter::new(file))?,
         }
         Some(start.elapsed().as_secs_f64())
     } else {
@@ -228,6 +263,8 @@ fn main() -> Result<()> {
         Backend::Compact(compiled) => compiled.artifact_payload_blake3(),
         Backend::Wide(compiled) => compiled.artifact_payload_blake3(),
         Backend::ExtraWide(compiled) => compiled.artifact_payload_blake3(),
+        #[cfg(feature = "large-css")]
+        Backend::Large(compiled) => compiled.artifact_payload_blake3(),
     }
     .map(|digest| {
         let mut encoded = String::with_capacity(64);
@@ -337,6 +374,14 @@ fn main() -> Result<()> {
                     args.pulse_interval,
                 )
             })?,
+            #[cfg(feature = "large-css")]
+            Backend::Large(compiled) => thread_pool.install(|| {
+                compiled.search_bounded_syndrome_parallel_pulsed(
+                    &problem.anchors,
+                    maximum_weight,
+                    args.pulse_interval,
+                )
+            })?,
         };
         #[cfg(not(feature = "parallel"))]
         let round_result = match &compiled {
@@ -351,6 +396,10 @@ fn main() -> Result<()> {
                 compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
             }
             Backend::ExtraWide(compiled) => {
+                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+            }
+            #[cfg(feature = "large-css")]
+            Backend::Large(compiled) => {
                 compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
             }
         };

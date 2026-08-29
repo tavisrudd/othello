@@ -15,6 +15,7 @@ exclude = ["A?ENTS.md", "evidence/", "proptest-regressions/"]
 [features]
 default = []
 parallel = ["dep:libc", "dep:multiversion", "dep:rayon"]
+large-css = []
 
 [dependencies]
 anyhow = "1"

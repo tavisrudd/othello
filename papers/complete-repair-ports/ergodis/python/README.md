@@ -52,6 +52,11 @@ transfer witnesses, orbit search, and capacitated scheduling.
   and a replayed incumbent to the native sparse CSS-distance interface.
   `check_c997_native.py` independently replays the native witness and reports
   cold and warm speedups against the retained single-threaded Gurobi control.
+- `generate_bb_native.py` constructs published bivariate-bicycle codes directly
+  from their two torus polynomials, checks commutation and ranks, derives a
+  quotient-observation basis, and emits a sparse native input without a matrix
+  download. `export_bb_native.py` also exposes the BB360 and BB756 controls to
+  the independent `bposd` construction.
 
 For normal use, installation, commands, JSON examples, and output semantics,
 start with `../README.md`.
