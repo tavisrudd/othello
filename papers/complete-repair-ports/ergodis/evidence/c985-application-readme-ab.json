@@ -1,0 +1,1070 @@
+{
+  "artifacts": {
+    "bench_kernels_source_sha256": "282abf26932c12c7a33df42d12476fbc6c0f1a83c00b5e295538368e999f837e",
+    "benchmark_python_sha256": "7b8f9e289c2d01bf0c9d2311cf2f9e0a7b2ed50cdd9b54f888b4a2d71b7d2813",
+    "checker_sha256": "fe30fa20d41e8c900c20f6c47a7259fe0bef0e3bf98ac82d33719fbc260c38f3",
+    "ergodis_sha256": "254dd3a3c2d490a41168488f101079fa6a1cd09f615a9175e1f3acc54809dae6",
+    "raw_jsonl_sha256": "14622b6522a24c84321e14c8f551ac2e02d0d09dbc420197e942f8b4a8032d87",
+    "runner_sha256": "1a82bbced885ca54fb1475add225f15e6a5aacd9ed0efb3d9074914d41b0cc39"
+  },
+  "cases": [
+    {
+      "competitor": "application:ceph:zdd:8",
+      "competitor_name": "Graphillion 2.1",
+      "description": "Ceph-style recursive XOR support, depth 8, binary fanout",
+      "ergodis": "application:ceph-zdd:rust:8:2",
+      "historical_ratio": 8.0,
+      "name": "ceph_recursive_xor",
+      "profiles": {
+        "cold": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 2159311.0,
+            "median_ns": 2105030.0,
+            "min_ns": 2101373.0,
+            "q1_ns": 2103227.0,
+            "q3_ns": 2125403.5
+          },
+          "competitor_peak_rss": {
+            "max_kb": 21132,
+            "median_kb": 21072,
+            "min_kb": 20932,
+            "q1_kb": 20976.0,
+            "q3_kb": 21106.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 107945116.0,
+            "median_ns": 101627951.0,
+            "min_ns": 100520318.0,
+            "q1_ns": 101135869.5,
+            "q3_ns": 102649483.5
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 224919.0,
+            "median_ns": 189854.0,
+            "min_ns": 181077.0,
+            "q1_ns": 184252.5,
+            "q3_ns": 201725.5
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2372,
+            "median_kb": 2180,
+            "min_kb": 2152,
+            "q1_kb": 2168.0,
+            "q3_kb": 2240.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 4963985.0,
+            "median_ns": 3014484.0,
+            "min_ns": 2736847.0,
+            "q1_ns": 2792305.0,
+            "q3_ns": 3800933.5
+          },
+          "geometric_mean_speedup": 30.712477133613685,
+          "log_ratio_t_score": 39.597177708065786,
+          "median_speedup": 33.71321625857029,
+          "repetitions_per_process": 1
+        },
+        "warm_batch": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 282799.125,
+            "median_ns": 273503.0,
+            "min_ns": 265414.25,
+            "q1_ns": 272118.625,
+            "q3_ns": 274713.5
+          },
+          "competitor_peak_rss": {
+            "max_kb": 21284,
+            "median_kb": 21092,
+            "min_kb": 20964,
+            "q1_kb": 20976.0,
+            "q3_kb": 21112.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 12751127.625,
+            "median_ns": 12597924.75,
+            "min_ns": 12370468.625,
+            "q1_ns": 12482363.3125,
+            "q3_ns": 12649656.0625
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 112944.125,
+            "median_ns": 110725.0,
+            "min_ns": 107916.0,
+            "q1_ns": 109638.5625,
+            "q3_ns": 111672.375
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2340,
+            "median_kb": 2220,
+            "min_kb": 2124,
+            "q1_kb": 2180.0,
+            "q3_kb": 2296.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 570373.375,
+            "median_ns": 547214.125,
+            "min_ns": 432598.0,
+            "q1_ns": 442033.1875,
+            "q3_ns": 557845.6875
+          },
+          "geometric_mean_speedup": 24.960736564660955,
+          "log_ratio_t_score": 67.72256489579311,
+          "median_speedup": 22.94379806384964,
+          "repetitions_per_process": 8
+        }
+      }
+    },
+    {
+      "competitor": "transfer-tower:cpsat-direct:6:4",
+      "competitor_name": "OR-Tools CP-SAT 9.14 direct model",
+      "description": "GF(4) represented tower, depth 6, fanout 4",
+      "ergodis": "transfer-tower:rust:6:4",
+      "historical_ratio": 344300.0,
+      "name": "represented_gf4_tower",
+      "profiles": {
+        "cold": {
+          "classification": "timeout_lower_bound",
+          "competitor_completed_rounds": 0,
+          "competitor_timeout_rounds": 7,
+          "ergodis_internal_per_solve": {
+            "max_ns": 1648220.0,
+            "median_ns": 1465109.0,
+            "min_ns": 1419413.0,
+            "q1_ns": 1441795.0,
+            "q3_ns": 1471646.0
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2888,
+            "median_kb": 2700,
+            "min_kb": 2508,
+            "q1_kb": 2576.0,
+            "q3_kb": 2846.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 4960989.0,
+            "median_ns": 4588586.0,
+            "min_ns": 3868284.0,
+            "q1_ns": 4226791.0,
+            "q3_ns": 4738374.0
+          },
+          "repetitions_per_process": 1,
+          "speedup_lower_bound": 2179.320601161229
+        },
+        "warm_batch": {
+          "classification": "timeout_lower_bound",
+          "competitor_completed_rounds": 0,
+          "competitor_timeout_rounds": 7,
+          "ergodis_internal_per_solve": {
+            "max_ns": 731463.25,
+            "median_ns": 720581.75,
+            "min_ns": 708951.375,
+            "q1_ns": 715685.25,
+            "q3_ns": 726861.625
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2952,
+            "median_kb": 2696,
+            "min_kb": 2524,
+            "q1_kb": 2590.0,
+            "q3_kb": 2838.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 1136070.5,
+            "median_ns": 1097081.625,
+            "min_ns": 1039435.5,
+            "q1_ns": 1048278.875,
+            "q3_ns": 1130587.1875
+          },
+          "repetitions_per_process": 8,
+          "speedup_lower_bound": 1139.3865064506938
+        }
+      }
+    },
+    {
+      "competitor": "application:azure-counted:highs:100000:100000",
+      "competitor_name": "SciPy 1.16 HiGHS counted MILP",
+      "description": "Azure-style LRC batch, 100000 demands, six types",
+      "ergodis": "application:azure:rust:100000:100000",
+      "historical_ratio": 173996.0,
+      "name": "azure_lrc_batch",
+      "profiles": {
+        "cold": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 17082208.0,
+            "median_ns": 5936825.0,
+            "min_ns": 4632977.0,
+            "q1_ns": 4998037.0,
+            "q3_ns": 6493561.0
+          },
+          "competitor_peak_rss": {
+            "max_kb": 63436,
+            "median_kb": 63304,
+            "min_kb": 63196,
+            "q1_kb": 63260.0,
+            "q3_kb": 63346.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 477960300.0,
+            "median_ns": 462015148.0,
+            "min_ns": 458850605.0,
+            "q1_ns": 460927382.0,
+            "q3_ns": 462555299.0
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 11141.0,
+            "median_ns": 6242.0,
+            "min_ns": 3477.0,
+            "q1_ns": 4849.0,
+            "q3_ns": 7173.5
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2176,
+            "median_kb": 2076,
+            "min_kb": 1888,
+            "q1_kb": 1972.0,
+            "q3_kb": 2134.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 3412044.0,
+            "median_ns": 2885763.0,
+            "min_ns": 2277040.0,
+            "q1_ns": 2487771.5,
+            "q3_ns": 2966809.0
+          },
+          "geometric_mean_speedup": 168.02111659935105,
+          "log_ratio_t_score": 98.6514286796099,
+          "median_speedup": 160.45472887276898,
+          "repetitions_per_process": 1
+        },
+        "warm_batch": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 5104717.75,
+            "median_ns": 5077954.125,
+            "min_ns": 5050680.875,
+            "q1_ns": 5073096.375,
+            "q3_ns": 5096398.5
+          },
+          "competitor_peak_rss": {
+            "max_kb": 63488,
+            "median_kb": 63392,
+            "min_kb": 63216,
+            "q1_kb": 63310.0,
+            "q3_kb": 63408.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 59101498.875,
+            "median_ns": 58533274.375,
+            "min_ns": 58043647.875,
+            "q1_ns": 58240440.4375,
+            "q3_ns": 58740501.5625
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 1367.5,
+            "median_ns": 840.25,
+            "min_ns": 465.875,
+            "q1_ns": 528.5,
+            "q3_ns": 1118.375
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2112,
+            "median_kb": 1992,
+            "min_kb": 1888,
+            "q1_kb": 1952.0,
+            "q3_kb": 2044.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 447199.0,
+            "median_ns": 367890.0,
+            "min_ns": 264533.875,
+            "q1_ns": 302150.1875,
+            "q3_ns": 397513.3125
+          },
+          "geometric_mean_speedup": 168.1519142146389,
+          "log_ratio_t_score": 67.55608656831974,
+          "median_speedup": 160.209085596238,
+          "repetitions_per_process": 8
+        }
+      }
+    },
+    {
+      "competitor": "application:rdag:interval-cpsat:21:3",
+      "competitor_name": "OR-Tools 9.14 CP-SAT intervals",
+      "description": "Repair DAG, 3 layers by 21 tasks",
+      "ergodis": "application:rdag:rust:21:3",
+      "historical_ratio": 7881.0,
+      "name": "repair_dag",
+      "profiles": {
+        "cold": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 47907486.0,
+            "median_ns": 47174170.0,
+            "min_ns": 46981302.0,
+            "q1_ns": 47128926.0,
+            "q3_ns": 47383345.0
+          },
+          "competitor_peak_rss": {
+            "max_kb": 81720,
+            "median_kb": 81544,
+            "min_kb": 81456,
+            "q1_kb": 81486.0,
+            "q3_kb": 81588.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 505013899.0,
+            "median_ns": 500139061.0,
+            "min_ns": 498542761.0,
+            "q1_ns": 499176690.5,
+            "q3_ns": 501804021.5
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 26409.0,
+            "median_ns": 21870.0,
+            "min_ns": 16410.0,
+            "q1_ns": 18654.5,
+            "q3_ns": 23098.0
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2188,
+            "median_kb": 2072,
+            "min_kb": 1936,
+            "q1_kb": 1976.0,
+            "q3_kb": 2098.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 3663571.0,
+            "median_ns": 2983075.0,
+            "min_ns": 2119106.0,
+            "q1_ns": 2766542.0,
+            "q3_ns": 3276270.5
+          },
+          "geometric_mean_speedup": 170.44486449669682,
+          "log_ratio_t_score": 75.33701857711785,
+          "median_speedup": 167.1237769751012,
+          "repetitions_per_process": 1
+        },
+        "warm_batch": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 35451335.5,
+            "median_ns": 35353677.5,
+            "min_ns": 34938137.5,
+            "q1_ns": 35099979.5625,
+            "q3_ns": 35383070.25
+          },
+          "competitor_peak_rss": {
+            "max_kb": 81664,
+            "median_kb": 81556,
+            "min_kb": 81472,
+            "q1_kb": 81524.0,
+            "q3_kb": 81576.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 93060506.0,
+            "median_ns": 92711925.625,
+            "min_ns": 92063498.5,
+            "q1_ns": 92297250.125,
+            "q3_ns": 92851346.6875
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 9164.625,
+            "median_ns": 8185.25,
+            "min_ns": 7850.875,
+            "q1_ns": 7986.75,
+            "q3_ns": 8654.25
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2092,
+            "median_kb": 1952,
+            "min_kb": 1936,
+            "q1_kb": 1938.0,
+            "q3_kb": 1980.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 449262.75,
+            "median_ns": 337418.375,
+            "min_ns": 289913.625,
+            "q1_ns": 334496.5625,
+            "q3_ns": 409176.875
+          },
+          "geometric_mean_speedup": 255.61793776699128,
+          "log_ratio_t_score": 91.58084338521178,
+          "median_speedup": 275.1464142639278,
+          "repetitions_per_process": 8
+        }
+      }
+    },
+    {
+      "competitor": "application:qc:cryptominisat:50000:4",
+      "competitor_name": "CryptoMiniSat 5.14 native XOR",
+      "description": "QC-LDPC, lift 50000, exclude weight four",
+      "ergodis": "application:qc:rust:50000:4",
+      "historical_ratio": 336.0,
+      "name": "qc_ldpc_codeword",
+      "profiles": {
+        "cold": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 1221637979.0,
+            "median_ns": 1201138120.0,
+            "min_ns": 1188077458.0,
+            "q1_ns": 1192534539.0,
+            "q3_ns": 1202350328.0
+          },
+          "competitor_peak_rss": {
+            "max_kb": 237524,
+            "median_kb": 237488,
+            "min_kb": 237456,
+            "q1_kb": 237476.0,
+            "q3_kb": 237504.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 1366717471.0,
+            "median_ns": 1339715266.0,
+            "min_ns": 1327797341.0,
+            "q1_ns": 1330482282.0,
+            "q3_ns": 1342073822.5
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 4030194.0,
+            "median_ns": 3908778.0,
+            "min_ns": 3796890.0,
+            "q1_ns": 3802019.5,
+            "q3_ns": 3980311.0
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 3916,
+            "median_kb": 3868,
+            "min_kb": 3784,
+            "q1_kb": 3820.0,
+            "q3_kb": 3890.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 7422541.0,
+            "median_ns": 6983243.0,
+            "min_ns": 6489433.0,
+            "q1_ns": 6650608.5,
+            "q3_ns": 7091264.0
+          },
+          "geometric_mean_speedup": 194.05791559653045,
+          "log_ratio_t_score": 263.34545823273504,
+          "median_speedup": 190.44613512661667,
+          "repetitions_per_process": 1
+        },
+        "warm_batch": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 150510843.375,
+            "median_ns": 148254142.0,
+            "min_ns": 147853570.625,
+            "q1_ns": 148070123.25,
+            "q3_ns": 149269281.0
+          },
+          "competitor_peak_rss": {
+            "max_kb": 237532,
+            "median_kb": 237500,
+            "min_kb": 237420,
+            "q1_kb": 237484.0,
+            "q3_kb": 237512.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 167890675.0,
+            "median_ns": 166037401.25,
+            "min_ns": 165229916.25,
+            "q1_ns": 165591057.1875,
+            "q3_ns": 166979634.1875
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 3811497.125,
+            "median_ns": 3721647.375,
+            "min_ns": 3688657.125,
+            "q1_ns": 3719917.125,
+            "q3_ns": 3761998.0
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 4024,
+            "median_kb": 3804,
+            "min_kb": 3712,
+            "q1_kb": 3788.0,
+            "q3_kb": 3872.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 4251798.125,
+            "median_ns": 4190887.25,
+            "min_ns": 4113311.5,
+            "q1_ns": 4153280.375,
+            "q3_ns": 4209052.375
+          },
+          "geometric_mean_speedup": 39.76489945197376,
+          "log_ratio_t_score": 1490.097021206552,
+          "median_speedup": 39.71958518372972,
+          "repetitions_per_process": 8
+        }
+      }
+    },
+    {
+      "competitor": "application:vector:cryptominisat:64:2",
+      "competitor_name": "CryptoMiniSat 5.14 native XOR",
+      "description": "Vector repair, 64 nodes, 2 symbols per node",
+      "ergodis": "application:vector:rust:64:2",
+      "historical_ratio": 4717.0,
+      "name": "vector_node_span",
+      "profiles": {
+        "cold": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 120566866.0,
+            "median_ns": 119791804.0,
+            "min_ns": 119357154.0,
+            "q1_ns": 119564384.5,
+            "q3_ns": 120249070.0
+          },
+          "competitor_peak_rss": {
+            "max_kb": 21452,
+            "median_kb": 21428,
+            "min_kb": 21228,
+            "q1_kb": 21416.0,
+            "q3_kb": 21440.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 216697403.0,
+            "median_ns": 216150955.0,
+            "min_ns": 214851736.0,
+            "q1_ns": 215464286.5,
+            "q3_ns": 216344841.5
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 95778.0,
+            "median_ns": 61815.0,
+            "min_ns": 56506.0,
+            "q1_ns": 59100.0,
+            "q3_ns": 77349.0
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2072,
+            "median_kb": 1964,
+            "min_kb": 1932,
+            "q1_kb": 1954.0,
+            "q3_kb": 1968.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 4020176.0,
+            "median_ns": 2854485.0,
+            "min_ns": 2227037.0,
+            "q1_ns": 2541006.0,
+            "q3_ns": 3743194.5
+          },
+          "geometric_mean_speedup": 71.4872867620255,
+          "log_ratio_t_score": 47.45485861431867,
+          "median_speedup": 75.72327582733838,
+          "repetitions_per_process": 1
+        },
+        "warm_batch": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 17760149.5,
+            "median_ns": 17638268.75,
+            "min_ns": 17586892.0,
+            "q1_ns": 17589398.5,
+            "q3_ns": 17680669.0625
+          },
+          "competitor_peak_rss": {
+            "max_kb": 21468,
+            "median_kb": 21400,
+            "min_kb": 21372,
+            "q1_kb": 21400.0,
+            "q3_kb": 21416.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 29838173.875,
+            "median_ns": 29552903.875,
+            "min_ns": 29387452.125,
+            "q1_ns": 29522320.75,
+            "q3_ns": 29616096.6875
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 35757.75,
+            "median_ns": 35090.25,
+            "min_ns": 32513.0,
+            "q1_ns": 32915.6875,
+            "q3_ns": 35401.5625
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2096,
+            "median_kb": 1992,
+            "min_kb": 1880,
+            "q1_kb": 1970.0,
+            "q3_kb": 2030.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 548396.125,
+            "median_ns": 456403.5,
+            "min_ns": 357262.75,
+            "q1_ns": 367531.875,
+            "q3_ns": 496605.375
+          },
+          "geometric_mean_speedup": 67.89988173595148,
+          "log_ratio_t_score": 62.789098134140104,
+          "median_speedup": 64.89605524497512,
+          "repetitions_per_process": 8
+        }
+      }
+    },
+    {
+      "competitor": "jin-fu-hamming:cpsat-direct:6",
+      "competitor_name": "OR-Tools CP-SAT 9.14 direct model",
+      "description": "Jin--Fu Hamming-outer binary [4095,2718,6;2] LRC",
+      "ergodis": "jin-fu-hamming:rust:6",
+      "historical_ratio": 432.0,
+      "name": "hamming_outer_lrc",
+      "profiles": {
+        "cold": {
+          "classification": "timeout_lower_bound",
+          "competitor_completed_rounds": 0,
+          "competitor_timeout_rounds": 7,
+          "ergodis_internal_per_solve": {
+            "max_ns": 265315485.0,
+            "median_ns": 256467256.0,
+            "min_ns": 254254897.0,
+            "q1_ns": 255323361.5,
+            "q3_ns": 258605630.0
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2380,
+            "median_kb": 2316,
+            "min_kb": 2164,
+            "q1_kb": 2264.0,
+            "q3_kb": 2334.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 269488424.0,
+            "median_ns": 260732989.0,
+            "min_ns": 257724387.0,
+            "q1_ns": 259594915.0,
+            "q3_ns": 262270173.5
+          },
+          "repetitions_per_process": 1,
+          "speedup_lower_bound": 38.35341296225465
+        },
+        "warm_batch": {
+          "classification": "timeout_lower_bound",
+          "competitor_completed_rounds": 0,
+          "competitor_timeout_rounds": 7,
+          "ergodis_internal_per_solve": {
+            "max_ns": 257747478.375,
+            "median_ns": 256494172.0,
+            "min_ns": 254479688.125,
+            "q1_ns": 256246553.5625,
+            "q3_ns": 256700978.3125
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 2348,
+            "median_kb": 2284,
+            "min_kb": 2156,
+            "q1_kb": 2164.0,
+            "q3_kb": 2342.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 258237811.25,
+            "median_ns": 257189662.25,
+            "min_ns": 254933441.625,
+            "q1_ns": 256775465.125,
+            "q3_ns": 257520927.25
+          },
+          "repetitions_per_process": 8,
+          "speedup_lower_bound": 4.8602264533671
+        }
+      }
+    },
+    {
+      "competitor": "application:gpu-compiled:maxflow:10000:6000:64",
+      "competitor_name": "OR-Tools 9.14 SimpleMaxFlow",
+      "description": "GPU MDS checkpoint, 10000/6000 shards, 64 failures",
+      "ergodis": "application:gpu-compiled:rust:10000:6000:64",
+      "historical_ratio": 1029.0,
+      "name": "gpu_mds_checkpoint",
+      "profiles": {
+        "cold": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 251518233.0,
+            "median_ns": 244826304.0,
+            "min_ns": 238313147.0,
+            "q1_ns": 242439093.5,
+            "q3_ns": 248356896.5
+          },
+          "competitor_peak_rss": {
+            "max_kb": 71028,
+            "median_kb": 70900,
+            "min_kb": 70748,
+            "q1_kb": 70836.0,
+            "q3_kb": 70966.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 402048273.0,
+            "median_ns": 393213013.0,
+            "min_ns": 386494815.0,
+            "q1_ns": 390842955.0,
+            "q3_ns": 397595141.5
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 712467.0,
+            "median_ns": 619574.0,
+            "min_ns": 568048.0,
+            "q1_ns": 591210.5,
+            "q3_ns": 634305.5
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 3400,
+            "median_kb": 3332,
+            "min_kb": 3140,
+            "q1_kb": 3330.0,
+            "q3_kb": 3354.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 4323169.0,
+            "median_ns": 3803040.0,
+            "min_ns": 2863671.0,
+            "q1_ns": 3761839.0,
+            "q3_ns": 4013197.0
+          },
+          "geometric_mean_speedup": 104.66111976879355,
+          "log_ratio_t_score": 95.11967838081799,
+          "median_speedup": 102.42305194747297,
+          "repetitions_per_process": 1
+        },
+        "warm_batch": {
+          "classification": "completed_pair",
+          "competitor_completed_rounds": 7,
+          "competitor_internal_per_solve": {
+            "max_ns": 52591356.875,
+            "median_ns": 51638487.875,
+            "min_ns": 51085826.375,
+            "q1_ns": 51588498.5625,
+            "q3_ns": 51779490.3125
+          },
+          "competitor_peak_rss": {
+            "max_kb": 73216,
+            "median_kb": 73016,
+            "min_kb": 72876,
+            "q1_kb": 72950.0,
+            "q3_kb": 73070.0
+          },
+          "competitor_timeout_rounds": 0,
+          "competitor_wall_per_solve": {
+            "max_ns": 71310578.75,
+            "median_ns": 70449126.125,
+            "min_ns": 69915316.0,
+            "q1_ns": 70249989.1875,
+            "q3_ns": 70649421.375
+          },
+          "ergodis_internal_per_solve": {
+            "max_ns": 322856.125,
+            "median_ns": 305388.625,
+            "min_ns": 299764.375,
+            "q1_ns": 303413.6875,
+            "q3_ns": 309864.375
+          },
+          "ergodis_peak_rss": {
+            "max_kb": 3580,
+            "median_kb": 3376,
+            "min_kb": 3340,
+            "q1_kb": 3372.0,
+            "q3_kb": 3478.0
+          },
+          "ergodis_wall_per_solve": {
+            "max_ns": 816050.625,
+            "median_ns": 682441.75,
+            "min_ns": 594153.75,
+            "q1_ns": 654393.375,
+            "q3_ns": 754709.5
+          },
+          "geometric_mean_speedup": 101.0044488332174,
+          "log_ratio_t_score": 111.68207622579625,
+          "median_speedup": 103.23097337611598,
+          "repetitions_per_process": 8
+        }
+      }
+    }
+  ],
+  "completed_case_aggregates": {
+    "cold": {
+      "geometric_mean_speedup": 104.16009429991033,
+      "log_ratio_t_score": 44.79814142441572
+    },
+    "warm_batch": {
+      "geometric_mean_speedup": 81.47855621850292,
+      "log_ratio_t_score": 34.800342648507396
+    }
+  },
+  "host": {
+    "active_thread_siblings": [
+      3,
+      15
+    ],
+    "boost": "0",
+    "canonical_host_ready": true,
+    "cpu": 3,
+    "cpu_model": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M",
+    "energy_performance_preference": "performance",
+    "governor": "performance",
+    "intel_no_turbo": null,
+    "isolated_cpus": "",
+    "loadavg_before": "0.56 0.91 0.99 1/1056 198358",
+    "lscpu_json": {
+      "lscpu": [
+        {
+          "data": "x86_64",
+          "field": "Architecture:"
+        },
+        {
+          "data": "32-bit, 64-bit",
+          "field": "CPU op-mode(s):"
+        },
+        {
+          "data": "48 bits physical, 48 bits virtual",
+          "field": "Address sizes:"
+        },
+        {
+          "data": "Little Endian",
+          "field": "Byte Order:"
+        },
+        {
+          "data": "24",
+          "field": "CPU(s):"
+        },
+        {
+          "data": "0-23",
+          "field": "On-line CPU(s) list:"
+        },
+        {
+          "data": "AuthenticAMD",
+          "field": "Vendor ID:"
+        },
+        {
+          "data": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M",
+          "field": "Model name:"
+        },
+        {
+          "data": "26",
+          "field": "CPU family:"
+        },
+        {
+          "data": "36",
+          "field": "Model:"
+        },
+        {
+          "data": "2",
+          "field": "Thread(s) per core:"
+        },
+        {
+          "data": "12",
+          "field": "Core(s) per socket:"
+        },
+        {
+          "data": "1",
+          "field": "Socket(s):"
+        },
+        {
+          "data": "0",
+          "field": "Stepping:"
+        },
+        {
+          "data": "disabled",
+          "field": "Frequency boost:"
+        },
+        {
+          "data": "94%",
+          "field": "CPU(s) scaling MHz:"
+        },
+        {
+          "data": "2000.0000",
+          "field": "CPU max MHz:"
+        },
+        {
+          "data": "605.2640",
+          "field": "CPU min MHz:"
+        },
+        {
+          "data": "3992.53",
+          "field": "BogoMIPS:"
+        },
+        {
+          "data": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze",
+          "field": "Flags:"
+        },
+        {
+          "data": "AMD-V",
+          "field": "Virtualization:"
+        },
+        {
+          "data": "576 KiB (12 instances)",
+          "field": "L1d cache:"
+        },
+        {
+          "data": "384 KiB (12 instances)",
+          "field": "L1i cache:"
+        },
+        {
+          "data": "12 MiB (12 instances)",
+          "field": "L2 cache:"
+        },
+        {
+          "data": "24 MiB (2 instances)",
+          "field": "L3 cache:"
+        },
+        {
+          "data": "1",
+          "field": "NUMA node(s):"
+        },
+        {
+          "data": "0-23",
+          "field": "NUMA node0 CPU(s):"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Gather data sampling:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Ghostwrite:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Indirect target selection:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Itlb multihit:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability L1tf:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Mds:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Meltdown:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Mmio stale data:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Old microcode:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Reg file data sampling:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Retbleed:"
+        },
+        {
+          "data": "Mitigation; IBPB on VMEXIT only",
+          "field": "Vulnerability Spec rstack overflow:"
+        },
+        {
+          "data": "Mitigation; Speculative Store Bypass disabled via prctl",
+          "field": "Vulnerability Spec store bypass:"
+        },
+        {
+          "data": "Mitigation; usercopy/swapgs barriers and __user pointer sanitization",
+          "field": "Vulnerability Spectre v1:"
+        },
+        {
+          "data": "Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected",
+          "field": "Vulnerability Spectre v2:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Srbds:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Tsa:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Tsx async abort:"
+        },
+        {
+          "data": "Mitigation; IBPB on VMEXIT",
+          "field": "Vulnerability Vmscape:"
+        }
+      ]
+    },
+    "nohz_full_cpus": "",
+    "online_cpus": "0-23",
+    "physical_core_isolated": false,
+    "platform": "Linux-7.0.9-x86_64-with-glibc2.40",
+    "rustc_vv": "rustc 1.93.1 (01f6ddf75 2026-02-11)\nbinary: rustc\ncommit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf\ncommit-date: 2026-02-11\nhost: x86_64-unknown-linux-gnu\nrelease: 1.93.1\nLLVM version: 21.1.8\n",
+    "rustflags": "",
+    "scaling_driver": "amd-pstate-epp",
+    "stable_frequency_policy": true,
+    "thread_siblings": "3,15"
+  },
+  "implementations": {
+    "packages": [
+      "absl-py==2.5.0",
+      "graphillion==2.1",
+      "immutabledict==4.3.1",
+      "numpy==2.5.2",
+      "ortools==9.14.6206",
+      "pandas==3.0.5",
+      "protobuf==6.31.1",
+      "pycryptosat==5.14.7",
+      "python-dateutil==2.9.0.post0",
+      "scipy==1.16.1",
+      "six==1.17.0",
+      "typing_extensions==4.16.0"
+    ],
+    "python": "Python 3.12.12"
+  },
+  "protocol": {
+    "cpu": 3,
+    "dependency_setup_excluded": true,
+    "fresh_process_per_sample": true,
+    "metric": "external wall time including implementation startup",
+    "profiles": {
+      "cold": 1,
+      "warm_batch": 8
+    },
+    "rotated_interleave": true,
+    "rounds": 7,
+    "timeout_policy": "report timeout/Ergodis-median lower bound",
+    "timeout_s": 10.0
+  },
+  "schema": "ergodis-application-readme-ab-v3"
+}
