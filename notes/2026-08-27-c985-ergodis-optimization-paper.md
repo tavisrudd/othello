@@ -1252,23 +1252,24 @@ verified artifact, permitting many objectives to reuse one topology plan.
 `evaluate_frozen_pareto_dag` is the one-shot convenience path.  Evaluation uses
 one caller-capacity-checked accumulator: compose and Pareto choice are fused,
 witnesses are created only for admitted nondominated products, and class/
-generator loops do not grow heap storage.  The current returned representation
-still freezes and retains one front per quotient class.  A consuming selected-
-entry evaluator with last-use sort reclamation is therefore the next scaling
-step; the present API does not claim frontier-bounded end-to-end Pareto memory.
+generator loops do not grow heap storage.  `evaluate_entries` additionally
+computes each target sort's final predecessor at plan construction, retains only
+requested result classes, and drops every live sort slab at that exact last use.
+On the control quotient it peaks at 34 of 153 classes and 75 Pareto entries.
+The all-class convenience result still retains one front per quotient class.
 
 The strongest classical control is retained as a negative.  In this separable
 shuffle product, an exact factorized solver evaluates the two branch languages
 independently and combines their fronts once.  Nine CPU-2 processes, each
 amortizing 1,000 solves, give:
 
-- raw Cartesian DP / quotient DP: 36.487x geometric mean, log-ratio
-  t = 2087.13;
-- quotient DP / exact factorized DP: 2.352x geometric mean, log-ratio
-  t = 318.44.
+- raw Cartesian DP / quotient DP: 35.796x geometric mean, log-ratio
+  t = 1455.08;
+- quotient DP / exact factorized DP: 2.356x geometric mean, log-ratio
+  t = 209.82.
 
 Thus quotienting trounces the intentionally Cartesian raw formulation but is
-still 2.35x slower than the theorem-specialized factorization.  This is a
+still 2.36x slower than the theorem-specialized factorization.  This is a
 shuffle-product control, not evidence of superiority on general fork/join
 scheduling.  A genuinely coupled shared-capacity or mode-transition instance
 is required for that application claim.
@@ -1283,4 +1284,4 @@ scripts/check-shuffle-product-control.sh \
 
 - benchmark script: `b8b2bcda258f4d84d8706dfa7cd5032014e9c2a063416848721c80568de06698`;
 - checker: `70de6d93cc130e6c9cc99cc13a6b3a91f0c165c524d9b150e3be4566631b7fa5`;
-- evidence TSV: `929876ef33ec58391033c76f8a9636a3d11a600efeebd5ac85e1b293fcd75da7`.
+- evidence TSV: `6f52c9ee2c34b036f41c7857a67f643fa92fb0f8d063fbe6362efdfdf6340a44`.

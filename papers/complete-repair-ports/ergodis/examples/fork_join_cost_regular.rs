@@ -4,8 +4,8 @@ use ergodis::observational::{
     compile_layered_frozen_dag_audited, verify_frozen_layered_dag_audit, LayeredGeneratorSpec,
 };
 use ergodis::{
-    CappedAdditiveMonoid, FiniteOrderedMonoid, FrozenParetoPlan, ParetoWitness,
-    WitnessedParetoFront, WitnessedParetoWorkspace,
+    CappedAdditiveMonoid, FiniteOrderedMonoid, FrozenParetoEvaluationMetrics, FrozenParetoPlan,
+    ParetoWitness, WitnessedParetoFront, WitnessedParetoWorkspace,
 };
 use std::io::Write;
 use std::time::Instant;
@@ -190,6 +190,7 @@ fn raw_pareto_dp(
     fronts
 }
 
+#[cfg(test)]
 fn quotient_pareto_dp(
     workflow: &Workflow,
     plan: &FrozenParetoPlan<'_>,
@@ -215,6 +216,37 @@ fn quotient_pareto_dp(
         |_, edge, suffix| edge | (suffix << 3),
     )
     .unwrap()
+}
+
+fn quotient_entry_pareto_dp(
+    workflow: &Workflow,
+    plan: &FrozenParetoPlan<'_>,
+    resources: &CappedAdditiveMonoid,
+    weights: &[[u16; 2]; 4],
+    entry_class: u32,
+) -> (WitnessedParetoFront, FrozenParetoEvaluationMetrics) {
+    let edges = edge_fronts(resources, weights);
+    let outputs = [
+        empty_front(resources),
+        singleton_front(resources, [0, 0], 0),
+        empty_front(resources),
+    ];
+    let mut generator_edges = Vec::with_capacity(workflow.generators.len());
+    for &action in &workflow.actions {
+        generator_edges.push(edges[(2 * action.branch + action.symbol) as usize].clone());
+    }
+    let mut workspace = WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
+    let (mut fronts, metrics) = plan
+        .evaluate_entries(
+            &[entry_class],
+            resources,
+            &outputs,
+            &generator_edges,
+            &mut workspace,
+            |_, edge, suffix| edge | (suffix << 3),
+        )
+        .unwrap();
+    (fronts.pop().unwrap(), metrics)
 }
 
 fn factorized_pareto_dp(
@@ -416,7 +448,18 @@ fn run(
     automaton_states: u32,
     audit_path: Option<&str>,
     repetitions: u128,
-) -> (usize, usize, usize, u128, u128, u128, u128, u64) {
+) -> (
+    usize,
+    usize,
+    usize,
+    usize,
+    usize,
+    u128,
+    u128,
+    u128,
+    u128,
+    u64,
+) {
     assert!(repetitions != 0);
     let workflow = Workflow::new(length, automaton_states);
     let compile_start = Instant::now();
@@ -462,6 +505,7 @@ fn run(
 
     let resources = CappedAdditiveMonoid::new([64, 64]).unwrap();
     let plan = FrozenParetoPlan::new(&frozen).unwrap();
+    let entry_class = frozen.entry_class(0, 0).unwrap();
     let mut raw = None;
     let raw_start = Instant::now();
     for _ in 0..repetitions {
@@ -472,15 +516,16 @@ fn run(
     let mut quotient = None;
     let quotient_start = Instant::now();
     for _ in 0..repetitions {
-        quotient = Some(std::hint::black_box(quotient_pareto_dp(
+        quotient = Some(std::hint::black_box(quotient_entry_pareto_dp(
             &workflow,
             &plan,
             &resources,
             &DEFAULT_WEIGHTS,
+            entry_class,
         )));
     }
     let quotient_ns = quotient_start.elapsed().as_nanos() / repetitions;
-    let quotient = quotient.unwrap();
+    let (quotient_entry, quotient_metrics) = quotient.unwrap();
     let mut factorized = None;
     let factorized_start = Instant::now();
     for _ in 0..repetitions {
@@ -490,9 +535,7 @@ fn run(
     }
     let factorized_ns = factorized_start.elapsed().as_nanos() / repetitions;
     let factorized = factorized.unwrap();
-    let entry_class = frozen.entry_class(0, 0).unwrap();
     let raw_entry = &raw[0][0];
-    let quotient_entry = quotient[entry_class as usize].as_ref().unwrap();
     assert_eq!(
         raw_entry.resources().collect::<Vec<_>>(),
         quotient_entry.resources().collect::<Vec<_>>()
@@ -515,6 +558,8 @@ fn run(
             .sum(),
         frozen.storage().classes,
         quotient_entry.entries().len(),
+        quotient_metrics.peak_live_classes,
+        quotient_metrics.peak_live_entries,
         compile_ns,
         raw_ns,
         quotient_ns,
@@ -529,10 +574,20 @@ fn main() {
         .ok()
         .and_then(|value| value.parse::<u128>().ok())
         .unwrap_or(1000);
-    let (raw_states, classes, front, compile_ns, raw_ns, quotient_ns, factorized_ns, audit_bytes) =
-        run(5, 12, Some(audit_path), repetitions);
+    let (
+        raw_states,
+        classes,
+        front,
+        peak_live_classes,
+        peak_live_entries,
+        compile_ns,
+        raw_ns,
+        quotient_ns,
+        factorized_ns,
+        audit_bytes,
+    ) = run(5, 12, Some(audit_path), repetitions);
     println!(
-        "fork-join-cost-regular\trepetitions={repetitions}\traw_states={raw_states}\tclasses={classes}\tfront={front}\tcompile_ns={compile_ns}\traw_pareto_ns={raw_ns}\tquotient_pareto_ns={quotient_ns}\tfactorized_pareto_ns={factorized_ns}\traw_quotient_ratio={:.3}\tquotient_factorized_ratio={:.3}\taudit_bytes={}",
+        "fork-join-cost-regular\trepetitions={repetitions}\traw_states={raw_states}\tclasses={classes}\tfront={front}\tpeak_live_classes={peak_live_classes}\tpeak_live_entries={peak_live_entries}\tcompile_ns={compile_ns}\traw_pareto_ns={raw_ns}\tquotient_pareto_ns={quotient_ns}\tfactorized_pareto_ns={factorized_ns}\traw_quotient_ratio={:.3}\tquotient_factorized_ratio={:.3}\taudit_bytes={}",
         raw_ns as f64 / quotient_ns as f64,
         quotient_ns as f64 / factorized_ns as f64,
         audit_bytes
@@ -547,7 +602,7 @@ mod tests {
     fn quotient_pareto_matches_raw_and_lifts_words() {
         // Since gcd(2^3, 6) = 2, the bounded continuation has a
         // non-trivial kernel without erasing every initial distinction.
-        let (raw_states, classes, front, _, _, _, _, _) = run(3, 6, None, 1);
+        let (raw_states, classes, front, _, _, _, _, _, _, _) = run(3, 6, None, 1);
         assert!(classes < raw_states);
         assert!(front != 0);
 

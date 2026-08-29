@@ -420,13 +420,25 @@ pub struct FrozenParetoPlan<'a> {
     frozen: &'a FrozenObservation,
     offsets: Box<[usize]>,
     outgoing: Box<[u32]>,
+    generator_targets: Box<[u32]>,
+    release_offsets: Box<[usize]>,
+    release_targets: Box<[u32]>,
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct FrozenParetoEvaluationMetrics {
+    pub peak_live_classes: usize,
+    pub peak_live_entries: usize,
+    pub retained_entries: usize,
 }
 
 impl<'a> FrozenParetoPlan<'a> {
     pub fn new(frozen: &'a FrozenObservation) -> Result<Self, FrozenParetoError> {
         let sort_count = frozen.sort_count();
         let mut offsets = vec![0_usize; sort_count + 1];
-        for generator in 0..frozen.generator_count() {
+        let mut generator_targets = vec![0_u32; frozen.generator_count()];
+        let mut last_source = vec![None; sort_count];
+        for (generator, target_slot) in generator_targets.iter_mut().enumerate() {
             let spec = frozen
                 .generator_spec(generator as u32)
                 .ok_or(FrozenParetoError::Artifact)?;
@@ -437,6 +449,9 @@ impl<'a> FrozenParetoPlan<'a> {
                 return Err(FrozenParetoError::Artifact);
             }
             offsets[spec.source_sort as usize + 1] += 1;
+            *target_slot = spec.target_sort;
+            let slot = &mut last_source[spec.target_sort as usize];
+            *slot = Some(slot.map_or(spec.source_sort, |old: u32| old.min(spec.source_sort)));
         }
         for sort in 0..sort_count {
             offsets[sort + 1] += offsets[sort];
@@ -451,10 +466,28 @@ impl<'a> FrozenParetoPlan<'a> {
             outgoing[cursor[source]] = generator as u32;
             cursor[source] += 1;
         }
+        let mut release_offsets = vec![0_usize; sort_count + 1];
+        for (target, source) in last_source.iter().enumerate() {
+            let release_sort = source.map_or(target, |source| source as usize);
+            release_offsets[release_sort + 1] += 1;
+        }
+        for sort in 0..sort_count {
+            release_offsets[sort + 1] += release_offsets[sort];
+        }
+        let mut release_cursor = release_offsets[..sort_count].to_vec();
+        let mut release_targets = vec![0_u32; sort_count];
+        for (target, source) in last_source.iter().enumerate() {
+            let release_sort = source.map_or(target, |source| source as usize);
+            release_targets[release_cursor[release_sort]] = target as u32;
+            release_cursor[release_sort] += 1;
+        }
         Ok(Self {
             frozen,
             offsets: offsets.into_boxed_slice(),
             outgoing: outgoing.into_boxed_slice(),
+            generator_targets: generator_targets.into_boxed_slice(),
+            release_offsets: release_offsets.into_boxed_slice(),
+            release_targets: release_targets.into_boxed_slice(),
         })
     }
 
@@ -534,6 +567,174 @@ impl<'a> FrozenParetoPlan<'a> {
             }
         }
         Ok(fronts)
+    }
+
+    /// Evaluate only selected quotient classes while reclaiming every sort
+    /// slab immediately after its last predecessor sort has been processed.
+    pub fn evaluate_entries<M: FiniteOrderedMonoid>(
+        &self,
+        entry_classes: &[u32],
+        monoid: &M,
+        output_fronts: &[WitnessedParetoFront],
+        edge_fronts: &[WitnessedParetoFront],
+        workspace: &mut WitnessedParetoWorkspace,
+        mut compose_witness: impl FnMut(u32, u32, u32) -> u32,
+    ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
+        if edge_fronts.len() != self.frozen.generator_count() {
+            return Err(FrozenParetoError::EdgeFrontCount);
+        }
+        let sort_count = self.frozen.sort_count();
+        let mut selected_counts = vec![0_usize; sort_count + 1];
+        let mut selected_sorts = Vec::with_capacity(entry_classes.len());
+        for &class in entry_classes {
+            let sort = self
+                .sort_for_class(class)
+                .ok_or(FrozenParetoError::Artifact)?;
+            selected_sorts.push(sort);
+            selected_counts[sort + 1] += 1;
+        }
+        for sort in 0..sort_count {
+            selected_counts[sort + 1] += selected_counts[sort];
+        }
+        let mut selected_cursor = selected_counts[..sort_count].to_vec();
+        let mut selected_indices = vec![0_usize; entry_classes.len()];
+        for (index, &sort) in selected_sorts.iter().enumerate() {
+            selected_indices[selected_cursor[sort]] = index;
+            selected_cursor[sort] += 1;
+        }
+
+        let capacity = workspace.capacity();
+        let mut accumulator = Vec::with_capacity(capacity);
+        let mut live: Vec<Option<Vec<WitnessedParetoFront>>> = vec![None; sort_count];
+        let mut retained: Vec<Option<WitnessedParetoFront>> = vec![None; entry_classes.len()];
+        let mut metrics = FrozenParetoEvaluationMetrics::default();
+        let mut live_classes = 0_usize;
+        let mut live_entries = 0_usize;
+
+        for sort in (0..sort_count).rev() {
+            let range = self
+                .frozen
+                .class_range(sort as u32)
+                .ok_or(FrozenParetoError::Artifact)?;
+            let mut sort_fronts = Vec::with_capacity(range.len as usize);
+            for class in range.start..range.start + range.len {
+                let output = self
+                    .frozen
+                    .output(class)
+                    .ok_or(FrozenParetoError::Artifact)? as usize;
+                let output_front = output_fronts.get(output).ok_or(FrozenParetoError::Output)?;
+                if output_front.entries.len() > capacity {
+                    return Err(OrderedResourceError::WorkspaceCapacity {
+                        required: output_front.entries.len(),
+                        capacity,
+                    }
+                    .into());
+                }
+                accumulator.clear();
+                accumulator.extend_from_slice(&output_front.entries);
+                for &generator in &self.outgoing[self.offsets[sort]..self.offsets[sort + 1]] {
+                    let target = self
+                        .frozen
+                        .transition(generator, class)
+                        .ok_or(FrozenParetoError::Artifact)?;
+                    let target_sort = self.generator_targets[generator as usize] as usize;
+                    let target_range = self
+                        .frozen
+                        .class_range(target_sort as u32)
+                        .ok_or(FrozenParetoError::Artifact)?;
+                    let target_local = target
+                        .checked_sub(target_range.start)
+                        .filter(|&local| local < target_range.len)
+                        .ok_or(FrozenParetoError::Artifact)?
+                        as usize;
+                    let child = live[target_sort]
+                        .as_ref()
+                        .and_then(|fronts| fronts.get(target_local))
+                        .ok_or(FrozenParetoError::Artifact)?;
+                    for &edge in &edge_fronts[generator as usize].entries {
+                        for &suffix in &child.entries {
+                            let resource = monoid.combine(edge.resource, suffix.resource);
+                            validate_element(monoid.element_count(), resource)?;
+                            if accumulator
+                                .iter()
+                                .any(|entry| monoid.leq(entry.resource, resource))
+                            {
+                                continue;
+                            }
+                            accumulator.retain(|entry| !monoid.leq(resource, entry.resource));
+                            if accumulator.len() == capacity {
+                                return Err(OrderedResourceError::WorkspaceCapacity {
+                                    required: capacity.saturating_add(1),
+                                    capacity,
+                                }
+                                .into());
+                            }
+                            accumulator.push(ParetoWitness {
+                                resource,
+                                witness: compose_witness(generator, edge.witness, suffix.witness),
+                            });
+                        }
+                    }
+                }
+                accumulator.sort_unstable_by_key(|entry| entry.resource);
+                sort_fronts.push(WitnessedParetoFront {
+                    entries: Box::from(accumulator.as_slice()),
+                });
+            }
+
+            for &index in &selected_indices[selected_counts[sort]..selected_counts[sort + 1]] {
+                let local = entry_classes[index]
+                    .checked_sub(range.start)
+                    .filter(|&local| local < range.len)
+                    .ok_or(FrozenParetoError::Artifact)? as usize;
+                let front = sort_fronts[local].clone();
+                metrics.retained_entries += front.entries.len();
+                retained[index] = Some(front);
+            }
+            live_classes += sort_fronts.len();
+            live_entries += sort_fronts
+                .iter()
+                .map(|front| front.entries.len())
+                .sum::<usize>();
+            live[sort] = Some(sort_fronts);
+            metrics.peak_live_classes = metrics.peak_live_classes.max(live_classes);
+            metrics.peak_live_entries = metrics.peak_live_entries.max(live_entries);
+
+            for &target in
+                &self.release_targets[self.release_offsets[sort]..self.release_offsets[sort + 1]]
+            {
+                if let Some(fronts) = live[target as usize].take() {
+                    live_classes -= fronts.len();
+                    live_entries -= fronts
+                        .iter()
+                        .map(|front| front.entries.len())
+                        .sum::<usize>();
+                }
+            }
+        }
+
+        retained
+            .into_iter()
+            .map(|front| front.ok_or(FrozenParetoError::Artifact))
+            .collect::<Result<Vec<_>, _>>()
+            .map(|fronts| (fronts, metrics))
+    }
+
+    fn sort_for_class(&self, class: u32) -> Option<usize> {
+        let mut low = 0_usize;
+        let mut high = self.frozen.sort_count();
+        while low < high {
+            let middle = low + (high - low) / 2;
+            let range = self.frozen.class_range(middle as u32)?;
+            if class < range.start {
+                high = middle;
+            } else if class >= range.start + range.len {
+                low = middle + 1;
+            } else {
+                return Some(middle);
+            }
+        }
+        None
     }
 }
 
@@ -1185,6 +1386,20 @@ mod tests {
                         |_, edge, child| edge | (child << 1),
                     )
                     .unwrap();
+                let selected_classes: Vec<_> = (0..3)
+                    .map(|state| frozen.entry_class(0, state).unwrap())
+                    .collect();
+                let (selected, selected_metrics) = plan
+                    .evaluate_entries(
+                        &selected_classes,
+                        &monoid,
+                        &outputs,
+                        &edges,
+                        &mut workspace,
+                        |_, edge, child| edge | (child << 1),
+                    )
+                    .unwrap();
+                assert!(selected_metrics.peak_live_classes <= frozen.storage().classes);
                 for state in 0..3 {
                     let target = if state < 2 { 0 } else { 1 };
                     let entries = workspace
@@ -1205,6 +1420,10 @@ mod tests {
                             .unwrap()
                             .resources()
                             .collect::<Vec<_>>(),
+                        raw.resources().collect::<Vec<_>>()
+                    );
+                    assert_eq!(
+                        selected[state as usize].resources().collect::<Vec<_>>(),
                         raw.resources().collect::<Vec<_>>()
                     );
                 }
