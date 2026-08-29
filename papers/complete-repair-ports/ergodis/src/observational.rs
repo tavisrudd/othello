@@ -2387,6 +2387,7 @@ pub enum LayeredAuditError {
 
 const SEPARATOR_STREAM_MAGIC: &[u8; 8] = b"ERGSEP01";
 const LAYERED_AUDIT_MAGIC: &[u8; 8] = b"ERGLAY01";
+const FROZEN_OBSERVATION_MAGIC: &[u8; 8] = b"ERGFRZ01";
 
 #[derive(Clone, Debug)]
 pub struct CompiledObservation {
@@ -2423,6 +2424,24 @@ pub struct FrozenObservationStorage {
     pub entry_states: usize,
     pub classes: usize,
     pub payload_bytes: usize,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct FrozenObservationLimits {
+    pub maximum_sorts: usize,
+    pub maximum_states: usize,
+    pub maximum_entry_states: usize,
+    pub maximum_classes: usize,
+    pub maximum_generators: usize,
+    pub maximum_transitions: usize,
+}
+
+#[derive(Debug, Error)]
+pub enum FrozenObservationFileError {
+    #[error("frozen observation I/O failed")]
+    Io(#[from] std::io::Error),
+    #[error("frozen observation is malformed or exceeds its loader budget")]
+    Format,
 }
 
 impl FrozenObservation {
@@ -2996,6 +3015,9 @@ fn read_var_u32<R: Read>(reader: &mut R) -> Result<u32, LayeredAuditError> {
         }
         value |= payload << shift;
         if byte[0] & 0x80 == 0 {
+            if shift != 0 && payload == 0 {
+                return Err(LayeredAuditError::Format);
+            }
             return Ok(value);
         }
     }
@@ -3034,6 +3056,300 @@ fn quotient_fingerprint(
         fingerprint_word(&mut hash, word);
     }
     hash
+}
+
+fn frozen_u32(value: usize) -> Result<u32, FrozenObservationFileError> {
+    u32::try_from(value).map_err(|_| FrozenObservationFileError::Format)
+}
+
+fn read_frozen_count<R: Read>(
+    reader: &mut R,
+    maximum: usize,
+) -> Result<usize, FrozenObservationFileError> {
+    let value = read_var_u32(reader).map_err(|error| match error {
+        LayeredAuditError::Io(error) => FrozenObservationFileError::Io(error),
+        LayeredAuditError::Compilation(_) | LayeredAuditError::Format => {
+            FrozenObservationFileError::Format
+        }
+    })? as usize;
+    if value > maximum {
+        return Err(FrozenObservationFileError::Format);
+    }
+    Ok(value)
+}
+
+fn read_frozen_values<R: Read>(
+    reader: &mut R,
+    count: usize,
+) -> Result<Box<[u32]>, FrozenObservationFileError> {
+    let mut values = Vec::with_capacity(count);
+    for _ in 0..count {
+        values.push(read_var_u32(reader).map_err(map_audit_file_error)?);
+    }
+    Ok(values.into_boxed_slice())
+}
+
+/// Stream the compact runtime quotient. The format is versioned and ends in a
+/// stable 128-bit structural fingerprint; paper evidence should additionally
+/// bind the file with its recorded SHA-256.
+pub fn write_frozen_observation<W: Write>(
+    frozen: &FrozenObservation,
+    writer: &mut W,
+) -> Result<(), FrozenObservationFileError> {
+    validate_frozen_observation(frozen)?;
+    writer.write_all(FROZEN_OBSERVATION_MAGIC)?;
+    for count in [
+        frozen.class_ranges.len(),
+        frozen.entry_classes.len(),
+        frozen.class_outputs.len(),
+        frozen.generator_records.len(),
+        frozen.generator_transitions.len(),
+    ] {
+        write_var_u32(writer, frozen_u32(count)?)?;
+    }
+    for metric in [
+        frozen.metrics.states,
+        frozen.metrics.classes,
+        frozen.metrics.generators,
+        frozen.metrics.refinement_rounds,
+        frozen.metrics.refinement_splits,
+        frozen.metrics.separators,
+        frozen.metrics.separator_steps,
+    ] {
+        write_var_u32(writer, frozen_u32(metric)?)?;
+    }
+    for range in &frozen.class_ranges {
+        write_var_u32(writer, range.start)?;
+        write_var_u32(writer, range.len)?;
+    }
+    for range in &frozen.entry_ranges {
+        write_var_u32(writer, range.start)?;
+        write_var_u32(writer, range.len)?;
+    }
+    for values in [
+        &*frozen.entry_classes,
+        &*frozen.class_outputs,
+        &*frozen.class_representatives,
+    ] {
+        for &value in values {
+            write_var_u32(writer, value)?;
+        }
+    }
+    for record in &frozen.generator_records {
+        write_var_u32(writer, record.source_sort)?;
+        write_var_u32(writer, record.target_sort)?;
+        write_var_u32(writer, record.transition_start)?;
+        write_var_u32(writer, record.transition_len)?;
+    }
+    for &target in &frozen.generator_transitions {
+        write_var_u32(writer, target)?;
+    }
+    let fingerprint = quotient_fingerprint(
+        &frozen.class_ranges,
+        &frozen.class_outputs,
+        &frozen.class_representatives,
+        &frozen.generator_records,
+        &frozen.generator_transitions,
+    );
+    for word in fingerprint {
+        writer.write_all(&word.to_le_bytes())?;
+    }
+    Ok(())
+}
+
+fn validate_frozen_observation(
+    frozen: &FrozenObservation,
+) -> Result<(), FrozenObservationFileError> {
+    if frozen.class_ranges.len() != frozen.entry_ranges.len()
+        || frozen.class_outputs.len() != frozen.class_representatives.len()
+        || frozen.metrics.classes != frozen.class_outputs.len()
+        || frozen.metrics.generators != frozen.generator_records.len()
+    {
+        return Err(FrozenObservationFileError::Format);
+    }
+    let mut next_class = 0_u32;
+    let mut next_entry = 0_u32;
+    for (sort, class_range) in frozen.class_ranges.iter().copied().enumerate() {
+        if class_range.start != next_class {
+            return Err(FrozenObservationFileError::Format);
+        }
+        next_class = class_range
+            .start
+            .checked_add(class_range.len)
+            .ok_or(FrozenObservationFileError::Format)?;
+        let entry_range = frozen.entry_ranges[sort];
+        if entry_range.start != next_entry {
+            return Err(FrozenObservationFileError::Format);
+        }
+        let entry_end = entry_range
+            .start
+            .checked_add(entry_range.len)
+            .ok_or(FrozenObservationFileError::Format)?;
+        if entry_end as usize > frozen.entry_classes.len() {
+            return Err(FrozenObservationFileError::Format);
+        }
+        for &class in &frozen.entry_classes[entry_range.start as usize..entry_end as usize] {
+            if !class_range.contains(class) {
+                return Err(FrozenObservationFileError::Format);
+            }
+        }
+        next_entry = entry_end;
+    }
+    if next_class as usize != frozen.class_outputs.len()
+        || next_entry as usize != frozen.entry_classes.len()
+    {
+        return Err(FrozenObservationFileError::Format);
+    }
+    let transition_words = frozen.generator_transitions.len();
+    let mut covered_transitions = vec![0_u64; transition_words.div_ceil(64)];
+    for record in frozen.generator_records.iter().copied() {
+        let source = record.source_sort as usize;
+        let target = record.target_sort as usize;
+        if source >= frozen.class_ranges.len()
+            || target >= frozen.class_ranges.len()
+            || record.transition_len != frozen.class_ranges[source].len
+        {
+            return Err(FrozenObservationFileError::Format);
+        }
+        let end = record
+            .transition_start
+            .checked_add(record.transition_len)
+            .ok_or(FrozenObservationFileError::Format)?;
+        if end as usize > frozen.generator_transitions.len() {
+            return Err(FrozenObservationFileError::Format);
+        }
+        for &class in &frozen.generator_transitions[record.transition_start as usize..end as usize]
+        {
+            if !frozen.class_ranges[target].contains(class) {
+                return Err(FrozenObservationFileError::Format);
+            }
+        }
+        for transition in record.transition_start as usize..end as usize {
+            covered_transitions[transition / 64] |= 1_u64 << (transition % 64);
+        }
+    }
+    for transition in 0..transition_words {
+        if covered_transitions[transition / 64] & (1_u64 << (transition % 64)) == 0 {
+            return Err(FrozenObservationFileError::Format);
+        }
+    }
+    if frozen
+        .class_representatives
+        .iter()
+        .any(|&state| state as usize >= frozen.metrics.states)
+    {
+        return Err(FrozenObservationFileError::Format);
+    }
+    Ok(())
+}
+
+/// Load a frozen runtime quotient under explicit allocation budgets, checking
+/// every range, target, representative, metric, fingerprint, and trailing byte.
+pub fn read_frozen_observation<R: Read>(
+    reader: &mut R,
+    limits: FrozenObservationLimits,
+) -> Result<FrozenObservation, FrozenObservationFileError> {
+    let mut magic = [0_u8; 8];
+    reader.read_exact(&mut magic)?;
+    if &magic != FROZEN_OBSERVATION_MAGIC {
+        return Err(FrozenObservationFileError::Format);
+    }
+    let sort_count = read_frozen_count(reader, limits.maximum_sorts)?;
+    let entry_count = read_frozen_count(reader, limits.maximum_entry_states)?;
+    let class_count = read_frozen_count(reader, limits.maximum_classes)?;
+    let generator_count = read_frozen_count(reader, limits.maximum_generators)?;
+    let transition_count = read_frozen_count(reader, limits.maximum_transitions)?;
+    let mut metrics = [0_usize; 7];
+    for metric in &mut metrics {
+        *metric = read_var_u32(reader).map_err(|error| match error {
+            LayeredAuditError::Io(error) => FrozenObservationFileError::Io(error),
+            LayeredAuditError::Compilation(_) | LayeredAuditError::Format => {
+                FrozenObservationFileError::Format
+            }
+        })? as usize;
+    }
+    if metrics[0] > limits.maximum_states
+        || metrics[1] != class_count
+        || metrics[2] != generator_count
+    {
+        return Err(FrozenObservationFileError::Format);
+    }
+    let mut class_ranges = Vec::with_capacity(sort_count);
+    let mut entry_ranges = Vec::with_capacity(sort_count);
+    for _ in 0..sort_count {
+        class_ranges.push(SortRange {
+            start: read_var_u32(reader).map_err(map_audit_file_error)?,
+            len: read_var_u32(reader).map_err(map_audit_file_error)?,
+        });
+    }
+    for _ in 0..sort_count {
+        entry_ranges.push(SortRange {
+            start: read_var_u32(reader).map_err(map_audit_file_error)?,
+            len: read_var_u32(reader).map_err(map_audit_file_error)?,
+        });
+    }
+    let entry_classes = read_frozen_values(reader, entry_count)?;
+    let class_outputs = read_frozen_values(reader, class_count)?;
+    let class_representatives = read_frozen_values(reader, class_count)?;
+    let mut generator_records = Vec::with_capacity(generator_count);
+    for _ in 0..generator_count {
+        generator_records.push(GeneratorRecord {
+            source_sort: read_var_u32(reader).map_err(map_audit_file_error)?,
+            target_sort: read_var_u32(reader).map_err(map_audit_file_error)?,
+            transition_start: read_var_u32(reader).map_err(map_audit_file_error)?,
+            transition_len: read_var_u32(reader).map_err(map_audit_file_error)?,
+        });
+    }
+    let generator_transitions = read_frozen_values(reader, transition_count)?;
+    let mut expected_fingerprint = [0_u64; 2];
+    for word in &mut expected_fingerprint {
+        let mut bytes = [0_u8; 8];
+        reader.read_exact(&mut bytes)?;
+        *word = u64::from_le_bytes(bytes);
+    }
+    let mut trailing = [0_u8; 1];
+    if reader.read(&mut trailing)? != 0 {
+        return Err(FrozenObservationFileError::Format);
+    }
+    let actual_fingerprint = quotient_fingerprint(
+        &class_ranges,
+        &class_outputs,
+        &class_representatives,
+        &generator_records,
+        &generator_transitions,
+    );
+    if expected_fingerprint != actual_fingerprint {
+        return Err(FrozenObservationFileError::Format);
+    }
+    let frozen = FrozenObservation {
+        class_ranges: class_ranges.into_boxed_slice(),
+        entry_ranges: entry_ranges.into_boxed_slice(),
+        entry_classes,
+        class_outputs,
+        class_representatives,
+        generator_records: generator_records.into_boxed_slice(),
+        generator_transitions,
+        metrics: CompilationMetrics {
+            states: metrics[0],
+            classes: metrics[1],
+            generators: metrics[2],
+            refinement_rounds: metrics[3],
+            refinement_splits: metrics[4],
+            separators: metrics[5],
+            separator_steps: metrics[6],
+        },
+    };
+    validate_frozen_observation(&frozen)?;
+    Ok(frozen)
+}
+
+fn map_audit_file_error(error: LayeredAuditError) -> FrozenObservationFileError {
+    match error {
+        LayeredAuditError::Io(error) => FrozenObservationFileError::Io(error),
+        LayeredAuditError::Compilation(_) | LayeredAuditError::Format => {
+            FrozenObservationFileError::Format
+        }
+    }
 }
 
 /// Stream a compact replay sidecar after independently checking the source
@@ -5902,6 +6218,45 @@ mod tests {
         .unwrap();
         let frozen = direct.into_frozen(&counts, &[0]).unwrap();
         verify_frozen_layered_audit(&frozen, &mut std::io::Cursor::new(&audit)).unwrap();
+        let limits = FrozenObservationLimits {
+            maximum_sorts: 3,
+            maximum_states: 12,
+            maximum_entry_states: 4,
+            maximum_classes: generic.metrics().classes,
+            maximum_generators: layered_generators.len(),
+            maximum_transitions: generic.storage().quotient_bytes,
+        };
+        let mut frozen_bytes = Vec::new();
+        write_frozen_observation(&frozen, &mut frozen_bytes).unwrap();
+        let mut unreferenced_transition = frozen.clone();
+        let mut transitions =
+            std::mem::take(&mut unreferenced_transition.generator_transitions).into_vec();
+        transitions.push(unreferenced_transition.class_ranges[1].start);
+        unreferenced_transition.generator_transitions = transitions.into_boxed_slice();
+        assert!(write_frozen_observation(&unreferenced_transition, &mut Vec::new()).is_err());
+        let loaded =
+            read_frozen_observation(&mut std::io::Cursor::new(&frozen_bytes), limits).unwrap();
+        assert_eq!(loaded.storage(), frozen.storage());
+        verify_frozen_layered_audit(&loaded, &mut std::io::Cursor::new(&audit)).unwrap();
+        let too_small = FrozenObservationLimits {
+            maximum_classes: limits.maximum_classes - 1,
+            ..limits
+        };
+        assert!(
+            read_frozen_observation(&mut std::io::Cursor::new(&frozen_bytes), too_small).is_err()
+        );
+        let mut corrupted_frozen = frozen_bytes.clone();
+        let last = corrupted_frozen.len() - 1;
+        corrupted_frozen[last] ^= 1;
+        assert!(
+            read_frozen_observation(&mut std::io::Cursor::new(corrupted_frozen), limits).is_err()
+        );
+        let mut overlong_frozen = frozen_bytes.clone();
+        overlong_frozen[8] |= 0x80;
+        overlong_frozen.insert(9, 0);
+        assert!(
+            read_frozen_observation(&mut std::io::Cursor::new(overlong_frozen), limits).is_err()
+        );
         let mut corrupted_audit = audit.clone();
         corrupted_audit[0] ^= 1;
         assert!(

@@ -112,12 +112,23 @@ at process resolution from compilation alone; representative phase times were
 The 12.476x compiler A/B excludes this optional durable audit on the direct
 side; the evidence timings are reported separately rather than conflated.
 
+`ERGFRZ01` is the deployment artifact paired with that audit.  Its required
+loader budgets independently cap sorts, semantic states, retained entry
+states, classes, generators, and transitions before allocation.  The loader
+rejects noncanonical varints, malformed or noncontiguous ranges, untyped or
+unreferenced transitions, out-of-range witnesses, inconsistent metrics,
+fingerprint mismatch, and trailing bytes.  Varint serialization reduces the
+300,312-byte in-memory evaluator to 117,856 bytes on disk.  The committed
+artifact loads in about 0.69 ms and its audit replays in about 9.3 ms without
+running either compiler.
+
 ```sh
 papers/complete-repair-ports/ergodis/scripts/check-layered-audit-evidence.sh
 ```
 
-- audit generator: `fe3fa65ca52712cd88646ddffa3f243b0927b8e77b85792a53ba045201fcab53`;
-- audit checker: `f7a7b26ee5e04a82be594240eaa675ee98e5183a086c595838984bcbd7241a88`;
+- artifact generator: `2c6a68eefa82ff622a11182a3595343d45c47b30a65dc3e2789758842d35331c`;
+- artifact checker: `d034d233c39b382eeb7d3ca1c23e9280dc010a69369e4c709af61e87578ab4c9`;
+- frozen artifact: `af6d000ec8d205e5250f7d1bfec3543f9c4f1aecfcd80ab0c795061faad9ac50`;
 - streamed audit: `742b7e0860d927ff0b4b4521e065b14eecb8bf7885cb7db5367fb3e26e63af50`.
 
 ### Deliberate `ej` / `tt` / red-team checkpoints
