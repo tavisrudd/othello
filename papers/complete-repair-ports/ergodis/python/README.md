@@ -41,6 +41,13 @@ transfer witnesses, orbit search, and capacitated scheduling.
   returned witness. `check_c997_gurobi.py` checks the retained JSONL evidence
   and reports same-backend node, work, iteration, and wall-time ratios without
   requiring Gurobi.
+- `check_c997_parity_ab.py` checks the retained C997 physical-parity A/B. The
+  adapter exposes binary-slack, exhaustive forbidden-set, compact cascaded, and
+  root-cut controls; the latter three are research controls, not production
+  defaults.
+- `analyze_c997_support_orbits.py` derives the complete translation orbit of
+  retained C997 witnesses, replays every translated support, and measures the
+  exact multiplicity left by coordinate anchoring.
 
 For normal use, installation, commands, JSON examples, and output semantics,
 start with `../README.md`.

@@ -1,0 +1,67 @@
+{
+  "anchors": [
+    0,
+    72
+  ],
+  "c997_source_sha256": "6ba2a45137daa622dd8691691b8598bfbbd5b9f9e0028466fbd8f65177078173",
+  "group_order": 72,
+  "records": [
+    {
+      "anchor_representatives": {
+        "0": 8,
+        "72": 4
+      },
+      "anchored_representatives_total": 12,
+      "canonical_support": [
+        0,
+        1,
+        8,
+        16,
+        32,
+        48,
+        49,
+        64,
+        82,
+        84,
+        130,
+        132
+      ],
+      "canonical_support_sha256": "d7eeb173ae3d9635e2abee8fc9b54926fcc693b306865e54f5d64b1ec2ac596c",
+      "orbit_size": 72,
+      "source_anchor": 0,
+      "source_is_canonical": true,
+      "stabilizer_order": 1,
+      "weight": 12
+    },
+    {
+      "anchor_representatives": {
+        "0": 0,
+        "72": 6
+      },
+      "anchored_representatives_total": 6,
+      "canonical_support": [
+        72,
+        75,
+        78,
+        87,
+        96,
+        102,
+        108,
+        111,
+        114,
+        123,
+        132,
+        138
+      ],
+      "canonical_support_sha256": "2a9d208cfe86bda7aeee8c08a15879c536ed34731f268a381a15e487f3849e9d",
+      "orbit_size": 36,
+      "source_anchor": 72,
+      "source_is_canonical": false,
+      "stabilizer_order": 2,
+      "weight": 12
+    }
+  ],
+  "schema": "ergodis-c997-support-orbits-v1",
+  "source_evidence": "/home/tavis/src/othello/papers/complete-repair-ports/ergodis/evidence/c985-c997-parity-binary-slack-symbreak.jsonl",
+  "source_runner_sha256": "f134351755142f619f0aef79332b4cde22c965cbbe140ff0da3377528d6dbe3a"
+}

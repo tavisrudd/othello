@@ -14,6 +14,7 @@ import importlib.util
 import json
 import os
 import platform
+import re
 import time
 from importlib.metadata import version
 from pathlib import Path
@@ -21,6 +22,9 @@ from pathlib import Path
 import gurobipy as gp
 import numpy as np
 from gurobipy import GRB
+
+ROOT_RELAXATION_RE = re.compile(r"Root relaxation: objective ([^,]+)")
+PRESOLVED_RE = re.compile(r"Presolved: (\d+) rows, (\d+) columns, (\d+) nonzeros")
 
 
 def load_c997(path: Path):
@@ -114,29 +118,140 @@ def add_mod2(model: gp.Model, terms, bits: int, rhs) -> None:
     )
 
 
-def base_model(hx: np.ndarray, name: str) -> tuple[gp.Model, gp.tupledict]:
+def add_even_parity_forbidden_sets(
+    model: gp.Model, x: gp.tupledict, support: np.ndarray
+) -> None:
+    """Emit the exact even-parity polytope for one bounded check support."""
+    variables = [x[int(coordinate)] for coordinate in support]
+    width = len(variables)
+    for mask in range(1, 1 << width):
+        if mask.bit_count() & 1 == 0:
+            continue
+        coefficients = [1.0 if mask & (1 << index) else -1.0 for index in range(width)]
+        model.addConstr(gp.LinExpr(coefficients, variables) <= mask.bit_count() - 1)
+
+
+def add_xor_hull(model: gp.Model, left, right, result) -> None:
+    """Exact convex hull of result = left XOR right on three unit variables."""
+    model.addConstr(result <= left + right)
+    model.addConstr(result >= left - right)
+    model.addConstr(result >= right - left)
+    model.addConstr(result <= 2 - left - right)
+
+
+def add_even_parity_cascade(
+    model: gp.Model, x: gp.tupledict, support: np.ndarray
+) -> None:
+    """Compact exact extension of one even-parity polytope as an XOR chain."""
+    variables = [x[int(coordinate)] for coordinate in support]
+    if len(variables) == 1:
+        model.addConstr(variables[0] == 0)
+        return
+    previous = variables[0]
+    for current in variables[1:-1]:
+        result = model.addVar(lb=0.0, ub=1.0, vtype=GRB.CONTINUOUS)
+        add_xor_hull(model, previous, current, result)
+        previous = result
+    model.addConstr(previous == variables[-1])
+
+
+def root_parity_cut_callback(model: gp.Model, where: int) -> None:
+    """Separate supplied physical parity hulls only while processing the root."""
+    if where != GRB.Callback.MIPNODE:
+        return
+    if model.cbGet(GRB.Callback.MIPNODE_STATUS) != GRB.OPTIMAL:
+        return
+    if model.cbGet(GRB.Callback.MIPNODE_NODCNT) > 0.5:
+        return
+    started = time.perf_counter()
+    stats = model._root_parity_cut_stats
+    stats["calls"] += 1
+    bound = float(model.cbGet(GRB.Callback.MIPNODE_OBJBND))
+    stats["best_bound"] = max(stats["best_bound"], bound)
+    values = model.cbGetNodeRel(model._root_parity_x)
+    for coordinates, variables in zip(
+        model._root_parity_coordinates, model._root_parity_variables, strict=True
+    ):
+        mask = 0
+        closest_index = 0
+        closest_distance = float("inf")
+        for index, coordinate in enumerate(coordinates):
+            value = values[coordinate]
+            if value > 0.5:
+                mask |= 1 << index
+            distance = abs(2.0 * value - 1.0)
+            if distance < closest_distance:
+                closest_distance = distance
+                closest_index = index
+        if mask.bit_count() & 1 == 0:
+            mask ^= 1 << closest_index
+        penalty = 0.0
+        for index, coordinate in enumerate(coordinates):
+            value = values[coordinate]
+            penalty += 1.0 - value if mask & (1 << index) else value
+        if penalty >= 1.0 - 1e-7:
+            continue
+        coefficients = [
+            1.0 if mask & (1 << index) else -1.0 for index in range(len(coordinates))
+        ]
+        model.cbCut(gp.LinExpr(coefficients, variables) <= mask.bit_count() - 1)
+        stats["cuts"] += 1
+    stats["seconds"] += time.perf_counter() - started
+
+
+def base_model(
+    hx: np.ndarray, name: str, physical_parity_encoding: str
+) -> tuple[gp.Model, gp.tupledict]:
     model = gp.Model(name)
     n = hx.shape[1]
     x = model.addVars(n, vtype=GRB.BINARY, name="x")
     model.setObjective(x.sum(), GRB.MINIMIZE)
     bits = int(np.ceil(np.log2(int(np.max(hx.sum(axis=1))))))
+    cut_coordinates = []
+    cut_variables = []
     for row in range(hx.shape[0]):
         support = np.flatnonzero(hx[row])
-        add_mod2(model, (x[int(q)] for q in support), bits, 0)
+        if physical_parity_encoding in ("binary-slack", "root-cuts"):
+            add_mod2(model, (x[int(q)] for q in support), bits, 0)
+            if physical_parity_encoding == "root-cuts":
+                coordinates = tuple(int(q) for q in support)
+                cut_coordinates.append(coordinates)
+                cut_variables.append(tuple(x[q] for q in coordinates))
+        elif physical_parity_encoding == "forbidden-set":
+            add_even_parity_forbidden_sets(model, x, support)
+        else:
+            add_even_parity_cascade(model, x, support)
+    if physical_parity_encoding == "root-cuts":
+        model._root_parity_x = [x[index] for index in range(n)]
+        model._root_parity_coordinates = cut_coordinates
+        model._root_parity_variables = cut_variables
+        model._root_parity_cut_stats = {
+            "calls": 0,
+            "cuts": 0,
+            "seconds": 0.0,
+            "best_bound": float("-inf"),
+        }
     return model, x
 
 
-def model_per_logical(hx: np.ndarray, logical: np.ndarray, index: int):
-    model, x = base_model(hx, f"gross_per_logical_{index}")
+def model_per_logical(
+    hx: np.ndarray, logical: np.ndarray, index: int, physical_parity_encoding: str
+):
+    model, x = base_model(hx, f"gross_per_logical_{index}", physical_parity_encoding)
     support = np.flatnonzero(logical)
     bits = int(np.ceil(np.log2(int(support.size))))
     add_mod2(model, (x[int(q)] for q in support), bits, 1)
     return model, x
 
 
-def model_global(hx: np.ndarray, lx: np.ndarray, anchor: int | None):
+def model_global(
+    hx: np.ndarray,
+    lx: np.ndarray,
+    anchor: int | None,
+    physical_parity_encoding: str,
+):
     suffix = "global" if anchor is None else f"anchor_{anchor}"
-    model, x = base_model(hx, f"gross_{suffix}")
+    model, x = base_model(hx, f"gross_{suffix}", physical_parity_encoding)
     parity = model.addVars(lx.shape[0], vtype=GRB.BINARY, name="parity")
     for i in range(lx.shape[0]):
         support = np.flatnonzero(lx[i])
@@ -190,6 +305,7 @@ def solve(
     log_path: Path,
     time_limit: float,
     seed: int,
+    model_build_seconds: float,
     logical: int | None = None,
     anchor: int | None = None,
 ) -> dict:
@@ -200,9 +316,28 @@ def solve(
     model.Params.TimeLimit = time_limit
     model.Params.LogFile = str(log_path)
     model.Params.LogToConsole = 0
+    if hasattr(model, "_root_parity_cut_stats"):
+        model.Params.PreCrush = 1
     start = time.perf_counter()
-    model.optimize()
+    if hasattr(model, "_root_parity_cut_stats"):
+        model.optimize(root_parity_cut_callback)
+    else:
+        model.optimize()
     wall = time.perf_counter() - start
+    root_relaxation = None
+    presolved = None
+    with log_path.open(encoding="utf-8", errors="replace") as log:
+        for line in log:
+            match = ROOT_RELAXATION_RE.search(line)
+            if match:
+                root_relaxation = float(match.group(1))
+            match = PRESOLVED_RE.search(line)
+            if match:
+                presolved = {
+                    "rows": int(match.group(1)),
+                    "columns": int(match.group(2)),
+                    "nonzeros": int(match.group(3)),
+                }
     result = {
         "kind": "solve",
         "name": model.ModelName,
@@ -215,6 +350,7 @@ def solve(
             GRB.INFEASIBLE: "INFEASIBLE",
         }.get(model.Status, f"STATUS_{model.Status}"),
         "wall_seconds": wall,
+        "model_build_seconds": model_build_seconds,
         "runtime_seconds": float(model.Runtime),
         "work": float(model.Work),
         "nodes": float(model.NodeCount),
@@ -223,7 +359,14 @@ def solve(
         "num_vars": int(model.NumVars),
         "num_constraints": int(model.NumConstrs),
         "log_path": str(log_path),
+        "root_relaxation": root_relaxation,
+        "presolved": presolved,
     }
+    if hasattr(model, "_root_parity_cut_stats"):
+        cut_stats = dict(model._root_parity_cut_stats)
+        if cut_stats["best_bound"] == float("-inf"):
+            cut_stats["best_bound"] = None
+        result["root_parity_cuts"] = cut_stats
     if model.SolCount:
         result["objective"] = float(model.ObjVal)
         result["witness"] = replay_witness(hx, lx, x, model.ObjVal, logical, anchor)
@@ -246,6 +389,11 @@ def main() -> int:
     parser.add_argument("--time-limit", type=float, default=900.0)
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--logicals", default="all")
+    parser.add_argument(
+        "--physical-parity-encoding",
+        choices=("binary-slack", "forbidden-set", "cascaded", "root-cuts"),
+        default="binary-slack",
+    )
     args = parser.parse_args()
 
     c997 = load_c997(args.c997_source.resolve())
@@ -259,8 +407,9 @@ def main() -> int:
     sink.emit(
         {
             "kind": "header",
-            "schema": "ergodis-c997-gurobi-v1",
+            "schema": "ergodis-c997-gurobi-v2",
             "mode": args.mode,
+            "physical_parity_encoding": args.physical_parity_encoding,
             "solver": f"Gurobi {gp.gurobi.version()}",
             "package_versions": {
                 package: version(package)
@@ -290,7 +439,11 @@ def main() -> int:
                 else (int(v) for v in args.logicals.split(","))
             )
             for index in indices:
-                model, x = model_per_logical(hx, lx[index], index)
+                build_start = time.perf_counter()
+                model, x = model_per_logical(
+                    hx, lx[index], index, args.physical_parity_encoding
+                )
+                build_seconds = time.perf_counter() - build_start
                 result = solve(
                     model,
                     x,
@@ -299,13 +452,16 @@ def main() -> int:
                     args.log_dir / f"per_logical_{index}.log",
                     args.time_limit,
                     args.seed,
+                    build_seconds,
                     logical=index,
                 )
                 sink.emit(result)
                 results.append(result)
                 model.dispose()
         elif args.mode == "global":
-            model, x = model_global(hx, lx, None)
+            build_start = time.perf_counter()
+            model, x = model_global(hx, lx, None, args.physical_parity_encoding)
+            build_seconds = time.perf_counter() - build_start
             result = solve(
                 model,
                 x,
@@ -314,13 +470,16 @@ def main() -> int:
                 args.log_dir / "global.log",
                 args.time_limit,
                 args.seed,
+                build_seconds,
             )
             sink.emit(result)
             results.append(result)
             model.dispose()
         else:
             for anchor in anchors:
-                model, x = model_global(hx, lx, anchor)
+                build_start = time.perf_counter()
+                model, x = model_global(hx, lx, anchor, args.physical_parity_encoding)
+                build_seconds = time.perf_counter() - build_start
                 result = solve(
                     model,
                     x,
@@ -329,6 +488,7 @@ def main() -> int:
                     args.log_dir / f"anchor_{anchor}.log",
                     args.time_limit,
                     args.seed,
+                    build_seconds,
                     anchor=anchor,
                 )
                 sink.emit(result)
