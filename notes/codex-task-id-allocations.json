@@ -3824,8 +3824,17 @@
       "last": 997,
       "purpose": "symmetry-reduction gate experiment for exact qLDPC distance solvers",
       "sequence": 425
+    },
+    {
+      "count": 1,
+      "first": 998,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 998,
+      "purpose": "ergodis public/private crate partition and disclosure-sequence design",
+      "sequence": 426
     }
   ],
-  "next_id": 998,
+  "next_id": 999,
   "schema": "codex-task-id-allocations-v1"
 }
