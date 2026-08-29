@@ -48,7 +48,10 @@ def main() -> int:
     parser.add_argument("--gurobi", type=Path, required=True)
     args = parser.parse_args()
     record = read_native(args.native)
-    if record["schema"] != "ergodis-css-distance-native-v1":
+    if record["schema"] not in {
+        "ergodis-css-distance-native-v1",
+        "ergodis-css-distance-native-v2",
+    }:
         raise ValueError("native schema mismatch")
     if record["mode"] != "certify-incumbent" or record["maximum_weight"] != 12:
         raise ValueError("native run did not certify the supplied incumbent")
@@ -71,11 +74,26 @@ def main() -> int:
         raise ValueError("native witness failed independent GF(2) replay")
 
     native_median = statistics.median(record["search_seconds"])
-    cold = record["compile_seconds"] + native_median
+    if record["schema"] == "ergodis-css-distance-native-v1":
+        preparation_mode = "compile"
+        preparation = record["compile_seconds"]
+        artifact_payload_blake3 = None
+    else:
+        preparation_mode = record["preparation_mode"]
+        preparation = record["preparation_seconds"]
+        artifact_payload_blake3 = record["artifact_payload_blake3"]
+        if preparation_mode == "artifact-load" and (
+            not isinstance(artifact_payload_blake3, str)
+            or len(artifact_payload_blake3) != 64
+        ):
+            raise ValueError("loaded artifact is not bound by a payload checksum")
+    cold = preparation + native_median
     gurobi = gurobi_wall(args.gurobi)
     output = {
         "native_rounds": len(record["search_seconds"]),
-        "native_compile_seconds": record["compile_seconds"],
+        "native_preparation_mode": preparation_mode,
+        "native_preparation_seconds": preparation,
+        "artifact_payload_blake3": artifact_payload_blake3,
         "native_search_median_seconds": native_median,
         "native_cold_seconds": cold,
         "gurobi_anchored_wall_seconds": gurobi,

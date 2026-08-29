@@ -183,6 +183,9 @@ logical observations, verified coordinate-orbit anchors, and an optional
 incumbent support. It independently replays the incumbent and exhaustively
 closes every smaller connected-support class. `--rounds` reuses the compiled
 residual-syndrome filters; `--evidence` writes one create-only JSONL record.
+`--compiled-out` creates a versioned, checksummed filter artifact, and
+`--compiled-in` reloads it only when its cryptographic source fingerprint
+matches the supplied matrices. Artifact and evidence output never overwrite.
 
 ### Contextual-state library APIs
 

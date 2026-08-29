@@ -2,6 +2,7 @@ use anyhow::{bail, Context, Result};
 use clap::Parser;
 use ergodis::{CompiledCssDistance, Matrix};
 use serde::{Deserialize, Serialize};
+use std::fmt::Write as _;
 use std::fs::{File, OpenOptions};
 use std::io::{BufReader, BufWriter, Write};
 use std::path::PathBuf;
@@ -17,6 +18,12 @@ struct Args {
     /// Create a JSONL evidence stream. Existing files are never overwritten.
     #[arg(long)]
     evidence: Option<PathBuf>,
+    /// Load a source-bound compiled filter artifact instead of rebuilding it.
+    #[arg(long, conflicts_with = "compiled_out")]
+    compiled_in: Option<PathBuf>,
+    /// Create a compiled filter artifact. Existing files are never overwritten.
+    #[arg(long, conflicts_with = "compiled_in")]
+    compiled_out: Option<PathBuf>,
     #[arg(long, default_value_t = 1)]
     rounds: u16,
 }
@@ -43,7 +50,10 @@ struct RunRecord<'a> {
     anchors: &'a [u16],
     maximum_weight: u16,
     mode: &'static str,
-    compile_seconds: f64,
+    preparation_mode: &'static str,
+    preparation_seconds: f64,
+    artifact_write_seconds: Option<f64>,
+    artifact_payload_blake3: Option<String>,
     search_seconds: &'a [f64],
     result: &'a ergodis::BoundedCssDistanceResult,
 }
@@ -92,9 +102,40 @@ fn main() -> Result<()> {
     let columns = usize::from(problem.coordinate_count);
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
-    let compile_start = Instant::now();
-    let compiled = CompiledCssDistance::compile(&physical, &logical)?;
-    let compile_seconds = compile_start.elapsed().as_secs_f64();
+    let preparation_start = Instant::now();
+    let (compiled, preparation_mode) = if let Some(path) = &args.compiled_in {
+        let file = File::open(path)
+            .with_context(|| format!("opening compiled artifact {}", path.display()))?;
+        (
+            CompiledCssDistance::read_artifact(&physical, &logical, BufReader::new(file))?,
+            "artifact-load",
+        )
+    } else {
+        (
+            CompiledCssDistance::compile(&physical, &logical)?,
+            "compile",
+        )
+    };
+    let preparation_seconds = preparation_start.elapsed().as_secs_f64();
+    let artifact_write_seconds = if let Some(path) = &args.compiled_out {
+        let start = Instant::now();
+        let file = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(path)
+            .with_context(|| format!("creating compiled artifact {}", path.display()))?;
+        compiled.write_artifact(BufWriter::new(file))?;
+        Some(start.elapsed().as_secs_f64())
+    } else {
+        None
+    };
+    let artifact_payload_blake3 = compiled.artifact_payload_blake3().map(|digest| {
+        let mut encoded = String::with_capacity(64);
+        for byte in digest {
+            write!(&mut encoded, "{byte:02x}").expect("writing to a String cannot fail");
+        }
+        encoded
+    });
     let maximum_weight = args.maximum_weight.unwrap_or(problem.maximum_weight);
     if args.rounds == 0 {
         bail!("round count must be positive");
@@ -125,7 +166,7 @@ fn main() -> Result<()> {
     }
     let result = result.expect("positive round count checked above");
     let record = RunRecord {
-        schema: "ergodis-css-distance-native-v1",
+        schema: "ergodis-css-distance-native-v2",
         label: &problem.label,
         coordinate_count: problem.coordinate_count,
         physical_checks: problem.physical_checks.len(),
@@ -133,7 +174,10 @@ fn main() -> Result<()> {
         anchors: &problem.anchors,
         maximum_weight,
         mode,
-        compile_seconds,
+        preparation_mode,
+        preparation_seconds,
+        artifact_write_seconds,
+        artifact_payload_blake3,
         search_seconds: &search_seconds,
         result: &result,
     };

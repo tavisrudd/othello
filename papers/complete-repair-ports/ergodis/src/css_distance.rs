@@ -9,6 +9,8 @@
 
 use crate::matrix::Matrix;
 use serde::Serialize;
+use sha2::{Digest, Sha256};
+use std::io::{self, Read, Write};
 use thiserror::Error;
 
 const MAX_COORDINATES: usize = 256;
@@ -17,6 +19,9 @@ const MAX_LOGICALS: usize = 64;
 const SUPPORT_WORDS: usize = MAX_COORDINATES / 64;
 const SYNDROME_WORDS: usize = MAX_CHECKS / 64;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
+const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
+const ARTIFACT_VERSION: u16 = 1;
+const MAX_ARTIFACT_BLOOM_WORDS: usize = FOUR_COMPLETION_BLOOM_BITS / 64;
 
 #[derive(Debug, Clone, PartialEq, Eq, Error)]
 pub enum CssDistanceError {
@@ -40,6 +45,24 @@ pub enum CssDistanceError {
     IncumbentPhysicalSyndrome,
     #[error("incumbent support has zero logical observation")]
     IncumbentLogicalObservation,
+}
+
+#[derive(Debug, Error)]
+pub enum CssDistanceArtifactError {
+    #[error(transparent)]
+    Io(#[from] io::Error),
+    #[error("compiled CSS artifact has an invalid magic or version")]
+    Format,
+    #[error("compiled CSS artifact does not match the supplied matrices")]
+    SourceMismatch,
+    #[error("compiled CSS artifact has invalid dimensions or section lengths")]
+    Shape,
+    #[error("compiled CSS artifact payload checksum failed")]
+    Checksum,
+    #[error("compiled CSS artifact contains trailing bytes")]
+    TrailingBytes,
+    #[error(transparent)]
+    Problem(#[from] CssDistanceError),
 }
 
 #[repr(C)]
@@ -134,7 +157,7 @@ impl PackedSyndrome {
 }
 
 #[repr(C)]
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 struct PackedColumn {
     syndrome: PackedSyndrome,
     logical: u64,
@@ -231,6 +254,153 @@ pub struct CompiledCssDistance {
     logical_count: u8,
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
+    source_sha256: [u8; 32],
+    artifact_payload_blake3: Option<[u8; 32]>,
+}
+
+struct CompiledStructure {
+    columns: Box<[PackedColumn]>,
+    neighbors: Box<[PackedSupport]>,
+    maximum_column_check_weight: u8,
+    kernel_weights_even: bool,
+}
+
+struct HashingWriter<W> {
+    inner: W,
+    hasher: blake3::Hasher,
+}
+
+impl<W: Write> HashingWriter<W> {
+    fn bytes(&mut self, bytes: &[u8]) -> io::Result<()> {
+        self.inner.write_all(bytes)?;
+        self.hasher.update(bytes);
+        Ok(())
+    }
+
+    fn finish(mut self) -> io::Result<W> {
+        let digest = self.hasher.finalize();
+        self.inner.write_all(digest.as_bytes())?;
+        Ok(self.inner)
+    }
+}
+
+struct HashingReader<R> {
+    inner: R,
+    hasher: blake3::Hasher,
+}
+
+impl<R: Read> HashingReader<R> {
+    fn bytes(&mut self, bytes: &mut [u8]) -> io::Result<()> {
+        self.inner.read_exact(bytes)?;
+        self.hasher.update(&*bytes);
+        Ok(())
+    }
+
+    fn finish(mut self) -> Result<[u8; 32], CssDistanceArtifactError> {
+        let actual = *self.hasher.finalize().as_bytes();
+        let mut expected = [0u8; 32];
+        self.inner.read_exact(&mut expected)?;
+        if actual != expected {
+            return Err(CssDistanceArtifactError::Checksum);
+        }
+        let mut trailing = [0u8; 1];
+        if self.inner.read(&mut trailing)? != 0 {
+            return Err(CssDistanceArtifactError::TrailingBytes);
+        }
+        Ok(actual)
+    }
+}
+
+fn write_u16<W: Write>(writer: &mut HashingWriter<W>, value: u16) -> io::Result<()> {
+    writer.bytes(&value.to_le_bytes())
+}
+
+fn write_u64<W: Write>(writer: &mut HashingWriter<W>, value: u64) -> io::Result<()> {
+    writer.bytes(&value.to_le_bytes())
+}
+
+fn write_len<W: Write>(writer: &mut HashingWriter<W>, length: usize) -> io::Result<()> {
+    let length = u32::try_from(length)
+        .map_err(|_| io::Error::new(io::ErrorKind::InvalidInput, "artifact section too large"))?;
+    writer.bytes(&length.to_le_bytes())
+}
+
+fn write_u64_slice<W: Write>(writer: &mut HashingWriter<W>, values: &[u64]) -> io::Result<()> {
+    if cfg!(target_endian = "little") {
+        return writer.bytes(bytemuck::cast_slice(values));
+    }
+    for &value in values {
+        write_u64(writer, value)?;
+    }
+    Ok(())
+}
+
+fn read_u16<R: Read>(reader: &mut HashingReader<R>) -> io::Result<u16> {
+    let mut bytes = [0u8; 2];
+    reader.bytes(&mut bytes)?;
+    Ok(u16::from_le_bytes(bytes))
+}
+
+fn read_u32<R: Read>(reader: &mut HashingReader<R>) -> io::Result<u32> {
+    let mut bytes = [0u8; 4];
+    reader.bytes(&mut bytes)?;
+    Ok(u32::from_le_bytes(bytes))
+}
+
+fn read_u64<R: Read>(reader: &mut HashingReader<R>) -> io::Result<u64> {
+    let mut bytes = [0u8; 8];
+    reader.bytes(&mut bytes)?;
+    Ok(u64::from_le_bytes(bytes))
+}
+
+fn read_len<R: Read>(
+    reader: &mut HashingReader<R>,
+    maximum: usize,
+) -> Result<usize, CssDistanceArtifactError> {
+    let length = read_u32(reader)? as usize;
+    if length > maximum {
+        return Err(CssDistanceArtifactError::Shape);
+    }
+    Ok(length)
+}
+
+fn read_syndromes<R: Read>(
+    reader: &mut HashingReader<R>,
+    maximum: usize,
+) -> Result<Box<[u128]>, CssDistanceArtifactError> {
+    let length = read_len(reader, maximum)?;
+    let mut values = vec![0u128; length];
+    for value in &mut values {
+        let mut bytes = [0u8; 16];
+        reader.bytes(&mut bytes)?;
+        *value = u128::from_le_bytes(bytes);
+    }
+    Ok(values.into_boxed_slice())
+}
+
+fn read_bloom<R: Read>(
+    reader: &mut HashingReader<R>,
+) -> Result<CompletionBloom, CssDistanceArtifactError> {
+    let length = read_len(reader, MAX_ARTIFACT_BLOOM_WORDS)?;
+    if length == 0 || !length.is_power_of_two() {
+        return Err(CssDistanceArtifactError::Shape);
+    }
+    let mut words = vec![0u64; length];
+    if cfg!(target_endian = "little") {
+        reader.bytes(bytemuck::cast_slice_mut(&mut words))?;
+    } else {
+        for word in &mut words {
+            *word = read_u64(reader)?;
+        }
+    }
+    Ok(CompletionBloom {
+        words: words.into_boxed_slice(),
+        bit_mask: (length * 64 - 1) as u64,
+    })
+}
+
+fn strictly_sorted(values: &[u128]) -> bool {
+    values.windows(2).all(|pair| pair[0] < pair[1])
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize)]
@@ -256,7 +426,26 @@ pub struct BoundedCssDistanceResult {
 }
 
 impl CompiledCssDistance {
-    pub fn compile(physical: &Matrix, logical: &Matrix) -> Result<Self, CssDistanceError> {
+    fn source_sha256(physical: &Matrix, logical: &Matrix) -> [u8; 32] {
+        let mut hasher = Sha256::new();
+        hasher.update(b"ergodis-css-distance-source-v1\0");
+        for dimension in [
+            physical.rows(),
+            physical.cols(),
+            logical.rows(),
+            logical.cols(),
+        ] {
+            hasher.update((dimension as u64).to_le_bytes());
+        }
+        hasher.update(physical.as_slice());
+        hasher.update(logical.as_slice());
+        hasher.finalize().into()
+    }
+
+    fn compile_structure(
+        physical: &Matrix,
+        logical: &Matrix,
+    ) -> Result<CompiledStructure, CssDistanceError> {
         let coordinate_count = physical.cols();
         if coordinate_count > MAX_COORDINATES {
             return Err(CssDistanceError::TooManyCoordinates);
@@ -307,6 +496,21 @@ impl CompiledCssDistance {
             );
             kernel_weights_even &= column.syndrome.weight() & 1 == 1;
         }
+        Ok(CompiledStructure {
+            columns: columns.into_boxed_slice(),
+            neighbors: neighbors.into_boxed_slice(),
+            maximum_column_check_weight,
+            kernel_weights_even,
+        })
+    }
+
+    pub fn compile(physical: &Matrix, logical: &Matrix) -> Result<Self, CssDistanceError> {
+        let coordinate_count = physical.cols();
+        let structure = Self::compile_structure(physical, logical)?;
+        let columns = structure.columns;
+        let neighbors = structure.neighbors;
+        let maximum_column_check_weight = structure.maximum_column_check_weight;
+        let kernel_weights_even = structure.kernel_weights_even;
         let mut short_completion_syndromes = [Vec::new(), Vec::new(), Vec::new()];
         short_completion_syndromes[0].reserve(columns.len());
         short_completion_syndromes[1].reserve(
@@ -378,8 +582,8 @@ impl CompiledCssDistance {
         ];
 
         Ok(Self {
-            columns: columns.into_boxed_slice(),
-            neighbors: neighbors.into_boxed_slice(),
+            columns,
+            neighbors,
             short_completion_syndromes,
             three_completion_bloom,
             four_completion_bloom,
@@ -388,7 +592,155 @@ impl CompiledCssDistance {
             logical_count: logical.rows() as u8,
             maximum_column_check_weight,
             kernel_weights_even,
+            source_sha256: Self::source_sha256(physical, logical),
+            artifact_payload_blake3: None,
         })
+    }
+
+    /// Write the expensive completion filters as a versioned, checksummed cache artifact.
+    pub fn write_artifact<W: Write>(&self, mut writer: W) -> Result<(), CssDistanceArtifactError> {
+        writer.write_all(ARTIFACT_MAGIC)?;
+        let mut writer = HashingWriter {
+            inner: writer,
+            hasher: blake3::Hasher::new(),
+        };
+        write_u16(&mut writer, ARTIFACT_VERSION)?;
+        writer.bytes(&self.source_sha256)?;
+        write_u16(&mut writer, self.coordinate_count)?;
+        write_u16(&mut writer, self.check_count)?;
+        writer.bytes(&[
+            self.logical_count,
+            self.maximum_column_check_weight,
+            u8::from(self.kernel_weights_even),
+            0,
+        ])?;
+        write_len(&mut writer, self.columns.len())?;
+        for column in &self.columns {
+            write_u64(&mut writer, column.syndrome.words[0])?;
+            write_u64(&mut writer, column.syndrome.words[1])?;
+            write_u64(&mut writer, column.logical)?;
+        }
+        write_len(&mut writer, self.neighbors.len())?;
+        for support in &self.neighbors {
+            for word in support.words {
+                write_u64(&mut writer, word)?;
+            }
+        }
+        for syndromes in &self.short_completion_syndromes {
+            write_len(&mut writer, syndromes.len())?;
+            for &syndrome in syndromes.iter() {
+                writer.bytes(&syndrome.to_le_bytes())?;
+            }
+        }
+        for bloom in [&self.three_completion_bloom, &self.four_completion_bloom] {
+            write_len(&mut writer, bloom.words.len())?;
+            write_u64_slice(&mut writer, &bloom.words)?;
+        }
+        let mut writer = writer.finish()?;
+        writer.flush()?;
+        Ok(())
+    }
+
+    /// Load a compiled cache only when it is bound to exactly these source matrices.
+    pub fn read_artifact<R: Read>(
+        physical: &Matrix,
+        logical: &Matrix,
+        mut reader: R,
+    ) -> Result<Self, CssDistanceArtifactError> {
+        let mut magic = [0u8; 8];
+        reader.read_exact(&mut magic)?;
+        if &magic != ARTIFACT_MAGIC {
+            return Err(CssDistanceArtifactError::Format);
+        }
+        let mut reader = HashingReader {
+            inner: reader,
+            hasher: blake3::Hasher::new(),
+        };
+        if read_u16(&mut reader)? != ARTIFACT_VERSION {
+            return Err(CssDistanceArtifactError::Format);
+        }
+        let mut source_sha256 = [0u8; 32];
+        reader.bytes(&mut source_sha256)?;
+        if source_sha256 != Self::source_sha256(physical, logical) {
+            return Err(CssDistanceArtifactError::SourceMismatch);
+        }
+        let coordinate_count = read_u16(&mut reader)?;
+        let check_count = read_u16(&mut reader)?;
+        let mut flags = [0u8; 4];
+        reader.bytes(&mut flags)?;
+        let logical_count = flags[0];
+        let maximum_column_check_weight = flags[1];
+        let kernel_weights_even = match flags[2] {
+            0 => false,
+            1 => true,
+            _ => return Err(CssDistanceArtifactError::Shape),
+        };
+        if flags[3] != 0
+            || usize::from(coordinate_count) != physical.cols()
+            || usize::from(check_count) != physical.rows()
+            || usize::from(logical_count) != logical.rows()
+        {
+            return Err(CssDistanceArtifactError::Shape);
+        }
+
+        let column_len = read_len(&mut reader, MAX_COORDINATES)?;
+        if column_len != usize::from(coordinate_count) {
+            return Err(CssDistanceArtifactError::Shape);
+        }
+        let mut columns = vec![PackedColumn::default(); column_len];
+        for column in &mut columns {
+            column.syndrome.words[0] = read_u64(&mut reader)?;
+            column.syndrome.words[1] = read_u64(&mut reader)?;
+            column.logical = read_u64(&mut reader)?;
+        }
+        let neighbor_len = read_len(&mut reader, MAX_COORDINATES)?;
+        if neighbor_len != column_len {
+            return Err(CssDistanceArtifactError::Shape);
+        }
+        let mut neighbors = vec![PackedSupport::default(); neighbor_len];
+        for support in &mut neighbors {
+            for word in &mut support.words {
+                *word = read_u64(&mut reader)?;
+            }
+        }
+        let maximum_pairs = column_len.saturating_mul(column_len.saturating_sub(1)) / 2;
+        let one_completion = read_syndromes(&mut reader, column_len)?;
+        let two_completion = read_syndromes(&mut reader, maximum_pairs)?;
+        let three_completion_bloom = read_bloom(&mut reader)?;
+        let four_completion_bloom = read_bloom(&mut reader)?;
+        let artifact_payload_blake3 = reader.finish()?;
+
+        if !strictly_sorted(&one_completion) || !strictly_sorted(&two_completion) {
+            return Err(CssDistanceArtifactError::Shape);
+        }
+        let expected = Self::compile_structure(physical, logical)?;
+        if columns.as_slice() != expected.columns.as_ref()
+            || neighbors.as_slice() != expected.neighbors.as_ref()
+            || maximum_column_check_weight != expected.maximum_column_check_weight
+            || kernel_weights_even != expected.kernel_weights_even
+        {
+            return Err(CssDistanceArtifactError::Shape);
+        }
+        Ok(Self {
+            columns: columns.into_boxed_slice(),
+            neighbors: neighbors.into_boxed_slice(),
+            short_completion_syndromes: [one_completion, two_completion],
+            three_completion_bloom,
+            four_completion_bloom,
+            coordinate_count,
+            check_count,
+            logical_count,
+            maximum_column_check_weight,
+            kernel_weights_even,
+            source_sha256,
+            artifact_payload_blake3: Some(artifact_payload_blake3),
+        })
+    }
+
+    /// Payload checksum of a successfully loaded artifact.
+    #[inline]
+    pub fn artifact_payload_blake3(&self) -> Option<[u8; 32]> {
+        self.artifact_payload_blake3
     }
 
     #[inline]
@@ -689,5 +1041,57 @@ mod tests {
         let answer = compiled.search_bounded(&[0, 1, 2, 3, 4], 5).unwrap();
         assert_eq!(answer.distance, Some(1));
         assert_eq!(&*answer.witness, &[4]);
+    }
+
+    fn artifact_problem() -> (Matrix, Matrix) {
+        (
+            Matrix::new::<2>(2, 5, vec![1, 1, 0, 0, 0, 0, 1, 1, 1, 0]).unwrap(),
+            Matrix::new::<2>(1, 5, vec![1, 0, 1, 0, 1]).unwrap(),
+        )
+    }
+
+    #[test]
+    fn compiled_artifact_round_trips_exact_search() {
+        let (physical, logical) = artifact_problem();
+        let compiled = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let mut artifact = Vec::new();
+        compiled.write_artifact(&mut artifact).unwrap();
+        let loaded = CompiledCssDistance::read_artifact(&physical, &logical, &*artifact).unwrap();
+        assert_eq!(
+            loaded.search_bounded(&[0, 1, 2, 3, 4], 5).unwrap(),
+            compiled.search_bounded(&[0, 1, 2, 3, 4], 5).unwrap()
+        );
+    }
+
+    #[test]
+    fn compiled_artifact_rejects_another_source() {
+        let (physical, logical) = artifact_problem();
+        let compiled = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let mut artifact = Vec::new();
+        compiled.write_artifact(&mut artifact).unwrap();
+        let other_logical = Matrix::new::<2>(1, 5, vec![0, 0, 1, 0, 1]).unwrap();
+        assert!(matches!(
+            CompiledCssDistance::read_artifact(&physical, &other_logical, &*artifact),
+            Err(CssDistanceArtifactError::SourceMismatch)
+        ));
+    }
+
+    #[test]
+    fn compiled_artifact_rejects_corruption_and_trailing_bytes() {
+        let (physical, logical) = artifact_problem();
+        let compiled = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let mut artifact = Vec::new();
+        compiled.write_artifact(&mut artifact).unwrap();
+        let middle = artifact.len() / 2;
+        artifact[middle] ^= 1;
+        assert!(CompiledCssDistance::read_artifact(&physical, &logical, &*artifact).is_err());
+
+        let mut artifact = Vec::new();
+        compiled.write_artifact(&mut artifact).unwrap();
+        artifact.push(0);
+        assert!(matches!(
+            CompiledCssDistance::read_artifact(&physical, &logical, &*artifact),
+            Err(CssDistanceArtifactError::TrailingBytes)
+        ));
     }
 }

@@ -107,6 +107,7 @@ HASHED_PATHS = (
     "evidence/c985-c997-parity-root-cuts-symbreak.jsonl",
     "evidence/c985-c997-optimal-support-orbits.json",
     "evidence/c985-c997-native-distance.jsonl",
+    "evidence/c985-c997-native-cached-distance.jsonl",
     "evidence/c985-c997-native-input.json",
     "evidence/c997-gurobi-13.0.2-global-seed1.jsonl",
     "evidence/c997-gurobi-13.0.2-per-logical-seed1.jsonl",

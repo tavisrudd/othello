@@ -62,7 +62,8 @@ pub use contextual::{
     RankStratifiedEnvelope,
 };
 pub use css_distance::{
-    BoundedCssDistanceResult, CompiledCssDistance, ConnectedSearchStats, CssDistanceError,
+    BoundedCssDistanceResult, CompiledCssDistance, ConnectedSearchStats, CssDistanceArtifactError,
+    CssDistanceError,
 };
 pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
