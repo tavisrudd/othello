@@ -1274,17 +1274,16 @@ independently and combines their fronts once.  Nine interleaved rounds run
 identity, quotient, and specialized stages in separate CPU-2 processes, each
 amortizing 1,000 solves, and give:
 
-- identity quotient / minimized quotient: 4.536x geometric mean, log-ratio
-  t = 359.94;
-- minimized quotient / exact factorized DP: 1.010x geometric mean, log-ratio
-  t = 1.91.
+- identity quotient / minimized quotient: 4.511x geometric mean, log-ratio
+  t = 425.61;
+- minimized quotient / exact factorized DP: 0.984x geometric mean, log-ratio
+  t = -3.98.
 
 The identity artifact gives every concrete state a distinct observation but
 maps those observations back to the same base fronts at evaluation.  It uses
 the identical consuming algorithm, retained-entry obligation, objective
-tables, and witness operation; the 4.536x ratio isolates contextual
-minimization.  The minimized engine has no statistically resolved gap from the
-stronger
+tables, and witness operation; the 4.511x ratio isolates contextual
+minimization.  The minimized engine is 1.6% faster than the stronger
 branch-factorized solver.  The legacy Cartesian DP remains an independent
 correctness oracle and is not used for the quotient speedup claim.
 
@@ -1298,7 +1297,7 @@ scripts/check-shuffle-product-control.sh \
 
 - benchmark script: `0375db708d1741a21c1be72e653d36c25931625ccf8234ebb2858bbdb6f80ce6`;
 - checker: `053cb6d5d8ebc1933994af8903b095b1a9e03f518720542b88e7939e816a3761`;
-- evidence TSV: `b0337b37ee31c1131753103dd9de4a5811551f8e979f8669d989ab623a7d395f`.
+- evidence TSV: `2cc795b91013fb12afc9760948fc0f9b8a16e9e328259d183b1585054abc4914`.
 
 The coupled control adds a shared mode selected by each branch's first symbol
 and requires the modes to agree at the join.  Unlike the discarded switch-
@@ -1312,10 +1311,10 @@ classes, contextual minimization has 349, and only 101 minimized classes are
 reachable from the requested entry.  The consuming frontier peaks at 23
 classes / 23 Pareto entries.  Nine interleaved rounds run each of the three
 stages in a separate CPU-2 process amortizing 1,000 evaluations and give a
-7.513x identity/minimized geometric speedup with log-ratio t = 422.85.  The
-generic minimized evaluator is 1.239x faster than the exact mode-conditioned
-branch join (generic/specialized ratio 0.807, log-ratio t = -48.62).  The
-one-time minimized compile plus entry-plan cost crosses over after 47.12 such
+7.979x identity/minimized geometric speedup with log-ratio t = 37.87.  The
+generic minimized evaluator is 1.248x faster than the exact mode-conditioned
+branch join (generic/specialized ratio 0.801, log-ratio t = -47.67).  The
+one-time minimized compile plus entry-plan cost crosses over after 43.60 such
 entry evaluations
 geometrically.  This synthetic finite-state join-compatibility application is
 genuinely coupled and differs from the unconditioned branch product, but it
@@ -1330,7 +1329,7 @@ scripts/check-coupled-workflow.sh evidence/c985-coupled-workflow.tsv
 
 - coupled benchmark: `6fa41ddb0891d3cac2ceb580648059cba4a7b1da42afce25dccb998ee0377f3e`;
 - coupled checker: `f85b6afd48267b8de80c610c05c85940dae87916a3246fce7633b4ad8697cc89`;
-- coupled evidence: `b8e4e6ac712235539e946810d38d186d726ff4f6d061d415340080eaa985204e`.
+- coupled evidence: `313e4ed1f9f70cffd2b2ee076567b08d98604b1862879263b39991c77716ca82`.
 
 An isolated `perf stat` pass then showed that generic evaluation executed fewer
 instructions than the mode-conditioned solver but lost IPC in repeated small
@@ -1345,9 +1344,9 @@ handles zero/singleton fronts without the general scan-plus-retain path.  Both
 generic and specialized
 controls now reuse prebuilt objective fronts and workspaces, and their stages
 run in separate pinned processes with alternating round order.  Mean entry-plan
-construction is 8.3 us on the shuffle control and 7.9 us on the coupled
-control; warm generic evaluation has no statistically resolved gap from the
-exact separator solver on the former and is 23.9% ahead on the latter.  The
+construction is 8.1 us on both controls; warm generic evaluation is 1.6%
+faster than the exact separator solver on the former and 24.8% ahead on the
+latter.  The
 initial hardware-counter pass predates this final change and remains diagnostic
 rather than a separate paper claim.  A final isolated 100,000-evaluation
 coupled pass after the full change measured 2,354,831,517 cycles and
@@ -1363,7 +1362,7 @@ retained statistical claim.
   algorithms and retention obligations.  Identity and minimized artifacts now
   use the same plan, objective tables, reachability pruning, last-use release,
   witness operation, and selected entry.  The retained quotient-only gains are
-  4.536x on the shuffle control and 7.513x on the shared-mode control.
+  4.511x on the shuffle control and 7.979x on the shared-mode control.
 - **Settled -- apparent nonfactorization.**  A switch-count monitor constrained
   schedules without changing the attainable additive cost set and was
   discarded.  Shared-mode compatibility changes the front relative to the
