@@ -48,11 +48,11 @@ The crate is the primary integration surface. The `ergodis` executable calls
 the same public APIs and provides JSON interfaces for examples, shell workflows,
 and independent replay.
 
-After cloning the repository, add the crate by path:
+Add the crate from its repository, or by path after cloning it:
 
 ```toml
 [dependencies]
-ergodis = { path = "../compositional-recovery/ergodis" }
+ergodis = { git = "https://github.com/tavisrudd/ergodis" }
 ```
 
 Enable `features = ["parallel"]` when independent subproblems are large enough
