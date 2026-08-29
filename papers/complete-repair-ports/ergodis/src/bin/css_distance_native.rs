@@ -26,6 +26,9 @@ struct Args {
     compiled_out: Option<PathBuf>,
     #[arg(long, default_value_t = 1)]
     rounds: u16,
+    /// Static anchor-search worker count (requires the `parallel` feature above one).
+    #[arg(long, default_value_t = 1)]
+    threads: usize,
 }
 
 #[derive(Debug, Deserialize)]
@@ -54,6 +57,7 @@ struct RunRecord<'a> {
     preparation_seconds: f64,
     artifact_write_seconds: Option<f64>,
     artifact_payload_blake3: Option<String>,
+    threads: usize,
     search_seconds: &'a [f64],
     result: &'a ergodis::BoundedCssDistanceResult,
 }
@@ -140,6 +144,21 @@ fn main() -> Result<()> {
     if args.rounds == 0 {
         bail!("round count must be positive");
     }
+    if args.threads == 0 {
+        bail!("thread count must be positive");
+    }
+    #[cfg(not(feature = "parallel"))]
+    if args.threads != 1 {
+        bail!("thread counts above one require the `parallel` feature");
+    }
+    #[cfg(feature = "parallel")]
+    let thread_pool = (args.threads > 1)
+        .then(|| {
+            rayon::ThreadPoolBuilder::new()
+                .num_threads(args.threads)
+                .build()
+        })
+        .transpose()?;
     let certify_incumbent = args.maximum_weight.is_none() && !problem.incumbent_support.is_empty();
     let mode = if certify_incumbent {
         "certify-incumbent"
@@ -150,6 +169,22 @@ fn main() -> Result<()> {
     let mut result = None;
     for _ in 0..args.rounds {
         let search_start = Instant::now();
+        #[cfg(feature = "parallel")]
+        let round_result = if let Some(pool) = &thread_pool {
+            pool.install(|| {
+                if certify_incumbent {
+                    compiled
+                        .certify_incumbent_parallel(&problem.anchors, &problem.incumbent_support)
+                } else {
+                    compiled.search_bounded_parallel(&problem.anchors, maximum_weight)
+                }
+            })?
+        } else if certify_incumbent {
+            compiled.certify_incumbent(&problem.anchors, &problem.incumbent_support)?
+        } else {
+            compiled.search_bounded(&problem.anchors, maximum_weight)?
+        };
+        #[cfg(not(feature = "parallel"))]
         let round_result = if certify_incumbent {
             compiled.certify_incumbent(&problem.anchors, &problem.incumbent_support)?
         } else {
@@ -178,6 +213,7 @@ fn main() -> Result<()> {
         preparation_seconds,
         artifact_write_seconds,
         artifact_payload_blake3,
+        threads: args.threads,
         search_seconds: &search_seconds,
         result: &result,
     };

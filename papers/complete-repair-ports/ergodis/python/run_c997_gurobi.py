@@ -305,12 +305,13 @@ def solve(
     log_path: Path,
     time_limit: float,
     seed: int,
+    threads: int,
     model_build_seconds: float,
     logical: int | None = None,
     anchor: int | None = None,
 ) -> dict:
     log_path.parent.mkdir(parents=True, exist_ok=True)
-    model.Params.Threads = 1
+    model.Params.Threads = threads
     model.Params.Seed = seed
     model.Params.MIPGap = 0.0
     model.Params.TimeLimit = time_limit
@@ -388,6 +389,7 @@ def main() -> int:
     parser.add_argument("--log-dir", type=Path, required=True)
     parser.add_argument("--time-limit", type=float, default=900.0)
     parser.add_argument("--seed", type=int, default=1)
+    parser.add_argument("--threads", type=int, default=1)
     parser.add_argument("--logicals", default="all")
     parser.add_argument(
         "--physical-parity-encoding",
@@ -395,6 +397,8 @@ def main() -> int:
         default="binary-slack",
     )
     args = parser.parse_args()
+    if args.threads < 1:
+        parser.error("--threads must be positive")
 
     c997 = load_c997(args.c997_source.resolve())
     hx, hz, lx, _, _, _ = c997.build_gross_code()
@@ -416,7 +420,7 @@ def main() -> int:
                 for package in ("gurobipy", "mip", "bposd", "numpy")
             },
             "python_version": platform.python_version(),
-            "threads": 1,
+            "threads": args.threads,
             "seed": args.seed,
             "mip_gap": 0.0,
             "time_limit": args.time_limit,
@@ -452,6 +456,7 @@ def main() -> int:
                     args.log_dir / f"per_logical_{index}.log",
                     args.time_limit,
                     args.seed,
+                    args.threads,
                     build_seconds,
                     logical=index,
                 )
@@ -470,6 +475,7 @@ def main() -> int:
                 args.log_dir / "global.log",
                 args.time_limit,
                 args.seed,
+                args.threads,
                 build_seconds,
             )
             sink.emit(result)
@@ -488,6 +494,7 @@ def main() -> int:
                     args.log_dir / f"anchor_{anchor}.log",
                     args.time_limit,
                     args.seed,
+                    args.threads,
                     build_seconds,
                     anchor=anchor,
                 )

@@ -186,6 +186,8 @@ residual-syndrome filters; `--evidence` writes one create-only JSONL record.
 `--compiled-out` creates a versioned, checksummed filter artifact, and
 `--compiled-in` reloads it only when its cryptographic source fingerprint
 matches the supplied matrices. Artifact and evidence output never overwrite.
+With the `parallel` feature, `--threads N` statically partitions anchors across
+workers with disjoint DFS workspaces and deterministic post-join reduction.
 
 ### Contextual-state library APIs
 

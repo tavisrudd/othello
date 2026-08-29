@@ -58,6 +58,25 @@ and 22.33x faster than the retained 3.80805 s one-thread Gurobi 13.0.2 control.
 Repeated warm-process loads reached about 0.0059 s. Candidate counts, pruning
 counters, optimum, and witness were unchanged.
 
+### Two-anchor parallel checkpoint
+
+Static contiguous anchor partitioning gives each Rayon task its own pre-sized
+DFS workspace and 128-byte-aligned result record. The compiled filters are
+read-only, and counters/incumbents are reduced deterministically only after
+join. On cores 2 and 3, the retained 11-round median search fell from 0.15786 s
+to 0.07859 s (2.01x), with exactly the same 12,268,521 candidates. Cached
+preparation plus search was 0.09769 s.
+
+The matched Gurobi 13.0.2 control used `Threads=2` and took 1.87536 s across
+the same two anchored exact solves, leaving native ahead by 23.86x on search
+and 19.20x end-to-end. Perf counted zero context switches and migrations in
+both native runs. Two threads retired essentially the same total instructions
+as one thread; cache misses rose 3.2%, consistent with concurrent read-only
+filter pressure rather than duplicated work. `perf c2c` could not open the AMD
+IBS load-latency event under the host's `perf_event_paranoid=2`, so direct HITM
+sampling remains an optional privileged confirmation rather than a release
+gate.
+
 ## Parallel search discipline
 
 Gurobi 13.0.2 supports parallel MIP. Every parallel comparison therefore runs

@@ -28,17 +28,22 @@ def read_native(path: Path) -> dict:
     return records[0]
 
 
-def gurobi_wall(path: Path) -> float:
+def gurobi_wall(path: Path) -> tuple[float, int]:
     solves = []
+    threads = None
     for line in path.read_text(encoding="utf-8").splitlines():
         record = json.loads(line)
+        if record.get("kind") == "header":
+            threads = record.get("threads")
         if record.get("kind") == "solve":
             if record["status_name"] != "OPTIMAL" or record["objective"] != 12.0:
                 raise ValueError("Gurobi control is not an exact distance-12 solve")
             solves.append(record)
     if len(solves) != 2:
         raise ValueError("Gurobi control does not contain both anchored solves")
-    return sum(record["wall_seconds"] for record in solves)
+    if not isinstance(threads, int) or threads < 1:
+        raise ValueError("Gurobi control has no valid thread count")
+    return sum(record["wall_seconds"] for record in solves), threads
 
 
 def main() -> int:
@@ -88,7 +93,10 @@ def main() -> int:
         ):
             raise ValueError("loaded artifact is not bound by a payload checksum")
     cold = preparation + native_median
-    gurobi = gurobi_wall(args.gurobi)
+    native_threads = record.get("threads", 1)
+    gurobi, gurobi_threads = gurobi_wall(args.gurobi)
+    if native_threads != gurobi_threads:
+        raise ValueError("native and Gurobi evidence use different thread counts")
     output = {
         "native_rounds": len(record["search_seconds"]),
         "native_preparation_mode": preparation_mode,
@@ -97,6 +105,7 @@ def main() -> int:
         "native_search_median_seconds": native_median,
         "native_cold_seconds": cold,
         "gurobi_anchored_wall_seconds": gurobi,
+        "matched_threads": native_threads,
         "warm_search_speedup_over_gurobi": gurobi / native_median,
         "cold_speedup_over_gurobi": gurobi / cold,
         "candidate_supports": result["stats"]["candidates"],

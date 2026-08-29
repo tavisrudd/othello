@@ -425,6 +425,25 @@ pub struct BoundedCssDistanceResult {
     pub stats: ConnectedSearchStats,
 }
 
+#[cfg(feature = "parallel")]
+#[repr(C, align(128))]
+struct CachePaddedSearchResult(BoundedCssDistanceResult);
+
+#[cfg(feature = "parallel")]
+const _: () = assert!(std::mem::align_of::<CachePaddedSearchResult>() == 128);
+
+#[cfg(feature = "parallel")]
+fn merge_search_stats(left: &mut ConnectedSearchStats, right: ConnectedSearchStats) {
+    left.candidates += right.candidates;
+    left.connected_supports += right.connected_supports;
+    left.exclusive_extensions += right.exclusive_extensions;
+    left.syndrome_bound_prunes += right.syndrome_bound_prunes;
+    left.four_completion_prunes += right.four_completion_prunes;
+    left.kernel_supports += right.kernel_supports;
+    left.nontrivial_supports += right.nontrivial_supports;
+    left.maximum_depth = left.maximum_depth.max(right.maximum_depth);
+}
+
 impl CompiledCssDistance {
     fn source_sha256(physical: &Matrix, logical: &Matrix) -> [u8; 32] {
         let mut hasher = Sha256::new();
@@ -934,6 +953,63 @@ impl CompiledCssDistance {
         })
     }
 
+    /// Search static anchor partitions in parallel with no shared hot-loop writes.
+    ///
+    /// Each partition owns its DFS frames, counters, incumbent, and witness.
+    /// Results occupy separate cache lines and are reduced in anchor order only
+    /// after all workers complete. Because incumbents are partition-local, work
+    /// counters can exceed the sequential search when an early partition finds
+    /// a strong incumbent.
+    #[cfg(feature = "parallel")]
+    pub fn search_bounded_parallel(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        use rayon::prelude::*;
+
+        if anchors.is_empty() || rayon::current_num_threads() == 1 {
+            return self.search_bounded(anchors, maximum_weight);
+        }
+        if maximum_weight == 0 || usize::from(maximum_weight) > self.coordinate_count() {
+            return Err(CssDistanceError::InvalidMaximumWeight);
+        }
+        for &anchor in anchors {
+            if usize::from(anchor) >= self.coordinate_count() {
+                return Err(CssDistanceError::AnchorOutOfRange { anchor });
+            }
+        }
+        let partition_count = rayon::current_num_threads().min(anchors.len());
+        let anchors_per_partition = anchors.len().div_ceil(partition_count);
+        let partials = anchors
+            .par_chunks(anchors_per_partition)
+            .map(|partition| {
+                self.search_bounded(partition, maximum_weight)
+                    .map(CachePaddedSearchResult)
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+
+        let mut combined = BoundedCssDistanceResult {
+            distance: None,
+            witness: Box::default(),
+            searched_maximum_weight: partials[0].0.searched_maximum_weight,
+            stats: ConnectedSearchStats::default(),
+        };
+        for CachePaddedSearchResult(partial) in partials {
+            merge_search_stats(&mut combined.stats, partial.stats);
+            let improves = match (partial.distance, combined.distance) {
+                (Some(partial), Some(current)) => partial < current,
+                (Some(_), None) => true,
+                _ => false,
+            };
+            if improves {
+                combined.distance = partial.distance;
+                combined.witness = partial.witness;
+            }
+        }
+        Ok(combined)
+    }
+
     /// Replay an incumbent and close every strictly smaller weight.
     pub fn certify_incumbent(
         &self,
@@ -974,6 +1050,25 @@ impl CompiledCssDistance {
         if result.distance.is_none() {
             result.distance = Some(incumbent.len() as u16);
             result.witness = incumbent.to_vec().into_boxed_slice();
+        }
+        Ok(result)
+    }
+
+    /// Parallel counterpart of [`Self::certify_incumbent`].
+    #[cfg(feature = "parallel")]
+    pub fn certify_incumbent_parallel(
+        &self,
+        anchors: &[u16],
+        incumbent: &[u16],
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        let replay = self.certify_incumbent(&[], incumbent)?;
+        if incumbent.len() == 1 {
+            return Ok(replay);
+        }
+        let mut result = self.search_bounded_parallel(anchors, incumbent.len() as u16 - 1)?;
+        if result.distance.is_none() {
+            result.distance = replay.distance;
+            result.witness = replay.witness;
         }
         Ok(result)
     }
@@ -1093,5 +1188,31 @@ mod tests {
             CompiledCssDistance::read_artifact(&physical, &logical, &*artifact),
             Err(CssDistanceArtifactError::TrailingBytes)
         ));
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn static_parallel_anchor_partitions_match_sequential_answers() {
+        let (physical, logical) = artifact_problem();
+        let compiled = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let anchors = [0, 1, 2, 3, 4];
+        let pool = rayon::ThreadPoolBuilder::new()
+            .num_threads(3)
+            .build()
+            .unwrap();
+        let parallel = pool
+            .install(|| compiled.search_bounded_parallel(&anchors, 5))
+            .unwrap();
+        let sequential = compiled.search_bounded(&anchors, 5).unwrap();
+        assert_eq!(parallel.distance, sequential.distance);
+        assert_eq!(parallel.witness, sequential.witness);
+
+        let absent_logical = Matrix::new::<2>(1, 5, vec![0, 0, 0, 0, 0]).unwrap();
+        let absent = CompiledCssDistance::compile(&physical, &absent_logical).unwrap();
+        let parallel = pool
+            .install(|| absent.search_bounded_parallel(&anchors, 5))
+            .unwrap();
+        let sequential = absent.search_bounded(&anchors, 5).unwrap();
+        assert_eq!(parallel, sequential);
     }
 }
