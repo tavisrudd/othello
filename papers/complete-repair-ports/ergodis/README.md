@@ -193,6 +193,13 @@ Young-Brothers-Wait. Rare verified bound improvements use cache-line-separated
 worker mailboxes; `--pulse-interval` controls coarse polling without adding
 per-support synchronization.
 
+Inputs with 257--320 coordinates dispatch to a separately monomorphized wide
+backend. It preserves exact three-word syndromes, removes redundant check rows
+for syndrome tracking while retaining the original sparse connectivity graph,
+and applies precomputed odd-check neighborhood packings as exact lower bounds.
+The compact hot layout is unchanged; wide artifact persistence and parallel
+search remain follow-up work.
+
 ### Contextual-state library APIs
 
 The Rust library exposes three exact shortcuts derived from the compositional

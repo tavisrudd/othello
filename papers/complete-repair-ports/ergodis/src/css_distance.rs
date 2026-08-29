@@ -178,9 +178,55 @@ impl PackedSyndrome<2> {
 
 impl PackedSyndrome<3> {
     #[inline]
+    fn toggle(&mut self, right: Self) {
+        self.words[0] ^= right.words[0];
+        self.words[1] ^= right.words[1];
+        self.words[2] ^= right.words[2];
+    }
+
+    #[inline]
+    fn is_zero(&self) -> bool {
+        self.words[0] == 0 && self.words[1] == 0 && self.words[2] == 0
+    }
+
+    #[inline]
     fn weight(&self) -> u32 {
         self.words[0].count_ones() + self.words[1].count_ones() + self.words[2].count_ones()
     }
+
+    #[inline]
+    fn difference_assign(&mut self, right: Self) {
+        self.words[0] &= !right.words[0];
+        self.words[1] &= !right.words[1];
+        self.words[2] &= !right.words[2];
+    }
+
+    #[inline]
+    fn union_assign(&mut self, right: Self) {
+        self.words[0] |= right.words[0];
+        self.words[1] |= right.words[1];
+        self.words[2] |= right.words[2];
+    }
+
+    #[inline]
+    fn pop_lowest(&mut self) -> Option<usize> {
+        for (word_index, word) in self.words.iter_mut().enumerate() {
+            if *word != 0 {
+                let bit = word.trailing_zeros() as usize;
+                *word &= *word - 1;
+                return Some(64 * word_index + bit);
+            }
+        }
+        None
+    }
+}
+
+#[inline]
+fn wide_syndrome_key(syndrome: PackedSyndrome<3>) -> u128 {
+    let residual = syndrome.words[2];
+    let low = syndrome.words[0] ^ residual.rotate_left(46);
+    let high = syndrome.words[1] ^ residual.rotate_left(11);
+    u128::from(low) | (u128::from(high) << 64)
 }
 
 type WidePackedSupport = PackedSupport<WIDE_SUPPORT_WORDS>;
@@ -272,6 +318,78 @@ impl CompletionBloom {
     }
 }
 
+fn compile_completion_filters<const WORDS: usize>(
+    columns: &[PackedColumn<WORDS>],
+    key: fn(PackedSyndrome<WORDS>) -> u128,
+) -> ([Box<[u128]>; 2], CompletionBloom, CompletionBloom) {
+    let mut short = [Vec::new(), Vec::new(), Vec::new()];
+    short[0].reserve(columns.len());
+    short[1].reserve(
+        columns
+            .len()
+            .saturating_mul(columns.len().saturating_sub(1))
+            / 2,
+    );
+    short[2].reserve(
+        columns
+            .len()
+            .saturating_mul(columns.len().saturating_sub(1))
+            .saturating_mul(columns.len().saturating_sub(2))
+            / 6,
+    );
+    for left in 0..columns.len() {
+        let left_key = key(columns[left].syndrome);
+        short[0].push(left_key);
+        for middle in left + 1..columns.len() {
+            let pair_key = left_key ^ key(columns[middle].syndrome);
+            short[1].push(pair_key);
+            for right in columns.iter().skip(middle + 1) {
+                short[2].push(pair_key ^ key(right.syndrome));
+            }
+        }
+    }
+    for syndromes in &mut short {
+        syndromes.sort_unstable();
+        syndromes.dedup();
+    }
+    let mut three_completion_bloom = CompletionBloom::new(short.iter().map(Vec::len).sum());
+    for syndromes in &short {
+        for &syndrome in syndromes {
+            three_completion_bloom.insert_three(syndrome);
+        }
+    }
+    let quadruple_count = columns
+        .len()
+        .saturating_mul(columns.len().saturating_sub(1))
+        .saturating_mul(columns.len().saturating_sub(2))
+        .saturating_mul(columns.len().saturating_sub(3))
+        / 24;
+    let mut four_completion_bloom = CompletionBloom::new(quadruple_count);
+    for syndromes in &short {
+        for &syndrome in syndromes {
+            four_completion_bloom.insert_one(syndrome);
+        }
+    }
+    for first in 0..columns.len() {
+        let first_key = key(columns[first].syndrome);
+        for second in first + 1..columns.len() {
+            let pair_key = first_key ^ key(columns[second].syndrome);
+            for third in second + 1..columns.len() {
+                let triple_key = pair_key ^ key(columns[third].syndrome);
+                for fourth in columns.iter().skip(third + 1) {
+                    four_completion_bloom.insert_one(triple_key ^ key(fourth.syndrome));
+                }
+            }
+        }
+    }
+    let [one, two, _three] = short;
+    (
+        [one.into_boxed_slice(), two.into_boxed_slice()],
+        three_completion_bloom,
+        four_completion_bloom,
+    )
+}
+
 #[derive(Clone, Debug)]
 pub struct CompiledCssDistance {
     columns: Box<[PackedColumn]>,
@@ -301,6 +419,7 @@ struct WideCompiledStructure {
     check_count: u16,
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
+    check_conflicts: Box<[PackedSyndrome<3>]>,
 }
 
 /// Precompiled exact state for CSS instances up to 320 coordinates and rank 192.
@@ -313,6 +432,10 @@ pub struct CompiledWideCssDistance {
     logical_count: u8,
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
+    short_completion_syndromes: [Box<[u128]>; 2],
+    three_completion_bloom: CompletionBloom,
+    four_completion_bloom: CompletionBloom,
+    check_conflicts: Box<[PackedSyndrome<3>]>,
 }
 
 /// Select original rows forming a basis, preserving sparse presentation rows.
@@ -411,18 +534,28 @@ fn compile_wide_structure(
             .max(u8::try_from(column.syndrome.weight()).expect("wide check count is bounded"));
         kernel_weights_even &= column.syndrome.weight() & 1 == 1;
     }
+    let mut check_conflicts = vec![PackedSyndrome::<3>::default(); basis.len()];
+    for column in &columns {
+        let mut checks = column.syndrome;
+        while let Some(check) = checks.pop_lowest() {
+            check_conflicts[check].union_assign(column.syndrome);
+        }
+    }
     Ok(WideCompiledStructure {
         columns: columns.into_boxed_slice(),
         neighbors: neighbors.into_boxed_slice(),
         check_count: basis.len() as u16,
         maximum_column_check_weight,
         kernel_weights_even,
+        check_conflicts: check_conflicts.into_boxed_slice(),
     })
 }
 
 impl CompiledWideCssDistance {
     pub fn compile(physical: &Matrix, logical: &Matrix) -> Result<Self, CssDistanceError> {
         let structure = compile_wide_structure(physical, logical)?;
+        let (short_completion_syndromes, three_completion_bloom, four_completion_bloom) =
+            compile_completion_filters(&structure.columns, wide_syndrome_key);
         Ok(Self {
             columns: structure.columns,
             neighbors: structure.neighbors,
@@ -431,6 +564,189 @@ impl CompiledWideCssDistance {
             logical_count: logical.rows() as u8,
             maximum_column_check_weight: structure.maximum_column_check_weight,
             kernel_weights_even: structure.kernel_weights_even,
+            short_completion_syndromes,
+            three_completion_bloom,
+            four_completion_bloom,
+            check_conflicts: structure.check_conflicts,
+        })
+    }
+
+    #[inline]
+    fn syndrome_completion_lower_bound(&self, syndrome: PackedSyndrome<3>) -> u16 {
+        let degree = u32::from(self.maximum_column_check_weight);
+        if degree == 0 {
+            return u16::from(!syndrome.is_zero()) * u16::MAX;
+        }
+        syndrome.weight().div_ceil(degree) as u16
+    }
+
+    /// Greedy packing of odd checks with pairwise-disjoint coordinate neighborhoods.
+    #[inline]
+    fn syndrome_packing_lower_bound(&self, mut syndrome: PackedSyndrome<3>) -> u16 {
+        let mut packed = 0u16;
+        while let Some(check) = syndrome.pop_lowest() {
+            packed += 1;
+            syndrome.difference_assign(self.check_conflicts[check]);
+        }
+        packed
+    }
+
+    #[inline]
+    fn has_short_completion(&self, syndrome: PackedSyndrome<3>, additions: u16) -> bool {
+        if syndrome.is_zero() {
+            return true;
+        }
+        let key = wide_syndrome_key(syndrome);
+        if additions >= 3 {
+            return self.three_completion_bloom.contains_three(key);
+        }
+        self.short_completion_syndromes
+            .iter()
+            .take(usize::from(additions))
+            .any(|syndromes| syndromes.binary_search(&key).is_ok())
+    }
+
+    #[inline]
+    fn may_have_four_completion(&self, syndrome: PackedSyndrome<3>) -> bool {
+        syndrome.is_zero()
+            || self
+                .four_completion_bloom
+                .contains_one(wide_syndrome_key(syndrome))
+    }
+
+    pub fn search_bounded(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        if maximum_weight == 0 || usize::from(maximum_weight) > self.coordinate_count() {
+            return Err(CssDistanceError::InvalidMaximumWeight);
+        }
+        for &anchor in anchors {
+            if usize::from(anchor) >= self.coordinate_count() {
+                return Err(CssDistanceError::AnchorOutOfRange { anchor });
+            }
+        }
+        let searched_maximum_weight = if self.kernel_weights_even && maximum_weight & 1 == 1 {
+            maximum_weight - 1
+        } else {
+            maximum_weight
+        };
+        if searched_maximum_weight == 0 {
+            return Ok(BoundedCssDistanceResult {
+                distance: None,
+                witness: Box::default(),
+                searched_maximum_weight,
+                stats: ConnectedSearchStats::default(),
+            });
+        }
+        let frame_count = usize::from(searched_maximum_weight);
+        let mut supports = vec![WidePackedSupport::default(); frame_count];
+        let mut boundaries = vec![WidePackedSupport::default(); frame_count];
+        let mut candidates = vec![WidePackedSupport::default(); frame_count];
+        let mut syndromes = vec![PackedSyndrome::<3>::default(); frame_count];
+        let mut logicals = vec![0u64; frame_count];
+        let mut best_weight = searched_maximum_weight.saturating_add(1);
+        let mut best_support = WidePackedSupport::default();
+        let mut stats = ConnectedSearchStats::default();
+        for &anchor in anchors {
+            let root = usize::from(anchor);
+            supports[0] = WidePackedSupport::singleton(root);
+            boundaries[0] = self.neighbors[root];
+            candidates[0] = boundaries[0];
+            syndromes[0] = self.columns[root].syndrome;
+            logicals[0] = self.columns[root].logical;
+            stats.connected_supports += 1;
+            stats.maximum_depth = stats.maximum_depth.max(1);
+            if syndromes[0].is_zero() {
+                stats.kernel_supports += 1;
+                if logicals[0] != 0 {
+                    stats.nontrivial_supports += 1;
+                    best_weight = 1;
+                    best_support = supports[0];
+                }
+            }
+            if best_weight == 1 {
+                break;
+            }
+            let mut depth = 0usize;
+            loop {
+                let Some(added) = candidates[depth].pop_lowest() else {
+                    if depth == 0 {
+                        break;
+                    }
+                    depth -= 1;
+                    continue;
+                };
+                stats.candidates += 1;
+                let child_depth = depth + 1;
+                let child_weight = (child_depth + 1) as u16;
+                let mut child_support = supports[depth];
+                child_support.insert(added);
+                stats.connected_supports += 1;
+                stats.maximum_depth = stats.maximum_depth.max(child_weight);
+                let mut child_syndrome = syndromes[depth];
+                child_syndrome.toggle(self.columns[added].syndrome);
+                let child_logical = logicals[depth] ^ self.columns[added].logical;
+                if child_syndrome.is_zero() {
+                    stats.kernel_supports += 1;
+                    if child_logical != 0 {
+                        stats.nontrivial_supports += 1;
+                        if child_weight < best_weight {
+                            best_weight = child_weight;
+                            best_support = child_support;
+                        }
+                    }
+                }
+                let improvement_budget = best_weight.saturating_sub(child_weight + 1);
+                let cheap_bound = self
+                    .syndrome_completion_lower_bound(child_syndrome)
+                    .max(self.syndrome_packing_lower_bound(child_syndrome));
+                let four_completion_reject =
+                    improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
+                if child_weight >= searched_maximum_weight
+                    || cheap_bound > improvement_budget
+                    || (improvement_budget <= 3
+                        && !self.has_short_completion(child_syndrome, improvement_budget))
+                    || four_completion_reject
+                {
+                    stats.syndrome_bound_prunes += 1;
+                    stats.four_completion_prunes += u64::from(four_completion_reject);
+                    continue;
+                }
+                supports[child_depth] = child_support;
+                syndromes[child_depth] = child_syndrome;
+                logicals[child_depth] = child_logical;
+                let mut exclusive = self.neighbors[added];
+                exclusive.difference_assign(boundaries[depth]);
+                exclusive.difference_assign(child_support);
+                let mut child_boundary = boundaries[depth];
+                child_boundary.union_assign(self.neighbors[added]);
+                child_boundary.difference_assign(child_support);
+                boundaries[child_depth] = child_boundary;
+                let mut child_candidates = candidates[depth];
+                child_candidates.union_assign(exclusive);
+                stats.exclusive_extensions += 1;
+                candidates[child_depth] = child_candidates;
+                depth = child_depth;
+            }
+        }
+        let witness = if best_weight <= searched_maximum_weight {
+            let mut witness = Vec::with_capacity(best_weight as usize);
+            for coordinate in 0..self.coordinate_count() {
+                if best_support.contains(coordinate) {
+                    witness.push(coordinate as u16);
+                }
+            }
+            witness.into_boxed_slice()
+        } else {
+            Box::default()
+        };
+        Ok(BoundedCssDistanceResult {
+            distance: (best_weight <= searched_maximum_weight).then_some(best_weight),
+            witness,
+            searched_maximum_weight,
+            stats,
         })
     }
 
@@ -1807,14 +2123,14 @@ mod tests {
         logical_data[0] = 1;
         let logical = Matrix::new::<2>(1, columns, logical_data).unwrap();
         assert_eq!(independent_row_indices(&physical).len(), 2);
-        let compiled = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
-        assert_eq!(compiled.coordinate_count(), 288);
-        assert_eq!(compiled.check_count(), 2);
-        assert_eq!(compiled.logical_count(), 1);
-        assert_eq!(compiled.maximum_column_check_weight(), 1);
-        assert!(!compiled.kernel_weights_even());
+        let compiled = compile_wide_structure(&physical, &logical).unwrap();
+        assert_eq!(compiled.columns.len(), 288);
+        assert_eq!(compiled.check_count, 2);
+        assert_eq!(compiled.maximum_column_check_weight, 1);
+        assert!(!compiled.kernel_weights_even);
         assert_eq!(
-            compiled.packed_storage_bytes(),
+            compiled.columns.len() * std::mem::size_of::<WidePackedColumn>()
+                + compiled.neighbors.len() * std::mem::size_of::<WidePackedSupport>(),
             columns
                 * (std::mem::size_of::<WidePackedColumn>()
                     + std::mem::size_of::<WidePackedSupport>())
@@ -1845,9 +2161,21 @@ mod tests {
         }
         let physical = Matrix::new::<2>(block, 2 * block, data).unwrap();
         let logical = Matrix::new::<2>(1, 2 * block, vec![0; 2 * block]).unwrap();
-        let compiled = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
-        assert_eq!(compiled.coordinate_count(), 288);
-        assert_eq!(compiled.check_count(), 138);
+        let compiled = compile_wide_structure(&physical, &logical).unwrap();
+        assert_eq!(compiled.columns.len(), 288);
+        assert_eq!(compiled.check_count, 138);
+    }
+
+    #[test]
+    fn wide_search_matches_compact_search_on_overlap_domain() {
+        let (physical, logical) = artifact_problem();
+        let compact = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let wide = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+        let anchors = [0, 1, 2, 3, 4];
+        assert_eq!(
+            wide.search_bounded(&anchors, 5).unwrap(),
+            compact.search_bounded(&anchors, 5).unwrap()
+        );
     }
 
     #[cfg(feature = "parallel")]

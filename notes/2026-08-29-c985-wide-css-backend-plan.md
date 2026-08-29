@@ -59,3 +59,23 @@ the enumeration loop.  Search remains iterative to avoid stack-depth limits.
    support operations; five-word sets are small enough that scalar unrolling is
    the baseline to beat.
 
+## First wide checkpoint
+
+The committed BB288 export has 288 coordinates, 144 presented checks, rank 138,
+and 12 logical observations.  The wide compiler retains five support words and
+three exact syndrome words, compiles the full completion filters in about
+1.7--1.9 seconds, and peaks near 84 MB RSS on the development machine.
+
+A theorem-driven odd-check packing bound was added.  Two odd checks whose
+coordinate neighborhoods are disjoint require two different future support
+coordinates; greedily packing such checks therefore lower-bounds every exact
+completion.  The conflict masks are precomputed, occupy only a few KiB, and
+the search loop uses fixed three-word scalar operations with no allocation.
+
+On the official BB288 input, the weight-10 negative search changed from
+56,507,600 candidates and 0.875 seconds to 20,118,660 candidates and 0.532
+seconds: 2.81x less work and 1.65x less wall time.  The original weight-14 run
+was still unfinished after three minutes; the strengthened version remained
+unfinished at a 30-second bounded probe.  The next reduction is a
+future-domain-restricted packing envelope, followed by the already validated
+YBWC root split and monotone bound pulses.

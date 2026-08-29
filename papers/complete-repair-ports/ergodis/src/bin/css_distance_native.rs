@@ -1,6 +1,6 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
-use ergodis::{CompiledCssDistance, Matrix};
+use ergodis::{CompiledCssDistance, CompiledWideCssDistance, Matrix};
 use serde::{Deserialize, Serialize};
 use std::fmt::Write as _;
 use std::fs::{File, OpenOptions};
@@ -67,6 +67,11 @@ struct RunRecord<'a> {
     result: &'a ergodis::BoundedCssDistanceResult,
 }
 
+enum Backend {
+    Compact(CompiledCssDistance),
+    Wide(CompiledWideCssDistance),
+}
+
 fn dense_matrix(rows: &[Vec<u16>], columns: usize) -> Result<Matrix> {
     let mut data = vec![0u8; rows.len().saturating_mul(columns)];
     for (row_index, row) in rows.iter().enumerate() {
@@ -111,17 +116,30 @@ fn main() -> Result<()> {
     let columns = usize::from(problem.coordinate_count);
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
+    let wide_problem = columns > 256 || physical.rows() > 128;
+    if wide_problem && (args.compiled_in.is_some() || args.compiled_out.is_some()) {
+        bail!("compiled artifacts are not yet supported by the wide CSS backend");
+    }
     let preparation_start = Instant::now();
     let (compiled, preparation_mode) = if let Some(path) = &args.compiled_in {
         let file = File::open(path)
             .with_context(|| format!("opening compiled artifact {}", path.display()))?;
         (
-            CompiledCssDistance::read_artifact(&physical, &logical, BufReader::new(file))?,
+            Backend::Compact(CompiledCssDistance::read_artifact(
+                &physical,
+                &logical,
+                BufReader::new(file),
+            )?),
             "artifact-load",
+        )
+    } else if wide_problem {
+        (
+            Backend::Wide(CompiledWideCssDistance::compile(&physical, &logical)?),
+            "wide-compile",
         )
     } else {
         (
-            CompiledCssDistance::compile(&physical, &logical)?,
+            Backend::Compact(CompiledCssDistance::compile(&physical, &logical)?),
             "compile",
         )
     };
@@ -133,12 +151,19 @@ fn main() -> Result<()> {
             .create_new(true)
             .open(path)
             .with_context(|| format!("creating compiled artifact {}", path.display()))?;
+        let Backend::Compact(compiled) = &compiled else {
+            unreachable!("wide artifacts were rejected before compilation")
+        };
         compiled.write_artifact(BufWriter::new(file))?;
         Some(start.elapsed().as_secs_f64())
     } else {
         None
     };
-    let artifact_payload_blake3 = compiled.artifact_payload_blake3().map(|digest| {
+    let artifact_payload_blake3 = match &compiled {
+        Backend::Compact(compiled) => compiled.artifact_payload_blake3(),
+        Backend::Wide(_) => None,
+    }
+    .map(|digest| {
         let mut encoded = String::with_capacity(64);
         for byte in digest {
             write!(&mut encoded, "{byte:02x}").expect("writing to a String cannot fail");
@@ -151,6 +176,9 @@ fn main() -> Result<()> {
     }
     if args.threads == 0 {
         bail!("thread count must be positive");
+    }
+    if wide_problem && args.threads != 1 {
+        bail!("the wide CSS backend is currently single-threaded");
     }
     #[cfg(not(feature = "parallel"))]
     if args.threads != 1 {
@@ -172,26 +200,34 @@ fn main() -> Result<()> {
     for _ in 0..args.rounds {
         let search_start = Instant::now();
         #[cfg(feature = "parallel")]
-        let round_result = thread_pool.install(|| {
-            if certify_incumbent {
-                compiled.certify_incumbent_parallel_pulsed(
-                    &problem.anchors,
-                    &problem.incumbent_support,
-                    args.pulse_interval,
-                )
-            } else {
-                compiled.search_bounded_parallel_pulsed(
-                    &problem.anchors,
-                    maximum_weight,
-                    args.pulse_interval,
-                )
-            }
-        })?;
+        let round_result = match &compiled {
+            Backend::Compact(compiled) => thread_pool.install(|| {
+                if certify_incumbent {
+                    compiled.certify_incumbent_parallel_pulsed(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                        args.pulse_interval,
+                    )
+                } else {
+                    compiled.search_bounded_parallel_pulsed(
+                        &problem.anchors,
+                        maximum_weight,
+                        args.pulse_interval,
+                    )
+                }
+            })?,
+            Backend::Wide(compiled) => compiled.search_bounded(&problem.anchors, maximum_weight)?,
+        };
         #[cfg(not(feature = "parallel"))]
-        let round_result = if certify_incumbent {
-            compiled.certify_incumbent(&problem.anchors, &problem.incumbent_support)?
-        } else {
-            compiled.search_bounded(&problem.anchors, maximum_weight)?
+        let round_result = match &compiled {
+            Backend::Compact(compiled) => {
+                if certify_incumbent {
+                    compiled.certify_incumbent(&problem.anchors, &problem.incumbent_support)
+                } else {
+                    compiled.search_bounded(&problem.anchors, maximum_weight)
+                }?
+            }
+            Backend::Wide(compiled) => compiled.search_bounded(&problem.anchors, maximum_weight)?,
         };
         search_seconds.push(search_start.elapsed().as_secs_f64());
         round_stats.push(round_result.stats);
