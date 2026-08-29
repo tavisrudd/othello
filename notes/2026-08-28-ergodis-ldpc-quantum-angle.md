@@ -374,7 +374,7 @@ precisely certified transversal group and decoder. This is tractable and useful.
 
 That is a differentiated capability — *certify the exact transversal logical gate group of a
 given finite code* — and it is a different product from distance computation. Section 5
-treats it as its own wedge.
+treats it as its own product.
 
 ### 3.4 C967: the lane already wants this tool, for a dense family
 
@@ -495,7 +495,7 @@ single argument that heuristic upper bounds are not good enough for this communi
 
 ### 4.4 The classical side
 
-Two facts reframe wedge three. First, **the minimum distances of the deployed 5G New Radio LDPC
+Two facts reframe product three. First, **the minimum distances of the deployed 5G New Radio LDPC
 base graphs are still not known**: Danilko, Mogilnykh and Tikhomolov, *Minimum distances of LDPC
 codes in 5G standard*, arXiv:2607.04716 (2026), can only bracket the `[9984, 8448]` base-graph-1
 code at `d` between 8 and 14, and the `[25344, 8448]` code at `d` between 22 and 57. Butler's
@@ -536,7 +536,7 @@ Micron and Kioxia all ship LDPC and none publishes distances, error-floor certif
 trapping-set inventories — those are trade secrets satisfied in-house by hiring, not by tool
 purchase. The survey did not search job boards, which is an acknowledged gap.
 
-## 5. Candidate wedge products
+## 5. Candidate first products
 
 Ranked by expected value. All three assume the pre-emption checks in 6.2 come back clean; the
 ranking changes if check 1 or check 4 fails.
@@ -550,7 +550,7 @@ repository has actually built four separate times
 `papers/mds_css_transversal_groups/supplement/verify.py`, and the C967 acceptance gate that
 explicitly demands a checker which rejects corrupted certificates). That is the durable asset.
 
-### Wedge 1 (highest EV): a symmetry-reduction front end for exact qLDPC distance solvers
+### Product 1 (highest EV): a symmetry-reduction front end for exact qLDPC distance solvers
 
 **The shape changed once the survey landed.** My first draft proposed writing a new search
 engine. That is now clearly wrong. The exact-distance competition in 2026 is *not* hand-written
@@ -569,7 +569,7 @@ solver run. For the gross code that is a group of order `lm = 72` acting freely 
 the reduction is potentially an order of magnitude or more off the search tree, and it applies
 to every one of the `2k` solves in IBM's pipeline.
 
-**Why this is the right wedge.** It is exactly the thesis ergodis's own documentation already
+**Why this is the right first product.** It is exactly the thesis ergodis's own documentation already
 argues: "the compiled state can instead define a smaller external model after equivalences and
 impossible states have been removed" (`OPTIMIZATION.md:325-329`). The crate's whole design
 philosophy — compile the algebra, then hand a smaller problem to CP-SAT or a specialized kernel —
@@ -604,14 +604,14 @@ symmetry-breaking constraints for the `Z_l x Z_m` group to its integer program f
 unmodified script, same solver, same machine. This is cheap, uses a published reference
 implementation with a known answer, and answers the only question that matters: does the
 symmetry reduction actually shrink the tree, or does the solver's own presolve already find it?
-If the reduction buys less than about 5x, stop — the whole wedge rests on this number.
+If the reduction buys less than about 5x, stop — the whole proposal rests on this number.
 
 A second, complementary check at the same cost: run the same experiment on the passant code
 (78 coordinates, `PGL(2,13)` of order 2184, known `d = 12` with 364 minimum words in four orbits
 of 91), where the group is far larger relative to the code and our own committed certificates
 give an independent answer to check against.
 
-### Wedge 2: exact transversal logical gate group of a given finite CSS code
+### Product 2: exact transversal logical gate group of a given finite CSS code
 
 **What it is.** Input a stabilizer or CSS code; output the exact group of transversal logical
 operations it admits, with a proof object, rather than a yes/no test for one nominated gate.
@@ -649,10 +649,10 @@ arXiv:2409.18175 and arXiv:2303.15615 before spending anything here.
 
 **Ranked second, not first,** for three reasons now. The addressable market is a few dozen
 research groups. It is a capability people want occasionally, not on every design iteration —
-wedge one sits in a design loop, wedge two in a paper-writing loop. And a permissively licensed
+product one sits in a design loop, product two in a paper-writing loop. And a permissively licensed
 implementation of the adjacent capability already exists.
 
-### Wedge 3 (lowest EV): classical QC-LDPC error-floor and trapping-set certification
+### Product 3 (lowest EV): classical QC-LDPC error-floor and trapping-set certification
 
 **What it is.** Exhaustive certified enumeration of `(a,b)` trapping sets and stopping sets for
 5G NR, Wi-Fi, and NAND-flash QC-LDPC base graphs, with orbit counts under the circulant group.
@@ -660,7 +660,7 @@ implementation of the adjacent capability already exists.
 **Why it is ranked last despite the largest market.** Three reasons, all structural. The
 existing kernel is a toy (section 2.1) with no demonstrated scale. Symmetry is *already* used
 here — Usatyuk, Kuznetsov and Egorov, arXiv:2401.14810, do cyclic group projection for exactly
-this problem — so the differentiator that makes wedge one attractive is absent. And the actual
+this problem — so the differentiator that makes product one attractive is absent. And the actual
 deliverable those buyers want is an **error-floor curve**, which requires importance sampling
 and decoder simulation (belief propagation, min-sum, layered scheduling), none of which exists
 anywhere in this repository and all of which sits outside the exact-algebraic competence the
@@ -736,15 +736,15 @@ zero-citation result from one graph is usually an indexing gap.
 2. **Information-set-decoding overlap.** Meet-in-the-middle over a GF(2) syndrome (section 2.2)
    is the Stern/Dumer/MMT/BJMM structure, and forty years of cryptanalysis literature sits on
    it. Any claim of a novel search algorithm here is very likely pre-empted. Note this now
-   matters less: wedge one no longer proposes a new search engine. Still check
+   matters less: product one no longer proposes a new search engine. Still check
    `information set decoding` + `quantum code distance` before writing any algorithm section.
 3. **Symmetry breaking in integer programming.** New, and now the most important open check.
    Symmetry breaking for mixed-integer programs is a mature subfield — orbital branching,
    orbitopal fixing, isomorphism pruning, lexicographic-leader constraints. Establish what
    transfers to a `Z_l x Z_m`-symmetric weight-minimization program before claiming novelty,
    and check whether Gurobi's and HiGHS's own presolve already detect and exploit this symmetry
-   automatically. **If the solvers already do it, the wedge is dead**, and the first experiment
-   in wedge one is designed to reveal exactly that.
+   automatically. **If the solvers already do it, the proposal is dead**, and the first experiment
+   in product one is designed to reveal exactly that.
 4. **Certificates of non-existence for low-weight codewords.** Our strongest differentiator is
    the *short checkable certificate* (the 3.7 KB positive-semidefinite obstruction in
    `papers/q13-passant-code/verification/weight_eight_theta.json`, verified size on disk).
@@ -753,7 +753,7 @@ zero-citation result from one graph is usually an indexing gap.
    certainly exists (Schrijver's SDP bounds for binary codes, 2005); the question is whether
    anyone ships them as an artifact. This is a "packaged, not proved" novelty, which is fine
    for a product and fatal for a paper.
-5. **Exact transversal-gate-group computation.** For wedge two, and now urgent: the survey
+5. **Exact transversal-gate-group computation.** For product two, and now urgent: the survey
    established that Infleqtion's `qLDPC` package already uses automorphisms to construct
    transversal logical gates, citing arXiv:2409.18175. Determine exactly what it computes —
    a group, or membership for nominated gates — before assuming a gap exists.
@@ -762,15 +762,15 @@ zero-citation result from one graph is usually an indexing gap.
    expansion search (arXiv:1510.04954, arXiv:1801.02028), the problem is known hard
    (arXiv:1711.10543), and symmetry is already exploited for quasi-cyclic codes
    (arXiv:2401.14810). Still open: what sizes these reach in practice and whether any is open
-   source. This mainly confirms wedge three is crowded.
-7. **Already-cached prior art that raises the bar on wedge two, found locally.** The shared
+   source. This mainly confirms product three is crowded.
+7. **Already-cached prior art that raises the bar on product two, found locally.** The shared
    literature cache at `/tmp/persistent/tavis/lit-search/` already holds, verified by me with
    `litcache.py list`:
    - `arXiv:2409.18175`, *Fault-Tolerant Logical Clifford Gates from Code Automorphisms* —
      automorphism-group methods applied to logical gates in this exact setting;
    - `arXiv:2303.15615`, *Transversal Diagonal Logical Operators for Stabilizer Codes* — a
      computational method for finding transversal diagonal logical operators, which is close
-     to wedge two's core deliverable;
+     to product two's core deliverable;
    - `arXiv:1409.8320`, *Classification of Transversal Gates in Qubit Stabilizer Codes*;
    - `arXiv:2507.10519`, *A Classification of Transversal Clifford Gates*;
    - `arXiv:1910.09333`, *On Optimality of CSS Codes for Transversal T*;
@@ -779,10 +779,10 @@ zero-citation result from one graph is usually an indexing gap.
      the classical projective plane* — the passant code's own prior art, already cached.
 
    None of these were read in this session; only their titles were confirmed present. But the
-   titles alone mean wedge two is entering a **crowded** area, and that automorphism-based
+   titles alone mean product two is entering a **crowded** area, and that automorphism-based
    reasoning about qLDPC logical operators is live current work rather than an opening. Read
-   `arXiv:2303.15615` and `arXiv:2409.18175` before committing anything to wedge two, and read
-   `arXiv:1102.5715` before claiming novelty for the symmetry-reduction idea in wedge one.
+   `arXiv:2303.15615` and `arXiv:2409.18175` before committing anything to product two, and read
+   `arXiv:1102.5715` before claiming novelty for the symmetry-reduction idea in product one.
 8. ~~**The gross-code question.**~~ **Answered** in section 4.2: a mixed-integer program,
    one solve per logical operator, with no symmetry used. Two loose ends the survey could not
    close and which should be closed before citing this anywhere: the bibliographic identity of
