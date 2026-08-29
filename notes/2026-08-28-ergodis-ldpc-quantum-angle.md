@@ -644,7 +644,7 @@ Diagonal Logical Operators for Stabilizer Codes*), `arXiv:1409.8320`, `arXiv:250
 `arXiv:2409.18175` (*Fault-Tolerant Logical Clifford Gates from Code Automorphisms*). The
 survey independently established that Infleqtion's `qLDPC` package **already ships automorphism
 machinery for constructing transversal logical gates**, citing arXiv:2409.18175 — that is a
-working implementation of a large part of this wedge, in Python, under Apache-2.0. Read
+working implementation of a large part of this product, in Python, under Apache-2.0. Read
 arXiv:2409.18175 and arXiv:2303.15615 before spending anything here.
 
 **Ranked second, not first,** for three reasons now. The addressable market is a few dozen
