@@ -11,6 +11,7 @@ pub mod bitset;
 pub mod composition;
 pub mod confinement;
 pub mod contextual;
+pub mod css_distance;
 pub mod defect;
 pub mod family_response;
 pub mod field;
@@ -59,6 +60,9 @@ pub use contextual::{
     ContextWork, ContextualError, FrozenRankStratifiedEnvelope, PlannedContextCost,
     RankBoundedContextCache, RankEnvelopeAnswer, RankEnvelopeStorage, RankOneProbeCache,
     RankStratifiedEnvelope,
+};
+pub use css_distance::{
+    BoundedCssDistanceResult, CompiledCssDistance, ConnectedSearchStats, CssDistanceError,
 };
 pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,

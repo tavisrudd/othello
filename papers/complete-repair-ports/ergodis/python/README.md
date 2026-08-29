@@ -48,6 +48,10 @@ transfer witnesses, orbit search, and capacitated scheduling.
 - `analyze_c997_support_orbits.py` derives the complete translation orbit of
   retained C997 witnesses, replays every translated support, and measures the
   exact multiplicity left by coordinate anchoring.
+- `export_c997_native.py` exports the verified C997 matrices, orbit anchors,
+  and a replayed incumbent to the native sparse CSS-distance interface.
+  `check_c997_native.py` independently replays the native witness and reports
+  cold and warm speedups against the retained single-threaded Gurobi control.
 
 For normal use, installation, commands, JSON examples, and output semantics,
 start with `../README.md`.

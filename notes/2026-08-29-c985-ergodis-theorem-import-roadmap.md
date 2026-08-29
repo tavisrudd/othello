@@ -336,3 +336,42 @@ This does not predict an equal branch-and-bound speedup, but it establishes a
 concrete target and catches a subtle point: fixing a coordinate consumes its
 point stabilizer, not all multiplicity of translated supports satisfying that
 coordinate constraint.
+
+## Execution checkpoint 3: native exact CSS backend
+
+The first native backend replaces mixed-integer search by theorem-reduced
+connected-support enumeration. If a physical-kernel support is disconnected in
+the coordinate graph induced by shared checks, each component is itself in the
+kernel; a nonzero logical observation therefore occurs on a component of no
+greater weight. ESU exclusive-neighborhood augmentation enumerates every rooted
+connected support exactly once without a visited table or recursive call stack.
+
+The backend adds two further exact reductions:
+
+- all Gross columns have odd physical-check degree three, so every kernel
+  support has even weight; a replayed weight-12 incumbent requires search only
+  through weight 10;
+- packed one-, two-, three-, and four-column residual-syndrome oracles reject a
+  partial support unless its syndrome can close within the remaining weight.
+  The four-column oracle is a 16 MiB Bloom representation. It has no false
+  negatives, so false positives affect only runtime, never the proof.
+
+All search frames, supports, boundaries, and syndromes are fixed-width flat
+records allocated before enumeration. The search is iterative and performs no
+per-support allocation. The command writes create-only JSONL evidence, and the
+independent checker reconstructs the C997 matrices and replays the witness over
+GF(2).
+
+On the same quiet machine and one pinned core, the retained 11-round native run
+has compile time 0.1244 seconds and median search time 0.1502 seconds. The cold
+total is 0.2746 seconds versus 3.8080 seconds for the retained two-anchor Gurobi
+13.0.2 control: 13.87x cold and 25.35x warm-search speedups. Peak memory in the
+development measurement was about 26 MiB. The native proof examined 12,268,521
+connected candidates and found no nontrivial support through the theorem-reduced
+weight-10 domain before returning the independently replayed weight-12 witness.
+
+This is now the preferred structured CSS backend for this domain, with Gurobi
+retained as an external control and fallback. It is not a generic MILP or
+unstructured-code replacement. The next compiler improvement is persistence of
+the source-bound residual-syndrome filters so repeated X/Z and incumbent queries
+pay only the warm search cost.

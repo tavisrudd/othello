@@ -93,6 +93,7 @@ The main library surfaces are:
 | `compile_binary_*`, `confinement_*`, contextual plans | recovery profiles, confinement certificates, and context caches |
 | scheduler functions and workspaces                    | capacitated and coefficient-weighted simultaneous recovery      |
 | span, orbit, incidence, and projective modules        | compiled finite-field and symmetry-reduced search               |
+| `CompiledCssDistance`                                 | exact bounded CSS distance from connected-support elimination    |
 | application types and functions                       | worked storage, sparse-code, and dependent-task models          |
 
 Generate the complete API documentation with:
@@ -176,6 +177,12 @@ aggregate loads, selected backend, and auditable work counters:
 Use `ergodis <command> --help` for command-specific options. The input schemas
 are represented by complete examples in `examples/data/`; these are also used
 by the end-to-end CLI tests.
+
+The separate `css_distance_native` binary consumes sparse physical checks,
+logical observations, verified coordinate-orbit anchors, and an optional
+incumbent support. It independently replays the incumbent and exhaustively
+closes every smaller connected-support class. `--rounds` reuses the compiled
+residual-syndrome filters; `--evidence` writes one create-only JSONL record.
 
 ### Contextual-state library APIs
 

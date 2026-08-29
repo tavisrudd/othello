@@ -4,8 +4,9 @@ use ergodis::observational::{
 };
 use ergodis::{
     compile_verified_explicit_binary_support, BinarySupportCandidate, CanonicalContextBasis,
-    CostTable, DenseSelector, ExplicitBinarySupportProblem, FinitePermutationAction, Gf4, Matrix,
-    Prime, RankBoundedContextCache, RankOneProbeCache, SparseSelector,
+    CompiledCssDistance, CostTable, DenseSelector, ExplicitBinarySupportProblem,
+    FinitePermutationAction, Gf4, Matrix, Prime, RankBoundedContextCache, RankOneProbeCache,
+    SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -113,6 +114,38 @@ fn verified_semantic_symmetry_evaluation_allocates_nothing() {
         verified.verify_complete_backend_results(&[result]).unwrap();
     });
     assert_eq!(boundary_allocations, 0);
+}
+
+#[test]
+fn connected_css_search_has_no_per_support_allocations() {
+    let physical = Matrix::new::<2>(
+        3,
+        8,
+        vec![
+            1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0,
+        ],
+    )
+    .unwrap();
+    let logical = Matrix::new::<2>(1, 8, vec![1, 0, 1, 0, 1, 0, 1, 0]).unwrap();
+    let compiled = CompiledCssDistance::compile(&physical, &logical).unwrap();
+    let (_, shallow_allocations) = tracked_allocations(|| {
+        compiled
+            .search_bounded(&[0, 1, 2, 3, 4, 5, 6, 7], 3)
+            .unwrap()
+    });
+    let (_, deep_allocations) = tracked_allocations(|| {
+        compiled
+            .search_bounded(&[0, 1, 2, 3, 4, 5, 6, 7], 8)
+            .unwrap()
+    });
+    assert!(
+        shallow_allocations <= 6,
+        "shallow CSS search allocated {shallow_allocations} times"
+    );
+    assert!(
+        deep_allocations <= shallow_allocations + 1,
+        "CSS search allocations grew from {shallow_allocations} to {deep_allocations}"
+    );
 }
 
 fn gf4_scalar_table(costs: &[u32]) -> CostTable {
