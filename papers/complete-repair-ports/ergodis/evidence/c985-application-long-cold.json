@@ -1,0 +1,300 @@
+{
+  "artifacts": {
+    "benchmark_python_sha256": "7b8f9e289c2d01bf0c9d2311cf2f9e0a7b2ed50cdd9b54f888b4a2d71b7d2813",
+    "checker_sha256": "d2aa92e21e841f1f90fde6ce4c2347085a867ff74d607011ae79491b4cdfa60f",
+    "ergodis_sha256": "254dd3a3c2d490a41168488f101079fa6a1cd09f615a9175e1f3acc54809dae6",
+    "raw_jsonl_sha256": "381e6bead6f0cd8c7bc81a891153c1fd4c3dfdd749f080bf47c8f18a55c0fe8f",
+    "runner_sha256": "06d0d3c5585039c5e4d780b8ccaf7b24596437f281d57aafef94849c0460b0c7"
+  },
+  "cases": [
+    {
+      "classification": "timeout_lower_bound",
+      "competitor": "transfer-tower:cpsat-direct:6:4",
+      "competitor_completed_rounds": 0,
+      "competitor_name": "OR-Tools CP-SAT 9.14 direct model",
+      "competitor_timeout_rounds": 3,
+      "description": "GF(4) represented tower, depth 6, fanout 4",
+      "ergodis": "transfer-tower:rust:6:4",
+      "ergodis_wall_per_solve": {
+        "max_ns": 21573689.0,
+        "median_ns": 4558740.0,
+        "min_ns": 4357242.0,
+        "q1_ns": 4457991.0,
+        "q3_ns": 13066214.5
+      },
+      "historical_ratio": 344300.0,
+      "name": "represented_gf4_tower",
+      "speedup_lower_bound": 87743.54317201683
+    },
+    {
+      "classification": "completed_pair",
+      "competitor": "jin-fu-hamming:cpsat-direct:6",
+      "competitor_completed_rounds": 3,
+      "competitor_name": "OR-Tools CP-SAT 9.14 direct model",
+      "competitor_timeout_rounds": 0,
+      "competitor_wall_per_solve": {
+        "max_ns": 299805388708.0,
+        "median_ns": 270938609328.0,
+        "min_ns": 243954138019.0,
+        "q1_ns": 257446373673.5,
+        "q3_ns": 285371999018.0
+      },
+      "description": "Jin--Fu Hamming-outer binary [4095,2718,6;2] LRC",
+      "ergodis": "jin-fu-hamming:rust:6",
+      "ergodis_wall_per_solve": {
+        "max_ns": 455712695.0,
+        "median_ns": 442572582.0,
+        "min_ns": 258292362.0,
+        "q1_ns": 350432472.0,
+        "q3_ns": 449142638.5
+      },
+      "geometric_mean_speedup": 724.5645939716533,
+      "historical_ratio": 432.0,
+      "log_ratio_t_score": 49.089146401862884,
+      "median_speedup": 657.8824597107175,
+      "name": "hamming_outer_lrc"
+    }
+  ],
+  "completed_pair_geometric_mean_speedup": 724.5645939716533,
+  "completed_pair_log_ratio_t_score": 49.089146401862884,
+  "host": {
+    "active_thread_siblings": [
+      3,
+      15
+    ],
+    "boost": "0",
+    "canonical_host_ready": true,
+    "cpu": 3,
+    "cpu_model": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M",
+    "energy_performance_preference": "performance",
+    "governor": "performance",
+    "intel_no_turbo": null,
+    "isolated_cpus": "",
+    "loadavg_before": "0.36 0.77 0.93 1/1031 204832",
+    "lscpu_json": {
+      "lscpu": [
+        {
+          "data": "x86_64",
+          "field": "Architecture:"
+        },
+        {
+          "data": "32-bit, 64-bit",
+          "field": "CPU op-mode(s):"
+        },
+        {
+          "data": "48 bits physical, 48 bits virtual",
+          "field": "Address sizes:"
+        },
+        {
+          "data": "Little Endian",
+          "field": "Byte Order:"
+        },
+        {
+          "data": "24",
+          "field": "CPU(s):"
+        },
+        {
+          "data": "0-23",
+          "field": "On-line CPU(s) list:"
+        },
+        {
+          "data": "AuthenticAMD",
+          "field": "Vendor ID:"
+        },
+        {
+          "data": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M",
+          "field": "Model name:"
+        },
+        {
+          "data": "26",
+          "field": "CPU family:"
+        },
+        {
+          "data": "36",
+          "field": "Model:"
+        },
+        {
+          "data": "2",
+          "field": "Thread(s) per core:"
+        },
+        {
+          "data": "12",
+          "field": "Core(s) per socket:"
+        },
+        {
+          "data": "1",
+          "field": "Socket(s):"
+        },
+        {
+          "data": "0",
+          "field": "Stepping:"
+        },
+        {
+          "data": "disabled",
+          "field": "Frequency boost:"
+        },
+        {
+          "data": "85%",
+          "field": "CPU(s) scaling MHz:"
+        },
+        {
+          "data": "2000.0000",
+          "field": "CPU max MHz:"
+        },
+        {
+          "data": "605.2640",
+          "field": "CPU min MHz:"
+        },
+        {
+          "data": "3992.53",
+          "field": "BogoMIPS:"
+        },
+        {
+          "data": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze",
+          "field": "Flags:"
+        },
+        {
+          "data": "AMD-V",
+          "field": "Virtualization:"
+        },
+        {
+          "data": "576 KiB (12 instances)",
+          "field": "L1d cache:"
+        },
+        {
+          "data": "384 KiB (12 instances)",
+          "field": "L1i cache:"
+        },
+        {
+          "data": "12 MiB (12 instances)",
+          "field": "L2 cache:"
+        },
+        {
+          "data": "24 MiB (2 instances)",
+          "field": "L3 cache:"
+        },
+        {
+          "data": "1",
+          "field": "NUMA node(s):"
+        },
+        {
+          "data": "0-23",
+          "field": "NUMA node0 CPU(s):"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Gather data sampling:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Ghostwrite:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Indirect target selection:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Itlb multihit:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability L1tf:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Mds:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Meltdown:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Mmio stale data:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Old microcode:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Reg file data sampling:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Retbleed:"
+        },
+        {
+          "data": "Mitigation; IBPB on VMEXIT only",
+          "field": "Vulnerability Spec rstack overflow:"
+        },
+        {
+          "data": "Mitigation; Speculative Store Bypass disabled via prctl",
+          "field": "Vulnerability Spec store bypass:"
+        },
+        {
+          "data": "Mitigation; usercopy/swapgs barriers and __user pointer sanitization",
+          "field": "Vulnerability Spectre v1:"
+        },
+        {
+          "data": "Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected",
+          "field": "Vulnerability Spectre v2:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Srbds:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Tsa:"
+        },
+        {
+          "data": "Not affected",
+          "field": "Vulnerability Tsx async abort:"
+        },
+        {
+          "data": "Mitigation; IBPB on VMEXIT",
+          "field": "Vulnerability Vmscape:"
+        }
+      ]
+    },
+    "nohz_full_cpus": "",
+    "online_cpus": "0-23",
+    "physical_core_isolated": false,
+    "platform": "Linux-7.0.9-x86_64-with-glibc2.40",
+    "rustc_vv": "rustc 1.93.1 (01f6ddf75 2026-02-11)\nbinary: rustc\ncommit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf\ncommit-date: 2026-02-11\nhost: x86_64-unknown-linux-gnu\nrelease: 1.93.1\nLLVM version: 21.1.8\n",
+    "rustflags": "",
+    "scaling_driver": "amd-pstate-epp",
+    "stable_frequency_policy": true,
+    "thread_siblings": "3,15"
+  },
+  "implementations": {
+    "packages": [
+      "absl-py==2.5.0",
+      "graphillion==2.1",
+      "immutabledict==4.3.1",
+      "numpy==2.5.2",
+      "ortools==9.14.6206",
+      "pandas==3.0.5",
+      "protobuf==6.31.1",
+      "pycryptosat==5.14.7",
+      "python-dateutil==2.9.0.post0",
+      "scipy==1.16.1",
+      "six==1.17.0",
+      "typing_extensions==4.16.0"
+    ],
+    "python": "Python 3.12.12"
+  },
+  "protocol": {
+    "cpu": 3,
+    "fresh_process_per_sample": true,
+    "metric": "external wall time including implementation startup",
+    "profile": "cold",
+    "repetitions_per_process": 1,
+    "rotated_interleave": true,
+    "rounds": 3,
+    "timeout_s": 400.0
+  },
+  "schema": "ergodis-application-long-controls-v1"
+}
