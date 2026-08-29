@@ -2772,6 +2772,191 @@ where
     })
 }
 
+/// Independently verify the reverse-induction theorem for a layered artifact
+/// directly against observation and transition oracles.
+pub fn verify_layered_observational<O, T>(
+    state_counts: &[u32],
+    generators: &[LayeredGeneratorSpec],
+    mut observation: O,
+    mut transition: T,
+    compiled: &CompiledObservation,
+) -> Result<(), ObservationalError>
+where
+    O: FnMut(u32, u32) -> u32,
+    T: FnMut(u32, u32) -> u32,
+{
+    if state_counts.is_empty() {
+        return Err(ObservationalError::NoSorts);
+    }
+    if compiled.certificate_policy != CertificatePolicy::QuotientOnly
+        || !compiled.split_records.is_empty()
+        || !compiled.multiway_records.is_empty()
+        || !compiled.separators.is_empty()
+        || !compiled.separator_paths.is_empty()
+        || compiled.class_ranges.len() != state_counts.len()
+        || compiled.generator_records.len() != generators.len()
+        || compiled.class_outputs.len() != compiled.class_representatives.len()
+    {
+        return Err(ObservationalError::CompiledShape);
+    }
+    let mut raw_ranges = Vec::with_capacity(state_counts.len());
+    let mut total_states = 0_u32;
+    for &len in state_counts {
+        raw_ranges.push(SortRange {
+            start: total_states,
+            len,
+        });
+        total_states = total_states
+            .checked_add(len)
+            .ok_or(ObservationalError::Overflow)?;
+    }
+    if compiled.state_classes.len() != total_states as usize {
+        return Err(ObservationalError::CompiledShape);
+    }
+    let mut total_classes = 0_u32;
+    for range in &compiled.class_ranges {
+        if range.start != total_classes {
+            return Err(ObservationalError::CompiledShape);
+        }
+        total_classes = range
+            .start
+            .checked_add(range.len)
+            .ok_or(ObservationalError::Overflow)?;
+    }
+    if total_classes as usize != compiled.class_outputs.len() {
+        return Err(ObservationalError::CompiledShape);
+    }
+
+    let mut outgoing = vec![Vec::<u32>::new(); state_counts.len()];
+    for (generator, spec) in generators.iter().enumerate() {
+        let source = spec.source_sort as usize;
+        let target = spec.target_sort as usize;
+        if source >= state_counts.len() || target >= state_counts.len() {
+            return Err(ObservationalError::GeneratorSort { generator });
+        }
+        if source >= target {
+            return Err(ObservationalError::LayeredGeneratorOrder { generator });
+        }
+        outgoing[source].push(u32::try_from(generator).map_err(|_| ObservationalError::Overflow)?);
+    }
+
+    for sort in (0..state_counts.len()).rev() {
+        let raw_range = raw_ranges[sort];
+        let class_range = compiled.class_ranges[sort];
+        let width = outgoing[sort]
+            .len()
+            .checked_add(1)
+            .ok_or(ObservationalError::Overflow)?;
+        let signature_words = (class_range.len as usize)
+            .checked_mul(width)
+            .ok_or(ObservationalError::Overflow)?;
+        let mut signatures = vec![u32::MAX; signature_words];
+        let mut seen = vec![false; class_range.len as usize];
+        let mut expected_representatives = vec![u32::MAX; class_range.len as usize];
+        let mut scratch = vec![0_u32; width];
+        for state in 0..raw_range.len {
+            let raw_state = raw_range.start + state;
+            let class = compiled.state_classes[raw_state as usize];
+            if !class_range.contains(class) {
+                return Err(ObservationalError::Partition);
+            }
+            scratch[0] = observation(sort as u32, state);
+            for (slot, &generator) in outgoing[sort].iter().enumerate() {
+                let target_sort = generators[generator as usize].target_sort as usize;
+                let target_state = transition(generator, state);
+                let target_range = raw_ranges[target_sort];
+                if target_state >= target_range.len {
+                    return Err(ObservationalError::TransitionTarget {
+                        generator: generator as usize,
+                        transition: state as usize,
+                    });
+                }
+                let target_class =
+                    compiled.state_classes[(target_range.start + target_state) as usize];
+                if !compiled.class_ranges[target_sort].contains(target_class) {
+                    return Err(ObservationalError::Partition);
+                }
+                scratch[slot + 1] = target_class;
+            }
+            let local_class = (class - class_range.start) as usize;
+            let stored = &mut signatures[local_class * width..(local_class + 1) * width];
+            if seen[local_class] {
+                if stored != scratch {
+                    return Err(ObservationalError::Partition);
+                }
+            } else {
+                stored.copy_from_slice(&scratch);
+                seen[local_class] = true;
+                expected_representatives[local_class] = raw_state;
+            }
+        }
+        if seen.iter().any(|&is_seen| !is_seen) {
+            return Err(ObservationalError::Partition);
+        }
+        let mut order = (0..class_range.len).collect::<Vec<_>>();
+        order.sort_unstable_by(|&left, &right| {
+            let left = left as usize * width;
+            let right = right as usize * width;
+            signatures[left..left + width].cmp(&signatures[right..right + width])
+        });
+        for pair in order.windows(2) {
+            let left = pair[0] as usize * width;
+            let right = pair[1] as usize * width;
+            if signatures[left..left + width] == signatures[right..right + width] {
+                return Err(ObservationalError::Partition);
+            }
+        }
+        for local_class in 0..class_range.len as usize {
+            let class = class_range.start as usize + local_class;
+            if compiled.class_outputs[class] != signatures[local_class * width] {
+                return Err(ObservationalError::ObservationMismatch {
+                    class: class as u32,
+                });
+            }
+            if compiled.class_representatives[class] != expected_representatives[local_class] {
+                return Err(ObservationalError::Partition);
+            }
+        }
+    }
+
+    for (generator, spec) in generators.iter().enumerate() {
+        let record = compiled.generator_records[generator];
+        let source_range = compiled.class_ranges[spec.source_sort as usize];
+        if record.source_sort != spec.source_sort
+            || record.target_sort != spec.target_sort
+            || record.transition_len != source_range.len
+        {
+            return Err(ObservationalError::CompiledShape);
+        }
+        for class in source_range.start..source_range.end() {
+            let representative = compiled.class_representatives[class as usize];
+            let source_state = representative - raw_ranges[spec.source_sort as usize].start;
+            let target_state = transition(generator as u32, source_state);
+            let target_range = raw_ranges[spec.target_sort as usize];
+            if target_state >= target_range.len {
+                return Err(ObservationalError::TransitionTarget {
+                    generator,
+                    transition: source_state as usize,
+                });
+            }
+            let expected = compiled.state_classes[(target_range.start + target_state) as usize];
+            if compiled.transition(generator as u32, class) != Some(expected) {
+                return Err(ObservationalError::QuotientTransition {
+                    generator: generator as u32,
+                    class,
+                });
+            }
+        }
+    }
+    if compiled.metrics.states != total_states as usize
+        || compiled.metrics.classes != total_classes as usize
+        || compiled.metrics.generators != generators.len()
+    {
+        return Err(ObservationalError::CompiledShape);
+    }
+    Ok(())
+}
+
 impl CompiledObservation {
     pub fn class_ranges(&self) -> &[SortRange] {
         &self.class_ranges
@@ -5307,6 +5492,24 @@ mod tests {
             local_transition,
         )
         .unwrap();
+        verify_layered_observational(
+            &counts,
+            &layered_generators,
+            observation,
+            local_transition,
+            &direct,
+        )
+        .unwrap();
+        let mut corrupted = direct.clone();
+        corrupted.generator_transitions[0] = u32::MAX;
+        assert!(verify_layered_observational(
+            &counts,
+            &layered_generators,
+            observation,
+            local_transition,
+            &corrupted,
+        )
+        .is_err());
 
         let raw_ranges = [0_u32, 4, 9];
         let observations = counts
