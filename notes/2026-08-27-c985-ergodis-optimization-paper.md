@@ -1367,6 +1367,14 @@ and 1.689x fewer instructions.  This single counter
 pass is diagnostic; the alternating nine-round timing above remains the
 retained statistical claim.
 
+No pre-existing Ergodis application module currently calls
+`FrozenParetoPlan`; outside its defining/export modules, the sole consumer is
+the new fork/join control.  Thus these warm-evaluation gains do not silently
+relabel an older application benchmark as faster.  Existing applications gain
+only after an explicit adapter adopts the frozen/query-plan API; the certified
+layered-compiler improvements earlier in this report have the broader immediate
+compiler impact.
+
 ### Highest-EV continuation order
 
 1. Add the branded, once-validated objective wrapper described below, then
