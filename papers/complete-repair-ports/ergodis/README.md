@@ -214,7 +214,13 @@ packing proof as soon as it exceeds the remaining completion budget cut the
 single-worker instruction count by 6.3% without changing the search tree. The
 retained 16-worker median improved from 0.255602 to 0.234717 seconds (1.089x,
 Welch t = 6.37 over independent 11-round samples), about 10.63x faster than
-the retained 2.494941-second single-worker baseline.
+the retained 2.494941-second single-worker baseline. The portable binary now
+multiversions the complete worker-local DFS once per coarse partition: on
+x86-64 hosts supporting AVX2, BMI1/2, LZCNT, and POPCNT it selects the tuned
+kernel, otherwise it retains the generic implementation. A 32-byte conflict
+record avoids split dependent loads. The final retained 16-worker median is
+0.177196 seconds, 1.325x faster than the post-cutoff portable kernel (Welch
+t = 19.57) and 14.08x faster than the retained original single-worker run.
 On the same BB288 input and two verified translation anchors, an 8-thread
 Gurobi binary-slack control remained unresolved after two 60-second orbit
 limits (both lower bounds 13).  The retained Ergodis cached-cold exact run is

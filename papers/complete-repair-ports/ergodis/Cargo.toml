@@ -14,7 +14,7 @@ exclude = ["A?ENTS.md", "evidence/", "proptest-regressions/"]
 
 [features]
 default = []
-parallel = ["dep:libc", "dep:rayon"]
+parallel = ["dep:libc", "dep:multiversion", "dep:rayon"]
 
 [dependencies]
 anyhow = "1"
@@ -22,6 +22,7 @@ blake3 = "1"
 bytemuck = "1"
 clap = { version = "4.5", features = ["derive"] }
 libc = { version = "0.2", optional = true }
+multiversion = { version = "0.8", optional = true }
 num-bigint = "0.4"
 num-traits = "0.2"
 rayon = { version = "1.12", optional = true }

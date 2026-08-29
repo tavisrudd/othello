@@ -431,9 +431,18 @@ struct WideCompiledStructure {
     check_count: u16,
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
-    check_conflicts: Box<[PackedSyndrome<3>]>,
+    check_conflicts: Box<[AlignedConflict]>,
     check_neighbors: Box<[WidePackedSupport]>,
 }
+
+#[repr(C, align(32))]
+#[derive(Clone, Copy, Debug, Default)]
+struct AlignedConflict {
+    syndrome: PackedSyndrome<3>,
+    _padding: u64,
+}
+
+const _: () = assert!(std::mem::size_of::<AlignedConflict>() == 32);
 
 /// Precompiled exact state for CSS instances up to 320 coordinates and rank 192.
 #[derive(Clone, Debug)]
@@ -448,7 +457,7 @@ pub struct CompiledWideCssDistance {
     short_completion_syndromes: [Box<[u128]>; 2],
     three_completion_bloom: CompletionBloom,
     four_completion_bloom: CompletionBloom,
-    check_conflicts: Box<[PackedSyndrome<3>]>,
+    check_conflicts: Box<[AlignedConflict]>,
     check_neighbors: Box<[WidePackedSupport]>,
     source_sha256: [u8; 32],
     artifact_payload_blake3: Option<[u8; 32]>,
@@ -550,12 +559,14 @@ fn compile_wide_structure(
             .max(u8::try_from(column.syndrome.weight()).expect("wide check count is bounded"));
         kernel_weights_even &= column.syndrome.weight() & 1 == 1;
     }
-    let mut check_conflicts = vec![PackedSyndrome::<3>::default(); basis.len()];
+    let mut check_conflicts = vec![AlignedConflict::default(); basis.len()];
     let mut check_neighbors = vec![WidePackedSupport::default(); basis.len()];
     for (coordinate, column) in columns.iter().enumerate() {
         let mut checks = column.syndrome;
         while let Some(check) = checks.pop_lowest() {
-            check_conflicts[check].union_assign(column.syndrome);
+            check_conflicts[check]
+                .syndrome
+                .union_assign(column.syndrome);
             check_neighbors[check].insert(coordinate);
         }
     }
@@ -725,7 +736,7 @@ impl CompiledWideCssDistance {
                 return true;
             }
             remaining -= 1;
-            syndrome.difference_assign(self.check_conflicts[check]);
+            syndrome.difference_assign(self.check_conflicts[check].syndrome);
         }
         false
     }
@@ -903,125 +914,131 @@ impl CompiledWideCssDistance {
             stats,
         })
     }
+}
 
-    #[cfg(feature = "parallel")]
-    fn search_syndrome_branch_partition(
-        &self,
-        branches: &[WideRootBranch],
-        searched_maximum_weight: u16,
-        mailboxes: &[BoundMailbox],
-        pulse_interval: u64,
-    ) -> CachePaddedWideBranchResult {
-        let mut workspace = WideBranchWorkspace::new(usize::from(searched_maximum_weight));
-        let worker_index = rayon::current_thread_index().unwrap_or(0) % mailboxes.len();
-        let mailbox = &mailboxes[worker_index];
-        let mut pruning_bound = mailbox.0.load(Ordering::Relaxed);
-        let mut best_weight = searched_maximum_weight.saturating_add(1);
-        let mut best_support = WidePackedSupport::default();
-        let mut stats = ConnectedSearchStats::default();
-        for branch in branches {
-            poll_bound(mailbox, &mut pruning_bound, &mut stats);
-            let improvement_budget = pruning_bound.saturating_sub(branch.weight + 1);
-            if branch.weight >= searched_maximum_weight
-                || self.completion_lower_bound_exceeds(branch.syndrome, improvement_budget)
+#[cfg(feature = "parallel")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition(
+    compiled: &CompiledWideCssDistance,
+    branches: &[WideRootBranch],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+    pulse_interval: u64,
+) -> CachePaddedWideBranchResult {
+    let mut workspace = WideBranchWorkspace::new(usize::from(searched_maximum_weight));
+    let worker_index = rayon::current_thread_index().unwrap_or(0) % mailboxes.len();
+    let mailbox = &mailboxes[worker_index];
+    let mut pruning_bound = mailbox.0.load(Ordering::Relaxed);
+    let mut best_weight = searched_maximum_weight.saturating_add(1);
+    let mut best_support = WidePackedSupport::default();
+    let mut stats = ConnectedSearchStats::default();
+    for branch in branches {
+        poll_bound(mailbox, &mut pruning_bound, &mut stats);
+        let improvement_budget = pruning_bound.saturating_sub(branch.weight + 1);
+        if branch.weight >= searched_maximum_weight
+            || compiled.completion_lower_bound_exceeds(branch.syndrome, improvement_budget)
+        {
+            stats.syndrome_bound_prunes += 1;
+            continue;
+        }
+        let branch_options =
+            compiled.syndrome_branch_options(branch.syndrome, branch.support, branch.forbidden);
+        if branch_options.is_empty() {
+            stats.syndrome_bound_prunes += 1;
+            continue;
+        }
+        let branch_depth = usize::from(branch.weight - 1);
+        workspace.supports[branch_depth] = branch.support;
+        workspace.forbidden[branch_depth] = branch.forbidden;
+        workspace.options[branch_depth] = branch_options;
+        workspace.rejected[branch_depth] = WidePackedSupport::default();
+        workspace.syndromes[branch_depth] = branch.syndrome;
+        workspace.logicals[branch_depth] = branch.logical;
+        stats.exclusive_extensions += 1;
+        let mut depth = branch_depth;
+        loop {
+            let Some(added) = workspace.options[depth].pop_lowest() else {
+                if depth == branch_depth {
+                    break;
+                }
+                depth -= 1;
+                continue;
+            };
+            stats.candidates += 1;
+            if pulse_interval != 0 && stats.candidates & (pulse_interval - 1) == 0 {
+                poll_bound(mailbox, &mut pruning_bound, &mut stats);
+            }
+            let prior_rejected = workspace.rejected[depth];
+            workspace.rejected[depth].insert(added);
+            let child_depth = depth + 1;
+            let child_weight = (child_depth + 1) as u16;
+            let mut child_support = workspace.supports[depth];
+            child_support.insert(added);
+            let mut child_forbidden = workspace.forbidden[depth];
+            child_forbidden.union_assign(prior_rejected);
+            let mut child_syndrome = workspace.syndromes[depth];
+            child_syndrome.toggle(compiled.columns[added].syndrome);
+            let child_logical = workspace.logicals[depth] ^ compiled.columns[added].logical;
+            stats.connected_supports += 1;
+            stats.maximum_depth = stats.maximum_depth.max(child_weight);
+            if child_syndrome.is_zero() {
+                stats.kernel_supports += 1;
+                if child_logical != 0 {
+                    stats.nontrivial_supports += 1;
+                    if child_weight < best_weight {
+                        best_weight = child_weight;
+                        best_support = child_support;
+                        pruning_bound = pruning_bound.min(child_weight);
+                        stats.bound_improvements_published +=
+                            u64::from(publish_bound(mailboxes, child_weight));
+                    }
+                }
+                continue;
+            }
+            let improvement_budget = pruning_bound.saturating_sub(child_weight + 1);
+            if child_weight >= searched_maximum_weight
+                || compiled.completion_lower_bound_exceeds(child_syndrome, improvement_budget)
             {
                 stats.syndrome_bound_prunes += 1;
                 continue;
             }
-            let branch_options =
-                self.syndrome_branch_options(branch.syndrome, branch.support, branch.forbidden);
-            if branch_options.is_empty() {
+            let four_completion_reject =
+                improvement_budget == 4 && !compiled.may_have_four_completion(child_syndrome);
+            if (improvement_budget <= 3
+                && !compiled.has_short_completion(child_syndrome, improvement_budget))
+                || four_completion_reject
+            {
+                stats.syndrome_bound_prunes += 1;
+                stats.four_completion_prunes += u64::from(four_completion_reject);
+                continue;
+            }
+            let child_options =
+                compiled.syndrome_branch_options(child_syndrome, child_support, child_forbidden);
+            if child_options.is_empty() {
                 stats.syndrome_bound_prunes += 1;
                 continue;
             }
-            let branch_depth = usize::from(branch.weight - 1);
-            workspace.supports[branch_depth] = branch.support;
-            workspace.forbidden[branch_depth] = branch.forbidden;
-            workspace.options[branch_depth] = branch_options;
-            workspace.rejected[branch_depth] = WidePackedSupport::default();
-            workspace.syndromes[branch_depth] = branch.syndrome;
-            workspace.logicals[branch_depth] = branch.logical;
+            workspace.supports[child_depth] = child_support;
+            workspace.forbidden[child_depth] = child_forbidden;
+            workspace.options[child_depth] = child_options;
+            workspace.rejected[child_depth] = WidePackedSupport::default();
+            workspace.syndromes[child_depth] = child_syndrome;
+            workspace.logicals[child_depth] = child_logical;
             stats.exclusive_extensions += 1;
-            let mut depth = branch_depth;
-            loop {
-                let Some(added) = workspace.options[depth].pop_lowest() else {
-                    if depth == branch_depth {
-                        break;
-                    }
-                    depth -= 1;
-                    continue;
-                };
-                stats.candidates += 1;
-                if pulse_interval != 0 && stats.candidates & (pulse_interval - 1) == 0 {
-                    poll_bound(mailbox, &mut pruning_bound, &mut stats);
-                }
-                let prior_rejected = workspace.rejected[depth];
-                workspace.rejected[depth].insert(added);
-                let child_depth = depth + 1;
-                let child_weight = (child_depth + 1) as u16;
-                let mut child_support = workspace.supports[depth];
-                child_support.insert(added);
-                let mut child_forbidden = workspace.forbidden[depth];
-                child_forbidden.union_assign(prior_rejected);
-                let mut child_syndrome = workspace.syndromes[depth];
-                child_syndrome.toggle(self.columns[added].syndrome);
-                let child_logical = workspace.logicals[depth] ^ self.columns[added].logical;
-                stats.connected_supports += 1;
-                stats.maximum_depth = stats.maximum_depth.max(child_weight);
-                if child_syndrome.is_zero() {
-                    stats.kernel_supports += 1;
-                    if child_logical != 0 {
-                        stats.nontrivial_supports += 1;
-                        if child_weight < best_weight {
-                            best_weight = child_weight;
-                            best_support = child_support;
-                            pruning_bound = pruning_bound.min(child_weight);
-                            stats.bound_improvements_published +=
-                                u64::from(publish_bound(mailboxes, child_weight));
-                        }
-                    }
-                    continue;
-                }
-                let improvement_budget = pruning_bound.saturating_sub(child_weight + 1);
-                if child_weight >= searched_maximum_weight
-                    || self.completion_lower_bound_exceeds(child_syndrome, improvement_budget)
-                {
-                    stats.syndrome_bound_prunes += 1;
-                    continue;
-                }
-                let four_completion_reject =
-                    improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
-                if (improvement_budget <= 3
-                    && !self.has_short_completion(child_syndrome, improvement_budget))
-                    || four_completion_reject
-                {
-                    stats.syndrome_bound_prunes += 1;
-                    stats.four_completion_prunes += u64::from(four_completion_reject);
-                    continue;
-                }
-                let child_options =
-                    self.syndrome_branch_options(child_syndrome, child_support, child_forbidden);
-                if child_options.is_empty() {
-                    stats.syndrome_bound_prunes += 1;
-                    continue;
-                }
-                workspace.supports[child_depth] = child_support;
-                workspace.forbidden[child_depth] = child_forbidden;
-                workspace.options[child_depth] = child_options;
-                workspace.rejected[child_depth] = WidePackedSupport::default();
-                workspace.syndromes[child_depth] = child_syndrome;
-                workspace.logicals[child_depth] = child_logical;
-                stats.exclusive_extensions += 1;
-                depth = child_depth;
-            }
-        }
-        CachePaddedWideBranchResult {
-            best_weight,
-            best_support,
-            stats,
+            depth = child_depth;
         }
     }
+    CachePaddedWideBranchResult {
+        best_weight,
+        best_support,
+        stats,
+    }
+}
 
+impl CompiledWideCssDistance {
     #[cfg(feature = "parallel")]
     fn search_syndrome_anchor_parallel(
         &self,
@@ -1136,7 +1153,8 @@ impl CompiledWideCssDistance {
         let partials = partitions
             .par_iter()
             .map(|partition| {
-                self.search_syndrome_branch_partition(
+                search_syndrome_branch_partition(
+                    self,
                     partition,
                     searched_maximum_weight,
                     &mailboxes,

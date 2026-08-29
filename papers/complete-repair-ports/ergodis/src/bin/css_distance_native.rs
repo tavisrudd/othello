@@ -67,6 +67,7 @@ struct RunRecord<'a> {
     preparation_seconds: f64,
     artifact_write_seconds: Option<f64>,
     artifact_payload_blake3: Option<String>,
+    search_kernel: &'static str,
     threads: usize,
     worker_cpus: &'a [usize],
     pulse_interval: u64,
@@ -78,6 +79,23 @@ struct RunRecord<'a> {
 enum Backend {
     Compact(CompiledCssDistance),
     Wide(CompiledWideCssDistance),
+}
+
+fn search_kernel(wide: bool) -> &'static str {
+    if !wide {
+        return "portable-compact";
+    }
+    #[cfg(target_arch = "x86_64")]
+    if std::arch::is_x86_feature_detected!("avx")
+        && std::arch::is_x86_feature_detected!("avx2")
+        && std::arch::is_x86_feature_detected!("bmi1")
+        && std::arch::is_x86_feature_detected!("bmi2")
+        && std::arch::is_x86_feature_detected!("lzcnt")
+        && std::arch::is_x86_feature_detected!("popcnt")
+    {
+        return "x86-64-avx2-bmi-popcnt";
+    }
+    "portable-wide"
 }
 
 #[cfg(all(feature = "parallel", target_os = "linux"))]
@@ -334,6 +352,7 @@ fn main() -> Result<()> {
         preparation_seconds,
         artifact_write_seconds,
         artifact_payload_blake3,
+        search_kernel: search_kernel(wide_problem),
         threads: args.threads,
         worker_cpus: &args.worker_cpus,
         pulse_interval: args.pulse_interval,

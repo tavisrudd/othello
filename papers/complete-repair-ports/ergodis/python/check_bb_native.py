@@ -52,6 +52,13 @@ def main() -> int:
         or any(cpu < 0 for cpu in worker_cpus)
     ):
         raise RuntimeError("worker affinity is incomplete, repeated, or invalid")
+    search_kernel = record.get("search_kernel")
+    if search_kernel is not None and search_kernel not in {
+        "portable-compact",
+        "portable-wide",
+        "x86-64-avx2-bmi-popcnt",
+    }:
+        raise RuntimeError("evidence names an unknown native search kernel")
     output = {
         "schema": "ergodis-bb-native-check-v1",
         "label": problem["label"],

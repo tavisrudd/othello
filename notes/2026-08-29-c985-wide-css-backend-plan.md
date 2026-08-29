@@ -203,6 +203,26 @@ instruction target is a budget-specialized packing realization or a compact
 lookup representation; it must retain the theorem's roughly 8x pruning value
 and beat the now-short-circuiting scalar loop on complete proofs.
 
+The subsequent ISA pass followed the Muła--Kurz--Lemire lesson at the correct
+granularity. Harley--Seal accumulation is mismatched to each five-word option
+mask, and a thresholded word-by-word count increased instructions on both the
+portable and tuned builds. Whole-worker multiversioning was decisive instead:
+the ordinary portable binary contains one generic clone and one
+`AVX2+BMI1/2+LZCNT+POPCNT` clone, dispatching outside the DFS candidate loop.
+An x86-64-v4 control was 13.8% slower than x86-64-v3, so AVX-512 is deliberately
+not selected. Aligning each 24-byte conflict mask to a 32-byte record then cut
+another 2.2% cycles by avoiding split dependent loads.
+
+The independently replayed 16-worker evidence names the selected
+`x86-64-avx2-bmi-popcnt` kernel. Its eleven-round median is 0.177196 seconds,
+mean 0.179661, and sample standard deviation 0.005225. Against the immediately
+prior 0.234717-second retained run this is 1.325x (Welch t = 19.57); against
+the original 2.494941-second single-worker record it is 14.08x. Two rejected
+controls are informative for the next profile: a four-check compiled packing
+automaton increased cycles by 6.7%, while moving random completion-filter
+probes ahead of packing reduced instructions but increased cache misses about
+8.6x and slowed the proof by roughly 20%.
+
 ## Matched Gurobi comparison
 
 The audited global parity model was regenerated from the same BB288 source,
