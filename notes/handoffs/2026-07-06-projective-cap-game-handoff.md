@@ -2,7 +2,7 @@
 
 **Lane**: `cap`
 
-Updated: 2026-07-29.
+Updated: 2026-08-29.
 
 ## Goal
 
@@ -143,6 +143,9 @@ only their named fields and domains.
   `../2026-07-29-c80-causal-one-to-many.md`,
   `../../rust/scripts/c80_causal_one_to_many.py`,
   `../2026-07-29-c80-causal-one-to-many.json`
+- Ergodis transfer memo for the Hall-rematching theorem and exact
+  support-deficit engine:
+  `../2026-08-29-c80-ergodis-transfer-memo.md`
 - Search/lookup companion with the full prior handoff, historical
   attacks, and report pointers:
   `2026-07-29-projective-cap-c80-lookup.md`
@@ -173,9 +176,9 @@ for closed C-item provenance.
 
 ## Next action
 
-Start from the q11 one-to-many witness and formulate the global
-consumed-label/new-defect neighbourhood. Test Hall surplus on the
-existing q11 witness and the certified q23 replacement corpus before
-attempting a field-uniform incidence proof.
+Follow `../2026-08-29-c80-ergodis-transfer-memo.md`: start from the q11
+one-to-many witness, formulate the global consumed-label/new-defect
+restriction graph, and run the q11/q23 Hall-deficit gate before attempting a
+field-uniform incidence proof.
 
 go C80 cap prove global consumed-label Hall surplus and strict support descent, or extract the first support-deficit set
