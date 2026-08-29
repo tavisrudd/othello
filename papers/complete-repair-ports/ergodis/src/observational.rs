@@ -2504,6 +2504,10 @@ pub enum FrozenObservationFileError {
 }
 
 impl FrozenObservation {
+    pub fn class_range(&self, sort: u32) -> Option<SortRange> {
+        self.class_ranges.get(sort as usize).copied()
+    }
+
     pub fn entry_class(&self, sort: u32, local_state: u32) -> Option<u32> {
         let range = *self.entry_ranges.get(sort as usize)?;
         if local_state >= range.len {
