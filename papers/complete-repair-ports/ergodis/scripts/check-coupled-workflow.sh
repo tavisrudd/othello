@@ -8,7 +8,8 @@ awk -F '\t' '
         next
     }
     {
-        if ($2 != 46656 || $3 != 349 || $4 != 46656 || $5 != 101 || $6 != 23 || $7 != 23 || $8 <= 0 || $9 <= 0 || $10 <= $11 || $11 <= 0 || $12 <= 0 || $16 != 1000) exit 3
+        expected_order = ($1 % 2) ? "identity quotient factorized" : "factorized quotient identity"
+        if ($1 != NR - 1 || $15 != expected_order || $2 != 46656 || $3 != 349 || $4 != 46656 || $5 != 101 || $6 != 23 || $7 != 23 || $8 <= 0 || $9 <= 0 || $10 <= $11 || $11 <= 0 || $12 <= 0 || $16 != 1000) exit 3
         x = log($10 / $11)
         y = log($11 / $12)
         crossover_log += log(($8 + $9) / ($10 - $11))
@@ -16,7 +17,7 @@ awk -F '\t' '
         sy += y; syy += y * y; n++
     }
     END {
-        if (n < 5) exit 4
+        if (n != 9) exit 4
         variance = (sxx - sx * sx / n) / (n - 1)
         t = (sx / n) / sqrt(variance / n)
         variance_y = (syy - sy * sy / n) / (n - 1)

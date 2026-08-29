@@ -1267,19 +1267,21 @@ The all-class convenience result still retains one front per quotient class.
 
 The strongest classical control is retained as a negative.  In this separable
 shuffle product, an exact factorized solver evaluates the two branch languages
-independently and combines their fronts once.  Nine CPU-2 processes, each
-amortizing 1,000 solves, give:
+independently and combines their fronts once.  Nine interleaved rounds run
+identity, quotient, and specialized stages in separate CPU-2 processes, each
+amortizing 1,000 solves, and give:
 
-- identity quotient / minimized quotient: 6.196x geometric mean, log-ratio
-  t = 174.58;
-- minimized quotient / exact factorized DP: 1.090x geometric mean, log-ratio
-  t = 8.43.
+- identity quotient / minimized quotient: 6.370x geometric mean, log-ratio
+  t = 324.47;
+- minimized quotient / exact factorized DP: 1.016x geometric mean, log-ratio
+  t = 0.64.
 
 The identity artifact gives every concrete state a distinct observation but
 maps those observations back to the same base fronts at evaluation.  It uses
 the identical consuming algorithm, retained-entry obligation, objective
-tables, and witness operation; the 6.196x ratio isolates contextual
-minimization.  The minimized engine is only 9.0% slower than the stronger
+tables, and witness operation; the 6.370x ratio isolates contextual
+minimization.  The minimized engine has no statistically resolved gap from the
+stronger
 branch-factorized solver.  The legacy Cartesian DP remains an independent
 correctness oracle and is not used for the quotient speedup claim.
 
@@ -1292,8 +1294,8 @@ scripts/check-shuffle-product-control.sh \
 ```
 
 - benchmark script: `0375db708d1741a21c1be72e653d36c25931625ccf8234ebb2858bbdb6f80ce6`;
-- checker: `a13d1a5da32b70a6cc563cf95fd1b9114383db4715685f7b7315240ac1949bc2`;
-- evidence TSV: `59923bad2bd4755425523f495a12563e5a40ad97efb613c1d36c829069213106`.
+- checker: `053cb6d5d8ebc1933994af8903b095b1a9e03f518720542b88e7939e816a3761`;
+- evidence TSV: `5a553af58ccee7b2b79c54f1ca24dcbccc4604f4ee8fe742da9d26f71979da77`.
 
 The coupled control adds a shared mode selected by each branch's first symbol
 and requires the modes to agree at the join.  Unlike the discarded switch-
@@ -1305,11 +1307,12 @@ evaluation, brute force, and witness replay agree.
 At length five with 12 local DFA states, the identity artifact has 46,656
 classes, contextual minimization has 349, and only 101 minimized classes are
 reachable from the requested entry.  The consuming frontier peaks at 23
-classes / 23 Pareto entries.  Nine CPU-2 processes of 1,000 evaluations give a
-22.667x identity/minimized geometric speedup with log-ratio t = 77.62.  The
+classes / 23 Pareto entries.  Nine interleaved rounds run each of the three
+stages in a separate CPU-2 process amortizing 1,000 evaluations and give a
+24.118x identity/minimized geometric speedup with log-ratio t = 228.14.  The
 generic minimized evaluator is 1.188x faster than the exact mode-conditioned
-branch join (generic/specialized ratio 0.842, log-ratio t = -2.82).  The
-one-time minimized compile plus entry-plan cost crosses over after 12.62 such
+branch join (generic/specialized ratio 0.842, log-ratio t = -2.90).  The
+one-time minimized compile plus entry-plan cost crosses over after 11.54 such
 entry evaluations
 geometrically.  This synthetic finite-state join-compatibility application is
 genuinely coupled and differs from the unconditioned branch product, but it
@@ -1323,8 +1326,8 @@ scripts/check-coupled-workflow.sh evidence/c985-coupled-workflow.tsv
 ```
 
 - coupled benchmark: `6fa41ddb0891d3cac2ceb580648059cba4a7b1da42afce25dccb998ee0377f3e`;
-- coupled checker: `161cb733a28b752e98c2da5d87963e633219cda3b33a87c7b8775a81417f5bc0`;
-- coupled evidence: `f8553b84a9f370abf93fa24e5290c9735d7bd252891e6a34101e8d4635a60eb5`.
+- coupled checker: `f85b6afd48267b8de80c610c05c85940dae87916a3246fce7633b4ad8697cc89`;
+- coupled evidence: `64595d3f86c2fa249fea8e775a2258c35a9d6c5795ea83d6ae3196717581c293`.
 
 An isolated `perf stat` pass then showed that generic evaluation executed fewer
 instructions than the mode-conditioned solver but lost IPC in repeated small
@@ -1334,17 +1337,20 @@ allocations.  Over 100,000 isolated coupled evaluations, cycles fell from
 14,633,115,635 (1.033x).  The reusable query-plan boundary then moved all
 remaining reachability and release scheduling outside the objective loop and
 reused the caller's accumulator.  The common single-entry path also moves its
-result rather than cloning its witness box.  Both generic and specialized
+result rather than cloning its witness box, and a shared exact insertion helper
+handles zero/singleton fronts without the general scan-plus-retain path.  Both
+generic and specialized
 controls now reuse prebuilt objective fronts and workspaces, and their stages
 run in separate pinned processes with alternating round order.  Mean entry-plan
-construction is 3.4 us on the shuffle control and 4.6 us on the coupled
-control; warm generic evaluation is 9.0% behind the exact separator solver on
-the former and 18.8% ahead on the latter.  The hardware-counter pass predates
-this final change and remains diagnostic rather than a separate paper claim.
-A final isolated 100,000-evaluation coupled pass after the full change measured
-2,688,640,668 cycles and 10,891,364,155 instructions for generic evaluation,
-versus 2,939,393,801 cycles and 15,373,528,447 instructions for the specialized
-join: 1.093x fewer cycles and 1.411x fewer instructions.  This single counter
+construction is 3.5 us on the shuffle control and 4.2 us on the coupled
+control; warm generic evaluation has no statistically resolved gap from the
+exact separator solver on the former and is 18.8% ahead on the latter.  The
+initial hardware-counter pass predates this final change and remains diagnostic
+rather than a separate paper claim.  A final isolated 100,000-evaluation
+coupled pass after the full change measured 2,665,205,761 cycles and
+10,875,261,851 instructions for generic evaluation, versus 3,095,552,588
+cycles and 15,373,528,853 instructions for the specialized join: 1.161x fewer
+cycles and 1.414x fewer instructions.  This single counter
 pass is diagnostic; the alternating nine-round timing above remains the
 retained statistical claim.
 
@@ -1354,7 +1360,7 @@ retained statistical claim.
   algorithms and retention obligations.  Identity and minimized artifacts now
   use the same plan, objective tables, reachability pruning, last-use release,
   witness operation, and selected entry.  The retained quotient-only gains are
-  6.196x on the shuffle control and 22.667x on the shared-mode control.
+  6.370x on the shuffle control and 24.118x on the shared-mode control.
 - **Settled -- apparent nonfactorization.**  A switch-count monitor constrained
   schedules without changing the attainable additive cost set and was
   discarded.  Shared-mode compatibility changes the front relative to the
@@ -1381,5 +1387,16 @@ retained statistical claim.
   application-SOTA claim.
 - **Open -- unbounded witness and flat-front storage.**  The control packs short
   words into `u32`, and the generic result still allocates one box per reachable
-  class.  A pooled predecessor arena plus flat front/range slabs owns the next
-  scaling gate; current length-five evidence does not exercise it.
+  class.  After the singleton insertion specialization, the final coupled
+  profile attributes 84.89% of samples to the query evaluator, 6.63% to
+  AVX-512 `memmove`, and 3.46% to `malloc`.  A reusable
+  evaluation workspace with per-live-sort flat front-entry pools/ranges, dense
+  reachable-class slots, and a separate compact global witness/backpointer
+  arena is therefore the next implementation gate.  Provenance nodes should be
+  created only for finalized nondominated entries; they cannot share the
+  shorter front-slab lifetime because parent witnesses may reference suffixes.
+  Acceptance requires exact multi-entry/witness parity, front allocations that
+  scale with live sorts rather than reachable classes, witness storage bounded
+  separately by finalized provenance nodes, and a retained multiround speedup.
+  Current length-five evidence does not exercise the unbounded-witness half of
+  this successor.

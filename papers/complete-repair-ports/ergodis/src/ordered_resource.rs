@@ -531,24 +531,13 @@ impl<'a> FrozenParetoPlan<'a> {
                         for &suffix in &child.entries {
                             let resource = monoid.combine(edge.resource, suffix.resource);
                             validate_element(monoid.element_count(), resource)?;
-                            if accumulator
-                                .iter()
-                                .any(|entry| monoid.leq(entry.resource, resource))
-                            {
-                                continue;
-                            }
-                            accumulator.retain(|entry| !monoid.leq(resource, entry.resource));
-                            if accumulator.len() == capacity {
-                                return Err(OrderedResourceError::WorkspaceCapacity {
-                                    required: capacity.saturating_add(1),
-                                    capacity,
-                                }
-                                .into());
-                            }
-                            accumulator.push(ParetoWitness {
+                            insert_witnessed_bounded(
+                                monoid,
+                                accumulator,
+                                capacity,
                                 resource,
-                                witness: compose_witness(generator, edge.witness, suffix.witness),
-                            });
+                                || compose_witness(generator, edge.witness, suffix.witness),
+                            )?;
                         }
                     }
                 }
@@ -792,24 +781,13 @@ impl FrozenParetoQueryPlan<'_, '_> {
                         for &suffix in &child.entries {
                             let resource = monoid.combine(edge.resource, suffix.resource);
                             validate_element(monoid.element_count(), resource)?;
-                            if accumulator
-                                .iter()
-                                .any(|entry| monoid.leq(entry.resource, resource))
-                            {
-                                continue;
-                            }
-                            accumulator.retain(|entry| !monoid.leq(resource, entry.resource));
-                            if accumulator.len() == capacity {
-                                return Err(OrderedResourceError::WorkspaceCapacity {
-                                    required: capacity.saturating_add(1),
-                                    capacity,
-                                }
-                                .into());
-                            }
-                            accumulator.push(ParetoWitness {
+                            insert_witnessed_bounded(
+                                monoid,
+                                accumulator,
+                                capacity,
                                 resource,
-                                witness: compose_witness(generator, edge.witness, suffix.witness),
-                            });
+                                || compose_witness(generator, edge.witness, suffix.witness),
+                            )?;
                         }
                     }
                 }
@@ -903,6 +881,46 @@ pub fn evaluate_frozen_pareto_dag<M: FiniteOrderedMonoid>(
         workspace,
         compose_witness,
     )
+}
+
+#[inline]
+fn insert_witnessed_bounded<M: FiniteOrderedMonoid>(
+    monoid: &M,
+    entries: &mut Vec<ParetoWitness>,
+    capacity: usize,
+    resource: u32,
+    make_witness: impl FnOnce() -> u32,
+) -> Result<(), OrderedResourceError> {
+    if let [current] = entries.as_mut_slice() {
+        if monoid.leq(current.resource, resource) {
+            return Ok(());
+        }
+        if monoid.leq(resource, current.resource) {
+            *current = ParetoWitness {
+                resource,
+                witness: make_witness(),
+            };
+            return Ok(());
+        }
+    } else if entries
+        .iter()
+        .any(|entry| monoid.leq(entry.resource, resource))
+    {
+        return Ok(());
+    } else if entries.len() > 1 {
+        entries.retain(|entry| !monoid.leq(resource, entry.resource));
+    }
+    if entries.len() == capacity {
+        return Err(OrderedResourceError::WorkspaceCapacity {
+            required: capacity.saturating_add(1),
+            capacity,
+        });
+    }
+    entries.push(ParetoWitness {
+        resource,
+        witness: make_witness(),
+    });
+    Ok(())
 }
 
 #[inline]
@@ -1542,6 +1560,7 @@ mod tests {
                 )
                 .unwrap()];
                 let mut workspace = WitnessedParetoWorkspace::with_capacity(2);
+                let workspace_storage = workspace.entries.as_ptr();
                 let (empty_selected, empty_metrics) = empty_query
                     .evaluate(&monoid, &[], &edges, &mut workspace, |_, _, _| {
                         unreachable!("an empty query must not compose witnesses")
@@ -1576,6 +1595,7 @@ mod tests {
                         |_, edge, child| edge | (child << 1),
                     )
                     .unwrap();
+                assert_eq!(workspace.entries.as_ptr(), workspace_storage);
                 assert_eq!(
                     mixed[0].resources().collect::<Vec<_>>(),
                     mixed[2].resources().collect::<Vec<_>>()

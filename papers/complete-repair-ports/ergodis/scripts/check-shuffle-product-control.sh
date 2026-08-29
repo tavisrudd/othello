@@ -8,7 +8,8 @@ awk -F '\t' '
         next
     }
     {
-        if ($2 != 5184 || $3 != 153 || $4 != 5184 || $5 != 3 || $6 != 96 || $7 != 22 || $8 != 26 || $9 <= 0 || $10 <= 0 || $11 <= $12 || $12 <= 0 || $13 <= 0 || $17 != 1000) exit 3
+        expected_order = ($1 % 2) ? "identity quotient factorized" : "factorized quotient identity"
+        if ($1 != NR - 1 || $16 != expected_order || $2 != 5184 || $3 != 153 || $4 != 5184 || $5 != 3 || $6 != 96 || $7 != 22 || $8 != 26 || $9 <= 0 || $10 <= 0 || $11 <= $12 || $12 <= 0 || $13 <= 0 || $17 != 1000) exit 3
         x = log($11 / $12)
         y = log($12 / $13)
         sx += x; sxx += x * x
@@ -16,7 +17,7 @@ awk -F '\t' '
         n++
     }
     END {
-        if (n < 5) exit 4
+        if (n != 9) exit 4
         vx = (sxx - sx * sx / n) / (n - 1)
         vy = (syy - sy * sy / n) / (n - 1)
         tx = (sx / n) / sqrt(vx / n)
