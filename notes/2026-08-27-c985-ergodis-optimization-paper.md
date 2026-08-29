@@ -1252,7 +1252,8 @@ verified artifact, permitting many objectives to reuse one topology plan.
 `evaluate_frozen_pareto_dag` is the one-shot convenience path.  Evaluation uses
 one caller-capacity-checked accumulator: compose and Pareto choice are fused,
 witnesses are created only for admitted nondominated products, and class/
-generator loops do not grow heap storage.  `evaluate_entries` additionally
+generator loops do not grow scratch storage; one final front is allocated per
+reachable class.  `evaluate_entries` additionally
 computes a packed-bitmap forward closure from requested classes, skips
 unreachable quotient classes, computes each target sort's final predecessor at
 plan construction, and drops every live sort slab at that exact last use.  On
@@ -1265,16 +1266,16 @@ shuffle product, an exact factorized solver evaluates the two branch languages
 independently and combines their fronts once.  Nine CPU-2 processes, each
 amortizing 1,000 solves, give:
 
-- identity quotient / minimized quotient: 6.731x geometric mean, log-ratio
-  t = 1773.35;
-- minimized quotient / exact factorized DP: 1.165x geometric mean, log-ratio
-  t = 18.80.
+- identity quotient / minimized quotient: 6.918x geometric mean, log-ratio
+  t = 157.24;
+- minimized quotient / exact factorized DP: 1.296x geometric mean, log-ratio
+  t = 20.25.
 
 The identity artifact gives every concrete state a distinct observation but
 maps those observations back to the same base fronts at evaluation.  It uses
 the identical consuming algorithm, retained-entry obligation, objective
 tables, and witness operation; the 6.73x ratio isolates contextual
-minimization.  The minimized engine is only 16.5% slower than the stronger
+minimization.  The minimized engine is only 29.6% slower than the stronger
 branch-factorized solver.  The legacy Cartesian DP remains an independent
 correctness oracle and is not used for the quotient speedup claim.
 
@@ -1286,9 +1287,9 @@ scripts/check-shuffle-product-control.sh \
   evidence/c985-shuffle-product-control.tsv
 ```
 
-- benchmark script: `0a6d016385d63b96fcd1289b06b65b06a0e39272af5db7509ec1eb285e88be3a`;
-- checker: `4a4139050d7f7aefcc2d318a9ef1c64576bd499bad1e5b903d713d07e3c437e9`;
-- evidence TSV: `7e144140a395d5b92577be6b71889692da52e70fd0dd14a79d0a49ec1641eee9`.
+- benchmark script: `c44333bc484d8aacd11a66bbd08b9f54cccb92decda69c472de554ca63e08742`;
+- checker: `1c10e493c98864c9efeb3e3365c7065b2c9f6b1af31d1d3d2040abd652806d2a`;
+- evidence TSV: `d4bb6315b33827d733963b885def0c7668465e24dc45909300da3eb817f32c04`.
 
 The coupled control adds a shared mode selected by each branch's first symbol
 and requires the modes to agree at the join.  Unlike the discarded switch-
@@ -1301,17 +1302,56 @@ At length five with 12 local DFA states, the identity artifact has 46,656
 classes, contextual minimization has 349, and only 101 minimized classes are
 reachable from the requested entry.  The consuming frontier peaks at 23
 classes / 23 Pareto entries.  Nine CPU-2 processes of 1,000 evaluations give a
-23.034x identity/minimized geometric speedup with log-ratio t = 967.61.  The
-one-time minimized compile cost crosses over after 10.34 such entry evaluations
-geometrically.  This
-is a synthetic but genuinely nonfactorizable finite-state join-compatibility
-application; it is not yet a public workflow-suite or SOTA claim.
+23.433x identity/minimized geometric speedup with log-ratio t = 363.66.  The
+exact mode-conditioned branch join is 1.147x faster than generic minimized
+evaluation (log-ratio t = 28.86).  The one-time minimized compile cost crosses
+over after 9.68 such entry evaluations
+geometrically.  This synthetic finite-state join-compatibility application is
+genuinely coupled and differs from the unconditioned branch product, but it
+still factorizes through a two-value shared-mode interface.  The measured
+mode-conditioned join is therefore the strongest specialized control.  This is
+not yet a public workflow-suite or SOTA claim.
 
 ```sh
 scripts/bench-coupled-workflow.sh > evidence/c985-coupled-workflow.tsv
 scripts/check-coupled-workflow.sh evidence/c985-coupled-workflow.tsv
 ```
 
-- coupled benchmark: `0027d32f34b444abc4c7f84b0a02e5c7c80c0f12f97e512d984775c8eb9fea85`;
-- coupled checker: `7015dd9e380e1a318f7c7393a57ec5361cfc565d91fa2198fc4be39f6e03ed10`;
-- coupled evidence: `118a0f84467e35eb0615ef15595afaea471d33cb26ec2b5297423c3f4ca6923e`.
+- coupled benchmark: `54b514da2c157d267eb0e901184b28b3a022d774c4cab1ad92113a68cd341148`;
+- coupled checker: `fc8b6a5812797a2d46eab545dda39c29b8225658e337627490aa45ca090b65ef`;
+- coupled evidence: `13a9d3b384454dbe6985a45654466b7c6d73e5a42d1476fab06d15dec58f30ac`.
+
+## Mystery ledger
+
+- **Settled -- source of the speedup.**  The original raw/quotient timing mixed
+  algorithms and retention obligations.  Identity and minimized artifacts now
+  use the same plan, objective tables, reachability pruning, last-use release,
+  witness operation, and selected entry.  The retained quotient-only gains are
+  6.918x on the shuffle control and 23.433x on the shared-mode control.
+- **Settled -- apparent nonfactorization.**  A switch-count monitor constrained
+  schedules without changing the attainable additive cost set and was
+  discarded.  Shared-mode compatibility changes the front relative to the
+  unconditioned product, but the EJ/TT pass exposed its two-value separator.
+  The exact mode-conditioned join is now implemented, checked for front and
+  witness parity, and measured as the strongest specialized baseline.
+- **Settled -- selected-entry residency.**  Structural lifetimes could retain a
+  target past its final reachable predecessor.  Release buckets are now derived
+  from the packed reachable-class closure for each evaluation.  The coupled
+  control certifies 101 reachable classes and a 23-class / 23-entry peak.
+- **Open -- objective-family minimality.**  The feasibility/right-language
+  quotient is universal over local ordered-monoid interpretations but can be
+  finer than the coarsest quotient for one fixed objective family after cost
+  collisions and dominance.  The evidence gap is a weighted/Pareto
+  Myhill--Nerode theorem and certified minimizer; this is the highest-value
+  theoretical successor.
+- **Open -- cyclic semantics.**  The theorem and evaluator are acyclic.  No
+  least-fixed-point, convergence, or negative-cycle claim is made; a cyclic
+  extension needs a separately specified algebra and certificate.
+- **Open -- application/SOTA breadth.**  The shared-mode instance is synthetic.
+  A public workflow, MDD/CostRegular, RCSP, or configuration benchmark with its
+  strongest native separator-aware implementation remains the gate for an
+  application-SOTA claim.
+- **Open -- unbounded witness and flat-front storage.**  The control packs short
+  words into `u32`, and the generic result still allocates one box per reachable
+  class.  A pooled predecessor arena plus flat front/range slabs owns the next
+  scaling gate; current length-five evidence does not exercise it.

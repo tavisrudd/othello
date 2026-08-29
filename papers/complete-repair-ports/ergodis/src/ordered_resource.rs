@@ -421,8 +421,6 @@ pub struct FrozenParetoPlan<'a> {
     offsets: Box<[usize]>,
     outgoing: Box<[u32]>,
     generator_targets: Box<[u32]>,
-    release_offsets: Box<[usize]>,
-    release_targets: Box<[u32]>,
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -438,7 +436,6 @@ impl<'a> FrozenParetoPlan<'a> {
         let sort_count = frozen.sort_count();
         let mut offsets = vec![0_usize; sort_count + 1];
         let mut generator_targets = vec![0_u32; frozen.generator_count()];
-        let mut last_source = vec![None; sort_count];
         for (generator, target_slot) in generator_targets.iter_mut().enumerate() {
             let spec = frozen
                 .generator_spec(generator as u32)
@@ -451,8 +448,6 @@ impl<'a> FrozenParetoPlan<'a> {
             }
             offsets[spec.source_sort as usize + 1] += 1;
             *target_slot = spec.target_sort;
-            let slot = &mut last_source[spec.target_sort as usize];
-            *slot = Some(slot.map_or(spec.source_sort, |old: u32| old.min(spec.source_sort)));
         }
         for sort in 0..sort_count {
             offsets[sort + 1] += offsets[sort];
@@ -467,28 +462,11 @@ impl<'a> FrozenParetoPlan<'a> {
             outgoing[cursor[source]] = generator as u32;
             cursor[source] += 1;
         }
-        let mut release_offsets = vec![0_usize; sort_count + 1];
-        for (target, source) in last_source.iter().enumerate() {
-            let release_sort = source.map_or(target, |source| source as usize);
-            release_offsets[release_sort + 1] += 1;
-        }
-        for sort in 0..sort_count {
-            release_offsets[sort + 1] += release_offsets[sort];
-        }
-        let mut release_cursor = release_offsets[..sort_count].to_vec();
-        let mut release_targets = vec![0_u32; sort_count];
-        for (target, source) in last_source.iter().enumerate() {
-            let release_sort = source.map_or(target, |source| source as usize);
-            release_targets[release_cursor[release_sort]] = target as u32;
-            release_cursor[release_sort] += 1;
-        }
         Ok(Self {
             frozen,
             offsets: offsets.into_boxed_slice(),
             outgoing: outgoing.into_boxed_slice(),
             generator_targets: generator_targets.into_boxed_slice(),
-            release_offsets: release_offsets.into_boxed_slice(),
-            release_targets: release_targets.into_boxed_slice(),
         })
     }
 
@@ -594,6 +572,7 @@ impl<'a> FrozenParetoPlan<'a> {
             selected_sorts.push(sort);
             selected_counts[sort + 1] += 1;
         }
+        let mut last_reachable_source = vec![None; sort_count];
         for sort in 0..sort_count {
             selected_counts[sort + 1] += selected_counts[sort];
         }
@@ -625,6 +604,9 @@ impl<'a> FrozenParetoPlan<'a> {
                     continue;
                 }
                 for &generator in &self.outgoing[self.offsets[sort]..self.offsets[sort + 1]] {
+                    let target_sort = self.generator_targets[generator as usize] as usize;
+                    let slot = &mut last_reachable_source[target_sort];
+                    *slot = Some(slot.map_or(sort, |old: usize| old.min(sort)));
                     let target =
                         self.frozen
                             .transition(generator, class)
@@ -639,6 +621,20 @@ impl<'a> FrozenParetoPlan<'a> {
                     }
                 }
             }
+        }
+        let mut release_offsets = vec![0_usize; sort_count + 1];
+        for (target, source) in last_reachable_source.iter().enumerate() {
+            release_offsets[source.unwrap_or(target) + 1] += 1;
+        }
+        for sort in 0..sort_count {
+            release_offsets[sort + 1] += release_offsets[sort];
+        }
+        let mut release_cursor = release_offsets[..sort_count].to_vec();
+        let mut release_targets = vec![0_u32; sort_count];
+        for (target, source) in last_reachable_source.iter().enumerate() {
+            let release_sort = source.unwrap_or(target);
+            release_targets[release_cursor[release_sort]] = target as u32;
+            release_cursor[release_sort] += 1;
         }
 
         let capacity = workspace.capacity();
@@ -750,9 +746,7 @@ impl<'a> FrozenParetoPlan<'a> {
             metrics.peak_live_classes = metrics.peak_live_classes.max(live_classes);
             metrics.peak_live_entries = metrics.peak_live_entries.max(live_entries);
 
-            for &target in
-                &self.release_targets[self.release_offsets[sort]..self.release_offsets[sort + 1]]
-            {
+            for &target in &release_targets[release_offsets[sort]..release_offsets[sort + 1]] {
                 if let Some(fronts) = live[target as usize].take() {
                     live_classes -= fronts.iter().filter(|front| front.is_some()).count();
                     live_entries -= fronts

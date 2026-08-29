@@ -354,6 +354,75 @@ fn factorized_pareto_dp(
     WitnessedParetoFront::new(resources, entries.iter().copied()).unwrap()
 }
 
+fn mode_conditioned_factorized_pareto_dp(
+    workflow: &Workflow,
+    resources: &CappedAdditiveMonoid,
+    initial_state: u32,
+) -> WitnessedParetoFront {
+    assert_eq!(workflow.monitor_states, 9);
+    let edges = edge_fronts(resources, &DEFAULT_WEIGHTS);
+    let (initial_left, initial_right, _) = workflow.decode_state(initial_state);
+    let mut workspace = WitnessedParetoWorkspace::with_capacity(resources.element_count() as usize);
+    let mut result = empty_front(resources);
+    for first_symbol in 0..2 {
+        let mut mode_fronts = [empty_front(resources), empty_front(resources)];
+        for branch in 0..2 {
+            let mut next = Vec::with_capacity(workflow.automaton_states as usize);
+            for state in 0..workflow.automaton_states {
+                next.push(if state == workflow.automaton_states - 1 {
+                    singleton_front(resources, [0, 0], 0)
+                } else {
+                    empty_front(resources)
+                });
+            }
+            let mut current = Vec::with_capacity(workflow.automaton_states as usize);
+            for _ in 1..workflow.length {
+                current.clear();
+                for state in 0..workflow.automaton_states {
+                    let mut front = empty_front(resources);
+                    for symbol in 0..2 {
+                        let target = (2 * state + symbol + 1) % workflow.automaton_states;
+                        let candidate = extend_front(
+                            resources,
+                            &mut workspace,
+                            &edges[2 * branch + symbol as usize],
+                            &next[target as usize],
+                        );
+                        front = front.choice(resources, &candidate).unwrap();
+                    }
+                    current.push(front);
+                }
+                std::mem::swap(&mut current, &mut next);
+            }
+            let initial = if branch == 0 {
+                initial_left
+            } else {
+                initial_right
+            };
+            let target = (2 * initial + first_symbol + 1) % workflow.automaton_states;
+            mode_fronts[branch] = extend_front(
+                resources,
+                &mut workspace,
+                &edges[2 * branch + first_symbol as usize],
+                &next[target as usize],
+            );
+        }
+        let entries = workspace
+            .compose(
+                resources,
+                &mode_fronts[0],
+                &mode_fronts[1],
+                |left, right| {
+                    Ok::<_, std::convert::Infallible>(left | (right << (3 * workflow.length)))
+                },
+            )
+            .unwrap();
+        let candidate = WitnessedParetoFront::new(resources, entries.iter().copied()).unwrap();
+        result = result.choice(resources, &candidate).unwrap();
+    }
+    result
+}
+
 fn verify_witness(
     workflow: &Workflow,
     resources: &CappedAdditiveMonoid,
@@ -635,21 +704,24 @@ fn run(
     }
     let identity_ns = identity_start.elapsed().as_nanos() / repetitions;
     let (identity_entry_front, _) = identity_result.unwrap();
-    let (factorized, factorized_ns) = if workflow.monitor_states == 1 {
-        let mut factorized = None;
-        let factorized_start = Instant::now();
-        for _ in 0..repetitions {
-            factorized = Some(std::hint::black_box(factorized_pareto_dp(
-                &workflow, &resources, 0,
-            )));
-        }
-        (
-            factorized,
-            factorized_start.elapsed().as_nanos() / repetitions,
-        )
-    } else {
-        (None, 0)
-    };
+    let (factorized, factorized_ns) =
+        if workflow.monitor_states == 1 || workflow.monitor_states == 9 {
+            let mut factorized = None;
+            let factorized_start = Instant::now();
+            for _ in 0..repetitions {
+                factorized = Some(std::hint::black_box(if workflow.monitor_states == 1 {
+                    factorized_pareto_dp(&workflow, &resources, 0)
+                } else {
+                    mode_conditioned_factorized_pareto_dp(&workflow, &resources, 0)
+                }));
+            }
+            (
+                factorized,
+                factorized_start.elapsed().as_nanos() / repetitions,
+            )
+        } else {
+            (None, 0)
+        };
     let raw_entry = &raw[0][0];
     assert_eq!(
         raw_entry.resources().collect::<Vec<_>>(),
@@ -825,10 +897,10 @@ mod tests {
     }
 
     #[test]
-    fn shared_mode_monitor_prevents_branch_factorization() {
+    fn shared_mode_monitor_requires_conditioned_join() {
         let result = run(3, 5, 9, None, 1);
         assert!(result.front != 0 && result.peak_live_classes < result.classes);
-        assert_eq!(result.factorized_ns, 0);
+        assert!(result.factorized_ns != 0);
 
         let workflow = Workflow::new(3, 5, 9);
         let incompatible = [
@@ -885,13 +957,43 @@ mod tests {
             workflow.observation(terminal_sort, execute(&incompatible)),
             2
         );
+        let left_symbols = [0_u8, 1, 0];
+        let right_symbols = [1_u8, 1, 1];
+        for schedule in 0_u32..64 {
+            if schedule.count_ones() != 3 {
+                continue;
+            }
+            let mut left = 0;
+            let mut right = 0;
+            let mut actions = Vec::with_capacity(6);
+            for step in 0..6 {
+                if schedule & (1 << step) != 0 {
+                    actions.push(Action {
+                        branch: 0,
+                        symbol: left_symbols[left],
+                    });
+                    left += 1;
+                } else {
+                    actions.push(Action {
+                        branch: 1,
+                        symbol: right_symbols[right],
+                    });
+                    right += 1;
+                }
+            }
+            assert_eq!(workflow.observation(terminal_sort, execute(&actions)), 2);
+        }
 
         let resources = CappedAdditiveMonoid::new([64, 64]).unwrap();
         let coupled = brute_force_entry(&workflow, &resources, 0, &DEFAULT_WEIGHTS);
-        let independent = factorized_pareto_dp(&Workflow::new(3, 5, 1), &resources, 0);
-        assert_ne!(
+        let raw = raw_pareto_dp(&workflow, &resources);
+        assert_eq!(
             coupled.resources().collect::<Vec<_>>(),
-            independent.resources().collect::<Vec<_>>()
+            raw[0][0].resources().collect::<Vec<_>>()
         );
+        let independent = factorized_pareto_dp(&Workflow::new(3, 5, 1), &resources, 0);
+        assert!(independent
+            .resources()
+            .any(|resource| !coupled.resources().any(|candidate| candidate == resource)));
     }
 }

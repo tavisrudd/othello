@@ -4,13 +4,13 @@ set -euo pipefail
 evidence=${1:-evidence/c985-shuffle-product-control.tsv}
 awk -F '\t' '
     NR == 1 {
-        if ($0 != "round\traw_states\tclasses\tidentity_classes\tfront\tidentity_ns\tquotient_ns\tfactorized_ns\tidentity_quotient\tquotient_factorized") exit 2
+        if ($0 != "round\traw_states\tclasses\tidentity_classes\tfront\treachable_classes\tpeak_live_classes\tpeak_live_entries\tidentity_ns\tquotient_ns\tfactorized_ns\tidentity_quotient\tquotient_factorized") exit 2
         next
     }
     {
-        if ($2 != 5184 || $3 != 153 || $4 != 5184 || $5 != 3 || $6 <= 0 || $7 <= 0 || $8 <= 0) exit 3
-        x = log($6 / $7)
-        y = log($7 / $8)
+        if ($2 != 5184 || $3 != 153 || $4 != 5184 || $5 != 3 || $6 != 96 || $7 != 22 || $8 != 26 || $9 <= 0 || $10 <= 0 || $11 <= 0) exit 3
+        x = log($9 / $10)
+        y = log($10 / $11)
         sx += x; sxx += x * x
         sy += y; syy += y * y
         n++
