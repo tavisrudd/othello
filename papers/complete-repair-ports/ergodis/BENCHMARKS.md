@@ -74,39 +74,41 @@ components, or aggregate capacity totals before the exact solve begins.
 
 ![ergodis and matched exact controls](docs/benchmark-highlights.svg)
 
-| application      | bounded instance                  | matched exact control          | ergodis time | control time | result           |
-| :--------------- | :-------------------------------- | :----------------------------- | -----------: | -----------: | :--------------- |
-| Ceph XOR         | 8 diamonds, 256 minimal supports  | Graphillion ZDD family closure |       102 us |       864 us | ergodis 8x       |
-| Azure LRC        | 100,000 demands, domain cap 100k  | HiGHS counted integer model    |        <1 us |     4,877 us | ergodis 173,996x |
-| Repair DAG       | 3 layers x 21 tasks               | CP-SAT interval scheduling     |         2 us |    19,218 us | ergodis 7,881x   |
-| QC-LDPC          | lift 50,000, weight 4             | CryptoMiniSat native XOR       |     1,517 us |   509,306 us | ergodis 336x     |
-| vector node span | 64 nodes, 2 symbols per node      | CryptoMiniSat native XOR       |        10 us |    48,691 us | ergodis 4,717x   |
-| GPU MDS          | 10,000 shards, k=6,000, 64 failed | OR-Tools bipartite max-flow    |       100 us |   103,061 us | ergodis 1,029x   |
+| application      | bounded instance                  | matched exact control          | cold wall/solve | cold speedup | warm speedup |
+| :--------------- | :-------------------------------- | :----------------------------- | :-------------- | -----------: | -----------: |
+| Ceph XOR         | 8 diamonds, 256 minimal supports  | Graphillion ZDD family closure | 3.014 / 101.628 ms | 33.71x | 22.94x |
+| Azure LRC        | 100,000 demands, domain cap 100k  | HiGHS counted integer model    | 2.886 / 462.015 ms | 160.45x | 160.21x |
+| Repair DAG       | 3 layers x 21 tasks               | CP-SAT interval scheduling     | 2.983 / 500.139 ms | 167.12x | 275.15x |
+| QC-LDPC          | lift 50,000, weight 4             | CryptoMiniSat native XOR       | 6.983 / 1,339.715 ms | 190.45x | 39.72x |
+| vector node span | 64 nodes, 2 symbols per node      | CryptoMiniSat native XOR       | 2.854 / 216.151 ms | 75.72x | 64.90x |
+| GPU MDS          | 10,000 shards, k=6,000, 64 failed | OR-Tools bipartite max-flow    | 3.803 / 393.213 ms | 102.42x | 103.23x |
 
 | application      | ergodis RSS | control RSS |
 | :--------------- | ----------: | ----------: |
-| Ceph XOR         |     2.2 MiB |    19.4 MiB |
-| Azure LRC        |     2.2 MiB |    61.6 MiB |
-| Repair DAG       |     2.3 MiB |    79.1 MiB |
-| QC-LDPC          |     4.0 MiB |   231.8 MiB |
-| vector node span |     2.2 MiB |    20.8 MiB |
-| GPU MDS          |     3.6 MiB |    69.1 MiB |
+| Ceph XOR         |     2.1 MiB |    20.6 MiB |
+| Azure LRC        |     2.0 MiB |    61.8 MiB |
+| Repair DAG       |     2.0 MiB |    79.6 MiB |
+| QC-LDPC          |     3.8 MiB |   231.9 MiB |
+| vector node span |     1.9 MiB |    20.9 MiB |
+| GPU MDS          |     3.3 MiB |    69.2 MiB |
 
 ### Methodology
 
 Each row uses a formulation-specific open-source control that matches the
-question being answered. Times include construction of the ergodis state or
-the control model; RSS is the process high-water memory. The two programs were
-run with the same CPU affinity in rotated order so ambient machine load did not
-systematically favor either one. The headline controls use eleven rounds, and
-the table reports medians and ratios computed from the unrounded samples.
+question being answered. The corrected protocol starts a fresh process for
+each sample, includes state or model construction and implementation startup,
+and records process high-water RSS. Seven paired rounds run with the same CPU
+affinity in rotated order. Cold profiles perform one solve per process;
+warm-batch profiles perform eight solves on both sides and normalize external
+wall time per solve. The table reports medians from unrounded samples.
 
 The controls establish exact equality of the support family, optimum, or
 feasibility verdict rather than agreement on a heuristic score. Raw samples,
 checksums, package versions, and replay commands are recorded in
-`evidence/benchmarks.json`. Commercial solvers and domain-specific LDPC
-enumerators are not included, so these measurements support only the declared
-instance comparisons.
+`evidence/c985-application-readme-ab.json`; the line-buffered raw transcript is
+adjacent. Commercial solvers and domain-specific LDPC enumerators are not
+included, so these measurements support only the declared instance
+comparisons.
 
 The outcome strength is not identical across rows. Each control returns the
 same support family, optimum, or feasibility verdict, as applicable; ergodis
@@ -466,7 +468,7 @@ canonical coefficient witness tree.
 | 3 / 3          |     27 |       175 us |     11.578 ms |       27.461 ms |                 66x / 156x |
 | 4 / 3          |     81 |       177 us |     43.054 ms |      112.447 ms |                243x / 635x |
 | 5 / 4          |  1,024 |       316 us |        8.17 s |          1.58 s |           25,889x / 5,013x |
-| 6 / 4          |  4,096 |       766 us |      263.76 s |          6.19 s |          344,300x / 8,080x |
+| 6 / 4          |  4,096 |     4.559 ms |        >400 s |       not rerun |              >87,743x / -- |
 
 | depth / fanout | ergodis RSS | direct RSS | labelled RSS |
 | :------------- | ----------: | ---------: | -----------: |
@@ -474,17 +476,16 @@ canonical coefficient witness tree.
 | 3 / 3          |     2.3 MiB |   75.8 MiB |     77.3 MiB |
 | 4 / 3          |     2.4 MiB |   78.8 MiB |     82.3 MiB |
 | 5 / 4          |     2.4 MiB |  126.5 MiB |    158.1 MiB |
-| 6 / 4          |     2.8 MiB |  281.4 MiB |    411.4 MiB |
+| 6 / 4          |     2.2 MiB |          -- |           -- |
 
 These are bounded single-worker results for the identity-block GF(4) tower
-family, not a general claim about CP-SAT. The first three rows use 21 rounds;
-the 1,024-leaf row uses seven. At 4,096 leaves, Rust uses 21 samples, labelled
-CP-SAT seven, and direct CP-SAT one completed solve. Raw samples, artifact
-hashes, work counters, and the exact protocol are in
-`evidence/benchmarks.json`; replay the first four rows with
-`python/run_benchmarks.py --write --transfer-only --ab-rounds 21` and the last with
-`python/run_benchmarks.py --write --transfer-deep-only` after building the release
-benchmark binary with the documented architecture flags.
+family, not a general claim about CP-SAT. The first four rows retain the
+historical amortized protocol. The corrected 4,096-leaf row uses three
+fresh-process paired rounds; every direct CP-SAT run exceeded 400 seconds, so
+`>87,743x` is a lower bound. The labelled-table model has not been rerun under
+the corrected protocol. Its raw samples and artifact hashes are in
+`evidence/c985-application-long-cold.json`; the adjacent runner and checker
+record the exact replay interface.
 
 A benchmark taken directly from the paper uses Jin and Fu's published GF(4) cyclic
 `[43,36,5]` outer code and binary `[3,2,2]` inner code, which produce their
@@ -522,16 +523,18 @@ cost `1,023`, `Gamma=5`, and maximum confined radius `4`.
 
 | backend         | exact time | peak RSS | relative time |
 | :-------------- | ---------: | -------: | ------------: |
-| ergodis         |     231 ms |  2.4 MiB |            1x |
-| direct CP-SAT   |      100 s |  119 MiB |          432x |
-| labelled CP-SAT |       82 s |  124 MiB |          356x |
+| ergodis         | 442.573 ms |  2.1 MiB |            1x |
+| direct CP-SAT   |  270.939 s | 121.6 MiB |       657.88x |
+| labelled CP-SAT |   not rerun |       -- |             -- |
 
-The Rust time is the median of 21 fixed-affinity runs. Because each exact CP-SAT
-solve takes more than a minute, its row is one completed deterministic
-single-worker proof of optimality, not a timing distribution. This is a mixed
+The corrected cold row is the paired median of three rotated fresh-process
+runs; all direct CP-SAT controls completed, and the log-ratio t-score is 49.09.
+The equal eight-solve warm control exceeded 400 seconds in every round, giving
+a separate `>196.50x` lower bound. The labelled-table model has not been rerun
+under this protocol. This is a mixed
 algorithm-and-engineering comparison: unlike the represented-tower results
 above, it does not isolate min--sum composition as the sole source of the win.
-Replay with `python/run_benchmarks.py --write --jin-fu-hamming-only`.
+Replay with the adjacent long-control runner and checker.
 
 ergodis alone can be pushed much farther before ten seconds. The following
 use fixed CPU affinity and are single end-to-end solves, including instance compilation and

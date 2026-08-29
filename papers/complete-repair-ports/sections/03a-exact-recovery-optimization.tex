@@ -141,16 +141,17 @@ engine.  On four exact capacitated-scheduling profiles, ergodis was
 $2.5$--$377$ times faster than direct CP-SAT and $2.5$--$373$ times faster than
 structured CP-SAT receiving the same safe preprocessing.  The represented
 tower benchmark isolates the composition theorem: at depth six and fanout
-four, ergodis expands an exact coefficient witness over $4096$ leaves in
-$766\,\mu$s, while direct and labelled-table CP-SAT take $264$ s and $6.19$ s,
-respectively.  The direct entry is one completed deterministic solve; the
-shorter entries are interleaved medians.
+four, ergodis expands an exact coefficient witness over $4096$ leaves in a
+$4.559$ ms cold-process median.  Direct CP-SAT exceeded $400$ s in each of
+three paired rounds, giving a speedup greater than $87{,}743$; for equal
+eight-solve batches the bound is greater than $45{,}103$.  The labelled-table
+control has not been rerun under this corrected protocol.
 
 The same compilation pattern has been tested through six bundled application
 examples.  These are separate matched comparisons, not a ranking of unlike
 tasks.  Each row below states the question and the exact output checked against
-its formulation-specific open-source control.  The narrowest gap is eightfold;
-the structure-dominated examples reach three to five orders of magnitude.
+its formulation-specific open-source control.  The cold-process gaps range
+from $34$-fold to $190$-fold.
 The comparisons do not include commercial solvers or claim a universal
 ranking.
 
@@ -158,24 +159,25 @@ ranking.
 \centering
 \scriptsize
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{@{}llllrrr@{}}
+\begin{tabular}{@{}llllrr@{}}
 \toprule
-example & question/output checked & bounded instance & exact control & ergodis & control & faster\\
+example & question/output checked & bounded instance & exact control & cold faster & warm faster\\
 \midrule
-recursive XOR & complete minimal-support family & $8$ diamonds, $256$ supports & Graphillion ZDD~\cite{InoueEtAl2016} & $102\,\mu$s & $864\,\mu$s & $8\times$\\
-cloud LRC & maximum served count and loads & $100{,}000$ demands, six types & HiGHS integer model & $<1\,\mu$s & $4877\,\mu$s & $>4877\times$\\
-repair DAG & optimal makespan and schedule & $3\times21$ tasks & CP-SAT intervals & $2\,\mu$s & $19{,}218\,\mu$s & $7881\times$\\
-QC-LDPC & absence of a weight-four word & lift $50{,}000$ & CryptoMiniSat XOR & $1517\,\mu$s & $509{,}306\,\mu$s & $336\times$\\
-vector repair & minimum nodes and spanning set & $64$ nodes, $2$ symbols/node & CryptoMiniSat XOR & $10\,\mu$s & $48{,}691\,\mu$s & $4717\times$\\
-GPU MDS & feasible flow and helper assignment & $10{,}000$ shards, $64$ failures & OR-Tools max-flow & $100\,\mu$s & $103{,}061\,\mu$s & $1029\times$\\
+recursive XOR & complete minimal-support family & $8$ diamonds, $256$ supports & Graphillion ZDD~\cite{InoueEtAl2016} & $33.71\times$ & $22.94\times$\\
+cloud LRC & maximum served count and loads & $100{,}000$ demands, six types & HiGHS integer model & $160.45\times$ & $160.21\times$\\
+repair DAG & optimal makespan and schedule & $3\times21$ tasks & CP-SAT intervals & $167.12\times$ & $275.15\times$\\
+QC-LDPC & absence of a weight-four word & lift $50{,}000$ & CryptoMiniSat XOR & $190.45\times$ & $39.72\times$\\
+vector repair & minimum nodes and spanning set & $64$ nodes, $2$ symbols/node & CryptoMiniSat XOR & $75.72\times$ & $64.90\times$\\
+GPU MDS & feasible flow and helper assignment & $10{,}000$ shards, $64$ failures & OR-Tools max-flow & $102.42\times$ & $103.23\times$\\
 \bottomrule
 \end{tabular}
 }
-\caption{Six separate exact comparisons.  ZDD means zero-suppressed decision
+\caption{Six separate exact comparisons under the corrected process-symmetric
+protocol.  Cold runs perform one solve per fresh process; warm runs perform
+eight solves on both sides and normalize external wall time per solve.  ZDD means zero-suppressed decision
 diagram; LRC means locally repairable code; DAG means directed acyclic graph;
 QC-LDPC means quasi-cyclic low-density parity-check code; MDS means
-maximum-distance-separable code.  The cloud-LRC ratio is the conservative bound
-supported by the displayed censored time; other ratios use unrounded medians.}
+maximum-distance-separable code.  Ratios use unrounded paired samples.}
 \label{tab:ergodis-applications}
 \end{table}
 
@@ -183,14 +185,15 @@ supported by the displayed censored time; other ratios use unrounded medians.}
 
 As a code-native check, ergodis also analyzes Jin and Fu's published
 $\F_4$ Hamming-outer family~\cite[Corollary~5.4]{JinFu2026}.  For its binary
-$[4095,2718,6;2]$ LRC, all backends obtain the same exact confinement cost;
-the 21-run ergodis median is $231$ ms, versus one completed optimality proof
-of $100$ s for direct CP-SAT and $82$ s for labelled-table CP-SAT.  Exact
+$[4095,2718,6;2]$ LRC, all backends obtain the same exact confinement cost.
+Three corrected cold-process pairs give a $442.573$ ms ergodis median and a
+$270.939$ s direct-CP-SAT median.  The paired speedup is $657.88$ with
+log-ratio $t=49.09$.  Each equal eight-solve direct-CP-SAT batch exceeded
+$400$ s, giving a separate warm speedup greater than $196.50$.  The
+labelled-table model has not been rerun under this protocol.  Exact
 inputs, outputs, tool versions, peak memory,
-replay commands, and raw timing samples are in
-\texttt{ergodis/evidence/benchmarks.json} and
-\texttt{ergodis/BENCHMARKS.md}; the two minute-scale CP-SAT entries are single
-completed deterministic solves.
+replay commands, and raw timing samples are in the corrected application evidence
+under \texttt{ergodis/evidence/} and in \texttt{ergodis/BENCHMARKS.md}.
 
 General-purpose constraint solvers have also been used to construct binary
 codes~\cite{KochemazovEtAl2026}, and repair dependency graphs and scheduling

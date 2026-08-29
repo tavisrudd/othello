@@ -291,17 +291,24 @@ These are bounded exact comparisons, not universal solver rankings. Every
 control reproduces the same exact support family, optimum, or feasibility
 verdict, as applicable; timing includes input or model construction.
 
-| workload                    | scale                                  | ergodis | matched control         | control time |  speedup |
-| :-------------------------- | :------------------------------------- | ------: | :---------------------- | -----------: | -------: |
-| Ceph XOR support family     | 8 diamonds, 256 minimal supports       |  102 us | Graphillion ZDD closure |       864 us |       8x |
-| represented GF(4) tower     | depth 6, fanout 4; 4,096 leaves        |  766 us | direct CP-SAT           |     263.76 s | 344,300x |
-| published Hamming-outer LRC | binary `[4095,2718,6;2]`               |  231 ms | direct CP-SAT           |        100 s |     432x |
-| GPU MDS checkpoint recovery | 10,000 shards, 6,000 data, 64 failures |  100 us | OR-Tools bipartite flow |   103,061 us |   1,029x |
+| workload                    | scale                                  | cold wall/solve       | cold speedup | warm-batch wall/solve | warm speedup |
+| :-------------------------- | :------------------------------------- | :-------------------- | -----------: | :-------------------- | -----------: |
+| Ceph XOR support family     | 8 diamonds, 256 minimal supports       | 3.014 / 101.628 ms    |       33.71x | 0.547 / 12.598 ms     |       22.94x |
+| represented GF(4) tower     | depth 6, fanout 4; 4,096 leaves        | 4.559 ms / >400 s     |   >87,743.5x | 1.109 ms / >50 s      |   >45,103.0x |
+| published Hamming-outer LRC | binary `[4095,2718,6;2]`               | 442.573 ms / 270.939 s|      657.88x | 254.452 ms / >50 s    |      >196.50x |
+| GPU MDS checkpoint recovery | 10,000 shards, 6,000 data, 64 failures | 3.803 / 393.213 ms    |      102.42x | 0.682 / 70.449 ms     |      103.23x |
+
+Each cell is `ergodis / control`. Cold samples run one solve per fresh process;
+warm-batch samples run eight solves per fresh process on both sides and divide
+external wall time by eight. The tower and warm Hamming controls exceeded the
+400-second batch limit, so those entries are lower bounds. The cold Hamming
+ratio is the median of three paired completed runs (`t = 49.09`).
 
 See `BENCHMARKS.md` for all comparison tables, peak RSS, protocols,
 architecture flags, profiling results, limits probes, and exact replay
-commands. Machine-readable samples and artifact hashes are in
-`evidence/benchmarks.json`.
+commands. Corrected raw samples, summaries, and artifact hashes are in
+`evidence/c985-application-readme-ab*` and
+`evidence/c985-application-long-{cold,warm}*`.
 
 ## Mathematical and evidence scope
 
