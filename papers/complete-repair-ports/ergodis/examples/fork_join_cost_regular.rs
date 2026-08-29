@@ -588,6 +588,17 @@ fn run(
     repetitions: u128,
 ) -> RunResult {
     assert!(repetitions != 0);
+    let profile_stage = std::env::var("ERGODIS_PROFILE_STAGE").ok();
+    let stage_repetitions = |stage: &str| {
+        if profile_stage
+            .as_deref()
+            .is_none_or(|selected| selected == stage)
+        {
+            repetitions
+        } else {
+            1
+        }
+    };
     let workflow = Workflow::new(length, automaton_states, monitor_states);
     let compile_start = Instant::now();
     let (frozen, audit) = if let Some(path) = audit_path {
@@ -672,15 +683,17 @@ fn run(
         }
     }
     let mut raw = None;
+    let raw_repetitions = stage_repetitions("legacy");
     let raw_start = Instant::now();
-    for _ in 0..repetitions {
+    for _ in 0..raw_repetitions {
         raw = Some(std::hint::black_box(raw_pareto_dp(&workflow, &resources)));
     }
-    let raw_ns = raw_start.elapsed().as_nanos() / repetitions;
+    let raw_ns = raw_start.elapsed().as_nanos() / raw_repetitions;
     let raw = raw.unwrap();
     let mut quotient = None;
+    let quotient_repetitions = stage_repetitions("quotient");
     let quotient_start = Instant::now();
-    for _ in 0..repetitions {
+    for _ in 0..quotient_repetitions {
         quotient = Some(std::hint::black_box(quotient_entry_pareto_dp(
             &plan,
             &resources,
@@ -689,11 +702,12 @@ fn run(
             entry_class,
         )));
     }
-    let quotient_ns = quotient_start.elapsed().as_nanos() / repetitions;
+    let quotient_ns = quotient_start.elapsed().as_nanos() / quotient_repetitions;
     let (quotient_entry, quotient_metrics) = quotient.unwrap();
     let mut identity_result = None;
+    let identity_repetitions = stage_repetitions("identity");
     let identity_start = Instant::now();
-    for _ in 0..repetitions {
+    for _ in 0..identity_repetitions {
         identity_result = Some(std::hint::black_box(quotient_entry_pareto_dp(
             &identity_plan,
             &resources,
@@ -702,13 +716,14 @@ fn run(
             identity_entry,
         )));
     }
-    let identity_ns = identity_start.elapsed().as_nanos() / repetitions;
+    let identity_ns = identity_start.elapsed().as_nanos() / identity_repetitions;
     let (identity_entry_front, _) = identity_result.unwrap();
     let (factorized, factorized_ns) =
         if workflow.monitor_states == 1 || workflow.monitor_states == 9 {
             let mut factorized = None;
+            let factorized_repetitions = stage_repetitions("factorized");
             let factorized_start = Instant::now();
-            for _ in 0..repetitions {
+            for _ in 0..factorized_repetitions {
                 factorized = Some(std::hint::black_box(if workflow.monitor_states == 1 {
                     factorized_pareto_dp(&workflow, &resources, 0)
                 } else {
@@ -717,7 +732,7 @@ fn run(
             }
             (
                 factorized,
-                factorized_start.elapsed().as_nanos() / repetitions,
+                factorized_start.elapsed().as_nanos() / factorized_repetitions,
             )
         } else {
             (None, 0)

@@ -563,25 +563,37 @@ impl<'a> FrozenParetoPlan<'a> {
             return Err(FrozenParetoError::EdgeFrontCount);
         }
         let sort_count = self.frozen.sort_count();
-        let mut selected_counts = vec![0_usize; sort_count + 1];
-        let mut selected_sorts = Vec::with_capacity(entry_classes.len());
-        for &class in entry_classes {
-            let sort = self
-                .sort_for_class(class)
-                .ok_or(FrozenParetoError::Artifact)?;
-            selected_sorts.push(sort);
-            selected_counts[sort + 1] += 1;
+        let single_sort = if let [class] = entry_classes {
+            Some(
+                self.sort_for_class(*class)
+                    .ok_or(FrozenParetoError::Artifact)?,
+            )
+        } else {
+            None
+        };
+        let mut selected_counts = Vec::new();
+        let mut selected_indices = Vec::new();
+        if single_sort.is_none() {
+            selected_counts.resize(sort_count + 1, 0_usize);
+            let mut selected_sorts = Vec::with_capacity(entry_classes.len());
+            for &class in entry_classes {
+                let sort = self
+                    .sort_for_class(class)
+                    .ok_or(FrozenParetoError::Artifact)?;
+                selected_sorts.push(sort);
+                selected_counts[sort + 1] += 1;
+            }
+            for sort in 0..sort_count {
+                selected_counts[sort + 1] += selected_counts[sort];
+            }
+            let mut selected_cursor = selected_counts[..sort_count].to_vec();
+            selected_indices.resize(entry_classes.len(), 0_usize);
+            for (index, &sort) in selected_sorts.iter().enumerate() {
+                selected_indices[selected_cursor[sort]] = index;
+                selected_cursor[sort] += 1;
+            }
         }
         let mut last_reachable_source = vec![None; sort_count];
-        for sort in 0..sort_count {
-            selected_counts[sort + 1] += selected_counts[sort];
-        }
-        let mut selected_cursor = selected_counts[..sort_count].to_vec();
-        let mut selected_indices = vec![0_usize; entry_classes.len()];
-        for (index, &sort) in selected_sorts.iter().enumerate() {
-            selected_indices[selected_cursor[sort]] = index;
-            selected_cursor[sort] += 1;
-        }
 
         let class_count = self.frozen.storage().classes;
         let mut reachable = vec![0_u64; class_count.div_ceil(64)];
@@ -724,7 +736,7 @@ impl<'a> FrozenParetoPlan<'a> {
                 }));
             }
 
-            for &index in &selected_indices[selected_counts[sort]..selected_counts[sort + 1]] {
+            let mut retain_index = |index: usize| -> Result<(), FrozenParetoError> {
                 let local = entry_classes[index]
                     .checked_sub(range.start)
                     .filter(|&local| local < range.len)
@@ -735,6 +747,18 @@ impl<'a> FrozenParetoPlan<'a> {
                     .clone();
                 metrics.retained_entries += front.entries.len();
                 retained[index] = Some(front);
+                Ok(())
+            };
+            match single_sort {
+                Some(selected_sort) if selected_sort == sort => retain_index(0)?,
+                Some(_) => {}
+                None => {
+                    for &index in
+                        &selected_indices[selected_counts[sort]..selected_counts[sort + 1]]
+                    {
+                        retain_index(index)?;
+                    }
+                }
             }
             live_classes += sort_fronts.iter().filter(|front| front.is_some()).count();
             live_entries += sort_fronts
