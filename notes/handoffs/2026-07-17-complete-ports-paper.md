@@ -340,12 +340,19 @@ Sequel research:
   workload admission, and witness-bearing compiled services.
 
 - [C985 Ergodis exact algebraic optimization paper](../2026-08-27-c985-ergodis-optimization-paper.md)
-  is queued after C983.  It targets constraint programming and exact
+  is in progress after C983.  It targets constraint programming and exact
   combinatorial optimization with contextual quotient compilation, the C980
   finite ordered-monoid/Pareto theorem, witness-preserving composition, and
   C983's two admitted noncoding exemplars.  Recovery remains the deepest
   motivating application, but the paper proceeds only if C983 demonstrates
-  one genuine shared kernel and material cross-domain state reduction.
+  one genuine shared kernel and material cross-domain state reduction.  Its
+  corrected application benchmark protocol now covers eight README/paper
+  workloads with symmetric cold and eight-solve warm batches, streamed raw
+  evidence, independent replay, and three-round long controls.  The six
+  completed cold application comparisons have a 104.16x geometric mean;
+  the represented tower is >87,743x, and the published Hamming-outer LRC is
+  657.88x with log-ratio `t=49.09`.  The README, benchmark guide, figures, and
+  37-page manuscript use only the corrected evidence; the release gate passes.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
