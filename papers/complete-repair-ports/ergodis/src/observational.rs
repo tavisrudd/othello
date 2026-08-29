@@ -79,6 +79,8 @@ pub enum ObservationalError {
     },
     #[error("generator {generator} transition {transition} leaves its target sort")]
     TransitionTarget { generator: usize, transition: usize },
+    #[error("layered generator {generator} does not point to a later sort")]
+    LayeredGeneratorOrder { generator: usize },
     #[error("restricted presentation names unknown generator {generator}")]
     UnknownGenerator { generator: u32 },
     #[error("restricted presentation repeats generator {generator}")]
@@ -2389,6 +2391,249 @@ pub struct CompiledObservation {
     separator_paths: Box<[u32]>,
     certificate_policy: CertificatePolicy,
     metrics: CompilationMetrics,
+}
+
+/// Generator metadata for an acyclic typed presentation supplied by oracles.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct LayeredGeneratorSpec {
+    pub source_sort: u32,
+    pub target_sort: u32,
+}
+
+/// Compile the exact minimal quotient of a finite layered deterministic
+/// system without materializing its observation or transition tables.
+///
+/// `observation(sort, state)` and `transition(generator, state)` use local
+/// state IDs. Every generator must point to a strictly later sort. Reverse
+/// induction interns the complete future-response signature at each state;
+/// signature words and sort workspaces are allocated once, outside hot loops.
+pub fn compile_layered_observational<O, T>(
+    state_counts: &[u32],
+    generators: &[LayeredGeneratorSpec],
+    mut observation: O,
+    mut transition: T,
+) -> Result<CompiledObservation, ObservationalError>
+where
+    O: FnMut(u32, u32) -> u32,
+    T: FnMut(u32, u32) -> u32,
+{
+    if state_counts.is_empty() {
+        return Err(ObservationalError::NoSorts);
+    }
+    let mut raw_ranges = Vec::with_capacity(state_counts.len());
+    let mut total_states = 0_u32;
+    for &len in state_counts {
+        raw_ranges.push(SortRange {
+            start: total_states,
+            len,
+        });
+        total_states = total_states
+            .checked_add(len)
+            .ok_or(ObservationalError::Overflow)?;
+    }
+    let mut outgoing_counts = vec![0_usize; state_counts.len()];
+    for (generator, spec) in generators.iter().enumerate() {
+        let source = spec.source_sort as usize;
+        let target = spec.target_sort as usize;
+        if source >= state_counts.len() || target >= state_counts.len() {
+            return Err(ObservationalError::GeneratorSort { generator });
+        }
+        if source >= target {
+            return Err(ObservationalError::LayeredGeneratorOrder { generator });
+        }
+        outgoing_counts[source] = outgoing_counts[source]
+            .checked_add(1)
+            .ok_or(ObservationalError::Overflow)?;
+    }
+    let mut outgoing = outgoing_counts
+        .into_iter()
+        .map(Vec::with_capacity)
+        .collect::<Vec<Vec<u32>>>();
+    for (generator, spec) in generators.iter().enumerate() {
+        let source = spec.source_sort as usize;
+        outgoing[source].push(u32::try_from(generator).map_err(|_| ObservationalError::Overflow)?);
+    }
+
+    let mut local_state_classes = vec![0_u32; total_states as usize];
+    let mut class_counts = vec![0_u32; state_counts.len()];
+    let mut local_class_outputs = vec![Vec::<u32>::new(); state_counts.len()];
+    let mut local_class_representatives = vec![Vec::<u32>::new(); state_counts.len()];
+    for sort in (0..state_counts.len()).rev() {
+        let count = state_counts[sort] as usize;
+        local_class_outputs[sort].reserve_exact(count);
+        local_class_representatives[sort].reserve_exact(count);
+        let width = outgoing[sort]
+            .len()
+            .checked_add(1)
+            .ok_or(ObservationalError::Overflow)?;
+        let mut signatures = vec![
+            0_u32;
+            count
+                .checked_mul(width)
+                .ok_or(ObservationalError::Overflow)?
+        ];
+        for state in 0..count {
+            let signature = &mut signatures[state * width..(state + 1) * width];
+            signature[0] = observation(sort as u32, state as u32);
+            for (slot, &generator) in outgoing[sort].iter().enumerate() {
+                let target_sort = generators[generator as usize].target_sort as usize;
+                let target_state = transition(generator, state as u32);
+                let target_range = raw_ranges[target_sort];
+                if target_state >= target_range.len {
+                    return Err(ObservationalError::TransitionTarget {
+                        generator: generator as usize,
+                        transition: state,
+                    });
+                }
+                signature[slot + 1] =
+                    local_state_classes[(target_range.start + target_state) as usize];
+            }
+        }
+        let range = raw_ranges[sort];
+        let lookup_capacity = if count == 0 {
+            1
+        } else {
+            count
+                .checked_mul(4)
+                .ok_or(ObservationalError::Overflow)?
+                .div_ceil(3)
+                .checked_next_power_of_two()
+                .ok_or(ObservationalError::Overflow)?
+        };
+        let mut lookup_hashes = vec![0_u64; lookup_capacity];
+        let mut lookup_representatives = vec![u32::MAX; lookup_capacity];
+        let lookup_mask = lookup_capacity - 1;
+        for state in 0..count as u32 {
+            let start = state as usize * width;
+            let signature = &signatures[start..start + width];
+            let hash = layered_signature_hash(signature);
+            let mut slot = hash as usize & lookup_mask;
+            let class = loop {
+                let representative = lookup_representatives[slot];
+                if representative == u32::MAX {
+                    lookup_hashes[slot] = hash;
+                    lookup_representatives[slot] = state;
+                    let class = u32::try_from(local_class_outputs[sort].len())
+                        .map_err(|_| ObservationalError::Overflow)?;
+                    local_class_outputs[sort].push(signature[0]);
+                    local_class_representatives[sort].push(state);
+                    break class;
+                }
+                let representative_start = representative as usize * width;
+                if lookup_hashes[slot] == hash
+                    && signatures[representative_start..representative_start + width] == *signature
+                {
+                    break local_state_classes[(range.start + representative) as usize];
+                }
+                slot = (slot + 1) & lookup_mask;
+            };
+            local_state_classes[(range.start + state) as usize] = class;
+        }
+        class_counts[sort] = u32::try_from(local_class_outputs[sort].len())
+            .map_err(|_| ObservationalError::Overflow)?;
+        local_class_outputs[sort] = std::mem::take(&mut local_class_outputs[sort])
+            .into_boxed_slice()
+            .into_vec();
+        local_class_representatives[sort] = std::mem::take(&mut local_class_representatives[sort])
+            .into_boxed_slice()
+            .into_vec();
+    }
+
+    fn layered_signature_hash(signature: &[u32]) -> u64 {
+        let mut hash = 0x9e37_79b9_7f4a_7c15_u64;
+        for &word in signature {
+            hash ^= u64::from(word).wrapping_add(0x9e37_79b9);
+            hash = hash.rotate_left(27).wrapping_mul(0x94d0_49bb_1331_11eb);
+        }
+        hash ^ (hash >> 31)
+    }
+
+    let mut class_ranges = Vec::with_capacity(state_counts.len());
+    let mut total_classes = 0_u32;
+    for &len in &class_counts {
+        class_ranges.push(SortRange {
+            start: total_classes,
+            len,
+        });
+        total_classes = total_classes
+            .checked_add(len)
+            .ok_or(ObservationalError::Overflow)?;
+    }
+    for (sort, raw_range) in raw_ranges.iter().copied().enumerate() {
+        let class_start = class_ranges[sort].start;
+        for class in &mut local_state_classes[raw_range.start as usize..raw_range.end() as usize] {
+            *class = class
+                .checked_add(class_start)
+                .ok_or(ObservationalError::Overflow)?;
+        }
+    }
+    let mut class_outputs = Vec::with_capacity(total_classes as usize);
+    let mut class_representatives = Vec::with_capacity(total_classes as usize);
+    for (sort, outputs) in local_class_outputs.into_iter().enumerate() {
+        class_outputs.extend(outputs);
+        let raw_start = raw_ranges[sort].start;
+        class_representatives.extend(
+            local_class_representatives[sort]
+                .iter()
+                .map(|&state| raw_start + state),
+        );
+    }
+
+    let mut generator_records = Vec::with_capacity(generators.len());
+    let transition_count = generators.iter().try_fold(0_usize, |count, spec| {
+        count
+            .checked_add(class_counts[spec.source_sort as usize] as usize)
+            .ok_or(ObservationalError::Overflow)
+    })?;
+    let mut generator_transitions = Vec::with_capacity(transition_count);
+    for (generator, spec) in generators.iter().enumerate() {
+        let source_sort = spec.source_sort as usize;
+        let target_sort = spec.target_sort as usize;
+        let transition_start =
+            u32::try_from(generator_transitions.len()).map_err(|_| ObservationalError::Overflow)?;
+        for &representative in &local_class_representatives[source_sort] {
+            let target_state = transition(generator as u32, representative);
+            let target_range = raw_ranges[target_sort];
+            if target_state >= target_range.len {
+                return Err(ObservationalError::TransitionTarget {
+                    generator,
+                    transition: representative as usize,
+                });
+            }
+            generator_transitions
+                .push(local_state_classes[(target_range.start + target_state) as usize]);
+        }
+        generator_records.push(GeneratorRecord {
+            source_sort: spec.source_sort,
+            target_sort: spec.target_sort,
+            transition_start,
+            transition_len: class_counts[source_sort],
+        });
+    }
+    debug_assert_eq!(generator_transitions.len(), transition_count);
+
+    Ok(CompiledObservation {
+        class_ranges: class_ranges.into_boxed_slice(),
+        state_classes: local_state_classes.into_boxed_slice(),
+        class_outputs: class_outputs.into_boxed_slice(),
+        class_representatives: class_representatives.into_boxed_slice(),
+        generator_records: generator_records.into_boxed_slice(),
+        generator_transitions: generator_transitions.into_boxed_slice(),
+        split_records: Box::default(),
+        multiway_records: Box::default(),
+        separators: Box::default(),
+        separator_paths: Box::default(),
+        certificate_policy: CertificatePolicy::QuotientOnly,
+        metrics: CompilationMetrics {
+            states: total_states as usize,
+            classes: total_classes as usize,
+            generators: generators.len(),
+            refinement_rounds: state_counts.len(),
+            refinement_splits: 0,
+            separators: 0,
+            separator_steps: 0,
+        },
+    })
 }
 
 impl CompiledObservation {
@@ -4889,6 +5134,96 @@ fn verify_compilation_with_inverse(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn layered_oracle_compiler_matches_generic_minimization() {
+        let counts = [4_u32, 5, 3];
+        let layered_generators = [
+            LayeredGeneratorSpec {
+                source_sort: 0,
+                target_sort: 1,
+            },
+            LayeredGeneratorSpec {
+                source_sort: 0,
+                target_sort: 1,
+            },
+            LayeredGeneratorSpec {
+                source_sort: 1,
+                target_sort: 2,
+            },
+            LayeredGeneratorSpec {
+                source_sort: 0,
+                target_sort: 2,
+            },
+        ];
+        let local_transition = |generator: u32, state: u32| match generator {
+            0 => (state + 1) % 5,
+            1 => (2 * state + 1) % 5,
+            2 => (state + 1) % 3,
+            3 => (2 * state) % 3,
+            _ => unreachable!(),
+        };
+        let observation = |sort: u32, state: u32| (sort + state * state) % 3;
+        let direct = compile_layered_observational(
+            &counts,
+            &layered_generators,
+            observation,
+            local_transition,
+        )
+        .unwrap();
+
+        let raw_ranges = [0_u32, 4, 9];
+        let observations = counts
+            .iter()
+            .enumerate()
+            .flat_map(|(sort, &count)| (0..count).map(move |state| observation(sort as u32, state)))
+            .collect::<Vec<_>>();
+        let generators = layered_generators
+            .iter()
+            .enumerate()
+            .map(|(generator, spec)| GeneratorSpec {
+                source_sort: spec.source_sort,
+                target_sort: spec.target_sort,
+                transitions: (0..counts[spec.source_sort as usize])
+                    .map(|state| {
+                        raw_ranges[spec.target_sort as usize]
+                            + local_transition(generator as u32, state)
+                    })
+                    .collect(),
+            })
+            .collect::<Vec<_>>();
+        let presentation = FinitePresentation::new(counts, observations, generators).unwrap();
+        let generic =
+            compile_observational_with_policy(&presentation, CertificatePolicy::QuotientOnly)
+                .unwrap();
+        assert_eq!(direct.metrics().classes, generic.metrics().classes);
+        for (sort, range) in presentation.sorts().iter().enumerate() {
+            let class_range = direct.class_ranges()[sort];
+            for left in range.start..range.end() {
+                assert!(
+                    class_range.contains(direct.state_classes()[left as usize]),
+                    "sort={sort} state={left} class={}",
+                    direct.state_classes()[left as usize]
+                );
+                for right in range.start..range.end() {
+                    assert_eq!(
+                        direct.state_classes()[left as usize]
+                            == direct.state_classes()[right as usize],
+                        generic.state_classes()[left as usize]
+                            == generic.state_classes()[right as usize]
+                    );
+                }
+            }
+        }
+        for (class, &representative) in direct.class_representatives().iter().enumerate() {
+            assert_eq!(
+                direct.state_classes()[representative as usize],
+                class as u32,
+                "class={class} representative={representative}"
+            );
+        }
+        verify_compilation(&presentation, &direct).unwrap();
+    }
 
     #[test]
     fn minimizes_and_certifies_a_typed_chain() {

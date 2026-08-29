@@ -1,7 +1,8 @@
 use ergodis::observational::{
-    compile_observational_with_policy, CertificatePolicy, CompiledObservation, FinitePresentation,
-    GeneratorSpec,
+    compile_layered_observational, compile_observational_with_policy, CertificatePolicy,
+    CompiledObservation, FinitePresentation, GeneratorSpec, LayeredGeneratorSpec,
 };
+#[cfg(test)]
 use ergodis::{CompositionTable, CostTable, Matrix};
 use std::collections::{BTreeMap, BTreeSet};
 use std::hint::black_box;
@@ -10,6 +11,7 @@ use std::time::Instant;
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 struct RecoveryProfile([u32; 4]);
 
+#[cfg(test)]
 fn profile_table(costs: [u32; 2]) -> CostTable {
     CostTable::from_entries::<2>(
         1,
@@ -24,7 +26,8 @@ fn profile_table(costs: [u32; 2]) -> CostTable {
     .unwrap()
 }
 
-fn hierarchy_step(profile: RecoveryProfile, context: usize) -> RecoveryProfile {
+#[cfg(test)]
+fn hierarchy_step_reference(profile: RecoveryProfile, context: usize) -> RecoveryProfile {
     let coefficients = [(1_u8, 0_u8), (0, 1), (1, 1)][context];
     let blocks = [
         Matrix::new::<2>(1, 1, vec![coefficients.0]).unwrap(),
@@ -48,12 +51,131 @@ fn hierarchy_step(profile: RecoveryProfile, context: usize) -> RecoveryProfile {
     RecoveryProfile(result)
 }
 
+#[inline]
+fn add_cost(left: u32, right: u32) -> u32 {
+    left.checked_add(right).expect("hierarchy cost overflow")
+}
+
+#[inline]
+fn hierarchy_step(profile: RecoveryProfile, context: usize) -> RecoveryProfile {
+    let [ordinary_zero, ordinary_one, target_zero, target_one] = profile.0;
+    let ordinary_minimum = ordinary_zero.min(ordinary_one);
+    let next = match context {
+        0 => [
+            add_cost(ordinary_zero, ordinary_minimum),
+            add_cost(ordinary_one, ordinary_minimum),
+            add_cost(target_zero, ordinary_minimum),
+            add_cost(target_one, ordinary_minimum),
+        ],
+        1 => {
+            let target_minimum = target_zero.min(target_one);
+            [
+                add_cost(ordinary_zero, ordinary_minimum),
+                add_cost(ordinary_one, ordinary_minimum),
+                add_cost(ordinary_zero, target_minimum),
+                add_cost(ordinary_one, target_minimum),
+            ]
+        }
+        2 => [
+            add_cost(ordinary_zero, ordinary_zero).min(add_cost(ordinary_one, ordinary_one)),
+            add_cost(ordinary_zero, ordinary_one),
+            add_cost(target_zero, ordinary_zero).min(add_cost(target_one, ordinary_one)),
+            add_cost(target_zero, ordinary_one).min(add_cost(target_one, ordinary_zero)),
+        ],
+        _ => panic!("unknown hierarchy context {context}"),
+    };
+    RecoveryProfile(next)
+}
+
+#[inline]
+fn layered_transition_id(seed_bound: u32, generator: u32, state: u32) -> u32 {
+    let level = generator / 3;
+    let context = generator % 3;
+    if level == 0 {
+        let ordinary = state / seed_bound + 1;
+        let zero_sector = state % seed_bound + 1;
+        let target_parameter = match context {
+            0 => zero_sector,
+            1 => 0,
+            2 => zero_sector.min(ordinary),
+            _ => unreachable!(),
+        };
+        return (ordinary - 1) * (seed_bound + 1) + target_parameter;
+    }
+    let ordinary = state / (seed_bound + 1) + 1;
+    let target_parameter = state % (seed_bound + 1);
+    let next_parameter = if target_parameter == 0 {
+        0
+    } else {
+        match context {
+            0 => target_parameter,
+            1 => 0,
+            2 => target_parameter.min(ordinary),
+            _ => unreachable!(),
+        }
+    };
+    (ordinary - 1) * (seed_bound + 1) + next_parameter
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn scalar_hierarchy_step_matches_composition_oracle() {
+        for ordinary_zero in 0..=4 {
+            for ordinary_one in 0..=4 {
+                for target_zero in 0..=4 {
+                    for target_one in 0..=4 {
+                        let profile =
+                            RecoveryProfile([ordinary_zero, ordinary_one, target_zero, target_one]);
+                        for context in 0..3 {
+                            assert_eq!(
+                                hierarchy_step(profile, context),
+                                hierarchy_step_reference(profile, context),
+                                "profile={profile:?} context={context}"
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn closed_form_layered_ids_match_profile_transitions() {
+        for seed_bound in 1..=12 {
+            let profiles = build_profiles(4, seed_bound);
+            for level in 0..=4 {
+                for state in 0..profiles[level].len() as u32 {
+                    let algebraic_output = if level == 0 || state % (seed_bound + 1) != 0 {
+                        0
+                    } else {
+                        state / (seed_bound + 1) + 1
+                    };
+                    assert_eq!(profiles[level][state as usize].0[3], algebraic_output);
+                    if level == 4 {
+                        continue;
+                    }
+                    for context in 0..3_u32 {
+                        let target =
+                            hierarchy_step(profiles[level][state as usize], context as usize);
+                        let target_state =
+                            layered_transition_id(seed_bound, 3 * level as u32 + context, state);
+                        assert_eq!(profiles[level + 1][target_state as usize], target);
+                    }
+                }
+            }
+        }
+    }
+}
+
 struct HierarchyMachine {
     presentation: FinitePresentation,
     profiles: Vec<Vec<RecoveryProfile>>,
 }
 
-fn build_machine(depth: usize, seed_bound: u32) -> HierarchyMachine {
+fn build_profiles(depth: usize, seed_bound: u32) -> Vec<Vec<RecoveryProfile>> {
     let first = (1..=seed_bound)
         .flat_map(|ordinary| {
             (1..=seed_bound).map(move |zero_sector| RecoveryProfile([0, ordinary, zero_sector, 0]))
@@ -70,6 +192,11 @@ fn build_machine(depth: usize, seed_bound: u32) -> HierarchyMachine {
             .collect();
         profiles.push(next);
     }
+    profiles
+}
+
+fn build_machine(depth: usize, seed_bound: u32) -> HierarchyMachine {
+    let profiles = build_profiles(depth, seed_bound);
     let mut next_offset = 0_u32;
     let offsets = profiles
         .iter()
@@ -118,6 +245,42 @@ fn build_machine(depth: usize, seed_bound: u32) -> HierarchyMachine {
         presentation,
         profiles,
     }
+}
+
+fn compile_layered_hierarchy(
+    depth: usize,
+    seed_bound: u32,
+) -> Result<CompiledObservation, ergodis::observational::ObservationalError> {
+    let generators = (0..depth)
+        .flat_map(|level| {
+            (0..3).map(move |_| LayeredGeneratorSpec {
+                source_sort: level as u32,
+                target_sort: level as u32 + 1,
+            })
+        })
+        .collect::<Vec<_>>();
+    let mut state_counts = Vec::with_capacity(depth + 1);
+    state_counts.push(
+        seed_bound
+            .checked_mul(seed_bound)
+            .expect("hierarchy state count overflow"),
+    );
+    let repeated_count = seed_bound
+        .checked_mul(seed_bound + 1)
+        .expect("hierarchy state count overflow");
+    state_counts.resize(depth + 1, repeated_count);
+    compile_layered_observational(
+        &state_counts,
+        &generators,
+        |sort, state| {
+            if sort == 0 || state % (seed_bound + 1) != 0 {
+                0
+            } else {
+                state / (seed_bound + 1) + 1
+            }
+        },
+        |generator, state| layered_transition_id(seed_bound, generator, state),
+    )
 }
 
 fn words(depth: usize) -> Vec<Box<[u8]>> {
@@ -258,9 +421,23 @@ fn main() {
         Some(value) => panic!("unknown order {value}"),
     };
     let mode = args.next().unwrap_or_else(|| "full".to_owned());
-    assert!(mode == "full" || mode == "raw-build-only");
+    assert!(mode == "full" || mode == "raw-build-only" || mode == "layered-build-only");
     assert!(depth >= 1 && seed_bound >= 1);
     assert!(args.next().is_none());
+
+    if mode == "layered-build-only" {
+        let start = Instant::now();
+        let compiled = compile_layered_hierarchy(depth, seed_bound).unwrap();
+        let compile_ns = start.elapsed().as_nanos();
+        println!(
+            "layered-only\t{depth}\t{seed_bound}\t{}\t{}\t{}\t{compile_ns}",
+            compiled.metrics().states,
+            compiled.class_outputs().len(),
+            compiled.storage().quotient_bytes
+        );
+        black_box(compiled);
+        return;
+    }
 
     let build_start = Instant::now();
     let machine = build_machine(depth, seed_bound);
@@ -276,6 +453,10 @@ fn main() {
     )
     .unwrap();
     let quotient_build_ns = compile_start.elapsed().as_nanos();
+    let layered_compile_start = Instant::now();
+    let layered = compile_layered_hierarchy(depth, seed_bound).unwrap();
+    let layered_compile_ns = layered_compile_start.elapsed().as_nanos();
+    assert_eq!(compiled.class_ranges(), layered.class_ranges());
     let queries = words(depth);
 
     for (start, &seed) in machine.profiles[0].iter().take(64).enumerate() {
@@ -283,17 +464,23 @@ fn main() {
             let mut profile = seed;
             let mut state = start as u32;
             let mut class = compiled.state_classes()[start];
+            let mut layered_class = layered.state_classes()[start];
             for (level, &context) in contexts.iter().enumerate() {
                 profile = hierarchy_step(profile, context as usize);
                 let generator = 3 * level as u32 + u32::from(context);
                 state = machine.presentation.transition(generator, state).unwrap();
                 class = compiled.transition(generator, class).unwrap();
+                layered_class = layered.transition(generator, layered_class).unwrap();
             }
             assert_eq!(
                 profile.0[3],
                 machine.presentation.observations()[state as usize]
             );
             assert_eq!(profile.0[3], compiled.class_outputs()[class as usize]);
+            assert_eq!(
+                profile.0[3],
+                layered.class_outputs()[layered_class as usize]
+            );
         }
     }
 
@@ -358,7 +545,7 @@ fn main() {
         std::mem::size_of::<u32>() * (machine.presentation.state_count() + raw_transition_count);
     let compiled_storage = compiled.storage();
     println!(
-        "hierarchy\t{depth}\t{seed_bound}\t{:?}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
+        "hierarchy\t{depth}\t{seed_bound}\t{:?}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}",
         machine.profiles.iter().map(Vec::len).collect::<Vec<_>>(),
         machine.presentation.state_count(),
         compiled.class_outputs().len(),
@@ -385,6 +572,8 @@ fn main() {
         quotient_ns,
         random_cached_queries,
         random_raw_ns,
-        random_quotient_ns
+        random_quotient_ns,
+        layered_compile_ns,
+        layered.storage().quotient_bytes
     );
 }
