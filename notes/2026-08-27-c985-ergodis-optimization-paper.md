@@ -74,10 +74,10 @@ artifact and 4,469,760 bytes for the former raw evaluator.
 
 Nine CPU-2 paired rounds, with generic/direct process order alternated, compare
 the optimized raw-presentation plus split-transcript compiler against direct
-layered compilation plus freezing.  The geometric time ratio is 14.711x and
-the median paired ratio is 14.546x (paired log-ratio `t=233.11`).  Peak RSS is
-5.275x lower geometrically and 5.242x lower by the median paired ratio
-(`t=322.42`).  The older 2.061-second raw construction is not used as the A
+layered compilation plus freezing.  The geometric time ratio is 14.262x and
+the median paired ratio is 14.622x (paired log-ratio `t=184.43`).  Peak RSS is
+5.295x lower geometrically and 5.290x lower by the median paired ratio
+(`t=366.58`).  The older 2.061-second raw construction is not used as the A
 side: theorem-specializing the scalar hierarchy transition already reduced
 that construction to roughly 40--45 ms, so the recorded comparison is against
 the corrected optimized baseline.
@@ -92,7 +92,7 @@ papers/complete-repair-ports/ergodis/scripts/check-layered-hierarchy-evidence.sh
 
 - A/B script: `736afdd1353a35fd25189d53930e7fb1e13c667a82c6ccfcf9c6526dccfc9375`;
 - checker: `8a0a64651a9cae295c8e44e9966478383be26493ba2e2afa008eab11ad18ee51`;
-- evidence TSV: `29139f82995d895d5551335be7c23920b6e8daa373dbc7b206aa15cb02ab6a6f`.
+- evidence TSV: `3c60d3284a95dd30ad2e6e338e17ada26468bab8adf5eeacca471571cfa10c4a`.
 
 The final B side uses the consuming chain specialization.  When every
 generator targets the adjacent stratum, a concrete class map is released as
@@ -117,7 +117,7 @@ The full `b=256` sidecar is 3,005,633 bytes and the frozen evaluator remains
 300,312 bytes.  A CPU-2 write-and-replay control peaks at 6.4 MiB, indistinguishable
 at process resolution from compilation alone; representative phase times were
 4.2 ms compile, 8.7 ms independently verify and write, and 9.4 ms replay.
-The 14.711x compiler A/B excludes this optional durable audit on the direct
+The 14.262x compiler A/B excludes this optional durable audit on the direct
 side; the evidence timings are reported separately rather than conflated.
 
 `ERGFRZ01` is the deployment artifact paired with that audit.  Its required
@@ -162,10 +162,10 @@ evidence; the current checker targets version 2.
 The scaling result is strongest at depth 64 and `b=256`: 4,276,224 concrete
 states compile to 32,769 classes.  Nine interleaved CPU-2 rounds compare equal
 products--compile plus streamed evidence plus independent replay--rather than
-the earlier unequal full-map/frozen outputs.  The frontier-one path is 1.729x
-faster end to end (`t=32.21` on paired log ratios), 4.990x faster in its
-compile-and-stream phase, and 3.607x lower in peak RSS (`t=354.43`).  Its
-independent sorting replay is 0.644x the old replay speed, an intentional cost
+the earlier unequal full-map/frozen outputs.  The frontier-one path is 1.754x
+faster end to end (`t=134.02` on paired log ratios), 4.989x faster in its
+compile-and-stream phase, and 3.607x lower in peak RSS (`t=252.27`).  Its
+independent sorting replay is 0.665x the old replay speed, an intentional cost
 for algorithmic independence; the total still wins.  The audit is 38,984,421
 bytes rather than 46,401,954 bytes, a 1.190x reduction.  A representative run
 used 6.2 MiB versus 22.8 MiB peak RSS.
@@ -181,7 +181,7 @@ papers/complete-repair-ports/ergodis/scripts/check-layered-audit-evidence.sh
 
 - certified A/B script: `010d3742a953efff5b131be999b7e7ff48604d6602980842d50dfcfb82b753b6`;
 - certified checker: `e1b2460728da591fc9cb206a71e19e75366749ecce1fcef5a9062c2f3018f616`;
-- certified evidence: `fd3983d27cfff2665eb7072eb31216e2095e47e5037e4d2511b7f06c0c651f55`;
+- certified evidence: `00f14ef344dc3f9cc5f3e94f9071fbea072832bb903a45ff0ae2a836cdb45563`;
 - artifact checker: `583e97ba47ad1a62006f0ac99cc07b1f5b908ad91173f19859b8349d1e07cc2b`;
 - `ERGFRZ02`: `99a93ca87566291ca33e0e7b4bd66e18d32cf95bb7a1a23bb1eda27caf377bd0`;
 - `ERGLAY02`: `5295518ae0565b86aff9a54a7cd938032b804accb977fb1105abd61f1d656b7d`.
@@ -218,11 +218,19 @@ class-map space is bounded by the maximum weighted live frontier
 \]
 
 plus the current stratum's `|X_s|(1+outdeg(s))` signature workspace and the
-final quotient.  The implemented chain compiler is the frontier-one
-corollary.  This identifies the next general backend: reference-counted
-last-use consumption for arbitrary DAGs, with schedule selection connected to
-pebbling, register allocation, pathwidth/cutwidth, variable elimination, and
-tensor-contraction ordering.
+final quotient.  The chain compiler is the frontier-one corollary.
+
+Commit `e2138e734` implements the arbitrary-DAG form.  It counts distinct
+predecessor sorts, releases each concrete target map on its final use, and
+reports peak live state-class words, live map count, and signature words.  A
+branching control with a skip edge is byte-exact against full compilation and
+checks the predicted live frontier.  The chain instantiation is const-specialized:
+hardware counters are 81.78 million instructions and 16.02 million cycles,
+slightly better than the pre-generalization 82.63 million/16.27 million result,
+so generality adds no chain hot-path tax.  The remaining general problem is
+schedule selection when the supplied topological order is not fixed; that
+connects to pebbling, register allocation, pathwidth/cutwidth, variable
+elimination, and tensor-contraction ordering.
 
 Primary references:
 
