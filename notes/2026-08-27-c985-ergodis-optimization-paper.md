@@ -94,11 +94,31 @@ papers/complete-repair-ports/ergodis/scripts/check-layered-hierarchy-evidence.sh
 - checker: `8a0a64651a9cae295c8e44e9966478383be26493ba2e2afa008eab11ad18ee51`;
 - evidence TSV: `bf8f3ee695bb186778046c5bd788ec6e9d2ae6f770a52644198493df1830a9d5`.
 
-The deliberate boundary is evidence policy.  The generic A side retains a
-split transcript; the direct compiler is exact by acyclic reverse induction
-and freezes a query artifact, but does not yet emit an independently replayed
-layered transcript.  A streaming per-stratum transcript is therefore the next
-trust upgrade, not part of the speed claim.
+Commit `ec34f2c10` adds an independent reverse-induction verifier against the
+domain observation and transition oracles.  The subsequent `ERGLAY01` audit
+sidecar closes the persistence boundary without retaining a transcript in
+memory.  Its first pass varint-encodes the raw class map; its second pass
+streams observations and local target IDs.  Replay retains only the compact
+`u32` state-class map plus one stratum's signatures and checks the frozen
+artifact fingerprint, entry maps, congruence, minimality, outputs, quotient
+transitions, and concrete representative provenance before requiring clean
+EOF.  Corrupted magic, semantic records, truncation, and trailing bytes are
+negative-tested.
+
+The full `b=256` sidecar is 3,005,633 bytes and the frozen evaluator remains
+300,312 bytes.  A CPU-2 write-and-replay control peaks at 6.4 MiB, indistinguishable
+at process resolution from compilation alone; representative phase times were
+4.2 ms compile, 8.7 ms independently verify and write, and 9.4 ms replay.
+The 12.476x compiler A/B excludes this optional durable audit on the direct
+side; the evidence timings are reported separately rather than conflated.
+
+```sh
+papers/complete-repair-ports/ergodis/scripts/check-layered-audit-evidence.sh
+```
+
+- audit generator: `fe3fa65ca52712cd88646ddffa3f243b0927b8e77b85792a53ba045201fcab53`;
+- audit checker: `f7a7b26ee5e04a82be594240eaa675ee98e5183a086c595838984bcbd7241a88`;
+- streamed audit: `742b7e0860d927ff0b4b4521e065b14eecb8bf7885cb7db5367fb3e26e63af50`.
 
 ### Deliberate `ej` / `tt` / red-team checkpoints
 

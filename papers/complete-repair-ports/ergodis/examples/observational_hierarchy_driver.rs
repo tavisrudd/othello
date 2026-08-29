@@ -1,11 +1,13 @@
 use ergodis::observational::{
-    compile_layered_observational, compile_observational_with_policy, CertificatePolicy,
-    CompiledObservation, FinitePresentation, GeneratorSpec, LayeredGeneratorSpec,
+    compile_layered_observational, compile_observational_with_policy, verify_frozen_layered_audit,
+    write_layered_audit, CertificatePolicy, CompiledObservation, FinitePresentation, GeneratorSpec,
+    LayeredGeneratorSpec,
 };
 #[cfg(test)]
 use ergodis::{CompositionTable, CostTable, Matrix};
 use std::collections::{BTreeMap, BTreeSet};
 use std::hint::black_box;
+use std::io::Write;
 use std::time::Instant;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -251,27 +253,33 @@ fn compile_layered_hierarchy(
     depth: usize,
     seed_bound: u32,
 ) -> Result<CompiledObservation, ergodis::observational::ObservationalError> {
-    let generators = (0..depth)
+    let generators = hierarchy_generators(depth);
+    let state_counts = hierarchy_state_counts(depth, seed_bound);
+    compile_layered_observational(
+        &state_counts,
+        &generators,
+        |sort, state| hierarchy_observation(seed_bound, sort, state),
+        |generator, state| layered_transition_id(seed_bound, generator, state),
+    )
+}
+
+fn hierarchy_generators(depth: usize) -> Vec<LayeredGeneratorSpec> {
+    (0..depth)
         .flat_map(|level| {
             (0..3).map(move |_| LayeredGeneratorSpec {
                 source_sort: level as u32,
                 target_sort: level as u32 + 1,
             })
         })
-        .collect::<Vec<_>>();
-    let state_counts = hierarchy_state_counts(depth, seed_bound);
-    compile_layered_observational(
-        &state_counts,
-        &generators,
-        |sort, state| {
-            if sort == 0 || state % (seed_bound + 1) != 0 {
-                0
-            } else {
-                state / (seed_bound + 1) + 1
-            }
-        },
-        |generator, state| layered_transition_id(seed_bound, generator, state),
-    )
+        .collect()
+}
+
+fn hierarchy_observation(seed_bound: u32, sort: u32, state: u32) -> u32 {
+    if sort == 0 || state % (seed_bound + 1) != 0 {
+        0
+    } else {
+        state / (seed_bound + 1) + 1
+    }
 }
 
 fn hierarchy_state_counts(depth: usize, seed_bound: u32) -> Vec<u32> {
@@ -426,14 +434,57 @@ fn main() {
         Some(value) => panic!("unknown order {value}"),
     };
     let mode = args.next().unwrap_or_else(|| "full".to_owned());
+    let audit_path = (mode == "layered-audit" || mode == "layered-audit-verify")
+        .then(|| args.next().expect("layered-audit needs an output path"));
     assert!(
         mode == "full"
             || mode == "raw-build-only"
             || mode == "generic-build-only"
             || mode == "layered-build-only"
+            || mode == "layered-audit"
+            || mode == "layered-audit-verify"
     );
     assert!(depth >= 1 && seed_bound >= 1);
     assert!(args.next().is_none());
+
+    if let Some(audit_path) = audit_path {
+        let state_counts = hierarchy_state_counts(depth, seed_bound);
+        let generators = hierarchy_generators(depth);
+        let compile_start = Instant::now();
+        let compiled = compile_layered_hierarchy(depth, seed_bound).unwrap();
+        let compile_ns = compile_start.elapsed().as_nanos();
+        let write_ns = if mode == "layered-audit" {
+            let file = std::fs::File::create(&audit_path).unwrap();
+            let mut writer = std::io::BufWriter::with_capacity(64 * 1024, file);
+            let write_start = Instant::now();
+            write_layered_audit(
+                &state_counts,
+                &generators,
+                |sort, state| hierarchy_observation(seed_bound, sort, state),
+                |generator, state| layered_transition_id(seed_bound, generator, state),
+                &compiled,
+                &mut writer,
+            )
+            .unwrap();
+            writer.flush().unwrap();
+            drop(writer);
+            write_start.elapsed().as_nanos()
+        } else {
+            0
+        };
+        let frozen = compiled.into_frozen(&state_counts, &[0]).unwrap();
+        let file = std::fs::File::open(&audit_path).unwrap();
+        let mut reader = std::io::BufReader::with_capacity(64 * 1024, file);
+        let verify_start = Instant::now();
+        verify_frozen_layered_audit(&frozen, &mut reader).unwrap();
+        let verify_ns = verify_start.elapsed().as_nanos();
+        println!(
+            "layered-audit\t{depth}\t{seed_bound}\t{}\t{}\t{compile_ns}\t{write_ns}\t{verify_ns}",
+            frozen.storage().payload_bytes,
+            std::fs::metadata(audit_path).unwrap().len()
+        );
+        return;
+    }
 
     if mode == "layered-build-only" {
         let start = Instant::now();
