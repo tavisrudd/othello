@@ -188,6 +188,8 @@ residual-syndrome filters; `--evidence` writes one create-only JSONL record.
 matches the supplied matrices. Artifact and evidence output never overwrite.
 With the `parallel` feature, `--threads N` statically partitions anchors across
 workers with disjoint DFS workspaces and deterministic post-join reduction.
+On Linux, `--worker-cpus` accepts one unique CPU ID per worker and pins the
+Rayon pool in worker-index order; affinity startup is verified before search.
 Direct optimization uses parity-aware iterative deepening and anchor-level
 Young-Brothers-Wait. Rare verified bound improvements use cache-line-separated
 worker mailboxes; `--pulse-interval` controls coarse polling without adding
@@ -197,8 +199,7 @@ Inputs with 257--320 coordinates dispatch to a separately monomorphized wide
 backend. It preserves exact three-word syndromes, removes redundant check rows
 for syndrome tracking while retaining the original sparse connectivity graph,
 and applies precomputed odd-check neighborhood packings as exact lower bounds.
-The compact hot layout is unchanged; wide artifact persistence and parallel
-search remain follow-up work.  Wide search branches fail-first on an odd check
+The compact hot layout is unchanged. Wide search branches fail-first on an odd check
 and uses a disjoint first-true chain over its incident coordinates, rather than
 enumerating every connected boundary extension.  The retained official
 BB `[[288,12,18]]` run closes the exact distance in about 2.6 seconds of warm
@@ -208,6 +209,12 @@ Young-Brothers-Wait.  Disjoint deeper seeds feed coarse work-stealing tasks;
 the retained eight-thread median is about 0.39 seconds.  Wide compiled
 artifacts persist the 21 MB completion-filter payload with the same
 source-binding and checksum discipline; measured reload is about 12--25 ms.
+On the 16-worker topology-selected mask `0-15`, stopping the exact greedy
+packing proof as soon as it exceeds the remaining completion budget cut the
+single-worker instruction count by 6.3% without changing the search tree. The
+retained 16-worker median improved from 0.255602 to 0.234717 seconds (1.089x,
+Welch t = 6.37 over independent 11-round samples), about 10.63x faster than
+the retained 2.494941-second single-worker baseline.
 On the same BB288 input and two verified translation anchors, an 8-thread
 Gurobi binary-slack control remained unresolved after two 60-second orbit
 limits (both lower bounds 13).  The retained Ergodis cached-cold exact run is

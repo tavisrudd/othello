@@ -173,6 +173,36 @@ target/release/css_distance_native \
   --threads 8 --compiled-in "$artifact_dir/bb288.bin"
 ```
 
+## Instruction and topology checkpoint
+
+The 12-to-16-worker ceiling was execution-side rather than capacity-side.
+Aggregate work stayed flat, RSS stayed near 23 MiB, and outer-cache misses did
+not grow, while IPC fell from 2.70 to 2.39 and L1-data misses grew by 49%.
+The host has four high-frequency cores and eight compact cores, with the first
+four SMT siblings numbered 12--15. An interleaved exploratory A/B found that
+keeping 16 workers on CPUs 0--15 beat unconstrained placement by 1.075x
+(paired t = 3.29, 11 pairs). The CLI now exposes verified, unique per-worker
+Linux affinity through `--worker-cpus` while retaining coarse Rayon stealing;
+no affinity check or scheduler operation enters the DFS loop.
+
+An instruction-event profile localized roughly 40% of retired instructions to
+the greedy odd-check packing lower bound. The theorem is essential: a rebuilt
+control omitting it increased a single-worker proof from about 30 billion to
+239.24 billion instructions and to 16.3 seconds. The profitable reduction was
+to preserve the theorem but answer the actual predicate directly: stop the
+greedy packing as soon as the packed count exceeds the remaining completion
+budget, and test the constant-time degree bound first. This preserves the exact
+tree and 53,086,371-candidate sequential proof while reducing retired
+instructions from 31.83 billion to 29.82 billion (6.3%).
+
+On the selected CPU 0--15 mask, independent retained 11-round samples improved
+from 0.255602-second to 0.234717-second median (1.089x, Welch t = 6.37). The
+new mean is 0.234849 seconds with sample standard deviation 0.007757. Against
+the retained 2.494941-second single-worker baseline this is 10.63x. The next
+instruction target is a budget-specialized packing realization or a compact
+lookup representation; it must retain the theorem's roughly 8x pruning value
+and beat the now-short-circuiting scalar loop on complete proofs.
+
 ## Matched Gurobi comparison
 
 The audited global parity model was regenerated from the same BB288 source,

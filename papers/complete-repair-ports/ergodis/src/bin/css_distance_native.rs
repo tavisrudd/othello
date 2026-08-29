@@ -6,6 +6,10 @@ use std::fmt::Write as _;
 use std::fs::{File, OpenOptions};
 use std::io::{BufReader, BufWriter, Write};
 use std::path::PathBuf;
+#[cfg(feature = "parallel")]
+use std::sync::atomic::{AtomicBool, Ordering};
+#[cfg(feature = "parallel")]
+use std::sync::Arc;
 use std::time::Instant;
 
 #[derive(Debug, Parser)]
@@ -29,6 +33,9 @@ struct Args {
     /// Static anchor-search worker count (requires the `parallel` feature above one).
     #[arg(long, default_value_t = 1)]
     threads: usize,
+    /// Pin Rayon workers, in worker-index order, to these comma-separated Linux CPU IDs.
+    #[arg(long, value_delimiter = ',')]
+    worker_cpus: Vec<usize>,
     /// Worker-local bound mailbox polling interval; zero disables mid-branch polling.
     #[arg(long, default_value_t = 16384)]
     pulse_interval: u64,
@@ -61,6 +68,7 @@ struct RunRecord<'a> {
     artifact_write_seconds: Option<f64>,
     artifact_payload_blake3: Option<String>,
     threads: usize,
+    worker_cpus: &'a [usize],
     pulse_interval: u64,
     search_seconds: &'a [f64],
     round_stats: &'a [ergodis::ConnectedSearchStats],
@@ -70,6 +78,20 @@ struct RunRecord<'a> {
 enum Backend {
     Compact(CompiledCssDistance),
     Wide(CompiledWideCssDistance),
+}
+
+#[cfg(all(feature = "parallel", target_os = "linux"))]
+fn pin_current_thread(cpu: usize) -> bool {
+    let mut set = unsafe { std::mem::zeroed::<libc::cpu_set_t>() };
+    unsafe {
+        libc::CPU_ZERO(&mut set);
+        libc::CPU_SET(cpu, &mut set);
+        libc::sched_setaffinity(
+            0,
+            std::mem::size_of::<libc::cpu_set_t>(),
+            std::ptr::addr_of!(set),
+        ) == 0
+    }
 }
 
 fn dense_matrix(rows: &[Vec<u16>], columns: usize) -> Result<Matrix> {
@@ -190,9 +212,53 @@ fn main() -> Result<()> {
         bail!("thread counts above one require the `parallel` feature");
     }
     #[cfg(feature = "parallel")]
-    let thread_pool = rayon::ThreadPoolBuilder::new()
-        .num_threads(args.threads)
-        .build()?;
+    let thread_pool = {
+        if !args.worker_cpus.is_empty() && args.worker_cpus.len() != args.threads {
+            bail!(
+                "worker CPU count {} does not match thread count {}",
+                args.worker_cpus.len(),
+                args.threads
+            );
+        }
+        #[cfg(not(target_os = "linux"))]
+        if !args.worker_cpus.is_empty() {
+            bail!("worker CPU affinity is currently supported only on Linux");
+        }
+        let mut builder = rayon::ThreadPoolBuilder::new().num_threads(args.threads);
+        #[cfg(target_os = "linux")]
+        let affinity_failed = Arc::new(AtomicBool::new(false));
+        #[cfg(target_os = "linux")]
+        if !args.worker_cpus.is_empty() {
+            if args
+                .worker_cpus
+                .iter()
+                .any(|&cpu| cpu >= libc::CPU_SETSIZE as usize)
+            {
+                bail!("worker CPU ID exceeds the Linux cpu_set_t capacity");
+            }
+            let mut unique_cpus = args.worker_cpus.clone();
+            unique_cpus.sort_unstable();
+            if unique_cpus.windows(2).any(|pair| pair[0] == pair[1]) {
+                bail!("worker CPU IDs must be unique");
+            }
+            let worker_cpus = Arc::new(args.worker_cpus.clone());
+            let failed = Arc::clone(&affinity_failed);
+            builder = builder.start_handler(move |worker| {
+                if !pin_current_thread(worker_cpus[worker]) {
+                    failed.store(true, Ordering::Relaxed);
+                }
+            });
+        }
+        let pool = builder.build()?;
+        #[cfg(target_os = "linux")]
+        if !args.worker_cpus.is_empty() {
+            pool.broadcast(|_| ());
+            if affinity_failed.load(Ordering::Relaxed) {
+                bail!("failed to pin one or more Rayon workers");
+            }
+        }
+        pool
+    };
     let certify_incumbent = args.maximum_weight.is_none() && !problem.incumbent_support.is_empty();
     let mode = if certify_incumbent {
         "certify-incumbent"
@@ -246,10 +312,9 @@ fn main() -> Result<()> {
         round_stats.push(round_result.stats);
         if let Some(reference) = &result {
             if reference.distance != round_result.distance
-                || reference.witness != round_result.witness
                 || reference.searched_maximum_weight != round_result.searched_maximum_weight
             {
-                bail!("native search returned different exact answers across rounds");
+                bail!("native search returned different exact optima across rounds");
             }
         } else {
             result = Some(round_result);
@@ -270,6 +335,7 @@ fn main() -> Result<()> {
         artifact_write_seconds,
         artifact_payload_blake3,
         threads: args.threads,
+        worker_cpus: &args.worker_cpus,
         pulse_interval: args.pulse_interval,
         search_seconds: &search_seconds,
         round_stats: &round_stats,

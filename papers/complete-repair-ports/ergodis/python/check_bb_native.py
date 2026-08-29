@@ -45,6 +45,13 @@ def main() -> int:
         raise RuntimeError("round timing is invalid")
     if record["threads"] == 1 and len(set(candidates)) != 1:
         raise RuntimeError("single-threaded round work is nondeterministic")
+    worker_cpus = record.get("worker_cpus", [])
+    if worker_cpus and (
+        len(worker_cpus) != record["threads"]
+        or len(set(worker_cpus)) != len(worker_cpus)
+        or any(cpu < 0 for cpu in worker_cpus)
+    ):
+        raise RuntimeError("worker affinity is incomplete, repeated, or invalid")
     output = {
         "schema": "ergodis-bb-native-check-v1",
         "label": problem["label"],

@@ -350,6 +350,7 @@ dependencies = [
  "bytemuck",
  "clap",
  "criterion",
+ "libc",
  "num-bigint",
  "num-traits",
  "proptest",

@@ -716,15 +716,25 @@ impl CompiledWideCssDistance {
         syndrome.weight().div_ceil(degree) as u16
     }
 
-    /// Greedy packing of odd checks with pairwise-disjoint coordinate neighborhoods.
+    /// Test whether greedy packing finds more disjoint neighborhoods than the budget.
     #[inline]
-    fn syndrome_packing_lower_bound(&self, mut syndrome: PackedSyndrome<3>) -> u16 {
-        let mut packed = 0u16;
+    fn syndrome_packing_exceeds(&self, mut syndrome: PackedSyndrome<3>, budget: u16) -> bool {
+        let mut remaining = budget;
         while let Some(check) = syndrome.pop_lowest() {
-            packed += 1;
+            if remaining == 0 {
+                return true;
+            }
+            remaining -= 1;
             syndrome.difference_assign(self.check_conflicts[check]);
         }
-        packed
+        false
+    }
+
+    /// Test the cheap degree bound before paying for greedy conflict packing.
+    #[inline]
+    fn completion_lower_bound_exceeds(&self, syndrome: PackedSyndrome<3>, budget: u16) -> bool {
+        self.syndrome_completion_lower_bound(syndrome) > budget
+            || self.syndrome_packing_exceeds(syndrome, budget)
     }
 
     #[inline]
@@ -843,15 +853,16 @@ impl CompiledWideCssDistance {
                     continue;
                 }
                 let improvement_budget = best_weight.saturating_sub(child_weight + 1);
-                let lower_bound = self
-                    .syndrome_completion_lower_bound(child_syndrome)
-                    .max(self.syndrome_packing_lower_bound(child_syndrome));
+                if child_weight >= searched_maximum_weight
+                    || self.completion_lower_bound_exceeds(child_syndrome, improvement_budget)
+                {
+                    stats.syndrome_bound_prunes += 1;
+                    continue;
+                }
                 let four_completion_reject =
                     improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
-                if child_weight >= searched_maximum_weight
-                    || lower_bound > improvement_budget
-                    || (improvement_budget <= 3
-                        && !self.has_short_completion(child_syndrome, improvement_budget))
+                if (improvement_budget <= 3
+                    && !self.has_short_completion(child_syndrome, improvement_budget))
                     || four_completion_reject
                 {
                     stats.syndrome_bound_prunes += 1;
@@ -911,10 +922,9 @@ impl CompiledWideCssDistance {
         for branch in branches {
             poll_bound(mailbox, &mut pruning_bound, &mut stats);
             let improvement_budget = pruning_bound.saturating_sub(branch.weight + 1);
-            let lower_bound = self
-                .syndrome_completion_lower_bound(branch.syndrome)
-                .max(self.syndrome_packing_lower_bound(branch.syndrome));
-            if branch.weight >= searched_maximum_weight || lower_bound > improvement_budget {
+            if branch.weight >= searched_maximum_weight
+                || self.completion_lower_bound_exceeds(branch.syndrome, improvement_budget)
+            {
                 stats.syndrome_bound_prunes += 1;
                 continue;
             }
@@ -973,15 +983,16 @@ impl CompiledWideCssDistance {
                     continue;
                 }
                 let improvement_budget = pruning_bound.saturating_sub(child_weight + 1);
-                let lower_bound = self
-                    .syndrome_completion_lower_bound(child_syndrome)
-                    .max(self.syndrome_packing_lower_bound(child_syndrome));
+                if child_weight >= searched_maximum_weight
+                    || self.completion_lower_bound_exceeds(child_syndrome, improvement_budget)
+                {
+                    stats.syndrome_bound_prunes += 1;
+                    continue;
+                }
                 let four_completion_reject =
                     improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
-                if child_weight >= searched_maximum_weight
-                    || lower_bound > improvement_budget
-                    || (improvement_budget <= 3
-                        && !self.has_short_completion(child_syndrome, improvement_budget))
+                if (improvement_budget <= 3
+                    && !self.has_short_completion(child_syndrome, improvement_budget))
                     || four_completion_reject
                 {
                     stats.syndrome_bound_prunes += 1;
@@ -1067,15 +1078,16 @@ impl CompiledWideCssDistance {
                         continue;
                     }
                     let improvement_budget = active_bound.saturating_sub(child_weight + 1);
-                    let lower_bound = self
-                        .syndrome_completion_lower_bound(child_syndrome)
-                        .max(self.syndrome_packing_lower_bound(child_syndrome));
+                    if child_weight >= searched_maximum_weight
+                        || self.completion_lower_bound_exceeds(child_syndrome, improvement_budget)
+                    {
+                        prefix_stats.syndrome_bound_prunes += 1;
+                        continue;
+                    }
                     let four_completion_reject =
                         improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
-                    if child_weight >= searched_maximum_weight
-                        || lower_bound > improvement_budget
-                        || (improvement_budget <= 3
-                            && !self.has_short_completion(child_syndrome, improvement_budget))
+                    if (improvement_budget <= 3
+                        && !self.has_short_completion(child_syndrome, improvement_budget))
                         || four_completion_reject
                     {
                         prefix_stats.syndrome_bound_prunes += 1;
@@ -1327,15 +1339,16 @@ impl CompiledWideCssDistance {
                     }
                 }
                 let improvement_budget = best_weight.saturating_sub(child_weight + 1);
-                let cheap_bound = self
-                    .syndrome_completion_lower_bound(child_syndrome)
-                    .max(self.syndrome_packing_lower_bound(child_syndrome));
+                if child_weight >= searched_maximum_weight
+                    || self.completion_lower_bound_exceeds(child_syndrome, improvement_budget)
+                {
+                    stats.syndrome_bound_prunes += 1;
+                    continue;
+                }
                 let four_completion_reject =
                     improvement_budget == 4 && !self.may_have_four_completion(child_syndrome);
-                if child_weight >= searched_maximum_weight
-                    || cheap_bound > improvement_budget
-                    || (improvement_budget <= 3
-                        && !self.has_short_completion(child_syndrome, improvement_budget))
+                if (improvement_budget <= 3
+                    && !self.has_short_completion(child_syndrome, improvement_budget))
                     || four_completion_reject
                 {
                     stats.syndrome_bound_prunes += 1;
