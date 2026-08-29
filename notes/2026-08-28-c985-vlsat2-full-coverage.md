@@ -57,10 +57,10 @@ ERGODIS_BENCH_CPU=3 scripts/vlsat2-full-coverage.sh
 Committed evidence:
 
 - manifest SHA-256: `f96a5efefb01e5c3dd777040e7cb8dabc2b4fc86305cd6a991b1112b67655abf`;
-- raw JSONL SHA-256: `ad7406f008ee369f0d310f3e87e7d34ee10080acf4f014a290d0ce03d08cd24f`;
-- coverage JSON SHA-256: `e2edc33afaaef3f51e6c20b97f712443e18c96e140c6b15ea48e7053d79e1160`;
+- raw JSONL SHA-256: `94675a7ca6f5a088c618947ed9c51743f7d0f017b2527aec83777b1152646231`;
+- coverage JSON SHA-256: `b4324efda96e7bd5a4457900dc1a7100533bc7d451604f5fa4d737fef8a5bf8f`;
 - checked Ergodis binary SHA-256:
-  `53efb2980b204a0d22b1de1ffeb4559acab45702d82f901e2647573cce028911`.
+  `e3fd9d83f84ecc5eef92cf915d607e8ae0069e4e27e75abccb1baa1beb4d6d1f`.
 
 The coverage JSON additionally pins the runner, checker, streaming clique
 replayer, shared process runner, and manifest.  Full `cargo test
@@ -76,4 +76,3 @@ kernel isolation of every online SMT sibling of the pinned physical core.  The
 current host fails all three conditions.  Canonical A/B evidence therefore
 remains blocked until a controlled host is configured; diagnostic-host output
 is not committed as timing evidence.
-

@@ -26,7 +26,7 @@
     "stable_frequency_policy": false,
     "physical_core_isolated": false,
     "canonical_host_ready": false,
-    "loadavg_before": "0.72 0.84 1.08 2/938 114573",
+    "loadavg_before": "0.96 0.97 1.11 1/937 135755",
     "rustc_vv": "rustc 1.93.1 (01f6ddf75 2026-02-11)\nbinary: rustc\ncommit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf\ncommit-date: 2026-02-11\nhost: x86_64-unknown-linux-gnu\nrelease: 1.93.1\nLLVM version: 21.1.8\n",
     "rustflags": "-C target-cpu=x86-64",
     "lscpu_json": {
@@ -93,7 +93,7 @@
         },
         {
           "field": "CPU(s) scaling MHz:",
-          "data": "47%"
+          "data": "55%"
         },
         {
           "field": "CPU max MHz:",
@@ -220,12 +220,12 @@
   },
   "artifacts": {
     "manifest_sha256": "f96a5efefb01e5c3dd777040e7cb8dabc2b4fc86305cd6a991b1112b67655abf",
-    "raw_jsonl_sha256": "ad7406f008ee369f0d310f3e87e7d34ee10080acf4f014a290d0ce03d08cd24f",
+    "raw_jsonl_sha256": "94675a7ca6f5a088c618947ed9c51743f7d0f017b2527aec83777b1152646231",
     "runner_sha256": "717b5ca81a82a97e9b2c8c5063b2cf39207e5b14dc7454ec410b71e76f47c065",
     "checker_sha256": "f20322762a3774fa4bd39ff31a40c73f4d6be5e2ae283473c6d04993f1b3b49e",
     "clique_replay_sha256": "f6aa3bdde57a2f0f47aa705a15720eff751a04bc14e790c4efe72d297ae44094",
     "process_runner_sha256": "82b4f0968bba02d778cedb7635757ef8365b7bda47de88c715a721723734239e",
-    "ergodis_sha256": "53efb2980b204a0d22b1de1ffeb4559acab45702d82f901e2647573cce028911"
+    "ergodis_sha256": "e3fd9d83f84ecc5eef92cf915d607e8ae0069e4e27e75abccb1baa1beb4d6d1f"
   },
   "summary": {
     "sat": {

@@ -196,53 +196,26 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
     let mut edge_colors = vec![0_u64; edge_color_words];
     let mut domains = vec![0_u64; vertices.saturating_mul(color_words)];
     let mut domain_seen = vec![0_u64; words];
-    scan_dimacs(path, |clause| {
-        if clause.iter().all(|&literal| literal > 0) {
-            let first = (clause[0] as usize - 1) / colors;
-            if first >= vertices || domain_seen[first / 64] & (1_u64 << (first % 64)) != 0 {
-                return Err(StructuredSatError::Encoding);
-            }
-            for &literal in clause {
-                let variable = literal as usize - 1;
-                if variable / colors != first {
-                    return Err(StructuredSatError::Encoding);
-                }
-                let color = variable % colors;
-                let domain_word = &mut domains[first * color_words + color / 64];
-                let bit = 1_u64 << (color % 64);
-                if *domain_word & bit != 0 {
-                    return Err(StructuredSatError::Encoding);
-                }
-                *domain_word |= bit;
-            }
-            domain_seen[first / 64] |= 1_u64 << (first % 64);
-            return Ok(());
-        }
-        let left = (-clause[0] - 1) as usize;
-        let right = (-clause[1] - 1) as usize;
-        let (left_vertex, left_color) = (left / colors, left % colors);
-        let (right_vertex, right_color) = (right / colors, right % colors);
-        if left_vertex >= vertices
-            || right_vertex >= vertices
-            || left_vertex == right_vertex
-            || left_color != right_color
-        {
-            return Err(StructuredSatError::Encoding);
-        }
-        let (low, high) = if left_vertex < right_vertex {
-            (left_vertex, right_vertex)
-        } else {
-            (right_vertex, left_vertex)
-        };
-        let colors_seen = &mut edge_colors
-            [triangular_pair_index(vertices, low, high) * color_words + left_color / 64];
-        let bit = 1_u64 << (left_color % 64);
-        if *colors_seen & bit != 0 {
-            return Err(StructuredSatError::Encoding);
-        }
-        *colors_seen |= bit;
-        Ok(())
-    })?;
+    if color_words == 1 {
+        populate_single_word_coloring(
+            path,
+            colors,
+            vertices,
+            &mut edge_colors,
+            &mut domains,
+            &mut domain_seen,
+        )?;
+    } else {
+        populate_multiword_coloring(
+            path,
+            colors,
+            vertices,
+            color_words,
+            &mut edge_colors,
+            &mut domains,
+            &mut domain_seen,
+        )?;
+    }
     let complete_words = vertices / 64;
     if domain_seen[..complete_words]
         .iter()
@@ -298,6 +271,122 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
         words,
         adjacency: adjacency.into_boxed_slice(),
     })
+}
+
+#[inline(always)]
+fn populate_single_word_coloring(
+    path: &Path,
+    colors: usize,
+    vertices: usize,
+    edge_colors: &mut [u64],
+    domains: &mut [u64],
+    domain_seen: &mut [u64],
+) -> Result<(), StructuredSatError> {
+    scan_dimacs(path, |clause| {
+        if clause.iter().all(|&literal| literal > 0) {
+            let first = (clause[0] as usize - 1) / colors;
+            if first >= vertices || domain_seen[first / 64] & (1_u64 << (first % 64)) != 0 {
+                return Err(StructuredSatError::Encoding);
+            }
+            for &literal in clause {
+                let variable = literal as usize - 1;
+                if variable / colors != first {
+                    return Err(StructuredSatError::Encoding);
+                }
+                let bit = 1_u64 << (variable % colors);
+                if domains[first] & bit != 0 {
+                    return Err(StructuredSatError::Encoding);
+                }
+                domains[first] |= bit;
+            }
+            domain_seen[first / 64] |= 1_u64 << (first % 64);
+            return Ok(());
+        }
+        let left = (-clause[0] - 1) as usize;
+        let right = (-clause[1] - 1) as usize;
+        let (left_vertex, left_color) = (left / colors, left % colors);
+        let (right_vertex, right_color) = (right / colors, right % colors);
+        if left_vertex >= vertices
+            || right_vertex >= vertices
+            || left_vertex == right_vertex
+            || left_color != right_color
+        {
+            return Err(StructuredSatError::Encoding);
+        }
+        let (low, high) = if left_vertex < right_vertex {
+            (left_vertex, right_vertex)
+        } else {
+            (right_vertex, left_vertex)
+        };
+        let colors_seen = &mut edge_colors[triangular_pair_index(vertices, low, high)];
+        let bit = 1_u64 << left_color;
+        if *colors_seen & bit != 0 {
+            return Err(StructuredSatError::Encoding);
+        }
+        *colors_seen |= bit;
+        Ok(())
+    })?;
+    Ok(())
+}
+
+#[inline(never)]
+fn populate_multiword_coloring(
+    path: &Path,
+    colors: usize,
+    vertices: usize,
+    color_words: usize,
+    edge_colors: &mut [u64],
+    domains: &mut [u64],
+    domain_seen: &mut [u64],
+) -> Result<(), StructuredSatError> {
+    scan_dimacs(path, |clause| {
+        if clause.iter().all(|&literal| literal > 0) {
+            let first = (clause[0] as usize - 1) / colors;
+            if first >= vertices || domain_seen[first / 64] & (1_u64 << (first % 64)) != 0 {
+                return Err(StructuredSatError::Encoding);
+            }
+            for &literal in clause {
+                let variable = literal as usize - 1;
+                if variable / colors != first {
+                    return Err(StructuredSatError::Encoding);
+                }
+                let color = variable % colors;
+                let domain_word = &mut domains[first * color_words + color / 64];
+                let bit = 1_u64 << (color % 64);
+                if *domain_word & bit != 0 {
+                    return Err(StructuredSatError::Encoding);
+                }
+                *domain_word |= bit;
+            }
+            domain_seen[first / 64] |= 1_u64 << (first % 64);
+            return Ok(());
+        }
+        let left = (-clause[0] - 1) as usize;
+        let right = (-clause[1] - 1) as usize;
+        let (left_vertex, left_color) = (left / colors, left % colors);
+        let (right_vertex, right_color) = (right / colors, right % colors);
+        if left_vertex >= vertices
+            || right_vertex >= vertices
+            || left_vertex == right_vertex
+            || left_color != right_color
+        {
+            return Err(StructuredSatError::Encoding);
+        }
+        let (low, high) = if left_vertex < right_vertex {
+            (left_vertex, right_vertex)
+        } else {
+            (right_vertex, left_vertex)
+        };
+        let colors_seen = &mut edge_colors
+            [triangular_pair_index(vertices, low, high) * color_words + left_color / 64];
+        let bit = 1_u64 << (left_color % 64);
+        if *colors_seen & bit != 0 {
+            return Err(StructuredSatError::Encoding);
+        }
+        *colors_seen |= bit;
+        Ok(())
+    })?;
+    Ok(())
 }
 
 #[inline(always)]
