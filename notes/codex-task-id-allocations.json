@@ -3815,8 +3815,17 @@
       "last": 996,
       "purpose": "export current 34-page Paper I authority to standalone repository",
       "sequence": 424
+    },
+    {
+      "count": 1,
+      "first": 997,
+      "kind": "reservation",
+      "lane": "quantum-codes",
+      "last": 997,
+      "purpose": "symmetry-reduction gate experiment for exact qLDPC distance solvers",
+      "sequence": 425
     }
   ],
-  "next_id": 997,
+  "next_id": 998,
   "schema": "codex-task-id-allocations-v1"
 }

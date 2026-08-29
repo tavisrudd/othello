@@ -40,6 +40,7 @@ unless a later, explicitly authorized placement task decides otherwise.
 - `notes/quantum-codes-tasks/`
 - `notes/quantum-codes-reports/`
 - `notes/2026-08-25-quantum-codes-discovery-track.md`
+- `notes/2026-08-28-ergodis-ldpc-quantum-angle.md` (read-only input for C997)
 - a new repository-local compiler/certificate directory chosen by C967 after
   its mathematical schema gate
 - the exact C967 row in `notes/2026-07-07-codex-task-queue.md`
@@ -50,6 +51,12 @@ unless a later, explicitly authorized placement task decides otherwise.
 1. **C967 -- jet-quotient quantum-code compiler.** Freeze the construction and
    normalization, emit exact checks/logicals/certificates, replay `q=11` and
    `q=13`, and decide the transversal-phase gate without manuscript edits.
+2. **C997 -- symmetry-reduction gate for exact qLDPC distance solvers.** Add
+   automorphism-orbit symmetry breaking to the public gross-code integer
+   program and to the passant code, count branch-and-bound nodes, and pass or
+   close the proposal at roughly 5x. Research gate only; no ergodis or
+   manuscript edits. Card:
+   `notes/quantum-codes-tasks/c997-qldpc-distance-symmetry-reduction-gate.md`.
 
 ## Entry action
 
