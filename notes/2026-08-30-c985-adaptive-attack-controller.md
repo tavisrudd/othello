@@ -425,6 +425,15 @@ No `n=59/58` run is authorized.  The controller first has to reproduce the
 approved Stage-0 counts and published `n=60` candidate census with an unchanged
 plan schema.
 
+If that gate later opens a long campaign, the same compact control surface is
+useful without changing the polynomial core: query exclusion counts by prefix
+depth/residue/interlacing stratum, redirect diagnostic effort to the first
+surviving deck, compare filter plans on identical prefixes, and arm a trace for
+one polynomial prefix/Farkas rejection.  Candidate polynomials and Farkas
+vectors remain file evidence; `agent brief` reports only changed survivor
+counts and the first unexplained prefix.  The present work designs this path
+but launches no `R^18` enumeration.
+
 Residual hitting becomes another registered primitive.  The newly separated
 engine can decide bounded transversals with pre-sized iterative workspace and
 stream complete negative evidence.  Attack plans may vary when it is invoked,
