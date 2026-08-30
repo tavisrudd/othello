@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay the C997 Gross-code formulations with Gurobi.
+"""Privately replay the C997 Gross-code formulations with Gurobi.
 
 The committed C997 experiment is read-only input.  Solver logs and evidence are
 streamed to files so an interrupted or long run does not accumulate a transcript

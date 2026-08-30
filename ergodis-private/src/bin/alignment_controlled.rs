@@ -1,6 +1,6 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
-use ergodis::control::{read_manifest, AlignmentCampaignControl};
+use ergodis::control::read_manifest;
 use ergodis::{
     compile_alignment_attachment, search_alignment_attachment_controlled,
     search_alignment_attachment_from, AlignmentSearchWorkspace,
@@ -8,8 +8,12 @@ use ergodis::{
 use serde_json::json;
 use std::path::PathBuf;
 
+#[path = "../alignment_control.rs"]
+mod alignment_control;
+use alignment_control::AlignmentCampaignControl;
+
 #[derive(Debug, Parser)]
-#[command(about = "Opt-in C880 search with coarse campaign safe points")]
+#[command(about = "Opt-in alignment-attachment search with campaign safe points")]
 struct Cli {
     #[arg(long)]
     run_dir: PathBuf,

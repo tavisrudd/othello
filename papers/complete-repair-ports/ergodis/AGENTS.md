@@ -2,7 +2,7 @@ Read all of `../../../AGENTS.md` in a dedicated command before doing anything.
 Then read all of `../../../notes/queens-othello-perf-playbook.md` before any
 Rust design, implementation, optimization, or benchmark in this directory.
 
-This is private C962 code-and-mathematics work. Do not export, synchronize,
+This is private code-and-mathematics work. Do not export, synchronize,
 publish, or commit it without explicit user authorization.
 
 ## Architecture gate

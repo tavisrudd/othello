@@ -75,12 +75,12 @@ fn compose_cli_retains_legacy_prime_schema() {
 }
 
 #[test]
-fn hall_cli_matches_the_c80_q11_complete_exchange() {
+fn hall_cli_matches_the_projective_q11_complete_exchange() {
     let output = Command::new(env!("CARGO_BIN_EXE_ergodis"))
         .args([
             "hall",
             "--input",
-            example("hall-c80-q11.json").to_str().unwrap(),
+            example("hall-projective-q11.json").to_str().unwrap(),
         ])
         .output()
         .unwrap();

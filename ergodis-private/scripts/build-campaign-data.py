@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stream compact frozen feature batches for the experimental campaign layer."""
+"""Private builder for compact frozen campaign feature batches."""
 
 from __future__ import annotations
 

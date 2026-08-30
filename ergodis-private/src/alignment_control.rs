@@ -1,5 +1,7 @@
-use super::{send_request, Manifest, PlanArena, PlanOutput, PlanRole};
-use crate::alignment::{
+use ergodis::control::{
+    send_request, CompiledPlan, Manifest, PlanArena, PlanOutput, PlanRole,
+};
+use ergodis::{
     AlignmentBranchFeatures, AlignmentError, AlignmentSearchControl, AlignmentSearchPoint,
 };
 use serde_json::json;
@@ -423,7 +425,7 @@ fn prepare_latest(
     Ok(())
 }
 
-/// C880 adapter for live ordering-plan injection. A watcher blocks on a Unix
+/// Alignment-attachment adapter for live ordering-plan injection. A watcher blocks on a Unix
 /// datagram; a search thread executes one relaxed Boolean load per stride.
 pub struct AlignmentCampaignControl {
     arena: PlanArena,
@@ -460,11 +462,7 @@ impl AlignmentCampaignControl {
         self.watcher.notifications.load(Ordering::Relaxed)
     }
 
-    pub fn last_point(&self) -> Option<AlignmentSearchPoint> {
-        self.last_point
-    }
-
-    fn ordering_plan(&self) -> Option<&super::CompiledPlan> {
+    fn ordering_plan(&self) -> Option<&CompiledPlan> {
         self.arena
             .plans()
             .iter()

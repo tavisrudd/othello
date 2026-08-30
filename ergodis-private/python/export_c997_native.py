@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export the C997 Gross matrices to the native Ergodis sparse JSON interface."""
+"""Privately export C997 Gross matrices to the Ergodis sparse interface."""
 
 from __future__ import annotations
 

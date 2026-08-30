@@ -88,7 +88,7 @@ plain no-theorem run 43.10 seconds.
 
 Implementation commits are `07cc0ebe2`, `b1c4dd052`, and `3a30a24e6` plus the
 current follow-up. Operator documentation is in
-`papers/complete-repair-ports/ergodis/docs/CAMPAIGNS.md`.
+`ergodis-private/docs/CAMPAIGNS.md`.
 
 ## Architecture after real use
 

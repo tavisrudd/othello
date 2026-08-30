@@ -390,23 +390,23 @@ Reproduction from the repository root:
 
 ```sh
 nix shell nixpkgs#python313 -c python3 \
-  papers/complete-repair-ports/ergodis/scripts/c80_projective_hall_scout.py \
+  ergodis-private/scripts/projective_hall_scout.py \
   --q 11 --states 1000 --exchanges 100000 --continue-after-issue \
   --p-admission \
   --check notes/2026-08-30-c985-c80-komega-admission-q11.json
 nix shell nixpkgs#python313 -c python3 \
-  papers/complete-repair-ports/ergodis/scripts/c80_projective_hall_scout.py \
+  ergodis-private/scripts/projective_hall_scout.py \
   --q 13 --states 300 --exchanges 30000 --continue-after-issue \
   --p-admission \
   --check notes/2026-08-30-c985-c80-komega-admission-q13.json
 sha256sum -c notes/2026-08-30-c985-c80-komega-admission.sha256
 
 nix shell nixpkgs#python313 -c python3 \
-  papers/complete-repair-ports/ergodis/scripts/c80_projective_hall_scout.py \
+  ergodis-private/scripts/projective_hall_scout.py \
   --q 11 --states 100 --exchanges 10000 \
   --check notes/2026-08-30-c985-c80-projective-hall-deficit.json
 nix shell nixpkgs#python313 -c python3 \
-  papers/complete-repair-ports/ergodis/scripts/c80_projective_hall_replay.py
+  ergodis-private/scripts/projective_hall_replay.py
 sha256sum -c notes/2026-08-30-c985-c80-projective-hall-deficit.sha256
 ```
 

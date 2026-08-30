@@ -13,12 +13,10 @@ use std::os::unix::net::{UnixDatagram, UnixListener, UnixStream};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 
-mod alignment;
 mod client;
 mod synthesis;
 mod vm;
 
-pub use alignment::AlignmentCampaignControl;
 pub use client::PlanArena;
 use synthesis::learn_decision_tree;
 pub use vm::{

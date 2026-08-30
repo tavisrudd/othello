@@ -14,7 +14,7 @@ from collections import Counter
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "rust/scripts/c80_causal_nonpacking.py"
 
 
@@ -177,6 +177,7 @@ def scout(
     continue_after_issue: bool,
     p_admission: bool,
     feature_output: Path | None = None,
+    root_generator: str = "python",
 ) -> dict:
     source = load_source()
     game = source.DirectSmallBoundaryGame(q)
@@ -188,10 +189,22 @@ def scout(
 
     def primary_mask(state) -> int:
         return sum(1 << by_cell[point] for point in state)
-    rng = random.Random(seed)
     feature_sink = FeatureSink(feature_output)
     states = set()
     attempts = 0
+    rng = random.Random(seed)
+    xorshift = max(seed, 1)
+
+    def choose(legal):
+        nonlocal xorshift
+        if root_generator == "python":
+            return rng.choice(legal)
+        xorshift ^= (xorshift << 13) & ((1 << 64) - 1)
+        xorshift ^= xorshift >> 7
+        xorshift ^= (xorshift << 17) & ((1 << 64) - 1)
+        xorshift &= (1 << 64) - 1
+        return legal[xorshift % len(legal)]
+
     while len(states) < state_budget and attempts < 20 * state_budget:
         attempts += 1
         state = frozenset()
@@ -199,7 +212,7 @@ def scout(
             legal = game.legal(state)
             if not legal:
                 break
-            state |= {rng.choice(legal)}
+            state |= {choose(legal)}
         if len(state) == 4:
             states.add(state)
 
@@ -557,6 +570,8 @@ def scout(
         "first_issue": first_issue,
         "stopped_early": stop,
     }
+    if root_generator != "python":
+        result["root_generator"] = root_generator
     result["primary_replay"] = (
         primary_replay(source, q, first_issue)
         if first_issue is not None
@@ -592,6 +607,12 @@ def main() -> None:
     parser.add_argument("--continue-after-issue", action="store_true")
     parser.add_argument("--p-admission", action="store_true")
     parser.add_argument("--feature-output", type=Path)
+    parser.add_argument(
+        "--root-generator",
+        choices=("python", "xorshift64"),
+        default="python",
+        help="deterministic root sampler; xorshift64 is the Rust parity oracle",
+    )
     output = parser.add_mutually_exclusive_group()
     output.add_argument("--write", type=Path)
     output.add_argument("--check", type=Path)
@@ -604,6 +625,7 @@ def main() -> None:
         args.continue_after_issue,
         args.p_admission,
         args.feature_output,
+        args.root_generator,
     )
     encoded = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if args.write is not None:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit whole-support translation orbits left by C997 coordinate anchoring."""
+"""Privately audit whole-support translation orbits after C997 anchoring."""
 
 from __future__ import annotations
 

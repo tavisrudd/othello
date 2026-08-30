@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compact Eulerian-witness backend for C880 attachment separation."""
+"""Private compact Eulerian-witness backend for C880 attachment separation."""
 
 from __future__ import annotations
 

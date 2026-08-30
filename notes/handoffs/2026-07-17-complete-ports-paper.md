@@ -621,7 +621,16 @@ Sequel research:
   compiled root-to-plan dispatch table, as specified with persistence and
   literature read depths in the
   [adaptive-search ADR](../2026-08-30-c985-ergodis-adaptive-search-learning-adr.md);
-  no sound pruning role exists.
+  no sound pruning role exists.  The first parallel-root control is now
+  [separated from the public package](../2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md):
+  Ergodis exposes only a generic worker-local root executor, while the
+  projective-grid and alignment-attachment adapters, fixtures, controller
+  documentation, and oracle scripts live in top-level `ergodis-private` with a
+  one-way dependency.  On a deterministic 10,000-root q11 workload, exact
+  1/24-worker metrics agree and seven interleaved pairs give a 10.1831x
+  geometric-mean speedup (`t=196.040`) at about 2 MiB peak RSS.  The next gate
+  is generic parallel heartbeats, compiled root-to-plan dispatch, and
+  off-thread deterministic evidence merging; domain fields remain private.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

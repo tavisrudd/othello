@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Replay and compare the retained C997 native-distance evidence."""
+"""Privately replay and compare retained C997 native-distance evidence."""
 
 from __future__ import annotations
 

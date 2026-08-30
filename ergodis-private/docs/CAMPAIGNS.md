@@ -1,4 +1,4 @@
-# Experimental theorem campaigns
+# Private experimental theorem campaigns
 
 The `control-plane` feature is an opt-in layer for long diagnostic searches.
 It is not linked into ordinary Ergodis solves and cannot promote a sampled
@@ -29,8 +29,8 @@ row/cell limits are checked before allocation. Large raw search evidence should
 remain in domain-owned files; campaign data should contain only the compact
 features needed to compare attacks.
 
-The included adapter builds C80 and C880 batches without retaining a second
-in-memory copy:
+The included adapters build projective-grid and alignment-attachment batches
+without retaining a second in-memory copy:
 
 ```text
 python3 scripts/build-campaign-data.py c80 ...
@@ -38,7 +38,7 @@ python3 scripts/build-campaign-data.py c880 ...
 python3 scripts/build-campaign-data.py merge ...
 ```
 
-`c80_projective_hall_scout.py --feature-output FILE` optionally streams all
+`projective_hall_scout.py --feature-output FILE` optionally streams all
 sampled survivor and non-survivor reply rows while leaving its canonical
 aggregate certificate unchanged.
 

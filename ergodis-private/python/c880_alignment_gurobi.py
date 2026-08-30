@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lazy exact backend for the theorem-reduced C880 attachment problem."""
+"""Private lazy backend for the theorem-reduced C880 attachment problem."""
 
 from __future__ import annotations
 

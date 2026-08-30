@@ -581,7 +581,7 @@ mod tests {
 
     #[test]
     fn c80_q11_reply_resource_graph_repairs_the_causal_collision() {
-        // C80 q=11 one-to-many witness. Right labels are the two consumed
+        // Projective q=11 one-to-many witness. Right labels are the two consumed
         // certificate replies (2,9) and (7,10); the second new defect can use
         // only the latter. The causal label alone branches, while the complete
         // exchange admits the distinct resource assignment. This does not yet

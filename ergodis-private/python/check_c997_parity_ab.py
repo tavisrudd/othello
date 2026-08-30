@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check and summarize the retained C997 physical-parity formulation A/B."""
+"""Privately check the retained C997 physical-parity formulation A/B."""
 
 from __future__ import annotations
 

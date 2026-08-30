@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check and summarize streamed C997/Gurobi evidence without Gurobi."""
+"""Privately check streamed C997/Gurobi evidence without Gurobi."""
 
 from __future__ import annotations
 

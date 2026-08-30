@@ -34,6 +34,7 @@ pub mod packed_ternary;
 pub mod projective;
 pub mod provenance;
 pub mod residual_hitting;
+pub mod root_execution;
 pub mod sat;
 pub mod scheduler;
 pub mod selector;

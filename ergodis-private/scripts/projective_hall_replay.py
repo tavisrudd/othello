@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "rust/scripts/c80_causal_nonpacking.py"
 CERTIFICATE = ROOT / "notes/2026-08-30-c985-c80-projective-hall-deficit.json"
 
