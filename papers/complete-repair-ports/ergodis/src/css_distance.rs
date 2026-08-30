@@ -453,6 +453,7 @@ const _: () = assert!(std::mem::align_of::<PackedColumn>() == 8);
 struct CompletionBloom {
     words: Box<[u64]>,
     bit_mask: u64,
+    hash_step_mask: u64,
 }
 
 impl CompletionBloom {
@@ -464,13 +465,24 @@ impl CompletionBloom {
         Self {
             words: vec![0; bit_count / 64].into_boxed_slice(),
             bit_mask: bit_count as u64 - 1,
+            hash_step_mask: u64::MAX,
         }
+    }
+
+    fn new_adaptive(item_count: usize) -> Self {
+        let mut bloom = Self::new(item_count);
+        let bit_count = bloom.words.len() * 64;
+        if bit_count < item_count.saturating_mul(3) {
+            bloom.hash_step_mask = 0;
+        }
+        bloom
     }
 
     fn universal() -> Self {
         Self {
             words: vec![u64::MAX].into_boxed_slice(),
             bit_mask: 63,
+            hash_step_mask: u64::MAX,
         }
     }
 
@@ -488,7 +500,7 @@ impl CompletionBloom {
         let low = key as u64;
         let high = (key >> 64) as u64;
         let first = self.first_hash(key) as u64;
-        let second = Self::mix(high ^ low.rotate_left(41)) | 1;
+        let second = (Self::mix(high ^ low.rotate_left(41)) | 1) & self.hash_step_mask;
         [
             (first & self.bit_mask) as usize,
             (first.wrapping_add(second) & self.bit_mask) as usize,
@@ -528,6 +540,11 @@ impl CompletionBloom {
         self.hashes(key)
             .into_iter()
             .all(|bit| self.words[bit / 64] & (1u64 << (bit % 64)) != 0)
+    }
+
+    #[inline]
+    fn uses_one_hash(&self) -> bool {
+        self.hash_step_mask == 0
     }
 }
 
@@ -627,6 +644,34 @@ fn prepare_completion_keys<const WORDS: usize>(
     (unique, capped)
 }
 
+fn populate_three_completion_bloom<const THREE_HASHES: bool>(
+    one: &[u128],
+    two: &[u128],
+    keys: &[u128],
+    bloom: &mut CompletionBloom,
+) {
+    for &key in one.iter().chain(two) {
+        if THREE_HASHES {
+            bloom.insert_three(key);
+        } else {
+            bloom.insert_one(key);
+        }
+    }
+    for (left, &left_key) in keys.iter().enumerate() {
+        for (middle, &middle_key) in keys.iter().enumerate().skip(left + 1) {
+            let pair_key = left_key ^ middle_key;
+            for &right_key in keys.iter().skip(middle + 1) {
+                let key = pair_key ^ right_key;
+                if THREE_HASHES {
+                    bloom.insert_three(key);
+                } else {
+                    bloom.insert_one(key);
+                }
+            }
+        }
+    }
+}
+
 /// Memory-bounded completion filters for large codes.  Triple keys stream
 /// directly into the Bloom filter instead of materializing O(n^3) u128s;
 /// the optional four-completion rejection is conservatively disabled.
@@ -647,24 +692,15 @@ fn compile_large_completion_filters<const WORDS: usize>(
     two.sort_unstable();
     two.dedup();
     let three_completion_bloom = if triple_count <= MAX_ENUMERATED_THREE_COMPLETIONS {
-        let mut bloom = CompletionBloom::new(
+        let mut bloom = CompletionBloom::new_adaptive(
             one.len()
                 .saturating_add(pair_count)
                 .saturating_add(triple_count),
         );
-        for &key in &one {
-            bloom.insert_three(key);
-        }
-        for &key in &two {
-            bloom.insert_three(key);
-        }
-        for (left, &left_key) in keys.iter().enumerate() {
-            for (middle, &middle_key) in keys.iter().enumerate().skip(left + 1) {
-                let pair_key = left_key ^ middle_key;
-                for &right_key in keys.iter().skip(middle + 1) {
-                    bloom.insert_three(pair_key ^ right_key);
-                }
-            }
+        if bloom.uses_one_hash() {
+            populate_three_completion_bloom::<false>(&one, &two, &keys, &mut bloom);
+        } else {
+            populate_three_completion_bloom::<true>(&one, &two, &keys, &mut bloom);
         }
         bloom
     } else {
@@ -1020,7 +1056,7 @@ where
             self.logical_count,
             self.maximum_column_check_weight,
             u8::from(self.kernel_weights_even),
-            0,
+            u8::from(self.three_completion_bloom.uses_one_hash()),
         ])?;
         for syndromes in &self.short_completion_syndromes {
             write_len(&mut writer, syndromes.len())?;
@@ -1073,8 +1109,12 @@ where
             1 => true,
             _ => return Err(CssDistanceArtifactError::Shape),
         };
-        if flags[3] != 0
-            || usize::from(coordinate_count) != physical.cols()
+        let three_uses_one_hash = match flags[3] {
+            0 => false,
+            1 => true,
+            _ => return Err(CssDistanceArtifactError::Shape),
+        };
+        if usize::from(coordinate_count) != physical.cols()
             || usize::from(logical_count) != logical.rows()
         {
             return Err(CssDistanceArtifactError::Shape);
@@ -1085,7 +1125,10 @@ where
             / 2;
         let one_completion = read_syndromes(&mut reader, physical.cols())?;
         let two_completion = read_syndromes(&mut reader, maximum_pairs)?;
-        let three_completion_bloom = read_bloom(&mut reader)?;
+        let mut three_completion_bloom = read_bloom(&mut reader)?;
+        if three_uses_one_hash {
+            three_completion_bloom.hash_step_mask = 0;
+        }
         let four_completion_bloom = read_bloom(&mut reader)?;
         let artifact_payload_blake3 = reader.finish()?;
         if !strictly_sorted(&one_completion) || !strictly_sorted(&two_completion) {
@@ -2449,6 +2492,7 @@ fn read_bloom<R: Read>(
     Ok(CompletionBloom {
         words: words.into_boxed_slice(),
         bit_mask: (length * 64 - 1) as u64,
+        hash_step_mask: u64::MAX,
     })
 }
 
@@ -3764,6 +3808,16 @@ mod tests {
         assert_eq!(short[0].len(), columns.len());
         assert_eq!(triple_bloom.words.as_ref(), &[u64::MAX]);
         assert_eq!(triple_bloom.bit_mask, 63);
+    }
+
+    #[test]
+    fn adaptive_high_load_bloom_uses_matching_single_hash() {
+        let mut bloom = CompletionBloom::new_adaptive(60_000_000);
+        assert!(bloom.uses_one_hash());
+        for key in [0_u128, 1, u128::MAX, 0x1234_5678_9abc_def0] {
+            bloom.insert_one(key);
+            assert!(bloom.contains_three(key));
+        }
     }
 
     fn artifact_problem() -> (Matrix, Matrix) {
