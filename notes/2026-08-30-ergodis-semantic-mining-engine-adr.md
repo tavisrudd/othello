@@ -210,6 +210,55 @@ Three current examples define the required generality:
 contracts.  Predicate IR and graph storage remain private design work until
 these three examples force a common minimal interface.
 
+## Lean kernel boundary
+
+Lean 4 exposes the required in-process authority.  A Lean-side bridge can
+construct a `Declaration` and submit it through `Lean.addDecl`; the underlying
+kernel environment operation type-checks the declaration and returns a new
+immutable environment or an exception.  Declarations containing metavariables
+or free variables are rejected.  Ergodis must never use unchecked declaration
+insertion or a kernel-skip option.
+
+The kernel is a checker, not the theorem-search engine.  The division of labor
+is:
+
+```text
+Ergodis                 normalized goals, mining, theorem DAG, proof plan
+Lean elaborator/meta    names, implicit arguments, tactics, proof-term construction
+Lean kernel             final declaration type checking and environment extension
+```
+
+Use two integration modes:
+
+1. **Stable baseline.** Emit a compact certificate/theorem-DAG artifact and a
+   generated Lean module.  The repository's guarded build checks it through
+   the ordinary trusted path.  This is the reproducibility and release gate.
+2. **Campaign bridge.** A persistent Lean executable imports the target
+   environment once, accepts length-delimited batches over a Unix socket,
+   constructs/checks declarations in process, and returns bounded structured
+   results.  This amortizes startup and imports during rapid theorem assembly.
+
+The bridge protocol should include environment/module hashes, fragment IDs,
+normalized statements, certificate references, requested declaration names,
+and resource limits.  Replies contain only status, declaration/type hashes,
+used-axiom summaries, compact diagnostics, and timings; verbose elaborator
+traces stream to per-run files on explicit request.  Each socket path remains
+run-isolated as in the search control plane.
+
+Do not bind the Rust miner directly to Lean's exported runtime/C symbols.  The
+exported kernel entry exists, but Lean runtime object ownership and internal
+ABI details are a brittle cross-language boundary.  A small version-pinned
+Lean bridge gives typed ownership, imports, exception handling, and an easy
+fallback to generated modules.
+
+For reflected finite certificates, prefer a small Lean checker plus a proved
+soundness theorem.  Ergodis supplies data; evaluation proves the checker's
+Boolean proposition; composition uses the soundness theorem.  For symbolic
+steps, emit explicit proof terms or tactic-generated terms and let the kernel
+check the resulting declaration.  Every composed theorem records the exact
+Lean declaration dependencies, so a later environment change invalidates the
+right DAG nodes rather than the entire campaign.
+
 Search threads check only the existing cheap steering flag.  Mining reducers
 receive batched snapshots outside the solver hot path.  Serialization, JSON,
 formula formatting, and orbit narrative never execute in worker loops.
