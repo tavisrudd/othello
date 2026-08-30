@@ -161,18 +161,19 @@ impl Campaign {
         response_limit: usize,
         trace_limit: u64,
     ) -> Result<Self, ControlError> {
+        let run_dir = absolute_path(run_dir)?;
         if run_dir.exists() {
             return Err(ControlError::Invalid("run directory already exists".into()));
         }
-        fs::create_dir(run_dir)?;
-        fs::set_permissions(run_dir, fs::Permissions::from_mode(0o700))?;
+        fs::create_dir(&run_dir)?;
+        fs::set_permissions(&run_dir, fs::Permissions::from_mode(0o700))?;
         fs::create_dir(run_dir.join("evidence"))?;
         fs::set_permissions(run_dir.join("evidence"), fs::Permissions::from_mode(0o700))?;
         let batch = FeatureBatch::read_jsonl(data, 10_000_000, 200_000_000)?;
         let run_id = random_hex(16)?;
         let nonce = random_hex(16)?;
         let socket = match socket {
-            Some(path) => path,
+            Some(path) => absolute_path(&path)?,
             None => default_socket(&run_id, &nonce)?,
         };
         if socket.exists() {
@@ -186,7 +187,7 @@ impl Campaign {
             run_id,
             nonce,
             socket,
-            run_dir: run_dir.to_path_buf(),
+            run_dir: run_dir.clone(),
             pid: std::process::id(),
             code_commit: option_env!("ERGODIS_GIT_COMMIT")
                 .unwrap_or("unknown")
@@ -1109,14 +1110,24 @@ fn random_hex(bytes: usize) -> Result<String, ControlError> {
     Ok(random.iter().map(|byte| format!("{byte:02x}")).collect())
 }
 
+fn absolute_path(path: &Path) -> Result<PathBuf, ControlError> {
+    if path.is_absolute() {
+        Ok(path.to_path_buf())
+    } else {
+        Ok(std::env::current_dir()?.join(path))
+    }
+}
+
 fn default_socket(run_id: &str, nonce: &str) -> Result<PathBuf, ControlError> {
     let runtime = std::env::var_os("XDG_RUNTIME_DIR").ok_or_else(|| {
         ControlError::Invalid("XDG_RUNTIME_DIR is unavailable; provide --socket".into())
     })?;
-    Ok(PathBuf::from(runtime)
-        .join("ergodis")
-        .join(unsafe { libc_uid() }.to_string())
-        .join(format!("{}-{}.sock", &run_id[..12], &nonce[..12])))
+    absolute_path(
+        &PathBuf::from(runtime)
+            .join("ergodis")
+            .join(unsafe { libc_uid() }.to_string())
+            .join(format!("{}-{}.sock", &run_id[..12], &nonce[..12])),
+    )
 }
 
 #[cfg(unix)]
@@ -1302,6 +1313,17 @@ mod tests {
         let second = next_client_request_id();
         assert_ne!(first, 0);
         assert!(second > first);
+    }
+
+    #[test]
+    fn manifested_paths_are_absolute_without_requiring_the_target_to_exist() {
+        let relative = Path::new("future-campaign.sock");
+        assert_eq!(
+            absolute_path(relative).unwrap(),
+            std::env::current_dir().unwrap().join(relative)
+        );
+        let absolute = std::env::temp_dir().join("ergodis-absolute.sock");
+        assert_eq!(absolute_path(&absolute).unwrap(), absolute);
     }
 
     #[test]
