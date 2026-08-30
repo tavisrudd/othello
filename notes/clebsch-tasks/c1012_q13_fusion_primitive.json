@@ -1,0 +1,500 @@
+{
+  "all_nontrivial_relation_unions_recover_full_scheme": true,
+  "complement_representatives_checked": 31,
+  "consequence": "the elliptic association scheme is fusion-primitive",
+  "off_diagonal_relations": [
+    0,
+    1,
+    3,
+    9,
+    10,
+    12
+  ],
+  "rows": [
+    {
+      "canonical_mask": 1,
+      "coherent_ranks": [
+        3,
+        4,
+        6,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0
+      ]
+    },
+    {
+      "canonical_mask": 2,
+      "coherent_ranks": [
+        3,
+        5,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        1
+      ]
+    },
+    {
+      "canonical_mask": 3,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        1
+      ]
+    },
+    {
+      "canonical_mask": 4,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        3
+      ]
+    },
+    {
+      "canonical_mask": 5,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        3
+      ]
+    },
+    {
+      "canonical_mask": 6,
+      "coherent_ranks": [
+        3,
+        4,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        1,
+        3
+      ]
+    },
+    {
+      "canonical_mask": 7,
+      "coherent_ranks": [
+        3,
+        5,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "canonical_mask": 8,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        9
+      ]
+    },
+    {
+      "canonical_mask": 9,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        9
+      ]
+    },
+    {
+      "canonical_mask": 10,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        1,
+        9
+      ]
+    },
+    {
+      "canonical_mask": 11,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        1,
+        9
+      ]
+    },
+    {
+      "canonical_mask": 12,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        3,
+        9
+      ]
+    },
+    {
+      "canonical_mask": 13,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        3,
+        9
+      ]
+    },
+    {
+      "canonical_mask": 14,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        1,
+        3,
+        9
+      ]
+    },
+    {
+      "canonical_mask": 15,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        1,
+        3,
+        9
+      ]
+    },
+    {
+      "canonical_mask": 16,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        10
+      ]
+    },
+    {
+      "canonical_mask": 17,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 18,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        1,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 19,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        1,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 20,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        3,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 21,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        3,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 22,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        1,
+        3,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 23,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        1,
+        3,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 24,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        9,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 25,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        9,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 26,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        1,
+        9,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 27,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        1,
+        9,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 28,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        3,
+        9,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 29,
+      "coherent_ranks": [
+        3,
+        6,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        3,
+        9,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 30,
+      "coherent_ranks": [
+        3,
+        7,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        1,
+        3,
+        9,
+        10
+      ]
+    },
+    {
+      "canonical_mask": 31,
+      "coherent_ranks": [
+        3,
+        5,
+        7,
+        7,
+        7
+      ],
+      "full_scheme_recovered": true,
+      "selected_relations": [
+        0,
+        1,
+        3,
+        9,
+        10
+      ]
+    }
+  ],
+  "schema": "c1012-q13-fusion-primitive-v1",
+  "vertices": 78
+}

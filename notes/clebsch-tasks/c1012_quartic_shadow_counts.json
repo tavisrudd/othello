@@ -1,0 +1,362 @@
+{
+  "formula_characteristic_not_three": {
+    "negative_cross_ratios": "(q-chi(-3))/2",
+    "positive_cross_ratios": "(q-6-chi(-3))/2",
+    "unordered_four_sets": "|PGL(2,q)| times cross-ratio count / 24",
+    "zero_cross_ratios": "1+chi(-3)"
+  },
+  "range": "odd primes 3 through 101",
+  "rows": [
+    {
+      "chi_minus_three": 0,
+      "normalized_cross_ratio_counts": {
+        "-1": 0,
+        "0": 1,
+        "1": 0
+      },
+      "q": 3,
+      "unordered_four_set_counts": {
+        "-1": 0,
+        "0": 1,
+        "1": 0
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 3,
+        "0": 0,
+        "1": 0
+      },
+      "q": 5,
+      "unordered_four_set_counts": {
+        "-1": 15,
+        "0": 0,
+        "1": 0
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 3,
+        "0": 2,
+        "1": 0
+      },
+      "q": 7,
+      "unordered_four_set_counts": {
+        "-1": 42,
+        "0": 28,
+        "1": 0
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 6,
+        "0": 0,
+        "1": 3
+      },
+      "q": 11,
+      "unordered_four_set_counts": {
+        "-1": 330,
+        "0": 0,
+        "1": 165
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 6,
+        "0": 2,
+        "1": 3
+      },
+      "q": 13,
+      "unordered_four_set_counts": {
+        "-1": 546,
+        "0": 182,
+        "1": 273
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 9,
+        "0": 0,
+        "1": 6
+      },
+      "q": 17,
+      "unordered_four_set_counts": {
+        "-1": 1836,
+        "0": 0,
+        "1": 1224
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 9,
+        "0": 2,
+        "1": 6
+      },
+      "q": 19,
+      "unordered_four_set_counts": {
+        "-1": 2565,
+        "0": 570,
+        "1": 1710
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 12,
+        "0": 0,
+        "1": 9
+      },
+      "q": 23,
+      "unordered_four_set_counts": {
+        "-1": 6072,
+        "0": 0,
+        "1": 4554
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 15,
+        "0": 0,
+        "1": 12
+      },
+      "q": 29,
+      "unordered_four_set_counts": {
+        "-1": 15225,
+        "0": 0,
+        "1": 12180
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 15,
+        "0": 2,
+        "1": 12
+      },
+      "q": 31,
+      "unordered_four_set_counts": {
+        "-1": 18600,
+        "0": 2480,
+        "1": 14880
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 18,
+        "0": 2,
+        "1": 15
+      },
+      "q": 37,
+      "unordered_four_set_counts": {
+        "-1": 37962,
+        "0": 4218,
+        "1": 31635
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 21,
+        "0": 0,
+        "1": 18
+      },
+      "q": 41,
+      "unordered_four_set_counts": {
+        "-1": 60270,
+        "0": 0,
+        "1": 51660
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 21,
+        "0": 2,
+        "1": 18
+      },
+      "q": 43,
+      "unordered_four_set_counts": {
+        "-1": 69531,
+        "0": 6622,
+        "1": 59598
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 24,
+        "0": 0,
+        "1": 21
+      },
+      "q": 47,
+      "unordered_four_set_counts": {
+        "-1": 103776,
+        "0": 0,
+        "1": 90804
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 27,
+        "0": 0,
+        "1": 24
+      },
+      "q": 53,
+      "unordered_four_set_counts": {
+        "-1": 167427,
+        "0": 0,
+        "1": 148824
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 30,
+        "0": 0,
+        "1": 27
+      },
+      "q": 59,
+      "unordered_four_set_counts": {
+        "-1": 256650,
+        "0": 0,
+        "1": 230985
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 30,
+        "0": 2,
+        "1": 27
+      },
+      "q": 61,
+      "unordered_four_set_counts": {
+        "-1": 283650,
+        "0": 18910,
+        "1": 255285
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 33,
+        "0": 2,
+        "1": 30
+      },
+      "q": 67,
+      "unordered_four_set_counts": {
+        "-1": 413457,
+        "0": 25058,
+        "1": 375870
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 36,
+        "0": 0,
+        "1": 33
+      },
+      "q": 71,
+      "unordered_four_set_counts": {
+        "-1": 536760,
+        "0": 0,
+        "1": 492030
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 36,
+        "0": 2,
+        "1": 33
+      },
+      "q": 73,
+      "unordered_four_set_counts": {
+        "-1": 583416,
+        "0": 32412,
+        "1": 534798
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 39,
+        "0": 2,
+        "1": 36
+      },
+      "q": 79,
+      "unordered_four_set_counts": {
+        "-1": 801060,
+        "0": 41080,
+        "1": 739440
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 42,
+        "0": 0,
+        "1": 39
+      },
+      "q": 83,
+      "unordered_four_set_counts": {
+        "-1": 1000482,
+        "0": 0,
+        "1": 929019
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 45,
+        "0": 0,
+        "1": 42
+      },
+      "q": 89,
+      "unordered_four_set_counts": {
+        "-1": 1321650,
+        "0": 0,
+        "1": 1233540
+      }
+    },
+    {
+      "chi_minus_three": 1,
+      "normalized_cross_ratio_counts": {
+        "-1": 48,
+        "0": 2,
+        "1": 45
+      },
+      "q": 97,
+      "unordered_four_set_counts": {
+        "-1": 1825152,
+        "0": 76048,
+        "1": 1711080
+      }
+    },
+    {
+      "chi_minus_three": -1,
+      "normalized_cross_ratio_counts": {
+        "-1": 51,
+        "0": 0,
+        "1": 48
+      },
+      "q": 101,
+      "unordered_four_set_counts": {
+        "-1": 2189175,
+        "0": 0,
+        "1": 2060400
+      }
+    }
+  ],
+  "schema": "c1012-quartic-shadow-counts-v1"
+}
