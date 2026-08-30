@@ -48,10 +48,10 @@ The retained radius-16 runs sharpen the directional statement:
 
 | Direction | Candidates | Search seconds | Result |
 | --- | ---: | ---: | --- |
-| `ker(Hz)/row(Hx)` | 100,609,601,462 | 548.087546038 | no logical through 16; `dX >= 18` |
-| `ker(Hx)/row(Hz)` | 16,356,698,669 | 99.855133830 | weight-16 logical witness; `dZ = 16` |
+| X-check input: `ker(Hx)/row(Hz)` | 100,609,601,462 | 548.087546038 | no logical through 16; `dZ >= 18` |
+| Z-check input: `ker(Hz)/row(Hx)` | 16,356,698,669 | 99.855133830 | weight-16 logical witness; `dX = 16` |
 
-Thus `min(dX,dZ)=16`.  The Z witness support is
+Thus `min(dX,dZ)=16`.  The X-type witness support is
 
 ```text
 396 431 635 648 867 878 1061 1066 1079 1085 1278 1279 1284 1290 1302 1319
@@ -66,8 +66,8 @@ all-coordinate anchors, and the elementary parity theorem.
 
 Tracked files:
 
-- `ergodis/python/generate_sce_lp_native.py`, 10,287 bytes,
-  SHA-256 `9bce51d855b9b9777dc2dc87c15384e5e3bde590d50f030bf99b67307a8939e7`;
+- `ergodis/python/generate_sce_lp_native.py`, 14,560 bytes,
+  SHA-256 `6fbafd5e8e38dc68569cf1e2bddac1984cb81779ff81758b776d682b13c3342a`;
 - `ergodis/evidence/c985-sce-r2elite02-x-w16.jsonl`, 7,559 bytes,
   SHA-256 `7da0366cbdc07ed7c430ec24030154310a1b1a5f2cbe4be1e434f8dd60dd5894`;
 - `ergodis/evidence/c985-sce-r2elite02-z-w16.jsonl`, 7,624 bytes,
@@ -119,7 +119,7 @@ bounds.  This bundle replaces that randomized distance proxy with an independent
 ## Mystery ledger (ej + tt closeout)
 
 - **Quantum distance:** closed exactly at 16.
-- **Directional X distance:** only `dX >= 18` is needed here; its exact value remains open and has
+- **Directional Z distance:** only `dZ >= 18` is needed here; its exact value remains open and has
   no effect on the quantum distance.
 - **Non-abelian symmetry:** no coordinate-orbit theorem is assumed.  A verified action could make
   future larger shells cheaper, but is not part of this certificate.

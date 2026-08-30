@@ -161,6 +161,7 @@ struct Worker {
     work: Vec<u64>,
     order: Vec<u16>,
     pivots: Vec<u16>,
+    pivot_marker: Vec<u8>,
     logical_value: Vec<u64>,
     witness: Vec<u16>,
 }
@@ -172,6 +173,7 @@ impl Worker {
             work: vec![0; base_len],
             order: (0..columns as u16).collect(),
             pivots: vec![0; rank],
+            pivot_marker: vec![0; columns],
             logical_value: vec![0; logical_words],
             witness: Vec::with_capacity(rank + 1),
         }
@@ -198,6 +200,7 @@ impl Worker {
     ) -> Option<Vec<u16>> {
         self.work.copy_from_slice(base);
         self.shuffle();
+        self.pivot_marker.fill(0);
         let mut pivot_count = 0usize;
         for &column in &self.order {
             let column = usize::from(column);
@@ -219,6 +222,7 @@ impl Worker {
                 }
             }
             self.pivots[pivot_count] = column as u16;
+            self.pivot_marker[column] = 1;
             pivot_count += 1;
             if pivot_count == rank {
                 break;
@@ -228,7 +232,7 @@ impl Worker {
 
         for &free in &self.order {
             let free = usize::from(free);
-            if self.pivots.iter().any(|&pivot| usize::from(pivot) == free) {
+            if self.pivot_marker[free] != 0 {
                 continue;
             }
             let word = free / 64;
@@ -283,6 +287,9 @@ fn main() -> Result<()> {
     let args = Args::parse();
     if args.threads == 0 {
         bail!("--threads must be positive");
+    }
+    if args.trials == 0 {
+        bail!("--trials must be positive");
     }
     let mut input_bytes = Vec::new();
     File::open(&args.input)

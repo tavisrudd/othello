@@ -195,6 +195,16 @@ Young-Brothers-Wait. Rare verified bound improvements use cache-line-separated
 worker mailboxes; `--pulse-interval` controls coarse polling without adding
 per-support synchronization.
 
+The `parallel`-gated `css_distance_random` companion searches for an upper
+certificate by random information sets. It row-reduces the physical parity
+checks under deterministic random coordinate orders, inspects the induced
+systematic kernel basis, and retains only independently replayable logical
+supports. Worker matrices, permutations, pivot maps, and witness scratch are
+pre-sized; a trial allocates nothing unless it discovers a witness.
+`--seed`, `--trials`, and `--threads` are explicit, and `--evidence` writes one
+create-only, source-hashed JSON record. This is a witness finder, not a lower-
+bound procedure; exactness still comes from `css_distance_native` exhaustion.
+
 Inputs with 257--320 coordinates dispatch to a separately monomorphized wide
 backend. It preserves exact three-word syndromes, removes redundant check rows
 for syndrome tracking while retaining the original sparse connectivity graph,

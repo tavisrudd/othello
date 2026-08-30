@@ -164,7 +164,7 @@ def support_component_count(rows: list[int], columns: int) -> int:
 
 def central_coordinate_orbit_anchors(
     candidate: dict[str, object], hx: list[int], hz: list[int], columns: int, order: int
-) -> list[int]:
+) -> tuple[list[int], int, int]:
     modulus = int(candidate["modulus"])
     twist = int(candidate["twist"])
     if modulus % 2:
@@ -181,6 +181,54 @@ def central_coordinate_orbit_anchors(
         for element in elements
     ):
         raise RuntimeError("claimed central element is not central")
+
+    a = candidate["a"]
+    b = candidate["b"]
+    assert isinstance(a, list) and isinstance(b, list)
+
+    def conjugate(left: tuple[int, int], value: tuple[int, int]) -> tuple[int, int]:
+        return multiply(
+            multiply(left, value, modulus, twist),
+            inverse(left, modulus, twist),
+            modulus,
+            twist,
+        )
+
+    right_deck_initials: set[tuple[int, int]] = set()
+    for initial in elements:
+        row_values = [conjugate(row[0], initial) for row in b]
+        if all(
+            len(
+                {
+                    conjugate(inverse(b[row][column], modulus, twist), row_values[row])
+                    for row in range(len(b))
+                }
+            )
+            == 1
+            for column in range(1, len(b[0]))
+        ):
+            right_deck_initials.add(initial)
+
+    left_deck_initials: set[tuple[int, int]] = set()
+    for initial in elements:
+        row_values = [conjugate(row[0], initial) for row in a]
+        if all(
+            len(
+                {
+                    conjugate(inverse(a[row][column], modulus, twist), row_values[row])
+                    for row in range(len(a))
+                }
+            )
+            == 1
+            for column in range(1, len(a[0]))
+        ):
+            left_deck_initials.add(initial)
+    expected_deck_initials = {identity, central}
+    if not expected_deck_initials.issubset(right_deck_initials) or not expected_deck_initials.issubset(
+        left_deck_initials
+    ):
+        raise RuntimeError("central involution is absent from a natural blockwise deck family")
+
     permutation = [
         block * order + index[multiply(elements[position], central, modulus, twist)]
         for block in range(columns // order)
@@ -205,7 +253,7 @@ def central_coordinate_orbit_anchors(
     anchors = [coordinate for coordinate in range(columns) if coordinate <= permutation[coordinate]]
     if len(anchors) * 2 != columns:
         raise RuntimeError("central involution did not produce two-point coordinate orbits")
-    return anchors
+    return anchors, len(left_deck_initials), len(right_deck_initials)
 
 
 def build_checks(candidate: dict[str, object]) -> tuple[list[int], list[int], int, int]:
@@ -292,11 +340,12 @@ def main() -> int:
     dimension = columns - len(physical_basis) - len(stabilizer_basis)
     if len(logical) != dimension:
         raise RuntimeError("logical quotient basis has the wrong dimension")
-    anchors = (
+    orbit_result = (
         central_coordinate_orbit_anchors(candidate, hx, hz, columns, order)
         if args.verified_central_orbits
-        else list(range(columns))
+        else None
     )
+    anchors = orbit_result[0] if orbit_result is not None else list(range(columns))
     component_count = support_component_count(hx + hz, columns)
     if component_count != 1:
         raise RuntimeError("combined X/Z support graph is decomposable")
@@ -327,6 +376,9 @@ def main() -> int:
             "combined_support_components": component_count,
         },
     }
+    if orbit_result is not None:
+        output["metadata"]["natural_left_deck_actions"] = orbit_result[1]
+        output["metadata"]["natural_right_deck_actions"] = orbit_result[2]
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with args.out.open("x", encoding="utf-8") as stream:
         json.dump(output, stream, separators=(",", ":"), sort_keys=True)
