@@ -1,8 +1,8 @@
 use anyhow::{bail, Context, Result};
 use clap::Parser;
-use ergodis::{CompiledCssDistance, CompiledExtraWideCssDistance, CompiledWideCssDistance, Matrix};
 #[cfg(feature = "large-css")]
-use ergodis::{CompiledHugeCssDistance, CompiledLargeCssDistance};
+use ergodis::{CompiledColossalCssDistance, CompiledHugeCssDistance, CompiledLargeCssDistance};
+use ergodis::{CompiledCssDistance, CompiledExtraWideCssDistance, CompiledWideCssDistance, Matrix};
 use serde::{Deserialize, Serialize};
 use std::fmt::Write as _;
 use std::fs::{File, OpenOptions};
@@ -86,6 +86,8 @@ enum Backend {
     Large(CompiledLargeCssDistance),
     #[cfg(feature = "large-css")]
     Huge(CompiledHugeCssDistance),
+    #[cfg(feature = "large-css")]
+    Colossal(CompiledColossalCssDistance),
 }
 
 fn search_kernel(wide: bool) -> &'static str {
@@ -193,14 +195,33 @@ fn main() -> Result<()> {
     let logical = dense_matrix(&problem.logical_observations, columns)?;
     let physical_rank = binary_rank(&problem.physical_checks, columns);
     let wide_problem = columns > 256 || physical_rank > 128;
-    let huge_problem = columns > 832 || physical_rank > 384 || logical.rows() > 64;
-    let large_problem = !huge_problem && (columns > 384 || physical_rank > 192);
+    let colossal_problem = columns > 1536 || physical_rank > 704;
+    let huge_problem =
+        !colossal_problem && (columns > 832 || physical_rank > 384 || logical.rows() > 64);
+    let large_problem =
+        !colossal_problem && !huge_problem && (columns > 384 || physical_rank > 192);
     let extra_wide_problem = !large_problem && columns > 320;
     let preparation_start = Instant::now();
     let (compiled, preparation_mode) = if let Some(path) = &args.compiled_in {
         let file = File::open(path)
             .with_context(|| format!("opening compiled artifact {}", path.display()))?;
-        if huge_problem {
+        if colossal_problem {
+            #[cfg(feature = "large-css")]
+            {
+                (
+                    Backend::Colossal(CompiledColossalCssDistance::read_artifact(
+                        &physical,
+                        &logical,
+                        BufReader::new(file),
+                    )?),
+                    "colossal-artifact-load",
+                )
+            }
+            #[cfg(not(feature = "large-css"))]
+            {
+                bail!("colossal CSS instances require --features large-css")
+            }
+        } else if huge_problem {
             #[cfg(feature = "large-css")]
             {
                 (
@@ -260,6 +281,18 @@ fn main() -> Result<()> {
                 "artifact-load",
             )
         }
+    } else if colossal_problem {
+        #[cfg(feature = "large-css")]
+        {
+            (
+                Backend::Colossal(CompiledColossalCssDistance::compile(&physical, &logical)?),
+                "colossal-compile",
+            )
+        }
+        #[cfg(not(feature = "large-css"))]
+        {
+            bail!("colossal CSS instances require --features large-css")
+        }
     } else if huge_problem {
         #[cfg(feature = "large-css")]
         {
@@ -316,6 +349,8 @@ fn main() -> Result<()> {
             Backend::Large(compiled) => compiled.write_artifact(BufWriter::new(file))?,
             #[cfg(feature = "large-css")]
             Backend::Huge(compiled) => compiled.write_artifact(BufWriter::new(file))?,
+            #[cfg(feature = "large-css")]
+            Backend::Colossal(compiled) => compiled.write_artifact(BufWriter::new(file))?,
         }
         Some(start.elapsed().as_secs_f64())
     } else {
@@ -329,6 +364,8 @@ fn main() -> Result<()> {
         Backend::Large(compiled) => compiled.artifact_payload_blake3(),
         #[cfg(feature = "large-css")]
         Backend::Huge(compiled) => compiled.artifact_payload_blake3(),
+        #[cfg(feature = "large-css")]
+        Backend::Colossal(compiled) => compiled.artifact_payload_blake3(),
     }
     .map(|digest| {
         let mut encoded = String::with_capacity(64);
@@ -454,6 +491,14 @@ fn main() -> Result<()> {
                     args.pulse_interval,
                 )
             })?,
+            #[cfg(feature = "large-css")]
+            Backend::Colossal(compiled) => thread_pool.install(|| {
+                compiled.search_bounded_syndrome_parallel_pulsed(
+                    &problem.anchors,
+                    maximum_weight,
+                    args.pulse_interval,
+                )
+            })?,
         };
         #[cfg(not(feature = "parallel"))]
         let round_result = match &compiled {
@@ -476,6 +521,10 @@ fn main() -> Result<()> {
             }
             #[cfg(feature = "large-css")]
             Backend::Huge(compiled) => {
+                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+            }
+            #[cfg(feature = "large-css")]
+            Backend::Colossal(compiled) => {
                 compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
             }
         };

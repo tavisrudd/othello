@@ -94,28 +94,80 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def translation_preserves(
+    physical: list[int],
+    physical_basis: list[int],
+    observable: list[int],
+    observable_basis: list[int],
+    block_size: int,
+    rows: int,
+    columns: int,
+) -> bool:
+    for axis in (0, 1):
+        translated_physical = [
+            permute(row, block_size, rows, columns, axis) for row in physical
+        ]
+        translated_observable = [
+            permute(row, block_size, rows, columns, axis) for row in observable
+        ]
+        if not is_contained(translated_physical, physical_basis):
+            return False
+        if not is_contained(translated_observable, observable_basis):
+            return False
+    return True
+
+
+def discover_torus_shape(
+    physical: list[int],
+    physical_basis: list[int],
+    observable: list[int],
+    observable_basis: list[int],
+    coordinate_count: int,
+) -> tuple[int, int] | None:
+    if coordinate_count % 2:
+        return None
+    block_size = coordinate_count // 2
+    shapes = [
+        (rows, block_size // rows)
+        for rows in range(1, int(block_size**0.5) + 1)
+        if block_size % rows == 0
+    ]
+    shapes += [(columns, rows) for rows, columns in shapes if rows != columns]
+    shapes.sort(key=lambda shape: (abs(shape[0] - shape[1]), shape))
+    for rows, columns in shapes:
+        if translation_preserves(
+            physical,
+            physical_basis,
+            observable,
+            observable_basis,
+            block_size,
+            rows,
+            columns,
+        ):
+            return rows, columns
+    return None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--physical", type=Path, required=True)
     parser.add_argument("--logical", type=Path, required=True)
     parser.add_argument("--label", required=True)
     parser.add_argument("--maximum-weight", type=int, required=True)
-    parser.add_argument("--torus-shape", required=True, help="rows,columns per coordinate block")
+    symmetry = parser.add_mutually_exclusive_group()
+    symmetry.add_argument("--torus-shape", help="rows,columns per coordinate block")
+    symmetry.add_argument(
+        "--auto-torus",
+        action="store_true",
+        help="use a two-block torus quotient only after verifying both translations",
+    )
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
 
-    try:
-        torus_rows, torus_columns = (int(part) for part in args.torus_shape.split(","))
-    except (TypeError, ValueError):
-        raise RuntimeError("--torus-shape must be rows,columns") from None
-    if torus_rows <= 0 or torus_columns <= 0:
-        raise RuntimeError("torus dimensions must be positive")
-    block_size = torus_rows * torus_columns
-
     physical, columns = read_dense(args.physical)
     logical_raw, logical_columns = read_dense(args.logical)
-    if columns != logical_columns or columns != 2 * block_size:
-        raise RuntimeError("matrix widths do not match the two-block torus shape")
+    if columns != logical_columns:
+        raise RuntimeError("physical and logical matrix widths differ")
     physical_basis = row_basis(physical)
     logical_basis = row_basis(logical_raw)
     observable_basis = row_basis(physical + logical_basis)
@@ -123,25 +175,48 @@ def main() -> int:
     if observable_rank != len(logical_basis):
         raise RuntimeError("logical rows are not independent modulo the physical constraints")
 
-    for axis in (0, 1):
-        translated_physical = [
-            permute(row, block_size, torus_rows, torus_columns, axis) for row in physical
-        ]
-        translated_observable = [
-            permute(row, block_size, torus_rows, torus_columns, axis)
-            for row in physical + logical_basis
-        ]
-        if not is_contained(translated_physical, physical_basis):
-            raise RuntimeError(f"torus translation {axis} does not preserve physical checks")
-        if not is_contained(translated_observable, observable_basis):
-            raise RuntimeError(f"torus translation {axis} does not preserve observability")
+    observable = physical + logical_basis
+    torus_shape: tuple[int, int] | None = None
+    if args.torus_shape is not None:
+        try:
+            torus_shape = tuple(int(part) for part in args.torus_shape.split(","))
+        except ValueError:
+            raise RuntimeError("--torus-shape must be rows,columns") from None
+        if len(torus_shape) != 2 or min(torus_shape) <= 0:
+            raise RuntimeError("--torus-shape must contain two positive dimensions")
+        if columns != 2 * torus_shape[0] * torus_shape[1]:
+            raise RuntimeError("matrix widths do not match the two-block torus shape")
+        if not translation_preserves(
+            physical,
+            physical_basis,
+            observable,
+            observable_basis,
+            columns // 2,
+            *torus_shape,
+        ):
+            raise RuntimeError("torus translations do not preserve the imported problem")
+    elif args.auto_torus:
+        torus_shape = discover_torus_shape(
+            physical,
+            physical_basis,
+            observable,
+            observable_basis,
+            columns,
+        )
+
+    if torus_shape is None:
+        anchors = list(range(columns))
+        translation_invariance = "none-used-all-coordinate-anchors"
+    else:
+        anchors = [0, columns // 2]
+        translation_invariance = "physical-and-observability-quotient-verified"
 
     output = {
         "label": args.label,
         "coordinate_count": columns,
         "physical_checks": sparse_rows(physical),
         "logical_observations": sparse_rows(logical_basis),
-        "anchors": [0, block_size],
+        "anchors": anchors,
         "maximum_weight": args.maximum_weight,
         "metadata": {
             "source_schema": "QDistSAT-dense-binary-v1",
@@ -151,9 +226,9 @@ def main() -> int:
             "physical_rank": len(physical_basis),
             "logical_source_rows": len(logical_raw),
             "logical_observation_rank": len(logical_basis),
-            "torus_shape": [torus_rows, torus_columns],
-            "translation_orbits": 2,
-            "translation_invariance": "physical-and-observability-quotient-verified",
+            "torus_shape": list(torus_shape) if torus_shape is not None else None,
+            "translation_orbits": 2 if torus_shape is not None else columns,
+            "translation_invariance": translation_invariance,
         },
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)

@@ -66,7 +66,9 @@ pub use css_distance::{
     CompiledWideCssDistance, ConnectedSearchStats, CssDistanceArtifactError, CssDistanceError,
 };
 #[cfg(feature = "large-css")]
-pub use css_distance::{CompiledHugeCssDistance, CompiledLargeCssDistance};
+pub use css_distance::{
+    CompiledColossalCssDistance, CompiledHugeCssDistance, CompiledLargeCssDistance,
+};
 pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
     FamilyResponseTable,

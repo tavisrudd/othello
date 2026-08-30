@@ -24,9 +24,11 @@ const WIDE_SUPPORT_WORDS: usize = 5;
 const EXTRA_WIDE_SUPPORT_WORDS: usize = 6;
 const LARGE_SUPPORT_WORDS: usize = 13;
 const HUGE_SUPPORT_WORDS: usize = 24;
+const COLOSSAL_SUPPORT_WORDS: usize = 28;
 const WIDE_SYNDROME_WORDS: usize = 3;
 const LARGE_SYNDROME_WORDS: usize = 6;
 const HUGE_SYNDROME_WORDS: usize = 11;
+const COLOSSAL_SYNDROME_WORDS: usize = 13;
 const HUGE_LOGICAL_WORDS: usize = 4;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
 const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
@@ -39,6 +41,8 @@ const LARGE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSL1";
 const LARGE_ARTIFACT_VERSION: u16 = 2;
 const HUGE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSH1";
 const HUGE_ARTIFACT_VERSION: u16 = 1;
+const COLOSSAL_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSC1";
+const COLOSSAL_ARTIFACT_VERSION: u16 = 1;
 const MAX_ARTIFACT_BLOOM_WORDS: usize = FOUR_COMPLETION_BLOOM_BITS / 64;
 
 fn wide_artifact_identity<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
@@ -52,6 +56,9 @@ fn wide_artifact_identity<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
             (LARGE_ARTIFACT_MAGIC, LARGE_ARTIFACT_VERSION)
         }
         (HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS) => (HUGE_ARTIFACT_MAGIC, HUGE_ARTIFACT_VERSION),
+        (COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS) => {
+            (COLOSSAL_ARTIFACT_MAGIC, COLOSSAL_ARTIFACT_VERSION)
+        }
         _ => unreachable!("unsupported fixed support width"),
     }
 }
@@ -310,6 +317,51 @@ impl WideSyndrome for PackedSyndrome<6> {
 }
 
 impl WideSyndrome for PackedSyndrome<11> {
+    #[inline]
+    fn toggle(&mut self, right: Self) {
+        for (left, right) in self.words.iter_mut().zip(right.words) {
+            *left ^= right;
+        }
+    }
+
+    #[inline]
+    fn is_zero(&self) -> bool {
+        self.words.iter().all(|&word| word == 0)
+    }
+
+    #[inline]
+    fn weight(&self) -> u32 {
+        self.words.iter().map(|word| word.count_ones()).sum()
+    }
+
+    #[inline]
+    fn difference_assign(&mut self, right: Self) {
+        for (left, right) in self.words.iter_mut().zip(right.words) {
+            *left &= !right;
+        }
+    }
+
+    #[inline]
+    fn union_assign(&mut self, right: Self) {
+        for (left, right) in self.words.iter_mut().zip(right.words) {
+            *left |= right;
+        }
+    }
+
+    #[inline]
+    fn pop_lowest(&mut self) -> Option<usize> {
+        for (word_index, word) in self.words.iter_mut().enumerate() {
+            if *word != 0 {
+                let bit = word.trailing_zeros() as usize;
+                *word &= *word - 1;
+                return Some(64 * word_index + bit);
+            }
+        }
+        None
+    }
+}
+
+impl WideSyndrome for PackedSyndrome<13> {
     #[inline]
     fn toggle(&mut self, right: Self) {
         for (left, right) in self.words.iter_mut().zip(right.words) {
@@ -661,6 +713,12 @@ pub type CompiledLargeCssDistance =
 #[cfg(feature = "large-css")]
 pub type CompiledHugeCssDistance =
     CompiledWideCssDistanceImpl<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS, HUGE_LOGICAL_WORDS>;
+#[cfg(feature = "large-css")]
+pub type CompiledColossalCssDistance = CompiledWideCssDistanceImpl<
+    COLOSSAL_SUPPORT_WORDS,
+    COLOSSAL_SYNDROME_WORDS,
+    HUGE_LOGICAL_WORDS,
+>;
 
 /// Select original rows forming a basis, preserving sparse presentation rows.
 fn independent_row_indices(matrix: &Matrix) -> Vec<usize> {
@@ -1410,6 +1468,28 @@ fn search_syndrome_branch_partition_huge(
 }
 
 #[cfg(feature = "parallel")]
+#[cfg(feature = "large-css")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition_colossal(
+    compiled: &CompiledColossalCssDistance,
+    branches: &[WideRootBranch<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+    pulse_interval: u64,
+) -> CachePaddedWideBranchResult<COLOSSAL_SUPPORT_WORDS> {
+    search_syndrome_branch_partition_impl(
+        compiled,
+        branches,
+        searched_maximum_weight,
+        mailboxes,
+        pulse_interval,
+    )
+}
+
+#[cfg(feature = "parallel")]
 impl WidePartitionKernel<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> for CompiledWideCssDistance {
     #[inline]
     fn search_partition(
@@ -1484,6 +1564,29 @@ impl WidePartitionKernel<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS> for CompiledHu
         pulse_interval: u64,
     ) -> CachePaddedWideBranchResult<HUGE_SUPPORT_WORDS> {
         search_syndrome_branch_partition_huge(
+            self,
+            branches,
+            searched_maximum_weight,
+            mailboxes,
+            pulse_interval,
+        )
+    }
+}
+
+#[cfg(feature = "parallel")]
+#[cfg(feature = "large-css")]
+impl WidePartitionKernel<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>
+    for CompiledColossalCssDistance
+{
+    #[inline]
+    fn search_partition(
+        &self,
+        branches: &[WideRootBranch<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+        pulse_interval: u64,
+    ) -> CachePaddedWideBranchResult<COLOSSAL_SUPPORT_WORDS> {
+        search_syndrome_branch_partition_colossal(
             self,
             branches,
             searched_maximum_weight,
@@ -1948,6 +2051,21 @@ impl CompiledWideCssDistanceImpl<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1> {
 #[cfg(feature = "parallel")]
 #[cfg(feature = "large-css")]
 impl CompiledWideCssDistanceImpl<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS, HUGE_LOGICAL_WORDS> {
+    pub fn search_bounded_syndrome_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+    }
+}
+
+#[cfg(feature = "parallel")]
+#[cfg(feature = "large-css")]
+impl
+    CompiledWideCssDistanceImpl<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS, HUGE_LOGICAL_WORDS>
+{
     pub fn search_bounded_syndrome_parallel_pulsed(
         &self,
         anchors: &[u16],
