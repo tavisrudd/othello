@@ -327,6 +327,14 @@ changes any bound on equiangular lines in `R^18`.
   controls.
 - `a9f8bfd1e` — iterative residual Hitting Set kernel with canonical streamed
   negative evidence and independent replay.
+- `3f6c58ec2` — canonical proof records compressed from 16 bytes to one
+  4-byte clause index.
+- `c09a015e5` — allocation-counter gate for residual solve, streamed write,
+  and replay hot paths.
+- `c555de3a5` — mandatory preflight record limit before streamed residual
+  evidence emits any bytes.
+- `a3cf6cd08` — empty residual clauses emit a one-record proof rather than a
+  middle-layer enumeration.
 
 Validation used an isolated persistent target at
 `/home/tavis/.cache/ergodis/target-c985-validation`: formatting, strict

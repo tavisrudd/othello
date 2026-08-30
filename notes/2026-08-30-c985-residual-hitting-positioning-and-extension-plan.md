@@ -147,11 +147,28 @@ enumerates every `k`-subset of the available universe, for
 `k=min(budget,|available|)`, and streams one clause missed by each subset.
 Every smaller candidate extends to such a `k`-subset, so the proof is complete.
 The verifier regenerates the subsets in canonical order and consumes each
-16-byte witness record without buffering the proof.  Repeated solving performs
-no allocation and uses no recursion.  Exhaustive testing compares the kernel
+4-byte clause-index record without buffering the proof.  Commit `3f6c58ec2`
+removes the canonical subset and repeated clause mask from each record: the
+verifier regenerates the former and resolves the latter from the index, cutting
+record bytes by exactly 4x (`16 -> 4`) without changing semantics.  Repeated
+solving performs no allocation and uses no recursion.  Commit `c09a015e5`
+measures zero allocations for repeated solve, streamed write to a sink, and
+independent replay after setup.  Exhaustive testing compares the kernel
 with brute force for all 65,536 hypergraphs on a four-element universe and all
 budgets zero through four; the full all-feature test suite and strict clippy
 also pass.
+
+Streaming alone does not bound disk consumption.  Commit `c555de3a5` makes the
+maximum evidence-record count a mandatory writer argument, computes the exact
+binomial count, and rejects an oversized proof before emitting its header.
+The corruption test also checks that a rejected stream remains empty.  Thus
+the caller controls both resident memory and worst-case file volume.
+
+Commit `a3cf6cd08` adds the first theorem-driven proof reduction: an empty
+residual clause refutes every budget and now emits one canonical record.  The
+regression uses 16 available elements at budget 8, where blind middle-layer
+enumeration would require `binomial(16,8)=12,870` records, and checks a 36-byte
+proof instead.
 
 This flat proof is deliberately a simple correctness baseline, not the final
 storage claim.  Its output can be `Theta(binomial(n,k))`.  The next measured
@@ -193,6 +210,49 @@ replace transversal number by the corresponding exact residual optimizer.
 This is the natural bridge to repair resources, scheduling, test selection,
 and game-reply obligations.  The common theorem is the sound compiler from
 semantic contexts to residual obligations; the backend algebra may differ.
+
+### 7. C80 structural proof-packet synthesis
+
+Residual hitting also supplies a stepping stone for the missing C80 survivor
+edge.  For a target residual `R'=D_p D_o R`, take its unresolved defect or
+opponent fibres as obligations.  Registered structural packets--a direct
+`B_small` response edge, a persistent-pair block, an adaptive copycat shell,
+or a projective incidence motif--each discharge an exact subset of those
+obligations.  A compatible packet selection covering every obligation is a
+replayable sufficient P certificate, without asking the recursive `K_Omega`
+oracle whether the target survives.
+
+The backend may begin as bounded Hitting Set/Set Cover with compatibility
+checks.  Its finite algorithm is classical.  The useful Ergodis object is the
+compiler
+
+\[
+  (R,o,p)\longmapsto
+  \text{structural proof-packet obligation instance}
+\]
+
+and the lift from a selected packet set to an explicit opponent-complete game
+certificate.  Negative bounded results remain diagnostic unless the packet
+grammar is proved complete; positive results are sufficient once every packet
+and the cover replay independently.
+
+This creates a productive discovery loop.  Solve many finite fibres exactly,
+canonicalize their selected packet patterns under projective transport, and
+search for a short generative rule.  A recurring orbit-level rule becomes the
+candidate symbolic incidence construction for the uniform theorem.  The
+known q23 failure of shallow rank-zero routing warns that packet depth or rank
+may grow with `q`; the representation must permit iterative packet DAGs, not
+assume a fixed shell.
+
+There are two non-negotiable qualifications.  First, persistent pairing is not
+a monotone set-cover action: pair choices must form a disjoint complete
+matching and satisfy cross-pair persistence.  That layer needs matching/exact
+cover or a pre-certified whole-pairing packet; plain Hitting Set is sound only
+for independently selectable response packets.  Second, a packet referring to
+another positive-rank target is sufficient only inside an acyclic certificate
+DAG ordered by a proved rank (`Omega`, defect rank, or another well-founded
+measure).  Without those constraints, “coverage” would merely hide the same
+recursive survivor oracle.
 
 ### Measured sharpening decisions
 
@@ -295,6 +355,34 @@ it must show that the non-survivor reply families never cover an entire
 opponent fibre.  This is a tighter target than the earlier generic bad-family
 union.
 
+There is a uniform theorem beneath half of this observation.  Write the exact
+residual as `R(S)=(V,E,A)`, with `A` the load-zero lines, and
+
+\[
+  \Omega(S)=\sum_{L\in A(S)}\max(0,|V(S)\cap L|-2).
+\]
+
+For every legal move `x`, `Omega(S+x) <= Omega(S)`.  An active line through
+`x` changes from load zero to load one and leaves the sum; an active line not
+through `x` retains load zero while its legal trace can only shrink.  No line
+can change from positive selected load back to zero.  Applying the statement
+twice gives monotonicity across every opponent/reply exchange.
+
+Thus nonincrease is proved for all capacity-two projective residuals, not
+merely sampled at q11/q13.  Strictness is the remaining incidence statement:
+
+\[
+ \Delta_\Omega(S;o,h)=
+ \sum_L\left(a_L(S)-a_L(S+o+h)\right)>0,
+ \qquad a_L=\max(0,|V\cap L|-2).
+\]
+
+This marginal decomposition is a better counting primitive than recomputing a
+scalar difference.  It can identify which active lines each reply destroys
+and lets a uniform proof show that no legal reply avoids every positive
+marginal.  The present data establish strictness on the sampled domain only;
+the monotonicity lemma alone does not.
+
 ## Gated `R^18` polynomial adapter
 
 The design-only adapter uses the same pattern without launching C1000 Stage 1.
@@ -367,7 +455,8 @@ counting theorem remains open.
   whole-run UNSAT claim.  Those require independent clause-compilation replay
   and a global search certificate.
 - Flat subset proofs have bounded memory but potentially enormous I/O.  A
-  branch-DAG format is the leading compression candidate, contingent on
+  mandatory record limit now prevents accidental filesystem exhaustion; a
+  branch-DAG format is still the leading compression candidate, contingent on
   measured proof-size distributions rather than assumed benefit.
 - Exact depth four and local duplicate/superset kernelization remain killed on
   the recorded controls.  They should not return without a distributional

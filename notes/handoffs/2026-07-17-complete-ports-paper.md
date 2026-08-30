@@ -568,7 +568,13 @@ Sequel research:
   bounded-transversal solver plus a canonical streamed negative certificate
   and independent verifier, exhaustively checked on every four-vertex
   hypergraph.  Its flat subset proof is a correctness baseline and may have
-  combinatorial output; a streamed branch DAG is the next proof-compression
+  combinatorial output; commit `3f6c58ec2` removes redundant subset/mask data
+  and cuts each canonical proof record exactly 4x, from 16 bytes to a 4-byte
+  clause index; `c09a015e5` independently gates zero allocations in repeated
+  solve, streamed write, and replay.  `c555de3a5` preflights a mandatory exact
+  record limit before writing any bytes, so streaming cannot silently exhaust
+  the filesystem.  `a3cf6cd08` turns an empty residual clause into a one-record
+  proof (12,870 records avoided in its budget-8 regression).  A streamed branch DAG is the next proof-compression
   target, and global C880 search replay is still open.  The higher-level C80
   workflow is specified as a runtime typed attack-plan controller in
   [C985 adaptive attack controller](../2026-08-30-c985-adaptive-attack-controller.md):
