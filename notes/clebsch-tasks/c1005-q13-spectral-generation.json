@@ -1,0 +1,71 @@
+{
+  "field_order": 13,
+  "independent_cross_check": "The concurrence distribution agrees with the support-orbit enumeration in verification/pair_reconstruction.json.",
+  "ordinary_power_span": {
+    "M7_coefficients_c0_through_c6": [
+      0,
+      -342870528,
+      -164334272,
+      -17583384,
+      -98533,
+      29775,
+      568
+    ],
+    "canonical_pivot_entries": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        0,
+        7
+      ],
+      [
+        0,
+        8
+      ],
+      [
+        0,
+        15
+      ]
+    ],
+    "conclusion": "Q[M] is the full seven-dimensional elliptic Bose--Mesner algebra",
+    "dimension": 7,
+    "exact_matrix_identity_checked": true,
+    "independence_modulus": 1000003,
+    "minimal_polynomial_coefficients_high_to_low": [
+      1,
+      -568,
+      -29775,
+      98533,
+      17583384,
+      164334272,
+      342870528,
+      0
+    ],
+    "pivot_minor_determinant": -588032627033324735474759106560,
+    "pivot_minor_determinant_mod_p": 694500
+  },
+  "pair_concurrence_distribution": {
+    "12": 546,
+    "6": 1092,
+    "7": 546,
+    "8": 273,
+    "9": 546
+  },
+  "point_count": 78,
+  "point_order": "(1,y,z), then (0,1,z), then (0,0,1), filtered to internal points",
+  "schema": "c1005-q13-spectral-generation-v1"
+}
