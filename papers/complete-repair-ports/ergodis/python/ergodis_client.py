@@ -17,6 +17,7 @@ from typing import Any, BinaryIO, Iterator, Mapping
 
 SCHEMA = "ergodis-control-experimental-v0"
 MAX_FRAME_BYTES = 64 * 1024
+_U64_MAX = (1 << 64) - 1
 _LENGTH = struct.Struct("<I")
 
 
@@ -135,9 +136,15 @@ class Session:
         *,
         max_bytes: int = 8192,
     ) -> Response:
-        if not 1 <= max_bytes <= MAX_FRAME_BYTES:
+        if (
+            isinstance(max_bytes, bool)
+            or not isinstance(max_bytes, int)
+            or not 1 <= max_bytes <= MAX_FRAME_BYTES
+        ):
             raise ValueError(f"max_bytes must be in 1..={MAX_FRAME_BYTES}")
         request_id = self._next_request_id
+        if request_id > _U64_MAX:
+            raise ProtocolError("request ID space exhausted")
         self._next_request_id += 1
         request = {
             "schema": SCHEMA,
@@ -172,8 +179,12 @@ class Session:
         epoch = response.get("epoch")
         ok = response.get("ok")
         result = response.get("result")
-        if isinstance(epoch, bool) or not isinstance(epoch, int) or epoch < 0:
-            raise ProtocolError("response epoch is not a nonnegative integer")
+        if (
+            isinstance(epoch, bool)
+            or not isinstance(epoch, int)
+            or not 0 <= epoch <= _U64_MAX
+        ):
+            raise ProtocolError("response epoch is not a u64")
         if not isinstance(ok, bool):
             raise ProtocolError("response ok field is not Boolean")
         if not isinstance(result, dict):
@@ -189,7 +200,11 @@ class Session:
         if result.get("framing") != "u32-le-length-prefixed-json":
             raise ProtocolError("unsupported framing")
         peer_limit = result.get("max_frame_bytes")
-        if not isinstance(peer_limit, int) or not 1 <= peer_limit <= MAX_FRAME_BYTES:
+        if (
+            isinstance(peer_limit, bool)
+            or not isinstance(peer_limit, int)
+            or not 1 <= peer_limit <= MAX_FRAME_BYTES
+        ):
             raise ProtocolError("invalid peer frame limit")
         if result.get("proof_authority") is not False:
             raise ProtocolError("campaign transport cannot claim proof authority")
@@ -215,7 +230,11 @@ class Session:
         self, relative_path: Path | str, *, max_line_bytes: int = 1024 * 1024
     ) -> Iterator[bytes]:
         """Stream a daemon-returned run-relative file with bounded line memory."""
-        if max_line_bytes < 1:
+        if (
+            isinstance(max_line_bytes, bool)
+            or not isinstance(max_line_bytes, int)
+            or max_line_bytes < 1
+        ):
             raise ValueError("max_line_bytes must be positive")
         supplied = Path(relative_path)
         if supplied.is_absolute():

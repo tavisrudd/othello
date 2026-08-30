@@ -54,6 +54,7 @@ class ErgodisClientTest(unittest.TestCase):
             {"schema": "future"},
             {"framing": "native-objects"},
             {"max_frame_bytes": MAX_FRAME_BYTES + 1},
+            {"max_frame_bytes": True},
             {"proof_authority": True},
             {"socket_io_timeout_ms": True},
             {"socket_io_timeout_ms": 60_001},
@@ -93,6 +94,7 @@ class ErgodisClientTest(unittest.TestCase):
             baseline | {"request_id": True},
             baseline | {"epoch": True},
             baseline | {"epoch": -1},
+            baseline | {"epoch": 1 << 64},
             baseline | {"ok": 1},
             baseline | {"result": []},
         )
@@ -223,6 +225,13 @@ class ErgodisClientTest(unittest.TestCase):
             session = Session(root, root / "unused.sock", "run", "nonce")
             with self.assertRaises(ProtocolError):
                 next(session.iter_evidence_json("invalid.jsonl"))
+
+    def test_boolean_size_limits_are_not_accepted_as_integers(self) -> None:
+        session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
+        with self.assertRaises(ValueError):
+            session.request("noop", max_bytes=True)
+        with self.assertRaises(ValueError):
+            next(session.iter_evidence_lines("unused", max_line_bytes=True))
 
     def test_remote_errors_and_cross_run_responses_fail_closed(self) -> None:
         for crossed, exception in ((False, RemoteError), (True, ProtocolError)):
