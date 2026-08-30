@@ -33,6 +33,7 @@ const HUGE_LOGICAL_WORDS: usize = 4;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
 const MAX_ENUMERATED_FOUR_COMPLETIONS: usize = 10_000_000;
 const MAX_ENUMERATED_THREE_COMPLETIONS: usize = 100_000_000;
+const SYNDROME_PACKING_ADMISSION_MARGIN: u32 = 6;
 const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
 const ARTIFACT_VERSION: u16 = 1;
 const WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSW1";
@@ -1188,20 +1189,6 @@ where
         false
     }
 
-    #[inline]
-    fn syndrome_degree_bound_exceeds(
-        &self,
-        syndrome_weight: u32,
-        maximum_permitted_lower_bound: u32,
-        budget: u16,
-    ) -> bool {
-        let degree = u32::from(self.maximum_column_check_weight);
-        if degree == 0 {
-            return syndrome_weight != 0 && budget != u16::MAX;
-        }
-        syndrome_weight.div_ceil(degree) > maximum_permitted_lower_bound
-    }
-
     /// Test whether greedy packing finds more disjoint neighborhoods than the budget.
     #[inline(always)]
     fn syndrome_packing_exceeds(
@@ -1237,8 +1224,19 @@ where
         let parity_adjustment =
             u32::from(self.kernel_weights_even) & ((u32::from(budget) ^ required_parity) & 1);
         let maximum_permitted_lower_bound = u32::from(budget) - parity_adjustment;
-        self.syndrome_degree_bound_exceeds(syndrome_weight, maximum_permitted_lower_bound, budget)
-            || self.syndrome_packing_exceeds(syndrome, maximum_permitted_lower_bound)
+        let degree = u32::from(self.maximum_column_check_weight);
+        if degree == 0 {
+            return syndrome_weight != 0 && budget != u16::MAX;
+        }
+        let degree_lower_bound = syndrome_weight.div_ceil(degree);
+        if degree_lower_bound > maximum_permitted_lower_bound {
+            return true;
+        }
+        // Packing only strengthens the degree bound, so omitting it far from
+        // the cutoff can add work but can never prune a valid completion.
+        degree_lower_bound.saturating_add(SYNDROME_PACKING_ADMISSION_MARGIN)
+            > maximum_permitted_lower_bound
+            && self.syndrome_packing_exceeds(syndrome, maximum_permitted_lower_bound)
     }
 
     #[inline]
