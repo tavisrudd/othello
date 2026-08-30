@@ -60,7 +60,7 @@ def c880_rows(pattern: str):
             {
                 "id": row_id,
                 "weight": 1,
-                "expected": True,
+                "expected": naive > marginal,
                 "values": [
                     int(source["m"]),
                     int(source["known_points"]),
@@ -124,6 +124,39 @@ def c80_bank_rows(path: Path):
     return rows
 
 
+def merge_batches(pattern: str, output: Path) -> None:
+    paths = [Path(name) for name in sorted(glob.glob(pattern))]
+    if not paths:
+        raise SystemExit(f"no campaign batches matched {pattern!r}")
+    headers = []
+    for path in paths:
+        with path.open(encoding="utf-8") as stream:
+            headers.append(json.loads(stream.readline()))
+    fields = headers[0]["fields"]
+    if any(header.get("schema") != SCHEMA or header["fields"] != fields for header in headers):
+        raise SystemExit("campaign batches have incompatible schemas or fields")
+    header = {
+        "schema": SCHEMA,
+        "presentation": "merge-" + "-".join(header["presentation"] for header in headers),
+        "problem": " + ".join(header["problem"] for header in headers),
+        "fields": fields,
+        "rows": sum(int(header["rows"]) for header in headers),
+    }
+    row_id = 0
+    with output.open("x", encoding="utf-8") as target:
+        target.write(json.dumps(header, separators=(",", ":")) + "\n")
+        for path in paths:
+            with path.open(encoding="utf-8") as source:
+                next(source)
+                for line in source:
+                    row = json.loads(line)
+                    row["id"] = row_id
+                    target.write(json.dumps(row, separators=(",", ":")) + "\n")
+                    row_id += 1
+    if row_id != header["rows"]:
+        raise SystemExit("campaign batch row count mismatch")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="adapter", required=True)
@@ -137,7 +170,15 @@ def main() -> None:
     bank = subparsers.add_parser("c80-bank")
     bank.add_argument("--input", type=Path, required=True)
     bank.add_argument("--output", type=Path, required=True)
+    merge = subparsers.add_parser("merge")
+    merge.add_argument("--inputs", required=True)
+    merge.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+
+    if args.adapter == "merge":
+        merge_batches(args.inputs, args.output)
+        print(json.dumps({"output": str(args.output), "adapter": "merge"}))
+        return
 
     if args.adapter == "c80":
         fields = [
@@ -165,8 +206,8 @@ def main() -> None:
             "search_nodes",
         ]
         rows = c880_rows(args.inputs)
-        problem = "C880 marginal aligned attachment"
-        presentation = "c880-marginal-kj-v0"
+        problem = "C880 strict marginal improvement classification"
+        presentation = "c880-marginal-strict-saving-kj-v0"
         output = args.output
     else:
         fields = [

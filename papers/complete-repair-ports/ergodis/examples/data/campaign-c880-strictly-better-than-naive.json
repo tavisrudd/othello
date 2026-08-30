@@ -1,10 +1,10 @@
 {
   "schema": "ergodis-attack-plan-v0",
-  "name": "marginal-no-worse-than-naive",
+  "name": "marginal-strictly-better-than-naive",
   "role": "diagnostic",
   "program": [
     { "op": "field", "name": "marginal_cost" },
     { "op": "field", "name": "naive_cost" },
-    { "op": "le" }
+    { "op": "lt" }
   ]
 }

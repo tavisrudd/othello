@@ -7,11 +7,19 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, VecDeque};
 use std::fs::{self, File, OpenOptions};
-use std::io::{self, BufRead, BufReader, BufWriter, Read, Write};
+use std::io::{self, BufReader, BufWriter, Read, Write};
 use std::os::unix::fs::{OpenOptionsExt, PermissionsExt};
 use std::os::unix::net::{UnixListener, UnixStream};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
+
+mod synthesis;
+mod vm;
+
+use synthesis::learn_decision_tree;
+pub use vm::{
+    evaluate_plan, CompiledPlan, Evaluation, FeatureBatch, PlanOp, PlanOutput, PlanRole, PlanSpec,
+};
 
 pub const SCHEMA: &str = "ergodis-control-experimental-v0";
 pub const DATA_SCHEMA: &str = "ergodis-campaign-data-v0";
@@ -31,459 +39,6 @@ pub enum ControlError {
     Json(#[from] serde_json::Error),
     #[error("{0}")]
     Invalid(String),
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(deny_unknown_fields)]
-struct DataHeader {
-    schema: String,
-    presentation: String,
-    problem: String,
-    fields: Vec<String>,
-    rows: usize,
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(deny_unknown_fields)]
-struct DataRow {
-    id: u64,
-    #[serde(default = "one")]
-    weight: u64,
-    expected: bool,
-    values: Vec<i64>,
-}
-
-const fn one() -> u64 {
-    1
-}
-
-/// Dense, presized feature batch. The evaluator touches only flat arrays.
-#[derive(Debug)]
-pub struct FeatureBatch {
-    pub presentation: String,
-    pub problem: String,
-    pub fields: Box<[String]>,
-    row_ids: Box<[u64]>,
-    weights: Box<[u64]>,
-    expected: Box<[u64]>,
-    values: Box<[i64]>,
-}
-
-impl FeatureBatch {
-    pub fn read_jsonl(
-        path: &Path,
-        max_rows: usize,
-        max_cells: usize,
-    ) -> Result<Self, ControlError> {
-        let file = File::open(path)?;
-        let mut lines = BufReader::new(file).lines();
-        let header_line = lines
-            .next()
-            .ok_or_else(|| ControlError::Invalid("empty campaign data".into()))??;
-        let header: DataHeader = serde_json::from_str(&header_line)?;
-        if header.schema != DATA_SCHEMA {
-            return Err(ControlError::Invalid(format!(
-                "unsupported data schema {:?}",
-                header.schema
-            )));
-        }
-        if header.rows > max_rows || header.fields.len().saturating_mul(header.rows) > max_cells {
-            return Err(ControlError::Invalid(
-                "campaign data exceeds configured limits".into(),
-            ));
-        }
-        if header.fields.is_empty() || header.fields.len() > u16::MAX as usize {
-            return Err(ControlError::Invalid("invalid feature width".into()));
-        }
-        let mut seen = BTreeMap::new();
-        for (index, field) in header.fields.iter().enumerate() {
-            if field.is_empty() || seen.insert(field, index).is_some() {
-                return Err(ControlError::Invalid(
-                    "feature names must be nonempty and unique".into(),
-                ));
-            }
-        }
-        let mut row_ids = Vec::with_capacity(header.rows);
-        let mut weights = Vec::with_capacity(header.rows);
-        let mut expected = vec![0u64; header.rows.div_ceil(64)];
-        let mut values = Vec::with_capacity(header.rows * header.fields.len());
-        for row_index in 0..header.rows {
-            let line = lines
-                .next()
-                .ok_or_else(|| ControlError::Invalid(format!("missing data row {row_index}")))??;
-            let row: DataRow = serde_json::from_str(&line)?;
-            if row.values.len() != header.fields.len() || row.weight == 0 {
-                return Err(ControlError::Invalid(format!(
-                    "invalid data row {row_index}"
-                )));
-            }
-            row_ids.push(row.id);
-            weights.push(row.weight);
-            if row.expected {
-                expected[row_index / 64] |= 1u64 << (row_index % 64);
-            }
-            values.extend_from_slice(&row.values);
-        }
-        if lines.next().transpose()?.is_some() {
-            return Err(ControlError::Invalid(
-                "campaign data has trailing rows".into(),
-            ));
-        }
-        Ok(Self {
-            presentation: header.presentation,
-            problem: header.problem,
-            fields: header.fields.into_boxed_slice(),
-            row_ids: row_ids.into_boxed_slice(),
-            weights: weights.into_boxed_slice(),
-            expected: expected.into_boxed_slice(),
-            values: values.into_boxed_slice(),
-        })
-    }
-
-    pub fn rows(&self) -> usize {
-        self.row_ids.len()
-    }
-
-    fn expected(&self, row: usize) -> bool {
-        self.expected[row / 64] & (1u64 << (row % 64)) != 0
-    }
-
-    fn row(&self, row: usize) -> &[i64] {
-        let width = self.fields.len();
-        &self.values[row * width..(row + 1) * width]
-    }
-
-    fn row_json(&self, row: usize) -> Value {
-        let mut features = serde_json::Map::with_capacity(self.fields.len());
-        for (name, value) in self.fields.iter().zip(self.row(row)) {
-            features.insert(name.clone(), (*value).into());
-        }
-        json!({
-            "row": row,
-            "id": self.row_ids[row],
-            "weight": self.weights[row],
-            "expected": self.expected(row),
-            "features": features,
-        })
-    }
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-#[serde(deny_unknown_fields)]
-pub struct PlanSpec {
-    pub schema: String,
-    pub name: String,
-    pub role: PlanRole,
-    #[serde(default)]
-    pub output: PlanOutput,
-    pub program: Vec<PlanOp>,
-}
-
-#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
-#[serde(rename_all = "kebab-case")]
-pub enum PlanRole {
-    Diagnostic,
-    Ordering,
-}
-
-#[derive(Clone, Copy, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
-#[serde(rename_all = "kebab-case")]
-pub enum PlanOutput {
-    #[default]
-    Predicate,
-    Score,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-#[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
-pub enum PlanOp {
-    Field { name: String },
-    Const { value: i64 },
-    Add,
-    Sub,
-    Mul,
-    Min,
-    Max,
-    Eq,
-    Ne,
-    Lt,
-    Le,
-    Gt,
-    Ge,
-    And,
-    Or,
-    Not,
-    Abs,
-}
-
-#[repr(u8)]
-#[derive(Clone, Copy, Debug)]
-enum OpCode {
-    Field,
-    Const,
-    Add,
-    Sub,
-    Mul,
-    Min,
-    Max,
-    Eq,
-    Ne,
-    Lt,
-    Le,
-    Gt,
-    Ge,
-    And,
-    Or,
-    Not,
-    Abs,
-}
-
-#[repr(C)]
-#[derive(Clone, Copy, Debug)]
-struct CompiledOp {
-    value: i64,
-    field: u16,
-    code: OpCode,
-    _pad: [u8; 5],
-}
-
-const _: () = assert!(std::mem::size_of::<CompiledOp>() == 16);
-const _: () = assert!(std::mem::align_of::<CompiledOp>() == 8);
-
-#[derive(Clone, Debug)]
-pub struct CompiledPlan {
-    pub name: String,
-    pub role: PlanRole,
-    pub output: PlanOutput,
-    ops: Box<[CompiledOp]>,
-    stack_needed: usize,
-    pub hash: String,
-}
-
-impl CompiledPlan {
-    pub fn compile(spec: &PlanSpec, fields: &[String]) -> Result<Self, ControlError> {
-        if spec.schema != PLAN_SCHEMA || spec.name.is_empty() || spec.name.len() > 96 {
-            return Err(ControlError::Invalid("invalid plan schema or name".into()));
-        }
-        if spec.program.is_empty() || spec.program.len() > MAX_PLAN_OPS {
-            return Err(ControlError::Invalid(
-                "plan program length is out of bounds".into(),
-            ));
-        }
-        let index: BTreeMap<&str, usize> = fields
-            .iter()
-            .enumerate()
-            .map(|(field, name)| (name.as_str(), field))
-            .collect();
-        let mut depth = 0usize;
-        let mut stack_needed = 0usize;
-        let mut ops = Vec::with_capacity(spec.program.len());
-        for op in &spec.program {
-            let (code, value, field, inputs) = match op {
-                PlanOp::Field { name } => {
-                    let field = *index.get(name.as_str()).ok_or_else(|| {
-                        ControlError::Invalid(format!("unknown feature {name:?}"))
-                    })?;
-                    (OpCode::Field, 0, field as u16, 0)
-                }
-                PlanOp::Const { value } => (OpCode::Const, *value, 0, 0),
-                PlanOp::Add => (OpCode::Add, 0, 0, 2),
-                PlanOp::Sub => (OpCode::Sub, 0, 0, 2),
-                PlanOp::Mul => (OpCode::Mul, 0, 0, 2),
-                PlanOp::Min => (OpCode::Min, 0, 0, 2),
-                PlanOp::Max => (OpCode::Max, 0, 0, 2),
-                PlanOp::Eq => (OpCode::Eq, 0, 0, 2),
-                PlanOp::Ne => (OpCode::Ne, 0, 0, 2),
-                PlanOp::Lt => (OpCode::Lt, 0, 0, 2),
-                PlanOp::Le => (OpCode::Le, 0, 0, 2),
-                PlanOp::Gt => (OpCode::Gt, 0, 0, 2),
-                PlanOp::Ge => (OpCode::Ge, 0, 0, 2),
-                PlanOp::And => (OpCode::And, 0, 0, 2),
-                PlanOp::Or => (OpCode::Or, 0, 0, 2),
-                PlanOp::Not => (OpCode::Not, 0, 0, 1),
-                PlanOp::Abs => (OpCode::Abs, 0, 0, 1),
-            };
-            if depth < inputs {
-                return Err(ControlError::Invalid("plan stack underflow".into()));
-            }
-            depth = depth + 1 - inputs;
-            stack_needed = stack_needed.max(depth);
-            if stack_needed > MAX_PLAN_STACK {
-                return Err(ControlError::Invalid(
-                    "plan stack exceeds fixed evaluator".into(),
-                ));
-            }
-            ops.push(CompiledOp {
-                value,
-                field,
-                code,
-                _pad: [0; 5],
-            });
-        }
-        if depth != 1 {
-            return Err(ControlError::Invalid(
-                "plan must leave exactly one result".into(),
-            ));
-        }
-        let encoded = serde_json::to_vec(spec)?;
-        Ok(Self {
-            name: spec.name.clone(),
-            role: spec.role,
-            output: spec.output,
-            ops: ops.into_boxed_slice(),
-            stack_needed,
-            hash: blake3::hash(&encoded).to_hex().to_string(),
-        })
-    }
-
-    /// Evaluate one row with a fixed stack and no allocation.
-    fn evaluate_value(
-        &self,
-        row: &[i64],
-        trace: Option<&mut Vec<i64>>,
-    ) -> Result<i64, ControlError> {
-        let mut stack = [0i64; MAX_PLAN_STACK];
-        let mut depth = 0usize;
-        let mut trace = trace;
-        for op in &self.ops {
-            let result = match op.code {
-                OpCode::Field => row[op.field as usize],
-                OpCode::Const => op.value,
-                OpCode::Not => {
-                    stack[depth - 1] = i64::from(stack[depth - 1] == 0);
-                    if let Some(values) = trace.as_deref_mut() {
-                        values.push(stack[depth - 1]);
-                    }
-                    continue;
-                }
-                OpCode::Abs => {
-                    stack[depth - 1] = stack[depth - 1].checked_abs().ok_or_else(|| {
-                        ControlError::Invalid("arithmetic overflow in plan".into())
-                    })?;
-                    if let Some(values) = trace.as_deref_mut() {
-                        values.push(stack[depth - 1]);
-                    }
-                    continue;
-                }
-                code => {
-                    let right = stack[depth - 1];
-                    let left = stack[depth - 2];
-                    depth -= 2;
-                    match code {
-                        OpCode::Add => left.checked_add(right).ok_or_else(|| {
-                            ControlError::Invalid("arithmetic overflow in plan".into())
-                        })?,
-                        OpCode::Sub => left.checked_sub(right).ok_or_else(|| {
-                            ControlError::Invalid("arithmetic overflow in plan".into())
-                        })?,
-                        OpCode::Mul => left.checked_mul(right).ok_or_else(|| {
-                            ControlError::Invalid("arithmetic overflow in plan".into())
-                        })?,
-                        OpCode::Min => left.min(right),
-                        OpCode::Max => left.max(right),
-                        OpCode::Eq => i64::from(left == right),
-                        OpCode::Ne => i64::from(left != right),
-                        OpCode::Lt => i64::from(left < right),
-                        OpCode::Le => i64::from(left <= right),
-                        OpCode::Gt => i64::from(left > right),
-                        OpCode::Ge => i64::from(left >= right),
-                        OpCode::And => i64::from(left != 0 && right != 0),
-                        OpCode::Or => i64::from(left != 0 || right != 0),
-                        OpCode::Field | OpCode::Const | OpCode::Not | OpCode::Abs => unreachable!(),
-                    }
-                }
-            };
-            stack[depth] = result;
-            depth += 1;
-            if let Some(values) = trace.as_deref_mut() {
-                values.push(result);
-            }
-        }
-        debug_assert_eq!(depth, 1);
-        debug_assert!(self.stack_needed <= MAX_PLAN_STACK);
-        Ok(stack[0])
-    }
-}
-
-#[derive(Clone, Debug, Serialize)]
-pub struct Evaluation {
-    pub output: PlanOutput,
-    pub rows: usize,
-    pub weighted_rows: u64,
-    pub weighted_correct: u64,
-    pub weighted_false_positive: u64,
-    pub weighted_false_negative: u64,
-    pub weighted_true: u64,
-    pub first_mismatch: Option<usize>,
-    pub first_false: Option<usize>,
-    pub outcome_hash: String,
-    pub minimum_score: i64,
-    pub maximum_score: i64,
-}
-
-pub fn evaluate_plan(
-    batch: &FeatureBatch,
-    plan: &CompiledPlan,
-) -> Result<Evaluation, ControlError> {
-    let mut outcome_hasher = blake3::Hasher::new();
-    let mut outcome_word = 0u64;
-    let mut outcome_bits = 0u32;
-    let mut result = Evaluation {
-        output: plan.output,
-        rows: batch.rows(),
-        weighted_rows: 0,
-        weighted_correct: 0,
-        weighted_false_positive: 0,
-        weighted_false_negative: 0,
-        weighted_true: 0,
-        first_mismatch: None,
-        first_false: None,
-        outcome_hash: String::new(),
-        minimum_score: i64::MAX,
-        maximum_score: i64::MIN,
-    };
-    for row in 0..batch.rows() {
-        let value = plan.evaluate_value(batch.row(row), None)?;
-        let observed = value != 0;
-        let expected = batch.expected(row);
-        result.minimum_score = result.minimum_score.min(value);
-        result.maximum_score = result.maximum_score.max(value);
-        if plan.output == PlanOutput::Predicate {
-            outcome_word |= u64::from(observed) << outcome_bits;
-            outcome_bits += 1;
-            if outcome_bits == 64 {
-                outcome_hasher.update(&outcome_word.to_le_bytes());
-                outcome_word = 0;
-                outcome_bits = 0;
-            }
-        } else {
-            outcome_hasher.update(&value.to_le_bytes());
-        }
-        let weight = batch.weights[row];
-        result.weighted_rows = result.weighted_rows.saturating_add(weight);
-        if observed {
-            result.weighted_true = result.weighted_true.saturating_add(weight);
-        } else if result.first_false.is_none() {
-            result.first_false = Some(row);
-        }
-        if observed == expected {
-            result.weighted_correct = result.weighted_correct.saturating_add(weight);
-        } else {
-            result.first_mismatch.get_or_insert(row);
-            if observed {
-                result.weighted_false_positive =
-                    result.weighted_false_positive.saturating_add(weight);
-            } else {
-                result.weighted_false_negative =
-                    result.weighted_false_negative.saturating_add(weight);
-            }
-        }
-    }
-    if plan.output == PlanOutput::Predicate && outcome_bits != 0 {
-        outcome_hasher.update(&outcome_word.to_le_bytes());
-    }
-    result.outcome_hash = outcome_hasher.finalize().to_hex().to_string();
-    Ok(result)
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -698,6 +253,8 @@ impl Campaign {
         let result = match request.op.as_str() {
             "status" => self.status(),
             "agent-brief" => self.agent_brief(&request.args),
+            "feature-ceiling" => self.feature_ceiling(),
+            "synthesize-tree" => self.synthesize_tree(&request.args),
             "candidate-try" => self.candidate_try(&request.args, false),
             "candidate-apply" => self.candidate_try(&request.args, true),
             "obstruction-first" => self.obstruction(&request.args),
@@ -760,6 +317,129 @@ impl Campaign {
         }))
     }
 
+    fn feature_ceiling(&self) -> Result<Value, ControlError> {
+        if self.batch.rows() > u32::MAX as usize {
+            return Err(ControlError::Invalid(
+                "feature ceiling requires at most u32::MAX rows".into(),
+            ));
+        }
+        let mut order: Vec<u32> = (0..self.batch.rows() as u32).collect();
+        order.sort_unstable_by(|&left, &right| {
+            self.batch
+                .row(left as usize)
+                .cmp(self.batch.row(right as usize))
+                .then_with(|| left.cmp(&right))
+        });
+        let mut weighted_rows = 0u64;
+        let mut optimal_correct = 0u64;
+        let mut ambiguous_weight = 0u64;
+        let mut ambiguous_groups = 0usize;
+        let mut distinct_vectors = 0usize;
+        let mut first_collision = None;
+        let mut start = 0usize;
+        while start < order.len() {
+            let first = order[start] as usize;
+            let mut end = start + 1;
+            let mut positive = 0u64;
+            let mut negative = 0u64;
+            let mut positive_row = None;
+            let mut negative_row = None;
+            while end <= order.len() {
+                if end == order.len()
+                    || self.batch.row(order[end] as usize) != self.batch.row(first)
+                {
+                    break;
+                }
+                end += 1;
+            }
+            for &row in &order[start..end] {
+                let row = row as usize;
+                if self.batch.expected(row) {
+                    positive += self.batch.weights[row];
+                    positive_row.get_or_insert(row);
+                } else {
+                    negative += self.batch.weights[row];
+                    negative_row.get_or_insert(row);
+                }
+            }
+            distinct_vectors += 1;
+            weighted_rows = weighted_rows.saturating_add(positive.saturating_add(negative));
+            optimal_correct = optimal_correct.saturating_add(positive.max(negative));
+            if positive != 0 && negative != 0 {
+                ambiguous_groups += 1;
+                ambiguous_weight = ambiguous_weight.saturating_add(positive + negative);
+                if first_collision.is_none() {
+                    first_collision = Some(json!({
+                        "positive": self.batch.row_json(positive_row.unwrap()),
+                        "negative": self.batch.row_json(negative_row.unwrap()),
+                    }));
+                }
+            }
+            start = end;
+        }
+        Ok(json!({
+            "rows": self.batch.rows(),
+            "weighted_rows": weighted_rows,
+            "distinct_feature_vectors": distinct_vectors,
+            "ambiguous_groups": ambiguous_groups,
+            "ambiguous_weight": ambiguous_weight,
+            "optimal_weighted_correct": optimal_correct,
+            "unavoidable_weighted_errors": weighted_rows.saturating_sub(optimal_correct),
+            "first_collision": first_collision,
+        }))
+    }
+
+    fn synthesize_tree(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let max_nodes = args
+            .get("max_nodes")
+            .and_then(Value::as_u64)
+            .unwrap_or(31)
+            .clamp(1, 41) as usize;
+        let max_depth = args
+            .get("max_depth")
+            .and_then(Value::as_u64)
+            .unwrap_or(8)
+            .clamp(1, 16) as usize;
+        let training_filter = match (
+            args.get("train_field").and_then(Value::as_str),
+            args.get("train_value").and_then(Value::as_i64),
+        ) {
+            (None, None) => None,
+            (Some(name), Some(value)) => Some((
+                self.batch
+                    .fields
+                    .iter()
+                    .position(|field| field == name)
+                    .ok_or_else(|| ControlError::Invalid("unknown training field".into()))?,
+                value,
+            )),
+            _ => {
+                return Err(ControlError::Invalid(
+                    "train_field and train_value must be supplied together".into(),
+                ))
+            }
+        };
+        let training_rows = training_filter.map_or(self.batch.rows(), |(field, value)| {
+            (0..self.batch.rows())
+                .filter(|&row| self.batch.row(row)[field] == value)
+                .count()
+        });
+        let (spec, nodes, depth) =
+            learn_decision_tree(&self.batch, max_nodes, max_depth, training_filter)?;
+        let plan = CompiledPlan::compile(&spec, &self.batch.fields)?;
+        let evaluation = evaluate_plan(&self.batch, &plan)?;
+        let synopsis = format!(
+            "tree {nodes} nodes, {} unavoidable errors",
+            evaluation
+                .weighted_rows
+                .saturating_sub(evaluation.weighted_correct)
+        );
+        self.record("tree-synthesized", &synopsis, Some(spec.name.clone()))?;
+        Ok(
+            json!({"plan": spec, "nodes": nodes, "depth": depth, "training_rows": training_rows, "evaluation": evaluation}),
+        )
+    }
+
     fn candidate_try(&mut self, args: &Value, apply: bool) -> Result<Value, ControlError> {
         let spec_value = args
             .get("plan")
@@ -767,12 +447,17 @@ impl Campaign {
         let spec: PlanSpec = serde_json::from_value(spec_value.clone())?;
         let plan = CompiledPlan::compile(&spec, &self.batch.fields)?;
         let evaluation = evaluate_plan(&self.batch, &plan)?;
+        let groups = args
+            .get("group_by")
+            .and_then(Value::as_str)
+            .map(|field| self.grouped_evaluation(&plan, field))
+            .transpose()?;
         let equivalent_to = self.archive.get(&evaluation.outcome_hash).cloned();
         if equivalent_to.is_none() && self.archive.len() < MAX_ARCHIVE_CLASSES {
             self.archive
                 .insert(evaluation.outcome_hash.clone(), plan.name.clone());
         }
-        let first = evaluation.first_mismatch.or(evaluation.first_false);
+        let first = evaluation.first_mismatch;
         let obstruction = first.map(|row| self.batch.row_json(row));
         if !apply {
             let synopsis = match first {
@@ -781,7 +466,7 @@ impl Campaign {
             };
             self.record("candidate-tested", &synopsis, Some(plan.name.clone()))?;
             return Ok(
-                json!({"plan": plan.name, "hash": plan.hash, "equivalent_to": equivalent_to, "evaluation": evaluation, "first_obstruction": obstruction}),
+                json!({"plan": plan.name, "hash": plan.hash, "equivalent_to": equivalent_to, "evaluation": evaluation, "groups": groups, "first_obstruction": obstruction}),
             );
         }
         let expected_epoch = args
@@ -818,8 +503,61 @@ impl Campaign {
             Some(name.clone()),
         )?;
         Ok(
-            json!({"plan": name, "hash": hash, "equivalent_to": equivalent_to, "old_epoch": old_epoch, "new_epoch": new_epoch, "evaluation": evaluation, "first_obstruction": obstruction}),
+            json!({"plan": name, "hash": hash, "equivalent_to": equivalent_to, "old_epoch": old_epoch, "new_epoch": new_epoch, "evaluation": evaluation, "groups": groups, "first_obstruction": obstruction}),
         )
+    }
+
+    fn grouped_evaluation(
+        &self,
+        plan: &CompiledPlan,
+        field_name: &str,
+    ) -> Result<Value, ControlError> {
+        let field = self
+            .batch
+            .fields
+            .iter()
+            .position(|field| field == field_name)
+            .ok_or_else(|| ControlError::Invalid("unknown group_by field".into()))?;
+        let mut groups: BTreeMap<i64, [u64; 6]> = BTreeMap::new();
+        for row in 0..self.batch.rows() {
+            let value = self.batch.row(row)[field];
+            if !groups.contains_key(&value) && groups.len() == 256 {
+                return Err(ControlError::Invalid(
+                    "group_by produces more than 256 groups".into(),
+                ));
+            }
+            let counts = groups.entry(value).or_default();
+            let observed = plan.evaluate_value(self.batch.row(row), None)? != 0;
+            let expected = self.batch.expected(row);
+            let weight = self.batch.weights[row];
+            counts[0] += 1;
+            counts[1] = counts[1].saturating_add(weight);
+            if observed == expected {
+                counts[2] = counts[2].saturating_add(weight);
+            } else if observed {
+                counts[3] = counts[3].saturating_add(weight);
+            } else {
+                counts[4] = counts[4].saturating_add(weight);
+            }
+            if observed {
+                counts[5] = counts[5].saturating_add(weight);
+            }
+        }
+        let groups: Vec<_> = groups
+            .into_iter()
+            .map(|(value, counts)| {
+                json!({
+                    "value": value,
+                    "rows": counts[0],
+                    "weighted_rows": counts[1],
+                    "weighted_correct": counts[2],
+                    "weighted_false_positive": counts[3],
+                    "weighted_false_negative": counts[4],
+                    "weighted_true": counts[5],
+                })
+            })
+            .collect();
+        Ok(json!({"field": field_name, "groups": groups}))
     }
 
     fn obstruction(&self, args: &Value) -> Result<Value, ControlError> {
@@ -829,10 +567,7 @@ impl Campaign {
             .iter()
             .find(|stored| stored.plan.name == name)
             .ok_or_else(|| ControlError::Invalid("unknown active plan".into()))?;
-        let row = stored
-            .evaluation
-            .first_mismatch
-            .or(stored.evaluation.first_false);
+        let row = stored.evaluation.first_mismatch;
         Ok(match row {
             Some(row) => json!({"plan": name, "obstruction": self.batch.row_json(row)}),
             None => json!({"plan": name, "obstruction": null}),
@@ -920,11 +655,11 @@ impl Campaign {
             .iter()
             .find(|stored| stored.plan.name == name)
             .ok_or_else(|| ControlError::Invalid("unknown active plan".into()))?;
-        let mut values = Vec::with_capacity(stored.plan.ops.len().min(max_records));
+        let mut values = Vec::with_capacity(stored.plan.op_count().min(max_records));
         let observed = stored
             .plan
             .evaluate_value(self.batch.row(row), Some(&mut values))?;
-        let truncated = stored.plan.ops.len() > max_records;
+        let truncated = stored.plan.op_count() > max_records;
         values.truncate(max_records);
         let trace = json!({
             "schema": SCHEMA,

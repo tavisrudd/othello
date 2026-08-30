@@ -9,6 +9,7 @@ import importlib.util
 import json
 import os
 import random
+import shutil
 from collections import Counter
 from pathlib import Path
 
@@ -113,6 +114,61 @@ def write_json(path: Path, value: dict) -> None:
     temporary.replace(path)
 
 
+class FeatureSink:
+    FIELDS = [
+        "q",
+        "state_omega",
+        "target_omega",
+        "omega_drop",
+        "old_defect_rank",
+        "half_defect_rank",
+        "next_defect_rank",
+        "support_surplus",
+        "created",
+        "consumed",
+        "omega_descends",
+        "charge_descends",
+    ]
+
+    def __init__(self, output: Path | None):
+        self.output = output
+        self.count = 0
+        self.raw_path = None
+        self.raw = None
+        if output is not None:
+            self.raw_path = output.with_name(f".{output.name}.{os.getpid()}.rows")
+            self.raw = self.raw_path.open("x", encoding="utf-8")
+
+    def append(self, expected: bool, values: list[int]) -> None:
+        if self.raw is None:
+            return
+        row = {
+            "id": self.count,
+            "weight": 1,
+            "expected": expected,
+            "values": values,
+        }
+        self.raw.write(json.dumps(row, separators=(",", ":")) + "\n")
+        self.count += 1
+
+    def finish(self, q: int, seed: int) -> None:
+        if self.raw is None or self.output is None or self.raw_path is None:
+            return
+        self.raw.close()
+        header = {
+            "schema": "ergodis-campaign-data-v0",
+            "presentation": f"c80-q{q}-reply-features-seed-{seed}",
+            "problem": "C80 projective reply survivor classification",
+            "fields": self.FIELDS,
+            "rows": self.count,
+        }
+        with self.output.open("x", encoding="utf-8") as stream:
+            stream.write(json.dumps(header, separators=(",", ":")) + "\n")
+            with self.raw_path.open("r", encoding="utf-8") as raw:
+                shutil.copyfileobj(raw, stream, length=1024 * 1024)
+        self.raw_path.unlink()
+
+
 def scout(
     q: int,
     seed: int,
@@ -120,6 +176,7 @@ def scout(
     exchange_budget: int,
     continue_after_issue: bool,
     p_admission: bool,
+    feature_output: Path | None = None,
 ) -> dict:
     source = load_source()
     game = source.DirectSmallBoundaryGame(q)
@@ -132,6 +189,7 @@ def scout(
     def primary_mask(state) -> int:
         return sum(1 << by_cell[point] for point in state)
     rng = random.Random(seed)
+    feature_sink = FeatureSink(feature_output)
     states = set()
     attempts = 0
     while len(states) < state_budget and attempts < 20 * state_budget:
@@ -225,6 +283,23 @@ def scout(
                             charge = len(consumed) > len(created) or (
                                 len(consumed) == len(created)
                                 and target_omega < game.omega(state)
+                            )
+                            feature_sink.append(
+                                survivor,
+                                [
+                                    q,
+                                    game.omega(state),
+                                    target_omega,
+                                    game.omega(state) - target_omega,
+                                    len(old_defects),
+                                    len(half_defects),
+                                    len(target_defects),
+                                    len(consumed) - len(created),
+                                    len(created),
+                                    len(consumed),
+                                    int(omega_descends),
+                                    int(charge),
+                                ],
                             )
                             reply_rows.append(
                                 (
@@ -504,6 +579,7 @@ def scout(
                 admission_counts[field] = None
         result["K_Omega_p_admission"] = admission_counts
         result["first_K_Omega_admission_miss"] = first_admission_miss
+    feature_sink.finish(q, seed)
     return result
 
 
@@ -515,6 +591,7 @@ def main() -> None:
     parser.add_argument("--exchanges", type=int, default=10_000)
     parser.add_argument("--continue-after-issue", action="store_true")
     parser.add_argument("--p-admission", action="store_true")
+    parser.add_argument("--feature-output", type=Path)
     output = parser.add_mutually_exclusive_group()
     output.add_argument("--write", type=Path)
     output.add_argument("--check", type=Path)
@@ -526,6 +603,7 @@ def main() -> None:
         args.exchanges,
         args.continue_after_issue,
         args.p_admission,
+        args.feature_output,
     )
     encoded = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if args.write is not None:

@@ -1,0 +1,2 @@
+{"schema":"ergodis-attack-plan-v0","name":"charge-descends-seed","role":"diagnostic","program":[{"op":"field","name":"charge_descends"}]}
+{"schema":"ergodis-attack-plan-v0","name":"surplus-and-omega-seed","role":"diagnostic","program":[{"op":"field","name":"support_surplus"},{"op":"const","value":0},{"op":"ge"},{"op":"field","name":"omega_drop"},{"op":"const","value":0},{"op":"gt"},{"op":"and"}]}

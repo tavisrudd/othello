@@ -14,6 +14,9 @@ use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
 use std::convert::Infallible;
 
+#[cfg(feature = "control-plane")]
+use ergodis::control::{CompiledPlan, PlanOp, PlanOutput, PlanRole, PlanSpec, PLAN_SCHEMA};
+
 struct CountingAllocator;
 
 thread_local! {
@@ -69,6 +72,41 @@ fn tracked_allocations<T>(operation: impl FnOnce() -> T) -> (T, usize) {
     drop(guard);
     let count = ALLOCATIONS.with(Cell::get);
     (result, count)
+}
+
+#[cfg(feature = "control-plane")]
+#[test]
+fn campaign_vm_evaluation_allocates_nothing() {
+    let fields = vec!["surplus".to_owned(), "drop".to_owned()];
+    let spec = PlanSpec {
+        schema: PLAN_SCHEMA.to_owned(),
+        name: "allocation-gate".to_owned(),
+        role: PlanRole::Diagnostic,
+        output: PlanOutput::Predicate,
+        program: vec![
+            PlanOp::Field {
+                name: "surplus".to_owned(),
+            },
+            PlanOp::Const { value: 0 },
+            PlanOp::Gt,
+            PlanOp::Field {
+                name: "drop".to_owned(),
+            },
+            PlanOp::Const { value: 0 },
+            PlanOp::Gt,
+            PlanOp::Or,
+        ],
+    };
+    let plan = CompiledPlan::compile(&spec, &fields).unwrap();
+    let (answer, allocations) = tracked_allocations(|| {
+        let mut answer = 0;
+        for _ in 0..10_000 {
+            answer += plan.evaluate_row(&[0, 6]).unwrap();
+        }
+        answer
+    });
+    assert_eq!(answer, 10_000);
+    assert_eq!(allocations, 0);
 }
 
 #[test]
