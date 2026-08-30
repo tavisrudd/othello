@@ -32,7 +32,7 @@ pub struct ResidualHittingWorkspace {
 
 impl ResidualHittingWorkspace {
     pub fn new(maximum_budget: u32) -> Self {
-        let depth = maximum_budget as usize + 1;
+        let depth = maximum_budget.min(64) as usize + 1;
         Self {
             chosen: vec![0; depth].into_boxed_slice(),
             branches: vec![0; depth].into_boxed_slice(),
@@ -50,13 +50,14 @@ impl ResidualHittingWorkspace {
         available: u64,
         budget: u32,
     ) -> Result<bool, ResidualHittingError> {
-        if budget as usize >= self.chosen.len() {
+        let effective_budget = budget.min(available.count_ones()) as usize;
+        if effective_budget >= self.chosen.len() {
             return Err(ResidualHittingError::Budget);
         }
         if clauses.iter().any(|&clause| clause & !available != 0) {
             return Err(ResidualHittingError::Clause);
         }
-        self.entered[..=budget as usize].fill(false);
+        self.entered[..=effective_budget].fill(false);
         self.chosen[0] = 0;
         let mut depth = 0_usize;
         loop {
@@ -72,7 +73,7 @@ impl ResidualHittingWorkspace {
                 let Some(branch) = best else {
                     return Ok(true);
                 };
-                if branch == 0 || depth == budget as usize {
+                if branch == 0 || depth == effective_budget {
                     if depth == 0 {
                         return Ok(false);
                     }
@@ -321,6 +322,13 @@ mod tests {
             1
         );
         assert_eq!(proof.len(), 36);
+    }
+
+    #[test]
+    fn workspace_and_search_normalize_budgets_to_the_mask_universe() {
+        let mut workspace = ResidualHittingWorkspace::new(u32::MAX);
+        assert_eq!(workspace.chosen.len(), 65);
+        assert!(workspace.is_hittable(&[1_u64, 2], 0b11, u32::MAX).unwrap());
     }
 
     #[test]
