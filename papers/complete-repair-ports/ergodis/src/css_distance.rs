@@ -680,6 +680,7 @@ struct WideCompiledStructure<
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
     kernel_parity_functional: PackedSyndrome<CHECK_WORDS>,
+    projected_parity_bound: ProjectedParityBound,
     check_conflicts: Box<[AlignedConflict<CHECK_WORDS>]>,
     check_neighbors: Box<[PackedSupport<SUPPORT_WORDS>]>,
 }
@@ -692,6 +693,88 @@ struct AlignedConflict<const CHECK_WORDS: usize> {
 }
 
 const _: () = assert!(std::mem::size_of::<AlignedConflict<WIDE_SYNDROME_WORDS>>() == 32);
+
+const PROJECTED_BOUND_STATES: usize = 512;
+const PROJECTED_BOUND_UNREACHABLE: u8 = u8::MAX;
+
+/// Exact word metric on an eight-bit syndrome image, crossed with support
+/// parity.  It is cold-compiled and read once per residual-bound query.
+#[repr(C, align(64))]
+#[derive(Clone, Debug)]
+struct ProjectedParityBound {
+    distances: [u8; PROJECTED_BOUND_STATES],
+    key_mask: u8,
+    _padding: [u8; 63],
+}
+
+const _: () = assert!(std::mem::size_of::<ProjectedParityBound>() == 576);
+const _: () = assert!(std::mem::align_of::<ProjectedParityBound>() == 64);
+
+impl ProjectedParityBound {
+    fn compile<const CHECK_WORDS: usize>(
+        columns: &[PackedColumn<CHECK_WORDS>],
+        check_count: usize,
+    ) -> Self {
+        let projected_bits = check_count.min(8);
+        let key_mask = if projected_bits == 8 {
+            u8::MAX
+        } else {
+            (1_u8 << projected_bits) - 1
+        };
+        let mut present = [false; 256];
+        for column in columns {
+            present[(column.syndrome.words[0] as u8 & key_mask) as usize] = true;
+        }
+        let mut generators = [0_u8; 256];
+        let mut generator_count = 0usize;
+        for (key, &is_present) in present.iter().enumerate() {
+            if is_present {
+                generators[generator_count] = key as u8;
+                generator_count += 1;
+            }
+        }
+
+        let mut distances = [PROJECTED_BOUND_UNREACHABLE; PROJECTED_BOUND_STATES];
+        let mut queue = [0_u16; PROJECTED_BOUND_STATES];
+        let mut head = 0usize;
+        let mut tail = 1usize;
+        distances[0] = 0;
+        while head < tail {
+            let state = usize::from(queue[head]);
+            head += 1;
+            let next_distance = distances[state] + 1;
+            for &generator in &generators[..generator_count] {
+                let next = state ^ usize::from(generator) ^ 0x100;
+                if distances[next] == PROJECTED_BOUND_UNREACHABLE {
+                    distances[next] = next_distance;
+                    queue[tail] = next as u16;
+                    tail += 1;
+                }
+            }
+        }
+        Self {
+            distances,
+            key_mask,
+            _padding: [0; 63],
+        }
+    }
+
+    #[inline]
+    fn lower_bound<const CHECK_WORDS: usize>(
+        &self,
+        syndrome: PackedSyndrome<CHECK_WORDS>,
+        required_parity: u32,
+        parity_is_exact: bool,
+    ) -> u32 {
+        let key = usize::from(syndrome.words[0] as u8 & self.key_mask);
+        let even = self.distances[key];
+        let odd = self.distances[0x100 | key];
+        let unrestricted = even.min(odd);
+        let required = if required_parity == 0 { even } else { odd };
+        let mask = 0_u8.wrapping_sub(u8::from(parity_is_exact));
+        u32::from((unrestricted & !mask) | (required & mask))
+    }
+}
 
 /// Precompiled exact state for CSS instances up to 320 coordinates and rank 192.
 #[derive(Clone, Debug)]
@@ -709,6 +792,7 @@ pub struct CompiledWideCssDistanceImpl<
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
     kernel_parity_functional: PackedSyndrome<CHECK_WORDS>,
+    projected_parity_bound: ProjectedParityBound,
     short_completion_syndromes: [Box<[u128]>; 2],
     three_completion_bloom: CompletionBloom,
     four_completion_bloom: CompletionBloom,
@@ -921,6 +1005,7 @@ where
             check_neighbors[check].insert(coordinate);
         }
     }
+    let projected_parity_bound = ProjectedParityBound::compile(&columns, basis.len());
     Ok(WideCompiledStructure {
         columns: columns.into_boxed_slice(),
         extra_logical_columns: extra_logical_columns.into_boxed_slice(),
@@ -929,6 +1014,7 @@ where
         maximum_column_check_weight,
         kernel_weights_even: kernel_parity_functional.is_some(),
         kernel_parity_functional: kernel_parity_functional.unwrap_or_default(),
+        projected_parity_bound,
         check_conflicts: check_conflicts.into_boxed_slice(),
         check_neighbors: check_neighbors.into_boxed_slice(),
     })
@@ -959,6 +1045,7 @@ where
             maximum_column_check_weight: structure.maximum_column_check_weight,
             kernel_weights_even: structure.kernel_weights_even,
             kernel_parity_functional: structure.kernel_parity_functional,
+            projected_parity_bound: structure.projected_parity_bound,
             short_completion_syndromes,
             three_completion_bloom,
             four_completion_bloom,
@@ -1074,6 +1161,7 @@ where
             maximum_column_check_weight,
             kernel_weights_even,
             kernel_parity_functional: structure.kernel_parity_functional,
+            projected_parity_bound: structure.projected_parity_bound,
             short_completion_syndromes: [one_completion, two_completion],
             three_completion_bloom,
             four_completion_bloom,
@@ -1153,9 +1241,11 @@ where
         syndrome: PackedSyndrome<CHECK_WORDS>,
         budget: u16,
     ) -> bool {
-        let syndrome_weight = syndrome.weight();
         let required_parity = packed_dot_parity(syndrome, self.kernel_parity_functional);
-        self.syndrome_degree_bound_exceeds(syndrome_weight, required_parity, budget)
+        self.projected_parity_bound
+            .lower_bound(syndrome, required_parity, self.kernel_weights_even)
+            > u32::from(budget)
+            || self.syndrome_degree_bound_exceeds(syndrome.weight(), required_parity, budget)
             || self.syndrome_packing_exceeds(syndrome, required_parity, budget)
     }
 
@@ -3656,6 +3746,13 @@ mod tests {
             assert_eq!(
                 packed_dot_parity(syndrome, compiled.kernel_parity_functional),
                 support.count_ones() & 1
+            );
+            assert!(
+                compiled.projected_parity_bound.lower_bound(
+                    syndrome,
+                    support.count_ones() & 1,
+                    true,
+                ) <= support.count_ones()
             );
         }
     }
