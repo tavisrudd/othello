@@ -3,10 +3,10 @@ use ergodis::observational::{
     FinitePresentation, GeneratorSpec, LayeredGeneratorSpec,
 };
 use ergodis::{
-    compile_verified_explicit_binary_support, BinarySupportCandidate, CanonicalContextBasis,
-    CompiledCssDistance, CostTable, DenseSelector, ExplicitBinarySupportProblem,
-    FinitePermutationAction, Gf4, Matrix, Prime, RankBoundedContextCache, RankOneProbeCache,
-    SparseSelector,
+    compile_binary_commutant, compile_verified_explicit_binary_support, BinarySupportCandidate,
+    CanonicalContextBasis, CompiledCssDistance, CostTable, DenseSelector,
+    ExplicitBinarySupportProblem, FinitePermutationAction, Gf4, Matrix, PackedBinaryAction,
+    PackedBinaryLinearMap, Prime, RankBoundedContextCache, RankOneProbeCache, SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -114,6 +114,22 @@ fn verified_semantic_symmetry_evaluation_allocates_nothing() {
         verified.verify_complete_backend_results(&[result]).unwrap();
     });
     assert_eq!(boundary_allocations, 0);
+}
+
+#[test]
+fn bounded_commutant_scan_allocation_count_is_candidate_independent() {
+    let generator = PackedBinaryLinearMap::new(3, vec![0b010, 0b011, 0b100]).unwrap();
+    let action = PackedBinaryAction::new(3, vec![generator]).unwrap();
+    let commutant = compile_binary_commutant(&action).unwrap();
+
+    let (short, short_allocations) =
+        tracked_allocations(|| commutant.search_extension_field(&[3], 1).unwrap());
+    let (full, full_allocations) =
+        tracked_allocations(|| commutant.search_extension_field(&[3], 8).unwrap());
+    assert!(short.field.is_none());
+    assert!(full.field.is_none());
+    assert!(full.combinations_examined > short.combinations_examined);
+    assert_eq!(full_allocations, short_allocations);
 }
 
 #[test]

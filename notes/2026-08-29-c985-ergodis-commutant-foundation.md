@@ -35,6 +35,14 @@ polynomial through degree eight.  A successful certificate therefore supplies
 a genuine scalar-field action, the mechanism needed by the portfolio's
 hidden-`F_8` example.
 
+The commutant can now also discover such an operator without an oracle.  A
+bounded Gray-code scan constructs linear combinations of the verified
+commutant basis, rejects singular candidates by packed elimination, and tests
+only requested degrees dividing the binary state dimension.  Each surviving
+candidate is admitted by the same minimal-polynomial irreducibility theorem.
+The search reports combinations examined, invertible candidates, and degree
+tests; exhaustion of a bounded prefix makes no nonexistence claim.
+
 ## Public interfaces
 
 `src/commutant.rs` provides:
@@ -46,6 +54,7 @@ hidden-`F_8` example.
   observable quotient from physical checks and logical representatives;
 - `compile_binary_commutant` and a dimension-and-equation verifier;
 - bounded `BinaryCommutant::find_central_split`;
+- bounded `BinaryCommutant::search_extension_field`, with structural counters;
 - allocation-free coordinate conversion through `PackedBinarySubspace`;
 - `certify_binary_extension_field` and exact replay.
 - `certify_binary_extension_field_exhaustive`, retained as a differential and
@@ -67,6 +76,14 @@ round trips.
   and allocates nothing in its scan loop.
 - The exhaustive field check preallocates combination and rank workspaces and
   allocates nothing per candidate field element.
+- Field discovery uses one flat power store and one fixed labelled reducer.
+  Its Gray-code candidate loop, rank test, power recurrence, and minimal-
+  polynomial tests allocate nothing; an allocation-growth regression checks
+  that scanning seven candidates costs no more allocations than scanning one.
+  The pivot directory stores row IDs as `u8` and matrix-bit pivots as `u16`.
+- Requested degrees are deduplicated, invalid degrees are rejected, degrees
+  not dividing the binary dimension are skipped, and powers are generated
+  incrementally so a successful smaller degree does not pay for larger ones.
 - Compilation owns its equation matrices and bases; no hot search backend has
   been changed yet.
 - Dense commutant compilation computes a conservative equation-workspace upper
@@ -89,6 +106,11 @@ identity as a fake quadratic-field generator.  A quotient fixture realizes the
 same irreducible order-three action on
 `F_2^3 / span((1,1,1))`, certifies its `F_4` scalar structure, and rejects both
 nonnested inputs and a permutation that preserves `D` but not `K`.
+
+Discovery fixtures find `F_4` and `F_8` generators from their full commuting
+algebras and reject the product algebra `F_4 x F_2` as a fake cubic field.  An
+independent bounded oracle enumerates every binary `2 x 2` map for all sixteen
+single-generator actions and agrees exactly with the commutant search.
 
 The complete crate test suite and strict library clippy gate pass with all
 features in an isolated disk-backed Cargo target.  No benchmark, profile,
@@ -128,8 +150,10 @@ This is the algebraic foundation, not yet the Work Package A acceptance result.
    equation storage grows as generators times the fourth power of state rank.
    Large-rank support must use sparse or block equations, streamed elimination,
    and an explicit memory budget.
-2. Extension-field certification currently consumes a proposed operator; a
-   structural discovery pass over the commutant is still required.
+2. Field discovery is exact for every candidate it admits, but its `u64`
+   Gray-code budget explores at most the first 64 commutant basis directions.
+   A miss is only a bounded negative.  Large or highly structured algebras
+   need blockwise candidate generation rather than exponential enumeration.
 3. A central idempotent gives exact invariant blocks but is not, without
    additional semisimplicity hypotheses, advertised as a complete isotypic
    decomposition.
@@ -140,13 +164,13 @@ This is the algebraic foundation, not yet the Work Package A acceptance result.
 
 ## Next gate
 
-1. Add bounded discovery of field-generating commutant elements, retaining the
-   exact field verifier as the admission gate.
-2. Add a segmented binary-map representation for ranks above 63 without
+1. Add a segmented binary-map representation for ranks above 63 without
    changing the packed fast path.
-3. Extend the CSS adapter from the now-implemented logical quotient to the
+2. Extend the CSS adapter from the now-implemented logical quotient to the
    physical-syndrome space, using segmented state when its rank exceeds 63.
-4. Compile completion keys in block coordinates and prove exact agreement with
+3. Compile completion keys in block coordinates and prove exact agreement with
    the unreduced backend on small exhaustive codes.
+4. Replace exponential field-candidate enumeration with blockwise centralizer
+   structure when the algebra dimension exceeds the bounded packed regime.
 5. Only after an all-clear, measure gross, BB784, R2Elite, LP1768, and held-out
    controls under the protocol in the portfolio-theorem workplan.

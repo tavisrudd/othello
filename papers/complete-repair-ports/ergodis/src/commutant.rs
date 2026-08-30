@@ -180,6 +180,18 @@ pub struct BinaryExtensionField {
     degree: u8,
 }
 
+/// Outcome of a bounded search for an extension-field generator.
+///
+/// A missing field only describes the searched Gray-code prefix.  It is not a
+/// proof that the commutant contains no such field.
+#[derive(Clone, Debug)]
+pub struct BinaryExtensionFieldSearch {
+    pub field: Option<BinaryExtensionField>,
+    pub combinations_examined: u64,
+    pub invertible_candidates: u64,
+    pub degree_tests: u64,
+}
+
 impl BinaryExtensionField {
     pub fn generator(&self) -> &PackedBinaryLinearMap {
         &self.generator
@@ -254,6 +266,282 @@ impl BinaryCommutant {
             )?));
         }
         Ok(None)
+    }
+
+    /// Search a bounded prefix of the commutant for an operator whose minimal
+    /// polynomial has one of the requested irreducible degrees.
+    ///
+    /// Candidate rows, powers, flattened matrices, rank elimination, and
+    /// labelled dependence elimination all reuse fixed workspaces.  The scan
+    /// allocates only once, after a successful generator has been found.  Its
+    /// `u64` Gray code spans at most the first 64 commutant basis directions.
+    pub fn search_extension_field(
+        &self,
+        degrees: &[u8],
+        maximum_combinations: u64,
+    ) -> Result<BinaryExtensionFieldSearch, BinaryCommutantError> {
+        let mut requested = [false; 17];
+        let dimension = self.dimension();
+        let mut maximum_degree = 0usize;
+        for &degree in degrees {
+            let degree = usize::from(degree);
+            if !(2..=16).contains(&degree) {
+                return Err(BinaryCommutantError::FieldDegree);
+            }
+            if dimension % degree == 0 {
+                requested[degree] = true;
+                maximum_degree = maximum_degree.max(degree);
+            }
+        }
+        let mut result = BinaryExtensionFieldSearch {
+            field: None,
+            combinations_examined: 0,
+            invertible_candidates: 0,
+            degree_tests: 0,
+        };
+        if self.basis.is_empty() || maximum_combinations == 0 || maximum_degree == 0 {
+            return Ok(result);
+        }
+
+        let basis_count = self.basis.len();
+        let available = if basis_count >= 64 {
+            u64::MAX
+        } else {
+            (1_u64 << basis_count) - 1
+        };
+        let limit = available.min(maximum_combinations);
+        let mut workspace = ExtensionFieldSearchWorkspace::new(dimension, maximum_degree)?;
+        let mut candidate = vec![0_u64; dimension];
+        let mut previous_gray = 0_u64;
+
+        for index in 1..=limit {
+            let gray = index ^ (index >> 1);
+            let changed = gray ^ previous_gray;
+            let basis_index = changed.trailing_zeros() as usize;
+            if basis_index >= basis_count {
+                break;
+            }
+            for (row, &basis_row) in candidate.iter_mut().zip(self.basis[basis_index].rows()) {
+                *row ^= basis_row;
+            }
+            previous_gray = gray;
+            result.combinations_examined += 1;
+            if packed_is_identity(&candidate) {
+                continue;
+            }
+            workspace.rank_scratch.copy_from_slice(&candidate);
+            if packed_rank_in_place(&mut workspace.rank_scratch, dimension) != dimension {
+                continue;
+            }
+            result.invertible_candidates += 1;
+            workspace.set_generator(&candidate);
+            for (degree, &is_requested) in requested
+                .iter()
+                .enumerate()
+                .take(maximum_degree + 1)
+                .skip(2)
+            {
+                workspace.build_power(&candidate, degree);
+                if !is_requested {
+                    continue;
+                }
+                result.degree_tests += 1;
+                if workspace.has_irreducible_minimal_polynomial(degree) {
+                    result.field = Some(BinaryExtensionField {
+                        generator: PackedBinaryLinearMap::new(dimension, candidate.clone())?,
+                        degree: degree as u8,
+                    });
+                    return Ok(result);
+                }
+            }
+        }
+        Ok(result)
+    }
+}
+
+struct FixedLabelledBinaryReducer {
+    word_count: usize,
+    pivot_to_row: Vec<u8>,
+    pivot_rows: Vec<u64>,
+    row_pivots: Vec<u16>,
+    row_labels: Vec<u64>,
+    scratch: Vec<u64>,
+    row_count: usize,
+}
+
+impl FixedLabelledBinaryReducer {
+    fn new(variable_count: usize, maximum_rows: usize) -> Result<Self, BinaryCommutantError> {
+        let word_count = variable_count.div_ceil(64);
+        let stored_words = maximum_rows
+            .checked_mul(word_count)
+            .ok_or(BinaryCommutantError::ResourceLimit)?;
+        Ok(Self {
+            word_count,
+            pivot_to_row: vec![u8::MAX; variable_count],
+            pivot_rows: vec![0; stored_words],
+            row_pivots: vec![0; maximum_rows],
+            row_labels: vec![0; maximum_rows],
+            scratch: vec![0; word_count],
+            row_count: 0,
+        })
+    }
+
+    fn reset(&mut self) {
+        for &pivot in &self.row_pivots[..self.row_count] {
+            self.pivot_to_row[usize::from(pivot)] = u8::MAX;
+        }
+        self.row_count = 0;
+    }
+
+    fn insert(&mut self, source: &[u64], label: u64) -> bool {
+        let Some((pivot, label)) = self.reduce_to_pivot(source, label) else {
+            return false;
+        };
+        let row = self.row_count;
+        let start = row * self.word_count;
+        self.pivot_rows[start..start + self.word_count].copy_from_slice(&self.scratch);
+        self.row_pivots[row] = pivot as u16;
+        self.row_labels[row] = label;
+        self.pivot_to_row[pivot] = row as u8;
+        self.row_count += 1;
+        true
+    }
+
+    fn dependent_label(&mut self, source: &[u64]) -> Option<u64> {
+        let mut label = 0_u64;
+        self.scratch.copy_from_slice(source);
+        while let Some(pivot) = first_set_bit(&self.scratch) {
+            let row = self.pivot_to_row[pivot];
+            if row == u8::MAX {
+                return None;
+            }
+            let row = usize::from(row);
+            let start = row * self.word_count;
+            for (entry, &reducer) in self
+                .scratch
+                .iter_mut()
+                .zip(&self.pivot_rows[start..start + self.word_count])
+            {
+                *entry ^= reducer;
+            }
+            label ^= self.row_labels[row];
+        }
+        Some(label)
+    }
+
+    fn reduce_to_pivot(&mut self, source: &[u64], mut label: u64) -> Option<(usize, u64)> {
+        self.scratch.copy_from_slice(source);
+        loop {
+            let pivot = first_set_bit(&self.scratch)?;
+            let row = self.pivot_to_row[pivot];
+            if row == u8::MAX {
+                return Some((pivot, label));
+            }
+            let row = usize::from(row);
+            let start = row * self.word_count;
+            for (entry, &reducer) in self
+                .scratch
+                .iter_mut()
+                .zip(&self.pivot_rows[start..start + self.word_count])
+            {
+                *entry ^= reducer;
+            }
+            label ^= self.row_labels[row];
+        }
+    }
+}
+
+struct ExtensionFieldSearchWorkspace {
+    dimension: usize,
+    maximum_degree: usize,
+    word_count: usize,
+    powers: Vec<u64>,
+    flattened_powers: Vec<u64>,
+    rank_scratch: Vec<u64>,
+    reducer: FixedLabelledBinaryReducer,
+}
+
+impl ExtensionFieldSearchWorkspace {
+    fn new(dimension: usize, maximum_degree: usize) -> Result<Self, BinaryCommutantError> {
+        let variable_count = dimension
+            .checked_mul(dimension)
+            .ok_or(BinaryCommutantError::ResourceLimit)?;
+        let word_count = variable_count.div_ceil(64);
+        let power_count = maximum_degree + 1;
+        let power_words = power_count
+            .checked_mul(dimension)
+            .ok_or(BinaryCommutantError::ResourceLimit)?;
+        let flattened_words = power_count
+            .checked_mul(word_count)
+            .ok_or(BinaryCommutantError::ResourceLimit)?;
+        let mut workspace = Self {
+            dimension,
+            maximum_degree,
+            word_count,
+            powers: vec![0; power_words],
+            flattened_powers: vec![0; flattened_words],
+            rank_scratch: vec![0; dimension],
+            reducer: FixedLabelledBinaryReducer::new(variable_count, maximum_degree)?,
+        };
+        for (index, row) in workspace.powers[..dimension].iter_mut().enumerate() {
+            *row = 1_u64 << index;
+        }
+        pack_map_rows_into(
+            &workspace.powers[..dimension],
+            dimension,
+            &mut workspace.flattened_powers[..word_count],
+        );
+        Ok(workspace)
+    }
+
+    fn set_generator(&mut self, generator: &[u64]) {
+        let start = self.dimension;
+        self.powers[start..start + self.dimension].copy_from_slice(generator);
+        let flat_start = self.word_count;
+        pack_map_rows_into(
+            generator,
+            self.dimension,
+            &mut self.flattened_powers[flat_start..flat_start + self.word_count],
+        );
+    }
+
+    fn build_power(&mut self, generator: &[u64], power: usize) {
+        let dimension = self.dimension;
+        debug_assert!((2..=self.maximum_degree).contains(&power));
+        let split = power * dimension;
+        let (previous, current) = self.powers.split_at_mut(split);
+        let left = &previous[split - dimension..split];
+        let output = &mut current[..dimension];
+        for (row, &left_row) in output.iter_mut().zip(left) {
+            *row = packed_composed_row(left_row, generator);
+        }
+        let flat_start = power * self.word_count;
+        pack_map_rows_into(
+            output,
+            dimension,
+            &mut self.flattened_powers[flat_start..flat_start + self.word_count],
+        );
+    }
+
+    fn has_irreducible_minimal_polynomial(&mut self, degree: usize) -> bool {
+        self.reducer.reset();
+        for power in 0..degree {
+            let start = power * self.word_count;
+            if !self.reducer.insert(
+                &self.flattened_powers[start..start + self.word_count],
+                1_u64 << power,
+            ) {
+                return false;
+            }
+        }
+        let start = degree * self.word_count;
+        let Some(coefficients) = self
+            .reducer
+            .dependent_label(&self.flattened_powers[start..start + self.word_count])
+        else {
+            return false;
+        };
+        is_irreducible_binary_polynomial((1_u64 << degree) | coefficients, degree)
     }
 }
 
@@ -1234,6 +1522,19 @@ fn packed_rank_in_place(rows: &mut [u64], columns: usize) -> usize {
     rank
 }
 
+fn pack_map_rows_into(rows: &[u64], dimension: usize, output: &mut [u64]) {
+    output.fill(0);
+    for (row_index, &row) in rows.iter().enumerate() {
+        let mut bits = row;
+        while bits != 0 {
+            let column = bits.trailing_zeros() as usize;
+            let bit_index = row_index * dimension + column;
+            output[bit_index / 64] |= 1_u64 << (bit_index % 64);
+            bits &= bits - 1;
+        }
+    }
+}
+
 #[inline]
 fn packed_composed_row(mut left_row: u64, right_rows: &[u64]) -> u64 {
     let mut row = 0_u64;
@@ -1249,6 +1550,13 @@ fn packed_composed_row(mut left_row: u64, right_rows: &[u64]) -> u64 {
 fn packed_is_idempotent(rows: &[u64]) -> bool {
     rows.iter()
         .all(|&row| packed_composed_row(row, rows) == row)
+}
+
+#[inline]
+fn packed_is_identity(rows: &[u64]) -> bool {
+    rows.iter()
+        .enumerate()
+        .all(|(index, &row)| row == 1_u64 << index)
 }
 
 #[inline]
@@ -1374,6 +1682,78 @@ mod tests {
         let field = certify_binary_extension_field(&action, generator.clone(), 2).unwrap();
         assert_eq!(field.scalar_dimension(), 1);
         verify_binary_extension_field(&action, &field).unwrap();
+    }
+
+    #[test]
+    fn bounded_commutant_search_discovers_f4_without_hot_loop_allocation() {
+        let generator = map(&[0b10, 0b11]);
+        let action = PackedBinaryAction::new(2, vec![generator]).unwrap();
+        let commutant = compile_binary_commutant(&action).unwrap();
+        let search = commutant.search_extension_field(&[2], 4).unwrap();
+        let field = search.field.unwrap();
+        assert_eq!(field.degree(), 2);
+        assert!(search.combinations_examined <= 4);
+        assert!(search.invertible_candidates > 0);
+        assert!(search.degree_tests > 0);
+        verify_binary_extension_field(&action, &field).unwrap();
+    }
+
+    #[test]
+    fn bounded_commutant_search_discovers_f8_and_rejects_product_algebra() {
+        let generator = map(&[0b100, 0b101, 0b010]);
+        let action = PackedBinaryAction::new(3, vec![generator]).unwrap();
+        let commutant = compile_binary_commutant(&action).unwrap();
+        let search = commutant.search_extension_field(&[3, 3], 8).unwrap();
+        let field = search.field.unwrap();
+        assert_eq!(field.degree(), 3);
+        verify_binary_extension_field(&action, &field).unwrap();
+
+        let product_generator = map(&[0b010, 0b011, 0b100]);
+        let product_action = PackedBinaryAction::new(3, vec![product_generator]).unwrap();
+        let product_commutant = compile_binary_commutant(&product_action).unwrap();
+        let product_search = product_commutant
+            .search_extension_field(&[3], 1_u64 << product_commutant.algebra_dimension())
+            .unwrap();
+        assert!(product_search.field.is_none());
+        assert!(product_search.degree_tests > 0);
+    }
+
+    #[test]
+    fn bounded_commutant_search_validates_degrees_and_divisibility() {
+        let action = PackedBinaryAction::new(3, Vec::new()).unwrap();
+        let commutant = compile_binary_commutant(&action).unwrap();
+        assert_eq!(
+            commutant.search_extension_field(&[1], 1).unwrap_err(),
+            BinaryCommutantError::FieldDegree
+        );
+        let search = commutant.search_extension_field(&[2], 1).unwrap();
+        assert!(search.field.is_none());
+        assert_eq!(search.combinations_examined, 0);
+    }
+
+    #[test]
+    fn bounded_commutant_search_matches_exhaustive_two_dimensional_oracle() {
+        for action_bits in 0_u64..16 {
+            let action_generator = map(&[action_bits & 3, action_bits >> 2]);
+            let action = PackedBinaryAction::new(2, vec![action_generator.clone()]).unwrap();
+            let commutant = compile_binary_commutant(&action).unwrap();
+            let search = commutant
+                .search_extension_field(&[2], 1_u64 << commutant.algebra_dimension())
+                .unwrap();
+            let exhaustive_exists = (0_u64..16).any(|candidate_bits| {
+                let candidate = map(&[candidate_bits & 3, candidate_bits >> 2]);
+                candidate.commutes_with(&action_generator)
+                    && certify_binary_extension_field_exhaustive(&action, candidate, 2).is_ok()
+            });
+            assert_eq!(
+                search.field.is_some(),
+                exhaustive_exists,
+                "action={action_bits:#x}"
+            );
+            if let Some(field) = search.field {
+                verify_binary_extension_field(&action, &field).unwrap();
+            }
+        }
     }
 
     #[test]

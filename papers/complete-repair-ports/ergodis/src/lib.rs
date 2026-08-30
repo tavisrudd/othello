@@ -54,7 +54,8 @@ pub use commutant::{
     compile_binary_subspace_action, verify_binary_commutant, verify_binary_css_logical_action,
     verify_binary_extension_field, verify_binary_invariant_split, verify_binary_quotient_action,
     verify_binary_subspace_action, BinaryCommutant, BinaryCommutantError, BinaryExtensionField,
-    BinaryInvariantSplit, PackedBinaryAction, PackedBinaryLinearMap, PackedBinarySubspace,
+    BinaryExtensionFieldSearch, BinaryInvariantSplit, PackedBinaryAction, PackedBinaryLinearMap,
+    PackedBinarySubspace,
 };
 pub use composition::{
     CompositionAnswer, CompositionError, CompositionTable, CompositionTower, CostTable,
