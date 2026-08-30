@@ -477,6 +477,36 @@ fn bitmap_insert(bitmap: &mut [u64], bit: u32) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::field::Prime;
+
+    type Point = [u8; 2];
+
+    fn collinear<const Q: u8>(left: Point, middle: Point, right: Point) -> bool {
+        let dx_left = Prime::<Q>::sub(middle[0], left[0]);
+        let dy_left = Prime::<Q>::sub(middle[1], left[1]);
+        let dx_right = Prime::<Q>::sub(right[0], left[0]);
+        let dy_right = Prime::<Q>::sub(right[1], left[1]);
+        Prime::<Q>::mul(dx_left, dy_right) == Prime::<Q>::mul(dy_left, dx_right)
+    }
+
+    fn projective_charge_edges<const Q: u8>(
+        causal: Point,
+        old_labels: &[Point],
+        fibres: &[&[(Point, bool)]],
+    ) -> Vec<(u32, u32)> {
+        let mut edges = Vec::new();
+        for (defect, attacks) in fibres.iter().enumerate() {
+            for (label, &old_label) in old_labels.iter().enumerate() {
+                if attacks.iter().any(|&(reply, secant_deleted)| {
+                    old_label == reply
+                        || (secant_deleted && collinear::<Q>(causal, reply, old_label))
+                }) {
+                    edges.push((defect as u32, label as u32));
+                }
+            }
+        }
+        edges
+    }
 
     fn brute_cardinality(graph: &DenseHallGraph) -> u32 {
         let base = graph.right_count as u64 + 1;
@@ -574,5 +604,67 @@ mod tests {
         assert!(result.deficient_left_contains(1));
         assert!(result.deficient_right_contains(1));
         verify_hall_result(&causal_only, &result).unwrap();
+    }
+
+    #[test]
+    fn c80_deletion_secants_lift_reply_resources_to_distinct_old_labels() {
+        let q11_labels = [[3, 7], [4, 4], [4, 10], [6, 0], [7, 0], [7, 10], [8, 9]];
+        let q11_first = [([2, 9], true), ([7, 10], false)];
+        let q11_second = [([7, 10], false)];
+        let q11_edges =
+            projective_charge_edges::<11>([7, 10], &q11_labels, &[&q11_first, &q11_second]);
+        let q11 = DenseHallGraph::new(2, q11_labels.len() as u32, q11_edges).unwrap();
+        let mut workspace = HallWorkspace::new(2, 27).unwrap();
+        let result = solve_hall(&q11, &mut workspace).unwrap();
+        assert!(result.is_saturated());
+        assert_eq!(result.matched_right(0), Some(0)); // (3,7), on the deletion secant.
+        assert_eq!(result.matched_right(1), Some(5)); // causal label (7,10).
+
+        let q23_type_i_labels = [
+            [5, 2],
+            [5, 9],
+            [5, 10],
+            [6, 18],
+            [6, 21],
+            [9, 10],
+            [10, 13],
+            [11, 3],
+            [11, 9],
+            [11, 16],
+            [11, 18],
+            [12, 15],
+            [12, 17],
+            [14, 11],
+            [14, 16],
+            [15, 2],
+            [16, 13],
+            [16, 17],
+            [16, 22],
+            [17, 19],
+            [19, 3],
+            [19, 14],
+            [20, 13],
+            [20, 14],
+            [21, 16],
+            [22, 14],
+            [22, 18],
+        ];
+        let type_i_attack = [([5, 13], true)];
+        let type_i_edges =
+            projective_charge_edges::<23>([12, 15], &q23_type_i_labels, &[&type_i_attack]);
+        assert_eq!(type_i_edges.len(), 3);
+        let type_i = DenseHallGraph::new(1, q23_type_i_labels.len() as u32, type_i_edges).unwrap();
+        let result = solve_hall(&type_i, &mut workspace).unwrap();
+        assert!(result.is_saturated());
+
+        let q23_type_ii_labels = [[20, 17], [22, 20]];
+        let type_ii_attack = [([8, 20], true)];
+        let type_ii_edges =
+            projective_charge_edges::<23>([20, 17], &q23_type_ii_labels, &[&type_ii_attack]);
+        assert_eq!(type_ii_edges, [(0, 0)]);
+        let type_ii = DenseHallGraph::new(1, 2, type_ii_edges).unwrap();
+        let result = solve_hall(&type_ii, &mut workspace).unwrap();
+        assert!(result.is_saturated());
+        // Type III has the identical local state and causal move.
     }
 }
