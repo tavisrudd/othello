@@ -12,6 +12,7 @@ R2_ELITE_01 = {
     "group": "Dic_11",
     "modulus": 22,
     "twist": 11,
+    "reported_qdistrnd_upper": 20,
     "a": [
         [(8, 0), (1, 0), (15, 0)],
         [(7, 1), (2, 0), (18, 1)],
@@ -27,6 +28,29 @@ R2_ELITE_01 = {
         [(9, 0), (6, 1), (1, 1)],
     ],
 }
+
+R2_ELITE_02 = {
+    "group": "D_22",
+    "modulus": 22,
+    "twist": 0,
+    "reported_qdistrnd_upper": 16,
+    "a": [
+        [(12, 0), (3, 1), (17, 0)],
+        [(8, 0), (0, 1), (15, 0)],
+        [(4, 1), (20, 1), (13, 1)],
+        [(0, 0), (17, 1), (11, 0)],
+        [(19, 0), (14, 0), (9, 0)],
+    ],
+    "b": [
+        [(21, 0), (1, 0), (10, 0)],
+        [(12, 0), (0, 0), (3, 0)],
+        [(3, 0), (14, 0), (3, 0)],
+        [(1, 1), (6, 1), (19, 0)],
+        [(14, 0), (5, 0), (11, 0)],
+    ],
+}
+
+CANDIDATES = {"r2elite01": R2_ELITE_01, "r2elite02": R2_ELITE_02}
 
 
 def multiply(left: tuple[int, int], right: tuple[int, int], modulus: int, twist: int) -> tuple[int, int]:
@@ -207,12 +231,12 @@ def build_checks(candidate: dict[str, object]) -> tuple[list[int], list[int], in
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--candidate", choices=("r2elite01",), required=True)
+    parser.add_argument("--candidate", choices=tuple(CANDIDATES), required=True)
     parser.add_argument("--direction", choices=("x", "z"), default="x")
     parser.add_argument("--maximum-weight", type=int, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
-    candidate = R2_ELITE_01
+    candidate = CANDIDATES[args.candidate]
     hx, hz, columns, order = build_checks(candidate)
     physical, stabilizers = (hx, hz) if args.direction == "x" else (hz, hx)
     physical_basis = row_basis(physical)
@@ -226,7 +250,7 @@ def main() -> int:
     if component_count != 1:
         raise RuntimeError("combined X/Z support graph is decomposable")
     output = {
-        "label": f"sce-r2elite01-{args.direction}",
+        "label": f"sce-{args.candidate}-{args.direction}",
         "coordinate_count": columns,
         "physical_checks": sparse(physical),
         "logical_observations": sparse(logical),
@@ -242,6 +266,7 @@ def main() -> int:
             "physical_rank": len(physical_basis),
             "stabilizer_rank": len(stabilizer_basis),
             "logical_observation_rank": len(logical),
+            "reported_qdistrnd_upper": candidate["reported_qdistrnd_upper"],
             "coordinate_orbits_claimed": columns,
             "anchor_policy": "all coordinates; no non-abelian orbit reduction assumed",
             "combined_support_components": component_count,

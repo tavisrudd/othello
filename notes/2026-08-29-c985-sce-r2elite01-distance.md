@@ -76,8 +76,8 @@ cache artifacts are about 34.7 MB each and remain cache-only.
 
 Tracked files:
 
-- `ergodis/python/generate_sce_lp_native.py`, 9,581 bytes,
-  SHA-256 `cc369e36def2ab8a02a8be4f1e9f0cee127f14b2a5e5ba3b7a11ddeafe7dc2c9`;
+- `ergodis/python/generate_sce_lp_native.py`, 10,287 bytes,
+  SHA-256 `9bce51d855b9b9777dc2dc87c15384e5e3bde590d50f030bf99b67307a8939e7`;
 - `ergodis/evidence/c985-sce-r2elite01-x-w14.jsonl`, 7,546 bytes,
   SHA-256 `a7ac40f739c56603278685e0ff47cadffd8ccfa86f21937d4c15214cc94d427d`;
 - `ergodis/evidence/c985-sce-r2elite01-z-w14.jsonl`, 7,544 bytes,
@@ -85,10 +85,10 @@ Tracked files:
 
 Canonical generated inputs are cache-only because they are deterministic 96--115 KB expansions:
 
-- X: 115,015 bytes, SHA-256
-  `3a6cbbe12647e8bf0570a9b2407d6713cf5042552ba5baf8a38faf5d4f23d427`;
-- Z: 96,616 bytes, SHA-256
-  `34e546d3768218d177a567212b37a65a4eab5f90c384fd8096d69ee09fe3c1d6`.
+- X: 115,044 bytes, SHA-256
+  `1eb7a487b1c3e4fbed8a454e836bad94223d3ae8b1679c737e81af93e8458692`;
+- Z: 96,645 bytes, SHA-256
+  `2402ceb3b86053fd9a419ea945a4c9c7321eb7ce142cc1060bf71bb528d6fc40`.
 
 Replay from the ergodis root, using disk-backed cache rather than `/tmp`:
 

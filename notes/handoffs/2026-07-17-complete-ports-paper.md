@@ -422,6 +422,15 @@ Sequel research:
   in `{16,18,20}` conditional on reproducing the source's randomized weight-20
   upper bound; verified non-abelian coordinate actions and full decomposition
   classification are the main theorem-driven acceleration gates.
+  The adjacent
+  [SCE R2Elite02 exact certificate](../2026-08-29-c985-sce-r2elite02-exact-distance.md)
+  closes the stronger immediate target: it independently reconstructs the
+  published `[[1496,198,<=16]]` dihedral lifted product, exhausts both CSS
+  directions below 16, exhausts X through 16, and independently replays a
+  weight-16 Z logical.  Hence the code is exactly `[[1496,198,16]]`, with
+  exact figure of merit `576/17 = 33.88235...`, 1.765x BB360.  The radius-16
+  runs examine 116.97 billion candidates in 647.943 seconds combined at the
+  same low-memory huge backend; no non-abelian orbit reduction is assumed.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
