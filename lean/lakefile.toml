@@ -1,5 +1,5 @@
 name = "NodeKayles"
-defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens", "FiniteGeom", "RepairCodes", "RepairPorts", "DihedralSchreier", "RelativeConicArcs", "TavisRuddFiniteGeom"]
+defaultTargets = ["NodeKayles", "Sumfree", "CapGame", "ProjectiveCap", "Queens", "FiniteGeom", "RepairCodes", "RepairPorts", "DihedralSchreier", "RelativeConicArcs", "TavisRuddFiniteGeom", "HadamardMatrices"]
 
 # mathlib (Finset, Equiv, card lemmas; Nat.find/Nat.xor for the self-contained Grundy layer).
 # Note: mathlib v4.32 no longer ships SetTheory/Game/ (PGame/Sprague–Grundy were extracted to
@@ -52,3 +52,7 @@ name = "TavisRuddFiniteGeom"
 roots = [
   "TavisRuddFiniteGeom.Papers.Q13PassantCode.SemanticGate",
 ]
+
+# Hadamard matrices built from circulant sequences by the Goethals–Seidel array.
+[[lean_lib]]
+name = "HadamardMatrices"

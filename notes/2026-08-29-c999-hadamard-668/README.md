@@ -226,6 +226,119 @@ These are the twelve orders the poster claimed: 668, 716, 892, 1132, 1244, 1388,
 on — which is why a naive reading of the header appears to disagree with the
 announcement by 4 to 28.
 
+## Lean check
+
+Order 668 is now proved orthogonal in Lean, from the 664 sequence characters
+rather than from the 446,224 matrix entries. Lean builds the matrix itself, so
+coverage is complete.
+
+### Extracting the sequences
+
+`extract_gs_sequences.py` reads `evidence/H668.txt`, reads off the 4×4 corner,
+the border-row block signs, the four slab column prefixes, and the four
+length-166 sequences `A`, `B`, `C`, `D`, then rebuilds the whole 668×668 matrix
+from that data alone and asserts it equals the file entry for entry.
+
+```bash
+cd notes/2026-08-29-c999-hadamard-668
+uv run --no-project python3 extract_gs_sequences.py
+```
+
+Result on 2026-08-29: exact match. The extracted data is
+
+| item                           | value                                 |
+|--------------------------------|---------------------------------------|
+| corner (rows 0–3, columns 0–3) | `-++-`, `+-+-`, `++--`, `----`        |
+| border-row block signs         | `---+`, `--+-`, `-+--`, `+---`        |
+| slab column prefixes           | `+++-`, `--+-`, `-+--`, `+---`        |
+| row sums of `A,B,C,D`          | 2, 0, 0, 0                            |
+| `Σᵢ PAF_i(s)`                  | 664 at `s = 0`, `-4` at every `s ≠ 0` |
+
+| sequence | sha256 of its `+`/`-` string                                       |
+|----------|--------------------------------------------------------------------|
+| `A`      | `ab43e555e591a019a21a6752c4683f9f1c99b9b8e58a27d00a8ae22559d419b5` |
+| `B`      | `6dbc97cc55305d0f7cc155f64ff47655f6f806420cfe622dd949396e00e33e0c` |
+| `C`      | `0d6b42c59bb5f4c39e1433ab5590c6c46549544bee2eb35103d45fe232420f4d` |
+| `D`      | `b0b88655279088ddd1d8a3d539d9945d32073873bb07ba82a4463e5a67453b5f` |
+
+The concatenation `A‖B‖C‖D` has sha256
+`ffa2bf2b506ad9c51d3d1e26299c1932cfe961ef7e8f93b77385421684494611`.
+
+The block structure differs in one respect from the textbook Goethals–Seidel
+array: the six blocks of the lower-right 3×3 corner carry an extra cyclic shift
+by 2, so block `(k,l)` there is back-circulant with entries `x(i+j+2)` instead of
+`x(i+j)`. That is the operation the `had668` crate detects but does not name.
+The shift is harmless — it cancels identically in every cross term — and the
+Lean development carries it as a free parameter `e`, recovering the classical
+array at `e = 0`.
+
+### Lean modules
+
+Under `lean/`, in the new library `HadamardMatrices`:
+
+| module                                         | contents                                                                                                  |
+|------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `HadamardMatrices/BorderedGoethalsSeidel.lean` | the general array over four sequences of length `m` with inner shift `e`, and the orthogonality criterion |
+| `HadamardMatrices/Order668/Sequences.lean`     | the four sequences as literals, their `±1` values and row sums                                            |
+| `HadamardMatrices/Order668/Correlations.lean`  | the autocorrelation identity `Σᵢ PAF_i(s) = -4` for `s ≠ 0`                                               |
+| `HadamardMatrices/Order668/Orthogonality.lean` | the terminal statements                                                                                   |
+| `HadamardMatrices/AxiomAudit.lean`             | the `#print axioms` audit                                                                                 |
+
+The Lean list literals in `Sequences.lean` were checked entry by entry against
+the sequences printed by `extract_gs_sequences.py`; all four match.
+
+The terminal declaration is
+
+```
+HadamardMatrices.Order668.matrixOrder668_mul_transpose :
+  matrixOrder668 * matrixOrder668ᵀ = (668 : ℤ) • (1 : Matrix (ArrayIndex 166) (ArrayIndex 166) ℤ)
+```
+
+with `HadamardMatrices.Order668.matrixOrder668_entry_sq` (every entry is ±1),
+`HadamardMatrices.Order668.card_arrayIndex_order668` (the index set has 668
+elements), and `HadamardMatrices.Order668.reindex_mul_transpose` (the same
+identity over `Fin 668`, along any bijection of the index set). Together these
+say `matrixOrder668` is a Hadamard matrix of order 668.
+
+### What is checked how
+
+The orthogonality criterion `HadamardMatrices.borderedArray_mul_transpose` is ordinary
+algebra: sums over `ZMod m` reindexed by translations and reflections, plus
+`decide` over the 4×4 sign tables. The two finite inputs at `m = 166` — the ±1
+values and row sums, and the 165 nonzero-shift autocorrelation identities, a sum
+of 664 products each — are exhaustive checks discharged by **kernel reduction**,
+not native evaluation. To keep the autocorrelation check inside the kernel's
+budget the sequences are also presented as the binary digits of a single natural
+number, so a lookup is one arithmetic operation instead of a list traversal;
+`sequenceA_eq_packed` and its three siblings check entry by entry that the two
+presentations agree, so the packed form carries no independent data.
+
+Axiom output, verbatim:
+
+```
+'HadamardMatrices.Order668.matrixOrder668_mul_transpose' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadamardMatrices.Order668.matrixOrder668_entry_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadamardMatrices.Order668.card_arrayIndex_order668' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadamardMatrices.Order668.reindex_mul_transpose' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadamardMatrices.borderedArray_mul_transpose' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadamardMatrices.Order668.pafSum_eq_neg_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+Only Lean's three standard axioms: no `sorryAx`, and no `Lean.ofReduceBool`,
+which is what a `native_decide` step would have introduced.
+
+### Replay
+
+```bash
+cd /home/tavis/src/othello
+lean/scripts/lean-build-queue.py build HadamardMatrices --cores 20-23
+lean/scripts/guarded-lean HadamardMatrices/AxiomAudit.lean
+```
+
+The first command builds the library (about a minute, dominated by the
+autocorrelation check; peak resident set about 5 GB on that module). The second
+prints the axiom block above.
+
 ## Security note
 
 The poster's script writes to `/tmp/r`, `/tmp/p` and `/tmp/q` and runs
