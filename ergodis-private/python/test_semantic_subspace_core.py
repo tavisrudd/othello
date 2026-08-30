@@ -1,6 +1,7 @@
 import unittest
 
 from semantic_subspace_core import (
+    enumerate_affine_subspaces,
     linearized_exponents,
     prime_field_basis,
     verify_prime_subspace,
@@ -22,6 +23,10 @@ class SemanticSubspaceCoreTest(unittest.TestCase):
         basis = prime_field_basis(elements, coordinates, 3)
         self.assertEqual(basis, [1, 3])
         self.assertTrue(verify_prime_subspace(elements, basis, add, 3))
+        self.assertEqual(
+            len(enumerate_affine_subspaces(elements, 1, coordinates, add, 3)),
+            12,
+        )
 
     def test_rejects_non_linearized_polynomial(self) -> None:
         self.assertEqual(linearized_exponents([0, 2, 0, 1, 0, 0, 0, 0, 0, 1], 3), [1, 3, 9])

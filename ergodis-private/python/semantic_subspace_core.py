@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Iterable, Sequence
+from itertools import combinations
 
 
 def prime_field_basis(
@@ -51,6 +52,43 @@ def verify_prime_subspace(
             multiple = add(multiple, basis_element)
         expected = expanded
     return expected == set(elements)
+
+
+def prime_span(
+    basis: Sequence[int], add: Callable[[int, int], int], characteristic: int
+) -> set[int]:
+    span = {0}
+    for basis_element in basis:
+        expanded = set()
+        multiple = 0
+        for _ in range(characteristic):
+            expanded.update(add(value, multiple) for value in span)
+            multiple = add(multiple, basis_element)
+        span = expanded
+    return span
+
+
+def enumerate_affine_subspaces(
+    elements: Iterable[int],
+    rank: int,
+    coordinates: Callable[[int], Sequence[int]],
+    add: Callable[[int, int], int],
+    characteristic: int,
+) -> list[tuple[int, ...]]:
+    """Enumerate distinct affine rank-``rank`` prime-field subspaces."""
+
+    universe = tuple(sorted(set(elements)))
+    linear_subspaces: set[tuple[int, ...]] = set()
+    for candidates in combinations((element for element in universe if element != 0), rank):
+        basis = prime_field_basis(candidates, coordinates, characteristic)
+        if len(basis) == rank:
+            linear_subspaces.add(tuple(sorted(prime_span(basis, add, characteristic))))
+    affine_subspaces = {
+        tuple(sorted(add(shift, value) for value in subspace))
+        for subspace in linear_subspaces
+        for shift in universe
+    }
+    return sorted(affine_subspaces)
 
 
 def linearized_exponents(coefficients_low_to_high: Sequence[int], characteristic: int) -> list[int]:

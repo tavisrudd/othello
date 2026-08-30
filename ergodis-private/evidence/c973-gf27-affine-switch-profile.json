@@ -1,0 +1,20 @@
+{
+  "affine_F3_planes": 39,
+  "all_hankel_witnesses_replayed": true,
+  "maximum_plane_overlap_histogram": {
+    "7": 175,
+    "8": 24,
+    "9": 1
+  },
+  "maximum_replacement_distance": 2,
+  "problem": "C973 GF(27) certified switch witness sample",
+  "replacement_distance_histogram": {
+    "0": 1,
+    "1": 24,
+    "2": 175
+  },
+  "schema": "ergodis.semantic-affine-switch-profile.v1",
+  "source": "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/certify-witness-sample.tsv",
+  "source_sha256": "5dc58017fd6e0fe48140f515caa742a8491d8999272b5836c2304a9f46cdfa6a",
+  "witnesses": 200
+}
