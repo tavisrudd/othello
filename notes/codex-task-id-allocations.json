@@ -3860,8 +3860,17 @@
       "last": 1006,
       "purpose": "bounded-degree Clebsch publication successor and extremal-shell math-first task with publication successor",
       "sequence": 429
+    },
+    {
+      "count": 1,
+      "first": 1007,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 1007,
+      "purpose": "general odd-order arc line bound and component-sensitive algebraic containment envelope",
+      "sequence": 430
     }
   ],
-  "next_id": 1007,
+  "next_id": 1008,
   "schema": "codex-task-id-allocations-v1"
 }
