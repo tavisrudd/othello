@@ -154,6 +154,14 @@ three-op plan: `match` profiles all 6,890 weighted labelled locators, `reduce`
 finds the 2,106-object ambient minimum, and `canonicalize` proves that minimum
 is one cap orbit.  Their intersection is exactly zero.
 
+The first five-run counter baseline is compute-bound and stable: 0.17965 s,
+873.3 M cycles, 3.905 G instructions, 153.2 M branches, 0.713 M branch misses,
+and only 9.2 K cache misses.  This is about 26.1 million ambient objects/s,
+186 cycles and 833 instructions per object, IPC 4.47, and a 0.47% branch-miss
+rate.  The next kernel optimization target is therefore instruction work in
+the 39-mask overlap reduction (batched SIMD/popcount or a theorem-derived
+smaller family), not memory layout or branch prediction.
+
 ## Python's continuing role
 
 Python is not removed.  It remains the place to create a new feature in
