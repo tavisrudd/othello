@@ -50,6 +50,14 @@ automated engine should surface the candidate lemma
 
 without requiring a human to hand-write three successive Python probes.
 
+The next canonicalization pass sharpens this further.  All 2,106 overlap-four
+sets are nine-caps, and the affine group `AGL(3,3)` is transitive on them: its
+order is 303,264, the orbit has size 2,106, and the stabilizer has order 144.
+Thus the hostile stratum also has semantic size one.  The proof target becomes
+an affine-action calculation showing that the orbit of one cap normal form
+cannot satisfy `g2=g3=0`.  Mining plans must therefore canonicalize nearest
+negative strata as aggressively as positive witnesses.
+
 ## Plan algebra
 
 The plan language has exactly three transform verbs:
@@ -72,6 +80,7 @@ match affine_subspace(rank=2, metric=max_overlap) as plane
 reduce histogram(plane.overlap), minima(label=g2_g3_zero)
 canonicalize under [translation, scaling, frobenius]
 canonicalize fit divided_power_orbit(parameter=z4)
+canonicalize near_misses under AGL(3,3)
 verify replay_hankel, action_preservation, source_hash
 sink lemma_packet, bounded_exceptions
 ```
@@ -135,6 +144,11 @@ formula formatting, and orbit narrative never execute in worker loops.
 `semantic_sets.rs` is the first Rust kernel: it profiles maximum overlap with a
 precompiled mask family and iteratively enumerates fixed-cardinality subsets.
 Both steady-state loops allocate nothing and use no recursion.
+`semantic-affine-census` is the first end-to-end `match/reduce/canonicalize`
+adapter.  In under one second including the release-build check on the current
+host, it streams all 4,686,825 masks through the overlap reducer, recognizes
+the minimum stratum as caps, and closes its affine orbit.  The hot census loop
+allocates nothing; only precomputation and the pre-sized orbit set allocate.
 
 ## Python's continuing role
 
@@ -193,3 +207,11 @@ from becoming the permanent execution architecture.
 Vibe: the architecture is now clear and grounded in three different
 certificate modalities; the risk is overbuilding the recipe language before
 two more real campaigns force its minimal shape.
+
+Replay the landed ambient census with:
+
+```bash
+cargo run --release --manifest-path ergodis-private/Cargo.toml \
+  --bin semantic_affine_census -- \
+  --output /path/to/create-new.json
+```

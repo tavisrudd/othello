@@ -321,6 +321,23 @@ generator artifact to a plausible filtration of the full split-locator
 variety.  A worthwhile theorem target is to derive the bound four from
 `g2=g3=0`, then identify distance two as the unique semilinear extremal orbit.
 
+The exact ambient complement also canonicalizes cleanly.  Among all
+`C(27,9)=4,686,825` nine-sets, exactly 2,106 have maximum plane overlap four;
+every one is a nine-cap.  Applying all 303,264 affine transformations to the
+first cap produces exactly those 2,106 masks, with stabilizer order 144.  Thus
+there is one hostile `AGL(3,3)` orbit.  The most economical proof of the
+five-coplanar-point lemma is now to choose one cap normal form, compute the
+affine transformation law of `(g2,g3)`, and prove that `(0,0)` is absent on
+that orbit.  This is a much smaller target than classifying 6,890 positive
+locators.
+
+The ambient claim is now reproduced by the Rust semantic engine rather than a
+one-off Python loop.  `semantic-affine-census` compiles the 39 planes and 117
+lines to `u64` masks, streams all 4,686,825 nine-sets through the
+allocation-free overlap reducer, recognizes every minimum object as a cap,
+and canonicalizes the first cap under `AGL(3,3)`.  Its compact result is
+`ergodis-private/evidence/gf27-affine-nine-set-census.json`.
+
 The broader PRS route is digit-first rather than field-first: compile each
 carrier extension into kernel state, quotient `E tensor E^(1)` orbit type,
 extension-leakage cocycle, marker/root exclusions, and switch margin.  If this
@@ -426,6 +443,10 @@ lowered to an explicit stack before input-scaled use.
 - **Found:** all 6,890 split `e_3` locators, including 6,812 outside the switch
   category, have affine-plane replacement distance at most four; the 78 good
   switches are exactly the distance-two stratum.
+- **Found:** the only ambient obstruction to five coplanar points is one
+  2,106-element affine orbit of nine-caps (stabilizer 144).  A source-language
+  affine-action exclusion of `g2=g3=0` would turn the exact census into a
+  structural theorem.
 
 **EJ.** A successful C896 state quotient would provide the first literal
 weighted-automaton/minimal-realization instance for the broader Ergodis thesis.
