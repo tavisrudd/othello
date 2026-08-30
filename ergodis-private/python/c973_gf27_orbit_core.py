@@ -66,6 +66,21 @@ def canonical_support(support: tuple[int, ...]) -> tuple[int, ...]:
     return min(scale_support(support, scalar) for scalar in range(1, 27))
 
 
+def frobenius_support(support: tuple[int, ...], power: int) -> tuple[int, ...]:
+    result = support
+    for _ in range(power % 3):
+        result = tuple(sorted(mul(mul(point, point), point) for point in result))
+    return result
+
+
+def semilinear_orbit(support: tuple[int, ...]) -> set[tuple[int, ...]]:
+    return {
+        scale_support(frobenius_support(support, power), scalar)
+        for power in range(3)
+        for scalar in range(1, 27)
+    }
+
+
 def extract(source: Path) -> dict[str, object]:
     source_bytes = source.read_bytes()
     rows: list[tuple[str, tuple[int, ...]]] = []
@@ -105,6 +120,25 @@ def extract(source: Path) -> dict[str, object]:
             }
         )
 
+    semilinear_groups: list[dict[str, object]] = []
+    unseen = set(support_set)
+    while unseen:
+        representative = min(unseen)
+        orbit = semilinear_orbit(representative)
+        if not orbit <= support_set:
+            raise ValueError("input does not contain a complete semilinear orbit")
+        unseen -= orbit
+        semilinear_groups.append(
+            {
+                "representative": list(representative),
+                "orbit_size": len(orbit),
+                "frobenius_cycle": [
+                    list(canonical_support(frobenius_support(representative, power)))
+                    for power in range(3)
+                ],
+            }
+        )
+
     return {
         "schema": "ergodis.semantic-orbit-core.v1",
         "problem": "C973 GF(27) extremal e3 switch witnesses",
@@ -116,9 +150,12 @@ def extract(source: Path) -> dict[str, object]:
         "torus_orbits": len(orbits),
         "compression_ratio": len(rows) / len(orbits),
         "orbits": orbits,
+        "semilinear_orbits": len(semilinear_groups),
+        "semilinear_compression_ratio": len(rows) / len(semilinear_groups),
+        "semilinear_orbit_cores": semilinear_groups,
         "proof_target": (
-            "verify the three representative switch identities and prove that nonzero "
-            "scalar multiplication preserves admissibility and closure"
+            "verify one representative switch identity and prove that nonzero scalar "
+            "multiplication and field Frobenius preserve admissibility and closure"
         ),
     }
 

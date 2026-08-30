@@ -223,15 +223,17 @@ quantify over the certified reply predicate, not every complete exchange.
 
 The GF(27) switch sweep is a high-value orbit-core control.  Its global minimum
 is 78 good candidates, attained on 27 translated extremal syndromes.  For the
-normalized `e_3` fibre, the 78 explicit nine-point witnesses compress exactly
-to three nonzero-scalar orbits of size 26, one for each conjugate plane label
-`l1,l2,l3`.  The independent adapter rebuilds `GF(27)`, checks that every
-support gives a monic split locator with `g_2=g_3=0`, and verifies complete
-orbit coverage.  The compression is therefore 78 witnesses to three seeds,
-not a fitted statistical pattern.
+normalized `e_3` fibre, the 78 explicit nine-point witnesses first compress to
+three nonzero-scalar orbits of size 26, one for each conjugate plane label
+`l1,l2,l3`.  Those three representatives are themselves a three-cycle under
+field Frobenius.  Hence all 78 witnesses form one semilinear orbit.  The
+independent adapter rebuilds `GF(27)`, checks that every support gives a monic
+split locator with `g_2=g_3=0`, and verifies complete torus and Frobenius orbit
+coverage.  The exact semantic certificate is therefore one seed plus
+equivariance, a 78-fold compression rather than a fitted statistical pattern.
 
-This sharpens the structural target.  Prove the three seed identities once,
-prove torus equivariance, then prove that translation reduces every extremal
+This sharpens the structural target.  Verify one seed identity, prove
+semilinear equivariance, then prove that translation reduces every extremal
 syndrome to the normalized fibre.  That would turn the worst 27-by-78 portion
 of the finite certificate into one small lemma packet.  The remaining step is
 the uniform lower bound away from the extremal orbit; the existing split and
@@ -329,7 +331,8 @@ lowered to an explicit stack before input-scaled use.
   of the sampled certified q11 replies creates a genuinely new defect; q13 has
   596 such certified replies and all satisfy Hall.
 - **Found:** the PRS `e_3` extremal switch certificate has exact semantic size
-  three after torus quotient, a 26-fold reduction with independent replay.
+  one after semilinear quotient: three torus orbits are a Frobenius cycle, a
+  78-fold reduction with independent replay.
 - **Open:** whether translation plus those three representatives proves all 27
   extremal fibres, and whether the nonextremal margin admits one uniform
   character-sum bound.

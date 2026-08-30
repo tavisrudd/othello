@@ -54,8 +54,21 @@
     }
   ],
   "problem": "C973 GF(27) extremal e3 switch witnesses",
-  "proof_target": "verify the three representative switch identities and prove that nonzero scalar multiplication preserves admissibility and closure",
+  "proof_target": "verify one representative switch identity and prove that nonzero scalar multiplication and field Frobenius preserve admissibility and closure",
   "schema": "ergodis.semantic-orbit-core.v1",
+  "semilinear_compression_ratio": 78.0,
+  "semilinear_orbit_cores": [
+    {
+      "frobenius_cycle": [
+        [0, 1, 2, 3, 12, 13, 14, 19, 25],
+        [0, 1, 2, 4, 9, 10, 11, 20, 21],
+        [0, 1, 2, 5, 15, 16, 17, 22, 24]
+      ],
+      "orbit_size": 78,
+      "representative": [0, 1, 2, 3, 12, 13, 14, 19, 25]
+    }
+  ],
+  "semilinear_orbits": 1,
   "source": "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/e3-good78.tsv",
   "source_sha256": "07e4b937b59a8e3b3b054c5eaec08d4fc15dbc95c66a3bbabf6a89aca5c3c5bc",
   "torus_orbits": 3

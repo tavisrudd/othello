@@ -22,11 +22,14 @@ class C973Gf27OrbitCoreTest(unittest.TestCase):
         self.assertEqual(result["input_witnesses"], 78)
         self.assertEqual(result["torus_orbits"], 3)
         self.assertEqual(result["compression_ratio"], 26.0)
+        self.assertEqual(result["semilinear_orbits"], 1)
+        self.assertEqual(result["semilinear_compression_ratio"], 78.0)
         self.assertEqual(
             {orbit["lambda_label"] for orbit in result["orbits"]},
             {"l1", "l2", "l3"},
         )
         self.assertTrue(all(orbit["orbit_size"] == 26 for orbit in result["orbits"]))
+        self.assertEqual(result["semilinear_orbit_cores"][0]["orbit_size"], 78)
 
 
 if __name__ == "__main__":
