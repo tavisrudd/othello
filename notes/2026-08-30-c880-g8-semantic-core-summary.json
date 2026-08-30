@@ -1,0 +1,30 @@
+{
+  "schema": "c880-g8-semantic-core-summary/v1",
+  "exact_size": 16,
+  "input_clauses": 322844,
+  "core_clauses": 82368,
+  "core_cnf_sha256": "40979953f4bb1229cc069d90aefe02b4cc226c78aececf1afeb470b4c7b6383e",
+  "semantic_core_sha256": "3765bb10bc1cf4a3be23900343a208fbaa8d5c20feeb762a7cb38e7b5ca3a378",
+  "used_cut_groups": {
+    "total": 94,
+    "by_smaller_side": {"1": 6, "2": 7, "3": 50, "4": 31}
+  },
+  "context_masks": {
+    "total": 27139,
+    "core_used": 10159,
+    "census": [
+      {"side_size": 1, "weight": 9, "count": 280},
+      {"side_size": 1, "weight": 11, "count": 168},
+      {"side_size": 1, "weight": 15, "count": 56},
+      {"side_size": 2, "weight": 12, "count": 280},
+      {"side_size": 2, "weight": 14, "count": 6300},
+      {"side_size": 2, "weight": 16, "count": 18480},
+      {"side_size": 4, "weight": 16, "count": 1575}
+    ]
+  },
+  "two_stratum_ablation": [
+    {"retained": [2, 3], "clauses": 300797, "sat": true, "failed_cut_types": {"4": 1}},
+    {"retained": [2, 4], "clauses": 290780, "sat": true, "failed_cut_types": {"3": 2}},
+    {"retained": [3, 4], "clauses": 308840, "sat": true, "failed_cut_types": {"2": 3}}
+  ]
+}

@@ -19,6 +19,16 @@ end in the 2026-08-19 cost-per-bit report and confirms that the previous upper
 witness was optimal. Report and compact certificates:
 `notes/2026-08-30-c880-exact-eight-point-attachment.md`.
 
+**2026-08-30 structural extraction follow-on:** compiler provenance, checked
+input-core lifting, semantic slicing, and invariant near-miss profiling are now
+implemented privately.  The proof has been reduced to a precise candidate
+theorem: under the point-context conditions, the \(2+6\), \(3+5\), and
+\(4+4\) cut strata are jointly inconsistent at size 16, although every pair
+of strata is satisfiable.  This is not yet a short human proof.  The next move
+is orbit classification of those three two-stratum near-miss families, then an
+invariant three-stratum incompatibility lemma.  Report:
+`notes/2026-08-30-c880-certificate-to-structural-theorem.md`.
+
 **2026-08-19: the nonadaptive bracket narrowed by a factor 8/3 from above.**
 It now reads \(0.616\,n^2\le\mathrm{minimum}(n)\le\frac98n^2+O(n)\), a factor of
 1.827 rather than the 4.87 recorded below. A nonadaptive family decomposes as a
