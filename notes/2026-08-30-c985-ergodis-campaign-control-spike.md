@@ -23,7 +23,10 @@ plan identities, and each lowered plan can be fetched only against that exact
 epoch. Activation and deactivation are epoch-atomic. A solver can therefore
 compile into an inactive preallocated arena and swap at a later safe point,
 without socket checks, JSON, or allocation in the node loop. No domain solver
-consumes this boundary yet.
+consumes this boundary yet. A real C880 socket exercise observed unchanged
+epoch 0, activated the exact 11/11 marginal-saving predicate at epoch 1,
+fetched its lowered plan against epoch 1, rejected a misspelled plan identity,
+deactivated it at epoch 2, and returned an empty changed snapshot.
 
 Implementation commits are `07cc0ebe2`, `b1c4dd052`, and `3a30a24e6` plus the
 current follow-up. Operator documentation is in
