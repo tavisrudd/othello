@@ -9,7 +9,7 @@
 The theorem package is clean, but its algebraic core must be presented as an
 application of coherent-configuration theory rather than a new general
 theorem. The programme contributes new geometric instances, quantitative
-marking fibres, and two priority-judo upgrades:
+marking fibres, and two useful priority-leverage upgrades:
 
 1. **Paper IV:** the \(q=13\) elliptic scheme is fusion-primitive. Every
    nonempty proper union of its six off-diagonal relations has coherent
@@ -108,7 +108,7 @@ A proper coherent closure alone is not an impossibility proof. Honest
 negative certificates require an excess automorphism moving the carrier, two
 explicit carriers with the same shadow, or a proved nontrivial fibre.
 
-## 4. Priority judo I: \(q=13\) fusion-primitivity
+## 4. Priority leverage I: \(q=13\) fusion-primitivity
 
 The elliptic scheme on the \(78\) internal points has six off-diagonal
 relations
@@ -144,7 +144,7 @@ Combined with Paper IV:
 This is certificate-assisted and fixed-field. An all-\(q\) classification
 would require eigenmatrix or character-sum input.
 
-## 5. Priority judo II: the quartic Gram family
+## 5. Priority leverage II: the quartic Gram family
 
 Let \(R=\nu_4(\mathbf P^1(\mathbf F_q))\), with \(q\) odd, in the invariant
 five-dimensional quadratic module. Up to a nonzero scalar,
@@ -215,7 +215,50 @@ For Paper V the intended matching stabilizer is \(A_5\), giving
 The unrestricted lower bound is five bits; the constrained pair-membership
 model requires exactly eleven adaptive or fourteen nonadaptive queries.
 
-## 6. Programme trichotomy
+Neither result is a priority-judo move in the strict sense. Fusion-primitivity
+is a new fixed-field property expressed in established language. The harmonic
+preserver theorem proves our automorphism statement; it is not a corollary of
+our Gram calculation.
+
+## 6. Genuine priority-judo targets
+
+A result should be called priority judo here only if it crosses the classical
+ceiling by proving a theorem from which the relevant classical result follows
+as a specialization. The credible targets are:
+
+1. **Cross-ratio coloring rigidity, including even-Veronese Gram shadows.**
+   Classify the full permutation groups preserving anharmonic-invariant
+   colorings of four-subsets obtained from a rational function of cross-ratio,
+   with an explicit exceptional list. This would contain the classical
+   harmonic-preserver theorem and the Gram colorings as special cases. For
+   the rational normal curve of degree \(2m\), the normalized four-point Gram
+   determinant is
+   \[
+   \bigl(1-(\lambda^m+(1-\lambda)^m)^2\bigr)
+   \bigl(1-(\lambda^m-(1-\lambda)^m)^2\bigr).
+   \]
+   A general coloring-rigidity theorem that specializes both to harmonic
+   quadruples and to these determinant colors would be genuine priority judo.
+   The determinant identity alone is not enough; the full automorphism
+   classification is the hard gate.
+2. **All-\(q\) elliptic fusion classification.** Determine exactly which
+   unions of elliptic relations generate the full coherent configuration for
+   every odd \(q\). If the theorem classifies fusion-primitivity and all
+   exceptional fusions uniformly, the \(q=13\) result and standard
+   single-relation generation statements become corollaries. A bounded census
+   would not meet the bar; the character/eigenmatrix proof is essential.
+3. **A representation-theoretic weighted-shadow theorem with converse.** An
+   if-and-only-if theorem for reconstruction of a \(G\)-stable extremal shell
+   from its weighted 2-section, stated through spherical transforms and
+   marking stabilizers, could qualify only if it genuinely derives the
+   quotient-polynomial/coherent-generation results rather than restating
+   them. At present this is a prospect, not an achieved move.
+
+The first two are the best research directions. The all-\(q\) elliptic
+classification is closer to the existing programme data; cross-ratio
+coloring rigidity is broader and potentially more distinctive.
+
+## 7. Programme trichotomy
 
 | Source | Sparse shadow | Closure/fibre | Verdict |
 |---|---|---|---|
@@ -226,7 +269,7 @@ model requires exactly eleven adaptive or fourteen nonadaptive queries.
 The honest general picture has three outcomes: full closure, excess-symmetry
 impossibility, and carrier-relative faithfulness.
 
-## 7. Literature audit and novelty boundary
+## 8. Literature audit and novelty boundary
 
 ### Coherent configurations
 
@@ -302,7 +345,7 @@ The harmonic design and its automorphism group are not new. The useful bridge
 is that the quartic metric Gram determinant produces exactly this relation,
 proving Paper V's information-loss boundary.
 
-## 8. Publication recommendation
+## 9. Publication recommendation
 
 Immediate upgrades:
 
@@ -325,7 +368,7 @@ version should add one of:
 Without one of these, the material is strongest as coordinated upgrades to
 Papers IV and V plus a synthesis note.
 
-## 9. Ergodis implications
+## 10. Ergodis implications
 
 The controller should distinguish ordinary polynomial generation, coherent
 generation, and parameter-level separability. Useful additions would:
