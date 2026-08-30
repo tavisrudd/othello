@@ -1226,7 +1226,7 @@ where
     }
 
     /// Test the cheap degree bound before paying for greedy conflict packing.
-    #[inline]
+    #[inline(always)]
     fn completion_lower_bound_exceeds(
         &self,
         syndrome: PackedSyndrome<CHECK_WORDS>,
