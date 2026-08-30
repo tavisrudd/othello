@@ -337,6 +337,20 @@ the announcement's actual novelty: an unassumed search at `m = 166`. For the ope
 order 3, 9 and 29 are available and it sits in the class the 892-type searches close; an order
 whose `m` has `φ(m) = 2·(large prime)` is in the hard class.
 
+### 12.2 Settled: the inner shift is the emitter's convention
+
+Measuring the back-circulant shift directly on the block entries of every circulant-family order
+gives the same value in all nine (bordered 668/716/1676/1772 and plain 892/1132/1244/1948/1964):
+shift `1` in the decoder README's sequence-reversal convention, which is the Lean library's `e = 2`.
+A constant across bordered and unbordered families alike is a fixed convention of the program that
+emitted the payload, not a searched parameter. **(b) is settled.** The Lean development keeps `e`
+free, so nothing there changes.
+
+Two new leads from the second pass are logged on the discovery track (symmetric quadruples at
+`m = 166, 178`; the `φ(m)` hard-class prediction for open orders); neither is allocated work.
+
+No genuine mystery remains on this task.
+
 **(a) The order-3 automorphism of order 892 — settled, see §12.1; original record kept.** Orders 668 and 716 have automorphism group of order
 4, exactly the centre times the half-shift, which is what parity forces for a bordered array with
 even block length: diagonal blocks are circulant so row shift equals column shift, off-diagonal
@@ -352,7 +366,7 @@ the existing crate, not a research programme. Whether it means the 892 sequences
 symmetry-reduced search — while the 668 sequences demonstrably were not — is the question worth the
 answer.
 
-**(b) The inner shift `e = 2`.** The lower-right 3×3 corner of the 668 array carries an extra
+**(b) The inner shift `e = 2` — settled, see §12.2; original record kept.** The lower-right 3×3 corner of the 668 array carries an extra
 cyclic shift by 2. It cancels identically in every cross term, so it is not needed for
 orthogonality: the classical array at `e = 0` over the same four sequences would work equally well.
 Two readings are open. It may be an artifact of how the poster's `sed` program advances its

@@ -204,7 +204,7 @@ Cheapest discriminator: report the shift value at the other three bordered order
 The crate detects the operation but does not currently print its shift.
 **Evidence**: CHECKED for `e = 2` at 668 (rebuild matches entry for entry) and LEAN for the
 irrelevance of `e` to orthogonality; OPEN for what it means.
-**Status**: open lead.
+**Status**: retired → settled 2026-08-30: the same shift appears in every one of the nine circulant-family orders, bordered and plain (measured directly on the block entries; shift `1` in the sequence-reversal convention of the decoder README, `2` in the Lean convention), so it is the emitter's fixed convention, not a searched parameter; see §12.2 of `notes/2026-08-29-c999-hadamard-668-report.md`.
 
 ### 2026-08-29 — two orders closed in the same fortnight by opposite search philosophies
 
@@ -229,3 +229,38 @@ Alpöge search exploits no multiplier structure anywhere.
 exhaustive over the units of `Z_166`; the 2060 automorphism statement is a proved lower bound, the
 exact group was not computed).
 **Status**: retired → settled 2026-08-30: multiplier invariance is the norm across the payload (seven of nine circulant-family quadruples), and 668/716 are the exceptions because `φ(m)` admits no useful multiplier; see §12.1 of `notes/2026-08-29-c999-hadamard-668-report.md`.
+
+
+### 2026-08-30 — symmetric quadruples were not used at 668/716: is the `−1` multiplier dead there?
+
+**Provenance**: the multiplier scan in §12.1 of `notes/2026-08-29-c999-hadamard-668-report.md` and
+`certificate/H668.json`, `certificate/H716.json` (commit `f57fde27a`): both fixed multiplier groups are
+trivial, in particular `−1` is absent, so none of the eight sequences is symmetric.
+**Was I looking for this?**: no — the scan was after the order-3 automorphism of 892.
+**Expectation violated**: a search team facing a 664-bit space with no odd-order multiplier would be
+expected to take the one symmetry left, `x(−i) = x(i)`, which halves the space; they did not.
+**Observed**: `φ(166) = 2·41` and `φ(178) = 2³·11` leave `−1` as the only cheap multiplier, and the
+solutions found are not symmetric. Either symmetric bordered-Goethals–Seidel quadruples do not exist
+at these even lengths (an even-length analogue of the known Williamson nonexistence lengths, not
+in the literature as far as this lane knows) or the team tried and found none.
+**Strongest question**: does a symmetric quadruple with `Σ PAF = −4`, row sums `(2,0,0,0)` exist at
+`m = 166` or `178`? Symmetric sequences have about `m/2` free bits each, so the space is `~2^332`
+before the PSD filter — a real search, not a scan. — do not pursue yet.
+**Status**: open lead.
+
+### 2026-08-30 — the `φ(m)` obstruction predicts which open orders are hard
+
+**Provenance**: §12.1 of `notes/2026-08-29-c999-hadamard-668-report.md`; multiplier groups of all
+nine circulant-family quadruples and of the external order-2060 matrix (commit `f57fde27a`).
+**Was I looking for this?**: no — the scan explained one automorphism.
+**Expectation violated**: that the twelve 2026 orders were found by one method.
+**Observed**: every order whose block length admits a small odd-order multiplier was solved with one
+(892, 1132, 1244, 1676, 1772, 1948, 1964, and 2060 externally); the two that admit none (668, 716)
+were solved without symmetry. The bordered even-`m` route has forced row sums `(±2,0,0,0)`, and the
+plain odd-`m` route needs row sums `≡ ±1 (mod r)` under an order-`r` multiplier with
+`a²+b²+c²+d² = 4m` — a congruence filter on admissible `(r, row sums)`.
+**Strongest question**: tabulate `φ(n/4)` and `φ(n/4 − 1)` for the open orders above 2000; those with
+both of the form `2^k·(large prime)` are the 668 class and need a symmetry-free method, the rest are
+the 892 class. `2092 = 4·523` is 892-class (`φ(523) = 2·3²·29`). — follow-on, gated on reopening the
+declined Part 2 of the Hadamard task.
+**Status**: open lead.
