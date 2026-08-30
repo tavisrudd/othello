@@ -158,6 +158,11 @@ with brute force for all 65,536 hypergraphs on a four-element universe and all
 budgets zero through four; the full all-feature test suite and strict clippy
 also pass.
 
+Commit `def33cd2e` additionally runs writer plus independent replay across all
+256 hypergraphs on a three-element universe and every budget zero through
+three, checking that feasible instances emit nothing and every infeasible
+stream verifies.
+
 Streaming alone does not bound disk consumption.  Commit `c555de3a5` makes the
 maximum evidence-record count a mandatory writer argument, computes the exact
 binomial count, and rejects an oversized proof before emitting its header.

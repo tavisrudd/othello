@@ -337,6 +337,8 @@ changes any bound on equiangular lines in `R^18`.
   middle-layer enumeration.
 - `d46df230a` — residual workspaces cap stack depth at the 64-element universe
   and normalize oversized logical budgets.
+- `def33cd2e` — streamed proof writer/replay exhausted on every three-vertex
+  hypergraph and budget.
 
 Validation used an isolated persistent target at
 `/home/tavis/.cache/ergodis/target-c985-validation`: formatting, strict
