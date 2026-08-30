@@ -453,6 +453,10 @@ counting theorem remains open.
 - The q11/q13 split is empirical structure, not permission to extrapolate to
   all larger fields.  Why the minimum q13 support surplus is 18 remains a
   mystery; a uniform incidence argument must explain a symbolic margin.
+- `Omega` nonincrease under legal moves is now proved directly from the exact
+  residual line loads.  Strict decrease for every reply in the sampled
+  positive domain is still open and must be obtained from positive lost
+  active-line mass, not promoted from the census.
 - Some tested opponent fibres contain only one certified reply.  Mean reply
   abundance, random sampling, and global support surplus are therefore
   incapable of proving the existential response theorem by themselves.
