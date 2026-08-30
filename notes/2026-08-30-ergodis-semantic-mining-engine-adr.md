@@ -369,12 +369,24 @@ Fibonacci-hashed mask table sized once from the certified extremal count.  Its
 insert path allocates nothing.  Against the already optimized build this cuts
 a further 30.8 million instructions (2.3%) and 8.4 million cycles (3.1%)
 end-to-end.  A denser 32 KiB table lost that gain to collision branches; the
-measured 64 KiB table is retained.  Finally, marking the generic Gosper visitor
+measured 64 KiB table is retained.  Marking the generic Gosper visitor
 for cross-crate inlining fuses successor generation with the census callback.
-The final seven-run end-to-end result is 52.55 ms, 251.2 million cycles, and
+Before generator closure, the seven-run end-to-end result is 52.55 ms, 251.2 million cycles, and
 1.229 billion instructions: 3.356x faster than the frozen baseline with 71.2%
 fewer cycles and 68.7% fewer instructions.  Throughput is 89.2 million objects
 per second at 53.6 cycles and 262.2 instructions per object.
+
+Canonicalization now closes the orbit iteratively under four affine
+generators: one basis translation, two coordinate swaps, and one transvection.
+Conjugation supplies the other basis translations.  The generated orbit has
+all 2,106 extremal caps, so this smaller subgroup already certifies AGL
+transitivity; the full group order is the classical
+`27(27-1)(27-3)(27-9)=303264`.  This replaces 303,264 full-group transforms by
+8,424 generator edges.  The final 11-run result is 43.72 ms, 206.1 million
+cycles, and 1.022 billion instructions: 4.034x faster than baseline with 76.4%
+fewer cycles and 73.9% fewer instructions, or 107.2 million objects/s at 44.0
+cycles per object.  The iterative queue is pre-sized, allocation-free while
+closing edges, and has no recursion or stack-growth limit.
 
 ## Python's continuing role
 

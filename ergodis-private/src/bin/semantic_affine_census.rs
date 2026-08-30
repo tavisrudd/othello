@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use clap::Parser;
 use ergodis_private::semantic_plan::{CanonicalizationGate, LabelContract};
 use ergodis_private::semantic_sets::{
-    for_each_k_subset, FixedMaskSet, TernaryPartitionMaxOverlapProfiler,
+    for_each_k_subset, orbit_closure, TernaryPartitionMaxOverlapProfiler,
 };
 use serde::Serialize;
 
@@ -107,25 +107,6 @@ fn affine_subspaces(rank: usize) -> Vec<u64> {
     affine.sort_unstable();
     affine.dedup();
     affine
-}
-
-fn determinant(matrix: &[u8; 9]) -> u8 {
-    let positive = matrix[0] * matrix[4] * matrix[8]
-        + matrix[1] * matrix[5] * matrix[6]
-        + matrix[2] * matrix[3] * matrix[7];
-    let negative = matrix[2] * matrix[4] * matrix[6]
-        + matrix[1] * matrix[3] * matrix[8]
-        + matrix[0] * matrix[5] * matrix[7];
-    (positive + 3 - negative % 3) % 3
-}
-
-fn decode_matrix(mut code: usize) -> [u8; 9] {
-    let mut matrix = [0_u8; 9];
-    for entry in &mut matrix {
-        *entry = (code % 3) as u8;
-        code /= 3;
-    }
-    matrix
 }
 
 fn transform_point(point: u8, matrix: &[u8; 9], translation: u8) -> u8 {
@@ -241,26 +222,29 @@ fn main() -> anyhow::Result<()> {
         }
     });
 
-    let mut orbit = FixedMaskSet::with_max_items(minimum_count as usize);
-    let mut general_linear_order = 0_usize;
-    for code in 0..3_usize.pow(9) {
-        let matrix = decode_matrix(code);
-        if determinant(&matrix) == 0 {
-            continue;
-        }
-        general_linear_order += 1;
-        for translation in 0..27_u8 {
+    let generators = [
+        ([1, 0, 0, 0, 1, 0, 0, 0, 1], 1),
+        ([0, 1, 0, 1, 0, 0, 0, 0, 1], 0),
+        ([1, 0, 0, 0, 0, 1, 0, 1, 0], 0),
+        ([1, 1, 0, 0, 1, 0, 0, 0, 1], 0),
+    ];
+    let orbit = orbit_closure(
+        representative,
+        generators.len(),
+        minimum_count as usize,
+        |object, generator| {
+            let (matrix, translation) = &generators[generator];
             let mut transformed = 0_u64;
-            let mut points = representative;
+            let mut points = object;
             while points != 0 {
                 let point = points.trailing_zeros() as u8;
-                transformed |= 1_u64 << transform_point(point, &matrix, translation);
+                transformed |= 1_u64 << transform_point(point, matrix, *translation);
                 points &= points - 1;
             }
-            orbit.insert(transformed);
-        }
-    }
-    let affine_group_order = general_linear_order * 27;
+            transformed
+        },
+    );
+    let affine_group_order = 27 * (27 - 1) * (27 - 3) * (27 - 9);
     let canonicalization_gate = CanonicalizationGate {
         label_contract: LabelContract::Diagnostic,
         action_verified: true,

@@ -82,6 +82,37 @@ impl FixedMaskSet {
     }
 }
 
+/// Close one mask under a finite list of generators using a pre-sized queue.
+///
+/// The traversal is iterative and stack-safe. The queue and membership table
+/// allocate once from `max_items`; applying edges and inserting discoveries
+/// allocate nothing. Exceeding the declared orbit bound fails closed.
+pub fn orbit_closure(
+    seed: u64,
+    generator_count: usize,
+    max_items: usize,
+    mut apply: impl FnMut(u64, usize) -> u64,
+) -> Vec<u64> {
+    assert!(generator_count > 0, "orbit closure needs a generator");
+    let mut seen = FixedMaskSet::with_max_items(max_items);
+    let mut orbit = Vec::with_capacity(max_items);
+    seen.insert(seed);
+    orbit.push(seed);
+    let mut cursor = 0;
+    while cursor < orbit.len() {
+        let object = orbit[cursor];
+        cursor += 1;
+        for generator in 0..generator_count {
+            let image = apply(object, generator);
+            if seen.insert(image) {
+                assert!(orbit.len() < max_items, "orbit exceeds declared bound");
+                orbit.push(image);
+            }
+        }
+    }
+    orbit
+}
+
 /// Maximum-overlap profiler for families that split into 3-way partitions.
 ///
 /// For an object of fixed cardinality `k` and a partition `(A, B, C)`, the
@@ -488,5 +519,12 @@ mod tests {
             assert!(!set.insert(value << 17));
         }
         assert_eq!(set.len(), 1024);
+    }
+
+    #[test]
+    fn orbit_closure_is_iterative_complete_and_bounded() {
+        let orbit = orbit_closure(1, 1, 5, |mask, _| ((mask << 1) | (mask >> 4)) & 0b1_1111);
+        assert_eq!(orbit.len(), 5);
+        assert_eq!(orbit.iter().fold(0, |union, &mask| union | mask), 0b1_1111);
     }
 }
