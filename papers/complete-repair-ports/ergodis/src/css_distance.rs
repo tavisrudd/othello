@@ -1203,7 +1203,7 @@ where
     }
 
     /// Test whether greedy packing finds more disjoint neighborhoods than the budget.
-    #[inline]
+    #[inline(always)]
     fn syndrome_packing_exceeds(
         &self,
         mut syndrome: PackedSyndrome<CHECK_WORDS>,
