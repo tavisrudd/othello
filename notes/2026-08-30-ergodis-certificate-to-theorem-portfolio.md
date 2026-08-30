@@ -439,8 +439,8 @@ lowered to an explicit stack before input-scaled use.
   one after semilinear quotient: three torus orbits are a Frobenius cycle, a
   78-fold reduction with independent replay.
 - **Open:** whether the source unipotent action plus the one semilinear seed
-  proves all 27 extremal fibres, and whether the nonextremal margin admits one uniform
-  character-sum bound.
+  proves all 27 extremal fibres, and whether the nonextremal margin admits one
+  uniform character-sum bound.
 - **Settled structurally:** the 27 extremal fibres are exactly the monomial
   curve `(0,1,t,t^2,-t^3,-t^4,-t^5)`, and this is the classical
   divided-power translation orbit of `e_3` by Lucas reduction.
@@ -455,17 +455,22 @@ lowered to an explicit stack before input-scaled use.
   fixed Hankel label leaves 27 field-semilinear cap classes.  A paired
   cap/syndrome action or a 27-representative exclusion is needed for a theorem.
 
-**EJ.** A successful C896 state quotient would provide the first literal
-weighted-automaton/minimal-realization instance for the broader Ergodis thesis.
-The same state minimizer could then act on sparse elimination fronts in coding,
-modular representation theory, and polynomial identity systems.
+**EJ.** The PRS control exposes a reusable theorem-mining pattern stronger than
+the original orbit core: mine the nearest negative stratum, identify its
+classical structure, and canonicalize labelled pairs rather than unlabelled
+objects.  The cap obstruction suggests a concrete next lemma and forced the
+`preserves/transports/diagnostic` action contract.  A successful C896 state
+quotient would then provide the first literal weighted-automaton realization
+using the same `match/reduce/canonicalize` algebra.
 
 **TT.** The main danger is optimizing certificate size instead of identifying
 the invariant that makes the certificate inevitable.  Each campaign should
 therefore alternate positive cores with deliberately generated near-misses,
 ask which semantic distinction predicts extension to every future context,
 and demand a source-language implication proof before accepting a learned
-state merge.
+state merge.  Symmetry is especially treacherous: the acting group must
+preserve or explicitly transport the observable, not merely the underlying
+geometry.
 
 Vibe: this is a real cross-domain programme now; C80 supplies the hard game
 theorem, while C896 and PRS supply two independent tests of whether Ergodis can
