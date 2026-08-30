@@ -142,6 +142,74 @@ it cannot pass a theorem gate.
 6. **Independent verifier.** Re-read the source and proposed packet without
    sharing the mining reducer.  Reject source drift by hash.
 
+## Theorem assembly and composition
+
+`match/reduce/canonicalize` produces typed theorem fragments, not final prose.
+A downstream **theorem composer** stores them in an AND/OR hypergraph.  Each
+fragment declares:
+
+```text
+domain and parameter sorts
+universally/existentially quantified variables
+hypotheses and conclusion in normalized predicate IR
+observable and action contracts
+dependencies and source provenance
+status: candidate | finite-certified | proved
+proof/certificate verifier
+```
+
+Hyperedges are a deliberately finite rule vocabulary:
+
+```text
+direct implication     specialization        exact transport
+exhaustive case split  induction/descent     quotient-and-lift
+bound arithmetic       witness substitution
+```
+
+The composer runs two bounded searches.  Backward chaining from a requested
+target exposes the smallest missing obligations.  Forward saturation from
+proved fragments finds cheap derived theorems and reusable interfaces.  It
+scores plans by unresolved proof debt, number and generality of covered goals,
+dependency stability, description length, and estimated verification cost.
+Textual similarity is only a retrieval hint; it never discharges a premise.
+
+Composition is typed and proof-status preserving.  A finite certificate cannot
+be promoted to a theorem by composing it with proved facts.  Domain,
+quantifier, and action/observable compatibility are explicit gates.  Every
+successful hyperedge emits a composite certificate listing exact premise IDs,
+substitutions, case coverage, transports, and remaining obligations.  The
+independent verifier rebuilds this DAG without trusting the planner.
+
+The same exceptional-state loop guides theorem search.  If composition stalls,
+the unresolved predicate becomes a new mining label; Ergodis generates
+positive/negative finite instances, searches semantic separators, and returns
+candidate fragments to the graph.  This closes the loop:
+
+```text
+target theorem
+  -> missing typed obligation
+  -> match / reduce / canonicalize campaign
+  -> finite-certified lemma packet
+  -> source-language proof
+  -> proved fragment
+  -> larger theorem composition
+```
+
+Three current examples define the required generality:
+
+- **PRS:** additive-plane switch identity + divided-power translation +
+  semilinear transport compose the extremal packet; cap classification plus a
+  paired cap/syndrome exclusion would yield the five-coplanar lemma; that lemma
+  joins the switch margin to replace the GF(27) census structurally.
+- **C80:** local charge-transport packets + Hall saturation + opponent
+  completeness + strict descent/termination compose a global P strategy.
+- **C896:** certified local carry transitions + base cases + a
+  most-significant-digit induction compose the uniform socle theorem.
+
+`semantic_theorems.rs` lands only the proof-safety status and composition
+contracts.  Predicate IR and graph storage remain private design work until
+these three examples force a common minimal interface.
+
 Search threads check only the existing cheap steering flag.  Mining reducers
 receive batched snapshots outside the solver hot path.  Serialization, JSON,
 formula formatting, and orbit narrative never execute in worker loops.

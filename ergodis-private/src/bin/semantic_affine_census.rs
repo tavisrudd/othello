@@ -4,6 +4,7 @@ use std::io::Write;
 use std::path::PathBuf;
 
 use clap::Parser;
+use ergodis_private::semantic_plan::{CanonicalizationGate, LabelContract};
 use ergodis_private::semantic_sets::{for_each_k_subset, MaxOverlapProfiler};
 use serde::Serialize;
 
@@ -32,6 +33,8 @@ struct ResultEnvelope {
     minimum_stratum_orbit_size: usize,
     stabilizer_order: usize,
     single_affine_orbit: bool,
+    canonicalization_label_contract: &'static str,
+    canonicalization_proof_eligible: bool,
     representative: Vec<u8>,
     labelled_objects: Option<u64>,
     labelled_maximum_plane_overlap_histogram: Option<Vec<u64>>,
@@ -231,6 +234,10 @@ fn main() -> anyhow::Result<()> {
         }
     }
     let affine_group_order = general_linear_order * 27;
+    let canonicalization_gate = CanonicalizationGate {
+        label_contract: LabelContract::Diagnostic,
+        action_verified: true,
+    };
     let labelled = args
         .labelled_tsv
         .as_ref()
@@ -254,6 +261,8 @@ fn main() -> anyhow::Result<()> {
         minimum_stratum_orbit_size: orbit.len(),
         stabilizer_order: affine_group_order / orbit.len(),
         single_affine_orbit: orbit.len() as u64 == minimum_count,
+        canonicalization_label_contract: "diagnostic",
+        canonicalization_proof_eligible: canonicalization_gate.proof_eligible(),
         representative: (0..27_u8)
             .filter(|point| representative & (1_u64 << point) != 0)
             .collect(),

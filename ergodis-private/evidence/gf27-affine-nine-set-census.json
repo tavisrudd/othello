@@ -5,6 +5,8 @@
   "affine_planes": 39,
   "affine_lines": 117,
   "ambient_subsets": 4686825,
+  "canonicalization_label_contract": "diagnostic",
+  "canonicalization_proof_eligible": false,
   "maximum_plane_overlap_histogram": [
     0,
     0,
