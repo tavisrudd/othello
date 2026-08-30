@@ -170,6 +170,12 @@ regression uses 16 available elements at budget 8, where blind middle-layer
 enumeration would require `binomial(16,8)=12,870` records, and checks a 36-byte
 proof instead.
 
+Final OOM review found that a caller could request a nonsensical `u32` stack
+depth even though the universe is one `u64`.  Commit `d46df230a` caps physical
+workspace depth at 64 and normalizes each logical budget to the available-set
+cardinality.  The regression constructs with `u32::MAX`, confirms a 65-frame
+arena, and solves the normalized instance exactly.
+
 This flat proof is deliberately a simple correctness baseline, not the final
 storage claim.  Its output can be `Theta(binomial(n,k))`.  The next measured
 format should stream the solver's branching tree or hash-consed DAG and retain

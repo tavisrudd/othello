@@ -721,6 +721,86 @@ display conveniences.  Requests resolve them to hashes and echo those hashes
 before commit.  Copy-pasted commands in memos should pin the hash or checkpoint
 so later alias changes cannot silently redirect a reproduction.
 
+### Agent-facing output discipline
+
+The interface is intended to accelerate agent research without flooding the
+conversation or consuming a token budget.  `ergodisctl agent brief` returns one
+bounded decision digest:
+
+```text
+epoch and health
+changes since cursor
+at most K promoted/killed plans
+first new decisive witness/falsifier synopsis
+resource headroom
+one recommended next action
+next cursor
+```
+
+It defaults to deltas, not a full snapshot.  Every query includes hard
+`max_records` and `max_bytes` limits enforced server-side, plus optional
+`--fields`, `--top`, `--since`, and `--group` projection.  A capped response
+ends with aggregate omitted counts and a continuation cursor; it never dumps a
+partially formatted record.  The controller can estimate a conservative token
+count for JSON/text, but bytes and records are the enforceable limits.
+
+Raw feature rows, micro-op traces, complete certificates, benchmark rounds,
+and counterexample corpora are never returned inline by default.  They stream
+to bounded evidence files.  The CLI reports path relative to the run arena,
+content hash, schema, byte/record counts, and a short causal synopsis.  An
+explicit `trace decode --slice ... --max-records N` is required to inspect a
+localized window.
+
+Subscriptions are low-rate, lossy pulse views: if a client is slow, equivalent
+status updates coalesce and only decisive events plus the newest aggregate are
+retained.  There is no unbounded socket queue and no raw-event subscription.
+`tail` also has a mandatory limit unless writing directly to a named bounded
+file.
+
+For the expected research loop, prefer these compact operations:
+
+```sh
+ergodisctl --run RUN agent brief --since CURSOR --max-bytes 8192
+ergodisctl --run RUN attack diff A B --fields outcome,coverage,states,why
+ergodisctl --run RUN why PLAN --first --max-bytes 4096
+ergodisctl --run RUN repro EVENT          # prints one exact bounded command
+ergodisctl --run RUN note EVENT --text 'hypothesis redirect'
+ergodisctl --run RUN apply steering.json --expect-epoch N
+```
+
+The high-level ledger remains complete on disk, but following along consumes
+only state transitions relevant to the next decision.  This is the operational
+lesson from the recent C80/C880/CSS work: the useful unit is the first exact
+obstruction, A/B delta, or changed frontier--not the millions of candidates
+that agree.
+
+The recent notes suggest five higher-level verbs that I would use repeatedly:
+
+```sh
+# Run the retained hostile/positive sequence and stop at first failed gate.
+ergodisctl campaign gate PLAN --suite c80-q11-q23 --first-failure
+
+# Compare a mutation against its parent with identical states/work protocol.
+ergodisctl compare A B --paired --metrics coverage,states,instructions,rss
+
+# Fetch/replay only the decisive object, not its surrounding transcript.
+ergodisctl obstruction first PLAN --replay --brief
+
+# Profile only after structural counters say the candidate is promising.
+ergodisctl profile PLAN --event instructions,branches,cache-misses --rounds 7
+
+# Generate a bounded durable handoff file and print only its hash/path.
+ergodisctl handoff write --since CHECKPOINT --max-events 100 --output RUN/handoff.md
+```
+
+`campaign gate` captures C80's staged q11/q23 edge-definition tests and the
+`R^18` Stage-0-before-Stage-1 discipline.  `compare --paired` captures the CSS
+and C880 requirement to separate genuine instruction/state reductions from
+noise or parallel work inflation.  `obstruction first` matches the repeated
+mathematical workflow of redirecting from one smallest exact falsifier.
+`handoff write` prevents the control interface from turning a long research
+session into conversational text debt.
+
 ## Highest-EV next move
 
 Implement stages 1--3 as a small runtime plan VM over the existing C80 feature

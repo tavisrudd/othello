@@ -335,6 +335,8 @@ changes any bound on equiangular lines in `R^18`.
   evidence emits any bytes.
 - `a3cf6cd08` — empty residual clauses emit a one-record proof rather than a
   middle-layer enumeration.
+- `d46df230a` — residual workspaces cap stack depth at the 64-element universe
+  and normalize oversized logical budgets.
 
 Validation used an isolated persistent target at
 `/home/tavis/.cache/ergodis/target-c985-validation`: formatting, strict

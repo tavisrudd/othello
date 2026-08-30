@@ -574,7 +574,9 @@ Sequel research:
   solve, streamed write, and replay.  `c555de3a5` preflights a mandatory exact
   record limit before writing any bytes, so streaming cannot silently exhaust
   the filesystem.  `a3cf6cd08` turns an empty residual clause into a one-record
-  proof (12,870 records avoided in its budget-8 regression).  A streamed branch DAG is the next proof-compression
+  proof (12,870 records avoided in its budget-8 regression).  `d46df230a`
+  caps workspace depth at the actual 64-element universe even for adversarial
+  caller budgets.  A streamed branch DAG is the next proof-compression
   target, and global C880 search replay is still open.  The higher-level C80
   workflow is specified as a runtime typed attack-plan controller in
   [C985 adaptive attack controller](../2026-08-30-c985-adaptive-attack-controller.md):
