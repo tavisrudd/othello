@@ -9,6 +9,9 @@ use serde::Serialize;
 
 #[derive(Parser)]
 struct Args {
+    /// Optional TSV with `nine_set` and optional `orbit_size` columns.
+    #[arg(long)]
+    labelled_tsv: Option<PathBuf>,
     #[arg(long)]
     output: Option<PathBuf>,
 }
@@ -30,6 +33,9 @@ struct ResultEnvelope {
     stabilizer_order: usize,
     single_affine_orbit: bool,
     representative: Vec<u8>,
+    labelled_objects: Option<u64>,
+    labelled_maximum_plane_overlap_histogram: Option<Vec<u64>>,
+    labelled_in_minimum_stratum: Option<u64>,
 }
 
 #[inline]
@@ -135,6 +141,40 @@ fn transform_point(point: u8, matrix: &[u8; 9], translation: u8) -> u8 {
     result
 }
 
+fn profile_labelled(path: &PathBuf, planes: Vec<u64>) -> anyhow::Result<(u64, Vec<u64>)> {
+    let input = std::fs::read_to_string(path)?;
+    let mut lines = input.lines();
+    let header: Vec<&str> = lines
+        .next()
+        .ok_or_else(|| anyhow::anyhow!("empty labelled TSV"))?
+        .split('\t')
+        .collect();
+    let support_column = header
+        .iter()
+        .position(|name| *name == "nine_set")
+        .ok_or_else(|| anyhow::anyhow!("labelled TSV lacks nine_set column"))?;
+    let weight_column = header.iter().position(|name| *name == "orbit_size");
+    let mut profiler = MaxOverlapProfiler::new(planes, 9);
+    let mut total = 0_u64;
+    for line in lines.filter(|line| !line.is_empty()) {
+        let fields: Vec<&str> = line.split('\t').collect();
+        let weight = weight_column
+            .map(|column| fields[column].parse())
+            .transpose()?
+            .unwrap_or(1_u64);
+        let mut mask = 0_u64;
+        for point in fields[support_column].split(',') {
+            mask |= 1_u64 << point.parse::<u8>()?;
+        }
+        if mask.count_ones() != 9 {
+            anyhow::bail!("labelled TSV row is not a nine-set");
+        }
+        profiler.observe(mask, weight);
+        total += weight;
+    }
+    Ok((total, profiler.histogram().to_vec()))
+}
+
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
     let planes = affine_subspaces(2);
@@ -183,6 +223,14 @@ fn main() -> anyhow::Result<()> {
         }
     }
     let affine_group_order = general_linear_order * 27;
+    let labelled = args
+        .labelled_tsv
+        .as_ref()
+        .map(|path| profile_labelled(path, planes.clone()))
+        .transpose()?;
+    let labelled_in_minimum_stratum = labelled
+        .as_ref()
+        .map(|(_, histogram)| histogram[minimum as usize]);
     let result = ResultEnvelope {
         schema: "ergodis.semantic-affine-census.v1",
         universe: "AG(3,3)",
@@ -201,6 +249,11 @@ fn main() -> anyhow::Result<()> {
         representative: (0..27_u8)
             .filter(|point| representative & (1_u64 << point) != 0)
             .collect(),
+        labelled_objects: labelled.as_ref().map(|(total, _)| *total),
+        labelled_maximum_plane_overlap_histogram: labelled
+            .as_ref()
+            .map(|(_, histogram)| histogram.clone()),
+        labelled_in_minimum_stratum,
     };
     let rendered = serde_json::to_vec_pretty(&result)?;
     if let Some(path) = args.output {

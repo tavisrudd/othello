@@ -337,6 +337,10 @@ lines to `u64` masks, streams all 4,686,825 nine-sets through the
 allocation-free overlap reducer, recognizes every minimum object as a cap,
 and canonicalizes the first cap under `AGL(3,3)`.  Its compact result is
 `ergodis-private/evidence/gf27-affine-nine-set-census.json`.
+The labelled run in `gf27-affine-nine-set-labelled-census.json` completes the
+packet in one engine invocation: 6,890 labelled objects have overlap histogram
+`4004/2808/78` at `5/6/7`, while the 2,106-object cap orbit is overlap four, so
+the intersection is zero.
 
 The broader PRS route is digit-first rather than field-first: compile each
 carrier extension into kernel state, quotient `E tensor E^(1)` orbit type,

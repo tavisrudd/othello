@@ -149,6 +149,10 @@ adapter.  In under one second including the release-build check on the current
 host, it streams all 4,686,825 masks through the overlap reducer, recognizes
 the minimum stratum as caps, and closes its affine orbit.  The hot census loop
 allocates nothing; only precomputation and the pre-sized orbit set allocate.
+With the frozen labelled-locator TSV attached, the same run performs the full
+three-op plan: `match` profiles all 6,890 weighted labelled locators, `reduce`
+finds the 2,106-object ambient minimum, and `canonicalize` proves that minimum
+is one cap orbit.  Their intersection is exactly zero.
 
 ## Python's continuing role
 
@@ -213,5 +217,6 @@ Replay the landed ambient census with:
 ```bash
 cargo run --release --manifest-path ergodis-private/Cargo.toml \
   --bin semantic_affine_census -- \
+  --labelled-tsv notes/reed-solomon-tasks/c973-gf27-switch-probe/out/e3-ninesets.tsv \
   --output /path/to/create-new.json
 ```
