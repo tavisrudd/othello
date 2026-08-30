@@ -177,6 +177,22 @@ class Session:
             raise ProtocolError("invalid peer frame limit")
         if result.get("proof_authority") is not False:
             raise ProtocolError("campaign transport cannot claim proof authority")
+        timeout_ms = result.get("socket_io_timeout_ms")
+        if (
+            isinstance(timeout_ms, bool)
+            or not isinstance(timeout_ms, int)
+            or not 1 <= timeout_ms <= 60_000
+        ):
+            raise ProtocolError("invalid peer socket timeout")
+        if result.get("large_results") != "run-relative-create-only-files":
+            raise ProtocolError("unsupported large-result policy")
+        operations = result.get("operations")
+        if (
+            not isinstance(operations, list)
+            or any(not isinstance(operation, str) for operation in operations)
+            or not {"capabilities", "status"}.issubset(operations)
+        ):
+            raise ProtocolError("invalid operation inventory")
         return result
 
     def iter_evidence_lines(

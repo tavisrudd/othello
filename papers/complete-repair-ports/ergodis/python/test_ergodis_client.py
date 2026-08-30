@@ -44,7 +44,10 @@ class ErgodisClientTest(unittest.TestCase):
             "schema": SCHEMA,
             "framing": "u32-le-length-prefixed-json",
             "max_frame_bytes": MAX_FRAME_BYTES,
+            "socket_io_timeout_ms": 10_000,
+            "large_results": "run-relative-create-only-files",
             "proof_authority": False,
+            "operations": ["capabilities", "status"],
         }
         session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
         for changed in (
@@ -52,6 +55,10 @@ class ErgodisClientTest(unittest.TestCase):
             {"framing": "native-objects"},
             {"max_frame_bytes": MAX_FRAME_BYTES + 1},
             {"proof_authority": True},
+            {"socket_io_timeout_ms": True},
+            {"socket_io_timeout_ms": 60_001},
+            {"large_results": "inline-unbounded"},
+            {"operations": ["status"]},
         ):
             capabilities = baseline | changed
             with self.subTest(changed=changed), patch.object(
@@ -137,7 +144,10 @@ class ErgodisClientTest(unittest.TestCase):
                                         "schema": SCHEMA,
                                         "framing": "u32-le-length-prefixed-json",
                                         "max_frame_bytes": MAX_FRAME_BYTES,
+                                        "socket_io_timeout_ms": 10_000,
+                                        "large_results": "run-relative-create-only-files",
                                         "proof_authority": False,
+                                        "operations": ["capabilities", "status"],
                                     },
                                 },
                                 separators=(",", ":"),
