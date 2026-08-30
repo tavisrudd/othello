@@ -3869,8 +3869,17 @@
       "last": 1007,
       "purpose": "general odd-order arc line bound and component-sensitive algebraic containment envelope",
       "sequence": 430
+    },
+    {
+      "count": 1,
+      "first": 1008,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1008,
+      "purpose": "ergodis-controlled sparse-shadow theorem search: scalar six-local criterion and q13 one-relation generation",
+      "sequence": 431
     }
   ],
-  "next_id": 1008,
+  "next_id": 1009,
   "schema": "codex-task-id-allocations-v1"
 }
