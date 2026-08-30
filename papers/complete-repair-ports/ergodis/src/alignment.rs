@@ -259,6 +259,13 @@ impl AlignmentAttachment {
                 }
             }
         }
+        let clause = self.clause_for_coloring(cut, color_one);
+        debug_assert_ne!(clause, 0, "cut={cut} selected={selected:#x}");
+        Some(clause)
+    }
+
+    #[inline]
+    fn clause_for_coloring(&self, cut: usize, color_one: u16) -> u64 {
         let lookup = &self.cut_clause_lookups[cut];
         let low_vertices = lookup.low_vertices as usize;
         let high_states = 1_usize << lookup.high_vertices;
@@ -275,8 +282,7 @@ impl AlignmentAttachment {
                 clause |= lookup.cross_masks[vertex] ^ zero;
             }
         }
-        debug_assert_ne!(clause, 0, "cut={cut} selected={selected:#x}");
-        Some(clause)
+        clause
     }
 
     fn all_cut_mask(&self) -> [u64; 2] {
@@ -993,6 +999,28 @@ mod tests {
             assert_eq!(
                 problem.separates(selected).unwrap(),
                 direct_separates(&problem, selected)
+            );
+        }
+    }
+
+    #[test]
+    fn residual_lower_bound_never_exceeds_exact_five_point_completion_distance() {
+        let problem = compile_alignment_attachment(5).unwrap();
+        let domain = 1_u64 << problem.triples().len();
+        let separating = (0..domain)
+            .filter(|&selected| problem.separates(selected).unwrap())
+            .collect::<Vec<_>>();
+        for selected in 0..domain {
+            let (_, bound, _) = problem.violation_summary(selected, problem.all_cut_mask());
+            let exact = separating
+                .iter()
+                .filter(|&&completion| completion & selected == selected)
+                .map(|&completion| (completion ^ selected).count_ones())
+                .min()
+                .unwrap();
+            assert!(
+                bound <= exact,
+                "selected={selected:#x} bound={bound} exact={exact}"
             );
         }
     }

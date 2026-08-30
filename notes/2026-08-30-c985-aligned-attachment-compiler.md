@@ -204,6 +204,23 @@ rejected. Its dependent find/union chains made the same exact control 1.674x
 slower across 21 rounds (old/new geometric ratio `0.5971`, `t=-56.292`). The
 bitmap kernel remains the admitted implementation.
 
+A `1/256`-scaled feasible dual packing of the residual context hitting set is
+mathematically valid but also rejected from the runtime. It changes no prune on
+the rooted control (`8,759` states both ways) and is 25.5% slower across 21
+interleaved rounds (old/new geometric ratio `0.7965`, `t=-22.534`). The useful
+artifact from that pass is retained: an exhaustive five-point test computes the
+true minimum extension distance for every partial family and verifies that all
+admitted packing/incidence lower bounds never exceed it.
+
+Three further hot-path alternatives are rejected. Incidence-maximizing ties
+between equally short branch clauses increase the rooted control from 8,759 to
+10,262 states. Packing the two cut-edge IDs into one `u16` is neutral on both
+search (ratio `0.988`, `t=-0.842`) and fractional separation (`0.990`,
+`t=-1.532`). Greedy bipartite-component flips reduce shallow duplicates but
+leave the budget-12 closure at exactly 324,456 states while adding about 40%
+wall time under the active sweep. The admitted rules remain shortest-context
+branching and the two-byte pair representation.
+
 Three equal 300-second pulse controls retain the known 17-query incumbent but
 leave the certified lower bound at 15. One context times 16 rotating orbit
 images visits 179,851 nodes; four contexts times four images visits 273,890;
