@@ -42,6 +42,11 @@ class C973Gf27OrbitCoreTest(unittest.TestCase):
             result["semilinear_seed_switch"]["plane_locator_coefficients_low_to_high"],
             [0, 16, 0, 22, 0, 0, 0, 0, 0, 1],
         )
+        self.assertEqual(result["semilinear_seed_switch"]["plane_basis_over_F3"], [1, 12])
+        self.assertEqual(
+            result["semilinear_seed_switch"]["plane_locator_linearized_exponents"],
+            [1, 3, 9],
+        )
         self.assertEqual(result["semilinear_seed_switch"]["closing_coefficients"], {"g_2": 0, "g_3": 0})
         self.assertEqual(
             result["extremal_curve_core"]["formula"],

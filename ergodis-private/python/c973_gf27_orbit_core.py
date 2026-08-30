@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Iterable
 
 from semantic_parametric_core import fit_monomial_coordinates
+from semantic_subspace_core import linearized_exponents, prime_field_basis, verify_prime_subspace
 
 
 def _digits(a: int) -> tuple[int, int, int]:
@@ -155,6 +156,10 @@ def extract(source: Path, extremes: Path | None = None) -> dict[str, object]:
         raise ValueError("switch metadata does not match seed support")
     plane_locator = polynomial_from_roots(plane)
     seed_locator = polynomial_from_roots(seed)
+    plane_basis = prime_field_basis(plane, _digits, 3)
+    if not verify_prime_subspace(plane, plane_basis, add, 3):
+        raise ValueError("switch source is not an F3-linear plane")
+    plane_linearized_exponents = linearized_exponents(plane_locator, 3)
 
     result: dict[str, object] = {
         "schema": "ergodis.semantic-orbit-core.v1",
@@ -172,8 +177,9 @@ def extract(source: Path, extremes: Path | None = None) -> dict[str, object]:
         "semilinear_orbit_cores": semilinear_groups,
         "semilinear_seed_switch": {
             "plane": list(plane),
-            "plane_basis_over_F3": [1, 12],
+            "plane_basis_over_F3": plane_basis,
             "plane_locator_coefficients_low_to_high": plane_locator,
+            "plane_locator_linearized_exponents": plane_linearized_exponents,
             "removed": removed,
             "added": added,
             "support": list(seed),

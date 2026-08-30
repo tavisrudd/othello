@@ -284,6 +284,14 @@ divided-power translation, scalar transport, and Frobenius transport.  This
 is the desired certificate-to-lemma shape; none of the 2,106 finite witness
 pairs is logically primitive.
 
+The plane recognition is now generic rather than encoded in the PRS adapter.
+`semantic_subspace_core.py` extracts a deterministic prime-field basis, checks
+the complete generated subspace, and recognizes locator support only at
+`p`-power exponents.  On this seed it derives basis `1,12` and exponents
+`1,3,9`.  The same primitive can expose affine/additive locator families in
+higher carriers and semilinear repair-layer certificates before any
+domain-specific theorem is proposed.
+
 The broader PRS route is digit-first rather than field-first: compile each
 carrier extension into kernel state, quotient `E tensor E^(1)` orbit type,
 extension-leakage cocycle, marker/root exclusions, and switch margin.  If this
