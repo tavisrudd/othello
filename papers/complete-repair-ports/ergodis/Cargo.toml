@@ -41,6 +41,11 @@ proptest = "1"
 name = "ergodis"
 path = "src/bin/ergodis.rs"
 
+[[bin]]
+name = "css_distance_random"
+path = "src/bin/css_distance_random.rs"
+required-features = ["parallel"]
+
 [[bench]]
 name = "scheduler_locality"
 harness = false

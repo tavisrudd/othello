@@ -162,6 +162,52 @@ def support_component_count(rows: list[int], columns: int) -> int:
     return len({root(coordinate) for coordinate in range(columns)})
 
 
+def central_coordinate_orbit_anchors(
+    candidate: dict[str, object], hx: list[int], hz: list[int], columns: int, order: int
+) -> list[int]:
+    modulus = int(candidate["modulus"])
+    twist = int(candidate["twist"])
+    if modulus % 2:
+        raise RuntimeError("central involution requires an even rotation modulus")
+    elements = [(exponent, reflection) for reflection in range(2) for exponent in range(modulus)]
+    index = {element: position for position, element in enumerate(elements)}
+    central = (modulus // 2, 0)
+    identity = (0, 0)
+    if multiply(central, central, modulus, twist) != identity:
+        raise RuntimeError("claimed central element is not an involution")
+    if any(
+        multiply(central, element, modulus, twist)
+        != multiply(element, central, modulus, twist)
+        for element in elements
+    ):
+        raise RuntimeError("claimed central element is not central")
+    permutation = [
+        block * order + index[multiply(elements[position], central, modulus, twist)]
+        for block in range(columns // order)
+        for position in range(order)
+    ]
+    if sorted(permutation) != list(range(columns)):
+        raise RuntimeError("central coordinate action is not a permutation")
+
+    def permute(row: int) -> int:
+        result = 0
+        while row:
+            bit = row & -row
+            coordinate = bit.bit_length() - 1
+            result |= 1 << permutation[coordinate]
+            row ^= bit
+        return result
+
+    for name, rows in (("X", hx), ("Z", hz)):
+        presented = set(rows)
+        if {permute(row) for row in rows} != presented:
+            raise RuntimeError(f"central action does not preserve the presented {name} checks")
+    anchors = [coordinate for coordinate in range(columns) if coordinate <= permutation[coordinate]]
+    if len(anchors) * 2 != columns:
+        raise RuntimeError("central involution did not produce two-point coordinate orbits")
+    return anchors
+
+
 def build_checks(candidate: dict[str, object]) -> tuple[list[int], list[int], int, int]:
     a = candidate["a"]
     b = candidate["b"]
@@ -234,6 +280,7 @@ def main() -> int:
     parser.add_argument("--candidate", choices=tuple(CANDIDATES), required=True)
     parser.add_argument("--direction", choices=("x", "z"), default="x")
     parser.add_argument("--maximum-weight", type=int, required=True)
+    parser.add_argument("--verified-central-orbits", action="store_true")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     candidate = CANDIDATES[args.candidate]
@@ -245,7 +292,11 @@ def main() -> int:
     dimension = columns - len(physical_basis) - len(stabilizer_basis)
     if len(logical) != dimension:
         raise RuntimeError("logical quotient basis has the wrong dimension")
-    anchors = list(range(columns))
+    anchors = (
+        central_coordinate_orbit_anchors(candidate, hx, hz, columns, order)
+        if args.verified_central_orbits
+        else list(range(columns))
+    )
     component_count = support_component_count(hx + hz, columns)
     if component_count != 1:
         raise RuntimeError("combined X/Z support graph is decomposable")
@@ -267,8 +318,12 @@ def main() -> int:
             "stabilizer_rank": len(stabilizer_basis),
             "logical_observation_rank": len(logical),
             "reported_qdistrnd_upper": candidate["reported_qdistrnd_upper"],
-            "coordinate_orbits_claimed": columns,
-            "anchor_policy": "all coordinates; no non-abelian orbit reduction assumed",
+            "coordinate_orbits_claimed": len(anchors),
+            "anchor_policy": (
+                "one representative per verified central-involution coordinate orbit"
+                if args.verified_central_orbits
+                else "all coordinates; no non-abelian orbit reduction assumed"
+            ),
             "combined_support_components": component_count,
         },
     }
