@@ -42,7 +42,8 @@ mod zdd;
 
 pub use alignment::{
     compile_alignment_attachment, search_alignment_attachment, search_alignment_attachment_from,
-    AlignmentAttachment, AlignmentError, AlignmentSearchMetrics, AlignmentSearchWorkspace,
+    AlignmentAttachment, AlignmentError, AlignmentFractionalContext, AlignmentSearchMetrics,
+    AlignmentSearchWorkspace,
 };
 pub use applications::{
     azure_lrc_12_2_2_counted, azure_lrc_12_2_2_upgrade_domains, ceph_xor_repair_family,

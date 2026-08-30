@@ -58,8 +58,8 @@ for cut in range(1, 1 << 7):
     CUTS.append((cut, pairs, len(crossing)))
 
 
-def violated_clause(selected: list[bool]) -> int | None:
-    best: int | None = None
+def violated_clauses(selected: list[bool]) -> list[int]:
+    clauses: list[int] = []
     for _cut, pairs, edge_count in CUTS:
         adjacency = [[] for _ in range(edge_count)]
         for keep, pair in zip(selected, pairs, strict=True):
@@ -94,20 +94,30 @@ def violated_clause(selected: list[bool]) -> int | None:
                 clause |= 1 << index
         if clause == 0:
             raise RuntimeError("complete family failed to distinguish a cut context")
-        if best is None or clause.bit_count() < best.bit_count():
-            best = clause
-    return best
+        clauses.append(clause)
+    clauses.sort(key=int.bit_count)
+    return clauses
+
+
+def violated_clause(selected: list[bool]) -> int | None:
+    clauses = violated_clauses(selected)
+    return clauses[0] if clauses else None
 
 
 def main() -> None:
     output = sys.argv[1] if len(sys.argv) > 1 else None
     orbit_batch = int(os.environ.get("ERGODIS_ALIGNMENT_ORBIT_BATCH", "16"))
+    context_batch = int(os.environ.get("ERGODIS_ALIGNMENT_CONTEXT_BATCH", "4"))
     if not 1 <= orbit_batch <= len(ANCHOR_STABILIZER_MAPS):
         raise ValueError("ERGODIS_ALIGNMENT_ORBIT_BATCH must lie in [1, 720]")
+    if not 1 <= context_batch <= len(CUTS):
+        raise ValueError("ERGODIS_ALIGNMENT_CONTEXT_BATCH must lie in [1, 127]")
     model = gp.Model("c880-alignment-attachment")
     model.Params.OutputFlag = 1
     model.Params.Threads = 16
     model.Params.LazyConstraints = 1
+    if seconds := os.environ.get("ERGODIS_ALIGNMENT_SECONDS"):
+        model.Params.TimeLimit = float(seconds)
     variables = model.addVars(len(TRIPLES), vtype=GRB.BINARY, name="triple")
     for index, triple in enumerate(TRIPLES):
         variables[index].Start = int(triple in KNOWN_G8)
@@ -115,37 +125,63 @@ def main() -> None:
     model.addConstr(variables.sum() >= 15, name="proved_weight_mask_lower_bound")
     model.setObjective(variables.sum(), GRB.MINIMIZE)
     lazy_count = 0
+    orbit_cursor = 0
     added_clauses: set[int] = set()
     started = time.perf_counter()
 
     def callback(active: gp.Model, where: int) -> None:
-        nonlocal lazy_count
+        nonlocal lazy_count, orbit_cursor
         if where != GRB.Callback.MIPSOL:
             return
         values = active.cbGetSolution(variables)
         selected = [values[index] > 0.5 for index in range(len(TRIPLES))]
-        clause = violated_clause(selected)
-        if clause is None:
+        clauses = violated_clauses(selected)
+        if not clauses:
             return
-        support = [index for index in range(len(TRIPLES)) if clause >> index & 1]
-        for mapping in ANCHOR_STABILIZER_MAPS[:orbit_batch]:
-            image = 0
-            for index in support:
-                image |= 1 << mapping[index]
-            if image in added_clauses:
-                continue
-            added_clauses.add(image)
-            active.cbLazy(
-                gp.quicksum(
-                    variables[index] for index in range(len(TRIPLES)) if image >> index & 1
+        for clause in clauses[:context_batch]:
+            support = [index for index in range(len(TRIPLES)) if clause >> index & 1]
+            mappings = [list(range(len(TRIPLES)))]
+            for offset in range(orbit_batch - 1):
+                index = (orbit_cursor + 223 * offset) % len(ANCHOR_STABILIZER_MAPS)
+                mappings.append(ANCHOR_STABILIZER_MAPS[index])
+            orbit_cursor = (orbit_cursor + max(1, orbit_batch - 1)) % len(ANCHOR_STABILIZER_MAPS)
+            for mapping in mappings:
+                image = 0
+                for index in support:
+                    image |= 1 << mapping[index]
+                if image in added_clauses:
+                    continue
+                added_clauses.add(image)
+                active.cbLazy(
+                    gp.quicksum(
+                        variables[index] for index in range(len(TRIPLES)) if image >> index & 1
+                    )
+                    >= 1
                 )
-                >= 1
-            )
-            lazy_count += 1
+                lazy_count += 1
 
     model.optimize(callback)
     if model.Status != GRB.OPTIMAL:
-        raise RuntimeError(f"unexpected Gurobi status {model.Status}")
+        record = {
+            "points": 8,
+            "status": model.Status,
+            "status_name": "TIME_LIMIT" if model.Status == GRB.TIME_LIMIT else "NONOPTIMAL",
+            "incumbent": model.ObjVal if model.SolCount else None,
+            "best_bound": model.ObjBound,
+            "lazy_constraints": lazy_count,
+            "orbit_batch": orbit_batch,
+            "context_batch": context_batch,
+            "nodes": model.NodeCount,
+            "work": model.Work,
+            "elapsed_seconds": time.perf_counter() - started,
+        }
+        text = json.dumps(record, indent=2) + "\n"
+        if output is None:
+            print(text, end="")
+        else:
+            with open(output, "x", encoding="utf-8") as stream:
+                stream.write(text)
+        return
     selected = [variables[index].X > 0.5 for index in range(len(TRIPLES))]
     if violated_clause(selected) is not None:
         raise RuntimeError("Gurobi incumbent failed exact replay")
@@ -156,6 +192,7 @@ def main() -> None:
         "family_triples": [TRIPLES[index] for index, keep in enumerate(selected) if keep],
         "lazy_constraints": lazy_count,
         "orbit_batch": orbit_batch,
+        "context_batch": context_batch,
         "nodes": model.NodeCount,
         "work": model.Work,
         "elapsed_seconds": time.perf_counter() - started,

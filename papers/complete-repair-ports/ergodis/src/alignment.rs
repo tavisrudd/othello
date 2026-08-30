@@ -15,6 +15,10 @@ pub enum AlignmentError {
     Family,
     #[error("the requested cut is outside the compiled domain")]
     Cut,
+    #[error(
+        "fractional query weights must match the triple domain and be finite nonnegative values"
+    )]
+    Weights,
     #[error("the search budget exceeds the compiled triple count")]
     Budget,
     #[error("the pre-sized search table is full")]
@@ -29,6 +33,13 @@ pub struct AlignmentAttachment {
     triples: Box<[[u8; 3]]>,
     cut_edge_counts: Box<[u8]>,
     cut_pairs: Box<[u8]>,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct AlignmentFractionalContext {
+    pub cut: usize,
+    pub clause: u64,
+    pub weight: f64,
 }
 
 impl AlignmentAttachment {
@@ -62,6 +73,118 @@ impl AlignmentAttachment {
             return Err(AlignmentError::Cut);
         }
         Ok(self.violation_for_cut(cut, selected).is_none())
+    }
+
+    /// Separate the most violated fractional context inequality.
+    ///
+    /// For one cut, minimizing the weight of a same-colour clause is weighted
+    /// MaxCut on its cut-edge rook graph.  Complementary colourings agree, so
+    /// vertex zero is fixed.  Gray-code enumeration flips one vertex at a time;
+    /// every vertex has exactly `point_count - 2` incident triple constraints.
+    /// The bounded kernel uses fixed stack storage and allocates nothing.
+    pub fn minimum_fractional_context(
+        &self,
+        weights: &[f64],
+    ) -> Result<AlignmentFractionalContext, AlignmentError> {
+        let mut context = [AlignmentFractionalContext {
+            cut: 0,
+            clause: 0,
+            weight: f64::INFINITY,
+        }];
+        self.fractional_contexts(weights, &mut context)?;
+        Ok(context[0])
+    }
+
+    /// Return the lightest context inequality for as many distinct cuts as
+    /// fit in `output`, sorted by weight.  One Gray scan therefore amortizes
+    /// into a batch of user cuts without allocating.
+    pub fn fractional_contexts(
+        &self,
+        weights: &[f64],
+        output: &mut [AlignmentFractionalContext],
+    ) -> Result<usize, AlignmentError> {
+        if weights.len() != self.triples.len()
+            || weights
+                .iter()
+                .any(|weight| !weight.is_finite() || *weight < 0.0)
+        {
+            return Err(AlignmentError::Weights);
+        }
+        if output.is_empty() {
+            return Err(AlignmentError::Workspace);
+        }
+        let empty = AlignmentFractionalContext {
+            cut: 0,
+            clause: 0,
+            weight: f64::INFINITY,
+        };
+        output.fill(empty);
+        let mut written = 0_usize;
+        for cut in 0..self.cut_count() {
+            let edge_count = self.cut_edge_counts[cut] as usize;
+            let mut incident_other = [[u8::MAX; 6]; 16];
+            let mut incident_weight = [[0.0_f64; 6]; 16];
+            let mut degrees = [0_u8; 16];
+            let mut current = 0.0;
+            for (triple, &weight) in weights.iter().enumerate() {
+                let (left, right) = self.pair(cut, triple);
+                if left == u8::MAX {
+                    continue;
+                }
+                current += weight;
+                for (vertex, other) in [(left, right), (right, left)] {
+                    let degree = &mut degrees[vertex as usize];
+                    incident_other[vertex as usize][*degree as usize] = other;
+                    incident_weight[vertex as usize][*degree as usize] = weight;
+                    *degree += 1;
+                }
+            }
+            debug_assert!(degrees[..edge_count]
+                .iter()
+                .all(|&degree| degree == self.point_count - 2));
+
+            let mut colors = 0_u16;
+            let mut best_weight = current;
+            let mut best_colors = colors;
+            for step in 1_u32..(1_u32 << (edge_count - 1)) {
+                let vertex = step.trailing_zeros() as usize + 1;
+                let vertex_color = colors >> vertex & 1;
+                for index in 0..degrees[vertex] as usize {
+                    let other = incident_other[vertex][index] as usize;
+                    let weight = incident_weight[vertex][index];
+                    let same_colour = u64::from(vertex_color == (colors >> other & 1));
+                    current += f64::from_bits(weight.to_bits() ^ (same_colour << 63));
+                }
+                colors ^= 1_u16 << vertex;
+                if current < best_weight {
+                    best_weight = current;
+                    best_colors = colors;
+                }
+            }
+
+            let mut clause = 0_u64;
+            let mut exact_weight = 0.0;
+            for (triple, &weight) in weights.iter().enumerate() {
+                let (left, right) = self.pair(cut, triple);
+                if left != u8::MAX && (best_colors >> left & 1) == (best_colors >> right & 1) {
+                    clause |= 1_u64 << triple;
+                    exact_weight += weight;
+                }
+            }
+            let insertion =
+                output[..written].partition_point(|context| context.weight <= exact_weight);
+            if insertion < output.len() {
+                let next_written = (written + 1).min(output.len());
+                output.copy_within(insertion..next_written - 1, insertion + 1);
+                output[insertion] = AlignmentFractionalContext {
+                    cut,
+                    clause,
+                    weight: exact_weight,
+                };
+                written = next_written;
+            }
+        }
+        Ok(written)
     }
 
     #[inline]
@@ -630,5 +753,48 @@ mod tests {
                 }
             }
         }
+    }
+
+    #[test]
+    fn gray_fractional_separator_matches_exhaustive_colourings() {
+        let problem = compile_alignment_attachment(5).unwrap();
+        let weights = (0..problem.triples().len())
+            .map(|index| ((13 * index + 5) % 23) as f64 / 29.0)
+            .collect::<Vec<_>>();
+        let compiled = problem.minimum_fractional_context(&weights).unwrap();
+        let mut direct = f64::INFINITY;
+        for cut in 0..problem.cut_count() {
+            let edge_count = problem.cut_edge_counts[cut] as usize;
+            for free_colors in 0_u16..1_u16 << (edge_count - 1) {
+                let colors = free_colors << 1;
+                let mut weight = 0.0;
+                for (triple, &triple_weight) in weights.iter().enumerate() {
+                    let (left, right) = problem.pair(cut, triple);
+                    if left != u8::MAX && (colors >> left & 1) == (colors >> right & 1) {
+                        weight += triple_weight;
+                    }
+                }
+                direct = direct.min(weight);
+            }
+        }
+        assert!((compiled.weight - direct).abs() < 1e-12);
+        let replay = weights
+            .iter()
+            .enumerate()
+            .filter(|(index, _)| compiled.clause >> *index & 1 != 0)
+            .map(|(_, weight)| weight)
+            .sum::<f64>();
+        assert!((compiled.weight - replay).abs() < 1e-12);
+        let mut batch = [compiled; 8];
+        assert_eq!(problem.fractional_contexts(&weights, &mut batch), Ok(8));
+        assert_eq!(batch[0], compiled);
+        assert!(batch
+            .windows(2)
+            .all(|pair| pair[0].weight <= pair[1].weight));
+        assert!(batch.windows(2).all(|pair| pair[0].cut != pair[1].cut));
+        assert_eq!(
+            problem.minimum_fractional_context(&weights[..9]),
+            Err(AlignmentError::Weights)
+        );
     }
 }

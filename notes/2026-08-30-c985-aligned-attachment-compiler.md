@@ -136,7 +136,29 @@ cases. All associated streams are explicitly incomplete and are not evidence.
 A fourth orbit split would have 559 cases per weight and did not make one
 diagnostic parity-native subcase immediate. The current Gurobi diagnostic
 therefore changes its lazy symmetry closure from a 720-cut callback storm to a
-tunable bounded pulse; its status is not part of this checkpoint.
+tunable bounded pulse.
+
+Three equal 300-second pulse controls retain the known 17-query incumbent but
+leave the certified lower bound at 15. One context times 16 rotating orbit
+images visits 179,851 nodes; four contexts times four images visits 273,890;
+and sixteen contexts with identity only visits 262,384. The `4 x 4` shape is
+the best throughput point, but no integer-incumbent-only pulse changes the
+bound. This identifies the backend pathology: lazy constraints arrive too late
+to strengthen the fractional relaxation.
+
+The missing exact user-cut oracle is now implemented in Rust. Fractional
+separation on one cut is weighted MaxCut on a rook graph with at most 16
+vertices. Complement symmetry fixes one colour, and Gray-code enumeration
+updates only the six edges incident to the flipped cut-edge vertex. The kernel
+returns a caller-sized batch of the lightest distinct-cut inequalities, uses
+fixed stack storage, and allocates nothing. Exhaustive five-point colourings
+agree exactly. On the quiet 8-point control, branchless sign-bit accumulation
+reduces a complete 127-cut pass from 34.77 ms to 8.14 ms, a 4.27x speedup. A
+three-round, 100-pass counter run is stable to 0.13% and gives 236.1 million
+instructions, 40.39 million cycles, about 1,200 branch misses, and 178 cache
+misses per complete pass. The next backend step is to expose this batched
+separator at fractional MIP nodes or consume it in the native LP lower bound;
+more integer lazy-cut tuning has low expected value.
 
 ## Boundary and next gate
 

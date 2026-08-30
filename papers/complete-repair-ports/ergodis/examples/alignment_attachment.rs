@@ -14,6 +14,23 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .ok()
         .map_or(Ok(24_u32), |value| value.parse())?;
     let problem = compile_alignment_attachment(points)?;
+    if let Ok(rounds) = std::env::var("ERGODIS_ALIGNMENT_FRACTIONAL_ROUNDS") {
+        let rounds = rounds.parse::<u32>()?;
+        let weights = (0..problem.triples().len())
+            .map(|index| ((17 * index + 3) % 31) as f64 / 37.0)
+            .collect::<Box<[_]>>();
+        let started = std::time::Instant::now();
+        let mut checksum = 0_u64;
+        for _ in 0..rounds {
+            let context = problem.minimum_fractional_context(&weights)?;
+            checksum ^= context.clause.rotate_left(context.cut as u32);
+        }
+        println!(
+            "points={points} fractional_rounds={rounds} elapsed_ns={} checksum={checksum:#x}",
+            started.elapsed().as_nanos()
+        );
+        return Ok(());
+    }
     let mut initial = 1_u64;
     if let Ok(fixed) = std::env::var("ERGODIS_ALIGNMENT_FIXED") {
         for index in fixed.split(',').filter(|item| !item.is_empty()) {

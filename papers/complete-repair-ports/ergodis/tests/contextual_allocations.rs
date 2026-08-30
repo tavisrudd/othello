@@ -94,6 +94,18 @@ fn aligned_attachment_search_allocates_nothing_after_workspace_construction() {
     assert_eq!(allocations, 0);
 }
 
+#[test]
+fn aligned_fractional_separation_allocates_nothing() {
+    let problem = compile_alignment_attachment(8).unwrap();
+    let weights = (0..problem.triples().len())
+        .map(|index| ((17 * index + 3) % 31) as f64 / 37.0)
+        .collect::<Vec<_>>();
+    let (context, allocations) =
+        tracked_allocations(|| problem.minimum_fractional_context(&weights).unwrap());
+    assert!(context.weight.is_finite());
+    assert_eq!(allocations, 0);
+}
+
 struct ThreeCycle;
 
 impl FinitePermutationAction for ThreeCycle {
