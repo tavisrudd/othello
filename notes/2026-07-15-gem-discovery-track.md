@@ -160,3 +160,72 @@ Madison–Wu use, column weight 2, row weight 6. **Nobody has written Edge's hex
 — follow-on, and the lane's next find-work.
 **Status**: open lead. The correction it forced in C191 and the method is a *result* and lives there;
 this entry records the byproduct, which is the far side itself.
+
+### 2026-08-29 — the order-892 matrix has an automorphism of order 3 that permutes its four blocks
+
+**Provenance**: C999, `notes/2026-08-29-c999-hadamard-668/certificate/H892.json` and the
+"Automorphism groups, and the 4-profile invariant" section of
+`notes/2026-08-29-c999-hadamard-668/verify/README.md`; commit `79693844f`.
+**Was I looking for this?**: no — the task asked for the automorphism group of order **668**, and
+892 was computed only because it was the next cheapest order in the same payload.
+**Expectation violated**: that the whole payload would look like 668, whose group is exactly the
+sign centre times the half-shift, which parity forces for a bordered array with even block length.
+**Observed / musing**: `|Aut(H892)| = 6`, from an element of order 3 fixing one position in each of
+the four circulant blocks of order 223. It is neither a common block shift nor a common block
+multiplier, so it must permute the four blocks as well — outside both families the crate's
+solver-free searches cover, which is why the solver proves it exists without describing it.
+**Why it may matter / strongest question**: an automorphism that mixes the four Goethals–Seidel
+blocks is a symmetry reduction available to a searcher, and 668 demonstrably had none. If the 892
+sequences were found inside a symmetry-reduced search and the 668 ones were not, that is visible
+evidence about a method its authors declined to disclose. Cheapest discriminator: read the order-3
+generator out of the existing nauty output and check whether it is a block permutation composed
+with a multiplier of `Z_223`.
+**Evidence**: CHECKED (nauty, and bliss on 668; the 892 group order is solver output, the
+generator's action is unread).
+**Status**: open lead.
+
+### 2026-08-29 — a free shift parameter sits inside the posted order-668 array and does nothing
+
+**Provenance**: C999, `notes/2026-08-29-c999-hadamard-668/README.md` under "Extracting the
+sequences", and the Lean library `lean/HadamardMatrices/BorderedGoethalsSeidel.lean` (commit
+`3ca9d0ad9`), which carries the shift as a parameter `e`.
+**Was I looking for this?**: no — the deliverable was orthogonality of the posted matrix; the
+deviation surfaced while rebuilding the matrix from the four extracted sequences and finding the
+textbook array did not reproduce it.
+**Observed / musing**: the six blocks of the lower-right 3×3 corner are back-circulant with entries
+`x(i+j+2)` instead of `x(i+j)` — an extra cyclic shift by 2. It cancels identically in every cross
+term, so the classical array at `e = 0` over the same four sequences is equally Hadamard. The
+posted matrix therefore uses a parameter it did not need.
+**Why it may matter / strongest question**: either the shift is a fixed artifact of how the
+poster's `sed` program advances its rotation state, in which case it carries no information, or `e`
+was a free coordinate in their search and the whole family `e ∈ Z_m` was being searched at once.
+Cheapest discriminator: report the shift value at the other three bordered orders (716, 1676,
+1772) — constant across all four means a generator convention, varying means a searched parameter.
+The crate detects the operation but does not currently print its shift.
+**Evidence**: CHECKED for `e = 2` at 668 (rebuild matches entry for entry) and LEAN for the
+irrelevance of `e` to orthogonality; OPEN for what it means.
+**Status**: open lead.
+
+### 2026-08-29 — two orders closed in the same fortnight by opposite search philosophies
+
+**Provenance**: C999, `notes/2026-08-29-c999-hadamard-668/certificate/H668.json` and
+`.../certificate/H2060.json` with the "External: order 2060" section of
+`.../certificate/README.md`; commits `79693844f` and `e4d2be925`.
+**Was I looking for this?**: no — 2060 was fetched to settle whether the smallest open order was
+still open, a bookkeeping question for the Part 2 survey. Its internal structure was a byproduct.
+**Observed / musing**: the externally posted order-2060 matrix is a Goethals–Seidel array over four
+blocks of order `515 = 5 · 103` written in a CRT-interleaved index order, with a genuine multiplier
+`104 ≡ (−1,1)` acting in one CRT factor and a proved dihedral row-automorphism group of order 10.
+The order-668 sequences are invariant under **no** unit of `Z_166` at all, in either the sign or
+the shift sense — every unit was tested. One construction rides a multiplier group to shrink its
+search space; the other apparently searched a 664-bit space with no reduction at all.
+**Why it may matter / strongest question**: multiplier-invariant search is the standard tool in
+this area and is exactly what this lane's own C736–C741 census assumes. A closure achieved without
+it is the interesting one, and says the frontier may be moving by compute rather than by structure.
+Cheapest discriminator: run the existing multiplier scan on the four prime-block-length orders
+1132, 1244, 1948, 1964 from the same payload — symmetry-free across the board would settle that the
+Alpöge search exploits no multiplier structure anywhere.
+**Evidence**: CHECKED (both structures recovered from matrix entries; the 668 multiplier scan is
+exhaustive over the units of `Z_166`; the 2060 automorphism statement is a proved lower bound, the
+exact group was not computed).
+**Status**: open lead.

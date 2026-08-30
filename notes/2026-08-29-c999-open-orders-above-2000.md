@@ -80,6 +80,16 @@ complete rather than partial.
 
 ## 2. Orders 4t in (2000, 4000] with no known Hadamard matrix
 
+> **2060 closed (2026-08-23 gist, verified 2026-08-30).** A gist posted by GitHub user
+> `schneiderlo` on 2026-08-23 gives a Hadamard matrix of order 2060; it was fetched and verified
+> here (`max |(H Hᵀ)_ij| = 0` off the diagonal in exact `i64`), and its structure is a
+> Goethals–Seidel array over four blocks of order `515 = 5 · 103` in a CRT-interleaved index order.
+> See `2026-08-29-c999-hadamard-668/external/provenance.md`,
+> `2026-08-29-c999-hadamard-668/certificate/H2060.json`, and the "External: order 2060" section of
+> `2026-08-29-c999-hadamard-668/certificate/README.md`. **The smallest open admissible order is
+> therefore 2092 = 4 · 523**, which was already this note's recommended first target in §4.1. The
+> lists and analysis below still list 2060 as open and have not been rewritten.
+
 ### 2.1 How the list is derived
 
 Source 1's Table 4 gives, for every odd n ≤ 2999, the minimal exponent m such that a Hadamard matrix

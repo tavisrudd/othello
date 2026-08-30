@@ -15,12 +15,17 @@ ID 2 while exhausting that mechanism for IDs 0, 1, 3, 4, and 5. C741 proves the 
 among the three fixed positions modulo 6 (36 same-point and 72 different-point cases); neither ID
 is yet decided. C760's bounded *Ten Advances* transplant spike is reported provisionally: scalar
 two-point moving projections cannot see the ternary arc condition, and the current deep-hole and
-matching-quotient data do not satisfy the polynomial-moment reconstruction hypotheses.
+matching-quotient data do not satisfy the polynomial-moment reconstruction hypotheses. C999 is
+reported: the externally announced order-668 Hadamard matrix is decoded, verified, structurally
+classified, Lean-checked and cross-checked against this lane's length-333 census, its Part 2 search
+declined by the user; C1000's feasibility spike is reported with no stage approved.
 
 **Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190/C191/C192/C193/C736/C737/C738
 reports and scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`,
-`notes/2026-07-15-gem-discovery-track.md`, this handoff and its companion, and the `gem-mining` rows
-of the global queue. Changes to the Clebsch manuscript belong to `clebsch` (C167), even when they
+`notes/2026-07-15-gem-discovery-track.md`, `notes/2026-08-29-c999-hadamard-668-report.md`,
+`notes/2026-08-29-c999-hadamard-668/**`, `notes/2026-08-29-c999-open-orders-above-2000.md`,
+`notes/2026-08-29-c1000-feasibility-spike.md`, `lean/HadamardMatrices/**`, this handoff and its
+companion, and the `gem-mining` rows of the global queue. Changes to the Clebsch manuscript belong to `clebsch` (C167), even when they
 cite a gem result.
 
 **C760 additionally owns** `notes/2026-08-01-c760-ten-proofs-method-spike.md` and any narrowly
@@ -110,6 +115,8 @@ Cheap-upgrade report: [reader questions and cheap upgrades](../2026-07-14-clebsc
 | **C740** | reported | exact six-case orbit-lock census excludes ID 2 `<112>` at shifts 111 and 222; full spectra prove the criterion does not exclude IDs `0,1,3,4,5`; C736's feasible 9-compression witnesses for IDs 2, 4, and 5 remain positive controls; the census is 25/30 impossible and paired IDs 4/5 are the next exact target → [report](../2026-07-31-c740-hadamard-668-residual-orbit-locks.md) |
 | **C741** | in progress, proof-carrying mixed lift remains | both common quotient systems are exactly feasible: C736's 9-compression witness survives and a new 37-compression witness has joint norm 650 and PAF `-18`; complete enumeration gives 4,089 accepted 9-compressions, eight complementary profile pairs, 648 normalized sequence pairs, and exactly 108 affine/decimation/swap representatives; orbit-size congruence proves exactly one singleton minus per positive row, and each compression recovers its location modulo 6, splitting the global frontier exactly into 36 same-point and 72 different-point cases; a compression-aware exact shift-111 mixed-triple screen retains all 108; finish those representatives with selector-aware checked proofs or a mixed-character obstruction—generic solver status is not evidence → [checkpoint](../2026-07-31-c741-hadamard-668-ids4-5.md) |
 | **C760** | reported, **provisional pending user-launched vet** | moving projections are killed for passant-arc bounds by the `q+1` passant-line clique and the missing three-point predicate; Lemma 10 is killed for the current Reed--Solomon and matching-quotient data by absent whole-fibre moment coherence; C737 is a hold-low one-sided spherical relaxation, not a promoted lead → [report](../2026-08-01-c760-ten-proofs-method-spike.md) |
+| **C999** | reported | Hadamard order 668 decoded, verified, classified, Lean-checked; Part 2 declined by the user → [report](../2026-08-29-c999-hadamard-668-report.md), deliverables `notes/2026-08-29-c999-hadamard-668/` |
+| **C1000** | spike reported, Stage 1 not approved | independent open-problem win: one-day feasibility spike delivered; no stage is authorised → [spike](../2026-08-29-c1000-feasibility-spike.md) |
 | **C174** | reported, folds into C155 | stronger six-arc identity in every finite projective plane; exact q=5,7,11,13 tables tracked → [report](../2026-07-14-c174-general-six-subset-identity.md) |
 | **C175** | queued, independent | classify concurrency-free conic six-sets across small q; not a C155 gate |
 | **C177** | queued, independent | test whether local Mathieu systems on the point-regulus conics of `D_Hex(11)` glue to a `2-(1332,6,240)` or oriented `2-(1332,6,120)` design; not a C155 gate |
