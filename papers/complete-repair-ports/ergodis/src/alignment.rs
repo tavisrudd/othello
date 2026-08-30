@@ -584,6 +584,9 @@ impl AlignmentSearchWorkspace {
         problem: &AlignmentAttachment,
         fixed: u64,
     ) -> Result<usize, AlignmentError> {
+        if !self.compact_seen.is_empty() {
+            return Err(AlignmentError::Workspace);
+        }
         if fixed == 0 || fixed >> problem.triples.len() != 0 {
             return Err(AlignmentError::Family);
         }
@@ -635,6 +638,9 @@ impl AlignmentSearchWorkspace {
         problem: &AlignmentAttachment,
         fixed: u64,
     ) -> Result<usize, AlignmentError> {
+        if !self.compact_seen.is_empty() {
+            return Err(AlignmentError::Workspace);
+        }
         if fixed == 0 || fixed >> problem.triples.len() != 0 {
             return Err(AlignmentError::Family);
         }
@@ -1132,6 +1138,14 @@ mod tests {
         let mut workspace = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
         assert_eq!(workspace.enable_compact_seen(&problem, 1).unwrap(), 5 << 18);
         assert_eq!(workspace.seen_storage_bytes(), 5 << 18);
+        assert_eq!(
+            workspace.enable_compact_seen(&problem, 1),
+            Err(AlignmentError::Workspace)
+        );
+        assert_eq!(
+            workspace.set_point_stabilizer(&problem, 1),
+            Err(AlignmentError::Workspace)
+        );
         let mut keys = std::collections::HashSet::new();
         for selected in 0..1_u64 << problem.triples().len() {
             if selected & 1 != 0 && selected.count_ones() <= 9 {
