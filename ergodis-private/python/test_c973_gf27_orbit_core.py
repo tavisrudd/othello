@@ -36,6 +36,13 @@ class C973Gf27OrbitCoreTest(unittest.TestCase):
         )
         self.assertTrue(all(orbit["orbit_size"] == 26 for orbit in result["orbits"]))
         self.assertEqual(result["semilinear_orbit_cores"][0]["orbit_size"], 78)
+        self.assertEqual(result["semilinear_seed_switch"]["removed"], [24, 26])
+        self.assertEqual(result["semilinear_seed_switch"]["added"], [3, 19])
+        self.assertEqual(
+            result["semilinear_seed_switch"]["plane_locator_coefficients_low_to_high"],
+            [0, 16, 0, 22, 0, 0, 0, 0, 0, 1],
+        )
+        self.assertEqual(result["semilinear_seed_switch"]["closing_coefficients"], {"g_2": 0, "g_3": 0})
         self.assertEqual(
             result["extremal_curve_core"]["formula"],
             "(z2,...,z8)=(0,1,t,t^2,-t^3,-t^4,-t^5)",

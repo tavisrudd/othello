@@ -87,6 +87,7 @@ def semilinear_orbit(support: tuple[int, ...]) -> set[tuple[int, ...]]:
 def extract(source: Path, extremes: Path | None = None) -> dict[str, object]:
     source_bytes = source.read_bytes()
     rows: list[tuple[str, tuple[int, ...]]] = []
+    row_details: dict[tuple[int, ...], dict[str, str]] = {}
     with source.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle, delimiter="\t"):
             support = tuple(sorted(int(value) for value in row["nine_set"].split(",")))
@@ -96,6 +97,7 @@ def extract(source: Path, extremes: Path | None = None) -> dict[str, object]:
             if polynomial[2] != 0 or polynomial[3] != 0:
                 raise ValueError("certificate row does not close e_3")
             rows.append((row["lambda_label"], support))
+            row_details[support] = row
 
     support_set = {support for _, support in rows}
     if len(support_set) != len(rows):
@@ -142,6 +144,18 @@ def extract(source: Path, extremes: Path | None = None) -> dict[str, object]:
             }
         )
 
+    seed = tuple(semilinear_groups[0]["representative"])
+    seed_row = row_details[seed]
+    plane = tuple(sorted(int(value) for value in seed_row["plane_points"].split(",")))
+    removed = sorted(set(plane) - set(seed))
+    added = sorted(set(seed) - set(plane))
+    if len(removed) != 2 or len(added) != 2:
+        raise ValueError("semilinear seed is not a two-point plane switch")
+    if added != sorted((int(seed_row["y1"]), int(seed_row["y2"]))):
+        raise ValueError("switch metadata does not match seed support")
+    plane_locator = polynomial_from_roots(plane)
+    seed_locator = polynomial_from_roots(seed)
+
     result: dict[str, object] = {
         "schema": "ergodis.semantic-orbit-core.v1",
         "problem": "C973 GF(27) extremal e3 switch witnesses",
@@ -156,9 +170,19 @@ def extract(source: Path, extremes: Path | None = None) -> dict[str, object]:
         "semilinear_orbits": len(semilinear_groups),
         "semilinear_compression_ratio": len(rows) / len(semilinear_groups),
         "semilinear_orbit_cores": semilinear_groups,
+        "semilinear_seed_switch": {
+            "plane": list(plane),
+            "plane_basis_over_F3": [1, 12],
+            "plane_locator_coefficients_low_to_high": plane_locator,
+            "removed": removed,
+            "added": added,
+            "support": list(seed),
+            "support_locator_coefficients_low_to_high": seed_locator,
+            "closing_coefficients": {"g_2": seed_locator[2], "g_3": seed_locator[3]},
+        },
         "proof_target": (
-            "verify one representative switch identity and prove that nonzero scalar "
-            "multiplication and field Frobenius preserve admissibility and closure"
+            "verify the recorded additive-plane two-point switch identity and prove that "
+            "nonzero scalar multiplication and field Frobenius preserve admissibility and closure"
         ),
     }
     if extremes is not None:

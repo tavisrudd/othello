@@ -269,6 +269,21 @@ C973 checkpoint, so the mathematical value here is independent extraction and
 proof recovery, not a novelty claim.  What remains genuinely useful is that
 the 78 locators over the normalized fibre reduce to one semilinear seed.
 
+That seed is itself source-readable.  It starts with the additive plane
+`<1,12>_F3`, whose locator is the linearized polynomial
+`X^9+22X^3+16X`, removes `24,26`, and inserts `3,19`.  The resulting locator
+has coefficient vector
+
+```text
+(g0,...,g9) = (0,21,0,0,2,4,9,13,19,1),
+```
+
+so the required `g2=g3=0` identity is immediate.  Consequently the complete
+extremal packet reduces to one additive-plane two-point-switch computation,
+divided-power translation, scalar transport, and Frobenius transport.  This
+is the desired certificate-to-lemma shape; none of the 2,106 finite witness
+pairs is logically primitive.
+
 The broader PRS route is digit-first rather than field-first: compile each
 carrier extension into kernel state, quotient `E tensor E^(1)` orbit type,
 extension-leakage cocycle, marker/root exclusions, and switch margin.  If this

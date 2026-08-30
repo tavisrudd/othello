@@ -71,7 +71,7 @@
     }
   ],
   "problem": "C973 GF(27) extremal e3 switch witnesses",
-  "proof_target": "verify one representative switch identity and prove that nonzero scalar multiplication and field Frobenius preserve admissibility and closure",
+  "proof_target": "verify the recorded additive-plane two-point switch identity and prove that nonzero scalar multiplication and field Frobenius preserve admissibility and closure",
   "schema": "ergodis.semantic-orbit-core.v1",
   "semilinear_compression_ratio": 78.0,
   "semilinear_orbit_cores": [
@@ -86,6 +86,16 @@
     }
   ],
   "semilinear_orbits": 1,
+  "semilinear_seed_switch": {
+    "added": [3, 19],
+    "closing_coefficients": {"g_2": 0, "g_3": 0},
+    "plane": [0, 1, 2, 12, 13, 14, 24, 25, 26],
+    "plane_basis_over_F3": [1, 12],
+    "plane_locator_coefficients_low_to_high": [0, 16, 0, 22, 0, 0, 0, 0, 0, 1],
+    "removed": [24, 26],
+    "support": [0, 1, 2, 3, 12, 13, 14, 19, 25],
+    "support_locator_coefficients_low_to_high": [0, 21, 0, 0, 2, 4, 9, 13, 19, 1]
+  },
   "source": "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/e3-good78.tsv",
   "source_sha256": "07e4b937b59a8e3b3b054c5eaec08d4fc15dbc95c66a3bbabf6a89aca5c3c5bc",
   "torus_orbits": 3
