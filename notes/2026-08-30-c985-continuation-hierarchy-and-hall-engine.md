@@ -153,6 +153,17 @@ the two displayed defects.  A lexicographic measure with overload before or
 after support is therefore a possible stepping stone, not the theorem the C80
 handoff currently requests.
 
+The game-semantic scope is narrower still.  Those two defects are the
+successor's only legal moves and are mutually conflicting; playing either
+leaves no move.  The successor is therefore N, not a candidate P-survivor
+reply.  The scout deliberately tested every old-labelled complete exchange,
+not only replies already admitted by `F_d`, `B_cc`, or another sound survivor.
+Consequently the certificate refutes a universal per-exchange charge law.  It
+does **not** refute the opponent-complete existential statement that every
+relevant opponent has some different reply satisfying Hall, descent, and a P
+boundary.  Any next C80 adapter must encode that reply-admission predicate
+explicitly rather than treating an incidence invariant as a game theorem.
+
 This is a successful Ergodis negative: it turns the first apparently natural
 edge law into the exact minimal obstruction rather than encouraging a broad
 q23 census.  The next proof object must either (i) give the opponent label
@@ -208,6 +219,11 @@ and no exchange creates more than two new defects.  The q13 sample reaches four
 new defects but every sampled charged support decreases strictly.  These are
 deterministic samples, not exhaustive field theorems.
 
+These diagnostics range over old-labelled exchanges, not an opponent-complete
+P-survivor reply family.  Their value is state compression and falsification:
+they suggest the two scalar inequalities as cheap admission tests, but they do
+not prove that an admitted reply exists for each opponent.
+
 This compresses the next C80 question to two scalar inequalities rather than a
 growing matching:
 
@@ -258,6 +274,23 @@ misses.  Cache misses rose by 13.98% from a very small absolute count, so the
 timing protocols, not that single counter pair, carry the speed claim.  Raw
 outputs are under `/home/tavis/.cache/ergodis/c985-objective-ab` and are not
 paper evidence.
+
+## Bounded integer-moment compiler fixture
+
+`integer_moments` adds an allocation-free iterative kernel for nondecreasing
+integer multisets with prescribed degree, first moment, and second moment.  An
+exact convex lower envelope and endpoint-concentration upper envelope reject
+unreachable prefixes before descent.  The reusable workspace owns every stack
+and accumulator; enumeration performs no recursion and no allocation.  A
+fixed-width modular coefficient recurrence then checks the Seidel type-2
+divisibility conditions through order 63 without big-integer allocation.
+
+The exact controls reproduce all four integral-subpopulation counts from
+C1000's approved Stage 0: `177 -> 6`, `722 -> 28`, `2066 -> 28`, and the
+forced-root case `68 -> 6`.  This is a reusable spectral-enumeration primitive,
+not authorization for C1000 Stage 1.  It enumerates integer-rooted spectra only;
+it neither enumerates the complete real-rooted polynomial population nor
+changes any bound on equiangular lines in `R^18`.
 
 ## Commits and validation
 

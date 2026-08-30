@@ -20,6 +20,7 @@ pub mod field;
 pub mod group_action;
 pub mod hall;
 pub mod incidence;
+pub mod integer_moments;
 pub mod interface;
 pub mod matrix;
 pub mod observational;
@@ -102,6 +103,10 @@ pub use group_action::{
 pub use hall::{
     solve_hall, verify_hall_certificate, verify_hall_result, DenseHallGraph, HallError,
     HallReplayError, HallResult, HallWorkspace,
+};
+pub use integer_moments::{
+    enumerate_integer_moments, seidel_integer_spectrum_is_type2, IntegerMomentError,
+    IntegerMomentMetrics, IntegerMomentProblem, IntegerMomentWorkspace,
 };
 pub use interface::{
     lift_class_witnesses, present_finite_interface, present_witnessed_pareto_interface,
