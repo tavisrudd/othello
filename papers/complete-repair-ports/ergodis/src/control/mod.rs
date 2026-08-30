@@ -36,6 +36,7 @@ pub const MAX_ARCHIVE_CLASSES: usize = 4096;
 pub const SOCKET_IO_TIMEOUT: Duration = Duration::from_secs(10);
 const EVENT_RING: usize = 256;
 const MAX_WATCHERS: usize = 64;
+static NEXT_CLIENT_REQUEST_ID: AtomicU64 = AtomicU64::new(1);
 
 #[derive(Debug, thiserror::Error)]
 pub enum ControlError {
@@ -1054,7 +1055,7 @@ pub fn send_request(
 ) -> Result<Response, ControlError> {
     let request = Request {
         schema: SCHEMA.into(),
-        request_id: 1,
+        request_id: next_client_request_id(),
         run_id: manifest.run_id.clone(),
         nonce: manifest.nonce.clone(),
         max_bytes: max_bytes.min(MAX_FRAME_BYTES),
@@ -1073,6 +1074,15 @@ pub fn send_request(
         return Err(ControlError::Invalid("response handshake rejected".into()));
     }
     Ok(response)
+}
+
+fn next_client_request_id() -> u64 {
+    loop {
+        let request_id = NEXT_CLIENT_REQUEST_ID.fetch_add(1, Ordering::Relaxed);
+        if request_id != 0 {
+            return request_id;
+        }
+    }
 }
 
 pub fn read_manifest(run_dir: &Path) -> Result<Manifest, ControlError> {
@@ -1279,6 +1289,14 @@ mod tests {
         assert_eq!(response.schema, SCHEMA);
         assert_eq!(response.request_id, 7);
         assert_eq!(serde_json::to_string(&response).unwrap(), response_json);
+    }
+
+    #[test]
+    fn rust_client_request_ids_are_nonzero_and_monotone() {
+        let first = next_client_request_id();
+        let second = next_client_request_id();
+        assert_ne!(first, 0);
+        assert!(second > first);
     }
 
     #[test]
