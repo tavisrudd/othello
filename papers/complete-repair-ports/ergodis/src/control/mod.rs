@@ -12,6 +12,7 @@ use std::os::unix::fs::{FileTypeExt, OpenOptionsExt, PermissionsExt};
 use std::os::unix::net::{UnixDatagram, UnixListener, UnixStream};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
+use std::time::Duration;
 
 mod client;
 mod synthesis;
@@ -32,6 +33,7 @@ pub const MAX_PLAN_OPS: usize = 128;
 pub const MAX_PLAN_STACK: usize = 64;
 pub const MAX_ACTIVE_PLANS: usize = 64;
 pub const MAX_ARCHIVE_CLASSES: usize = 4096;
+pub const SOCKET_IO_TIMEOUT: Duration = Duration::from_secs(10);
 const EVENT_RING: usize = 256;
 const MAX_WATCHERS: usize = 64;
 
@@ -225,6 +227,8 @@ impl Campaign {
         let mut shutdown = false;
         while !shutdown {
             let (mut stream, _) = listener.accept()?;
+            stream.set_read_timeout(Some(SOCKET_IO_TIMEOUT))?;
+            stream.set_write_timeout(Some(SOCKET_IO_TIMEOUT))?;
             match read_frame(&mut stream) {
                 Ok(bytes) => {
                     let request = serde_json::from_slice::<Request>(&bytes);
@@ -303,6 +307,7 @@ impl Campaign {
             "schema": SCHEMA,
             "framing": "u32-le-length-prefixed-json",
             "max_frame_bytes": MAX_FRAME_BYTES,
+            "socket_io_timeout_ms": SOCKET_IO_TIMEOUT.as_millis() as u64,
             "large_results": "run-relative-create-only-files",
             "proof_authority": false,
             "operations": [
@@ -1563,6 +1568,10 @@ mod tests {
         assert!(capabilities.ok);
         assert_eq!(capabilities.result["schema"], SCHEMA);
         assert_eq!(capabilities.result["max_frame_bytes"], MAX_FRAME_BYTES);
+        assert_eq!(
+            capabilities.result["socket_io_timeout_ms"],
+            SOCKET_IO_TIMEOUT.as_millis() as u64
+        );
         assert_eq!(capabilities.result["proof_authority"], false);
 
         let (pulse, _) = campaign.handle(request(&campaign, 3, "pulse", json!({"since_epoch": 0})));

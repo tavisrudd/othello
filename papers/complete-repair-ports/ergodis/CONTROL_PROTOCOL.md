@@ -22,6 +22,8 @@ UTF-8 JSON payload of exactly that length
 Frames are at most 65,536 bytes.  Unknown request fields are rejected.  The
 client must verify the response schema, request ID, and run ID.  The daemon
 accepts connections through a blocking Unix-domain listener; it does not poll.
+Accepted streams have the read/write deadline reported by `capabilities`, so a
+client that abandons a partial frame cannot hold the serial controller forever.
 
 The request object contains `schema`, `request_id`, `run_id`, `nonce`,
 `max_bytes`, `op`, and an `args` object.  The response contains `schema`,
