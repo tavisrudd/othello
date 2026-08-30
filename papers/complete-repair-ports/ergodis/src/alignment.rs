@@ -32,6 +32,7 @@ pub struct AlignmentAttachment {
     point_count: u8,
     triples: Box<[[u8; 3]]>,
     cut_edge_counts: Box<[u8]>,
+    cut_triple_masks: Box<[u64]>,
     cut_pairs: Box<[u8]>,
 }
 
@@ -59,7 +60,10 @@ impl AlignmentAttachment {
         if selected >> self.triples.len() != 0 {
             return Err(AlignmentError::Family);
         }
-        Ok(self.violation_summary(selected).0.is_none())
+        Ok(self
+            .violation_summary(selected, self.all_cut_mask())
+            .0
+            .is_none())
     }
 
     /// Decide one compiled cut.  This is useful for monotone residualization:
@@ -196,14 +200,12 @@ impl AlignmentAttachment {
     fn violation_for_cut(&self, cut: usize, selected: u64) -> Option<u64> {
         let edge_count = self.cut_edge_counts[cut] as usize;
         let mut adjacency = [0_u16; 16];
-        let mut remaining_selected = selected;
+        let mut remaining_selected = selected & self.cut_triple_masks[cut];
         while remaining_selected != 0 {
             let triple = remaining_selected.trailing_zeros() as usize;
             remaining_selected &= remaining_selected - 1;
             let (left, right) = self.pair(cut, triple);
-            if left == u8::MAX {
-                continue;
-            }
+            debug_assert_ne!(left, u8::MAX);
             adjacency[left as usize] |= 1_u16 << right;
             adjacency[right as usize] |= 1_u16 << left;
         }
@@ -246,9 +248,12 @@ impl AlignmentAttachment {
             }
         }
         let mut clause = 0_u64;
-        for triple in 0..self.triples.len() {
+        let mut crossing = self.cut_triple_masks[cut];
+        while crossing != 0 {
+            let triple = crossing.trailing_zeros() as usize;
+            crossing &= crossing - 1;
             let (left, right) = self.pair(cut, triple);
-            if left != u8::MAX && (color_one >> left & 1) == (color_one >> right & 1) {
+            if (color_one >> left & 1) == (color_one >> right & 1) {
                 clause |= 1_u64 << triple;
             }
         }
@@ -256,18 +261,42 @@ impl AlignmentAttachment {
         Some(clause)
     }
 
-    fn violation_summary(&self, selected: u64) -> (Option<u64>, u32) {
+    fn all_cut_mask(&self) -> [u64; 2] {
+        let low_bits = |count: usize| {
+            if count >= 64 {
+                u64::MAX
+            } else {
+                (1_u64 << count) - 1
+            }
+        };
+        let upper = self.cut_count().saturating_sub(64);
+        [low_bits(self.cut_count()), low_bits(upper)]
+    }
+
+    fn violation_summary(
+        &self,
+        selected: u64,
+        candidates: [u64; 2],
+    ) -> (Option<u64>, u32, [u64; 2]) {
         let mut best = None;
         let mut clauses = [0_u64; 127];
         let mut clause_count = 0_usize;
-        for cut in 0..self.cut_count() {
-            let Some(clause) = self.violation_for_cut(cut, selected) else {
-                continue;
-            };
-            clauses[clause_count] = clause;
-            clause_count += 1;
-            if best.is_none_or(|prior: u64| clause.count_ones() < prior.count_ones()) {
-                best = Some(clause);
+        let mut unresolved = [0_u64; 2];
+        for word in 0..2 {
+            let mut cuts = candidates[word];
+            while cuts != 0 {
+                let offset = cuts.trailing_zeros() as usize;
+                cuts &= cuts - 1;
+                let cut = 64 * word + offset;
+                let Some(clause) = self.violation_for_cut(cut, selected) else {
+                    continue;
+                };
+                unresolved[word] |= 1_u64 << offset;
+                clauses[clause_count] = clause;
+                clause_count += 1;
+                if best.is_none_or(|prior: u64| clause.count_ones() < prior.count_ones()) {
+                    best = Some(clause);
+                }
             }
         }
         let mut used = 0_u64;
@@ -318,7 +347,7 @@ impl AlignmentAttachment {
             capacity += usize::from(hit_counts[best_triple]);
             incidence_bound += 1;
         }
-        (best, packing.max(incidence_bound))
+        (best, packing.max(incidence_bound), unresolved)
     }
 }
 
@@ -341,6 +370,7 @@ pub fn compile_alignment_attachment(
 
     let cut_count = (1_usize << (n - 1)) - 1;
     let mut cut_edge_counts = Vec::with_capacity(cut_count);
+    let mut cut_triple_masks = Vec::with_capacity(cut_count);
     let mut cut_pairs = Vec::with_capacity(cut_count * triples.len() * 2);
     for cut in 1..=cut_count {
         let mut edge_index = [[u8::MAX; 8]; 8];
@@ -354,7 +384,8 @@ pub fn compile_alignment_attachment(
             }
         }
         cut_edge_counts.push(edge_count);
-        for &[a, b, c] in &triples {
+        let mut cut_triple_mask = 0_u64;
+        for (triple, &[a, b, c]) in triples.iter().enumerate() {
             let (a, b, c) = (a as usize, b as usize, c as usize);
             let endpoints = if side(cut, a) == side(cut, b) && side(cut, a) != side(cut, c) {
                 Some((c, a, b))
@@ -369,16 +400,19 @@ pub fn compile_alignment_attachment(
                 cut_pairs.extend([u8::MAX, u8::MAX]);
                 continue;
             };
+            cut_triple_mask |= 1_u64 << triple;
             cut_pairs.extend([
                 edge_index[center.min(left)][center.max(left)],
                 edge_index[center.min(right)][center.max(right)],
             ]);
         }
+        cut_triple_masks.push(cut_triple_mask);
     }
     Ok(AlignmentAttachment {
         point_count: point_count as u8,
         triples: triples.into_boxed_slice(),
         cut_edge_counts: cut_edge_counts.into_boxed_slice(),
+        cut_triple_masks: cut_triple_masks.into_boxed_slice(),
         cut_pairs: cut_pairs.into_boxed_slice(),
     })
 }
@@ -399,6 +433,7 @@ pub struct AlignmentSearchMetrics {
 struct SearchFrame {
     selected: u64,
     branch_bits: u64,
+    unresolved_cuts: [u64; 2],
     entered: bool,
 }
 
@@ -555,6 +590,7 @@ pub fn search_alignment_attachment_from(
     workspace.frames.fill(SearchFrame::default());
     workspace.frames[0] = SearchFrame {
         selected: initial,
+        unresolved_cuts: problem.all_cut_mask(),
         ..SearchFrame::default()
     };
     let mut depth = 0_usize;
@@ -578,7 +614,9 @@ pub fn search_alignment_attachment_from(
                 .states
                 .checked_add(1)
                 .ok_or(AlignmentError::Overflow)?;
-            let (violation, packing) = problem.violation_summary(selected);
+            let (violation, packing, unresolved_cuts) =
+                problem.violation_summary(selected, workspace.frames[depth].unresolved_cuts);
+            workspace.frames[depth].unresolved_cuts = unresolved_cuts;
             let Some(clause) = violation else {
                 return Ok((Some(selected), metrics));
             };
@@ -603,9 +641,11 @@ pub fn search_alignment_attachment_from(
             let bit = branch_bits & branch_bits.wrapping_neg();
             workspace.frames[depth].branch_bits ^= bit;
             let selected = workspace.frames[depth].selected | bit;
+            let unresolved_cuts = workspace.frames[depth].unresolved_cuts;
             depth += 1;
             workspace.frames[depth] = SearchFrame {
                 selected,
+                unresolved_cuts,
                 ..SearchFrame::default()
             };
         } else if depth == 0 {

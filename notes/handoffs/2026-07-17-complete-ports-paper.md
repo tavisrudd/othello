@@ -517,13 +517,15 @@ Sequel research:
   outer solve--replay--cut boundary after a Gurobi presolve incumbent escaped
   callback enforcement; unreplayed objectives are never reported as
   incumbents. Its native DFS can opt into exact setwise-stabilizer
-  canonicalization with no hot-loop allocation. Completed controls improve
-  5.78x at `n=6` and 30.18x on a rooted `n=8` exclusion while cutting the latter
-  from 63.64 billion to 2.082 billion instructions. A 60-second rooted
-  budget-16 probe remains incomplete, and the exact `15 <= g(8) <= 17` gap is
-  unchanged. The next C880 gate is a proof-producing symmetry-quotiented orbit
-  sweep or a genuinely aggregate context rank inequality, not more first-order
-  Gurobi pulse tuning.
+  canonicalization with no hot-loop allocation. Monotone unresolved-cut masks
+  and compiled crossing-triple masks remove discharged and irrelevant work.
+  Completed controls improve 5.78x at `n=6` and about 52.7x on a rooted `n=8`
+  exclusion; the final crossing-mask slice alone is 1.746x. A parity-DSU
+  alternative is rejected as 1.674x slower. A bounded rooted budget-16 probe
+  remains incomplete, and the exact `15 <= g(8) <= 17` gap is unchanged. The
+  next C880 gate is a proof-producing symmetry-quotiented orbit sweep or a
+  genuinely aggregate context rank inequality, not more first-order Gurobi
+  pulse tuning.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

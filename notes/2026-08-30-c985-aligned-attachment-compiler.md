@@ -159,6 +159,30 @@ billion instructions, 28.18 billion to 0.925 billion cycles, and 397,975 to
 without a result and is not evidence. The reduction nevertheless removes the
 largest known repeat-work factor before another proof-producing run.
 
+Profiling the actual budget-16 worker assigned 85.6% of cycles to rebuilding
+and checking cut graphs. Monotonicity now carries a two-word unresolved-cut
+mask down the iterative DFS: once a partial family separates a cut, no
+extension revisits it. This adds a statistically clear 1.1457x on the `n=6`
+control (`t=5.554`) and a smaller, inconclusive 1.0221x on the rooted `n=8`
+control (`t=1.338`). The representation is still fixed-size and allocation-free.
+
+The larger local win is a compiled crossing-triple mask for each cut. Selected
+edge insertion now ignores non-crossing triples before the bitmap BFS, and
+failed-colouring clause construction iterates only the structurally possible
+triple bits instead of scanning all 56 variables. Against the already
+symmetry-quotiented and residualized build, 21 interleaved rooted `n=8` rounds
+give another 1.7462x geometrically (1.7818x median, paired log-ratio
+`t=38.219`). Five-round counters reduce cycles `910.5M -> 521.7M`, branches
+`412.0M -> 291.2M`, and branch misses `19.62M -> 6.01M`; instructions fall
+only `2.063B -> 1.940B`, so most of the gain is better independent work and
+branch behaviour. Relative to the pre-symmetry worker, the completed rooted
+`n=8` control is about 52.7x faster.
+
+A parity-DSU replacement for the 16-vertex bitmap BFS was also measured and
+rejected. Its dependent find/union chains made the same exact control 1.674x
+slower across 21 rounds (old/new geometric ratio `0.5971`, `t=-56.292`). The
+bitmap kernel remains the admitted implementation.
+
 Three equal 300-second pulse controls retain the known 17-query incumbent but
 leave the certified lower bound at 15. One context times 16 rotating orbit
 images visits 179,851 nodes; four contexts times four images visits 273,890;
@@ -241,8 +265,10 @@ cut-context theorem.
   genuinely aggregate cover/rank inequality or a complete quotient-branch
   proof; C985 owns it.
 - **Partly settled:** native orbit workers repeated symmetry-equivalent partial
-  families. Setwise-stabilizer canonicalization removes 5.78x--30.18x wall
-  time on completed controls, but the bounded budget-16 probe still timed out.
+  families and rechecked discharged/non-crossing contexts. Setwise-stabilizer
+  canonicalization plus monotone residualization and crossing masks removes up
+  to about 52.7x wall time on completed controls, but the bounded budget-16
+  probe still timed out.
 - **Settled:** a displayed generic-solver incumbent is not automatically a
   certified Ergodis incumbent. The independent outer replay boundary now
   catches callback-delivery gaps and refuses unreplayed objectives.
