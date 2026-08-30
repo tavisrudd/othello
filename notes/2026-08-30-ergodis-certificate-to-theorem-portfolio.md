@@ -163,6 +163,45 @@ workspace construction.  Exhaustive comparison with brute force passes on all
 malformed-graph tests.  This removes matching mechanics as a risk; it does not
 define or validate C80's projective charge edge.
 
+The first edge proposal now passes the frozen `q=11` one-to-many falsifier.
+Define the **ancestral-secant edge** by
+
+```text
+new defect z -- consumed old label ell
+iff line(z,ell) contains a pre-exchange selected point.
+```
+
+This is projectively natural and uses only bounded incidence data.  On the
+witness its two new defects have degrees three and two in a seven-label graph.
+The exact Hall core returns the distinct assignment
+
+```text
+(0,5) -> (4,10), carried by ancestral point (10,1)
+(6,5) -> (3,7),  carried by ancestral point (5,2).
+```
+
+Thus it avoids the shared causal reply `(7,10)` that killed one-label
+transport.  This is a useful candidate, not a C80 theorem: no charge-transport
+soundness lemma has been proved for the edge, and it has not passed the three
+q23 replacement classes or the q11/q13 control corpus.  The graph, semantic
+manifest, and matching certificate are in `ergodis-private/evidence/` under
+the prefix `c80-q11-ancestral-secant-hall-`.
+
+Replay the independent certificate check with:
+
+```bash
+PYTHONPATH=ergodis-private/python python3 \
+  ergodis-private/python/verify_hall_certificate.py \
+  --graph ergodis-private/evidence/c80-q11-ancestral-secant-hall-graph.json \
+  --certificate ergodis-private/evidence/c80-q11-ancestral-secant-hall-certificate.json
+python3 rust/scripts/c80_causal_one_to_many.py --check
+```
+
+The graph, semantic manifest, and certificate SHA-256 values are respectively
+`16fc9151242b959952d8cd5698d52120bb46b268047efb0638df2f03201a8960`,
+`e925b55682c885ddb6fc6579e02b83ae8af399fe925a6ea1a4fa97dcfd2f8000`, and
+`23d3830e4b0b0f47c5407462e4580be60d8e1c5101baa9ce0ae5cc10f53e4e1b`.
+
 ### C756
 
 Treat each maximum coherent set and each failed extension as an orbit object.
@@ -239,6 +278,9 @@ lowered to an explicit stack before input-scaled use.
 - **Settled engineering:** exact matching and deficient-set extraction are
   reusable, allocation-free after sizing, and exhaustively checked through
   `4 x 4`; C80's missing datum is now solely the sound edge relation.
+- **Found, not proved:** the ancestral-secant edge passes the exact q11
+  one-to-many witness with a noncausal two-label matching.  Its soundness and
+  q23 coverage are the immediate falsification gates.
 
 **EJ.** A successful C896 state quotient would provide the first literal
 weighted-automaton/minimal-realization instance for the broader Ergodis thesis.

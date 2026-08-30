@@ -20,3 +20,7 @@ path = "src/bin/projective_grid_scout.rs"
 [[bin]]
 name = "alignment-controlled"
 path = "src/bin/alignment_controlled.rs"
+
+[[bin]]
+name = "hall-certify"
+path = "src/bin/hall_certify.rs"
