@@ -3,6 +3,7 @@
 //! The crate is organized around compact state representations and replayable
 //! arena witnesses.  It intentionally does not mirror the Python module tree.
 
+pub mod alignment;
 pub mod applications;
 mod arena;
 pub mod automata;
@@ -39,6 +40,10 @@ pub mod transfer;
 pub mod witness;
 mod zdd;
 
+pub use alignment::{
+    compile_alignment_attachment, search_alignment_attachment, AlignmentAttachment, AlignmentError,
+    AlignmentSearchMetrics, AlignmentSearchWorkspace,
+};
 pub use applications::{
     azure_lrc_12_2_2_counted, azure_lrc_12_2_2_upgrade_domains, ceph_xor_repair_family,
     ceph_xor_repair_supports, ceph_xor_repair_supports_compressed, gpu_checkpoint_mds_recovery,
