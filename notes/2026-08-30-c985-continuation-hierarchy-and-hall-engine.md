@@ -72,12 +72,47 @@ has the forced global matching
 
 Thus the original local update fails for exactly the reason recorded by C80,
 while enlarging elimination to the complete exchange repairs the collision at
-the reply-resource level.  This is evidence for the Hall-rematching route, not
-the C80 theorem or even yet its final consumed-label graph: `(2,9)` is not one
-of the seven old defect labels.  The next mathematical gate must identify how
-that consumed reply transports a distinct ancestral label soundly, then replay
-the q23 representatives and retained corpus under that edge law.  The generic
-oracle is no longer the blocker.
+the reply-resource level.  The reply graph alone is not the final
+consumed-label graph because `(2,9)` is not one of the seven old defect labels.
+
+A first projectively natural lift of that resource graph has now passed every
+retained representative control.  For a new defect `z`, attacked old
+certificate reply `r`, causal move `h`, and consumed old defect label `ell`,
+put `z -- ell` when either
+
+```text
+ell = r,
+```
+
+or `r` is deleted on a new secant and
+
+```text
+ell lies on Line(h,r).
+```
+
+The q=11 deleted reply `(2,9)` lies with `h=(7,10)` on a line containing the
+distinct consumed old defect `(3,7)`.  The exact matching is therefore
+
+```text
+(0,5) -> (3,7)   [deletion-secant edge]
+(6,5) -> (7,10)  [direct consumed-reply edge].
+```
+
+For the q23 Type-I representative, the deletion secant supplies three old
+labels `(11,18)`, `(12,15)`, and `(20,14)` for its sole new defect.  Types II
+and III supply the causal old label `(20,17)`; they have the identical local
+state and move.  The same finite-field incidence code constructs all four
+graphs, and the Hall engine saturates each.
+
+The associated transport lemma is combinatorial.  If this equivariant
+restriction graph has a matching from all new defects into consumed old
+labels, retain the surviving labels and assign each new defect its matched
+consumed label.  Matching injectivity prevents new/new collisions; consumption
+prevents new/retained collisions.  Whenever the consumed-label count exceeds
+the new-defect count, the support cardinality decreases strictly.  What remains
+open is the field-uniform Hall inequality for this incidence relation and
+opponent-complete entry.  The q11/q23 representatives are positive controls,
+not that theorem; the full retained q23 corpus is the next finite gate.
 
 ## Once-validated Pareto objectives
 
@@ -112,6 +147,8 @@ paper evidence.
 - `c68239172` — exact continuation quotient hierarchies;
 - `2083b648a` — iterative streaming Hall engine;
 - `4e146c881` — q=11 C80 direct-exchange gate.
+- `7c90685ba` — create-only streamed Hall solve/replay CLI;
+- `2d2595cca` — projective deletion-secant charge edges on q11/q23 controls.
 
 Validation used an isolated persistent target at
 `/home/tavis/.cache/ergodis/target-c985-validation`: formatting, strict
@@ -130,15 +167,14 @@ the C80 positive/negative pair all pass.
 - The matching kernel is an iterative augmenting-path engine, not yet
   Hopcroft--Karp or a full Dulmage--Mendelsohn decomposition.  Profile a real
   corpus before importing that machinery.
-- The q=11 direct-reply matching does not itself transport ancestral labels.
-  C80 still needs edge soundness, strict support descent, and
-  opponent-complete entry.
+- The projective deletion-secant relation now transports distinct consumed
+  labels on q11 and all three q23 representatives.  C80 still needs the full
+  q23 corpus gate, a field-uniform Hall theorem, and opponent-complete entry.
 - The full `R^18` enumeration and order-2092 Hadamard search remain separately
   gated.  The continuation tower and streaming certificate boundary are their
   common reusable stepping stones, not authorization for large runs.
 
-The highest-EV continuation is to instantiate the direct certificate-reply
-graph on the three q23 replacement representatives, then formulate and test the
-weakest projectively natural map from those consumed replies to distinct
-ancestral labels.  Any failure should be emitted immediately as the exact
-minimal Hall-deficient set.
+The highest-EV continuation is to run this deletion-secant consumed-label graph
+over the full retained q23 corpus, then study the resulting neighbourhoods for
+a field-uniform Hall proof.  Any failure should be emitted immediately as the
+exact minimal Hall-deficient set.

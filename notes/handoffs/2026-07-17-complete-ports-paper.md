@@ -485,9 +485,13 @@ Sequel research:
   matching/deficiency certificates and passes all 4,096 `3 x 4` graphs against
   brute force.  On C80's q=11 falsifier the causal-only reply-resource graph is
   deficient by one while the complete certificate-reply graph saturates both
-  new defects.  This does not yet give the final consumed-label graph because
-  the second reply is not an old defect label; ancestral-label soundness and
-  the q23 corpus remain the next mathematical gate.  The once-validated Pareto objective wrapper also closes its hostile
+  new defects.  The first projectively natural consumed-label lift now also
+  passes: a direct edge uses an attacked reply that is itself an old label, and
+  a deletion-secant edge uses a consumed old label on the causal/reply line.
+  This matches the two q11 defects to `(3,7)` and `(7,10)` and saturates all
+  three certified q23 replacement representatives.  The full q23 corpus,
+  uniform Hall inequality, and opponent-complete entry remain open.  The
+  once-validated Pareto objective wrapper also closes its hostile
   same-cardinality-order gate and gives 1.028--1.044x warm gains on two clean
   20-pair protocols.
 
