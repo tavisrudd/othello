@@ -182,7 +182,7 @@ generator out of the existing nauty output and check whether it is a block permu
 with a multiplier of `Z_223`.
 **Evidence**: CHECKED (nauty, and bliss on 668; the 892 group order is solver output, the
 generator's action is unread).
-**Status**: open lead.
+**Status**: retired → settled 2026-08-30: the order-3 element is the fixed multiplier `39` of `Z_223` (`39³ ≡ 1`), acting identically on all four sequences; see §12.1 of `notes/2026-08-29-c999-hadamard-668-report.md`.
 
 ### 2026-08-29 — a free shift parameter sits inside the posted order-668 array and does nothing
 
@@ -228,4 +228,4 @@ Alpöge search exploits no multiplier structure anywhere.
 **Evidence**: CHECKED (both structures recovered from matrix entries; the 668 multiplier scan is
 exhaustive over the units of `Z_166`; the 2060 automorphism statement is a proved lower bound, the
 exact group was not computed).
-**Status**: open lead.
+**Status**: retired → settled 2026-08-30: multiplier invariance is the norm across the payload (seven of nine circulant-family quadruples), and 668/716 are the exceptions because `φ(m)` admits no useful multiplier; see §12.1 of `notes/2026-08-29-c999-hadamard-668-report.md`.

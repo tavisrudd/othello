@@ -297,12 +297,47 @@ not verified against the T-matrix disjointness conditions and is marked as unver
 
 ## 12. Mystery ledger
 
-Three genuine unexplained features remain. None is allocated work; each is recorded with what would
-settle it. The `ej`+`tt` closeout pass settled the fourth candidate — whether the decoded matrices
+Three features were recorded as unexplained at the first closeout; a second `ej`+`tt` pass settled
+(a) and (c) by a direct sequence-level multiplier scan (§12.1 below), leaving only (b) open. None is
+allocated work. The `ej`+`tt` pass also settled the fourth candidate — whether the decoded matrices
 might secretly realise a length-333 Legendre pair — negatively and completely (§6), so it is not
 listed here.
 
-**(a) The order-3 automorphism of order 892.** Orders 668 and 716 have automorphism group of order
+### 12.1 Settled: the fixed multiplier groups of the nine circulant-family quadruples
+
+Scanning every unit `t` of `Z_m` for `X(t·i) = ±X(i + s)` on all four sequences (any block
+permutation allowed; the sequences read off row 0 as `[A, rev B, rev C, rev D]`, or row 4 from
+column 4 in the bordered cases) gives:
+
+| order | `m` | fixed multiplier group | block row sums |
+|------:|----:|-----------------------:|----------------|
+| 668   | 166 | trivial                | (2, 0, 0, 0)   |
+| 716   | 178 | trivial                | (2, 0, 0, 0)   |
+| 892   | 223 | order 3, `⟨39⟩`        | (11, 11, 11, 23) |
+| 1132  | 283 | order 3, `⟨44⟩`        | (19, 19, 19, 7) |
+| 1244  | 311 | order 5, `⟨6⟩`         | (21, 19, 21, 1) |
+| 1676  | 418 | order 15               | (2, 0, 0, 0)   |
+| 1772  | 442 | order 12               | (2, 0, 0, 0)   |
+| 1948  | 487 | order 9                | (17, 1, 17, 37) |
+| 1964  | 491 | order 7                | (29, 27, 15, 13) |
+
+Every hit is the identity block permutation with sign `+` and shift `0`: the multiplier fixes each
+sequence outright. The crate's `classify` had reported these groups absent; that was a detection
+bug, corrected in the follow-up commit that records the groups in every certificate.
+
+**(a) is settled.** The order-3 automorphism of 892 is the multiplier `39` (`39³ ≡ 1 mod 223`),
+and `|Aut| = 6` is exactly the centre times `⟨39⟩`. **(c) is settled** the same way: seven of the
+nine circulant-family quadruples, and the external 2060 matrix, are multiplier-invariant — the
+classical Đoković-style symmetry-reduced search — and only 668 and 716 are not. Those two are
+multiplier-free by necessity: `φ(166) = 2·41` and `φ(178) = 2³·11` offer no multiplier other
+than `−1`, which would force symmetric sequences (absent), or one of order 41 or 11, which
+collapses the space. That is why 668 was the last order below 2000 to fall, and it identifies
+the announcement's actual novelty: an unassumed search at `m = 166`. For the open orders above
+2000, the same arithmetic sorts targets: `2092 = 4·523` has `φ(523) = 2·3²·29`, so multipliers of
+order 3, 9 and 29 are available and it sits in the class the 892-type searches close; an order
+whose `m` has `φ(m) = 2·(large prime)` is in the hard class.
+
+**(a) The order-3 automorphism of order 892 — settled, see §12.1; original record kept.** Orders 668 and 716 have automorphism group of order
 4, exactly the centre times the half-shift, which is what parity forces for a bordered array with
 even block length: diagonal blocks are circulant so row shift equals column shift, off-diagonal
 blocks are back-circulant so row shift equals minus column shift, and a common shift then needs
@@ -330,7 +365,7 @@ a searched parameter. The crate detects the operation but does not currently rep
 value, so this needs one small addition to `classify`. The Lean development already carries `e` as
 a free parameter, so either answer leaves the formalization untouched.
 
-**(c) Order 2060's CRT structure against order 668's rigidity.** The externally posted order-2060
+**(c) Order 2060's CRT structure against order 668's rigidity — settled, see §12.1; original record kept.** The externally posted order-2060
 matrix has four blocks of order `515 = 5 · 103` in a CRT-interleaved index order with a genuine
 multiplier `104 ≡ (−1,1)` acting in one factor, giving a proved dihedral automorphism group of
 order 10 on rows. The order-668 sequences, by contrast, are invariant under no unit of `Z_166` at
@@ -348,6 +383,6 @@ discriminator between "they found a new search method" and "they had enough comp
 
 Fully closed and well-evidenced: two independent orthogonality checks, an exact automorphism group
 with two independent solvers, a Lean proof on the standard three axioms, and a clean negative on
-the census route. The mild disappointment is that the payload carries no method — the twelve
-matrices are literal data, so nothing about *how* they were found transfers, which is exactly why
-Part 2 had no theorem to be guided by.
+the census route. The payload carries no generator, but the seeds themselves disclose the method
+(§12.1): seven of nine are multiplier-assumed searches in the classical style, and only 668 and 716
+— the two orders whose block length admits no useful multiplier — were found without symmetry.
