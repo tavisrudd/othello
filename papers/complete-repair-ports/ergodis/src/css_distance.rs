@@ -31,6 +31,7 @@ const HUGE_SYNDROME_WORDS: usize = 11;
 const COLOSSAL_SYNDROME_WORDS: usize = 13;
 const HUGE_LOGICAL_WORDS: usize = 4;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
+const MAX_ENUMERATED_FOUR_COMPLETIONS: usize = 50_000_000;
 const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
 const ARTIFACT_VERSION: u16 = 1;
 const WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSW1";
@@ -569,12 +570,7 @@ fn compile_completion_filters<const WORDS: usize>(
             three_completion_bloom.insert_three(syndrome);
         }
     }
-    let quadruple_count = columns
-        .len()
-        .saturating_mul(columns.len().saturating_sub(1))
-        .saturating_mul(columns.len().saturating_sub(2))
-        .saturating_mul(columns.len().saturating_sub(3))
-        / 24;
+    let quadruple_count = distinct_quadruple_count(columns.len());
     let mut four_completion_bloom = CompletionBloom::new(quadruple_count);
     for syndromes in &short {
         for &syndrome in syndromes {
@@ -599,6 +595,14 @@ fn compile_completion_filters<const WORDS: usize>(
         three_completion_bloom,
         four_completion_bloom,
     )
+}
+
+fn distinct_quadruple_count(item_count: usize) -> usize {
+    item_count
+        .saturating_mul(item_count.saturating_sub(1))
+        .saturating_mul(item_count.saturating_sub(2))
+        .saturating_mul(item_count.saturating_sub(3))
+        / 24
 }
 
 /// Memory-bounded completion filters for large codes.  Triple keys stream
@@ -944,7 +948,10 @@ where
         let structure =
             compile_wide_structure::<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>(physical, logical)?;
         let (short_completion_syndromes, three_completion_bloom, four_completion_bloom) =
-            if CHECK_WORDS > WIDE_SYNDROME_WORDS {
+            if CHECK_WORDS > WIDE_SYNDROME_WORDS
+                || distinct_quadruple_count(structure.columns.len())
+                    > MAX_ENUMERATED_FOUR_COMPLETIONS
+            {
                 compile_large_completion_filters(&structure.columns, wide_syndrome_key)
             } else {
                 compile_completion_filters(&structure.columns, wide_syndrome_key)
