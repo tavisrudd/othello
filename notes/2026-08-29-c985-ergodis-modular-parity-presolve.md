@@ -103,3 +103,33 @@ candidates on either Gross or BB288; BB288 search increased from `0.6949 s` to
 `0.7423 s` in the bounded diagnostic.  Commit `a70b5a9bc` removes the table.
 Future finite images need a compile-time selection score predicting a strictly
 stronger bound before they are admitted to the hot path.
+
+## Cold-compiler follow-up
+
+A compile-only BB288 profile put 95.81% of sampled cycles in fourth-order
+completion-Bloom construction.  The compiler enumerated every distinct
+quadruple even though the finished Bloom was only a conservative rejection
+filter.  The already-verified large-code policy is now selected whenever the
+quadruple count would exceed a general 50,000,000-work budget: exact one- and
+two-completion sets remain, three-completion keys stream into their Bloom, and
+the optional four-completion filter becomes universal.  This can only remove
+a rejection opportunity; it cannot exclude a feasible support.
+
+On BB288 the policy changes candidate count from 22,488,441 to 22,631,546
+(`+0.64%`) and preserves the exact distance and witness.  Its benefits are
+substantially larger:
+
+- compile time: `1.7962 s -> 0.02129 s` (`84.35x`);
+- artifact bytes: `21,637,474 -> 4,860,266` (`4.45x` smaller);
+- compile-only peak RSS: `84,160 -> 6,024 KiB` (`13.97x` smaller).
+
+Three alternating one-round cold counter pairs give old/new geometric means
+of `3.637x` task clock, `3.853x` cycles, `1.950x` instructions, `1.634x`
+branches, and `25.815x` cache misses.  Five-round end-to-end pairs retain a
+`1.616x` task-clock and `1.652x` cycle advantage.  Finally, three five-round
+compiled-artifact pairs isolate search: task-clock ratio is `1.0109` with
+paired-log `t=0.44`, so no wall-time change is established; cycles favor the
+new universal filter by `1.0245x` (`t=5.06`).  The smaller filter removes cache
+misses even though it admits the extra candidates.  Raw diagnostics are under
+`/home/tavis/.cache/ergodis/completion-filter-perf-v1`; the shared-host data
+are not paper evidence.

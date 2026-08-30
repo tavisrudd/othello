@@ -452,6 +452,13 @@ Sequel research:
   run-constant branch.  On a diagnostic three-pair, 500-round Gross A/B this
   removes 28.91% of candidates and 19.2% of cycles, while one-shot cold time
   remains compile-dominated.  Higher residues and moment images remain open.
+  Profiling then assigned 95.81% of BB288 compile cycles to the optional
+  fourth-order completion Bloom.  A family-independent 50-million-quadruple
+  work cap now selects streamed triples and a universal four-filter: BB288
+  compile is 84.35x faster, its artifact 4.45x smaller, and compile-only RSS
+  13.97x smaller, while compiled-in search wall time is statistically
+  unchanged in the diagnostic A/B.  Small presentations retain the stronger
+  four-filter.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

@@ -112,6 +112,14 @@ rejected after pruning no extra Gross or BB288 candidates and slowing the
 latter diagnostic by 6.8%; future images require a cold strength/admission
 test before entering the hot path.
 
+The first compiler-cost follow-up is accepted.  A profile attributed 95.81%
+of BB288 compilation to an optional fourth-order Bloom.  A general 50-million
+quadruple work budget now selects the existing streamed-triple/universal-four
+policy.  BB288 compile is 84.35x faster, its artifact 4.45x smaller, and peak
+RSS 13.97x smaller; compiled-in search wall time is unchanged within the
+diagnostic power (`1.0109x`, `t=0.44`).  Small presentations below the work
+budget retain the full four-completion filter.
+
 ### Theorem input
 
 The integral-secant modular surcharge, Hadamard compression congruence, orbit
