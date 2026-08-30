@@ -76,7 +76,16 @@ pub fn certify_one(file: &Path, opts: &CertifyOpts) -> Result<Certificate> {
 
     let rep = classify(&m, aut.clone());
 
-    let automorphism = match &aut {
+    // The proved, solver-free part of the automorphism group: block-shift automorphisms
+    // certified by dephasing equality. Present whether or not nauty was run.
+    let proved_shift = rep
+        .tests
+        .iter()
+        .find(|t| t.found && t.name.starts_with("gs_array"))
+        .and_then(|t| t.detail.get("shift_automorphisms").cloned())
+        .unwrap_or(serde_json::Value::Null);
+
+    let solver = match &aut {
         Some(a) => json!({
             "computed": true,
             "graph_vertices": a.graph_vertices,
@@ -98,8 +107,17 @@ pub fn certify_one(file: &Path, opts: &CertifyOpts) -> Result<Certificate> {
                 opts.aut_timeout_secs.unwrap_or(0)
             ),
         }),
-        None => json!({"computed": false, "reason": "not requested (--with-aut not given)"}),
+        None => json!({
+            "computed": false,
+            "reason": "not run. At these orders the 4n-vertex Hadamard graph defeats both dense \
+                       nauty and Traces within a safe budget; see ../certificate/README.md. The \
+                       proved_shift_subgroup field below is exact and needs no solver."
+        }),
     };
+    let automorphism = json!({
+        "solver": solver,
+        "proved_shift_subgroup": proved_shift,
+    });
 
     // Keep the classification record compact: the matched form plus the full test ledger of
     // what was tried and what it returned.
@@ -164,7 +182,7 @@ pub fn run(files: &[String], opts: &CertifyOpts) -> Result<bool> {
             .as_str()
             .unwrap_or("(no known form matched)")
             .to_string();
-        let aut = c.automorphism["aut_graph_order"]
+        let aut = c.automorphism["solver"]["aut_graph_order"]
             .as_str()
             .map(|s| s.to_string())
             .unwrap_or_else(|| "not computed".into());

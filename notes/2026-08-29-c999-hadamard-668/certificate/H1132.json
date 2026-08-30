@@ -318,8 +318,18 @@
     ]
   },
   "automorphism": {
-    "computed": false,
-    "reason": "not requested (--with-aut not given)"
+    "proved_shift_subgroup": {
+      "block_order": 283,
+      "border_width": 0,
+      "cyclic_subgroup_order": 1,
+      "note": "exact: dephasing is a complete invariant for the row/column sign group, so a listed shift is a proved automorphism and an omitted one is proved not to be. This is a lower bound on |Aut| that needs no graph-isomorphism solver.",
+      "predicted_by_gs_parity": [],
+      "shifts_realised_by_a_monomial_automorphism": []
+    },
+    "solver": {
+      "computed": false,
+      "reason": "not run. At these orders the 4n-vertex Hadamard graph defeats both dense nauty and Traces within a safe budget; see ../certificate/README.md. The proved_shift_subgroup field below is exact and needs no solver."
+    }
   },
   "tool_version": "had668 0.1.0"
 }
