@@ -18,7 +18,8 @@ mod vm;
 
 use synthesis::learn_decision_tree;
 pub use vm::{
-    evaluate_plan, CompiledPlan, Evaluation, FeatureBatch, PlanOp, PlanOutput, PlanRole, PlanSpec,
+    evaluate_plan, CompiledPlan, Evaluation, ExpressionPlanSpec, FeatureBatch, PlanDocument,
+    PlanExpr, PlanOp, PlanOutput, PlanRole, PlanSpec,
 };
 
 pub const SCHEMA: &str = "ergodis-control-experimental-v0";
@@ -929,6 +930,36 @@ mod tests {
     }
 
     #[test]
+    fn expression_plan_lowers_to_the_same_validated_program() {
+        let document: PlanDocument = serde_json::from_value(json!({
+            "schema": PLAN_SCHEMA,
+            "name": "support-or-omega",
+            "role": "diagnostic",
+            "expr": {
+                "op": "or",
+                "left": {
+                    "op": "gt",
+                    "left": {"op": "field", "name": "surplus"},
+                    "right": {"op": "const", "value": 0}
+                },
+                "right": {
+                    "op": "gt",
+                    "left": {"op": "field", "name": "drop"},
+                    "right": {"op": "const", "value": 0}
+                }
+            }
+        }))
+        .unwrap();
+        let lowered = document.lower().unwrap();
+        let batch = batch();
+        let plan = CompiledPlan::compile(&lowered, &batch.fields).unwrap();
+        let result = evaluate_plan(&batch, &plan).unwrap();
+        assert_eq!(result.weighted_correct, 5);
+        assert_eq!(result.first_false, None);
+        assert_eq!(lowered.program.len(), 7);
+    }
+
+    #[test]
     fn malformed_postfix_program_fails_closed() {
         let mut spec = PlanSpec {
             schema: PLAN_SCHEMA.into(),
@@ -939,6 +970,10 @@ mod tests {
         };
         assert!(CompiledPlan::compile(&spec, &batch().fields).is_err());
         spec.program = vec![PlanOp::Const { value: 1 }, PlanOp::Const { value: 2 }];
+        assert!(CompiledPlan::compile(&spec, &batch().fields).is_err());
+        spec.program = vec![PlanOp::Const { value: 1 }, PlanOp::Not];
+        assert!(CompiledPlan::compile(&spec, &batch().fields).is_err());
+        spec.program = vec![PlanOp::Const { value: 1 }];
         assert!(CompiledPlan::compile(&spec, &batch().fields).is_err());
     }
 

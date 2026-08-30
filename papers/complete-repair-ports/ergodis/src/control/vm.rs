@@ -168,6 +168,205 @@ pub enum PlanOutput {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(untagged)]
+pub enum PlanDocument {
+    Bytecode(PlanSpec),
+    Expression(ExpressionPlanSpec),
+}
+
+impl PlanDocument {
+    pub fn lower(self) -> Result<PlanSpec, ControlError> {
+        match self {
+            Self::Bytecode(spec) => Ok(spec),
+            Self::Expression(spec) => spec.lower(),
+        }
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct ExpressionPlanSpec {
+    pub schema: String,
+    pub name: String,
+    pub role: PlanRole,
+    #[serde(default)]
+    pub output: PlanOutput,
+    pub expr: PlanExpr,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
+pub enum PlanExpr {
+    Field {
+        name: String,
+    },
+    Const {
+        value: i64,
+    },
+    Add {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Sub {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Mul {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Min {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Max {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Eq {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Ne {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Lt {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Le {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Gt {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Ge {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    And {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Or {
+        left: Box<Self>,
+        right: Box<Self>,
+    },
+    Not {
+        arg: Box<Self>,
+    },
+    Abs {
+        arg: Box<Self>,
+    },
+    Select {
+        condition: Box<Self>,
+        #[serde(rename = "then")]
+        then_value: Box<Self>,
+        #[serde(rename = "else")]
+        else_value: Box<Self>,
+    },
+}
+
+impl ExpressionPlanSpec {
+    pub fn lower(self) -> Result<PlanSpec, ControlError> {
+        enum Emit<'a> {
+            Expr(&'a PlanExpr, usize),
+            Op(PlanOp),
+        }
+        let mut work = vec![Emit::Expr(&self.expr, 1)];
+        let mut program = Vec::with_capacity(MAX_PLAN_OPS);
+        let mut nodes = 0usize;
+        while let Some(item) = work.pop() {
+            match item {
+                Emit::Op(op) => program.push(op),
+                Emit::Expr(expr, depth) => {
+                    nodes += 1;
+                    if nodes > MAX_PLAN_OPS || depth > 32 {
+                        return Err(ControlError::Invalid(
+                            "expression plan exceeds node or depth limit".into(),
+                        ));
+                    }
+                    match expr {
+                        PlanExpr::Field { name } => {
+                            program.push(PlanOp::Field { name: name.clone() })
+                        }
+                        PlanExpr::Const { value } => program.push(PlanOp::Const { value: *value }),
+                        PlanExpr::Not { arg } => {
+                            work.push(Emit::Op(PlanOp::Not));
+                            work.push(Emit::Expr(arg, depth + 1));
+                        }
+                        PlanExpr::Abs { arg } => {
+                            work.push(Emit::Op(PlanOp::Abs));
+                            work.push(Emit::Expr(arg, depth + 1));
+                        }
+                        PlanExpr::Select {
+                            condition,
+                            then_value,
+                            else_value,
+                        } => {
+                            work.push(Emit::Op(PlanOp::Select));
+                            work.push(Emit::Expr(else_value, depth + 1));
+                            work.push(Emit::Expr(then_value, depth + 1));
+                            work.push(Emit::Expr(condition, depth + 1));
+                        }
+                        binary => {
+                            let (left, right, op) = binary_parts(binary).unwrap();
+                            work.push(Emit::Op(op));
+                            work.push(Emit::Expr(right, depth + 1));
+                            work.push(Emit::Expr(left, depth + 1));
+                        }
+                    }
+                }
+            }
+            if program.len().saturating_add(work.len()) > 3 * MAX_PLAN_OPS {
+                return Err(ControlError::Invalid(
+                    "expression lowering work limit exceeded".into(),
+                ));
+            }
+        }
+        if program.len() > MAX_PLAN_OPS {
+            return Err(ControlError::Invalid(
+                "lowered expression exceeds VM operation limit".into(),
+            ));
+        }
+        Ok(PlanSpec {
+            schema: self.schema,
+            name: self.name,
+            role: self.role,
+            output: self.output,
+            program,
+        })
+    }
+}
+
+fn binary_parts(expr: &PlanExpr) -> Option<(&PlanExpr, &PlanExpr, PlanOp)> {
+    let parts = match expr {
+        PlanExpr::Add { left, right } => (left, right, PlanOp::Add),
+        PlanExpr::Sub { left, right } => (left, right, PlanOp::Sub),
+        PlanExpr::Mul { left, right } => (left, right, PlanOp::Mul),
+        PlanExpr::Min { left, right } => (left, right, PlanOp::Min),
+        PlanExpr::Max { left, right } => (left, right, PlanOp::Max),
+        PlanExpr::Eq { left, right } => (left, right, PlanOp::Eq),
+        PlanExpr::Ne { left, right } => (left, right, PlanOp::Ne),
+        PlanExpr::Lt { left, right } => (left, right, PlanOp::Lt),
+        PlanExpr::Le { left, right } => (left, right, PlanOp::Le),
+        PlanExpr::Gt { left, right } => (left, right, PlanOp::Gt),
+        PlanExpr::Ge { left, right } => (left, right, PlanOp::Ge),
+        PlanExpr::And { left, right } => (left, right, PlanOp::And),
+        PlanExpr::Or { left, right } => (left, right, PlanOp::Or),
+        PlanExpr::Field { .. }
+        | PlanExpr::Const { .. }
+        | PlanExpr::Not { .. }
+        | PlanExpr::Abs { .. }
+        | PlanExpr::Select { .. } => return None,
+    };
+    Some((parts.0, parts.1, parts.2))
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
 pub enum PlanOp {
     Field { name: String },
@@ -211,6 +410,12 @@ enum OpCode {
     Not,
     Abs,
     Select,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum ValueKind {
+    Integer,
+    Boolean,
 }
 
 #[repr(C)]
@@ -267,6 +472,7 @@ impl CompiledPlan {
             .collect();
         let mut depth = 0usize;
         let mut stack_needed = 0usize;
+        let mut kinds = [ValueKind::Integer; MAX_PLAN_STACK];
         let mut ops = Vec::with_capacity(spec.program.len());
         for op in &spec.program {
             let (code, value, field, inputs) = match op {
@@ -297,13 +503,73 @@ impl CompiledPlan {
             if depth < inputs {
                 return Err(ControlError::Invalid("plan stack underflow".into()));
             }
-            depth = depth + 1 - inputs;
-            stack_needed = stack_needed.max(depth);
-            if stack_needed > MAX_PLAN_STACK {
+            let base = depth - inputs;
+            let result_kind = match code {
+                OpCode::Field | OpCode::Const => ValueKind::Integer,
+                OpCode::Add
+                | OpCode::Sub
+                | OpCode::Mul
+                | OpCode::Min
+                | OpCode::Max
+                | OpCode::Abs => {
+                    if kinds[base..depth]
+                        .iter()
+                        .any(|kind| *kind != ValueKind::Integer)
+                    {
+                        return Err(ControlError::Invalid(
+                            "arithmetic plan operation requires integers".into(),
+                        ));
+                    }
+                    ValueKind::Integer
+                }
+                OpCode::Eq | OpCode::Ne => {
+                    if kinds[base] != kinds[base + 1] {
+                        return Err(ControlError::Invalid(
+                            "equality plan operation requires equal sorts".into(),
+                        ));
+                    }
+                    ValueKind::Boolean
+                }
+                OpCode::Lt | OpCode::Le | OpCode::Gt | OpCode::Ge => {
+                    if kinds[base..depth]
+                        .iter()
+                        .any(|kind| *kind != ValueKind::Integer)
+                    {
+                        return Err(ControlError::Invalid(
+                            "ordered comparison requires integers".into(),
+                        ));
+                    }
+                    ValueKind::Boolean
+                }
+                OpCode::And | OpCode::Or | OpCode::Not => {
+                    if kinds[base..depth]
+                        .iter()
+                        .any(|kind| *kind != ValueKind::Boolean)
+                    {
+                        return Err(ControlError::Invalid(
+                            "Boolean plan operation requires predicates".into(),
+                        ));
+                    }
+                    ValueKind::Boolean
+                }
+                OpCode::Select => {
+                    if kinds[base] != ValueKind::Boolean || kinds[base + 1] != kinds[base + 2] {
+                        return Err(ControlError::Invalid(
+                            "select requires a predicate and equal branch sorts".into(),
+                        ));
+                    }
+                    kinds[base + 1]
+                }
+            };
+            let next_depth = depth + 1 - inputs;
+            if next_depth > MAX_PLAN_STACK {
                 return Err(ControlError::Invalid(
                     "plan stack exceeds fixed evaluator".into(),
                 ));
             }
+            depth = next_depth;
+            kinds[depth - 1] = result_kind;
+            stack_needed = stack_needed.max(depth);
             ops.push(CompiledOp {
                 value,
                 field,
@@ -314,6 +580,15 @@ impl CompiledPlan {
         if depth != 1 {
             return Err(ControlError::Invalid(
                 "plan must leave exactly one result".into(),
+            ));
+        }
+        let expected_kind = match spec.output {
+            PlanOutput::Predicate => ValueKind::Boolean,
+            PlanOutput::Score => ValueKind::Integer,
+        };
+        if kinds[0] != expected_kind {
+            return Err(ControlError::Invalid(
+                "plan result sort does not match its declared output".into(),
             ));
         }
         let encoded = serde_json::to_vec(spec)?;

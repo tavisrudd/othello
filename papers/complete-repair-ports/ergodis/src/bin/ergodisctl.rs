@@ -1,6 +1,6 @@
 use anyhow::{bail, Context, Result};
 use clap::{Parser, Subcommand};
-use ergodis::control::{read_manifest, send_request, PlanOp, PlanOutput, PlanSpec};
+use ergodis::control::{read_manifest, send_request, PlanDocument, PlanOp, PlanOutput, PlanSpec};
 use serde_json::{json, Value};
 use std::collections::BTreeSet;
 use std::fs::{File, OpenOptions};
@@ -112,10 +112,13 @@ enum Command {
 }
 
 fn read_plan(path: &PathBuf) -> Result<PlanSpec> {
-    serde_json::from_reader(BufReader::new(
+    let document: PlanDocument = serde_json::from_reader(BufReader::new(
         File::open(path).with_context(|| format!("cannot open plan {}", path.display()))?,
     ))
-    .with_context(|| format!("invalid plan {}", path.display()))
+    .with_context(|| format!("invalid plan {}", path.display()))?;
+    document
+        .lower()
+        .with_context(|| format!("cannot lower plan {}", path.display()))
 }
 
 fn main() -> Result<()> {
@@ -271,9 +274,12 @@ fn read_plan_jsonl(path: &PathBuf, limit: usize) -> Result<Vec<PlanSpec>> {
         if plans.len() == limit {
             bail!("seed population exceeds limit {limit}");
         }
+        let document: PlanDocument = serde_json::from_str(&line)
+            .with_context(|| format!("invalid plan at line {}", line_number + 1))?;
         plans.push(
-            serde_json::from_str(&line)
-                .with_context(|| format!("invalid plan at line {}", line_number + 1))?,
+            document
+                .lower()
+                .with_context(|| format!("cannot lower plan at line {}", line_number + 1))?,
         );
     }
     if plans.is_empty() {

@@ -1,0 +1,18 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "rank-zero-or-six-descent",
+  "role": "diagnostic",
+  "program": [
+    { "op": "field", "name": "next_defect_rank" },
+    { "op": "const", "value": 0 },
+    { "op": "eq" },
+    { "op": "field", "name": "next_defect_rank" },
+    { "op": "const", "value": 6 },
+    { "op": "eq" },
+    { "op": "or" },
+    { "op": "field", "name": "omega_drop" },
+    { "op": "const", "value": 0 },
+    { "op": "gt" },
+    { "op": "and" }
+  ]
+}

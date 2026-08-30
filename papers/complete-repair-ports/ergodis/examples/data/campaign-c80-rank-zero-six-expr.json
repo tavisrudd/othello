@@ -1,0 +1,26 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "positive-drop-and-defect-rank-zero-or-six",
+  "role": "diagnostic",
+  "expr": {
+    "op": "and",
+    "left": {
+      "op": "gt",
+      "left": { "op": "field", "name": "omega_drop" },
+      "right": { "op": "const", "value": 0 }
+    },
+    "right": {
+      "op": "or",
+      "left": {
+        "op": "eq",
+        "left": { "op": "field", "name": "next_defect_rank" },
+        "right": { "op": "const", "value": 0 }
+      },
+      "right": {
+        "op": "eq",
+        "left": { "op": "field", "name": "next_defect_rank" },
+        "right": { "op": "const", "value": 6 }
+      }
+    }
+  }
+}
