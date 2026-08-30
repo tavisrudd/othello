@@ -44,6 +44,12 @@ A client resolves paths beneath the manifested run directory and streams them
 with a caller-selected record bound.  It must not read an entire evidence file
 merely to iterate its records.
 
+The daemon likewise does not retain a serialized evidence payload.  It first
+streams compact JSON through a hash/count sink to enforce the configured bound
+and derive the content address, then serializes directly through a buffered
+create-only file writer.  This trades one cheap serialization pass for bounded
+memory independent of the trace limit.
+
 The reference Python client is `python/ergodis_client.py`.  It has no external
 dependencies, uses monotone request IDs, enforces the frame bound, and provides
 bounded line and JSONL iterators.  A future in-process Python or Lean FFI must

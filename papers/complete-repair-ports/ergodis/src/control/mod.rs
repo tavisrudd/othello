@@ -966,22 +966,22 @@ impl Campaign {
             "op_results": values,
             "truncated": truncated,
         });
-        let encoded = serde_json::to_vec(&trace)?;
-        if encoded.len() as u64 > self.trace_limit {
+        let (hash, bytes) = json_hash_and_len(&trace)?;
+        if bytes > self.trace_limit {
             return Err(ControlError::Invalid(
                 "trace exceeds configured file limit".into(),
             ));
         }
-        let hash = blake3::hash(&encoded).to_hex().to_string();
+        let hash = hash.to_hex().to_string();
         let relative = PathBuf::from("evidence").join(format!("trace-{}.json", &hash[..20]));
-        write_create_bytes(&self.manifest.run_dir.join(&relative), &encoded)?;
+        write_create_json_compact(&self.manifest.run_dir.join(&relative), &trace)?;
         self.record(
             "trace-written",
             "localized trace captured",
             Some(name.into()),
         )?;
         Ok(
-            json!({"path": relative, "hash": hash, "bytes": encoded.len(), "records": values.len(), "truncated": truncated}),
+            json!({"path": relative, "hash": hash, "bytes": bytes, "records": values.len(), "truncated": truncated}),
         )
     }
 
@@ -1133,14 +1133,47 @@ fn write_create_json(path: &Path, value: &impl Serialize) -> Result<(), ControlE
     Ok(())
 }
 
-fn write_create_bytes(path: &Path, bytes: &[u8]) -> Result<(), ControlError> {
-    let mut file = OpenOptions::new()
+struct HashCounter {
+    hasher: blake3::Hasher,
+    bytes: u64,
+}
+
+impl Write for HashCounter {
+    fn write(&mut self, buffer: &[u8]) -> io::Result<usize> {
+        self.hasher.update(buffer);
+        self.bytes = self.bytes.saturating_add(buffer.len() as u64);
+        Ok(buffer.len())
+    }
+
+    fn flush(&mut self) -> io::Result<()> {
+        Ok(())
+    }
+}
+
+fn json_hash_and_len(
+    value: &(impl Serialize + ?Sized),
+) -> Result<(blake3::Hash, u64), ControlError> {
+    let mut counter = HashCounter {
+        hasher: blake3::Hasher::new(),
+        bytes: 0,
+    };
+    serde_json::to_writer(&mut counter, value)?;
+    Ok((counter.hasher.finalize(), counter.bytes))
+}
+
+fn write_create_json_compact(
+    path: &Path,
+    value: &(impl Serialize + ?Sized),
+) -> Result<(), ControlError> {
+    let file = OpenOptions::new()
         .write(true)
         .create_new(true)
         .mode(0o600)
         .open(path)?;
-    file.write_all(bytes)?;
-    file.write_all(b"\n")?;
+    let mut writer = BufWriter::new(file);
+    serde_json::to_writer(&mut writer, value)?;
+    writer.write_all(b"\n")?;
+    writer.flush()?;
     Ok(())
 }
 
@@ -1241,6 +1274,22 @@ mod tests {
         assert_eq!(response.schema, SCHEMA);
         assert_eq!(response.request_id, 7);
         assert_eq!(serde_json::to_string(&response).unwrap(), response_json);
+    }
+
+    #[test]
+    fn evidence_hashing_streams_the_exact_compact_payload() {
+        let value = json!({"rows": [1, 2, 3], "status": "finite-certified"});
+        let expected = serde_json::to_vec(&value).unwrap();
+        let (hash, bytes) = json_hash_and_len(&value).unwrap();
+        assert_eq!(bytes, expected.len() as u64);
+        assert_eq!(hash, blake3::hash(&expected));
+
+        let temporary = tempfile::tempdir().unwrap();
+        let path = temporary.path().join("evidence.json");
+        write_create_json_compact(&path, &value).unwrap();
+        let mut expected_file = expected;
+        expected_file.push(b'\n');
+        assert_eq!(fs::read(path).unwrap(), expected_file);
     }
 
     #[test]
