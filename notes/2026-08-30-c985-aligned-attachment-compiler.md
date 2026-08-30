@@ -281,6 +281,22 @@ leave the budget-12 closure at exactly 324,456 states while adding about 40%
 wall time under the active sweep. The admitted rules remain shortest-context
 branching and the two-byte pair representation.
 
+The admitted aggregate bound is an exact residual hitting oracle at the last
+three selections. It asks whether one set of at most `r <= 3` remaining triples
+can hit every currently exposed context clause. A fixed four-frame iterative
+DFS answers that necessary condition with no recursion or allocation; failure
+raises the certified lower bound to `r+1`. The exhaustive five-point completion
+distance test covers this bound as well. On rooted eight-point exclusions it
+reduces states by 6.82x, 6.35x, and 5.33x at budgets 10, 11, and 12. Seven
+interleaved budget-12 rounds improve wall time 1.8410x geometrically (1.8425x
+median, paired log-ratio `t=267.262`) despite the stronger per-node work. This
+is the first aggregate context bound to change the native capacity frontier.
+On the actual `[0,1,2]` weight-15 orbit, `2^24` still fills after 145.26
+seconds, but `2^25` closes in 215.38 seconds with 24,034,007 states at 265,672
+KiB RSS. The prior admitted worker required 62,708,044 states, `2^26`, 310.37
+seconds, and 527,600 KiB. Thus the hard-case result is 2.61x fewer states,
+1.44x less wall time, and half the exact table capacity/RSS.
+
 Three equal 300-second pulse controls retain the known 17-query incumbent but
 leave the certified lower bound at 15. One context times 16 rotating orbit
 images visits 179,851 nodes; four contexts times four images visits 273,890;

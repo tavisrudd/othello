@@ -73,7 +73,7 @@ impl AlignmentAttachment {
             return Err(AlignmentError::Family);
         }
         Ok(self
-            .violation_summary(selected, self.all_cut_mask())
+            .violation_summary(selected, self.all_cut_mask(), self.triples.len() as u32)
             .0
             .is_none())
     }
@@ -399,6 +399,7 @@ impl AlignmentAttachment {
         &self,
         selected: u64,
         candidates: [u64; 2],
+        remaining_budget: u32,
     ) -> (Option<u64>, u32, [u64; 2]) {
         let mut best = None;
         let mut clauses = [0_u64; 127];
@@ -469,7 +470,65 @@ impl AlignmentAttachment {
             capacity += usize::from(hit_counts[best_triple]);
             incidence_bound += 1;
         }
-        (best, packing.max(incidence_bound), unresolved)
+        let mut bound = packing.max(incidence_bound);
+        if remaining_budget <= 3
+            && bound <= remaining_budget
+            && !clauses_hittable(
+                &clauses[..clause_count],
+                ((1_u64 << self.triples.len()) - 1) & !selected,
+                remaining_budget,
+            )
+        {
+            bound = remaining_budget + 1;
+        }
+        (best, bound, unresolved)
+    }
+}
+
+fn clauses_hittable(clauses: &[u64], available: u64, budget: u32) -> bool {
+    let mut chosen = [0_u64; 4];
+    let mut branches = [0_u64; 4];
+    let mut entered = [false; 4];
+    let mut depth = 0_usize;
+    loop {
+        if !entered[depth] {
+            let mut best = None;
+            for &clause in clauses {
+                if clause & chosen[depth] == 0 {
+                    let residual = clause & available;
+                    debug_assert_ne!(residual, 0);
+                    if best.is_none_or(|prior: u64| residual.count_ones() < prior.count_ones()) {
+                        best = Some(residual);
+                    }
+                }
+            }
+            let Some(branch) = best else {
+                return true;
+            };
+            if depth == budget as usize {
+                if depth == 0 {
+                    return false;
+                }
+                depth -= 1;
+                continue;
+            }
+            branches[depth] = branch;
+            entered[depth] = true;
+        }
+        let branch = branches[depth];
+        if branch == 0 {
+            entered[depth] = false;
+            if depth == 0 {
+                return false;
+            }
+            depth -= 1;
+            continue;
+        }
+        let bit = branch & branch.wrapping_neg();
+        branches[depth] ^= bit;
+        chosen[depth + 1] = chosen[depth] | bit;
+        depth += 1;
+        entered[depth] = false;
     }
 }
 
@@ -984,8 +1043,11 @@ pub fn search_alignment_attachment_from(
                 .states
                 .checked_add(1)
                 .ok_or(AlignmentError::Overflow)?;
-            let (violation, packing, unresolved_cuts) =
-                problem.violation_summary(selected, workspace.frames[depth].unresolved_cuts);
+            let (violation, packing, unresolved_cuts) = problem.violation_summary(
+                selected,
+                workspace.frames[depth].unresolved_cuts,
+                budget - selected.count_ones(),
+            );
             workspace.frames[depth].unresolved_cuts = unresolved_cuts;
             let Some(clause) = violation else {
                 return Ok((Some(selected), metrics));
@@ -1280,7 +1342,9 @@ mod tests {
         let mut quotient_values = std::collections::HashMap::new();
         let mut signature = vec![0_u8; problem.closure_signature_len()];
         for selected in 0..domain {
-            let (_, bound, _) = problem.violation_summary(selected, problem.all_cut_mask());
+            let remaining = problem.triples().len() as u32 - selected.count_ones();
+            let (_, bound, _) =
+                problem.violation_summary(selected, problem.all_cut_mask(), remaining.min(3));
             let exact = separating
                 .iter()
                 .filter(|&&completion| completion & selected == selected)

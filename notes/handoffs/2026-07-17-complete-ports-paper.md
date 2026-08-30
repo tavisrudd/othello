@@ -543,8 +543,13 @@ Sequel research:
   It is not admitted as a backend: the exhaustive five-point census merges only
   `9/1,024` states, all near saturation, and a deterministic 100,000-family
   rooted weight-15 sample has zero exact merges after bytewise collision replay.
-  Aggregate context rank/cover bounds and proof-producing search are the next
-  route.
+  The first aggregate bound is now admitted: an iterative, allocation-free
+  exact residual hitting oracle for the final three selections. It cuts rooted
+  budget-10/11/12 states by 6.82x/6.35x/5.33x and improves the seven-round
+  budget-12 wall time 1.841x (`t=267.262`). On the actual `[0,1,2]` weight-15
+  orbit it reduces states `62.71M -> 24.03M`, capacity `2^26 -> 2^25`, wall
+  time `310.37 -> 215.38` seconds, and RSS `527,600 -> 265,672` KiB. Extending
+  that bound and adding proof-producing search are the next route.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
