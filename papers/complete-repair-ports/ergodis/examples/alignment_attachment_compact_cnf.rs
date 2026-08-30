@@ -25,6 +25,61 @@ fn write_xor(
     writeln!(output, "{}{left} 0", if parity { "" } else { "-" })
 }
 
+fn counter_shape(items: usize, budget: usize) -> (usize, usize) {
+    let width = budget + 1;
+    let variables = (1..=items).map(|prefix| prefix.min(width)).sum();
+    let mut clauses = 2_usize;
+    for prefix in 2..=items {
+        clauses += 3;
+        for threshold in 2..=prefix.min(width) {
+            clauses += if threshold < prefix { 4 } else { 3 };
+        }
+    }
+    (variables, clauses + 1)
+}
+
+fn write_at_most(
+    output: &mut impl Write,
+    items: usize,
+    budget: usize,
+    next_variable: &mut usize,
+) -> std::io::Result<()> {
+    let width = budget + 1;
+    let mut counter = vec![vec![0_usize; width]; items];
+    for (prefix, row) in counter.iter_mut().enumerate() {
+        for cell in &mut row[..=prefix.min(budget)] {
+            *cell = *next_variable;
+            *next_variable += 1;
+        }
+    }
+    writeln!(output, "-1 {} 0", counter[0][0])?;
+    writeln!(output, "1 -{} 0", counter[0][0])?;
+    for prefix in 1..items {
+        let item = prefix + 1;
+        let state = counter[prefix][0];
+        let prior = counter[prefix - 1][0];
+        writeln!(output, "-{prior} {state} 0")?;
+        writeln!(output, "-{item} {state} 0")?;
+        writeln!(output, "-{state} {prior} {item} 0")?;
+        for threshold in 1..=prefix.min(budget) {
+            let state = counter[prefix][threshold];
+            let lower = counter[prefix - 1][threshold - 1];
+            if threshold < prefix {
+                let prior = counter[prefix - 1][threshold];
+                writeln!(output, "-{prior} {state} 0")?;
+                writeln!(output, "-{item} -{lower} {state} 0")?;
+                writeln!(output, "-{state} {prior} {item} 0")?;
+                writeln!(output, "-{state} {prior} {lower} 0")?;
+            } else {
+                writeln!(output, "-{state} {item} 0")?;
+                writeln!(output, "-{state} {lower} 0")?;
+                writeln!(output, "-{item} -{lower} {state} 0")?;
+            }
+        }
+    }
+    writeln!(output, "-{} 0", counter[items - 1][budget])
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let path = std::env::args()
         .nth(1)
@@ -49,49 +104,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         xor_auxiliaries += edge_count * 5 + crossing_triples - 1;
         xor_clauses += edge_count * 21 + 4 * (crossing_triples - 1) + 1;
     }
-    let assignment_clauses = triples.len();
-    let slot_implications = triples.len() * budget;
-    let slot_exclusions = budget * triples.len() * (triples.len() - 1) / 2;
+    let (counter_variables, counter_clauses) = counter_shape(triples.len(), budget);
     let anchor_clause = 1_usize;
     let witness_implications = witness_count;
-    let clause_count = assignment_clauses
-        + slot_implications
-        + slot_exclusions
-        + anchor_clause
-        + witness_implications
-        + xor_clauses;
-    let variable_count = triples.len() * (budget + 1) + witness_count + xor_auxiliaries;
+    let clause_count = counter_clauses + anchor_clause + witness_implications + xor_clauses;
+    let variable_count = triples.len() + counter_variables + witness_count + xor_auxiliaries;
 
     let file = std::fs::File::create_new(path)?;
     let mut output = BufWriter::with_capacity(1 << 20, file);
     writeln!(output, "p cnf {variable_count} {clause_count}")?;
     writeln!(output, "1 0")?;
 
-    let slot_variable = |triple: usize, slot: usize| triples.len() + triple * budget + slot + 1;
-    for triple in 0..triples.len() {
-        write!(output, "-{}", triple + 1)?;
-        for slot in 0..budget {
-            write!(output, " {}", slot_variable(triple, slot))?;
-        }
-        writeln!(output, " 0")?;
-        for slot in 0..budget {
-            writeln!(output, "-{} {} 0", slot_variable(triple, slot), triple + 1)?;
-        }
-    }
-    for slot in 0..budget {
-        for left in 0..triples.len() {
-            for right in left + 1..triples.len() {
-                writeln!(
-                    output,
-                    "-{} -{} 0",
-                    slot_variable(left, slot),
-                    slot_variable(right, slot)
-                )?;
-            }
-        }
-    }
-
-    let mut next_variable = triples.len() * (budget + 1) + 1;
+    let mut next_variable = triples.len() + 1;
+    write_at_most(&mut output, triples.len(), budget, &mut next_variable)?;
     for cut in 1_usize..1 << 7 {
         let mut edge_index = [[u8::MAX; 8]; 8];
         let mut edge_count = 0_u8;

@@ -59,9 +59,9 @@ iff it contains an Eulerian subgraph with an odd number of edges: one direction
 selects an odd cycle; in the other, an Eulerian subgraph decomposes into cycles,
 and odd total size forces an odd one.  For every cut, select witness triples,
 require witness-to-query implication, even degree at every cut edge, and odd
-total witness size.  Tseitin XOR chains compile the at-most-16 decision to
-20,537 variables and only 89,724 clauses.  The CNF is 325 KiB; the complete
-colouring expansion is 32 MiB.
+total witness size.  Tseitin XOR chains plus a monotone sequential cardinality
+counter compile the at-most-16 decision to 20,457 variables and only 67,324
+clauses.  The CNF is about 300 KiB; the complete colouring expansion is 32 MiB.
 
 ## Implemented trust boundary
 
@@ -81,10 +81,11 @@ The quotient matches the original four-triple alignment definition for all
 accepts the committed 17-query `g(8)` witness, and rejects a one-query deletion
 from that witness.  Strict all-target/all-feature clippy passes.
 
-The compact at-most-17 SAT control is satisfiable.  Its 17 selected query
-variables replay as separating in the independent Rust verifier.  The
-at-most-16 decision is still running in this checkpoint and writes a binary
-DRAT stream directly under `/home/tavis/.cache/ergodis`; it is not yet a result.
+The compact at-most-17 SAT control is satisfiable in 0.20 seconds.  Its 17
+selected query variables replay as separating in the independent Rust
+verifier.  The at-most-16 decision is still running in this checkpoint and
+writes a binary DRAT stream directly under `/home/tavis/.cache/ergodis`; it is
+not yet a result.
 
 ## Performance lesson
 
@@ -106,6 +107,13 @@ reached 1.78 GiB maximum RSS.  The compact solver stays near 64 MiB RSS on the
 same decision.  A compact Gurobi model is also mathematically valid, but the
 installed restricted license rejects its roughly 5,000 witness variables; that
 is a license boundary, not a model failure.
+
+The first compact CNF used 16 interchangeable witness slots for the at-most-16
+constraint.  That introduced a `16!` backend symmetry: after 4.5 minutes its
+incomplete proof stream had reached 326 MiB.  Replacing slots by the exact
+sequential counter makes the satisfiable control roughly two orders of
+magnitude faster and removes 22,400 clauses.  The slot proof was stopped and
+retained with an explicit `.slot-incomplete` name; it is not evidence.
 
 ## Boundary and next gate
 
