@@ -198,7 +198,7 @@ fn main() -> Result<()> {
     // Deep searches benefit overwhelmingly from syndrome-driven fail-first
     // branching even when the compact coordinate representation would fit.
     // Keep shallow and genuinely small jobs on the lower-overhead compact path.
-    let deep_syndrome_problem = columns >= 128 && maximum_weight >= 12;
+    let deep_syndrome_problem = columns >= 96 && maximum_weight >= 12;
     let wide_problem = columns > 256 || physical_rank > 128 || deep_syndrome_problem;
     let colossal_problem = columns > 1536 || physical_rank > 704;
     let huge_problem =

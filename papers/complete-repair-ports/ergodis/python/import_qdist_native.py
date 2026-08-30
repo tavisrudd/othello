@@ -78,6 +78,27 @@ def permute(value: int, block_size: int, rows: int, columns: int, axis: int) -> 
     return result
 
 
+def permute_cyclic_blocks(value: int, block_size: int) -> int:
+    result = 0
+    while value:
+        low = value & -value
+        coordinate = low.bit_length() - 1
+        value ^= low
+        block, offset = divmod(coordinate, block_size)
+        result |= 1 << (block * block_size + (offset + 1) % block_size)
+    return result
+
+
+def permute_global_shift(value: int, coordinate_count: int, step: int) -> int:
+    result = 0
+    while value:
+        low = value & -value
+        coordinate = low.bit_length() - 1
+        value ^= low
+        result |= 1 << ((coordinate + step) % coordinate_count)
+    return result
+
+
 def sparse_rows(rows: list[int]) -> list[list[int]]:
     output: list[list[int]] = []
     for value in rows:
@@ -148,6 +169,59 @@ def discover_torus_shape(
     return None
 
 
+def discover_cyclic_block_size(
+    physical: list[int],
+    physical_basis: list[int],
+    observable: list[int],
+    observable_basis: list[int],
+    coordinate_count: int,
+) -> int | None:
+    block_sizes = [
+        size
+        for size in range(2, coordinate_count + 1)
+        if coordinate_count % size == 0
+    ]
+    for block_size in reversed(block_sizes):
+        translated_physical = [
+            permute_cyclic_blocks(row, block_size) for row in physical
+        ]
+        if not is_contained(translated_physical, physical_basis):
+            continue
+        translated_observable = [
+            permute_cyclic_blocks(row, block_size) for row in observable
+        ]
+        if is_contained(translated_observable, observable_basis):
+            return block_size
+    return None
+
+
+def discover_global_shift(
+    physical: list[int],
+    physical_basis: list[int],
+    observable: list[int],
+    observable_basis: list[int],
+    coordinate_count: int,
+) -> int | None:
+    steps = [
+        step
+        for step in range(1, coordinate_count)
+        if coordinate_count % step == 0
+    ]
+    steps.sort(key=lambda step: (step, -coordinate_count // step))
+    for step in steps:
+        translated_physical = [
+            permute_global_shift(row, coordinate_count, step) for row in physical
+        ]
+        if not is_contained(translated_physical, physical_basis):
+            continue
+        translated_observable = [
+            permute_global_shift(row, coordinate_count, step) for row in observable
+        ]
+        if is_contained(translated_observable, observable_basis):
+            return step
+    return None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--physical", type=Path, required=True)
@@ -177,6 +251,8 @@ def main() -> int:
 
     observable = physical + logical_basis
     torus_shape: tuple[int, int] | None = None
+    cyclic_block_size: int | None = None
+    global_shift: int | None = None
     if args.torus_shape is not None:
         try:
             torus_shape = tuple(int(part) for part in args.torus_shape.split(","))
@@ -196,15 +272,44 @@ def main() -> int:
         ):
             raise RuntimeError("torus translations do not preserve the imported problem")
     elif args.auto_torus:
-        torus_shape = discover_torus_shape(
+        found_global_shift = discover_global_shift(
+            physical, physical_basis, observable, observable_basis, columns
+        )
+        found_cyclic_block_size = discover_cyclic_block_size(
+            physical, physical_basis, observable, observable_basis, columns
+        )
+        found_torus_shape = discover_torus_shape(
             physical,
             physical_basis,
             observable,
             observable_basis,
             columns,
         )
+        choices: list[tuple[int, str, object]] = []
+        if found_global_shift is not None:
+            choices.append((found_global_shift, "global", found_global_shift))
+        if found_cyclic_block_size is not None:
+            choices.append(
+                (columns // found_cyclic_block_size, "cyclic", found_cyclic_block_size)
+            )
+        if found_torus_shape is not None:
+            choices.append((2, "torus", found_torus_shape))
+        if choices:
+            _, symmetry_kind, symmetry_value = min(choices, key=lambda choice: choice[:2])
+            if symmetry_kind == "global":
+                global_shift = int(symmetry_value)
+            elif symmetry_kind == "cyclic":
+                cyclic_block_size = int(symmetry_value)
+            else:
+                torus_shape = symmetry_value  # type: ignore[assignment]
 
-    if torus_shape is None:
+    if global_shift is not None:
+        anchors = list(range(global_shift))
+        translation_invariance = "physical-and-observability-global-shift-quotient-verified"
+    elif cyclic_block_size is not None:
+        anchors = list(range(0, columns, cyclic_block_size))
+        translation_invariance = "physical-and-observability-cyclic-quotient-verified"
+    elif torus_shape is None:
         anchors = list(range(columns))
         translation_invariance = "none-used-all-coordinate-anchors"
     else:
@@ -227,7 +332,9 @@ def main() -> int:
             "logical_source_rows": len(logical_raw),
             "logical_observation_rank": len(logical_basis),
             "torus_shape": list(torus_shape) if torus_shape is not None else None,
-            "translation_orbits": 2 if torus_shape is not None else columns,
+            "cyclic_block_size": cyclic_block_size,
+            "global_shift": global_shift,
+            "translation_orbits": len(anchors),
             "translation_invariance": translation_invariance,
         },
     }
