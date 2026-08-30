@@ -396,6 +396,10 @@ than assumed beneficial.  A direct VPOPCNT/store/reduce kernel took about
 43--44 ms for the SSE4.1/POPCNT build.  For this short 26-count reduction,
 ZMM setup, lane rearrangement, and reduction dominate.  Both AVX-512 probes
 were rejected; the feature is available, but it is not the fastest kernel.
+An AVX2/POPCNT packed-max variant likewise took 103.2 ms and 504.6 million
+cycles because population counts remain scalar and mixed-width reduction adds
+work.  The retained SSE4.1 path is therefore the winner against both wider
+instruction-set families on this exact workload.
 
 ## Python's continuing role
 
