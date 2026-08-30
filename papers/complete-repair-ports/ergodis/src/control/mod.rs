@@ -233,15 +233,18 @@ impl Campaign {
             match read_frame(&mut stream) {
                 Ok(bytes) => {
                     let request = serde_json::from_slice::<Request>(&bytes);
-                    let response = match request {
+                    let (response, limit) = match request {
                         Ok(request) => {
+                            let limit = request.max_bytes.min(self.response_limit);
                             let (response, stop) = self.handle(request);
                             shutdown |= stop;
-                            response
+                            (response, limit)
                         }
-                        Err(error) => self.error_response(0, format!("invalid request: {error}")),
+                        Err(error) => (
+                            self.error_response(0, format!("invalid request: {error}")),
+                            self.response_limit,
+                        ),
                     };
-                    let limit = self.response_limit;
                     let _ = write_response(&mut stream, response, limit);
                 }
                 Err(error) => {
@@ -1064,6 +1067,8 @@ pub fn send_request(
     };
     let encoded = serde_json::to_vec(&request)?;
     let mut stream = UnixStream::connect(&manifest.socket)?;
+    stream.set_read_timeout(Some(SOCKET_IO_TIMEOUT))?;
+    stream.set_write_timeout(Some(SOCKET_IO_TIMEOUT))?;
     write_frame(&mut stream, &encoded)?;
     let response = read_frame(&mut stream)?;
     let response: Response = serde_json::from_slice(&response)?;

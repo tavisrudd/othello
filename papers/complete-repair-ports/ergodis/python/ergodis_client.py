@@ -62,6 +62,16 @@ def _write_frame(stream: BinaryIO, payload: bytes) -> None:
     stream.flush()
 
 
+def _decode_object(payload: bytes | bytearray, description: str) -> Mapping[str, Any]:
+    try:
+        value = json.loads(payload)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise ProtocolError(f"invalid {description} JSON") from error
+    if not isinstance(value, dict):
+        raise ProtocolError(f"{description} is not an object")
+    return value
+
+
 class Session:
     """One isolated campaign endpoint with monotone client request IDs."""
 
@@ -88,9 +98,7 @@ class Session:
             encoded = source.read(MAX_FRAME_BYTES + 1)
         if len(encoded) > MAX_FRAME_BYTES:
             raise ProtocolError("manifest exceeds protocol frame bound")
-        manifest = json.loads(encoded)
-        if not isinstance(manifest, dict):
-            raise ProtocolError("manifest is not an object")
+        manifest = _decode_object(encoded, "manifest")
         if manifest.get("schema") != SCHEMA:
             raise ProtocolError("unsupported manifest schema")
         try:
@@ -138,19 +146,25 @@ class Session:
             connection.connect(str(self.socket_path))
             with connection.makefile("rwb", buffering=0) as stream:
                 _write_frame(stream, encoded)
-                response = json.loads(_read_frame(stream, max_bytes))
+                response = _decode_object(_read_frame(stream, max_bytes), "response")
         if (
             response.get("schema") != SCHEMA
             or response.get("request_id") != request_id
             or response.get("run_id") != self.run_id
         ):
             raise ProtocolError("response handshake rejected")
+        epoch = response.get("epoch")
+        ok = response.get("ok")
         result = response.get("result")
+        if isinstance(epoch, bool) or not isinstance(epoch, int) or epoch < 0:
+            raise ProtocolError("response epoch is not a nonnegative integer")
+        if not isinstance(ok, bool):
+            raise ProtocolError("response ok field is not Boolean")
         if not isinstance(result, dict):
             raise ProtocolError("response result is not an object")
-        if not response.get("ok"):
+        if not ok:
             raise RemoteError(str(result.get("error", "request rejected")))
-        return Response(request_id, int(response.get("epoch", 0)), result)
+        return Response(request_id, epoch, result)
 
     def capabilities(self) -> Mapping[str, Any]:
         result = self.request("capabilities").result

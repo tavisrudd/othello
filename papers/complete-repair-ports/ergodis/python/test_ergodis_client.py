@@ -68,6 +68,38 @@ class ErgodisClientTest(unittest.TestCase):
             (root / "manifest.json").write_text("[]")
             with self.assertRaises(ProtocolError):
                 Session.from_run_dir(root)
+            (root / "manifest.json").write_bytes(b"{not-json")
+            with self.assertRaises(ProtocolError):
+                Session.from_run_dir(root)
+
+    def test_response_envelope_is_strictly_typed(self) -> None:
+        session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
+        baseline = {
+            "schema": SCHEMA,
+            "request_id": 1,
+            "run_id": "run",
+            "epoch": 0,
+            "ok": True,
+            "result": {},
+        }
+        malformed = (
+            [],
+            baseline | {"epoch": True},
+            baseline | {"epoch": -1},
+            baseline | {"ok": 1},
+            baseline | {"result": []},
+        )
+        for response in malformed:
+            with self.subTest(response=response), patch(
+                "ergodis_client.socket.socket"
+            ) as socket_factory, patch("ergodis_client._write_frame"), patch(
+                "ergodis_client._read_frame",
+                return_value=json.dumps(response).encode(),
+            ):
+                connection = socket_factory.return_value.__enter__.return_value
+                connection.makefile.return_value.__enter__.return_value = object()
+                with self.assertRaises(ProtocolError):
+                    session.request("noop")
 
     def test_live_framing_handshake_and_monotone_ids(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
