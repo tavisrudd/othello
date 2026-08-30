@@ -14,6 +14,8 @@ pub mod composition;
 pub mod confinement;
 pub mod contextual;
 pub mod continuation;
+#[cfg(feature = "control-plane")]
+pub mod control;
 pub mod css_distance;
 pub mod defect;
 pub mod family_response;
