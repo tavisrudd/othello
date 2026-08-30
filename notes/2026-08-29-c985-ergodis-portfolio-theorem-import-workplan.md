@@ -123,6 +123,19 @@ The adjacent Gross control confirms the crossover: despite 39.3% more
 candidates, the smaller representation is 1.097x faster over 500-round paired
 runs because it removes about 192x cache misses.
 
+The large-code continuation is now accepted.  Bounded-multiplicity syndrome
+types, saturated-filter abandonment, and load-adaptive Bloom hashing improve
+clean cold compilation by 3.361x on BB756 and 476x on R2Elite01.  A
+parity-compatible packing cutoff, monotone conflict scan, and hardware-target
+specialization improve clean warm search by 1.344x on BB288, 1.460x on BB756,
+and 1.389x on the exact R2Elite02 Z solve.  The full theorem, counter, RSS, and
+statistical record is in
+`2026-08-30-c985-completion-compression-and-wide-search.md`.
+
+The cross-domain backlog has also been ranked against the gem-mining, crowns,
+open-problem, and discovery-track portfolios.  The resulting application and
+theory gates are in `2026-08-30-c985-ergodis-cross-domain-gem-scan.md`.
+
 ### Theorem input
 
 The integral-secant modular surcharge, Hadamard compression congruence, orbit

@@ -149,10 +149,24 @@ product:
 |--------------------------------------|---------------------------|-----------------------------------------|-------------------------------|
 | bivariate bicycle `[[784,24,24]]` | Bravyi et al. | exact `d = 24`, witness plus exclusion | 127 s, 16 threads, 23 MiB RSS |
 | QDistSAT `BB_360_12_?` | official benchmark input | exact `[[360,12,24]]`, both directions | about 470 s combined |
-| bivariate bicycle `[[756,16,<=34]]` | Bravyi et al. | `d >= 24` certified; exact value open | 33 s; Gurobi licence refused |
+| bivariate bicycle `[[756,16,<=34]]` | Bravyi et al. | `d >= 24` certified; exact value open | 27.51 s clean mean; Gurobi licence refused |
 | lifted product `R2Elite02` | Liu--Marquardt | exact `[[1496,198,16]]` | 116.97B candidates, 647.943 s |
 | lifted product `R2Elite01` | Liu--Marquardt | exact `[[1496,194,20]]` | 712.48B exclusion candidates, 4,247.838 s combined; deterministic weight-20 witness at RIS trial 765 |
 | C997 control, one core | gross code | 0.12 s compile + 0.15 s search | Gurobi one-thread 3.8 s |
+
+The 2026-08-30 compiler/search continuation materially strengthens the native
+product.  Clean same-host A/B gives 3.361x faster BB756 compilation, 476x
+faster R2Elite01 compilation, 1.460x faster BB756 radius-22 search, and 1.389x
+faster R2Elite02 Z exact search.  R2Elite01 compiler RSS falls 1.64x; BB756
+search remains about 24 MiB.  The detailed statistical and counter record is
+`2026-08-30-c985-completion-compression-and-wide-search.md`.
+
+The non-coding application frontier is no longer generic speculation.  The
+ranked C985 scan identifies exact real-rooted polynomial enumeration for the
+open `R^18` equiangular-line problem and C80's odd-plane cap game as flagship
+adapters, with a double-coset continuation hierarchy as their common small
+theory fixture.  See `2026-08-30-c985-ergodis-cross-domain-gem-scan.md`; the
+large C1000 enumeration remains separately gated and unapproved.
 
 The Gurobi boundary memo fixes the product boundary: domain object, then
 ergodis to a smaller certified model, then any backend (Gurobi, SCIP, Kissat,

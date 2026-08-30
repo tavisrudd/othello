@@ -461,6 +461,21 @@ Sequel research:
   four-filter.  The adjacent Gross crossover supports the cap: the smaller
   representation remains 1.097x faster across 500-round pairs despite 39.3%
   more candidates, because it removes about 192x cache misses.
+  The clean continuation is now recorded in
+  [C985 completion compression and wide search](../2026-08-30-c985-completion-compression-and-wide-search.md).
+  Exact bounded-multiplicity syndrome types, saturated-filter abandonment,
+  and adaptive Bloom hashing improve cold compilation 3.361x on BB756 and
+  476x on R2Elite01.  Parity-compatible monotone packing and hardware-target
+  specialization improve warm search 1.344x on BB288, 1.460x on BB756, and
+  1.389x on the exact R2Elite02 Z application.  The BB756 search removes
+  54.4% of instructions and 30.2% of cycles at about 24 MiB RSS.  All changes
+  remain iterative and allocation-free in the candidate loop.
+  The read-only cross-lane/open-problem scan is ranked in
+  [C985 cross-domain gem scan](../2026-08-30-c985-ergodis-cross-domain-gem-scan.md).
+  Its highest-EV common stepping stone is a small exact continuation-hierarchy
+  API, with B3/H3 double-coset information levels as the first fixture; C80's
+  cap game and the gated `R^18` real-rooted polynomial enumerator are the two
+  flagship adapters.  The C1000 large enumeration remains unapproved.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
