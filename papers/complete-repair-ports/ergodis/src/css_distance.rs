@@ -1192,16 +1192,14 @@ where
     fn syndrome_degree_bound_exceeds(
         &self,
         syndrome_weight: u32,
-        required_parity: u32,
+        maximum_permitted_lower_bound: u32,
         budget: u16,
     ) -> bool {
         let degree = u32::from(self.maximum_column_check_weight);
         if degree == 0 {
             return syndrome_weight != 0 && budget != u16::MAX;
         }
-        let mut lower_bound = syndrome_weight.div_ceil(degree);
-        lower_bound += u32::from(self.kernel_weights_even) & ((lower_bound ^ required_parity) & 1);
-        lower_bound > u32::from(budget)
+        syndrome_weight.div_ceil(degree) > maximum_permitted_lower_bound
     }
 
     /// Test whether greedy packing finds more disjoint neighborhoods than the budget.
@@ -1209,19 +1207,22 @@ where
     fn syndrome_packing_exceeds(
         &self,
         mut syndrome: PackedSyndrome<CHECK_WORDS>,
-        required_parity: u32,
-        budget: u16,
+        maximum_permitted_lower_bound: u32,
     ) -> bool {
         let mut lower_bound = 0_u32;
-        while let Some(check) = syndrome.pop_lowest() {
-            lower_bound += 1;
-            if lower_bound > u32::from(budget) {
-                return true;
+        for word_index in 0..CHECK_WORDS {
+            while syndrome.words[word_index] != 0 {
+                let bit = syndrome.words[word_index].trailing_zeros() as usize;
+                lower_bound += 1;
+                if lower_bound > maximum_permitted_lower_bound {
+                    return true;
+                }
+                let conflicts = self.check_conflicts[64 * word_index + bit].syndrome;
+                debug_assert_ne!(conflicts.words[word_index] & (1_u64 << bit), 0);
+                syndrome.difference_assign(conflicts);
             }
-            syndrome.difference_assign(self.check_conflicts[check].syndrome);
         }
-        lower_bound += u32::from(self.kernel_weights_even) & ((lower_bound ^ required_parity) & 1);
-        lower_bound > u32::from(budget)
+        false
     }
 
     /// Test the cheap degree bound before paying for greedy conflict packing.
@@ -1233,8 +1234,11 @@ where
     ) -> bool {
         let syndrome_weight = syndrome.weight();
         let required_parity = packed_dot_parity(syndrome, self.kernel_parity_functional);
-        self.syndrome_degree_bound_exceeds(syndrome_weight, required_parity, budget)
-            || self.syndrome_packing_exceeds(syndrome, required_parity, budget)
+        let parity_adjustment =
+            u32::from(self.kernel_weights_even) & ((u32::from(budget) ^ required_parity) & 1);
+        let maximum_permitted_lower_bound = u32::from(budget) - parity_adjustment;
+        self.syndrome_degree_bound_exceeds(syndrome_weight, maximum_permitted_lower_bound, budget)
+            || self.syndrome_packing_exceeds(syndrome, maximum_permitted_lower_bound)
     }
 
     #[inline]
@@ -4061,6 +4065,23 @@ mod tests {
         assert!(loaded.artifact_payload_blake3().is_some());
         assert_eq!(
             loaded
+                .search_bounded_syndrome_driven(&anchors, 5)
+                .unwrap()
+                .distance,
+            driven.distance
+        );
+        let mut one_hash_wide = wide.clone();
+        one_hash_wide.three_completion_bloom.hash_step_mask = 0;
+        let mut one_hash_artifact = Vec::new();
+        one_hash_wide
+            .write_artifact(&mut one_hash_artifact)
+            .unwrap();
+        let one_hash_loaded =
+            CompiledWideCssDistance::read_artifact(&physical, &logical, &*one_hash_artifact)
+                .unwrap();
+        assert!(one_hash_loaded.three_completion_bloom.uses_one_hash());
+        assert_eq!(
+            one_hash_loaded
                 .search_bounded_syndrome_driven(&anchors, 5)
                 .unwrap()
                 .distance,
