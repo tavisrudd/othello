@@ -360,7 +360,7 @@ a time into packed unsigned maxima.  There is no per-object feature check and
 the exact generic kernel remains the fallback.  Seven-run counter A/Bs on CPU
 2 reduce end-to-end time from 176.37 to 57.38 ms (3.074x), cycles from 872.8 M
 to 272.8 M (-68.7%), and instructions from 3.919 B to 1.319 B (-66.4%).  The
-result is 81.7 million ambient objects/s, 58.2 cycles and 281.4 instructions
+At that stage the result is 81.7 million ambient objects/s, 58.2 cycles and 281.4 instructions
 per object.  The complete histogram, extremal count, cap/orbit claims, and
 historical representative remain unchanged.
 
@@ -369,7 +369,12 @@ Fibonacci-hashed mask table sized once from the certified extremal count.  Its
 insert path allocates nothing.  Against the already optimized build this cuts
 a further 30.8 million instructions (2.3%) and 8.4 million cycles (3.1%)
 end-to-end.  A denser 32 KiB table lost that gain to collision branches; the
-measured 64 KiB table is retained.
+measured 64 KiB table is retained.  Finally, marking the generic Gosper visitor
+for cross-crate inlining fuses successor generation with the census callback.
+The final seven-run end-to-end result is 52.55 ms, 251.2 million cycles, and
+1.229 billion instructions: 3.356x faster than the frozen baseline with 71.2%
+fewer cycles and 68.7% fewer instructions.  Throughput is 89.2 million objects
+per second at 53.6 cycles and 262.2 instructions per object.
 
 ## Python's continuing role
 

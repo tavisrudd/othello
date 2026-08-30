@@ -329,6 +329,7 @@ impl MaxOverlapProfiler {
 /// Gosper successors enumerate masks in increasing machine-word order.  The
 /// loop is iterative, stack-safe, and entirely allocation-free.  The callback
 /// should preserve that property when used in search.
+#[inline]
 pub fn for_each_k_subset(n: usize, k: usize, mut visit: impl FnMut(u64)) {
     assert!(n <= 64, "u64 subset universe exceeds 64 elements");
     if k > n {
