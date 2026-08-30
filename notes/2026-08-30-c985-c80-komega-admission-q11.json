@@ -1,0 +1,242 @@
+{
+  "K_Omega_p_admission": {
+    "certified_replies": 23000,
+    "charge_admissible_replies": 23000,
+    "equal_support_certified_replies": 23000,
+    "legal_replies": 37292,
+    "maximum_certified_replies_per_opponent": 7,
+    "minimum_certified_replies_per_opponent": 1,
+    "minimum_certified_support_surplus": 0,
+    "minimum_equal_support_omega_drop": 6,
+    "non_omega_descending_replies": 0,
+    "omega_descending_non_survivor_replies": 14292,
+    "omega_descending_replies": 37292,
+    "opponents": 6124,
+    "positive_omega_states": 315,
+    "sampled_states_in_K_Omega": 334,
+    "with_certified_reply": 6124,
+    "with_charge_admissible_reply": 6124,
+    "without_certified_reply": 0,
+    "without_charge_admissible_reply": 0
+  },
+  "continue_after_issue": true,
+  "counts": {
+    "complete_exchanges": 6866,
+    "complete_relation_hall_failures": 0,
+    "exchanges_with_new_defects": 6458,
+    "hall_failures": 234,
+    "maximum_new_defects": 2,
+    "new_defects": 10686,
+    "nondecreasing_exchanges": 234,
+    "omega_first_lex_failures": 0,
+    "states": 1000,
+    "support_first_lex_failures": 0,
+    "uncovered_fibres": 0
+  },
+  "delta_profiles_support_omega_old_half_next_persistent": {
+    "0/10/2/0/2/0": 234,
+    "2/8/4/0/2/0": 292,
+    "3/14/4/0/1/0": 448,
+    "3/15/5/0/2/0": 1206,
+    "4/15/5/0/1/0": 402,
+    "4/9/6/0/2/0": 816,
+    "5/10/7/0/2/0": 1692,
+    "6/12/8/0/2/0": 1368
+  },
+  "equal_support_profiles_oldrank_nextrank_created_omega": {
+    "2/2/2/10/0": 234
+  },
+  "exchange_budget": 100000,
+  "first_K_Omega_admission_miss": null,
+  "first_issue": {
+    "causal": [
+      6,
+      1
+    ],
+    "charged_support": [
+      2,
+      2
+    ],
+    "consumed": [
+      [
+        4,
+        9
+      ],
+      [
+        6,
+        1
+      ]
+    ],
+    "created": [
+      [
+        3,
+        5
+      ],
+      [
+        9,
+        10
+      ]
+    ],
+    "fibres": [
+      {
+        "attacks": [
+          {
+            "mode": "causal_reply_already_selected",
+            "pivots": [],
+            "reply": [
+              6,
+              1
+            ]
+          },
+          {
+            "mode": "certificate_reply_secant_deletion",
+            "pivots": [
+              [
+                7,
+                6
+              ]
+            ],
+            "reply": [
+              10,
+              10
+            ]
+          }
+        ],
+        "defect": [
+          3,
+          5
+        ],
+        "incident_labels": [
+          [
+            6,
+            1
+          ]
+        ],
+        "old_replies": [
+          [
+            6,
+            1
+          ],
+          [
+            10,
+            10
+          ]
+        ]
+      },
+      {
+        "attacks": [
+          {
+            "mode": "certificate_reply_secant_deletion",
+            "pivots": [
+              [
+                7,
+                6
+              ]
+            ],
+            "reply": [
+              3,
+              8
+            ]
+          },
+          {
+            "mode": "causal_reply_already_selected",
+            "pivots": [],
+            "reply": [
+              6,
+              1
+            ]
+          }
+        ],
+        "defect": [
+          9,
+          10
+        ],
+        "incident_labels": [
+          [
+            6,
+            1
+          ]
+        ],
+        "old_replies": [
+          [
+            3,
+            8
+          ],
+          [
+            6,
+            1
+          ]
+        ]
+      }
+    ],
+    "half_defects": [],
+    "hall": false,
+    "neighbours": [
+      [
+        1
+      ],
+      [
+        1
+      ]
+    ],
+    "next_defects": [
+      [
+        3,
+        5
+      ],
+      [
+        9,
+        10
+      ]
+    ],
+    "old_defects": [
+      [
+        4,
+        9
+      ],
+      [
+        6,
+        1
+      ]
+    ],
+    "omega": [
+      10,
+      0,
+      0
+    ],
+    "omega_first_descends": true,
+    "opponent": [
+      4,
+      9
+    ],
+    "state": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        7
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        7,
+        6
+      ]
+    ],
+    "successor_is_small_boundary": false,
+    "support_first_descends": true,
+    "uncovered": []
+  },
+  "primary_replay": true,
+  "q": 11,
+  "schema": "c80-projective-hall-scout-v1",
+  "seed": 98508030,
+  "source": "rust/scripts/c80_causal_nonpacking.py",
+  "source_sha256": "268b8a839aa8308c1e3b48aa82c6c8bcc7b74d4b6778216830bcfd43ff00bffe",
+  "state_budget": 1000,
+  "stopped_early": false
+}

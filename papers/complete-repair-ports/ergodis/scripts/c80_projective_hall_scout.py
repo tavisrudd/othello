@@ -119,9 +119,18 @@ def scout(
     state_budget: int,
     exchange_budget: int,
     continue_after_issue: bool,
+    p_admission: bool,
 ) -> dict:
     source = load_source()
     game = source.DirectSmallBoundaryGame(q)
+    primary = source.SmallBoundaryGame(q)
+    by_cell = {
+        game.board[index]: index
+        for index in range(q * q)
+    }
+
+    def primary_mask(state) -> int:
+        return sum(1 << by_cell[point] for point in state)
     rng = random.Random(seed)
     states = set()
     attempts = 0
@@ -150,11 +159,153 @@ def scout(
         "omega_first_lex_failures": 0,
     }
     first_issue = None
+    admission_counts = {
+        "sampled_states_in_K_Omega": 0,
+        "positive_omega_states": 0,
+        "opponents": 0,
+        "legal_replies": 0,
+        "non_omega_descending_replies": 0,
+        "omega_descending_non_survivor_replies": 0,
+        "omega_descending_replies": 0,
+        "with_certified_reply": 0,
+        "without_certified_reply": 0,
+        "with_charge_admissible_reply": 0,
+        "without_charge_admissible_reply": 0,
+        "certified_replies": 0,
+        "charge_admissible_replies": 0,
+        "minimum_certified_replies_per_opponent": 1 << 60,
+        "maximum_certified_replies_per_opponent": 0,
+        "minimum_certified_support_surplus": 1 << 60,
+        "equal_support_certified_replies": 0,
+        "minimum_equal_support_omega_drop": 1 << 60,
+    }
+    first_admission_miss = None
     equality_profiles: Counter[str] = Counter()
     delta_profiles: Counter[str] = Counter()
     stop = False
     for state in sorted(states, key=lambda value: sorted(value)):
         old_defects = game.defects(state)
+        if p_admission:
+            state_mask = primary_mask(state)
+            if primary.kernel.contains(state_mask):
+                admission_counts["sampled_states_in_K_Omega"] += 1
+                old_omega = primary.kernel.omega(state_mask)
+                if old_omega > 0:
+                    admission_counts["positive_omega_states"] += 1
+                    for opponent in game.legal(state):
+                        admission_counts["opponents"] += 1
+                        child = state | {opponent}
+                        half_defects = game.defects(child)
+                        reply_rows = []
+                        certified = 0
+                        admissible = 0
+                        for reply in game.legal(child):
+                            admission_counts["legal_replies"] += 1
+                            target = child | {reply}
+                            target_mask = primary_mask(target)
+                            omega_descends = (
+                                primary.kernel.omega(target_mask) < old_omega
+                            )
+                            if omega_descends:
+                                admission_counts["omega_descending_replies"] += 1
+                                survivor = primary.kernel.contains(target_mask)
+                                if not survivor:
+                                    admission_counts[
+                                        "omega_descending_non_survivor_replies"
+                                    ] += 1
+                            else:
+                                admission_counts[
+                                    "non_omega_descending_replies"
+                                ] += 1
+                                survivor = False
+                            target_defects = game.defects(target)
+                            created = target_defects - half_defects - old_defects
+                            consumed = old_defects - target_defects
+                            target_omega = game.omega(target)
+                            charge = len(consumed) > len(created) or (
+                                len(consumed) == len(created)
+                                and target_omega < game.omega(state)
+                            )
+                            reply_rows.append(
+                                (
+                                    reply,
+                                    len(target_defects),
+                                    target_omega,
+                                    survivor,
+                                    charge,
+                                )
+                            )
+                            if survivor:
+                                certified += 1
+                                admissible += int(charge)
+                                surplus = len(consumed) - len(created)
+                                admission_counts[
+                                    "minimum_certified_support_surplus"
+                                ] = min(
+                                    admission_counts[
+                                        "minimum_certified_support_surplus"
+                                    ],
+                                    surplus,
+                                )
+                                if surplus == 0:
+                                    admission_counts[
+                                        "equal_support_certified_replies"
+                                    ] += 1
+                                    admission_counts[
+                                        "minimum_equal_support_omega_drop"
+                                    ] = min(
+                                        admission_counts[
+                                            "minimum_equal_support_omega_drop"
+                                        ],
+                                        game.omega(state) - target_omega,
+                                    )
+                        admission_counts["certified_replies"] += certified
+                        admission_counts["charge_admissible_replies"] += admissible
+                        admission_counts[
+                            "minimum_certified_replies_per_opponent"
+                        ] = min(
+                            admission_counts[
+                                "minimum_certified_replies_per_opponent"
+                            ],
+                            certified,
+                        )
+                        admission_counts[
+                            "maximum_certified_replies_per_opponent"
+                        ] = max(
+                            admission_counts[
+                                "maximum_certified_replies_per_opponent"
+                            ],
+                            certified,
+                        )
+                        if certified:
+                            admission_counts["with_certified_reply"] += 1
+                        else:
+                            admission_counts["without_certified_reply"] += 1
+                        if admissible:
+                            admission_counts["with_charge_admissible_reply"] += 1
+                        else:
+                            admission_counts[
+                                "without_charge_admissible_reply"
+                            ] += 1
+                            if first_admission_miss is None:
+                                first_admission_miss = {
+                                    "state": point_list(state),
+                                    "opponent": list(opponent),
+                                    "old_defect_rank": len(old_defects),
+                                    "old_omega": old_omega,
+                                    "legal_replies": len(reply_rows),
+                                    "certified_replies": [
+                                        {
+                                            "reply": list(reply),
+                                            "next_defect_rank": rank,
+                                            "next_omega": omega,
+                                            "charge_descends": charge,
+                                        }
+                                        for reply, rank, omega, survivor, charge
+                                        in reply_rows
+                                        if survivor
+                                    ],
+                                }
         for opponent in game.legal(state):
             if opponent not in old_defects:
                 continue
@@ -343,6 +494,16 @@ def scout(
         result["delta_profiles_support_omega_old_half_next_persistent"] = dict(
             sorted(delta_profiles.items())
         )
+    if p_admission:
+        for field in (
+            "minimum_certified_replies_per_opponent",
+            "minimum_certified_support_surplus",
+            "minimum_equal_support_omega_drop",
+        ):
+            if admission_counts[field] == 1 << 60:
+                admission_counts[field] = None
+        result["K_Omega_p_admission"] = admission_counts
+        result["first_K_Omega_admission_miss"] = first_admission_miss
     return result
 
 
@@ -353,6 +514,7 @@ def main() -> None:
     parser.add_argument("--states", type=int, default=100)
     parser.add_argument("--exchanges", type=int, default=10_000)
     parser.add_argument("--continue-after-issue", action="store_true")
+    parser.add_argument("--p-admission", action="store_true")
     output = parser.add_mutually_exclusive_group()
     output.add_argument("--write", type=Path)
     output.add_argument("--check", type=Path)
@@ -363,6 +525,7 @@ def main() -> None:
         args.states,
         args.exchanges,
         args.continue_after_issue,
+        args.p_admission,
     )
     encoded = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if args.write is not None:

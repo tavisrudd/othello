@@ -174,6 +174,18 @@ This is the natural bridge to repair resources, scheduling, test selection,
 and game-reply obligations.  The common theorem is the sound compiler from
 semantic contexts to residual obligations; the backend algebra may differ.
 
+### Measured sharpening decisions
+
+Two obvious strengthenings have now failed the admission gate and are not in
+the code.  Extending exact residual hitting from the final three to the final
+four choices changes no search-state count on rooted budgets 12 or 13 and
+slows wall time by 19.2% and 18.4% respectively.  Exact duplicate/superset
+clause elimination likewise changes no state count and slows those controls by
+8.6% and 6.6%.  Both controls preserve the same result and search metrics.
+This redirects residual work to proof emission or a genuinely stronger
+aggregate rank/cover inequality; neither more bounded depth nor local clause
+preprocessing pays on the measured distribution.
+
 ## C80: game-semantic admission before counting
 
 The universal complete-exchange inequality is not the right theorem.  The
@@ -218,6 +230,50 @@ proved q11 and q13 base fields may absorb equality exceptions.  A diagnostic
 must report, for every opponent, counts of legal replies, P-certified replies,
 charge-admissible replies, and the first empty fibre.  Aggregate exchange
 counts alone cannot establish opponent completeness.
+
+The first implementation of this predicate now uses the proved `K_Omega`
+survivor as `CertifiedP`.  It filters the sampled state domain before counting,
+requires the certified reply to re-enter `K_Omega` with strict `Omega` drop,
+and only then applies the consumed/created charge test.  This corrects the
+earlier diagnostic's quantifier error: arbitrary exchanges, including known N
+successors, are not evidence against existential P-reply admission.
+
+The deterministic q11 1,000-state control contains 334 sampled `K_Omega`
+states, 315 with positive overload.  All 6,124 opponent fibres have an
+admissible reply; all 23,000 certified replies pass the charge test.  Every
+certified reply is a support-equality case, and the minimum `Omega` drop is 6.
+Thus strict consumed-label surplus is false as the universal progress branch
+even on the correct P domain; q11 progresses through the second lexicographic
+coordinate.
+
+The q13 300-state control contains 48 positive-overload `K_Omega` states.  All
+1,930 opponent fibres have an admissible reply and all 10,428 certified replies
+pass the charge test.  No certified reply has equal support; the minimum
+consumed-minus-created surplus is 18.  This is the first clean evidence for the
+field-split theorem shape:
+
+\[
+ q=11:\ \text{support equality with strict }\Omega\text{ descent},
+ \qquad
+ q\geq13:\ \text{strict support surplus}.
+\]
+
+These are deterministic sampled controls, not a uniform theorem.  Membership
+in `K_Omega` is still supplied by the existing recursive certificate engine,
+so the next mathematical step is to replace that oracle in the *existence*
+argument: partition replies by the first failed geometric condition and bound
+the union of bad families below the legal-reply count.  The observed minimum
+surplus 18 at q13 is a margin to explain, not a bound to extrapolate.
+
+The first failed-condition census sharpens that route again.  Every one of the
+37,292 q11 and 33,596 q13 legal replies strictly decreases `Omega`; no reply is
+lost at the scalar-descent gate.  The only failed condition is hereditary
+survivor re-entry: 14,292 q11 and 23,168 q13 replies descend in `Omega` but
+leave `K_Omega`.  Some opponent fibres have exactly one certified reply.  A
+uniform proof therefore cannot stop at an `Omega` count or average abundance;
+it must show that the non-survivor reply families never cover an entire
+opponent fibre.  This is a tighter target than the earlier generic bad-family
+union.
 
 ## Gated `R^18` polynomial adapter
 
@@ -265,6 +321,11 @@ claim.  Zero sources were read in full.
   gains.
 - **Potentially novel but unaudited:** the general contextual-obligation
   compiler theorem and its proof-producing use for aligned attachments.
-- **Open:** depth-four profitability, compact proof replay, an aggregate rank
+- **Open:** compact proof replay, an aggregate rank
   inequality strong enough to close C880, C80 opponent-complete admissible
   reply counting, and the complete real-rooted `R^18` adapter.
+
+The depth-four and local-kernel profitability questions are now settled
+negative on the stated rooted controls.  The C80 predicate is implemented and
+positive on its q11/q13 sampled `K_Omega` domains; its uniform geometric
+counting theorem remains open.

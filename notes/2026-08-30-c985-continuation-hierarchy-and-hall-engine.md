@@ -248,6 +248,29 @@ shape: discharge the already-proved small fields separately and prove strict
 consumed-label surplus above a field threshold.  That would be a counting
 theorem, not a matching theorem.
 
+The missing game-semantic admission predicate is now explicit and implemented
+for the proved strict-overload survivor.  A reply is counted only when its
+successor re-enters `K_Omega` with strict `Omega` drop and the complete-exchange
+charge satisfies support descent, using `Omega` to break equality.  On a
+deterministic 1,000-state q11 control, 315 positive-overload survivor states
+give 6,124/6,124 admitted opponent fibres and 23,000/23,000 charge-admissible
+certified replies.  All are support-equality cases, with minimum `Omega` drop
+6.  On a 300-state q13 control, 48 survivor states give 1,930/1,930 admitted
+fibres and 10,428/10,428 admissible certified replies; every one has strict
+support surplus, with minimum 18.  This replaces the false universal-exchange
+quantifier by an exact P-survivor predicate and identifies the live field-split
+counting statement.  It does not prove that statement: `K_Omega` membership is
+still supplied by the existing certificate engine, and both controls are
+sampled.
+
+The admission failure census isolates the hard condition.  All 37,292 q11 and
+33,596 q13 legal replies in these positive-overload survivor controls strictly
+decrease `Omega`.  Exactly 14,292 and 23,168 respectively fail only because
+their successors do not re-enter `K_Omega`; some opponent fibres retain a
+single certified reply.  Hence the uniform theorem must prevent hereditary
+non-survivor replies from covering a whole fibre.  Scalar overload descent and
+aggregate average reply abundance are already insufficient.
+
 ## Once-validated Pareto objectives
 
 `ValidatedParetoObjective` now binds immutable output and generator-edge
@@ -334,9 +357,27 @@ Ergodis-platform continuation remains a second flagship adapter, because the
 generic hierarchy/Hall machinery has now done its job and exposed the
 mathematical boundary quickly.
 
+The sharper continuation is now to count bad replies relative to the
+`K_Omega` admission predicate: classify the first failed geometric condition,
+prove that the bad families do not cover the legal reply line for q at least
+13, and retain q11 as the strict-`Omega` equality base.  Do not return to a
+universal per-exchange Hall law.
+
 Reproduction from the repository root:
 
 ```sh
+nix shell nixpkgs#python313 -c python3 \
+  papers/complete-repair-ports/ergodis/scripts/c80_projective_hall_scout.py \
+  --q 11 --states 1000 --exchanges 100000 --continue-after-issue \
+  --p-admission \
+  --check notes/2026-08-30-c985-c80-komega-admission-q11.json
+nix shell nixpkgs#python313 -c python3 \
+  papers/complete-repair-ports/ergodis/scripts/c80_projective_hall_scout.py \
+  --q 13 --states 300 --exchanges 30000 --continue-after-issue \
+  --p-admission \
+  --check notes/2026-08-30-c985-c80-komega-admission-q13.json
+sha256sum -c notes/2026-08-30-c985-c80-komega-admission.sha256
+
 nix shell nixpkgs#python313 -c python3 \
   papers/complete-repair-ports/ergodis/scripts/c80_projective_hall_scout.py \
   --q 11 --states 100 --exchanges 10000 \

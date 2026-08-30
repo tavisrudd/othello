@@ -509,7 +509,16 @@ Sequel research:
   Since q11 and q13 are already proved cap-game base fields, the surviving
   theorem shape is strict consumed-label surplus above a field threshold plus
   the existing finite bases; this is now a counting problem rather than a
-  matching problem.
+  matching problem.  The first game-semantic admission predicate now requires
+  re-entry into the proved `K_Omega` survivor with strict `Omega` drop before
+  applying the charge test.  Deterministic controls admit all 6,124 q11 and
+  1,930 q13 opponent fibres.  All 23,000 q11 certified replies are
+  support-equality cases with minimum `Omega` drop 6, whereas all 10,428 q13
+  replies have strict support surplus with minimum 18.  This identifies a
+  q11-equality/q13-surplus counting split but remains sampled evidence using
+  the existing survivor certificate, not a uniform theorem.  Every sampled
+  legal reply already decreases `Omega`; the only failed admission condition
+  is re-entry into `K_Omega`, and some fibres have a unique certified reply.
   The
   once-validated Pareto objective wrapper also closes its hostile
   same-cardinality-order gate and gives 1.028--1.044x warm gains on two clean
