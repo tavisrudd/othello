@@ -519,13 +519,14 @@ Sequel research:
   incumbents. Its native DFS can opt into exact setwise-stabilizer
   canonicalization with no hot-loop allocation. Monotone unresolved-cut masks
   and compiled crossing-triple masks remove discharged and irrelevant work.
-  Completed controls improve 5.78x at `n=6` and about 52.7x on a rooted `n=8`
-  exclusion; the final crossing-mask slice alone is 1.746x. A parity-DSU
-  alternative is rejected as 1.674x slower. A bounded rooted budget-16 probe
-  remains incomplete, and the exact `15 <= g(8) <= 17` gap is unchanged. The
-  next C880 gate is a proof-producing symmetry-quotiented orbit sweep or a
-  genuinely aggregate context rank inequality, not more first-order Gurobi
-  pulse tuning.
+  Incremental per-depth group images remove repeated canonical remapping.
+  Completed controls improve 5.78x at `n=6` and about 56.7x on a rooted `n=8`
+  exclusion; the crossing-mask and incremental-image slices add 1.746x and
+  1.077x respectively. A parity-DSU alternative is rejected as 1.674x slower.
+  A bounded rooted budget-16 probe remains incomplete, and the exact
+  `15 <= g(8) <= 17` gap is unchanged. The next C880 gate is a proof-producing
+  symmetry-quotiented orbit sweep or a genuinely aggregate context rank
+  inequality, not more first-order Gurobi pulse tuning.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

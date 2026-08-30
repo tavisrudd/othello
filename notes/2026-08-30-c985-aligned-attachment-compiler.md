@@ -178,6 +178,15 @@ only `2.063B -> 1.940B`, so most of the gain is better independent work and
 branch behaviour. Relative to the pre-symmetry worker, the completed rooted
 `n=8` control is about 52.7x faster.
 
+The next profile assigned 31.1% of hard-worker cycles to reconstructing every
+group image from all selected triples. The DFS now retains one pre-sized image
+accumulator per symmetry and depth: a child performs one OR per symmetry and
+canonicalization becomes a flat minimum scan. Thirty-one interleaved rounds
+add 1.0769x geometrically (1.0860x median, paired log-ratio `t=6.798`), with
+cycles `521.3M -> 481.1M` and instructions `1.940B -> 1.880B`. This lifts the
+cumulative completed rooted `n=8` control to about 56.7x over the original
+worker, without allocation in the DFS loop.
+
 A parity-DSU replacement for the 16-vertex bitmap BFS was also measured and
 rejected. Its dependent find/union chains made the same exact control 1.674x
 slower across 21 rounds (old/new geometric ratio `0.5971`, `t=-56.292`). The
@@ -267,8 +276,8 @@ cut-context theorem.
 - **Partly settled:** native orbit workers repeated symmetry-equivalent partial
   families and rechecked discharged/non-crossing contexts. Setwise-stabilizer
   canonicalization plus monotone residualization and crossing masks removes up
-  to about 52.7x wall time on completed controls, but the bounded budget-16
-  probe still timed out.
+  to about 56.7x wall time on completed controls after incremental group-image
+  accumulation, but the bounded budget-16 probe still timed out.
 - **Settled:** a displayed generic-solver incumbent is not automatically a
   certified Ergodis incumbent. The independent outer replay boundary now
   catches callback-delivery gaps and refuses unreplayed objectives.

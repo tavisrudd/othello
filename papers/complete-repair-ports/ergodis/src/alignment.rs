@@ -442,6 +442,7 @@ pub struct AlignmentSearchWorkspace {
     frames: Box<[SearchFrame]>,
     seen: Box<[u64]>,
     symmetry_maps: Box<[u8]>,
+    symmetry_images: Box<[u64]>,
 }
 
 impl AlignmentSearchWorkspace {
@@ -456,6 +457,7 @@ impl AlignmentSearchWorkspace {
             frames: vec![SearchFrame::default(); maximum_budget as usize + 1].into_boxed_slice(),
             seen: vec![0_u64; slots].into_boxed_slice(),
             symmetry_maps: Box::new([]),
+            symmetry_images: Box::new([]),
         })
     }
 
@@ -499,16 +501,35 @@ impl AlignmentSearchWorkspace {
             }
         }
         self.symmetry_maps = maps.into_boxed_slice();
-        Ok(self.symmetry_maps.len() / 56)
+        let count = self.symmetry_maps.len() / 56;
+        self.symmetry_images = if count > 1 {
+            vec![0_u64; count * self.frames.len()].into_boxed_slice()
+        } else {
+            Box::new([])
+        };
+        Ok(count)
     }
 
     #[inline]
-    fn canonical_key(&self, selected: u64) -> u64 {
-        if self.symmetry_maps.len() <= 56 {
+    fn canonical_key(&self, selected: u64, depth: usize) -> u64 {
+        if self.symmetry_images.is_empty() {
             return selected;
         }
-        let mut canonical = selected;
-        for map in self.symmetry_maps.chunks_exact(56) {
+        let count = self.symmetry_maps.len() / 56;
+        self.symmetry_images[depth * count..(depth + 1) * count]
+            .iter()
+            .copied()
+            .min()
+            .unwrap_or(selected)
+    }
+
+    fn initialize_symmetry_images(&mut self, selected: u64) {
+        if self.symmetry_images.is_empty() {
+            return;
+        }
+        let count = self.symmetry_maps.len() / 56;
+        for symmetry in 0..count {
+            let map = &self.symmetry_maps[symmetry * 56..(symmetry + 1) * 56];
             let mut image = 0_u64;
             let mut bits = selected;
             while bits != 0 {
@@ -516,14 +537,26 @@ impl AlignmentSearchWorkspace {
                 bits &= bits - 1;
                 image |= 1_u64 << map[triple];
             }
-            canonical = canonical.min(image);
+            self.symmetry_images[symmetry] = image;
         }
-        canonical
     }
 
-    fn insert_seen(&mut self, selected: u64) -> Result<bool, AlignmentError> {
+    fn extend_symmetry_images(&mut self, depth: usize, triple: usize) {
+        if self.symmetry_images.is_empty() {
+            return;
+        }
+        let count = self.symmetry_maps.len() / 56;
+        let destination = (depth + 1) * count;
+        for symmetry in 0..count {
+            self.symmetry_images[destination + symmetry] = self.symmetry_images
+                [depth * count + symmetry]
+                | 1_u64 << self.symmetry_maps[symmetry * 56 + triple];
+        }
+    }
+
+    fn insert_seen(&mut self, selected: u64, depth: usize) -> Result<bool, AlignmentError> {
         debug_assert_ne!(selected, 0);
-        let selected = self.canonical_key(selected);
+        let selected = self.canonical_key(selected, depth);
         let mask = self.seen.len() - 1;
         let mut slot = (selected.wrapping_mul(0x9e37_79b9_7f4a_7c15) >> 32) as usize & mask;
         for _ in 0..self.seen.len() {
@@ -593,13 +626,14 @@ pub fn search_alignment_attachment_from(
         unresolved_cuts: problem.all_cut_mask(),
         ..SearchFrame::default()
     };
+    workspace.initialize_symmetry_images(initial);
     let mut depth = 0_usize;
     let mut metrics = AlignmentSearchMetrics::default();
 
     loop {
         if !workspace.frames[depth].entered {
             let selected = workspace.frames[depth].selected;
-            if !workspace.insert_seen(selected)? {
+            if !workspace.insert_seen(selected, depth)? {
                 metrics.duplicate_states = metrics
                     .duplicate_states
                     .checked_add(1)
@@ -642,6 +676,7 @@ pub fn search_alignment_attachment_from(
             workspace.frames[depth].branch_bits ^= bit;
             let selected = workspace.frames[depth].selected | bit;
             let unresolved_cuts = workspace.frames[depth].unresolved_cuts;
+            workspace.extend_symmetry_images(depth, bit.trailing_zeros() as usize);
             depth += 1;
             workspace.frames[depth] = SearchFrame {
                 selected,
@@ -827,16 +862,25 @@ mod tests {
         let mut workspace = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
         assert_eq!(workspace.set_point_stabilizer(&problem, fixed).unwrap(), 12);
         let selected = fixed | 1_u64 << 4 | 1_u64 << 8;
-        let canonical = workspace.canonical_key(selected);
-        for map in workspace.symmetry_maps.chunks_exact(56) {
-            let mut image = 0_u64;
-            let mut bits = selected;
-            while bits != 0 {
-                let triple = bits.trailing_zeros() as usize;
-                bits &= bits - 1;
-                image |= 1_u64 << map[triple];
-            }
-            assert_eq!(workspace.canonical_key(image), canonical);
+        workspace.initialize_symmetry_images(selected);
+        let canonical = workspace.canonical_key(selected, 0);
+        let images = workspace
+            .symmetry_maps
+            .chunks_exact(56)
+            .map(|map| {
+                let mut image = 0_u64;
+                let mut bits = selected;
+                while bits != 0 {
+                    let triple = bits.trailing_zeros() as usize;
+                    bits &= bits - 1;
+                    image |= 1_u64 << map[triple];
+                }
+                image
+            })
+            .collect::<Vec<_>>();
+        for image in images {
+            workspace.initialize_symmetry_images(image);
+            assert_eq!(workspace.canonical_key(image, 0), canonical);
         }
 
         let (solution, _) = search_alignment_attachment(&problem, 9, &mut workspace).unwrap();
