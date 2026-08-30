@@ -10,6 +10,8 @@ use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
 use serde::Serialize;
 use thiserror::Error;
 
+use crate::hall_core::{HallOutcome, HallWorkspace};
+
 const MAX_Q: u16 = 17;
 const MAX_POINTS: usize = (MAX_Q as usize) * (MAX_Q as usize);
 const WORDS: usize = MAX_POINTS.div_ceil(64);
@@ -248,6 +250,9 @@ pub struct C80ScoutMetrics {
     pub complete_relation_failures: u64,
     pub support_first_lex_failures: u64,
     pub omega_first_lex_failures: u64,
+    pub ancestral_secant_edges: u64,
+    pub ancestral_secant_zero_degree_defects: u64,
+    pub ancestral_secant_hall_failures: u64,
 }
 
 impl C80ScoutMetrics {
@@ -261,11 +266,84 @@ impl C80ScoutMetrics {
         self.complete_relation_failures += right.complete_relation_failures;
         self.support_first_lex_failures += right.support_first_lex_failures;
         self.omega_first_lex_failures += right.omega_first_lex_failures;
+        self.ancestral_secant_edges += right.ancestral_secant_edges;
+        self.ancestral_secant_zero_degree_defects += right.ancestral_secant_zero_degree_defects;
+        self.ancestral_secant_hall_failures += right.ancestral_secant_hall_failures;
         self
     }
 }
 
-fn scout_root(game: C80Game, state: C80Bits) -> C80ScoutMetrics {
+struct C80Worker {
+    hall: HallWorkspace,
+    offsets: Vec<u32>,
+    neighbors: Vec<u32>,
+}
+
+impl C80Worker {
+    fn new(points: usize) -> Self {
+        Self {
+            hall: HallWorkspace::new(points, points),
+            offsets: Vec::with_capacity(points + 1),
+            neighbors: Vec::with_capacity(points * points),
+        }
+    }
+
+    fn ancestral_secant_hall(
+        &mut self,
+        game: C80Game,
+        state: C80Bits,
+        created: C80Bits,
+        consumed: C80Bits,
+    ) -> (HallOutcome, u64, u64) {
+        self.offsets.clear();
+        self.neighbors.clear();
+        self.offsets.push(0);
+        let mut zero_degree = 0_u64;
+        let mut defect = created.next(0);
+        while let Some(new_defect) = defect {
+            let begin = self.neighbors.len();
+            let mut label_rank = 0_u32;
+            let mut label = consumed.next(0);
+            while let Some(old_label) = label {
+                let mut carrier = state.next(0);
+                let mut adjacent = false;
+                while let Some(selected) = carrier {
+                    if selected != new_defect
+                        && selected != old_label
+                        && game.collinear(new_defect, old_label, selected)
+                    {
+                        adjacent = true;
+                        break;
+                    }
+                    carrier = state.next(usize::from(selected) + 1);
+                }
+                if adjacent {
+                    self.neighbors.push(label_rank);
+                }
+                label_rank += 1;
+                label = consumed.next(usize::from(old_label) + 1);
+            }
+            if self.neighbors.len() == begin {
+                zero_degree += 1;
+            }
+            self.offsets.push(self.neighbors.len() as u32);
+            defect = created.next(usize::from(new_defect) + 1);
+        }
+        let edge_count = self.neighbors.len() as u64;
+        let outcome = self
+            .hall
+            .solve(
+                created.count() as usize,
+                consumed.count() as usize,
+                &self.offsets,
+                &self.neighbors,
+            )
+            .expect("internally compiled Hall graph is valid");
+        (outcome, edge_count, zero_degree)
+    }
+}
+
+fn scout_root(game: C80Game, state: C80Bits, worker: &mut C80Worker) -> C80ScoutMetrics {
     let mut metrics = C80ScoutMetrics {
         states: 1,
         ..C80ScoutMetrics::default()
@@ -305,6 +383,13 @@ fn scout_root(game: C80Game, state: C80Bits) -> C80ScoutMetrics {
                         if consumed_count < created_count {
                             metrics.complete_relation_failures += 1;
                         }
+                        let (hall, edges, zero_degree) =
+                            worker.ancestral_secant_hall(game, state, created, consumed);
+                        metrics.ancestral_secant_edges += edges;
+                        metrics.ancestral_secant_zero_degree_defects += zero_degree;
+                        if matches!(hall, HallOutcome::Deficient { .. }) {
+                            metrics.ancestral_secant_hall_failures += 1;
+                        }
                         let next_support = old_support - consumed_count + created_count;
                         let next_legal = game.legal(successor);
                         let next_omega = game.omega(successor, next_legal);
@@ -330,20 +415,22 @@ struct C80Kernel {
 
 impl RootKernel for C80Kernel {
     type Root = C80Bits;
-    type Worker = ();
+    type Worker = C80Worker;
     type Output = C80ScoutMetrics;
 
     #[inline]
-    fn create_worker(&self) -> Self::Worker {}
+    fn create_worker(&self) -> Self::Worker {
+        C80Worker::new(usize::from(self.game.points))
+    }
 
     #[inline]
     fn evaluate(
         &self,
-        _worker: &mut Self::Worker,
+        worker: &mut Self::Worker,
         _ordinal: RootOrdinal,
         root: &Self::Root,
     ) -> Self::Output {
-        scout_root(self.game, *root)
+        scout_root(self.game, *root, worker)
     }
 }
 

@@ -1,0 +1,62 @@
+{
+  "compression_ratio": 26.0,
+  "field": "GF(3)[x]/(x^3-x-1)",
+  "input_witnesses": 78,
+  "observable": "monic split degree-nine locator has g_2=g_3=0",
+  "orbits": [
+    {
+      "input_members": 26,
+      "lambda_label": "l3",
+      "orbit_size": 26,
+      "representative": [
+        0,
+        1,
+        2,
+        3,
+        12,
+        13,
+        14,
+        19,
+        25
+      ]
+    },
+    {
+      "input_members": 26,
+      "lambda_label": "l2",
+      "orbit_size": 26,
+      "representative": [
+        0,
+        1,
+        2,
+        4,
+        9,
+        10,
+        11,
+        20,
+        21
+      ]
+    },
+    {
+      "input_members": 26,
+      "lambda_label": "l1",
+      "orbit_size": 26,
+      "representative": [
+        0,
+        1,
+        2,
+        5,
+        15,
+        16,
+        17,
+        22,
+        24
+      ]
+    }
+  ],
+  "problem": "C973 GF(27) extremal e3 switch witnesses",
+  "proof_target": "verify the three representative switch identities and prove that nonzero scalar multiplication preserves admissibility and closure",
+  "schema": "ergodis.semantic-orbit-core.v1",
+  "source": "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/e3-good78.tsv",
+  "source_sha256": "07e4b937b59a8e3b3b054c5eaec08d4fc15dbc95c66a3bbabf6a89aca5c3c5bc",
+  "torus_orbits": 3
+}

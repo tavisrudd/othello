@@ -3,8 +3,8 @@
 **Lane:** `cap`
 **Task:** C80
 **Date:** 2026-08-30
-**Status:** diagnostic edge proposal passes the first four frozen witnesses;
-charge-transport soundness remains open
+**Status:** diagnostic edge passes the admitted q13 sample but fails on
+unrestricted q11 exchanges; charge-transport soundness remains open
 
 ## Result
 
@@ -85,11 +85,29 @@ Before it can enter a survivor proof, one needs a local lemma explaining why a
 selected carrier on `z ell` lets old label `ell` absorb the new fibre `z` while
 preserving the hereditary boundary or the chosen support/Omega descent.
 
+The deterministic control runs establish an important quantifier boundary.
+
+| domain | states | relevant exchanges/replies | new-defect replies | Hall failures |
+|---|---:|---:|---:|---:|
+| q11, every complete exchange | 1,000 | 7,138 | 6,652 | 1,266 |
+| q13, every complete exchange | 300 | 122,742 | 31,584 | 0 |
+| q11, `K_Omega`-certified P replies | 334 admitted states | 23,000 | 0 | 0 |
+| q13, `K_Omega`-certified P replies | 205 admitted states | 43,628 | 596 | 0 |
+
+Thus the ancestral-secant relation is false as a universal invariant of q11
+complete exchanges.  That does not refute its intended use: P needs an
+existential certified reply, and the raw failures include non-surviving
+successors.  In fact the frozen q11 one-to-many witness is not a
+`K_Omega`-certified successor.  It remains valuable as an adversarial test of
+the edge language, but it is not positive strategy evidence.  The q13 admitted
+sample is the first nonvacuous strategy-domain control: all 596 certified
+new-defect replies are Hall saturated.
+
 The next falsification gates are:
 
-1. attach the edge to the full deterministic q11/q13 exchange sidecars;
-2. emit the first zero-degree new defect or Hall-deficient subset;
-3. profile any obstruction by carrier multiplicity, creator half-move, defect
+1. enlarge the admitted-reply q13 control and add q17/q19 without changing the edge;
+2. emit the first admitted zero-degree defect or Hall-deficient subset;
+3. profile any admitted obstruction by carrier multiplicity, creator half-move, defect
    rank, and deletion mechanism;
 4. if no obstruction appears, prove the bounded local transport packet and
    then test opponent completeness.
@@ -99,17 +117,20 @@ failed graph.  Any enrichment must have its own projective transport lemma.
 
 ## Mystery ledger and EJ/TT closeout
 
-- **Settled:** the q11 one-to-many collision does not kill global incidence
-  transport; two distinct ancestral secants route around the shared causal
-  reply.
+- **Settled:** the q11 one-to-many collision does not kill the relation as a
+  graph language; two distinct ancestral secants route around the shared
+  causal reply.  It is not an admitted strategy successor.
 - **Settled engineering:** exact Hall search and replay are no longer the
   bottleneck.
 - **Surprising:** the same extremely weak incidence motif has large degree on
   all three q23 replacement types (`15,10,14`).
 - **Open:** whether those many edges are genuinely sound charge transports or
   merely abundant incidences.
-- **Open:** whether a multi-defect exchange in the retained corpus yields a
-  Hall-deficient subset despite positive individual degrees.
+- **Settled boundary:** unrestricted q11 exchanges do yield zero-degree defects
+  and Hall-deficient subsets; theorem search must stay inside the certified
+  reply predicate.
+- **Open:** whether an admitted multi-defect reply yields a Hall-deficient
+  subset despite positive individual degrees.
 
 **EJ.** If soundness holds, the carrier point gives a bounded packet label for
 every edge.  Matching certificates can then be quotient by carrier-line orbit,
@@ -122,5 +143,5 @@ ancestral secant, and simultaneously search specifically for overlapping
 neighborhoods in multi-defect exchanges.  Average surplus can hide the only
 Hall obstruction that matters.
 
-Vibe: genuinely promising first edge, but one local soundness lemma separates
-it from being mathematics rather than a well-covered graph heuristic.
+Vibe: still promising on the exact strategy domain, but the raw q11 failures
+were useful discipline—the quantifier restriction is essential, not cosmetic.

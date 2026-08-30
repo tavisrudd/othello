@@ -69,6 +69,28 @@ def point_list(points) -> list[list[int]]:
     return [list(point) for point in sorted(points)]
 
 
+def ancestral_secant_relation(game, state, created, consumed):
+    labels = sorted(consumed)
+    neighbours = []
+    carriers = []
+    for defect in sorted(created):
+        incident = set()
+        edge_carriers = {}
+        for label_index, label in enumerate(labels):
+            witnesses = sorted(
+                selected
+                for selected in state
+                if selected not in (defect, label)
+                and game.collinear(defect, label, selected)
+            )
+            if witnesses:
+                incident.add(label_index)
+                edge_carriers[label_index] = witnesses
+        neighbours.append(incident)
+        carriers.append(edge_carriers)
+    return labels, neighbours, carriers
+
+
 def primary_replay(source, q: int, issue: dict) -> bool:
     boundary = source.SmallBoundaryGame(q)
     game = boundary.game
@@ -249,8 +271,13 @@ def scout(
         "minimum_certified_support_surplus": 1 << 60,
         "equal_support_certified_replies": 0,
         "minimum_equal_support_omega_drop": 1 << 60,
+        "certified_replies_with_new_defects": 0,
+        "ancestral_secant_edges": 0,
+        "ancestral_secant_zero_degree_defects": 0,
+        "ancestral_secant_hall_failures": 0,
     }
     first_admission_miss = None
+    first_ancestral_secant_failure = None
     equality_profiles: Counter[str] = Counter()
     delta_profiles: Counter[str] = Counter()
     stop = False
@@ -326,6 +353,44 @@ def scout(
                             if survivor:
                                 certified += 1
                                 admissible += int(charge)
+                                if created:
+                                    admission_counts[
+                                        "certified_replies_with_new_defects"
+                                    ] += 1
+                                    labels, relation, carriers = ancestral_secant_relation(
+                                        game, state, created, consumed
+                                    )
+                                    admission_counts["ancestral_secant_edges"] += sum(
+                                        len(row) for row in relation
+                                    )
+                                    admission_counts[
+                                        "ancestral_secant_zero_degree_defects"
+                                    ] += sum(not row for row in relation)
+                                    hall = all(relation) and saturates(
+                                        relation, len(labels)
+                                    )
+                                    if not hall:
+                                        admission_counts[
+                                            "ancestral_secant_hall_failures"
+                                        ] += 1
+                                        if first_ancestral_secant_failure is None:
+                                            first_ancestral_secant_failure = {
+                                                "state": point_list(state),
+                                                "opponent": list(opponent),
+                                                "reply": list(reply),
+                                                "created": point_list(created),
+                                                "consumed": point_list(consumed),
+                                                "neighbours": [
+                                                    sorted(row) for row in relation
+                                                ],
+                                                "edge_carriers": [
+                                                    {
+                                                        str(label): point_list(points)
+                                                        for label, points in sorted(row.items())
+                                                    }
+                                                    for row in carriers
+                                                ],
+                                            }
                                 surplus = len(consumed) - len(created)
                                 admission_counts[
                                     "minimum_certified_support_surplus"
@@ -594,6 +659,9 @@ def scout(
                 admission_counts[field] = None
         result["K_Omega_p_admission"] = admission_counts
         result["first_K_Omega_admission_miss"] = first_admission_miss
+        result["first_ancestral_secant_admission_failure"] = (
+            first_ancestral_secant_failure
+        )
     feature_sink.finish(q, seed)
     return result
 

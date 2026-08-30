@@ -10,12 +10,16 @@ smallest semantic obstruction visible in the source problem, then support a
 counterexample-guided search for a structural lemma whose implication is
 independently certified.
 
-The best immediate portfolio targets are C80 and C896.  C80 has the highest
-mathematical payoff and the richest existing exact corpus.  C896 is the best
-second *modality*: its certificates are finite-field rank computations rather
-than CNF refutations, and its desired general theorem is explicitly a finite
-carry/borrow state machine.  A first C896 rank-core adapter is now implemented
-and replayed at `q=9`.
+The best immediate portfolio targets are C80, C896, and the PRS carrier
+programme around C973.  C80 has the highest mathematical payoff and the
+richest existing exact corpus.  C896 is the best second *modality*: its
+certificates are finite-field rank computations rather than CNF refutations,
+and its desired general theorem is explicitly a finite carry/borrow state
+machine.  C973 is the strongest code-facing bridge: its digit-stripping
+modules, pointed locator certificates, and switch witnesses already expose the
+same state/minimal-realization problem in a second mathematical language.  A
+first C896 rank-core adapter and a first C973 orbit-core adapter are now
+implemented.
 
 ## Ranked targets
 
@@ -27,14 +31,15 @@ They are prioritization judgments, not novelty grades.
 |---:|---|---:|---|---|
 | 1 | C80 global residual rematching | 96 | exact matching/flow instances; positive matching witnesses or negative Hall cuts; existing survivor DAG replay | projective Hall-rematching lemma with strict support descent and opponent completeness |
 | 2 | C896 corrected finite-group socle | 94 | exact sparse Hom matrices over `GF(q)` with rank/PLU certificates at `q=9,25` and exponent three | minimal carry/borrow automaton and a block-triangular most-significant-digit induction |
-| 3 | C756 saturated-internal coherence | 90 | maximum-clique/nonexistence certificates in the `AGL(1,q)` Cayley graph; existing census through `q<=127` and `q=169` | character/polynomial or dual-3-net lemma improving the ratio bound by the missing 25 percent |
-| 4 | square-root conic-arc repair layers | 88 | synthesize and certify nonlinear coefficient layers; exact collision and coverage replay | semilinear orbit normal form or interpolation theorem explaining the twelve `q=64` layers uniformly |
-| 5 | Gross/passant exact CSS distance | 87 | proof-producing exact-distance optimization plus primal logical witness | free-cover homology, distance doubling, or a relative-weight theorem replacing branch-and-bound |
-| 6 | C967 jet-quotient CSS family | 83 | exact checks/logicals/distance at `q=11,13` | family-level jet/relative-weight formula and a structural transversal-phase criterion |
-| 7 | four-frame continuation exceptions `q=7,8,9,11` | 79 | certified graph automorphism groups and orbit representatives | taxonomy of the small-field extra automorphisms as exceptional field identities |
-| 8 | odd-plane finite strategy bases, below C80 | 76 | rules-only strategy DAGs for the already computed fields | bounded projective reply packets usable as C80 base strata, not a table of moves |
-| 9 | residual Legendre-pair multipliers at length 333 | 65 | SAT/CP nonexistence proofs for the five remaining multiplier cases | modular compression or orbit-lock lemmas; value is now confined to the Legendre route |
-| 10 | exceptional parabolic deficit | 62 | exact root/parabolic incidence ranks across bounded ranks | a uniform deficit formula; lower priority because much of the surrounding ladder is classical |
+| 3 | C973 PRS carrier/nucleus saturation | 93 | exact pointed locator and switch certificates, orbit quotients, digit-stripping modules | a translation-invariant switch lemma and a finite carry-state lifting theorem making the GF(27) sweep and one-carry cases corollaries |
+| 4 | C756 saturated-internal coherence | 90 | maximum-clique/nonexistence certificates in the `AGL(1,q)` Cayley graph; existing census through `q<=127` and `q=169` | character/polynomial or dual-3-net lemma improving the ratio bound by the missing 25 percent |
+| 5 | square-root conic-arc repair layers | 88 | synthesize and certify nonlinear coefficient layers; exact collision and coverage replay | semilinear orbit normal form or interpolation theorem explaining the twelve `q=64` layers uniformly |
+| 6 | Gross/passant exact CSS distance | 87 | proof-producing exact-distance optimization plus primal logical witness | free-cover homology, distance doubling, or a relative-weight theorem replacing branch-and-bound |
+| 7 | C967 jet-quotient CSS family | 83 | exact checks/logicals/distance at `q=11,13` | family-level jet/relative-weight formula and a structural transversal-phase criterion |
+| 8 | four-frame continuation exceptions `q=7,8,9,11` | 79 | certified graph automorphism groups and orbit representatives | taxonomy of the small-field extra automorphisms as exceptional field identities |
+| 9 | odd-plane finite strategy bases, below C80 | 76 | rules-only strategy DAGs for the already computed fields | bounded projective reply packets usable as C80 base strata, not a table of moves |
+| 10 | residual Legendre-pair multipliers at length 333 | 65 | SAT/CP nonexistence proofs for the five remaining multiplier cases | modular compression or orbit-lock lemmas; value is now confined to the Legendre route |
+| 11 | exceptional parabolic deficit | 62 | exact root/parabolic incidence ranks across bounded ranks | a uniform deficit formula; lower priority because much of the surrounding ladder is classical |
 
 C880 itself would rank with C80/C896, but is omitted from the table because it
 is the source example rather than an “other problem.”
@@ -182,8 +187,7 @@ The exact Hall core returns the distinct assignment
 
 Thus it avoids the shared causal reply `(7,10)` that killed one-label
 transport.  This is a useful candidate, not a C80 theorem: no charge-transport
-soundness lemma has been proved for the edge, and it has not passed the full
-q11/q13 control corpus.  It does pass the three frozen q23 replacement classes:
+soundness lemma has been proved for the edge.  It does pass the three frozen q23 replacement classes:
 their single new fibres have 15, 10, and 14 ancestral-secant choices.  Those
 are strong coverage checks but not nontrivial subset-Hall tests.  The graph,
 semantic manifest, and matching certificate are in `ergodis-private/evidence/`
@@ -203,6 +207,43 @@ The graph, semantic manifest, and certificate SHA-256 values are respectively
 `16fc9151242b959952d8cd5698d52120bb46b268047efb0638df2f03201a8960`,
 `e925b55682c885ddb6fc6579e02b83ae8af399fe925a6ea1a4fa97dcfd2f8000`, and
 `23d3830e4b0b0f47c5407462e4580be60d8e1c5101baa9ce0ae5cc10f53e4e1b`.
+
+The deterministic controls reveal the necessary quantifier boundary.  On all
+complete raw exchanges, q11 has 1,266 Hall failures among 6,652 exchanges that
+create defects, while q13 has none among 31,584.  Those raw graphs include
+successors that are irrelevant to P's existential reply.  Restricting to
+actual `K_Omega`-certified replies removes the apparent contradiction: the
+q11 sample has no certified reply that creates a genuinely new defect; the
+q13 sample has 596 such replies, all with positive degree and all Hall
+saturated.  The frozen q11 one-to-many witness is therefore a relation
+falsifier, not itself an admitted P successor.  Future theorem statements must
+quantify over the certified reply predicate, not every complete exchange.
+
+### C973 / projective Reed--Solomon
+
+The GF(27) switch sweep is a high-value orbit-core control.  Its global minimum
+is 78 good candidates, attained on 27 translated extremal syndromes.  For the
+normalized `e_3` fibre, the 78 explicit nine-point witnesses compress exactly
+to three nonzero-scalar orbits of size 26, one for each conjugate plane label
+`l1,l2,l3`.  The independent adapter rebuilds `GF(27)`, checks that every
+support gives a monic split locator with `g_2=g_3=0`, and verifies complete
+orbit coverage.  The compression is therefore 78 witnesses to three seeds,
+not a fitted statistical pattern.
+
+This sharpens the structural target.  Prove the three seed identities once,
+prove torus equivariance, then prove that translation reduces every extremal
+syndrome to the normalized fibre.  That would turn the worst 27-by-78 portion
+of the finite certificate into one small lemma packet.  The remaining step is
+the uniform lower bound away from the extremal orbit; the existing split and
+collision ledgers suggest a character-sum inequality rather than another
+census.
+
+The broader PRS route is digit-first rather than field-first: compile each
+carrier extension into kernel state, quotient `E tensor E^(1)` orbit type,
+extension-leakage cocycle, marker/root exclusions, and switch margin.  If this
+state stabilizes for successive digits, the classical one-carry divided-power
+module theorem and the fixed GF(27) closure become corollaries of a general
+finite-state carrier-lifting theorem.
 
 ### C756
 
@@ -284,6 +325,14 @@ lowered to an explicit stack before input-scaled use.
   one-to-many witness with a noncausal two-label matching and has degrees 15,
   10, and 14 on the three frozen q23 types.  Its soundness and full-corpus
   multi-defect Hall behaviour are the immediate falsification gates.
+- **Settled:** raw q11 Hall failures do not refute the P strategy because none
+  of the sampled certified q11 replies creates a genuinely new defect; q13 has
+  596 such certified replies and all satisfy Hall.
+- **Found:** the PRS `e_3` extremal switch certificate has exact semantic size
+  three after torus quotient, a 26-fold reduction with independent replay.
+- **Open:** whether translation plus those three representatives proves all 27
+  extremal fibres, and whether the nonextremal margin admits one uniform
+  character-sum bound.
 
 **EJ.** A successful C896 state quotient would provide the first literal
 weighted-automaton/minimal-realization instance for the broader Ergodis thesis.
@@ -297,6 +346,6 @@ ask which semantic distinction predicts extension to every future context,
 and demand a source-language implication proof before accepting a learned
 state merge.
 
-Vibe: this is a real cross-domain programme now; C80 supplies the hard theorem,
-and C896 supplies the cleanest test of whether Ergodis can discover the right
-state rather than merely solve the finite instance.
+Vibe: this is a real cross-domain programme now; C80 supplies the hard game
+theorem, while C896 and PRS supply two independent tests of whether Ergodis can
+discover the right carry/orbit state rather than merely solve a finite instance.
