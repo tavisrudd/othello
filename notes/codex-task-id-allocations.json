@@ -3842,8 +3842,26 @@
       "last": 1000,
       "purpose": "Hadamard 668 structure/explanation and next open orders; independent open-problem win (M(18) or Legendre length 333)",
       "sequence": 427
+    },
+    {
+      "count": 3,
+      "first": 1001,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 1003,
+      "purpose": "bounded-degree uncovered loci and matching-design realizability math-first tasks with publication successor",
+      "sequence": 428
+    },
+    {
+      "count": 3,
+      "first": 1004,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1006,
+      "purpose": "bounded-degree Clebsch publication successor and extremal-shell math-first task with publication successor",
+      "sequence": 429
     }
   ],
-  "next_id": 1001,
+  "next_id": 1007,
   "schema": "codex-task-id-allocations-v1"
 }
