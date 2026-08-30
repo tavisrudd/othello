@@ -12,6 +12,7 @@ pub mod commutant;
 pub mod composition;
 pub mod confinement;
 pub mod contextual;
+pub mod continuation;
 pub mod css_distance;
 pub mod defect;
 pub mod family_response;
@@ -71,6 +72,10 @@ pub use contextual::{
     ContextWork, ContextualError, FrozenRankStratifiedEnvelope, PlannedContextCost,
     RankBoundedContextCache, RankEnvelopeAnswer, RankEnvelopeStorage, RankOneProbeCache,
     RankStratifiedEnvelope,
+};
+pub use continuation::{
+    compile_continuation_hierarchy, ContinuationHierarchy, ContinuationHierarchyError,
+    ContinuationLevel,
 };
 pub use css_distance::{
     BoundedCssDistanceResult, CompiledCssDistance, CompiledExtraWideCssDistance,
