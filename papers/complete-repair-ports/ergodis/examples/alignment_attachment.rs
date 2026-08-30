@@ -85,11 +85,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     } else {
         1
     };
+    if std::env::var_os("ERGODIS_ALIGNMENT_COMPACT_SEEN").is_some() {
+        workspace.enable_compact_seen(&problem, initial)?;
+    }
+    let seen_bytes = workspace.seen_storage_bytes();
     let started = std::time::Instant::now();
     let (solution, metrics) =
         search_alignment_attachment_from(&problem, budget, initial, &mut workspace)?;
     println!(
-        "points={points} triples={} cuts={} budget={budget} initial={initial:#x} stabilizer={stabilizer} solution={solution:?} states={} duplicates={} infeasible={} elapsed_ns={}",
+        "points={points} triples={} cuts={} budget={budget} initial={initial:#x} stabilizer={stabilizer} seen_bytes={seen_bytes} solution={solution:?} states={} duplicates={} infeasible={} elapsed_ns={}",
         problem.triples().len(),
         problem.cut_count(),
         metrics.states,

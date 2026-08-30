@@ -528,7 +528,12 @@ Sequel research:
   budget-16 probe remains incomplete, and the exact `15 <= g(8) <= 17` gap is
   unchanged. The next C880 gate is a proof-producing symmetry-quotiented orbit
   sweep or a genuinely aggregate context rank inequality, not more first-order
-  Gurobi pulse tuning.
+  Gurobi pulse tuning. An opt-in exact five-byte combinatorial duplicate key now
+  replaces eight-byte masks when the rooted cardinality layers fit 40 bits. It
+  cuts `2^22`-slot process RSS 33.4% (`36,680 -> 24,420` KiB), is 1.036x faster
+  under the loaded sweep, and keeps exhaustive key/search/allocation gates. The
+  first wide `2^26` weight-15 wave closes two cases and exhausts ten tables;
+  compact `2^27` retries are the next native capacity experiment.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

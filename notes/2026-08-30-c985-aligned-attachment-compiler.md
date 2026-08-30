@@ -212,6 +212,18 @@ artifact from that pass is retained: an exhaustive five-point test computes the
 true minimum extension distance for every partial family and verifies that all
 admitted packing/incidence lower bounds never exceed it.
 
+The duplicate table now has an opt-in exact combinatorial key. For a fixed
+root, a partial family is encoded by its cardinality layer and colex rank among
+subsets of the nonfixed triples. The weight-15 three-triple roots need only 39
+bits, so one open-addressing slot uses five bytes rather than eight; no
+fingerprint or collision risk is introduced. Exhaustive five-point keys are
+injective, wide and compact searches have identical metrics, and the compact
+insertion loop allocates nothing. At `2^22` slots, seen storage falls
+`32 -> 20` MiB and process RSS `36,680 -> 24,420` KiB. Twenty-one interleaved
+rounds under the memory-loaded orbit sweep give a 1.0360x geometric speedup
+(`t=2.075`). At `2^27`, the exact table is 640 MiB instead of 1 GiB, making the
+next failed-orbit retry materially cheaper.
+
 Three further hot-path alternatives are rejected. Incidence-maximizing ties
 between equally short branch clauses increase the rooted control from 8,759 to
 10,262 states. Packing the two cut-edge IDs into one `u16` is neutral on both

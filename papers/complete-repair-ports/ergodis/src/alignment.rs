@@ -545,6 +545,11 @@ struct SearchFrame {
 pub struct AlignmentSearchWorkspace {
     frames: Box<[SearchFrame]>,
     seen: Box<[u64]>,
+    compact_seen: Box<[[u8; 5]]>,
+    compact_fixed: u64,
+    compact_positions: [u8; 56],
+    compact_prefix: [u64; 17],
+    compact_binomial: Box<[[u64; 17]]>,
     symmetry_maps: Box<[u8]>,
     symmetry_images: Box<[u64]>,
 }
@@ -560,6 +565,11 @@ impl AlignmentSearchWorkspace {
         Ok(Self {
             frames: vec![SearchFrame::default(); maximum_budget as usize + 1].into_boxed_slice(),
             seen: vec![0_u64; slots].into_boxed_slice(),
+            compact_seen: Box::new([]),
+            compact_fixed: 0,
+            compact_positions: [u8::MAX; 56],
+            compact_prefix: [0; 17],
+            compact_binomial: Box::new([]),
             symmetry_maps: Box::new([]),
             symmetry_images: Box::new([]),
         })
@@ -614,6 +624,73 @@ impl AlignmentSearchWorkspace {
         Ok(count)
     }
 
+    /// Replace the wide duplicate table by exact five-byte combinatorial keys.
+    ///
+    /// This is available when every searched state contains `fixed` and the
+    /// configured maximum number of added triples has fewer than `2^40`
+    /// possible subsets. The table is rebuilt before search; insertion remains
+    /// allocation-free.
+    pub fn enable_compact_seen(
+        &mut self,
+        problem: &AlignmentAttachment,
+        fixed: u64,
+    ) -> Result<usize, AlignmentError> {
+        if fixed == 0 || fixed >> problem.triples.len() != 0 {
+            return Err(AlignmentError::Family);
+        }
+        let fixed_count = fixed.count_ones() as usize;
+        let maximum_added = self.frames.len() - 1;
+        if fixed_count > maximum_added || maximum_added - fixed_count > 16 {
+            return Err(AlignmentError::Budget);
+        }
+        let variable_count = problem.triples.len() - fixed_count;
+        let mut binomial = vec![[0_u64; 17]; variable_count + 1];
+        for n in 0..=variable_count {
+            binomial[n][0] = 1;
+            for k in 1..=n.min(16) {
+                binomial[n][k] = if k == n {
+                    1
+                } else {
+                    binomial[n - 1][k - 1]
+                        .checked_add(binomial[n - 1][k])
+                        .ok_or(AlignmentError::Overflow)?
+                };
+            }
+        }
+        let mut prefix = [0_u64; 17];
+        for k in 1..=maximum_added - fixed_count {
+            prefix[k] = prefix[k - 1]
+                .checked_add(binomial[variable_count][k - 1])
+                .ok_or(AlignmentError::Overflow)?;
+        }
+        let total = prefix[maximum_added - fixed_count]
+            .checked_add(binomial[variable_count][maximum_added - fixed_count])
+            .ok_or(AlignmentError::Overflow)?;
+        if total >= 1_u64 << 40 {
+            return Err(AlignmentError::Workspace);
+        }
+        let mut positions = [u8::MAX; 56];
+        let mut position = 0_u8;
+        for (triple, slot) in positions.iter_mut().enumerate().take(problem.triples.len()) {
+            if fixed >> triple & 1 == 0 {
+                *slot = position;
+                position += 1;
+            }
+        }
+        let slots = self.seen.len();
+        self.seen = Box::new([]);
+        self.compact_seen = vec![[0_u8; 5]; slots].into_boxed_slice();
+        self.compact_fixed = fixed;
+        self.compact_positions = positions;
+        self.compact_prefix = prefix;
+        self.compact_binomial = binomial.into_boxed_slice();
+        Ok(slots * 5)
+    }
+
+    pub fn seen_storage_bytes(&self) -> usize {
+        self.seen.len() * std::mem::size_of::<u64>() + self.compact_seen.len() * 5
+    }
+
     #[inline]
     fn canonical_key(&self, selected: u64, depth: usize) -> u64 {
         if self.symmetry_images.is_empty() {
@@ -658,20 +735,53 @@ impl AlignmentSearchWorkspace {
         }
     }
 
+    #[inline]
+    fn compact_key(&self, selected: u64) -> [u8; 5] {
+        debug_assert_eq!(selected & self.compact_fixed, self.compact_fixed);
+        let mut variable = selected & !self.compact_fixed;
+        let cardinality = variable.count_ones() as usize;
+        let mut order = 1_usize;
+        let mut rank = self.compact_prefix[cardinality];
+        while variable != 0 {
+            let triple = variable.trailing_zeros() as usize;
+            variable &= variable - 1;
+            let position = self.compact_positions[triple] as usize;
+            rank += self.compact_binomial[position][order];
+            order += 1;
+        }
+        let encoded = (rank + 1).to_le_bytes();
+        [encoded[0], encoded[1], encoded[2], encoded[3], encoded[4]]
+    }
+
     fn insert_seen(&mut self, selected: u64, depth: usize) -> Result<bool, AlignmentError> {
         debug_assert_ne!(selected, 0);
         let selected = self.canonical_key(selected, depth);
-        let mask = self.seen.len() - 1;
+        let slots = self.seen.len().max(self.compact_seen.len());
+        let mask = slots - 1;
         let mut slot = (selected.wrapping_mul(0x9e37_79b9_7f4a_7c15) >> 32) as usize & mask;
-        for _ in 0..self.seen.len() {
-            if self.seen[slot] == selected {
-                return Ok(false);
+        if self.compact_seen.is_empty() {
+            for _ in 0..slots {
+                if self.seen[slot] == selected {
+                    return Ok(false);
+                }
+                if self.seen[slot] == 0 {
+                    self.seen[slot] = selected;
+                    return Ok(true);
+                }
+                slot = (slot + 1) & mask;
             }
-            if self.seen[slot] == 0 {
-                self.seen[slot] = selected;
-                return Ok(true);
+        } else {
+            let key = self.compact_key(selected);
+            for _ in 0..slots {
+                if self.compact_seen[slot] == key {
+                    return Ok(false);
+                }
+                if self.compact_seen[slot] == [0; 5] {
+                    self.compact_seen[slot] = key;
+                    return Ok(true);
+                }
+                slot = (slot + 1) & mask;
             }
-            slot = (slot + 1) & mask;
         }
         Err(AlignmentError::Workspace)
     }
@@ -723,7 +833,13 @@ pub fn search_alignment_attachment_from(
     if initial == 0 || initial >> problem.triples.len() != 0 || initial.count_ones() > budget {
         return Err(AlignmentError::Family);
     }
+    if !workspace.compact_seen.is_empty()
+        && (initial & workspace.compact_fixed != workspace.compact_fixed)
+    {
+        return Err(AlignmentError::Family);
+    }
     workspace.seen.fill(0);
+    workspace.compact_seen.fill([0; 5]);
     workspace.frames.fill(SearchFrame::default());
     workspace.frames[0] = SearchFrame {
         selected: initial,
@@ -990,6 +1106,27 @@ mod tests {
 
         let (solution, _) = search_alignment_attachment(&problem, 9, &mut workspace).unwrap();
         assert!(problem.separates(solution.unwrap()).unwrap());
+    }
+
+    #[test]
+    fn compact_seen_keys_are_exact_and_preserve_search() {
+        let problem = compile_alignment_attachment(5).unwrap();
+        let mut workspace = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
+        assert_eq!(workspace.enable_compact_seen(&problem, 1).unwrap(), 5 << 18);
+        assert_eq!(workspace.seen_storage_bytes(), 5 << 18);
+        let mut keys = std::collections::HashSet::new();
+        for selected in 0..1_u64 << problem.triples().len() {
+            if selected & 1 != 0 && selected.count_ones() <= 9 {
+                assert!(keys.insert(workspace.compact_key(selected)));
+            }
+        }
+        assert_eq!(keys.len(), (1 << (problem.triples().len() - 1)) - 1);
+
+        let (solution, metrics) = search_alignment_attachment(&problem, 9, &mut workspace).unwrap();
+        assert!(problem.separates(solution.unwrap()).unwrap());
+        let mut wide = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
+        let (_, wide_metrics) = search_alignment_attachment(&problem, 9, &mut wide).unwrap();
+        assert_eq!(metrics, wide_metrics);
     }
 
     #[test]

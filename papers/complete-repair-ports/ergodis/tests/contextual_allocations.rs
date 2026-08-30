@@ -106,6 +106,17 @@ fn symmetry_quotiented_attachment_search_allocates_nothing_in_the_hot_loop() {
 }
 
 #[test]
+fn compact_seen_attachment_search_allocates_nothing_in_the_hot_loop() {
+    let problem = compile_alignment_attachment(5).unwrap();
+    let mut workspace = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
+    workspace.enable_compact_seen(&problem, 1).unwrap();
+    let (result, allocations) =
+        tracked_allocations(|| search_alignment_attachment(&problem, 9, &mut workspace).unwrap());
+    assert!(result.0.is_some());
+    assert_eq!(allocations, 0);
+}
+
+#[test]
 fn aligned_fractional_separation_allocates_nothing() {
     let problem = compile_alignment_attachment(8).unwrap();
     let weights = (0..problem.triples().len())
