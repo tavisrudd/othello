@@ -757,6 +757,12 @@ pub struct AlignmentSearchWorkspace {
     compact_binomial: Box<[[u64; 17]]>,
     symmetry_maps: Box<[u8]>,
     symmetry_images: Box<[u64]>,
+    #[cfg(feature = "control-plane")]
+    control_order: Box<[[u8; 56]]>,
+    #[cfg(feature = "control-plane")]
+    control_order_len: Box<[u8]>,
+    #[cfg(feature = "control-plane")]
+    control_order_cursor: Box<[u8]>,
 }
 
 impl AlignmentSearchWorkspace {
@@ -777,6 +783,12 @@ impl AlignmentSearchWorkspace {
             compact_binomial: Box::new([]),
             symmetry_maps: Box::new([]),
             symmetry_images: Box::new([]),
+            #[cfg(feature = "control-plane")]
+            control_order: vec![[u8::MAX; 56]; maximum_budget as usize + 1].into_boxed_slice(),
+            #[cfg(feature = "control-plane")]
+            control_order_len: vec![0; maximum_budget as usize + 1].into_boxed_slice(),
+            #[cfg(feature = "control-plane")]
+            control_order_cursor: vec![0; maximum_budget as usize + 1].into_boxed_slice(),
         })
     }
 
@@ -1059,6 +1071,7 @@ pub fn search_alignment_attachment_from(
 
 /// Search with a controller polled after each `pulse_interval` entered states.
 /// Ordering controls may change branch order but never remove a branch.
+#[cfg(feature = "control-plane")]
 pub fn search_alignment_attachment_controlled<C: AlignmentSearchControl>(
     problem: &AlignmentAttachment,
     budget: u32,
@@ -1105,6 +1118,11 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
     workspace.seen.fill(0);
     workspace.compact_seen.fill([0; 5]);
     workspace.frames.fill(SearchFrame::default());
+    #[cfg(feature = "control-plane")]
+    {
+        workspace.control_order_len.fill(0);
+        workspace.control_order_cursor.fill(0);
+    }
     workspace.frames[0] = SearchFrame {
         selected: initial,
         unresolved_cuts: problem.all_cut_mask(),
@@ -1169,15 +1187,37 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
             }
             workspace.frames[depth].branch_bits = branch_bits;
             workspace.frames[depth].entered = true;
+            #[cfg(feature = "control-plane")]
+            if CONTROLLED && control.ordering_active() {
+                let len = prepare_controlled_order(
+                    problem,
+                    budget,
+                    depth,
+                    workspace.frames[depth],
+                    control,
+                    &mut workspace.control_order[depth],
+                )?;
+                workspace.control_order_len[depth] = len;
+                workspace.control_order_cursor[depth] = 0;
+            }
         }
 
         let branch_bits = workspace.frames[depth].branch_bits;
         if branch_bits != 0 {
-            let bit = if CONTROLLED && control.ordering_active() {
-                controlled_branch(problem, budget, depth, &workspace.frames[depth], control)?
-            } else {
-                branch_bits & branch_bits.wrapping_neg()
-            };
+            let mut bit = branch_bits & branch_bits.wrapping_neg();
+            #[cfg(feature = "control-plane")]
+            if CONTROLLED && workspace.control_order_len[depth] != 0 {
+                let cursor = &mut workspace.control_order_cursor[depth];
+                while *cursor < workspace.control_order_len[depth] {
+                    let candidate = workspace.control_order[depth][*cursor as usize];
+                    *cursor += 1;
+                    let ordered_bit = 1_u64 << candidate;
+                    if branch_bits & ordered_bit != 0 {
+                        bit = ordered_bit;
+                        break;
+                    }
+                }
+            }
             workspace.frames[depth].branch_bits ^= bit;
             let selected = workspace.frames[depth].selected | bit;
             let unresolved_cuts = workspace.frames[depth].unresolved_cuts;
@@ -1197,17 +1237,19 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
     Ok((None, metrics))
 }
 
+#[cfg(feature = "control-plane")]
 #[inline(never)]
-fn controlled_branch<C: AlignmentSearchControl>(
+fn prepare_controlled_order<C: AlignmentSearchControl>(
     problem: &AlignmentAttachment,
     budget: u32,
     depth: usize,
-    frame: &SearchFrame,
+    frame: SearchFrame,
     control: &mut C,
-) -> Result<u64, AlignmentError> {
+    order: &mut [u8; 56],
+) -> Result<u8, AlignmentError> {
     let mut candidates = frame.branch_bits;
-    let mut best_bit = candidates & candidates.wrapping_neg();
-    let mut best_score = i64::MIN;
+    let mut scored = [(i64::MIN, u8::MAX); 56];
+    let mut len = 0usize;
     let branch_count = candidates.count_ones();
     let unresolved_count = frame
         .unresolved_cuts
@@ -1232,12 +1274,15 @@ fn controlled_branch<C: AlignmentSearchControl>(
             child_unresolved_count: child_unresolved.iter().map(|word| word.count_ones()).sum(),
             child_packing: packing,
         })?;
-        if score > best_score {
-            best_score = score;
-            best_bit = bit;
-        }
+        scored[len] = (score, bit.trailing_zeros() as u8);
+        len += 1;
     }
-    Ok(best_bit)
+    scored[..len]
+        .sort_unstable_by(|left, right| right.0.cmp(&left.0).then_with(|| left.1.cmp(&right.1)));
+    for (slot, &(_, candidate)) in order.iter_mut().zip(&scored[..len]) {
+        *slot = candidate;
+    }
+    Ok(len as u8)
 }
 
 #[cfg(test)]
@@ -1405,6 +1450,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg(feature = "control-plane")]
     fn controlled_ordering_preserves_the_exact_answer() {
         struct PackingOrder {
             pulses: u64,

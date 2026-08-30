@@ -214,13 +214,16 @@ ergodisctl --run-dir RUN apply \
 ```
 
 The residual-packing plan is intentionally a diagnostic stressor, not a
-recommended heuristic. It recomputes an exact child bound for every candidate
-branch. A live budget-13 control preserved the exact UNSAT answer and nearly
-the same state count but was about 3.9x slower while the plan was active. This
-is useful negative evidence: theorem strength does not pay for unrestricted
-per-branch recomputation. Any production version should precompute each
-branch's score once per search frame, cache the selected child's summary, or
-use a cheaper theorem-equivalent accumulator.
+recommended heuristic. The first live version recomputed every remaining
+child score on every selection and made the budget-13 control about 3.9x
+slower. Fixed, pre-sized per-depth order buffers now compute each child score
+once per frame; default feature-off workspaces contain none of this state. That
+repair reduced the same injection experiment from 168.85 to 78.07 seconds
+(2.16x), preserving the exact UNSAT answer and essentially the same state
+count. It is still 1.81x slower than the 43.10-second no-theorem diagnostic.
+The next gate is therefore not more caching alone: cache the chosen child's
+summary and/or replace exact child evaluation with a cheaper theorem-equivalent
+accumulator, then demand an actual state reduction in multiround A/B.
 
 ## Current limitations
 

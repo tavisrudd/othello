@@ -599,10 +599,12 @@ Sequel research:
   was inconclusive because it reached no relevant survivor states.  C880 and
   small controls pass.  The C880 DFS now consumes bounded pulses and ordering
   plans while publishing compact progress.  Exact solved budget-12/13 controls
-  survive mid-search activation/deactivation, but exact child-packing ordering
-  is rejected as a production policy: it barely changes states and costs about
-  3.9x in the diagnostic.  The next gate is compute-once frame scoring followed
-  by multiround A/B; no sound pruning role exists.
+  survive mid-search activation/deactivation.  Compute-once fixed-buffer frame
+  ordering repairs the initial repeated-score pathology by 2.16x, but exact
+  child-packing ordering is still rejected as a production policy: it barely
+  changes states and remains 1.81x slower than the no-theorem budget-13
+  diagnostic.  The next gate is a cheaper equivalent accumulator plus
+  multiround A/B; no sound pruning role exists.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

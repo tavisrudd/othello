@@ -45,15 +45,18 @@ it at epoch 2, and closed after 2,001,680 states in 168.85 seconds. Peak RSS was
 about 69 MiB and 134 MiB for budgets 12 and 13 respectively. These are
 diagnostic single runs, not performance estimates.
 
-The negative is decisive enough architecturally: exact child-packing scores
-are recomputed for every remaining candidate every time a branch is selected.
-They barely change the tree and can cost about 3.9x wall time. The theorem is a
-successful live-injection test but a rejected production ordering policy until
-scores are computed once per frame or replaced by a cheaper equivalent
-accumulator. Safe-point polling itself was 8.49 versus 7.95 seconds on the
-budget-12 diagnostic (about 6.8%, including 37 socket/heartbeat pulses); users
-control that tax directly through the chunk interval, and ordinary solves pay
-none.
+The negative exposed and then removed classic repeated work: exact scores were
+recomputed for every remaining candidate on every selection. Fixed, pre-sized
+per-depth buffers now score and sort each frame only once, with no allocation;
+the storage exists only under `control-plane`. Repeating the same mid-run
+budget-13 injection fell from 168.85 to 78.07 seconds, a 2.16x repair, while
+retaining the exact UNSAT answer and near-identical 2,001,421-state tree. The
+budget-12 injection similarly fell from 17.30 to 10.13 seconds. The policy is
+still rejected for production: 78.07 seconds is 1.81x the 43.10-second
+no-theorem diagnostic, and 10.13 is 1.27x the 7.95-second unchanged core path.
+The exact child bound is costly and did not materially shrink either tree.
+Safe-point users control the socket/heartbeat tax through the chunk interval,
+and ordinary feature-off solves retain neither branches nor ordering storage.
 
 Implementation commits are `07cc0ebe2`, `b1c4dd052`, and `3a30a24e6` plus the
 current follow-up. Operator documentation is in
@@ -176,8 +179,9 @@ from silently becoming a proof-authoritative prune.
 1. Construct or import q17 `K_Omega` survivor states, then replay the `{0,6}`
    rule and extract its first mismatch if any; unguided random states do not
    reach the relevant stratum at useful density.
-2. Cache C880 branch-theorem scores once per frame, then repeat an interleaved
-   multiround A/B; add a C80 live adapter only after that pattern is sound.
+2. Cache the chosen C880 child's exact summary or derive a cheaper equivalent
+   ordering accumulator, then require a state reduction in interleaved
+   multiround A/B; add C80 only after that pattern is sound.
 3. Persist controller checkpoints so restart preserves the last validated
    epoch and active plan hashes.
 4. Split transport and ledger modules after the next surface change, not before

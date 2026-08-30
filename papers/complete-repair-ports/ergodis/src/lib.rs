@@ -43,11 +43,12 @@ pub mod transfer;
 pub mod witness;
 mod zdd;
 
+#[cfg(feature = "control-plane")]
+pub use alignment::search_alignment_attachment_controlled;
 pub use alignment::{
-    compile_alignment_attachment, search_alignment_attachment,
-    search_alignment_attachment_controlled, search_alignment_attachment_from, AlignmentAttachment,
-    AlignmentBranchFeatures, AlignmentError, AlignmentFractionalContext, AlignmentSearchControl,
-    AlignmentSearchMetrics, AlignmentSearchPoint, AlignmentSearchWorkspace,
+    compile_alignment_attachment, search_alignment_attachment, search_alignment_attachment_from,
+    AlignmentAttachment, AlignmentBranchFeatures, AlignmentError, AlignmentFractionalContext,
+    AlignmentSearchControl, AlignmentSearchMetrics, AlignmentSearchPoint, AlignmentSearchWorkspace,
 };
 pub use applications::{
     azure_lrc_12_2_2_counted, azure_lrc_12_2_2_upgrade_domains, ceph_xor_repair_family,
