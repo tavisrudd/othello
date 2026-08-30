@@ -388,6 +388,15 @@ fewer cycles and 73.9% fewer instructions, or 107.2 million objects/s at 44.0
 cycles per object.  The iterative queue is pre-sized, allocation-free while
 closing edges, and has no recursion or stack-growth limit.
 
+The host also exposes AVX2 and AVX-512F/DQ/BW/VL/VPOPCNTDQ.  Rust 1.87 can
+detect those features but its AVX-512 target attributes and intrinsics remain
+unstable, so two stable runtime-gated assembly probes were measured rather
+than assumed beneficial.  A direct VPOPCNT/store/reduce kernel took about
+89.5 ms; a VPOPCNT/compress/packed-max kernel took about 107.2 ms, both versus
+43--44 ms for the SSE4.1/POPCNT build.  For this short 26-count reduction,
+ZMM setup, lane rearrangement, and reduction dominate.  Both AVX-512 probes
+were rejected; the feature is available, but it is not the fastest kernel.
+
 ## Python's continuing role
 
 Python is not removed.  It remains the place to create a new feature in

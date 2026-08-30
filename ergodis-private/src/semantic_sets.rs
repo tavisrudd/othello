@@ -82,35 +82,103 @@ impl FixedMaskSet {
     }
 }
 
-/// Close one mask under a finite list of generators using a pre-sized queue.
+/// Witness-bearing closure of one mask under finitely many generators.
+#[derive(Debug, Clone)]
+pub struct OrbitClosure {
+    objects: Vec<u64>,
+    parents: Vec<u32>,
+    generators: Vec<u16>,
+}
+
+impl OrbitClosure {
+    #[must_use]
+    pub fn len(&self) -> usize {
+        self.objects.len()
+    }
+
+    #[must_use]
+    pub fn is_empty(&self) -> bool {
+        self.objects.is_empty()
+    }
+
+    #[must_use]
+    pub fn objects(&self) -> &[u64] {
+        &self.objects
+    }
+
+    /// Reconstruct a seed-to-object generator word into caller scratch.
+    /// Returns `None` for an invalid index or insufficient scratch.
+    pub fn transporter_word<'a>(
+        &self,
+        object_index: usize,
+        scratch: &'a mut [u16],
+    ) -> Option<&'a [u16]> {
+        if object_index >= self.objects.len() {
+            return None;
+        }
+        let mut depth = 0;
+        let mut cursor = object_index;
+        while self.parents[cursor] != u32::MAX {
+            depth += 1;
+            cursor = self.parents[cursor] as usize;
+        }
+        if depth > scratch.len() {
+            return None;
+        }
+        cursor = object_index;
+        let mut write = depth;
+        while self.parents[cursor] != u32::MAX {
+            write -= 1;
+            scratch[write] = self.generators[cursor];
+            cursor = self.parents[cursor] as usize;
+        }
+        Some(&scratch[..depth])
+    }
+}
+
+/// Close one mask under a finite list of generators using pre-sized arenas.
 ///
-/// The traversal is iterative and stack-safe. The queue and membership table
-/// allocate once from `max_items`; applying edges and inserting discoveries
-/// allocate nothing. Exceeding the declared orbit bound fails closed.
+/// The traversal is iterative and stack-safe. The queue, membership table,
+/// parents, and generator labels allocate once from `max_items`; applying
+/// edges and inserting discoveries allocate nothing. Exceeding the declared
+/// orbit bound fails closed.
 pub fn orbit_closure(
     seed: u64,
     generator_count: usize,
     max_items: usize,
     mut apply: impl FnMut(u64, usize) -> u64,
-) -> Vec<u64> {
+) -> OrbitClosure {
     assert!(generator_count > 0, "orbit closure needs a generator");
+    assert!(generator_count <= u16::MAX as usize);
+    assert!(max_items <= u32::MAX as usize);
     let mut seen = FixedMaskSet::with_max_items(max_items);
-    let mut orbit = Vec::with_capacity(max_items);
+    let mut objects = Vec::with_capacity(max_items);
+    let mut parents = Vec::with_capacity(max_items);
+    let mut generators = Vec::with_capacity(max_items);
     seen.insert(seed);
-    orbit.push(seed);
+    objects.push(seed);
+    parents.push(u32::MAX);
+    generators.push(u16::MAX);
     let mut cursor = 0;
-    while cursor < orbit.len() {
-        let object = orbit[cursor];
+    while cursor < objects.len() {
+        let object = objects[cursor];
+        let parent = cursor as u32;
         cursor += 1;
         for generator in 0..generator_count {
             let image = apply(object, generator);
             if seen.insert(image) {
-                assert!(orbit.len() < max_items, "orbit exceeds declared bound");
-                orbit.push(image);
+                assert!(objects.len() < max_items, "orbit exceeds declared bound");
+                objects.push(image);
+                parents.push(parent);
+                generators.push(generator as u16);
             }
         }
     }
-    orbit
+    OrbitClosure {
+        objects,
+        parents,
+        generators,
+    }
 }
 
 /// Maximum-overlap profiler for families that split into 3-way partitions.
@@ -524,7 +592,18 @@ mod tests {
     #[test]
     fn orbit_closure_is_iterative_complete_and_bounded() {
         let orbit = orbit_closure(1, 1, 5, |mask, _| ((mask << 1) | (mask >> 4)) & 0b1_1111);
+        assert!(!orbit.is_empty());
         assert_eq!(orbit.len(), 5);
-        assert_eq!(orbit.iter().fold(0, |union, &mask| union | mask), 0b1_1111);
+        assert_eq!(
+            orbit.objects().iter().fold(0, |union, &mask| union | mask),
+            0b1_1111
+        );
+        let mut scratch = [u16::MAX; 4];
+        for index in 0..orbit.len() {
+            let word = orbit.transporter_word(index, &mut scratch).unwrap();
+            assert_eq!(word, vec![0; index]);
+        }
+        assert!(orbit.transporter_word(orbit.len(), &mut scratch).is_none());
+        assert!(orbit.transporter_word(4, &mut scratch[..3]).is_none());
     }
 }
