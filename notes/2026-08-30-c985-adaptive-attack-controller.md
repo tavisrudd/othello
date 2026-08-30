@@ -637,9 +637,10 @@ verbose tracing.
 
 Expose the controller through a versioned local Unix-domain socket, with a
 dedicated cold-path thread owning accept, parsing, authorization, ledger
-emission, and response formatting.  The default socket is created with mode
-`0600` in an explicit run directory, never implicitly under `/tmp`.  A small
-`ergodisctl` client provides both human commands and machine-readable output.
+emission, and response formatting.  The socket is created with mode `0600` at
+the private runtime endpoint recorded by the explicit run manifest, never
+implicitly under `/tmp`.  A small `ergodisctl` client provides both human
+commands and machine-readable output.
 
 ### Concurrent-run isolation
 
