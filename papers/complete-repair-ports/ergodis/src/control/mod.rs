@@ -262,6 +262,7 @@ impl Campaign {
         }
         let request_limit = request.max_bytes.min(self.response_limit);
         let result = match request.op.as_str() {
+            "capabilities" => self.capabilities(),
             "status" => self.status(),
             "pulse" => self.pulse(&request.args),
             "watch-register" => self.watch_register(&request.args),
@@ -295,6 +296,24 @@ impl Campaign {
                 self.error_response(request.request_id, "response exceeds requested max_bytes");
         }
         (response, stop)
+    }
+
+    fn capabilities(&self) -> Result<Value, ControlError> {
+        Ok(json!({
+            "schema": SCHEMA,
+            "framing": "u32-le-length-prefixed-json",
+            "max_frame_bytes": MAX_FRAME_BYTES,
+            "large_results": "run-relative-create-only-files",
+            "proof_authority": false,
+            "operations": [
+                "capabilities", "status", "pulse", "watch-register",
+                "watch-unregister", "plan-get", "agent-brief",
+                "feature-ceiling", "scope-profile", "synthesize-tree",
+                "candidate-try", "candidate-apply", "candidate-deactivate",
+                "obstruction-first", "exceptional", "trace", "note", "noop",
+                "shutdown"
+            ],
+        }))
     }
 
     fn status(&self) -> Result<Value, ControlError> {
@@ -1206,6 +1225,25 @@ mod tests {
     }
 
     #[test]
+    fn language_neutral_binding_fixture_is_exact() {
+        let fixture: Value = serde_json::from_str(include_str!(
+            "../../tests/fixtures/control_protocol_v0.json"
+        ))
+        .unwrap();
+        let request_json = fixture["request_json"].as_str().unwrap();
+        let request: Request = serde_json::from_str(request_json).unwrap();
+        assert_eq!(request.schema, SCHEMA);
+        assert_eq!(request.request_id, 7);
+        assert_eq!(serde_json::to_string(&request).unwrap(), request_json);
+
+        let response_json = fixture["response_json"].as_str().unwrap();
+        let response: Response = serde_json::from_str(response_json).unwrap();
+        assert_eq!(response.schema, SCHEMA);
+        assert_eq!(response.request_id, 7);
+        assert_eq!(serde_json::to_string(&response).unwrap(), response_json);
+    }
+
+    #[test]
     fn expression_plan_lowers_to_the_same_validated_program() {
         let document: PlanDocument = serde_json::from_value(json!({
             "schema": PLAN_SCHEMA,
@@ -1471,6 +1509,12 @@ mod tests {
             watcher.recv(&mut notification).unwrap_err().kind(),
             io::ErrorKind::WouldBlock | io::ErrorKind::TimedOut
         ));
+
+        let (capabilities, _) = campaign.handle(request(&campaign, 21, "capabilities", json!({})));
+        assert!(capabilities.ok);
+        assert_eq!(capabilities.result["schema"], SCHEMA);
+        assert_eq!(capabilities.result["max_frame_bytes"], MAX_FRAME_BYTES);
+        assert_eq!(capabilities.result["proof_authority"], false);
 
         let (pulse, _) = campaign.handle(request(&campaign, 3, "pulse", json!({"since_epoch": 0})));
         assert_eq!(pulse.result["changed"], true);

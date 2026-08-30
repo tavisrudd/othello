@@ -5,6 +5,11 @@ This directory contains transparent reference algorithms, differential-oracle
 fixtures, benchmark controls, and evidence generators used to audit ergodis.
 It is intentionally secondary to the Rust interface.
 
+`ergodis_client.py` is the exception: it is the dependency-free reference
+binding for the optional, versioned local control protocol.  It sends bounded
+framed requests and streams run-relative evidence without buffering complete
+files.  See `../CONTROL_PROTOCOL.md`.
+
 The `recovery_algorithms` package implements direct finite-field and
 combinatorial formulations. Its simple representations make it useful for
 independent checking on bounded instances; they are not the high-performance

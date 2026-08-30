@@ -179,6 +179,11 @@ Use `ergodis <command> --help` for command-specific options. The input schemas
 are represented by complete examples in `examples/data/`; these are also used
 by the end-to-end CLI tests.
 
+Long-running experimental campaigns may opt into the `control-plane` feature.
+Its bounded Unix-socket protocol, language-neutral fixture, and dependency-free
+Python binding are documented in [CONTROL_PROTOCOL.md](CONTROL_PROTOCOL.md).
+Ordinary solves do not compile this layer or pay its search-path costs.
+
 The separate `css_distance_native` binary consumes sparse physical checks,
 logical observations, verified coordinate-orbit anchors, and an optional
 incumbent support. It independently replays the incumbent and exhaustively
