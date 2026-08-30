@@ -3887,8 +3887,17 @@
       "last": 1009,
       "purpose": "ergodis-controlled exact-root and parity-linear bounded-degree uncovered-locus refinement",
       "sequence": 432
+    },
+    {
+      "count": 1,
+      "first": 1010,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1010,
+      "purpose": "ergodis paper review: q13 parity-graph universality and component-count uncovered-locus envelopes",
+      "sequence": 433
     }
   ],
-  "next_id": 1010,
+  "next_id": 1011,
   "schema": "codex-task-id-allocations-v1"
 }
