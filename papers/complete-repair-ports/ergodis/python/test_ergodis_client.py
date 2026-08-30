@@ -80,7 +80,6 @@ class ErgodisClientTest(unittest.TestCase):
                 Session.from_run_dir(root)
 
     def test_response_envelope_is_strictly_typed(self) -> None:
-        session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
         baseline = {
             "schema": SCHEMA,
             "request_id": 1,
@@ -91,12 +90,14 @@ class ErgodisClientTest(unittest.TestCase):
         }
         malformed = (
             [],
+            baseline | {"request_id": True},
             baseline | {"epoch": True},
             baseline | {"epoch": -1},
             baseline | {"ok": 1},
             baseline | {"result": []},
         )
         for response in malformed:
+            session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
             with self.subTest(response=response), patch(
                 "ergodis_client.socket.socket"
             ) as socket_factory, patch("ergodis_client._write_frame"), patch(
@@ -181,6 +182,11 @@ class ErgodisClientTest(unittest.TestCase):
                         "evidence/long.jsonl", max_line_bytes=8
                     )
                 )
+            (root / "evidence" / "invalid.jsonl").write_bytes(b'{"x":1}\n{bad\n')
+            stream = session.iter_evidence_json("evidence/invalid.jsonl")
+            self.assertEqual(next(stream), {"x": 1})
+            with self.assertRaisesRegex(ProtocolError, "line 2"):
+                next(stream)
 
     def test_oversized_declared_response_is_rejected_before_payload_read(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

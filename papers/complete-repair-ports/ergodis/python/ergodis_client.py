@@ -147,9 +147,12 @@ class Session:
             with connection.makefile("rwb", buffering=0) as stream:
                 _write_frame(stream, encoded)
                 response = _decode_object(_read_frame(stream, max_bytes), "response")
+        peer_request_id = response.get("request_id")
         if (
             response.get("schema") != SCHEMA
-            or response.get("request_id") != request_id
+            or isinstance(peer_request_id, bool)
+            or not isinstance(peer_request_id, int)
+            or peer_request_id != request_id
             or response.get("run_id") != self.run_id
         ):
             raise ProtocolError("response handshake rejected")
@@ -216,7 +219,12 @@ class Session:
     def iter_evidence_json(
         self, relative_path: Path | str, *, max_line_bytes: int = 1024 * 1024
     ) -> Iterator[Any]:
-        for line in self.iter_evidence_lines(
-            relative_path, max_line_bytes=max_line_bytes
+        for line_number, line in enumerate(
+            self.iter_evidence_lines(relative_path, max_line_bytes=max_line_bytes), 1
         ):
-            yield json.loads(line)
+            try:
+                yield json.loads(line)
+            except (UnicodeDecodeError, json.JSONDecodeError) as error:
+                raise ProtocolError(
+                    f"invalid evidence JSON at line {line_number}"
+                ) from error
