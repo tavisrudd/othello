@@ -31,6 +31,7 @@ pub mod ordered_resource;
 pub mod packed_ternary;
 pub mod projective;
 pub mod provenance;
+pub mod residual_hitting;
 pub mod sat;
 pub mod scheduler;
 pub mod selector;
@@ -138,6 +139,9 @@ pub use ordered_resource::{
     FrozenParetoQueryPlan, OrderedMonoidCertificate, OrderedResourceError, ParetoFront,
     ParetoObservationTable, ParetoResponseDictionary, ParetoWitness, ParetoWitnessError,
     ParetoWorkspace, ValidatedParetoObjective, WitnessedParetoFront, WitnessedParetoWorkspace,
+};
+pub use residual_hitting::{
+    verify_residual_hitting_refutation, ResidualHittingError, ResidualHittingWorkspace,
 };
 pub use scheduler::{
     maximum_parallel_repairs, CapacityCut, ParallelRepairResult, PositiveGradingCertificate,
