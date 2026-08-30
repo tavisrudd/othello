@@ -91,6 +91,104 @@ impl AlignmentAttachment {
         Ok(self.violation_for_cut(cut, selected).is_none())
     }
 
+    /// Bytes required by the exact cutwise parity-closure signature.
+    pub fn closure_signature_len(&self) -> usize {
+        self.cut_edge_counts
+            .iter()
+            .map(|&count| count as usize)
+            .sum()
+    }
+
+    /// Write the exact absorbing/parity closure of a partial family.
+    ///
+    /// A separated cut is filled with `0xff`. Otherwise each cut-edge vertex
+    /// receives its component's least vertex in the low nibble and its parity
+    /// from that root in bit four. The caller owns the fixed-size output and
+    /// the kernel allocates nothing.
+    pub fn write_closure_signature(
+        &self,
+        selected: u64,
+        output: &mut [u8],
+    ) -> Result<usize, AlignmentError> {
+        if selected >> self.triples.len() != 0 {
+            return Err(AlignmentError::Family);
+        }
+        let required = self.closure_signature_len();
+        if output.len() < required {
+            return Err(AlignmentError::Workspace);
+        }
+        let mut offset = 0_usize;
+        for cut in 0..self.cut_count() {
+            let edge_count = self.cut_edge_counts[cut] as usize;
+            let block = &mut output[offset..offset + edge_count];
+            offset += edge_count;
+            let mut adjacency = [0_u16; 16];
+            let mut bits = selected & self.cut_triple_masks[cut];
+            while bits != 0 {
+                let triple = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                let (left, right) = self.pair(cut, triple);
+                adjacency[left as usize] |= 1_u16 << right;
+                adjacency[right as usize] |= 1_u16 << left;
+            }
+            let mut queue = [0_u8; 16];
+            let mut colored = 0_u16;
+            let mut color_one = 0_u16;
+            let mut separated = false;
+            for root in 0..edge_count {
+                let root_bit = 1_u16 << root;
+                if colored & root_bit != 0 {
+                    continue;
+                }
+                colored |= root_bit;
+                let mut component = root_bit;
+                queue[0] = root as u8;
+                let mut head = 0_usize;
+                let mut tail = 1_usize;
+                while head < tail {
+                    let vertex = queue[head];
+                    head += 1;
+                    let vertex_bit = 1_u16 << vertex;
+                    let neighbors = adjacency[vertex as usize];
+                    let same_color = if color_one & vertex_bit == 0 {
+                        colored & !color_one
+                    } else {
+                        color_one
+                    };
+                    if neighbors & same_color != 0 {
+                        separated = true;
+                        break;
+                    }
+                    let mut fresh = neighbors & !colored;
+                    colored |= fresh;
+                    component |= fresh;
+                    if color_one & vertex_bit == 0 {
+                        color_one |= fresh;
+                    }
+                    while fresh != 0 {
+                        let neighbor = fresh.trailing_zeros() as u8;
+                        fresh &= fresh - 1;
+                        queue[tail] = neighbor;
+                        tail += 1;
+                    }
+                }
+                if separated {
+                    break;
+                }
+                let mut vertices = component;
+                while vertices != 0 {
+                    let vertex = vertices.trailing_zeros() as usize;
+                    vertices &= vertices - 1;
+                    block[vertex] = root as u8 | (((color_one >> vertex) as u8 & 1) << 4);
+                }
+            }
+            if separated {
+                block.fill(u8::MAX);
+            }
+        }
+        Ok(required)
+    }
+
     /// Separate the most violated fractional context inequality.
     ///
     /// For one cut, minimizing the weight of a same-colour clause is weighted
@@ -1179,6 +1277,8 @@ mod tests {
         let separating = (0..domain)
             .filter(|&selected| problem.separates(selected).unwrap())
             .collect::<Vec<_>>();
+        let mut quotient_values = std::collections::HashMap::new();
+        let mut signature = vec![0_u8; problem.closure_signature_len()];
         for selected in 0..domain {
             let (_, bound, _) = problem.violation_summary(selected, problem.all_cut_mask());
             let exact = separating
@@ -1191,7 +1291,15 @@ mod tests {
                 bound <= exact,
                 "selected={selected:#x} bound={bound} exact={exact}"
             );
+            problem
+                .write_closure_signature(selected, &mut signature)
+                .unwrap();
+            let key = (selected.count_ones(), signature.clone());
+            if let Some(prior) = quotient_values.insert(key, exact) {
+                assert_eq!(prior, exact, "selected={selected:#x}");
+            }
         }
+        assert!(quotient_values.len() < domain as usize);
     }
 
     #[test]

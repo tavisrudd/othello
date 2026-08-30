@@ -537,9 +537,12 @@ Sequel research:
   These diagnostics are not UNSAT certificates and do not change the proved
   bound. A compact `2^27` retry of `[0,1,11]` makes 134,217,728 exact slots
   practical at 659,164 KiB RSS but also exhausts capacity. Further syntactic
-  growth is abandoned. The highest-EV native successor is the exact contextual
-  quotient by the 127-tuple of absorbing separated flags or bipartite
-  parity-component closures, followed by a proof-producing replay path.
+  growth is abandoned. The highest-EV native successor is the exact
+  optimal-continuation quotient by selected cardinality and the 127-tuple of
+  absorbing separated flags or bipartite parity-component closures, followed
+  by a proof-producing replay path. A caller-buffered signature and exhaustive
+  five-point equal-optimum control pass; literal syntactic trace congruence is
+  deliberately not claimed.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

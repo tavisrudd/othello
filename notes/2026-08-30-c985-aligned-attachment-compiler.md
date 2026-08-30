@@ -244,11 +244,15 @@ The next theorem-derived state reduction is sharper than mask compression. For
 each cut, retain either an absorbing separated flag or the parity-labelled
 connected-component closure of the current bipartite constraint graph. At a
 fixed selected cardinality, two families with the same 127-component closure
-tuple have identical responses to adding every future triple. Induction on the
-continuation therefore makes this tuple an exact contextual quotient of the
-native search. The 26 capacity failures show that compiling and interning this
-semantic closure, rather than enlarging syntactic mask tables again, is the
-highest-EV successor after the bounded compact retry.
+tuple have the same closure-extending moves and exact optimal continuation
+value. A syntactic re-addition can distinguish traces when a triple belongs to
+only one representative, but it changes no closure in either and is strictly
+dominated; thus the claim is optimization equivalence, not literal trace
+congruence. Exhaustive five-point grouping by cardinality and closure signature
+confirms equal exact completion distance in every class. The signature writer
+uses caller storage and allocates nothing. The 26 capacity failures show that
+compiling and interning this semantic closure, rather than enlarging syntactic
+mask tables again, is the highest-EV successor.
 
 Three further hot-path alternatives are rejected. Incidence-maximizing ties
 between equally short branch clauses increase the rooted control from 8,759 to

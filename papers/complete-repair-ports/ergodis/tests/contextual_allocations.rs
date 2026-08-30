@@ -82,6 +82,14 @@ fn aligned_attachment_verification_allocates_nothing() {
     let (separates, allocations) = tracked_allocations(|| problem.separates(selected).unwrap());
     assert!(separates);
     assert_eq!(allocations, 0);
+
+    let mut signature = vec![0_u8; problem.closure_signature_len()];
+    let (_, signature_allocations) = tracked_allocations(|| {
+        problem
+            .write_closure_signature(selected, &mut signature)
+            .unwrap()
+    });
+    assert_eq!(signature_allocations, 0);
 }
 
 #[test]
