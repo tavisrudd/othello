@@ -81,6 +81,7 @@ def main() -> int:
     if manifest.get("schema") not in {
         "ergodis-qdist-native-suite-v1",
         "ergodis-qdist-native-suite-v2",
+        "ergodis-qdist-native-suite-v3",
     }:
         raise RuntimeError("unexpected suite manifest schema")
     records: list[dict[str, Any]] = []
@@ -105,6 +106,7 @@ def main() -> int:
         if record.get("schema") not in {
             "ergodis-qdist-native-suite-result-v1",
             "ergodis-qdist-native-suite-result-v2",
+            "ergodis-qdist-native-suite-result-v3",
         }:
             raise RuntimeError(f"{stem}/{direction}: unexpected result schema")
         canonical_input_path = args.root / "inputs" / f"{stem}--{direction}.json"

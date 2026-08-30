@@ -22,17 +22,7 @@ from typing import Any
 
 PINNED_QDIST_COMMIT = "9fb224b0fa372161fb3933034016bc8dc423a5ab"
 SUITE_DIRECTORIES = ("BB", "BB2", "LP", "LP2", "QT", "QT2")
-DEFAULT_MAXIMUM_WEIGHT = 6
-LITERATURE_BB_DISTANCES = {
-    "BB_72_12_6": 6,
-    "BB_90_8_10": 10,
-    "BB_108_8_10": 10,
-    "BB_144_12_12": 12,
-    "BB_216_8_10": 10,
-    "BB_144_14_14": 14,
-    "BB_288_12_?": 18,
-    "BB_360_12_?": 24,
-}
+DEFAULT_MAXIMUM_WEIGHT = 20
 
 
 def sha256(path: Path) -> str:
@@ -178,7 +168,12 @@ def main() -> int:
     parser.add_argument("--threads", type=int, default=16)
     parser.add_argument("--worker-cpus", default="")
     parser.add_argument("--timeout", type=float, default=180.0)
-    parser.add_argument("--maximum-weight", type=int)
+    parser.add_argument(
+        "--maximum-weight",
+        type=int,
+        default=DEFAULT_MAXIMUM_WEIGHT,
+        help="uniform search radius for every suite instance (default: 20)",
+    )
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
 
@@ -209,7 +204,7 @@ def main() -> int:
     manifest_path = output_root / "manifest.json"
     instances = discover_instances(args.qdist_root)
     manifest = {
-        "schema": "ergodis-qdist-native-suite-v2",
+        "schema": "ergodis-qdist-native-suite-v3",
         "qdist_commit": PINNED_QDIST_COMMIT,
         "suite_directories": list(SUITE_DIRECTORIES),
         "instance_count": len(instances),
@@ -217,8 +212,7 @@ def main() -> int:
         "timeout_seconds": args.timeout,
         "threads": args.threads,
         "worker_cpus": args.worker_cpus,
-        "maximum_weight_override": args.maximum_weight,
-        "default_non_bb_maximum_weight": DEFAULT_MAXIMUM_WEIGHT,
+        "maximum_weight": args.maximum_weight,
         "binary_sha256": sha256(args.binary),
         "random_binary_sha256": sha256(args.random_binary) if args.random_binary else None,
         "ris_trials": args.ris_trials,
@@ -239,8 +233,6 @@ def main() -> int:
     directions = (("hx-gz", "Hx", "Gz"), ("hz-gx", "Hz", "Gx"))
     for instance_index, (stem, matrix_dir) in enumerate(instances, 1):
         maximum_weight = args.maximum_weight
-        if maximum_weight is None:
-            maximum_weight = LITERATURE_BB_DISTANCES.get(stem, DEFAULT_MAXIMUM_WEIGHT)
         for direction, physical_suffix, logical_suffix in directions:
             key = (stem, direction)
             if key in completed:
@@ -347,7 +339,7 @@ def main() -> int:
                     raise RuntimeError(f"{slug}: expected one native JSON record")
                 native_record = json.loads(lines[0])
             record = {
-                "schema": "ergodis-qdist-native-suite-result-v2",
+                "schema": "ergodis-qdist-native-suite-result-v3",
                 "instance_index": instance_index,
                 "stem": stem,
                 "direction": direction,
