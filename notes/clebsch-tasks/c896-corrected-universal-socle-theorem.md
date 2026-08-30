@@ -4,6 +4,18 @@
 
 **Status:** queued future mathematics; independent of Paper II
 
+**2026-08-30 semantic-rank spike:** the frozen `q=9` Hom computation now has
+a separate provenance-preserving rank-core adapter.  For every nontrivial
+central-even source, Weyl is the only individually essential generator block;
+three alternative generator cores attain full rank.  For the unexpected
+`L(2,0)` channel the system has 30 variables, rank 29, and an explicit
+29-equation semantic basis.  This is a control extraction around the already
+known catalecticant summand, not the missing carry theorem.  Next: compile
+H4--H5 sparsely at `q=25`, labeling rows and variables by torus alias,
+carry/borrow state, and Weyl partner.  Portfolio memo and artifact:
+`notes/2026-08-30-ergodis-certificate-to-theorem-portfolio.md` and
+`notes/2026-08-30-c896-q9-semantic-rank.json`.
+
 ## Objective
 
 Determine whether the finite-group socle of
