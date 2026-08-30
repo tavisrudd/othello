@@ -1092,9 +1092,17 @@ fn next_client_request_id() -> u64 {
 }
 
 pub fn read_manifest(run_dir: &Path) -> Result<Manifest, ControlError> {
-    Ok(serde_json::from_reader(BufReader::new(File::open(
-        run_dir.join("manifest.json"),
-    )?))?)
+    let file = File::open(run_dir.join("manifest.json"))?;
+    let capacity = file.metadata()?.len().min(MAX_FRAME_BYTES as u64) as usize;
+    let mut encoded = Vec::with_capacity(capacity);
+    file.take(MAX_FRAME_BYTES as u64 + 1)
+        .read_to_end(&mut encoded)?;
+    if encoded.len() > MAX_FRAME_BYTES {
+        return Err(ControlError::Invalid(
+            "manifest exceeds protocol frame bound".into(),
+        ));
+    }
+    Ok(serde_json::from_slice(&encoded)?)
 }
 
 fn required_str<'a>(value: &'a Value, key: &str) -> Result<&'a str, ControlError> {
@@ -1339,6 +1347,21 @@ mod tests {
         assert!(encoded
             .bytes()
             .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte)));
+    }
+
+    #[test]
+    fn rust_manifest_ingestion_is_bounded_before_json_parsing() {
+        let temporary = tempfile::tempdir().unwrap();
+        fs::write(
+            temporary.path().join("manifest.json"),
+            vec![b' '; MAX_FRAME_BYTES + 1],
+        )
+        .unwrap();
+        assert!(matches!(
+            read_manifest(temporary.path()),
+            Err(ControlError::Invalid(message))
+                if message == "manifest exceeds protocol frame bound"
+        ));
     }
 
     #[test]
