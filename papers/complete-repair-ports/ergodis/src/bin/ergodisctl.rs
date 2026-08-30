@@ -33,6 +33,8 @@ struct Cli {
 
 #[derive(Debug, Subcommand)]
 enum Command {
+    /// Report the negotiated protocol surface and hard limits.
+    Capabilities,
     Status,
     /// Exercise the control socket without changing or notifying search state.
     Noop,
@@ -227,6 +229,7 @@ fn main() -> Result<()> {
         );
     }
     let (op, args) = match cli.command {
+        Command::Capabilities => ("capabilities", json!({})),
         Command::Status => ("status", json!({})),
         Command::Noop => ("noop", json!({})),
         Command::Probation { .. } => unreachable!(),
