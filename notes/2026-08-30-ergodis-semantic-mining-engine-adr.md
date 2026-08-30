@@ -251,6 +251,12 @@ ABI details are a brittle cross-language boundary.  A small version-pinned
 Lean bridge gives typed ownership, imports, exception handling, and an easy
 fallback to generated modules.
 
+The bounded Rust prior-art and licensing audit is
+`notes/2026-08-30-ergodis-rust-theorem-infrastructure-audit.md`.  No dependency
+was added.  MM0, egglog, Ascent, Salsa, RustSAT, Differential Dataflow, and
+Verus are separated into design-only, optional-spike, or deferred categories;
+every future adoption requires an exact SPDX/transitive/MSRV/native-code intake.
+
 For reflected finite certificates, prefer a small Lean checker plus a proved
 soundness theorem.  Ergodis supplies data; evaluation proves the checker's
 Boolean proposition; composition uses the soundness theorem.  For symbolic
