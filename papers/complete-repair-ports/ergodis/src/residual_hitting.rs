@@ -117,9 +117,10 @@ impl ResidualHittingWorkspace {
         if self.is_hittable(clauses, available, budget)? {
             return Ok(None);
         }
+        let empty_clause = clauses.iter().position(|&clause| clause == 0);
         let width = available.count_ones();
-        let cardinality = budget.min(width);
-        let count = binomial(width, cardinality)?;
+        let cardinality = empty_clause.map_or_else(|| budget.min(width), |_| 0);
+        let count = empty_clause.map_or_else(|| binomial(width, cardinality), |_| Ok(1))?;
         if count > maximum_records {
             return Err(ResidualHittingError::EvidenceLimit {
                 required: count,
@@ -131,6 +132,11 @@ impl ResidualHittingWorkspace {
         output.write_all(&budget.to_le_bytes())?;
         output.write_all(&cardinality.to_le_bytes())?;
         output.write_all(&count.to_le_bytes())?;
+        if let Some(clause) = empty_clause {
+            let clause = u32::try_from(clause).map_err(|_| ResidualHittingError::Overflow)?;
+            output.write_all(&clause.to_le_bytes())?;
+            return Ok(Some(1));
+        }
         for_each_combination(available, cardinality, |chosen| {
             let clause = clauses
                 .iter()
@@ -160,10 +166,20 @@ pub fn verify_residual_hitting_refutation<R: Read>(
         return Err(ResidualHittingError::Certificate);
     }
     let cardinality = read_u32(input)?;
-    let expected_cardinality = budget.min(available.count_ones());
+    let empty_clause = clauses.iter().any(|&clause| clause == 0);
+    let expected_cardinality = if empty_clause {
+        0
+    } else {
+        budget.min(available.count_ones())
+    };
     let count = read_u64(input)?;
     if cardinality != expected_cardinality
-        || count != binomial(available.count_ones(), cardinality)?
+        || count
+            != if empty_clause {
+                1
+            } else {
+                binomial(available.count_ones(), cardinality)?
+            }
     {
         return Err(ResidualHittingError::Certificate);
     }
@@ -173,7 +189,7 @@ pub fn verify_residual_hitting_refutation<R: Read>(
             .ok()
             .and_then(|index| clauses.get(index))
             .ok_or(ResidualHittingError::Certificate)?;
-        if clause & expected != 0 {
+        if (empty_clause && *clause != 0) || (!empty_clause && clause & expected != 0) {
             return Err(ResidualHittingError::Certificate);
         }
         seen += 1;
@@ -291,19 +307,20 @@ mod tests {
     #[test]
     fn empty_clause_is_an_immediate_refutation() {
         let clauses = [0_u64];
-        let mut workspace = ResidualHittingWorkspace::new(2);
-        assert!(!workspace.is_hittable(&clauses, 0b11, 2).unwrap());
+        let mut workspace = ResidualHittingWorkspace::new(8);
+        assert!(!workspace.is_hittable(&clauses, 0xffff, 8).unwrap());
         let mut proof = Vec::new();
         assert_eq!(
             workspace
-                .write_refutation(&clauses, 0b11, 2, 1, &mut proof)
+                .write_refutation(&clauses, 0xffff, 8, 1, &mut proof)
                 .unwrap(),
             Some(1)
         );
         assert_eq!(
-            verify_residual_hitting_refutation(&clauses, 0b11, 2, &mut &proof[..]).unwrap(),
+            verify_residual_hitting_refutation(&clauses, 0xffff, 8, &mut &proof[..]).unwrap(),
             1
         );
+        assert_eq!(proof.len(), 36);
     }
 
     #[test]
