@@ -182,10 +182,12 @@ The exact Hall core returns the distinct assignment
 
 Thus it avoids the shared causal reply `(7,10)` that killed one-label
 transport.  This is a useful candidate, not a C80 theorem: no charge-transport
-soundness lemma has been proved for the edge, and it has not passed the three
-q23 replacement classes or the q11/q13 control corpus.  The graph, semantic
-manifest, and matching certificate are in `ergodis-private/evidence/` under
-the prefix `c80-q11-ancestral-secant-hall-`.
+soundness lemma has been proved for the edge, and it has not passed the full
+q11/q13 control corpus.  It does pass the three frozen q23 replacement classes:
+their single new fibres have 15, 10, and 14 ancestral-secant choices.  Those
+are strong coverage checks but not nontrivial subset-Hall tests.  The graph,
+semantic manifest, and matching certificate are in `ergodis-private/evidence/`
+under the prefix `c80-q11-ancestral-secant-hall-`.
 
 Replay the independent certificate check with:
 
@@ -279,8 +281,9 @@ lowered to an explicit stack before input-scaled use.
   reusable, allocation-free after sizing, and exhaustively checked through
   `4 x 4`; C80's missing datum is now solely the sound edge relation.
 - **Found, not proved:** the ancestral-secant edge passes the exact q11
-  one-to-many witness with a noncausal two-label matching.  Its soundness and
-  q23 coverage are the immediate falsification gates.
+  one-to-many witness with a noncausal two-label matching and has degrees 15,
+  10, and 14 on the three frozen q23 types.  Its soundness and full-corpus
+  multi-defect Hall behaviour are the immediate falsification gates.
 
 **EJ.** A successful C896 state quotient would provide the first literal
 weighted-automaton/minimal-realization instance for the broader Ergodis thesis.

@@ -1,0 +1,9 @@
+{
+  "schema": "ergodis-hall-certificate/v1",
+  "certificate": {
+    "outcome": "saturated",
+    "matching": [
+      0
+    ]
+  }
+}

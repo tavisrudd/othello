@@ -54,6 +54,15 @@ The witness still has global cardinality surplus: seven old defect
 labels disappear and only two genuinely new defects appear. Thus the
 live proof object is global, not causal-local.
 
+The first global edge proposal now passes that witness and all three retained
+q23 replacement types.  Connect a new defect `z` to a consumed old label
+`ell` when `z ell` contains a pre-exchange selected point.  On q11 the two
+new fibres have degrees 3 and 2 and admit a distinct matching that avoids the
+shared causal reply; the q23 type-I/II/III degrees are 15, 10, and 14.  This is
+diagnostic only: the projective charge-transport soundness lemma and full
+q11/q13 corpus gate remain open.  Report:
+`../2026-08-30-c80-ancestral-secant-hall-probe.md`.
+
 ## Active frontier — C80
 
 Define a projectively natural bipartite incidence relation between
@@ -176,9 +185,10 @@ for closed C-item provenance.
 
 ## Next action
 
-Follow `../2026-08-29-c80-ergodis-transfer-memo.md`: start from the q11
-one-to-many witness, formulate the global consumed-label/new-defect
-restriction graph, and run the q11/q23 Hall-deficit gate before attempting a
-field-uniform incidence proof.
+Follow `../2026-08-30-c80-ancestral-secant-hall-probe.md`: prove or falsify
+the local charge-transport meaning of the ancestral-secant edge, then bind it
+to the deterministic q11/q13 sidecars and emit the first deficient subset.
+The architecture remains `../2026-08-29-c80-ergodis-transfer-memo.md`; after
+the finite Hall-deficit gates, attempt the field-uniform incidence proof.
 
 go C80 cap prove global consumed-label Hall surplus and strict support descent, or extract the first support-deficit set

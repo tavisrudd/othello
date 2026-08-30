@@ -1,0 +1,26 @@
+{
+  "left_count": 1,
+  "neighbors": [
+    0,
+    3,
+    4,
+    10,
+    18,
+    19,
+    20,
+    22,
+    23,
+    24,
+    25,
+    26,
+    28,
+    31,
+    32
+  ],
+  "offsets": [
+    0,
+    15
+  ],
+  "right_count": 34,
+  "schema": "ergodis-hall-graph/v1"
+}
