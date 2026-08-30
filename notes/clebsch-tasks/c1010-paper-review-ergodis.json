@@ -1,0 +1,324 @@
+{
+  "ergodis_control": {
+    "ceiling_unavoidable_errors": 0,
+    "evolve_best_correct": 10,
+    "evolve_candidates": 794,
+    "evolve_perfect": 0,
+    "power_generation_rows": 15,
+    "presentation_hash": "e3c60f9c6afdeb89b1ae12a20dc572e1a52a5a08c42b609574f516daebdf7961",
+    "synthesize_error": "plan result sort does not match its declared output"
+  },
+  "irreducible_curve_envelope": {
+    "bounded_check_range": "2<=q<=1000, 1<=degree<=10",
+    "degree_rows": [
+      {
+        "arithmetic_genus": 0,
+        "degree": 1,
+        "largest_integer_q_through_1000_not_excluded": 11
+      },
+      {
+        "arithmetic_genus": 0,
+        "degree": 2,
+        "largest_integer_q_through_1000_not_excluded": 11
+      },
+      {
+        "arithmetic_genus": 1,
+        "degree": 3,
+        "largest_integer_q_through_1000_not_excluded": 11
+      },
+      {
+        "arithmetic_genus": 3,
+        "degree": 4,
+        "largest_integer_q_through_1000_not_excluded": 13
+      },
+      {
+        "arithmetic_genus": 6,
+        "degree": 5,
+        "largest_integer_q_through_1000_not_excluded": 14
+      },
+      {
+        "arithmetic_genus": 10,
+        "degree": 6,
+        "largest_integer_q_through_1000_not_excluded": 17
+      },
+      {
+        "arithmetic_genus": 15,
+        "degree": 7,
+        "largest_integer_q_through_1000_not_excluded": 19
+      },
+      {
+        "arithmetic_genus": 21,
+        "degree": 8,
+        "largest_integer_q_through_1000_not_excluded": 21
+      },
+      {
+        "arithmetic_genus": 28,
+        "degree": 9,
+        "largest_integer_q_through_1000_not_excluded": 23
+      },
+      {
+        "arithmetic_genus": 36,
+        "degree": 10,
+        "largest_integer_q_through_1000_not_excluded": 26
+      }
+    ],
+    "necessary_inequality_genus_free": "q^2-N*q+beta_k-pi_d*floor(2*sqrt(q)) <= 0",
+    "six_arc_degree_at_most_three_integer_cutoff": 11,
+    "six_arc_sharp_beta": 44
+  },
+  "q13_one_bit_reconstruction": {
+    "all_nonconstant_predicates_recover_full_scheme": true,
+    "fusion_rows": [
+      {
+        "canonical_mask": 1,
+        "color_counts_first_four_rounds": [
+          3,
+          4,
+          6,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          8
+        ]
+      },
+      {
+        "canonical_mask": 2,
+        "color_counts_first_four_rounds": [
+          3,
+          4,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          6
+        ]
+      },
+      {
+        "canonical_mask": 3,
+        "color_counts_first_four_rounds": [
+          3,
+          5,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          8,
+          6
+        ]
+      },
+      {
+        "canonical_mask": 4,
+        "color_counts_first_four_rounds": [
+          3,
+          6,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          12
+        ]
+      },
+      {
+        "canonical_mask": 5,
+        "color_counts_first_four_rounds": [
+          3,
+          6,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          8,
+          12
+        ]
+      },
+      {
+        "canonical_mask": 6,
+        "color_counts_first_four_rounds": [
+          3,
+          7,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          6,
+          12
+        ]
+      },
+      {
+        "canonical_mask": 7,
+        "color_counts_first_four_rounds": [
+          3,
+          7,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          8,
+          6,
+          12
+        ]
+      },
+      {
+        "canonical_mask": 8,
+        "color_counts_first_four_rounds": [
+          3,
+          6,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          7
+        ]
+      },
+      {
+        "canonical_mask": 9,
+        "color_counts_first_four_rounds": [
+          3,
+          6,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          8,
+          7
+        ]
+      },
+      {
+        "canonical_mask": 10,
+        "color_counts_first_four_rounds": [
+          3,
+          7,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          6,
+          7
+        ]
+      },
+      {
+        "canonical_mask": 11,
+        "color_counts_first_four_rounds": [
+          3,
+          7,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          8,
+          6,
+          7
+        ]
+      },
+      {
+        "canonical_mask": 12,
+        "color_counts_first_four_rounds": [
+          3,
+          7,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          12,
+          7
+        ]
+      },
+      {
+        "canonical_mask": 13,
+        "color_counts_first_four_rounds": [
+          3,
+          7,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          8,
+          12,
+          7
+        ]
+      },
+      {
+        "canonical_mask": 14,
+        "color_counts_first_four_rounds": [
+          3,
+          7,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          6,
+          12,
+          7
+        ]
+      },
+      {
+        "canonical_mask": 15,
+        "color_counts_first_four_rounds": [
+          3,
+          5,
+          7,
+          7
+        ],
+        "full_elliptic_scheme_recovered": true,
+        "selected_concurrence_values": [
+          8,
+          6,
+          12,
+          7
+        ]
+      }
+    ],
+    "observable_predicates_checked_up_to_complement": 15,
+    "parity_graph_binary_image": "K=ker(A_0)",
+    "parity_graph_binary_rank": 36,
+    "parity_graph_valency": 28,
+    "parity_pair_signatures": {
+      "0": {
+        "adjacent": false,
+        "common_neighbors": 12
+      },
+      "1": {
+        "adjacent": false,
+        "common_neighbors": 8
+      },
+      "10": {
+        "adjacent": true,
+        "common_neighbors": 8
+      },
+      "12": {
+        "adjacent": true,
+        "common_neighbors": 7
+      },
+      "3": {
+        "adjacent": false,
+        "common_neighbors": 14
+      },
+      "9": {
+        "adjacent": false,
+        "common_neighbors": 11
+      }
+    },
+    "parity_relation_labels": [
+      10,
+      12
+    ],
+    "rho_zero_graph_binary_rank": 42,
+    "rho_zero_times_parity_is_zero": true,
+    "vertices": 78
+  },
+  "schema": "c1010-paper-review-ergodis-v1"
+}

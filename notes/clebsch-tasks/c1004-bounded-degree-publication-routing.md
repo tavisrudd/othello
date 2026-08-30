@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch`
 
-**Status:** Queued; C1001, C1007, and C1009 theorem packets frozen;
+**Status:** Queued; C1001, C1007, C1009, and C1010's component-count envelope frozen;
 publication decision only.
 
 ## Goal
@@ -12,7 +12,9 @@ the arcs paper, and banked low-degree curve material. Choose the smallest
 honest publication package and split any cross-lane implementation work
 explicitly. C1009's exact quadratic root should replace the coarse field
 window in any eventual theorem statement; its parity-linear bound is the
-readable low-degree corollary.
+readable low-degree corollary. C1010's Aubry--Perret/Bézout refinement should
+be the factor-sensitive version: the linear coefficient records rational
+geometric component count rather than total degree.
 
 ## Acceptance gate
 

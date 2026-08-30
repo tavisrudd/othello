@@ -2,8 +2,9 @@
 
 **Lane**: `clebsch`
 
-**Status:** Queued; C1005 criterion and C1008's exact \(q=13\) one-relation
-generator packet frozen; publication decision only.
+**Status:** Queued; C1005 criterion, C1008's exact \(q=13\) one-relation
+generator, and C1010's parity/universal one-bit packets frozen; publication
+decision only.
 
 ## Goal
 
@@ -14,6 +15,13 @@ retention as a reusable lemma. In particular, test whether a single
 unweighted relation graph generates the full coherent algebra in the other
 profiles. Treat the manuscript-ready language as draft options only; no
 manuscript has been edited.
+
+C1010 supplies the strongest Paper-IV input: the parity graph of pair
+concurrences recovers both the code and all six scheme relations after one
+common-neighbor refinement. More generally every nonconstant Boolean predicate
+of the five observed concurrence values has full coherent closure. Test this
+one-bit universality, not merely ordinary polynomial generation, against the
+other C968 profiles.
 
 ## Acceptance gate
 
