@@ -534,29 +534,23 @@ fn compile_completion_filters<const WORDS: usize>(
     columns: &[PackedColumn<WORDS>],
     key: fn(PackedSyndrome<WORDS>) -> u128,
 ) -> ([Box<[u128]>; 2], CompletionBloom, CompletionBloom) {
+    let (one, keys) = prepare_completion_keys(columns, key, 4);
     let mut short = [Vec::new(), Vec::new(), Vec::new()];
-    short[0].reserve(columns.len());
-    short[1].reserve(
-        columns
-            .len()
-            .saturating_mul(columns.len().saturating_sub(1))
-            / 2,
-    );
+    short[0] = one;
+    short[1].reserve(keys.len().saturating_mul(keys.len().saturating_sub(1)) / 2);
     short[2].reserve(
-        columns
-            .len()
-            .saturating_mul(columns.len().saturating_sub(1))
-            .saturating_mul(columns.len().saturating_sub(2))
+        keys.len()
+            .saturating_mul(keys.len().saturating_sub(1))
+            .saturating_mul(keys.len().saturating_sub(2))
             / 6,
     );
-    for left in 0..columns.len() {
-        let left_key = key(columns[left].syndrome);
-        short[0].push(left_key);
-        for middle in left + 1..columns.len() {
-            let pair_key = left_key ^ key(columns[middle].syndrome);
+    for left in 0..keys.len() {
+        let left_key = keys[left];
+        for middle in left + 1..keys.len() {
+            let pair_key = left_key ^ keys[middle];
             short[1].push(pair_key);
-            for right in columns.iter().skip(middle + 1) {
-                short[2].push(pair_key ^ key(right.syndrome));
+            for &right_key in keys.iter().skip(middle + 1) {
+                short[2].push(pair_key ^ right_key);
             }
         }
     }
@@ -570,21 +564,21 @@ fn compile_completion_filters<const WORDS: usize>(
             three_completion_bloom.insert_three(syndrome);
         }
     }
-    let quadruple_count = distinct_quadruple_count(columns.len());
+    let quadruple_count = distinct_quadruple_count(keys.len());
     let mut four_completion_bloom = CompletionBloom::new(quadruple_count);
     for syndromes in &short {
         for &syndrome in syndromes {
             four_completion_bloom.insert_one(syndrome);
         }
     }
-    for first in 0..columns.len() {
-        let first_key = key(columns[first].syndrome);
-        for second in first + 1..columns.len() {
-            let pair_key = first_key ^ key(columns[second].syndrome);
-            for third in second + 1..columns.len() {
-                let triple_key = pair_key ^ key(columns[third].syndrome);
-                for fourth in columns.iter().skip(third + 1) {
-                    four_completion_bloom.insert_one(triple_key ^ key(fourth.syndrome));
+    for first in 0..keys.len() {
+        let first_key = keys[first];
+        for second in first + 1..keys.len() {
+            let pair_key = first_key ^ keys[second];
+            for third in second + 1..keys.len() {
+                let triple_key = pair_key ^ keys[third];
+                for &fourth_key in keys.iter().skip(third + 1) {
+                    four_completion_bloom.insert_one(triple_key ^ fourth_key);
                 }
             }
         }
@@ -605,6 +599,33 @@ fn distinct_quadruple_count(item_count: usize) -> usize {
         / 24
 }
 
+/// Replace equal projected column keys by at most the number that any retained
+/// completion filter can consume.  For subsets of size at most `maximum`, this
+/// preserves the exact set of possible XOR keys while bounding multiplicity.
+fn prepare_completion_keys<const WORDS: usize>(
+    columns: &[PackedColumn<WORDS>],
+    key: fn(PackedSyndrome<WORDS>) -> u128,
+    maximum: usize,
+) -> (Vec<u128>, Vec<u128>) {
+    let mut sorted = Vec::with_capacity(columns.len());
+    sorted.extend(columns.iter().map(|column| key(column.syndrome)));
+    sorted.sort_unstable();
+    let mut unique = Vec::with_capacity(sorted.len());
+    let mut capped = Vec::with_capacity(sorted.len());
+    let mut start = 0usize;
+    while start < sorted.len() {
+        let value = sorted[start];
+        let mut end = start + 1;
+        while end < sorted.len() && sorted[end] == value {
+            end += 1;
+        }
+        unique.push(value);
+        capped.extend(std::iter::repeat_n(value, (end - start).min(maximum)));
+        start = end;
+    }
+    (unique, capped)
+}
+
 /// Memory-bounded completion filters for large codes.  Triple keys stream
 /// directly into the Bloom filter instead of materializing O(n^3) u128s;
 /// the optional four-completion rejection is conservatively disabled.
@@ -612,36 +633,33 @@ fn compile_large_completion_filters<const WORDS: usize>(
     columns: &[PackedColumn<WORDS>],
     key: fn(PackedSyndrome<WORDS>) -> u128,
 ) -> ([Box<[u128]>; 2], CompletionBloom, CompletionBloom) {
-    let pair_count = columns
-        .len()
-        .saturating_mul(columns.len().saturating_sub(1))
-        / 2;
-    let triple_count = pair_count.saturating_mul(columns.len().saturating_sub(2)) / 3;
-    let mut one = Vec::with_capacity(columns.len());
+    let (one, keys) = prepare_completion_keys(columns, key, 3);
+    let pair_count = keys.len().saturating_mul(keys.len().saturating_sub(1)) / 2;
+    let triple_count = pair_count.saturating_mul(keys.len().saturating_sub(2)) / 3;
     let mut two = Vec::with_capacity(pair_count);
     let mut three_completion_bloom = CompletionBloom::new(
-        columns
-            .len()
+        one.len()
             .saturating_add(pair_count)
             .saturating_add(triple_count),
     );
-    for left in 0..columns.len() {
-        let left_key = key(columns[left].syndrome);
-        one.push(left_key);
-        three_completion_bloom.insert_three(left_key);
-        for middle in left + 1..columns.len() {
-            let pair_key = left_key ^ key(columns[middle].syndrome);
+    for &key in &one {
+        three_completion_bloom.insert_three(key);
+    }
+    for left in 0..keys.len() {
+        let left_key = keys[left];
+        for middle in left + 1..keys.len() {
+            let pair_key = left_key ^ keys[middle];
             two.push(pair_key);
-            three_completion_bloom.insert_three(pair_key);
-            for right in columns.iter().skip(middle + 1) {
-                three_completion_bloom.insert_three(pair_key ^ key(right.syndrome));
+            for &right_key in keys.iter().skip(middle + 1) {
+                three_completion_bloom.insert_three(pair_key ^ right_key);
             }
         }
     }
-    one.sort_unstable();
-    one.dedup();
     two.sort_unstable();
     two.dedup();
+    for &key in &two {
+        three_completion_bloom.insert_three(key);
+    }
     (
         [one.into_boxed_slice(), two.into_boxed_slice()],
         three_completion_bloom,
@@ -3554,6 +3572,23 @@ impl CompiledCssDistance {
 mod tests {
     use super::*;
 
+    fn subset_xors(keys: &[u128], size: usize) -> Vec<u128> {
+        let mut output = Vec::new();
+        for mask in 0_usize..1_usize << keys.len() {
+            if mask.count_ones() as usize == size {
+                output.push(
+                    keys.iter()
+                        .enumerate()
+                        .filter(|(index, _)| mask & (1_usize << index) != 0)
+                        .fold(0, |value, (_, &key)| value ^ key),
+                );
+            }
+        }
+        output.sort_unstable();
+        output.dedup();
+        output
+    }
+
     fn brute_force(physical: &Matrix, logical: &Matrix, maximum: u16) -> Option<u16> {
         let n = physical.cols();
         (1usize..1usize << n)
@@ -3664,6 +3699,45 @@ mod tests {
                 packed_dot_parity(syndrome, compiled.kernel_parity_functional),
                 support.count_ones() & 1
             );
+        }
+    }
+
+    #[test]
+    fn multiplicity_capping_preserves_all_retained_completion_keys() {
+        let keys = [1_u128, 1, 1, 1, 2, 2, 4];
+        let columns = keys
+            .iter()
+            .map(|&key| PackedColumn::<3> {
+                syndrome: PackedSyndrome {
+                    words: [key as u64, 0, 0],
+                },
+                logical: 0,
+            })
+            .collect::<Vec<_>>();
+        let (unique, capped_three) = prepare_completion_keys(&columns, wide_syndrome_key, 3);
+        assert_eq!(unique, vec![1, 2, 4]);
+        assert_eq!(capped_three, vec![1, 1, 1, 2, 2, 4]);
+
+        let expected = (1..=4)
+            .map(|size| subset_xors(&keys, size))
+            .collect::<Vec<_>>();
+        let (short, triple_bloom, _) =
+            compile_large_completion_filters(&columns, wide_syndrome_key);
+        assert_eq!(short[0].as_ref(), expected[0]);
+        assert_eq!(short[1].as_ref(), expected[1]);
+        for value in expected.iter().take(3).flatten() {
+            assert!(triple_bloom.contains_three(*value));
+        }
+
+        let (full_short, full_triple_bloom, four_bloom) =
+            compile_completion_filters(&columns, wide_syndrome_key);
+        assert_eq!(full_short[0].as_ref(), expected[0]);
+        assert_eq!(full_short[1].as_ref(), expected[1]);
+        for value in expected.iter().take(3).flatten() {
+            assert!(full_triple_bloom.contains_three(*value));
+        }
+        for &value in &expected[3] {
+            assert!(four_bloom.contains_one(value));
         }
     }
 
