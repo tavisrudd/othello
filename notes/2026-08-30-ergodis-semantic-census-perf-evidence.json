@@ -1,0 +1,83 @@
+{
+  "schema": "ergodis.semantic-census-perf-evidence.v1",
+  "date": "2026-08-30",
+  "binary": "ergodis-private/target/release/semantic_affine_census",
+  "toolchain": "rustc 1.87.0 (17067e9ac 2025-05-09)",
+  "host": "AMD Ryzen AI 9 HX 370",
+  "protocol": {
+    "cpu": 2,
+    "governor": "performance",
+    "boost": false,
+    "oom_score_adjust": 500,
+    "counter_command": "choom -n 500 -- perf stat -r N -e task-clock,cycles,instructions,branches,branch-misses,cache-misses taskset -c 2 BIN"
+  },
+  "baseline": {
+    "runs": 7,
+    "elapsed_seconds": 0.176365327,
+    "task_clock_ms": 175.22,
+    "cycles": 872768395,
+    "instructions": 3919366438,
+    "branches": 153084200,
+    "branch_misses": 704547,
+    "cache_misses": 12600
+  },
+  "final": {
+    "runs": 11,
+    "elapsed_seconds": 0.043724886,
+    "task_clock_ms": 42.78,
+    "cycles": 206064257,
+    "instructions": 1021979911,
+    "branches": 62309158,
+    "branch_misses": 26718,
+    "cache_misses": 12164,
+    "speedup": 4.0335,
+    "cycle_reduction_fraction": 0.7639,
+    "instruction_reduction_fraction": 0.7392,
+    "objects_per_second": 107188959,
+    "cycles_per_object": 43.97,
+    "instructions_per_object": 218.05,
+    "maximum_rss_kib": 2388
+  },
+  "landed_reductions": [
+    "derive the third overlap in each ternary parallel class",
+    "Gosper fixed-cardinality mask successors",
+    "construction-time POPCNT/SSE4.1 dispatch with packed maxima",
+    "pre-sized exact Fibonacci mask set",
+    "cross-crate fusion of enumeration and reduction",
+    "iterative four-generator affine orbit closure with transporter witnesses"
+  ],
+  "rejected_hardware_variants": [
+    {
+      "name": "AVX-512 VPOPCNT store/scalar-reduce",
+      "elapsed_seconds": 0.089531467,
+      "cycles": 428779689,
+      "instructions": 1533762128,
+      "reason": "lane extraction and scalar reduction dominate 26 counts"
+    },
+    {
+      "name": "AVX-512 VPOPCNT compress/packed-max",
+      "elapsed_seconds": 0.107202408,
+      "cycles": 519695465,
+      "instructions": 1007787475,
+      "reason": "ZMM setup and rearrangement reduce instructions but increase cycles"
+    },
+    {
+      "name": "AVX2 scalar-POPCNT packed-max",
+      "elapsed_seconds": 0.103174555,
+      "cycles": 504553028,
+      "instructions": 1129964569,
+      "reason": "population counts stay scalar and mixed-width reduction expands"
+    }
+  ],
+  "exact_output_invariants": {
+    "ambient_subsets": 4686825,
+    "maximum_plane_overlap_histogram": [0, 0, 0, 0, 2106, 2070198, 2393352, 214812, 6318, 39],
+    "minimum_stratum_size": 2106,
+    "minimum_stratum_all_caps": true,
+    "minimum_stratum_orbit_size": 2106,
+    "stabilizer_order": 144,
+    "labelled_objects": 6890,
+    "labelled_maximum_plane_overlap_histogram": [0, 0, 0, 0, 0, 4004, 2808, 78, 0, 0],
+    "labelled_in_minimum_stratum": 0
+  }
+}
