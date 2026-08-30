@@ -157,13 +157,21 @@ fn profile_labelled(path: &PathBuf, planes: Vec<u64>) -> anyhow::Result<(u64, Ve
     let mut profiler = MaxOverlapProfiler::new(planes, 9);
     let mut total = 0_u64;
     for line in lines.filter(|line| !line.is_empty()) {
-        let fields: Vec<&str> = line.split('\t').collect();
-        let weight = weight_column
-            .map(|column| fields[column].parse())
-            .transpose()?
-            .unwrap_or(1_u64);
+        let mut support_field = None;
+        let mut weight = 1_u64;
+        for (column, field) in line.split('\t').enumerate() {
+            if column == support_column {
+                support_field = Some(field);
+            }
+            if Some(column) == weight_column {
+                weight = field.parse()?;
+            }
+        }
         let mut mask = 0_u64;
-        for point in fields[support_column].split(',') {
+        for point in support_field
+            .ok_or_else(|| anyhow::anyhow!("short labelled TSV row"))?
+            .split(',')
+        {
             mask |= 1_u64 << point.parse::<u8>()?;
         }
         if mask.count_ones() != 9 {
