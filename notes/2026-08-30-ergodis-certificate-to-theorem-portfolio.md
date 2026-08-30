@@ -325,11 +325,14 @@ The exact ambient complement also canonicalizes cleanly.  Among all
 `C(27,9)=4,686,825` nine-sets, exactly 2,106 have maximum plane overlap four;
 every one is a nine-cap.  Applying all 303,264 affine transformations to the
 first cap produces exactly those 2,106 masks, with stabilizer order 144.  Thus
-there is one hostile `AGL(3,3)` orbit.  The most economical proof of the
-five-coplanar-point lemma is now to choose one cap normal form, compute the
-affine transformation law of `(g2,g3)`, and prove that `(0,0)` is absent on
-that orbit.  This is a much smaller target than classifying 6,890 positive
-locators.
+there is one geometric `AGL(3,3)` orbit.  Red-team correction: this does not
+reduce the fixed Hankel label to one case, because a general `F3`-affine map
+does not preserve GF(27) multiplication.  The field-semilinear affine group is
+also transitive on the caps, but translation transports the `e_3` syndrome.
+Its fixed-label stabilizer `GammaL(1,27)` has cap orbits of size 78, so there
+are 27 residual cap classes.  The sound proof target is to canonicalize
+`(cap,syndrome)` pairs under the transported action, or check those 27
+fixed-label representatives—not to apply blind affine symmetry.
 
 The ambient claim is now reproduced by the Rust semantic engine rather than a
 one-off Python loop.  `semantic-affine-census` compiles the 39 planes and 117
@@ -448,9 +451,9 @@ lowered to an explicit stack before input-scaled use.
   category, have affine-plane replacement distance at most four; the 78 good
   switches are exactly the distance-two stratum.
 - **Found:** the only ambient obstruction to five coplanar points is one
-  2,106-element affine orbit of nine-caps (stabilizer 144).  A source-language
-  affine-action exclusion of `g2=g3=0` would turn the exact census into a
-  structural theorem.
+  2,106-element geometric affine orbit of nine-caps (stabilizer 144), but the
+  fixed Hankel label leaves 27 field-semilinear cap classes.  A paired
+  cap/syndrome action or a 27-representative exclusion is needed for a theorem.
 
 **EJ.** A successful C896 state quotient would provide the first literal
 weighted-automaton/minimal-realization instance for the broader Ergodis thesis.

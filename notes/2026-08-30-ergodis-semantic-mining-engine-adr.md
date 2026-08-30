@@ -50,13 +50,15 @@ automated engine should surface the candidate lemma
 
 without requiring a human to hand-write three successive Python probes.
 
-The next canonicalization pass sharpens this further.  All 2,106 overlap-four
-sets are nine-caps, and the affine group `AGL(3,3)` is transitive on them: its
-order is 303,264, the orbit has size 2,106, and the stabilizer has order 144.
-Thus the hostile stratum also has semantic size one.  The proof target becomes
-an affine-action calculation showing that the orbit of one cap normal form
-cannot satisfy `g2=g3=0`.  Mining plans must therefore canonicalize nearest
-negative strata as aggressively as positive witnesses.
+The next geometric canonicalization pass sharpens this further.  All 2,106
+overlap-four sets are nine-caps, and `AGL(3,3)` is transitive on them: its order
+is 303,264, the orbit has size 2,106, and the stabilizer has order 144.  This is
+**not** yet a one-case Hankel proof.  Arbitrary `F3`-affine maps do not preserve
+GF(27) multiplication or the fixed label `g2=g3=0`.  Even the relevant
+`AGammaL(1,27)` action moves the `e_3` syndrome under translations.  The fixed
+label stabilizer `GammaL(1,27)` has orbit size 78 on a cap, leaving 27 cap
+orbits.  A sound canonicalizer must either prove label preservation or carry
+the transformed label and quotient `(object,label)` pairs.
 
 ## Plan algebra
 
@@ -90,6 +92,9 @@ columns but may not serialize.  `reduce` must declare its memory bound and
 retention policy.  `canonicalize` runs only on a reducer's bounded retained
 set unless explicitly supplied a streamed orbit partition.  This prevents an
 innocent plan from materializing the full search corpus.
+Every `canonicalize under action` op must declare whether the action preserves
+the label, transports it through an exact action adapter, or is diagnostic
+only.  The verifier rejects a proof packet built from a diagnostic quotient.
 
 ## Recipe model
 
@@ -185,7 +190,7 @@ from becoming the permanent execution architecture.
 2. Port affine-subspace enumeration and cap recognition, using fixed arrays for
    small prime-field dimensions.
 3. Add orbit closure from declared generators and emit one representative plus
-   stabilizer/transporter certificates.
+   stabilizer/transporter certificates, with exact label-action typing.
 4. Port exact parametric fitting and match fitted coefficient rows against a
    catalogue of classical actions (divided powers, Frobenius, torus, affine).
 5. Join feature outputs into a bounded separator search and exceptional-state
@@ -211,6 +216,8 @@ from becoming the permanent execution architecture.
 - Recover the known divided-power translation identity from the recipe output.
 - Find the 2,106 ambient nine-caps as the unique overlap-four stratum and show
   zero intersection with the `e_3` label.
+- Reject `AGL(3,3)` as a proof quotient for the fixed Hankel label; accept it
+  only as diagnostic geometry until a paired syndrome action is supplied.
 - Run one C80 and one C896 recipe without adding either problem's vocabulary to
   the kernel layer.
 - Demonstrate zero allocations in measured Rust feature hot loops and bounded
