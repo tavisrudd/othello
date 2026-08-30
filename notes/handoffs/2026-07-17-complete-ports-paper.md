@@ -542,7 +542,11 @@ Sequel research:
   absorbing separated flags or bipartite parity-component closures, followed
   by a proof-producing replay path. A caller-buffered signature and exhaustive
   five-point equal-optimum control pass; literal syntactic trace congruence is
-  deliberately not claimed.
+  deliberately not claimed. The first census is weak (`1,024 -> 1,015`, with
+  all merges near saturation), so an eight-point streamed collision census is
+  now the admission gate before implementing closure interning. If it is
+  similarly sparse, aggregate rank bounds and proof production outrank this
+  quotient.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

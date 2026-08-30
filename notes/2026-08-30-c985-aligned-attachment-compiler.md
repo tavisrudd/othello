@@ -251,8 +251,17 @@ dominated; thus the claim is optimization equivalence, not literal trace
 congruence. Exhaustive five-point grouping by cardinality and closure signature
 confirms equal exact completion distance in every class. The signature writer
 uses caller storage and allocates nothing. The 26 capacity failures show that
-compiling and interning this semantic closure, rather than enlarging syntactic
-mask tables again, is the highest-EV successor.
+testing this semantic closure is preferable to enlarging syntactic mask tables
+again.
+
+The first exact census substantially lowers that admission estimate. At five
+points, cardinality plus closure reduces only `1,024 -> 1,015` states; the
+per-cardinality counts are `1,10,45,120,210,252,210,120,45,1,1`, so all nine
+merges occur at the nearly complete cardinality-nine layer. The quotient is
+correct but not yet a scaling win. Before building an interner, the next gate
+is a streamed collision census over a bounded prefix of real eight-point
+search states. Low collision density would redirect effort to aggregate rank
+bounds and proof production instead.
 
 Three further hot-path alternatives are rejected. Incidence-maximizing ties
 between equally short branch clauses increase the rooted control from 8,759 to
