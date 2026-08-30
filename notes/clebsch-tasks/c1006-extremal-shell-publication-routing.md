@@ -2,11 +2,12 @@
 
 **Lane**: `clebsch`
 
-**Status:** Queued after C1005; publication decision only.
+**Status:** Queued; C1005 math packet and exact \(q=13\) cyclic-generator
+certificate frozen; publication decision only.
 
 ## Goal
 
-Evaluate C1005 with C968's five reconstruction profiles and other banked sparse-shadow families, then choose between a Paper IV mechanism upgrade, series-level synthesis, a standalone reconstruction paper, or retention as a reusable lemma.
+Evaluate C1005 with C968's five reconstruction profiles and other banked sparse-shadow families, then choose between a Paper IV mechanism upgrade, series-level synthesis, a standalone reconstruction paper, or retention as a reusable lemma.  Treat the manuscript-ready language in C1005 as a draft option only; no manuscript has been edited.
 
 ## Acceptance gate
 

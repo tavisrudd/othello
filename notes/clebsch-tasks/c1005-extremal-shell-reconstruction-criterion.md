@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch`
 
-**Status:** Math packet proved; no manuscript edits.  The spectral criterion,
+**Status:** Reported 2026-08-30; no manuscript edits.  The spectral criterion,
 coherent-closure correction, and exact no-go statements are separated below.
 The \(q=13\) pair matrix satisfies the strongest spectral criterion, with a
 new exact certificate.

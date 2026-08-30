@@ -156,8 +156,7 @@ any of the above.
 | [C896 — corrected universal finite-group socle theorem](../clebsch-tasks/c896-corrected-universal-socle-theorem.md) | queued future mathematics; independent of Paper II | run `q=9,25` and exponent-three reconnaissance, then attempt a carry/borrow theorem only if the data support one |
 | [C968 — sparse-shadow reconstruction and canonicalization](../clebsch-tasks/c968-sparse-shadow-reconstruction-canonicalization.md) | Papers I, II, IV, and V canonicalization, full automorphism, reconstruction, independent replay, zero-allocation, golden/backend gates green; Paper III remains at its exact source gate | the owning Paper-III stream must freeze its complete named export; then resume that adapter's action/arithmetic and reference-orbit gates |
 | [C1004 — bounded-degree publication routing](../clebsch-tasks/c1004-bounded-degree-publication-routing.md) | queued; C1001/C1007 theorem packets frozen; decision only | audit and choose the smallest Paper I/companion/arcs-paper or standalone package |
-| [C1005 — extremal-shell reconstruction criterion](../clebsch-tasks/c1005-extremal-shell-reconstruction-criterion.md) | queued math-first; no manuscript edits | prove the spectral/coherent reconstruction theorem and corrected no-go boundary |
-| [C1006 — extremal-shell publication routing](../clebsch-tasks/c1006-extremal-shell-publication-routing.md) | queued after C1005; decision only | test against C968 and banked families, then choose integration, spinoff, or reusable-lemma status |
+| [C1006 — extremal-shell publication routing](../clebsch-tasks/c1006-extremal-shell-publication-routing.md) | queued; C1005 math packet and q13 certificate frozen; decision only | test against C968 and banked families, then choose Paper IV strengthening, series synthesis, spinoff, or reusable-lemma status |
 
 C756 optional stuck-state/review reading:
 [`c756-proof-expert-dossier.md`](../clebsch-tasks/c756-proof-expert-dossier.md).
