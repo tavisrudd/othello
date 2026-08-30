@@ -1,0 +1,215 @@
+{
+  "marking": {
+    "a5_stabilizer_order": 60,
+    "base_axis_pairs_in_export_point_order": [
+      [
+        6,
+        10
+      ],
+      [
+        4,
+        7
+      ],
+      [
+        2,
+        9
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        8,
+        11
+      ]
+    ],
+    "h3_matching_orbit_size": 22,
+    "pgl_order": 1320
+  },
+  "metric_shadow": {
+    "automorphism_identification": "PGL(2,11)",
+    "four_set_gram_character_counts": {
+      "negative": 330,
+      "positive": 165
+    },
+    "isotropic_points": 12,
+    "normalized_determinant_square_class": "chi(lambda^2-lambda+1)",
+    "orthogonal_distinct_pairs": 0,
+    "pointwise_ordered_triple_stabilizer": 1,
+    "positive_blocks_are_harmonic_quadruples": true,
+    "positive_design": {
+      "pair_degree": 15,
+      "parameters": "3-(12,4,3)",
+      "point_degree": 55
+    },
+    "positive_design_automorphism_order": 1320,
+    "triangle_gram_character_counts": {
+      "negative": 0,
+      "positive": 220
+    }
+  },
+  "pair_membership_queries": {
+    "adaptive_all_no_remaining_candidates": [
+      20,
+      21
+    ],
+    "adaptive_branch_separators": [
+      [
+        0,
+        7
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        6,
+        8
+      ],
+      [
+        0,
+        8
+      ],
+      [
+        3,
+        10
+      ],
+      [
+        0,
+        12
+      ],
+      [
+        0,
+        14
+      ],
+      [
+        3,
+        16
+      ],
+      [
+        1,
+        18
+      ],
+      [
+        2,
+        20
+      ]
+    ],
+    "adaptive_first_ten_query_edges": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        14,
+        15
+      ],
+      [
+        16,
+        17
+      ],
+      [
+        18,
+        19
+      ]
+    ],
+    "candidate_count": 22,
+    "candidates_per_query": 2,
+    "nonadaptive_witness_isolated_candidate": 0,
+    "nonadaptive_witness_query_edges": [
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        6,
+        8
+      ],
+      [
+        2,
+        9
+      ],
+      [
+        9,
+        21
+      ],
+      [
+        5,
+        13
+      ],
+      [
+        13,
+        16
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        11,
+        12
+      ],
+      [
+        14,
+        15
+      ],
+      [
+        14,
+        17
+      ],
+      [
+        18,
+        19
+      ],
+      [
+        19,
+        20
+      ]
+    ],
+    "optimal_adaptive_queries": 11,
+    "optimal_nonadaptive_queries": 14,
+    "query_count": 66,
+    "query_graph_degree": 6
+  },
+  "schema": "c1011-paper-v-unmarked-shadow-v1"
+}
