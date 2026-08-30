@@ -157,8 +157,20 @@ reduces a complete 127-cut pass from 34.77 ms to 8.14 ms, a 4.27x speedup. A
 three-round, 100-pass counter run is stable to 0.13% and gives 236.1 million
 instructions, 40.39 million cycles, about 1,200 branch misses, and 178 cache
 misses per complete pass. The next backend step is to expose this batched
-separator at fractional MIP nodes or consume it in the native LP lower bound;
-more integer lazy-cut tuning has low expected value.
+separator at fractional MIP nodes or consume it in the native LP lower bound.
+
+That boundary is now exercised through a persistent binary sidecar. Each
+request sends 448 bytes of fractional query weights; the Rust process returns
+up to sixteen `(cut, mask, weight)` records and stays near 2 MiB RSS. At a
+100-node pulse, Gurobi adds 31,941 exact user cuts in 2,586 calls during 300
+seconds. A corrected same-node schedule adds 31,772 cuts in 2,569 calls. Both
+runs retain bound 15 and incumbent 17, visiting 260,318 and 258,665 nodes;
+the integer-only `4 x 4` control visits 273,890. Thus the first-order context
+inequalities reduce reported Gurobi work slightly (`459.62 -> 423.70`) but do
+not improve the certified bound and cost about 5.6% node throughput. This is a
+measured negative for C880, not a defect in the separator. The next useful
+bound must aggregate contexts into cover/rank inequalities or branch in the
+compiled quotient; more lazy/user-cut pulse tuning has low expected value.
 
 ## Boundary and next gate
 

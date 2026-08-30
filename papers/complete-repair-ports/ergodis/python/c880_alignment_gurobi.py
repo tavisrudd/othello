@@ -6,6 +6,8 @@ from __future__ import annotations
 import itertools
 import json
 import os
+import struct
+import subprocess
 import sys
 import time
 
@@ -116,6 +118,7 @@ def main() -> None:
     model.Params.OutputFlag = 1
     model.Params.Threads = 16
     model.Params.LazyConstraints = 1
+    model.Params.PreCrush = 1
     if seconds := os.environ.get("ERGODIS_ALIGNMENT_SECONDS"):
         model.Params.TimeLimit = float(seconds)
     variables = model.addVars(len(TRIPLES), vtype=GRB.BINARY, name="triple")
@@ -125,12 +128,69 @@ def main() -> None:
     model.addConstr(variables.sum() >= 15, name="proved_weight_mask_lower_bound")
     model.setObjective(variables.sum(), GRB.MINIMIZE)
     lazy_count = 0
+    fractional_count = 0
+    fractional_calls = 0
+    last_fractional_node = -1.0
     orbit_cursor = 0
     added_clauses: set[int] = set()
     started = time.perf_counter()
+    separator = None
+    separator_path = os.environ.get("ERGODIS_ALIGNMENT_SEPARATOR")
+    fractional_period = float(os.environ.get("ERGODIS_ALIGNMENT_FRACTIONAL_PERIOD", "100"))
+    if separator_path:
+        separator = subprocess.Popen(
+            [separator_path],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            bufsize=0,
+        )
+
+    def read_exact(stream, length: int) -> bytes:
+        chunks = bytearray(length)
+        view = memoryview(chunks)
+        offset = 0
+        while offset < length:
+            count = stream.readinto(view[offset:])
+            if not count:
+                raise RuntimeError("fractional separator closed its response stream")
+            offset += count
+        return bytes(chunks)
 
     def callback(active: gp.Model, where: int) -> None:
-        nonlocal lazy_count, orbit_cursor
+        nonlocal lazy_count, fractional_count, fractional_calls, last_fractional_node, orbit_cursor
+        if where == GRB.Callback.MIPNODE and separator is not None:
+            if active.cbGet(GRB.Callback.MIPNODE_STATUS) != GRB.OPTIMAL:
+                return
+            node = active.cbGet(GRB.Callback.MIPNODE_NODCNT)
+            if node != last_fractional_node and node < last_fractional_node + fractional_period:
+                return
+            last_fractional_node = node
+            values = active.cbGetNodeRel(variables)
+            assert separator.stdin is not None and separator.stdout is not None
+            separator.stdin.write(
+                struct.pack(
+                    "<56d",
+                    *(max(0.0, min(1.0, values[index])) for index in range(len(TRIPLES))),
+                )
+            )
+            separator.stdin.flush()
+            count = struct.unpack("<I", read_exact(separator.stdout, 4))[0]
+            response = read_exact(separator.stdout, 24 * count)
+            for offset in range(count):
+                _cut, clause, weight = struct.unpack_from("<QQd", response, 24 * offset)
+                if weight >= 1.0 - 1e-8:
+                    continue
+                active.cbCut(
+                    gp.quicksum(
+                        variables[index]
+                        for index in range(len(TRIPLES))
+                        if clause >> index & 1
+                    )
+                    >= 1
+                )
+                fractional_count += 1
+            fractional_calls += 1
+            return
         if where != GRB.Callback.MIPSOL:
             return
         values = active.cbGetSolution(variables)
@@ -160,7 +220,13 @@ def main() -> None:
                 )
                 lazy_count += 1
 
-    model.optimize(callback)
+    try:
+        model.optimize(callback)
+    finally:
+        if separator is not None:
+            assert separator.stdin is not None
+            separator.stdin.close()
+            separator.wait(timeout=5)
     if model.Status != GRB.OPTIMAL:
         record = {
             "points": 8,
@@ -169,6 +235,8 @@ def main() -> None:
             "incumbent": model.ObjVal if model.SolCount else None,
             "best_bound": model.ObjBound,
             "lazy_constraints": lazy_count,
+            "fractional_calls": fractional_calls,
+            "fractional_constraints": fractional_count,
             "orbit_batch": orbit_batch,
             "context_batch": context_batch,
             "nodes": model.NodeCount,
@@ -191,6 +259,8 @@ def main() -> None:
         "family_indices": [index for index, keep in enumerate(selected) if keep],
         "family_triples": [TRIPLES[index] for index, keep in enumerate(selected) if keep],
         "lazy_constraints": lazy_count,
+        "fractional_calls": fractional_calls,
+        "fractional_constraints": fractional_count,
         "orbit_batch": orbit_batch,
         "context_batch": context_batch,
         "nodes": model.NodeCount,
