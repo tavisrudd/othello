@@ -3878,8 +3878,17 @@
       "last": 1008,
       "purpose": "ergodis-controlled sparse-shadow theorem search: scalar six-local criterion and q13 one-relation generation",
       "sequence": 431
+    },
+    {
+      "count": 1,
+      "first": 1009,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 1009,
+      "purpose": "ergodis-controlled exact-root and parity-linear bounded-degree uncovered-locus refinement",
+      "sequence": 432
     }
   ],
-  "next_id": 1009,
+  "next_id": 1010,
   "schema": "codex-task-id-allocations-v1"
 }
