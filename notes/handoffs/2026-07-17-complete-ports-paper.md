@@ -446,6 +446,12 @@ Sequel research:
   rank filter, power recurrence, and fixed labelled reducer allocate nothing
   per candidate, and an exhaustive `2 x 2` oracle plus allocation-growth gate
   pass.  Misses remain bounded negatives, not indecomposability claims.
+  Work Package B has also landed its first theorem import: arbitrary rowspace
+  functionals now recognize the exact even-kernel condition and parity-round
+  residual degree and packing bounds without hot-loop allocation or a
+  run-constant branch.  On a diagnostic three-pair, 500-round Gross A/B this
+  removes 28.91% of candidates and 19.2% of cycles, while one-shot cold time
+  remains compile-dominated.  Higher residues and moment images remain open.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

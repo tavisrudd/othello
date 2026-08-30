@@ -7,7 +7,8 @@
 landed locally; no external claim or release decision
 
 Progress record:
-`2026-08-29-c985-ergodis-commutant-foundation.md`.
+`2026-08-29-c985-ergodis-commutant-foundation.md` and
+`2026-08-29-c985-ergodis-modular-parity-presolve.md`.
 
 This plan turns the portfolio review in
 `2026-08-29-ergodis-commercialization-analysis-memo.md` into an ordered
@@ -99,6 +100,13 @@ held-out family shows either a twofold search-state reduction or a twofold
 compile/RSS reduction without a material regression on small instances.
 
 ## 4. Work package B: modular and moment presolve
+
+The first exact import is complete.  Labelled elimination now recovers an
+arbitrary functional proving that the physical kernel is even, and the hot
+backend parity-rounds both syndrome-degree and disjoint-packing completion
+bounds.  On the diagnostic Gross control this removes 28.91% of candidates
+and 19.2% of cycles across three paired 500-round runs; cold compilation still
+dominates a one-shot solve.  Higher residues and moment images remain open.
 
 ### Theorem input
 
