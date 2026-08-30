@@ -2329,7 +2329,10 @@ mod-3-compatible fixed common multiplier subgroups are impossible — a publishe
 proof-carrying baseline reproduced, then extended by a nine-compression congruence and a shift-111
 orbit lock whose exact six-case census also proves the lock is exhausted on the five survivors. Every
 order-six subgroup is closed and the paired residual cases are the live target. No Legendre pair and
-no matrix of order 668 is constructed, and unrestricted order 668 remains open. A companion attack on
+no matrix of order 668 is constructed here. Existence at order 668 was settled externally on
+2026-08-12 (an Anthropic team's announcement covering all twelve previously open orders below
+2000, method undisclosed), so the residual census now bears only on the Legendre-pair question at
+length 333. A companion attack on
 `M(18) ∈ {57,58,59}` by Seidel-spectrum census is queued and has produced nothing yet.
 
 **How much an aligned reconstruction costs.** The passages paper proves aligned four-sets determine

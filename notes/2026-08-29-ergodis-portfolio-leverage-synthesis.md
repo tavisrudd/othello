@@ -168,14 +168,13 @@ golden operator programme, Hadamard 668, and the E8 code ladder; and the
 
 ## D. Showcases (prestige and demonstration, not revenue)
 
-1. **Hadamard order 668.** The residual-multiplier census reduced the
-   Legendre-pair route to five subgroup cases by congruence and orbit-lock
-   proofs. A theorem-guided parallel search over the surviving cases, with
-   per-shard coverage certificates, is a recognisable open problem with a
-   natural sharding theorem and an audience that understands certificates.
-   High visibility, uncertain outcome; appropriate as the cluster
-   demonstration for the parallelism story only if a bounded first shard
-   shows the search is within reach.
+1. **Hadamard order 668 — withdrawn as a showcase.** Existence at order 668
+   was settled on 2026-08-12 by an Anthropic team (announced as an encoded
+   matrix with a decoder; method undisclosed), together with the other eleven
+   open orders below 2000. The residual-multiplier census (C736--C741) now
+   bears only on whether a *Legendre pair* of length 333 exists, which is a
+   narrower question with a smaller audience. It is no longer a
+   parallelism showcase; the QDistSAT sweep is the showcase.
 
 2. **The QDistSAT suite and `LP_1768_224`.** Still the most legible result
    in the quantum vertical, and the first place item A.1 should be measured.
@@ -203,7 +202,7 @@ ergodis beyond the symmetry-transfer pattern already recorded.
 | B.3 repair-multiplicity certificates | reach | days | reliability buyers; patent-light | storage adapter |
 | B.2 robust state certification | reach | months | new adjacent market | quantum networking |
 | B.5 strategy certificates | reach | months | EDA vocabulary; long shot | observational compiler |
-| D.1 Hadamard 668 | showcase | unknown | prestige | parallelism story |
+| D.1 Hadamard 668 | withdrawn | — | settled externally 2026-08-12 | — |
 
 Recommended allocation: one `complete-ports` task for A.1 with the QDistSAT
 sweep as its measurement gate (the sweep is needed anyway); one for A.2/C.3;

@@ -3331,9 +3331,15 @@ their argument is altered.
 
 ### Residual multipliers for Hadamard order 668
 
-Order \(668=4\cdot167\) is one of the smallest open Hadamard orders, and the
-Legendre-pair route reduces to a census of possible fixed common multiplier
-subgroups for length \(333\). Of the \(30\) mod-\(3\)-compatible subgroups,
+Order \(668=4\cdot167\) was, until August 2026, the smallest order with no
+known Hadamard matrix. On 2026-08-12 a team at Anthropic (Levent Alpöge with
+two colleagues and Claude) announced constructions for order 668 and the
+eleven other previously open admissible orders below 2000, released as an
+encoded string with a decoder rather than a paper; the construction method is
+undisclosed and no independent write-up has appeared. The results recorded
+here predate that announcement and concern the Legendre-pair route, which
+reduces to a census of possible fixed common multiplier subgroups for length
+\(333\); they remain valid as statements about that route. Of the \(30\) mod-\(3\)-compatible subgroups,
 \(21\) were excluded by published proof-carrying work; that baseline is
 reproduced here and pushed to \(25\) by two independent mechanisms.
 
@@ -3370,8 +3376,9 @@ than merely untried.
 
 Hence \(25\) of the \(30\) subgroups are impossible, five residual cases remain,
 and every subgroup of order six is closed. No Legendre pair and no Hadamard
-matrix of order \(668\) is constructed here, and unrestricted order \(668\)
-remains open.
+matrix of order \(668\) is constructed here; existence at order \(668\) is now
+settled externally, so the residual census is of interest only for the
+Legendre-pair question at length \(333\).
 
 ### A code ladder along the exceptional root systems — pre-empted
 
