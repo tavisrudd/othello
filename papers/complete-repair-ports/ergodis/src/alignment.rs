@@ -638,6 +638,18 @@ impl AlignmentSearchWorkspace {
         if fixed == 0 || fixed >> problem.triples.len() != 0 {
             return Err(AlignmentError::Family);
         }
+        for map in self.symmetry_maps.chunks_exact(56) {
+            let mut image = 0_u64;
+            let mut bits = fixed;
+            while bits != 0 {
+                let triple = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                image |= 1_u64 << map[triple];
+            }
+            if image != fixed {
+                return Err(AlignmentError::Family);
+            }
+        }
         let fixed_count = fixed.count_ones() as usize;
         let maximum_added = self.frames.len() - 1;
         if fixed_count > maximum_added || maximum_added - fixed_count > 16 {
@@ -1111,6 +1123,12 @@ mod tests {
     #[test]
     fn compact_seen_keys_are_exact_and_preserve_search() {
         let problem = compile_alignment_attachment(5).unwrap();
+        let mut incompatible = AlignmentSearchWorkspace::new(9, 1 << 10).unwrap();
+        incompatible.set_point_stabilizer(&problem, 1).unwrap();
+        assert_eq!(
+            incompatible.enable_compact_seen(&problem, 3),
+            Err(AlignmentError::Family)
+        );
         let mut workspace = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
         assert_eq!(workspace.enable_compact_seen(&problem, 1).unwrap(), 5 << 18);
         assert_eq!(workspace.seen_storage_bytes(), 5 << 18);
