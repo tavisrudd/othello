@@ -548,4 +548,30 @@ mod tests {
         assert_eq!(workspace.right_match.as_ptr(), pointers.1);
         assert_eq!(workspace.queue.as_ptr(), pointers.2);
     }
+
+    #[test]
+    fn c80_q11_direct_certificate_consumption_has_global_hall_surplus() {
+        // C80 q=11 one-to-many witness. Right labels are the two consumed
+        // certificate replies (2,9) and (7,10); the second new defect can use
+        // only the latter. The causal label alone branches, while the complete
+        // exchange admits the distinct global assignment.
+        let graph = DenseHallGraph::new(2, 2, [(0, 0), (0, 1), (1, 1)]).unwrap();
+        let mut workspace = HallWorkspace::new(2, 2).unwrap();
+        let result = solve_hall(&graph, &mut workspace).unwrap();
+        assert!(result.is_saturated());
+        assert_eq!(result.matched_right(0), Some(0));
+        assert_eq!(result.matched_right(1), Some(1));
+        verify_hall_result(&graph, &result).unwrap();
+
+        // Removing the secant-deleted (2,9) repair yields the exact two-to-one
+        // causal collision and a replayable deficiency-one obstruction.
+        let causal_only = DenseHallGraph::new(2, 2, [(0, 1), (1, 1)]).unwrap();
+        let result = solve_hall(&causal_only, &mut workspace).unwrap();
+        assert!(!result.is_saturated());
+        assert_eq!(result.deficiency(), 1);
+        assert!(result.deficient_left_contains(0));
+        assert!(result.deficient_left_contains(1));
+        assert!(result.deficient_right_contains(1));
+        verify_hall_result(&causal_only, &result).unwrap();
+    }
 }
