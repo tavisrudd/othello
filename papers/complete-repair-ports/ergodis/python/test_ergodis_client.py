@@ -213,6 +213,17 @@ class ErgodisClientTest(unittest.TestCase):
                 session.request("noop")
             server.join()
 
+    def test_nonfinite_json_is_rejected_in_both_directions(self) -> None:
+        session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
+        with self.assertRaises(ProtocolError):
+            session.request("noop", {"score": float("nan")})
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "invalid.jsonl").write_bytes(b'{"score":NaN}\n')
+            session = Session(root, root / "unused.sock", "run", "nonce")
+            with self.assertRaises(ProtocolError):
+                next(session.iter_evidence_json("invalid.jsonl"))
+
     def test_remote_errors_and_cross_run_responses_fail_closed(self) -> None:
         for crossed, exception in ((False, RemoteError), (True, ProtocolError)):
             with self.subTest(crossed=crossed), tempfile.TemporaryDirectory() as directory:

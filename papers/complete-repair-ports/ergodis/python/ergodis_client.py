@@ -62,11 +62,19 @@ def _write_frame(stream: BinaryIO, payload: bytes) -> None:
     stream.flush()
 
 
-def _decode_object(payload: bytes | bytearray, description: str) -> Mapping[str, Any]:
+def _reject_json_constant(token: str) -> None:
+    raise ValueError(f"non-finite JSON number {token}")
+
+
+def _decode_json(payload: bytes | bytearray, description: str) -> Any:
     try:
-        value = json.loads(payload)
-    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        return json.loads(payload, parse_constant=_reject_json_constant)
+    except (UnicodeDecodeError, ValueError, RecursionError) as error:
         raise ProtocolError(f"invalid {description} JSON") from error
+
+
+def _decode_object(payload: bytes | bytearray, description: str) -> Mapping[str, Any]:
+    value = _decode_json(payload, description)
     if not isinstance(value, dict):
         raise ProtocolError(f"{description} is not an object")
     return value
@@ -140,7 +148,12 @@ class Session:
             "op": operation,
             "args": dict(arguments or {}),
         }
-        encoded = json.dumps(request, separators=(",", ":")).encode("utf-8")
+        try:
+            encoded = json.dumps(
+                request, separators=(",", ":"), allow_nan=False
+            ).encode("utf-8")
+        except (TypeError, ValueError, RecursionError) as error:
+            raise ProtocolError("request is not finite JSON") from error
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as connection:
             connection.settimeout(self.timeout)
             connection.connect(str(self.socket_path))
@@ -222,9 +235,4 @@ class Session:
         for line_number, line in enumerate(
             self.iter_evidence_lines(relative_path, max_line_bytes=max_line_bytes), 1
         ):
-            try:
-                yield json.loads(line)
-            except (UnicodeDecodeError, json.JSONDecodeError) as error:
-                raise ProtocolError(
-                    f"invalid evidence JSON at line {line_number}"
-                ) from error
+            yield _decode_json(line, f"evidence at line {line_number}")
