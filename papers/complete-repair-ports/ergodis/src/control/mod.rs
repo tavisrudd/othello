@@ -1102,7 +1102,11 @@ pub fn read_manifest(run_dir: &Path) -> Result<Manifest, ControlError> {
             "manifest exceeds protocol frame bound".into(),
         ));
     }
-    Ok(serde_json::from_slice(&encoded)?)
+    let manifest: Manifest = serde_json::from_slice(&encoded)?;
+    if manifest.schema != SCHEMA {
+        return Err(ControlError::Invalid("unsupported manifest schema".into()));
+    }
+    Ok(manifest)
 }
 
 fn required_str<'a>(value: &'a Value, key: &str) -> Result<&'a str, ControlError> {
@@ -1361,6 +1365,26 @@ mod tests {
             read_manifest(temporary.path()),
             Err(ControlError::Invalid(message))
                 if message == "manifest exceeds protocol frame bound"
+        ));
+        fs::write(
+            temporary.path().join("manifest.json"),
+            serde_json::to_vec(&Manifest {
+                schema: "future".into(),
+                run_id: "run".into(),
+                nonce: "nonce".into(),
+                socket: temporary.path().join("campaign.sock"),
+                run_dir: temporary.path().to_path_buf(),
+                pid: 1,
+                code_commit: "test".into(),
+                presentation_hash: "hash".into(),
+                problem: "fixture".into(),
+            })
+            .unwrap(),
+        )
+        .unwrap();
+        assert!(matches!(
+            read_manifest(temporary.path()),
+            Err(ControlError::Invalid(message)) if message == "unsupported manifest schema"
         ));
     }
 
