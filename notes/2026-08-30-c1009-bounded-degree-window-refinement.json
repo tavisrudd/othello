@@ -1,0 +1,67 @@
+{
+  "bounded_check": {
+    "all_exact_root_and_range_checks_pass": true,
+    "degree_range": [
+      1,
+      100
+    ],
+    "k_range": [
+      6,
+      100
+    ],
+    "rows": 9500,
+    "rows_in_low_degree_range": 2304
+  },
+  "controller_discovery_replay": {
+    "false_negative": 0,
+    "false_positive": 0,
+    "note": "This bounded control-plane replay motivated the formula; the theorem is proved symbolically in the report.",
+    "outcome_hash": "8c4c1a9502882f220766a1f6a8f9c37d433e60341bd0038d677a591d5e3cdd42",
+    "plan": "d <= r-2",
+    "rows": 9500,
+    "weighted_correct": 9500
+  },
+  "examples": {
+    "k10_d3": {
+      "a": 47,
+      "beta": 287,
+      "discriminant": 1061,
+      "exact_upper_root": 39,
+      "old_coarse_upper_bound": 46
+    },
+    "k11_d3": {
+      "a": 57,
+      "beta": 440,
+      "discriminant": 1489,
+      "exact_upper_root": 47,
+      "old_coarse_upper_bound": 56
+    },
+    "k6_d1": {
+      "a": 15,
+      "beta": 39,
+      "discriminant": 69,
+      "exact_upper_root": 11,
+      "old_coarse_upper_bound": 14
+    },
+    "k6_d3": {
+      "a": 17,
+      "beta": 39,
+      "discriminant": 133,
+      "exact_upper_root": 14,
+      "old_coarse_upper_bound": 16
+    },
+    "k8_d2": {
+      "a": 29,
+      "beta": 125,
+      "discriminant": 341,
+      "exact_upper_root": 23,
+      "old_coarse_upper_bound": 28
+    }
+  },
+  "schema": "c1009-bounded-degree-window-v1",
+  "theorem": {
+    "even_low_degree": "k=2r, 1<=d<=r-2 implies q<=binom(k,2)+d-k+1",
+    "exact_root": "q <= floor((a+sqrt(a^2-4*beta_k))/2), a=binom(k,2)+d-1",
+    "odd_low_degree": "k=2r+1, 1<=d<=r-2 implies q<=binom(k,2)+d-k"
+  }
+}

@@ -2,11 +2,17 @@
 
 **Lane**: `clebsch`
 
-**Status:** Queued; C1001 and C1007 theorem packets frozen; publication decision only.
+**Status:** Queued; C1001, C1007, and C1009 theorem packets frozen;
+publication decision only.
 
 ## Goal
 
-Assess C1001 and C1007 against Paper I, its computational companion, the arcs paper, and banked low-degree curve material. Choose the smallest honest publication package and split any cross-lane implementation work explicitly.
+Assess C1001, C1007, and C1009 against Paper I, its computational companion,
+the arcs paper, and banked low-degree curve material. Choose the smallest
+honest publication package and split any cross-lane implementation work
+explicitly. C1009's exact quadratic root should replace the coarse field
+window in any eventual theorem statement; its parity-linear bound is the
+readable low-degree corollary.
 
 ## Acceptance gate
 

@@ -1,0 +1,466 @@
+{
+  "controller_notes": {
+    "synthesize_failure": "predicate tree synthesis rejected with 'plan result sort does not match its declared output'",
+    "working_commands": [
+      "ceiling",
+      "try",
+      "evolve",
+      "shutdown"
+    ]
+  },
+  "q13_elliptic_relations": {
+    "certificates": {
+      "0": {
+        "canonical_pivot_entries": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            15
+          ]
+        ],
+        "exact_entrywise_identity_checked": true,
+        "label": 0,
+        "minimal_polynomial_coefficients_high_to_low": [
+          1,
+          -6,
+          -26,
+          124,
+          161,
+          -686,
+          -72,
+          504
+        ],
+        "minimal_polynomial_degree": 7,
+        "pivot_minor_determinant": -74240,
+        "power_identity_coefficients_c0_up": [
+          -504,
+          72,
+          686,
+          -161,
+          -124,
+          26,
+          6
+        ],
+        "valency": 7
+      },
+      "1": {
+        "canonical_pivot_entries": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            15
+          ]
+        ],
+        "exact_entrywise_identity_checked": true,
+        "label": 1,
+        "minimal_polynomial_coefficients_high_to_low": [
+          1,
+          -14,
+          -35,
+          468,
+          496,
+          -2376,
+          -3504,
+          -1120
+        ],
+        "minimal_polynomial_degree": 7,
+        "pivot_minor_determinant": 293396480,
+        "power_identity_coefficients_c0_up": [
+          1120,
+          3504,
+          2376,
+          -496,
+          -468,
+          35,
+          14
+        ],
+        "valency": 14
+      },
+      "10": {
+        "canonical_pivot_entries": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            15
+          ]
+        ],
+        "exact_entrywise_identity_checked": true,
+        "label": 10,
+        "minimal_polynomial_coefficients_high_to_low": [
+          1,
+          -13,
+          -48,
+          399,
+          1200,
+          -1396,
+          -4368,
+          0
+        ],
+        "minimal_polynomial_degree": 7,
+        "pivot_minor_determinant": -138311040,
+        "power_identity_coefficients_c0_up": [
+          0,
+          4368,
+          1396,
+          -1200,
+          -399,
+          48,
+          13
+        ],
+        "valency": 14
+      },
+      "12": {
+        "canonical_pivot_entries": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            15
+          ]
+        ],
+        "exact_entrywise_identity_checked": true,
+        "label": 12,
+        "minimal_polynomial_coefficients_high_to_low": [
+          1,
+          -13,
+          -48,
+          457,
+          612,
+          -4796,
+          -1600,
+          12992
+        ],
+        "minimal_polynomial_degree": 7,
+        "pivot_minor_determinant": 68113920,
+        "power_identity_coefficients_c0_up": [
+          -12992,
+          1600,
+          4796,
+          -612,
+          -457,
+          48,
+          13
+        ],
+        "valency": 14
+      },
+      "3": {
+        "canonical_pivot_entries": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            15
+          ]
+        ],
+        "exact_entrywise_identity_checked": true,
+        "label": 3,
+        "minimal_polynomial_coefficients_high_to_low": [
+          1,
+          -12,
+          -61,
+          416,
+          808,
+          -2200,
+          -1424,
+          1120
+        ],
+        "minimal_polynomial_degree": 7,
+        "pivot_minor_determinant": -1551467520,
+        "power_identity_coefficients_c0_up": [
+          -1120,
+          1424,
+          2200,
+          -808,
+          -416,
+          61,
+          12
+        ],
+        "valency": 14
+      },
+      "9": {
+        "canonical_pivot_entries": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ]
+        ],
+        "exact_entrywise_identity_checked": true,
+        "label": 9,
+        "minimal_polynomial_coefficients_high_to_low": [
+          1,
+          -15,
+          -20,
+          523,
+          -538,
+          -1852,
+          2408
+        ],
+        "minimal_polynomial_degree": 6,
+        "pivot_minor_determinant": 876416,
+        "power_identity_coefficients_c0_up": [
+          -2408,
+          1852,
+          538,
+          -523,
+          20,
+          15
+        ],
+        "valency": 14
+      }
+    },
+    "point_count": 78,
+    "rho_zero_conclusion": "Q[A_0] is the full elliptic Bose--Mesner algebra",
+    "scheme_dimension": 7
+  },
+  "rho_zero_modular_reconnaissance": {
+    "boundary": "A full modular degree proves characteristic-zero generation; a modular deficit is reconnaissance, not a proof of characteristic-zero nongeneration.",
+    "coarse_feature_collision": {
+      "controller_unavoidable_errors": 2,
+      "features": [
+        "q_mod_12",
+        "chi_2",
+        "chi_3",
+        "chi_5",
+        "chi_7"
+      ],
+      "full_row": {
+        "deficit_mod_p": 0,
+        "degree_mod_p": 7,
+        "q": 13,
+        "scheme_rank": 7
+      },
+      "nonfull_row": {
+        "deficit_mod_p": 1,
+        "degree_mod_p": 78,
+        "q": 157,
+        "scheme_rank": 79
+      },
+      "values": [
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ]
+    },
+    "modulus": 1000003,
+    "nonfull_rows": [
+      {
+        "deficit_mod_p": 2,
+        "degree_mod_p": 13,
+        "q": 29,
+        "scheme_rank": 15
+      },
+      {
+        "deficit_mod_p": 1,
+        "degree_mod_p": 18,
+        "q": 37,
+        "scheme_rank": 19
+      },
+      {
+        "deficit_mod_p": 1,
+        "degree_mod_p": 30,
+        "q": 61,
+        "scheme_rank": 31
+      },
+      {
+        "deficit_mod_p": 1,
+        "degree_mod_p": 36,
+        "q": 73,
+        "scheme_rank": 37
+      },
+      {
+        "deficit_mod_p": 2,
+        "degree_mod_p": 43,
+        "q": 89,
+        "scheme_rank": 45
+      },
+      {
+        "deficit_mod_p": 1,
+        "degree_mod_p": 48,
+        "q": 97,
+        "scheme_rank": 49
+      },
+      {
+        "deficit_mod_p": 1,
+        "degree_mod_p": 50,
+        "q": 101,
+        "scheme_rank": 51
+      },
+      {
+        "deficit_mod_p": 1,
+        "degree_mod_p": 54,
+        "q": 109,
+        "scheme_rank": 55
+      },
+      {
+        "deficit_mod_p": 1,
+        "degree_mod_p": 74,
+        "q": 149,
+        "scheme_rank": 75
+      },
+      {
+        "deficit_mod_p": 1,
+        "degree_mod_p": 78,
+        "q": 157,
+        "scheme_rank": 79
+      },
+      {
+        "deficit_mod_p": 3,
+        "degree_mod_p": 88,
+        "q": 181,
+        "scheme_rank": 91
+      },
+      {
+        "deficit_mod_p": 2,
+        "degree_mod_p": 95,
+        "q": 193,
+        "scheme_rank": 97
+      }
+    ],
+    "rows": 44,
+    "scope": "odd primes 5<=q<=199"
+  },
+  "schema": "c1008-ergodis-controlled-theorem-search-v1",
+  "six_local_scalar_criterion": {
+    "admissible_graphs": 172,
+    "cluster_graphs": 203,
+    "controller_outcome_hash": "9bc0e6bf4c01a773c96422744f5216a110764fc5ad1aafff398ba3e912ea90a2",
+    "criterion": "cluster_defect=0 and at least one even-degree vertex",
+    "graphs_checked": 32768,
+    "identity": "sum_v deg(v)^2-2|E|-6T = 2*(number of induced P3)"
+  }
+}

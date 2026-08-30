@@ -2,7 +2,8 @@
 
 **Lane**: `relconic`
 
-**Status:** Queued; C1002 math packet frozen; publication decision only.
+**Status:** Queued; C1002 math packet and C1008 scalar reformulation frozen;
+publication decision only.
 
 ## Goal
 
@@ -31,3 +32,14 @@ the extending blocks.  The \(k=10\) certificate has three blocks.
 
 This is useful as a private exact prefilter for coordinate/orbit searches.
 It does not justify a new ergodis public command by itself.
+
+C1008 supplies the preferred scalar certificate. For each six-set graph
+\(G\), compute
+
+\[
+D(G)=\sum_v\deg(v)^2-2|E(G)|-6T(G).
+\]
+
+Reject when \(D(G)>0\), or when \(D(G)=0\) but every vertex has odd degree.
+The identity \(D(G)=2\#\{\text{induced }P_3\}\) gives a one-line human proof
+that this is exactly C1002's union-of-cliques-with-an-odd-component test.
