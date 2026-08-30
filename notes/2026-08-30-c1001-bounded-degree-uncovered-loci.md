@@ -63,6 +63,15 @@ The statement is nontrivial exactly when the right side is positive. At
 `q<=N-2`, (2) is automatic. For `q>=N`, apply Theorem 1 to `d=delta(A)` when
 `delta(A)<=q`; if `delta(A)>q`, (2) is immediate.
 
+The unsimplified integer consequence is stronger. Whenever `U(A)` is
+nonempty and `delta(A)<=q`,
+\[
+ \delta(A)\ge
+ q-N+1+\left\lceil\frac{\beta_k}{q}\right\rceil. \tag{3}
+\]
+Thus the linear lower bound carries additional integral surcharges whenever
+`q<beta_k`; (2) is only its stable first step.
+
 ### Theorem 3 — all-field six-arc cubic tail
 
 Let `A` be a six-arc in `PG(2,q)`, for any prime power `q>=11`. Then the
@@ -73,22 +82,38 @@ following are equivalent:
 
 For the Clebsch hexagon the least vanishing degree is two.
 
+### Proposition 4 — component-sensitive six-arc bound
+
+Let `q` be odd, let `A` be a six-arc, and let a degree-`d` curve contain
+`U(A)`. If its `F_q`-line factors have total multiplicity `s<d` and the
+residual degree-`d-s` curve has no `F_q`-line component, then
+\[
+ |U(A)|\le (d-1)q+1-5s. \tag{4}
+\]
+If all components are rational lines, then
+\[
+ |U(A)|\le d(q-5). \tag{5}
+\]
+Repeated line factors only lower these bounds. In particular, a cubic over
+`F_13` contains at most `27` points of `U(A)`, while every six-arc there has
+at least `32` uncovered points.
+
 ## Proof
 
 For an ordinary uncovered locus, specialize the prescribed-hole identity to
 the empty hole set. Its nonnegative defect gives
 \[
- |U(A)|\ge q^2-(N-1)q+N-k+1+\frac6r\binom{k}{4}. \tag{3}
+ |U(A)|\ge q^2-(N-1)q+N-k+1+\frac6r\binom{k}{4}. \tag{6}
 \]
 Serre's projective hypersurface inequality says that a nonzero plane form of
-degree `1<=d<=q` has at most `dq+1` rational zeros. Combining this with (3)
+degree `1<=d<=q` has at most `dq+1` rational zeros. Combining this with (6)
 and cancelling the final `1` gives (1). Since `beta_k>0` for `k>=4`, (1)
 cannot hold when `q>=N+d-1`, proving the explicit field window and Corollary
 2. When the curve has no rational line component, the Sziklai bound
 `(d-1)q+1` gives the stated one-degree improvement, apart from its unique
 `(q,d)=(4,4)` exception.
 
-For every six-arc, (3) gives the characteristic-free estimate
+For every six-arc, (6) gives the characteristic-free estimate
 \[
  |U(A)|\ge q^2-14q+40.
 \]
@@ -107,18 +132,24 @@ the estimate to
 \]
 hence
 \[
- |U(A)|\ge q^2-14q+45. \tag{4}
+ |U(A)|\ge q^2-14q+45. \tag{7}
 \]
 
-At `q=13`, (4) gives `|U(A)|>=32`. A cubic without an `F_13`-line component
-has at most `2q+1=27` rational points by the Sziklai bound, so a containing
-cubic has an `F_13`-line component `L` and a residual quadratic form. The
-six-arc line bound gives `|U(A) intersect L|<=q-5=8`, while Serre's quadratic
-bound gives at most `2q+1=27` points on the residual conic. Therefore
-`|U(A)|<=35`. Since `|U(A)|=42-c(A)`, one has `c(A)>=7`; the displayed
-spectrum forces `c(A)=10`. Uniform concurrence rigidity then forces a root of
-`x^2-x-1` in `F_13`, equivalently `5` square in `F_13`. But
-`(5/13)=(3/5)=-1`, a contradiction.
+For Proposition 4, factor off the rational lines with total multiplicity `s`
+and use a union bound on `U(A)`. There are at most `s` distinct such lines, and
+the line lemma charges at most `q-5` uncovered points to each. When the
+residual degree is positive, Sziklai charges at most `(d-s-1)q+1` to it,
+giving (4); when it is zero, the line charges alone give (5). Repetition can
+only reduce the zero set.
+
+At `q=13`, (7) gives `|U(A)|>=32`. A cubic without an
+`F_13`-line component has at most `2q+1=27` rational points by Sziklai. If it
+has one rational line and a residual conic without a rational line component,
+the line bound and Sziklai give at most `(q-5)+(q+1)=22` uncovered points. If
+the residual conic has a rational line component, it splits into two rational
+lines, and all three line components contain at most `3(q-5)=24` uncovered
+points. Thus every cubic contains at most `27` points of `U(A)`, contradicting
+`|U(A)|>=32`.
 
 At `q=11`, the exact finite low-degree classification says that `U(A)` lies
 on a form of degree at most three exactly for the Clebsch class, whose
@@ -127,7 +158,7 @@ directions.
 
 ## Evidence boundary
 
-- Equation (3): human consequence of `thm:main` in
+- Equation (6): human consequence of `thm:main` in
   `papers/arcs_complete_outside_conic/arcs_complete_outside_conic.tex`; the
   underlying identity and nonnegativity are also formally verified there.
 - Exact six-arc identity, spectrum, line bound, and `c=10` normal form:
@@ -151,6 +182,11 @@ The closeout produced two task-owned upgrades and both are incorporated above:
 2. The six-arc cubic tail holds for every field order `q>=11`, not only odd
    orders. The characteristic-free defect estimate excludes `q>=15`, and the
    only remaining field orders are the odd cases `11` and `13`.
+3. Retaining the integer constant gives the sharper lower bound (3), with
+   multiple degree surcharges before the stable linear range.
+4. Factoring a containing curve and charging each rational line by the
+   six-arc line lemma proves Proposition 4. At `q=13` it removes the need for
+   the fine concurrence-spectrum and golden-root terminal argument.
 
 ## Mystery ledger
 
@@ -160,10 +196,9 @@ The closeout produced two task-owned upgrades and both are incorporated above:
   explicit minimum vanishing form, or a structural argument improving the
   bound. C1004 should decide whether this merits a new math task before using
   sharpness language.
-- **Rational-line peeling beyond the first surcharge — open.** Sziklai gives a
-  one-degree improvement when there is no rational line component, while the
-  q=13 proof succeeds by bounding uncovered points on the forced line. A
-  general `k`-arc line bound strong enough to iterate this argument was not an
+- **Rational-line peeling beyond six-arcs — open.** Proposition 4 completely
+  performs the component split for six-arcs because the `q-5` line lemma is
+  available. A general `k`-arc line bound strong enough to repeat it was not an
   input to C1001. Any such extension needs a separately allocated proof task.
 - **The tail boundary below eleven — intentionally outside scope.** The theorem
   classifies `q>=11`; small fields may have incidental cubic containment simply
