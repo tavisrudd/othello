@@ -1,0 +1,372 @@
+{
+  "n": 1388,
+  "source_file": "H1388.txt",
+  "sha256_source_file": "a6b92584eb803b87026709d64fe892dec8f7182a120e13de9edd3065cf05bf0b",
+  "sha256_canonical_as_given": "a6b92584eb803b87026709d64fe892dec8f7182a120e13de9edd3065cf05bf0b",
+  "sha256_canonical_normalized": "5ebac7a33165a39cb9e86e5b99eb42cc46e3c7006956b2c97885f8f6b4655db1",
+  "square": true,
+  "entries_pm1": true,
+  "max_abs_offdiag": 0,
+  "is_hadamard": true,
+  "row_sum_multiset": [
+    [
+      -34,
+      342
+    ],
+    [
+      -6,
+      346
+    ],
+    [
+      -2,
+      349
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      6,
+      3
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      62,
+      285
+    ],
+    [
+      86,
+      57
+    ]
+  ],
+  "classification": {
+    "forms_found": [
+      "gs_array[as_given]"
+    ],
+    "primary_form": "bordered Goethals--Seidel array with a generalized (non-matrix) transpose, border 20, four block-circulant blocks of order 342 (6 sub-blocks of length 57)",
+    "tests": [
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 694,
+          "top_left_circulant": false,
+          "top_right_circulant": false
+        },
+        "found": false,
+        "name": "two_circulant[as_given]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "attempts": [
+            {
+              "border": "border_first_two",
+              "core_order": 693,
+              "top_left_circulant": false,
+              "top_right_circulant": false
+            },
+            {
+              "border": "border_last_two",
+              "core_order": 693,
+              "top_left_circulant": false,
+              "top_right_circulant": false
+            }
+          ],
+          "core_order": 693
+        },
+        "found": false,
+        "name": "bordered_two_circulant[as_given]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 347,
+          "reason": "williamson blocks must be symmetric circulants"
+        },
+        "found": false,
+        "name": "williamson[as_given]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 347,
+          "reason": "goethals-seidel condition fails at shift 1: 1344"
+        },
+        "found": false,
+        "name": "goethals_seidel[as_given]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_circulant_lengths": [
+            57,
+            57,
+            57,
+            57
+          ],
+          "block_order": 342,
+          "blocks_circulant": false,
+          "border": {
+            "border_row_block_signs": [
+              "+-++",
+              "+-+-",
+              "++-+",
+              "++++",
+              "++--",
+              "++--",
+              "++--",
+              "++++",
+              "+--+",
+              "+---",
+              "++--",
+              "+++-",
+              "+-+-",
+              "+--+",
+              "+--+",
+              "+--+",
+              "+-+-",
+              "++++",
+              "++++",
+              "+-+-"
+            ],
+            "border_rows_constant_on_each_body_block": false,
+            "column_prefix_constant_within_each_slab": false,
+            "corner": [
+              "--++-+++-+++++-+++++",
+              "--++-+--+-++---+----",
+              "+---+++----+-+-++--+",
+              "-+----+---+--+-+-++-",
+              "+--+--+---+++-+--+-+",
+              "+--+---+++---+-+-+-+",
+              "-++--++-++-+-++--+-+",
+              "-++-+--+---++--+-+-+",
+              "+++++-++-+++-+++----",
+              "+++++---+-++-+--++++",
+              "---+++-+---+-++--++-",
+              "--+----+--+--++-+--+",
+              "--+++-+--+------++--",
+              "++---+-+-+++----++--",
+              "++++-+------++++++--",
+              "----+---++++++++++--",
+              "-+-+-----+-+--+++-++",
+              "+-+-++---++---++-+++",
+              "+-+---+++--+--+++++-",
+              "-+-++++++-+---++++-+"
+            ],
+            "slab_column_prefixes": [
+              "++++++++++++++++++++",
+              "-++---++--++-+-++--+",
+              "--++++---++--++-+--+",
+              "--+++++++-+-+--+----"
+            ]
+          },
+          "border_width": 20,
+          "shift_automorphisms": {
+            "block_order": 342,
+            "border_width": 20,
+            "cyclic_subgroup_order": 1,
+            "note": "exact: dephasing is a complete invariant for the row/column sign group, so a listed shift is a proved automorphism and an omitted one is proved not to be. This is a lower bound on |Aut| that needs no graph-isomorphism solver.",
+            "predicted_by_gs_parity": [
+              171
+            ],
+            "shifts_realised_by_a_monomial_automorphism": [],
+            "sub_block_cyclic_subgroup_order": 1,
+            "sub_block_length": 57,
+            "sub_block_shifts_realised": []
+          },
+          "sub_block_count": [
+            6,
+            6,
+            6,
+            6
+          ],
+          "transpose_operation_is_matrix_transpose": false
+        },
+        "found": true,
+        "name": "gs_array[as_given]",
+        "variant": "bordered Goethals--Seidel array with a generalized (non-matrix) transpose, border 20, four block-circulant blocks of order 342 (6 sub-blocks of length 57)"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 694,
+          "top_left_circulant": false,
+          "top_right_circulant": false
+        },
+        "found": false,
+        "name": "two_circulant[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "attempts": [
+            {
+              "border": "border_first_two",
+              "core_order": 693,
+              "top_left_circulant": false,
+              "top_right_circulant": false
+            },
+            {
+              "border": "border_last_two",
+              "core_order": 693,
+              "top_left_circulant": false,
+              "top_right_circulant": false
+            }
+          ],
+          "core_order": 693
+        },
+        "found": false,
+        "name": "bordered_two_circulant[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 347,
+          "reason": "williamson condition fails at shift 1: 1388"
+        },
+        "found": false,
+        "name": "williamson[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 347,
+          "reason": "goethals-seidel condition fails at shift 1: 1388"
+        },
+        "found": false,
+        "name": "goethals_seidel[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "attempts": [
+            {
+              "block_order": 347,
+              "border_width": 0,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            },
+            {
+              "block_order": 346,
+              "border_width": 4,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            },
+            {
+              "block_order": 344,
+              "border_width": 12,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            },
+            {
+              "block_order": 342,
+              "border_width": 20,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            },
+            {
+              "block_order": 340,
+              "border_width": 28,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            }
+          ]
+        },
+        "found": false,
+        "name": "gs_array[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "caveat": "the literal comparison is only run when q is prime (the built-in Paley I generator does not implement non-prime prime powers), and only detects the matrix in exactly the generated row/column order up to dephasing",
+          "paley_I": {
+            "construction_exists_at_this_order": false,
+            "matrix_equals_paley_I_after_dephasing": null,
+            "prime_power": null,
+            "q": 1387,
+            "q_mod_4": 3
+          },
+          "paley_II": {
+            "construction_exists_at_this_order": false,
+            "prime_power": null,
+            "q": 693,
+            "q_mod_4": 1
+          }
+        },
+        "found": false,
+        "name": "paley_applicability"
+      },
+      {
+        "applicable": false,
+        "detail": {
+          "reason": "automorphism group not computed (pass --with-aut)"
+        },
+        "found": false,
+        "name": "cyclic_block_structure_from_aut"
+      }
+    ]
+  },
+  "automorphism": {
+    "computed": false,
+    "reason": "not requested (--with-aut not given)"
+  },
+  "tool_version": "had668 0.1.0"
+}
