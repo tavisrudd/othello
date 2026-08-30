@@ -104,7 +104,7 @@ and III supply the causal old label `(20,17)`; they have the identical local
 state and move.  The same finite-field incidence code constructs all four
 graphs, and the Hall engine saturates each.
 
-The associated transport lemma is combinatorial.  If this equivariant
+The associated conditional transport lemma is combinatorial.  If this equivariant
 restriction graph has a matching from all new defects into consumed old
 labels, retain the surviving labels and assign each new defect its matched
 consumed label.  Matching injectivity prevents new/new collisions; consumption
@@ -112,7 +112,55 @@ prevents new/retained collisions.  Whenever the consumed-label count exceeds
 the new-defect count, the support cardinality decreases strictly.  What remains
 open is the field-uniform Hall inequality for this incidence relation and
 opponent-complete entry.  The q11/q23 representatives are positive controls,
-not that theorem; the full retained q23 corpus is the next finite gate.
+not that theorem.
+
+### Bounded hostile q=11 scout: exact obstruction
+
+The very first complete exchange tested by a deterministic 100-state q=11
+hostile scout disproves the proposed deletion-secant Hall relation and the
+strict support-cardinality surplus in their present forms.  The exact state is
+
+```text
+A = {(0,0),(1,7),(5,4),(7,6)},
+o = (4,9),
+h = (6,1).
+```
+
+Before the exchange the old defect labels are exactly `{(4,9),(6,1)}`.  The
+intermediate defect locus is empty.  After `o,h`, the genuinely new defects are
+exactly `{(3,5),(9,10)}`.  Both primary bitmask and independent affine-
+determinant implementations agree.
+
+The old certificate replies are
+
+```text
+(3,5): {(6,1),(10,10)}
+(9,10): {(3,8),(6,1)}.
+```
+
+The two noncausal replies are deleted on the same causal secant through the
+selected pivot `(7,6)`.  Under the direct/deletion-secant consumed-label law,
+both new defects have the same singleton neighbourhood `{(6,1)}`.  Therefore
+`Z={(3,5),(9,10)}` has `|Gamma(Z)|=1<2=|Z|`; the Rust Hall engine independently
+extracts and replays deficiency one.  The other consumed label `(4,9)` has no
+edge under this rule.
+
+Moreover, consumed and new support cardinalities are both two, so even the
+complete-bipartite relation would not give strict support-cardinality descent.
+The overload coordinate does fall `10 -> 0 -> 0` across state/intermediate/
+successor, but the successor is not the small boundary and still has exactly
+the two displayed defects.  A lexicographic measure with overload before or
+after support is therefore a possible stepping stone, not the theorem the C80
+handoff currently requests.
+
+This is a successful Ergodis negative: it turns the first apparently natural
+edge law into the exact minimal obstruction rather than encouraging a broad
+q23 census.  The next proof object must either (i) give the opponent label
+`(4,9)` a bounded, projectively natural exchange-motif edge to one of the two
+new defects and use a sound lexicographic descent, or (ii) abandon label
+matching in favour of a richer global charge object.  Merely making every
+consumed label adjacent to every new defect repairs matching but not strict
+support descent.
 
 ## Once-validated Pareto objectives
 
@@ -167,14 +215,33 @@ the C80 positive/negative pair all pass.
 - The matching kernel is an iterative augmenting-path engine, not yet
   Hopcroft--Karp or a full Dulmage--Mendelsohn decomposition.  Profile a real
   corpus before importing that machinery.
-- The projective deletion-secant relation now transports distinct consumed
-  labels on q11 and all three q23 representatives.  C80 still needs the full
-  q23 corpus gate, a field-uniform Hall theorem, and opponent-complete entry.
+- The projective deletion-secant relation transports distinct consumed labels
+  on the original q11 witness and all three q23 representatives, but a bounded
+  hostile q11 scout finds an exact deficiency-one exchange with no strict
+  support-cardinality drop.  That candidate theorem is rejected.
 - The full `R^18` enumeration and order-2092 Hadamard search remain separately
   gated.  The continuation tower and streaming certificate boundary are their
   common reusable stepping stones, not authorization for large runs.
 
-The highest-EV continuation is to run this deletion-secant consumed-label graph
-over the full retained q23 corpus, then study the resulting neighbourhoods for
-a field-uniform Hall proof.  Any failure should be emitted immediately as the
-exact minimal Hall-deficient set.
+The highest-EV C80 continuation is to inspect the exact two-defect obstruction
+for the weakest bounded exchange motif that connects the consumed opponent
+label `(4,9)` without using an exception table, and to test whether the exact
+overload drop supports a hereditary lexicographic measure.  The higher-EV
+Ergodis-platform continuation remains a second flagship adapter, because the
+generic hierarchy/Hall machinery has now done its job and exposed the
+mathematical boundary quickly.
+
+Reproduction from the repository root:
+
+```sh
+nix shell nixpkgs#python313 -c python3 \
+  papers/complete-repair-ports/ergodis/scripts/c80_projective_hall_scout.py \
+  --q 11 --states 100 --exchanges 10000 \
+  --check notes/2026-08-30-c985-c80-projective-hall-deficit.json
+nix shell nixpkgs#python313 -c python3 \
+  papers/complete-repair-ports/ergodis/scripts/c80_projective_hall_replay.py
+sha256sum -c notes/2026-08-30-c985-c80-projective-hall-deficit.sha256
+```
+
+The certificate SHA-256 is
+`b351d9514d783e60a85cacf543ab9d8ad2021cf4fd9dd6de6c9c67586d92dbc3`.

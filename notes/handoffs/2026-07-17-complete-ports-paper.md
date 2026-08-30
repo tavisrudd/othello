@@ -488,9 +488,15 @@ Sequel research:
   new defects.  The first projectively natural consumed-label lift now also
   passes: a direct edge uses an attacked reply that is itself an old label, and
   a deletion-secant edge uses a consumed old label on the causal/reply line.
-  This matches the two q11 defects to `(3,7)` and `(7,10)` and saturates all
-  three certified q23 replacement representatives.  The full q23 corpus,
-  uniform Hall inequality, and opponent-complete entry remain open.  The
+  This matches the two original q11 defects to `(3,7)` and `(7,10)` and
+  saturates all three certified q23 replacement representatives.  A bounded
+  hostile q11 scout then rejects the candidate theorem on its first tested
+  complete exchange: two consumed labels are replaced by two new defects, both
+  with singleton neighbourhood equal to the causal label, giving an exact
+  deficiency-one Hall set and no strict support-cardinality drop.  Primary
+  bitmask, independent determinant, and Rust Hall replay agree; the overload
+  coordinate falls `10 -> 0 -> 0`, so an exchange motif plus lexicographic
+  descent is the surviving C80 stepping stone.  The
   once-validated Pareto objective wrapper also closes its hostile
   same-cardinality-order gate and gives 1.028--1.044x warm gains on two clean
   20-pair protocols.

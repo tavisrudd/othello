@@ -1,0 +1,198 @@
+{
+  "counts": {
+    "complete_exchanges": 1,
+    "exchanges_with_new_defects": 1,
+    "hall_failures": 1,
+    "maximum_new_defects": 2,
+    "new_defects": 2,
+    "nondecreasing_exchanges": 1,
+    "states": 100,
+    "uncovered_fibres": 0
+  },
+  "exchange_budget": 10000,
+  "first_issue": {
+    "causal": [
+      6,
+      1
+    ],
+    "consumed": [
+      [
+        4,
+        9
+      ],
+      [
+        6,
+        1
+      ]
+    ],
+    "created": [
+      [
+        3,
+        5
+      ],
+      [
+        9,
+        10
+      ]
+    ],
+    "fibres": [
+      {
+        "attacks": [
+          {
+            "mode": "causal_reply_already_selected",
+            "pivots": [],
+            "reply": [
+              6,
+              1
+            ]
+          },
+          {
+            "mode": "certificate_reply_secant_deletion",
+            "pivots": [
+              [
+                7,
+                6
+              ]
+            ],
+            "reply": [
+              10,
+              10
+            ]
+          }
+        ],
+        "defect": [
+          3,
+          5
+        ],
+        "incident_labels": [
+          [
+            6,
+            1
+          ]
+        ],
+        "old_replies": [
+          [
+            6,
+            1
+          ],
+          [
+            10,
+            10
+          ]
+        ]
+      },
+      {
+        "attacks": [
+          {
+            "mode": "certificate_reply_secant_deletion",
+            "pivots": [
+              [
+                7,
+                6
+              ]
+            ],
+            "reply": [
+              3,
+              8
+            ]
+          },
+          {
+            "mode": "causal_reply_already_selected",
+            "pivots": [],
+            "reply": [
+              6,
+              1
+            ]
+          }
+        ],
+        "defect": [
+          9,
+          10
+        ],
+        "incident_labels": [
+          [
+            6,
+            1
+          ]
+        ],
+        "old_replies": [
+          [
+            3,
+            8
+          ],
+          [
+            6,
+            1
+          ]
+        ]
+      }
+    ],
+    "half_defects": [],
+    "hall": false,
+    "neighbours": [
+      [
+        1
+      ],
+      [
+        1
+      ]
+    ],
+    "next_defects": [
+      [
+        3,
+        5
+      ],
+      [
+        9,
+        10
+      ]
+    ],
+    "old_defects": [
+      [
+        4,
+        9
+      ],
+      [
+        6,
+        1
+      ]
+    ],
+    "omega": [
+      10,
+      0,
+      0
+    ],
+    "opponent": [
+      4,
+      9
+    ],
+    "state": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        7
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        7,
+        6
+      ]
+    ],
+    "successor_is_small_boundary": false,
+    "uncovered": []
+  },
+  "primary_replay": true,
+  "q": 11,
+  "schema": "c80-projective-hall-scout-v1",
+  "seed": 98508030,
+  "source": "rust/scripts/c80_causal_nonpacking.py",
+  "source_sha256": "268b8a839aa8308c1e3b48aa82c6c8bcc7b74d4b6778216830bcfd43ff00bffe",
+  "state_budget": 100,
+  "stopped_early": true
+}

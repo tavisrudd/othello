@@ -667,4 +667,22 @@ mod tests {
         assert!(result.is_saturated());
         // Type III has the identical local state and causal move.
     }
+
+    #[test]
+    fn c80_bounded_q11_scout_extracts_a_projective_hall_deficit() {
+        let old_labels = [[4, 9], [6, 1]];
+        let first = [([6, 1], false), ([10, 10], true)];
+        let second = [([3, 8], true), ([6, 1], false)];
+        let edges = projective_charge_edges::<11>([6, 1], &old_labels, &[&first, &second]);
+        assert_eq!(edges, [(0, 1), (1, 1)]);
+        let graph = DenseHallGraph::new(2, 2, edges).unwrap();
+        let mut workspace = HallWorkspace::new(2, 2).unwrap();
+        let result = solve_hall(&graph, &mut workspace).unwrap();
+        assert!(!result.is_saturated());
+        assert_eq!(result.deficiency(), 1);
+        assert!(result.deficient_left_contains(0));
+        assert!(result.deficient_left_contains(1));
+        assert!(result.deficient_right_contains(1));
+        verify_hall_result(&graph, &result).unwrap();
+    }
 }
