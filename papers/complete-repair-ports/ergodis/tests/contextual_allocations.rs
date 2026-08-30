@@ -8,7 +8,7 @@ use ergodis::{
     AlignmentSearchWorkspace, BinarySupportCandidate, CanonicalContextBasis, CompiledCssDistance,
     CostTable, DenseSelector, ExplicitBinarySupportProblem, FinitePermutationAction, Gf4, Matrix,
     PackedBinaryAction, PackedBinaryLinearMap, Prime, RankBoundedContextCache, RankOneProbeCache,
-    SparseSelector,
+    ResidualHittingWorkspace, SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -100,6 +100,40 @@ fn aligned_attachment_search_allocates_nothing_after_workspace_construction() {
         tracked_allocations(|| search_alignment_attachment(&problem, 9, &mut workspace).unwrap());
     assert!(result.0.is_some());
     assert_eq!(allocations, 0);
+}
+
+#[test]
+fn residual_hitting_solve_write_and_replay_allocate_nothing_after_setup() {
+    let clauses = [0b0011_u64, 0b0101, 0b1010, 0b1100];
+    let mut workspace = ResidualHittingWorkspace::new(1);
+    let (answer, solve_allocations) =
+        tracked_allocations(|| workspace.is_hittable(&clauses, 0b1111, 1).unwrap());
+    assert!(!answer);
+    assert_eq!(solve_allocations, 0);
+
+    let (records, write_allocations) = tracked_allocations(|| {
+        workspace
+            .write_refutation(&clauses, 0b1111, 1, &mut std::io::sink())
+            .unwrap()
+    });
+    assert_eq!(records, Some(4));
+    assert_eq!(write_allocations, 0);
+
+    let mut proof = Vec::new();
+    workspace
+        .write_refutation(&clauses, 0b1111, 1, &mut proof)
+        .unwrap();
+    let (verified, replay_allocations) = tracked_allocations(|| {
+        ergodis::residual_hitting::verify_residual_hitting_refutation(
+            &clauses,
+            0b1111,
+            1,
+            &mut &proof[..],
+        )
+        .unwrap()
+    });
+    assert_eq!(verified, 4);
+    assert_eq!(replay_allocations, 0);
 }
 
 #[test]
