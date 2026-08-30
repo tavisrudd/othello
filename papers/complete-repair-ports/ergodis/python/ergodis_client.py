@@ -140,7 +140,17 @@ class Session:
         return Response(request_id, int(response.get("epoch", 0)), result)
 
     def capabilities(self) -> Mapping[str, Any]:
-        return self.request("capabilities").result
+        result = self.request("capabilities").result
+        if result.get("schema") != SCHEMA:
+            raise ProtocolError("capability schema mismatch")
+        if result.get("framing") != "u32-le-length-prefixed-json":
+            raise ProtocolError("unsupported framing")
+        peer_limit = result.get("max_frame_bytes")
+        if not isinstance(peer_limit, int) or not 1 <= peer_limit <= MAX_FRAME_BYTES:
+            raise ProtocolError("invalid peer frame limit")
+        if result.get("proof_authority") is not False:
+            raise ProtocolError("campaign transport cannot claim proof authority")
+        return result
 
     def iter_evidence_lines(
         self, relative_path: Path | str, *, max_line_bytes: int = 1024 * 1024

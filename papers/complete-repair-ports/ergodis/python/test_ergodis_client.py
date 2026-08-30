@@ -7,8 +7,16 @@ import struct
 import tempfile
 import threading
 import unittest
+from unittest.mock import patch
 
-from ergodis_client import MAX_FRAME_BYTES, SCHEMA, ProtocolError, RemoteError, Session
+from ergodis_client import (
+    MAX_FRAME_BYTES,
+    SCHEMA,
+    ProtocolError,
+    RemoteError,
+    Response,
+    Session,
+)
 
 
 def recv_exact(connection: socket.socket, length: int) -> bytes:
@@ -30,6 +38,26 @@ class ErgodisClientTest(unittest.TestCase):
         for name in ("request_json", "response_json"):
             wire = fixture[name]
             self.assertEqual(json.dumps(json.loads(wire), separators=(",", ":")), wire)
+
+    def test_capability_negotiation_preserves_transport_and_trust_bounds(self) -> None:
+        baseline = {
+            "schema": SCHEMA,
+            "framing": "u32-le-length-prefixed-json",
+            "max_frame_bytes": MAX_FRAME_BYTES,
+            "proof_authority": False,
+        }
+        session = Session(Path.cwd(), Path("unused.sock"), "run", "nonce")
+        for changed in (
+            {"schema": "future"},
+            {"framing": "native-objects"},
+            {"max_frame_bytes": MAX_FRAME_BYTES + 1},
+            {"proof_authority": True},
+        ):
+            capabilities = baseline | changed
+            with self.subTest(changed=changed), patch.object(
+                session, "request", return_value=Response(1, 0, capabilities)
+            ), self.assertRaises(ProtocolError):
+                session.capabilities()
 
     def test_live_framing_handshake_and_monotone_ids(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -65,7 +93,9 @@ class ErgodisClientTest(unittest.TestCase):
                                     "ok": True,
                                     "result": {
                                         "schema": SCHEMA,
+                                        "framing": "u32-le-length-prefixed-json",
                                         "max_frame_bytes": MAX_FRAME_BYTES,
+                                        "proof_authority": False,
                                     },
                                 },
                                 separators=(",", ":"),
