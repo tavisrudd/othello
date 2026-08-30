@@ -584,7 +584,13 @@ Sequel research:
   successive halving without Rust recompilation, and only replay-gated typed
   predicates may prune or admit.  FunSearch/AlphaEvolve supply the compact
   program and proposer--evaluator--archive pattern; Ergodis adds theorem-role
-  effects, permanent falsifiers, and universal-claim gates.
+  effects, permanent falsifiers, and universal-claim gates.  The proposed
+  ledger/socket/`ergodisctl` surface is explicitly an opt-in long-campaign
+  control plane: ordinary seconds-scale `ergodis solve` stays unchanged.  Each
+  campaign has an isolated run ID/socket, bounded file-backed verbose traces,
+  and a compact delta-based `agent brief`; the first vertical slice should
+  expose C80 gate/diff/first-obstruction/trace/apply commands without adding an
+  unbounded text stream or hot-loop control overhead.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
