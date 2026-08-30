@@ -1,11 +1,12 @@
-use std::collections::HashSet;
 use std::fs::OpenOptions;
 use std::io::Write;
 use std::path::PathBuf;
 
 use clap::Parser;
 use ergodis_private::semantic_plan::{CanonicalizationGate, LabelContract};
-use ergodis_private::semantic_sets::{for_each_k_subset, TernaryPartitionMaxOverlapProfiler};
+use ergodis_private::semantic_sets::{
+    for_each_k_subset, FixedMaskSet, TernaryPartitionMaxOverlapProfiler,
+};
 use serde::Serialize;
 
 #[derive(Parser)]
@@ -240,7 +241,7 @@ fn main() -> anyhow::Result<()> {
         }
     });
 
-    let mut orbit = HashSet::with_capacity(4096);
+    let mut orbit = FixedMaskSet::with_max_items(minimum_count as usize);
     let mut general_linear_order = 0_usize;
     for code in 0..3_usize.pow(9) {
         let matrix = decode_matrix(code);

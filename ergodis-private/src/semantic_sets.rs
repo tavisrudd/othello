@@ -11,6 +11,77 @@ pub struct MaxOverlapProfiler {
     histogram: Box<[u64]>,
 }
 
+/// Pre-sized open-addressed set for bounded `u64` orbit/canonicalization keys.
+///
+/// The table allocates only in [`with_max_items`](Self::with_max_items).
+/// Insert and lookup use Fibonacci hashing plus linear probing and allocate
+/// nothing. `u64::MAX` is reserved as the empty sentinel.
+#[derive(Debug, Clone)]
+pub struct FixedMaskSet {
+    slots: Box<[u64]>,
+    mask: usize,
+    shift: u32,
+    len: usize,
+    max_items: usize,
+}
+
+impl FixedMaskSet {
+    #[must_use]
+    pub fn with_max_items(max_items: usize) -> Self {
+        assert!(max_items > 0, "fixed mask set must admit at least one item");
+        let capacity = max_items
+            .checked_mul(2)
+            .and_then(usize::checked_next_power_of_two)
+            .expect("fixed mask set capacity overflow");
+        Self {
+            slots: vec![u64::MAX; capacity].into_boxed_slice(),
+            mask: capacity - 1,
+            shift: u64::BITS - capacity.trailing_zeros(),
+            len: 0,
+            max_items,
+        }
+    }
+
+    #[inline]
+    fn initial_slot(&self, value: u64) -> usize {
+        (value.wrapping_mul(0x9e37_79b9_7f4a_7c15) >> self.shift) as usize
+    }
+
+    /// Insert a key, returning whether it was absent. This method allocates
+    /// nothing and fails closed if the declared item bound is exceeded.
+    #[inline]
+    pub fn insert(&mut self, value: u64) -> bool {
+        assert_ne!(value, u64::MAX, "u64::MAX is the empty sentinel");
+        let mut slot = self.initial_slot(value);
+        loop {
+            let stored = self.slots[slot];
+            if stored == value {
+                return false;
+            }
+            if stored == u64::MAX {
+                assert!(
+                    self.len < self.max_items,
+                    "fixed mask set item bound exceeded"
+                );
+                self.slots[slot] = value;
+                self.len += 1;
+                return true;
+            }
+            slot = (slot + 1) & self.mask;
+        }
+    }
+
+    #[must_use]
+    pub fn len(&self) -> usize {
+        self.len
+    }
+
+    #[must_use]
+    pub fn is_empty(&self) -> bool {
+        self.len == 0
+    }
+}
+
 /// Maximum-overlap profiler for families that split into 3-way partitions.
 ///
 /// For an object of fixed cardinality `k` and a partition `(A, B, C)`, the
@@ -405,5 +476,16 @@ mod tests {
             1,
         )
         .is_err());
+    }
+
+    #[test]
+    fn fixed_mask_set_handles_duplicates_and_dense_collisions() {
+        let mut set = FixedMaskSet::with_max_items(1024);
+        assert!(set.is_empty());
+        for value in 0..1024_u64 {
+            assert!(set.insert(value << 17));
+            assert!(!set.insert(value << 17));
+        }
+        assert_eq!(set.len(), 1024);
     }
 }

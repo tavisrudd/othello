@@ -364,6 +364,13 @@ result is 81.7 million ambient objects/s, 58.2 cycles and 281.4 instructions
 per object.  The complete histogram, extremal count, cap/orbit claims, and
 historical representative remain unchanged.
 
+Orbit closure also replaces the generic randomized `HashSet` with a bounded
+Fibonacci-hashed mask table sized once from the certified extremal count.  Its
+insert path allocates nothing.  Against the already optimized build this cuts
+a further 30.8 million instructions (2.3%) and 8.4 million cycles (3.1%)
+end-to-end.  A denser 32 KiB table lost that gain to collision branches; the
+measured 64 KiB table is retained.
+
 ## Python's continuing role
 
 Python is not removed.  It remains the place to create a new feature in
