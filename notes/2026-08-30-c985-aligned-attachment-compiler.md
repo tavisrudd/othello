@@ -138,6 +138,27 @@ diagnostic parity-native subcase immediate. The current Gurobi diagnostic
 therefore changes its lazy symmetry closure from a 720-cut callback storm to a
 tunable bounded pulse.
 
+The native continuation now imports the same symmetry inside the search rather
+than only between workers. For a caller-supplied fixed root, it precomputes the
+full setwise point stabilizer and hashes each partial family by its least group
+image. The group table is built before search; the iterative DFS canonicalizer
+uses fixed storage and allocates nothing in the hot loop. The mode is opt-in,
+so existing small and symmetry-free paths pay no cost. On the exact `n=6`,
+budget-11 exclusion, the 36-element stabilizer reduces `50,349 -> 3,558`
+visited states. Twenty-one interleaved rounds give a 5.7845x geometric
+wall-time ratio (5.8799x median, paired log-ratio `t=55.493`). Perf counters
+fall from 1.049 billion to 105.7 million instructions and from 508.1 million
+to 57.0 million cycles.
+
+The target-shaped `n=8`, fixed-root `[0,1,2]`, budget-10 exclusion has a
+72-element stabilizer and reduces `302,471 -> 8,759` states. Three interleaved
+diagnostic rounds give a 30.18x geometric wall-time ratio (31.66x median,
+paired log-ratio `t=69.663`); one counter pair reduces 63.64 billion to 2.082
+billion instructions, 28.18 billion to 0.925 billion cycles, and 397,975 to
+18,260 cache misses. A 60-second budget-16 probe of this rooted case timed out
+without a result and is not evidence. The reduction nevertheless removes the
+largest known repeat-work factor before another proof-producing run.
+
 Three equal 300-second pulse controls retain the known 17-query incumbent but
 leave the certified lower bound at 15. One context times 16 rotating orbit
 images visits 179,851 nodes; four contexts times four images visits 273,890;
@@ -172,6 +193,28 @@ measured negative for C880, not a defect in the separator. The next useful
 bound must aggregate contexts into cover/rank inequalities or branch in the
 compiled quotient; more lazy/user-cut pulse tuning has low expected value.
 
+One backend trust defect was exposed by asking only the unresolved
+cardinality-16 feasibility question. Gurobi 13 installed a presolve heuristic
+solution of weight 15 without delivering it through the expected `MIPSOL`
+proof boundary; independent exact replay rejected it. The driver now wraps the
+callback solve in an outer solve--replay--cut loop. Every escaped incumbent is
+checked, all witnessed contextual failures are installed as ordinary
+constraints, and the remaining wall-time budget is carried into the restart.
+Non-replayed incumbents are reported as null. In a 300-second control this
+boundary installed 109 replay constraints, explored 459,437 nodes, and retained
+only the honest bound 15 with no replayed cardinality-16 incumbent. The
+solver's displayed objective 16 was not accepted.
+
+The universal three-edge crossing floor is now explicit for all 127 cuts. It
+is exact as a necessary consequence of an odd cycle, but a 300-second
+optimization control remains at incumbent 17 and bound 15 (`253,046` nodes,
+`465.85` work), so it is not the missing rank inequality. A tempting stronger
+shortcut was rejected in hostile review: although the ambient constraint graph
+is a line graph of a complete bipartite graph, the *selected* graph is a
+non-induced subgraph and may omit ambient chords, so non-bipartiteness does not
+force a selected triangle. Safe strengthening must retain the full
+rank-stratified odd-cycle hierarchy.
+
 ## Boundary and next gate
 
 - A Gurobi optimum is not an independently replayable proof of the lower
@@ -190,3 +233,19 @@ replayable certificate, and then extract a human lower-bound motif from the
 solver's orbit-closed obstruction family.  That would turn the classical link
 criterion and C880's mask computations into corollaries of the more general
 cut-context theorem.
+
+## Mystery ledger
+
+- **Unsettled:** why the cardinality-16 relaxation stays at bound 15 after
+  first-order context cuts and the crossing floor. The evidence gap is a
+  genuinely aggregate cover/rank inequality or a complete quotient-branch
+  proof; C985 owns it.
+- **Partly settled:** native orbit workers repeated symmetry-equivalent partial
+  families. Setwise-stabilizer canonicalization removes 5.78x--30.18x wall
+  time on completed controls, but the bounded budget-16 probe still timed out.
+- **Settled:** a displayed generic-solver incumbent is not automatically a
+  certified Ergodis incumbent. The independent outer replay boundary now
+  catches callback-delivery gaps and refuses unreplayed objectives.
+- **Settled negative:** ambient line-graph chordality does not collapse
+  selected odd cycles to triangles; the induced/non-induced distinction blocks
+  that shortcut.

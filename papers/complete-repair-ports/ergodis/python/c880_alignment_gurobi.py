@@ -110,22 +110,36 @@ def main() -> None:
     output = sys.argv[1] if len(sys.argv) > 1 else None
     orbit_batch = int(os.environ.get("ERGODIS_ALIGNMENT_ORBIT_BATCH", "16"))
     context_batch = int(os.environ.get("ERGODIS_ALIGNMENT_CONTEXT_BATCH", "4"))
+    maximum = int(os.environ.get("ERGODIS_ALIGNMENT_MAXIMUM", "17"))
     if not 1 <= orbit_batch <= len(ANCHOR_STABILIZER_MAPS):
         raise ValueError("ERGODIS_ALIGNMENT_ORBIT_BATCH must lie in [1, 720]")
     if not 1 <= context_batch <= len(CUTS):
         raise ValueError("ERGODIS_ALIGNMENT_CONTEXT_BATCH must lie in [1, 127]")
+    if maximum not in (16, 17):
+        raise ValueError("ERGODIS_ALIGNMENT_MAXIMUM must be 16 or 17")
     model = gp.Model("c880-alignment-attachment")
     model.Params.OutputFlag = 1
     model.Params.Threads = 16
     model.Params.LazyConstraints = 1
     model.Params.PreCrush = 1
-    if seconds := os.environ.get("ERGODIS_ALIGNMENT_SECONDS"):
-        model.Params.TimeLimit = float(seconds)
+    seconds = float(os.environ.get("ERGODIS_ALIGNMENT_SECONDS", "inf"))
+    if seconds < float("inf"):
+        model.Params.TimeLimit = seconds
     variables = model.addVars(len(TRIPLES), vtype=GRB.BINARY, name="triple")
-    for index, triple in enumerate(TRIPLES):
-        variables[index].Start = int(triple in KNOWN_G8)
+    if maximum == len(KNOWN_G8):
+        for index, triple in enumerate(TRIPLES):
+            variables[index].Start = int(triple in KNOWN_G8)
     model.addConstr(variables[0] == 1, name="point_transitive_anchor")
     model.addConstr(variables.sum() >= 15, name="proved_weight_mask_lower_bound")
+    model.addConstr(variables.sum() <= maximum, name="known_witness_upper_bound")
+    for cut, pairs, _edge_count in CUTS:
+        model.addConstr(
+            gp.quicksum(
+                variables[index] for index, pair in enumerate(pairs) if pair is not None
+            )
+            >= 3,
+            name=f"odd_cycle_edge_floor_{cut}",
+        )
     model.setObjective(variables.sum(), GRB.MINIMIZE)
     lazy_count = 0
     fractional_count = 0
@@ -220,21 +234,63 @@ def main() -> None:
                 )
                 lazy_count += 1
 
+    replay_constraints = 0
+    solution_replayed = False
     try:
-        model.optimize(callback)
+        while True:
+            added_clauses.clear()
+            model.optimize(callback)
+            if model.SolCount == 0:
+                break
+            selected = [variables[index].X > 0.5 for index in range(len(TRIPLES))]
+            clauses = violated_clauses(selected)
+            if not clauses:
+                solution_replayed = True
+                break
+
+            # Gurobi can install a presolve heuristic incumbent without a
+            # MIPSOL callback.  Never trust such an incumbent: replay it and
+            # restart with ordinary constraints excluding every witnessed
+            # contextual failure.  This outer proof boundary is deliberately
+            # independent of callback delivery.
+            for clause in clauses:
+                model.addConstr(
+                    gp.quicksum(
+                        variables[index]
+                        for index in range(len(TRIPLES))
+                        if clause >> index & 1
+                    )
+                    >= 1
+                )
+                replay_constraints += 1
+            if seconds < float("inf"):
+                remaining = seconds - (time.perf_counter() - started)
+                if remaining <= 0.0:
+                    break
+                model.Params.TimeLimit = remaining
     finally:
         if separator is not None:
             assert separator.stdin is not None
             separator.stdin.close()
             separator.wait(timeout=5)
-    if model.Status != GRB.OPTIMAL:
+    if model.Status != GRB.OPTIMAL or not solution_replayed:
         record = {
             "points": 8,
             "status": model.Status,
-            "status_name": "TIME_LIMIT" if model.Status == GRB.TIME_LIMIT else "NONOPTIMAL",
-            "incumbent": model.ObjVal if model.SolCount else None,
+            "status_name": (
+                "TIME_LIMIT"
+                if model.Status == GRB.TIME_LIMIT
+                else "INFEASIBLE"
+                if model.Status == GRB.INFEASIBLE
+                else "UNREPLAYED"
+                if model.Status == GRB.OPTIMAL
+                else "NONOPTIMAL"
+            ),
+            "incumbent": model.ObjVal if solution_replayed else None,
             "best_bound": model.ObjBound,
+            "maximum": maximum,
             "lazy_constraints": lazy_count,
+            "replay_constraints": replay_constraints,
             "fractional_calls": fractional_calls,
             "fractional_constraints": fractional_count,
             "orbit_batch": orbit_batch,
@@ -256,9 +312,11 @@ def main() -> None:
     record = {
         "points": 8,
         "optimum": int(round(model.ObjVal)),
+        "maximum": maximum,
         "family_indices": [index for index, keep in enumerate(selected) if keep],
         "family_triples": [TRIPLES[index] for index, keep in enumerate(selected) if keep],
         "lazy_constraints": lazy_count,
+        "replay_constraints": replay_constraints,
         "fractional_calls": fractional_calls,
         "fractional_constraints": fractional_count,
         "orbit_batch": orbit_batch,

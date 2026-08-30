@@ -406,6 +406,7 @@ struct SearchFrame {
 pub struct AlignmentSearchWorkspace {
     frames: Box<[SearchFrame]>,
     seen: Box<[u64]>,
+    symmetry_maps: Box<[u8]>,
 }
 
 impl AlignmentSearchWorkspace {
@@ -419,11 +420,75 @@ impl AlignmentSearchWorkspace {
         Ok(Self {
             frames: vec![SearchFrame::default(); maximum_budget as usize + 1].into_boxed_slice(),
             seen: vec![0_u64; slots].into_boxed_slice(),
+            symmetry_maps: Box::new([]),
         })
+    }
+
+    /// Compile the setwise point stabilizer of a fixed initial family.
+    ///
+    /// Search then hashes the least image of every state under this group.
+    /// Compilation may allocate; canonicalization in the search loop does not.
+    pub fn set_point_stabilizer(
+        &mut self,
+        problem: &AlignmentAttachment,
+        fixed: u64,
+    ) -> Result<usize, AlignmentError> {
+        if fixed == 0 || fixed >> problem.triples.len() != 0 {
+            return Err(AlignmentError::Family);
+        }
+        let mut lookup = [[[u8::MAX; 8]; 8]; 8];
+        for (index, &[a, b, c]) in problem.triples.iter().enumerate() {
+            lookup[a as usize][b as usize][c as usize] = index as u8;
+        }
+        let n = problem.point_count as usize;
+        let mut permutation = [0_u8, 1, 2, 3, 4, 5, 6, 7];
+        let mut maps = Vec::with_capacity(720 * problem.triples.len());
+        loop {
+            let mut map = [u8::MAX; 56];
+            let mut fixed_image = 0_u64;
+            for (index, &triple) in problem.triples.iter().enumerate() {
+                let mut image = triple.map(|point| permutation[point as usize]);
+                image.sort_unstable();
+                let image_index = lookup[image[0] as usize][image[1] as usize][image[2] as usize];
+                debug_assert_ne!(image_index, u8::MAX);
+                map[index] = image_index;
+                if fixed >> index & 1 != 0 {
+                    fixed_image |= 1_u64 << image_index;
+                }
+            }
+            if fixed_image == fixed {
+                maps.extend_from_slice(&map);
+            }
+            if !next_permutation(&mut permutation[..n]) {
+                break;
+            }
+        }
+        self.symmetry_maps = maps.into_boxed_slice();
+        Ok(self.symmetry_maps.len() / 56)
+    }
+
+    #[inline]
+    fn canonical_key(&self, selected: u64) -> u64 {
+        if self.symmetry_maps.len() <= 56 {
+            return selected;
+        }
+        let mut canonical = selected;
+        for map in self.symmetry_maps.chunks_exact(56) {
+            let mut image = 0_u64;
+            let mut bits = selected;
+            while bits != 0 {
+                let triple = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                image |= 1_u64 << map[triple];
+            }
+            canonical = canonical.min(image);
+        }
+        canonical
     }
 
     fn insert_seen(&mut self, selected: u64) -> Result<bool, AlignmentError> {
         debug_assert_ne!(selected, 0);
+        let selected = self.canonical_key(selected);
         let mask = self.seen.len() - 1;
         let mut slot = (selected.wrapping_mul(0x9e37_79b9_7f4a_7c15) >> 32) as usize & mask;
         for _ in 0..self.seen.len() {
@@ -438,6 +503,22 @@ impl AlignmentSearchWorkspace {
         }
         Err(AlignmentError::Workspace)
     }
+}
+
+fn next_permutation(values: &mut [u8]) -> bool {
+    let Some(pivot) = (0..values.len() - 1)
+        .rev()
+        .find(|&index| values[index] < values[index + 1])
+    else {
+        return false;
+    };
+    let successor = (pivot + 1..values.len())
+        .rev()
+        .find(|&index| values[pivot] < values[index])
+        .expect("a permutation pivot has a successor");
+    values.swap(pivot, successor);
+    values[pivot + 1..].reverse();
+    true
 }
 
 /// Search exactly for a separating family of at most `budget` triples.
@@ -697,6 +778,29 @@ mod tests {
         let exact = exact.unwrap();
         assert_eq!(exact.count_ones(), 9);
         assert!(problem.separates(exact).unwrap());
+    }
+
+    #[test]
+    fn setwise_stabilizer_canonicalizes_search_states() {
+        let problem = compile_alignment_attachment(5).unwrap();
+        let fixed = 1_u64;
+        let mut workspace = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
+        assert_eq!(workspace.set_point_stabilizer(&problem, fixed).unwrap(), 12);
+        let selected = fixed | 1_u64 << 4 | 1_u64 << 8;
+        let canonical = workspace.canonical_key(selected);
+        for map in workspace.symmetry_maps.chunks_exact(56) {
+            let mut image = 0_u64;
+            let mut bits = selected;
+            while bits != 0 {
+                let triple = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                image |= 1_u64 << map[triple];
+            }
+            assert_eq!(workspace.canonical_key(image), canonical);
+        }
+
+        let (solution, _) = search_alignment_attachment(&problem, 9, &mut workspace).unwrap();
+        assert!(problem.separates(solution.unwrap()).unwrap());
     }
 
     #[test]

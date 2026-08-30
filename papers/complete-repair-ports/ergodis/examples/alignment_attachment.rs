@@ -80,11 +80,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Ok(());
     }
     let mut workspace = AlignmentSearchWorkspace::new(budget, 1_usize << seen_power)?;
+    let stabilizer = if std::env::var_os("ERGODIS_ALIGNMENT_SYMMETRY").is_some() {
+        workspace.set_point_stabilizer(&problem, initial)?
+    } else {
+        1
+    };
     let started = std::time::Instant::now();
     let (solution, metrics) =
         search_alignment_attachment_from(&problem, budget, initial, &mut workspace)?;
     println!(
-        "points={points} triples={} cuts={} budget={budget} initial={initial:#x} solution={solution:?} states={} duplicates={} infeasible={} elapsed_ns={}",
+        "points={points} triples={} cuts={} budget={budget} initial={initial:#x} stabilizer={stabilizer} solution={solution:?} states={} duplicates={} infeasible={} elapsed_ns={}",
         problem.triples().len(),
         problem.cut_count(),
         metrics.states,

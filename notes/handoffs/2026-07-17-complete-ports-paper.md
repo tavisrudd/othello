@@ -495,8 +495,11 @@ Sequel research:
   with singleton neighbourhood equal to the causal label, giving an exact
   deficiency-one Hall set and no strict support-cardinality drop.  Primary
   bitmask, independent determinant, and Rust Hall replay agree; the overload
-  coordinate falls `10 -> 0 -> 0`, so an exchange motif plus lexicographic
-  descent is the surviving C80 stepping stone.  The coarser complete-exchange
+  coordinate falls `10 -> 0 -> 0`.  The successor is N (its only two legal
+  moves conflict), so this rejects a universal exchange law but not existence
+  of a different good reply for every opponent.  An exchange motif plus
+  lexicographic descent is the surviving C80 stepping stone only when paired
+  with an explicit P-survivor reply-admission predicate.  The coarser complete-exchange
   relation then removes matching entirely: Hall is exactly
   `consumed >= created`.  Deterministic diagnostics find zero failures of that
   inequality or of support-first `(cardinality, Omega)` descent across 65,464
@@ -510,7 +513,17 @@ Sequel research:
   The
   once-validated Pareto objective wrapper also closes its hostile
   same-cardinality-order gate and gives 1.028--1.044x warm gains on two clean
-  20-pair protocols.
+  20-pair protocols. The C880 aligned-attachment backend now has an independent
+  outer solve--replay--cut boundary after a Gurobi presolve incumbent escaped
+  callback enforcement; unreplayed objectives are never reported as
+  incumbents. Its native DFS can opt into exact setwise-stabilizer
+  canonicalization with no hot-loop allocation. Completed controls improve
+  5.78x at `n=6` and 30.18x on a rooted `n=8` exclusion while cutting the latter
+  from 63.64 billion to 2.082 billion instructions. A 60-second rooted
+  budget-16 probe remains incomplete, and the exact `15 <= g(8) <= 17` gap is
+  unchanged. The next C880 gate is a proof-producing symmetry-quotiented orbit
+  sweep or a genuinely aggregate context rank inequality, not more first-order
+  Gurobi pulse tuning.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
