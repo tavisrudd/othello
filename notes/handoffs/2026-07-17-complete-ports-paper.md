@@ -483,10 +483,11 @@ Sequel research:
   `1 -> 2 -> 6 -> 2q` through one API without retaining cloned transition
   tables.  A pre-sized iterative Hall backend streams and replays exact
   matching/deficiency certificates and passes all 4,096 `3 x 4` graphs against
-  brute force.  On C80's q=11 falsifier the causal-only graph is deficient by
-  one while the complete certificate-reply graph saturates both new defects;
-  ancestral-label soundness and the q23 corpus remain the next mathematical
-  gate.  The once-validated Pareto objective wrapper also closes its hostile
+  brute force.  On C80's q=11 falsifier the causal-only reply-resource graph is
+  deficient by one while the complete certificate-reply graph saturates both
+  new defects.  This does not yet give the final consumed-label graph because
+  the second reply is not an old defect label; ancestral-label soundness and
+  the q23 corpus remain the next mathematical gate.  The once-validated Pareto objective wrapper also closes its hostile
   same-cardinality-order gate and gives 1.028--1.044x warm gains on two clean
   20-pair protocols.
 

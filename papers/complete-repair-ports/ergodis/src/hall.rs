@@ -550,11 +550,12 @@ mod tests {
     }
 
     #[test]
-    fn c80_q11_direct_certificate_consumption_has_global_hall_surplus() {
+    fn c80_q11_reply_resource_graph_repairs_the_causal_collision() {
         // C80 q=11 one-to-many witness. Right labels are the two consumed
         // certificate replies (2,9) and (7,10); the second new defect can use
         // only the latter. The causal label alone branches, while the complete
-        // exchange admits the distinct global assignment.
+        // exchange admits the distinct resource assignment. This does not yet
+        // transport the second resource to a distinct ancestral defect label.
         let graph = DenseHallGraph::new(2, 2, [(0, 0), (0, 1), (1, 1)]).unwrap();
         let mut workspace = HallWorkspace::new(2, 2).unwrap();
         let result = solve_hall(&graph, &mut workspace).unwrap();

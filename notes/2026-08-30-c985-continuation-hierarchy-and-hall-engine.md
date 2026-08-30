@@ -51,8 +51,8 @@ workspace growth.
 
 ## C80 discriminator
 
-The first C80 acceptance-sequence control is positive for the weakest proposed
-restriction relation, direct certificate-reply consumption.  In the q=11
+The first C80 mechanism control is positive at the certificate-reply resource
+level.  In the q=11
 one-to-many witness the two genuinely new defect fibres have old certificate
 reply sets
 
@@ -71,11 +71,13 @@ has the forced global matching
 ```
 
 Thus the original local update fails for exactly the reason recorded by C80,
-while enlarging elimination to the complete exchange repairs this witness.
-This is evidence for the Hall-rematching route, not the C80 theorem: the next
-mathematical gate must identify how consumed certificate replies transport
-ancestral labels soundly, then replay the q23 representatives and retained
-corpus under that edge law.  The generic oracle is no longer the blocker.
+while enlarging elimination to the complete exchange repairs the collision at
+the reply-resource level.  This is evidence for the Hall-rematching route, not
+the C80 theorem or even yet its final consumed-label graph: `(2,9)` is not one
+of the seven old defect labels.  The next mathematical gate must identify how
+that consumed reply transports a distinct ancestral label soundly, then replay
+the q23 representatives and retained corpus under that edge law.  The generic
+oracle is no longer the blocker.
 
 ## Once-validated Pareto objectives
 
@@ -140,4 +142,3 @@ graph on the three q23 replacement representatives, then formulate and test the
 weakest projectively natural map from those consumed replies to distinct
 ancestral labels.  Any failure should be emitted immediately as the exact
 minimal Hall-deficient set.
-
