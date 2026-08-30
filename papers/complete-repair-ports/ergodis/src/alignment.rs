@@ -34,6 +34,18 @@ pub struct AlignmentAttachment {
     cut_edge_counts: Box<[u8]>,
     cut_triple_masks: Box<[u64]>,
     cut_pairs: Box<[u8]>,
+    cut_clause_lookups: Box<[CutClauseLookup]>,
+    clause_lookup_pool: Box<[u64]>,
+}
+
+#[derive(Debug)]
+struct CutClauseLookup {
+    low_vertices: u8,
+    high_vertices: u8,
+    low_offset: u32,
+    high_offset: u32,
+    cross_offset: u32,
+    cross_masks: [u64; 8],
 }
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -247,14 +259,20 @@ impl AlignmentAttachment {
                 }
             }
         }
-        let mut clause = 0_u64;
-        let mut crossing = self.cut_triple_masks[cut];
-        while crossing != 0 {
-            let triple = crossing.trailing_zeros() as usize;
-            crossing &= crossing - 1;
-            let (left, right) = self.pair(cut, triple);
-            if (color_one >> left & 1) == (color_one >> right & 1) {
-                clause |= 1_u64 << triple;
+        let lookup = &self.cut_clause_lookups[cut];
+        let low_vertices = lookup.low_vertices as usize;
+        let high_states = 1_usize << lookup.high_vertices;
+        let low_colors = color_one as usize & ((1_usize << low_vertices) - 1);
+        let high_colors = color_one as usize >> low_vertices;
+        let mut clause = self.clause_lookup_pool[lookup.low_offset as usize + low_colors]
+            | self.clause_lookup_pool[lookup.high_offset as usize + high_colors];
+        for vertex in 0..low_vertices {
+            let zero = self.clause_lookup_pool
+                [lookup.cross_offset as usize + vertex * high_states + high_colors];
+            if low_colors >> vertex & 1 == 0 {
+                clause |= zero;
+            } else {
+                clause |= lookup.cross_masks[vertex] ^ zero;
             }
         }
         debug_assert_ne!(clause, 0, "cut={cut} selected={selected:#x}");
@@ -372,6 +390,8 @@ pub fn compile_alignment_attachment(
     let mut cut_edge_counts = Vec::with_capacity(cut_count);
     let mut cut_triple_masks = Vec::with_capacity(cut_count);
     let mut cut_pairs = Vec::with_capacity(cut_count * triples.len() * 2);
+    let mut cut_clause_lookups = Vec::with_capacity(cut_count);
+    let mut clause_lookup_pool = Vec::new();
     for cut in 1..=cut_count {
         let mut edge_index = [[u8::MAX; 8]; 8];
         let mut edge_count = 0_u8;
@@ -384,6 +404,7 @@ pub fn compile_alignment_attachment(
             }
         }
         cut_edge_counts.push(edge_count);
+        let pair_base = cut_pairs.len();
         let mut cut_triple_mask = 0_u64;
         for (triple, &[a, b, c]) in triples.iter().enumerate() {
             let (a, b, c) = (a as usize, b as usize, c as usize);
@@ -407,6 +428,81 @@ pub fn compile_alignment_attachment(
             ]);
         }
         cut_triple_masks.push(cut_triple_mask);
+
+        let low_vertices = edge_count as usize / 2;
+        let high_vertices = edge_count as usize - low_vertices;
+        let low_offset = clause_lookup_pool.len();
+        for colors in 0..1_usize << low_vertices {
+            let mut clause = 0_u64;
+            let mut crossing = cut_triple_mask;
+            while crossing != 0 {
+                let triple = crossing.trailing_zeros() as usize;
+                crossing &= crossing - 1;
+                let first = cut_pairs[pair_base + 2 * triple] as usize;
+                let second = cut_pairs[pair_base + 2 * triple + 1] as usize;
+                let (left, right) = (first.min(second), first.max(second));
+                if right < low_vertices && (colors >> left & 1) == (colors >> right & 1) {
+                    clause |= 1_u64 << triple;
+                }
+            }
+            clause_lookup_pool.push(clause);
+        }
+        let high_offset = clause_lookup_pool.len();
+        for colors in 0..1_usize << high_vertices {
+            let mut clause = 0_u64;
+            let mut crossing = cut_triple_mask;
+            while crossing != 0 {
+                let triple = crossing.trailing_zeros() as usize;
+                crossing &= crossing - 1;
+                let first = cut_pairs[pair_base + 2 * triple] as usize;
+                let second = cut_pairs[pair_base + 2 * triple + 1] as usize;
+                let (left, right) = (first.min(second), first.max(second));
+                if left >= low_vertices
+                    && (colors >> (left - low_vertices) & 1)
+                        == (colors >> (right - low_vertices) & 1)
+                {
+                    clause |= 1_u64 << triple;
+                }
+            }
+            clause_lookup_pool.push(clause);
+        }
+        let mut cross_edges = [[0_u64; 8]; 8];
+        let mut crossing = cut_triple_mask;
+        while crossing != 0 {
+            let triple = crossing.trailing_zeros() as usize;
+            crossing &= crossing - 1;
+            let first = cut_pairs[pair_base + 2 * triple] as usize;
+            let second = cut_pairs[pair_base + 2 * triple + 1] as usize;
+            let (left, right) = (first.min(second), first.max(second));
+            if left < low_vertices && right >= low_vertices {
+                cross_edges[left][right - low_vertices] |= 1_u64 << triple;
+            }
+        }
+        let mut cross_masks = [0_u64; 8];
+        let cross_offset = clause_lookup_pool.len();
+        for vertex in 0..low_vertices {
+            cross_masks[vertex] = cross_edges[vertex]
+                .iter()
+                .copied()
+                .fold(0, |mask, edges| mask | edges);
+            for colors in 0..1_usize << high_vertices {
+                let mut zero = 0_u64;
+                for (high, &edges) in cross_edges[vertex][..high_vertices].iter().enumerate() {
+                    if colors >> high & 1 == 0 {
+                        zero |= edges;
+                    }
+                }
+                clause_lookup_pool.push(zero);
+            }
+        }
+        cut_clause_lookups.push(CutClauseLookup {
+            low_vertices: low_vertices as u8,
+            high_vertices: high_vertices as u8,
+            low_offset: low_offset as u32,
+            high_offset: high_offset as u32,
+            cross_offset: cross_offset as u32,
+            cross_masks,
+        });
     }
     Ok(AlignmentAttachment {
         point_count: point_count as u8,
@@ -414,6 +510,8 @@ pub fn compile_alignment_attachment(
         cut_edge_counts: cut_edge_counts.into_boxed_slice(),
         cut_triple_masks: cut_triple_masks.into_boxed_slice(),
         cut_pairs: cut_pairs.into_boxed_slice(),
+        cut_clause_lookups: cut_clause_lookups.into_boxed_slice(),
+        clause_lookup_pool: clause_lookup_pool.into_boxed_slice(),
     })
 }
 
@@ -839,6 +937,7 @@ mod tests {
             ],
         );
         assert_eq!(g8.count_ones(), 17);
+        assert_eq!(p8.clause_lookup_pool.len(), 226_368);
         assert!(p8.separates(g8).unwrap());
         assert!(!p8.separates(g8 & !(1_u64 << g8.trailing_zeros())).unwrap());
     }

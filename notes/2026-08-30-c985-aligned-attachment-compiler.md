@@ -187,6 +187,18 @@ cycles `521.3M -> 481.1M` and instructions `1.940B -> 1.880B`. This lifts the
 cumulative completed rooted `n=8` control to about 56.7x over the original
 worker, without allocation in the DFS loop.
 
+Same-colour clause reconstruction is now a factored meet-in-the-middle lookup.
+For each cut, separate low-half and high-half tables are joined through a
+low-vertex/high-colouring incidence factor; the hot path uses about ten indexed
+ORs rather than up to 48 triple-pair tests. At eight points the exact pool is
+226,368 words (1,810,944 bytes), 18.75x smaller than the 4,244,480-word full
+colouring table. Thirty-one interleaved rounds add 1.2007x geometrically
+(1.2072x median, paired log-ratio `t=15.495`). Five-round counters reduce
+instructions `1.880B -> 1.209B`, cycles `481.9M -> 425.8M`, and branches
+`275.9M -> 224.7M`; the lookup trades for more cache misses, but peak RSS rises
+only `34,256 -> 36,112` KiB. The cumulative completed rooted `n=8` speedup is
+now about 68.1x.
+
 A parity-DSU replacement for the 16-vertex bitmap BFS was also measured and
 rejected. Its dependent find/union chains made the same exact control 1.674x
 slower across 21 rounds (old/new geometric ratio `0.5971`, `t=-56.292`). The
@@ -276,8 +288,9 @@ cut-context theorem.
 - **Partly settled:** native orbit workers repeated symmetry-equivalent partial
   families and rechecked discharged/non-crossing contexts. Setwise-stabilizer
   canonicalization plus monotone residualization and crossing masks removes up
-  to about 56.7x wall time on completed controls after incremental group-image
-  accumulation, but the bounded budget-16 probe still timed out.
+  to about 68.1x wall time on completed controls after incremental group-image
+  accumulation and the factored clause lookup, but the bounded budget-16 probe
+  still timed out.
 - **Settled:** a displayed generic-solver incumbent is not automatically a
   certified Ergodis incumbent. The independent outer replay boundary now
   catches callback-delivery gaps and refuses unreplayed objectives.
