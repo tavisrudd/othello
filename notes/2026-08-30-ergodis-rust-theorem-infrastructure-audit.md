@@ -11,7 +11,7 @@
 | `egglog` | exact-term canonicalization, equality saturation, rewrite discovery, Datalog joins | private optional spike after recipe IR stabilizes | MIT | equality explanations are not Ergodis proof authority; replay every extracted equality in Lean or an independent checker |
 | Ascent | forward theorem-DAG saturation, case joins, proof-status/debt lattices | private optional spike on one frozen theorem graph | permissive MIT text | generated data structures may not meet hot-loop/memory constraints; no automatic trust in derived facts |
 | Salsa | incremental invalidation of theorem fragments, environment hashes, certificates, and composed goals | borrow query-key/durability design first | MIT OR Apache-2.0 | upstream describes itself as work in progress; avoid making persistent artifact format depend on it |
-| RustSAT + solver adapters | finite implication refutations and PB/VeriPB proof logging | sidecar spike only if current native backend lacks a gate | MIT | current advertised MSRV 1.87 exceeds this crate's 1.82; solver-wrapper licenses and proof formats need separate audit |
+| RustSAT + solver adapters | finite implication refutations and PB/VeriPB proof logging | sidecar spike only if current native backend lacks a gate | MIT | current advertised MSRV 1.87 matches this crate; solver-wrapper licenses and proof formats still need separate audit |
 | Differential/Timely Dataflow | incremental forward closure over very large changing theorem graphs | defer until scale demands it | MIT | heavy architecture and allocation model for today's graph; do not pay distributed-dataflow cost prematurely |
 | Verus | machine-check stable Rust kernels such as mask census, matching, and certificate parsers | selective verification experiment, no runtime dependency | MIT | supports a Rust subset and remains under active development; separate toolchain/replay burden |
 | PyO3 / maturin | optional in-process Python transport after the socket protocol stabilizes | audit and spike later; no dependency now | MIT OR Apache-2.0 | CPython/toolchain/build closure; binding must remain a replaceable transport |
@@ -72,7 +72,7 @@ facts; it is not the first implementation.
 RustSAT provides a useful common encoding layer and advertises proof logging,
 including VeriPB support through `pigeons`, plus interfaces to CaDiCaL, Kissat,
 Glucose, and MiniSat.  It could validate candidate implication edges.  Because
-of the MSRV mismatch and per-solver licensing surface, isolate any experiment
+of the per-solver licensing surface, isolate any experiment
 as a tool/sidecar rather than changing Ergodis' core toolchain.
 
 ## Licensing and supply-chain gate

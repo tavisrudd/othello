@@ -675,7 +675,7 @@ codegen unit remain: disabling them measured 1--2% slower in the executable
 A/B even though Criterion's harness-local absolute times moved in the opposite
 direction.
 
-Criterion 0.7 is the newest compatible line for the crate's Rust 1.82 floor.
+Criterion 0.7 is the benchmark harness line used by the recorded runs.
 `scheduler_locality` uses 60 samples, two seconds of warmup, four seconds of
 measurement, a warmed workspace, and transition throughput. With the final
 production-equivalent profile and `x86-64-v3`, its point estimates are 3.794 us

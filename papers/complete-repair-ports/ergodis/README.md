@@ -107,7 +107,7 @@ The crate is at version 0.1.0; lower-level interfaces may still evolve.
 
 ## Build and use the CLI
 
-ergodis requires Rust 1.82 or later.
+ergodis requires Rust 1.87 or later.
 
 ```text
 cargo install --path . --features parallel
