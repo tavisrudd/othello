@@ -191,6 +191,19 @@ impl<const WORDS: usize> Default for PackedSyndrome<WORDS> {
     }
 }
 
+#[inline]
+fn packed_dot_parity<const WORDS: usize>(
+    left: PackedSyndrome<WORDS>,
+    right: PackedSyndrome<WORDS>,
+) -> u32 {
+    left.words
+        .iter()
+        .zip(right.words)
+        .fold(0_u64, |parity, (&left, right)| parity ^ (left & right))
+        .count_ones()
+        & 1
+}
+
 const _: () = assert!(std::mem::size_of::<PackedSyndrome>() == 16);
 const _: () = assert!(std::mem::align_of::<PackedSyndrome>() == 8);
 
@@ -666,6 +679,7 @@ struct WideCompiledStructure<
     check_count: u16,
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
+    kernel_parity_functional: PackedSyndrome<CHECK_WORDS>,
     check_conflicts: Box<[AlignedConflict<CHECK_WORDS>]>,
     check_neighbors: Box<[PackedSupport<SUPPORT_WORDS>]>,
 }
@@ -694,6 +708,7 @@ pub struct CompiledWideCssDistanceImpl<
     logical_count: u8,
     maximum_column_check_weight: u8,
     kernel_weights_even: bool,
+    kernel_parity_functional: PackedSyndrome<CHECK_WORDS>,
     short_completion_syndromes: [Box<[u128]>; 2],
     three_completion_bloom: CompletionBloom,
     four_completion_bloom: CompletionBloom,
@@ -751,6 +766,70 @@ fn independent_row_indices(matrix: &Matrix) -> Vec<usize> {
         indices.push(row_index);
     }
     indices
+}
+
+/// Recover a check-row functional whose value on every coordinate column is
+/// one.  Such a functional exists exactly when every kernel word has even
+/// Hamming weight.
+fn binary_all_ones_functional<const WORDS: usize>(
+    matrix: &Matrix,
+    rows: &[usize],
+    output_position: impl Fn(usize, usize) -> usize,
+) -> Option<PackedSyndrome<WORDS>> {
+    let support_words = matrix.cols().div_ceil(64);
+    let mut pivots: Vec<(usize, Box<[u64]>, PackedSyndrome<WORDS>)> =
+        Vec::with_capacity(rows.len());
+    for (position, &row_index) in rows.iter().enumerate() {
+        let mut words = vec![0_u64; support_words];
+        for (coordinate, &entry) in matrix.row(row_index).iter().enumerate() {
+            words[coordinate / 64] |= u64::from(entry & 1) << (coordinate % 64);
+        }
+        let mut label = PackedSyndrome::<WORDS>::default();
+        let label_bit = output_position(position, row_index);
+        if label_bit >= WORDS * 64 {
+            return None;
+        }
+        label.words[label_bit / 64] |= 1_u64 << (label_bit % 64);
+        for &(pivot, ref basis, basis_label) in &pivots {
+            if words[pivot / 64] & (1_u64 << (pivot % 64)) != 0 {
+                for (left, &right) in words.iter_mut().zip(basis.iter()) {
+                    *left ^= right;
+                }
+                for (left, right) in label.words.iter_mut().zip(basis_label.words) {
+                    *left ^= right;
+                }
+            }
+        }
+        let Some(pivot) = words
+            .iter()
+            .rposition(|&word| word != 0)
+            .map(|word| word * 64 + (63 - words[word].leading_zeros() as usize))
+        else {
+            continue;
+        };
+        let insertion = pivots.partition_point(|&(existing, _, _)| existing > pivot);
+        pivots.insert(insertion, (pivot, words.into_boxed_slice(), label));
+    }
+
+    let mut target = vec![u64::MAX; support_words];
+    if let Some(last) = target.last_mut() {
+        let remainder = matrix.cols() % 64;
+        if remainder != 0 {
+            *last = (1_u64 << remainder) - 1;
+        }
+    }
+    let mut functional = PackedSyndrome::<WORDS>::default();
+    for &(pivot, ref basis, basis_label) in &pivots {
+        if target[pivot / 64] & (1_u64 << (pivot % 64)) != 0 {
+            for (left, &right) in target.iter_mut().zip(basis.iter()) {
+                *left ^= right;
+            }
+            for (left, right) in functional.words.iter_mut().zip(basis_label.words) {
+                *left ^= right;
+            }
+        }
+    }
+    target.iter().all(|&word| word == 0).then_some(functional)
 }
 
 fn compile_wide_structure<
@@ -823,18 +902,13 @@ where
             }
         }
     }
-    let presented_row_sum_is_all_ones = (0..coordinate_count).all(|coordinate| {
-        (0..physical.rows()).fold(0u8, |parity, row| {
-            parity ^ (physical.row(row)[coordinate] & 1)
-        }) == 1
-    });
+    let kernel_parity_functional =
+        binary_all_ones_functional::<CHECK_WORDS>(physical, &basis, |position, _| position);
     let mut maximum_column_check_weight = 0u8;
-    let mut basis_row_sum_is_all_ones = true;
     for (coordinate, column) in columns.iter().enumerate() {
         neighbors[coordinate].remove(coordinate);
         maximum_column_check_weight = maximum_column_check_weight
             .max(u8::try_from(column.syndrome.weight()).expect("wide check count is bounded"));
-        basis_row_sum_is_all_ones &= column.syndrome.weight() & 1 == 1;
     }
     let mut check_conflicts = vec![AlignedConflict::<CHECK_WORDS>::default(); basis.len()];
     let mut check_neighbors = vec![PackedSupport::<SUPPORT_WORDS>::default(); basis.len()];
@@ -853,7 +927,8 @@ where
         neighbors: neighbors.into_boxed_slice(),
         check_count: basis.len() as u16,
         maximum_column_check_weight,
-        kernel_weights_even: presented_row_sum_is_all_ones || basis_row_sum_is_all_ones,
+        kernel_weights_even: kernel_parity_functional.is_some(),
+        kernel_parity_functional: kernel_parity_functional.unwrap_or_default(),
         check_conflicts: check_conflicts.into_boxed_slice(),
         check_neighbors: check_neighbors.into_boxed_slice(),
     })
@@ -883,6 +958,7 @@ where
             logical_count: logical.rows() as u8,
             maximum_column_check_weight: structure.maximum_column_check_weight,
             kernel_weights_even: structure.kernel_weights_even,
+            kernel_parity_functional: structure.kernel_parity_functional,
             short_completion_syndromes,
             three_completion_bloom,
             four_completion_bloom,
@@ -997,6 +1073,7 @@ where
             logical_count,
             maximum_column_check_weight,
             kernel_weights_even,
+            kernel_parity_functional: structure.kernel_parity_functional,
             short_completion_syndromes: [one_completion, two_completion],
             three_completion_bloom,
             four_completion_bloom,
@@ -1036,14 +1113,17 @@ where
     #[inline]
     fn syndrome_degree_bound_exceeds(
         &self,
-        syndrome: PackedSyndrome<CHECK_WORDS>,
+        syndrome_weight: u32,
+        required_parity: u32,
         budget: u16,
     ) -> bool {
         let degree = u32::from(self.maximum_column_check_weight);
         if degree == 0 {
-            return !syndrome.is_zero() && budget != u16::MAX;
+            return syndrome_weight != 0 && budget != u16::MAX;
         }
-        syndrome.weight() > u32::from(budget) * degree
+        let mut lower_bound = syndrome_weight.div_ceil(degree);
+        lower_bound += u32::from(self.kernel_weights_even) & ((lower_bound ^ required_parity) & 1);
+        lower_bound > u32::from(budget)
     }
 
     /// Test whether greedy packing finds more disjoint neighborhoods than the budget.
@@ -1051,17 +1131,19 @@ where
     fn syndrome_packing_exceeds(
         &self,
         mut syndrome: PackedSyndrome<CHECK_WORDS>,
+        required_parity: u32,
         budget: u16,
     ) -> bool {
-        let mut remaining = budget;
+        let mut lower_bound = 0_u32;
         while let Some(check) = syndrome.pop_lowest() {
-            if remaining == 0 {
+            lower_bound += 1;
+            if lower_bound > u32::from(budget) {
                 return true;
             }
-            remaining -= 1;
             syndrome.difference_assign(self.check_conflicts[check].syndrome);
         }
-        false
+        lower_bound += u32::from(self.kernel_weights_even) & ((lower_bound ^ required_parity) & 1);
+        lower_bound > u32::from(budget)
     }
 
     /// Test the cheap degree bound before paying for greedy conflict packing.
@@ -1071,8 +1153,10 @@ where
         syndrome: PackedSyndrome<CHECK_WORDS>,
         budget: u16,
     ) -> bool {
-        self.syndrome_degree_bound_exceeds(syndrome, budget)
-            || self.syndrome_packing_exceeds(syndrome, budget)
+        let syndrome_weight = syndrome.weight();
+        let required_parity = packed_dot_parity(syndrome, self.kernel_parity_functional);
+        self.syndrome_degree_bound_exceeds(syndrome_weight, required_parity, budget)
+            || self.syndrome_packing_exceeds(syndrome, required_parity, budget)
     }
 
     #[inline]
@@ -2531,7 +2615,9 @@ impl CompiledCssDistance {
         let mut columns = vec![PackedColumn::<2>::default(); coordinate_count];
         let mut neighbors = vec![PackedSupport::default(); coordinate_count];
         let mut maximum_column_check_weight = 0u8;
-        let mut kernel_weights_even = true;
+        let presented_rows = (0..physical.rows()).collect::<Vec<_>>();
+        let kernel_weights_even =
+            binary_all_ones_functional::<2>(physical, &presented_rows, |_, row| row).is_some();
         for check in 0..physical.rows() {
             let row = physical.row(check);
             let mut support = PackedSupport::default();
@@ -2559,7 +2645,6 @@ impl CompiledCssDistance {
             maximum_column_check_weight = maximum_column_check_weight.max(
                 u8::try_from(column.syndrome.weight()).expect("check count is bounded by 128"),
             );
-            kernel_weights_even &= column.syndrome.weight() & 1 == 1;
         }
         Ok(CompiledStructure {
             columns: columns.into_boxed_slice(),
@@ -3543,6 +3628,36 @@ mod tests {
             compiled.certify_incumbent_syndrome_driven(&[0, 1], &[0]),
             Err(CssDistanceError::IncumbentPhysicalSyndrome)
         ));
+    }
+
+    #[test]
+    fn arbitrary_rowspace_functional_certifies_kernel_parity() {
+        let physical = Matrix::new::<2>(
+            3,
+            5,
+            vec![
+                1, 1, 0, 0, 0, // first two rows sum to all ones
+                0, 0, 1, 1, 1, // while the sum of all three does not
+                1, 0, 1, 0, 0,
+            ],
+        )
+        .unwrap();
+        let logical = Matrix::new::<2>(1, 5, vec![1, 0, 0, 0, 0]).unwrap();
+        let compiled = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+        assert!(compiled.kernel_weights_even());
+
+        for support in 0_u64..1 << 5 {
+            let mut syndrome = PackedSyndrome::<3>::default();
+            for coordinate in 0..5 {
+                if support & (1_u64 << coordinate) != 0 {
+                    syndrome.toggle(compiled.columns[coordinate].syndrome);
+                }
+            }
+            assert_eq!(
+                packed_dot_parity(syndrome, compiled.kernel_parity_functional),
+                support.count_ones() & 1
+            );
+        }
     }
 
     fn artifact_problem() -> (Matrix, Matrix) {
