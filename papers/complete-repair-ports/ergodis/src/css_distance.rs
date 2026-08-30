@@ -32,6 +32,7 @@ const COLOSSAL_SYNDROME_WORDS: usize = 13;
 const HUGE_LOGICAL_WORDS: usize = 4;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
 const MAX_ENUMERATED_FOUR_COMPLETIONS: usize = 10_000_000;
+const MAX_ENUMERATED_THREE_COMPLETIONS: usize = 100_000_000;
 const ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSS1";
 const ARTIFACT_VERSION: u16 = 1;
 const WIDE_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSW1";
@@ -637,29 +638,38 @@ fn compile_large_completion_filters<const WORDS: usize>(
     let pair_count = keys.len().saturating_mul(keys.len().saturating_sub(1)) / 2;
     let triple_count = pair_count.saturating_mul(keys.len().saturating_sub(2)) / 3;
     let mut two = Vec::with_capacity(pair_count);
-    let mut three_completion_bloom = CompletionBloom::new(
-        one.len()
-            .saturating_add(pair_count)
-            .saturating_add(triple_count),
-    );
-    for &key in &one {
-        three_completion_bloom.insert_three(key);
-    }
-    for left in 0..keys.len() {
-        let left_key = keys[left];
-        for middle in left + 1..keys.len() {
-            let pair_key = left_key ^ keys[middle];
+    for (left, &left_key) in keys.iter().enumerate() {
+        for &middle_key in keys.iter().skip(left + 1) {
+            let pair_key = left_key ^ middle_key;
             two.push(pair_key);
-            for &right_key in keys.iter().skip(middle + 1) {
-                three_completion_bloom.insert_three(pair_key ^ right_key);
-            }
         }
     }
     two.sort_unstable();
     two.dedup();
-    for &key in &two {
-        three_completion_bloom.insert_three(key);
-    }
+    let three_completion_bloom = if triple_count <= MAX_ENUMERATED_THREE_COMPLETIONS {
+        let mut bloom = CompletionBloom::new(
+            one.len()
+                .saturating_add(pair_count)
+                .saturating_add(triple_count),
+        );
+        for &key in &one {
+            bloom.insert_three(key);
+        }
+        for &key in &two {
+            bloom.insert_three(key);
+        }
+        for (left, &left_key) in keys.iter().enumerate() {
+            for (middle, &middle_key) in keys.iter().enumerate().skip(left + 1) {
+                let pair_key = left_key ^ middle_key;
+                for &right_key in keys.iter().skip(middle + 1) {
+                    bloom.insert_three(pair_key ^ right_key);
+                }
+            }
+        }
+        bloom
+    } else {
+        CompletionBloom::universal()
+    };
     (
         [one.into_boxed_slice(), two.into_boxed_slice()],
         three_completion_bloom,
@@ -3739,6 +3749,21 @@ mod tests {
         for &value in &expected[3] {
             assert!(four_bloom.contains_one(value));
         }
+    }
+
+    #[test]
+    fn saturated_triple_filter_is_replaced_by_universal_filter() {
+        let columns = (0_u64..846)
+            .map(|key| PackedColumn::<3> {
+                syndrome: PackedSyndrome { words: [key, 0, 0] },
+                logical: 0,
+            })
+            .collect::<Vec<_>>();
+        let (short, triple_bloom, _) =
+            compile_large_completion_filters(&columns, wide_syndrome_key);
+        assert_eq!(short[0].len(), columns.len());
+        assert_eq!(triple_bloom.words.as_ref(), &[u64::MAX]);
+        assert_eq!(triple_bloom.bit_mask, 63);
     }
 
     fn artifact_problem() -> (Matrix, Matrix) {
