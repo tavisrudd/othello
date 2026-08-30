@@ -563,7 +563,20 @@ Sequel research:
   rooted diagnostic closures, at 23.20--26.47 million states and at most
   265,884 KiB RSS; the other 22 still fill the exact table. This is evidence
   that the aggregate bound transfers across roots, not an UNSAT certificate or
-  a change to the proved bound.
+  a change to the proved bound.  The residual backend is now separately
+  reusable and proof-producing: commit `a9f8bfd1e` adds a pre-sized iterative
+  bounded-transversal solver plus a canonical streamed negative certificate
+  and independent verifier, exhaustively checked on every four-vertex
+  hypergraph.  Its flat subset proof is a correctness baseline and may have
+  combinatorial output; a streamed branch DAG is the next proof-compression
+  target, and global C880 search replay is still open.  The higher-level C80
+  workflow is specified as a runtime typed attack-plan controller in
+  [C985 adaptive attack controller](../2026-08-30-c985-adaptive-attack-controller.md):
+  exact features are compiled once, many diagnostic/ordering plans race by
+  successive halving without Rust recompilation, and only replay-gated typed
+  predicates may prune or admit.  FunSearch/AlphaEvolve supply the compact
+  program and proposer--evaluator--archive pattern; Ergodis adds theorem-role
+  effects, permanent falsifiers, and universal-claim gates.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

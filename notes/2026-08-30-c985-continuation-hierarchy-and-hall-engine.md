@@ -325,6 +325,8 @@ changes any bound on equiangular lines in `R^18`.
 - `2d2595cca` — projective deletion-secant charge edges on q11/q23 controls.
 - `1d49e683e` — game-semantic `K_Omega` admission and q11/q13 counting
   controls.
+- `a9f8bfd1e` — iterative residual Hitting Set kernel with canonical streamed
+  negative evidence and independent replay.
 
 Validation used an isolated persistent target at
 `/home/tavis/.cache/ergodis/target-c985-validation`: formatting, strict
@@ -364,6 +366,13 @@ The sharper continuation is now to count bad replies relative to the
 prove that the bad families do not cover the legal reply line for q at least
 13, and retain q11 as the strict-`Omega` equality base.  Do not return to a
 universal per-exchange Hall law.
+
+The repeated propose--probe--falsify--redirect loop is specified as a reusable
+runtime facility in
+[C985 adaptive attack controller](2026-08-30-c985-adaptive-attack-controller.md).
+It compiles exact features once and races typed attack-plan bytecode without
+rebuilding Rust.  Diagnostic and ordering mutations may evolve freely; a
+predicate can prune or admit only through a proof/replay-gated soundness role.
 
 Reproduction from the repository root:
 

@@ -140,6 +140,26 @@ Stream this tree or a shared DAG and replay it independently.  This turns a
 runtime prune into proof-producing search and is the most important extension
 for a mathematical `g(8)` claim.
 
+The first generic proof kernel is now implemented in commit `a9f8bfd1e`.  It
+provides a pre-sized, iterative bounded-transversal decision workspace and a
+separate negative-certificate writer/verifier.  The baseline certificate
+enumerates every `k`-subset of the available universe, for
+`k=min(budget,|available|)`, and streams one clause missed by each subset.
+Every smaller candidate extends to such a `k`-subset, so the proof is complete.
+The verifier regenerates the subsets in canonical order and consumes each
+16-byte witness record without buffering the proof.  Repeated solving performs
+no allocation and uses no recursion.  Exhaustive testing compares the kernel
+with brute force for all 65,536 hypergraphs on a four-element universe and all
+budgets zero through four; the full all-feature test suite and strict clippy
+also pass.
+
+This flat proof is deliberately a simple correctness baseline, not the final
+storage claim.  Its output can be `Theta(binomial(n,k))`.  The next measured
+format should stream the solver's branching tree or hash-consed DAG and retain
+the flat form as the independent oracle on small kernels.  The engine is not
+yet wired to turn a complete C880 run into a global proof; it certifies only
+the bounded residual subproblem presented to it.
+
 ### 3. Kernelization of residual clauses
 
 Delete duplicate clauses and any clause containing another residual clause;
@@ -329,3 +349,31 @@ The depth-four and local-kernel profitability questions are now settled
 negative on the stated rooted controls.  The C80 predicate is implemented and
 positive on its q11/q13 sampled `K_Omega` domains; its uniform geometric
 counting theorem remains open.
+
+## Deliberate red-team closeout and Mystery Ledger
+
+- The `K_Omega` admission census cannot prove `K_Omega` is hereditary: it uses
+  the existing certificate engine to define the survivor domain.  Its value is
+  to isolate the missing geometric statement--every opponent fibre contains a
+  re-entering reply--and to falsify stronger scalar claims.
+- The q11/q13 split is empirical structure, not permission to extrapolate to
+  all larger fields.  Why the minimum q13 support surplus is 18 remains a
+  mystery; a uniform incidence argument must explain a symbolic margin.
+- Some tested opponent fibres contain only one certified reply.  Mean reply
+  abundance, random sampling, and global support surplus are therefore
+  incapable of proving the existential response theorem by themselves.
+- The residual proof kernel certifies a local Hitting Set instance, not the
+  semantic correctness of the compiler that produced its clauses and not a
+  whole-run UNSAT claim.  Those require independent clause-compilation replay
+  and a global search certificate.
+- Flat subset proofs have bounded memory but potentially enormous I/O.  A
+  branch-DAG format is the leading compression candidate, contingent on
+  measured proof-size distributions rather than assumed benefit.
+- Exact depth four and local duplicate/superset kernelization remain killed on
+  the recorded controls.  They should not return without a distributional
+  change or a theorem that removes materially more work.
+- The runtime attack controller is still a design.  Its soundness effect
+  system, permanent falsifier corpus, and selection-bias controls are required
+  before automatically discovered predicates may influence pruning.
+- The `R^18` adapter remains gated and unlaunched.  Reproducing Stage 0 and the
+  published `n=60` census is still the admission condition.
