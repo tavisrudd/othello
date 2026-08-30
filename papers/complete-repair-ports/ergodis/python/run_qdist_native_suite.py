@@ -263,7 +263,6 @@ def main() -> int:
             ris_evidence_sha256: str | None = None
             if (
                 args.random_binary is not None
-                and stem in LITERATURE_BB_DISTANCES
                 and maximum_weight >= 12
             ):
                 ris_stdout_path = ris_dir / f"{slug}.stdout.jsonl"
