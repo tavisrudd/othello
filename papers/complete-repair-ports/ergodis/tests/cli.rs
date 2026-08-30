@@ -75,6 +75,27 @@ fn compose_cli_retains_legacy_prime_schema() {
 }
 
 #[test]
+fn hall_cli_matches_the_c80_q11_complete_exchange() {
+    let output = Command::new(env!("CARGO_BIN_EXE_ergodis"))
+        .args([
+            "hall",
+            "--input",
+            example("hall-c80-q11.json").to_str().unwrap(),
+        ])
+        .output()
+        .unwrap();
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let value: Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(value["saturated"], true);
+    assert_eq!(value["cardinality"], 2);
+    assert_eq!(value["matching"], serde_json::json!([0, 1]));
+}
+
+#[test]
 fn transfer_cli_fails_closed_on_insufficient_budget() {
     let mut value: Value =
         serde_json::from_slice(&std::fs::read(example("f4-scalar-separation.json")).unwrap())

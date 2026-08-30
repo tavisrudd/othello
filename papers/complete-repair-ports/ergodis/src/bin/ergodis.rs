@@ -4,14 +4,16 @@ use ergodis::{
     azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
     compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
     gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair,
-    parse_ceph_xor_layers, schedule_repair_dag, CephXorLayer, CoefficientWitness, CompositionTable,
-    CompositionTower, ConfinementSector, CostTable, FiniteField, Gf4, GpuCheckpointCapacities,
-    Matrix, MatrixCoefficientWitness, Prime, QcLdpcCode, RepairTask, TowerLevel, TowerWitness,
+    parse_ceph_xor_layers, schedule_repair_dag, solve_hall, verify_hall_certificate, CephXorLayer,
+    CoefficientWitness, CompositionTable, CompositionTower, ConfinementSector, CostTable,
+    DenseHallGraph, FiniteField, Gf4, GpuCheckpointCapacities, HallWorkspace, Matrix,
+    MatrixCoefficientWitness, Prime, QcLdpcCode, RepairTask, TowerLevel, TowerWitness,
     WeightedRepairProblem, WeightedSchedulerBackend,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
-use std::io::{self, Read};
+use std::fs::{File, OpenOptions};
+use std::io::{self, BufReader, BufWriter, Read, Write};
 use std::num::NonZeroUsize;
 use std::path::{Path, PathBuf};
 
@@ -82,6 +84,53 @@ enum Command {
         #[arg(short, long, default_value = "-")]
         input: PathBuf,
     },
+    /// Decide a finite Hall restriction graph and emit an exact obstruction or matching.
+    Hall {
+        /// JSON input file, or '-' for standard input.
+        #[arg(short, long, default_value = "-")]
+        input: PathBuf,
+        /// Optional create-only path for the streamed binary certificate.
+        #[arg(long)]
+        certificate: Option<PathBuf>,
+    },
+    /// Independently replay a streamed Hall certificate.
+    VerifyHall {
+        /// JSON graph input file, or '-' for standard input.
+        #[arg(short, long, default_value = "-")]
+        input: PathBuf,
+        /// Binary Hall certificate to replay.
+        #[arg(long)]
+        certificate: PathBuf,
+    },
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct HallInput {
+    left_count: u32,
+    right_count: u32,
+    edges: Vec<[u32; 2]>,
+}
+
+impl HallInput {
+    fn into_graph(self) -> Result<DenseHallGraph> {
+        DenseHallGraph::new(
+            self.left_count,
+            self.right_count,
+            self.edges.into_iter().map(|edge| (edge[0], edge[1])),
+        )
+        .context("invalid Hall restriction graph")
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct HallOutput {
+    saturated: bool,
+    cardinality: u32,
+    deficiency: u32,
+    matching: Vec<Option<u32>>,
+    deficient_left: Vec<u32>,
+    deficient_right: Vec<u32>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -1383,6 +1432,48 @@ fn run_with_threads<T: Send>(
     }
 }
 
+fn hall(input: HallInput, certificate: Option<&Path>) -> Result<HallOutput> {
+    let graph = input.into_graph()?;
+    let mut workspace = HallWorkspace::new(graph.left_count(), graph.right_count())
+        .context("failed to allocate Hall workspace")?;
+    let result = solve_hall(&graph, &mut workspace).context("Hall solve failed")?;
+    if let Some(path) = certificate {
+        let file = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(path)
+            .with_context(|| format!("failed to create Hall certificate {}", path.display()))?;
+        let mut writer = BufWriter::new(file);
+        result
+            .write_certificate(&mut writer)
+            .context("failed to stream Hall certificate")?;
+        writer.flush().context("failed to flush Hall certificate")?;
+    }
+    Ok(HallOutput {
+        saturated: result.is_saturated(),
+        cardinality: result.cardinality(),
+        deficiency: result.deficiency(),
+        matching: (0..graph.left_count())
+            .map(|left| result.matched_right(left))
+            .collect(),
+        deficient_left: (0..graph.left_count())
+            .filter(|&left| result.deficient_left_contains(left))
+            .collect(),
+        deficient_right: (0..graph.right_count())
+            .filter(|&right| result.deficient_right_contains(right))
+            .collect(),
+    })
+}
+
+fn verify_hall(input: HallInput, certificate: &Path) -> Result<Value> {
+    let graph = input.into_graph()?;
+    let file = File::open(certificate)
+        .with_context(|| format!("failed to open Hall certificate {}", certificate.display()))?;
+    verify_hall_certificate(&graph, BufReader::new(file))
+        .context("Hall certificate replay failed")?;
+    Ok(json!({"verified": true}))
+}
+
 fn main() -> Result<()> {
     match Cli::parse().command {
         Command::Compose {
@@ -1426,6 +1517,14 @@ fn main() -> Result<()> {
         Command::Application { input } => {
             let input = read_json(&input)?;
             write_json(&application(input)?)
+        }
+        Command::Hall { input, certificate } => {
+            let input = read_json(&input)?;
+            write_json(&hall(input, certificate.as_deref())?)
+        }
+        Command::VerifyHall { input, certificate } => {
+            let input = read_json(&input)?;
+            write_json(&verify_hall(input, &certificate)?)
         }
     }
 }
