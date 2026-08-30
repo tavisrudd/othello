@@ -145,6 +145,22 @@ summary. `evolve` deterministically mutates constants, fields, comparisons, and
 Boolean combinators. The server hashes each full output vector, so syntactically
 different attacks with the same behaviour share one observational class.
 
+Plans may also carry an observational scope, for example
+`"scope":{"field":"root_orbit","mask":2048}`. Values 0 through 63 select
+bits in the mask. Scope is part of the executable hash. The compiled adapter
+tests it before the VM and before computing optional theorem features, so a
+root-specific idea pays neither cost on excluded roots.
+
+The current predicate-only `evolve` command treats scope as a separate part of
+the genome. It asks the controller
+for bounded profiles of `root_orbit` and `root_candidate`, proposes observed
+singletons and the union of positive-majority frozen strata, and mutates an
+existing mask one observed bit at a time. Profiles combine the frozen batch
+with strata seen in instrumented live pulses, so runtime-only roots remain
+eligible. Offline labels rank theorem shapes; live ordering policies still
+require a future paired operational proposer/race plus the throughput probation
+below rather than being selected by classification accuracy.
+
 The bounded tree synthesizer is a second proposer:
 
 ```text
@@ -220,9 +236,17 @@ control statically disabled; `--baseline` exercises that unchanged path.
 Long diagnostic runs may add `--progress-file FILE --pulse-interval 4096`.
 Only then does the auxiliary watcher take a one-second receive timeout and
 stream changed heartbeat snapshots as create-only, mode-0600 JSONL through a
-line writer. The search thread performs no file I/O or allocation. With no
-progress file the watcher returns to pure blocking `recv`, and short solves
+line writer. It also publishes the same snapshot to the local controller so
+candidate generation can learn which root strata actually occurred. The
+search thread performs no socket/file I/O, serialization, or allocation. With
+no progress file the watcher returns to pure blocking `recv`, and short solves
 should still omit the entire control layer.
+
+Snapshots include total and current-root states, duplicate/infeasible counts,
+root ordinal and size proxies, canonical root orbit, and active/completed root
+masks. The current adapter has one active root; a parallel adapter should use
+one cacheline-isolated slot per worker and let the watcher OR the slots into the
+published mask.
 
 ```text
 alignment-controlled --run-dir RUN --points 8 --budget 13 \
@@ -230,7 +254,17 @@ alignment-controlled --run-dir RUN --points 8 --budget 13 \
 ergodisctl --run-dir RUN status
 ergodisctl --run-dir RUN apply \
   examples/data/campaign-c880-residual-packing-order.json --expect-epoch 0
+
+# Compare an active ordering plan with a temporarily inactive same-root window.
+ergodisctl --run-dir RUN probation prefer-strong-residual-packing-bound \
+  --progress RUN/progress.jsonl --expect-epoch 1 --samples 5
 ```
+
+Probation compares state rates only when both windows retain the same root
+candidate and initial structural sizing tuple. Otherwise it uses completed-root
+throughput when both windows span roots; an incomparable pair is restored as
+inconclusive. A slowdown beyond the requested threshold leaves the plan rolled
+back.
 
 The residual-packing plan is intentionally a diagnostic stressor, not a
 recommended heuristic. The first live version recomputed every remaining
@@ -240,16 +274,21 @@ once per frame; default feature-off workspaces contain none of this state. That
 repair reduced the same injection experiment from 168.85 to 78.07 seconds
 (2.16x), preserving the exact UNSAT answer and essentially the same state
 count. It is still 1.81x slower than the 43.10-second no-theorem diagnostic.
-The next gate is therefore not more caching alone: cache the chosen child's
-summary and/or replace exact child evaluation with a cheaper theorem-equivalent
-accumulator, then demand an actual state reduction in multiround A/B.
+Root scoping is the first theorem-driven cost repair. On the budget-12 fixture,
+an unscoped residual score executed 220.9 billion instructions in 18.76 seconds;
+an excluded scope executed 91.7 billion in 8.00 seconds, indistinguishable from
+the no-plan instruction count. A genuinely visited orbit-11 scope finished in
+10.40 seconds versus 18.69 seconds unscoped while preserving the exact answer.
+The next gate is an online root-to-plan dispatcher that promotes only
+same-stratum probation wins, followed by a cheaper theorem-equivalent child
+summary and an actual state reduction in multiround A/B.
 
 ## Current limitations
 
 The C880 exact DFS now consumes the safe-point protocol experimentally; C80
 does not yet have a live adapter. The controller does not
 restore active plans after process restart, compact equivalent ledger entries
-on disk, generate proof handles, or promote rules. The protocol, command names,
-and proposer are expected to change after more real campaigns; the isolation,
-boundedness, exact replay, and core-independence invariants are the intended
-durable parts.
+on disk, generate proof handles, or promote rules into a multi-policy
+root-to-plan dispatch table. The protocol, command names, and proposer are
+expected to change after more real campaigns; the isolation, boundedness,
+exact replay, and core-independence invariants are the intended durable parts.

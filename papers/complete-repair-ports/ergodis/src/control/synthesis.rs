@@ -141,6 +141,7 @@ pub(super) fn learn_decision_tree(
             name: format!("decision-tree-{}-{}", nodes.len(), realized_depth),
             role: PlanRole::Diagnostic,
             output: PlanOutput::Predicate,
+            scope: None,
             program,
         },
         nodes.len(),

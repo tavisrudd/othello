@@ -149,7 +149,16 @@ pub struct PlanSpec {
     pub role: PlanRole,
     #[serde(default)]
     pub output: PlanOutput,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub scope: Option<PlanScope>,
     pub program: Vec<PlanOp>,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct PlanScope {
+    pub field: String,
+    pub mask: u64,
 }
 
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
@@ -191,6 +200,8 @@ pub struct ExpressionPlanSpec {
     pub role: PlanRole,
     #[serde(default)]
     pub output: PlanOutput,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub scope: Option<PlanScope>,
     pub expr: PlanExpr,
 }
 
@@ -337,6 +348,7 @@ impl ExpressionPlanSpec {
             name: self.name,
             role: self.role,
             output: self.output,
+            scope: self.scope,
             program,
         })
     }
@@ -438,6 +450,8 @@ pub struct CompiledPlan {
     ops: Box<[CompiledOp]>,
     stack_needed: usize,
     field_count: u16,
+    scope_field: u16,
+    scope_mask: u64,
     pub hash: String,
 }
 
@@ -456,6 +470,19 @@ impl CompiledPlan {
         self.evaluate_value(row, None)
     }
 
+    #[inline(always)]
+    pub fn applies(&self, row: &[i64]) -> bool {
+        if self.scope_field == u16::MAX {
+            return true;
+        }
+        let value = row[self.scope_field as usize];
+        (0..64).contains(&value) && self.scope_mask >> value & 1 != 0
+    }
+
+    pub fn scope_descriptor(&self) -> Option<(usize, u64)> {
+        (self.scope_field != u16::MAX).then_some((self.scope_field as usize, self.scope_mask))
+    }
+
     pub fn compile(spec: &PlanSpec, fields: &[String]) -> Result<Self, ControlError> {
         if spec.schema != PLAN_SCHEMA || spec.name.is_empty() || spec.name.len() > 96 {
             return Err(ControlError::Invalid("invalid plan schema or name".into()));
@@ -470,6 +497,17 @@ impl CompiledPlan {
             .enumerate()
             .map(|(field, name)| (name.as_str(), field))
             .collect();
+        let (scope_field, scope_mask) = if let Some(scope) = &spec.scope {
+            let field = *index.get(scope.field.as_str()).ok_or_else(|| {
+                ControlError::Invalid(format!("unknown scope feature {:?}", scope.field))
+            })?;
+            if scope.mask == 0 {
+                return Err(ControlError::Invalid("plan scope mask is empty".into()));
+            }
+            (field as u16, scope.mask)
+        } else {
+            (u16::MAX, u64::MAX)
+        };
         let mut depth = 0usize;
         let mut stack_needed = 0usize;
         let mut kinds = [ValueKind::Integer; MAX_PLAN_STACK];
@@ -592,8 +630,13 @@ impl CompiledPlan {
             ));
         }
         // The display name is ledger metadata, not executable semantics.
-        let encoded =
-            serde_json::to_vec(&(PLAN_SCHEMA, spec.role, spec.output, spec.program.as_slice()))?;
+        let encoded = serde_json::to_vec(&(
+            PLAN_SCHEMA,
+            spec.role,
+            spec.output,
+            spec.scope.as_ref().map(|scope| (&scope.field, scope.mask)),
+            spec.program.as_slice(),
+        ))?;
         Ok(Self {
             name: spec.name.clone(),
             role: spec.role,
@@ -601,6 +644,8 @@ impl CompiledPlan {
             ops: ops.into_boxed_slice(),
             stack_needed,
             field_count: fields.len() as u16,
+            scope_field,
+            scope_mask,
             hash: blake3::hash(&encoded).to_hex().to_string(),
         })
     }
@@ -611,6 +656,9 @@ impl CompiledPlan {
         row: &[i64],
         trace: Option<&mut Vec<i64>>,
     ) -> Result<i64, ControlError> {
+        if !self.applies(row) {
+            return Ok(0);
+        }
         let mut stack = [0i64; MAX_PLAN_STACK];
         let mut depth = 0usize;
         let mut trace = trace;

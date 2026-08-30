@@ -13,7 +13,7 @@ use std::sync::{Arc, Mutex};
 use std::thread::{self, JoinHandle};
 use std::time::{Duration, Instant};
 
-pub const ALIGNMENT_PLAN_FIELDS: [&str; 7] = [
+pub const ALIGNMENT_PLAN_FIELDS: [&str; 15] = [
     "depth",
     "selected_count",
     "candidate",
@@ -21,6 +21,14 @@ pub const ALIGNMENT_PLAN_FIELDS: [&str; 7] = [
     "unresolved_count",
     "child_unresolved_count",
     "child_packing",
+    "root_candidate",
+    "root_orbit",
+    "root_ordinal",
+    "root_total",
+    "root_sized",
+    "root_initial_unresolved",
+    "root_initial_packing",
+    "root_initial_branches",
 ];
 
 static WATCH_IDS: AtomicU64 = AtomicU64::new(0);
@@ -28,7 +36,7 @@ static WATCH_IDS: AtomicU64 = AtomicU64::new(0);
 #[repr(align(64))]
 struct PaddedFlag(AtomicBool);
 
-#[repr(align(64))]
+#[repr(C, align(64))]
 struct Heartbeat {
     sequence: AtomicU64,
     states: AtomicU64,
@@ -37,6 +45,20 @@ struct Heartbeat {
     depth: AtomicU64,
     selected_count: AtomicU64,
     unresolved_count: AtomicU64,
+    root_done: AtomicU64,
+    root_total: AtomicU64,
+    root_candidate: AtomicU64,
+    root_orbit: AtomicU64,
+    root_states: AtomicU64,
+    root_duplicates: AtomicU64,
+    root_infeasible: AtomicU64,
+    root_ordinal: AtomicU64,
+    root_sized: AtomicU64,
+    root_initial_unresolved: AtomicU64,
+    root_initial_packing: AtomicU64,
+    root_initial_branches: AtomicU64,
+    active_root_mask: AtomicU64,
+    completed_root_mask: AtomicU64,
 }
 
 impl Heartbeat {
@@ -49,6 +71,20 @@ impl Heartbeat {
             depth: AtomicU64::new(0),
             selected_count: AtomicU64::new(0),
             unresolved_count: AtomicU64::new(0),
+            root_done: AtomicU64::new(0),
+            root_total: AtomicU64::new(0),
+            root_candidate: AtomicU64::new(u64::MAX),
+            root_orbit: AtomicU64::new(u64::MAX),
+            root_states: AtomicU64::new(0),
+            root_duplicates: AtomicU64::new(0),
+            root_infeasible: AtomicU64::new(0),
+            root_ordinal: AtomicU64::new(0),
+            root_sized: AtomicU64::new(0),
+            root_initial_unresolved: AtomicU64::new(0),
+            root_initial_packing: AtomicU64::new(0),
+            root_initial_branches: AtomicU64::new(0),
+            active_root_mask: AtomicU64::new(0),
+            completed_root_mask: AtomicU64::new(0),
         }
     }
 
@@ -64,6 +100,37 @@ impl Heartbeat {
             .store(u64::from(point.selected_count), Ordering::Relaxed);
         self.unresolved_count
             .store(u64::from(point.unresolved_count), Ordering::Relaxed);
+        self.root_done
+            .store(u64::from(point.root_done), Ordering::Relaxed);
+        self.root_total
+            .store(u64::from(point.root_total), Ordering::Relaxed);
+        self.root_candidate.store(
+            point.root_candidate.map_or(u64::MAX, u64::from),
+            Ordering::Relaxed,
+        );
+        self.root_orbit.store(
+            point.root_orbit.map_or(u64::MAX, u64::from),
+            Ordering::Relaxed,
+        );
+        self.root_states.store(point.root_states, Ordering::Relaxed);
+        self.root_duplicates
+            .store(point.root_duplicates, Ordering::Relaxed);
+        self.root_infeasible
+            .store(point.root_infeasible, Ordering::Relaxed);
+        self.root_ordinal
+            .store(u64::from(point.root_ordinal), Ordering::Relaxed);
+        self.root_sized
+            .store(u64::from(point.root_sized), Ordering::Relaxed);
+        self.root_initial_unresolved
+            .store(u64::from(point.root_initial_unresolved), Ordering::Relaxed);
+        self.root_initial_packing
+            .store(u64::from(point.root_initial_packing), Ordering::Relaxed);
+        self.root_initial_branches
+            .store(u64::from(point.root_initial_branches), Ordering::Relaxed);
+        self.active_root_mask
+            .store(point.active_root_mask, Ordering::Relaxed);
+        self.completed_root_mask
+            .store(point.completed_root_mask, Ordering::Relaxed);
         self.sequence.fetch_add(1, Ordering::Release);
     }
 
@@ -74,6 +141,8 @@ impl Heartbeat {
                 std::hint::spin_loop();
                 continue;
             }
+            let root_candidate = self.root_candidate.load(Ordering::Relaxed);
+            let root_orbit = self.root_orbit.load(Ordering::Relaxed);
             let status = json!({
                 "states": self.states.load(Ordering::Relaxed),
                 "duplicates": self.duplicates.load(Ordering::Relaxed),
@@ -81,6 +150,20 @@ impl Heartbeat {
                 "depth": self.depth.load(Ordering::Relaxed),
                 "selected_count": self.selected_count.load(Ordering::Relaxed),
                 "unresolved_count": self.unresolved_count.load(Ordering::Relaxed),
+                "root_done": self.root_done.load(Ordering::Relaxed),
+                "root_total": self.root_total.load(Ordering::Relaxed),
+                "root_candidate": (root_candidate != u64::MAX).then_some(root_candidate),
+                "root_orbit": (root_orbit != u64::MAX).then_some(root_orbit),
+                "root_states": self.root_states.load(Ordering::Relaxed),
+                "root_duplicates": self.root_duplicates.load(Ordering::Relaxed),
+                "root_infeasible": self.root_infeasible.load(Ordering::Relaxed),
+                "root_ordinal": self.root_ordinal.load(Ordering::Relaxed),
+                "root_sized": self.root_sized.load(Ordering::Relaxed) != 0,
+                "root_initial_unresolved": self.root_initial_unresolved.load(Ordering::Relaxed),
+                "root_initial_packing": self.root_initial_packing.load(Ordering::Relaxed),
+                "root_initial_branches": self.root_initial_branches.load(Ordering::Relaxed),
+                "active_root_mask": self.active_root_mask.load(Ordering::Relaxed),
+                "completed_root_mask": self.completed_root_mask.load(Ordering::Relaxed),
             });
             if self.sequence.load(Ordering::Acquire) == before {
                 return status;
@@ -237,6 +320,15 @@ impl SteeringWatcher {
                             let states = status["states"].as_u64().unwrap_or(0);
                             if states != last_states {
                                 last_states = states;
+                                let _ = send_request(
+                                    &thread_manifest,
+                                    "pulse",
+                                    json!({
+                                        "since_epoch": thread_applied_epoch.load(Ordering::Acquire),
+                                        "solver": &status,
+                                    }),
+                                    response_limit,
+                                );
                                 let record = json!({
                                     "schema": "ergodis-progress-v0",
                                     "elapsed_ms": start.elapsed().as_millis(),
@@ -421,8 +513,19 @@ impl AlignmentSearchControl for AlignmentCampaignControl {
     }
 
     #[inline]
-    fn ordering_active(&self) -> bool {
-        self.ordering_plan().is_some()
+    fn ordering_active(&self, root_candidate: Option<u32>, root_orbit: Option<u32>) -> bool {
+        let Some(plan) = self.ordering_plan() else {
+            return false;
+        };
+        let Some((field, mask)) = plan.scope_descriptor() else {
+            return true;
+        };
+        let value = match field {
+            7 => root_candidate,
+            8 => root_orbit,
+            _ => return true,
+        };
+        value.is_none_or(|value| value < 64 && mask >> value & 1 != 0)
     }
 
     #[inline]
@@ -438,6 +541,14 @@ impl AlignmentSearchControl for AlignmentCampaignControl {
             i64::from(features.unresolved_count),
             i64::from(features.child_unresolved_count),
             i64::from(features.child_packing),
+            features.root_candidate.map_or(-1, i64::from),
+            features.root_orbit.map_or(-1, i64::from),
+            i64::from(features.root_ordinal),
+            i64::from(features.root_total),
+            i64::from(features.root_sized),
+            i64::from(features.root_initial_unresolved),
+            i64::from(features.root_initial_packing),
+            i64::from(features.root_initial_branches),
         ])
         .map_err(|_| AlignmentError::Control)
     }

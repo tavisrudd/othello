@@ -597,8 +597,8 @@ Sequel research:
   isolated flag at a shared 4096-state deadline and swaps preallocated arenas.
   A nine-round budget-12 A/B found no measurable idle or one-noop-per-second
   overhead (`noop/idle=0.9989x`, paired `t=-0.640`), and the controlled search
-  has an explicit zero-allocation regression. Optional progress JSONL is
-  serialized off-thread. On the frozen 70,888-row q11/q13 C80 corpus the obstruction loop
+  has an explicit zero-allocation regression. Optional progress JSONL and live
+  root observations are serialized off-thread. On the frozen 70,888-row q11/q13 C80 corpus the obstruction loop
   found the exact sampled predicate `omega_drop > 0` and
   `next_defect_rank in {0,6}`; this is not a theorem, and an unguided q17 probe
   was inconclusive because it reached no relevant survivor states.  C880 and
@@ -608,9 +608,20 @@ Sequel research:
   ordering repairs the initial repeated-score pathology by 2.16x, but exact
   child-packing ordering is still rejected as a production policy: it barely
   changes states and remains 1.81x slower than the no-theorem budget-13
-  diagnostic. The next gate is autonomous probation/rollback of adverse
-  ordering plans and learning from live progress trajectories; no sound
-  pruning role exists.
+  diagnostic. Autonomous same-stratum probation now rolls that adverse plan
+  back at a measured 2.161x inactive/active state rate. Persistent root sizing,
+  canonical root orbits, and active/completed masks support root-scoped plans;
+  exclusion happens before the VM and theorem-feature construction. On the
+  budget-12 diagnostic this cuts an excluded scope from 220.9 to 91.7 billion
+  instructions, while a visited orbit-11 scope takes 10.40 seconds versus
+  18.69 seconds unscoped. `evolve` now treats scope as a separate genome,
+  combining frozen categorical profiles with live-only root observations and
+  mutating singleton/union masks without solver recompilation. The next gate is
+  reliability-branching-style theorem pseudo-costs, paired racing, and a
+  compiled root-to-plan dispatch table, as specified with persistence and
+  literature read depths in the
+  [adaptive-search ADR](../2026-08-30-c985-ergodis-adaptive-search-learning-adr.md);
+  no sound pruning role exists.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

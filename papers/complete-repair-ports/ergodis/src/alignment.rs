@@ -700,6 +700,20 @@ pub struct AlignmentSearchPoint {
     pub depth: u32,
     pub selected_count: u32,
     pub unresolved_count: u32,
+    pub root_done: u32,
+    pub root_total: u32,
+    pub root_candidate: Option<u32>,
+    pub root_orbit: Option<u32>,
+    pub root_states: u64,
+    pub root_duplicates: u64,
+    pub root_infeasible: u64,
+    pub root_ordinal: u32,
+    pub root_sized: bool,
+    pub root_initial_unresolved: u32,
+    pub root_initial_packing: u32,
+    pub root_initial_branches: u32,
+    pub active_root_mask: u64,
+    pub completed_root_mask: u64,
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -711,6 +725,27 @@ pub struct AlignmentBranchFeatures {
     pub unresolved_count: u32,
     pub child_unresolved_count: u32,
     pub child_packing: u32,
+    pub root_candidate: Option<u32>,
+    pub root_orbit: Option<u32>,
+    pub root_ordinal: u32,
+    pub root_total: u32,
+    pub root_sized: bool,
+    pub root_initial_unresolved: u32,
+    pub root_initial_packing: u32,
+    pub root_initial_branches: u32,
+}
+
+#[derive(Clone, Copy, Debug, Default)]
+struct RootProgress {
+    candidate: Option<u32>,
+    orbit: Option<u32>,
+    ordinal: u32,
+    total: u32,
+    sized: bool,
+    initial_unresolved: u32,
+    initial_packing: u32,
+    initial_branches: u32,
+    start_metrics: AlignmentSearchMetrics,
 }
 
 /// Optional coarse control for long searches. Standard searches instantiate
@@ -719,7 +754,7 @@ pub trait AlignmentSearchControl {
     fn steering_pending(&self) -> bool;
     fn safe_point(&mut self, point: AlignmentSearchPoint) -> Result<(), AlignmentError>;
     fn heartbeat(&mut self, point: AlignmentSearchPoint) -> Result<(), AlignmentError>;
-    fn ordering_active(&self) -> bool;
+    fn ordering_active(&self, root_candidate: Option<u32>, root_orbit: Option<u32>) -> bool;
     fn score_branch(&mut self, features: AlignmentBranchFeatures) -> Result<i64, AlignmentError>;
 }
 
@@ -742,7 +777,7 @@ impl AlignmentSearchControl for NoAlignmentControl {
     }
 
     #[inline(always)]
-    fn ordering_active(&self) -> bool {
+    fn ordering_active(&self, _root_candidate: Option<u32>, _root_orbit: Option<u32>) -> bool {
         false
     }
 
@@ -771,6 +806,7 @@ pub struct AlignmentSearchWorkspace {
     compact_binomial: Box<[[u64; 17]]>,
     symmetry_maps: Box<[u8]>,
     symmetry_images: Box<[u64]>,
+    root_orbit_representative: [u8; 56],
     #[cfg(feature = "control-plane")]
     control_order: Box<[[u8; 56]]>,
     #[cfg(feature = "control-plane")]
@@ -797,6 +833,7 @@ impl AlignmentSearchWorkspace {
             compact_binomial: Box::new([]),
             symmetry_maps: Box::new([]),
             symmetry_images: Box::new([]),
+            root_orbit_representative: std::array::from_fn(|index| index as u8),
             #[cfg(feature = "control-plane")]
             control_order: vec![[u8::MAX; 56]; maximum_budget as usize + 1].into_boxed_slice(),
             #[cfg(feature = "control-plane")]
@@ -850,6 +887,14 @@ impl AlignmentSearchWorkspace {
         }
         self.symmetry_maps = maps.into_boxed_slice();
         let count = self.symmetry_maps.len() / 56;
+        for candidate in 0..problem.triples.len() {
+            self.root_orbit_representative[candidate] = self
+                .symmetry_maps
+                .chunks_exact(56)
+                .map(|map| map[candidate])
+                .min()
+                .unwrap_or(candidate as u8);
+        }
         self.symmetry_images = if count > 1 {
             vec![0_u64; count * self.frames.len()].into_boxed_slice()
         } else {
@@ -1148,6 +1193,8 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
     let mut next_heartbeat = pulse_interval;
     let mut next_steering_check = STEERING_FLAG_STRIDE;
     let mut next_control_event = next_heartbeat.min(next_steering_check);
+    let mut root = RootProgress::default();
+    let mut completed_root_mask = 0_u64;
 
     loop {
         if !workspace.frames[depth].entered {
@@ -1159,6 +1206,9 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
                     .ok_or(AlignmentError::Overflow)?;
                 if depth == 0 {
                     break;
+                }
+                if depth == 1 {
+                    complete_root(&mut root, &mut completed_root_mask);
                 }
                 depth -= 1;
                 continue;
@@ -1176,6 +1226,9 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
                             depth,
                             selected,
                             workspace.frames[depth].unresolved_cuts,
+                            root,
+                            workspace.frames[0].branch_bits,
+                            completed_root_mask,
                         ))?;
                     }
                 }
@@ -1185,6 +1238,9 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
                         depth,
                         selected,
                         workspace.frames[depth].unresolved_cuts,
+                        root,
+                        workspace.frames[0].branch_bits,
+                        completed_root_mask,
                     ))?;
                     next_heartbeat = next_heartbeat.saturating_add(pulse_interval);
                 }
@@ -1200,6 +1256,13 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
                 return Ok((Some(selected), metrics));
             };
             let branch_bits = clause & !selected;
+            if depth == 1 && root.candidate.is_some() && !root.sized {
+                root.sized = true;
+                root.initial_unresolved =
+                    unresolved_cuts.iter().map(|word| word.count_ones()).sum();
+                root.initial_packing = packing;
+                root.initial_branches = branch_bits.count_ones();
+            }
             if selected.count_ones().saturating_add(packing) > budget || branch_bits == 0 {
                 metrics.infeasible_states = metrics
                     .infeasible_states
@@ -1208,18 +1271,28 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
                 if depth == 0 {
                     break;
                 }
+                if depth == 1 {
+                    complete_root(&mut root, &mut completed_root_mask);
+                }
                 depth -= 1;
                 continue;
             }
             workspace.frames[depth].branch_bits = branch_bits;
+            if depth == 0 {
+                root.total = branch_bits.count_ones();
+            }
             workspace.frames[depth].entered = true;
             #[cfg(feature = "control-plane")]
-            if CONTROLLED && control.ordering_active() {
+            if CONTROLLED && control.ordering_active(root.candidate, root.orbit) {
                 let len = prepare_controlled_order(
-                    problem,
-                    budget,
-                    depth,
-                    workspace.frames[depth],
+                    ControlledOrderInput {
+                        problem,
+                        budget,
+                        depth,
+                        frame: workspace.frames[depth],
+                        root,
+                        root_orbit_representative: &workspace.root_orbit_representative,
+                    },
                     control,
                     &mut workspace.control_order[depth],
                 )?;
@@ -1245,6 +1318,23 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
                 }
             }
             workspace.frames[depth].branch_bits ^= bit;
+            if depth == 0 {
+                root = RootProgress {
+                    candidate: Some(bit.trailing_zeros()),
+                    orbit: Some(
+                        workspace.root_orbit_representative[bit.trailing_zeros() as usize] as u32,
+                    ),
+                    ordinal: root.total.saturating_sub(
+                        workspace.frames[0]
+                            .branch_bits
+                            .count_ones()
+                            .saturating_add(1),
+                    ),
+                    total: root.total,
+                    start_metrics: metrics,
+                    ..RootProgress::default()
+                };
+            }
             let selected = workspace.frames[depth].selected | bit;
             let unresolved_cuts = workspace.frames[depth].unresolved_cuts;
             workspace.extend_symmetry_images(depth, bit.trailing_zeros() as usize);
@@ -1257,6 +1347,9 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
         } else if depth == 0 {
             break;
         } else {
+            if depth == 1 {
+                complete_root(&mut root, &mut completed_root_mask);
+            }
             depth -= 1;
         }
     }
@@ -1269,25 +1362,71 @@ fn alignment_search_point(
     depth: usize,
     selected: u64,
     unresolved_cuts: [u64; 2],
+    root: RootProgress,
+    root_remaining: u64,
+    completed_root_mask: u64,
 ) -> AlignmentSearchPoint {
+    let root_in_flight = u32::from(depth > 0);
     AlignmentSearchPoint {
         metrics,
         depth: depth as u32,
         selected_count: selected.count_ones(),
         unresolved_count: unresolved_cuts.iter().map(|word| word.count_ones()).sum(),
+        root_done: root
+            .total
+            .saturating_sub(root_remaining.count_ones() + root_in_flight),
+        root_total: root.total,
+        root_candidate: root.candidate,
+        root_orbit: root.orbit,
+        root_states: metrics.states.saturating_sub(root.start_metrics.states),
+        root_duplicates: metrics
+            .duplicate_states
+            .saturating_sub(root.start_metrics.duplicate_states),
+        root_infeasible: metrics
+            .infeasible_states
+            .saturating_sub(root.start_metrics.infeasible_states),
+        root_ordinal: root.ordinal,
+        root_sized: root.sized,
+        root_initial_unresolved: root.initial_unresolved,
+        root_initial_packing: root.initial_packing,
+        root_initial_branches: root.initial_branches,
+        active_root_mask: root.candidate.map_or(0, |candidate| 1_u64 << candidate),
+        completed_root_mask,
     }
+}
+
+#[inline]
+fn complete_root(root: &mut RootProgress, completed_root_mask: &mut u64) {
+    if let Some(candidate) = root.candidate.take() {
+        *completed_root_mask |= 1_u64 << candidate;
+    }
+}
+
+#[cfg(feature = "control-plane")]
+struct ControlledOrderInput<'a> {
+    problem: &'a AlignmentAttachment,
+    budget: u32,
+    depth: usize,
+    frame: SearchFrame,
+    root: RootProgress,
+    root_orbit_representative: &'a [u8; 56],
 }
 
 #[cfg(feature = "control-plane")]
 #[inline(never)]
 fn prepare_controlled_order<C: AlignmentSearchControl>(
-    problem: &AlignmentAttachment,
-    budget: u32,
-    depth: usize,
-    frame: SearchFrame,
+    input: ControlledOrderInput<'_>,
     control: &mut C,
     order: &mut [u8; 56],
 ) -> Result<u8, AlignmentError> {
+    let ControlledOrderInput {
+        problem,
+        budget,
+        depth,
+        frame,
+        root,
+        root_orbit_representative,
+    } = input;
     let mut candidates = frame.branch_bits;
     let mut scored = [(i64::MIN, u8::MAX); 56];
     let mut len = 0usize;
@@ -1300,22 +1439,62 @@ fn prepare_controlled_order<C: AlignmentSearchControl>(
     while candidates != 0 {
         let bit = candidates & candidates.wrapping_neg();
         candidates ^= bit;
+        let candidate = bit.trailing_zeros();
+        let root_candidate = if depth == 0 {
+            Some(candidate)
+        } else {
+            root.candidate
+        };
+        let root_orbit = if depth == 0 {
+            Some(root_orbit_representative[candidate as usize] as u32)
+        } else {
+            root.orbit
+        };
+        if !control.ordering_active(root_candidate, root_orbit) {
+            scored[len] = (0, candidate as u8);
+            len += 1;
+            continue;
+        }
         let selected = frame.selected | bit;
-        let (_, packing, child_unresolved) = problem.violation_summary(
+        let (child_violation, packing, child_unresolved) = problem.violation_summary(
             selected,
             frame.unresolved_cuts,
             budget - selected.count_ones(),
         );
+        let child_unresolved_count = child_unresolved.iter().map(|word| word.count_ones()).sum();
+        let child_branch_count = child_violation
+            .map(|clause| (clause & !selected).count_ones())
+            .unwrap_or(0);
         let score = control.score_branch(AlignmentBranchFeatures {
             depth: depth as u32,
             selected_count: frame.selected.count_ones(),
-            candidate: bit.trailing_zeros(),
+            candidate,
             branch_count,
             unresolved_count,
-            child_unresolved_count: child_unresolved.iter().map(|word| word.count_ones()).sum(),
+            child_unresolved_count,
             child_packing: packing,
+            root_candidate,
+            root_orbit,
+            root_ordinal: root.ordinal,
+            root_total: root.total,
+            root_sized: depth == 0 || root.sized,
+            root_initial_unresolved: if depth == 0 {
+                child_unresolved_count
+            } else {
+                root.initial_unresolved
+            },
+            root_initial_packing: if depth == 0 {
+                packing
+            } else {
+                root.initial_packing
+            },
+            root_initial_branches: if depth == 0 {
+                child_branch_count
+            } else {
+                root.initial_branches
+            },
         })?;
-        scored[len] = (score, bit.trailing_zeros() as u8);
+        scored[len] = (score, candidate as u8);
         len += 1;
     }
     scored[..len]
@@ -1510,7 +1689,11 @@ mod tests {
                 Ok(())
             }
 
-            fn ordering_active(&self) -> bool {
+            fn ordering_active(
+                &self,
+                _root_candidate: Option<u32>,
+                _root_orbit: Option<u32>,
+            ) -> bool {
                 true
             }
 
@@ -1643,6 +1826,21 @@ mod tests {
             }
         }
         assert!(quotient_values.len() < domain as usize);
+    }
+
+    #[test]
+    fn root_orbit_labels_are_invariant_under_the_compiled_stabilizer() {
+        let problem = compile_alignment_attachment(8).unwrap();
+        let mut workspace = AlignmentSearchWorkspace::new(12, 16).unwrap();
+        assert_eq!(workspace.set_point_stabilizer(&problem, 1).unwrap(), 720);
+        for map in workspace.symmetry_maps.chunks_exact(56) {
+            for (candidate, &image) in map.iter().enumerate().take(problem.triples().len()) {
+                assert_eq!(
+                    workspace.root_orbit_representative[candidate],
+                    workspace.root_orbit_representative[image as usize],
+                );
+            }
+        }
     }
 
     #[test]

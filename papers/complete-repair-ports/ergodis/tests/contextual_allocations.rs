@@ -88,6 +88,7 @@ fn campaign_vm_evaluation_allocates_nothing() {
         name: "allocation-gate".to_owned(),
         role: PlanRole::Diagnostic,
         output: PlanOutput::Predicate,
+        scope: None,
         program: vec![
             PlanOp::Field {
                 name: "surplus".to_owned(),
@@ -162,7 +163,7 @@ impl AlignmentSearchControl for IdleSearchControl {
         Ok(())
     }
 
-    fn ordering_active(&self) -> bool {
+    fn ordering_active(&self, _root_candidate: Option<u32>, _root_orbit: Option<u32>) -> bool {
         false
     }
 

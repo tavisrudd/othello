@@ -202,14 +202,80 @@ lesson: filtered deficiency two was recursive certificate debt, not game debt.
 All v0 plan roles are diagnostic or ordering, preventing such a coordinate
 from silently becoming a proof-authoritative prune.
 
+## Root-aware steering and online probation
+
+The alignment adapter now publishes persistent current-root identity,
+canonical stabilizer orbit, ordinal/total progress, per-root state and failure
+counts, three initial structural sizing proxies, and active/completed root
+masks. These are copied from already-computed summaries; the search does not
+repeat a theorem merely to report it. The shared heartbeat is cacheline aligned,
+while serialization remains in the watcher.
+
+Plans may carry a categorical `scope` bitmask over `root_candidate` or
+`root_orbit`. Scope rejection occurs before both VM evaluation and optional
+child-summary construction. On the deterministic budget-12 diagnostic:
+
+- baseline was 7.99 seconds / 308,653 states;
+- controlled with no plan was 8.07 seconds / the same tree;
+- an excluded scope was 8.00--8.04 seconds and 91.7 billion instructions;
+- the unscoped residual score was 18.69--18.76 seconds, 308,280 states, and
+  220.9 billion instructions;
+- a genuinely visited orbit-11 scope was 10.40 seconds / 308,499 states.
+
+Thus scoping removed 58.5% of the unscoped instruction count when excluded and
+made a live narrow policy 1.80x faster than evaluating it globally. The
+remaining cost is theorem-feature work within the selected root, not the VM or
+control gate.
+
+Publishing changed progress to the controller once per second remains off the
+search path: its counter run used 91,664,705,534 instructions and 39,994,337,048
+cycles versus 91,665,154,806 instructions and 39,923,857,118 cycles without
+periodic publication. The instruction delta is -0.00049% and the cycle delta
++0.176%, well below a one-run scheduling claim; the exact tree is identical.
+
+`ergodisctl probation` now makes a reversible active/inactive comparison. The
+budget-13 adverse ordering plan ran at 31,000 states/s active and 67,000
+states/s inactive; the controller rolled it back automatically (2.161x). State
+rates are accepted only across the same root candidate and initial structural
+tuple. Cross-root windows use completed-root throughput only when both have a
+nonzero rate; otherwise the plan is restored as inconclusive.
+
+## Scope-aware candidate generation
+
+Scope is a separate part of the current predicate evolutionary genome. The controller returns a
+bounded 64-bin profile for categorical fields; `evolve` proposes singleton
+masks, the positive-majority frozen union, and one-bit mask mutations before
+ordinary expression mutations. Scope participates in structural deduplication.
+Instrumented watcher snapshots also accumulate live-only root values in the
+controller. In the integration replay, the frozen fixture exposed orbit values
+0 and 6, while the solve exposed 1 and 11; the second evolution run emitted all
+four without a solver rebuild (34 tested candidates versus 30 from the frozen
+batch alone).
+
+This deliberately separates two fitness functions. Frozen labels rank theorem
+predicates. Root-scoped ordering candidates are proposals for same-stratum
+online probation; an offline classification loss must not suppress a runtime
+speedup. The next controller abstraction is therefore a precompiled
+root-to-plan dispatch table with held-out probation evidence, not a single
+global ordering plan.
+
+## Classical algorithmic imports
+
+The staged decision, shadow-probe design, persistence boundary, import order,
+and source-by-source read depths are owned by
+[the adaptive-search learning ADR](2026-08-30-c985-ergodis-adaptive-search-learning-adr.md).
+This spike report relies on that audited record rather than duplicating its
+source characterisations.
+
 ## Next gates
 
 1. Construct or import q17 `K_Omega` survivor states, then replay the `{0,6}`
    rule and extract its first mismatch if any; unguided random states do not
    reach the relevant stratum at useful density.
-2. Cache the chosen C880 child's exact summary or derive a cheaper equivalent
-   ordering accumulator, then require a state reduction in interleaved
-   multiround A/B; add C80 only after that pattern is sound.
+2. Compile accepted scoped policies into an O(1) root-to-plan dispatch table,
+   then run held-out same-stratum probation before promotion. In parallel,
+   derive a cheaper equivalent child accumulator and require an actual state
+   reduction in interleaved multiround A/B.
 3. Persist controller checkpoints so restart preserves the last validated
    epoch and active plan hashes.
 4. Split transport and ledger modules after the next surface change, not before
@@ -222,6 +288,27 @@ from silently becoming a proof-authoritative prune.
 - **Settled:** the injected residual-packing theorem's initial 3.9x slowdown
   was mostly repeated work, not socket contention. Compute-once frame ordering
   repairs that slice by 2.16x without allocation or feature-off storage.
+- **Settled:** global theorem-feature evaluation was the next repeated-work
+  pathology. Root scope rejects before feature construction, cutting the
+  excluded case from 220.9 to 91.7 billion instructions and making cost track
+  the selected observational region.
+- **Settled:** root-specific candidate generation need not know every stratum
+  at compile time. Optional watcher observations extend the frozen categorical
+  profile, and mask mutations enter the same bounded evolve ledger.
+- **Settled:** canonical root labels are not an accidental numbering artifact.
+  A regression checks all 720 compiled point-stabilizer actions and every one
+  of the 56 candidates, requiring the representative label to remain constant
+  on each orbit.
+- **Open:** multiple simultaneously active policies still require a compiled
+  root-to-plan dispatch table and parallel worker-slot aggregation. The present
+  single-thread adapter publishes one active root in a `u64`; the successor
+  must preserve cacheline isolation and avoid policy scans.
+- **Open:** current `evolve` ranks predicate programs against frozen labels;
+  ordering-policy generation can emit scoped shapes but still needs the paired
+  operational race from the adaptive-search ADR before it may promote them.
+- **Open:** semantic/performance persistence is specified but not yet landed.
+  The ADR's first implementation gate is a checksummed reliability/probation
+  WAL with build/hardware-conditioned reload; it owns this gap.
 - **Open:** exact child packing barely changes the C880 state count. The next
   discriminator is whether quotient-refinement gain or cheap cut-coverage is a
   better ordering observable than lower-bound strength; this belongs to the

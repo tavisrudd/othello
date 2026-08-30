@@ -23,7 +23,7 @@ pub use client::PlanArena;
 use synthesis::learn_decision_tree;
 pub use vm::{
     evaluate_plan, CompiledPlan, Evaluation, ExpressionPlanSpec, FeatureBatch, PlanDocument,
-    PlanExpr, PlanOp, PlanOutput, PlanRole, PlanSpec,
+    PlanExpr, PlanOp, PlanOutput, PlanRole, PlanScope, PlanSpec,
 };
 
 pub const SCHEMA: &str = "ergodis-control-experimental-v0";
@@ -144,6 +144,7 @@ pub struct Campaign {
     archive: BTreeMap<String, String>,
     events: VecDeque<Event>,
     solver_status: Option<Value>,
+    live_scope_masks: BTreeMap<String, u64>,
     watchers: Vec<PathBuf>,
     ledger: Ledger,
     response_limit: usize,
@@ -203,6 +204,7 @@ impl Campaign {
             archive: BTreeMap::new(),
             events: VecDeque::with_capacity(EVENT_RING),
             solver_status: None,
+            live_scope_masks: BTreeMap::new(),
             watchers: Vec::with_capacity(MAX_WATCHERS),
             ledger,
             response_limit: response_limit.min(MAX_FRAME_BYTES),
@@ -269,6 +271,7 @@ impl Campaign {
             "plan-get" => self.plan_get(&request.args),
             "agent-brief" => self.agent_brief(&request.args),
             "feature-ceiling" => self.feature_ceiling(),
+            "scope-profile" => self.scope_profile(&request.args),
             "synthesize-tree" => self.synthesize_tree(&request.args),
             "candidate-try" => self.candidate_try(&request.args, false),
             "candidate-apply" => self.candidate_try(&request.args, true),
@@ -371,6 +374,30 @@ impl Campaign {
                     .and_then(Value::as_u64)
                     .ok_or_else(|| ControlError::Invalid("invalid solver pulse".into()))
             };
+            let optional_number = |name: &str| match status.get(name) {
+                None | Some(Value::Null) => Ok(None),
+                Some(value) => value
+                    .as_u64()
+                    .map(Some)
+                    .ok_or_else(|| ControlError::Invalid("invalid solver pulse".into())),
+            };
+            let optional_bool = |name: &str| match status.get(name) {
+                None | Some(Value::Null) => Ok(None),
+                Some(value) => value
+                    .as_bool()
+                    .map(Some)
+                    .ok_or_else(|| ControlError::Invalid("invalid solver pulse".into())),
+            };
+            let root_candidate = optional_number("root_candidate")?;
+            let root_orbit = optional_number("root_orbit")?;
+            for (field, value) in [
+                ("root_candidate", root_candidate),
+                ("root_orbit", root_orbit),
+            ] {
+                if let Some(value) = value.filter(|&value| value < 64) {
+                    *self.live_scope_masks.entry(field.into()).or_default() |= 1_u64 << value;
+                }
+            }
             self.solver_status = Some(json!({
                 "states": number("states")?,
                 "duplicates": number("duplicates")?,
@@ -378,6 +405,20 @@ impl Campaign {
                 "depth": number("depth")?,
                 "selected_count": number("selected_count")?,
                 "unresolved_count": number("unresolved_count")?,
+                "root_done": optional_number("root_done")?,
+                "root_total": optional_number("root_total")?,
+                "root_candidate": root_candidate,
+                "root_orbit": root_orbit,
+                "root_states": optional_number("root_states")?,
+                "root_duplicates": optional_number("root_duplicates")?,
+                "root_infeasible": optional_number("root_infeasible")?,
+                "root_ordinal": optional_number("root_ordinal")?,
+                "root_sized": optional_bool("root_sized")?,
+                "root_initial_unresolved": optional_number("root_initial_unresolved")?,
+                "root_initial_packing": optional_number("root_initial_packing")?,
+                "root_initial_branches": optional_number("root_initial_branches")?,
+                "active_root_mask": optional_number("active_root_mask")?,
+                "completed_root_mask": optional_number("completed_root_mask")?,
             }));
         }
         let since_epoch = args
@@ -528,6 +569,65 @@ impl Campaign {
             "optimal_weighted_correct": optimal_correct,
             "unavoidable_weighted_errors": weighted_rows.saturating_sub(optimal_correct),
             "first_collision": first_collision,
+        }))
+    }
+
+    fn scope_profile(&self, args: &Value) -> Result<Value, ControlError> {
+        let field = required_str(args, "field")?;
+        let field_index = self
+            .batch
+            .fields
+            .iter()
+            .position(|candidate| candidate == field)
+            .ok_or_else(|| ControlError::Invalid(format!("unknown scope field {field:?}")))?;
+        let mut bins = [(0_u64, 0_u64, 0_u64, 0_u64); 64];
+        let mut batch_observed_mask = 0_u64;
+        let mut omitted_rows = 0_u64;
+        for row in 0..self.batch.rows() {
+            let value = self.batch.row(row)[field_index];
+            let Ok(value) = u32::try_from(value) else {
+                omitted_rows = omitted_rows.saturating_add(1);
+                continue;
+            };
+            if value >= 64 {
+                omitted_rows = omitted_rows.saturating_add(1);
+                continue;
+            }
+            let weight = self.batch.weights[row];
+            let bin = &mut bins[value as usize];
+            bin.0 = bin.0.saturating_add(1);
+            bin.1 = bin.1.saturating_add(weight);
+            if self.batch.expected(row) {
+                bin.2 = bin.2.saturating_add(weight);
+            } else {
+                bin.3 = bin.3.saturating_add(weight);
+            }
+            batch_observed_mask |= 1_u64 << value;
+        }
+        let strata: Vec<Value> = bins
+            .iter()
+            .enumerate()
+            .filter(|(_, bin)| bin.0 != 0)
+            .map(
+                |(value, &(rows, weight, positive_weight, negative_weight))| {
+                    json!({
+                        "value": value,
+                        "rows": rows,
+                        "weight": weight,
+                        "positive_weight": positive_weight,
+                        "negative_weight": negative_weight,
+                    })
+                },
+            )
+            .collect();
+        let live_observed_mask = self.live_scope_masks.get(field).copied().unwrap_or(0);
+        Ok(json!({
+            "field": field,
+            "observed_mask": batch_observed_mask | live_observed_mask,
+            "batch_observed_mask": batch_observed_mask,
+            "live_observed_mask": live_observed_mask,
+            "omitted_rows": omitted_rows,
+            "strata": strata,
         }))
     }
 
@@ -1085,6 +1185,7 @@ mod tests {
             name: "support-or-omega".into(),
             role: PlanRole::Diagnostic,
             output: PlanOutput::Predicate,
+            scope: None,
             program: vec![
                 PlanOp::Field {
                     name: "surplus".into(),
@@ -1148,6 +1249,7 @@ mod tests {
             name: "bad".into(),
             role: PlanRole::Diagnostic,
             output: PlanOutput::Predicate,
+            scope: None,
             program: vec![PlanOp::And],
         };
         assert!(CompiledPlan::compile(&spec, &batch().fields).is_err());
@@ -1157,6 +1259,85 @@ mod tests {
         assert!(CompiledPlan::compile(&spec, &batch().fields).is_err());
         spec.program = vec![PlanOp::Const { value: 1 }];
         assert!(CompiledPlan::compile(&spec, &batch().fields).is_err());
+    }
+
+    #[test]
+    fn compiled_scope_mask_skips_vm_outside_selected_contexts() {
+        let fields = vec!["root_candidate".into(), "score".into()];
+        let scoped = PlanSpec {
+            schema: PLAN_SCHEMA.into(),
+            name: "root-six".into(),
+            role: PlanRole::Ordering,
+            output: PlanOutput::Score,
+            scope: Some(PlanScope {
+                field: "root_candidate".into(),
+                mask: 1 << 6,
+            }),
+            program: vec![PlanOp::Field {
+                name: "score".into(),
+            }],
+        };
+        let plan = CompiledPlan::compile(&scoped, &fields).unwrap();
+        assert_eq!(plan.evaluate_row(&[6, 17]).unwrap(), 17);
+        assert_eq!(plan.evaluate_row(&[5, 17]).unwrap(), 0);
+        assert!(plan.applies(&[6, 17]));
+        assert!(!plan.applies(&[5, 17]));
+
+        let mut unscoped = scoped;
+        unscoped.scope = None;
+        let unscoped = CompiledPlan::compile(&unscoped, &fields).unwrap();
+        assert_ne!(plan.hash, unscoped.hash);
+    }
+
+    #[test]
+    fn scope_profile_combines_frozen_and_live_strata() {
+        let temporary = tempfile::tempdir().unwrap();
+        let data = temporary.path().join("data.jsonl");
+        fs::write(
+            &data,
+            concat!(
+                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"roots\",\"problem\":\"fixture\",\"fields\":[\"root_orbit\"],\"rows\":2}\n",
+                "{\"id\":1,\"expected\":true,\"values\":[0]}\n",
+                "{\"id\":2,\"expected\":false,\"values\":[6]}\n"
+            ),
+        )
+        .unwrap();
+        let mut campaign = Campaign::create(
+            &data,
+            &temporary.path().join("run"),
+            Some(temporary.path().join("control.sock")),
+            4096,
+            4096,
+            4096,
+        )
+        .unwrap();
+        let frozen = campaign
+            .scope_profile(&json!({"field": "root_orbit"}))
+            .unwrap();
+        assert_eq!(frozen["observed_mask"], 65);
+        assert_eq!(frozen["live_observed_mask"], 0);
+
+        campaign
+            .pulse(&json!({
+                "since_epoch": 0,
+                "solver": {
+                    "states": 10,
+                    "duplicates": 2,
+                    "infeasible": 3,
+                    "depth": 4,
+                    "selected_count": 5,
+                    "unresolved_count": 6,
+                    "root_candidate": 26,
+                    "root_orbit": 11
+                }
+            }))
+            .unwrap();
+        let combined = campaign
+            .scope_profile(&json!({"field": "root_orbit"}))
+            .unwrap();
+        assert_eq!(combined["batch_observed_mask"], 65);
+        assert_eq!(combined["live_observed_mask"], 1_u64 << 11);
+        assert_eq!(combined["observed_mask"], 65 | (1_u64 << 11));
     }
 
     #[test]
@@ -1267,6 +1448,7 @@ mod tests {
             name: "positive".into(),
             role: PlanRole::Diagnostic,
             output: PlanOutput::Predicate,
+            scope: None,
             program: vec![
                 PlanOp::Field { name: "x".into() },
                 PlanOp::Const { value: 0 },

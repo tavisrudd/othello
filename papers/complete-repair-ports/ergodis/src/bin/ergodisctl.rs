@@ -1,12 +1,16 @@
 use anyhow::{bail, Context, Result};
 use clap::{Parser, Subcommand};
-use ergodis::control::{read_manifest, send_request, PlanDocument, PlanOp, PlanOutput, PlanSpec};
+use ergodis::control::{
+    read_manifest, send_request, PlanDocument, PlanOp, PlanOutput, PlanRole, PlanScope, PlanSpec,
+};
 use serde_json::{json, Value};
 use std::collections::BTreeSet;
 use std::fs::{File, OpenOptions};
 use std::io::{BufRead, BufReader, BufWriter, Write};
 use std::os::unix::fs::OpenOptionsExt;
 use std::path::PathBuf;
+use std::thread;
+use std::time::{Duration, Instant};
 
 #[derive(Debug, Parser)]
 #[command(
@@ -32,6 +36,20 @@ enum Command {
     Status,
     /// Exercise the control socket without changing or notifying search state.
     Noop,
+    /// Run an autonomous active/off ordering-plan probation from progress JSONL.
+    Probation {
+        plan: String,
+        #[arg(long)]
+        progress: PathBuf,
+        #[arg(long)]
+        expect_epoch: u64,
+        #[arg(long, default_value_t = 5)]
+        samples: usize,
+        #[arg(long, default_value_t = 15)]
+        slowdown_percent: u64,
+        #[arg(long, default_value_t = 120)]
+        timeout_seconds: u64,
+    },
     /// Poll a long search safe point for a changed active-plan epoch.
     Pulse {
         #[arg(long, default_value_t = 0)]
@@ -169,6 +187,27 @@ fn main() -> Result<()> {
             cli.max_bytes,
         );
     }
+    if let Command::Probation {
+        plan,
+        progress,
+        expect_epoch,
+        samples,
+        slowdown_percent,
+        timeout_seconds,
+    } = &cli.command
+    {
+        return run_probation(
+            &manifest,
+            plan,
+            progress,
+            *expect_epoch,
+            *samples,
+            *slowdown_percent,
+            *timeout_seconds,
+            cli.max_bytes,
+            cli.json,
+        );
+    }
     if let Command::Synthesize {
         output,
         max_nodes,
@@ -190,6 +229,7 @@ fn main() -> Result<()> {
     let (op, args) = match cli.command {
         Command::Status => ("status", json!({})),
         Command::Noop => ("noop", json!({})),
+        Command::Probation { .. } => unreachable!(),
         Command::Pulse { since_epoch } => ("pulse", json!({"since_epoch": since_epoch})),
         Command::PlanGet { plan, expect_epoch } => (
             "plan-get",
@@ -249,6 +289,214 @@ fn main() -> Result<()> {
         );
     }
     Ok(())
+}
+
+#[derive(Clone, Copy, Debug, serde::Deserialize)]
+struct ProgressSolver {
+    states: u64,
+    root_done: u64,
+    #[serde(default)]
+    root_candidate: u64,
+    #[serde(default)]
+    root_initial_unresolved: u64,
+    #[serde(default)]
+    root_initial_packing: u64,
+    #[serde(default)]
+    root_initial_branches: u64,
+}
+
+#[derive(Clone, Copy, Debug, serde::Deserialize)]
+struct ProgressRecord {
+    elapsed_ms: u64,
+    applied_epoch: u64,
+    solver: ProgressSolver,
+}
+
+#[allow(clippy::too_many_arguments)]
+fn run_probation(
+    manifest: &ergodis::control::Manifest,
+    plan_name: &str,
+    progress_path: &PathBuf,
+    expect_epoch: u64,
+    samples: usize,
+    slowdown_percent: u64,
+    timeout_seconds: u64,
+    max_bytes: usize,
+    emit_json: bool,
+) -> Result<()> {
+    if !(2..=60).contains(&samples) || slowdown_percent > 1000 || timeout_seconds == 0 {
+        bail!("probation requires 2..=60 samples, slowdown <=1000%, and a positive timeout");
+    }
+    let fetched = send_request(
+        manifest,
+        "plan-get",
+        json!({"plan": plan_name, "expect_epoch": expect_epoch}),
+        max_bytes,
+    )?;
+    if !fetched.ok {
+        bail!("probation cannot fetch active plan: {}", fetched.result);
+    }
+    let plan: PlanSpec = serde_json::from_value(fetched.result["plan"].clone())?;
+    if plan.role != PlanRole::Ordering {
+        bail!("probation accepts ordering plans only");
+    }
+
+    let file = File::open(progress_path)
+        .with_context(|| format!("cannot open progress file {}", progress_path.display()))?;
+    let mut reader = BufReader::new(file);
+    let mut fragment = String::new();
+    let deadline = Instant::now() + Duration::from_secs(timeout_seconds);
+    let active =
+        collect_progress_window(&mut reader, &mut fragment, expect_epoch, samples, deadline)?;
+
+    let deactivated = send_request(
+        manifest,
+        "candidate-deactivate",
+        json!({"plan": plan_name, "expect_epoch": expect_epoch}),
+        max_bytes,
+    )?;
+    if !deactivated.ok {
+        bail!("probation cannot deactivate plan: {}", deactivated.result);
+    }
+    let inactive_epoch = deactivated.epoch;
+    let inactive = collect_progress_window(
+        &mut reader,
+        &mut fragment,
+        inactive_epoch,
+        samples,
+        deadline,
+    )?;
+
+    let active_state_rate = progress_rate(&active, |sample| sample.solver.states)?;
+    let inactive_state_rate = progress_rate(&inactive, |sample| sample.solver.states)?;
+    let active_root_rate = progress_rate(&active, |sample| sample.solver.root_done)?;
+    let inactive_root_rate = progress_rate(&inactive, |sample| sample.solver.root_done)?;
+    let same_stratum = matches!(
+        (progress_stratum(&active), progress_stratum(&inactive)),
+        (Some(active), Some(inactive)) if active == inactive
+    );
+    let (metric, active_rate, inactive_rate, comparable) = if same_stratum {
+        (
+            "same_root_states_per_second",
+            active_state_rate,
+            inactive_state_rate,
+            true,
+        )
+    } else if active_root_rate > 0.0 && inactive_root_rate > 0.0 {
+        (
+            "completed_roots_per_second",
+            active_root_rate,
+            inactive_root_rate,
+            true,
+        )
+    } else {
+        ("incomparable_root_windows", 0.0, 0.0, false)
+    };
+    let rollback = comparable
+        && inactive_rate * 100.0 > active_rate * (100_u64.saturating_add(slowdown_percent) as f64);
+    let final_epoch = if rollback {
+        inactive_epoch
+    } else {
+        let restored = send_request(
+            manifest,
+            "candidate-apply",
+            json!({"plan": plan, "expect_epoch": inactive_epoch}),
+            max_bytes,
+        )?;
+        if !restored.ok {
+            bail!("probation cannot restore plan: {}", restored.result);
+        }
+        restored.epoch
+    };
+    let ratio = (comparable && active_rate > 0.0).then(|| inactive_rate / active_rate);
+    let result = json!({
+        "plan": plan_name,
+        "decision": if rollback { "rollback" } else { "retain" },
+        "metric": metric,
+        "active_rate": active_rate,
+        "inactive_rate": inactive_rate,
+        "ratio": ratio,
+        "comparable": comparable,
+        "threshold_percent": slowdown_percent,
+        "final_epoch": final_epoch,
+    });
+    if emit_json {
+        println!("{}", serde_json::to_string(&result)?);
+    } else {
+        println!(
+            "decision={} plan={} metric={} active={:.3} inactive={:.3} ratio={} epoch={}",
+            text(&result, "decision"),
+            plan_name,
+            metric,
+            active_rate,
+            inactive_rate,
+            ratio.map_or_else(|| "n/a".to_owned(), |value| format!("{value:.3}x")),
+            final_epoch,
+        );
+    }
+    Ok(())
+}
+
+fn progress_stratum(samples: &[ProgressRecord]) -> Option<(u64, u64, u64, u64)> {
+    let first = samples.first()?.solver;
+    let stratum = (
+        first.root_candidate,
+        first.root_initial_unresolved,
+        first.root_initial_packing,
+        first.root_initial_branches,
+    );
+    samples
+        .iter()
+        .all(|sample| {
+            let solver = sample.solver;
+            (
+                solver.root_candidate,
+                solver.root_initial_unresolved,
+                solver.root_initial_packing,
+                solver.root_initial_branches,
+            ) == stratum
+        })
+        .then_some(stratum)
+}
+
+fn collect_progress_window<R: BufRead>(
+    reader: &mut R,
+    fragment: &mut String,
+    epoch: u64,
+    samples: usize,
+    deadline: Instant,
+) -> Result<Vec<ProgressRecord>> {
+    let mut window = Vec::with_capacity(samples);
+    while window.len() < samples {
+        if Instant::now() >= deadline {
+            bail!("probation timed out waiting for epoch {epoch} progress");
+        }
+        let mut chunk = String::new();
+        if reader.read_line(&mut chunk)? == 0 {
+            thread::sleep(Duration::from_millis(50));
+            continue;
+        }
+        fragment.push_str(&chunk);
+        if !fragment.ends_with('\n') {
+            continue;
+        }
+        let record: ProgressRecord = serde_json::from_str(fragment.trim_end())?;
+        fragment.clear();
+        if record.applied_epoch == epoch {
+            window.push(record);
+        }
+    }
+    Ok(window)
+}
+
+fn progress_rate(samples: &[ProgressRecord], value: impl Fn(ProgressRecord) -> u64) -> Result<f64> {
+    let first = samples.first().copied().context("empty progress window")?;
+    let last = samples.last().copied().context("empty progress window")?;
+    let elapsed_ms = last.elapsed_ms.saturating_sub(first.elapsed_ms);
+    if elapsed_ms == 0 {
+        bail!("progress window has zero duration");
+    }
+    Ok(value(last).saturating_sub(value(first)) as f64 * 1000.0 / elapsed_ms as f64)
 }
 
 fn run_synthesize(
@@ -348,6 +596,7 @@ fn run_evolve(
                 .ok_or_else(|| anyhow::anyhow!("invalid feature field"))
         })
         .collect::<Result<_>>()?;
+    let scope_profiles = read_scope_profiles(manifest, &fields, max_bytes)?;
     let mut current = read_plan_jsonl(seeds, beam)?;
     if current
         .iter()
@@ -375,7 +624,10 @@ fn run_evolve(
             if tested == max_candidates {
                 break;
             }
-            let structural_key = format!("{:?}|{:?}|{:?}", plan.role, plan.output, plan.program);
+            let structural_key = format!(
+                "{:?}|{:?}|{:?}|{:?}",
+                plan.role, plan.output, plan.scope, plan.program
+            );
             if !structural.insert(structural_key) {
                 continue;
             }
@@ -423,6 +675,7 @@ fn run_evolve(
             mutate_plan(
                 &parent,
                 &fields,
+                &scope_profiles,
                 &mut current,
                 max_candidates.saturating_sub(tested),
             );
@@ -440,7 +693,116 @@ fn run_evolve(
     Ok(())
 }
 
-fn mutate_plan(parent: &PlanSpec, fields: &[String], output: &mut Vec<PlanSpec>, limit: usize) {
+#[derive(Debug)]
+struct ScopeMutationProfile {
+    field: String,
+    observed_mask: u64,
+    positive_majority_mask: u64,
+}
+
+fn read_scope_profiles(
+    manifest: &ergodis::control::Manifest,
+    fields: &[String],
+    max_bytes: usize,
+) -> Result<Vec<ScopeMutationProfile>> {
+    let mut profiles = Vec::new();
+    for field in ["root_orbit", "root_candidate"] {
+        if !fields.iter().any(|candidate| candidate == field) {
+            continue;
+        }
+        let response = send_request(
+            manifest,
+            "scope-profile",
+            json!({"field": field}),
+            max_bytes,
+        )?;
+        if !response.ok {
+            bail!("scope profile rejected: {}", response.result);
+        }
+        let observed_mask = number(&response.result, "observed_mask");
+        let mut positive_majority_mask = 0_u64;
+        for stratum in response.result["strata"]
+            .as_array()
+            .ok_or_else(|| anyhow::anyhow!("scope profile omitted strata"))?
+        {
+            if number(stratum, "positive_weight") > number(stratum, "negative_weight") {
+                positive_majority_mask |= 1_u64 << number(stratum, "value");
+            }
+        }
+        if observed_mask != 0 {
+            profiles.push(ScopeMutationProfile {
+                field: field.to_owned(),
+                observed_mask,
+                positive_majority_mask,
+            });
+        }
+    }
+    Ok(profiles)
+}
+
+fn push_scoped_child(
+    parent: &PlanSpec,
+    field: &str,
+    mask: u64,
+    output: &mut Vec<PlanSpec>,
+    limit: usize,
+) -> bool {
+    if mask == 0 || output.len() == limit {
+        return output.len() == limit;
+    }
+    let mut child = parent.clone();
+    child.scope = Some(PlanScope {
+        field: field.to_owned(),
+        mask,
+    });
+    output.push(child);
+    output.len() == limit
+}
+
+fn mutate_plan(
+    parent: &PlanSpec,
+    fields: &[String],
+    scope_profiles: &[ScopeMutationProfile],
+    output: &mut Vec<PlanSpec>,
+    limit: usize,
+) {
+    for profile in scope_profiles {
+        if parent
+            .scope
+            .as_ref()
+            .is_some_and(|scope| scope.field == profile.field)
+        {
+            let current_mask = parent.scope.as_ref().map_or(0, |scope| scope.mask);
+            let mut bits = profile.observed_mask;
+            while bits != 0 {
+                let bit = bits & bits.wrapping_neg();
+                bits ^= bit;
+                if push_scoped_child(parent, &profile.field, current_mask ^ bit, output, limit) {
+                    return;
+                }
+            }
+        } else {
+            let mut bits = profile.observed_mask;
+            while bits != 0 {
+                let bit = bits & bits.wrapping_neg();
+                bits ^= bit;
+                if push_scoped_child(parent, &profile.field, bit, output, limit) {
+                    return;
+                }
+            }
+            if profile.positive_majority_mask != profile.observed_mask
+                && push_scoped_child(
+                    parent,
+                    &profile.field,
+                    profile.positive_majority_mask,
+                    output,
+                    limit,
+                )
+            {
+                return;
+            }
+        }
+    }
     for (index, op) in parent.program.iter().enumerate() {
         let replacements: Vec<PlanOp> = match op {
             PlanOp::Const { value } => [-8, -2, -1, 1, 2, 8]
@@ -660,4 +1022,93 @@ fn number(value: &Value, key: &str) -> u64 {
 
 fn signed(value: &Value, key: &str) -> i64 {
     value.get(key).and_then(Value::as_i64).unwrap_or(0)
+}
+
+#[cfg(test)]
+mod probation_tests {
+    use super::*;
+    use std::io::Cursor;
+
+    #[test]
+    fn windows_filter_epochs_and_measure_cumulative_rate() {
+        let data = concat!(
+            "{\"elapsed_ms\":1000,\"applied_epoch\":1,\"solver\":{\"states\":100,\"root_done\":0}}\n",
+            "{\"elapsed_ms\":2000,\"applied_epoch\":1,\"solver\":{\"states\":300,\"root_done\":1}}\n",
+            "{\"elapsed_ms\":3000,\"applied_epoch\":2,\"solver\":{\"states\":350,\"root_done\":1}}\n",
+            "{\"elapsed_ms\":4000,\"applied_epoch\":2,\"solver\":{\"states\":750,\"root_done\":3}}\n",
+        );
+        let mut reader = Cursor::new(data.as_bytes());
+        let mut fragment = String::new();
+        let deadline = Instant::now() + Duration::from_secs(1);
+        let active = collect_progress_window(&mut reader, &mut fragment, 1, 2, deadline).unwrap();
+        let inactive = collect_progress_window(&mut reader, &mut fragment, 2, 2, deadline).unwrap();
+        assert_eq!(
+            progress_rate(&active, |sample| sample.solver.states).unwrap(),
+            200.0
+        );
+        assert_eq!(
+            progress_rate(&inactive, |sample| sample.solver.states).unwrap(),
+            400.0
+        );
+        assert_eq!(
+            progress_rate(&inactive, |sample| sample.solver.root_done).unwrap(),
+            2.0
+        );
+        assert_eq!(progress_stratum(&active), progress_stratum(&inactive));
+    }
+
+    #[test]
+    fn stratum_rejects_windows_that_cross_roots() {
+        let records = [
+            ProgressRecord {
+                elapsed_ms: 1_000,
+                applied_epoch: 1,
+                solver: ProgressSolver {
+                    states: 100,
+                    root_done: 0,
+                    root_candidate: 3,
+                    root_initial_unresolved: 7,
+                    root_initial_packing: 2,
+                    root_initial_branches: 4,
+                },
+            },
+            ProgressRecord {
+                elapsed_ms: 2_000,
+                applied_epoch: 1,
+                solver: ProgressSolver {
+                    states: 200,
+                    root_done: 1,
+                    root_candidate: 4,
+                    root_initial_unresolved: 7,
+                    root_initial_packing: 2,
+                    root_initial_branches: 4,
+                },
+            },
+        ];
+        assert_eq!(progress_stratum(&records), None);
+    }
+
+    #[test]
+    fn evolution_generates_singleton_and_label_aligned_scopes_first() {
+        let parent = PlanSpec {
+            schema: ergodis::control::PLAN_SCHEMA.into(),
+            name: "seed".into(),
+            role: PlanRole::Diagnostic,
+            output: PlanOutput::Predicate,
+            scope: None,
+            program: vec![PlanOp::Const { value: 1 }],
+        };
+        let profile = ScopeMutationProfile {
+            field: "root_orbit".into(),
+            observed_mask: 0b1011,
+            positive_majority_mask: 0b1001,
+        };
+        let mut children = Vec::new();
+        mutate_plan(&parent, &[], &[profile], &mut children, 8);
+        let masks: Vec<u64> = children
+            .iter()
+            .filter_map(|child| child.scope.as_ref().map(|scope| scope.mask))
+            .collect();
+        assert_eq!(masks, vec![0b0001, 0b0010, 0b1000, 0b1001]);
+    }
 }

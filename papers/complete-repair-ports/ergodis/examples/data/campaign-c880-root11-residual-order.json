@@ -1,0 +1,8 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "root-eleven-residual-packing-bound",
+  "role": "ordering",
+  "output": "score",
+  "scope": { "field": "root_orbit", "mask": 2048 },
+  "expr": { "op": "field", "name": "child_packing" }
+}
