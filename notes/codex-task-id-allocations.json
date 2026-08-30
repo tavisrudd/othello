@@ -3833,8 +3833,17 @@
       "last": 998,
       "purpose": "ergodis public/private crate partition and disclosure-sequence design",
       "sequence": 426
+    },
+    {
+      "count": 2,
+      "first": 999,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 1000,
+      "purpose": "Hadamard 668 structure/explanation and next open orders; independent open-problem win (M(18) or Legendre length 333)",
+      "sequence": 427
     }
   ],
-  "next_id": 999,
+  "next_id": 1001,
   "schema": "codex-task-id-allocations-v1"
 }
