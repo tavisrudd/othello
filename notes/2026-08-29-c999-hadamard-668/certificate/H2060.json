@@ -320,7 +320,7 @@
     },
     "solver": {
       "computed": false,
-      "reason": "the exact 4-profile colouring costs C(2060,4) = 7.5e11 XOR-popcounts, about 2.1 h at the measured rate of the n=668 run, beyond the 30-minute cap. No cheaper exact invariant exists: on a Hadamard matrix every pair and every triple statistic is constant by orthogonality, and odd-order products are not monomial invariants at all, so quadruples are the minimum."
+      "reason": "the exact 4-profile colouring costs C(2060,4) = 7.5e11 XOR-popcounts, about 2.1 h at the measured n=668 rate, beyond the 30-minute cap. No cheaper exact invariant exists: every pair and triple statistic is constant by orthogonality, and odd-order products are not monomial invariants, so quadruples are the minimum."
     },
     "proved_subgroup_in_ring_coordinates": {
       "shifts": [
@@ -335,10 +335,16 @@
         104
       ],
       "multiplier_subgroup_order": 2,
-      "multiplier_meaning": "104 = (-1, 1) in CRT coordinates; it inverts the Z_5 translations",
       "generated_order_lower_bound": 20,
       "structure": "dihedral of order 10 on the rows, times the central swap",
       "method": "exact dephasing test, no solver"
+    },
+    "proved_lower_bound": {
+      "value": 20,
+      "formula": "2 (central swap) * |fixed multiplier group| * (2 if the block order is even, from the half-shift)",
+      "block_order": 515,
+      "block_order_even": false,
+      "multiplier_group_order": 2
     }
   },
   "tool_version": "had668 0.1.0",
@@ -350,20 +356,19 @@
     "gist_updated_at": "2026-08-23T02:33:42Z",
     "gist_revision": "00784a83279fda136c961e0844616366f9298214",
     "gist_revision_count": 1,
-    "fetched_utc": "2026-08-29T21:5x",
     "bytes": 4245660,
-    "claim": "Hadamard matrix of order 2060"
+    "claim": "Hadamard matrix of order 2060",
+    "fetched": "2026-08-29 (this session)"
   },
   "structure_analysis": {
     "block_order": 515,
     "border_width": 0,
-    "n_over_4": 515,
     "factorisation": "515 = 5 * 103",
-    "block_relations_at_515": "all nine hold: (1,1)=(2,2)=(3,3)=(0,0); (k,0)=-(0,k); (2,1)=-(1,2); (3,1)=-(1,3); (3,2)=-(2,3)",
+    "block_relations_at_515": "all nine hold",
     "index_order": "CRT-interleaved: file index f = 5*(t mod 103) + (t mod 5) for ring index t in Z_515 = Z_5 x Z_103",
     "after_relabelling": {
       "A": "genuine circulant of order 515",
-      "B_C_D": "back-circulant after the column multiplier 104; 104 = (-1, 1) in CRT coordinates, i.e. circulant in the Z_5 factor and back-circulant in the Z_103 factor"
+      "B_C_D": "back-circulant after column multiplier 104 = (-1, 1) in CRT coordinates: circulant in the Z_5 factor, back-circulant in the Z_103 factor"
     },
     "sequence_row_sums": {
       "A": -17,
@@ -373,6 +378,17 @@
     },
     "sum_of_squared_row_sums": 2060,
     "paf_sum_over_nonzero_shifts": 0,
-    "verdict": "the four complementary-sequence conditions the Goethals-Seidel array needs at block order 515 hold exactly: sum_i PAF_i(s) = 0 for every nonzero shift and sum_i (row sum_i)^2 = n = 2060"
+    "verdict": "the four complementary-sequence conditions the Goethals-Seidel array needs at block order 515 hold exactly"
+  },
+  "multipliers": {
+    "modulus": 515,
+    "fixed_multiplier_group": [
+      1,
+      104
+    ],
+    "fixed_multiplier_group_order": 2,
+    "cyclic_generator": 104,
+    "computed_in": "ring coordinates after the CRT relabelling",
+    "note": "104 = (-1, 1) in CRT coordinates; it inverts the Z_5 translations"
   }
 }

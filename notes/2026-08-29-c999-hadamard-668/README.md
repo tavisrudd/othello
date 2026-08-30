@@ -205,20 +205,20 @@ signs are only 32, and the `sed` generator quadruples each adjacent pair
 SHA-256 is of the written `evidence/H<order>.txt` (rows of `+`/`-`, one per
 line, trailing newline).
 
-| order | family | structure | sha256 of `H<order>.txt` |
-|---|---|---|---|
-| 668  | `h` | 4 circulants of length 166, 4-row border   | `bdeb5059d77e2703211082627b60441b8c888c928a55cc6f295e011941a387b0` |
-| 716  | `h` | 4 circulants of length 178, 4-row border   | `3adcb1bb2884467d9e34069a3b32950728adabcdb8b35a4503d20c3312664ee6` |
-| 892  | `g` | 4 circulants of length 223                 | `e77fc79ab287f5f5ba5bbdc10191bdc7593839052fe1015c1fb6a2e974ab54de` |
-| 1132 | `g` | 4 circulants of length 283                 | `7d1c1e892149e90330d58bb0cf9ef2c888078df1b35fb55f8724d580ebf7b743` |
-| 1244 | `g` | 4 circulants of length 311                 | `4cb747cf511eba1f203582b5121bdf6ab02671133e45579c1d023add8b2da143` |
-| 1388 | `v` | 24 circulants of length 57, 20-col border  | `a6b92584eb803b87026709d64fe892dec8f7182a120e13de9edd3065cf05bf0b` |
-| 1436 | `u` | 128 circulants of length 11, 28-col border | `e4d745a4d44f39a5671f9cd86f5c1d0aef93504dcfb2e253451cadc9e4086728` |
-| 1676 | `h` | 4 circulants of length 418, 4-row border   | `8e919c2bdb4d30c34817eb5650d2dd3d82d7c6504feccd96c5ca22a2191cdb99` |
-| 1772 | `h` | 4 circulants of length 442, 4-row border   | `1852e951db69c44eb95b37ed741c3ff2e29691267eaf872d6a9da3a977236ba2` |
-| 1916 | `w` | 16 circulants of length 119, 12-col border | `be2073eeaa5399cfe104023829d2c6770b49dd2f07bf6347203f1cbd75577ae9` |
-| 1948 | `g` | 4 circulants of length 487                 | `fddc841ebf951f6e17e939551d058ea5df046251ea065b5f6e7ee2fd8d0f62ce` |
-| 1964 | `g` | 4 circulants of length 491                 | `740b907cd442f1b7fd40dcc31f2b3aae9794842da6dc579f98dac1d0d9e1493d` |
+| order | family | structure | fixed multiplier group | sha256 of `H<order>.txt` |
+|---|---|---|---|---|
+| 668 | `h` | 4 circulants of length 166, 4-row border   | trivial | `bdeb5059d77e2703211082627b60441b8c888c928a55cc6f295e011941a387b0` |
+| 716 | `h` | 4 circulants of length 178, 4-row border   | trivial | `3adcb1bb2884467d9e34069a3b32950728adabcdb8b35a4503d20c3312664ee6` |
+| 892 | `g` | 4 circulants of length 223                 | order 3, `<39>` | `e77fc79ab287f5f5ba5bbdc10191bdc7593839052fe1015c1fb6a2e974ab54de` |
+| 1132 | `g` | 4 circulants of length 283                 | order 3, `<44>` | `7d1c1e892149e90330d58bb0cf9ef2c888078df1b35fb55f8724d580ebf7b743` |
+| 1244 | `g` | 4 circulants of length 311                 | order 5, `<6>` | `4cb747cf511eba1f203582b5121bdf6ab02671133e45579c1d023add8b2da143` |
+| 1388 | `v` | 24 circulants of length 57, 20-col border  | n/a (blocks not circulant) | `a6b92584eb803b87026709d64fe892dec8f7182a120e13de9edd3065cf05bf0b` |
+| 1436 | `u` | 128 circulants of length 11, 28-col border | n/a (blocks not circulant) | `e4d745a4d44f39a5671f9cd86f5c1d0aef93504dcfb2e253451cadc9e4086728` |
+| 1676 | `h` | 4 circulants of length 418, 4-row border   | order 15, `<49>` | `8e919c2bdb4d30c34817eb5650d2dd3d82d7c6504feccd96c5ca22a2191cdb99` |
+| 1772 | `h` | 4 circulants of length 442, 4-row border   | order 12, `<55>` | `1852e951db69c44eb95b37ed741c3ff2e29691267eaf872d6a9da3a977236ba2` |
+| 1916 | `w` | 16 circulants of length 119, 12-col border | n/a (blocks not circulant) | `be2073eeaa5399cfe104023829d2c6770b49dd2f07bf6347203f1cbd75577ae9` |
+| 1948 | `g` | 4 circulants of length 487                 | order 9, `<41>` | `fddc841ebf951f6e17e939551d058ea5df046251ea065b5f6e7ee2fd8d0f62ce` |
+| 1964 | `g` | 4 circulants of length 491                 | order 7, `<138>` | `740b907cd442f1b7fd40dcc31f2b3aae9794842da6dc579f98dac1d0d9e1493d` |
 
 These are the twelve orders the poster claimed: 668, 716, 892, 1132, 1244, 1388,
 1436, 1676, 1772, 1916, 1948, 1964. The record lengths in the header are the

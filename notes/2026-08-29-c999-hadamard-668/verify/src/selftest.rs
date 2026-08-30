@@ -296,6 +296,7 @@ pub fn run(outdir: Option<&Path>, aut_max_n: usize, workdir: &Path) -> Result<Se
     auxiliary.push(census_check());
     auxiliary.push(parser_roundtrip_check()?);
     auxiliary.push(order_668_dry_run()?);
+    auxiliary.push(multiplier_detection_check()?);
 
     let all_pass = results.iter().all(|r| r.pass)
         && auxiliary
@@ -450,6 +451,62 @@ fn order_668_dry_run() -> Result<serde_json::Value> {
         "paley_applicability_at_668": paley,
         "note": "these sequences are a synthetic multiplier-invariant pair, not a Legendre pair; \
                  the matrix is intentionally not Hadamard"
+    }))
+}
+
+
+/// Regression test for multiplier detection, using the four length-223 sequences recovered from
+/// the decoded order-892 matrix. Their fixed multiplier group is `{1, 39, 183} = <39>` of order
+/// 3, and it is the source of that matrix's order-6 automorphism group. The matrix-level test
+/// missed this before the compensating shift `2r = t - 1` was derived, so this case pins the fix.
+pub const SEQ892: [&str; 4] = [
+    "----++-++++--+++++--+--+--+--+++-----++--+-+-+++-+++-+++-+-+++-+++-+++++-++++---+++---+--+--++++--+++++--+---+++-+--+-----+-+++++++------+++-+--++-+++--++--+++-+-+++-++-+++-+----++-------+--+-+-++-+-+--+--+-+--+-+-+-++-+-+-",
+    "--+++++-+-++-++----++--++++-+--++-+---+-++--+-+----+------+--+-+-+--+---+++++-+++-++++---+-++-++--+-++-+---+++-+-+++-+-+--+++-+-----++-+++--+--++++-++-+-++++--+--++---+++++---+---++++-++----+--+-+-++++++-+++-++++--+---+--++",
+    "--+-+-++-+++-+++---++---++----++------+--+--++++-+++-++++--+++++-+-+-++++-+-+-++--+++++-----+++-+++++-+---+--+++++-+---++------++-+++-+++-++---++-+--+--+-++++--+-+++-+++-+---++++---++--+-++-+--++-+------+-++++-+--+-+---++--",
+    "-+-++++-++++-+--++++---++---+++--+--++++-++-++++++-+---+-----+++--++----+----+-+-+----++++++---+-+---+++++-++---+-+--++--+-++-+++-+++-+++++-+-+-+---++-+++-+++-++---++-+-+--+--+--+-+-++-++++-++--+++++-+--+++++-+--+-++-+++---",
+];
+
+fn multiplier_detection_check() -> Result<serde_json::Value> {
+    let seqs: Vec<Vec<i8>> = SEQ892
+        .iter()
+        .map(|s| s.chars().map(|c| if c == '+' { 1i8 } else { -1 }).collect())
+        .collect();
+    let m = crate::construct::goethals_seidel(&seqs[0], &seqs[1], &seqs[2], &seqs[3])?;
+    let (ok, worst, _) = m.check_orthogonality();
+    let rep = classify(&m, None);
+    let mr = rep
+        .tests
+        .iter()
+        .find(|t| t.found && t.name == "gs_array[as_given]")
+        .and_then(|t| t.detail.get("multipliers").cloned());
+    let group = mr
+        .as_ref()
+        .and_then(|v| v.get("fixed_multiplier_group").cloned())
+        .unwrap_or(json!(null));
+    let gen = mr
+        .as_ref()
+        .and_then(|v| v.get("cyclic_generator").cloned())
+        .unwrap_or(json!(null));
+    let verified = mr
+        .as_ref()
+        .and_then(|v| v.get("verified_on_matrix_with_compensating_shift").cloned())
+        .unwrap_or(json!(null));
+    let pass = m.n == 892
+        && ok
+        && group == json!([1, 39, 183])
+        && gen == json!(39)
+        && verified == json!([39, 183]);
+    Ok(json!({
+        "check": "multiplier_detection_892",
+        "pass": pass,
+        "n": m.n,
+        "hadamard": ok,
+        "max_abs_offdiag": worst,
+        "fixed_multiplier_group": group,
+        "cyclic_generator": gen,
+        "verified_on_matrix": verified,
+        "note": "rebuilt from the four length-223 sequences via the Goethals--Seidel array; the \
+                 group <39> of order 3 explains |Aut| = 6 = centre x <39>"
     }))
 }
 

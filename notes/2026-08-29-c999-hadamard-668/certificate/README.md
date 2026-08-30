@@ -111,7 +111,7 @@ finishes in about 4 s.
 |---:|---:|---:|---:|---|
 | 668 | 4 | 2 | central swap; shift by 83 | 8 × 2, 664 × 4 |
 | 716 | 4 | 2 | central swap; shift by 89 | 8 × 2, 712 × 4 |
-| 892 | 6 | 3 | central swap; an order-3 element | 8 × 2, 592 × 6 |
+| 892 | 6 | 3 | central swap; the multiplier 39 | 8 × 2, 592 × 6 |
 
 For 668 the group is exactly the central swap times the half-shift — order 4, nothing more. The
 two generators nauty returns are precisely the two elements already proved by hand above, so the
@@ -122,12 +122,59 @@ DIMACS format and returned `|Aut| = 4` in 0.30 s, with the same two generators. 
 independent symmetry solvers therefore agree, and one of the two generators is independently
 proved by the dephasing argument with no solver at all.
 
-**A surprise at order 892.** Its group has order 6, not 2: there is an element of order 3 fixing
-four rows and four columns (one position in each of the four circulant blocks). It is *not* in
-either family the exact search covers — neither a common block shift nor a common block
-multiplier `i -> t*i` — so it must combine a map on positions with a permutation of the four
-blocks. The exact searches remain a proved lower bound; here the solver found more than they
-cover, which is exactly what a lower bound is for.
+**Order 892 is the multiplier.** Its group has order 6, not 2, from an element of order 3 fixing
+one position in each of the four circulant blocks. That element is the sequence multiplier
+`39`, of order 3 in `(Z/223)*`. An earlier version of this bundle reported it as lying outside
+every family the exact search covered; that was a bug in the matrix-level multiplier test, not a
+property of the matrix. With the shared offset `2r = t - 1` applied, the exact solver-free search
+finds it directly, and `2 x 3 = 6` matches nauty and bliss exactly.
+
+### Multiplier groups
+
+`classify` reports, for every order whose four blocks are circulant, the **fixed multiplier
+group**: the units `t` of `Z_m` with `X_k[t·i] = X_k[i]` for all four sequences and all `i`
+(untranslated, unsigned, identity block permutation). Every non-identity element is then
+re-verified against the full matrix as a monomial automorphism.
+
+| order | block order `m` | fixed multiplier group | generator | proved `\|Aut\|` ≥ | exact `\|Aut\|` |
+|---:|---:|---|---:|---:|---:|
+| 668  | 166 | trivial            | —   | 4  | **4** |
+| 716  | 178 | trivial            | —   | 4  | **4** |
+| 892  | 223 | order 3, ⟨39⟩      | 39  | 6  | **6** |
+| 1132 | 283 | order 3, ⟨44⟩      | 44  | 6  | not computed |
+| 1244 | 311 | order 5, ⟨6⟩       | 6   | 10 | not computed |
+| 1388 | 342 | not defined        | —   | 2  | not computed |
+| 1436 | 352 | not defined        | —   | 2  | not computed |
+| 1676 | 418 | order 15, ⟨49⟩     | 49  | 60 | not computed |
+| 1772 | 442 | order 12, ⟨55⟩     | 55  | 48 | not computed |
+| 1916 | 476 | not defined        | —   | 2  | not computed |
+| 1948 | 487 | order 9, ⟨41⟩      | 41  | 18 | not computed |
+| 1964 | 491 | order 7, ⟨138⟩     | 138 | 14 | not computed |
+| 2060 | 515 | order 2, ⟨104⟩     | 104 | 20 | not computed |
+
+"not defined" is the three block-circulant super-block orders, whose blocks are not circulant.
+Order 2060 is computed in ring coordinates after the CRT relabelling, and its bound also uses
+the `Z_5` translation subgroup of order 5.
+
+The lower bound is `2 · |multiplier group| · (2 if m is even)` — the central swap, the
+multipliers, and the half-shift that exists exactly when `m` is even. **It is tight at all three
+orders where the exact group is known** (4, 4 and 6), which is some evidence the others are
+tight too.
+
+### The bug this replaced
+
+Earlier versions searched for multipliers on the matrix, mapping `i → t·i` on rows and columns
+uniformly. That preserves a circulant diagonal block, whose entry depends on `j − i`, but not a
+back-circulant off-diagonal block `X_k R`, whose entry is `c[i + j]`: the map sends it to
+`c[t(i+j) + 2r]`, so a shared offset `r` with `2r ≡ t − 1 (mod m)` is forced. Without it every
+non-trivial multiplier was rejected and all nine groups above were reported as trivial. The
+offset is shared across all blocks, not per block-column: the diagonal blocks force row and
+column offsets to agree, and the off-diagonal ones then force `2r = t − 1`. `2` is invertible
+for odd `m`; for even `m` every unit is odd, so both `r` and `r + m/2` are tried.
+
+`selftest`'s `multiplier_detection_892` case pins the fix: it rebuilds the order-892 matrix from
+its four length-223 sequences and requires the group `{1, 39, 183}` with generator 39, both
+verified on the matrix.
 
 ## Relation to the C736–C741 Legendre-pair census
 

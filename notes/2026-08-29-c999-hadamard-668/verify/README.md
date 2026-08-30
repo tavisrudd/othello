@@ -125,6 +125,18 @@ Direct block tests (authoritative — they check the actual block structure):
   `Σᵢ PAF_i(s)` and `Σᵢ (row sum_i)²` identities are evaluated. Bordered arrays additionally get
   the border described — the corner, the per-block border-row signs, and the per-slab column
   prefixes.
+- **`multipliers`** (inside the `gs_array` detail, when the blocks are circulant) — the fixed
+  multiplier group of the four sequences: units `t` of `Z_m` with `X_k[t·i] = X_k[i]` for every
+  block and every `i`. Each non-identity element is re-verified against the full matrix as a
+  monomial automorphism, using the shared offset `r` with `2r ≡ t − 1 (mod m)`.
+
+  That offset is the whole subtlety, and getting it wrong is why an earlier version reported
+  every multiplier group as trivial. Mapping `i → t·i` on rows and columns uniformly preserves a
+  circulant diagonal block (entry `a[j − i]`) but not a back-circulant off-diagonal block (entry
+  `c[i + j]`), which becomes `c[t(i+j) + 2r]`. The diagonal blocks force the row and column
+  offsets to agree, and the off-diagonal ones then force `2r = t − 1`, shared across all blocks
+  rather than per block-column. The group is computed on the *sequences*, which has no such blind
+  spot; the matrix check is confirmation. `selftest`'s `multiplier_detection_892` case pins it.
 - **`shift_automorphisms`** (inside the `gs_array` detail) — an exact, solver-free automorphism
   search. For each shift `s` it permutes rows and columns by "fix the border, rotate each block
   by `s`" and tests whether that pair is realised by a monomial automorphism `P H Q = H`.

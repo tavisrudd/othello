@@ -536,6 +536,10 @@ fn test_gs_array(m: &Matrix, label: &str) -> TestResult {
             detail["border"] = json!(describe_border(m, bw, mm));
         }
         detail["shift_automorphisms"] = shift_automorphisms(m, bw, mm, bcl[0]);
+        if all_circ {
+            let seqs: Vec<Vec<i8>> = blocks.iter().map(|(_, x)| first_row(x)).collect();
+            detail["multipliers"] = multiplier_report_for_sequences(m, bw, mm, &seqs);
+        }
         return TestResult {
             name: format!("gs_array[{label}]"),
             applicable: true,
@@ -978,4 +982,155 @@ pub fn classify(m: &Matrix, aut: Option<AutReport>) -> ClassifyReport {
         forms_found,
         aut,
     }
+}
+
+// ---------------------------------------------------------------------------
+// Multiplier groups, computed on the sequences rather than on the matrix.
+// ---------------------------------------------------------------------------
+
+/// Why the matrix-level `multiplier_search` misses these: it applies `i -> t*i` to rows and
+/// columns uniformly. That preserves a circulant diagonal block, whose entry depends on `j - i`,
+/// but *not* a back-circulant off-diagonal block `X_k R`, whose entry is `c[i + j]`: the map
+/// sends it to `c[t(i+j) + d]`, and invariance forces the compensating shift `d = t - 1 (mod m)`
+/// on every block-column except the first. Without that shift every non-trivial multiplier is
+/// rejected, which is exactly what happened. The sequence-level test below has no such blind
+/// spot, and `matrix_multipliers_with_compensating_shift` re-checks the survivors against the
+/// full matrix with the derived shift applied.
+fn units_mod(m: usize) -> Vec<usize> {
+    (1..m).filter(|&t| crate::graph::gcd(t, m) == 1).collect()
+}
+
+fn closure_mod(gens: &[usize], m: usize) -> Vec<usize> {
+    let mut set = vec![1usize];
+    let mut changed = true;
+    while changed {
+        changed = false;
+        let snap = set.clone();
+        for &g in gens {
+            for &x in &snap {
+                let v = (x * g) % m;
+                if !set.contains(&v) {
+                    set.push(v);
+                    changed = true;
+                }
+            }
+        }
+    }
+    set.sort_unstable();
+    set
+}
+
+/// `t` is a fixed multiplier of the sequence set when `X_k[t*i] = X_k[i]` for every block and
+/// every `i` -- untranslated, unsigned, identity block permutation.
+fn fixed_multiplier_group(seqs: &[Vec<i8>], m: usize) -> Vec<usize> {
+    units_mod(m)
+        .into_iter()
+        .filter(|&t| {
+            seqs.iter()
+                .all(|s| (0..m).all(|i| s[(t * i) % m] == s[i]))
+        })
+        .collect()
+}
+
+/// The same, but allowing each sequence its own sign and shift: `X_k[t*i] = eps * X_k[i + sh]`.
+fn translated_multiplier_group(seqs: &[Vec<i8>], m: usize) -> Vec<usize> {
+    units_mod(m)
+        .into_iter()
+        .filter(|&t| {
+            seqs.iter().all(|s| {
+                let y: Vec<i8> = (0..m).map(|i| s[(t * i) % m]).collect();
+                [1i8, -1].iter().any(|&eps| {
+                    (0..m).any(|sh| (0..m).all(|i| y[i] == eps * s[(i + sh) % m]))
+                })
+            })
+        })
+        .collect()
+}
+
+/// Re-verify a sequence multiplier against the whole matrix. The map is `i -> t*i + r` on rows
+/// and columns alike, with the *same* offset `r` in every block, chosen so that `2r = t - 1`.
+///
+/// Derivation. A diagonal block is circulant, entry `a[j - i]`, and `a[t(j-i)] = a[j-i]` needs
+/// the row and column offsets to agree. An off-diagonal block is back-circulant, entry
+/// `b[m-1-i-j]`, and the same map sends it to `b[m-1-t(i+j)-2r]`; with `b[tx] = b[x]` that equals
+/// `b[t^-1(m-1-2r) - (i+j)]`, which is the original iff `2r = t - 1 (mod m)`. So the offset is
+/// forced and shared, not per-block-column -- getting that wrong rejects every multiplier.
+/// `2` is invertible for odd `m`; for even `m` every unit `t` is odd, so `t - 1` is even and
+/// both solutions `r` and `r + m/2` are tried.
+fn matrix_multipliers_with_compensating_shift(
+    mat: &Matrix,
+    bw: usize,
+    mm: usize,
+    cands: &[usize],
+) -> Vec<usize> {
+    let n = mat.n;
+    let base = mat.dephase();
+    let mut ok = Vec::new();
+    for &t in cands {
+        if t == 1 {
+            continue;
+        }
+        let offsets: Vec<usize> = if mm % 2 == 1 {
+            vec![((t + mm - 1) % mm) * ((mm + 1) / 2) % mm]
+        } else if (t + mm - 1) % mm % 2 == 0 {
+            let r = ((t + mm - 1) % mm) / 2;
+            vec![r, (r + mm / 2) % mm]
+        } else {
+            vec![]
+        };
+        for r in offsets {
+            let map = |i: usize| -> usize {
+                if i < bw {
+                    i
+                } else {
+                    let k = (i - bw) / mm;
+                    let p = (i - bw) % mm;
+                    bw + k * mm + (p * t + r) % mm
+                }
+            };
+            let rows: Vec<Vec<i8>> = (0..n)
+                .map(|i| {
+                    let si = map(i);
+                    (0..n).map(|j| mat.rows[si][map(j)]).collect()
+                })
+                .collect();
+            if (Matrix { n, rows }).dephase().rows == base.rows {
+                ok.push(t);
+                break;
+            }
+        }
+    }
+    ok
+}
+
+pub fn multiplier_report_for_sequences(
+    mat: &Matrix,
+    bw: usize,
+    mm: usize,
+    seqs: &[Vec<i8>],
+) -> serde_json::Value {
+    let fixed = fixed_multiplier_group(seqs, mm);
+    let translated = translated_multiplier_group(seqs, mm);
+    // Smallest element whose powers give the whole group, when the group is cyclic.
+    let gen = fixed
+        .iter()
+        .find(|&&g| g != 1 && closure_mod(&[g], mm) == fixed)
+        .copied();
+    let verified = matrix_multipliers_with_compensating_shift(mat, bw, mm, &fixed);
+    json!({
+        "modulus": mm,
+        "fixed_multiplier_group": fixed,
+        "fixed_multiplier_group_order": fixed.len(),
+        "cyclic_generator": gen,
+        "is_cyclic": gen.is_some() || fixed.len() == 1,
+        "translated_multiplier_group": translated,
+        "translated_multiplier_group_order": translated.len(),
+        "verified_on_matrix_with_compensating_shift": verified,
+        "definition": "t in (Z/m)* with X_k[t*i] = X_k[i] for all four sequences and all i \
+                       (untranslated, unsigned, identity block permutation); the translated \
+                       variant allows each sequence its own sign and shift",
+        "note": "computed on the sequences. The matrix-level test needs the compensating shift \
+                 t-1 on every block-column after the first, because the off-diagonal blocks are \
+                 back-circulant; omitting it rejects every non-trivial multiplier."
+    })
 }

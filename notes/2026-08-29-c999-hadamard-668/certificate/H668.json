@@ -117,6 +117,22 @@
           },
           "border_width": 4,
           "expected_paf_sum": -4,
+          "multipliers": {
+            "cyclic_generator": null,
+            "definition": "t in (Z/m)* with X_k[t*i] = X_k[i] for all four sequences and all i (untranslated, unsigned, identity block permutation); the translated variant allows each sequence its own sign and shift",
+            "fixed_multiplier_group": [
+              1
+            ],
+            "fixed_multiplier_group_order": 1,
+            "is_cyclic": true,
+            "modulus": 166,
+            "note": "computed on the sequences. The matrix-level test needs the compensating shift t-1 on every block-column after the first, because the off-diagonal blocks are back-circulant; omitting it rejects every non-trivial multiplier.",
+            "translated_multiplier_group": [
+              1
+            ],
+            "translated_multiplier_group_order": 1,
+            "verified_on_matrix_with_compensating_shift": []
+          },
           "paf_sum_constant_over_nonzero_shifts": true,
           "paf_sum_value": -4,
           "sequence_row_sums": [
@@ -147,6 +163,8 @@
             "block_order": 166,
             "border_width": 4,
             "cyclic_subgroup_order": 2,
+            "multiplier_subgroup_order": 1,
+            "multipliers_realised_by_a_monomial_automorphism": [],
             "note": "exact: dephasing is a complete invariant for the row/column sign group, so a listed shift is a proved automorphism and an omitted one is proved not to be. This is a lower bound on |Aut| that needs no graph-isomorphism solver.",
             "predicted_by_gs_parity": [
               83
@@ -398,6 +416,8 @@
       "block_order": 166,
       "border_width": 4,
       "cyclic_subgroup_order": 2,
+      "multiplier_subgroup_order": 1,
+      "multipliers_realised_by_a_monomial_automorphism": [],
       "note": "exact: dephasing is a complete invariant for the row/column sign group, so a listed shift is a proved automorphism and an omitted one is proved not to be. This is a lower bound on |Aut| that needs no graph-isomorphism solver.",
       "predicted_by_gs_parity": [
         83
@@ -1106,6 +1126,13 @@
         4,
         4
       ]
+    },
+    "proved_lower_bound": {
+      "value": 4,
+      "formula": "2 (central swap) * |fixed multiplier group| * (2 if the block order is even, from the half-shift)",
+      "block_order": 166,
+      "block_order_even": true,
+      "multiplier_group_order": 1
     }
   },
   "tool_version": "had668 0.1.0"
