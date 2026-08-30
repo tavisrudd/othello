@@ -84,16 +84,29 @@ class Session:
     @classmethod
     def from_run_dir(cls, run_dir: Path | str, *, timeout: float = 10.0) -> "Session":
         root = Path(run_dir).resolve()
-        with (root / "manifest.json").open("r", encoding="utf-8") as source:
-            manifest = json.load(source)
+        with (root / "manifest.json").open("rb") as source:
+            encoded = source.read(MAX_FRAME_BYTES + 1)
+        if len(encoded) > MAX_FRAME_BYTES:
+            raise ProtocolError("manifest exceeds protocol frame bound")
+        manifest = json.loads(encoded)
+        if not isinstance(manifest, dict):
+            raise ProtocolError("manifest is not an object")
         if manifest.get("schema") != SCHEMA:
             raise ProtocolError("unsupported manifest schema")
         try:
+            socket_value = manifest["socket"]
+            run_id = manifest["run_id"]
+            nonce = manifest["nonce"]
+            if not all(
+                isinstance(value, str) and 1 <= len(value) <= 4096
+                for value in (socket_value, run_id, nonce)
+            ):
+                raise ProtocolError("invalid manifest identity field")
             return cls(
                 root,
-                Path(manifest["socket"]),
-                str(manifest["run_id"]),
-                str(manifest["nonce"]),
+                Path(socket_value),
+                run_id,
+                nonce,
                 timeout=timeout,
             )
         except KeyError as error:

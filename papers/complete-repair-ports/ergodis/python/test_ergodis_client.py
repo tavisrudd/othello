@@ -59,6 +59,16 @@ class ErgodisClientTest(unittest.TestCase):
             ), self.assertRaises(ProtocolError):
                 session.capabilities()
 
+    def test_manifest_ingestion_is_bounded_and_typed(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "manifest.json").write_bytes(b" " * (MAX_FRAME_BYTES + 1))
+            with self.assertRaises(ProtocolError):
+                Session.from_run_dir(root)
+            (root / "manifest.json").write_text("[]")
+            with self.assertRaises(ProtocolError):
+                Session.from_run_dir(root)
+
     def test_live_framing_handshake_and_monotone_ids(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
