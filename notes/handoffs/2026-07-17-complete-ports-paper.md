@@ -549,7 +549,12 @@ Sequel research:
   budget-12 wall time 1.841x (`t=267.262`). On the actual `[0,1,2]` weight-15
   orbit it reduces states `62.71M -> 24.03M`, capacity `2^26 -> 2^25`, wall
   time `310.37 -> 215.38` seconds, and RSS `527,600 -> 265,672` KiB. Extending
-  that bound and adding proof-producing search are the next route.
+  that bound and adding proof-producing search are the next route. A `2^25`
+  sweep over the 26 formerly failed roots closes four more, for 6/28 total
+  rooted diagnostic closures, at 23.20--26.47 million states and at most
+  265,884 KiB RSS; the other 22 still fill the exact table. This is evidence
+  that the aggregate bound transfers across roots, not an UNSAT certificate or
+  a change to the proved bound.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

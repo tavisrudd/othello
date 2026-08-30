@@ -297,6 +297,17 @@ KiB RSS. The prior admitted worker required 62,708,044 states, `2^26`, 310.37
 seconds, and 527,600 KiB. Thus the hard-case result is 2.61x fewer states,
 1.44x less wall time, and half the exact table capacity/RSS.
 
+The same `2^25` worker was then applied to all 26 roots that had failed the
+earlier `2^26` wide sweep. It closes four more: `[0,11,18]`, `[0,11,55]`,
+`[0,46,20]`, and `[0,46,51]`, using 23.20--26.47 million states and at most
+265,884 KiB RSS. The twelve-way diagnostic sweep has median wall time 468.17
+seconds and maximum 631.91 seconds; the other 22 roots still fill the exact
+table. Together with the two earlier closures, the current native diagnostics
+therefore close 6/28 rooted cases. This remains neither a proof certificate nor
+a lower-bound improvement, but it shows that the aggregate residual theorem
+generalizes beyond the root on which it was developed and crosses capacity
+frontiers that compact syntactic storage alone did not cross.
+
 Three equal 300-second pulse controls retain the known 17-query incumbent but
 leave the certified lower bound at 15. One context times 16 rotating orbit
 images visits 179,851 nodes; four contexts times four images visits 273,890;
@@ -382,9 +393,11 @@ cut-context theorem.
   families and rechecked discharged/non-crossing contexts. Setwise-stabilizer
   canonicalization plus monotone residualization and crossing masks removes up
   to about 68.1x wall time on completed controls after incremental group-image
-  accumulation and the factored clause lookup. The full weight-15 sweep closes
-  only 2/28 cases before `2^26` capacity; the owning successor is the exact
-  parity-closure contextual quotient, followed by proof-producing replay.
+  accumulation and the factored clause lookup. The exact final-three hitting
+  theorem raises the rooted diagnostic closure count from 2/28 at `2^26` to
+  6/28 at `2^25`, but 22 roots still exhaust capacity. The owning successor is
+  a deeper aggregate cover/rank bound together with proof-producing replay;
+  the sparse parity-closure quotient has been rejected.
 - **Settled:** a displayed generic-solver incumbent is not automatically a
   certified Ergodis incumbent. The independent outer replay boundary now
   catches callback-delivery gaps and refuses unreplayed objectives.
