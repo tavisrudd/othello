@@ -926,6 +926,21 @@ and delete abstractions that did not earn their cost.  Freeze a `v1` only after
 the same compact operations survive several distinct long searches (C80,
 C880, and one non-game adapter).
 
+The v0 test matrix should stay correspondingly small and adversarial:
+
+- byte/counter parity for the pre-existing uncontrolled short solve;
+- two simultaneous run directories and sockets, with cross-run mutations
+  rejected;
+- stale socket, malformed/oversized frame, wrong nonce, wrong run, and stale
+  epoch failures leaving the active search unchanged;
+- slow pulse subscriber coalescing rather than queue growth;
+- ledger, response, trace, and evidence limits truncating cleanly;
+- controller disconnect/restart retaining the last validated epoch;
+- C80 plan load/steer/replay producing the exact retained q11/q13 evidence.
+
+These are durable behavioural contracts even if nearly every type and command
+is renamed during the first refactors.
+
 ## Source scope and read depth
 
 This section imports architecture ideas, not novelty or priority claims.  Zero
