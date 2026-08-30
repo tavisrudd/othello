@@ -15,6 +15,20 @@ class C973Gf27AffineSwitchProfileTest(unittest.TestCase):
         self.assertEqual(result["maximum_plane_overlap_histogram"], {"7": 175, "8": 24, "9": 1})
         self.assertEqual(result["maximum_replacement_distance"], 2)
 
+    def test_complete_e3_locator_set_has_radius_at_most_four(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        result = extract(
+            root / "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/e3-ninesets.tsv"
+        )
+        self.assertEqual(result["witnesses"], 266)
+        self.assertEqual(result["weighted_witnesses"], 6890)
+        self.assertEqual(result["maximum_plane_overlap_histogram"], {"5": 155, "6": 108, "7": 3})
+        self.assertEqual(
+            result["weighted_maximum_plane_overlap_histogram"],
+            {"5": 4004, "6": 2808, "7": 78},
+        )
+        self.assertEqual(result["maximum_replacement_distance"], 4)
+
 
 if __name__ == "__main__":
     unittest.main()

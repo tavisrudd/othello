@@ -20,10 +20,19 @@ def extract(source: Path) -> dict[str, object]:
     if len(planes) != 39:
         raise ValueError("unexpected number of affine F3 planes in GF(27)")
     overlap_histogram: Counter[int] = Counter()
+    weighted_overlap_histogram: Counter[int] = Counter()
     rows = 0
+    weighted_witnesses = 0
     with source.open(newline="", encoding="utf-8") as handle:
         for row in csv.DictReader(handle, delimiter="\t"):
-            syndrome = tuple(int(value) for value in row["z2,z3,z4,z5,z6,z7,z8"].split(","))
+            if "z2,z3,z4,z5,z6,z7,z8" in row:
+                syndrome = tuple(
+                    int(value) for value in row["z2,z3,z4,z5,z6,z7,z8"].split(",")
+                )
+                weight = 1
+            else:
+                syndrome = (0, 1, 0, 0, 0, 0, 0)
+                weight = int(row["orbit_size"])
             support = tuple(int(value) for value in row["nine_set"].split(","))
             polynomial = polynomial_from_roots(support)
             equations = []
@@ -34,8 +43,11 @@ def extract(source: Path) -> dict[str, object]:
                 equations.append(value)
             if equations != [0, 0]:
                 raise ValueError("witness does not satisfy its Hankel equations")
-            overlap_histogram[max(len(set(support) & set(plane)) for plane in planes)] += 1
+            maximum_overlap = max(len(set(support) & set(plane)) for plane in planes)
+            overlap_histogram[maximum_overlap] += 1
+            weighted_overlap_histogram[maximum_overlap] += weight
             rows += 1
+            weighted_witnesses += weight
     return {
         "schema": "ergodis.semantic-affine-switch-profile.v1",
         "problem": "C973 GF(27) certified switch witness sample",
@@ -43,11 +55,19 @@ def extract(source: Path) -> dict[str, object]:
         "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "affine_F3_planes": len(planes),
         "witnesses": rows,
+        "weighted_witnesses": weighted_witnesses,
         "maximum_plane_overlap_histogram": {
             str(overlap): count for overlap, count in sorted(overlap_histogram.items())
         },
         "replacement_distance_histogram": {
             str(9 - overlap): count for overlap, count in sorted(overlap_histogram.items(), reverse=True)
+        },
+        "weighted_maximum_plane_overlap_histogram": {
+            str(overlap): count for overlap, count in sorted(weighted_overlap_histogram.items())
+        },
+        "weighted_replacement_distance_histogram": {
+            str(9 - overlap): count
+            for overlap, count in sorted(weighted_overlap_histogram.items(), reverse=True)
         },
         "maximum_replacement_distance": 9 - min(overlap_histogram),
         "all_hankel_witnesses_replayed": True,

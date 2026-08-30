@@ -16,5 +16,16 @@
   "schema": "ergodis.semantic-affine-switch-profile.v1",
   "source": "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/certify-witness-sample.tsv",
   "source_sha256": "5dc58017fd6e0fe48140f515caa742a8491d8999272b5836c2304a9f46cdfa6a",
+  "weighted_maximum_plane_overlap_histogram": {
+    "7": 175,
+    "8": 24,
+    "9": 1
+  },
+  "weighted_replacement_distance_histogram": {
+    "0": 1,
+    "1": 24,
+    "2": 175
+  },
+  "weighted_witnesses": 200,
   "witnesses": 200
 }
