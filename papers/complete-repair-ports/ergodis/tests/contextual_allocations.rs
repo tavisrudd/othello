@@ -4,10 +4,11 @@ use ergodis::observational::{
 };
 use ergodis::{
     compile_alignment_attachment, compile_binary_commutant,
-    compile_verified_explicit_binary_support, BinarySupportCandidate, CanonicalContextBasis,
-    CompiledCssDistance, CostTable, DenseSelector, ExplicitBinarySupportProblem,
-    FinitePermutationAction, Gf4, Matrix, PackedBinaryAction, PackedBinaryLinearMap, Prime,
-    RankBoundedContextCache, RankOneProbeCache, SparseSelector,
+    compile_verified_explicit_binary_support, search_alignment_attachment,
+    AlignmentSearchWorkspace, BinarySupportCandidate, CanonicalContextBasis, CompiledCssDistance,
+    CostTable, DenseSelector, ExplicitBinarySupportProblem, FinitePermutationAction, Gf4, Matrix,
+    PackedBinaryAction, PackedBinaryLinearMap, Prime, RankBoundedContextCache, RankOneProbeCache,
+    SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -80,6 +81,16 @@ fn aligned_attachment_verification_allocates_nothing() {
     .fold(0_u64, |mask, index| mask | (1_u64 << index));
     let (separates, allocations) = tracked_allocations(|| problem.separates(selected).unwrap());
     assert!(separates);
+    assert_eq!(allocations, 0);
+}
+
+#[test]
+fn aligned_attachment_search_allocates_nothing_after_workspace_construction() {
+    let problem = compile_alignment_attachment(5).unwrap();
+    let mut workspace = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
+    let (result, allocations) =
+        tracked_allocations(|| search_alignment_attachment(&problem, 9, &mut workspace).unwrap());
+    assert!(result.0.is_some());
     assert_eq!(allocations, 0);
 }
 

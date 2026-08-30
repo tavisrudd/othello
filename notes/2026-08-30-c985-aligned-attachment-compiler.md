@@ -50,7 +50,7 @@ At eight points the complete streamed context family has
 \]
 
 clauses over only 56 query variables.  The generated at-most-16 SAT model has
-952 variables and 4,270,072 clauses including its generic slot encoding.  It
+952 variables and 4,270,072 clauses. It
 is written directly to persistent cache; the clause corpus is never buffered
 in RAM or written to `/tmp`.
 
@@ -59,18 +59,24 @@ iff it contains an Eulerian subgraph with an odd number of edges: one direction
 selects an odd cycle; in the other, an Eulerian subgraph decomposes into cycles,
 and odd total size forces an odd one.  For every cut, select witness triples,
 require witness-to-query implication, even degree at every cut edge, and odd
-total witness size.  Tseitin XOR chains plus a monotone sequential cardinality
+total witness size. Tseitin XOR chains plus a monotone sequential cardinality
 counter compile the at-most-16 decision to 20,457 variables and only 67,324
-clauses.  The CNF is about 300 KiB; the complete colouring expansion is 32 MiB.
+clauses. Non-bipartiteness also forces at least three selected crossing triples
+on every cut; explicit unary threshold propagation strengthens the model
+without changing its solutions. A 22,034-variable parity-native form retains
+each Euler condition as one XOR constraint instead of expanding it.
 
 ## Implemented trust boundary
 
 - `src/alignment.rs` compiles cut-edge incidences once and verifies a selected
   family with fixed 16-entry colour and queue arrays.
 - The native counterexample-guided DFS is iterative, uses a pre-sized flat
-  duplicate table, and allocates nothing in the search loop.
+  duplicate table, computes fixed-stack disjoint-clause and incidence-capacity
+  lower bounds, and allocates nothing in the search loop.
 - `examples/alignment_attachment_cnf.rs` streams the complete reduced CNF.
 - `examples/alignment_attachment_compact_cnf.rs` streams the Eulerian/XOR CNF.
+- `examples/alignment_attachment_orbits.rs` independently computes exact
+  stabilizer-orbit representatives without recursion.
 - `python/c880_alignment_gurobi.py` is a thin backend: every incumbent is
   replayed by exact cut bipartiteness, violated contexts are closed under the
   `S_3 x S_5` stabilizer of the fixed first triple, and C880's already-proved
@@ -81,11 +87,11 @@ The quotient matches the original four-triple alignment definition for all
 accepts the committed 17-query `g(8)` witness, and rejects a one-query deletion
 from that witness.  Strict all-target/all-feature clippy passes.
 
-The compact at-most-17 SAT control is satisfiable in 0.20 seconds.  Its 17
-selected query variables replay as separating in the independent Rust
-verifier.  The at-most-16 decision is still running in this checkpoint and
-writes a binary DRAT stream directly under `/home/tavis/.cache/ergodis`; it is
-not yet a result.
+The compact at-most-17 SAT control is satisfiable in 0.20 seconds. A separate
+CryptoMiniSat control consumes the native XOR form in 2.8 seconds including
+generation and process startup. Its 17 selected query variables replay as
+separating in the independent Rust verifier. Neither control proves the
+16-query exclusion.
 
 ## Performance lesson
 
@@ -114,6 +120,23 @@ incomplete proof stream had reached 326 MiB.  Replacing slots by the exact
 sequential counter makes the satisfiable control roughly two orders of
 magnitude faster and removes 22,400 clauses.  The slot proof was stopped and
 retained with an explicit `.slot-incomplete` name; it is not evidence.
+
+The proof layout imports the proved lower bound directly into the same
+sequential counter and splits cardinalities 15 and 16. After the first triple
+is fixed, its `S_3 x S_5` stabilizer has exactly three orbits on a second
+triple, classified by intersection size 2, 1, or 0. The stabilizers of those
+pairs give 9, 12, and 7 third-triple orbits respectively, hence 28 cases per
+weight. An in-tree exhaustive `S_8` checker verifies those representatives,
+the stabilizer orders `48/24/72`, and complete coverage.
+
+This split did not yet close a case: twelve proof-producing Kissat workers ran
+for about fifteen minutes, while twelve native workers each exhausted a
+`2^24`-slot, 128 MiB duplicate table in about four minutes on the earliest
+cases. All associated streams are explicitly incomplete and are not evidence.
+A fourth orbit split would have 559 cases per weight and did not make one
+diagnostic parity-native subcase immediate. The current Gurobi diagnostic
+therefore changes its lazy symmetry closure from a 720-cut callback storm to a
+tunable bounded pulse; its status is not part of this checkpoint.
 
 ## Boundary and next gate
 

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import itertools
 import json
+import os
 import sys
 import time
 
@@ -100,6 +101,9 @@ def violated_clause(selected: list[bool]) -> int | None:
 
 def main() -> None:
     output = sys.argv[1] if len(sys.argv) > 1 else None
+    orbit_batch = int(os.environ.get("ERGODIS_ALIGNMENT_ORBIT_BATCH", "16"))
+    if not 1 <= orbit_batch <= len(ANCHOR_STABILIZER_MAPS):
+        raise ValueError("ERGODIS_ALIGNMENT_ORBIT_BATCH must lie in [1, 720]")
     model = gp.Model("c880-alignment-attachment")
     model.Params.OutputFlag = 1
     model.Params.Threads = 16
@@ -124,7 +128,7 @@ def main() -> None:
         if clause is None:
             return
         support = [index for index in range(len(TRIPLES)) if clause >> index & 1]
-        for mapping in ANCHOR_STABILIZER_MAPS:
+        for mapping in ANCHOR_STABILIZER_MAPS[:orbit_batch]:
             image = 0
             for index in support:
                 image |= 1 << mapping[index]
@@ -151,6 +155,7 @@ def main() -> None:
         "family_indices": [index for index, keep in enumerate(selected) if keep],
         "family_triples": [TRIPLES[index] for index, keep in enumerate(selected) if keep],
         "lazy_constraints": lazy_count,
+        "orbit_batch": orbit_batch,
         "nodes": model.NodeCount,
         "work": model.Work,
         "elapsed_seconds": time.perf_counter() - started,

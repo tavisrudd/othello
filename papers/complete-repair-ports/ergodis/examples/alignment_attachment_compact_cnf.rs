@@ -9,9 +9,18 @@ fn write_xor(
     output: &mut impl Write,
     inputs: &[usize],
     parity: bool,
+    native: bool,
     next_variable: &mut usize,
 ) -> std::io::Result<()> {
     debug_assert!(inputs.len() >= 2);
+    if native {
+        write!(output, "x")?;
+        for (index, &input) in inputs.iter().enumerate() {
+            let negative = index == 0 && !parity;
+            write!(output, " {}{input}", if negative { "-" } else { "" })?;
+        }
+        return writeln!(output, " 0");
+    }
     let mut left = inputs[0];
     for &right in &inputs[1..] {
         let result = *next_variable;
@@ -36,6 +45,60 @@ fn counter_shape(items: usize, budget: usize) -> (usize, usize) {
         }
     }
     (variables, clauses + 2)
+}
+
+fn threshold_shape(items: usize, threshold: usize) -> (usize, usize) {
+    let variables = (1..=items).map(|prefix| prefix.min(threshold)).sum();
+    let mut clauses = 3_usize;
+    for prefix in 2..=items {
+        clauses += 3;
+        for level in 2..=prefix.min(threshold) {
+            clauses += if level < prefix { 4 } else { 3 };
+        }
+    }
+    (variables, clauses)
+}
+
+fn write_threshold(
+    output: &mut impl Write,
+    inputs: &[usize],
+    threshold: usize,
+    next_variable: &mut usize,
+) -> std::io::Result<()> {
+    debug_assert!(threshold > 0 && threshold <= inputs.len());
+    let mut counter = vec![vec![0_usize; threshold]; inputs.len()];
+    for (prefix, row) in counter.iter_mut().enumerate() {
+        for cell in &mut row[..(prefix + 1).min(threshold)] {
+            *cell = *next_variable;
+            *next_variable += 1;
+        }
+    }
+    writeln!(output, "-{} {} 0", inputs[0], counter[0][0])?;
+    writeln!(output, "{} -{} 0", inputs[0], counter[0][0])?;
+    for prefix in 1..inputs.len() {
+        let input = inputs[prefix];
+        let state = counter[prefix][0];
+        let prior = counter[prefix - 1][0];
+        writeln!(output, "-{prior} {state} 0")?;
+        writeln!(output, "-{input} {state} 0")?;
+        writeln!(output, "-{state} {prior} {input} 0")?;
+        for level in 1..=prefix.min(threshold - 1) {
+            let state = counter[prefix][level];
+            let lower = counter[prefix - 1][level - 1];
+            if level < prefix {
+                let prior = counter[prefix - 1][level];
+                writeln!(output, "-{prior} {state} 0")?;
+                writeln!(output, "-{input} -{lower} {state} 0")?;
+                writeln!(output, "-{state} {prior} {input} 0")?;
+                writeln!(output, "-{state} {prior} {lower} 0")?;
+            } else {
+                writeln!(output, "-{state} {input} 0")?;
+                writeln!(output, "-{state} {lower} 0")?;
+                writeln!(output, "-{input} -{lower} {state} 0")?;
+            }
+        }
+    }
+    writeln!(output, "{} 0", counter[inputs.len() - 1][threshold - 1])
 }
 
 fn write_cardinality_band(
@@ -83,9 +146,9 @@ fn write_cardinality_band(
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let path = std::env::args()
-        .nth(1)
-        .ok_or("usage: alignment_attachment_compact_cnf OUTPUT.cnf [MAXIMUM] [MINIMUM] [FIXED]")?;
+    let path = std::env::args().nth(1).ok_or(
+        "usage: alignment_attachment_compact_cnf OUTPUT.cnf [MAXIMUM] [MINIMUM] [FIXED] [cnf|xor]",
+    )?;
     let budget = std::env::args()
         .nth(2)
         .map_or(Ok(16_usize), |value| value.parse())?;
@@ -95,6 +158,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut fixed = std::env::args()
         .nth(4)
         .map(|value| {
+            if value.is_empty() {
+                return Ok(Vec::new());
+            }
             value
                 .split(',')
                 .map(str::parse::<usize>)
@@ -102,6 +168,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         })
         .transpose()?
         .unwrap_or_default();
+    let native_xor = match std::env::args().nth(5).as_deref() {
+        None | Some("cnf") => false,
+        Some("xor") => true,
+        Some(_) => return Err("FORMAT must be cnf or xor".into()),
+    };
     let problem = compile_alignment_attachment(8)?;
     let triples = problem.triples();
     if minimum < 15 || budget < minimum || budget >= triples.len() {
@@ -117,29 +188,63 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     {
         return Err("FIXED must contain distinct zero-based non-anchor triple indices".into());
     }
+    let fixed_mask = fixed
+        .iter()
+        .fold(1_u64, |mask, &index| mask | (1_u64 << index));
 
     let mut witness_count = 0_usize;
     let mut xor_auxiliaries = 0_usize;
     let mut xor_clauses = 0_usize;
+    let mut threshold_variables = 0_usize;
+    let mut threshold_clauses = 0_usize;
+    let mut active_cut_count = 0_usize;
+    let mut active_cuts = [false; 127];
     for cut in 1_usize..1 << 7 {
+        if problem.separates_cut(fixed_mask, cut - 1)? {
+            continue;
+        }
+        active_cuts[cut - 1] = true;
+        active_cut_count += 1;
         let right = (0..8).filter(|&point| side(cut, point)).count();
         let edge_count = right * (8 - right);
         let crossing_triples = 3 * edge_count;
         witness_count += crossing_triples;
         xor_auxiliaries += edge_count * 5 + crossing_triples - 1;
         xor_clauses += edge_count * 21 + 4 * (crossing_triples - 1) + 1;
+        let (variables, clauses) = threshold_shape(crossing_triples, 3);
+        threshold_variables += variables;
+        threshold_clauses += clauses;
     }
     let (counter_variables, counter_clauses) = counter_shape(triples.len(), budget);
     let anchor_clauses = 1_usize + fixed.len();
     let witness_implications = witness_count;
-    let clause_count = counter_clauses + anchor_clauses + witness_implications + xor_clauses;
-    let variable_count = triples.len() + counter_variables + witness_count + xor_auxiliaries;
+    let xor_clause_count = if native_xor {
+        (1_usize..1 << 7)
+            .filter(|&cut| active_cuts[cut - 1])
+            .map(|cut| {
+                let right = (0..8).filter(|&point| side(cut, point)).count();
+                right * (8 - right) + 1
+            })
+            .sum()
+    } else {
+        xor_clauses
+    };
+    let clause_count = counter_clauses
+        + threshold_clauses
+        + anchor_clauses
+        + witness_implications
+        + xor_clause_count;
+    let variable_count = triples.len()
+        + counter_variables
+        + threshold_variables
+        + witness_count
+        + if native_xor { 0 } else { xor_auxiliaries };
 
     let file = std::fs::File::create_new(path)?;
     let mut output = BufWriter::with_capacity(1 << 20, file);
     writeln!(output, "p cnf {variable_count} {clause_count}")?;
     writeln!(output, "1 0")?;
-    for fixed in fixed {
+    for &fixed in &fixed {
         writeln!(output, "{} 0", fixed + 1)?;
     }
 
@@ -152,6 +257,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         &mut next_variable,
     )?;
     for cut in 1_usize..1 << 7 {
+        if !active_cuts[cut - 1] {
+            continue;
+        }
         let mut edge_index = [[u8::MAX; 8]; 8];
         let mut edge_count = 0_u8;
         for (left, row) in edge_index.iter_mut().enumerate() {
@@ -165,6 +273,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let mut witness_by_triple = [0_usize; 56];
         let mut pairs = [(u8::MAX, u8::MAX); 56];
         let mut witnesses = [0_usize; 48];
+        let mut crossing = [0_usize; 48];
         let mut witness_len = 0_usize;
         for (triple, &[a, b, c]) in triples.iter().enumerate() {
             let (a, b, c) = (a as usize, b as usize, c as usize);
@@ -184,6 +293,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             next_variable += 1;
             witness_by_triple[triple] = witness;
             witnesses[witness_len] = witness;
+            crossing[witness_len] = triple + 1;
             witness_len += 1;
             pairs[triple] = (
                 edge_index[center.min(left)][center.max(left)],
@@ -191,6 +301,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             );
             writeln!(output, "-{witness} {} 0", triple + 1)?;
         }
+        write_threshold(&mut output, &crossing[..witness_len], 3, &mut next_variable)?;
         for edge in 0..edge_count {
             let mut incident = [0_usize; 6];
             let mut len = 0_usize;
@@ -201,12 +312,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
             }
             debug_assert_eq!(len, 6);
-            write_xor(&mut output, &incident, false, &mut next_variable)?;
+            write_xor(
+                &mut output,
+                &incident,
+                false,
+                native_xor,
+                &mut next_variable,
+            )?;
         }
         write_xor(
             &mut output,
             &witnesses[..witness_len],
             true,
+            native_xor,
             &mut next_variable,
         )?;
     }
@@ -215,7 +333,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     output.flush()?;
     eprintln!(
-        "wrote variables={variable_count} clauses={clause_count} witnesses={witness_count} xor_auxiliaries={xor_auxiliaries}"
+        "wrote variables={variable_count} clauses={clause_count} active_cuts={active_cut_count} witnesses={witness_count} xor_auxiliaries={} native_xor={native_xor}",
+        if native_xor { 0 } else { xor_auxiliaries }
     );
     Ok(())
 }

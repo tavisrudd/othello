@@ -13,6 +13,8 @@ pub enum AlignmentError {
     Shape,
     #[error("the selected family uses a triple outside the compiled domain")]
     Family,
+    #[error("the requested cut is outside the compiled domain")]
+    Cut,
     #[error("the search budget exceeds the compiled triple count")]
     Budget,
     #[error("the pre-sized search table is full")]
@@ -46,7 +48,20 @@ impl AlignmentAttachment {
         if selected >> self.triples.len() != 0 {
             return Err(AlignmentError::Family);
         }
-        Ok(self.first_violation(selected).is_none())
+        Ok(self.violation_summary(selected).0.is_none())
+    }
+
+    /// Decide one compiled cut.  This is useful for monotone residualization:
+    /// a cut separated by an already-fixed family stays separated by every
+    /// extension and its constraint subsystem can be omitted.
+    pub fn separates_cut(&self, selected: u64, cut: usize) -> Result<bool, AlignmentError> {
+        if selected >> self.triples.len() != 0 {
+            return Err(AlignmentError::Family);
+        }
+        if cut >= self.cut_count() {
+            return Err(AlignmentError::Cut);
+        }
+        Ok(self.violation_for_cut(cut, selected).is_none())
     }
 
     #[inline]
@@ -118,17 +133,69 @@ impl AlignmentAttachment {
         Some(clause)
     }
 
-    fn first_violation(&self, selected: u64) -> Option<u64> {
+    fn violation_summary(&self, selected: u64) -> (Option<u64>, u32) {
         let mut best = None;
+        let mut clauses = [0_u64; 127];
+        let mut clause_count = 0_usize;
         for cut in 0..self.cut_count() {
             let Some(clause) = self.violation_for_cut(cut, selected) else {
                 continue;
             };
+            clauses[clause_count] = clause;
+            clause_count += 1;
             if best.is_none_or(|prior: u64| clause.count_ones() < prior.count_ones()) {
                 best = Some(clause);
             }
         }
-        best
+        let mut used = 0_u64;
+        let mut packing = 0_u32;
+        loop {
+            let mut next = None;
+            for &clause in &clauses[..clause_count] {
+                if clause & used == 0
+                    && next.is_none_or(|prior: u64| clause.count_ones() < prior.count_ones())
+                {
+                    next = Some(clause);
+                }
+            }
+            let Some(clause) = next else {
+                break;
+            };
+            used |= clause;
+            packing += 1;
+        }
+
+        let mut hit_counts = [0_u8; 56];
+        for &clause in &clauses[..clause_count] {
+            let mut bits = clause;
+            while bits != 0 {
+                let triple = bits.trailing_zeros() as usize;
+                bits &= bits - 1;
+                hit_counts[triple] += 1;
+            }
+        }
+        let mut available = if self.triples.len() == 64 {
+            u64::MAX
+        } else {
+            (1_u64 << self.triples.len()) - 1
+        } & !selected;
+        let mut capacity = 0_usize;
+        let mut incidence_bound = 0_u32;
+        while capacity < clause_count && available != 0 {
+            let mut candidates = available;
+            let mut best_triple = candidates.trailing_zeros() as usize;
+            while candidates != 0 {
+                let triple = candidates.trailing_zeros() as usize;
+                candidates &= candidates - 1;
+                if hit_counts[triple] > hit_counts[best_triple] {
+                    best_triple = triple;
+                }
+            }
+            available &= !(1_u64 << best_triple);
+            capacity += usize::from(hit_counts[best_triple]);
+            incidence_bound += 1;
+        }
+        (best, packing.max(incidence_bound))
     }
 }
 
@@ -261,16 +328,29 @@ pub fn search_alignment_attachment(
     budget: u32,
     workspace: &mut AlignmentSearchWorkspace,
 ) -> Result<(Option<u64>, AlignmentSearchMetrics), AlignmentError> {
+    search_alignment_attachment_from(problem, budget, 1, workspace)
+}
+
+/// Search from a caller-proved symmetry representative or other fixed family.
+pub fn search_alignment_attachment_from(
+    problem: &AlignmentAttachment,
+    budget: u32,
+    initial: u64,
+    workspace: &mut AlignmentSearchWorkspace,
+) -> Result<(Option<u64>, AlignmentSearchMetrics), AlignmentError> {
     if budget == 0
         || budget as usize > problem.triples.len()
         || budget as usize >= workspace.frames.len()
     {
         return Err(AlignmentError::Budget);
     }
+    if initial == 0 || initial >> problem.triples.len() != 0 || initial.count_ones() > budget {
+        return Err(AlignmentError::Family);
+    }
     workspace.seen.fill(0);
     workspace.frames.fill(SearchFrame::default());
     workspace.frames[0] = SearchFrame {
-        selected: 1,
+        selected: initial,
         ..SearchFrame::default()
     };
     let mut depth = 0_usize;
@@ -294,11 +374,12 @@ pub fn search_alignment_attachment(
                 .states
                 .checked_add(1)
                 .ok_or(AlignmentError::Overflow)?;
-            let Some(clause) = problem.first_violation(selected) else {
+            let (violation, packing) = problem.violation_summary(selected);
+            let Some(clause) = violation else {
                 return Ok((Some(selected), metrics));
             };
             let branch_bits = clause & !selected;
-            if selected.count_ones() == budget || branch_bits == 0 {
+            if selected.count_ones().saturating_add(packing) > budget || branch_bits == 0 {
                 metrics.infeasible_states = metrics
                     .infeasible_states
                     .checked_add(1)

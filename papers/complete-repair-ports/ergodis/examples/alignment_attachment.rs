@@ -1,5 +1,5 @@
 use ergodis::{
-    compile_alignment_attachment, search_alignment_attachment, AlignmentSearchWorkspace,
+    compile_alignment_attachment, search_alignment_attachment_from, AlignmentSearchWorkspace,
 };
 use std::io::BufRead;
 
@@ -14,6 +14,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .ok()
         .map_or(Ok(24_u32), |value| value.parse())?;
     let problem = compile_alignment_attachment(points)?;
+    let mut initial = 1_u64;
+    if let Ok(fixed) = std::env::var("ERGODIS_ALIGNMENT_FIXED") {
+        for index in fixed.split(',').filter(|item| !item.is_empty()) {
+            initial |= 1_u64 << index.parse::<usize>()?;
+        }
+    }
     if let Ok(path) = std::env::var("ERGODIS_ALIGNMENT_MODEL") {
         let file = std::fs::File::open(path)?;
         let mut reader = std::io::BufReader::new(file);
@@ -58,9 +64,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     let mut workspace = AlignmentSearchWorkspace::new(budget, 1_usize << seen_power)?;
     let started = std::time::Instant::now();
-    let (solution, metrics) = search_alignment_attachment(&problem, budget, &mut workspace)?;
+    let (solution, metrics) =
+        search_alignment_attachment_from(&problem, budget, initial, &mut workspace)?;
     println!(
-        "points={points} triples={} cuts={} budget={budget} solution={solution:?} states={} duplicates={} infeasible={} elapsed_ns={}",
+        "points={points} triples={} cuts={} budget={budget} initial={initial:#x} solution={solution:?} states={} duplicates={} infeasible={} elapsed_ns={}",
         problem.triples().len(),
         problem.cut_count(),
         metrics.states,
