@@ -13,7 +13,9 @@ Companion records: `2026-08-29-c998-ergodis-partition-design.md`,
 `2026-08-29-ergodis-certificate-prior-art-veripb.md`,
 `2026-08-28-ergodis-ldpc-quantum-angle.md`, and the C985 result notes dated
 2026-08-29 (BB784, QDistSAT BB360, BB756, R2Elite01, R2Elite02, native and wide
-CSS backend plans, Gurobi boundary memo).
+CSS backend plans, Gurobi boundary memo).  The execution order for importing
+theorems and methods from the wider portfolio is
+`2026-08-29-c985-ergodis-portfolio-theorem-import-workplan.md`.
 
 ## 1. Licensing and release decisions taken in discussion
 
