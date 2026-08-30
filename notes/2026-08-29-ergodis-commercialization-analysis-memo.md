@@ -205,22 +205,49 @@ would make the dual-certificate route the paid feature.
 
 ## 6. Revised patent recommendation
 
-1. File one narrow US provisional on the native backend method, not on
-   symmetry reduction: connected-support enumeration with exact syndrome
-   tracking, projected completion filters with the one-sided-collision
-   guarantee, certified witness transport between CSS directions, and the
-   persisted compiled-filter artifact with source fingerprint checks. Cite
-   the Dumer--Kovalev--Pryadko irreducible-cluster method, `dist_m4ri`, and the
-   connected-cluster backend in `codeDistance` as the closest prior art and
-   state the residue over them in one sentence before drafting.
-2. Re-run the quantum landscape search against Google Patents and Lens once
-   they are reachable, restricted to code-distance computation, connected or
-   irreducible cluster enumeration, and syndrome filtering claims.
+Superseded in part by the re-scope addendum
+`2026-08-29-c998-native-backend-patent-rescope.md` and by the source check
+recorded in section 6.1. Current recommendation:
+
+1. **Do not file** on the native backend method. Connected-support
+   enumeration for exact distance is the Dumer--Kovalev--Pryadko irreducible-
+   cluster method, implemented publicly in `dist_m4ri` (GPL-2.0) and wrapped by
+   `codeDistance`; the addendum's only surviving residue was the
+   constraint-driven branching rule plus the one-sided projected completion
+   filter, and section 6.1 shows the branching rule is already in
+   `dist_m4ri`. What remains — a Bloom-filtered set of completable projected
+   syndromes with a one-sided soundness guarantee — is a standard
+   filter-then-verify pattern and is not worth a filing on its own.
+2. The nearest patent, US 11,552,653 B2 (Microsoft, 2023), claims growing a
+   cluster around each unsatisfied check for *decoding*; it is not a blocking
+   risk for distance computation but should be cited in any paper's related
+   work to pre-empt the comparison.
 3. Keep the earlier verdicts: nothing on the certified compiler alone; paid
    freedom-to-operate work only for storage; automata and solvers low risk.
-4. Sequencing is unchanged: provisional decision before the paper, the paper
-   before any public push, and no push of the native backend code before the
-   decision, because publishing the checker publishes the method.
+   Lens remains uncovered; Google Patents claim-text queries returned nothing
+   relevant.
+4. Disclosure: with no filing intended, the paper and the code push are no
+   longer gated on a patent decision. The addendum's sharper point stands —
+   a checker cannot replay a hundred-billion-candidate exhaustion, so an
+   exact-distance paper must disclose the enumerator, and the moat is speed,
+   engineering, certificate discipline, and the trademark, not a claim.
+
+### 6.1 Source check of `dist_m4ri` (2026-08-29)
+
+Clone of `github.com/QEC-pages/dist-m4ri` (depth one) read at
+`src/dist_cc.c`, function `start_CC_recurs`. The recursion selects
+`row = syn[w]->vec[0]`, documented as "row with the first non-zero syndrome
+bit", and extends the current error only by columns incident to that row;
+it descends only while the syndrome is nonzero, accepts a zero-syndrome
+vector at the weight limit after a logical-nontriviality test against `L`,
+and prunes with a per-weight minimum-syndrome-weight hash
+(`hash_add_maybe`, `p_swei`). So constraint-driven branching on the first
+unsatisfied check is present in the published tool. It does not contain a
+precompiled completable-syndrome filter; ergodis' compact and wide backends
+compile pair and triple completion keys into sorted `u128` tables and Bloom
+filters (`compile_large_completion_filters` in `css_distance.rs`), which is
+the remaining engineering difference and the likely source of the measured
+speed. That difference is an optimisation, not a claimable method.
 
 ## 7. Actions
 
