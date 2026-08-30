@@ -111,6 +111,7 @@ def main() -> None:
     orbit_batch = int(os.environ.get("ERGODIS_ALIGNMENT_ORBIT_BATCH", "16"))
     context_batch = int(os.environ.get("ERGODIS_ALIGNMENT_CONTEXT_BATCH", "4"))
     maximum = int(os.environ.get("ERGODIS_ALIGNMENT_MAXIMUM", "17"))
+    target = float(os.environ.get("ERGODIS_ALIGNMENT_TARGET", "-inf"))
     if not 1 <= orbit_batch <= len(ANCHOR_STABILIZER_MAPS):
         raise ValueError("ERGODIS_ALIGNMENT_ORBIT_BATCH must lie in [1, 720]")
     if not 1 <= context_batch <= len(CUTS):
@@ -122,6 +123,8 @@ def main() -> None:
     model.Params.Threads = 16
     model.Params.LazyConstraints = 1
     model.Params.PreCrush = 1
+    if target > float("-inf"):
+        model.Params.BestObjStop = target
     seconds = float(os.environ.get("ERGODIS_ALIGNMENT_SECONDS", "inf"))
     if seconds < float("inf"):
         model.Params.TimeLimit = seconds
@@ -287,6 +290,16 @@ def main() -> None:
                 else "NONOPTIMAL"
             ),
             "incumbent": model.ObjVal if solution_replayed else None,
+            "family_indices": (
+                [index for index, keep in enumerate(selected) if keep]
+                if solution_replayed
+                else None
+            ),
+            "family_triples": (
+                [TRIPLES[index] for index, keep in enumerate(selected) if keep]
+                if solution_replayed
+                else None
+            ),
             "best_bound": model.ObjBound,
             "maximum": maximum,
             "lazy_constraints": lazy_count,

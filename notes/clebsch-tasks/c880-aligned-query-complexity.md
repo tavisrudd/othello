@@ -11,6 +11,14 @@ side, and item 5 is closed on the promised-anchor side and reduced to a single
 open counting question on the regular side. Only item 8, the nonadaptive
 constant, and that counting question remain.
 
+**2026-08-30: the eight-point attachment constant is settled exactly:**
+\(g(8)=17\). Exact-cardinality 15 and 16 reduce to compact parity CNFs and are
+UNSAT with independently replayed DRAT certificates; a 17-triple family is
+replayed by the separate Rust cut-graph checker. This closes the finite loose
+end in the 2026-08-19 cost-per-bit report and confirms that the previous upper
+witness was optimal. Report and compact certificates:
+`notes/2026-08-30-c880-exact-eight-point-attachment.md`.
+
 **2026-08-19: the nonadaptive bracket narrowed by a factor 8/3 from above.**
 It now reads \(0.616\,n^2\le\mathrm{minimum}(n)\le\frac98n^2+O(n)\), a factor of
 1.827 rather than the 4.87 recorded below. A nonadaptive family decomposes as a
@@ -256,13 +264,12 @@ points is a \(10^{16}\)-pair scan.
   star-flip route is capped by the construction. A third mechanism must come
   from the alignment code's distance distribution, which is the only mechanism
   ever tight in this lane — it gives exactly 30 at \(n=7\), the true minimum.
-- \(g(8)\) is bracketed, not settled: \(15\le g(8)\le17\). The 15 is proved from
-  two weight-capped mask families, but the complete family was never built, so
-  the route is stalled rather than exhausted; the branch and bound was killed at
-  900 s and HiGHS took about 25 minutes to return 15 again. The \(+3\)
-  progression is now a theorem in the form \(P(k,1)=3\), and is proved broken at
-  \(m=8\) by the certified witness of 17 regardless of where \(g(8)\) lands. The
-  escape from it is batching, already visible at \(g(5)=9\).
+- \(g(8)=17\) exactly. The earlier weight-capped families supplied only the
+  lower bound 15; the complete cut system, compiled through odd Eulerian
+  witnesses and semantic symmetry, excludes exact sizes 15 and 16 with checked
+  DRAT proofs. The \(+3\) progression is a theorem in the form \(P(k,1)=3\) and
+  is broken at \(m=8\); the escape from it is batching, already visible at
+  \(g(5)=9\).
 - `P(2,6)` remains undecided after a capped branch and bound and a 6 GB HiGHS
   run, and cannot help the construction, because the one-anchor value it would
   have to beat is now exact.

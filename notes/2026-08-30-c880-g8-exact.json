@@ -1,0 +1,135 @@
+{
+  "schema": "c880-alignment-g8-exact/v1",
+  "result": {
+    "g8": 17,
+    "lower_excluded_exact_sizes": [15, 16],
+    "upper_witness_size": 17
+  },
+  "domain": {
+    "points": 8,
+    "triples": 56,
+    "nontrivial_cuts_up_to_complement": 127,
+    "selection_anchor_index": 0,
+    "selection_anchor_triple": [0, 1, 2],
+    "anchor_stabilizer_order": 720
+  },
+  "inputs": {
+    "generator": {
+      "path": "ergodis-private/python/c880_alignment_sat.py",
+      "bytes": 11684,
+      "sha256": "1a41e41dd7e83167148feb2b07d6d0087b00b49ddc768ba58635e655e9411ab9"
+    },
+    "generator_tests": {
+      "path": "ergodis-private/python/test_c880_alignment_sat.py",
+      "bytes": 2341,
+      "sha256": "9d079ea6bb6d50cdd8a03add45fafed29aa534d0ff78aa1ef766ee6d33eaffcd"
+    },
+    "low_weight_masks": {
+      "path": "notes/2026-08-19-c880-cpb-masks-m8w16.json",
+      "bytes": 1369114,
+      "sha256": "5b0656b6cd04f50aeccaabe403b42b823ba5ef8d70afb2458917328afaaa8f14",
+      "masks": 27139,
+      "role": "redundant valid propagation clauses"
+    }
+  },
+  "tools": {
+    "kissat": {
+      "revision": "8af8e56f174b778aef3aa45af9f739b2a5f492c2",
+      "binary_sha256": "638b9d6a476c83ee30330bfe9f020af2cd4d2c9bb582b63ef96d9be988ebe6d4"
+    },
+    "drat_trim": {
+      "revision": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+      "binary_sha256": "e96fd1788cf779996f8912ce5e33549e1389a01a5fcf873e2b7cfa7a5a014e9e"
+    },
+    "zstd": "1.5.7"
+  },
+  "unsat": [
+    {
+      "exact_size": 15,
+      "variables": 60880,
+      "clauses": 322844,
+      "cnf_bytes": 6525568,
+      "cnf_sha256": "dcb428f8f7171607807fbf00a9ffa9c71af7cf0f7862993421da249c239b5046",
+      "raw_binary_drat_bytes": 48712406,
+      "raw_binary_drat_sha256": "718a2c49ab99befb9a4d0691b651676f5407f3a26aed9d416efb486486da5ed1",
+      "tracked_certificate": "notes/2026-08-30-c880-g8-k15.drat.zst",
+      "tracked_certificate_bytes": 7228513,
+      "tracked_certificate_sha256": "889ca9395b21b33f77326330d8a2b89f07401208f6ae02760fa068c98e9f43dc",
+      "decompressed_core_drat_bytes": 47458706,
+      "decompressed_core_drat_sha256": "3111775b322f04bb08d0585b8a5c174b31768794107d09a9b5fd26daefbdda51",
+      "raw_replay": {
+        "core_input_clauses": 38554,
+        "core_lemmas": 428171,
+        "resolution_steps": 11640506,
+        "rat_lemmas": 16194,
+        "verdict": "VERIFIED"
+      },
+      "tracked_certificate_replay": {
+        "core_input_clauses": 36675,
+        "core_lemmas": 415001,
+        "resolution_steps": 11461316,
+        "rat_lemmas": 14219,
+        "verdict": "VERIFIED"
+      }
+    },
+    {
+      "exact_size": 16,
+      "variables": 60880,
+      "clauses": 322844,
+      "cnf_bytes": 6525625,
+      "cnf_sha256": "d734536f7797e9554ba0dd7fb4bf29fc2dc53cbc1efb60d63ed42c868bc1e948",
+      "raw_binary_drat_bytes": 131410187,
+      "raw_binary_drat_sha256": "2f314925023c7145f0e90e6c2abbe2fa84c4fa2c1b24a2b84945b8515a92dcc9",
+      "tracked_certificate": "notes/2026-08-30-c880-g8-k16.drat.zst",
+      "tracked_certificate_bytes": 29141608,
+      "tracked_certificate_sha256": "032cdcc812573260b04ce9786bdc4119ec2a0296f513288eff8643959f51c35c",
+      "decompressed_core_drat_bytes": 203682658,
+      "decompressed_core_drat_sha256": "9c63a0f16b14141ca81a9c87f3e6b5aa1ed066862dc2658cf07ad7775534c116",
+      "raw_replay": {
+        "core_input_clauses": 85389,
+        "core_lemmas": 1645125,
+        "resolution_steps": 46593312,
+        "rat_lemmas": 28684,
+        "verdict": "VERIFIED"
+      },
+      "tracked_certificate_replay": {
+        "core_input_clauses": 82368,
+        "core_lemmas": 1611926,
+        "resolution_steps": 46310634,
+        "rat_lemmas": 25144,
+        "verdict": "VERIFIED"
+      }
+    }
+  ],
+  "sat": {
+    "exact_size": 17,
+    "variables": 60880,
+    "clauses": 322844,
+    "cnf_bytes": 6525651,
+    "cnf_sha256": "1f43b06f31c8ecb05ce39f12033bcd9b5ae86850c9a422b9e72c563bef28e88f",
+    "model_bytes": 418374,
+    "model_sha256": "29b0ed0143515e6ba2f4fe06a2f87280fcfec2e09797672b63c5b68bd4ce8175",
+    "family_indices": [0, 5, 9, 10, 24, 25, 35, 45, 46, 48, 49, 50, 51, 52, 53, 54, 55],
+    "family_triples": [
+      [0, 1, 2],
+      [0, 1, 7],
+      [0, 2, 6],
+      [0, 2, 7],
+      [1, 2, 6],
+      [1, 2, 7],
+      [1, 6, 7],
+      [2, 6, 7],
+      [3, 4, 5],
+      [3, 4, 7],
+      [3, 5, 6],
+      [3, 5, 7],
+      [3, 6, 7],
+      [4, 5, 6],
+      [4, 5, 7],
+      [4, 6, 7],
+      [5, 6, 7]
+    ],
+    "python_replay": "passed",
+    "independent_rust_replay": "points=8 selected=17 separates=true"
+  }
+}
