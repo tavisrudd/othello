@@ -386,7 +386,9 @@ transitivity; the full group order is the classical
 cycles, and 1.022 billion instructions: 4.034x faster than baseline with 76.4%
 fewer cycles and 73.9% fewer instructions, or 107.2 million objects/s at 44.0
 cycles per object.  The iterative queue is pre-sized, allocation-free while
-closing edges, and has no recursion or stack-growth limit.
+closing edges, and has no recursion or stack-growth limit.  The final
+witness-bearing executable peaks at 2,388 KiB RSS in `/usr/bin/time -v`; parent
+and generator arenas therefore do not trade the speedup for material memory.
 
 The host also exposes AVX2 and AVX-512F/DQ/BW/VL/VPOPCNTDQ.  Rust 1.87 can
 detect those features but its AVX-512 target attributes and intrinsics remain
