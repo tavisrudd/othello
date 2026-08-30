@@ -4,7 +4,7 @@ use std::io::{Read, Write};
 
 use thiserror::Error;
 
-const MAGIC: [u8; 8] = *b"ERGHIT01";
+const MAGIC: [u8; 8] = *b"ERGHIT02";
 
 #[derive(Debug, Error)]
 pub enum ResidualHittingError {
@@ -123,10 +123,9 @@ impl ResidualHittingWorkspace {
         for_each_combination(available, cardinality, |chosen| {
             let clause = clauses
                 .iter()
-                .copied()
-                .find(|clause| clause & chosen == 0)
+                .position(|clause| clause & chosen == 0)
                 .ok_or(ResidualHittingError::Certificate)?;
-            output.write_all(&chosen.to_le_bytes())?;
+            let clause = u32::try_from(clause).map_err(|_| ResidualHittingError::Overflow)?;
             output.write_all(&clause.to_le_bytes())?;
             Ok(())
         })?;
@@ -159,9 +158,11 @@ pub fn verify_residual_hitting_refutation<R: Read>(
     }
     let mut seen = 0_u64;
     for_each_combination(available, cardinality, |expected| {
-        let chosen = read_u64(input)?;
-        let clause = read_u64(input)?;
-        if chosen != expected || clause & chosen != 0 || !clauses.contains(&clause) {
+        let clause = usize::try_from(read_u32(input)?)
+            .ok()
+            .and_then(|index| clauses.get(index))
+            .ok_or(ResidualHittingError::Certificate)?;
+        if clause & expected != 0 {
             return Err(ResidualHittingError::Certificate);
         }
         seen += 1;
@@ -259,6 +260,7 @@ mod tests {
             verify_residual_hitting_refutation(&clauses, 0xf, 3, &mut &proof[..]).unwrap(),
             4
         );
+        assert_eq!(proof.len(), 32 + 4 * 4);
 
         let last = proof.len() - 1;
         proof[last] ^= 1;
