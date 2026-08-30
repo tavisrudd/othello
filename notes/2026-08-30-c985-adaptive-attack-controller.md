@@ -889,6 +889,43 @@ corruption tests, disconnect leaving the last epoch active, and exact replay of
 every promoted decision.  Broader dashboards, remote networking, arbitrary
 code evolution, and automatic short-solve control remain out of scope.
 
+## Deliberately evolvable v0
+
+Expect several days of real use to invalidate much of the surface design in
+this memo.  The first implementation is a learning instrument, not a protocol
+stability promise.  Keep only these invariants firm:
+
+- the uncontrolled exact core remains independent and unchanged;
+- every controlled run and decision is unambiguously identified;
+- mutation is epoch-atomic and cannot bypass soundness roles;
+- output, trace, memory, and file growth are bounded;
+- decisive witnesses/falsifiers remain replayable from their owning commit.
+
+Everything else--command names, JSON fields, attack grammar, archive policy,
+pulse contents, trace events, and controller decomposition--is provisional.
+Mark the schema `experimental-v0`; reject mismatched versions rather than
+building compatibility machinery.  Store the code commit and decoder version
+with every run so old evidence remains readable by its original checkout.
+Add migrations only after repeated real data shows which records deserve
+durability.
+
+Use four small replaceable seams:
+
+```text
+core safe-point adapter
+controller state/model
+transport (initially local length-prefixed JSON)
+CLI/renderers and file evidence
+```
+
+Test invariants and end-to-end behaviours, not private struct layouts or exact
+human wording.  Prefer one vertical C80 campaign and rapid refactoring over a
+generic framework with speculative extension points.  At the end of each use
+session, record friction as ledger annotations, update the command workflow,
+and delete abstractions that did not earn their cost.  Freeze a `v1` only after
+the same compact operations survive several distinct long searches (C80,
+C880, and one non-game adapter).
+
 ## Source scope and read depth
 
 This section imports architecture ideas, not novelty or priority claims.  Zero
