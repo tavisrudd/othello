@@ -8,7 +8,7 @@ import tempfile
 import threading
 import unittest
 
-from ergodis_client import MAX_FRAME_BYTES, SCHEMA, ProtocolError, Session
+from ergodis_client import MAX_FRAME_BYTES, SCHEMA, ProtocolError, RemoteError, Session
 
 
 def recv_exact(connection: socket.socket, length: int) -> bytes:
@@ -92,6 +92,75 @@ class ErgodisClientTest(unittest.TestCase):
             )
             with self.assertRaises(ProtocolError):
                 list(session.iter_evidence_lines("../outside"))
+            (root / "evidence" / "long.jsonl").write_bytes(b"123456789\n")
+            with self.assertRaises(ProtocolError):
+                list(
+                    session.iter_evidence_lines(
+                        "evidence/long.jsonl", max_line_bytes=8
+                    )
+                )
+
+    def test_oversized_declared_response_is_rejected_before_payload_read(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            endpoint = root / "campaign.sock"
+            ready = threading.Event()
+
+            def serve() -> None:
+                with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as listener:
+                    listener.bind(str(endpoint))
+                    listener.listen()
+                    ready.set()
+                    connection, _ = listener.accept()
+                    with connection:
+                        length = struct.unpack("<I", recv_exact(connection, 4))[0]
+                        recv_exact(connection, length)
+                        connection.sendall(struct.pack("<I", MAX_FRAME_BYTES + 1))
+
+            server = threading.Thread(target=serve)
+            server.start()
+            ready.wait()
+            session = Session(root, endpoint, "run", "nonce")
+            with self.assertRaises(ProtocolError):
+                session.request("noop")
+            server.join()
+
+    def test_remote_errors_and_cross_run_responses_fail_closed(self) -> None:
+        for crossed, exception in ((False, RemoteError), (True, ProtocolError)):
+            with self.subTest(crossed=crossed), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                endpoint = root / "campaign.sock"
+                ready = threading.Event()
+
+                def serve() -> None:
+                    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as listener:
+                        listener.bind(str(endpoint))
+                        listener.listen()
+                        ready.set()
+                        connection, _ = listener.accept()
+                        with connection:
+                            length = struct.unpack("<I", recv_exact(connection, 4))[0]
+                            request = json.loads(recv_exact(connection, length))
+                            response = json.dumps(
+                                {
+                                    "schema": SCHEMA,
+                                    "request_id": request["request_id"],
+                                    "run_id": "other-run" if crossed else "run",
+                                    "epoch": 0,
+                                    "ok": False,
+                                    "result": {"error": "bounded rejection"},
+                                },
+                                separators=(",", ":"),
+                            ).encode()
+                            connection.sendall(struct.pack("<I", len(response)) + response)
+
+                server = threading.Thread(target=serve)
+                server.start()
+                ready.wait()
+                session = Session(root, endpoint, "run", "nonce")
+                with self.assertRaises(exception):
+                    session.request("noop")
+                server.join()
 
 
 if __name__ == "__main__":
