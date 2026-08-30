@@ -476,6 +476,19 @@ Sequel research:
   API, with B3/H3 double-coset information levels as the first fixture; C80's
   cap game and the gated `R^18` real-rooted polynomial enumerator are the two
   flagship adapters.  The C1000 large enumeration remains unapproved.
+  The common stepping stone is now implemented in
+  [C985 continuation hierarchy and Hall engine](../2026-08-30-c985-continuation-hierarchy-and-hall-engine.md):
+  nested context alphabets compile to replayable exact quotient towers with
+  allocation-free level selection/projection, and the B3/H3 controls realize
+  `1 -> 2 -> 6 -> 2q` through one API without retaining cloned transition
+  tables.  A pre-sized iterative Hall backend streams and replays exact
+  matching/deficiency certificates and passes all 4,096 `3 x 4` graphs against
+  brute force.  On C80's q=11 falsifier the causal-only graph is deficient by
+  one while the complete certificate-reply graph saturates both new defects;
+  ancestral-label soundness and the q23 corpus remain the next mathematical
+  gate.  The once-validated Pareto objective wrapper also closes its hostile
+  same-cardinality-order gate and gives 1.028--1.044x warm gains on two clean
+  20-pair protocols.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

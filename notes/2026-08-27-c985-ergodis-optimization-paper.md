@@ -1441,16 +1441,13 @@ compiler impact.
 
 ### Highest-EV continuation order
 
-1. Add the branded, once-validated objective wrapper described below, then
-   move operand/canonicality checks out of repeated evaluation without weakening
-   the safe API.
-2. Instantiate the same frozen/query-plan engine on a public workflow,
+1. Instantiate the same frozen/query-plan engine on a public workflow,
    MDD/CostRegular, or resource-constrained path suite with its strongest native
    separator-aware baseline.
-3. Develop objective-family residual equivalence and a certified minimizer;
+2. Develop objective-family residual equivalence and a certified minimizer;
    treat classical weighted-automata and semiring factorization as corollaries,
    not novelty claims.
-4. Attempt reusable flat front-entry pools only if profiling after steps 1--2
+3. Attempt reusable flat front-entry pools only if profiling after steps 1--2
    still shows allocator/locality pressure.  Preserve a separate persistent
    provenance arena and gate the change on whole-portfolio, not single-control,
    performance.
@@ -1479,18 +1476,14 @@ compiler impact.
   collisions and dominance.  The evidence gap is a weighted/Pareto
   Myhill--Nerode theorem and certified minimizer; this is the highest-value
   theoretical successor.
-- **Open -- branded objective interpretations.**  Evaluation now range-checks
-  output and edge resources before copying or composition, and a hostile
-  larger-universe regression returns `Element` rather than reaching `combine`.
-  A front still carries unbranded `u32` resource IDs, however; safely caching
-  canonicality across distinct same-cardinality orders requires a validated
-  objective wrapper bound to the monoid and frozen generator table.  The next
-  API should construct `ValidatedParetoObjective` once from the monoid plus
-  immutable output/edge fronts, checking generator count, range, strict resource
-  ordering, uniqueness, and pairwise antichain canonicality under that order;
-  repeated evaluation should accept only that wrapper.  Its hostile gate uses
-  two same-cardinality monoids with different orders as well as the retained
-  larger-universe case.
+- **Settled -- branded objective interpretations.**  `ValidatedParetoObjective`
+  now binds immutable output/edge fronts to the exact frozen plan and ordered
+  monoid, checking generator count, output coverage, range, strict order,
+  uniqueness, and pairwise antichain canonicality once.  Repeated evaluation
+  verifies plan identity and omits those checks from the class/product loops;
+  the safe unvalidated API remains.  Equal-cardinality chain/diamond monoids
+  supply the hostile order-confusion gate.  Two 20-pair coupled protocols give
+  1.0440x (`t=5.6538`) and 1.0281x (`t=5.1170`) warm speedups.
 - **Open -- cyclic semantics.**  The theorem and evaluator are acyclic.  No
   least-fixed-point, convergence, or negative-cycle claim is made; a cyclic
   extension needs a separately specified algebra and certificate.
