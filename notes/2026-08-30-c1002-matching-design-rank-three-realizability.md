@@ -2,7 +2,7 @@
 
 **Lane**: `relconic`
 
-**Status:** Active; math first; no manuscript edits.  The odd-characteristic
+**Status:** Reported 2026-08-30; no manuscript edits.  The odd-characteristic
 part of the ten-point classification now has a three-block geometric
 certificate, and a field-uniform six-local obstruction has been isolated.
 
@@ -137,6 +137,44 @@ math step is to combine it with design intersection numbers, seeking either
 an infinite odd-characteristic nonrealizability theorem or an abstract
 characterization of the characteristic-two hyperoval designs.
 
+### Relation to the conic equality spectra
+
+The rank-three realization question and the conic equality trichotomies are
+not equivalent.  The former asks whether an abstract matching design can be
+represented by concurrent secants of an arc over \(K\).  The latter adds a
+prescribed nonsingular conic, completeness outside it, and zero defect.  Those
+extra hypotheses force
+\[
+\begin{array}{ll}
+k\ {\rm even}:&
+q\in\{k-2,\binom{k-1}{2},\binom{k-1}{2}+1\},\\
+k\ {\rm odd}:&
+q\in\{k-1,\binom{k-1}{2}-1,\binom{k-1}{2}\}.
+\end{array}
+\]
+In characteristic two the paper already closes the geometric equality
+branches: odd \(k\) gives an oval of size \(q+1\) whose nucleus lies on the
+prescribed conic, and even \(k\) gives a hyperoval of size \(q+2\).  These are
+constructions of the associated rank-three matching designs, but they do not
+classify arbitrary abstract designs at the same \(k\).
+
+Conversely, every zero-defect pair supplies a rank-three realization.
+Therefore the six-local obstruction is a necessary combinatorial gate before
+the conic arithmetic is used.  At \(k=10\), Mathon's two-class completeness
+and the displayed bad six-set exclude the order-\(37\) candidate in odd
+characteristic by a human local proof; the regular hyperoval over
+\(\mathbf F_8\) supplies the surviving equality construction.
+
+### C659 boundary
+
+C659 was queued as a projectivization/dual-Chow bridge for C658's
+square-root carrier inequality.  It has no delivered task report and is not a
+premise of the matching-design theorem or the six-local obstruction.  Its
+planned output concerns coordinate charts, square restrictions, and a
+nonsquare ambient Chow form; that could eventually add a different
+rank-three obstruction, but it should not be cited as already banked
+realizability machinery.  C1002 therefore leaves C659 separate and open.
+
 ## 5. Evidence and trust boundary
 
 No new exhaustive computation underlies the local proof.  The only finite
@@ -172,17 +210,33 @@ Completeness of the two abstract classes remains Mathon's external theorem;
 the tracked enumeration reconstructs representatives but is not used to
 prove that there are only two.
 
-## 6. Deliverables after the remaining proof work
+## 6. Frozen deliverables and successor work
 
-1. a theorem packet separating abstract design existence, six-local
-   admissibility, and projective realization;
-2. a compact bad-six-set certificate format suitable for arbitrary proposed
-   matching designs;
-3. a manuscript replacement of the odd-characteristic \(k=10\) elimination
-   paragraph by the displayed three-block proof, leaving the characteristic-
-   two certificate and trust statement intact;
-4. a zero-defect transfer corollary stated only after any general
-   representability result is proved;
-5. C1003's publication decision: short strengthening of the current appendix
-   if the result remains local, or a separate design/finite-geometry paper if
-   an infinite-family obstruction is obtained.
+1. **Delivered:** a theorem packet separating abstract design existence,
+   six-local admissibility, and projective realization.
+2. **Delivered:** a compact bad-six-set certificate: six vertices together
+   with the extending design blocks; the \(k=10\) certificate uses only the
+   three displayed blocks.
+3. **Draft integration language:** replace only the
+   odd-characteristic \(k=10\) elimination paragraph by the three-block
+   diagonal proof, leaving the characteristic-two certificate and trust
+   statement intact.
+4. **Geometric transfer:** every zero-defect arc inherits all six-local
+   constraints; the conic trichotomies and oval/hyperoval conclusions remain
+   separate downstream filters.
+5. **C1003 decision:** the present result is a strong appendix simplification
+   and reusable design filter, not yet a standalone paper.  A standalone
+   finite-geometry/design paper requires an infinite-family obstruction or a
+   broader representability classification.
+
+### Manuscript-ready draft language (not integrated)
+
+> **Odd-characteristic exclusion at ten points.**  Mathon's theorem leaves
+> two simple \(\operatorname{MATCH}(10,5,1)\) designs.  In the fixed
+> representatives both contain
+> \(09|12|34|57|68\), \(09|13|24|58|67\), and
+> \(09|14|23|56|78\).  In a projective realization, restriction to the
+> six-set \(\{0,1,2,3,4,9\}\) would put the three diagonal points of the
+> complete quadrangle on \(1,2,3,4\) on the chord \(09\).  Those diagonal
+> points are noncollinear in odd characteristic.  Hence neither abstract
+> class is realizable there.

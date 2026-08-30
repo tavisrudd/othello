@@ -2,11 +2,11 @@
 
 **Lane**: `relconic`
 
-**Status:** Queued after C1002; publication decision only.
+**Status:** Queued; C1002 math packet frozen; publication decision only.
 
 ## Goal
 
-Evaluate the frozen C1002 theorem packet against the arcs paper and banked matching-design results, then choose between a forward-paper strengthening, a companion, and a standalone finite-geometry/design paper.
+Evaluate the frozen C1002 theorem packet against the arcs paper and banked matching-design results, then choose between a forward-paper strengthening, a companion, and a standalone finite-geometry/design paper.  The packet includes manuscript-ready draft language, but no manuscript has been edited.
 
 ## Acceptance gate
 
