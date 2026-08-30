@@ -18,6 +18,7 @@ pub mod defect;
 pub mod family_response;
 pub mod field;
 pub mod group_action;
+pub mod hall;
 pub mod incidence;
 pub mod interface;
 pub mod matrix;
@@ -97,6 +98,10 @@ pub use group_action::{
     BinaryGlPresentationError, BinaryGlProbeAction, BinaryGlProbeError, BinaryGlRrefQuotient,
     BinaryRightLinearMap, FinitePermutationAction, OrbitCompileError, OrbitPartition,
     OrbitQuotientError, OrbitStorage,
+};
+pub use hall::{
+    solve_hall, verify_hall_certificate, verify_hall_result, DenseHallGraph, HallError,
+    HallReplayError, HallResult, HallWorkspace,
 };
 pub use interface::{
     lift_class_witnesses, present_finite_interface, present_witnessed_pareto_interface,
