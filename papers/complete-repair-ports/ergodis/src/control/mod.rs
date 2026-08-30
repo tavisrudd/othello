@@ -1105,9 +1105,15 @@ fn required_str<'a>(value: &'a Value, key: &str) -> Result<&'a str, ControlError
 }
 
 fn random_hex(bytes: usize) -> Result<String, ControlError> {
+    const HEX: &[u8; 16] = b"0123456789abcdef";
     let mut random = vec![0u8; bytes];
     File::open("/dev/urandom")?.read_exact(&mut random)?;
-    Ok(random.iter().map(|byte| format!("{byte:02x}")).collect())
+    let mut encoded = String::with_capacity(bytes.saturating_mul(2));
+    for byte in random {
+        encoded.push(HEX[(byte >> 4) as usize] as char);
+        encoded.push(HEX[(byte & 0x0f) as usize] as char);
+    }
+    Ok(encoded)
 }
 
 fn absolute_path(path: &Path) -> Result<PathBuf, ControlError> {
@@ -1324,6 +1330,15 @@ mod tests {
         );
         let absolute = std::env::temp_dir().join("ergodis-absolute.sock");
         assert_eq!(absolute_path(&absolute).unwrap(), absolute);
+    }
+
+    #[test]
+    fn random_handshake_material_is_exact_lower_hex() {
+        let encoded = random_hex(16).unwrap();
+        assert_eq!(encoded.len(), 32);
+        assert!(encoded
+            .bytes()
+            .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte)));
     }
 
     #[test]
