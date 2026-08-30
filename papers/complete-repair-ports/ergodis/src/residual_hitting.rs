@@ -16,6 +16,8 @@ pub enum ResidualHittingError {
     Certificate,
     #[error("a certificate count overflowed")]
     Overflow,
+    #[error("the certificate needs {required} records, above the limit {maximum}")]
+    EvidenceLimit { required: u64, maximum: u64 },
     #[error(transparent)]
     Io(#[from] std::io::Error),
 }
@@ -101,12 +103,15 @@ impl ResidualHittingWorkspace {
     ///
     /// The certificate lists every `k`-subset of the available universe, where
     /// `k=min(budget, |available|)`, together with one clause it misses. Every
-    /// smaller hitting set extends to a `k`-subset, so this is complete.
+    /// smaller hitting set extends to a `k`-subset, so this is complete. The
+    /// exact record count is checked against `maximum_records` before any
+    /// output is written.
     pub fn write_refutation<W: Write>(
         &mut self,
         clauses: &[u64],
         available: u64,
         budget: u32,
+        maximum_records: u64,
         output: &mut W,
     ) -> Result<Option<u64>, ResidualHittingError> {
         if self.is_hittable(clauses, available, budget)? {
@@ -115,6 +120,12 @@ impl ResidualHittingWorkspace {
         let width = available.count_ones();
         let cardinality = budget.min(width);
         let count = binomial(width, cardinality)?;
+        if count > maximum_records {
+            return Err(ResidualHittingError::EvidenceLimit {
+                required: count,
+                maximum: maximum_records,
+            });
+        }
         output.write_all(&MAGIC)?;
         output.write_all(&available.to_le_bytes())?;
         output.write_all(&budget.to_le_bytes())?;
@@ -252,7 +263,7 @@ mod tests {
         let mut proof = Vec::new();
         assert_eq!(
             workspace
-                .write_refutation(&clauses, 0xf, 3, &mut proof)
+                .write_refutation(&clauses, 0xf, 3, 4, &mut proof)
                 .unwrap(),
             Some(4)
         );
@@ -261,6 +272,16 @@ mod tests {
             4
         );
         assert_eq!(proof.len(), 32 + 4 * 4);
+
+        let mut limited = Vec::new();
+        assert!(matches!(
+            workspace.write_refutation(&clauses, 0xf, 3, 3, &mut limited),
+            Err(ResidualHittingError::EvidenceLimit {
+                required: 4,
+                maximum: 3
+            })
+        ));
+        assert!(limited.is_empty());
 
         let last = proof.len() - 1;
         proof[last] ^= 1;
@@ -275,7 +296,7 @@ mod tests {
         let mut proof = Vec::new();
         assert_eq!(
             workspace
-                .write_refutation(&clauses, 0b11, 2, &mut proof)
+                .write_refutation(&clauses, 0b11, 2, 1, &mut proof)
                 .unwrap(),
             Some(1)
         );

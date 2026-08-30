@@ -113,7 +113,7 @@ fn residual_hitting_solve_write_and_replay_allocate_nothing_after_setup() {
 
     let (records, write_allocations) = tracked_allocations(|| {
         workspace
-            .write_refutation(&clauses, 0b1111, 1, &mut std::io::sink())
+            .write_refutation(&clauses, 0b1111, 1, 4, &mut std::io::sink())
             .unwrap()
     });
     assert_eq!(records, Some(4));
@@ -121,7 +121,7 @@ fn residual_hitting_solve_write_and_replay_allocate_nothing_after_setup() {
 
     let mut proof = Vec::new();
     workspace
-        .write_refutation(&clauses, 0b1111, 1, &mut proof)
+        .write_refutation(&clauses, 0b1111, 1, 4, &mut proof)
         .unwrap();
     let (verified, replay_allocations) = tracked_allocations(|| {
         ergodis::residual_hitting::verify_residual_hitting_refutation(
