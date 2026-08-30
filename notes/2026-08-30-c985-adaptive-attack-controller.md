@@ -590,6 +590,137 @@ traces; bulk verbose traces expire or compress only through an explicit
 post-run policy.  No evidence path defaults to `/tmp`, and every file sink has
 a declared maximum before launch.
 
+## Runtime control socket and steering protocol
+
+Expose the controller through a versioned local Unix-domain socket, with a
+dedicated cold-path thread owning accept, parsing, authorization, ledger
+emission, and response formatting.  The default socket is created with mode
+`0600` in an explicit run directory, never implicitly under `/tmp`.  A small
+`ergodisctl` client provides both human commands and machine-readable output.
+
+The initial protocol can be length-prefixed JSON because it is off the compute
+path and easy to inspect.  Every frame carries schema version, request ID, run
+ID, and a maximum response size.  Large results are paginated or returned as
+content-addressed evidence references; the socket never becomes an unbounded
+data stream.  Unknown fields are rejected in mutation requests and tolerated
+only where the version policy explicitly permits them.
+
+### Query surface
+
+Read-only commands should include:
+
+```text
+status / resource headroom / current epoch
+list or inspect presentations, strata, plans, islands, and Pareto fronts
+per-stage throughput and outcome counts
+per-thread states/instructions/counters (approximate or barrier-consistent)
+lookup ledger event, counterexample, witness, or trace by stable key
+subscribe to low-rate pulse summaries
+explain the active ordering/pruning/admission plan and its proof handles
+```
+
+The default counter snapshot reads cache-line-separated thread-local counters
+without stopping workers and is labelled approximate.  A consistent snapshot
+is an explicit safe-point request and reports its synchronization cost.
+
+### Steering surface
+
+Mutating commands may:
+
+```text
+load an already validated plan or presentation hash
+activate/deactivate diagnostic and ordering plans or archive islands
+change stage budgets, successive-halving thresholds, and evaluator weights
+redirect effort among existing roots/strata/quotient levels
+arm/disarm a localized TraceFilter
+cancel one evaluation, checkpoint, rotate/flush evidence, or pause at safe point
+resume from a controller-issued pause
+```
+
+They may not change a plan's soundness role, install an unregistered feature,
+turn sampled success into a prune/admit rule, inject arbitrary code, or name an
+arbitrary output path.  Necessary/sufficient activation requires the exact
+validated plan hash and proof-handle set already present in the run arena.
+
+Every accepted or rejected mutation is appended to the attack ledger with
+request ID, prior epoch, resulting epoch, caller identity when available, and
+reason.  Replay can therefore reconstruct not only the random seed and plans
+but the complete mid-search steering history.
+
+### Publication to workers
+
+The controller validates and lowers an update into a bounded immutable plan
+slot.  Slots are allocated from a run-sized arena and are never reclaimed
+while workers may reference them.  Publication is a small atomic control word
+containing epoch and active-slot indices.  Workers acquire it only between
+bounded chunks, update thread-local cached pointers, and acknowledge the epoch
+in cache-line-separated cells.  The candidate loop contains no socket poll,
+lock, reference-count mutation, or shared logging write.
+
+Small controls such as cancellation and trace arming use dedicated atomic bits
+sampled at the same boundary.  Larger updates become visible together at one
+epoch, preventing a worker from observing a new feature ABI with an old plan.
+Disconnect, malformed input, or controller-client failure leaves the last
+validated epoch active.  Pausing means reaching a declared safe point; it
+never suspends a worker while it owns a file buffer or partial certificate.
+
+This is also the right API for an external FunSearch/AlphaEvolve-style
+proposer.  The proposer can query archive summaries, submit plan data, and
+redirect diagnostic effort, but it receives no privileged path around type
+checking, resource limits, hostile corpora, or proof promotion.
+
+### CLI that is pleasant to operate
+
+Make `ergodisctl` useful directly rather than exposing protocol nouns.  Human
+output defaults to compact tables and short explanations; `--json` gives a
+stable schema, meaningful exit codes, and no decorations for scripts/agents.
+Every mutating command supports `--dry-run` and `--expect-epoch N` for
+optimistic concurrency.  A YAML/JSON transaction file applies several changes
+atomically at one epoch.
+
+Representative sessions:
+
+```sh
+# Follow the high-level campaign.
+ergodisctl --run RUN status --watch 2s
+ergodisctl --run RUN attacks --frontier --group family
+ergodisctl --run RUN tail --events promoted,falsified,steered
+
+# Understand a decision.
+ergodisctl --run RUN attack show PLAN
+ergodisctl --run RUN explain --state STATE --opponent OPPONENT
+ergodisctl --run RUN counterexample show EVENT --open-trace
+
+# Arm one bounded local trace without restarting.
+ergodisctl --run RUN trace arm \
+  --plan PLAN --state STATE --opponent OPPONENT \
+  --events features,ops,ordering,admission --max-records 100000
+ergodisctl --run RUN trace tail --follow
+ergodisctl --run RUN trace disarm
+
+# Redirect diagnostic effort; solver-authoritative roles remain gated.
+ergodisctl --run RUN focus set --stratum q13-positive --weight 4
+ergodisctl --run RUN plan load attack-plan.json --role diagnostic --dry-run
+ergodisctl --run RUN plan activate PLAN --ordering --expect-epoch 42
+ergodisctl --run RUN evaluator budget PLAN --states 1000000 --seconds 300
+
+# Operational controls.
+ergodisctl --run RUN checkpoint create --label before-q17-redirect
+ergodisctl --run RUN pause --at chunk
+ergodisctl --run RUN resume
+```
+
+`ergodisctl shell` keeps a socket connection, command history, completion of
+live plan/stratum IDs, `watch`, and transaction staging.  It is optional; every
+operation remains available as a one-shot command for reproducibility.  A
+successful mutation prints the old/new epoch and ledger event key, making the
+next `explain` or rollback-by-checkpoint obvious.
+
+The CLI should use domain aliases (`q13-positive`, `root-0-1-2`) only as
+display conveniences.  Requests resolve them to hashes and echo those hashes
+before commit.  Copy-pasted commands in memos should pin the hash or checkpoint
+so later alias changes cannot silently redirect a reproduction.
+
 ## Highest-EV next move
 
 Implement stages 1--3 as a small runtime plan VM over the existing C80 feature
