@@ -224,6 +224,32 @@ rounds under the memory-loaded orbit sweep give a 1.0360x geometric speedup
 (`t=2.075`). At `2^27`, the exact table is 640 MiB instead of 1 GiB, making the
 next failed-orbit retry materially cheaper.
 
+The full 28-case weight-15 third-orbit diagnostic has now run at `2^26` wide
+slots with twelve concurrent workers. Exactly two rooted cases close:
+`[0,1,2]` and `[0,1,6]`; the other 26 terminate only because the exact table is
+full. Per-case wall times range from 204.67 to 839.06 seconds (median 674.33)
+and peak RSS is 528,080 KiB. The `[0,1,2]` case takes 310.37 seconds alone but
+467.44 seconds in the 12-way sweep, quantifying the random-table contention.
+These are deterministic diagnostic exclusions, not independently replayable
+UNSAT certificates, and they do not raise the proved lower bound.
+
+The first compact `2^27` retry targets failed root `[0,1,11]`. It also exhausts
+exact capacity after 1,232.68 seconds at 659,164 KiB peak RSS. The loaded run is
+not a speed comparison, but it confirms that five-byte keys make 134,217,728
+exact slots practical while a second doubling still does not close this case.
+Further syntactic-table growth is therefore abandoned in favour of the
+semantic closure quotient below.
+
+The next theorem-derived state reduction is sharper than mask compression. For
+each cut, retain either an absorbing separated flag or the parity-labelled
+connected-component closure of the current bipartite constraint graph. At a
+fixed selected cardinality, two families with the same 127-component closure
+tuple have identical responses to adding every future triple. Induction on the
+continuation therefore makes this tuple an exact contextual quotient of the
+native search. The 26 capacity failures show that compiling and interning this
+semantic closure, rather than enlarging syntactic mask tables again, is the
+highest-EV successor after the bounded compact retry.
+
 Three further hot-path alternatives are rejected. Incidence-maximizing ties
 between equally short branch clauses increase the rooted control from 8,759 to
 10,262 states. Packing the two cut-edge IDs into one `u16` is neutral on both
@@ -318,8 +344,9 @@ cut-context theorem.
   families and rechecked discharged/non-crossing contexts. Setwise-stabilizer
   canonicalization plus monotone residualization and crossing masks removes up
   to about 68.1x wall time on completed controls after incremental group-image
-  accumulation and the factored clause lookup, but the bounded budget-16 probe
-  still timed out.
+  accumulation and the factored clause lookup. The full weight-15 sweep closes
+  only 2/28 cases before `2^26` capacity; the owning successor is the exact
+  parity-closure contextual quotient, followed by proof-producing replay.
 - **Settled:** a displayed generic-solver incumbent is not automatically a
   certified Ergodis incumbent. The independent outer replay boundary now
   catches callback-delivery gaps and refuses unreplayed objectives.

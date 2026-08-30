@@ -532,8 +532,14 @@ Sequel research:
   replaces eight-byte masks when the rooted cardinality layers fit 40 bits. It
   cuts `2^22`-slot process RSS 33.4% (`36,680 -> 24,420` KiB), is 1.036x faster
   under the loaded sweep, and keeps exhaustive key/search/allocation gates. The
-  first wide `2^26` weight-15 wave closes two cases and exhausts ten tables;
-  compact `2^27` retries are the next native capacity experiment.
+  full 28-case wide `2^26` weight-15 sweep closes only roots `[0,1,2]` and
+  `[0,1,6]`; the other 26 exhaust exact capacity at about 528 MiB RSS each.
+  These diagnostics are not UNSAT certificates and do not change the proved
+  bound. A compact `2^27` retry of `[0,1,11]` makes 134,217,728 exact slots
+  practical at 659,164 KiB RSS but also exhausts capacity. Further syntactic
+  growth is abandoned. The highest-EV native successor is the exact contextual
+  quotient by the 127-tuple of absorbing separated flags or bipartite
+  parity-component closures, followed by a proof-producing replay path.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and
