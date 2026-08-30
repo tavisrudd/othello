@@ -31,6 +31,12 @@ The request object contains `schema`, `request_id`, `run_id`, `nonce`,
 returns the daemon's framing, frame bound, operation names, large-result
 policy, and proof-authority status.
 
+Numbers follow the Rust wire types rather than a binding language's coercion
+rules: request IDs and epochs are unsigned 64-bit integers, Boolean values are
+not integers, and byte limits are positive bounded integers.  Non-finite
+floating-point spellings are not JSON and are rejected.  Reference clients
+fail closed if any envelope field has a different type.
+
 `tests/fixtures/control_protocol_v0.json` is the language-neutral wire fixture.
 New clients should parse and reproduce those compact payloads before speaking
 to a live daemon.  In Lean, the stable starting point is a small client that
@@ -54,8 +60,10 @@ memory independent of the trace limit.
 
 The reference Python client is `python/ergodis_client.py`.  It has no external
 dependencies, uses monotone request IDs, enforces the frame bound, and provides
-bounded line and JSONL iterators.  A future in-process Python or Lean FFI must
-remain byte-for-byte conformant with this socket path.
+bounded line and JSONL iterators.  Capability negotiation also pins the socket
+deadline, create-only large-result policy, proof-authority status, and minimum
+operation inventory.  A future in-process Python or Lean FFI must remain
+byte-for-byte conformant with this socket path.
 
 ## Search-path isolation
 
