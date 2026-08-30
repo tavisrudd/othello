@@ -45,6 +45,7 @@ pub struct CertifyOpts<'a> {
     pub with_aut: bool,
     pub invariant: Option<Invariant>,
     pub traces: bool,
+    pub profile_colour: bool,
     pub aut_timeout_secs: Option<u64>,
 }
 
@@ -52,6 +53,11 @@ pub fn certify_one(file: &Path, opts: &CertifyOpts) -> Result<Certificate> {
     let text = std::fs::read_to_string(file).with_context(|| format!("reading {file:?}"))?;
     let (m, _) = parse(&text, &ParseOpts::default())?;
 
+    let cells = if opts.with_aut && opts.profile_colour {
+        Some(crate::profile_cells(&m))
+    } else {
+        None
+    };
     let aut = if opts.with_aut {
         match run_autgroup_engine(
             &m,
@@ -59,6 +65,7 @@ pub fn certify_one(file: &Path, opts: &CertifyOpts) -> Result<Certificate> {
             true,
             opts.invariant,
             opts.traces,
+            cells.as_deref(),
             opts.workdir,
             false,
             opts.aut_timeout_secs.map(std::time::Duration::from_secs),
@@ -97,6 +104,12 @@ pub fn certify_one(file: &Path, opts: &CertifyOpts) -> Result<Certificate> {
             "num_orbits": a.num_orbits,
             "orbit_sizes": a.orbit_sizes,
             "cyclic_structure_found": a.cyclic_structure_found,
+            "initial_colouring": if opts.profile_colour {
+                "4-profile invariant (rows and columns coloured by the multiset of |J| over \
+                 quadruples); without it neither nauty nor Traces finishes at this order"
+            } else {
+                "row/column split only"
+            },
         }),
         None if aut_failed => json!({
             "computed": false,

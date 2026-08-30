@@ -7,6 +7,7 @@ mod certify;
 mod classify;
 mod construct;
 mod graph;
+mod invariant4;
 mod matrix;
 mod selftest;
 
@@ -69,6 +70,80 @@ impl InputOpts {
     }
 }
 
+/// bliss / DIMACS graph format: `p edge V E`, then `n <vertex> <colour>` (1-indexed), then
+/// one `e u v` per edge. Same 4n graph and same colouring as the dreadnaut path, so a
+/// disagreement between the two solvers would be a real disagreement.
+fn write_bliss(m: &matrix::Matrix, cells: Option<&[Vec<usize>]>, out: &std::path::Path)
+    -> Result<()> {
+    use std::io::Write;
+    let n = m.n;
+    let nv = 4 * n;
+    let mut colour = vec![0usize; nv];
+    match cells {
+        Some(cs) => {
+            for (ci, cell) in cs.iter().enumerate() {
+                for &v in cell {
+                    colour[v] = ci;
+                }
+            }
+        }
+        None => {
+            for v in (2 * n)..(4 * n) {
+                colour[v] = 1;
+            }
+        }
+    }
+    let f = std::fs::File::create(out)?;
+    let mut w = std::io::BufWriter::with_capacity(1 << 20, f);
+    writeln!(w, "p edge {} {}", nv, 2 * n * n)?;
+    for v in 0..nv {
+        writeln!(w, "n {} {}", v + 1, colour[v])?;
+    }
+    for r in 0..n {
+        for c in 0..n {
+            let (a, b) = if m.rows[r][c] == 1 {
+                (2 * n + c, 3 * n + c)
+            } else {
+                (3 * n + c, 2 * n + c)
+            };
+            writeln!(w, "e {} {}", r + 1, a + 1)?;
+            writeln!(w, "e {} {}", n + r + 1, b + 1)?;
+        }
+    }
+    w.flush()?;
+    Ok(())
+}
+
+/// Cells of the 4-profile colouring, as vertex lists in the 4n graph. A row `r` contributes
+/// `r` and `n+r` to its cell (an automorphism may negate a row, so `r+` and `r-` must share a
+/// colour); a column `c` contributes `2n+c` and `3n+c`. Row cells never merge with column cells.
+pub fn profile_cells(m: &matrix::Matrix) -> Vec<Vec<usize>> {
+    let n = m.n;
+    let p = invariant4::profile(m);
+    let nrc = p.row_class_sizes.len();
+    let mut cells: Vec<Vec<usize>> = vec![Vec::new(); nrc + p.col_class_sizes.len()];
+    for r in 0..n {
+        let c = &mut cells[p.row_class[r]];
+        c.push(r);
+        c.push(n + r);
+    }
+    for c in 0..n {
+        let cell = &mut cells[nrc + p.col_class[c]];
+        cell.push(2 * n + c);
+        cell.push(3 * n + c);
+    }
+    cells
+}
+
+/// `size -> how many classes have that size`
+fn size_hist(sizes: &[usize]) -> std::collections::BTreeMap<usize, usize> {
+    let mut h = std::collections::BTreeMap::new();
+    for &s in sizes {
+        *h.entry(s).or_insert(0) += 1;
+    }
+    h
+}
+
 fn mk_inv(code: Option<u32>, levels: &Option<Vec<u32>>) -> Option<graph::Invariant> {
     code.map(|code| {
         let (lo, hi) = match levels {
@@ -123,6 +198,10 @@ enum Cmd {
         /// Only write the `.dre` file and print its path.
         #[arg(long)]
         emit_only: bool,
+        /// Write the graph in bliss/DIMACS format to this path and exit. Used to confirm the
+        /// nauty result with an independent solver.
+        #[arg(long)]
+        emit_bliss: Option<PathBuf>,
         /// nauty vertex invariant code (`*=`), e.g. 1 = twopaths, 6 = cellquads.
         #[arg(long)]
         invariant: Option<u32>,
@@ -132,6 +211,10 @@ enum Cmd {
         /// Use nauty's Traces engine. Required in practice at these orders.
         #[arg(long)]
         traces: bool,
+        /// Refine the initial colouring by the 4-profile invariant. This is what makes the
+        /// computation feasible at these orders.
+        #[arg(long)]
+        profile_colour: bool,
     },
     /// Test the known structural forms and report exactly what was tested.
     Classify {
@@ -151,6 +234,9 @@ enum Cmd {
         /// Use nauty's Traces engine. Required in practice at these orders.
         #[arg(long)]
         traces: bool,
+        /// Refine the initial colouring by the 4-profile invariant.
+        #[arg(long)]
+        profile_colour: bool,
     },
     /// Build known Hadamard matrices and run the whole pipeline on them.
     Selftest {
@@ -165,6 +251,14 @@ enum Cmd {
         /// Print the full JSON report instead of the table.
         #[arg(long)]
         json: bool,
+    },
+    /// Compute the 4-profile vertex invariant and report how far it splits rows and columns.
+    Profile {
+        #[command(flatten)]
+        input: InputOpts,
+        /// Write the row/column class vectors as JSON here.
+        #[arg(long)]
+        out: Option<PathBuf>,
     },
     /// Write a per-order certificate JSON for each input matrix.
     Certify {
@@ -187,9 +281,13 @@ enum Cmd {
         /// nauty invariant levels (`k=lo hi`).
         #[arg(long, num_args = 2)]
         invar_levels: Option<Vec<u32>>,
-        /// Use nauty's Traces engine. Required in practice at these orders.
+        /// Use nauty's Traces engine.
         #[arg(long)]
         traces: bool,
+        /// Refine the initial colouring by the 4-profile invariant. Needed for --with-aut to
+        /// finish at these orders.
+        #[arg(long)]
+        profile_colour: bool,
     },
     /// TODO: decode the poster's encoded +-1 string once the encoding is published.
     Decode {
@@ -238,20 +336,34 @@ fn main() -> Result<()> {
             invariant,
             invar_levels,
             traces,
+            profile_colour,
+            emit_bliss,
         } => {
             let inv = mk_inv(invariant, &invar_levels);
             let text = input.read()?;
             let (m, _) = matrix::parse(&text, &input.parse_opts())?;
             let wd = workdir.unwrap_or_else(default_workdir);
+            let cells = if profile_colour {
+                Some(profile_cells(&m))
+            } else {
+                None
+            };
+            if let Some(bp) = emit_bliss {
+                write_bliss(&m, cells.as_deref(), &bp)?;
+                println!("{}", bp.display());
+                return Ok(());
+            }
             if emit_only {
                 std::fs::create_dir_all(&wd)?;
                 let p = wd.join(format!("had{}.dre", m.n));
-                graph::write_dreadnaut_full(&m, !no_color, generators, inv, traces, &p)?;
+                graph::write_dreadnaut_full(
+                    &m, !no_color, generators, inv, traces, cells.as_deref(), &p,
+                )?;
                 println!("{}", p.display());
                 return Ok(());
             }
             let rep = graph::run_autgroup_engine(
-                &m, !no_color, generators, inv, traces, &wd, keep_graph, None,
+                &m, !no_color, generators, inv, traces, cells.as_deref(), &wd, keep_graph, None,
             )?;
             println!("{}", serde_json::to_string_pretty(&rep)?);
         }
@@ -262,6 +374,7 @@ fn main() -> Result<()> {
             invariant,
             invar_levels,
             traces,
+            profile_colour,
         } => {
             let inv = mk_inv(invariant, &invar_levels);
             let text = input.read()?;
@@ -269,7 +382,15 @@ fn main() -> Result<()> {
             let wd = workdir.unwrap_or_else(default_workdir);
             let aut = if with_aut {
                 Some(graph::run_autgroup_engine(
-                    &m, true, true, inv, traces, &wd, false, None,
+                    &m,
+                    true,
+                    true,
+                    inv,
+                    traces,
+                    if profile_colour { Some(profile_cells(&m)) } else { None }.as_deref(),
+                    &wd,
+                    false,
+                    None,
                 )?)
             } else {
                 None
@@ -294,6 +415,35 @@ fn main() -> Result<()> {
                 std::process::exit(1);
             }
         }
+        Cmd::Profile { input, out } => {
+            let text = input.read()?;
+            let (m, _) = matrix::parse(&text, &input.parse_opts())?;
+            let t0 = std::time::Instant::now();
+            let p = invariant4::profile(&m);
+            let secs = t0.elapsed().as_secs_f64();
+            let rep = serde_json::json!({
+                "n": m.n,
+                "seconds": secs,
+                "row_classes": p.row_class_sizes.len(),
+                "col_classes": p.col_class_sizes.len(),
+                "row_class_size_histogram": size_hist(&p.row_class_sizes),
+                "col_class_size_histogram": size_hist(&p.col_class_sizes),
+                "row_class": p.row_class,
+                "col_class": p.col_class,
+            });
+            if let Some(o) = out {
+                std::fs::write(o, serde_json::to_string(&rep)? + "\n")?;
+            }
+            println!(
+                "n={} rows split into {} classes, cols into {} classes ({:.1} s)",
+                m.n,
+                p.row_class_sizes.len(),
+                p.col_class_sizes.len(),
+                secs
+            );
+            println!("  row class sizes: {:?}", size_hist(&p.row_class_sizes));
+            println!("  col class sizes: {:?}", size_hist(&p.col_class_sizes));
+        }
         Cmd::Certify {
             files,
             outdir,
@@ -303,6 +453,7 @@ fn main() -> Result<()> {
             invariant,
             invar_levels,
             traces,
+            profile_colour,
         } => {
             let wd = workdir.unwrap_or_else(default_workdir);
             let opts = certify::CertifyOpts {
@@ -311,6 +462,7 @@ fn main() -> Result<()> {
                 with_aut,
                 invariant: mk_inv(invariant, &invar_levels),
                 traces,
+                profile_colour,
                 aut_timeout_secs: Some(aut_timeout),
             };
             let ok = certify::run(&files, &opts)?;

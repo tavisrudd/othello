@@ -326,21 +326,50 @@ integer arithmetic in Rust, numpy's `int32` matrix product in the cross-check, n
 automorphism order (none is reported here), and — for the shift-automorphism statements — the
 elementary dephasing argument above, which uses no solver at all.
 
-## Automorphism groups are the hard part
+## Automorphism groups, and the 4-profile invariant
 
-`verify` and `classify` run in well under a second at these orders. Computing `|Aut|` does not.
-The 4n-vertex graph is regular, so nauty's refinement never splits a cell unaided, and when the
-automorphism group is small the search degenerates into deep individualization. On the order-668
-graph (2672 vertices) dense nauty made no progress in 20 minutes, with or without the twopaths,
-adjtriang and cellquads invariants. Traces reached a first generator in about two minutes — the
-shift by 83, exactly matching `shift_automorphisms` — but its memory passed 1.6 GB and was still
-climbing at roughly 400 MB/min, so the run was stopped rather than risk the host.
+`|Aut(H668)| = 4`; modulo the central swap the Hadamard automorphism group has order 2.
 
-This is why `shift_automorphisms` exists. It gives proved automorphisms and proved non-existence
-for the shift family in milliseconds, with no solver, and it is what the certificate bundle
-reports. Contrast the selftest cases, where the groups are large and nauty finishes instantly:
-Paley I at order 660 has 2640 vertices — nearly the same size as H668 — and returns
-`2 · |PSL(2,659)|` in 0.2 s.
+Reaching that needed a real vertex invariant. The 4n graph is regular, so refinement never
+splits a cell unaided: dense nauty made no progress in 20 minutes with or without the twopaths,
+adjtriang and cellquads invariants, and Traces burned its full 900 s budget without clearing its
+first level. Which invariant *can* work is forced by orthogonality — see `src/invariant4.rs`:
+
+- pairs are constant (`n/2` agreements for every pair);
+- triples are constant too (`n/4` for every triple);
+- odd-order products are not invariants at all — three entries pick up `eps_c³ = eps_c` under a
+  column sign flip;
+- quadruples are the first level that is both invariant and non-constant, via
+  `J(i,j,k,l) = Σ_c H_ic H_jc H_kc H_lc = n − 2·popcount(b_i ^ b_j ^ b_k ^ b_l)`.
+
+`had668 profile` colours each row by the multiset `{ |J(i,j,k,l)| : j<k<l }` and each column the
+same way on the transpose. At n = 668 that splits the rows into **336 classes — 4 singletons and
+332 pairs** — and the columns identically: the singletons are the border rows, the pairs are the
+half-shift orbits. `C(668,4) = 8.2e9` XOR-popcounts, 28 s on 16 cores, 100 MB. Pass
+`--profile-colour` to `autgroup` or `certify` and dense nauty then finishes in about 4 s.
+
+The invariant correctly returns a single class on highly symmetric matrices (Paley 12,
+Sylvester 16, the bordered Legendre-pair fixture at 28), which is what a transitive group
+should give.
+
+| order | \|Aut(graph)\| | mod centre | generators |
+|---:|---:|---:|---|
+| 668 | 4 | 2 | central swap; shift by 83 |
+| 716 | 4 | 2 | central swap; shift by 89 |
+| 892 | 6 | 3 | central swap; an order-3 element outside the shift and multiplier families |
+
+For 668 the group is exactly the sign centre times the half-shift and nothing more, so the two
+elements already proved by `shift_automorphisms` generate everything; the solver contributes
+only the upper bound. bliss 0.73, given the same graph and colouring via `--emit-bliss`, returns
+`|Aut| = 4` in 0.30 s with the same two generators — an independent second solver.
+
+Order 892 is the surprise: order 6, from an element of order 3 fixing one position in each of
+the four circulant blocks. It is neither a common block shift nor a common block multiplier, so
+it must permute the four blocks as well.
+
+For contrast, the selftest cases have large groups and nauty finishes instantly without any of
+this: Paley I at order 660 has 2640 vertices — nearly H668's size — and returns
+`2 · |PSL(2,659)|` in 0.2 s. Small groups, not large graphs, are the expensive case.
 
 ## Inspecting one matrix by hand
 
@@ -372,8 +401,12 @@ expect it not to finish at these orders.
   positions.
 - `decode` is a stub pending the poster's encoding. It was never needed: the payload was decoded
   by `../decode.py`, written separately, and this crate reads its `+`/`-` output directly.
-- `|Aut|` is not computed at these orders; see above. `shift_automorphisms` covers only the
-  block-shift family, so it is a lower bound on the group, exact within that family.
+- `|Aut|` is computed only for orders 668, 716 and 892. The 4-profile invariant costs `C(n,4)`,
+  which is 28 s at n = 668 but roughly 35 minutes at n = 1964; the nine remaining orders were
+  left unrun rather than spend hours. Nothing about them is claimed.
+- `shift_automorphisms` and the multiplier search cover only maps that act the same way on all
+  four blocks. Order 892 has an automorphism outside both, so these are a proved lower bound,
+  not the whole group.
 - The `gs_array` border widths tried are 0, 4, 12, 20 and 28 — the ones these matrices use. A
   different border width needs that list extended.
 - For the three block-circulant super-block orders the generalized transpose is detected and

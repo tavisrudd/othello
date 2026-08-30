@@ -40,18 +40,20 @@ pub fn write_dreadnaut_inv(
     inv: Option<Invariant>,
     out: &Path,
 ) -> Result<()> {
-    write_dreadnaut_full(m, colored, want_gens, inv, false, out)
+    write_dreadnaut_full(m, colored, want_gens, inv, false, None, out)
 }
 
 /// `traces` selects nauty's Traces engine (`At+`). The 4n Hadamard graph is regular, so dense
 /// nauty's refinement never splits a cell and the search degenerates; Traces is built for
 /// exactly this case and succeeds on graphs where the dense engine does not finish.
+#[allow(clippy::too_many_arguments)]
 pub fn write_dreadnaut_full(
     m: &Matrix,
     colored: bool,
     want_gens: bool,
     inv: Option<Invariant>,
     traces: bool,
+    partition: Option<&[Vec<usize>]>,
     out: &Path,
 ) -> Result<()> {
     let n = m.n;
@@ -79,7 +81,24 @@ pub fn write_dreadnaut_full(
         writeln!(w, "{} :;", v)?;
     }
     writeln!(w, "{} :.", 4 * n - 1)?;
-    if colored {
+    // An explicit partition (from the 4-profile invariant) supersedes the plain row/column
+    // split; both are valid colourings, the finer one just gives nauty far more to work with.
+    if let Some(cells) = partition {
+        write!(w, "f=[")?;
+        for (ci, cell) in cells.iter().enumerate() {
+            if ci > 0 {
+                write!(w, "|")?;
+            }
+            for (vi, v) in cell.iter().enumerate() {
+                if vi > 0 {
+                    write!(w, ",")?;
+                }
+                write!(w, "{}", v)?;
+            }
+            writeln!(w)?;
+        }
+        writeln!(w, "]")?;
+    } else if colored {
         write!(w, "f=[")?;
         for v in 0..(2 * n) {
             if v > 0 {
@@ -232,7 +251,7 @@ pub fn run_autgroup_full(
     keep: bool,
     timeout: Option<std::time::Duration>,
 ) -> Result<AutReport> {
-    run_autgroup_engine(m, colored, want_gens, inv, false, workdir, keep, timeout)
+    run_autgroup_engine(m, colored, want_gens, inv, false, None, workdir, keep, timeout)
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -242,13 +261,14 @@ pub fn run_autgroup_engine(
     want_gens: bool,
     inv: Option<Invariant>,
     traces: bool,
+    partition: Option<&[Vec<usize>]>,
     workdir: &Path,
     keep: bool,
     timeout: Option<std::time::Duration>,
 ) -> Result<AutReport> {
     std::fs::create_dir_all(workdir)?;
     let path: PathBuf = workdir.join(format!("had{}-{}.dre", m.n, std::process::id()));
-    write_dreadnaut_full(m, colored, want_gens, inv, traces, &path)?;
+    write_dreadnaut_full(m, colored, want_gens, inv, traces, partition, &path)?;
     let mut cmd = dreadnaut_command()?;
     let f = std::fs::File::open(&path)?;
     let mut child = cmd

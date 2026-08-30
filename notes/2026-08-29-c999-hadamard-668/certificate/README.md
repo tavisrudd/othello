@@ -80,15 +80,54 @@ The three super-block orders were searched twice, once rotating whole super-bloc
 rotating inside each sub-block. Both come back empty, and the same parity rule explains why:
 their sub-block lengths 57, 11 and 119 are all odd.
 
-**The full automorphism order is not in this bundle.** The 4n-vertex Hadamard graph is regular,
-so nauty's refinement never splits a cell unaided, and with a small automorphism group the
-search degenerates into deep individualization. Dense nauty made no progress on the order-668
-graph (2672 vertices) in 20 minutes, with or without the `twopaths`, `adjtriang` and `cellquads`
-invariants. Traces reached a first generator in about two minutes — the shift by 83, matching
-the exact result above — but its memory grew past 1.6 GB and was still climbing at roughly
-400 MB/min, so the run was stopped rather than risk exhausting the host. This is a known-hard
-computation at this order, not a defect in the tooling; the `verify` and `classify` results do
-not depend on it.
+### The full automorphism group
+
+`|Aut(H668)| = 4`, and the Hadamard automorphism group modulo the central swap has order 2.
+
+Getting there needed a real vertex invariant. The 4n-vertex graph is regular, so nauty's
+refinement never splits a cell unaided; dense nauty made no progress in 20 minutes with or
+without the `twopaths`, `adjtriang` and `cellquads` invariants, and Traces ran its full 900 s
+budget without getting past its first level. The reason is structural, and it is worth stating
+because it says which invariant can possibly work:
+
+- **pairs** are useless: `#{c : H_ic = H_jc} = n/2` for every pair, by orthogonality;
+- **triples** are useless too: `indicator(x=y=z) = (1 + xy + xz + yz)/4`, so
+  `#{c : H_ic = H_jc = H_kc} = n/4` for *every* triple, again by orthogonality;
+- **odd-order products are not even invariants**: under a column sign flip `eps_c`, a product of
+  three entries picks up `eps_c^3 = eps_c`, so `|sum_c H_ic H_jc H_kc|` is not preserved by the
+  monomial group at all;
+- **quadruples** are the first level that both is invariant and varies:
+  `indicator(all four equal) = (1 + xy+xz+xw+yz+yw+zw + xyzw)/8`, so the count is
+  `(n + J)/8` with `J(i,j,k,l) = sum_c H_ic H_jc H_kc H_lc`.
+
+Colouring each row by the multiset `{ |J(i,j,k,l)| : j<k<l }` (and each column likewise on the
+transpose) splits the 668 rows into **336 classes: 4 singletons and 332 pairs**, and the columns
+identically. The 4 singletons are the border rows; the 332 pairs are exactly the orbits of the
+half-shift. In bit terms `J = n - 2*popcount(b_i ^ b_j ^ b_k ^ b_l)`, so the whole computation is
+`C(668,4) = 8.2e9` XOR-popcounts, 28 s on 16 cores at 100 MB. With that colouring dense nauty
+finishes in about 4 s.
+
+| order | \|Aut(graph)\| | mod centre | generators | orbit sizes |
+|---:|---:|---:|---:|---|
+| 668 | 4 | 2 | central swap; shift by 83 | 8 × 2, 664 × 4 |
+| 716 | 4 | 2 | central swap; shift by 89 | 8 × 2, 712 × 4 |
+| 892 | 6 | 3 | central swap; an order-3 element | 8 × 2, 592 × 6 |
+
+For 668 the group is exactly the central swap times the half-shift — order 4, nothing more. The
+two generators nauty returns are precisely the two elements already proved by hand above, so the
+solver adds only the upper bound: there is nothing else.
+
+**Independent confirmation.** bliss 0.73 was given the same graph and the same colouring in
+DIMACS format and returned `|Aut| = 4` in 0.30 s, with the same two generators. Two
+independent symmetry solvers therefore agree, and one of the two generators is independently
+proved by the dephasing argument with no solver at all.
+
+**A surprise at order 892.** Its group has order 6, not 2: there is an element of order 3 fixing
+four rows and four columns (one position in each of the four circulant blocks). It is *not* in
+either family the exact search covers — neither a common block shift nor a common block
+multiplier `i -> t*i` — so it must combine a map on positions with a permutation of the four
+blocks. The exact searches remain a proved lower bound; here the solver found more than they
+cover, which is exactly what a lower bound is for.
 
 ## Relation to the C736–C741 Legendre-pair census
 
