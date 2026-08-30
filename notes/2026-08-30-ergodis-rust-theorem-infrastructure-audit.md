@@ -14,6 +14,7 @@
 | RustSAT + solver adapters | finite implication refutations and PB/VeriPB proof logging | sidecar spike only if current native backend lacks a gate | MIT | current advertised MSRV 1.87 exceeds this crate's 1.82; solver-wrapper licenses and proof formats need separate audit |
 | Differential/Timely Dataflow | incremental forward closure over very large changing theorem graphs | defer until scale demands it | MIT | heavy architecture and allocation model for today's graph; do not pay distributed-dataflow cost prematurely |
 | Verus | machine-check stable Rust kernels such as mask census, matching, and certificate parsers | selective verification experiment, no runtime dependency | MIT | supports a Rust subset and remains under active development; separate toolchain/replay burden |
+| PyO3 / maturin | optional in-process Python transport after the socket protocol stabilizes | audit and spike later; no dependency now | MIT OR Apache-2.0 | CPython/toolchain/build closure; binding must remain a replaceable transport |
 | `petgraph` | ordinary graph algorithms and visualization | probably unnecessary initially | MIT OR Apache-2.0 reported upstream | theorem DAG is a typed hypergraph with proof status; a small CSR/index layer may be simpler and faster |
 
 ## What to copy conceptually
@@ -116,6 +117,7 @@ Policy for this incubation:
 - RustSAT repository: <https://github.com/chrjabs/rustsat>
 - Differential Dataflow repository/license: <https://github.com/TimelyDataflow/differential-dataflow>
 - Verus repository: <https://github.com/verus-lang/verus>
+- PyO3 and maturin: <https://github.com/PyO3/pyo3>, <https://github.com/PyO3/maturin>
 
 ## Next decision gate
 

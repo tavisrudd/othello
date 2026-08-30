@@ -265,6 +265,68 @@ check the resulting declaration.  Every composed theorem records the exact
 Lean declaration dependencies, so a later environment change invalidates the
 right DAG nodes rather than the entire campaign.
 
+## Python and Lean bindings
+
+Both clients share one versioned Ergodis protocol.  The protocol—not PyO3,
+Lean FFI, JSON, or a particular daemon—is the semantic authority.  Requests
+carry a schema version, run/socket identity, request ID, environment and source
+hashes, resource budget, and one typed operation.  Large arrays and evidence
+are referenced by immutable file/hash or mapped fixed-width buffers rather
+than copied into messages.
+
+The topology is deliberately asymmetric:
+
+```text
+Python client  -> Ergodis daemon -> candidate packets / streamed evidence
+Lean client    -> Ergodis daemon -> candidate lemmas / missing obligations
+Ergodis        -> Lean bridge    -> checked declarations / diagnostics
+```
+
+Python and Lean may request mining and composition, but neither binding can
+mark a fragment proved.  Only the Lean bridge/kernel path can return that
+status.
+
+### Python
+
+Start with a stdlib client over the framed Unix-socket protocol.  It is easy to
+iterate, keeps the Rust core independent of CPython, and supports remote or
+long-lived campaigns.  The ergonomic API should expose sessions, recipes,
+bounded iterators over exceptional states, explicit evidence sinks, steering,
+and cancellation.  It must not materialize full result streams by default.
+
+After the protocol stabilizes, spike an optional PyO3/maturin extension for
+in-process small/medium calls and buffer-protocol views.  Release the GIL around
+Rust computation; accept caller-owned contiguous buffers; never call Python
+from search hot loops.  Keep the socket client as the reference and fallback,
+and test byte-for-byte agreement between transports.  PyO3 and maturin are
+dual MIT/Apache-2.0 upstream, but still require the normal exact-version and
+transitive intake before adoption.
+
+### Lean
+
+Start with a small Lean client speaking the same framed protocol to the Rust
+daemon.  It submits normalized theorem interfaces, finite domains, exact
+labels, and unresolved proof obligations, then receives untrusted lemma
+packets.  A separate Lean-side kernel bridge checks completed declarations.
+This keeps Lean runtime ownership out of Rust and amortizes imports in both
+directions.
+
+Only if socket overhead becomes material should we add a direct Lean/Rust FFI
+transport.  Lean's FFI supports exported and external symbols, but its
+reference-counted `lean_object` ownership rules make a direct binding much
+more delicate than a process protocol.  FFI must therefore be a replaceable
+transport with identical protocol conformance tests, never the sole route to
+replay or release.
+
+### First binding acceptance test
+
+Run the GF(27) affine recipe three ways—Rust CLI, Python socket client, Lean
+socket client—and require identical request hashes, histograms, cap orbit,
+diagnostic label contract, and lemma packet.  Then send the packet through the
+Lean bridge and verify that the diagnostic `AGL(3,3)` quotient is rejected as
+a proof edge while the divided-power translation identity is accepted after
+its exact action proof is supplied.
+
 Search threads check only the existing cheap steering flag.  Mining reducers
 receive batched snapshots outside the solver hot path.  Serialization, JSON,
 formula formatting, and orbit narrative never execute in worker loops.
