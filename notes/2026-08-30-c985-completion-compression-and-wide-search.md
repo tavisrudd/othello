@@ -151,10 +151,18 @@ Landed commits, in order:
 ## Remaining performance frontier
 
 No equally obvious hardware miss remains.  The dominant operation is now the
-actual conflict-mask packing itself.  The next credible implementation target
-is incremental sparse syndrome weight for low-column-degree codes: carry the
-weight in each iterative frame and update it from precomputed check indices,
-avoiding six or more popcounts per candidate.  It needs a dense fallback,
-small-path neutrality, artifact reconstruction rather than duplication, and a
-measured admission rule before landing.
+actual conflict-mask packing itself.
 
+Incremental sparse syndrome weight was implemented and rejected after this
+report's first freeze.  The prototype derived at most four check indices per
+column at compile/artifact load, carried one `u16` weight in each iterative
+frame, and allocated nothing in the candidate loop.  It retained exactly the
+same BB756 tree, but two completed pairs regressed `28.94 -> 30.50` seconds and
+`30.09 -> 32.36` seconds; the remaining repetitions were stopped.  Three
+indexed bit probes and the enlarged frame cost more than six target-specialized
+hardware popcounts.  The patch was fully reverted.
+
+Further micro-optimization now has lower EV than coherent separator contraction
+or a new continuation-state application.  Revisit syndrome-weight updates only
+with a representation that shares the already-loaded column words or replaces,
+rather than supplements, the conflict-mask traffic.
