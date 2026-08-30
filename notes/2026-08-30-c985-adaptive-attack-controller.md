@@ -592,11 +592,70 @@ a declared maximum before launch.
 
 ## Runtime control socket and steering protocol
 
+This entire section is an optional layer above the existing Ergodis core.  The
+core remains a deterministic library of exact compilers, solvers, workspaces,
+and replay functions.  Existing entry points retain their signatures and do
+not create a controller thread, socket, ledger, plan VM, atomic control word,
+or filesystem artifact.
+
+Implement the layer as a separate `control-plane` package/binary (and optional
+Cargo feature only where a hook type must be exposed).  The ordinary solve
+path uses a zero-sized `NullControl` that is monomorphized away, or remains a
+separate unchanged function.  A distinct controlled entry point observes an
+adapter only at chunk/safe-point boundaries the solver already has.  Benchmark
+the uncontrolled binary against its pre-layer instruction count; any retained
+overhead fails admission.
+
+Domain primitives such as residual hitting, continuation hierarchies, Hall,
+and certificate replay stay in core.  Attack generation, archives, protocol,
+human rendering, and runtime steering stay above it.  A crash or removal of
+the optional layer cannot invalidate a core result or make the core unusable.
+
+Use two explicit operational modes:
+
+```text
+ergodis solve ...       # current one-shot core path; seconds-scale default
+ergodis campaign ...    # opt-in long search with controller/ledger/socket
+```
+
+There is no automatic duration guess and no socket “just in case.”  Solves that
+normally finish in seconds use the core path and ordinary bounded result/evidence
+output.  Campaign mode is justified when attack populations, expensive proof
+search, multi-stage gates, or hours-long exact enumeration make mid-run
+observation and redirection valuable.  Within campaign mode, instrumentation
+still has tiers `none`, `ledger`, and localized `trace`; control does not imply
+verbose tracing.
+
 Expose the controller through a versioned local Unix-domain socket, with a
 dedicated cold-path thread owning accept, parsing, authorization, ledger
 emission, and response formatting.  The default socket is created with mode
 `0600` in an explicit run directory, never implicitly under `/tmp`.  A small
 `ergodisctl` client provides both human commands and machine-readable output.
+
+### Concurrent-run isolation
+
+Every controlled launch creates or is given an immutable 128-bit run ID and a
+private durable run directory.  There is no global `ergodis.sock`, and the CLI
+never chooses arbitrarily among multiple live runs.
+
+Unix socket paths are short, so the default endpoint is a hash/nonce name under
+the mode-`0700` `XDG_RUNTIME_DIR`, for example
+`$XDG_RUNTIME_DIR/ergodis/<uid>/<run-prefix>-<nonce>.sock`.  Only the socket
+lives there; ledgers and large evidence remain in the explicit durable run
+directory.  If no private runtime directory exists, startup requires
+`--socket PATH` rather than falling back to `/tmp`.
+
+The run manifest records endpoint, full run ID, random nonce, PID/start
+identity, code commit, and presentation hash.  Binding uses exclusive creation
+and a per-run lock.  A stale endpoint is removed only by an explicit cleanup
+that verifies process/start identity and lock ownership; one run must never
+unlink another's socket.
+
+The handshake verifies run ID, nonce, schema, and presentation hash.  A client
+selects exactly one of `--run RUN_ID`, `--run-dir PATH`, or `--socket PATH`.
+`ERGODIS_RUN` may pin an agent session, but every response echoes the full run
+ID and epoch.  Mutation transactions include both run ID and `--expect-epoch`,
+so a command copied from one search cannot steer another.
 
 The initial protocol can be length-prefixed JSON because it is off the compute
 path and easy to inspect.  Every frame carries schema version, request ID, run
