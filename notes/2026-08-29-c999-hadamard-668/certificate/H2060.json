@@ -1,0 +1,378 @@
+{
+  "n": 2060,
+  "source_file": "H2060.txt",
+  "sha256_source_file": "c7a145d86210740dd3f8ea21ca896a54d6916007a042638f17c8c47f097200f7",
+  "sha256_canonical_as_given": "c7a145d86210740dd3f8ea21ca896a54d6916007a042638f17c8c47f097200f7",
+  "sha256_canonical_normalized": "784688ba09c08ba96bf31695b19c7e16239cc46f98141e5a0147a4a9def281e3",
+  "square": true,
+  "entries_pm1": true,
+  "max_abs_offdiag": 0,
+  "is_hadamard": true,
+  "row_sum_multiset": [
+    [
+      -66,
+      515
+    ],
+    [
+      -46,
+      515
+    ],
+    [
+      2,
+      515
+    ],
+    [
+      42,
+      515
+    ]
+  ],
+  "classification": {
+    "forms_found": [
+      "gs_array[as_given]"
+    ],
+    "primary_form": "Goethals--Seidel array with a generalized (non-matrix) transpose, four block-circulant blocks of order 515 (103 sub-blocks of length 5)",
+    "tests": [
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 1030,
+          "top_left_circulant": false,
+          "top_right_circulant": false
+        },
+        "found": false,
+        "name": "two_circulant[as_given]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "attempts": [
+            {
+              "border": "border_first_two",
+              "core_order": 1029,
+              "top_left_circulant": false,
+              "top_right_circulant": false
+            },
+            {
+              "border": "border_last_two",
+              "core_order": 1029,
+              "top_left_circulant": false,
+              "top_right_circulant": false
+            }
+          ],
+          "core_order": 1029
+        },
+        "found": false,
+        "name": "bordered_two_circulant[as_given]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 515,
+          "reason": "williamson blocks must be symmetric circulants"
+        },
+        "found": false,
+        "name": "williamson[as_given]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 515,
+          "reason": "goethals-seidel condition fails at shift 1: 200"
+        },
+        "found": false,
+        "name": "goethals_seidel[as_given]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_circulant_lengths": [
+            5,
+            1,
+            1,
+            1
+          ],
+          "block_order": 515,
+          "blocks_circulant": false,
+          "border_width": 0,
+          "shift_automorphisms": {
+            "block_order": 515,
+            "border_width": 0,
+            "cyclic_subgroup_order": 1,
+            "multiplier_subgroup_order": 1,
+            "multipliers_realised_by_a_monomial_automorphism": [],
+            "note": "exact: dephasing is a complete invariant for the row/column sign group, so a listed shift is a proved automorphism and an omitted one is proved not to be. This is a lower bound on |Aut| that needs no graph-isomorphism solver.",
+            "predicted_by_gs_parity": [],
+            "shifts_realised_by_a_monomial_automorphism": [],
+            "sub_block_cyclic_subgroup_order": 5,
+            "sub_block_length": 5,
+            "sub_block_shifts_realised": [
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "sub_block_count": [
+            103,
+            515,
+            515,
+            515
+          ],
+          "transpose_operation_is_matrix_transpose": false
+        },
+        "found": true,
+        "name": "gs_array[as_given]",
+        "variant": "Goethals--Seidel array with a generalized (non-matrix) transpose, four block-circulant blocks of order 515 (103 sub-blocks of length 5)"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 1030,
+          "top_left_circulant": false,
+          "top_right_circulant": false
+        },
+        "found": false,
+        "name": "two_circulant[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "attempts": [
+            {
+              "border": "border_first_two",
+              "core_order": 1029,
+              "top_left_circulant": false,
+              "top_right_circulant": false
+            },
+            {
+              "border": "border_last_two",
+              "core_order": 1029,
+              "top_left_circulant": false,
+              "top_right_circulant": false
+            }
+          ],
+          "core_order": 1029
+        },
+        "found": false,
+        "name": "bordered_two_circulant[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 515,
+          "reason": "williamson condition fails at shift 1: 2060"
+        },
+        "found": false,
+        "name": "williamson[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "block_order": 515,
+          "reason": "goethals-seidel condition fails at shift 1: 2060"
+        },
+        "found": false,
+        "name": "goethals_seidel[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "attempts": [
+            {
+              "block_order": 515,
+              "border_width": 0,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            },
+            {
+              "block_order": 514,
+              "border_width": 4,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            },
+            {
+              "block_order": 512,
+              "border_width": 12,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            },
+            {
+              "block_order": 510,
+              "border_width": 20,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            },
+            {
+              "block_order": 508,
+              "border_width": 28,
+              "skeleton_relations_failed": [
+                "(1,0)=-BR",
+                "(1,1)=A",
+                "(2,0)=-CR",
+                "(2,2)=A",
+                "(3,0)=-DR",
+                "(3,3)=A"
+              ],
+              "transpose_consistency_failed": [
+                "(3,1)=C^op R",
+                "(2,1)=-D^op R",
+                "(3,2)=-B^op R"
+              ]
+            }
+          ]
+        },
+        "found": false,
+        "name": "gs_array[dephased]"
+      },
+      {
+        "applicable": true,
+        "detail": {
+          "caveat": "the literal comparison is only run when q is prime (the built-in Paley I generator does not implement non-prime prime powers), and only detects the matrix in exactly the generated row/column order up to dephasing",
+          "paley_I": {
+            "construction_exists_at_this_order": false,
+            "matrix_equals_paley_I_after_dephasing": null,
+            "prime_power": null,
+            "q": 2059,
+            "q_mod_4": 3
+          },
+          "paley_II": {
+            "construction_exists_at_this_order": false,
+            "prime_power": null,
+            "q": 1029,
+            "q_mod_4": 1
+          }
+        },
+        "found": false,
+        "name": "paley_applicability"
+      },
+      {
+        "applicable": false,
+        "detail": {
+          "reason": "automorphism group not computed (pass --with-aut)"
+        },
+        "found": false,
+        "name": "cyclic_block_structure_from_aut"
+      }
+    ]
+  },
+  "automorphism": {
+    "proved_shift_subgroup": {
+      "block_order": 515,
+      "border_width": 0,
+      "cyclic_subgroup_order": 1,
+      "multiplier_subgroup_order": 1,
+      "multipliers_realised_by_a_monomial_automorphism": [],
+      "note": "exact: dephasing is a complete invariant for the row/column sign group, so a listed shift is a proved automorphism and an omitted one is proved not to be. This is a lower bound on |Aut| that needs no graph-isomorphism solver.",
+      "predicted_by_gs_parity": [],
+      "shifts_realised_by_a_monomial_automorphism": [],
+      "sub_block_cyclic_subgroup_order": 5,
+      "sub_block_length": 5,
+      "sub_block_shifts_realised": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "solver": {
+      "computed": false,
+      "reason": "the exact 4-profile colouring costs C(2060,4) = 7.5e11 XOR-popcounts, about 2.1 h at the measured rate of the n=668 run, beyond the 30-minute cap. No cheaper exact invariant exists: on a Hadamard matrix every pair and every triple statistic is constant by orthogonality, and odd-order products are not monomial invariants at all, so quadruples are the minimum."
+    },
+    "proved_subgroup_in_ring_coordinates": {
+      "shifts": [
+        103,
+        206,
+        309,
+        412
+      ],
+      "shift_subgroup_order": 5,
+      "shift_meaning": "translations of the Z_5 factor (multiples of 103)",
+      "multipliers": [
+        104
+      ],
+      "multiplier_subgroup_order": 2,
+      "multiplier_meaning": "104 = (-1, 1) in CRT coordinates; it inverts the Z_5 translations",
+      "generated_order_lower_bound": 20,
+      "structure": "dihedral of order 10 on the rows, times the central swap",
+      "method": "exact dephasing test, no solver"
+    }
+  },
+  "tool_version": "had668 0.1.0",
+  "external_source": {
+    "url": "https://gist.github.com/schneiderlo/b866a2ff2fcd93934f0db54cfa4069d0",
+    "raw_url": "https://gist.githubusercontent.com/schneiderlo/b866a2ff2fcd93934f0db54cfa4069d0/raw/H2060.txt",
+    "gist_owner": "schneiderlo",
+    "gist_created_at": "2026-08-23T02:33:38Z",
+    "gist_updated_at": "2026-08-23T02:33:42Z",
+    "gist_revision": "00784a83279fda136c961e0844616366f9298214",
+    "gist_revision_count": 1,
+    "fetched_utc": "2026-08-29T21:5x",
+    "bytes": 4245660,
+    "claim": "Hadamard matrix of order 2060"
+  },
+  "structure_analysis": {
+    "block_order": 515,
+    "border_width": 0,
+    "n_over_4": 515,
+    "factorisation": "515 = 5 * 103",
+    "block_relations_at_515": "all nine hold: (1,1)=(2,2)=(3,3)=(0,0); (k,0)=-(0,k); (2,1)=-(1,2); (3,1)=-(1,3); (3,2)=-(2,3)",
+    "index_order": "CRT-interleaved: file index f = 5*(t mod 103) + (t mod 5) for ring index t in Z_515 = Z_5 x Z_103",
+    "after_relabelling": {
+      "A": "genuine circulant of order 515",
+      "B_C_D": "back-circulant after the column multiplier 104; 104 = (-1, 1) in CRT coordinates, i.e. circulant in the Z_5 factor and back-circulant in the Z_103 factor"
+    },
+    "sequence_row_sums": {
+      "A": -17,
+      "B": 5,
+      "C": 39,
+      "D": 15
+    },
+    "sum_of_squared_row_sums": 2060,
+    "paf_sum_over_nonzero_shifts": 0,
+    "verdict": "the four complementary-sequence conditions the Goethals-Seidel array needs at block order 515 hold exactly: sum_i PAF_i(s) = 0 for every nonzero shift and sum_i (row sum_i)^2 = n = 2060"
+  }
+}

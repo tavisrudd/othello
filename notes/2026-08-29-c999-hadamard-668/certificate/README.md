@@ -161,3 +161,57 @@ There is no Lean formalization of any of this and none is claimed. The trusted b
 `i64` integer arithmetic in Rust, numpy's `int32` matrix product in the cross-check, and — for
 the automorphism statements only — the argument recorded above, which is elementary and needs no
 solver. `sha256sum -c SHA256SUMS` ties every number in this bundle to specific bytes.
+
+## External: order 2060
+
+Not from the Alpöge payload. A gist posted 2026-08-23 by GitHub user `schneiderlo` claims a
+Hadamard matrix of order 2060, the smallest order left open after the 2026 sweep. Provenance,
+hashes and the fetch command are in `../external/provenance.md`; the matrix is
+`../external/H2060.txt`, sha256
+`c7a145d86210740dd3f8ea21ca896a54d6916007a042638f17c8c47f097200f7`.
+
+**The claim holds.** `max |(H Hᵀ)_ij| = 0` off the diagonal in exact `i64` arithmetic, all
+entries `±1`, order 2060, checked in 0.27 s.
+
+### Structure
+
+`2060 = 4 · 515` and `515 = 5 · 103`. The 4×4 block decomposition at block order 515 satisfies
+all nine Goethals–Seidel block relations exactly: the four diagonal blocks are equal, and
+`(k,0) = −(0,k)`, `(2,1) = −(1,2)`, `(3,1) = −(1,3)`, `(3,2) = −(2,3)`.
+
+The blocks look unstructured only because the index order is CRT-interleaved. Writing
+`Z_515 ≅ Z_5 × Z_103`, the file index is `f = 5·(t mod 103) + (t mod 5)` for ring index `t`.
+After relabelling by `t`:
+
+- `A` is a genuine **circulant of order 515**;
+- `B`, `C`, `D` are back-circulant after the column multiplier `104`, and `104 ≡ (−1, 1)` in CRT
+  coordinates — that is, circulant in the `Z_5` factor and back-circulant in the `Z_103` factor.
+  The array's reversal acts in one CRT factor only, which is why the plain back-diagonal test
+  misses it.
+
+The four complementary-sequence conditions the Goethals–Seidel array needs at block order 515
+hold **exactly**, computed from the entries:
+
+| | A | B | C | D | |
+|---|---:|---:|---:|---:|---|
+| row sum | −17 | 5 | 39 | 15 | `Σ (row sum)² = 2060 = n` |
+
+and `Σᵢ PAF_i(s) = 0` at every one of the 514 nonzero shifts. First rows of the four sequences
+are in `H2060.json` under `structure_analysis`.
+
+### Automorphisms
+
+Proved exactly by the dephasing test in ring coordinates, with no solver:
+
+- the four shifts `103, 206, 309, 412` — the `Z_5` translations — giving a cyclic group of
+  order 5;
+- the multiplier `104 ≡ (−1, 1)`, which inverts those translations.
+
+Together they give a dihedral group of order 10 on the rows, and with the central swap
+**`|Aut(graph)| ≥ 20`**. This is a proved lower bound, not the full group.
+
+The exact group was **not** computed. The 4-profile colouring that made order 668 tractable
+costs `C(2060,4) = 7.5 × 10¹¹` XOR-popcounts here — about 2.1 hours at the measured rate of the
+n = 668 run, beyond the 30-minute cap. There is no cheaper exact substitute: on a Hadamard
+matrix every pair and every triple statistic is constant by orthogonality, and odd-order
+products are not monomial invariants at all, so quadruples are genuinely the minimum.
