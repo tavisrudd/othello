@@ -153,6 +153,16 @@ not a bounded matching size.  Alternating forests, Dulmage--Mendelsohn blocks,
 and transversal-matroid circuits are the semantic objects most likely to lift
 to a projective theorem.
 
+The generic Hall decision layer is now landed as a Rust private primitive.
+`HallWorkspace` accepts caller-owned CSR restriction edges and reuses all
+matching, queue, visitation, and certificate storage across solves.  It emits
+either a left-saturating matching or the exact alternating-reachable deficient
+left set and its neighborhood.  The solve path allocates nothing after
+workspace construction.  Exhaustive comparison with brute force passes on all
+65,536 bipartite graphs of size `4 x 4`, alongside repeated-capacity and
+malformed-graph tests.  This removes matching mechanics as a risk; it does not
+define or validate C80's projective charge edge.
+
 ### C756
 
 Treat each maximum coherent set and each failed extension as an orbit object.
@@ -183,8 +193,9 @@ without a template is not progress on the infinite-family problem.
 
 1. Keep the current private C880 constraint provenance/core/slicer.
 2. Land the generic rank-core layer and q9 control (done in this spike).
-3. Add a matching/Hall adapter and run the known C80 one-to-many witness plus
-   deterministic q11/q13 controls.
+3. Bind the completed matching/Hall core to a projectively defined C80 charge
+   edge, then run the known one-to-many witness and deterministic q11/q13
+   controls.
 4. Add orbit blocking/canonicalization shared by C880, C756, and continuation
    exceptions.
 5. Add independently certified candidate-lemma implication checks.
@@ -225,6 +236,9 @@ lowered to an explicit stack before input-scaled use.
   state count growing with the field exponent.
 - **Open:** whether C80 Hall-deficit orbits admit bounded projective
   descriptions; this is the highest-value next empirical question.
+- **Settled engineering:** exact matching and deficient-set extraction are
+  reusable, allocation-free after sizing, and exhaustively checked through
+  `4 x 4`; C80's missing datum is now solely the sound edge relation.
 
 **EJ.** A successful C896 state quotient would provide the first literal
 weighted-automaton/minimal-realization instance for the broader Ergodis thesis.
