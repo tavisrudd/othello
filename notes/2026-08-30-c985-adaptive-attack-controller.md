@@ -862,12 +862,22 @@ session into conversational text debt.
 
 ## Highest-EV next move
 
-Implement stages 1--3 as a small runtime plan VM over the existing C80 feature
-producers.  The acceptance test is byte-identical reproduction of both q11 and
-q13 admission certificates from a loaded plan, with no source recompilation
-and no allocation in repeated plan evaluation.  Then generate only
-ordering/diagnostic mutations until the soundness effect system and hostile
-corpus have survived independent review.
+Implement one narrow vertical slice rather than a general daemon:
+
+1. the typed plan schema/VM over the existing C80 residual feature producers;
+2. an optional `ergodis campaign` wrapper with per-run manifest, bounded
+   ledger, isolated socket, and atomic epoch publication;
+3. `ergodisctl agent brief`, `campaign gate`, `obstruction first`, `trace arm`,
+   and atomic `apply`--the commands needed by the actual research loop;
+4. byte-identical reproduction of q11/q13 admission certificates from a loaded
+   plan, followed by diagnostic/ordering mutations only.
+
+Acceptance requires unchanged uncontrolled solve instructions within
+measurement noise, no hot allocation, two concurrent campaigns unable to
+cross-connect or steer one another, response/trace/file limits enforced under
+corruption tests, disconnect leaving the last epoch active, and exact replay of
+every promoted decision.  Broader dashboards, remote networking, arbitrary
+code evolution, and automatic short-solve control remain out of scope.
 
 ## Source scope and read depth
 
