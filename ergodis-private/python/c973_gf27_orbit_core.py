@@ -14,6 +14,7 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 from typing import Iterable
@@ -190,6 +191,10 @@ def extract(source: Path, extremes: Path | None = None) -> dict[str, object]:
         }
         if generated != set(minimum_rows):
             raise ValueError("fitted curve does not equal the extremal syndrome set")
+        divided_power_coefficients = [math.comb(index, 3) % 3 for index in range(3, 9)]
+        fitted_coefficients = [1] + [coefficient for coefficient, _ in fits.values()]
+        if fitted_coefficients != divided_power_coefficients:
+            raise ValueError("extremal curve is not the divided-power translation orbit of e_3")
         result["extremes_source"] = os.fspath(extremes)
         result["extremes_source_sha256"] = hashlib.sha256(extreme_bytes).hexdigest()
         result["extremal_curve_core"] = {
@@ -201,6 +206,8 @@ def extract(source: Path, extremes: Path | None = None) -> dict[str, object]:
                 for index, (coefficient, exponent) in fits.items()
             ],
             "exact_set_equality": True,
+            "structural_identity": "z_i=binom(i,3)t^(i-3), 3<=i<=8, in characteristic 3",
+            "divided_power_coefficients_mod_3": divided_power_coefficients,
         }
     return result
 

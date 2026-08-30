@@ -41,6 +41,10 @@ class C973Gf27OrbitCoreTest(unittest.TestCase):
             "(z2,...,z8)=(0,1,t,t^2,-t^3,-t^4,-t^5)",
         )
         self.assertTrue(result["extremal_curve_core"]["exact_set_equality"])
+        self.assertEqual(
+            result["extremal_curve_core"]["divided_power_coefficients_mod_3"],
+            [1, 1, 1, 2, 2, 2],
+        )
 
 
 if __name__ == "__main__":

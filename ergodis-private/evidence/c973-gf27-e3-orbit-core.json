@@ -8,10 +8,12 @@
       {"coefficient": 2, "coordinate": "z7", "exponent": 4},
       {"coefficient": 2, "coordinate": "z8", "exponent": 5}
     ],
+    "divided_power_coefficients_mod_3": [1, 1, 1, 2, 2, 2],
     "exact_set_equality": true,
     "formula": "(z2,...,z8)=(0,1,t,t^2,-t^3,-t^4,-t^5)",
     "parameter": "t=z4",
-    "rows": 27
+    "rows": 27,
+    "structural_identity": "z_i=binom(i,3)t^(i-3), 3<=i<=8, in characteristic 3"
   },
   "extremes_source": "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/extremes.tsv",
   "extremes_source_sha256": "b74072f6359b8b8f27b8c788ecc6a87201ed43f554d9331153738cb2eb26a34e",

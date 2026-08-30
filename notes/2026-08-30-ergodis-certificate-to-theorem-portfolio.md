@@ -254,6 +254,21 @@ syndrome curve and one semilinear locator seed.  The proof-extraction question
 is no longer “why did 2,106 witness pairs work?” but “which unipotent action
 produces this curve, and why does it transport the seed?”
 
+The first half of that question is now closed structurally.  In the correct
+degree-ten divided-power action,
+
+```text
+e_3 -> sum_{i=3}^8 binom(i,3) t^(i-3) e_i.
+```
+
+Lucas reduction modulo three gives the coefficient row
+`1,1,1,-1,-1,-1`, exactly the extracted curve.  Therefore the 27 minimizers
+are the upper-unipotent orbit of `e_3` by a direct classical module identity;
+the finite list is a corollary.  This orbit fact was already stated in the
+C973 checkpoint, so the mathematical value here is independent extraction and
+proof recovery, not a novelty claim.  What remains genuinely useful is that
+the 78 locators over the normalized fibre reduce to one semilinear seed.
+
 The broader PRS route is digit-first rather than field-first: compile each
 carrier extension into kernel state, quotient `E tensor E^(1)` orbit type,
 extension-leakage cocycle, marker/root exclusions, and switch margin.  If this
@@ -350,9 +365,9 @@ lowered to an explicit stack before input-scaled use.
 - **Open:** whether the source unipotent action plus the one semilinear seed
   proves all 27 extremal fibres, and whether the nonextremal margin admits one uniform
   character-sum bound.
-- **Settled computationally:** the 27 extremal fibres are exactly the monomial
-  curve `(0,1,t,t^2,-t^3,-t^4,-t^5)`; identifying this fitted parameter with
-  the source unipotent action remains the proof step.
+- **Settled structurally:** the 27 extremal fibres are exactly the monomial
+  curve `(0,1,t,t^2,-t^3,-t^4,-t^5)`, and this is the classical
+  divided-power translation orbit of `e_3` by Lucas reduction.
 
 **EJ.** A successful C896 state quotient would provide the first literal
 weighted-automaton/minimal-realization instance for the broader Ergodis thesis.
