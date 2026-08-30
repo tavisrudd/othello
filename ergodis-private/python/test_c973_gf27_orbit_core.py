@@ -1,9 +1,11 @@
 import importlib.util
 from pathlib import Path
+import sys
 import unittest
 
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
 SPEC = importlib.util.spec_from_file_location(
     "c973_gf27_orbit_core", HERE / "c973_gf27_orbit_core.py"
 )
@@ -18,7 +20,11 @@ class C973Gf27OrbitCoreTest(unittest.TestCase):
             HERE.parent.parent
             / "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/e3-good78.tsv"
         )
-        result = MODULE.extract(source)
+        extremes = (
+            HERE.parent.parent
+            / "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/extremes.tsv"
+        )
+        result = MODULE.extract(source, extremes)
         self.assertEqual(result["input_witnesses"], 78)
         self.assertEqual(result["torus_orbits"], 3)
         self.assertEqual(result["compression_ratio"], 26.0)
@@ -30,6 +36,11 @@ class C973Gf27OrbitCoreTest(unittest.TestCase):
         )
         self.assertTrue(all(orbit["orbit_size"] == 26 for orbit in result["orbits"]))
         self.assertEqual(result["semilinear_orbit_cores"][0]["orbit_size"], 78)
+        self.assertEqual(
+            result["extremal_curve_core"]["formula"],
+            "(z2,...,z8)=(0,1,t,t^2,-t^3,-t^4,-t^5)",
+        )
+        self.assertTrue(result["extremal_curve_core"]["exact_set_equality"])
 
 
 if __name__ == "__main__":

@@ -1,5 +1,20 @@
 {
   "compression_ratio": 26.0,
+  "extremal_curve_core": {
+    "coordinate_monomials": [
+      {"coefficient": 1, "coordinate": "z4", "exponent": 1},
+      {"coefficient": 1, "coordinate": "z5", "exponent": 2},
+      {"coefficient": 2, "coordinate": "z6", "exponent": 3},
+      {"coefficient": 2, "coordinate": "z7", "exponent": 4},
+      {"coefficient": 2, "coordinate": "z8", "exponent": 5}
+    ],
+    "exact_set_equality": true,
+    "formula": "(z2,...,z8)=(0,1,t,t^2,-t^3,-t^4,-t^5)",
+    "parameter": "t=z4",
+    "rows": 27
+  },
+  "extremes_source": "notes/reed-solomon-tasks/c973-gf27-switch-probe/out/extremes.tsv",
+  "extremes_source_sha256": "b74072f6359b8b8f27b8c788ecc6a87201ed43f554d9331153738cb2eb26a34e",
   "field": "GF(3)[x]/(x^3-x-1)",
   "input_witnesses": 78,
   "observable": "monic split degree-nine locator has g_2=g_3=0",

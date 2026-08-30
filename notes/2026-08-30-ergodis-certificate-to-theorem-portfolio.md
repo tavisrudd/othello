@@ -240,6 +240,20 @@ the uniform lower bound away from the extremal orbit; the existing split and
 collision ledgers suggest a character-sum inequality rather than another
 census.
 
+The translation claim is now extracted exactly rather than inferred from a
+27-row display.  A reusable finite-field parametric-core fitter finds, and an
+independent set-equality check verifies, that the 27 and only 27 minimum rows
+are
+
+```text
+(z2,...,z8) = (0,1,t,t^2,-t^3,-t^4,-t^5),  t in GF(27).
+```
+
+Thus the entire worst-case certificate has two generators: one parametric
+syndrome curve and one semilinear locator seed.  The proof-extraction question
+is no longer “why did 2,106 witness pairs work?” but “which unipotent action
+produces this curve, and why does it transport the seed?”
+
 The broader PRS route is digit-first rather than field-first: compile each
 carrier extension into kernel state, quotient `E tensor E^(1)` orbit type,
 extension-leakage cocycle, marker/root exclusions, and switch margin.  If this
@@ -333,9 +347,12 @@ lowered to an explicit stack before input-scaled use.
 - **Found:** the PRS `e_3` extremal switch certificate has exact semantic size
   one after semilinear quotient: three torus orbits are a Frobenius cycle, a
   78-fold reduction with independent replay.
-- **Open:** whether translation plus those three representatives proves all 27
-  extremal fibres, and whether the nonextremal margin admits one uniform
+- **Open:** whether the source unipotent action plus the one semilinear seed
+  proves all 27 extremal fibres, and whether the nonextremal margin admits one uniform
   character-sum bound.
+- **Settled computationally:** the 27 extremal fibres are exactly the monomial
+  curve `(0,1,t,t^2,-t^3,-t^4,-t^5)`; identifying this fitted parameter with
+  the source unipotent action remains the proof step.
 
 **EJ.** A successful C896 state quotient would provide the first literal
 weighted-automaton/minimal-realization instance for the broader Ergodis thesis.

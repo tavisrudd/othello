@@ -18,6 +18,8 @@ import os
 from pathlib import Path
 from typing import Iterable
 
+from semantic_parametric_core import fit_monomial_coordinates
+
 
 def _digits(a: int) -> tuple[int, int, int]:
     return (a % 3, (a // 3) % 3, (a // 9) % 3)
@@ -81,7 +83,7 @@ def semilinear_orbit(support: tuple[int, ...]) -> set[tuple[int, ...]]:
     }
 
 
-def extract(source: Path) -> dict[str, object]:
+def extract(source: Path, extremes: Path | None = None) -> dict[str, object]:
     source_bytes = source.read_bytes()
     rows: list[tuple[str, tuple[int, ...]]] = []
     with source.open(newline="", encoding="utf-8") as handle:
@@ -139,7 +141,7 @@ def extract(source: Path) -> dict[str, object]:
             }
         )
 
-    return {
+    result: dict[str, object] = {
         "schema": "ergodis.semantic-orbit-core.v1",
         "problem": "C973 GF(27) extremal e3 switch witnesses",
         "source": os.fspath(source),
@@ -158,14 +160,65 @@ def extract(source: Path) -> dict[str, object]:
             "multiplication and field Frobenius preserve admissibility and closure"
         ),
     }
+    if extremes is not None:
+        extreme_bytes = extremes.read_bytes()
+        minimum_rows: list[tuple[int, ...]] = []
+        with extremes.open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle, delimiter="\t"):
+                if int(row["n_good"]) == 78:
+                    minimum_rows.append(
+                        tuple(int(value) for value in row["z2,z3,z4,z5,z6,z7,z8"].split(","))
+                    )
+        if len(minimum_rows) != 27:
+            raise ValueError("expected exactly 27 extremal syndrome rows")
+        fits = fit_monomial_coordinates(
+            minimum_rows,
+            parameter_index=2,
+            coordinate_indices=range(2, 7),
+            field_elements=range(27),
+            multiply=mul,
+            one=1,
+            maximum_exponent=8,
+        )
+        generated = {
+            (
+                0,
+                1,
+                *(mul(coefficient, _field_power(t, exponent)) for coefficient, exponent in fits.values()),
+            )
+            for t in range(27)
+        }
+        if generated != set(minimum_rows):
+            raise ValueError("fitted curve does not equal the extremal syndrome set")
+        result["extremes_source"] = os.fspath(extremes)
+        result["extremes_source_sha256"] = hashlib.sha256(extreme_bytes).hexdigest()
+        result["extremal_curve_core"] = {
+            "rows": 27,
+            "parameter": "t=z4",
+            "formula": "(z2,...,z8)=(0,1,t,t^2,-t^3,-t^4,-t^5)",
+            "coordinate_monomials": [
+                {"coordinate": f"z{index + 2}", "coefficient": coefficient, "exponent": exponent}
+                for index, (coefficient, exponent) in fits.items()
+            ],
+            "exact_set_equality": True,
+        }
+    return result
+
+
+def _field_power(value: int, exponent: int) -> int:
+    result = 1
+    for _ in range(exponent):
+        result = mul(result, value)
+    return result
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("source", type=Path)
+    parser.add_argument("--extremes", type=Path)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    result = extract(args.source)
+    result = extract(args.source, args.extremes)
     rendered = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if args.output is None:
         print(rendered, end="")
