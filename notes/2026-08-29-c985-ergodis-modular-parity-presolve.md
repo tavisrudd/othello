@@ -110,7 +110,7 @@ A compile-only BB288 profile put 95.81% of sampled cycles in fourth-order
 completion-Bloom construction.  The compiler enumerated every distinct
 quadruple even though the finished Bloom was only a conservative rejection
 filter.  The already-verified large-code policy is now selected whenever the
-quadruple count would exceed a general 50,000,000-work budget: exact one- and
+quadruple count would exceed a general 10,000,000-work budget: exact one- and
 two-completion sets remain, three-completion keys stream into their Bloom, and
 the optional four-completion filter becomes universal.  This can only remove
 a rejection opportunity; it cannot exclude a feasible support.
@@ -133,3 +133,13 @@ new universal filter by `1.0245x` (`t=5.06`).  The smaller filter removes cache
 misses even though it admits the extra candidates.  Raw diagnostics are under
 `/home/tavis/.cache/ergodis/completion-filter-perf-v1`; the shared-host data
 are not paper evidence.
+
+The nearest retained control sharpened the cap.  Gross has about 17.1 million
+distinct quadruples.  Disabling its saturated four-filter increases candidates
+from 39,234 to 54,659, but compile falls from about `151.8 ms` to `2.05 ms`.
+Across three alternating 500-round pairs, the universal-filter build is still
+`1.0967x` faster in task clock (`t=4.85`) and `1.0609x` faster in cycles
+(`t=8.77`).  It retires about 20.8% more instructions, yet removes roughly
+192x cache misses.  This is why the final work budget is ten million rather
+than fifty million: the cache-resident representation wins even after the
+weaker filter admits 39.3% more candidates.
