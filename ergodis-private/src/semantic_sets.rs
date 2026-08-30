@@ -606,4 +606,23 @@ mod tests {
         assert!(orbit.transporter_word(orbit.len(), &mut scratch).is_none());
         assert!(orbit.transporter_word(4, &mut scratch[..3]).is_none());
     }
+
+    #[test]
+    fn orbit_transporter_words_replay_multiple_generators() {
+        let apply = |value: u64, generator: usize| match generator {
+            0 => (value + 1) % 6,
+            1 => 5 - value,
+            _ => unreachable!(),
+        };
+        let orbit = orbit_closure(0, 2, 6, apply);
+        assert_eq!(orbit.len(), 6);
+        let mut scratch = [u16::MAX; 6];
+        for (index, &expected) in orbit.objects().iter().enumerate() {
+            let word = orbit.transporter_word(index, &mut scratch).unwrap();
+            let replayed = word
+                .iter()
+                .fold(0, |value, &generator| apply(value, generator as usize));
+            assert_eq!(replayed, expected);
+        }
+    }
 }
