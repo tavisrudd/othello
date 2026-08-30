@@ -585,12 +585,20 @@ Sequel research:
   predicates may prune or admit.  FunSearch/AlphaEvolve supply the compact
   program and proposer--evaluator--archive pattern; Ergodis adds theorem-role
   effects, permanent falsifiers, and universal-claim gates.  The proposed
-  ledger/socket/`ergodisctl` surface is explicitly an opt-in long-campaign
-  control plane: ordinary seconds-scale `ergodis solve` stays unchanged.  Each
-  campaign has an isolated run ID/socket, bounded file-backed verbose traces,
-  and a compact delta-based `agent brief`; the first vertical slice should
-  expose C80 gate/diff/first-obstruction/trace/apply commands without adding an
-  unbounded text stream or hot-loop control overhead.
+  ledger/socket/`ergodisctl` surface is now an opt-in long-campaign control
+  plane: ordinary seconds-scale `ergodis solve` stays unchanged.  The
+  [implemented vertical slice](../2026-08-30-c985-ergodis-campaign-control-spike.md)
+  has isolated run IDs/sockets, bounded file-backed ledgers and traces, compact
+  delta briefs, exact feature ceilings, exceptional-state queries, unattended
+  batch/evolution/tree proposers, and typed SMT-LIB-inspired source plans
+  lowered to an allocation-free validated VM.  Epoch-atomic pulse, plan fetch,
+  and deactivation now provide the transport half of coarse safe-point live
+  steering.  On the frozen 70,888-row q11/q13 C80 corpus the obstruction loop
+  found the exact sampled predicate `omega_drop > 0` and
+  `next_defect_rank in {0,6}`; this is not a theorem, and an unguided q17 probe
+  was inconclusive because it reached no relevant survivor states.  C880 and
+  small controls pass.  The next gate is consumption by one long domain solver;
+  no sound pruning role exists.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

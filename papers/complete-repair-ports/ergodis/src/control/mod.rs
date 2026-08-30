@@ -1055,6 +1055,11 @@ mod tests {
         assert_eq!(result.weighted_correct, 5);
         assert_eq!(result.first_false, None);
         assert_eq!(lowered.program.len(), 7);
+
+        let mut renamed = lowered;
+        renamed.name = "same-executable-different-label".into();
+        let renamed_plan = CompiledPlan::compile(&renamed, &batch.fields).unwrap();
+        assert_eq!(plan.hash, renamed_plan.hash);
     }
 
     #[test]

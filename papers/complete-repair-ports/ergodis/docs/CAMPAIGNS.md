@@ -83,7 +83,15 @@ The older explicit `program` array is the stable lowered/debug form and remains
 accepted. It is not the preferred author syntax. This source/IR split follows
 the useful MLIR distinction between a readable dialect and a canonical lowered
 form; durable ledgers record the lowered plan hash so two front ends cannot
-silently disagree about execution.
+silently disagree about execution. That execution hash covers the schema,
+role, output sort, and canonical lowered operations, but deliberately excludes
+the human display name.
+
+Keeping the source fragment inside SMT-LIB's quantifier-free integer/Boolean
+core also leaves a clean future route to emit a candidate as an SMT formula for
+bounded counterexample search. Quantifiers, filesystem actions, loops, and
+unbounded collections do not belong in the row evaluator; relational/grouped
+queries should remain a separate offline Datalog/SQL-like layer.
 
 The compiled evaluator uses one 16-byte operation record and allocates nothing
 while evaluating a feature row. Diagnostic and ordering are the only admitted

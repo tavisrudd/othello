@@ -14,7 +14,8 @@ agent briefs, localized file traces, batched/evolutionary proposal evaluation,
 exceptional-state ranking, exact feature-sufficiency ceilings, and a bounded
 decision-tree proposer. Author plans now have an SMT-LIB-inspired typed prefix
 tree that lowers to the same validated postfix VM; the explicit postfix form
-remains the stable replay/debug IR.
+remains the stable replay/debug IR. Executable hashes exclude display names, so
+renaming an attack cannot manufacture a distinct replay identity.
 
 The first live-adapter boundary is also present: a constant-size unchanged
 `pulse` is polled only at a solver safe point; a changed epoch returns bounded

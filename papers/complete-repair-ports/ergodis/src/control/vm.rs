@@ -591,7 +591,9 @@ impl CompiledPlan {
                 "plan result sort does not match its declared output".into(),
             ));
         }
-        let encoded = serde_json::to_vec(spec)?;
+        // The display name is ledger metadata, not executable semantics.
+        let encoded =
+            serde_json::to_vec(&(PLAN_SCHEMA, spec.role, spec.output, spec.program.as_slice()))?;
         Ok(Self {
             name: spec.name.clone(),
             role: spec.role,
