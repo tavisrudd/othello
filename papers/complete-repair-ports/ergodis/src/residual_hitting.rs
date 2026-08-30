@@ -166,7 +166,7 @@ pub fn verify_residual_hitting_refutation<R: Read>(
         return Err(ResidualHittingError::Certificate);
     }
     let cardinality = read_u32(input)?;
-    let empty_clause = clauses.iter().any(|&clause| clause == 0);
+    let empty_clause = clauses.contains(&0);
     let expected_cardinality = if empty_clause {
         0
     } else {
