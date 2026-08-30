@@ -25,6 +25,8 @@ pub enum BinaryCommutantError {
     NotPermutation,
     #[error("coordinate action does not preserve the supplied binary row space")]
     NotInvariant,
+    #[error("binary quotient action requires nested row spaces with quotient rank in 1..=63")]
+    QuotientShape,
     #[error("binary extension-field certificates require a degree in 2..=16")]
     FieldDegree,
     #[error("commuting operator does not generate the claimed extension field")]
@@ -586,6 +588,120 @@ pub fn compile_binary_subspace_action(
     PackedBinaryAction::new(dimension, generators)
 }
 
+/// Induce coordinate actions on a binary quotient row space
+/// `superspace / subspace`.
+///
+/// The reducer retains quotient labels while eliminating concrete ambient
+/// rows. A generator may therefore move a chosen representative by an element
+/// of `subspace`; only its exact quotient action is exposed.
+pub fn compile_binary_quotient_action(
+    subspace: &Matrix,
+    superspace: &Matrix,
+    coordinate_generators: &[Box<[u16]>],
+) -> Result<PackedBinaryAction, BinaryCommutantError> {
+    if subspace.cols() != superspace.cols() || subspace.cols() == 0 {
+        return Err(BinaryCommutantError::QuotientShape);
+    }
+    let subspace_basis = canonical_binary_matrix(subspace)?;
+    let superspace_basis = canonical_binary_matrix(superspace)?;
+    if superspace_basis.rows() <= subspace_basis.rows() {
+        return Err(BinaryCommutantError::QuotientShape);
+    }
+    let ambient_dimension = superspace_basis.cols();
+    let word_count = ambient_dimension.div_ceil(64);
+    let subspace_rows = (0..subspace_basis.rows())
+        .map(|row| pack_binary_row(subspace_basis.row(row)))
+        .collect::<Vec<_>>();
+    let superspace_rows = (0..superspace_basis.rows())
+        .map(|row| pack_binary_row(superspace_basis.row(row)))
+        .collect::<Vec<_>>();
+
+    let mut superspace_reducer = LabelledBinaryReducer::new(ambient_dimension);
+    for row in &superspace_rows {
+        if !superspace_reducer.insert(row.clone(), 0) {
+            return Err(BinaryCommutantError::Certificate);
+        }
+    }
+    for row in &subspace_rows {
+        let mut candidate = row.clone();
+        let mut label = 0;
+        superspace_reducer.reduce(&mut candidate, &mut label);
+        if candidate.iter().any(|&word| word != 0) {
+            return Err(BinaryCommutantError::QuotientShape);
+        }
+    }
+
+    let mut subspace_reducer = LabelledBinaryReducer::new(ambient_dimension);
+    let mut quotient_reducer = LabelledBinaryReducer::new(ambient_dimension);
+    for row in &subspace_rows {
+        if !subspace_reducer.insert(row.clone(), 0) || !quotient_reducer.insert(row.clone(), 0) {
+            return Err(BinaryCommutantError::Certificate);
+        }
+    }
+    let mut quotient_sources = Vec::new();
+    for row in &superspace_rows {
+        if quotient_sources.len() == MAX_PACKED_DIMENSION {
+            let mut reduced = row.clone();
+            let mut label = 0;
+            quotient_reducer.reduce(&mut reduced, &mut label);
+            if reduced.iter().any(|&word| word != 0) {
+                return Err(BinaryCommutantError::QuotientShape);
+            }
+            continue;
+        }
+        let quotient_label = 1_u64 << quotient_sources.len();
+        if quotient_reducer.insert(row.clone(), quotient_label) {
+            quotient_sources.push(row.clone());
+        }
+    }
+    let quotient_dimension = quotient_sources.len();
+    if quotient_dimension == 0
+        || quotient_dimension > MAX_PACKED_DIMENSION
+        || quotient_dimension != superspace_basis.rows() - subspace_basis.rows()
+    {
+        return Err(BinaryCommutantError::QuotientShape);
+    }
+
+    let mut generators = Vec::with_capacity(coordinate_generators.len());
+    let mut transformed = vec![0_u64; word_count];
+    for permutation in coordinate_generators {
+        validate_permutation(permutation, ambient_dimension)?;
+        for source in &subspace_rows {
+            permute_packed(source, permutation, &mut transformed);
+            let mut label = 0;
+            subspace_reducer.reduce(&mut transformed, &mut label);
+            if transformed.iter().any(|&word| word != 0) {
+                return Err(BinaryCommutantError::NotInvariant);
+            }
+        }
+        for source in &superspace_rows {
+            permute_packed(source, permutation, &mut transformed);
+            let mut label = 0;
+            quotient_reducer.reduce(&mut transformed, &mut label);
+            if transformed.iter().any(|&word| word != 0) {
+                return Err(BinaryCommutantError::NotInvariant);
+            }
+        }
+
+        let mut action_rows = vec![0_u64; quotient_dimension];
+        for (source_basis, source) in quotient_sources.iter().enumerate() {
+            permute_packed(source, permutation, &mut transformed);
+            let mut target_label = 0;
+            quotient_reducer.reduce(&mut transformed, &mut target_label);
+            if transformed.iter().any(|&word| word != 0) {
+                return Err(BinaryCommutantError::NotInvariant);
+            }
+            for (target_basis, action_row) in action_rows.iter_mut().enumerate() {
+                if target_label & (1_u64 << target_basis) != 0 {
+                    *action_row |= 1_u64 << source_basis;
+                }
+            }
+        }
+        generators.push(PackedBinaryLinearMap::new(quotient_dimension, action_rows)?);
+    }
+    PackedBinaryAction::new(quotient_dimension, generators)
+}
+
 /// Replay an induced action from the original row space and permutations.
 pub fn verify_binary_subspace_action(
     subspace: &Matrix,
@@ -593,6 +709,19 @@ pub fn verify_binary_subspace_action(
     action: &PackedBinaryAction,
 ) -> Result<(), BinaryCommutantError> {
     let replay = compile_binary_subspace_action(subspace, coordinate_generators)?;
+    if replay.dimension != action.dimension || replay.generators != action.generators {
+        return Err(BinaryCommutantError::Certificate);
+    }
+    Ok(())
+}
+
+pub fn verify_binary_quotient_action(
+    subspace: &Matrix,
+    superspace: &Matrix,
+    coordinate_generators: &[Box<[u16]>],
+    action: &PackedBinaryAction,
+) -> Result<(), BinaryCommutantError> {
+    let replay = compile_binary_quotient_action(subspace, superspace, coordinate_generators)?;
     if replay.dimension != action.dimension || replay.generators != action.generators {
         return Err(BinaryCommutantError::Certificate);
     }
@@ -712,6 +841,15 @@ fn canonical_binary_basis(subspace: &Matrix) -> Result<(Matrix, Vec<usize>), Bin
     Ok((basis, pivot_columns))
 }
 
+fn canonical_binary_matrix(matrix: &Matrix) -> Result<Matrix, BinaryCommutantError> {
+    if matrix.cols() == 0 || matrix.as_slice().iter().any(|&entry| entry > 1) {
+        return Err(BinaryCommutantError::SubspaceShape);
+    }
+    matrix
+        .canonical_row_basis::<2>()
+        .map_err(|_| BinaryCommutantError::SubspaceShape)
+}
+
 fn validate_permutation(
     permutation: &[u16],
     coordinate_count: usize,
@@ -727,6 +865,69 @@ fn validate_permutation(
         }
     }
     Ok(())
+}
+
+struct LabelledBinaryReducer {
+    pivot_rows: Vec<Option<Box<[u64]>>>,
+    pivot_labels: Vec<u64>,
+}
+
+impl LabelledBinaryReducer {
+    fn new(ambient_dimension: usize) -> Self {
+        Self {
+            pivot_rows: vec![None; ambient_dimension],
+            pivot_labels: vec![0; ambient_dimension],
+        }
+    }
+
+    fn insert(&mut self, mut row: Vec<u64>, mut label: u64) -> bool {
+        self.reduce(&mut row, &mut label);
+        let Some(pivot) = first_set_bit(&row) else {
+            return false;
+        };
+        self.pivot_rows[pivot] = Some(row.into_boxed_slice());
+        self.pivot_labels[pivot] = label;
+        true
+    }
+
+    fn reduce(&self, row: &mut [u64], label: &mut u64) {
+        while let Some(pivot) = first_set_bit(row) {
+            let Some(reducer) = &self.pivot_rows[pivot] else {
+                break;
+            };
+            for (entry, &reducer_entry) in row.iter_mut().zip(reducer.iter()) {
+                *entry ^= reducer_entry;
+            }
+            *label ^= self.pivot_labels[pivot];
+        }
+    }
+}
+
+fn pack_binary_row(row: &[u8]) -> Vec<u64> {
+    let mut packed = vec![0_u64; row.len().div_ceil(64)];
+    for (coordinate, &entry) in row.iter().enumerate() {
+        if entry != 0 {
+            packed[coordinate / 64] |= 1_u64 << (coordinate % 64);
+        }
+    }
+    packed
+}
+
+fn permute_packed(source: &[u64], permutation: &[u16], target: &mut [u64]) {
+    target.fill(0);
+    for (coordinate, &image) in permutation.iter().enumerate() {
+        if source[coordinate / 64] & (1_u64 << (coordinate % 64)) != 0 {
+            let image = usize::from(image);
+            target[image / 64] |= 1_u64 << (image % 64);
+        }
+    }
+}
+
+fn first_set_bit(words: &[u64]) -> Option<usize> {
+    words
+        .iter()
+        .enumerate()
+        .find_map(|(index, &word)| (word != 0).then(|| 64 * index + word.trailing_zeros() as usize))
 }
 
 fn pack_map(map: &PackedBinaryLinearMap, variable_count: usize) -> Vec<u64> {
@@ -1007,6 +1208,44 @@ mod tests {
             )
             .unwrap_err(),
             BinaryCommutantError::NotExtensionField
+        );
+    }
+
+    #[test]
+    fn quotient_action_retains_modulo_subspace_mixing() {
+        let subspace = Matrix::new::<2>(1, 3, [1, 1, 1]).unwrap();
+        let superspace = Matrix::new::<2>(3, 3, [1, 0, 0, 0, 1, 0, 0, 0, 1]).unwrap();
+        let permutations = vec![vec![1_u16, 2, 0].into_boxed_slice()];
+        let action = compile_binary_quotient_action(&subspace, &superspace, &permutations).unwrap();
+        verify_binary_quotient_action(&subspace, &superspace, &permutations, &action).unwrap();
+        assert_eq!(action.dimension(), 2);
+        let generator = &action.generators()[0];
+        assert_eq!(
+            generator
+                .compose(generator)
+                .unwrap()
+                .compose(generator)
+                .unwrap(),
+            PackedBinaryLinearMap::identity(2).unwrap()
+        );
+        let field = certify_binary_extension_field(&action, generator.clone(), 2).unwrap();
+        verify_binary_extension_field(&action, &field).unwrap();
+    }
+
+    #[test]
+    fn quotient_action_rejects_nonnested_and_noninvariant_inputs() {
+        let left = Matrix::new::<2>(1, 3, [1, 0, 0]).unwrap();
+        let right = Matrix::new::<2>(1, 3, [0, 1, 0]).unwrap();
+        assert_eq!(
+            compile_binary_quotient_action(&left, &right, &[]).unwrap_err(),
+            BinaryCommutantError::QuotientShape
+        );
+
+        let full = Matrix::new::<2>(3, 3, [1, 0, 0, 0, 1, 0, 0, 0, 1]).unwrap();
+        let swap = vec![vec![1_u16, 0, 2].into_boxed_slice()];
+        assert_eq!(
+            compile_binary_quotient_action(&left, &full, &swap).unwrap_err(),
+            BinaryCommutantError::NotInvariant
         );
     }
 }

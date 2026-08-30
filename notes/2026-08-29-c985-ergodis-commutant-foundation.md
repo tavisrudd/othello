@@ -9,10 +9,13 @@
 
 Ergodis now has a generic verified `GF(2)` linear-action layer beneath its
 coordinate-orbit compiler.  It can induce an action from coordinate
-permutations onto the canonical basis of any invariant binary row space of
-rank at most 63, compute the full commuting endomorphism algebra, find a
-nontrivial central-idempotent split when one occurs in a bounded search, and
-convert ambient vectors to compact coordinates in both invariant summands.
+permutations onto the canonical basis of any invariant binary row space, or
+onto a nested quotient `D/K`, of rank at most 63; compute the full commuting
+endomorphism algebra; find a nontrivial central-idempotent split when one
+occurs in a bounded search; and convert ambient vectors to compact coordinates
+in both invariant summands.  The quotient reducer retains labels while
+eliminating ambient rows, so a representative may move by an element of `K`
+without losing the induced action on `D/K`.
 
 The same layer can certify that a supplied commuting operator generates an
 actual extension field `GF(2^d)`, for `2 <= d <= 16`.  It does not infer this
@@ -32,6 +35,7 @@ needed by the portfolio's hidden-`F_8` example.
 
 - `PackedBinaryLinearMap` and `PackedBinaryAction`;
 - `compile_binary_subspace_action` and exact replay;
+- `compile_binary_quotient_action` and exact replay;
 - `compile_binary_commutant` and a dimension-and-equation verifier;
 - bounded `BinaryCommutant::find_central_split`;
 - allocation-free coordinate conversion through `PackedBinarySubspace`;
@@ -66,7 +70,10 @@ the coordinate cycle on the binary even-parity code, a central split into
 nonisomorphic dimensions one and two, compact-coordinate round trips, action
 compatibility of both summands, rejection of a non-invariant coordinate
 action, rejection of a dependent commutant basis, and rejection of the
-identity as a fake quadratic-field generator.
+identity as a fake quadratic-field generator.  A quotient fixture realizes the
+same irreducible order-three action on
+`F_2^3 / span((1,1,1))`, certifies its `F_4` scalar structure, and rejects both
+nonnested inputs and a permutation that preserves `D` but not `K`.
 
 The complete crate test suite and strict library clippy gate pass with all
 features in an isolated disk-backed Cargo target.  No benchmark, profile,
@@ -97,7 +104,8 @@ This is the algebraic foundation, not yet the Work Package A acceptance result.
 2. Add a segmented binary-map representation for ranks above 63 without
    changing the packed fast path.
 3. Build a CSS adapter that independently induces and verifies the actions on
-   physical-syndrome and logical-observation spaces.
+   physical-syndrome space and on the logical quotient; the generic `D/K`
+   action compiler is now available for the latter.
 4. Compile completion keys in block coordinates and prove exact agreement with
    the unreduced backend on small exhaustive codes.
 5. Only after an all-clear, measure gross, BB784, R2Elite, LP1768, and held-out

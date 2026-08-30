@@ -433,8 +433,8 @@ Sequel research:
   same low-memory huge backend; no non-abelian orbit reduction is assumed.
   The portfolio-import programme has begun with the
   [verified commutant foundation](../2026-08-29-c985-ergodis-commutant-foundation.md):
-  induced binary subspace actions, full commuting algebras, central-idempotent
-  block coordinates, and exact extension-field certificates.  The packed
+  induced binary subspace and nested-quotient actions, full commuting algebras,
+  central-idempotent block coordinates, and exact extension-field certificates.  The packed
   rank-63 correctness gate passes; segmented large-rank support, operator
   discovery, CSS integration, and all performance measurements remain open.
 
