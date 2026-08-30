@@ -501,52 +501,35 @@ pub fn compile_binary_commutant(
 
 /// Certify that a commuting operator generates a copy of `GF(2^degree)`.
 ///
-/// Closure is checked by reducing the next power into
-/// `span(1, A, ..., A^(degree-1))`.  The field condition is checked directly:
-/// every nonzero element of that span has full binary rank.  The bounded
-/// degree makes this exhaustive certificate practical and prevents an
-/// accidental product algebra from being labelled a field.
+/// The minimal polynomial is recovered from the first dependent power and
+/// certified irreducible over `GF(2)`.  Thus the generated algebra is a field,
+/// without enumerating all `2^degree - 1` nonzero elements.
 pub fn certify_binary_extension_field(
     action: &PackedBinaryAction,
     generator: PackedBinaryLinearMap,
     degree: usize,
 ) -> Result<BinaryExtensionField, BinaryCommutantError> {
-    if !(2..=16).contains(&degree) {
-        return Err(BinaryCommutantError::FieldDegree);
-    }
-    let dimension = action.dimension();
-    if generator.dimension() != dimension
-        || dimension % degree != 0
-        || action
-            .generators
-            .iter()
-            .any(|action_generator| !generator.commutes_with(action_generator))
-    {
+    let powers = extension_field_powers(action, &generator, degree)?;
+    let polynomial = generated_minimal_polynomial(&powers, degree)?;
+    if !is_irreducible_binary_polynomial(polynomial, degree) {
         return Err(BinaryCommutantError::NotExtensionField);
     }
-    let identity = PackedBinaryLinearMap::identity(dimension)?;
-    let mut powers = Vec::with_capacity(degree + 1);
-    powers.push(identity);
-    for _ in 0..degree {
-        let next = powers
-            .last()
-            .expect("identity starts the power sequence")
-            .compose(&generator)?;
-        powers.push(next);
-    }
-    let variable_count = dimension * dimension;
-    let mut flattened = powers[..degree]
-        .iter()
-        .map(|power| pack_map(power, variable_count))
-        .collect::<Vec<_>>();
-    if binary_rank(flattened.clone(), variable_count) != degree {
-        return Err(BinaryCommutantError::NotExtensionField);
-    }
-    flattened.push(pack_map(&powers[degree], variable_count));
-    if binary_rank(flattened, variable_count) != degree {
-        return Err(BinaryCommutantError::NotExtensionField);
-    }
+    Ok(BinaryExtensionField {
+        generator,
+        degree: degree as u8,
+    })
+}
 
+/// Exhaustive reference certificate used for differential tests and A/B
+/// performance-counter diagnostics.
+pub fn certify_binary_extension_field_exhaustive(
+    action: &PackedBinaryAction,
+    generator: PackedBinaryLinearMap,
+    degree: usize,
+) -> Result<BinaryExtensionField, BinaryCommutantError> {
+    let powers = extension_field_powers(action, &generator, degree)?;
+    generated_minimal_polynomial(&powers, degree)?;
+    let dimension = action.dimension();
     let mut combination = vec![0_u64; dimension];
     let mut rank_scratch = vec![0_u64; dimension];
     let mut previous_gray = 0_u64;
@@ -567,6 +550,132 @@ pub fn certify_binary_extension_field(
         generator,
         degree: degree as u8,
     })
+}
+
+fn extension_field_powers(
+    action: &PackedBinaryAction,
+    generator: &PackedBinaryLinearMap,
+    degree: usize,
+) -> Result<Vec<PackedBinaryLinearMap>, BinaryCommutantError> {
+    if !(2..=16).contains(&degree) {
+        return Err(BinaryCommutantError::FieldDegree);
+    }
+    let dimension = action.dimension();
+    if generator.dimension() != dimension
+        || dimension % degree != 0
+        || action
+            .generators
+            .iter()
+            .any(|action_generator| !generator.commutes_with(action_generator))
+    {
+        return Err(BinaryCommutantError::NotExtensionField);
+    }
+    let identity = PackedBinaryLinearMap::identity(dimension)?;
+    let mut powers = Vec::with_capacity(degree + 1);
+    powers.push(identity);
+    for _ in 0..degree {
+        let next = powers
+            .last()
+            .expect("identity starts the power sequence")
+            .compose(generator)?;
+        powers.push(next);
+    }
+    Ok(powers)
+}
+
+fn generated_minimal_polynomial(
+    powers: &[PackedBinaryLinearMap],
+    degree: usize,
+) -> Result<u64, BinaryCommutantError> {
+    let dimension = powers
+        .first()
+        .ok_or(BinaryCommutantError::NotExtensionField)?
+        .dimension();
+    if powers.len() != degree + 1 {
+        return Err(BinaryCommutantError::NotExtensionField);
+    }
+    let variable_count = dimension * dimension;
+    let mut reducer = LabelledBinaryReducer::new(variable_count);
+    for (power, map) in powers.iter().take(degree).enumerate() {
+        if !reducer.insert(pack_map(map, variable_count), 1_u64 << power) {
+            return Err(BinaryCommutantError::NotExtensionField);
+        }
+    }
+    let mut next = pack_map(&powers[degree], variable_count);
+    let mut coefficients = 0_u64;
+    reducer.reduce(&mut next, &mut coefficients);
+    if next.iter().any(|&word| word != 0) {
+        return Err(BinaryCommutantError::NotExtensionField);
+    }
+    Ok((1_u64 << degree) | coefficients)
+}
+
+fn is_irreducible_binary_polynomial(polynomial: u64, degree: usize) -> bool {
+    if degree < 2 || polynomial >> degree != 1 || polynomial & 1 == 0 {
+        return false;
+    }
+    let x = 0b10_u64;
+    let mut frobenius = x;
+    for _ in 0..degree {
+        frobenius = polynomial_multiply_mod(frobenius, frobenius, polynomial, degree);
+    }
+    if frobenius != x {
+        return false;
+    }
+    let mut remaining = degree;
+    let mut prime = 2usize;
+    while prime * prime <= remaining {
+        if remaining % prime == 0 {
+            let mut test = x;
+            for _ in 0..degree / prime {
+                test = polynomial_multiply_mod(test, test, polynomial, degree);
+            }
+            if polynomial_gcd(polynomial, test ^ x) != 1 {
+                return false;
+            }
+            while remaining % prime == 0 {
+                remaining /= prime;
+            }
+        }
+        prime += 1;
+    }
+    if remaining > 1 {
+        let mut test = x;
+        for _ in 0..degree / remaining {
+            test = polynomial_multiply_mod(test, test, polynomial, degree);
+        }
+        if polynomial_gcd(polynomial, test ^ x) != 1 {
+            return false;
+        }
+    }
+    true
+}
+
+fn polynomial_multiply_mod(mut left: u64, mut right: u64, modulus: u64, degree: usize) -> u64 {
+    let mut product = 0_u64;
+    while right != 0 {
+        if right & 1 != 0 {
+            product ^= left;
+        }
+        right >>= 1;
+        left <<= 1;
+        if left & (1_u64 << degree) != 0 {
+            left ^= modulus;
+        }
+    }
+    product
+}
+
+fn polynomial_gcd(mut left: u64, mut right: u64) -> u64 {
+    while right != 0 {
+        let right_degree = 63 - right.leading_zeros();
+        while left != 0 && 63 - left.leading_zeros() >= right_degree {
+            let shift = (63 - left.leading_zeros()) - right_degree;
+            left ^= right << shift;
+        }
+        std::mem::swap(&mut left, &mut right);
+    }
+    left
 }
 
 pub fn verify_binary_extension_field(
@@ -1169,6 +1278,24 @@ mod tests {
         PackedBinaryLinearMap::new(rows.len(), rows.to_vec()).unwrap()
     }
 
+    fn multiplication_by_x(degree: usize, polynomial: u64) -> PackedBinaryLinearMap {
+        let mut rows = vec![0_u64; degree];
+        for source in 0..degree {
+            let image = if source + 1 < degree {
+                1_u64 << (source + 1)
+            } else {
+                polynomial & ((1_u64 << degree) - 1)
+            };
+            let mut bits = image;
+            while bits != 0 {
+                let target = bits.trailing_zeros() as usize;
+                rows[target] |= 1_u64 << source;
+                bits &= bits - 1;
+            }
+        }
+        PackedBinaryLinearMap::new(degree, rows).unwrap()
+    }
+
     #[test]
     fn every_two_dimensional_single_generator_commutant_replays() {
         for packed in 0_u64..16 {
@@ -1284,6 +1411,45 @@ mod tests {
             .unwrap_err(),
             BinaryCommutantError::NotExtensionField
         );
+    }
+
+    #[test]
+    fn irreducibility_certificate_matches_exhaustive_field_check() {
+        let generator = map(&[0b100, 0b101, 0b010]);
+        let action = PackedBinaryAction::new(3, vec![generator.clone()]).unwrap();
+        let fast = certify_binary_extension_field(&action, generator.clone(), 3).unwrap();
+        let exhaustive =
+            certify_binary_extension_field_exhaustive(&action, generator.clone(), 3).unwrap();
+        assert_eq!(fast.degree(), exhaustive.degree());
+        assert_eq!(fast.generator(), exhaustive.generator());
+
+        let product_generator = map(&[0b010, 0b011, 0b100]);
+        let product_action = PackedBinaryAction::new(3, vec![product_generator.clone()]).unwrap();
+        assert_eq!(
+            certify_binary_extension_field(&product_action, product_generator.clone(), 3)
+                .unwrap_err(),
+            BinaryCommutantError::NotExtensionField
+        );
+        assert_eq!(
+            certify_binary_extension_field_exhaustive(&product_action, product_generator, 3)
+                .unwrap_err(),
+            BinaryCommutantError::NotExtensionField
+        );
+    }
+
+    #[test]
+    fn irreducibility_theorem_matches_exhaustive_through_degree_eight() {
+        for degree in 2..=8 {
+            let action = PackedBinaryAction::new(degree, Vec::new()).unwrap();
+            for tail in (1_u64..1_u64 << degree).step_by(2) {
+                let generator = multiplication_by_x(degree, (1_u64 << degree) | tail);
+                let theorem =
+                    certify_binary_extension_field(&action, generator.clone(), degree).is_ok();
+                let exhaustive =
+                    certify_binary_extension_field_exhaustive(&action, generator, degree).is_ok();
+                assert_eq!(theorem, exhaustive, "degree={degree}, tail={tail:#x}");
+            }
+        }
     }
 
     #[test]

@@ -49,7 +49,8 @@ pub use applications::{
 pub use automata::{ExplicitMataDfa, ExplicitMataError};
 pub use commutant::{
     binary_commutant_workspace_upper_bound, certify_binary_extension_field,
-    compile_binary_commutant, compile_binary_css_logical_action, compile_binary_quotient_action,
+    certify_binary_extension_field_exhaustive, compile_binary_commutant,
+    compile_binary_css_logical_action, compile_binary_quotient_action,
     compile_binary_subspace_action, verify_binary_commutant, verify_binary_css_logical_action,
     verify_binary_extension_field, verify_binary_invariant_split, verify_binary_quotient_action,
     verify_binary_subspace_action, BinaryCommutant, BinaryCommutantError, BinaryExtensionField,

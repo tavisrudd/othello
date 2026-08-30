@@ -437,7 +437,11 @@ Sequel research:
   central-idempotent block coordinates, and exact extension-field certificates.  The packed
   rank-63 correctness gate and CSS logical-quotient adapter pass; segmented
   large-rank syndrome support, operator discovery, hot-backend integration,
-  and clean performance measurements remain open.
+  and clean performance measurements remain open.  Minimal-polynomial
+  irreducibility has replaced exhaustive field-element rank testing, with a
+  diagnostic three-pair counter A/B showing 20.09x fewer instructions and
+  19.90x fewer cycles at degree eight; the shared-host result is not a paper
+  benchmark.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

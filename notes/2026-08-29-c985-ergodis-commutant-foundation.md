@@ -19,15 +19,21 @@ without losing the induced action on `D/K`.
 
 The same layer can certify that a supplied commuting operator generates an
 actual extension field `GF(2^d)`, for `2 <= d <= 16`.  It does not infer this
-from the operator order.  It checks that
+from the operator order.  It recovers the first polynomial relation among
+`1,A,...,A^d` and checks that the resulting degree-`d` minimal polynomial is
+irreducible over `GF(2)`.  This proves that the generated algebra is a field.
+
+An exhaustive reference path separately checks that
 
 1. `1,A,...,A^(d-1)` are independent;
 2. `A^d` lies in their span, so the span is an algebra; and
 3. every nonzero element of the `2^d`-element algebra has full binary rank.
 
-The last condition rejects product algebras and zero divisors.  A successful
-certificate therefore supplies a genuine scalar-field action, the mechanism
-needed by the portfolio's hidden-`F_8` example.
+The last condition rejects product algebras and zero divisors.  Differential
+tests compare the theorem and exhaustive paths for every monic odd binary
+polynomial through degree eight.  A successful certificate therefore supplies
+a genuine scalar-field action, the mechanism needed by the portfolio's
+hidden-`F_8` example.
 
 ## Public interfaces
 
@@ -42,6 +48,8 @@ needed by the portfolio's hidden-`F_8` example.
 - bounded `BinaryCommutant::find_central_split`;
 - allocation-free coordinate conversion through `PackedBinarySubspace`;
 - `certify_binary_extension_field` and exact replay.
+- `certify_binary_extension_field_exhaustive`, retained as a differential and
+  performance-counter reference rather than the default algorithm.
 
 An induced coordinate action is rejected unless each supplied map is a true
 permutation and preserves the supplied row space exactly.  A commutant
@@ -85,7 +93,30 @@ nonnested inputs and a permutation that preserves `D` but not `K`.
 The complete crate test suite and strict library clippy gate pass with all
 features in an isolated disk-backed Cargo target.  No benchmark, profile,
 timing comparison, or performance claim was run because another computation
-owned the machine.
+owned the machine when the foundation first landed.
+
+### Shared-host diagnostic A/B
+
+After diagnostic measurements were authorized, the committed
+`examples/commutant_field_probe.rs` compared 20,000 certifications of the AES
+degree-eight field in three alternating exhaustive/theorem pairs.  Both the
+probe and `perf stat` ran under `choom -n 1000`.  Raw counter files are retained
+privately at `/home/tavis/.cache/ergodis/commutant-field-perf-v1`; they are not
+paper evidence.
+
+| counter, exhaustive/theorem | paired ratios | geometric mean | paired-log `t` |
+|---|---:|---:|---:|
+| cycles | 19.720, 20.818, 19.208 | 19.904 | 126.24 |
+| instructions | 19.971, 19.749, 20.559 | 20.090 | 250.27 |
+| branches | 28.623, 27.890, 29.148 | 28.549 | 261.80 |
+| branch misses | 24.094, 22.232, 41.659 | 28.154 | 16.92 |
+| task clock | 12.991, 14.387, 18.419 | 15.100 | 26.19 |
+
+Cache-reference and cache-miss ratios were unstable under contention and are
+not interpreted.  The robust conclusion is algorithmic: minimal-polynomial
+irreducibility removes about twenty times the retired instructions of the
+degree-eight exhaustive certificate.  These are diagnostic counters, not a
+clean machine-level benchmark claim.
 
 ## Exact boundary
 
