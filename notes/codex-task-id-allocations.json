@@ -3905,8 +3905,17 @@
       "last": 1011,
       "purpose": "Paper V unmarked metric-shadow no-go and H3 marking ambiguity",
       "sequence": 434
+    },
+    {
+      "count": 1,
+      "first": 1012,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1012,
+      "purpose": "sparse-shadow reconstruction/no-go theorem and literature audit",
+      "sequence": 435
     }
   ],
-  "next_id": 1012,
+  "next_id": 1013,
   "schema": "codex-task-id-allocations-v1"
 }
