@@ -537,16 +537,14 @@ Sequel research:
   These diagnostics are not UNSAT certificates and do not change the proved
   bound. A compact `2^27` retry of `[0,1,11]` makes 134,217,728 exact slots
   practical at 659,164 KiB RSS but also exhausts capacity. Further syntactic
-  growth is abandoned. The highest-EV native successor is the exact
-  optimal-continuation quotient by selected cardinality and the 127-tuple of
-  absorbing separated flags or bipartite parity-component closures, followed
-  by a proof-producing replay path. A caller-buffered signature and exhaustive
-  five-point equal-optimum control pass; literal syntactic trace congruence is
-  deliberately not claimed. The first census is weak (`1,024 -> 1,015`, with
-  all merges near saturation), so an eight-point streamed collision census is
-  now the admission gate before implementing closure interning. If it is
-  similarly sparse, aggregate rank bounds and proof production outrank this
-  quotient.
+  growth is abandoned. Cardinality plus the 127 parity-component closures is a
+  valid optimal-continuation quotient (not a literal syntactic-trace
+  congruence), and its caller-buffered signature/equal-optimum controls pass.
+  It is not admitted as a backend: the exhaustive five-point census merges only
+  `9/1,024` states, all near saturation, and a deterministic 100,000-family
+  rooted weight-15 sample has zero exact merges after bytewise collision replay.
+  Aggregate context rank/cover bounds and proof-producing search are the next
+  route.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

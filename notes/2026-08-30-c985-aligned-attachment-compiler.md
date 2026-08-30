@@ -263,6 +263,15 @@ is a streamed collision census over a bounded prefix of real eight-point
 search states. Low collision density would redirect effort to aggregate rank
 bounds and proof production instead.
 
+A deterministic rooted weight-15 sample supplies that negative signal:
+100,000 distinct `[0,1,2]`-containing families give 100,000 distinct closure
+classes. The census uses a 64-bit hash only as a bucket index and bytewise
+replays every bucket collision, so the zero-merge count is exact for the
+sampled domain. It is not a sample of the DFS distribution, but together with
+the weak five-point census it makes closure interning low expected value. The
+next algorithmic target is aggregate context rank/cover bounds and a
+proof-producing search representation.
+
 Three further hot-path alternatives are rejected. Incidence-maximizing ties
 between equally short branch clauses increase the rooted control from 8,759 to
 10,262 states. Packing the two cut-edge IDs into one `u16` is neutral on both
@@ -366,3 +375,6 @@ cut-context theorem.
 - **Settled negative:** ambient line-graph chordality does not collapse
   selected odd cycles to triangles; the induced/non-induced distinction blocks
   that shortcut.
+- **Settled negative:** parity closure is a valid optimal-continuation quotient,
+  but it merges only 9/1,024 five-point states and 0/100,000 deterministic
+  rooted weight-15 samples. It is not admitted as the next backend.
