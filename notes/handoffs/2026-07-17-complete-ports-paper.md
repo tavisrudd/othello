@@ -597,8 +597,12 @@ Sequel research:
   found the exact sampled predicate `omega_drop > 0` and
   `next_defect_rank in {0,6}`; this is not a theorem, and an unguided q17 probe
   was inconclusive because it reached no relevant survivor states.  C880 and
-  small controls pass.  The next gate is consumption by one long domain solver;
-  no sound pruning role exists.
+  small controls pass.  The C880 DFS now consumes bounded pulses and ordering
+  plans while publishing compact progress.  Exact solved budget-12/13 controls
+  survive mid-search activation/deactivation, but exact child-packing ordering
+  is rejected as a production policy: it barely changes states and costs about
+  3.9x in the diagnostic.  The next gate is compute-once frame scoring followed
+  by multiround A/B; no sound pruning role exists.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

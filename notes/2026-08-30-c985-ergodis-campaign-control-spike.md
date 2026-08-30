@@ -22,11 +22,38 @@ The first live-adapter boundary is also present: a constant-size unchanged
 plan identities, and each lowered plan can be fetched only against that exact
 epoch. Activation and deactivation are epoch-atomic. A solver can therefore
 compile into an inactive preallocated arena and swap at a later safe point,
-without socket checks, JSON, or allocation in the node loop. No domain solver
-consumes this boundary yet. A real C880 socket exercise observed unchanged
+without socket checks, JSON, or allocation in the node loop. A preliminary
+C880 socket exercise observed unchanged
 epoch 0, activated the exact 11/11 marginal-saving predicate at epoch 1,
 fetched its lowered plan against epoch 1, rejected a misspelled plan identity,
 deactivated it at epoch 2, and returned an empty changed snapshot.
+
+The C880 DFS now also consumes that boundary. Its ordinary entry point uses a
+const-disabled generic path, while `alignment-controlled` polls only after a
+configured state chunk, publishes six bounded progress counters in the same
+pulse, and applies score plans only to branch ordering. No branch can be
+removed. A double-buffered client fetches and hash-checks every lowered plan
+against one stable epoch before swapping arenas.
+
+Two solved n=8 UNSAT controls exercised the live path. Budget 12 accepted the
+residual-packing ordering theorem after 245,760 states and closed exactly after
+308,499 states in 17.30 seconds; the unchanged core baseline closed after
+308,653 states in 7.95 seconds. Budget 13 reported 786,432 states at an
+intermediate query and closed without the theorem after 2,002,426 states in
+43.10 seconds. A separate run injected the theorem at epoch 1, later removed
+it at epoch 2, and closed after 2,001,680 states in 168.85 seconds. Peak RSS was
+about 69 MiB and 134 MiB for budgets 12 and 13 respectively. These are
+diagnostic single runs, not performance estimates.
+
+The negative is decisive enough architecturally: exact child-packing scores
+are recomputed for every remaining candidate every time a branch is selected.
+They barely change the tree and can cost about 3.9x wall time. The theorem is a
+successful live-injection test but a rejected production ordering policy until
+scores are computed once per frame or replaced by a cheaper equivalent
+accumulator. Safe-point polling itself was 8.49 versus 7.95 seconds on the
+budget-12 diagnostic (about 6.8%, including 37 socket/heartbeat pulses); users
+control that tax directly through the chunk interval, and ordinary solves pay
+none.
 
 Implementation commits are `07cc0ebe2`, `b1c4dd052`, and `3a30a24e6` plus the
 current follow-up. Operator documentation is in
@@ -39,10 +66,13 @@ confirming the anticipated refactor pressure. It is now a subtree:
 
 ```text
 src/control/mod.rs          controller, ledger, bounded query model
+src/control/client.rs       double-buffered safe-point plan arena
+src/control/alignment.rs    C880 heartbeat and ordering adapter
 src/control/vm.rs           feature batch, typed bytecode, evaluator
 src/control/synthesis.rs    iterative bounded decision-tree proposer
 src/bin/ergodis_campaign.rs isolated campaign process
 src/bin/ergodisctl.rs       human/agent CLI and unattended batch/evolve loop
+src/bin/alignment_controlled.rs opt-in live C880 runner
 ```
 
 Transport and ledger extraction are the next structural refactors if their
@@ -146,8 +176,8 @@ from silently becoming a proof-authoritative prune.
 1. Construct or import q17 `K_Omega` survivor states, then replay the `{0,6}`
    rule and extract its first mismatch if any; unguided random states do not
    reach the relevant stratum at useful density.
-2. Consume the pulse/snapshot protocol from one genuinely long C80 or C880
-   search; the transport boundary alone does not test mid-search steering.
+2. Cache C880 branch-theorem scores once per frame, then repeat an interleaved
+   multiround A/B; add a C80 live adapter only after that pattern is sound.
 3. Persist controller checkpoints so restart preserves the last validated
    epoch and active plan hashes.
 4. Split transport and ledger modules after the next surface change, not before

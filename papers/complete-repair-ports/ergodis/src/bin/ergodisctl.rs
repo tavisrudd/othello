@@ -536,15 +536,28 @@ fn run_batch(
 
 fn render_compact(op: &str, result: &Value, epoch: u64) -> Result<()> {
     match op {
-        "status" => println!(
-            "epoch={epoch} health={} problem={} rows={} plans={} ledger={}/{}",
-            text(result, "health"),
-            text(result, "problem"),
-            number(result, "rows"),
-            number(result, "plans"),
-            number(result, "ledger_bytes"),
-            number(result, "ledger_limit")
-        ),
+        "status" => {
+            println!(
+                "epoch={epoch} health={} problem={} rows={} plans={} ledger={}/{}",
+                text(result, "health"),
+                text(result, "problem"),
+                number(result, "rows"),
+                number(result, "plans"),
+                number(result, "ledger_bytes"),
+                number(result, "ledger_limit")
+            );
+            if let Some(solver) = result.get("solver").filter(|value| value.is_object()) {
+                println!(
+                    "solver states={} dup={} infeasible={} depth={} selected={} unresolved={}",
+                    number(solver, "states"),
+                    number(solver, "duplicates"),
+                    number(solver, "infeasible"),
+                    number(solver, "depth"),
+                    number(solver, "selected_count"),
+                    number(solver, "unresolved_count")
+                );
+            }
+        }
         "pulse" => println!(
             "epoch={epoch} changed={} plans={}",
             result

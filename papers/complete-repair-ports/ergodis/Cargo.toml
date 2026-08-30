@@ -54,6 +54,11 @@ path = "src/bin/ergodisctl.rs"
 required-features = ["control-plane"]
 
 [[bin]]
+name = "alignment-controlled"
+path = "src/bin/alignment_controlled.rs"
+required-features = ["control-plane"]
+
+[[bin]]
 name = "css_distance_random"
 path = "src/bin/css_distance_random.rs"
 required-features = ["parallel"]

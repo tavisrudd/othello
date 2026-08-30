@@ -199,10 +199,33 @@ change between pulse and fetch fails closed and causes a retry. This design
 keeps transport, JSON, and allocation outside hot loops and makes plan removal
 as atomic as plan activation.
 
+The experimental `alignment-controlled` binary is the first consumer. It
+publishes a bounded C880 heartbeat at each pulse and permits only score-valued
+ordering plans. Every branch remains in the exact DFS. The ordinary
+`search_alignment_attachment` entry point instantiates the internal loop with
+control statically disabled; `--baseline` exercises that unchanged path.
+
+```text
+alignment-controlled --run-dir RUN --points 8 --budget 13 \
+  --initial 0 --seen-capacity 16777216 --symmetry
+ergodisctl --run-dir RUN status
+ergodisctl --run-dir RUN apply \
+  examples/data/campaign-c880-residual-packing-order.json --expect-epoch 0
+```
+
+The residual-packing plan is intentionally a diagnostic stressor, not a
+recommended heuristic. It recomputes an exact child bound for every candidate
+branch. A live budget-13 control preserved the exact UNSAT answer and nearly
+the same state count but was about 3.9x slower while the plan was active. This
+is useful negative evidence: theorem strength does not pay for unrestricted
+per-branch recomputation. Any production version should precompute each
+branch's score once per search frame, cache the selected child's summary, or
+use a cheaper theorem-equivalent accumulator.
+
 ## Current limitations
 
-The controller now exposes the transport half of a safe-point adapter, but C80
-and C880 do not yet consume pulse updates inside a live search. It does not
+The C880 exact DFS now consumes the safe-point protocol experimentally; C80
+does not yet have a live adapter. The controller does not
 restore active plans after process restart, compact equivalent ledger entries
 on disk, generate proof handles, or promote rules. The protocol, command names,
 and proposer are expected to change after more real campaigns; the isolation,

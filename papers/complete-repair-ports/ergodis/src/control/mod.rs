@@ -13,9 +13,13 @@ use std::os::unix::net::{UnixListener, UnixStream};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 
+mod alignment;
+mod client;
 mod synthesis;
 mod vm;
 
+pub use alignment::AlignmentCampaignControl;
+pub use client::PlanArena;
 use synthesis::learn_decision_tree;
 pub use vm::{
     evaluate_plan, CompiledPlan, Evaluation, ExpressionPlanSpec, FeatureBatch, PlanDocument,
@@ -138,6 +142,7 @@ pub struct Campaign {
     plans: Vec<StoredPlan>,
     archive: BTreeMap<String, String>,
     events: VecDeque<Event>,
+    solver_status: Option<Value>,
     ledger: Ledger,
     response_limit: usize,
     trace_limit: u64,
@@ -195,6 +200,7 @@ impl Campaign {
             plans: Vec::with_capacity(MAX_ACTIVE_PLANS),
             archive: BTreeMap::new(),
             events: VecDeque::with_capacity(EVENT_RING),
+            solver_status: None,
             ledger,
             response_limit: response_limit.min(MAX_FRAME_BYTES),
             trace_limit,
@@ -297,12 +303,29 @@ impl Campaign {
             "ledger_limit": self.ledger.max_bytes,
             "ledger_truncated": self.ledger.truncated,
             "health": "ready",
+            "solver": self.solver_status,
         }))
     }
 
     /// Safe-point query for a live solver. The unchanged response is constant
     /// size; changed epochs return only bounded plan identities.
-    fn pulse(&self, args: &Value) -> Result<Value, ControlError> {
+    fn pulse(&mut self, args: &Value) -> Result<Value, ControlError> {
+        if let Some(status) = args.get("solver").filter(|status| !status.is_null()) {
+            let number = |name: &str| {
+                status
+                    .get(name)
+                    .and_then(Value::as_u64)
+                    .ok_or_else(|| ControlError::Invalid("invalid solver pulse".into()))
+            };
+            self.solver_status = Some(json!({
+                "states": number("states")?,
+                "duplicates": number("duplicates")?,
+                "infeasible": number("infeasible")?,
+                "depth": number("depth")?,
+                "selected_count": number("selected_count")?,
+                "unresolved_count": number("unresolved_count")?,
+            }));
+        }
         let since_epoch = args
             .get("since_epoch")
             .and_then(Value::as_u64)

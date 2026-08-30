@@ -25,6 +25,8 @@ pub enum AlignmentError {
     Workspace,
     #[error("an arithmetic counter overflowed")]
     Overflow,
+    #[error("the optional search controller rejected a safe-point operation")]
+    Control,
 }
 
 #[derive(Debug)]
@@ -690,6 +692,52 @@ pub struct AlignmentSearchMetrics {
     pub infeasible_states: u64,
 }
 
+#[derive(Clone, Copy, Debug)]
+pub struct AlignmentSearchPoint {
+    pub metrics: AlignmentSearchMetrics,
+    pub depth: u32,
+    pub selected_count: u32,
+    pub unresolved_count: u32,
+}
+
+#[derive(Clone, Copy, Debug)]
+pub struct AlignmentBranchFeatures {
+    pub depth: u32,
+    pub selected_count: u32,
+    pub candidate: u32,
+    pub branch_count: u32,
+    pub unresolved_count: u32,
+    pub child_unresolved_count: u32,
+    pub child_packing: u32,
+}
+
+/// Optional coarse control for long searches. Standard searches instantiate
+/// the internal loop with control disabled, so these calls are compiled out.
+pub trait AlignmentSearchControl {
+    fn safe_point(&mut self, point: AlignmentSearchPoint) -> Result<(), AlignmentError>;
+    fn ordering_active(&self) -> bool;
+    fn score_branch(&mut self, features: AlignmentBranchFeatures) -> Result<i64, AlignmentError>;
+}
+
+struct NoAlignmentControl;
+
+impl AlignmentSearchControl for NoAlignmentControl {
+    #[inline(always)]
+    fn safe_point(&mut self, _point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
+        Ok(())
+    }
+
+    #[inline(always)]
+    fn ordering_active(&self) -> bool {
+        false
+    }
+
+    #[inline(always)]
+    fn score_branch(&mut self, _features: AlignmentBranchFeatures) -> Result<i64, AlignmentError> {
+        Ok(0)
+    }
+}
+
 #[derive(Clone, Copy, Debug, Default)]
 struct SearchFrame {
     selected: u64,
@@ -999,6 +1047,47 @@ pub fn search_alignment_attachment_from(
     initial: u64,
     workspace: &mut AlignmentSearchWorkspace,
 ) -> Result<(Option<u64>, AlignmentSearchMetrics), AlignmentError> {
+    search_alignment_attachment_internal::<false, _>(
+        problem,
+        budget,
+        initial,
+        workspace,
+        u64::MAX,
+        &mut NoAlignmentControl,
+    )
+}
+
+/// Search with a controller polled after each `pulse_interval` entered states.
+/// Ordering controls may change branch order but never remove a branch.
+pub fn search_alignment_attachment_controlled<C: AlignmentSearchControl>(
+    problem: &AlignmentAttachment,
+    budget: u32,
+    initial: u64,
+    workspace: &mut AlignmentSearchWorkspace,
+    pulse_interval: u64,
+    control: &mut C,
+) -> Result<(Option<u64>, AlignmentSearchMetrics), AlignmentError> {
+    if pulse_interval == 0 {
+        return Err(AlignmentError::Control);
+    }
+    search_alignment_attachment_internal::<true, _>(
+        problem,
+        budget,
+        initial,
+        workspace,
+        pulse_interval,
+        control,
+    )
+}
+
+fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSearchControl>(
+    problem: &AlignmentAttachment,
+    budget: u32,
+    initial: u64,
+    workspace: &mut AlignmentSearchWorkspace,
+    pulse_interval: u64,
+    control: &mut C,
+) -> Result<(Option<u64>, AlignmentSearchMetrics), AlignmentError> {
     if budget == 0
         || budget as usize > problem.triples.len()
         || budget as usize >= workspace.frames.len()
@@ -1024,6 +1113,7 @@ pub fn search_alignment_attachment_from(
     workspace.initialize_symmetry_images(initial);
     let mut depth = 0_usize;
     let mut metrics = AlignmentSearchMetrics::default();
+    let mut next_pulse = pulse_interval;
 
     loop {
         if !workspace.frames[depth].entered {
@@ -1043,6 +1133,19 @@ pub fn search_alignment_attachment_from(
                 .states
                 .checked_add(1)
                 .ok_or(AlignmentError::Overflow)?;
+            if CONTROLLED && metrics.states >= next_pulse {
+                control.safe_point(AlignmentSearchPoint {
+                    metrics,
+                    depth: depth as u32,
+                    selected_count: selected.count_ones(),
+                    unresolved_count: workspace.frames[depth]
+                        .unresolved_cuts
+                        .iter()
+                        .map(|word| word.count_ones())
+                        .sum(),
+                })?;
+                next_pulse = next_pulse.saturating_add(pulse_interval);
+            }
             let (violation, packing, unresolved_cuts) = problem.violation_summary(
                 selected,
                 workspace.frames[depth].unresolved_cuts,
@@ -1070,7 +1173,11 @@ pub fn search_alignment_attachment_from(
 
         let branch_bits = workspace.frames[depth].branch_bits;
         if branch_bits != 0 {
-            let bit = branch_bits & branch_bits.wrapping_neg();
+            let bit = if CONTROLLED && control.ordering_active() {
+                controlled_branch(problem, budget, depth, &workspace.frames[depth], control)?
+            } else {
+                branch_bits & branch_bits.wrapping_neg()
+            };
             workspace.frames[depth].branch_bits ^= bit;
             let selected = workspace.frames[depth].selected | bit;
             let unresolved_cuts = workspace.frames[depth].unresolved_cuts;
@@ -1088,6 +1195,49 @@ pub fn search_alignment_attachment_from(
         }
     }
     Ok((None, metrics))
+}
+
+#[inline(never)]
+fn controlled_branch<C: AlignmentSearchControl>(
+    problem: &AlignmentAttachment,
+    budget: u32,
+    depth: usize,
+    frame: &SearchFrame,
+    control: &mut C,
+) -> Result<u64, AlignmentError> {
+    let mut candidates = frame.branch_bits;
+    let mut best_bit = candidates & candidates.wrapping_neg();
+    let mut best_score = i64::MIN;
+    let branch_count = candidates.count_ones();
+    let unresolved_count = frame
+        .unresolved_cuts
+        .iter()
+        .map(|word| word.count_ones())
+        .sum();
+    while candidates != 0 {
+        let bit = candidates & candidates.wrapping_neg();
+        candidates ^= bit;
+        let selected = frame.selected | bit;
+        let (_, packing, child_unresolved) = problem.violation_summary(
+            selected,
+            frame.unresolved_cuts,
+            budget - selected.count_ones(),
+        );
+        let score = control.score_branch(AlignmentBranchFeatures {
+            depth: depth as u32,
+            selected_count: frame.selected.count_ones(),
+            candidate: bit.trailing_zeros(),
+            branch_count,
+            unresolved_count,
+            child_unresolved_count: child_unresolved.iter().map(|word| word.count_ones()).sum(),
+            child_packing: packing,
+        })?;
+        if score > best_score {
+            best_score = score;
+            best_bit = bit;
+        }
+    }
+    Ok(best_bit)
 }
 
 #[cfg(test)]
@@ -1252,6 +1402,40 @@ mod tests {
         let exact = exact.unwrap();
         assert_eq!(exact.count_ones(), 9);
         assert!(problem.separates(exact).unwrap());
+    }
+
+    #[test]
+    fn controlled_ordering_preserves_the_exact_answer() {
+        struct PackingOrder {
+            pulses: u64,
+        }
+        impl AlignmentSearchControl for PackingOrder {
+            fn safe_point(&mut self, _point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
+                self.pulses += 1;
+                Ok(())
+            }
+
+            fn ordering_active(&self) -> bool {
+                true
+            }
+
+            fn score_branch(
+                &mut self,
+                features: AlignmentBranchFeatures,
+            ) -> Result<i64, AlignmentError> {
+                Ok(i64::from(features.child_packing))
+            }
+        }
+
+        let problem = compile_alignment_attachment(5).unwrap();
+        let mut workspace = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
+        let mut control = PackingOrder { pulses: 0 };
+        let (answer, _) =
+            search_alignment_attachment_controlled(&problem, 9, 1, &mut workspace, 1, &mut control)
+                .unwrap();
+        assert!(control.pulses > 0);
+        assert_eq!(answer.unwrap().count_ones(), 9);
+        assert!(problem.separates(answer.unwrap()).unwrap());
     }
 
     #[test]
