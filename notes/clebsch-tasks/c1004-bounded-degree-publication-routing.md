@@ -2,7 +2,7 @@
 
 **Lane**: `clebsch`
 
-**Status:** Queued after C1001; publication decision only.
+**Status:** Queued; C1001 theorem packet frozen; publication decision only.
 
 ## Goal
 
