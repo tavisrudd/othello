@@ -63,8 +63,8 @@ in RAM or written to `/tmp`.
 - `examples/alignment_attachment_cnf.rs` streams the complete reduced CNF.
 - `python/c880_alignment_gurobi.py` is a thin backend: every incumbent is
   replayed by exact cut bipartiteness, violated contexts are closed under the
-  full `S_8` point action, and C880's already-proved `g(8) >= 15` bound is
-  imported explicitly.
+  `S_3 x S_5` stabilizer of the fixed first triple, and C880's already-proved
+  `g(8) >= 15` bound is imported explicitly.
 
 The quotient matches the original four-triple alignment definition for all
 1,024 query families at five points.  It independently re-proves `g(5)=9`,
@@ -80,8 +80,11 @@ resulting violated context clause.  This is both more general and exact.
 
 The generic backend should not be asked to rediscover known mathematics.
 Importing the proved lower bound reduces the live optimization to cardinality
-15 or 16, while orbit-closing every lazy constraint exposes symmetry that a
-backend cannot see in an initially empty lazy model.
+15 or 16.  Orbit-closing each lazy constraint exposes symmetry that a backend
+cannot see in an initially empty lazy model.  Closing under all 40,320 point
+permutations was measured and rejected: after fixing the first triple, only its
+720-element stabilizer is a model symmetry, and the larger callback cost
+dominated the node reduction.
 
 ## Boundary and next gate
 

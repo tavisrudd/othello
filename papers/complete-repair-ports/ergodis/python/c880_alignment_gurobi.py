@@ -18,9 +18,10 @@ def side(cut: int, point: int) -> int:
 
 TRIPLES = list(itertools.combinations(range(8), 3))
 TRIPLE_INDEX = {triple: index for index, triple in enumerate(TRIPLES)}
-PERMUTATION_MAPS = [
+ANCHOR_STABILIZER_MAPS = [
     [TRIPLE_INDEX[tuple(sorted(permutation[point] for point in triple))] for triple in TRIPLES]
     for permutation in itertools.permutations(range(8))
+    if {permutation[0], permutation[1], permutation[2]} == {0, 1, 2}
 ]
 KNOWN_G8 = {
     (0, 1, 2), (0, 1, 4), (0, 1, 5), (0, 2, 4), (0, 2, 5), (0, 4, 5),
@@ -123,7 +124,7 @@ def main() -> None:
         if clause is None:
             return
         support = [index for index in range(len(TRIPLES)) if clause >> index & 1]
-        for mapping in PERMUTATION_MAPS:
+        for mapping in ANCHOR_STABILIZER_MAPS:
             image = 0
             for index in support:
                 image |= 1 << mapping[index]
