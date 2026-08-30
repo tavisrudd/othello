@@ -323,6 +323,8 @@ changes any bound on equiangular lines in `R^18`.
 - `4e146c881` — q=11 C80 direct-exchange gate.
 - `7c90685ba` — create-only streamed Hall solve/replay CLI;
 - `2d2595cca` — projective deletion-secant charge edges on q11/q23 controls.
+- `1d49e683e` — game-semantic `K_Omega` admission and q11/q13 counting
+  controls.
 
 Validation used an isolated persistent target at
 `/home/tavis/.cache/ergodis/target-c985-validation`: formatting, strict
