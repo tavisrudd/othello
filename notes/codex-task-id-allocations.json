@@ -3896,8 +3896,17 @@
       "last": 1010,
       "purpose": "ergodis paper review: q13 parity-graph universality and component-count uncovered-locus envelopes",
       "sequence": 433
+    },
+    {
+      "count": 1,
+      "first": 1011,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1011,
+      "purpose": "Paper V unmarked metric-shadow no-go and H3 marking ambiguity",
+      "sequence": 434
     }
   ],
-  "next_id": 1011,
+  "next_id": 1012,
   "schema": "codex-task-id-allocations-v1"
 }
