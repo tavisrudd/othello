@@ -10,6 +10,7 @@ use crate::Matrix;
 use thiserror::Error;
 
 const MAX_PACKED_DIMENSION: usize = 63;
+const MAX_COMMUTANT_EQUATION_BYTES: usize = 128 * 1024 * 1024;
 
 #[derive(Clone, Copy, Debug, Error, PartialEq, Eq)]
 pub enum BinaryCommutantError {
@@ -31,6 +32,8 @@ pub enum BinaryCommutantError {
     FieldDegree,
     #[error("commuting operator does not generate the claimed extension field")]
     NotExtensionField,
+    #[error("binary commutant equation workspace exceeds the 128 MiB safety limit")]
+    ResourceLimit,
     #[error("binary commutant certificate failed independent replay")]
     Certificate,
 }
@@ -435,8 +438,35 @@ impl PackedBinarySubspace {
     }
 }
 
+pub fn binary_commutant_workspace_upper_bound(
+    action: &PackedBinaryAction,
+) -> Result<usize, BinaryCommutantError> {
+    let variable_count = action
+        .dimension()
+        .checked_mul(action.dimension())
+        .ok_or(BinaryCommutantError::ResourceLimit)?;
+    let equation_count = action
+        .generators
+        .len()
+        .checked_mul(variable_count)
+        .ok_or(BinaryCommutantError::ResourceLimit)?;
+    let bytes_per_equation = variable_count
+        .div_ceil(64)
+        .checked_mul(std::mem::size_of::<u64>())
+        .and_then(|bytes| bytes.checked_add(std::mem::size_of::<Vec<u64>>()))
+        .ok_or(BinaryCommutantError::ResourceLimit)?;
+    equation_count
+        .checked_mul(bytes_per_equation)
+        .ok_or(BinaryCommutantError::ResourceLimit)
+}
+
 /// Compile the full solution space of `XG = GX` for every supplied generator.
-pub fn compile_binary_commutant(action: &PackedBinaryAction) -> BinaryCommutant {
+pub fn compile_binary_commutant(
+    action: &PackedBinaryAction,
+) -> Result<BinaryCommutant, BinaryCommutantError> {
+    if binary_commutant_workspace_upper_bound(action)? > MAX_COMMUTANT_EQUATION_BYTES {
+        return Err(BinaryCommutantError::ResourceLimit);
+    }
     let dimension = action.dimension();
     let variable_count = dimension * dimension;
     let mut equations = commutant_equations(action);
@@ -463,10 +493,10 @@ pub fn compile_binary_commutant(action: &PackedBinaryAction) -> BinaryCommutant 
                 .expect("commutant nullspace vectors have the compiled shape"),
         );
     }
-    BinaryCommutant {
+    Ok(BinaryCommutant {
         dimension: dimension as u8,
         basis: basis.into_boxed_slice(),
-    }
+    })
 }
 
 /// Certify that a commuting operator generates a copy of `GF(2^degree)`.
@@ -702,6 +732,34 @@ pub fn compile_binary_quotient_action(
     PackedBinaryAction::new(quotient_dimension, generators)
 }
 
+/// Compile the coordinate action on CSS logical row classes.
+///
+/// Physical checks form `K`; adjoining the supplied logical rows forms `D`.
+/// The observable module is the quotient `D/K`, so logical representatives
+/// are allowed to mix with physical checks under a symmetry.
+pub fn compile_binary_css_logical_action(
+    physical_checks: &Matrix,
+    logical_rows: &Matrix,
+    coordinate_generators: &[Box<[u16]>],
+) -> Result<PackedBinaryAction, BinaryCommutantError> {
+    if physical_checks.cols() == 0 || physical_checks.cols() != logical_rows.cols() {
+        return Err(BinaryCommutantError::QuotientShape);
+    }
+    if physical_checks.as_slice().iter().any(|&entry| entry > 1)
+        || logical_rows.as_slice().iter().any(|&entry| entry > 1)
+    {
+        return Err(BinaryCommutantError::SubspaceShape);
+    }
+    let rows = physical_checks.rows() + logical_rows.rows();
+    let columns = physical_checks.cols();
+    let mut joined = Vec::with_capacity(rows.saturating_mul(columns));
+    joined.extend_from_slice(physical_checks.as_slice());
+    joined.extend_from_slice(logical_rows.as_slice());
+    let superspace =
+        Matrix::new::<2>(rows, columns, joined).map_err(|_| BinaryCommutantError::SubspaceShape)?;
+    compile_binary_quotient_action(physical_checks, &superspace, coordinate_generators)
+}
+
 /// Replay an induced action from the original row space and permutations.
 pub fn verify_binary_subspace_action(
     subspace: &Matrix,
@@ -728,11 +786,28 @@ pub fn verify_binary_quotient_action(
     Ok(())
 }
 
+pub fn verify_binary_css_logical_action(
+    physical_checks: &Matrix,
+    logical_rows: &Matrix,
+    coordinate_generators: &[Box<[u16]>],
+    action: &PackedBinaryAction,
+) -> Result<(), BinaryCommutantError> {
+    let replay =
+        compile_binary_css_logical_action(physical_checks, logical_rows, coordinate_generators)?;
+    if replay.dimension != action.dimension || replay.generators != action.generators {
+        return Err(BinaryCommutantError::Certificate);
+    }
+    Ok(())
+}
+
 /// Independently replay the defining equations and dimension count.
 pub fn verify_binary_commutant(
     action: &PackedBinaryAction,
     commutant: &BinaryCommutant,
 ) -> Result<(), BinaryCommutantError> {
+    if binary_commutant_workspace_upper_bound(action)? > MAX_COMMUTANT_EQUATION_BYTES {
+        return Err(BinaryCommutantError::ResourceLimit);
+    }
     if action.dimension() != commutant.dimension() {
         return Err(BinaryCommutantError::Certificate);
     }
@@ -1098,7 +1173,7 @@ mod tests {
     fn every_two_dimensional_single_generator_commutant_replays() {
         for packed in 0_u64..16 {
             let action = PackedBinaryAction::new(2, vec![map(&[packed & 3, packed >> 2])]).unwrap();
-            let commutant = compile_binary_commutant(&action);
+            let commutant = compile_binary_commutant(&action).unwrap();
             verify_binary_commutant(&action, &commutant).unwrap();
         }
     }
@@ -1107,7 +1182,7 @@ mod tests {
     fn central_idempotent_splits_nonisomorphic_blocks() {
         let generator = map(&[0b010, 0b011, 0b100]);
         let action = PackedBinaryAction::new(3, vec![generator.clone()]).unwrap();
-        let commutant = compile_binary_commutant(&action);
+        let commutant = compile_binary_commutant(&action).unwrap();
         verify_binary_commutant(&action, &commutant).unwrap();
         assert_eq!(commutant.algebra_dimension(), 3);
 
@@ -1144,7 +1219,7 @@ mod tests {
     fn trivial_action_is_one_isotypic_block() {
         let action =
             PackedBinaryAction::new(2, vec![PackedBinaryLinearMap::identity(2).unwrap()]).unwrap();
-        let commutant = compile_binary_commutant(&action);
+        let commutant = compile_binary_commutant(&action).unwrap();
         assert_eq!(commutant.algebra_dimension(), 4);
         verify_binary_commutant(&action, &commutant).unwrap();
         assert!(commutant.find_central_split(16).unwrap().is_none());
@@ -1165,7 +1240,7 @@ mod tests {
                 .unwrap(),
             PackedBinaryLinearMap::identity(2).unwrap()
         );
-        let commutant = compile_binary_commutant(&action);
+        let commutant = compile_binary_commutant(&action).unwrap();
         verify_binary_commutant(&action, &commutant).unwrap();
         assert_eq!(commutant.algebra_dimension(), 2);
         assert!(commutant.find_central_split(4).unwrap().is_none());
@@ -1177,7 +1252,7 @@ mod tests {
     #[test]
     fn replay_rejects_a_dependent_commutant_basis() {
         let action = PackedBinaryAction::new(2, vec![map(&[0b10, 0b11])]).unwrap();
-        let mut commutant = compile_binary_commutant(&action);
+        let mut commutant = compile_binary_commutant(&action).unwrap();
         assert!(commutant.basis.len() >= 2);
         commutant.basis[0] = commutant.basis[1].clone();
         assert_eq!(
@@ -1246,6 +1321,30 @@ mod tests {
         assert_eq!(
             compile_binary_quotient_action(&left, &full, &swap).unwrap_err(),
             BinaryCommutantError::NotInvariant
+        );
+    }
+
+    #[test]
+    fn css_logical_action_is_computed_modulo_checks() {
+        let physical = Matrix::new::<2>(1, 3, [1, 1, 1]).unwrap();
+        let logical = Matrix::new::<2>(2, 3, [1, 0, 0, 0, 1, 0]).unwrap();
+        let permutations = vec![vec![1_u16, 2, 0].into_boxed_slice()];
+        let action = compile_binary_css_logical_action(&physical, &logical, &permutations).unwrap();
+        verify_binary_css_logical_action(&physical, &logical, &permutations, &action).unwrap();
+        assert_eq!(action.dimension(), 2);
+        let generator = &action.generators()[0];
+        let field = certify_binary_extension_field(&action, generator.clone(), 2).unwrap();
+        assert_eq!(field.scalar_dimension(), 1);
+    }
+
+    #[test]
+    fn commutant_workspace_is_rejected_before_large_allocation() {
+        let identity = PackedBinaryLinearMap::identity(63).unwrap();
+        let action = PackedBinaryAction::new(63, vec![identity; 100]).unwrap();
+        assert!(binary_commutant_workspace_upper_bound(&action).unwrap() > 128 * 1024 * 1024);
+        assert_eq!(
+            compile_binary_commutant(&action).unwrap_err(),
+            BinaryCommutantError::ResourceLimit
         );
     }
 }

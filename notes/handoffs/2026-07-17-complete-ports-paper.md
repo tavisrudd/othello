@@ -435,8 +435,9 @@ Sequel research:
   [verified commutant foundation](../2026-08-29-c985-ergodis-commutant-foundation.md):
   induced binary subspace and nested-quotient actions, full commuting algebras,
   central-idempotent block coordinates, and exact extension-field certificates.  The packed
-  rank-63 correctness gate passes; segmented large-rank support, operator
-  discovery, CSS integration, and all performance measurements remain open.
+  rank-63 correctness gate and CSS logical-quotient adapter pass; segmented
+  large-rank syndrome support, operator discovery, hot-backend integration,
+  and clean performance measurements remain open.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

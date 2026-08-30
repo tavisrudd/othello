@@ -44,6 +44,8 @@ Every imported reduction must satisfy all of the following.
 5. Hot loops allocate nothing, use iterative rather than depth-proportional
    recursive control, pre-size persistent storage, and retain compressed state
    when the density warrants it.
+   Every heavy process runs under `choom -n 1000`; every potentially dense
+   compiler preflights a conservative byte bound and refuses unsafe growth.
 6. Performance claims use cold and warm measurements, compile/search splits,
    peak RSS, multiround statistics, and held-out families.  A win on a named
    construction is evidence for a mechanism, not permission for a name-based

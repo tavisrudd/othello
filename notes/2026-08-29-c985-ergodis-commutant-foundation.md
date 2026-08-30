@@ -36,6 +36,8 @@ needed by the portfolio's hidden-`F_8` example.
 - `PackedBinaryLinearMap` and `PackedBinaryAction`;
 - `compile_binary_subspace_action` and exact replay;
 - `compile_binary_quotient_action` and exact replay;
+- `compile_binary_css_logical_action`, which constructs and verifies the
+  observable quotient from physical checks and logical representatives;
 - `compile_binary_commutant` and a dimension-and-equation verifier;
 - bounded `BinaryCommutant::find_central_split`;
 - allocation-free coordinate conversion through `PackedBinarySubspace`;
@@ -59,6 +61,11 @@ round trips.
   allocates nothing per candidate field element.
 - Compilation owns its equation matrices and bases; no hot search backend has
   been changed yet.
+- Dense commutant compilation computes a conservative equation-workspace upper
+  bound before allocation and refuses requests above 128 MiB.  This includes
+  both packed row payloads and per-row vector headers.
+- Builds, tests, profiles, and future benchmarks run under `choom -n 1000` so
+  task-owned work is preferred for OOM termination over unrelated processes.
 - No instance names, expected distances, construction-family tables, or
   benchmark-derived answers enter the API or implementation.
 
@@ -86,7 +93,10 @@ This is the algebraic foundation, not yet the Work Package A acceptance result.
 
 1. The rank-63 packed representation is sufficient for many logical and
    portfolio observation modules, but not for the full syndrome spaces of the
-   larger qLDPC targets.
+   larger qLDPC targets.  A naive segmented dense commutant is forbidden: its
+   equation storage grows as generators times the fourth power of state rank.
+   Large-rank support must use sparse or block equations, streamed elimination,
+   and an explicit memory budget.
 2. Extension-field certification currently consumes a proposed operator; a
    structural discovery pass over the commutant is still required.
 3. A central idempotent gives exact invariant blocks but is not, without
@@ -103,9 +113,8 @@ This is the algebraic foundation, not yet the Work Package A acceptance result.
    exact field verifier as the admission gate.
 2. Add a segmented binary-map representation for ranks above 63 without
    changing the packed fast path.
-3. Build a CSS adapter that independently induces and verifies the actions on
-   physical-syndrome space and on the logical quotient; the generic `D/K`
-   action compiler is now available for the latter.
+3. Extend the CSS adapter from the now-implemented logical quotient to the
+   physical-syndrome space, using segmented state when its rank exceeds 63.
 4. Compile completion keys in block coordinates and prove exact agreement with
    the unreduced backend on small exhaustive codes.
 5. Only after an all-clear, measure gross, BB784, R2Elite, LP1768, and held-out
