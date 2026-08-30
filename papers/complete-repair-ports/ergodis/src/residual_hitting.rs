@@ -351,4 +351,35 @@ mod tests {
             }
         }
     }
+
+    #[test]
+    fn streamed_refutations_replay_on_every_three_element_hypergraph() {
+        let mut workspace = ResidualHittingWorkspace::new(3);
+        for family in 0_u64..1_u64 << 8 {
+            let clauses = (0_u64..8)
+                .filter(|clause| family >> clause & 1 != 0)
+                .collect::<Vec<_>>();
+            for budget in 0..=3 {
+                let mut proof = Vec::new();
+                let records = workspace
+                    .write_refutation(&clauses, 0b111, budget, 8, &mut proof)
+                    .unwrap();
+                if let Some(records) = records {
+                    assert_eq!(
+                        verify_residual_hitting_refutation(
+                            &clauses,
+                            0b111,
+                            budget,
+                            &mut &proof[..],
+                        )
+                        .unwrap(),
+                        records,
+                        "family={family:#x} budget={budget}"
+                    );
+                } else {
+                    assert!(proof.is_empty(), "family={family:#x} budget={budget}");
+                }
+            }
+        }
+    }
 }
