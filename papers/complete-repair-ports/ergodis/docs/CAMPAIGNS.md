@@ -190,26 +190,39 @@ that must not be treated as game debt.
 The socket is never a raw-event stream. Disconnect leaves the last validated
 epoch active. Seconds-scale solves should not launch this layer at all.
 
-For live adapters, the inner search loop never touches the socket. A solver
-polls `pulse` only at a domain-selected chunk boundary. If the epoch changed,
-the pulse returns bounded plan identities; `plan-get` returns one canonical
-lowered plan only while that epoch is still current. The solver compiles into a
-preallocated inactive arena and swaps arenas at its next safe point. An epoch
-change between pulse and fetch fails closed and causes a retry. This design
-keeps transport, JSON, and allocation outside hot loops and makes plan removal
-as atomic as plan activation.
+For live adapters, the inner search loop never touches the socket. Each solver
+registers a private `RUN/watch-*.sock` Unix datagram endpoint. The campaign
+pushes one eight-byte epoch only after a semantic activation or deactivation;
+`status`, `noop`, notes, and unchanged queries do not notify search. An
+auxiliary watcher blocks in `recv` with no idle timer or wakeup and raises a
+cacheline-isolated atomic flag. The search tests that flag once per 4096 states
+at a precomputed control deadline shared with its existing heartbeat deadline.
+Thus the steady-state controlled loop retains one deadline comparison rather
+than adding a mask or second branch.
 
-Pulse intervals remain fixed and caller-selected. Experimental 8x and 4x
-unchanged-epoch backoff both missed a theorem submitted during the final work
-chunk of the short budget-12 control. Backoff is therefore rejected in v0;
-future overhead reduction should use push notification or a nonblocking wakeup
-rather than silently weakening steering responsiveness.
+After a datagram, the watcher—not the search thread—uses `pulse` to obtain
+bounded plan identities and `plan-get` to fetch canonical lowered plans against
+that exact epoch. It validates and compiles them into a recycled, preallocated
+arena, then publishes the arena and raises the flag. The search safe point only
+locks the rarely touched exchange, swaps two arenas, and returns the old arena
+for watcher reuse. It performs no socket or file I/O, serialization,
+compilation, allocation, or deallocation. An epoch change between pulse and
+fetch fails closed. Repeated datagrams are drained while the watcher always
+prepares the latest epoch, so plan removal remains as atomic as activation.
 
 The experimental `alignment-controlled` binary is the first consumer. It
-publishes a bounded C880 heartbeat at each pulse and permits only score-valued
-ordering plans. Every branch remains in the exact DFS. The ordinary
+publishes a bounded C880 heartbeat into relaxed atomics at the caller-selected
+state interval and permits only score-valued ordering plans. Every branch
+remains in the exact DFS. The ordinary
 `search_alignment_attachment` entry point instantiates the internal loop with
 control statically disabled; `--baseline` exercises that unchanged path.
+
+Long diagnostic runs may add `--progress-file FILE --pulse-interval 4096`.
+Only then does the auxiliary watcher take a one-second receive timeout and
+stream changed heartbeat snapshots as create-only, mode-0600 JSONL through a
+line writer. The search thread performs no file I/O or allocation. With no
+progress file the watcher returns to pure blocking `recv`, and short solves
+should still omit the entire control layer.
 
 ```text
 alignment-controlled --run-dir RUN --points 8 --budget 13 \

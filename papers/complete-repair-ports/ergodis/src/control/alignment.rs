@@ -1,8 +1,17 @@
-use super::{Manifest, PlanArena, PlanOutput, PlanRole};
+use super::{send_request, Manifest, PlanArena, PlanOutput, PlanRole};
 use crate::alignment::{
     AlignmentBranchFeatures, AlignmentError, AlignmentSearchControl, AlignmentSearchPoint,
 };
 use serde_json::json;
+use std::fs::{self, OpenOptions};
+use std::io::{self, LineWriter, Write};
+use std::os::unix::fs::{OpenOptionsExt, PermissionsExt};
+use std::os::unix::net::UnixDatagram;
+use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
+use std::sync::{Arc, Mutex};
+use std::thread::{self, JoinHandle};
+use std::time::{Duration, Instant};
 
 pub const ALIGNMENT_PLAN_FIELDS: [&str; 7] = [
     "depth",
@@ -14,35 +23,349 @@ pub const ALIGNMENT_PLAN_FIELDS: [&str; 7] = [
     "child_packing",
 ];
 
-/// C880 adapter for live ordering-plan injection at coarse search safe points.
-pub struct AlignmentCampaignControl {
+static WATCH_IDS: AtomicU64 = AtomicU64::new(0);
+
+#[repr(align(64))]
+struct PaddedFlag(AtomicBool);
+
+#[repr(align(64))]
+struct Heartbeat {
+    sequence: AtomicU64,
+    states: AtomicU64,
+    duplicates: AtomicU64,
+    infeasible: AtomicU64,
+    depth: AtomicU64,
+    selected_count: AtomicU64,
+    unresolved_count: AtomicU64,
+}
+
+impl Heartbeat {
+    fn new() -> Self {
+        Self {
+            sequence: AtomicU64::new(0),
+            states: AtomicU64::new(0),
+            duplicates: AtomicU64::new(0),
+            infeasible: AtomicU64::new(0),
+            depth: AtomicU64::new(0),
+            selected_count: AtomicU64::new(0),
+            unresolved_count: AtomicU64::new(0),
+        }
+    }
+
+    fn publish(&self, point: AlignmentSearchPoint) {
+        self.sequence.fetch_add(1, Ordering::AcqRel);
+        self.states.store(point.metrics.states, Ordering::Relaxed);
+        self.duplicates
+            .store(point.metrics.duplicate_states, Ordering::Relaxed);
+        self.infeasible
+            .store(point.metrics.infeasible_states, Ordering::Relaxed);
+        self.depth.store(u64::from(point.depth), Ordering::Relaxed);
+        self.selected_count
+            .store(u64::from(point.selected_count), Ordering::Relaxed);
+        self.unresolved_count
+            .store(u64::from(point.unresolved_count), Ordering::Relaxed);
+        self.sequence.fetch_add(1, Ordering::Release);
+    }
+
+    fn snapshot(&self) -> serde_json::Value {
+        loop {
+            let before = self.sequence.load(Ordering::Acquire);
+            if before & 1 != 0 {
+                std::hint::spin_loop();
+                continue;
+            }
+            let status = json!({
+                "states": self.states.load(Ordering::Relaxed),
+                "duplicates": self.duplicates.load(Ordering::Relaxed),
+                "infeasible": self.infeasible.load(Ordering::Relaxed),
+                "depth": self.depth.load(Ordering::Relaxed),
+                "selected_count": self.selected_count.load(Ordering::Relaxed),
+                "unresolved_count": self.unresolved_count.load(Ordering::Relaxed),
+            });
+            if self.sequence.load(Ordering::Acquire) == before {
+                return status;
+            }
+        }
+    }
+}
+
+struct SteeringWatcher {
+    ready: Arc<PaddedFlag>,
+    failed: Arc<PaddedFlag>,
+    stop: Arc<PaddedFlag>,
+    heartbeat: Arc<Heartbeat>,
+    notifications: Arc<AtomicU64>,
+    applied_epoch: Arc<AtomicU64>,
+    exchange: Arc<Mutex<PlanExchange>>,
+    endpoint: PathBuf,
     manifest: Manifest,
-    fields: Box<[String]>,
+    response_limit: usize,
+    handle: Option<JoinHandle<()>>,
+}
+
+struct PlanExchange {
+    prepared: Option<PlanArena>,
+    recycled: Option<PlanArena>,
+}
+
+impl SteeringWatcher {
+    fn spawn(
+        manifest: Manifest,
+        response_limit: usize,
+        progress_path: Option<PathBuf>,
+        fields: Arc<[String]>,
+    ) -> Result<Self, AlignmentError> {
+        let ready = Arc::new(PaddedFlag(AtomicBool::new(false)));
+        let failed = Arc::new(PaddedFlag(AtomicBool::new(false)));
+        let stop = Arc::new(PaddedFlag(AtomicBool::new(false)));
+        let heartbeat = Arc::new(Heartbeat::new());
+        let notifications = Arc::new(AtomicU64::new(0));
+        let applied_epoch = Arc::new(AtomicU64::new(0));
+        let exchange = Arc::new(Mutex::new(PlanExchange {
+            prepared: None,
+            recycled: Some(PlanArena::new(response_limit)),
+        }));
+        let endpoint = manifest.run_dir.join(format!(
+            "watch-{}-{}.sock",
+            std::process::id(),
+            WATCH_IDS.fetch_add(1, Ordering::Relaxed)
+        ));
+        let socket = UnixDatagram::bind(&endpoint).map_err(|_| AlignmentError::Control)?;
+        if fs::set_permissions(&endpoint, fs::Permissions::from_mode(0o600)).is_err() {
+            let _ = fs::remove_file(&endpoint);
+            return Err(AlignmentError::Control);
+        }
+        let registration = match send_request(
+            &manifest,
+            "watch-register",
+            json!({"path": endpoint}),
+            response_limit,
+        ) {
+            Ok(registration) => registration,
+            Err(_) => {
+                let _ = fs::remove_file(&endpoint);
+                return Err(AlignmentError::Control);
+            }
+        };
+        if !registration.ok {
+            let _ = fs::remove_file(&endpoint);
+            return Err(AlignmentError::Control);
+        }
+        let Some(registered_epoch) = registration.result["epoch"].as_u64() else {
+            unregister(&manifest, &endpoint, response_limit);
+            return Err(AlignmentError::Control);
+        };
+        let mut progress = if let Some(path) = progress_path {
+            if socket
+                .set_read_timeout(Some(Duration::from_secs(1)))
+                .is_err()
+            {
+                unregister(&manifest, &endpoint, response_limit);
+                return Err(AlignmentError::Control);
+            }
+            let file = match OpenOptions::new()
+                .write(true)
+                .create_new(true)
+                .mode(0o600)
+                .open(path)
+            {
+                Ok(file) => file,
+                Err(_) => {
+                    unregister(&manifest, &endpoint, response_limit);
+                    return Err(AlignmentError::Control);
+                }
+            };
+            Some(LineWriter::new(file))
+        } else {
+            None
+        };
+        let thread_ready = Arc::clone(&ready);
+        let thread_failed = Arc::clone(&failed);
+        let thread_stop = Arc::clone(&stop);
+        let thread_notifications = Arc::clone(&notifications);
+        let thread_heartbeat = Arc::clone(&heartbeat);
+        let thread_applied_epoch = Arc::clone(&applied_epoch);
+        let thread_exchange = Arc::clone(&exchange);
+        let thread_manifest = manifest.clone();
+        let handle = thread::Builder::new()
+            .name("ergodis-steering".into())
+            .spawn(move || {
+                let mut epoch = [0_u8; 8];
+                let mut notified_epoch = registered_epoch;
+                let mut last_states = u64::MAX;
+                let start = Instant::now();
+                let mut initial_refresh = registered_epoch != 0;
+                loop {
+                    let received = if initial_refresh {
+                        initial_refresh = false;
+                        Ok(8)
+                    } else {
+                        socket.recv(&mut epoch)
+                    };
+                    if thread_stop.0.load(Ordering::Relaxed) {
+                        break;
+                    }
+                    match received {
+                        Ok(8) => {
+                            if registered_epoch == 0 || epoch != [0; 8] {
+                                notified_epoch = u64::from_le_bytes(epoch);
+                                thread_notifications.fetch_add(1, Ordering::Relaxed);
+                            }
+                            thread_ready.0.store(false, Ordering::Release);
+                            if prepare_latest(
+                                &thread_manifest,
+                                &fields,
+                                response_limit,
+                                &thread_heartbeat,
+                                &thread_exchange,
+                            )
+                            .is_err()
+                            {
+                                thread_failed.0.store(true, Ordering::Release);
+                                break;
+                            }
+                            thread_ready.0.store(true, Ordering::Release);
+                        }
+                        Err(error)
+                            if progress.is_some()
+                                && matches!(
+                                    error.kind(),
+                                    io::ErrorKind::WouldBlock | io::ErrorKind::TimedOut
+                                ) =>
+                        {
+                            let status = thread_heartbeat.snapshot();
+                            let states = status["states"].as_u64().unwrap_or(0);
+                            if states != last_states {
+                                last_states = states;
+                                let record = json!({
+                                    "schema": "ergodis-progress-v0",
+                                    "elapsed_ms": start.elapsed().as_millis(),
+                                    "applied_epoch": thread_applied_epoch.load(Ordering::Acquire),
+                                    "notified_epoch": notified_epoch,
+                                    "solver": status,
+                                });
+                                let Some(writer) = progress.as_mut() else {
+                                    unreachable!()
+                                };
+                                if serde_json::to_writer(&mut *writer, &record).is_err()
+                                    || writer.write_all(b"\n").is_err()
+                                {
+                                    thread_failed.0.store(true, Ordering::Release);
+                                    break;
+                                }
+                            }
+                        }
+                        _ => {
+                            thread_failed.0.store(true, Ordering::Release);
+                            break;
+                        }
+                    }
+                }
+            })
+            .map_err(|_| {
+                unregister(&manifest, &endpoint, response_limit);
+                AlignmentError::Control
+            })?;
+        Ok(Self {
+            ready,
+            failed,
+            stop,
+            heartbeat,
+            notifications,
+            applied_epoch,
+            exchange,
+            endpoint,
+            manifest,
+            response_limit,
+            handle: Some(handle),
+        })
+    }
+}
+
+impl Drop for SteeringWatcher {
+    fn drop(&mut self) {
+        self.stop.0.store(true, Ordering::Relaxed);
+        if let Ok(socket) = UnixDatagram::unbound() {
+            let _ = socket.send_to(&[0], &self.endpoint);
+        }
+        if let Some(handle) = self.handle.take() {
+            let _ = handle.join();
+        }
+        unregister(&self.manifest, &self.endpoint, self.response_limit);
+    }
+}
+
+fn unregister(manifest: &Manifest, endpoint: &Path, response_limit: usize) {
+    let _ = send_request(
+        manifest,
+        "watch-unregister",
+        json!({"path": endpoint}),
+        response_limit,
+    );
+    let _ = fs::remove_file(endpoint);
+}
+
+fn prepare_latest(
+    manifest: &Manifest,
+    fields: &[String],
+    response_limit: usize,
+    heartbeat: &Heartbeat,
+    exchange: &Mutex<PlanExchange>,
+) -> Result<(), AlignmentError> {
+    let mut arena = {
+        let mut exchange = exchange.lock().map_err(|_| AlignmentError::Control)?;
+        exchange
+            .prepared
+            .take()
+            .or_else(|| exchange.recycled.take())
+            .unwrap_or_else(|| PlanArena::new(response_limit))
+    };
+    arena
+        .refresh_with_status(manifest, fields, Some(heartbeat.snapshot()))
+        .map_err(|_| AlignmentError::Control)?;
+    let mut exchange = exchange.lock().map_err(|_| AlignmentError::Control)?;
+    if exchange.prepared.is_some() {
+        return Err(AlignmentError::Control);
+    }
+    exchange.prepared = Some(arena);
+    Ok(())
+}
+
+/// C880 adapter for live ordering-plan injection. A watcher blocks on a Unix
+/// datagram; a search thread executes one relaxed Boolean load per stride.
+pub struct AlignmentCampaignControl {
     arena: PlanArena,
-    pulses: u64,
+    watcher: SteeringWatcher,
     last_point: Option<AlignmentSearchPoint>,
 }
 
 impl AlignmentCampaignControl {
-    pub fn new(manifest: Manifest, response_limit: usize) -> Self {
-        Self {
-            manifest,
-            fields: ALIGNMENT_PLAN_FIELDS
+    pub fn new(
+        manifest: Manifest,
+        response_limit: usize,
+        progress_path: Option<PathBuf>,
+    ) -> Result<Self, AlignmentError> {
+        let fields: Arc<[String]> = Arc::from(
+            ALIGNMENT_PLAN_FIELDS
                 .iter()
                 .map(|field| (*field).into())
-                .collect(),
+                .collect::<Vec<String>>(),
+        );
+        let watcher =
+            SteeringWatcher::spawn(manifest.clone(), response_limit, progress_path, fields)?;
+        Ok(Self {
             arena: PlanArena::new(response_limit),
-            pulses: 0,
+            watcher,
             last_point: None,
-        }
+        })
     }
 
     pub fn epoch(&self) -> u64 {
         self.arena.epoch()
     }
 
-    pub fn pulses(&self) -> u64 {
-        self.pulses
+    pub fn notifications(&self) -> u64 {
+        self.watcher.notifications.load(Ordering::Relaxed)
     }
 
     pub fn last_point(&self) -> Option<AlignmentSearchPoint> {
@@ -58,22 +381,41 @@ impl AlignmentCampaignControl {
 }
 
 impl AlignmentSearchControl for AlignmentCampaignControl {
+    #[inline(always)]
+    fn steering_pending(&self) -> bool {
+        self.watcher.failed.0.load(Ordering::Relaxed)
+            || self.watcher.ready.0.load(Ordering::Relaxed)
+    }
+
     fn safe_point(&mut self, point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
-        self.arena
-            .refresh_with_status(
-                &self.manifest,
-                &self.fields,
-                Some(json!({
-                    "states": point.metrics.states,
-                    "duplicates": point.metrics.duplicate_states,
-                    "infeasible": point.metrics.infeasible_states,
-                    "depth": point.depth,
-                    "selected_count": point.selected_count,
-                    "unresolved_count": point.unresolved_count,
-                })),
-            )
-            .map_err(|_| AlignmentError::Control)?;
-        self.pulses = self.pulses.saturating_add(1);
+        if self.watcher.failed.0.load(Ordering::Acquire) {
+            return Err(AlignmentError::Control);
+        }
+        if self.watcher.ready.0.swap(false, Ordering::AcqRel) {
+            let mut exchange = self
+                .watcher
+                .exchange
+                .lock()
+                .map_err(|_| AlignmentError::Control)?;
+            if let Some(mut prepared) = exchange.prepared.take() {
+                if exchange.recycled.is_some() {
+                    exchange.prepared = Some(prepared);
+                    return Err(AlignmentError::Control);
+                }
+                std::mem::swap(&mut self.arena, &mut prepared);
+                exchange.recycled = Some(prepared);
+            }
+            self.watcher
+                .applied_epoch
+                .store(self.arena.epoch(), Ordering::Release);
+        }
+        self.last_point = Some(point);
+        Ok(())
+    }
+
+    #[inline]
+    fn heartbeat(&mut self, point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
+        self.watcher.heartbeat.publish(point);
         self.last_point = Some(point);
         Ok(())
     }

@@ -7,6 +7,8 @@
 
 use thiserror::Error;
 
+const STEERING_FLAG_STRIDE: u64 = 4096;
+
 #[derive(Clone, Copy, Debug, Error, PartialEq, Eq)]
 pub enum AlignmentError {
     #[error("alignment attachment controls require 5 through 8 points")]
@@ -714,7 +716,9 @@ pub struct AlignmentBranchFeatures {
 /// Optional coarse control for long searches. Standard searches instantiate
 /// the internal loop with control disabled, so these calls are compiled out.
 pub trait AlignmentSearchControl {
+    fn steering_pending(&self) -> bool;
     fn safe_point(&mut self, point: AlignmentSearchPoint) -> Result<(), AlignmentError>;
+    fn heartbeat(&mut self, point: AlignmentSearchPoint) -> Result<(), AlignmentError>;
     fn ordering_active(&self) -> bool;
     fn score_branch(&mut self, features: AlignmentBranchFeatures) -> Result<i64, AlignmentError>;
 }
@@ -723,7 +727,17 @@ struct NoAlignmentControl;
 
 impl AlignmentSearchControl for NoAlignmentControl {
     #[inline(always)]
+    fn steering_pending(&self) -> bool {
+        false
+    }
+
+    #[inline(always)]
     fn safe_point(&mut self, _point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
+        Ok(())
+    }
+
+    #[inline(always)]
+    fn heartbeat(&mut self, _point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
         Ok(())
     }
 
@@ -1131,7 +1145,9 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
     workspace.initialize_symmetry_images(initial);
     let mut depth = 0_usize;
     let mut metrics = AlignmentSearchMetrics::default();
-    let mut next_pulse = pulse_interval;
+    let mut next_heartbeat = pulse_interval;
+    let mut next_steering_check = STEERING_FLAG_STRIDE;
+    let mut next_control_event = next_heartbeat.min(next_steering_check);
 
     loop {
         if !workspace.frames[depth].entered {
@@ -1151,18 +1167,28 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
                 .states
                 .checked_add(1)
                 .ok_or(AlignmentError::Overflow)?;
-            if CONTROLLED && metrics.states >= next_pulse {
-                control.safe_point(AlignmentSearchPoint {
-                    metrics,
-                    depth: depth as u32,
-                    selected_count: selected.count_ones(),
-                    unresolved_count: workspace.frames[depth]
-                        .unresolved_cuts
-                        .iter()
-                        .map(|word| word.count_ones())
-                        .sum(),
-                })?;
-                next_pulse = next_pulse.saturating_add(pulse_interval);
+            if CONTROLLED && metrics.states >= next_control_event {
+                if metrics.states >= next_steering_check {
+                    next_steering_check = next_steering_check.saturating_add(STEERING_FLAG_STRIDE);
+                    if control.steering_pending() {
+                        control.safe_point(alignment_search_point(
+                            metrics,
+                            depth,
+                            selected,
+                            workspace.frames[depth].unresolved_cuts,
+                        ))?;
+                    }
+                }
+                if metrics.states >= next_heartbeat {
+                    control.heartbeat(alignment_search_point(
+                        metrics,
+                        depth,
+                        selected,
+                        workspace.frames[depth].unresolved_cuts,
+                    ))?;
+                    next_heartbeat = next_heartbeat.saturating_add(pulse_interval);
+                }
+                next_control_event = next_heartbeat.min(next_steering_check);
             }
             let (violation, packing, unresolved_cuts) = problem.violation_summary(
                 selected,
@@ -1235,6 +1261,21 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
         }
     }
     Ok((None, metrics))
+}
+
+#[inline]
+fn alignment_search_point(
+    metrics: AlignmentSearchMetrics,
+    depth: usize,
+    selected: u64,
+    unresolved_cuts: [u64; 2],
+) -> AlignmentSearchPoint {
+    AlignmentSearchPoint {
+        metrics,
+        depth: depth as u32,
+        selected_count: selected.count_ones(),
+        unresolved_count: unresolved_cuts.iter().map(|word| word.count_ones()).sum(),
+    }
 }
 
 #[cfg(feature = "control-plane")]
@@ -1456,7 +1497,15 @@ mod tests {
             pulses: u64,
         }
         impl AlignmentSearchControl for PackingOrder {
+            fn steering_pending(&self) -> bool {
+                false
+            }
+
             fn safe_point(&mut self, _point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
+                Ok(())
+            }
+
+            fn heartbeat(&mut self, _point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
                 self.pulses += 1;
                 Ok(())
             }

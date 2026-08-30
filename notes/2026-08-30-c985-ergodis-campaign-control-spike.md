@@ -17,23 +17,25 @@ tree that lowers to the same validated postfix VM; the explicit postfix form
 remains the stable replay/debug IR. Executable hashes exclude display names, so
 renaming an attack cannot manufacture a distinct replay identity.
 
-The first live-adapter boundary is also present: a constant-size unchanged
-`pulse` is polled only at a solver safe point; a changed epoch returns bounded
-plan identities, and each lowered plan can be fetched only against that exact
-epoch. Activation and deactivation are epoch-atomic. A solver can therefore
-compile into an inactive preallocated arena and swap at a later safe point,
-without socket checks, JSON, or allocation in the node loop. A preliminary
-C880 socket exercise observed unchanged
+The first live-adapter boundary is also present. Each solver registers a
+private Unix datagram endpoint and the campaign pushes one eight-byte epoch
+only after semantic plan activation or deactivation. The auxiliary watcher
+blocks in `recv`; on notification it fetches, validates, and compiles the
+latest plan set into a recycled preallocated arena. The solver safe point only
+swaps arenas through a rarely touched mutex and returns the old one for reuse.
+There is no timer, socket/file I/O, serialization, compilation, allocation, or
+deallocation in the search path. A preliminary C880 socket exercise observed unchanged
 epoch 0, activated the exact 11/11 marginal-saving predicate at epoch 1,
 fetched its lowered plan against epoch 1, rejected a misspelled plan identity,
 deactivated it at epoch 2, and returned an empty changed snapshot.
 
 The C880 DFS now also consumes that boundary. Its ordinary entry point uses a
-const-disabled generic path, while `alignment-controlled` polls only after a
-configured state chunk, publishes six bounded progress counters in the same
-pulse, and applies score plans only to branch ordering. No branch can be
-removed. A double-buffered client fetches and hash-checks every lowered plan
-against one stable epoch before swapping arenas.
+const-disabled generic path. `alignment-controlled` folds a 4096-state flag
+check into its existing precomputed heartbeat deadline, publishes six bounded
+progress counters through relaxed atomics, and applies score plans only to
+branch ordering. No branch can be removed. Optional one-second progress JSONL
+is serialized by the watcher through a line writer; the feature is absent
+unless an explicit create-only output path is supplied.
 
 Two solved n=8 UNSAT controls exercised the live path. Budget 12 accepted the
 residual-packing ordering theorem after 245,760 states and closed exactly after
@@ -55,8 +57,34 @@ budget-12 injection similarly fell from 17.30 to 10.13 seconds. The policy is
 still rejected for production: 78.07 seconds is 1.81x the 43.10-second
 no-theorem diagnostic, and 10.13 is 1.27x the 7.95-second unchanged core path.
 The exact child bound is costly and did not materially shrink either tree.
-Safe-point users control the socket/heartbeat tax through the chunk interval,
-and ordinary feature-off solves retain neither branches nor ordering storage.
+Safe-point users control only the relaxed heartbeat publication interval; all
+socket and serialization work now belongs to the watcher. Ordinary feature-off
+solves retain neither control branches nor ordering storage.
+
+The event-driven idle gate passed a rotated multiround control on the current
+budget-12 tree (309,777 states in every run). Across nine rounds per arm,
+baseline, idle event control, and one `noop` request per second averaged
+7.9789, 7.9667, and 7.9578 seconds. Paired idle-minus-baseline was -0.0122
+seconds (`t=-0.860`, ratio 0.9985x); noop-minus-idle was -0.0089 seconds
+(`t=-0.640`, ratio 0.9989x). Every controlled result reported zero semantic
+notifications. The claim is therefore “no measurable overhead in this
+protocol,” not a speedup. The replay driver is `scripts/control-event-ab.sh`.
+
+An isolated 1,048,576-state Criterion gate explains the choice of cadence: an
+every-state relaxed load took 208.8 microseconds, whereas a 4096-state mask
+gate took 106.5 microseconds (1.96x cheaper). Folding the gate into the existing
+deadline was better still: the combined deadline microkernel took 431.6
+microseconds versus 508.5 microseconds for the old heartbeat-only loop. The
+production loop consequently adds no second steady-state comparison.
+
+A longer budget-13 rescue exercise began under the deliberately adverse
+`-child_packing` ordering, then deactivated it and activated `child_packing` at
+15 seconds. The watcher observed two semantic notifications; progress JSONL
+first showed applied epoch 3 at 15.986 seconds and 487,424 states. The exact
+UNSAT run closed after 2,011,955 states in 101.76 seconds. This is a control and
+trajectory test, not evidence that residual packing is a winning heuristic:
+the already measured always-good-policy run remained 78.07 seconds and the
+plain no-theorem run 43.10 seconds.
 
 Implementation commits are `07cc0ebe2`, `b1c4dd052`, and `3a30a24e6` plus the
 current follow-up. Operator documentation is in
@@ -201,11 +229,13 @@ from silently becoming a proof-authoritative prune.
 - **Open:** the exact sampled C80 rank-sector law `{0,6}` has no q17 evidence.
   Unguided sampling missed the survivor stratum entirely; a targeted q17
   constructor/import is the evidence gate.
-- **Settled negative:** exponential backoff cut the short budget-12 no-plan run
-  from 37 pulses / 8.49 seconds to 6 pulses / 7.93 seconds, but both 8x and 4x
-  caps missed a theorem submitted during the final work chunk. Fixed polling
-  is retained in v0. A push notification/eventfd successor owns simultaneous
-  low overhead and bounded steering latency.
+- **Settled:** exponential polling backoff missed late theorem submissions, so
+  it was replaced rather than tuned. Semantic epoch changes now push one Unix
+  datagram to a blocking watcher; ordinary/noop requests emit none. A
+  cacheline-isolated flag is checked at the shared 4096-state control deadline.
+  The watcher prepares the next arena and the search only swaps preallocated
+  storage. This settles simultaneous responsiveness, zero idle wakeups, and
+  zero search-path serialization/allocation for the current adapter.
 - **Opportunity:** because source plans stay in a quantifier-free SMT-LIB-like
   fragment, the same candidate can later be emitted to an SMT backend for
   bounded symbolic counterexample search. This is a successor capability, not

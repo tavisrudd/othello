@@ -16,6 +16,11 @@ use std::convert::Infallible;
 
 #[cfg(feature = "control-plane")]
 use ergodis::control::{CompiledPlan, PlanOp, PlanOutput, PlanRole, PlanSpec, PLAN_SCHEMA};
+#[cfg(feature = "control-plane")]
+use ergodis::{
+    search_alignment_attachment_controlled, AlignmentBranchFeatures, AlignmentError,
+    AlignmentSearchControl, AlignmentSearchPoint,
+};
 
 struct CountingAllocator;
 
@@ -137,6 +142,45 @@ fn aligned_attachment_search_allocates_nothing_after_workspace_construction() {
     let (result, allocations) =
         tracked_allocations(|| search_alignment_attachment(&problem, 9, &mut workspace).unwrap());
     assert!(result.0.is_some());
+    assert_eq!(allocations, 0);
+}
+
+#[cfg(feature = "control-plane")]
+struct IdleSearchControl;
+
+#[cfg(feature = "control-plane")]
+impl AlignmentSearchControl for IdleSearchControl {
+    fn steering_pending(&self) -> bool {
+        false
+    }
+
+    fn safe_point(&mut self, _point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
+        Ok(())
+    }
+
+    fn heartbeat(&mut self, _point: AlignmentSearchPoint) -> Result<(), AlignmentError> {
+        Ok(())
+    }
+
+    fn ordering_active(&self) -> bool {
+        false
+    }
+
+    fn score_branch(&mut self, _features: AlignmentBranchFeatures) -> Result<i64, AlignmentError> {
+        Ok(0)
+    }
+}
+
+#[cfg(feature = "control-plane")]
+#[test]
+fn controlled_alignment_search_allocates_nothing_after_setup() {
+    let problem = compile_alignment_attachment(5).unwrap();
+    let mut workspace = AlignmentSearchWorkspace::new(9, 1 << 18).unwrap();
+    let mut control = IdleSearchControl;
+    let (_, allocations) = tracked_allocations(|| {
+        search_alignment_attachment_controlled(&problem, 9, 1, &mut workspace, 4096, &mut control)
+            .unwrap()
+    });
     assert_eq!(allocations, 0);
 }
 

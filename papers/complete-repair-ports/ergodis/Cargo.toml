@@ -101,6 +101,10 @@ harness = false
 name = "gl_probe"
 harness = false
 
+[[bench]]
+name = "steering_gate"
+harness = false
+
 
 [profile.release]
 opt-level = 3

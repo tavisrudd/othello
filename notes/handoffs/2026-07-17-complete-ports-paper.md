@@ -591,9 +591,14 @@ Sequel research:
   has isolated run IDs/sockets, bounded file-backed ledgers and traces, compact
   delta briefs, exact feature ceilings, exceptional-state queries, unattended
   batch/evolution/tree proposers, and typed SMT-LIB-inspired source plans
-  lowered to an allocation-free validated VM.  Epoch-atomic pulse, plan fetch,
-  and deactivation now provide the transport half of coarse safe-point live
-  steering.  On the frozen 70,888-row q11/q13 C80 corpus the obstruction loop
+  lowered to an allocation-free validated VM. Live steering is event driven:
+  semantic epoch changes push one Unix datagram to a blocking watcher, which
+  fetches and compiles into a recycled arena; the search only checks an
+  isolated flag at a shared 4096-state deadline and swaps preallocated arenas.
+  A nine-round budget-12 A/B found no measurable idle or one-noop-per-second
+  overhead (`noop/idle=0.9989x`, paired `t=-0.640`), and the controlled search
+  has an explicit zero-allocation regression. Optional progress JSONL is
+  serialized off-thread. On the frozen 70,888-row q11/q13 C80 corpus the obstruction loop
   found the exact sampled predicate `omega_drop > 0` and
   `next_defect_rank in {0,6}`; this is not a theorem, and an unguided q17 probe
   was inconclusive because it reached no relevant survivor states.  C880 and
@@ -603,8 +608,9 @@ Sequel research:
   ordering repairs the initial repeated-score pathology by 2.16x, but exact
   child-packing ordering is still rejected as a production policy: it barely
   changes states and remains 1.81x slower than the no-theorem budget-13
-  diagnostic.  The next gate is a cheaper equivalent accumulator plus
-  multiround A/B; no sound pruning role exists.
+  diagnostic. The next gate is autonomous probation/rollback of adverse
+  ordering plans and learning from live progress trajectories; no sound
+  pruning role exists.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

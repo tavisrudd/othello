@@ -23,6 +23,9 @@ struct Cli {
     seen_capacity: usize,
     #[arg(long, default_value_t = 65_536)]
     pulse_interval: u64,
+    /// Stream coarse progress snapshots from the auxiliary watcher as JSONL.
+    #[arg(long, conflicts_with = "baseline")]
+    progress_file: Option<PathBuf>,
     #[arg(long)]
     symmetry: bool,
     #[arg(long)]
@@ -57,7 +60,7 @@ fn main() -> Result<()> {
         (answer, metrics, serde_json::Value::Null)
     } else {
         let manifest = read_manifest(&cli.run_dir).context("cannot read campaign manifest")?;
-        let mut control = AlignmentCampaignControl::new(manifest, 8192);
+        let mut control = AlignmentCampaignControl::new(manifest, 8192, cli.progress_file)?;
         let (answer, metrics) = search_alignment_attachment_controlled(
             &problem,
             cli.budget,
@@ -71,7 +74,7 @@ fn main() -> Result<()> {
             metrics,
             json!({
                 "epoch": control.epoch(),
-                "pulses": control.pulses(),
+                "notifications": control.notifications(),
                 "group": group,
             }),
         )

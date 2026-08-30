@@ -1,0 +1,11 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "prefer-weak-residual-packing-bound",
+  "role": "ordering",
+  "output": "score",
+  "expr": {
+    "op": "sub",
+    "left": { "op": "const", "value": 0 },
+    "right": { "op": "field", "name": "child_packing" }
+  }
+}

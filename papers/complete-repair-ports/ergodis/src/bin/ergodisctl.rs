@@ -30,6 +30,8 @@ struct Cli {
 #[derive(Debug, Subcommand)]
 enum Command {
     Status,
+    /// Exercise the control socket without changing or notifying search state.
+    Noop,
     /// Poll a long search safe point for a changed active-plan epoch.
     Pulse {
         #[arg(long, default_value_t = 0)]
@@ -187,6 +189,7 @@ fn main() -> Result<()> {
     }
     let (op, args) = match cli.command {
         Command::Status => ("status", json!({})),
+        Command::Noop => ("noop", json!({})),
         Command::Pulse { since_epoch } => ("pulse", json!({"since_epoch": since_epoch})),
         Command::PlanGet { plan, expect_epoch } => (
             "plan-get",
@@ -569,6 +572,7 @@ fn render_compact(op: &str, result: &Value, epoch: u64) -> Result<()> {
                 .and_then(Value::as_array)
                 .map_or(0, Vec::len)
         ),
+        "noop" => println!("epoch={epoch} noop"),
         "candidate-deactivate" => println!(
             "epoch={epoch} deactivated={} old={} new={}",
             text(result, "plan"),

@@ -8,8 +8,8 @@ use serde_json::{json, Value};
 use std::collections::{BTreeMap, VecDeque};
 use std::fs::{self, File, OpenOptions};
 use std::io::{self, BufReader, BufWriter, Read, Write};
-use std::os::unix::fs::{OpenOptionsExt, PermissionsExt};
-use std::os::unix::net::{UnixListener, UnixStream};
+use std::os::unix::fs::{FileTypeExt, OpenOptionsExt, PermissionsExt};
+use std::os::unix::net::{UnixDatagram, UnixListener, UnixStream};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -35,6 +35,7 @@ pub const MAX_PLAN_STACK: usize = 64;
 pub const MAX_ACTIVE_PLANS: usize = 64;
 pub const MAX_ARCHIVE_CLASSES: usize = 4096;
 const EVENT_RING: usize = 256;
+const MAX_WATCHERS: usize = 64;
 
 #[derive(Debug, thiserror::Error)]
 pub enum ControlError {
@@ -143,6 +144,7 @@ pub struct Campaign {
     archive: BTreeMap<String, String>,
     events: VecDeque<Event>,
     solver_status: Option<Value>,
+    watchers: Vec<PathBuf>,
     ledger: Ledger,
     response_limit: usize,
     trace_limit: u64,
@@ -201,6 +203,7 @@ impl Campaign {
             archive: BTreeMap::new(),
             events: VecDeque::with_capacity(EVENT_RING),
             solver_status: None,
+            watchers: Vec::with_capacity(MAX_WATCHERS),
             ledger,
             response_limit: response_limit.min(MAX_FRAME_BYTES),
             trace_limit,
@@ -261,6 +264,8 @@ impl Campaign {
         let result = match request.op.as_str() {
             "status" => self.status(),
             "pulse" => self.pulse(&request.args),
+            "watch-register" => self.watch_register(&request.args),
+            "watch-unregister" => self.watch_unregister(&request.args),
             "plan-get" => self.plan_get(&request.args),
             "agent-brief" => self.agent_brief(&request.args),
             "feature-ceiling" => self.feature_ceiling(),
@@ -272,6 +277,7 @@ impl Campaign {
             "exceptional" => self.exceptional(&request.args),
             "trace" => self.trace(&request.args),
             "note" => self.note(&request.args),
+            "noop" => Ok(json!({"noop": true})),
             "shutdown" => Ok(json!({"stopping": true})),
             _ => Err(ControlError::Invalid(format!(
                 "unknown operation {:?}",
@@ -304,7 +310,55 @@ impl Campaign {
             "ledger_truncated": self.ledger.truncated,
             "health": "ready",
             "solver": self.solver_status,
+            "watchers": self.watchers.len(),
         }))
+    }
+
+    fn watch_register(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let path = PathBuf::from(
+            args.get("path")
+                .and_then(Value::as_str)
+                .ok_or_else(|| ControlError::Invalid("watch-register requires path".into()))?,
+        );
+        if path.parent() != Some(self.manifest.run_dir.as_path())
+            || !path
+                .file_name()
+                .and_then(|name| name.to_str())
+                .is_some_and(|name| name.starts_with("watch-"))
+            || !fs::metadata(&path)?.file_type().is_socket()
+        {
+            return Err(ControlError::Invalid("invalid watcher endpoint".into()));
+        }
+        if !self.watchers.contains(&path) {
+            if self.watchers.len() == MAX_WATCHERS {
+                return Err(ControlError::Invalid("watcher arena full".into()));
+            }
+            self.watchers.push(path.clone());
+        }
+        Ok(json!({
+            "path": path,
+            "epoch": self.epoch.load(Ordering::Acquire),
+        }))
+    }
+
+    fn watch_unregister(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let path = PathBuf::from(
+            args.get("path")
+                .and_then(Value::as_str)
+                .ok_or_else(|| ControlError::Invalid("watch-unregister requires path".into()))?,
+        );
+        let before = self.watchers.len();
+        self.watchers.retain(|candidate| candidate != &path);
+        Ok(json!({"removed": before != self.watchers.len()}))
+    }
+
+    fn notify_watchers(&mut self, epoch: u64) {
+        let Ok(socket) = UnixDatagram::unbound() else {
+            return;
+        };
+        let message = epoch.to_le_bytes();
+        self.watchers
+            .retain(|path| socket.send_to(&message, path).is_ok());
     }
 
     /// Safe-point query for a live solver. The unchanged response is constant
@@ -586,6 +640,7 @@ impl Campaign {
         });
         let new_epoch = old_epoch + 1;
         self.epoch.store(new_epoch, Ordering::Release);
+        self.notify_watchers(new_epoch);
         self.record(
             "candidate-applied",
             "diagnostic plan activated",
@@ -621,6 +676,7 @@ impl Campaign {
         self.plans.remove(index);
         let new_epoch = old_epoch + 1;
         self.epoch.store(new_epoch, Ordering::Release);
+        self.notify_watchers(new_epoch);
         self.record(
             "candidate-deactivated",
             "diagnostic plan deactivated",
@@ -1189,6 +1245,20 @@ mod tests {
             args,
         };
 
+        let watcher_path = campaign.manifest.run_dir.join("watch-test.sock");
+        let watcher = UnixDatagram::bind(&watcher_path).unwrap();
+        watcher
+            .set_read_timeout(Some(Duration::from_millis(20)))
+            .unwrap();
+        let (registered, _) = campaign.handle(request(
+            &campaign,
+            0,
+            "watch-register",
+            json!({"path": watcher_path}),
+        ));
+        assert!(registered.ok);
+        assert_eq!(registered.result["epoch"], 0);
+
         let (pulse, _) = campaign.handle(request(&campaign, 1, "pulse", json!({"since_epoch": 0})));
         assert_eq!(pulse.result["changed"], false);
 
@@ -1211,6 +1281,16 @@ mod tests {
         ));
         assert!(applied.ok);
         assert_eq!(applied.epoch, 1);
+        let mut notification = [0_u8; 8];
+        assert_eq!(watcher.recv(&mut notification).unwrap(), 8);
+        assert_eq!(u64::from_le_bytes(notification), 1);
+
+        let (noop, _) = campaign.handle(request(&campaign, 20, "noop", json!({})));
+        assert!(noop.ok);
+        assert!(matches!(
+            watcher.recv(&mut notification).unwrap_err().kind(),
+            io::ErrorKind::WouldBlock | io::ErrorKind::TimedOut
+        ));
 
         let (pulse, _) = campaign.handle(request(&campaign, 3, "pulse", json!({"since_epoch": 0})));
         assert_eq!(pulse.result["changed"], true);
@@ -1236,8 +1316,17 @@ mod tests {
         ));
         assert!(removed.ok);
         assert_eq!(removed.epoch, 2);
+        assert_eq!(watcher.recv(&mut notification).unwrap(), 8);
+        assert_eq!(u64::from_le_bytes(notification), 2);
         let (pulse, _) = campaign.handle(request(&campaign, 6, "pulse", json!({"since_epoch": 1})));
         assert_eq!(pulse.result["changed"], true);
         assert_eq!(pulse.result["plans"].as_array().unwrap().len(), 0);
+        let (unregistered, _) = campaign.handle(request(
+            &campaign,
+            7,
+            "watch-unregister",
+            json!({"path": watcher_path}),
+        ));
+        assert_eq!(unregistered.result["removed"], true);
     }
 }
