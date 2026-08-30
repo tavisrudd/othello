@@ -3,10 +3,10 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-29
-**Status**: analysis record of the 2026-08-29 discussion; private; no product,
-publication, filing, push, or novelty claim authorized. Numbers quoted from
-task reports are those reports' numbers; market figures are estimates and are
-marked as such.
+**Status**: updated after exact closure of R2Elite01; private analysis record;
+no product, publication, filing, push, or novelty claim authorized. Numbers
+quoted from task reports are those reports' numbers. Market figures are
+unvalidated planning assumptions, not forecasts.
 
 Companion records: `2026-08-29-c998-ergodis-partition-design.md`,
 `2026-08-29-c998-patent-landscape.md`,
@@ -148,8 +148,8 @@ product:
 | bivariate bicycle `[[784,24,24]]` | Bravyi et al. | exact `d = 24`, witness plus exclusion | 127 s, 16 threads, 23 MiB RSS |
 | QDistSAT `BB_360_12_?` | official benchmark input | exact `[[360,12,24]]`, both directions | about 470 s combined |
 | bivariate bicycle `[[756,16,<=34]]` | Bravyi et al. | `d >= 24` certified; exact value open | 33 s; Gurobi licence refused |
-| lifted product `R2Elite02` | Liu--Marquardt | exact `[[1496,198,16]]` | published bound was randomized |
-| lifted product `R2Elite01` | Liu--Marquardt | `[[1496,194,d]]`, `d >= 16` | exact value open |
+| lifted product `R2Elite02` | Liu--Marquardt | exact `[[1496,198,16]]` | 116.97B candidates, 647.943 s |
+| lifted product `R2Elite01` | Liu--Marquardt | exact `[[1496,194,20]]` | 712.48B exclusion candidates, 4,247.838 s combined; deterministic weight-20 witness at RIS trial 765 |
 | C997 control, one core | gross code | 0.12 s compile + 0.15 s search | Gurobi one-thread 3.8 s |
 
 The Gurobi boundary memo fixes the product boundary: domain object, then
@@ -161,24 +161,54 @@ qLDPC suite are next. The QDistSAT 27-instance suite, including the open
 
 Consequences for the analysis above:
 
-1. Exact certification at 1,496 coordinates in minutes, where the authors
-   published randomized upper bounds, is a capability no surveyed tool has.
-   The product is exact certification at a scale the field treats as out of
-   reach, with the certificate as the deliverable.
+1. R2Elite01 closes at `[[1496,194,20]]`: the two exact misses cover
+   712,476,065,846 candidates in 4,247.838 s (about 70.8 minutes), while a
+   deterministic native RIS run supplies the independently checked weight-20
+   logical. Its exact rate-distance figure of merit is `9700/187 =
+   51.871657754...`, 2.70165 times BB360's 19.2 and 1.531 times R2Elite02's.
+   Within the recorded comparison, exact distance at this scale where the
+   source result used randomized bounds is the strongest demonstrated product
+   fact.
 2. The Delsarte--Schrijver dual certificate remains valuable but moves to the
-   instances beyond exhaustive reach (the BB756 gap, the R2Elite01 exact
-   value) and to compact replacement of billion-candidate replay records.
+   instances beyond exhaustive reach (the BB756 gap, `LP_1768_224`, and
+   customer roadmap codes) and to compact replacement of hundred-billion-
+   candidate replay records.
 3. The deep-hole unification and passant fixtures stand; they are consumers
    of a proven engine rather than reasons to build one.
-4. The patent object changes from "symmetry reduction of an optimization
-   model" to the native method itself: connected-support enumeration with
-   exact syndrome tracking, projected completion filters whose collisions can
-   only admit candidates, witness transport by certified isomorphism, and
-   persisted source-bound compiled filters. That is implementation-specific,
-   has a measurable technical effect, and is a materially better
-   subject-matter-eligibility position.
+4. The native implementation facts include connected-support enumeration,
+   exact syndrome tracking, one-sided projected-completion filters, witness
+   transport by checked isomorphism, persisted source-bound filters, and a
+   verified central involution reducing 1,496 anchors to 748. The blockwise
+   deck calculation found identity and central actions in each tested family;
+   it is not a full automorphism-group classification. These facts explain a
+   measurable technical effect but do not establish patent novelty; section 6
+   records the adverse prior-art conclusion.
 
-## 5. Revised market sizing (estimates)
+### 4.1 Evidence products and trust levels
+
+The commercial language must distinguish three different deliverables:
+
+1. **Replayable upper witness.** A low-weight logical and its transport data
+   are small and independently checkable without trusting the search.
+2. **Exact exhaustive-computation bundle.** The current lower bound consists
+   of canonical input reconstruction, source-bound artifact hashes, enumerator
+   and filter versions, deterministic parameters, counters, timings, and an
+   auditable implementation. It supports reproduction and attestation, but its
+   compact record does not independently replay 712.48 billion misses.
+3. **Succinct lower-bound certificate.** A future LP, SDP, dual, or other proof
+   object would let a small checker verify the exclusion much more cheaply
+   than rerunning the search.
+
+Until level 3 exists, describe the result as an **exact audited computation
+with a reproducibility bundle**, not as a succinct independently checkable
+lower-bound proof certificate. The immediate product wedge is an independent
+qLDPC parameter audit: reconstruct the customer's code, bind every artifact to
+that source, produce exact exclusions where feasible, return a replayable
+logical witness, and issue a precise audit report. The broader compositional
+compiler remains an expansion option; the quantum result alone does not yet
+validate demand for that general product.
+
+## 5. Revised market sizing (unvalidated planning assumptions)
 
 Serviceable market for certified qLDPC and stabilizer-code distance:
 
@@ -190,18 +220,25 @@ Serviceable market for certified qLDPC and stabilizer-code distance:
 | code-based post-quantum cryptography parameter audit (HSM and PQC vendors, certification labs) | ten to twenty | medium to high once regulators ask for reproducible evidence | US$25k--150k |
 | classical LDPC silicon | about six | latent; solved by hiring today | none near term |
 
-Base case: US$2--5M per year at maturity within quantum plus PQC, up from the
-US$1--3M estimated before the native results, because exact certification of
-roadmap codes is a gating item rather than a convenience. First-two-year
-capture: two to four hardware customers, US$0.3--1.5M per year. The larger
-value remains strategic: the customers are the acquirers, and the same engine
-is the credibility proof for the general certified symmetry compiler whose
-market (exact-optimization tooling, EDA formal) is fifty times larger.
+Planning scenario, not forecast: US$2--5M per year at maturity within quantum
+plus PQC, up from the US$1--3M estimate made before the native results.
+First-two-year scenario: two to four hardware customers and US$0.3--1.5M per
+year. None of the customer counts, willingness-to-pay ranges, conversion
+rates, acquisition thesis, or the claimed fifty-times-larger general market
+has been validated by customer evidence.
 
 What would move the number: sweeping the QDistSAT suite and closing
 `LP_1768_224` (a headline no competitor can match today); closing the BB756
 exact value; and a customer whose roadmap code exceeds exhaustive reach, which
 would make the dual-certificate route the paid feature.
+
+The first commercial evidence gate is five to ten disclosure-safe interviews
+with qLDPC roadmap owners. Ask whether an independent exact parameter audit
+changes a tape-out, architecture, publication, procurement, or investor
+decision; what evidence their internal reviewers require; which instances are
+currently supported only by randomized search; and whether they would pay for
+a private audit. Until those interviews, treat the table as a prioritization
+device only.
 
 ## 6. Revised patent recommendation
 
@@ -251,6 +288,12 @@ speed. That difference is an optimisation, not a claimable method.
 
 ## 7. Actions
 
+- Replace every external-facing use of "certificate" with the evidence level
+  in section 4.1; reserve "succinct certificate" for a cheap independently
+  checkable lower-bound object.
+- After disclosure and counsel review make outreach safe, conduct five to ten
+  qLDPC-roadmap interviews before turning the market ranges into a forecast or
+  committing to a product build.
 - Queue one `complete-ports` task for the covering-radius/deep-hole query,
   the symmetry-reduced dual certificate, and extension-field support, with
   the passant code as acceptance instance and the gross code as second gate.
@@ -261,3 +304,7 @@ speed. That difference is an optimisation, not a claimable method.
   emitter go in `ergodis-symmetry`; the covering-radius query goes public.
 - Sweep the QDistSAT 27-instance suite with the native backend before any
   external claim; it is the benchmark the field scores on.
+- Package R2Elite01 as the reference audit bundle: canonical reconstruction,
+  source-bound hashes, both exhaustive exclusion records, deterministic RIS
+  witness, independent witness check, resource measurements, and exact
+  parameter/FOM statement.
