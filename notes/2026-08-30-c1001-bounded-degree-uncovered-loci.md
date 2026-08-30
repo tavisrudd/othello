@@ -196,10 +196,10 @@ The closeout produced two task-owned upgrades and both are incorporated above:
   explicit minimum vanishing form, or a structural argument improving the
   bound. C1004 should decide whether this merits a new math task before using
   sharpness language.
-- **Rational-line peeling beyond six-arcs — open.** Proposition 4 completely
-  performs the component split for six-arcs because the `q-5` line lemma is
-  available. A general `k`-arc line bound strong enough to repeat it was not an
-  input to C1001. Any such extension needs a separately allocated proof task.
+- **Rational-line peeling beyond six-arcs — settled by C1007.** The odd-order
+  focused-direction theorem gives `|U(A) intersect ell|<=q-k+1` for every
+  line and every `k>=4`; the resulting component envelope improves the stable
+  minimum-degree bound from `q-N+2` to `q-N+3`.
 - **The tail boundary below eleven — intentionally outside scope.** The theorem
   classifies `q>=11`; small fields may have incidental cubic containment simply
   because the uncovered locus is small. This is a scope boundary, not an

@@ -2,11 +2,11 @@
 
 **Lane**: `clebsch`
 
-**Status:** Queued; C1001 theorem packet frozen; publication decision only.
+**Status:** Queued; C1001 and C1007 theorem packets frozen; publication decision only.
 
 ## Goal
 
-Assess C1001 against Paper I, its computational companion, the arcs paper, and banked low-degree curve material. Choose the smallest honest publication package and split any cross-lane implementation work explicitly.
+Assess C1001 and C1007 against Paper I, its computational companion, the arcs paper, and banked low-degree curve material. Choose the smallest honest publication package and split any cross-lane implementation work explicitly.
 
 ## Acceptance gate
 
