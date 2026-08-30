@@ -2,8 +2,9 @@ use anyhow::{bail, Context, Result};
 use clap::{Parser, Subcommand};
 use ergodis::control::{read_manifest, send_request, PlanSpec};
 use serde_json::{json, Value};
-use std::fs::File;
-use std::io::BufReader;
+use std::fs::{File, OpenOptions};
+use std::io::{BufRead, BufReader, BufWriter, Write};
+use std::os::unix::fs::OpenOptionsExt;
 use std::path::PathBuf;
 
 #[derive(Debug, Parser)]
@@ -39,6 +40,14 @@ enum Command {
     Try {
         plan: PathBuf,
     },
+    /// Stream a JSONL population through the evaluator and write JSONL results.
+    Batch {
+        plans: PathBuf,
+        #[arg(long)]
+        output: PathBuf,
+        #[arg(long, default_value_t = 10_000)]
+        max_plans: usize,
+    },
     /// Evaluate and atomically activate a diagnostic/ordering plan.
     Apply {
         plan: PathBuf,
@@ -48,6 +57,14 @@ enum Command {
     /// Return only a stored plan's first mismatch or false row.
     Obstruction {
         plan: String,
+    },
+    /// Rank and return at most 32 exceptional feature rows by a plan's value.
+    Exceptional {
+        plan: String,
+        #[arg(long, default_value_t = 8)]
+        top: u64,
+        #[arg(long, default_value = "high")]
+        direction: String,
     },
     /// Write one bounded localized evaluator trace under the run directory.
     Trace {
@@ -74,15 +91,32 @@ fn read_plan(path: &PathBuf) -> Result<PlanSpec> {
 fn main() -> Result<()> {
     let cli = Cli::parse();
     let manifest = read_manifest(&cli.run_dir).context("cannot read campaign manifest")?;
+    if let Command::Batch {
+        plans,
+        output,
+        max_plans,
+    } = &cli.command
+    {
+        return run_batch(&manifest, plans, output, *max_plans, cli.max_bytes);
+    }
     let (op, args) = match cli.command {
         Command::Status => ("status", json!({})),
         Command::AgentBrief { since, top } => ("agent-brief", json!({"since": since, "top": top})),
         Command::Try { plan } => ("candidate-try", json!({"plan": read_plan(&plan)?})),
+        Command::Batch { .. } => unreachable!(),
         Command::Apply { plan, expect_epoch } => (
             "candidate-apply",
             json!({"plan": read_plan(&plan)?, "expect_epoch": expect_epoch}),
         ),
         Command::Obstruction { plan } => ("obstruction-first", json!({"plan": plan})),
+        Command::Exceptional {
+            plan,
+            top,
+            direction,
+        } => (
+            "exceptional",
+            json!({"plan": plan, "top": top, "direction": direction}),
+        ),
         Command::Trace {
             plan,
             row,
@@ -113,6 +147,67 @@ fn main() -> Result<()> {
     Ok(())
 }
 
+fn run_batch(
+    manifest: &ergodis::control::Manifest,
+    plans: &PathBuf,
+    output: &PathBuf,
+    max_plans: usize,
+    max_bytes: usize,
+) -> Result<()> {
+    let input = BufReader::new(
+        File::open(plans).with_context(|| format!("cannot open {}", plans.display()))?,
+    );
+    let output_file = OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .mode(0o600)
+        .open(output)
+        .with_context(|| format!("cannot create {}", output.display()))?;
+    let mut writer = BufWriter::new(output_file);
+    let mut count = 0usize;
+    let mut perfect = 0usize;
+    let mut best_correct = 0u64;
+    let mut best_name = String::new();
+    for (line_number, line) in input.lines().enumerate() {
+        if count == max_plans {
+            bail!("plan population exceeds --max-plans {max_plans}");
+        }
+        let line = line?;
+        if line.trim().is_empty() {
+            continue;
+        }
+        let plan: PlanSpec = serde_json::from_str(&line)
+            .with_context(|| format!("invalid plan at line {}", line_number + 1))?;
+        let response = send_request(manifest, "candidate-try", json!({"plan": plan}), max_bytes)?;
+        if !response.ok {
+            bail!(
+                "candidate at line {} rejected: {}",
+                line_number + 1,
+                response.result
+            );
+        }
+        serde_json::to_writer(&mut writer, &response.result)?;
+        writer.write_all(b"\n")?;
+        count += 1;
+        let evaluation = &response.result["evaluation"];
+        let correct = number(evaluation, "weighted_correct");
+        let rows = number(evaluation, "weighted_rows");
+        if correct == rows {
+            perfect += 1;
+        }
+        if correct > best_correct {
+            best_correct = correct;
+            best_name = text(&response.result, "plan").into();
+        }
+    }
+    writer.flush()?;
+    println!(
+        "plans={count} perfect={perfect} best={best_name} correct={best_correct} results={}",
+        output.display()
+    );
+    Ok(())
+}
+
 fn render_compact(op: &str, result: &Value, epoch: u64) -> Result<()> {
     match op {
         "status" => println!(
@@ -139,20 +234,36 @@ fn render_compact(op: &str, result: &Value, epoch: u64) -> Result<()> {
         ),
         "candidate-try" | "candidate-apply" => {
             let evaluation = &result["evaluation"];
-            println!(
-                "epoch={epoch} plan={} correct={}/{} fp={} fn={} first={}",
-                text(result, "plan"),
-                number(evaluation, "weighted_correct"),
-                number(evaluation, "weighted_rows"),
-                number(evaluation, "weighted_false_positive"),
-                number(evaluation, "weighted_false_negative"),
-                result
-                    .get("first_obstruction")
-                    .and_then(|value| value.get("id"))
-                    .map_or_else(|| "none".into(), Value::to_string)
-            );
+            if text(evaluation, "output") == "score" {
+                println!(
+                    "epoch={epoch} plan={} score=[{},{}] rows={}",
+                    text(result, "plan"),
+                    signed(evaluation, "minimum_score"),
+                    signed(evaluation, "maximum_score"),
+                    number(evaluation, "rows")
+                );
+            } else {
+                println!(
+                    "epoch={epoch} plan={} correct={}/{} fp={} fn={} first={}",
+                    text(result, "plan"),
+                    number(evaluation, "weighted_correct"),
+                    number(evaluation, "weighted_rows"),
+                    number(evaluation, "weighted_false_positive"),
+                    number(evaluation, "weighted_false_negative"),
+                    result
+                        .get("first_obstruction")
+                        .and_then(|value| value.get("id"))
+                        .map_or_else(|| "none".into(), Value::to_string)
+                );
+            }
         }
         "obstruction-first" => println!("epoch={epoch} {}", serde_json::to_string(result)?),
+        "exceptional" => println!(
+            "epoch={epoch} plan={} examined={} top={}",
+            text(result, "plan"),
+            number(result, "examined"),
+            serde_json::to_string(&result["top"])?
+        ),
         "trace" => println!(
             "epoch={epoch} trace={} bytes={} records={}",
             text(result, "path"),
@@ -172,4 +283,8 @@ fn text<'a>(value: &'a Value, key: &str) -> &'a str {
 
 fn number(value: &Value, key: &str) -> u64 {
     value.get(key).and_then(Value::as_u64).unwrap_or(0)
+}
+
+fn signed(value: &Value, key: &str) -> i64 {
+    value.get(key).and_then(Value::as_i64).unwrap_or(0)
 }

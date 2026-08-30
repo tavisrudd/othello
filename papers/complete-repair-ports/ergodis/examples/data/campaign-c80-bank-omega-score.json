@@ -1,0 +1,9 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "retained-overload-score",
+  "role": "ordering",
+  "output": "score",
+  "program": [
+    { "op": "field", "name": "omega" }
+  ]
+}

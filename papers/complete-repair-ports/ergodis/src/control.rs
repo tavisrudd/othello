@@ -20,6 +20,7 @@ pub const MAX_FRAME_BYTES: usize = 64 * 1024;
 pub const MAX_PLAN_OPS: usize = 128;
 pub const MAX_PLAN_STACK: usize = 64;
 pub const MAX_ACTIVE_PLANS: usize = 64;
+pub const MAX_ARCHIVE_CLASSES: usize = 4096;
 const EVENT_RING: usize = 256;
 
 #[derive(Debug, thiserror::Error)]
@@ -173,6 +174,8 @@ pub struct PlanSpec {
     pub schema: String,
     pub name: String,
     pub role: PlanRole,
+    #[serde(default)]
+    pub output: PlanOutput,
     pub program: Vec<PlanOp>,
 }
 
@@ -183,6 +186,14 @@ pub enum PlanRole {
     Ordering,
 }
 
+#[derive(Clone, Copy, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+pub enum PlanOutput {
+    #[default]
+    Predicate,
+    Score,
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(tag = "op", rename_all = "kebab-case", deny_unknown_fields)]
 pub enum PlanOp {
@@ -190,6 +201,7 @@ pub enum PlanOp {
     Const { value: i64 },
     Add,
     Sub,
+    Mul,
     Min,
     Max,
     Eq,
@@ -201,6 +213,7 @@ pub enum PlanOp {
     And,
     Or,
     Not,
+    Abs,
 }
 
 #[repr(u8)]
@@ -210,6 +223,7 @@ enum OpCode {
     Const,
     Add,
     Sub,
+    Mul,
     Min,
     Max,
     Eq,
@@ -221,6 +235,7 @@ enum OpCode {
     And,
     Or,
     Not,
+    Abs,
 }
 
 #[repr(C)]
@@ -239,6 +254,7 @@ const _: () = assert!(std::mem::align_of::<CompiledOp>() == 8);
 pub struct CompiledPlan {
     pub name: String,
     pub role: PlanRole,
+    pub output: PlanOutput,
     ops: Box<[CompiledOp]>,
     stack_needed: usize,
     pub hash: String,
@@ -273,6 +289,7 @@ impl CompiledPlan {
                 PlanOp::Const { value } => (OpCode::Const, *value, 0, 0),
                 PlanOp::Add => (OpCode::Add, 0, 0, 2),
                 PlanOp::Sub => (OpCode::Sub, 0, 0, 2),
+                PlanOp::Mul => (OpCode::Mul, 0, 0, 2),
                 PlanOp::Min => (OpCode::Min, 0, 0, 2),
                 PlanOp::Max => (OpCode::Max, 0, 0, 2),
                 PlanOp::Eq => (OpCode::Eq, 0, 0, 2),
@@ -284,6 +301,7 @@ impl CompiledPlan {
                 PlanOp::And => (OpCode::And, 0, 0, 2),
                 PlanOp::Or => (OpCode::Or, 0, 0, 2),
                 PlanOp::Not => (OpCode::Not, 0, 0, 1),
+                PlanOp::Abs => (OpCode::Abs, 0, 0, 1),
             };
             if depth < inputs {
                 return Err(ControlError::Invalid("plan stack underflow".into()));
@@ -311,6 +329,7 @@ impl CompiledPlan {
         Ok(Self {
             name: spec.name.clone(),
             role: spec.role,
+            output: spec.output,
             ops: ops.into_boxed_slice(),
             stack_needed,
             hash: blake3::hash(&encoded).to_hex().to_string(),
@@ -318,7 +337,11 @@ impl CompiledPlan {
     }
 
     /// Evaluate one row with a fixed stack and no allocation.
-    fn evaluate(&self, row: &[i64], trace: Option<&mut Vec<i64>>) -> Result<bool, ControlError> {
+    fn evaluate_value(
+        &self,
+        row: &[i64],
+        trace: Option<&mut Vec<i64>>,
+    ) -> Result<i64, ControlError> {
         let mut stack = [0i64; MAX_PLAN_STACK];
         let mut depth = 0usize;
         let mut trace = trace;
@@ -328,6 +351,15 @@ impl CompiledPlan {
                 OpCode::Const => op.value,
                 OpCode::Not => {
                     stack[depth - 1] = i64::from(stack[depth - 1] == 0);
+                    if let Some(values) = trace.as_deref_mut() {
+                        values.push(stack[depth - 1]);
+                    }
+                    continue;
+                }
+                OpCode::Abs => {
+                    stack[depth - 1] = stack[depth - 1].checked_abs().ok_or_else(|| {
+                        ControlError::Invalid("arithmetic overflow in plan".into())
+                    })?;
                     if let Some(values) = trace.as_deref_mut() {
                         values.push(stack[depth - 1]);
                     }
@@ -344,6 +376,9 @@ impl CompiledPlan {
                         OpCode::Sub => left.checked_sub(right).ok_or_else(|| {
                             ControlError::Invalid("arithmetic overflow in plan".into())
                         })?,
+                        OpCode::Mul => left.checked_mul(right).ok_or_else(|| {
+                            ControlError::Invalid("arithmetic overflow in plan".into())
+                        })?,
                         OpCode::Min => left.min(right),
                         OpCode::Max => left.max(right),
                         OpCode::Eq => i64::from(left == right),
@@ -354,7 +389,7 @@ impl CompiledPlan {
                         OpCode::Ge => i64::from(left >= right),
                         OpCode::And => i64::from(left != 0 && right != 0),
                         OpCode::Or => i64::from(left != 0 || right != 0),
-                        OpCode::Field | OpCode::Const | OpCode::Not => unreachable!(),
+                        OpCode::Field | OpCode::Const | OpCode::Not | OpCode::Abs => unreachable!(),
                     }
                 }
             };
@@ -366,12 +401,13 @@ impl CompiledPlan {
         }
         debug_assert_eq!(depth, 1);
         debug_assert!(self.stack_needed <= MAX_PLAN_STACK);
-        Ok(stack[0] != 0)
+        Ok(stack[0])
     }
 }
 
 #[derive(Clone, Debug, Serialize)]
 pub struct Evaluation {
+    pub output: PlanOutput,
     pub rows: usize,
     pub weighted_rows: u64,
     pub weighted_correct: u64,
@@ -380,13 +416,20 @@ pub struct Evaluation {
     pub weighted_true: u64,
     pub first_mismatch: Option<usize>,
     pub first_false: Option<usize>,
+    pub outcome_hash: String,
+    pub minimum_score: i64,
+    pub maximum_score: i64,
 }
 
 pub fn evaluate_plan(
     batch: &FeatureBatch,
     plan: &CompiledPlan,
 ) -> Result<Evaluation, ControlError> {
+    let mut outcome_hasher = blake3::Hasher::new();
+    let mut outcome_word = 0u64;
+    let mut outcome_bits = 0u32;
     let mut result = Evaluation {
+        output: plan.output,
         rows: batch.rows(),
         weighted_rows: 0,
         weighted_correct: 0,
@@ -395,10 +438,27 @@ pub fn evaluate_plan(
         weighted_true: 0,
         first_mismatch: None,
         first_false: None,
+        outcome_hash: String::new(),
+        minimum_score: i64::MAX,
+        maximum_score: i64::MIN,
     };
     for row in 0..batch.rows() {
-        let observed = plan.evaluate(batch.row(row), None)?;
+        let value = plan.evaluate_value(batch.row(row), None)?;
+        let observed = value != 0;
         let expected = batch.expected(row);
+        result.minimum_score = result.minimum_score.min(value);
+        result.maximum_score = result.maximum_score.max(value);
+        if plan.output == PlanOutput::Predicate {
+            outcome_word |= u64::from(observed) << outcome_bits;
+            outcome_bits += 1;
+            if outcome_bits == 64 {
+                outcome_hasher.update(&outcome_word.to_le_bytes());
+                outcome_word = 0;
+                outcome_bits = 0;
+            }
+        } else {
+            outcome_hasher.update(&value.to_le_bytes());
+        }
         let weight = batch.weights[row];
         result.weighted_rows = result.weighted_rows.saturating_add(weight);
         if observed {
@@ -419,6 +479,10 @@ pub fn evaluate_plan(
             }
         }
     }
+    if plan.output == PlanOutput::Predicate && outcome_bits != 0 {
+        outcome_hasher.update(&outcome_word.to_le_bytes());
+    }
+    result.outcome_hash = outcome_hasher.finalize().to_hex().to_string();
     Ok(result)
 }
 
@@ -515,6 +579,7 @@ pub struct Campaign {
     epoch: AtomicU64,
     seq: u64,
     plans: Vec<StoredPlan>,
+    archive: BTreeMap<String, String>,
     events: VecDeque<Event>,
     ledger: Ledger,
     response_limit: usize,
@@ -571,6 +636,7 @@ impl Campaign {
             epoch: AtomicU64::new(0),
             seq: 0,
             plans: Vec::with_capacity(MAX_ACTIVE_PLANS),
+            archive: BTreeMap::new(),
             events: VecDeque::with_capacity(EVENT_RING),
             ledger,
             response_limit: response_limit.min(MAX_FRAME_BYTES),
@@ -635,6 +701,7 @@ impl Campaign {
             "candidate-try" => self.candidate_try(&request.args, false),
             "candidate-apply" => self.candidate_try(&request.args, true),
             "obstruction-first" => self.obstruction(&request.args),
+            "exceptional" => self.exceptional(&request.args),
             "trace" => self.trace(&request.args),
             "note" => self.note(&request.args),
             "shutdown" => Ok(json!({"stopping": true})),
@@ -663,6 +730,7 @@ impl Campaign {
             "rows": self.batch.rows(),
             "fields": self.batch.fields,
             "plans": self.plans.len(),
+            "outcome_classes": self.archive.len(),
             "ledger_bytes": self.ledger.bytes,
             "ledger_limit": self.ledger.max_bytes,
             "ledger_truncated": self.ledger.truncated,
@@ -699,11 +767,21 @@ impl Campaign {
         let spec: PlanSpec = serde_json::from_value(spec_value.clone())?;
         let plan = CompiledPlan::compile(&spec, &self.batch.fields)?;
         let evaluation = evaluate_plan(&self.batch, &plan)?;
+        let equivalent_to = self.archive.get(&evaluation.outcome_hash).cloned();
+        if equivalent_to.is_none() && self.archive.len() < MAX_ARCHIVE_CLASSES {
+            self.archive
+                .insert(evaluation.outcome_hash.clone(), plan.name.clone());
+        }
         let first = evaluation.first_mismatch.or(evaluation.first_false);
         let obstruction = first.map(|row| self.batch.row_json(row));
         if !apply {
+            let synopsis = match first {
+                Some(row) => format!("first obstruction row {row}"),
+                None => "no obstruction in frozen batch".into(),
+            };
+            self.record("candidate-tested", &synopsis, Some(plan.name.clone()))?;
             return Ok(
-                json!({"plan": plan.name, "hash": plan.hash, "evaluation": evaluation, "first_obstruction": obstruction}),
+                json!({"plan": plan.name, "hash": plan.hash, "equivalent_to": equivalent_to, "evaluation": evaluation, "first_obstruction": obstruction}),
             );
         }
         let expected_epoch = args
@@ -740,7 +818,7 @@ impl Campaign {
             Some(name.clone()),
         )?;
         Ok(
-            json!({"plan": name, "hash": hash, "old_epoch": old_epoch, "new_epoch": new_epoch, "evaluation": evaluation, "first_obstruction": obstruction}),
+            json!({"plan": name, "hash": hash, "equivalent_to": equivalent_to, "old_epoch": old_epoch, "new_epoch": new_epoch, "evaluation": evaluation, "first_obstruction": obstruction}),
         )
     }
 
@@ -759,6 +837,68 @@ impl Campaign {
             Some(row) => json!({"plan": name, "obstruction": self.batch.row_json(row)}),
             None => json!({"plan": name, "obstruction": null}),
         })
+    }
+
+    fn exceptional(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let name = required_str(args, "plan")?;
+        let top = args
+            .get("top")
+            .and_then(Value::as_u64)
+            .unwrap_or(8)
+            .clamp(1, 32) as usize;
+        let high = match args
+            .get("direction")
+            .and_then(Value::as_str)
+            .unwrap_or("high")
+        {
+            "high" => true,
+            "low" => false,
+            _ => {
+                return Err(ControlError::Invalid(
+                    "exceptional direction must be high or low".into(),
+                ))
+            }
+        };
+        let stored = self
+            .plans
+            .iter()
+            .find(|stored| stored.plan.name == name)
+            .ok_or_else(|| ControlError::Invalid("unknown active plan".into()))?;
+        let mut selected: Vec<(i64, usize)> = Vec::with_capacity(top);
+        for row in 0..self.batch.rows() {
+            let score = stored.plan.evaluate_value(self.batch.row(row), None)?;
+            let position = selected
+                .iter()
+                .position(|&(other, other_row)| {
+                    if high {
+                        score > other || (score == other && row < other_row)
+                    } else {
+                        score < other || (score == other && row < other_row)
+                    }
+                })
+                .unwrap_or(selected.len());
+            if position < top {
+                selected.insert(position, (score, row));
+                if selected.len() > top {
+                    selected.pop();
+                }
+            }
+        }
+        let rows: Vec<_> = selected
+            .iter()
+            .map(|&(score, row)| json!({"score": score, "state": self.batch.row_json(row)}))
+            .collect();
+        let synopsis = selected.first().map_or_else(
+            || "no exceptional state".into(),
+            |&(score, row)| format!("top exceptional row {row}, score {score}"),
+        );
+        self.record("exceptional-query", &synopsis, Some(name.into()))?;
+        Ok(json!({
+            "plan": name,
+            "direction": if high { "high" } else { "low" },
+            "top": rows,
+            "examined": self.batch.rows(),
+        }))
     }
 
     fn trace(&mut self, args: &Value) -> Result<Value, ControlError> {
@@ -783,7 +923,7 @@ impl Campaign {
         let mut values = Vec::with_capacity(stored.plan.ops.len().min(max_records));
         let observed = stored
             .plan
-            .evaluate(self.batch.row(row), Some(&mut values))?;
+            .evaluate_value(self.batch.row(row), Some(&mut values))?;
         let truncated = stored.plan.ops.len() > max_records;
         values.truncate(max_records);
         let trace = json!({
@@ -890,7 +1030,14 @@ pub fn send_request(
     let mut stream = UnixStream::connect(&manifest.socket)?;
     write_frame(&mut stream, &encoded)?;
     let response = read_frame(&mut stream)?;
-    Ok(serde_json::from_slice(&response)?)
+    let response: Response = serde_json::from_slice(&response)?;
+    if response.schema != SCHEMA
+        || response.request_id != request.request_id
+        || response.run_id != manifest.run_id
+    {
+        return Err(ControlError::Invalid("response handshake rejected".into()));
+    }
+    Ok(response)
 }
 
 pub fn read_manifest(run_dir: &Path) -> Result<Manifest, ControlError> {
@@ -1003,6 +1150,8 @@ fn write_response(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::thread;
+    use std::time::Duration;
 
     fn batch() -> FeatureBatch {
         FeatureBatch {
@@ -1022,6 +1171,7 @@ mod tests {
             schema: PLAN_SCHEMA.into(),
             name: "support-or-omega".into(),
             role: PlanRole::Diagnostic,
+            output: PlanOutput::Predicate,
             program: vec![
                 PlanOp::Field {
                     name: "surplus".into(),
@@ -1049,10 +1199,66 @@ mod tests {
             schema: PLAN_SCHEMA.into(),
             name: "bad".into(),
             role: PlanRole::Diagnostic,
+            output: PlanOutput::Predicate,
             program: vec![PlanOp::And],
         };
         assert!(CompiledPlan::compile(&spec, &batch().fields).is_err());
         spec.program = vec![PlanOp::Const { value: 1 }, PlanOp::Const { value: 2 }];
         assert!(CompiledPlan::compile(&spec, &batch().fields).is_err());
+    }
+
+    #[test]
+    fn simultaneous_campaigns_reject_cross_run_control() {
+        let temporary = tempfile::tempdir().unwrap();
+        let data = temporary.path().join("data.jsonl");
+        fs::write(
+            &data,
+            concat!(
+                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"tiny\",\"problem\":\"fixture\",\"fields\":[\"x\"],\"rows\":1}\n",
+                "{\"id\":1,\"expected\":true,\"values\":[1]}\n"
+            ),
+        )
+        .unwrap();
+        let campaign_a = Campaign::create(
+            &data,
+            &temporary.path().join("run-a"),
+            Some(temporary.path().join("a.sock")),
+            4096,
+            4096,
+            4096,
+        )
+        .unwrap();
+        let campaign_b = Campaign::create(
+            &data,
+            &temporary.path().join("run-b"),
+            Some(temporary.path().join("b.sock")),
+            4096,
+            4096,
+            4096,
+        )
+        .unwrap();
+        let manifest_a = campaign_a.manifest().clone();
+        let manifest_b = campaign_b.manifest().clone();
+        let thread_a = thread::spawn(move || campaign_a.serve().unwrap());
+        let thread_b = thread::spawn(move || campaign_b.serve().unwrap());
+        for _ in 0..100 {
+            if manifest_a.socket.exists() && manifest_b.socket.exists() {
+                break;
+            }
+            thread::sleep(Duration::from_millis(2));
+        }
+        assert!(manifest_a.socket.exists() && manifest_b.socket.exists());
+
+        let mut crossed = manifest_a.clone();
+        crossed.socket = manifest_b.socket.clone();
+        assert!(send_request(&crossed, "status", json!({}), 4096).is_err());
+        let status_b = send_request(&manifest_b, "status", json!({}), 4096).unwrap();
+        assert!(status_b.ok);
+        assert_eq!(status_b.epoch, 0);
+
+        send_request(&manifest_a, "shutdown", json!({}), 4096).unwrap();
+        send_request(&manifest_b, "shutdown", json!({}), 4096).unwrap();
+        thread_a.join().unwrap();
+        thread_b.join().unwrap();
     }
 }

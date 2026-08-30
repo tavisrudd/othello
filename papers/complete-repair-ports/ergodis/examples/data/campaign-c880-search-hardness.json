@@ -1,0 +1,9 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "search-node-hardness",
+  "role": "ordering",
+  "output": "score",
+  "program": [
+    { "op": "field", "name": "search_nodes" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "strict-support-descent",
+  "role": "diagnostic",
+  "program": [
+    { "op": "field", "name": "support_surplus" },
+    { "op": "const", "value": 0 },
+    { "op": "gt" }
+  ]
+}

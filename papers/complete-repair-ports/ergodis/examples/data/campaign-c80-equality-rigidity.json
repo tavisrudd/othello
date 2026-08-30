@@ -1,0 +1,13 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "equal-support-rigidity-score",
+  "role": "ordering",
+  "output": "score",
+  "program": [
+    { "op": "field", "name": "equal_support" },
+    { "op": "const", "value": 1000 },
+    { "op": "mul" },
+    { "op": "field", "name": "omega_drop" },
+    { "op": "add" }
+  ]
+}
