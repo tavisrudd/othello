@@ -199,6 +199,12 @@ change between pulse and fetch fails closed and causes a retry. This design
 keeps transport, JSON, and allocation outside hot loops and makes plan removal
 as atomic as plan activation.
 
+Pulse intervals remain fixed and caller-selected. Experimental 8x and 4x
+unchanged-epoch backoff both missed a theorem submitted during the final work
+chunk of the short budget-12 control. Backoff is therefore rejected in v0;
+future overhead reduction should use push notification or a nonblocking wakeup
+rather than silently weakening steering responsiveness.
+
 The experimental `alignment-controlled` binary is the first consumer. It
 publishes a bounded C880 heartbeat at each pulse and permits only score-valued
 ordering plans. Every branch remains in the exact DFS. The ordinary

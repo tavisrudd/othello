@@ -189,6 +189,28 @@ from silently becoming a proof-authoritative prune.
 5. Add proof handles and hostile-corpus gates before any necessary/sufficient
    role exists.
 
+## Mystery ledger (`ej` + `tt` closeout)
+
+- **Settled:** the injected residual-packing theorem's initial 3.9x slowdown
+  was mostly repeated work, not socket contention. Compute-once frame ordering
+  repairs that slice by 2.16x without allocation or feature-off storage.
+- **Open:** exact child packing barely changes the C880 state count. The next
+  discriminator is whether quotient-refinement gain or cheap cut-coverage is a
+  better ordering observable than lower-bound strength; this belongs to the
+  measured C880 successor, not more syntax.
+- **Open:** the exact sampled C80 rank-sector law `{0,6}` has no q17 evidence.
+  Unguided sampling missed the survivor stratum entirely; a targeted q17
+  constructor/import is the evidence gate.
+- **Settled negative:** exponential backoff cut the short budget-12 no-plan run
+  from 37 pulses / 8.49 seconds to 6 pulses / 7.93 seconds, but both 8x and 4x
+  caps missed a theorem submitted during the final work chunk. Fixed polling
+  is retained in v0. A push notification/eventfd successor owns simultaneous
+  low overhead and bounded steering latency.
+- **Opportunity:** because source plans stay in a quantifier-free SMT-LIB-like
+  fragment, the same candidate can later be emitted to an SMT backend for
+  bounded symbolic counterexample search. This is a successor capability, not
+  evidence for any current theorem.
+
 ## Vibe
 
 The spike crossed the line from dashboard design to a useful theorem-search
