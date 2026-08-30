@@ -95,3 +95,11 @@ moment images.  Each invariant must expose a packed residual-state projection,
 a reachable-residue table by remaining weight, and an independently replayed
 exclusion.  Keep an invariant only when its extra hot instructions are repaid
 by end-to-end state reduction on held-out instances.
+
+One immediate generalization was implemented and rejected.  An exact
+512-state BFS table combined an eight-bit syndrome projection with completion
+parity.  It passed the full correctness gate but removed no additional
+candidates on either Gross or BB288; BB288 search increased from `0.6949 s` to
+`0.7423 s` in the bounded diagnostic.  Commit `a70b5a9bc` removes the table.
+Future finite images need a compile-time selection score predicting a strictly
+stronger bound before they are admitted to the hot path.

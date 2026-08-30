@@ -107,6 +107,10 @@ backend parity-rounds both syndrome-degree and disjoint-packing completion
 bounds.  On the diagnostic Gross control this removes 28.91% of candidates
 and 19.2% of cycles across three paired 500-round runs; cold compilation still
 dominates a one-shot solve.  Higher residues and moment images remain open.
+An eight-bit projected-syndrome/parity word metric passed correctness but was
+rejected after pruning no extra Gross or BB288 candidates and slowing the
+latter diagnostic by 6.8%; future images require a cold strength/admission
+test before entering the hot path.
 
 ### Theorem input
 
