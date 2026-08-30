@@ -76,6 +76,17 @@ def read_json(path: Path) -> dict[str, Any]:
     return value
 
 
+def one_json_line(path: Path) -> dict[str, Any]:
+    with path.open("r", encoding="utf-8") as stream:
+        lines = [line for line in stream if line.strip()]
+    if len(lines) != 1:
+        raise RuntimeError(f"{path}: expected one nonempty JSON line")
+    value = json.loads(lines[0])
+    if not isinstance(value, dict):
+        raise RuntimeError(f"{path}: expected a JSON object")
+    return value
+
+
 def ensure_input(
     importer: Path,
     physical: Path,
@@ -161,6 +172,9 @@ def main() -> int:
     parser.add_argument("--qdist-root", type=Path, required=True)
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--binary", type=Path, required=True)
+    parser.add_argument("--random-binary", type=Path)
+    parser.add_argument("--ris-trials", type=int, default=1_000_000)
+    parser.add_argument("--ris-seed", type=int, default=98530)
     parser.add_argument("--threads", type=int, default=16)
     parser.add_argument("--worker-cpus", default="")
     parser.add_argument("--timeout", type=float, default=180.0)
@@ -168,8 +182,8 @@ def main() -> int:
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
 
-    if args.threads <= 0 or args.timeout <= 0:
-        raise RuntimeError("threads and timeout must be positive")
+    if args.threads <= 0 or args.timeout <= 0 or args.ris_trials <= 0:
+        raise RuntimeError("threads, timeout, and RIS trials must be positive")
     if str(args.output_root.resolve()).startswith("/tmp/"):
         raise RuntimeError("--output-root must not use the RAM-backed /tmp filesystem")
     if git_commit(args.qdist_root) != PINNED_QDIST_COMMIT:
@@ -180,18 +194,22 @@ def main() -> int:
         raise RuntimeError("the suite runner requires timeout and time executables")
     if not args.binary.is_file():
         raise RuntimeError(f"native binary does not exist: {args.binary}")
+    if args.random_binary is not None and not args.random_binary.is_file():
+        raise RuntimeError(f"random-search binary does not exist: {args.random_binary}")
 
     output_root = args.output_root
     inputs_dir = output_root / "inputs"
     logs_dir = output_root / "logs"
     evidence_dir = output_root / "evidence"
-    for directory in (inputs_dir, logs_dir, evidence_dir):
+    ris_dir = output_root / "ris"
+    search_inputs_dir = output_root / "search-inputs"
+    for directory in (inputs_dir, logs_dir, evidence_dir, ris_dir, search_inputs_dir):
         directory.mkdir(parents=True, exist_ok=True)
     summary = output_root / "summary.jsonl"
     manifest_path = output_root / "manifest.json"
     instances = discover_instances(args.qdist_root)
     manifest = {
-        "schema": "ergodis-qdist-native-suite-v1",
+        "schema": "ergodis-qdist-native-suite-v2",
         "qdist_commit": PINNED_QDIST_COMMIT,
         "suite_directories": list(SUITE_DIRECTORIES),
         "instance_count": len(instances),
@@ -202,6 +220,9 @@ def main() -> int:
         "maximum_weight_override": args.maximum_weight,
         "default_non_bb_maximum_weight": DEFAULT_MAXIMUM_WEIGHT,
         "binary_sha256": sha256(args.binary),
+        "random_binary_sha256": sha256(args.random_binary) if args.random_binary else None,
+        "ris_trials": args.ris_trials,
+        "ris_seed": args.ris_seed,
     }
     if manifest_path.exists():
         if read_json(manifest_path) != manifest:
@@ -236,6 +257,57 @@ def main() -> int:
                 maximum_weight,
                 input_path,
             )
+            budget_started = time.monotonic()
+            search_input_path = input_path
+            ris_record: dict[str, Any] | None = None
+            ris_evidence_sha256: str | None = None
+            if (
+                args.random_binary is not None
+                and stem in LITERATURE_BB_DISTANCES
+                and maximum_weight >= 12
+            ):
+                ris_stdout_path = ris_dir / f"{slug}.stdout.jsonl"
+                ris_stderr_path = ris_dir / f"{slug}.stderr.log"
+                ris_evidence_path = ris_dir / f"{slug}.evidence.jsonl"
+                ris_command = [
+                    timeout_program,
+                    "--signal=TERM",
+                    "--kill-after=2s",
+                    f"{args.timeout}s",
+                    str(args.random_binary),
+                    "--input",
+                    str(input_path),
+                    "--trials",
+                    str(args.ris_trials),
+                    "--target-weight",
+                    str(maximum_weight),
+                    "--threads",
+                    str(args.threads),
+                    "--seed",
+                    str(args.ris_seed + 2 * instance_index + (direction == "hz-gx")),
+                    "--evidence",
+                    str(ris_evidence_path),
+                ]
+                with ris_stdout_path.open("xb") as stdout, ris_stderr_path.open("xb") as stderr:
+                    ris_returncode = subprocess.run(
+                        ris_command, stdout=stdout, stderr=stderr
+                    ).returncode
+                if ris_returncode == 0:
+                    ris_record = one_json_line(ris_stdout_path)
+                    ris_evidence_sha256 = sha256(ris_evidence_path)
+                    result = ris_record.get("result")
+                    if result is not None:
+                        search_problem = dict(problem)
+                        search_problem["incumbent_support"] = result["witness"]
+                        search_input_path = search_inputs_dir / f"{slug}.json"
+                        with search_input_path.open("x", encoding="utf-8") as stream:
+                            json.dump(
+                                search_problem,
+                                stream,
+                                separators=(",", ":"),
+                                sort_keys=True,
+                            )
+                            stream.write("\n")
             stdout_path = logs_dir / f"{slug}.stdout.jsonl"
             stderr_path = logs_dir / f"{slug}.stderr.log"
             metrics_path = logs_dir / f"{slug}.time"
@@ -243,6 +315,7 @@ def main() -> int:
             for path in (stdout_path, stderr_path, metrics_path, evidence_path):
                 if path.exists():
                     raise RuntimeError(f"refusing to overwrite incomplete run artifact {path}")
+            remaining_timeout = args.timeout - (time.monotonic() - budget_started)
             command = [
                 time_program,
                 "-f",
@@ -252,10 +325,10 @@ def main() -> int:
                 timeout_program,
                 "--signal=TERM",
                 "--kill-after=5s",
-                f"{args.timeout}s",
+                f"{max(0.001, remaining_timeout)}s",
                 str(args.binary),
                 "--input",
-                str(input_path),
+                str(search_input_path),
                 "--evidence",
                 str(evidence_path),
                 "--threads",
@@ -263,10 +336,9 @@ def main() -> int:
             ]
             if args.worker_cpus:
                 command += ["--worker-cpus", args.worker_cpus]
-            started = time.monotonic()
             with stdout_path.open("xb") as stdout, stderr_path.open("xb") as stderr:
                 returncode = subprocess.run(command, stdout=stdout, stderr=stderr).returncode
-            elapsed = time.monotonic() - started
+            elapsed = time.monotonic() - budget_started
             status = "ok" if returncode == 0 else "timeout" if returncode == 124 else "error"
             native_record: dict[str, Any] | None = None
             if status == "ok":
@@ -276,7 +348,7 @@ def main() -> int:
                     raise RuntimeError(f"{slug}: expected one native JSON record")
                 native_record = json.loads(lines[0])
             record = {
-                "schema": "ergodis-qdist-native-suite-result-v1",
+                "schema": "ergodis-qdist-native-suite-result-v2",
                 "instance_index": instance_index,
                 "stem": stem,
                 "direction": direction,
@@ -289,7 +361,11 @@ def main() -> int:
                 "logical_rows": len(problem["logical_observations"]),
                 "anchor_count": len(problem["anchors"]),
                 "torus_shape": problem["metadata"]["torus_shape"],
-                "input_sha256": sha256(input_path),
+                "canonical_input_sha256": sha256(input_path),
+                "input_relative_path": str(search_input_path.relative_to(output_root)),
+                "input_sha256": sha256(search_input_path),
+                "ris": ris_record,
+                "ris_evidence_sha256": ris_evidence_sha256,
                 "evidence_sha256": sha256(evidence_path) if evidence_path.exists() else None,
                 "metrics": parse_metrics(metrics_path),
                 "native": native_record,

@@ -191,10 +191,15 @@ fn main() -> Result<()> {
     let problem: SparseProblem =
         serde_json::from_reader(BufReader::new(file)).context("parsing sparse CSS problem")?;
     let columns = usize::from(problem.coordinate_count);
+    let maximum_weight = args.maximum_weight.unwrap_or(problem.maximum_weight);
     let physical = dense_matrix(&problem.physical_checks, columns)?;
     let logical = dense_matrix(&problem.logical_observations, columns)?;
     let physical_rank = binary_rank(&problem.physical_checks, columns);
-    let wide_problem = columns > 256 || physical_rank > 128;
+    // Deep searches benefit overwhelmingly from syndrome-driven fail-first
+    // branching even when the compact coordinate representation would fit.
+    // Keep shallow and genuinely small jobs on the lower-overhead compact path.
+    let deep_syndrome_problem = columns >= 128 && maximum_weight >= 12;
+    let wide_problem = columns > 256 || physical_rank > 128 || deep_syndrome_problem;
     let colossal_problem = columns > 1536 || physical_rank > 704;
     let huge_problem =
         !colossal_problem && (columns > 832 || physical_rank > 384 || logical.rows() > 64);
@@ -374,7 +379,6 @@ fn main() -> Result<()> {
         }
         encoded
     });
-    let maximum_weight = args.maximum_weight.unwrap_or(problem.maximum_weight);
     if args.rounds == 0 {
         bail!("round count must be positive");
     }
@@ -462,42 +466,82 @@ fn main() -> Result<()> {
                 }
             })?,
             Backend::Wide(compiled) => thread_pool.install(|| {
-                compiled.search_bounded_syndrome_parallel_pulsed(
-                    &problem.anchors,
-                    maximum_weight,
-                    args.pulse_interval,
-                )
+                if certify_incumbent {
+                    compiled.certify_incumbent_parallel_pulsed(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                        args.pulse_interval,
+                    )
+                } else {
+                    compiled.search_bounded_syndrome_parallel_pulsed(
+                        &problem.anchors,
+                        maximum_weight,
+                        args.pulse_interval,
+                    )
+                }
             })?,
             Backend::ExtraWide(compiled) => thread_pool.install(|| {
-                compiled.search_bounded_syndrome_parallel_pulsed(
-                    &problem.anchors,
-                    maximum_weight,
-                    args.pulse_interval,
-                )
+                if certify_incumbent {
+                    compiled.certify_incumbent_parallel_pulsed(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                        args.pulse_interval,
+                    )
+                } else {
+                    compiled.search_bounded_syndrome_parallel_pulsed(
+                        &problem.anchors,
+                        maximum_weight,
+                        args.pulse_interval,
+                    )
+                }
             })?,
             #[cfg(feature = "large-css")]
             Backend::Large(compiled) => thread_pool.install(|| {
-                compiled.search_bounded_syndrome_parallel_pulsed(
-                    &problem.anchors,
-                    maximum_weight,
-                    args.pulse_interval,
-                )
+                if certify_incumbent {
+                    compiled.certify_incumbent_parallel_pulsed(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                        args.pulse_interval,
+                    )
+                } else {
+                    compiled.search_bounded_syndrome_parallel_pulsed(
+                        &problem.anchors,
+                        maximum_weight,
+                        args.pulse_interval,
+                    )
+                }
             })?,
             #[cfg(feature = "large-css")]
             Backend::Huge(compiled) => thread_pool.install(|| {
-                compiled.search_bounded_syndrome_parallel_pulsed(
-                    &problem.anchors,
-                    maximum_weight,
-                    args.pulse_interval,
-                )
+                if certify_incumbent {
+                    compiled.certify_incumbent_parallel_pulsed(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                        args.pulse_interval,
+                    )
+                } else {
+                    compiled.search_bounded_syndrome_parallel_pulsed(
+                        &problem.anchors,
+                        maximum_weight,
+                        args.pulse_interval,
+                    )
+                }
             })?,
             #[cfg(feature = "large-css")]
             Backend::Colossal(compiled) => thread_pool.install(|| {
-                compiled.search_bounded_syndrome_parallel_pulsed(
-                    &problem.anchors,
-                    maximum_weight,
-                    args.pulse_interval,
-                )
+                if certify_incumbent {
+                    compiled.certify_incumbent_parallel_pulsed(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                        args.pulse_interval,
+                    )
+                } else {
+                    compiled.search_bounded_syndrome_parallel_pulsed(
+                        &problem.anchors,
+                        maximum_weight,
+                        args.pulse_interval,
+                    )
+                }
             })?,
         };
         #[cfg(not(feature = "parallel"))]
@@ -510,22 +554,57 @@ fn main() -> Result<()> {
                 }?
             }
             Backend::Wide(compiled) => {
-                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                if certify_incumbent {
+                    compiled.certify_incumbent_syndrome_driven(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                    )?
+                } else {
+                    compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                }
             }
             Backend::ExtraWide(compiled) => {
-                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                if certify_incumbent {
+                    compiled.certify_incumbent_syndrome_driven(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                    )?
+                } else {
+                    compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                }
             }
             #[cfg(feature = "large-css")]
             Backend::Large(compiled) => {
-                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                if certify_incumbent {
+                    compiled.certify_incumbent_syndrome_driven(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                    )?
+                } else {
+                    compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                }
             }
             #[cfg(feature = "large-css")]
             Backend::Huge(compiled) => {
-                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                if certify_incumbent {
+                    compiled.certify_incumbent_syndrome_driven(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                    )?
+                } else {
+                    compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                }
             }
             #[cfg(feature = "large-css")]
             Backend::Colossal(compiled) => {
-                compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                if certify_incumbent {
+                    compiled.certify_incumbent_syndrome_driven(
+                        &problem.anchors,
+                        &problem.incumbent_support,
+                    )?
+                } else {
+                    compiled.search_bounded_syndrome_driven(&problem.anchors, maximum_weight)?
+                }
             }
         };
         search_seconds.push(search_start.elapsed().as_secs_f64());

@@ -1818,6 +1818,84 @@ where
         })
     }
 
+    fn checked_incumbent_result(
+        &self,
+        incumbent: &[u16],
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        if incumbent.is_empty() || incumbent.len() > self.coordinate_count() {
+            return Err(CssDistanceError::InvalidIncumbentSupport);
+        }
+        let mut support = PackedSupport::<SUPPORT_WORDS>::default();
+        let mut syndrome = PackedSyndrome::<CHECK_WORDS>::default();
+        let mut logical = 0u64;
+        for &coordinate in incumbent {
+            let coordinate = usize::from(coordinate);
+            if coordinate >= self.coordinate_count() || support.contains(coordinate) {
+                return Err(CssDistanceError::InvalidIncumbentSupport);
+            }
+            support.insert(coordinate);
+            syndrome.toggle(self.columns[coordinate].syndrome);
+            logical ^= self.columns[coordinate].logical;
+        }
+        if !syndrome.is_zero() {
+            return Err(CssDistanceError::IncumbentPhysicalSyndrome);
+        }
+        if !self.logical_is_nonzero(support, logical) {
+            return Err(CssDistanceError::IncumbentLogicalObservation);
+        }
+        Ok(BoundedCssDistanceResult {
+            distance: Some(incumbent.len() as u16),
+            witness: incumbent.to_vec().into_boxed_slice(),
+            searched_maximum_weight: 0,
+            stats: ConnectedSearchStats::default(),
+        })
+    }
+
+    /// Replay an incumbent and close every strictly smaller weight.
+    pub fn certify_incumbent_syndrome_driven(
+        &self,
+        anchors: &[u16],
+        incumbent: &[u16],
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        let replay = self.checked_incumbent_result(incumbent)?;
+        if incumbent.len() == 1 {
+            return Ok(replay);
+        }
+        let mut result =
+            self.search_bounded_syndrome_driven(anchors, incumbent.len() as u16 - 1)?;
+        if result.distance.is_none() {
+            result.distance = replay.distance;
+            result.witness = replay.witness;
+        }
+        Ok(result)
+    }
+
+    #[cfg(feature = "parallel")]
+    fn certify_incumbent_parallel_pulsed_impl(
+        &self,
+        anchors: &[u16],
+        incumbent: &[u16],
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError>
+    where
+        Self: WidePartitionKernel<SUPPORT_WORDS, CHECK_WORDS>,
+    {
+        let replay = self.checked_incumbent_result(incumbent)?;
+        if incumbent.len() == 1 {
+            return Ok(replay);
+        }
+        let mut result = self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            incumbent.len() as u16 - 1,
+            pulse_interval,
+        )?;
+        if result.distance.is_none() {
+            result.distance = replay.distance;
+            result.witness = replay.witness;
+        }
+        Ok(result)
+    }
+
     #[inline]
     fn has_short_completion(&self, syndrome: PackedSyndrome<CHECK_WORDS>, additions: u16) -> bool {
         if syndrome.is_zero() {
@@ -2021,6 +2099,15 @@ impl CompiledWideCssDistanceImpl<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> {
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
         self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
     }
+
+    pub fn certify_incumbent_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        incumbent: &[u16],
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.certify_incumbent_parallel_pulsed_impl(anchors, incumbent, pulse_interval)
+    }
 }
 
 #[cfg(feature = "parallel")]
@@ -2032,6 +2119,15 @@ impl CompiledWideCssDistanceImpl<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> 
         pulse_interval: u64,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
         self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+    }
+
+    pub fn certify_incumbent_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        incumbent: &[u16],
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.certify_incumbent_parallel_pulsed_impl(anchors, incumbent, pulse_interval)
     }
 }
 
@@ -2046,6 +2142,15 @@ impl CompiledWideCssDistanceImpl<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1> {
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
         self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
     }
+
+    pub fn certify_incumbent_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        incumbent: &[u16],
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.certify_incumbent_parallel_pulsed_impl(anchors, incumbent, pulse_interval)
+    }
 }
 
 #[cfg(feature = "parallel")]
@@ -2058,6 +2163,15 @@ impl CompiledWideCssDistanceImpl<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS, HUGE_L
         pulse_interval: u64,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
         self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+    }
+
+    pub fn certify_incumbent_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        incumbent: &[u16],
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.certify_incumbent_parallel_pulsed_impl(anchors, incumbent, pulse_interval)
     }
 }
 
@@ -2073,6 +2187,15 @@ impl
         pulse_interval: u64,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
         self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+    }
+
+    pub fn certify_incumbent_parallel_pulsed(
+        &self,
+        anchors: &[u16],
+        incumbent: &[u16],
+        pulse_interval: u64,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.certify_incumbent_parallel_pulsed_impl(anchors, incumbent, pulse_interval)
     }
 }
 
@@ -3403,6 +3526,23 @@ mod tests {
         let answer = compiled.search_bounded(&[0, 1, 2, 3, 4], 5).unwrap();
         assert_eq!(answer.distance, Some(1));
         assert_eq!(&*answer.witness, &[4]);
+    }
+
+    #[test]
+    fn syndrome_driven_incumbent_closes_strictly_smaller_weights() {
+        let physical = Matrix::new::<2>(1, 2, vec![1, 1]).unwrap();
+        let logical = Matrix::new::<2>(1, 2, vec![1, 0]).unwrap();
+        let compiled = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+        let answer = compiled
+            .certify_incumbent_syndrome_driven(&[0, 1], &[0, 1])
+            .unwrap();
+        assert_eq!(answer.distance, Some(2));
+        assert_eq!(&*answer.witness, &[0, 1]);
+        assert_eq!(answer.searched_maximum_weight, 0);
+        assert!(matches!(
+            compiled.certify_incumbent_syndrome_driven(&[0, 1], &[0]),
+            Err(CssDistanceError::IncumbentPhysicalSyndrome)
+        ));
     }
 
     fn artifact_problem() -> (Matrix, Matrix) {
