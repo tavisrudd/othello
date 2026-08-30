@@ -431,6 +431,12 @@ Sequel research:
   exact figure of merit `576/17 = 33.88235...`, 1.765x BB360.  The radius-16
   runs examine 116.97 billion candidates in 647.943 seconds combined at the
   same low-memory huge backend; no non-abelian orbit reduction is assumed.
+  The portfolio-import programme has begun with the
+  [verified commutant foundation](../2026-08-29-c985-ergodis-commutant-foundation.md):
+  induced binary subspace actions, full commuting algebras, central-idempotent
+  block coordinates, and exact extension-field certificates.  The packed
+  rank-63 correctness gate passes; segmented large-rank support, operator
+  discovery, CSS integration, and all performance measurements remain open.
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and proves the exact finite and

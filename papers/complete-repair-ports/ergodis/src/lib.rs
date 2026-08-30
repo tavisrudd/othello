@@ -8,6 +8,7 @@ mod arena;
 pub mod automata;
 pub mod balanced;
 pub mod bitset;
+pub mod commutant;
 pub mod composition;
 pub mod confinement;
 pub mod contextual;
@@ -46,6 +47,12 @@ pub use applications::{
     RepairDagAnswer, RepairTask,
 };
 pub use automata::{ExplicitMataDfa, ExplicitMataError};
+pub use commutant::{
+    certify_binary_extension_field, compile_binary_commutant, compile_binary_subspace_action,
+    verify_binary_commutant, verify_binary_extension_field, verify_binary_invariant_split,
+    verify_binary_subspace_action, BinaryCommutant, BinaryCommutantError, BinaryExtensionField,
+    BinaryInvariantSplit, PackedBinaryAction, PackedBinaryLinearMap, PackedBinarySubspace,
+};
 pub use composition::{
     CompositionAnswer, CompositionError, CompositionTable, CompositionTower, CostTable,
     TowerAnswer, TowerLevel, TowerWitness,

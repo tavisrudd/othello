@@ -3,7 +3,11 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-29
-**Status**: execution plan; no external claim or release decision
+**Status**: execution in progress; Work Package A packed correctness foundation
+landed locally; no external claim or release decision
+
+Progress record:
+`2026-08-29-c985-ergodis-commutant-foundation.md`.
 
 This plan turns the portfolio review in
 `2026-08-29-ergodis-commercialization-analysis-memo.md` into an ordered
