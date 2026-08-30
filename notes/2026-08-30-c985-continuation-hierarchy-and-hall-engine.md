@@ -162,6 +162,76 @@ matching in favour of a richer global charge object.  Merely making every
 consumed label adjacent to every new defect repairs matching but not strict
 support descent.
 
+### Surviving quotient: complete exchange plus lexicographic descent
+
+There is a cheaper and more general response state behind the failed graph.
+Make every genuinely new defect adjacent to every old label consumed in the
+same complete opponent/reply exchange.  This relation is projectively natural
+and needs no incidence table.  Hall feasibility then collapses exactly to the
+single count inequality
+
+```text
+number of consumed old labels >= number of genuinely new defects.
+```
+
+The matching engine becomes a verifier/falsifier rather than the hot
+algorithm; on this complete relation a direct cardinality test is the exact
+theorem-driven reduction.  If the inequality is strict, charged support size
+falls.  If equality holds, the next candidate well-founded state is
+
+```text
+(charged support cardinality, Omega),
+```
+
+ordered lexicographically.
+
+The bounded diagnostic is unexpectedly sharp.  With deterministic seed
+`98508030`:
+
+| field/sample | complete exchanges | with new defects | narrow secant Hall failures | complete-relation failures | support-first lex failures |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| q=11, 1,000 size-four states | 6,866 | 6,458 | 234 | 0 | 0 |
+| q=11, 10,000 size-four states | 70,066 | 65,464 | 2,350 | 0 | 0 |
+| q=13, 100 size-four states, 10,000-exchange cap | 10,001 | 2,953 | 51 | 0 | 0 |
+
+In the 1,000-state q11 sample, all 234 equal-support cases have the identical
+profile
+
+```text
+old defect rank / next rank / new count / Omega old / Omega next
+2 / 2 / 2 / 10 / 0.
+```
+
+The 10,000-state q11 envelope has the same aggregate signature: all 2,350
+non-strict cardinality cases still pass the support-first lexicographic test,
+and no exchange creates more than two new defects.  The q13 sample reaches four
+new defects but every sampled charged support decreases strictly.  These are
+deterministic samples, not exhaustive field theorems.
+
+This compresses the next C80 question to two scalar inequalities rather than a
+growing matching:
+
+```text
+consumed >= created,
+and consumed = created implies Omega(next) < Omega(old).
+```
+
+If those inequalities admit a field-uniform proof, the classical Hall step is
+an immediate corollary and Ergodis's minimal interface is just the four counts.
+If either fails, the scout emits the first exact exchange.  This is a better
+stepping stone than enriching the already-falsified secant graph.
+
+The field split matters.  The equality obstruction is over q=11, whose plane
+is already a proved base case in the cap lane.  In the q11 1,000-state sample,
+the eight observed `(support drop, Omega drop, old/half/next ranks)` profiles
+all have empty intermediate defect locus; the sole zero-support-drop profile
+is exactly `0/10/2/0/2`.  By contrast the q13 capped sample has minimum support
+drop 16 and minimum overload drop 90 among exchanges with new defects.  This
+does not prove monotone growth with q, but it identifies a legitimate theorem
+shape: discharge the already-proved small fields separately and prove strict
+consumed-label surplus above a field threshold.  That would be a counting
+theorem, not a matching theorem.
+
 ## Once-validated Pareto objectives
 
 `ValidatedParetoObjective` now binds immutable output and generator-edge
@@ -244,4 +314,4 @@ sha256sum -c notes/2026-08-30-c985-c80-projective-hall-deficit.sha256
 ```
 
 The certificate SHA-256 is
-`b351d9514d783e60a85cacf543ab9d8ad2021cf4fd9dd6de6c9c67586d92dbc3`.
+`564d92e45dd472beffbf36744baeabbb93e64b89d1ea1a2c3f5a8b69bfb6ed32`.

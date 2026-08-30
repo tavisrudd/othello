@@ -496,7 +496,18 @@ Sequel research:
   deficiency-one Hall set and no strict support-cardinality drop.  Primary
   bitmask, independent determinant, and Rust Hall replay agree; the overload
   coordinate falls `10 -> 0 -> 0`, so an exchange motif plus lexicographic
-  descent is the surviving C80 stepping stone.  The
+  descent is the surviving C80 stepping stone.  The coarser complete-exchange
+  relation then removes matching entirely: Hall is exactly
+  `consumed >= created`.  Deterministic diagnostics find zero failures of that
+  inequality or of support-first `(cardinality, Omega)` descent across 65,464
+  q11 and 2,953 q13 exchanges with new defects.  Every one of the 234
+  equal-support cases in the 1,000-state q11 sample has the locked profile
+  `2/2/2/10/0`.  These are sampled stepping-stone data, not a uniform theorem.
+  Since q11 and q13 are already proved cap-game base fields, the surviving
+  theorem shape is strict consumed-label surplus above a field threshold plus
+  the existing finite bases; this is now a counting problem rather than a
+  matching problem.
+  The
   once-validated Pareto objective wrapper also closes its hostile
   same-cardinality-order gate and gives 1.028--1.044x warm gains on two clean
   20-pair protocols.

@@ -9,6 +9,7 @@ import importlib.util
 import json
 import os
 import random
+from collections import Counter
 from pathlib import Path
 
 
@@ -112,7 +113,13 @@ def write_json(path: Path, value: dict) -> None:
     temporary.replace(path)
 
 
-def scout(q: int, seed: int, state_budget: int, exchange_budget: int) -> dict:
+def scout(
+    q: int,
+    seed: int,
+    state_budget: int,
+    exchange_budget: int,
+    continue_after_issue: bool,
+) -> dict:
     source = load_source()
     game = source.DirectSmallBoundaryGame(q)
     rng = random.Random(seed)
@@ -138,8 +145,13 @@ def scout(q: int, seed: int, state_budget: int, exchange_budget: int) -> dict:
         "uncovered_fibres": 0,
         "hall_failures": 0,
         "nondecreasing_exchanges": 0,
+        "complete_relation_hall_failures": 0,
+        "support_first_lex_failures": 0,
+        "omega_first_lex_failures": 0,
     }
     first_issue = None
+    equality_profiles: Counter[str] = Counter()
+    delta_profiles: Counter[str] = Counter()
     stop = False
     for state in sorted(states, key=lambda value: sorted(value)):
         old_defects = game.defects(state)
@@ -168,6 +180,43 @@ def scout(q: int, seed: int, state_budget: int, exchange_budget: int) -> dict:
                 )
                 if len(consumed) <= len(created):
                     counts["nondecreasing_exchanges"] += 1
+                if len(consumed) < len(created):
+                    counts["complete_relation_hall_failures"] += 1
+                old_support = len(old_defects)
+                next_support = old_support - len(consumed) + len(created)
+                old_omega = game.omega(state)
+                next_omega = game.omega(successor)
+                support_first_descends = (next_support, next_omega) < (
+                    old_support,
+                    old_omega,
+                )
+                omega_first_descends = (next_omega, next_support) < (
+                    old_omega,
+                    old_support,
+                )
+                if not support_first_descends:
+                    counts["support_first_lex_failures"] += 1
+                if not omega_first_descends:
+                    counts["omega_first_lex_failures"] += 1
+                if next_support == old_support:
+                    profile = (
+                        len(old_defects),
+                        len(next_defects),
+                        len(created),
+                        old_omega,
+                        next_omega,
+                    )
+                    equality_profiles["/".join(map(str, profile))] += 1
+                persistent_intermediate = len((half_defects - old_defects) & next_defects)
+                delta_profile = (
+                    len(consumed) - len(created),
+                    old_omega - next_omega,
+                    len(old_defects),
+                    len(half_defects),
+                    len(next_defects),
+                    persistent_intermediate,
+                )
+                delta_profiles["/".join(map(str, delta_profile))] += 1
 
                 labels = sorted(consumed)
                 neighbours = []
@@ -250,16 +299,20 @@ def scout(q: int, seed: int, state_budget: int, exchange_budget: int) -> dict:
                         "uncovered": point_list(uncovered),
                         "hall": hall,
                         "omega": [
-                            game.omega(state),
+                            old_omega,
                             game.omega(child),
-                            game.omega(successor),
+                            next_omega,
                         ],
+                        "charged_support": [old_support, next_support],
+                        "support_first_descends": support_first_descends,
+                        "omega_first_descends": omega_first_descends,
                         "successor_is_small_boundary": game.is_small_boundary(
                             successor
                         ),
                     }
-                    stop = True
-                    break
+                    if not continue_after_issue:
+                        stop = True
+                        break
             if stop:
                 break
         if stop:
@@ -271,6 +324,7 @@ def scout(q: int, seed: int, state_budget: int, exchange_budget: int) -> dict:
         "seed": seed,
         "state_budget": state_budget,
         "exchange_budget": exchange_budget,
+        "continue_after_issue": continue_after_issue,
         "source": str(SOURCE.relative_to(ROOT)),
         "source_sha256": sha256(SOURCE),
         "counts": counts,
@@ -282,6 +336,13 @@ def scout(q: int, seed: int, state_budget: int, exchange_budget: int) -> dict:
         if first_issue is not None
         else None
     )
+    if continue_after_issue:
+        result["equal_support_profiles_oldrank_nextrank_created_omega"] = dict(
+            sorted(equality_profiles.items())
+        )
+        result["delta_profiles_support_omega_old_half_next_persistent"] = dict(
+            sorted(delta_profiles.items())
+        )
     return result
 
 
@@ -291,11 +352,18 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=985_080_30)
     parser.add_argument("--states", type=int, default=100)
     parser.add_argument("--exchanges", type=int, default=10_000)
+    parser.add_argument("--continue-after-issue", action="store_true")
     output = parser.add_mutually_exclusive_group()
     output.add_argument("--write", type=Path)
     output.add_argument("--check", type=Path)
     args = parser.parse_args()
-    result = scout(args.q, args.seed, args.states, args.exchanges)
+    result = scout(
+        args.q,
+        args.seed,
+        args.states,
+        args.exchanges,
+        args.continue_after_issue,
+    )
     encoded = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if args.write is not None:
         write_json(args.write, result)
