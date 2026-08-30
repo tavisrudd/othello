@@ -223,7 +223,9 @@ impl AlignmentSearchWorkspace {
         if maximum_budget == 0 || seen_capacity < 16 {
             return Err(AlignmentError::Workspace);
         }
-        let slots = seen_capacity.next_power_of_two();
+        let slots = seen_capacity
+            .checked_next_power_of_two()
+            .ok_or(AlignmentError::Workspace)?;
         Ok(Self {
             frames: vec![SearchFrame::default(); maximum_budget as usize + 1].into_boxed_slice(),
             seen: vec![0_u64; slots].into_boxed_slice(),
@@ -333,6 +335,35 @@ pub fn search_alignment_attachment(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    const SECOND_REPRESENTATIVES: [usize; 3] = [1, 11, 46];
+    const THIRD_REPRESENTATIVES: [&[usize]; 3] = [
+        &[2, 6, 7, 11, 15, 36, 40, 46, 52],
+        &[1, 3, 12, 18, 21, 23, 26, 27, 33, 46, 49, 55],
+        &[1, 4, 11, 13, 20, 47, 51],
+    ];
+
+    fn next_permutation(permutation: &mut [u8; 8]) -> bool {
+        let Some(pivot) = (0..permutation.len() - 1)
+            .rev()
+            .find(|&index| permutation[index] < permutation[index + 1])
+        else {
+            return false;
+        };
+        let successor = (pivot + 1..permutation.len())
+            .rev()
+            .find(|&index| permutation[pivot] < permutation[index])
+            .unwrap();
+        permutation.swap(pivot, successor);
+        permutation[pivot + 1..].reverse();
+        true
+    }
+
+    fn permuted_triple_index(triples: &[[u8; 3]], index: usize, permutation: &[u8; 8]) -> usize {
+        let mut image = triples[index].map(|point| permutation[point as usize]);
+        image.sort_unstable();
+        triples.iter().position(|&triple| triple == image).unwrap()
+    }
 
     fn direct_answer(n: usize, e: u64, x: usize, triple: [u8; 3]) -> bool {
         let [a, b, c] = triple.map(usize::from);
@@ -472,6 +503,51 @@ mod tests {
                 problem.separates(selected).unwrap(),
                 direct_separates(&problem, selected)
             );
+        }
+    }
+
+    #[test]
+    fn three_level_orbit_split_covers_every_anchored_family() {
+        let problem = compile_alignment_attachment(8).unwrap();
+        let triples = problem.triples();
+        let mut permutations = Vec::with_capacity(40_320);
+        let mut permutation = [0, 1, 2, 3, 4, 5, 6, 7];
+        loop {
+            if permuted_triple_index(triples, 0, &permutation) == 0 {
+                permutations.push(permutation);
+            }
+            if !next_permutation(&mut permutation) {
+                break;
+            }
+        }
+        assert_eq!(permutations.len(), 720);
+
+        for second in 1..triples.len() {
+            assert!(SECOND_REPRESENTATIVES.iter().any(|&representative| {
+                permutations
+                    .iter()
+                    .any(|action| permuted_triple_index(triples, second, action) == representative)
+            }));
+        }
+
+        for (case, &second) in SECOND_REPRESENTATIVES.iter().enumerate() {
+            let stabilizer = permutations
+                .iter()
+                .filter(|action| permuted_triple_index(triples, second, action) == second);
+            let mut stabilizer_size = 0_usize;
+            let mut covered = [false; 56];
+            for action in stabilizer {
+                stabilizer_size += 1;
+                for &representative in THIRD_REPRESENTATIVES[case] {
+                    covered[permuted_triple_index(triples, representative, action)] = true;
+                }
+            }
+            assert_eq!(stabilizer_size, [48, 24, 72][case]);
+            for (third, &is_covered) in covered.iter().enumerate().take(triples.len()).skip(1) {
+                if third != second {
+                    assert!(is_covered, "second={second} third={third}");
+                }
+            }
         }
     }
 }

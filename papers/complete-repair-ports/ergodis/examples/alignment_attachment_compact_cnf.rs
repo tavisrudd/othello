@@ -35,12 +35,13 @@ fn counter_shape(items: usize, budget: usize) -> (usize, usize) {
             clauses += if threshold < prefix { 4 } else { 3 };
         }
     }
-    (variables, clauses + 1)
+    (variables, clauses + 2)
 }
 
-fn write_at_most(
+fn write_cardinality_band(
     output: &mut impl Write,
     items: usize,
+    minimum: usize,
     budget: usize,
     next_variable: &mut usize,
 ) -> std::io::Result<()> {
@@ -77,20 +78,44 @@ fn write_at_most(
             }
         }
     }
-    writeln!(output, "-{} 0", counter[items - 1][budget])
+    writeln!(output, "-{} 0", counter[items - 1][budget])?;
+    writeln!(output, "{} 0", counter[items - 1][minimum - 1])
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let path = std::env::args()
         .nth(1)
-        .ok_or("usage: alignment_attachment_compact_cnf OUTPUT.cnf [BUDGET]")?;
+        .ok_or("usage: alignment_attachment_compact_cnf OUTPUT.cnf [MAXIMUM] [MINIMUM] [FIXED]")?;
     let budget = std::env::args()
         .nth(2)
         .map_or(Ok(16_usize), |value| value.parse())?;
+    let minimum = std::env::args()
+        .nth(3)
+        .map_or(Ok(15_usize), |value| value.parse())?;
+    let mut fixed = std::env::args()
+        .nth(4)
+        .map(|value| {
+            value
+                .split(',')
+                .map(str::parse::<usize>)
+                .collect::<Result<Vec<_>, _>>()
+        })
+        .transpose()?
+        .unwrap_or_default();
     let problem = compile_alignment_attachment(8)?;
     let triples = problem.triples();
-    if budget == 0 || budget >= triples.len() {
-        return Err("budget must be between 1 and 55".into());
+    if minimum < 15 || budget < minimum || budget >= triples.len() {
+        return Err(
+            "bounds must satisfy the proved lower bound 15 <= MINIMUM <= MAXIMUM <= 55".into(),
+        );
+    }
+    fixed.sort_unstable();
+    if fixed.windows(2).any(|pair| pair[0] == pair[1])
+        || fixed
+            .iter()
+            .any(|&index| index == 0 || index >= triples.len())
+    {
+        return Err("FIXED must contain distinct zero-based non-anchor triple indices".into());
     }
 
     let mut witness_count = 0_usize;
@@ -105,18 +130,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         xor_clauses += edge_count * 21 + 4 * (crossing_triples - 1) + 1;
     }
     let (counter_variables, counter_clauses) = counter_shape(triples.len(), budget);
-    let anchor_clause = 1_usize;
+    let anchor_clauses = 1_usize + fixed.len();
     let witness_implications = witness_count;
-    let clause_count = counter_clauses + anchor_clause + witness_implications + xor_clauses;
+    let clause_count = counter_clauses + anchor_clauses + witness_implications + xor_clauses;
     let variable_count = triples.len() + counter_variables + witness_count + xor_auxiliaries;
 
     let file = std::fs::File::create_new(path)?;
     let mut output = BufWriter::with_capacity(1 << 20, file);
     writeln!(output, "p cnf {variable_count} {clause_count}")?;
     writeln!(output, "1 0")?;
+    for fixed in fixed {
+        writeln!(output, "{} 0", fixed + 1)?;
+    }
 
     let mut next_variable = triples.len() + 1;
-    write_at_most(&mut output, triples.len(), budget, &mut next_variable)?;
+    write_cardinality_band(
+        &mut output,
+        triples.len(),
+        minimum,
+        budget,
+        &mut next_variable,
+    )?;
     for cut in 1_usize..1 << 7 {
         let mut edge_index = [[u8::MAX; 8]; 8];
         let mut edge_count = 0_u8;

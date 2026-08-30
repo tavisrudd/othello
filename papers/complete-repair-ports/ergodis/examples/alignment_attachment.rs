@@ -1,6 +1,7 @@
 use ergodis::{
     compile_alignment_attachment, search_alignment_attachment, AlignmentSearchWorkspace,
 };
+use std::io::BufRead;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let points = std::env::var("ERGODIS_ALIGNMENT_POINTS")
@@ -13,6 +14,35 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .ok()
         .map_or(Ok(24_u32), |value| value.parse())?;
     let problem = compile_alignment_attachment(points)?;
+    if let Ok(path) = std::env::var("ERGODIS_ALIGNMENT_MODEL") {
+        let file = std::fs::File::open(path)?;
+        let mut reader = std::io::BufReader::new(file);
+        let mut line = String::new();
+        let mut selected = 0_u64;
+        let mut satisfiable = false;
+        while reader.read_line(&mut line)? != 0 {
+            if line.trim_end() == "s SATISFIABLE" {
+                satisfiable = true;
+            } else if let Some(model_line) = line.strip_prefix("v ") {
+                for literal in model_line.split_ascii_whitespace() {
+                    let literal = literal.parse::<i32>()?;
+                    if literal > 0 && literal as usize <= problem.triples().len() {
+                        selected |= 1_u64 << (literal - 1);
+                    }
+                }
+            }
+            line.clear();
+        }
+        if !satisfiable {
+            return Err("the model stream is not SATISFIABLE".into());
+        }
+        println!(
+            "points={points} selected={} separates={}",
+            selected.count_ones(),
+            problem.separates(selected)?
+        );
+        return Ok(());
+    }
     if let Ok(family) = std::env::var("ERGODIS_ALIGNMENT_FAMILY") {
         let mut selected = 0_u64;
         for index in family.split(',') {

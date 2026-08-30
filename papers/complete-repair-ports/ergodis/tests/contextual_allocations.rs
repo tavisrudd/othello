@@ -5,9 +5,9 @@ use ergodis::observational::{
 use ergodis::{
     compile_alignment_attachment, compile_binary_commutant,
     compile_verified_explicit_binary_support, BinarySupportCandidate, CanonicalContextBasis,
-    CompiledCssDistance, CostTable, DenseSelector,
-    ExplicitBinarySupportProblem, FinitePermutationAction, Gf4, Matrix, PackedBinaryAction,
-    PackedBinaryLinearMap, Prime, RankBoundedContextCache, RankOneProbeCache, SparseSelector,
+    CompiledCssDistance, CostTable, DenseSelector, ExplicitBinarySupportProblem,
+    FinitePermutationAction, Gf4, Matrix, PackedBinaryAction, PackedBinaryLinearMap, Prime,
+    RankBoundedContextCache, RankOneProbeCache, SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -73,9 +73,11 @@ fn tracked_allocations<T>(operation: impl FnOnce() -> T) -> (T, usize) {
 #[test]
 fn aligned_attachment_verification_allocates_nothing() {
     let problem = compile_alignment_attachment(8).unwrap();
-    let selected = [0_u32, 1, 2, 3, 5, 7, 8, 11, 13, 14, 20, 22, 23, 28, 29, 30, 51]
-        .into_iter()
-        .fold(0_u64, |mask, index| mask | (1_u64 << index));
+    let selected = [
+        0_u32, 1, 2, 3, 5, 7, 8, 11, 13, 14, 20, 22, 23, 28, 29, 30, 51,
+    ]
+    .into_iter()
+    .fold(0_u64, |mask, index| mask | (1_u64 << index));
     let (separates, allocations) = tracked_allocations(|| problem.separates(selected).unwrap());
     assert!(separates);
     assert_eq!(allocations, 0);
