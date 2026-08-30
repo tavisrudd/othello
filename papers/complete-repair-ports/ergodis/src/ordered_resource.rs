@@ -329,6 +329,33 @@ impl WitnessedParetoFront {
     }
 }
 
+fn validate_objective_front<M: FiniteOrderedMonoid>(
+    monoid: &M,
+    front: &WitnessedParetoFront,
+) -> Result<(), FrozenParetoError> {
+    let count = monoid.element_count();
+    for entry in &front.entries {
+        validate_element(count, entry.resource)?;
+    }
+    if front
+        .entries
+        .windows(2)
+        .any(|pair| pair[0].resource >= pair[1].resource)
+    {
+        return Err(FrozenParetoError::ObjectiveFront);
+    }
+    for (left_index, left) in front.entries.iter().enumerate() {
+        for right in &front.entries[left_index + 1..] {
+            if monoid.leq(left.resource, right.resource)
+                || monoid.leq(right.resource, left.resource)
+            {
+                return Err(FrozenParetoError::ObjectiveFront);
+            }
+        }
+    }
+    Ok(())
+}
+
 #[derive(Debug, Error, PartialEq, Eq)]
 pub enum ParetoWitnessError<E> {
     #[error(transparent)]
@@ -345,6 +372,8 @@ pub enum FrozenParetoError {
     EdgeFrontCount,
     #[error("the frozen quotient output has no supplied Pareto interpretation")]
     Output,
+    #[error("a supplied Pareto objective front is not canonical for its bound ordered monoid")]
+    ObjectiveFront,
     #[error("the frozen quotient DAG is malformed or not forward-topological")]
     Artifact,
 }
@@ -423,6 +452,15 @@ pub struct FrozenParetoPlan<'a> {
     generator_targets: Box<[u32]>,
 }
 
+/// Immutable objective tables checked once against one exact ordered monoid
+/// and one frozen generator table.
+pub struct ValidatedParetoObjective<'plan, 'frozen, 'objective, M> {
+    plan: &'plan FrozenParetoPlan<'frozen>,
+    monoid: &'objective M,
+    output_fronts: &'objective [WitnessedParetoFront],
+    edge_fronts: &'objective [WitnessedParetoFront],
+}
+
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct FrozenParetoEvaluationMetrics {
     pub reachable_classes: usize,
@@ -483,6 +521,41 @@ impl<'a> FrozenParetoPlan<'a> {
             offsets: offsets.into_boxed_slice(),
             outgoing: outgoing.into_boxed_slice(),
             generator_targets: generator_targets.into_boxed_slice(),
+        })
+    }
+
+    pub fn validate_objective<'plan, 'objective, M: FiniteOrderedMonoid>(
+        &'plan self,
+        monoid: &'objective M,
+        output_fronts: &'objective [WitnessedParetoFront],
+        edge_fronts: &'objective [WitnessedParetoFront],
+    ) -> Result<ValidatedParetoObjective<'plan, 'a, 'objective, M>, FrozenParetoError> {
+        if edge_fronts.len() != self.frozen.generator_count() {
+            return Err(FrozenParetoError::EdgeFrontCount);
+        }
+        for sort in 0..self.frozen.sort_count() {
+            let range = self
+                .frozen
+                .class_range(sort as u32)
+                .ok_or(FrozenParetoError::Artifact)?;
+            for class in range.start..range.start + range.len {
+                let output = self
+                    .frozen
+                    .output(class)
+                    .ok_or(FrozenParetoError::Artifact)? as usize;
+                if output >= output_fronts.len() {
+                    return Err(FrozenParetoError::Output);
+                }
+            }
+        }
+        for front in output_fronts.iter().chain(edge_fronts) {
+            validate_objective_front(monoid, front)?;
+        }
+        Ok(ValidatedParetoObjective {
+            plan: self,
+            monoid,
+            output_fronts,
+            edge_fronts,
         })
     }
 
@@ -748,6 +821,43 @@ impl FrozenParetoQueryPlan<'_, '_> {
         output_fronts: &[WitnessedParetoFront],
         edge_fronts: &[WitnessedParetoFront],
         workspace: &mut WitnessedParetoWorkspace,
+        compose_witness: impl FnMut(u32, u32, u32) -> u32,
+    ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
+        self.evaluate_impl::<false, M>(
+            monoid,
+            output_fronts,
+            edge_fronts,
+            workspace,
+            compose_witness,
+        )
+    }
+
+    /// Evaluate a once-validated objective without repeating resource range
+    /// and canonicality checks in the class/generator loops.
+    pub fn evaluate_validated<M: FiniteOrderedMonoid>(
+        &self,
+        objective: &ValidatedParetoObjective<'_, '_, '_, M>,
+        workspace: &mut WitnessedParetoWorkspace,
+        compose_witness: impl FnMut(u32, u32, u32) -> u32,
+    ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
+        if !std::ptr::eq(self.plan, objective.plan) {
+            return Err(FrozenParetoError::Artifact);
+        }
+        self.evaluate_impl::<true, M>(
+            objective.monoid,
+            objective.output_fronts,
+            objective.edge_fronts,
+            workspace,
+            compose_witness,
+        )
+    }
+
+    fn evaluate_impl<const VALIDATED: bool, M: FiniteOrderedMonoid>(
+        &self,
+        monoid: &M,
+        output_fronts: &[WitnessedParetoFront],
+        edge_fronts: &[WitnessedParetoFront],
+        workspace: &mut WitnessedParetoWorkspace,
         mut compose_witness: impl FnMut(u32, u32, u32) -> u32,
     ) -> Result<(Vec<WitnessedParetoFront>, FrozenParetoEvaluationMetrics), FrozenParetoError> {
         if edge_fronts.len() != self.plan.frozen.generator_count() {
@@ -791,8 +901,10 @@ impl FrozenParetoQueryPlan<'_, '_> {
                     }
                     .into());
                 }
-                for entry in &output_front.entries {
-                    validate_element(monoid.element_count(), entry.resource)?;
+                if !VALIDATED {
+                    for entry in &output_front.entries {
+                        validate_element(monoid.element_count(), entry.resource)?;
+                    }
                 }
                 accumulator.clear();
                 accumulator.extend_from_slice(&output_front.entries);
@@ -812,10 +924,14 @@ impl FrozenParetoQueryPlan<'_, '_> {
                         .and_then(Option::as_ref)
                         .ok_or(FrozenParetoError::Artifact)?;
                     for &edge in &edge_fronts[generator as usize].entries {
-                        validate_element(monoid.element_count(), edge.resource)?;
+                        if !VALIDATED {
+                            validate_element(monoid.element_count(), edge.resource)?;
+                        }
                         for &suffix in &child.entries {
                             let resource = monoid.combine(edge.resource, suffix.resource);
-                            validate_element(monoid.element_count(), resource)?;
+                            if !VALIDATED {
+                                validate_element(monoid.element_count(), resource)?;
+                            }
                             insert_witnessed_bounded(
                                 monoid,
                                 accumulator,
@@ -1619,6 +1735,14 @@ mod tests {
                         |_, edge, child| edge | (child << 1),
                     )
                     .unwrap();
+                let objective = plan.validate_objective(&monoid, &outputs, &edges).unwrap();
+                let (validated_selected, validated_metrics) = selected_query
+                    .evaluate_validated(&objective, &mut workspace, |_, edge, child| {
+                        edge | (child << 1)
+                    })
+                    .unwrap();
+                assert_eq!(validated_selected, selected);
+                assert_eq!(validated_metrics, selected_metrics);
                 let (mixed, _) = mixed_query
                     .evaluate(
                         &monoid,
@@ -1700,5 +1824,47 @@ mod tests {
                 element: 2
             }))
         ));
+    }
+
+    #[test]
+    fn validated_objective_is_bound_to_the_exact_resource_order() {
+        use crate::observational::{compile_layered_frozen_dag_audited, LayeredGeneratorSpec};
+
+        let mut audit = Vec::new();
+        let (frozen, _) = compile_layered_frozen_dag_audited(
+            &[1],
+            &[] as &[LayeredGeneratorSpec],
+            &[0],
+            |_, _| 0,
+            |_, _| unreachable!("the presentation has no generators"),
+            &mut audit,
+        )
+        .unwrap();
+        let plan = FrozenParetoPlan::new(&frozen).unwrap();
+        let chain = CappedAdditiveMonoid::new([3]).unwrap();
+        let diamond = CappedAdditiveMonoid::new([1, 1]).unwrap();
+        assert_eq!(chain.element_count(), diamond.element_count());
+        let incomparable = WitnessedParetoFront::new(
+            &diamond,
+            [
+                ParetoWitness {
+                    resource: 1,
+                    witness: 10,
+                },
+                ParetoWitness {
+                    resource: 2,
+                    witness: 20,
+                },
+            ],
+        )
+        .unwrap();
+        assert!(plan
+            .validate_objective(&diamond, std::slice::from_ref(&incomparable), &[])
+            .is_ok());
+        assert_eq!(
+            plan.validate_objective(&chain, std::slice::from_ref(&incomparable), &[])
+                .err(),
+            Some(FrozenParetoError::ObjectiveFront)
+        );
     }
 }

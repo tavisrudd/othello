@@ -5,7 +5,8 @@ use ergodis::observational::{
 };
 use ergodis::{
     CappedAdditiveMonoid, FiniteOrderedMonoid, FrozenParetoEvaluationMetrics, FrozenParetoPlan,
-    FrozenParetoQueryPlan, ParetoWitness, WitnessedParetoFront, WitnessedParetoWorkspace,
+    FrozenParetoQueryPlan, ParetoWitness, ValidatedParetoObjective, WitnessedParetoFront,
+    WitnessedParetoWorkspace,
 };
 use std::io::Write;
 use std::time::Instant;
@@ -271,21 +272,13 @@ fn quotient_pareto_dp(
     .unwrap()
 }
 
-fn quotient_entry_pareto_dp(
+fn quotient_entry_pareto_dp<M: FiniteOrderedMonoid>(
     query: &FrozenParetoQueryPlan<'_, '_>,
-    resources: &CappedAdditiveMonoid,
-    outputs: &[WitnessedParetoFront],
-    generator_edges: &[WitnessedParetoFront],
+    objective: &ValidatedParetoObjective<'_, '_, '_, M>,
     workspace: &mut WitnessedParetoWorkspace,
 ) -> (WitnessedParetoFront, FrozenParetoEvaluationMetrics) {
     let (mut fronts, metrics) = query
-        .evaluate(
-            resources,
-            outputs,
-            generator_edges,
-            workspace,
-            |_, edge, suffix| edge | (suffix << 3),
-        )
+        .evaluate_validated(objective, workspace, |_, edge, suffix| edge | (suffix << 3))
         .unwrap();
     (fronts.pop().unwrap(), metrics)
 }
@@ -656,6 +649,9 @@ fn run(
     for &action in &workflow.actions {
         generator_edges.push(edges[(2 * action.branch + action.symbol) as usize].clone());
     }
+    let quotient_objective = plan
+        .validate_objective(&resources, &quotient_outputs, &generator_edges)
+        .unwrap();
 
     let mut state_offsets = Vec::with_capacity(workflow.state_counts.len());
     let mut state_offset = 0_u32;
@@ -685,6 +681,9 @@ fn run(
             });
         }
     }
+    let identity_objective = identity_plan
+        .validate_objective(&resources, &identity_outputs, &generator_edges)
+        .unwrap();
     let mut raw = None;
     let raw_repetitions = stage_repetitions("legacy");
     let raw_start = Instant::now();
@@ -701,9 +700,7 @@ fn run(
     for _ in 0..quotient_repetitions {
         quotient = Some(std::hint::black_box(quotient_entry_pareto_dp(
             &query,
-            &resources,
-            &quotient_outputs,
-            &generator_edges,
+            &quotient_objective,
             &mut quotient_workspace,
         )));
     }
@@ -717,9 +714,7 @@ fn run(
     for _ in 0..identity_repetitions {
         identity_result = Some(std::hint::black_box(quotient_entry_pareto_dp(
             &identity_query,
-            &resources,
-            &identity_outputs,
-            &generator_edges,
+            &identity_objective,
             &mut identity_workspace,
         )));
     }

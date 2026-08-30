@@ -116,7 +116,7 @@ pub use ordered_resource::{
     FiniteOrderedMonoid, FrozenParetoError, FrozenParetoEvaluationMetrics, FrozenParetoPlan,
     FrozenParetoQueryPlan, OrderedMonoidCertificate, OrderedResourceError, ParetoFront,
     ParetoObservationTable, ParetoResponseDictionary, ParetoWitness, ParetoWitnessError,
-    ParetoWorkspace, WitnessedParetoFront, WitnessedParetoWorkspace,
+    ParetoWorkspace, ValidatedParetoObjective, WitnessedParetoFront, WitnessedParetoWorkspace,
 };
 pub use scheduler::{
     maximum_parallel_repairs, CapacityCut, ParallelRepairResult, PositiveGradingCertificate,
