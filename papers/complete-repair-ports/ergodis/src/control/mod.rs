@@ -125,6 +125,7 @@ impl Ledger {
 }
 
 struct StoredPlan {
+    spec: PlanSpec,
     plan: CompiledPlan,
     evaluation: Evaluation,
 }
@@ -253,11 +254,14 @@ impl Campaign {
         let request_limit = request.max_bytes.min(self.response_limit);
         let result = match request.op.as_str() {
             "status" => self.status(),
+            "pulse" => self.pulse(&request.args),
+            "plan-get" => self.plan_get(&request.args),
             "agent-brief" => self.agent_brief(&request.args),
             "feature-ceiling" => self.feature_ceiling(),
             "synthesize-tree" => self.synthesize_tree(&request.args),
             "candidate-try" => self.candidate_try(&request.args, false),
             "candidate-apply" => self.candidate_try(&request.args, true),
+            "candidate-deactivate" => self.candidate_deactivate(&request.args),
             "obstruction-first" => self.obstruction(&request.args),
             "exceptional" => self.exceptional(&request.args),
             "trace" => self.trace(&request.args),
@@ -293,6 +297,66 @@ impl Campaign {
             "ledger_limit": self.ledger.max_bytes,
             "ledger_truncated": self.ledger.truncated,
             "health": "ready",
+        }))
+    }
+
+    /// Safe-point query for a live solver. The unchanged response is constant
+    /// size; changed epochs return only bounded plan identities.
+    fn pulse(&self, args: &Value) -> Result<Value, ControlError> {
+        let since_epoch = args
+            .get("since_epoch")
+            .and_then(Value::as_u64)
+            .ok_or_else(|| ControlError::Invalid("pulse requires since_epoch".into()))?;
+        let epoch = self.epoch.load(Ordering::Acquire);
+        if since_epoch > epoch {
+            return Err(ControlError::Invalid(format!(
+                "pulse epoch {since_epoch} is ahead of current epoch {epoch}"
+            )));
+        }
+        if since_epoch == epoch {
+            return Ok(json!({"changed": false, "epoch": epoch}));
+        }
+        let plans: Vec<_> = self
+            .plans
+            .iter()
+            .map(|stored| {
+                json!({
+                    "name": stored.plan.name,
+                    "hash": stored.plan.hash,
+                    "role": stored.plan.role,
+                    "output": stored.plan.output,
+                })
+            })
+            .collect();
+        Ok(json!({"changed": true, "epoch": epoch, "plans": plans}))
+    }
+
+    /// Fetch one lowered plan from a stable epoch. Callers retry the pulse if
+    /// the epoch changes between discovery and fetch.
+    fn plan_get(&self, args: &Value) -> Result<Value, ControlError> {
+        let expected_epoch = args
+            .get("expect_epoch")
+            .and_then(Value::as_u64)
+            .ok_or_else(|| ControlError::Invalid("plan-get requires expect_epoch".into()))?;
+        let epoch = self.epoch.load(Ordering::Acquire);
+        if expected_epoch != epoch {
+            return Err(ControlError::Invalid(format!(
+                "stale epoch: expected {expected_epoch}, current {epoch}"
+            )));
+        }
+        let name = args
+            .get("plan")
+            .and_then(Value::as_str)
+            .ok_or_else(|| ControlError::Invalid("plan-get requires plan".into()))?;
+        let stored = self
+            .plans
+            .iter()
+            .find(|stored| stored.plan.name == name)
+            .ok_or_else(|| ControlError::Invalid("unknown active plan".into()))?;
+        Ok(json!({
+            "epoch": epoch,
+            "plan": stored.spec,
+            "hash": stored.plan.hash,
         }))
     }
 
@@ -493,6 +557,7 @@ impl Campaign {
         let name = plan.name.clone();
         let hash = plan.hash.clone();
         self.plans.push(StoredPlan {
+            spec,
             plan,
             evaluation: evaluation.clone(),
         });
@@ -506,6 +571,39 @@ impl Campaign {
         Ok(
             json!({"plan": name, "hash": hash, "equivalent_to": equivalent_to, "old_epoch": old_epoch, "new_epoch": new_epoch, "evaluation": evaluation, "groups": groups, "first_obstruction": obstruction}),
         )
+    }
+
+    fn candidate_deactivate(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let expected_epoch = args
+            .get("expect_epoch")
+            .and_then(Value::as_u64)
+            .ok_or_else(|| {
+                ControlError::Invalid("candidate-deactivate requires expect_epoch".into())
+            })?;
+        let old_epoch = self.epoch.load(Ordering::Acquire);
+        if expected_epoch != old_epoch {
+            return Err(ControlError::Invalid(format!(
+                "stale epoch: expected {expected_epoch}, current {old_epoch}"
+            )));
+        }
+        let name = args
+            .get("plan")
+            .and_then(Value::as_str)
+            .ok_or_else(|| ControlError::Invalid("candidate-deactivate requires plan".into()))?;
+        let index = self
+            .plans
+            .iter()
+            .position(|stored| stored.plan.name == name)
+            .ok_or_else(|| ControlError::Invalid("unknown active plan".into()))?;
+        self.plans.remove(index);
+        let new_epoch = old_epoch + 1;
+        self.epoch.store(new_epoch, Ordering::Release);
+        self.record(
+            "candidate-deactivated",
+            "diagnostic plan deactivated",
+            Some(name.into()),
+        )?;
+        Ok(json!({"plan": name, "old_epoch": old_epoch, "new_epoch": new_epoch}))
     }
 
     fn grouped_evaluation(
@@ -1030,5 +1128,88 @@ mod tests {
         send_request(&manifest_b, "shutdown", json!({}), 4096).unwrap();
         thread_a.join().unwrap();
         thread_b.join().unwrap();
+    }
+
+    #[test]
+    fn safe_point_pulse_fetch_and_deactivate_are_epoch_consistent() {
+        let temporary = tempfile::tempdir().unwrap();
+        let data = temporary.path().join("data.jsonl");
+        fs::write(
+            &data,
+            concat!(
+                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"tiny\",\"problem\":\"fixture\",\"fields\":[\"x\"],\"rows\":1}\n",
+                "{\"id\":1,\"expected\":true,\"values\":[1]}\n"
+            ),
+        )
+        .unwrap();
+        let mut campaign = Campaign::create(
+            &data,
+            &temporary.path().join("run"),
+            Some(temporary.path().join("campaign.sock")),
+            4096,
+            4096,
+            4096,
+        )
+        .unwrap();
+        let request = |campaign: &Campaign, request_id, op: &str, args| Request {
+            schema: SCHEMA.into(),
+            request_id,
+            run_id: campaign.manifest.run_id.clone(),
+            nonce: campaign.manifest.nonce.clone(),
+            max_bytes: 4096,
+            op: op.into(),
+            args,
+        };
+
+        let (pulse, _) = campaign.handle(request(&campaign, 1, "pulse", json!({"since_epoch": 0})));
+        assert_eq!(pulse.result["changed"], false);
+
+        let spec = PlanSpec {
+            schema: PLAN_SCHEMA.into(),
+            name: "positive".into(),
+            role: PlanRole::Diagnostic,
+            output: PlanOutput::Predicate,
+            program: vec![
+                PlanOp::Field { name: "x".into() },
+                PlanOp::Const { value: 0 },
+                PlanOp::Gt,
+            ],
+        };
+        let (applied, _) = campaign.handle(request(
+            &campaign,
+            2,
+            "candidate-apply",
+            json!({"plan": spec, "expect_epoch": 0}),
+        ));
+        assert!(applied.ok);
+        assert_eq!(applied.epoch, 1);
+
+        let (pulse, _) = campaign.handle(request(&campaign, 3, "pulse", json!({"since_epoch": 0})));
+        assert_eq!(pulse.result["changed"], true);
+        assert_eq!(pulse.result["plans"][0]["name"], "positive");
+
+        let (fetched, _) = campaign.handle(request(
+            &campaign,
+            4,
+            "plan-get",
+            json!({"plan": "positive", "expect_epoch": 1}),
+        ));
+        assert!(fetched.ok);
+        assert_eq!(
+            fetched.result["plan"]["program"].as_array().unwrap().len(),
+            3
+        );
+
+        let (removed, _) = campaign.handle(request(
+            &campaign,
+            5,
+            "candidate-deactivate",
+            json!({"plan": "positive", "expect_epoch": 1}),
+        ));
+        assert!(removed.ok);
+        assert_eq!(removed.epoch, 2);
+        let (pulse, _) = campaign.handle(request(&campaign, 6, "pulse", json!({"since_epoch": 1})));
+        assert_eq!(pulse.result["changed"], true);
+        assert_eq!(pulse.result["plans"].as_array().unwrap().len(), 0);
     }
 }

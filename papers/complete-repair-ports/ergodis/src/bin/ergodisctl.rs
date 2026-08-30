@@ -30,6 +30,17 @@ struct Cli {
 #[derive(Debug, Subcommand)]
 enum Command {
     Status,
+    /// Poll a long search safe point for a changed active-plan epoch.
+    Pulse {
+        #[arg(long, default_value_t = 0)]
+        since_epoch: u64,
+    },
+    /// Fetch one lowered active plan from an unchanged epoch.
+    PlanGet {
+        plan: String,
+        #[arg(long)]
+        expect_epoch: u64,
+    },
     /// Exact best possible classification using the current feature vectors.
     Ceiling,
     /// Learn a bounded exact decision-tree attack and write its replayable plan.
@@ -81,6 +92,12 @@ enum Command {
     /// Evaluate and atomically activate a diagnostic/ordering plan.
     Apply {
         plan: PathBuf,
+        #[arg(long)]
+        expect_epoch: u64,
+    },
+    /// Atomically remove one diagnostic/ordering plan.
+    Deactivate {
+        plan: String,
         #[arg(long)]
         expect_epoch: u64,
     },
@@ -170,6 +187,11 @@ fn main() -> Result<()> {
     }
     let (op, args) = match cli.command {
         Command::Status => ("status", json!({})),
+        Command::Pulse { since_epoch } => ("pulse", json!({"since_epoch": since_epoch})),
+        Command::PlanGet { plan, expect_epoch } => (
+            "plan-get",
+            json!({"plan": plan, "expect_epoch": expect_epoch}),
+        ),
         Command::Ceiling => ("feature-ceiling", json!({})),
         Command::Synthesize { .. } => unreachable!(),
         Command::AgentBrief { since, top } => ("agent-brief", json!({"since": since, "top": top})),
@@ -182,6 +204,10 @@ fn main() -> Result<()> {
         Command::Apply { plan, expect_epoch } => (
             "candidate-apply",
             json!({"plan": read_plan(&plan)?, "expect_epoch": expect_epoch}),
+        ),
+        Command::Deactivate { plan, expect_epoch } => (
+            "candidate-deactivate",
+            json!({"plan": plan, "expect_epoch": expect_epoch}),
         ),
         Command::Obstruction { plan } => ("obstruction-first", json!({"plan": plan})),
         Command::Exceptional {
@@ -518,6 +544,23 @@ fn render_compact(op: &str, result: &Value, epoch: u64) -> Result<()> {
             number(result, "plans"),
             number(result, "ledger_bytes"),
             number(result, "ledger_limit")
+        ),
+        "pulse" => println!(
+            "epoch={epoch} changed={} plans={}",
+            result
+                .get("changed")
+                .and_then(Value::as_bool)
+                .unwrap_or(false),
+            result
+                .get("plans")
+                .and_then(Value::as_array)
+                .map_or(0, Vec::len)
+        ),
+        "candidate-deactivate" => println!(
+            "epoch={epoch} deactivated={} old={} new={}",
+            text(result, "plan"),
+            number(result, "old_epoch"),
+            number(result, "new_epoch")
         ),
         "feature-ceiling" => println!(
             "epoch={epoch} vectors={} ambiguous={} unavoidable={}/{} first={}",

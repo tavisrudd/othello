@@ -16,6 +16,14 @@ decision-tree proposer. Author plans now have an SMT-LIB-inspired typed prefix
 tree that lowers to the same validated postfix VM; the explicit postfix form
 remains the stable replay/debug IR.
 
+The first live-adapter boundary is also present: a constant-size unchanged
+`pulse` is polled only at a solver safe point; a changed epoch returns bounded
+plan identities, and each lowered plan can be fetched only against that exact
+epoch. Activation and deactivation are epoch-atomic. A solver can therefore
+compile into an inactive preallocated arena and swap at a later safe point,
+without socket checks, JSON, or allocation in the node loop. No domain solver
+consumes this boundary yet.
+
 Implementation commits are `07cc0ebe2`, `b1c4dd052`, and `3a30a24e6` plus the
 current follow-up. Operator documentation is in
 `papers/complete-repair-ports/ergodis/docs/CAMPAIGNS.md`.
@@ -134,9 +142,8 @@ from silently becoming a proof-authoritative prune.
 1. Construct or import q17 `K_Omega` survivor states, then replay the `{0,6}`
    rule and extract its first mismatch if any; unguided random states do not
    reach the relevant stratum at useful density.
-2. Add a chunk/safe-point adapter to one genuinely long C80 or C880 search;
-   frozen-batch evaluation alone does not test pulse publication or mid-search
-   steering.
+2. Consume the pulse/snapshot protocol from one genuinely long C80 or C880
+   search; the transport boundary alone does not test mid-search steering.
 3. Persist controller checkpoints so restart preserves the last validated
    epoch and active plan hashes.
 4. Split transport and ledger modules after the next surface change, not before

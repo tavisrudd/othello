@@ -98,6 +98,11 @@ ergodisctl --run-dir RUN try plan.json --group-by q
 # Atomically retain a diagnostic plan.
 ergodisctl --run-dir RUN apply plan.json --expect-epoch 0
 
+# Long solvers poll only at coarse safe points. An unchanged pulse is tiny.
+ergodisctl --run-dir RUN pulse --since-epoch 0
+ergodisctl --run-dir RUN --json plan-get PLAN --expect-epoch 1
+ergodisctl --run-dir RUN deactivate PLAN --expect-epoch 1
+
 # Fetch a compact decisive object or inspect only one local execution.
 ergodisctl --run-dir RUN obstruction PLAN
 ergodisctl --run-dir RUN trace PLAN --row 17 --max-records 32
@@ -177,11 +182,21 @@ that must not be treated as game debt.
 The socket is never a raw-event stream. Disconnect leaves the last validated
 epoch active. Seconds-scale solves should not launch this layer at all.
 
+For live adapters, the inner search loop never touches the socket. A solver
+polls `pulse` only at a domain-selected chunk boundary. If the epoch changed,
+the pulse returns bounded plan identities; `plan-get` returns one canonical
+lowered plan only while that epoch is still current. The solver compiles into a
+preallocated inactive arena and swaps arenas at its next safe point. An epoch
+change between pulse and fetch fails closed and causes a retry. This design
+keeps transport, JSON, and allocation outside hot loops and makes plan removal
+as atomic as plan activation.
+
 ## Current limitations
 
-The controller is still a frozen-batch evaluator, not yet a safe-point adapter
-to a live C80 or C880 search. It does not restore active plans after process
-restart, compact equivalent ledger entries on disk, generate proof handles, or
-promote rules. The protocol, command names, and proposer are expected to change
-after more real campaigns; the isolation, boundedness, exact replay, and
-core-independence invariants are the intended durable parts.
+The controller now exposes the transport half of a safe-point adapter, but C80
+and C880 do not yet consume pulse updates inside a live search. It does not
+restore active plans after process restart, compact equivalent ledger entries
+on disk, generate proof handles, or promote rules. The protocol, command names,
+and proposer are expected to change after more real campaigns; the isolation,
+boundedness, exact replay, and core-independence invariants are the intended
+durable parts.
