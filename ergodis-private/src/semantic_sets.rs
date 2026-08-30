@@ -11,6 +11,217 @@ pub struct MaxOverlapProfiler {
     histogram: Box<[u64]>,
 }
 
+/// Maximum-overlap profiler for families that split into 3-way partitions.
+///
+/// For an object of fixed cardinality `k` and a partition `(A, B, C)`, the
+/// third overlap is `k - |object & A| - |object & B|`.  Compilation therefore
+/// retains only two masks per partition.  [`observe`](Self::observe) performs
+/// no allocation and uses two population counts instead of three.
+#[derive(Debug, Clone)]
+pub struct TernaryPartitionMaxOverlapProfiler {
+    retained: Box<[[u64; 2]]>,
+    universe: u64,
+    object_size: u32,
+    histogram: Box<[u64]>,
+    kernel: unsafe fn(&[[u64; 2]], u64, u32) -> u32,
+}
+
+#[inline]
+unsafe fn ternary_partition_max_generic(
+    retained: &[[u64; 2]],
+    object: u64,
+    object_size: u32,
+) -> u32 {
+    let mut maximum = 0_u32;
+    for &[first, second] in retained {
+        let first_overlap = (object & first).count_ones();
+        let second_overlap = (object & second).count_ones();
+        let third_overlap = object_size - first_overlap - second_overlap;
+        maximum = maximum
+            .max(first_overlap)
+            .max(second_overlap)
+            .max(third_overlap);
+    }
+    maximum
+}
+
+#[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+#[target_feature(enable = "popcnt")]
+unsafe fn ternary_partition_max_popcnt(
+    retained: &[[u64; 2]],
+    object: u64,
+    object_size: u32,
+) -> u32 {
+    let mut maximum = 0_u32;
+    for &[first, second] in retained {
+        let first_overlap = (object & first).count_ones();
+        let second_overlap = (object & second).count_ones();
+        let third_overlap = object_size - first_overlap - second_overlap;
+        maximum = maximum
+            .max(first_overlap)
+            .max(second_overlap)
+            .max(third_overlap);
+    }
+    maximum
+}
+
+#[cfg(target_arch = "x86_64")]
+#[target_feature(enable = "popcnt,sse4.1")]
+unsafe fn ternary_partition_max_popcnt_sse41(
+    retained: &[[u64; 2]],
+    object: u64,
+    object_size: u32,
+) -> u32 {
+    use std::arch::x86_64::{
+        __m128i, _mm_add_epi32, _mm_max_epu32, _mm_set1_epi32, _mm_set_epi32, _mm_setzero_si128,
+        _mm_storeu_si128, _mm_sub_epi32,
+    };
+
+    let mut maximum = _mm_setzero_si128();
+    let size = _mm_set1_epi32(object_size as i32);
+    let mut chunks = retained.chunks_exact(4);
+    for chunk in &mut chunks {
+        let first = _mm_set_epi32(
+            (object & chunk[3][0]).count_ones() as i32,
+            (object & chunk[2][0]).count_ones() as i32,
+            (object & chunk[1][0]).count_ones() as i32,
+            (object & chunk[0][0]).count_ones() as i32,
+        );
+        let second = _mm_set_epi32(
+            (object & chunk[3][1]).count_ones() as i32,
+            (object & chunk[2][1]).count_ones() as i32,
+            (object & chunk[1][1]).count_ones() as i32,
+            (object & chunk[0][1]).count_ones() as i32,
+        );
+        let third = _mm_sub_epi32(size, _mm_add_epi32(first, second));
+        maximum = _mm_max_epu32(maximum, _mm_max_epu32(first, _mm_max_epu32(second, third)));
+    }
+    let mut lanes = [0_i32; 4];
+    // SAFETY: `lanes` provides four writable, properly sized i32 lanes and
+    // `_mm_storeu_si128` permits an unaligned destination.
+    unsafe { _mm_storeu_si128(lanes.as_mut_ptr().cast::<__m128i>(), maximum) };
+    let mut result = lanes.into_iter().max().unwrap_or(0) as u32;
+    for &[first, second] in chunks.remainder() {
+        let first_overlap = (object & first).count_ones();
+        let second_overlap = (object & second).count_ones();
+        let third_overlap = object_size - first_overlap - second_overlap;
+        result = result
+            .max(first_overlap)
+            .max(second_overlap)
+            .max(third_overlap);
+    }
+    result
+}
+
+fn select_ternary_partition_kernel() -> unsafe fn(&[[u64; 2]], u64, u32) -> u32 {
+    #[cfg(target_arch = "x86_64")]
+    if std::is_x86_feature_detected!("popcnt") && std::is_x86_feature_detected!("sse4.1") {
+        return ternary_partition_max_popcnt_sse41;
+    }
+    #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+    if std::is_x86_feature_detected!("popcnt") {
+        return ternary_partition_max_popcnt;
+    }
+    ternary_partition_max_generic
+}
+
+impl TernaryPartitionMaxOverlapProfiler {
+    /// Compile an unordered family of distinct masks into unique 3-way
+    /// partitions. Every member must be disjoint from exactly its two partners,
+    /// and each resulting triple must partition `universe`.
+    pub fn try_new(
+        family: Vec<u64>,
+        universe: u64,
+        object_size: usize,
+    ) -> Result<Self, &'static str> {
+        if family.is_empty() || family.len() % 3 != 0 {
+            return Err("ternary family size must be positive and divisible by three");
+        }
+        if object_size > universe.count_ones() as usize {
+            return Err("object size exceeds universe");
+        }
+        for (index, &member) in family.iter().enumerate() {
+            if member == 0 || member & !universe != 0 {
+                return Err("partition member lies outside the universe");
+            }
+            if family[..index].contains(&member) {
+                return Err("ternary family contains a duplicate member");
+            }
+        }
+        let mut used = vec![false; family.len()];
+        let mut retained = Vec::with_capacity(family.len() / 3);
+        for first_index in 0..family.len() {
+            if used[first_index] {
+                continue;
+            }
+            let first = family[first_index];
+            let mut partners = [usize::MAX; 2];
+            let mut partner_count = 0;
+            for (index, &candidate) in family.iter().enumerate() {
+                if index == first_index || first & candidate != 0 {
+                    continue;
+                }
+                if partner_count == partners.len() {
+                    return Err("partition member has more than two disjoint partners");
+                }
+                partners[partner_count] = index;
+                partner_count += 1;
+            }
+            if partner_count != 2 {
+                return Err("partition member does not have two disjoint partners");
+            }
+            let [second_index, third_index] = partners;
+            if used[second_index]
+                || used[third_index]
+                || family[second_index] & family[third_index] != 0
+                || first | family[second_index] | family[third_index] != universe
+            {
+                return Err("family does not decompose into unique ternary partitions");
+            }
+            used[first_index] = true;
+            used[second_index] = true;
+            used[third_index] = true;
+            retained.push([first, family[second_index]]);
+        }
+        if retained.len() * 3 != family.len() {
+            return Err("partition compilation left unused family members");
+        }
+        Ok(Self {
+            retained: retained.into_boxed_slice(),
+            universe,
+            object_size: object_size as u32,
+            histogram: vec![0; object_size + 1].into_boxed_slice(),
+            kernel: select_ternary_partition_kernel(),
+        })
+    }
+
+    /// Observe one fixed-cardinality object. This method performs no allocation.
+    #[inline]
+    pub fn observe(&mut self, object: u64, weight: u64) -> u32 {
+        debug_assert_eq!(object & !self.universe, 0);
+        debug_assert_eq!(object.count_ones(), self.object_size);
+        // SAFETY: construction selects a kernel only after checking its CPU
+        // feature preconditions. Both kernels accept every compiled family.
+        let maximum = unsafe { (self.kernel)(&self.retained, object, self.object_size) };
+        self.histogram[maximum as usize] += weight;
+        maximum
+    }
+
+    #[must_use]
+    pub fn histogram(&self) -> &[u64] {
+        &self.histogram
+    }
+
+    #[must_use]
+    pub fn partitions(&self) -> usize {
+        self.retained.len()
+    }
+
+    pub fn clear(&mut self) {
+        self.histogram.fill(0);
+    }
+}
+
 impl MaxOverlapProfiler {
     #[must_use]
     pub fn new(family: Vec<u64>, maximum_object_size: usize) -> Self {
@@ -44,9 +255,9 @@ impl MaxOverlapProfiler {
 
 /// Visit every `k`-subset of an `n`-element universe as a `u64` mask.
 ///
-/// The combination storage is allocated once before the first callback.  The
-/// enumeration is iterative and stack-safe; the steady-state loop allocates
-/// nothing.  The callback should preserve that property when used in search.
+/// Gosper successors enumerate masks in increasing machine-word order.  The
+/// loop is iterative, stack-safe, and entirely allocation-free.  The callback
+/// should preserve that property when used in search.
 pub fn for_each_k_subset(n: usize, k: usize, mut visit: impl FnMut(u64)) {
     assert!(n <= 64, "u64 subset universe exceeds 64 elements");
     if k > n {
@@ -56,28 +267,22 @@ pub fn for_each_k_subset(n: usize, k: usize, mut visit: impl FnMut(u64)) {
         visit(0);
         return;
     }
-    let mut indices: Vec<usize> = (0..k).collect();
+    if k == n {
+        visit(if n == 64 { u64::MAX } else { (1_u64 << n) - 1 });
+        return;
+    }
+    let low = (1_u64 << k) - 1;
+    let last = low << (n - k);
+    let mut mask = low;
     loop {
-        let mut mask = 0_u64;
-        for &index in &indices {
-            mask |= 1_u64 << index;
-        }
         visit(mask);
-
-        let mut pivot = k;
-        while pivot > 0 {
-            pivot -= 1;
-            if indices[pivot] != pivot + n - k {
-                break;
-            }
-        }
-        if pivot == 0 && indices[0] == n - k {
+        if mask == last {
             break;
         }
-        indices[pivot] += 1;
-        for index in (pivot + 1)..k {
-            indices[index] = indices[index - 1] + 1;
-        }
+        let lowest = mask & mask.wrapping_neg();
+        let incremented = mask + lowest;
+        let packed_low_ones = ((incremented ^ mask) >> 2) >> lowest.trailing_zeros();
+        mask = incremented | packed_low_ones;
     }
 }
 
@@ -116,5 +321,89 @@ mod tests {
         masks.clear();
         for_each_k_subset(4, 5, |mask| masks.push(mask));
         assert!(masks.is_empty());
+        for_each_k_subset(64, 64, |mask| masks.push(mask));
+        assert_eq!(masks, [u64::MAX]);
+    }
+
+    #[test]
+    fn subset_enumerator_is_strictly_ordered_without_duplicates() {
+        let mut previous = None;
+        let mut count = 0;
+        for_each_k_subset(12, 5, |mask| {
+            if let Some(previous) = previous {
+                assert!(previous < mask);
+            }
+            previous = Some(mask);
+            count += 1;
+        });
+        assert_eq!(count, 792);
+
+        let mut singleton_count = 0;
+        for_each_k_subset(64, 1, |mask| {
+            assert_eq!(mask.count_ones(), 1);
+            singleton_count += 1;
+        });
+        assert_eq!(singleton_count, 64);
+
+        let mut omitted_singleton_count = 0;
+        for_each_k_subset(64, 63, |mask| {
+            assert_eq!(mask.count_ones(), 63);
+            omitted_singleton_count += 1;
+        });
+        assert_eq!(omitted_singleton_count, 64);
+    }
+
+    #[test]
+    fn ternary_partitions_match_direct_overlap_exhaustively() {
+        let family = vec![
+            0b000_000_111,
+            0b000_111_000,
+            0b111_000_000,
+            0b001_001_001,
+            0b010_010_010,
+            0b100_100_100,
+        ];
+        let mut direct = MaxOverlapProfiler::new(family.clone(), 4);
+        let mut partitioned =
+            TernaryPartitionMaxOverlapProfiler::try_new(family, 0b111_111_111, 4).unwrap();
+        assert_eq!(partitioned.partitions(), 2);
+        for_each_k_subset(9, 4, |object| {
+            let expected = direct.observe(object, 1);
+            assert_eq!(partitioned.observe(object, 1), expected);
+            // SAFETY: the generic kernel has no CPU feature precondition.
+            assert_eq!(
+                unsafe { ternary_partition_max_generic(&partitioned.retained, object, 4) },
+                expected
+            );
+            #[cfg(any(target_arch = "x86", target_arch = "x86_64"))]
+            if std::is_x86_feature_detected!("popcnt") {
+                // SAFETY: the feature check satisfies the kernel precondition.
+                assert_eq!(
+                    unsafe { ternary_partition_max_popcnt(&partitioned.retained, object, 4) },
+                    expected
+                );
+            }
+            #[cfg(target_arch = "x86_64")]
+            if std::is_x86_feature_detected!("popcnt") && std::is_x86_feature_detected!("sse4.1") {
+                // SAFETY: the feature checks satisfy the kernel preconditions.
+                assert_eq!(
+                    unsafe { ternary_partition_max_popcnt_sse41(&partitioned.retained, object, 4) },
+                    expected
+                );
+            }
+        });
+        assert_eq!(partitioned.histogram(), direct.histogram());
+        partitioned.clear();
+        assert_eq!(partitioned.histogram(), &[0; 5]);
+    }
+
+    #[test]
+    fn malformed_ternary_family_is_rejected() {
+        assert!(TernaryPartitionMaxOverlapProfiler::try_new(
+            vec![0b001, 0b010, 0b100, 0b001, 0b010, 0b100],
+            0b111,
+            1,
+        )
+        .is_err());
     }
 }

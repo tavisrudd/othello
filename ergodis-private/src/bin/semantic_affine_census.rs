@@ -5,7 +5,7 @@ use std::path::PathBuf;
 
 use clap::Parser;
 use ergodis_private::semantic_plan::{CanonicalizationGate, LabelContract};
-use ergodis_private::semantic_sets::{for_each_k_subset, MaxOverlapProfiler};
+use ergodis_private::semantic_sets::{for_each_k_subset, TernaryPartitionMaxOverlapProfiler};
 use serde::Serialize;
 
 #[derive(Parser)]
@@ -129,7 +129,11 @@ fn decode_matrix(mut code: usize) -> [u8; 9] {
 
 fn transform_point(point: u8, matrix: &[u8; 9], translation: u8) -> u8 {
     let vector = [point % 3, (point / 3) % 3, (point / 9) % 3];
-    let shift = [translation % 3, (translation / 3) % 3, (translation / 9) % 3];
+    let shift = [
+        translation % 3,
+        (translation / 3) % 3,
+        (translation / 9) % 3,
+    ];
     let mut result = 0_u8;
     let mut place = 1_u8;
     for row in 0..3 {
@@ -142,6 +146,21 @@ fn transform_point(point: u8, matrix: &[u8; 9], translation: u8) -> u8 {
         place *= 3;
     }
     result
+}
+
+/// Compare equal-cardinality masks by their increasing element tuples.
+#[inline]
+fn subset_lexicographically_precedes(mut left: u64, mut right: u64) -> bool {
+    while left != 0 {
+        let left_point = left.trailing_zeros();
+        let right_point = right.trailing_zeros();
+        if left_point != right_point {
+            return left_point < right_point;
+        }
+        left &= left - 1;
+        right &= right - 1;
+    }
+    false
 }
 
 fn profile_labelled(path: &PathBuf, planes: Vec<u64>) -> anyhow::Result<(u64, Vec<u64>)> {
@@ -157,7 +176,8 @@ fn profile_labelled(path: &PathBuf, planes: Vec<u64>) -> anyhow::Result<(u64, Ve
         .position(|name| *name == "nine_set")
         .ok_or_else(|| anyhow::anyhow!("labelled TSV lacks nine_set column"))?;
     let weight_column = header.iter().position(|name| *name == "orbit_size");
-    let mut profiler = MaxOverlapProfiler::new(planes, 9);
+    let mut profiler = TernaryPartitionMaxOverlapProfiler::try_new(planes, (1_u64 << 27) - 1, 9)
+        .map_err(anyhow::Error::msg)?;
     let mut total = 0_u64;
     for line in lines.filter(|line| !line.is_empty()) {
         let mut support_field = None;
@@ -193,7 +213,10 @@ fn main() -> anyhow::Result<()> {
     assert_eq!(planes.len(), 39);
     assert_eq!(lines.len(), 117);
 
-    let mut profiler = MaxOverlapProfiler::new(planes.clone(), 9);
+    let mut profiler =
+        TernaryPartitionMaxOverlapProfiler::try_new(planes.clone(), (1_u64 << 27) - 1, 9)
+            .map_err(anyhow::Error::msg)?;
+    assert_eq!(profiler.partitions(), 13);
     let mut ambient_subsets = 0_u64;
     let mut minimum = 9_u32;
     let mut minimum_count = 0_u64;
@@ -211,6 +234,9 @@ fn main() -> anyhow::Result<()> {
         if overlap == minimum {
             minimum_count += 1;
             minimum_all_caps &= lines.iter().all(|line| (mask & line).count_ones() <= 2);
+            if subset_lexicographically_precedes(mask, representative) {
+                representative = mask;
+            }
         }
     });
 

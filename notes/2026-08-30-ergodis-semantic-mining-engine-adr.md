@@ -344,13 +344,25 @@ three-op plan: `match` profiles all 6,890 weighted labelled locators, `reduce`
 finds the 2,106-object ambient minimum, and `canonicalize` proves that minimum
 is one cap orbit.  Their intersection is exactly zero.
 
-The first five-run counter baseline is compute-bound and stable: 0.17965 s,
-873.3 M cycles, 3.905 G instructions, 153.2 M branches, 0.713 M branch misses,
-and only 9.2 K cache misses.  This is about 26.1 million ambient objects/s,
-186 cycles and 833 instructions per object, IPC 4.47, and a 0.47% branch-miss
-rate.  The next kernel optimization target is therefore instruction work in
-the 39-mask overlap reduction (batched SIMD/popcount or a theorem-derived
-smaller family), not memory layout or branch prediction.
+The first counter baseline was compute-bound: about 0.1764 s, 872.8 M cycles,
+and 3.919 G instructions for the 4,686,825-object census on the pinned
+performance core.  Two exact structural reductions now remove most of that
+work.  The 39 affine planes are 13 parallel classes of three planes.  Each
+class partitions `AG(3,3)`, so for a fixed nine-set its third overlap is
+`9-a-b`; the compiled profiler retains two masks per class and performs 26
+instead of 39 population counts.  Gosper mask successors then replace the
+nine-index mask reconstruction with constant-work, allocation-free subset
+enumeration.
+
+The profiler selects its hardware kernel once at construction.  On x86-64
+with POPCNT and SSE4.1, scalar population counts feed four parallel classes at
+a time into packed unsigned maxima.  There is no per-object feature check and
+the exact generic kernel remains the fallback.  Seven-run counter A/Bs on CPU
+2 reduce end-to-end time from 176.37 to 57.38 ms (3.074x), cycles from 872.8 M
+to 272.8 M (-68.7%), and instructions from 3.919 B to 1.319 B (-66.4%).  The
+result is 81.7 million ambient objects/s, 58.2 cycles and 281.4 instructions
+per object.  The complete histogram, extremal count, cap/orbit claims, and
+historical representative remain unchanged.
 
 ## Python's continuing role
 
