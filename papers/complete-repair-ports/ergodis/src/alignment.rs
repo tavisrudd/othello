@@ -57,47 +57,60 @@ impl AlignmentAttachment {
 
     fn violation_for_cut(&self, cut: usize, selected: u64) -> Option<u64> {
         let edge_count = self.cut_edge_counts[cut] as usize;
-        let mut colors = [-1_i8; 16];
-        let mut queue = [0_u8; 16];
-        for root in 0..edge_count {
-            if colors[root] >= 0 {
+        let mut adjacency = [0_u16; 16];
+        let mut remaining_selected = selected;
+        while remaining_selected != 0 {
+            let triple = remaining_selected.trailing_zeros() as usize;
+            remaining_selected &= remaining_selected - 1;
+            let (left, right) = self.pair(cut, triple);
+            if left == u8::MAX {
                 continue;
             }
-            colors[root] = 0;
+            adjacency[left as usize] |= 1_u16 << right;
+            adjacency[right as usize] |= 1_u16 << left;
+        }
+        let mut queue = [0_u8; 16];
+        let mut colored = 0_u16;
+        let mut color_one = 0_u16;
+        for root in 0..edge_count {
+            let root_bit = 1_u16 << root;
+            if colored & root_bit != 0 {
+                continue;
+            }
+            colored |= root_bit;
             queue[0] = root as u8;
             let mut head = 0_usize;
             let mut tail = 1_usize;
             while head < tail {
                 let vertex = queue[head];
                 head += 1;
-                for triple in 0..self.triples.len() {
-                    if selected & (1_u64 << triple) == 0 {
-                        continue;
-                    }
-                    let (left, right) = self.pair(cut, triple);
-                    let neighbor = if left == vertex {
-                        right
-                    } else if right == vertex {
-                        left
-                    } else {
-                        continue;
-                    };
-                    debug_assert_ne!(neighbor, u8::MAX);
-                    let required = colors[vertex as usize] ^ 1;
-                    if colors[neighbor as usize] < 0 {
-                        colors[neighbor as usize] = required;
-                        queue[tail] = neighbor;
-                        tail += 1;
-                    } else if colors[neighbor as usize] != required {
-                        return None;
-                    }
+                let vertex_bit = 1_u16 << vertex;
+                let neighbors = adjacency[vertex as usize];
+                let same_color = if color_one & vertex_bit == 0 {
+                    colored & !color_one
+                } else {
+                    color_one
+                };
+                if neighbors & same_color != 0 {
+                    return None;
+                }
+                let mut fresh = neighbors & !colored;
+                colored |= fresh;
+                if color_one & vertex_bit == 0 {
+                    color_one |= fresh;
+                }
+                while fresh != 0 {
+                    let neighbor = fresh.trailing_zeros() as u8;
+                    fresh &= fresh - 1;
+                    queue[tail] = neighbor;
+                    tail += 1;
                 }
             }
         }
         let mut clause = 0_u64;
         for triple in 0..self.triples.len() {
             let (left, right) = self.pair(cut, triple);
-            if left != u8::MAX && colors[left as usize] == colors[right as usize] {
+            if left != u8::MAX && (color_one >> left & 1) == (color_one >> right & 1) {
                 clause |= 1_u64 << triple;
             }
         }

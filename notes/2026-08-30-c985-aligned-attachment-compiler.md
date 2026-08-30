@@ -54,6 +54,15 @@ clauses over only 56 query variables.  The generated at-most-16 SAT model has
 is written directly to persistent cache; the clause corpus is never buffered
 in RAM or written to `/tmp`.
 
+There is a second, much smaller exact formulation.  A graph is non-bipartite
+iff it contains an Eulerian subgraph with an odd number of edges: one direction
+selects an odd cycle; in the other, an Eulerian subgraph decomposes into cycles,
+and odd total size forces an odd one.  For every cut, select witness triples,
+require witness-to-query implication, even degree at every cut edge, and odd
+total witness size.  Tseitin XOR chains compile the at-most-16 decision to
+20,537 variables and only 89,724 clauses.  The CNF is 325 KiB; the complete
+colouring expansion is 32 MiB.
+
 ## Implemented trust boundary
 
 - `src/alignment.rs` compiles cut-edge incidences once and verifies a selected
@@ -61,6 +70,7 @@ in RAM or written to `/tmp`.
 - The native counterexample-guided DFS is iterative, uses a pre-sized flat
   duplicate table, and allocates nothing in the search loop.
 - `examples/alignment_attachment_cnf.rs` streams the complete reduced CNF.
+- `examples/alignment_attachment_compact_cnf.rs` streams the Eulerian/XOR CNF.
 - `python/c880_alignment_gurobi.py` is a thin backend: every incumbent is
   replayed by exact cut bipartiteness, violated contexts are closed under the
   `S_3 x S_5` stabilizer of the fixed first triple, and C880's already-proved
@@ -70,6 +80,11 @@ The quotient matches the original four-triple alignment definition for all
 1,024 query families at five points.  It independently re-proves `g(5)=9`,
 accepts the committed 17-query `g(8)` witness, and rejects a one-query deletion
 from that witness.  Strict all-target/all-feature clippy passes.
+
+The compact at-most-17 SAT control is satisfiable.  Its 17 selected query
+variables replay as separating in the independent Rust verifier.  The
+at-most-16 decision is still running in this checkpoint and writes a binary
+DRAT stream directly under `/home/tavis/.cache/ergodis`; it is not yet a result.
 
 ## Performance lesson
 
@@ -85,6 +100,12 @@ cannot see in an initially empty lazy model.  Closing under all 40,320 point
 permutations was measured and rejected: after fixing the first triple, only its
 720-element stabilizer is a model symmetry, and the larger callback cost
 dominated the node reduction.
+
+The expanded colouring CNF was stopped after 25 minutes without a result.  It
+reached 1.78 GiB maximum RSS.  The compact solver stays near 64 MiB RSS on the
+same decision.  A compact Gurobi model is also mathematically valid, but the
+installed restricted license rejects its roughly 5,000 witness variables; that
+is a license boundary, not a model failure.
 
 ## Boundary and next gate
 
