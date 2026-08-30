@@ -7,6 +7,8 @@
 //! cyclic rotations are exact semantic symmetries.  Enumeration is iterative,
 //! and the hot path writes into one pre-sized record array.
 
+use std::io::{BufWriter, Write};
+
 const LENGTH: usize = 9;
 const TARGET_ENERGY: i16 = 594;
 const TARGET_PAF: i16 = -74;
@@ -178,7 +180,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     records.sort_unstable_by_key(|record| record.signature);
     records.dedup_by_key(|record| record.signature);
 
+    let mut signature_output = std::env::var("ERGODIS_LEGENDRE_SIGNATURES")
+        .ok()
+        .map(|path| std::fs::File::create_new(path).map(BufWriter::new))
+        .transpose()?;
     let mut matching_signatures = 0_u64;
+    let mut signature_pairs = 0_u64;
     let mut witness = None;
     for &record in &records {
         let complement = Signature {
@@ -190,7 +197,24 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         {
             matching_signatures += 1;
             witness.get_or_insert((record, records[index]));
+            if record.signature <= complement {
+                signature_pairs += 1;
+                if let Some(output) = &mut signature_output {
+                    writeln!(
+                        output,
+                        "{} {} {} {} {}",
+                        record.signature.energy,
+                        record.signature.paf[0],
+                        record.signature.paf[1],
+                        record.signature.paf[2],
+                        record.signature.paf[3]
+                    )?;
+                }
+            }
         }
+    }
+    if let Some(output) = &mut signature_output {
+        output.flush()?;
     }
     if let Some((left_record, right_record)) = witness {
         let left = unpack(left_record.packed);
@@ -209,7 +233,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             return Err("compressed witness replay failed".into());
         }
         println!(
-            "status=SAT raw={complete} canonical={} signatures={} matching_signatures={matching_signatures} left={left:?} right={right:?}",
+            "status=SAT raw={complete} canonical={} signatures={} matching_signatures={matching_signatures} signature_pairs={signature_pairs} left={left:?} right={right:?}",
             RECORD_CAPACITY,
             records.len()
         );

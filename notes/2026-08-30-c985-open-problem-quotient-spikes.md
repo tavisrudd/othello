@@ -41,7 +41,9 @@ and no allocation or recursion in the enumeration loop. There are exactly
 sum is one, so every cyclic orbit has size nine and the exact canonical census
 is 1,951,427. Quotienting by the five-coordinate response leaves 769,834
 signatures; only 4,262 signatures have a complementary signature satisfying
-all compressed Legendre equations.
+all compressed Legendre equations, forming 2,131 unordered complementary
+pairs. The optional evidence path streams those five-integer representatives
+through a buffered writer rather than retaining a second corpus.
 
 The relaxation is feasible. One independently replayed compressed witness is
 
@@ -59,7 +61,7 @@ exact reduction from a quadratic comparison of 17.56 million sequences to
 ## Next lift
 
 The compressed witness is not a length-333 Legendre pair. The next compiler
-must lift only the 4,262 compatible signatures through the exact 117-orbit ID-3
+must lift only the 2,131 compatible signature pairs through the exact 117-orbit ID-3
 model. The natural hierarchy is:
 
 1. compile each `Z_9` column's 13 orbit signs to its exact compressed value and
@@ -70,6 +72,25 @@ model. The natural hierarchy is:
    `-2`;
 4. stream compact survivor or exclusion evidence and replay it against direct
    length-333 arithmetic.
+
+The first complete-orbit diagnostic now implements that lift in
+`python/legendre333_id3_cpsat.py`. It independently reconstructs all 117
+orbits and every weighted PAF equation, checks a labelled sample against direct
+length-333 arithmetic, and adds both CRT faces as redundant exact constraints.
+The second face is the mod-37 compression: 13 multiplier-orbit values in
+`{-9,-7,...,9}`, combined energy 650, and twelve combined compressed PAFs equal
+to `-18`. Row-sign normalization plus translation by multiples of 37 and
+reflection give exact lexicographic symmetry breaking on each nine-column
+compression.
+
+This does not yet close ID 3. The unsplit quotient-strengthened CP-SAT model
+remained `UNKNOWN` after 300.17 seconds with 6,843,822 branches. Fixing the
+first extreme signature `(9,-3,-3,1,1)`, adding the mod-37 quotient, and using
+the exact dihedral normalization remained `UNKNOWN` after 300.19 seconds with
+14,124 variables, 54,767 constraints, 5,727,990 branches, and 20,071 conflicts.
+The latter used about 3.5 GiB RSS. These are bounded diagnostics, not negative
+existence results. They show that the next reduction must compile below the
+generic orbit-bit search rather than add more redundant equations to it.
 
 An exact exclusion would settle ID 3. A survivor would be strictly more
 valuable than the present compression witness because it would satisfy the
@@ -95,3 +116,6 @@ length 333*, arXiv `2607.20765v1`, SHA-256
 `de396e62dc6d1cf43b9fea51d753318464bc8ed773c6b3f6cf6cb5fa681a1c70`. The paper
 leaves IDs `0,1,2,3,4,5,7,9,10` open and explicitly distinguishes fixed common
 multipliers from unrestricted and translation-twisted cases.
+Its public artifact was inspected read-only at Git commit
+`691398b7634140269874a45024ed3041036cda9c`; the Ergodis orbit/PAF builder is an
+independent implementation rather than an import of that code.
