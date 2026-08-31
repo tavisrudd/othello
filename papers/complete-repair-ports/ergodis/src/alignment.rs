@@ -1307,6 +1307,9 @@ fn search_alignment_attachment_internal<const CONTROLLED: bool, C: AlignmentSear
 
         let branch_bits = workspace.frames[depth].branch_bits;
         if branch_bits != 0 {
+            // The controlled monomorphization may replace the default bit;
+            // the ordinary monomorphization compiles that branch away.
+            #[allow(unused_mut)]
             let mut bit = branch_bits & branch_bits.wrapping_neg();
             #[cfg(feature = "control-plane")]
             if CONTROLLED && workspace.control_order_len[depth] != 0 {

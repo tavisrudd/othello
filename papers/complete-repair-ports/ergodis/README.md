@@ -226,7 +226,9 @@ with `--shard-index I --shard-count N`. Run every `I` in `0..N` with identical
 input, maximum weight, anchors, and binary semantics. Each JSON record is marked
 `partial-shard`; only the best witness across all `N` successful records, or
 exhaustion by all `N`, supports a global claim. Shards may run in any order, on
-different machines, and survive session boundaries independently.
+different machines, and survive session boundaries independently. Maintainers
+can compile every supported CSS feature combination and replay the compact/wide
+shard-union regression with `scripts/check-css-feature-matrix.sh`.
 
 The `parallel`-gated `css_distance_random` companion searches for an upper
 certificate by random information sets. It row-reduces the physical parity

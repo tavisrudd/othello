@@ -41,8 +41,11 @@ as each coherent tranche lands.
    be distributed without changing the proof obligation. The public API and
    CLI now expose a thread-count-independent modulo partition, evidence records
    distinguish partial shards from global results, and the README states the
-   `large-css,parallel` release feature contract. Next: full feature-matrix and
-   shard-union tests. Large-CSS v1 artifacts now load across the 12-to-13-word
+   `large-css,parallel` release feature contract. A checked-in validation
+   command now compiles default, `parallel`, `large-css`, and combined builds,
+   then replays the compact/wide shard-union regression; all four combinations
+   and the full 341-test all-feature library suite pass. Large-CSS v1 artifacts
+   now load across the 12-to-13-word
    internal support-width change, including the retained C1018 artifact, and BB
    generation is idempotent only when the existing bytes match. Reusable
    foundations now include table-backed runtime GF(p^h) arithmetic through
