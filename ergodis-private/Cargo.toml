@@ -24,3 +24,7 @@ path = "src/bin/alignment_controlled.rs"
 [[bin]]
 name = "hall-certify"
 path = "src/bin/hall_certify.rs"
+
+[[bin]]
+name = "q25-pair-repair"
+path = "src/bin/q25_pair_repair.rs"
