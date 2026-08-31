@@ -790,7 +790,7 @@ fn stratum_sweep(
         write!(json, "{{\"w\":{},\"points\":{}}}", w, hist[w])?;
     }
     json.push_str("],\"exceptional_examples\":[");
-    for (i, e) in exceptional.iter().take(8).enumerate() {
+    for (i, e) in exceptional.iter().take(256).enumerate() {
         if i > 0 {
             json.push(',');
         }
