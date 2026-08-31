@@ -448,6 +448,19 @@ field — well below `(10,7)`'s `q_min = 29`.  The `m = 4` row **fires** at
 Conjecture PRS-2's field law to a fifth redundancy; its four exceptional points
 are analysed in §5f.
 
+The `m = 4` orbit at `(15,17)` was re-derived independently in Python: weight
+`14 = ρ`, so deep; apolar degree 8 with a **pencil** of apolar octics whose
+eighteen members have root-type profile `9 ×` no rational root, `8 ×` two simple
+rational roots plus an irreducible sextic, `1 ×` type `6+2` — **no split
+squarefree member**, so the point is outside `P_15`; orbit size 612 in
+`PGL_2(17)` of order 4896, stabilizer of order 8 with element orders
+`{1,2,4,4,8,8,8,8}`, i.e. **cyclic `C_8` = `μ_{gcd(8,16)}`** exactly as
+Conjecture PRS-2 predicts; and four sparsest points, `c = s_9/s_1 ∈ {2,15}` on
+one and `c = s_{13}/s_5 ∈ {8,9}` on the mirror.  Since `(F_17^*)^8 = {1,16}`,
+the classes of `F_17^*/(F_17^*)^8` are the pairs `{x,-x}`, so `{2,15}` and
+`{8,9}` are each exactly one class — Conjecture PRS-3's cut, confirmed at a
+fourth carrier.
+
 The `m = 3` row at `q = 16` is the odd one out and is not a carrier result at
 all: its stratum contains three points of weight `15 = r`, so the covering
 radius there is `r`, not `r-1`.  That is the Seroussi–Roth even-field exception
@@ -645,7 +658,7 @@ Two consequences.
    | `(9,13)`  | `{1,4,7}`   | 3 | `(1,1)` | 2 | `S_3` | 3 |
    | `(11,13)` | `{1,5,9}`   | 4 | `(1,1)` | 2 | `C_4` | 4 |
    | `(10,13)` | `{0,8}`     | 8 | `(0,1)` | 1 | `C_4` | 4 |
-   | `(15,17)` | `{1,9}`     | 8 | `(1,5)` | 1 | — | 8 |
+   | `(15,17)` | `{1,9}`     | 8 | `(1,5)` | 1 | `C_8` | 8 |
 
    Two things survive across the whole table and one does not.  What survives:
    every sparsest representative has **two or three** nonzero coordinates, so
