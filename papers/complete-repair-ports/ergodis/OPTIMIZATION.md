@@ -439,6 +439,10 @@ solver.
 ## Where to read next
 
 - [README.md](README.md) is the command-oriented entry point.
+- [DESIGN.md](DESIGN.md) records component ownership, trust boundaries, and
+  current versus accepted campaign topology.
+- [CONTROL_PROTOCOL.md](CONTROL_PROTOCOL.md) specifies the optional bounded
+  local protocol.
 - [BENCHMARKS.md](BENCHMARKS.md) gives the complete experimental evidence.
 - [`../compositional_recovery.pdf`](../compositional_recovery.pdf) contains the
   definitions, theorem statements, proofs, information-loss examples, and

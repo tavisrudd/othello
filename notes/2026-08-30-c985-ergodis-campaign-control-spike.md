@@ -102,12 +102,28 @@ src/control/alignment.rs    C880 heartbeat and ordering adapter
 src/control/vm.rs           feature batch, typed bytecode, evaluator
 src/control/synthesis.rs    iterative bounded decision-tree proposer
 src/bin/ergodis_campaign.rs isolated campaign process
-src/bin/ergodisctl.rs       human/agent CLI and unattended batch/evolve loop
+src/bin/ergodisctl.rs       human/agent CLI and v0 unattended batch/evolve loop
 src/bin/alignment_controlled.rs opt-in live C880 runner
 ```
 
 Transport and ledger extraction are the next structural refactors if their
 surfaces continue to grow. The core solver modules remain independent.
+
+### Relationship to the accepted adaptive architecture
+
+This spike records experimental v0, not the final placement of unattended
+evolution.  The authoritative deployment decision is
+`notes/2026-08-30-c985-ergodis-adaptive-search-learning-adr.md`: the campaign
+daemon owns evolution and persistence; one solver-side low-priority shadow
+sampler owns isolated bounded probes; the watcher owns event-driven plan install
+and batched scorecard transport; search workers retain only fixed-size
+publication and the existing coarse safe point.
+
+The later runner-neutral public `theorem_search` kernel has been validated by
+offline Q16 and Q25 replays.  It is not yet hosted by the daemon.  Therefore
+`ergodisctl evolve` remains the implemented v0 loop, while daemon-owned
+low-priority evolution and live scorecard ingestion remain explicit integration
+work rather than an implied property of this spike.
 
 ## C80 results
 

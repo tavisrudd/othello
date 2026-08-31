@@ -123,6 +123,12 @@ cargo build --release --all-features
 
 ## Start here
 
+For component ownership, trust boundaries, and the distinction between current
+and accepted campaign architecture, see [DESIGN.md](DESIGN.md). The mathematical
+compiler model is explained in [OPTIMIZATION.md](OPTIMIZATION.md), protocol
+details in [CONTROL_PROTOCOL.md](CONTROL_PROTOCOL.md), and measurement scope in
+[BENCHMARKS.md](BENCHMARKS.md).
+
 The bundled inputs exercise the main workflows:
 
 ```text

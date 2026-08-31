@@ -420,12 +420,18 @@ end-to-end SOTA when no such implementation exists.
 
 ## Architecture and scaling review
 
-The new theorem evolver is deliberately campaign-side: allocations, ordered
-deduplication, ranking, and JSONL serialization never enter a solver hot loop.
-The domain client controls the candidate type, mutation grammar, exact truth
-oracle, coverage predicate, and syntax cost; the engine controls deterministic
-generation, testing, ranking, and replay.  This is enough to reuse one engine
-for Q16 incidence thresholds and Q25 matrix-literal conjunctions.
+The new theorem evolver is a runner-neutral deterministic kernel.  The Q16 and
+Q25 clients currently invoke it offline for acceptance and replay; that is a
+validation harness, not the intended live placement.  The authoritative
+deployment choice is the adaptive-search ADR: one low-priority campaign-daemon
+worker owns evolution, while a separate solver-side low-priority sampler runs
+isolated bounded probes and sends compact scorecards through the watcher.
+Allocations, ordered deduplication, ranking, and JSONL serialization never enter
+a solver hot loop.  The domain client controls the candidate type, mutation
+grammar, exact truth oracle, coverage predicate, and syntax cost; the engine
+controls deterministic generation, testing, ranking, and replay.  This is enough
+to reuse one engine for Q16 incidence thresholds and Q25 matrix-literal
+conjunctions, but daemon integration is still open.
 
 The present single-score beam can starve a temporarily unsound but promising
 parent after finding a narrow sound rule.  Before scaling to richer grammars it

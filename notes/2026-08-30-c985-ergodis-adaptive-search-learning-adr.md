@@ -24,6 +24,27 @@ The search core remains exact. Learned evidence may select ordering and diagnost
 work but may not prune or admit a branch without an independently validated theorem
 role.
 
+### Deployment ownership
+
+The campaign daemon owns candidate generation, evolution, exact frozen-batch
+evaluation, durable statistics, and validated plan activation.  `ergodisctl` is
+the human/agent steering client and temporary v0 host for the unattended evolve
+loop; it is not the final evolution owner.
+
+The solver process owns two cold-path adapters.  An event-driven watcher receives
+epoch notifications and installs already validated immutable plans.  One
+low-priority shadow sampler consumes fixed-size `RootSnapshot`s from a preallocated
+SPSC ring and runs bounded probes in an isolated presized workspace.  It emits
+compact scorecards to the watcher for batched submission to the daemon.  Search
+workers neither evolve candidates nor perform socket I/O, serialization, plan
+compilation, or shadow expansion.
+
+Implementation status as of this ADR refresh: the daemon, protocol, watcher,
+frozen-batch evaluator, ledger, external `ergodisctl evolve`, and runner-neutral
+`theorem_search` kernel exist.  Daemon-owned evolution, live scorecard ingestion,
+and the isolated shadow sampler remain staged work.  Offline theorem-search
+replays validate the kernel but do not constitute that integration.
+
 ## Context
 
 The first live C880 ordering plan exposed two distinct costs. Recomputing child
@@ -171,11 +192,13 @@ may import them only as weak priors and must recalibrate. Exact falsifiers never
 performance estimates may be retired or placed in a new generation after detected
 distribution shift.
 
-Search threads emit only fixed-size scorecards into a preallocated ring. A single
-watcher owns persistence and serialization. It appends checksummed, versioned WAL
-records at root completion or a coarse time boundary, periodically compacts them into
-sorted immutable tables, and installs a new manifest by atomic rename. Restart replays
-the WAL, restores active plan hashes/epoch, and rebuilds the dispatch table.
+Search threads emit only fixed-size snapshots and counters into preallocated rings.
+The shadow sampler emits fixed-size scorecards to the watcher.  The watcher owns
+batching and transport, while the campaign daemon owns persistence and serialization:
+it appends checksummed, versioned WAL records at root completion or a coarse time
+boundary, periodically compacts them into sorted immutable tables, and installs a new
+manifest by atomic rename. Restart replays the WAL, restores active plan hashes/epoch,
+and rebuilds the dispatch table.
 
 The disk format is portable and versioned, not a dump of a `repr(C)` Rust structure.
 The in-memory cross-thread scorecard may use `repr(C, align(64))`. Current expected
@@ -224,10 +247,12 @@ are deferred until measured scale requires them.
    ledger; restore them as priors.
 2. Add fixed-size root snapshots and one isolated shadow sampler with a hard node and
    duty-cycle budget.
-3. Add paired successive racing and held-out promotion.
-4. Compile a multi-policy root dispatch table and worker-slot mask aggregation.
-5. Replace mutation-only refinement with a discrimination table.
-6. Add a sliding/restarted operator-selection bandit only after reward and shift tests
+3. Move the deterministic evolve loop from `ergodisctl` into one low-priority daemon
+   worker and add batched live scorecard ingestion.
+4. Add paired successive racing and held-out promotion.
+5. Compile a multi-policy root dispatch table and worker-slot mask aggregation.
+6. Replace mutation-only refinement with a discrimination table.
+7. Add a sliding/restarted operator-selection bandit only after reward and shift tests
    are measured.
 
 ## Literature audit

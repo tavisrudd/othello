@@ -60,6 +60,19 @@ and derive the content address, then serializes directly through a buffered
 create-only file writer.  This trades one cheap serialization pass for bounded
 memory independent of the trace limit.
 
+## Proof-authorized plans
+
+The daemon advertises an exact allowlist in `proof_schemas`. A plan with role
+`necessary` is accepted only through presentation-bound authorized compilation:
+its proof handle must name an allowlisted theorem schema, match the manifested
+presentation hash, and reproduce the theorem's canonical predicate exactly.
+Ordinary compilation rejects `necessary` plans, and diagnostic or ordering
+plans reject attached proof handles. The first registered schema checks the
+nontrivial order-two or order-three character-energy budget of a bordered
+cyclic Goethals--Seidel tuple. The second checks membership in the exact
+multiplier-orbit/order-two-profile intersection for one presentation-bound
+cyclic subgroup shard. A frozen-batch fit is never a proof handle.
+
 The reference Python client is `python/ergodis_client.py`.  It has no external
 dependencies, uses monotone request IDs, enforces the frame bound, and provides
 bounded line and JSONL iterators.  Capability negotiation also pins the socket
@@ -68,6 +81,18 @@ operation inventory.  A future in-process Python or Lean FFI must remain
 byte-for-byte conformant with this socket path.
 
 ## Search-path isolation
+
+The component topology and implementation-status matrix are authoritative in
+[DESIGN.md](DESIGN.md). In experimental v0, `ergodis-campaign` serves the serial
+control protocol and durable ledger, while `ergodisctl evolve` is an external
+client. The generic `theorem_search` engine is currently exercised by replay
+binaries; it is not yet hosted by the daemon.
+
+The accepted integration moves candidate evolution into one low-priority daemon
+worker. A distinct solver-side low-priority sampler consumes fixed-size root
+snapshots, performs isolated bounded probes, and sends compact scorecards through
+the watcher. Search workers do not run evolution, probe workspaces, or protocol
+code.
 
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
