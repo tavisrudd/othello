@@ -2,8 +2,11 @@
 
 **Lane**: `clebsch`
 
-**Status:** Queued; C1001, C1007, C1009, and C1010's component-count envelope frozen;
-publication decision only.
+**Status:** Reported 2026-08-30; split forward integration selected, no
+manuscript or Ergodis source edits.
+
+**Decision report:**
+[`2026-08-30-c1004-bounded-degree-publication-audit.md`](../2026-08-30-c1004-bounded-degree-publication-audit.md).
 
 ## Goal
 
@@ -50,6 +53,10 @@ algorithm.  Its natural first home is ergodis-private or a paper-local example.
 Promotion to the public ergodis surface is justified only if it reuses the
 generic prescribed-coset and finite-field APIs without adding
 arc-paper-specific concepts to the core library.
+
+C1004's decision is **no implementation now**.  Retain this specification for
+a future equality census; the existing paper-local low-degree evaluator is
+sufficient for the current theorem packet.
 
 Required certificate fields are: field model; normalized projective columns;
 all arc-minor checks; the projective syndrome/cost census; Veronese monomial
