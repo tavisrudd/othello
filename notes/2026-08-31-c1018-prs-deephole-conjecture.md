@@ -609,6 +609,12 @@ r = 9 :  q ∈ {9,…,53}          r = 10 : q ∈ {11,…,59}
 closes the non-regular class **at every prime power, with no residual field
 range** — a complete classification rather than a bounded verification.
 
+Redundancy eight is finished (§5d).  Redundancies nine and ten are finished as
+far as this wave's compute reached and are a straightforward unattended
+continuation, not a research problem: the sweep cost grows like `q^4` at both,
+so the remaining fields are roughly an hour and a half of wall clock apiece.
+The exact command is in §9; the exact reached range is in §6.
+
 ### 5f. The reduction immediately found something the census taxonomy had ruled out
 
 Applied at `r = 10`, the sweep reports **six exceptional points at `q = 13`** —
