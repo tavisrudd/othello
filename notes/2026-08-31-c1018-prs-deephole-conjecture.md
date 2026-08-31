@@ -1090,11 +1090,15 @@ evidence gap and its owner.
     with normal form `Y(Y^8 + cX^8)` and `c` running over one fourth-power class
     of `F_13^*`.  It has shape `(a,b) = (0,1)`, which §5.3f's heuristic had
     excluded.  Nothing is open about the orbit itself — it is verified from the
-    definition — but the taxonomy question is: **are `(1,1)` and `(0,1)` the
-    only shapes?**  The lemma makes this checkable rather than guessable, and
-    the sweeps at `r = 8, 9, 10, 11, 12` found no third shape.  Evidence gap:
-    the same at higher `r`, where the `ℓ = 2` locus grows like `q^{(d-1)/2}`
-    and the sweep runs out of budget around `r = 13`.
+    definition — but the taxonomy is: three exponent pairs are now known,
+    `(1,1)`, `(0,1)` and `(1,5)` at `(15,17)`, so **no rule for `(a,b)` beyond
+    `min(a,b) ≤ 1` survives**, and with it D′'s divisibility `m | r-3` is gone.
+    What does survive across all six carrier orbits is `deg G ≤ 2`,
+    `min(a,b) ≤ 1`, the stabilizer `μ_{gcd(g,q-1)}`, the least-admissible-field
+    law, and the `m`-th power class cut.  Evidence gap: whether `deg G ≤ 2` and
+    `min(a,b) ≤ 1` are real constraints or artifacts of the small `r` reachable
+    — the `ℓ = 2` locus grows like `q^{(d-1)/2}` and the sweep runs out of
+    budget around `r = 13`.
 
 11. **The residual is now exactly one class: regular orbits.**  *New this
     wave.*  The fixed-locus lemma is a complete search of every orbit with
@@ -1128,7 +1132,8 @@ notes/2026-08-31-c1018-prs-certificate.py           certificate builder / checke
 notes/2026-08-31-c1018-prs-certificate.json         compact certificate, one record per cell
 notes/2026-08-30-c1018-prs-helper.py                independent Python verifier (extended
                                                     to read the new driver's JSON schema)
-ergodis-private/src/bin/c1018_prs_census.rs         parallel u64 census + stratum driver
+ergodis-private/src/bin/c1018_prs_census.rs         parallel u64 census, stratum sweep,
+                                                    and fixed-locus sweep driver
 ergodis-private/src/bin/c1018_prs_deephole.rs       2026-08-30 driver (ported onto the core
                                                     by a concurrent session; unchanged here)
 ```
@@ -1150,6 +1155,11 @@ C=~/.cache/ergodis/c1018/prs && mkdir -p $C
 
 # the same cell through the 2026-08-30 driver, where it fits in u32 and 2 GB
 ./target/release/c1018_prs_deephole --r 8 --q 13 --max-reps 16
+
+# the fixed-locus sweep of §5d: a complete search of every orbit with
+# nontrivial stabilizer, at square-root cost
+./target/release/c1018_prs_census --r 8 --q 43 --fix-sweep --max-reps 64 \
+  --out $C/fix-r8-q43.json
 
 # a carrier-stratum sweep
 ./target/release/c1018_prs_census --r 13 --q 31 --stratum-mod 5 --stratum-class 1 \
