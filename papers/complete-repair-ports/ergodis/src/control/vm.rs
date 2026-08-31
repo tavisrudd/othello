@@ -909,6 +909,22 @@ pub fn evaluate_plan(
     batch: &FeatureBatch,
     plan: &CompiledPlan,
 ) -> Result<Evaluation, ControlError> {
+    let (evaluation, _) = evaluate_plan_cascaded(batch, plan, None)?;
+    Ok(evaluation.expect("an uncensored evaluation always completes"))
+}
+
+/// Evaluate in fixed row blocks and stop only when `can_enter` proves that no
+/// completion of the unseen rows can enter the current survivor set.
+pub(super) fn evaluate_plan_cascaded(
+    batch: &FeatureBatch,
+    plan: &CompiledPlan,
+    can_enter: Option<&dyn Fn(u64, u64) -> bool>,
+) -> Result<(Option<Evaluation>, usize), ControlError> {
+    let total_weight = batch
+        .weights
+        .iter()
+        .try_fold(0_u64, |sum, &weight| sum.checked_add(weight))
+        .ok_or_else(|| ControlError::Invalid("campaign weight overflow".into()))?;
     let mut outcome_hasher = blake3::Hasher::new();
     let mut outcome_word = 0u64;
     let mut outcome_bits = 0u32;
@@ -962,10 +978,19 @@ pub fn evaluate_plan(
                     result.weighted_false_negative.saturating_add(weight);
             }
         }
+        let rows_evaluated = row + 1;
+        if rows_evaluated % 64 == 0 && rows_evaluated != batch.rows() {
+            let remaining_weight = total_weight.saturating_sub(result.weighted_rows);
+            let maximum_correct = result.weighted_correct.saturating_add(remaining_weight);
+            if can_enter.is_some_and(|gate| !gate(result.weighted_false_positive, maximum_correct))
+            {
+                return Ok((None, rows_evaluated));
+            }
+        }
     }
     if plan.output == PlanOutput::Predicate && outcome_bits != 0 {
         outcome_hasher.update(&outcome_word.to_le_bytes());
     }
     result.outcome_hash = outcome_hasher.finalize().to_hex().to_string();
-    Ok(result)
+    Ok((Some(result), batch.rows()))
 }

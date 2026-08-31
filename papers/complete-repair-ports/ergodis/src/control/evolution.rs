@@ -1,4 +1,7 @@
-use super::{evaluate_plan, CompiledPlan, ControlError, FeatureBatch, PlanOp, PlanScope, PlanSpec};
+use super::{
+    vm::evaluate_plan_cascaded, CompiledPlan, ControlError, FeatureBatch, PlanOp, PlanScope,
+    PlanSpec,
+};
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs::File;
@@ -87,6 +90,8 @@ pub(super) fn run_evolution(
     let mut perfect = 0_usize;
     let mut structural_rejections = 0_usize;
     let mut outcome_expansion_rejections = 0_usize;
+    let mut cascade_rejections = 0_usize;
+    let mut rows_evaluated = 0_u64;
     let mut best: Option<(u64, u64, usize, PlanSpec)> = None;
     let mut truncated = false;
     let mut current = current
@@ -103,6 +108,7 @@ pub(super) fn run_evolution(
             .generation
             .store(generation as u64, Ordering::Relaxed);
         let mut ranked = Vec::new();
+        let mut survivor_keys = Vec::<(u64, std::cmp::Reverse<u64>, usize)>::new();
         for pending in current.drain(..) {
             if tested == bounds.max_candidates || progress.cancelled.load(Ordering::Acquire) {
                 break 'generations;
@@ -118,7 +124,40 @@ pub(super) fn run_evolution(
             }
             plan.name = format!("evolve-g{generation}-c{tested}");
             let compiled = CompiledPlan::compile(&plan, &batch.fields)?;
-            let evaluation = evaluate_plan(&batch, &compiled)?;
+            let can_enter = |false_positive: u64, maximum_correct: u64| {
+                if survivor_keys.len() < bounds.beam {
+                    return true;
+                }
+                let worst = survivor_keys[survivor_keys.len() - 1];
+                false_positive < worst.0
+                    || (false_positive == worst.0 && maximum_correct >= worst.1 .0)
+            };
+            let (evaluation, examined) =
+                evaluate_plan_cascaded(&batch, &compiled, Some(&can_enter))?;
+            rows_evaluated = rows_evaluated.saturating_add(examined as u64);
+            let Some(evaluation) = evaluation else {
+                let record = json!({
+                    "generation": generation,
+                    "parent_hash": pending.parent_hash,
+                    "operator": pending.operator,
+                    "plan": &plan,
+                    "hash": &compiled.hash,
+                    "evaluation": null,
+                    "cascade": {"rejected": true, "rows_evaluated": examined},
+                });
+                let mut encoded = serde_json::to_vec(&record)?;
+                encoded.push(b'\n');
+                if bytes.saturating_add(encoded.len() as u64) > bounds.byte_limit {
+                    truncated = true;
+                    break 'generations;
+                }
+                writer.write_all(&encoded)?;
+                bytes += encoded.len() as u64;
+                tested += 1;
+                cascade_rejections += 1;
+                progress.tested.store(tested as u64, Ordering::Relaxed);
+                continue;
+            };
             let equivalent_to = outcome_classes.get(&evaluation.outcome_hash).cloned();
             outcome_classes
                 .entry(evaluation.outcome_hash.clone())
@@ -163,6 +202,13 @@ pub(super) fn run_evolution(
                     plan.clone(),
                 ));
             }
+            survivor_keys.push((
+                evaluation.weighted_false_positive,
+                std::cmp::Reverse(evaluation.weighted_correct),
+                plan.program.len(),
+            ));
+            survivor_keys.sort_unstable();
+            survivor_keys.truncate(bounds.beam);
             ranked.push((
                 evaluation.weighted_correct,
                 evaluation.weighted_false_positive,
@@ -217,6 +263,8 @@ pub(super) fn run_evolution(
         "outcome_classes": outcome_classes.len(),
         "structural_rejections": structural_rejections,
         "outcome_expansion_rejections": outcome_expansion_rejections,
+        "cascade_rejections": cascade_rejections,
+        "rows_evaluated": rows_evaluated,
         "bytes": bytes,
         "truncated": truncated,
         "cancelled": progress.cancelled.load(Ordering::Acquire),

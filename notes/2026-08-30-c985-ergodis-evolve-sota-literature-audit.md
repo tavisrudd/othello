@@ -138,6 +138,17 @@ Every stage has a declared row/work/byte budget. Unsound candidates stop
 immediately. Diagnostic and ordering candidates use paired operational races;
 no noisy runtime score can grant proof authority.
 
+**First slice landed.** Frozen-batch evolution now evaluates in fixed 64-row
+blocks. Once the current beam is full, a candidate stops only when its observed
+false-positive count and the optimistic assumption that every unseen row is
+correct still cannot match the beam's worst exact survivor. Thus rejection is a
+proof from monotone partial counts, not a sampling heuristic. Rejected trials
+remain in streamed evidence with lineage, compiled hash, and rows examined;
+summary counters report rejected candidates and total rows evaluated. A
+128-row planted control verifies both early stopping and preservation of the
+perfect survivor. Multiple semantic strata and operational shadow stages remain
+open.
+
 ### P0 — maximum-oriented target selection
 
 Replace static beam truncation with a deterministic PUCT-like selector over

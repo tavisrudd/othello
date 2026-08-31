@@ -1673,6 +1673,7 @@ fn write_response(
 
 #[cfg(test)]
 mod tests {
+    use super::vm::evaluate_plan_cascaded;
     use super::*;
     use crate::multiset::{MultisetBounds, MultisetStatistic};
     use std::thread;
@@ -1798,6 +1799,36 @@ mod tests {
         let result = evaluate_plan(&parents, &plan).unwrap();
         assert_eq!(result.weighted_correct, 3);
         assert_eq!(result.first_mismatch, None);
+    }
+
+    #[test]
+    fn exact_cascade_stops_only_after_beam_entry_is_impossible() {
+        let batch = FeatureBatch {
+            presentation: "cascade".into(),
+            problem: "all-positive".into(),
+            fields: vec!["x".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: (0..128).collect::<Vec<_>>().into_boxed_slice(),
+            weights: vec![1; 128].into_boxed_slice(),
+            expected: vec![u64::MAX; 2].into_boxed_slice(),
+            values: vec![0; 128].into_boxed_slice(),
+        };
+        let spec = PlanSpec {
+            schema: PLAN_SCHEMA.into(),
+            name: "always-false".into(),
+            role: PlanRole::Diagnostic,
+            output: PlanOutput::Predicate,
+            scope: None,
+            program: vec![PlanOp::Bool { value: false }],
+        };
+        let plan = CompiledPlan::compile(&spec, &batch.fields).unwrap();
+        let gate = |false_positive, maximum_correct| false_positive == 0 && maximum_correct >= 128;
+        let (evaluation, rows) = evaluate_plan_cascaded(&batch, &plan, Some(&gate)).unwrap();
+        assert!(evaluation.is_none());
+        assert_eq!(rows, 64);
+        let (evaluation, rows) = evaluate_plan_cascaded(&batch, &plan, None).unwrap();
+        assert_eq!(rows, 128);
+        assert_eq!(evaluation.unwrap().weighted_correct, 0);
     }
 
     #[test]
@@ -2205,6 +2236,65 @@ mod tests {
             .iter()
             .skip(1)
             .all(|record| record["operator"] != "seed"));
+    }
+
+    #[test]
+    fn daemon_evolution_cascade_avoids_full_rows_for_dominated_candidates() {
+        let temporary = tempfile::tempdir().unwrap();
+        let data = temporary.path().join("data.jsonl");
+        let batch = FeatureBatch {
+            presentation: "cascade".into(),
+            problem: "all-positive".into(),
+            fields: vec!["x".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: (0..128).collect::<Vec<_>>().into_boxed_slice(),
+            weights: vec![1; 128].into_boxed_slice(),
+            expected: vec![u64::MAX; 2].into_boxed_slice(),
+            values: vec![0; 128].into_boxed_slice(),
+        };
+        batch.write_jsonl(File::create(&data).unwrap()).unwrap();
+        let mut campaign = Campaign::create(
+            &data,
+            &temporary.path().join("run"),
+            Some(temporary.path().join("control.sock")),
+            16_384,
+            8_192,
+            64 * 1024,
+        )
+        .unwrap();
+        let seed = json!({
+            "schema": PLAN_SCHEMA,
+            "name": "threshold",
+            "role": "diagnostic",
+            "output": "predicate",
+            "program": [
+                {"op": "field", "name": "x"},
+                {"op": "const", "value": 0},
+                {"op": "gt"}
+            ],
+        });
+        campaign
+            .evolution_start(&json!({
+                "seeds": [seed],
+                "evidence_name": "cascade-control",
+                "generations": 2,
+                "beam": 1,
+                "max_candidates": 16,
+            }))
+            .unwrap();
+        let completed = loop {
+            let status = campaign.evolution_status().unwrap();
+            if status["state"] != "running" {
+                break status;
+            }
+            thread::yield_now();
+        };
+        let summary = &completed["summary"];
+        let tested = summary["tested"].as_u64().unwrap();
+        let rows = summary["rows_evaluated"].as_u64().unwrap();
+        assert!(summary["cascade_rejections"].as_u64().unwrap() > 0);
+        assert!(rows < tested * 128);
+        assert!(summary["perfect"].as_u64().unwrap() > 0);
     }
 
     #[test]
