@@ -385,6 +385,14 @@ recomputed from the records.
 The `--recheck-shards` dial costs what it should: 2 of 32 shards is 6.2% of the
 cover and cost 2.6% and 5.9% of the two jobs' shard wall time respectively.
 
+At sweep scale: the twelve acceptance jobs cost **3,775 s of wall clock** in
+total (1.05 h, on a contended host). Structurally verifying all twelve committed
+certificates costs **0.03 s and 3.7 MiB**, a ratio of about **126,000x**. That
+is the number to quote for the integrity-and-upper-bound half of the claim, and
+it is worth being precise about what it covers: twelve complete 32-shard covers,
+twelve code identities and parity gates re-derived from their inputs, and every
+witness re-checked over GF(2).
+
 ### 6.3 A real finding: candidate counts are not always reproducible
 
 The first version of the shard re-check compared candidate counts for equality
