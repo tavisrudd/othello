@@ -28,7 +28,7 @@ task-specific feature extractors remain private adapters.
 | C1013/C1014 | quadratic-character census, product twists, squarefree preflight, bad-prime routing | single polynomial and linear twist already fit | landed nonmaterialized product census and exact `gcd(f,f')` degree |
 | C1008/C1009/C1011 | controller proposes and audits finite predicates | CLI evolution retained/transported too much and synthesized Boolean leaves did not type-check | landed streaming evolution API, bulk daemon evaluation, Boolean VM constants, synthesis regression |
 | C1011 | adaptive/nonadaptive query design over a finite incidence system | ceiling can show ambiguity but cannot optimize query cost | next-tier generic query-design compiler/certificate |
-| C1005/C1012 | coherent closure and fusion-primitivity | spectral sufficient condition now covered; Hadamard/common-neighbour closure is not | highest-EV remaining theorem kernel |
+| C1005/C1012 | coherent closure and fusion-primitivity | spectral sufficient condition was covered; Hadamard/common-neighbour closure was not | landed exact transpose/intersection-count coherent refinement |
 | C1013/C1014 | higher characters, Jacobi sums, cyclotomic cosets, curve-supported sums | quadratic characters only | high-value algebraic extension after coherent closure |
 | C1015 | Hamilton-pair parity and shared-two-label closure | generic incidence/group kernels exist, but no typed linear-constraint closure engine | retain as a private fixture for a future interpolation/closure kernel |
 
@@ -65,6 +65,14 @@ branch, allocation, controller state, or communication path. The product
 character census is allocation-free after setup and has an explicit allocator
 regression.
 
+The next tranche adds `coherent_closure`, the highest-ranked remaining kernel.
+It compiles the coarsest ordered-pair coloring closed under diagonal
+distinction, transpose, and every two-step intersection count, and replays the
+complete deterministic result. Its presized flat `(color,color)` pool and
+explicit 16-byte signature records avoid one allocation per ordered pair. A
+five-cycle control reaches rank three by both the new coherent route and the
+modular-power route.
+
 ## Evolve/control consequences
 
 The new batch operation is the bridge from the current external
@@ -87,28 +95,26 @@ successive-halving scorecards remain open.
 
 ## Highest-EV remaining kernels
 
-1. **Coherent closure / fusion compiler.** Start from one or more exact
-   integral relation matrices, refine by transpose, Hadamard atoms, and
-   multiplication/common-neighbour counts, and emit a replayable partition
-   transcript. This generalizes the fixed C1008/C1012 sparse-shadow results
-   and complements the spectral sufficient condition already landed.
-2. **Finite query-design compiler.** Accept hypothesis-by-query incidence
+1. **Finite query-design compiler.** Accept hypothesis-by-query incidence
    masks; certify separating nonadaptive families and adaptive decision trees;
    then add exact optimization for bounded instances. C1011's `22/66` fixture
    is the known-answer gate, but the public API is fault diagnosis and active
    identification.
-3. **Higher multiplicative-character layer.** Compile a cyclic log table once,
+2. **Higher multiplicative-character layer.** Compile a cyclic log table once,
    support coset-restricted censuses and exact Jacobi sums, and retain
    positive/zero/class counts as witnesses. This directly absorbs the
    C1014 cyclotomic-number work.
-4. **Finite polynomial algebra.** Extend the landed derivative/GCD preflight
+3. **Finite polynomial algebra.** Extend the landed derivative/GCD preflight
    to squarefree factor degrees, reduction modulo `x^p-x`, and recurrence
    compilation. This prevents callers from using symbolic systems merely to
    shape a character-sum request.
-5. **Typed linear-constraint closure.** Compile small incidence/interpolation
+4. **Typed linear-constraint closure.** Compile small incidence/interpolation
    identities and propagate equality, parity, and pencil-membership closure.
    C1015 is a strong private fixture; public semantics should be generic
    finite-module constraints.
+5. **Compact coherent transcripts.** The deterministic final-color replay is
+   exact, but large public certificates should stream refinement splits or
+   intersection tables rather than duplicate all compiler work.
 
 ## Acceptance and non-goals
 
