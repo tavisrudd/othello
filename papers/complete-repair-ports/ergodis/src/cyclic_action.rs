@@ -2,8 +2,9 @@
 //!
 //! A labeling invariant under an action is constant on every action orbit.
 //! Therefore, at a cyclic shift `s`, positions whose endpoints occupy the same
-//! orbit cannot change.  [`CyclicOrbitLocks`] compiles the orbit partition once
-//! and exposes allocation-free shift queries.
+//! orbit cannot change.  [`CyclicOrbitLocks`] compiles the orbit partition and
+//! its cyclic within-orbit difference census once, then exposes constant-time,
+//! allocation-free shift queries.
 
 use std::error::Error;
 use std::fmt::{self, Display, Formatter};
@@ -41,19 +42,19 @@ impl<E: Error + 'static> Error for CyclicOrbitLockError<E> {}
 
 /// A compiled action-orbit partition on `Z / n Z`.
 ///
-/// The hot representation is one dense orbit ID per carrier position.  Shift
-/// queries traverse two contiguous slice pairs, avoiding remainder operations
-/// and allocating no memory.
+/// The hot representation uses dense orbit IDs and one lock count per shift.
+/// Shift queries are indexed loads and allocate no memory.
 #[repr(C)]
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct CyclicOrbitLocks {
     orbit_of: Box<[u32]>,
     orbit_sizes: Box<[u32]>,
+    locked_by_shift: Box<[u32]>,
 }
 
 #[cfg(target_pointer_width = "64")]
 const _: () = assert!(
-    std::mem::size_of::<CyclicOrbitLocks>() == 32 && std::mem::align_of::<CyclicOrbitLocks>() == 8
+    std::mem::size_of::<CyclicOrbitLocks>() == 48 && std::mem::align_of::<CyclicOrbitLocks>() == 8
 );
 
 impl CyclicOrbitLocks {
@@ -105,9 +106,11 @@ impl CyclicOrbitLocks {
             orbit_sizes[orbit as usize] += 1;
         }
 
+        let locked_by_shift = compile_difference_census(&orbit_of, &orbit_sizes)?;
         Ok(Self {
             orbit_of: orbit_of.into_boxed_slice(),
             orbit_sizes: orbit_sizes.into_boxed_slice(),
+            locked_by_shift,
         })
     }
 
@@ -133,26 +136,10 @@ impl CyclicOrbitLocks {
     /// Count positions locked by the given cyclic shift.
     ///
     /// Returns `None` when `shift >= point_count()`.  The query allocates no
-    /// memory and contains no integer remainder in its scan loop.
+    /// memory and performs one indexed load.
     #[inline]
     pub fn locked_at_shift(&self, shift: u32) -> Option<u32> {
-        let shift = usize::try_from(shift).ok()?;
-        let count = self.orbit_of.len();
-        if shift >= count {
-            return None;
-        }
-        let split = count - shift;
-        let direct = self.orbit_of[..split]
-            .iter()
-            .zip(&self.orbit_of[shift..])
-            .filter(|(left, right)| left == right)
-            .count();
-        let wrapped = self.orbit_of[split..]
-            .iter()
-            .zip(&self.orbit_of[..shift])
-            .filter(|(left, right)| left == right)
-            .count();
-        u32::try_from(direct + wrapped).ok()
+        self.locked_by_shift.get(shift as usize).copied()
     }
 
     /// Fill lock counts for shifts `0..point_count()` without allocation.
@@ -160,11 +147,7 @@ impl CyclicOrbitLocks {
         if output.len() != self.orbit_of.len() {
             return false;
         }
-        for (shift, slot) in output.iter_mut().enumerate() {
-            *slot = self
-                .locked_at_shift(shift as u32)
-                .expect("enumerated shift is in range");
-        }
+        output.copy_from_slice(&self.locked_by_shift);
         true
     }
 
@@ -187,6 +170,50 @@ impl CyclicOrbitLocks {
     ) -> Option<bool> {
         Some(self.joint_change_upper_bound(shift, labeling_count)? < required)
     }
+}
+
+/// Count ordered within-orbit differences.  This costs `sum |orbit|^2`, which
+/// is substantially smaller than scanning every point at every shift when the
+/// action has many small orbits.
+fn compile_difference_census<E>(
+    orbit_of: &[u32],
+    orbit_sizes: &[u32],
+) -> Result<Box<[u32]>, CyclicOrbitLockError<E>> {
+    let count = orbit_of.len();
+    let mut offsets = Vec::with_capacity(orbit_sizes.len() + 1);
+    offsets.push(0_usize);
+    for &size in orbit_sizes {
+        let next = offsets
+            .last()
+            .copied()
+            .and_then(|offset| offset.checked_add(size as usize))
+            .ok_or(CyclicOrbitLockError::CarrierTooLarge)?;
+        offsets.push(next);
+    }
+    let mut cursors = offsets[..orbit_sizes.len()].to_vec();
+    let mut points = vec![0_u32; count];
+    for (point, &orbit) in orbit_of.iter().enumerate() {
+        let cursor = &mut cursors[orbit as usize];
+        points[*cursor] = point as u32;
+        *cursor += 1;
+    }
+
+    let modulus = orbit_of.len() as u32;
+    let mut locked_by_shift = vec![0_u32; count];
+    for range in offsets.windows(2) {
+        let orbit = &points[range[0]..range[1]];
+        for &source in orbit {
+            for &target in orbit {
+                let shift = if target >= source {
+                    target - source
+                } else {
+                    modulus - (source - target)
+                };
+                locked_by_shift[shift as usize] += 1;
+            }
+        }
+    }
+    Ok(locked_by_shift.into_boxed_slice())
 }
 
 #[inline]
