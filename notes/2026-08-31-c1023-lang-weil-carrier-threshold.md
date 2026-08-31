@@ -2,7 +2,11 @@
 
 **Lane:** `gem-mining`
 **Date:** 2026-08-31
-**Status:** in progress (written incrementally)
+**Status:** complete as a well-diagnosed negative.  The threshold does **not**
+close, for two independent and precisely located reasons (§3, §4).  What lands
+is a corrected structural picture — Lemma 1, Theorem A, and the `(1,…,1)`
+complete-intersection normal form for the secant condition — plus a redirection
+(§9) to the tool that is probably right.
 
 Predecessor: `notes/2026-08-31-c1018-prs-deephole-conjecture.md` §7, whose
 heuristic count this task is to make rigorous, and whose §5d fixed-locus lemma
@@ -43,28 +47,48 @@ for the `a = b = 1` carriers, which is finite exactly when `M ≥ 3`.  Numerical
 `C_heur(9,3) = 18` against an observed last-firing field of 13 and a clean
 census from 16 up — the right constant to within the width of one field.
 
-The rigorous version of that count carries a Weil error term, and the honest
-outcome is stated up front:
+**The threshold does not close.**  That is the verdict, and it is a verified
+negative rather than a budget failure:
 
-* **It closes**, with an explicit constant, for carriers with `M ≥ 3`, i.e.
-  `m ≤ (r-3)/2`, **conditional** on one geometric hypothesis (§4) that is
-  verified computationally for the carriers in range but not proved in general.
-* **It does not close at all** for `M = 2` — the two-index carriers, `deg G = 1`
-  — where the solution space is a single point and there is no room to count.
-  `(6,3)`, `(8,5)` and `(10,4)` are all of this type, so the mechanism that
-  produces three of the six known carrier orbits is *outside* the reach of this
-  argument. That is a structural failure, not a missing epsilon.
-* The explicit constant is roughly `20 √q`-driven and lands near **400** for
-  `(9,3)`, against a heuristic 18 and an observed 16.  So the theorem is
-  rigorous and effective but around 25× too weak to be swept against.
+* The equivariant count **fails structurally on the `M = 2` locus** — two-index
+  carriers, `deg G = 1` — where the solution space for `Φ` is a single point and
+  there is nothing to count.  That locus is a divisor inside every `M ≥ 3`
+  stratum, and it is where three of the six known carrier orbits live:
+  `(6,3)`, `(8,5)`, `(10,13)`.
+* Worse, the count does not close on the `M = 3` strata either.  Exhaustive
+  computation over the `(9, m=3)` stratum for `13 ≤ q ≤ 79` (§3) shows the set
+  of points the argument fails to certify sitting **flat at 100–150** across a
+  six-fold range of `q`, while the true exceptional deep count is 4 at `q = 13`
+  and 0 above.  A residual that stable is structure, not a tail.
+* Dropping equivariance gives a clean object — `V_s` is a complete intersection
+  of two divisors of multidegree `(1,…,1)` in `(P^1)^{d-1}` (§4) — but its
+  Lang–Weil constant is driven by the Segre degree `(d-1)!`, giving a threshold
+  around `10^{14}` at `r = 9` against an observed 16.  A Betti-number bound
+  would improve that to perhaps `10^6`.  Both are useless.
+* And the geometric-irreducibility hypothesis any such theorem needs is **false
+  exactly where the interesting behaviour is**: persistent points are deep at
+  every `q`, so verifying the hypothesis per point *is* the classification
+  problem restated.
 
-**Consequence for the `r ≥ 11` hope, stated plainly:** the threshold does *not*
-supply a usable substitute for the missing field-ranged theorem above `r = 10`.
-It would require sweeping the carrier strata up to `q ≈ C`, and while the small
-`m ≥ 3` strata are cheap enough for that, the `m = 2` stratum — which is the
-order-two locus the fixed-locus lemma needs — has dimension growing like `r/2`
-and is not sweepable to `q ≈ 400` at any `r ≥ 11`.  §6 states exactly what
-would and would not close.
+`C_heur` is a mean-crossing, not a bound: it is the field at which the expected
+count reaches one, with no error term, and §7 exhibits a cell — `(12,3)` — where
+the carrier fires slightly *above* it.  Reading it as a threshold was the error
+in the original §7.
+
+**Consequence for the `r ≥ 11` hope, stated plainly:** no threshold is proved,
+so nothing is supplied for the missing field-ranged theorem above `r = 10`.
+Even granting one, §6 shows it would not have been enough: it would close one
+split stratum at a time, whereas the fixed-locus lemma needs every prime-order
+locus including the order-two one, whose dimension grows like `r/2` and which is
+not sweepable to any of the constants in play.  The position at `r ≥ 11` is
+unchanged by this task.
+
+**What does land**, and is worth having independently of the threshold:
+Lemma 1 (§1), which kills the original heuristic and reproves the persistent
+locus in a line; Theorem A (§2), a verified structural reduction collapsing the
+annihilation conditions from `d-j+1` to `M-L_g`; and the observation (§4) that
+the secant condition is a complete intersection of two multidegree-`(1,…,1)`
+divisors in `(P^1)^{d-1}`, which is the right normal form for any successor.
 
 ## 1. Why the §7 heuristic cannot be repaired as written
 
@@ -378,4 +402,172 @@ And, for completeness, the limit that predates all of this: a stratum threshold
 would say nothing about orbits with **trivial** stabilizer, which C1018 §8
 item 11 already identifies as the entire residual at redundancies eight and
 nine.  Even a fully successful C1023 would not touch that class.
+
+## 7. Numerical sanity, against C1018's own cells
+
+The instruction was that a threshold contradicting the observed exceptional
+fields is wrong and one predicting them is evidence.  Checking `C_heur`:
+
+| carrier | `M` | `C_heur = (m^{M-1}(M-1)!)^{1/(M-2)}` | least admissible `q` | observed firing | verdict |
+|---|---:|---:|---:|---|---|
+| `(9, m=3)`  | 3 | 18   | 13 | fires at 13, clean 16 → 49 | consistent: 13 < 18, and no firing above |
+| `(11, m=4)` | 3 | 32   | 13 | fires at 13, clean 16 → 25 | consistent |
+| `(12, m=3)` | 4 | 12.7 | 13 | fires at 13 | **tension**: 13 > 12.7 |
+| `(15, m=4)` | 4 | 22.6 | 17 | fires at 17 | consistent: 17 < 22.6 |
+| `(13, m=5)` | 3 | 50   | 16 | clean at 16 and 31 | vacuous: no firing predicted or seen |
+
+Four of five are consistent.  The `(12,3)` row is the informative one: the
+heuristic says no firing above 12.7 and the carrier fires at 13.  The expected
+count there is `q^2/(m^{M-1}(M-1)!) = 169/162 = 1.04`, i.e. the mean crosses one
+essentially *at* the observed field, so a mean-based threshold has no margin.
+That cell also has `k = q+1-r = 2`, the near-degenerate boundary C1018 flags.
+Either way it shows `C_heur` is a mean-crossing, not a threshold: it carries no
+error term and is not a bound in either direction.
+
+The distinction matters and is worth stating flatly, because it was implicit in
+§7 of C1018: **the field at which the expected count crosses one is not the
+field beyond which the count is positive.** A rigorous uniform threshold has to
+dominate the fluctuation, which is what drives §4's constants from 18 up to
+`10^6` and beyond.
+
+## 8. Prior art — bounded pass, not an audit
+
+Per the task instruction this is a bounded check with read depths recorded, not
+a novelty audit under `notes/literature-audit-conventions.md`.
+
+* **Lemma 1 is essentially classical, and I should not have called it new.**
+  The Apolarity Lemma plus Sylvester's theorem on binary forms gives: with
+  `Ann(F) = (G_1,G_2)`, `deg G_1 ≤ deg G_2`, `deg G_1 + deg G_2 = d+2`, the rank
+  is `deg G_1` if `G_1` is squarefree and `deg G_2 = d+2-e` otherwise.  Over an
+  algebraically closed field that is exactly Lemma 1(i)–(ii).  *Read depth:
+  search snippets only* (a Springer "Final Comments and Further Reading"
+  chapter and a talk-slide deck on the Waring rank of binary binomial forms);
+  the primary sources were not obtained.
+  What is **not** classical is the `F_q`-rational refinement: over `F_q` the
+  relevant condition is "split squarefree", so a `G_1` that is irreducible over
+  `F_q` but squarefree over `F̄_q` — the conjugate-secant family — falls into
+  the bad case with no classical counterpart, and that family is half the
+  persistent locus.  So Lemma 1 should be presented as the finite-field
+  refinement of Sylvester, with the arithmetic case being the only new part.
+* The same snippet records that **Waring rank over finite fields is not always
+  well defined** in the naive sense (`xy` over `F_2`), which is consistent with
+  this repository's insistence on `p > d` and on distinct rational base points.
+* **PRS deep-hole literature.** Searching the deep-hole/covering-radius corpus
+  surfaces the expected body — explicit deep holes of RS codes, deep holes of
+  PRS codes, even-characteristic PRS deep holes, deep holes and MDS extensions —
+  and one item worth flagging: the covering-radius conjecture in the literature
+  is stated as `q-k+1` when `q` is even and `k ∈ {2,q-2}`, and `q-k` otherwise,
+  which is C1018's Conjecture A verbatim.  C1018 already labels that as
+  imported, which is correct.  *Read depth: titles and abstracts via search;
+  no paper newly read in this task.*
+* **No predecessor found for the specific bound sought here** — an effective
+  threshold for cyclic-carrier strata via point counting.  That is a bounded
+  negative from two searches, not a cleared novelty claim.  Given that Dye 1991
+  pre-empted this repository twice today, the working assumption should remain
+  that a predecessor exists, particularly on the multiplicative-subgroup side
+  identified in §9.
+* **Effective Lang–Weil** is quoted in the Ghorpade–Lachaud shape from memory
+  for the *form* of the error term only; no constant in this report depends on
+  the precise statement, and none is claimed as verified.
+
+## 9. `ej` + `tt` closeout
+
+**`tt` — the attack this report used is probably the wrong one.**  The
+good-`Φ` condition is "all roots lie in `(F_q^*)^m`", a *multiplicative*
+condition, and it is being intersected with `Λ_s`, a *linear* condition.  That
+is not naturally a Lang–Weil problem at all; it is a multiplicative-subgroup
+versus affine-subspace incidence problem, where the sharp tools are character
+sums over subgroups and sum-product estimates (Heath-Brown–Konyagin,
+Bourgain–Glibichuk–Konyagin and successors) rather than variety point counts.
+Those bounds are sensitive to the subgroup index `m` and to the dimension of the
+subspace, and are typically *polynomial* in the relevant parameters where
+Lang–Weil is exponential in `d`.  Concretely, for `M = 3` the question
+"does a line in `P^2` contain a quadratic whose two roots both lie in the
+index-`m` subgroup" is an incidence question between a line and the product set
+`H · H` for `H = (F_q^*)^m`, which is exactly the regime those methods address.
+**This is the single most promising redirection this task produces, and it was
+not pursued.**
+
+**`ej` — what is cheap and in reach now.**
+
+1. The `M = 2` locus is one parameter after torus normalisation
+   (`s = X^α Y^β (g_0 Y^m + g_1 X^m)`, and `g_1/g_0` normalises into
+   `F_q^*/(F_q^*)^m`).  It is small enough to settle by hand, it is where three
+   of the six known carrier orbits live, and §3 shows it is precisely what the
+   equivariant argument cannot see.  Highest value per unit effort here.
+2. Theorem A's row collapse held at `q = 16` with `p = 2 ≤ d = 8`, outside its
+   own hypothesis.  A characteristic-free proof — replacing falling factorials
+   by divided powers / Hasse derivatives, which is the Ball–Lavrauw idiom the
+   dossier points at — would extend every consequence to even characteristic at
+   no cost.
+3. The `V_s` description as a complete intersection of two `(1,…,1)` divisors in
+   `(P^1)^{d-1}` is a clean, small object that did not exist before this task.
+   Even without a threshold it is the right normal form for a successor.
+
+**Surprising and unexplained:** the Theorem-A residual with *all* coefficients
+nonzero sits at 130, 64, 60 for `q = 31, 49, 61` — it falls and then stops
+falling, rather than continuing to decay as the mean-count heuristic predicts.
+The `M = 2` sub-locus explains the part that grows linearly, not this part.
+
+## 10. Mystery ledger
+
+1. **Is the §7 heuristic salvageable?**  *Settled: no.*  Lemma 1 shows the
+   apolar space is contained in the multiples of the lower generator at every
+   level up to `d+1-e`, so the `1/j!` density is wrong by an unbounded factor
+   exactly where it is needed, and any repair not seeing the generator would
+   contradict the persistent locus being deep at all `q`.  Nothing open.
+2. **Does the torus-equivariant count close?**  *Settled: no*, and for a
+   structural reason rather than a constant.  The `M = 2` sub-locus is a divisor
+   in every larger stratum on which the solution space is a single point, and
+   the exhaustive check over `13 ≤ q ≤ 79` shows the uncertified residual flat
+   rather than decaying.  Nothing open about the verdict; the residual's
+   full-support part (§9) is open.
+3. **Can any effective bound reach the observed threshold?**  *Open, and this is
+   the real question.*  Observed `≈ 16`; mean-crossing heuristic `18`;
+   Lang–Weil via Segre degree `≈ 10^{14}`; via Betti numbers perhaps `10^6`.
+   The gap is four to twelve orders of magnitude.  §9's redirection to
+   multiplicative-subgroup incidence is the untried route.  Owner: a successor;
+   this is not a matter of tightening constants in the present argument.
+4. **Why does the full-support residual stop decaying?**  *Open.*  See §9.
+   Either there is a second degeneration locus not yet identified, or the
+   fluctuation is genuinely heavy-tailed in this range.  Cheap to probe: extend
+   the exhaustive sweep to `q ≈ 150` and fit.
+5. **Does Theorem A hold in small characteristic?**  *Open, with evidence.*  It
+   held on 242,151 pairs at `q = 16`, `p = 2 ≤ d`.  The proof does not cover it.
+   Evidence gap: a divided-power reformulation.
+6. **Nothing anomalous in the verification layer.**  507,318 (point, `Φ`) pairs
+   across four carriers, two characteristics and both exponent shapes, checked
+   against the raw definitions with zero mismatches and a hard assertion on the
+   row-collapse claim that never fired.  No mystery here and none is claimed.
+
+## 11. Evidence bundle
+
+```text
+notes/2026-08-31-c1023-lang-weil-carrier-threshold.md   this report
+notes/2026-08-31-c1023-carrier-threshold-check.py       verification + bound generator
+```
+
+Replay:
+
+```bash
+cd ~/src/othello/notes
+python3 2026-08-31-c1023-carrier-threshold-check.py verify 9  3 1 13
+python3 2026-08-31-c1023-carrier-threshold-check.py verify 11 4 1 13
+python3 2026-08-31-c1023-carrier-threshold-check.py verify 9  3 1 16
+python3 2026-08-31-c1023-carrier-threshold-check.py verify 10 4 0 13
+for q in 13 16 19 25 31 37 43 49 61 64 79; do
+  python3 2026-08-31-c1023-carrier-threshold-check.py bound 9 3 1 $q
+done
+```
+
+`verify` re-runs the Theorem A check; it raises on any row outside the predicted
+residue class and reports the mismatch count, which must be zero.  `bound`
+recomputes the residual table of §3.  The script imports only the `GF` class of
+`notes/2026-08-30-c1018-prs-helper.py`; the "true exceptional deep count" row of
+§3 is read from the committed C1018 evidence, not recomputed here.
+
+**What this certifies:** Theorem A parts (1) and (2), exhaustively, on the four
+listed cells; and the residual counts of §3, exhaustively over the named
+strata.  **What it does not certify:** any threshold, since none is proved; and
+nothing at all about orbits with trivial stabilizer.
 
