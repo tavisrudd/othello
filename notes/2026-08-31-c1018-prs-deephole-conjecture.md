@@ -532,6 +532,15 @@ census's `O(q^d)`.  **That is a square-root saving in the exponent.**  Measured:
 | `r=9, q=13`  |    883,708,281 | 67,193 |   13,151× |
 | `r=9, q=16`  |  4,581,298,449 | 70,794 |   64,713× |
 
+**One convention to keep in view.**  Both the stratum sweep and the fixed-locus
+sweep pin deepness to `w = d = r-1`, since a sweep of a subspace cannot
+establish the covering radius of the whole space.  That is correct except in the
+Seroussi–Roth even-field case `ρ = r`, which needs `q` even and
+`k = q+1-r ∈ {2, q-2}`.  No cell in any fixed-locus sweep here is of that form:
+`k = 2` forces `q = r+1`, which is odd at `r = 8, 10, 12`, and `k = q-2` forces
+`r = 3`.  The one cell in the whole wave that *is* of that form, `(15,16)`, was
+reached by a stratum sweep and is flagged in §5f.
+
 The implementation (`--fix-sweep`) uses none of the diagonal structure: it
 builds `S_σ` for a concrete `σ` — including a non-split generator found by
 searching companion matrices `[[0,b],[1,e]]` for an irreducible characteristic
