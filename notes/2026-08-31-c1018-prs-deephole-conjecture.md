@@ -282,7 +282,14 @@ attempted"* and *"Is 43 sharp?"*.  2026-08-30 answered the first over
 | 8 | 25 | 18 |  6,357,828,776 | 275 s | 790 MB | 7 |  8,450 | 2 |  8,450 | **0** |
 | 8 | 27 | 20 | 10,862,674,480 | 507 s | 1.35 GB | 7 | 10,584 | 5 | 10,584 | **0** |
 | 8 | 29 | 22 | 17,865,943,320 | 1,043 s | 2.21 GB | 7 | 13,050 | 2 | 13,050 | **0** |
-<!-- R8BAND EVENMORE -->
+
+The census was stopped at `q = 29`.  That is a deliberate stop, not a budget
+failure: once the fixed-locus lemma of §5d landed mid-wave it closed the
+non-regular class at **every** prime power below 43 in seconds per cell, so the
+only thing a further census cell could add is the regular-class answer at one
+more field, at a cost of tens of minutes and gigabytes each.  The compute went
+to finishing the lemma's sweeps at redundancies nine and ten instead.
+
 
 Every cell is clean, in both senses: the deep set is exactly `q(q+1)^2/2`, and
 the modular carrier contributes nothing even where it is nonempty — `q = 25` has
@@ -888,7 +895,7 @@ projective space assigned its exact NRC rank, no sampling, no pruning:
 | 5 | 7, 8, 9, 11, 13, 16 | agrees with the committed all-field theorem |
 | 6 | 7, 8, 9, 11, 13 | agrees with the committed all-field theorem |
 | 7 | 7, 8, 9, 11, 13 | agrees with the committed all-field theorem |
-| 8 | <!-- R8DOMAIN --> | <!-- R8VERDICT --> |
+| 8 | 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29 | `X(8) ∩ [8,29] = {8,9,11}`, so `q_0(8) = 13` |
 | 9 | 9, 11, 13, 16, 17, 19 | `X(9) ∩ [9,19] = {9,11,13}`, so `q_0(9) = 16` |
 | 10 | <!-- R10DOMAIN --> | <!-- R10VERDICT --> |
 
@@ -908,12 +915,19 @@ with `m = 3, 4, 6, 12`.
 
 **The exact unverified boundary.**
 
-* `r = 8`: <!-- R8GAP -->
-* `r = 9`: the band `[23, 52]` between the last censused field and the proved
-  threshold 53 is untested.  `|PG(8,23)| ≈ 8.2·10^{10}`, a 10.2 GB bitmap and
-  roughly three quarters of an hour, so the next cell is reachable but was not
-  run in this wave.
-* `r = 10`: <!-- R10GAP -->
+* `r = 8`: **the regular class only, at `q ∈ {31, 32, 37, 41}`.**  The
+  non-regular class is closed at every prime power (§5d) and C513's theorem
+  covers `q ≥ 43`, so those four fields are the entire residue, and only for
+  orbits of size exactly `q^3-q`.
+* `r = 9`: no census above `q = 19`; the band `[23, 52]` up to the proved
+  threshold 53 is untested by census.  `|PG(8,23)| ≈ 8.2·10^{10}` is a 10.2 GB
+  bitmap and roughly three quarters of an hour, so the next census cell is
+  reachable but was not run.  For the non-regular class the fixed-locus sweep
+  covers the range stated above, and the residue there is the regular class
+  plus whatever fields the sweep did not reach.
+* `r = 10`: no census above `q = 13`.  The fixed-locus sweep reached the range
+  stated above; everything from there to the proved threshold 59, plus the
+  regular class throughout, is open.
 * `r ≥ 11`: no census at any field; only carrier strata.  The census ceiling on
   this machine is about `1·10^{11}` projective points (a 12 GB bitmap), which at
   `r = 11` is `q ≤ 13` and at `r = 15` is nothing at all.
