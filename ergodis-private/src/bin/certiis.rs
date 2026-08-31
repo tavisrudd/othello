@@ -10,7 +10,7 @@
 //! Everything here calls `ergodis_private::hall_core::HallWorkspace` exactly as it stands;
 //! no core or shared module is modified.
 
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::time::Instant;
@@ -287,20 +287,22 @@ impl Compiled {
             "unsupported instance schema {:?} (expected {INSTANCE_SCHEMA})",
             instance.schema
         );
-        let mut task_index = BTreeMap::new();
+        let mut task_index = HashMap::with_capacity(instance.tasks.len());
         for (index, task) in instance.tasks.iter().enumerate() {
             ensure!(task.demand >= 1, "task {} has demand 0", task.id);
             if task_index.insert(task.id.as_str(), index).is_some() {
                 bail!("duplicate task id {}", task.id);
             }
         }
-        let mut resource_index = BTreeMap::new();
+        let mut resource_index = HashMap::with_capacity(instance.resources.len());
         for (index, resource) in instance.resources.iter().enumerate() {
             if resource_index.insert(resource.id.as_str(), index).is_some() {
                 bail!("duplicate resource id {}", resource.id);
             }
         }
-        let mut adjacency = vec![BTreeSet::new(); instance.tasks.len()];
+        // Collect then sort/dedup: on a 2.6-million-pair instance this is an order of
+        // magnitude cheaper than inserting each pair into a per-task ordered set.
+        let mut adjacency: Vec<Vec<u32>> = vec![Vec::new(); instance.tasks.len()];
         for (task, resource) in &instance.eligible {
             let &task_ix = task_index
                 .get(task.as_str())
@@ -308,17 +310,18 @@ impl Compiled {
             let &resource_ix = resource_index
                 .get(resource.as_str())
                 .with_context(|| format!("eligibility names unknown resource {resource}"))?;
-            adjacency[task_ix].insert(resource_ix as u32);
+            adjacency[task_ix].push(resource_ix as u32);
+        }
+        for list in &mut adjacency {
+            list.sort_unstable();
+            list.dedup();
         }
         Ok(Self {
             task_ids: instance.tasks.iter().map(|t| t.id.clone()).collect(),
             resource_ids: instance.resources.iter().map(|r| r.id.clone()).collect(),
             demand: instance.tasks.iter().map(|t| t.demand).collect(),
             capacity: instance.resources.iter().map(|r| r.capacity).collect(),
-            adjacency: adjacency
-                .into_iter()
-                .map(|set| set.into_iter().collect())
-                .collect(),
+            adjacency,
         })
     }
 
@@ -862,19 +865,19 @@ fn verify(instance: &Instance, raw: &[u8], report: &Report) -> anyhow::Result<Ve
     );
     checks.push(format!("regime independently reclassified as {}", report.regime));
 
-    let task_index: BTreeMap<&str, usize> = instance
+    let task_index: HashMap<&str, usize> = instance
         .tasks
         .iter()
         .enumerate()
         .map(|(i, t)| (t.id.as_str(), i))
         .collect();
-    let resource_index: BTreeMap<&str, usize> = instance
+    let resource_index: HashMap<&str, usize> = instance
         .resources
         .iter()
         .enumerate()
         .map(|(i, r)| (r.id.as_str(), i))
         .collect();
-    let mut eligible: BTreeSet<(usize, usize)> = BTreeSet::new();
+    let mut eligible: HashSet<(usize, usize)> = HashSet::with_capacity(instance.eligible.len());
     for (task, resource) in &instance.eligible {
         let &t = task_index
             .get(task.as_str())
@@ -981,6 +984,7 @@ fn verify(instance: &Instance, raw: &[u8], report: &Report) -> anyhow::Result<Ve
                 "certificate repeats a task"
             );
 
+            // Recomputed from the eligibility relation alone, never from `Compiled`.
             let neighborhood = |set: &BTreeSet<usize>| -> BTreeSet<usize> {
                 eligible
                     .iter()
