@@ -32,7 +32,9 @@ C1022 (novelty audit, pre-emption found →
 [report](../2026-08-31-dye-1991-preemption-surface-sweep.md)); C1023 (Lang–Weil threshold, verified
 negative → [report](../2026-08-31-c1023-lang-weil-carrier-threshold.md)); C1024 (incidence route,
 closed negative, and it puts the C1018 constant-threshold conjecture at risk →
-[report](../2026-08-31-c1024-incidence-threshold.md)). Open in this lane: C159
+[report](../2026-08-31-c1024-incidence-threshold.md)); C1025 (that risk discharged over 190 cells,
+the dimension clause sharpened, and the level-`d-1` reduction that makes high-redundancy cells cheap
+→ [report](../2026-08-31-c1025-prs1-falsification.md)). Open in this lane: C159
 (U-atlas, in progress), C1021 (prime-power healthy-arc census, queued). Unallocated successors named
 by those reports: the regular-orbit reduction for the deep-hole residual, the incidence-bound
 reframing, the symmetry-reduced exhaustion prototype, and a real audit of the Sylvester-adjacent
