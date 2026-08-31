@@ -788,20 +788,27 @@ look at — which is how the `(0,1)` shape was missed until now.
 
 ### Conjecture PRS-3 (carrier cut).
 
-Each exceptional orbit of a cyclic carrier meets its stratum in the set cut out
-by one value of the absolute invariant `u` together with a union of classes of
-`c` in `F_q^*/(F_q^*)^m`, where for a three-index carrier `{1,1+m,1+2m}`
+Write `g` for the support gap of a sparsest representative and
+`m = gcd(g, q-1)` for the order of the torus element stabilizing it.  Each
+exceptional carrier orbit meets its stratum in the set cut out by a union of
+classes of `c` in `F_q^*/(F_q^*)^m`, together — when the support has three
+indices — with one value of the absolute invariant `u`:
 
 ```text
-c = s_{1+m}/s_1 ,        u = s_{1+m}^2/(s_1 s_{1+2m}) ,
+three-index support {a, a+g, a+2g}:   c = s_{a+g}/s_a ,   u = s_{a+g}^2/(s_a s_{a+2g})
+two-index support   {a, a+g}:         c = s_{a+g}/s_a
 ```
 
-and for a two-index carrier `{1,1+m}` the cut is by `c = s_{1+m}/s_1` alone.
 `u` separates orbits; neither invariant alone suffices.
 
-This is 2026-08-30's Conjecture E′ extended to the two-index case by the
-`(8,11,m=5)` carrier, where the four exceptional points are exactly the union of
-two of the five classes of `F_11^*/(F_11^*)^5`.
+This is 2026-08-30's Conjecture E′ with the class modulus corrected from the gap
+to `gcd(g,q-1)`, and extended to the two-index case by two new carriers:
+
+* `(8,11)`, gap 5, `m = gcd(5,10) = 5`: the four exceptional points are
+  `c ∈ {2,5,6,9}`, exactly two of the five classes of `F_11^*/(F_11^*)^5`.
+* `(10,13)`, gap 8, `m = gcd(8,12) = 4`: the three exceptional points on each
+  locus are `c ∈ {7,8,11}`, exactly the class `C_3` of `F_13^*/(F_13^*)^4` —
+  and `C_3` is precisely the class neither `(11,13)` orbit used.
 
 *Falsifier.*  An exceptional carrier orbit whose stratum intersection is not a
 union of `m`-th power classes at a single `u`.
@@ -826,8 +833,15 @@ projective space assigned its exact NRC rank, no sampling, no pruning:
 | 9 | 9, 11, 13, 16, 17, 19 | `X(9) ∩ [9,19] = {9,11,13}`, so `q_0(9) = 16` |
 | 10 | <!-- R10DOMAIN --> | <!-- R10VERDICT --> |
 
+What is **completely classified for the non-regular class** — the fixed-locus
+lemma of §5d applied at every prime power below the imported field-ranged
+theorem's threshold, so that no field is left over:
+
+<!-- FIXDOMAIN -->
+
 Carrier strata verified exhaustively (each a complete sweep of the named
-projective subspace, blind to everything outside it): `r = 5` with `m = 2` over
+projective subspace, blind to everything outside it, and superseded by the
+fixed-locus sweeps wherever those reach): `r = 5` with `m = 2` over
 nine fields; `r = 6` with `m = 3` over thirteen; `r = 8` with `m = 5` over four;
 `r = 9` with `m = 2, 3, 6`; `r = 10` with `m = 3, 7`; `r = 11` with
 `m = 2, 3, 4, 8`; `r = 12` with `m = 3`; `r = 13` with `m = 2, 5, 10`; `r = 15`
