@@ -9,6 +9,8 @@ The current experimental schema is `ergodis-control-experimental-v0`.  A
 client reads `manifest.json` from a caller-selected private run directory.  It
 uses the manifest's exact socket path, run ID, and nonce on every request.
 Simultaneous campaigns therefore have separate endpoints and handshakes.
+Both reference clients bound manifest ingestion to the 65,536-byte frame
+ceiling and reject a mismatched manifest schema before connecting.
 
 ## Wire format
 
