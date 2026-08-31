@@ -597,6 +597,75 @@ struct CompiledOp {
 const _: () = assert!(std::mem::size_of::<CompiledOp>() == 16);
 const _: () = assert!(std::mem::align_of::<CompiledOp>() == 8);
 
+const MAX_TRUTH_TABLE_LEAVES: usize = 6;
+const TRUTH_COLUMNS: [u64; MAX_TRUTH_TABLE_LEAVES] = [
+    0xaaaa_aaaa_aaaa_aaaa,
+    0xcccc_cccc_cccc_cccc,
+    0xf0f0_f0f0_f0f0_f0f0,
+    0xff00_ff00_ff00_ff00,
+    0xffff_0000_ffff_0000,
+    0xffff_ffff_0000_0000,
+];
+
+#[repr(u8)]
+#[derive(Clone, Copy, Debug)]
+enum ComparisonCode {
+    Eq,
+    Ne,
+    Lt,
+    Le,
+    Gt,
+    Ge,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug)]
+struct PredicateLeaf {
+    value: i64,
+    field: u16,
+    code: ComparisonCode,
+    _pad: [u8; 5],
+}
+
+const _: () = assert!(std::mem::size_of::<PredicateLeaf>() == 16);
+const _: () = assert!(std::mem::align_of::<PredicateLeaf>() == 8);
+
+impl PredicateLeaf {
+    #[inline(always)]
+    fn evaluate(self, row: &[i64]) -> usize {
+        let field = row[self.field as usize];
+        usize::from(match self.code {
+            ComparisonCode::Eq => field == self.value,
+            ComparisonCode::Ne => field != self.value,
+            ComparisonCode::Lt => field < self.value,
+            ComparisonCode::Le => field <= self.value,
+            ComparisonCode::Gt => field > self.value,
+            ComparisonCode::Ge => field >= self.value,
+        })
+    }
+}
+
+#[repr(C)]
+#[derive(Clone, Debug)]
+struct CompiledPredicate {
+    leaves: Box<[PredicateLeaf]>,
+    truth_table: u64,
+}
+
+const _: () = assert!(std::mem::size_of::<CompiledPredicate>() == 24);
+const _: () = assert!(std::mem::align_of::<CompiledPredicate>() == 8);
+
+impl CompiledPredicate {
+    #[inline(always)]
+    fn evaluate(&self, row: &[i64]) -> i64 {
+        let mut assignment = 0usize;
+        for (index, &leaf) in self.leaves.iter().enumerate() {
+            assignment |= leaf.evaluate(row) << index;
+        }
+        ((self.truth_table >> assignment) & 1) as i64
+    }
+}
+
 fn fused_field_constant_comparison(code: OpCode, reverse: bool) -> Option<OpCode> {
     Some(match (code, reverse) {
         (OpCode::Eq, _) => OpCode::FieldEqConst,
@@ -638,6 +707,74 @@ fn fuse_field_constant_comparisons(ops: &[CompiledOp]) -> Vec<CompiledOp> {
     fused
 }
 
+fn comparison_code(code: OpCode) -> Option<ComparisonCode> {
+    Some(match code {
+        OpCode::FieldEqConst => ComparisonCode::Eq,
+        OpCode::FieldNeConst => ComparisonCode::Ne,
+        OpCode::FieldLtConst => ComparisonCode::Lt,
+        OpCode::FieldLeConst => ComparisonCode::Le,
+        OpCode::FieldGtConst => ComparisonCode::Gt,
+        OpCode::FieldGeConst => ComparisonCode::Ge,
+        _ => return None,
+    })
+}
+
+/// Compile a small pure predicate to its exact Boolean response table.
+///
+/// Six leaves cover the complete table in one `u64`. Larger or mixed-sort
+/// programs keep the ordinary stack evaluator rather than changing semantics.
+fn compile_truth_table_predicate(ops: &[CompiledOp]) -> Option<CompiledPredicate> {
+    let mut leaves = Vec::with_capacity(MAX_TRUTH_TABLE_LEAVES);
+    let mut stack = [0u64; MAX_PLAN_STACK];
+    let mut depth = 0usize;
+    for op in ops {
+        let result = if let Some(code) = comparison_code(op.code) {
+            if leaves.len() == MAX_TRUTH_TABLE_LEAVES {
+                return None;
+            }
+            let leaf_index = leaves.len();
+            leaves.push(PredicateLeaf {
+                value: op.value,
+                field: op.field,
+                code,
+                _pad: [0; 5],
+            });
+            TRUTH_COLUMNS[leaf_index]
+        } else {
+            match op.code {
+                OpCode::Bool => {
+                    if op.value != 0 {
+                        u64::MAX
+                    } else {
+                        0
+                    }
+                }
+                OpCode::Not => {
+                    stack[depth - 1] = !stack[depth - 1];
+                    continue;
+                }
+                OpCode::And | OpCode::Or => {
+                    let right = stack[depth - 1];
+                    let left = stack[depth - 2];
+                    depth -= 2;
+                    if matches!(op.code, OpCode::And) {
+                        left & right
+                    } else {
+                        left | right
+                    }
+                }
+                _ => return None,
+            }
+        };
+        stack[depth] = result;
+        depth += 1;
+    }
+    (depth == 1).then(|| CompiledPredicate {
+        leaves: leaves.into_boxed_slice(),
+        truth_table: stack[0],
+    })
+}
+
 #[inline(always)]
 unsafe fn read_plan_stack(stack: &[MaybeUninit<i64>; MAX_PLAN_STACK], index: usize) -> i64 {
     // SAFETY: callers use only indices below the validated bytecode depth.
@@ -651,6 +788,7 @@ pub struct CompiledPlan {
     pub output: PlanOutput,
     ops: Box<[CompiledOp]>,
     fast_ops: Box<[CompiledOp]>,
+    fast_predicate: Option<CompiledPredicate>,
     stack_needed: usize,
     field_count: u16,
     scope_field: u16,
@@ -849,12 +987,14 @@ impl CompiledPlan {
             spec.program.as_slice(),
         ))?;
         let fast_ops = fuse_field_constant_comparisons(&ops).into_boxed_slice();
+        let fast_predicate = compile_truth_table_predicate(&fast_ops);
         Ok(Self {
             name: spec.name.clone(),
             role: spec.role,
             output: spec.output,
             ops: ops.into_boxed_slice(),
             fast_ops,
+            fast_predicate,
             stack_needed,
             field_count: fields.len() as u16,
             scope_field,
@@ -865,6 +1005,13 @@ impl CompiledPlan {
 
     #[inline]
     pub(super) fn evaluate_value_untraced(&self, row: &[i64]) -> Result<i64, ControlError> {
+        if let Some(predicate) = &self.fast_predicate {
+            return Ok(if self.applies(row) {
+                predicate.evaluate(row)
+            } else {
+                0
+            });
+        }
         self.evaluate_value_impl::<false>(row, None)
     }
 
@@ -1247,6 +1394,86 @@ mod tests {
             let mut trace = Vec::new();
             assert!(plan.evaluate_value(&[0], Some(&mut trace)).is_err());
             assert!(plan.evaluate_value_untraced(&[0]).is_err());
+        }
+    }
+
+    #[test]
+    fn truth_table_predicate_matches_source_trace_exhaustively() {
+        let program = vec![
+            PlanOp::Field {
+                name: "x".to_owned(),
+            },
+            PlanOp::Const { value: 0 },
+            PlanOp::Gt,
+            PlanOp::Field {
+                name: "y".to_owned(),
+            },
+            PlanOp::Const { value: 0 },
+            PlanOp::Gt,
+            PlanOp::And,
+            PlanOp::Field {
+                name: "z".to_owned(),
+            },
+            PlanOp::Const { value: 0 },
+            PlanOp::Lt,
+            PlanOp::Or,
+        ];
+        let plan = CompiledPlan::compile(
+            &PlanSpec {
+                schema: PLAN_SCHEMA.to_owned(),
+                name: "truth-table-test".to_owned(),
+                role: PlanRole::Diagnostic,
+                output: PlanOutput::Predicate,
+                scope: None,
+                program,
+            },
+            &["x".to_owned(), "y".to_owned(), "z".to_owned()],
+        )
+        .unwrap();
+        let predicate = plan.fast_predicate.as_ref().unwrap();
+        assert_eq!(predicate.leaves.len(), 3);
+        assert_eq!(plan.fast_ops.len(), 5);
+        for x in -1..=1 {
+            for y in -1..=1 {
+                for z in -1..=1 {
+                    let row = [x, y, z];
+                    let expected = i64::from(((x > 0) & (y > 0)) | (z < 0));
+                    let mut trace = Vec::new();
+                    assert_eq!(
+                        plan.evaluate_value(&row, Some(&mut trace)).unwrap(),
+                        expected
+                    );
+                    assert_eq!(plan.evaluate_value_untraced(&row).unwrap(), expected);
+                    assert_eq!(trace.len(), plan.ops.len());
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn truth_table_predicate_accepts_six_leaves_and_falls_back_above_it() {
+        for leaf_count in [MAX_TRUTH_TABLE_LEAVES, MAX_TRUTH_TABLE_LEAVES + 1] {
+            let mut program = Vec::new();
+            for _ in 0..leaf_count {
+                program.extend([
+                    PlanOp::Field {
+                        name: "x".to_owned(),
+                    },
+                    PlanOp::Const { value: 0 },
+                    PlanOp::Gt,
+                ]);
+            }
+            program.extend((1..leaf_count).map(|_| PlanOp::And));
+            let plan = compile_test_plan(program, PlanOutput::Predicate);
+            assert_eq!(
+                plan.fast_predicate.is_some(),
+                leaf_count == MAX_TRUTH_TABLE_LEAVES
+            );
+            for value in [-1, 1] {
+                let mut trace = Vec::new();
+                let traced = plan.evaluate_value(&[value], Some(&mut trace)).unwrap();
+                assert_eq!(plan.evaluate_value_untraced(&[value]).unwrap(), traced);
+            }
         }
     }
 

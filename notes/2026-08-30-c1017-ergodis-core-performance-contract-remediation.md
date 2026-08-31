@@ -644,6 +644,21 @@ quiet-core direct-residual pairs put the remaining interpreter gap at 8.852x
 cycles and 8.838x wall (`t=725.10/668.92`). Evidence is under
 `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-stack`.
 
+The next general compiler tier consumes pure predicates with at most six
+field/constant comparison occurrences as exact finite response functions. It
+evaluates the Boolean circuit over all 64 assignments once at compile time,
+then runtime evaluation forms the observed leaf assignment and performs one
+`u64` truth-table lookup. The source program remains untouched for tracing;
+larger or mixed-arithmetic programs fall back to the stack VM. This removes
+the stack and Boolean dispatch without matching any named application shape.
+Same-toolchain retained binaries over fifteen rotated pairs improve cycles
+1.634x (`t=79.14`), instructions 1.798x, branches 2.095x, and wall 1.667x
+(`t=70.69`) at exact parity. The direct-code residual is 5.595x cycles and
+5.603x wall (`t=169.59/132.10`). All-target/all-feature tests, the explicit
+campaign-VM zero-allocation test, strict clippy, exact/fallback boundary tests,
+and Tiger layout assertions pass. Evidence is under
+`/home/tavis/.cache/ergodis-perf/c1017-plan-vm-truth-table`.
+
 ## Review findings for the pending C1016 Rust overlay
 
 The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its

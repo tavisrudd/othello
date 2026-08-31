@@ -265,6 +265,30 @@ as each coherent tranche lands.
    bounded Boolean/arithmetic superinstruction family only if it generalizes
    beyond the synthetic residual; otherwise move to the first application
    adapter for an already-landed theorem kernel.
+   The residual profile attributes 94.02% of sampled cycles to the evaluator;
+   comparison fusion has reduced the representative eleven-op source program
+   to three comparison leaves and two Boolean connectives. A general exact
+   response compiler now recognizes every pure predicate over at most six
+   field/constant comparison occurrences, evaluates its Boolean circuit once
+   over all 64 assignments at compile time, and stores the result as one
+   `u64` truth table. Runtime evaluation forms the six-bit-or-smaller leaf
+   assignment and performs one table lookup: there is no operand stack,
+   connective dispatch, allocation, or benchmark-specific expression match.
+   Larger predicates and mixed arithmetic retain the ordinary evaluator.
+   Source bytecode remains intact for granular traces.
+
+   Against commit `56276678b`, with both binaries rebuilt by Rust 1.93.1,
+   fifteen rotated 131,072,000-row pairs improve cycles 1.634x (`t=79.14`),
+   instructions 1.798x, branches 2.095x, and wall 1.667x (`t=70.69`) at exact
+   work/checksum parity. The direct-code residual is now 5.595x cycles and
+   5.603x wall (`t=169.59/132.10`). Exhaustive three-leaf values, every
+   comparison and operand order, Boolean connectives, constant predicates,
+   the six-leaf boundary, seven-leaf fallback, tracing, and the existing
+   allocation gate all pass. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-truth-table`. Current next
+   slice: stop interpreter-only tuning and select an existing theorem kernel
+   whose first real application adapter can turn a kernel win into an
+   end-to-end application win.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and
