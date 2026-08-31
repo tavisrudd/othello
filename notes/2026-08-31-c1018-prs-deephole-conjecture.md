@@ -336,6 +336,213 @@ some involution `t ↦ μ/t` fixes `s`, i.e. when the carrier polynomial `G` is
 self-reciprocal up to the torus action.  That happens at `(9,13,3)` and not at
 the other two; it is a condition on `G`, not on the parity of `m`.
 
+## 6. The landed conjecture (item 5)
+
+Notation.  `X(r) = { q : q ≥ r-1 a prime power, PRS_{q+1-r}(q) has a deep hole
+outside P_r ∪ M^max_{r,p} }`, and `q_0(r) = 1 + max X(r)` (with `q_0(r) = r-1`
+when `X(r) = ∅`).  `P_r` is the persistent locus — deep part the tangent and
+conjugate-secant families, of total size `q(q+1)^2/2` — and `M^max_{r,p}` is the
+modular Lucas carrier `P⟨ e_i : C(r-1,i) ≡ 0 (mod p) ⟩`.
+
+Three statements, in decreasing order of how well the data pin them.
+
+### Conjecture PRS-1 (exceptional band).  `X(r) ⊆ {7,8,9,11,13}` for every `r ≥ 6`.
+
+Equivalently: **for every redundancy `r ≥ 6` and every prime power `q ≥ 16` with
+`q ≥ r-1`, the deep holes of `PRS_{q+1-r}(q)` are exactly `P_r ∪ M^max_{r,p}`,
+of deep size `q(q+1)^2/2` plus the modular carrier's deep part.**  The
+exceptional set is contained in the prime powers of the interval `[7,13]`, and
+the threshold is the constant 16 rather than the linearly growing proved
+threshold `Q*_r = 6r-16+⌊2√(6r-18)⌋` (which is 29, 37, 43, 53, 59 at
+`r = 6,…,10`).
+
+Redundancies 4 and 5 sit outside the statement and are the reason it starts at
+`r = 6`: `X(4) = ∅` and `X(5) = {7,8,9,11,13,17,19}`, the only redundancy known
+to have an exceptional field above 13.
+
+This replaces Conjecture B′ of 2026-08-30 §5.3c (`q_0(r) ≤ 23` for every `r`),
+which it implies for `r ≥ 6` and sharpens from 23 to 16.  B′'s bound of 23 was
+set entirely by `r = 5`; every redundancy from 6 up has `q_0(r) ≤ 16`.
+
+*Falsifier.*  One deep syndrome over a field of order at least 16, at any
+redundancy at least 6, with catalecticant rank at least 3 and support not
+contained in `M^max_{r,p}`.
+
+### Conjecture PRS-2 (cyclic-pullback carriers).
+
+The exceptional deep holes with nontrivial cyclic stabilizer are the
+`PGL_2(q)`-orbits of syndromes `X Y · G(X^m, Y^m)` with `m | r-3` and
+`m | q-1`.  For each pair `(r,m)` they occur at **at most one field**, and if
+at any, then at the least prime power `q` with `m | q-1` and `q ≥ r-1`.  The
+orbit's stabilizer is `Stab_N(s)` for `N` the dihedral normaliser of the torus,
+always containing `μ_m` and equal to it unless `G` is self-reciprocal up to the
+torus, in which case it is dihedral of order `2m`.
+
+This is 2026-08-30's Conjecture D′ with the escape clause promoted from a
+footnote to part of the statement (three empty pairs are now known, not one),
+and with the stabilizer clause corrected — see §5c.
+
+*Falsifier.*  A carrier firing at a field other than the least admissible one,
+or a stabilizer not of the stated form.
+
+### Conjecture PRS-3 (carrier cut).
+
+Each exceptional orbit of a cyclic carrier meets its stratum in the set cut out
+by one value of the absolute invariant `u` together with a union of classes of
+`c` in `F_q^*/(F_q^*)^m`, where for a three-index carrier `{1,1+m,1+2m}`
+
+```text
+c = s_{1+m}/s_1 ,        u = s_{1+m}^2/(s_1 s_{1+2m}) ,
+```
+
+and for a two-index carrier `{1,1+m}` the cut is by `c = s_{1+m}/s_1` alone.
+`u` separates orbits; neither invariant alone suffices.
+
+This is 2026-08-30's Conjecture E′ extended to the two-index case by the
+`(8,11,m=5)` carrier, where the four exceptional points are exactly the union of
+two of the five classes of `F_11^*/(F_11^*)^5`.
+
+*Falsifier.*  An exceptional carrier orbit whose stratum intersection is not a
+union of `m`-th power classes at a single `u`.
+
+## 7. What the exceptional deep holes are, in classical language
+
+This section is a reading of the data in standard terminology, not a new
+result, and a literature check is owed before any of it is claimed as one.
+
+Under apolarity, `s ∈ span{ P_{t_1}, …, P_{t_j} }` says exactly that the binary
+form dual to `s` is a sum of `j` `d`-th powers of linear forms with **distinct
+`F_q`-rational** base points.  So the NRC rank `w(s)` is the Waring rank of a
+binary form of degree `d`, computed over `F_q` with rational and distinct
+summands, and `ρ = d` says the maximum such rank is `d`.
+
+Over an algebraically closed field the maximum Waring rank of a binary form of
+degree `d` is `d`, attained precisely by the forms `L_1^{d-1} L_2` with `L_1`
+and `L_2` independent (Comas–Seiguer).  That is exactly the **tangent** family:
+apolar quadric a perfect square.  The **conjugate-secant** family is the other
+classical source of a rank jump — algebraic-closure rank 2, but the two base
+points are Galois-conjugate, so no rational decomposition of size 2 exists and
+the `F_q`-rank rises to `d`.  Together they are the persistent locus, of size
+`q(q+1)^2/2`, and their deepness is classical plus arithmetic bookkeeping.
+
+The exceptional deep holes are therefore precisely the syndromes whose
+**`F_q`-Waring rank exceeds their algebraic-closure rank by more than that
+bookkeeping accounts for**.  The `(9,13)` witness makes the size of the jump
+concrete: its apolar ideal is a complete intersection of type `(5,5)` in degree
+`d = 8`, so over the algebraic closure it has rank 5, the generic value for a
+binary octic; over `F_13` every annihilator of degree 5, 6 and 7 fails to be
+split squarefree and the rank jumps to 8.
+
+That reframing turns 2026-08-30 mystery-ledger item 5 — "why does a carrier fire
+at exactly one field, and why the least admissible one?" — into a concrete
+counting question with a standard tool.  For a fixed carrier `(r,m)` the stratum
+is a projective space of dimension `M-1` that does **not** grow with `q`, while
+the apolar space at level `j` has `(q^{k_j}-1)/(q-1) ≈ q^{k_j - 1}` members and
+the split squarefree fraction of degree-`j` forms is `1/j! + O(q^{-1/2})` by
+Lang–Weil applied to the configuration space.  The expected number of split
+squarefree annihilators therefore grows like `q^{k_j-1}/j!` with an error term
+one power of `q^{1/2}` smaller, so past an explicit constant the count is
+positive and no point of the stratum can be deep.  **The threshold is a constant
+for each carrier, not a function of `r`** — which is precisely the shape the
+data show (13, then 16) and precisely what the Hasse–Weil deletion budget
+`6r-18` behind the proved thresholds `Q*_r` fails to capture, because that
+budget is applied to a family whose dimension it lets grow with `r`.
+
+Making this an argument rather than a heuristic needs the explicit error term
+for the carrier's own pencil, not for a generic form.  That is a well-posed
+successor task and it is the single highest-value follow-up this wave exposes.
+
+## 8. Mystery ledger
+
+Carried forward from 2026-08-30 §8, with this wave's `ej` + `tt` closeout pass
+folded in.  Items settled here are marked; everything still open names its
+evidence gap and its owner.
+
+1. **Where does `q_0(9)` sit?**  *Settled.*  It is 16.  The three cells
+   `r = 9` at `q = 16, 17, 19` are now exhaustive censuses of 4.58, 7.41 and
+   17.9 billion projective directions, all with deep set exactly the persistent
+   locus and zero exceptional excess.  The band closes immediately above 13.
+   Nothing open.
+
+2. **The GF(2^h) field-labelling hazard.**  *Settled and closed by
+   construction.*  Both drivers now take the field from the core's
+   `SmallField::new`, emit `defining_poly`, and the verifier rebuilds the same
+   model; the `r=8, q=16` cell that produced 30 spurious disagreements on
+   2026-08-30 now agrees representative-for-representative.  The standing
+   caution survives for the committed R5–R7 certificates at
+   `q = 8, 9, 16, 25, 27, 32` if they are ever re-checked by a program that
+   picks its own modulus.
+
+3. **What the `r = 8, q = 11` exceptional orbits are.**  *Half settled.*  The
+   size-264 orbit with `C_5` stabilizer is the `m = 5` cyclic-quintic carrier
+   `XY(Y^5 + cX^5)` with `c` in two of the five fifth-power classes of `F_11^*`,
+   and it fires at `q = 11` and nowhere above (§5b).  The two size-1320 orbits
+   have trivial stabilizer, are invisible to every stratum sweep, and remain
+   undescribed.  Evidence gap: the analogue of C491's branch-divisor
+   classification for regular exceptional orbits at redundancy eight.
+
+4. **Is the carrier stabilizer governed by the parity of `m`?**  *Settled: no.*
+   `m = 5` is odd with a cyclic `C_5` stabilizer.  The stabilizer is `Stab_N(s)`
+   for `N` the dihedral normaliser of the torus; it is `μ_m` in general and
+   doubles only when `G` is self-reciprocal up to the torus, which happens at
+   `m = 3` and not at `m = 4` or `m = 5` (§5c).  The 2026-08-30 reading was
+   drawn from two data points that happened to be `m = 3` and `m = 4`.
+
+5. **Why does a carrier fire at exactly one field, and why the least admissible
+   one?**  *Reframed, not settled.*  §7 turns the question into a Lang–Weil
+   count: the carrier stratum has fixed dimension while the apolar space at
+   level `j` grows like `q^{k_j-1}` and the split squarefree fraction is
+   `1/j! + O(q^{-1/2})`, so past an explicit constant no stratum point can be
+   deep, and that constant does not depend on `r`.  This explains the *shape* of
+   the observed constant threshold and why the proved thresholds `Q*_r` grow.
+   Evidence gap: the explicit error term for the carrier's own apolar pencil
+   rather than for a generic form.  Owner: a successor task; this is the highest
+   value follow-up the wave exposes.
+
+6. **Why some `(r,m)` pairs carry nothing.**  *Sharpened, not settled.*  Three
+   empty pairs are now known — `(10,7)`, `(13,5)`, `(13,10)` — against five that
+   fire: `(6,3)`, `(8,5)`, `(9,3)`, `(11,4)`, `(12,3)`.  The 2026-08-30
+   hypothesis that emptiness comes from the stratum being too small for `G` to
+   be irreducible (`(10,7)` has a two-index stratum) is **refuted**: `(8,5)` has
+   the same two-index, linear-`G` shape and fires, while `(13,5)` has the same
+   three-index, quadratic-`G` shape as the firing `(9,3)` and is empty.  What
+   separates them is the least admissible field: every firing pair has
+   `q_min ≤ 13`, every empty pair has `q_min ∈ {13, 17, 29, 16, 31}` with the
+   one collision at `(9,6)`, `q_min = 13`.  So the carrier shape does not
+   predict firing and the field does, almost.  Evidence gap: `(9,6)` at
+   `q = 13`, the one pair with a small `q_min` that carries nothing, is the
+   discriminating case and it was already swept clean on 2026-08-30.
+
+7. **The exceptional band is not monotone in `r`.**  *Standing, from
+   2026-08-30.*  Now with a fuller table (§6): `q_0(r) = 4, 23, 16, 13, 13, 16`
+   at `r = 4,…,9`.  The dip to 13 at `r = 7, 8` and the rise back to 16 at
+   `r = 9` are unexplained by any counting budget.  §7 predicts the threshold
+   should be constant per carrier, which is consistent with a small oscillation
+   coming from *which* carriers are admissible at each `r` (via `m | r-3`) but
+   does not derive the values.  Owner: the same successor as item 5.
+
+8. **Redundancy four has no exceptional field at all.**  *Standing, from
+   2026-08-30.*  `X(4) = ∅` over twelve fields in three characteristics, while
+   `X(5)` is the largest band of all.  Unexplained.  Note that `r-3 = 1` at
+   `r = 4`, so there is no cyclic-pullback carrier at all — consistent with, but
+   not an explanation of, the emptiness.
+
+9. **`r = 5` is the outlier that sets Conjecture B′'s bound.**  *New this
+   wave.*  Every redundancy from 6 up has `q_0(r) ≤ 16`; only `r = 5` reaches
+   17 and 19.  Evidence gap: whether the `r = 5` sporadics at `q = 17, 19` are a
+   carrier phenomenon at all — `r-3 = 2` gives only `m = 2`, whose least
+   admissible field is 5, so under Conjecture PRS-2 the `m = 2` carrier would
+   fire at `q = 5` and nowhere else, leaving 17 and 19 to a different mechanism.
+   Owner: whichever task takes item 3; the `r = 5` sporadics are C491's and are
+   classified there by branch divisor, so the answer may already be committed.
+
+10. **Nothing anomalous in the validation layer.**  Twenty committed-certificate
+    cells reproduced exactly on the new core, ten cells cross-run through two
+    structurally different drivers, six cells re-derived in Python from the
+    definition of the coset weight with zero disagreements, and every run
+    self-checked by requiring its weight histogram to sum to the exact point
+    count of the space.  No genuine mystery here and none is claimed.
+
 ## 9. Evidence bundle, replay, and trusted boundary
 
 ### Task-owned files (all committed)
