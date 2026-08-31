@@ -295,6 +295,26 @@
   "zero_hamilton_hesse_obstruction": {
     "affine_factorization_rule": "M_a={{infinity,a}} union {{x,y}:x+y=-a}; vertices 1..9 use factor_to_ag23_point in order",
     "automorphism_group_order": 432,
+    "characteristic_not_two_incidence_obstruction": {
+      "argument": "the first two Hesse lines intersect only at point 0, while the third avoids point 0; the lift equations place 2*u_infinity in all three line spans, hence u_infinity=0 when 2 is nonzero",
+      "hesse_lines_by_ag23_point_index": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          3,
+          6
+        ],
+        [
+          1,
+          3,
+          8
+        ]
+      ]
+    },
     "exceptional_characteristics_from_minor": [
       2,
       3

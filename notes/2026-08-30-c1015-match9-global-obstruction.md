@@ -183,29 +183,33 @@ one-factorizations gives the following dichotomy.
   \]
   and automorphism-group order 432. Thus the appearance of the affine-plane
   shadow is structural, not an accidental isomorphism found after the census.
-  Substituting his nine Hesse points into the 45 lift equations
-  \(u_i+u_j=\lambda_{ij}t_M\) gives a 135-by-75 matrix over
-  \(\mathbf Z[\omega]\). Exact elimination selects a full minor with
-  determinant
+  Write (z=u_\infty). The edge \(\infty a\in M_a\) and (1) give
 
   \[
-  -8(1+\omega),\qquad
-  N\bigl(-8(1+\omega)\bigr)=192=2^6\cdot3.
+  u_a=-z+s_at_a
   \]
 
-  Therefore the lift has only the zero solution in every characteristic
-  except possibly 2 and 3. Characteristic two is already eliminated by the
-  universal characteristic-two triple closure. In characteristic three,
-  standard affine coordinates \(t=(a,b,1)\) give rank 74 and a unique
-  projective nullvector with
+  for some scalar (s_a). If \(\{a,x,y\}\) is an affine line, then
+  (x+y=-a), so (xy\in M_a\). Its lift equation becomes
 
   \[
-  u_0=0,\qquad \{u_1,\ldots,u_9\}
-    =\{(a,b,-1):a,b\in\mathbf F_3\}.
+  -2z+s_xt_x+s_yt_y\in\langle t_a\rangle.
   \]
 
-  The zero defining form is impossible for a carrier line. Hence the
-  non-pencil branch dies in the remaining characteristic as well.
+  The three Hesse points (t_a,t_x,t_y) are collinear. Hence (2z) lies in
+  the vector plane defining every Hesse line. In fact three lines suffice:
+  (012) and (036) meet only at Hesse point (0), while (138) avoids
+  that point. Their three vector planes have zero total intersection.
+  Therefore (z=0) whenever (2\ne0), impossible for a carrier defining
+  form. In characteristic two, the universal characteristic-two triple
+  closure already forces the nine transversals to be a pencil. This kills the
+  exceptional class over every field without coordinates or row reduction.
+
+  As independent regression evidence, the earlier exact Hesse lift still
+  finds a full minor (-8(1+\omega)), of norm 192, and the characteristic-
+  three specialization has rank 74 with its unique nullvector satisfying
+  (u_\infty=0\). Those computations are no longer load-bearing for the
+  theorem.
 
 The census is independently normalized by two classical totals: 396
 unlabelled classes and 1,225,566,720 labelled factorizations. The latter is
@@ -358,23 +362,49 @@ final rank-74 ternary specialization. Replay with
 uv run --with pynauty python notes/c1015_k10_factorization_closure.py --check
 ```
 
-The trusted boundary is `pynauty` canonical labeling plus exact finite graph
-closure and row reduction over \(\mathbf Q(\omega)\) and \(\mathbf F_3\). The
-output is cross-checked against Gelling's 396 classes, the classical labelled
-total, the independently enumerated regular-design factorizations, and two
-separate Hamilton-cycle tests. The row reduction is exact rational-pair
-arithmetic, not floating point. A handwritten presentation should replace
-the 72-extra-triple and determinant checks by short coordinatization lemmas
-before manuscript insertion.
+The trusted boundary for the 396-class dichotomy is `pynauty` canonical
+labeling plus exact finite graph closure. The geometric exclusion of the
+exceptional class is now the three-Hesse-line human argument above. The output
+is cross-checked against Gelling's 396 classes, the classical labelled total,
+the independently enumerated regular-design factorizations, and two separate
+Hamilton-cycle tests. Exact row reduction over \(\mathbf Q(\omega)\) and
+\(\mathbf F_3\) remains a non-load-bearing independent replay. A handwritten
+presentation should replace only the finite 72-extra-triple check by the
+short affine-plane closure lemma before manuscript insertion.
+
+The compression bundle `c1015_hesse_compression_campaign.py`, its JSON
+certificate, the exact high-level plan, the three-plan lowered seed batch,
+and `c1015_hesse_compression_campaign.sha256` records the Ergodis pass. It
+enumerates all 4,096 subfamilies of the twelve affine lines and independently
+replays the controller's two first obstructions and exact conjunction. A
+filesystem-clean replay is
+
+```text
+c1015_tmp=$(mktemp -d)
+python3 notes/c1015_hesse_compression_campaign.py "$c1015_tmp/data.jsonl" --certificate "$c1015_tmp/certificate.json"
+cmp "$c1015_tmp/certificate.json" notes/c1015_hesse_compression_campaign.json
+sha256sum -c notes/c1015_hesse_compression_campaign.sha256
+```
+
+The control run used the experimental-v0 interface: `ceiling` reported 48
+feature vectors and zero unavoidable errors; `batch` tested the three lowered
+plans and found the conjunction uniquely perfect at 4,096/4,096. The Python
+replay independently obtains the same counts without trusting Ergodis. The
+controller is diagnostic only and is not part of the mathematical proof.
 
 | Artifact | Bytes | SHA-256 |
 |---|---:|---|
 | `notes/c1015_ree_bridge.py` | 10,728 | `7b60af8c3583a754db5ddc28d75cc065ca8d8906443e4b4f66903284e60fb123` |
 | `notes/c1015_ree_bridge.json` | 1,263 | `1545f49a4d66d33d5d90d0ee99d5eaf39640c0170c99db2a7b6e78697a279b50` |
 | `notes/c1015_ree_bridge.sha256` | 317 | `249bd54b32d954d1fd1c3751b99638219af40b905cbeedd7b85c0cc598fdd9b1` |
-| `notes/c1015_k10_factorization_closure.py` | 20,513 | `150be14fe54832e15bce7b6ca7d89ef5442cd1cf698f54970ea06d07bf7e3941` |
-| `notes/c1015_k10_factorization_closure.json` | 5,899 | `3f36a331e308ae2960c579b6d064925d070d7ccba064a887c10dcdc7a9bef9d1` |
-| `notes/c1015_k10_factorization_closure.sha256` | 216 | `b68b6419275ed372cf5cff5a2d32b6407cadb44a604a96286dcdc19eb107ab0b` |
+| `notes/c1015_k10_factorization_closure.py` | 21,287 | `f588743532692e339a83fd204209c4685bc779ac961babe91068cf248044c610` |
+| `notes/c1015_k10_factorization_closure.json` | 6,393 | `91c4bc296a8223fabebd5d3e8e5b8b826fa84399445d97b62917e0427a94ca66` |
+| `notes/c1015_k10_factorization_closure.sha256` | 216 | `6ebad51c8bc282f6fdbe71a8d5951e46078b4df1f33b08e9d715472137f090a8` |
+| `notes/c1015_hesse_compression_campaign.py` | 4,903 | `d0b28bc7a20c2f45f388ca9b8c9040ce1d3d814bfa428e9efe19add9458c6e9d` |
+| `notes/c1015_hesse_compression_campaign.json` | 1,170 | `ccd70c64db320dd160bc980434d6397d5eed1b2f29758be96a7125f39cc3db1d` |
+| `notes/c1015_hesse_force_zero_plan.json` | 446 | `37e951bf3b1e4bb357ec45954403fd35df1b4961cd454bd7f51a3fe58ef4682f` |
+| `notes/c1015_hesse_compression_seeds.jsonl` | 666 | `84d28e86afc5d1520538fae247b60a966cdada78c2af90d0295b70dc377390b3` |
+| `notes/c1015_hesse_compression_campaign.sha256` | 431 | `20e8c910511e3c0dcfe7b6d56d7c41c1161c35bfe284a0279a41a0bdbf7b2ab6` |
 | tracked input JSON | 79,326 | `c2c3619a1c074bd28a9e0b967a4ac1762496589ede0cc636431f484d67fba357` |
 
 ## Literature position of the move
@@ -530,9 +560,10 @@ generic obstruction might degenerate; independent combinatorial and ternary
 arguments close them. This is the strongest current theorem, not merely a
 regular-Ree corollary.
 
-The most valuable conceptual compression still available is to replace the
-exact Hesse row reduction by an (AGL(2,3))-module or Fourier calculation.
-The affine rule suggests a higher-order family on
+The Hesse row reduction has now been replaced by a three-line incidence
+argument: the exceptional lift puts (2u_\infty) in Hesse lines (012),
+(036), and (138), whose vector planes have zero total intersection. The
+affine rule still suggests a higher-order family on
 (\{\infty\}\cup\mathbf F_p^d), with factors pairing (x) to
 (2a-x). Determining whether the parity-shadow/Hesse dichotomy is the first
 case of a uniform affine-round-robin obstruction is a genuine successor,
@@ -548,11 +579,12 @@ not needed for the order-ten theorem.
   exactly the affine factorization
   (M_a=\{\infty a\}\cup\{xy:x+y=-a\}), with automorphism order 432; its
   twelve parity triples are the affine lines.
-- **Why only characteristics 2 and 3 survive the generic Hesse test — settled
-  computationally, not conceptually.** The exact full minor is
-  (-8(1+\omega)), of norm 192. The missing evidence is a short
-  (AGL(2,3))-equivariant decomposition deriving these factors without row
-  reduction.
+- **Why the Hesse exception cannot lift — settled conceptually.** Three
+  affine lines force (2u_\infty) into vector planes with zero total
+  intersection. This kills every characteristic except two; the existing
+  characteristic-two closure kills the remainder. The determinant
+  (-8(1+\omega)) and its norm 192 survive only as regression evidence; their
+  prime factorization is no longer an unexplained proof dependency.
 - **Nine-point deletion completion — reduced, still open.** The missing line
   exists exactly when the 36 edge gains (4) are balanced; 28 fixed-base
   triangle products are a complete frame-free test. AF+BG then constructs the
@@ -567,13 +599,20 @@ not needed for the order-ten theorem.
   Korchmaros--Pace--Sonnino full text and its largest three-graph citing set
   are cleared, including the 2024 characterization paper. MathSciNet and
   Google Scholar remain uncovered, and no exhaustive MSC sweep has been run.
-- **Ergodis lessons — recorded, source untouched.** A useful future control
-  interface should ingest small incidence hypergraphs and exact finite-field
-  rank features, generate base-point-invariant rather than fixed-base
-  shadows, track algebraic parameter rings and exceptional-prime norms, and
-  force specialization checks before accepting characteristic claims. The
-  initial fixed-base undercount and mistaken characteristic-three inference
-  are concrete regression tests for those features.
+- **Ergodis compression pass — settled, with interface debt recorded.** The
+  frozen campaign contained all 4,096 subfamilies of the twelve affine lines.
+  Its feature ceiling had 48 vectors and zero unavoidable errors. The two
+  weakened rules exposed exactly the missing proof ingredients: “a line
+  outside the largest pencil” alone has 16 false positives, first a parallel
+  pair; “an incident pair” alone has 99, first a two-line pencil. Their
+  conjunction is exact on all 4,096 rows and says precisely: two selected
+  lines meet at a Hesse point and a third avoids it. This selected the
+  three-line proof above. No Ergodis source was edited. Two control-interface
+  issues should be repaired by the owning lane: high-level `expr` plans work
+  with `try` but are rejected by `batch`, and `synthesize` failed here with
+  `plan result sort does not match its declared output` despite a zero-error
+  feature ceiling. The earlier fixed-base undercount and mistaken
+  characteristic-three inference remain useful additional regressions.
 
 ## Publication decision after proof
 

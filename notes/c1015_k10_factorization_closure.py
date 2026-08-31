@@ -252,6 +252,13 @@ def exceptional_hesse_obstruction(state):
         frozenset(factor_to_point[index] for index in triple)
         for triple in triples
     } == affine_lines
+    three_line_zero_carrier_witness = ((0, 1, 2), (0, 3, 6), (1, 3, 8))
+    assert all(frozenset(line) in affine_lines for line in three_line_zero_carrier_witness)
+    assert (
+        set(three_line_zero_carrier_witness[0])
+        & set(three_line_zero_carrier_witness[1])
+    ) == {0}
+    assert 0 not in three_line_zero_carrier_witness[2]
     point_of_vertex = {
         vertex: points[factor_to_point[vertex - 1]] for vertex in range(1, 10)
     }
@@ -432,6 +439,14 @@ def exceptional_hesse_obstruction(state):
             "vertices 1..9 use factor_to_ag23_point in order"
         ),
         "automorphism_group_order": automorphism_order,
+        "characteristic_not_two_incidence_obstruction": {
+            "hesse_lines_by_ag23_point_index": three_line_zero_carrier_witness,
+            "argument": (
+                "the first two Hesse lines intersect only at point 0, while "
+                "the third avoids point 0; the lift equations place 2*u_infinity "
+                "in all three line spans, hence u_infinity=0 when 2 is nonzero"
+            ),
+        },
         "hesse_parameter_polynomial": "omega^2-omega+1",
         "generic_lift_matrix_shape": (len(generic_matrix), len(generic_matrix[0])),
         "generic_lift_matrix_rank": generic_rank,

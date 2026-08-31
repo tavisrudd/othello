@@ -1,0 +1,18 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "hesse-incidence-forces-zero-intersection",
+  "role": "diagnostic",
+  "expr": {
+    "op": "and",
+    "left": {
+      "op": "gt",
+      "left": { "op": "field", "name": "max_point_multiplicity" },
+      "right": { "op": "const", "value": 1 }
+    },
+    "right": {
+      "op": "gt",
+      "left": { "op": "field", "name": "witness_slack" },
+      "right": { "op": "const", "value": 0 }
+    }
+  }
+}

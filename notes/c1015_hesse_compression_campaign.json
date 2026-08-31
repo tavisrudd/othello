@@ -1,0 +1,59 @@
+{
+  "distinct_feature_vectors": 48,
+  "ergodis_control_result": {
+    "batch_perfect_plans": 1,
+    "batch_plan_count": 3,
+    "ceiling_unavoidable_errors": 0,
+    "tree_synthesis_issue": "plan result sort does not match its declared output"
+  },
+  "evaluations": {
+    "conjunction": {
+      "correct": 4096,
+      "false_negatives": 0,
+      "false_positives": 0,
+      "first_mismatch_id": null,
+      "first_mismatch_values": null
+    },
+    "incident_line_pair": {
+      "correct": 3997,
+      "false_negatives": 0,
+      "false_positives": 99,
+      "first_mismatch_id": 3,
+      "first_mismatch_values": [
+        2,
+        2,
+        5,
+        2,
+        1,
+        0
+      ]
+    },
+    "line_outside_max_pencil": {
+      "correct": 4080,
+      "false_negatives": 0,
+      "false_positives": 16,
+      "first_mismatch_id": 24,
+      "first_mismatch_values": [
+        2,
+        1,
+        6,
+        1,
+        0,
+        1
+      ]
+    }
+  },
+  "full_family_forces_zero": true,
+  "full_family_values": [
+    12,
+    4,
+    9,
+    4,
+    54,
+    8
+  ],
+  "negative": 128,
+  "positive": 3968,
+  "rows": 4096,
+  "schema": "c1015-hesse-compression-campaign-v1"
+}

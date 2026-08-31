@@ -1,0 +1,3 @@
+{"schema":"ergodis-attack-plan-v0","name":"hesse-has-line-outside-max-pencil","role":"diagnostic","program":[{"op":"field","name":"witness_slack"},{"op":"const","value":0},{"op":"gt"}]}
+{"schema":"ergodis-attack-plan-v0","name":"hesse-has-incident-line-pair","role":"diagnostic","program":[{"op":"field","name":"max_point_multiplicity"},{"op":"const","value":1},{"op":"gt"}]}
+{"schema":"ergodis-attack-plan-v0","name":"hesse-incidence-forces-zero-intersection","role":"diagnostic","program":[{"op":"field","name":"max_point_multiplicity"},{"op":"const","value":1},{"op":"gt"},{"op":"field","name":"witness_slack"},{"op":"const","value":0},{"op":"gt"},{"op":"and"}]}
