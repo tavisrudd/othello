@@ -2,9 +2,10 @@
 
 **Lane:** `gem-mining`
 **Date:** 2026-08-30
-**Status:** complete for the redundancy-four and redundancy-eight bands and for
-the certificate-reproduction gate; partial for the redundancy-nine and
-redundancy-ten predictions.  See §8.
+**Status:** complete for the redundancy-four sweep, the redundancy-eight band
+`8 ≤ q ≤ 19`, the certificate-reproduction gate, and the redundancy-nine
+decider (which **falsified** Conjecture B — see §5.3c); partial for the
+replacement Conjecture B′ and for redundancy ten.  See §8.
 
 Scope note (crosswalk discipline): this task makes **no claim about the MDS
 conjecture**.  It works entirely inside the projective Reed--Solomon (PRS)
@@ -177,6 +178,11 @@ obstruction.  Meanwhile the *observed* last exceptional field is
 increases.  Conjecture B asserts that the true threshold is a constant, 13, not
 a growing function of `r`.
 
+> **Outcome: false.**  The `r = 9, q = 13` census (§5.3c) exhibits one
+> exceptional orbit of size 364.  Conjecture B is retained here as stated
+> because it is what the `r = 8` sweep was designed to test, and it does hold
+> throughout that sweep; the surviving replacement is Conjecture B′ in §5.3c.
+
 ### Conjecture C — the exceptional band is squeezed shut by growing redundancy
 
 > Let `X(r) = { q : PRS_{q+1-r}(q) has a deep hole outside
@@ -190,6 +196,11 @@ Rationale: `X(5) = {7,8,9,11,13,17,19}`, `X(6) = {7,8,9,11,13}`,
 `X(7) = {7,8,9,11}` are repository facts; the lower end of the band rises with
 `r` because `k = q+1-r ≥ 1` forces `q ≥ r-1`, while the upper end is observed
 to fall.  This is the sharpest of the three and the one worth testing hardest.
+
+> **Outcome: monotonicity half false.**  `13 ∈ X(9)` while `13 ∉ X(8)`
+> (§5.3c), so `X` is not non-increasing in `r`.  The boundedness half —
+> `X(r) ⊆ {7,8,9,11,13,17,19}` — survives every cell computed and is what
+> Conjecture B′ generalizes.
 
 ## 4. Driver
 
@@ -249,14 +260,14 @@ for q in 7 8 9 11 13 16;                         do R --q $q --r 5; done
 for q in 7 8 9 11 13;                            do R --q $q --r 6; done
 for q in 7 8 9 11 13;                            do R --q $q --r 7; done
 for q in 8 9 11 13 16 17 19;                     do R --q $q --r 8; done
-for q in 9 11;                                   do R --q $q --r 9; done
+for q in 9 11 13;                                do R --q $q --r 9; done
 # R = ergodis-private/target/release/c1018_prs_deephole
 ```
 
 ### Artifacts and git state
 
-Bulk JSON lives under `~/.cache/ergodis/c1018/r{r}-q{q}.json` — nine files for
-`r = 8` (`q = 8,9,11,13,16,17,19`) and `r = 9` (`q = 9,11`), outside the
+Bulk JSON lives under `~/.cache/ergodis/c1018/r{r}-q{q}.json` — ten files, for
+`r = 8` (`q = 8,9,11,13,16,17,19`) and `r = 9` (`q = 9,11,13`), outside the
 repository as instructed, with the tables in this report as the committed
 record.  The three task-owned files are
 
@@ -402,9 +413,77 @@ is a boundary artifact, not an exceptional stratum, and it is why Conjecture
 C's constraint `q ≥ r-1` matters.  The `q = 11` cell is informative and shows
 redundancy nine still has a large exceptional excess at `q = 11`, exactly as
 Conjecture C predicts (`11 ∈ X(9)` is permitted).  The decisive redundancy-nine
-cell is `q = 13`, where Conjecture C predicts excess zero; `|PG(8,13)| ≈
-9.1·10^8` puts it at the edge of, not beyond, a single-machine census, and it
-is the highest-value immediate follow-up.
+cell is `q = 13`; it was run as a follow-up and is reported in §5.3c.
+
+### 5.3c (2026-08-30, follow-up) The redundancy-nine decider: Conjecture B is false
+
+`r = 9`, `q = 13` (`k = 5`), exhaustive over all 883,708,281 points of
+`PG(8,13)`; 396 s and 968 MB.
+
+| quantity | value |
+|---|---:|
+| `ρ` | 8 = `r-1` |
+| deep directions | 1,638 |
+| `PGL_2` deep orbits | 4 |
+| persistent `q(q+1)^2/2` | 1,274 |
+| **exceptional excess** | **364** |
+
+The excess is nonzero.  Conjecture B predicted `deep = 1,274` here; it is 1,638.
+**Conjecture B is false as stated**, and with it the monotonicity half of
+Conjecture C: `13 ∈ X(9)` while `13 ∉ X(8)`, so `X(9) ⊄ X(8)` and the
+exceptional band does *not* shrink monotonically in `r`.
+
+Orbit breakdown.  Three of the four orbits are persistent and match the orbit
+law exactly — one tangent orbit of size `182 = q(q+1)` (`p = 13 ∤ 8`), and
+`⌊gcd(8,14)/2⌋ + 1 = 2` conjugate-secant orbits of size 546 each, totalling
+`182 + 1092 = 1274`.  The fourth is genuinely exceptional:
+
+```text
+witness      s = (1, 0, 1, 2, 4, 12, 4, 3, 6) ∈ PG(8,13)
+orbit size   364      (stabilizer of order 6 in PGL_2(13), |PGL_2(13)| = 2184)
+apolar degree 5, apolar kernel dimension 2   (a pencil of degree-5 apolar
+             forms, no member split squarefree)
+consecutive three-row catalecticant rank 3   (persistent requires 2)
+```
+
+**Certificate for the witness**, reproduced independently in Python by
+definition-level Gaussian rank over `F_13` (a prime field, so the field-model
+hazard of §5.4 does not arise):
+
+* *Positive.*  `s` lies in the span of exactly eight curve points, with minimal
+  spanning set the NRC parameters `{0, 1, 2, 3, 4, 5, 6, 12}`.  The driver and
+  the Python verifier return the identical subset.
+* *Negative.*  All 9,907 subsets of `PG(1,13)` of size `1 ≤ j ≤ 7` fail to span
+  `s`; the search is exhaustive with no pruning, and the first success occurs on
+  the sixth subset of size 8.  Hence `w(s) = 8 = ρ`, so `s` is deep, while its
+  catalecticant rank 3 puts it outside `P_9`.
+
+Independent whole-cell re-check: every emitted orbit representative re-verified
+in Python with **zero weight disagreements**, deep orbit sizes summing to 1,638,
+and deep-representative catalecticant ranks `{2, 3}` — the 3 being exactly this
+orbit.
+
+**Revised picture.**  Writing `q_0(r)` for the least field beyond which no
+exceptional deep hole occurs, the data now read
+
+| `r` | 4 | 5 | 6 | 7 | 8 | 9 |
+|---|---:|---:|---:|---:|---:|---:|
+| `X(r)` (exhaustively known part) | `∅` | `{7,8,9,11,13,17,19}` | `{7,8,9,11,13}` | `{7,8,9,11}` | `{8,9,11}` | `⊇ {9,11,13}` |
+| `q_0(r)` | 4 | 23 | 16 | 13 | 13 | ≥ 16 |
+| proved threshold `Q*_r` | — | 23 | 29 | 37 | 43 | 53 |
+
+So `q_0` falls from 23 to 13 across `r = 5..8` and then rises again at `r = 9`.
+The right replacement for Conjecture B is therefore a *boundedness* claim rather
+than a constant-threshold or monotonicity claim:
+
+> **Conjecture B′.**  `q_0(r) ≤ 23` for every redundancy `r`; equivalently, no
+> PRS code over a field of order at least 23 has a deep hole outside
+> `P_r ∪ M^max_{r,p}`, at any redundancy.
+
+B′ is consistent with every cell computed here and with the committed R5--R7
+classifications, and it still contradicts the shape of the proved thresholds
+`Q*_r = 6r-16+⌊2√(6r-18)⌋`, which grow without bound.  It is weaker than B but
+survives the falsification, and it is what the `r = 9` result actually supports.
 
 ### 5.4 Independent verification
 
@@ -459,17 +538,19 @@ pruning, exact `F_q` arithmetic throughout.
    Domain: all of `PG(3,q)` for each listed `q` (135,200 up to 4,297,472
    points).  Stop condition: full enumeration.
 3. **No cell with `ρ = r` other than `(r,q) = (3, even q)` and `(r,q) = (7,8)`.**
-   Domain: all 41 census cells listed in §5.1--5.3b.  Stop condition: full
+   Domain: all 42 census cells listed in §5.1--5.3c.  Stop condition: full
    enumeration of each cell.  Note both exceptions have `q` even with
    `k ∈ {2, q-2}`, which is exactly the Seroussi--Roth exceptional pair; the
    grid contains no other cell with `q` even and `k ∈ {2, q-2}`, so this
    negative does not test the conjecture's exception clause beyond those two.
 4. **Partially searched:** `r = 9` below its threshold `q < 53`.  Domain:
-   all 48,427,561 points of `PG(8,9)` and all 235,794,769 points of
-   `PG(8,11)`; both have a large exceptional excess, so `9, 11 ∈ X(9)`.
-   Stop condition for the sweep, not the cells: `|PG(8,13)| ≈ 9.1·10^8` and
-   `|PG(8,16)| ≈ 4.6·10^9` were not run in this wave.  Conjecture C's decisive
-   redundancy-nine prediction — excess zero at `q = 13` — is **untested**.
+   all 48,427,561 points of `PG(8,9)`, all 235,794,769 points of `PG(8,11)`,
+   and all 883,708,281 points of `PG(8,13)`; all three have a nonzero
+   exceptional excess, so `{9, 11, 13} ⊆ X(9)` exactly.  Stop condition for the
+   sweep, not the cells: `|PG(8,16)| ≈ 4.6·10^9` and everything above it were
+   not run.  So `q_0(9) ≥ 16`, and `X(9) ∩ [16, 52]` is **untested** — the
+   first unsearched redundancy-nine cell, `q = 16`, is the one that would pin
+   `q_0(9)`.
 5. **Not searched at all:** `r = 10` below its threshold `q < 59`.
    `|PG(9,11)| ≈ 2.6·10^9` and every larger cell is beyond a single-wave
    exhaustive census on this machine.  Conjecture C's prediction
@@ -479,11 +560,12 @@ pruning, exact `F_q` arithmetic throughout.
 
 | Conjecture | Verdict | Exact verified domain |
 |---|---|---|
-| A (radius dichotomy) | survives | all 41 census cells: `r=3` for `q ∈ {5,7,8,9}`; `r=4` for `q ∈ {4,…,64}` (12 fields); `r=5` for `q ∈ {7,8,9,11,13,16}`; `r=6` for `q ∈ {7,8,9,11,13}`; `r=7` for `q ∈ {7,8,9,11,13}`; `r=8` for `q ∈ {8,9,11,13,16,17,19}`; `r=9` for `q ∈ {9,11}` |
-| B (persistent-only for `r ≥ 8`, `q ≥ 13`) | survives; **new** at `r=8` | `r=8`, `q ∈ {13, 16, 17, 19}`, exhaustive over 1.73·10^9 projective directions.  Untested for `r ≥ 9` |
-| C (band squeezed shut) | survives; `X(4) = ∅` and `X(8) ∩ [8,19] = {8,9,11}` are new | `X(4) = ∅` exhaustive over 12 fields `4 ≤ q ≤ 64`; `X(8) ∩ [8,19] = {8,9,11}` exact; `X(8) ∩ [23,42]`, `X(9) ∩ [13,52]`, `X(10)` untested |
+| A (radius dichotomy) | survives | all 42 census cells: `r=3` for `q ∈ {5,7,8,9}`; `r=4` for `q ∈ {4,…,64}` (12 fields); `r=5` for `q ∈ {7,8,9,11,13,16}`; `r=6` for `q ∈ {7,8,9,11,13}`; `r=7` for `q ∈ {7,8,9,11,13}`; `r=8` for `q ∈ {8,9,11,13,16,17,19}`; `r=9` for `q ∈ {9,11,13}` |
+| B (persistent-only for `r ≥ 8`, `q ≥ 13`) | **FALSIFIED** at `(r,q) = (9,13)`, §5.3c; true at `r=8` for `q ∈ {13,16,17,19}` | falsifying witness `(1,0,1,2,4,12,4,3,6)`, orbit size 364, certificate in §5.3c |
+| B′ (`q_0(r) ≤ 23` for every `r`) | survives; replaces B | every cell in §5.1--5.3c, plus the committed R5--R7 classifications |
+| C (band squeezed shut) | monotonicity half **FALSIFIED** (`13 ∈ X(9) \ X(8)`); `X(4) = ∅` and `X(8) ∩ [8,19] = {8,9,11}` stand as new results | `X(4) = ∅` exhaustive over 12 fields `4 ≤ q ≤ 64`; `X(8) ∩ [8,19] = {8,9,11}` exact; `X(9) ⊇ {9,11,13}` exact; `X(8) ∩ [23,42]`, `X(9) ∩ [16,52]`, `X(10)` untested |
 
-Conjecture B, restricted to `r = 8`, is the sharpest new statement: it says the
+Conjecture B, restricted to `r = 8`, remains the sharpest new statement: it says the
 proved threshold 43 is not merely non-sharp but off by a factor of more than
 three, and identifies 13 as the entry field.  This directly answers the
 "is 43 sharp?" question recorded as open in
@@ -550,7 +632,7 @@ is ever opened for extension.
 results off from MDS-length progress because Kaipa's deep-hole/MDS-extension
 dictionary is an equivalence only when the covering radius is `r`, and the
 repository's classifications live at radius `r-1`.  Everything computed here
-stays inside that fence and in fact sharpens it: across 41 exhaustive census
+stays inside that fence and in fact sharpens it: across 42 exhaustive census
 cells the covering radius was `r-1` in every case except `(r,q) = (3, q even)`
 and `(r,q) = (7,8)`, both of which are the classical even-field
 `k ∈ {2, q-2}` exceptions and both of which were already known.  The dossier's
@@ -561,16 +643,20 @@ only route back toward MDS, is untouched here and remains untouched.
 
 ## 8. Mystery ledger
 
-1. **Why does the exceptional band contract as redundancy grows?**  Observed
-   last exceptional field: `19, 13, 11, 11` at `r = 5, 6, 7, 8`, against proved
-   thresholds `23, 29, 37, 43` moving the other way.  Settled by this pass:
-   the `r = 8` entry field is 13, not 43, exhaustively over `8 ≤ q ≤ 19`.
-   Still open: the mechanism.  The Hasse--Weil deletion budget `6r-18` grows
-   linearly in `r`, but the actual obstruction evidently does not; the missing
-   ingredient is presumably that the higher-degree splitting covers acquire
-   *more* rational points relative to their genus, not fewer.  Owning
-   successor: a fixed-level `r = 9` calibration of the kind C509 used to close
-   every field below 37 at `r = 7` without scanning `PG(6,q)`.
+1. **The exceptional band does not contract monotonically.**  Observed last
+   exceptional field: `19, 13, 11, 11` at `r = 5, 6, 7, 8`, against proved
+   thresholds `23, 29, 37, 43` moving the other way — then it jumps back up at
+   `r = 9`, where `13 ∈ X(9)` although `13 ∉ X(8)`.  Settled by this pass: the
+   `r = 8` entry field is 13, not 43, exhaustively over `8 ≤ q ≤ 19`; and the
+   monotonicity that made Conjectures B and C attractive is false.  Still open:
+   the mechanism, now with an extra constraint — whatever governs `q_0(r)` is
+   not monotone in `r`, so it is not a pure counting budget.  The Hasse--Weil
+   deletion budget `6r-18` grows linearly in `r`, but the actual obstruction
+   evidently oscillates; a natural suspect is arithmetic in `gcd(r-1, q+1)`,
+   which is 7 at `(r,q) = (8,13)` (no exception) and 2 at `(9,13)` (one
+   exception).  Owning successor: a fixed-level `r = 9` calibration of the kind
+   C509 used to close every field below 37 at `r = 7` without scanning
+   `PG(6,q)`.
 2. **Redundancy four has no exceptional field at all.**  Every one of the
    twelve fields swept, in three characteristics, gives deep = persistent
    exactly.  This is the only redundancy in `4 ≤ r ≤ 8` with `X(r) = ∅`, and it
@@ -586,17 +672,24 @@ only route back toward MDS, is untouched here and remains untouched.
    = 10`, yes — but no structural description was attempted.  Evidence gap: the
    analogue of C491's branch-divisor classification of the `r = 5` sporadics,
    at `r = 8`.  Owning successor: whichever task takes item 1.
-4. **The decisive redundancy-nine cell was not reached.**  Conjecture C
-   predicts excess zero at `r = 9, q = 13`; the cell has `|PG(8,13)| ≈
-   9.1·10^8`, comparable to the `r = 8, q = 19` cell that did complete
-   (9.4·10^8, about ten minutes), so it is reachable rather than out of reach —
-   it simply did not fit this wave after the `r = 8` sweep.  Gate: one run of
-   `--q 13 --r 9`.  If it returns `deep = 1274 = q(q+1)^2/2` in five orbits, the
-   redundancy-nine threshold drops from the proved 53 to 13 as well and
-   Conjecture C acquires its second independent confirmation; if it returns an
-   excess, Conjecture B is false as stated and the true threshold grows with
-   `r` after all.  This is the single highest-information follow-up in the lane.
-5. **The field-model near-miss.**  A verifier that chose its own irreducible
+4. **The single exceptional orbit at `r = 9, q = 13` has no structural
+   description.**  Settled by this pass: it exists, has size 364, stabilizer
+   order 6 in `PGL_2(13)`, apolar degree 5 with a two-dimensional apolar pencil
+   none of whose members is split squarefree, and catalecticant rank 3.  Open:
+   why *this* orbit and why *this* field.  A stabilizer of order 6 echoes the
+   `C_2`, `C_3`, `V_4`, `A_4` stabilizers of the redundancy-five sporadics
+   classified by branch divisor in C491, which suggests the same branch-divisor
+   machinery would name it.  Evidence gap: the redundancy-nine analogue of that
+   classification.  Owning successor: whichever task takes item 1.
+5. **Where does `q_0(9)` actually sit?**  The redundancy-nine band is now known
+   to contain `9, 11, 13` and is unsearched from 16 up to the proved threshold
+   53.  Gate: one run of `--q 16 --r 9` (`|PG(8,16)| ≈ 4.6·10^9`, roughly five
+   times the `q = 13` cell, so of order half an hour and about 5 GB — the first
+   cell in this campaign where memory, not time, is the binding constraint).
+   That single cell decides whether `q_0(9)` is 16 (band closes immediately
+   above 13, and Conjecture B′ is comfortable) or larger (B′ starts to look
+   fragile too).
+6. **The field-model near-miss.**  A verifier that chose its own irreducible
    polynomial produced 30 apparent counterexamples at `r = 8, q = 16` that were
    pure labelling artifacts.  Settled by this pass, and worth recording as a
    standing hazard: syndrome coordinates over a non-prime field are element
@@ -604,7 +697,7 @@ only route back toward MDS, is untouched here and remains untouched.
    fix one field model, while only aggregate counts are model-free.  The
    committed certificates for `q = 8, 9, 16, 25, 27, 32` in the R5--R7 bundles
    have the same exposure if they are ever re-checked by a second program.
-6. **No genuine mystery in the validation layer.**  Sixteen committed-certificate
+7. **No genuine mystery in the validation layer.**  Sixteen committed-certificate
    cells (plus four classical conic cells) reproduced exactly by an independent
    code path, plus definition-level
    Python agreement on two of them and representative-level agreement on five
@@ -612,6 +705,8 @@ only route back toward MDS, is untouched here and remains untouched.
    surfaced there and none is claimed.
 
 **Status: complete** for the redundancy-four sweep, the redundancy-eight band
-`8 ≤ q ≤ 19`, and the certificate-reproduction gate; **partial** for
-Conjecture C, whose decisive redundancy-nine and redundancy-ten predictions are
-untested.
+`8 ≤ q ≤ 19`, the certificate-reproduction gate, and the redundancy-nine
+decider at `q = 13`, which falsified Conjecture B and the monotonicity half of
+Conjecture C with an exactly certified witness.  **Partial** for the
+replacement Conjecture B′ (`q_0(r) ≤ 23` for every `r`), whose first untested
+cell is `r = 9, q = 16`, and for redundancy ten, which was not searched at all.

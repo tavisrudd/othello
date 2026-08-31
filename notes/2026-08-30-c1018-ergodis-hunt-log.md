@@ -46,6 +46,15 @@ projects, ranked by Ergodis fit):
   as a standing certificate-recheck hazard. Ergodis fit: prime-field rank
   oracle exact (116 cross-checks); biggest gap is no general GF(p^h).
   Follow-up (r=9,q=13) queued to decide Conjecture B.
+- **Wave 1A follow-up (landed ~01:30): Conjecture B falsified at
+  redundancy nine.** Exhaustive census of all 883,708,281 points of
+  PG(8,13): covering radius 8 as predicted, but deep = 1638 vs the
+  persistent locus's 1274 — one new exceptional PGL₂(13) orbit
+  (stabilizer order 6, catalecticant rank 3, two-dimensional non-split
+  apolar pencil), witness independently certified in Python. Also kills
+  the monotonicity half of Conjecture C (13 ∈ X(9) but 13 ∉ X(8)).
+  Replacement Conjecture B′ (q₀(r) ≤ 23 for every redundancy) survives
+  every cell; the r=8 result stands.
 - **Wave 2A, order-12 planes (landed ~01:10)** —
   `2026-08-30-c1018-hunt-plane12.md`; driver
   `ergodis-private/src/bin/c1018_plane12.rs`, helper
