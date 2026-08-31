@@ -275,6 +275,18 @@ zero-Hamilton case. The remaining star orbit is the affine (AG(2,3))
 factorization displayed above. Thus the finite residue is a five-pair
 endpoint chase, not an enumeration of one-factorizations of (K_{10}).
 
+There is a sharper local presentation of the 640-row star table. Form a graph
+on its four two-factor signature groups, joining two groups when all four
+cross-pairs have cycle type (4+6). Each such group edge has a color: the
+endpoint of the distinguished base edge used by its four-cycles. The only
+possible uncolored graphs are the empty graph, a perfect matching, a triangle,
+and (K_4), occurring respectively (512,48,64,16) times. The perfect-matching
+edges have opposite colors, while every triangle and (K_4) is monochromatic.
+Thus the zero-Hamilton hypothesis produces a monochromatic (K_4), and its
+color is the common vertex of all 36 four-cycles. A direct bit-table proof of
+this **endpoint-closure lemma** is the remaining presentation compression;
+the exact rooted proof already verifies it without the global census.
+
 The independent 396-class census remains useful regression evidence. It is
 normalized by the classical totals 396 unlabelled classes and 1,225,566,720
 labelled factorizations, the latter recovered from the computed automorphism
@@ -485,9 +497,9 @@ first canonical witness is the six-equation triangle displayed above.
 
 | Artifact | Bytes | SHA-256 |
 |---|---:|---|
-| `notes/c1015_zero_hamilton_rooted.py` | 12,154 | `c7ec559a4808f2f6359f537e2960699c905f23eff2e4be5df5367cafd3e9ed1e` |
-| `notes/c1015_zero_hamilton_rooted.json` | 3,545 | `0077857dd9b9d36d03de858d02fc2f1b5e046c33a107637e6dc0d74f17b6eafb` |
-| `notes/c1015_zero_hamilton_rooted.sha256` | 206 | `1b9d2001560c4d6b3605eadfaf4c70eeb828b9f030dfad864a3eb633d7b47b11` |
+| `notes/c1015_zero_hamilton_rooted.py` | 14,069 | `69a12b09e9915c8aa4659cb91d9a8c87a76f89deb17242868bf114566222e052` |
+| `notes/c1015_zero_hamilton_rooted.json` | 3,823 | `26129e5f7d96f97d943badf9ee29445f8a196e2427ed69b40060554a3a426210` |
+| `notes/c1015_zero_hamilton_rooted.sha256` | 206 | `f4173e3cfc77e7ef5b2ed02e1d1e3076f3246d44fe7fa4b8db0f4571570e41fc` |
 | `notes/c1015_ree_bridge.py` | 10,728 | `7b60af8c3583a754db5ddc28d75cc065ca8d8906443e4b4f66903284e60fb123` |
 | `notes/c1015_ree_bridge.json` | 1,263 | `1545f49a4d66d33d5d90d0ee99d5eaf39640c0170c99db2a7b6e78697a279b50` |
 | `notes/c1015_ree_bridge.sha256` | 317 | `249bd54b32d954d1fd1c3751b99638219af40b905cbeedd7b85c0cc598fdd9b1` |
@@ -721,8 +733,14 @@ not needed for the order-ten theorem.
   issues should be repaired by the owning lane: high-level `expr` plans work
   with `try` but are rejected by `batch`, and `synthesize` failed here with
   `plan result sort does not match its declared output` despite a zero-error
-  feature ceiling. The earlier fixed-base undercount and mistaken
-  characteristic-three inference remain useful additional regressions.
+  feature ceiling. A second diagnostic pass over all 640 rooted star
+  completions reduced the endpoint data to six feature vectors, again with
+  zero unavoidable errors. It exposed the empty/matching/triangle/(K_4)
+  block-graph hierarchy and its endpoint-color rule now independently frozen
+  in the rooted certificate. `synthesize` reproduced the same output-sort
+  failure on this smaller exact dataset. The earlier fixed-base undercount
+  and mistaken characteristic-three inference remain useful additional
+  regressions.
 
 ## Publication decision after proof
 

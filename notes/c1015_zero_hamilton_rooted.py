@@ -227,6 +227,44 @@ def common_four_cycle_vertices(solution):
     return tuple(sorted(set.intersection(*four_sets)))
 
 
+def full_nonham_block_profile(solution):
+    groups = {}
+    for index in solution:
+        groups.setdefault(signature(MATCHINGS[index]), []).append(MATCHINGS[index])
+    edges = []
+    colors = []
+    for left, right in itertools.combinations(range(1, 5), 2):
+        cycle_parts = tuple(
+            components(first, second)
+            for first in groups[(0, left)]
+            for second in groups[(0, right)]
+        )
+        if not all(tuple(map(len, parts)) == (4, 6) for parts in cycle_parts):
+            continue
+        endpoint_colors = {
+            next(vertex for vertex in (0, 1) if vertex in parts[0])
+            for parts in cycle_parts
+        }
+        assert len(endpoint_colors) == 1
+        edges.append((left, right))
+        colors.append(next(iter(endpoint_colors)))
+    degrees = Counter(vertex for edge in edges for vertex in edge)
+    degree_sequence = tuple(sorted(degrees.get(vertex, 0) for vertex in range(1, 5)))
+    shapes = {
+        (0, (0, 0, 0, 0)): "empty",
+        (2, (1, 1, 1, 1)): "perfect_matching",
+        (3, (0, 2, 2, 2)): "triangle",
+        (6, (3, 3, 3, 3)): "complete",
+    }
+    shape = shapes[(len(edges), degree_sequence)]
+    color_counts = tuple(sorted(Counter(colors).values()))
+    if shape == "perfect_matching":
+        assert color_counts == (1, 1)
+    if shape in ("triangle", "complete"):
+        assert len(set(colors)) == 1
+    return shape
+
+
 def matching_json(matching):
     return [list(edge) for edge in matching]
 
@@ -257,6 +295,13 @@ def build_certificate():
     zero_triangle = tuple(
         solution for solution, count in triangle_hamilton.items() if count == 0
     )
+    block_shapes = Counter(full_nonham_block_profile(solution) for solution in star)
+    assert block_shapes == {
+        "empty": 512,
+        "perfect_matching": 48,
+        "triangle": 64,
+        "complete": 16,
+    }
     star_pair_permutations = tuple(
         (0,) + permutation for permutation in itertools.permutations(range(1, 5))
     )
@@ -301,6 +346,11 @@ def build_certificate():
             "explicit_symmetry_group_order": star_group_order,
             "hamilton_free_orbits": zero_star_orbits,
             "common_four_cycle_vertex_sets": [list(vertices) for vertices in sorted(common_vertices)],
+            "full_nonham_block_graph_distribution": dict(sorted(block_shapes.items())),
+            "block_endpoint_rule": (
+                "perfect-matching blocks have opposite endpoint colors; "
+                "triangle and complete blocks are monochromatic"
+            ),
         },
         "three_plus_two_pattern": {
             "rooted_exact_covers": len(triangle),

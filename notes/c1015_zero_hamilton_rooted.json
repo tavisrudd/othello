@@ -43,6 +43,7 @@
     }
   },
   "star_pattern": {
+    "block_endpoint_rule": "perfect-matching blocks have opposite endpoint colors; triangle and complete blocks are monochromatic",
     "common_four_cycle_vertex_sets": [
       [
         0
@@ -52,6 +53,12 @@
       ]
     ],
     "explicit_symmetry_group_order": 768,
+    "full_nonham_block_graph_distribution": {
+      "complete": 16,
+      "empty": 512,
+      "perfect_matching": 48,
+      "triangle": 64
+    },
     "hamilton_free_completions": 16,
     "hamilton_free_orbits": 1,
     "hamilton_pairs_away_from_base": {
