@@ -209,7 +209,106 @@ and never touches `hall_core`.
 
 ## What would make this a real product
 
-*(filled in as they land)*
+### What is missing
+
+- **Repair suggestions.** The certificate says which shifts are short and which nurses
+  could cover them. It does not say what to change. The natural next step is cheap and is
+  the thing a buyer actually wants: for each certificate, rank the eligibility edges that
+  would most reduce the deficit if added (cross-train this nurse for that qualification),
+  and the capacity increases that would do the same (one more shift from this nurse). Both
+  are one pass over the certificate's neighbourhood; neither is implemented.
+- **Explanations for feasible-but-tight instances.** A roster that is feasible today with
+  zero slack is a roster that breaks on the first sick day. The same machinery gives the
+  tight sets — task sets where demand equals capacity exactly — and nothing surfaces them.
+- **Soft constraints and objectives.** Real rosters have preferences, costs, and fairness
+  targets. This tool answers a pure feasibility question. An instance that is feasible but
+  unacceptably expensive gets `FEASIBLE` and no further help.
+- **Incremental re-solve.** The interactive question is "what if we cross-train one
+  nurse?", and today that is a full rebuild and re-solve of the whole instance.
+- **A real input format.** JSON with string identifiers on both sides of every eligibility
+  pair costs 144 MB and most of the wall time on an 8000-shift instance. A columnar or
+  binary format, and integer identifiers, are table stakes at production scale.
+
+### What is fragile
+
+- **Instance compilation dominates the runtime.** On the 8000-shift, 1107-nurse,
+  2.58-million-pair instance the matching itself is 205 ms and the whole `solve` is 1.6 s,
+  with the remainder in parsing and index construction; peak resident memory is 543 MB,
+  nearly all of it the parsed instance. Replacing ordered maps and per-task ordered sets
+  with hash maps and sort/dedup cut `solve` from 5.25 s to 1.58 s during this work, which
+  says the remaining cost is in the same place and is addressable, not fundamental.
+- **The unit expansion is a memory multiplier.** Capacities are handled by expanding to
+  unit copies, so the incidence list is roughly the eligibility list times the average
+  resource capacity. At capacity 5 that is a 5x multiplier; a nurse roster with monthly
+  capacity 20 makes it 20x. There is a hard cap at 40 million incidences after which the
+  tool refuses rather than exhausting memory, which is the right failure mode but is still
+  a ceiling that a capacity-aware matching would remove entirely.
+- **Certificate order is heuristic.** Deletion runs in three orders (index, reverse,
+  descending eligibility count) and keeps the smallest result. Every order yields an
+  irreducible set, so this only affects size, but it means certificate size is not a
+  deterministic function of the instance alone in the way the verdict is.
+- **The classifier is syntactic.** It reads declared couplings and the `distinct` flag. An
+  instance that encodes a pairwise conflict by some other means — say by pre-filtering
+  eligibility in a way that only makes sense jointly — will be classified as a matching and
+  certified. The decline is only as good as the honesty of the input encoding.
+
+### Problem shapes it will never cover
+
+These are not gaps to be closed later; they are outside the method.
+
+- **Anything with a genuine objective.** Hall's condition is about existence. Cost, overtime
+  minimisation, and fairness are not expressible as a deficiency.
+- **Pairwise or higher coupling between tasks.** Conflicts, precedence, "these two shifts
+  must go to the same nurse", and inner-product constraints all leave the matching world.
+  This is exactly the failure mode C1018 recorded when the orbit-matrix search carried row
+  sums, column sums and pairwise row inner products together, and it is why that search
+  uses its own row enumeration rather than `hall_core`.
+- **Resource-side lower bounds and distinct-resource requirements.** Feasibility is still a
+  flow question but the certificate is a cut naming both sides, not a task set. The tool
+  declines; a different product would be needed.
+- **Time-indexed scheduling with sequencing.** Once the question is "in what order", not
+  "who does what", bipartite matching is the wrong model outright.
+
+## Requests against `hall_core` (not implemented, read-only constraint)
+
+Nothing under `papers/complete-repair-ports/ergodis/`, `ergodis-private/src/lib.rs`,
+`ergodis-private/Cargo.toml` or `ergodis-private/src/hall_core.rs` was touched. These are
+the changes this prototype wanted and worked around instead.
+
+1. **A capacity-aware solve.** The single most valuable change. Something like
+   `solve_capacitated(left_count, right_count, offsets, neighbors, demands, capacities)`
+   that scales capacities inside the augmenting search — `pair_right` becoming a count plus
+   a list of partners — instead of forcing the caller to expand to unit copies. It removes
+   the `sum(d) x sum(c)` incidence blow-up, the 40-million-edge ceiling, and the projection
+   argument that currently has to be justified by hand.
+2. **Deficiency reported per unmatched root, or the alternating forest exposed.** The single
+   alternating-reachable set merges every independent bottleneck into one blob; this
+   prototype recovers the separate bottlenecks by decomposing it into connected components
+   afterwards. `hall_core` already computes the reachability that would give them directly,
+   and one root per bottleneck is the natural output.
+3. **A first-violation fast path.** For screening large instance families, an option to
+   stop at the first unmatched root without extracting the full reachable set. Today the
+   caller pays for the full extraction even when only the yes/no answer is wanted.
+4. **A fallible constructor.** `HallWorkspace::new` asserts on capacity overflow. A service
+   taking untrusted input wants `Result`, so an oversized request is rejected rather than
+   aborting the process. `solve` already validates the CSR shape properly and returns
+   `HallError`; the constructor is the one place that does not.
+5. **A documented contract for `matching()` after a deficient solve.** The maximum matching
+   is still in the workspace and is useful — it is the partial assignment to keep while the
+   shortage is fixed — but the doc comment only describes it for the saturated case, so
+   this prototype does not rely on it there.
+6. **Warm-start / incremental re-solve.** Re-solving after adding or removing a handful of
+   edges currently redoes the whole matching. The interactive product question is exactly
+   that edit, repeated.
+7. **Deficit magnitude in the outcome.** `HallOutcome::Deficient` gives the two set sizes;
+   the caller usually wants the deficiency `|S| - |N(S)|` and the count of unmatched left
+   vertices to rank bottlenecks by severity without recomputing.
+
+None of these is a correctness complaint. `hall_core` did exactly what it says: it
+allocated once, validated the CSR shape rather than panicking, and returned a deficient set
+with its neighbourhood that was in every one of thousands of tested cases a genuine Hall
+witness. Every item above is about the shape of the API for a capacitated, multi-bottleneck,
+interactive use rather than for a tight inner search loop, which is what it was built for.
 
 ## Requests against `hall_core` (not implemented, read-only constraint)
 
