@@ -322,7 +322,23 @@ Conjecture C's prediction `X(10) ⊆ {11}` untested.  The new driver reaches it.
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | 10 | 11 | 2 | 2,593,742,460 | 611 s | 329 MB | 9 | 66,390,456 | 50,447 | 792 | **66,389,664** | 50,444 |
 
-<!-- R10 MORE -->
+| 10 | 13 | 4 | 11,488,207,654 | 2,634 s | 1.41 GB | 9 | 1,820 | 3 | 1,274 | **546** | 1 |
+
+**The `(10,13)` cell is the strongest single validation of the fixed-locus lemma
+in this report.**  The census assigns an exact NRC rank to all 11,488,207,654
+points of `PG(9,13)` and finds exactly three deep orbits: one tangent of size
+`182 = q(q+1)`, one conjugate-secant of size 1,092 — together the predicted
+`1274 = q(q+1)^2/2` — and **one** exceptional orbit, of size 546, with
+representative `(1,0,0,0,0,0,0,0,7,0)`.  That is precisely the orbit the sweep
+of §5d had already produced from 64,643 points, a factor of 178,000 fewer.  The
+census adds one thing the sweep could not: there are **no regular exceptional
+orbits** at `(10,13)` either, so the exceptional set is exactly that one
+`C_4`-stabilized orbit.
+
+So `13 ∈ X(10)`, and `q_0(10) ≥ 16`.  This is the census that was never run
+before this wave, and it settles the taxonomy question §5f raised without
+relying on the lemma at all.
+
 
 `ρ = 9 = r-1`, so Conjecture A survives at a redundancy it had never been tested
 at.  The persistent part is `792 = q(q+1)^2/2` in three orbits — one tangent of
@@ -920,7 +936,7 @@ projective space assigned its exact NRC rank, no sampling, no pruning:
 | 7 | 7, 8, 9, 11, 13 | agrees with the committed all-field theorem |
 | 8 | 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29 | `X(8) ∩ [8,29] = {8,9,11}`, so `q_0(8) = 13` |
 | 9 | 9, 11, 13, 16, 17, 19 | `X(9) ∩ [9,19] = {9,11,13}`, so `q_0(9) = 16` |
-| 10 | <!-- R10DOMAIN --> | <!-- R10VERDICT --> |
+| 10 | 11, 13 | `X(10) ∩ [11,13] = {11,13}`; at `q = 13` the exceptional set is exactly one `C_4`-stabilized orbit of size 546 |
 
 What is **completely classified for the non-regular class** — the fixed-locus
 lemma of §5d applied at every prime power below the imported field-ranged
