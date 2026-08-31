@@ -126,9 +126,13 @@ as each coherent tranche lands.
    cost (`t=-0.84/-1.17`) with identical work, instructions, branches, and
    output. Raw evidence is under
    `/home/tavis/.cache/ergodis-perf/c1017-scheduler/final-serial-ab`. The private
-   registry now records 59 pass, 11 open, and 32 not-applicable cells. Current
-   next slice: observational-refinement parallel evidence, the remaining
-   multi-cell registry gap.
+   observational refiner itself has no public parallel kernel: its split and
+   multiway engines mutate one exact quotient/worklist in dependency order and
+   create no worker-written state. Those two registry cells are therefore
+   correctly not applicable rather than unsupported passes. The private
+   registry now records 59 pass, 9 open, and 34 not-applicable cells. Current
+   next slice: retain a same-work counter A/B for the binary linear Gray scan,
+   the first remaining real gap.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

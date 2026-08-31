@@ -56,8 +56,8 @@
       "layout": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/observational_compiler.rs"]},
       "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-27-c985-ergodis-optimization-paper.md"]},
-      "parallel_counters": {"status": "open", "reason": "Parallel compilation evidence is not yet attached to this registry row."},
-      "contention": {"status": "open", "reason": "Parallel compilation ownership evidence is not yet attached to this registry row."}
+      "parallel_counters": {"status": "na", "reason": "The public observational refiner exposes no parallel kernel; split and multiway refinement are single mutable quotient/worklist machines."},
+      "contention": {"status": "na", "reason": "The public observational refiner creates no worker threads or worker-written shared state."}
     },
     {
       "id": "orbit-product-search",

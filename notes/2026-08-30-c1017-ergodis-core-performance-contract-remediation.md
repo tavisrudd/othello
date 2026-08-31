@@ -353,10 +353,14 @@ give medians of 2,260 KiB baseline and 2,616 KiB candidate, a 356 KiB absolute
 increase from the iterative code and fixed workspaces. Raw evidence is under
 `/home/tavis/.cache/ergodis-perf/c1017-zdd/generic-final-ab`.
 
-The refreshed private registry now reports 59 pass, 11 open, and 32
-not-applicable cells. The next multi-cell gap is observational-refinement
-parallel evidence; the remaining open cells are retained single-thread counter
-rows.
+The observational-refinement parallel cells were also misclassified. The
+public split and multiway refiners expose no parallel entry point: both mutate
+one exact quotient, dirty-block queue, and transcript in dependency order, and
+create no worker-written shared state. Their parallel-counter and contention
+cells are therefore not applicable, not passing measurements. Adding a new
+parallel refiner would reopen both gates. The refreshed private registry now
+reports 59 pass, 9 open, and 34 not-applicable cells; every remaining gap is a
+retained single-thread counter row.
 
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
