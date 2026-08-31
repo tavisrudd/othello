@@ -176,6 +176,14 @@ depth/matching state in caller-sized typed arrays, so there is no hot frame or
 record layout to pad; their outstanding evidence is counter A/B rather than
 structural compliance.
 
+Four more already-measured kernels are now explicit registry rows rather than
+implicit prose: character-sum census, dense/sparse successive selection, the
+campaign plan VM, and semantic-symmetry anchor evaluation. Each has an
+executable zero-allocation gate and exact hot-record layouts where records
+exist. Their counter rows remain open. The remaining allocation failures are
+therefore concentrated in sparse scheduling, frozen ordered-resource fronts,
+and growing ZDD operations instead of being hidden by census omissions.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

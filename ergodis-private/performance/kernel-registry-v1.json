@@ -138,6 +138,46 @@
       "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is registered."},
       "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
       "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
+    },
+    {
+      "id": "character-sum-census",
+      "source": "papers/complete-repair-ports/ergodis/src/character_sum.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/character_sum.rs"]},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/character_sum.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is registered."},
+      "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
+      "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
+    },
+    {
+      "id": "successive-selector",
+      "source": "papers/complete-repair-ports/ergodis/src/selector.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/selector.rs"]},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/selector.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is registered."},
+      "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
+      "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
+    },
+    {
+      "id": "campaign-plan-vm",
+      "source": "papers/complete-repair-ports/ergodis/src/control/vm.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/control/vm.rs"]},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/control/vm.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is registered."},
+      "parallel_counters": {"status": "na", "reason": "Plans execute worker-locally; parallel ownership belongs to the calling search kernel."},
+      "contention": {"status": "na", "reason": "The VM owns no shared mutable state."}
+    },
+    {
+      "id": "semantic-symmetry-anchor",
+      "source": "papers/complete-repair-ports/ergodis/src/semantic_symmetry.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/semantic_symmetry.rs"]},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/semantic_symmetry.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is registered."},
+      "parallel_counters": {"status": "na", "reason": "Anchor evaluation is worker-local; root parallelism is covered by root-execution."},
+      "contention": {"status": "na", "reason": "The verified evaluator owns no shared mutable state."}
     }
   ]
 }

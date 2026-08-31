@@ -53,8 +53,12 @@ as each coherent tranche lands.
    exact. The census now also registers Hall matching/deficiency extraction
    and exact integer-moment enumeration. Their actual iterative regions both
    pass the shared zero-event allocator gate; each uses fixed typed arrays
-   rather than a heap-grown frame stack. Current next slice is expanding that
-   census and closing its highest-leverage open allocation/layout rows.
+   rather than a heap-grown frame stack. Existing executable gates and exact
+   layout contracts now also register character-sum census, dense/sparse
+   successive selection, the campaign plan VM, and verified semantic-symmetry
+   anchor evaluation. Current next slice is closing the remaining substantive
+   sparse-scheduler, ordered-front, and ZDD allocation/growth failures rather
+   than mistaking an incomplete registry for compliance.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and
