@@ -188,5 +188,89 @@ sampling-artifact worry: the region that was previously unreachable — `m` up t
 The heuristic `(r-3)^2/2`, which would have permitted firing at (say) `r = 31`
 for every `q` below 392, is not merely unproved but **empirically wrong as a
 description of where carriers fire**: nothing fires above 13 anywhere in the
-swept region.
+`M = 3` region.
+
+### The larger-`M` direction, and the whole picture
+
+Extending to `M = 4, 5, 6` (the other axis of the sampling bias — larger support,
+smaller `m`), with `q` capped per `M` by the stratum size `q^{M-1}`:
+
+```text
+190 cells total.   M = 3,4,5,6.   r = 9 … 39.   q = 9 … 127.   m = 2 … 18.
+largest stratum swept: 10,172,526 points
+cells with an exceptional deep hole: 10
+```
+
+All ten, classified against PRS-1's actual hypotheses (`r ≥ 6`, `q ≥ 16`,
+`k = q+1-r ≥ 6`):
+
+| `r` | `m` | `q` | `k` | exceptional | status |
+|---:|---:|---:|---:|---:|---|
+| 9  | 2 | 9  | 1 | 402     | `q < 16` and `k = 1` |
+| 9  | 2 | 11 | 3 | 45      | `q < 16` and `k = 3` |
+| 11 | 2 | 11 | 1 | 7,097   | `q < 16` and `k = 1` |
+| 9  | 3 | 13 | 5 | 4       | `q < 16` (the known `(9,3)` carrier) |
+| 11 | 2 | 13 | 3 | 40      | `q < 16` |
+| 11 | 4 | 13 | 3 | 12      | `q < 16` (the known `(11,4)` carrier) |
+| 12 | 3 | 13 | 2 | 404     | `q < 16`, degenerate |
+| 13 | 2 | 13 | 1 | 157,432 | `q < 16`, degenerate |
+| 15 | 3 | 16 | 2 | 2,861   | `k = 2`; also the Seroussi–Roth cell where `ρ = r`, so the driver's `w ≥ d` test over-counts — see the caveat below |
+| 15 | 4 | 17 | 3 | 4       | **`k = 3`** — the only cell firing above `q = 13` |
+
+> **Inside PRS-1's stated scope — `q ≥ 16` and `k ≥ 6` — there are 171 cells,
+> spanning `r = 9 … 39`, `q = 16 … 127`, `m = 2 … 18`, and not one of them
+> fires.**
+
+## Verdict on Conjecture PRS-1
+
+**PRS-1 survives, and its verified domain grows by an order of magnitude.**  The
+artifact risk C1024 raised is discharged: the constancy of the threshold is not
+an accident of which carriers were cheap to sweep, because the carriers that
+were *not* cheap — `m` up to 18, `r` up to 39, `q` up to 127 — behave the same
+way.
+
+But one hypothesis turns out to be doing real work, and the data now pin it
+where they previously could not.
+
+### The `k ≥ 6` clause is necessary, and the true boundary is `k ≥ 4`
+
+C1018 §6 introduced `k ≥ 6` to exclude the near-degenerate boundary and said of
+the intermediate range: *"no cell with `3 ≤ k ≤ 5` and `q ≥ 16` is within census
+reach … This is the largest structural gap in the statement,"* and *"the true
+boundary may well be `k ≥ 3`; the data cannot tell."*
+
+The stratum sweep reaches that gap, because a stratum is small even when the
+ambient space is not.  Eight cells with `3 ≤ k ≤ 5` and `q ≥ 16`:
+
+| `r` | `m` | `q` | `k` | exceptional |
+|---:|---:|---:|---:|---:|
+| 13 | 5 | 16 | 4 | 0 |
+| 12 | 3 | 16 | 5 | 0 |
+| 13 | 2 | 17 | 5 | 0 |
+| 15 | 3 | 19 | 5 | 0 |
+| 15 | 6 | 19 | 5 | 0 |
+| 21 | 6 | 25 | 5 | 0 |
+| 27 | 6 | 31 | 5 | 0 |
+| **15** | **4** | **17** | **3** | **4** |
+
+So the data now *can* tell, and they say:
+
+* `k = 3` **fires**, at `(15, m=4)` over `F_17`.  Without the `k` hypothesis
+  PRS-1 would be **false**, since `17 > 13`.  The clause is load-bearing, not
+  defensive.
+* `k = 4` and `k = 5` are **clean** across seven cells.
+
+**Recommended sharpening: replace `k ≥ 6` by `k ≥ 4` in PRS-1.**  That is the
+weakest hypothesis consistent with all present evidence, it is now supported by
+seven cells rather than by none, and `k = 3` is exhibited as a genuine
+counterexample rather than a precaution.  The exact unverified boundary becomes
+`k = 3` with `q > 17`, and `k ∈ {4,5}` beyond the seven cells listed.
+
+*Caveat on the `(15,3,16)` row.*  That cell has `q` even and `k = 2`, i.e. the
+Seroussi–Roth case where `ρ = r` rather than `r-1` (C1018 §5f found it).  This
+driver decides "no split squarefree annihilator of degree `d-1`", which is
+`w ≥ d`, and when `ρ = d+1` that includes non-deep points of weight `d`.  Its
+2,861 count is therefore an over-count and is not a deep count; it is excluded
+from PRS-1 by `k = 2` regardless, and no other cell in the sweep is of that
+form.
 
