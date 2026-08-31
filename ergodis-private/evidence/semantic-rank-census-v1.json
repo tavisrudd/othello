@@ -66,6 +66,30 @@
     "raw_replay_speedup": 4.124301265078,
     "core_replay_speedup": 3.643001007049
   },
+  "hardware_counter_ab": {
+    "protocol": "perf stat -r 5, pinned CPU 2, 500000 replays per process, user-space counters, approximately 83.3% event coverage",
+    "raw": {
+      "cycles": 17111050662,
+      "instructions": 137730455495,
+      "branches": 29806347544,
+      "branch_misses": 4546253,
+      "elapsed_seconds": 3.719045501
+    },
+    "compiled_core": {
+      "cycles": 4767140346,
+      "instructions": 39689366454,
+      "branches": 8400198710,
+      "branch_misses": 1038906,
+      "elapsed_seconds": 0.997221671
+    },
+    "reduction_ratios": {
+      "cycles": 3.589374220,
+      "instructions": 3.470210482,
+      "branches": 3.548290769,
+      "branch_misses": 4.376000331,
+      "elapsed": 3.729407021
+    }
+  },
   "provenance": {
     "frozen_source": "notes/2026-08-09-c895-q9-hom-falsifier.py",
     "source_sha256": "782087ca2931c7438dca514010b65cb152d90df18cc27ae86822dde0fea20ab6",

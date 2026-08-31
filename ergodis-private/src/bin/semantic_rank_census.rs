@@ -4,7 +4,7 @@ use std::io::{self, Write};
 use std::path::PathBuf;
 use std::time::Instant;
 
-use clap::Parser;
+use clap::{Parser, ValueEnum};
 use ergodis_private::landed_rank_adapter::{
     q9_channel_system, q9_extra_channel_system, GENERATOR_NAMES, SOURCE_SHA256,
 };
@@ -15,6 +15,19 @@ use serde::Serialize;
 struct Args {
     #[arg(long)]
     output: Option<PathBuf>,
+
+    /// Run only one allocation-free rank kernel for hardware-counter isolation.
+    #[arg(long, value_enum)]
+    replay_kernel: Option<ReplayKernel>,
+
+    #[arg(long, default_value_t = 200_000)]
+    kernel_rounds: usize,
+}
+
+#[derive(Clone, Copy, ValueEnum)]
+enum ReplayKernel {
+    Raw,
+    Core,
 }
 
 #[derive(Serialize)]
@@ -63,6 +76,27 @@ const LANDED_CHANNELS: [([usize; 2], usize, usize, usize, usize); 5] = [
     ([2, 2], 90, 0, 3, 3),
 ];
 
+fn run_replay_kernel(
+    kernel: ReplayKernel,
+    rounds: usize,
+    system: &ergodis_private::semantic_rank::Gf9BlockSystem,
+    certificate: &ergodis_private::semantic_rank::Gf9BlockSystem,
+    rank: usize,
+) {
+    assert!(rounds > 0);
+    let (selected, mask) = match kernel {
+        ReplayKernel::Raw => (system, 0b1111),
+        ReplayKernel::Core => (certificate, 1),
+    };
+    let mut workspace = Gf9RankWorkspace::new(selected.row_count(), selected.columns());
+    let mut checksum = 0_usize;
+    for _ in 0..rounds {
+        checksum = checksum.wrapping_add(black_box(workspace.rank_blocks(selected, mask)));
+    }
+    assert_eq!(checksum, rank.wrapping_mul(rounds));
+    black_box(checksum);
+}
+
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
     let system = q9_extra_channel_system();
@@ -72,6 +106,10 @@ fn main() -> anyhow::Result<()> {
     let certificate = system
         .select_rows(&core.independent_rows)
         .map_err(|message| anyhow::anyhow!(message))?;
+    if let Some(kernel) = args.replay_kernel {
+        run_replay_kernel(kernel, args.kernel_rounds, &system, &certificate, core.rank);
+        return Ok(());
+    }
     let replay_rounds = 2_000;
     let mut raw_workspace = Gf9RankWorkspace::new(system.row_count(), system.columns());
     let mut core_workspace = Gf9RankWorkspace::new(certificate.row_count(), certificate.columns());

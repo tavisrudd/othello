@@ -101,6 +101,26 @@ sub-millisecond absolute time but that the mathematical certificate reduction
 produces an almost proportional replay reduction while preserving exact
 source-row witnesses.
 
+The census binary also has an isolated `--replay-kernel raw|core` counter mode.
+It performs no serialization or control-corpus work, allocates its workspace
+before the timed loop, and makes every replay allocation-free.  Five
+`perf stat` repetitions pinned to CPU 2, with 500,000 replays per process,
+measured:
+
+| counter | raw | compiled core | raw/core |
+|---|---:|---:|---:|
+| cycles | 17.111 B | 4.767 B | **3.589x** |
+| instructions | 137.730 B | 39.689 B | **3.470x** |
+| branches | 29.806 B | 8.400 B | **3.548x** |
+| branch misses | 4.546 M | 1.039 M | **4.376x** |
+| elapsed | 3.719 s | 0.997 s | **3.729x** |
+
+The six counters were multiplexed at approximately 83.3% coverage; `perf`
+scaled the reported counts.  The instruction and branch reductions closely
+track the row-certificate reduction, directly supporting theorem-driven work
+elimination.  Cache counters were also sampled but are omitted from the claim
+because their five-run variance was high.
+
 Machine-readable evidence is in
 `ergodis-private/evidence/semantic-rank-census-v1.json`.
 
