@@ -216,6 +216,129 @@ def starters(m: int) -> int:
     return count
 
 
+# ------------------------------------------- order-(n+1) invariant plane model
+
+
+def build_plane(n: int, perms: list[list[int]]):
+    """Reconstruct the incidence structure from the wave-2B permutation model.
+
+    `perms[x-1][i]` is `pi_x(i)` for `x` in `1..p-1` and rows `i` in `0..n-2`.
+    Point orbits are numbered `0..n-1` with orbit 0 the point set of the fixed
+    line `L`; line orbits likewise with orbit 0 the pencil through the fixed
+    point `P`.  Returns (points, lines) with points as hashable labels.
+    """
+    p = n + 1
+    r = n - 1
+    # D[i][j] for i, j in 0..n-1, as sets of residues.
+    D = [[set() for _ in range(n)] for _ in range(n)]
+    for i in range(n):
+        D[i][0] = {0}
+    for j in range(n):
+        D[0][j] = {0}
+    for x in range(1, p):
+        pi = perms[x - 1]
+        for i in range(r):
+            D[i + 1][pi[i] + 1].add(x)
+
+    points = ["P"] + [(i, t) for i in range(n) for t in range(p)]
+    lines = [frozenset((0, t) for t in range(p))]
+    for j in range(n):
+        for s in range(p):
+            line = set()
+            if j == 0:
+                line.add("P")
+            for i in range(n):
+                for d in D[i][j]:
+                    line.add((i, (s - d) % p))
+            lines.append(frozenset(line))
+    return points, lines
+
+
+def verify_plane(n: int, perms: list[list[int]]) -> dict:
+    """Check the projective-plane axioms directly on the reconstructed object."""
+    p = n + 1
+    points, lines = build_plane(n, perms)
+    v = n * n + n + 1
+    report = {
+        "points": len(points),
+        "lines": len(lines),
+        "expected": v,
+        "distinct_lines": len(set(lines)),
+    }
+    report["all_line_sizes_ok"] = all(len(l) == n + 1 for l in lines)
+    counts = {}
+    ok = True
+    for l in lines:
+        for a, b in itertools.combinations(sorted(l, key=str), 2):
+            key = (str(a), str(b))
+            counts[key] = counts.get(key, 0) + 1
+            if counts[key] > 1:
+                ok = False
+    report["every_pair_at_most_once"] = ok
+    report["pairs_covered"] = len(counts)
+    report["pairs_expected"] = v * (v - 1) // 2
+    report["is_projective_plane"] = (
+        ok
+        and report["all_line_sizes_ok"]
+        and len(points) == v
+        and len(lines) == v
+        and report["distinct_lines"] == v
+        and len(counts) == report["pairs_expected"]
+    )
+    # Hyperoval: a row whose column map is exactly two-to-one.
+    r = n - 1
+    hyper = []
+    for i in range(r):
+        fibres = {}
+        for x in range(1, p):
+            fibres.setdefault(perms[x - 1][i], []).append(x)
+        if all(len(f) == 2 for f in fibres.values()) and len(fibres) == (p - 1) // 2:
+            hyper.append(i)
+    report["hyperoval_rows"] = hyper
+    return report
+
+
+def conjugacy_class_counts(r: int) -> dict:
+    """Orbits of S_r on itself by conjugation, and by conjugation fixing point 0.
+
+    Verifies the wave-2B level-2 symmetry reduction by brute force: the driver
+    claims the class counts are the partitions of r, and the partitions of
+    r - l summed over the length l of the cycle through 0.
+    """
+    perms = list(itertools.permutations(range(r)))
+    stab = [p for p in perms if p[0] == 0]
+
+    def orbits(group):
+        seen, count = set(), 0
+        for pi in perms:
+            if pi in seen:
+                continue
+            count += 1
+            for rho in group:
+                inv = [0] * r
+                for a in range(r):
+                    inv[rho[a]] = a
+                seen.add(tuple(inv[pi[rho[a]]] for a in range(r)))
+        return count
+
+    def partitions(m):
+        if m == 0:
+            return 1
+        table = [1] + [0] * m
+        for part in range(1, m + 1):
+            for t in range(part, m + 1):
+                table[t] += table[t - part]
+        return table[m]
+
+    return {
+        "r": r,
+        "full_conjugation_orbits": orbits(perms),
+        "expected_full": partitions(r),
+        "stabilizer_conjugation_orbits": orbits(stab),
+        "expected_stabilizer": sum(partitions(r - lead) for lead in range(1, r + 1)),
+    }
+
+
 # ---------------------------------------------------------------------- main
 
 
@@ -313,6 +436,54 @@ def main() -> int:
             "nodes": rust["nodes"],
             "hall_failures": rust["hall_failures"],
         }
+
+    # 7. Wave 2B: reconstruct a plane from the permutation model and verify the
+    #    axioms directly, which validates the model itself.
+    invariant = {}
+    for tag in (
+        "inv-n4",
+        "inv-n4-hyp",
+        "inv-n6",
+        "inv-n6-hyp",
+        "inv-n10",
+        "inv-n12-hyperoval",
+        "inv-n12-general",
+    ):
+        path = args.cache / f"{tag}.json"
+        if not path.exists():
+            continue
+        rust = json.loads(path.read_text())
+        entry = {
+            "solutions": rust["solutions"],
+            "nodes": rust["nodes"],
+            "exhausted": rust["exhausted"],
+            "classes": rust.get("level_two_classes"),
+            "classes_exhausted": rust.get("classes_exhausted"),
+            "verdict": rust["verdict"],
+        }
+        if rust.get("example"):
+            entry["reconstruction"] = verify_plane(rust["n"], rust["example"])
+        invariant[tag] = entry
+    if invariant:
+        report["invariant_plane_model"] = invariant
+        # The n = 4 solution must reconstruct a genuine projective plane, and
+        # the n = 6 searches must agree with the wave-2A orbit-matrix result.
+        for tag in ("inv-n4", "inv-n4-hyp"):
+            if tag in invariant and "reconstruction" in invariant[tag]:
+                assert invariant[tag]["reconstruction"]["is_projective_plane"]
+        for tag in ("inv-n6", "inv-n6-hyp"):
+            if tag in invariant:
+                assert invariant[tag]["solutions"] == 0
+                assert invariant[tag]["exhausted"]
+
+    # 8. Brute-force check of the wave-2B level-2 symmetry reduction.
+    sym = {}
+    for r in (3, 5, 6, 7):
+        counts = conjugacy_class_counts(r)
+        assert counts["full_conjugation_orbits"] == counts["expected_full"]
+        assert counts["stabilizer_conjugation_orbits"] == counts["expected_stabilizer"]
+        sym[f"r{r}"] = counts
+    report["level_two_symmetry_reduction"] = sym
 
     print(json.dumps(report, indent=2, sort_keys=True))
     return 0

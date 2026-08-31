@@ -155,6 +155,22 @@ report.
   no longer compiles** — css_distance.rs mid-edit from a concurrent
   session (three undefined BOUND_PULSE_* constants); campaign results
   all come from pre-breakage binaries, core untouched by us.
+- **Wave 2B, order-13-invariant hyperoval (landed ~04:45)** — appended to
+  the plane12 report. **Not eliminated, no sub-elimination** — stated as
+  the exact negative it is (0/139 level-2 classes closed at 400 s each;
+  depth-3 survivor counts certified: 2.04e9 hyperoval vs 8.2e8 general —
+  the hyperoval assumption HURTS, shrinking the symmetry group 56→139
+  classes). Kept: an exact reformulation (invariant plane = n
+  permutations covering n(n−1)² slots; invariant hyperoval = two-to-one
+  row whose fibres are the wave-2A starters), a lossless 11!→139
+  reduction (brute-verified r=3,5,6,7), end-to-end model validation
+  (PG(2,4) reconstructed; n=6 eliminated matching wave 2A; one
+  slot-collision bug found and fixed by the validation). Successor
+  identified as algebraic: FF*=12I over Z[ζ₁₃] with root-sum entries
+  (2 primitive root mod 13 ⇒ rigidity at 2). Labels: no novelty claim,
+  pending literature audit. **Blocker re-raised: the foreign
+  css_distance.rs edit now makes every ergodis-private binary
+  unbuildable** (built out of tree against unmodified hall_core).
 - **Wave 1B, transversal/CSS (landed ~23:45)** —
   `2026-08-30-c1018-hunt-transversal-css.md`; driver
   `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes
