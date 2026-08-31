@@ -591,8 +591,17 @@ census has none.  It does:
 | `r=9, q=13` | 364 in one orbit | 18 | ✓ nonzero |
 | `r=9, q=16` | 0 | **0** | ✓ |
 
-The counts differ because the sweep counts *points of one orbit lying in the
-fixed loci*, not orbit sizes: at `(9,13)` the single exceptional orbit of size
+One further check pins the sweep against a *stratum* count rather than a census
+count.  2026-08-30 §5.3f found 40 exceptional points on the `m = 2` stratum at
+`(11,13)`.  The fixed-locus sweep at that cell reports exactly 40 on its
+order-two split locus with eigenvalue `-1` — the odd-index stratum, which is
+that same subspace — while also reporting 1,070 more spread over five other
+loci that no stratum sweep had ever looked at, including 952 on a non-split
+order-two locus.  The old number is reproduced exactly and the new ones are
+what the lemma adds.
+
+The counts in the table above differ from census orbit sizes because the sweep
+counts *points of one orbit lying in the fixed loci*, not orbit sizes: at `(9,13)` the single exceptional orbit of size
 364 meets the loci in 18 points (4 on the `m = 3` stratum, 14 on a non-split
 order-2 locus, consistent with its `S_3` stabilizer containing both a
 three-cycle and involutions).  What matters is the zero/nonzero agreement, and
@@ -908,7 +917,7 @@ theorem's threshold, so that no field is left over:
 | 8  | 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32, 37, 41, 43 | 43 | 8, 9, 11 | **complete over all prime powers** |
 | 9  | <!-- R9FIXFIELDS --> | 53 | 9, 11, 13 | <!-- R9FIXSTATUS --> |
 | 10 | <!-- R10FIXFIELDS --> | 59 | 11, 13 | partial |
-| 11 | 11, 13 | — | 11, 13 | partial; no field-ranged theorem exists above `r = 10` |
+| 11 | 11, 13 | — | 11, 13 | partial; no field-ranged theorem exists above `r = 10`.  At `q = 13` the sweep finds 1,110 exceptional points across six loci, of which the 40 on the odd-index locus are exactly 2026-08-30 §5.3f's `m = 2` count |
 | 12 | 13 | — | 13 | partial; `k = 2` there, so the count is a boundary artifact |
 
 Each row's "exceptional at" is exact over the fields swept: the sweep is
