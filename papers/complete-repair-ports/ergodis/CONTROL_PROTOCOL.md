@@ -60,18 +60,14 @@ and derive the content address, then serializes directly through a buffered
 create-only file writer.  This trades one cheap serialization pass for bounded
 memory independent of the trace limit.
 
-## Proof-authorized plans
+## Proof authority
 
-The daemon advertises an exact allowlist in `proof_schemas`. A plan with role
-`necessary` is accepted only through presentation-bound authorized compilation:
-its proof handle must name an allowlisted theorem schema, match the manifested
-presentation hash, and reproduce the theorem's canonical predicate exactly.
-Ordinary compilation rejects `necessary` plans, and diagnostic or ordering
-plans reject attached proof handles. The first registered schema checks the
-nontrivial order-two or order-three character-energy budget of a bordered
-cyclic Goethals--Seidel tuple. The second checks membership in the exact
-multiplier-orbit/order-two-profile intersection for one presentation-bound
-cyclic subgroup shard. A frozen-batch fit is never a proof handle.
+The daemon currently advertises `proof_authority: false`. Plans may diagnose
+or order work, but no control-plane plan is authorized to prune the exact
+search. A fit to a frozen feature batch is evidence about that batch, not a
+proof. Any future pruning role must bind its predicate to independently
+verified feature semantics rather than trusting field names or presentation
+metadata.
 
 The reference Python client is `python/ergodis_client.py`.  It has no external
 dependencies, uses monotone request IDs, enforces the frame bound, and provides

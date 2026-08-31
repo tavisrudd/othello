@@ -1,8 +1,10 @@
 //! Deterministic bounded evolution of candidate sufficient conditions.
 //!
-//! This is campaign-side infrastructure, not a solver hot path. Candidates are
-//! ranked by exact false positives, covered true examples, and declared syntax
-//! cost; the complete trial sequence is retained for replay.
+//! This is a runner-neutral campaign engine, not a solver hot path. The intended
+//! live owner is a low-priority campaign-daemon worker; replay binaries may call
+//! it offline for deterministic acceptance tests. Candidates are ranked by exact
+//! false positives, covered true examples, and declared syntax cost; the complete
+//! trial sequence is retained for replay.
 
 use std::collections::BTreeSet;
 

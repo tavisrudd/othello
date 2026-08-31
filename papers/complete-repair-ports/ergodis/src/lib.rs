@@ -23,7 +23,6 @@ pub mod defect;
 pub mod family_response;
 pub mod field;
 pub mod group_action;
-pub mod hadamard;
 pub mod hall;
 pub mod incidence;
 pub mod integer_moments;
@@ -118,11 +117,6 @@ pub use group_action::{
     BinaryGlPresentationError, BinaryGlProbeAction, BinaryGlProbeError, BinaryGlRrefQuotient,
     BinaryRightLinearMap, FinitePermutationAction, OrbitCompileError, OrbitPartition,
     OrbitQuotientError, OrbitStorage,
-};
-pub use hadamard::{
-    compile_bordered_multiplier_strata, compile_bordered_order_two_profiles,
-    count_bordered_order_two_profile_domain, BorderedGsCharacterError, BorderedGsCharacterSector,
-    BorderedGsMultiplierStratum, BorderedGsOrderTwoProfile, CyclicMultiplierOrbitPartition,
 };
 pub use hall::{
     solve_hall, verify_hall_certificate, verify_hall_result, DenseHallGraph, HallError,
