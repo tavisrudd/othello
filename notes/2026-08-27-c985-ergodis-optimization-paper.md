@@ -211,6 +211,26 @@ as each coherent tranche lands.
    optimization frontier is Boolean/arithmetic fusion or a bounded native-code
    plan adapter, not more interpreter micro-tuning. Raw evidence is under
    `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-fusion/final-ab`.
+   Application translation is now measured against the exact public-source
+   snapshot in the standalone mirror: its `ergodis/src` tree matches monorepo
+   commit `056acfcf` (2026-08-27). A seven-round corrected fresh-process sweep
+   links both revisions to the identical old benchmark harness and preserves
+   work, states, and checksums on all eight README workloads. Across all 56
+   paired samples, old/current wall is 0.984x cold (`t=-0.69`) and 1.006x for
+   eight-solve warm batches (`t=0.27`): no suite-level application regression
+   or gain is established. Same-work long-loop counters expose the changes
+   hidden by process startup: Ceph ZDD improves 1.036x cycles/wall
+   (`t=2.30/2.36`) and vector node span improves 1.061x cycles and 1.057x wall
+   (`t=9.34/8.64`); tower, repair DAG, and GPU are neutral. QC-LDPC regresses
+   to 0.980x cycles and 0.983x wall (`t=-20.17/-15.33`), Hamming-outer is
+   0.992x wall (`t=-2.05`), and Azure is 0.995x cycles with wall below
+   resolution. The first sweep using today's enlarged benchmark dispatcher
+   showed a false 2--3% suite loss; holding the harness byte-identical removed
+   it, so benchmark-only parser growth must not be attributed to application
+   kernels. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/application-mirror-delta-056acfc`. The next
+   application-facing optimization gate is the isolated 2% QC regression;
+   preserve the Ceph/vector gains and require no loss on the other six cases.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and
