@@ -33,7 +33,25 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
    invariants as the next arithmetic shadows past the square class.
 4. **Automorphism groups of the induced colorings** and excess-automorphism
    marking-loss obstructions, family-level (Paper V's mechanism for all
-   \(m\)).
+   \(m\)). **Largely closed 2026-08-30** (marking-reconstruction report
+   below): the 4-set coloring is honestly \(PGL_2\)-invariant for every
+   \((d,q)\) (bracket weights are even — no twisted case), and there is a
+   clean dichotomy with no exceptional set beyond arithmetic: a constant
+   coloring has \(\mathrm{Aut}=\mathrm{Sym}(q+1)\), every nonconstant one
+   has exactly \(\mathrm{Aut}=P\Gamma L_2(q)\) (proof via 3-transitivity +
+   an odd \((q+1)\)-cycle and the 3-transitive classification; census of
+   881 \((m,q)\) pairs, \(q\le121\), zero partial collapses). Marking
+   fibre is uniformly \(\mathrm{Gal}(\mathbf F_q/\mathbf F_p)\) —
+   trivial over prime fields. Paper V's \(q=11\) harmonic design is
+   reproduced exactly and its \(9!\)-candidate check becomes a corollary.
+   Two new proved strata: \(r=2p^i\) (Frobenius-twist total collapse over
+   non-prime fields) and \(r=p+1\) over \(\mathbf F_{p^2}\) — the
+   **Baer-subline coloring = Miquelian inversive plane of order \(p\)**,
+   with the \(-1\) color absent; it is the unique refinement failure and
+   the unique query-complexity jump. \((47,30)\) is not
+   reconstruction-exceptional. Query bounds: \(\Theta(q\log q)\)
+   information-theoretic, an explicit \(O(q^2)\) adaptive strategy
+   sufficing except on Baer strata.
 5. **Exceptional harmonic/equianharmonic collapses** — structural location of
    \(\Phi_{2m,4}=0\) against \(I=0\), \(J=0\).
 6. **Exact marking fibres and query complexity** of the
@@ -161,6 +179,10 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
 
 ## Session reports
 
+- `../2026-08-30-c1014-marking-reconstruction.md` — invariance, Aut
+  dichotomy, uniform Galois fibre, Baer/Miquelian stratum, query bounds,
+  novelty boundary ("to our knowledge", audit gaps apply). Script:
+  `c1014_marking_reconstruction.py`.
 - `../2026-08-30-c1014-chevalley-weil-multiplicities.md` — proved
   \((a,b,c)\) closed form, dihedral-lift correction, product law for
   \(u^2\Phi\), genus-law theorem, explicit \(S_3\)-quotient models and
