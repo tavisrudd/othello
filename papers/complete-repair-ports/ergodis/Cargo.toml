@@ -104,6 +104,10 @@ harness = false
 name = "steering_gate"
 harness = false
 
+[[bench]]
+name = "character_sum"
+harness = false
+
 
 [profile.release]
 opt-level = 3

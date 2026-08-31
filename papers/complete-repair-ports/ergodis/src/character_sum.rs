@@ -18,6 +18,8 @@ use std::ops::Range;
 
 use thiserror::Error;
 
+use crate::prime_polynomial::{PrimePolynomialError, PrimePolynomialRecurrence};
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Error)]
 pub enum CharacterSumError {
     #[error("modulus is not an odd prime")]
@@ -34,6 +36,8 @@ pub enum CharacterSumError {
     InvalidCharacterOrder,
     #[error("multiplicative-character class is outside the character order")]
     InvalidCharacterClass,
+    #[error("polynomial recurrence belongs to another prime field")]
+    RecurrenceModulusMismatch,
 }
 
 /// Exact coefficients in the basis `1, zeta, ..., zeta^(order-1)`.
@@ -222,6 +226,22 @@ impl PrimeMultiplicativeCharacter {
         coefficients: &[u32],
     ) -> Result<RootOfUnityCensus, CharacterSumError> {
         self.polynomial_census_kernel_reduced::<false>(coefficients, 0)
+    }
+
+    /// Compile finite differences, then census with modular additions only.
+    pub fn polynomial_census_via_recurrence_reduced(
+        &self,
+        coefficients: &[u32],
+    ) -> Result<RootOfUnityCensus, CharacterSumError> {
+        let mut recurrence = compile_recurrence(self.modulus, coefficients)?;
+        let mut census = RootOfUnityCensus {
+            coefficients: vec![0; self.order as usize].into_boxed_slice(),
+            zero: 0,
+        };
+        while let Some(value) = recurrence.next_value() {
+            self.tally_class(value, &mut census);
+        }
+        Ok(census)
     }
 
     /// Census `chi(f(x))` only on one multiplicative coset of the input.
@@ -485,6 +505,31 @@ impl PrimeQuadraticCharacter {
         self.polynomial_census_range_reduced(0..self.modulus, coefficients)
     }
 
+    /// Compile finite differences, then census with modular additions only.
+    pub fn polynomial_census_via_recurrence_reduced(
+        &self,
+        coefficients: &[u32],
+    ) -> Result<CharacterCensus, CharacterSumError> {
+        let mut recurrence = compile_recurrence(self.modulus, coefficients)?;
+        self.polynomial_census_recurrence(&mut recurrence)
+    }
+
+    /// Census a presized recurrence; rewind and evaluation allocate nothing.
+    pub fn polynomial_census_recurrence(
+        &self,
+        recurrence: &mut PrimePolynomialRecurrence,
+    ) -> Result<CharacterCensus, CharacterSumError> {
+        if recurrence.modulus() != self.modulus {
+            return Err(CharacterSumError::RecurrenceModulusMismatch);
+        }
+        recurrence.rewind();
+        let mut census = CharacterCensus::default();
+        while let Some(value) = recurrence.next_value() {
+            self.tally_reduced(value, &mut census);
+        }
+        Ok(census)
+    }
+
     /// Census `chi(f(x))` on a field subrange, suitable for parallel splitting.
     pub fn polynomial_census_range_reduced(
         &self,
@@ -656,6 +701,16 @@ impl PrimeQuadraticCharacter {
             census.negative += 1;
         }
     }
+}
+
+fn compile_recurrence(
+    modulus: u32,
+    coefficients: &[u32],
+) -> Result<PrimePolynomialRecurrence, CharacterSumError> {
+    PrimePolynomialRecurrence::compile(modulus, coefficients).map_err(|error| match error {
+        PrimePolynomialError::NotPrime => CharacterSumError::NotOddPrime,
+        PrimePolynomialError::UnreducedCoefficient => CharacterSumError::UnreducedInput,
+    })
 }
 
 fn trimmed(mut polynomial: Vec<u32>) -> Vec<u32> {
@@ -863,6 +918,12 @@ mod tests {
         let character = PrimeQuadraticCharacter::new(5).unwrap();
         let coefficients = character.reduce_coefficients(&[1, 0, 1]);
         let full = character.polynomial_census_reduced(&coefficients).unwrap();
+        assert_eq!(
+            character
+                .polynomial_census_via_recurrence_reduced(&coefficients)
+                .unwrap(),
+            full
+        );
         assert_eq!((full.positive(), full.negative(), full.zero()), (1, 2, 2));
         assert_eq!(full.sum(), -1);
         let left = character
@@ -979,6 +1040,12 @@ mod tests {
             let polynomial = higher.reduce_coefficients(&[3, -2, 5, 1]);
             let expected = quadratic.polynomial_census_reduced(&polynomial).unwrap();
             let actual = higher.polynomial_census_reduced(&polynomial).unwrap();
+            assert_eq!(
+                higher
+                    .polynomial_census_via_recurrence_reduced(&polynomial)
+                    .unwrap(),
+                actual
+            );
             assert_eq!(actual.zero(), expected.zero());
             assert_eq!(actual.coefficients()[0], expected.positive());
             assert_eq!(actual.coefficients()[1], expected.negative());

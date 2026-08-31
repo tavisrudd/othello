@@ -8,8 +8,8 @@ use ergodis::{
     AlignmentSearchWorkspace, BinarySupportCandidate, CanonicalContextBasis, CompiledCssDistance,
     CostTable, CyclicOrbitLocks, DenseSelector, ExplicitBinarySupportProblem,
     FinitePermutationAction, Gf4, Matrix, PackedBinaryAction, PackedBinaryLinearMap, Prime,
-    PrimeQuadraticCharacter, RankBoundedContextCache, RankOneProbeCache, ResidualHittingWorkspace,
-    SparseSelector,
+    PrimePolynomialRecurrence, PrimeQuadraticCharacter, RankBoundedContextCache,
+    RankOneProbeCache, ResidualHittingWorkspace, SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -612,6 +612,27 @@ fn character_sum_census_allocates_nothing() {
                 .polynomial_census_reduced(&coefficients)
                 .unwrap()
                 .sum();
+        }
+        sum
+    });
+    assert_ne!(sum, 0);
+    assert_eq!(allocations, 0);
+}
+
+#[test]
+fn recurrence_character_sum_census_allocates_nothing_after_compilation() {
+    let character = PrimeQuadraticCharacter::new(97).unwrap();
+    let coefficients = character.reduce_coefficients(&[36, -108, 105, -36]);
+    let mut recurrence = PrimePolynomialRecurrence::compile(97, &coefficients).unwrap();
+    let expected = character.polynomial_census_reduced(&coefficients).unwrap();
+    let (sum, allocations) = tracked_allocations(|| {
+        let mut sum = 0;
+        for _ in 0..1_000 {
+            let census = character
+                .polynomial_census_recurrence(&mut recurrence)
+                .unwrap();
+            assert_eq!(census, expected);
+            sum += census.sum();
         }
         sum
     });

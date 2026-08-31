@@ -36,6 +36,7 @@ pub mod orbit;
 pub mod orbit_compile;
 pub mod ordered_resource;
 pub mod packed_ternary;
+pub mod prime_polynomial;
 pub mod projective;
 pub mod provenance;
 pub mod quadratic_window;
@@ -167,6 +168,9 @@ pub use ordered_resource::{
     FrozenParetoQueryPlan, OrderedMonoidCertificate, OrderedResourceError, ParetoFront,
     ParetoObservationTable, ParetoResponseDictionary, ParetoWitness, ParetoWitnessError,
     ParetoWorkspace, ValidatedParetoObjective, WitnessedParetoFront, WitnessedParetoWorkspace,
+};
+pub use prime_polynomial::{
+    reduce_prime_polynomial_function, PrimePolynomialError, PrimePolynomialRecurrence,
 };
 pub use quadratic_window::concave_quadratic_window;
 pub use query_design::{

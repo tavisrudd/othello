@@ -897,3 +897,22 @@ option mass `4`, and ordinary option loads ranging from `2` to `4`. Across its
 solver without the certificate (`140.506x` maximum), and beats reused-model
 single-worker CP-SAT in all 18 (`73.352x` median, `11.634x` minimum). This is a
 bounded deterministic crossover map, not a general SOTA claim.
+
+## Prime-polynomial recurrence diagnostic
+
+The `character_sum` Criterion target compares the existing exact Horner
+census with the same census driven by a compiled forward-difference
+recurrence. Both paths use the packed quadratic-character table and return the
+same witness. On the quiet 2026-08-30 host, Rust 1.87 release/LTO, one-second
+warmup, two-second measurement, and 15 samples at `p=65,537`, degree 14:
+
+| Exact evaluator | Criterion estimate | Throughput |
+|---|---:|---:|
+| Horner | 2.4463 ms | 26.790 Melem/s |
+| finite differences | 684.71 us | 95.715 Melem/s |
+
+The within-harness ratio is `3.573x`. This is a diagnostic A/B for the new
+alternative evaluator, not a replacement crossover claim: compilation cost,
+degree, modulus, and repetition count determine which entry point is best.
+The presized recurrence census has a separate allocator regression requiring
+zero allocations across 1,000 complete rewinds and evaluations.

@@ -106,18 +106,14 @@ successive-halving scorecards remain open.
 
 ## Highest-EV remaining kernels
 
-1. **Finite polynomial algebra.** Extend the landed derivative/GCD preflight
-   to squarefree factor degrees, reduction modulo `x^p-x`, and recurrence
-   compilation. This prevents callers from using symbolic systems merely to
-   shape a character-sum request.
-2. **Typed linear-constraint closure.** Compile small incidence/interpolation
+1. **Typed linear-constraint closure.** Compile small incidence/interpolation
    identities and propagate equality, parity, and pencil-membership closure.
    C1015 is a strong private fixture; public semantics should be generic
    finite-module constraints.
-3. **Compact coherent transcripts.** The deterministic final-color replay is
+2. **Compact coherent transcripts.** The deterministic final-color replay is
    exact, but large public certificates should stream refinement splits or
    intersection tables rather than duplicate all compiler work.
-4. **General exact query optimization.** The pair-query triple-factor case is
+3. **General exact query optimization.** The pair-query triple-factor case is
    theorem-optimal and the generic constructors always emit exact replayable
    strategies, but arbitrary-mask minimum nonadaptive selection and
    minimum-depth adaptive trees remain bounded exact-search backends.
@@ -132,6 +128,15 @@ its coefficient difference is regression-checked against
 the pre-existing packed quadratic-character implementation. This makes the
 classical quadratic path a specialization while preserving its denser one-bit
 representation and faster dedicated tally loop.
+
+The first finite-polynomial slice is also landed. Exact reduction modulo
+`x^p-x` produces the canonical degree-below-`p` polynomial function, and a
+presized forward-difference state enumerates the whole field using modular
+additions only. The recurrence is iterative, rewinds without allocation, and
+feeds the existing quadratic and higher-character censuses. On the degree-14,
+`p=65,537` Criterion control it reduces the quadratic census from 2.4463 ms to
+684.71 us (`3.573x`) with identical output. Squarefree factor-degree profiles
+and general polynomial remainder arithmetic remain open.
 
 ## Acceptance and non-goals
 
