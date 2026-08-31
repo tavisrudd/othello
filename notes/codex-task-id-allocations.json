@@ -3914,8 +3914,17 @@
       "last": 1012,
       "purpose": "sparse-shadow reconstruction/no-go theorem and literature audit",
       "sequence": 435
+    },
+    {
+      "count": 2,
+      "first": 1013,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 1014,
+      "purpose": "deep consequences and uses audit for classical Wronskian Gram mechanism and downstream arithmetic reconstruction hierarchy",
+      "sequence": 436
     }
   ],
-  "next_id": 1013,
+  "next_id": 1015,
   "schema": "codex-task-id-allocations-v1"
 }
