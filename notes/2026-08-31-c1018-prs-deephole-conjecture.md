@@ -521,6 +521,84 @@ order-2 locus, consistent with its `S_3` stabilizer containing both a
 three-cycle and involutions).  What matters is the zero/nonzero agreement, and
 it is exact on all ten cells.
 
+### 5e. What the reduction turns into a complete statement
+
+The reduction composes with the imported field-ranged theorems in a way the
+census alone never could.  `notes/2026-07-23-c513-prs-redundancy-eight.md`
+proves that for **every** prime power `q ≥ 43` the deep syndromes at `r = 8` are
+exactly the persistent families; the companion results give `q ≥ 53` at `r = 9`
+and `q ≥ 59` at `r = 10`.  Below those thresholds there are only finitely many
+prime powers, and the fixed-locus sweep decides each of them for the whole
+non-regular class in seconds.  So sweeping the finite lists
+
+```text
+r = 8 :  q ∈ {8,9,11,13,16,17,19,23,25,27,29,31,32,37,41,43}
+r = 9 :  q ∈ {9,…,53}          r = 10 : q ∈ {11,…,59}
+```
+
+closes the non-regular class **at every prime power, with no residual field
+range** — a complete classification rather than a bounded verification.
+
+### 5f. The reduction immediately found something the census taxonomy had ruled out
+
+Applied at `r = 10`, the sweep reports **six exceptional points at `q = 13`** —
+and `r = 10` is the redundancy 2026-08-30 §5.3f singled out as having *no
+cyclic-pullback carrier at all*, because `r-3 = 7` is prime and the `m = 7`
+stratum was swept clean at eight fields including both least admissible ones.
+
+The points are, on the two order-2 split loci (which are exchanged by the
+inversion `t ↦ 1/t`, so they are the same orbit seen twice),
+
+```text
+(1,0,0,0,0,0,0,0,c,0)  and  (0,1,0,0,0,0,0,0,0,c),    c ∈ {7,8,11} ⊂ F_13^* ,
+```
+
+i.e. as binary nonics of degree `d = 9`
+
+```text
+s  =  Y ( Y^8 + c X^8 )  =  Y · G(X^4, Y^4),     G(z,w) = w^2 + c z^2 .
+```
+
+Independent Python, computing the coset weight from its definition and closing
+the orbit itself, confirms: `w(s) = 9 = ρ`, so `s` is **deep**; apolar degree 3
+with a one-dimensional kernel spanned by the cubic `x`, root type "double at ∞
+plus simple at 0", no split squarefree member, so `s` is **outside `P_10`**;
+orbit size 546 in `PGL_2(13)` of order 2184, stabilizer of order 4 with element
+orders `{1,2,4,4}`, i.e. **cyclic `C_4`**; and the orbit meets the loci in
+exactly those six points.
+
+Two consequences.
+
+1. **`13 ∈ X(10)`.**  Redundancy ten does have exceptional deep holes, and the
+   2026-08-30 reading — "redundancy ten is the first redundancy tested where the
+   mechanism is simply absent" — is **wrong**.  The mechanism was there; the
+   search was looking at the wrong stratum.
+2. **The carrier family is larger than Conjecture D′ says.**  Writing a stratum
+   point as `X^a Y^b G(X^m,Y^m)` with `a + b + m(M-1) = d`, 2026-08-30 §5.3f
+   argued that deepness forces `a = b = 1`, hence `m | r-3`.  This orbit has
+   `(a,b) = (0,1)` and `m = 4 | r-2 = 8`.  So there are (at least) two carrier
+   families:
+
+   | `(a,b)` | divisibility | fires at |
+   |---|---|---|
+   | `(1,1)` | `m \| r-3` | `(6,3)@7`, `(8,5)@11`, `(9,3)@13`, `(11,4)@13`, `(12,3)@13` |
+   | `(0,1)` and its mirror `(1,0)` | `m \| r-2` | `(10,4)@13` |
+
+   Both obey D′'s field law: `q = 13` is the least prime power with `4 | q-1`
+   and `q ≥ r-1 = 9`.  And Conjecture E′'s cut holds verbatim: `c = s_8/s_0`
+   takes the values `{7,8,11}`, which is exactly the class `C_3` of
+   `F_13^*/(F_13^*)^4` — the one class that the two `(11,13,m=4)` orbits did
+   *not* use.
+
+The taxonomy correction is the point.  A census at `(10,13)` would have found
+this orbit too, but `|PG(9,13)| = 1.15·10^{10}` and it was never run before this
+wave; the stratum sweeps that *were* cheap enough all looked at `a = b = 1`
+because a heuristic said to.  The lemma removes the heuristic: it names every
+subspace that can possibly contain a non-regular orbit, so nothing of that class
+can be missed again.
+
+<!-- FIXSWEEP RESULT -->
+
 **What this replaces, and what it does not.**  It replaces the census as the
 tool for the entire non-regular class, at every field, with a proof rather than
 an enumeration — the `r = 8` band cells that each cost minutes and gigabytes as
