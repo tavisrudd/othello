@@ -452,11 +452,22 @@ logical gate of Clifford-hierarchy level 3 or higher — that is, it has no
 transversal diagonal non-Clifford gate at any phase whatsoever. Nothing was
 skipped: the row cap was never hit at these lengths.
 
-An `n = 9` pass restricted to `wX ≤ 6` was launched and had not returned within
-this wave's budget, so **it contributes nothing to the statement above** and no
-partial result from it is claimed. Resuming it is the cheapest way to extend the
-certified length by one:
-`./target/release/c1018_level_census --census 9 --max-check-weight 6 --threads 16`.
+An `n = 9` pass restricted to `wX ≤ 6` was launched and was still running when
+this wave's budget expired, so **it contributes nothing to the statement above**
+and no partial result from it is claimed. It writes its table to
+`~/.cache/ergodis/c1018/census-n9-w6.txt` only on completion, so that file is
+either a bare header (unfinished) or a complete exhaustive result — it is never
+a partial one, and it can be read at face value whenever it lands. Extending the
+certified length by one is exactly:
+
+```
+./target/release/c1018_level_census --census 9 --max-check-weight 6 --threads 16
+```
+
+If that proves too slow, `--max-check-weight 4` covers the region where a
+counterexample would actually matter — the observed threshold puts level 3 at
+`wX ≥ 8`, so `wX ≤ 4` is the deepest part of the predicted no-go zone and is far
+cheaper to sweep.
 
 Two sharper corollaries fall out of the same census:
 
