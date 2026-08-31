@@ -352,7 +352,12 @@ fn split_squarefree(f: &Field, l: &[u8], j: usize, roots: &mut Vec<usize>) -> bo
 
 /// Enumerate the projective points of the span of `basis` in leading-one normal
 /// form, calling `visit` on each; stops at the first `true`.
-fn for_each_projective_point<Fn_>(f: &Field, basis: &[Vec<u8>], buf: &mut [u8], mut visit: Fn_) -> bool
+fn for_each_projective_point<Fn_>(
+    f: &Field,
+    basis: &[Vec<u8>],
+    buf: &mut [u8],
+    mut visit: Fn_,
+) -> bool
 where
     Fn_: FnMut(&[u8]) -> bool,
 {
@@ -686,7 +691,8 @@ fn worker(
         }
         let hi = (lo + CHUNK).min(n);
         for start in lo..hi {
-            if visited[(start / 64) as usize].load(Ordering::Relaxed) & (1u64 << (start % 64)) != 0 {
+            if visited[(start / 64) as usize].load(Ordering::Relaxed) & (1u64 << (start % 64)) != 0
+            {
                 continue;
             }
             orbit.clear();
@@ -786,8 +792,7 @@ fn stratum_sweep(
     std::thread::scope(|scope| {
         let mut handles = Vec::new();
         for _ in 0..threads {
-            let (f, sub, indices, cursor, failures) =
-                (f, &sub, &indices, &cursor, &failures);
+            let (f, sub, indices, cursor, failures) = (f, &sub, &indices, &cursor, &failures);
             handles.push(scope.spawn(move || {
                 let mut hist = vec![0u64; d + 2];
                 let mut examples: Vec<(Vec<u8>, usize, usize, usize)> = Vec::new();
