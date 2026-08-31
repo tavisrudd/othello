@@ -339,6 +339,33 @@ cyclic-quintic carrier above.  The two regular orbits remain unidentified and
 are invisible to every stratum sweep, exactly as 2026-08-30 §5.3f's scope note
 says.
 
+### 5b′. The redundancy-five carrier is empty, and the strata are nested
+
+`r = 5` has `r-3 = 2`, so `m = 2` on the stratum `{1,3}` is its only
+cyclic-pullback carrier, admissible for every odd `q ≥ 4`.  Exhaustive sweeps:
+
+| `q` | 5 | 7 | 9 | 11 | 13 | 17 | 19 | 23 | 25 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| stratum points | 6 | 8 | 10 | 12 | 14 | 18 | 20 | 24 | 26 |
+| deep | 4 | 5 | 6 | 7 | 8 | 10 | 11 | 13 | 14 |
+| **exceptional** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+Every deep stratum point is persistent, at every field, and the deep count is
+exactly `(q+3)/2`.  So `(5,2)` is a **fourth empty pair**, and it matters more
+than the others: `X(5) = {7,8,9,11,13,17,19}` is the largest exceptional band of
+any redundancy, and *none* of it comes from a cyclic-pullback carrier.  The
+`r = 5` sporadics — C491's, classified there by branch divisor — are a different
+mechanism, and they are the sole reason Conjecture B′ needed a bound of 23
+rather than 16.
+
+One caveat on the carrier taxonomy that the data force.  The strata are nested:
+`{i ≡ 1 mod m'} ⊆ {i ≡ 1 mod m}` whenever `m | m'`, so the `m = 2` stratum
+contains every even-`m` stratum, and the `m = 3` stratum contains the `m = 6`
+one.  That is why 2026-08-30 §5.3f found 40 exceptional points on the `m = 2`
+stratum at `(11,13)` containing the 12 on the `m = 4` stratum.  Statements about
+"the `m` carrier" are therefore only sharp when phrased through the orbit
+stabilizer, which is what §5c does, rather than through stratum membership.
+
 ### 5c. The stabilizer is not governed by the parity of `m`
 
 Stabilizers of carrier orbits, all computed independently in Python:
