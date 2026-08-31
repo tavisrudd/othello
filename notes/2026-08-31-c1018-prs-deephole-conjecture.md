@@ -1065,5 +1065,38 @@ python3 notes/2026-08-31-c1018-prs-certificate.py check $C \
 
 ## 10. Status
 
-<!-- STATUS -->
+**Complete.**
+
+* The re-baseline of both drivers against the new Ergodis core, including the
+  `(9,13)` falsifying witness reproduced representative-for-representative, and
+  the closure of the GF(2^h) field-labelling hazard by construction (§1, §2).
+* The three redundancy-nine cells that were out of budget on 2026-08-30:
+  `q = 16, 17, 19` are now exhaustive censuses of 4.58, 7.41 and 17.9 billion
+  projective directions, all clean, pinning `q_0(9) = 16` (§4).
+* The `m = 5` discriminator at `r = 13`, answered negatively at both its least
+  admissible fields, and the stabilizer question answered outright by the
+  cheaper `(8,11,m=5)` cell (§5a–§5c).
+* The **fixed-locus lemma** and its implementation: a proved, complete search of
+  every orbit with nontrivial stabilizer, at `O(q^{⌈(d+1)/2⌉-1})` instead of
+  `O(q^d)`, validated zero-for-zero against ten census cells (§5d).
+* The landed conjecture, in three statements with exact domains, exact
+  boundaries and falsifiers (§6).
+
+**Partial.**
+
+* The redundancy-eight threshold band as a *census*: the regular class is
+  decided up to <!-- R8CENSUSTOP -->, and the fields above that rest on the
+  fixed-locus sweep plus C513's theorem, which together leave only the regular
+  class open there.
+* Redundancy ten: two censuses (`q = 11, 13`) and a fixed-locus sweep to the
+  proved threshold; no census above `q = 13`.
+* Redundancies 11 and above: fixed-locus sweeps only, and those run out of
+  budget around `r = 13`, where the order-two locus is already `q^6` points.
+
+**Not attempted.**
+
+* Any reduction for the regular class.  §8 item 11 records the Borel normal form
+  as the concrete next move and its cost.
+* A proof of the Lang–Weil count sketched in §7, which is what would turn the
+  "one field per carrier" law from an observation into a theorem.
 
