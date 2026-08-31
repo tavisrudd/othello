@@ -31,6 +31,18 @@ projects, ranked by Ergodis fit):
   (report `2026-08-30-c1018-hunt-prs-deepholes.md`), sub B on target 2
   (report `2026-08-30-c1018-hunt-transversal-css.md`).
 
+## Overnight pipeline (post-scout, ~00:15)
+
+Scout report `2026-08-30-c1018-target-scout.md` ranked the remaining
+targets (Hadamard excluded — other agent). Launched per ranking: wave 3A =
+close/narrow the exact distance of the bivariate-bicycle `[[756,16,d]]`
+(the snapshot's one explicitly unfinished exact computation); wave 3B =
+sweep published qLDPC tables for distances stated only as upper bounds.
+Queued next: transversal level-vs-check-weight no-go census (resumes the
+wave-1B sub), PRS redundancy-10, coordinated M(18) only if the user
+approves executing queued C1000(a)/C737. Rejected list in the scout
+report.
+
 ## Results
 
 - **Wave 1A, PRS deep holes (landed ~00:45)** —
