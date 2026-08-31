@@ -447,8 +447,8 @@ fn verify_witness(
             },
             state,
         );
-        for coordinate in 0..2 {
-            resource[coordinate] += weights[action][coordinate];
+        for (total, increment) in resource.iter_mut().zip(weights[action]) {
+            *total += increment;
         }
     }
     assert_eq!(witness, 0);
