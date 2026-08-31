@@ -2,7 +2,9 @@
 
 **Lane:** `gem-mining`
 **Date:** 2026-08-31
-**Status:** in progress (written incrementally)
+**Status:** complete for the re-baseline, the redundancy-nine band `16 ≤ q ≤ 19`,
+the `r = 13` carrier discriminator, the first redundancy-ten censuses, and the
+redundancy-eight threshold band as far as memory reaches.  See §10.
 
 Predecessor report: `notes/2026-08-30-c1018-hunt-prs-deepholes.md` (authority on
 setup, conventions, prior art, and every cell run before today).  Notation,
@@ -89,7 +91,15 @@ certificates.
 | 8 | 11 | 21,435,888  | 7 | 3,696   | 5     | prime | ✓ |
 | 8 | 13 | 67,977,560  | 7 | 1,274   | 5     | prime | ✓ |
 
-All twenty cells reproduce exactly.  The `(9,13)` falsifying witness reproduces
+All twenty cells reproduce exactly.  So do the four classical redundancy-three
+cells (`q = 5,7,8,9` giving deep `25, 49, 1, 81`, with `ρ = 3` and the single
+nucleus point at `q = 8`) and the whole redundancy-four sweep over
+`q ∈ {4,5,7,8,9,11,13,16,25,27,32,64}`, where deep `= q(q+1)^2/2` with zero
+exceptional excess in every cell and the orbit counts
+`2,3,2,3,3,3,2,2,2,3,3,2` match 2026-08-30 §5.2 term by term.  `X(4) = ∅`
+stands.
+
+The `(9,13)` falsifying witness reproduces
 representative-for-representative, not merely count-for-count: the four
 `PGL_2(13)`-orbits of deep syndromes in `PG(8,13)` come back as
 
@@ -237,6 +247,25 @@ exceptional deep hole anywhere in `PG(8,q)`, with or without cyclic symmetry.
 That is the exact upgrade from stratum-only to full-space evidence that item 2
 was for.
 
+## 4b. The redundancy-eight threshold band (item 4)
+
+`notes/2026-07-23-c513-prs-redundancy-eight.md` proves that for every prime
+power `q ≥ 43` the deep syndromes of `PRS(q-7)` are exactly the persistent
+tangent and conjugate-secant families, and records two open items: *"What
+happens below 43?  No bounded census or exceptional normal-form theorem was
+attempted"* and *"Is 43 sharp?"*.  2026-08-30 answered the first over
+`8 ≤ q ≤ 19` and left `X(8) ∩ [23,42]` — the fields `23, 25, 27, 29, 31, 32,
+37, 41` — untested.  Exhaustive censuses of the full `PG(7,q)`:
+
+<!-- R8BAND TABLE -->
+
+## 4c. First redundancy-ten censuses
+
+`r = 10` was recorded on 2026-08-30 §5.5 item 5 as **not searched at all**, with
+Conjecture C's prediction `X(10) ⊆ {11}` untested.  The new driver reaches it.
+
+<!-- R10 TABLE -->
+
 ## 5. The cyclic-pullback carriers (item 3, and what it settled)
 
 2026-08-30 §5.3f left Conjecture D′ with one escape clause — some `(r,m)` pairs
@@ -339,8 +368,10 @@ the other two; it is a condition on `G`, not on the parity of `m`.
 ## 6. The landed conjecture (item 5)
 
 Notation.  `X(r) = { q : q ≥ r-1 a prime power, PRS_{q+1-r}(q) has a deep hole
-outside P_r ∪ M^max_{r,p} }`, and `q_0(r) = 1 + max X(r)` (with `q_0(r) = r-1`
-when `X(r) = ∅`).  `P_r` is the persistent locus — deep part the tangent and
+outside P_r ∪ M^max_{r,p} }`, and `q_0(r)` = the least prime power beyond which
+no exceptional deep hole occurs, i.e. `1 + max X(r)` rounded up to the next
+prime power, with the 2026-08-30 convention `q_0(4) = 4` when `X(r) = ∅`.
+`P_r` is the persistent locus — deep part the tangent and
 conjugate-secant families, of total size `q(q+1)^2/2` — and `M^max_{r,p}` is the
 modular Lucas carrier `P⟨ e_i : C(r-1,i) ≡ 0 (mod p) ⟩`.
 
