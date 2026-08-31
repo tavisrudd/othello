@@ -1,11 +1,14 @@
 # C1018 — Sharpened PRS deep-hole conjectures and exact computational test
 
 **Lane:** `gem-mining`
-**Date:** 2026-08-30
+**Date:** 2026-08-30, extended 2026-08-31
 **Status:** complete for the redundancy-four sweep, the redundancy-eight band
-`8 ≤ q ≤ 19`, the certificate-reproduction gate, and the redundancy-nine
-decider (which **falsified** Conjecture B — see §5.3c); partial for the
-replacement Conjecture B′ and for redundancy ten.  See §8.
+`8 ≤ q ≤ 19`, the certificate-reproduction gate, the redundancy-nine decider
+(which **falsified** Conjecture B — §5.3c), and the structural identification
+and recurrence sweep of the resulting exceptional orbit (§5.3d).  Partial for
+the replacement Conjecture B′ and for redundancy ten; the three redundancy-nine
+census cells at `q = 16, 17, 19` are recorded as out of budget in §5.3e.
+See §8.
 
 Scope note (crosswalk discipline): this task makes **no claim about the MDS
 conjecture**.  It works entirely inside the projective Reed--Solomon (PRS)
@@ -229,6 +232,14 @@ precisely in the small-`q`, large-`r` corner that matters here.  Measured:
 `q=13, r=8` (`N = 67,977,560`) in 23 s and 76 MB; `q=16, r=8`
 (`N = 286,331,153`) in about 2 min.
 
+**Stratum mode** (`--stratum-mod M --stratum-class A`) skips the orbit census
+and instead sweeps only `{ s : s_i = 0 unless i ≡ A (mod M) }`, the fixed locus
+of the order-`M` diagonal torus element `t ↦ ζ_M t`.  That locus is a
+projective subspace of dimension `|{i ≡ A}| - 1`, so it is exhaustively
+searchable at field orders far beyond the reach of a full `PG(d,q)` census; the
+mode reports the exact weight histogram over the stratum together with the deep
+and exceptional (catalecticant rank `≥ 3`) counts and example points.
+
 **Independent verifier.**  `notes/2026-08-30-c1018-prs-helper.py` recomputes
 the same quantities by a deliberately different route: a different irreducible
 polynomial (last rather than first in code order, so the element labelling
@@ -246,9 +257,14 @@ cd ergodis-private && cargo build --release --bin c1018_prs_deephole
 ./target/release/c1018_prs_deephole --q 11 --r 5 --ergodis-crosscheck
 ./target/release/c1018_prs_deephole --q 13 --r 6 --semilinear
 
+# exhaustive sweep of the S_3-fixed stratum {i ≡ 1 mod 3}
+./target/release/c1018_prs_deephole --q 13 --r 9 --stratum-mod 3 --stratum-class 1
+
 # independent Python re-derivation from the definition
 python3 notes/2026-08-30-c1018-prs-helper.py census 8 5
 python3 notes/2026-08-30-c1018-prs-helper.py verify 13 8 ~/.cache/ergodis/c1018/r8-q13.json
+python3 notes/2026-08-30-c1018-prs-helper.py stratum 13 9 3 1
+python3 notes/2026-08-30-c1018-prs-helper.py structure 13 9 1,0,1,2,4,12,4,3,6
 ```
 
 Every census cell reported below, reproduced from a clean tree:
@@ -485,6 +501,149 @@ classifications, and it still contradicts the shape of the proved thresholds
 `Q*_r = 6r-16+⌊2√(6r-18)⌋`, which grow without bound.  It is weaker than B but
 survives the falsification, and it is what the `r = 9` result actually supports.
 
+### 5.3d (2026-08-31, follow-up) What the exceptional orbit is, and where it recurs
+
+#### The orbit is the `S_3`-fixed stratum
+
+Running the orbit through the group directly (`structure` subcommand of the
+helper) gives, for the 364-point orbit at `(r,q) = (9,13)`:
+
+* stabilizer order 6, with element orders `1, 2, 2, 2, 3, 3` — three
+  involutions and two elements of order three, so the stabilizer is **`S_3`**,
+  not `C_6`;
+* the orbit contains exactly **four** points of minimal support, all supported
+  on the index set `{1, 4, 7}`:
+  `(0,1,0,0,1,0,0,8,0)`, `(0,1,0,0,5,0,0,5,0)`, `(0,1,0,0,8,0,0,5,0)`,
+  `(0,1,0,0,12,0,0,8,0)`;
+* the apolar quintic pencil has 14 members with root-type profile
+  `6 × (no rational root)`, `6 × (one simple rational root)`,
+  `2 × (2+1+1+1)` — **no split squarefree member**, and the two fibres that are
+  totally rational are ramified rather than squarefree.
+
+The support condition is forced, not accidental.  `s_i = 0` unless
+`i ≡ a (mod 3)` is exactly the fixed locus of the order-three diagonal torus
+element `t ↦ ζ_3 t`, which exists when `3 | q-1`.  The extra involution
+`t ↦ μ/t` acts by `s_i ↦ μ^i s_{d-i}`, so it preserves the class of `a` only
+when `d ≡ 2a (mod 3)`; with `d = 8` that selects `a = 1`.  Confirmed directly:
+sweeping the other two classes at `(9,13)` gives `{0,3,6}` → 0 deep points and
+`{2,5,8}` → 0 deep points, against `{1,4,7}` → 6 deep, 4 exceptional.
+
+#### Closed membership condition
+
+The stratum `{1,4,7}` is a plane `PG(2,13)` of 183 points.  Its exact weight
+census is `w = 3` for 4 points, `w = 6` for 89, `w = 7` for 84, `w = 8` for 6.
+The 6 deep points are 2 persistent plus the 4 above.  Two invariants cut them
+out.  Under the torus `s_i ↦ ζ^i s_i` and projective scaling,
+
+```text
+c(s) = s_4 / s_1      is well defined in  F_q^* / (F_q^*)^3 ,
+u(s) = s_4^2 / (s_1 s_7)   is absolutely invariant
+                            (also fixed by the involution t ↦ μ/t).
+```
+
+Verified on all four points: `c ∈ {1, 5, 8, 12}` — precisely the cubes of
+`F_13^*` — and `u = 5` in every case, with `u^2 = 12 = -1`, so `u` is a
+primitive fourth root of unity.  Neither condition alone suffices: `u = 5`
+alone admits 12 stratum points and `c` a cube alone admits 48, while their
+conjunction admits exactly the 4.  So
+
+> **Membership.**  A syndrome lies in the exceptional orbit at `(9,13)` iff it
+> is `PGL_2(13)`-equivalent to a point of the `{1,4,7}` stratum with
+> `s_1 s_4 s_7 ≠ 0`, `s_4/s_1` a cube, and `s_4^2/(s_1 s_7) = 5`.
+
+Because `c` is a cube it can be normalized to 1 by the torus, forcing
+`s_7/s_1 = 1/5 = 8`, so the whole orbit collapses to a **single normal form**.
+Since `p = 13 > d = 8` the syndrome is honestly a binary octic, and it is
+
+```text
+s  =  X^7 Y + X^4 Y^4 + 8 X Y^7  =  X Y ( X^6 + X^3 Y^3 + 8 Y^6 ).
+```
+
+The sextic factor is the pullback of `z^2 + z + 8` under `z = (X/Y)^3`, and
+`z^2 + z + 8` is irreducible over `F_13` (discriminant `-31 = 8`, a non-square),
+so the sextic has no rational root.  This is the **cyclic-cubic pullback of an
+irreducible binary quadratic, times the two coordinate points** — recognizably
+the same mechanism C491 identifies at redundancy five as "Frobenius twisting of
+the cyclic cubic deck transformation", reappearing four redundancies up.
+
+**Count check.**  The characterization reproduces the census exactly: the four
+stratum points sweep out one `PGL_2(13)`-orbit of size `2184/6 = 364`, and
+`1274 + 364 = 1638`, which is the deep total from the independent exhaustive
+census of all 883,708,281 points of `PG(8,13)` in §5.3c.  The stratum sweep and
+the full census were also cross-checked against each other and against the
+Python verifier: all three give the same 4 points.
+
+#### Recurrence: one field per redundancy, and which one
+
+The stratum is a projective subspace, so it can be swept exactly at field orders
+far past the reach of a full `PG(d,q)` census.  Sweeping `{i ≡ 1 mod 3}` at
+redundancies `r ≡ 0 (mod 3)` (the ones for which `d = r-1 ≡ 2 (mod 3)` makes
+the class self-symmetric):
+
+| `r` | `d` | stratum | fields swept | exceptional points found |
+|---:|---:|---|---|---|
+| 6  | 5  | `{1,4}`       | `q = 7,9,11,13,16,19,25,27,31,37,43,49,64` | **only at `q = 7`** (4 points) |
+| 9  | 8  | `{1,4,7}`     | `q = 13,16,17,19,23,25,27,29,31`           | **only at `q = 13`** (4 points) |
+| 12 | 11 | `{1,4,7,10}`  | `q = 13,16,17`                             | **only at `q = 13`** (404 points) |
+
+Every other cell in that table returns exactly 2 deep stratum points, both
+persistent, and 0 exceptional.  The fields that do carry exceptional points are
+`7, 13, 13` for `r = 6, 9, 12` — in each case **the smallest prime power
+`q ≡ 1 (mod 3)` satisfying the admissibility bound `q ≥ r-1`** (for `r=6`,
+`q ≥ 5` and `5 ≡ 2`, `7 ≡ 1`; for `r=9`, `q ≥ 8` and `8 ≡ 2`, `9 ≡ 0`,
+`11 ≡ 2`, `13 ≡ 1`; for `r=12`, `q ≥ 12` and `13 ≡ 1`).  Hence:
+
+> **Prediction (cyclic-cubic stratum).**  For every redundancy `r ≡ 0 (mod 3)`,
+> the arithmetic-progression stratum `{i ≡ 1 mod 3}` carries exceptional deep
+> holes at exactly one field: the least prime power `q ≡ 1 (mod 3)` with
+> `q ≥ r-1`.  At every larger field the stratum's only deep points are the two
+> persistent ones it meets.
+
+The `r = 12` row is the prediction's first confirmation outside the
+repository's proved range, which stops at `r = 10`.  Note that `r = 12, q = 13`
+gives `k = 2`, so it sits on the degenerate `q ≈ r` boundary, which is why its
+exceptional count (404) is large compared with the clean `r = 9, q = 13` case
+(4); the prediction is about *where* exceptional points occur, not how many.
+
+The cube-class condition itself flips with the redundancy and is the invariant
+worth tracking rather than a fixed inequality: at `r = 9, q = 13` the four
+exceptional points have `s_4/s_1` **a cube**, while at `r = 6, q = 7` the four
+exceptional points are `s_4 ∈ {2,3,4,5}`, precisely the **non**-cubes of
+`F_7^*`.  In both cases the cut is by the class of `s_4/s_1` in
+`F_q^*/(F_q^*)^3`; only the selected class differs.
+
+### 5.3e (2026-08-31) Conjecture B′ at redundancy nine: feasibility and what was run
+
+The three cells requested for a full census are all out of budget, by the
+measured scaling of the `(9,13)` run (883,708,281 points in 396 s, 968 MB) and
+against 10 GB of available memory:
+
+| cell | `|PG(8,q)|` | memory | estimated time | verdict |
+|---|---:|---:|---:|---|
+| `r=9, q=16` | 4.58·10^9 | 4.6 GB | 34 min | over the ~15 min budget |
+| `r=9, q=17` | 7.41·10^9 | 7.4 GB | 55 min | over budget |
+| `r=9, q=19` | 1.79·10^10 | 17.9 GB | 134 min | exceeds available RAM |
+
+All three are recorded as **out of budget and not run**.  For reference the
+same scaling puts every other nearby untested cell out of reach too:
+`r=8, q=23` at 21 min / 3.6 GB and `r=10, q=11` at 24 min / 2.6 GB.  The
+exhaustive-census ceiling on this machine is about `2·10^9` projective points.
+
+In their place the stratum sweep of §5.3d supplies an exact, complete search of
+the predicted exceptional locus at those very fields.  At `r = 9` it returns
+**zero exceptional points for every `q` in `{16, 17, 19, 23, 25, 27, 29, 31}`**,
+each sweep exhaustive over the full `q^2+q+1` points of the stratum.
+
+The scope limit must be stated plainly: this is a complete search of one
+stratum, not of `PG(8,q)`.  It cannot show that `q ∈ X(9)` fails — an
+exceptional orbit off the `S_3`-fixed locus would be invisible to it.  What it
+does establish is that the *one structural mechanism known to produce an
+exceptional orbit at redundancy nine* produces none at any of those eight
+fields, which is evidence for Conjecture B′ (`q_0(r) ≤ 23`) and against any
+picture in which the cyclic-cubic family persists upward.  It also refutes the
+congruence guess that first suggested itself from `u^2 = -1`: `q ≡ 1 (mod 12)`
+is not the right predictor, since `q = 25` is `1 (mod 12)` and carries nothing.
+
 ### 5.4 Independent verification
 
 * Python, definition-level rank, different field model
@@ -562,7 +721,8 @@ pruning, exact `F_q` arithmetic throughout.
 |---|---|---|
 | A (radius dichotomy) | survives | all 42 census cells: `r=3` for `q ∈ {5,7,8,9}`; `r=4` for `q ∈ {4,…,64}` (12 fields); `r=5` for `q ∈ {7,8,9,11,13,16}`; `r=6` for `q ∈ {7,8,9,11,13}`; `r=7` for `q ∈ {7,8,9,11,13}`; `r=8` for `q ∈ {8,9,11,13,16,17,19}`; `r=9` for `q ∈ {9,11,13}` |
 | B (persistent-only for `r ≥ 8`, `q ≥ 13`) | **FALSIFIED** at `(r,q) = (9,13)`, §5.3c; true at `r=8` for `q ∈ {13,16,17,19}` | falsifying witness `(1,0,1,2,4,12,4,3,6)`, orbit size 364, certificate in §5.3c |
-| B′ (`q_0(r) ≤ 23` for every `r`) | survives; replaces B | every cell in §5.1--5.3c, plus the committed R5--R7 classifications |
+| B′ (`q_0(r) ≤ 23` for every `r`) | survives; replaces B | every cell in §5.1--5.3c, plus the committed R5--R7 classifications; additionally supported, on the `S_3`-fixed stratum only, at `r=9` for `q ∈ {16,…,31}` and `r=6` for `q ∈ {9,…,64}` (§5.3d--e) |
+| D (cyclic-cubic stratum recurs at exactly one field per `r ≡ 0 mod 3`, the least prime power `q ≡ 1 mod 3` with `q ≥ r-1`) | **new**; survives, and confirmed at `r=12` outside the repository's proved range | `r=6` over 13 fields, `r=9` over 9 fields, `r=12` over 3 fields, each an exhaustive sweep of the full stratum |
 | C (band squeezed shut) | monotonicity half **FALSIFIED** (`13 ∈ X(9) \ X(8)`); `X(4) = ∅` and `X(8) ∩ [8,19] = {8,9,11}` stand as new results | `X(4) = ∅` exhaustive over 12 fields `4 ≤ q ≤ 64`; `X(8) ∩ [8,19] = {8,9,11}` exact; `X(9) ⊇ {9,11,13}` exact; `X(8) ∩ [23,42]`, `X(9) ∩ [16,52]`, `X(10)` untested |
 
 Conjecture B, restricted to `r = 8`, remains the sharpest new statement: it says the
@@ -672,16 +832,34 @@ only route back toward MDS, is untouched here and remains untouched.
    = 10`, yes — but no structural description was attempted.  Evidence gap: the
    analogue of C491's branch-divisor classification of the `r = 5` sporadics,
    at `r = 8`.  Owning successor: whichever task takes item 1.
-4. **The single exceptional orbit at `r = 9, q = 13` has no structural
-   description.**  Settled by this pass: it exists, has size 364, stabilizer
-   order 6 in `PGL_2(13)`, apolar degree 5 with a two-dimensional apolar pencil
-   none of whose members is split squarefree, and catalecticant rank 3.  Open:
-   why *this* orbit and why *this* field.  A stabilizer of order 6 echoes the
-   `C_2`, `C_3`, `V_4`, `A_4` stabilizers of the redundancy-five sporadics
-   classified by branch divisor in C491, which suggests the same branch-divisor
-   machinery would name it.  Evidence gap: the redundancy-nine analogue of that
-   classification.  Owning successor: whichever task takes item 1.
-5. **Where does `q_0(9)` actually sit?**  The redundancy-nine band is now known
+4. **The single exceptional orbit at `r = 9, q = 13` is now named.**  Settled
+   by the 2026-08-31 pass (§5.3d): it is the `PGL_2(13)`-orbit of the binary
+   octic `XY(X^6 + X^3Y^3 + 8Y^6)`, its stabilizer is `S_3`, and membership is
+   cut on the `S_3`-fixed stratum by two closed conditions — `s_4/s_1` a cube
+   and `s_4^2/(s_1 s_7)` a primitive fourth root of unity.  Its sextic factor is
+   the cyclic-cubic pullback of an irreducible binary quadratic, the same
+   mechanism C491 names at redundancy five, so the redundancy-five branch-divisor
+   machinery should extend to it directly.  Still open: a proof that the stratum
+   is deep exactly at the one predicted field, rather than the sweep evidence of
+   §5.3d.  Owning successor: whichever task takes item 1.
+5. **Why one field per redundancy, and why the least admissible `q ≡ 1 mod 3`?**
+   The recurrence is sharp across `r = 6, 9, 12` (fields `7, 13, 13`) and clean
+   in the sense that every larger field in the sweep returns exactly the two
+   persistent stratum points.  Unexplained: what makes deepness fail the moment
+   `q` exceeds that first field.  The likely mechanism is that deepness needs
+   the apolar levels above the minimal one to stay split-free too, and the number
+   of forms at those levels grows with `q` while the stratum's dimension does
+   not — but that is a heuristic, not an argument, and it does not by itself
+   explain why the *first* admissible field always works.
+6. **The cube class flips between redundancies.**  At `r = 9, q = 13` the
+   exceptional points have `s_4/s_1` a cube; at `r = 6, q = 7` they have
+   `s_4/s_1` a non-cube.  The cut is by the class in `F_q^*/(F_q^*)^3` in both
+   cases, but which class is selected changes, and nothing here explains the
+   choice.  Evidence gap: a third clean data point — `r = 12` would supply it,
+   but its only exceptional field is the degenerate `k = 2` boundary cell, so
+   `r = 15` (least admissible `q ≡ 1 mod 3` with `q ≥ 14` is 16) is the
+   informative next test.
+7. **Where does `q_0(9)` actually sit?**  The redundancy-nine band is now known
    to contain `9, 11, 13` and is unsearched from 16 up to the proved threshold
    53.  Gate: one run of `--q 16 --r 9` (`|PG(8,16)| ≈ 4.6·10^9`, roughly five
    times the `q = 13` cell, so of order half an hour and about 5 GB — the first
@@ -689,7 +867,7 @@ only route back toward MDS, is untouched here and remains untouched.
    That single cell decides whether `q_0(9)` is 16 (band closes immediately
    above 13, and Conjecture B′ is comfortable) or larger (B′ starts to look
    fragile too).
-6. **The field-model near-miss.**  A verifier that chose its own irreducible
+8. **The field-model near-miss.**  A verifier that chose its own irreducible
    polynomial produced 30 apparent counterexamples at `r = 8, q = 16` that were
    pure labelling artifacts.  Settled by this pass, and worth recording as a
    standing hazard: syndrome coordinates over a non-prime field are element
@@ -697,7 +875,7 @@ only route back toward MDS, is untouched here and remains untouched.
    fix one field model, while only aggregate counts are model-free.  The
    committed certificates for `q = 8, 9, 16, 25, 27, 32` in the R5--R7 bundles
    have the same exposure if they are ever re-checked by a second program.
-7. **No genuine mystery in the validation layer.**  Sixteen committed-certificate
+9. **No genuine mystery in the validation layer.**  Sixteen committed-certificate
    cells (plus four classical conic cells) reproduced exactly by an independent
    code path, plus definition-level
    Python agreement on two of them and representative-level agreement on five
@@ -705,8 +883,12 @@ only route back toward MDS, is untouched here and remains untouched.
    surfaced there and none is claimed.
 
 **Status: complete** for the redundancy-four sweep, the redundancy-eight band
-`8 ≤ q ≤ 19`, the certificate-reproduction gate, and the redundancy-nine
-decider at `q = 13`, which falsified Conjecture B and the monotonicity half of
-Conjecture C with an exactly certified witness.  **Partial** for the
-replacement Conjecture B′ (`q_0(r) ≤ 23` for every `r`), whose first untested
-cell is `r = 9, q = 16`, and for redundancy ten, which was not searched at all.
+`8 ≤ q ≤ 19`, the certificate-reproduction gate, the redundancy-nine decider at
+`q = 13` (which falsified Conjecture B and the monotonicity half of Conjecture C
+with an exactly certified witness), and the structural identification of the
+resulting orbit together with its recurrence sweep at `r = 6, 9, 12`.
+**Partial** for the replacement Conjecture B′ (`q_0(r) ≤ 23` for every `r`),
+which now has stratum-level but not census-level support above `q = 13`, and for
+redundancy ten, which was not searched at all.  The three requested
+redundancy-nine census cells (`q = 16, 17, 19`) are out of budget by 2--9× in
+time, and `q = 19` exceeds available memory outright.

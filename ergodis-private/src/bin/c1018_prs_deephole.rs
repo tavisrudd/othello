@@ -44,6 +44,13 @@ struct Args {
     /// Cross-check every representative's Hankel ranks against Ergodis (prime q only).
     #[arg(long, default_value_t = false)]
     ergodis_crosscheck: bool,
+    /// Sweep only the arithmetic-progression stratum {s : s_i = 0 unless i ≡ A mod M}
+    /// instead of running a full PG(d,q) orbit census.  Requires --stratum-class.
+    #[arg(long)]
+    stratum_mod: Option<usize>,
+    /// Residue class A for --stratum-mod.
+    #[arg(long, default_value_t = 0)]
+    stratum_class: usize,
     /// Output JSON path.
     #[arg(long)]
     out: Option<String>,
@@ -679,6 +686,124 @@ struct OrbitRecord {
     roots: Vec<usize>,
 }
 
+/// Exact weight sweep of the arithmetic-progression stratum
+/// `{ s : s_i = 0 unless i ≡ a (mod m) }`, the fixed locus in `PG(d,q)` of the
+/// order-`m` diagonal torus element `t ↦ ζ_m t` (present when `m | q-1`).  It is
+/// a projective subspace of dimension `|idx| - 1`, so it can be swept exactly at
+/// field orders far beyond the reach of a full `PG(d,q)` census.  A point here
+/// of weight `d` whose consecutive three-row catalecticant has rank ≥ 3 is an
+/// exceptional deep hole.
+fn stratum_sweep(
+    f: &Field,
+    d: usize,
+    r: usize,
+    k: usize,
+    m: usize,
+    a: usize,
+    out: Option<&str>,
+) -> Result<()> {
+    if m == 0 {
+        bail!("--stratum-mod must be positive");
+    }
+    let idx: Vec<usize> = (0..=d).filter(|i| i % m == a % m).collect();
+    if idx.is_empty() {
+        bail!("empty stratum: no coordinate index is ≡ {a} mod {m}");
+    }
+    let q = f.q;
+    let l = idx.len();
+    let mut hist = vec![0usize; d + 2];
+    let mut deep = 0usize;
+    let mut exceptional: Vec<Vec<u8>> = Vec::new();
+    let mut s = vec![0u8; d + 1];
+    let mut tail = vec![0u8; l];
+
+    // enumerate leading-one normal forms of PG(l-1, q)
+    for lead in 0..l {
+        let free = l - lead - 1;
+        let count = (q as u64).pow(free as u32);
+        for code in 0..count {
+            for item in tail.iter_mut() {
+                *item = 0;
+            }
+            tail[lead] = 1;
+            let mut c = code;
+            for j in (lead + 1..l).rev() {
+                tail[j] = (c % q as u64) as u8;
+                c /= q as u64;
+            }
+            for item in s.iter_mut() {
+                *item = 0;
+            }
+            for (&i, &v) in idx.iter().zip(tail.iter()) {
+                s[i] = v;
+            }
+            let mut w = d + 1;
+            for j in 1..=d {
+                if find_split_annihilator(f, d, &s, j).is_some() {
+                    w = j;
+                    break;
+                }
+            }
+            hist[w] += 1;
+            if w == d {
+                deep += 1;
+                // consecutive three-row catalecticant, 3 x (d-1)
+                let rows = 3usize;
+                let cols = d - 1;
+                let mut data = vec![0u8; rows * cols];
+                for v in 0..rows {
+                    for u in 0..cols {
+                        data[v * cols + u] = s[u + v];
+                    }
+                }
+                if rank_of(f, rows, cols, &mut data) >= 3 && exceptional.len() < 4096 {
+                    exceptional.push(s.clone());
+                }
+            }
+        }
+    }
+
+    let stratum_points: u64 = ((q as u64).pow(l as u32) - 1) / (q as u64 - 1);
+    let mut json = String::new();
+    write!(
+        json,
+        "{{\"mode\":\"stratum\",\"q\":{},\"p\":{},\"n\":{},\"k\":{},\"r\":{},\"d\":{},\
+\"stratum_mod\":{},\"stratum_class\":{},\"stratum_indices\":{:?},\"stratum_points\":{},\
+\"deep_in_stratum\":{},\"exceptional_in_stratum\":{},\"weight_histogram\":[",
+        q,
+        f.p,
+        q + 1,
+        k,
+        r,
+        d,
+        m,
+        a,
+        idx,
+        stratum_points,
+        deep,
+        exceptional.len()
+    )?;
+    for w in 0..=(d + 1) {
+        if w > 0 {
+            json.push(',');
+        }
+        write!(json, "{{\"w\":{},\"points\":{}}}", w, hist[w])?;
+    }
+    json.push_str("],\"exceptional_examples\":[");
+    for (i, e) in exceptional.iter().take(8).enumerate() {
+        if i > 0 {
+            json.push(',');
+        }
+        write!(json, "{e:?}")?;
+    }
+    json.push_str("]}");
+    if let Some(path) = out {
+        std::fs::write(path, format!("{json}\n"))?;
+    }
+    println!("{json}");
+    Ok(())
+}
+
 fn main() -> Result<()> {
     let args = Args::parse();
     let q = args.q;
@@ -695,6 +820,10 @@ fn main() -> Result<()> {
     let k = q + 1 - r;
     if k < 1 {
         bail!("dimension k = q+1-r must be positive");
+    }
+
+    if let Some(m) = args.stratum_mod {
+        return stratum_sweep(&f, d, r, k, m, args.stratum_class, args.out.as_deref());
     }
 
     // group generators of PGL(2,q): a -> a+1, a -> g a, a -> 1/a

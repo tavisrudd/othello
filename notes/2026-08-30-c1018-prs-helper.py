@@ -183,6 +183,371 @@ def projective_points(gf, d):
             yield tuple([0] * lead + [1] + list(tail))
 
 
+# --------------------------------------------------------------------------
+# structure of a single PGL(2,q)-orbit in PG(d,q)
+# --------------------------------------------------------------------------
+
+
+def sym_power(gf, d, a, b, c, e):
+    """S[i][j] = coefficient of x^{d-j} y^j in (a x + b y)^{d-i} (c x + e y)^i."""
+
+    def binom(n, k):
+        acc = 1
+        for i in range(k):
+            acc = acc * (n - i) // (i + 1)
+        return acc
+
+    def powf(x, n):
+        acc = 1
+        for _ in range(n):
+            acc = gf.mul[acc][x]
+        return acc
+
+    s = [[0] * (d + 1) for _ in range(d + 1)]
+    for i in range(d + 1):
+        av = [
+            gf.mul[gf.mul[binom(d - i, k) % gf.p][powf(a, d - i - k)]][powf(b, k)]
+            for k in range(d - i + 1)
+        ]
+        bv = [
+            gf.mul[gf.mul[binom(i, k) % gf.p][powf(c, i - k)]][powf(e, k)]
+            for k in range(i + 1)
+        ]
+        for ka, x in enumerate(av):
+            if not x:
+                continue
+            for kb, y in enumerate(bv):
+                if y:
+                    s[i][ka + kb] = gf.add[s[i][ka + kb]][gf.mul[x][y]]
+    return s
+
+
+def act(gf, m, v):
+    out = []
+    for row in m:
+        acc = 0
+        for x, y in zip(row, v):
+            if x and y:
+                acc = gf.add[acc][gf.mul[x][y]]
+        out.append(acc)
+    return tuple(out)
+
+
+def normalize(gf, v):
+    lead = next(i for i, x in enumerate(v) if x)
+    iv = gf.inv[v[lead]]
+    return tuple(gf.mul[x][iv] for x in v)
+
+
+def pgl_elements(gf):
+    """All of PGL(2,q) as normalized (a,b,c,d) with ad-bc != 0."""
+    q = gf.q
+    out = []
+    for t in itertools.product(range(q), repeat=4):
+        a, b, c, e = t
+        det = gf.add[gf.mul[a][e]][gf.neg[gf.mul[b][c]]]
+        if det == 0:
+            continue
+        lead = next(i for i, x in enumerate(t) if x)
+        iv = gf.inv[t[lead]]
+        if gf.mul[t[lead]][iv] == 1 and t[lead] == 1:
+            out.append(t)
+    return out
+
+
+def kernel_basis(gf, rows, cols, data):
+    """Reduced row echelon form, then an explicit null-space basis."""
+    m = [list(data[i * cols : (i + 1) * cols]) for i in range(rows)]
+    piv_cols, piv = [], 0
+    for c in range(cols):
+        sel = next((i for i in range(piv, rows) if m[i][c]), None)
+        if sel is None:
+            continue
+        m[piv], m[sel] = m[sel], m[piv]
+        iv = gf.inv[m[piv][c]]
+        m[piv] = [gf.mul[x][iv] for x in m[piv]]
+        for i in range(rows):
+            if i != piv and m[i][c]:
+                f = m[i][c]
+                m[i] = [
+                    gf.add[m[i][j]][gf.neg[gf.mul[f][m[piv][j]]]] for j in range(cols)
+                ]
+        piv_cols.append(c)
+        piv += 1
+        if piv == rows:
+            break
+    free = [c for c in range(cols) if c not in piv_cols]
+    basis = []
+    for fc in free:
+        v = [0] * cols
+        v[fc] = 1
+        for ri, pc in enumerate(piv_cols):
+            v[pc] = gf.neg[m[ri][fc]]
+        basis.append(tuple(v))
+    return basis
+
+
+def form_roots(gf, l, j):
+    """Root multiset of the binary form sum l_u X^u Y^{j-u} over PG(1,q).
+
+    Returns (root_list, is_split_squarefree); the entry `q` denotes infinity.
+    """
+    roots = []
+    for a in range(gf.q):
+        val, powa = 0, 1
+        for u in range(j + 1):
+            if l[u]:
+                val = gf.add[val][gf.mul[l[u]][powa]]
+            powa = gf.mul[powa][a]
+        if val == 0:
+            roots.append(a)
+    deg = max((u for u in range(j + 1) if l[u]), default=0)
+    inf_mult = j - deg
+    if inf_mult:
+        roots.append(gf.q)
+    total = len(roots) + (inf_mult - 1 if inf_mult else 0)
+    return roots, (inf_mult <= 1 and len(roots) == j)
+
+
+def cmd_structure(q, r, rep):
+    d = r - 1
+    gf = GF(q)
+    s0 = normalize(gf, tuple(rep))
+    curve = gf.curve(d)
+
+    g = next(x for x in range(2, q) if _order(gf, x) == q - 1) if q > 3 else q - 1
+    gens = [
+        sym_power(gf, d, 1, 0, 1, 1),
+        sym_power(gf, d, 1, 0, 0, g),
+        sym_power(gf, d, 0, 1, 1, 0),
+    ]
+
+    # orbit
+    seen, queue = {s0}, [s0]
+    while queue:
+        cur = queue.pop()
+        for m in gens:
+            nxt = normalize(gf, act(gf, m, cur))
+            if nxt not in seen:
+                seen.add(nxt)
+                queue.append(nxt)
+    orbit = sorted(seen)
+    pgl_order = (q * q - 1) * q
+    stab_order = pgl_order // len(orbit)
+
+    # sparsest representatives
+    best = min(sum(1 for x in v if x) for v in orbit)
+    sparse = [v for v in orbit if sum(1 for x in v if x) == best]
+
+    # stabilizer of the sparsest representative, with element orders
+    sref = sparse[0]
+    stab = []
+    for a, b, c, e in pgl_elements(gf):
+        m = sym_power(gf, d, a, b, c, e)
+        if normalize(gf, act(gf, m, sref)) == sref:
+            stab.append((a, b, c, e))
+    orders = []
+    for t in stab:
+        m = sym_power(gf, 1, *t)
+        cur, k = m, 1
+        ident = [[1, 0], [0, 1]]
+        while normalize(gf, tuple(cur[0] + cur[1])) != normalize(
+            gf, tuple(ident[0] + ident[1])
+        ):
+            cur = [
+                [
+                    _dot(gf, cur[i], [m[0][j], m[1][j]])
+                    for j in range(2)
+                ]
+                for i in range(2)
+            ]
+            k += 1
+            if k > pgl_order:
+                break
+        orders.append(k)
+
+    # apolar structure
+    apolar = {}
+    e_level = None
+    for j in range(1, d + 1):
+        rows, cols = d - j + 1, j + 1
+        data = [s0[u + v] for v in range(rows) for u in range(cols)]
+        basis = kernel_basis(gf, rows, cols, data)
+        if basis:
+            e_level = j
+            members = []
+            for coeffs in itertools.product(range(q), repeat=len(basis)):
+                if not any(coeffs):
+                    continue
+                lead = next(i for i, x in enumerate(coeffs) if x)
+                if coeffs[lead] != 1:
+                    continue
+                l = [0] * (j + 1)
+                for ci, bv in zip(coeffs, basis):
+                    if ci:
+                        for u in range(j + 1):
+                            l[u] = gf.add[l[u]][gf.mul[ci][bv[u]]]
+                members.append(tuple(l))
+            profile = collections_counter(
+                _root_type(gf, l, j) for l in members
+            )
+            apolar = {
+                "apolar_degree": j,
+                "kernel_dim": len(basis),
+                "kernel_basis": [list(b) for b in basis],
+                "members": len(members),
+                "root_type_profile": profile,
+                "split_squarefree_members": sum(
+                    1 for l in members if form_roots(gf, l, j)[1]
+                ),
+            }
+            break
+
+    w, T = coset_weight(gf, curve, s0, d)
+    print(
+        json.dumps(
+            {
+                "q": q,
+                "r": r,
+                "d": d,
+                "rep": list(s0),
+                "orbit_size": len(orbit),
+                "pgl_order": pgl_order,
+                "stabilizer_order": stab_order,
+                "stabilizer_element_orders": sorted(orders),
+                "sparsest_support_size": best,
+                "sparsest_reps": [list(v) for v in sparse[:6]],
+                "sparsest_rep_count": len(sparse),
+                "weight": w,
+                "min_spanning_set": list(T) if T else None,
+                **apolar,
+            }
+        )
+    )
+
+
+def cmd_stratum(q, r, m, a):
+    """Exact weight census of the arithmetic-progression stratum.
+
+    The stratum is { s : s_i = 0 unless i ≡ a (mod m) } ⊂ PG(d,q), the fixed
+    locus of the order-m diagonal torus element t ↦ ζ_m t.  It is a projective
+    subspace, so it can be swept exactly at field orders far beyond the reach
+    of a full PG(d,q) census.  A deep point here with consecutive three-row
+    catalecticant rank ≥ 3 is an exceptional deep hole.
+    """
+    d = r - 1
+    gf = GF(q)
+    curve = gf.curve(d)
+    idx = [i for i in range(d + 1) if i % m == a % m]
+    hist, deep, exc = {}, [], []
+    rho = None
+    for tail in itertools.product(range(q), repeat=len(idx)):
+        if not any(tail):
+            continue
+        lead = next(i for i, x in enumerate(tail) if x)
+        if tail[lead] != 1:
+            continue
+        s = [0] * (d + 1)
+        for i, v in zip(idx, tail):
+            s[i] = v
+        w, _ = coset_weight(gf, curve, tuple(s), d)
+        hist[w] = hist.get(w, 0) + 1
+        rho = w if rho is None else max(rho, w)
+    # second pass now that the stratum maximum is known
+    for tail in itertools.product(range(q), repeat=len(idx)):
+        if not any(tail):
+            continue
+        lead = next(i for i, x in enumerate(tail) if x)
+        if tail[lead] != 1:
+            continue
+        s = [0] * (d + 1)
+        for i, v in zip(idx, tail):
+            s[i] = v
+        w, _ = coset_weight(gf, curve, tuple(s), d)
+        if w != d:  # d = r-1 is the covering radius in every non-exceptional cell
+            continue
+        cat = [[s[i + j] for j in range(d - 1)] for i in range(3)]
+        deep.append(s)
+        if gf.rank(cat) >= 3:
+            exc.append(s)
+    print(
+        json.dumps(
+            {
+                "q": q,
+                "r": r,
+                "d": d,
+                "stratum": f"support ⊆ {{i ≡ {a} mod {m}}} = {idx}",
+                "stratum_points": (q ** len(idx) - 1) // (q - 1),
+                "weight_histogram": {str(k): v for k, v in sorted(hist.items())},
+                "stratum_max_weight": rho,
+                "deep_in_stratum": len(deep),
+                "exceptional_in_stratum": len(exc),
+                "exceptional_examples": exc[:4],
+            }
+        )
+    )
+
+
+def _order(gf, x):
+    cur, k = x, 1
+    while cur != 1:
+        cur = gf.mul[cur][x]
+        k += 1
+    return k
+
+
+def _dot(gf, u, v):
+    acc = 0
+    for a, b in zip(u, v):
+        if a and b:
+            acc = gf.add[acc][gf.mul[a][b]]
+    return acc
+
+
+def _root_type(gf, l, j):
+    """Partition of j given by the root multiplicities over PG(1,q), plus the
+    non-rational remainder recorded as 'i<k>'."""
+    mults = []
+    poly = list(l)
+    deg = max((u for u in range(j + 1) if poly[u]), default=0)
+    inf_mult = j - deg
+    if inf_mult:
+        mults.append(inf_mult)
+    work = poly[: deg + 1]
+    for a in range(gf.q):
+        m = 0
+        while len(work) > 1:
+            val, powa = 0, 1
+            for u in range(len(work)):
+                if work[u]:
+                    val = gf.add[val][gf.mul[work[u]][powa]]
+                powa = gf.mul[powa][a]
+            if val != 0:
+                break
+            # synthetic division by (x - a)
+            out = [0] * (len(work) - 1)
+            carry = 0
+            for u in range(len(work) - 1, 0, -1):
+                out[u - 1] = gf.add[work[u]][carry]
+                carry = gf.mul[out[u - 1]][a]
+            work = out
+            m += 1
+        if m:
+            mults.append(m)
+    rem = j - sum(mults)
+    key = "+".join(str(x) for x in sorted(mults, reverse=True)) or "-"
+    if rem:
+        key += f"+i{rem}"
+    return key
+
+
+def collections_counter(it):
+    out = {}
+    for x in it:
+        out[x] = out.get(x, 0) + 1
+    return dict(sorted(out.items()))
+
+
 def cmd_census(q, r):
     d = r - 1
     gf = GF(q)
@@ -255,5 +620,15 @@ if __name__ == "__main__":
         cmd_census(int(sys.argv[2]), int(sys.argv[3]))
     elif sys.argv[1] == "verify":
         cmd_verify(int(sys.argv[2]), int(sys.argv[3]), sys.argv[4])
+    elif sys.argv[1] == "stratum":
+        cmd_stratum(
+            int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5])
+        )
+    elif sys.argv[1] == "structure":
+        cmd_structure(
+            int(sys.argv[2]),
+            int(sys.argv[3]),
+            [int(x) for x in sys.argv[4].split(",")],
+        )
     else:
         raise SystemExit(__doc__)

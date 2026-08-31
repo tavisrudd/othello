@@ -81,6 +81,18 @@ report.
   one-factorizations of K₁₄ ↔ starters in Z₁₃; all 133 starters
   enumerated with Hall-deficient witnesses. hall_core load-bearing;
   independent Python verification passes all five checks.
+- **Wave 3C, PRS orbit structure + recurrence (landed ~00:40)** — report
+  §5.3d/e. The (9,13) exceptional orbit is the PGL₂(13)-orbit of
+  XY(X⁶+X³Y³+8Y⁶), stabilizer S₃; membership cut exactly by two closed
+  invariant conditions on the S₃-fixed stratum; the sextic factor is the
+  cyclic-cubic pullback of z²+z+8 — the same mechanism C491 names at
+  redundancy five. Recurrence law (exhaustive stratum sweeps): exactly one
+  exceptional field per redundancy, the least prime power q≡1 mod 3 with
+  q≥r−1 — confirmed q=7@r=6, q=13@r=9, q=13@r=12 (beyond the proved
+  range); q≡1 mod 12 guess refuted at q=25. New Conjecture D recorded.
+  Full-space B′ cells at q=16,17,19 out of budget (RAM/time, stated
+  exactly); stratum sweeps at eight fields all clean — supports B′,
+  does not establish it.
 - **Wave 1B, transversal/CSS (landed ~23:45)** —
   `2026-08-30-c1018-hunt-transversal-css.md`; driver
   `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes
