@@ -189,7 +189,17 @@ as each coherent tranche lands.
    measured successor rather than hiding interpreter overhead. Raw evidence is
    under `/home/tavis/.cache/ergodis-perf/c1017-plan-vm/final-ab`. The private
    registry now records 67 pass, 1 open, and 34 not-applicable cells. Current
-   next slice: retain the semantic-symmetry anchor counter A/B.
+   semantic-symmetry gate is now closed too. On a verified 64-coordinate
+   support model with four invariant 16-cycles, one scan per certified orbit
+   replaces one scan per coordinate while preserving the exact minimizer,
+   work count, and checksum. Across nine rotated million-solve pairs,
+   all-anchors/orbit-cover is 14.288x cycles (`t=486.69`), 16.747x
+   instructions, and 14.288x wall (`t=491.99`), close to the theorem's ideal
+   16x reduction after fixed costs. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-semantic-anchor/final-ab`. The private
+   registry now records 68 pass, zero open, and 34 not-applicable cells.
+   Current next slice: run the strict end-to-end registry audit, then use the
+   measured 16.87x plan-VM fusion gap to select the next C985 optimization.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

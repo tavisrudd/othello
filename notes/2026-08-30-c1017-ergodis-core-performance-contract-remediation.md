@@ -469,6 +469,19 @@ under `/home/tavis/.cache/ergodis-perf/c1017-plan-vm/final-ab`. Full
 all-target/all-feature tests and strict clippy pass. The registry now has 67
 pass, 1 open, and 34 not-applicable cells.
 
+The semantic-symmetry anchor row closes the registry with a theorem-matched
+control. A verified 64-coordinate explicit support problem has four invariant
+16-cycles and 128 canonical candidates. The baseline performs the same exact
+anchored minimization once for every coordinate; the production orbit cover
+performs it once for each certified orbit. Nine rotated pairs run 1,000,000
+complete minima per arm. Both return the identical support, cost, work count,
+and checksum. All-anchors/orbit-cover is 14.288x cycles (`t=486.69`), 16.747x
+instructions, 15.837x branches, 3,743.5x branch misses, and 14.288x wall
+(`t=491.99`), close to the ideal 16x scan reduction after fixed costs; median
+RSS is 2,392 versus 2,432 KiB. Raw evidence and the retained binary hash are
+under `/home/tavis/.cache/ergodis-perf/c1017-semantic-anchor/final-ab`. The
+registry now has 68 pass, zero open, and 34 not-applicable cells.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

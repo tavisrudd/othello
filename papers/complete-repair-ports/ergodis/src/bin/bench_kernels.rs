@@ -1,3 +1,4 @@
+use std::convert::Infallible;
 use std::hint::black_box;
 use std::time::Instant;
 
@@ -7,17 +8,20 @@ use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
 use ergodis::{
     azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
     ceph_xor_repair_supports_compressed, certify_rank_one_transfer_by_generators_field,
-    compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
+    compile_binary_rank_one, compile_binary_target_subspace,
+    compile_verified_explicit_binary_support, confinement_by_generators_field,
     enumerate_integer_moments, gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery,
     minimum_node_span_repair, schedule_repair_dag, solve_hall,
     ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
-    ternary_orbit_syndrome_search_correlated, CephXorLayer, CompiledBinaryLinearCode,
-    CompositionTower, ContextStrategy, DenseHallGraph, DenseSelector, FiniteField, Gf4,
+    ternary_orbit_syndrome_search_correlated, BinarySupportCandidate, CephXorLayer,
+    CompiledBinaryLinearCode, CompositionTower, ContextStrategy, DenseHallGraph, DenseSelector,
+    ExplicitBinarySupportProblem, FiniteField, FinitePermutationAction, Gf4,
     GpuCheckpointCapacities, HallWorkspace, IntegerMomentProblem, IntegerMomentWorkspace, Matrix,
     OrbitOption, Prime, PrimePolynomialRecurrence, PrimeQuadraticCharacter, QcLdpcCode,
-    RankOneProbeCache, RepairTask, SparseSelector, TowerLevel, WeightedRepairProblem,
-    WeightedRepairWorkspace, WeightedSchedulerBackend,
+    RankOneProbeCache, RepairTask, SparseSelector, TowerLevel,
+    VerifiedExplicitBinarySupportProblem, WeightedRepairProblem, WeightedRepairWorkspace,
+    WeightedSchedulerBackend,
 };
 
 fn next_u32(state: &mut u64) -> u32 {
@@ -293,6 +297,90 @@ fn selector_spec(variant: &str) -> Option<(&str, usize)> {
     let backend = fields.next()?;
     let terms = fields.next()?.parse().ok()?;
     fields.next().is_none().then_some((backend, terms))
+}
+
+fn semantic_anchor_spec(variant: &str) -> Option<(&str, u32, u32)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "semantic-anchor" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let block_size = fields.next()?.parse().ok()?;
+    let blocks = fields.next()?.parse().ok()?;
+    fields
+        .next()
+        .is_none()
+        .then_some((backend, block_size, blocks))
+}
+
+struct BlockRotation {
+    block_size: u32,
+    blocks: u32,
+}
+
+impl FinitePermutationAction for BlockRotation {
+    type Error = Infallible;
+
+    fn point_count(&self) -> u32 {
+        self.block_size * self.blocks
+    }
+
+    fn generator_count(&self) -> u32 {
+        1
+    }
+
+    fn apply(&self, _generator: u32, point: u32) -> Result<u32, Self::Error> {
+        let block = point / self.block_size;
+        let offset = point % self.block_size;
+        Ok(block * self.block_size + (offset + 1) % self.block_size)
+    }
+}
+
+fn semantic_anchor_fixture(block_size: u32, blocks: u32) -> VerifiedExplicitBinarySupportProblem {
+    assert!(block_size >= 2 && blocks > 0 && block_size * blocks <= 64);
+    let mut candidates = Vec::with_capacity((block_size * blocks * 2) as usize);
+    for block in 0..blocks {
+        let base = block * block_size;
+        for offset in 0..block_size {
+            let point = base + offset;
+            let next = base + (offset + 1) % block_size;
+            candidates.push(BinarySupportCandidate::new(
+                1_u64 << point,
+                100 + u64::from(block),
+            ));
+            candidates.push(BinarySupportCandidate::new(
+                (1_u64 << point) | (1_u64 << next),
+                10 + u64::from(block),
+            ));
+        }
+    }
+    let action = BlockRotation { block_size, blocks };
+    let problem = ExplicitBinarySupportProblem::new(action.point_count(), candidates).unwrap();
+    compile_verified_explicit_binary_support(&action, problem).unwrap()
+}
+
+fn all_anchor_minimum(
+    verified: &VerifiedExplicitBinarySupportProblem,
+) -> Option<BinarySupportCandidate> {
+    let mut best = None;
+    for anchor in 0..verified.problem().point_count() {
+        let anchor_bit = 1_u64 << anchor;
+        let local = verified
+            .problem()
+            .candidates()
+            .iter()
+            .copied()
+            .filter(|candidate| candidate.support() & anchor_bit != 0)
+            .min_by_key(|candidate| (candidate.cost(), candidate.support()));
+        if let Some(candidate) = local {
+            if best.is_none_or(|current: BinarySupportCandidate| {
+                (candidate.cost(), candidate.support()) < (current.cost(), current.support())
+            }) {
+                best = Some(candidate);
+            }
+        }
+    }
+    best
 }
 
 #[cfg(feature = "control-plane")]
@@ -1050,6 +1138,28 @@ fn main() {
         let elapsed_ns = started.elapsed().as_nanos();
         println!(
             "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
+    if let Some((backend, block_size, blocks)) = semantic_anchor_spec(&variant) {
+        let verified = semantic_anchor_fixture(block_size, blocks);
+        for _ in 0..repetitions {
+            let candidate = match backend {
+                "all" => all_anchor_minimum(&verified).unwrap(),
+                "orbit" => verified.anchored_minimum().unwrap().candidate(),
+                _ => panic!("unknown semantic-anchor backend"),
+            };
+            work += 1;
+            checksum = checksum
+                .wrapping_add(candidate.cost())
+                .wrapping_add(candidate.support().rotate_left(17));
+            black_box(candidate);
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            verified.cover().subproblem_count(),
             peak_rss_kib()
         );
         return;
