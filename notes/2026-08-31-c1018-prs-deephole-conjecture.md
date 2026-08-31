@@ -675,7 +675,7 @@ search of the whole fixed locus:
 | deep found | 126 | 299 | 18 | 30 | 12 | 18 | 22 | 26 | 28 | 58 | 32 | 36 | 18 | 40 | 86 | 48 |
 | **exceptional** | 120 | 289 | **4** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
-Total swept: 704,536 points, against `Σ_q |PG(7,q)| ≈ 4·10^{11}` for the
+Total swept: 704,536 points, against `Σ_q |PG(7,q)| ≈ 6·10^{11}` for the
 corresponding censuses.  Every cell ran in seconds to minutes.
 
 Combined with C513's theorem for `q ≥ 43`, this is a **complete classification
@@ -687,7 +687,7 @@ over all prime powers, with no residual field range**:
 That statement is not a bounded verification.  It is the finite list below the
 threshold decided by an exhaustive search justified by the lemma, glued to an
 imported theorem above the threshold.  The corresponding census claim —
-`X(8) ∩ [8,43] = {8,9,11}` — would have required roughly `4·10^{11}` points of
+`X(8) ∩ [8,43] = {8,9,11}` — would have required roughly `6·10^{11}` points of
 enumeration and about 24 GB of memory at `q = 41` alone; the residual there is
 now only the regular class.
 
