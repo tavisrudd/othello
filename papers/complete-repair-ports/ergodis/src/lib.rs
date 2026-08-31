@@ -9,6 +9,7 @@ mod arena;
 pub mod automata;
 pub mod balanced;
 pub mod bitset;
+pub mod character_sum;
 pub mod commutant;
 pub mod composition;
 pub mod confinement;
@@ -62,6 +63,7 @@ pub use applications::{
     RepairDagAnswer, RepairTask,
 };
 pub use automata::{ExplicitMataDfa, ExplicitMataError};
+pub use character_sum::{CharacterCensus, CharacterSumError, PrimeQuadraticCharacter};
 pub use commutant::{
     binary_commutant_workspace_upper_bound, certify_binary_extension_field,
     certify_binary_extension_field_exhaustive, compile_binary_commutant,

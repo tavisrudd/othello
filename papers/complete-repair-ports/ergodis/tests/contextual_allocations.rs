@@ -7,8 +7,8 @@ use ergodis::{
     compile_verified_explicit_binary_support, search_alignment_attachment,
     AlignmentSearchWorkspace, BinarySupportCandidate, CanonicalContextBasis, CompiledCssDistance,
     CostTable, DenseSelector, ExplicitBinarySupportProblem, FinitePermutationAction, Gf4, Matrix,
-    PackedBinaryAction, PackedBinaryLinearMap, Prime, RankBoundedContextCache, RankOneProbeCache,
-    ResidualHittingWorkspace, SparseSelector,
+    PackedBinaryAction, PackedBinaryLinearMap, Prime, PrimeQuadraticCharacter,
+    RankBoundedContextCache, RankOneProbeCache, ResidualHittingWorkspace, SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -564,4 +564,22 @@ fn sparse_selector_allocates_only_its_returned_assignment() {
         allocations <= 1,
         "sparse selector hot path allocated {allocations} times"
     );
+}
+
+#[test]
+fn character_sum_census_allocates_nothing() {
+    let character = PrimeQuadraticCharacter::new(97).unwrap();
+    let coefficients = character.reduce_coefficients(&[36, -108, 105, -36]);
+    let (sum, allocations) = tracked_allocations(|| {
+        let mut sum = 0;
+        for _ in 0..1_000 {
+            sum += character
+                .polynomial_census_reduced(&coefficients)
+                .unwrap()
+                .sum();
+        }
+        sum
+    });
+    assert_ne!(sum, 0);
+    assert_eq!(allocations, 0);
 }
