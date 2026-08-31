@@ -46,6 +46,20 @@ projects, ranked by Ergodis fit):
   as a standing certificate-recheck hazard. Ergodis fit: prime-field rank
   oracle exact (116 cross-checks); biggest gap is no general GF(p^h).
   Follow-up (r=9,q=13) queued to decide Conjecture B.
+- **Wave 2A, order-12 planes (landed ~01:10)** —
+  `2026-08-30-c1018-hunt-plane12.md`; driver
+  `ergodis-private/src/bin/c1018_plane12.rs`, helper
+  `2026-08-30-c1018-plane12-helper.py`. Eliminations with certificates:
+  no point-regular collineation group on a plane of order 12 (multiplier
+  orbit certificate + 1.18e11-node exact exhaustion), hence every
+  prime-order collineation fixes a point and line; order-6/order-7
+  control eliminated. Both classical — correctly not claimed as novel.
+  Proved reduction: the order-13 tactical decomposition is solvable
+  (Paley-biplane doubling + a mixed-type witness), so that case cannot
+  die at decomposition level. **New bridge:** hyperoval external lines ↔
+  one-factorizations of K₁₄ ↔ starters in Z₁₃; all 133 starters
+  enumerated with Hall-deficient witnesses. hall_core load-bearing;
+  independent Python verification passes all five checks.
 - **Wave 1B, transversal/CSS (landed ~23:45)** —
   `2026-08-30-c1018-hunt-transversal-css.md`; driver
   `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes
