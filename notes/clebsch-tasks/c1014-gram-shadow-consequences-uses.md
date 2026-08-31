@@ -107,14 +107,25 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
   \(\operatorname{Jac}(C_3)\sim E_1^2\).
 - Open items after the Chevalley–Weil pass ((a,b,c) derivation is closed):
   the \(m=3\) bias \(\equiv1\bmod4\) rigidity; the sporadic stratum
-  \((p,r)=(47,30)\); genus \(\equiv4\bmod6\) never occurs (the closed
-  form's third branch is unreachable, with no common cause identified); the
+  \((p,r)=(47,30)\); the
   \(m=8\) abelian-surface isotypic factors are unidentified; the sign-side
   quotient conductor uses all of \(\mathrm{Bad}(C_m)\) while the trivial
   side drops primes in an unexplained pattern (measured \(m=5,6,7\) only;
   \(m=7\) breaks the "largest harmonic prime" reading); and \(m=6\) is the
   only row where the 2- and 3-adic conductor exponents differ between the
-  isotypic sides.
+  isotypic sides. Settled by inspection (tt pass): genus \(\equiv4\bmod6\)
+  never occurring is immediate from the proved genus law — all three
+  residues of \(m\bmod3\) give \(g\equiv0\) or \(2\bmod6\); not a mystery.
+- tt-pass frontier (2026-08-30): the tower \(\{C_m\}\) is the pullback of
+  one fixed curve along the Dickson map, which should *derive* the
+  \(2m\bmod(p-1)\) stratification and likely absorbs \((47,30)\); the
+  bias \(\bmod4\) rigidity should follow in one line from \(E_1\)'s
+  \(\mathbf Z/4\)-torsion; the excluded set \(p\mid4^{m-1}-1\) in the
+  odd-bias theorem is uncharacterized; the \(r=5\) power-sum/Jacobi–Trudi
+  analogue on \(x+y+z+w=0\) is the structural generalization feeding C1013
+  gate 3; candidate uniform conjecture: every isotypic factor of
+  \(\operatorname{Jac}(C_m)\) is of \(\mathrm{GL}_2\)-type with level
+  supported on the bad-prime law (first test: the \(m=8\) surfaces).
 - The
   \(m=3\) supersingular anomaly is **resolved** (2026-08-30, independent
   PARI recheck): the data are correct and extend (22 zeros of \(a_p\) below
