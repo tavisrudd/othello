@@ -21,6 +21,8 @@ pub struct OrbitSyndromeResult {
     pub bound_prunes: u64,
     pub residue_prunes: u64,
     pub memo_prunes: u64,
+    pub memo_states: u32,
+    pub memo_saturated: bool,
     pub correlated_suffix_states: u64,
 }
 
@@ -276,14 +278,28 @@ impl ExactResidueSet {
     }
 }
 
-#[derive(Default)]
 struct DeadMemo {
     heads: FxHashMap<u64, u32>,
     records: Vec<DeadRecord>,
     words: Vec<u64>,
+    maximum_records: usize,
 }
 
 impl DeadMemo {
+    fn with_capacity(maximum_records: usize, key_width: usize) -> Result<Self, OrbitError> {
+        let heads = FxHashMap::with_capacity_and_hasher(maximum_records, Default::default());
+        let maximum_records = heads.capacity();
+        let word_capacity = maximum_records
+            .checked_mul(key_width)
+            .ok_or(OrbitError::TooLarge)?;
+        Ok(Self {
+            heads,
+            records: Vec::with_capacity(maximum_records),
+            words: Vec::with_capacity(word_capacity),
+            maximum_records,
+        })
+    }
+
     fn hash(family: u32, packed: &[TritBlock], totals: &[i64]) -> u64 {
         let mut hasher = FxHasher::default();
         family.hash(&mut hasher);
@@ -326,6 +342,9 @@ impl DeadMemo {
         packed: &[TritBlock],
         totals: &[i64],
     ) -> Result<(), OrbitError> {
+        if self.records.len() == self.maximum_records {
+            return Ok(());
+        }
         let key_start = u32::try_from(self.words.len()).map_err(|_| OrbitError::TooLarge)?;
         let id = u32::try_from(self.records.len()).map_err(|_| OrbitError::TooLarge)?;
         let hash = Self::hash(family, packed, totals);
@@ -341,6 +360,25 @@ impl DeadMemo {
         self.heads.insert(hash, id);
         Ok(())
     }
+
+    fn saturated(&self) -> bool {
+        self.records.len() == self.maximum_records
+    }
+}
+
+const MAX_DEAD_MEMO_BYTES: usize = 8 << 20;
+
+fn dead_memo_capacity(families: &[FamilyRecord], key_width: usize) -> usize {
+    let mut prefix_count = 1_usize;
+    let mut state_bound = 0_usize;
+    for family in families {
+        state_bound = state_bound.saturating_add(prefix_count);
+        prefix_count = prefix_count.saturating_mul(family.option_len as usize);
+    }
+    let bytes_per_record = std::mem::size_of::<DeadRecord>()
+        .saturating_add(key_width.saturating_mul(std::mem::size_of::<u64>()))
+        .saturating_add(16);
+    state_bound.min(MAX_DEAD_MEMO_BYTES / bytes_per_record.max(1))
 }
 
 fn correlated_suffix_sets(
@@ -573,6 +611,7 @@ struct Search<'a> {
     needed: Vec<TritBlock>,
     totals: Vec<i64>,
     choices: Vec<u32>,
+    frames: Vec<SearchFrame>,
     dead: DeadMemo,
     states_examined: u64,
     bound_prunes: u64,
@@ -701,126 +740,29 @@ impl Search<'_> {
         }
     }
 
-    fn visit_recursive<const CORRELATED: bool>(
-        &mut self,
-        family_index: usize,
-    ) -> Result<bool, OrbitError> {
-        self.states_examined += 1;
-        let suffix_total = family_index * self.total_width;
-        for coordinate in 0..self.total_width {
-            let current = self.totals[coordinate];
-            let target = self.target_totals[coordinate];
-            if current + self.suffix_min[suffix_total + coordinate] > target
-                || current + self.suffix_max[suffix_total + coordinate] < target
-            {
-                self.bound_prunes += 1;
-                return Ok(false);
-            }
-        }
-        if CORRELATED {
-            for ((needed, &target), &current) in self
-                .needed
-                .iter_mut()
-                .zip(self.target_packed)
-                .zip(&self.packed)
-            {
-                *needed = target.add_mod3(current).add_mod3(current);
-            }
-            if !self.correlated_suffixes[family_index].contains(&self.needed) {
-                self.residue_prunes += 1;
-                return Ok(false);
-            }
-        } else {
-            let suffix_residue = family_index * self.target_residue.len();
-            for coordinate in 0..self.target_residue.len() {
-                let block = self.packed[coordinate / 21].raw();
-                let current = ((block >> (3 * (coordinate % 21))) & 7) as u8;
-                let needed = (self.target_residue[coordinate] + 3 - current) % 3;
-                if self.suffix_residues[suffix_residue + coordinate] & (1 << needed) == 0 {
-                    self.residue_prunes += 1;
-                    return Ok(false);
-                }
-            }
-        }
-        let family_u32 = family_index as u32;
-        if self.dead.contains(family_u32, &self.packed, &self.totals) {
-            self.memo_prunes += 1;
-            return Ok(false);
-        }
-        if family_index == self.families.len() {
-            return Ok(self
-                .packed
-                .iter()
-                .zip(self.target_packed)
-                .all(|(left, right)| left.raw() == right.raw())
-                && self.totals == self.target_totals);
-        }
-        let family = self.families[family_index];
-        let start = family.option_start as usize;
-        let end = start + family.option_len as usize;
-        for option_index in start..end {
-            let option = self.options[option_index];
-            let residue_start = option.residue_start as usize;
-            for (left, &right) in self
-                .packed
-                .iter_mut()
-                .zip(&self.residues[residue_start..residue_start + self.residue_blocks])
-            {
-                *left = left.add_mod3(right);
-            }
-            let totals_start = option.totals_start as usize;
-            for (left, &right) in self
-                .totals
-                .iter_mut()
-                .zip(&self.option_totals[totals_start..totals_start + self.total_width])
-            {
-                *left += right;
-            }
-            self.choices.push(option.label);
-            if self.visit_recursive::<CORRELATED>(family_index + 1)? {
-                return Ok(true);
-            }
-            self.choices.pop();
-            for (left, &right) in self
-                .totals
-                .iter_mut()
-                .zip(&self.option_totals[totals_start..totals_start + self.total_width])
-            {
-                *left -= right;
-            }
-            for (left, &right) in self
-                .packed
-                .iter_mut()
-                .zip(&self.residues[residue_start..residue_start + self.residue_blocks])
-            {
-                *left = left.add_mod3(right).add_mod3(right);
-            }
-        }
-        self.dead.insert(family_u32, &self.packed, &self.totals)?;
-        Ok(false)
-    }
-
-    #[cold]
-    #[inline(never)]
     fn run<const CORRELATED: bool>(&mut self) -> Result<bool, OrbitError> {
-        let mut stack = Vec::with_capacity(self.families.len() + 1);
-        stack.push(SearchFrame {
+        let mut frame = SearchFrame {
             family: 0,
             next_option: NO_OPTION,
             end_option: 0,
             incoming_option: NO_OPTION,
-        });
-        while let Some(frame) = stack.last_mut() {
+        };
+        let mut depth = 0_usize;
+        loop {
             let family_index = frame.family as usize;
             if frame.next_option == NO_OPTION {
                 match self.enter::<CORRELATED>(family_index) {
                     Entry::Accept => return Ok(true),
                     Entry::Reject => {
                         let incoming = frame.incoming_option;
-                        stack.pop();
-                        if incoming != NO_OPTION {
-                            self.undo(incoming as usize);
+                        if depth == 0 {
+                            return Ok(false);
                         }
+                        depth -= 1;
+                        // SAFETY: a parent is stored before every descent and
+                        // the frame array has one slot per family plus one.
+                        frame = unsafe { *self.frames.get_unchecked(depth) };
+                        self.undo(incoming as usize);
                         continue;
                     }
                     Entry::Descend => {
@@ -833,24 +775,30 @@ impl Search<'_> {
             if frame.next_option == frame.end_option {
                 self.dead.insert(frame.family, &self.packed, &self.totals)?;
                 let incoming = frame.incoming_option;
-                stack.pop();
-                if incoming != NO_OPTION {
-                    self.undo(incoming as usize);
+                if depth == 0 {
+                    return Ok(false);
                 }
+                depth -= 1;
+                // SAFETY: `depth` now names the stored parent frame.
+                frame = unsafe { *self.frames.get_unchecked(depth) };
+                self.undo(incoming as usize);
                 continue;
             }
             let option = frame.next_option;
             frame.next_option += 1;
             let next_family = frame.family + 1;
+            // SAFETY: `depth <= families.len()` and the array has one extra
+            // terminal slot.
+            unsafe { *self.frames.get_unchecked_mut(depth) = frame };
             self.apply(option as usize);
-            stack.push(SearchFrame {
+            depth += 1;
+            frame = SearchFrame {
                 family: next_family,
                 next_option: NO_OPTION,
                 end_option: 0,
                 incoming_option: option,
-            });
+            };
         }
-        Ok(false)
     }
 }
 
@@ -955,6 +903,8 @@ fn orbit_search_impl(
         .iter()
         .map(|&value| i64::from(value))
         .collect();
+    let key_width = residue_blocks + total_width;
+    let maximum_dead_records = dead_memo_capacity(&families, key_width);
     let mut search = Search {
         families: &families,
         options: &options,
@@ -973,24 +923,25 @@ fn orbit_search_impl(
         needed: vec![TritBlock::default(); residue_blocks],
         totals: vec![0; total_width],
         choices: Vec::with_capacity(family_count),
-        dead: DeadMemo::default(),
+        frames: vec![
+            SearchFrame {
+                family: 0,
+                next_option: NO_OPTION,
+                end_option: 0,
+                incoming_option: NO_OPTION,
+            };
+            family_count + 1
+        ],
+        dead: DeadMemo::with_capacity(maximum_dead_records, key_width)?,
         states_examined: 0,
         bound_prunes: 0,
         residue_prunes: 0,
         memo_prunes: 0,
     };
-    // The recursive kernel is measurably faster at ordinary depths. Reserve the
-    // explicit stack for inputs large enough that call-stack growth, rather
-    // than instruction count, is the binding concern.
-    let iterative = family_count > 32_768;
-    let feasible = if correlated_suffixes.is_empty() && iterative {
+    let feasible = if correlated_suffixes.is_empty() {
         search.run::<false>()?
-    } else if correlated_suffixes.is_empty() {
-        search.visit_recursive::<false>(0)?
-    } else if iterative {
-        search.run::<true>()?
     } else {
-        search.visit_recursive::<true>(0)?
+        search.run::<true>()?
     };
     Ok(OrbitSyndromeResult {
         choices: feasible.then(|| search.choices.into_boxed_slice()),
@@ -998,6 +949,8 @@ fn orbit_search_impl(
         bound_prunes: search.bound_prunes,
         residue_prunes: search.residue_prunes,
         memo_prunes: search.memo_prunes,
+        memo_states: search.dead.records.len() as u32,
+        memo_saturated: search.dead.saturated(),
         correlated_suffix_states,
     })
 }
@@ -1266,6 +1219,36 @@ mod tests {
                 assert_eq!(answer.choices, expected.choices);
             }
         }
+    }
+
+    #[test]
+    fn dead_memo_stops_at_its_presized_capacity() {
+        let mut memo = DeadMemo::with_capacity(1, 1).unwrap();
+        let maximum = memo.maximum_records;
+        let record_pointer = memo.records.as_ptr();
+        let word_pointer = memo.words.as_ptr();
+        for family in 0..maximum as u32 + 10 {
+            memo.insert(family, &[TritBlock::default()], &[]).unwrap();
+        }
+        assert!(memo.saturated());
+        assert_eq!(memo.records.len(), maximum);
+        assert_eq!(memo.records.as_ptr(), record_pointer);
+        assert_eq!(memo.words.as_ptr(), word_pointer);
+    }
+
+    #[test]
+    fn iterative_search_handles_deep_singleton_products() {
+        const FAMILIES: usize = 50_000;
+        let option = OrbitOption {
+            label: 7,
+            residue: Box::new([]),
+            totals: Box::new([]),
+        };
+        let families = vec![vec![option]; FAMILIES];
+        let answer = ternary_orbit_syndrome_search(&families, &[], &[]).unwrap();
+        assert_eq!(answer.states_examined, FAMILIES as u64 + 1);
+        assert_eq!(answer.choices.as_ref().unwrap().len(), FAMILIES);
+        assert!(!answer.memo_saturated);
     }
 
     proptest! {

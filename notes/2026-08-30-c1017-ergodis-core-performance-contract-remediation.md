@@ -28,6 +28,25 @@ branches, 20.013M to 19.844M branch misses, and 2,640 to 2,368 KiB peak RSS.
 The iterative traversal trades more predictable branches for less recursive
 control overhead and stack traffic; it does not reduce theorem work.
 
+The coordinate/correlated ternary-orbit solver now uses only its iterative
+production traversal at every depth. Its current frame stays in a local
+register record and the presized array stores parents only. The dead-state memo
+is sized before traversal from the exact prefix-tree upper bound subject to an
+8 MiB structural budget; once full it stops admitting records rather than
+growing. Results expose memo occupancy and saturation because saturation can
+add work but cannot alter exactness. Tests cover a 50,000-family product and a
+forced-capacity memo with stable backing pointers.
+
+On `orbit-grid:rust:14:3:12:12345`, four interleaved order-reversed pairs of
+500 solves preserved 206,356 states and the witness per solve. Mean time fell
+from 3.251467 s to 3.155416 s (`1.0304x`, paired `t=8.710`, 3 df). A diagnostic
+counter pair measured 15.210B to 14.056B cycles, 66.472B to 68.344B
+instructions, 7.752B to 7.683B branches, 74.065M to 50.682M branch misses,
+and 9,116 to 8,156 KiB peak RSS. The explicit traversal executes 2.8% more
+instructions but removes enough call-stack and unpredictable-return cost to
+win overall. Meet-in-the-middle enumeration still contains separate recursive
+paths and remains open.
+
 ## Goal
 
 Bring every reusable public Ergodis solve kernel into compliance with the

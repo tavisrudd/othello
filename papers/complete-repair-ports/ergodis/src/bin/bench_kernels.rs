@@ -974,7 +974,9 @@ fn main() {
         for _ in 0..repetitions {
             let answer = ternary_orbit_syndrome_search(&families, &target, &[]).unwrap();
             work += answer.states_examined;
-            peak_states = peak_states.max(answer.correlated_suffix_states);
+            peak_states = peak_states
+                .max(answer.correlated_suffix_states)
+                .max(u64::from(answer.memo_states));
             checksum = checksum.wrapping_add(answer.feasible() as u64);
             black_box(answer);
         }
@@ -1182,7 +1184,9 @@ fn main() {
                         .unwrap()
                 };
                 work += answer.states_examined;
-                peak_states = peak_states.max(answer.correlated_suffix_states);
+                peak_states = peak_states
+                    .max(answer.correlated_suffix_states)
+                    .max(u64::from(answer.memo_states));
                 checksum = checksum.wrapping_add(answer.feasible() as u64);
                 black_box(answer);
             }
