@@ -276,7 +276,24 @@ attempted"* and *"Is 43 sharp?"*.  2026-08-30 answered the first over
 `r = 10` was recorded on 2026-08-30 §5.5 item 5 as **not searched at all**, with
 Conjecture C's prediction `X(10) ⊆ {11}` untested.  The new driver reaches it.
 
-<!-- R10 TABLE -->
+| `r` | `q` | `k` | `N = \|PG(9,q)\|` | wall | RSS | `ρ` | deep | orbits | persistent | **exceptional** | exc. orbits |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 10 | 11 | 2 | 2,593,742,460 | 611 s | 329 MB | 9 | 66,390,456 | 50,447 | 792 | **66,389,664** | 50,444 |
+
+<!-- R10 MORE -->
+
+`ρ = 9 = r-1`, so Conjecture A survives at a redundancy it had never been tested
+at.  The persistent part is `792 = q(q+1)^2/2` in three orbits — one tangent of
+size `132 = q(q+1)` (`p = 11 ∤ 9`) and two conjugate-secant of sizes `220` and
+`440` summing to `660 = q(q^2-1)/2`, matching `⌊gcd(9,12)/2⌋ + 1 = 2`.
+
+The exceptional excess is enormous, but `q = 11` at `r = 10` gives `k = 2`: this
+is the near-degenerate boundary `q ≈ r`, where the curve has too few points for
+a split squarefree annihilator of degree `r-2` to exist and almost everything is
+deep.  2026-08-30 §5.3b flagged the same artifact at `(9,9)` and this report at
+`(8,8)`, `(8,9)`, `(9,9)`.  So `11 ∈ X(10)` is confirmed but carries no
+information beyond the boundary; Conjecture C's prediction `X(10) ⊆ {11}` is
+decided by the next cell, not this one.
 
 ## 5. The cyclic-pullback carriers (item 3, and what it settled)
 
@@ -377,6 +394,16 @@ one.  That is why 2026-08-30 §5.3f found 40 exceptional points on the `m = 2`
 stratum at `(11,13)` containing the 12 on the `m = 4` stratum.  Statements about
 "the `m` carrier" are therefore only sharp when phrased through the orbit
 stabilizer, which is what §5c does, rather than through stratum membership.
+
+### 5b″. Redundancy fifteen, a new rung
+
+`r = 15` has `r-3 = 12`, so its carriers are `m ∈ {2,3,4,6,12}`, and it is
+reachable because `d = 14 ≤ q` and `k = q-14 ≥ 1` force only `q ≥ 16`.  The
+`m = 6` carrier is the cheapest test of the "`m ≥ 6` never fires" pattern at a
+*small* least admissible field: `6 | q-1` and `q ≥ 16` give `q_min = 19`, far
+below `(10,7)`'s `q_min = 29`.
+
+<!-- R15 TABLE -->
 
 ### 5c. The stabilizer is not governed by the parity of `m`
 
