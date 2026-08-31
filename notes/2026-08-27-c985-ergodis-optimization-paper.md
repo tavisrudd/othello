@@ -46,8 +46,12 @@ as each coherent tranche lands.
    slices. The iterative orbit-product loop now passes the same real-loop gate
    on a fully exhausted correlated-residue instance, including dead-memo
    insertion; its option, family, residue, dead-memo, and traversal records all
-   have exact compile-time layout assertions. Current next slice is expanding
-   that census and closing its highest-leverage open allocation/layout rows.
+   have exact compile-time layout assertions. Generic root execution now gates
+   the callback region itself in serial and Rayon modes and records zero events
+   on every participating thread. The executor owns no concrete worker/output
+   layout; those remain kernel contracts, while its `RootOrdinal` layout is
+   exact. Current next slice is expanding that census and closing its
+   highest-leverage open allocation/layout rows.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

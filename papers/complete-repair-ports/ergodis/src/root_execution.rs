@@ -6,6 +6,9 @@
 
 use thiserror::Error;
 
+#[cfg(test)]
+use crate::test_alloc::HotLoopAllocationGuard;
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 #[repr(transparent)]
 pub struct RootOrdinal(pub u32);
@@ -51,10 +54,12 @@ where
         let mut worker = kernel.create_worker();
         let mut aggregate = identity();
         for (ordinal, root) in roots.iter().enumerate() {
-            aggregate = reduce(
-                aggregate,
-                kernel.evaluate(&mut worker, RootOrdinal(ordinal as u32), root),
-            );
+            let output = {
+                #[cfg(test)]
+                let _allocation_guard = HotLoopAllocationGuard::enter();
+                kernel.evaluate(&mut worker, RootOrdinal(ordinal as u32), root)
+            };
+            aggregate = reduce(aggregate, output);
         }
         return Ok(aggregate);
     }
@@ -72,6 +77,8 @@ where
                 .map_init(
                     || kernel.create_worker(),
                     |worker, (ordinal, root)| {
+                        #[cfg(test)]
+                        let _allocation_guard = HotLoopAllocationGuard::enter();
                         kernel.evaluate(worker, RootOrdinal(ordinal as u32), root)
                     },
                 )
@@ -132,5 +139,18 @@ mod tests {
             reduce_roots(&SumKernel, &roots, 4, || 0, |a, b| a + b).unwrap(),
             serial
         );
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn serial_and_parallel_root_callbacks_allocate_nothing() {
+        let roots = [10, 20, 30, 40, 50];
+        let ((serial, parallel), events) = crate::test_alloc::measure_allocations(|| {
+            let serial = reduce_roots(&SumKernel, &roots, 1, || 0, |a, b| a + b).unwrap();
+            let parallel = reduce_roots(&SumKernel, &roots, 3, || 0, |a, b| a + b).unwrap();
+            (serial, parallel)
+        });
+        assert_eq!(serial, parallel);
+        assert_eq!(events, Default::default());
     }
 }

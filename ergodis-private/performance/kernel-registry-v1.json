@@ -112,8 +112,8 @@
     {
       "id": "root-execution",
       "source": "papers/complete-repair-ports/ergodis/src/root_execution.rs",
-      "allocation": {"status": "open", "reason": "Worker initialization is presized, but a cross-thread allocator gate is not registered."},
-      "layout": {"status": "open", "reason": "All worker-written records need explicit stride assertions."},
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/root_execution.rs"]},
+      "layout": {"status": "na", "reason": "The generic executor owns no worker/output record; RootOrdinal is transparent with exact size/alignment assertions, while concrete layouts belong to each kernel."},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/root_execution.rs"]},
       "single_thread_counters": {"status": "open", "reason": "No retained single-thread control is registered."},
       "parallel_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md"]},

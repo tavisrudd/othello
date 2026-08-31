@@ -161,6 +161,13 @@ The controller restores the process leader's allowed CPU mask because a helper
 spawned inside `ThreadPool::install` otherwise inherits one pinned worker's
 affinity. It blocks in the kernel between publications and never spins.
 
+The generic root executor now brackets only the client hot callback—not pool
+creation, worker construction, or reduction—with the shared test allocator
+guard. Serial and three-worker Rayon execution both record zero events across
+all callback threads. The executor's only owned hot value, `RootOrdinal`, is a
+transparent four-byte scalar with exact alignment assertions; concrete worker
+and output layouts remain the responsibility of their kernel registry rows.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted
