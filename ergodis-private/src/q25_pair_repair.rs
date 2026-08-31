@@ -5,12 +5,15 @@
 
 use std::io::{Read, Write};
 
-use anyhow::{ensure, Result};
+use anyhow::{ensure, Context, Result};
 use ergodis::observational::{
     compile_observational_with_policy, verify_compilation, CertificatePolicy, CompiledObservation,
     FinitePresentation, GeneratorSpec,
 };
 use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
+use ergodis::theorem_search::{
+    evolve_implications, CandidateTrial, EvolutionConfig, EvolutionResult,
+};
 
 const FIELD_ORDER: usize = 25;
 const POINT_COUNT: usize = 651;
@@ -82,6 +85,21 @@ pub struct ResidualOrbitClass {
     pub slice_rows: u16,
 }
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct StabilizerPatternDiscovery {
+    pub matrices: u32,
+    pub members: u32,
+    pub universal_literals: u32,
+    pub trials: Box<[CandidateTrial<u32>]>,
+    pub best_sound: CandidateTrial<u32>,
+}
+
+#[derive(Clone, Copy)]
+struct MatrixExample {
+    literals: u32,
+    member: bool,
+}
+
 impl Q25Census {
     pub fn obstruction_count(&self) -> usize {
         self.records
@@ -148,6 +166,102 @@ pub fn classify_minimum_residual_orbits(census: &Q25Census) -> Vec<ResidualOrbit
     }
     representatives.sort_unstable();
     representatives
+}
+
+pub fn synthesize_residual_stabilizer_pattern() -> Result<StabilizerPatternDiscovery> {
+    let mut examples = Vec::with_capacity(5_usize.pow(9));
+    let mut universal_literals = (1_u32 << 27) - 1;
+    let mut members = 0_u32;
+    for code in 0..5_usize.pow(9) {
+        let matrix = decode_matrix(code);
+        let literals = matrix_literal_mask(matrix);
+        let member = semantic_residual_member(matrix);
+        if member {
+            universal_literals &= literals;
+            members += 1;
+        }
+        examples.push(MatrixExample { literals, member });
+    }
+    let EvolutionResult { trials, best_sound } = evolve_implications(
+        [0_u32],
+        &examples,
+        EvolutionConfig {
+            generations: 10,
+            beam_width: 32,
+            max_candidates: 256,
+        },
+        |candidate, output| {
+            let mut available = universal_literals & !candidate;
+            while available != 0 {
+                let bit = available.trailing_zeros();
+                output.push(*candidate | (1_u32 << bit));
+                available &= available - 1;
+            }
+        },
+        |candidate, example| example.literals & candidate == *candidate,
+        |example| example.member,
+        |candidate| candidate.count_ones(),
+    )?;
+    let best_sound = best_sound.context("matrix evolution found no exact stabilizer rule")?;
+    Ok(StabilizerPatternDiscovery {
+        matrices: examples.len() as u32,
+        members,
+        universal_literals,
+        trials,
+        best_sound,
+    })
+}
+
+pub fn format_matrix_pattern(pattern: u32) -> String {
+    let mut parts = Vec::new();
+    for entry in 0..9 {
+        for test in 0..3 {
+            let literal = 1_u32 << (3 * entry + test);
+            if pattern & literal == 0 {
+                continue;
+            }
+            let relation = match test {
+                0 => "=0",
+                1 => "!=0",
+                _ => "=1",
+            };
+            parts.push(format!("m{entry}{relation}"));
+        }
+    }
+    parts.join(" & ")
+}
+
+fn decode_matrix(mut code: usize) -> [u8; 9] {
+    let mut matrix = [0_u8; 9];
+    for entry in &mut matrix {
+        *entry = (code % 5) as u8;
+        code /= 5;
+    }
+    matrix
+}
+
+fn matrix_literal_mask(matrix: [u8; 9]) -> u32 {
+    let mut mask = 0_u32;
+    for (entry, value) in matrix.into_iter().enumerate() {
+        if value == 0 {
+            mask |= 1_u32 << (3 * entry);
+        } else {
+            mask |= 1_u32 << (3 * entry + 1);
+        }
+        if value == 1 {
+            mask |= 1_u32 << (3 * entry + 2);
+        }
+    }
+    mask
+}
+
+fn semantic_residual_member(matrix: [u8; 9]) -> bool {
+    if matrix.iter().find(|&&entry| entry != 0) != Some(&1) || det5(matrix) == 0 {
+        return false;
+    }
+    [([0, 0, 1], [0, 0, 1]), ([0, 1, 0], [0, 1, 0])]
+        .into_iter()
+        .all(|(point, expected)| normalize(apply_matrix_raw(matrix, point)) == expected)
 }
 
 fn canonical_triple(triple: [u16; 3], action: &[[u16; ORBIT_COUNT]]) -> [u16; 3] {
@@ -608,23 +722,26 @@ impl Geometry {
             orbit_of_point[pair[1] as usize] = orbit as u16;
         }
 
+        assert_eq!(self.points[self.fixed[0] as usize], [0, 0, 1]);
+        assert_eq!(self.points[self.fixed[1] as usize], [0, 1, 0]);
         let mut matrices = Vec::with_capacity(400);
-        for code in 0..5_usize.pow(9) {
-            let mut encoded = code;
-            let mut matrix = [0_u8; 9];
-            for entry in &mut matrix {
-                *entry = (encoded % 5) as u8;
-                encoded /= 5;
-            }
-            if matrix.iter().find(|&&entry| entry != 0) != Some(&1) || det5(matrix) == 0 {
-                continue;
-            }
-            let left =
-                id_by_key[point_key(apply_matrix(matrix, self.points[self.fixed[0] as usize]))];
-            let right =
-                id_by_key[point_key(apply_matrix(matrix, self.points[self.fixed[1] as usize]))];
-            if left == self.fixed[0] && right == self.fixed[1] {
-                matrices.push(matrix);
+        for middle_scale in 1..5 {
+            for final_scale in 1..5 {
+                for lower_left in 0..5 {
+                    for bottom_left in 0..5 {
+                        matrices.push([
+                            1,
+                            0,
+                            0,
+                            lower_left,
+                            middle_scale,
+                            0,
+                            bottom_left,
+                            0,
+                            final_scale,
+                        ]);
+                    }
+                }
             }
         }
         assert_eq!(matrices.len(), 400);
@@ -657,6 +774,11 @@ fn det5(matrix: [u8; 9]) -> u8 {
 
 #[inline]
 fn apply_matrix(matrix: [u8; 9], point: Point) -> Point {
+    normalize(apply_matrix_raw(matrix, point))
+}
+
+#[inline]
+fn apply_matrix_raw(matrix: [u8; 9], point: Point) -> Point {
     let mut image = [0_u8; 3];
     for row in 0..3 {
         let mut coordinate = 0_u8;
@@ -665,7 +787,7 @@ fn apply_matrix(matrix: [u8; 9], point: Point) -> Point {
         }
         image[row] = coordinate;
     }
-    normalize(image)
+    image
 }
 
 struct GenerateKernel<'a> {

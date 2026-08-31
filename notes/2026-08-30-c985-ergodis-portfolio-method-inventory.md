@@ -229,6 +229,31 @@ intersections are `3,6,6,3,6`.  Thus their global union has size 1,600.  The
 classification adds 0.071 seconds to the warm 12-thread diagnostic and no
 problem-specific representative table to the implementation.
 
+The theorem evolver was then applied to the stabilizer construction itself.
+It semantically labels all `5^9=1,953,125` base-field matrices by normalized
+invertibility and their action on the two fixed projective points.  Each matrix
+is retained only as a 27-bit entry-literal mask.  From the exact 400 positives,
+240 evolved conjunctions recover the unique minimum-complexity exact pattern
+`m0=1`, `m1=m2=m5=m7=0`, `m4!=0`, `m8!=0`, with all 400 positives and zero
+false positives.  Synthesis takes 0.433 seconds and 41 MiB peak process RSS in
+the measured combined run.
+
+Promoting that discovered pattern replaces the `5^9` filter with direct
+generation of `5^2*4^2=400` matrices.  The 11-round median residual
+classification time falls from the prior 0.0714-second diagnostic to 0.0185
+seconds, a 3.86x phase speedup, while preserving all five classes and
+stabilizers.  The full 240-line trial stream regenerates with SHA-256
+`f8e2a71b45fe86a042ab9350f594b2a9c948b36a5cc3ead6c69a42a3daeb1989`; the
+committed compact expectation is
+`ergodis-private/evidence/q25-stabilizer-trials-v1.sha256`.
+
+```text
+choom -n 1000 -- ergodis-private/target/release/q25-pair-repair \
+  --threads 12 --synthesize-stabilizer \
+  --stabilizer-log ergodis-private/target/q25-stabilizer-trials-v1.jsonl
+sha256sum ergodis-private/target/q25-stabilizer-trials-v1.jsonl
+```
+
 The later sealed Q25 exact-minimum/extremal package is larger: the committed
 record inventory has 9,511 Lean modules and about 83.1 MiB tracked source, with
 at least 6h27m of recorded cold tree builds and roughly 4 GB per worker.  It also
@@ -392,3 +417,67 @@ cycles, branches, branch misses, last-level cache misses, peak RSS, evidence
 bytes, and verifier wall time are separate fields.  A generic solver timeout is
 diagnostic only, and no bespoke geometry result will be described as published
 end-to-end SOTA when no such implementation exists.
+
+## Architecture and scaling review
+
+The new theorem evolver is deliberately campaign-side: allocations, ordered
+deduplication, ranking, and JSONL serialization never enter a solver hot loop.
+The domain client controls the candidate type, mutation grammar, exact truth
+oracle, coverage predicate, and syntax cost; the engine controls deterministic
+generation, testing, ranking, and replay.  This is enough to reuse one engine
+for Q16 incidence thresholds and Q25 matrix-literal conjunctions.
+
+The present single-score beam can starve a temporarily unsound but promising
+parent after finding a narrow sound rule.  Before scaling to richer grammars it
+needs a Pareto beam over false positives, coverage, complexity, and behavioural
+novelty, plus counterexample-guided mutations.  Candidate evaluation should
+gain compressed column bitmaps and cached conjunctions; Q25 currently stores
+one 27-bit mask per matrix and is comfortable at 41 MiB, but denser grammars
+should not multiply that by the candidate count.  All traversal is iterative,
+so no recursion or stack-depth limit is introduced.
+
+For large domains the intended gate is sample -> held-out counterexamples ->
+full exact replay.  Only the last stage can certify the finite claim.  Promotion
+to a uniform theorem is separate again: a typed proof-schema matcher should
+recognize degree/root-count, rank, group-action, and pigeonhole schemas and emit
+the residual obligations for Lean or another kernel.  This prevents an exact
+but accidental finite classifier from being mislabeled as mathematics.
+
+The short Q16 campaign also shows that maximum thread count is not a default:
+eight workers beat twelve.  Future campaign scheduling should estimate grain
+from a sample and select threads automatically.  Evidence writers already run
+after evaluation and stream JSONL; larger truth datasets need chunked readers
+and compressed feature stores rather than whole-input `String`/`Vec` loading.
+
+## `ej` + `tt` closeout and mystery ledger
+
+The strongest extra value is the closed discovery-to-optimization loop, not
+another domain adapter: semantic oracle -> evolved rule -> exact falsification
+log -> classical proof-schema match -> promoted fast path.  The Q25 result also
+answers the referee-style “what does the invariant forget?” question sharply:
+the full 310-bit response distinguishes all 7,044 rows, while the theorem
+objective admits a tiny streamed certificate.  State minimization and proof
+compression are different operations and need separate APIs.
+
+- **Q25 response injectivity — open.** All 7,044 legal normalized rows have
+  distinct legal-pair masks.  It is unknown whether the mask reconstructs the
+  row for a structural reason or only at this field/order.  The evidence gap is
+  a cross-field experiment and an intrinsic reconstruction argument.
+- **Q16 `3+3` rule — settled here.** Evolution identifies both thresholds;
+  the classical restriction-to-a-line and residual-line proof promotes the
+  finite rule uniformly for quadratics.
+- **q=19 transient marked net — open.** The marker necessity and six common-
+  infinity witnesses are settled; the equianharmonic reason for occurrence at
+  19 remains with the PRS theory programme.
+- **Hadamard IDs 4/5 — open.** Cyclic-difference censuses settle the lock layer,
+  but the nested 9/37-compression lift has not excluded or constructed the two
+  remaining cases.
+- **Aligned `g(8)` 15/16 exclusion — open.** The compiler and symmetry quotient
+  are validated, but the crown still needs the stronger aggregate context-rank
+  theorem or a completed exact exclusion.
+
+Highest EV is to add typed predicate grammars, Pareto/CEGIS evolution, and
+proof-schema matching, then run the same engine against the Q25 injectivity
+mystery and Hadamard compression moments.  That tests whether Ergodis can move
+from rediscovering supplied feature families to proposing genuinely new
+invariants.

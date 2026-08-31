@@ -1,4 +1,4 @@
-use std::fs::File;
+use std::fs::{File, OpenOptions};
 use std::io::{BufReader, BufWriter, Write};
 use std::path::PathBuf;
 use std::time::Instant;
@@ -6,8 +6,9 @@ use std::time::Instant;
 use anyhow::Result;
 use clap::Parser;
 use ergodis_private::q25_pair_repair::{
-    classify_minimum_residual_orbits, compile_q25_pair_repair, independently_verify,
-    verify_certificate, verify_minimum_certificate, write_certificate, write_minimum_certificate,
+    classify_minimum_residual_orbits, compile_q25_pair_repair, format_matrix_pattern,
+    independently_verify, synthesize_residual_stabilizer_pattern, verify_certificate,
+    verify_minimum_certificate, write_certificate, write_minimum_certificate,
 };
 
 #[derive(Parser)]
@@ -20,6 +21,10 @@ struct Arguments {
     minimum_certificate: Option<PathBuf>,
     #[arg(long)]
     classify_residual: bool,
+    #[arg(long)]
+    synthesize_stabilizer: bool,
+    #[arg(long, requires = "synthesize_stabilizer")]
+    stabilizer_log: Option<PathBuf>,
 }
 
 fn main() -> Result<()> {
@@ -89,5 +94,43 @@ fn main() -> Result<()> {
         minimum_certificate_replay_seconds,
         classification_seconds,
     );
+    if arguments.synthesize_stabilizer {
+        let started = Instant::now();
+        let discovery = synthesize_residual_stabilizer_pattern()?;
+        println!(
+            "stabilizer_matrices={} stabilizer_members={} theorem_trials={} covered_true={} false_positives={} complexity={} pattern={} synthesize_seconds={:.6}",
+            discovery.matrices,
+            discovery.members,
+            discovery.trials.len(),
+            discovery.best_sound.score.covered_true,
+            discovery.best_sound.score.false_positives,
+            discovery.best_sound.score.complexity,
+            format_matrix_pattern(discovery.best_sound.candidate),
+            started.elapsed().as_secs_f64(),
+        );
+        if let Some(path) = arguments.stabilizer_log {
+            let output = OpenOptions::new().write(true).create_new(true).open(path)?;
+            let mut writer = BufWriter::new(output);
+            for trial in &discovery.trials {
+                serde_json::to_writer(
+                    &mut writer,
+                    &serde_json::json!({
+                        "generation": trial.generation,
+                        "candidate_mask": trial.candidate,
+                        "pattern": format_matrix_pattern(trial.candidate),
+                        "score": {
+                            "examples": trial.score.examples,
+                            "conclusion_true": trial.score.conclusion_true,
+                            "covered_true": trial.score.covered_true,
+                            "false_positives": trial.score.false_positives,
+                            "complexity": trial.score.complexity,
+                        },
+                    }),
+                )?;
+                writer.write_all(b"\n")?;
+            }
+            writer.flush()?;
+        }
+    }
     Ok(())
 }
