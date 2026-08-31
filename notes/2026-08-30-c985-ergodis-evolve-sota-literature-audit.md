@@ -1,0 +1,279 @@
+# C985 — Ergodis evolve-system SOTA audit and implementation priorities
+
+**Lane:** `complete-ports`  
+**Date:** 2026-08-30  
+**Scope:** optional theorem-discovery/campaign layer, not solver authority
+
+## Verdict
+
+Ergodis is not yet competitive with the leading evolutionary coding systems as
+an autonomous proposal engine. It has a narrow deterministic beam mutator, no
+islands or quality-diversity archive, no staged evaluator, no learned proposal
+policy, and no persistent cross-campaign population.
+
+It is already stronger than those systems in a different and important layer:
+the exact experimental substrate. Candidate plans are typed and compiled,
+finite evaluations are exact, outcome equivalence is hashed, counterexamples
+are replayable, evidence is bounded and streamed, live solver steering is
+optional, and diagnostic/ordering evidence is prevented from masquerading as
+proof. The solver hot path can remain allocation-free and effectively unaware
+of the campaign layer.
+
+The best strategy is therefore not to reproduce AlphaEvolve around arbitrary
+source programs. It is to import the strongest search-control mechanisms while
+retaining Ergodis's smaller typed genome and exact semantic boundary:
+
+```text
+typed theorem/attack plan
+  -> exact staged evaluation
+  -> semantic + behavioural archive
+  -> max-oriented target selection
+  -> counterexample/hindsight refinement
+  -> replay or proof extraction
+```
+
+This makes Ergodis a complementary system: less general as a source-code
+generator, more rigorous and potentially far more sample-efficient when a
+problem has already been compiled into exact finite observables.
+
+## Comparison with the strongest relevant systems
+
+| Capability | Relevant SOTA | Ergodis now | Consequence |
+|---|---|---|---|
+| Proposal breadth | AlphaEvolve evolves whole files with an LLM ensemble; CodeEvolve adds inspirations, meta-prompts, and depth refinement | bounded hand-written mutations over a typed VM | large autonomy gap, but a much smaller and safer search space |
+| Diversity | AlphaEvolve uses MAP-Elites/islands; open CodeEvolve uses CVT-MAP-Elites, islands, and migration | exact structural deduplication and outcome-class hashing inside one run | add semantic niches and multiple populations before scaling proposal volume |
+| Evaluation economy | AlphaEvolve uses cascades and parallel evaluators | every candidate sees the full frozen batch | add exact successive gates; most bad plans should die on permanent falsifiers |
+| Target selection | TTT-Discover uses maximum-oriented PUCT; runtime CodeEvolve profiles weighted component graphs | static beam rank; humans currently redirect campaigns from live evidence | compile solver/root cost and uncertainty into a max-oriented selection policy |
+| Learning from a campaign | TTT-Discover updates the model at test time; HTPS trains online from proof search | no learned proposal policy | defer weight updates until exact archives and rewards are calibrated |
+| Learning from failure | Minimo hindsight-relabels failed proof trees into achieved theorems and proofs | permanent counterexamples, but no systematic extraction of valid sublemmas from failed attacks | add exact hindsight extraction over intermediate plan/search states |
+| Cumulative theory | Minimo identifies lemma accumulation and premise selection as necessary for depth | theorem kernels exist, but evolve does not yet compose or retrieve them as a growing library | add theorem dependency DAG, utility, and premise/kernel selection |
+| Trace diagnosis | EvoTrace/EvoReplay retain source, lineage, prompts, evaluation metadata, replay interventions, and cycling tests | bounded event ledger and streamed trials, but incomplete lineage/replay schema and no cycling diagnostic | make every candidate replayable and detect equivalent reversions before evaluation |
+| Runtime focus | runtime CodeEvolve selects profiled hot components and prunes context | Ergodis has perf counters and rich root metrics but target choice is mostly manual | use measured theorem cost, state mass, exceptional roots, and debt as target weights |
+| Exactness boundary | most systems rely on task evaluators and may overfit them | explicit `proof_authority: false`, hostile replay, exact witnesses/counterexamples | retain this as the non-negotiable architectural edge |
+
+AlphaEvolve's published ablations support evolution, rich context, meta-prompt
+evolution, full-file evolution, and mixed model capability as jointly useful.
+Its evaluator cascade, multiple metrics, asynchronous throughput pipeline, and
+MAP-Elites/island database are the directly reusable architectural pieces.[1]
+The mathematical follow-up reports that search heuristics, rather than direct
+objects, are often the right genome; it also emphasizes expert intervention,
+families of correlated instances, continuous score shaping, and a separate
+generalizer mode.[2]
+
+The open CodeEvolve study provides the cleanest reproducible search baseline:
+island evolution, CVT-MAP-Elites, inspiration-based crossover, lineage-local
+depth refinement, meta-prompt exploration, and plateau-triggered exploration.
+Its controlled comparison reports leading results on six of nine tasks against
+OpenEvolve and ShinkaEvolve under matched conditions, while its ablations say
+the interaction of components matters more than one operator alone.[3]
+
+TTT-Discover sharpens the objective. Discovery needs one exceptional state,
+not high mean reward. It therefore uses an entropic, maximum-seeking objective
+and PUCT whose exploitation term is the best descendant reward, not the mean,
+while preserving exploration through visit counts. Its matched baselines use
+the same model and 25,600-sample budget.[4] Ergodis should import the selection
+principle before considering test-time weight updates: its exact campaign
+archive already supplies better-calibrated values than a generic reward model.
+
+Minimo and HTPS supply the theorem-side bridge. Minimo generates well-typed
+conjectures by construction and converts otherwise failed proof searches into
+new true statements and proof data by hindsight relabeling.[5] HTPS treats a
+proof as an AND/OR hypergraph, selects whole partial proof hypertrees, batches
+leaf expansion, and trains online from minimal proof trees and critic states.[6]
+For Ergodis, failed attack plans should similarly yield achieved subrelations,
+minimal obstruction predicates, and candidate intermediate lemmas rather than
+only a negative score.
+
+Two 2026 diagnostics change the implementation order. Runtime CodeEvolve uses
+measured time/frequency on a component graph to select writable targets and
+then applies a validation cascade; it reports 15.22x average speedup across
+seven selected Java hotspots, though this is an enterprise case study rather
+than a matched general benchmark.[7] EvoTrace finds that roughly 30% of added
+lines in its traces reintroduce previously deleted lines, that best lineages
+are short, and that late mathematical gains are often recoverable by a small
+Bayesian hyperparameter sweep.[8] Ergodis should therefore add replay/cycling
+diagnostics and route numeric tuning to a cheap specialist instead of spending
+general evolution budget on it.
+
+## Highest-value implementation order
+
+### P0 — persistent replayable search graph and anti-cycling
+
+Persist a compact candidate record:
+
+```text
+candidate hash, semantic hash, parent hashes, operator,
+generation/island, exact score vector, presentation hash,
+first obstruction, evaluation stages passed, artifact path
+```
+
+The semantic hash is the lowered plan plus scope; the outcome hash is behaviour
+on the frozen corpus. Reject exact structural repeats before compilation and
+skip already-known outcome classes unless they enter a new behavioural niche.
+Record add/drop operator inverses so a short cycle is detectable without
+retaining full text. This directly attacks the EvoTrace pathology while making
+campaign replay and cross-run persistence possible.
+
+### P0 — exact evaluator cascade
+
+Use lexicographic stages:
+
+1. permanent counterexamples and corruptions;
+2. tiny exhaustive strata;
+3. training corpus;
+4. hostile held-out strata;
+5. bounded shadow probes with states/instructions/theorem-cost counters;
+6. full exact replay or certificate gate.
+
+Every stage has a declared row/work/byte budget. Unsound candidates stop
+immediately. Diagnostic and ordering candidates use paired operational races;
+no noisy runtime score can grant proof authority.
+
+### P0 — maximum-oriented target selection
+
+Replace static beam truncation with a deterministic PUCT-like selector over
+candidate/root pairs:
+
+```text
+best descendant impact
++ prior from semantic rank / exact margin
++ exploration bonus from visits and uncertainty
+- theorem evaluation cost
+```
+
+The primary value is exceptional descendant states or instructions avoided,
+not mean predicate accuracy. The initial implementation needs no neural model:
+the persistent scorecards and reliability statistics in the existing ADR are
+enough.
+
+### P1 — semantic islands and quality-diversity niches
+
+Use a small fixed island count with different operator priors: obstruction
+repair, scope mutation, expression structure, theorem-kernel composition, and
+numeric tuning. Define niches from semantics rather than code shape:
+
+- false-positive and false-negative profile;
+- exact output class;
+- root/field/rank scope;
+- primitive/kernel family;
+- proof/certificate footprint;
+- operational cost bucket.
+
+Migration should copy compact elites, not mutable shared state. A global
+append-only counterexample set is shared by every island.
+
+### P1 — exact hindsight and theorem accumulation
+
+When a candidate fails, inspect its opcode trace and the exact search states it
+did settle. Extract:
+
+- the longest sound prefix;
+- subexpressions with zero false positives;
+- smallest counterexample-separating predicates;
+- intermediate invariants true on all reached children;
+- proof/certificate handles already produced by kernels.
+
+Store these in a theorem dependency DAG with domains and replay obligations.
+Candidate generation may compose only type-compatible nodes. Premise selection
+uses observed utility, domain overlap, and cost; it does not make a theorem
+trusted.
+
+### P1 — profile-driven campaign targeting
+
+Aggregate existing root progress, debt ledgers, exceptional-state counts, and
+perf counters outside the search path into a weighted target graph. Nodes are
+root strata, primitive producers, theorem calls, and unresolved obligations;
+edges are dependency or continuation relations. Route proposal/evaluation
+budget to nodes with high measured state mass and plausible removable cost.
+Simple flat targets receive one-shot or numeric tuning; structural targets get
+full evolution.
+
+### P2 — learned proposer or test-time training
+
+Only after the above archives are stable, train or adapt a proposer on exact
+campaign transitions. The first useful learned object is likely operator and
+target selection, not arbitrary Rust generation. TTT-style weight adaptation
+is expensive and optimizes a less transparent state; an offline contextual
+bandit over typed mutations should be the first learned baseline.
+
+## Near-term acceptance tests
+
+1. Replaying a campaign from its durable graph produces identical semantic and
+   outcome hashes without reevaluating cached nodes.
+2. A synthetic add/drop cycle is rejected before VM evaluation.
+3. On a frozen campaign, the cascade evaluates fewer full rows while returning
+   the same Pareto elites as exhaustive evaluation.
+4. PUCT selection beats static beam selection on held-out best-found score at
+   equal exact evaluation work, over multiple seeds.
+5. Islands retain more semantic outcome classes than one population at equal
+   work, without increasing permanent-counterexample failures.
+6. A failed search yields at least one independently replayable sublemma in a
+   fixture where the intended theorem is deliberately too strong.
+7. Profile-driven targeting chooses a planted expensive primitive/root and
+   leaves a planted cold target on the cheap path.
+
+## Literature-audit protocol
+
+This is a systems-positioning and import audit, not a novelty or priority
+claim. No absence claim is made. Search used arXiv-oriented web discovery and
+targeted primary-paper retrieval. The exact new queries were:
+
+```text
+site:arxiv.org 2026 automated theorem discovery evolutionary search runtime profile target selection theorem proving
+site:arxiv.org 2025 2026 LLM theorem conjecture generation proof search self improvement archive MAP elites
+site:arxiv.org 2026 algorithm discovery evolutionary code search successive halving evaluator cascade
+arXiv 2605.04677 theorem proving runtime profile weighted component graph MCTS target selection
+site:arxiv.org "runtime profile" "target selection" theorem proving 2026
+site:arxiv.org "EvoTrace" "EvoReplay" 2605.20086
+```
+
+Opening full-text count: **1 of 8** sources was read in full. The other seven
+were read at the exact partial depths below. All eight PDFs and extracted texts
+are in the shared persistent literature cache.
+
+## Sources and read depth
+
+1. Novikov et al., *AlphaEvolve: A coding agent for scientific and algorithmic
+   discovery*, arXiv:2506.13131v1. **Partial:** abstract; Sections 1, 2.1–2.6,
+   4, 5, and 6. Cache key `arXiv:2506.13131`, SHA-256
+   `f092c8cbd65da89951ee6496374da9a54963f9035758c25ac6e4625f506df9ad`.
+
+2. Georgiev, Gómez-Serrano, Tao, Wagner, *Mathematical Exploration and
+   Discovery at Scale*, arXiv:2511.02864v3. **Partial:** abstract; Sections
+   1–5, including search mode, generalizer mode, meta-analysis, ablations, and
+   future work. Cache key `arXiv:2511.02864`, SHA-256
+   `77b43844077c98c26dfc76ad391cadbbd53d48a1d290ddae575ff4d1bcdef9d2`.
+
+3. Assumpção et al., *CodeEvolve: an open-source evolutionary framework for
+   algorithmic discovery and optimization*, arXiv:2510.14150v6. **Partial:**
+   abstract; Sections 1–5.4. Cache key `arXiv:2510.14150`, SHA-256
+   `5ba07cdc336db7052c1ada4849f5d4b9577da6e0621ca61f0300b0a84eea4cf8`.
+
+4. Yuksekgonul et al., *Learning to Discover at Test Time*,
+   arXiv:2601.16175v2. **Partial:** abstract; Sections 1–3.3 and 4–4.1.3. Cache
+   key `arXiv:2601.16175`, SHA-256
+   `4656ec28d800002d9a3e3f83a71c7d9032ef5f1873cd953b8808a8391ce06ec7`.
+
+5. Poesia et al., *Learning Formal Mathematics From Intrinsic Motivation*,
+   arXiv:2407.00695v2. **Partial:** abstract; Sections 1–5. Cache key
+   `arXiv:2407.00695`, SHA-256
+   `1a7d6468b9f6b67a7203a2778067e57a7fd610b2a8738664adffdbc47f43f02f`.
+
+6. Lample et al., *HyperTree Proof Search for Neural Theorem Proving*,
+   arXiv:2205.11491v1. **Partial:** abstract; Sections 1–6.3. Cache key
+   `arXiv:2205.11491`, SHA-256
+   `9deff4b44772a176314016ce0b277cac20649f2ed8784031f34a6b29bb64fa48`.
+
+7. Borra et al., *CodeEvolve: LLM-Driven Evolutionary Optimization with
+   Runtime-Enriched Target Selection for Multi-Language Code Enhancement*,
+   arXiv:2605.04677v1. **Full text.** Cache key `arXiv:2605.04677`, SHA-256
+   `56f7427dc9ed8488c5ca781fe4d53a58f3265134f92c190b114e017384e71026`.
+
+8. Pelleriti et al., *What Do Evolutionary Coding Agents Evolve?*,
+   arXiv:2605.20086v1. **Partial:** abstract; Sections 1–6. Cache key
+   `arXiv:2605.20086`, SHA-256
+   `b8f592bd68429b4c5f7cee2878a316941acf3cdf80215a0d78c08c25a73722f3`.
+
+The audit did not attempt MathSciNet, zbMATH, Google Scholar, or exhaustive
+forward-citation coverage because it makes no novelty-negative claim. Those
+channels would be required before asserting priority for a new search method.
