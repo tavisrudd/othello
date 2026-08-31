@@ -506,6 +506,12 @@ mod tests {
         let mut incomplete = core.clone();
         incomplete.minimum_block_masks = Vec::new().into_boxed_slice();
         assert!(!incomplete.verify(&system));
+        let mut wrong_marginal = core.clone();
+        wrong_marginal.rank_loss_if_removed[1] = 1;
+        assert!(!wrong_marginal.verify(&system));
+        let mut wrong_minimum_size = core.clone();
+        wrong_minimum_size.minimum_block_size = 1;
+        assert!(!wrong_minimum_size.verify(&system));
         assert!(system.select_rows(&[system.row_count() as u32]).is_err());
     }
 
