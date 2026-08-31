@@ -51,6 +51,78 @@ layout, evidence, and publication-boundary failures.
    retain negative controls and close the task only with independently checked
    evidence.
 
+## Concrete source-audit findings
+
+The remediation must close these observed failures rather than treating the
+acceptance gates as prospective guidance:
+
+- No allocator instrumentation currently proves that any public solve loop is
+  allocation-free. Recursive or growing production paths remain in the
+  application, balanced, orbit, ZDD, sparse-scheduler, and ordered-resource
+  solvers.
+- CSS workers publish bounds with worker-to-worker `fetch_min` traffic, allocate
+  per-task workspaces, and retain a run-constant pulse branch inside the search
+  loop. These require worker-owned storage and a no-pulse kernel selected before
+  entry, followed by single-thread and parallel counter A/Bs.
+- Hot layout holes include `alignment::SearchFrame`, the CSS wide-branch frame,
+  `SeparatorSearchNode`, `SparseTerm`, and root-branch records. Some padded CSS
+  records assert alignment without asserting the complete size contract.
+- `alignment`, fixed-GF(27), defect-q27, Hadamard/GS, control/proof GS schemas,
+  and C-ID fixtures are domain- or campaign-specific and currently cross the
+  public-core boundary.
+- There is no systematic retained-binary registry covering allocator events,
+  perf counters, false sharing/contention, and one-thread/parallel semantic
+  parity for all public solve kernels.
+
+## Review findings for the pending C1016 Rust overlay
+
+The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its
+generic ideas may be retained only after the following blockers are resolved:
+
+1. **Necessary-pruning authority is not semantically bound.**
+   `CompiledPlan::compile_authorized` verifies a presentation-hash string,
+   theorem metadata, a field name, and the predicate program shape. It does not
+   prove that the named feature column was produced by the theorem's verified
+   extractor. A miswired or adversarial producer can label arbitrary data
+   `character_energy_q2` or `multiplier_profile_admissible` and obtain
+   `PlanRole::Necessary` pruning. Consequently the advertised
+   `"proof_authority": true` capability is unsound. Bind authority to a typed,
+   sealed extractor/presentation implementation (or an equivalently verified
+   semantic commitment), and retain negative tests that substitute a field
+   with the right name and wrong values.
+2. **The overlay violates the public/private boundary.**
+   `control/proof.rs` publishes bordered-GS theorem schemas, and `hadamard.rs`
+   publishes GS-specific compilers from the reusable crate. The GS schemas,
+   adapters, fixtures, and campaign claims belong in `ergodis-private/`. A
+   generic necessary-predicate mechanism belongs in core only if it exposes no
+   private domain vocabulary and satisfies the semantic-authority gate above.
+3. **The character compression contract is false as documented.**
+   `BorderedGsCharacterSector::energy` says a coefficient vector may be an
+   arbitrary compression provided its length retains the character order.
+   Character energy is preserved only by a specified residue-class-preserving
+   aggregation (or another proved intertwining map); length divisibility alone
+   is insufficient. Require and verify the compression map/certificate, or
+   restrict the API to uncompressed coefficients.
+4. **Several supported input ranges are arithmetically unsound.**
+   `multiplier_character_fixed_field_degree` accepts character order one but its
+   multiplicative-order loop cannot terminate normally for that case;
+   `count_bordered_order_two_profile_domain` reaches an unchecked `u16` cast for
+   carriers above `u16::MAX`; order-three profile compilation truncates an
+   `i64` target to `u32` and performs unchecked `u32` sums; and `euler_phi` uses
+   `prime * prime` in its loop condition. Reject unsupported ranges explicitly
+   or use checked/wider arithmetic throughout, with boundary tests.
+5. **Tests are fixtures and self-consistency checks, not independent theorem
+   oracles.** The current M522/H2060 assertions can preserve an implementation's
+   shared mistake. Add small exhaustive direct-action/direct-character-sum
+   oracles, malformed semantic-binding controls, arithmetic boundary cases, and
+   randomized differential tests before accepting exact or proof-authority
+   claims.
+
+Approval requires splitting the reusable mechanism from the private GS
+application, repairing the authority and arithmetic contracts, and passing the
+acceptance gates above. Until then, do not commit the coupled Rust overlay as a
+public Ergodis change.
+
 ## Boundaries
 
 - Preserve exact semantics and replayable witnesses.
