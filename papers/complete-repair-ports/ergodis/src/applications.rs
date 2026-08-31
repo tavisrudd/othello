@@ -1142,29 +1142,29 @@ impl QcLdpcCode {
         let mut examined = 0u64;
         for anchor_group in 0..usize::from(self.variable_groups) {
             let anchor = anchor_group * usize::from(self.lift);
-            let mut selected = vec![anchor];
+            let mut selected = Vec::with_capacity(size);
+            selected.push(anchor);
+            let mut next_by_depth = vec![0_usize; size + 1];
             let mut check_degrees = vec![0u16; check_count];
             self.update_degrees(anchor, &mut check_degrees, true);
-            let mut answer = None;
-            self.search_trapping_sets(
-                0,
+            let odd_checks = self.search_trapping_sets_iterative(
                 variable_count,
                 size,
                 maximum_odd_checks,
                 false,
                 anchor,
                 &mut selected,
+                &mut next_by_depth,
                 &mut check_degrees,
                 &mut examined,
                 budget,
-                &mut answer,
             )?;
-            if let Some((variables, odd_checks)) = answer {
+            if let Some(odd_checks) = odd_checks {
                 return Ok(QcSearchResult {
                     answer: Some(QcTrappingSetAnswer {
-                        variables: variables
-                            .into_iter()
-                            .map(|variable| variable as u32)
+                        variables: selected
+                            .iter()
+                            .map(|&variable| variable as u32)
                             .collect::<Vec<_>>()
                             .into_boxed_slice(),
                         odd_checks: odd_checks as u32,
@@ -1275,28 +1275,28 @@ impl QcLdpcCode {
             let mut examined = 0u64;
             for anchor_group in 0..usize::from(self.variable_groups) {
                 let anchor = anchor_group * usize::from(self.lift);
-                let mut selected = vec![anchor];
+                let mut selected = Vec::with_capacity(size);
+                selected.push(anchor);
+                let mut next_by_depth = vec![0_usize; size + 1];
                 let mut check_degrees = vec![0u16; check_count];
                 self.update_degrees(anchor, &mut check_degrees, true);
-                let mut answer = None;
-                self.search_trapping_sets(
-                    0,
+                let odd_checks = self.search_trapping_sets_iterative(
                     variable_count,
                     size,
                     0,
                     true,
                     anchor,
                     &mut selected,
+                    &mut next_by_depth,
                     &mut check_degrees,
                     &mut examined,
                     budget,
-                    &mut answer,
                 )?;
-                if let Some((variables, odd_checks)) = answer {
+                if let Some(odd_checks) = odd_checks {
                     return Ok(Some(QcTrappingSetAnswer {
-                        variables: variables
-                            .into_iter()
-                            .map(|variable| variable as u32)
+                        variables: selected
+                            .iter()
+                            .map(|&variable| variable as u32)
                             .collect::<Vec<_>>()
                             .into_boxed_slice(),
                         odd_checks: odd_checks as u32,
@@ -1310,72 +1310,70 @@ impl QcLdpcCode {
     }
 
     #[allow(clippy::too_many_arguments)]
-    fn search_trapping_sets(
+    fn search_trapping_sets_iterative(
         &self,
-        next: usize,
         variable_count: usize,
         target_size: usize,
         maximum_odd_checks: usize,
         stopping: bool,
         anchor: usize,
         selected: &mut Vec<usize>,
+        next_by_depth: &mut [usize],
         check_degrees: &mut [u16],
         examined: &mut u64,
         budget: u64,
-        answer: &mut Option<(Vec<usize>, usize)>,
-    ) -> Result<(), ApplicationError> {
-        if answer.is_some() {
-            return Ok(());
-        }
-        if selected.len() == target_size {
-            *examined += 1;
-            if *examined > budget {
-                return Err(ApplicationError::Budget { budget });
-            }
-            let odd = check_degrees
-                .iter()
-                .filter(|&&degree| degree & 1 != 0)
-                .count();
-            let accepted = if stopping {
-                check_degrees.iter().all(|&degree| degree != 1)
-            } else {
-                odd <= maximum_odd_checks
-            };
-            if accepted {
-                *answer = Some((selected.clone(), odd));
-            }
-            return Ok(());
-        }
-        let needed = target_size - selected.len();
-        if variable_count.saturating_sub(next) < needed {
-            return Ok(());
-        }
-        for variable in next..variable_count {
-            if variable == anchor || variable_count - variable < needed {
+    ) -> Result<Option<usize>, ApplicationError> {
+        debug_assert_eq!(selected.as_slice(), &[anchor]);
+        debug_assert!(next_by_depth.len() > target_size);
+        next_by_depth[1] = 0;
+        loop {
+            let depth = selected.len();
+            if depth == target_size {
+                *examined += 1;
+                if *examined > budget {
+                    return Err(ApplicationError::Budget { budget });
+                }
+                let odd = check_degrees
+                    .iter()
+                    .filter(|&&degree| degree & 1 != 0)
+                    .count();
+                let accepted = if stopping {
+                    check_degrees.iter().all(|&degree| degree != 1)
+                } else {
+                    odd <= maximum_odd_checks
+                };
+                if accepted {
+                    return Ok(Some(odd));
+                }
+                if depth == 1 {
+                    return Ok(None);
+                }
+                let variable = selected.pop().unwrap();
+                self.update_degrees(variable, check_degrees, false);
                 continue;
             }
+
+            let needed = target_size - depth;
+            let mut variable = next_by_depth[depth];
+            while variable < variable_count
+                && (variable == anchor || variable_count - variable < needed)
+            {
+                variable += 1;
+            }
+            if variable == variable_count {
+                if depth == 1 {
+                    return Ok(None);
+                }
+                let variable = selected.pop().unwrap();
+                self.update_degrees(variable, check_degrees, false);
+                continue;
+            }
+
+            next_by_depth[depth] = variable + 1;
             selected.push(variable);
             self.update_degrees(variable, check_degrees, true);
-            self.search_trapping_sets(
-                variable + 1,
-                variable_count,
-                target_size,
-                maximum_odd_checks,
-                stopping,
-                anchor,
-                selected,
-                check_degrees,
-                examined,
-                budget,
-                answer,
-            )?;
-            self.update_degrees(variable, check_degrees, false);
-            selected.pop();
-            if answer.is_some() {
-                break;
-            }
+            next_by_depth[depth + 1] = variable + 1;
         }
-        Ok(())
     }
 
     fn update_degrees(&self, variable: usize, degrees: &mut [u16], add: bool) {
@@ -2023,6 +2021,69 @@ mod tests {
                 );
             }
         }
+    }
+
+    fn exhaustive_qc_exists(
+        code: &QcLdpcCode,
+        size: usize,
+        maximum_odd_checks: usize,
+        stopping: bool,
+    ) -> bool {
+        let variable_count = usize::from(code.variable_groups) * usize::from(code.lift);
+        let check_count = usize::from(code.check_groups) * usize::from(code.lift);
+        (1_usize..1_usize << variable_count).any(|mask| {
+            if mask.count_ones() as usize != size {
+                return false;
+            }
+            let mut degrees = vec![0_u16; check_count];
+            for variable in 0..variable_count {
+                if mask & (1 << variable) != 0 {
+                    code.update_degrees(variable, &mut degrees, true);
+                }
+            }
+            if stopping {
+                degrees.iter().all(|&degree| degree != 1)
+            } else {
+                degrees.iter().filter(|&&degree| degree & 1 != 0).count() <= maximum_odd_checks
+            }
+        })
+    }
+
+    #[test]
+    fn iterative_qc_search_matches_exhaustive_small_codes() {
+        let choices = [None, Some(0), Some(1)];
+        for mut packed in (0_usize..3_usize.pow(6)).step_by(17) {
+            let mut shifts = Vec::with_capacity(6);
+            for _ in 0..6 {
+                shifts.push(choices[packed % 3]);
+                packed /= 3;
+            }
+            let code = QcLdpcCode::new(2, 3, 2, shifts).unwrap();
+            for size in 1..=4 {
+                for maximum_odd_checks in 0..=2 {
+                    let expected = exhaustive_qc_exists(&code, size, maximum_odd_checks, false);
+                    let actual = code
+                        .search_trapping_set(size, maximum_odd_checks, 1_000_000)
+                        .unwrap();
+                    assert_eq!(actual.answer.is_some(), expected);
+                }
+                let expected_stopping =
+                    (1..=size).any(|weight| exhaustive_qc_exists(&code, weight, 0, true));
+                assert_eq!(
+                    code.find_stopping_set(size, 1_000_000).unwrap().is_some(),
+                    expected_stopping
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn iterative_qc_search_preserves_budget_boundary() {
+        let code = QcLdpcCode::new(1, 1, 2, vec![Some(0)]).unwrap();
+        assert_eq!(
+            code.search_trapping_set(1, 1, 0),
+            Err(ApplicationError::Budget { budget: 0 })
+        );
     }
 
     #[test]

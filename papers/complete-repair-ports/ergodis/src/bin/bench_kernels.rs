@@ -600,11 +600,14 @@ fn main() {
                     checksum += u64::from(answer.slots);
                     black_box(answer);
                 }
-                ("qc", &[lift, size]) => {
+                ("qc", parameters @ &[lift, size, ..]) if parameters.len() <= 3 => {
+                    let maximum_odd_checks = parameters.get(2).copied().unwrap_or(0);
                     let code =
                         QcLdpcCode::new(2, 2, lift, vec![Some(0), Some(0), Some(0), Some(1)])
                             .unwrap();
-                    let answer = code.search_trapping_set(size, 0, 1 << 32).unwrap();
+                    let answer = code
+                        .search_trapping_set(size, maximum_odd_checks, 1 << 32)
+                        .unwrap();
                     work += answer.candidates_examined;
                     checksum += answer.answer.is_some() as u64;
                     black_box(answer);

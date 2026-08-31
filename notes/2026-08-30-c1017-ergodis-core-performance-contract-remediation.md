@@ -2,7 +2,31 @@
 
 **Lane:** `complete-ports`
 
-**Status:** QUEUED
+**Status:** ACTIVE
+
+## 2026-08-30 progress
+
+The original source audit is a historical baseline. Since it was written, a
+thread-local counting-allocator harness has landed and the rejected GS/proof
+overlay has been removed from public core. The remaining recursive,
+contention, workspace-ownership, layout, and registry findings are still live
+unless closed below.
+
+The first production repair replaces the recursive QC trapping/stopping-set
+DFS with a presized iterative depth machine. Selection and frame capacity are
+fixed before enumeration; accepted witnesses no longer clone a vector in the
+terminal loop. Small QC codes are differentially checked against exhaustive
+subset enumeration, including stopping semantics and the exact zero-budget
+boundary.
+
+Retained-binary A/B on `application:qc:rust:13:6:1`, 1,000 solves per round,
+six interleaved order-reversed pairs, preserved the exact 106,260 candidates
+per solve and negative verdict. Mean time fell from 1.656122 s to 1.515367 s
+(`1.0929x`, paired `t=12.991`, 5 df). One diagnostic counter pair measured
+7.893B to 7.284B cycles, 37.042B to 37.412B instructions, 5.974B to 7.481B
+branches, 20.013M to 19.844M branch misses, and 2,640 to 2,368 KiB peak RSS.
+The iterative traversal trades more predictable branches for less recursive
+control overhead and stack traffic; it does not reduce theorem work.
 
 ## Goal
 
