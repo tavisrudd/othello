@@ -747,7 +747,11 @@ enumeration and about 24 GB of memory at `q = 41` alone; the residual there is
 now only the regular class.
 
 **Redundancies nine, ten, eleven and twelve.**  The same sweep at the higher
-redundancies is summarised in the domain table of §6.  The pattern it shows is
+redundancies is summarised in the domain table of §6.  Note in passing that
+`r = 9, q = 32` is clean, and that cell has the largest modular carrier
+anywhere in the wave: `d = 8 = 1000` in binary, so `C(8,i)` is odd only for
+`i ∈ {0,8}` and `M^max_{9,2} = P⟨e_1,…,e_7⟩` is a whole `PG(6,32)`.  It holds no
+deep point.  The pattern the table shows is
 the one Conjecture PRS-1 asserts: exceptional points on the fixed loci at
 `q ∈ {9,11,13}` for `r = 9`, `{11,13}` for `r = 10`, `{11,13}` for `r = 11` and
 `{13}` for `r = 12` — never above 13 — with the `r = 11` and `r = 12` entries
