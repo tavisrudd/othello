@@ -126,20 +126,35 @@ characteristic two the layers collapse, every (t_M\in W), and all
 transversals (T_M) are concurrent. Dually, all matching centers are
 collinear.
 
-There is also an all-characteristic amplification. Each Hamilton pair forces
-the (m) factors indexed by odd-distance vertices onto its pencil. If a
-family of these (m)-sets has connected closure under union of sets sharing
-two factor labels, then their pencils coincide and **all** transversals are
-concurrent over an arbitrary field. This is a purely combinatorial closure
-test placed on top of (2).
+There is a stronger all-characteristic consequence that does not require a
+closure computation when (m) is odd. The Hamilton cycle is bipartite, with
+parts (X,Y) of size (m). If a factor (C) has any edge (xy) crossing this
+bipartition, then the alternating recurrence gives
 
-This has two useful general forms.
+\[
+ u_y\equiv-u_x\pmod W,
+ \qquad t_C\doteq u_x+u_y\in W.
+\]
+
+When (m) is odd, every perfect matching has a crossing edge: otherwise it
+would restrict to perfect matchings of the two odd sets (X) and (Y).
+Consequently **one Hamilton pair forces every transversal into its pencil
+over every field whenever (m) is odd**. When (m) is even, the only factors
+not forced onto this pencil are those that split as perfect matchings inside
+(X) and inside (Y). Multiple Hamilton pairs can still eliminate that residual
+set: if the resulting forced-factor sets have connected closure under union
+of sets sharing two factor labels, their pencils coincide.
+
+This has three useful general forms.
 
 1. Every geometrically transversal one-factorization over a field of
    characteristic two that contains a perfect pair has all its transversals
    in one pencil. In particular this holds for every geometrically realized
    perfect one-factorization.
-2. Fix vertex (0), label a factor by its partner (k) at (0), and attach
+2. Over an arbitrary field, if (m) is odd, a geometrically transversal
+   one-factorization containing just one Hamilton pair has all its
+   transversals in one pencil.
+3. Fix vertex (0), label a factor by its partner (k) at (0), and attach
    the triple \(\{i,j,k\}\) whenever (ij\in M_k\). In characteristic two,
    (1) makes the three corresponding transversal forms collinear in their
    parameter plane. Therefore it is enough that these triples have connected
@@ -161,13 +176,13 @@ The Hamilton-pair theorem admits a complete order-ten closure.
 > pencil. This holds over every field and for every one-factorization of
 > (K_{10}).
 
-For each pair of factors and each choice of base carrier, (2) places the
-factors indexed by the odd vertices of the base cycle on one line in the
-parameter plane of transversal forms. Exact canonical enumeration of all 396
-one-factorizations gives the following dichotomy.
+Here (m=5) is odd. Thus the preceding theorem makes the pencil conclusion
+immediate as soon as the factorization has one Hamilton pair. Exact canonical
+enumeration of all 396 one-factorizations is needed only for the following
+dichotomy.
 
-- In 395 classes, these parity subsets have connected two-point-overlap
-  closure on all nine factors, so the pencil conclusion is immediate.
+- In 395 classes, at least one pair of factors is Hamilton, so the odd-half
+  theorem gives the pencil directly, with no parity-shadow closure census.
 - The unique remaining class has no Hamilton pair: every factor pair has
   cycle type (4+6). Its parity constraints are the twelve triples of the
   Steiner triple system (AG(2,3)) on the nine factor forms. Adding any other
@@ -369,18 +384,21 @@ The second bundle `c1015_k10_factorization_closure.py`,
 `c1015_k10_factorization_closure.json`, and
 `c1015_k10_factorization_closure.sha256` performs independent canonical
 augmentation of colored incidence graphs through all nine factors. It checks
-the 396-class and labelled-count census, every parity closure over all ten
-base vertices, the universal characteristic-two triple closure, the unique
-(AG(2,3)) sparse-shadow dichotomy, the generic Hesse lift determinant, and the
-final rank-74 ternary specialization. Replay with
+the 396-class and labelled-count census, that exactly 395 classes have a
+Hamilton pair, every parity closure over all ten base vertices as independent
+regression evidence, the universal characteristic-two triple closure, the
+unique (AG(2,3)) sparse-shadow dichotomy, the generic Hesse lift determinant,
+and the final rank-74 ternary specialization. Replay with
 
 ```text
 uv run --with pynauty python notes/c1015_k10_factorization_closure.py --check
 ```
 
-The trusted boundary for the 396-class dichotomy is `pynauty` canonical
-labeling plus exact finite graph closure. The geometric exclusion of the
-exceptional class is now the three-Hesse-line human argument above. The output
+The trusted boundary for the finite dichotomy is `pynauty` canonical labeling
+plus the Hamilton-cycle test: 395 classes have a Hamilton pair and the unique
+remaining class is the affine one. Parity-shadow closure is no longer
+load-bearing for those 395 classes. The geometric exclusion of the exceptional
+class is the three-Hesse-line human argument above. The output
 is cross-checked against Gelling's 396 classes, the classical labelled total,
 the independently enumerated regular-design factorizations, and two separate
 Hamilton-cycle tests. Exact row reduction over \(\mathbf Q(\omega)\) and
@@ -534,11 +552,11 @@ Manuscript language such as "new" or "to our knowledge" is not yet authorized.
 
 1. **Landed:** replace the normalized substitution chain by the frame-free
    star-interpolation identity and Hamilton-pair parity holonomy.
-2. **Landed universally for ten points:** 395 of the 396 one-factorizations
-   close from their Hamilton parity shadows; the affine (AG(2,3)) exception
-   is killed by the Hesse lift determinant and its characteristic-two/three
-   specializations. Determine whether a nine-point realization itself
-   reconstructs the missing tenth carrier line.
+2. **Landed universally for ten points:** the odd-half theorem handles every
+   one-factorization having one Hamilton pair; 395 of the 396 classes do.
+   The affine (AG(2,3)) exception is killed by the six-equation Hesse tripod.
+   Determine whether a nine-point realization itself reconstructs the missing
+   tenth carrier line.
 3. Determine the actual carrier of the obstruction: seven displayed blocks,
    their vertex/block incidence shadow, or a smaller invariant subdiagram.
 4. Test relabellings and deletions to decide whether the certificate is a
@@ -571,13 +589,13 @@ Manuscript language such as "new" or "to our knowledge" is not yet authorized.
 
 ## Extra-juice and Tao-style closeout
 
-The cheap structural upgrade is the affine description of the sole census
-exception. It explains simultaneously its automorphism order 432, its twelve
-parity triples, and the Hesse representation space. The determinant norm
-(2^6\cdot3) then isolates exactly the two characteristics in which the
-generic obstruction might degenerate; independent combinatorial and ternary
-arguments close them. This is the strongest current theorem, not merely a
-regular-Ree corollary.
+The decisive Tao-style simplification is the odd-half theorem: relative to a
+Hamilton cycle, every perfect matching on two odd bipartition classes must
+cross the cut, and one crossing edge already puts its transversal in the
+Hamilton pencil. This removes the 395-class parity-closure computation from
+the proof. The finite residue is now only the structural assertion that the
+unique zero-Hamilton factorization of (K_{10}) is affine (AG(2,3)); the
+six-equation Hesse tripod then excludes it geometrically.
 
 The Hesse row reduction has now been replaced by a three-line incidence
 argument: the exceptional lift puts (2u_\infty) in Hesse lines (012),
@@ -594,6 +612,10 @@ not needed for the order-ten theorem.
   nine non-Hamilton pairs are three disjoint triangles, so the Hamilton graph
   is (K_{3,3,3}); these are the three diagonal packets from the local
   quadrangle calculation.
+- **Why the other 395 census classes close — settled conceptually.** They do
+  not need a many-pair closure calculation. Since (K_{10}) has odd half-size
+  five, one Hamilton pair forces all nine factors into its pencil. The only
+  remaining finite input is the uniqueness of the zero-Hamilton class.
 - **Why the unique zero-Hamilton class produces (AG(2,3)) — settled.** It is
   exactly the affine factorization
   (M_a=\{\infty a\}\cup\{xy:x+y=-a\}), with automorphism order 432; its
@@ -642,8 +664,9 @@ not needed for the order-ten theorem.
 
 The universal (K_{10}) pencil theorem clears the threshold for a short
 standalone representation paper if the priority audit stays clean. Its spine
-would be interpolation, parity pencils, the 396-class sparse-shadow dichotomy,
-and the Hesse obstruction; Ree rigidity would be the marquee application.
+would be interpolation, the general odd-half Hamilton-pair theorem, the unique
+zero-Hamilton (K_{10}) residue, and the Hesse obstruction; Ree rigidity would
+be the marquee application.
 It also strengthens the arcs equality paper by replacing the regular
 characteristic-two coordinate classification with automatic Ree completion
 plus Nagy's theorem. The best integration decision should follow the
