@@ -499,6 +499,23 @@ adapter remain measurable successors. Raw evidence and binary hashes are under
 `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-fusion/final-ab`. Full
 all-target/all-feature tests and strict clippy pass.
 
+The mirror-delta application audit found and repaired one code-layout
+regression created by the earlier recursion-removal tranche. ThinLTO had
+inlined the general iterative QC trapping-set DFS into the same 8,127-byte
+function as the degree-two theorem fast path, versus 6,371 bytes in the
+exported snapshot. Outlining only the DFS restores a 6,476-byte entry point;
+the search remains iterative and its measured region remains allocation-free.
+On a quiet physical core, fifteen paired degree-two runs improve cycles 1.046x
+(`t=17.45`), instructions 1.019x, and wall 1.042x (`t=17.00`). Nine paired
+controls that actually enter the DFS improve cycles 1.106x and wall 1.107x
+(`t=10.84/11.00`) at identical 7,277,000-candidate work and checksum. The
+final byte-identical-harness audit against standalone source commit `056acfcf`
+covers all eight README applications: 72 long-loop pairs improve geometric
+mean cycles 1.012x (`t=4.05`) and wall 1.011x (`t=3.72`), with no material
+application regression. Raw evidence is under
+`/home/tavis/.cache/ergodis-perf/qc-outline/quiet-core-ab` and
+`/home/tavis/.cache/ergodis-perf/application-mirror-delta-056acfc`.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

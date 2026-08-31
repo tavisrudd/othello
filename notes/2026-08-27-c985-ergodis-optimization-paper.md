@@ -213,24 +213,38 @@ as each coherent tranche lands.
    `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-fusion/final-ab`.
    Application translation is now measured against the exact public-source
    snapshot in the standalone mirror: its `ergodis/src` tree matches monorepo
-   commit `056acfcf` (2026-08-27). A seven-round corrected fresh-process sweep
-   links both revisions to the identical old benchmark harness and preserves
-   work, states, and checksums on all eight README workloads. Across all 56
-   paired samples, old/current wall is 0.984x cold (`t=-0.69`) and 1.006x for
-   eight-solve warm batches (`t=0.27`): no suite-level application regression
-   or gain is established. Same-work long-loop counters expose the changes
-   hidden by process startup: Ceph ZDD improves 1.036x cycles/wall
-   (`t=2.30/2.36`) and vector node span improves 1.061x cycles and 1.057x wall
-   (`t=9.34/8.64`); tower, repair DAG, and GPU are neutral. QC-LDPC regresses
-   to 0.980x cycles and 0.983x wall (`t=-20.17/-15.33`), Hamming-outer is
-   0.992x wall (`t=-2.05`), and Azure is 0.995x cycles with wall below
-   resolution. The first sweep using today's enlarged benchmark dispatcher
-   showed a false 2--3% suite loss; holding the harness byte-identical removed
-   it, so benchmark-only parser growth must not be attributed to application
-   kernels. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/application-mirror-delta-056acfc`. The next
-   application-facing optimization gate is the isolated 2% QC regression;
-   preserve the Ceph/vector gains and require no loss on the other six cases.
+   commit `056acfcf` (2026-08-27). The first same-harness counter sweep exposed
+   a 2% QC-LDPC regression. Bisecting every intervening `applications.rs`
+   revision showed that the iterative-DFS safety conversion let ThinLTO inline
+   the general DFS into `search_trapping_set`, expanding the function from
+   6,371 to 8,127 bytes even when the degree-two theorem returns before search.
+   Marking only the iterative engine `inline(never)` restores a 6,476-byte
+   theorem entry point and preserves the allocation-free, nonrecursive DFS.
+   Against the pre-fix current build, fifteen quiet-core pairs improve the
+   degree-two application path 1.046x cycles and 1.042x wall
+   (`t=17.45/17.00`); nine pairs on an instance that actually enters DFS improve
+   1.106x cycles and wall (`t=10.84/11.00`) at identical work and checksum.
+
+   The final mirror comparison links both revisions to the byte-identical old
+   benchmark harness and preserves work, states, and checksums on all eight
+   README workloads. Corrected seven-round fresh-process measurements remain
+   startup-dominated and establish no suite delta: old/current is 0.972x cold
+   (`t=-1.21`) and 1.011x for eight-solve warm batches (`t=0.66`). Nine-pair
+   long-loop counters on a quiet physical core expose the kernel delta:
+   old/current is 1.012x cycles (`t=4.05`) and 1.011x wall (`t=3.72`) across 72
+   pairs. Vector node span improves 1.047x wall, GPU checkpoint 1.050x, repair
+   DAG 1.010x, and QC-LDPC 1.003x; Ceph, Azure, and Hamming-outer are neutral.
+   The represented tower has a small 0.994x wall point loss, about six
+   microseconds per thousand solves, with no instruction/work change. No
+   material application regression remains. A sweep using today's enlarged
+   benchmark dispatcher had shown a false 2--3% suite loss; holding the harness
+   byte-identical removes benchmark-only parser growth from the application
+   result. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/application-mirror-delta-056acfc` and
+   `/home/tavis/.cache/ergodis-perf/qc-outline/quiet-core-ab`. Full
+   all-target/all-feature tests and strict clippy pass. Current next slice:
+   continue the measured plan-VM Boolean/arithmetic fusion frontier or select a
+   theorem kernel with an immediate application adapter.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

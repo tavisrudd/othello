@@ -1377,6 +1377,10 @@ impl QcLdpcCode {
     }
 
     #[allow(clippy::too_many_arguments)]
+    // Keep the general DFS out of the degree-two theorem fast path. ThinLTO
+    // otherwise merges both bodies, increasing instruction and I-cache cost
+    // even when the theorem returns before search begins.
+    #[inline(never)]
     fn search_trapping_sets_iterative(
         &self,
         variable_count: usize,
