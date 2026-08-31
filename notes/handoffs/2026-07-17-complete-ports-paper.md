@@ -693,6 +693,9 @@ formalization, read the paper-specific expert dossier
 
 C985 follows C983 as a separate optimization-facing paper research task and
 does not block C984, C325, or C953.
+C1016 is queued after C985 as a proof-carrying Ergodis pilot: add verified
+`Necessary` plans and test evolved group-ring quotient and compatible-compression
+reductions on the bordered Goethals--Seidel order-2092 search before any full run.
 
 The prior monolithic draft and its cold reads remain inputs, not acceptance of the modular
 hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
