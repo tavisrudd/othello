@@ -113,6 +113,7 @@ pub use continuation::{
 pub use css_distance::{
     BoundedCssDistanceResult, CompiledCssDistance, CompiledExtraWideCssDistance,
     CompiledWideCssDistance, ConnectedSearchStats, CssDistanceArtifactError, CssDistanceError,
+    CssSearchShard,
 };
 #[cfg(feature = "large-css")]
 pub use css_distance::{

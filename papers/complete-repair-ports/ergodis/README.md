@@ -207,6 +207,22 @@ Young-Brothers-Wait. Rare verified bound improvements use cache-line-separated
 worker mailboxes; `--pulse-interval` controls coarse polling without adding
 per-support synchronization.
 
+Large portfolio instances require the same feature-complete release build used
+for their evidence runs:
+
+```sh
+cargo build --release --features large-css,parallel --bin css_distance_native
+```
+
+Without `large-css`, the binary rejects instances above 384 coordinates or
+physical rank 192; without `parallel`, `--threads` cannot exceed one. Long
+exhaustions can be split into deterministic, thread-count-independent pieces
+with `--shard-index I --shard-count N`. Run every `I` in `0..N` with identical
+input, maximum weight, anchors, and binary semantics. Each JSON record is marked
+`partial-shard`; only the best witness across all `N` successful records, or
+exhaustion by all `N`, supports a global claim. Shards may run in any order, on
+different machines, and survive session boundaries independently.
+
 The `parallel`-gated `css_distance_random` companion searches for an upper
 certificate by random information sets. It row-reduces the physical parity
 checks under deterministic random coordinate orders, inspects the induced

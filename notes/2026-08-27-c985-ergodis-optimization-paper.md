@@ -26,19 +26,29 @@ as each coherent tranche lands.
    is the cross-thread real-loop allocation-count gate and the measured 2.15%
    clean-miss codegen repair, followed by the remaining Tiger layouts and
    registry evidence.
-3. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
+3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
+   prefix shards first so multi-hour radii survive session boundaries and can
+   be distributed without changing the proof obligation. The public API and
+   CLI now expose a thread-count-independent modulo partition, evidence records
+   distinguish partial shards from global results, and the README states the
+   `large-css,parallel` release feature contract. Next: full feature-matrix and
+   shard-union tests, stable compiled-artifact compatibility/idempotent BB
+   generation, then reusable small-field, null-space, projective-indexing, and
+   generator-orbit foundations. Keep tactical plane completion in
+   `ergodis-private`; do not specialize the public core for C1018.
+4. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
    exact replay/parity, zero-allocation, bounded-memory, and deterministic
    parallel evidence gates.
-4. **Pending — typed plan/theorem authoring language.** Replace hand-authored
+5. **Pending — typed plan/theorem authoring language.** Replace hand-authored
    JSON AST/bytecode plans with a compact bounded textual language for recipes,
    steering plans, and injected theorem fragments. Text and JSON must share one
    typed AST and lowering pass; JSON remains protocol/cache/debug syntax. The
    accepted algebra and constraints are in
    `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
-5. **In progress — daemon-owned evolve.** Retain bounded streamed evidence,
+6. **In progress — daemon-owned evolve.** Retain bounded streamed evidence,
    lineage/outcome deduplication, and exact cascades; next add durable replay,
    selection, and cross-campaign learning without entering solve workers.
-6. **Done for current tranche — SOTA audit.** The primary-source comparison and
+7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
    new evolution mechanism changes the comparison.

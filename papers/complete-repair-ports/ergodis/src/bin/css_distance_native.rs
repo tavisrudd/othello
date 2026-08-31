@@ -2,7 +2,10 @@ use anyhow::{bail, Context, Result};
 use clap::Parser;
 #[cfg(feature = "large-css")]
 use ergodis::{CompiledColossalCssDistance, CompiledHugeCssDistance, CompiledLargeCssDistance};
-use ergodis::{CompiledCssDistance, CompiledExtraWideCssDistance, CompiledWideCssDistance, Matrix};
+use ergodis::{
+    CompiledCssDistance, CompiledExtraWideCssDistance, CompiledWideCssDistance, CssSearchShard,
+    Matrix,
+};
 use serde::{Deserialize, Serialize};
 use std::fmt::Write as _;
 use std::fs::{File, OpenOptions};
@@ -41,6 +44,12 @@ struct Args {
     /// Worker-local bound mailbox polling interval; zero disables mid-branch polling.
     #[arg(long, default_value_t = 4096)]
     pulse_interval: u64,
+    /// Zero-based member of a deterministic complete search partition.
+    #[arg(long, requires = "shard_count")]
+    shard_index: Option<u32>,
+    /// Number of deterministic search shards (1..=4096).
+    #[arg(long, requires = "shard_index")]
+    shard_count: Option<u32>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -73,6 +82,8 @@ struct RunRecord<'a> {
     threads: usize,
     worker_cpus: &'a [usize],
     pulse_interval: u64,
+    result_scope: &'static str,
+    search_shard: Option<CssSearchShard>,
     search_seconds: &'a [f64],
     round_stats: &'a [ergodis::ConnectedSearchStats],
     result: &'a ergodis::BoundedCssDistanceResult,
@@ -186,6 +197,15 @@ fn emit(record: &RunRecord<'_>, path: Option<&PathBuf>) -> Result<()> {
 
 fn main() -> Result<()> {
     let args = Args::parse();
+    let search_shard = match (args.shard_index, args.shard_count) {
+        (Some(index), Some(count)) => Some(CssSearchShard::new(index, count)?),
+        (None, None) => None,
+        _ => unreachable!("clap enforces paired shard arguments"),
+    };
+    #[cfg(not(feature = "parallel"))]
+    if search_shard.is_some() {
+        bail!("search sharding requires the `parallel` feature");
+    }
     let file = File::open(&args.input)
         .with_context(|| format!("opening input {}", args.input.display()))?;
     let problem: SparseProblem =
@@ -438,8 +458,13 @@ fn main() -> Result<()> {
         pool
     };
     let certify_incumbent = args.maximum_weight.is_none() && !problem.incumbent_support.is_empty();
+    if certify_incumbent && search_shard.is_some() {
+        bail!("search shards cannot be combined with incumbent certification");
+    }
     let mode = if certify_incumbent {
         "certify-incumbent"
+    } else if search_shard.is_some() {
+        "bounded-search-shard"
     } else {
         "bounded-search"
     };
@@ -458,11 +483,19 @@ fn main() -> Result<()> {
                         args.pulse_interval,
                     )
                 } else {
-                    compiled.search_bounded_parallel_pulsed(
-                        &problem.anchors,
-                        maximum_weight,
-                        args.pulse_interval,
-                    )
+                    match search_shard {
+                        Some(shard) => compiled.search_bounded_parallel_pulsed_shard(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                            shard,
+                        ),
+                        None => compiled.search_bounded_parallel_pulsed(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                        ),
+                    }
                 }
             })?,
             Backend::Wide(compiled) => thread_pool.install(|| {
@@ -473,11 +506,19 @@ fn main() -> Result<()> {
                         args.pulse_interval,
                     )
                 } else {
-                    compiled.search_bounded_syndrome_parallel_pulsed(
-                        &problem.anchors,
-                        maximum_weight,
-                        args.pulse_interval,
-                    )
+                    match search_shard {
+                        Some(shard) => compiled.search_bounded_syndrome_parallel_pulsed_shard(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                            shard,
+                        ),
+                        None => compiled.search_bounded_syndrome_parallel_pulsed(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                        ),
+                    }
                 }
             })?,
             Backend::ExtraWide(compiled) => thread_pool.install(|| {
@@ -488,11 +529,19 @@ fn main() -> Result<()> {
                         args.pulse_interval,
                     )
                 } else {
-                    compiled.search_bounded_syndrome_parallel_pulsed(
-                        &problem.anchors,
-                        maximum_weight,
-                        args.pulse_interval,
-                    )
+                    match search_shard {
+                        Some(shard) => compiled.search_bounded_syndrome_parallel_pulsed_shard(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                            shard,
+                        ),
+                        None => compiled.search_bounded_syndrome_parallel_pulsed(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                        ),
+                    }
                 }
             })?,
             #[cfg(feature = "large-css")]
@@ -504,11 +553,19 @@ fn main() -> Result<()> {
                         args.pulse_interval,
                     )
                 } else {
-                    compiled.search_bounded_syndrome_parallel_pulsed(
-                        &problem.anchors,
-                        maximum_weight,
-                        args.pulse_interval,
-                    )
+                    match search_shard {
+                        Some(shard) => compiled.search_bounded_syndrome_parallel_pulsed_shard(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                            shard,
+                        ),
+                        None => compiled.search_bounded_syndrome_parallel_pulsed(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                        ),
+                    }
                 }
             })?,
             #[cfg(feature = "large-css")]
@@ -520,11 +577,19 @@ fn main() -> Result<()> {
                         args.pulse_interval,
                     )
                 } else {
-                    compiled.search_bounded_syndrome_parallel_pulsed(
-                        &problem.anchors,
-                        maximum_weight,
-                        args.pulse_interval,
-                    )
+                    match search_shard {
+                        Some(shard) => compiled.search_bounded_syndrome_parallel_pulsed_shard(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                            shard,
+                        ),
+                        None => compiled.search_bounded_syndrome_parallel_pulsed(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                        ),
+                    }
                 }
             })?,
             #[cfg(feature = "large-css")]
@@ -536,11 +601,19 @@ fn main() -> Result<()> {
                         args.pulse_interval,
                     )
                 } else {
-                    compiled.search_bounded_syndrome_parallel_pulsed(
-                        &problem.anchors,
-                        maximum_weight,
-                        args.pulse_interval,
-                    )
+                    match search_shard {
+                        Some(shard) => compiled.search_bounded_syndrome_parallel_pulsed_shard(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                            shard,
+                        ),
+                        None => compiled.search_bounded_syndrome_parallel_pulsed(
+                            &problem.anchors,
+                            maximum_weight,
+                            args.pulse_interval,
+                        ),
+                    }
                 }
             })?,
         };
@@ -621,7 +694,7 @@ fn main() -> Result<()> {
     }
     let result = result.expect("positive round count checked above");
     let record = RunRecord {
-        schema: "ergodis-css-distance-native-v3",
+        schema: "ergodis-css-distance-native-v4",
         label: &problem.label,
         coordinate_count: problem.coordinate_count,
         physical_checks: problem.physical_checks.len(),
@@ -637,6 +710,12 @@ fn main() -> Result<()> {
         threads: args.threads,
         worker_cpus: &args.worker_cpus,
         pulse_interval: args.pulse_interval,
+        result_scope: if search_shard.is_some() {
+            "partial-shard"
+        } else {
+            "global"
+        },
+        search_shard,
         search_seconds: &search_seconds,
         round_stats: &round_stats,
         result: &result,

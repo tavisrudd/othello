@@ -87,6 +87,8 @@ pub enum CssDistanceError {
     InvalidMaximumWeight,
     #[error("parallel bound-pulse interval must be zero or a power of two")]
     InvalidPulseInterval,
+    #[error("CSS search shard count must be in 1..=4096 and index must be below count")]
+    InvalidSearchShard,
     #[error("incumbent support is empty, repeated, or outside the coordinate range")]
     InvalidIncumbentSupport,
     #[error("incumbent support does not have zero physical syndrome")]
@@ -2024,6 +2026,7 @@ where
         searched_maximum_weight: u16,
         initial_bound: u16,
         pulse_interval: u64,
+        shard: Option<CssSearchShard>,
     ) -> CachePaddedWideBranchResult<SUPPORT_WORDS>
     where
         Self: WidePartitionKernel<SUPPORT_WORDS, CHECK_WORDS>,
@@ -2039,7 +2042,10 @@ where
             forbidden: PackedSupport::<SUPPORT_WORDS>::default(),
             weight: 1,
         }];
-        let target_branches = rayon::current_num_threads().saturating_mul(4);
+        let target_branches = shard.map_or_else(
+            || rayon::current_num_threads().saturating_mul(4),
+            |shard| usize::try_from(shard.count()).unwrap().saturating_mul(16),
+        );
         let mut prefix_stats = ConnectedSearchStats::default();
         let mut prefix_best_weight = searched_maximum_weight.saturating_add(1);
         let mut prefix_best_support = PackedSupport::<SUPPORT_WORDS>::default();
@@ -2106,6 +2112,17 @@ where
                 break;
             }
             branches = next;
+        }
+        if let Some(shard) = shard {
+            let count = usize::try_from(shard.count()).unwrap();
+            let index = usize::try_from(shard.index()).unwrap();
+            branches = branches
+                .into_iter()
+                .enumerate()
+                .filter_map(|(branch_index, branch)| {
+                    (branch_index % count == index).then_some(branch)
+                })
+                .collect();
         }
         if branches.is_empty() {
             return CachePaddedWideBranchResult {
@@ -2205,6 +2222,7 @@ where
         anchors: &[u16],
         maximum_weight: u16,
         pulse_interval: u64,
+        shard: Option<CssSearchShard>,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError>
     where
         Self: WidePartitionKernel<SUPPORT_WORDS, CHECK_WORDS>,
@@ -2249,6 +2267,7 @@ where
                 searched_maximum_weight,
                 best_weight,
                 pulse_interval,
+                shard,
             );
             merge_search_stats(&mut stats, partial.stats);
             if partial.best_weight < best_weight {
@@ -2345,6 +2364,7 @@ where
             anchors,
             incumbent.len() as u16 - 1,
             pulse_interval,
+            None,
         )?;
         if result.distance.is_none() {
             result.distance = replay.distance;
@@ -2554,7 +2574,27 @@ impl CompiledWideCssDistanceImpl<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> {
         maximum_weight: u16,
         pulse_interval: u64,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
-        self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            None,
+        )
+    }
+
+    pub fn search_bounded_syndrome_parallel_pulsed_shard(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+        shard: CssSearchShard,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            Some(shard),
+        )
     }
 
     pub fn certify_incumbent_parallel_pulsed(
@@ -2575,7 +2615,27 @@ impl CompiledWideCssDistanceImpl<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> 
         maximum_weight: u16,
         pulse_interval: u64,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
-        self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            None,
+        )
+    }
+
+    pub fn search_bounded_syndrome_parallel_pulsed_shard(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+        shard: CssSearchShard,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            Some(shard),
+        )
     }
 
     pub fn certify_incumbent_parallel_pulsed(
@@ -2597,7 +2657,27 @@ impl CompiledWideCssDistanceImpl<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1> {
         maximum_weight: u16,
         pulse_interval: u64,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
-        self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            None,
+        )
+    }
+
+    pub fn search_bounded_syndrome_parallel_pulsed_shard(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+        shard: CssSearchShard,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            Some(shard),
+        )
     }
 
     pub fn certify_incumbent_parallel_pulsed(
@@ -2619,7 +2699,27 @@ impl CompiledWideCssDistanceImpl<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS, HUGE_L
         maximum_weight: u16,
         pulse_interval: u64,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
-        self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            None,
+        )
+    }
+
+    pub fn search_bounded_syndrome_parallel_pulsed_shard(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+        shard: CssSearchShard,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            Some(shard),
+        )
     }
 
     pub fn certify_incumbent_parallel_pulsed(
@@ -2643,7 +2743,27 @@ impl
         maximum_weight: u16,
         pulse_interval: u64,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
-        self.search_bounded_syndrome_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval)
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            None,
+        )
+    }
+
+    pub fn search_bounded_syndrome_parallel_pulsed_shard(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+        shard: CssSearchShard,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_syndrome_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            Some(shard),
+        )
     }
 
     pub fn certify_incumbent_parallel_pulsed(
@@ -2817,6 +2937,40 @@ pub struct BoundedCssDistanceResult {
     pub witness: Box<[u16]>,
     pub searched_maximum_weight: u16,
     pub stats: ConnectedSearchStats,
+}
+
+/// One deterministic member of a complete prefix partition of a CSS search.
+///
+/// Running every index in `0..count` with identical source, radius, anchors,
+/// and build semantics covers the unsharded search exactly. A single shard's
+/// result is partial and must not be reported as a global distance result.
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
+pub struct CssSearchShard {
+    index: u32,
+    count: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<CssSearchShard>() == 8);
+const _: () = assert!(std::mem::align_of::<CssSearchShard>() == 4);
+
+impl CssSearchShard {
+    pub fn new(index: u32, count: u32) -> Result<Self, CssDistanceError> {
+        if count == 0 || count > 4096 || index >= count {
+            return Err(CssDistanceError::InvalidSearchShard);
+        }
+        Ok(Self { index, count })
+    }
+
+    #[inline]
+    pub const fn index(self) -> u32 {
+        self.index
+    }
+
+    #[inline]
+    pub const fn count(self) -> u32 {
+        self.count
+    }
 }
 
 #[cfg(feature = "parallel")]
@@ -3865,6 +4019,7 @@ impl CompiledCssDistance {
         anchors: &[u16],
         searched_maximum_weight: u16,
         pulse_interval: u64,
+        shard: Option<CssSearchShard>,
     ) -> BoundedCssDistanceResult {
         use rayon::prelude::*;
 
@@ -3898,6 +4053,17 @@ impl CompiledCssDistance {
                     remaining_root_candidates: remaining,
                 });
             }
+        }
+        if let Some(shard) = shard {
+            let count = usize::try_from(shard.count()).unwrap();
+            let index = usize::try_from(shard.index()).unwrap();
+            branches = branches
+                .into_iter()
+                .enumerate()
+                .filter_map(|(branch_index, branch)| {
+                    (branch_index % count == index).then_some(branch)
+                })
+                .collect();
         }
         if best_weight == 1 || branches.is_empty() {
             return self.finish_packed_search(
@@ -4028,6 +4194,38 @@ impl CompiledCssDistance {
         maximum_weight: u16,
         pulse_interval: u64,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_parallel_pulsed_impl(anchors, maximum_weight, pulse_interval, None)
+    }
+
+    /// Search one deterministic member of a complete prefix partition.
+    ///
+    /// A shard is a partial result. Run every index in `0..shard.count()`
+    /// with identical inputs and take the best witness (or require every shard
+    /// to exhaust) before making a global claim.
+    #[cfg(feature = "parallel")]
+    pub fn search_bounded_parallel_pulsed_shard(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+        shard: CssSearchShard,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
+        self.search_bounded_parallel_pulsed_impl(
+            anchors,
+            maximum_weight,
+            pulse_interval,
+            Some(shard),
+        )
+    }
+
+    #[cfg(feature = "parallel")]
+    fn search_bounded_parallel_pulsed_impl(
+        &self,
+        anchors: &[u16],
+        maximum_weight: u16,
+        pulse_interval: u64,
+        shard: Option<CssSearchShard>,
+    ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
         if pulse_interval != 0 && !pulse_interval.is_power_of_two() {
             return Err(CssDistanceError::InvalidPulseInterval);
         }
@@ -4049,7 +4247,7 @@ impl CompiledCssDistance {
         let mut limit = step;
         while limit <= searched_maximum_weight {
             let mut result =
-                self.search_bounded_parallel_single_pulsed(anchors, limit, pulse_interval)?;
+                self.search_bounded_parallel_single_pulsed(anchors, limit, pulse_interval, shard)?;
             merge_search_stats(&mut cumulative_stats, result.stats);
             if result.distance.is_some() {
                 result.searched_maximum_weight = searched_maximum_weight;
@@ -4072,6 +4270,7 @@ impl CompiledCssDistance {
         anchors: &[u16],
         maximum_weight: u16,
         pulse_interval: u64,
+        shard: Option<CssSearchShard>,
     ) -> Result<BoundedCssDistanceResult, CssDistanceError> {
         if pulse_interval != 0 && !pulse_interval.is_power_of_two() {
             return Err(CssDistanceError::InvalidPulseInterval);
@@ -4104,7 +4303,7 @@ impl CompiledCssDistance {
         let mut active_maximum = searched_maximum_weight;
         for &anchor in anchors {
             let partial =
-                self.search_bounded_root_parallel(&[anchor], active_maximum, pulse_interval);
+                self.search_bounded_root_parallel(&[anchor], active_maximum, pulse_interval, shard);
             merge_search_stats(&mut combined.stats, partial.stats);
             let improves = match (partial.distance, combined.distance) {
                 (Some(partial), Some(current)) => partial < current,
@@ -4197,6 +4396,7 @@ impl CompiledCssDistance {
             anchors,
             incumbent.len() as u16 - 1,
             pulse_interval,
+            None,
         )?;
         if result.distance.is_none() {
             result.distance = replay.distance;
@@ -4736,6 +4936,60 @@ mod tests {
         assert_eq!(answer.distance, Some(2));
         assert_eq!(&*answer.witness, &[0, 1]);
         assert!(answer.stats.bound_improvements_published >= 1);
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn deterministic_search_shards_cover_compact_and_wide_searches() {
+        assert!(CssSearchShard::new(0, 0).is_err());
+        assert!(CssSearchShard::new(3, 3).is_err());
+        assert!(CssSearchShard::new(0, 4097).is_err());
+
+        let (physical, logical) = artifact_problem();
+        let anchors = [0, 1, 2, 3, 4];
+        let pool = rayon::ThreadPoolBuilder::new()
+            .num_threads(3)
+            .build()
+            .unwrap();
+        let compact = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let compact_reference = pool
+            .install(|| compact.search_bounded_parallel_pulsed(&anchors, 5, 0))
+            .unwrap();
+        let compact_shard_best = (0..3)
+            .filter_map(|index| {
+                pool.install(|| {
+                    compact.search_bounded_parallel_pulsed_shard(
+                        &anchors,
+                        5,
+                        0,
+                        CssSearchShard::new(index, 3).unwrap(),
+                    )
+                })
+                .unwrap()
+                .distance
+            })
+            .min();
+        assert_eq!(compact_shard_best, compact_reference.distance);
+
+        let wide = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+        let wide_reference = pool
+            .install(|| wide.search_bounded_syndrome_parallel_pulsed(&anchors, 5, 0))
+            .unwrap();
+        let wide_shard_best = (0..3)
+            .filter_map(|index| {
+                pool.install(|| {
+                    wide.search_bounded_syndrome_parallel_pulsed_shard(
+                        &anchors,
+                        5,
+                        0,
+                        CssSearchShard::new(index, 3).unwrap(),
+                    )
+                })
+                .unwrap()
+                .distance
+            })
+            .min();
+        assert_eq!(wide_shard_best, wide_reference.distance);
     }
 
     #[cfg(feature = "parallel")]
