@@ -19,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "notes/c1015_hamilton_gap_rooted.json"
 MANIFEST = ROOT / "notes/c1015_hamilton_gap_rooted.sha256"
+GROUP_DATA = ROOT / "notes/c1015_chord_pack_groups.jsonl"
 VERTICES = tuple(range(10))
 EDGES = tuple(itertools.combinations(VERTICES, 2))
 EDGE_INDEX = {edge: index for index, edge in enumerate(EDGES)}
@@ -116,6 +117,40 @@ def encode_counter(counter):
     return {str(key): counter[key] for key in sorted(counter)}
 
 
+def mask_component_sizes(mask):
+    adjacency = {vertex: [] for vertex in VERTICES}
+    for index, (left, right) in enumerate(EDGES):
+        if mask & (1 << index):
+            adjacency[left].append(right)
+            adjacency[right].append(left)
+    unseen = set(VERTICES)
+    sizes = []
+    while unseen:
+        stack = [unseen.pop()]
+        size = 0
+        while stack:
+            vertex = stack.pop()
+            size += 1
+            for neighbor in adjacency[vertex]:
+                if neighbor in unseen:
+                    unseen.remove(neighbor)
+                    stack.append(neighbor)
+        sizes.append(size)
+    return tuple(sorted(sizes))
+
+
+def mask_triangle_count(mask):
+    adjacency = {vertex: set() for vertex in VERTICES}
+    for index, (left, right) in enumerate(EDGES):
+        if mask & (1 << index):
+            adjacency[left].add(right)
+            adjacency[right].add(left)
+    return sum(
+        all(right in adjacency[left] for left, right in itertools.combinations(triple, 2))
+        for triple in itertools.combinations(VERTICES, 3)
+    )
+
+
 def build_certificate():
     partner_index = next(
         index
@@ -201,6 +236,140 @@ def build_certificate():
             actions.append(action)
     assert len(set(actions)) == 20
 
+    ordered_actions = tuple(
+        action
+        for action in actions
+        if action[BASE_INDEX] == BASE_INDEX and action[partner_index] == partner_index
+    )
+    assert len(ordered_actions) == 10
+
+    cycle_position = {vertex: position for position, vertex in enumerate(cycle)}
+
+    def cycle_word(index):
+        pairs = tuple(
+            sorted(
+                tuple(sorted((cycle_position[left], cycle_position[right])))
+                for left, right in MATCHINGS[index]
+            )
+        )
+        return " ".join(f"{left}{right}" for left, right in pairs)
+
+    def root_type(index):
+        return (
+            int(is_hamilton(BASE, MATCHINGS[index])),
+            int(is_hamilton(partner, MATCHINGS[index])),
+        )
+
+    doubly_bad = tuple(index for index in candidates if root_type(index) == (0, 0))
+    assert len(doubly_bad) == 25
+
+    def disjoint_pack(pack):
+        return all(
+            not MASKS[left] & MASKS[right]
+            for left, right in itertools.combinations(pack, 2)
+        )
+
+    def pack_orbits(packs):
+        unseen = set(packs)
+        answer = []
+        while unseen:
+            representative = min(unseen)
+            orbit = {
+                tuple(sorted(action[index] for index in representative))
+                for action in ordered_actions
+            }
+            unseen.difference_update(orbit)
+            answer.append((representative, orbit))
+        return tuple(answer)
+
+    doubly_bad_orbits = []
+    bad_orbit_index = {}
+    unseen_bad = set(doubly_bad)
+    while unseen_bad:
+        representative = min(unseen_bad)
+        orbit = {action[representative] for action in ordered_actions}
+        unseen_bad.difference_update(orbit)
+        orbit_index = len(doubly_bad_orbits)
+        for index in orbit:
+            bad_orbit_index[index] = orbit_index
+        doubly_bad_orbits.append(
+            {
+                "orbit_size": len(orbit),
+                "representative": cycle_word(representative),
+            }
+        )
+    assert sorted(row["orbit_size"] for row in doubly_bad_orbits) == [5, 5, 5, 10]
+
+    packs = {
+        size: tuple(
+            pack
+            for pack in itertools.combinations(doubly_bad, size)
+            if disjoint_pack(pack)
+        )
+        for size in (4, 5, 6)
+    }
+    assert tuple(len(packs[size]) for size in (4, 5, 6)) == (80, 21, 0)
+
+    five_pack_rows = []
+    for representative, orbit in pack_orbits(packs[5]):
+        remaining = FULL_MASK ^ rooted_mask
+        for index in representative:
+            remaining ^= MASKS[index]
+        component_sizes = mask_component_sizes(remaining)
+        assert any(size % 2 for size in component_sizes)
+        five_pack_rows.append(
+            {
+                "orbit_size": len(orbit),
+                "representative": [cycle_word(index) for index in representative],
+                "remaining_two_factor_components": component_sizes,
+            }
+        )
+    assert len(five_pack_rows) == 4
+
+    four_pack_rows = []
+    for representative, orbit in pack_orbits(packs[4]):
+        remaining = FULL_MASK ^ rooted_mask
+        for index in representative:
+            remaining ^= MASKS[index]
+        contained = tuple(
+            index for index in candidates if MASKS[index] & remaining == MASKS[index]
+        )
+        decompositions = []
+        for triple in itertools.combinations(contained, 3):
+            if MASKS[triple[0]] | MASKS[triple[1]] | MASKS[triple[2]] != remaining:
+                continue
+            types = tuple(sorted(root_type(index) for index in triple))
+            cost = sum(sum(pair) for pair in types)
+            assert cost >= 4
+            decompositions.append((types, cost))
+        assert decompositions
+        four_pack_rows.append(
+            {
+                "orbit_size": len(orbit),
+                "representative": [cycle_word(index) for index in representative],
+                "doubly_bad_orbit_counts": [
+                    sum(bad_orbit_index[index] == orbit_index for index in representative)
+                    for orbit_index in range(4)
+                ],
+                "complement_triangle_count": mask_triangle_count(remaining),
+                "completion_count": len(decompositions),
+                "minimum_completion_cost": min(cost for _, cost in decompositions),
+                "completion_costs": encode_counter(Counter(cost for _, cost in decompositions)),
+                "completion_root_types": encode_counter(
+                    Counter(str(types) for types, _ in decompositions)
+                ),
+            }
+        )
+    assert len(four_pack_rows) == 9
+    assert all(
+        (row["minimum_completion_cost"] == 4)
+        == (
+            row["doubly_bad_orbit_counts"][0] == 0
+            or row["complement_triangle_count"] == 0
+        )
+        for row in four_pack_rows
+    )
+
     equality_orbits = defaultdict(set)
     for factors, count, degree_sequence in equality_rows:
         canonical = min(
@@ -244,6 +413,26 @@ def build_certificate():
             f"{left}|{right}": multiplicity
             for (left, right), multiplicity in sorted(root_degree_distribution.items())
         },
+        "two_root_chord_packing": {
+            "doubly_bad_matching_count": len(doubly_bad),
+            "doubly_bad_dihedral_orbits": doubly_bad_orbits,
+            "disjoint_pack_counts": {
+                str(size): len(packs[size]) for size in (4, 5, 6)
+            },
+            "five_pack_dihedral_orbits": five_pack_rows,
+            "four_pack_dihedral_orbits": four_pack_rows,
+            "sharp_cost_rule": (
+                "a four-pack has minimum complementary-triple cost four iff "
+                "it contains no orbit-0 doubly-bad matching or its cubic "
+                "complement is triangle-free"
+            ),
+            "deduction": (
+                "five doubly-bad factors cannot extend because the residual two-factor "
+                "has an odd component; with at most three doubly-bad factors the other "
+                "four each cost at least one; with four, every residual three-factor "
+                "completion has total root-Hamilton cost at least four"
+            ),
+        },
         "equality_degree_sequence_distribution": {
             str(count): {
                 ",".join(map(str, sequence)): multiplicity
@@ -276,9 +465,60 @@ def canonical_bytes(value):
     return (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
 
 
-def manifest_bytes(script_path, output_bytes):
+def group_data_bytes(certificate):
+    rows = certificate["two_root_chord_packing"]["four_pack_dihedral_orbits"]
+    output = [
+        json.dumps(
+            {
+                "schema": "ergodis-campaign-data-v0",
+                "presentation": "c1015-four-pack-orbit-multiset-v1",
+                "problem": "classify sharp two-root chord packs from single-factor orbits",
+                "fields": [
+                    "pack",
+                    "bad-orbit-0",
+                    "bad-orbit-1",
+                    "bad-orbit-2",
+                    "bad-orbit-3",
+                    "complement-triangles",
+                ],
+                "rows": 4 * len(rows),
+            },
+            sort_keys=True,
+        )
+    ]
+    row_id = 0
+    for pack, row in enumerate(rows):
+        expected = row["minimum_completion_cost"] == 4
+        for orbit, multiplicity in enumerate(row["doubly_bad_orbit_counts"]):
+            for _ in range(multiplicity):
+                values = (
+                    [pack]
+                    + [int(position == orbit) for position in range(4)]
+                    + [row["complement_triangle_count"]]
+                )
+                output.append(
+                    json.dumps(
+                        {
+                            "id": row_id,
+                            "weight": 1,
+                            "expected": expected,
+                            "values": values,
+                        },
+                        sort_keys=True,
+                    )
+                )
+                row_id += 1
+    assert row_id == 4 * len(rows)
+    return ("\n".join(output) + "\n").encode()
+
+
+def manifest_bytes(script_path, output_bytes, group_bytes):
     rows = []
-    for path, data in ((script_path, script_path.read_bytes()), (OUTPUT, output_bytes)):
+    for path, data in (
+        (script_path, script_path.read_bytes()),
+        (OUTPUT, output_bytes),
+        (GROUP_DATA, group_bytes),
+    ):
         rows.append(f"{hashlib.sha256(data).hexdigest()}  {path.relative_to(ROOT)}")
     return ("\n".join(rows) + "\n").encode()
 
@@ -289,16 +529,22 @@ def main():
     arguments = parser.parse_args()
     certificate = build_certificate()
     output_bytes = canonical_bytes(certificate)
+    group_bytes = group_data_bytes(certificate)
     script_path = Path(__file__).resolve()
-    manifest = manifest_bytes(script_path, output_bytes)
+    manifest = manifest_bytes(script_path, output_bytes, group_bytes)
     if arguments.check:
         assert OUTPUT.read_bytes() == output_bytes
+        assert GROUP_DATA.read_bytes() == group_bytes
         assert MANIFEST.read_bytes() == manifest
         print("C1015 rooted Hamilton-gap checks passed")
         return
     OUTPUT.write_bytes(output_bytes)
+    GROUP_DATA.write_bytes(group_bytes)
     MANIFEST.write_bytes(manifest)
-    print(f"wrote {OUTPUT.relative_to(ROOT)} and {MANIFEST.relative_to(ROOT)}")
+    print(
+        f"wrote {OUTPUT.relative_to(ROOT)}, {GROUP_DATA.relative_to(ROOT)}, "
+        f"and {MANIFEST.relative_to(ROOT)}"
+    )
 
 
 if __name__ == "__main__":

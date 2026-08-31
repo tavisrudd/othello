@@ -430,8 +430,10 @@ while equality 18 has six degree sequences, frozen in the rooted certificate.
 The order-20 dihedral stabilizer of the rooted Hamilton cycle is applied
 explicitly only to summarize equality orbits; it is not used to discard any
 completion. A conceptual propagation proof of (2h)--(2i), presumably using
-compatibility between the two oriented shadows of each Hamilton pair, remains
-an important proof-compression problem.
+compatibility between the two oriented shadows of each Hamilton pair, was the
+initial proof-compression target. The local chord-packing argument below now
+supplies such a proof for (2h); only the stronger bound (2i) remains at the
+rooted-exhaustion stage.
 
 The rooted data isolate a substantially smaller structural lemma. If (FG) is
 an edge of (H), then
@@ -444,8 +446,8 @@ Equivalently, after deleting the rooted edge, if (A) of the remaining seven
 factors are Hamilton with (F) and (B) are Hamilton with (G), then
 (A+B\ge4). In particular, a degree-two factor can be adjacent only to factors
 of degree at least four. The fixed-Hamilton-pair certificate proves (2j)
-without the global census; a human proof of this two-root amplification lemma
-is the immediate local target.
+without the global census. The dihedral chord-packing proof below proves it
+from 25 local matchings and thirteen packing orbits.
 
 Modulo that local lemma, (2h) already has a short structural proof. If (H)
 has an isolated vertex, the rooted spectrum above gives (0,12,16), or (23).
@@ -461,9 +463,9 @@ incidences from the degree-two vertices into the (c) high-degree vertices, so
 \]
 
 The last inequality is a two-case check according as (a\le2c) or (a>2c).
-Thus a nonempty Hamilton graph has at least 12 edges. This reduces the human
-proof of the first gap from 173,008 completions to the single local statement
-(2j).
+Thus a nonempty Hamilton graph has at least 12 edges. Together with the next
+paragraph, this is a structural proof of the first gap independent of the
+173,008-completion enumeration.
 
 There are two further exact structural reductions for (2j)--(2i). First, the
 Hamilton cycle (F\cup G) has a (5+5) alternating bipartition. Every other
@@ -477,24 +479,90 @@ sum to 15. Hence their multiplicities at (1,3,5) are exactly one of
 This turns (2j) into a bounded matching problem on the two (K_5) halves,
 rather than a one-factorization census.
 
-The degree-two case of this local problem is smaller still. Contract such a
-factor (F), and let (C_1,C_2) be the two five-cycles supplied by its Hamilton
-partners. The potential-code argument says that (|C_1\cap C_2|) is zero or
-three. Up to the Petersen action, the edge-coverage multiplicities (d) from
-(2c) then have only the following four shapes. The last column is presently
-a rooted-certificate consequence; turning it into a four-row endpoint-bit
-chase would be a human proof of the degree-two case of (2j).
+Here is the promised local proof. Number the rooted decagon cyclically modulo
+ten, so
+
+\[
+ F=\{01,23,45,67,89\},\qquad
+ G=\{12,34,56,78,90\}.
+\]
+
+Give a residual matching (M) cost
+
+\[
+ w(M)=\epsilon_{FM}+\epsilon_{GM}\in\{0,1,2\}.
+\]
+
+There are exactly 25 cost-zero matchings. Under the order-ten dihedral group
+preserving the ordered pair ((F,G)), they have four orbits, represented by
+
+\[
+\begin{array}{c|l}
+5&08,19,27,35,46\\
+10&08,15,26,37,49\\
+5&03,17,26,49,58\\
+5&03,16,27,49,58.
+\end{array}                                                   \tag{2l}
+\]
+
+The compatibility check among these four chord types is tiny. There are no
+six pairwise edge-disjoint cost-zero matchings. There are 21 five-packs, in
+four dihedral orbits of sizes (10,5,5,1); the two-regular complements have
+cycle types
+
+\[
+ (3+7),\qquad(5+5),\qquad(3+3+4),\qquad(5+5),
+\]
+
+so none is the union of two perfect matchings. Finally the 80 four-packs form
+nine dihedral orbits. Factoring each complementary cubic graph gives the
+following complete table; the last column lists the total cost of its
+three-factor completions.
 
 \[
 \begin{array}{c|c|c}
- |C_1\cap C_2|&\text{nonzero multiplicities in }d
-    &\text{minimum degree of either Hamilton partner}\\ \hline
- 0&1^6&5\\
- 3&1^6&4\\
- 3&2,1^4&4\\
- 3&2^2,1^2&4
-\end{array}
+ \text{orbit size}&\text{number of completions}&\text{completion costs}\\ \hline
+10&1&5\\
+10&2&4,4\\
+10&1&5\\
+ 5&1&6\\
+10&1&6\\
+10&1&6\\
+10&2&5,5\\
+10&1&6\\
+ 5&1&4
+\end{array}                                                   \tag{2m}
 \]
+
+Write (B_0) for the first orbit in (2l). The sharp rows in (2m) satisfy the
+more compact equality law
+
+\[
+ \text{complementary-triple cost}=4
+ \iff
+ \bigl(B_0\text{ is absent}\bigr)
+ \qquad\text{or}\qquad
+ \bigl(\text{the cubic complement is triangle-free}\bigr).
+\]
+
+This is the exact five-node rule found by the grouped Ergodis pass and
+independently replayed by the Python certificate.
+
+This table proves (2j). Indeed, let (z) be the number of cost-zero factors in
+an exact cover of the 35 diagonals. The five-pack calculation gives (z\le4).
+If (z\le3), the other (7-z) factors already have total cost at least four. If
+(z=4), their complementary triple has total cost at least four by (2m).
+Hence
+
+\[
+ A+B=\sum_Mw(M)\ge4.
+\]
+
+This is a finite local orbit proof, not an appeal to the 396-class census or
+the 173,008 rooted completions. Every entry follows by rotating or reflecting
+the four representatives in (2l), rejecting shared chords, and alternating
+around the residual degree-two or degree-three graph. The certificate freezes
+the representatives and all thirteen orbit rows for replay.
 
 There is also a topological formulation of the full two-root lemma. Regard
 (F\cup G) as an alternating Hamilton decagon. For any remaining factor (M),
@@ -511,7 +579,7 @@ so, from ten vertices and fifteen edges,
 
 \[
  \chi(M)=-(\epsilon_{FM}+\epsilon_{GM}),\qquad
- \gamma(M)=2+\epsilon_{FM}+\epsilon_{GM},           \tag{2l}
+ \gamma(M)=2+\epsilon_{FM}+\epsilon_{GM},           \tag{2n}
 \]
 
 where (\gamma=2-\chi) is Euler genus. The seven factors (M) partition the
@@ -519,17 +587,14 @@ where (\gamma=2-\chi) is Euler genus. The seven factors (M) partition the
 
 \[
  \sum_M\bigl(\gamma(M)-2\bigr)\ge4,
- \quad\text{equivalently}\quad \sum_M\chi(M)\le-4.  \tag{2m}
+ \quad\text{equivalently}\quad \sum_M\chi(M)\le-4.  \tag{2o}
 \]
 
-This reframes the endpoint chase as a genus-defect packing problem for a
-one-factorization of the diagonals of a decagon. It is not yet a proof: the
-missing step is to show that seven disjoint chord matchings cannot all have
-total Euler-genus excess at most three. But it exposes a plausible route via
-rotation systems or matching book embeddings and explains why the desired
-quantity is additive over the seven residual factors.
+Thus the chord-packing argument is also a proof of the genus-defect bound. The
+surface language explains why its cost is additive and may still admit a
+table-free proof via rotation systems or matching book embeddings.
 
-Third, let (\tau_1,\ldots,\tau_9) be the matching involutions on the
+Finally, let (\tau_1,\ldots,\tau_9) be the matching involutions on the
 ten-dimensional permutation space (U), and put
 
 \[
@@ -544,7 +609,7 @@ values (0) and (-2) on those two types. Therefore
 \[
  \operatorname{tr}(T^2)
  =9\binom{10}{2}-4(36-|E(H)|)
- =261+4|E(H)|.                                      \tag{2n}
+ =261+4|E(H)|.                                      \tag{2p}
 \]
 
 Thus (2h) is the spectral-energy jump (261\to309), while the no-isolate
@@ -775,8 +840,9 @@ order-ten finite lemma; it does not prove the interpolation, pencil, or Hesse
 arguments.
 
 The independent bundle `c1015_hamilton_gap_rooted.py`,
-`c1015_hamilton_gap_rooted.json`, and `c1015_hamilton_gap_rooted.sha256`
-proves (2h)--(2i) after fixing one Hamilton pair. Replay with
+`c1015_hamilton_gap_rooted.json`, `c1015_chord_pack_groups.jsonl`, and
+`c1015_hamilton_gap_rooted.sha256` proves (2h)--(2i) after fixing one
+Hamilton pair. Replay with
 
 ```text
 python notes/c1015_hamilton_gap_rooted.py --check
@@ -785,7 +851,11 @@ python notes/c1015_hamilton_gap_rooted.py --check
 It exhausts 173,008 residual exact covers, uses two agreeing Hamilton tests,
 and invokes no graph-isomorphism package or global one-factorization census.
 Its equality-orbit summary uses only the explicitly generated order-20
-dihedral stabilizer of the rooted ten-cycle.
+dihedral stabilizer of the rooted ten-cycle. Independently of that exhaustion,
+it checks the four cost-zero matching orbits, four five-pack orbits, nine
+four-pack orbits, the local proof of (2j), and the sharp cost-four rule selected
+by the grouped Ergodis pass. The JSONL file is the 36-child frozen input for
+`group-compile`; the Python replay does not trust the controller output.
 
 The bundle `c1015_ree_bridge.py`, `c1015_ree_bridge.json`, and
 `c1015_ree_bridge.sha256` independently enumerates the contained
@@ -859,6 +929,10 @@ first canonical witness is the six-equation triangle displayed above.
 
 | Artifact | Bytes | SHA-256 |
 |---|---:|---|
+| `notes/c1015_hamilton_gap_rooted.py` | 19,918 | `beaa78ed1e8b08f909a7a1fac1e905923b96e84da9e60a13923dd3df59b4db0c` |
+| `notes/c1015_hamilton_gap_rooted.json` | 10,844 | `ef5cac89ccabdc421443373219a0d401b82d500beb5cfe3211fefffa88bac815` |
+| `notes/c1015_chord_pack_groups.jsonl` | 2,894 | `01d22b75b4d4d72663ba4f14e3f24f906bc849b2e18b7e11f140c50786683d8c` |
+| `notes/c1015_hamilton_gap_rooted.sha256` | 306 | `728053aeed2650f7f5f52db76474a315bb6f5231e4fbfd327ba0654219a7ceb8` |
 | `notes/c1015_zero_hamilton_rooted.py` | 14,840 | `79d73b9a1b7d796e341bdbac2d8b498613dcd9f54a60ea1b43ac61a2a3bd30e7` |
 | `notes/c1015_zero_hamilton_rooted.json` | 4,070 | `17190516e63f4ac072c35185b33895f20de5466809eb46d8851d0512700190de` |
 | `notes/c1015_zero_hamilton_rooted.sha256` | 206 | `00abab945d9ef05469ec33b69557cfd742a5f1f919f9bab5e3216fe55a59d998` |
@@ -1216,21 +1290,31 @@ not needed for the order-ten theorem.
   Hamilton shadow, not only degrees zero and one: modulo three it lies in the
   ([10,5,4]) potential code (2f), whose missing weights also force the
   zero-or-three intersection law for two Hamilton partners.
-- **Global Hamilton-gap theorem — first gap structurally reduced; second
+- **Global Hamilton-gap theorem — first gap structural; second
   finite.**
   The rooted Hamilton-pair certificate proves the sharp dichotomy “empty or
   at least 12 Hamilton pairs” and the stronger bound 18 when there is no
   isolated factor. Both are attained. It fixes one Hamilton pair and checks
   173,008 exact-cover completions, independently of the 396-class census. The
-  same root proves the sharper local amplification law (2j); no-leaves,
-  (2j), the isolated-factor spectrum, and a short degree count then prove the
-  12-gap structurally. The remaining human local task is to prove (2j) from
-  the three cut types (2k), or equivalently the genus-defect packing bound
-  (2m); for a degree-two endpoint this is reduced to the displayed four-row
-  signature table. For the 18-gap, the exterior-square identity (2n)
+  sharper local amplification law (2j) now has a direct dihedral chord-packing
+  proof: 25 doubly bad matchings reduce to four single-factor orbits, four
+  five-pack orbits, and nine four-pack orbits. No-leaves, (2j), the
+  isolated-factor spectrum, and a short degree count prove the 12-gap
+  structurally. Equivalently, this proves the genus-defect packing bound
+  (2o). For the 18-gap, the exterior-square identity (2p)
   reduces the problem exactly to the energy bound
   (\operatorname{tr}(T^2)\ge333) under no isolation. A proof from the forced
   standard module would replace rooted exhaustion completely.
+- **Why the sharp two-root packs have the rule “no (B_0) or no triangle” —
+  finite statement settled, conceptual explanation open.** `group-compile`
+  first proves that single-factor orbit multiplicities alone lose one bit:
+  the two ((2,0,2,0)) packs have complementary costs four and six. The
+  triangle count of the cubic complement supplies exactly that bit, and the
+  five-node synthesized rule is replayed independently in the Python
+  certificate. What is still unexplained is why this disjunction is forced by
+  a switching, rotation-system, or cubic-graph invariant. Such a proof would
+  remove the nine-row presentation table, but is not a theorem gap; it is the
+  exact proof-compression successor exposed by the `ej`+`tt` closeout.
 - **Why the affine exception exists — settled geometrically by C1014.** It is
   the residual-pair factorization obtained by rooting the Miquelian inversive
   plane of order three at a point of (\mathbf P^1(\mathbf F_9)). The ten
@@ -1283,7 +1367,7 @@ not needed for the order-ten theorem.
   Korchmaros--Pace--Sonnino full text and its largest three-graph citing set
   are cleared, including the 2024 characterization paper. MathSciNet and
   Google Scholar remain uncovered, and no exhaustive MSC sweep has been run.
-- **Ergodis compression pass — settled, with interface debt recorded.** The
+- **Ergodis compression pass — settled, including grouped chord packs.** The
   frozen campaign contained all 4,096 subfamilies of the twelve affine lines.
   Its feature ceiling had 48 vectors and zero unavoidable errors. The two
   weakened rules exposed exactly the missing proof ingredients: “a line
@@ -1302,14 +1386,26 @@ not needed for the order-ten theorem.
   in the rooted certificate. `synthesize` reproduced the same output-sort
   failure on this smaller exact dataset. The earlier fixed-base undercount
   and mistaken characteristic-three inference remain useful additional
-  regressions. The Hamilton-gap compression exposes a third, distinct
-  interface boundary: (2m) is a grouped assertion about the sum of seven
-  matchings in one exact cover, whereas the current campaign evaluator sees
-  one flat row at a time. Supplying precomputed group sums would only encode
-  the desired conclusion as a feature. A useful future extension would be a
-  bounded multiset/group-aggregation layer (counts, sums, and minima over a
-  fixed parent key), with the resulting candidate still replayed and proved
-  independently. No Ergodis source change is made here.
+  regressions. The requested aggregation layer is now available as
+  `group-compile`. On the Hamilton-gap fixture it compiled 36 child rows into
+  the nine four-pack parent rows. Counts of the four single-matching dihedral
+  orbits alone give five feature vectors and one unavoidable collision: two
+  packs both have multiplicities ((2,0,2,0)), but their complementary triples
+  have costs four and six. Adding the triangle count of the complementary
+  cubic graph gives seven vectors and zero unavoidable errors. The current
+  synthesizer then returns a five-node, depth-two exact rule:
+
+  \[
+  \text{completion cost }4
+  \iff
+  \text{no orbit-0 chord occurs}\quad\text{or}\quad
+  \text{the cubic complement is triangle-free}.
+  \]
+
+  This compresses the equality cases of (2m) and identifies the first genuine
+  relational feature; it is diagnostic rather than a proof of the lower
+  bound. The earlier output-sort failure does not reproduce on this grouped
+  campaign. No Ergodis source was edited.
 
 ## Publication decision after proof
 

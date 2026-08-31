@@ -183,5 +183,312 @@
     "no_isolated_factor_minimum_edges": 18,
     "nonempty_hamilton_graph_minimum_edges": 12
   },
-  "trusted_boundary": "deterministic exact cover after fixing one Hamilton pair; equality rows quotiented only by its explicit order-20 dihedral stabilizer; no graph-isomorphism or global one-factorization census"
+  "trusted_boundary": "deterministic exact cover after fixing one Hamilton pair; equality rows quotiented only by its explicit order-20 dihedral stabilizer; no graph-isomorphism or global one-factorization census",
+  "two_root_chord_packing": {
+    "deduction": "five doubly-bad factors cannot extend because the residual two-factor has an odd component; with at most three doubly-bad factors the other four each cost at least one; with four, every residual three-factor completion has total root-Hamilton cost at least four",
+    "disjoint_pack_counts": {
+      "4": 80,
+      "5": 21,
+      "6": 0
+    },
+    "doubly_bad_dihedral_orbits": [
+      {
+        "orbit_size": 5,
+        "representative": "08 19 27 35 46"
+      },
+      {
+        "orbit_size": 10,
+        "representative": "08 15 26 37 49"
+      },
+      {
+        "orbit_size": 5,
+        "representative": "03 17 26 49 58"
+      },
+      {
+        "orbit_size": 5,
+        "representative": "03 16 27 49 58"
+      }
+    ],
+    "doubly_bad_matching_count": 25,
+    "five_pack_dihedral_orbits": [
+      {
+        "orbit_size": 10,
+        "remaining_two_factor_components": [
+          3,
+          7
+        ],
+        "representative": [
+          "08 19 27 35 46",
+          "02 13 49 57 68",
+          "07 16 25 39 48",
+          "06 17 24 38 59",
+          "05 14 28 37 69"
+        ]
+      },
+      {
+        "orbit_size": 5,
+        "remaining_two_factor_components": [
+          5,
+          5
+        ],
+        "representative": [
+          "08 19 27 35 46",
+          "02 13 49 57 68",
+          "07 16 25 39 48",
+          "06 15 29 38 47",
+          "05 14 28 37 69"
+        ]
+      },
+      {
+        "orbit_size": 5,
+        "remaining_two_factor_components": [
+          3,
+          3,
+          4
+        ],
+        "representative": [
+          "08 19 27 35 46",
+          "03 17 26 49 58",
+          "07 16 25 39 48",
+          "06 15 29 38 47",
+          "05 14 28 37 69"
+        ]
+      },
+      {
+        "orbit_size": 1,
+        "remaining_two_factor_components": [
+          5,
+          5
+        ],
+        "representative": [
+          "03 17 26 49 58",
+          "07 16 25 39 48",
+          "06 15 29 38 47",
+          "04 18 27 36 59",
+          "05 14 28 37 69"
+        ]
+      }
+    ],
+    "four_pack_dihedral_orbits": [
+      {
+        "complement_triangle_count": 2,
+        "completion_costs": {
+          "5": 1
+        },
+        "completion_count": 1,
+        "completion_root_types": {
+          "((0, 1), (1, 1), (1, 1))": 1
+        },
+        "doubly_bad_orbit_counts": [
+          2,
+          1,
+          1,
+          0
+        ],
+        "minimum_completion_cost": 5,
+        "orbit_size": 10,
+        "representative": [
+          "08 19 27 35 46",
+          "02 13 49 57 68",
+          "07 16 25 39 48",
+          "06 17 24 38 59"
+        ]
+      },
+      {
+        "complement_triangle_count": 0,
+        "completion_costs": {
+          "4": 2
+        },
+        "completion_count": 2,
+        "completion_root_types": {
+          "((0, 1), (0, 1), (1, 1))": 1,
+          "((1, 0), (1, 0), (1, 1))": 1
+        },
+        "doubly_bad_orbit_counts": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "minimum_completion_cost": 4,
+        "orbit_size": 10,
+        "representative": [
+          "08 19 27 35 46",
+          "02 13 49 57 68",
+          "07 16 25 39 48",
+          "06 15 29 38 47"
+        ]
+      },
+      {
+        "complement_triangle_count": 2,
+        "completion_costs": {
+          "5": 1
+        },
+        "completion_count": 1,
+        "completion_root_types": {
+          "((1, 0), (1, 1), (1, 1))": 1
+        },
+        "doubly_bad_orbit_counts": [
+          2,
+          1,
+          1,
+          0
+        ],
+        "minimum_completion_cost": 5,
+        "orbit_size": 10,
+        "representative": [
+          "08 19 27 35 46",
+          "02 13 49 57 68",
+          "07 16 25 39 48",
+          "04 15 26 38 79"
+        ]
+      },
+      {
+        "complement_triangle_count": 2,
+        "completion_costs": {
+          "6": 1
+        },
+        "completion_count": 1,
+        "completion_root_types": {
+          "((1, 1), (1, 1), (1, 1))": 1
+        },
+        "doubly_bad_orbit_counts": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "minimum_completion_cost": 6,
+        "orbit_size": 5,
+        "representative": [
+          "08 19 27 35 46",
+          "02 13 49 57 68",
+          "07 16 25 39 48",
+          "05 14 28 37 69"
+        ]
+      },
+      {
+        "complement_triangle_count": 2,
+        "completion_costs": {
+          "6": 1
+        },
+        "completion_count": 1,
+        "completion_root_types": {
+          "((1, 1), (1, 1), (1, 1))": 1
+        },
+        "doubly_bad_orbit_counts": [
+          1,
+          1,
+          2,
+          0
+        ],
+        "minimum_completion_cost": 6,
+        "orbit_size": 10,
+        "representative": [
+          "08 19 27 35 46",
+          "02 16 37 48 59",
+          "03 17 26 49 58",
+          "06 15 29 38 47"
+        ]
+      },
+      {
+        "complement_triangle_count": 2,
+        "completion_costs": {
+          "6": 1
+        },
+        "completion_count": 1,
+        "completion_root_types": {
+          "((1, 1), (1, 1), (1, 1))": 1
+        },
+        "doubly_bad_orbit_counts": [
+          1,
+          0,
+          3,
+          0
+        ],
+        "minimum_completion_cost": 6,
+        "orbit_size": 10,
+        "representative": [
+          "08 19 27 35 46",
+          "03 17 26 49 58",
+          "07 16 25 39 48",
+          "06 15 29 38 47"
+        ]
+      },
+      {
+        "complement_triangle_count": 4,
+        "completion_costs": {
+          "5": 2
+        },
+        "completion_count": 2,
+        "completion_root_types": {
+          "((0, 1), (1, 1), (1, 1))": 1,
+          "((1, 0), (1, 1), (1, 1))": 1
+        },
+        "doubly_bad_orbit_counts": [
+          1,
+          0,
+          3,
+          0
+        ],
+        "minimum_completion_cost": 5,
+        "orbit_size": 10,
+        "representative": [
+          "08 19 27 35 46",
+          "03 17 26 49 58",
+          "07 16 25 39 48",
+          "05 14 28 37 69"
+        ]
+      },
+      {
+        "complement_triangle_count": 2,
+        "completion_costs": {
+          "6": 1
+        },
+        "completion_count": 1,
+        "completion_root_types": {
+          "((1, 1), (1, 1), (1, 1))": 1
+        },
+        "doubly_bad_orbit_counts": [
+          1,
+          1,
+          2,
+          0
+        ],
+        "minimum_completion_cost": 6,
+        "orbit_size": 10,
+        "representative": [
+          "08 19 27 35 46",
+          "03 17 26 49 58",
+          "06 15 29 38 47",
+          "04 16 28 39 57"
+        ]
+      },
+      {
+        "complement_triangle_count": 2,
+        "completion_costs": {
+          "4": 1
+        },
+        "completion_count": 1,
+        "completion_root_types": {
+          "((0, 1), (1, 0), (1, 1))": 1
+        },
+        "doubly_bad_orbit_counts": [
+          0,
+          0,
+          4,
+          0
+        ],
+        "minimum_completion_cost": 4,
+        "orbit_size": 5,
+        "representative": [
+          "03 17 26 49 58",
+          "07 16 25 39 48",
+          "06 15 29 38 47",
+          "04 18 27 36 59"
+        ]
+      }
+    ],
+    "sharp_cost_rule": "a four-pack has minimum complementary-triple cost four iff it contains no orbit-0 doubly-bad matching or its cubic complement is triangle-free"
+  }
 }
