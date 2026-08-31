@@ -52,6 +52,48 @@
     54,
     8
   ],
+  "minimum_three_line_lift_witness": {
+    "finite_edge_count": 3,
+    "hesse_lines": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        0,
+        3,
+        6
+      ],
+      [
+        1,
+        3,
+        8
+      ]
+    ],
+    "infinity_edge_count": 3,
+    "minimizer_count": 216,
+    "owners": [
+      2,
+      6,
+      8
+    ],
+    "paired_endpoints": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        3
+      ]
+    ],
+    "total_equation_count": 6
+  },
   "negative": 128,
   "positive": 3968,
   "rows": 4096,

@@ -115,6 +115,32 @@ def main():
             "first_mismatch_id": mismatches[0]["id"] if mismatches else None,
             "first_mismatch_values": mismatches[0]["values"] if mismatches else None,
         }
+    equation_witnesses = []
+    for first, second in itertools.combinations(LINES, 2):
+        shared = set(first) & set(second)
+        if len(shared) != 1:
+            continue
+        common_point = next(iter(shared))
+        for third in LINES:
+            if common_point in third:
+                continue
+            for owners in itertools.product(range(3), repeat=3):
+                triples = (first, second, third)
+                paired_endpoints = tuple(
+                    tuple(sorted(set(line) - {line[owner]}))
+                    for line, owner in zip(triples, owners)
+                )
+                infinity_points = tuple(
+                    sorted(set().union(*(set(pair) for pair in paired_endpoints)))
+                )
+                equation_witnesses.append(
+                    (len(infinity_points), triples, owners, paired_endpoints)
+                )
+    minimum_infinity_edges = min(item[0] for item in equation_witnesses)
+    minimum_witnesses = tuple(
+        item for item in equation_witnesses if item[0] == minimum_infinity_edges
+    )
+    first_witness = minimum_witnesses[0]
     certificate = {
         "schema": "c1015-hesse-compression-campaign-v1",
         "rows": len(rows),
@@ -124,6 +150,17 @@ def main():
         "full_family_values": rows[-1]["values"],
         "full_family_forces_zero": rows[-1]["expected"],
         "evaluations": evaluations,
+        "minimum_three_line_lift_witness": {
+            "infinity_edge_count": minimum_infinity_edges,
+            "finite_edge_count": 3,
+            "total_equation_count": minimum_infinity_edges + 3,
+            "minimizer_count": len(minimum_witnesses),
+            "hesse_lines": first_witness[1],
+            "owners": tuple(
+                line[owner] for line, owner in zip(first_witness[1], first_witness[2])
+            ),
+            "paired_endpoints": first_witness[3],
+        },
         "ergodis_control_result": {
             "ceiling_unavoidable_errors": 0,
             "batch_perfect_plans": 1,

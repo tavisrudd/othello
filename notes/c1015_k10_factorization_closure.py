@@ -259,6 +259,14 @@ def exceptional_hesse_obstruction(state):
         & set(three_line_zero_carrier_witness[1])
     ) == {0}
     assert 0 not in three_line_zero_carrier_witness[2]
+    six_equation_witness = {
+        "infinity_edges_to_ag23_points": (0, 1, 3),
+        "finite_edges_with_owner": ((0, 1, 2), (0, 3, 6), (1, 3, 8)),
+    }
+    assert all(
+        tuple(sorted((left, right, owner))) in three_line_zero_carrier_witness
+        for left, right, owner in six_equation_witness["finite_edges_with_owner"]
+    )
     point_of_vertex = {
         vertex: points[factor_to_point[vertex - 1]] for vertex in range(1, 10)
     }
@@ -441,6 +449,7 @@ def exceptional_hesse_obstruction(state):
         "automorphism_group_order": automorphism_order,
         "characteristic_not_two_incidence_obstruction": {
             "hesse_lines_by_ag23_point_index": three_line_zero_carrier_witness,
+            "six_equation_witness": six_equation_witness,
             "argument": (
                 "the first two Hesse lines intersect only at point 0, while "
                 "the third avoids point 0; the lift equations place 2*u_infinity "

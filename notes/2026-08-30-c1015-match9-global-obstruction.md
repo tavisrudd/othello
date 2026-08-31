@@ -205,6 +205,22 @@ one-factorizations gives the following dichotomy.
   closure already forces the nine transversals to be a pencil. This kills the
   exceptional class over every field without coordinates or row reduction.
 
+  Only six instances of (1) are used. In affine-point labels they are the
+  three edges \(\infty0,\infty1,\infty3\) and
+
+  \[
+  01\in M_2,\qquad 03\in M_6,\qquad 13\in M_8.
+  \]
+
+  They produce the three Hesse lines (012,036,138), respectively. This is
+  minimal within the three-line method: three vector-plane constraints need
+  three finite-edge equations, and three distinct finite edges use at least
+  three endpoint equations; choosing a triangle attains six. Thus the
+  exceptional census class is excluded by a bounded **Hesse-tripod lemma**
+  involving only four carrier variables and six factor points. The lemma
+  applies to any larger transversal design containing this incidence shadow,
+  independently of a complete one-factorization.
+
   As independent regression evidence, the earlier exact Hesse lift still
   finds a full minor (-8(1+\omega)), of norm 192, and the characteristic-
   three specialization has rank 74 with its unique nullvector satisfying
@@ -391,20 +407,23 @@ feature vectors and zero unavoidable errors; `batch` tested the three lowered
 plans and found the conjunction uniquely perfect at 4,096/4,096. The Python
 replay independently obtains the same counts without trusting Ergodis. The
 controller is diagnostic only and is not part of the mathematical proof.
+The same certificate minimizes the lift support inside this method: three
+infinity edges plus three finite edges, with 216 labelled minimizers; its
+first canonical witness is the six-equation triangle displayed above.
 
 | Artifact | Bytes | SHA-256 |
 |---|---:|---|
 | `notes/c1015_ree_bridge.py` | 10,728 | `7b60af8c3583a754db5ddc28d75cc065ca8d8906443e4b4f66903284e60fb123` |
 | `notes/c1015_ree_bridge.json` | 1,263 | `1545f49a4d66d33d5d90d0ee99d5eaf39640c0170c99db2a7b6e78697a279b50` |
 | `notes/c1015_ree_bridge.sha256` | 317 | `249bd54b32d954d1fd1c3751b99638219af40b905cbeedd7b85c0cc598fdd9b1` |
-| `notes/c1015_k10_factorization_closure.py` | 21,287 | `f588743532692e339a83fd204209c4685bc779ac961babe91068cf248044c610` |
-| `notes/c1015_k10_factorization_closure.json` | 6,393 | `91c4bc296a8223fabebd5d3e8e5b8b826fa84399445d97b62917e0427a94ca66` |
-| `notes/c1015_k10_factorization_closure.sha256` | 216 | `6ebad51c8bc282f6fdbe71a8d5951e46078b4df1f33b08e9d715472137f090a8` |
-| `notes/c1015_hesse_compression_campaign.py` | 4,903 | `d0b28bc7a20c2f45f388ca9b8c9040ce1d3d814bfa428e9efe19add9458c6e9d` |
-| `notes/c1015_hesse_compression_campaign.json` | 1,170 | `ccd70c64db320dd160bc980434d6397d5eed1b2f29758be96a7125f39cc3db1d` |
+| `notes/c1015_k10_factorization_closure.py` | 21,685 | `ca2a693ac5051a60c0c580540de61c9931a07892db3f24ed6b84a0c3f6c01dfc` |
+| `notes/c1015_k10_factorization_closure.json` | 6,779 | `909bcaec05c378c3ff4fb5279f44535cb49b58150efbee1bdf7c9fc7223723a3` |
+| `notes/c1015_k10_factorization_closure.sha256` | 216 | `2761a50545b2388b62e6d30e4e867bf5115121c9f3c9ca13ed67bcb1a0cdbe01` |
+| `notes/c1015_hesse_compression_campaign.py` | 6,519 | `bf59ed28d49668c16b56d9581191cfd1308e8bd7af6a1d0ab3b99892dd8c65b9` |
+| `notes/c1015_hesse_compression_campaign.json` | 1,699 | `ad126f40d89da51499d5ff1aed77323c61ca19aff4fd06eb6c918717e904a283` |
 | `notes/c1015_hesse_force_zero_plan.json` | 446 | `37e951bf3b1e4bb357ec45954403fd35df1b4961cd454bd7f51a3fe58ef4682f` |
 | `notes/c1015_hesse_compression_seeds.jsonl` | 666 | `84d28e86afc5d1520538fae247b60a966cdada78c2af90d0295b70dc377390b3` |
-| `notes/c1015_hesse_compression_campaign.sha256` | 431 | `20e8c910511e3c0dcfe7b6d56d7c41c1161c35bfe284a0279a41a0bdbf7b2ab6` |
+| `notes/c1015_hesse_compression_campaign.sha256` | 431 | `38c4b1aa01d5ab3cfd52add3dec4c72a34f97dfa4d1e5fe7c6f9ec664a77da73` |
 | tracked input JSON | 79,326 | `c2c3619a1c074bd28a9e0b967a4ac1762496589ede0cc636431f484d67fba357` |
 
 ## Literature position of the move
@@ -585,6 +604,11 @@ not needed for the order-ten theorem.
   characteristic-two closure kills the remainder. The determinant
   (-8(1+\omega)) and its norm 192 survive only as regression evidence; their
   prime factorization is no longer an unexplained proof dependency.
+- **Size of the obstruction carrier — settled within the incidence method.**
+  The Hesse tripod uses exactly six lift equations on four carrier variables;
+  fewer cannot supply three distinct vector-plane constraints and their
+  endpoint eliminations. Whether a fundamentally different five-equation
+  obstruction exists is not needed and has not been claimed.
 - **Nine-point deletion completion — reduced, still open.** The missing line
   exists exactly when the 36 edge gains (4) are balanced; 28 fixed-base
   triangle products are a complete frame-free test. AF+BG then constructs the
