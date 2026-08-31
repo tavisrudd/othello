@@ -224,6 +224,21 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
   Cremona/LMFDB label still to be pinned (needs elldata; class is
   determined by conductor 90 + cyclic 12-isogeny structure).
 
+- **Paper II bridge closed measured-negative (2026-08-30, feasibility
+  report below):** Paper II's trade generator is the \(PSL/PGL\) sheet
+  sign (odd determinant weight); every Gram-shadow coloring has even
+  bracket weight, and a \(\chi\circ\det\) twist would need \(rd\) odd,
+  where \(G_{d,r}\equiv0\) — so no member of the family can generate it.
+  No Paper II verification item is displaced. By-products kept: the exact
+  identity \(I=u^2-uv+v^2\) on Paper II's three switch constants (the
+  \(m=2\) color is the square class of their norm form), and a proved
+  reason Paper II needs modular machinery (the naive edge-bracket square
+  class is constant for \(q\equiv1\bmod4\), orientation-dependent for
+  \(q\equiv3\bmod4\)). **Cross-lane lead, relconic-owned, flagged only:**
+  at \(q=9\) the Baer/Miquelian circles construct C1015's exceptional
+  \(K_{10}\) one-factorization explicitly (verified set-equal, orbit =
+  the ten rooted versions) — routing belongs to the relconic lane.
+
 ## Session reports
 
 - `../2026-08-30-c1014-dickson-strata-derivation.md` — periodicity over
