@@ -241,8 +241,41 @@ scaling choice.
 Parallel Pareto marking preserves exact work and output at 1, 2, 4, 8, and 12
 threads, but it does not materially accelerate these fixtures: the serial
 state-expansion/directory pass dominates. This is recorded as a negative
-scaling result, not a parallel speedup. The next allocation-remediation targets
-are the frozen ordered-resource front and growing ZDD operations.
+scaling result, not a parallel speedup.
+
+The frozen ordered-resource allocation gate is now closed as well. A compiled
+query already determines the complete reachable class set and the last source
+that can consume each target sort. It now also stores target-local indices and
+release edges. `WitnessedParetoWorkspace::prepare_frozen` simulates that fixed
+release schedule before evaluation, best-fit assigns reusable slabs using warm
+per-sort capacity hints, and reserves both the witness payload and a parallel
+eight-byte `repr(C)` `FrontSpan` sidecar. The evaluation loop only clears and
+refills those slabs. Span metadata is released with its payload, so storage is
+proportional to the peak simultaneously live sorts/classes rather than every
+reachable class. Selected fronts are copied into a reusable retention arena;
+the owned API results are boxed only after leaving the guarded region.
+
+The warm-loop test measures the actual reverse-topological class/generator
+loop and reports zero allocations, reallocations, and deallocations. Existing
+tiny exhaustive/property comparisons retain exact front and witness equality,
+and the complete 351-test all-feature library suite plus integration/doc tests
+and strict all-target clippy pass
+in isolated target directories. The reusable public control is
+`examples/frozen_pareto_ab.rs`; the retained baseline is commit `23bb522fd`.
+Nine alternating core-2 rounds, each evaluating 50 warm queries over eight
+sorts and 16,384 classes, preserve the checksum and 24,064-entry live peak.
+Baseline/candidate ratios are 1.464x cycles (`t=14.92` on paired log ratios),
+1.422x instructions, 1.402x branches, 2.830x branch misses, and 1.495x wall
+time (`t=16.13`). Cache misses are statistically indistinguishable
+(`baseline/candidate=0.950`, `t=-0.88`), rather than the 1.73x candidate excess
+seen before span pooling. On the 131,072-class, 192,512-live-entry control,
+five evaluations take 31.60 ms baseline versus 21.65 ms candidate (1.459x),
+with peak RSS 11,552 versus 11,836 KiB. This reduces the intermediate
+candidate's 9.1% RSS regression to 2.5% without giving back its speedup. Raw
+counters are under
+`/home/tavis/.cache/ergodis-perf/c1017-ordered/span-pool-ab`.
+
+The next allocation-remediation target is growing ZDD operations.
 
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at

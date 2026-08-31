@@ -79,8 +79,19 @@ as each coherent tranche lands.
    1.025x, wall time 1.171x (`t=7.52`), and RSS 1.350x, with identical exact
    work, checksum, and witness. Sparse Pareto parallelism is result-stable
    through 12 threads but time-neutral because serial expansion dominates, so
-   no parallel speedup is claimed. Next: frozen ordered-front storage, then
-   iterative pre-sized ZDD operations.
+   no parallel speedup is claimed. The frozen ordered-resource evaluator now
+   precomputes reachable-local transition indices and exact last-consumer
+   release edges, then best-fit assigns reusable payload/span slabs from warm
+   capacity hints. Both the witness payload and its eight-byte `FrontSpan`
+   metadata therefore scale with peak live sorts rather than total reachable
+   classes, and the guarded warm DAG loop performs zero allocation,
+   reallocation, or deallocation; only returned-front boxing remains outside
+   the solve region. Nine alternating same-core rounds on a 16,384-class DAG
+   improve cycles 1.464x (`t=14.92`), instructions 1.422x, branch misses
+   2.830x, and wall time 1.495x (`t=16.13`) at identical checksum and peak-live
+   work. On a 131,072-class control the final candidate is 1.459x faster and
+   uses 11,836 KiB versus 11,552 KiB baseline RSS, closing the earlier 9% span
+   metadata regression to 2.5%. Next: iterative pre-sized ZDD operations.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

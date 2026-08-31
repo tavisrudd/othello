@@ -382,17 +382,127 @@ pub enum FrozenParetoError {
 #[derive(Clone, Debug)]
 pub struct WitnessedParetoWorkspace {
     entries: Vec<ParetoWitness>,
+    slabs: Vec<Vec<ParetoWitness>>,
+    slab_spans: Vec<Vec<FrontSpan>>,
+    planned_slabs: Vec<u32>,
+    live_slabs: Vec<u32>,
+    planning_live: Vec<u32>,
+    free_slabs: Vec<u32>,
+    retained_entries: Vec<ParetoWitness>,
+    retained_spans: Vec<FrontSpan>,
+    sort_capacity_hints: Vec<usize>,
+    sort_live_classes: Vec<usize>,
+    sort_live_entries: Vec<usize>,
 }
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default)]
+struct FrontSpan {
+    start: u32,
+    len: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<FrontSpan>() == 8);
+const _: () = assert!(std::mem::align_of::<FrontSpan>() == 4);
+
+const NO_SLAB: u32 = u32::MAX;
 
 impl WitnessedParetoWorkspace {
     pub fn with_capacity(capacity: usize) -> Self {
         Self {
             entries: Vec::with_capacity(capacity),
+            slabs: Vec::new(),
+            slab_spans: Vec::new(),
+            planned_slabs: Vec::new(),
+            live_slabs: Vec::new(),
+            planning_live: Vec::new(),
+            free_slabs: Vec::new(),
+            retained_entries: Vec::new(),
+            retained_spans: Vec::new(),
+            sort_capacity_hints: Vec::new(),
+            sort_live_classes: Vec::new(),
+            sort_live_entries: Vec::new(),
         }
     }
 
     pub fn capacity(&self) -> usize {
         self.entries.capacity()
+    }
+
+    fn prepare_frozen(
+        &mut self,
+        query: &FrozenParetoQueryPlan<'_, '_>,
+    ) -> Result<(), FrozenParetoError> {
+        let sort_count = query.plan.frozen.sort_count();
+        self.planned_slabs.resize(sort_count, NO_SLAB);
+        self.planned_slabs.fill(NO_SLAB);
+        self.live_slabs.resize(sort_count, NO_SLAB);
+        self.live_slabs.fill(NO_SLAB);
+        self.planning_live.resize(sort_count, NO_SLAB);
+        self.planning_live.fill(NO_SLAB);
+        self.sort_capacity_hints.resize(sort_count, 0);
+        self.sort_live_classes.resize(sort_count, 0);
+        self.sort_live_classes.fill(0);
+        self.sort_live_entries.resize(sort_count, 0);
+        self.sort_live_entries.fill(0);
+        self.retained_spans
+            .resize(query.entry_classes.len(), FrontSpan::default());
+        self.retained_spans.fill(FrontSpan::default());
+        self.retained_entries.clear();
+
+        self.free_slabs.clear();
+        self.free_slabs.reserve(sort_count);
+        debug_assert_eq!(self.slabs.len(), self.slab_spans.len());
+        for (index, slab) in self.slabs.iter_mut().enumerate() {
+            slab.clear();
+            self.slab_spans[index].clear();
+            self.free_slabs
+                .push(u32::try_from(index).map_err(|_| OrderedResourceError::Overflow)?);
+        }
+
+        for sort in (0..sort_count).rev() {
+            if query.reachable_offsets[sort] != query.reachable_offsets[sort + 1] {
+                let required = self.sort_capacity_hints[sort];
+                let fitting = self
+                    .free_slabs
+                    .iter()
+                    .enumerate()
+                    .filter(|&(_, &id)| self.slabs[id as usize].capacity() >= required)
+                    .min_by_key(|&(_, &id)| self.slabs[id as usize].capacity())
+                    .map(|(position, _)| position);
+                let fallback = self
+                    .free_slabs
+                    .iter()
+                    .enumerate()
+                    .max_by_key(|&(_, &id)| self.slabs[id as usize].capacity())
+                    .map(|(position, _)| position);
+                let slab = if let Some(position) = fitting.or(fallback) {
+                    self.free_slabs.swap_remove(position)
+                } else {
+                    let id = u32::try_from(self.slabs.len())
+                        .map_err(|_| OrderedResourceError::Overflow)?;
+                    self.slabs.push(Vec::new());
+                    self.slab_spans.push(Vec::new());
+                    id
+                };
+                self.slabs[slab as usize].reserve(required);
+                self.slab_spans[slab as usize]
+                    .reserve(query.reachable_offsets[sort + 1] - query.reachable_offsets[sort]);
+                self.slab_spans[slab as usize].clear();
+                self.planned_slabs[sort] = slab;
+                self.planning_live[sort] = slab;
+            }
+            for &target in
+                &query.release_targets[query.release_offsets[sort]..query.release_offsets[sort + 1]]
+            {
+                let slot = &mut self.planning_live[target as usize];
+                if *slot != NO_SLAB {
+                    self.free_slabs.push(*slot);
+                    *slot = NO_SLAB;
+                }
+            }
+        }
+        Ok(())
     }
 
     pub fn compose<'a, M, E>(
@@ -866,16 +976,23 @@ impl FrozenParetoQueryPlan<'_, '_> {
         if self.entry_classes.is_empty() {
             return Ok((Vec::new(), FrozenParetoEvaluationMetrics::default()));
         }
+        workspace.prepare_frozen(self)?;
         let sort_count = self.plan.frozen.sort_count();
         let capacity = workspace.capacity();
-        let accumulator = &mut workspace.entries;
-        let mut live: Vec<Option<Vec<Option<WitnessedParetoFront>>>> = vec![None; sort_count];
-        let mut retained = if self.single_sort.is_some() {
-            Vec::new()
-        } else {
-            vec![None; self.entry_classes.len()]
-        };
-        let mut single_retained = None;
+        let WitnessedParetoWorkspace {
+            entries: accumulator,
+            slabs,
+            planned_slabs,
+            live_slabs,
+            planning_live: _,
+            free_slabs: _,
+            slab_spans,
+            retained_entries,
+            retained_spans,
+            sort_capacity_hints,
+            sort_live_classes,
+            sort_live_entries,
+        } = workspace;
         let mut metrics = FrozenParetoEvaluationMetrics {
             reachable_classes: self.reachable_classes,
             ..FrozenParetoEvaluationMetrics::default()
@@ -883,10 +1000,23 @@ impl FrozenParetoQueryPlan<'_, '_> {
         let mut live_classes = 0_usize;
         let mut live_entries = 0_usize;
 
+        #[cfg(test)]
+        let _allocation_guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+
         for sort in (0..sort_count).rev() {
             let reachable_classes = &self.reachable_class_ids
                 [self.reachable_offsets[sort]..self.reachable_offsets[sort + 1]];
-            let mut sort_fronts = Vec::with_capacity(reachable_classes.len());
+            let slab = planned_slabs[sort];
+            if !reachable_classes.is_empty() {
+                if slab == NO_SLAB
+                    || live_slabs.contains(&slab)
+                    || !slabs[slab as usize].is_empty()
+                    || !slab_spans[slab as usize].is_empty()
+                {
+                    return Err(FrozenParetoError::Artifact);
+                }
+                live_slabs[sort] = slab;
+            }
             for (class_local, &class) in reachable_classes.iter().enumerate() {
                 let output = self
                     .plan
@@ -918,16 +1048,24 @@ impl FrozenParetoQueryPlan<'_, '_> {
                 {
                     let target_sort = self.plan.generator_targets[generator as usize] as usize;
                     let target_local = target_locals[edge_local] as usize;
-                    let child = live[target_sort]
-                        .as_ref()
-                        .and_then(|fronts| fronts.get(target_local))
-                        .and_then(Option::as_ref)
+                    let target_slab = live_slabs[target_sort];
+                    if target_slab == NO_SLAB {
+                        return Err(FrozenParetoError::Artifact);
+                    }
+                    let child_span = slab_spans[target_slab as usize]
+                        .get(target_local)
+                        .copied()
+                        .ok_or(FrozenParetoError::Artifact)?;
+                    let child_start = child_span.start as usize;
+                    let child_end = child_start + child_span.len as usize;
+                    let child = slabs[target_slab as usize]
+                        .get(child_start..child_end)
                         .ok_or(FrozenParetoError::Artifact)?;
                     for &edge in &edge_fronts[generator as usize].entries {
                         if !VALIDATED {
                             validate_element(monoid.element_count(), edge.resource)?;
                         }
-                        for &suffix in &child.entries {
+                        for &suffix in child {
                             let resource = monoid.combine(edge.resource, suffix.resource);
                             if !VALIDATED {
                                 validate_element(monoid.element_count(), resource)?;
@@ -943,9 +1081,12 @@ impl FrozenParetoQueryPlan<'_, '_> {
                     }
                 }
                 accumulator.sort_unstable_by_key(|entry| entry.resource);
-                sort_fronts.push(Some(WitnessedParetoFront {
-                    entries: Box::from(accumulator.as_slice()),
-                }));
+                let current = &mut slabs[slab as usize];
+                let span = make_front_span(current.len(), accumulator.len())?;
+                current.extend_from_slice(accumulator);
+                let spans = &mut slab_spans[slab as usize];
+                debug_assert_eq!(spans.len(), class_local);
+                spans.push(span);
             }
 
             let local_for_index = |index: usize| -> Result<usize, FrozenParetoError> {
@@ -953,65 +1094,92 @@ impl FrozenParetoQueryPlan<'_, '_> {
                     .binary_search(&self.entry_classes[index])
                     .map_err(|_| FrozenParetoError::Artifact)
             };
+            let mut removed_single_entries = 0_usize;
+            let mut removed_single_class = 0_usize;
             match self.single_sort {
                 Some(selected_sort) if selected_sort == sort => {
                     let local = local_for_index(0)?;
-                    let front = sort_fronts[local]
-                        .take()
-                        .ok_or(FrozenParetoError::Artifact)?;
-                    metrics.retained_entries = front.entries.len();
-                    single_retained = Some(front);
+                    let span = slab_spans[slab as usize][local];
+                    let start = span.start as usize;
+                    let end = start + span.len as usize;
+                    let retained = make_front_span(retained_entries.len(), span.len as usize)?;
+                    retained_entries.extend_from_slice(
+                        slabs[slab as usize]
+                            .get(start..end)
+                            .ok_or(FrozenParetoError::Artifact)?,
+                    );
+                    retained_spans[0] = retained;
+                    metrics.retained_entries = span.len as usize;
+                    removed_single_entries = span.len as usize;
+                    removed_single_class = 1;
+                    slab_spans[slab as usize][local].len = 0;
                 }
                 Some(_) => {}
                 None => {
                     for &index in &self.selected_indices
                         [self.selected_counts[sort]..self.selected_counts[sort + 1]]
                     {
-                        let front = sort_fronts[local_for_index(index)?]
-                            .as_ref()
-                            .ok_or(FrozenParetoError::Artifact)?
-                            .clone();
-                        metrics.retained_entries += front.entries.len();
-                        retained[index] = Some(front);
+                        let local = local_for_index(index)?;
+                        let span = slab_spans[slab as usize][local];
+                        let start = span.start as usize;
+                        let end = start + span.len as usize;
+                        let retained = make_front_span(retained_entries.len(), span.len as usize)?;
+                        retained_entries.extend_from_slice(
+                            slabs[slab as usize]
+                                .get(start..end)
+                                .ok_or(FrozenParetoError::Artifact)?,
+                        );
+                        retained_spans[index] = retained;
+                        metrics.retained_entries += span.len as usize;
                     }
                 }
             }
-            live_classes += sort_fronts.iter().filter(|front| front.is_some()).count();
-            live_entries += sort_fronts
-                .iter()
-                .filter_map(Option::as_ref)
-                .map(|front| front.entries.len())
-                .sum::<usize>();
-            live[sort] = Some(sort_fronts);
+            sort_live_classes[sort] = reachable_classes.len() - removed_single_class;
+            sort_live_entries[sort] = if slab == NO_SLAB {
+                0
+            } else {
+                slabs[slab as usize].len() - removed_single_entries
+            };
+            sort_capacity_hints[sort] = if slab == NO_SLAB {
+                0
+            } else {
+                sort_capacity_hints[sort].max(slabs[slab as usize].len())
+            };
+            live_classes += sort_live_classes[sort];
+            live_entries += sort_live_entries[sort];
             metrics.peak_live_classes = metrics.peak_live_classes.max(live_classes);
             metrics.peak_live_entries = metrics.peak_live_entries.max(live_entries);
 
             for &target in
                 &self.release_targets[self.release_offsets[sort]..self.release_offsets[sort + 1]]
             {
-                if let Some(fronts) = live[target as usize].take() {
-                    live_classes -= fronts.iter().filter(|front| front.is_some()).count();
-                    live_entries -= fronts
-                        .iter()
-                        .filter_map(Option::as_ref)
-                        .map(|front| front.entries.len())
-                        .sum::<usize>();
+                let target = target as usize;
+                let target_slab = live_slabs[target];
+                if target_slab != NO_SLAB {
+                    live_classes -= sort_live_classes[target];
+                    live_entries -= sort_live_entries[target];
+                    slabs[target_slab as usize].clear();
+                    slab_spans[target_slab as usize].clear();
+                    live_slabs[target] = NO_SLAB;
                 }
             }
         }
 
-        if self.single_sort.is_some() {
-            Ok((
-                vec![single_retained.ok_or(FrozenParetoError::Artifact)?],
-                metrics,
-            ))
-        } else {
-            retained
-                .into_iter()
-                .map(|front| front.ok_or(FrozenParetoError::Artifact))
-                .collect::<Result<Vec<_>, _>>()
-                .map(|fronts| (fronts, metrics))
+        #[cfg(test)]
+        drop(_allocation_guard);
+
+        let mut retained = Vec::with_capacity(retained_spans.len());
+        for &span in retained_spans.iter() {
+            let start = span.start as usize;
+            let end = start + span.len as usize;
+            retained.push(WitnessedParetoFront {
+                entries: retained_entries
+                    .get(start..end)
+                    .ok_or(FrozenParetoError::Artifact)?
+                    .into(),
+            });
         }
+        Ok((retained, metrics))
     }
 }
 
@@ -1030,6 +1198,13 @@ pub fn evaluate_frozen_pareto_dag<M: FiniteOrderedMonoid>(
         workspace,
         compose_witness,
     )
+}
+
+fn make_front_span(start: usize, len: usize) -> Result<FrontSpan, OrderedResourceError> {
+    Ok(FrontSpan {
+        start: u32::try_from(start).map_err(|_| OrderedResourceError::Overflow)?,
+        len: u32::try_from(len).map_err(|_| OrderedResourceError::Overflow)?,
+    })
 }
 
 #[inline]
@@ -1824,6 +1999,183 @@ mod tests {
                 element: 2
             }))
         ));
+    }
+
+    #[test]
+    fn warm_frozen_front_evaluation_allocates_nothing_in_dag_loop() {
+        use crate::observational::{compile_layered_frozen_dag_audited, LayeredGeneratorSpec};
+
+        let mut audit = Vec::new();
+        let (frozen, _) = compile_layered_frozen_dag_audited(
+            &[3, 2],
+            &[LayeredGeneratorSpec {
+                source_sort: 0,
+                target_sort: 1,
+            }],
+            &[0],
+            |sort, state| if sort == 0 { 0 } else { state + 1 },
+            |_, state| if state < 2 { 0 } else { 1 },
+            &mut audit,
+        )
+        .unwrap();
+        let plan = FrozenParetoPlan::new(&frozen).unwrap();
+        let query = plan
+            .query(&[
+                frozen.entry_class(0, 0).unwrap(),
+                frozen.entry_class(0, 2).unwrap(),
+            ])
+            .unwrap();
+        let monoid = CappedAdditiveMonoid::new([1, 1]).unwrap();
+        let outputs = [
+            WitnessedParetoFront::new(
+                &monoid,
+                [ParetoWitness {
+                    resource: 0,
+                    witness: 0,
+                }],
+            )
+            .unwrap(),
+            WitnessedParetoFront::new(
+                &monoid,
+                [
+                    ParetoWitness {
+                        resource: 1,
+                        witness: 1,
+                    },
+                    ParetoWitness {
+                        resource: 2,
+                        witness: 2,
+                    },
+                ],
+            )
+            .unwrap(),
+            WitnessedParetoFront::new(
+                &monoid,
+                [ParetoWitness {
+                    resource: 3,
+                    witness: 4,
+                }],
+            )
+            .unwrap(),
+        ];
+        let edges = [WitnessedParetoFront::new(
+            &monoid,
+            [ParetoWitness {
+                resource: 1,
+                witness: 3,
+            }],
+        )
+        .unwrap()];
+        let mut workspace = WitnessedParetoWorkspace::with_capacity(8);
+        let expected = query
+            .evaluate(
+                &monoid,
+                &outputs,
+                &edges,
+                &mut workspace,
+                |_, edge, child| edge ^ child,
+            )
+            .unwrap();
+        let (answer, events) = crate::test_alloc::measure_allocations(|| {
+            query
+                .evaluate::<CappedAdditiveMonoid>(
+                    &monoid,
+                    &outputs,
+                    &edges,
+                    &mut workspace,
+                    |_, edge, child| edge ^ child,
+                )
+                .unwrap()
+        });
+        assert_eq!(answer, expected);
+        assert_eq!(events, Default::default());
+    }
+
+    #[test]
+    fn frozen_front_workspace_reuses_slabs_across_released_sorts() {
+        use crate::observational::{compile_layered_frozen_dag_audited, LayeredGeneratorSpec};
+
+        let generators = [
+            LayeredGeneratorSpec {
+                source_sort: 0,
+                target_sort: 1,
+            },
+            LayeredGeneratorSpec {
+                source_sort: 1,
+                target_sort: 2,
+            },
+            LayeredGeneratorSpec {
+                source_sort: 2,
+                target_sort: 3,
+            },
+        ];
+        let mut audit = Vec::new();
+        let (frozen, _) = compile_layered_frozen_dag_audited(
+            &[2, 2, 2, 2],
+            &generators,
+            &[0],
+            |sort, state| sort * 2 + state,
+            |_, state| state,
+            &mut audit,
+        )
+        .unwrap();
+        let plan = FrozenParetoPlan::new(&frozen).unwrap();
+        let query = plan
+            .query(&[
+                frozen.entry_class(0, 0).unwrap(),
+                frozen.entry_class(0, 1).unwrap(),
+            ])
+            .unwrap();
+        let monoid = CappedAdditiveMonoid::new([1, 1]).unwrap();
+        let outputs = (0..8)
+            .map(|output| {
+                WitnessedParetoFront::new(
+                    &monoid,
+                    [ParetoWitness {
+                        resource: output % 4,
+                        witness: output,
+                    }],
+                )
+                .unwrap()
+            })
+            .collect::<Vec<_>>();
+        let edges = (0..3)
+            .map(|generator| {
+                WitnessedParetoFront::new(
+                    &monoid,
+                    [ParetoWitness {
+                        resource: 0,
+                        witness: generator,
+                    }],
+                )
+                .unwrap()
+            })
+            .collect::<Vec<_>>();
+        let mut workspace = WitnessedParetoWorkspace::with_capacity(8);
+        let expected = query
+            .evaluate(
+                &monoid,
+                &outputs,
+                &edges,
+                &mut workspace,
+                |_, edge, child| edge ^ child,
+            )
+            .unwrap();
+        assert_eq!(workspace.slabs.len(), 2);
+        let (answer, events) = crate::test_alloc::measure_allocations(|| {
+            query
+                .evaluate(
+                    &monoid,
+                    &outputs,
+                    &edges,
+                    &mut workspace,
+                    |_, edge, child| edge ^ child,
+                )
+                .unwrap()
+        });
+        assert_eq!(answer, expected);
+        assert_eq!(events, Default::default());
+        assert_eq!(workspace.slabs.len(), 2);
     }
 
     #[test]
