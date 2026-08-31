@@ -15,6 +15,12 @@ use std::io::{self, Read, Write};
 use std::os::fd::{AsRawFd, FromRawFd, OwnedFd};
 #[cfg(feature = "parallel")]
 use std::sync::atomic::{AtomicBool, AtomicU16, Ordering};
+#[cfg(all(test, feature = "parallel"))]
+use std::{
+    alloc::{GlobalAlloc, Layout, System},
+    cell::Cell,
+    sync::atomic::AtomicU64,
+};
 use thiserror::Error;
 
 const MAX_COORDINATES: usize = 256;
@@ -50,6 +56,80 @@ const HUGE_ARTIFACT_VERSION: u16 = 1;
 const COLOSSAL_ARTIFACT_MAGIC: &[u8; 8] = b"ERGOCSC1";
 const COLOSSAL_ARTIFACT_VERSION: u16 = 1;
 const MAX_ARTIFACT_BLOOM_WORDS: usize = FOUR_COMPLETION_BLOOM_BITS / 64;
+
+#[cfg(all(test, feature = "parallel"))]
+struct HotLoopCountingAllocator;
+
+#[cfg(all(test, feature = "parallel"))]
+thread_local! {
+    static COUNT_HOT_LOOP_ALLOCATIONS: Cell<bool> = const { Cell::new(false) };
+}
+
+#[cfg(all(test, feature = "parallel"))]
+static HOT_LOOP_ALLOCATIONS: AtomicU64 = AtomicU64::new(0);
+#[cfg(all(test, feature = "parallel"))]
+static HOT_LOOP_REALLOCATIONS: AtomicU64 = AtomicU64::new(0);
+#[cfg(all(test, feature = "parallel"))]
+static HOT_LOOP_DEALLOCATIONS: AtomicU64 = AtomicU64::new(0);
+
+#[cfg(all(test, feature = "parallel"))]
+fn count_hot_loop_event(counter: &AtomicU64) {
+    COUNT_HOT_LOOP_ALLOCATIONS.with(|enabled| {
+        if enabled.get() {
+            counter.fetch_add(1, Ordering::Relaxed);
+        }
+    });
+}
+
+#[cfg(all(test, feature = "parallel"))]
+unsafe impl GlobalAlloc for HotLoopCountingAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        count_hot_loop_event(&HOT_LOOP_ALLOCATIONS);
+        unsafe { System.alloc(layout) }
+    }
+
+    unsafe fn alloc_zeroed(&self, layout: Layout) -> *mut u8 {
+        count_hot_loop_event(&HOT_LOOP_ALLOCATIONS);
+        unsafe { System.alloc_zeroed(layout) }
+    }
+
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        count_hot_loop_event(&HOT_LOOP_DEALLOCATIONS);
+        unsafe { System.dealloc(ptr, layout) }
+    }
+
+    unsafe fn realloc(&self, ptr: *mut u8, layout: Layout, new_size: usize) -> *mut u8 {
+        count_hot_loop_event(&HOT_LOOP_REALLOCATIONS);
+        unsafe { System.realloc(ptr, layout, new_size) }
+    }
+}
+
+#[cfg(all(test, feature = "parallel"))]
+#[global_allocator]
+static HOT_LOOP_ALLOCATOR: HotLoopCountingAllocator = HotLoopCountingAllocator;
+
+#[cfg(all(test, feature = "parallel"))]
+struct HotLoopAllocationGuard;
+
+#[cfg(all(test, feature = "parallel"))]
+impl HotLoopAllocationGuard {
+    fn enter() -> Self {
+        COUNT_HOT_LOOP_ALLOCATIONS.with(|enabled| {
+            assert!(
+                !enabled.replace(true),
+                "nested CSS hot-loop allocation guard"
+            );
+        });
+        Self
+    }
+}
+
+#[cfg(all(test, feature = "parallel"))]
+impl Drop for HotLoopAllocationGuard {
+    fn drop(&mut self) {
+        COUNT_HOT_LOOP_ALLOCATIONS.with(|enabled| enabled.set(false));
+    }
+}
 
 fn wide_artifact_identity<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
 ) -> (&'static [u8; 8], u16) {
@@ -2190,6 +2270,8 @@ where
                 .zip(workspaces.par_iter_mut())
                 .zip(partials.par_iter_mut())
                 .for_each(|((partition, workspace), result)| {
+                    #[cfg(test)]
+                    let _allocation_guard = HotLoopAllocationGuard::enter();
                     if worker_pulse_interval == 0 {
                         *result = self.search_partition_unpulsed(
                             partition,
@@ -4123,6 +4205,8 @@ impl CompiledCssDistance {
                 .zip(workspaces.par_iter_mut())
                 .zip(partials.par_iter_mut())
                 .for_each(|((partition, workspace), result)| {
+                    #[cfg(test)]
+                    let _allocation_guard = HotLoopAllocationGuard::enter();
                     if worker_pulse_interval == 0 {
                         *result = self.search_root_branch_partition::<false>(
                             partition,
@@ -4965,6 +5049,35 @@ mod tests {
         assert_eq!(answer.distance, Some(2));
         assert_eq!(&*answer.witness, &[0, 1]);
         assert!(answer.stats.bound_improvements_published >= 1);
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn parallel_css_partition_loops_allocate_nothing_across_workers() {
+        HOT_LOOP_ALLOCATIONS.store(0, Ordering::Relaxed);
+        HOT_LOOP_REALLOCATIONS.store(0, Ordering::Relaxed);
+        HOT_LOOP_DEALLOCATIONS.store(0, Ordering::Relaxed);
+
+        let physical = Matrix::new::<2>(1, 8, vec![1; 8]).unwrap();
+        let logical = Matrix::new::<2>(1, 8, vec![1, 0, 1, 1, 1, 1, 1, 1]).unwrap();
+        let anchors = [0, 1, 2, 3, 4, 5, 6, 7];
+        let compact = CompiledCssDistance::compile(&physical, &logical).unwrap();
+        let wide = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+        let pool = rayon::ThreadPoolBuilder::new()
+            .num_threads(3)
+            .build()
+            .unwrap();
+
+        let compact_result = pool
+            .install(|| compact.search_bounded_parallel_pulsed(&anchors, 4, 0))
+            .unwrap();
+        let wide_result = pool
+            .install(|| wide.search_bounded_syndrome_parallel_pulsed(&anchors, 4, 0))
+            .unwrap();
+        assert_eq!(compact_result.distance, wide_result.distance);
+        assert_eq!(HOT_LOOP_ALLOCATIONS.load(Ordering::Relaxed), 0);
+        assert_eq!(HOT_LOOP_REALLOCATIONS.load(Ordering::Relaxed), 0);
+        assert_eq!(HOT_LOOP_DEALLOCATIONS.load(Ordering::Relaxed), 0);
     }
 
     #[cfg(feature = "parallel")]

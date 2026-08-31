@@ -23,9 +23,12 @@ as each coherent tranche lands.
    2.20% of instructions. CSS workspaces/results are now preallocated in
    exclusive 16x coarse lanes before enumeration; the one-lane-per-thread
    imbalance and direct-slice codegen controls are rejected. Current next slice
-   is the cross-thread real-loop allocation-count gate and the measured 2.15%
-   clean-miss codegen repair, followed by the remaining Tiger layouts and
-   registry evidence.
+   now has a test-only cross-thread allocator gate around the actual compact
+   and wide Rayon partition loops; allocator, reallocator, and deallocator
+   counts are all zero on every participating worker, while production builds
+   contain no observer. Current next slice is the measured 2.15% clean-miss
+   codegen repair, followed by the remaining Tiger layouts and registry
+   evidence.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

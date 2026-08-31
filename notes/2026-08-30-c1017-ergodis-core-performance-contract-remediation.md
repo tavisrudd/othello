@@ -206,6 +206,15 @@ progress, but its cross-thread allocation-count harness and the clean-miss
 codegen repair remain open; this is a checkpoint, not completion of work
 package 4.
 
+The cross-thread gate is now closed. A test-only global allocator uses a
+thread-local enable bit entered immediately around each compact and wide Rayon
+partition kernel, so setup, result assembly, and unrelated concurrent tests do
+not contaminate the measurement. The dedicated three-worker regression counts
+allocation, reallocation, and deallocation across all participating workers
+and observes `(0, 0, 0)`. The guard and allocator are absent from production
+builds. The remaining package-4 blocker is the retained-controller clean-miss
+codegen regression and its single-/parallel-mode counter evidence.
+
 ## Review findings for the pending C1016 Rust overlay
 
 The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its
