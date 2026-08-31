@@ -44,8 +44,19 @@ counter pair measured 15.210B to 14.056B cycles, 66.472B to 68.344B
 instructions, 7.752B to 7.683B branches, 74.065M to 50.682M branch misses,
 and 9,116 to 8,156 KiB peak RSS. The explicit traversal executes 2.8% more
 instructions but removes enough call-stack and unpredictable-return cost to
-win overall. Meet-in-the-middle enumeration still contains separate recursive
-paths and remains open.
+win overall.
+
+The meet-in-the-middle right enumeration and left lookup are now iterative
+odometers as well. The public reserved backend computes the exact right-product
+bound before enumeration, reserves every table/choice/key buffer once, and
+rejects requests whose conservative table estimate exceeds 256 MiB rather
+than growing toward OOM. The deliberately unreserved hidden benchmark remains
+as a negative control. On `orbit-meet`, six interleaved pairs of 100,000 solves
+preserved 486 assignments and 243 unique right states per solve while reducing
+mean time from 1.010449 s to 952.919 ms (`1.0604x`, paired `t=4.198`, 5 df).
+One counter pair moved from 4.750B to 4.526B cycles and 26.932B to 25.454B
+instructions. All production orbit search/enumeration paths are now iterative;
+bounded correlated-suffix compilation remains a cold allocating compiler.
 
 ## Goal
 

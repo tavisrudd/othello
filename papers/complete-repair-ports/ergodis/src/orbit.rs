@@ -422,7 +422,7 @@ fn correlated_suffix_sets(
 
 #[allow(clippy::too_many_arguments)]
 fn enumerate_right(
-    family_index: usize,
+    start_family: usize,
     end: usize,
     families: &[FamilyRecord],
     options: &[PackedOptionRecord],
@@ -436,45 +436,55 @@ fn enumerate_right(
     table: &mut MeetTable,
     assignments: &mut u64,
 ) -> Result<(), OrbitError> {
-    if family_index == end {
-        *assignments = assignments.checked_add(1).ok_or(OrbitError::TooLarge)?;
-        return table.insert(packed, totals, choices);
+    let width = end - start_family;
+    let mut next_options = vec![0_u32; width];
+    let mut incoming_options = vec![NO_OPTION; width];
+    let mut depth = 0_usize;
+    if width != 0 {
+        next_options[0] = families[start_family].option_start;
     }
-    let family = families[family_index];
-    let start = family.option_start as usize;
-    let option_end = start + family.option_len as usize;
-    for option in &options[start..option_end] {
+    loop {
+        if depth == width {
+            *assignments = assignments.checked_add(1).ok_or(OrbitError::TooLarge)?;
+            table.insert(packed, totals, choices)?;
+        } else {
+            let family = families[start_family + depth];
+            let option_end = family.option_start + family.option_len;
+            if next_options[depth] != option_end {
+                let option_index = next_options[depth];
+                next_options[depth] += 1;
+                incoming_options[depth] = option_index;
+                let option = options[option_index as usize];
+                let residue_start = option.residue_start as usize;
+                let total_start = option.totals_start as usize;
+                for (left, &right) in packed
+                    .iter_mut()
+                    .zip(&residues[residue_start..residue_start + residue_blocks])
+                {
+                    *left = left.add_mod3(right);
+                }
+                for (left, &right) in totals
+                    .iter_mut()
+                    .zip(&option_totals[total_start..total_start + total_width])
+                {
+                    *left += right;
+                }
+                choices.push(option.label);
+                depth += 1;
+                if depth < width {
+                    next_options[depth] = families[start_family + depth].option_start;
+                }
+                continue;
+            }
+        }
+        if depth == 0 {
+            return Ok(());
+        }
+        depth -= 1;
+        let option = options[incoming_options[depth] as usize];
+        choices.pop();
         let residue_start = option.residue_start as usize;
         let total_start = option.totals_start as usize;
-        for (left, &right) in packed
-            .iter_mut()
-            .zip(&residues[residue_start..residue_start + residue_blocks])
-        {
-            *left = left.add_mod3(right);
-        }
-        for (left, &right) in totals
-            .iter_mut()
-            .zip(&option_totals[total_start..total_start + total_width])
-        {
-            *left += right;
-        }
-        choices.push(option.label);
-        enumerate_right(
-            family_index + 1,
-            end,
-            families,
-            options,
-            residues,
-            option_totals,
-            residue_blocks,
-            total_width,
-            packed,
-            totals,
-            choices,
-            table,
-            assignments,
-        )?;
-        choices.pop();
         for (left, &right) in totals
             .iter_mut()
             .zip(&option_totals[total_start..total_start + total_width])
@@ -488,12 +498,11 @@ fn enumerate_right(
             *left = left.add_mod3(right).add_mod3(right);
         }
     }
-    Ok(())
 }
 
 #[allow(clippy::too_many_arguments)]
 fn search_left(
-    family_index: usize,
+    start_family: usize,
     end: usize,
     families: &[FamilyRecord],
     options: &[PackedOptionRecord],
@@ -512,71 +521,73 @@ fn search_left(
     assignments: &mut u64,
     answer: &mut Vec<u32>,
 ) -> Result<bool, OrbitError> {
-    if family_index == end {
-        *assignments = assignments.checked_add(1).ok_or(OrbitError::TooLarge)?;
-        for ((needed, &target), &current) in needed_packed
-            .iter_mut()
-            .zip(target_packed)
-            .zip(packed.iter())
-        {
-            *needed = target.add_mod3(current).add_mod3(current);
-        }
-        for ((needed, &target), &current) in needed_totals
-            .iter_mut()
-            .zip(target_totals)
-            .zip(totals.iter())
-        {
-            *needed = target - current;
-        }
-        if let Some(right) = table.get(needed_packed, needed_totals) {
-            answer.extend_from_slice(choices);
-            answer.extend_from_slice(right);
-            return Ok(true);
-        }
-        return Ok(false);
+    let width = end - start_family;
+    let mut next_options = vec![0_u32; width];
+    let mut incoming_options = vec![NO_OPTION; width];
+    let mut depth = 0_usize;
+    if width != 0 {
+        next_options[0] = families[start_family].option_start;
     }
-    let family = families[family_index];
-    let start = family.option_start as usize;
-    let option_end = start + family.option_len as usize;
-    for option in &options[start..option_end] {
+    loop {
+        if depth == width {
+            *assignments = assignments.checked_add(1).ok_or(OrbitError::TooLarge)?;
+            for ((needed, &target), &current) in needed_packed
+                .iter_mut()
+                .zip(target_packed)
+                .zip(packed.iter())
+            {
+                *needed = target.add_mod3(current).add_mod3(current);
+            }
+            for ((needed, &target), &current) in needed_totals
+                .iter_mut()
+                .zip(target_totals)
+                .zip(totals.iter())
+            {
+                *needed = target - current;
+            }
+            if let Some(right) = table.get(needed_packed, needed_totals) {
+                answer.extend_from_slice(choices);
+                answer.extend_from_slice(right);
+                return Ok(true);
+            }
+        } else {
+            let family = families[start_family + depth];
+            let option_end = family.option_start + family.option_len;
+            if next_options[depth] != option_end {
+                let option_index = next_options[depth];
+                next_options[depth] += 1;
+                incoming_options[depth] = option_index;
+                let option = options[option_index as usize];
+                let residue_start = option.residue_start as usize;
+                let total_start = option.totals_start as usize;
+                for (left, &right) in packed
+                    .iter_mut()
+                    .zip(&residues[residue_start..residue_start + residue_blocks])
+                {
+                    *left = left.add_mod3(right);
+                }
+                for (left, &right) in totals
+                    .iter_mut()
+                    .zip(&option_totals[total_start..total_start + total_width])
+                {
+                    *left += right;
+                }
+                choices.push(option.label);
+                depth += 1;
+                if depth < width {
+                    next_options[depth] = families[start_family + depth].option_start;
+                }
+                continue;
+            }
+        }
+        if depth == 0 {
+            return Ok(false);
+        }
+        depth -= 1;
+        let option = options[incoming_options[depth] as usize];
+        choices.pop();
         let residue_start = option.residue_start as usize;
         let total_start = option.totals_start as usize;
-        for (left, &right) in packed
-            .iter_mut()
-            .zip(&residues[residue_start..residue_start + residue_blocks])
-        {
-            *left = left.add_mod3(right);
-        }
-        for (left, &right) in totals
-            .iter_mut()
-            .zip(&option_totals[total_start..total_start + total_width])
-        {
-            *left += right;
-        }
-        choices.push(option.label);
-        if search_left(
-            family_index + 1,
-            end,
-            families,
-            options,
-            residues,
-            option_totals,
-            residue_blocks,
-            total_width,
-            target_packed,
-            target_totals,
-            packed,
-            totals,
-            needed_packed,
-            needed_totals,
-            choices,
-            table,
-            assignments,
-            answer,
-        )? {
-            return Ok(true);
-        }
-        choices.pop();
         for (left, &right) in totals
             .iter_mut()
             .zip(&option_totals[total_start..total_start + total_width])
@@ -590,7 +601,6 @@ fn search_left(
             *left = left.add_mod3(right).add_mod3(right);
         }
     }
-    Ok(false)
 }
 
 struct Search<'a> {
@@ -1041,7 +1051,15 @@ fn orbit_syndrome_meet_in_middle_impl(
             product.checked_mul(family.option_len as usize)
         });
     let reservation = if reserve {
-        right_bound.ok_or(OrbitError::TooLarge)?.min(1 << 16)
+        let reservation = right_bound.ok_or(OrbitError::TooLarge)?;
+        let bytes_per_state = std::mem::size_of::<MeetRecord>()
+            .saturating_add((residue_blocks + total_width).saturating_mul(8))
+            .saturating_add(right_width.saturating_mul(4))
+            .saturating_add(16);
+        if reservation.saturating_mul(bytes_per_state) > MAX_MEET_TABLE_BYTES {
+            return Err(OrbitError::TooLarge);
+        }
+        reservation
     } else {
         0
     };
@@ -1102,6 +1120,8 @@ fn orbit_syndrome_meet_in_middle_impl(
         unique_right_states,
     })
 }
+
+const MAX_MEET_TABLE_BYTES: usize = 256 << 20;
 
 fn balanced_product_split(families: &[FamilyRecord]) -> usize {
     let mut suffix_products = vec![1u128; families.len() + 1];
@@ -1249,6 +1269,22 @@ mod tests {
         assert_eq!(answer.states_examined, FAMILIES as u64 + 1);
         assert_eq!(answer.choices.as_ref().unwrap().len(), FAMILIES);
         assert!(!answer.memo_saturated);
+    }
+
+    #[test]
+    fn meet_in_middle_rejects_oversized_table_before_enumeration() {
+        let option = |label| OrbitOption {
+            label,
+            residue: Box::new([]),
+            totals: Box::new([]),
+        };
+        let families = (0..50)
+            .map(|family| vec![option(2 * family), option(2 * family + 1)])
+            .collect::<Vec<_>>();
+        assert_eq!(
+            ternary_orbit_syndrome_meet_in_middle(&families, &[], &[]),
+            Err(OrbitError::TooLarge)
+        );
     }
 
     proptest! {
