@@ -59,12 +59,14 @@ The ownership rule is:
 ## Current implementation status
 
 The experimental v0 control protocol, campaign daemon, file-backed ledger,
-candidate evaluation, plan activation, event-driven watcher, and external
-`ergodisctl evolve` loop are implemented.
+single and bulk candidate evaluation, bounded create-only evidence streaming,
+plan activation, event-driven watcher, and external `ergodisctl evolve` loop
+are implemented.
 
 The generic `theorem_search` module implements deterministic candidate
-seed/mutate/test/rank evolution with a complete replayable trial sequence. It is
-runner-neutral. Current domain demonstrations call it from replay binaries.
+seed/mutate/test/rank evolution with either a retained result or a caller-owned
+streaming trial sink. It is runner-neutral. Current domain demonstrations call
+it from replay binaries.
 
 Daemon-owned low-priority evolution and live snapshot/scorecard ingestion are
 accepted design but are not yet implemented. Until that integration lands,

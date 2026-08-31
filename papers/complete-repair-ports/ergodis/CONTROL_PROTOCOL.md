@@ -39,6 +39,12 @@ not integers, and byte limits are positive bounded integers.  Non-finite
 floating-point spellings are not JSON and are rejected.  Reference clients
 fail closed if any envelope field has a different type.
 
+Campaign-data headers may bind an offline feature extractor with an optional
+`generator` object containing a nonempty `name`, nonempty `version`, and
+64-hex-digit `digest`. The daemon copies this provenance into the manifest and
+status response. A presentation hash alone does not identify how derived
+features were computed.
+
 `tests/fixtures/control_protocol_v0.json` is the language-neutral wire fixture.
 New clients should parse and reproduce those compact payloads before speaking
 to a live daemon.  In Lean, the stable starting point is a small client that
@@ -60,6 +66,13 @@ and derive the content address, then serializes directly through a buffered
 create-only file writer.  This trades one cheap serialization pass for bounded
 memory independent of the trace limit.
 
+`candidate-batch` accepts a bounded list of lowered plans, evaluates them
+against the frozen batch, and writes each complete record directly to a
+create-only JSONL file under `evidence/`. The response contains only counts and
+a caller-bounded top set. The daemon stops before the first record that would
+cross `max_evidence_bytes` and reports `truncated: true`; it never silently
+writes beyond the configured campaign trace limit.
+
 ## Proof authority
 
 The daemon currently advertises `proof_authority: false`. Plans may diagnose
@@ -80,9 +93,10 @@ byte-for-byte conformant with this socket path.
 
 The component topology and implementation-status matrix are authoritative in
 [DESIGN.md](DESIGN.md). In experimental v0, `ergodis-campaign` serves the serial
-control protocol and durable ledger, while `ergodisctl evolve` is an external
-client. The generic `theorem_search` engine is currently exercised by replay
-binaries; it is not yet hosted by the daemon.
+control protocol, durable ledger, and bulk candidate evaluator, while
+`ergodisctl evolve` still owns mutation externally. The generic
+`theorem_search` engine supports caller-owned streaming sinks but is not yet
+hosted as a background daemon job.
 
 The accepted integration moves candidate evolution into one low-priority daemon
 worker. A distinct solver-side low-priority sampler consumes fixed-size root
