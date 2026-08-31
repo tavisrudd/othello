@@ -350,10 +350,12 @@ algebraic front end.
   the open observations ledger. Script:
   `c1013_modular_foundations.py`.
 - `../2026-08-30-c1013-c1014-phi-family-arithmetic.md` — gate 4 closure,
-  Dickson identification, genus law \(2m-4\) (drop to \(2m-5\) iff
-  \(m\equiv1\bmod3\)), proved exceptional strata periodic in
-  \(2m\bmod(p-1)\), and the \(\Phi_{2m,4}(1/2)=16(1-4^{1-m})\) odd-bias
-  theorem. Script: `c1013_phi_family_arithmetic.py`.
+  Dickson identification, genus law \(2m-4\) (drop iff \(m\equiv1\bmod3\);
+  the drop is to \(2m-6\), corrected in
+  `../2026-08-30-c1014-modular-structure-covers.md`), proved exceptional
+  strata periodic in \(2m\bmod(p-1)\), and the
+  \(\Phi_{2m,4}(1/2)=16(1-4^{1-m})\) odd-bias theorem. Script:
+  `c1013_phi_family_arithmetic.py`.
 - Ergodis fit (user directive to try Ergodis for compute):
   `ergodis::character_sum::PrimeQuadraticCharacter` replayed the entire
   finite-field census exactly (thousands of censuses, zero disagreements) via

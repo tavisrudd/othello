@@ -44,19 +44,52 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
 
 ## State after 2026-08-30 session
 
-- Thread 1: genus of \(C_m\) is \(2m-4\), dropping to \(2m-5\) exactly when
-  \(m\equiv1\bmod3\) (proved via \(\operatorname{ord}_I\Phi=2/1/0\) for
-  \(m\equiv1/2/0\bmod3\)); Jacobian splits under \(\lambda\mapsto1-\lambda\).
-  Three proved exceptional strata, periodic in \(2m\bmod(p-1)\); the
-  \(q=11,13\) harmonic collapse is exactly these. Bias is always odd — hence
-  nonzero — away from divisors of \(4^{m-1}-1\), from
+- Thread 1: genus of \(C_m\) is \(2m-4\), dropping to \(2m-6\) exactly when
+  \(m\equiv1\bmod3\) (**corrected 2026-08-30 evening**: the repeated factor
+  is \(I^2\) and must be divided out whole; the first report's \(2m-5\) and
+  its \(\chi(\Phi)=\chi(\mathrm{radical})\) preamble carry the same
+  off-by-one — current statements live in the modular-structure report
+  below). Jacobian splits under \(\lambda\mapsto1-\lambda\) into quotients
+  \(D_1,D_2\) with \(g_1+g_2=g(C_m)\). Exceptional strata: the earlier three
+  proved families, plus a fourth proved stratum
+  \(r=2m\equiv(p-1)/2+1\bmod(p-1)\) (sign uniformity, not an extremum) —
+  this resolves the \((6,23)\) sporadic, with \((5,19)\) the same stratum;
+  complete constant-character classification for \(p\le300\) fits one
+  \(\mu_n\) family except one point. Bias is always odd — hence nonzero —
+  away from divisors of \(4^{m-1}-1\), from
   \(\Phi_{2m,4}(1/2)=16(1-4^{1-m})\).
+- Modular identifications: \(m=3\) → conductor 90 (below); \(m=4\) → both
+  quotients elliptic of **conductor 14** (the unique level-14 newform;
+  torsion \(\mathbf Z/6\)). Uniform supersingular-congruence law: \(L=\)
+  lcm of rational torsion over the isogeny class divides \(p+1\), giving
+  \(p\equiv11\bmod12\) at \(m=3\) (\(L=12\)) and \(p\equiv5\bmod6\) at
+  \(m=4\) (\(L=6\)); exhaustive to \(p<2000\). Higher-genus quotients
+  (\(m=5,6\)) all split, though \(\operatorname{Aut}(D)=1\): the split comes
+  from the anharmonic \(S_3\) acting on the square-class model of
+  \(\Phi_{2m,4}\) (Theorem H, exact over \(\mathbf Q\));
+  \(H^0(\Omega)=a\cdot\mathrm{triv}+b\cdot\mathrm{sgn}+c\cdot\mathrm{std}\)
+  with measured \((a,b,c)=(0,0,1),(0,0,1),(1,1,2),(1,1,3)\) at
+  \(m=3,4,5,6\). Elliptic factors located: level 150 (\(m=5\), \(D_1\)),
+  level 1584 (\(m=6\), \(D_1\)).
+- Exact bad-prime law (no exceptions, \(m=2..12\)):
+  \(\{2\}\cup H(m)\cup M(m)\cup E(m)\) — harmonic point
+  (\(p\mid4^{m-1}-1\), minus \(p=3\) when \(m\equiv1\bmod3\)), collision
+  locus (odd \(p\mid m\)), true double branch point
+  (\(p\mid\operatorname{Res}\) after removing the common factor; first at
+  \((8,29)\), closing that open item). Levels stay supported on the bad
+  primes, but \(\{2,3,5\}\) does not persist: 7 enters at \(m=4\), 17 at
+  \(m=5\), 11 and 31 at \(m=6\).
 - Thread 2: verified with global sign \(-1\); the pieces are Dickson
   polynomials (\(s_m=D_m(1,u)\)), not Chebyshev/cyclotomic except
   \(I=\Phi_6(\lambda)\). Jacobi-sum decomposition **refuted**: at \(m=3\) the
   descent quotients are non-CM elliptic curves with
   \(\operatorname{Jac}(C_3)\sim E_1^2\).
-- Open anomalies: sporadic collapse at \((m,p)=(6,23)\) remains open. The
+- Open items after the modular-structure pass: derive the \((a,b,c)\)
+  multiplicities (Riemann–Hurwitz for \(C_m\to C_m/S_3\), which would also
+  give the \(D_2\) conductors); the \(m=3\) bias \(\equiv1\bmod4\) rigidity;
+  and the newly isolated unexplained stratum \((p,r)=(47,30)\), which
+  replaces \((6,23)\) as the open sporadic point.
+- The
   \(m=3\) supersingular anomaly is **resolved** (2026-08-30, independent
   PARI recheck): the data are correct and extend (22 zeros of \(a_p\) below
   3000, all \(\equiv11\bmod12\)), but the mechanism is classical, not CM.
@@ -80,6 +113,11 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
 
 - `../2026-08-30-c1013-c1014-phi-family-arithmetic.md` — factorization
   verification, \(u\)-descent, genus/bias tables, Jacobi-sum decomposition.
+- `../2026-08-30-c1014-modular-structure-covers.md` — quotient curves and
+  modular identification for \(m=3..6\), genus-law correction, Theorem H
+  (anharmonic \(S_3\)), bad-prime law, fourth exceptional stratum resolving
+  \((6,23)\), constant-character classification \(p\le300\). Scripts:
+  `c1014_modular_structure.py` + generated `c1014_*.gp`.
 - `../2026-08-30-c1013-modular-transvectant-foundations.md` — modular
   radicals, integrality/content laws, parity/Pfaffian residuals,
   transvectant identification (C1013-side, feeds threads 1–2 boundaries).
