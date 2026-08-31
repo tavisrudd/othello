@@ -350,8 +350,9 @@ is the near-degenerate boundary `q ≈ r`, where the curve has too few points fo
 a split squarefree annihilator of degree `r-2` to exist and almost everything is
 deep.  2026-08-30 §5.3b flagged the same artifact at `(9,9)` and this report at
 `(8,8)`, `(8,9)`, `(9,9)`.  So `11 ∈ X(10)` is confirmed but carries no
-information beyond the boundary; Conjecture C's prediction `X(10) ⊆ {11}` is
-decided by the next cell, not this one.
+information beyond the boundary; the next cell is the one that decides
+2026-08-30 Conjecture C's surviving prediction `X(10) ⊆ {11}` — and it
+**falsifies** it.
 
 ## 5. The cyclic-pullback carriers (item 3, and what it settled)
 
