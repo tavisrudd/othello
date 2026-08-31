@@ -3995,8 +3995,17 @@
       "last": 1023,
       "purpose": "make the Lang-Weil split-squarefree annihilator count rigorous: explicit error term for the carrier pencil, constant threshold per carrier, aiming to replace the missing field-ranged theorems above redundancy ten",
       "sequence": 444
+    },
+    {
+      "count": 1,
+      "first": 1024,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 1024,
+      "purpose": "promote the C1023 discovery-track lead: multiplicative-subgroup versus affine-subspace incidence bound for the PRS exceptional-deep-hole threshold",
+      "sequence": 445
     }
   ],
-  "next_id": 1024,
+  "next_id": 1025,
   "schema": "codex-task-id-allocations-v1"
 }

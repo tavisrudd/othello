@@ -322,4 +322,5 @@ exceptional field 13, nothing at 16 or above) and the shape Lang-Weil cannot pro
 independent of `r`, and does it see the regular (trivial-stabilizer) orbits that the fixed-locus
 lemma cannot? If yes, one tool closes both open residuals at once; if it only handles the carrier
 strata, it is worth no more than the refuted count.
-**Status**: open lead, unallocated. Provisional - the gap-mining vet gate applies.
+**Status**: graduated -> C1024, `notes/2026-08-31-c1024-incidence-threshold.md` (allocated
+2026-08-31). Provisional - the gap-mining vet gate applies.
