@@ -2,7 +2,10 @@
 
 **Lane:** `gem-mining`
 **Date:** 2026-08-31
-**Status:** in progress (written incrementally)
+**Status:** complete.  The premise behind the proposed accelerator was **false**
+and was replaced by two proved reductions; the falsification was then run and
+**Conjecture PRS-1 survives** on a domain an order of magnitude larger, with its
+`k` hypothesis shown necessary and sharpenable from `k ≥ 6` to `k ≥ 4`.
 
 Predecessors: `notes/2026-08-31-c1024-incidence-threshold.md` (which raised the
 sampling-artifact risk and proposed the `(17,7)` test), and
@@ -273,4 +276,142 @@ driver decides "no split squarefree annihilator of degree `d-1`", which is
 2,861 count is therefore an over-count and is not a deep count; it is excluded
 from PRS-1 by `k = 2` regardless, and no other cell in the sweep is of that
 form.
+
+## Out of budget, recorded rather than inferred
+
+Cells attempted or enumerated but not run, with the cost that stopped them.  No
+verdict is inferred for any of them.
+
+| region | why | estimate |
+|---|---|---|
+| `m = 2`, `M ≥ 7` (i.e. `r ≥ 15`), `q ≥ 17` | stratum is `PG(M-1,q)` with `M-1 ≥ 6` | `(17,2)@27` alone is `27^8 ≈ 2.8·10^{11}` points; the sweep cost is `q^{M-1}` points × `≈ q^2` trials |
+| `M = 3`, `q > 127` | phase-1 cost is `q^2` points × `q^2` trials × `O(d^2)` | at `q = 241` about `4·10^{12}` operations, roughly 200–2000 s per cell |
+| `M = 4`, `q > 64`; `M = 5`, `q > 32`; `M = 6`, `q > 27` | same `q^{M+1}` scaling | `M=4` at `q=127` is `127^5 ≈ 3.3·10^{10}` |
+
+The `q^{M+1}` scaling is the live limit.  A known fix exists and was not built:
+the C1023 σ-elimination replaces the random `(d-1)`-subset by choosing `d-3`
+points freely and *solving* a 2×2 linear system for the elementary symmetric
+functions of the last two, so a witness is found with probability about one half
+per trial instead of `q^{-2}` — a `q^2` speedup on phase 1, which would move the
+`M = 3` ceiling from 127 to the driver's `u8` field limit of 251.
+
+## `ej` + `tt` closeout
+
+**`tt` — the interesting question this raises is about `k`, not about `q`.**  The
+whole campaign has been organised around a threshold in the *field*: "nothing
+above 13".  The `(15,4)@17` cell says the real boundary is at least partly in the
+*dimension*: `k = 3` fires at `q = 17` while `k = 4` does not at `q = 16`.  Since
+`k = q+1-r`, a hypothesis in `k` is a statement about the diagonal `q ≈ r`, and
+the two conditions `q ≥ 16` and `k ≥ 4` may well be shadows of a single
+condition on the pair.  Nothing here separates them, and the cells that would —
+small `k` at large `q` — are exactly the ones the sweep can reach cheaply.  That
+is the sharpest cheap experiment left in this lane.
+
+A second `tt` point: Lemma A (deep is decided at one level) should have been
+noticed much earlier.  Every driver in this campaign computes the exact rank
+`w(s)` when the question only ever needed a yes/no at level `d-1`.  The cost of
+that was a factor of roughly `d` on every stratum sweep in C1018 and C1023, and
+it is the single reason `(17,7)` looked out of budget.  Reporting a richer
+quantity than the question needs is a quiet and expensive habit.
+
+**`ej` — cheap and in reach.**
+
+1. **Separate `q` from `k`.**  Sweep carriers with `k` small and `q` large —
+   e.g. `(r, m)` with `r ≈ q` at `q = 31, 61, 127` — to see whether firing
+   tracks `k` or `q`.  Cheap, and it decides whether PRS-1 should be stated in
+   one variable or two.
+2. **σ-elimination in phase 1**, as above: a `q^2` speedup that lifts every
+   ceiling in the out-of-budget table.  Half a day of work, no new mathematics.
+3. **Re-run the `(15,4)@17` cell against the exact C1018 path** to be certain the
+   one firing cell in the gap is real; it agrees with C1018 §5b″ already, but it
+   now carries more weight than any other single cell in the report.
+
+**Surprising and unexplained:** `(13,5)@16` is clean with `k = 4` while
+`(15,4)@17` fires with `k = 3`, and the two are otherwise similar — both `M = 3`,
+adjacent `m`, adjacent `q`.  Whatever distinguishes them is doing the work that
+the `k` hypothesis currently papers over.
+
+## Mystery ledger
+
+1. **Is "Hankel rank `≤ M` on a stratum" true?**  *Settled: no.*  The rank is
+   generically full, `min(j+1, d-j+1)`, verified on three carriers; and the
+   block decomposition that does hold gives a bound that is provably within `m`
+   of the generic one, hence useless.  Nothing open.
+2. **Is PRS-1's constant threshold a sampling artifact?**  *Settled: no.*  190
+   cells, `r` to 39, `q` to 127, `m` to 18: zero firing inside scope.  Risk flag
+   discharged in the C1018 report.
+3. **Where is the true `k` boundary?**  *Sharpened, still open.*  `k = 3` fires,
+   `k ∈ {4,5}` clean on seven cells, so `k ≥ 4` is the recommended clause.  Open:
+   whether `k = 3` fires for `q > 17`, and whether `k ∈ {4,5}` stays clean
+   beyond the seven cells.  Owner: `ej` item 1.
+4. **Are `q ≥ 16` and `k ≥ 4` two conditions or one?**  *Open, newly raised.*
+   See the `tt` note.  This is the most interesting question the task exposed.
+5. **Why does `(15,4)@17` fire when `(13,5)@16` does not?**  *Open.*
+6. **Method: two false premises in three tasks.**  C1023's Lemma 1 was
+   essentially Sylvester's theorem, caught at the end; this rank bound was
+   vacuous, caught before any code.  Both were mine, both were plausible from
+   the shape of the situation, and neither survived one probe.  The pattern is
+   asserting structure from sparsity without testing it.  What worked: the
+   coordinator's gate, placed *before* the build rather than after.  No mystery,
+   but a standing method note — put the cheap probe first when a claim is load
+   bearing, and expect the shape-based intuition to be wrong about half the time.
+7. **Nothing anomalous in the validation layer.**  Gate 1 agreed with the
+   committed values on eight of eight cells across both characteristics, both
+   exponent shapes and `M = 2,3,4`; and on every clean cell the exhaustive
+   fallback ran zero times, so the fast path is doing the work it claims.
+
+## Evidence bundle
+
+```text
+notes/2026-08-31-c1025-prs1-falsification.md        this report
+notes/2026-08-31-c1025-certificate.py               certificate builder / checker
+notes/2026-08-31-c1025-certificate.json             190-cell certificate with per-file SHA-256
+ergodis-private/src/bin/c1025_prs_stratum.rs        driver
+```
+
+Bulk per-cell JSON lives outside the repository under `~/.cache/ergodis/c1025/`;
+the committed certificate folds every load-bearing field of every cell together
+with the SHA-256 and byte count of the file it came from.
+
+**Build note.**  `ergodis-private`'s library does not currently compile — an
+untracked `src/g133_sparse_defect.rs` from a concurrent session — so the driver
+was built out of tree from a throwaway manifest at
+`~/.cache/ergodis/c1025-build/Cargo.toml` that points at the in-repo source and
+depends on the read-only core by path.  Nothing was written into either library
+root and the foreign file was not touched.
+
+```bash
+# out-of-tree build (the in-tree one will fail while g133_sparse_defect.rs is broken)
+cd ~/.cache/ergodis/c1025-build && cargo build --release --bin c1025_prs_stratum
+
+R=~/.cache/ergodis/c1025-build/target/release/c1025_prs_stratum
+C=~/.cache/ergodis/c1025 && mkdir -p $C
+
+# the cell that was out of budget
+$R --r 17 --q 29 --stratum-mod 7 --stratum-class 1 --threads 20 --out $C/r17-m7-c1-q29.json
+
+# gate 1: agreement with the committed C1018 values
+$R --r 9  --q 13 --stratum-mod 3 --stratum-class 1
+$R --r 15 --q 17 --stratum-mod 4 --stratum-class 1
+
+# rebuild / re-check the certificate
+cd ~/src/othello
+python3 notes/2026-08-31-c1025-certificate.py build $C notes/2026-08-31-c1025-certificate.json
+python3 notes/2026-08-31-c1025-certificate.py check $C notes/2026-08-31-c1025-certificate.json
+```
+
+**Independent cross-check.**  Gate 1's eight cells are checked against values
+produced by two structurally different C1018 drivers plus definition-level
+Python, none of which share code with this driver.  Beyond that the results are
+*self-verifying in the sound direction*: every "not deep" verdict is backed by an
+explicit split squarefree annihilator that the driver verifies directly against
+the Hankel system, and every "deep" verdict comes either from Sylvester's `O(q)`
+test or from the complete `C(q+1,d-1)` enumeration.  The `phase2_points` field
+records how many points took the exhaustive route, so the split between fast and
+exact paths is auditable per cell.
+
+**What this certifies:** for each listed cell, the exact number of deep and of
+exceptional points on the named stratum.  **What it does not:** anything about
+orbits with trivial stabilizer, which meet no stratum at all (C1024 §2); and
+anything about cells in the out-of-budget table.
 
