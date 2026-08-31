@@ -7,6 +7,9 @@
 
 use thiserror::Error;
 
+#[cfg(test)]
+use crate::test_alloc::HotLoopAllocationGuard;
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct IntegerMomentProblem {
     pub degree: u32,
@@ -68,6 +71,8 @@ pub fn enumerate_integer_moments(
     workspace: &mut IntegerMomentWorkspace,
     mut visit: impl FnMut(&[i32]),
 ) -> Result<IntegerMomentMetrics, IntegerMomentError> {
+    #[cfg(test)]
+    let _allocation_guard = HotLoopAllocationGuard::enter();
     if problem.degree == 0 || problem.minimum > problem.maximum {
         return Err(IntegerMomentError::Shape);
     }
@@ -388,5 +393,23 @@ mod tests {
         assert_eq!(workspace.values.as_ptr(), pointers.0);
         assert_eq!(workspace.next_value.as_ptr(), pointers.1);
         assert_eq!(workspace.prefix_sum.as_ptr(), pointers.2);
+    }
+
+    #[test]
+    fn moment_enumeration_loop_allocates_nothing() {
+        let problem = IntegerMomentProblem {
+            degree: 6,
+            sum: 21,
+            square_sum: 91,
+            minimum: 0,
+            maximum: 7,
+        };
+        let mut workspace = IntegerMomentWorkspace::new(6).unwrap();
+        let (metrics, events) = crate::test_alloc::measure_allocations(|| {
+            enumerate_integer_moments(problem, &mut workspace, |_| {}).unwrap()
+        });
+        assert!(metrics.prefixes > 0);
+        assert_eq!(metrics.solutions, 3);
+        assert_eq!(events, Default::default());
     }
 }

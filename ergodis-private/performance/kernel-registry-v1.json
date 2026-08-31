@@ -118,6 +118,26 @@
       "single_thread_counters": {"status": "open", "reason": "No retained single-thread control is registered."},
       "parallel_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md"]},
       "contention": {"status": "pass", "evidence": ["notes/2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md"]}
+    },
+    {
+      "id": "hall-matching",
+      "source": "papers/complete-repair-ports/ergodis/src/hall.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/hall.rs"]},
+      "layout": {"status": "na", "reason": "The iterative matching kernel stores state in fixed typed arrays and has no frame or record object."},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/hall.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is registered."},
+      "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
+      "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
+    },
+    {
+      "id": "integer-moment-enumeration",
+      "source": "papers/complete-repair-ports/ergodis/src/integer_moments.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/integer_moments.rs"]},
+      "layout": {"status": "na", "reason": "The iterative enumerator stores its depth machine in fixed typed arrays and has no frame or record object."},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/integer_moments.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is registered."},
+      "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
+      "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
     }
   ]
 }

@@ -50,8 +50,11 @@ as each coherent tranche lands.
    the callback region itself in serial and Rayon modes and records zero events
    on every participating thread. The executor owns no concrete worker/output
    layout; those remain kernel contracts, while its `RootOrdinal` layout is
-   exact. Current next slice is expanding that census and closing its
-   highest-leverage open allocation/layout rows.
+   exact. The census now also registers Hall matching/deficiency extraction
+   and exact integer-moment enumeration. Their actual iterative regions both
+   pass the shared zero-event allocator gate; each uses fixed typed arrays
+   rather than a heap-grown frame stack. Current next slice is expanding that
+   census and closing its highest-leverage open allocation/layout rows.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

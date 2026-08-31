@@ -7,6 +7,9 @@
 use std::io::{self, Read, Write};
 use thiserror::Error;
 
+#[cfg(test)]
+use crate::test_alloc::HotLoopAllocationGuard;
+
 const NONE: u32 = u32::MAX;
 const CERTIFICATE_MAGIC: [u8; 8] = *b"ERGHALL1";
 
@@ -204,6 +207,8 @@ pub fn solve_hall<'a>(
     graph: &DenseHallGraph,
     workspace: &'a mut HallWorkspace,
 ) -> Result<HallResult<'a>, HallError> {
+    #[cfg(test)]
+    let _allocation_guard = HotLoopAllocationGuard::enter();
     if graph.left_count > workspace.max_left || graph.right_count > workspace.max_right {
         return Err(HallError::Workspace);
     }
@@ -577,6 +582,18 @@ mod tests {
         assert_eq!(workspace.left_match.as_ptr(), pointers.0);
         assert_eq!(workspace.right_match.as_ptr(), pointers.1);
         assert_eq!(workspace.queue.as_ptr(), pointers.2);
+    }
+
+    #[test]
+    fn matching_and_deficiency_loop_allocates_nothing() {
+        let graph = DenseHallGraph::new(4, 4, [(0, 0), (1, 0), (2, 1), (3, 2), (3, 3)]).unwrap();
+        let mut workspace = HallWorkspace::new(4, 4).unwrap();
+        let (summary, events) = crate::test_alloc::measure_allocations(|| {
+            let result = solve_hall(&graph, &mut workspace).unwrap();
+            (result.cardinality(), result.deficiency())
+        });
+        assert_eq!(summary, (3, 1));
+        assert_eq!(events, Default::default());
     }
 
     #[test]

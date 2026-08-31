@@ -168,6 +168,14 @@ all callback threads. The executor's only owned hot value, `RootOrdinal`, is a
 transparent four-byte scalar with exact alignment assertions; concrete worker
 and output layouts remain the responsibility of their kernel registry rows.
 
+The registry census now includes two previously omitted reusable kernels.
+Hall matching plus deficient-set extraction and the iterative integer-moment
+enumerator both bracket their complete search regions with the shared guard
+and record zero allocation, reallocation, and deallocation. Both represent
+depth/matching state in caller-sized typed arrays, so there is no hot frame or
+record layout to pad; their outstanding evidence is counter A/B rather than
+structural compliance.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted
