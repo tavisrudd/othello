@@ -2132,17 +2132,46 @@ fn cmd_verify(
                 4096,
             )?;
             let claimed = &level.shards[index as usize];
-            let agrees = run.record.result.stats.candidates == claimed.candidates
-                && run.record.result.stats.kernel_supports == claimed.kernel_supports
-                && run.record.result.stats.nontrivial_supports == claimed.nontrivial_supports;
-            if agrees {
-                matched += 1;
-                println!("[ok] shard {index:4} re-run reproduces {} candidates exactly", claimed.candidates);
-            } else {
+            let stats = &run.record.result.stats;
+            // The conclusion of a shard is deterministic; its counters are not.
+            // The parallel search shares improved bounds between rayon workers
+            // through an asynchronous mailbox, so as soon as a shard finds a
+            // witness the pruning -- and therefore the candidate count -- varies
+            // run to run at fixed thread count. A witness-free shard has no
+            // bound to publish and does reproduce its counters exactly.
+            let conclusion_agrees = run.record.result.distance == claimed.distance
+                && (stats.nontrivial_supports > 0) == (claimed.nontrivial_supports > 0)
+                && run.record.result.searched_maximum_weight == claimed.searched_maximum_weight;
+            let counters_agree = stats.candidates == claimed.candidates
+                && stats.kernel_supports == claimed.kernel_supports
+                && stats.nontrivial_supports == claimed.nontrivial_supports;
+            let witness_free = claimed.distance.is_none() && claimed.nontrivial_supports == 0;
+            if !conclusion_agrees {
                 failures.push(format!(
-                    "shard {index} re-run disagrees: {} candidates against {} claimed",
-                    run.record.result.stats.candidates, claimed.candidates
+                    "shard {index} re-run reaches a different conclusion: distance {:?} against {:?} claimed",
+                    run.record.result.distance, claimed.distance
                 ));
+            } else if witness_free && !counters_agree {
+                failures.push(format!(
+                    "witness-free shard {index} re-run disagrees on counters: {} candidates against {} claimed",
+                    stats.candidates, claimed.candidates
+                ));
+            } else {
+                matched += 1;
+                if counters_agree {
+                    println!(
+                        "[ok] shard {index:4} re-run reproduces the conclusion and all {} candidates exactly",
+                        claimed.candidates
+                    );
+                } else {
+                    println!(
+                        "[ok] shard {index:4} re-run reproduces the conclusion (distance {:?}); counters drift by {} candidates ({:+.3}%), which is expected for a shard that publishes a bound",
+                        claimed.distance,
+                        stats.candidates.abs_diff(claimed.candidates),
+                        100.0 * (stats.candidates as f64 - claimed.candidates as f64)
+                            / claimed.candidates as f64
+                    );
+                }
             }
         }
         let recheck_seconds = recheck_start.elapsed().as_secs_f64();

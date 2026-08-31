@@ -1,0 +1,28 @@
+{
+  "schema": "certdist-combined-v1",
+  "label": "r3elitep01",
+  "rule": "a CSS code's distance is the minimum of its two side distances, so the code-level lower bound is the minimum of the per-side lower bounds and the code-level upper bound is the minimum of the per-side upper bounds",
+  "sides": [
+    {
+      "input_sha256": "18af8d21493dbde96eb1f6176936a846a01ac13706d772ded8d8d42f7d1e81d2",
+      "label": "c1018-sce-r3elitep01-x",
+      "lower": 18,
+      "upper": 18,
+      "exact": true,
+      "lower_provenance": "complete 32-shard exhaustion through weight 17 found no logical operator",
+      "upper_provenance": "builtin-osd witness, re-verified from the input (zero physical syndrome, 18 logical observations triggered)"
+    },
+    {
+      "input_sha256": "d1d6b757054bf9f101e1b41041f0281e39776589c358152a1bad0488b0af72dc",
+      "label": "c1018-sce-r3elitep01-z",
+      "lower": 18,
+      "upper": 20,
+      "exact": false,
+      "lower_provenance": "complete 32-shard exhaustion through weight 17 found no logical operator",
+      "upper_provenance": "builtin-osd witness, re-verified from the input (zero physical syndrome, 36 logical observations triggered)"
+    }
+  ],
+  "lower": 18,
+  "upper": 18,
+  "exact": true
+}

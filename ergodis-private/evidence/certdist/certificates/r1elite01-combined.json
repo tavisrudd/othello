@@ -1,0 +1,28 @@
+{
+  "schema": "certdist-combined-v1",
+  "label": "r1elite01",
+  "rule": "a CSS code's distance is the minimum of its two side distances, so the code-level lower bound is the minimum of the per-side lower bounds and the code-level upper bound is the minimum of the per-side upper bounds",
+  "sides": [
+    {
+      "input_sha256": "c0b9a8f0c8750e66f14f04d7d7bdd1fc814f29b6660a831760400ff8f3c38a91",
+      "label": "c1018-sce-r1elite01-x",
+      "lower": 18,
+      "upper": 20,
+      "exact": false,
+      "lower_provenance": "complete 32-shard exhaustion through weight 16 found no logical operator; every logical operator of this code has even weight (the all-ones vector lies in the physical row space), so the bound lifts by one further unit",
+      "upper_provenance": "builtin-osd witness, re-verified from the input (zero physical syndrome, 94 logical observations triggered)"
+    },
+    {
+      "input_sha256": "0aebb878e82da15c105858b96930f79ec6db0bf5aef4bdce8ba7da6703f5e0bd",
+      "label": "c1018-sce-r1elite01-z",
+      "lower": 18,
+      "upper": 18,
+      "exact": true,
+      "lower_provenance": "complete 32-shard exhaustion through weight 16 found no logical operator; every logical operator of this code has even weight (the all-ones vector lies in the physical row space), so the bound lifts by one further unit",
+      "upper_provenance": "builtin-osd witness, re-verified from the input (zero physical syndrome, 113 logical observations triggered)"
+    }
+  ],
+  "lower": 18,
+  "upper": 18,
+  "exact": true
+}
