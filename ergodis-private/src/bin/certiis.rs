@@ -89,6 +89,12 @@ pub struct GroundTruth {
     /// Size of the maximum-deficiency set the generator expects before minimization.
     #[serde(default)]
     pub expected_raw_deficient: Option<usize>,
+    /// Number of independent bottlenecks planted.
+    #[serde(default)]
+    pub bottleneck_count: Option<usize>,
+    /// Planted task sets, one per bottleneck, each the unique irreducible certificate.
+    #[serde(default)]
+    pub planted_blocks: Vec<Vec<String>>,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -442,8 +448,6 @@ pub struct Deficiency {
     pub demand: u64,
     pub neighborhood_capacity: u64,
     pub deficit: u64,
-    /// Size of the maximum-deficiency set `hall_core` returned, before minimization.
-    pub raw_deficient_tasks: usize,
     pub removal_tests: Vec<RemovalTest>,
 }
 
@@ -462,9 +466,21 @@ pub struct AssignedTask {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag = "status", rename_all = "snake_case")]
 pub enum Verdict {
-    Feasible { assignment: Vec<AssignedTask> },
-    Infeasible { certificate: Deficiency },
-    Declined { needed_instead: Vec<String> },
+    Feasible {
+        assignment: Vec<AssignedTask>,
+    },
+    /// One irreducible certificate per independent bottleneck. The certificates are
+    /// pairwise disjoint in both tasks and resources, and each one on its own proves the
+    /// instance infeasible.
+    Infeasible {
+        /// Size of the maximum-deficiency set `hall_core` returned, before decomposition
+        /// and minimization.
+        raw_deficient_tasks: usize,
+        certificates: Vec<Deficiency>,
+    },
+    Declined {
+        needed_instead: Vec<String>,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -554,6 +570,88 @@ fn minimize(compiled: &Compiled, seed: &[u32], order: &[u32]) -> Vec<u32> {
     (0..compiled.task_count() as u32)
         .filter(|&t| present[t as usize])
         .collect()
+}
+
+/// Split a task set into the connected components of the bipartite subgraph it induces
+/// together with its neighbourhood.
+///
+/// Components partition both the task set and its neighbourhood, so the total deficit is
+/// the sum of the per-component deficits. A component with deficit zero is padding: it can
+/// be dropped without destroying the violation, and dropping it makes the explanation
+/// smaller and easier to read.
+fn components(compiled: &Compiled, tasks: &[u32]) -> Vec<Vec<u32>> {
+    // Reverse incidence restricted to the given task set.
+    let mut sharers: BTreeMap<u32, Vec<u32>> = BTreeMap::new();
+    for &task in tasks {
+        for &resource in &compiled.adjacency[task as usize] {
+            sharers.entry(resource).or_default().push(task);
+        }
+    }
+    let mut visited_task = vec![false; compiled.task_count()];
+    let mut expanded_resource = vec![false; compiled.resource_count()];
+    let mut out = Vec::new();
+    let mut queue = Vec::new();
+
+    for &start in tasks {
+        if visited_task[start as usize] {
+            continue;
+        }
+        visited_task[start as usize] = true;
+        queue.clear();
+        queue.push(start);
+        let mut group = Vec::new();
+        while let Some(task) = queue.pop() {
+            group.push(task);
+            for &resource in &compiled.adjacency[task as usize] {
+                if expanded_resource[resource as usize] {
+                    continue;
+                }
+                expanded_resource[resource as usize] = true;
+                for &other in &sharers[&resource] {
+                    if !visited_task[other as usize] {
+                        visited_task[other as usize] = true;
+                        queue.push(other);
+                    }
+                }
+            }
+        }
+        group.sort_unstable();
+        out.push(group);
+    }
+    out
+}
+
+/// Decompose a violating task set into one irreducible certificate per independent
+/// bottleneck.
+///
+/// Each returned set violates on its own and is irreducible under single-task removal, and
+/// the sets are pairwise disjoint in tasks and in resources. Recursion terminates because
+/// it only happens on a strictly smaller set.
+fn extract_certificates(compiled: &Compiled, set: &[u32]) -> Vec<Vec<u32>> {
+    let mut out = Vec::new();
+    for group in components(compiled, set) {
+        let neighborhood = compiled.neighborhood(&group);
+        if compiled.demand_of(&group) <= compiled.capacity_of(&neighborhood) {
+            continue; // padding: this component carries no deficit of its own.
+        }
+        let mut forward = group.clone();
+        forward.sort_unstable();
+        let mut backward = forward.clone();
+        backward.reverse();
+        let mut by_degree = forward.clone();
+        by_degree.sort_by_key(|&t| std::cmp::Reverse(compiled.adjacency[t as usize].len()));
+        let best = [forward, backward, by_degree]
+            .into_iter()
+            .map(|order| minimize(compiled, &group, &order))
+            .min_by_key(Vec::len)
+            .expect("three orders");
+        if best.len() < group.len() {
+            out.extend(extract_certificates(compiled, &best));
+        } else {
+            out.push(best);
+        }
+    }
+    out
 }
 
 fn removal_tests(compiled: &Compiled, tasks: &[u32]) -> Vec<RemovalTest> {
@@ -671,49 +769,47 @@ fn solve(instance: &Instance, raw: &[u8]) -> anyhow::Result<Report> {
             );
 
             let minimization_started = Instant::now();
-            // Three removal orders; keep the smallest irreducible result. Every one of
-            // them is irreducible, so this only trades a constant factor for size.
-            let forward: Vec<u32> = seed.clone();
-            let mut backward = seed.clone();
-            backward.reverse();
-            let mut by_degree = seed.clone();
-            by_degree.sort_by_key(|&t| std::cmp::Reverse(compiled.adjacency[t as usize].len()));
-            let best = [forward, backward, by_degree]
-                .into_iter()
-                .map(|order| minimize(&compiled, &seed, &order))
-                .min_by_key(Vec::len)
-                .expect("three orders");
+            let extracted = extract_certificates(&compiled, &seed);
             let minimization_micros = minimization_started.elapsed().as_micros();
+            ensure!(
+                !extracted.is_empty(),
+                "decomposition of a violating set produced no certificate"
+            );
 
-            let neighborhood = compiled.neighborhood(&best);
-            let demand = compiled.demand_of(&best);
-            let capacity = compiled.capacity_of(&neighborhood);
-            ensure!(
-                demand > capacity,
-                "minimization destroyed the violation (demand {demand}, capacity {capacity})"
-            );
-            let tests = removal_tests(&compiled, &best);
-            ensure!(
-                tests.iter().all(|t| !t.still_violated),
-                "minimization returned a reducible set"
-            );
+            let mut certificates = Vec::with_capacity(extracted.len());
+            for tasks in &extracted {
+                let neighborhood = compiled.neighborhood(tasks);
+                let demand = compiled.demand_of(tasks);
+                let capacity = compiled.capacity_of(&neighborhood);
+                ensure!(
+                    demand > capacity,
+                    "extraction destroyed the violation (demand {demand}, capacity {capacity})"
+                );
+                let tests = removal_tests(&compiled, tasks);
+                ensure!(
+                    tests.iter().all(|t| !t.still_violated),
+                    "extraction returned a reducible set"
+                );
+                certificates.push(Deficiency {
+                    tasks: tasks
+                        .iter()
+                        .map(|&t| compiled.task_ids[t as usize].clone())
+                        .collect(),
+                    neighborhood: neighborhood
+                        .iter()
+                        .map(|&r| compiled.resource_ids[r as usize].clone())
+                        .collect(),
+                    demand,
+                    neighborhood_capacity: capacity,
+                    deficit: demand - capacity,
+                    removal_tests: tests,
+                });
+            }
+            certificates.sort_by(|a, b| a.tasks.len().cmp(&b.tasks.len()).then_with(|| a.tasks.cmp(&b.tasks)));
             (
                 Verdict::Infeasible {
-                    certificate: Deficiency {
-                        tasks: best
-                            .iter()
-                            .map(|&t| compiled.task_ids[t as usize].clone())
-                            .collect(),
-                        neighborhood: neighborhood
-                            .iter()
-                            .map(|&r| compiled.resource_ids[r as usize].clone())
-                            .collect(),
-                        demand,
-                        neighborhood_capacity: capacity,
-                        deficit: demand - capacity,
-                        raw_deficient_tasks: raw_size,
-                        removal_tests: tests,
-                    },
+                    raw_deficient_tasks: raw_size,
+                    certificates,
                 },
                 minimization_micros,
             )
@@ -859,11 +955,15 @@ fn verify(instance: &Instance, raw: &[u8], report: &Report) -> anyhow::Result<Ve
                 instance.tasks.len()
             ));
         }
-        Verdict::Infeasible { certificate } => {
+        Verdict::Infeasible { certificates, .. } => {
             ensure!(
                 classification.certifiable,
                 "infeasible verdict in a non-certifiable regime"
             );
+            ensure!(!certificates.is_empty(), "no certificate");
+            let mut claimed_tasks: BTreeSet<usize> = BTreeSet::new();
+            let mut claimed_resources: BTreeSet<usize> = BTreeSet::new();
+            for certificate in certificates {
             ensure!(!certificate.tasks.is_empty(), "empty certificate");
             let indices: Vec<usize> = certificate
                 .tasks
@@ -967,6 +1067,26 @@ fn verify(instance: &Instance, raw: &[u8], report: &Report) -> anyhow::Result<Ve
                  leaves demand <= capacity",
                 distinct.len()
             ));
+
+            for &t in &distinct {
+                ensure!(
+                    claimed_tasks.insert(t),
+                    "task {} appears in two certificates",
+                    instance.tasks[t].id
+                );
+            }
+            for &r in &hood {
+                ensure!(
+                    claimed_resources.insert(r),
+                    "resource {} appears in two certificates",
+                    instance.resources[r].id
+                );
+            }
+            }
+            checks.push(format!(
+                "{} independent bottleneck(s), pairwise disjoint in tasks and resources",
+                certificates.len()
+            ));
         }
     }
     Ok(checks)
@@ -1022,6 +1142,11 @@ fn plant_block(
     cascade: usize,
     ground_truth: &mut GroundTruth,
 ) {
+    if plant < 2 {
+        // A single task cannot be short of its own eligible resources here, and `plant = 0`
+        // would underflow the capacity arithmetic below.
+        return;
+    }
     let use_bridge = plant >= 3 && cascade >= 1;
     let scarce_total = if use_bridge {
         plant as u32 - 2
@@ -1088,9 +1213,23 @@ fn plant_block(
         ground_truth.planted_tasks.push(id);
     }
     ground_truth.feasible = false;
-    ground_truth.planted_resources = neighbourhood;
+    ground_truth
+        .planted_resources
+        .extend(neighbourhood.iter().cloned());
     ground_truth.minimal_certificate_size = Some(plant);
-    ground_truth.expected_raw_deficient = Some(plant + if use_bridge { cascade } else { 0 });
+    ground_truth.expected_raw_deficient =
+        Some(ground_truth.expected_raw_deficient.unwrap_or(0) + plant
+            + if use_bridge { cascade } else { 0 });
+    ground_truth.bottleneck_count = Some(ground_truth.bottleneck_count.unwrap_or(0) + 1);
+    let block: Vec<String> = ground_truth
+        .planted_tasks
+        .iter()
+        .rev()
+        .take(plant)
+        .rev()
+        .cloned()
+        .collect();
+    ground_truth.planted_blocks.push(block);
 }
 
 /// Shift rostering with qualifications.
@@ -1183,6 +1322,8 @@ fn generate_roster(
         planted_resources: Vec::new(),
         minimal_certificate_size: None,
         expected_raw_deficient: None,
+        bottleneck_count: None,
+        planted_blocks: Vec::new(),
     };
 
     if plant > 0 {
@@ -1283,6 +1424,8 @@ fn generate_placement(
         planted_resources: Vec::new(),
         minimal_certificate_size: None,
         expected_raw_deficient: None,
+        bottleneck_count: None,
+        planted_blocks: Vec::new(),
     };
 
     if plant > 0 {
@@ -1361,6 +1504,52 @@ fn generate_coupled(seed: u64, rows: usize, columns: usize) -> Instance {
     }
 }
 
+/// A roster with three independent shortages of different sizes. A single unsatisfiable
+/// core names one of them; this is where per-bottleneck decomposition pays.
+fn generate_multi_roster(
+    seed: u64,
+    shifts: usize,
+    nurses: usize,
+    plant: usize,
+    cascade: usize,
+) -> Instance {
+    let mut instance = generate_roster(seed, shifts, nurses, 0, 0);
+    let mut ground_truth = instance.ground_truth.take().unwrap_or(GroundTruth {
+        feasible: true,
+        planted_tasks: Vec::new(),
+        planted_resources: Vec::new(),
+        minimal_certificate_size: None,
+        expected_raw_deficient: None,
+        bottleneck_count: None,
+        planted_blocks: Vec::new(),
+    });
+    let sizes: Vec<usize> = if plant == 0 {
+        Vec::new()
+    } else {
+        vec![plant, plant + 2, plant + 5]
+    };
+    for (index, size) in sizes.into_iter().enumerate() {
+        plant_block(
+            &mut instance.tasks,
+            &mut instance.resources,
+            &mut instance.eligible,
+            &format!("shift_scarce{index}"),
+            &format!("nurse_scarce{index}"),
+            size,
+            cascade,
+            &mut ground_truth,
+        );
+    }
+    // `minimal_certificate_size` is per block and no longer single-valued here.
+    ground_truth.minimal_certificate_size = None;
+    if plant == 0 {
+        ground_truth.feasible = true;
+    }
+    instance.ground_truth = Some(ground_truth);
+    instance.name = format!("multiroster-s{seed}-t{shifts}-r{nurses}-plant{plant}-cascade{cascade}");
+    instance
+}
+
 /// The most common real roster shape that this tool must refuse: every shift needs two
 /// *distinct* nurses. Hall's condition is necessary but not sufficient here.
 fn generate_distinct_roster(
@@ -1404,6 +1593,7 @@ fn generate_exact_load(seed: u64, rows: usize, columns: usize) -> Instance {
 enum Domain {
     Roster,
     Placement,
+    MultiRoster,
     DistinctRoster,
     Coupled,
     ExactLoad,
@@ -1495,6 +1685,9 @@ fn build(domain: Domain, args: &GenerateArgs) -> Instance {
         Domain::Placement => {
             generate_placement(args.seed, args.tasks, args.resources, args.plant, args.cascade)
         }
+        Domain::MultiRoster => {
+            generate_multi_roster(args.seed, args.tasks, args.resources, args.plant, args.cascade)
+        }
         Domain::DistinctRoster => generate_distinct_roster(
             args.seed,
             args.tasks,
@@ -1532,14 +1725,30 @@ fn main() -> anyhow::Result<()> {
             let report = solve(&instance, &raw)?;
             let line = match &report.verdict {
                 Verdict::Feasible { .. } => format!("FEASIBLE ({})", report.regime),
-                Verdict::Infeasible { certificate } => format!(
-                    "INFEASIBLE ({}): {} tasks demand {} units, their {} eligible resources supply {}",
-                    report.regime,
-                    certificate.tasks.len(),
-                    certificate.demand,
-                    certificate.neighborhood.len(),
-                    certificate.neighborhood_capacity
-                ),
+                Verdict::Infeasible {
+                    raw_deficient_tasks,
+                    certificates,
+                } => {
+                    let detail = certificates
+                        .iter()
+                        .map(|c| {
+                            format!(
+                                "{} tasks demand {} units, their {} eligible resources supply {}",
+                                c.tasks.len(),
+                                c.demand,
+                                c.neighborhood.len(),
+                                c.neighborhood_capacity
+                            )
+                        })
+                        .collect::<Vec<_>>()
+                        .join("; ");
+                    format!(
+                        "INFEASIBLE ({}): {} bottleneck(s) from a {raw_deficient_tasks}-task \
+                         deficient set -- {detail}",
+                        report.regime,
+                        certificates.len()
+                    )
+                }
                 Verdict::Declined { .. } => format!("DECLINED ({})", report.regime),
             };
             println!("{line} [{} us]", report.total_micros);
@@ -1568,6 +1777,7 @@ fn main() -> anyhow::Result<()> {
                 for (domain, tasks, resources) in [
                     (Domain::Roster, 150usize, 45usize),
                     (Domain::Placement, 200, 50),
+                    (Domain::MultiRoster, 150, 45),
                 ] {
                     for (plant, cascade) in
                         [(0usize, 0usize), (4, 0), (4, 40), (9, 40), (17, 120)]
@@ -1698,9 +1908,20 @@ fn selftest() -> anyhow::Result<()> {
                 let truth = instance.ground_truth.clone().expect("planted ground truth");
                 let raw_bytes = serde_json::to_vec(&instance)?;
                 let report = solve(&instance, &raw_bytes)?;
-                let Verdict::Infeasible { certificate } = &report.verdict else {
+                let Verdict::Infeasible {
+                    raw_deficient_tasks,
+                    certificates,
+                } = &report.verdict
+                else {
                     bail!("{} should be infeasible", instance.name);
                 };
+                anyhow::ensure!(
+                    certificates.len() == 1,
+                    "{}: one planted bottleneck but {} certificates",
+                    instance.name,
+                    certificates.len()
+                );
+                let certificate = &certificates[0];
                 anyhow::ensure!(
                     certificate.tasks.len() == truth.minimal_certificate_size.unwrap(),
                     "{}: certificate has {} tasks, planted minimum is {:?}",
@@ -1714,10 +1935,9 @@ fn selftest() -> anyhow::Result<()> {
                     instance.name
                 );
                 anyhow::ensure!(
-                    certificate.raw_deficient_tasks == truth.expected_raw_deficient.unwrap(),
-                    "{}: maximum-deficiency set has {} tasks, expected {:?}",
+                    *raw_deficient_tasks == truth.expected_raw_deficient.unwrap(),
+                    "{}: maximum-deficiency set has {raw_deficient_tasks} tasks, expected {:?}",
                     instance.name,
-                    certificate.raw_deficient_tasks,
                     truth.expected_raw_deficient
                 );
                 verify(&instance, &raw_bytes, &report)?;
@@ -1727,6 +1947,38 @@ fn selftest() -> anyhow::Result<()> {
     println!(
         "selftest ok: every planted instance returns exactly its planted minimal certificate, \
          with the expected pre-minimization maximum-deficiency set"
+    );
+
+    // Several independent shortages must come back separated, not merged into one blob.
+    for seed in 1..=3u64 {
+        let instance = generate_multi_roster(seed, 150, 45, 4, 40);
+        let truth = instance.ground_truth.clone().expect("planted ground truth");
+        let raw_bytes = serde_json::to_vec(&instance)?;
+        let report = solve(&instance, &raw_bytes)?;
+        let Verdict::Infeasible { certificates, .. } = &report.verdict else {
+            bail!("{} should be infeasible", instance.name);
+        };
+        anyhow::ensure!(
+            certificates.len() == truth.bottleneck_count.unwrap(),
+            "{}: {} certificates for {:?} planted bottlenecks",
+            instance.name,
+            certificates.len(),
+            truth.bottleneck_count
+        );
+        let mut found: Vec<Vec<String>> = certificates.iter().map(|c| c.tasks.clone()).collect();
+        let mut expected = truth.planted_blocks.clone();
+        found.sort();
+        expected.sort();
+        anyhow::ensure!(
+            found == expected,
+            "{}: certificates are not the planted blocks",
+            instance.name
+        );
+        verify(&instance, &raw_bytes, &report)?;
+    }
+    println!(
+        "selftest ok: instances with three independent shortages return three separate \
+         certificates, each exactly its planted block"
     );
 
     // The classifier must decline on the non-matching shapes.
@@ -1803,7 +2055,9 @@ mod tests {
         let raw = serde_json::to_vec(&instance).unwrap();
         let report = solve(&instance, &raw).unwrap();
         match &report.verdict {
-            Verdict::Infeasible { certificate } => {
+            Verdict::Infeasible { certificates, .. } => {
+                assert_eq!(certificates.len(), 1);
+                let certificate = &certificates[0];
                 assert_eq!(certificate.tasks.len(), 2, "{:?}", certificate.tasks);
                 assert_eq!(certificate.neighborhood, vec!["r0".to_string()]);
                 assert!(certificate.removal_tests.iter().all(|t| !t.still_violated));
@@ -1832,13 +2086,44 @@ mod tests {
         let raw = serde_json::to_vec(&infeasible).unwrap();
         let report = solve(&infeasible, &raw).unwrap();
         match &report.verdict {
-            Verdict::Infeasible { certificate } => {
-                assert_eq!(certificate.tasks, vec!["t".to_string()]);
-                assert_eq!(certificate.deficit, 1);
+            Verdict::Infeasible { certificates, .. } => {
+                assert_eq!(certificates[0].tasks, vec!["t".to_string()]);
+                assert_eq!(certificates[0].deficit, 1);
             }
             other => panic!("expected infeasible, got {other:?}"),
         }
         verify(&infeasible, &raw, &report).unwrap();
+    }
+
+    #[test]
+    fn independent_bottlenecks_come_back_separated() {
+        // Three tasks on two resources, four tasks on three others. A single irreducible
+        // set would pad one shortage with part of the other; two certificates do not.
+        let instance = instance_from(
+            &[("a1", 1), ("a2", 1), ("a3", 1), ("b1", 1), ("b2", 1), ("b3", 1), ("b4", 1)],
+            &[("ra1", 1), ("ra2", 1), ("rb1", 1), ("rb2", 1), ("rb3", 1)],
+            &[
+                ("a1", "ra1"), ("a1", "ra2"), ("a2", "ra1"), ("a2", "ra2"),
+                ("a3", "ra1"), ("a3", "ra2"),
+                ("b1", "rb1"), ("b1", "rb2"), ("b1", "rb3"),
+                ("b2", "rb1"), ("b2", "rb2"), ("b2", "rb3"),
+                ("b3", "rb1"), ("b3", "rb2"), ("b3", "rb3"),
+                ("b4", "rb1"), ("b4", "rb2"), ("b4", "rb3"),
+            ],
+        );
+        let raw = serde_json::to_vec(&instance).unwrap();
+        let report = solve(&instance, &raw).unwrap();
+        match &report.verdict {
+            Verdict::Infeasible { certificates, .. } => {
+                assert_eq!(certificates.len(), 2);
+                assert_eq!(certificates[0].tasks, vec!["a1", "a2", "a3"]);
+                assert_eq!(certificates[0].neighborhood, vec!["ra1", "ra2"]);
+                assert_eq!(certificates[1].tasks, vec!["b1", "b2", "b3", "b4"]);
+                assert_eq!(certificates[1].neighborhood, vec!["rb1", "rb2", "rb3"]);
+            }
+            other => panic!("expected infeasible, got {other:?}"),
+        }
+        verify(&instance, &raw, &report).unwrap();
     }
 
     #[test]
@@ -1875,7 +2160,8 @@ mod tests {
         );
         let raw = serde_json::to_vec(&instance).unwrap();
         let mut report = solve(&instance, &raw).unwrap();
-        if let Verdict::Infeasible { certificate } = &mut report.verdict {
+        if let Verdict::Infeasible { certificates, .. } = &mut report.verdict {
+            let certificate = &mut certificates[0];
             certificate.tasks.push("c".into());
             certificate.demand += 1;
             certificate.deficit += 1;

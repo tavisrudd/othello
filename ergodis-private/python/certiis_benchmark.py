@@ -300,9 +300,8 @@ def run_certiis(
     )
     verify_wall = time.perf_counter() - verify_started
     status = report["status"]
-    size = None
-    if status == "infeasible":
-        size = len(report["certificate"]["tasks"])
+    certificates = report.get("certificates") or []
+    tasks = sorted(t for c in certificates for t in c["tasks"])
     return {
         "status": status,
         "regime": report["regime"],
@@ -310,13 +309,12 @@ def run_certiis(
         "seconds_in_process": in_process,
         "seconds_wall": wall,
         "verify_seconds_wall": verify_wall,
-        "explanation_size": size,
-        "raw_deficient_tasks": (
-            report["certificate"]["raw_deficient_tasks"] if status == "infeasible" else None
-        ),
-        "explanation": (
-            sorted(report["certificate"]["tasks"]) if status == "infeasible" else None
-        ),
+        # Total tasks named across all bottlenecks: the quantity comparable to one core.
+        "explanation_size": len(tasks) if status == "infeasible" else None,
+        "certificate_count": len(certificates) if status == "infeasible" else None,
+        "certificate_sizes": [len(c["tasks"]) for c in certificates],
+        "raw_deficient_tasks": report.get("raw_deficient_tasks"),
+        "explanation": tasks if status == "infeasible" else None,
         "stdout": completed.stdout.strip(),
     }
 
