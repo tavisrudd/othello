@@ -926,7 +926,7 @@ theorem's threshold, so that no field is left over:
 |---:|---|---:|---|---|
 | 8  | 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32, 37, 41, 43 | 43 | 8, 9, 11 | **complete over all prime powers** |
 | 9  | <!-- R9FIXFIELDS --> | 53 | 9, 11, 13 | <!-- R9FIXSTATUS --> |
-| 10 | <!-- R10FIXFIELDS --> | 59 | 11, 13 | partial |
+| 10 | 11, 13, 16, 17, 19, 23 | 59 | 11, 13 | partial; the sweep cost grows like `q^4` here, so `[25,59]` is an unattended continuation of a few hours, not a research problem |
 | 11 | 11, 13 | — | 11, 13 | partial; no field-ranged theorem exists above `r = 10`.  At `q = 13` the sweep finds 1,110 exceptional points across six loci, of which the 40 on the odd-index locus are exactly 2026-08-30 §5.3f's `m = 2` count |
 | 12 | 13 | — | 13 | partial; `k = 2` there, so the count is a boundary artifact |
 
