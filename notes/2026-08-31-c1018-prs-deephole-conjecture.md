@@ -177,3 +177,237 @@ Every cell in this wave with a nonzero exceptional count had its
 representatives checked against the relevant `M^max_{r,p}` support condition
 before being read as an `X(r)` witness.
 
+## 4. Redundancy nine above `q = 13`: the three out-of-budget cells (item 2)
+
+2026-08-30 §5.3e recorded `r = 9` at `q = 16, 17, 19` as out of budget by
+2–9× in time, with `q = 19` exceeding available memory outright, and §5.5 item 4
+recorded `X(9) ∩ [16,52]` as untested.  All three are now exhaustive censuses of
+the full projective space, with the deep-orbit representatives independently
+re-derived in Python from the definition of the coset weight.
+
+| `r` | `q` | `k` | `N = \|PG(8,q)\|` | wall | peak RSS | `ρ` | deep | `PGL_2` orbits | persistent `q(q+1)^2/2` | **exceptional** |
+|---:|---:|---:|------------------:|-----:|---------:|----:|-----:|---------------:|------------------------:|----------------:|
+| 9 | 13 | 5 |    883,708,281 |  40 s | 139 MB | 8 | 1,638 | 4 | 1,274 | **364** |
+| 9 | 16 | 8 |  4,581,298,449 | 126 s | 562 MB | 8 | 2,312 | 3 | 2,312 | **0** |
+| 9 | 17 | 9 |  7,411,742,281 | 334 s | 912 MB | 8 | 2,754 | 3 | 2,754 | **0** |
+| 9 | 19 | 11 | 17,927,094,321 | 644 s | 2.20 GB | 8 | 3,800 | 4 | 3,800 | **0** |
+
+Orbit structure matches the persistent orbit law exactly in each clean cell:
+at `q = 16` the tangent family splits in two because `p = 2 \| r-1 = 8`, and
+`gcd(8,17) = 1` gives one conjugate-secant orbit, total 3; at `q = 17`,
+`p = 17 ∤ 8` gives one tangent orbit and `gcd(8,18) = 2` gives
+`⌊2/2⌋ + 1 = 2` conjugate-secant orbits, total 3; at `q = 19`,
+`gcd(8,20) = 4` gives `⌊4/2⌋ + 1 = 3` conjugate-secant orbits of sizes
+`855 + 855 + 1710 = 3420 = q(q^2-1)/2` plus one tangent orbit of size
+`380 = q(q+1)`, total 4.
+
+For reference, 2026-08-30 §5.3e estimated these three cells at 34, 55 and
+134 minutes and 4.6, 7.4 and 17.9 GB, with `q = 19` exceeding available memory.
+Measured on the new driver they cost 2, 6 and 11 minutes and 0.56, 0.91 and
+2.20 GB, all under load from concurrent runs.
+
+**Independent replay.**  Every deep orbit representative of every cell was
+re-checked in Python by computing the coset weight from its definition — the
+least number of parity-check columns whose `F_q`-span contains the syndrome,
+decided by Gaussian rank — with no Hankel criterion and no orbit machinery:
+
+| cell | reps checked | weight disagreements | listed deep orbit sizes | driver deep total | catalecticant ranks |
+|---|---:|---:|---:|---:|---|
+| `r=9, q=13` | 4 | 0 | 1,638 | 1,638 | `{2,3}` |
+| `r=9, q=16` | 3 | 0 | 2,312 | 2,312 | `{2}` |
+| `r=9, q=17` | 3 | 0 | 2,754 | 2,754 | `{2}` |
+| `r=8, q=16` | 2 | 0 | 2,312 | 2,312 | `{2}` |
+| `r=8, q=19` | 2 | 0 | 3,800 | 3,800 | `{2}` |
+
+The `r=8, q=16` row is the cell that produced 30 spurious weight disagreements
+on 2026-08-30 through a field-model mismatch.  With both sides reading
+`defining_poly` and rebuilding `GF(16) = F_2[x]/(x^4+x+1)`, it agrees exactly.
+
+**What this settles.**  `q_0(9) = 16`: the redundancy-nine exceptional band
+closes immediately above `q = 13`, and `X(9) ∩ [16,19] = ∅`.  2026-08-30
+mystery-ledger item 8 asked precisely this and named the `q = 16` cell as the
+gate; the answer is the comfortable one for Conjecture B′, not the fragile one.
+Combined with the positive cells, `X(9) ∩ [9,19] = {9,11,13}` exactly.
+
+Note that `q = 16` and `q = 19` both satisfy `3 \| q-1`, so the cyclic-cubic
+carrier that produces the exceptional orbit at `q = 13` is *admissible* at both
+and fires at neither.  The full census confirms what the 2026-08-30 stratum
+sweep could only show on the `S_3`-fixed locus: at those fields there is no
+exceptional deep hole anywhere in `PG(8,q)`, with or without cyclic symmetry.
+That is the exact upgrade from stratum-only to full-space evidence that item 2
+was for.
+
+## 5. The cyclic-pullback carriers (item 3, and what it settled)
+
+2026-08-30 §5.3f left Conjecture D′ with one escape clause — some `(r,m)` pairs
+carry nothing, `(10,7)` being the only known instance — and mystery-ledger
+item 6 with one open question: is the orbit stabilizer dihedral because `m` is
+odd, or because `m = 3`?  The queued discriminator was `m = 5` at `r = 13`.
+It is answered, and a cheaper cell answers the stabilizer question outright.
+
+### 5a. `m = 5` at `r = 13` is a second empty pair
+
+`r = 13` has `r-3 = 10`, so its cyclic-pullback carriers are `m ∈ {2,5,10}`,
+each requiring `m | q-1` and `q ≥ r-1 = 12`.  Exhaustive sweeps of the full
+stratum, every point evaluated exactly:
+
+| `r` | `m` | stratum | `q` | stratum points | max weight | deep | exceptional |
+|---:|---:|---|---:|---:|---:|---:|---:|
+| 13 | 5  | `{1,6,11}` | 16 | 273 | 12 | 2 | **0** |
+| 13 | 5  | `{1,6,11}` | 31 | 993 | 12 | 2 | **0** |
+| 13 | 10 | `{1,11}`   | 31 |  32 | 12 | 2 | **0** |
+
+`q = 16` is the least admissible field for `m = 5` (`5 | 15`, `16 ≥ 12`) and
+`q = 31` is the least admissible one of characteristic exceeding `d = 12`, where
+the syndrome is honestly a binary form of degree 12 and the factorisation
+`XY·G(X^5,Y^5)` is available.  Both are clean, and in both the stratum's only
+deep points are the two persistent ones it meets.  `q = 31` is also the least
+admissible field for `m = 10`, and it too is clean.
+
+So **`(13,5)` and `(13,10)` are empty pairs, joining `(10,7)`.**  The
+prediction recorded as 2026-08-30 mystery-ledger item 7 — that `(13,5)` would
+fire at `q = 16` because its stratum `{1,6,11}` has the same three-index,
+quadratic-`G` shape that fires at `(9,3)` — is **false**.  Shape alone does not
+predict firing.
+
+### 5b. The `(r,m) = (8,5)` carrier fires, and names the `r=8, q=11` orbit
+
+`r = 8` has `r-3 = 5`, so its only cyclic-pullback carrier is `m = 5`, on the
+two-index stratum `{1,6}` (`a = b = 1`, `G` linear), admissible when `5 | q-1`
+and `q ≥ 7`:
+
+| `r` | `m` | stratum | `q` | stratum points | deep | exceptional |
+|---:|---:|---|---:|---:|---:|---:|
+| 8 | 5 | `{1,6}` | 11 | 12 | 6 | **4** |
+| 8 | 5 | `{1,6}` | 16 | 17 | 2 | 0 |
+| 8 | 5 | `{1,6}` | 31 | 32 | 2 | 0 |
+| 8 | 5 | `{1,6}` | 41 | 42 | 2 | 0 |
+
+It fires at `q = 11`, the least admissible field, and at no larger one — D′'s
+field law holds for a fifth `(r,m)` pair.  The four exceptional stratum points
+are `(0,1,0,0,0,0,c,0)` for `c ∈ {2,5,6,9}`, i.e. the binary septics
+
+```text
+s = X Y ( Y^5 + c X^5 ),      c ∈ {2,5,6,9} ⊂ F_11^* .
+```
+
+The five classes of `F_11^*/(F_11^*)^5` are `{1,10}, {2,9}, {4,7}, {3,8},
+{5,6}`, and `{2,5,6,9} = {2,9} ∪ {5,6}` is exactly a union of two of them —
+Conjecture E′'s cut, now confirmed on a two-index carrier as well as on the
+three-index ones.  Each has apolar degree 4 with a one-dimensional kernel
+spanned by the quartic `x^2` (root type "double at 0 plus double at ∞"), so
+there is a unique apolar quartic and it is not split squarefree.
+
+Independent Python (definition-level weight, independent orbit closure)
+confirms: orbit size 264 in `PGL_2(11)` of order 1320, stabilizer of order 5
+with element orders `{1,5,5,5,5}`, minimal-support points exactly those four,
+weight 7 with minimal spanning set `{0,1,2,3,5,7,8}`.
+
+**This names the orbit that 2026-08-30 mystery-ledger item 3 left
+undescribed.**  The three exceptional orbits at `r = 8, q = 11` have sizes
+`264, 1320, 1320` and stabilizer orders `5, 1, 1`; the 264 one is the `m = 5`
+cyclic-quintic carrier above.  The two regular orbits remain unidentified and
+are invisible to every stratum sweep, exactly as 2026-08-30 §5.3f's scope note
+says.
+
+### 5c. The stabilizer is not governed by the parity of `m`
+
+Stabilizers of carrier orbits, all computed independently in Python:
+
+| `(r,q,m)` | shape of `G` | orbit(s) | stabilizer | stratum points per orbit |
+|---|---|---|---|---:|
+| `(9,13,3)`  | quadratic | one, size 364 | `S_3`, order 6 — dihedral | 4 |
+| `(11,13,4)` | quadratic | two, size 546 | `C_4`, order 4 — cyclic | 6 |
+| `(8,11,5)`  | linear    | one, size 264 | `C_5`, order 5 — cyclic | 4 |
+
+`m = 5` is odd and its stabilizer is **cyclic**, so the reading recorded as
+mystery-ledger item 6 — "the involution `t ↦ μ/t` stabilises carrier points only
+in the odd case" — is **false**.  There is no odd/even dichotomy: `m = 3` is
+simply the one carrier tested whose stabilizer is dihedral.
+
+The mechanism is visible in the orbit counts and needs no new computation.  The
+subgroup of `PGL_2(q)` preserving the stratum is the normaliser `N` of the
+diagonal torus, dihedral of order `2(q-1)`, and every carrier orbit's stabilizer
+is `Stab_N(s)`, which always contains the order-`m` torus element.  Counting
+`|N| / |O ∩ stratum|` reproduces each row: `24/4 = 6` at `(9,13,3)`,
+`24/6 = 4` at `(11,13,4)`, `20/4 = 5` at `(8,11,5)`.  So the stabilizer is the
+cyclic group `μ_m` in general and doubles to dihedral order `2m` exactly when
+some involution `t ↦ μ/t` fixes `s`, i.e. when the carrier polynomial `G` is
+self-reciprocal up to the torus action.  That happens at `(9,13,3)` and not at
+the other two; it is a condition on `G`, not on the parity of `m`.
+
+## 9. Evidence bundle, replay, and trusted boundary
+
+### Task-owned files (all committed)
+
+```text
+notes/2026-08-31-c1018-prs-deephole-conjecture.md   this report
+notes/2026-08-31-c1018-prs-certificate.py           certificate builder / checker
+notes/2026-08-31-c1018-prs-certificate.json         compact certificate, one record per cell
+notes/2026-08-30-c1018-prs-helper.py                independent Python verifier (extended
+                                                    to read the new driver's JSON schema)
+ergodis-private/src/bin/c1018_prs_census.rs         parallel u64 census + stratum driver
+ergodis-private/src/bin/c1018_prs_deephole.rs       2026-08-30 driver (ported onto the core
+                                                    by a concurrent session; unchanged here)
+```
+
+Bulk per-cell JSON lives outside the repository under
+`~/.cache/ergodis/c1018/prs/`; the committed certificate folds every
+load-bearing field of every cell together with the SHA-256 and byte count of the
+file it came from, so no claim in this report rests on an untracked file.
+
+### Replay
+
+```bash
+cd ~/src/othello/ergodis-private
+cargo build --release --bin c1018_prs_census --bin c1018_prs_deephole
+C=~/.cache/ergodis/c1018/prs && mkdir -p $C
+
+# a full PG(r-1,q) census cell
+./target/release/c1018_prs_census --r 9 --q 19 --max-reps 16 --out $C/r9-q19.json
+
+# the same cell through the 2026-08-30 driver, where it fits in u32 and 2 GB
+./target/release/c1018_prs_deephole --r 8 --q 13 --max-reps 16
+
+# a carrier-stratum sweep
+./target/release/c1018_prs_census --r 13 --q 31 --stratum-mod 5 --stratum-class 1 \
+  --max-reps 512 --out $C/r13-m5-q31.json
+
+# pin the exact-rank algorithm, to cross-check kernel enumeration against
+# subset enumeration on the same cell
+./target/release/c1018_prs_census --r 8 --q 13 --rank-mode kernel
+./target/release/c1018_prs_census --r 8 --q 13 --rank-mode subset
+
+# independent Python re-derivation from the definition of the coset weight
+cd ~/src/othello
+python3 notes/2026-08-30-c1018-prs-helper.py verify 19 9 $C/r9-q19.json
+
+# rebuild / re-check the committed certificate
+python3 notes/2026-08-31-c1018-prs-certificate.py build $C \
+  notes/2026-08-31-c1018-prs-certificate.json
+python3 notes/2026-08-31-c1018-prs-certificate.py check $C \
+  notes/2026-08-31-c1018-prs-certificate.json
+```
+
+### What the computation certifies, and what it does not
+
+* **Certified.**  For each census cell, the exact NRC rank `w(s)` of every point
+  of `PG(r-1,q)`, hence the exact covering radius, the exact number of deep
+  projective directions, the exact `PGL_2(q)`-orbit decomposition of the deep
+  set, and the exact split of that set by catalecticant rank.  Arithmetic is
+  exact in `F_q` throughout (table-driven `SmallField`, no floating point, no
+  modular reduction outside the field).  Enumeration is complete: the run aborts
+  unless the weight histogram sums to the exact point count of the space.
+* **Certified for a stratum sweep.**  The same quantities over the named
+  arithmetic-progression stratum, exhaustively.  Nothing outside that stratum.
+* **Not certified.**  Anything about a field or redundancy not listed.  A
+  stratum sweep sees only orbits whose stabilizer contains the corresponding
+  cyclic group; it cannot show `q ∉ X(r)`.
+* **Trusted boundary of the checker.**  The Ergodis core's `SmallField`
+  (irreducibility test and arithmetic tables), `ProjectiveIndex` (rank/unrank of
+  `PG(d,q)`), and the standard library's atomics.  The exact-rank criterion
+  itself is the Hankel/apolarity equivalence of 2026-08-30 §1, which the Python
+  verifier does *not* assume: it decides `w(s)` from the definition, as the
+  least number of parity-check columns whose `F_q`-span contains the syndrome,
+  by Gaussian rank.
+
