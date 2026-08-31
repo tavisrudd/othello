@@ -59,6 +59,16 @@ as each coherent tranche lands.
    anchor evaluation. Current next slice is closing the remaining substantive
    sparse-scheduler, ordered-front, and ZDD allocation/growth failures rather
    than mistaking an incomplete registry for compliance.
+   Sparse scheduling has begun its substantive repair: because a layer's new
+   witness nodes cannot yet have descendants, the solver now compacts exactly
+   the nodes referenced by the Pareto-retained frontier before publishing the
+   layer. This removes 2.04% of instructions on a 688,212-state case and 2.40%
+   on a 4,144,127-state case at identical transition counts and checksum, with
+   effectively unchanged RSS. Cycles were noisy on the shared host and no
+   cycle-speedup claim is made. A side-predecessor representation that cut
+   instructions further but raised RSS about 22% was measured and rejected.
+   Next: move layer storage into a reusable two-front workspace so allocation
+   is cold/planned rather than performed during live-front construction.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

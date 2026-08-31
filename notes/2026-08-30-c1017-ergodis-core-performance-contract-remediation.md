@@ -184,6 +184,28 @@ exist. Their counter rows remain open. The remaining allocation failures are
 therefore concentrated in sparse scheduling, frozen ordered-resource fronts,
 and growing ZDD operations instead of being hidden by census omissions.
 
+Sparse-scheduler witness retention now uses the layer boundary as a theorem
+boundary. A witness born while processing demand `d` points only to an earlier
+layer, and no layer-`d+1` child exists before the Pareto frontier is published.
+The retained states therefore name the complete live subset: the solver copies
+those nodes down in one sequential pass, rewrites the state IDs, and truncates
+all dominated intermediate improvements without a remap table. Exact result,
+witness, transition count, and peak-front parity pass in sequential, property,
+dense-fallback, and Rayon tests.
+
+Against the retained pre-change binary on
+`scheduler-grid:flat:8:5:12:8:12345`, the exact 10,383,904 transitions and
+688,212-state peak are unchanged while instructions fall from 4.123572B to
+4.039575B (2.04%). On `scheduler-grid:flat:10:4:12:10:12345`, exact work is
+79,449,511 transitions with a 4,144,127-state peak and instructions fall from
+34.768097B to 33.933860B (2.40%). Peak RSS is effectively flat (about 88 MiB
+and 545 MiB respectively). The host was busy enough that cycle counts were not
+stable, so no wall or cycle speedup is claimed. An earlier packed predecessor
+side vector removed 3.41% of instructions but increased the 688k-state RSS
+from about 88 MiB to 107 MiB and was rejected. The outstanding scheduler gate
+is the reusable two-front/capacity plan needed to move all live-front
+allocation out of the solve region.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

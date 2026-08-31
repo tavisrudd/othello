@@ -83,9 +83,9 @@
       "id": "sparse-scheduler",
       "source": "papers/complete-repair-ports/ergodis/src/scheduler.rs",
       "allocation": {"status": "open", "reason": "The adaptive sparse solve path still lacks a complete hot-loop allocator boundary."},
-      "layout": {"status": "open", "reason": "Sparse state, load-pool, and witness records are not fully asserted."},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/scheduler.rs"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/scheduler.rs"]},
-      "single_thread_counters": {"status": "open", "reason": "No retained counter A/B is registered."},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "parallel_counters": {"status": "open", "reason": "No retained parallel counter A/B is registered."},
       "contention": {"status": "open", "reason": "Parallel ownership and false-sharing evidence is not registered."}
     },

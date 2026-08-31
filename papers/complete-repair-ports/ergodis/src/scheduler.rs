@@ -601,6 +601,8 @@ impl WeightedRepairProblem {
         }
 
         for (demand, family) in self.families.iter().copied().enumerate() {
+            let demand = u32::try_from(demand).map_err(|_| SchedulerError::TooLarge)?;
+            let layer_witness_start = witnesses.len();
             let mut updated = Vec::with_capacity(states.len());
             let mut updated_packed = dense_packed
                 .as_ref()
@@ -698,7 +700,7 @@ impl WeightedRepairProblem {
                         u32::try_from(witnesses.len()).map_err(|_| SchedulerError::TooLarge)?;
                     witnesses.push(ScheduleWitnessNode {
                         parent: state.witness,
-                        demand: u32::try_from(demand).map_err(|_| SchedulerError::TooLarge)?,
+                        demand,
                         option,
                         repairs,
                     });
@@ -803,6 +805,22 @@ impl WeightedRepairProblem {
                 }
                 loads = compact_loads;
             }
+            // Every witness born in this layer points only into earlier
+            // layers, and no later-layer child exists yet. Retained states
+            // therefore identify the complete live subset, which can be
+            // compacted in place without a remap table.
+            let mut next_witness = layer_witness_start;
+            for state in &mut states {
+                let witness = state.witness as usize;
+                if state.witness == NONE || witness < layer_witness_start {
+                    continue;
+                }
+                witnesses[next_witness] = witnesses[witness];
+                state.witness =
+                    u32::try_from(next_witness).map_err(|_| SchedulerError::TooLarge)?;
+                next_witness += 1;
+            }
+            witnesses.truncate(next_witness);
             peak_pareto_states = peak_pareto_states
                 .max(u32::try_from(states.len()).map_err(|_| SchedulerError::TooLarge)?);
         }
