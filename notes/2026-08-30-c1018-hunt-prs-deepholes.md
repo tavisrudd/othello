@@ -737,39 +737,64 @@ Replacing Conjecture D:
 D′ is consistent with every cell above.  Its weakest point is the escape clause
 in the last sentence, which `(10,7)` forces and which nothing here explains.
 
-#### Do the closed invariant conditions generalize?  No.
+#### Do the closed invariant conditions generalize?  Yes, in refined form.
 
-At `(9,13,m=3)` the four exceptional points were cut exactly by `s_4/s_1` a cube
-together with `s_4^2/(s_1 s_7) = 5`.  The natural generalization to a
-three-index carrier `{1, 1+m, 1+2m}` is `c = s_{1+m}/s_1` in `(F_q^*)^m` and
-`u = s_{1+m}^2/(s_1 s_{1+2m})` a fixed constant; both `c` (modulo `m`-th powers)
-and `u` are genuine invariants of the torus and the involution at any `m`.
+An earlier draft of this subsection recorded the conditions as *failing* at the
+quartic carrier.  That was a partial-data error: only 8 of the 12 exceptional
+points were then available (the driver's example cap) and the orbit
+decomposition had not been computed.  The completed independent run supplies
+both and reverses the verdict.  The record of the correction is kept here
+deliberately.
 
-Tested at `(11, 13, m=4)`, where `(F_13^*)^4 = {1,3,9}`, on the exhibited
-exceptional points:
+At `(9,13,m=3)` the four exceptional points were cut by `s_4/s_1` a cube
+together with `s_4^2/(s_1 s_7) = 5`.  For a three-index carrier
+`{1, 1+m, 1+2m}` the natural invariants are
 
 ```text
-(s_1,s_5,s_9)   c    c ∈ 4th powers    u    u^2
-( 1, 1, 4)      1         yes          10    9
-( 1, 1, 8)      1         yes           5   12
-( 1, 2, 6)      2         no            5   12
-( 1, 3, 7)      3         yes           5   12
-( 1, 3,10)      3         yes          10    9
-( 1, 4,12)      4         no           10    9
-( 1, 5, 5)      5         no            5   12
-( 1, 6, 2)      6         no            5   12
+c = s_{1+m} / s_1        well defined in  F_q^* / (F_q^*)^m
+u = s_{1+m}^2 / (s_1 s_{1+2m})     absolutely invariant.
 ```
 
-Both conditions fail: `c` lies in the fourth powers for some exceptional points
-and not others, and `u` takes two values, `5` (order 4) and `10` (order 6),
-rather than one.  **The `(9,13)` cut does not generalize verbatim** — it is
-specific to the cubic carrier, where the stratum happens to be cut by a single
-class condition plus a single value.  The quartic carrier's exceptional set is
-three times larger (12 against 4) and is not a single class.  Pinning its exact
-cut needs the full 12-point list; only 8 are exhibited above, because the
-driver's example cap is 8 and the rebuild that would raise it is blocked (see
-below).  The negative is unaffected: counterexamples to both conditions already
-appear among the 8.
+Independent Python, computing weights from the definition, finds **exactly 12**
+exceptional points at `(11,13,m=4)` — matching the driver's count, an
+independent cross-check of that cell — namely
+
+```text
+(s_1,s_5,s_9):  (1,1,4) (1,1,8) (1,2,6) (1,3,7) (1,3,10) (1,4,12)
+                (1,5,5) (1,6,2) (1,9,11) (1,9,12) (1,10,10) (1,12,4)
+```
+
+Orbit decomposition under `PGL_2(13)`: the 12 points are **exactly two orbits,
+each of size 546, each with stabilizer of order 4** — cyclic `C_4`, matching the
+carrier's `m = 4`, just as the `m = 3` carrier had the order-6 stabilizer `S_3`.
+And `u` is a perfect orbit invariant:
+
+| orbit | size | stabilizer | stratum points | `u` | `c` values |
+|---|---:|---:|---|---:|---|
+| I  | 546 | 4 | `(1,1,4) (1,3,10) (1,4,12) (1,9,12) (1,10,10) (1,12,4)` | 10 | `{1,3,4,9,10,12}` |
+| II | 546 | 4 | `(1,1,8) (1,2,6) (1,3,7) (1,5,5) (1,6,2) (1,9,11)`      | 5  | `{1,2,3,5,6,9}` |
+
+The `c` sets are unions of classes in `F_13^*/(F_13^*)^4`, whose four classes are
+`C_0 = {1,3,9}`, `C_1 = {2,5,6}`, `C_2 = {4,10,12}`, `C_3 = {7,8,11}`:
+orbit I takes `C_0 ∪ C_2`, orbit II takes `C_0 ∪ C_1`, and `C_3` occurs in
+neither.  So each orbit meets the stratum in a set cut by a fixed value of `u`
+together with a union of `m`-th power classes of `c` — which is exactly the
+`(9,13)` cut, with the class count scaling: at `m = 3` the single orbit took one
+of the three cube classes (4 points), at `m = 4` each orbit takes two of the
+four fourth-power classes (6 points).
+
+> **Conjecture E′ (carrier cut).**  Each exceptional orbit of a three-index
+> cyclic carrier meets its stratum in the set determined by one value of
+> `u = s_{1+m}^2/(s_1 s_{1+2m})` together with a union of classes of
+> `c = s_{1+m}/s_1` in `F_q^*/(F_q^*)^m`; `u` separates the orbits, and the
+> orbit stabilizer is the cyclic group of order `m` (dihedrally extended when
+> `m` is odd, as at `m = 3`).
+
+Neither invariant alone suffices at either carrier: at `m = 4`, `u = 5` admits
+12 stratum points against the orbit's 6, and a single `c` class admits 3.
+Also note the stabilizer distinction the data force — order 6 (`S_3`, dihedral)
+at `m = 3` against order 4 (`C_4`, cyclic) at `m = 4` — so the involution
+`t ↦ μ/t` stabilizes individual carrier points only in the odd case.
 
 #### Scope limit, restated
 
@@ -798,8 +823,10 @@ and `tests/contextual_allocations.rs` are all dirty from a concurrent session
 and the crate is mid-edit.  This is **foreign work in a read-only tree and was
 not touched**; it is raised here per cross-lane hygiene.  All results in this
 subsection were produced by the binary built before the breakage, which is why
-the exceptional-example cap stayed at 8.  Nothing in this report depends on the
-raised cap.
+the driver's exceptional-example cap stayed at 8.  That cap is the reason an
+earlier draft mis-read the quartic carrier; the independent Python sweep
+supplied the full 12-point list and the orbit decomposition without needing the
+rebuild, so nothing in this report now depends on it.
 
 ### 5.4 Independent verification
 
@@ -815,6 +842,11 @@ raised cap.
   `{2}` alone at `q = 13, 16, 17, 19` — every deep orbit persistent — while at
   `q = 11` both 2 and 3 occur, confirming that the `q = 11` exceptional orbits
   are genuinely outside `P_8`.
+* Independent Python re-derivation of the `(11,13,m=4)` carrier: the
+  definition-level sweep returns **exactly 12** exceptional stratum points,
+  matching the driver's count, with the same coordinates; an independent orbit
+  closure then splits them into two `PGL_2(13)`-orbits of size 546 with
+  stabilizer order 4 (§5.3f).
 * Ergodis rank cross-check (`--ergodis-crosscheck`, `r=5, q=11`): 116 Hankel
   ranks computed by `Matrix::canonical_row_basis_field::<Prime<11>>` agreed
   with the driver's own Gaussian elimination in every case.
@@ -881,7 +913,8 @@ pruning, exact `F_q` arithmetic throughout.
 | B′ (`q_0(r) ≤ 23` for every `r`) | survives; replaces B | every cell in §5.1--5.3c, plus the committed R5--R7 classifications; additionally supported, on the `S_3`-fixed stratum only, at `r=9` for `q ∈ {16,…,31}` and `r=6` for `q ∈ {9,…,64}` (§5.3d--e) |
 | D (cyclic-cubic stratum recurs at exactly one field per `r ≡ 0 mod 3`) | **FALSIFIED** at `r=10` and `r=11` (§5.3f): the mod-3 stratum there does not reach the covering radius at any field | mod-3 sweeps at `r=10` over 5 fields and `r=11` over 8 fields |
 | D′ (carriers are `XY·G(X^m,Y^m)` with `m \| r-3` and `m \| q-1`, one field each, some pairs empty) | **new**; replaces D; survives every cell, with `(r,m)=(10,7)` as the empty instance | exhaustive stratum sweeps: `r=6` (13 fields), `r=9` for `m=2,3,6` (15 cells), `r=10` for `m=3,7` (13 cells), `r=11` for `m=2,3,4,8` (23 cells), `r=12` (3 fields) |
-| E (the `(9,13)` invariant cut generalizes to other carriers) | **FALSIFIED** at `(11,13,m=4)`: `s_5/s_1` is a 4th power for some exceptional points and not others, and `u` takes two values | 8 exhibited of the 12 exceptional points |
+| E (the `(9,13)` invariant cut generalizes verbatim: one `m`-th power class plus one `u`) | **FALSIFIED** at `(11,13,m=4)`: two `u` values occur, and each orbit spans two classes | all 12 exceptional points, both orbits |
+| E′ (refined cut: one `u` per orbit plus a union of `c`-classes in `F_q^*/(F_q^*)^m`; stabilizer cyclic of order `m`) | **new**; replaces E; survives at both carriers tested | `(9,13,m=3)`: 1 orbit, 4 stratum points, 1 cube class, stabilizer `S_3`.  `(11,13,m=4)`: 2 orbits of size 546, 6 stratum points each, 2 classes each, stabilizer `C_4` |
 | C (band squeezed shut) | monotonicity half **FALSIFIED** (`13 ∈ X(9) \ X(8)`); `X(4) = ∅` and `X(8) ∩ [8,19] = {8,9,11}` stand as new results | `X(4) = ∅` exhaustive over 12 fields `4 ≤ q ≤ 64`; `X(8) ∩ [8,19] = {8,9,11}` exact; `X(9) ⊇ {9,11,13}` exact; `X(8) ∩ [23,42]`, `X(9) ∩ [16,52]`, `X(10)` untested |
 
 Conjecture B, restricted to `r = 8`, remains the sharpest new statement: it says the
@@ -1012,16 +1045,17 @@ only route back toward MDS, is untouched here and remains untouched.
    while the stratum's dimension does not — but that is a heuristic, not an
    argument, and it does not explain why the *first* admissible field always
    works when the carrier is nonempty.
-6. **The class condition does not survive a change of carrier.**  At
-   `r = 9, q = 13` (cubic carrier) the exceptional points have `s_4/s_1` a cube;
-   at `r = 6, q = 7` they have `s_4/s_1` a non-cube; at `r = 11, q = 13`
-   (quartic carrier) `s_5/s_1` is a fourth power for some and not others, and
-   the second invariant takes two values instead of one (§5.3f).  Settled by
-   the 2026-08-31 pass: the clean two-condition cut is a property of the cubic
-   carrier, not of the mechanism.  Open: the actual cut for the quartic carrier.
-   Evidence gap: the full 12-point list at `(11,13,m=4)`, which needs the
-   driver's example cap raised — blocked while the Ergodis core is mid-edit
-   (§5.3f).  Cheap once the core compiles again.
+6. **The carrier cut generalizes, but the stabilizer type changes with `m`.**
+   Settled by the 2026-08-31 pass: at `(11,13,m=4)` the 12 exceptional points
+   are exactly two `PGL_2(13)`-orbits of size 546, `u` separates them, and each
+   meets the stratum in a union of fourth-power classes of `c` — the `(9,13)`
+   cut in refined form (§5.3f, Conjecture E′).  A first reading of partial data
+   recorded this as a falsification; the completed independent run reversed it,
+   which is a standing caution against calling a structure absent from a capped
+   example list.  Open: the stabilizer is dihedral `S_3` at `m = 3` but cyclic
+   `C_4` at `m = 4`, so the involution `t ↦ μ/t` fixes carrier points only for
+   odd `m`.  Nothing here explains why, and `m = 5` at `r = 13` would be the
+   first test that separates "odd" from "3".
 7. **Redundancy ten has no cyclic-pullback carrier, and nothing explains why.**
    `r-3 = 7` is prime, so `m = 7` is the only candidate; it yields zero
    exceptional points at all eight fields swept, including the two least

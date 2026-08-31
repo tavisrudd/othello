@@ -144,7 +144,14 @@ report.
   mechanism** (strata {1,5,9} and {1,3,5,7,9}); the (9,13) two-condition
   invariant cut is specific to the cubic carrier. Replaced by D′ (+ new
   E) in the conjecture table; stratum-sweep scope limit stated (regular
-  orbits invisible). **Foreign issue for the morning: the Ergodis core
+  orbits invisible). **Correction (landed ~03:10):** the invariant
+  conditions DO generalize — the completed independent sweep shows the
+  12 points at (11,13,4) are exactly two PGL₂(13)-orbits of size 546
+  with C₄ stabilizers, separated perfectly by u=s₅²/(s₁s₉) (values 10
+  and 5), each a union of fourth-power classes — the (9,13) cut in
+  refined form (Conjecture E′; E retained as falsified verbatim).
+  Stabilizer pattern (S₃ at m=3, C₄ at m=4) predicts m=5 at r=13 as the
+  odd/cubic discriminating test. **Foreign issue for the morning: the Ergodis core
   no longer compiles** — css_distance.rs mid-edit from a concurrent
   session (three undefined BOUND_PULSE_* constants); campaign results
   all come from pre-breakage binaries, core untouched by us.
