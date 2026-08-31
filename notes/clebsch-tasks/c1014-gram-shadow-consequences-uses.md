@@ -165,9 +165,23 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
   accident. Geometric frame: \(C_m\) is the pullback of one fixed double
   cover along the power map; the newform/Sato–Tate results are the
   \(p-1>2m\) corner; constancy lives only in \(2m<p\lesssim16m^2\).
-  New prediction opened: the u-line census has minimal period
-  \(\mathrm{lcm}(p-1,p+1)\) — it sees the non-split torus, so a second,
-  unsearched stratum family indexed by \(r\bmod(p+1)\) should exist.
+  **Non-split family found and classified (2026-08-30, torus report
+  below):** period exactly \(\mathrm{lcm}(p-1,p+1)\) proved; the
+  Plancherel dual is a trace-one Gauss sum (Jacobi-sum analogue,
+  magnitudes \(p,\sqrt p,1\) exactly); 319 constant non-split strata at
+  \(5\le p<300\), all classified — two identically constant infinite
+  families (including \(m\equiv(p+1)/2\): identically \(-1\) with closed
+  form), torus power-residue families (the \(n=3\) row unconditionally
+  infinite), Weil-closed fixed-exponent families, and exactly one
+  sporadic \((p,i,j)=(19,7,3)\) (family proved finite). The two tori are
+  quadratically correlated: \(z^{(p+1)/2}=\chi(\nu)\). **Reconstruction
+  gate: definitive no, proved** — 4-set cross-ratios are
+  \(\mathbf F_q\)-rational, non-split \(u\) carry color \(+1\) over
+  \(\mathbf F_{p^2}\) for every \(m\), and the prime-power scan
+  \(q\le1000\) matches the \(\lambda\)-line taxonomy exactly; one wording
+  refinement for the manuscript (Baer stratum is the first of the
+  \(r\equiv0\bmod(p+1)\) classes). No torus mirror of the
+  \((17,6),(17,10),(47,30)\) family exists (\(p<400\)).
 - Open items after the Chevalley–Weil pass ((a,b,c) derivation is closed):
   the \(m=3\) bias \(\equiv1\bmod4\) rigidity; the unconditional
   finiteness of the sporadic families over all parameter corners (stated
@@ -241,6 +255,10 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
 
 ## Session reports
 
+- `../2026-08-30-c1014-nonsplit-torus-strata.md` — trace-one Gauss-sum
+  master formula, period theorem, 319-stratum classification, sporadic
+  \((19,7,3)\), reconstruction-gate clearance. Script:
+  `c1014_nonsplit_torus.py`.
 - `../2026-08-30-c1014-dickson-strata-derivation.md` — periodicity over
   \(\mathbf Z\), master Jacobi-sum formula, 15-class constant-stratum
   classification, \((47,30)\) finite family, pullback geometry, non-split
