@@ -2,9 +2,10 @@
 
 **Date**: 2026-08-31
 **Scope**: commercial prototype, not a math task. All work confined to
-`ergodis-private/src/bin/certiis.rs` and `ergodis-private/python/certiis_benchmark.py`.
-No edit to the Ergodis core, to `ergodis-private/src/lib.rs`, `Cargo.toml`, or
-`src/hall_core.rs`.
+`ergodis-private/src/bin/certiis.rs` and three scripts under `ergodis-private/python/`
+(`certiis_benchmark.py`, `certiis_summarise.py`, `certiis_core_audit.py`). No edit to the
+Ergodis core, to `ergodis-private/src/lib.rs`, `ergodis-private/Cargo.toml`, or
+`ergodis-private/src/hall_core.rs`; `hall_core` is called exactly as it stands.
 
 ## Verdict
 
@@ -65,7 +66,7 @@ prescribed row or column sums, pairwise inner products, task conflicts.
 Quadratic coupling is checked first, so an instance carrying both kinds of structure is
 named by the harder one.
 
-The boundary is stated exactly, because it is where the honesty of the product lives:
+The boundary is stated exactly, because it is where the value of the product lives:
 
 - Task-side *exact demands* plus resource-side *upper bounds* only. Feasibility is a
   max-flow on `source -> task (d_t) -> eligible resource (inf) -> sink (c_r)`. Min-cut
@@ -330,9 +331,11 @@ difference is that certiis removes it and CP-SAT does not.
 
 ### Where the incumbent wins, and why it is not a win
 
-On the ten multi-shortage instances with three planted bottlenecks of sizes 4, 6 and 9,
-CP-SAT returns a **4-task** core against our 19 tasks. On raw size the incumbent wins by
-almost 5x, and that is worth stating plainly.
+On the five multi-shortage instances with three planted bottlenecks of sizes 4, 6 and 9 and
+no cascade, CP-SAT returns a **4-task** core against our 19 tasks. On raw size the incumbent
+wins by almost 5x there, and that is worth stating plainly. (On the five cascade variants of
+the same instances its core is 43 tasks against our 19, so the size win is specific to the
+no-cascade case.)
 
 It is not a usable win. An explanation names a set of tasks; the test that matters is
 whether removing exactly those tasks restores feasibility. `certiis_core_audit.py` applies
@@ -413,7 +416,7 @@ remembering before quoting any of them as a product number.
 - **The classifier is syntactic.** It reads declared couplings and the `distinct` flag. An
   instance that encodes a pairwise conflict by some other means — say by pre-filtering
   eligibility in a way that only makes sense jointly — will be classified as a matching and
-  certified. The decline is only as good as the honesty of the input encoding.
+  certified. The decline is only as good as the faithfulness of the input encoding.
 
 ### Problem shapes it will never cover
 
