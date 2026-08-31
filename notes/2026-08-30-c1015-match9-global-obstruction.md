@@ -7,13 +7,17 @@ transversal one-factorization of (K_{10}) is a pencil, over every field.
 For the regular matching design this forces every canonical
 one-factorization line, after which Nagy's theorem gives the exact field
 boundary. The nine-point extension and broader priority audit remain open;
-the closest-seed forward-citation sweep is closed. No manuscript, summary,
+the geometric closest-seed and graph-shadow bounded sweeps are closed. No
+manuscript, summary,
 mirror, formal, release, or Ergodis source edits are authorized.
 
-Literature depth for the sources added or reused in this report: **two were
-read at full-text depth** (Nagy and Korchmaros--Pace--Sonnino); Tohaneanu--Xie,
-Dinitz--Garnick--McKay, Gelling, Ziegler, and Kiss--Korchmaros--Romaniello--
-Smaldore were read at the explicitly recorded partial depths below. The
+Literature depth for the sources added or reused in this report: **eight were
+read at full-text depth** (Nagy; Korchmaros--Pace--Sonnino; Dinitz--Dukes--
+Stinson; Meszka; Kaski--de Souza Medeiros--Ostergard--Wanless; Venkaiah--
+Ramanjaneyulu--Jampala--Prasad; Allsop; and the arXiv version of Erskine--
+Griggs). Tohaneanu--Xie, Dinitz--Garnick--McKay, Gelling, Ziegler,
+Kiss--Korchmaros--Romaniello--Smaldore, and the later published Erskine--Griggs
+passage were read at the explicitly recorded partial depths below. The
 priority verdict remains bounded and provisional.
 
 ## Starting point
@@ -701,6 +705,133 @@ with representative tables checked against page images; cache key
 `gelling:1973:k10`, SHA-256
 `64614781270098af2f1086df5e5684f9a2e98bb3661be35bef1e90243cee93a4`.
 The computation here does not import either classification.
+
+The graph-theoretic audit changes the priority statement for the exceptional
+class but not for the new proof mechanism. Dinitz--Dukes--Stinson,
+_Sequentially Perfect and Uniform One-Factorizations of the Complete Graph_
+(Electron. J. Combin. 12 (2005), R1, DOI `10.37236/1898`), explicitly says in
+Section 3 that one-factorization #1 in Gelling's list is a uniform
+one-factorization of (K_{10}) of type (4+6). Thus existence of the
+zero-Hamilton affine class, and even its uniform cycle type, is classical and
+must not be advertised as a new classification result. Read depth: `full
+text`, published version, all sections; cache key `10.37236/1898`, SHA-256
+`db08a69ac75f057aebb21556a7104bc8b7a6b90e0203fd01abf020a6f9200348`.
+The paper does not prove uniqueness of this class, derive the rooted Petersen
+system (2a), or discuss the Hamilton-pair graph or its ternary shadow.
+
+Meszka, _k-Cycle Free One-Factorizations of Complete Graphs_ (Electron. J.
+Combin. 16 (2009), R3, DOI `10.37236/92`), studies avoidance of a prescribed
+cycle length and records the uniform/perfect background, but contains no
+Hamilton-pair degree spectrum, fixed-factor contraction, Petersen operator,
+or modular potential code. Read depth: `full text`, published version, all
+sections; cache key `10.37236/92`, SHA-256
+`42d212e1e85e43b5de5f408ce48b204d4d4364e2904012b6ede03688c51df320`.
+
+Kaski--de Souza Medeiros--Ostergard--Wanless, _Switching in
+One-Factorisations of Complete Graphs_ (Electron. J. Combin. 21 (2014), P2.49,
+DOI `10.37236/3606`), is the strongest census-adjacent full-text check. It
+constructs four switching graphs through order twelve, characterizes perfect
+factorizations as factor-switching isolated vertices, and gives complete
+(K_{10}) switching-graph degree data. Its switching-graph degree is a degree
+between **isomorphism classes**, not the degree of a factor in the
+Hamilton-pair graph. It contains no assertion that the latter graph has no
+leaves and no Petersen potential or ternary-code calculation. Read depth:
+`full text`, published version, all sections; cache key `10.37236/3606`,
+SHA-256
+`075f23efc12609b42b17eeff5b775a48e60bc673a673f7623406f7de54ed2e52`.
+
+Venkaiah--Ramanjaneyulu--Jampala--Prasad, _Equivalence of Lower Bounds on the
+Number of Perfect Pairs_ (arXiv:1412.6793), studies the **maximum total number**
+of perfect pairs and product lower bounds. It does not impose or derive local
+degree restrictions inside a given factorization. Read depth: `full text`,
+arXiv v1, all sections; cache key `arXiv:1412.6793`, SHA-256
+`55d9e70e0e37d4e453d4fd760ce52aa3546445b7a8c4c53860250d59ee1ee579`.
+
+Allsop, _Cycles of Quadratic Latin Squares and Anti-perfect
+1-factorisations_ (J. Combin. Des. 31 (2023), 447--475; arXiv:2302.12942v3),
+proves that anti-perfect one-factorizations of (K_{2n}) exist exactly for
+(2n >= 8), and in Section 6 explicitly identifies Dinitz--Dukes Theorem 3.2 as
+the four-cycle criterion for one finite-field starter family. This makes the
+existence side of the K10 anti-perfect phenomenon emphatically classical, but
+again supplies neither a K10 uniqueness proof nor any of (2a)--(2f). Read
+depth: `full text`, arXiv v3, all sections; cache key `arXiv:2302.12942`,
+SHA-256
+`c65bb3421c3d8d11c8fab3ea71eec91f8a6880a6664b42061d3e09c205378f14`.
+
+There is also a concrete downstream correction opportunity. The indexed
+open-access text of Erskine--Griggs, _Cycle Switching in Steiner Triple Systems
+of Order 19_ (J. Combin. Des. 33 (2025), 195--204, DOI
+`10.1002/jcd.21975`), says in its discussion of the order-24 component that
+all but one of the 396 (K_{10}) one-factorizations exhibit both cycle types and
+that the sole exception is the perfect class. This omits the classical uniform
+type-(4+6) class just recorded by Dinitz--Dukes--Stinson. The relevant
+statement is absent from arXiv v1 and was added later. Read depth: `full text`
+for arXiv:2405.07750v1, all sections, cache SHA-256
+`b9980303ecfe56ebd43b404280ed4e974a578a6cb61ad83c0a617aaef4831152`;
+`partial` for the later published/open-repository version, exact K10 paragraph
+as indexed by the Open University repository and publisher metadata. The
+publisher and repository PDFs returned access denials, so the printed page
+image remains an explicit verification gap. The safe claim is therefore that
+the rooted theorem gives a direct proof of the missing second exception and a
+potential correction to recent downstream literature, not that it discovers
+the exception itself.
+
+The closest inaccessible source is Dinitz--Dukes, _On the Structure of Uniform
+One-Factorizations from Starters in Finite Fields_ (Finite Fields Appl. 12
+(2006), 283--300, DOI `10.1016/j.ffa.2005.05.008`). Publisher metadata and the
+abstract say that it gives general cycle-existence conditions and completely
+characterizes four-cycles in the Horton-starter family. The Crossref TDM
+endpoint returned metadata only and requires an API key for full text; the
+ScienceDirect PDF endpoint returned HTML and was rejected by the literature
+cache. Read depth: `metadata and abstract only`. Cameron, _Minimal
+Edge-Colourings of Complete Graphs_ (1975), the Mendelsohn--Rosa survey, and
+the Wallis survey/book were likewise not available at full-text depth. These
+are the principal reasons the negative verdict below remains bounded.
+
+Two exact forward-citation sweeps were run on 2026-08-30. For
+`10.37236/1898`, the independently returned counts were OpenAlex 33
+(`W2767999306`), Crossref 11, and Semantic Scholar 36. For
+`10.1016/j.ffa.2005.05.008`, the corresponding counts were OpenAlex 11
+(`W2004773548`), Crossref 9, and Semantic Scholar 19. Each service returned
+the matching seed title and identifier with HTTP success. The larger Semantic
+Scholar set was screened in each case over all returned titles, years,
+identifiers, and available abstracts. The mechanical discriminator was a
+claim about the cycle spectrum or perfect-pair degrees **inside one fixed
+one-factorization**, a K10 classification, a fixed-factor contraction, or a
+Petersen/code constraint. The promoted works were Meszka, Kaski et al.,
+Venkaiah et al., and Allsop; the remaining records concerned starter
+constructions, perfect-pair lower bounds in other settings, switching,
+orthogonal factorizations, or unrelated uses of the word factorization.
+
+The bounded topical sets were also recorded. OpenAlex
+`filter=title.search:uniform one-factorization` returned four records; all
+four were screened, with the two Dinitz papers promoted and the hypergraph and
+2025 product-of-cycles papers rejected by title/domain. OpenAlex search for
+the exact phrase `"Hamilton pair" one-factorization` returned one unrelated
+numerical-analysis record. The broader query `one-factorization Petersen
+ternary code` returned 65 records; all titles/domains were screened and none
+was a one-factorization result involving the Petersen contraction or the
+weight enumerator in (2f). Exact web searches for `Hamilton pair graph`,
+`number of perfect pairs`, `anti-perfect K10`, and the ([10,5,4]_3) weight
+enumerator promoted the sources above but found no predecessor for the local
+shadow consequences.
+
+Accordingly, the present bounded verdict is:
+
+- the affine/Steiner zero-Hamilton example and its uniform (4+6) cycle type
+  are classical;
+- its uniqueness among K10 factorizations is already implicit in the old 396
+  table, so the contribution is a short direct rooted proof and a correction
+  of a later omission, not a new census fact;
+- no checked source contains the Petersen potential formula (2d), the ternary
+  code (2f), the no-leaves theorem for the Hamilton-pair graph, or the
+  zero-or-three intersection theorem for two Hamilton partners.
+
+The last bullet is a provisional priority claim, suitable for planning and a
+carefully attributed literature paragraph but not yet for unqualified
+manuscript language. Semantic Scholar, OpenAlex, Crossref, and ordinary web
+search were covered. zbMATH's API returned an HTTP 502 proxy page;
+MathSciNet and Google Scholar were not covered.
 
 Nagy (2021) remains the exact priority ceiling after the pencil has been
 produced: his theorem assumes the Ree-unital line structure rather than
