@@ -98,17 +98,26 @@ as each coherent tranche lands.
    application variable count rather than the global 256-variable format
    limit, all hot records have asserted layouts, and a 256-level regression
    exercises the hard bound. The actual 12-level Ceph closure loop records
-   zero allocation, reallocation, and deallocation after setup. Seven paired
-   long runs preserve exact operations, nodes, checksum, and supports. On the
-   256-support fixture wall time is neutral (`candidate/baseline=1.006`,
-   `t=0.30`) and cycles are 1.013x higher (`t=0.62`), while branches and branch
-   misses fall 1.013x and 1.210x. On the deeper 4,096-support fixture the
-   bounded machine costs 1.017x cycles/wall but removes 1.015x branches and
-   1.084x branch misses. This small measured tax closes unbounded native-stack
-   dependence without changing algebraic work. Current next slice: run the
-   private registry's open-gate report against this new baseline and select
-   the remaining substantive application/orbit or cold-replay failure rather
-   than extending the census speculatively.
+   zero allocation, reallocation, and deallocation after setup. Node/link
+   arenas and the fixed unique table never grow in an operation; an
+   underestimated cold hint aborts without allocation and restarts through an
+   outlined geometric retry. Post-closure reliability analysis has a separate
+   cold phase boundary: if it needs derived nodes beyond the solve arena, it
+   grows and rebuilds outside the guarded closure, then restarts its iterative
+   DP. Seven paired final runs preserve exact operations, nodes, checksum, and
+   supports. The 256-support fixture improves cycles 1.036x (`t=2.42`) and
+   wall 1.039x (`t=2.01`) while removing 1.053x branches and 1.432x branch
+   misses. On the deeper 4,096-support fixture the point estimates improve
+   cycles 1.038x and wall 1.032x, but timing is noisy (`t=0.58/0.47`); branches
+   and branch misses fall 1.055x and 1.060x. Eleven isolated deep RSS pairs
+   measure 2,260 KiB baseline versus 2,616 KiB candidate: a 356 KiB text and
+   workspace cost, material proportionally but small in absolute terms. Raw
+   evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-zdd/generic-final-ab`. The private
+   registry now records 59 pass, 13 open, and 30
+   not-applicable cells. Current next slice: close the sparse scheduler's
+   parallel-counter and contention gates, the highest-severity remaining
+   solve-kernel evidence gap.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

@@ -82,7 +82,7 @@
     {
       "id": "sparse-scheduler",
       "source": "papers/complete-repair-ports/ergodis/src/scheduler.rs",
-      "allocation": {"status": "open", "reason": "The adaptive sparse solve path still lacks a complete hot-loop allocator boundary."},
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/scheduler.rs", "notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/scheduler.rs"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/scheduler.rs"]},
       "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
@@ -92,20 +92,20 @@
     {
       "id": "ordered-resource-front",
       "source": "papers/complete-repair-ports/ergodis/src/ordered_resource.rs",
-      "allocation": {"status": "open", "reason": "Workspace reuse tests do not yet cover the entire live-front solve boundary."},
-      "layout": {"status": "open", "reason": "Live and retained front records are not fully asserted."},
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/ordered_resource.rs", "notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/ordered_resource.rs"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/ordered_resource.rs"]},
-      "single_thread_counters": {"status": "open", "reason": "No retained counter A/B is registered."},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "parallel_counters": {"status": "na", "reason": "No public parallel front evaluator is exposed."},
       "contention": {"status": "na", "reason": "No public parallel front evaluator is exposed."}
     },
     {
       "id": "zdd-family-operations",
       "source": "papers/complete-repair-ports/ergodis/src/zdd.rs",
-      "allocation": {"status": "open", "reason": "Unique/memo tables can still grow inside public operations."},
-      "layout": {"status": "open", "reason": "Traversal and unique-table records are not fully asserted."},
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/applications.rs", "papers/complete-repair-ports/ergodis/src/zdd.rs", "notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/zdd.rs"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/zdd.rs"]},
-      "single_thread_counters": {"status": "open", "reason": "No retained counter A/B is registered."},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
       "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
     },

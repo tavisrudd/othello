@@ -280,6 +280,7 @@ pub struct ParetoWitness {
 }
 
 const _: () = assert!(std::mem::size_of::<ParetoWitness>() == 8);
+const _: () = assert!(std::mem::align_of::<ParetoWitness>() == 4);
 
 /// Canonical resource antichain retaining one concrete witness per point.
 #[derive(Clone, Debug, PartialEq, Eq)]

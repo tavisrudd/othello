@@ -418,7 +418,7 @@ pub fn ceph_xor_repair_family(
     let node_capacity_hint = memo_capacity_hint
         .saturating_mul(capacity_scale_tenths)
         .div_ceil(10);
-    ceph_xor_repair_family_with(
+    match ceph_xor_repair_family_with(
         coordinate_count,
         layers,
         target,
@@ -426,7 +426,69 @@ pub fn ceph_xor_repair_family(
         node_budget,
         node_capacity_hint,
         memo_capacity_hint,
-    )
+    ) {
+        Ok(family) => Ok(family),
+        Err(CephBuildError::Application(error)) => Err(error),
+        Err(CephBuildError::Capacity) => ceph_xor_repair_family_retry(
+            coordinate_count,
+            layers,
+            target,
+            &unavailable_mask,
+            node_budget,
+            node_capacity_hint,
+            memo_capacity_hint,
+        ),
+    }
+}
+
+#[cold]
+#[inline(never)]
+fn ceph_xor_repair_family_retry(
+    coordinate_count: usize,
+    layers: &[CephXorLayer],
+    target: usize,
+    unavailable: &[bool; 256],
+    node_budget: usize,
+    mut node_capacity_hint: usize,
+    memo_capacity_hint: usize,
+) -> Result<CephCompressedRepairFamily, ApplicationError> {
+    loop {
+        let next = node_capacity_hint.max(1).saturating_mul(2).min(node_budget);
+        if next <= node_capacity_hint {
+            return Err(ApplicationError::Budget {
+                budget: node_budget as u64,
+            });
+        }
+        node_capacity_hint = next;
+        match ceph_xor_repair_family_with(
+            coordinate_count,
+            layers,
+            target,
+            unavailable,
+            node_budget,
+            node_capacity_hint,
+            memo_capacity_hint,
+        ) {
+            Ok(family) => return Ok(family),
+            Err(CephBuildError::Application(error)) => return Err(error),
+            Err(CephBuildError::Capacity) => {}
+        }
+    }
+}
+
+enum CephBuildError {
+    Application(ApplicationError),
+    Capacity,
+}
+
+fn ceph_zdd_error(zdd: &Zdd<DirectMemo>, node_budget: usize) -> CephBuildError {
+    if zdd.capacity_exhausted() {
+        CephBuildError::Capacity
+    } else {
+        CephBuildError::Application(ApplicationError::Budget {
+            budget: node_budget as u64,
+        })
+    }
 }
 
 fn ceph_xor_repair_family_with(
@@ -437,7 +499,7 @@ fn ceph_xor_repair_family_with(
     node_budget: usize,
     node_capacity_hint: usize,
     memo_capacity_hint: usize,
-) -> Result<CephCompressedRepairFamily, ApplicationError> {
+) -> Result<CephCompressedRepairFamily, CephBuildError> {
     let group_coordinates = layers
         .iter()
         .map(|layer| layer.data.len() + 1)
@@ -451,7 +513,7 @@ fn ceph_xor_repair_family_with(
         for coordinate in std::iter::once(layer.parity).chain(layer.data.iter().copied()) {
             let coordinate = usize::from(coordinate);
             if seen[coordinate] {
-                return Err(ApplicationError::Shape);
+                return Err(CephBuildError::Application(ApplicationError::Shape));
             }
             seen[coordinate] = true;
             group_data.push(coordinate);
@@ -470,10 +532,10 @@ fn ceph_xor_repair_family_with(
         let root = if is_unavailable {
             EMPTY
         } else {
-            zdd.singleton(coordinate as u32)
-                .ok_or(ApplicationError::Budget {
-                    budget: node_budget as u64,
-                })?
+            let Some(root) = zdd.singleton(coordinate as u32) else {
+                return Err(ceph_zdd_error(&zdd, node_budget));
+            };
+            root
         };
         supports.push(root);
     }
@@ -489,21 +551,18 @@ fn ceph_xor_repair_family_with(
                 let mut product = UNIT;
                 for &source in group {
                     if source != destination {
-                        product = zdd.join(product, supports[source]).ok_or(
-                            ApplicationError::Budget {
-                                budget: node_budget as u64,
-                            },
-                        )?;
+                        let Some(next) = zdd.join(product, supports[source]) else {
+                            return Err(ceph_zdd_error(&zdd, node_budget));
+                        };
+                        product = next;
                     }
                 }
-                let combined =
-                    zdd.union(supports[destination], product)
-                        .ok_or(ApplicationError::Budget {
-                            budget: node_budget as u64,
-                        })?;
-                let minimal = zdd.minimal(combined).ok_or(ApplicationError::Budget {
-                    budget: node_budget as u64,
-                })?;
+                let Some(combined) = zdd.union(supports[destination], product) else {
+                    return Err(ceph_zdd_error(&zdd, node_budget));
+                };
+                let Some(minimal) = zdd.minimal(combined) else {
+                    return Err(ceph_zdd_error(&zdd, node_budget));
+                };
                 if minimal != supports[destination] {
                     supports[destination] = minimal;
                     changed = true;
@@ -1659,6 +1718,25 @@ mod tests {
         assert_eq!(answer.support_count, 1u64 << levels);
         assert!(!answer.zdd_storage_grew);
         assert_eq!(events, Default::default());
+    }
+
+    #[test]
+    fn compressed_ceph_reports_a_cold_retry_when_the_node_hint_is_too_small() {
+        let layers = parse_ceph_xor_layers(
+            8,
+            &["_cDD_cDD".into(), "cDDD____".into(), "____cDDD".into()],
+        )
+        .unwrap();
+        let mut unavailable = [false; 256];
+        unavailable[2] = true;
+        let (attempt, events) = crate::test_alloc::measure_allocations(|| {
+            ceph_xor_repair_family_with(8, &layers, 2, &unavailable, 10_000, 8, 64)
+        });
+        assert!(matches!(attempt, Err(CephBuildError::Capacity)));
+        assert_eq!(events, Default::default());
+        let answer = ceph_xor_repair_supports_compressed(8, &layers, 2, &[2], 10_000).unwrap();
+        assert_eq!(answer.support_count, 1);
+        assert!(!answer.zdd_storage_grew);
     }
 
     #[test]

@@ -23,24 +23,32 @@ fn node_key(variable: u32, low: u32, high: u32) -> u64 {
     u64::from(variable) | (u64::from(low) << 8) | (u64::from(high) << 32)
 }
 
+#[repr(C)]
 #[derive(Debug)]
 struct UniqueTable {
     buckets: Vec<u32>,
     links: Vec<u32>,
-    grow_at: usize,
+    _rehash_at: usize,
 }
 
+const _: () = assert!(std::mem::size_of::<UniqueTable>() == 56);
+const _: () = assert!(std::mem::align_of::<UniqueTable>() == 8);
+
 impl UniqueTable {
-    fn with_capacities(expected_nodes: usize, link_capacity: usize) -> Self {
-        let slots = expected_nodes
+    fn bucket_slots(expected_nodes: usize) -> usize {
+        expected_nodes
             .saturating_mul(10)
             .div_ceil(7)
             .next_power_of_two()
-            .max(16);
+            .max(16)
+    }
+
+    fn with_capacities(expected_nodes: usize, link_capacity: usize) -> Self {
+        let slots = Self::bucket_slots(expected_nodes);
         Self {
             buckets: vec![EMPTY; slots],
             links: Vec::with_capacity(link_capacity),
-            grow_at: slots * 7 / 10,
+            _rehash_at: slots * 7 / 10,
         }
     }
 
@@ -58,9 +66,6 @@ impl UniqueTable {
         high: u32,
         allow_insert: bool,
     ) -> Option<(u32, bool)> {
-        if allow_insert && nodes.len() == self.grow_at {
-            self.grow(nodes);
-        }
         let key = node_key(variable, low, high);
         let slot = self.slot(key);
         let mut root = self.buckets[slot];
@@ -81,12 +86,21 @@ impl UniqueTable {
         Some((candidate, true))
     }
 
+    fn capacities(&self) -> (usize, usize) {
+        (self.buckets.capacity(), self.links.capacity())
+    }
+
     #[cold]
     #[inline(never)]
-    fn grow(&mut self, nodes: &[Node]) {
+    fn reserve_for_nodes(&mut self, nodes: &[Node], capacity: usize) {
+        if self.links.capacity() < capacity {
+            self.links
+                .reserve_exact(capacity.saturating_sub(self.links.len()));
+        }
+        let slots = Self::bucket_slots(capacity);
+        self.buckets.resize(slots, EMPTY);
         self.buckets.fill(EMPTY);
-        self.buckets.resize(self.buckets.len() * 2, EMPTY);
-        self.grow_at = self.buckets.len() * 7 / 10;
+        self._rehash_at = slots * 7 / 10;
         for (index, &node) in nodes.iter().enumerate() {
             let root = index as u32 + 2;
             let key = node_key(node.meta & 0xff, node.low, node.high);
@@ -94,10 +108,6 @@ impl UniqueTable {
             self.links[index] = self.buckets[slot];
             self.buckets[slot] = root;
         }
-    }
-
-    fn capacities(&self) -> (usize, usize) {
-        (self.buckets.capacity(), self.links.capacity())
     }
 }
 
@@ -338,11 +348,15 @@ impl ZddMemo for FlatMap {
     }
 }
 
+#[repr(C)]
 #[derive(Debug)]
 pub(crate) struct DirectMemo {
     entries: Vec<DirectEntry>,
     mask: usize,
 }
+
+const _: () = assert!(std::mem::size_of::<DirectMemo>() == 32);
+const _: () = assert!(std::mem::align_of::<DirectMemo>() == 8);
 
 impl ZddMemo for DirectMemo {
     fn with_capacity(capacity: usize) -> Self {
@@ -390,6 +404,7 @@ impl ZddMemo for DirectMemo {
     }
 }
 
+#[repr(C)]
 #[derive(Debug)]
 pub(crate) struct Zdd<M: ZddMemo> {
     nodes: Vec<Node>,
@@ -405,7 +420,12 @@ pub(crate) struct Zdd<M: ZddMemo> {
     node_budget: usize,
     operations: u64,
     initial_capacities: [usize; 11],
+    capacity_exhausted: bool,
+    node_limit: usize,
 }
+
+const _: () = assert!(std::mem::size_of::<Zdd<DirectMemo>>() == 416);
+const _: () = assert!(std::mem::align_of::<Zdd<DirectMemo>>() == 8);
 
 #[cfg(test)]
 impl Zdd<FlatMap> {
@@ -434,7 +454,7 @@ impl<M: ZddMemo> Zdd<M> {
             .saturating_add(node_capacity_hint / 8)
             .saturating_add(2)
             .min(node_budget);
-        let mut minimal_cache = Vec::with_capacity(node_capacity + 2);
+        let mut minimal_cache = Vec::with_capacity(node_capacity.saturating_add(2));
         minimal_cache.extend([EMPTY, UNIT]);
         let nodes = Vec::with_capacity(node_capacity);
         let unique = UniqueTable::with_capacities(node_capacity_hint, node_capacity);
@@ -474,6 +494,8 @@ impl<M: ZddMemo> Zdd<M> {
             node_budget,
             operations: 0,
             initial_capacities,
+            capacity_exhausted: false,
+            node_limit: node_capacity,
         }
     }
 
@@ -487,6 +509,31 @@ impl<M: ZddMemo> Zdd<M> {
 
     pub(crate) fn operations(&self) -> u64 {
         self.operations
+    }
+
+    pub(crate) fn capacity_exhausted(&self) -> bool {
+        self.capacity_exhausted
+    }
+
+    #[cold]
+    #[inline(never)]
+    fn grow_for_analysis(&mut self) -> bool {
+        let current = self.nodes.capacity();
+        if current >= self.node_budget {
+            return false;
+        }
+        let target = current.max(1).saturating_mul(2).min(self.node_budget);
+        self.nodes
+            .reserve_exact(target.saturating_sub(self.nodes.len()));
+        self.minimal_cache.reserve_exact(
+            target
+                .saturating_add(2)
+                .saturating_sub(self.minimal_cache.len()),
+        );
+        self.unique.reserve_for_nodes(&self.nodes, target);
+        self.node_limit = target;
+        self.capacity_exhausted = false;
+        true
     }
 
     pub(crate) fn storage_grew(&self) -> bool {
@@ -552,13 +599,14 @@ impl<M: ZddMemo> Zdd<M> {
         debug_assert!((variable as usize) < self.union_stack.capacity());
         debug_assert!(low < 2 || variable < self.variable(low));
         debug_assert!(high < 2 || variable < self.variable(high));
-        let (root, inserted) = self.unique.intern(
-            &self.nodes,
-            variable,
-            low,
-            high,
-            self.nodes.len() < self.node_budget,
-        )?;
+        let allow_insert = self.nodes.len() < self.node_limit;
+        let Some((root, inserted)) =
+            self.unique
+                .intern(&self.nodes, variable, low, high, allow_insert)
+        else {
+            self.capacity_exhausted = self.node_limit < self.node_budget;
+            return None;
+        };
         if !inserted {
             return Some(root);
         }
@@ -1070,7 +1118,15 @@ impl<M: ZddMemo> Zdd<M> {
             }
         }
 
-        counts_from(self, root, 0, included_variables, &mut Vec::new()).map(Vec::into_boxed_slice)
+        loop {
+            let mut memo = Vec::new();
+            if let Some(counts) = counts_from(self, root, 0, included_variables, &mut memo) {
+                return Some(counts.into_boxed_slice());
+            }
+            if !self.capacity_exhausted || !self.grow_for_analysis() {
+                return None;
+            }
+        }
     }
 
     pub(crate) fn aggregate_frontier(

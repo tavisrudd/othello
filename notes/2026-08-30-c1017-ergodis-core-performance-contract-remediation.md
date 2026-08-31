@@ -286,6 +286,24 @@ both children. A production 25-variable fixture therefore reserves 25 frames
 per machine while the dedicated 256-variable regression reaches the format
 limit without growth or native-stack dependence.
 
+Node, link, and minimal-cache arenas are also fixed for an attempt, and the
+unique table keeps its hint-sized bucket directory rather than rehashing in an
+operation. Bucket load can affect chain length but not canonicalization or
+correctness. If a valid solve exhausts the cold structural estimate before its
+semantic node budget, `make` records capacity exhaustion and the attempt exits
+without allocating. A cold, non-inlined controller doubles the estimate and
+restarts; only reaching the actual node budget becomes `ApplicationError::Budget`.
+The forced-underestimate regression exhausts during the guarded closure,
+records zero allocator events, then verifies the ordinary public call's exact
+answer. Outlining matters: placing retry around the common solve loop caused a
+measured 10% IPC regression and is rejected.
+
+Reliability-polynomial evaluation is a distinct post-solve phase and can
+construct derived ZDD nodes not needed by closure. If that analysis exhausts
+the closure-sized arena, it cold-grows the node, minimal-cache, and unique-table
+storage, rebuilds the directory, and restarts only the iterative reliability
+DP. No growth or allocation is admitted back into the closure attempt.
+
 `UnionFrame`, `JoinFrame`, `AvoidFrame`, and `MinimalFrame` are respectively
 24, 40, 24, and 16-byte `repr(C)` records with compile-time size/alignment
 assertions. The join machine stores each operand split once and uses sentinel
@@ -304,26 +322,28 @@ join, union, and minimalization region and reports zero allocations,
 reallocations, and deallocations. Seeded explicit-family differentials cover
 all algebraic operations, the existing seeded Ceph comparison covers the
 lossy direct memo, and the depth-256 test exercises the exact stack bound.
-The complete 353-test all-feature library suite plus integration/doc tests and
+The complete 354-test all-feature library suite plus integration/doc tests and
 strict all-target clippy pass in isolated target directories.
 
 Seven alternating core-2 rounds of 20,000 solves on
 `application:ceph-zdd:rust:8:2` preserve exactly 85,860,000 operations,
 1,568 peak nodes per solve, the 256-support result, and checksum. Relative to
-commit `6511cef18`, candidate/baseline is 1.013x cycles (`t=0.62`) and 1.006x
-wall (`t=0.30`), statistically time-neutral; it retires 1.033x more
-instructions but 1.013x fewer branches and 1.210x fewer branch misses. Seven
-paired 5,000-solve rounds on the deeper 37-variable, 4,096-support fixture are
-1.017x higher in cycles (`t=7.15`) and wall (`t=7.46`), with 1.033x more
-instructions, 1.015x fewer branches, and 1.084x fewer branch misses. Median
-deep-fixture peak RSS is 2,440 KiB versus 2,152 KiB baseline; the absolute
-0.28 MiB increase is the allocator/code-page cost of the reusable machines,
-not growth in the guarded loop. Raw evidence is under
-`/home/tavis/.cache/ergodis-perf/c1017-zdd/variable-bound-ab` and
-`/home/tavis/.cache/ergodis-perf/c1017-zdd/deep-ab`.
+commit `6511cef18`, baseline/candidate is 1.036x cycles (`t=2.42`) and 1.039x
+wall (`t=2.01`); the candidate retires 1.016x more instructions but 1.053x
+fewer branches and 1.432x fewer branch misses. Seven paired 5,000-solve rounds
+on the deeper 37-variable, 4,096-support fixture give point estimates of
+1.038x cycles (`t=0.58`) and 1.032x wall (`t=0.47`), with 1.016x more
+instructions, 1.055x fewer branches, and 1.060x fewer branch misses. The deep
+timing result is too noisy for a speed claim. Eleven isolated deep RSS pairs
+give medians of 2,260 KiB baseline and 2,616 KiB candidate, a 356 KiB absolute
+increase from the iterative code and fixed workspaces. Raw evidence is under
+`/home/tavis/.cache/ergodis-perf/c1017-zdd/generic-final-ab`.
 
-Next, rerun the private registry's bounded open-gate report and choose the
-remaining substantive application/orbit or cold-replay failure.
+The refreshed private registry now reports 59 pass, 13 open, and 30
+not-applicable cells. The next highest-severity solve-kernel gap is the sparse
+scheduler's parallel-counter and contention evidence; the remaining open
+cells are observational-compiler parallel evidence or single-thread retained
+counter rows.
 
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
