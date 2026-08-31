@@ -3923,8 +3923,17 @@
       "last": 1014,
       "purpose": "deep consequences and uses audit for classical Wronskian Gram mechanism and downstream arithmetic reconstruction hierarchy",
       "sequence": 436
+    },
+    {
+      "count": 1,
+      "first": 1015,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 1015,
+      "purpose": "global matching-design obstruction beyond six-local admissibility",
+      "sequence": 437
     }
   ],
-  "next_id": 1015,
+  "next_id": 1016,
   "schema": "codex-task-id-allocations-v1"
 }
