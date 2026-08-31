@@ -60,6 +60,9 @@ recursion, or dynamic dispatch.  Fixed-cardinality block
 subsets use the existing Gosper iterator rather than scanning all masks at
 every size.  An independent `GF(2)` control exercises the same compiler to
 guard against accidentally baking the landed `GF(9)` answer into the engine.
+An exhaustive three-block control pads one matrix with zero columns to force
+the dense path and checks that it agrees with the online path for all eight
+semantic block masks.
 The `GF(9)` adapter's add, multiply, negation, and inverse operations are tiny
 compile-time tables.  Exhaustive field-law tests check the table adapter; the
 elimination loop therefore replaces division/remainder arithmetic with two

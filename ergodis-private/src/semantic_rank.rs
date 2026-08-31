@@ -541,6 +541,31 @@ mod tests {
     }
 
     #[test]
+    fn online_and_dense_rank_states_are_equivalent_for_every_block_mask() {
+        let rows = vec![
+            1, 0, 0, 0, 1, 0, 1, 1, 0, // block 0
+            0, 0, 1, 1, 0, 1, 0, 1, 1, // block 1
+            1, 1, 1, 1, 2, 0, // block 2
+        ];
+        let online_system = Gf9BlockSystem::try_new(3, rows.clone(), vec![0, 3, 6, 8]).unwrap();
+        let mut padded_rows = Vec::with_capacity(8 * 8);
+        for row in rows.chunks_exact(3) {
+            padded_rows.extend_from_slice(row);
+            padded_rows.extend_from_slice(&[0; 5]);
+        }
+        let dense_system = Gf9BlockSystem::try_new(8, padded_rows, vec![0, 3, 6, 8]).unwrap();
+        let mut online = Gf9RankWorkspace::new(8, 3);
+        let mut dense = Gf9RankWorkspace::new(8, 8);
+        for mask in 0..8 {
+            assert_eq!(
+                online.rank_blocks(&online_system, mask),
+                dense.rank_blocks(&dense_system, mask),
+                "block mask {mask:03b}"
+            );
+        }
+    }
+
+    #[test]
     fn compiler_is_field_generic_without_dynamic_dispatch() {
         let system = BlockSystem::<Gf2>::try_new(
             3,
