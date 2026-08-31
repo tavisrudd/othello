@@ -719,6 +719,30 @@ problem as *"do exceptional deep holes with trivial stabilizer exist for
 `q ≥ 16`, `r ≥ 6`?"* is strictly sharper than stating it as `X(r) ⊆ {7,…,13}`,
 and it is what the lemma buys.
 
+### 5g. What is left of the certificate pile
+
+Taking the reduction seriously means auditing what each census cell still
+contributes that a theorem does not.  A cell reports four things:
+
+| reported quantity | what it actually is, after the reduction |
+|---|---|
+| covering radius `ρ` | a **consistency check against an imported theorem** — Dür's completeness criterion plus Seroussi–Roth already determine `ρ`, so `ρ = r-1` in 46 cells and `ρ = r` in the three even-field `k ∈ {2,q-2}` cells is confirmation, not evidence |
+| persistent deep count `q(q+1)^2/2` and its orbit decomposition | a **consistency check against the committed orbit law** of C498/C513, which is proved for all fields |
+| exceptional points with **nontrivial** stabilizer | **superseded** by the fixed-locus lemma of §5d, which decides the same question in `O(q^{(d-1)/2})` instead of `O(q^d)` and, glued to the imported field-ranged theorems, over *all* prime powers instead of a bounded range |
+| exceptional points with **trivial** stabilizer | the only quantity a census still uniquely supplies |
+
+So the honest accounting is: of the fifty census cells in the evidence bundle,
+the covering-radius and persistent-family columns are theorem checks, the
+non-regular exceptional column is now a lemma, and what genuinely rests on
+enumeration is one number per cell — the count of *regular* exceptional deep
+points.  That is what a successor reduction has to attack, and §8 item 11 names
+the Borel normal form as the concrete candidate.
+
+The census cells are worth keeping in the bundle anyway, for the reason
+consistency checks are worth keeping: they are what caught the GF(16)
+field-labelling artifact in the first place, and they are what validated the
+fixed-locus sweep zero-for-zero on ten cells before it was trusted anywhere.
+
 ## 6. The landed conjecture (item 5)
 
 Notation.  `X(r) = { q : q ≥ r-1 a prime power, PRS_{q+1-r}(q) has a deep hole
