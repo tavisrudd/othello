@@ -9,15 +9,17 @@
 The theorem package is clean, but its algebraic core must be presented as an
 application of coherent-configuration theory rather than a new general
 theorem. The programme contributes new geometric instances, quantitative
-marking fibres, and two useful priority-leverage upgrades:
+marking fibres, one useful priority-leverage upgrade, and one candidate
+priority-judo bridge:
 
 1. **Paper IV:** the \(q=13\) elliptic scheme is fusion-primitive. Every
    nonempty proper union of its six off-diagonal relations has coherent
    closure equal to the complete rank-seven scheme.
-2. **Paper V:** the quartic Gram character is a cross-ratio character over
-   every odd finite field. Classical harmonic-preserver theory gives the
-   conceptual automorphism proof at \(q=11\), replacing the finite \(9!\)
-   stabilizer check and explaining the excess symmetry.
+2. **Paper V:** finite-field binary-quartic orbit theory already contains the
+   square-class calculation behind the quartic Gram character. Combining that
+   calculation with harmonic-preserver theory answers a different question
+   not treated there: exactly when the metric shadow is the harmonic design,
+   and why it forgets the \(A_5\) marking.
 
 One example is maximally resistant to fusion; the other forgets exactly the
 subgroup marking that the geometry needs.
@@ -144,7 +146,7 @@ Combined with Paper IV:
 This is certificate-assisted and fixed-field. An all-\(q\) classification
 would require eigenmatrix or character-sum input.
 
-## 5. Priority leverage II: the quartic Gram family
+## 5. Priority-judo candidate: the quartic Gram family
 
 Let \(R=\nu_4(\mathbf P^1(\mathbf F_q))\), with \(q\) odd, in the invariant
 five-dimensional quadratic module. Up to a nonzero scalar,
@@ -201,10 +203,25 @@ At \(q=11\), \(\chi(-3)=-1\). The positive ratios are
  165\text{ positive},\qquad0\text{ zero},\qquad330\text{ negative}.
 \]
 
+Away from characteristic three, the positive Gram relation is *exactly* the
+harmonic orbit if and only if
+
+\[
+ \boxed{q\in\{11,13\}.}
+\]
+
+Indeed, equality forces the positive-ratio count
+\((q-6-\epsilon)/2\) to be three, hence \(q=11\) with \(\epsilon=-1\) or
+\(q=13\) with \(\epsilon=1\); conversely \(3\) is a square in both fields,
+so the three harmonic ratios \(-1,2,1/2\) are positive. At \(q=11\) there
+is no zero class, while at \(q=13\) the two equianharmonic ratios form the
+zero class.
+
 Classical harmonic-preserver theory says that the permutations preserving
 harmonic quadruples form \(\operatorname{P\Gamma L}_2(q)\). Over the prime
-field \(\mathbf F_{11}\), this is \(\operatorname{PGL}_2(11)\). Thus C1011's
-automorphism result follows conceptually without its \(9!\) stabilizer audit.
+fields \(\mathbf F_{11}\) and \(\mathbf F_{13}\), this is
+\(\operatorname{PGL}_2(q)\). Thus C1011's automorphism result follows
+conceptually without its \(9!\) stabilizer audit.
 
 For Paper V the intended matching stabilizer is \(A_5\), giving
 
@@ -215,16 +232,32 @@ For Paper V the intended matching stabilizer is \(A_5\), giving
 The unrestricted lower bound is five bits; the constrained pair-membership
 model requires exactly eleven adaptive or fourteen nonadaptive queries.
 
-Neither result is a priority-judo move in the strict sense. Fusion-primitivity
-is a new fixed-field property expressed in established language. The harmonic
-preserver theorem proves our automorphism statement; it is not a corollary of
-our Gram calculation.
+This is a credible **latent-consequence priority-judo move**. Kaipa--Patanker--
+Pradhan already derive the apolar square criterion
+\(\chi(\lambda^2-\lambda+1)\) and count its finite-field solutions in their
+binary-quartic/line-orbit classification. They do not formulate the Gram
+shadow, its exceptional collapse to the harmonic design at \(q=11,13\), its
+full permutation automorphism group, or the resulting failure to reconstruct
+a proper-subgroup marking. Conversely, the harmonic-preserver literature does
+not connect its design to this metric/apolar shadow. The judo is therefore not
+the raw character sum; it is the cross-literature consequence that settles a
+reconstruction question neither source asks.
+
+Fusion-primitivity remains priority leverage rather than priority judo unless
+an audit of the elliptic-scheme literature shows that it answers an explicit
+question left open or unnoticed there.
 
 ## 6. Genuine priority-judo targets
 
-A result should be called priority judo here only if it crosses the classical
-ceiling by proving a theorem from which the relevant classical result follows
-as a specialization. The credible targets are:
+A result should be called priority judo here if it does either of two things:
+
+1. **Upward judo:** proves a broader theorem from which the classical ceiling
+   becomes a corollary.
+2. **Latent-consequence judo:** uses a classical theorem to answer a natural
+   question that its authors and subsequent literature did not extract.
+
+The quartic shadow above is a candidate of the second kind, subject to a final
+citation audit. Credible targets of the first kind are:
 
 1. **Cross-ratio coloring rigidity, including even-Veronese Gram shadows.**
    Classify the full permutation groups preserving anharmonic-invariant
@@ -344,6 +377,22 @@ classical. A convenient proof is Proposition 4.21 in Peter Cameron's
 The harmonic design and its automorphism group are not new. The useful bridge
 is that the quartic metric Gram determinant produces exactly this relation,
 proving Paper V's information-loss boundary.
+
+The closest finite-field overlap is:
+
+- K. Kaipa, N. Patanker, and P. Pradhan, *On the \(PGL_2(q)\)-orbits of lines
+  of \(PG(3,q)\) and binary quartic forms*, arXiv:2312.07118 (v3, 2025),
+  <https://arxiv.org/abs/2312.07118>.
+
+They identify the degree-four rational normal curve with pure binary
+quartics, use the apolar invariant \(I\), prove the square criterion, derive
+\(36I=\beta^2(\lambda^2-\lambda+1)\), and count the square cases. Thus the
+all-\(q\) square-character calculation must be cited as known/overlapping.
+Their paper contains no discussion of four-set Gram shadows, harmonic
+3-designs, full permutation automorphism groups, \(q=11\), \(A_5\) matchings,
+or reconstruction fibres. The defensible new statement is the bridge and its
+reconstruction consequence, especially the exact \(q\in\{11,13\}\)
+harmonic-collapse classification.
 
 ## 9. Publication recommendation
 
