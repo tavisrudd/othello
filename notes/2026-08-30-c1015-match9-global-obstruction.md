@@ -6,15 +6,15 @@
 transversal one-factorization of (K_{10}) is a pencil, over every field.
 For the regular matching design this forces every canonical
 one-factorization line, after which Nagy's theorem gives the exact field
-boundary. The nine-point extension and final forward-citation audit remain
-open. No manuscript, summary, mirror, formal, release, or Ergodis source edits
-are authorized.
+boundary. The nine-point extension and broader priority audit remain open;
+the closest-seed forward-citation sweep is closed. No manuscript, summary,
+mirror, formal, release, or Ergodis source edits are authorized.
 
 Literature depth for the sources added or reused in this report: **two were
 read at full-text depth** (Nagy and Korchmaros--Pace--Sonnino); Tohaneanu--Xie,
-Dinitz--Garnick--McKay, Gelling, and Ziegler were read at the explicitly
-recorded partial depths below. The priority verdict remains bounded and
-provisional.
+Dinitz--Garnick--McKay, Gelling, Ziegler, and Kiss--Korchmaros--Romaniello--
+Smaldore were read at the explicitly recorded partial depths below. The
+priority verdict remains bounded and provisional.
 
 ## Starting point
 
@@ -325,6 +325,41 @@ star-interpolation, parity-layer, or automatic-pencil theorem; Section 7's
 sporadic highly symmetric cases are (K_{12}) and (K_{28}), not (K_{10}).
 Thus this closest full-text threat does not pre-empt the present converse.
 
+The forward-citation closure of that exact seed was run on 2026-08-30 using
+the pinned DOI `10.1016/j.jcta.2018.06.006`. The independent counts were
+OpenAlex 5 (`W2808718921`), Crossref 3 (`is-referenced-by-count`), and
+Semantic Scholar 6 (`ffcc31a9bff1e2ef3a5fe9b4246963746c608a5c`). All three
+requests returned HTTP success and the matching seed DOI/title, so none of
+the counts is an error-coded empty response. The load-bearing queries were:
+
+```text
+https://api.openalex.org/works/https://doi.org/10.1016/j.jcta.2018.06.006
+https://api.crossref.org/works/10.1016/j.jcta.2018.06.006
+https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016%2Fj.jcta.2018.06.006?fields=title,citationCount,citations.title,citations.abstract,citations.year,citations.externalIds,citations.url
+```
+
+The largest set, Semantic Scholar's six citing works, was screened over title,
+year, external identifiers, and every available abstract. The mechanical
+discriminator was whether the metadata asserted a converse, classification,
+concurrency/pencil theorem, projective representation theorem, or a result on
+all-line transversals rather than another construction of one-factorizations.
+Five works were construction papers (hyperbolae, odd square orders,
+circular-linear factorizations, parabolas, and the Lee metric) and did not pass
+that discriminator.
+
+The sixth work did pass and was promoted: Kiss--Korchmaros--Romaniello--
+Smaldore, _A Note on Parabolic and Linear One-Factorizations of the Complete
+Graph (K_{p+1})_ (CEUR Workshop Proceedings 3792, 2024). Read depth:
+`partial`, published proceedings PDF, abstract, introduction, Definitions
+3.4--3.6, all of Section 4, and references; cache key
+`ceur:3792:paper16`, SHA-256
+`273b4319bc8435b013642f6e90d435765784a481637e1adc8a25118d49f2e9c4`.
+Its Theorem 4.1 proves that an all-line representation on a conic over odd
+(\mathbf F_q\), (q\ge5), must use at least one chord representative; it does
+not derive a pencil and its chord factors do not put all edge/star points on
+one line. Thus it strengthens the adjacent conic-specific negative result but
+does not contain the arbitrary-carrier, all-field automatic-pencil theorem.
+
 Ziegler, _Matroid representations and free arrangements_ (Trans. AMS 320
 (1990), 525--541), Example 4.1, gives the exact representation condition for
 the exceptional sparse shadow: (AG(2,3)) is representable over (K) if and
@@ -362,10 +397,11 @@ Searches for `one-factorization star configuration projective plane`,
 `one-factorization secants concurrent projective plane`, and
 `one-factorization characteristic two geometry` found the adjacent literatures
 but no statement of (1), (2), or the automatic-pencil consequence. The 2018
-JCTA full-text threat is now closed. This remains a bounded provisional
-novelty result rather than a final global priority verdict until its
-forward-citation sweep is closed; manuscript language such as "new" or "to
-our knowledge" is not yet authorized.
+JCTA full-text threat and its three-graph forward-citation set are now closed.
+This remains a bounded provisional novelty result rather than a categorical
+global priority verdict: MathSciNet and Google Scholar were not covered, and
+the topical search was bounded rather than an exhaustive MSC sweep.
+Manuscript language such as "new" or "to our knowledge" is not yet authorized.
 
 ## Work programme
 
@@ -402,8 +438,9 @@ our knowledge" is not yet authorized.
 - **Priority-judo — provisionally landed:** the universal (K_{10}) pencil
   theorem answers the order-ten instance of the geometric-transversal problem
   at a level above the Ree field boundary. Final priority status awaits the
-  forward-citation closure recorded above and a careful convention-by-
-  convention comparison with Korchmaros--Pace--Sonnino's Problem 1.
+  broader topical closure; the exact Korchmaros--Pace--Sonnino seed, its
+  forward citations, and the later 2024 linear-factorization theorem have now
+  been checked convention by convention.
 
 ## Extra-juice and Tao-style closeout
 
@@ -444,9 +481,10 @@ not needed for the order-ten theorem.
 - **Higher affine round-robin family — open successor.** The evidence gap is
   a general parity-shadow closure/representation theorem for
   (K_{p^d+1}), beginning with the midpoint factorization above.
-- **Global priority — open.** The closest full-text threat is cleared, but the
-  three-graph forward-citation sweep required by the literature-audit rules
-  has not yet been completed.
+- **Closest-seed priority — settled; global priority remains bounded.** The
+  Korchmaros--Pace--Sonnino full text and its largest three-graph citing set
+  are cleared, including the 2024 characterization paper. MathSciNet and
+  Google Scholar remain uncovered, and no exhaustive MSC sweep has been run.
 - **Ergodis lessons — recorded, source untouched.** A useful future control
   interface should ingest small incidence hypergraphs and exact finite-field
   rank features, generate base-point-invariant rather than fixed-base
