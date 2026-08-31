@@ -1330,11 +1330,23 @@ not needed for the order-ten theorem.
   reduces the problem exactly to the energy bound
   (\operatorname{tr}(T^2)\ge333) under no isolation. A proof from the forced
   standard module would replace rooted exhaustion completely.
-- **18-gap proof compression — narrowed but open.** The new local-profile
-  replay cuts the minimum-degree-three branch to five near-equality degree
-  profiles after the neighbour-sum moment identity; the first three already
-  have short incidence-count contradictions, while the last two need a small
-  residual accounting. The minimum-degree-two branch is now exactly a
+- **18-gap proof compression — conditional minimum-degree-three half now
+  structural.** Let \(s(v)=\sum_{u\sim v}d(u)\). The local-profile data give
+  \(s(v)\ge(14,15,19,18,27,32)\) for degrees \(3,4,5,6,7,8\).
+  Assuming this local lemma, \(\delta(H)\ge3\) and \(2|E(H)|\le34\) are
+  impossible: degrees seven and eight contradict their own neighbour-sum
+  bounds, and \(\sum_vs(v)=\sum_vd(v)^2\) leaves only
+  \(3^7 6^2,3^6 4 6^2,3^6 5^2 6,3^5 4^2 5 6,3^4 4^4 6\).
+  The first two force too many incidences to the six-vertices; in the third,
+  zero moment slack forces the six-vertex onto all six three-vertices and
+  leaves a five-vertex with neighbour sum at most 17. In the fourth, the sole
+  moment slack forces the six-vertex onto all five three-vertices and one
+  four-vertex, leaving the five-vertex with neighbour sum at most 17. In the
+  fifth, both slack units are consumed by the six-vertex; its four three-neighbours
+  force the two adjacent four-vertices to use only three-neighbours, while a
+  remaining four-vertex cannot reach neighbour sum 15. Thus the degree-three
+  half of the 18-gap is a short lemma once the local bounds are explained.
+  The minimum-degree-two branch is exactly a
   three-root completion problem: fixing the degree-two factor and its two
   Hamilton partners leaves 24 ordered-dihedral chord types and 110 extensions,
   all with no isolated factor and with minimum 18. This is substantial
