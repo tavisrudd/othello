@@ -25,6 +25,46 @@ projects, ranked by Ergodis fit):
 4. Structured Legendre pairs toward order 668 (if time).
 5. Exact certified equiangular bounds M(18)–M(20) (if time).
 
+## Closeout (2026-08-31 05:45)
+
+Window ran ~23:15–05:45 with one ~20-min session-limit interruption
+(~03:00–03:20; three subs resumed with context intact). Every wave is
+committed with its report, driver, and (where result-bearing)
+deterministic evidence + SHA256SUMS entries. Scoreboard:
+
+1. **PRS deep holes** — C513 sharpness answered (q=13, not 43); X(4)=∅;
+   persistent-locus conjecture falsified by a new exceptional orbit at
+   (9,13), fully characterized (Wronskian-adjacent invariant cut,
+   S₃/C₄ stabilizer ladder, cyclic-pullback carriers m | r−3);
+   conjectures B′/D′/E′ standing, D and E falsified. Strongest
+   mathematics of the night.
+2. **qLDPC exact distances** — all six open Liu–Marquardt §S7
+   lifted-product codes closed exactly, each replacing a published
+   upper bound; new exact kd²/n frontier record [[1428,186,18]] = 42.20.
+3. **[[756,16,d]]** — snapshot's unfinished item narrowed to
+   28 ≤ d ≤ 34, d even.
+4. **Transversal no-go census** — certified: no diagonal non-Clifford
+   transversal below eight qubits; wX ≥ 2^{ℓ−1} threshold, [[8,3,2]]
+   uniquely minimal; proof gap named.
+5. **Order-12 planes** — certified point-regular elimination (classical);
+   order-13-invariant hyperoval NOT eliminated (exact negative, depth-3
+   survivor counts); reformulation + 11!→139 reduction kept; algebraic
+   Z[ζ₁₃] successor identified.
+6. **C80 (user-directed, cap lane)** — q=11 closed exhaustively (strict
+   descent false there, no deficit set, domain game-dead); q=13 strict
+   surplus on a game-live domain; proposed crown restatement recorded.
+
+Follow-ups recommended (owner: user routing): fold results into the
+snapshot (global-sweep rule) and crosswalk; literature audits for the
+plane12 reformulation and the transversal threshold before any external
+claim; Ergodis interface backlog (chunk-one-radius flag, large-css in
+release build, .ergocsl version stability, GF(p^h) rank kernels, torus/
+Gauss-sum census primitives); radius-28 run on a quiet host; PRS m=5 at
+r=13 stabilizer-parity test. Foreign issues raised overnight: dirty
+ergodis-private Cargo.toml and g53_search.rs/lib.rs (clippy-breaking),
+and a mid-edit ergodis core css_distance.rs (BOUND_PULSE_*) that now
+blocks all ergodis-private builds — all untouched by campaign work.
+
 ## Wave log
 
 - Wave 1 (launched ~23:15): sub A on target 1
@@ -171,6 +211,19 @@ report.
   pending literature audit. **Blocker re-raised: the foreign
   css_distance.rs edit now makes every ergodis-private binary
   unbuildable** (built out of tree against unmodified hall_core).
+- **Wave 3A, [[756,16,d]] (landed 05:35)** —
+  `2026-08-31-c1018-hunt-756-distance.md`; certificate
+  `ergodis-private/evidence/c1018-bb756-distance-certificate.json`.
+  **Certified 28 ≤ d ≤ 34, and d ∈ {28,30,32,34}** (even weight forced:
+  the all-ones vector lies in the check row space) — up from the
+  snapshot's d ≥ 24; radius-26 exhaustion of 5.59e11 candidates in 72
+  min. Upper side: published 34 stands; best verified witness 36;
+  order-three-invariant operators excluded exactly; strong evidence the
+  34 witness is not order-two invariant. Radius 28 needs ~4–6 h on a
+  quiet host and is blocked only by a missing chunk-one-radius flag —
+  the top Ergodis interface request of the campaign, alongside: release
+  build lacks large-css (recompile needed above 384 coordinates) and the
+  2026-08-29 .ergocsl filter artifact no longer loads (version drift).
 - **Wave 1B, transversal/CSS (landed ~23:45)** —
   `2026-08-30-c1018-hunt-transversal-css.md`; driver
   `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes
