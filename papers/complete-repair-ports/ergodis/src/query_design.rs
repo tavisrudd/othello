@@ -399,9 +399,17 @@ fn edge_query_triple_factor(hypotheses: u32, tests: &[u64]) -> Option<Vec<u32>> 
     } else {
         (1_u64 << hypotheses) - 1
     };
-    let isolate_choices = if hypotheses % 3 == 0 { 1 } else { order };
+    let isolate_choices = if hypotheses.is_multiple_of(3) {
+        1
+    } else {
+        order
+    };
     for choice in 0..isolate_choices {
-        let isolate = if hypotheses % 3 == 0 { order } else { choice };
+        let isolate = if hypotheses.is_multiple_of(3) {
+            order
+        } else {
+            choice
+        };
         let mut covered = if isolate == order {
             0
         } else {

@@ -483,7 +483,7 @@ const fn is_prime(value: u8) -> bool {
     }
     let mut divisor = 2u8;
     while (divisor as u16) * (divisor as u16) <= value as u16 {
-        if value % divisor == 0 {
+        if value.is_multiple_of(divisor) {
             return false;
         }
         divisor += 1;

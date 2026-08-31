@@ -292,7 +292,7 @@ fn hierarchy_generators(depth: usize) -> Vec<LayeredGeneratorSpec> {
 }
 
 fn hierarchy_observation(seed_bound: u32, sort: u32, state: u32) -> u32 {
-    if sort == 0 || state % (seed_bound + 1) != 0 {
+    if sort == 0 || !state.is_multiple_of(seed_bound + 1) {
         0
     } else {
         state / (seed_bound + 1) + 1

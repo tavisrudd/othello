@@ -288,7 +288,7 @@ impl BinaryCommutant {
             if !(2..=16).contains(&degree) {
                 return Err(BinaryCommutantError::FieldDegree);
             }
-            if dimension % degree == 0 {
+            if dimension.is_multiple_of(degree) {
                 requested[degree] = true;
                 maximum_degree = maximum_degree.max(degree);
             }
@@ -850,7 +850,7 @@ fn extension_field_powers(
     }
     let dimension = action.dimension();
     if generator.dimension() != dimension
-        || dimension % degree != 0
+        || !dimension.is_multiple_of(degree)
         || action
             .generators
             .iter()
@@ -913,7 +913,7 @@ fn is_irreducible_binary_polynomial(polynomial: u64, degree: usize) -> bool {
     let mut remaining = degree;
     let mut prime = 2usize;
     while prime * prime <= remaining {
-        if remaining % prime == 0 {
+        if remaining.is_multiple_of(prime) {
             let mut test = x;
             for _ in 0..degree / prime {
                 test = polynomial_multiply_mod(test, test, polynomial, degree);
@@ -921,7 +921,7 @@ fn is_irreducible_binary_polynomial(polynomial: u64, degree: usize) -> bool {
             if polynomial_gcd(polynomial, test ^ x) != 1 {
                 return false;
             }
-            while remaining % prime == 0 {
+            while remaining.is_multiple_of(prime) {
                 remaining /= prime;
             }
         }

@@ -178,7 +178,7 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
     })?;
     if maximum_positive_clause == 0
         || variables == 0
-        || variables as usize % maximum_positive_clause != 0
+        || !(variables as usize).is_multiple_of(maximum_positive_clause)
     {
         return Err(StructuredSatError::Encoding);
     }
@@ -220,7 +220,8 @@ fn parse_direct_coloring(path: &Path) -> Result<DirectColoringGraph, StructuredS
     if domain_seen[..complete_words]
         .iter()
         .any(|&word| word != u64::MAX)
-        || vertices % 64 != 0 && domain_seen[complete_words] != (1_u64 << (vertices % 64)) - 1
+        || !vertices.is_multiple_of(64)
+            && domain_seen[complete_words] != (1_u64 << (vertices % 64)) - 1
         || domains
             .chunks_exact(color_words)
             .any(|domain| domain.iter().all(|&word| word == 0))
