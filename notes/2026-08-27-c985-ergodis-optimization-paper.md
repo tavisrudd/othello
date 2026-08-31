@@ -51,7 +51,9 @@ as each coherent tranche lands.
    The smaller linear-code gap is also closed: a compiled binary row-space
    enumerator uses one-row Gray-code updates plus packed POPCNT, has a measured
    zero-allocation scan gate, and replaces the C1018 transversal driver's
-   materialized `2^k` span when computing minimum nonzero check weight.
+   materialized `2^k` span when computing minimum nonzero check weight. The
+   create-only `binary_linear_distance` evidence CLI makes this a first-class
+   public mode rather than only a library primitive.
    The random CSS upper-bound backend now adds pre-sized OSD-2 combinations.
    On a diagnostic BB756 run at target 36, OSD-2 found an independently replayed
    weight-36 logical support in 0.621 s after 1,406 completed trials; the same

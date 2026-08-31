@@ -6,6 +6,7 @@
 //! workspace keeps the loop allocation-free.
 
 use crate::{Matrix, MatrixError};
+use serde::Serialize;
 use thiserror::Error;
 
 #[derive(Clone, Debug, PartialEq, Eq, Error)]
@@ -30,14 +31,14 @@ pub struct BinaryLinearCodeWorkspace {
     best: Box<[u64]>,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize)]
 pub struct BinaryLinearWeightResult {
     pub weight: Option<u16>,
     pub support: Box<[u16]>,
     pub candidates: u64,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 pub struct BinaryLinearWeightSummary {
     pub weight: Option<u16>,
     pub candidates: u64,

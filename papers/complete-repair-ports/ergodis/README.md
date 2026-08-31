@@ -240,6 +240,12 @@ explicit, and `--evidence` writes one
 create-only, source-hashed JSON record. This is a witness finder, not a lower-
 bound procedure; exactness still comes from `css_distance_native` exhaustion.
 
+`binary_linear_distance` is the corresponding exact small-rank row-space mode.
+Its sparse JSON input contains `label`, `coordinate_count`, and `generators`;
+the output gives the minimum nonzero weight and a replayable support. It uses a
+canonical GF(2) basis and allocation-free packed Gray-code enumeration, and
+rejects rank above 63 rather than silently attempting an infeasible span.
+
 Inputs with 257--320 coordinates dispatch to a separately monomorphized wide
 backend. It preserves exact three-word syndromes, removes redundant check rows
 for syndrome tracking while retaining the original sparse connectivity graph,
