@@ -215,6 +215,30 @@ and observes `(0, 0, 0)`. The guard and allocator are absent from production
 builds. The remaining package-4 blocker is the retained-controller clean-miss
 codegen regression and its single-/parallel-mode counter evidence.
 
+That codegen blocker is now closed by changing the pre-sized wide frame stack
+from `Vec<WideBranchFrame>` to `Box<[WideBranchFrame]>`. The stack cannot grow,
+so the vector capacity word was both semantically misleading and unnecessary;
+the boxed slice retains contiguous bounds-checked indexing and the cross-thread
+allocation gate still observes `(0, 0, 0)`. Against retained Rust 1.91.1
+binaries `e1981022...` (control) and `c30cd001...` (candidate), three rotated
+counter pairs give:
+
+- BB360 12T clean miss, exactly 2,828,836,878 candidates in every run:
+  control/candidate 1.031389 instructions (`t=77996.4`), 1.018017 cycles
+  (`t=10.149`), and 1.012854 branch misses (`t=6.425`). Branches increase
+  0.336%; cache misses are noisy and unresolved.
+- BB288 1T theorem hit, exact candidate parity: 1.090023 instructions,
+  1.023990 cycles (`t=15.269`), with identical distance-18 witness.
+- BB288 12T theorem hit, asynchronous bound arrival changes aggregate work by
+  0.039%; after candidate normalization, instructions/candidate improve 2.88%
+  and cycles/candidate improve 3.88%, with identical distance-18 witness.
+
+Wall timing is deliberately not used for this decision because the host was
+shared during the run. Two alternatives are retained as negative evidence:
+moving an owned workspace through the wrapper added about 2.1% instructions,
+and storing run configuration in the workspace added about 0.6% instructions.
+Neither survives in the source.
+
 ## Review findings for the pending C1016 Rust overlay
 
 The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its

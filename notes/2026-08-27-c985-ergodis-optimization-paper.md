@@ -26,9 +26,13 @@ as each coherent tranche lands.
    now has a test-only cross-thread allocator gate around the actual compact
    and wide Rayon partition loops; allocator, reallocator, and deallocator
    counts are all zero on every participating worker, while production builds
-   contain no observer. Current next slice is the measured 2.15% clean-miss
-   codegen repair, followed by the remaining Tiger layouts and registry
-   evidence.
+   contain no observer. The measured clean-miss codegen pathology is also
+   repaired: representing each fixed-capacity frame stack as `Box<[Frame]>`
+   instead of `Vec<Frame>` removes unused capacity metadata while preserving
+   contiguous indexing. On the exact-work BB360 clean miss it removes 3.14%
+   of instructions and 1.80% of cycles (`t=10.15`); BB288 improves 2.40% in
+   1T cycles and 3.88% in 12T cycles/candidate. Current next slice is the
+   remaining Tiger layouts and registry evidence.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

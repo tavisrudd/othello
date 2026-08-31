@@ -3359,7 +3359,7 @@ struct WideBranchFrame<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
 
 #[cfg(feature = "parallel")]
 struct WideBranchWorkspace<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
-    frames: Vec<WideBranchFrame<SUPPORT_WORDS, CHECK_WORDS>>,
+    frames: Box<[WideBranchFrame<SUPPORT_WORDS, CHECK_WORDS>]>,
 }
 
 #[cfg(feature = "parallel")]
@@ -3368,7 +3368,7 @@ impl<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>
 {
     fn new(frame_count: usize) -> Self {
         Self {
-            frames: vec![WideBranchFrame::default(); frame_count],
+            frames: vec![WideBranchFrame::default(); frame_count].into_boxed_slice(),
         }
     }
 }
