@@ -526,6 +526,50 @@ two of the five classes of `F_11^*/(F_11^*)^5`.
 *Falsifier.*  An exceptional carrier orbit whose stratum intersection is not a
 union of `m`-th power classes at a single `u`.
 
+### Exact verified domain, and the exact unverified boundary
+
+What is **proved** (imported, not claimed here): the all-field classifications
+at `r = 5, 6, 7`, which determine `X(5)`, `X(6)`, `X(7)` completely; and the
+field-ranged theorems `q ≥ 43`, `q ≥ 53`, `q ≥ 59` at `r = 8, 9, 10`.
+
+What is **exhaustively verified** by this campaign — every point of the named
+projective space assigned its exact NRC rank, no sampling, no pruning:
+
+| `r` | fields censused exhaustively | verdict |
+|---:|---|---|
+| 3 | 5, 7, 8, 9 | classical picture reproduced; `ρ = 3` only at `q = 8` |
+| 4 | 4, 5, 7, 8, 9, 11, 13, 16, 25, 27, 32, 64 | `X(4) = ∅` |
+| 5 | 7, 8, 9, 11, 13, 16 | agrees with the committed all-field theorem |
+| 6 | 7, 8, 9, 11, 13 | agrees with the committed all-field theorem |
+| 7 | 7, 8, 9, 11, 13 | agrees with the committed all-field theorem |
+| 8 | <!-- R8DOMAIN --> | <!-- R8VERDICT --> |
+| 9 | 9, 11, 13, 16, 17, 19 | `X(9) ∩ [9,19] = {9,11,13}`, so `q_0(9) = 16` |
+| 10 | <!-- R10DOMAIN --> | <!-- R10VERDICT --> |
+
+Carrier strata verified exhaustively (each a complete sweep of the named
+projective subspace, blind to everything outside it): `r = 5` with `m = 2` over
+nine fields; `r = 6` with `m = 3` over thirteen; `r = 8` with `m = 5` over four;
+`r = 9` with `m = 2, 3, 6`; `r = 10` with `m = 3, 7`; `r = 11` with
+`m = 2, 3, 4, 8`; `r = 12` with `m = 3`; `r = 13` with `m = 2, 5, 10`; `r = 15`
+with `m = 3, 4, 6, 12`.
+
+**The exact unverified boundary.**
+
+* `r = 8`: <!-- R8GAP -->
+* `r = 9`: the band `[23, 52]` between the last censused field and the proved
+  threshold 53 is untested.  `|PG(8,23)| ≈ 8.2·10^{10}`, a 10.2 GB bitmap and
+  roughly three quarters of an hour, so the next cell is reachable but was not
+  run in this wave.
+* `r = 10`: <!-- R10GAP -->
+* `r ≥ 11`: no census at any field; only carrier strata.  The census ceiling on
+  this machine is about `1·10^{11}` projective points (a 12 GB bitmap), which at
+  `r = 11` is `q ≤ 13` and at `r = 15` is nothing at all.
+* `3 ≤ k ≤ 5` with `q ≥ 16`: unreachable by census at any redundancy, as
+  explained under PRS-1.  This is the largest structural gap in the statement.
+* Conjectures PRS-2 and PRS-3 are verified only on strata, so they say nothing
+  about exceptional orbits with trivial stabilizer — the class that contains the
+  two size-1320 orbits at `(8,11)` and, by §5b′, the whole `r = 5` band.
+
 ## 7. What the exceptional deep holes are, in classical language
 
 This section is a reading of the data in standard terminology, not a new
