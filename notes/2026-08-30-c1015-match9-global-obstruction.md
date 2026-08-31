@@ -218,6 +218,84 @@ exactly the three diagonal-triple packets found in the preliminary
 quadrangle calculation. The 27 cross-part Hamilton pairs supply the global
 glue that the local characteristic-two argument lacked.
 
+## Nine-point completion as a balanced-gain problem
+
+The deletion problem has a frame-free reduction that is substantially smaller
+than the original concurrence system. Let (L_1,\ldots,L_9) be the carrier
+lines, and index the nine near-perfect matching blocks so that (M_h) misses
+vertex (h). Let (T_h) be its four-star-point transversal and put
+
+\[
+P=\prod_{i=1}^9\ell_i,\qquad Q=\prod_{h=1}^9t_h.
+\]
+
+On (L_h), the degree-eight forms (Q/t_h) and (P/\ell_h) have the same
+eight simple zeros. Hence there are nonzero constants (c_h) and a constant
+(c) such that
+
+\[
+Q=cP+\sum_{h=1}^9 c_h t_h\frac{P}{\ell_h}.       \tag{3}
+\]
+
+Indeed the indicated choice makes the difference vanish on every (L_h), so
+the degree-nine difference is a scalar multiple of (P). This is the exact
+nine-carrier analogue of star interpolation; its coefficients are linear
+forms (c_ht_h), rather than the constants available with ten carriers.
+
+For an edge (ij\in M_h), write uniquely up to common scale
+
+\[
+t_h=A_{ij}\ell_i+B_{ij}\ell_j,
+\qquad \gamma_{ij}=B_{ij}/A_{ij},\qquad
+\gamma_{ji}=\gamma_{ij}^{-1}.                    \tag{4}
+\]
+
+The coefficients are nonzero in a faithful realization. Regard
+(\gamma) as a multiplicative gain on the oriented edges of (K_9).
+Then the following are equivalent.
+
+1. The gain is balanced: its product around every cycle is one; it is enough
+   to test the 28 triangles through a fixed vertex.
+2. There are nonzero vertex weights (a_i), unique up to common scale, with
+   \(\gamma_{ij}=a_i/a_j\), equivalently
+   \(t_h\doteq a_j\ell_i+a_i\ell_j\) for every (ij\in M_h\).
+3. The degree-eight star-adjoint
+   \[
+   F=\sum_i a_i\frac{P}{\ell_i}
+   \]
+   contains, at every star point (L_i\cap L_j), the length-two local
+   intersection of (P=0) with its assigned transversal (T_h).
+4. Under the expected-incidence hypothesis (no accidental extra
+   carrier/transversal incidences), the nine diagonal points
+   \(R_h=L_h\cap T_h\) are collinear, so their line is the missing tenth
+   carrier and the realization completes geometrically.
+
+The equivalence of (1) and (2) is ordinary gain-graph gauge exactness. At
+(L_i\cap L_j), only the (i,j) summands of (F) have linear terms, namely
+(a_i\ell_j+a_j\ell_i), which proves (2) equivalent to (3). Finally (P=Q=0)
+is a degree-((9,9)) complete intersection. The 36 assigned star contacts
+have total length 72 and lie on (F=0) of degree eight. Since all (a_i\ne0),
+(F) shares no carrier component with (P), so those contacts exhaust the
+degree-((9,8)) complete intersection (P=F=0) by Bezout. The complete-
+intersection ideal is ((P,F)); because (Q) contains it and has degree nine,
+the AF+BG form is
+
+\[
+Q=cP+\ell_0F
+\]
+
+for a linear form (\ell_0). On (P=0), the remaining nine intersections
+therefore lie on (\ell_0=0). Conversely, a completion supplies (2) from the
+ten-carrier interpolation theorem.
+
+Thus the nine-point frontier is now exact: it asks whether the prescribed
+matching concurrences force this edge-gain to be balanced. A single triangle
+with nonunit holonomy is a projectively intrinsic obstruction; no coordinate
+normalization or field-specific elimination is needed to state it. Accidental
+incidences require the scheme-theoretic version of the residual statement and
+remain to be checked before promoting the criterion without the faithful-
+realization qualifier.
+
 ## Application to the Ree bridge
 
 Exact enumeration gives 28 one-factorizations in the regular
@@ -475,9 +553,13 @@ not needed for the order-ten theorem.
   (-8(1+\omega)), of norm 192. The missing evidence is a short
   (AGL(2,3))-equivariant decomposition deriving these factors without row
   reduction.
-- **Nine-point deletion completion — open.** The ten-carrier interpolation
-  theorem does not reconstruct the deleted carrier. The next gate is a
-  projectively intrinsic completion lemma or an explicit counterexample.
+- **Nine-point deletion completion — reduced, still open.** The missing line
+  exists exactly when the 36 edge gains (4) are balanced; 28 fixed-base
+  triangle products are a complete frame-free test. AF+BG then constructs the
+  missing line from the degree-eight star adjoint. The remaining evidence gap
+  is to prove that the prescribed matching concurrences force balance, or to
+  realize one nonunit triangle holonomy as a counterexample. Accidental extra
+  incidences also require the scheme-theoretic cleanup stated above.
 - **Higher affine round-robin family — open successor.** The evidence gap is
   a general parity-shadow closure/representation theorem for
   (K_{p^d+1}), beginning with the midpoint factorization above.
