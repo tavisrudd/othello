@@ -6,7 +6,8 @@ use std::time::Instant;
 use anyhow::Result;
 use clap::Parser;
 use ergodis_private::q25_pair_repair::{
-    compile_q25_pair_repair, independently_verify, verify_certificate, write_certificate,
+    compile_q25_pair_repair, independently_verify, verify_certificate, verify_minimum_certificate,
+    write_certificate, write_minimum_certificate,
 };
 
 #[derive(Parser)]
@@ -15,6 +16,8 @@ struct Arguments {
     threads: usize,
     #[arg(long)]
     certificate: Option<PathBuf>,
+    #[arg(long)]
+    minimum_certificate: Option<PathBuf>,
 }
 
 fn main() -> Result<()> {
@@ -39,8 +42,24 @@ fn main() -> Result<()> {
         assert_eq!(verify_certificate(&mut input)?, certificate_bytes);
         certificate_replay_seconds = certificate_replay_started.elapsed().as_secs_f64();
     }
+    let mut minimum_certificate_bytes = 0_u64;
+    let mut minimum_certificate_seconds = 0_f64;
+    let mut minimum_certificate_replay_seconds = 0_f64;
+    if let Some(path) = arguments.minimum_certificate {
+        let certificate_started = Instant::now();
+        let mut output = BufWriter::new(File::create(&path)?);
+        minimum_certificate_bytes = write_minimum_certificate(&census, &mut output)?;
+        output.flush()?;
+        minimum_certificate_seconds = certificate_started.elapsed().as_secs_f64();
+        let certificate_replay_started = Instant::now();
+        let mut input = BufReader::new(File::open(path)?);
+        let summary = verify_minimum_certificate(&mut input, arguments.threads)?;
+        assert_eq!(summary.minimum_legal_count, 32);
+        assert_eq!(summary.minimum_rows, 24);
+        minimum_certificate_replay_seconds = certificate_replay_started.elapsed().as_secs_f64();
+    }
     println!(
-        "threads={} rows={} obstructions={} legal={} response_classes={} quotient_bytes={} quotient_certificate_bytes={} theorem_certificate_bytes={} compile_seconds={:.6} replay_seconds={:.6} certificate_seconds={:.6} certificate_replay_seconds={:.6}",
+        "threads={} rows={} obstructions={} legal={} response_classes={} quotient_bytes={} quotient_certificate_bytes={} theorem_certificate_bytes={} minimum_certificate_bytes={} compile_seconds={:.6} replay_seconds={:.6} certificate_seconds={:.6} certificate_replay_seconds={:.6} minimum_certificate_seconds={:.6} minimum_certificate_replay_seconds={:.6}",
         arguments.threads,
         census.records.len(),
         census.obstruction_count(),
@@ -49,10 +68,13 @@ fn main() -> Result<()> {
         census.quotient_bytes(),
         census.certificate_bytes(),
         certificate_bytes,
+        minimum_certificate_bytes,
         compiled.as_secs_f64(),
         replayed.as_secs_f64(),
         certificate_seconds,
         certificate_replay_seconds,
+        minimum_certificate_seconds,
+        minimum_certificate_replay_seconds,
     );
     Ok(())
 }

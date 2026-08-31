@@ -17,6 +17,7 @@ const POINT_COUNT: usize = 651;
 const ORBIT_COUNT: usize = 310;
 const NO_POINT: u16 = u16::MAX;
 const CERTIFICATE_MAGIC: [u8; 8] = *b"ERGQ2501";
+const MINIMUM_CERTIFICATE_MAGIC: [u8; 8] = *b"ERGQ25M1";
 
 type Point = [u8; 3];
 
@@ -56,6 +57,21 @@ struct RootRange {
 struct GeneratedRow {
     record: RowRecord,
     legal_mask: Option<[u64; 5]>,
+}
+
+#[derive(Clone, Copy, Debug)]
+enum MinimumEvidenceRow {
+    Obstruction([u8; 3]),
+    LegalMask([u64; 5]),
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct MinimumCertificateSummary {
+    pub rows: u32,
+    pub legal_rows: u32,
+    pub minimum_legal_count: u32,
+    pub maximum_legal_count: u32,
+    pub minimum_rows: u32,
 }
 
 impl Q25Census {
@@ -152,6 +168,183 @@ pub fn verify_certificate(input: &mut impl Read) -> Result<u64> {
     Ok(bytes)
 }
 
+pub fn write_minimum_certificate(census: &Q25Census, output: &mut impl Write) -> Result<u64> {
+    output.write_all(&MINIMUM_CERTIFICATE_MAGIC)?;
+    output.write_all(&(census.records.len() as u32).to_le_bytes())?;
+    let mut bytes = 12_u64;
+    for (index, record) in census.records.iter().enumerate() {
+        match record.outcome {
+            RowOutcome::Obstruction(indices) => {
+                output.write_all(&[triple_rank(indices)])?;
+                bytes += 1;
+            }
+            RowOutcome::Legal { .. } => {
+                output.write_all(&[u8::MAX])?;
+                let legal = census.record_to_legal[index];
+                ensure!(legal != u32::MAX);
+                for word in census.legal_masks[legal as usize] {
+                    output.write_all(&word.to_le_bytes())?;
+                }
+                bytes += 41;
+            }
+        }
+    }
+    Ok(bytes)
+}
+
+#[derive(Clone, Copy)]
+struct MinimumVerifyResult {
+    valid: bool,
+    summary: MinimumCertificateSummary,
+}
+
+struct MinimumVerifyKernel<'a> {
+    geometry: &'a Geometry,
+    evidence: &'a [MinimumEvidenceRow],
+}
+
+impl RootKernel for MinimumVerifyKernel<'_> {
+    type Root = RootRange;
+    type Worker = ();
+    type Output = MinimumVerifyResult;
+
+    fn create_worker(&self) -> Self::Worker {}
+
+    fn evaluate(
+        &self,
+        _worker: &mut Self::Worker,
+        _ordinal: RootOrdinal,
+        root: &Self::Root,
+    ) -> Self::Output {
+        let mut output = MinimumVerifyResult {
+            valid: true,
+            summary: MinimumCertificateSummary {
+                minimum_legal_count: u32::MAX,
+                ..MinimumCertificateSummary::default()
+            },
+        };
+        for second in root.start..root.end {
+            for third in second + 1..310_u16 {
+                output.summary.rows += 1;
+                let points = self.geometry.row_points(second, third);
+                match self.evidence[row_index(second, third)] {
+                    MinimumEvidenceRow::Obstruction(indices) => {
+                        if determinant(
+                            self.geometry.points[points[indices[0] as usize] as usize],
+                            self.geometry.points[points[indices[1] as usize] as usize],
+                            self.geometry.points[points[indices[2] as usize] as usize],
+                        ) != 0
+                        {
+                            output.valid = false;
+                            return output;
+                        }
+                    }
+                    MinimumEvidenceRow::LegalMask(mask) => {
+                        let count = mask.iter().map(|word| word.count_ones()).sum::<u32>();
+                        if count < 32 {
+                            output.valid = false;
+                            return output;
+                        }
+                        for orbit in 0..ORBIT_COUNT as u16 {
+                            let recorded =
+                                mask[orbit as usize / 64] & (1_u64 << (orbit as usize % 64)) != 0;
+                            if recorded != direct_arc(self.geometry, &points, orbit) {
+                                output.valid = false;
+                                return output;
+                            }
+                        }
+                        output.summary.legal_rows += 1;
+                        output.summary.minimum_legal_count =
+                            output.summary.minimum_legal_count.min(count);
+                        output.summary.maximum_legal_count =
+                            output.summary.maximum_legal_count.max(count);
+                        output.summary.minimum_rows += u32::from(count == 32);
+                    }
+                }
+            }
+        }
+        output
+    }
+}
+
+pub fn verify_minimum_certificate(
+    input: &mut impl Read,
+    threads: usize,
+) -> Result<MinimumCertificateSummary> {
+    ensure!(
+        (1..=12).contains(&threads),
+        "thread count must be in 1..=12"
+    );
+    let mut magic = [0_u8; 8];
+    input.read_exact(&mut magic)?;
+    ensure!(
+        magic == MINIMUM_CERTIFICATE_MAGIC,
+        "Q25 minimum certificate magic mismatch"
+    );
+    let mut count_bytes = [0_u8; 4];
+    input.read_exact(&mut count_bytes)?;
+    ensure!(u32::from_le_bytes(count_bytes) == 46_056);
+    let mut evidence = Vec::with_capacity(46_056);
+    for _ in 0..46_056 {
+        let mut tag = [0_u8; 1];
+        input.read_exact(&mut tag)?;
+        if tag[0] == u8::MAX {
+            let mut mask = [0_u64; 5];
+            for word in &mut mask {
+                *word = read_u64(input)?;
+            }
+            evidence.push(MinimumEvidenceRow::LegalMask(mask));
+        } else {
+            evidence.push(MinimumEvidenceRow::Obstruction(triple_from_rank(tag[0])?));
+        }
+    }
+    let mut trailing = [0_u8; 1];
+    ensure!(
+        input.read(&mut trailing)? == 0,
+        "trailing Q25 minimum certificate data"
+    );
+    let geometry = Geometry::build();
+    let roots = root_ranges(threads);
+    let result = reduce_roots(
+        &MinimumVerifyKernel {
+            geometry: &geometry,
+            evidence: &evidence,
+        },
+        &roots,
+        threads,
+        || MinimumVerifyResult {
+            valid: true,
+            summary: MinimumCertificateSummary {
+                minimum_legal_count: u32::MAX,
+                ..MinimumCertificateSummary::default()
+            },
+        },
+        |left, right| MinimumVerifyResult {
+            valid: left.valid && right.valid,
+            summary: MinimumCertificateSummary {
+                rows: left.summary.rows + right.summary.rows,
+                legal_rows: left.summary.legal_rows + right.summary.legal_rows,
+                minimum_legal_count: left
+                    .summary
+                    .minimum_legal_count
+                    .min(right.summary.minimum_legal_count),
+                maximum_legal_count: left
+                    .summary
+                    .maximum_legal_count
+                    .max(right.summary.maximum_legal_count),
+                minimum_rows: left.summary.minimum_rows + right.summary.minimum_rows,
+            },
+        },
+    )?;
+    ensure!(
+        result.valid,
+        "Q25 minimum certificate failed semantic replay"
+    );
+    ensure!(result.summary.rows == 46_056);
+    ensure!(result.summary.legal_rows == 7_044);
+    Ok(result.summary)
+}
+
 fn triple_rank(indices: [u8; 3]) -> u8 {
     let mut rank = 0_u8;
     for left in 0..8_u8 {
@@ -186,6 +379,12 @@ fn read_u16(input: &mut impl Read) -> Result<u16> {
     let mut bytes = [0_u8; 2];
     input.read_exact(&mut bytes)?;
     Ok(u16::from_le_bytes(bytes))
+}
+
+fn read_u64(input: &mut impl Read) -> Result<u64> {
+    let mut bytes = [0_u8; 8];
+    input.read_exact(&mut bytes)?;
+    Ok(u64::from_le_bytes(bytes))
 }
 
 #[derive(Debug)]
@@ -705,5 +904,23 @@ mod tests {
         );
         certificate[0] ^= 1;
         assert!(verify_certificate(&mut certificate.as_slice()).is_err());
+
+        let mut minimum_certificate = Vec::new();
+        assert_eq!(
+            write_minimum_certificate(&census, &mut minimum_certificate).unwrap(),
+            327_828
+        );
+        assert_eq!(
+            verify_minimum_certificate(&mut minimum_certificate.as_slice(), 4).unwrap(),
+            MinimumCertificateSummary {
+                rows: 46_056,
+                legal_rows: 7_044,
+                minimum_legal_count: 32,
+                maximum_legal_count: 47,
+                minimum_rows: 24,
+            }
+        );
+        minimum_certificate[0] ^= 1;
+        assert!(verify_minimum_certificate(&mut minimum_certificate.as_slice(), 4).is_err());
     }
 }

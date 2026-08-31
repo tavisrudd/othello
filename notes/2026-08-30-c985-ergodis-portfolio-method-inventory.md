@@ -207,13 +207,42 @@ proposal generator takes 17.28 seconds and 162,144 KiB in one current cold
 process, but that includes two C++ compilations and 606 subprocess launches and
 is not the important certificate comparison.
 
+The next landed slice replaces the finite exact-minimum lower-bound forest.
+For each bad row it retains the one-byte obstruction; for each legal row it
+streams the exact 310-bit response mask as five `u64` words.  The resulting
+327,828-byte certificate is replayed by a separate parallel determinant
+checker.  It certifies the complete legal-count range 32 through 47 and exactly
+24 normalized rows at the minimum 32.  A warm 12-thread diagnostic takes 0.635
+seconds for semantic certificate replay; the full process, including the
+independent census replay as well, takes 1.42 seconds and 33,628 KiB peak RSS.
+Certificate writing takes 0.00064 seconds.  This remains a single-round
+diagnostic.
+
 The later sealed Q25 exact-minimum/extremal package is larger: the committed
 record inventory has 9,511 Lean modules and about 83.1 MiB tracked source, with
 at least 6h27m of recorded cold tree builds and roughly 4 GB per worker.  It also
 contains residual transport, class-link, cover, and exhaustion obligations not
-present in C143.  Replacing that package requires a second Ergodis certificate
-layer over the 1,189 residual classes and their transport masks; the 74 KiB
-certificate is not represented as a replacement for those obligations.
+present in C143.  The exact-mask certificate makes the 1,189-class lower-bound
+proof forest unnecessary, but it does not yet replace the residual order-400
+action, the five minimum-orbit transporters and stabilizer calculation, or the
+semantic lift from the normalized slice.
+
+## First Hadamard orbit-lock replay result
+
+The generic public `CyclicOrbitLocks` compiler now accepts any finite
+permutation action.  Its structural reduction identifies a full shifted lock
+spectrum with the ordered within-orbit cyclic-difference multiset, so
+compilation costs `sum |O|^2` and every later shift query is O(1), allocation
+free, and backed by a compact `n`-entry `u32` census.  The private LP333 adapter
+reproduces all six recorded spectra and uniquely excludes ID 2 against an
+independent certificate.
+
+This theorem reduction cuts the adapter's census comparisons from 665,334 to
+4,734, or 140.54x.  In 31 interleaved rounds the native end-to-end median is
+0.994 ms versus 80.947 ms for the Python generator and 175.162 ms for the
+independent Python replay: 81.47x and 176.30x respectively.  Nine native RSS
+rounds give a 2,304 KiB median.  These are process-plus-serialization controls,
+not isolated kernel timings.
 
 ## Natural comparison implementations
 
