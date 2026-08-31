@@ -1,9 +1,9 @@
 # C1013 — Gram–discriminant invariant hierarchy
 
 **Lane:** clebsch
-**Status:** classical Wronskian mechanism identified; norm factorization proved
-as a classical-derived corollary; downstream arithmetic/reconstruction payload
-remains under audit.
+**Status:** base theorem and classicality audit frozen; deeper mechanism-level
+consequences/uses pass queued as C1013, with downstream family applications
+split to C1014.
 **Scope:** research note only. No manuscript or Ergodis source was edited.
 
 ## Executive result
