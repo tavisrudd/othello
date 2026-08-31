@@ -253,3 +253,129 @@ disqualifies the mechanism for three of the six known carrier orbits outright:
 `(6,3)`, `(8,5)` and `(10,13)` all have `M = 2` sparsest support (`{1,4}`,
 `{1,6}`, `{0,8}`).
 
+## 4. The unrestricted route, and why its constant is useless
+
+Dropping equivariance, the object to count is the honest one.  `w(s) ≤ d-1`
+holds iff `s` lies on a secant `(d-2)`-plane of the normal rational curve, so
+set
+
+```text
+V_s  =  { (t_1,…,t_{d-1}) ∈ (P^1)^{d-1}  :  s ∈ span{ P_{t_1},…,P_{t_{d-1}} } }.
+```
+
+Since `span{P_t : t ∈ T}` has codimension 2 in `PG(d,q)`, membership is two
+conditions, and the linear functionals vanishing on the `P_{t_i}` are
+`L_T · u` and `L_T · v` for `L_T = ∏_i (v - t_i u)`.  The coefficients of `L_T`
+are the elementary symmetric functions `e_k(t)`, each **multilinear**.  Hence:
+
+> `V_s` is the intersection of two divisors of multidegree `(1,1,…,1)` in
+> `(P^1)^{d-1}`, and `s` is not deep as soon as `V_s` has an `F_q`-point with
+> pairwise distinct coordinates.
+
+That is a clean and genuinely small description — two equations, each linear in
+each variable separately — and it is where an effective bound has to be applied.
+The trouble is the constant.
+
+**Via Lang–Weil in the Segre embedding.**  `(P^1)^{d-1} ⊂ P^{2^{d-1}-1}` has
+degree `(d-1)!`, and the `V_s` are hyperplane sections of it, so for a proper
+intersection `deg V_s = (d-1)!` and `dim V_s = d-3`.  The Ghorpade–Lachaud form
+of effective Lang–Weil for a geometrically irreducible variety of dimension `n`
+and degree `δ` gives
+
+```text
+| #V(F_q) − q^n |  ≤  (δ-1)(δ-2) q^{n-1/2} + C(n,δ) q^{n-1},
+```
+
+so positivity needs roughly `q > ((δ-1)(δ-2))^2 ≈ δ^4 = ((d-1)!)^4`.  At
+`d = 8` that is `5040^4 ≈ 6.5·10^{14}`.  The bound is explicit and it is
+worthless: the phenomenon it is meant to control switches off at 16.
+
+**Via Betti numbers of the ambient product.**  The Segre degree is the wrong
+invariant here — it is huge only because the embedding is.  Deligne's bound in
+the form `| #V(F_q) − q^n | ≤ (Σ_i b_i) q^{n-1/2}` with `b_i` the compactly
+supported Betti numbers is the right shape, and for `(P^1)^{d-1}` the total
+Betti number is `2^{d-1}`; cutting by two divisors multiplies this by a bounded
+factor via the Koszul complex, giving a total of order `c^{d}` for a small
+absolute `c` rather than `(d-1)!`.  That improves the threshold from
+`((d-1)!)^4` to something like `c^{4d}` — at `d = 8`, from `10^{14}` to perhaps
+`10^6`.  **Still four orders of magnitude above the truth, and still far above
+any field the strata can be swept over.**
+
+Neither version was carried out in detail, because neither can produce a usable
+number and the second requires Betti bounds for a possibly singular complete
+intersection that are themselves a small project.
+
+**The deeper problem is not the constant.**  Geometric irreducibility of `V_s`
+is not a technicality that can be assumed away: it is *false* exactly where the
+interesting behaviour lives.  For a persistent point, `s` is deep at every `q`,
+so `V_s(F_q)` has no point with distinct coordinates for any `q` whatever — the
+`F_q`-points all sit on the diagonal locus.  Any theorem of the form "`V_s`
+geometrically irreducible of dimension `d-3` ⟹ threshold" therefore carries a
+hypothesis that must be verified per point, and verifying it *is* the
+classification problem restated.  Lemma 1 tells us where the failure comes from
+(the ideal is contained in the multiples of `F`), but turning that into a proof
+that irreducibility holds off the persistent locus is not done here and is the
+actual open step.
+
+## 5. What a corrected hypothesis would have to supply
+
+Stated precisely, so a successor is not left guessing:
+
+1. **A dichotomy replacing geometric irreducibility.**  Prove: for `s` with
+   apolar degree `e ≥ 3` and lower generator `F` not split squarefree, the
+   complete intersection `V_s ⊂ (P^1)^{d-1}` is geometrically irreducible of
+   dimension `d-3` unless `s` lies in an explicitly described degeneration
+   locus.  Lemma 1 is the natural starting point: the two defining equations are
+   the pairing of `L_T·u` and `L_T·v` against `s`, so their degeneracy is
+   governed by the generators `F, H`, which are computable from `s`.
+2. **Betti bounds for that complete intersection**, so the effective constant is
+   `c^d` rather than `(d-1)!`.  The multidegree `(1,…,1)` structure is very
+   special and should make this tractable — these are the "multilinear
+   hypersurfaces" whose cohomology is accessible by Koszul resolution on
+   `(P^1)^{d-1}`.
+3. **A separate treatment of the `M = 2` locus**, which §3 shows the
+   equivariant argument cannot see and which is a divisor in every larger
+   stratum.  Since `M = 2` means `G` is linear, `s = X^α Y^β (g_0 Y^m + g_1 X^m)`
+   is a one-parameter family after torus normalisation, so this may be
+   accessible by hand — and it is where `(6,3)`, `(8,5)` and `(10,13)` live, so
+   it is worth doing on its own even without the rest.
+
+Item 3 is the cheapest and highest-value of the three.
+
+## 6. What this does and does not do for redundancies eleven and up
+
+The motivation was that C1018's fixed-locus closure stops at `r = 10` because no
+field-ranged theorem exists above it to pair the sweep against.  Being exact
+about what a stratum threshold would and would not supply:
+
+* A proved threshold `C(r,m)` would close **one stratum at a time**, not the
+  non-regular class.  The fixed-locus lemma needs *every* prime-order fixed
+  locus swept — unipotent, split for each `ℓ | q-1`, non-split for each
+  `ℓ | q+1`.  A carrier threshold speaks only to the split loci, and only to
+  those with `M ≥ 3`.
+* The binding locus is `ℓ = 2`, of projective dimension about `(d-1)/2`.  Even
+  granting a threshold, sweeping it up to `q ≈ C` costs `Σ_{q ≤ C} q^{(d-1)/2}`
+  points; at `r = 11` and `C = 10^6` that is beyond astronomical.  With the
+  realistic `C ≈ 10^6` from §4 the sweep is not merely expensive, it is
+  impossible.
+* Even in the fantasy where `C` were around 400, the C1018 drivers cap at
+  `q ≤ 251` because field elements are `u8`.  Sweeping past that needs a `u16`
+  element type — a real but modest change, worth recording as a prerequisite
+  rather than a blocker.
+
+So the honest statement of the combined position, which is weaker than the one
+the task hoped for:
+
+> The fixed-locus lemma closes the **non-regular** class at redundancies eight
+> and nine because an imported field-ranged theorem covers the tail.  At
+> `r ≥ 11` no such theorem exists, and the work here does **not** supply one.
+> What it supplies is a correct structural reduction (Theorem A), a proof that
+> the `§7` heuristic is unrepairable (Lemma 1), and a precise account of the two
+> obstructions — the `M = 2` locus and the effective constant — that a successor
+> must clear.
+
+And, for completeness, the limit that predates all of this: a stratum threshold
+would say nothing about orbits with **trivial** stabilizer, which C1018 §8
+item 11 already identifies as the entire residual at redundancies eight and
+nine.  Even a fully successful C1023 would not touch that class.
+
