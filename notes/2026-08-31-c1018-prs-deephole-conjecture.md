@@ -838,6 +838,23 @@ Three statements, in decreasing order of how well the data pin them.
 
 ### Conjecture PRS-1 (exceptional band).
 
+> **RISK FLAG, 2026-08-31 (C1024): the constant threshold may be a sampling
+> artifact.** Every carrier this campaign has found has `m <= 8` and `M <= 4`,
+> for the reason that those were the cheap strata to sweep — not because larger
+> ones were tested and came back empty. Along the `M = 3` direction the heuristic
+> threshold grows like `(r-3)^2/2` rather than staying constant, so the observed
+> "last exceptional field 13" may reflect the region searched rather than the
+> phenomenon. **This puts the constant-16 claim of PRS-1 at genuine risk**, and
+> the conjecture should not be quoted as though the threshold's constancy were
+> established. The designated falsifying cell is `(r, m) = (17, 7)` at `q = 29`
+> (a clean cell, `k = 13`); it was attempted and killed at 600 s. The stratum is
+> only 871 points, but cost is set by the ambient degree `d = 16`, so a deep point
+> must exhaust roughly `7·10^8` leaf tests — a small stratum is not a cheap sweep
+> once `r` is around 15 or more. The prerequisite is a sparsity-aware rank routine
+> exploiting that Hankel rank is at most `M` on a stratum by construction: a
+> driver change, not new mathematics.
+> → [C1024](2026-08-31-c1024-incidence-threshold.md)
+
 **For every redundancy `r ≥ 6` and every prime power `q ≥ 16` with dimension
 `k = q+1-r ≥ 6`, the deep holes of `PRS_k(q)` are exactly `P_r ∪ M^max_{r,p}`,
 of deep size `q(q+1)^2/2` plus the modular carrier's deep part.**

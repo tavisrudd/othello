@@ -30,7 +30,9 @@ Reed–Solomon wave extended to a fixed-locus classification →
 C1022 (novelty audit, pre-emption found →
 [report](../2026-08-31-c1022-q31-clebsch-recurrence-novelty-audit.md), surface sweep clean →
 [report](../2026-08-31-dye-1991-preemption-surface-sweep.md)); C1023 (Lang–Weil threshold, verified
-negative → [report](../2026-08-31-c1023-lang-weil-carrier-threshold.md)). Open in this lane: C159
+negative → [report](../2026-08-31-c1023-lang-weil-carrier-threshold.md)); C1024 (incidence route,
+closed negative, and it puts the C1018 constant-threshold conjecture at risk →
+[report](../2026-08-31-c1024-incidence-threshold.md)). Open in this lane: C159
 (U-atlas, in progress), C1021 (prime-power healthy-arc census, queued). Unallocated successors named
 by those reports: the regular-orbit reduction for the deep-hole residual, the incidence-bound
 reframing, the symmetry-reduced exhaustion prototype, and a real audit of the Sylvester-adjacent
