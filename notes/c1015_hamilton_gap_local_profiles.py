@@ -4,8 +4,8 @@
 This is deliberately a proof-search certificate, not a proof of the 18-gap.
 It independently re-enumerates exact covers after a fixed Hamilton root and
 records three small targets for a hand proof: local H-neighbour degree sums,
-the triangle subcase of degree-two three-root completions, and the residual
-degree profiles in the minimum-degree-three branch.
+the triangle and nontriangle degree-two completions, and the residual degree
+profiles in the minimum-degree-three branch.
 """
 
 import argparse
@@ -205,6 +205,73 @@ def build_certificate():
         if row["minimum_hamilton_edges"] is not None
     ) == 18
 
+    one_sided = {
+        index
+        for index in candidates
+        if hamilton(partner, index) and not hamilton(base, index)
+    }
+    unseen = set(one_sided)
+    degree_two_nontriangle_orbits = []
+    while unseen:
+        representative = min(unseen)
+        orbit = {action[representative] for action in actions}
+        assert orbit <= one_sided
+        unseen -= orbit
+        used = rooted_mask | gap.MASKS[representative]
+        edges = tuple(edge for edge in range(len(gap.EDGES)) if not used & (1 << edge))
+        available = tuple(
+            index
+            for index, mask in enumerate(gap.MASKS)
+            if not mask & used and not hamilton(partner, index)
+        )
+        extensions_by_edge = {edge: [] for edge in edges}
+        for index in available:
+            for edge in gap.MATCHINGS[index]:
+                extensions_by_edge[gap.EDGE_INDEX[edge]].append(index)
+        extensions = 0
+        no_isolate_extensions = 0
+        minimum_no_isolate_edges = 99
+
+        def extend_nontriangle(covered, chosen):
+            nonlocal extensions, no_isolate_extensions, minimum_no_isolate_edges
+            if len(chosen) == 6:
+                extensions += 1
+                adjacency, degrees = graph_data((base, partner, representative) + chosen)
+                if min(degrees) > 0:
+                    no_isolate_extensions += 1
+                    minimum_no_isolate_edges = min(
+                        minimum_no_isolate_edges,
+                        sum(len(neighbors) for neighbors in adjacency) // 2,
+                    )
+                return
+            first_uncovered = next(edge for edge in edges if not covered & (1 << edge))
+            for index in extensions_by_edge[first_uncovered]:
+                if not gap.MASKS[index] & covered:
+                    extend_nontriangle(covered | gap.MASKS[index], chosen + (index,))
+
+        extend_nontriangle(used, ())
+        degree_two_nontriangle_orbits.append(
+            {
+                "cycle_word": cycle_word(representative),
+                "extensions": extensions,
+                "minimum_no_isolate_hamilton_edges": (
+                    None if no_isolate_extensions == 0 else minimum_no_isolate_edges
+                ),
+                "no_isolate_extensions": no_isolate_extensions,
+                "orbit_size": len(orbit),
+            }
+        )
+    degree_two_nontriangle_orbits.sort(key=lambda row: row["cycle_word"])
+    assert len(one_sided) == 60
+    assert len(degree_two_nontriangle_orbits) == 8
+    assert sum(row["extensions"] for row in degree_two_nontriangle_orbits) == 44
+    assert sum(row["no_isolate_extensions"] for row in degree_two_nontriangle_orbits) == 42
+    assert min(
+        row["minimum_no_isolate_hamilton_edges"]
+        for row in degree_two_nontriangle_orbits
+        if row["minimum_no_isolate_hamilton_edges"] is not None
+    ) == 18
+
     lower_bounds = {3: 14, 4: 15, 5: 19, 6: 18, 7: 27, 8: 32}
     residual_profiles = []
     for degrees in itertools.combinations_with_replacement(range(3, 7), 9):
@@ -223,7 +290,8 @@ def build_certificate():
     ]
 
     return {
-        "degree_two_three_root_orbits": degree_two_orbits,
+        "degree_two_nontriangle_orbits": degree_two_nontriangle_orbits,
+        "degree_two_triangle_orbits": degree_two_orbits,
         "local_neighbor_degree_sum_minima": local_minimum,
         "maximum_number_of_degree_two_factors": maximum_degree_two_count,
         "minimum_degree_three_moment_residual_profiles": residual_profiles,
@@ -231,9 +299,9 @@ def build_certificate():
         "schema": "c1015-hamilton-gap-local-profiles-v1",
         "trusted_boundary": (
             "exact covers after a fixed ordered Hamilton root; the degree-two "
-            "table further fixes a residual matching Hamilton with both roots "
-            "and forbids its other Hamilton partners, hence treats a degree-two "
-            "vertex in a Hamilton triangle"
+            "tables either fix a residual matching Hamilton with both roots, "
+            "or fix an additional one-sided Hamilton matching and forbid further "
+            "Hamilton partners of the degree-two root"
         ),
     }
 

@@ -1,5 +1,63 @@
 {
-  "degree_two_three_root_orbits": [
+  "degree_two_nontriangle_orbits": [
+    {
+      "cycle_word": "03 16 27 48 59",
+      "extensions": 2,
+      "minimum_no_isolate_hamilton_edges": 21,
+      "no_isolate_extensions": 2,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "03 17 26 48 59",
+      "extensions": 2,
+      "minimum_no_isolate_hamilton_edges": 21,
+      "no_isolate_extensions": 2,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "08 14 26 37 59",
+      "extensions": 0,
+      "minimum_no_isolate_hamilton_edges": null,
+      "no_isolate_extensions": 0,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 14 27 36 59",
+      "extensions": 20,
+      "minimum_no_isolate_hamilton_edges": 18,
+      "no_isolate_extensions": 18,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 15 27 36 49",
+      "extensions": 0,
+      "minimum_no_isolate_hamilton_edges": null,
+      "no_isolate_extensions": 0,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 19 24 36 57",
+      "extensions": 0,
+      "minimum_no_isolate_hamilton_edges": null,
+      "no_isolate_extensions": 0,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "08 19 25 36 47",
+      "extensions": 16,
+      "minimum_no_isolate_hamilton_edges": 18,
+      "no_isolate_extensions": 16,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "08 19 26 35 47",
+      "extensions": 4,
+      "minimum_no_isolate_hamilton_edges": 22,
+      "no_isolate_extensions": 4,
+      "orbit_size": 10
+    }
+  ],
+  "degree_two_triangle_orbits": [
     {
       "cycle_word": "03 16 28 47 59",
       "extensions": 5,
@@ -214,5 +272,5 @@
   ],
   "rooted_exact_cover_completions": 173008,
   "schema": "c1015-hamilton-gap-local-profiles-v1",
-  "trusted_boundary": "exact covers after a fixed ordered Hamilton root; the degree-two table further fixes a residual matching Hamilton with both roots and forbids its other Hamilton partners, hence treats a degree-two vertex in a Hamilton triangle"
+  "trusted_boundary": "exact covers after a fixed ordered Hamilton root; the degree-two tables either fix a residual matching Hamilton with both roots, or fix an additional one-sided Hamilton matching and forbid further Hamilton partners of the degree-two root"
 }

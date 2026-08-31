@@ -870,19 +870,18 @@ sha256sum -c notes/c1015_hamilton_gap_local_profiles.sha256
 
 It separately replays the 173,008 rooted covers and records the sharp minimum
 neighbour-degree sums (8,14,15,19,18,27,32) at Hamilton degrees 2 through 8,
-the maximum of three degree-two factors under no isolation, and 24 dihedral
-orbits (110 total extensions) after fixing a Hamilton triangle whose third
-factor has degree two. Every extension in that smaller table already has no
-isolated factor; its smallest Hamilton count is 18. This treats only the
-triangle subcase of a degree-two vertex, not two nonadjacent Hamilton
-neighbours. It also reduces the
+the maximum of three degree-two factors under no isolation, the 24 dihedral
+orbits (110 total extensions) in the Hamilton-triangle degree-two subcase,
+and the eight one-sided orbits (44 extensions, 42 without isolates) in the
+nontriangle subcase. The no-isolate minimum is 18 in both tables, so together
+they cover every degree-two factor. It also reduces the
 minimum-degree-three, sub-18 branch to five degree profiles by the identity
 \(\sum_v\sum_{u\sim v}d(u)=\sum_vd(v)^2\). This is diagnosis only: the
 listed local bounds and the 24-row table have not yet been replaced by a
-hand proof. The files are respectively 9,729, 4,295, and 321 bytes, with
-SHA-256 values `0f7de76537255cfceaccbf7bc0926ca2e85e28117439ac10b9f2666a3d702eec`,
-`edf1d234270b4fb4afb41b20b5db51a86cbb06a8a2697a706849b49d8d041b27`, and
-`ec3343f759eb5d701833149251be8d19a6721e9091af971fa93ee8cbc00bac1a`.
+hand proof. The files are respectively 12,688, 5,775, and 321 bytes, with
+SHA-256 values `0be8476013270262e5326f40e7fac72d97d1d24553f52d12958a674c4b3b2668`,
+`022973fb5ba9fe2f04a1eb99ead7fee74994a740cd895cd01f77b6fb815eeff2`, and
+`ccb0218f6f8df893b852ccd8757319695b0298fedabd074d9778d3ce2a6f583c`.
 
 The bundle `c1015_ree_bridge.py`, `c1015_ree_bridge.json`, and
 `c1015_ree_bridge.sha256` independently enumerates the contained
@@ -1348,15 +1347,16 @@ not needed for the order-ten theorem.
   force the two adjacent four-vertices to use only three-neighbours, while a
   remaining four-vertex cannot reach neighbour sum 15. Thus the degree-three
   half of the 18-gap is a short lemma once the local bounds are explained.
-  The triangle subcase of a minimum-degree-two vertex is a three-root
-  completion problem: fixing that Hamilton triangle leaves 24
-  ordered-dihedral chord types and 110 extensions, all with no isolated factor
-  and with minimum 18. The nontriangle degree-two subcase remains open. This
-  is substantial localization, not a structural proof: the local neighbour
-  inequalities and the 24-orbit table remain finite certificate data. The
+  Every minimum-degree-two vertex is now covered by two finite rooted tables.
+  Its triangle subcase has 24 ordered-dihedral chord types and 110 extensions,
+  all no-isolate with minimum 18. In the nontriangle subcase, rooting at one
+  incident Hamilton edge leaves only eight one-sided chord types and 44
+  extensions; 42 have no isolate and again have minimum 18. This is a compact
+  finite proof of the degree-two half, not a structural proof: these 32 orbit
+  rows and the local neighbour inequalities remain certificate data. The
   clearest successor is a pentagon-decomposition lemma for the eight
   contracted 2-factors at a colour, which should simultaneously explain those
-  local bounds and the three-root exclusion.
+  local bounds and both degree-two tables.
 - **Why the sharp two-root packs have the rule “no (B_0) or no triangle” —
   finite statement settled, conceptual explanation open.** `group-compile`
   first proves that single-factor orbit multiplicities alone lose one bit:
