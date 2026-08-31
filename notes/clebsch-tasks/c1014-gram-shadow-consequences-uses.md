@@ -56,10 +56,25 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
   \(I=\Phi_6(\lambda)\). Jacobi-sum decomposition **refuted**: at \(m=3\) the
   descent quotients are non-CM elliptic curves with
   \(\operatorname{Jac}(C_3)\sim E_1^2\).
-- Open anomalies: sporadic collapse at \((m,p)=(6,23)\); the \(m=3\) curve
-  \(E_1\) shows 13 supersingular primes below 500 all \(\equiv11\bmod12\)
-  despite non-integral \(j=71^3/2160\) — needs an independent recheck (CM
-  signature vs a bug in the supersingular test).
+- Open anomalies: sporadic collapse at \((m,p)=(6,23)\) remains open. The
+  \(m=3\) supersingular anomaly is **resolved** (2026-08-30, independent
+  PARI recheck): the data are correct and extend (22 zeros of \(a_p\) below
+  3000, all \(\equiv11\bmod12\)), but the mechanism is classical, not CM.
+  \(E_1\) has conductor \(90\), rational torsion \(\mathbf Z/4\), and lies
+  in the eight-curve conductor-90 isogeny class with cyclic 12-isogenies.
+  A rational 4-torsion point forces \(4\mid p+1\) at any supersingular
+  prime, and the rational 3-isogeny forces \(p\equiv2\bmod3\); together
+  every supersingular prime is \(\equiv11\bmod12\). The abundance is an
+  enhanced Lang–Trotter constant from the same congruence concentration —
+  no conflict with Elkies (which gives infinitude, and here infinitely many
+  zero-\(a_p\) primes all \(\equiv11\bmod12\)). **Upgrade:** \(E_1\) is
+  modular of level 90, so \(\operatorname{Jac}(C_3)\sim E_1^2\) identifies
+  the entire \(m=3\) shadow census with the coefficient sequence of the
+  level-90 weight-2 newform of its isogeny class — an exact modular law for
+  the \(m=3\) bias (bias hits its minimal value exactly at these
+  supersingular primes), replacing Weil-bound estimates. Exact
+  Cremona/LMFDB label still to be pinned (needs elldata; class is
+  determined by conductor 90 + cyclic 12-isogeny structure).
 
 ## Session reports
 
