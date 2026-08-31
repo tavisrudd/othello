@@ -80,6 +80,44 @@ def complete_design(design):
     return result
 
 
+def one_factorizations(design):
+    edges = tuple(itertools.combinations(range(10), 2))
+    edge_index = {edge: index for index, edge in enumerate(edges)}
+    masks = tuple(
+        sum(1 << edge_index[edge] for edge in block)
+        for block in design
+    )
+    through = tuple(
+        tuple(index for index, mask in enumerate(masks) if mask & (1 << edge_index[edge]))
+        for edge in edges
+    )
+    full = (1 << len(edges)) - 1
+    result = []
+
+    def extend(used, chosen):
+        if used == full:
+            result.append(tuple(chosen))
+            return
+        choices = []
+        for edge_index_value in range(len(edges)):
+            if used & (1 << edge_index_value):
+                continue
+            candidates = tuple(
+                block_index
+                for block_index in through[edge_index_value]
+                if not (masks[block_index] & used)
+            )
+            if not candidates:
+                return
+            choices.append((len(candidates), candidates))
+        _, candidates = min(choices)
+        for block_index in candidates:
+            extend(used | masks[block_index], chosen + (block_index,))
+
+    extend(0, ())
+    return tuple(sorted(result))
+
+
 def perfect_matchings(vertices):
     vertices = tuple(vertices)
     if not vertices:
@@ -275,6 +313,17 @@ CHAR2_BASES = {
 }
 
 
+SEVEN_CORE_POLYNOMIALS = (
+    "-x4*y8+x8",
+    "-x7+y8",
+    "x5*y8-y5",
+    "y6*x8-x4*y8+x4-y6-x8+y8",
+    "y5*x8-y5-x8+y8",
+    "y6*x8-x5*y8",
+    "y5*x8-x7*y8",
+)
+
+
 def odd_integral_lift(design):
     variables, polys, _ = equations(design)
     target = ",".join(item.rstrip(",") for item in ODD_BASIS)
@@ -328,17 +377,27 @@ def seven_equation_core(design):
         [
             f"ring r=0,({','.join(variables)}),dp;",
             f"ideal I={','.join(chosen)};",
+            "ideal Z="
+            + ",".join(
+                f"({polynomial})-({expected})"
+                for polynomial, expected in zip(chosen, SEVEN_CORE_POLYNOMIALS)
+            )
+            + ";",
             f"ideal E=eliminate(I,{eliminate});",
-            'print("ELIMINATION");print(E);quit;',
+            'print("SIMPLIFIED");print(Z);print("ELIMINATION");print(E);quit;',
         ]
     )
     output = singular(program)
+    simplification = output.split("SIMPLIFIED\n", 1)[1].split("ELIMINATION\n", 1)[0]
+    assert set(simplification.replace(",", "").replace(" ", "").replace("\n", "")) <= {"0"}
     polynomial = output.split("ELIMINATION\n", 1)[1].strip()
     assert polynomial == "x8^4-2*x8^3+x8^2"
     return {
         "equation_indices": indices,
         "constraints": tuple(metadata[index] for index in indices),
+        "simplified_polynomials": SEVEN_CORE_POLYNOMIALS,
         "elimination_polynomial": polynomial,
+        "human_reduction": "-2*(r-1)^2/r^2 with r=y8/x8",
     }
 
 
@@ -354,6 +413,24 @@ def main() -> None:
     reduced = {}
     for name, entry in classes.items():
         parent = tuple(tuple(tuple(edge) for edge in block) for block in entry["matching_design"])
+        factorizations = one_factorizations(parent)
+        memberships = tuple(
+            sum(block_index in factorization for factorization in factorizations)
+            for block_index in range(63)
+        )
+        if name == "classical-hyperoval":
+            assert len(factorizations) == 28 and set(memberships) == {4}
+            assert {
+                len(set(left) & set(right))
+                for left, right in itertools.combinations(factorizations, 2)
+            } == {1}
+        else:
+            assert len(factorizations) == 1 and sorted(memberships).count(1) == 9
+        report.setdefault("ten_point_factorizations", {})[name] = {
+            "count": len(factorizations),
+            "block_membership_counts": tuple(sorted(set(memberships))),
+            "sha256": M10.digest_object(factorizations),
+        }
         for deleted in range(10):
             design = reduce_design(parent, deleted)
             validate_match9(design)

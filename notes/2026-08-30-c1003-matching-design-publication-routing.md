@@ -67,9 +67,10 @@ The packet has four different strengths and they should not be conflated.
   regular-hyperoval deletions are rank-three realizable over `K` exactly when
   `char(K)=2` and `K` contains `F_8`; the two nonhyperoval deletions are never
   realizable. In odd characteristic three classes fail the six-local test,
-  while the fourth passes every six-set and is excluded by a seven-equation
-  global coordinate certificate. Thus the local condition is necessary but
-  not sufficient.
+  while the fourth passes every six-set and is excluded by a seven-
+  concurrence human proof whose last identity is
+  `-2(r-1)^2/r^2=0`. Thus the local condition is necessary but not sufficient,
+  and the precise global obstruction degenerates in characteristic two.
 
 Thus the new general result is a **family-level necessary obstruction**, not
 a full representation classification. The `k=10` corollary participates in
@@ -104,8 +105,28 @@ completes to a plane of order eight. The literature located in this audit did
 not state the C1002 six-local odd-characteristic obstruction, its exact
 average, the scalar induced-`P_3` certificate, or the three-block weak
 field-realizability exclusion.
-Nor did it state an arbitrary-field rank-three classification of the four
-nine-point deletion classes.
+The later audit did locate a close priority ceiling: Nagy proves that the Ree
+unital `R(3)` embeds in a projective plane over `K` exactly when `K` contains
+`F_8`, with uniqueness and containment in `PG(2,8)`. For the regular hyperoval,
+the 63 matching blocks are the same 63 external points, while the 28 external
+lines are the one-factorizations of `K_10`. Nagy's hypothesis assumes those 28
+nine-point sets are lines. The present rank-three hypothesis assumes only the
+hyperoval secant concurrences. No source located here proves that the latter
+automatically upgrades to the former.
+
+An exact enumeration makes this bridge canonical rather than terminological.
+The regular ten-point matching design has exactly 28 one-factorizations; every
+matching block belongs to four, and every pair of factorizations intersects in
+one block. Hence the factorization/block incidence is a `2-(28,4,1)` design,
+identified with `R(3)` by the regular-hyperoval model in Nagy's Section 2. The
+nonhyperoval matching design has only one one-factorization. The remaining
+geometric question is exactly whether rank-three secant concurrence forces the
+nine matching centers in each of the regular class's 28 factorizations to be
+collinear. The ordered factorization-list SHA-256 values are
+`6408d524c6f0f50905c6bafe2d03624472a13ebccd8360e973d2ed08f12bc987`
+(regular) and
+`929e9543b96272615536dc3886c7abc5cb429b8680d56f1c37454a7d567fce7e`
+(nonhyperoval).
 
 The owning novelty-ledger wording should therefore be no stronger than:
 
@@ -113,8 +134,12 @@ The owning novelty-ledger wording should therefore be no stronger than:
 > was not located in the searched literature is the six-point
 > odd-characteristic obstruction for weak rank-three realizations over an
 > arbitrary field, together with its scalar certificate and the resulting
-> three-block exclusion of the two order-eight classes, or the resulting
-> all-field classification of their four nine-point deletions.
+> three-block exclusion of the two order-eight classes. Nagy's Ree-unital
+> embedding theorem already supplies the same `F_8` field boundary for the
+> regular external-line design under a stronger incidence hypothesis. What was
+> not located is the automatic passage from the matching design's secant-
+> concurrence realization to that Ree-unital embedding, or the all-field
+> nonrealizability of the two nonhyperoval deletions.
 
 Do not claim a first classification of order-eight abstract hyperovals, a
 first nonembeddability result, or a new classification of `pg(5,7,3)`. Do not
@@ -138,8 +163,9 @@ corollary. The logical order should be:
 Put the nine-point classification immediately before the ten-point theorem.
 Its completion lemma is human proof; the count of four pointed classes is an
 external-classification input; three odd-characteristic exclusions have
-short local certificates; and the remaining odd-characteristic exclusion
-and characteristic-two classification are trusted exact computation.
+short local certificates; the remaining odd-characteristic exclusion has a
+short normalized-coordinate proof; and only the characteristic-two
+classification remains trusted exact computation.
 
 ### Draft nine-point theorem
 
@@ -157,16 +183,21 @@ and characteristic-two classification are trusted exact computation.
 > Mathon's two ten-point classes and their two point orbits give the four
 > nine-point classes. Three representatives violate the six-local
 > obstruction. The remaining regular-hyperoval deletion passes every local
-> test, but seven concurrence equations eliminate to
-> `x_8^2(x_8-1)^2`; the projective-frame arc inequalities exclude both roots
-> in odd characteristic. In characteristic two, saturated lexicographic
+> test. Normalize four points to the projective frame and put
+> `a=x_8`, `b=y_8`, and `r=b/a`. Seven concurrence equations successively
+> give `x_4=1/r`, `x_7=b`, `y_5=ar^2`, `y_6=r^2`,
+> `r^2(a-1)=1-r`, and
+> `a(r^2+r-2)+1/r-r^2=0`. Substitution reduces the last equation to
+> `-2(r-1)^2/r^2=0`. The arc inequalities give `a,b!=0` and `a!=b`, hence
+> `r!=1`, a contradiction in odd characteristic. In characteristic two,
+> saturated lexicographic
 > bases leave precisely `u^3+u^2+1=0` for the two regular deletions and give
 > the unit ideal for both nonhyperoval deletions. Deleting a point from the
 > regular hyperoval over `F_8` supplies the converse.
 
 The final theorem should display the seven blocks/equations or point to a
-compact certificate table. Do not call that elimination a human proof until
-it has a direct incidence derivation.
+compact certificate table. The normalized substitution proof is human; the
+elimination remains independent regression evidence.
 
 For the tracked ordering of the survivor's 126 equations, one minimal core
 found by greedy deletion has indices `30,108,100,75,56,76,64`. The underlying
@@ -182,6 +213,29 @@ where the fourth is used. Elimination leaves
 `x8^4-2*x8^3+x8^2`. The full unsaturated-basis lift has only denominator
 prime `2`; its 9,324-byte matrix has SHA-256
 `0d30b437a8656c008414c0951002820f8474e74efda3f843591f3257e8c4cd54`.
+
+For a human proof, those seven determinants simplify to
+
+```text
+x8=x4*y8,  x7=y8,  y5=x5*y8,
+y6*x8-x4*y8+x4-y6-x8+y8=0,
+y5*(x8-1)=x8-y8,  y6*x8=x5*y8,  y5*x8=x7*y8.
+```
+
+With `a=x8`, `b=y8`, and `r=b/a`, the arc inequalities permit division by
+`a`, `b`, and `r`, and give `r!=1`. The first, third, sixth, and seventh
+relations yield `x4=1/r`, `y5=ar^2`, and `y6=r^2`. The fifth gives
+`a=(r^2-r+1)/r^2`. After these substitutions the fourth relation is
+
+\[
+ a(r^2+r-2)+\frac1r-r^2
+ =-\frac{2(r-1)^2}{r^2}=0.
+\]
+
+This contradicts `r!=1` outside characteristic two. The obstruction is
+therefore a genuine seven-block gluing defect, invisible on every six-set,
+and its characteristic-two disappearance is structural rather than an
+artifact of elimination.
 
 The ten-point proof should preserve its abstract-classification and
 partial-geometry paragraphs, then replace the normalized 189-equation
@@ -281,8 +335,11 @@ compressed sketch.
   representatives, verifies canonical completion, emits all six-local
   witnesses, checks the four characteristic-two orbit representatives,
   verifies the odd-characteristic integral lift, and checks the seven-
-  equation elimination polynomial. Its input is the existing tracked JSON;
-  it does not silently re-enumerate the abstract classes.
+  equation elimination polynomial. It also enumerates the 28 canonical regular
+  one-factorizations, verifies their `2-(28,4,1)` intersection parameters, and
+  distinguishes the nonhyperoval's unique factorization. Its input is the
+  existing tracked JSON; it does not silently re-enumerate the abstract
+  classes.
 
 ### Formal annotations
 
@@ -291,8 +348,9 @@ compressed sketch.
 - Classify Mathon's two-class completeness as an external theorem.
 - Classify the two point orbits in each ten-point class as an external input,
   and the canonical nine-to-ten completion as human proof.
-- Classify the nine-point seven-equation core and the characteristic-two
-  branch as trusted exact computation and
+- Classify the nine-point seven-concurrence substitution as human proof, its
+  elimination as independent regression evidence, the characteristic-two
+  branch as trusted exact computation, and
   the `F_8` construction as direct finite-field verification.
 - No Lean expansion is required for publication. A future formalization
   would naturally split into graph lemmas (`D=2 induced-P3` and cluster
@@ -361,7 +419,7 @@ source edit here.
 
 ## Literature audit
 
-Opening count: **one source was read at full-text depth** in this audit.
+Opening count: **three sources were read at full-text depth** in this audit.
 The negative verdict is therefore phrased as “not located in the searched
 domain,” not as a categorical priority claim.
 
@@ -380,6 +438,27 @@ domain,” not as a categorical priority claim.
   This verifies the abstract-hyperoval definition, equivalence with even
   abstract ovals, projective/embeddable terminology, and the 73-point secant
   ambient relevant at order eight.
+- **Bamberg--Harris--Penttila, _On abstract ovals with Pascalian secant
+  lines_ (2018), DOI `10.1515/jgth-2018-0028`.** Read depth: `full text`;
+  author-accepted manuscript, all sections. Cache key
+  `10.1515/jgth-2018-0028`, SHA-256
+  `5dfeb843d0cd9342c6689aa96168f44e9bed7b37b0004248cb509658884351c7`.
+  It characterizes abstract conics by regular involutions and Pascalian secant
+  lines and reconstructs `PGL(2,F)` through Moufang sets. It does not study a
+  projective realization of only the finite secant-concurrence reduct.
+- **Nagy, _Embeddings of Ree unitals in a projective plane over a field_
+  (2021), DOI `10.1016/j.ffa.2021.101875`.** Read depth: `full text` for
+  arXiv v3 (`arXiv:2007.10464`, all sections), cache SHA-256
+  `e268f76c7f01a40dd07d59f2077b0fb14a3b8c654041432d1dbf2296ea021f61`;
+  the published version's Sections 1--5 were also checked, cache SHA-256
+  `99e5b60d981c80fe358bad28ebbfe5d6cf18b4f19a50fe8480966c74477aed30`.
+  Theorem 1 proves that `R(3)` embeds in `PG(2,K)` exactly when `F_8` is a
+  subfield of `K`, uniquely and inside an order-eight subplane. Sections 2 and
+  5 identify its dual model with the 63 external points and 28 external lines
+  of the regular hyperoval and derive an odd-characteristic factor `2` followed
+  by `v^3+v^2+1` in characteristic two. This is the firm priority ceiling for
+  the regular nine-point field conclusion, but its input includes the 28
+  external-line blocks absent from the matching-design realization notion.
 - **Cooper, _Abstract hyperovals, partial geometries, and transitive
   hyperovals_ (2015 dissertation).** Read depth: `partial`; dissertation PDF,
   Chapters 6.1--6.3, the order-eight classification paragraph, the
@@ -436,19 +515,49 @@ Exact web queries used:
 - `"pg(5,7,3)" embedding projective plane`
 - `"pg(5,7,3)" projective embedding`
 - `"partial geometry pg(5,7,3)" representation field`
+- `"abstract oval" Pascalian secant lines`
+- `"abstract hyperoval" projective embedding cross ratio`
+- `hyperfactorization projective representation field concurrence`
+- `"pg(5,7,3)" embedding projective plane`
+- `projective plane punctured subplane embedding extends field monomorphism`
+- `embedding partial projective plane into Desarguesian plane subfield theorem`
+- `linear representation abstract conic secant incidence embedding`
+- `"secant lines" "abstract conic" embedding`
+- `"matching design" "Ree unital"`
+- `"abstract oval" "Ree unital"`
+- `"abstract hyperoval" "Ree unital"`
+- `"MATCH(9,4,1)" unital`
+- `one-factorization K10 collinear points hyperoval external line`
+- `perfect matchings concurrence centers collinear projective geometry`
+- `hyperoval one-factorization external lines matching design`
+- `"one-factorization" "external line" hyperoval`
 
 The searches promoted the classical matching-design, abstract-oval,
-abstract-hyperoval, and partial-geometry sources above. No result was found
-using the paper's arbitrary-field weak rank-three notion or the six-local
-cluster obstruction. No citation-graph exhaustiveness claim is made, and the
-negative verdict does not rest on an enumerated citing set.
+abstract-hyperoval, partial-geometry, Pascalian-secants, and Ree-unital sources
+above. No result was found using the paper's arbitrary-field weak rank-three
+notion, the six-local cluster obstruction, or an automatic one-factorization-
+line completion from the secant-concurrence data. Nagy's theorem prevents any
+claim that the bare `F_8` boundary or its factor-two/cubic coordinate mechanism
+is new. No citation-graph exhaustiveness claim is made, and the negative verdict
+does not rest on an enumerated citing set.
 
 Coverage gaps: MathSciNet was not accessible; Google Scholar automated search
 was not attempted; the original Buekenhout, Mathon, and Faina full texts were
 not obtained; the Reichard--Woldar published version was not read; and
 terminology for weak embeddings is not standardized enough for keyword search
-alone to close priority. These gaps require the qualified novelty wording
-above.
+alone to close priority. The exact equivalence, if any, between the seven-block
+shadow here and Nagy's super O'Nan configuration has not yet been checked.
+These gaps require the qualified novelty wording above.
+
+### Verdict-change surface checklist
+
+- Updated here: C1003 routing/novelty report, archive row, relconic handoff, and
+  C1015 successor card/queue row.
+- Not edited by instruction: manuscript, claim--proof--novelty ledger, README,
+  results snapshot, portfolio summary, mirror, and formal/release surfaces.
+  The scoped search found no existing `MATCH(9,4,1)` or Ree-unital claim on the
+  manuscript/README/snapshot surfaces, so no published sentence was left with
+  the superseded priority wording.
 
 ## `ej` + `tt` closeout
 
@@ -456,8 +565,11 @@ The extra-juice strengthening is now both conceptual and theorem-level. The
 paper should identify its even matching designs as abstract hyperovals and
 state exactly why its realization problem is not classical projectivity; it
 can then classify all four nine-point deletions under the weaker arbitrary-
-field rank-three notion. This answers a field-realizability question that the
-classical abstract-oval classification by itself does not answer.
+field rank-three notion. The Tao/literature pass then located Nagy's Ree-unital
+theorem, which already owns the regular model's `F_8` boundary under the
+external-line incidence hypothesis. The genuinely higher opportunity is now
+to prove that secant concurrence forces those external lines: a completion
+theorem turning the matching realization into a Ree-unital embedding.
 
 The useful subtraction is equally important: after the human odd-
 characteristic proof lands, the 189-equation presentation should no longer
@@ -466,12 +578,13 @@ independent regression certificate.
 
 ## Mystery ledger
 
-- **Weak-versus-projective embedding theorem — open.** It is not known from
-  the sources read whether every weak rank-three realization of an abstract
-  hyperoval over a Pappian plane satisfies a classical completion theorem.
-  Such a theorem could pre-empt or greatly generalize the field-specific
-  elimination and deserves a primary-source audit before any standalone
-  claim.
+- **Weak-versus-Ree completion theorem — open, owned by C1015.** For the
+  regular ten-point design, the 63 matching centers are Nagy's 63 dual
+  Ree-unital points and the 28 one-factorizations are the missing external-
+  line blocks. It is not known whether the concurrence realization forces
+  each nine-center factorization to be collinear. A positive bridge would let
+  Nagy's theorem replace the regular-class coordinate classification and add
+  uniqueness, admissibility, and subplane containment.
 - **Infinite-family force — open.** The six-local test is necessary for all
   sizes, but no infinite family of abstract designs is yet excluded by it.
   This is the main mathematical gate to a standalone representation paper.
@@ -479,11 +592,15 @@ independent regression certificate.
   distinguished point passes every six-set but is impossible in odd
   characteristic. It is a small explicit witness that local admissibility
   does not imply global realizability.
-- **Human form of the seven-equation certificate — open.** Exact elimination
-  gives `x_8^2(x_8-1)^2` from seven displayed concurrence equations, with an
-  integral lift whose only denominator prime is two. A synthetic derivation
-  would upgrade the remaining odd-characteristic branch from trusted
-  computation to human proof.
+- **Human form of the seven-equation certificate — settled in normalized
+  coordinates.** The seven determinants reduce by direct substitution to
+  `-2(r-1)^2/r^2=0`, contradicting the arc inequality `r!=1` in odd
+  characteristic. The exact elimination and integral lift remain independent
+  regression evidence.
+- **Projective meaning of the ratio defect — open, owned by C1015.** The
+  normalized ratio `r=b/a` behaves like a transition/holonomy parameter, but
+  the frame-free bracket or cross-ratio invariant and the class of incidence
+  shadows carrying the same `2(r-1)^2` defect have not yet been identified.
 - **Quantitative defect transfer — open.** One bad six-set certifies failure
   of zero defect, but no numerical lower bound on the global chord defect has
   yet been extracted from the number or type of bad six-sets.
