@@ -27,7 +27,7 @@ task-specific feature extractors remain private adapters.
 | C1002/C1008 | wedge deficit is twice the induced-`P3` count; zero exactly for cluster graphs | pattern recognition stayed in research scripts | landed allocation-free packed-graph census |
 | C1013/C1014 | quadratic-character census, product twists, squarefree preflight, bad-prime routing | single polynomial and linear twist already fit | landed nonmaterialized product census and exact `gcd(f,f')` degree |
 | C1008/C1009/C1011 | controller proposes and audits finite predicates | CLI evolution retained/transported too much and synthesized Boolean leaves did not type-check | landed streaming evolution API, bulk daemon evaluation, Boolean VM constants, synthesis regression |
-| C1011 | adaptive/nonadaptive query design over a finite incidence system | ceiling can show ambiguity but cannot optimize query cost | next-tier generic query-design compiler/certificate |
+| C1011 | adaptive/nonadaptive query design over a finite incidence system | ceiling could show ambiguity but could not construct query strategies | landed flat adaptive/nonadaptive compilers, verifiers, and pair-query lower bound |
 | C1005/C1012 | coherent closure and fusion-primitivity | spectral sufficient condition was covered; Hadamard/common-neighbour closure was not | landed exact transpose/intersection-count coherent refinement |
 | C1013/C1014 | higher characters, Jacobi sums, cyclotomic cosets, curve-supported sums | quadratic characters only | high-value algebraic extension after coherent closure |
 | C1015 | Hamilton-pair parity and shared-two-label closure | generic incidence/group kernels exist, but no typed linear-constraint closure engine | retain as a private fixture for a future interpolation/closure kernel |
@@ -73,6 +73,17 @@ explicit 16-byte signature records avoid one allocation per ordered pair. A
 five-cycle control reaches rank three by both the new coherent route and the
 modular-power route.
 
+The following query-design tranche takes arbitrary binary hypothesis masks,
+constructs and replays nonadaptive separating families and flat adaptive trees,
+and never recurses. For pair-membership queries it imports the component
+theorem that a separating selected-edge graph has at most one isolate and no
+two-vertex component. An iterative connected-triple exact cover attains the
+resulting lower bound when possible. On the frozen private C1011 incidence,
+the generic engine independently returns the exact known values: 14
+nonadaptive queries and adaptive depth 11. The private control is isolated in
+`ergodis-private/controls/query-design-c1011`; no projective or task vocabulary
+enters the public module.
+
 ## Evolve/control consequences
 
 The new batch operation is the bridge from the current external
@@ -95,26 +106,25 @@ successive-halving scorecards remain open.
 
 ## Highest-EV remaining kernels
 
-1. **Finite query-design compiler.** Accept hypothesis-by-query incidence
-   masks; certify separating nonadaptive families and adaptive decision trees;
-   then add exact optimization for bounded instances. C1011's `22/66` fixture
-   is the known-answer gate, but the public API is fault diagnosis and active
-   identification.
-2. **Higher multiplicative-character layer.** Compile a cyclic log table once,
+1. **Higher multiplicative-character layer.** Compile a cyclic log table once,
    support coset-restricted censuses and exact Jacobi sums, and retain
    positive/zero/class counts as witnesses. This directly absorbs the
    C1014 cyclotomic-number work.
-3. **Finite polynomial algebra.** Extend the landed derivative/GCD preflight
+2. **Finite polynomial algebra.** Extend the landed derivative/GCD preflight
    to squarefree factor degrees, reduction modulo `x^p-x`, and recurrence
    compilation. This prevents callers from using symbolic systems merely to
    shape a character-sum request.
-4. **Typed linear-constraint closure.** Compile small incidence/interpolation
+3. **Typed linear-constraint closure.** Compile small incidence/interpolation
    identities and propagate equality, parity, and pencil-membership closure.
    C1015 is a strong private fixture; public semantics should be generic
    finite-module constraints.
-5. **Compact coherent transcripts.** The deterministic final-color replay is
+4. **Compact coherent transcripts.** The deterministic final-color replay is
    exact, but large public certificates should stream refinement splits or
    intersection tables rather than duplicate all compiler work.
+5. **General exact query optimization.** The pair-query triple-factor case is
+   theorem-optimal and the generic constructors always emit exact replayable
+   strategies, but arbitrary-mask minimum nonadaptive selection and
+   minimum-depth adaptive trees remain bounded exact-search backends.
 
 ## Acceptance and non-goals
 

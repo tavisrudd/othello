@@ -39,6 +39,7 @@ pub mod packed_ternary;
 pub mod projective;
 pub mod provenance;
 pub mod quadratic_window;
+pub mod query_design;
 pub mod residual_hitting;
 pub mod root_execution;
 pub mod rpc;
@@ -167,6 +168,12 @@ pub use ordered_resource::{
     ParetoWorkspace, ValidatedParetoObjective, WitnessedParetoFront, WitnessedParetoWorkspace,
 };
 pub use quadratic_window::concave_quadratic_window;
+pub use query_design::{
+    compile_greedy_adaptive_queries, compile_greedy_nonadaptive_queries,
+    pair_query_nonadaptive_lower_bound, verify_adaptive_queries, verify_nonadaptive_queries,
+    AdaptiveQueryCertificate, AdaptiveQueryMetrics, AdaptiveQueryNode, NonadaptiveQueryCertificate,
+    QueryDesignError,
+};
 pub use residual_hitting::{
     verify_residual_hitting_refutation, ResidualHittingError, ResidualHittingWorkspace,
 };

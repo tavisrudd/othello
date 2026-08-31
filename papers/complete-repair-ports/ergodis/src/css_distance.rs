@@ -29,6 +29,7 @@ const WIDE_SYNDROME_WORDS: usize = 3;
 const LARGE_SYNDROME_WORDS: usize = 6;
 const HUGE_SYNDROME_WORDS: usize = 11;
 const COLOSSAL_SYNDROME_WORDS: usize = 13;
+#[cfg(feature = "large-css")]
 const HUGE_LOGICAL_WORDS: usize = 4;
 const FOUR_COMPLETION_BLOOM_BITS: usize = 1 << 27;
 const MAX_ENUMERATED_FOUR_COMPLETIONS: usize = 10_000_000;
