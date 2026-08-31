@@ -137,9 +137,15 @@ as each coherent tranche lands.
    recompute/Gray ratios of 13.542x cycles, 4.760x instructions, 11.989x
    branches, and 13.462x wall, with exact candidate and answer parity. Raw
    evidence is under `/home/tavis/.cache/ergodis-perf/c1017-linear/final-ab`.
-   The private registry now records 60 pass, 8 open, and 34 not-applicable
-   cells. Current next slice: retain the alignment attachment full-search
-   counter A/B.
+   The alignment controller now has its missing full-search counter control as
+   well. Seven rotated budget-12 pairs traverse the identical 309,777-state
+   rooted DFS with zero notifications; idle/baseline is 1.000965x cycles,
+   1.000274x instructions, and 1.004963x counter-enabled time (`t=0.95`). This
+   supports no measurable control-plane overhead at the complete search
+   boundary. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-alignment/full-search-ab`. The private
+   registry now records 61 pass, 7 open, and 34 not-applicable cells. Current
+   next slice: retain the generic root-execution single-thread control.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

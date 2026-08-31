@@ -374,6 +374,19 @@ fall 1.126x; median RSS is 2,368 versus 2,448 KiB. Raw evidence is under
 `/home/tavis/.cache/ergodis-perf/c1017-linear/final-ab`. The registry now has
 60 pass, 8 open, and 34 not-applicable cells.
 
+The alignment attachment row now has the missing full-search control rather
+than only its isolated steering-gate microbenchmark. Seven rotated same-core
+pairs run the exact budget-12 rooted DFS with symmetry and compact duplicate
+keys, comparing the production feature-off entry point against an idle
+event-driven controller with no plans. Every run returns the same UNSAT result
+after exactly 309,777 states, 200,092 duplicates, and 258,323 infeasible
+states; controlled runs report zero semantic notifications. Idle/baseline is
+1.000965x cycles (`t=0.741`), 1.000274x instructions, 1.000400x branches,
+0.999755x branch misses, and 1.004963x counter-enabled time (`t=0.952`). No
+overhead is measurable at the complete DFS boundary. Raw evidence is under
+`/home/tavis/.cache/ergodis-perf/c1017-alignment/full-search-ab`. The registry
+now has 61 pass, 7 open, and 34 not-applicable cells.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

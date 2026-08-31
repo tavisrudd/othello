@@ -35,7 +35,7 @@
       "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
       "layout": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/alignment.rs"]},
-      "single_thread_counters": {"status": "open", "reason": "The steering-gate microbench does not replace a retained full-search counter A/B."},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "parallel_counters": {"status": "na", "reason": "No public parallel attachment search is exposed."},
       "contention": {"status": "na", "reason": "No public parallel attachment search is exposed."}
     },
