@@ -124,6 +124,19 @@ report.
   ([[8,3,2]]'s ±1-phase gate evades the textbook uniform-phase
   divisibility argument yet lands on the threshold). The n=9, wX ≤ 6
   pass is excluded from the claim with a resume command.
+- **Wave 3B, qLDPC exact-distance sweep (landed ~02:15)** —
+  `2026-08-31-c1018-hunt-qldpc-sweep.md`, helper
+  `2026-08-31-c1018-qldpc-helper.py`. **All six open lifted-product
+  candidates from Liu–Marquardt arXiv:2606.24808 §S7 closed exactly**,
+  every one replacing a published randomized upper bound (all tight):
+  [[1428,186,18]], [[1496,198,16]], [[1496,192,16]], [[1496,198,14]],
+  [[1500,81,18]], [[1500,76,20]]. **New exact k·d²/n frontier record:
+  [[1428,186,18]] at 42.20** (previous exact record 33.88; bivariate
+  frontier 19.2), found in ~51 s via a verified right-translation anchor
+  reduction (42–60x anchor cut). Generic layer validated bit-identically
+  against the certified R2Elite02 matrices; independent witness
+  re-verification throughout. Evidence + SHA256SUMS under
+  ~/.cache/ergodis/c1018/qldpc/ pending compact-certificate landing.
 - **Wave 1B, transversal/CSS (landed ~23:45)** —
   `2026-08-30-c1018-hunt-transversal-css.md`; driver
   `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes
