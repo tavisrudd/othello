@@ -359,10 +359,10 @@ with POPCNT and SSE4.1, scalar population counts feed four parallel classes at
 a time into packed unsigned maxima.  There is no per-object feature check and
 the exact generic kernel remains the fallback.  Seven-run counter A/Bs on CPU
 2 reduce end-to-end time from 176.37 to 57.38 ms (3.074x), cycles from 872.8 M
-to 272.8 M (-68.7%), and instructions from 3.919 B to 1.319 B (-66.4%).  The
-At that stage the result is 81.7 million ambient objects/s, 58.2 cycles and 281.4 instructions
-per object.  The complete histogram, extremal count, cap/orbit claims, and
-historical representative remain unchanged.
+to 272.8 M (-68.7%), and instructions from 3.919 B to 1.319 B (-66.4%).  At
+that stage the result is 81.7 million ambient objects/s, 58.2 cycles, and 281.4
+instructions per object.  The complete histogram, extremal count, cap/orbit
+claims, and historical representative remain unchanged.
 
 Orbit closure also replaces the generic randomized `HashSet` with a bounded
 Fibonacci-hashed mask table sized once from the certified extremal count.  Its
