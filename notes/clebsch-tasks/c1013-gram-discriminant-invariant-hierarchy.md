@@ -1,8 +1,9 @@
 # C1013 — Gram–discriminant invariant hierarchy
 
-**Lane:** clebsch  
-**Status:** theorem candidate proved in safe characteristic; first literature
-screen complete; normalization and modular-characteristic refinement remain.  
+**Lane:** clebsch
+**Status:** classical Wronskian mechanism identified; norm factorization proved
+as a classical-derived corollary; downstream arithmetic/reconstruction payload
+remains under audit.
 **Scope:** research note only. No manuscript or Ergodis source was edited.
 
 ## Executive result
@@ -270,23 +271,23 @@ the same marking-loss obstruction as in Paper V, now for an entire family.
 
 ## 6. Priority and literature boundary
 
-Classical invariant theory supplies bracket rings, discriminants, the
-quartic generators \(I,J\), and the first fundamental theorem. Kaipa,
-Patanker, and Pradhan explicitly use the quartic apolar square class and the
-factor \(\lambda^2-\lambda+1\) in their finite-field line-orbit problem.
+The follow-up audit
+[C1013 classicality audit](c1013-gram-discriminant-classicality-audit.md)
+identifies the Vandermonde-divided exterior covariant as the classical
+Wronskian isomorphism/Hermite-reciprocity construction. McDowell--Wildon give
+an explicit version over arbitrary fields. The norm identity
+\(G_{d,r}=\Delta\Phi_{d,r}\) was not found stated in the inspected sources,
+but it is an immediate functorial corollary of that classical map and should
+be classified as **classical-derived**, not as a standalone novelty theorem.
 
-The bounded searches performed for C1013 found no source stating the general
-Gram–discriminant quotient \(G_{d,r}=\Delta\Phi_{d,r}\), the even/odd
-square-character dichotomy, or the interpretation of \(\Phi_{d,r}=0\) as the
-interior Gram-degeneracy divisor on point-configuration moduli. This is not an
-absence proof. A theorem-level audit should search classical symbolic-method,
-compound-matrix, and apolarity sources before any novelty claim.
-
-If the general factorization is not already explicit, it is an upward
-priority-judo theorem: the known quartic apolar formula and its finite-field
-character consequence become the first corollary. Even if the factorization
-is classical in another language, the finite-field/moduli/reconstruction
-interpretations may constitute latent-consequence judo.
+Kaipa--Patanker--Pradhan also explicitly derive the quartic apolar square
+factor \(\lambda^2-\lambda+1\) and its finite-field counts. The viable
+priority claim therefore begins only with downstream consequences not located
+in the audited sources: the parity ceiling, arithmetic double-cover family,
+interior moduli divisor, exceptional harmonic collapse, and reconstruction
+obstructions. Those remain “to our knowledge” claims subject to the audit's
+recorded coverage gaps. This is potentially latent-consequence judo, not a new
+representation-theoretic engine.
 
 ## 7. Ergodis improvement notes
 
@@ -316,5 +317,6 @@ algebraic front end.
 4. Compute a recurrence for \(\Phi_{2m,4}\) from
    \(s_m=\lambda^m+(1-\lambda)^m\), where
    \(s_m=s_{m-1}-\lambda(1-\lambda)s_{m-2}\).
-5. Audit classical compound-matrix and symbolic invariant theory for the exact
-   factorization before manuscript integration.
+5. Continue the classical compound-matrix and symbolic-invariant audit only
+   if a paper-facing novelty claim is attached to one of the downstream
+   consequences; the organizing factorization itself is already downgraded.

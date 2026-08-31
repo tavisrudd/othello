@@ -243,6 +243,14 @@ not connect its design to this metric/apolar shadow. The judo is therefore not
 the raw character sum; it is the cross-literature consequence that settles a
 reconstruction question neither source asks.
 
+The subsequent
+[C1013 classicality audit](c1013-gram-discriminant-classicality-audit.md)
+shows that the Vandermonde-divided exterior covariant is itself the classical
+Wronskian isomorphism and that the Gram--discriminant norm factorization is an
+immediate classical-derived corollary. This does not alter the present
+classification: any priority lies in the harmonic-collapse and
+marking-reconstruction consequence, not in the invariant-theory mechanism.
+
 Fusion-primitivity remains priority leverage rather than priority judo unless
 an audit of the elliptic-scheme literature shows that it answers an explicit
 question left open or unnoticed there.
