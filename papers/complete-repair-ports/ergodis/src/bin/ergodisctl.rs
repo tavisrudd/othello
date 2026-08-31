@@ -111,6 +111,24 @@ enum Command {
         #[arg(long, default_value_t = 1000)]
         max_candidates: usize,
     },
+    /// Start daemon-owned low-priority evolution with streamed evidence.
+    EvolveStart {
+        seeds: PathBuf,
+        #[arg(long)]
+        evidence_name: String,
+        #[arg(long, default_value_t = 3)]
+        generations: usize,
+        #[arg(long, default_value_t = 16)]
+        beam: usize,
+        #[arg(long, default_value_t = 1000)]
+        max_candidates: usize,
+        #[arg(long)]
+        max_evidence_bytes: Option<u64>,
+    },
+    /// Query the active or most recently completed daemon evolution job.
+    EvolveStatus,
+    /// Request cancellation of the active daemon evolution job.
+    EvolveCancel,
     /// Evaluate and atomically activate a diagnostic/ordering plan.
     Apply {
         plan: PathBuf,
@@ -189,6 +207,39 @@ fn main() -> Result<()> {
             cli.max_bytes,
         );
     }
+    if let Command::EvolveStart {
+        seeds,
+        evidence_name,
+        generations,
+        beam,
+        max_candidates,
+        max_evidence_bytes,
+    } = &cli.command
+    {
+        let seeds = read_plan_jsonl(seeds, 32)?;
+        let response = send_request(
+            &manifest,
+            "evolve-start",
+            json!({
+                "seeds": seeds,
+                "evidence_name": evidence_name,
+                "generations": generations,
+                "beam": beam,
+                "max_candidates": max_candidates,
+                "max_evidence_bytes": max_evidence_bytes,
+            }),
+            cli.max_bytes,
+        )?;
+        if !response.ok {
+            bail!("daemon evolution rejected: {}", response.result);
+        }
+        if cli.json {
+            println!("{}", serde_json::to_string(&response)?);
+        } else {
+            render_compact("evolve-start", &response.result, response.epoch)?;
+        }
+        return Ok(());
+    }
     if let Command::Probation {
         plan,
         progress,
@@ -247,6 +298,9 @@ fn main() -> Result<()> {
         ),
         Command::Batch { .. } => unreachable!(),
         Command::Evolve { .. } => unreachable!(),
+        Command::EvolveStart { .. } => unreachable!(),
+        Command::EvolveStatus => ("evolve-status", json!({})),
+        Command::EvolveCancel => ("evolve-cancel", json!({})),
         Command::Apply { plan, expect_epoch } => (
             "candidate-apply",
             json!({"plan": read_plan(&plan)?, "expect_epoch": expect_epoch}),
@@ -1009,6 +1063,18 @@ fn render_compact(op: &str, result: &Value, epoch: u64) -> Result<()> {
             number(result, "records")
         ),
         "note" => println!("epoch={epoch} event={}", number(result, "event")),
+        "evolve-start" | "evolve-status" | "evolve-cancel" => println!(
+            "epoch={epoch} evolution={} state={} tested={} perfect={} path={}",
+            text(result, "id"),
+            text(result, "state"),
+            result
+                .get("progress")
+                .map_or(0, |progress| number(progress, "tested")),
+            result
+                .get("progress")
+                .map_or(0, |progress| number(progress, "perfect")),
+            text(result, "path")
+        ),
         "shutdown" => println!("epoch={epoch} stopping"),
         _ => println!("{}", serde_json::to_string(result)?),
     }

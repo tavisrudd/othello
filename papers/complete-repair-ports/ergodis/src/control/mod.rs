@@ -12,13 +12,17 @@ use std::os::unix::fs::{FileTypeExt, OpenOptionsExt, PermissionsExt};
 use std::os::unix::net::{UnixDatagram, UnixListener, UnixStream};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::Arc;
+use std::thread::{self, JoinHandle};
 use std::time::Duration;
 
 mod client;
+mod evolution;
 mod synthesis;
 mod vm;
 
 pub use client::PlanArena;
+use evolution::{run_evolution, EvolutionBounds, EvolutionProgress};
 use synthesis::learn_decision_tree;
 pub use vm::{
     evaluate_plan, CompiledPlan, Evaluation, ExpressionPlanSpec, FeatureBatch,
@@ -140,9 +144,16 @@ struct StoredPlan {
     evaluation: Evaluation,
 }
 
+struct EvolutionJob {
+    id: String,
+    relative_path: PathBuf,
+    progress: Arc<EvolutionProgress>,
+    handle: JoinHandle<Result<Value, ControlError>>,
+}
+
 pub struct Campaign {
     manifest: Manifest,
-    batch: FeatureBatch,
+    batch: Arc<FeatureBatch>,
     epoch: AtomicU64,
     seq: u64,
     plans: Vec<StoredPlan>,
@@ -154,6 +165,8 @@ pub struct Campaign {
     ledger: Ledger,
     response_limit: usize,
     trace_limit: u64,
+    evolution: Option<EvolutionJob>,
+    last_evolution: Option<Value>,
 }
 
 impl Campaign {
@@ -174,6 +187,7 @@ impl Campaign {
         fs::create_dir(run_dir.join("evidence"))?;
         fs::set_permissions(run_dir.join("evidence"), fs::Permissions::from_mode(0o700))?;
         let batch = FeatureBatch::read_jsonl(data, 10_000_000, 200_000_000)?;
+        let batch = Arc::new(batch);
         let run_id = random_hex(16)?;
         let nonce = random_hex(16)?;
         let socket = match socket {
@@ -216,6 +230,8 @@ impl Campaign {
             ledger,
             response_limit: response_limit.min(MAX_FRAME_BYTES),
             trace_limit,
+            evolution: None,
+            last_evolution: None,
         })
     }
 
@@ -260,6 +276,10 @@ impl Campaign {
             }
         }
         drop(listener);
+        if let Some(job) = self.evolution.take() {
+            job.progress.cancel();
+            let _ = job.handle.join();
+        }
         fs::remove_file(&self.manifest.socket)?;
         Ok(())
     }
@@ -288,6 +308,9 @@ impl Campaign {
             "synthesize-tree" => self.synthesize_tree(&request.args),
             "candidate-try" => self.candidate_try(&request.args, false),
             "candidate-batch" => self.candidate_batch(&request.args),
+            "evolve-start" => self.evolution_start(&request.args),
+            "evolve-status" => self.evolution_status(),
+            "evolve-cancel" => self.evolution_cancel(),
             "candidate-apply" => self.candidate_try(&request.args, true),
             "candidate-deactivate" => self.candidate_deactivate(&request.args),
             "obstruction-first" => self.obstruction(&request.args),
@@ -327,6 +350,7 @@ impl Campaign {
                 "feature-ceiling", "scope-profile", "synthesize-tree",
                 "candidate-try", "candidate-apply", "candidate-deactivate",
                 "candidate-batch",
+                "evolve-start", "evolve-status", "evolve-cancel",
                 "obstruction-first", "exceptional", "trace", "note", "noop",
                 "shutdown"
             ],
@@ -349,6 +373,11 @@ impl Campaign {
             "health": "ready",
             "solver": self.solver_status,
             "watchers": self.watchers.len(),
+            "evolution": self.evolution.as_ref().map(|job| json!({
+                "id": job.id,
+                "path": job.relative_path,
+                "progress": job.progress.snapshot(),
+            })).or_else(|| self.last_evolution.clone()),
         }))
     }
 
@@ -895,6 +924,169 @@ impl Campaign {
             "path": relative,
             "bytes": bytes,
             "top": summaries,
+        }))
+    }
+
+    fn reap_evolution(&mut self) -> Result<(), ControlError> {
+        if !self
+            .evolution
+            .as_ref()
+            .is_some_and(|job| job.handle.is_finished())
+        {
+            return Ok(());
+        }
+        let job = self.evolution.take().unwrap();
+        let id = job.id;
+        let path = job.relative_path;
+        let completed = match job.handle.join() {
+            Ok(Ok(summary)) => {
+                json!({"id": id, "path": path, "state": "complete", "summary": summary})
+            }
+            Ok(Err(error)) => {
+                json!({"id": id, "path": path, "state": "failed", "error": error.to_string()})
+            }
+            Err(_) => json!({
+                "id": id,
+                "path": path,
+                "state": "failed",
+                "error": "evolution worker panicked",
+            }),
+        };
+        let synopsis = format!(
+            "evolution {}",
+            completed["state"].as_str().unwrap_or("failed")
+        );
+        self.last_evolution = Some(completed);
+        self.record("evolution-finished", &synopsis, None)?;
+        Ok(())
+    }
+
+    fn evolution_start(&mut self, args: &Value) -> Result<Value, ControlError> {
+        self.reap_evolution()?;
+        if self.evolution.is_some() {
+            return Err(ControlError::Invalid(
+                "an evolution job is already active".into(),
+            ));
+        }
+        let seeds = args
+            .get("seeds")
+            .and_then(Value::as_array)
+            .ok_or_else(|| ControlError::Invalid("evolve-start requires seeds".into()))?;
+        if seeds.is_empty() || seeds.len() > 32 {
+            return Err(ControlError::Invalid(
+                "evolve-start requires 1..=32 seeds".into(),
+            ));
+        }
+        let mut lowered = Vec::with_capacity(seeds.len());
+        for seed in seeds {
+            let spec: PlanSpec = serde_json::from_value(seed.clone())?;
+            if spec.output != PlanOutput::Predicate {
+                return Err(ControlError::Invalid(
+                    "evolve-start accepts predicate seeds only".into(),
+                ));
+            }
+            CompiledPlan::compile(&spec, &self.batch.fields)?;
+            lowered.push(spec);
+        }
+        let generations = args.get("generations").and_then(Value::as_u64).unwrap_or(3) as usize;
+        let beam = args.get("beam").and_then(Value::as_u64).unwrap_or(16) as usize;
+        let max_candidates = args
+            .get("max_candidates")
+            .and_then(Value::as_u64)
+            .unwrap_or(1_000) as usize;
+        if !(1..=32).contains(&generations)
+            || !(1..=256).contains(&beam)
+            || !(1..=100_000).contains(&max_candidates)
+        {
+            return Err(ControlError::Invalid(
+                "invalid evolution generations, beam, or candidate bound".into(),
+            ));
+        }
+        let evidence_name = required_str(args, "evidence_name")?;
+        if evidence_name.is_empty()
+            || evidence_name.len() > 64
+            || !evidence_name
+                .bytes()
+                .all(|byte| byte.is_ascii_alphanumeric() || matches!(byte, b'-' | b'_' | b'.'))
+        {
+            return Err(ControlError::Invalid(
+                "evolve-start evidence_name is not a safe slug".into(),
+            ));
+        }
+        let byte_limit = args
+            .get("max_evidence_bytes")
+            .and_then(Value::as_u64)
+            .unwrap_or(self.trace_limit)
+            .min(self.trace_limit);
+        if byte_limit == 0 {
+            return Err(ControlError::Invalid(
+                "evolution evidence limit must be positive".into(),
+            ));
+        }
+        let id = random_hex(12)?;
+        let relative_path = PathBuf::from("evidence").join(format!("{evidence_name}-{id}.jsonl"));
+        let output = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .mode(0o600)
+            .open(self.manifest.run_dir.join(&relative_path))?;
+        let progress = Arc::new(EvolutionProgress::new());
+        let worker_progress = Arc::clone(&progress);
+        let batch = Arc::clone(&self.batch);
+        let bounds = EvolutionBounds {
+            generations,
+            beam,
+            max_candidates,
+            byte_limit,
+        };
+        let handle = thread::Builder::new()
+            .name(format!("ergodis-evolve-{}", &id[..8]))
+            .spawn(move || run_evolution(batch, lowered, output, bounds, worker_progress))?;
+        self.evolution = Some(EvolutionJob {
+            id: id.clone(),
+            relative_path: relative_path.clone(),
+            progress,
+            handle,
+        });
+        self.last_evolution = None;
+        self.record("evolution-started", "low-priority evolution started", None)?;
+        Ok(json!({
+            "id": id,
+            "path": relative_path,
+            "state": "running",
+            "generations": generations,
+            "beam": beam,
+            "max_candidates": max_candidates,
+            "max_evidence_bytes": byte_limit,
+        }))
+    }
+
+    fn evolution_status(&mut self) -> Result<Value, ControlError> {
+        self.reap_evolution()?;
+        if let Some(job) = &self.evolution {
+            return Ok(json!({
+                "id": job.id,
+                "path": job.relative_path,
+                "state": "running",
+                "progress": job.progress.snapshot(),
+            }));
+        }
+        Ok(self
+            .last_evolution
+            .clone()
+            .unwrap_or_else(|| json!({"state": "idle"})))
+    }
+
+    fn evolution_cancel(&mut self) -> Result<Value, ControlError> {
+        self.reap_evolution()?;
+        let Some(job) = &self.evolution else {
+            return Ok(json!({"state": "idle", "cancel_requested": false}));
+        };
+        job.progress.cancel();
+        Ok(json!({
+            "id": job.id,
+            "state": "running",
+            "cancel_requested": true,
         }))
     }
 
@@ -1732,6 +1924,66 @@ mod tests {
         )
         .unwrap();
         assert_eq!(evidence.lines().count(), 2);
+    }
+
+    #[test]
+    fn daemon_evolution_runs_off_thread_and_streams_trials() {
+        let temporary = tempfile::tempdir().unwrap();
+        let data = temporary.path().join("data.jsonl");
+        fs::write(
+            &data,
+            concat!(
+                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"evolve\",\"problem\":\"threshold\",\"fields\":[\"x\"],\"rows\":4}\n",
+                "{\"id\":0,\"expected\":false,\"values\":[0]}\n",
+                "{\"id\":1,\"expected\":false,\"values\":[1]}\n",
+                "{\"id\":2,\"expected\":true,\"values\":[2]}\n",
+                "{\"id\":3,\"expected\":true,\"values\":[3]}\n"
+            ),
+        )
+        .unwrap();
+        let mut campaign = Campaign::create(
+            &data,
+            &temporary.path().join("run"),
+            Some(temporary.path().join("control.sock")),
+            16_384,
+            8_192,
+            16_384,
+        )
+        .unwrap();
+        let seed = json!({
+            "schema": PLAN_SCHEMA,
+            "name": "threshold",
+            "role": "diagnostic",
+            "output": "predicate",
+            "program": [
+                {"op": "field", "name": "x"},
+                {"op": "const", "value": 0},
+                {"op": "gt"}
+            ],
+        });
+        let started = campaign
+            .evolution_start(&json!({
+                "seeds": [seed],
+                "evidence_name": "evolution-control",
+                "generations": 4,
+                "beam": 2,
+                "max_candidates": 16,
+            }))
+            .unwrap();
+        assert_eq!(started["state"], "running");
+        let completed = loop {
+            let status = campaign.evolution_status().unwrap();
+            if status["state"] != "running" {
+                break status;
+            }
+            thread::yield_now();
+        };
+        assert_eq!(completed["state"], "complete");
+        assert!(completed["summary"]["tested"].as_u64().unwrap() >= 2);
+        assert!(completed["summary"]["perfect"].as_u64().unwrap() >= 1);
+        let relative = completed["path"].as_str().unwrap();
+        let evidence = fs::read_to_string(campaign.manifest.run_dir.join(relative)).unwrap();
+        assert!(evidence.lines().count() >= 2);
     }
 
     #[test]

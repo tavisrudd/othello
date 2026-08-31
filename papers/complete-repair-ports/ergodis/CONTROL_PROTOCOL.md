@@ -93,13 +93,15 @@ byte-for-byte conformant with this socket path.
 
 The component topology and implementation-status matrix are authoritative in
 [DESIGN.md](DESIGN.md). In experimental v0, `ergodis-campaign` serves the serial
-control protocol, durable ledger, and bulk candidate evaluator, while
-`ergodisctl evolve` still owns mutation externally. The generic
-`theorem_search` engine supports caller-owned streaming sinks but is not yet
-hosted as a background daemon job.
+control protocol, durable ledger, bulk candidate evaluator, and one optional
+low-priority evolution worker. `evolve-start`, `evolve-status`, and
+`evolve-cancel` manage that worker; `ergodisctl evolve` remains an offline
+staging path. The generic `theorem_search` engine also supports caller-owned
+streaming sinks.
 
-The accepted integration moves candidate evolution into one low-priority daemon
-worker. A distinct solver-side low-priority sampler consumes fixed-size root
+The daemon evolution worker shares only the immutable frozen feature batch,
+streams its audit to a bounded create-only file, and publishes progress through
+one isolated cache-line record. A distinct solver-side low-priority sampler consumes fixed-size root
 snapshots, performs isolated bounded probes, and sends compact scorecards through
 the watcher. Search workers do not run evolution, probe workspaces, or protocol
 code.

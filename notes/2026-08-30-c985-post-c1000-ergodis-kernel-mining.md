@@ -78,11 +78,12 @@ The new batch operation is the bridge from the current external
 - a fitted predicate remains diagnostic only because the daemon still reports
   `proof_authority: false`.
 
-The next systems slice should move mutation and successive-halving ownership
-into a low-priority daemon job using this batch/evidence boundary. It should
-expose start/status/cancel, checkpoint the population/archive, and merge only
-compact completion messages on the serial control thread. It must not run in a
-search worker or add a new search-path poll.
+The next systems slice moved mutation ownership into one low-priority daemon
+job using this batch/evidence boundary. It exposes start/status/cancel, shares
+the frozen batch immutably, publishes progress through one isolated 64-byte
+atomic record, and joins only on completion. It does not run in a search worker
+or add a search-path poll. Durable population/archive checkpoint-resume and
+successive-halving scorecards remain open.
 
 ## Highest-EV remaining kernels
 
