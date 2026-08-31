@@ -269,7 +269,12 @@ attempted"* and *"Is 43 sharp?"*.  2026-08-30 answered the first over
 `8 ≤ q ≤ 19` and left `X(8) ∩ [23,42]` — the fields `23, 25, 27, 29, 31, 32,
 37, 41` — untested.  Exhaustive censuses of the full `PG(7,q)`:
 
-<!-- R8BAND TABLE -->
+| `r` | `q` | `k` | `N = \|PG(7,q)\|` | wall | RSS | `ρ` | deep | orbits | `q(q+1)^2/2` | **exceptional** |
+|---:|---:|---:|------------------:|-----:|----:|----:|-----:|-------:|-------------:|----------------:|
+| 8 | 23 | 16 |  3,559,590,240 | 134 s | 448 MB | 7 |  6,624 | 2 |  6,624 | **0** |
+| 8 | 25 | 18 |  6,357,828,776 | 275 s | 790 MB | 7 |  8,450 | 2 |  8,450 | **0** |
+| 8 | 27 | 20 | 10,862,674,480 | 507 s | 1.35 GB | 7 | 10,584 | 5 | 10,584 | **0** |
+<!-- R8BAND MORE -->
 
 ## 4c. First redundancy-ten censuses
 
