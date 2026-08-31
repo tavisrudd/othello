@@ -1,0 +1,3 @@
+[build]
+# Keep build trees out of notes/; see ~/.cache/ergodis/.
+target-dir = "/home/tavis/.cache/ergodis/c1013-census-target"
