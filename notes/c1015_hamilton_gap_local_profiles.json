@@ -214,5 +214,5 @@
   ],
   "rooted_exact_cover_completions": 173008,
   "schema": "c1015-hamilton-gap-local-profiles-v1",
-  "trusted_boundary": "exact covers after a fixed ordered Hamilton root; the degree-two table further fixes a residual matching Hamilton with both roots and forbids its other Hamilton partners"
+  "trusted_boundary": "exact covers after a fixed ordered Hamilton root; the degree-two table further fixes a residual matching Hamilton with both roots and forbids its other Hamilton partners, hence treats a degree-two vertex in a Hamilton triangle"
 }

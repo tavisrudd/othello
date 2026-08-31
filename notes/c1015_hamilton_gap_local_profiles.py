@@ -4,8 +4,8 @@
 This is deliberately a proof-search certificate, not a proof of the 18-gap.
 It independently re-enumerates exact covers after a fixed Hamilton root and
 records three small targets for a hand proof: local H-neighbour degree sums,
-the degree-two three-root completions, and the residual degree profiles in the
-minimum-degree-three branch.
+the triangle subcase of degree-two three-root completions, and the residual
+degree profiles in the minimum-degree-three branch.
 """
 
 import argparse
@@ -232,7 +232,8 @@ def build_certificate():
         "trusted_boundary": (
             "exact covers after a fixed ordered Hamilton root; the degree-two "
             "table further fixes a residual matching Hamilton with both roots "
-            "and forbids its other Hamilton partners"
+            "and forbids its other Hamilton partners, hence treats a degree-two "
+            "vertex in a Hamilton triangle"
         ),
     }
 
