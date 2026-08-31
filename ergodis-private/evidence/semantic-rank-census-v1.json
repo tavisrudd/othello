@@ -1,0 +1,56 @@
+{
+  "schema": "ergodis.semantic-rank-census-evidence.v1",
+  "date": "2026-08-30",
+  "toolchain": "rustc 1.87.0 (17067e9ac 2025-05-09)",
+  "host": "AMD Ryzen AI 9 HX 370",
+  "protocol": {
+    "binary": "ergodis-private/target/release/semantic_rank_census",
+    "cpu": 2,
+    "governor": "performance",
+    "boost": true,
+    "outer_runs": 11,
+    "rank_replays_per_measurement": 2000
+  },
+  "finite_result": {
+    "field": "GF(9)",
+    "raw_equations": 120,
+    "variables": 30,
+    "rank": 29,
+    "hom_dimension": 1,
+    "independent_equations": 29,
+    "equation_compression_ratio": 4.137931034482759,
+    "minimum_generator_core_size": 3,
+    "minimum_generator_cores": [
+      ["u(1)", "u(a)", "weyl"],
+      ["u(1)", "weyl", "torus"],
+      ["u(a)", "weyl", "torus"]
+    ],
+    "rank_loss_if_removed": {
+      "u(1)": 0,
+      "u(a)": 0,
+      "weyl": 1,
+      "torus": 0
+    },
+    "independent_equations_by_generator": {
+      "u(1)": 20,
+      "u(a)": 4,
+      "weyl": 5,
+      "torus": 0
+    },
+    "certificate_replayed": true
+  },
+  "performance_medians": {
+    "compile_microseconds": 397,
+    "raw_rank_replay_nanoseconds": 28037,
+    "core_rank_replay_nanoseconds": 7235,
+    "rank_replay_speedup": 3.886230876216968,
+    "speedup_min": 3.8213362362226153,
+    "speedup_max": 3.911625313632562
+  },
+  "provenance": {
+    "frozen_source": "notes/2026-08-09-c895-q9-hom-falsifier.py",
+    "source_sha256": "782087ca2931c7438dca514010b65cb152d90df18cc27ae86822dde0fea20ab6",
+    "independent_control": "ergodis-private/python/c896_q9_semantic_rank.py"
+  },
+  "boundary": "bounded GF(9) finite certificate; not an all-field theorem"
+}
