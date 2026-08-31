@@ -256,6 +256,10 @@ reason = "internal theorem-adoption ledger; public claims remain in the manuscri
 path = "ergodis/AGENTS.md"
 reason = "local development instructions are outside the public software and manuscript boundary"
 
+[[repository.exclude_path]]
+path = "ergodis/PERFORMANCE.md"
+reason = "private performance-engineering contract is outside the public software and manuscript boundary"
+
 [[repository]]
 name = "continuation-graph-rigidity"
 source = "papers/continuation-graph-rigidity"
