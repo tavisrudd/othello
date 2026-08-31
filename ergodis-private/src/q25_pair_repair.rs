@@ -74,6 +74,14 @@ pub struct MinimumCertificateSummary {
     pub minimum_rows: u32,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct ResidualOrbitClass {
+    pub representative: [u16; 3],
+    pub orbit_size: u16,
+    pub stabilizer_order: u16,
+    pub slice_rows: u16,
+}
+
 impl Q25Census {
     pub fn obstruction_count(&self) -> usize {
         self.records
@@ -98,6 +106,80 @@ impl Q25Census {
         verify_compilation(&self.presentation, &self.compilation)?;
         Ok(())
     }
+}
+
+pub fn classify_minimum_residual_orbits(census: &Q25Census) -> Vec<ResidualOrbitClass> {
+    let geometry = Geometry::build();
+    let action = geometry.residual_action();
+    let first = geometry.orbit_by_number[5];
+    let mut representatives = Vec::with_capacity(5);
+
+    for (index, record) in census.records.iter().enumerate() {
+        let legal = census.record_to_legal[index];
+        if legal == u32::MAX
+            || census.legal_masks[legal as usize]
+                .iter()
+                .map(|word| word.count_ones())
+                .sum::<u32>()
+                != 32
+        {
+            continue;
+        }
+        let triple = [
+            first,
+            geometry.orbit_by_number[record.second_orbit as usize],
+            geometry.orbit_by_number[record.third_orbit as usize],
+        ];
+        let representative = canonical_triple(triple, &action);
+        if let Some(class) = representatives
+            .iter_mut()
+            .find(|class: &&mut ResidualOrbitClass| class.representative == representative)
+        {
+            class.slice_rows += 1;
+        } else {
+            let orbit_size = triple_orbit_size(representative, &action);
+            representatives.push(ResidualOrbitClass {
+                representative,
+                orbit_size,
+                stabilizer_order: 400 / orbit_size,
+                slice_rows: 1,
+            });
+        }
+    }
+    representatives.sort_unstable();
+    representatives
+}
+
+fn canonical_triple(triple: [u16; 3], action: &[[u16; ORBIT_COUNT]]) -> [u16; 3] {
+    let mut best = [u16::MAX; 3];
+    for permutation in action {
+        let mut image = [
+            permutation[triple[0] as usize],
+            permutation[triple[1] as usize],
+            permutation[triple[2] as usize],
+        ];
+        image.sort_unstable();
+        best = best.min(image);
+    }
+    best
+}
+
+fn triple_orbit_size(triple: [u16; 3], action: &[[u16; ORBIT_COUNT]]) -> u16 {
+    let mut images = [[0_u16; 3]; 400];
+    for (image, permutation) in images.iter_mut().zip(action) {
+        *image = [
+            permutation[triple[0] as usize],
+            permutation[triple[1] as usize],
+            permutation[triple[2] as usize],
+        ];
+        image.sort_unstable();
+    }
+    images.sort_unstable();
+    let mut distinct = 1_u16;
+    for index in 1..images.len() {
+        distinct += u16::from(images[index] != images[index - 1]);
+    }
+    distinct
 }
 
 pub fn write_certificate(census: &Q25Census, output: &mut impl Write) -> Result<u64> {
@@ -514,6 +596,76 @@ impl Geometry {
         }
         true
     }
+
+    fn residual_action(&self) -> Box<[[u16; ORBIT_COUNT]]> {
+        let mut id_by_key = vec![NO_POINT; FIELD_ORDER.pow(3)];
+        for (index, &point) in self.points.iter().enumerate() {
+            id_by_key[point_key(point)] = index as u16;
+        }
+        let mut orbit_of_point = vec![NO_POINT; POINT_COUNT];
+        for (orbit, pair) in self.orbits.iter().enumerate() {
+            orbit_of_point[pair[0] as usize] = orbit as u16;
+            orbit_of_point[pair[1] as usize] = orbit as u16;
+        }
+
+        let mut matrices = Vec::with_capacity(400);
+        for code in 0..5_usize.pow(9) {
+            let mut encoded = code;
+            let mut matrix = [0_u8; 9];
+            for entry in &mut matrix {
+                *entry = (encoded % 5) as u8;
+                encoded /= 5;
+            }
+            if matrix.iter().find(|&&entry| entry != 0) != Some(&1) || det5(matrix) == 0 {
+                continue;
+            }
+            let left =
+                id_by_key[point_key(apply_matrix(matrix, self.points[self.fixed[0] as usize]))];
+            let right =
+                id_by_key[point_key(apply_matrix(matrix, self.points[self.fixed[1] as usize]))];
+            if left == self.fixed[0] && right == self.fixed[1] {
+                matrices.push(matrix);
+            }
+        }
+        assert_eq!(matrices.len(), 400);
+
+        let mut action = Vec::with_capacity(400);
+        for matrix in matrices {
+            let mut permutation = [NO_POINT; ORBIT_COUNT];
+            for (orbit, pair) in self.orbits.iter().enumerate() {
+                let image = apply_matrix(matrix, self.points[pair[0] as usize]);
+                let image_point = id_by_key[point_key(image)];
+                permutation[orbit] = orbit_of_point[image_point as usize];
+            }
+            debug_assert!(!permutation.contains(&NO_POINT));
+            action.push(permutation);
+        }
+        action.into_boxed_slice()
+    }
+}
+
+#[inline]
+fn det5(matrix: [u8; 9]) -> u8 {
+    let positive = matrix[0] as i16 * matrix[4] as i16 * matrix[8] as i16
+        + matrix[1] as i16 * matrix[5] as i16 * matrix[6] as i16
+        + matrix[2] as i16 * matrix[3] as i16 * matrix[7] as i16;
+    let negative = matrix[2] as i16 * matrix[4] as i16 * matrix[6] as i16
+        + matrix[1] as i16 * matrix[3] as i16 * matrix[8] as i16
+        + matrix[0] as i16 * matrix[5] as i16 * matrix[7] as i16;
+    (positive - negative).rem_euclid(5) as u8
+}
+
+#[inline]
+fn apply_matrix(matrix: [u8; 9], point: Point) -> Point {
+    let mut image = [0_u8; 3];
+    for row in 0..3 {
+        let mut coordinate = 0_u8;
+        for column in 0..3 {
+            coordinate = add25(coordinate, mul25(matrix[3 * row + column], point[column]));
+        }
+        image[row] = coordinate;
+    }
+    normalize(image)
 }
 
 struct GenerateKernel<'a> {
@@ -922,5 +1074,41 @@ mod tests {
         );
         minimum_certificate[0] ^= 1;
         assert!(verify_minimum_certificate(&mut minimum_certificate.as_slice(), 4).is_err());
+
+        assert_eq!(
+            classify_minimum_residual_orbits(&census),
+            vec![
+                ResidualOrbitClass {
+                    representative: [65, 93, 154],
+                    orbit_size: 200,
+                    stabilizer_order: 2,
+                    slice_rows: 3,
+                },
+                ResidualOrbitClass {
+                    representative: [65, 96, 216],
+                    orbit_size: 400,
+                    stabilizer_order: 1,
+                    slice_rows: 6,
+                },
+                ResidualOrbitClass {
+                    representative: [65, 98, 251],
+                    orbit_size: 400,
+                    stabilizer_order: 1,
+                    slice_rows: 6,
+                },
+                ResidualOrbitClass {
+                    representative: [65, 119, 232],
+                    orbit_size: 200,
+                    stabilizer_order: 2,
+                    slice_rows: 3,
+                },
+                ResidualOrbitClass {
+                    representative: [65, 123, 279],
+                    orbit_size: 400,
+                    stabilizer_order: 1,
+                    slice_rows: 6,
+                },
+            ]
+        );
     }
 }

@@ -218,14 +218,25 @@ independent census replay as well, takes 1.42 seconds and 33,628 KiB peak RSS.
 Certificate writing takes 0.00064 seconds.  This remains a single-round
 diagnostic.
 
+The residual-action slice reconstructs, rather than tables, the ordered
+fixed-pair subgroup: it enumerates the 400 normalized invertible base-field
+matrices fixing the two distinguished points and compiles their permutation
+action on all 310 conjugate-pair orbits.  Canonicalizing the 24 minimum slice
+rows produces exactly five representatives `(65,93,154)`, `(65,96,216)`,
+`(65,98,251)`, `(65,119,232)`, and `(65,123,279)`.  Their orbit sizes are
+`200,400,400,200,400`, their stabilizer orders are `2,1,1,2,1`, and their slice
+intersections are `3,6,6,3,6`.  Thus their global union has size 1,600.  The
+classification adds 0.071 seconds to the warm 12-thread diagnostic and no
+problem-specific representative table to the implementation.
+
 The later sealed Q25 exact-minimum/extremal package is larger: the committed
 record inventory has 9,511 Lean modules and about 83.1 MiB tracked source, with
 at least 6h27m of recorded cold tree builds and roughly 4 GB per worker.  It also
 contains residual transport, class-link, cover, and exhaustion obligations not
 present in C143.  The exact-mask certificate makes the 1,189-class lower-bound
-proof forest unnecessary, but it does not yet replace the residual order-400
-action, the five minimum-orbit transporters and stabilizer calculation, or the
-semantic lift from the normalized slice.
+proof forest unnecessary, and the semantic residual-action replay replaces the
+five-orbit transport/stabilizer computation.  A proof-assistant-facing semantic
+lift from the normalized slice remains separate; no Lean build was rerun here.
 
 ## First Hadamard orbit-lock replay result
 

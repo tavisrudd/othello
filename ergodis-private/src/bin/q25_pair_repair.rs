@@ -6,8 +6,8 @@ use std::time::Instant;
 use anyhow::Result;
 use clap::Parser;
 use ergodis_private::q25_pair_repair::{
-    compile_q25_pair_repair, independently_verify, verify_certificate, verify_minimum_certificate,
-    write_certificate, write_minimum_certificate,
+    classify_minimum_residual_orbits, compile_q25_pair_repair, independently_verify,
+    verify_certificate, verify_minimum_certificate, write_certificate, write_minimum_certificate,
 };
 
 #[derive(Parser)]
@@ -18,6 +18,8 @@ struct Arguments {
     certificate: Option<PathBuf>,
     #[arg(long)]
     minimum_certificate: Option<PathBuf>,
+    #[arg(long)]
+    classify_residual: bool,
 }
 
 fn main() -> Result<()> {
@@ -58,13 +60,23 @@ fn main() -> Result<()> {
         assert_eq!(summary.minimum_rows, 24);
         minimum_certificate_replay_seconds = certificate_replay_started.elapsed().as_secs_f64();
     }
+    let classification_started = Instant::now();
+    let classes = if arguments.classify_residual {
+        classify_minimum_residual_orbits(&census)
+    } else {
+        Vec::new()
+    };
+    let classification_seconds = classification_started.elapsed().as_secs_f64();
+    let minimum_orbit_total: u16 = classes.iter().map(|class| class.orbit_size).sum();
     println!(
-        "threads={} rows={} obstructions={} legal={} response_classes={} quotient_bytes={} quotient_certificate_bytes={} theorem_certificate_bytes={} minimum_certificate_bytes={} compile_seconds={:.6} replay_seconds={:.6} certificate_seconds={:.6} certificate_replay_seconds={:.6} minimum_certificate_seconds={:.6} minimum_certificate_replay_seconds={:.6}",
+        "threads={} rows={} obstructions={} legal={} response_classes={} residual_classes={} minimum_orbit_total={} quotient_bytes={} quotient_certificate_bytes={} theorem_certificate_bytes={} minimum_certificate_bytes={} compile_seconds={:.6} replay_seconds={:.6} certificate_seconds={:.6} certificate_replay_seconds={:.6} minimum_certificate_seconds={:.6} minimum_certificate_replay_seconds={:.6} classification_seconds={:.6}",
         arguments.threads,
         census.records.len(),
         census.obstruction_count(),
         census.legal_count(),
         census.response_classes,
+        classes.len(),
+        minimum_orbit_total,
         census.quotient_bytes(),
         census.certificate_bytes(),
         certificate_bytes,
@@ -75,6 +87,7 @@ fn main() -> Result<()> {
         certificate_replay_seconds,
         minimum_certificate_seconds,
         minimum_certificate_replay_seconds,
+        classification_seconds,
     );
     Ok(())
 }
