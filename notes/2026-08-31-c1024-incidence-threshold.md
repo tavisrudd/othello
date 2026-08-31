@@ -230,12 +230,27 @@ is a live risk worth recording rather than a settled worry.
 1. The `M = 2` locus remains the best available target (C1023 §5 item 3):
    one parameter after normalisation, three of six known carrier orbits, and now
    additionally motivated because §3 shows `M = 2` is where Regime B collapses.
-2. A cheap falsification test for the artifact worry above: sweep an `M = 3`
-   carrier with larger `m` — `(17, m=7)`, `q_min = 29` — and see whether it
-   fires anywhere below the quadratic heuristic `(r-3)^2/2 = 98`.  The stratum is
-   a `PG(2,q)`, so this is minutes of compute, and a firing at `q > 13` would
-   falsify Conjecture PRS-1 outright.  **This is the single highest-value cheap
-   experiment this task exposes.**
+2. A falsification test for the artifact worry above: sweep an `M = 3` carrier
+   with larger `m` — `(17, m=7)`, stratum `{1,8,15}`, `q_min = 29` — and see
+   whether it fires anywhere below the quadratic heuristic `(r-3)^2/2 = 98`.
+   A firing at `q > 13` would falsify Conjecture PRS-1 outright.  Note the cell
+   is *clean*, not degenerate: `k = q+1-r = 13`.
+
+   **Attempted, and out of budget.**  The stratum is only `PG(2,29)` = 871
+   points, but the exact-rank cost is set by `d = 16`, not by the stratum size:
+   a deep point must exhaust every level `j ≤ 15`, and the driver's `auto` mode
+   picks subset enumeration above `j ≈ 8`, giving `Σ_{j≤15} C(30,j) ≈ 7·10^8`
+   leaf tests per deep point.  The run was killed at 600 s on 20 threads with no
+   output.  This is a *cost-model* obstruction and a specific one: the carrier
+   strata are cheap in point count and expensive in ambient degree, so
+   "the stratum is small" does not imply "the sweep is cheap" once `r ≳ 15`.
+
+   The fix is known and is not this task's: the apolar-kernel rank path already
+   in the driver wins at low `j` but loses to subsets above `j ≈ 8` because the
+   kernel dimension grows like `2j-d`.  A rank routine that exploits the
+   *sparsity* of the Hankel matrix on a stratum — rank `≤ M` by construction,
+   here 3 — would collapse this.  Recording it as the concrete prerequisite for
+   testing Conjecture PRS-1 at large `r`.
 3. Nothing else here is worth queueing; the route is closed.
 
 ## 7. Mystery ledger
@@ -251,9 +266,13 @@ is a live risk worth recording rather than a settled worry.
 3. **Is the observed constant threshold real, or an artifact of which carriers
    were cheap to sweep?**  *Open, and newly raised.*  §3's mean-count grows like
    `(r-3)^2/2` along the `M = 3` family, yet every sampled carrier has small `m`.
-   Evidence gap: one sweep of a large-`m`, `M = 3` carrier such as `(17,7)`.
-   This bears directly on C1018 Conjecture PRS-1 and is cheap.  Owner: a
-   successor, or the `ej` item above if someone runs it.
+   Evidence gap: one sweep of a large-`m`, `M = 3` carrier such as `(17,7)` at
+   `q = 29`.  **Attempted here and killed at 600 s** — see §6 item 2: the
+   blocker is the ambient degree `d = 16` in the exact-rank routine, not the
+   871-point stratum, and it needs a sparsity-aware rank path before this class
+   of cell is reachable at all.  This bears directly on C1018 Conjecture PRS-1,
+   whose verified domain contains no carrier with `m > 8` or `M > 4`.  Owner: a
+   successor; the prerequisite is a driver change, not new mathematics.
 4. **Why are the clean cells clean, given the mean count is below one at most of
    them?**  *Open, inherited from C1023 §3.*  The answer is presumably the
    non-equivariant annihilators, but nothing here quantifies them.
