@@ -1,3 +1,4 @@
+use crate::field::SmallField;
 use thiserror::Error;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Error)]
@@ -6,6 +7,115 @@ pub enum ProjectiveError {
     UnsupportedOrder,
     #[error("projective-plane incidence construction failed")]
     InvalidIncidence,
+    #[error("projective dimension is too large for the index representation")]
+    DimensionOverflow,
+    #[error("projective coordinates are empty, zero, or contain an invalid field element")]
+    InvalidPoint,
+    #[error("projective point index is out of range")]
+    PointOutOfRange,
+}
+
+/// Allocation-free rank/unrank operations for canonical points of `PG(d,q)`.
+///
+/// Points are ordered by their first nonzero coordinate. That coordinate is
+/// normalized to one, and the remaining suffix is a big-endian base-`q`
+/// number. The indexer borrows a runtime field and stores only `d + 2` block
+/// offsets.
+#[derive(Clone, Debug)]
+pub struct ProjectiveIndex<'a> {
+    field: &'a SmallField,
+    vector_dimension: u8,
+    point_count: u64,
+    offsets: Box<[u64]>,
+}
+
+impl<'a> ProjectiveIndex<'a> {
+    pub fn new(field: &'a SmallField, projective_dimension: u8) -> Result<Self, ProjectiveError> {
+        let vector_dimension = projective_dimension
+            .checked_add(1)
+            .ok_or(ProjectiveError::DimensionOverflow)?;
+        let mut offsets = Vec::with_capacity(usize::from(vector_dimension) + 1);
+        offsets.push(0u64);
+        let mut block = 1u64;
+        let mut blocks = Vec::with_capacity(usize::from(vector_dimension));
+        for _ in 0..vector_dimension {
+            blocks.push(block);
+            block = block
+                .checked_mul(u64::from(field.order()))
+                .ok_or(ProjectiveError::DimensionOverflow)?;
+        }
+        let mut point_count = 0u64;
+        for &block in blocks.iter().rev() {
+            point_count = point_count
+                .checked_add(block)
+                .ok_or(ProjectiveError::DimensionOverflow)?;
+            offsets.push(point_count);
+        }
+        Ok(Self {
+            field,
+            vector_dimension,
+            point_count,
+            offsets: offsets.into_boxed_slice(),
+        })
+    }
+
+    #[inline]
+    pub const fn projective_dimension(&self) -> u8 {
+        self.vector_dimension - 1
+    }
+
+    #[inline]
+    pub const fn point_count(&self) -> u64 {
+        self.point_count
+    }
+
+    /// Rank any nonzero homogeneous vector, normalizing it without allocation.
+    pub fn index(&self, coordinates: &[u8]) -> Result<u64, ProjectiveError> {
+        if coordinates.len() != usize::from(self.vector_dimension)
+            || coordinates
+                .iter()
+                .any(|&coordinate| u16::from(coordinate) >= self.field.order())
+        {
+            return Err(ProjectiveError::InvalidPoint);
+        }
+        let pivot = coordinates
+            .iter()
+            .position(|&coordinate| coordinate != 0)
+            .ok_or(ProjectiveError::InvalidPoint)?;
+        let inverse = self
+            .field
+            .inverse(coordinates[pivot])
+            .map_err(|_| ProjectiveError::InvalidPoint)?;
+        let mut suffix = 0u64;
+        for &coordinate in &coordinates[pivot + 1..] {
+            suffix = suffix * u64::from(self.field.order())
+                + u64::from(self.field.mul(coordinate, inverse));
+        }
+        Ok(self.offsets[pivot] + suffix)
+    }
+
+    /// Write the canonical representative for an index into caller storage.
+    pub fn point(&self, index: u64, output: &mut [u8]) -> Result<(), ProjectiveError> {
+        if index >= self.point_count || output.len() != usize::from(self.vector_dimension) {
+            return Err(ProjectiveError::PointOutOfRange);
+        }
+        output.fill(0);
+        let pivot = self.offsets[1..].partition_point(|&end| end <= index);
+        output[pivot] = 1;
+        let mut suffix = index - self.offsets[pivot];
+        for coordinate in output[pivot + 1..].iter_mut().rev() {
+            *coordinate = (suffix % u64::from(self.field.order())) as u8;
+            suffix /= u64::from(self.field.order());
+        }
+        debug_assert_eq!(suffix, 0);
+        Ok(())
+    }
+
+    pub fn point_owned(&self, index: u64) -> Result<Box<[u8]>, ProjectiveError> {
+        let mut point = vec![0; usize::from(self.vector_dimension)];
+        self.point(index, &mut point)?;
+        Ok(point.into_boxed_slice())
+    }
 }
 
 #[repr(C)]
@@ -216,6 +326,35 @@ impl ProjectivePlane {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn generic_projective_index_round_trips_and_quotients_scalars() {
+        let field = SmallField::new(3, 2).unwrap();
+        let indexer = ProjectiveIndex::new(&field, 2).unwrap();
+        assert_eq!(indexer.point_count(), 9 * 9 + 9 + 1);
+        let mut point = [0u8; 3];
+        for index in 0..indexer.point_count() {
+            indexer.point(index, &mut point).unwrap();
+            assert_eq!(indexer.index(&point).unwrap(), index);
+            for scalar in 1..field.order() as u8 {
+                let scaled = point.map(|coordinate| field.mul(coordinate, scalar));
+                assert_eq!(indexer.index(&scaled).unwrap(), index);
+            }
+        }
+        assert_eq!(
+            indexer.index(&[0, 0, 0]),
+            Err(ProjectiveError::InvalidPoint)
+        );
+    }
+
+    #[test]
+    fn generic_projective_index_handles_higher_dimension() {
+        let field = SmallField::new(2, 4).unwrap();
+        let indexer = ProjectiveIndex::new(&field, 3).unwrap();
+        assert_eq!(indexer.point_count(), 16u64.pow(3) + 16u64.pow(2) + 16 + 1);
+        let last = indexer.point_owned(indexer.point_count() - 1).unwrap();
+        assert_eq!(&*last, &[0, 0, 0, 1]);
+    }
 
     #[test]
     fn ternary_planes_have_exact_incidence_parameters() {

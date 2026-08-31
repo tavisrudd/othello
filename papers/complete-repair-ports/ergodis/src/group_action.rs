@@ -506,6 +506,8 @@ pub enum OrbitCompileError<E> {
     NotClosed { generator: u32, point: u32 },
     #[error("orbit {orbit} does not use its least point as representative")]
     NotCanonical { orbit: u32 },
+    #[error("generator-closure seed {point} is out of range")]
+    Seed { point: u32 },
 }
 
 #[derive(Debug, Error, PartialEq, Eq)]
@@ -538,6 +540,95 @@ pub struct OrbitPartition {
 pub struct OrbitStorage {
     pub quotient_bytes: usize,
     pub certificate_bytes: usize,
+}
+
+/// Bitmap-backed closure of seeds under repeated generator application.
+#[derive(Clone, Debug)]
+pub struct GeneratorClosure {
+    point_count: u32,
+    membership: Box<[u64]>,
+    discovery_order: Box<[u32]>,
+}
+
+impl GeneratorClosure {
+    #[inline]
+    pub fn contains(&self, point: u32) -> bool {
+        point < self.point_count
+            && self.membership[point as usize / 64] & (1u64 << (point % 64)) != 0
+    }
+
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.discovery_order.len()
+    }
+
+    #[inline]
+    pub fn is_empty(&self) -> bool {
+        self.discovery_order.is_empty()
+    }
+
+    pub fn discovery_order(&self) -> &[u32] {
+        &self.discovery_order
+    }
+
+    pub fn storage_bytes(&self) -> usize {
+        std::mem::size_of_val(&*self.membership) + std::mem::size_of_val(&*self.discovery_order)
+    }
+}
+
+/// Breadth-first closure of an index set under the supplied generators.
+///
+/// This computes the directed semigroup closure and therefore needs no scan of
+/// points outside the reachable set. Each traversed target is range-checked.
+/// When the adapter's maps are permutations (for example GL generators), this
+/// is exactly the group-orbit closure. The discovered-point array doubles as
+/// the BFS queue; membership costs one bit per ambient point.
+pub fn compile_generator_closure<A: FinitePermutationAction>(
+    action: &A,
+    seeds: &[u32],
+) -> Result<GeneratorClosure, OrbitCompileError<A::Error>> {
+    let point_count = action.point_count();
+    let mut membership = vec![0u64; (point_count as usize).div_ceil(64)];
+    let mut queue = Vec::new();
+    for &point in seeds {
+        if point >= point_count {
+            return Err(OrbitCompileError::Seed { point });
+        }
+        let word = &mut membership[point as usize / 64];
+        let bit = 1u64 << (point % 64);
+        if *word & bit == 0 {
+            *word |= bit;
+            queue.push(point);
+        }
+    }
+    let mut head = 0usize;
+    while head < queue.len() {
+        let point = queue[head];
+        head += 1;
+        for generator in 0..action.generator_count() {
+            let target = action
+                .apply(generator, point)
+                .map_err(OrbitCompileError::Adapter)?;
+            if target >= point_count {
+                return Err(OrbitCompileError::Target {
+                    generator,
+                    point,
+                    target,
+                });
+            }
+            let word = &mut membership[target as usize / 64];
+            let bit = 1u64 << (target % 64);
+            if *word & bit == 0 {
+                *word |= bit;
+                queue.push(target);
+            }
+        }
+    }
+    Ok(GeneratorClosure {
+        point_count,
+        membership: membership.into_boxed_slice(),
+        discovery_order: queue.into_boxed_slice(),
+    })
 }
 
 impl OrbitPartition {
@@ -1126,6 +1217,24 @@ mod tests {
         assert_eq!(deferred.point_orbits(), partition.point_orbits());
         assert_eq!(deferred.representatives(), partition.representatives());
         verify_permutation_orbits(&action, &deferred).unwrap();
+    }
+
+    #[test]
+    fn generator_closure_visits_only_seeded_orbits() {
+        let action = TableAction([[1, 2, 3, 0, 5, 4], [0, 3, 2, 1, 4, 5]]);
+        let first = compile_generator_closure(&action, &[2]).unwrap();
+        assert_eq!(first.discovery_order(), &[2, 3, 0, 1]);
+        assert!(first.contains(0));
+        assert!(!first.contains(4));
+        assert_eq!(first.storage_bytes(), 8 + 4 * 4);
+
+        let both = compile_generator_closure(&action, &[2, 4, 2]).unwrap();
+        assert_eq!(both.len(), 6);
+        assert!((0..6).all(|point| both.contains(point)));
+        assert_eq!(
+            compile_generator_closure(&action, &[6]).unwrap_err(),
+            OrbitCompileError::Seed { point: 6 }
+        );
     }
 
     #[test]

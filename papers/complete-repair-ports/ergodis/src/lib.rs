@@ -124,15 +124,15 @@ pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
     FamilyResponseTable,
 };
-pub use field::{FieldError, FiniteField, Gf4, Prime};
+pub use field::{FieldError, FiniteField, Gf4, Prime, SmallField};
 pub use graph_obstruction::{cluster_graph_census, ClusterGraphCensus, GraphObstructionError};
 pub use group_action::{
-    compile_binary_gl_rref, compile_permutation_orbits,
+    compile_binary_gl_rref, compile_generator_closure, compile_permutation_orbits,
     compile_permutation_orbits_with_deferred_verification, quotient_presentation_by_binary_gl_rref,
     quotient_presentation_by_orbits, verify_binary_gl_rref, verify_permutation_orbits,
     BinaryGlPresentationError, BinaryGlProbeAction, BinaryGlProbeError, BinaryGlRrefQuotient,
-    BinaryRightLinearMap, FinitePermutationAction, OrbitCompileError, OrbitPartition,
-    OrbitQuotientError, OrbitStorage,
+    BinaryRightLinearMap, FinitePermutationAction, GeneratorClosure, OrbitCompileError,
+    OrbitPartition, OrbitQuotientError, OrbitStorage,
 };
 pub use hall::{
     solve_hall, verify_hall_certificate, verify_hall_result, DenseHallGraph, HallError,

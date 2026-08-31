@@ -8,6 +8,10 @@ pub enum FieldError {
     ZeroInverse,
     #[error("field element lies outside the canonical encoding")]
     InvalidElement,
+    #[error("extension degree must be positive and the field order must fit in 256 elements")]
+    InvalidExtensionDegree,
+    #[error("the modulus must be monic, reduced, and irreducible over the prime field")]
+    InvalidExtensionModulus,
 }
 
 mod private {
@@ -169,6 +173,310 @@ impl FiniteField for Gf4 {
     }
 }
 
+/// Table-backed arithmetic for a runtime-selected field `GF(p^h)` of order at
+/// most 256.
+///
+/// Elements use the polynomial-basis encoding
+/// `a_0 + a_1 x + ... + a_(h-1) x^(h-1) -> sum a_i p^i`. Construction is a
+/// cold operation: it locates or validates an irreducible monic modulus and
+/// builds flat addition, subtraction, multiplication, and inverse tables.
+/// Arithmetic thereafter allocates nothing and performs one indexed lookup.
+#[derive(Clone, Debug)]
+pub struct SmallField {
+    order: u16,
+    characteristic: u8,
+    degree: u8,
+    modulus: Box<[u8]>,
+    add: Box<[u8]>,
+    subtract: Box<[u8]>,
+    multiply: Box<[u8]>,
+    inverse: Box<[u8]>,
+}
+
+impl SmallField {
+    /// Construct the canonical field using the lexicographically first monic
+    /// irreducible polynomial in polynomial-basis encoding.
+    pub fn new(characteristic: u8, degree: u8) -> Result<Self, FieldError> {
+        extension_order(characteristic, degree)?;
+        let modulus =
+            first_irreducible(characteristic, degree).ok_or(FieldError::InvalidExtensionModulus)?;
+        Self::from_modulus(characteristic, &modulus[..=usize::from(degree)])
+    }
+
+    /// Construct a field from low-to-high coefficients of a monic irreducible
+    /// polynomial. The slice length is `h + 1`.
+    pub fn from_modulus(characteristic: u8, modulus: &[u8]) -> Result<Self, FieldError> {
+        let degree = modulus
+            .len()
+            .checked_sub(1)
+            .and_then(|degree| u8::try_from(degree).ok())
+            .ok_or(FieldError::InvalidExtensionDegree)?;
+        let order = extension_order(characteristic, degree)?;
+        if modulus.last() != Some(&1)
+            || modulus
+                .iter()
+                .any(|&coefficient| coefficient >= characteristic)
+            || !polynomial_is_irreducible(characteristic, modulus)
+        {
+            return Err(FieldError::InvalidExtensionModulus);
+        }
+        let table_len = usize::from(order) * usize::from(order);
+        let mut add = vec![0; table_len];
+        let mut subtract = vec![0; table_len];
+        let mut multiply = vec![0; table_len];
+        for left in 0..order {
+            for right in 0..order {
+                let slot = usize::from(left) * usize::from(order) + usize::from(right);
+                add[slot] = extension_add(left, right, characteristic, degree, false);
+                subtract[slot] = extension_add(left, right, characteristic, degree, true);
+                multiply[slot] = extension_multiply(left, right, characteristic, degree, modulus);
+            }
+        }
+        let mut inverse = vec![0; usize::from(order)];
+        for value in 1..order {
+            let row = usize::from(value) * usize::from(order);
+            let candidate = (1..order)
+                .find(|&candidate| multiply[row + usize::from(candidate)] == 1)
+                .ok_or(FieldError::InvalidExtensionModulus)?;
+            inverse[usize::from(value)] = candidate as u8;
+        }
+        Ok(Self {
+            order,
+            characteristic,
+            degree,
+            modulus: modulus.into(),
+            add: add.into_boxed_slice(),
+            subtract: subtract.into_boxed_slice(),
+            multiply: multiply.into_boxed_slice(),
+            inverse: inverse.into_boxed_slice(),
+        })
+    }
+
+    #[inline]
+    pub const fn order(&self) -> u16 {
+        self.order
+    }
+
+    #[inline]
+    pub const fn characteristic(&self) -> u8 {
+        self.characteristic
+    }
+
+    #[inline]
+    pub const fn degree(&self) -> u8 {
+        self.degree
+    }
+
+    #[inline]
+    pub fn modulus(&self) -> &[u8] {
+        &self.modulus
+    }
+
+    #[inline(always)]
+    pub fn add(&self, left: u8, right: u8) -> u8 {
+        self.add[self.table_index(left, right)]
+    }
+
+    #[inline(always)]
+    pub fn sub(&self, left: u8, right: u8) -> u8 {
+        self.subtract[self.table_index(left, right)]
+    }
+
+    #[inline(always)]
+    pub fn mul(&self, left: u8, right: u8) -> u8 {
+        self.multiply[self.table_index(left, right)]
+    }
+
+    #[inline]
+    pub fn inverse(&self, value: u8) -> Result<u8, FieldError> {
+        if value == 0 {
+            return Err(FieldError::ZeroInverse);
+        }
+        self.inverse
+            .get(usize::from(value))
+            .copied()
+            .ok_or(FieldError::InvalidElement)
+    }
+
+    #[inline]
+    pub fn pow(&self, mut base: u8, mut exponent: u16) -> u8 {
+        let mut result = 1;
+        while exponent != 0 {
+            if exponent & 1 != 0 {
+                result = self.mul(result, base);
+            }
+            base = self.mul(base, base);
+            exponent >>= 1;
+        }
+        result
+    }
+
+    #[inline(always)]
+    fn table_index(&self, left: u8, right: u8) -> usize {
+        let left = usize::from(left);
+        let right = usize::from(right);
+        let order = usize::from(self.order);
+        assert!(
+            left < order && right < order,
+            "field element is not reduced"
+        );
+        left * order + right
+    }
+}
+
+fn extension_order(characteristic: u8, degree: u8) -> Result<u16, FieldError> {
+    if !is_prime(characteristic) {
+        return Err(FieldError::InvalidModulus);
+    }
+    if degree == 0 {
+        return Err(FieldError::InvalidExtensionDegree);
+    }
+    let mut order = 1u16;
+    for _ in 0..degree {
+        order = order
+            .checked_mul(u16::from(characteristic))
+            .filter(|&order| order <= 256)
+            .ok_or(FieldError::InvalidExtensionDegree)?;
+    }
+    Ok(order)
+}
+
+fn first_irreducible(characteristic: u8, degree: u8) -> Option<[u8; 9]> {
+    let degree = usize::from(degree);
+    if degree > 8 {
+        return None;
+    }
+    let candidate_count = usize::from(characteristic).pow(degree as u32);
+    for encoded in 0..candidate_count {
+        let mut value = encoded;
+        let mut candidate = [0u8; 9];
+        for coefficient in &mut candidate[..degree] {
+            *coefficient = (value % usize::from(characteristic)) as u8;
+            value /= usize::from(characteristic);
+        }
+        candidate[degree] = 1;
+        if polynomial_is_irreducible(characteristic, &candidate[..=degree]) {
+            return Some(candidate);
+        }
+    }
+    None
+}
+
+fn polynomial_is_irreducible(characteristic: u8, polynomial: &[u8]) -> bool {
+    let degree = polynomial.len() - 1;
+    if degree == 1 {
+        return true;
+    }
+    if polynomial[0] == 0 {
+        return false;
+    }
+    for divisor_degree in 1..=degree / 2 {
+        let divisor_count = usize::from(characteristic).pow(divisor_degree as u32);
+        for encoded in 0..divisor_count {
+            let mut value = encoded;
+            let mut divisor = [0u8; 9];
+            for coefficient in &mut divisor[..divisor_degree] {
+                *coefficient = (value % usize::from(characteristic)) as u8;
+                value /= usize::from(characteristic);
+            }
+            divisor[divisor_degree] = 1;
+            if polynomial_divides(characteristic, polynomial, &divisor[..=divisor_degree]) {
+                return false;
+            }
+        }
+    }
+    true
+}
+
+fn polynomial_divides(characteristic: u8, polynomial: &[u8], divisor: &[u8]) -> bool {
+    let divisor_degree = divisor.len() - 1;
+    let mut remainder = [0u8; 9];
+    remainder[..polynomial.len()].copy_from_slice(polynomial);
+    for power in (divisor_degree..polynomial.len()).rev() {
+        let leading = remainder[power];
+        if leading == 0 {
+            continue;
+        }
+        let shift = power - divisor_degree;
+        for index in 0..=divisor_degree {
+            let product = u16::from(leading) * u16::from(divisor[index]);
+            remainder[shift + index] = ((u16::from(remainder[shift + index])
+                + u16::from(characteristic)
+                - product % u16::from(characteristic))
+                % u16::from(characteristic)) as u8;
+        }
+    }
+    remainder[..divisor_degree].iter().all(|&value| value == 0)
+}
+
+fn extension_add(left: u16, right: u16, characteristic: u8, degree: u8, subtract: bool) -> u8 {
+    let characteristic = u16::from(characteristic);
+    let mut left = left;
+    let mut right = right;
+    let mut encoded = 0u16;
+    let mut place = 1u16;
+    for _ in 0..degree {
+        let left_coefficient = left % characteristic;
+        let right_coefficient = right % characteristic;
+        let coefficient = if subtract {
+            (left_coefficient + characteristic - right_coefficient) % characteristic
+        } else {
+            (left_coefficient + right_coefficient) % characteristic
+        };
+        encoded += coefficient * place;
+        place *= characteristic;
+        left /= characteristic;
+        right /= characteristic;
+    }
+    encoded as u8
+}
+
+fn extension_multiply(
+    mut left: u16,
+    mut right: u16,
+    characteristic: u8,
+    degree: u8,
+    modulus: &[u8],
+) -> u8 {
+    let degree = usize::from(degree);
+    let characteristic_u16 = u16::from(characteristic);
+    let mut left_coefficients = [0u16; 8];
+    let mut right_coefficients = [0u16; 8];
+    for index in 0..degree {
+        left_coefficients[index] = left % characteristic_u16;
+        right_coefficients[index] = right % characteristic_u16;
+        left /= characteristic_u16;
+        right /= characteristic_u16;
+    }
+    let mut product = [0u16; 15];
+    for (left_index, &left_coefficient) in left_coefficients[..degree].iter().enumerate() {
+        for (right_index, &right_coefficient) in right_coefficients[..degree].iter().enumerate() {
+            let slot = left_index + right_index;
+            product[slot] =
+                (product[slot] + left_coefficient * right_coefficient) % characteristic_u16;
+        }
+    }
+    for power in (degree..=(2 * degree - 2)).rev() {
+        let leading = product[power];
+        if leading == 0 {
+            continue;
+        }
+        let shift = power - degree;
+        for index in 0..degree {
+            let reduction = leading * u16::from(modulus[index]) % characteristic_u16;
+            product[shift + index] =
+                (product[shift + index] + characteristic_u16 - reduction) % characteristic_u16;
+        }
+    }
+    let mut encoded = 0u16;
+    let mut place = 1u16;
+    for coefficient in &product[..degree] {
+        encoded += *coefficient * place;
+        place *= characteristic_u16;
+    }
+    encoded as u8
+}
+
 const fn is_prime(value: u8) -> bool {
     if value < 2 {
         return false;
@@ -227,5 +535,55 @@ mod tests {
         assert_eq!(Gf4::mul(2, 2), 3);
         assert_eq!(Gf4::mul(2, 3), 1);
         assert_eq!(Gf4::inverse(4), Err(FieldError::InvalidElement));
+    }
+
+    #[test]
+    fn runtime_prime_power_fields_cover_campaign_orders() {
+        for (characteristic, degree, order) in [
+            (2, 3, 8),
+            (3, 2, 9),
+            (2, 4, 16),
+            (5, 2, 25),
+            (3, 3, 27),
+            (2, 5, 32),
+            (2, 6, 64),
+        ] {
+            let field = SmallField::new(characteristic, degree).unwrap();
+            assert_eq!(field.order(), order);
+            for left in 0..order as u8 {
+                assert_eq!(field.add(left, 0), left);
+                assert_eq!(field.mul(left, 0), 0);
+                assert_eq!(field.mul(left, 1), left);
+                if left != 0 {
+                    assert_eq!(field.mul(left, field.inverse(left).unwrap()), 1);
+                }
+                for right in 0..order as u8 {
+                    assert!(u16::from(field.add(left, right)) < order);
+                    assert!(u16::from(field.mul(left, right)) < order);
+                    assert_eq!(field.add(left, right), field.add(right, left));
+                    assert_eq!(field.mul(left, right), field.mul(right, left));
+                    assert_eq!(field.sub(field.add(left, right), right), left);
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn runtime_field_validates_moduli_and_matches_gf4_encoding() {
+        assert!(SmallField::new(6, 1).is_err());
+        assert!(SmallField::new(2, 0).is_err());
+        assert!(SmallField::new(3, 6).is_err());
+        assert!(SmallField::from_modulus(2, &[1, 0, 1]).is_err());
+        let field = SmallField::new(2, 2).unwrap();
+        assert_eq!(field.modulus(), &[1, 1, 1]);
+        for left in 0..4 {
+            for right in 0..4 {
+                assert_eq!(field.add(left, right), Gf4::add(left, right));
+                assert_eq!(field.mul(left, right), Gf4::mul(left, right));
+            }
+        }
+        let largest = SmallField::new(2, 8).unwrap();
+        assert_eq!(largest.order(), 256);
+        assert_eq!(largest.mul(255, largest.inverse(255).unwrap()), 1);
     }
 }

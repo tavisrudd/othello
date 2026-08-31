@@ -34,9 +34,12 @@ as each coherent tranche lands.
    `large-css,parallel` release feature contract. Next: full feature-matrix and
    shard-union tests. Large-CSS v1 artifacts now load across the 12-to-13-word
    internal support-width change, including the retained C1018 artifact, and BB
-   generation is idempotent only when the existing bytes match. Next: reusable
-   small-field, null-space, projective-indexing, and
-   generator-orbit foundations. Keep tactical plane completion in
+   generation is idempotent only when the existing bytes match. Reusable
+   foundations now include table-backed runtime GF(p^h) arithmetic through
+   order 256, static and runtime right-null-space APIs, allocation-free generic
+   PG(d,q) rank/unrank, and bitmap-backed seeded generator closure that scans
+   only reachable points. Next: replace private campaign-local arithmetic with
+   these APIs and measure the orbit-closure wave. Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
 4. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
    exact replay/parity, zero-allocation, bounded-memory, and deterministic
