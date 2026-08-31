@@ -3977,8 +3977,17 @@
       "last": 1021,
       "purpose": "target-mining execution: Brouwer exceptional exterior-set census reconstruction with lane invariants; prime-power healthy-arc census via new SmallField layer",
       "sequence": 442
+    },
+    {
+      "count": 1,
+      "first": 1022,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 1022,
+      "purpose": "novelty and priority audit of the C1020 finding that the q=31 exceptional exterior-set configuration is the q=11 Clebsch hexagon structure at a second completion level",
+      "sequence": 443
     }
   ],
-  "next_id": 1022,
+  "next_id": 1023,
   "schema": "codex-task-id-allocations-v1"
 }
