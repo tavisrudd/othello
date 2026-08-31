@@ -114,6 +114,15 @@ Record add/drop operator inverses so a short cycle is detectable without
 retaining full text. This directly attacks the EvoTrace pathology while making
 campaign replay and cross-run persistence possible.
 
+**First slice landed.** Daemon evolution records the stable compiled hash of
+each parent, a typed mutation-operator label, the child plan and compiled hash,
+exact evaluation, and outcome-equivalence link in every streamed trial.
+Structural repeats are rejected before compilation/evaluation, and only the
+best-ranked representative of an exact outcome class is expanded in a
+generation. Summary counters expose structural and outcome-expansion
+rejections. Durable restore across campaigns and inverse-edit fingerprints
+remain open.
+
 ### P0 — exact evaluator cascade
 
 Use lexicographic stages:

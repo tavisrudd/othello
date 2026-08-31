@@ -62,9 +62,15 @@ struct ScopeMutationProfile {
     positive_majority_mask: u64,
 }
 
+struct PendingCandidate {
+    plan: PlanSpec,
+    parent_hash: Option<String>,
+    operator: &'static str,
+}
+
 pub(super) fn run_evolution(
     batch: Arc<FeatureBatch>,
-    mut current: Vec<PlanSpec>,
+    current: Vec<PlanSpec>,
     output: File,
     bounds: EvolutionBounds,
     progress: Arc<EvolutionProgress>,
@@ -79,23 +85,35 @@ pub(super) fn run_evolution(
     let mut outcome_classes = BTreeMap::new();
     let mut tested = 0_usize;
     let mut perfect = 0_usize;
+    let mut structural_rejections = 0_usize;
+    let mut outcome_expansion_rejections = 0_usize;
     let mut best: Option<(u64, u64, usize, PlanSpec)> = None;
     let mut truncated = false;
+    let mut current = current
+        .into_iter()
+        .map(|plan| PendingCandidate {
+            plan,
+            parent_hash: None,
+            operator: "seed",
+        })
+        .collect::<Vec<_>>();
 
     'generations: for generation in 0..bounds.generations {
         progress
             .generation
             .store(generation as u64, Ordering::Relaxed);
         let mut ranked = Vec::new();
-        for mut plan in current.drain(..) {
+        for pending in current.drain(..) {
             if tested == bounds.max_candidates || progress.cancelled.load(Ordering::Acquire) {
                 break 'generations;
             }
+            let mut plan = pending.plan;
             let structural_key = format!(
                 "{:?}|{:?}|{:?}|{:?}",
                 plan.role, plan.output, plan.scope, plan.program
             );
             if !structural.insert(structural_key) {
+                structural_rejections += 1;
                 continue;
             }
             plan.name = format!("evolve-g{generation}-c{tested}");
@@ -107,6 +125,8 @@ pub(super) fn run_evolution(
                 .or_insert_with(|| plan.name.clone());
             let record = json!({
                 "generation": generation,
+                "parent_hash": pending.parent_hash,
+                "operator": pending.operator,
                 "plan": &plan,
                 "hash": &compiled.hash,
                 "equivalent_to": equivalent_to,
@@ -147,6 +167,8 @@ pub(super) fn run_evolution(
                 evaluation.weighted_correct,
                 evaluation.weighted_false_positive,
                 plan.program.len(),
+                evaluation.outcome_hash,
+                compiled.hash,
                 plan,
             ));
             progress.tested.store(tested as u64, Ordering::Relaxed);
@@ -161,16 +183,27 @@ pub(super) fn run_evolution(
                 .cmp(&left.0)
                 .then_with(|| left.1.cmp(&right.1))
                 .then_with(|| left.2.cmp(&right.2))
-                .then_with(|| left.3.name.cmp(&right.3.name))
+                .then_with(|| left.5.name.cmp(&right.5.name))
         });
-        for (_, _, _, parent) in ranked.into_iter().take(bounds.beam) {
+        let mut expanded_outcomes = BTreeSet::new();
+        let mut expanded = 0_usize;
+        for (_, _, _, outcome_hash, parent_hash, parent) in ranked {
+            if expanded == bounds.beam {
+                break;
+            }
+            if !expanded_outcomes.insert(outcome_hash) {
+                outcome_expansion_rejections += 1;
+                continue;
+            }
             mutate_plan(
                 &parent,
+                &parent_hash,
                 &batch.fields,
                 &scope_profiles,
                 &mut current,
                 bounds.max_candidates.saturating_sub(tested),
             );
+            expanded += 1;
             if current.len() >= bounds.max_candidates.saturating_sub(tested) {
                 break;
             }
@@ -182,6 +215,8 @@ pub(super) fn run_evolution(
         "tested": tested,
         "perfect": perfect,
         "outcome_classes": outcome_classes.len(),
+        "structural_rejections": structural_rejections,
+        "outcome_expansion_rejections": outcome_expansion_rejections,
         "bytes": bytes,
         "truncated": truncated,
         "cancelled": progress.cancelled.load(Ordering::Acquire),
@@ -234,9 +269,11 @@ fn scope_profiles(batch: &FeatureBatch) -> Result<Vec<ScopeMutationProfile>, Con
 
 fn push_scoped_child(
     parent: &PlanSpec,
+    parent_hash: &str,
     field: &str,
     mask: u64,
-    output: &mut Vec<PlanSpec>,
+    operator: &'static str,
+    output: &mut Vec<PendingCandidate>,
     limit: usize,
 ) -> bool {
     if mask == 0 || output.len() == limit {
@@ -247,15 +284,20 @@ fn push_scoped_child(
         field: field.to_owned(),
         mask,
     });
-    output.push(child);
+    output.push(PendingCandidate {
+        plan: child,
+        parent_hash: Some(parent_hash.into()),
+        operator,
+    });
     output.len() == limit
 }
 
 fn mutate_plan(
     parent: &PlanSpec,
+    parent_hash: &str,
     fields: &[String],
     scope_profiles: &[ScopeMutationProfile],
-    output: &mut Vec<PlanSpec>,
+    output: &mut Vec<PendingCandidate>,
     limit: usize,
 ) {
     for profile in scope_profiles {
@@ -269,7 +311,15 @@ fn mutate_plan(
             while bits != 0 {
                 let bit = bits & bits.wrapping_neg();
                 bits ^= bit;
-                if push_scoped_child(parent, &profile.field, current_mask ^ bit, output, limit) {
+                if push_scoped_child(
+                    parent,
+                    parent_hash,
+                    &profile.field,
+                    current_mask ^ bit,
+                    "scope-toggle",
+                    output,
+                    limit,
+                ) {
                     return;
                 }
             }
@@ -278,15 +328,25 @@ fn mutate_plan(
             while bits != 0 {
                 let bit = bits & bits.wrapping_neg();
                 bits ^= bit;
-                if push_scoped_child(parent, &profile.field, bit, output, limit) {
+                if push_scoped_child(
+                    parent,
+                    parent_hash,
+                    &profile.field,
+                    bit,
+                    "scope-initialize",
+                    output,
+                    limit,
+                ) {
                     return;
                 }
             }
             if profile.positive_majority_mask != profile.observed_mask
                 && push_scoped_child(
                     parent,
+                    parent_hash,
                     &profile.field,
                     profile.positive_majority_mask,
+                    "scope-majority",
                     output,
                     limit,
                 )
@@ -296,28 +356,37 @@ fn mutate_plan(
         }
     }
     for (index, op) in parent.program.iter().enumerate() {
-        let replacements: Vec<PlanOp> = match op {
-            PlanOp::Const { value } => [-8, -2, -1, 1, 2, 8]
-                .into_iter()
-                .filter_map(|delta| value.checked_add(delta))
-                .map(|value| PlanOp::Const { value })
-                .collect(),
-            PlanOp::Field { name } => fields
-                .iter()
-                .filter(|field| *field != name)
-                .map(|name| PlanOp::Field { name: name.clone() })
-                .collect(),
-            PlanOp::Eq | PlanOp::Ne | PlanOp::Lt | PlanOp::Le | PlanOp::Gt | PlanOp::Ge => vec![
-                PlanOp::Eq,
-                PlanOp::Ne,
-                PlanOp::Lt,
-                PlanOp::Le,
-                PlanOp::Gt,
-                PlanOp::Ge,
-            ],
-            PlanOp::And => vec![PlanOp::Or],
-            PlanOp::Or => vec![PlanOp::And],
-            _ => Vec::new(),
+        let (operator, replacements): (&'static str, Vec<PlanOp>) = match op {
+            PlanOp::Const { value } => (
+                "constant-shift",
+                [-8, -2, -1, 1, 2, 8]
+                    .into_iter()
+                    .filter_map(|delta| value.checked_add(delta))
+                    .map(|value| PlanOp::Const { value })
+                    .collect(),
+            ),
+            PlanOp::Field { name } => (
+                "field-substitute",
+                fields
+                    .iter()
+                    .filter(|field| *field != name)
+                    .map(|name| PlanOp::Field { name: name.clone() })
+                    .collect(),
+            ),
+            PlanOp::Eq | PlanOp::Ne | PlanOp::Lt | PlanOp::Le | PlanOp::Gt | PlanOp::Ge => (
+                "comparison-substitute",
+                vec![
+                    PlanOp::Eq,
+                    PlanOp::Ne,
+                    PlanOp::Lt,
+                    PlanOp::Le,
+                    PlanOp::Gt,
+                    PlanOp::Ge,
+                ],
+            ),
+            PlanOp::And => ("boolean-flip", vec![PlanOp::Or]),
+            PlanOp::Or => ("boolean-flip", vec![PlanOp::And]),
+            _ => ("none", Vec::new()),
         };
         for replacement in replacements {
             if output.len() == limit {
@@ -325,7 +394,11 @@ fn mutate_plan(
             }
             let mut child = parent.clone();
             child.program[index] = replacement;
-            output.push(child);
+            output.push(PendingCandidate {
+                plan: child,
+                parent_hash: Some(parent_hash.into()),
+                operator,
+            });
         }
     }
 }

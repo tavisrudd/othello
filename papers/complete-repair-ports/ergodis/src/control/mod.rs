@@ -2191,6 +2191,20 @@ mod tests {
         let relative = completed["path"].as_str().unwrap();
         let evidence = fs::read_to_string(campaign.manifest.run_dir.join(relative)).unwrap();
         assert!(evidence.lines().count() >= 2);
+        let records = evidence
+            .lines()
+            .map(|line| serde_json::from_str::<Value>(line).unwrap())
+            .collect::<Vec<_>>();
+        assert_eq!(records[0]["operator"], "seed");
+        assert!(records[0]["parent_hash"].is_null());
+        assert!(records
+            .iter()
+            .skip(1)
+            .any(|record| record["parent_hash"].as_str().is_some()));
+        assert!(records
+            .iter()
+            .skip(1)
+            .all(|record| record["operator"] != "seed"));
     }
 
     #[test]
