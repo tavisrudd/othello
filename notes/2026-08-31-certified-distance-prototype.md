@@ -252,20 +252,21 @@ contention. The candidate counts are exact and machine-independent.
 | `R3EliteP02` | x | 19 | 32 | 279.8 | 287.4 |  7.7 | 23.8 | 31.9 |  7,949,516,814 |  7,948,318,726 | +0.02% |
 | `R3EliteP02` | z | 19 | 32 | 299.5 | 306.0 |  6.5 | 23.8 | 33.2 | 13,407,186,395 | 13,405,995,220 | +0.01% |
 
-Three things in that table are worth stating plainly.
+The last two columns need a caveat before anything is read into them: the
+one-shot counts are the ones recorded in the earlier sweep report, taken on an
+older core revision. They are a fair comparison for the nine witness-free sides,
+whose counts are stable, and **not** a fair comparison for the three sides where
+the search returns a witness. Section 4.3 replaces those with a same-host,
+same-revision measurement.
 
-**Sharding is nearly free when the search finds nothing, and expensive when it
-finds something.** On the nine sides where the exhaustion returned no witness the
-inflation is between +0.01% and +1.8%, which is just the repeated prefix
-expansion. On `R1Elite02`'s X side it is **+42%**, and the mechanism is clear:
-the one-shot search finds a weight-16 logical operator early, publishes the
-improved bound to every worker, and prunes the rest of the space hard, whereas 32
-independent shards each have to rediscover it or run without it. `R3Elite02`'s
-X side goes the other way, at -2.5%, because there a shard happens to find its
-witness earlier than the one-shot search does. So sharding trades a bounded
-amount of extra work for resumability, and the size of that trade depends on
-whether the answer is a witness or a negative. **This is the single most
-actionable finding for the core**: see interface request 11.
+Two things in the table are solid.
+
+**Sharding is nearly free when the search finds nothing.** On the nine sides
+where the exhaustion returned no witness the inflation is between +0.01% and
++1.8%, and it falls as the radius deepens (+0.01% and +0.02% on the two
+1.3e10-candidate `R3EliteP02` sides). That is the repeated prefix expansion and
+nothing else, and it is a rounding error exactly where a service needs it to be:
+on the long jobs.
 
 **Peak resident memory is flat and small.** 22.8 to 24.4 MiB per shard on the
 1428- and 1496-coordinate instances, 23.8 MiB on the 1500-coordinate ones, across
@@ -279,7 +280,42 @@ reload, and it is 11% to 18% of these jobs' wall time at 32 shards. That fractio
 scales linearly with shard count, so it is the price of resume granularity and
 the thing interface request 2 would remove.
 
-### 4.3 The feasibility estimate, checked against the outcome
+### 4.3 What resumability costs: a same-host head-to-head
+
+The honest question is not how a sharded run compares to a number in an old
+report, it is what a customer pays for resumability. Both arms below ran back to
+back on the same host, at the same thread count, from the same compiled filter,
+against the current core.
+
+| instance | arm | search s | wall s | candidates | peak RSS |
+|:---|:---|---:|---:|---:|---:|
+| `R1Elite02` X, radius 16, **witness found** | one shot | 1.54 | 1.64 | 93,202,559 | 22.2 MiB |
+| | 32 resumable shards | 8.20 | ~16 | 385,401,304 | 24.4 MiB |
+| `R3EliteP02` Z, radius 19, **no witness** | one shot | 245.36 | 245.44 | 13,405,995,220 | 22.2 MiB |
+| | 32 resumable shards | 259.77 | ~266 | 13,407,186,395 | 23.8 MiB |
+
+**Resumability costs about 8% on the deep, witness-free radius and about 5x on
+the shallow one that ends in a witness.** The second number looks bad and matters
+little: that job costs 1.6 s, and nobody needs to resume a two-second search. The
+first number is the one that decides whether the product is viable, and 8% to
+turn an unrestartable multi-hour process into 32 restartable pieces is a good
+trade. The mechanism behind the 5x is the same one described in §2.1: the
+one-shot search finds its weight-16 witness early and publishes the improved
+bound to every worker, while 32 independent shards each run without it. Interface
+request 2 would remove most of that gap.
+
+A second measurement fell out of the same run and is worth recording, because it
+constrains what a certificate can promise. Repeating the one-shot
+`R1Elite02` X search five times at 8 threads gives 93,202,559 / 97,004,658 /
+98,401,192 / 96,093,566 / 98,093,155 candidates — a 5% spread — while at one
+thread it gives 92,746,415 twice, exactly. So the parallel search is
+**deterministic in its conclusion and nondeterministic in its counters whenever a
+bound is published**, which is precisely the rule §6.3 arrived at from the
+verifier side. The witness-free `R3EliteP02` Z search reproduces
+13,405,995,220 candidates exactly, matching the earlier report's figure across
+both core revisions.
+
+### 4.4 The feasibility estimate, checked against the outcome
 
 `certdist plan` sampled 3 of 32 shards of `R1Elite01`'s X side at the target
 radius and projected 46.0 s of total search from a per-shard spread of 1.19 s to
@@ -446,10 +482,10 @@ in descending order of what they would be worth.
    which is exactly what a commercial certificate needs.
 2. **Let a shard be seeded with a known upper bound.** This is the highest-value
    item after the automorphism generators, and it is the only one this sweep
-   measured a hard number for. Sharding costs +42% of the enumeration on
-   `R1Elite02`'s X side purely because 32 independent shards cannot share the
-   improved bound that the one-shot search publishes as soon as it finds its
-   weight-16 witness. A driver always has a candidate bound before it starts —
+   measured a hard number for. In the same-host head-to-head of §4.3, sharding
+   costs **5x the enumeration** on `R1Elite02`'s X side purely because 32
+   independent shards cannot share the improved bound that the one-shot search
+   publishes as soon as it finds its weight-16 witness. A driver always has a candidate bound before it starts —
    `certdist` runs its ordered-statistics pass first precisely so that it does —
    and handing that bound to every shard would recover the loss and speed up
    ordinary unsharded searches too. The input's `incumbent_support` field is
@@ -709,6 +745,12 @@ value in that report.
 
 ## 10. Verdict on the prototype itself
 
+The prototype is slower than the one-shot path, and by how much depends entirely
+on whether the search ends in a witness: 8% slower on the deep witness-free
+radius, 5x slower on the shallow one that finds a witness in under two seconds.
+Both figures are measured back to back on the same host in §4.3, and the first is
+the one that matters, because the shallow case has nothing to resume.
+
 The resume mechanism works, is cheap, and is the piece with real commercial
 value: two hard kills mid-radius cost 12% of the wall time and produced a
 byte-identical certificate. The upper-bound pass is competitive on this family —
@@ -725,7 +767,7 @@ certificate's real contribution there is turning an all-or-nothing re-run into a
 dial with a measured price per notch.
 
 The two things that would most change the economics are both in the core and
-both are small: seed shards with a known bound (worth up to 42% of the
+both are small: seed shards with a known bound (worth up to 5x of the
 enumeration on witness-bearing instances), and carry verified automorphism
 generators in the input (worth 42x to 60x, and worth more than that in
 credibility, since it converts the largest speedup in the system from a trusted
