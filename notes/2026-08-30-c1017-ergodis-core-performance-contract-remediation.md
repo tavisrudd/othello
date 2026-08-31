@@ -436,6 +436,22 @@ retained binary hash are under
 `/home/tavis/.cache/ergodis-perf/c1017-moment-character/final-ab`. The registry
 now has 65 pass, 3 open, and 34 not-applicable cells.
 
+The successive-selector row now records both sides of its representation
+crossover. `bench_kernels` constructs the same five-variable degree-four
+polynomial over `F_7` as either 3,125 dense coefficients or canonical sparse
+mixed-radix terms, and both backends return the same assignment, five partial
+tests per solve, work total, and checksum. At 32 nonzero terms (1.024%
+density), dense/sparse is 33.931x cycles (`t=1801.52`), 34.255x instructions,
+12.475x branches, 141.207x branch misses, and 33.785x wall (`t=1792.71`). At
+3,125 terms, sparse/dense is 1.521x cycles (`t=174.45`), 1.283x instructions,
+2.863x branches, 1.663x branch misses, and 1.524x wall (`t=106.96`). Median RSS
+differs by at most 36 KiB. Nine rotated pairs perform 500,000 complete
+selections per arm at each extreme. Raw counters and the retained binary hash
+are under `/home/tavis/.cache/ergodis-perf/c1017-selector/final-ab`. This
+validates the conservative representation switch without claiming one layout
+dominates every density. The registry now has 66 pass, 2 open, and 34
+not-applicable cells.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

@@ -172,7 +172,15 @@ as each coherent tranche lands.
    both controls. Raw evidence is under
    `/home/tavis/.cache/ergodis-perf/c1017-moment-character/final-ab`. The
    private registry now records 65 pass, 3 open, and 34 not-applicable cells.
-   Current next slice: retain the successive-selector counter A/B.
+   The selector representation crossover is now retained too. Across 500,000
+   complete selections per arm, sparse terms beat the dense tensor by 33.931x
+   cycles at 1.024% density, while the dense tensor beats sparse terms by
+   1.521x cycles at 100% density. Both extremes preserve the exact assignment,
+   five partial tests per solve, work, and checksum; nine rotated pairs have
+   `t=1801.52` and `t=174.45`. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-selector/final-ab`. The private
+   registry now records 66 pass, 2 open, and 34 not-applicable cells. Current
+   next slice: retain the campaign-plan VM counter A/B.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

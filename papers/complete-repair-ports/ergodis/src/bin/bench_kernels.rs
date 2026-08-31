@@ -11,10 +11,11 @@ use ergodis::{
     ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
     ternary_orbit_syndrome_search_correlated, CephXorLayer, CompiledBinaryLinearCode,
-    CompositionTower, ContextStrategy, DenseHallGraph, FiniteField, Gf4, GpuCheckpointCapacities,
-    HallWorkspace, IntegerMomentProblem, IntegerMomentWorkspace, Matrix, OrbitOption, Prime,
-    PrimePolynomialRecurrence, PrimeQuadraticCharacter, QcLdpcCode, RankOneProbeCache, RepairTask,
-    TowerLevel, WeightedRepairProblem, WeightedRepairWorkspace, WeightedSchedulerBackend,
+    CompositionTower, ContextStrategy, DenseHallGraph, DenseSelector, FiniteField, Gf4,
+    GpuCheckpointCapacities, HallWorkspace, IntegerMomentProblem, IntegerMomentWorkspace, Matrix,
+    OrbitOption, Prime, PrimePolynomialRecurrence, PrimeQuadraticCharacter, QcLdpcCode,
+    RankOneProbeCache, RepairTask, SparseSelector, TowerLevel, WeightedRepairProblem,
+    WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
 
 fn next_u32(state: &mut u64) -> u32 {
@@ -280,6 +281,16 @@ fn character_sum_spec(variant: &str) -> Option<(&str, u32, usize, u64)> {
         .next()
         .is_none()
         .then_some((backend, modulus, degree, seed))
+}
+
+fn selector_spec(variant: &str) -> Option<(&str, usize)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "selector" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let terms = fields.next()?.parse().ok()?;
+    fields.next().is_none().then_some((backend, terms))
 }
 
 struct HallBenchFixture {
@@ -976,6 +987,51 @@ fn main() {
                 .wrapping_add(u64::from(census.negative()) << 21)
                 .wrapping_add(u64::from(census.zero()) << 42);
             black_box(census);
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
+    if let Some((backend, term_count)) = selector_spec(&variant) {
+        const SLOTS: usize = 5_usize.pow(5);
+        assert!(term_count > 0 && term_count <= SLOTS);
+        let mut dense_coefficients = vec![0_u8; SLOTS];
+        let mut sparse_terms = Vec::with_capacity(term_count);
+        for term in 0..term_count {
+            let index = term * SLOTS / term_count;
+            let coefficient = (term % 6 + 1) as u8;
+            dense_coefficients[index] = coefficient;
+            sparse_terms.push((index as u64, coefficient));
+        }
+        let dense = DenseSelector::<Prime<7>>::new([4; 5], dense_coefficients).unwrap();
+        let sparse = SparseSelector::<Prime<7>>::new([4; 5], sparse_terms).unwrap();
+        let mut dense_workspace = dense.workspace();
+        let mut sparse_workspace = sparse.workspace();
+        let expected = dense.select_nonzero(&mut dense_workspace).unwrap();
+        assert_eq!(
+            expected,
+            sparse.select_nonzero(&mut sparse_workspace).unwrap()
+        );
+        for _ in 0..repetitions {
+            let answer = match backend {
+                "dense" => dense.select_nonzero(&mut dense_workspace).unwrap(),
+                "sparse" => sparse.select_nonzero(&mut sparse_workspace).unwrap(),
+                _ => panic!("unknown selector backend"),
+            };
+            work += answer.partial_tests;
+            let assignment_hash = answer
+                .assignment
+                .iter()
+                .fold(0x9e37_79b9_7f4a_7c15_u64, |hash, &value| {
+                    hash.rotate_left(5) ^ u64::from(value)
+                });
+            checksum = checksum
+                .wrapping_add(assignment_hash)
+                .wrapping_add(answer.partial_tests);
+            black_box(answer);
         }
         let elapsed_ns = started.elapsed().as_nanos();
         println!(
