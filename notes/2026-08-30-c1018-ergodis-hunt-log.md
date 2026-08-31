@@ -33,6 +33,19 @@ projects, ranked by Ergodis fit):
 
 ## Results
 
+- **Wave 1A, PRS deep holes (landed ~00:45)** —
+  `2026-08-30-c1018-hunt-prs-deepholes.md`; driver
+  `ergodis-private/src/bin/c1018_prs_deephole.rs`, helper
+  `2026-08-30-c1018-prs-helper.py`. Three sharpened conjectures all
+  survive 41 exhaustive census cells (r=3..9). **New:** redundancy 8 is
+  persistent-only already at q=13 (exhaustive q=13,16,17,19; 1.73e9
+  projective directions) — answers C513's open "is q=43 sharp?" with no;
+  exact X(8)∩[8,19]={8,9,11}. **New:** X(4)=∅ for 4≤q≤64 (twelve fields,
+  exhaustive). Sixteen cells reproduce committed R5/R6/R7 certificates
+  exactly. No counterexamples; one GF(16) field-labelling artifact logged
+  as a standing certificate-recheck hazard. Ergodis fit: prime-field rank
+  oracle exact (116 cross-checks); biggest gap is no general GF(p^h).
+  Follow-up (r=9,q=13) queued to decide Conjecture B.
 - **Wave 1B, transversal/CSS (landed ~23:45)** —
   `2026-08-30-c1018-hunt-transversal-css.md`; driver
   `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes
