@@ -1,0 +1,29 @@
+{
+  "classes": {
+    "classical-hyperoval": {
+      "all_have_hamilton_pair": true,
+      "hamilton_pair_count_distribution": {
+        "27": 28
+      },
+      "one_factorization_count": 28,
+      "one_factorizations_sha256": "6408d524c6f0f50905c6bafe2d03624472a13ebccd8360e973d2ed08f12bc987",
+      "overlap_closure_distribution": {
+        "9": 28
+      }
+    },
+    "mathon-nonhyperoval": {
+      "all_have_hamilton_pair": false,
+      "hamilton_pair_count_distribution": {
+        "0": 1
+      },
+      "one_factorization_count": 1,
+      "one_factorizations_sha256": "929e9543b96272615536dc3886c7abc5cb429b8680d56f1c37454a7d567fce7e",
+      "overlap_closure_distribution": {
+        "9": 1
+      }
+    }
+  },
+  "input_sha256": "c2c3619a1c074bd28a9e0b967a4ac1762496589ede0cc636431f484d67fba357",
+  "schema": "c1015-ree-bridge-v1",
+  "trusted_boundary": "exact enumeration and finite graph checks only; the automatic-pencil theorem is human"
+}
