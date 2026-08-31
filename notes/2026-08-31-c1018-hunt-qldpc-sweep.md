@@ -270,10 +270,48 @@ bound, which is itself worth recording: the randomized search was already tight 
 
 ## Evidence
 
+### Landed per-code certificates
+
+One compact closure record per code, following the C80 precedent, landed under
+`ergodis-private/evidence/`.  Each carries the source provenance and reported parameters, the
+protographs, the reconstructed length and dimension, the per-side anchor count, parity gate, search
+radius, candidate count and witness, and the certified distance with its exact figure of merit.
+They contain no wall-clock, host, toolchain or path fields, and regenerating them reproduces the
+same bytes; that was verified by emitting a second copy and diffing.
+
+| Landed path | SHA-256 |
+| ----------- | ------- |
+| `ergodis-private/evidence/c1018-qldpc-r1elite01-certificate.json`  | `81ed23d081e4d66fa6ca48e9a47250b078b2c6928eaa6636d215d3a37bd75114` |
+| `ergodis-private/evidence/c1018-qldpc-r1elite02-certificate.json`  | `5cce3768d71d5ce0fd58d18f6c31c85b3f032208e100677b94e21d8caedb8b71` |
+| `ergodis-private/evidence/c1018-qldpc-r3elite01-certificate.json`  | `003a22c70dda7550ba03c23e1c243b46476c1425291ce8228804a17579fdd82e` |
+| `ergodis-private/evidence/c1018-qldpc-r3elite02-certificate.json`  | `2345a5858bf6f7d9aacd2a72a6a4bd5dfef10336aa19e5416731168db5756f3d` |
+| `ergodis-private/evidence/c1018-qldpc-r3elitep01-certificate.json` | `2c32dd736b70a5a5b4118f9ff50c0b184a8c20c684b164628ded8b41cb747544` |
+| `ergodis-private/evidence/c1018-qldpc-r3elitep02-certificate.json` | `7c32be6dc6ec1d4bb0d6cce718bd9b074c4e114db091018d05d44b37e727ecfc` |
+
+Those six raw `sha256sum` lines are appended to `ergodis-private/evidence/SHA256SUMS`, which is
+append-only: no existing entry was touched, and the six new entries pass `sha256sum -c`.
+
+Regenerate them with:
+
+```bash
+python3 notes/2026-08-31-c1018-qldpc-helper.py --certificates \
+  --work-dir /home/tavis/.cache/ergodis/c1018/qldpc \
+  --certificate-dir <output directory>
+```
+
+The bulk search logs, compiled artifacts and evidence streams are deliberately *not* landed: they
+carry timings and are large.  They stay in the cache directory listed below.
+
+### Sources and generated artefacts
+
 Tracked in the repository:
 
-- `notes/2026-08-31-c1018-qldpc-helper.py`, 22,462 bytes,
-  SHA-256 `eca16ae0cf504addb22f49944fd67d560f32e52f60c2d8740d330ff7809906b4`.
+- `notes/2026-08-31-c1018-qldpc-helper.py`, 29,219 bytes,
+  SHA-256 `ed2370a230d20cba0685a0e4fb3416045d5a37b05fab64b02202e99e1579a8aa`.
+  (It grew by the `--certificates` emitter after the first commit of this report; the earlier
+  22,462-byte revision, SHA-256
+  `eca16ae0cf504addb22f49944fd67d560f32e52f60c2d8740d330ff7809906b4`, produced every search input
+  and is unchanged in its construction, group and anchor code.)
 
 Source of the protographs, on disk, not re-fetched:
 

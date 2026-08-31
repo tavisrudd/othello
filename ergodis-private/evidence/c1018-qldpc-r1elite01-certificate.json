@@ -1,0 +1,211 @@
+{
+  "boundary": "exhaustive finite enumeration by one reviewed implementation with an independently replayed witness at the attained weight; not machine-checked",
+  "candidate": "r1elite01",
+  "certified_distance": 18,
+  "certified_parameters": "[[1428,186,18]]",
+  "conclusion": "exact distance 18; replaces the published randomized upper bound [[1428,186,<=18]]",
+  "construction": {
+    "family": "lifted product over a finite group",
+    "generic_layer_bound_to": "reproduces the Ergodis reference build_checks(R2_ELITE_02) bit-identically",
+    "group": "Z_3 x Z_14",
+    "group_order": 42,
+    "protograph_a": [
+      [
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          10
+        ]
+      ],
+      [
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          1,
+          9
+        ]
+      ],
+      [
+        [
+          0,
+          13
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          13
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ]
+      ]
+    ],
+    "protograph_b": [
+      [
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          12
+        ]
+      ],
+      [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          0,
+          7
+        ]
+      ]
+    ]
+  },
+  "figure_of_merit_k_d2_over_n": {
+    "denominator": 1428,
+    "numerator": 60264
+  },
+  "reconstruction": {
+    "checks_commute": true,
+    "combined_support_components": 1,
+    "coordinate_count": 1428,
+    "dimension": 186,
+    "dimension_matches_published": true
+  },
+  "schema": "ergodis-private-c1018-qldpc-exact-distance-certificate-v1",
+  "sides": [
+    {
+      "anchor_notes": [
+        "verified right-translation automorphisms: 42 of 42",
+        "coordinate orbits: 34 of 1428"
+      ],
+      "anchors": 34,
+      "candidates_enumerated": 764931405,
+      "even_weight_kernel": true,
+      "input_sha256": "c0b9a8f0c8750e66f14f04d7d7bdd1fc814f29b6660a831760400ff8f3c38a91",
+      "input_side": "x",
+      "minimum_weight_found": null,
+      "physical_rank": 622,
+      "searched_maximum_weight": 16,
+      "searched_space": "ker(Hx) \\ row(Hz)",
+      "side_conclusion": "no logical through weight 16",
+      "stabilizer_rank": 620,
+      "witness_logical_observation_nonzero": null,
+      "witness_physical_syndrome_zero": null,
+      "witness_support": []
+    },
+    {
+      "anchor_notes": [
+        "verified right-translation automorphisms: 42 of 42",
+        "coordinate orbits: 34 of 1428"
+      ],
+      "anchors": 34,
+      "candidates_enumerated": 2019824133,
+      "even_weight_kernel": true,
+      "input_sha256": "0aebb878e82da15c105858b96930f79ec6db0bf5aef4bdce8ba7da6703f5e0bd",
+      "input_side": "z",
+      "minimum_weight_found": null,
+      "physical_rank": 620,
+      "searched_maximum_weight": 16,
+      "searched_space": "ker(Hz) \\ row(Hx)",
+      "side_conclusion": "no logical through weight 16",
+      "stabilizer_rank": 622,
+      "witness_logical_observation_nonzero": null,
+      "witness_physical_syndrome_zero": null,
+      "witness_support": []
+    }
+  ],
+  "source": {
+    "reference": "Zidu Liu and Florian Marquardt, Large-Language-Model Discovery of Quantum LDPC Codes through Structured Concept Evolution, arXiv:2606.24808v1",
+    "reported_distance_status": "QDistRnd randomized upper bound, 1e5 trials",
+    "reported_parameters": "[[1428,186,<=18]]",
+    "reported_qdistrnd_upper": 18,
+    "section": "S7 (protographs) and Table 1 (reported parameters)"
+  },
+  "task": "C1018"
+}
