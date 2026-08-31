@@ -105,11 +105,25 @@ report.
   the crown). **q=13 (50k states): strict surplus every time on a
   game-live domain.** Independent Python replay exact. Proposed cap-lane
   next step recorded in the report (prove |consumed| ≥ |created| at
-  q≥13 from projective incidence, q=11 as equality base). Evidence
-  landing paused on a sha256 mismatch — sub reconciling; commit follows.
+  q≥13 from projective incidence, q=11 as equality base). Evidence landed after a
+  hash-projection defect was found and fixed (outputs now
+  byte-reproducible; SHA256SUMS append audited); bundle committed.
   Foreign issues raised: ergodis-private lib currently fails clippy from
   another session's in-flight g53_search.rs/lib.rs edits; Cargo.toml
   dirty (earlier flag).
+- **Wave 4A, transversal level-vs-weight no-go census (landed ~01:45)** —
+  report §§14–19; driver `ergodis-private/src/bin/c1018_level_census.rs`.
+  **Certified finite no-go:** over every CSS code with n ≤ 8 (8,044,851
+  flags at n=8 — exhaustive, the flag IS the code), X-check weight ≤ 7
+  admits no diagonal transversal gate at hierarchy level ≥ 3. Corollaries:
+  n ≤ 7 caps at level 2 at every weight (eight qubits is the minimum
+  length for a diagonal transversal non-Clifford gate); at n=8, level 3
+  occurs only at wX=8, uniquely [[8,3,2]]. Threshold wX ≥ 2^{ℓ−1}
+  attained at every ℓ ≤ 6 on the RM ladder to n=64. Finite shadow of the
+  qLDPC question stated as census, not theorem; proof gap named exactly
+  ([[8,3,2]]'s ±1-phase gate evades the textbook uniform-phase
+  divisibility argument yet lands on the threshold). The n=9, wX ≤ 6
+  pass is excluded from the claim with a resume command.
 - **Wave 1B, transversal/CSS (landed ~23:45)** —
   `2026-08-30-c1018-hunt-transversal-css.md`; driver
   `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes

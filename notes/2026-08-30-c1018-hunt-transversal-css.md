@@ -396,5 +396,203 @@ disappointment is structural and was foreseeable: the finite-size leg cannot
 touch the dossier's live asymptotic target, and the check-weight tension in
 Section 8 says the classical high-level families are the wrong seed for it.
 
+**Status (wave 1B): complete**
+
+---
+
+# Wave 2 — 2026-08-31: the level-versus-check-weight census
+
+Wave 1B's mystery ledger left one row open: whether the observed tension between
+rising transversal hierarchy level and rising minimum check weight is a theorem
+or an artifact of the two families swept. This section closes it as far as an
+exhaustive finite census can, and states precisely what is and is not
+quantified over.
+
+## 14. What is swept, exactly
+
+A qubit CSS code *is* a flag `A ⊆ V ⊆ F_2^n`, with `A` the X-type stabilizer
+code, `B = V^⊥` the Z-type stabilizer code and `k = dim V − dim A`. The
+stabilizer commutation condition `A ⊥ B` is *identical* to `A ⊆ V`, so
+enumerating flags enumerates CSS codes exactly, with no admissibility filter
+and nothing omitted. That is what makes an exhaustive census possible at all.
+
+**Check weight is defined generator-independently.** `wX` is the least `w` such
+that the codewords of `A` of weight `≤ w` span `A`. Every generating set of `A`
+therefore contains a vector of weight `≥ wX`, and some generating set attains
+`wX`, so `wX` is the true optimal X-check weight of the code and not an artifact
+of a presentation. `wZ` is the same quantity for `B`.
+
+Two sweeps:
+
+- **Sweep E (exhaustive).** All flags in `F_2^n` with `k ≥ 1` and minimum
+  distance `d = min(d_X,d_Z) ≥ 2`, for `n ≤ 8`. `A = 0` is skipped with a
+  proof, not a heuristic: with no X-type stabilizers every weight-one vector
+  lies in `A^⊥`, and with `k ≥ 1` one of them lies outside `B`, forcing
+  `d_Z = 1`, so those flags never meet `d ≥ 2`.
+- **Sweep L (the ladder).** All flags `A ⊆ V` with both codes drawn from the
+  Reed–Muller family and its punctured and shortened forms —
+  `RM(r,m)` on `n = 2^m`, `PRM(r,m)` and `SRM(r,m)` on `n = 2^m − 1` — for
+  `m ≤ 6`, so `n ≤ 64`. Every wave-1B code lies in this ladder.
+
+## 15. Verdict: a no-go, with no counterexamples
+
+### Sweep E, exhaustive
+
+| `n` | flags analysed (`d ≥ 2`) | maximum level over all check weights |
+|---|---|---|
+| 5 |          200 | 2 |
+| 6 |        5,281 | 2 |
+| 7 |      173,018 | 2 |
+| 8 |    8,044,851 | 3 |
+
+**Certified statement (exhaustive, no sampling, no heuristic).** Let a qubit CSS
+code have `n ≤ 8`, `k ≥ 1` and minimum distance `d ≥ 2`. If its optimal X-check
+weight satisfies `wX ≤ 7`, then **no** transversal diagonal gate on it induces a
+logical gate of Clifford-hierarchy level 3 or higher — that is, it has no
+transversal diagonal non-Clifford gate at any phase whatsoever. Nothing was
+skipped: the row cap was never hit at these lengths.
+
+An `n = 9` pass restricted to `wX ≤ 6` was launched and had not returned within
+this wave's budget, so **it contributes nothing to the statement above** and no
+partial result from it is claimed. Resuming it is the cheapest way to extend the
+certified length by one:
+`./target/release/c1018_level_census --census 9 --max-check-weight 6 --threads 16`.
+
+Two sharper corollaries fall out of the same census:
+
+1. **`n = 8` is the minimum length.** For every `n ≤ 7`, the maximum level over
+   *all* CSS codes at *any* check weight is exactly 2. So the smallest qubit CSS
+   code with a non-Clifford diagonal transversal gate has eight qubits.
+2. **The bound at `n = 8` is tight and uniquely so.** Level 3 is attained at
+   `n = 8` only at `wX = 8`, by the witness `A = ⟨11111111⟩`,
+   `V = ⟨11100001, 11010010, 10110100, 01111000⟩` with `k = 3`, `wZ = 4` — which
+   is the cubic colour code `[[8,3,2]]` of wave 1B. Its X-check is the *entire*
+   qubit register.
+
+The full `(wX, d)` profile at `n = 8`, maximum level in each cell:
+
+| `wX` | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|
+| max level (`d ≥ 2`) | 1 | 1 | 2 | 2 | 2 | 2 | **3** |
+| max level at `d = 3`  | — | — | 2 | 2 | — | — | — |
+
+A dash means **no such code exists**, not "not computed": the census cell for
+that `(wX, d)` pair is empty after an exhaustive pass over every flag, so at
+`n = 8` there is no distance-3 CSS code at X-check weight 2, 3, 6, 7 or 8 at
+all. Distance 3 caps the level at 2 everywhere it occurs.
+
+### Sweep L, the Reed–Muller ladder to `n = 64`
+
+Maximum level attained at each optimal X-check weight, over every rung:
+
+| `wX` | 2 | 3 | 4 | 7 | 8 | 15 | 16 | 31 | 32 | 63 | 64 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| max level | 1 | 1 | 2 | 2 | 3 | 3 | 4 | 4 | 5 | 5 | 6 |
+
+The threshold is exactly `wX ≥ 2^{ℓ−1}` for level `ℓ`, attained at every level
+from 1 through 6, and the two sweeps agree at their overlap: the exhaustive
+census puts the first level-3 code at `wX = 8 = 2^{3−1}`, and the ladder's first
+level-3 rung is also at `wX = 8`. The level-attaining rungs are
+
+| rung | `n` | `k` | `d_X` | `wX` | level |
+|---|---|---|---|---|---|
+| `RM(0,3) ⊂ RM(1,3)`   |  8 |  3 |  4 |  8 | 3 |
+| `PRM(0,4) ⊂ PRM(1,4)` | 15 |  4 |  7 | 15 | 3 |
+| `RM(0,5) ⊂ RM(2,5)`   | 32 | 15 |  8 | 32 | 3 |
+| `RM(0,4) ⊂ RM(1,4)`   | 16 |  4 |  8 | 16 | 4 |
+| `PRM(0,5) ⊂ PRM(1,5)` | 31 |  5 | 15 | 31 | 4 |
+| `RM(0,5) ⊂ RM(1,5)`   | 32 |  5 | 16 | 32 | 5 |
+| `PRM(0,6) ⊂ PRM(1,6)` | 63 |  6 | 31 | 63 | 5 |
+| `RM(0,6) ⊂ RM(1,6)`   | 64 |  6 | 32 | 64 | 6 |
+
+Every rung reaching level `ℓ ≥ 3` has `wX ∈ {n, n−1}`: within this ladder a
+non-Clifford transversal gate never coexists with an X-check that is not
+essentially the whole register. `RM(0,5) ⊂ RM(2,5)` is the informative one — it
+has `k = 15` logical qubits and `d_X = 8`, so it is not a degenerate rung, and
+it still pays `wX = 32 = n`.
+
+The `SRM(0,m)` rungs are reported as degenerate rather than counted: shortening
+`RM(0,m)` at a coordinate leaves the zero code, so those rows have `A = 0` and a
+continuous logical action, and they are excluded for the same reason as in
+Sweep E. Rungs whose codes exceed dimension 17 (`V`) or 20 (`A`) are printed as
+`skipped (dimension)` and are not counted either way.
+
+## 16. The finite shadow of the asymptotic question
+
+The threshold `wX ≥ 2^{ℓ−1}` does not involve `n`. Read against the dossier's
+live target, that is the point: an asymptotically good qLDPC family has check
+weight bounded by a constant `W` independent of `n`, so if the observed
+threshold held in general it would cap the transversal diagonal level at
+`⌊log_2 W⌋ + 1` for the entire family, uniformly in `n`. A constant-check-weight
+family could then never carry a transversal diagonal non-Clifford gate unless
+its check weight were at least 8. This is the finite shadow of the asymptotic
+obstruction, and it says something concrete about where to look: a good qLDPC
+family with a transversal non-Clifford *diagonal* gate must have check weight
+`≥ 8`, or must evade the pattern that both sweeps exhibit.
+
+**What is not claimed.** The threshold is a census result over Sweeps E and L,
+not a theorem. The census quantifies over exactly what it sweeps: all CSS codes
+of length at most 8, and the Reed–Muller ladder to length 64. It says nothing
+about lengths 9 to 63 outside the ladder, nothing about non-diagonal transversal
+gates, nothing about gates transversal only after a qubit permutation, and
+nothing about qudits. In particular this is **not** an obstruction to the
+dossier's live target, which concerns transversal non-Clifford gates in general
+and is settled affirmatively in the non-LDPC regime by Golowich–Guruswami.
+
+The pattern is very likely the known divisibility mechanism rather than anything
+new: a code carrying a level-`ℓ` uniform-phase transversal diagonal gate must be
+`2^{ℓ−1}`-divisible, and a `2^{ℓ−1}`-divisible binary code has minimum weight
+`≥ 2^{ℓ−1}`, which lower-bounds `wX`. What the census adds is that the bound
+survives *non-uniform* phases too — the `[[8,3,2]]` gate has phases `±1` and its
+signed weight vanishes, so the naive divisibility argument does not apply to it,
+yet it still lands exactly on `wX = 2^{ℓ−1}`. Turning that observation into a
+proof is the open successor, not a claim made here.
+
+## 17. Wave 2 replay
+
+Driver (new file, uncommitted): `ergodis-private/src/bin/c1018_level_census.rs`.
+
+```
+cd ~/src/othello/ergodis-private
+cargo build --release --bin c1018_level_census
+
+# Sweep E, exhaustive (n = 8 takes a few minutes on 16 threads)
+for N in 5 6 7 8; do
+  ./target/release/c1018_level_census --census $N --threads 16 \
+      > ~/.cache/ergodis/c1018/census-n$N.txt
+done
+
+# Sweep L, the Reed-Muller ladder
+./target/release/c1018_level_census --ladder > ~/.cache/ergodis/c1018/ladder.txt
+```
+
+`--max-check-weight W` restricts Sweep E to `wX ≤ W` (this is what makes longer
+lengths reachable); `--min-distance D` raises the distance floor; `--row-cap`
+bounds the constraint system size and any flag above it is counted as skipped
+rather than silently assumed.
+
+Outputs: `~/.cache/ergodis/c1018/census-n{5,6,7,8}.txt`,
+`~/.cache/ergodis/c1018/ladder.txt`.
+
+## 18. Mystery ledger, revised
+
+| Feature | Status | Evidence gap / owner |
+|---|---|---|
+| Why the hypercube family's working rotation angle halves at each `D` | **Settled** in wave 1B: the coarser rotation stays code-preserving but its induced logical phase function is identically zero; only `2π/2^D` yields the top monomial. | closed |
+| `[[15,7,3]]` capped at level 2 while `[[15,1,3]]` reaches level 3 on the same `A` | **Settled** in wave 1B: the cap comes from `B`. `B^⊥` grows from dimension 5 to 11, adding coset-constancy rows that kill the `Z_8` factor. | closed |
+| Shor's code is the only member with a continuous transversal diagonal group | **Settled** in wave 1B: all six torus directions act trivially on the logicals, so Eastin–Knill holds. | closed |
+| Transversal level versus check weight: **theorem or artifact?** | **Substantially settled as a finite no-go, and it is not an artifact.** Exhaustively, no CSS code with `n ≤ 8`, `d ≥ 2` and `wX ≤ 7` reaches level 3; `n ≤ 7` caps at level 2 outright; and the Reed–Muller ladder to `n = 64` obeys `wX ≥ 2^{ℓ−1}` at every level through 6, with the threshold attained. | Still **not a theorem**. Open: a proof of `wX ≥ 2^{ℓ−1}` covering non-uniform phase patterns, for which the `[[8,3,2]]` signed-weight gate is the obstruction to the textbook divisibility argument. Also open: lengths 9–63 outside the ladder. |
+| Whether the qudit `[[12,2,(6,4)]]_11` jet code carries a transversal non-Clifford phase | **Open, out of framework** — the coset-constancy condition and the level calculus are both 2-adic. | Needs an `F_p` generalization. |
+
+## 19. Wave 2 vibe check
+
+Better than expected. The question came back as a clean no-go with a sharp,
+tight boundary rather than a vague trend: level 3 is impossible below eight
+qubits entirely, and impossible at eight qubits below check weight eight, with
+`[[8,3,2]]` sitting exactly on the boundary as the unique witness. The two
+independent sweeps agree on the same threshold `2^{ℓ−1}`, which is the strongest
+available evidence short of a proof. The real gap is that it remains a census,
+and the natural proof route is blocked at exactly the interesting case.
+
 **Status: complete**
 
