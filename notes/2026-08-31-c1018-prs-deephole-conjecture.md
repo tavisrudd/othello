@@ -581,19 +581,20 @@ evidence gap and its owner.
    rather than for a generic form.  Owner: a successor task; this is the highest
    value follow-up the wave exposes.
 
-6. **Why some `(r,m)` pairs carry nothing.**  *Sharpened, not settled.*  Three
-   empty pairs are now known — `(10,7)`, `(13,5)`, `(13,10)` — against five that
-   fire: `(6,3)`, `(8,5)`, `(9,3)`, `(11,4)`, `(12,3)`.  The 2026-08-30
-   hypothesis that emptiness comes from the stratum being too small for `G` to
-   be irreducible (`(10,7)` has a two-index stratum) is **refuted**: `(8,5)` has
-   the same two-index, linear-`G` shape and fires, while `(13,5)` has the same
-   three-index, quadratic-`G` shape as the firing `(9,3)` and is empty.  What
-   separates them is the least admissible field: every firing pair has
-   `q_min ≤ 13`, every empty pair has `q_min ∈ {13, 17, 29, 16, 31}` with the
-   one collision at `(9,6)`, `q_min = 13`.  So the carrier shape does not
-   predict firing and the field does, almost.  Evidence gap: `(9,6)` at
-   `q = 13`, the one pair with a small `q_min` that carries nothing, is the
-   discriminating case and it was already swept clean on 2026-08-30.
+6. **Why some `(r,m)` pairs carry nothing.**  *Sharpened, not settled.*  Four
+   empty pairs are now known — `(5,2)`, `(10,7)`, `(13,5)`, `(13,10)` — against
+   five that fire: `(6,3)`, `(8,5)`, `(9,3)`, `(11,4)`, `(12,3)`.  The
+   2026-08-30 hypothesis that emptiness comes from the stratum being too small
+   for `G` to be irreducible (`(10,7)` has a two-index stratum) is **refuted**:
+   `(8,5)` has the same two-index, linear-`G` shape and fires, while `(13,5)`
+   has the same three-index, quadratic-`G` shape as the firing `(9,3)` and is
+   empty.  Nor does the least admissible field separate them: `(5,2)` has
+   `q_min = 5`, the smallest of any pair, and carries nothing at any of the nine
+   fields swept.  Every firing pair has `m ∈ {3,4,5}`; no pair with `m = 2` or
+   `m ≥ 6` has ever fired on its own stratum.  That is the strongest pattern in
+   the data and nothing explains it.  Evidence gap: a firing or clean verdict
+   for a pair with `m = 6` or `m = 7` at a small `q_min`; `(9,6)` at `q = 13` is
+   the cheapest and was already swept clean on 2026-08-30.
 
 7. **The exceptional band is not monotone in `r`.**  *Standing, from
    2026-08-30.*  Now with a fuller table (§6): `q_0(r) = 4, 23, 16, 13, 13, 16`
@@ -609,14 +610,18 @@ evidence gap and its owner.
    `r = 4`, so there is no cyclic-pullback carrier at all — consistent with, but
    not an explanation of, the emptiness.
 
-9. **`r = 5` is the outlier that sets Conjecture B′'s bound.**  *New this
-   wave.*  Every redundancy from 6 up has `q_0(r) ≤ 16`; only `r = 5` reaches
-   17 and 19.  Evidence gap: whether the `r = 5` sporadics at `q = 17, 19` are a
-   carrier phenomenon at all — `r-3 = 2` gives only `m = 2`, whose least
-   admissible field is 5, so under Conjecture PRS-2 the `m = 2` carrier would
-   fire at `q = 5` and nowhere else, leaving 17 and 19 to a different mechanism.
-   Owner: whichever task takes item 3; the `r = 5` sporadics are C491's and are
-   classified there by branch divisor, so the answer may already be committed.
+9. **`r = 5` is the outlier that sets Conjecture B′'s bound, and it is not a
+   carrier.**  *New this wave, half settled.*  Every redundancy from 6 up has
+   `q_0(r) ≤ 16`; only `r = 5` reaches 17 and 19.  The sweep of §5b′ settles the
+   mechanism question negatively: `r = 5`'s only cyclic-pullback carrier is
+   `m = 2`, and it carries zero exceptional points at every odd `q` from 5 to
+   25.  So the entire `r = 5` band — the largest of any redundancy and the sole
+   reason Conjecture B′ needed 23 rather than 16 — comes from orbits with no
+   cyclic symmetry, the same invisible class as the two size-1320 orbits of
+   item 3.  Evidence gap: why that class survives to `q = 19` at `r = 5` and
+   dies by `q = 13` at every larger redundancy.  Owner: the same successor as
+   item 3; C491 classifies the `r = 5` sporadics by branch divisor, so half the
+   answer may already be committed.
 
 10. **Nothing anomalous in the validation layer.**  Twenty committed-certificate
     cells reproduced exactly on the new core, ten cells cross-run through two
