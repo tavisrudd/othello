@@ -177,13 +177,13 @@ The Hamilton-pair theorem admits a complete order-ten closure.
 > (K_{10}).
 
 Here (m=5) is odd. Thus the preceding theorem makes the pencil conclusion
-immediate as soon as the factorization has one Hamilton pair. Exact canonical
-enumeration of all 396 one-factorizations is needed only for the following
-dichotomy.
+immediate as soon as the factorization has one Hamilton pair. The direct
+rooted lemma proved below handles the complementary case without a global
+one-factorization census.
 
-- In 395 classes, at least one pair of factors is Hamilton, so the odd-half
-  theorem gives the pencil directly, with no parity-shadow closure census.
-- The unique remaining class has no Hamilton pair: every factor pair has
+- If at least one pair of factors is Hamilton, the odd-half theorem gives the
+  pencil directly.
+- If no pair is Hamilton, every factor pair has
   cycle type (4+6). Its parity constraints are the twelve triples of the
   Steiner triple system (AG(2,3)) on the nine factor forms. Adding any other
   collinear triple makes the two-point closure all nine, so a non-pencil
@@ -242,10 +242,44 @@ dichotomy.
   (u_\infty=0\). Those computations are no longer load-bearing for the
   theorem.
 
-The census is independently normalized by two classical totals: 396
-unlabelled classes and 1,225,566,720 labelled factorizations. The latter is
-recovered from the computed automorphism orders. This also detects and avoids
-the erroneous 1,255,566,720 count repeated in some secondary sources.
+The global 396-class census can now be removed from the load-bearing proof.
+Fix one factor (F), and regard its five edges as the vertices of a (K_5).
+For every other factor (G), the assumed absence of a Hamilton pair means that
+(F\cup G) has cycle type (4+6). Let (s(G)) be the pair of (F)-edges in its
+four-cycle, and let (d_e) count factors with signature (e\in E(K_5)). The
+four original graph edges between the two (F)-edges indexed by (e) give
+
+\[
+ 2d_e+\sum_{f\cap e=\varnothing}d_f=4.             \tag{2a}
+\]
+
+The nonnegative integral solutions with (\sum d_e=8) have only two
+(S_5)-orbits:
+
+- the **star pattern**, with multiplicity two on the four edges through one
+  vertex of (K_5) and zero elsewhere;
+- the **(3+2) pattern**, with multiplicity two on the edge inside the
+  two-part, multiplicity one on the six crossing edges, and zero on the
+  three edges inside the three-part.
+
+This reduction has a direct rooted completion lemma. After fixing endpoint
+labels on the five edges of (F), the star pattern has 640 exact-cover
+completions. Their numbers of Hamilton pairs away from (F) are respectively
+(0,12,16), with multiplicities (16,192,432). The sixteen Hamilton-free
+completions form one orbit under the explicit
+(S_4\ltimes C_2^5)-action, and every one has a single vertex common to all
+36 four-cycles. The (3+2) pattern has 192 completions, one orbit under the
+explicit ((S_3\times S_2)\ltimes C_2^5)-action; every completion has exactly
+23 Hamilton pairs away from (F), so this pattern is impossible in the
+zero-Hamilton case. The remaining star orbit is the affine (AG(2,3))
+factorization displayed above. Thus the finite residue is a five-pair
+endpoint chase, not an enumeration of one-factorizations of (K_{10}).
+
+The independent 396-class census remains useful regression evidence. It is
+normalized by the classical totals 396 unlabelled classes and 1,225,566,720
+labelled factorizations, the latter recovered from the computed automorphism
+orders. This also detects and avoids the erroneous 1,255,566,720 count
+repeated in some secondary sources.
 
 For the regular Ree factorization, the nine non-Hamilton pairs form three
 disjoint triangles, so its Hamilton-pair graph is (K_{3,3,3}). These are
@@ -359,6 +393,26 @@ carrier line, so the deletion version remains a distinct extension problem.
 
 ## Exact finite certificate
 
+The load-bearing finite lemma now has the smaller pure-Python bundle
+`c1015_zero_hamilton_rooted.py`, `c1015_zero_hamilton_rooted.json`, and
+`c1015_zero_hamilton_rooted.sha256`. Replay from the repository root with
+
+```text
+uv run python notes/c1015_zero_hamilton_rooted.py --check
+```
+
+It fixes one factor, independently derives all 15 labelled solutions of
+(2a), and exhausts exactly the 640 star-pattern and 192 (3+2)-pattern rooted
+exact covers. It quotients only by explicitly generated permutations of the
+five base edges and their endpoint flips; it uses no canonical-labelling or
+graph-isomorphism library. Two independent Hamilton tests agree on every
+factor pair: connected-component size ten and cycle type ((5,5)) for the
+product of the matching involutions. The existing full-census bundle below
+independently recovers the same unique zero-Hamilton class by a different
+canonical-augmentation route. The rooted bundle proves only the exact
+order-ten finite lemma; it does not prove the interpolation, pencil, or Hesse
+arguments.
+
 The bundle `c1015_ree_bridge.py`, `c1015_ree_bridge.json`, and
 `c1015_ree_bridge.sha256` independently enumerates the contained
 one-factorizations, counts Hamilton pairs both by component traversal and by
@@ -431,6 +485,9 @@ first canonical witness is the six-equation triangle displayed above.
 
 | Artifact | Bytes | SHA-256 |
 |---|---:|---|
+| `notes/c1015_zero_hamilton_rooted.py` | 12,154 | `c7ec559a4808f2f6359f537e2960699c905f23eff2e4be5df5367cafd3e9ed1e` |
+| `notes/c1015_zero_hamilton_rooted.json` | 3,545 | `0077857dd9b9d36d03de858d02fc2f1b5e046c33a107637e6dc0d74f17b6eafb` |
+| `notes/c1015_zero_hamilton_rooted.sha256` | 206 | `1b9d2001560c4d6b3605eadfaf4c70eeb828b9f030dfad864a3eb633d7b47b11` |
 | `notes/c1015_ree_bridge.py` | 10,728 | `7b60af8c3583a754db5ddc28d75cc065ca8d8906443e4b4f66903284e60fb123` |
 | `notes/c1015_ree_bridge.json` | 1,263 | `1545f49a4d66d33d5d90d0ee99d5eaf39640c0170c99db2a7b6e78697a279b50` |
 | `notes/c1015_ree_bridge.sha256` | 317 | `249bd54b32d954d1fd1c3751b99638219af40b905cbeedd7b85c0cc598fdd9b1` |
@@ -553,10 +610,11 @@ Manuscript language such as "new" or "to our knowledge" is not yet authorized.
 1. **Landed:** replace the normalized substitution chain by the frame-free
    star-interpolation identity and Hamilton-pair parity holonomy.
 2. **Landed universally for ten points:** the odd-half theorem handles every
-   one-factorization having one Hamilton pair; 395 of the 396 classes do.
-   The affine (AG(2,3)) exception is killed by the six-equation Hesse tripod.
-   Determine whether a nine-point realization itself reconstructs the missing
-   tenth carrier line.
+   one-factorization having one Hamilton pair. A direct rooted classification,
+   independent of the 396-class census, identifies the complementary case as
+   the affine (AG(2,3)) factorization, which the six-equation Hesse tripod
+   kills. Determine whether a nine-point realization itself reconstructs the
+   missing tenth carrier line.
 3. Determine the actual carrier of the obstruction: seven displayed blocks,
    their vertex/block incidence shadow, or a smaller invariant subdiagram.
 4. Test relabellings and deletions to decide whether the certificate is a
@@ -578,8 +636,9 @@ Manuscript language such as "new" or "to our knowledge" is not yet authorized.
   displayed concurrences, with every division and characteristic exception
   explicit.
 - **Strong — landed universally for ten points:** a frame-free interpolation
-  identity, parity invariant, replayable 396-class certificate, and the Ree
-  bridge giving all 28 one-factorization lines from matching concurrences.
+  identity, parity invariant, direct rooted zero-Hamilton classification, and
+  the Ree bridge giving all 28 one-factorization lines from matching
+  concurrences. The 396-class certificate is an independent cross-check.
 - **Priority-judo — provisionally landed:** the universal (K_{10}) pencil
   theorem answers the order-ten instance of the geometric-transversal problem
   at a level above the Ree field boundary. Final priority status awaits the
@@ -593,9 +652,10 @@ The decisive Tao-style simplification is the odd-half theorem: relative to a
 Hamilton cycle, every perfect matching on two odd bipartition classes must
 cross the cut, and one crossing edge already puts its transversal in the
 Hamilton pencil. This removes the 395-class parity-closure computation from
-the proof. The finite residue is now only the structural assertion that the
-unique zero-Hamilton factorization of (K_{10}) is affine (AG(2,3)); the
-six-equation Hesse tripod then excludes it geometrically.
+the proof. The finite residue is now a direct five-pair signature equation and
+rooted exact-cover lemma. Its two local patterns have respectively 640 and 192
+completions; explicit symmetry reduces the Hamilton-free residue to one affine
+orbit. The six-equation Hesse tripod then excludes it geometrically.
 
 The Hesse row reduction has now been replaced by a three-line incidence
 argument: the exceptional lift puts (2u_\infty) in Hesse lines (012),
@@ -614,12 +674,16 @@ not needed for the order-ten theorem.
   quadrangle calculation.
 - **Why the other 395 census classes close — settled conceptually.** They do
   not need a many-pair closure calculation. Since (K_{10}) has odd half-size
-  five, one Hamilton pair forces all nine factors into its pencil. The only
-  remaining finite input is the uniqueness of the zero-Hamilton class.
-- **Why the unique zero-Hamilton class produces (AG(2,3)) — settled.** It is
-  exactly the affine factorization
+  five, one Hamilton pair forces all nine factors into its pencil.
+- **Why the unique zero-Hamilton class produces (AG(2,3)) — settled without
+  the global census.** The rooted signature equation has only star and (3+2)
+  patterns. Every (3+2) completion has 23 Hamilton pairs; the sixteen
+  Hamilton-free star completions form one explicit-symmetry orbit and have a
+  common four-cycle vertex. This orbit is exactly the affine factorization
   (M_a=\{\infty a\}\cup\{xy:x+y=-a\}), with automorphism order 432; its
-  twelve parity triples are the affine lines.
+  twelve parity triples are the affine lines. A handwritten endpoint chase
+  replacing the 640+192 rooted exact-cover table would be a presentation
+  upgrade, not a logical or global-classification gap.
 - **Why the Hesse exception cannot lift — settled conceptually.** Three
   affine lines force (2u_\infty) into vector planes with zero total
   intersection. This kills every characteristic except two; the existing
