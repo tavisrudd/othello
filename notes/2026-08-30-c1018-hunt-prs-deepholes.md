@@ -4,8 +4,10 @@
 **Date:** 2026-08-30, extended 2026-08-31
 **Status:** complete for the redundancy-four sweep, the redundancy-eight band
 `8 ≤ q ≤ 19`, the certificate-reproduction gate, the redundancy-nine decider
-(which **falsified** Conjecture B — §5.3c), and the structural identification
-and recurrence sweep of the resulting exceptional orbit (§5.3d).  Partial for
+(which **falsified** Conjecture B — §5.3c), the structural identification
+and recurrence sweep of the resulting exceptional orbit (§5.3d), and the
+redundancy-ten and redundancy-eleven carrier sweeps (§5.3f, which **falsified**
+Conjecture D and its invariant-cut corollary).  Partial for
 the replacement Conjecture B′ and for redundancy ten; the three redundancy-nine
 census cells at `q = 16, 17, 19` are recorded as out of budget in §5.3e.
 See §8.
@@ -257,8 +259,10 @@ cd ergodis-private && cargo build --release --bin c1018_prs_deephole
 ./target/release/c1018_prs_deephole --q 11 --r 5 --ergodis-crosscheck
 ./target/release/c1018_prs_deephole --q 13 --r 6 --semilinear
 
-# exhaustive sweep of the S_3-fixed stratum {i ≡ 1 mod 3}
-./target/release/c1018_prs_deephole --q 13 --r 9 --stratum-mod 3 --stratum-class 1
+# exhaustive sweeps of the cyclic-pullback carrier strata (m | r-3)
+./target/release/c1018_prs_deephole --q 13 --r 9  --stratum-mod 3 --stratum-class 1
+./target/release/c1018_prs_deephole --q 13 --r 11 --stratum-mod 4 --stratum-class 1
+./target/release/c1018_prs_deephole --q 29 --r 10 --stratum-mod 7 --stratum-class 1
 
 # independent Python re-derivation from the definition
 python3 notes/2026-08-30-c1018-prs-helper.py census 8 5
@@ -282,10 +286,11 @@ for q in 9 11 13;                                do R --q $q --r 9; done
 
 ### Artifacts and git state
 
-Bulk JSON lives under `~/.cache/ergodis/c1018/r{r}-q{q}.json` — ten files, for
-`r = 8` (`q = 8,9,11,13,16,17,19`) and `r = 9` (`q = 9,11,13`), outside the
-repository as instructed, with the tables in this report as the committed
-record.  The three task-owned files are
+Bulk JSON lives under `~/.cache/ergodis/c1018/` — ten census files
+`r{r}-q{q}.json` for `r = 8` (`q = 8,9,11,13,16,17,19`) and `r = 9`
+(`q = 9,11,13`), plus thirteen stratum files `r{r}-s{class}-q{q}.json` for the
+`r = 10` and `r = 11` sweeps — all outside the repository as instructed, with
+the tables in this report as the committed record.  The three task-owned files are
 
 ```text
 notes/2026-08-30-c1018-hunt-prs-deepholes.md      (this report)
@@ -644,6 +649,158 @@ picture in which the cyclic-cubic family persists upward.  It also refutes the
 congruence guess that first suggested itself from `u^2 = -1`: `q ≡ 1 (mod 12)`
 is not the right predictor, since `q = 25` is `1 (mod 12)` and carries nothing.
 
+### 5.3f (2026-08-31, follow-up) Conjecture D at redundancies ten and eleven
+
+#### The carrier family, correctly stated
+
+§5.3d read the exceptional locus as "the `S_3`-fixed stratum at redundancies
+`r ≡ 0 (mod 3)`."  Testing the next two rungs forced a correction, and the
+corrected statement is better.  In characteristic `p > d` a syndrome supported
+on `{ i ≡ a (mod m) }` factors, as a binary form of degree `d`, as
+
+```text
+s  =  X^a · Y^b · G(X^m, Y^m),        b = d - a - m(M-1),
+```
+
+where `M` is the number of admissible indices and `deg G = M-1`.  The
+redundancy-nine exceptional orbit has `a = b = 1`: it is `XY · G(X^3,Y^3)`.
+That shape — the cyclic pullback multiplied by the two coordinate points, each
+with multiplicity **one** — is what makes every apolar level fail to be split
+squarefree.  It requires the extreme indices to be `1` and `d-1`, i.e.
+
+```text
+a = b = 1   ⟺   m | d - 2 = r - 3.
+```
+
+So the carrier at redundancy `r` is indexed by the divisors of `r-3`, not by a
+congruence on `r`.  For `m = 3` this reproduces `3 | r`, which is why the
+original mod-3 reading looked right on `r = 6, 9, 12`.
+
+The prediction that follows is sharper: at redundancies where `m = 3` does not
+divide `r-3`, the mod-3 stratum has the wrong multiplicities and should carry
+nothing.  Confirmed exactly:
+
+| `r` | `d` | mod-3 self-symmetric class | shape | fields swept (`3 | q-1` marked) | result |
+|---:|---:|---|---|---|---|
+| 10 | 9  | `a = 0`, `{0,3,6,9}` | `a=b=0`: `G(X^3,Y^3)` | `q = 11,13*,16*,17,19*` | max weight `8 = d-1` at every field: the stratum never even reaches the covering radius |
+| 11 | 10 | `a = 2`, `{2,5,8}`   | `a=b=2`: `X^2Y^2 G(X^3,Y^3)` | `q = 11,13*,16*,17,19*,23,25*,27` | max weight `9 = d-1` at every field with `q ≥ 13` |
+
+(The `q = 11` cells give `k = 2` and `k = 1`, the degenerate `q ≈ r` boundary
+where nearly everything is deep, and `3 ∤ 10` there so the locus is not a torus
+fixed locus at all; both are excluded as artifacts.)
+
+**Conjecture D as stated in §5.3d is therefore refuted at both new rungs**: at
+`r = 10` and `r = 11` the mod-3 stratum carries no deep points whatsoever, let
+alone exceptional ones at the predicted field `q = 13`.
+
+#### The correct carriers, swept
+
+Sweeping every `m | r-3` (each an exhaustive sweep of the full stratum):
+
+| `r` | `r-3` | `m` | stratum | fields swept | exceptional points |
+|---:|---:|---:|---|---|---|
+| 9  | 6 | 2 | `{1,3,5,7}`   | `13, 16, 19` | **0** at every field (8, 17, 11 deep, all persistent) |
+| 9  | 6 | 3 | `{1,4,7}`     | `13,16,17,19,23,25,27,29,31` | **4 at `q=13` only** |
+| 9  | 6 | 6 | `{1,7}`       | `13, 16, 19` | **0** at every field |
+| 10 | 7 | 7 | `{1,8}`       | `11,13,16,17,19,23,29,43` | **0** at every field (2 deep, persistent) |
+| 11 | 8 | 2 | `{1,3,5,7,9}` | `13`         | **40 at `q=13`** |
+| 11 | 8 | 4 | `{1,5,9}`     | `13,16,17,19,23,25` | **12 at `q=13` only** |
+| 11 | 8 | 8 | `{1,9}`       | `13,16,17,19,23,25` | **0** at every field |
+
+Three consequences.
+
+1. **Redundancy eleven does have exceptional deep holes at `q = 13`**, carried
+   by the cyclic-*quartic* stratum `{1,5,9}` (12 points) and, more abundantly,
+   by the cyclic-*quadratic* stratum `{1,3,5,7,9}` (40 points, which contain the
+   12 since `{1,5,9} ⊂ {1,3,5,7,9}`).  So Conjecture D's *field* prediction
+   `q = 13` survives at `r = 11` even though its *mechanism* does not: the
+   carrier is `m = 4`, not `m = 3`.  Both require `m | q-1`, and `q = 13` is the
+   least admissible prime power with `4 | q-1`.
+2. **Redundancy ten has no cyclic-pullback carrier at all.**  `r-3 = 7` is
+   prime, so `m = 7` is the only candidate, it needs `7 | q-1`, and it yields
+   zero exceptional points at every field swept including `q = 29` and `q = 43`
+   — the two least admissible fields with `7 | q-1`.  Redundancy ten is the
+   first redundancy tested where the mechanism is simply absent.
+3. **At redundancy nine the cubic carrier is the unique one.**  Its siblings
+   `m = 2` and `m = 6` both divide `r-3 = 6` and both yield zero exceptional
+   points, so the 364-orbit of §5.3d is not one of a family at that redundancy.
+
+Replacing Conjecture D:
+
+> **Conjecture D′ (cyclic-pullback carriers).**  The exceptional deep holes
+> with nontrivial cyclic stabilizer are exactly the `PGL_2(q)`-orbits of
+> syndromes `XY · G(X^m, Y^m)` with `m | r-3` and `m | q-1`.  For each such
+> `(r, m)` they occur at exactly one field: the least prime power `q` with
+> `m | q-1` and `q ≥ r-1` — except that some `(r,m)` pairs carry none at all,
+> `(10, 7)` being the first instance.
+
+D′ is consistent with every cell above.  Its weakest point is the escape clause
+in the last sentence, which `(10,7)` forces and which nothing here explains.
+
+#### Do the closed invariant conditions generalize?  No.
+
+At `(9,13,m=3)` the four exceptional points were cut exactly by `s_4/s_1` a cube
+together with `s_4^2/(s_1 s_7) = 5`.  The natural generalization to a
+three-index carrier `{1, 1+m, 1+2m}` is `c = s_{1+m}/s_1` in `(F_q^*)^m` and
+`u = s_{1+m}^2/(s_1 s_{1+2m})` a fixed constant; both `c` (modulo `m`-th powers)
+and `u` are genuine invariants of the torus and the involution at any `m`.
+
+Tested at `(11, 13, m=4)`, where `(F_13^*)^4 = {1,3,9}`, on the exhibited
+exceptional points:
+
+```text
+(s_1,s_5,s_9)   c    c ∈ 4th powers    u    u^2
+( 1, 1, 4)      1         yes          10    9
+( 1, 1, 8)      1         yes           5   12
+( 1, 2, 6)      2         no            5   12
+( 1, 3, 7)      3         yes           5   12
+( 1, 3,10)      3         yes          10    9
+( 1, 4,12)      4         no           10    9
+( 1, 5, 5)      5         no            5   12
+( 1, 6, 2)      6         no            5   12
+```
+
+Both conditions fail: `c` lies in the fourth powers for some exceptional points
+and not others, and `u` takes two values, `5` (order 4) and `10` (order 6),
+rather than one.  **The `(9,13)` cut does not generalize verbatim** — it is
+specific to the cubic carrier, where the stratum happens to be cut by a single
+class condition plus a single value.  The quartic carrier's exceptional set is
+three times larger (12 against 4) and is not a single class.  Pinning its exact
+cut needs the full 12-point list; only 8 are exhibited above, because the
+driver's example cap is 8 and the rebuild that would raise it is blocked (see
+below).  The negative is unaffected: counterexamples to both conditions already
+appear among the 8.
+
+#### Scope limit, restated
+
+A stratum sweep is exhaustive over its stratum and blind to everything else.
+It can only see exceptional orbits whose stabilizer contains the corresponding
+cyclic group.  The two size-1320 exceptional orbits found at `r = 8, q = 11`
+in §5.3 have **trivial** stabilizer in `PGL_2(11)` and are therefore invisible
+to every sweep in this subsection.  So none of the zeros above may be read as
+"this redundancy and field have no exceptional deep holes"; they mean "no
+exceptional deep hole with the corresponding cyclic symmetry", which is a
+statement about one mechanism, not about `X(r)`.
+
+#### Foreign breakage encountered
+
+Midway through this wave `cargo build` began failing inside the read-only
+Ergodis core:
+
+```text
+error[E0425]: cannot find value `BOUND_PULSE_COUNT_MASK`  in this scope
+error[E0425]: cannot find value `BOUND_PULSE_OBSERVED_BIT` in this scope
+  --> papers/complete-repair-ports/ergodis/src/css_distance.rs:1535, :3107, :3111
+```
+
+`papers/complete-repair-ports/ergodis/src/css_distance.rs`, `PERFORMANCE.md`,
+and `tests/contextual_allocations.rs` are all dirty from a concurrent session
+and the crate is mid-edit.  This is **foreign work in a read-only tree and was
+not touched**; it is raised here per cross-lane hygiene.  All results in this
+subsection were produced by the binary built before the breakage, which is why
+the exceptional-example cap stayed at 8.  Nothing in this report depends on the
+raised cap.
+
 ### 5.4 Independent verification
 
 * Python, definition-level rank, different field model
@@ -722,7 +879,9 @@ pruning, exact `F_q` arithmetic throughout.
 | A (radius dichotomy) | survives | all 42 census cells: `r=3` for `q ∈ {5,7,8,9}`; `r=4` for `q ∈ {4,…,64}` (12 fields); `r=5` for `q ∈ {7,8,9,11,13,16}`; `r=6` for `q ∈ {7,8,9,11,13}`; `r=7` for `q ∈ {7,8,9,11,13}`; `r=8` for `q ∈ {8,9,11,13,16,17,19}`; `r=9` for `q ∈ {9,11,13}` |
 | B (persistent-only for `r ≥ 8`, `q ≥ 13`) | **FALSIFIED** at `(r,q) = (9,13)`, §5.3c; true at `r=8` for `q ∈ {13,16,17,19}` | falsifying witness `(1,0,1,2,4,12,4,3,6)`, orbit size 364, certificate in §5.3c |
 | B′ (`q_0(r) ≤ 23` for every `r`) | survives; replaces B | every cell in §5.1--5.3c, plus the committed R5--R7 classifications; additionally supported, on the `S_3`-fixed stratum only, at `r=9` for `q ∈ {16,…,31}` and `r=6` for `q ∈ {9,…,64}` (§5.3d--e) |
-| D (cyclic-cubic stratum recurs at exactly one field per `r ≡ 0 mod 3`, the least prime power `q ≡ 1 mod 3` with `q ≥ r-1`) | **new**; survives, and confirmed at `r=12` outside the repository's proved range | `r=6` over 13 fields, `r=9` over 9 fields, `r=12` over 3 fields, each an exhaustive sweep of the full stratum |
+| D (cyclic-cubic stratum recurs at exactly one field per `r ≡ 0 mod 3`) | **FALSIFIED** at `r=10` and `r=11` (§5.3f): the mod-3 stratum there does not reach the covering radius at any field | mod-3 sweeps at `r=10` over 5 fields and `r=11` over 8 fields |
+| D′ (carriers are `XY·G(X^m,Y^m)` with `m \| r-3` and `m \| q-1`, one field each, some pairs empty) | **new**; replaces D; survives every cell, with `(r,m)=(10,7)` as the empty instance | exhaustive stratum sweeps: `r=6` (13 fields), `r=9` for `m=2,3,6` (15 cells), `r=10` for `m=3,7` (13 cells), `r=11` for `m=2,3,4,8` (23 cells), `r=12` (3 fields) |
+| E (the `(9,13)` invariant cut generalizes to other carriers) | **FALSIFIED** at `(11,13,m=4)`: `s_5/s_1` is a 4th power for some exceptional points and not others, and `u` takes two values | 8 exhibited of the 12 exceptional points |
 | C (band squeezed shut) | monotonicity half **FALSIFIED** (`13 ∈ X(9) \ X(8)`); `X(4) = ∅` and `X(8) ∩ [8,19] = {8,9,11}` stand as new results | `X(4) = ∅` exhaustive over 12 fields `4 ≤ q ≤ 64`; `X(8) ∩ [8,19] = {8,9,11}` exact; `X(9) ⊇ {9,11,13}` exact; `X(8) ∩ [23,42]`, `X(9) ∩ [16,52]`, `X(10)` untested |
 
 Conjecture B, restricted to `r = 8`, remains the sharpest new statement: it says the
@@ -842,24 +1001,41 @@ only route back toward MDS, is untouched here and remains untouched.
    machinery should extend to it directly.  Still open: a proof that the stratum
    is deep exactly at the one predicted field, rather than the sweep evidence of
    §5.3d.  Owning successor: whichever task takes item 1.
-5. **Why one field per redundancy, and why the least admissible `q ≡ 1 mod 3`?**
-   The recurrence is sharp across `r = 6, 9, 12` (fields `7, 13, 13`) and clean
-   in the sense that every larger field in the sweep returns exactly the two
-   persistent stratum points.  Unexplained: what makes deepness fail the moment
-   `q` exceeds that first field.  The likely mechanism is that deepness needs
-   the apolar levels above the minimal one to stay split-free too, and the number
-   of forms at those levels grows with `q` while the stratum's dimension does
-   not — but that is a heuristic, not an argument, and it does not by itself
-   explain why the *first* admissible field always works.
-6. **The cube class flips between redundancies.**  At `r = 9, q = 13` the
-   exceptional points have `s_4/s_1` a cube; at `r = 6, q = 7` they have
-   `s_4/s_1` a non-cube.  The cut is by the class in `F_q^*/(F_q^*)^3` in both
-   cases, but which class is selected changes, and nothing here explains the
-   choice.  Evidence gap: a third clean data point — `r = 12` would supply it,
-   but its only exceptional field is the degenerate `k = 2` boundary cell, so
-   `r = 15` (least admissible `q ≡ 1 mod 3` with `q ≥ 14` is 16) is the
-   informative next test.
-7. **Where does `q_0(9)` actually sit?**  The redundancy-nine band is now known
+5. **Why one field per carrier, and why the least admissible one?**  Where a
+   carrier fires it fires at exactly one field — `q = 7` at `(6,3)`, `q = 13` at
+   `(9,3)`, `(11,4)` and `(12,3)` — and in each case that is the least prime
+   power with `m | q-1` above the admissibility bound.  Every larger field in
+   the sweeps returns only the persistent stratum points.  Unexplained: what
+   makes deepness fail the moment `q` exceeds that first field.  The likely
+   mechanism is that deepness needs the apolar levels above the minimal one to
+   stay split-free too, and the number of forms at those levels grows with `q`
+   while the stratum's dimension does not — but that is a heuristic, not an
+   argument, and it does not explain why the *first* admissible field always
+   works when the carrier is nonempty.
+6. **The class condition does not survive a change of carrier.**  At
+   `r = 9, q = 13` (cubic carrier) the exceptional points have `s_4/s_1` a cube;
+   at `r = 6, q = 7` they have `s_4/s_1` a non-cube; at `r = 11, q = 13`
+   (quartic carrier) `s_5/s_1` is a fourth power for some and not others, and
+   the second invariant takes two values instead of one (§5.3f).  Settled by
+   the 2026-08-31 pass: the clean two-condition cut is a property of the cubic
+   carrier, not of the mechanism.  Open: the actual cut for the quartic carrier.
+   Evidence gap: the full 12-point list at `(11,13,m=4)`, which needs the
+   driver's example cap raised — blocked while the Ergodis core is mid-edit
+   (§5.3f).  Cheap once the core compiles again.
+7. **Redundancy ten has no cyclic-pullback carrier, and nothing explains why.**
+   `r-3 = 7` is prime, so `m = 7` is the only candidate; it yields zero
+   exceptional points at all eight fields swept, including the two least
+   admissible ones with `7 | q-1` (`q = 29, 43`).  Every other redundancy
+   tested has at least one carrier that fires.  Open: whether `(10,7)` is empty
+   because `m` is large relative to `d` (the stratum `{1,8}` is only a line, so
+   `G` is linear and the pullback has no room to be irreducible in the way the
+   `(9,13)` sextic is), or for an arithmetic reason.  The first test that would
+   separate those is `r = 13` (`r-3 = 10`, carriers `m = 2, 5, 10`), where
+   `m = 5` gives a three-index stratum `{1,6,11}` with a quadratic `G` — the
+   exact shape that fires at `(9,13)`.  Prediction from that reading: `(13,5)`
+   fires at `q = 16`, the least prime power with `5 | q-1` and `q ≥ 12`.
+   Untested, and cheap.
+8. **Where does `q_0(9)` actually sit?**  The redundancy-nine band is now known
    to contain `9, 11, 13` and is unsearched from 16 up to the proved threshold
    53.  Gate: one run of `--q 16 --r 9` (`|PG(8,16)| ≈ 4.6·10^9`, roughly five
    times the `q = 13` cell, so of order half an hour and about 5 GB — the first
@@ -867,7 +1043,7 @@ only route back toward MDS, is untouched here and remains untouched.
    That single cell decides whether `q_0(9)` is 16 (band closes immediately
    above 13, and Conjecture B′ is comfortable) or larger (B′ starts to look
    fragile too).
-8. **The field-model near-miss.**  A verifier that chose its own irreducible
+9. **The field-model near-miss.**  A verifier that chose its own irreducible
    polynomial produced 30 apparent counterexamples at `r = 8, q = 16` that were
    pure labelling artifacts.  Settled by this pass, and worth recording as a
    standing hazard: syndrome coordinates over a non-prime field are element
@@ -875,7 +1051,7 @@ only route back toward MDS, is untouched here and remains untouched.
    fix one field model, while only aggregate counts are model-free.  The
    committed certificates for `q = 8, 9, 16, 25, 27, 32` in the R5--R7 bundles
    have the same exposure if they are ever re-checked by a second program.
-9. **No genuine mystery in the validation layer.**  Sixteen committed-certificate
+10. **No genuine mystery in the validation layer.**  Sixteen committed-certificate
    cells (plus four classical conic cells) reproduced exactly by an independent
    code path, plus definition-level
    Python agreement on two of them and representative-level agreement on five
@@ -885,8 +1061,10 @@ only route back toward MDS, is untouched here and remains untouched.
 **Status: complete** for the redundancy-four sweep, the redundancy-eight band
 `8 ≤ q ≤ 19`, the certificate-reproduction gate, the redundancy-nine decider at
 `q = 13` (which falsified Conjecture B and the monotonicity half of Conjecture C
-with an exactly certified witness), and the structural identification of the
-resulting orbit together with its recurrence sweep at `r = 6, 9, 12`.
+with an exactly certified witness), the structural identification of the
+resulting orbit together with its recurrence sweep at `r = 6, 9, 12`, and the
+carrier sweeps at `r = 10, 11` that falsified Conjecture D and replaced it with
+Conjecture D′.
 **Partial** for the replacement Conjecture B′ (`q_0(r) ≤ 23` for every `r`),
 which now has stratum-level but not census-level support above `q = 13`, and for
 redundancy ten, which was not searched at all.  The three requested

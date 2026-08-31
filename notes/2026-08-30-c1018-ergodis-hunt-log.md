@@ -137,6 +137,17 @@ report.
   against the certified R2Elite02 matrices; independent witness
   re-verification throughout. Evidence + SHA256SUMS under
   ~/.cache/ergodis/c1018/qldpc/ pending compact-certificate landing.
+- **Wave 5A, PRS Conjecture D rungs (landed ~02:50)** — report §5.3f.
+  **Conjecture D refuted at r=10** (no carrier exists: the stratum shape
+  is s=XY·G(X^m,Y^m) with m | r−3, and r−3=7 prime gives zero across
+  q=11..43), while **r=11 fires at q=13 through a different, quartic
+  mechanism** (strata {1,5,9} and {1,3,5,7,9}); the (9,13) two-condition
+  invariant cut is specific to the cubic carrier. Replaced by D′ (+ new
+  E) in the conjecture table; stratum-sweep scope limit stated (regular
+  orbits invisible). **Foreign issue for the morning: the Ergodis core
+  no longer compiles** — css_distance.rs mid-edit from a concurrent
+  session (three undefined BOUND_PULSE_* constants); campaign results
+  all come from pre-breakage binaries, core untouched by us.
 - **Wave 1B, transversal/CSS (landed ~23:45)** —
   `2026-08-30-c1018-hunt-transversal-css.md`; driver
   `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes
