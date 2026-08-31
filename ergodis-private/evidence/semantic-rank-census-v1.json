@@ -52,42 +52,51 @@
     {"digits": [2, 2], "variables": 90, "rank": 90, "hom_dimension": 0, "minimum_generator_core_size": 3, "minimum_generator_core_count": 3, "certificate_replayed": true}
   ],
   "performance_medians": {
-    "compile_microseconds": 107,
-    "raw_rank_replay_nanoseconds": 6798,
-    "core_rank_replay_nanoseconds": 1986,
-    "rank_replay_speedup": 3.4425981873111784,
-    "speedup_min": 3.343069306930693,
-    "speedup_max": 3.529923273657289
+    "compile_microseconds": 89,
+    "raw_rank_replay_nanoseconds": 6209,
+    "core_rank_replay_nanoseconds": 1968,
+    "rank_replay_speedup": 3.131739572736521,
+    "speedup_min": 3.0406265296133137,
+    "speedup_max": 3.2456852791878172
   },
   "arithmetic_kernel_ab": {
     "baseline": "direct GF(9) digit arithmetic",
     "candidate": "compile-time 9x9 add/multiply tables",
     "compile_speedup": 3.710280373832,
     "raw_replay_speedup": 4.124301265078,
-    "core_replay_speedup": 3.643001007049
+    "core_replay_speedup": 3.643001007049,
+    "scope": "measured before the adaptive online-basis workspace"
+  },
+  "workspace_reduction": {
+    "strategy": "online echelon basis when rows exceed columns; dense matrix otherwise",
+    "focused_raw_matrix_payload_bytes": 3600,
+    "focused_online_payload_bytes": 1170,
+    "focused_certificate_dense_payload_bytes": 870,
+    "focused_payload_reduction": 3.076923076923077,
+    "allocation_free_per_query": true
   },
   "hardware_counter_ab": {
     "protocol": "perf stat -r 5, pinned CPU 2, 500000 replays per process, user-space counters, approximately 83.3% event coverage",
     "raw": {
-      "cycles": 17111050662,
-      "instructions": 137730455495,
-      "branches": 29806347544,
-      "branch_misses": 4546253,
-      "elapsed_seconds": 3.719045501
+      "cycles": 15076953012,
+      "instructions": 118484187415,
+      "branches": 30729564114,
+      "branch_misses": 15415830,
+      "elapsed_seconds": 3.124988366
     },
     "compiled_core": {
-      "cycles": 4767140346,
-      "instructions": 39689366454,
-      "branches": 8400198710,
-      "branch_misses": 1038906,
-      "elapsed_seconds": 0.997221671
+      "cycles": 4800588769,
+      "instructions": 39182800480,
+      "branches": 8401298106,
+      "branch_misses": 1181659,
+      "elapsed_seconds": 0.998772563
     },
     "reduction_ratios": {
-      "cycles": 3.589374220,
-      "instructions": 3.470210482,
-      "branches": 3.548290769,
-      "branch_misses": 4.376000331,
-      "elapsed": 3.729407021
+      "cycles": 3.140646645,
+      "instructions": 3.023882570,
+      "branches": 3.657716192,
+      "branch_misses": 13.045921031,
+      "elapsed": 3.128828806
     }
   },
   "provenance": {

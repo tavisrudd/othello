@@ -52,9 +52,11 @@ shapes are a direct guard against answer-specific logic.
 `semantic_rank.rs` separates the reusable compiler from the landed domain
 adapter.  `SmallField` is a statically dispatched arithmetic interface; a
 `BlockSystem<F>` stores one dense row-major arena plus semantic block offsets.
-`RankWorkspace<F>` pre-sizes its elimination matrix once;
-every subsequent block-rank query copies into that arena and eliminates
-without allocation, recursion, or dynamic dispatch.  Fixed-cardinality block
+`RankWorkspace<F>` selects its exact state representation once.  Systems with
+at most as many rows as columns use a dense elimination matrix; overdetermined
+systems stream rows into an echelon basis containing at most one row per
+pivot.  Every subsequent block-rank query eliminates without allocation,
+recursion, or dynamic dispatch.  Fixed-cardinality block
 subsets use the existing Gosper iterator rather than scanning all masks at
 every size.  An independent `GF(2)` control exercises the same compiler to
 guard against accidentally baking the landed `GF(9)` answer into the engine.
@@ -89,17 +91,21 @@ outer runs with 2,000 rank replays per measurement gave:
 
 | measure | median |
 |---|---:|
-| semantic-core compilation | 107 us |
-| raw 120-row rank replay | 6,798 ns |
-| compiled 29-row replay | 1,986 ns |
-| replay speedup | **3.443x** |
+| semantic-core compilation | 89 us |
+| raw 120-row rank replay | 6,209 ns |
+| compiled 29-row replay | 1,968 ns |
+| replay speedup | **3.132x** |
 
-The per-run speedup range was 3.343x--3.530x.  Against direct `GF(9)` digit
+The per-run speedup range was 3.041x--3.246x.  Against direct `GF(9)` digit
 arithmetic, table compilation separately improves compiler time by 3.710x,
 raw replay by 4.124x, and core replay by 3.643x.  The important result is not the
 sub-millisecond absolute time but that the mathematical certificate reduction
 produces an almost proportional replay reduction while preserving exact
-source-row witnesses.
+source-row witnesses.  Those arithmetic A/B ratios predate the adaptive
+workspace.  The latter independently lowers compiler median from 107 to 89 us
+and raw replay from 6,798 to 6,209 ns.  For the focused raw system its payload
+is 1,170 bytes rather than 3,600 bytes, a **3.077x** reduction; short
+certificate systems retain the faster dense path.
 
 The census binary also has an isolated `--replay-kernel raw|core` counter mode.
 It performs no serialization or control-corpus work, allocates its workspace
@@ -109,11 +115,11 @@ measured:
 
 | counter | raw | compiled core | raw/core |
 |---|---:|---:|---:|
-| cycles | 17.111 B | 4.767 B | **3.589x** |
-| instructions | 137.730 B | 39.689 B | **3.470x** |
-| branches | 29.806 B | 8.400 B | **3.548x** |
-| branch misses | 4.546 M | 1.039 M | **4.376x** |
-| elapsed | 3.719 s | 0.997 s | **3.729x** |
+| cycles | 15.077 B | 4.801 B | **3.141x** |
+| instructions | 118.484 B | 39.183 B | **3.024x** |
+| branches | 30.730 B | 8.401 B | **3.658x** |
+| branch misses | 15.416 M | 1.182 M | **13.046x** |
+| elapsed | 3.125 s | 0.999 s | **3.129x** |
 
 The six counters were multiplexed at approximately 83.3% coverage; `perf`
 scaled the reported counts.  The instruction and branch reductions closely

@@ -53,6 +53,9 @@ struct Envelope {
     raw_rank_replay_ns: u128,
     core_rank_replay_ns: u128,
     rank_replay_speedup: f64,
+    raw_workspace_payload_bytes: usize,
+    core_workspace_payload_bytes: usize,
+    workspace_payload_reduction: f64,
     landed_channel_controls: Vec<ChannelControl>,
     boundary: &'static str,
 }
@@ -113,6 +116,8 @@ fn main() -> anyhow::Result<()> {
     let replay_rounds = 2_000;
     let mut raw_workspace = Gf9RankWorkspace::new(system.row_count(), system.columns());
     let mut core_workspace = Gf9RankWorkspace::new(certificate.row_count(), certificate.columns());
+    let raw_workspace_payload_bytes = raw_workspace.payload_bytes();
+    let core_workspace_payload_bytes = core_workspace.payload_bytes();
     let raw_started = Instant::now();
     for _ in 0..replay_rounds {
         assert_eq!(
@@ -196,6 +201,10 @@ fn main() -> anyhow::Result<()> {
         raw_rank_replay_ns,
         core_rank_replay_ns,
         rank_replay_speedup: raw_rank_replay_ns as f64 / core_rank_replay_ns as f64,
+        raw_workspace_payload_bytes,
+        core_workspace_payload_bytes,
+        workspace_payload_reduction: (system.row_count() * system.columns()) as f64
+            / raw_workspace_payload_bytes as f64,
         landed_channel_controls,
         boundary: "bounded GF(9) finite certificate; not an all-field theorem",
     };

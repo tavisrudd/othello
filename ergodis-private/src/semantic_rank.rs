@@ -170,6 +170,9 @@ impl<F: SmallField> BlockSystem<F> {
 #[derive(Debug)]
 pub struct RankWorkspace<F: SmallField> {
     matrix: Box<[u8]>,
+    basis: Box<[u8]>,
+    scratch: Box<[u8]>,
+    pivots: Box<[usize]>,
     columns: usize,
     capacity_rows: usize,
     field: PhantomData<F>,
@@ -180,36 +183,96 @@ pub type Gf9RankWorkspace = RankWorkspace<Gf9>;
 impl<F: SmallField> RankWorkspace<F> {
     #[must_use]
     pub fn new(capacity_rows: usize, columns: usize) -> Self {
-        let entries = capacity_rows
+        let capacity_rank = capacity_rows.min(columns);
+        let compact_entries = capacity_rank
             .checked_mul(columns)
             .expect("rank workspace capacity overflow");
+        let use_online_basis = capacity_rows > columns;
         Self {
-            matrix: vec![0; entries].into_boxed_slice(),
+            matrix: vec![0; (!use_online_basis as usize) * compact_entries].into_boxed_slice(),
+            basis: vec![0; (use_online_basis as usize) * compact_entries].into_boxed_slice(),
+            scratch: vec![0; (use_online_basis as usize) * columns].into_boxed_slice(),
+            pivots: vec![0; (use_online_basis as usize) * capacity_rank].into_boxed_slice(),
             columns,
             capacity_rows,
             field: PhantomData,
         }
     }
 
+    /// Heap payload reserved by the reusable rank state, excluding allocators' metadata.
+    #[must_use]
+    pub fn payload_bytes(&self) -> usize {
+        self.matrix.len()
+            + self.basis.len()
+            + self.scratch.len()
+            + self.pivots.len() * std::mem::size_of::<usize>()
+    }
+
     /// Rank the selected semantic blocks. This method allocates nothing.
     pub fn rank_blocks(&mut self, system: &BlockSystem<F>, block_mask: u64) -> usize {
         assert_eq!(self.columns, system.columns);
+        if self.capacity_rows <= self.columns {
+            let mut used_rows = 0;
+            for block in 0..system.block_count() {
+                if block_mask & (1_u64 << block) == 0 {
+                    continue;
+                }
+                for row in system.block_offsets[block]..system.block_offsets[block + 1] {
+                    assert!(used_rows < self.capacity_rows);
+                    let start = used_rows * self.columns;
+                    self.matrix[start..start + self.columns].copy_from_slice(system.row(row));
+                    used_rows += 1;
+                }
+            }
+            return self.rank_matrix_prefix(used_rows);
+        }
+        self.rank_blocks_online(system, block_mask)
+    }
+
+    fn rank_blocks_online(&mut self, system: &BlockSystem<F>, block_mask: u64) -> usize {
         let mut used_rows = 0;
+        let mut rank = 0;
         for block in 0..system.block_count() {
             if block_mask & (1_u64 << block) == 0 {
                 continue;
             }
             for row in system.block_offsets[block]..system.block_offsets[block + 1] {
                 assert!(used_rows < self.capacity_rows);
-                let start = used_rows * self.columns;
-                self.matrix[start..start + self.columns].copy_from_slice(system.row(row));
                 used_rows += 1;
+                self.scratch.copy_from_slice(system.row(row));
+                for basis_row in 0..rank {
+                    let pivot = self.pivots[basis_row];
+                    let factor = self.scratch[pivot];
+                    if factor == 0 {
+                        continue;
+                    }
+                    let basis_start = basis_row * self.columns;
+                    for column in pivot..self.columns {
+                        self.scratch[column] = F::add(
+                            self.scratch[column],
+                            F::neg(F::mul(factor, self.basis[basis_start + column])),
+                        );
+                    }
+                }
+                let Some(pivot) = self.scratch.iter().position(|&value| value != 0) else {
+                    continue;
+                };
+                let scale = F::inverse(self.scratch[pivot]);
+                let basis_start = rank * self.columns;
+                for column in pivot..self.columns {
+                    self.basis[basis_start + column] = F::mul(scale, self.scratch[column]);
+                }
+                self.pivots[rank] = pivot;
+                rank += 1;
+                if rank == self.pivots.len() {
+                    return rank;
+                }
             }
         }
-        self.rank_prefix(used_rows)
+        rank
     }
 
-    fn rank_prefix(&mut self, rows: usize) -> usize {
+    fn rank_matrix_prefix(&mut self, rows: usize) -> usize {
         let mut pivot_row = 0;
         for column in 0..self.columns {
             let Some(pivot) =
@@ -463,6 +526,18 @@ mod tests {
         assert_eq!(workspace.rank_blocks(&system, 0b011), 2);
         assert_eq!(workspace.rank_blocks(&system, 0b100), 1);
         assert_eq!(workspace.rank_blocks(&system, 0b111), 2);
+    }
+
+    #[test]
+    fn rank_workspace_compresses_overdetermined_operational_state() {
+        let dense = Gf9RankWorkspace::new(29, 30);
+        let online = Gf9RankWorkspace::new(120, 30);
+        assert_eq!(dense.payload_bytes(), 29 * 30);
+        assert_eq!(
+            online.payload_bytes(),
+            30 * 30 + 30 + 30 * std::mem::size_of::<usize>()
+        );
+        assert!(online.payload_bytes() * 3 < 120 * 30);
     }
 
     #[test]
