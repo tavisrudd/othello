@@ -1,0 +1,11 @@
+[package]
+name = "c1013-census"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ergodis = { path = "../../../papers/complete-repair-ports/ergodis" }
+
+[[bin]]
+name = "c1013-census"
+path = "src/main.rs"

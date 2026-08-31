@@ -309,14 +309,58 @@ algebraic front end.
 ## 8. Immediate proof gates
 
 1. Minimize the characteristic assumptions using divided powers rather than
-   ordinary symmetric powers.
+   ordinary symmetric powers. — **Sharpened 2026-08-30**: divided-power rank
+   over \(\mathbf F_p\) is \(\prod(d_k+1)\) over base-\(p\) digits (Lucas);
+   nondegenerate iff \(d+1=a p^k\), \(p\nmid a\), \(a<p\). The factorization
+   itself is integral in the brackets with **no exceptional primes**; only the
+   form's radical and the content of \(\Phi\) are characteristic-sensitive.
+   See the modular report below.
 2. Prove root-to-coefficient descent integrally, including small
-   characteristics.
+   characteristics. — **Substantially closed 2026-08-30**:
+   \(\Phi_{2m,4}\in\mathbf Z[\lambda]\) with content \(16\) for \(m=2^k\),
+   \(p\) for \(m=p^k\) odd, \(1\) otherwise (Frobenius mechanism); mod \(p\)
+   the identity never fails, \(\Phi\equiv0\) exactly when \(m=p^k\).
 3. Decompose the exterior-Veronese covariant into irreducible \(SL_2\)
-   summands and obtain closed transvectant formulas for \(\Phi_{d,r}\).
-4. Compute a recurrence for \(\Phi_{2m,4}\) from
-   \(s_m=\lambda^m+(1-\lambda)^m\), where
-   \(s_m=s_{m-1}-\lambda(1-\lambda)s_{m-2}\).
+   summands and obtain closed transvectant formulas for \(\Phi_{d,r}\). —
+   **Refined 2026-08-30**: the sharp permanent guess
+   \(\Phi=c\cdot\mathrm{perm}([ij]^{d-r+1})\) is refuted (first at
+   \((6,4)\)); the Wronskian isomorphism is not an isometry because
+   \(\mathrm{Sym}^r(\mathrm{Sym}^{d-r+1})\) is reducible. The genuine
+   plethysm decomposition is the remaining open gate. New closed structure
+   for \(r=4\): \(\Phi_{d,4}\in\mathbf Z[I,\Delta]\) with no denominators via
+   power sums on the Plücker triple \(x+y+z=0\); Pfaffian residual
+   \(\pi=p_d/e_3\) for odd \(d\); \(\Phi_{d,3}=2\Delta_3^{(d-2)/2}\).
+4. Compute a recurrence for \(\Phi_{2m,4}\). — **Closed (proved) 2026-08-30**:
+   \(\Phi_{2m,4}=P_m(P_m+4u^{m-1})\) with \(P_m=(1-L_m^2)/u\),
+   \(u=\lambda(1-\lambda)\), \(L_m\) the Dickson/Lucas polynomial
+   \(L_m=L_{m-1}-uL_{m-2}\); equivalently an order-3 linear recurrence. The
+   four-factor Fermat/Lucas splitting
+   \(\Phi_{2m,4}=-(1+s_m)\frac{s_m-1}{u}\frac{1+d_m}{\lambda}
+   \frac{1-d_m}{1-\lambda}\) is verified with global sign \(-1\) for all
+   \(m\le12\); \(G_{2m,4}=(1-s_m^2)(1-d_m^2)\) exactly.
 5. Continue the classical compound-matrix and symbolic-invariant audit only
    if a paper-facing novelty claim is attached to one of the downstream
    consequences; the organizing factorization itself is already downgraded.
+
+## 9. Session reports (2026-08-30)
+
+- `../2026-08-30-c1013-modular-transvectant-foundations.md` — gates 1–3
+  status above, plus the parity/Pfaffian verification, the
+  \(G=2p_{2d}-p_d^2\) (even \(d\)) / \(p_d^2\) (odd \(d\)) closed form, and
+  the open observations ledger. Script:
+  `c1013_modular_foundations.py`.
+- `../2026-08-30-c1013-c1014-phi-family-arithmetic.md` — gate 4 closure,
+  Dickson identification, genus law \(2m-4\) (drop to \(2m-5\) iff
+  \(m\equiv1\bmod3\)), proved exceptional strata periodic in
+  \(2m\bmod(p-1)\), and the \(\Phi_{2m,4}(1/2)=16(1-4^{1-m})\) odd-bias
+  theorem. Script: `c1013_phi_family_arithmetic.py`.
+- Ergodis fit (user directive to try Ergodis for compute):
+  `ergodis::character_sum::PrimeQuadraticCharacter` replayed the entire
+  finite-field census exactly (thousands of censuses, zero disagreements) via
+  the thin driver crate `c1013-ergodis-driver/` (path-dependent on the
+  Ergodis crate, no Ergodis source edits). Recorded interface gaps (both
+  reports): no CLI census subcommand, no prime-range sweep, no general
+  polynomial-twist census, no mod-\(p\) squarefree/degeneracy or genus
+  annotation, no exact integer-matrix rank/radical mod a supplied prime, no
+  \(\mathbf F_p[t]\) divisibility layer — these supersede and extend the §7
+  wishlist.
