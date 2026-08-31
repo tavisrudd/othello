@@ -16,9 +16,13 @@ as each coherent tranche lands.
    validation: `2026-08-30-c985-post-c1000-ergodis-kernel-mining.md`.
 2. **In progress — core performance-contract remediation.** Close allocation,
    iterative traversal, Tiger layout, CSS publication/worker ownership, and
-   one-/parallel-mode measurement gaps under C1017. Current next slice is CSS
-   contention-free bound publication followed by pulse/no-pulse dispatch and
-   retained-binary counter A/B.
+   one-/parallel-mode measurement gaps under C1017. CSS contention-free
+   controller fan-out, separate pulse/no-pulse kernels, exact coalescence
+   controls, and retained-binary counter/RSS A/B are complete and accepted;
+   the clean miss costs 0.50% cycles/candidate and 0.82% wall while removing
+   2.20% of instructions. Current next slice is worker-owned CSS workspaces
+   plus the real-loop zero-allocation gate, followed by the remaining Tiger
+   layouts and registry evidence.
 3. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
    exact replay/parity, zero-allocation, bounded-memory, and deterministic
    parallel evidence gates.

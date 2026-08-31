@@ -166,6 +166,13 @@ may be shared. Each thread owns every mutable byte it changes during search;
 rare controller-to-worker mailboxes are isolated per worker and never create a
 worker-to-worker write path.
 
+Search threads also never busy-poll. They do not spin, wait for an epoch, or
+repeatedly load shared state until it changes. An admitted control or pulse
+check is a bounded safe-point action guarded by a measured coarse work counter;
+the worker performs useful search between checks and stale state can only add
+work. Blocking, event waits, socket handling, fan-out, and retry loops belong
+outside the solve workers.
+
 - Share immutable compiled data only.
 - Give every worker a presized workspace, iterative stack, counters, witness
   slot, and fixed evidence buffer.
@@ -176,10 +183,36 @@ worker-to-worker write path.
 - Establish useful bounds before opening speculative siblings. Propagate only
   verified monotone scalar facts through rare cache-line-isolated pulses; stale
   values may add work but must never affect correctness.
-- Poll at a measured power-of-two candidate stride and at natural branch
-  boundaries. The ordinary no-message path must have no measurable overhead.
+- Check at a measured power-of-two candidate stride. Do not add unconditional
+  root/branch-boundary probes. The ordinary no-message path must have no
+  measurable overhead.
 - Keep plan evolution, socket handling, evidence merging, and serialization in
   watcher, daemon, or other low-priority threads, never search workers.
+
+For rare monotone cross-worker facts, use **controller fan-out** when
+measurement supports it. These are guarded safe points, not busy polling:
+
+- allocate separate cache-line-isolated publication and inbox lines per worker
+  before search;
+- each solver writes only its own publication line and otherwise works
+  independently; a blocking off-path controller reduces published facts and is
+  the sole writer of every inbox line;
+- guard the pulse behind a measured power-of-two work counter, so the normal
+  iteration performs only the counter test;
+- at a pulse, check only the worker's dedicated local `AtomicBool` with relaxed
+  ordering and load its payload only on change;
+- wake the controller through an event-driven, allocation-free publication
+  path; complete a ready handshake before search starts and do not inherit a
+  pinned worker's one-CPU affinity; and
+- require a one-sided proof that delayed or stale propagation can only add
+  work, never alter the verdict, witness validity, or certificate.
+
+The controller may scan all publications only after an event; workers never do.
+A global atomic, ring gossip, an all-mailbox worker scan, or all-to-all RMW may
+win on a tiny thread count, but is not admitted without explicit contention and
+latency evidence. Split pulse-disabled and pulse-enabled kernels outside the
+hot loop so the disabled production instantiation contains neither the
+run-constant branch nor atomic loads.
 
 Record topology and affinity. Scaling across SMT siblings or heterogeneous
 cores is a hardware result, not automatically a scheduler limit.

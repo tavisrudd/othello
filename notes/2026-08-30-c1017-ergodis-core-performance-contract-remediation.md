@@ -128,6 +128,68 @@ acceptance gates as prospective guidance:
   perf counters, false sharing/contention, and one-thread/parallel semantic
   parity for all public solve kernels.
 
+## CSS controller fan-out pattern
+
+The reusable decision and its acceptance/rollback gate are recorded in
+`2026-08-31-ergodis-controller-bound-fanout-adr.md`.
+
+The prior CSS bound broadcast violates worker ownership: an improving worker
+executes `fetch_min` on every worker mailbox. The replacement uses separate
+cache-line-isolated publication and inbox lines:
+
+1. worker `i` is the sole writer of publication `i`;
+2. a blocking controller reduces publications and is the sole inbox writer;
+3. per-worker eventfds wake it without a shared worker-write line;
+4. a ready handshake prevents search from outrunning controller startup;
+5. the candidate stride checks one relaxed local Boolean;
+6. an unchanged Boolean returns without loading the payload; and
+7. stale or coalesced fan-out only adds work.
+
+The controller restores the process leader's allowed CPU mask because a helper
+spawned inside `ThreadPool::install` otherwise inherits one pinned worker's
+affinity. It blocks in the kernel between publications and never spins.
+
+Do not probe at root boundaries or scan all slots from workers. The all-slot
+control added 5.37% instructions without reducing cycles. Flag-gated rings at
+256--4,096 candidates lost or tied because multi-hop latency admitted
+speculative work. A no-fanout control was 5.6x slower on BB288, so abandoning
+mid-search propagation is not competitive.
+
+The retained controller now has separate multiversioned pulse/no-pulse entry
+points. A failed event setup or one-thread solve selects the no-pulse
+monomorphization before enumeration; it contains no pulse flag, atomic load,
+or observed epoch. The pulsed kernel tags the last-seen Boolean in the high bit
+of its existing worker-local pulse counter and strips that bit before merge,
+avoiding a live hot-loop variable or third mailbox line. `BoundMailbox` remains
+256 bytes at alignment 128: one 128-byte worker publication line and one
+128-byte controller-owned inbox line. Strict improvements and pulse checks are
+the only cold paths; the candidate loop remains iterative.
+
+The final retained-binary counter gate uses original direct-broadcast binary
+SHA-256 `3431259a7654c531ad56b899225010be98d02c057352c8ab8db8da4c4ffb54fb`
+and controller binary SHA-256
+`47b2821b9db0b466c81095d5d1ca6ef97a2719bd804d7f04328419df13f6b156`.
+On the 12-thread BB360 radius-20 clean miss, three interleaved pairs preserve
+exactly 2,828,836,878 candidates. Control/candidate geometric-mean ratios are
+0.991816 wall (`t=-4.017`), 0.995037 cycles/candidate (`t=-1.746`), 1.022480
+instructions/candidate, 1.029464 branches/candidate, 1.013885 branch
+misses/candidate, and 0.997673 cache misses/candidate. Thus the ownership-safe
+controller costs 0.50% cycles/candidate and 0.82% wall while removing 2.20% of
+instructions, 2.86% of branches, and 1.37% of branch misses. Separate peak RSS
+is 11,504 versus 11,572 KiB (+68 KiB).
+
+On the 12-thread BB288 radius-18 incumbent hit, five interleaved pairs of 20
+solves give control/candidate ratios 0.992417 wall (`t=-0.926`), 0.983443
+candidates (`t=-3.113`), 0.999489 cycles/candidate, 1.011560
+instructions/candidate, and 1.032460 branches/candidate. Controller wake
+latency admits 1.68% more speculative candidates, but per-candidate cycles are
+flat and wall is statistically unresolved. A ready-gated trace measures about
+47 microseconds from eventfd write to controller read. Rotated 512--16,384
+stride screens retain 4,096 as the optimum. The user accepted this measured
+sub-1% clean-miss trade for sole ownership and contention freedom. Per-task
+workspace allocation and its zero-allocation regression remain open under work
+package 4; this controller result does not close C1017.
+
 ## Review findings for the pending C1016 Rust overlay
 
 The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its

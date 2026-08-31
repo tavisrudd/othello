@@ -11,8 +11,10 @@ use crate::matrix::Matrix;
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 use std::io::{self, Read, Write};
+#[cfg(all(feature = "parallel", target_os = "linux"))]
+use std::os::fd::{AsRawFd, FromRawFd, OwnedFd};
 #[cfg(feature = "parallel")]
-use std::sync::atomic::{AtomicU16, Ordering};
+use std::sync::atomic::{AtomicBool, AtomicU16, Ordering};
 use thiserror::Error;
 
 const MAX_COORDINATES: usize = 256;
@@ -1405,6 +1407,7 @@ fn search_syndrome_branch_partition_impl<
     const SUPPORT_WORDS: usize,
     const CHECK_WORDS: usize,
     const LOGICAL_WORDS: usize,
+    const PULSE: bool,
 >(
     compiled: &CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>,
     branches: &[WideRootBranch<SUPPORT_WORDS, CHECK_WORDS>],
@@ -1420,12 +1423,11 @@ where
     ));
     let worker_index = rayon::current_thread_index().unwrap_or(0) % mailboxes.len();
     let mailbox = &mailboxes[worker_index];
-    let mut pruning_bound = mailbox.0.load(Ordering::Relaxed);
+    let mut pruning_bound = mailbox.inbound_bound.load(Ordering::Relaxed);
     let mut best_weight = searched_maximum_weight.saturating_add(1);
     let mut best_support = PackedSupport::<SUPPORT_WORDS>::default();
     let mut stats = ConnectedSearchStats::default();
     for branch in branches {
-        poll_bound(mailbox, &mut pruning_bound, &mut stats);
         let improvement_budget = pruning_bound.saturating_sub(branch.weight + 1);
         if branch.weight >= searched_maximum_weight
             || compiled.completion_lower_bound_exceeds(branch.syndrome, improvement_budget)
@@ -1460,8 +1462,8 @@ where
                 continue;
             };
             stats.candidates += 1;
-            if pulse_interval != 0 && stats.candidates & (pulse_interval - 1) == 0 {
-                poll_bound(mailbox, &mut pruning_bound, &mut stats);
+            if PULSE && stats.candidates & (pulse_interval - 1) == 0 {
+                check_bound_pulse(mailbox, &mut pruning_bound, &mut stats);
             }
             frame.rejected.insert(added);
             let child_depth = depth + 1;
@@ -1479,9 +1481,11 @@ where
                     if child_weight < best_weight {
                         best_weight = child_weight;
                         best_support = child_support;
-                        pruning_bound = pruning_bound.min(child_weight);
-                        stats.bound_improvements_published +=
-                            u64::from(publish_bound(mailboxes, child_weight));
+                        if child_weight < pruning_bound {
+                            pruning_bound = child_weight;
+                            publish_bound(mailbox, child_weight);
+                            stats.bound_improvements_published += 1;
+                        }
                     }
                 }
                 continue;
@@ -1528,6 +1532,7 @@ where
         }
     }
     stats.connected_supports = stats.candidates;
+    stats.bound_pulses_observed &= BOUND_PULSE_COUNT_MASK;
     CachePaddedWideBranchResult {
         best_weight,
         best_support,
@@ -1544,6 +1549,13 @@ trait WidePartitionKernel<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> 
         mailboxes: &[BoundMailbox],
         pulse_interval: u64,
     ) -> CachePaddedWideBranchResult<SUPPORT_WORDS>;
+
+    fn search_partition_unpulsed(
+        &self,
+        branches: &[WideRootBranch<SUPPORT_WORDS, CHECK_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+    ) -> CachePaddedWideBranchResult<SUPPORT_WORDS>;
 }
 
 #[cfg(feature = "parallel")]
@@ -1558,7 +1570,7 @@ fn search_syndrome_branch_partition_wide(
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
 ) -> CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS> {
-    search_syndrome_branch_partition_impl(
+    search_syndrome_branch_partition_impl::<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1, true>(
         compiled,
         branches,
         searched_maximum_weight,
@@ -1579,7 +1591,7 @@ fn search_syndrome_branch_partition_extra_wide(
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
 ) -> CachePaddedWideBranchResult<EXTRA_WIDE_SUPPORT_WORDS> {
-    search_syndrome_branch_partition_impl(
+    search_syndrome_branch_partition_impl::<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1, true>(
         compiled,
         branches,
         searched_maximum_weight,
@@ -1601,7 +1613,7 @@ fn search_syndrome_branch_partition_large(
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
 ) -> CachePaddedWideBranchResult<LARGE_SUPPORT_WORDS> {
-    search_syndrome_branch_partition_impl(
+    search_syndrome_branch_partition_impl::<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1, true>(
         compiled,
         branches,
         searched_maximum_weight,
@@ -1623,7 +1635,12 @@ fn search_syndrome_branch_partition_huge(
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
 ) -> CachePaddedWideBranchResult<HUGE_SUPPORT_WORDS> {
-    search_syndrome_branch_partition_impl(
+    search_syndrome_branch_partition_impl::<
+        HUGE_SUPPORT_WORDS,
+        HUGE_SYNDROME_WORDS,
+        HUGE_LOGICAL_WORDS,
+        true,
+    >(
         compiled,
         branches,
         searched_maximum_weight,
@@ -1645,13 +1662,119 @@ fn search_syndrome_branch_partition_colossal(
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
 ) -> CachePaddedWideBranchResult<COLOSSAL_SUPPORT_WORDS> {
-    search_syndrome_branch_partition_impl(
+    search_syndrome_branch_partition_impl::<
+        COLOSSAL_SUPPORT_WORDS,
+        COLOSSAL_SYNDROME_WORDS,
+        HUGE_LOGICAL_WORDS,
+        true,
+    >(
         compiled,
         branches,
         searched_maximum_weight,
         mailboxes,
         pulse_interval,
     )
+}
+
+#[cfg(feature = "parallel")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition_wide_unpulsed(
+    compiled: &CompiledWideCssDistance,
+    branches: &[WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+) -> CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS> {
+    search_syndrome_branch_partition_impl::<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1, false>(
+        compiled,
+        branches,
+        searched_maximum_weight,
+        mailboxes,
+        0,
+    )
+}
+
+#[cfg(feature = "parallel")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition_extra_wide_unpulsed(
+    compiled: &CompiledExtraWideCssDistance,
+    branches: &[WideRootBranch<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+) -> CachePaddedWideBranchResult<EXTRA_WIDE_SUPPORT_WORDS> {
+    search_syndrome_branch_partition_impl::<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1, false>(
+        compiled,
+        branches,
+        searched_maximum_weight,
+        mailboxes,
+        0,
+    )
+}
+
+#[cfg(feature = "parallel")]
+#[cfg(feature = "large-css")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition_large_unpulsed(
+    compiled: &CompiledLargeCssDistance,
+    branches: &[WideRootBranch<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+) -> CachePaddedWideBranchResult<LARGE_SUPPORT_WORDS> {
+    search_syndrome_branch_partition_impl::<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1, false>(
+        compiled,
+        branches,
+        searched_maximum_weight,
+        mailboxes,
+        0,
+    )
+}
+
+#[cfg(feature = "parallel")]
+#[cfg(feature = "large-css")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition_huge_unpulsed(
+    compiled: &CompiledHugeCssDistance,
+    branches: &[WideRootBranch<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+) -> CachePaddedWideBranchResult<HUGE_SUPPORT_WORDS> {
+    search_syndrome_branch_partition_impl::<
+        HUGE_SUPPORT_WORDS,
+        HUGE_SYNDROME_WORDS,
+        HUGE_LOGICAL_WORDS,
+        false,
+    >(compiled, branches, searched_maximum_weight, mailboxes, 0)
+}
+
+#[cfg(feature = "parallel")]
+#[cfg(feature = "large-css")]
+#[multiversion::multiversion(
+    targets("x86_64+avx+avx2+bmi1+bmi2+lzcnt+popcnt"),
+    dispatcher = "indirect"
+)]
+fn search_syndrome_branch_partition_colossal_unpulsed(
+    compiled: &CompiledColossalCssDistance,
+    branches: &[WideRootBranch<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>],
+    searched_maximum_weight: u16,
+    mailboxes: &[BoundMailbox],
+) -> CachePaddedWideBranchResult<COLOSSAL_SUPPORT_WORDS> {
+    search_syndrome_branch_partition_impl::<
+        COLOSSAL_SUPPORT_WORDS,
+        COLOSSAL_SYNDROME_WORDS,
+        HUGE_LOGICAL_WORDS,
+        false,
+    >(compiled, branches, searched_maximum_weight, mailboxes, 0)
 }
 
 #[cfg(feature = "parallel")]
@@ -1670,6 +1793,21 @@ impl WidePartitionKernel<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> for CompiledWi
             searched_maximum_weight,
             mailboxes,
             pulse_interval,
+        )
+    }
+
+    #[inline]
+    fn search_partition_unpulsed(
+        &self,
+        branches: &[WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+    ) -> CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS> {
+        search_syndrome_branch_partition_wide_unpulsed(
+            self,
+            branches,
+            searched_maximum_weight,
+            mailboxes,
         )
     }
 }
@@ -1694,6 +1832,21 @@ impl WidePartitionKernel<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>
             pulse_interval,
         )
     }
+
+    #[inline]
+    fn search_partition_unpulsed(
+        &self,
+        branches: &[WideRootBranch<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+    ) -> CachePaddedWideBranchResult<EXTRA_WIDE_SUPPORT_WORDS> {
+        search_syndrome_branch_partition_extra_wide_unpulsed(
+            self,
+            branches,
+            searched_maximum_weight,
+            mailboxes,
+        )
+    }
 }
 
 #[cfg(feature = "parallel")]
@@ -1713,6 +1866,21 @@ impl WidePartitionKernel<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS> for Compiled
             searched_maximum_weight,
             mailboxes,
             pulse_interval,
+        )
+    }
+
+    #[inline]
+    fn search_partition_unpulsed(
+        &self,
+        branches: &[WideRootBranch<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+    ) -> CachePaddedWideBranchResult<LARGE_SUPPORT_WORDS> {
+        search_syndrome_branch_partition_large_unpulsed(
+            self,
+            branches,
+            searched_maximum_weight,
+            mailboxes,
         )
     }
 }
@@ -1736,6 +1904,21 @@ impl WidePartitionKernel<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS> for CompiledHu
             pulse_interval,
         )
     }
+
+    #[inline]
+    fn search_partition_unpulsed(
+        &self,
+        branches: &[WideRootBranch<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+    ) -> CachePaddedWideBranchResult<HUGE_SUPPORT_WORDS> {
+        search_syndrome_branch_partition_huge_unpulsed(
+            self,
+            branches,
+            searched_maximum_weight,
+            mailboxes,
+        )
+    }
 }
 
 #[cfg(feature = "parallel")]
@@ -1757,6 +1940,21 @@ impl WidePartitionKernel<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>
             searched_maximum_weight,
             mailboxes,
             pulse_interval,
+        )
+    }
+
+    #[inline]
+    fn search_partition_unpulsed(
+        &self,
+        branches: &[WideRootBranch<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>],
+        searched_maximum_weight: u16,
+        mailboxes: &[BoundMailbox],
+    ) -> CachePaddedWideBranchResult<COLOSSAL_SUPPORT_WORDS> {
+        search_syndrome_branch_partition_colossal_unpulsed(
+            self,
+            branches,
+            searched_maximum_weight,
+            mailboxes,
         )
     }
 }
@@ -1878,20 +2076,45 @@ where
         for (index, branch) in branches.into_iter().enumerate() {
             partitions[index % partition_count].push(branch);
         }
-        let mailboxes = (0..rayon::current_num_threads())
-            .map(|_| BoundMailbox(AtomicU16::new(active_bound)))
-            .collect::<Vec<_>>();
-        let partials = partitions
-            .par_iter()
-            .map(|partition| {
-                self.search_partition(
-                    partition,
-                    searched_maximum_weight,
-                    &mailboxes,
-                    pulse_interval,
+        let events = (pulse_interval != 0 && thread_count > 1)
+            .then(|| BoundControllerEvents::new(thread_count))
+            .flatten();
+        let worker_pulse_interval = if events.is_some() { pulse_interval } else { 0 };
+        let mailboxes = (0..thread_count)
+            .map(|worker| {
+                BoundMailbox::new(
+                    active_bound,
+                    events
+                        .as_ref()
+                        .map_or(-1, |events| events.worker_fd(worker)),
                 )
             })
             .collect::<Vec<_>>();
+        let search = || {
+            partitions
+                .par_iter()
+                .map(|partition| {
+                    if worker_pulse_interval == 0 {
+                        self.search_partition_unpulsed(
+                            partition,
+                            searched_maximum_weight,
+                            &mailboxes,
+                        )
+                    } else {
+                        self.search_partition(
+                            partition,
+                            searched_maximum_weight,
+                            &mailboxes,
+                            worker_pulse_interval,
+                        )
+                    }
+                })
+                .collect::<Vec<_>>()
+        };
+        let partials = match &events {
+            Some(events) => with_bound_controller(&mailboxes, events, search),
+            None => search(),
+        };
         let mut combined = CachePaddedWideBranchResult {
             best_weight: prefix_best_weight,
             best_support: prefix_best_support,
@@ -2548,10 +2771,233 @@ const _: () = assert!(std::mem::align_of::<CachePaddedBranchResult>() == 128);
 
 #[cfg(feature = "parallel")]
 #[repr(C, align(128))]
-struct BoundMailbox(AtomicU16);
+struct BoundMailbox {
+    notify_fd: i32,
+    published_bound: AtomicU16,
+    _publication_pad: [u8; 122],
+    inbound_bound: AtomicU16,
+    inbound_pulse: AtomicBool,
+    _inbound_pad: [u8; 125],
+}
 
 #[cfg(feature = "parallel")]
-const _: () = assert!(std::mem::align_of::<BoundMailbox>() == 128);
+const _: () = assert!(
+    std::mem::size_of::<BoundMailbox>() == 256 && std::mem::align_of::<BoundMailbox>() == 128
+);
+
+#[cfg(feature = "parallel")]
+impl BoundMailbox {
+    fn new(bound: u16, notify_fd: i32) -> Self {
+        Self {
+            notify_fd,
+            published_bound: AtomicU16::new(bound),
+            _publication_pad: [0; 122],
+            inbound_bound: AtomicU16::new(bound),
+            inbound_pulse: AtomicBool::new(false),
+            _inbound_pad: [0; 125],
+        }
+    }
+}
+
+#[cfg(all(feature = "parallel", target_os = "linux"))]
+struct BoundControllerEvents {
+    worker: Box<[OwnedFd]>,
+    stop: OwnedFd,
+}
+
+#[cfg(all(feature = "parallel", not(target_os = "linux")))]
+struct BoundControllerEvents;
+
+#[cfg(all(feature = "parallel", target_os = "linux"))]
+impl BoundControllerEvents {
+    fn new(worker_count: usize) -> Option<Self> {
+        fn event_fd() -> Option<OwnedFd> {
+            // SAFETY: `eventfd` returns a new owned descriptor on success. It
+            // is immediately wrapped exactly once and closed by `OwnedFd`.
+            let fd = unsafe { libc::eventfd(0, libc::EFD_CLOEXEC | libc::EFD_NONBLOCK) };
+            (fd >= 0).then(|| {
+                // SAFETY: the successful `eventfd` result is uniquely owned.
+                unsafe { OwnedFd::from_raw_fd(fd) }
+            })
+        }
+
+        let mut worker = Vec::with_capacity(worker_count);
+        for _ in 0..worker_count {
+            worker.push(event_fd()?);
+        }
+        Some(Self {
+            worker: worker.into_boxed_slice(),
+            stop: event_fd()?,
+        })
+    }
+
+    fn worker_fd(&self, worker: usize) -> i32 {
+        self.worker[worker].as_raw_fd()
+    }
+}
+
+#[cfg(all(feature = "parallel", not(target_os = "linux")))]
+impl BoundControllerEvents {
+    fn new(_worker_count: usize) -> Option<Self> {
+        None
+    }
+
+    fn worker_fd(&self, _worker: usize) -> i32 {
+        -1
+    }
+}
+
+#[cfg(all(feature = "parallel", target_os = "linux"))]
+fn signal_bound_event(fd: i32) {
+    let value = 1_u64;
+    // SAFETY: `fd` is a live eventfd owned by the enclosing controller event
+    // set, and `value` supplies exactly the required eight readable bytes.
+    let _ = unsafe {
+        libc::write(
+            fd,
+            (&raw const value).cast::<libc::c_void>(),
+            std::mem::size_of::<u64>(),
+        )
+    };
+}
+
+#[cfg(all(feature = "parallel", not(target_os = "linux")))]
+fn signal_bound_event(_fd: i32) {}
+
+#[cfg(all(feature = "parallel", target_os = "linux"))]
+fn drain_bound_event(fd: i32) {
+    let mut value = 0_u64;
+    // SAFETY: `fd` is a live eventfd and `value` supplies eight writable bytes.
+    let _ = unsafe {
+        libc::read(
+            fd,
+            (&raw mut value).cast::<libc::c_void>(),
+            std::mem::size_of::<u64>(),
+        )
+    };
+}
+
+#[cfg(feature = "parallel")]
+fn fan_out_published_bound(mailboxes: &[BoundMailbox], broadcast_bound: &mut u16) -> bool {
+    let mut next_bound = *broadcast_bound;
+    for mailbox in mailboxes {
+        next_bound = next_bound.min(mailbox.published_bound.load(Ordering::Acquire));
+    }
+    if next_bound >= *broadcast_bound {
+        return false;
+    }
+    *broadcast_bound = next_bound;
+    for mailbox in mailboxes {
+        mailbox.inbound_bound.store(next_bound, Ordering::Relaxed);
+        let pulse = mailbox.inbound_pulse.load(Ordering::Relaxed);
+        mailbox.inbound_pulse.store(!pulse, Ordering::Release);
+    }
+    true
+}
+
+#[cfg(all(feature = "parallel", target_os = "linux"))]
+fn run_bound_controller(
+    mailboxes: &[BoundMailbox],
+    events: &BoundControllerEvents,
+    ready: &std::sync::Barrier,
+) {
+    // `search` is commonly entered through a pinned Rayon worker, and Linux
+    // threads inherit their creator's affinity. The controller is not a
+    // worker: restore the process leader's allowed mask so its rare fan-out
+    // does not steal cycles from one pinned solver.
+    let mut process_affinity = unsafe { std::mem::zeroed::<libc::cpu_set_t>() };
+    // SAFETY: both affinity calls receive a correctly sized live `cpu_set_t`.
+    // Failure is performance-only; leaving inherited affinity preserves exact
+    // semantics and the controller remains event-blocked between publications.
+    unsafe {
+        if libc::sched_getaffinity(
+            libc::getpid(),
+            std::mem::size_of::<libc::cpu_set_t>(),
+            std::ptr::addr_of_mut!(process_affinity),
+        ) == 0
+        {
+            let _ = libc::sched_setaffinity(
+                0,
+                std::mem::size_of::<libc::cpu_set_t>(),
+                std::ptr::addr_of!(process_affinity),
+            );
+        }
+    }
+    let mut poll_fds = events
+        .worker
+        .iter()
+        .chain(std::iter::once(&events.stop))
+        .map(|fd| libc::pollfd {
+            fd: fd.as_raw_fd(),
+            events: libc::POLLIN,
+            revents: 0,
+        })
+        .collect::<Vec<_>>();
+    let stop_index = poll_fds.len() - 1;
+    let mut broadcast_bound = mailboxes[0].inbound_bound.load(Ordering::Relaxed);
+    ready.wait();
+    loop {
+        // SAFETY: `poll_fds` is a valid mutable array for the entire blocking
+        // call. The controller, not a search worker, owns this wait loop.
+        let ready = unsafe { libc::poll(poll_fds.as_mut_ptr(), poll_fds.len() as _, -1) };
+        if ready < 0 {
+            if io::Error::last_os_error().kind() == io::ErrorKind::Interrupted {
+                continue;
+            }
+            return;
+        }
+        if poll_fds[stop_index].revents & libc::POLLIN != 0 {
+            drain_bound_event(poll_fds[stop_index].fd);
+            return;
+        }
+        let mut publication = false;
+        for poll_fd in &mut poll_fds[..stop_index] {
+            if poll_fd.revents & libc::POLLIN != 0 {
+                drain_bound_event(poll_fd.fd);
+                publication = true;
+            }
+            poll_fd.revents = 0;
+        }
+        if !publication {
+            continue;
+        }
+        fan_out_published_bound(mailboxes, &mut broadcast_bound);
+    }
+}
+
+#[cfg(all(feature = "parallel", target_os = "linux"))]
+fn with_bound_controller<R>(
+    mailboxes: &[BoundMailbox],
+    events: &BoundControllerEvents,
+    search: impl FnOnce() -> R,
+) -> R {
+    struct StopOnDrop<'a>(&'a BoundControllerEvents);
+    impl Drop for StopOnDrop<'_> {
+        fn drop(&mut self) {
+            signal_bound_event(self.0.stop.as_raw_fd());
+        }
+    }
+
+    let ready = std::sync::Barrier::new(2);
+    std::thread::scope(|scope| {
+        let controller = scope.spawn(|| run_bound_controller(mailboxes, events, &ready));
+        ready.wait();
+        let stop = StopOnDrop(events);
+        let result = search();
+        drop(stop);
+        controller.join().expect("bound controller panicked");
+        result
+    })
+}
+
+#[cfg(all(feature = "parallel", not(target_os = "linux")))]
+fn with_bound_controller<R>(
+    _mailboxes: &[BoundMailbox],
+    _events: &BoundControllerEvents,
+    search: impl FnOnce() -> R,
+) -> R {
+    search()
+}
 
 #[cfg(feature = "parallel")]
 struct BranchWorkspace {
@@ -2639,17 +3085,39 @@ fn merge_search_stats(left: &mut ConnectedSearchStats, right: ConnectedSearchSta
 }
 
 #[cfg(feature = "parallel")]
-fn publish_bound(mailboxes: &[BoundMailbox], bound: u16) -> bool {
-    let mut improved = false;
-    for mailbox in mailboxes {
-        improved |= mailbox.0.fetch_min(bound, Ordering::Relaxed) > bound;
+const BOUND_PULSE_OBSERVED_BIT: u64 = 1 << 63;
+#[cfg(feature = "parallel")]
+const BOUND_PULSE_COUNT_MASK: u64 = BOUND_PULSE_OBSERVED_BIT - 1;
+
+#[cfg(feature = "parallel")]
+#[cold]
+#[inline(never)]
+fn publish_bound(mailbox: &BoundMailbox, bound: u16) {
+    // The search worker writes only its publication line. The blocking
+    // controller reduces publications and owns every inbound line.
+    mailbox.published_bound.store(bound, Ordering::Release);
+    if mailbox.notify_fd >= 0 {
+        signal_bound_event(mailbox.notify_fd);
     }
-    improved
 }
 
 #[cfg(feature = "parallel")]
-fn poll_bound(mailbox: &BoundMailbox, pruning_bound: &mut u16, stats: &mut ConnectedSearchStats) {
-    let received = mailbox.0.load(Ordering::Relaxed);
+#[inline(always)]
+fn check_bound_pulse(
+    mailbox: &BoundMailbox,
+    pruning_bound: &mut u16,
+    stats: &mut ConnectedSearchStats,
+) {
+    let pulse = mailbox.inbound_pulse.load(Ordering::Relaxed);
+    let observed = stats.bound_pulses_observed & BOUND_PULSE_OBSERVED_BIT != 0;
+    if pulse == observed {
+        return;
+    }
+    stats.bound_pulses_observed ^= BOUND_PULSE_OBSERVED_BIT;
+    // The guarded Boolean load stays relaxed on the overwhelmingly common
+    // path. Only a changed pulse pays the acquire fence for its bound payload.
+    std::sync::atomic::fence(Ordering::Acquire);
+    let received = mailbox.inbound_bound.load(Ordering::Relaxed);
     if received < *pruning_bound {
         *pruning_bound = received;
         stats.bound_pulses_observed += 1;
@@ -3167,7 +3635,7 @@ impl CompiledCssDistance {
     }
 
     #[cfg(feature = "parallel")]
-    fn search_root_branch_partition(
+    fn search_root_branch_partition<const PULSE: bool>(
         &self,
         branches: &[RootBranch],
         searched_maximum_weight: u16,
@@ -3178,12 +3646,11 @@ impl CompiledCssDistance {
         let mut best_weight = searched_maximum_weight.saturating_add(1);
         let worker_index = rayon::current_thread_index().unwrap_or(0) % mailboxes.len();
         let mailbox = &mailboxes[worker_index];
-        let mut pruning_bound = best_weight;
+        let mut pruning_bound = mailbox.inbound_bound.load(Ordering::Relaxed);
         let mut best_support = PackedSupport::default();
         let mut stats = ConnectedSearchStats::default();
 
         for branch in branches {
-            poll_bound(mailbox, &mut pruning_bound, &mut stats);
             let root = usize::from(branch.root);
             let added = usize::from(branch.added);
             workspace.supports[0] = PackedSupport::singleton(root);
@@ -3207,9 +3674,11 @@ impl CompiledCssDistance {
                     if best_weight > 2 {
                         best_weight = 2;
                         best_support = child_support;
-                        pruning_bound = pruning_bound.min(2);
-                        stats.bound_improvements_published +=
-                            u64::from(publish_bound(mailboxes, 2));
+                        if 2 < pruning_bound {
+                            pruning_bound = 2;
+                            publish_bound(mailbox, 2);
+                            stats.bound_improvements_published += 1;
+                        }
                     }
                 }
             }
@@ -3253,8 +3722,8 @@ impl CompiledCssDistance {
                     continue;
                 };
                 stats.candidates += 1;
-                if pulse_interval != 0 && stats.candidates & (pulse_interval - 1) == 0 {
-                    poll_bound(mailbox, &mut pruning_bound, &mut stats);
+                if PULSE && stats.candidates & (pulse_interval - 1) == 0 {
+                    check_bound_pulse(mailbox, &mut pruning_bound, &mut stats);
                 }
                 let child_depth = depth + 1;
                 let child_weight = (child_depth + 1) as u16;
@@ -3272,9 +3741,11 @@ impl CompiledCssDistance {
                         if child_weight < best_weight {
                             best_weight = child_weight;
                             best_support = child_support;
-                            pruning_bound = pruning_bound.min(child_weight);
-                            stats.bound_improvements_published +=
-                                u64::from(publish_bound(mailboxes, child_weight));
+                            if child_weight < pruning_bound {
+                                pruning_bound = child_weight;
+                                publish_bound(mailbox, child_weight);
+                                stats.bound_improvements_published += 1;
+                            }
                         }
                     }
                 }
@@ -3311,6 +3782,7 @@ impl CompiledCssDistance {
             }
         }
 
+        stats.bound_pulses_observed &= BOUND_PULSE_COUNT_MASK;
         CachePaddedBranchResult {
             best_weight,
             best_support,
@@ -3374,20 +3846,47 @@ impl CompiledCssDistance {
         for (index, branch) in branches.into_iter().enumerate() {
             partitions[index % partition_count].push(branch);
         }
-        let mailboxes = (0..rayon::current_num_threads())
-            .map(|_| BoundMailbox(AtomicU16::new(searched_maximum_weight.saturating_add(1))))
-            .collect::<Vec<_>>();
-        let partials = partitions
-            .par_iter()
-            .map(|partition| {
-                self.search_root_branch_partition(
-                    partition,
-                    searched_maximum_weight,
-                    &mailboxes,
-                    pulse_interval,
+        let thread_count = rayon::current_num_threads();
+        let events = (pulse_interval != 0 && thread_count > 1)
+            .then(|| BoundControllerEvents::new(thread_count))
+            .flatten();
+        let worker_pulse_interval = if events.is_some() { pulse_interval } else { 0 };
+        let mailboxes = (0..thread_count)
+            .map(|worker| {
+                BoundMailbox::new(
+                    searched_maximum_weight.saturating_add(1),
+                    events
+                        .as_ref()
+                        .map_or(-1, |events| events.worker_fd(worker)),
                 )
             })
             .collect::<Vec<_>>();
+        let search = || {
+            partitions
+                .par_iter()
+                .map(|partition| {
+                    if worker_pulse_interval == 0 {
+                        self.search_root_branch_partition::<false>(
+                            partition,
+                            searched_maximum_weight,
+                            &mailboxes,
+                            0,
+                        )
+                    } else {
+                        self.search_root_branch_partition::<true>(
+                            partition,
+                            searched_maximum_weight,
+                            &mailboxes,
+                            worker_pulse_interval,
+                        )
+                    }
+                })
+                .collect::<Vec<_>>()
+        };
+        let partials = match &events {
+            Some(events) => with_bound_controller(&mailboxes, events, search),
+            None => search(),
+        };
         for partial in partials {
             merge_search_stats(&mut stats, partial.stats);
             if partial.best_weight < best_weight {
@@ -4155,5 +4654,45 @@ mod tests {
         assert_eq!(answer.distance, Some(2));
         assert_eq!(&*answer.witness, &[0, 1]);
         assert!(answer.stats.bound_improvements_published >= 1);
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn controller_bound_fanout_is_monotone_and_coalescence_safe() {
+        let mailboxes = [BoundMailbox::new(20, -1), BoundMailbox::new(20, -1)];
+        let receiver = &mailboxes[1];
+        let mut broadcast_bound = 20;
+        let mut pruning_bound = 20;
+        let mut stats = ConnectedSearchStats::default();
+
+        check_bound_pulse(receiver, &mut pruning_bound, &mut stats);
+        assert_eq!(pruning_bound, 20);
+        assert_eq!(stats.bound_pulses_observed & BOUND_PULSE_COUNT_MASK, 0);
+
+        publish_bound(&mailboxes[0], 17);
+        assert!(fan_out_published_bound(&mailboxes, &mut broadcast_bound));
+        check_bound_pulse(receiver, &mut pruning_bound, &mut stats);
+        assert_eq!(pruning_bound, 17);
+        assert_eq!(receiver.inbound_bound.load(Ordering::Relaxed), 17);
+        assert_eq!(stats.bound_pulses_observed & BOUND_PULSE_COUNT_MASK, 1);
+
+        // Two controller fanouts may toggle the Boolean back before a worker
+        // checks. Missing that notification is deliberately one-sided: the
+        // worker keeps a valid looser bound and only performs extra work.
+        publish_bound(&mailboxes[0], 15);
+        assert!(fan_out_published_bound(&mailboxes, &mut broadcast_bound));
+        publish_bound(&mailboxes[0], 13);
+        assert!(fan_out_published_bound(&mailboxes, &mut broadcast_bound));
+        check_bound_pulse(receiver, &mut pruning_bound, &mut stats);
+        assert_eq!(pruning_bound, 17);
+        assert_eq!(stats.bound_pulses_observed & BOUND_PULSE_COUNT_MASK, 1);
+
+        // A later controller pulse exposes the newest monotone payload.
+        publish_bound(&mailboxes[0], 11);
+        assert!(fan_out_published_bound(&mailboxes, &mut broadcast_bound));
+        check_bound_pulse(receiver, &mut pruning_bound, &mut stats);
+        assert_eq!(pruning_bound, 11);
+        assert_eq!(receiver.inbound_bound.load(Ordering::Relaxed), 11);
+        assert_eq!(stats.bound_pulses_observed & BOUND_PULSE_COUNT_MASK, 2);
     }
 }
