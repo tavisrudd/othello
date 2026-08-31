@@ -857,6 +857,31 @@ four-pack orbits, the local proof of (2j), and the sharp cost-four rule selected
 by the grouped Ergodis pass. The JSONL file is the 36-child frozen input for
 `group-compile`; the Python replay does not trust the controller output.
 
+The non-load-bearing proof-search bundle
+`c1015_hamilton_gap_local_profiles.py`,
+`c1015_hamilton_gap_local_profiles.json`, and
+`c1015_hamilton_gap_local_profiles.sha256` refines the unresolved 18-gap.
+Replay with
+
+```text
+python notes/c1015_hamilton_gap_local_profiles.py --check
+sha256sum -c notes/c1015_hamilton_gap_local_profiles.sha256
+```
+
+It separately replays the 173,008 rooted covers and records the sharp minimum
+neighbour-degree sums (8,14,15,19,18,27,32) at Hamilton degrees 2 through 8,
+the maximum of three degree-two factors under no isolation, and 24 dihedral
+orbits (110 total extensions) after fixing a degree-two factor and its two
+Hamilton partners. Every extension in that smaller table already has no
+isolated factor; its smallest Hamilton count is 18. It also reduces the
+minimum-degree-three, sub-18 branch to five degree profiles by the identity
+\(\sum_v\sum_{u\sim v}d(u)=\sum_vd(v)^2\). This is diagnosis only: the
+listed local bounds and the 24-row table have not yet been replaced by a
+hand proof. The files are respectively 9,637, 4,238, and 321 bytes, with
+SHA-256 values `d3e051ff9dadb6ab7c137847255a68df1a1e54cb8e7c32db85f0ffbf51bc880a`,
+`d70a73904bfea0d372c59a8e7474af441f6480c374bab3cb5ba73d0bd88d4c41`, and
+`c8553dcb962a39f4285d6c9d11e51734a888278ab60f2a96065c55c835a79d05`.
+
 The bundle `c1015_ree_bridge.py`, `c1015_ree_bridge.json`, and
 `c1015_ree_bridge.sha256` independently enumerates the contained
 one-factorizations, counts Hamilton pairs both by component traversal and by
@@ -1305,6 +1330,19 @@ not needed for the order-ten theorem.
   reduces the problem exactly to the energy bound
   (\operatorname{tr}(T^2)\ge333) under no isolation. A proof from the forced
   standard module would replace rooted exhaustion completely.
+- **18-gap proof compression — narrowed but open.** The new local-profile
+  replay cuts the minimum-degree-three branch to five near-equality degree
+  profiles after the neighbour-sum moment identity; the first three already
+  have short incidence-count contradictions, while the last two need a small
+  residual accounting. The minimum-degree-two branch is now exactly a
+  three-root completion problem: fixing the degree-two factor and its two
+  Hamilton partners leaves 24 ordered-dihedral chord types and 110 extensions,
+  all with no isolated factor and with minimum 18. This is substantial
+  localization, not a structural proof: the local neighbour inequalities and
+  the 24-orbit table remain finite certificate data. The clearest successor is
+  a pentagon-decomposition lemma for the eight contracted 2-factors at a
+  colour, which should simultaneously explain those local bounds and the
+  three-root exclusion.
 - **Why the sharp two-root packs have the rule “no (B_0) or no triangle” —
   finite statement settled, conceptual explanation open.** `group-compile`
   first proves that single-factor orbit multiplicities alone lose one bit:

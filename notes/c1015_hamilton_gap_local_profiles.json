@@ -1,0 +1,218 @@
+{
+  "degree_two_three_root_orbits": [
+    {
+      "cycle_word": "03 16 28 47 59",
+      "extensions": 5,
+      "minimum_hamilton_edges": 21,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "03 16 29 47 58",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "03 18 25 47 69",
+      "extensions": 5,
+      "minimum_hamilton_edges": 25,
+      "orbit_size": 1
+    },
+    {
+      "cycle_word": "03 18 26 47 59",
+      "extensions": 5,
+      "minimum_hamilton_edges": 22,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "05 16 27 38 49",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 1
+    },
+    {
+      "cycle_word": "06 15 27 38 49",
+      "extensions": 34,
+      "minimum_hamilton_edges": 20,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "06 15 27 39 48",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "07 14 26 38 59",
+      "extensions": 5,
+      "minimum_hamilton_edges": 21,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "07 14 26 39 58",
+      "extensions": 5,
+      "minimum_hamilton_edges": 22,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "07 14 29 36 58",
+      "extensions": 5,
+      "minimum_hamilton_edges": 25,
+      "orbit_size": 1
+    },
+    {
+      "cycle_word": "08 13 25 47 69",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "08 13 26 47 59",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "08 13 26 49 57",
+      "extensions": 2,
+      "minimum_hamilton_edges": 20,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 14 25 37 69",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 14 26 39 57",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "08 14 29 36 57",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "08 15 29 36 47",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 16 24 37 59",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 16 27 35 49",
+      "extensions": 12,
+      "minimum_hamilton_edges": 23,
+      "orbit_size": 5
+    },
+    {
+      "cycle_word": "08 16 29 35 47",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 17 24 36 59",
+      "extensions": 6,
+      "minimum_hamilton_edges": 19,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 17 25 36 49",
+      "extensions": 20,
+      "minimum_hamilton_edges": 18,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 17 25 39 46",
+      "extensions": 6,
+      "minimum_hamilton_edges": 19,
+      "orbit_size": 10
+    },
+    {
+      "cycle_word": "08 17 26 35 49",
+      "extensions": 0,
+      "minimum_hamilton_edges": null,
+      "orbit_size": 5
+    }
+  ],
+  "local_neighbor_degree_sum_minima": {
+    "2": 8,
+    "3": 14,
+    "4": 15,
+    "5": 19,
+    "6": 18,
+    "7": 27,
+    "8": 32
+  },
+  "maximum_number_of_degree_two_factors": 3,
+  "minimum_degree_three_moment_residual_profiles": [
+    [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      6,
+      6
+    ],
+    [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      4,
+      6,
+      6
+    ],
+    [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      5,
+      5,
+      6
+    ],
+    [
+      3,
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      5,
+      6
+    ],
+    [
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      6
+    ]
+  ],
+  "rooted_exact_cover_completions": 173008,
+  "schema": "c1015-hamilton-gap-local-profiles-v1",
+  "trusted_boundary": "exact covers after a fixed ordered Hamilton root; the degree-two table further fixes a residual matching Hamilton with both roots and forbids its other Hamilton partners"
+}
