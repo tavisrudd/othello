@@ -32,6 +32,21 @@ checks that its rank is 29, replays all minimum cores and single-block
 ablations, and exhausts every smaller block subset.  This is a bounded finite
 certificate, not an all-field representation theorem.
 
+The adapter also reconstructs and certifies the complete frozen five-channel
+control corpus rather than specializing to that one example:
+
+| digits | variables | rank | Hom dim. | minimum core | core count |
+|---|---:|---:|---:|---:|---:|
+| `(0,0)` | 10 | 10 | 0 | 2 | 4 |
+| `(0,2)` | 30 | 29 | 1 | 3 | 3 |
+| `(1,1)` | 40 | 40 | 0 | 3 | 3 |
+| `(2,0)` | 30 | 29 | 1 | 3 | 3 |
+| `(2,2)` | 90 | 90 | 0 | 3 | 3 |
+
+Every row is rebuilt from the same field/tensor adapter and every certificate
+is replayed.  The different dimensions, ranks, and two distinct minimum-core
+shapes are a direct guard against answer-specific logic.
+
 ## Architecture
 
 `semantic_rank.rs` separates the reusable compiler from the landed domain
@@ -59,7 +74,9 @@ deterministic independent source-row indices
 
 The row indices are the witness lift: they point back into the original
 labelled equations, while the block masks retain the source-generator
-meaning.  The verifier does not trust cached ranks or the adapter's prose.
+meaning.  They are emitted in the machine-readable result and evidence, with
+`block=floor(row/30)`, `output=floor((row%30)/3)`, and `input=row%3`.  The
+verifier does not trust cached ranks or the adapter's prose.
 
 The domain-specific reconstruction lives separately in
 `landed_rank_adapter.rs`; no internal research identifiers or conclusions were

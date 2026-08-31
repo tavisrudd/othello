@@ -108,6 +108,32 @@ fn sym_square(matrix: &Matrix) -> Matrix {
     result
 }
 
+fn frobenius_matrix(matrix: &[[u8; 2]; 2]) -> [[u8; 2]; 2] {
+    let mut result = [[0; 2]; 2];
+    for row in 0..2 {
+        for column in 0..2 {
+            result[row][column] = power(matrix[row][column], 3);
+        }
+    }
+    result
+}
+
+fn kronecker(left: &Matrix, right: &Matrix) -> Matrix {
+    let mut result = vec![vec![0; left[0].len() * right[0].len()]; left.len() * right.len()];
+    for (left_row, left_values) in left.iter().enumerate() {
+        for (left_column, &left_value) in left_values.iter().enumerate() {
+            for (right_row, right_values) in right.iter().enumerate() {
+                for (right_column, &right_value) in right_values.iter().enumerate() {
+                    result[left_row * right.len() + right_row]
+                        [left_column * right[0].len() + right_column] =
+                        mul(left_value, right_value);
+                }
+            }
+        }
+    }
+    result
+}
+
 fn generators() -> [[[u8; 2]; 2]; 4] {
     let primitive = (2..9).find(|&value| power(value, 4) != 1).unwrap();
     [
@@ -118,16 +144,22 @@ fn generators() -> [[[u8; 2]; 2]; 4] {
     ]
 }
 
-/// Reconstruct the four generator blocks for the extra `L(2,0)` source.
+/// Reconstruct the four generator blocks for one two-digit source.
 #[must_use]
-pub fn q9_extra_channel_system() -> Gf9BlockSystem {
-    let mut rows = Vec::with_capacity(4 * 300 * 30);
+pub fn q9_channel_system(low_digit: usize, high_digit: usize) -> Gf9BlockSystem {
+    assert!(low_digit <= 2 && high_digit <= 2);
+    let source_dimension = (low_digit + 1) * (high_digit + 1);
+    let variables = 10 * source_dimension;
+    let mut rows = Vec::with_capacity(4 * variables * variables);
     let mut block_offsets = Vec::with_capacity(5);
     block_offsets.push(0);
     let mut row_count = 0;
     for generator in generators() {
         let target = sym_square(&sym_power(&generator, 3));
-        let source = sym_power(&generator, 2);
+        let source = kronecker(
+            &sym_power(&generator, low_digit),
+            &sym_power(&frobenius_matrix(&generator), high_digit),
+        );
         let target_dimension = target.len();
         let source_dimension = source.len();
         let variables = target_dimension * source_dimension;
@@ -149,7 +181,13 @@ pub fn q9_extra_channel_system() -> Gf9BlockSystem {
         }
         block_offsets.push(row_count);
     }
-    Gf9BlockSystem::try_new(30, rows, block_offsets).unwrap()
+    Gf9BlockSystem::try_new(variables, rows, block_offsets).unwrap()
+}
+
+/// Focused extra-channel control used by the performance census.
+#[must_use]
+pub fn q9_extra_channel_system() -> Gf9BlockSystem {
+    q9_channel_system(2, 0)
 }
 
 #[cfg(test)]
@@ -175,5 +213,25 @@ mod tests {
         let mut incomplete = core.clone();
         incomplete.minimum_block_masks = core.minimum_block_masks[..2].into();
         assert!(!incomplete.verify(&system));
+    }
+
+    #[test]
+    fn all_landed_q9_channels_match_the_independent_controls() {
+        let cases = [
+            ((0, 0), 10, 0, 2, &[0b0110, 0b1001, 0b1010, 0b1100][..]),
+            ((0, 2), 29, 1, 3, &[0b0111, 0b1101, 0b1110][..]),
+            ((1, 1), 40, 0, 3, &[0b0111, 0b1101, 0b1110][..]),
+            ((2, 0), 29, 1, 3, &[0b0111, 0b1101, 0b1110][..]),
+            ((2, 2), 90, 0, 3, &[0b0111, 0b1101, 0b1110][..]),
+        ];
+        for ((low, high), rank, hom, core_size, masks) in cases {
+            let system = q9_channel_system(low, high);
+            let core = compile_semantic_rank_core(&system);
+            assert_eq!(core.rank, rank, "digits ({low},{high})");
+            assert_eq!(system.columns() - core.rank, hom, "digits ({low},{high})");
+            assert_eq!(core.minimum_block_size, core_size);
+            assert_eq!(&*core.minimum_block_masks, masks);
+            assert!(core.verify(&system));
+        }
     }
 }

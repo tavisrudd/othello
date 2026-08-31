@@ -6,7 +6,7 @@ use std::time::Instant;
 
 use clap::Parser;
 use ergodis_private::landed_rank_adapter::{
-    q9_extra_channel_system, GENERATOR_NAMES, SOURCE_SHA256,
+    q9_channel_system, q9_extra_channel_system, GENERATOR_NAMES, SOURCE_SHA256,
 };
 use ergodis_private::semantic_rank::{compile_semantic_rank_core, Gf9RankWorkspace};
 use serde::Serialize;
@@ -28,6 +28,7 @@ struct Envelope {
     rank: usize,
     hom_dimension: usize,
     independent_equations: usize,
+    independent_equation_rows: Vec<u32>,
     equation_compression_ratio: f64,
     minimum_generator_core_size: usize,
     minimum_generator_cores: Vec<Vec<&'static str>>,
@@ -39,8 +40,28 @@ struct Envelope {
     raw_rank_replay_ns: u128,
     core_rank_replay_ns: u128,
     rank_replay_speedup: f64,
+    landed_channel_controls: Vec<ChannelControl>,
     boundary: &'static str,
 }
+
+#[derive(Serialize)]
+struct ChannelControl {
+    digits: [usize; 2],
+    variables: usize,
+    rank: usize,
+    hom_dimension: usize,
+    minimum_generator_core_size: usize,
+    minimum_generator_core_count: usize,
+    certificate_replayed: bool,
+}
+
+const LANDED_CHANNELS: [([usize; 2], usize, usize, usize, usize); 5] = [
+    ([0, 0], 10, 0, 2, 4),
+    ([0, 2], 29, 1, 3, 3),
+    ([1, 1], 40, 0, 3, 3),
+    ([2, 0], 29, 1, 3, 3),
+    ([2, 2], 90, 0, 3, 3),
+];
 
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
@@ -81,6 +102,30 @@ fn main() -> anyhow::Result<()> {
                 .collect()
         })
         .collect();
+    let landed_channel_controls: Vec<_> = LANDED_CHANNELS
+        .into_iter()
+        .map(
+            |([low, high], expected_rank, expected_hom, expected_size, expected_count)| {
+                let control_system = q9_channel_system(low, high);
+                let control_core = compile_semantic_rank_core(&control_system);
+                let control = ChannelControl {
+                    digits: [low, high],
+                    variables: control_system.columns(),
+                    rank: control_core.rank,
+                    hom_dimension: control_system.columns() - control_core.rank,
+                    minimum_generator_core_size: control_core.minimum_block_size,
+                    minimum_generator_core_count: control_core.minimum_block_masks.len(),
+                    certificate_replayed: control_core.verify(&control_system),
+                };
+                assert_eq!(control.rank, expected_rank);
+                assert_eq!(control.hom_dimension, expected_hom);
+                assert_eq!(control.minimum_generator_core_size, expected_size);
+                assert_eq!(control.minimum_generator_core_count, expected_count);
+                assert!(control.certificate_replayed);
+                control
+            },
+        )
+        .collect();
     let mut independent_by_generator = [0; 4];
     for &row in &core.independent_rows {
         independent_by_generator[row as usize / 30] += 1;
@@ -95,6 +140,7 @@ fn main() -> anyhow::Result<()> {
         rank: core.rank,
         hom_dimension: system.columns() - core.rank,
         independent_equations: core.independent_rows.len(),
+        independent_equation_rows: core.independent_rows.to_vec(),
         equation_compression_ratio: system.row_count() as f64 / core.independent_rows.len() as f64,
         minimum_generator_core_size: core.minimum_block_size,
         minimum_generator_cores,
@@ -112,6 +158,7 @@ fn main() -> anyhow::Result<()> {
         raw_rank_replay_ns,
         core_rank_replay_ns,
         rank_replay_speedup: raw_rank_replay_ns as f64 / core_rank_replay_ns as f64,
+        landed_channel_controls,
         boundary: "bounded GF(9) finite certificate; not an all-field theorem",
     };
     assert_eq!(
