@@ -148,10 +148,14 @@ def main() -> int:
             "translation_orbits": 2,
         },
     }
+    encoded = json.dumps(output, separators=(",", ":"), sort_keys=True) + "\n"
     args.out.parent.mkdir(parents=True, exist_ok=True)
+    if args.out.exists():
+        if args.out.read_text(encoding="utf-8") == encoded:
+            return 0
+        raise RuntimeError(f"refusing to replace different output: {args.out}")
     with args.out.open("x", encoding="utf-8") as stream:
-        json.dump(output, stream, separators=(",", ":"), sort_keys=True)
-        stream.write("\n")
+        stream.write(encoded)
     return 0
 
 

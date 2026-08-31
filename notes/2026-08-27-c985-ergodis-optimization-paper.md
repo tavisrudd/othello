@@ -32,8 +32,10 @@ as each coherent tranche lands.
    CLI now expose a thread-count-independent modulo partition, evidence records
    distinguish partial shards from global results, and the README states the
    `large-css,parallel` release feature contract. Next: full feature-matrix and
-   shard-union tests, stable compiled-artifact compatibility/idempotent BB
-   generation, then reusable small-field, null-space, projective-indexing, and
+   shard-union tests. Large-CSS v1 artifacts now load across the 12-to-13-word
+   internal support-width change, including the retained C1018 artifact, and BB
+   generation is idempotent only when the existing bytes match. Next: reusable
+   small-field, null-space, projective-indexing, and
    generator-orbit foundations. Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
 4. **Pending — robustness closure.** Complete malformed-input, feature-matrix,

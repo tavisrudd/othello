@@ -69,6 +69,17 @@ fn wide_artifact_identity<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
     }
 }
 
+#[inline]
+fn wide_artifact_version_is_supported<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize>(
+    version: u16,
+) -> bool {
+    let (_, current) = wide_artifact_identity::<SUPPORT_WORDS, CHECK_WORDS>();
+    version == current
+        || (SUPPORT_WORDS == LARGE_SUPPORT_WORDS
+            && CHECK_WORDS == LARGE_SYNDROME_WORDS
+            && version == 1)
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Error)]
 pub enum CssDistanceError {
     #[error("CSS distance search currently supports at most 256 coordinates")]
@@ -1085,8 +1096,7 @@ where
         logical: &Matrix,
         mut reader: R,
     ) -> Result<Self, CssDistanceArtifactError> {
-        let (expected_magic, expected_version) =
-            wide_artifact_identity::<SUPPORT_WORDS, CHECK_WORDS>();
+        let (expected_magic, _) = wide_artifact_identity::<SUPPORT_WORDS, CHECK_WORDS>();
         let mut magic = [0u8; 8];
         reader.read_exact(&mut magic)?;
         if &magic != expected_magic {
@@ -1096,7 +1106,8 @@ where
             inner: reader,
             hasher: blake3::Hasher::new(),
         };
-        if read_u16(&mut reader)? != expected_version {
+        let version = read_u16(&mut reader)?;
+        if !wide_artifact_version_is_supported::<SUPPORT_WORDS, CHECK_WORDS>(version) {
             return Err(CssDistanceArtifactError::Format);
         }
         let mut source_sha256 = [0u8; 32];
@@ -4774,6 +4785,24 @@ mod tests {
         assert_eq!(compiled.check_count, 370);
         assert_eq!(compiled.maximum_column_check_weight, 3);
         assert!(compiled.kernel_weights_even);
+    }
+
+    #[cfg(feature = "large-css")]
+    #[test]
+    fn large_artifact_reader_accepts_width_only_version_one_artifacts() {
+        let (physical, logical) = artifact_problem();
+        let compiled = CompiledLargeCssDistance::compile(&physical, &logical).unwrap();
+        let mut artifact = Vec::new();
+        compiled.write_artifact(&mut artifact).unwrap();
+        artifact[8..10].copy_from_slice(&1u16.to_le_bytes());
+        let payload_end = artifact.len() - 32;
+        let checksum = blake3::hash(&artifact[8..payload_end]);
+        artifact[payload_end..].copy_from_slice(checksum.as_bytes());
+
+        let loaded =
+            CompiledLargeCssDistance::read_artifact(&physical, &logical, &*artifact).unwrap();
+        assert_eq!(loaded.coordinate_count(), physical.cols());
+        assert_eq!(loaded.check_count(), compiled.check_count());
     }
 
     #[cfg(feature = "large-css")]
