@@ -624,7 +624,33 @@ because a heuristic said to.  The lemma removes the heuristic: it names every
 subspace that can possibly contain a non-regular orbit, so nothing of that class
 can be missed again.
 
-<!-- FIXSWEEP RESULT -->
+**Redundancy eight, closed.**  The sweep was run at every prime power from 8 to
+43, i.e. the complete list below C513's proved threshold, each an exhaustive
+search of the whole fixed locus:
+
+| `q` | 8 | 9 | 11 | 13 | 16 | 17 | 19 | 23 | 25 | 27 | 29 | 31 | 32 | 37 | 41 | 43 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| points swept | 609 | 1,741 | 2,979 | 5,155 | 4,985 | 10,459 | 15,283 | 25,473 | 33,906 | 41,673 | 50,617 | 63,685 | 33,866 | 106,973 | 141,501 | 166,681 |
+| deep found | 126 | 299 | 18 | 30 | 12 | 18 | 22 | 26 | 28 | 58 | 32 | 36 | 18 | 40 | 86 | 48 |
+| **exceptional** | 120 | 289 | **4** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+Total swept: 704,536 points, against `Σ_q |PG(7,q)| ≈ 4·10^{11}` for the
+corresponding censuses.  Every cell ran in seconds to minutes.
+
+Combined with C513's theorem for `q ≥ 43`, this is a **complete classification
+over all prime powers, with no residual field range**:
+
+> At redundancy eight, the exceptional deep holes whose `PGL_2(q)`-stabilizer is
+> nontrivial occur at exactly `q ∈ {8, 9, 11}`, and at no other field.
+
+That statement is not a bounded verification.  It is the finite list below the
+threshold decided by an exhaustive search justified by the lemma, glued to an
+imported theorem above the threshold.  The corresponding census claim —
+`X(8) ∩ [8,43] = {8,9,11}` — would have required roughly `4·10^{11}` points of
+enumeration and about 24 GB of memory at `q = 41` alone; the residual there is
+now only the regular class.
+
+<!-- FIXSWEEP MORE -->
 
 **What this replaces, and what it does not.**  It replaces the census as the
 tool for the entire non-regular class, at every field, with a proof rather than
