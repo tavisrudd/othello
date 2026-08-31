@@ -133,6 +133,21 @@ because their five-run variance was high.
 Machine-readable evidence is in
 `ergodis-private/evidence/semantic-rank-census-v1.json`.
 
+## Scaling envelope
+
+The immutable input still occupies `O(RC)` bytes; the online reduction targets
+the repeatedly mutated operational state.  For `R > C`, that state is
+`O(C^2)` rather than `O(RC)`, and it may return immediately once it has found
+`C` pivots.  For `R <= C`, the dense path remains `O(RC)` and avoids basis
+metadata.  The compiled row certificate then changes subsequent exact replay
+from `R` source rows to exactly `rank` source rows.
+
+Minimum semantic-block discovery is exhaustive by design and currently caps
+the block count at 20.  Its next scaling step is not a wider blind mask scan:
+use marginal rank loss to identify mandatory blocks, contract them first, and
+enumerate only the residual antichain.  That preserves the exhaustive verifier
+while moving reusable theorem information ahead of enumeration.
+
 ## What this establishes
 
 This is stronger evidence for the cross-domain thesis than a second orbit
