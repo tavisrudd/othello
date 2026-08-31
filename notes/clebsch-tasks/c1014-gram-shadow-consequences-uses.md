@@ -149,9 +149,30 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
   prediction is nonetheless confirmed at \(m=8,9,10\) via an extended
   \(R_m(J)\) recipe and genus2red (sign side uses every odd bad prime;
   trivial side a proper divisor; the drop rule stays open).
+- **Strata classification derived and completed (2026-08-30, Dickson
+  derivation report below):** \(u^2\Phi_{2m,4}=G_r\) with \(r=2m\), an
+  identity over \(\mathbf Z\), proves the census depends only on
+  \(2m\bmod(p-1)\); the census equals an exact Plancherel pairing of
+  Jacobi sums (verified exactly on 308 pairs); every constant stratum
+  belongs to one of **15 proved classes** — two identically degenerate
+  families, three infinite power-residue families
+  (\(\lambda^m\in\mu_n\), \(n\in\{3,4,8\}\); \(n=5,7,9,10,11,12\)
+  provably empty), and ten finite families closed by Weil bounds plus
+  exhaustive census, exhaustive for \(5\le p<4000\). \((47,30)\) is
+  **settled**: via \(3\cdot15\equiv-1\bmod46\) it is a character sum over
+  the supersingular Fermat cubic; its family is finite with exactly three
+  members \((17,6),(17,10),(47,30)\) — a theorem, not an isolated
+  accident. Geometric frame: \(C_m\) is the pullback of one fixed double
+  cover along the power map; the newform/Sato–Tate results are the
+  \(p-1>2m\) corner; constancy lives only in \(2m<p\lesssim16m^2\).
+  New prediction opened: the u-line census has minimal period
+  \(\mathrm{lcm}(p-1,p+1)\) — it sees the non-split torus, so a second,
+  unsearched stratum family indexed by \(r\bmod(p+1)\) should exist.
 - Open items after the Chevalley–Weil pass ((a,b,c) derivation is closed):
-  the \(m=3\) bias \(\equiv1\bmod4\) rigidity; the sporadic stratum
-  \((p,r)=(47,30)\); the
+  the \(m=3\) bias \(\equiv1\bmod4\) rigidity; the unconditional
+  finiteness of the sporadic families over all parameter corners (stated
+  gap in the derivation report); the predicted non-split-torus stratum
+  family (unsearched); the
   \(m=8\) abelian-surface isotypic factors are unidentified; the sign-side
   quotient conductor uses all of \(\mathrm{Bad}(C_m)\) while the trivial
   side drops primes in an unexplained pattern (measured \(m=5,6,7\) only;
@@ -205,6 +226,10 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
 
 ## Session reports
 
+- `../2026-08-30-c1014-dickson-strata-derivation.md` — periodicity over
+  \(\mathbf Z\), master Jacobi-sum formula, 15-class constant-stratum
+  classification, \((47,30)\) finite family, pullback geometry, non-split
+  torus prediction. Script: `c1014_dickson_strata.py`.
 - `../2026-08-30-c1014-hasse-census-sato-tate.md` — no-second-invariant
   theorem, Fermat-factor 16-stratum coloring, \(m=8\) Sato–Tate verdicts,
   extended quotient recipe and level confirmation. Scripts:
