@@ -35,7 +35,12 @@ as each coherent tranche lands.
    result records, alignment frame, sparse selector term, and observational
    separator node now have explicit representations and compile-time size and
    alignment contracts; same-work A/B is instruction-neutral in 1T and 12T.
-   Current next slice is registry evidence.
+   The first executable private registry now covers eleven principal public
+   kernels across allocation, layout, correctness, single-/parallel counters,
+   and contention; it verifies every referenced source/evidence path and fails
+   closed on 22 honestly open gates rather than omitting weak rows. Current
+   next slice is expanding that census and closing its highest-leverage open
+   allocation/layout rows.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

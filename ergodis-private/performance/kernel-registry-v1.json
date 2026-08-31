@@ -1,0 +1,123 @@
+{
+  "schema": "ergodis-private-performance-kernel-registry-v1",
+  "dimensions": [
+    "allocation",
+    "layout",
+    "correctness",
+    "single_thread_counters",
+    "parallel_counters",
+    "contention"
+  ],
+  "kernels": [
+    {
+      "id": "css-connected-support",
+      "source": "papers/complete-repair-ports/ergodis/src/css_distance.rs",
+      "allocation": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "layout": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/css_distance.rs"]},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "parallel_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "contention": {"status": "pass", "evidence": ["notes/2026-08-31-ergodis-controller-bound-fanout-adr.md"]}
+    },
+    {
+      "id": "binary-linear-gray-scan",
+      "source": "papers/complete-repair-ports/ergodis/src/linear_code.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/linear_code.rs"]},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/linear_code.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is recorded yet."},
+      "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
+      "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
+    },
+    {
+      "id": "alignment-attachment",
+      "source": "papers/complete-repair-ports/ergodis/src/alignment.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
+      "layout": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/alignment.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "The steering-gate microbench does not replace a retained full-search counter A/B."},
+      "parallel_counters": {"status": "na", "reason": "No public parallel attachment search is exposed."},
+      "contention": {"status": "na", "reason": "No public parallel attachment search is exposed."}
+    },
+    {
+      "id": "residual-hitting",
+      "source": "papers/complete-repair-ports/ergodis/src/residual_hitting.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/residual_hitting.rs"]},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/residual_hitting.rs"]},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-27-c985-ergodis-optimization-paper.md"]},
+      "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
+      "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
+    },
+    {
+      "id": "observational-refinement",
+      "source": "papers/complete-repair-ports/ergodis/src/observational.rs",
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
+      "layout": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/observational_compiler.rs"]},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-27-c985-ergodis-optimization-paper.md"]},
+      "parallel_counters": {"status": "open", "reason": "Parallel compilation evidence is not yet attached to this registry row."},
+      "contention": {"status": "open", "reason": "Parallel compilation ownership evidence is not yet attached to this registry row."}
+    },
+    {
+      "id": "orbit-product-search",
+      "source": "papers/complete-repair-ports/ergodis/src/orbit.rs",
+      "allocation": {"status": "open", "reason": "Presized memo pointer tests do not count every allocator event."},
+      "layout": {"status": "open", "reason": "The complete iterative frame and memo layout set is not registered."},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/orbit.rs"]},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "parallel_counters": {"status": "na", "reason": "The registered product kernel is single-threaded."},
+      "contention": {"status": "na", "reason": "The registered product kernel is single-threaded."}
+    },
+    {
+      "id": "qc-trapping-search",
+      "source": "papers/complete-repair-ports/ergodis/src/applications.rs",
+      "allocation": {"status": "open", "reason": "The iterative rewrite lacks a real-loop counting-allocator gate."},
+      "layout": {"status": "open", "reason": "The iterative frame layout is not yet asserted."},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/applications.rs"]},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
+      "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
+      "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
+    },
+    {
+      "id": "sparse-scheduler",
+      "source": "papers/complete-repair-ports/ergodis/src/scheduler.rs",
+      "allocation": {"status": "open", "reason": "The adaptive sparse solve path still lacks a complete hot-loop allocator boundary."},
+      "layout": {"status": "open", "reason": "Sparse state, load-pool, and witness records are not fully asserted."},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/scheduler.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained counter A/B is registered."},
+      "parallel_counters": {"status": "open", "reason": "No retained parallel counter A/B is registered."},
+      "contention": {"status": "open", "reason": "Parallel ownership and false-sharing evidence is not registered."}
+    },
+    {
+      "id": "ordered-resource-front",
+      "source": "papers/complete-repair-ports/ergodis/src/ordered_resource.rs",
+      "allocation": {"status": "open", "reason": "Workspace reuse tests do not yet cover the entire live-front solve boundary."},
+      "layout": {"status": "open", "reason": "Live and retained front records are not fully asserted."},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/ordered_resource.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained counter A/B is registered."},
+      "parallel_counters": {"status": "na", "reason": "No public parallel front evaluator is exposed."},
+      "contention": {"status": "na", "reason": "No public parallel front evaluator is exposed."}
+    },
+    {
+      "id": "zdd-family-operations",
+      "source": "papers/complete-repair-ports/ergodis/src/zdd.rs",
+      "allocation": {"status": "open", "reason": "Unique/memo tables can still grow inside public operations."},
+      "layout": {"status": "open", "reason": "Traversal and unique-table records are not fully asserted."},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/zdd.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained counter A/B is registered."},
+      "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
+      "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
+    },
+    {
+      "id": "root-execution",
+      "source": "papers/complete-repair-ports/ergodis/src/root_execution.rs",
+      "allocation": {"status": "open", "reason": "Worker initialization is presized, but a cross-thread allocator gate is not registered."},
+      "layout": {"status": "open", "reason": "All worker-written records need explicit stride assertions."},
+      "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/root_execution.rs"]},
+      "single_thread_counters": {"status": "open", "reason": "No retained single-thread control is registered."},
+      "parallel_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md"]},
+      "contention": {"status": "pass", "evidence": ["notes/2026-08-30-c985-ergodis-private-adapters-and-parallel-roots.md"]}
+    }
+  ]
+}

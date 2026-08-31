@@ -252,6 +252,17 @@ pairs are likewise instruction- and branch-neutral. Cache-event variation on
 the shared host is inconsistent between the 1T and 12T controls and does not
 coincide with a cycle regression.
 
+The registry gate now has an executable private first tranche at
+`ergodis-private/performance/kernel-registry-v1.json`. Eleven principal public
+kernels carry all six required dimensions: allocation, layout, correctness,
+single-thread counters, parallel counters, and contention. The companion
+checker validates unique IDs, complete dimensions, source paths, evidence
+paths, and reasons for every open/not-applicable gate. Its default invocation
+fails while any required gate is open; `--allow-open` prints the bounded
+remediation list. The initial census reports 30 passing, 22 open, and 14
+not-applicable cells. This is infrastructure progress, not C1017 closure: the
+census must expand and the 22 open cells must be repaired or justified.
+
 ## Review findings for the pending C1016 Rust overlay
 
 The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its
