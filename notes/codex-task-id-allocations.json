@@ -3968,8 +3968,17 @@
       "last": 1019,
       "purpose": "commercial Ergodis prototypes: certified exact code-distance service and explainable assignment infeasibility certificates",
       "sequence": 441
+    },
+    {
+      "count": 2,
+      "first": 1020,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 1021,
+      "purpose": "target-mining execution: Brouwer exceptional exterior-set census reconstruction with lane invariants; prime-power healthy-arc census via new SmallField layer",
+      "sequence": 442
     }
   ],
-  "next_id": 1020,
+  "next_id": 1022,
   "schema": "codex-task-id-allocations-v1"
 }
