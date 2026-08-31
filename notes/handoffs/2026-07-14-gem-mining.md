@@ -20,6 +20,22 @@ reported: the externally announced order-668 Hadamard matrix is decoded, verifie
 classified, Lean-checked and cross-checked against this lane's length-333 census, its Part 2 search
 declined by the user; C1000's feasibility spike is reported with no stage approved.
 
+**2026-08-31 — routing for the Ergodis campaign and its successors.** Reported and archived:
+C1018 (eight-hour Ergodis hunt → [log](../2026-08-30-c1018-ergodis-hunt-log.md), with the punctured
+Reed–Solomon wave extended to a fixed-locus classification →
+[report](../2026-08-31-c1018-prs-deephole-conjecture.md)); C1019 (commercial prototypes →
+[certified distance](../2026-08-31-certified-distance-prototype.md),
+[infeasibility certificates](../2026-08-31-infeasibility-certificate-prototype.md)); C1020
+(Brouwer exceptional census → [report](../2026-08-31-c1020-brouwer-exceptional-census.md));
+C1022 (novelty audit, pre-emption found →
+[report](../2026-08-31-c1022-q31-clebsch-recurrence-novelty-audit.md), surface sweep clean →
+[report](../2026-08-31-dye-1991-preemption-surface-sweep.md)); C1023 (Lang–Weil threshold, verified
+negative → [report](../2026-08-31-c1023-lang-weil-carrier-threshold.md)). Open in this lane: C159
+(U-atlas, in progress), C1021 (prime-power healthy-arc census, queued). Unallocated successors named
+by those reports: the regular-orbit reduction for the deep-hole residual, the incidence-bound
+reframing, the symmetry-reduced exhaustion prototype, and a real audit of the Sylvester-adjacent
+lemma. Target slate: [target mining](../2026-08-31-ergodis-target-mining-from-gem-reports.md).
+
 **Allowed paths for this lane:** `notes/2026-07-14-c147-*`, C155–C157/C159/C160/C169/C174/C175/C177/C178/C190/C191/C192/C193/C736/C737/C738
 reports and scripts, `notes/2026-07-15-gems-theory-gaps-method*.md`,
 `notes/2026-07-15-gem-discovery-track.md`, `notes/2026-08-29-c999-hadamard-668-report.md`,

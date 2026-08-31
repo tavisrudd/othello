@@ -302,3 +302,24 @@ at q=31 is a 6-arc plus a 10-arc — and the natural question is whether the uni
 not just its size, is what forces `(q+1)/2`. Read Storme-Van Maldeghem Prop 11 in full before
 building on this; it is currently partial depth.
 **Status**: open lead. Provisional - the gap-mining vet gate applies.
+
+### 2026-08-31 - the PRS threshold looks like a sum-product problem, not a counting problem
+
+**Was I looking for this?**: no - the C1023 task was to make a Lang-Weil count rigorous, and this
+came out of the closeout passes after that count was refuted.
+**Expectation violated**: that the constant threshold governing exceptional PRS deep holes is an
+equidistribution phenomenon, so that counting split squarefree annihilators against a fixed-dimension
+stratum would settle it. It is not: the apolar space sits inside the multiples of the lower generator
+`F`, so the naive density is wrong by an unbounded factor precisely where it is needed, and the
+correction is not a better error term.
+**Observed**: the condition that decides deepness is whether a multiplicative structure (the
+fifth-power classes, the fourth-power classes, the carrier's cyclic pullback) meets an affine
+subspace of the apolar pencil. That is an incidence question between a multiplicative subgroup and
+an affine subspace over `F_q` - the Heath-Brown-Konyagin and Bourgain-Glibichuk-Konyagin regime -
+and those bounds are *constant-threshold* by nature, which is the shape the data show (last
+exceptional field 13, nothing at 16 or above) and the shape Lang-Weil cannot produce.
+**Strongest question**: does a sum-product / incidence bound give an absolute constant `q_0`
+independent of `r`, and does it see the regular (trivial-stabilizer) orbits that the fixed-locus
+lemma cannot? If yes, one tool closes both open residuals at once; if it only handles the carrier
+strata, it is worth no more than the refuted count.
+**Status**: open lead, unallocated. Provisional - the gap-mining vet gate applies.

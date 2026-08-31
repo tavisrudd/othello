@@ -1012,6 +1012,26 @@ with `m = 3, 4, 6, 12`.
 
 ## 7. What the exceptional deep holes are, in classical language
 
+> **SUPERSEDED IN PART, 2026-08-31 (C1023).** The counting argument at the end of
+> this section — the one this text calls the single highest-value follow-up — was
+> attempted and is **structurally refuted, not merely unproved**. The apolar space
+> at every level up to `d+1-e` lies inside the multiples of the lower generator
+> `F`, so the `1/j!` density is wrong by an unbounded factor exactly where the
+> argument needs it, and any repair blind to `F` would prove the persistent locus
+> eventually shallow, which is false at every `q`. A torus-equivariant replacement
+> is rigorous but leaves an uncertified residual that stays flat at 100-150 over
+> `13 <= q <= 79` instead of decaying; the non-equivariant normal form has a
+> Lang-Weil constant near `10^14` at `r = 9` against an observed threshold of 16.
+> C1023 also shows a threshold would **not** have closed `r >= 11` in any case:
+> it closes one split stratum at a time, while the fixed-locus lemma needs the
+> order-two locus, whose dimension grows with `r`. The surviving lead is that this
+> is a multiplicative-subgroup-versus-affine-subspace incidence problem
+> (Heath-Brown-Konyagin / BGK regime), not a Lang-Weil counting problem.
+> **Priority note:** C1023's Lemma 1 is essentially Sylvester's classical theorem
+> via the Apolarity Lemma, caught at search-snippet depth only; a real audit is
+> owed before any of this reading is claimed as new.
+> → [C1023](2026-08-31-c1023-lang-weil-carrier-threshold.md)
+
 This section is a reading of the data in standard terminology, not a new
 result, and a literature check is owed before any of it is claimed as one.
 
