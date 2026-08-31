@@ -116,6 +116,19 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
   isotypic sides. Settled by inspection (tt pass): genus \(\equiv4\bmod6\)
   never occurring is immediate from the proved genus law — all three
   residues of \(m\bmod3\) give \(g\equiv0\) or \(2\bmod6\); not a mystery.
+- tt second pass (2026-08-30, banked): Hasse–Witt invariant census of the
+  Gram quadratic space (second coloring, thread 3 — is it also
+  Dickson-structured?); compute the tower's motive once from the
+  Dickson-pullback datum instead of curve-by-curve newform hunting (would
+  make conductors a priori); Sato–Tate moment statistics as a cheap
+  decision between split \(\mathrm{GL}_2\)-type and simple
+  \(\mathrm{USp}(4)\) for the \(m=8\) surfaces; extremal/maximal-curve
+  criterion over \(\mathbf F_{p^2}\) (bridge back to codes); the
+  reconstruction/marking threads carry the audit's actual novelty and have
+  no work yet — spine of any paper; possible \(\mathbf Z[\zeta_6]\)-linear
+  reformulation unifying \(I=\Phi_6\), the period-6 trace, mod-6 genus
+  classes, and the anharmonic \(S_3\); for odd \(d\) study the Pfaffian
+  residual \(\pi\) itself (value and zero locus), not just \(\Phi=\pi^2\).
 - tt-pass frontier (2026-08-30): the tower \(\{C_m\}\) is the pullback of
   one fixed curve along the Dickson map, which should *derive* the
   \(2m\bmod(p-1)\) stratification and likely absorbs \((47,30)\); the
