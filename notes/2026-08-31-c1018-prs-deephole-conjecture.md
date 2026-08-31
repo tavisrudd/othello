@@ -573,22 +573,49 @@ Two consequences.
    2026-08-30 reading — "redundancy ten is the first redundancy tested where the
    mechanism is simply absent" — is **wrong**.  The mechanism was there; the
    search was looking at the wrong stratum.
-2. **The carrier family is larger than Conjecture D′ says.**  Writing a stratum
-   point as `X^a Y^b G(X^m,Y^m)` with `a + b + m(M-1) = d`, 2026-08-30 §5.3f
-   argued that deepness forces `a = b = 1`, hence `m | r-3`.  This orbit has
-   `(a,b) = (0,1)` and `m = 4 | r-2 = 8`.  So there are (at least) two carrier
-   families:
+2. **The carrier family is larger than Conjecture D′ says, and its exponents
+   are not what D′ assumed.**  Writing a sparsest representative as
+   `X^a Y^b G(X^g, Y^g)` with `a + b + g·deg G = d`, where `g` is the gap
+   between consecutive support indices, 2026-08-30 §5.3f argued that deepness
+   forces `a = b = 1` and hence `g | r-3`.  This orbit has `(a,b) = (0,1)` and
+   `g = 8`.  Collecting every carrier orbit whose sparsest representative is
+   known:
 
-   | `(a,b)` | divisibility | fires at |
-   |---|---|---|
-   | `(1,1)` | `m \| r-3` | `(6,3)@7`, `(8,5)@11`, `(9,3)@13`, `(11,4)@13`, `(12,3)@13` |
-   | `(0,1)` and its mirror `(1,0)` | `m \| r-2` | `(10,4)@13` |
+   | `(r,q)` | sparsest support | `g` | `(a,b)` | `deg G` | stabilizer | `gcd(g, q-1)` |
+   |---|---|---:|---|---:|---|---:|
+   | `(6,7)`   | `{1,4}`     | 3 | `(1,1)` | 1 | `S_3` | 3 |
+   | `(8,11)`  | `{1,6}`     | 5 | `(1,1)` | 1 | `C_5` | 5 |
+   | `(9,13)`  | `{1,4,7}`   | 3 | `(1,1)` | 2 | `S_3` | 3 |
+   | `(11,13)` | `{1,5,9}`   | 4 | `(1,1)` | 2 | `C_4` | 4 |
+   | `(10,13)` | `{0,8}`     | 8 | `(0,1)` | 1 | `C_4` | 4 |
+   | `(15,17)` | `{1,9}`     | 8 | `(1,5)` | 1 | — | 8 |
 
-   Both obey D′'s field law: `q = 13` is the least prime power with `4 | q-1`
-   and `q ≥ r-1 = 9`.  And Conjecture E′'s cut holds verbatim: `c = s_8/s_0`
-   takes the values `{7,8,11}`, which is exactly the class `C_3` of
-   `F_13^*/(F_13^*)^4` — the one class that the two `(11,13,m=4)` orbits did
-   *not* use.
+   Two things survive across the whole table and one does not.  What survives:
+   every sparsest representative has **two or three** nonzero coordinates, so
+   `deg G ≤ 2`; and **`min(a,b) ≤ 1`**, i.e. at least one of the two coordinate
+   points `0, ∞` is a simple root of `s`.  What does not survive: any rule
+   fixing `(a,b)`, and with it D′'s divisibility `g | r-3` — the last two rows
+   have `g | r-2` and `g | r-1` respectively.  The stabilizer is `μ_{gcd(g,q-1)}`
+   throughout, dihedrally extended only at `(6,7)` and `(9,13)`.
+
+   D′'s **field** law does survive every row: `q = 13` is the least prime power
+   with `4 | q-1` and `q ≥ 9`, and `q = 17` the least with `8 | q-1` and
+   `q ≥ 14`.  So does Conjecture E′'s cut: at `(10,13)`, `c = s_8/s_0` takes the
+   values `{7,8,11}`, which is exactly the class `C_3` of `F_13^*/(F_13^*)^4` —
+   the one class that neither `(11,13)` orbit used.
+
+3. **Two further carrier cells, found the same way.**  Sweeping `r = 15`, whose
+   carriers were never examined: the `g = 8` stratum fires at `q = 17` with 4
+   exceptional points (row six above), while `g = 12` at `q = 25` and `g = 6` at
+   `q = 19` are clean.  And `(15,16)` turns up a **new instance of Conjecture
+   A's exception clause**: its stratum contains 3 points of weight
+   `15 = r`, so `ρ = r` there.  That is exactly the Seroussi–Roth even-field
+   case, `q = 16` even with `k = q+1-r = 2`; before this the campaign had seen
+   it only at `(3, q even)` and `(7,8)`.  Conjecture A survives, now with an
+   instance at a redundancy five times higher than any previously tested.
+   (The sweep's own `deep` column pins deepness to `w = d`, so for that one cell
+   its 2,860 count is the weight-14 population and not the deep set; the
+   `stratum_max_weight` field is what flags the cell.)
 
 The taxonomy correction is the point.  A census at `(10,13)` would have found
 this orbit too, but `|PG(9,13)| = 1.15·10^{10}` and it was never run before this
@@ -664,26 +691,26 @@ contained in `M^max_{r,p}`.
 
 ### Conjecture PRS-2 (cyclic-pullback carriers).
 
-The exceptional deep holes whose stabilizer contains a split-torus element are
-the `PGL_2(q)`-orbits of syndromes
+Every exceptional deep hole whose stabilizer contains a split-torus element of
+order `ℓ` lies, up to `PGL_2(q)`, on the stratum `{ i ≡ a (mod ℓ) }` — that much
+is the **proved** fixed-locus lemma of §5d, not a conjecture.  What is
+conjectural is the shape and the field:
 
-```text
-X^a Y^b · G(X^m, Y^m),     a, b ∈ {0,1},   a + b + m·deg G = d = r-1,
-```
+> A sparsest representative of such an orbit is
+> `X^a Y^b · G(X^g, Y^g)` with `deg G ≤ 2` and `min(a,b) ≤ 1`, where `g` is the
+> support gap; the stabilizer is `μ_{gcd(g,q-1)}`, dihedrally doubled exactly
+> when `G` is self-reciprocal up to the torus.  For each `(r, g)` such orbits
+> occur at **at most one field**, and if at any, then at the least prime power
+> `q` with `gcd(g,q-1) > 1` admitting the shape and `q ≥ r-1`.
 
-with `m | q-1`.  The two admissible shapes are `(a,b) = (1,1)`, forcing
-`m | r-3`, and `(a,b) = (0,1)` with its mirror `(1,0)`, forcing `m | r-2`.  For
-each triple `(r, m, (a,b))` they occur at **at most one field**, and if at any,
-then at the least prime power `q` with `m | q-1` and `q ≥ r-1`.  The orbit's
-stabilizer is `Stab_N(s)` for `N` the dihedral normaliser of the torus, always
-containing `μ_m` and equal to it unless `G` is self-reciprocal up to the torus,
-in which case it is dihedral of order `2m`.
-
-This is 2026-08-30's Conjecture D′ with three corrections, all forced by data
+This is 2026-08-30's Conjecture D′ with four corrections, all forced by data
 from this wave: the escape clause promoted from a footnote to part of the
 statement (four empty pairs are now known, not one — §5b′, §5a); the stabilizer
-clause corrected, since `m = 5` is odd and cyclic (§5c); and the `(0,1)` shape
-added, which D′ excluded and which is what fires at `(10,13)` (§5f).
+clause corrected, since `m = 5` is odd and cyclic (§5c); the exponent condition
+weakened from `a = b = 1` to `min(a,b) ≤ 1`, since `(10,13)` has `(0,1)` and
+`(15,17)` has `(1,5)` (§5f); and, following from that, the divisibility
+`m | r-3` dropped, since the same two cells have `g | r-2` and `g | r-1`.  The
+**field** law is the part that has survived every test.
 
 *Falsifier.*  A carrier firing at a field other than the least admissible one, a
 stabilizer not of the stated form, or a split-torus-stabilized exceptional orbit
