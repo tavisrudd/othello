@@ -22,7 +22,7 @@ is the operational layer a paying user needs and the current tooling lacks.
 4. A **checkable certificate** plus a `verify` mode whose cost is measured
    against production cost.
 5. An **up-front feasibility estimate** obtained by sampling shards of the
-   target radius, so a job can be declined honestly before hours are spent.
+   target radius, so a job can be declined on evidence before hours are spent.
 
 The whole prototype is one file, `ergodis-private/src/bin/certdist.rs`. Nothing
 under `papers/complete-repair-ports/ergodis/` is modified.
@@ -139,7 +139,7 @@ A complete cover that *does* find a witness at weight `w` pins the distance
 exactly, because everything lighter was enumerated; that case collapses the
 bracket to `[w, w]`.
 
-Partial covers are honest: an interrupted job keeps the lower bound of the
+Partial covers claim nothing they cannot support: an interrupted job keeps the lower bound of the
 deepest *complete* level and the best witness found so far, and `status` prints
 both plus the shard progress.
 
@@ -282,7 +282,7 @@ the thing interface request 2 would remove.
 
 ### 4.3 What resumability costs: a same-host head-to-head
 
-The honest question is not how a sharded run compares to a number in an old
+The question that matters is not how a sharded run compares to a number in an old
 report, it is what a customer pays for resumability. Both arms below ran back to
 back on the same host, at the same thread count, from the same compiled filter,
 against the current core.
@@ -359,7 +359,7 @@ one per kill, since shards run sequentially. Arm B spent 142 s of wall against
 arm A's 127 s, so two hard kills cost 12% here; with a work queue running shards
 concurrently the loss would be one shard per killed worker.
 
-`certdist status` on the interrupted job reports the partial state honestly:
+`certdist status` on the interrupted job reports the partial state as partial:
 
 ```
 radius  16           4 / 32 shards, 249179535 candidates [PARTIAL]
@@ -618,7 +618,7 @@ in descending order of what they would be worth.
 | `ergodis-private/src/bin/certdist.rs` | the whole prototype |
 | `ergodis-private/evidence/certdist/certificates/*-x-certificate.json`, `*-z-certificate.json` | the twelve per-side certificates, one per input, each carrying the code identity, parity gate, all 32 shard records, the upper-bound records and the bracket |
 | `ergodis-private/evidence/certdist/certificates/*-combined.json` | the six code-level brackets |
-| `ergodis-private/evidence/certdist/scripts/` | the exact driver scripts for the acceptance sweep, the resume demonstration, the verification measurement, the certificate regeneration, and the summary tables, plus the out-of-tree build shim |
+| `ergodis-private/evidence/certdist/scripts/` | the exact driver scripts for the acceptance sweep, the resume demonstration, the verification measurement, the sharded-versus-one-shot head-to-head, the certificate regeneration, and the summary tables, plus the out-of-tree build shim |
 | `ergodis-private/evidence/certdist/SHA256SUMS.certificates` | hashes of the eighteen certificates; `sha256sum -c` passes in that directory |
 | `ergodis-private/evidence/certdist/SHA256SUMS.scripts` | hashes of the driver scripts |
 | `ergodis-private/evidence/certdist/SHA256SUMS.binaries` | hashes of the three binaries used, with their cache paths |
@@ -757,7 +757,7 @@ byte-identical certificate. The upper-bound pass is competitive on this family â
 it closed ten of twelve sides at the true side distance in 30 to 56 seconds
 apiece â€” but this family is one where the randomized bound was already known to
 be tight, so it is not evidence that the decoder is strong on hard instances.
-The 756-coordinate case remains the honest test of that and was not attempted
+The 756-coordinate case remains the real test of that and was not attempted
 here.
 
 The verification story is genuinely asymmetric and should be sold that way: the
