@@ -72,7 +72,8 @@ pub use applications::{
 };
 pub use automata::{ExplicitMataDfa, ExplicitMataError};
 pub use character_sum::{
-    CharacterCensus, CharacterSumError, PolynomialDegeneracy, PrimeQuadraticCharacter,
+    CharacterCensus, CharacterSumError, CyclotomicCensus, PolynomialDegeneracy,
+    PrimeMultiplicativeCharacter, PrimeQuadraticCharacter, RootOfUnityCensus,
 };
 pub use coherent_closure::{
     compile_coherent_closure, verify_coherent_closure, CoherentClosure, CoherentClosureError,

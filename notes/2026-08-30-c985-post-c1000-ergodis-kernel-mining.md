@@ -29,7 +29,7 @@ task-specific feature extractors remain private adapters.
 | C1008/C1009/C1011 | controller proposes and audits finite predicates | CLI evolution retained/transported too much and synthesized Boolean leaves did not type-check | landed streaming evolution API, bulk daemon evaluation, Boolean VM constants, synthesis regression |
 | C1011 | adaptive/nonadaptive query design over a finite incidence system | ceiling could show ambiguity but could not construct query strategies | landed flat adaptive/nonadaptive compilers, verifiers, and pair-query lower bound |
 | C1005/C1012 | coherent closure and fusion-primitivity | spectral sufficient condition was covered; Hadamard/common-neighbour closure was not | landed exact transpose/intersection-count coherent refinement |
-| C1013/C1014 | higher characters, Jacobi sums, cyclotomic cosets, curve-supported sums | quadratic characters only | high-value algebraic extension after coherent closure |
+| C1013/C1014 | higher characters, Jacobi sums, cyclotomic cosets, curve-supported sums | quadratic characters only | landed exact higher-character, coset, Jacobi, and cyclotomic censuses; curve support remains |
 | C1015 | Hamilton-pair parity and shared-two-label closure | generic incidence/group kernels exist, but no typed linear-constraint closure engine | retain as a private fixture for a future interpolation/closure kernel |
 
 ## Landed tranche
@@ -106,25 +106,32 @@ successive-halving scorecards remain open.
 
 ## Highest-EV remaining kernels
 
-1. **Higher multiplicative-character layer.** Compile a cyclic log table once,
-   support coset-restricted censuses and exact Jacobi sums, and retain
-   positive/zero/class counts as witnesses. This directly absorbs the
-   C1014 cyclotomic-number work.
-2. **Finite polynomial algebra.** Extend the landed derivative/GCD preflight
+1. **Finite polynomial algebra.** Extend the landed derivative/GCD preflight
    to squarefree factor degrees, reduction modulo `x^p-x`, and recurrence
    compilation. This prevents callers from using symbolic systems merely to
    shape a character-sum request.
-3. **Typed linear-constraint closure.** Compile small incidence/interpolation
+2. **Typed linear-constraint closure.** Compile small incidence/interpolation
    identities and propagate equality, parity, and pencil-membership closure.
    C1015 is a strong private fixture; public semantics should be generic
    finite-module constraints.
-4. **Compact coherent transcripts.** The deterministic final-color replay is
+3. **Compact coherent transcripts.** The deterministic final-color replay is
    exact, but large public certificates should stream refinement splits or
    intersection tables rather than duplicate all compiler work.
-5. **General exact query optimization.** The pair-query triple-factor case is
+4. **General exact query optimization.** The pair-query triple-factor case is
    theorem-optimal and the generic constructors always emit exact replayable
    strategies, but arbitrary-mask minimum nonadaptive selection and
    minimum-depth adaptive trees remain bounded exact-search backends.
+
+The higher multiplicative-character layer is now landed. It compiles a
+primitive-root class table for any order dividing `p-1`, emits exact
+root-of-unity coefficient witnesses for polynomial and Jacobi sums, supports
+input-coset-restricted censuses, and returns the complete cyclotomic-number
+matrix. The table uses one, two, or four bytes per field element according to
+the character order rather than retaining full discrete logs. At order two
+its coefficient difference is regression-checked against
+the pre-existing packed quadratic-character implementation. This makes the
+classical quadratic path a specialization while preserving its denser one-bit
+representation and faster dedicated tally loop.
 
 ## Acceptance and non-goals
 
