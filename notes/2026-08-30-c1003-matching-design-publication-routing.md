@@ -20,9 +20,12 @@ The publication unit is:
    D(G)=\sum_v\deg(v)^2-2|E(G)|-6T(G)
        =2\#\{\hbox{induced }P_3\};
    \]
-3. the exact local-concurrence average; and
+3. the exact local-concurrence average;
 4. the three-block human exclusion of both ten-point abstract classes in odd
-   characteristic.
+   characteristic; and
+5. the all-field rank-three classification of the four nine-point abstract
+   classes, including a sharp counterexample to sufficiency of the six-local
+   test.
 
 Use this packet to replace only the odd-characteristic elimination paragraph
 in Theorem `thm:match-ten-realization`. Retain the characteristic-two exact
@@ -33,13 +36,14 @@ This is the right destination because the arcs paper already owns all three
 interfaces the result needs: the equality-to-matching-design transfer, the
 definition of rank-three realization, and the ten-point field classification.
 The new proof turns a trusted computer exclusion into a short geometric one
-and supplies a reusable obstruction for every size. A separate paper would
-need substantially more: an infinite-family exclusion, a sufficient
-criterion, or a genuine representation classification.
+and supplies a reusable obstruction for every size. The nine-point boundary
+classification is strong enough to publish in the appendix, but a separate
+paper would still need substantially more, such as an infinite-family
+exclusion or a structural representation theorem.
 
 ## What has actually been proved
 
-The packet has three different strengths and they should not be conflated.
+The packet has four different strengths and they should not be conflated.
 
 - **Family theorem:** for every simple
   `MATCH(k,floor(k/2),1)` design admitting a rank-three realization over an
@@ -57,6 +61,15 @@ The packet has three different strengths and they should not be conflated.
   representative by the same three blocks through one edge. Combined with
   the existing characteristic-two computation, this preserves the current
   all-field ten-point theorem.
+- **Complete nine-point consequence:** every `MATCH(9,4,1)` design completes
+  canonically to a `MATCH(10,5,1)` design. Hence the two ten-point classes
+  and their two point orbits supply exactly four nine-point classes. The two
+  regular-hyperoval deletions are rank-three realizable over `K` exactly when
+  `char(K)=2` and `K` contains `F_8`; the two nonhyperoval deletions are never
+  realizable. In odd characteristic three classes fail the six-local test,
+  while the fourth passes every six-set and is excluded by a seven-equation
+  global coordinate certificate. Thus the local condition is necessary but
+  not sufficient.
 
 Thus the new general result is a **family-level necessary obstruction**, not
 a full representation classification. The `k=10` corollary participates in
@@ -91,6 +104,8 @@ completes to a plane of order eight. The literature located in this audit did
 not state the C1002 six-local odd-characteristic obstruction, its exact
 average, the scalar induced-`P_3` certificate, or the three-block weak
 field-realizability exclusion.
+Nor did it state an arbitrary-field rank-three classification of the four
+nine-point deletion classes.
 
 The owning novelty-ledger wording should therefore be no stronger than:
 
@@ -98,7 +113,8 @@ The owning novelty-ledger wording should therefore be no stronger than:
 > was not located in the searched literature is the six-point
 > odd-characteristic obstruction for weak rank-three realizations over an
 > arbitrary field, together with its scalar certificate and the resulting
-> three-block exclusion of the two order-eight classes.
+> three-block exclusion of the two order-eight classes, or the resulting
+> all-field classification of their four nine-point deletions.
 
 Do not claim a first classification of order-eight abstract hyperovals, a
 first nonembeddability result, or a new classification of `pg(5,7,3)`. Do not
@@ -117,7 +133,55 @@ corollary. The logical order should be:
    characteristic**;
 3. a one-paragraph scalar reformulation as a remark or corollary;
 4. the exact-average lemma; and
-5. the present six/seven and ten-point results as applications.
+5. the present six/seven, nine-point, and ten-point results as applications.
+
+Put the nine-point classification immediately before the ten-point theorem.
+Its completion lemma is human proof; the count of four pointed classes is an
+external-classification input; three odd-characteristic exclusions have
+short local certificates; and the remaining odd-characteristic exclusion
+and characteristic-two classification are trusted exact computation.
+
+### Draft nine-point theorem
+
+> **Theorem (nine-point boundary).** Up to isomorphism there are four simple
+> `MATCH(9,4,1)` designs. The two obtained by deleting a point from the
+> regular order-eight abstract hyperoval admit a rank-three realization over
+> a field `K` if and only if `K` has characteristic two and contains `F_8`.
+> The other two admit no rank-three realization over any field.
+>
+> Every nine-point design completes canonically: adjoin a new vertex and, in
+> each block, pair it with the unique omitted old vertex. For a fixed old
+> edge the seven blocks through it partition the edges on the other seven
+> vertices into near-one-factors; a degree count shows that each omitted
+> vertex occurs once. The completion is therefore a `MATCH(10,5,1)` design.
+> Mathon's two ten-point classes and their two point orbits give the four
+> nine-point classes. Three representatives violate the six-local
+> obstruction. The remaining regular-hyperoval deletion passes every local
+> test, but seven concurrence equations eliminate to
+> `x_8^2(x_8-1)^2`; the projective-frame arc inequalities exclude both roots
+> in odd characteristic. In characteristic two, saturated lexicographic
+> bases leave precisely `u^3+u^2+1=0` for the two regular deletions and give
+> the unit ideal for both nonhyperoval deletions. Deleting a point from the
+> regular hyperoval over `F_8` supplies the converse.
+
+The final theorem should display the seven blocks/equations or point to a
+compact certificate table. Do not call that elimination a human proof until
+it has a direct incidence derivation.
+
+For the tracked ordering of the survivor's 126 equations, one minimal core
+found by greedy deletion has indices `30,108,100,75,56,76,64`. The underlying
+blocks are
+
+```text
+03|14|28|67   08|17|23|46   08|13|25|47   06|14|25|38
+05|12|38|67   06|15|28|47   05|17|28|34
+```
+
+using the third line-concurrence equation in every block except the fourth,
+where the fourth is used. Elimination leaves
+`x8^4-2*x8^3+x8^2`. The full unsaturated-basis lift has only denominator
+prime `2`; its 9,324-byte matrix has SHA-256
+`0d30b437a8656c008414c0951002820f8474e74efda3f843591f3257e8c4cd54`.
 
 The ten-point proof should preserve its abstract-classification and
 partial-geometry paragraphs, then replace the normalized 189-equation
@@ -211,13 +275,24 @@ compressed sketch.
   coordinate elimination.
 - The 32,768-graph C1008 census is optional audit evidence. The public
   theorem should rest on the induced-`P_3` identity.
+- Add `notes/c1003_match9_rank_three.py` (or move a publication copy into the
+  paper's checker directory after acceptance) as the exact nine-point replay.
+  It derives all twenty labelled deletions from the tracked ten-point
+  representatives, verifies canonical completion, emits all six-local
+  witnesses, checks the four characteristic-two orbit representatives,
+  verifies the odd-characteristic integral lift, and checks the seven-
+  equation elimination polynomial. Its input is the existing tracked JSON;
+  it does not silently re-enumerate the abstract classes.
 
 ### Formal annotations
 
 - Classify the six-local proposition, parity step, exact average, and
   three-block contradiction as human proof.
 - Classify Mathon's two-class completeness as an external theorem.
-- Classify the characteristic-two branch as trusted exact computation and
+- Classify the two point orbits in each ten-point class as an external input,
+  and the canonical nine-to-ten completion as human proof.
+- Classify the nine-point seven-equation core and the characteristic-two
+  branch as trusted exact computation and
   the `F_8` construction as direct finite-field verification.
 - No Lean expansion is required for publication. A future formalization
   would naturally split into graph lemmas (`D=2 induced-P3` and cluster
@@ -275,6 +350,14 @@ when a real design-generation workflow consumes it or when further local
 obstructions make the filter a reusable hierarchy. The scalar expression,
 certificate schema, and control-interface observations already recorded in
 C1008 are sufficient design notes until then.
+
+The nine-point survivor is the preferred hard-negative regression case: the
+local prefilter must accept it, while the coordinate layer must reject it in
+odd characteristic. A future control interface should expose stage-specific
+outcomes such as `locally_rejected`, `locally_admissible`, and
+`globally_inconsistent` rather than collapse every negative result to one
+status. Preserve this as a product note; it does not justify an Ergodis
+source edit here.
 
 ## Literature audit
 
@@ -369,11 +452,12 @@ above.
 
 ## `ej` + `tt` closeout
 
-The useful strengthening is conceptual rather than a larger theorem: the
+The extra-juice strengthening is now both conceptual and theorem-level. The
 paper should identify its even matching designs as abstract hyperovals and
-state exactly why its realization problem is not classical projectivity.
-That makes the new contribution easier to see and prevents an avoidable
-priority objection.
+state exactly why its realization problem is not classical projectivity; it
+can then classify all four nine-point deletions under the weaker arbitrary-
+field rank-three notion. This answers a field-realizability question that the
+classical abstract-oval classification by itself does not answer.
 
 The useful subtraction is equally important: after the human odd-
 characteristic proof lands, the 189-equation presentation should no longer
@@ -391,8 +475,15 @@ independent regression certificate.
 - **Infinite-family force — open.** The six-local test is necessary for all
   sizes, but no infinite family of abstract designs is yet excluded by it.
   This is the main mathematical gate to a standalone representation paper.
-- **Sufficiency — open and unlikely locally.** Passing every six-set does not
-  currently construct coordinates or imply global realizability.
+- **Sufficiency — settled negatively.** The regular-hyperoval deletion at the
+  distinguished point passes every six-set but is impossible in odd
+  characteristic. It is a small explicit witness that local admissibility
+  does not imply global realizability.
+- **Human form of the seven-equation certificate — open.** Exact elimination
+  gives `x_8^2(x_8-1)^2` from seven displayed concurrence equations, with an
+  integral lift whose only denominator prime is two. A synthetic derivation
+  would upgrade the remaining odd-characteristic branch from trusted
+  computation to human proof.
 - **Quantitative defect transfer — open.** One bad six-set certifies failure
   of zero defect, but no numerical lower bound on the global chord defect has
   yet been extracted from the number or type of bad six-sets.
