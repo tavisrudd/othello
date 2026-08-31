@@ -7,7 +7,12 @@
 `semantic_rank_census.rs` untouched); any core mod via one worktree under
 `~/.cache/ergodis/`; bulk output to `~/.cache/ergodis/` or `/tmp/persistent`,
 never tmpfs; crosswalk conventions — computational results only, no bridge
-inflation, negatives with exact searched domain and stop condition.
+inflation, negatives with exact searched domain and stop condition. Every
+wave MUST check `notes/2026-07-31-results-summary-snapshot.md` (the
+authoritative self-contained portfolio summary, 2026-08-29 revision) for
+repository prior art via targeted section reads, cite it by section, and
+mark anything it already settles as prior art rather than a hunt result —
+the portfolio is large and hunts must build on it, not rediscover it.
 
 **Targets** (from `notes/open-problems/plausible-bridges/README.md` bounded
 projects, ranked by Ergodis fit):
