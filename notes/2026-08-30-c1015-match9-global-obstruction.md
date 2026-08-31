@@ -342,6 +342,41 @@ This is a ([10,5,4]_3) code with weight distribution
  1+30z^4+60z^6+120z^7+20z^9+12z^{10}.
 \]
 
+There is a census-free general form of this code calculation. For (m\ge3),
+put
+
+\[
+ \mathcal C_m=\{(r_i+r_j+c)_{ij}:r_i,c\in\mathbf F_3\}.
+\]
+
+The kernel of the displayed parametrization consists exactly of
+((r_i,c)=(t,-2t)), so (\dim\mathcal C_m=m). Shifting every (r_i) by a
+common constant gives each word a unique representative with (c=0). If
+(n_0,n_1,n_2) are the multiplicities of the three values among the (r_i),
+the number of zero coordinates is
+
+\[
+ \binom{n_0}{2}+n_1n_2.
+\]
+
+Consequently the Hamming weight enumerator is
+
+\[
+ W_m(z)=\sum_{n_0+n_1+n_2=m}
+ \binom{m}{n_0,n_1,n_2}
+ z^{\binom m2-\binom{n_0}{2}-n_1n_2}.             \tag{2g}
+\]
+
+For (m\ge5), convexity in (n_0), after maximizing (n_1n_2) for fixed
+(n_0), shows that the largest zero set of a nonzero word has size
+(\binom{m-1}{2}). Hence (\mathcal C_m) has parameters
+([\binom m2,m,m-1]_3). At (m=5), (2g) gives the displayed distribution
+directly; the 243-word check is therefore regression evidence rather than a
+proof ingredient. This theorem identifies the invariant target at every
+Johnson level. It does **not** by itself show that the contracted Hamilton
+shadow of an arbitrary (K_{2m}) factorization lies in (\mathcal C_m); that is
+the substantive higher-order question.
+
 Thus (2f) packages more than the no-leaves statement. A single contracted
 five-cycle would have forbidden weight five. If (h=2), the shadow support is
 the union of the two contracted five-cycles. Two five-cycles in (K_5) meet in
@@ -406,7 +441,29 @@ exactly the three diagonal-triple packets found in the preliminary
 quadrangle calculation. The 27 cross-part Hamilton pairs supply the global
 glue that the local characteristic-two argument lacked.
 
-## Nine-point completion as a balanced-gain problem
+## Odd near-factorization completion as a balanced-gain problem
+
+The adjoint argument is not special to nine carriers. Let (n) be odd, let
+(L_1,\ldots,L_n) be carrier lines, and let
+((M_h)_{h=1}^n) be a near-one-factorization of (K_n), indexed so that
+(M_h) misses (h). If a transversal (T_h) contains the star points assigned
+by (M_h), define (P=\prod_i\ell_i) and (Q=\prod_ht_h). The argument below
+proves the following **odd near-factorization adjoint theorem**.
+
+- The assigned transversal directions admit an adjoint
+  (F=\sum_i a_iP/\ell_i), with every (a_i\ne0), exactly when their edge gain
+  is balanced.
+- Under the expected-incidence hypothesis, balance forces the (n) residual
+  points (L_h\cap T_h) to be collinear, producing the missing
+  ((n+1))-st carrier.
+
+Indeed there are (\binom n2) assigned contacts, of total length
+(2\binom n2=n(n-1)), which exhaust the complete intersection of (P) with
+the degree-((n-1)) adjoint (F). Thus (Q=cP+\ell_0F), and the residual points
+lie on (\ell_0). The first assertion is just the graph-theoretic fact that
+edge ratios are vertex ratios exactly when all cycle holonomies are trivial.
+The present nine-point calculation is an unresolved geometric instance of
+this general theorem.
 
 The deletion problem has a frame-free reduction that is substantially smaller
 than the original concurrence system. Let (L_1,\ldots,L_9) be the carrier
@@ -896,6 +953,20 @@ Manuscript language such as "new" or "to our knowledge" is not yet authorized.
 
 ## Extra-juice and Tao-style closeout
 
+The next structural level is a discrete flatness principle. Formula (2f)
+says that the additive curvature of the Hamilton shadow vanishes on every
+quadrilateral, hence the shadow is a vertex potential. The deletion criterion
+says that the multiplicative curvature of the transversal directions
+vanishes on every triangle, hence those directions are vertex ratios. These
+are the additive and multiplicative forms of the same complete-graph
+Poincaré lemma. The useful research question is therefore not merely whether
+one can check more cycles, but whether star interpolation forces a flat
+connection in a wider class of extremal incidence designs. The odd
+near-factorization adjoint theorem above is the first general theorem in that
+direction; forcing its balance from concurrence alone would solve the
+nine-point problem and explain what the order-ten character formula is a
+special case of.
+
 The decisive Tao-style simplification is the odd-half theorem: relative to a
 Hamilton cycle, every perfect matching on two odd bipartition classes must
 cross the cut, and one crossing edge already puts its transversal in the
@@ -948,6 +1019,26 @@ not needed for the order-ten theorem.
   Hamilton shadow, not only degrees zero and one: modulo three it lies in the
   ([10,5,4]) potential code (2f), whose missing weights also force the
   zero-or-three intersection law for two Hamilton partners.
+- **Global Hamilton-gap theorem — new high-value target.** Census
+  reconnaissance shows a much larger gap than no-leaves alone explains. If
+  the Hamilton-pair graph has an isolated vertex, the proved rooted spectrum
+  gives total edge count (0,12,16), or (23). Across the independent 396-class
+  census, every graph with no isolated vertex has at least 18 edges; the
+  minimum 18 is attained. Thus the first proof target is the sharp dichotomy
+  “empty or at least 12 Hamilton pairs,” and the stronger second target is
+  “no isolated factor implies at least 18.” The only graph-theoretic cases
+  below 12 after no-leaves are small-excess 2-cores on nine vertices. A proof
+  should propagate the (h=2) zero-or-three intersection law around those
+  cycles, or find the global compatibility identity between the two oriented
+  shadows of each Hamilton pair. This would turn the local ternary code into
+  a genuinely global extremal theorem and remove another conspicuous census
+  phenomenon.
+- **Potential code at all Johnson levels — algebra settled, realization
+  open.** Formula (2g) gives (\mathcal C_m) explicitly, including parameters
+  ([\binom m2,m,m-1]_3) for every (m\ge5), without enumeration. What remains
+  open is the important part: construct a canonical shadow of a
+  (K_{2m}) one-factorization whose local coverage equations force membership
+  in this code (or in the correct higher Johnson analogue).
 - **Why the Hesse exception cannot lift — settled conceptually.** Three
   affine lines force (2u_\infty) into vector planes with zero total
   intersection. This kills every characteristic except two; the existing
@@ -966,6 +1057,12 @@ not needed for the order-ten theorem.
   is to prove that the prescribed matching concurrences force balance, or to
   realize one nonunit triangle holonomy as a counterexample. Accidental extra
   incidences also require the scheme-theoretic cleanup stated above.
+- **Odd near-factorization adjoint theorem — settled generalization.** The
+  balance-to-completion implication and its AF+BG proof work for every odd
+  (n), not only (n=9): a balanced transversal realization of a
+  near-one-factorization of (K_n) has its (n) residual points on one missing
+  carrier. This separates the universal adjoint theorem from the genuinely
+  order-specific question of whether matching concurrence forces flatness.
 - **Higher affine round-robin family — open successor.** The evidence gap is
   a general parity-shadow closure/representation theorem for
   (K_{p^d+1}), beginning with the midpoint factorization above.
