@@ -362,6 +362,18 @@ parallel refiner would reopen both gates. The refreshed private registry now
 reports 59 pass, 9 open, and 34 not-applicable cells; every remaining gap is a
 retained single-thread counter row.
 
+The binary linear Gray scan now has a retained same-work algorithmic control.
+`bench_kernels` constructs one deterministic full-rank systematic binary
+`20 x 384` generator, canonicalizes it once for both variants, and compares the
+production reflected-Gray recurrence against exact binary-subset
+recomputation. Both enumerate all 1,048,575 nonzero words per repetition and
+return minimum weight 149. Across nine rotated same-core pairs of 20 scans,
+recompute/Gray is 13.542x cycles (`t=970.77`), 4.760x instructions, 11.989x
+branches, 11,803x branch misses, and 13.462x wall (`t=959.80`). Cache misses
+fall 1.126x; median RSS is 2,368 versus 2,448 KiB. Raw evidence is under
+`/home/tavis/.cache/ergodis-perf/c1017-linear/final-ab`. The registry now has
+60 pass, 8 open, and 34 not-applicable cells.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

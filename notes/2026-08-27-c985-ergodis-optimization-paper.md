@@ -130,9 +130,16 @@ as each coherent tranche lands.
    multiway engines mutate one exact quotient/worklist in dependency order and
    create no worker-written state. Those two registry cells are therefore
    correctly not applicable rather than unsupported passes. The private
-   registry now records 59 pass, 9 open, and 34 not-applicable cells. Current
-   next slice: retain a same-work counter A/B for the binary linear Gray scan,
-   the first remaining real gap.
+   binary linear-code kernel now has a retained exact algorithmic control as
+   well. On a deterministic full-rank binary `20 x 384` presentation, reflected
+   Gray updates and binary-subset recomputation both scan all 1,048,575
+   nonzero words and return minimum weight 149. Nine rotated 20-scan pairs give
+   recompute/Gray ratios of 13.542x cycles, 4.760x instructions, 11.989x
+   branches, and 13.462x wall, with exact candidate and answer parity. Raw
+   evidence is under `/home/tavis/.cache/ergodis-perf/c1017-linear/final-ab`.
+   The private registry now records 60 pass, 8 open, and 34 not-applicable
+   cells. Current next slice: retain the alignment attachment full-search
+   counter A/B.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

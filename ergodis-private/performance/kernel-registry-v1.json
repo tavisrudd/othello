@@ -25,7 +25,7 @@
       "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
       "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/linear_code.rs"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/linear_code.rs"]},
-      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is recorded yet."},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
       "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
     },

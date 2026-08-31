@@ -9,10 +9,10 @@ use ergodis::{
     schedule_repair_dag, ternary_orbit_syndrome_meet_in_middle,
     ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
-    ternary_orbit_syndrome_search_correlated, CephXorLayer, CompositionTower, ContextStrategy,
-    FiniteField, Gf4, GpuCheckpointCapacities, Matrix, OrbitOption, Prime, QcLdpcCode,
-    RankOneProbeCache, RepairTask, TowerLevel, WeightedRepairProblem, WeightedRepairWorkspace,
-    WeightedSchedulerBackend,
+    ternary_orbit_syndrome_search_correlated, CephXorLayer, CompiledBinaryLinearCode,
+    CompositionTower, ContextStrategy, FiniteField, Gf4, GpuCheckpointCapacities, Matrix,
+    OrbitOption, Prime, QcLdpcCode, RankOneProbeCache, RepairTask, TowerLevel,
+    WeightedRepairProblem, WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
 
 fn next_u32(state: &mut u64) -> u32 {
@@ -41,6 +41,86 @@ fn advance_lcg(state: u64, mut delta: u64) -> u64 {
     accumulated_multiplier
         .wrapping_mul(state)
         .wrapping_add(accumulated_increment)
+}
+
+fn linear_span_spec(variant: &str) -> Option<(&str, usize, usize, u64)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "linear-span" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let rank = fields.next()?.parse().ok()?;
+    let coordinates = fields.next()?.parse().ok()?;
+    let seed = fields.next()?.parse().ok()?;
+    fields
+        .next()
+        .is_none()
+        .then_some((backend, rank, coordinates, seed))
+}
+
+fn linear_span_fixture(
+    rank: usize,
+    coordinates: usize,
+    seed: u64,
+) -> (CompiledBinaryLinearCode, Vec<u64>, usize) {
+    assert!(rank > 0 && rank <= 63 && coordinates >= rank && coordinates <= u16::MAX as usize);
+    let mut state = seed;
+    let mut entries = Vec::with_capacity(rank * coordinates);
+    for row in 0..rank {
+        for coordinate in 0..coordinates {
+            let entry = if coordinate < rank {
+                u8::from(coordinate == row)
+            } else {
+                (next_u32(&mut state) & 1) as u8
+            };
+            entries.push(entry);
+        }
+    }
+    let matrix = Matrix::new_field::<Prime<2>>(rank, coordinates, entries).unwrap();
+    let basis = matrix.canonical_row_basis::<2>().unwrap();
+    assert_eq!(basis.rows(), rank);
+    let word_count = coordinates.div_ceil(64);
+    let mut basis_words = vec![0_u64; rank * word_count];
+    for row in 0..rank {
+        for (coordinate, &entry) in basis.row(row).iter().enumerate() {
+            if entry != 0 {
+                basis_words[row * word_count + coordinate / 64] |= 1_u64 << (coordinate % 64);
+            }
+        }
+    }
+    (
+        CompiledBinaryLinearCode::compile(&matrix).unwrap(),
+        basis_words,
+        word_count,
+    )
+}
+
+fn binary_span_recompute(
+    basis_words: &[u64],
+    rank: usize,
+    word_count: usize,
+    current: &mut [u64],
+) -> (u16, u64) {
+    let candidates = (1_u64 << rank) - 1;
+    let mut best = u16::MAX;
+    for mask in 1..=candidates {
+        current.fill(0);
+        for row in 0..rank {
+            if mask & (1_u64 << row) == 0 {
+                continue;
+            }
+            let basis = &basis_words[row * word_count..(row + 1) * word_count];
+            for (word, &toggle) in current.iter_mut().zip(basis) {
+                *word ^= toggle;
+            }
+        }
+        let weight = current
+            .iter()
+            .map(|word| word.count_ones() as u16)
+            .sum::<u16>();
+        best = best.min(weight);
+    }
+    (best, candidates)
 }
 
 fn jin_fu_outer_dual_basis() -> Matrix {
@@ -498,6 +578,33 @@ fn main() {
     let mut work = 0u64;
     let mut peak_states = 0u64;
     let mut checksum = 0u64;
+    if let Some((backend, rank, coordinates, seed)) = linear_span_spec(&variant) {
+        let (compiled, basis_words, word_count) = linear_span_fixture(rank, coordinates, seed);
+        let mut workspace = compiled.workspace();
+        let mut current = vec![0_u64; word_count];
+        for _ in 0..repetitions {
+            let (weight, candidates) = match backend {
+                "gray" => {
+                    let summary = compiled.minimum_nonzero_weight_scan(&mut workspace);
+                    (
+                        summary.weight.expect("positive-rank fixture has a word"),
+                        summary.candidates,
+                    )
+                }
+                "recompute" => binary_span_recompute(&basis_words, rank, word_count, &mut current),
+                _ => panic!("unknown linear-span backend"),
+            };
+            work += candidates;
+            checksum = checksum.wrapping_add(u64::from(weight));
+            black_box((weight, candidates));
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
     if let Some((application, parameters)) = application_spec(&variant) {
         for _ in 0..repetitions {
             match (application, parameters.as_slice()) {
