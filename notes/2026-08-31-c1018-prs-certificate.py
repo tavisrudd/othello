@@ -72,9 +72,49 @@ def digest(path):
     return hashlib.sha256(raw).hexdigest(), len(raw)
 
 
+FIX_FIELDS = [
+    "driver",
+    "mode",
+    "q",
+    "p",
+    "h",
+    "defining_poly",
+    "n",
+    "k",
+    "r",
+    "d",
+    "swept_points",
+    "deep_in_fixed_locus",
+    "exceptional_in_fixed_locus",
+]
+
+
 def fold(path):
     data = json.load(open(path))
-    stratum = data.get("mode") == "stratum"
+    mode = data.get("mode", "census")
+    if mode == "fix_sweep":
+        rec = {key: data[key] for key in FIX_FIELDS if key in data}
+        rec["mode"] = "fix_sweep"
+        rec["loci"] = sorted(
+            [
+                loc["order"],
+                loc["kind"],
+                loc["eigenvalue"],
+                loc["dim"],
+                loc["points"],
+                loc["deep"],
+                loc["exceptional"],
+            ]
+            for loc in data["loci"]
+            if loc["deep"] or loc["exceptional"]
+        )
+        rec["exceptional_examples"] = sorted(
+            pt for loc in data["loci"] for pt in loc.get("examples", [])
+        )
+        sha, size = digest(path)
+        rec["source"] = {"name": os.path.basename(path), "sha256": sha, "bytes": size}
+        return rec
+    stratum = mode == "stratum"
     fields = STRATUM_FIELDS if stratum else CENSUS_FIELDS
     rec = {key: data[key] for key in fields if key in data}
     rec["mode"] = "stratum" if stratum else "census"
