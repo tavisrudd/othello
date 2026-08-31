@@ -48,6 +48,10 @@ as each coherent tranche lands.
    counter/profile a larger orbit-closure wave.
    Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
+   The smaller linear-code gap is also closed: a compiled binary row-space
+   enumerator uses one-row Gray-code updates plus packed POPCNT, has a measured
+   zero-allocation scan gate, and replaces the C1018 transversal driver's
+   materialized `2^k` span when computing minimum nonzero check weight.
 4. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
    exact replay/parity, zero-allocation, bounded-memory, and deterministic
    parallel evidence gates.

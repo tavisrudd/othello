@@ -24,6 +24,7 @@ use std::fs;
 use std::path::PathBuf;
 
 use clap::Parser;
+use ergodis::{CompiledBinaryLinearCode, Matrix};
 
 type Word = u64;
 
@@ -251,7 +252,13 @@ fn parity_probe(name: &str, n: usize, modulus: i128) -> Probe {
         name: name.to_string(),
         modulus,
         coeff: (0..n)
-            .map(|j| if (j as u32).count_ones() % 2 == 0 { 1 } else { -1 })
+            .map(|j| {
+                if (j as u32).count_ones() % 2 == 0 {
+                    1
+                } else {
+                    -1
+                }
+            })
             .collect(),
     }
 }
@@ -474,10 +481,7 @@ fn subgroup_invariants(rows: &[Vec<i128>], m: usize, n_mod: i128) -> Vec<i128> {
     }
     let (diag, _) = smith_normal_form(&mat, m);
     assert_eq!(diag.len(), m, "expected full rank after adjoining N*I");
-    diag.iter()
-        .map(|e| n_mod / e)
-        .filter(|f| *f > 1)
-        .collect()
+    diag.iter().map(|e| n_mod / e).filter(|f| *f > 1).collect()
 }
 
 struct Generator {
@@ -669,7 +673,9 @@ fn analyse(code: &Code) -> Analysis {
             continue;
         }
         let scale = modulus / d;
-        let coeff: Vec<i128> = (0..n).map(|j| (vmat[j][i] * scale).rem_euclid(modulus)).collect();
+        let coeff: Vec<i128> = (0..n)
+            .map(|j| (vmat[j][i] * scale).rem_euclid(modulus))
+            .collect();
         let logical: Vec<i128> = reps
             .iter()
             .map(|&v| {
@@ -681,7 +687,10 @@ fn analyse(code: &Code) -> Analysis {
             })
             .collect();
         let base = logical[0];
-        let logical: Vec<i128> = logical.iter().map(|x| (x - base).rem_euclid(modulus)).collect();
+        let logical: Vec<i128> = logical
+            .iter()
+            .map(|x| (x - base).rem_euclid(modulus))
+            .collect();
         let level = multilinear_level(&logical, k, modulus);
         let name = name_gate(&logical, k, modulus, level);
         generators.push(Generator {
@@ -697,7 +706,10 @@ fn analyse(code: &Code) -> Analysis {
     let mut torus_logically_trivial = true;
     for i in rank..n {
         for &v in &reps {
-            let s: i128 = (0..n).filter(|&j| v >> j & 1 == 1).map(|j| vmat[j][i]).sum();
+            let s: i128 = (0..n)
+                .filter(|&j| v >> j & 1 == 1)
+                .map(|j| vmat[j][i])
+                .sum();
             let s0: i128 = 0; // reps[0] = 0
             if s - s0 != 0 {
                 torus_logically_trivial = false;
@@ -732,11 +744,7 @@ fn analyse(code: &Code) -> Analysis {
 /// Membership test and logical readout for one named physical gate.
 fn probe_report(an: &Analysis, p: &Probe) -> String {
     for row in &an.rows {
-        let s: i128 = row
-            .iter()
-            .zip(p.coeff.iter())
-            .map(|(r, c)| r * c)
-            .sum();
+        let s: i128 = row.iter().zip(p.coeff.iter()).map(|(r, c)| r * c).sum();
         if s.rem_euclid(p.modulus) != 0 {
             return format!("{}: NOT code-preserving", p.name);
         }
@@ -770,7 +778,12 @@ fn probe_report(an: &Analysis, p: &Probe) -> String {
 fn supports(basis: &[Word], n: usize) -> Vec<Vec<u16>> {
     basis
         .iter()
-        .map(|&w| (0..n).filter(|&j| w >> j & 1 == 1).map(|j| j as u16).collect())
+        .map(|&w| {
+            (0..n)
+                .filter(|&j| w >> j & 1 == 1)
+                .map(|j| j as u16)
+                .collect()
+        })
         .collect()
 }
 
@@ -787,10 +800,7 @@ fn write_distance_inputs(code: &Code, dir: &PathBuf) -> std::io::Result<()> {
     let logical_z = complete(&b, &aperp, n);
     let anchors: Vec<u16> = (0..n as u16).collect();
     let slug = code.label.replace(['[', ']', ',', ' '], "_");
-    for (tag, checks, logicals) in [
-        ("dZ", &a, &logical_x),
-        ("dX", &b, &logical_z),
-    ] {
+    for (tag, checks, logicals) in [("dZ", &a, &logical_x), ("dX", &b, &logical_z)] {
         let problem = serde_json::json!({
             "label": format!("c1018-{slug}-{tag}"),
             "coordinate_count": n,
@@ -843,15 +853,18 @@ fn main() -> std::io::Result<()> {
         // Exact lower bound on every X-type check weight: the minimum nonzero
         // weight of A. Enumerable because dim(A) is small for this catalogue.
         {
-            let mut a = code.a.clone();
-            rref(&mut a, code.n);
-            let min_x = if a.len() <= 20 {
-                span(&a)
-                    .into_iter()
-                    .filter(|&w| w != 0)
-                    .map(|w| w.count_ones())
-                    .min()
-                    .unwrap_or(0)
+            let min_x = if code.a.len() <= 20 {
+                let mut generator = Vec::with_capacity(code.a.len() * code.n);
+                for &word in &code.a {
+                    generator.extend((0..code.n).map(|coordinate| (word >> coordinate & 1) as u8));
+                }
+                let generator = Matrix::new::<2>(code.a.len(), code.n, generator)
+                    .expect("catalogued binary generator is valid");
+                CompiledBinaryLinearCode::compile(&generator)
+                    .expect("catalogued code rank fits the exact enumerator")
+                    .minimum_nonzero_weight()
+                    .weight
+                    .map_or(0, u32::from)
             } else {
                 0
             };
@@ -888,27 +901,21 @@ fn main() -> std::io::Result<()> {
         );
         for g in &an.generators {
             println!("  gen order {}: {}", g.order, g.name);
-            let phases: Vec<String> = g
-                .coeff
-                .iter()
-                .map(|c| format!("{}", c))
-                .collect();
+            let phases: Vec<String> = g.coeff.iter().map(|c| format!("{}", c)).collect();
             println!(
                 "      theta_j = 2pi/{} * [{}]",
                 an.modulus,
                 phases.join(",")
             );
             if cli.verbose_logical {
-                println!("      logical phase table (units 2pi/{}): {:?}", an.modulus, g.logical);
+                println!(
+                    "      logical phase table (units 2pi/{}): {:?}",
+                    an.modulus, g.logical
+                );
             }
             let _ = g.level;
         }
-        let max_level = an
-            .generators
-            .iter()
-            .map(|g| g.level)
-            .max()
-            .unwrap_or(0);
+        let max_level = an.generators.iter().map(|g| g.level).max().unwrap_or(0);
         println!(
             "  maximum induced logical Clifford-hierarchy level: {}",
             if max_level == usize::MAX {

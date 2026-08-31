@@ -94,6 +94,7 @@ The main library surfaces are:
 | scheduler functions and workspaces                    | capacitated and coefficient-weighted simultaneous recovery      |
 | span, orbit, incidence, and projective modules        | compiled finite-field and symmetry-reduced search               |
 | `SmallField`, `Matrix::null_space_*`                  | runtime GF(p^h) arithmetic and reusable kernel computation       |
+| `CompiledBinaryLinearCode`                           | exact minimum nonzero weight for small-rank binary row spaces    |
 | binary commutant and invariant-split compiler         | verified module blocks beyond coordinate-orbit reduction         |
 | `CompiledCssDistance`                                 | exact bounded CSS distance from connected-support elimination    |
 | application types and functions                       | worked storage, sparse-code, and dependent-task models          |

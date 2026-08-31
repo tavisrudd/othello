@@ -29,6 +29,7 @@ pub mod hall;
 pub mod incidence;
 pub mod integer_moments;
 pub mod interface;
+pub mod linear_code;
 pub mod matrix;
 pub mod modular_power;
 pub mod multiset;
@@ -146,6 +147,10 @@ pub use interface::{
     lift_class_witnesses, present_finite_interface, present_witnessed_pareto_interface,
     FiniteInterfaceAdapter, FiniteInterfaceWitness, InterfaceCompileError, ParetoInterfaceError,
     VerifiedParetoWitnesses, WitnessedParetoPresentation,
+};
+pub use linear_code::{
+    BinaryLinearCodeError, BinaryLinearCodeWorkspace, BinaryLinearWeightResult,
+    BinaryLinearWeightSummary, CompiledBinaryLinearCode,
 };
 pub use matrix::{Matrix, MatrixError};
 pub use modular_power::{

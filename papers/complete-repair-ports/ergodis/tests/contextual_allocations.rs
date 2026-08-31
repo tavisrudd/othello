@@ -5,11 +5,11 @@ use ergodis::observational::{
 use ergodis::{
     compile_alignment_attachment, compile_binary_commutant,
     compile_verified_explicit_binary_support, search_alignment_attachment,
-    AlignmentSearchWorkspace, BinarySupportCandidate, CanonicalContextBasis, CompiledCssDistance,
-    CostTable, CyclicOrbitLocks, DenseSelector, ExplicitBinarySupportProblem,
-    FinitePermutationAction, Gf4, Matrix, PackedBinaryAction, PackedBinaryLinearMap, Prime,
-    PrimePolynomialRecurrence, PrimeQuadraticCharacter, RankBoundedContextCache,
-    RankOneProbeCache, ResidualHittingWorkspace, SparseSelector,
+    AlignmentSearchWorkspace, BinarySupportCandidate, CanonicalContextBasis,
+    CompiledBinaryLinearCode, CompiledCssDistance, CostTable, CyclicOrbitLocks, DenseSelector,
+    ExplicitBinarySupportProblem, FinitePermutationAction, Gf4, Matrix, PackedBinaryAction,
+    PackedBinaryLinearMap, Prime, PrimePolynomialRecurrence, PrimeQuadraticCharacter,
+    RankBoundedContextCache, RankOneProbeCache, ResidualHittingWorkspace, SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
@@ -111,6 +111,27 @@ fn cyclic_orbit_lock_census_allocates_nothing_after_compilation() {
         checksum
     });
     assert_eq!(checksum, 30_000);
+    assert_eq!(allocations, 0);
+}
+
+#[test]
+fn binary_linear_weight_scan_allocates_nothing_after_compilation() {
+    let generator = Matrix::new::<2>(
+        3,
+        8,
+        vec![
+            1, 1, 1, 1, 0, 0, 0, 0, //
+            0, 0, 1, 1, 1, 1, 0, 0, //
+            0, 0, 0, 0, 1, 1, 1, 1,
+        ],
+    )
+    .unwrap();
+    let compiled = CompiledBinaryLinearCode::compile(&generator).unwrap();
+    let mut workspace = compiled.workspace();
+    let (summary, allocations) =
+        tracked_allocations(|| compiled.minimum_nonzero_weight_scan(&mut workspace));
+    assert_eq!(summary.weight, Some(4));
+    assert_eq!(summary.candidates, 7);
     assert_eq!(allocations, 0);
 }
 
