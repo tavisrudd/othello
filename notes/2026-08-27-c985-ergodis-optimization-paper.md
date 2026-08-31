@@ -160,8 +160,19 @@ as each coherent tranche lands.
    faster, identifying a genuine representation crossover and a later hybrid
    API opportunity. Raw evidence is under
    `/home/tavis/.cache/ergodis-perf/c1017-hall/final-ab`. The private registry
-   now records 63 pass, 5 open, and 34 not-applicable cells. Current next
-   slice: retain the integer-moment enumeration counter A/B.
+   now records 63 pass, 5 open, and 34 not-applicable cells. The next two
+   theorem kernels now have retained exact controls as well. On 1,000 solves
+   of the degree-12 C1000-derived spectrum instance, convex moment envelopes
+   preserve all 68 solutions and the exact checksum while beating flat
+   iterative nondecreasing enumeration by 472.620x cycles (`t=2611.87`),
+   384.695x instructions, and 477.223x wall (`t=960.83`). On 65,521,000 exact
+   field points, a precompiled finite-difference character recurrence preserves
+   the Horner census checksum while improving cycles 3.502x (`t=380.69`),
+   instructions 1.117x, and wall 3.479x (`t=307.39`). Median RSS is neutral in
+   both controls. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-moment-character/final-ab`. The
+   private registry now records 65 pass, 3 open, and 34 not-applicable cells.
+   Current next slice: retain the successive-selector counter A/B.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

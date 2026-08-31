@@ -135,7 +135,7 @@
       "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/integer_moments.rs"]},
       "layout": {"status": "na", "reason": "The iterative enumerator stores its depth machine in fixed typed arrays and has no frame or record object."},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/integer_moments.rs"]},
-      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is registered."},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
       "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
     },
@@ -145,7 +145,7 @@
       "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/tests/contextual_allocations.rs"]},
       "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/character_sum.rs"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/character_sum.rs"]},
-      "single_thread_counters": {"status": "open", "reason": "No retained same-work perf-counter A/B is registered."},
+      "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "parallel_counters": {"status": "na", "reason": "The kernel is deliberately single-threaded."},
       "contention": {"status": "na", "reason": "The kernel is deliberately single-threaded."}
     },

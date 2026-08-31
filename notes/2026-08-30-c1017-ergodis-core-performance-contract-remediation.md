@@ -416,6 +416,26 @@ than claiming universal bitmap superiority. Raw evidence is under
 `/home/tavis/.cache/ergodis-perf/c1017-hall/final-ab`. The registry now has 63
 pass, 5 open, and 34 not-applicable cells.
 
+The integer-moment and character-sum rows now have retained theorem-to-baseline
+controls. The moment benchmark compares the production exact convex
+sum/square-sum envelopes with the same iterative nondecreasing enumeration
+without those envelopes. Both solve the C1000-derived degree-12 instance 1,000
+times, find the same 68 solutions, and return the same solution checksum. Nine
+rotated pairs give flat/envelope ratios of 472.620x cycles (`t=2611.87`),
+384.695x instructions, 347.564x branches, 438.790x branch misses, and 477.223x
+wall (`t=960.83`), with 2,332 versus 2,336 KiB median RSS. The character-sum
+control compares exact Horner evaluation with a precompiled finite-difference
+recurrence over all 65,521 points for the same deterministic degree-12
+polynomial. Both arms process 65,521,000 points and return the same census
+checksum. Horner/recurrence is 3.502x cycles (`t=380.69`), 1.117x
+instructions, 2.599x branches, 1.232x branch misses, and 3.479x wall
+(`t=307.39`), with 2,376 versus 2,360 KiB median RSS. These measurements
+separate theorem-driven search-space reduction from cheaper equivalent
+evaluation rather than conflating either with setup. Raw evidence and the
+retained binary hash are under
+`/home/tavis/.cache/ergodis-perf/c1017-moment-character/final-ab`. The registry
+now has 65 pass, 3 open, and 34 not-applicable cells.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

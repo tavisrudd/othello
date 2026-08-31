@@ -6,13 +6,14 @@ use ergodis::{
     azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
     ceph_xor_repair_supports_compressed, certify_rank_one_transfer_by_generators_field,
     compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
-    gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair,
-    schedule_repair_dag, solve_hall, ternary_orbit_syndrome_meet_in_middle,
-    ternary_orbit_syndrome_meet_in_middle_count_split,
+    enumerate_integer_moments, gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery,
+    minimum_node_span_repair, schedule_repair_dag, solve_hall,
+    ternary_orbit_syndrome_meet_in_middle, ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
     ternary_orbit_syndrome_search_correlated, CephXorLayer, CompiledBinaryLinearCode,
     CompositionTower, ContextStrategy, DenseHallGraph, FiniteField, Gf4, GpuCheckpointCapacities,
-    HallWorkspace, Matrix, OrbitOption, Prime, QcLdpcCode, RankOneProbeCache, RepairTask,
+    HallWorkspace, IntegerMomentProblem, IntegerMomentWorkspace, Matrix, OrbitOption, Prime,
+    PrimePolynomialRecurrence, PrimeQuadraticCharacter, QcLdpcCode, RankOneProbeCache, RepairTask,
     TowerLevel, WeightedRepairProblem, WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
 
@@ -198,6 +199,87 @@ fn hall_spec(variant: &str) -> Option<(&str, u32, u32, u32, usize, u64)> {
         .next()
         .is_none()
         .then_some((backend, left, right, density_per_mille, graphs, seed))
+}
+
+fn integer_moment_spec(variant: &str) -> Option<(&str, IntegerMomentProblem)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "integer-moment" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let problem = IntegerMomentProblem {
+        degree: fields.next()?.parse().ok()?,
+        sum: fields.next()?.parse().ok()?,
+        square_sum: fields.next()?.parse().ok()?,
+        minimum: fields.next()?.parse().ok()?,
+        maximum: fields.next()?.parse().ok()?,
+    };
+    fields.next().is_none().then_some((backend, problem))
+}
+
+fn hash_integer_moment_solution(values: &[i32]) -> u64 {
+    values.iter().fold(0xcbf2_9ce4_8422_2325, |hash, &value| {
+        (hash ^ value as u32 as u64).wrapping_mul(0x100_0000_01b3)
+    })
+}
+
+fn flat_integer_moment_enumeration(
+    problem: IntegerMomentProblem,
+    values: &mut [i32],
+    next_value: &mut [i32],
+    prefix_sum: &mut [i64],
+    prefix_square_sum: &mut [i64],
+) -> (u64, u64) {
+    let degree = problem.degree as usize;
+    prefix_sum[0] = 0;
+    prefix_square_sum[0] = 0;
+    next_value[0] = problem.minimum;
+    let mut depth = 0_usize;
+    let mut solutions = 0_u64;
+    let mut checksum = 0_u64;
+    loop {
+        if depth == degree {
+            if prefix_sum[depth] == problem.sum && prefix_square_sum[depth] == problem.square_sum {
+                solutions += 1;
+                checksum = checksum.wrapping_add(hash_integer_moment_solution(&values[..degree]));
+            }
+            depth -= 1;
+            continue;
+        }
+        let value = next_value[depth];
+        if value > problem.maximum {
+            if depth == 0 {
+                break;
+            }
+            depth -= 1;
+            continue;
+        }
+        next_value[depth] = value + 1;
+        values[depth] = value;
+        prefix_sum[depth + 1] = prefix_sum[depth] + i64::from(value);
+        prefix_square_sum[depth + 1] =
+            prefix_square_sum[depth] + i64::from(value) * i64::from(value);
+        depth += 1;
+        if depth < degree {
+            next_value[depth] = value;
+        }
+    }
+    (solutions, checksum)
+}
+
+fn character_sum_spec(variant: &str) -> Option<(&str, u32, usize, u64)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "character-sum" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let modulus = fields.next()?.parse().ok()?;
+    let degree = fields.next()?.parse().ok()?;
+    let seed = fields.next()?.parse().ok()?;
+    fields
+        .next()
+        .is_none()
+        .then_some((backend, modulus, degree, seed))
 }
 
 struct HallBenchFixture {
@@ -820,6 +902,80 @@ fn main() {
             work = work.wrapping_add(root_count as u64 * u64::from(rounds));
             checksum ^= aggregate;
             black_box(aggregate);
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
+    if let Some((backend, problem)) = integer_moment_spec(&variant) {
+        assert!(problem.degree > 0);
+        let degree = problem.degree as usize;
+        let mut workspace = IntegerMomentWorkspace::new(problem.degree).unwrap();
+        let mut values = vec![0_i32; degree];
+        let mut next_value = vec![0_i32; degree];
+        let mut prefix_sum = vec![0_i64; degree + 1];
+        let mut prefix_square_sum = vec![0_i64; degree + 1];
+        for _ in 0..repetitions {
+            let mut solution_checksum = 0_u64;
+            let solutions = match backend {
+                "envelope" => {
+                    enumerate_integer_moments(problem, &mut workspace, |solution| {
+                        solution_checksum =
+                            solution_checksum.wrapping_add(hash_integer_moment_solution(solution));
+                    })
+                    .unwrap()
+                    .solutions
+                }
+                "flat" => {
+                    let (solutions, checksum) = flat_integer_moment_enumeration(
+                        problem,
+                        &mut values,
+                        &mut next_value,
+                        &mut prefix_sum,
+                        &mut prefix_square_sum,
+                    );
+                    solution_checksum = checksum;
+                    solutions
+                }
+                _ => panic!("unknown integer-moment backend"),
+            };
+            work += 1;
+            checksum = checksum
+                .wrapping_add(solutions)
+                .wrapping_add(solution_checksum);
+            black_box((solutions, solution_checksum));
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
+    if let Some((backend, modulus, degree, seed)) = character_sum_spec(&variant) {
+        let character = PrimeQuadraticCharacter::new(modulus).unwrap();
+        let mut state = seed;
+        let coefficients = (0..=degree)
+            .map(|_| next_u32(&mut state) % modulus)
+            .collect::<Vec<_>>();
+        let mut recurrence = PrimePolynomialRecurrence::compile(modulus, &coefficients).unwrap();
+        for _ in 0..repetitions {
+            let census = match backend {
+                "horner" => character.polynomial_census_reduced(&coefficients).unwrap(),
+                "recurrence" => character
+                    .polynomial_census_recurrence(&mut recurrence)
+                    .unwrap(),
+                _ => panic!("unknown character-sum backend"),
+            };
+            work += u64::from(modulus);
+            checksum = checksum
+                .wrapping_add(u64::from(census.positive()))
+                .wrapping_add(u64::from(census.negative()) << 21)
+                .wrapping_add(u64::from(census.zero()) << 42);
+            black_box(census);
         }
         let elapsed_ns = started.elapsed().as_nanos();
         println!(
