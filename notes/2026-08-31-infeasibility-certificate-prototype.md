@@ -6,6 +6,22 @@
 No edit to the Ergodis core, to `ergodis-private/src/lib.rs`, `Cargo.toml`, or
 `src/hall_core.rs`.
 
+## Verdict
+
+The prototype does what it set out to do and the acceptance gate passes on all counts.
+Against 78 generated instances: certificates irreducible and verified by explicit removal
+test everywhere; Hopcroft-Karp agrees on feasible-versus-infeasible everywhere; the
+classifier declines on the non-matching shapes; and certiis is roughly 100x faster than
+OR-Tools CP-SAT at producing an explanation, while CP-SAT fails to produce one at all
+within 60 seconds on a third of the infeasible instances.
+
+The commercially interesting result is not the speed. It is that on rosters with several
+independent shortages, CP-SAT returns a *smaller* core than our explanation — and deleting
+the tasks that core names leaves the roster still infeasible, on every such instance. Our
+decomposed certificates restore feasibility every time. A solver's unsatisfiable core
+answers "is there a conflict"; a planner needs "what are all the shortages, and who is
+short".
+
 ## Product thesis
 
 Every commercial optimizer answers an over-constrained roster with `INFEASIBLE` and leaves
@@ -24,7 +40,7 @@ One JSON schema, `certiis-instance/v1`:
 {
   "schema": "certiis-instance/v1",
   "name": "roster-...",
-  "tasks":     [{"id": "shift_mon_am", "demand": 1}],
+  "tasks":     [{"id": "shift_mon_am", "demand": 1, "distinct": false}],
   "resources": [{"id": "nurse_alice",  "capacity": 3}],
   "eligible":  [["shift_mon_am", "nurse_alice"]],
   "couplings": []
@@ -32,8 +48,10 @@ One JSON schema, `certiis-instance/v1`:
 ```
 
 `demand` is how many resource-units the task consumes; `capacity` is how many task-units a
-resource can serve. `couplings` carries the extra structure that takes an instance out of
-the matching regime (row sums, column sums, pairwise inner products, task conflicts).
+resource can serve. `distinct` (default false) says the units must come from different
+resources, which as explained below takes the instance out of the certifiable regime.
+`couplings` carries the other structure that does the same: exact resource loads,
+prescribed row or column sums, pairwise inner products, task conflicts.
 
 ### Classifier — the regimes
 
@@ -41,8 +59,11 @@ the matching regime (row sums, column sums, pairwise inner products, task confli
 |---|---|---|
 | `bipartite_matching`             | all demands 1, all capacities 1, no couplings | certify |
 | `capacitated_matching`           | demands or capacities > 1, no couplings       | certify |
-| `degree_constrained_completion`  | any exact resource-side load (`resource_exact_load`) or prescribed column sums | decline |
+| `degree_constrained_completion`  | any exact resource load, prescribed row or column sums, or any task needing distinct resources | decline |
 | `quadratically_coupled`          | any pairwise inner-product or task-conflict coupling | decline |
+
+Quadratic coupling is checked first, so an instance carrying both kinds of structure is
+named by the harder one.
 
 The boundary is stated exactly, because it is where the honesty of the product lives:
 
@@ -205,7 +226,149 @@ and never touches `hall_core`.
 
 ## Benchmark
 
-*(filled in as they land)*
+### What was compared, with versions and invocations
+
+Three independent parties look at the same 78 generated instances (5 seeds x 3 realistic
+domains x 5 `(plant, cascade)` settings, plus the 3 instances that must be declined):
+
+- **certiis**, this prototype, Rust release build.
+- **Google OR-Tools CP-SAT 9.15.6755**, whose unsatisfiable core over assumption literals
+  is the directly comparable "which tasks are to blame" explanation. Model: an integer
+  variable per eligible pair bounded by `min(demand, capacity)`; one hard constraint per
+  resource, `sum of units <= capacity`; one assumption literal per task enforcing
+  `sum of units == demand` via `OnlyEnforceIf`; all literals passed to `AddAssumptions`;
+  `num_workers = 1`, `max_time_in_seconds = 60`; explanation read from
+  `SufficientAssumptionsForInfeasibility()`.
+- **HiGHS 1.15.1** (via `highspy`), irreducible infeasible subsystem on the linear
+  relaxation. The constraint matrix is bipartite, hence totally unimodular, so the
+  relaxation is exact here and an LP IIS is a fair comparison. Only `iis_strategy = 2`
+  returns a populated IIS in this version; the default `0` silently returns an empty one and
+  `1` returns `kError`.
+
+**networkx 3.6.1** Hopcroft-Karp maximum matching on the unit-expanded graph is the
+correctness oracle, so a bug in the extractor cannot masquerade as a win. Python 3.12.12.
+
+`highspy` and `ortools` cannot share one interpreter here: the OR-Tools wheel bundles its
+own HiGHS shared object and importing `highspy` afterwards fails with an undefined
+`Highs::releaseMemory` symbol. The two incumbents therefore run as separate passes, merged
+with `--merge-from`. Every engine runs three times per instance and the fastest is kept.
+The machine carried other work during the passes, so all three engines' absolute timings
+are pessimistic by a similar factor; the ratios are the trustworthy part, and the scale
+figures at the end of this section were retaken on an idle machine.
+
+Raw artifacts: `~/.cache/ergodis/certiis/benchmark.json`, `benchmark-highs.json`,
+`summary.txt`, `audit.txt`, with the per-instance certificates under `certificates/` and the
+instances under `instances/`. These are regenerable from the commands above and are
+deliberately not committed.
+
+```bash
+cd ~/src/othello/ergodis-private
+cargo build --release --bin certiis
+C=~/.cache/ergodis/certiis
+./target/release/certiis suite --out $C/instances
+
+uv run --python 3.12 --with highspy python python/certiis_benchmark.py \
+    --engines highs --repeats 3 --time-limit 60 \
+    --instances $C/instances --certificates $C/certificates \
+    --binary ./target/release/certiis --out $C/benchmark-highs.json
+
+uv run --python 3.12 --with ortools --with networkx python python/certiis_benchmark.py \
+    --engines hopcroft,cpsat --repeats 3 --time-limit 60 \
+    --instances $C/instances --certificates $C/certificates \
+    --binary ./target/release/certiis \
+    --merge-from $C/benchmark-highs.json --out $C/benchmark.json
+
+uv run --python 3.12 python python/certiis_summarise.py --benchmark $C/benchmark.json
+uv run --python 3.12 python python/certiis_core_audit.py \
+    --benchmark $C/benchmark.json --instances $C/instances \
+    --binary ./target/release/certiis --workdir $C/audit
+```
+
+### Correctness
+
+Hopcroft-Karp agrees with certiis on feasible-versus-infeasible for all 78 instances, and
+certiis declines on all 3 non-matching instances. All 60 infeasible instances return
+certificates that equal the planted ground truth exactly, and the number of certificates
+equals the planted bottleneck count on all 60.
+
+### Time to explanation
+
+| | certiis | CP-SAT | HiGHS |
+|---|---:|---:|---:|
+| infeasible, median | 0.40 ms | 61.2 ms | 57.8 ms |
+| infeasible, max | 1.10 ms | 60018 ms (limit) | 327 ms |
+| feasible, median | 0.31 ms | 23.7 ms | 15.9 ms |
+
+certiis figures are in-process; end-to-end wall time including process launch and JSON
+output has median 2.61 ms, and independent verification of the certificate adds a further
+3.07 ms median. Even measured that way, **CP-SAT does not beat certiis end-to-end on a
+single instance in the suite.**
+
+CP-SAT returned no explanation at all on 20 of the 60 infeasible instances: it hit the 60-second
+limit and reported `UNKNOWN`. These are the cascade instances, where a long forced
+alternating chain sits next to the shortage. Over the 40 instances where it did answer, its
+median was 38.6 ms against 0.35 ms for certiis on the same subset — a factor of about 110.
+
+### Explanation size
+
+| | median | min | max |
+|---|---:|---:|---:|
+| certiis, total tasks named | 13 | 4 | 58 |
+| certiis before minimization | 49 | 4 | 418 |
+| CP-SAT core | 43 | 4 | 49 |
+| HiGHS IIS, task rows only | 22 | 4 | 124 |
+| HiGHS IIS, all rows and columns | 88 | 9 | 845 |
+
+Minimization is doing real work: the median explanation shrinks from 49 tasks to 13, and on
+the largest instance from 418 to 58 (as 17 + 19 + 22 across three bottlenecks).
+
+The cascade is what separates the tools. On `roster-...-plant9-cascade40` certiis names the
+9 shifts that are actually short; CP-SAT's core has 49 tasks — the 9 plus the entire
+40-link chain, which is matched perfectly and is not part of any minimal violator. The
+chain is reachable by alternating paths, so it is in the raw deficient set too; the
+difference is that certiis removes it and CP-SAT does not.
+
+### Where the incumbent wins, and why it is not a win
+
+On the ten multi-shortage instances with three planted bottlenecks of sizes 4, 6 and 9,
+CP-SAT returns a **4-task** core against our 19 tasks. On raw size the incumbent wins by
+almost 5x, and that is worth stating plainly.
+
+It is not a usable win. An explanation names a set of tasks; the test that matters is
+whether removing exactly those tasks restores feasibility. `certiis_core_audit.py` applies
+that residual test to both explanations on all 40 instances where CP-SAT produced a core:
+
+- Removing the tasks named by the CP-SAT core left the instance **still infeasible on 10 of
+  them** — every multi-shortage instance. The core names one of the three shortages, so a
+  planner who fixes it comes back to a roster that is still infeasible, twice.
+- Removing the tasks named by the certiis certificates restored feasibility on **all 40**.
+
+That is the shape of the difference: a solver's unsatisfiable core is a proof that *some*
+conflict exists, and one core is enough for that purpose. A planner needs every independent
+shortage, separated, with the resources responsible for each. HiGHS behaves the same way —
+its IIS is one subsystem — and additionally reports resource rows and column bounds, so its
+raw output is larger still (median 88 entries against our 13 tasks).
+
+### Scale
+
+On an 8000-shift, 1107-nurse instance with 2.58 million eligible pairs (a 144 MB JSON file),
+wall time is 0.50 s, of which `solve` is 191 ms and the matching itself only 20 ms; peak
+resident memory is 542 MB, nearly all of it the parsed instance. The cost is dominated by
+parsing and index construction, not by matching. Replacing ordered maps and per-task
+ordered sets with hash maps and sort/dedup during this work cut `solve` by a factor of
+about three on this instance.
+
+The unit expansion is the other scaling term. On an 8000-shift, 300-nurse instance where
+each nurse has capacity 28, the 892 thousand eligible pairs become roughly 25 million unit
+incidences; peak memory is 253 MB against 0.21 s wall, so the expansion, not the
+eligibility list, sets the memory. Past 40 million incidences the tool refuses with a clear
+message rather than exhausting memory — the right failure mode, and a ceiling that a
+capacity-aware `hall_core` would remove outright. (Verified: 60 tasks of demand 1000
+against 60 resources of capacity 1000, fully eligible, is refused rather than attempted.)
+
+These figures were taken on an otherwise idle machine. Measurements made while the
+benchmark and other builds were running were three to seven times worse, which is worth
+remembering before quoting any of them as a product number.
 
 ## What would make this a real product
 
@@ -232,11 +395,11 @@ and never touches `hall_core`.
 ### What is fragile
 
 - **Instance compilation dominates the runtime.** On the 8000-shift, 1107-nurse,
-  2.58-million-pair instance the matching itself is 205 ms and the whole `solve` is 1.6 s,
-  with the remainder in parsing and index construction; peak resident memory is 543 MB,
-  nearly all of it the parsed instance. Replacing ordered maps and per-task ordered sets
-  with hash maps and sort/dedup cut `solve` from 5.25 s to 1.58 s during this work, which
-  says the remaining cost is in the same place and is addressable, not fundamental.
+  2.58-million-pair instance the matching is 20 ms, the whole `solve` is 191 ms, and end to
+  end it is 0.50 s; peak resident memory is 542 MB, nearly all of it the parsed instance.
+  Replacing ordered maps and per-task ordered sets with hash maps and sort/dedup cut `solve`
+  by about three times during this work, which says the remaining cost sits in the same
+  place and is addressable rather than fundamental.
 - **The unit expansion is a memory multiplier.** Capacities are handled by expanding to
   unit copies, so the incidence list is roughly the eligibility list times the average
   resource capacity. At capacity 5 that is a 5x multiplier; a nurse roster with monthly
@@ -310,6 +473,47 @@ with its neighbourhood that was in every one of thousands of tested cases a genu
 witness. Every item above is about the shape of the API for a capacitated, multi-bottleneck,
 interactive use rather than for a tight inner search loop, which is what it was built for.
 
-## Requests against `hall_core` (not implemented, read-only constraint)
+## Files and replay
 
-*(filled in as they land)*
+All work is confined to these paths; nothing else in the repository was edited.
+
+| Path | Role |
+|---|---|
+| `ergodis-private/src/bin/certiis.rs` | the tool: classifier, extractor, verifier, generators, selftest |
+| `ergodis-private/python/certiis_benchmark.py` | head-to-head harness against CP-SAT, HiGHS, Hopcroft-Karp |
+| `ergodis-private/python/certiis_summarise.py` | reduces a benchmark JSON to the tables above |
+| `ergodis-private/python/certiis_core_audit.py` | residual test: does an explanation actually restore feasibility |
+| `notes/2026-08-31-infeasibility-certificate-prototype.md` | this report |
+
+`certiis.rs` needs no `Cargo.toml` entry: edition-2021 autobins picks it up from `src/bin`.
+Bulk output goes to `~/.cache/ergodis/certiis/` and is not committed.
+
+```bash
+cd ~/src/othello/ergodis-private
+cargo test  --release --bin certiis
+cargo build --release --bin certiis
+./target/release/certiis selftest
+
+# one instance, end to end
+C=~/.cache/ergodis/certiis
+./target/release/certiis generate --domain multi-roster --seed 1 \
+    --tasks 150 --resources 45 --plant 4 --cascade 40 --out $C/demo.json
+./target/release/certiis classify --input $C/demo.json
+./target/release/certiis solve  --input $C/demo.json --out $C/demo.cert.json
+./target/release/certiis verify --input $C/demo.json --certificate $C/demo.cert.json
+```
+
+## Foreign-lane issues
+
+1. **`ergodis-private/src/g53_search.rs` briefly broke the library build.** Two
+   `E0502` borrow errors around line 1340 (`workspace.class_orbits[class]` held immutably
+   across a mutable use). Because every `ergodis-private` binary links the library, this
+   blocked all of them, not only that lane's. It was left untouched and had cleared within
+   about a minute, so another session was evidently mid-edit. Worth raising only because the
+   blast radius is crate-wide.
+2. **A crate-wide `cargo fmt` reformatted `certiis.rs` mid-session.** The change was pure
+   rustfmt line-wrapping with no semantic difference (`git diff -w` shows only re-wrapping),
+   and it was revalidated and kept. Still, a formatter run against the whole crate reaches
+   into other lanes' in-progress files.
+
+Both are noted, not acted on.

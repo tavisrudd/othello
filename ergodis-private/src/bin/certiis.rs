@@ -129,7 +129,10 @@ pub enum Regime {
 
 impl Regime {
     fn certifiable(self) -> bool {
-        matches!(self, Regime::BipartiteMatching | Regime::CapacitatedMatching)
+        matches!(
+            self,
+            Regime::BipartiteMatching | Regime::CapacitatedMatching
+        )
     }
 
     fn as_str(self) -> &'static str {
@@ -334,7 +337,10 @@ impl Compiled {
     }
 
     fn demand_of(&self, tasks: &[u32]) -> u64 {
-        tasks.iter().map(|&t| u64::from(self.demand[t as usize])).sum()
+        tasks
+            .iter()
+            .map(|&t| u64::from(self.demand[t as usize]))
+            .sum()
     }
 
     fn neighborhood(&self, tasks: &[u32]) -> Vec<u32> {
@@ -716,7 +722,8 @@ fn solve(instance: &Instance, raw: &[u8]) -> anyhow::Result<Report> {
     }
 
     let expansion = Expansion::build(&compiled)?;
-    let mut workspace = HallWorkspace::new(expansion.left_count.max(1), expansion.right_count.max(1));
+    let mut workspace =
+        HallWorkspace::new(expansion.left_count.max(1), expansion.right_count.max(1));
     let matching_started = Instant::now();
     let outcome = workspace.solve(
         expansion.left_count,
@@ -808,7 +815,12 @@ fn solve(instance: &Instance, raw: &[u8]) -> anyhow::Result<Report> {
                     removal_tests: tests,
                 });
             }
-            certificates.sort_by(|a, b| a.tasks.len().cmp(&b.tasks.len()).then_with(|| a.tasks.cmp(&b.tasks)));
+            certificates.sort_by(|a, b| {
+                a.tasks
+                    .len()
+                    .cmp(&b.tasks.len())
+                    .then_with(|| a.tasks.cmp(&b.tasks))
+            });
             (
                 Verdict::Infeasible {
                     raw_deficient_tasks: raw_size,
@@ -863,7 +875,10 @@ fn verify(instance: &Instance, raw: &[u8], report: &Report) -> anyhow::Result<Ve
         report.regime,
         classification.regime
     );
-    checks.push(format!("regime independently reclassified as {}", report.regime));
+    checks.push(format!(
+        "regime independently reclassified as {}",
+        report.regime
+    ));
 
     let task_index: HashMap<&str, usize> = instance
         .tasks
@@ -923,7 +938,8 @@ fn verify(instance: &Instance, raw: &[u8], report: &Report) -> anyhow::Result<Ve
                     entry.task,
                     instance.tasks[t].demand
                 );
-                let named: BTreeSet<&String> = entry.resources.iter().map(|u| &u.resource).collect();
+                let named: BTreeSet<&String> =
+                    entry.resources.iter().map(|u| &u.resource).collect();
                 ensure!(
                     named.len() == entry.resources.len(),
                     "task {} lists the same resource twice",
@@ -967,125 +983,127 @@ fn verify(instance: &Instance, raw: &[u8], report: &Report) -> anyhow::Result<Ve
             let mut claimed_tasks: BTreeSet<usize> = BTreeSet::new();
             let mut claimed_resources: BTreeSet<usize> = BTreeSet::new();
             for certificate in certificates {
-            ensure!(!certificate.tasks.is_empty(), "empty certificate");
-            let indices: Vec<usize> = certificate
-                .tasks
-                .iter()
-                .map(|id| {
-                    task_index
-                        .get(id.as_str())
-                        .copied()
-                        .with_context(|| format!("certificate names unknown task {id}"))
-                })
-                .collect::<anyhow::Result<_>>()?;
-            let distinct: BTreeSet<usize> = indices.iter().copied().collect();
-            ensure!(
-                distinct.len() == indices.len(),
-                "certificate repeats a task"
-            );
-
-            // Recomputed from the eligibility relation alone, never from `Compiled`.
-            let neighborhood = |set: &BTreeSet<usize>| -> BTreeSet<usize> {
-                eligible
+                ensure!(!certificate.tasks.is_empty(), "empty certificate");
+                let indices: Vec<usize> = certificate
+                    .tasks
                     .iter()
-                    .filter(|(t, _)| set.contains(t))
-                    .map(|&(_, r)| r)
-                    .collect()
-            };
-            let demand = |set: &BTreeSet<usize>| -> u64 {
-                set.iter().map(|&t| u64::from(instance.tasks[t].demand)).sum()
-            };
-            let capacity = |set: &BTreeSet<usize>| -> u64 {
-                set.iter()
-                    .map(|&r| u64::from(instance.resources[r].capacity))
-                    .sum()
-            };
+                    .map(|id| {
+                        task_index
+                            .get(id.as_str())
+                            .copied()
+                            .with_context(|| format!("certificate names unknown task {id}"))
+                    })
+                    .collect::<anyhow::Result<_>>()?;
+                let distinct: BTreeSet<usize> = indices.iter().copied().collect();
+                ensure!(
+                    distinct.len() == indices.len(),
+                    "certificate repeats a task"
+                );
 
-            let hood = neighborhood(&distinct);
-            let claimed_hood: BTreeSet<usize> = certificate
-                .neighborhood
-                .iter()
-                .map(|id| {
-                    resource_index
-                        .get(id.as_str())
-                        .copied()
-                        .with_context(|| format!("certificate names unknown resource {id}"))
-                })
-                .collect::<anyhow::Result<_>>()?;
-            ensure!(
+                // Recomputed from the eligibility relation alone, never from `Compiled`.
+                let neighborhood = |set: &BTreeSet<usize>| -> BTreeSet<usize> {
+                    eligible
+                        .iter()
+                        .filter(|(t, _)| set.contains(t))
+                        .map(|&(_, r)| r)
+                        .collect()
+                };
+                let demand = |set: &BTreeSet<usize>| -> u64 {
+                    set.iter()
+                        .map(|&t| u64::from(instance.tasks[t].demand))
+                        .sum()
+                };
+                let capacity = |set: &BTreeSet<usize>| -> u64 {
+                    set.iter()
+                        .map(|&r| u64::from(instance.resources[r].capacity))
+                        .sum()
+                };
+
+                let hood = neighborhood(&distinct);
+                let claimed_hood: BTreeSet<usize> = certificate
+                    .neighborhood
+                    .iter()
+                    .map(|id| {
+                        resource_index
+                            .get(id.as_str())
+                            .copied()
+                            .with_context(|| format!("certificate names unknown resource {id}"))
+                    })
+                    .collect::<anyhow::Result<_>>()?;
+                ensure!(
                 hood == claimed_hood,
                 "stated neighbourhood is not the eligible-resource set of the certificate tasks"
             );
-            let d = demand(&distinct);
-            let c = capacity(&hood);
-            ensure!(
-                d == certificate.demand && c == certificate.neighborhood_capacity,
-                "stated demand/capacity ({}, {}) disagree with recomputation ({d}, {c})",
-                certificate.demand,
-                certificate.neighborhood_capacity
-            );
-            ensure!(
-                d > c,
-                "certificate does not violate Hall: demand {d} <= capacity {c}"
-            );
-            checks.push(format!(
-                "Hall violation recomputed independently: {} tasks demand {d} units, their {} \
+                let d = demand(&distinct);
+                let c = capacity(&hood);
+                ensure!(
+                    d == certificate.demand && c == certificate.neighborhood_capacity,
+                    "stated demand/capacity ({}, {}) disagree with recomputation ({d}, {c})",
+                    certificate.demand,
+                    certificate.neighborhood_capacity
+                );
+                ensure!(
+                    d > c,
+                    "certificate does not violate Hall: demand {d} <= capacity {c}"
+                );
+                checks.push(format!(
+                    "Hall violation recomputed independently: {} tasks demand {d} units, their {} \
                  eligible resources supply {c} (deficit {})",
-                distinct.len(),
-                hood.len(),
-                d - c
-            ));
+                    distinct.len(),
+                    hood.len(),
+                    d - c
+                ));
 
-            ensure!(
-                certificate.removal_tests.len() == indices.len(),
-                "removal tests do not cover every certificate task"
-            );
-            for &t in &distinct {
-                let mut reduced = distinct.clone();
-                reduced.remove(&t);
-                let reduced_hood = neighborhood(&reduced);
-                let rd = demand(&reduced);
-                let rc = capacity(&reduced_hood);
                 ensure!(
-                    rd <= rc,
-                    "certificate is reducible: dropping {} leaves demand {rd} > capacity {rc}",
-                    instance.tasks[t].id
+                    certificate.removal_tests.len() == indices.len(),
+                    "removal tests do not cover every certificate task"
                 );
-                let stated = certificate
-                    .removal_tests
-                    .iter()
-                    .find(|test| test.removed_task == instance.tasks[t].id)
-                    .with_context(|| {
-                        format!("no removal test recorded for {}", instance.tasks[t].id)
-                    })?;
-                ensure!(
-                    stated.demand_after == rd
-                        && stated.capacity_after == rc
-                        && !stated.still_violated,
-                    "removal test for {} disagrees with recomputation",
-                    instance.tasks[t].id
-                );
-            }
-            checks.push(format!(
+                for &t in &distinct {
+                    let mut reduced = distinct.clone();
+                    reduced.remove(&t);
+                    let reduced_hood = neighborhood(&reduced);
+                    let rd = demand(&reduced);
+                    let rc = capacity(&reduced_hood);
+                    ensure!(
+                        rd <= rc,
+                        "certificate is reducible: dropping {} leaves demand {rd} > capacity {rc}",
+                        instance.tasks[t].id
+                    );
+                    let stated = certificate
+                        .removal_tests
+                        .iter()
+                        .find(|test| test.removed_task == instance.tasks[t].id)
+                        .with_context(|| {
+                            format!("no removal test recorded for {}", instance.tasks[t].id)
+                        })?;
+                    ensure!(
+                        stated.demand_after == rd
+                            && stated.capacity_after == rc
+                            && !stated.still_violated,
+                        "removal test for {} disagrees with recomputation",
+                        instance.tasks[t].id
+                    );
+                }
+                checks.push(format!(
                 "irreducibility proved by explicit removal: each of the {} tasks, when dropped, \
                  leaves demand <= capacity",
                 distinct.len()
             ));
 
-            for &t in &distinct {
-                ensure!(
-                    claimed_tasks.insert(t),
-                    "task {} appears in two certificates",
-                    instance.tasks[t].id
-                );
-            }
-            for &r in &hood {
-                ensure!(
-                    claimed_resources.insert(r),
-                    "resource {} appears in two certificates",
-                    instance.resources[r].id
-                );
-            }
+                for &t in &distinct {
+                    ensure!(
+                        claimed_tasks.insert(t),
+                        "task {} appears in two certificates",
+                        instance.tasks[t].id
+                    );
+                }
+                for &r in &hood {
+                    ensure!(
+                        claimed_resources.insert(r),
+                        "resource {} appears in two certificates",
+                        instance.resources[r].id
+                    );
+                }
             }
             checks.push(format!(
                 "{} independent bottleneck(s), pairwise disjoint in tasks and resources",
@@ -1221,9 +1239,11 @@ fn plant_block(
         .planted_resources
         .extend(neighbourhood.iter().cloned());
     ground_truth.minimal_certificate_size = Some(plant);
-    ground_truth.expected_raw_deficient =
-        Some(ground_truth.expected_raw_deficient.unwrap_or(0) + plant
-            + if use_bridge { cascade } else { 0 });
+    ground_truth.expected_raw_deficient = Some(
+        ground_truth.expected_raw_deficient.unwrap_or(0)
+            + plant
+            + if use_bridge { cascade } else { 0 },
+    );
     ground_truth.bottleneck_count = Some(ground_truth.bottleneck_count.unwrap_or(0) + 1);
     let block: Vec<String> = ground_truth
         .planted_tasks
@@ -1301,11 +1321,11 @@ fn generate_roster(
                 break;
             }
         }
-        let reserved = match reserved.or_else(|| holders.iter().copied().find(|&n| remaining[n] > 0))
-        {
-            Some(n) => n,
-            None => continue,
-        };
+        let reserved =
+            match reserved.or_else(|| holders.iter().copied().find(|&n| remaining[n] > 0)) {
+                Some(n) => n,
+                None => continue,
+            };
         remaining[reserved] -= 1;
         tasks.push(Task {
             id: id.clone(),
@@ -1405,11 +1425,11 @@ fn generate_placement(
                 break;
             }
         }
-        let reserved = match reserved.or_else(|| candidates.iter().copied().find(|&h| remaining[h] > 0))
-        {
-            Some(h) => h,
-            None => continue,
-        };
+        let reserved =
+            match reserved.or_else(|| candidates.iter().copied().find(|&h| remaining[h] > 0)) {
+                Some(h) => h,
+                None => continue,
+            };
         remaining[reserved] -= 1;
         let id = format!("job_{index:04}_{class}_{memory}g");
         tasks.push(Task {
@@ -1550,7 +1570,8 @@ fn generate_multi_roster(
         ground_truth.feasible = true;
     }
     instance.ground_truth = Some(ground_truth);
-    instance.name = format!("multiroster-s{seed}-t{shifts}-r{nurses}-plant{plant}-cascade{cascade}");
+    instance.name =
+        format!("multiroster-s{seed}-t{shifts}-r{nurses}-plant{plant}-cascade{cascade}");
     instance
 }
 
@@ -1659,7 +1680,10 @@ enum Command {
 }
 
 #[derive(Parser, Debug)]
-#[command(name = "certiis", about = "Explainable infeasibility for assignment problems")]
+#[command(
+    name = "certiis",
+    about = "Explainable infeasibility for assignment problems"
+)]
 struct Arguments {
     #[command(subcommand)]
     command: Command,
@@ -1683,15 +1707,27 @@ fn write_json<T: Serialize>(path: &Path, value: &T) -> anyhow::Result<()> {
 
 fn build(domain: Domain, args: &GenerateArgs) -> Instance {
     match domain {
-        Domain::Roster => {
-            generate_roster(args.seed, args.tasks, args.resources, args.plant, args.cascade)
-        }
-        Domain::Placement => {
-            generate_placement(args.seed, args.tasks, args.resources, args.plant, args.cascade)
-        }
-        Domain::MultiRoster => {
-            generate_multi_roster(args.seed, args.tasks, args.resources, args.plant, args.cascade)
-        }
+        Domain::Roster => generate_roster(
+            args.seed,
+            args.tasks,
+            args.resources,
+            args.plant,
+            args.cascade,
+        ),
+        Domain::Placement => generate_placement(
+            args.seed,
+            args.tasks,
+            args.resources,
+            args.plant,
+            args.cascade,
+        ),
+        Domain::MultiRoster => generate_multi_roster(
+            args.seed,
+            args.tasks,
+            args.resources,
+            args.plant,
+            args.cascade,
+        ),
         Domain::DistinctRoster => generate_distinct_roster(
             args.seed,
             args.tasks,
@@ -1783,8 +1819,7 @@ fn main() -> anyhow::Result<()> {
                     (Domain::Placement, 200, 50),
                     (Domain::MultiRoster, 150, 45),
                 ] {
-                    for (plant, cascade) in
-                        [(0usize, 0usize), (4, 0), (4, 40), (9, 40), (17, 120)]
+                    for (plant, cascade) in [(0usize, 0usize), (4, 0), (4, 40), (9, 40), (17, 120)]
                     {
                         let args = GenerateArgs {
                             domain,
@@ -1876,9 +1911,7 @@ fn selftest() -> anyhow::Result<()> {
         for i in 0..tasks {
             for j in 0..resources {
                 if rng.below(100) < 45 {
-                    instance
-                        .eligible
-                        .push((format!("t{i}"), format!("r{j}")));
+                    instance.eligible.push((format!("t{i}"), format!("r{j}")));
                 }
             }
         }
@@ -1888,11 +1921,17 @@ fn selftest() -> anyhow::Result<()> {
         let report = solve(&instance, &raw)?;
         match &report.verdict {
             Verdict::Feasible { .. } => {
-                anyhow::ensure!(expected, "trial {trial}: claimed feasible, brute force says not");
+                anyhow::ensure!(
+                    expected,
+                    "trial {trial}: claimed feasible, brute force says not"
+                );
                 feasible_seen += 1;
             }
             Verdict::Infeasible { .. } => {
-                anyhow::ensure!(!expected, "trial {trial}: claimed infeasible, brute force says feasible");
+                anyhow::ensure!(
+                    !expected,
+                    "trial {trial}: claimed infeasible, brute force says feasible"
+                );
                 infeasible_seen += 1;
             }
             Verdict::Declined { .. } => bail!("trial {trial}: unexpected decline"),
@@ -1996,7 +2035,10 @@ fn selftest() -> anyhow::Result<()> {
         match &report.verdict {
             Verdict::Declined { needed_instead } => {
                 anyhow::ensure!(!needed_instead.is_empty());
-                println!("selftest ok: {} declined as {}", instance.name, report.regime);
+                println!(
+                    "selftest ok: {} declined as {}",
+                    instance.name, report.regime
+                );
             }
             _ => bail!("{} was not declined", instance.name),
         }
@@ -2104,15 +2146,35 @@ mod tests {
         // Three tasks on two resources, four tasks on three others. A single irreducible
         // set would pad one shortage with part of the other; two certificates do not.
         let instance = instance_from(
-            &[("a1", 1), ("a2", 1), ("a3", 1), ("b1", 1), ("b2", 1), ("b3", 1), ("b4", 1)],
+            &[
+                ("a1", 1),
+                ("a2", 1),
+                ("a3", 1),
+                ("b1", 1),
+                ("b2", 1),
+                ("b3", 1),
+                ("b4", 1),
+            ],
             &[("ra1", 1), ("ra2", 1), ("rb1", 1), ("rb2", 1), ("rb3", 1)],
             &[
-                ("a1", "ra1"), ("a1", "ra2"), ("a2", "ra1"), ("a2", "ra2"),
-                ("a3", "ra1"), ("a3", "ra2"),
-                ("b1", "rb1"), ("b1", "rb2"), ("b1", "rb3"),
-                ("b2", "rb1"), ("b2", "rb2"), ("b2", "rb3"),
-                ("b3", "rb1"), ("b3", "rb2"), ("b3", "rb3"),
-                ("b4", "rb1"), ("b4", "rb2"), ("b4", "rb3"),
+                ("a1", "ra1"),
+                ("a1", "ra2"),
+                ("a2", "ra1"),
+                ("a2", "ra2"),
+                ("a3", "ra1"),
+                ("a3", "ra2"),
+                ("b1", "rb1"),
+                ("b1", "rb2"),
+                ("b1", "rb3"),
+                ("b2", "rb1"),
+                ("b2", "rb2"),
+                ("b2", "rb3"),
+                ("b3", "rb1"),
+                ("b3", "rb2"),
+                ("b3", "rb3"),
+                ("b4", "rb1"),
+                ("b4", "rb2"),
+                ("b4", "rb3"),
             ],
         );
         let raw = serde_json::to_vec(&instance).unwrap();
