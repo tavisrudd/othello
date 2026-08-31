@@ -2,6 +2,7 @@ pub mod hall_core;
 pub mod landed_rank_adapter;
 pub mod projective_grid;
 pub mod q16_quadratic;
+pub mod q19_marked_polar;
 pub mod q25_pair_repair;
 pub mod semantic_plan;
 pub mod semantic_rank;

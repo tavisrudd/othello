@@ -280,6 +280,29 @@ This is a functional end-to-end control, not an isolated-kernel ratio: the
 Python program additionally computes complete spectra, stabilizers, and a
 projective invariance check.
 
+## First coherent marked-polar replay result
+
+The q=19 adapter enumerates all 381 projective members of
+`W=<1,t^3,t^4>` and retains their exact 20-point projective root masks.  It
+finds exactly six split squarefree quartics.  Their common-root mask is the
+single point at infinity, so all six use infinity and there are zero members
+with four finite roots, exactly reproducing the transient pointed-bad
+falsifier.
+
+To test the state question rather than merely recount the six witnesses, the
+adapter presents the 20 possible forbidden-marker states to the public Ergodis
+observational compiler.  With the marker erased they have the same immediate
+observation.  The future query “does a split witness avoid this marker?” creates
+exactly two contextual classes: infinity, where no witness survives, and the
+19 finite markers, where one does.  Thus the removed-root marker is not optional
+state; the separating continuation is generated automatically from the exact
+response table.
+
+The natural historical control is the full marked-polar calibration and its
+independent five-secant/orbit replay, which prove much more than this sharp
+falsifier.  Their current checkout was intentionally externalized and its
+field-arithmetic dependency is absent, so no fresh timing ratio is claimed.
+
 ## Natural comparison implementations
 
 Once each replay works, comparisons will separate compilation, solve,

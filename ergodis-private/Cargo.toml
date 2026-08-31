@@ -32,3 +32,7 @@ path = "src/bin/q25_pair_repair.rs"
 [[bin]]
 name = "q16-quadratic"
 path = "src/bin/q16_quadratic.rs"
+
+[[bin]]
+name = "q19-marked-polar"
+path = "src/bin/q19_marked_polar.rs"
