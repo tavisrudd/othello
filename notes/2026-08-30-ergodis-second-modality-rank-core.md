@@ -43,6 +43,10 @@ without allocation, recursion, or dynamic dispatch.  Fixed-cardinality block
 subsets use the existing Gosper iterator rather than scanning all masks at
 every size.  An independent `GF(2)` control exercises the same compiler to
 guard against accidentally baking the landed `GF(9)` answer into the engine.
+The `GF(9)` adapter's add, multiply, negation, and inverse operations are tiny
+compile-time tables.  Exhaustive field-law tests check the table adapter; the
+elimination loop therefore replaces division/remainder arithmetic with two
+indexed loads without weakening the arithmetic trust boundary.
 
 Compilation emits a `SemanticRankCore` containing:
 
@@ -68,12 +72,14 @@ outer runs with 2,000 rank replays per measurement gave:
 
 | measure | median |
 |---|---:|
-| semantic-core compilation | 397 us |
-| raw 120-row rank replay | 28,037 ns |
-| compiled 29-row replay | 7,235 ns |
-| replay speedup | **3.886x** |
+| semantic-core compilation | 107 us |
+| raw 120-row rank replay | 6,798 ns |
+| compiled 29-row replay | 1,986 ns |
+| replay speedup | **3.443x** |
 
-The per-run speedup range was 3.821x--3.912x.  The important result is not the
+The per-run speedup range was 3.343x--3.530x.  Against direct `GF(9)` digit
+arithmetic, table compilation separately improves compiler time by 3.710x,
+raw replay by 4.124x, and core replay by 3.643x.  The important result is not the
 sub-millisecond absolute time but that the mathematical certificate reduction
 produces an almost proportional replay reduction while preserving exact
 source-row witnesses.

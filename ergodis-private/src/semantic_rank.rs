@@ -20,40 +20,78 @@ pub trait SmallField: Copy {
 #[derive(Debug, Clone, Copy)]
 pub struct Gf9;
 
+const fn gf9_add_value(left: u8, right: u8) -> u8 {
+    ((left % 3 + right % 3) % 3) + 3 * ((left / 3 + right / 3) % 3)
+}
+
+const fn gf9_mul_value(left: u8, right: u8) -> u8 {
+    let (a, b) = (left % 3, left / 3);
+    let (c, d) = (right % 3, right / 3);
+    ((a * c + 2 * b * d) % 3) + 3 * ((a * d + b * c) % 3)
+}
+
+const fn gf9_binary_table(multiply: bool) -> [u8; 81] {
+    let mut table = [0; 81];
+    let mut left = 0;
+    while left < 9 {
+        let mut right = 0;
+        while right < 9 {
+            table[left * 9 + right] = if multiply {
+                gf9_mul_value(left as u8, right as u8)
+            } else {
+                gf9_add_value(left as u8, right as u8)
+            };
+            right += 1;
+        }
+        left += 1;
+    }
+    table
+}
+
+const fn gf9_inverse_table() -> [u8; 9] {
+    let mut table = [0; 9];
+    let mut value = 1;
+    while value < 9 {
+        let mut candidate = 1;
+        while candidate < 9 {
+            if gf9_mul_value(value as u8, candidate as u8) == 1 {
+                table[value] = candidate as u8;
+                break;
+            }
+            candidate += 1;
+        }
+        value += 1;
+    }
+    table
+}
+
+const GF9_ADD: [u8; 81] = gf9_binary_table(false);
+const GF9_MUL: [u8; 81] = gf9_binary_table(true);
+const GF9_NEG: [u8; 9] = [0, 2, 1, 6, 8, 7, 3, 5, 4];
+const GF9_INV: [u8; 9] = gf9_inverse_table();
+
 impl SmallField for Gf9 {
     const ORDER: u8 = 9;
 
     #[inline]
     fn add(left: u8, right: u8) -> u8 {
-        ((left % 3 + right % 3) % 3) + 3 * ((left / 3 + right / 3) % 3)
+        GF9_ADD[left as usize * 9 + right as usize]
     }
 
     #[inline]
     fn neg(value: u8) -> u8 {
-        ((3 - value % 3) % 3) + 3 * ((3 - value / 3) % 3)
+        GF9_NEG[value as usize]
     }
 
     #[inline]
     fn mul(left: u8, right: u8) -> u8 {
-        let (a, b) = (left % 3, left / 3);
-        let (c, d) = (right % 3, right / 3);
-        ((a * c + 2 * b * d) % 3) + 3 * ((a * d + b * c) % 3)
+        GF9_MUL[left as usize * 9 + right as usize]
     }
 
     #[inline]
     fn inverse(value: u8) -> u8 {
         debug_assert_ne!(value, 0);
-        let mut base = value;
-        let mut exponent = 7;
-        let mut result = 1;
-        while exponent != 0 {
-            if exponent & 1 != 0 {
-                result = Self::mul(result, base);
-            }
-            base = Self::mul(base, base);
-            exponent >>= 1;
-        }
-        result
+        GF9_INV[value as usize]
     }
 }
 

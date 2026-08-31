@@ -40,12 +40,19 @@
     "certificate_replayed": true
   },
   "performance_medians": {
-    "compile_microseconds": 397,
-    "raw_rank_replay_nanoseconds": 28037,
-    "core_rank_replay_nanoseconds": 7235,
-    "rank_replay_speedup": 3.886230876216968,
-    "speedup_min": 3.8213362362226153,
-    "speedup_max": 3.911625313632562
+    "compile_microseconds": 107,
+    "raw_rank_replay_nanoseconds": 6798,
+    "core_rank_replay_nanoseconds": 1986,
+    "rank_replay_speedup": 3.4425981873111784,
+    "speedup_min": 3.343069306930693,
+    "speedup_max": 3.529923273657289
+  },
+  "arithmetic_kernel_ab": {
+    "baseline": "direct GF(9) digit arithmetic",
+    "candidate": "compile-time 9x9 add/multiply tables",
+    "compile_speedup": 3.710280373832,
+    "raw_replay_speedup": 4.124301265078,
+    "core_replay_speedup": 3.643001007049
   },
   "provenance": {
     "frozen_source": "notes/2026-08-09-c895-q9-hom-falsifier.py",
