@@ -33,4 +33,17 @@ projects, ranked by Ergodis fit):
 
 ## Results
 
-(appended as waves land)
+- **Wave 1B, transversal/CSS (landed ~23:45)** —
+  `2026-08-30-c1018-hunt-transversal-css.md`; driver
+  `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes
+  distance-certified exactly by `css_distance_native` (two runs are genuine
+  exhaustions of 238M and 791M connected supports in seconds); complete
+  diagonal transversal group per code via Smith normal form over all real
+  phases; method validated on the known Steane/`[[15,1,3]]`/`[[8,3,2]]`
+  facts. **New exact classifications:** `[[16,4,2]]` → exactly CCCZ,
+  `[[32,5,2]]` → exactly C⁴Z, `[[31,1,3]]` → logical group exactly
+  \(\mathbf Z_{16}\) (level 4). Exact negatives: Steane and `[[15,7,3]]`
+  admit no non-Clifford diagonal transversal at any phase; Shor no
+  non-Pauli. No claim on the good-qLDPC target. Repository prior art
+  marked per the snapshot rule. Ergodis fit: clean; one convenience gap
+  recorded (no minimum-nonzero-weight mode).
