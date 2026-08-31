@@ -18,6 +18,7 @@ pub mod continuation;
 #[cfg(feature = "control-plane")]
 pub mod control;
 pub mod css_distance;
+pub mod cyclic_action;
 pub mod defect;
 pub mod family_response;
 pub mod field;
@@ -102,6 +103,7 @@ pub use css_distance::{
 pub use css_distance::{
     CompiledColossalCssDistance, CompiledHugeCssDistance, CompiledLargeCssDistance,
 };
+pub use cyclic_action::{CyclicOrbitLockError, CyclicOrbitLocks};
 pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
     FamilyResponseTable,

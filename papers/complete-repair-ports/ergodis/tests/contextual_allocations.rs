@@ -6,13 +6,32 @@ use ergodis::{
     compile_alignment_attachment, compile_binary_commutant,
     compile_verified_explicit_binary_support, search_alignment_attachment,
     AlignmentSearchWorkspace, BinarySupportCandidate, CanonicalContextBasis, CompiledCssDistance,
-    CostTable, DenseSelector, ExplicitBinarySupportProblem, FinitePermutationAction, Gf4, Matrix,
-    PackedBinaryAction, PackedBinaryLinearMap, Prime, PrimeQuadraticCharacter,
-    RankBoundedContextCache, RankOneProbeCache, ResidualHittingWorkspace, SparseSelector,
+    CostTable, CyclicOrbitLocks, DenseSelector, ExplicitBinarySupportProblem,
+    FinitePermutationAction, Gf4, Matrix, PackedBinaryAction, PackedBinaryLinearMap, Prime,
+    PrimeQuadraticCharacter, RankBoundedContextCache, RankOneProbeCache, ResidualHittingWorkspace,
+    SparseSelector,
 };
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::cell::Cell;
 use std::convert::Infallible;
+
+struct AllocationHalfTurn;
+
+impl FinitePermutationAction for AllocationHalfTurn {
+    type Error = Infallible;
+
+    fn point_count(&self) -> u32 {
+        30
+    }
+
+    fn generator_count(&self) -> u32 {
+        1
+    }
+
+    fn apply(&self, _generator: u32, point: u32) -> Result<u32, Self::Error> {
+        Ok((point + 15) % 30)
+    }
+}
 
 #[cfg(feature = "control-plane")]
 use ergodis::control::{CompiledPlan, PlanOp, PlanOutput, PlanRole, PlanSpec, PLAN_SCHEMA};
@@ -77,6 +96,22 @@ fn tracked_allocations<T>(operation: impl FnOnce() -> T) -> (T, usize) {
     drop(guard);
     let count = ALLOCATIONS.with(Cell::get);
     (result, count)
+}
+
+#[test]
+fn cyclic_orbit_lock_census_allocates_nothing_after_compilation() {
+    let locks = CyclicOrbitLocks::compile(&AllocationHalfTurn).unwrap();
+    let mut counts = [0_u32; 30];
+    let (checksum, allocations) = tracked_allocations(|| {
+        let mut checksum = 0_u64;
+        for _ in 0..1_000 {
+            assert!(locks.write_locked_counts(&mut counts));
+            checksum += u64::from(locks.locked_at_shift(15).unwrap());
+        }
+        checksum
+    });
+    assert_eq!(checksum, 30_000);
+    assert_eq!(allocations, 0);
 }
 
 #[cfg(feature = "control-plane")]
