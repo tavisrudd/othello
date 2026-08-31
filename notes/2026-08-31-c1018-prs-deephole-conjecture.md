@@ -483,6 +483,30 @@ Making this an argument rather than a heuristic needs the explicit error term
 for the carrier's own pencil, not for a generic form.  That is a well-posed
 successor task and it is the single highest-value follow-up this wave exposes.
 
+## 7b. Relation to the two open questions in C513, and to the MDS fence
+
+`notes/2026-07-23-c513-prs-redundancy-eight.md` records two open items that this
+wave speaks to directly.
+
+* *"What happens below 43?  No bounded census or exceptional normal-form theorem
+  was attempted."*  Answered by exhaustive census over the range §4b reaches:
+  `X(8)` is exactly `{8, 9, 11}` there, and the one exceptional orbit with
+  cyclic symmetry — the size-264 orbit at `q = 11` — has the closed normal form
+  `XY(Y^5 + cX^5)`, `c` in two of the five fifth-power classes of `F_11^*`
+  (§5b).  The two regular orbits at `q = 11` still have no normal form.
+* *"Is 43 sharp?"*  No, and by a wide margin: the persistent-only
+  classification holds unbroken from `q = 13` upward across every field
+  censused.  The proved threshold is not merely non-sharp; §7 argues the true
+  threshold should be a constant, while `Q*_r = 6r-16+⌊2√(6r-18)⌋` grows
+  linearly, so the gap widens with `r` rather than closing.
+
+The MDS fence of `notes/open-problems/plausible-bridges/mds.md` is respected
+exactly as on 2026-08-30 and this wave sharpens the same point.  Kaipa's
+deep-hole/MDS-extension dictionary is an equivalence only at covering radius
+`r`, and across every census cell in this wave the radius was `r-1` except the
+two classical even-field cases `k ∈ {2, q-2}` — `(r,q) = (3, q even)` and
+`(7,8)` — both already known.  Nothing here touches MDS length.
+
 ## 8. Mystery ledger
 
 Carried forward from 2026-08-30 §8, with this wave's `ej` + `tt` closeout pass
