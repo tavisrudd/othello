@@ -91,7 +91,24 @@ as each coherent tranche lands.
    2.830x, and wall time 1.495x (`t=16.13`) at identical checksum and peak-live
    work. On a 131,072-class control the final candidate is 1.459x faster and
    uses 11,836 KiB versus 11,552 KiB baseline RSS, closing the earlier 9% span
-   metadata regression to 2.5%. Next: iterative pre-sized ZDD operations.
+   metadata regression to 2.5%.
+   The ZDD closure now has bounded iterative machines for union, join,
+   upward-closure avoidance, and minimalization; counting, reliability DP,
+   and test enumeration are iterative as well. Frame capacities are the exact
+   application variable count rather than the global 256-variable format
+   limit, all hot records have asserted layouts, and a 256-level regression
+   exercises the hard bound. The actual 12-level Ceph closure loop records
+   zero allocation, reallocation, and deallocation after setup. Seven paired
+   long runs preserve exact operations, nodes, checksum, and supports. On the
+   256-support fixture wall time is neutral (`candidate/baseline=1.006`,
+   `t=0.30`) and cycles are 1.013x higher (`t=0.62`), while branches and branch
+   misses fall 1.013x and 1.210x. On the deeper 4,096-support fixture the
+   bounded machine costs 1.017x cycles/wall but removes 1.015x branches and
+   1.084x branch misses. This small measured tax closes unbounded native-stack
+   dependence without changing algebraic work. Current next slice: run the
+   private registry's open-gate report against this new baseline and select
+   the remaining substantive application/orbit or cold-replay failure rather
+   than extending the census speculatively.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

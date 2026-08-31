@@ -459,8 +459,12 @@ fn ceph_xor_repair_family_with(
         group_data[start..].sort_unstable();
         group_offsets.push(group_data.len());
     }
-    let mut zdd =
-        Zdd::<DirectMemo>::with_capacities(node_budget, node_capacity_hint, memo_capacity_hint);
+    let mut zdd = Zdd::<DirectMemo>::with_capacities(
+        node_budget,
+        node_capacity_hint,
+        memo_capacity_hint,
+        coordinate_count,
+    );
     let mut supports = Vec::with_capacity(coordinate_count);
     for (coordinate, &is_unavailable) in unavailable.iter().take(coordinate_count).enumerate() {
         let root = if is_unavailable {
@@ -474,6 +478,8 @@ fn ceph_xor_repair_family_with(
         supports.push(root);
     }
     let mut closure_rounds = 0u32;
+    #[cfg(test)]
+    let _allocation_guard = crate::test_alloc::HotLoopAllocationGuard::enter();
     loop {
         let mut changed = false;
         closure_rounds += 1;
@@ -508,6 +514,8 @@ fn ceph_xor_repair_family_with(
             break;
         }
     }
+    #[cfg(test)]
+    drop(_allocation_guard);
     Ok(CephCompressedRepairFamily {
         coordinate_count,
         eligible_helpers: unavailable[..coordinate_count]
@@ -1621,6 +1629,36 @@ mod tests {
             assert_eq!(answer.support_count, 1u64 << levels);
             assert_eq!(answer.first_support.as_ref().unwrap().len(), levels + 1);
         }
+    }
+
+    #[test]
+    fn compressed_ceph_closure_is_allocation_free_after_setup() {
+        let levels = 12;
+        let common = levels;
+        let mut layers = Vec::with_capacity(2 * levels);
+        for level in 0..levels {
+            let previous = if level == 0 { common } else { level - 1 };
+            for branch in 0..2 {
+                layers.push(CephXorLayer {
+                    parity: level as u8,
+                    data: Box::new([previous as u8, (levels + 1 + 2 * level + branch) as u8]),
+                });
+            }
+        }
+        let unavailable = (0..levels).collect::<Vec<_>>();
+        let (answer, events) = crate::test_alloc::measure_allocations(|| {
+            ceph_xor_repair_supports_compressed(
+                3 * levels + 1,
+                &layers,
+                levels - 1,
+                &unavailable,
+                1 << 20,
+            )
+            .unwrap()
+        });
+        assert_eq!(answer.support_count, 1u64 << levels);
+        assert!(!answer.zdd_storage_grew);
+        assert_eq!(events, Default::default());
     }
 
     #[test]

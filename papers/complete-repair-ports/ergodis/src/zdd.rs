@@ -3,6 +3,8 @@ use num_traits::{One, Zero};
 
 pub(crate) const EMPTY: u32 = 0;
 pub(crate) const UNIT: u32 = 1;
+const MAX_VARIABLES: usize = 256;
+const PENDING: u32 = u32::MAX;
 
 #[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
@@ -135,6 +137,39 @@ struct UnionFrame {
 }
 
 #[repr(C)]
+#[derive(Clone, Copy, Debug)]
+struct JoinFrame {
+    key: u64,
+    left_low: u32,
+    left_high: u32,
+    right_low: u32,
+    right_high: u32,
+    low: u32,
+    left_only: u32,
+    right_only: u32,
+    variable: u32,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug)]
+struct AvoidFrame {
+    key: u64,
+    next_family: u32,
+    next_subsets: u32,
+    low: u32,
+    meta: u32,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug)]
+struct MinimalFrame {
+    root: u32,
+    low: u32,
+    high: u32,
+    variable: u32,
+}
+
+#[repr(C)]
 #[derive(Clone, Copy, Debug, Default)]
 struct FrontierRange {
     start: u32,
@@ -153,6 +188,12 @@ pub(crate) struct AggregatedFrontier {
 
 const _: () = assert!(std::mem::size_of::<UnionFrame>() == 24);
 const _: () = assert!(std::mem::align_of::<UnionFrame>() == 8);
+const _: () = assert!(std::mem::size_of::<JoinFrame>() == 40);
+const _: () = assert!(std::mem::align_of::<JoinFrame>() == 8);
+const _: () = assert!(std::mem::size_of::<AvoidFrame>() == 24);
+const _: () = assert!(std::mem::align_of::<AvoidFrame>() == 8);
+const _: () = assert!(std::mem::size_of::<MinimalFrame>() == 16);
+const _: () = assert!(std::mem::align_of::<MinimalFrame>() == 4);
 
 #[derive(Debug)]
 #[cfg(test)]
@@ -358,9 +399,12 @@ pub(crate) struct Zdd<M: ZddMemo> {
     avoid_cache: M,
     minimal_cache: Vec<u32>,
     union_stack: Vec<UnionFrame>,
+    join_stack: Vec<JoinFrame>,
+    avoid_stack: Vec<AvoidFrame>,
+    minimal_stack: Vec<MinimalFrame>,
     node_budget: usize,
     operations: u64,
-    initial_capacities: [usize; 8],
+    initial_capacities: [usize; 11],
 }
 
 #[cfg(test)]
@@ -374,13 +418,14 @@ impl Zdd<FlatMap> {
 impl<M: ZddMemo> Zdd<M> {
     #[cfg(test)]
     pub(crate) fn with_capacity(node_budget: usize, capacity_hint: usize) -> Self {
-        Self::with_capacities(node_budget, capacity_hint, capacity_hint)
+        Self::with_capacities(node_budget, capacity_hint, capacity_hint, MAX_VARIABLES)
     }
 
     pub(crate) fn with_capacities(
         node_budget: usize,
         node_capacity_hint: usize,
         memo_capacity_hint: usize,
+        variable_capacity: usize,
     ) -> Self {
         let node_budget = node_budget.min((1 << 24) - 2);
         let node_capacity_hint = node_capacity_hint.min(node_budget);
@@ -396,7 +441,11 @@ impl<M: ZddMemo> Zdd<M> {
         let union_cache = M::with_capacity(memo_capacity);
         let join_cache = M::with_capacity(M::join_capacity(memo_capacity));
         let avoid_cache = M::with_capacity(M::avoid_capacity(memo_capacity));
-        let union_stack = Vec::with_capacity(256);
+        let variable_capacity = variable_capacity.clamp(1, MAX_VARIABLES);
+        let union_stack = Vec::with_capacity(variable_capacity);
+        let join_stack = Vec::with_capacity(variable_capacity);
+        let avoid_stack = Vec::with_capacity(variable_capacity);
+        let minimal_stack = Vec::with_capacity(variable_capacity);
         let unique_capacities = unique.capacities();
         let initial_capacities = [
             nodes.capacity(),
@@ -407,6 +456,9 @@ impl<M: ZddMemo> Zdd<M> {
             avoid_cache.capacity(),
             minimal_cache.capacity(),
             union_stack.capacity(),
+            join_stack.capacity(),
+            avoid_stack.capacity(),
+            minimal_stack.capacity(),
         ];
         Self {
             nodes,
@@ -416,6 +468,9 @@ impl<M: ZddMemo> Zdd<M> {
             avoid_cache,
             minimal_cache,
             union_stack,
+            join_stack,
+            avoid_stack,
+            minimal_stack,
             node_budget,
             operations: 0,
             initial_capacities,
@@ -445,6 +500,9 @@ impl<M: ZddMemo> Zdd<M> {
             self.avoid_cache.capacity(),
             self.minimal_cache.capacity(),
             self.union_stack.capacity(),
+            self.join_stack.capacity(),
+            self.avoid_stack.capacity(),
+            self.minimal_stack.capacity(),
         ];
         capacities
             .iter()
@@ -491,6 +549,9 @@ impl<M: ZddMemo> Zdd<M> {
         if high == EMPTY {
             return Some(low);
         }
+        debug_assert!((variable as usize) < self.union_stack.capacity());
+        debug_assert!(low < 2 || variable < self.variable(low));
+        debug_assert!(high < 2 || variable < self.variable(high));
         let (root, inserted) = self.unique.intern(
             &self.nodes,
             variable,
@@ -534,11 +595,15 @@ impl<M: ZddMemo> Zdd<M> {
                 let variable = self.variable(left).min(self.variable(right));
                 let (left_low, left_high) = self.split(left, variable);
                 let (right_low, right_high) = self.split(right, variable);
+                if self.union_stack.len() == self.union_stack.capacity() {
+                    self.union_stack.clear();
+                    return None;
+                }
                 self.union_stack.push(UnionFrame {
                     key,
                     high_left: left_high,
                     high_right: right_high,
-                    low: u32::MAX,
+                    low: PENDING,
                     variable,
                 });
                 left = left_low;
@@ -566,123 +631,295 @@ impl<M: ZddMemo> Zdd<M> {
         }
     }
 
-    pub(crate) fn join(&mut self, left: u32, right: u32) -> Option<u32> {
-        if left == EMPTY || right == EMPTY {
-            return Some(EMPTY);
+    pub(crate) fn join(&mut self, mut left: u32, mut right: u32) -> Option<u32> {
+        debug_assert!(self.join_stack.is_empty());
+        let mut result;
+        loop {
+            result = loop {
+                if left == EMPTY || right == EMPTY {
+                    break EMPTY;
+                }
+                if left == UNIT {
+                    break right;
+                }
+                if right == UNIT {
+                    break left;
+                }
+                let key = Self::commutative_key(left, right);
+                if let Some(root) = self.join_cache.get(key) {
+                    break root;
+                }
+                self.operations += 1;
+                let variable = self.variable(left).min(self.variable(right));
+                let (left_low, left_high) = self.split(left, variable);
+                let (right_low, right_high) = self.split(right, variable);
+                if self.join_stack.len() == self.join_stack.capacity() {
+                    self.join_stack.clear();
+                    return None;
+                }
+                self.join_stack.push(JoinFrame {
+                    key,
+                    left_low,
+                    left_high,
+                    right_low,
+                    right_high,
+                    low: PENDING,
+                    left_only: PENDING,
+                    right_only: PENDING,
+                    variable,
+                });
+                left = left_low;
+                right = right_low;
+            };
+
+            loop {
+                let Some(mut frame) = self.join_stack.pop() else {
+                    return Some(result);
+                };
+                let variable = frame.variable;
+                let stage = if frame.low == PENDING {
+                    0
+                } else if frame.left_only == PENDING {
+                    1
+                } else if frame.right_only == PENDING {
+                    2
+                } else {
+                    3
+                };
+                match stage {
+                    0 => {
+                        frame.low = result;
+                        self.join_stack.push(frame);
+                        left = frame.left_high;
+                        right = frame.right_low;
+                        break;
+                    }
+                    1 => {
+                        frame.left_only = result;
+                        self.join_stack.push(frame);
+                        left = frame.left_low;
+                        right = frame.right_high;
+                        break;
+                    }
+                    2 => {
+                        frame.right_only = result;
+                        self.join_stack.push(frame);
+                        left = frame.left_high;
+                        right = frame.right_high;
+                        break;
+                    }
+                    3 => {
+                        let Some(one_high) = self.union(frame.left_only, frame.right_only) else {
+                            self.join_stack.clear();
+                            return None;
+                        };
+                        let Some(high) = self.union(one_high, result) else {
+                            self.join_stack.clear();
+                            return None;
+                        };
+                        let Some(root) = self.make(variable, frame.low, high) else {
+                            self.join_stack.clear();
+                            return None;
+                        };
+                        self.join_cache.insert(frame.key, root);
+                        result = root;
+                    }
+                    _ => unreachable!("invalid iterative join stage"),
+                }
+            }
         }
-        if left == UNIT {
-            return Some(right);
-        }
-        if right == UNIT {
-            return Some(left);
-        }
-        let key = Self::commutative_key(left, right);
-        if let Some(root) = self.join_cache.get(key) {
-            return Some(root);
-        }
-        self.operations += 1;
-        let variable = self.variable(left).min(self.variable(right));
-        let (left_low, left_high) = self.split(left, variable);
-        let (right_low, right_high) = self.split(right, variable);
-        let low = self.join(left_low, right_low)?;
-        let left_only = self.join(left_high, right_low)?;
-        let right_only = self.join(left_low, right_high)?;
-        let both = self.join(left_high, right_high)?;
-        let one_high = self.union(left_only, right_only)?;
-        let high = self.union(one_high, both)?;
-        let root = self.make(variable, low, high)?;
-        self.join_cache.insert(key, root);
-        Some(root)
     }
 
     fn contains_empty(&self, root: u32) -> bool {
         root == UNIT || root >= 2 && self.node(root).meta & 0x100 != 0
     }
 
-    fn avoid_supersets(&mut self, family: u32, subsets: u32) -> Option<u32> {
-        if family == EMPTY || subsets == EMPTY {
-            return Some(family);
+    fn avoid_supersets(&mut self, mut family: u32, mut subsets: u32) -> Option<u32> {
+        const FAMILY_FIRST: u32 = 0;
+        const SUBSET_FIRST: u32 = 1;
+        const EQUAL_VARIABLE: u32 = 2;
+
+        debug_assert!(self.avoid_stack.is_empty());
+        let mut result;
+        loop {
+            result = loop {
+                if family == EMPTY || subsets == EMPTY {
+                    break family;
+                }
+                if family == subsets {
+                    break EMPTY;
+                }
+                let key = Self::pair_key(family, subsets);
+                if let Some(root) = self.avoid_cache.get(key) {
+                    break root;
+                }
+                if self.contains_empty(subsets) {
+                    break EMPTY;
+                }
+                if family == UNIT {
+                    break UNIT;
+                }
+                self.operations += 1;
+                let family_variable = self.variable(family);
+                let subset_variable = self.variable(subsets);
+                let kind = if family_variable < subset_variable {
+                    FAMILY_FIRST
+                } else if subset_variable < family_variable {
+                    SUBSET_FIRST
+                } else {
+                    EQUAL_VARIABLE
+                };
+                let family_node = self.node(family);
+                let (next_family, next_subsets) = if kind == FAMILY_FIRST {
+                    (family_node.high, subsets)
+                } else if kind == SUBSET_FIRST {
+                    (family, EMPTY)
+                } else {
+                    (family_node.high, subsets)
+                };
+                if self.avoid_stack.len() == self.avoid_stack.capacity() {
+                    self.avoid_stack.clear();
+                    return None;
+                }
+                self.avoid_stack.push(AvoidFrame {
+                    key,
+                    next_family,
+                    next_subsets,
+                    low: PENDING,
+                    meta: family_variable | (kind << 8),
+                });
+                if kind == FAMILY_FIRST {
+                    family = family_node.low;
+                } else if kind == SUBSET_FIRST {
+                    subsets = self.node(subsets).low;
+                } else {
+                    family = family_node.low;
+                    subsets = self.node(subsets).low;
+                }
+            };
+
+            loop {
+                let Some(mut frame) = self.avoid_stack.pop() else {
+                    return Some(result);
+                };
+                let kind = frame.meta >> 8;
+                let root = if kind == SUBSET_FIRST {
+                    result
+                } else if frame.low == PENDING {
+                    frame.low = result;
+                    family = frame.next_family;
+                    if kind == FAMILY_FIRST {
+                        subsets = frame.next_subsets;
+                    } else {
+                        let subset_node = self.node(frame.next_subsets);
+                        let Some(all_subset_tails) = self.union(subset_node.low, subset_node.high)
+                        else {
+                            self.avoid_stack.clear();
+                            return None;
+                        };
+                        subsets = all_subset_tails;
+                    }
+                    self.avoid_stack.push(frame);
+                    break;
+                } else {
+                    let Some(root) = self.make(frame.meta & 0xff, frame.low, result) else {
+                        self.avoid_stack.clear();
+                        return None;
+                    };
+                    root
+                };
+                self.avoid_cache.insert(frame.key, root);
+                result = root;
+            }
         }
-        if family == subsets {
-            return Some(EMPTY);
-        }
-        let key = Self::pair_key(family, subsets);
-        if let Some(root) = self.avoid_cache.get(key) {
-            return Some(root);
-        }
-        if self.contains_empty(subsets) {
-            return Some(EMPTY);
-        }
-        if family == UNIT {
-            return Some(UNIT);
-        }
-        self.operations += 1;
-        let family_variable = self.variable(family);
-        let subset_variable = self.variable(subsets);
-        let root = if family_variable < subset_variable {
-            let node = self.node(family);
-            let low = self.avoid_supersets(node.low, subsets)?;
-            let high = self.avoid_supersets(node.high, subsets)?;
-            self.make(family_variable, low, high)?
-        } else if subset_variable < family_variable {
-            let subset_low = self.node(subsets).low;
-            self.avoid_supersets(family, subset_low)?
-        } else {
-            let family_node = self.node(family);
-            let subset_node = self.node(subsets);
-            let low = self.avoid_supersets(family_node.low, subset_node.low)?;
-            let all_subset_tails = self.union(subset_node.low, subset_node.high)?;
-            let high = self.avoid_supersets(family_node.high, all_subset_tails)?;
-            self.make(family_variable, low, high)?
-        };
-        self.avoid_cache.insert(key, root);
-        Some(root)
     }
 
-    pub(crate) fn minimal(&mut self, root: u32) -> Option<u32> {
-        if root < 2 {
-            return Some(root);
+    pub(crate) fn minimal(&mut self, mut root: u32) -> Option<u32> {
+        debug_assert!(self.minimal_stack.is_empty());
+        let mut result;
+        loop {
+            result = loop {
+                if root < 2 {
+                    break root;
+                }
+                if self.contains_empty(root) {
+                    break UNIT;
+                }
+                let cached = self.minimal_cache[root as usize];
+                if cached != PENDING {
+                    break cached;
+                }
+                self.operations += 1;
+                let node = self.node(root);
+                if self.minimal_stack.len() == self.minimal_stack.capacity() {
+                    self.minimal_stack.clear();
+                    return None;
+                }
+                self.minimal_stack.push(MinimalFrame {
+                    root,
+                    low: PENDING,
+                    high: node.high,
+                    variable: node.meta & 0xff,
+                });
+                root = node.low;
+            };
+
+            loop {
+                let Some(mut frame) = self.minimal_stack.pop() else {
+                    return Some(result);
+                };
+                if frame.low == PENDING {
+                    frame.low = result;
+                    root = frame.high;
+                    self.minimal_stack.push(frame);
+                    break;
+                }
+                let Some(high) = self.avoid_supersets(result, frame.low) else {
+                    self.minimal_stack.clear();
+                    return None;
+                };
+                let Some(minimal) = self.make(frame.variable, frame.low, high) else {
+                    self.minimal_stack.clear();
+                    return None;
+                };
+                self.minimal_cache[frame.root as usize] = minimal;
+                result = minimal;
+            }
         }
-        if self.contains_empty(root) {
-            return Some(UNIT);
-        }
-        let cached = self.minimal_cache[root as usize];
-        if cached != u32::MAX {
-            return Some(cached);
-        }
-        self.operations += 1;
-        let node = self.node(root);
-        let low = self.minimal(node.low)?;
-        let high = self.minimal(node.high)?;
-        let high = self.avoid_supersets(high, low)?;
-        let minimal = self.make(node.meta & 0xff, low, high)?;
-        self.minimal_cache[root as usize] = minimal;
-        Some(minimal)
     }
 
     pub(crate) fn count(&self, root: u32) -> Option<u64> {
         const UNKNOWN: u64 = u64::MAX;
+        const EXPANDED: u32 = 1 << 31;
 
-        fn visit<M: ZddMemo>(zdd: &Zdd<M>, root: u32, cache: &mut [u64]) -> Option<u64> {
-            if root == EMPTY {
-                return Some(0);
-            }
-            if root == UNIT {
-                return Some(1);
-            }
-            let cached = cache[root as usize];
-            if cached != UNKNOWN {
-                return Some(cached);
-            }
-            let node = zdd.node(root);
-            let count = visit(zdd, node.low, cache)?.checked_add(visit(zdd, node.high, cache)?)?;
-            cache[root as usize] = count;
-            Some(count)
-        }
         let mut cache = vec![UNKNOWN; self.nodes.len() + 2];
         cache[EMPTY as usize] = 0;
         cache[UNIT as usize] = 1;
-        visit(self, root, &mut cache)
+        let mut stack = Vec::with_capacity(MAX_VARIABLES * 2 + 1);
+        stack.push(root);
+        while let Some(tagged) = stack.pop() {
+            let current = tagged & !EXPANDED;
+            if current < 2 || cache[current as usize] != UNKNOWN {
+                continue;
+            }
+            let node = self.node(current);
+            if tagged & EXPANDED != 0 {
+                cache[current as usize] =
+                    cache[node.low as usize].checked_add(cache[node.high as usize])?;
+                continue;
+            }
+            if stack.len() + 3 > stack.capacity() {
+                return None;
+            }
+            stack.push(current | EXPANDED);
+            if cache[node.high as usize] == UNKNOWN {
+                stack.push(node.high);
+            }
+            if cache[node.low as usize] == UNKNOWN {
+                stack.push(node.low);
+            }
+        }
+        Some(cache[root as usize])
     }
 
     pub(crate) fn first(&self, mut root: u32) -> Option<Box<[u8]>> {
@@ -735,62 +972,102 @@ impl<M: ZddMemo> Zdd<M> {
 
         fn counts_from<M: ZddMemo>(
             zdd: &mut Zdd<M>,
-            root: u32,
-            start: usize,
+            mut root: u32,
+            mut start: usize,
             included_variables: &[bool],
             memo: &mut Vec<Option<Box<[BigUint]>>>,
         ) -> Option<Vec<BigUint>> {
+            struct Frame {
+                root: u32,
+                start: usize,
+                variable: usize,
+                low: Option<Vec<BigUint>>,
+            }
+
             let variable_count = included_variables.len();
-            if start > variable_count {
-                return None;
-            }
-            if root == EMPTY {
-                let remaining = included_variables[start..]
-                    .iter()
-                    .filter(|&&keep| keep)
-                    .count();
-                return Some(vec![BigUint::zero(); remaining + 1]);
-            }
-            if root == UNIT {
-                let remaining = included_variables[start..]
-                    .iter()
-                    .filter(|&&keep| keep)
-                    .count();
-                return Some(binomial_row(remaining));
-            }
-            let variable = zdd.variable(root) as usize;
-            if variable < start || variable >= variable_count || !included_variables[variable] {
-                return None;
-            }
-            if memo.len() <= root as usize {
-                memo.resize(root as usize + 1, None);
-            }
-            let core = if let Some(cached) = &memo[root as usize] {
-                cached.to_vec()
-            } else {
-                let node = zdd.node(root);
-                let low = counts_from(zdd, node.low, variable + 1, included_variables, memo)?;
-                let high_root = zdd.union(node.low, node.high)?;
-                let high = counts_from(zdd, high_root, variable + 1, included_variables, memo)?;
-                let tail_size = included_variables[variable + 1..]
-                    .iter()
-                    .filter(|&&keep| keep)
-                    .count();
-                let mut counts = vec![BigUint::zero(); tail_size + 2];
-                for (weight, count) in low.into_iter().enumerate() {
-                    counts[weight] += count;
+            let mut stack = Vec::with_capacity(MAX_VARIABLES);
+            let mut result;
+            loop {
+                result = loop {
+                    if start > variable_count {
+                        return None;
+                    }
+                    if root < 2 {
+                        let remaining = included_variables[start..]
+                            .iter()
+                            .filter(|&&keep| keep)
+                            .count();
+                        break if root == EMPTY {
+                            vec![BigUint::zero(); remaining + 1]
+                        } else {
+                            binomial_row(remaining)
+                        };
+                    }
+                    let variable = zdd.variable(root) as usize;
+                    if variable < start
+                        || variable >= variable_count
+                        || !included_variables[variable]
+                    {
+                        return None;
+                    }
+                    if memo.len() <= root as usize {
+                        memo.resize(root as usize + 1, None);
+                    }
+                    if let Some(cached) = &memo[root as usize] {
+                        let gap = included_variables[start..variable]
+                            .iter()
+                            .filter(|&&keep| keep)
+                            .count();
+                        break convolve_binomial(cached, gap);
+                    }
+                    if stack.len() == stack.capacity() {
+                        return None;
+                    }
+                    let node = zdd.node(root);
+                    stack.push(Frame {
+                        root,
+                        start,
+                        variable,
+                        low: None,
+                    });
+                    root = node.low;
+                    start = variable + 1;
+                };
+
+                loop {
+                    let Some(mut frame) = stack.pop() else {
+                        return Some(result);
+                    };
+                    if frame.low.is_none() {
+                        let node = zdd.node(frame.root);
+                        frame.low = Some(result);
+                        root = zdd.union(node.low, node.high)?;
+                        start = frame.variable + 1;
+                        stack.push(frame);
+                        break;
+                    }
+                    let tail_size = included_variables[frame.variable + 1..]
+                        .iter()
+                        .filter(|&&keep| keep)
+                        .count();
+                    let mut counts = vec![BigUint::zero(); tail_size + 2];
+                    for (weight, count) in frame.low.take()?.into_iter().enumerate() {
+                        counts[weight] += count;
+                    }
+                    for (weight, count) in result.into_iter().enumerate() {
+                        counts[weight + 1] += count;
+                    }
+                    if memo.len() <= frame.root as usize {
+                        memo.resize(frame.root as usize + 1, None);
+                    }
+                    memo[frame.root as usize] = Some(counts.clone().into_boxed_slice());
+                    let gap = included_variables[frame.start..frame.variable]
+                        .iter()
+                        .filter(|&&keep| keep)
+                        .count();
+                    result = convolve_binomial(&counts, gap);
                 }
-                for (weight, count) in high.into_iter().enumerate() {
-                    counts[weight + 1] += count;
-                }
-                memo[root as usize] = Some(counts.clone().into_boxed_slice());
-                counts
-            };
-            let gap = included_variables[start..variable]
-                .iter()
-                .filter(|&&keep| keep)
-                .count();
-            Some(convolve_binomial(&core, gap))
+            }
         }
 
         counts_from(self, root, 0, included_variables, &mut Vec::new()).map(Vec::into_boxed_slice)
@@ -938,27 +1215,28 @@ impl<M: ZddMemo> Zdd<M> {
 
     #[cfg(test)]
     fn collect(&self, root: u32) -> Vec<Vec<u32>> {
-        fn visit<M: ZddMemo>(
-            zdd: &Zdd<M>,
-            root: u32,
-            prefix: &mut Vec<u32>,
-            output: &mut Vec<Vec<u32>>,
-        ) {
-            if root == EMPTY {
-                return;
-            }
-            if root == UNIT {
-                output.push(prefix.clone());
-                return;
-            }
-            let node = zdd.node(root);
-            visit(zdd, node.low, prefix, output);
-            prefix.push(node.meta & 0xff);
-            visit(zdd, node.high, prefix, output);
-            prefix.pop();
-        }
+        const PUSH_VARIABLE: u32 = 1 << 31;
+        const POP_VARIABLE: u32 = 1 << 30;
+
         let mut output = Vec::new();
-        visit(self, root, &mut Vec::new(), &mut output);
+        let mut prefix = Vec::with_capacity(MAX_VARIABLES);
+        let mut stack = Vec::with_capacity(MAX_VARIABLES * 3 + 1);
+        stack.push(root);
+        while let Some(task) = stack.pop() {
+            if task & PUSH_VARIABLE != 0 {
+                prefix.push(task & 0xff);
+            } else if task & POP_VARIABLE != 0 {
+                prefix.pop();
+            } else if task == UNIT {
+                output.push(prefix.clone());
+            } else if task != EMPTY {
+                let node = self.node(task);
+                stack.push(POP_VARIABLE);
+                stack.push(node.high);
+                stack.push(PUSH_VARIABLE | (node.meta & 0xff));
+                stack.push(node.low);
+            }
+        }
         output.sort();
         output
     }
@@ -1052,6 +1330,25 @@ mod tests {
         let root = family(&mut zdd, &[&[0, 2], &[1, 3], &[0, 3]]);
         assert_eq!(zdd.count(root), Some(3));
         assert_eq!(zdd.first(root).as_deref(), Some([1, 3].as_slice()));
+    }
+
+    #[test]
+    fn depth_256_operations_use_bounded_iterative_stacks() {
+        let mut zdd = Zdd::<FlatMap>::new(10_000);
+        let mut all = UNIT;
+        let mut odd = UNIT;
+        for variable in (0..MAX_VARIABLES as u32).rev() {
+            all = zdd.make(variable, EMPTY, all).unwrap();
+            if variable & 1 != 0 {
+                odd = zdd.make(variable, EMPTY, odd).unwrap();
+            }
+        }
+        assert_eq!(zdd.join(all, odd), Some(all));
+        let family = zdd.union(all, odd).unwrap();
+        assert_eq!(zdd.minimal(family), Some(odd));
+        assert_eq!(zdd.count(family), Some(2));
+        assert_eq!(zdd.first(all).unwrap().len(), MAX_VARIABLES);
+        assert!(!zdd.storage_grew());
     }
 
     #[test]

@@ -275,7 +275,55 @@ candidate's 9.1% RSS regression to 2.5% without giving back its speedup. Raw
 counters are under
 `/home/tavis/.cache/ergodis-perf/c1017-ordered/span-pool-ab`.
 
-The next allocation-remediation target is growing ZDD operations.
+The growing/recursive ZDD gate is now closed. `union`, `join`, upward-closure
+avoidance, and antichain minimalization use explicit continuation machines;
+counting, reliability-polynomial DP, and test-family enumeration no longer
+recurse either. The four solve stacks are allocated before closure and sized
+by the application's exact variable universe, not the 256-variable encoding
+limit. This is a semantic bound: every recursive descent advances the least
+decision variable, and node construction asserts strict variable growth into
+both children. A production 25-variable fixture therefore reserves 25 frames
+per machine while the dedicated 256-variable regression reaches the format
+limit without growth or native-stack dependence.
+
+`UnionFrame`, `JoinFrame`, `AvoidFrame`, and `MinimalFrame` are respectively
+24, 40, 24, and 16-byte `repr(C)` records with compile-time size/alignment
+assertions. The join machine stores each operand split once and uses sentinel
+result fields as its continuation state; this recovered most of the first
+iterative prototype's 18% instruction regression. Capacity guards precede
+every descent push (a continuation re-push has just freed its own slot). A
+control that removed them retired fewer instructions
+but collapsed IPC because LLVM retained the growth paths, so the guarded form
+is retained. A second control that adaptively removed products already inside
+the published antichain's upward closure reduced ZDD nodes and abstract
+operations but increased cycles/instructions on both standard fixtures; it is
+rejected rather than hidden in the final source.
+
+The guarded 12-level Ceph closure test measures the actual group/destination,
+join, union, and minimalization region and reports zero allocations,
+reallocations, and deallocations. Seeded explicit-family differentials cover
+all algebraic operations, the existing seeded Ceph comparison covers the
+lossy direct memo, and the depth-256 test exercises the exact stack bound.
+The complete 353-test all-feature library suite plus integration/doc tests and
+strict all-target clippy pass in isolated target directories.
+
+Seven alternating core-2 rounds of 20,000 solves on
+`application:ceph-zdd:rust:8:2` preserve exactly 85,860,000 operations,
+1,568 peak nodes per solve, the 256-support result, and checksum. Relative to
+commit `6511cef18`, candidate/baseline is 1.013x cycles (`t=0.62`) and 1.006x
+wall (`t=0.30`), statistically time-neutral; it retires 1.033x more
+instructions but 1.013x fewer branches and 1.210x fewer branch misses. Seven
+paired 5,000-solve rounds on the deeper 37-variable, 4,096-support fixture are
+1.017x higher in cycles (`t=7.15`) and wall (`t=7.46`), with 1.033x more
+instructions, 1.015x fewer branches, and 1.084x fewer branch misses. Median
+deep-fixture peak RSS is 2,440 KiB versus 2,152 KiB baseline; the absolute
+0.28 MiB increase is the allocator/code-page cost of the reusable machines,
+not growth in the guarded loop. Raw evidence is under
+`/home/tavis/.cache/ergodis-perf/c1017-zdd/variable-bound-ab` and
+`/home/tavis/.cache/ergodis-perf/c1017-zdd/deep-ab`.
+
+Next, rerun the private registry's bounded open-gate report and choose the
+remaining substantive application/orbit or cold-replay failure.
 
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
