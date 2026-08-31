@@ -86,8 +86,8 @@
       "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/scheduler.rs"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/scheduler.rs"]},
       "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
-      "parallel_counters": {"status": "open", "reason": "No retained parallel counter A/B is registered."},
-      "contention": {"status": "open", "reason": "Parallel ownership and false-sharing evidence is not registered."}
+      "parallel_counters": {"status": "na", "reason": "Retained 1/12-worker controls found no sparse end-to-end crossover, so the parallel compatibility API now selects the serial sparse kernel; adaptive dense scheduling retains separate parallel kernels."},
+      "contention": {"status": "na", "reason": "The sparse scheduler has no worker-written parallel path after the negative crossover control; its parallel compatibility API executes the serial sparse specialization."}
     },
     {
       "id": "ordered-resource-front",

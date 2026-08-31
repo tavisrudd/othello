@@ -238,10 +238,24 @@ faster on the smaller fixture but increased branches and misses and gave no
 large-front cycle or memory benefit; the retained 50% load is the more robust
 scaling choice.
 
-Parallel Pareto marking preserves exact work and output at 1, 2, 4, 8, and 12
-threads, but it does not materially accelerate these fixtures: the serial
-state-expansion/directory pass dominates. This is recorded as a negative
-scaling result, not a parallel speedup.
+Parallel Pareto marking preserves exact work and output, but a renewed
+1/12-worker crossover audit found no end-to-end win even at a 4,144,127-state
+peak. The sparse compatibility APIs therefore select the same serial sparse
+specialization; adaptive dense scheduling retains its separate parallel
+kernels. This removes every sparse worker write, Rayon scheduling point, and
+possible false-sharing edge rather than retaining parallel machinery that did
+not pay for itself. The correctness control now uses at most 12 workers.
+
+Seven rotated old/new counter pairs on the 688,212-state fixture preserve
+10,383,904 transitions, peak states, checksum, and result. At one worker the
+serial-dispatch candidate has baseline/candidate ratios 1.021x cycles and
+1.015x wall (`t=1.31/0.81`); through the 12-worker compatibility API the ratios
+are 1.012x and 1.022x (`t=1.09/1.17`). Three rotated 12-worker-API pairs on the
+4,144,127-state fixture give 0.980x cycles and 0.972x wall
+(`t=-0.84/-1.17`), a noisy 2--3% point cost rather than an established
+regression or crossover. Instructions, branches, exact work, and outputs are
+unchanged throughout; RSS differs by at most 528 KiB. Raw evidence is under
+`/home/tavis/.cache/ergodis-perf/c1017-scheduler/final-serial-ab`.
 
 The frozen ordered-resource allocation gate is now closed as well. A compiled
 query already determines the complete reachable class set and the last source
@@ -339,11 +353,10 @@ give medians of 2,260 KiB baseline and 2,616 KiB candidate, a 356 KiB absolute
 increase from the iterative code and fixed workspaces. Raw evidence is under
 `/home/tavis/.cache/ergodis-perf/c1017-zdd/generic-final-ab`.
 
-The refreshed private registry now reports 59 pass, 13 open, and 30
-not-applicable cells. The next highest-severity solve-kernel gap is the sparse
-scheduler's parallel-counter and contention evidence; the remaining open
-cells are observational-compiler parallel evidence or single-thread retained
-counter rows.
+The refreshed private registry now reports 59 pass, 11 open, and 32
+not-applicable cells. The next multi-cell gap is observational-refinement
+parallel evidence; the remaining open cells are retained single-thread counter
+rows.
 
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at

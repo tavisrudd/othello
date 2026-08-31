@@ -968,7 +968,6 @@ impl WeightedRepairProblem {
     fn solve_sparse_with_storage<const MEASURE_ALLOCATIONS: bool>(
         &self,
         storage: &mut SparseRepairStorage,
-        parallel: bool,
     ) -> Result<WeightedParallelRepairResult, SchedulerError> {
         let width = self.capacities.len();
         storage.loads.clear();
@@ -1112,7 +1111,6 @@ impl WeightedRepairProblem {
                     &storage.updated,
                     &storage.loads,
                     width,
-                    parallel,
                     &mut storage.keep,
                 );
                 storage.states.clear();
@@ -1194,7 +1192,7 @@ impl WeightedRepairProblem {
 
     pub fn solve(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
         let mut workspace = WeightedRepairWorkspace::new();
-        self.solve_sparse_with_storage::<false>(&mut workspace.sparse, false)
+        self.solve_sparse_with_storage::<false>(&mut workspace.sparse)
     }
 
     /// Solve with reusable sparse-front storage.
@@ -1202,23 +1200,27 @@ impl WeightedRepairProblem {
         &self,
         workspace: &mut WeightedRepairWorkspace,
     ) -> Result<WeightedParallelRepairResult, SchedulerError> {
-        self.solve_sparse_with_storage::<true>(&mut workspace.sparse, false)
+        self.solve_sparse_with_storage::<true>(&mut workspace.sparse)
     }
 
-    /// Solves with parallel Pareto kernels when the frontier is large enough.
+    /// Compatibility entry point for callers selecting a parallel backend.
+    ///
+    /// Sparse front construction remains serial because retained 1/12-worker
+    /// controls found no end-to-end crossover. Adaptive dense solves still use
+    /// their profitable parallel kernels.
     #[cfg(feature = "parallel")]
     pub fn solve_parallel(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
         let mut workspace = WeightedRepairWorkspace::new();
-        self.solve_sparse_with_storage::<false>(&mut workspace.sparse, true)
+        self.solve_sparse_with_storage::<false>(&mut workspace.sparse)
     }
 
-    /// Parallel sparse solve with reusable worker-local front storage.
+    /// Sparse solve with reusable storage through the parallel compatibility API.
     #[cfg(feature = "parallel")]
     pub fn solve_sparse_parallel_with_workspace(
         &self,
         workspace: &mut WeightedRepairWorkspace,
     ) -> Result<WeightedParallelRepairResult, SchedulerError> {
-        self.solve_sparse_with_storage::<true>(&mut workspace.sparse, true)
+        self.solve_sparse_with_storage::<true>(&mut workspace.sparse)
     }
 
     pub fn solve_adaptive(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
@@ -2133,36 +2135,10 @@ fn quadratic_pareto_keep_into(
     states: &[ScheduleState],
     loads: &[u32],
     width: usize,
-    _parallel: bool,
     keep: &mut Vec<u8>,
 ) {
     keep.clear();
     keep.resize(states.len(), 0);
-    #[cfg(feature = "parallel")]
-    if _parallel
-        && states
-            .len()
-            .saturating_mul(states.len())
-            .saturating_mul(width)
-            >= PARALLEL_PARETO_WORK
-    {
-        #[cfg(test)]
-        let allocation_measurement = crate::test_alloc::current_measurement();
-        keep.par_iter_mut().enumerate().for_each_init(
-            || {
-                #[cfg(test)]
-                return crate::test_alloc::HotLoopAllocationGuard::enter_for(
-                    allocation_measurement,
-                );
-                #[cfg(not(test))]
-                {}
-            },
-            |_allocation_guard, (index, slot)| {
-                *slot = u8::from(state_is_pareto(states, loads, width, index, &states[index]));
-            },
-        );
-        return;
-    }
     for (index, slot) in keep.iter_mut().enumerate() {
         *slot = u8::from(state_is_pareto(states, loads, width, index, &states[index]));
     }
@@ -2788,7 +2764,7 @@ mod tests {
             problem.recommended_backend(),
             WeightedSchedulerBackend::DenseLattice
         );
-        for threads in [1, 2, 24] {
+        for threads in [1, 2, 12] {
             let pool = rayon::ThreadPoolBuilder::new()
                 .num_threads(threads)
                 .build()

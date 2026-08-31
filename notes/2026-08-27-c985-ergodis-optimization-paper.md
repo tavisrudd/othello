@@ -113,11 +113,22 @@ as each coherent tranche lands.
    measure 2,260 KiB baseline versus 2,616 KiB candidate: a 356 KiB text and
    workspace cost, material proportionally but small in absolute terms. Raw
    evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-zdd/generic-final-ab`. The private
-   registry now records 59 pass, 13 open, and 30
-   not-applicable cells. Current next slice: close the sparse scheduler's
-   parallel-counter and contention gates, the highest-severity remaining
-   solve-kernel evidence gap.
+   `/home/tavis/.cache/ergodis-perf/c1017-zdd/generic-final-ab`.
+   The sparse scheduler's parallel gate is now resolved by a negative
+   crossover result rather than a forced speedup. Its 688,212-state and
+   4,144,127-state controls show no material 1-to-12-worker gain because serial
+   state expansion and directory construction dominate. The public parallel
+   compatibility APIs therefore select the allocation-free serial sparse
+   specialization, while adaptive dense scheduling retains its separate
+   parallel kernels. This deletes all sparse worker writes and false-sharing
+   edges. Seven standard old/new pairs are neutral to slightly favourable at
+   both 1T and the 12T API; three large pairs have a noisy 2--3% candidate point
+   cost (`t=-0.84/-1.17`) with identical work, instructions, branches, and
+   output. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-scheduler/final-serial-ab`. The private
+   registry now records 59 pass, 11 open, and 32 not-applicable cells. Current
+   next slice: observational-refinement parallel evidence, the remaining
+   multi-cell registry gap.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and
