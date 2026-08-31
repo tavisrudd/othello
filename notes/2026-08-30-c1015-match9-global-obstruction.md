@@ -2,11 +2,19 @@
 
 **Lane:** `relconic`
 
-**Status:** Strong gate reached for the ten-point regular class: a general
-star-configuration theorem forces every canonical one-factorization line in
-characteristic two. The nine-point extension and final priority audit remain
+**Status:** The ten-point theorem is now universal: every geometrically
+transversal one-factorization of (K_{10}) is a pencil, over every field.
+For the regular matching design this forces every canonical
+one-factorization line, after which Nagy's theorem gives the exact field
+boundary. The nine-point extension and final forward-citation audit remain
 open. No manuscript, summary, mirror, formal, release, or Ergodis source edits
 are authorized.
+
+Literature depth for the sources added or reused in this report: **two were
+read at full-text depth** (Nagy and Korchmaros--Pace--Sonnino); Tohaneanu--Xie,
+Dinitz--Garnick--McKay, Gelling, and Ziegler were read at the explicitly
+recorded partial depths below. The priority verdict remains bounded and
+provisional.
 
 ## Starting point
 
@@ -118,6 +126,13 @@ characteristic two the layers collapse, every (t_M\in W), and all
 transversals (T_M) are concurrent. Dually, all matching centers are
 collinear.
 
+There is also an all-characteristic amplification. Each Hamilton pair forces
+the (m) factors indexed by odd-distance vertices onto its pencil. If a
+family of these (m)-sets has connected closure under union of sets sharing
+two factor labels, then their pencils coincide and **all** transversals are
+concurrent over an arbitrary field. This is a purely combinatorial closure
+test placed on top of (2).
+
 This has two useful general forms.
 
 1. Every geometrically transversal one-factorization over a field of
@@ -135,18 +150,90 @@ The factor (2) in (2) is the invariant mechanism behind the odd/characteristic-
 two split seen in the seven-concurrence calculation. It replaces a normalized
 ratio accident by a projective parity holonomy.
 
+## Universal order-ten pencil theorem
+
+The Hamilton-pair theorem admits a complete order-ten closure.
+
+> **Theorem.** Let (L_0,\ldots,L_9) be ten lines in
+> \(\operatorname{PG}(2,K)\) with no three concurrent. If the edges of
+> (K_{10}) admit a one-factorization such that the five star points belonging
+> to every factor are collinear, then the nine factor transversals form a
+> pencil. This holds over every field and for every one-factorization of
+> (K_{10}).
+
+For each pair of factors and each choice of base carrier, (2) places the
+factors indexed by the odd vertices of the base cycle on one line in the
+parameter plane of transversal forms. Exact canonical enumeration of all 396
+one-factorizations gives the following dichotomy.
+
+- In 395 classes, these parity subsets have connected two-point-overlap
+  closure on all nine factors, so the pencil conclusion is immediate.
+- The unique remaining class has no Hamilton pair: every factor pair has
+  cycle type (4+6). Its parity constraints are the twelve triples of the
+  Steiner triple system (AG(2,3)) on the nine factor forms. Adding any other
+  collinear triple makes the two-point closure all nine, so a non-pencil
+  realization would have to be an exact projective representation of
+  (AG(2,3)). Ziegler's classical coordinatization says that such a
+  representation exists precisely when the field contains a root of
+  \(\omega^2-\omega+1\); it is not restricted to characteristic three.
+  The exceptional factorization itself has the transparent affine form
+  \[
+  M_a=\{\{\infty,a\}\}\cup
+      \{\{x,y\}:x+y=-a\},\qquad a\in\mathbf F_3^2,
+  \]
+  and automorphism-group order 432. Thus the appearance of the affine-plane
+  shadow is structural, not an accidental isomorphism found after the census.
+  Substituting his nine Hesse points into the 45 lift equations
+  \(u_i+u_j=\lambda_{ij}t_M\) gives a 135-by-75 matrix over
+  \(\mathbf Z[\omega]\). Exact elimination selects a full minor with
+  determinant
+
+  \[
+  -8(1+\omega),\qquad
+  N\bigl(-8(1+\omega)\bigr)=192=2^6\cdot3.
+  \]
+
+  Therefore the lift has only the zero solution in every characteristic
+  except possibly 2 and 3. Characteristic two is already eliminated by the
+  universal characteristic-two triple closure. In characteristic three,
+  standard affine coordinates \(t=(a,b,1)\) give rank 74 and a unique
+  projective nullvector with
+
+  \[
+  u_0=0,\qquad \{u_1,\ldots,u_9\}
+    =\{(a,b,-1):a,b\in\mathbf F_3\}.
+  \]
+
+  The zero defining form is impossible for a carrier line. Hence the
+  non-pencil branch dies in the remaining characteristic as well.
+
+The census is independently normalized by two classical totals: 396
+unlabelled classes and 1,225,566,720 labelled factorizations. The latter is
+recovered from the computed automorphism orders. This also detects and avoids
+the erroneous 1,255,566,720 count repeated in some secondary sources.
+
+For the regular Ree factorization, the nine non-Hamilton pairs form three
+disjoint triangles, so its Hamilton-pair graph is (K_{3,3,3}). These are
+exactly the three diagonal-triple packets found in the preliminary
+quadrangle calculation. The 27 cross-part Hamilton pairs supply the global
+glue that the local characteristic-two argument lacked.
+
 ## Application to the Ree bridge
 
 Exact enumeration gives 28 one-factorizations in the regular
 `MATCH(10,5,1)` design. Every one has exactly 27 Hamilton pairs (out of 36),
-so the theorem forces the nine centers of every one-factorization to be
-collinear in every characteristic-two rank-three realization. Consequently
+and the 27 resulting five-factor pencil sets have connected two-point-overlap
+closure. The theorem therefore forces the nine centers of every
+one-factorization to be collinear over **every field**, not only in
+characteristic two. Consequently
 the 63 matching centers automatically acquire all 28 lines of the canonical
 `2-(28,4,1)` incidence design identified with the Ree unital `R(3)`. Nagy's
-embedding theorem then supplies the classical field boundary, uniqueness,
-admissibility, and containment in an order-eight subplane. The new step is
-precisely the missing implication from matching concurrence alone to Nagy's
-line hypothesis.
+embedding theorem now supplies the full conclusion directly: a rank-three
+realization exists only when (K) contains \(\mathbf F_8\), and then it is
+unique, admissible, and contained in an order-eight subplane. In particular,
+odd characteristic is excluded without the seven-equation calculation. The
+new step is precisely the missing implication from matching concurrence alone
+to Nagy's line hypothesis.
 
 The nonhyperoval class has one one-factorization and no Hamilton pair, although
 its full triple-overlap closure is still connected; the second form of the
@@ -162,7 +249,8 @@ carrier line, so the deletion version remains a distinct extension problem.
 The bundle `c1015_ree_bridge.py`, `c1015_ree_bridge.json`, and
 `c1015_ree_bridge.sha256` independently enumerates the contained
 one-factorizations, counts Hamilton pairs both by component traversal and by
-the product of the two matching involutions, and checks the more general
+the product of the two matching involutions, checks the odd-distance
+five-factor pencil closures, and checks the more general characteristic-two
 triple-overlap closure. Replay from the repository root with
 
 ```text
@@ -171,17 +259,44 @@ python3 notes/c1015_ree_bridge.py --check
 
 It certifies exactly the two tracked ten-point designs: the regular class has
 28 factorizations, each with 27 Hamilton pairs and one nine-label closure; the
-nonhyperoval class has one factorization, zero Hamilton pairs, and one
-nine-label closure. The finite check does not prove the interpolation or
-parity theorem; those are the human argument above. The pre-existing C1003
-enumerator provides an independent check of the counts and canonical hashes,
-while the two Hamilton tests cross-check each other.
+27 five-factor sets also close to all nine factor labels in every regular
+factorization. The nonhyperoval class has one factorization, zero Hamilton
+pairs, and one characteristic-two nine-label triple closure. The finite check
+does not prove the interpolation or parity theorem; those are the human
+argument above. The pre-existing C1003 enumerator provides an independent
+check of the counts and canonical hashes, while the two Hamilton tests
+cross-check each other.
+
+The second bundle `c1015_k10_factorization_closure.py`,
+`c1015_k10_factorization_closure.json`, and
+`c1015_k10_factorization_closure.sha256` performs independent canonical
+augmentation of colored incidence graphs through all nine factors. It checks
+the 396-class and labelled-count census, every parity closure over all ten
+base vertices, the universal characteristic-two triple closure, the unique
+(AG(2,3)) sparse-shadow dichotomy, the generic Hesse lift determinant, and the
+final rank-74 ternary specialization. Replay with
+
+```text
+uv run --with pynauty python notes/c1015_k10_factorization_closure.py --check
+```
+
+The trusted boundary is `pynauty` canonical labeling plus exact finite graph
+closure and row reduction over \(\mathbf Q(\omega)\) and \(\mathbf F_3\). The
+output is cross-checked against Gelling's 396 classes, the classical labelled
+total, the independently enumerated regular-design factorizations, and two
+separate Hamilton-cycle tests. The row reduction is exact rational-pair
+arithmetic, not floating point. A handwritten presentation should replace
+the 72-extra-triple and determinant checks by short coordinatization lemmas
+before manuscript insertion.
 
 | Artifact | Bytes | SHA-256 |
 |---|---:|---|
-| `notes/c1015_ree_bridge.py` | 7,316 | `0136784443e9ccc9a07ab251a136a56ece4acae5b0d7d4457bbab5d2313dc4f6` |
-| `notes/c1015_ree_bridge.json` | 947 | `425dacafe2dd1fdd066b90f7167ed7ef20a4bebca40c547e0a10c769e034173b` |
-| `notes/c1015_ree_bridge.sha256` | 317 | `dd5f62c14fe2c9c4ff13a1d67ed3c5644bdbdc03797e24557748ed3864d7c33b` |
+| `notes/c1015_ree_bridge.py` | 10,728 | `7b60af8c3583a754db5ddc28d75cc065ca8d8906443e4b4f66903284e60fb123` |
+| `notes/c1015_ree_bridge.json` | 1,263 | `1545f49a4d66d33d5d90d0ee99d5eaf39640c0170c99db2a7b6e78697a279b50` |
+| `notes/c1015_ree_bridge.sha256` | 317 | `249bd54b32d954d1fd1c3751b99638219af40b905cbeedd7b85c0cc598fdd9b1` |
+| `notes/c1015_k10_factorization_closure.py` | 20,513 | `150be14fe54832e15bce7b6ca7d89ef5442cd1cf698f54970ea06d07bf7e3941` |
+| `notes/c1015_k10_factorization_closure.json` | 5,899 | `3f36a331e308ae2960c579b6d064925d070d7ccba064a887c10dcdc7a9bef9d1` |
+| `notes/c1015_k10_factorization_closure.sha256` | 216 | `b68b6419275ed372cf5cff5a2d32b6407cadb44a604a96286dcdc19eb107ab0b` |
 | tracked input JSON | 79,326 | `c2c3619a1c074bd28a9e0b967a4ac1762496589ede0cc636431f484d67fba357` |
 
 ## Literature position of the move
@@ -189,7 +304,8 @@ while the two Hamilton tests cross-check each other.
 The interpolation input is classical star-configuration algebra: for a
 codimension-two star configuration, Tohaneanu--Xie, Lemma 3.1, records that
 the ideal is generated in degree (s-1) by the products omitting one defining
-linear form (arXiv:1906.08346, cached PDF SHA-256
+linear form. Read depth: `partial`, arXiv v1, Lemma 3.1 and its surrounding
+setup; cache key `arxiv:1906.08346`, cached PDF SHA-256
 `9f5515d754ef1d818a9fe8dd8695827300df9f4f25826b7be702f0f1bda77ece`).
 The proof above specializes this standard generator statement and extracts
 the edgewise residue relation (1).
@@ -197,28 +313,68 @@ the edgewise residue relation (1).
 Perfect pairs and perfect one-factorizations are classical graph-theoretic
 notions. Korchmaros--Pace--Sonnino (JCTA 160 (2018), 62--83,
 doi:10.1016/j.jcta.2018.06.006) explicitly study geometric
-one-factorizations arising from ovals, but the accessible abstract describes
-a construction in finite planes of odd order, not the characteristic-two
-automatic-pencil converse here. Nagy (2021) remains the exact priority
-ceiling after the pencil has been produced: his theorem assumes the Ree-unital
-line structure rather than deriving it from the 63 matching concurrences.
+one-factorizations arising from ovals. Read depth: `full text`, published
+version, all sections; cache key `10.1016/j.jcta.2018.06.006`, SHA-256
+`30399d2ed0aee41d37cac7c184a7f512aabc4919ddd49dfb917d2b8bf947e401`.
+Section 2 represents a factor either by an external line or by a chord plus
+one exceptional pole, poses the broad all-lines Problem 1, and says uniqueness
+of its easy solution is out of reach. It also records the stronger known
+negative answer for all-external-line solutions in Desarguesian odd-order
+planes via Segre's tangent lemma. The paper contains no Hamilton-pair,
+star-interpolation, parity-layer, or automatic-pencil theorem; Section 7's
+sporadic highly symmetric cases are (K_{12}) and (K_{28}), not (K_{10}).
+Thus this closest full-text threat does not pre-empt the present converse.
+
+Ziegler, _Matroid representations and free arrangements_ (Trans. AMS 320
+(1990), 525--541), Example 4.1, gives the exact representation condition for
+the exceptional sparse shadow: (AG(2,3)) is representable over (K) if and
+only if (K) contains a root of \(\omega^2-\omega+1\), together with the
+nine Hesse coordinates used above. Read depth: `partial`, published author
+scan, Example 4.1 and its two following cases; the load-bearing formula was
+verified against the page image. Cache key
+`10.1090/S0002-9947-1990-0986703-7`, SHA-256
+`6e1c8ed5d8373a6693c2e0f08862d085e27926b94ba86c3c81c7d52c1a5b1785`.
+
+Dinitz--Garnick--McKay, _There are 526,915,620 nonisomorphic
+one-factorizations of K12_ (1994), supplies the classical 396-class and
+1,225,566,720 labelled (K_{10}) totals used only as external census checks.
+Read depth: `partial`, published paper, introduction and the (K_{10}) census
+passage; cache key `10.1002/jcd.3180020406`, SHA-256
+`f54a59d8e91729f69ec125d99a16ffb30c574e4000943c6ddbe42801e61ada3a`.
+Gelling's 1973 thesis is an earlier source for the 396 representatives. Read
+depth: `partial`, published scan, appendix pages 61--82 inspected through OCR
+with representative tables checked against page images; cache key
+`gelling:1973:k10`, SHA-256
+`64614781270098af2f1086df5e5684f9a2e98bb3661be35bef1e90243cee93a4`.
+The computation here does not import either classification.
+
+Nagy (2021) remains the exact priority ceiling after the pencil has been
+produced: his theorem assumes the Ree-unital line structure rather than
+deriving it from the 63 matching concurrences. Read depth: `full text` for
+arXiv v3, all sections, cache key `arxiv:2007.10464`, SHA-256
+`e268f76c7f01a40dd07d59f2077b0fb14a3b8c654041432d1dbf2296ea021f61`;
+Sections 1--5 of the published version (DOI
+`10.1016/j.ffa.2021.101875`) were also checked, SHA-256
+`99e5b60d981c80fe358bad28ebbfe5d6cf18b4f19a50fe8480966c74477aed30`.
 
 Searches for `one-factorization star configuration projective plane`,
 `perfect one-factorization projective geometry transversals`,
 `one-factorization secants concurrent projective plane`, and
 `one-factorization characteristic two geometry` found the adjacent literatures
-but no statement of (1), (2), or the automatic-pencil consequence. This is a
-bounded provisional novelty result, not yet a final priority verdict: the 2018
-JCTA article and its forward citations still require full-text closure before
-manuscript language such as "new" or "to our knowledge" is justified.
+but no statement of (1), (2), or the automatic-pencil consequence. The 2018
+JCTA full-text threat is now closed. This remains a bounded provisional
+novelty result rather than a final global priority verdict until its
+forward-citation sweep is closed; manuscript language such as "new" or "to
+our knowledge" is not yet authorized.
 
 ## Work programme
 
 1. **Landed:** replace the normalized substitution chain by the frame-free
    star-interpolation identity and Hamilton-pair parity holonomy.
-2. **Landed for ten points:** all 28 canonical one-factorizations have
-   Hamilton pairs, so their nine centers are forced collinear in
-   characteristic two. Determine whether a nine-point realization itself
+2. **Landed universally for ten points:** 395 of the 396 one-factorizations
+   close from their Hamilton parity shadows; the affine (AG(2,3)) exception
+   is killed by the Hesse lift determinant and its characteristic-two/three
+   specializations. Determine whether a nine-point realization itself
    reconstructs the missing tenth carrier line.
 3. Determine the actual carrier of the obstruction: seven displayed blocks,
    their vertex/block incidence shadow, or a smaller invariant subdiagram.
@@ -240,23 +396,73 @@ manuscript language such as "new" or "to our knowledge" is justified.
 - **Base — landed:** a human derivation of `-2(r-1)^2/r^2=0` from the seven
   displayed concurrences, with every division and characteristic exception
   explicit.
-- **Strong — landed for ten points:** a frame-free interpolation identity,
-  parity invariant, replayable finite certificate, and the Ree bridge giving
-  all 28 one-factorization lines from matching concurrences.
-- **Priority-judo — provisionally landed:** a general global compatibility theorem for rank-three
-  matching-design realizations from which the nine-point exclusion and a
-  classical abstract-oval fact both follow, or which answers a representation
-  question absent from the subsequent literature. Final status awaits the
-  full-text priority closure recorded above.
+- **Strong — landed universally for ten points:** a frame-free interpolation
+  identity, parity invariant, replayable 396-class certificate, and the Ree
+  bridge giving all 28 one-factorization lines from matching concurrences.
+- **Priority-judo — provisionally landed:** the universal (K_{10}) pencil
+  theorem answers the order-ten instance of the geometric-transversal problem
+  at a level above the Ree field boundary. Final priority status awaits the
+  forward-citation closure recorded above and a careful convention-by-
+  convention comparison with Korchmaros--Pace--Sonnino's Problem 1.
+
+## Extra-juice and Tao-style closeout
+
+The cheap structural upgrade is the affine description of the sole census
+exception. It explains simultaneously its automorphism order 432, its twelve
+parity triples, and the Hesse representation space. The determinant norm
+(2^6\cdot3) then isolates exactly the two characteristics in which the
+generic obstruction might degenerate; independent combinatorial and ternary
+arguments close them. This is the strongest current theorem, not merely a
+regular-Ree corollary.
+
+The most valuable conceptual compression still available is to replace the
+exact Hesse row reduction by an (AGL(2,3))-module or Fourier calculation.
+The affine rule suggests a higher-order family on
+(\{\infty\}\cup\mathbf F_p^d), with factors pairing (x) to
+(2a-x). Determining whether the parity-shadow/Hesse dichotomy is the first
+case of a uniform affine-round-robin obstruction is a genuine successor,
+not needed for the order-ten theorem.
+
+### Mystery ledger
+
+- **Why 27 Hamilton pairs in the regular Ree factorization — settled.** The
+  nine non-Hamilton pairs are three disjoint triangles, so the Hamilton graph
+  is (K_{3,3,3}); these are the three diagonal packets from the local
+  quadrangle calculation.
+- **Why the unique zero-Hamilton class produces (AG(2,3)) — settled.** It is
+  exactly the affine factorization
+  (M_a=\{\infty a\}\cup\{xy:x+y=-a\}), with automorphism order 432; its
+  twelve parity triples are the affine lines.
+- **Why only characteristics 2 and 3 survive the generic Hesse test — settled
+  computationally, not conceptually.** The exact full minor is
+  (-8(1+\omega)), of norm 192. The missing evidence is a short
+  (AGL(2,3))-equivariant decomposition deriving these factors without row
+  reduction.
+- **Nine-point deletion completion — open.** The ten-carrier interpolation
+  theorem does not reconstruct the deleted carrier. The next gate is a
+  projectively intrinsic completion lemma or an explicit counterexample.
+- **Higher affine round-robin family — open successor.** The evidence gap is
+  a general parity-shadow closure/representation theorem for
+  (K_{p^d+1}), beginning with the midpoint factorization above.
+- **Global priority — open.** The closest full-text threat is cleared, but the
+  three-graph forward-citation sweep required by the literature-audit rules
+  has not yet been completed.
+- **Ergodis lessons — recorded, source untouched.** A useful future control
+  interface should ingest small incidence hypergraphs and exact finite-field
+  rank features, generate base-point-invariant rather than fixed-base
+  shadows, track algebraic parameter rings and exceptional-prime norms, and
+  force specialization checks before accepting characteristic claims. The
+  initial fixed-base undercount and mistaken characteristic-three inference
+  are concrete regression tests for those features.
 
 ## Publication decision after proof
 
-The uniform Hamilton-pair theorem clears the prior threshold for a standalone
-representation note, especially if the literature closure stays clean. It
-also strengthens the arcs equality paper by replacing the regular
+The universal (K_{10}) pencil theorem clears the threshold for a short
+standalone representation paper if the priority audit stays clean. Its spine
+would be interpolation, parity pencils, the 396-class sparse-shadow dichotomy,
+and the Hesse obstruction; Ree rigidity would be the marquee application.
+It also strengthens the arcs equality paper by replacing the regular
 characteristic-two coordinate classification with automatic Ree completion
-plus Nagy's theorem. Reassess final placement after the nine-point extension
-and priority audit; the result is no longer merely a boundary lemma. A
-standalone note is strongest if the invariant excludes an infinite family or
-yields a structural
-classification beyond the four order-eight pointed classes.
+plus Nagy's theorem. The best integration decision should follow the
+nine-point completion attempt and priority audit, but the theorem no longer
+needs an infinite-family extension to justify standalone treatment.

@@ -5,6 +5,12 @@
       "hamilton_pair_count_distribution": {
         "27": 28
       },
+      "hamilton_pencil_closure_distribution": {
+        "9": 28
+      },
+      "nonhamilton_pair_graph_component_distribution": {
+        "3+3+3": 28
+      },
       "one_factorization_count": 28,
       "one_factorizations_sha256": "6408d524c6f0f50905c6bafe2d03624472a13ebccd8360e973d2ed08f12bc987",
       "overlap_closure_distribution": {
@@ -15,6 +21,12 @@
       "all_have_hamilton_pair": false,
       "hamilton_pair_count_distribution": {
         "0": 1
+      },
+      "hamilton_pencil_closure_distribution": {
+        "empty": 1
+      },
+      "nonhamilton_pair_graph_component_distribution": {
+        "9": 1
       },
       "one_factorization_count": 1,
       "one_factorizations_sha256": "929e9543b96272615536dc3886c7abc5cb429b8680d56f1c37454a7d567fce7e",

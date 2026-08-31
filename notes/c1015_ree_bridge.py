@@ -97,18 +97,35 @@ def is_hamilton_by_product(first, second):
     return len(orbit) == 5
 
 
-def overlap_closure(factors):
-    by_zero_partner = {}
-    for matching in factors:
-        edge = next(edge for edge in matching if 0 in edge)
-        partner = edge[0] if edge[1] == 0 else edge[1]
-        by_zero_partner[partner] = matching
-    parts = [
-        {colour, left, right}
-        for colour, matching in by_zero_partner.items()
-        for left, right in matching
-        if left != 0 and right != 0
-    ]
+def hamilton_odd_factor_set(factors, first_index, second_index):
+    adjacency = {vertex: [] for vertex in range(10)}
+    for left, right in factors[first_index] + factors[second_index]:
+        adjacency[left].append(right)
+        adjacency[right].append(left)
+    distances = {0: 0}
+    queue = [0]
+    while queue:
+        vertex = queue.pop(0)
+        for neighbor in adjacency[vertex]:
+            if neighbor not in distances:
+                distances[neighbor] = distances[vertex] + 1
+                queue.append(neighbor)
+    if len(distances) != 10:
+        return None
+    edge_owner = {
+        tuple(sorted(edge)): factor_index
+        for factor_index, matching in enumerate(factors)
+        for edge in matching
+    }
+    return frozenset(
+        edge_owner[tuple(sorted((0, vertex)))]
+        for vertex, distance in distances.items()
+        if distance % 2
+    )
+
+
+def two_point_closure(parts):
+    parts = [set(part) for part in parts]
     changed = True
     while changed:
         changed = False
@@ -124,6 +141,21 @@ def overlap_closure(factors):
     return tuple(sorted(len(part) for part in parts))
 
 
+def overlap_closure(factors):
+    by_zero_partner = {}
+    for matching in factors:
+        edge = next(edge for edge in matching if 0 in edge)
+        partner = edge[0] if edge[1] == 0 else edge[1]
+        by_zero_partner[partner] = matching
+    parts = [
+        {colour, left, right}
+        for colour, matching in by_zero_partner.items()
+        for left, right in matching
+        if left != 0 and right != 0
+    ]
+    return two_point_closure(parts)
+
+
 def build_report():
     raw = json.loads(INPUT.read_text())
     classes = {}
@@ -133,16 +165,49 @@ def build_report():
         )
         factorizations = one_factorizations(design)
         hamilton_counts = []
+        hamilton_pencil_closures = []
+        nonhamilton_component_sizes = []
         closures = []
         for factorization in factorizations:
             factors = tuple(design[index] for index in factorization)
             count = 0
-            for left, right in itertools.combinations(factors, 2):
+            odd_factor_sets = []
+            nonhamilton_pairs = []
+            for left_index, right_index in itertools.combinations(range(9), 2):
+                left, right = factors[left_index], factors[right_index]
                 first_test = component_sizes(left, right) == (10,)
                 second_test = is_hamilton_by_product(left, right)
                 assert first_test == second_test
                 count += first_test
+                odd_set = hamilton_odd_factor_set(
+                    factors, left_index, right_index
+                )
+                assert (odd_set is not None) == first_test
+                if odd_set is not None:
+                    assert len(odd_set) == 5 and {left_index, right_index} <= odd_set
+                    odd_factor_sets.append(odd_set)
+                else:
+                    nonhamilton_pairs.append((left_index, right_index))
             hamilton_counts.append(count)
+            hamilton_pencil_closures.append(two_point_closure(set(odd_factor_sets)))
+            adjacency = {factor_index: set() for factor_index in range(9)}
+            for left_index, right_index in nonhamilton_pairs:
+                adjacency[left_index].add(right_index)
+                adjacency[right_index].add(left_index)
+            unseen = set(adjacency)
+            component_sizes_value = []
+            while unseen:
+                stack = [min(unseen)]
+                component = set()
+                while stack:
+                    factor_index = stack.pop()
+                    if factor_index in component:
+                        continue
+                    component.add(factor_index)
+                    stack.extend(adjacency[factor_index] - component)
+                unseen -= component
+                component_sizes_value.append(len(component))
+            nonhamilton_component_sizes.append(tuple(sorted(component_sizes_value)))
             closures.append(overlap_closure(factors))
         classes[entry["name"]] = {
             "one_factorization_count": len(factorizations),
@@ -150,6 +215,14 @@ def build_report():
             "hamilton_pair_count_distribution": {
                 str(count): hamilton_counts.count(count)
                 for count in sorted(set(hamilton_counts))
+            },
+            "hamilton_pencil_closure_distribution": {
+                "+".join(map(str, closure)) or "empty": hamilton_pencil_closures.count(closure)
+                for closure in sorted(set(hamilton_pencil_closures))
+            },
+            "nonhamilton_pair_graph_component_distribution": {
+                "+".join(map(str, sizes)): nonhamilton_component_sizes.count(sizes)
+                for sizes in sorted(set(nonhamilton_component_sizes))
             },
             "overlap_closure_distribution": {
                 "+".join(map(str, closure)): closures.count(closure)
@@ -159,9 +232,12 @@ def build_report():
         }
     assert classes["classical-hyperoval"]["one_factorization_count"] == 28
     assert classes["classical-hyperoval"]["hamilton_pair_count_distribution"] == {"27": 28}
+    assert classes["classical-hyperoval"]["hamilton_pencil_closure_distribution"] == {"9": 28}
+    assert classes["classical-hyperoval"]["nonhamilton_pair_graph_component_distribution"] == {"3+3+3": 28}
     assert classes["classical-hyperoval"]["overlap_closure_distribution"] == {"9": 28}
     assert classes["mathon-nonhyperoval"]["one_factorization_count"] == 1
     assert classes["mathon-nonhyperoval"]["hamilton_pair_count_distribution"] == {"0": 1}
+    assert classes["mathon-nonhyperoval"]["hamilton_pencil_closure_distribution"] == {"empty": 1}
     assert classes["mathon-nonhyperoval"]["overlap_closure_distribution"] == {"9": 1}
     return {
         "schema": "c1015-ree-bridge-v1",

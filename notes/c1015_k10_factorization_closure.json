@@ -1,0 +1,382 @@
+{
+  "all_cycle_pencil_closure_distribution": {
+    "3+3+3+3+3+3+3+3+3+3+3+3": 1,
+    "9": 395
+  },
+  "automorphism_order_distribution": {
+    "1": 298,
+    "12": 2,
+    "16": 1,
+    "18": 1,
+    "2": 69,
+    "3": 5,
+    "4": 7,
+    "40": 1,
+    "432": 1,
+    "54": 1,
+    "6": 6,
+    "8": 3,
+    "9": 1
+  },
+  "canonical_partial_counts": {
+    "1": 1,
+    "2": 2,
+    "3": 15,
+    "4": 179,
+    "5": 1537,
+    "6": 6810,
+    "7": 10353,
+    "8": 3032,
+    "9": 396
+  },
+  "characteristic_two_pencil_closure_distribution": {
+    "9": 396
+  },
+  "exceptional_hamilton_closure_classes": [
+    {
+      "all_cycle_closure": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "characteristic_two_closure": [
+        9
+      ],
+      "factors": [
+        [
+          [
+            0,
+            1
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            8,
+            9
+          ]
+        ],
+        [
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            7,
+            9
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            7
+          ],
+          [
+            6,
+            8
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            9
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            6,
+            9
+          ]
+        ],
+        [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            5,
+            9
+          ]
+        ],
+        [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            8
+          ]
+        ],
+        [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ]
+        ],
+        [
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ]
+        ]
+      ],
+      "hamilton_closure": [],
+      "hamilton_count": 0
+    }
+  ],
+  "full_pencil_forced_by_all_cycle_constraints": 395,
+  "full_pencil_forced_by_hamilton_constraints": 395,
+  "full_pencil_forced_in_characteristic_two": 396,
+  "hamilton_pair_count_distribution": {
+    "0": 1,
+    "12": 2,
+    "16": 2,
+    "18": 8,
+    "19": 2,
+    "20": 9,
+    "21": 15,
+    "22": 21,
+    "23": 30,
+    "24": 60,
+    "25": 40,
+    "26": 52,
+    "27": 49,
+    "28": 39,
+    "29": 28,
+    "30": 24,
+    "31": 5,
+    "32": 5,
+    "33": 1,
+    "34": 2,
+    "36": 1
+  },
+  "hamilton_pencil_closure_distribution": {
+    "9": 395,
+    "empty": 1
+  },
+  "labelled_one_factorization_count": 1225566720,
+  "matching_count": 945,
+  "one_factorization_count": 396,
+  "one_factorizations_sha256": "cb25918e04aed9af817b5e8fc66a2dc8b02ccaf334cb0ef91ea9869c56f5642b",
+  "pynauty_version": "2.8.8.1",
+  "schema": "c1015-k10-factorization-closure-v1",
+  "trusted_boundary": "canonical colored-graph augmentation and finite cycle/closure checks; the interpolation and parity theorems are human",
+  "zero_hamilton_hesse_obstruction": {
+    "affine_factorization_rule": "M_a={{infinity,a}} union {{x,y}:x+y=-a}; vertices 1..9 use factor_to_ag23_point in order",
+    "automorphism_group_order": 432,
+    "exceptional_characteristics_from_minor": [
+      2,
+      3
+    ],
+    "extra_triples_forcing_full_pencil": 72,
+    "factor_to_ag23_point": [
+      0,
+      1,
+      2,
+      3,
+      6,
+      8,
+      4,
+      5,
+      7
+    ],
+    "generic_lift_matrix_rank": 75,
+    "generic_lift_matrix_shape": [
+      135,
+      75
+    ],
+    "generic_lift_minor_determinant": "-8*(1+omega)",
+    "generic_lift_minor_norm": 192,
+    "hesse_parameter_polynomial": "omega^2-omega+1",
+    "mod3_lift_matrix_rank": 74,
+    "mod3_lift_nullity": 1,
+    "mod3_unique_lift_carriers": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2
+      ],
+      [
+        0,
+        2,
+        2
+      ],
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        2,
+        0,
+        2
+      ],
+      [
+        1,
+        0,
+        2
+      ],
+      [
+        1,
+        1,
+        2
+      ],
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        2,
+        1,
+        2
+      ],
+      [
+        1,
+        2,
+        2
+      ]
+    ],
+    "mod3_zero_carrier_indices": [
+      0
+    ],
+    "pair_multiplicity": 1,
+    "parity_triple_count": 12
+  }
+}
