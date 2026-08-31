@@ -401,6 +401,160 @@ More generally, this proves the rooted spectrum statement: if the
 Hamilton-pair graph has an isolated factor, then its total number of edges is
 one of (0,12,16,23). The zero case is exactly the affine factorization.
 
+There is also a sharp **rooted Hamilton-gap theorem**. For every
+one-factorization of (K_{10}), its Hamilton-pair graph (H) satisfies
+
+\[
+ E(H)=\varnothing\quad\hbox{or}\quad |E(H)|\ge12.                 \tag{2h}
+\]
+
+Moreover, if (H) has no isolated vertex, then
+
+\[
+ |E(H)|\ge18.                                                     \tag{2i}
+\]
+
+Both bounds are attained. The current proof is a direct finite rooted proof,
+not a consequence of the 396-class census. If (H) is nonempty, choose one
+Hamilton pair and relabel its alternating ten-cycle to a fixed pair of
+matchings. There are 293 perfect matchings disjoint from that pair and exactly
+173,008 exact covers of the remaining 35 edges by seven of them. Direct cycle
+testing gives minimum 12 over all completions and minimum 18 over completions
+with no isolated factor. At equality 12 the only degree sequences are
+
+\[
+ (0,2,2,2,2,2,2,6,6),\qquad(0,2,2,2,3,3,4,4,4),
+\]
+
+while equality 18 has six degree sequences, frozen in the rooted certificate.
+The order-20 dihedral stabilizer of the rooted Hamilton cycle is applied
+explicitly only to summarize equality orbits; it is not used to discard any
+completion. A conceptual propagation proof of (2h)--(2i), presumably using
+compatibility between the two oriented shadows of each Hamilton pair, remains
+an important proof-compression problem.
+
+The rooted data isolate a substantially smaller structural lemma. If (FG) is
+an edge of (H), then
+
+\[
+ d_H(F)+d_H(G)\ge6.                                  \tag{2j}
+\]
+
+Equivalently, after deleting the rooted edge, if (A) of the remaining seven
+factors are Hamilton with (F) and (B) are Hamilton with (G), then
+(A+B\ge4). In particular, a degree-two factor can be adjacent only to factors
+of degree at least four. The fixed-Hamilton-pair certificate proves (2j)
+without the global census; a human proof of this two-root amplification lemma
+is the immediate local target.
+
+Modulo that local lemma, (2h) already has a short structural proof. If (H)
+has an isolated vertex, the rooted spectrum above gives (0,12,16), or (23).
+Otherwise the ternary code gives minimum degree at least two. Let (a,b,c) be
+the numbers of vertices of degrees (2), (3), and at least (4). If (a=0), the
+handshake lemma gives at least 14 edges. If (a>0), (2j) sends all (2a)
+incidences from the degree-two vertices into the (c) high-degree vertices, so
+(c\ge2) and
+
+\[
+ 2|E(H)|\ge 2a+3b+\max(4c,2a)\ge24,
+ \qquad a+b+c=9.
+\]
+
+The last inequality is a two-case check according as (a\le2c) or (a>2c).
+Thus a nonempty Hamilton graph has at least 12 edges. This reduces the human
+proof of the first gap from 173,008 completions to the single local statement
+(2j).
+
+There are two further exact structural reductions for (2j)--(2i). First, the
+Hamilton cycle (F\cup G) has a (5+5) alternating bipartition. Every other
+factor crosses this cut an odd number of times, and the seven crossing counts
+sum to 15. Hence their multiplicities at (1,3,5) are exactly one of
+
+\[
+ (3,4,0),\qquad(4,2,1),\qquad(5,0,2).              \tag{2k}
+\]
+
+This turns (2j) into a bounded matching problem on the two (K_5) halves,
+rather than a one-factorization census.
+
+The degree-two case of this local problem is smaller still. Contract such a
+factor (F), and let (C_1,C_2) be the two five-cycles supplied by its Hamilton
+partners. The potential-code argument says that (|C_1\cap C_2|) is zero or
+three. Up to the Petersen action, the edge-coverage multiplicities (d) from
+(2c) then have only the following four shapes. The last column is presently
+a rooted-certificate consequence; turning it into a four-row endpoint-bit
+chase would be a human proof of the degree-two case of (2j).
+
+\[
+\begin{array}{c|c|c}
+ |C_1\cap C_2|&\text{nonzero multiplicities in }d
+    &\text{minimum degree of either Hamilton partner}\\ \hline
+ 0&1^6&5\\
+ 3&1^6&4\\
+ 3&2,1^4&4\\
+ 3&2^2,1^2&4
+\end{array}
+\]
+
+There is also a topological formulation of the full two-root lemma. Regard
+(F\cup G) as an alternating Hamilton decagon. For any remaining factor (M),
+attach a disc to every bicolored cycle of the properly three-edge-colored
+cubic graph (F\cup G\cup M). This gives a connected closed surface. Write
+(\epsilon_{FM}) and (\epsilon_{GM}) for the indicators that the indicated
+factor pairs are Hamilton. Its three numbers of bicolored faces are
+
+\[
+ 1,\qquad 2-\epsilon_{FM},\qquad2-\epsilon_{GM},
+\]
+
+so, from ten vertices and fifteen edges,
+
+\[
+ \chi(M)=-(\epsilon_{FM}+\epsilon_{GM}),\qquad
+ \gamma(M)=2+\epsilon_{FM}+\epsilon_{GM},           \tag{2l}
+\]
+
+where (\gamma=2-\chi) is Euler genus. The seven factors (M) partition the
+35 diagonals of the decagon. Consequently (2j) is exactly the assertion
+
+\[
+ \sum_M\bigl(\gamma(M)-2\bigr)\ge4,
+ \quad\text{equivalently}\quad \sum_M\chi(M)\le-4.  \tag{2m}
+\]
+
+This reframes the endpoint chase as a genus-defect packing problem for a
+one-factorization of the diagonals of a decagon. It is not yet a proof: the
+missing step is to show that seven disjoint chord matchings cannot all have
+total Euler-genus excess at most three. But it exposes a plausible route via
+rotation systems or matching book embeddings and explains why the desired
+quantity is additive over the seven residual factors.
+
+Third, let (\tau_1,\ldots,\tau_9) be the matching involutions on the
+ten-dimensional permutation space (U), and put
+
+\[
+ T=\sum_{i=1}^9\bigwedge\nolimits^2\tau_i
+ \quad\hbox{on }\bigwedge\nolimits^2U.
+\]
+
+For (i\ne j), the product (\tau_i\tau_j) has cycle type ((5,5)) on a
+Hamilton pair and ((2,2,3,3)) otherwise. The exterior-square character has
+values (0) and (-2) on those two types. Therefore
+
+\[
+ \operatorname{tr}(T^2)
+ =9\binom{10}{2}-4(36-|E(H)|)
+ =261+4|E(H)|.                                      \tag{2n}
+\]
+
+Thus (2h) is the spectral-energy jump (261\to309), while the no-isolate
+bound (2i) is exactly the stronger jump to (333). The operator (T) is a
+canonical integral signed operator on the 45 edges, with a forced
+nine-dimensional (-1)-eigenspace coming from the standard representation.
+Proving the (333) lower bound from that forced module and the absence of an
+isolated factor is the cleanest current route to a fully structural proof of
+(2i).
+
 There is a sharper local presentation of the 640-row star table. Form a graph
 on its four two-factor signature groups, joining two groups when all four
 cross-pairs have cycle type (4+6). Each such group edge has a color: the
@@ -424,10 +578,39 @@ such triple. These twelve triples form an (STS(9)), which is uniquely the
 affine plane (AG(2,3)). This identifies the remaining factorization with
 
 \[
- M_a=\{\infty a\}\cup\{xy:x+y=-a\}
+M_a=\{\infty a\}\cup\{xy:x+y=-a\}
 \]
 
 without coordinates or an isomorphism computation.
+
+### Geometric origin of the affine residue
+
+C1014 supplies a stronger identification of this exception. On
+(\mathbf P^1(\mathbf F_9)), the exponent-(4) Baer coloring has 30 zero-color
+four-sets, exactly the Baer sublines or circles of the Miquelian inversive
+plane of order three. Fix a point (P). For every (Q\ne P), the four circles
+through (P,Q) have four residual pairs that partition the remaining eight
+points, and
+
+\[
+ F_{P,Q}=\{PQ\}\cup\{\text{those four residual pairs}\}
+\]
+
+is a perfect matching. The nine matchings ((F_{P,Q})_{Q\ne P}) factor
+(K_{10}). For (P=\infty), this family is set-equal to the affine family
+((M_a)) above, and every factor pair has type (4+6). Thus the exceptional
+zero-Hamilton factorization is not merely coordinatized by (AG(2,3)): it is
+the rooted residual-pair factorization of the Miquelian inversive plane.
+
+The exact C1014 bridge check verifies all ten roots. Inside
+(PGL_2(9)), the factorization stabilizer has order 72, so its orbit has size
+(720/72=10), precisely the ten choices of root; the semilinear stabilizer has
+order 144. This is an abstract/geometric construction of the exceptional
+factorization, not a rank-three realization of the C1015 carrier-transversal
+incidence, so it does not evade the Hesse obstruction. It does suggest a more
+conceptual stability route to (2h): interpret Hamilton pairs as defects of the
+rooted circle-residue structure and prove that any nonzero defect orbit has
+size at least 12.
 
 The independent 396-class census remains useful regression evidence. It is
 normalized by the classical totals 396 unlabelled classes and 1,225,566,720
@@ -590,6 +773,19 @@ independently recovers the same unique zero-Hamilton class by a different
 canonical-augmentation route. The rooted bundle proves only the exact
 order-ten finite lemma; it does not prove the interpolation, pencil, or Hesse
 arguments.
+
+The independent bundle `c1015_hamilton_gap_rooted.py`,
+`c1015_hamilton_gap_rooted.json`, and `c1015_hamilton_gap_rooted.sha256`
+proves (2h)--(2i) after fixing one Hamilton pair. Replay with
+
+```text
+python notes/c1015_hamilton_gap_rooted.py --check
+```
+
+It exhausts 173,008 residual exact covers, uses two agreeing Hamilton tests,
+and invokes no graph-isomorphism package or global one-factorization census.
+Its equality-orbit summary uses only the explicitly generated order-20
+dihedral stabilizer of the rooted ten-cycle.
 
 The bundle `c1015_ree_bridge.py`, `c1015_ree_bridge.json`, and
 `c1015_ree_bridge.sha256` independently enumerates the contained
@@ -942,8 +1138,9 @@ Manuscript language such as "new" or "to our knowledge" is not yet authorized.
   explicit.
 - **Strong — landed universally for ten points:** a frame-free interpolation
   identity, parity invariant, direct rooted zero-Hamilton classification, and
-  the Ree bridge giving all 28 one-factorization lines from matching
-  concurrences. The 396-class certificate is an independent cross-check.
+  the sharp rooted Hamilton gaps (2h)--(2i), together with the Ree bridge
+  giving all 28 one-factorization lines from matching concurrences. The
+  396-class certificate is an independent cross-check.
 - **Priority-judo — provisionally landed:** the universal (K_{10}) pencil
   theorem answers the order-ten instance of the geometric-transversal problem
   at a level above the Ree field boundary. Final priority status awaits the
@@ -1019,20 +1216,28 @@ not needed for the order-ten theorem.
   Hamilton shadow, not only degrees zero and one: modulo three it lies in the
   ([10,5,4]) potential code (2f), whose missing weights also force the
   zero-or-three intersection law for two Hamilton partners.
-- **Global Hamilton-gap theorem — new high-value target.** Census
-  reconnaissance shows a much larger gap than no-leaves alone explains. If
-  the Hamilton-pair graph has an isolated vertex, the proved rooted spectrum
-  gives total edge count (0,12,16), or (23). Across the independent 396-class
-  census, every graph with no isolated vertex has at least 18 edges; the
-  minimum 18 is attained. Thus the first proof target is the sharp dichotomy
-  “empty or at least 12 Hamilton pairs,” and the stronger second target is
-  “no isolated factor implies at least 18.” The only graph-theoretic cases
-  below 12 after no-leaves are small-excess 2-cores on nine vertices. A proof
-  should propagate the (h=2) zero-or-three intersection law around those
-  cycles, or find the global compatibility identity between the two oriented
-  shadows of each Hamilton pair. This would turn the local ternary code into
-  a genuinely global extremal theorem and remove another conspicuous census
-  phenomenon.
+- **Global Hamilton-gap theorem — first gap structurally reduced; second
+  finite.**
+  The rooted Hamilton-pair certificate proves the sharp dichotomy “empty or
+  at least 12 Hamilton pairs” and the stronger bound 18 when there is no
+  isolated factor. Both are attained. It fixes one Hamilton pair and checks
+  173,008 exact-cover completions, independently of the 396-class census. The
+  same root proves the sharper local amplification law (2j); no-leaves,
+  (2j), the isolated-factor spectrum, and a short degree count then prove the
+  12-gap structurally. The remaining human local task is to prove (2j) from
+  the three cut types (2k), or equivalently the genus-defect packing bound
+  (2m); for a degree-two endpoint this is reduced to the displayed four-row
+  signature table. For the 18-gap, the exterior-square identity (2n)
+  reduces the problem exactly to the energy bound
+  (\operatorname{tr}(T^2)\ge333) under no isolation. A proof from the forced
+  standard module would replace rooted exhaustion completely.
+- **Why the affine exception exists — settled geometrically by C1014.** It is
+  the residual-pair factorization obtained by rooting the Miquelian inversive
+  plane of order three at a point of (\mathbf P^1(\mathbf F_9)). The ten
+  choices of root are exactly its (PGL_2(9))-orbit. This explains the
+  (AG(2,3)) residue and suggests treating Hamilton pairs as stability defects
+  of a Baer-circle structure; it does not supply a forbidden rank-three
+  realization.
 - **Potential code at all Johnson levels — algebra settled, realization
   open.** Formula (2g) gives (\mathcal C_m) explicitly, including parameters
   ([\binom m2,m,m-1]_3) for every (m\ge5), without enumeration. What remains
@@ -1097,7 +1302,14 @@ not needed for the order-ten theorem.
   in the rooted certificate. `synthesize` reproduced the same output-sort
   failure on this smaller exact dataset. The earlier fixed-base undercount
   and mistaken characteristic-three inference remain useful additional
-  regressions.
+  regressions. The Hamilton-gap compression exposes a third, distinct
+  interface boundary: (2m) is a grouped assertion about the sum of seven
+  matchings in one exact cover, whereas the current campaign evaluator sees
+  one flat row at a time. Supplying precomputed group sums would only encode
+  the desired conclusion as a feature. A useful future extension would be a
+  bounded multiset/group-aggregation layer (counts, sums, and minima over a
+  fixed parent key), with the resulting candidate still replayed and proved
+  independently. No Ergodis source change is made here.
 
 ## Publication decision after proof
 
