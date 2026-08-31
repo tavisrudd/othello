@@ -387,6 +387,19 @@ overhead is measurable at the complete DFS boundary. Raw evidence is under
 `/home/tavis/.cache/ergodis-perf/c1017-alignment/full-search-ab`. The registry
 now has 61 pass, 7 open, and 34 not-applicable cells.
 
+The generic root executor now has both lightweight and realistic serial
+controls against the same direct worker loop. The primary nine-pair control
+runs 1,048,576 roots with one mixing round for 101 repetitions: both paths
+perform exactly 105,906,176 root-rounds and return the same checksum. Generic
+executor/direct is 0.999616x cycles (`t=-0.813`), 0.956716x instructions,
+1.000001x branches, 1.036740x branch misses (`t=1.014`), and 0.998684x wall
+(`t=-0.995`), with 8 KiB median-RSS difference. A secondary 64-round callback
+control is likewise cycle/wall neutral at 0.999929x/0.999517x over
+423,624,704 root-rounds. Its higher but still 0.302% branch-miss rate does not
+produce a measured cycle cost. Raw evidence is under
+`/home/tavis/.cache/ergodis-perf/c1017-root/light-ab` and `c1017-root/final-ab`.
+The registry now has 62 pass, 6 open, and 34 not-applicable cells.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

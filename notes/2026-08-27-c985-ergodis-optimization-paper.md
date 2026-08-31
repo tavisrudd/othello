@@ -145,7 +145,14 @@ as each coherent tranche lands.
    boundary. Raw evidence is under
    `/home/tavis/.cache/ergodis-perf/c1017-alignment/full-search-ab`. The private
    registry now records 61 pass, 7 open, and 34 not-applicable cells. Current
-   next slice: retain the generic root-execution single-thread control.
+   generic root executor now has a direct-loop control too. Nine rotated pairs
+   over 105,906,176 lightweight root-rounds give generic/direct ratios of
+   0.999616x cycles, 0.956716x instructions, and 0.998684x wall, with exact
+   checksum and work parity; a 423,624,704-round heavier callback control is
+   also cycle/wall neutral. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-root`. The private registry now
+   records 62 pass, 6 open, and 34 not-applicable cells. Current next slice:
+   retain the Hall-matching same-work counter A/B.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

@@ -1,6 +1,7 @@
 use std::hint::black_box;
 use std::time::Instant;
 
+use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
 use ergodis::{
     azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
     ceph_xor_repair_supports_compressed, certify_rank_one_transfer_by_generators_field,
@@ -121,6 +122,65 @@ fn binary_span_recompute(
         best = best.min(weight);
     }
     (best, candidates)
+}
+
+fn root_execution_spec(variant: &str) -> Option<(&str, usize, u32, u64)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "root-execution" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let roots = fields.next()?.parse().ok()?;
+    let rounds = fields.next()?.parse().ok()?;
+    let seed = fields.next()?.parse().ok()?;
+    fields
+        .next()
+        .is_none()
+        .then_some((backend, roots, rounds, seed))
+}
+
+struct RootExecutionBenchKernel {
+    rounds: u32,
+}
+
+impl RootKernel for RootExecutionBenchKernel {
+    type Root = u64;
+    type Worker = u64;
+    type Output = u64;
+
+    #[inline(always)]
+    fn create_worker(&self) -> Self::Worker {
+        0x9e37_79b9_7f4a_7c15
+    }
+
+    #[inline(always)]
+    fn evaluate(
+        &self,
+        worker: &mut Self::Worker,
+        ordinal: RootOrdinal,
+        root: &Self::Root,
+    ) -> Self::Output {
+        let mut value = root
+            .wrapping_add(u64::from(ordinal.0))
+            .wrapping_add(*worker);
+        for _ in 0..self.rounds {
+            value ^= value >> 30;
+            value = value.wrapping_mul(0xbf58_476d_1ce4_e5b9);
+            value ^= value >> 27;
+            value = value.wrapping_mul(0x94d0_49bb_1331_11eb);
+        }
+        *worker = worker.rotate_left(7) ^ value;
+        value
+    }
+}
+
+fn direct_root_execution(kernel: &RootExecutionBenchKernel, roots: &[u64]) -> u64 {
+    let mut worker = kernel.create_worker();
+    let mut aggregate = 0_u64;
+    for (ordinal, root) in roots.iter().enumerate() {
+        aggregate ^= kernel.evaluate(&mut worker, RootOrdinal(ordinal as u32), root);
+    }
+    aggregate
 }
 
 fn jin_fu_outer_dual_basis() -> Matrix {
@@ -597,6 +657,36 @@ fn main() {
             work += candidates;
             checksum = checksum.wrapping_add(u64::from(weight));
             black_box((weight, candidates));
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
+    if let Some((backend, root_count, rounds, seed)) = root_execution_spec(&variant) {
+        assert!(root_count <= u32::MAX as usize);
+        let roots = (0..root_count)
+            .scan(seed, |state, _| {
+                *state = state
+                    .wrapping_mul(6_364_136_223_846_793_005)
+                    .wrapping_add(1);
+                Some(*state)
+            })
+            .collect::<Vec<_>>();
+        let kernel = RootExecutionBenchKernel { rounds };
+        for _ in 0..repetitions {
+            let aggregate = match backend {
+                "direct" => direct_root_execution(&kernel, &roots),
+                "generic" => {
+                    reduce_roots(&kernel, &roots, 1, || 0_u64, |left, right| left ^ right).unwrap()
+                }
+                _ => panic!("unknown root-execution backend"),
+            };
+            work = work.wrapping_add(root_count as u64 * u64::from(rounds));
+            checksum ^= aggregate;
+            black_box(aggregate);
         }
         let elapsed_ns = started.elapsed().as_nanos();
         println!(
