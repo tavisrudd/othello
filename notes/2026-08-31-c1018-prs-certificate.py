@@ -126,7 +126,20 @@ def build(cache):
 
 
 def render(doc):
-    return json.dumps(doc, indent=1, sort_keys=True) + "\n"
+    """One compact line per cell, so the file stays diffable and small."""
+    head = {key: doc[key] for key in doc if key != "cells"}
+    lines = ["{"]
+    for key in sorted(head):
+        lines.append(f' {json.dumps(key)}: {json.dumps(head[key])},')
+    lines.append(' "cells": [')
+    body = [
+        "  " + json.dumps(cell, sort_keys=True, separators=(",", ":"))
+        for cell in doc["cells"]
+    ]
+    lines.append(",\n".join(body))
+    lines.append(" ]")
+    lines.append("}")
+    return "\n".join(lines) + "\n"
 
 
 if __name__ == "__main__":
