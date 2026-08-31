@@ -664,20 +664,33 @@ contained in `M^max_{r,p}`.
 
 ### Conjecture PRS-2 (cyclic-pullback carriers).
 
-The exceptional deep holes with nontrivial cyclic stabilizer are the
-`PGL_2(q)`-orbits of syndromes `X Y · G(X^m, Y^m)` with `m | r-3` and
-`m | q-1`.  For each pair `(r,m)` they occur at **at most one field**, and if
-at any, then at the least prime power `q` with `m | q-1` and `q ≥ r-1`.  The
-orbit's stabilizer is `Stab_N(s)` for `N` the dihedral normaliser of the torus,
-always containing `μ_m` and equal to it unless `G` is self-reciprocal up to the
-torus, in which case it is dihedral of order `2m`.
+The exceptional deep holes whose stabilizer contains a split-torus element are
+the `PGL_2(q)`-orbits of syndromes
 
-This is 2026-08-30's Conjecture D′ with the escape clause promoted from a
-footnote to part of the statement (three empty pairs are now known, not one),
-and with the stabilizer clause corrected — see §5c.
+```text
+X^a Y^b · G(X^m, Y^m),     a, b ∈ {0,1},   a + b + m·deg G = d = r-1,
+```
 
-*Falsifier.*  A carrier firing at a field other than the least admissible one,
-or a stabilizer not of the stated form.
+with `m | q-1`.  The two admissible shapes are `(a,b) = (1,1)`, forcing
+`m | r-3`, and `(a,b) = (0,1)` with its mirror `(1,0)`, forcing `m | r-2`.  For
+each triple `(r, m, (a,b))` they occur at **at most one field**, and if at any,
+then at the least prime power `q` with `m | q-1` and `q ≥ r-1`.  The orbit's
+stabilizer is `Stab_N(s)` for `N` the dihedral normaliser of the torus, always
+containing `μ_m` and equal to it unless `G` is self-reciprocal up to the torus,
+in which case it is dihedral of order `2m`.
+
+This is 2026-08-30's Conjecture D′ with three corrections, all forced by data
+from this wave: the escape clause promoted from a footnote to part of the
+statement (four empty pairs are now known, not one — §5b′, §5a); the stabilizer
+clause corrected, since `m = 5` is odd and cyclic (§5c); and the `(0,1)` shape
+added, which D′ excluded and which is what fires at `(10,13)` (§5f).
+
+*Falsifier.*  A carrier firing at a field other than the least admissible one, a
+stabilizer not of the stated form, or a split-torus-stabilized exceptional orbit
+whose sparsest representative is not of the displayed shape.  Note that the
+fixed-locus lemma of §5d makes the last of these mechanically checkable at any
+`(r,q)` within sweep range, rather than a matter of guessing which stratum to
+look at — which is how the `(0,1)` shape was missed until now.
 
 ### Conjecture PRS-3 (carrier cut).
 
