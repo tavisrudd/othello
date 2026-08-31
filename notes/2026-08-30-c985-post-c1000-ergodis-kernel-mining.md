@@ -125,14 +125,24 @@ No group operation enters a solve worker or a per-candidate cross-row loop.
 
 ## Highest-EV remaining kernels
 
-1. **Typed linear-constraint closure.** Compile small incidence/interpolation
+1. **Typed plan and theorem language.** Implement a compact textual authoring
+   language for the accepted `match` / `reduce` / `canonicalize` plan algebra
+   and normalized theorem fragments. One parser and typechecker must lower to
+   the existing bounded IR used by the CLI, daemon, Python client, and future
+   Lean client. JSON remains a versioned framed wire/cache representation and
+   a machine-readable debug view; users and campaign controllers should not
+   have to construct JSON ASTs or bytecode arrays. The language must retain
+   explicit resource bounds, action-preservation status, proof status,
+   provenance, and root scope/masks, and support parse/format/parse and
+   textual-versus-JSON lowering conformance tests.
+2. **Typed linear-constraint closure.** Compile small incidence/interpolation
    identities and propagate equality, parity, and pencil-membership closure.
    C1015 is a strong private fixture; public semantics should be generic
    finite-module constraints.
-2. **Compact coherent transcripts.** The deterministic final-color replay is
+3. **Compact coherent transcripts.** The deterministic final-color replay is
    exact, but large public certificates should stream refinement splits or
    intersection tables rather than duplicate all compiler work.
-3. **General exact query optimization.** The pair-query triple-factor case is
+4. **General exact query optimization.** The pair-query triple-factor case is
    theorem-optimal and the generic constructors always emit exact replayable
    strategies, but arbitrary-mask minimum nonadaptive selection and
    minimum-depth adaptive trees remain bounded exact-search backends.

@@ -96,6 +96,29 @@ Every `canonicalize under action` op must declare whether the action preserves
 the label, transports it through an exact action adapter, or is diagnostic
 only.  The verifier rejects a proof packet built from a diagnostic quotient.
 
+### Authoring substrate
+
+The algebra needs a compact textual surface language. JSON is retained only
+as a versioned wire, cache, and diagnostic representation; it is not the plan
+authoring language. The textual parser and JSON decoder converge on one typed
+AST and one lowering pass, so the daemon, CLI, Python binding, and Lean binding
+cannot acquire subtly different semantics.
+
+The surface language should read like the mathematical pipeline above: named
+bindings, function-style typed operations, ordinary infix scalar predicates,
+and explicit blocks for resources, scope, actions, and verification gates. It
+is deliberately not a general-purpose embedded language: no user loops,
+recursion, filesystem access, dynamic imports, or unbounded collections.
+Composition is expressed by the bounded dataflow graph, and every operation
+declares its output sort and worst-case retention before execution.
+
+Injected theorem fragments use the same lexer, names, scalar expressions,
+sorts, scope masks, and provenance syntax rather than a second mini-language.
+They add normalized quantifiers, hypotheses, conclusions, proof status, and
+certificate references. Formatting is canonical. Acceptance requires
+parse/format/parse identity and identical lowered bytes/hashes for equivalent
+textual and JSON documents.
+
 ## Recipe model
 
 A recipe has six sections which compile to that three-op algebra:
@@ -421,17 +444,20 @@ from becoming the permanent execution architecture.
 
 ## Near-term implementation order
 
-1. Finish the mask-family profiler with a streamed binary/JSONL recipe adapter
+1. Specify and implement the bounded textual plan/theorem front end, lowering
+   it to the existing typed IR while retaining JSON only at protocol and
+   persistence boundaries.
+2. Finish the mask-family profiler with a streamed binary/JSONL recipe adapter
    and exact ambient-versus-labelled histograms.
-2. Port affine-subspace enumeration and cap recognition, using fixed arrays for
+3. Port affine-subspace enumeration and cap recognition, using fixed arrays for
    small prime-field dimensions.
-3. Add orbit closure from declared generators and emit one representative plus
+4. Add orbit closure from declared generators and emit one representative plus
    stabilizer/transporter certificates, with exact label-action typing.
-4. Port exact parametric fitting and match fitted coefficient rows against a
+5. Port exact parametric fitting and match fitted coefficient rows against a
    catalogue of classical actions (divided powers, Frobenius, torus, affine).
-5. Join feature outputs into a bounded separator search and exceptional-state
+6. Join feature outputs into a bounded separator search and exceptional-state
    ledger.
-6. Apply the same recipe API to C80 Hall-deficit packets and C896 carry-state
+7. Apply the same recipe API to C80 Hall-deficit packets and C896 carry-state
    rank cores before considering a public API.
 
 ## Rejected alternatives
