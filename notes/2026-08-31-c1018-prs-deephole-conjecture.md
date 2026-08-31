@@ -156,6 +156,17 @@ run through the new driver and matched the 2026-08-30 tables: `r=8` at
 `(9,13,m=3)`, `(11,13,m=4)`.  The measured cost of the redundancy-nine decider
 `(9,13)` fell from 396 s and 968 MB to 40 s and 139 MB.
 
+The two exact-rank algorithms were also pinned against each other with
+`--rank-mode`, which is a cross-check of the new algorithm against the old one
+inside a single binary, on four cells with nontrivial exceptional structure:
+
+| cell | kernel enumeration | subset enumeration |
+|---|---|---|
+| `r=6, q=8`  | 5,037 deep / 13 orbits / 4,713 exceptional in 11 | identical |
+| `r=6, q=13` | 1,820 deep / 3 orbits / 546 exceptional in 1 | identical |
+| `r=7, q=11` | 3,080 deep / 10 orbits / 2,288 exceptional in 5 | identical |
+| `r=5, q=16` | 2,432 deep / 4 orbits / 120 exceptional in 1 | identical |
+
 ### 3b. What "exceptional" counts, and the characteristic caveat
 
 The driver reports a deep syndrome as **exceptional** exactly when its apolar
