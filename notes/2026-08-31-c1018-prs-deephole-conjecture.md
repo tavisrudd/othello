@@ -903,7 +903,20 @@ What is **completely classified for the non-regular class** — the fixed-locus
 lemma of §5d applied at every prime power below the imported field-ranged
 theorem's threshold, so that no field is left over:
 
-<!-- FIXDOMAIN -->
+| `r` | fields swept | proved threshold | exceptional at | status |
+|---:|---|---:|---|---|
+| 8  | 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32, 37, 41, 43 | 43 | 8, 9, 11 | **complete over all prime powers** |
+| 9  | <!-- R9FIXFIELDS --> | 53 | 9, 11, 13 | <!-- R9FIXSTATUS --> |
+| 10 | <!-- R10FIXFIELDS --> | 59 | 11, 13 | partial |
+| 11 | 11, 13 | — | 11, 13 | partial; no field-ranged theorem exists above `r = 10` |
+| 12 | 13 | — | 13 | partial; `k = 2` there, so the count is a boundary artifact |
+
+Each row's "exceptional at" is exact over the fields swept: the sweep is
+exhaustive over the whole fixed locus, and by the lemma the fixed locus contains
+every point of every non-regular orbit.  The `r = 8` row is a complete
+classification because its swept list is the whole of `[8,43]` and the imported
+theorem covers `q ≥ 43`, leaving no field unaccounted for.
+
 
 Carrier strata verified exhaustively (each a complete sweep of the named
 projective subspace, blind to everything outside it, and superseded by the
