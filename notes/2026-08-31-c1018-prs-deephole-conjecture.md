@@ -838,22 +838,26 @@ Three statements, in decreasing order of how well the data pin them.
 
 ### Conjecture PRS-1 (exceptional band).
 
-> **RISK FLAG, 2026-08-31 (C1024): the constant threshold may be a sampling
-> artifact.** Every carrier this campaign has found has `m <= 8` and `M <= 4`,
-> for the reason that those were the cheap strata to sweep — not because larger
-> ones were tested and came back empty. Along the `M = 3` direction the heuristic
-> threshold grows like `(r-3)^2/2` rather than staying constant, so the observed
-> "last exceptional field 13" may reflect the region searched rather than the
-> phenomenon. **This puts the constant-16 claim of PRS-1 at genuine risk**, and
-> the conjecture should not be quoted as though the threshold's constancy were
-> established. The designated falsifying cell is `(r, m) = (17, 7)` at `q = 29`
-> (a clean cell, `k = 13`); it was attempted and killed at 600 s. The stratum is
-> only 871 points, but cost is set by the ambient degree `d = 16`, so a deep point
-> must exhaust roughly `7·10^8` leaf tests — a small stratum is not a cheap sweep
-> once `r` is around 15 or more. The prerequisite is a sparsity-aware rank routine
-> exploiting that Hankel rank is at most `M` on a stratum by construction: a
-> driver change, not new mathematics.
-> → [C1024](2026-08-31-c1024-incidence-threshold.md)
+> **RISK FLAG DISCHARGED, 2026-08-31 (C1025).**  C1024 flagged the constant
+> threshold as possibly a sampling artifact, since every carrier then known had
+> `m ≤ 8` and `M ≤ 4` because those were the cheap strata.  C1025 swept the
+> region that was previously unreachable — **190 cells, `r = 9 … 39`,
+> `q = 9 … 127`, `m = 2 … 18`, `M = 3 … 6`** — and **nothing fires above
+> `q = 13` anywhere inside PRS-1's scope**: of 171 cells with `q ≥ 16` and
+> `k ≥ 6`, zero are exceptional.  The `(17,7)` cell at `q = 29` that had been
+> killed at 600 s is clean, in 0.14 s.  The heuristic `(r-3)^2/2`, which would
+> have permitted firing far above 13, is empirically wrong as a description of
+> where carriers fire.  The constancy is real, not an artifact of range.
+>
+> Two corrections came out of that work and are folded in below.  First, the
+> prerequisite named here — "Hankel rank is at most `M` on a stratum by
+> construction" — was **my own claim and it is false**: the rank on a stratum is
+> generically *full*, `min(j+1, d-j+1)`, and the block decomposition that does
+> hold is provably too weak to help.  The accelerator that worked instead rests
+> on two proved reductions (single-level and Sylvester); see C1025 Part 1.
+> Second, **the `k ≥ 6` clause below is load-bearing and can be sharpened** —
+> see the `k` hypothesis note.
+> → [C1025](2026-08-31-c1025-prs1-falsification.md)
 
 **For every redundancy `r ≥ 6` and every prime power `q ≥ 16` with dimension
 `k = q+1-r ≥ 6`, the deep holes of `PRS_k(q)` are exactly `P_r ∪ M^max_{r,p}`,
@@ -882,10 +886,23 @@ Three hypotheses, each doing work, each forced by data rather than caution.
   exceptional excesses of `8.6·10^5`, `5.2·10^5`, `1.6·10^7` and `6.6·10^7`.
   Without this hypothesis the conjecture would be false at, for instance,
   `(r,q) = (16,16)`, which has `k = 1`.
-  Six is the smallest value the data support: every clean cell censused has
-  `k ≥ 6`, and no cell with `3 ≤ k ≤ 5` and `q ≥ 16` is within census reach
-  (they all need `r ≥ 12`, hence `|PG(r-1,q)| ≥ 16^{11} ≈ 2·10^{13}`).  So the
-  true boundary may well be `k ≥ 3`; the data cannot tell.
+  Six was the smallest value the census could support, because no cell with
+  `3 ≤ k ≤ 5` and `q ≥ 16` is within census reach (they all need `r ≥ 12`, hence
+  `|PG(r-1,q)| ≥ 16^{11} ≈ 2·10^{13}`).
+
+  > **UPDATED 2026-08-31 (C1025): the data can now tell, and the answer is
+  > `k ≥ 4`.**  A stratum is small even when its ambient space is not, so the
+  > C1025 stratum sweep reaches the `3 ≤ k ≤ 5` gap this paragraph called
+  > unreachable.  Eight such cells were swept.  **`k = 3` fires**: the carrier
+  > `(r, m) = (15, 4)` over `F_17` has four exceptional deep points, and
+  > `17 > 13`, so without a `k` hypothesis PRS-1 would be **false**.  The clause
+  > is therefore necessary, not defensive.  **`k = 4` and `k = 5` are clean**
+  > across seven cells — `(13,5)@16`, `(12,3)@16`, `(13,2)@17`, `(15,3)@19`,
+  > `(15,6)@19`, `(21,6)@25`, `(27,6)@31`.  So `k ≥ 4` is the weakest hypothesis
+  > consistent with all present evidence and is the recommended form of the
+  > conjecture; `k = 3` with `q > 17` and `k ∈ {4,5}` beyond those seven cells
+  > are the exact remaining boundary.  Note this evidence is stratum-local: it
+  > constrains carriers, not regular orbits.
 
 This replaces Conjecture B′ of 2026-08-30 §5.3c (`q_0(r) ≤ 23` for every `r`),
 which it implies for `r ≥ 6` and sharpens from 23 to 16.
