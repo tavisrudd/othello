@@ -303,6 +303,37 @@ independent five-secant/orbit replay, which prove much more than this sharp
 falsifier.  Their current checkout was intentionally externalized and its
 field-arithmetic dependency is absent, so no fresh timing ratio is claimed.
 
+## Aligned-design attachment result
+
+This target was already landed earlier in the C985 campaign and is detailed in
+`notes/2026-08-30-c985-aligned-attachment-compiler.md`.  The public cut-quotient
+compiler agrees with the original four-triple definition on all 1,024
+five-point query families and independently re-proves `g(5)=9`.  It also
+accepts the committed 17-query `g(8)` witness and rejects a one-query deletion.
+The compact SAT control is satisfiable in 0.20 seconds; CryptoMiniSat consumes
+the native XOR form in 2.8 seconds including generation and startup, and its
+selected variables replay in the independent Rust verifier.
+
+The theorem-driven stabilizer quotient is the more important reusable result.
+On the exact six-point budget-11 exclusion it reduces 50,349 states to 3,558;
+21 interleaved rounds give a 5.7845x geometric wall-time ratio with paired
+log-ratio `t=55.493`, while instructions fall from 1.049 billion to 105.7
+million.  On the target-shaped eight-point rooted budget-10 exclusion it
+reduces 302,471 states to 8,759 and gives a 30.18x geometric wall-time ratio in
+three diagnostic rounds.  No fresh run was made here because the private
+controller adapter has an unrelated unstaged edit; the committed public core
+and recorded benchmark remain the authority.
+
+## Programme status
+
+All five ranked target families now have an Ergodis attempt with an exact
+acceptance gate: Q25 exact masks and residual orbits, Q16 structural quadratic
+obstructions, the q=19 coherent-marker separator, aligned attachment, and
+Hadamard cyclic locks.  Q25, Q16, and Hadamard have fresh natural-control
+measurements; aligned attachment retains its prior interleaved SAT/native
+controls; the externalized PRS full-field control is recorded without a fresh
+ratio.
+
 ## Natural comparison implementations
 
 Once each replay works, comparisons will separate compilation, solve,
