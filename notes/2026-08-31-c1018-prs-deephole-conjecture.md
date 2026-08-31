@@ -274,7 +274,26 @@ attempted"* and *"Is 43 sharp?"*.  2026-08-30 answered the first over
 | 8 | 23 | 16 |  3,559,590,240 | 134 s | 448 MB | 7 |  6,624 | 2 |  6,624 | **0** |
 | 8 | 25 | 18 |  6,357,828,776 | 275 s | 790 MB | 7 |  8,450 | 2 |  8,450 | **0** |
 | 8 | 27 | 20 | 10,862,674,480 | 507 s | 1.35 GB | 7 | 10,584 | 5 | 10,584 | **0** |
-<!-- R8BAND MORE -->
+| 8 | 29 | 22 | 17,865,943,320 | 1,043 s | 2.21 GB | 7 | 13,050 | 2 | 13,050 | **0** |
+<!-- R8BAND EVENMORE -->
+
+Every cell is clean, in both senses: the deep set is exactly `q(q+1)^2/2`, and
+the modular carrier contributes nothing even where it is nonempty — `q = 25` has
+characteristic 5 with `M^max_{8,5} = P⟨e_3,e_4⟩` and `q = 27` characteristic 3
+with `M^max_{8,3} = P⟨e_2,e_5⟩`, and neither holds a deep point.  Orbit counts
+follow the persistent law: two orbits when `gcd(7,q+1) = 1` and `p ≠ 7`, five at
+`q = 27` where `gcd(7,28) = 7` gives `⌊7/2⌋+1 = 4` conjugate-secant orbits.
+
+Deep-orbit representatives at `q = 23, 25, 27` were re-derived in Python from
+the definition of the coset weight, with zero weight disagreements, deep orbit
+sizes summing to the driver's totals (6,624 / 8,450 / 10,584) and every
+catalecticant rank equal to 2.
+
+**These censuses decide the regular class as well as the non-regular one**, which
+is what distinguishes them from the fixed-locus sweep of §5d.  Their value after
+that lemma lands is precisely that residue: `X(8) ∩ [13, 29] = ∅` *including*
+orbits with trivial stabilizer.
+
 
 ## 4c. First redundancy-ten censuses
 
@@ -408,7 +427,29 @@ reachable because `d = 14 ≤ q` and `k = q-14 ≥ 1` force only `q ≥ 16`.  Th
 *small* least admissible field: `6 | q-1` and `q ≥ 16` give `q_min = 19`, far
 below `(10,7)`'s `q_min = 29`.
 
-<!-- R15 TABLE -->
+| `r` | `m` | stratum | `q` | stratum points | max weight | deep | exceptional |
+|---:|---:|---|---:|---:|---:|---:|---:|
+| 15 | 6  | `{1,7,13}`      | 19 |    381 | 14 | 2 | **0** |
+| 15 | 12 | `{1,13}`        | 25 |     26 | 14 | 2 | **0** |
+| 15 | 4  | `{1,5,9,13}`    | 17 |  5,220 | 14 | 6 | **4** |
+| 15 | 3  | `{1,4,7,10,13}` | 16 | 69,905 | **15** | — | — |
+
+The `m = 6` row is the cheapest available test of the pattern that no carrier
+with `m ≥ 6` has ever fired, and it is clean at `q = 19`, the least admissible
+field — well below `(10,7)`'s `q_min = 29`.  The `m = 4` row **fires** at
+`q = 17`, again the least admissible field (`4 | 16`, `17 ≥ 14`), extending
+Conjecture PRS-2's field law to a fifth redundancy; its four exceptional points
+are analysed in §5f.
+
+The `m = 3` row at `q = 16` is the odd one out and is not a carrier result at
+all: its stratum contains three points of weight `15 = r`, so the covering
+radius there is `r`, not `r-1`.  That is the Seroussi–Roth even-field exception
+with `k = q+1-r = 2`, and it is a **new instance of Conjecture A's exception
+clause** at a redundancy five times higher than any previously tested — before
+this the campaign had seen it only at `(3, q even)` and `(7,8)`.  The sweep's
+`deep` column pins deepness to `w = d` and so does not apply to that cell; the
+`stratum_max_weight` field is what flags it.
+
 
 ### 5c. The stabilizer is not governed by the parity of `m`
 
