@@ -152,7 +152,16 @@ as each coherent tranche lands.
    also cycle/wall neutral. Raw evidence is under
    `/home/tavis/.cache/ergodis-perf/c1017-root`. The private registry now
    records 62 pass, 6 open, and 34 not-applicable cells. Current next slice:
-   retain the Hall-matching same-work counter A/B.
+   the Hall kernel now has a non-straw-man adjacency-list control using the
+   same iterative augmenting-path algorithm. On 512,000 deterministic
+   saturated `48 x 48` graphs per arm, the production bitmap is 1.090x lower
+   in cycles at 25% edge density despite more instructions, because branch and
+   cache misses fall 1.764x and 64.4x. At 5% density adjacency lists are 1.065x
+   faster, identifying a genuine representation crossover and a later hybrid
+   API opportunity. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-hall/final-ab`. The private registry
+   now records 63 pass, 5 open, and 34 not-applicable cells. Current next
+   slice: retain the integer-moment enumeration counter A/B.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

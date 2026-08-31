@@ -400,6 +400,22 @@ produce a measured cycle cost. Raw evidence is under
 `/home/tavis/.cache/ergodis-perf/c1017-root/light-ab` and `c1017-root/final-ab`.
 The registry now has 62 pass, 6 open, and 34 not-applicable cells.
 
+The Hall row now has a representation-matched control rather than a straw-man
+brute-force comparison. `bench_kernels` runs the same iterative augmenting-path
+algorithm over either the production dense row bitmap or presized adjacency
+lists. Every deterministic `48 x 48` graph contains its diagonal, so both
+variants saturate all left vertices and avoid unequal deficiency work. Nine
+rotated pairs process 512,000 graphs per arm with exact cardinality/checksum
+parity. At 25% random edge density, adjacency/bitmap is 1.090x cycles
+(`t=1.61`) and 1.092x wall (`t=1.68`): the bitmap retires 8.4% more
+instructions but avoids 1.764x branch misses and 64.4x cache misses. At 5%
+density the crossover reverses: adjacency/bitmap is 0.939x cycles (`t=-1.98`)
+and 0.933x wall (`t=-2.23`), with 14.3% fewer instructions. This validates the
+named dense kernel and identifies a real sparse-adjacency successor rather
+than claiming universal bitmap superiority. Raw evidence is under
+`/home/tavis/.cache/ergodis-perf/c1017-hall/final-ab`. The registry now has 63
+pass, 5 open, and 34 not-applicable cells.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

@@ -7,13 +7,13 @@ use ergodis::{
     ceph_xor_repair_supports_compressed, certify_rank_one_transfer_by_generators_field,
     compile_binary_rank_one, compile_binary_target_subspace, confinement_by_generators_field,
     gpu_checkpoint_mds_recovery, gpu_checkpoint_mds_same_rack_recovery, minimum_node_span_repair,
-    schedule_repair_dag, ternary_orbit_syndrome_meet_in_middle,
+    schedule_repair_dag, solve_hall, ternary_orbit_syndrome_meet_in_middle,
     ternary_orbit_syndrome_meet_in_middle_count_split,
     ternary_orbit_syndrome_meet_in_middle_unreserved, ternary_orbit_syndrome_search,
     ternary_orbit_syndrome_search_correlated, CephXorLayer, CompiledBinaryLinearCode,
-    CompositionTower, ContextStrategy, FiniteField, Gf4, GpuCheckpointCapacities, Matrix,
-    OrbitOption, Prime, QcLdpcCode, RankOneProbeCache, RepairTask, TowerLevel,
-    WeightedRepairProblem, WeightedRepairWorkspace, WeightedSchedulerBackend,
+    CompositionTower, ContextStrategy, DenseHallGraph, FiniteField, Gf4, GpuCheckpointCapacities,
+    HallWorkspace, Matrix, OrbitOption, Prime, QcLdpcCode, RankOneProbeCache, RepairTask,
+    TowerLevel, WeightedRepairProblem, WeightedRepairWorkspace, WeightedSchedulerBackend,
 };
 
 fn next_u32(state: &mut u64) -> u32 {
@@ -181,6 +181,139 @@ fn direct_root_execution(kernel: &RootExecutionBenchKernel, roots: &[u64]) -> u6
         aggregate ^= kernel.evaluate(&mut worker, RootOrdinal(ordinal as u32), root);
     }
     aggregate
+}
+
+fn hall_spec(variant: &str) -> Option<(&str, u32, u32, u32, usize, u64)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "hall" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let left = fields.next()?.parse().ok()?;
+    let right = fields.next()?.parse().ok()?;
+    let density_per_mille = fields.next()?.parse().ok()?;
+    let graphs = fields.next()?.parse().ok()?;
+    let seed = fields.next()?.parse().ok()?;
+    fields
+        .next()
+        .is_none()
+        .then_some((backend, left, right, density_per_mille, graphs, seed))
+}
+
+struct HallBenchFixture {
+    dense: DenseHallGraph,
+    adjacency: Vec<Vec<u32>>,
+}
+
+fn hall_fixtures(
+    left: u32,
+    right: u32,
+    density_per_mille: u32,
+    graph_count: usize,
+    seed: u64,
+) -> Vec<HallBenchFixture> {
+    assert!(left > 0 && left <= right && density_per_mille <= 1_000);
+    let mut state = seed;
+    (0..graph_count)
+        .map(|_| {
+            let mut edges = Vec::new();
+            let mut adjacency = vec![Vec::new(); left as usize];
+            for source in 0..left {
+                for target in 0..right {
+                    let include =
+                        target == source || next_u32(&mut state) % 1_000 < density_per_mille;
+                    if include {
+                        edges.push((source, target));
+                        adjacency[source as usize].push(target);
+                    }
+                }
+            }
+            HallBenchFixture {
+                dense: DenseHallGraph::new(left, right, edges).unwrap(),
+                adjacency,
+            }
+        })
+        .collect()
+}
+
+struct AdjacencyHallWorkspace {
+    left_match: Vec<u32>,
+    right_match: Vec<u32>,
+    left_seen: Vec<u32>,
+    right_seen: Vec<u32>,
+    parent_right: Vec<u32>,
+    queue: Vec<u32>,
+    epoch: u32,
+}
+
+impl AdjacencyHallWorkspace {
+    fn new(left: u32, right: u32) -> Self {
+        Self {
+            left_match: vec![u32::MAX; left as usize],
+            right_match: vec![u32::MAX; right as usize],
+            left_seen: vec![0; left as usize],
+            right_seen: vec![0; right as usize],
+            parent_right: vec![u32::MAX; right as usize],
+            queue: vec![0; left as usize],
+            epoch: 0,
+        }
+    }
+
+    fn solve(&mut self, adjacency: &[Vec<u32>]) -> u32 {
+        self.left_match.fill(u32::MAX);
+        self.right_match.fill(u32::MAX);
+        let mut cardinality = 0_u32;
+        for root in 0..adjacency.len() as u32 {
+            self.epoch = self.epoch.wrapping_add(1);
+            if self.epoch == 0 {
+                self.left_seen.fill(0);
+                self.right_seen.fill(0);
+                self.epoch = 1;
+            }
+            let epoch = self.epoch;
+            self.left_seen[root as usize] = epoch;
+            self.queue[0] = root;
+            let mut head = 0_usize;
+            let mut tail = 1_usize;
+            let mut augmented = false;
+            while head < tail && !augmented {
+                let left = self.queue[head];
+                head += 1;
+                for &right in &adjacency[left as usize] {
+                    if self.left_match[left as usize] == right
+                        || self.right_seen[right as usize] == epoch
+                    {
+                        continue;
+                    }
+                    self.right_seen[right as usize] = epoch;
+                    self.parent_right[right as usize] = left;
+                    let next_left = self.right_match[right as usize];
+                    if next_left == u32::MAX {
+                        let mut cursor = right;
+                        loop {
+                            let path_left = self.parent_right[cursor as usize];
+                            let previous = self.left_match[path_left as usize];
+                            self.left_match[path_left as usize] = cursor;
+                            self.right_match[cursor as usize] = path_left;
+                            if previous == u32::MAX {
+                                break;
+                            }
+                            cursor = previous;
+                        }
+                        augmented = true;
+                        break;
+                    }
+                    if self.left_seen[next_left as usize] != epoch {
+                        self.left_seen[next_left as usize] = epoch;
+                        self.queue[tail] = next_left;
+                        tail += 1;
+                    }
+                }
+            }
+            cardinality += u32::from(augmented);
+        }
+        cardinality
+    }
 }
 
 fn jin_fu_outer_dual_basis() -> Matrix {
@@ -687,6 +820,32 @@ fn main() {
             work = work.wrapping_add(root_count as u64 * u64::from(rounds));
             checksum ^= aggregate;
             black_box(aggregate);
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
+    if let Some((backend, left, right, density, graph_count, seed)) = hall_spec(&variant) {
+        let fixtures = hall_fixtures(left, right, density, graph_count, seed);
+        let mut dense_workspace = HallWorkspace::new(left, right).unwrap();
+        let mut adjacency_workspace = AdjacencyHallWorkspace::new(left, right);
+        for _ in 0..repetitions {
+            for fixture in &fixtures {
+                let cardinality = match backend {
+                    "bitmap" => solve_hall(&fixture.dense, &mut dense_workspace)
+                        .unwrap()
+                        .cardinality(),
+                    "adjacency" => adjacency_workspace.solve(&fixture.adjacency),
+                    _ => panic!("unknown Hall backend"),
+                };
+                assert_eq!(cardinality, left);
+                work += 1;
+                checksum = checksum.wrapping_add(u64::from(cardinality));
+                black_box(cardinality);
+            }
         }
         let elapsed_ns = started.elapsed().as_nanos();
         println!(
