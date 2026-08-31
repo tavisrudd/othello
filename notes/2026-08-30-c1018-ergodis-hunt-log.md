@@ -93,6 +93,23 @@ report.
   Full-space B′ cells at q=16,17,19 out of budget (RAM/time, stated
   exactly); stratum sweeps at eight fields all clean — supports B′,
   does not establish it.
+- **User-directed C80 attack (cap lane; landed ~01:00)** —
+  `2026-08-30-c80-hall-rematching-attack.md`; driver
+  `ergodis-private/src/bin/c80_hall_rematch.rs`. Formulation settled with
+  a label-defined edge relation (no matching table). **q=11 closed
+  exhaustively** (10.89M complete exchanges): zero Hall failures, but
+  363,000 flat-support exchanges — strict support descent is FALSE at
+  q=11; no support-deficit set exists there; all 1,266 raw failures
+  certified away as N-positions (whole census: every defect-creating
+  q=11 exchange is an N-position — q=11 is game-dead and cannot decide
+  the crown). **q=13 (50k states): strict surplus every time on a
+  game-live domain.** Independent Python replay exact. Proposed cap-lane
+  next step recorded in the report (prove |consumed| ≥ |created| at
+  q≥13 from projective incidence, q=11 as equality base). Evidence
+  landing paused on a sha256 mismatch — sub reconciling; commit follows.
+  Foreign issues raised: ergodis-private lib currently fails clippy from
+  another session's in-flight g53_search.rs/lib.rs edits; Cargo.toml
+  dirty (earlier flag).
 - **Wave 1B, transversal/CSS (landed ~23:45)** —
   `2026-08-30-c1018-hunt-transversal-css.md`; driver
   `ergodis-private/src/bin/c1018_transversal_css.rs`. Nine small CSS codes

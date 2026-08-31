@@ -1,0 +1,1003 @@
+{
+  "schema": "c80-hall-rematch/v1",
+  "q": 11,
+  "mode": "exhaustive-size-four",
+  "states_requested": 0,
+  "seed": 98508030,
+  "threads": 16,
+  "grundy_cap": 26,
+  "full_admission": true,
+  "metrics": {
+    "states": 1560900,
+    "complete_exchanges": 10890000,
+    "exchanges_with_new_defects": 10164000,
+    "new_defects": 16698000,
+    "maximum_new_defects": 2,
+    "nondecreasing_exchanges": 363000,
+    "complete_relation_failures": 0,
+    "support_first_lex_failures": 0,
+    "omega_first_lex_failures": 0,
+    "ancestral_secant_edges": 30492000,
+    "ancestral_secant_zero_degree_defects": 2371600,
+    "ancestral_secant_hall_failures": 1984400,
+    "failures_state_omega_zero": 0,
+    "failures_no_omega_descent": 0,
+    "failures_admission_candidates": 1984400,
+    "candidates_successor_omega_zero": 1984400,
+    "candidates_successor_ynk_zero": 0,
+    "candidates_successor_grundy_unknown": 0,
+    "candidates_successor_omega_positive": 0,
+    "successor_omega_zero": 10164000,
+    "successor_ynk_zero": 0,
+    "successor_omega_positive": 0,
+    "successor_grundy_unknown": 0,
+    "equality_successor_omega_zero": 363000,
+    "equality_successor_ynk_zero": 0,
+    "equality_successor_omega_positive": 0,
+    "deficient_left_one": 1500400,
+    "deficient_left_two_or_more": 484000
+  },
+  "first_failure": {
+    "state": [
+      [
+        5,
+        9
+      ],
+      [
+        6,
+        4
+      ],
+      [
+        7,
+        1
+      ],
+      [
+        8,
+        0
+      ]
+    ],
+    "opponent": [
+      0,
+      6
+    ],
+    "causal": [
+      2,
+      8
+    ],
+    "old_defects": [
+      [
+        0,
+        6
+      ],
+      [
+        2,
+        8
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        10,
+        10
+      ]
+    ],
+    "half_defects": [],
+    "next_defects": [
+      [
+        4,
+        7
+      ],
+      [
+        9,
+        5
+      ]
+    ],
+    "created": [
+      [
+        4,
+        7
+      ],
+      [
+        9,
+        5
+      ]
+    ],
+    "consumed": [
+      [
+        0,
+        6
+      ],
+      [
+        2,
+        8
+      ],
+      [
+        3,
+        7
+      ],
+      [
+        10,
+        10
+      ]
+    ],
+    "neighbours": [
+      [],
+      [
+        3
+      ]
+    ],
+    "deficient_left": [
+      0
+    ],
+    "deficient_right": [],
+    "omega": [
+      8,
+      0,
+      0
+    ],
+    "charged_support": [
+      4,
+      2
+    ],
+    "omega_descends": true,
+    "successor_omega_zero": true,
+    "successor_boundary_grundy": 1,
+    "successor_is_small_boundary": false,
+    "admission_candidate": true
+  },
+  "admission_candidates": [
+    {
+      "state": [
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "opponent": [
+        0,
+        6
+      ],
+      "causal": [
+        2,
+        8
+      ],
+      "old_defects": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "half_defects": [],
+      "next_defects": [
+        [
+          4,
+          7
+        ],
+        [
+          9,
+          5
+        ]
+      ],
+      "created": [
+        [
+          4,
+          7
+        ],
+        [
+          9,
+          5
+        ]
+      ],
+      "consumed": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "neighbours": [
+        [],
+        [
+          3
+        ]
+      ],
+      "deficient_left": [
+        0
+      ],
+      "deficient_right": [],
+      "omega": [
+        8,
+        0,
+        0
+      ],
+      "charged_support": [
+        4,
+        2
+      ],
+      "omega_descends": true,
+      "successor_omega_zero": true,
+      "successor_boundary_grundy": 1,
+      "successor_is_small_boundary": false,
+      "admission_candidate": true
+    },
+    {
+      "state": [
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "opponent": [
+        2,
+        8
+      ],
+      "causal": [
+        0,
+        6
+      ],
+      "old_defects": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "half_defects": [],
+      "next_defects": [
+        [
+          4,
+          7
+        ],
+        [
+          9,
+          5
+        ]
+      ],
+      "created": [
+        [
+          4,
+          7
+        ],
+        [
+          9,
+          5
+        ]
+      ],
+      "consumed": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "neighbours": [
+        [],
+        [
+          3
+        ]
+      ],
+      "deficient_left": [
+        0
+      ],
+      "deficient_right": [],
+      "omega": [
+        8,
+        0,
+        0
+      ],
+      "charged_support": [
+        4,
+        2
+      ],
+      "omega_descends": true,
+      "successor_omega_zero": true,
+      "successor_boundary_grundy": 1,
+      "successor_is_small_boundary": false,
+      "admission_candidate": true
+    },
+    {
+      "state": [
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "opponent": [
+        3,
+        7
+      ],
+      "causal": [
+        10,
+        10
+      ],
+      "old_defects": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "half_defects": [],
+      "next_defects": [
+        [
+          0,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "created": [
+        [
+          0,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "consumed": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "neighbours": [
+        [],
+        [
+          1
+        ]
+      ],
+      "deficient_left": [
+        0
+      ],
+      "deficient_right": [],
+      "omega": [
+        8,
+        0,
+        0
+      ],
+      "charged_support": [
+        4,
+        2
+      ],
+      "omega_descends": true,
+      "successor_omega_zero": true,
+      "successor_boundary_grundy": 1,
+      "successor_is_small_boundary": false,
+      "admission_candidate": true
+    },
+    {
+      "state": [
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "opponent": [
+        10,
+        10
+      ],
+      "causal": [
+        3,
+        7
+      ],
+      "old_defects": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "half_defects": [],
+      "next_defects": [
+        [
+          0,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "created": [
+        [
+          0,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "consumed": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          10,
+          10
+        ]
+      ],
+      "neighbours": [
+        [],
+        [
+          1
+        ]
+      ],
+      "deficient_left": [
+        0
+      ],
+      "deficient_right": [],
+      "omega": [
+        8,
+        0,
+        0
+      ],
+      "charged_support": [
+        4,
+        2
+      ],
+      "omega_descends": true,
+      "successor_omega_zero": true,
+      "successor_boundary_grundy": 1,
+      "successor_is_small_boundary": false,
+      "admission_candidate": true
+    },
+    {
+      "state": [
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "opponent": [
+        0,
+        9
+      ],
+      "causal": [
+        2,
+        8
+      ],
+      "old_defects": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          9
+        ]
+      ],
+      "half_defects": [],
+      "next_defects": [
+        [
+          3,
+          6
+        ],
+        [
+          10,
+          5
+        ]
+      ],
+      "created": [
+        [
+          3,
+          6
+        ],
+        [
+          10,
+          5
+        ]
+      ],
+      "consumed": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          9
+        ]
+      ],
+      "neighbours": [
+        [],
+        []
+      ],
+      "deficient_left": [
+        0,
+        1
+      ],
+      "deficient_right": [],
+      "omega": [
+        15,
+        0,
+        0
+      ],
+      "charged_support": [
+        5,
+        2
+      ],
+      "omega_descends": true,
+      "successor_omega_zero": true,
+      "successor_boundary_grundy": 1,
+      "successor_is_small_boundary": false,
+      "admission_candidate": true
+    },
+    {
+      "state": [
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "opponent": [
+        2,
+        8
+      ],
+      "causal": [
+        0,
+        9
+      ],
+      "old_defects": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          9
+        ]
+      ],
+      "half_defects": [],
+      "next_defects": [
+        [
+          3,
+          6
+        ],
+        [
+          10,
+          5
+        ]
+      ],
+      "created": [
+        [
+          3,
+          6
+        ],
+        [
+          10,
+          5
+        ]
+      ],
+      "consumed": [
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          9
+        ]
+      ],
+      "neighbours": [
+        [],
+        []
+      ],
+      "deficient_left": [
+        0,
+        1
+      ],
+      "deficient_right": [],
+      "omega": [
+        15,
+        0,
+        0
+      ],
+      "charged_support": [
+        5,
+        2
+      ],
+      "omega_descends": true,
+      "successor_omega_zero": true,
+      "successor_boundary_grundy": 1,
+      "successor_is_small_boundary": false,
+      "admission_candidate": true
+    },
+    {
+      "state": [
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "opponent": [
+        2,
+        2
+      ],
+      "causal": [
+        4,
+        3
+      ],
+      "old_defects": [
+        [
+          2,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "half_defects": [],
+      "next_defects": [
+        [
+          1,
+          9
+        ],
+        [
+          9,
+          9
+        ]
+      ],
+      "created": [
+        [
+          1,
+          9
+        ],
+        [
+          9,
+          9
+        ]
+      ],
+      "consumed": [
+        [
+          2,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "neighbours": [
+        [],
+        []
+      ],
+      "deficient_left": [
+        0,
+        1
+      ],
+      "deficient_right": [],
+      "omega": [
+        10,
+        0,
+        0
+      ],
+      "charged_support": [
+        2,
+        2
+      ],
+      "omega_descends": true,
+      "successor_omega_zero": true,
+      "successor_boundary_grundy": 1,
+      "successor_is_small_boundary": false,
+      "admission_candidate": true
+    },
+    {
+      "state": [
+        [
+          5,
+          10
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "opponent": [
+        4,
+        3
+      ],
+      "causal": [
+        2,
+        2
+      ],
+      "old_defects": [
+        [
+          2,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "half_defects": [],
+      "next_defects": [
+        [
+          1,
+          9
+        ],
+        [
+          9,
+          9
+        ]
+      ],
+      "created": [
+        [
+          1,
+          9
+        ],
+        [
+          9,
+          9
+        ]
+      ],
+      "consumed": [
+        [
+          2,
+          2
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "neighbours": [
+        [],
+        []
+      ],
+      "deficient_left": [
+        0,
+        1
+      ],
+      "deficient_right": [],
+      "omega": [
+        10,
+        0,
+        0
+      ],
+      "charged_support": [
+        2,
+        2
+      ],
+      "omega_descends": true,
+      "successor_omega_zero": true,
+      "successor_boundary_grundy": 1,
+      "successor_is_small_boundary": false,
+      "admission_candidate": true
+    }
+  ]
+}
