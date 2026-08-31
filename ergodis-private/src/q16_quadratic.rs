@@ -4,6 +4,9 @@ use std::io::Read;
 
 use anyhow::{ensure, Context, Result};
 use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
+use ergodis::theorem_search::{
+    evolve_implications, CandidateTrial, EvolutionConfig, EvolutionResult,
+};
 
 const Q: usize = 16;
 const POINT_COUNT: usize = 273;
@@ -27,6 +30,26 @@ pub struct QuadraticCensus {
     pub forced_hit: u32,
     pub exceptions: [ExceptionalLeaf; 3],
     pub exception_count: u8,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct LineOffCandidate {
+    pub collinear_points: u8,
+    pub off_line_rank: u8,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct QuadraticTheoremDiscovery {
+    pub examples: u32,
+    pub full_rank_examples: u32,
+    pub trials: Box<[CandidateTrial<LineOffCandidate>]>,
+    pub best_sound: CandidateTrial<LineOffCandidate>,
+}
+
+#[derive(Clone, Copy)]
+struct QuadraticExample {
+    uncovered: [u64; WORDS],
+    full_rank: bool,
 }
 
 pub fn read_level8(mut input: impl Read) -> Result<Vec<[u16; 8]>> {
@@ -92,6 +115,57 @@ pub fn analyze_quadratic_obstructions(
     )?;
     ensure!(census.leaves as usize == arcs.len(), "leaf count changed");
     Ok(census)
+}
+
+pub fn synthesize_quadratic_theorem(arcs: &[[u16; 8]]) -> Result<QuadraticTheoremDiscovery> {
+    let geometry = Geometry::build();
+    let examples = arcs
+        .iter()
+        .map(|arc| {
+            let uncovered = geometry.uncovered(arc);
+            let (rank, _) = quadratic_rank_kernel(&geometry.monomials, uncovered);
+            QuadraticExample {
+                uncovered,
+                full_rank: rank == 6,
+            }
+        })
+        .collect::<Vec<_>>();
+    let EvolutionResult { trials, best_sound } = evolve_implications(
+        [LineOffCandidate {
+            collinear_points: 1,
+            off_line_rank: 1,
+        }],
+        &examples,
+        EvolutionConfig {
+            generations: 8,
+            beam_width: 8,
+            max_candidates: 64,
+        },
+        |candidate, output| {
+            if candidate.collinear_points < 5 {
+                output.push(LineOffCandidate {
+                    collinear_points: candidate.collinear_points + 1,
+                    ..*candidate
+                });
+            }
+            if candidate.off_line_rank < 3 {
+                output.push(LineOffCandidate {
+                    off_line_rank: candidate.off_line_rank + 1,
+                    ..*candidate
+                });
+            }
+        },
+        |candidate, example| geometry.matches_line_off(example.uncovered, *candidate),
+        |example| example.full_rank,
+        |candidate| u32::from(candidate.collinear_points + candidate.off_line_rank),
+    )?;
+    let best_sound = best_sound.context("theorem evolution found no sound candidate")?;
+    Ok(QuadraticTheoremDiscovery {
+        examples: examples.len() as u32,
+        full_rank_examples: examples.iter().filter(|example| example.full_rank).count() as u32,
+        trials,
+        best_sound,
+    })
 }
 
 fn merge_census(mut left: QuadraticCensus, right: QuadraticCensus) -> QuadraticCensus {
@@ -191,6 +265,39 @@ impl Geometry {
             }
         }
         false
+    }
+
+    fn matches_line_off(&self, uncovered: [u64; WORDS], candidate: LineOffCandidate) -> bool {
+        for line in 0..POINT_COUNT {
+            if intersection_count(uncovered, self.line_masks[line])
+                < u32::from(candidate.collinear_points)
+            {
+                continue;
+            }
+            if self.off_line_rank(and_not(uncovered, self.line_masks[line]))
+                >= candidate.off_line_rank
+            {
+                return true;
+            }
+        }
+        false
+    }
+
+    fn off_line_rank(&self, points: [u64; WORDS]) -> u8 {
+        let Some(first) = first_set(points) else {
+            return 0;
+        };
+        let mut remaining = points;
+        remaining[first as usize / 64] &= !(1_u64 << (first as usize % 64));
+        let Some(second) = first_set(remaining) else {
+            return 1;
+        };
+        let joining_line = self.join(first, second);
+        if any(and_not(remaining, self.line_masks[joining_line])) {
+            3
+        } else {
+            2
+        }
     }
 }
 

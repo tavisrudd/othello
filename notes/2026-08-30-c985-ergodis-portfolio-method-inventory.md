@@ -280,6 +280,44 @@ This is a functional end-to-end control, not an isolated-kernel ratio: the
 Python program additionally computes complete spectra, stabilizers, and a
 projective invariance check.
 
+Ergodis then rediscovered the structural predicate rather than receiving it as
+an optimization.  The new public `theorem_search` engine performs deterministic
+seed/mutate/exact-test/beam evolution for sufficient conditions, retaining
+every trial.  The Q16 client starts at `(one point on a line, off-line rank
+one)`, independently mutates both thresholds, and uses exact quadratic rank as
+its truth oracle.  In 15 trials and 0.016 seconds it selects `(3,3)`, covering
+all 2,630 full-rank leaves with zero false positives.  The near misses explain
+the theorem: `(3,1)` and `(3,2)` retain all true leaves but admit two deficient
+leaves, while `(4,1)` is sound but loses six true leaves.  Thus both “three
+zeros force the line component” and “three noncollinear off-line zeros reject
+the residual line” are discovered as necessary.
+
+This is exhaustive induction on the frozen finite domain; promotion to a
+uniform theorem still uses the standard degree-two restriction and residual
+line argument.  The separation is deliberate: candidate search proposes the
+shape, exact testing falsifies bad shapes, and a proof-schema layer discharges
+the surviving shape.
+
+The complete compact trial ledger is
+`ergodis-private/evidence/q16-theorem-trials-v1.jsonl`, SHA-256
+`dfb4164d01f24c2f7fb5f1bd437d9519c4eddc1f513976678cec96f2dadf1b47`.
+From the repository root, replay to a fresh persistent target path with:
+
+```text
+git show 8226c99c4:lean/RelativeConicArcs/Q16CertificateLevels.lean |
+  choom -n 1000 -- ergodis-private/target/release/q16-quadratic \
+    --levels - --threads 8 --synthesize \
+    --theorem-log ergodis-private/target/q16-theorem-replay.jsonl
+sha256sum ergodis-private/target/q16-theorem-replay.jsonl
+```
+
+The next synthesis extensions are counterexample-guided mutation, Pareto and
+behavioural-diversity beams (so an early narrow sound rule cannot starve a
+temporarily unsound parent), typed predicate grammars, cross-parameter
+validation, and automatic matching against reusable proof schemas.  Cached
+feature columns and a sample-then-exact gate should keep large campaigns cheap;
+full exact replay remains the acceptance criterion.
+
 ## First coherent marked-polar replay result
 
 The q=19 adapter enumerates all 381 projective members of

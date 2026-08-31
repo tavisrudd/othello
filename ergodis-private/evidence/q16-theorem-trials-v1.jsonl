@@ -1,0 +1,15 @@
+{"candidate":{"collinear_points":1,"off_line_rank":1},"generation":0,"score":{"complexity":2,"conclusion_true":2630,"covered_true":2630,"examples":2633,"false_positives":3}}
+{"candidate":{"collinear_points":1,"off_line_rank":2},"generation":1,"score":{"complexity":3,"conclusion_true":2630,"covered_true":2630,"examples":2633,"false_positives":3}}
+{"candidate":{"collinear_points":2,"off_line_rank":1},"generation":1,"score":{"complexity":3,"conclusion_true":2630,"covered_true":2630,"examples":2633,"false_positives":3}}
+{"candidate":{"collinear_points":1,"off_line_rank":3},"generation":2,"score":{"complexity":4,"conclusion_true":2630,"covered_true":2630,"examples":2633,"false_positives":3}}
+{"candidate":{"collinear_points":2,"off_line_rank":2},"generation":2,"score":{"complexity":4,"conclusion_true":2630,"covered_true":2630,"examples":2633,"false_positives":3}}
+{"candidate":{"collinear_points":3,"off_line_rank":1},"generation":2,"score":{"complexity":4,"conclusion_true":2630,"covered_true":2630,"examples":2633,"false_positives":2}}
+{"candidate":{"collinear_points":2,"off_line_rank":3},"generation":3,"score":{"complexity":5,"conclusion_true":2630,"covered_true":2630,"examples":2633,"false_positives":3}}
+{"candidate":{"collinear_points":3,"off_line_rank":2},"generation":3,"score":{"complexity":5,"conclusion_true":2630,"covered_true":2630,"examples":2633,"false_positives":2}}
+{"candidate":{"collinear_points":4,"off_line_rank":1},"generation":3,"score":{"complexity":5,"conclusion_true":2630,"covered_true":2624,"examples":2633,"false_positives":0}}
+{"candidate":{"collinear_points":3,"off_line_rank":3},"generation":4,"score":{"complexity":6,"conclusion_true":2630,"covered_true":2630,"examples":2633,"false_positives":0}}
+{"candidate":{"collinear_points":4,"off_line_rank":2},"generation":4,"score":{"complexity":6,"conclusion_true":2630,"covered_true":2624,"examples":2633,"false_positives":0}}
+{"candidate":{"collinear_points":5,"off_line_rank":1},"generation":4,"score":{"complexity":6,"conclusion_true":2630,"covered_true":1586,"examples":2633,"false_positives":0}}
+{"candidate":{"collinear_points":4,"off_line_rank":3},"generation":5,"score":{"complexity":7,"conclusion_true":2630,"covered_true":2624,"examples":2633,"false_positives":0}}
+{"candidate":{"collinear_points":5,"off_line_rank":2},"generation":5,"score":{"complexity":7,"conclusion_true":2630,"covered_true":1586,"examples":2633,"false_positives":0}}
+{"candidate":{"collinear_points":5,"off_line_rank":3},"generation":6,"score":{"complexity":8,"conclusion_true":2630,"covered_true":1586,"examples":2633,"false_positives":0}}
