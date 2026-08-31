@@ -85,6 +85,13 @@ struct Args {
     /// Residue class `A` for `--stratum-mod`.
     #[arg(long, default_value_t = 0)]
     stratum_class: usize,
+    /// Complete search of every `PGL_2(q)`-orbit with nontrivial stabilizer,
+    /// by sweeping the fixed locus of one representative of each conjugacy
+    /// class of prime-order elements.  See the fixed-locus lemma in the module
+    /// documentation: this is exhaustive for non-regular orbits and costs
+    /// `O(q^{⌈(d+1)/2⌉ - 1})` instead of the census's `O(q^d)`.
+    #[arg(long)]
+    fix_sweep: bool,
     /// Output JSON path.
     #[arg(long)]
     out: Option<String>,
@@ -889,6 +896,329 @@ fn stratum_sweep(
     Ok(())
 }
 
+// ---------------------------------------------------------------------------
+// Fixed-locus sweep: a complete search of the non-regular orbits
+// ---------------------------------------------------------------------------
+//
+// **Fixed-locus lemma.**  Let `σ ∈ PGL_2(q)` have prime order `ℓ` and let
+// `S_σ` be its `d`-th symmetric power acting on `PG(d,q)`.  Then
+//
+//   Fix(S_σ) = ⋃_{λ ∈ F_q^*} P( ker(S_σ - λ·I) ),
+//
+// a finite union of linear subspaces of `PG(d,q)`, and a `PGL_2(q)`-orbit `O`
+// has a stabilizer containing a conjugate of `σ` if and only if `O` meets
+// `Fix(S_σ)`.  Since every nontrivial subgroup of `PGL_2(q)` contains an
+// element of prime order, and every element of prime order `ℓ` is conjugate to
+// a power of one fixed representative — unipotent for `ℓ = p`, split-torus for
+// `ℓ | q-1`, non-split-torus for `ℓ | q+1` — and since `Fix(S_{σ^k}) =
+// Fix(S_σ)` for `1 ≤ k < ℓ` (the two have the same eigenvectors), sweeping
+//
+//   Fix(S_σ)   for one σ of each prime order ℓ | p(q-1)(q+1)
+//
+// visits **every** point of **every** orbit with nontrivial stabilizer.  The
+// only orbits it cannot see are the regular ones.
+//
+// Cost.  For the split element `t ↦ ζt` of order `ℓ`, `S_σ` is diagonal with
+// entries `ζ^i`, so `ker(S_σ - ζ^a I)` is the arithmetic-progression stratum
+// `{ i ≡ a (mod ℓ) }` of dimension `⌈(d+1)/ℓ⌉`.  Summed over the `O(log q)`
+// primes and their eigenvalues the sweep is `O(q^{⌈(d+1)/2⌉ - 1})` points,
+// against `O(q^d)` for the census — a square-root saving that makes the
+// non-regular part of every redundancy-eight and redundancy-nine cell in the
+// unproved band decidable in seconds rather than hours.
+//
+// The implementation makes no use of the diagonal shape: it builds `S_σ` for a
+// concrete `σ` and takes null spaces over `F_q`, so the split, non-split and
+// unipotent cases run through the same code.
+
+fn prime_divisors(mut n: usize) -> Vec<usize> {
+    let mut out = Vec::new();
+    let mut d = 2usize;
+    while d * d <= n {
+        if n % d == 0 {
+            out.push(d);
+            while n % d == 0 {
+                n /= d;
+            }
+        }
+        d += 1;
+    }
+    if n > 1 {
+        out.push(n);
+    }
+    out
+}
+
+/// Kernel basis of `rows × cols` matrix `data` over `F_q`.
+fn kernel_basis(f: &Field, rows: usize, cols: usize, data: &mut [u8]) -> Vec<Vec<u8>> {
+    let pivots = rref(f, rows, cols, data);
+    let free: Vec<usize> = (0..cols).filter(|c| !pivots.contains(c)).collect();
+    free.iter()
+        .map(|&fc| {
+            let mut v = vec![0u8; cols];
+            v[fc] = 1;
+            for (ri, &pc) in pivots.iter().enumerate() {
+                v[pc] = f.n(data[ri * cols + fc]);
+            }
+            v
+        })
+        .collect()
+}
+
+/// Multiply two 2x2 matrices over `F_q`, stored row-major as `[a,b,c,e]`.
+fn mat2_mul(f: &Field, x: &[u8; 4], y: &[u8; 4]) -> [u8; 4] {
+    [
+        f.a(f.m(x[0], y[0]), f.m(x[1], y[2])),
+        f.a(f.m(x[0], y[1]), f.m(x[1], y[3])),
+        f.a(f.m(x[2], y[0]), f.m(x[3], y[2])),
+        f.a(f.m(x[2], y[1]), f.m(x[3], y[3])),
+    ]
+}
+
+fn mat2_is_scalar(m: &[u8; 4]) -> bool {
+    m[1] == 0 && m[2] == 0 && m[0] == m[3] && m[0] != 0
+}
+
+/// Order of a matrix in `PGL_2(q)`, i.e. least `k ≥ 1` with `M^k` scalar.
+fn pgl_order(f: &Field, m: &[u8; 4]) -> usize {
+    let mut acc = *m;
+    let mut k = 1usize;
+    while !mat2_is_scalar(&acc) {
+        acc = mat2_mul(f, &acc, m);
+        k += 1;
+        if k > f.q * f.q {
+            return 0;
+        }
+    }
+    k
+}
+
+/// A non-split-torus generator of `PGL_2(q)`: a matrix of order `q+1`.
+/// Searched over companion matrices `[[0,b],[1,e]]` of `x^2 - e x - b`,
+/// keeping the first with irreducible characteristic polynomial and full
+/// projective order.
+fn nonsplit_generator(f: &Field) -> Option<[u8; 4]> {
+    for b in 1..f.q as u8 {
+        for e in 0..f.q as u8 {
+            // irreducible iff x^2 - e x - b has no root in F_q
+            let mut rooted = false;
+            for a in 0..f.q as u8 {
+                if f.a(f.m(a, a), f.n(f.a(f.m(e, a), b))) == 0 {
+                    rooted = true;
+                    break;
+                }
+            }
+            if rooted {
+                continue;
+            }
+            let m = [0u8, b, 1u8, e];
+            if pgl_order(f, &m) == f.q + 1 {
+                return Some(m);
+            }
+        }
+    }
+    None
+}
+
+fn mat2_pow(f: &Field, m: &[u8; 4], mut e: usize) -> [u8; 4] {
+    let mut result = [1u8, 0, 0, 1];
+    let mut base = *m;
+    while e != 0 {
+        if e & 1 != 0 {
+            result = mat2_mul(f, &result, &base);
+        }
+        base = mat2_mul(f, &base, &base);
+        e >>= 1;
+    }
+    result
+}
+
+struct FixHit {
+    order: usize,
+    kind: &'static str,
+    eigenvalue: u8,
+    dimension: usize,
+    points: u64,
+    deep: u64,
+    exceptional: u64,
+    examples: Vec<Vec<u8>>,
+}
+
+#[allow(clippy::too_many_arguments)]
+fn fix_sweep(
+    f: &Field,
+    d: usize,
+    r: usize,
+    k: usize,
+    mode: RankMode,
+    threads: usize,
+    max_reps: usize,
+    out: Option<&str>,
+) -> Result<()> {
+    let g = f.primitive();
+    let mut generators: Vec<(usize, &'static str, [u8; 4])> = Vec::new();
+    // unipotent, order p
+    generators.push((f.p, "unipotent", [1, 0, 1, 1]));
+    // split torus, one element of each prime order dividing q-1
+    for l in prime_divisors(f.q - 1) {
+        let zeta = f.powi(g, (f.q - 1) / l);
+        generators.push((l, "split", [1, 0, 0, zeta]));
+    }
+    // non-split torus, one element of each prime order dividing q+1
+    if let Some(base) = nonsplit_generator(f) {
+        for l in prime_divisors(f.q + 1) {
+            generators.push((l, "nonsplit", mat2_pow(f, &base, (f.q + 1) / l)));
+        }
+    } else if f.q > 2 {
+        bail!("no non-split torus generator found for q = {}", f.q);
+    }
+
+    let mut hits: Vec<FixHit> = Vec::new();
+    let mut total_points = 0u64;
+    let mut total_deep = 0u64;
+    let mut total_exceptional = 0u64;
+
+    for (order, kind, sigma) in &generators {
+        let sym = sym_power(f, d, sigma[0], sigma[1], sigma[2], sigma[3]);
+        for lambda in 1..f.q as u8 {
+            // ker(S_sigma - lambda I)
+            let n = d + 1;
+            let mut data = vec![0u8; n * n];
+            for i in 0..n {
+                for j in 0..n {
+                    data[i * n + j] = sym[i][j];
+                }
+                data[i * n + i] = f.a(data[i * n + i], f.n(lambda));
+            }
+            let basis = kernel_basis(f, n, n, &mut data);
+            if basis.is_empty() {
+                continue;
+            }
+            let dim = basis.len();
+            let sub = ProjectiveIndex::new(
+                &f.inner,
+                u8::try_from(dim - 1).context("fixed-locus dimension exceeds u8")?,
+            )?;
+            let total = sub.point_count();
+            let chunk = (total / (threads as u64 * 4)).clamp(1, CHUNK);
+            let cursor = AtomicU64::new(0);
+            let mut deep = 0u64;
+            let mut exceptional = 0u64;
+            let mut examples: Vec<Vec<u8>> = Vec::new();
+            std::thread::scope(|scope| {
+                let mut handles = Vec::new();
+                for _ in 0..threads {
+                    let (f, sub, basis, cursor) = (f, &sub, &basis, &cursor);
+                    handles.push(scope.spawn(move || {
+                        let mut deep = 0u64;
+                        let mut exceptional = 0u64;
+                        let mut examples: Vec<Vec<u8>> = Vec::new();
+                        let mut coeff = vec![0u8; dim];
+                        let mut full = vec![0u8; d + 1];
+                        let mut sc = RankScratch::new(d);
+                        loop {
+                            let lo = cursor.fetch_add(chunk, Ordering::Relaxed);
+                            if lo >= total {
+                                break;
+                            }
+                            let hi = (lo + chunk).min(total);
+                            for idx in lo..hi {
+                                if sub.point(idx, &mut coeff).is_err() {
+                                    continue;
+                                }
+                                full.iter_mut().for_each(|c| *c = 0);
+                                for (t, &ct) in coeff.iter().enumerate() {
+                                    if ct == 0 {
+                                        continue;
+                                    }
+                                    for u in 0..=d {
+                                        let bt = basis[t][u];
+                                        if bt != 0 {
+                                            full[u] = f.a(full[u], f.m(ct, bt));
+                                        }
+                                    }
+                                }
+                                let info = analyse(f, d, &full, mode, &mut sc);
+                                if info.w == d {
+                                    deep += 1;
+                                    if info.apolar_degree >= 3 {
+                                        exceptional += 1;
+                                        examples.push(full.clone());
+                                    }
+                                }
+                            }
+                        }
+                        (deep, exceptional, examples)
+                    }));
+                }
+                for handle in handles {
+                    let (dp, ex, exm) = handle.join().expect("fix-sweep worker panicked");
+                    deep += dp;
+                    exceptional += ex;
+                    examples.extend(exm);
+                }
+            });
+            examples.sort();
+            total_points += total;
+            total_deep += deep;
+            total_exceptional += exceptional;
+            hits.push(FixHit {
+                order: *order,
+                kind,
+                eigenvalue: lambda,
+                dimension: dim - 1,
+                points: total,
+                deep,
+                exceptional,
+                examples,
+            });
+        }
+    }
+
+    let mut json = String::new();
+    write!(
+        json,
+        "{{\"driver\":\"c1018_prs_census\",\"mode\":\"fix_sweep\",\"q\":{},\"p\":{},\"h\":{},\
+\"defining_poly\":{:?},\"n\":{},\"k\":{},\"r\":{},\"d\":{},\"threads\":{},\
+\"swept_points\":{},\"deep_in_fixed_locus\":{},\"exceptional_in_fixed_locus\":{},\"loci\":[",
+        f.q,
+        f.p,
+        f.h,
+        f.inner.modulus(),
+        f.q + 1,
+        k,
+        r,
+        d,
+        threads,
+        total_points,
+        total_deep,
+        total_exceptional
+    )?;
+    for (i, hit) in hits.iter().enumerate() {
+        if i > 0 {
+            json.push(',');
+        }
+        write!(
+            json,
+            "{{\"order\":{},\"kind\":\"{}\",\"eigenvalue\":{},\"dim\":{},\"points\":{},\
+\"deep\":{},\"exceptional\":{},\"examples\":{:?}}}",
+            hit.order,
+            hit.kind,
+            hit.eigenvalue,
+            hit.dimension,
+            hit.points,
+            hit.deep,
+            hit.exceptional,
+            hit.examples.iter().take(max_reps).collect::<Vec<_>>()
+        )?;
+    }
+    json.push_str("]}");
+    if let Some(path) = out {
+        std::fs::write(path, format!("{json}\n"))?;
+    }
+    println!("{json}");
+    Ok(())
+}
+
 fn main() -> Result<()> {
     let args = Args::parse();
     let q = args.q;
@@ -910,6 +1240,18 @@ fn main() -> Result<()> {
         .or_else(|| std::thread::available_parallelism().ok().map(|v| v.get()))
         .unwrap_or(1)
         .max(1);
+    if args.fix_sweep {
+        return fix_sweep(
+            &f,
+            d,
+            r,
+            k,
+            args.rank_mode,
+            threads,
+            args.max_reps,
+            args.out.as_deref(),
+        );
+    }
     if let Some(m) = args.stratum_mod {
         return stratum_sweep(
             &f,
