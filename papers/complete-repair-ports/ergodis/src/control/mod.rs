@@ -1244,7 +1244,7 @@ impl Campaign {
                 ));
             }
             let counts = groups.entry(value).or_default();
-            let observed = plan.evaluate_value(self.batch.row(row), None)? != 0;
+            let observed = plan.evaluate_value_untraced(self.batch.row(row))? != 0;
             let expected = self.batch.expected(row);
             let weight = self.batch.weights[row];
             counts[0] += 1;
@@ -1318,7 +1318,7 @@ impl Campaign {
             .ok_or_else(|| ControlError::Invalid("unknown active plan".into()))?;
         let mut selected: Vec<(i64, usize)> = Vec::with_capacity(top);
         for row in 0..self.batch.rows() {
-            let score = stored.plan.evaluate_value(self.batch.row(row), None)?;
+            let score = stored.plan.evaluate_value_untraced(self.batch.row(row))?;
             let position = selected
                 .iter()
                 .position(|&(other, other_row)| {

@@ -452,6 +452,23 @@ validates the conservative representation switch without claiming one layout
 dominates every density. The registry now has 66 pass, 2 open, and 34
 not-applicable cells.
 
+The campaign-plan VM row is now both measured and improved. The retained
+predicate reads three fields and executes eleven stack operations over 65,536
+deterministic rows. The old evaluator carried an optional-trace test through
+every opcode even though production evaluation is untraced. Separate traced
+and untraced monomorphizations now select once outside the opcode loop; all
+ordinary call sites use the branch-free untraced path, while verbose debugging
+keeps identical trace semantics. Nine rotated old/new pairs each evaluate
+65,536,000 rows with identical work and outcome checksum. Old/new is 1.153x
+cycles (`t=21.17`), 1.177x instructions, 1.189x branches, and 1.150x wall
+(`t=21.99`), with 3,668 versus 3,636 KiB median RSS. A separate branchless
+handwritten-expression control is still 16.87x cheaper in cycles and 17.07x
+wall, quantifying the remaining dispatch/fusion opportunity rather than
+claiming interpreter parity. Raw evidence and all three binary hashes are
+under `/home/tavis/.cache/ergodis-perf/c1017-plan-vm/final-ab`. Full
+all-target/all-feature tests and strict clippy pass. The registry now has 67
+pass, 1 open, and 34 not-applicable cells.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

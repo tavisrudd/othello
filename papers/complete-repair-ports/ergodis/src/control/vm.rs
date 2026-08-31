@@ -615,7 +615,7 @@ impl CompiledPlan {
                 "feature row width does not match compiled plan".into(),
             ));
         }
-        self.evaluate_value(row, None)
+        self.evaluate_value_untraced(row)
     }
 
     #[inline(always)]
@@ -800,8 +800,24 @@ impl CompiledPlan {
         })
     }
 
-    /// Evaluate one row with a fixed stack and no allocation.
+    #[inline]
+    pub(super) fn evaluate_value_untraced(&self, row: &[i64]) -> Result<i64, ControlError> {
+        self.evaluate_value_impl::<false>(row, None)
+    }
+
+    /// Evaluate one row with a fixed stack and optional diagnostic tracing.
     pub(super) fn evaluate_value(
+        &self,
+        row: &[i64],
+        trace: Option<&mut Vec<i64>>,
+    ) -> Result<i64, ControlError> {
+        match trace {
+            Some(values) => self.evaluate_value_impl::<true>(row, Some(values)),
+            None => self.evaluate_value_untraced(row),
+        }
+    }
+
+    fn evaluate_value_impl<const TRACE: bool>(
         &self,
         row: &[i64],
         trace: Option<&mut Vec<i64>>,
@@ -819,8 +835,11 @@ impl CompiledPlan {
                 OpCode::Bool => op.value,
                 OpCode::Not => {
                     stack[depth - 1] = i64::from(stack[depth - 1] == 0);
-                    if let Some(values) = trace.as_deref_mut() {
-                        values.push(stack[depth - 1]);
+                    if TRACE {
+                        trace
+                            .as_deref_mut()
+                            .expect("traced evaluator has a trace sink")
+                            .push(stack[depth - 1]);
                     }
                     continue;
                 }
@@ -828,8 +847,11 @@ impl CompiledPlan {
                     stack[depth - 1] = stack[depth - 1].checked_abs().ok_or_else(|| {
                         ControlError::Invalid("arithmetic overflow in plan".into())
                     })?;
-                    if let Some(values) = trace.as_deref_mut() {
-                        values.push(stack[depth - 1]);
+                    if TRACE {
+                        trace
+                            .as_deref_mut()
+                            .expect("traced evaluator has a trace sink")
+                            .push(stack[depth - 1]);
                     }
                     continue;
                 }
@@ -879,8 +901,11 @@ impl CompiledPlan {
             };
             stack[depth] = result;
             depth += 1;
-            if let Some(values) = trace.as_deref_mut() {
-                values.push(result);
+            if TRACE {
+                trace
+                    .as_deref_mut()
+                    .expect("traced evaluator has a trace sink")
+                    .push(result);
             }
         }
         debug_assert_eq!(depth, 1);
@@ -943,7 +968,7 @@ pub(super) fn evaluate_plan_cascaded(
         maximum_score: i64::MIN,
     };
     for row in 0..batch.rows() {
-        let value = plan.evaluate_value(batch.row(row), None)?;
+        let value = plan.evaluate_value_untraced(batch.row(row))?;
         let observed = value != 0;
         let expected = batch.expected(row);
         result.minimum_score = result.minimum_score.min(value);

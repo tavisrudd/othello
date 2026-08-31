@@ -1,6 +1,8 @@
 use std::hint::black_box;
 use std::time::Instant;
 
+#[cfg(feature = "control-plane")]
+use ergodis::control::{CompiledPlan, PlanOp, PlanOutput, PlanRole, PlanSpec, PLAN_SCHEMA};
 use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
 use ergodis::{
     azure_lrc_12_2_2_counted, ceph_xor_repair_family, ceph_xor_repair_supports,
@@ -291,6 +293,18 @@ fn selector_spec(variant: &str) -> Option<(&str, usize)> {
     let backend = fields.next()?;
     let terms = fields.next()?.parse().ok()?;
     fields.next().is_none().then_some((backend, terms))
+}
+
+#[cfg(feature = "control-plane")]
+fn plan_vm_spec(variant: &str) -> Option<(&str, usize, u64)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "plan-vm" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let rows = fields.next()?.parse().ok()?;
+    let seed = fields.next()?.parse().ok()?;
+    fields.next().is_none().then_some((backend, rows, seed))
 }
 
 struct HallBenchFixture {
@@ -1032,6 +1046,59 @@ fn main() {
                 .wrapping_add(assignment_hash)
                 .wrapping_add(answer.partial_tests);
             black_box(answer);
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
+    #[cfg(feature = "control-plane")]
+    if let Some((backend, row_count, seed)) = plan_vm_spec(&variant) {
+        let fields = vec!["surplus".to_owned(), "drop".to_owned(), "debt".to_owned()];
+        let spec = PlanSpec {
+            schema: PLAN_SCHEMA.to_owned(),
+            name: "bench-predicate".to_owned(),
+            role: PlanRole::Diagnostic,
+            output: PlanOutput::Predicate,
+            scope: None,
+            program: vec![
+                PlanOp::Field {
+                    name: "surplus".to_owned(),
+                },
+                PlanOp::Const { value: 0 },
+                PlanOp::Gt,
+                PlanOp::Field {
+                    name: "drop".to_owned(),
+                },
+                PlanOp::Const { value: 0 },
+                PlanOp::Gt,
+                PlanOp::And,
+                PlanOp::Field {
+                    name: "debt".to_owned(),
+                },
+                PlanOp::Const { value: 0 },
+                PlanOp::Lt,
+                PlanOp::Or,
+            ],
+        };
+        let plan = CompiledPlan::compile(&spec, &fields).unwrap();
+        let mut state = seed;
+        let rows = (0..row_count)
+            .map(|_| std::array::from_fn(|_| i64::from(next_u32(&mut state) % 257) - 128))
+            .collect::<Vec<[i64; 3]>>();
+        for _ in 0..repetitions {
+            for row in &rows {
+                let value = match backend {
+                    "direct" => i64::from(((row[0] > 0) & (row[1] > 0)) | (row[2] < 0)),
+                    "vm" => plan.evaluate_row(row).unwrap(),
+                    _ => panic!("unknown plan-VM backend"),
+                };
+                work += 1;
+                checksum = checksum.wrapping_add(value as u64);
+                black_box(value);
+            }
         }
         let elapsed_ns = started.elapsed().as_nanos();
         println!(

@@ -180,7 +180,16 @@ as each coherent tranche lands.
    `t=1801.52` and `t=174.45`. Raw evidence is under
    `/home/tavis/.cache/ergodis-perf/c1017-selector/final-ab`. The private
    registry now records 66 pass, 2 open, and 34 not-applicable cells. Current
-   next slice: retain the campaign-plan VM counter A/B.
+   plan-VM gate is also closed with a concrete optimization. Moving the
+   optional tracing decision outside the opcode loop and monomorphizing traced
+   and untraced execution improves the ordinary evaluator by 1.153x cycles
+   (`t=21.17`), 1.177x instructions, and 1.150x wall (`t=21.99`) across
+   65,536,000 exact row evaluations. A branchless handwritten equivalent is
+   still 16.87x cheaper in cycles, leaving fused superinstructions as a
+   measured successor rather than hiding interpreter overhead. Raw evidence is
+   under `/home/tavis/.cache/ergodis-perf/c1017-plan-vm/final-ab`. The private
+   registry now records 67 pass, 1 open, and 34 not-applicable cells. Current
+   next slice: retain the semantic-symmetry anchor counter A/B.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and
