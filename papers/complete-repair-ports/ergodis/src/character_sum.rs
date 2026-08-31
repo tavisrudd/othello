@@ -28,7 +28,39 @@ pub enum CharacterSumError {
     UnreducedInput,
     #[error("character-census counts overflow u32")]
     CountOverflow,
+    #[error("the zero polynomial has no squarefree degree profile")]
+    ZeroPolynomial,
 }
+
+/// Degree metadata for a nonzero polynomial over the prime field.
+#[repr(C)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub struct PolynomialDegeneracy {
+    degree: u32,
+    repeated_factor_degree: u32,
+}
+
+impl PolynomialDegeneracy {
+    #[must_use]
+    pub fn degree(self) -> u32 {
+        self.degree
+    }
+
+    #[must_use]
+    pub fn repeated_factor_degree(self) -> u32 {
+        self.repeated_factor_degree
+    }
+
+    #[must_use]
+    pub fn is_squarefree(self) -> bool {
+        self.repeated_factor_degree == 0
+    }
+}
+
+const _: () = assert!(
+    std::mem::size_of::<PolynomialDegeneracy>() == 8
+        && std::mem::align_of::<PolynomialDegeneracy>() == 4
+);
 
 /// Counts witnessing an exact quadratic-character sum.
 #[repr(C)]
@@ -186,6 +218,86 @@ impl PrimeQuadraticCharacter {
         Ok(self.polynomial_census_kernel::<true>(range, coefficients, intercept, slope))
     }
 
+    /// Census the character of a product of reduced polynomials.
+    ///
+    /// Factors are evaluated independently and multiplied modulo the field;
+    /// the product polynomial is never materialized and the census allocates
+    /// nothing. An empty factor list denotes the constant polynomial one.
+    pub fn product_polynomial_census_range_reduced(
+        &self,
+        range: Range<u32>,
+        factors: &[&[u32]],
+    ) -> Result<CharacterCensus, CharacterSumError> {
+        self.validate_reduced_inputs(&range, &[], &[])?;
+        if factors
+            .iter()
+            .flat_map(|factor| factor.iter())
+            .any(|&value| value >= self.modulus)
+        {
+            return Err(CharacterSumError::UnreducedInput);
+        }
+        let modulus = u64::from(self.modulus);
+        let mut census = CharacterCensus::default();
+        for x in range {
+            let x64 = u64::from(x);
+            let mut product = 1_u64;
+            for factor in factors {
+                let mut value = 0_u64;
+                for &coefficient in factor.iter().rev() {
+                    value = (value * x64 + u64::from(coefficient)) % modulus;
+                }
+                product = product * value % modulus;
+            }
+            self.tally_reduced(product as u32, &mut census);
+        }
+        Ok(census)
+    }
+
+    /// Compute exact repeated-factor metadata via `gcd(f, f')`.
+    ///
+    /// This is a cold algebraic preflight and may allocate. It lets callers
+    /// detect bad primes before applying a squarefree character-sum bound.
+    pub fn polynomial_degeneracy_reduced(
+        &self,
+        coefficients: &[u32],
+    ) -> Result<PolynomialDegeneracy, CharacterSumError> {
+        if coefficients.iter().any(|&value| value >= self.modulus) {
+            return Err(CharacterSumError::UnreducedInput);
+        }
+        let polynomial = trimmed(coefficients.to_vec());
+        if polynomial.is_empty() {
+            return Err(CharacterSumError::ZeroPolynomial);
+        }
+        let degree = polynomial.len() - 1;
+        if degree == 0 {
+            return Ok(PolynomialDegeneracy {
+                degree: 0,
+                repeated_factor_degree: 0,
+            });
+        }
+        let modulus64 = u64::from(self.modulus);
+        let derivative = trimmed(
+            polynomial
+                .iter()
+                .enumerate()
+                .skip(1)
+                .map(|(power, &coefficient)| {
+                    (u64::from(coefficient) * (power as u64 % modulus64) % modulus64) as u32
+                })
+                .collect(),
+        );
+        let repeated_factor_degree = if derivative.is_empty() {
+            degree
+        } else {
+            polynomial_gcd_degree(polynomial, derivative, self.modulus)
+        };
+        Ok(PolynomialDegeneracy {
+            degree: u32::try_from(degree).map_err(|_| CharacterSumError::CountOverflow)?,
+            repeated_factor_degree: u32::try_from(repeated_factor_degree)
+                .map_err(|_| CharacterSumError::CountOverflow)?,
+        })
+    }
+
     fn validate_reduced_inputs(
         &self,
         range: &Range<u32>,
@@ -257,6 +369,46 @@ impl PrimeQuadraticCharacter {
     }
 }
 
+fn trimmed(mut polynomial: Vec<u32>) -> Vec<u32> {
+    while polynomial.last() == Some(&0) {
+        polynomial.pop();
+    }
+    polynomial
+}
+
+fn polynomial_gcd_degree(mut left: Vec<u32>, mut right: Vec<u32>, modulus: u32) -> usize {
+    let modulus64 = u64::from(modulus);
+    while !right.is_empty() {
+        let inverse = pow_mod(*right.last().unwrap(), modulus - 2, modulus);
+        while left.len() >= right.len() {
+            let shift = left.len() - right.len();
+            let factor = u64::from(*left.last().unwrap()) * u64::from(inverse) % modulus64;
+            for (index, &coefficient) in right.iter().enumerate() {
+                let product = factor * u64::from(coefficient) % modulus64;
+                let slot = &mut left[shift + index];
+                *slot = ((u64::from(*slot) + modulus64 - product) % modulus64) as u32;
+            }
+            left = trimmed(left);
+        }
+        left = std::mem::replace(&mut right, left);
+    }
+    left.len().saturating_sub(1)
+}
+
+fn pow_mod(base: u32, mut exponent: u32, modulus: u32) -> u32 {
+    let modulus64 = u64::from(modulus);
+    let mut base = u64::from(base);
+    let mut result = 1_u64;
+    while exponent != 0 {
+        if exponent & 1 != 0 {
+            result = result * base % modulus64;
+        }
+        base = base * base % modulus64;
+        exponent >>= 1;
+    }
+    result as u32
+}
+
 fn is_odd_prime(value: u32) -> bool {
     if value < 3 || value.is_multiple_of(2) {
         return false;
@@ -285,6 +437,36 @@ mod tests {
             exponent >>= 1;
         }
         result
+    }
+
+    #[test]
+    fn product_twist_matches_materialized_product() {
+        let character = PrimeQuadraticCharacter::new(101).unwrap();
+        let left = [3, 2, 1];
+        let right = [5, 0, 4];
+        let product = [15, 10, 17, 8, 4];
+        let direct = character
+            .product_polynomial_census_range_reduced(0..101, &[&left, &right])
+            .unwrap();
+        assert_eq!(
+            direct,
+            character.polynomial_census_reduced(&product).unwrap()
+        );
+    }
+
+    #[test]
+    fn reports_squarefree_and_repeated_factors() {
+        let character = PrimeQuadraticCharacter::new(101).unwrap();
+        let squarefree = character.polynomial_degeneracy_reduced(&[1, 0, 1]).unwrap();
+        assert_eq!(
+            (squarefree.degree(), squarefree.repeated_factor_degree()),
+            (2, 0)
+        );
+        let repeated = character.polynomial_degeneracy_reduced(&[1, 2, 1]).unwrap();
+        assert_eq!(
+            (repeated.degree(), repeated.repeated_factor_degree()),
+            (2, 1)
+        );
     }
 
     fn assert_descent_fixture(

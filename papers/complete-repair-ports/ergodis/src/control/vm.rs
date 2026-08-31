@@ -14,6 +14,16 @@ struct DataHeader {
     problem: String,
     fields: Vec<String>,
     rows: usize,
+    #[serde(default)]
+    generator: Option<FeatureGeneratorProvenance>,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct FeatureGeneratorProvenance {
+    pub name: String,
+    pub version: String,
+    pub digest: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -36,6 +46,7 @@ pub struct FeatureBatch {
     pub presentation: String,
     pub problem: String,
     pub fields: Box<[String]>,
+    pub generator: Option<FeatureGeneratorProvenance>,
     pub(super) row_ids: Box<[u64]>,
     pub(super) weights: Box<[u64]>,
     pub(super) expected: Box<[u64]>,
@@ -67,6 +78,19 @@ impl FeatureBatch {
         }
         if header.fields.is_empty() || header.fields.len() > u16::MAX as usize {
             return Err(ControlError::Invalid("invalid feature width".into()));
+        }
+        if header.generator.as_ref().is_some_and(|generator| {
+            generator.name.is_empty()
+                || generator.version.is_empty()
+                || generator.digest.len() != 64
+                || !generator
+                    .digest
+                    .bytes()
+                    .all(|byte| byte.is_ascii_hexdigit())
+        }) {
+            return Err(ControlError::Invalid(
+                "invalid feature-generator provenance".into(),
+            ));
         }
         let mut seen = BTreeMap::new();
         for (index, field) in header.fields.iter().enumerate() {
@@ -106,6 +130,7 @@ impl FeatureBatch {
             presentation: header.presentation,
             problem: header.problem,
             fields: header.fields.into_boxed_slice(),
+            generator: header.generator,
             row_ids: row_ids.into_boxed_slice(),
             weights: weights.into_boxed_slice(),
             expected: expected.into_boxed_slice(),
@@ -383,6 +408,7 @@ fn binary_parts(expr: &PlanExpr) -> Option<(&PlanExpr, &PlanExpr, PlanOp)> {
 pub enum PlanOp {
     Field { name: String },
     Const { value: i64 },
+    Bool { value: bool },
     Add,
     Sub,
     Mul,
@@ -422,6 +448,7 @@ enum OpCode {
     Not,
     Abs,
     Select,
+    Bool,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -521,6 +548,7 @@ impl CompiledPlan {
                     (OpCode::Field, 0, field as u16, 0)
                 }
                 PlanOp::Const { value } => (OpCode::Const, *value, 0, 0),
+                PlanOp::Bool { value } => (OpCode::Bool, i64::from(*value), 0, 0),
                 PlanOp::Add => (OpCode::Add, 0, 0, 2),
                 PlanOp::Sub => (OpCode::Sub, 0, 0, 2),
                 PlanOp::Mul => (OpCode::Mul, 0, 0, 2),
@@ -544,6 +572,7 @@ impl CompiledPlan {
             let base = depth - inputs;
             let result_kind = match code {
                 OpCode::Field | OpCode::Const => ValueKind::Integer,
+                OpCode::Bool => ValueKind::Boolean,
                 OpCode::Add
                 | OpCode::Sub
                 | OpCode::Mul
@@ -666,6 +695,7 @@ impl CompiledPlan {
             let result = match op.code {
                 OpCode::Field => row[op.field as usize],
                 OpCode::Const => op.value,
+                OpCode::Bool => op.value,
                 OpCode::Not => {
                     stack[depth - 1] = i64::from(stack[depth - 1] == 0);
                     if let Some(values) = trace.as_deref_mut() {
@@ -719,6 +749,7 @@ impl CompiledPlan {
                         OpCode::Or => i64::from(left != 0 || right != 0),
                         OpCode::Field
                         | OpCode::Const
+                        | OpCode::Bool
                         | OpCode::Not
                         | OpCode::Abs
                         | OpCode::Select => unreachable!(),

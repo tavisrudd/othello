@@ -109,9 +109,7 @@ pub(super) fn learn_decision_tree(
             Emit::Op(op) => program.push(op),
             Emit::Node(node) => match nodes[node as usize] {
                 LearnedNode::Pending => unreachable!(),
-                LearnedNode::Leaf(value) => program.push(PlanOp::Const {
-                    value: i64::from(value),
-                }),
+                LearnedNode::Leaf(value) => program.push(PlanOp::Bool { value }),
                 LearnedNode::Split {
                     field,
                     threshold,

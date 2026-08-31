@@ -618,3 +618,23 @@ fn character_sum_census_allocates_nothing() {
     assert_ne!(sum, 0);
     assert_eq!(allocations, 0);
 }
+
+#[test]
+fn product_character_sum_census_allocates_nothing() {
+    let character = PrimeQuadraticCharacter::new(97).unwrap();
+    let left = character.reduce_coefficients(&[1, 0, 1]);
+    let right = character.reduce_coefficients(&[3, -2, 4]);
+    let factors = [left.as_ref(), right.as_ref()];
+    let (sum, allocations) = tracked_allocations(|| {
+        let mut sum = 0;
+        for _ in 0..1_000 {
+            sum += character
+                .product_polynomial_census_range_reduced(0..97, &factors)
+                .unwrap()
+                .sum();
+        }
+        sum
+    });
+    assert_ne!(sum, 0);
+    assert_eq!(allocations, 0);
+}

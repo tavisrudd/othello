@@ -37,6 +37,7 @@ pub mod ordered_resource;
 pub mod packed_ternary;
 pub mod projective;
 pub mod provenance;
+pub mod quadratic_window;
 pub mod residual_hitting;
 pub mod root_execution;
 pub mod rpc;
@@ -68,7 +69,9 @@ pub use applications::{
     RepairDagAnswer, RepairTask,
 };
 pub use automata::{ExplicitMataDfa, ExplicitMataError};
-pub use character_sum::{CharacterCensus, CharacterSumError, PrimeQuadraticCharacter};
+pub use character_sum::{
+    CharacterCensus, CharacterSumError, PolynomialDegeneracy, PrimeQuadraticCharacter,
+};
 pub use commutant::{
     binary_commutant_workspace_upper_bound, certify_binary_extension_field,
     certify_binary_extension_field_exhaustive, compile_binary_commutant,
@@ -158,6 +161,7 @@ pub use ordered_resource::{
     ParetoObservationTable, ParetoResponseDictionary, ParetoWitness, ParetoWitnessError,
     ParetoWorkspace, ValidatedParetoObjective, WitnessedParetoFront, WitnessedParetoWorkspace,
 };
+pub use quadratic_window::concave_quadratic_window;
 pub use residual_hitting::{
     verify_residual_hitting_refutation, ResidualHittingError, ResidualHittingWorkspace,
 };

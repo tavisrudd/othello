@@ -21,8 +21,9 @@ mod vm;
 pub use client::PlanArena;
 use synthesis::learn_decision_tree;
 pub use vm::{
-    evaluate_plan, CompiledPlan, Evaluation, ExpressionPlanSpec, FeatureBatch, PlanDocument,
-    PlanExpr, PlanOp, PlanOutput, PlanRole, PlanScope, PlanSpec,
+    evaluate_plan, CompiledPlan, Evaluation, ExpressionPlanSpec, FeatureBatch,
+    FeatureGeneratorProvenance, PlanDocument, PlanExpr, PlanOp, PlanOutput, PlanRole, PlanScope,
+    PlanSpec,
 };
 
 pub const SCHEMA: &str = "ergodis-control-experimental-v0";
@@ -33,6 +34,7 @@ pub const MAX_PLAN_OPS: usize = 128;
 pub const MAX_PLAN_STACK: usize = 64;
 pub const MAX_ACTIVE_PLANS: usize = 64;
 pub const MAX_ARCHIVE_CLASSES: usize = 4096;
+pub const MAX_CANDIDATE_BATCH: usize = 4096;
 pub const SOCKET_IO_TIMEOUT: Duration = Duration::from_secs(10);
 const EVENT_RING: usize = 256;
 const MAX_WATCHERS: usize = 64;
@@ -60,6 +62,8 @@ pub struct Manifest {
     pub code_commit: String,
     pub presentation_hash: String,
     pub problem: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub feature_generator: Option<FeatureGeneratorProvenance>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -194,6 +198,7 @@ impl Campaign {
                 .into(),
             presentation_hash: data_hash,
             problem: batch.problem.clone(),
+            feature_generator: batch.generator.clone(),
         };
         write_create_json(&run_dir.join("manifest.json"), &manifest)?;
         let ledger = Ledger::create(&run_dir.join("ledger.jsonl"), ledger_limit)?;
@@ -282,6 +287,7 @@ impl Campaign {
             "scope-profile" => self.scope_profile(&request.args),
             "synthesize-tree" => self.synthesize_tree(&request.args),
             "candidate-try" => self.candidate_try(&request.args, false),
+            "candidate-batch" => self.candidate_batch(&request.args),
             "candidate-apply" => self.candidate_try(&request.args, true),
             "candidate-deactivate" => self.candidate_deactivate(&request.args),
             "obstruction-first" => self.obstruction(&request.args),
@@ -320,6 +326,7 @@ impl Campaign {
                 "watch-unregister", "plan-get", "agent-brief",
                 "feature-ceiling", "scope-profile", "synthesize-tree",
                 "candidate-try", "candidate-apply", "candidate-deactivate",
+                "candidate-batch",
                 "obstruction-first", "exceptional", "trace", "note", "noop",
                 "shutdown"
             ],
@@ -331,6 +338,7 @@ impl Campaign {
             "problem": self.batch.problem,
             "presentation": self.batch.presentation,
             "presentation_hash": self.manifest.presentation_hash,
+            "feature_generator": self.manifest.feature_generator,
             "rows": self.batch.rows(),
             "fields": self.batch.fields,
             "plans": self.plans.len(),
@@ -778,6 +786,118 @@ impl Campaign {
         )
     }
 
+    fn candidate_batch(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let plans = args
+            .get("plans")
+            .and_then(Value::as_array)
+            .ok_or_else(|| ControlError::Invalid("candidate-batch requires plans".into()))?;
+        if plans.is_empty() || plans.len() > MAX_CANDIDATE_BATCH {
+            return Err(ControlError::Invalid(format!(
+                "candidate-batch requires 1..={MAX_CANDIDATE_BATCH} plans"
+            )));
+        }
+        let evidence_name = required_str(args, "evidence_name")?;
+        if evidence_name.is_empty()
+            || evidence_name.len() > 64
+            || !evidence_name
+                .bytes()
+                .all(|byte| byte.is_ascii_alphanumeric() || matches!(byte, b'-' | b'_' | b'.'))
+        {
+            return Err(ControlError::Invalid(
+                "candidate-batch evidence_name is not a safe slug".into(),
+            ));
+        }
+        let retain = args
+            .get("retain")
+            .and_then(Value::as_u64)
+            .unwrap_or(32)
+            .clamp(1, 128) as usize;
+        let byte_limit = args
+            .get("max_evidence_bytes")
+            .and_then(Value::as_u64)
+            .unwrap_or(self.trace_limit)
+            .min(self.trace_limit);
+        let relative = PathBuf::from("evidence").join(format!("{evidence_name}.jsonl"));
+        let file = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .mode(0o600)
+            .open(self.manifest.run_dir.join(&relative))?;
+        let mut writer = BufWriter::new(file);
+        let mut bytes = 0_u64;
+        let mut tested = 0_usize;
+        let mut perfect = 0_usize;
+        let mut truncated = false;
+        let mut top: Vec<(u64, u64, String, Value)> = Vec::with_capacity(retain);
+        for spec_value in plans {
+            let spec: PlanSpec = serde_json::from_value(spec_value.clone())?;
+            let plan = CompiledPlan::compile(&spec, &self.batch.fields)?;
+            let evaluation = evaluate_plan(&self.batch, &plan)?;
+            let equivalent_to = self.archive.get(&evaluation.outcome_hash).cloned();
+            if equivalent_to.is_none() && self.archive.len() < MAX_ARCHIVE_CLASSES {
+                self.archive
+                    .insert(evaluation.outcome_hash.clone(), plan.name.clone());
+            }
+            let record = json!({
+                "plan": &spec,
+                "hash": &plan.hash,
+                "equivalent_to": &equivalent_to,
+                "evaluation": &evaluation,
+            });
+            let mut encoded = serde_json::to_vec(&record)?;
+            encoded.push(b'\n');
+            if bytes.saturating_add(encoded.len() as u64) > byte_limit {
+                truncated = true;
+                break;
+            }
+            writer.write_all(&encoded)?;
+            bytes += encoded.len() as u64;
+            tested += 1;
+            if evaluation.weighted_correct == evaluation.weighted_rows {
+                perfect += 1;
+            }
+            let compact = json!({
+                "plan": &plan.name,
+                "hash": &plan.hash,
+                "weighted_correct": evaluation.weighted_correct,
+                "weighted_rows": evaluation.weighted_rows,
+                "false_positive": evaluation.weighted_false_positive,
+                "false_negative": evaluation.weighted_false_negative,
+                "outcome_hash": &evaluation.outcome_hash,
+            });
+            top.push((
+                evaluation.weighted_correct,
+                evaluation.weighted_false_positive,
+                plan.name,
+                compact,
+            ));
+            top.sort_unstable_by(|left, right| {
+                right
+                    .0
+                    .cmp(&left.0)
+                    .then_with(|| left.1.cmp(&right.1))
+                    .then_with(|| left.2.cmp(&right.2))
+            });
+            top.truncate(retain);
+        }
+        writer.flush()?;
+        let summaries: Vec<_> = top.into_iter().map(|entry| entry.3).collect();
+        self.record(
+            "candidate-batch-tested",
+            &format!("tested {tested} candidates, retained {}", summaries.len()),
+            None,
+        )?;
+        Ok(json!({
+            "requested": plans.len(),
+            "tested": tested,
+            "perfect": perfect,
+            "truncated": truncated,
+            "path": relative,
+            "bytes": bytes,
+            "top": summaries,
+        }))
+    }
+
     fn candidate_deactivate(&mut self, args: &Value) -> Result<Value, ControlError> {
         let expected_epoch = args
             .get("expect_epoch")
@@ -1084,9 +1204,9 @@ pub fn send_request(
 
 fn next_client_request_id() -> u64 {
     loop {
-        let request_id = NEXT_CLIENT_REQUEST_ID.fetch_add(1, Ordering::Relaxed);
-        if request_id != 0 {
-            return request_id;
+        let sequence = NEXT_CLIENT_REQUEST_ID.fetch_add(1, Ordering::Relaxed) as u32;
+        if sequence != 0 {
+            return (u64::from(std::process::id()) << 32) | u64::from(sequence);
         }
     }
 }
@@ -1270,6 +1390,7 @@ mod tests {
             presentation: "tiny".into(),
             problem: "fixture".into(),
             fields: vec!["surplus".into(), "drop".into()].into_boxed_slice(),
+            generator: None,
             row_ids: vec![7, 8].into_boxed_slice(),
             weights: vec![2, 3].into_boxed_slice(),
             expected: vec![0b11].into_boxed_slice(),
@@ -1304,6 +1425,27 @@ mod tests {
         let result = evaluate_plan(&batch, &plan).unwrap();
         assert_eq!(result.weighted_correct, 5);
         assert_eq!(result.first_false, None);
+    }
+
+    #[test]
+    fn synthesized_boolean_tree_compiles_and_matches_training_rows() {
+        let batch = FeatureBatch {
+            presentation: "tree".into(),
+            problem: "threshold".into(),
+            fields: vec!["x".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: vec![0, 1, 2, 3].into_boxed_slice(),
+            weights: vec![1; 4].into_boxed_slice(),
+            expected: vec![0b1100].into_boxed_slice(),
+            values: vec![0, 1, 2, 3].into_boxed_slice(),
+        };
+        let (spec, nodes, _) = learn_decision_tree(&batch, 7, 3, None).unwrap();
+        assert!(nodes >= 3);
+        assert_eq!(spec.output, PlanOutput::Predicate);
+        let plan = CompiledPlan::compile(&spec, &batch.fields).unwrap();
+        let result = evaluate_plan(&batch, &plan).unwrap();
+        assert_eq!(result.weighted_correct, 4);
+        assert_eq!(result.first_mismatch, None);
     }
 
     #[test]
@@ -1378,6 +1520,7 @@ mod tests {
                 code_commit: "test".into(),
                 presentation_hash: "hash".into(),
                 problem: "fixture".into(),
+                feature_generator: None,
             })
             .unwrap(),
         )
@@ -1535,6 +1678,60 @@ mod tests {
         assert_eq!(combined["batch_observed_mask"], 65);
         assert_eq!(combined["live_observed_mask"], 1_u64 << 11);
         assert_eq!(combined["observed_mask"], 65 | (1_u64 << 11));
+    }
+
+    #[test]
+    fn candidate_batch_streams_exact_results_to_campaign_evidence() {
+        let temporary = tempfile::tempdir().unwrap();
+        let data = temporary.path().join("data.jsonl");
+        fs::write(
+            &data,
+            concat!(
+                "{\"schema\":\"ergodis-campaign-data-v0\",\"presentation\":\"batch\",\"problem\":\"fixture\",\"fields\":[\"x\"],\"rows\":2}\n",
+                "{\"id\":1,\"expected\":false,\"values\":[0]}\n",
+                "{\"id\":2,\"expected\":true,\"values\":[1]}\n"
+            ),
+        )
+        .unwrap();
+        let mut campaign = Campaign::create(
+            &data,
+            &temporary.path().join("run"),
+            Some(temporary.path().join("control.sock")),
+            4096,
+            4096,
+            4096,
+        )
+        .unwrap();
+        let plans = [false, true]
+            .into_iter()
+            .enumerate()
+            .map(|(index, value)| {
+                json!({
+                    "schema": PLAN_SCHEMA,
+                    "name": format!("constant-{index}"),
+                    "role": "diagnostic",
+                    "output": "predicate",
+                    "program": [{"op": "bool", "value": value}],
+                })
+            })
+            .collect::<Vec<_>>();
+        let result = campaign
+            .candidate_batch(&json!({
+                "plans": plans,
+                "evidence_name": "batch-control",
+                "retain": 2,
+            }))
+            .unwrap();
+        assert_eq!(result["tested"], 2);
+        assert_eq!(result["truncated"], false);
+        let evidence = fs::read_to_string(
+            campaign
+                .manifest
+                .run_dir
+                .join("evidence/batch-control.jsonl"),
+        )
+        .unwrap();
+        assert_eq!(evidence.lines().count(), 2);
     }
 
     #[test]
