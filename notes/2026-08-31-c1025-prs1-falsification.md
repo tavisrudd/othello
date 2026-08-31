@@ -89,3 +89,77 @@ correction that worked both times is mechanical and cheap: before building on a
 claim, spend one probe on the smallest instance where it could fail.  Both
 catches came from the gate, not from my own re-reading, which is worth noting
 about where to place gates in future tasks.
+
+## Part 1, step 2 — a different accelerator, on a proved reduction
+
+The premise failed, so the accelerator had to come from elsewhere.  Two
+reductions do the work, both proved rather than assumed.
+
+> **Lemma A (single level).**  If `q + 1 ≥ d - 1` then `w(s) ≤ d-1` iff some
+> split squarefree form of degree **exactly** `d-1` annihilates `s`.
+>
+> *Proof.*  (⇐) immediate.  (⇒) if `w(s) = j₀ ≤ d-1`, take a minimal spanning
+> set `T₀ ⊆ PG(1,q)`, `|T₀| = j₀`, and enlarge it to `T ⊇ T₀` with `|T| = d-1`
+> using any further points of `PG(1,q)`, available since `|PG(1,q)| = q+1 ≥ d-1`.
+> Then `s ∈ span{P_t : t ∈ T₀} ⊆ span{P_t : t ∈ T}`. ∎
+
+Deciding *deep or not* therefore needs **one** level, not all of `j = 1..d-1`.
+The 2026-08-30 and 2026-08-31 drivers search every level because they report the
+exact rank `w(s)`; for the deep question that is wasted work, and it is what made
+the `(17,7)` cell time out.
+
+> **Lemma B (Sylvester fast path).**  If the apolar degree satisfies `e ≤ 2`,
+> the verdict costs `O(q)`: with `s^⊥ = (F,H)` and `deg F = e`, `s` is deep iff
+> `F` is not split squarefree over `F_q`.
+
+This is C1023 Lemma 1, attributed there to Sylvester via the Apolarity Lemma
+with the finite-field refinement the only new part.  It disposes of the entire
+persistent locus without search, which matters because the persistent points are
+precisely the ones that genuinely *are* deep and would otherwise each cost a
+full `C(q+1, d-1)` enumeration.
+
+On top of those, a **randomised witness hunt** at level `d-1`: annihilation is
+two linear conditions, so a uniform random `(d-1)`-subset succeeds with
+probability about `q^{-2}`.  That phase can only certify *not deep*, and does so
+by exhibiting a witness verified directly, so it introduces no hypothesis.
+Survivors fall through to the complete `C(q+1,d-1)` enumeration, and the driver
+reports how many did, so exactness is auditable.
+
+Driver: `ergodis-private/src/bin/c1025_prs_stratum.rs`.
+
+### Gate 1 — agreement with the exact path
+
+Every cell whose answer is already committed, across both characteristics, both
+exponent shapes, and `M = 2, 3, 4`:
+
+| cell | stratum | points | deep | exceptional | committed | agrees |
+|---|---|---:|---:|---:|---|:--|
+| `(9, m=3, cls 1), q=13`   | `{1,4,7}`    | 183   | 6  | 4  | 6 / 4  | ✓ |
+| `(9, m=3, cls 0), q=13`   | `{0,3,6}`    | 183   | 0  | 0  | 0      | ✓ |
+| `(11, m=4), q=13`         | `{1,5,9}`    | 183   | 14 | 12 | 14 / 12| ✓ |
+| `(8, m=5), q=11`          | `{1,6}`      | 12    | 6  | 4  | 6 / 4  | ✓ |
+| `(9, m=3), q=16` (char 2) | `{1,4,7}`    | 273   | 2  | 0  | 2 / 0  | ✓ |
+| `(13, m=5), q=16` (char 2)| `{1,6,11}`   | 273   | 2  | 0  | 2 / 0  | ✓ |
+| `(15, m=4), q=17`         | `{1,5,9,13}` | 5,220 | 6  | 4  | 6 / 4  | ✓ |
+| `(10, m=4, cls 0), q=13`  | `{0,4,8}`    | 183   | 4  | 3  | 3 exc  | ✓ |
+
+Eight of eight.  With Lemma B active the `phase2` counter — points needing the
+exhaustive fallback — equals the exceptional count in every row and is **zero**
+on every clean cell: the randomised hunt certifies every non-deep point and
+Sylvester every persistent one, so the expensive path runs only on genuine
+exceptional candidates.
+
+## Part 2 — the cell that was out of budget, and the region beyond it
+
+`(17, m=7)` at `q = 29`, stratum `{1,8,15}`, `k = 13` (a clean cell, not
+degenerate):
+
+```text
+871 stratum points,  2 deep,  0 exceptional,  0 points needing exhaustive search
+wall 22.5 s   →   after Lemma B, 0.14 s
+```
+
+Against the 600 s timeout it previously hit.  **The cell is clean**: the two
+deep points are the persistent ones the stratum meets, and there is no
+exceptional deep hole at `q = 29`.
+
