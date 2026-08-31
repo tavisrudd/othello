@@ -28,3 +28,7 @@ path = "src/bin/hall_certify.rs"
 [[bin]]
 name = "q25-pair-repair"
 path = "src/bin/q25_pair_repair.rs"
+
+[[bin]]
+name = "q16-quadratic"
+path = "src/bin/q16_quadratic.rs"

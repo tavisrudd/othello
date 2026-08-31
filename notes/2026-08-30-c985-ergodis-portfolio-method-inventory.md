@@ -255,6 +255,31 @@ independent Python replay: 81.47x and 176.30x respectively.  Nine native RSS
 rounds give a 2,304 KiB median.  These are process-plus-serialization controls,
 not isolated kernel timings.
 
+## First `rho_C(16)` quadratic-obstruction replay result
+
+The private Q16 adapter consumes the frozen 2,633-leaf stream without importing
+the old generator or rebuilding its Lean package.  Its Ergodis root kernel uses
+precomputed 273-bit line masks and first tries the elementary six-point
+obstruction: three uncovered collinear points force a line component, while
+three noncollinear uncovered points off that line rule out the residual linear
+factor.  Incremental GF(16) elimination is reserved for leaves where that
+predicate fails.  The hot leaf path allocates nothing.
+
+The result is exactly 2,630 structural certificates, zero full-rank algebraic
+fallbacks, and three rank-five forced-hit leaves, numbered 89, 90, and 2,631.
+Their normalized kernel forms and selected-point intersection counts reproduce
+the records exactly: `(1,1,1,1,1,0)/2`, `(0,0,0,5,4,1)/7`, and
+`(2,1,1,5,5,1)/2`.
+
+An 11-round scaling diagnostic gives median analysis times of 4.093, 2.354,
+1.581, 1.388, and 1.641 ms at 1, 2, 4, 8, and 12 threads respectively; eight
+threads is the honest optimum for these tiny roots.  The 11-round median native
+parse-plus-analysis time is 2.654 ms.  The committed independent Python
+analyzer has a five-round median wall time of 8.12 seconds, about 3,060x larger.
+This is a functional end-to-end control, not an isolated-kernel ratio: the
+Python program additionally computes complete spectra, stabilizers, and a
+projective invariance check.
+
 ## Natural comparison implementations
 
 Once each replay works, comparisons will separate compilation, solve,
