@@ -482,6 +482,23 @@ RSS is 2,392 versus 2,432 KiB. Raw evidence and the retained binary hash are
 under `/home/tavis/.cache/ergodis-perf/c1017-semantic-anchor/final-ab`. The
 registry now has 68 pass, zero open, and 34 not-applicable cells.
 
+The first post-registry optimization attacks the measured plan-VM dispatch
+gap without specializing to any private theorem. After ordinary type and stack
+validation, the compiler now fuses every `field, constant, comparison` triple
+in either operand order into one general 16-byte superinstruction. Untraced
+evaluation uses the fused stream; the original validated bytecode remains
+alongside it so localized verbose traces retain one value per source opcode.
+All six comparisons and both operand orders have differential traced/untraced
+tests, including the three-value trace length. Nine rotated old/new pairs each
+evaluate 65,536,000 rows with exact work and checksum parity. Old/new is
+1.806x cycles (`t=12.96`), 1.648x instructions, 1.765x branches, and 1.789x
+wall (`t=13.66`), with 3,624 versus 3,648 KiB median RSS. The optimized VM is
+still 10.51x slower by cycles than the equivalent branchless handwritten
+predicate, so Boolean/arithmetic superinstructions or a bounded native-code
+adapter remain measurable successors. Raw evidence and binary hashes are under
+`/home/tavis/.cache/ergodis-perf/c1017-plan-vm-fusion/final-ab`. Full
+all-target/all-feature tests and strict clippy pass.
+
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
 256--4,096 candidates lost or tied because multi-hop latency admitted

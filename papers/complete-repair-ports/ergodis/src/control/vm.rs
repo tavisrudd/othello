@@ -570,6 +570,12 @@ enum OpCode {
     Abs,
     Select,
     Bool,
+    FieldEqConst,
+    FieldNeConst,
+    FieldLtConst,
+    FieldLeConst,
+    FieldGtConst,
+    FieldGeConst,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -590,12 +596,54 @@ struct CompiledOp {
 const _: () = assert!(std::mem::size_of::<CompiledOp>() == 16);
 const _: () = assert!(std::mem::align_of::<CompiledOp>() == 8);
 
+fn fused_field_constant_comparison(code: OpCode, reverse: bool) -> Option<OpCode> {
+    Some(match (code, reverse) {
+        (OpCode::Eq, _) => OpCode::FieldEqConst,
+        (OpCode::Ne, _) => OpCode::FieldNeConst,
+        (OpCode::Lt, false) | (OpCode::Gt, true) => OpCode::FieldLtConst,
+        (OpCode::Le, false) | (OpCode::Ge, true) => OpCode::FieldLeConst,
+        (OpCode::Gt, false) | (OpCode::Lt, true) => OpCode::FieldGtConst,
+        (OpCode::Ge, false) | (OpCode::Le, true) => OpCode::FieldGeConst,
+        _ => return None,
+    })
+}
+
+fn fuse_field_constant_comparisons(ops: &[CompiledOp]) -> Vec<CompiledOp> {
+    let mut fused = Vec::with_capacity(ops.len());
+    let mut cursor = 0;
+    while cursor < ops.len() {
+        if let Some(window) = ops.get(cursor..cursor + 3) {
+            let operands = match (window[0].code, window[1].code) {
+                (OpCode::Field, OpCode::Const) => Some((window[0].field, window[1].value, false)),
+                (OpCode::Const, OpCode::Field) => Some((window[1].field, window[0].value, true)),
+                _ => None,
+            };
+            if let Some((field, value, reverse)) = operands {
+                if let Some(code) = fused_field_constant_comparison(window[2].code, reverse) {
+                    fused.push(CompiledOp {
+                        value,
+                        field,
+                        code,
+                        _pad: [0; 5],
+                    });
+                    cursor += 3;
+                    continue;
+                }
+            }
+        }
+        fused.push(ops[cursor]);
+        cursor += 1;
+    }
+    fused
+}
+
 #[derive(Clone, Debug)]
 pub struct CompiledPlan {
     pub name: String,
     pub role: PlanRole,
     pub output: PlanOutput,
     ops: Box<[CompiledOp]>,
+    fast_ops: Box<[CompiledOp]>,
     stack_needed: usize,
     field_count: u16,
     scope_field: u16,
@@ -748,6 +796,12 @@ impl CompiledPlan {
                     }
                     kinds[base + 1]
                 }
+                OpCode::FieldEqConst
+                | OpCode::FieldNeConst
+                | OpCode::FieldLtConst
+                | OpCode::FieldLeConst
+                | OpCode::FieldGtConst
+                | OpCode::FieldGeConst => unreachable!("fused op appears only after validation"),
             };
             let next_depth = depth + 1 - inputs;
             if next_depth > MAX_PLAN_STACK {
@@ -787,11 +841,13 @@ impl CompiledPlan {
             spec.scope.as_ref().map(|scope| (&scope.field, scope.mask)),
             spec.program.as_slice(),
         ))?;
+        let fast_ops = fuse_field_constant_comparisons(&ops).into_boxed_slice();
         Ok(Self {
             name: spec.name.clone(),
             role: spec.role,
             output: spec.output,
             ops: ops.into_boxed_slice(),
+            fast_ops,
             stack_needed,
             field_count: fields.len() as u16,
             scope_field,
@@ -828,11 +884,18 @@ impl CompiledPlan {
         let mut stack = [0i64; MAX_PLAN_STACK];
         let mut depth = 0usize;
         let mut trace = trace;
-        for op in &self.ops {
+        let ops = if TRACE { &self.ops } else { &self.fast_ops };
+        for op in ops {
             let result = match op.code {
                 OpCode::Field => row[op.field as usize],
                 OpCode::Const => op.value,
                 OpCode::Bool => op.value,
+                OpCode::FieldEqConst => i64::from(row[op.field as usize] == op.value),
+                OpCode::FieldNeConst => i64::from(row[op.field as usize] != op.value),
+                OpCode::FieldLtConst => i64::from(row[op.field as usize] < op.value),
+                OpCode::FieldLeConst => i64::from(row[op.field as usize] <= op.value),
+                OpCode::FieldGtConst => i64::from(row[op.field as usize] > op.value),
+                OpCode::FieldGeConst => i64::from(row[op.field as usize] >= op.value),
                 OpCode::Not => {
                     stack[depth - 1] = i64::from(stack[depth - 1] == 0);
                     if TRACE {
@@ -895,7 +958,13 @@ impl CompiledPlan {
                         | OpCode::Bool
                         | OpCode::Not
                         | OpCode::Abs
-                        | OpCode::Select => unreachable!(),
+                        | OpCode::Select
+                        | OpCode::FieldEqConst
+                        | OpCode::FieldNeConst
+                        | OpCode::FieldLtConst
+                        | OpCode::FieldLeConst
+                        | OpCode::FieldGtConst
+                        | OpCode::FieldGeConst => unreachable!(),
                     }
                 }
             };
@@ -1018,4 +1087,59 @@ pub(super) fn evaluate_plan_cascaded(
     }
     result.outcome_hash = outcome_hasher.finalize().to_hex().to_string();
     Ok((Some(result), batch.rows()))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn fused_field_constant_comparisons_match_traced_programs() {
+        let fields = vec!["x".to_owned()];
+        let comparisons = [
+            PlanOp::Eq,
+            PlanOp::Ne,
+            PlanOp::Lt,
+            PlanOp::Le,
+            PlanOp::Gt,
+            PlanOp::Ge,
+        ];
+        for reverse in [false, true] {
+            for comparison in comparisons.clone() {
+                let mut program = Vec::with_capacity(3);
+                if reverse {
+                    program.push(PlanOp::Const { value: 1 });
+                    program.push(PlanOp::Field {
+                        name: "x".to_owned(),
+                    });
+                } else {
+                    program.push(PlanOp::Field {
+                        name: "x".to_owned(),
+                    });
+                    program.push(PlanOp::Const { value: 1 });
+                }
+                program.push(comparison);
+                let plan = CompiledPlan::compile(
+                    &PlanSpec {
+                        schema: PLAN_SCHEMA.to_owned(),
+                        name: "fusion-test".to_owned(),
+                        role: PlanRole::Diagnostic,
+                        output: PlanOutput::Predicate,
+                        scope: None,
+                        program,
+                    },
+                    &fields,
+                )
+                .unwrap();
+                assert_eq!(plan.ops.len(), 3);
+                assert_eq!(plan.fast_ops.len(), 1);
+                for value in [-2, 0, 1, 2] {
+                    let mut trace = Vec::new();
+                    let traced = plan.evaluate_value(&[value], Some(&mut trace)).unwrap();
+                    assert_eq!(plan.evaluate_value_untraced(&[value]).unwrap(), traced);
+                    assert_eq!(trace.len(), 3);
+                }
+            }
+        }
+    }
 }

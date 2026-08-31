@@ -200,6 +200,17 @@ as each coherent tranche lands.
    registry now records 68 pass, zero open, and 34 not-applicable cells.
    Current next slice: run the strict end-to-end registry audit, then use the
    measured 16.87x plan-VM fusion gap to select the next C985 optimization.
+   The strict audit passes at 68 pass, zero open, and 34 not-applicable cells.
+   The first general VM fusion slice is now landed: after validation, both
+   operand orders of each field/constant comparison compile from three source
+   opcodes to one 16-byte superinstruction, while the unfused bytecode remains
+   available for source-granular traces. Across nine rotated 65,536,000-row
+   pairs this adds a further 1.806x cycles (`t=12.96`), 1.648x instructions,
+   and 1.789x wall (`t=13.66`) improvement at exact outcome parity. The
+   branchless handwritten residual is 10.51x cycles, so the next measured
+   optimization frontier is Boolean/arithmetic fusion or a bounded native-code
+   plan adapter, not more interpreter micro-tuning. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-fusion/final-ab`.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and
