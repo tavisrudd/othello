@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-08-29
+**Date:** 2026-08-30
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -85,6 +85,11 @@ The results are grouped as follows.
 18. Two open programmes with substantial partial results: complete arcs of
     square-root size relative to a conic, and the outcome of the cap game on
     odd projective planes.
+19. *The Gram–discriminant shadow of four points and its Dickson tower* — the
+    square-class coloring that a four-point Veronese Gram determinant induces
+    on unordered four-subsets of a projective line, the family of hyperelliptic
+    covers whose Frobenius traces control it, and the reconstruction theorem it
+    forces. Not currently assigned to a manuscript.
 
 The first five sections are the five numbered papers of *Clebsch: Rigidity from
 Sparse Shadows*, in that order. The separately titled MDS--CSS
@@ -353,6 +358,18 @@ three, a quintic with one nonsplit node, a smooth sextic of genus ten), so
 "unique class whose uncovered set is an irreducible curve's rational point set"
 is wrong.
 
+That uniqueness is no longer confined to the field of eleven elements. For a
+six-arc \(A\) in \(\operatorname{PG}(2,q)\) with \(q\ge11\) an arbitrary prime
+power, \(\mathcal U(A)\) lies on a plane curve of degree at most three if and
+only if \(q=11\) and \(A\) is projectively equivalent to the Clebsch hexagon,
+in which case the least vanishing degree is two. Low-degree containment is
+therefore a property of the Clebsch class over every field, not a coincidence
+at one field order, and the argument is a human proof resting on the finite
+\(q=11\) census plus the general bounded-degree envelope described under the
+prescribed-hole paper below. It is routed to the computational companion of
+this paper rather than to the paper itself, which does not carry the finite
+input it needs.
+
 The complete syndrome-distance oracle is a four-case rule and the
 nearest-codeword multiplicity distribution is exact. The twenty support triples
 split into two complementary \(A_5\)-orbits of ten, but chirality is **not** the
@@ -609,6 +626,51 @@ the \(T(2q)\) seam), affine-class contraction, and Faber's tame-subgroup
 theorem. The endpoint lift is projectively intrinsic, and the exceptional
 \(q=9\) case is handled explicitly. These repairs strengthen the proof surface
 without weakening the theorem.
+
+### Geometrically transversal one-factorizations of \(K_{10}\) are pencils
+
+A second, field-uniform theorem has landed on the matching-design side.
+
+> Let \(L_0,\dots,L_9\) be ten lines of \(\operatorname{PG}(2,K)\), no three
+> concurrent, over any field \(K\). If the edges of \(K_{10}\) admit a
+> one-factorization such that for each factor the five star points
+> \(L_i\cap L_j\) with \(ij\) in that factor are collinear, then the nine
+> factor transversals form a pencil.
+
+The proof has two halves and no computation in either. The first is a
+star-factorization interpolation identity: writing \(P\) for the product of the
+carrier forms and \(Q\) for the product of the transversal forms, there are
+nonzero scalars \(c_i\), unique up to common scaling, with
+\(Q=\sum_ic_iP/\ell_i\), and comparing residues at each star point gives
+\(t_M\doteq u_i+u_j\) for every edge \(ij\) of the factor \(M\), where
+\(u_i=\ell_i/c_i\). A parity argument along an alternating cycle then shows
+that a Hamilton pair of factors forces the pencil whenever the half-order is
+odd, which is the case here. The second half handles the factorizations with no
+Hamilton pair: every factor pair then has cycle type \(4+6\), the parity
+constraints are exactly the twelve lines of the affine plane of order three on
+the nine factor forms, and a non-pencil realization would have to be a
+projective representation of that plane. Three of its lines suffice to kill it
+— their vector planes meet in zero, so the carrier form would have to vanish
+whenever two is invertible, and in characteristic two the triple closure
+already forces the pencil. This **Hesse-tripod lemma** uses four carrier
+variables and six factor points, which is minimal for the method, and it
+applies to any larger transversal design containing the same incidence shadow.
+It replaces an earlier 396-class census, which is no longer load-bearing.
+
+For the regular matching design the theorem forces every canonical
+one-factorization line, and at that point the field boundary is classical
+rather than new: Nagy's theorem that the Ree unital \(R(3)\) embeds in
+\(\operatorname{PG}(2,K)\) exactly when the field of eight elements is a
+subfield of \(K\), uniquely and inside a subplane of order eight, applies
+directly. The internal combinatorics were recomputed independently and agree:
+the regular matching design has exactly 28 one-factorizations, each block lies
+in four of them, and each pair shares exactly one block, a
+\(2\)-\((28,4,1)\) design, while the nonhyperoval class has a single
+one-factorization. What would be publishable is the automatic completion from
+secant concurrences to the Ree-unital line structure, not the field boundary
+itself; whether every rank-three realization of the regular design forces those
+collinearities is open, and the literature-priority verdict on this material is
+explicitly bounded and provisional.
 
 ## *Golden descent and operator realizations of the Clebsch cubic*
 
@@ -1928,6 +1990,46 @@ visible on its fibres, with equality realized by two collinear triples on a
 split quadratic meeting the arc once on each component. A classification-free
 proof of that six-hole stability statement is the remaining route.
 
+### A bounded-degree envelope for the ordinary uncovered locus
+
+The same defect identity supports a general degree obstruction, and this is
+where the six-arc cubic tail quoted in the first section comes from. Put
+\(N=\binom k2\), \(r=\lfloor k/2\rfloor\) and
+\(\beta_k=N-k+\frac6r\binom k4\). If the ordinary uncovered locus of a
+\(k\)-arc in \(\operatorname{PG}(2,q)\) with \(k\ge4\) lies in the zero set of
+a nonzero form of degree \(d\), then
+\[
+ q^2-(N+d-1)q+\beta_k\le0,
+\]
+and in particular \(q\le N+d-2\); the final inequality needs no hypothesis
+relating \(d\) and \(q\). So for fixed \(k\) and \(d\), degree-\(d\)
+containment is possible over only finitely many field orders. Solving the
+quadratic gives the exact window
+\(q\le\bigl\lfloor(a+\sqrt{a^2-4\beta_k})/2\bigr\rfloor\) with \(a=N+d-1\), and
+when \(a^2<4\beta_k\) no such containment exists at any field order in the
+stated range; in the low-degree range \(d\le r-2\) this specializes to a linear
+window that improves the coarse bound by \(k-3\) for even \(k\) and \(k-2\) for
+odd \(k\). Dually, the least degree \(\delta(A)\) of a form vanishing on the
+uncovered locus satisfies \(\delta(A)\ge q-\binom k2+2\), with an integral
+surcharge \(\lceil\beta_k/q\rceil\) whenever \(q<\beta_k\).
+
+Two refinements come from the components of the containing curve. In odd order
+every line meets the uncovered locus of a \(k\)-arc in at most \(q-k+1\) points,
+which follows from the Bichara–Korchmáros minimum-direction theorem for arcs in
+odd-order Desarguesian planes as recorded by Giulietti and Montanucci. Splitting
+off the rational line factors of total multiplicity \(s\) from a degree-\(d\)
+containing curve then gives \(|\mathcal U(A)|\le(d-1)q+1-s(k-1)\) whenever a
+residual component survives, and a corresponding one-degree improvement of the
+main inequality. For a six-arc over the field of thirteen elements this caps a
+cubic at 27 points of the uncovered locus while every six-arc there has at
+least 32 of them.
+
+These are human proofs. They are routed forward into this paper, which owns the
+universal defect identity, rather than into a standalone note: the main estimate
+is a short consequence of that identity together with classical point-count
+bounds, and the nearest prior literature already studies minimum vanishing
+degrees.
+
 ## *Integral Secant Distributions and Improved Bounds for Complete \((k,n)\)-Arcs*
 
 The prescribed-hole method extends from ordinary arcs to selected block
@@ -2488,15 +2590,50 @@ Presburger-complement input list of the MATA automata library (TACAS'24), with
 both systems minimizing the same derived, trimmed deterministic automaton and
 determinization, trimming and parsing excluded from the timed region, ergodis
 achieved a **2.699x geometric-mean speedup** over MATA's C++
-`minimize_hopcroft`, with an instance-level paired-log statistic of `26.20`. It
-won every instance of at least thirteen states; the losses were all on automata
-of two to twelve states. On the smaller controls used during development it is
-1.61–3.30x faster than the same MATA implementation with 13–38x lower cold peak
-resident memory, while additionally emitting a compact split transcript and
-verifying it before returning — the comparison tool returns only the minimized
-automaton. A native-functor competitor, Boa, remains 2.48x faster on the
-four-generator random family; that crossover is recorded rather than omitted,
-and no claim of universally fastest minimization is made.
+`minimize_hopcroft`, with an instance-level paired-log statistic of `26.20` and
+a median instance speedup of 2.809x across all 169 instances, winning 158 of
+them. It won every instance of at least thirteen states; the losses were all on
+automata of two to twelve states. On the smaller controls used during
+development it is 1.61–3.30x faster than the same MATA implementation with
+13–38x lower cold peak resident memory, while additionally emitting a compact
+split transcript and verifying it before returning — the comparison tool returns
+only the minimized automaton. A native-functor competitor, Boa, remains 2.48x
+faster on the four-generator random family; that crossover is recorded rather
+than omitted, and no claim of universally fastest minimization is made.
+
+**Measured on the applications the theory was written for.** Eight coding and
+storage workloads were run cold — one solve per fresh process — and warm, each
+against a constraint-programming control, with the two sides required to return
+the same normalized checksum. Over the twelve profiles where both sides
+completed, the geometric-mean speedup is 104.16x cold and 81.48x warm, with
+instance-log statistics of 44.80 and 34.80 and no individual profile below 39.60
+in absolute value. Representative rows: the Ceph XOR support family at 33.71x
+cold and 22.94x warm; recovery of a published binary \([4095,2718,6;2]\)
+Hamming-outer locally repairable code at 657.88x cold, a median of three paired
+completed runs with log-ratio statistic 49.09; GPU checkpoint recovery over an
+MDS code with 10,000 shards and 64 failures at 102.42x cold and 103.23x warm.
+Four profiles are lower bounds only, because the control exceeded the batch time
+limit — the represented \(GF(4)\) tower at depth six and the warm Hamming case
+among them. Two earlier headline ratios were **retracted** rather than softened
+when the protocol was corrected: a 344,300x tower figure and a 432x Hamming
+figure are not supported and should not be quoted.
+
+**Measured against a SAT solver on its own certified problem.** On the first ten
+rows of the official VLSAT-2 list, Ergodis certified all nine that are
+officially unsatisfiable. On the four instances where the comparison solver also
+finished, the geometric-mean speedup over Kissat 4.0.4 is 381.13x with an
+instance-log statistic of 22.56; the remaining five give timeout lower bounds
+between 2078x and 2835x. The loss is recorded and is a real one: the single
+officially satisfiable control is a clean theorem miss for Ergodis and is
+excluded from every speedup statistic. The protocol is deliberately unfavourable
+to Ergodis — the comparison solver's proof output was disabled while Ergodis's
+witness construction and output serialization were inside the timed region.
+
+Self-regression is separately controlled. An earlier rerun of the original Rust
+benchmark suite showed double-digit slowdowns against recorded numbers, but a
+powered head-to-head of saved binaries over 101 paired rounds attributes them to
+environment: the resolved differences are all within two percent, in both
+directions, and survive a six-way multiple-comparison correction.
 
 **Trust tier.** The theorems are human proofs. The benchmark numbers are
 reproducible measurements against pinned upstream revisions and a published
@@ -2533,6 +2670,62 @@ Every integer program closed at gap zero, so the distances themselves are
 certified: \(d_Z=12\) for the gross code, matching the published value, and
 \(d=12\) for the passant code, matching the independent committed computation
 in the binary-conic-code work.
+
+The same experiment has since been repeated against a commercial
+mixed-integer solver, which makes the encoding claim sharper. The structural
+fact underneath it is certified rather than measured: the gross code's semantic
+translation group has order 72, while the conventional per-logical encoding
+retains a matrix symmetry group of order two, and an independent
+matrix-automorphism pass finds exactly that order-two group. Feeding the solver
+the global re-encoding and then the certified orbit cover reduces twelve solves,
+548,921 branch-and-bound nodes and 114.6 seconds to two solves, 26,930 nodes and
+3.8 seconds: 20.38x fewer nodes, 30.43x fewer simplex iterations, 34.26x fewer
+of the solver's own work units, and 30.10x less wall time, with every witness
+passing an exact \(GF(2)\) replay and no solver log reporting a native symmetry
+or orbital pass.
+
+**Exact distances of large quantum codes.** The same front end has been used to
+close distances that the published sources left as upper bounds. Two
+non-abelian and dihedral lifted-product codes of length 1496, whose source
+reports \([[1496,194,\le20]]\) and \([[1496,198,\le16]]\) from \(10^5\)
+randomized trials, have exact distances 20 and 16; the first took about 3,089
+and 1,159 seconds on its two check sides, the second about 548 and 100 seconds.
+Among bivariate-bicycle codes, \([[288,12,18]]\), \([[360,12,24]]\) and
+\([[784,24,24]]\) are certified exactly, the last in 127 seconds on sixteen
+threads over 29.3 billion candidates in 23.4 MiB of resident memory; a fourth,
+\([[756,16,\cdot]]\), yields only the lower bound \(d\ge24\) and is not closed.
+
+**Trust tier for those distances.** Each is an exhaustive finite enumeration by
+one reviewed implementation, with the witness at the attained weight decoded and
+replayed by a second, independent implementation. That replay covers the upper
+bound only: for the length-1496 dihedral code the checker confirms the
+weight-16 witness but cannot independently re-run the hundred-billion-candidate
+exhaustion behind the matching lower bound, which rests on the enumerator alone.
+None of it is machine-checked in the proof-assistant sense. The comparisons
+against outside tools are of three different strengths and should not be quoted
+as one number: the gross-code round trip above is a clean same-machine,
+same-solver, proof-to-proof comparison; the \([[360,12,24]]\) figure is a
+cross-machine bound derived against a published 7,200-second timeout of a
+specialized distance solver, self-described as single-round and exploratory; the
+\([[288,12,18]]\) figure is against two sixty-second limits of a commercial
+solver on one protocol; and the \([[756,16,\cdot]]\) case produced no comparison
+at all, because the solver's installed licence rejected the model for size
+before optimization — a licence artefact and not a measurement.
+
+**A second modality: certified replay of a representation-theoretic
+computation.** The same compile-then-search principle has been applied to a
+frozen intertwiner calculation, rebuilt from \(GF(9)\) field arithmetic rather
+than from the earlier symbolic answer. For the extra \(L(2,0)\) channel in
+\(\operatorname{Sym}^2(\operatorname{Sym}^3E)\) it recovers 120 raw equations in
+30 variables of rank 29 and Hom-dimension one, produces a deterministic 29-row
+replay basis, and identifies exactly three minimum full-rank block cores, with
+rank dropping only when the Weyl block is removed. The full five-channel corpus
+is reproduced and agrees with the earlier extraction. This is a bounded finite
+certificate over specific instances, not an all-field representation theorem,
+and the source note says so. The engineering measurement alongside it — a 3.13x
+faster replay from the compiled basis, with thirteen times fewer branch misses
+under hardware counters — is reproducible rather than verifiable, like every
+timing above.
 
 **Trust tier and boundary.** The distances are certified by the solver's own
 optimality proof together with explicit \(GF(2)\) invariance checks; nothing
@@ -3335,9 +3528,10 @@ Order \(668=4\cdot167\) was, until August 2026, the smallest order with no
 known Hadamard matrix. On 2026-08-12 a team at Anthropic (Levent Alpöge with
 two colleagues and Claude) announced constructions for order 668 and the
 eleven other previously open admissible orders below 2000, released as an
-encoded string with a decoder rather than a paper; the construction method is
-undisclosed and no independent write-up has appeared. The results recorded
-here predate that announcement and concern the Legendre-pair route, which
+encoded string with a decoder rather than a paper, with the search method
+undisclosed. That payload has since been decoded and identified here, and the
+account is below. The results recorded first predate the announcement and
+concern the Legendre-pair route, which
 reduces to a census of possible fixed common multiplier subgroups for length
 \(333\); they remain valid as statements about that route. Of the \(30\) mod-\(3\)-compatible subgroups,
 \(21\) were excluded by published proof-carrying work; that baseline is
@@ -3379,6 +3573,68 @@ and every subgroup of order six is closed. No Legendre pair and no Hadamard
 matrix of order \(668\) is constructed here; existence at order \(668\) is now
 settled externally, so the residual census is of interest only for the
 Legendre-pair question at length \(333\).
+
+### What the order-668 announcement actually contains
+
+The announced payload was retrieved from two independent mirrors that returned
+byte-identical bytes, and its decoder was never executed: its shell obfuscation
+was undone statically and the decoding re-implemented from scratch. It carries
+twelve orders — 668, 716, 892, 1132, 1244, 1388, 1436, 1676, 1772, 1916, 1948
+and 1964 — under a header of twelve fixed-width records that consume the payload
+exactly, which is the check that the header was read correctly. All twelve
+decoded matrices satisfy \(HH^{\mathsf T}=nI\) exactly, verified in exact
+integer arithmetic by two implementations with two parsers on bytes pinned by a
+committed hash list. The payload contains no seed and no generator: every
+character is a literal entry of a first row or a border, so the compression is
+purely structural, and for order 668 the whole information content is 664 bits.
+Whatever search produced the sequences left no trace in what was posted.
+
+The structure is classical. Order 668 is a bordered Goethals–Seidel array with a
+border of width four over four \(\pm1\) circulants of length 166, with one
+deviation from the textbook array: the six blocks of the lower-right corner
+carry an extra cyclic shift by two. The four sequences have row sums
+\((2,0,0,0)\), their periodic autocorrelations sum to \(-4\) at every nonzero
+shift, and their squared row sums total four, which is exactly the hypothesis
+the bordered array needs. Orders 716, 1676 and 1772 have the same shape; orders
+892, 1132, 1244, 1948 and 1964 are the plain Goethals–Seidel array over four
+circulants of prime length; and orders 1388, 1436 and 1916 are bordered over
+block-circulant super-blocks, where the array's reversal is a per-group block
+reversal rather than a matrix transpose. The orthogonality statement is
+formalized in Lean with the inner shift as a free parameter, so the classical
+array is the zero case and order 668 is an instance of a stated theorem rather
+than a one-off; order 668's orthogonality is proved there from its 664 sequence
+characters rather than from its matrix entries.
+
+The matrix has almost no symmetry: \(|\operatorname{Aut}(H_{668})|=4\), the
+central sign involution times the half-shift by 83 and nothing else. The lower
+bound is proved without a solver by dephasing, which is a complete invariant for
+the row and column sign group; the matching upper bound came from two
+independent graph-automorphism programs on the same coloured graph. Reaching it
+required a vertex invariant, and which invariant can work is forced: on a
+Hadamard matrix every pair and triple statistic is constant, and odd products
+are not monomial invariants at all, so quadruples are the first level that is
+both invariant and non-constant. Colouring rows by their multiset of quadruple
+correlations splits the 668 rows into 336 classes and makes the search finish in
+seconds where it made no progress at all otherwise. Order 716 also has
+automorphism group of order four; order 892 has order six, from an element of
+order three that permutes the four circulant blocks. Larger orders were not
+computed and nothing is claimed about them. A separately posted order-2060
+matrix was also checked and holds, and is a plain Goethals–Seidel array over
+four blocks of order 515 disguised by a Chinese-remainder interleaving of the
+index order; with it closed, the smallest open admissible order is
+\(2092=4\cdot523\).
+
+None of this touches the census above. Order 668 was settled by a bordered
+Goethals–Seidel array with a four-row border over four circulants of length 166,
+whereas the Legendre-pair route would give a bordered two-circulant matrix with
+a two-row border over two circulants of order 333. The Legendre-pair test was
+run on the decoded matrix, as given and after dephasing, and does not fire, so
+no census exclusion is contradicted, none of the five residual survivors is
+realized, and the existence question for a Legendre pair of length 333 remains
+open. One priority exposure is recorded rather than resolved: \(333=37\cdot3^2\)
+has the form \(pq^2\) and therefore falls inside the length family of a 2026
+paper on binary Legendre pairs of length \(pq^2\), which was available here at
+abstract and metadata depth only.
 
 ### A code ladder along the exceptional root systems — pre-empted
 
@@ -3492,7 +3748,27 @@ one attachment layer per further point, and the layer is assembled from blocks
 of four points costing nine tests each. Correctness is an attachment lemma plus
 a composition argument, resting on the exhaustively computed attachment
 constants \(g(5)=9\) and \(g(6)=12\), each obtained from three independent
-solvers, with \(g(7)=15\) exact and \(g(8)\) bracketed between 15 and 17.
+solvers, with \(g(7)=15\) exact.
+
+The eight-point constant is now exact as well: \(g(8)=17\), closing an interval
+that had stood at \(15\le g(8)\le17\). Both smaller sizes are excluded by
+finite theorem rather than by timeout. The separation condition is recast
+exactly — a triple family separates an attachment cut precisely when the graph
+on the crossing point-pairs is non-bipartite, equivalently contains an
+odd-cardinality Eulerian subgraph — and the resulting parity encoding, with
+symmetry broken by a lex-leader over the stabilizer of one fixed triple, is
+unsatisfiable at exact sizes 15 and 16 and satisfiable at 17. Since separation
+is monotone under adding triples, the size-16 refutation alone excludes every
+smaller family. The boundary is that both refutations are certified rather than
+human: the solver emitted binary resolution proofs which an independent proof
+checker verified, and the satisfying family at 17 was decoded and replayed by a
+separate implementation of the cut-graph check. Reducing the size-16 refutation
+to a human argument has been attempted and has not succeeded; what the proof
+core does show is that the obstruction genuinely couples the \(2+6\), \(3+5\)
+and \(4+4\) cut strata — any two of the three are satisfiable at size 16 and
+all three together are not — so the target for a structural proof is a
+three-stratum incompatibility theorem, and that statement is relative to the
+current encoding rather than absolute.
 
 Which end of the bracket is loose is settled in favour of the floor. A star-flip
 argument gives \(\mathrm{minimum}(n)\ge\lceil n\,g(n-1)/4\rceil\), which already
@@ -3624,6 +3900,364 @@ conic subsets already give unboundedly many second-player-win heights; every
 scalar extremal selector tested; and unrestricted coordinate encodings, which
 are vacuous because a natural number can encode the whole residual.
 
+## The Gram–discriminant shadow of four points and its Dickson tower
+
+Let \(V\) be a two-dimensional vector space over a field \(K\), and for \(d\ge1\)
+let \(B_d\) be the \(SL(V)\)-invariant bilinear form on \(\operatorname{Sym}^dV\)
+normalized on pure powers by \(B_d(\ell^d,m^d)=[\ell,m]^d\), where \([\ \cdot\ ]\)
+is the bracket of two linear forms. Given \(r\le d+1\) linear forms
+\(\ell_1,\dots,\ell_r\) with product \(F=\prod_i\ell_i\), set
+\[
+ G_{d,r}(\ell_1,\dots,\ell_r)=\det\bigl(B_d(\ell_i^d,\ell_j^d)\bigr)_{i,j=1}^r .
+\]
+This is the Gram determinant of \(r\) points of the degree-\(d\) rational normal
+curve against the invariant form. Over a finite field its square class is a
+computable \(\pm1\) label attached to an \(r\)-subset of the projective line, and
+the whole section is about what that label remembers. The case \(d=4\), \(r=4\)
+is the four-point shadow used in the first of the numbered papers; everything
+below is the family it sits in.
+
+Nothing in this section is formally verified. The boundary that matters here is
+between a proof, a symbolic identity checked exactly over \(\mathbf Q\) in a
+stated range of \(m\), an exhaustive finite census over a stated range of primes,
+and a statistical measurement; each claim below says which it is.
+
+### The organizing factorization, and the part of it that is classical
+
+Write \(\Delta(F)=\prod_{i<j}[\ell_i,\ell_j]^2\) for the discriminant of the root
+form. Dividing the exterior product of the pure powers by the Vandermonde,
+\[
+ \Psi_{d,r}(F)=\frac{\ell_1^d\wedge\cdots\wedge\ell_r^d}{\prod_{i<j}[\ell_i,\ell_j]},
+\]
+gives a symmetric expression that descends to \(F\), and taking the induced norm
+of the identity \(\ell_1^d\wedge\cdots\wedge\ell_r^d=\bigl(\prod_{i<j}[\ell_i,\ell_j]\bigr)\Psi_{d,r}\)
+yields
+\[
+ G_{d,r}(F)=\Delta(F)\,\Phi_{d,r}(F),
+ \qquad
+ \Phi_{d,r}(F)=B_d^{\wedge r}\bigl(\Psi_{d,r}(F),\Psi_{d,r}(F)\bigr),
+\]
+with \(\Phi_{d,r}\) an invariant of binary \(r\)-ics of coefficient degree
+\(2(d-r+1)\). The Gram divisor therefore splits canonically into the collision
+boundary \(\Delta=0\) and an interior divisor \(\Phi_{d,r}=0\) on the moduli of
+\(r\) points. At \(r=d+1\) the residual invariant has degree zero and one
+recovers the ordinary Vandermonde identity; for \(r>d+1\) the determinant
+vanishes for dimension reasons. At \(d=r=4\) the residual has degree two, the
+degree-two invariant space of a binary quartic is one-dimensional and spanned by
+the apolar invariant \(I\), so \(G_{4,4}=16\,\Delta I\) is forced without
+expanding a determinant.
+
+**Priority concession.** The map \(\Psi_{d,r}\) is the classical Wronskian
+isomorphism \(\bigwedge^rS_d\simeq\operatorname{Sym}^r(S_{d-r+1})\) of
+Abdesselam–Chipalkatti, given in an explicit arbitrary-field form by
+McDowell–Wildon, and dividing an alternant by its Vandermonde is the standard
+Schur-polynomial mechanism. The norm identity was not located in the inspected
+sources, but it follows immediately once that map and the invariant form are put
+side by side, so it is classified as a **classical-derived corollary and not as a
+novelty theorem**. The quartic case is weaker still: Kaipa–Patanker–Pradhan
+already derive the apolar factor \(\lambda^2-\lambda+1\) and count its
+finite-field square classes. What follows the factorization is where a priority
+claim can begin, and every such claim carries a "to our knowledge" qualified by
+the audit's recorded coverage gaps — MathSciNet, Google Scholar and the
+nineteenth-century symbolic and compound-matrix originals were not covered.
+
+### Integrality, the modular radical, and the parity ceiling
+
+Three structural laws bound where the shadow can carry information.
+
+*Integrality with a content law.* \(\Phi_{2m,4}\in\mathbf Z[\lambda]\), and its
+content is \(16\) when \(m\) is a power of two, \(p\) when \(m=p^k\) for an odd
+prime \(p\), and \(1\) otherwise; computed exactly for \(m=2,\dots,18\). Because
+\(G\), \(\Delta\) and \(\Phi\) are integral bracket polynomials, the
+factorization reduces modulo every prime and never fails; what varies is whether
+the reduction is informative, and \(\Phi\equiv0\bmod p\) happens exactly when
+\(m=p^k\).
+
+*Modular radical.* Over \(\mathbf F_p\) the form \(B_d\) is nondegenerate exactly
+when \(d+1=ap^k\) with \(p\nmid a\) and \(a<p\); verified for all \(d<30\) and
+\(p\le29\). The Wronskian map itself is available over every field, but a
+nondegenerate Gram reading of it is characteristic-sensitive, and that
+distinction is the useful modular content of the construction.
+
+*Parity ceiling.* The invariant form on \(\operatorname{Sym}^dV\) is symmetric for
+even \(d\) and alternating for odd \(d\). Hence \(G_{d,r}=0\) identically when
+\(d\) and \(r\) are both odd, and \(G_{d,r}\) is a Pfaffian square when \(d\) is
+odd and \(r\) even. A nontrivial quadratic-character shadow can therefore exist
+only in even Veronese degree; verified symbolically at \((5,3)\), \((7,3)\),
+\((7,5)\) and, with fully generic roots, at \((d,3)\) for \(d=5,7,9\), with the
+Pfaffian square exhibited at \((5,4)\), \((7,4)\), \((7,6)\).
+
+*Closed form at \(r=4\).* The Plücker relation for four linear forms makes
+\(x=[12][34]\), \(y=-[13][24]\), \(z=[14][23]\) satisfy \(x+y+z=0\); with
+\(I=-e_2\), \(\Delta=e_3^2\) and \(p_k=x^k+y^k+z^k\), Newton's identities collapse
+to \(p_k=Ip_{k-2}+e_3p_{k-3}\) with no denominators, and
+\[
+ G_{d,4}=2p_{2d}-p_d^2\ (d\text{ even}),\qquad G_{d,4}=p_d^2\ (d\text{ odd}),
+\]
+so \(\Phi_{d,4}\in\mathbf Z[I,\Delta]\) with leading coefficient \(d^2\), and for
+odd \(d\) the Pfaffian residual is exactly \(p_d/e_3\). Verified symbolically for
+\(d=4,\dots,16\). The denominators visible in the older \((I,J)\) presentation are
+an artefact of choosing \(J\) rather than \(\Delta\) as the second generator.
+At \(r=3\) the answer is \(\Phi_{d,3}=2\Delta_3^{(d-2)/2}\) for even \(d\).
+
+**A refuted guess.** The sharp conjecture \(\Phi_{d,r}=c\cdot\operatorname{perm}([ij]^{d-r+1})\)
+is false, first at \((d,r)=(6,4)\): the Wronskian isomorphism is not an isometry,
+because \(\operatorname{Sym}^r(\operatorname{Sym}^{d-r+1})\) is reducible. The
+genuine plethysm decomposition of \(\Psi_{d,r}\), and with it a closed
+transvectant formula for general \((d,r)\), is open; so is the \(r=5\) analogue
+on \(x+y+z+w=0\).
+
+### The tower of four-point covers over the rationals
+
+Fix \(r=4\), put \(d=2m\), normalize the four points to \((\infty,0,1,\lambda)\)
+and write \(u=\lambda(1-\lambda)\). Then \(\Phi_{2m,4}\) is a polynomial in
+\(\lambda\) of degree \(4m-6\), and the square-class shadow is governed by the
+hyperelliptic curve \(C_m:y^2=\Phi_{2m,4}(\lambda)\).
+
+*A four-factor product law, proved for all \(m\):*
+\[
+ u^2\,\Phi_{2m,4}(\lambda)=\prod_{\varepsilon,\eta\in\{\pm1\}}
+   \bigl(1+\varepsilon\lambda^m+\eta(1-\lambda)^m\bigr),
+\]
+one line from the Dickson definition. It gives the functional equation
+\(\lambda^{4m-6}\Phi_{2m,4}(1/\lambda)=\Phi_{2m,4}(\lambda)\) with constant one,
+and exhibits the branch locus as a union of four generalized Fermat loci. On the
+\(u\)-line everything descends through Dickson polynomials: with
+\(L_m=L_{m-1}-uL_{m-2}\) and \(P_m=(1-L_m^2)/u\) one has the proved closed form
+\(\Phi_{2m,4}=P_m(P_m+4u^{m-1})\), equivalently an order-three linear recurrence.
+
+*Genus law (proved).* \(\Phi_{2m,4}\) is squarefree over \(\overline{\mathbf Q}\)
+except at the two roots of \(I=\lambda^2-\lambda+1\), where the multiplicity is
+exactly two and only when \(m\equiv1\pmod 3\). Hence
+\(g(C_m)=2m-4\), dropping to \(2m-6\) exactly on \(m\equiv1\pmod3\). An earlier
+report gave the drop as \(2m-5\); that was an off-by-one from dividing out only
+one factor of \(I\), and it is corrected here.
+
+*Chevalley–Weil theorem (proved twice).* The square-class model of
+\(\Phi_{2m,4}\) is exactly invariant under the anharmonic group acting on
+\(\lambda\), so \(\operatorname{Aut}_{\mathbf Q}(C_m)\) contains a copy of
+\(S_3\), and \(H^0(\Omega_{C_m})=a\cdot\mathrm{triv}+b\cdot\mathrm{sgn}+c\cdot\mathrm{std}\)
+with
+\[
+ a=b=\Bigl\lfloor\frac{m-2}{3}\Bigr\rfloor,\qquad c=\frac{g-2a}{2},
+ \qquad g=2m-4-2\,[\,m\equiv1\bmod3\,].
+\]
+The two proofs are independent: an explicit character computation on the basis
+\(\lambda^i\,d\lambda/y\), symbolically verified for \(m\le40\), and an
+equivariant Riemann–Hurwitz count. The equality \(a=b\) is forced rather than
+coincidental, because every transposition has trace zero on \(H^0(\Omega)\) when
+\(g\) is even. One correction travels with the theorem: the naive lift of
+\(\tau:\lambda\mapsto1/\lambda\) satisfies \((\sigma\tau)^3=\iota\), the
+hyperelliptic involution, so \(\sigma\) and \(\tau\) generate a dihedral group of
+order twelve and the acting \(S_3\) is \(\langle\sigma,\iota\tau\rangle\); the
+containment claimed earlier stands, its generator does not.
+
+*The modular ladder and where it ends.* Explicit \(S_3\)-quotient models come
+from the syzygy \(J=I^3/W^2\) with \(W=\lambda(\lambda-1)\), giving
+\(C_m/S_3:Y^2=R_m(J)\) and \(C_m/S_3':Z^2=(4J-27)R_m(J)\).
+
+| \(m\) | \(g(C_m)\) | \((a,b,c)\) | modular datum                                                                                    |
+|------:|-----------:|:------------|:-------------------------------------------------------------------------------------------------|
+| 3     | 2          | \((0,0,1)\) | the two descent quotients agree, elliptic of conductor 90; \(\operatorname{Jac}(C_3)\sim E_1^2\) |
+| 4     | 2          | \((0,0,1)\) | both quotients elliptic of conductor 14, the unique newform at that level                        |
+| 5     | 6          | \((1,1,2)\) | \(S_3\)-quotient conductors 150 and 2550; elliptic factor of level 150                           |
+| 6     | 8          | \((1,1,3)\) | \(S_3\)-quotient conductors 1584 and 2046; elliptic factor of level 1584                         |
+| 7     | 8          | \((1,1,3)\) | \(S_3\)-quotient conductors 637 and 6370                                                         |
+| 8     | 12         | \((2,2,4)\) | isotypic surfaces absolutely simple; the standard part is a simple fourfold                      |
+
+The three sign-side conductors all exceed the level-1600 bound of an earlier
+newform search, which is why that search returned nothing. At \(m=3\) the
+supersingular anomaly is resolved and is not complex multiplication: \(E_1\) has
+conductor 90, rational torsion \(\mathbf Z/4\) and a rational 3-isogeny, and the
+least common multiple of rational torsion orders across an isogeny class divides
+\(p+1\) at every supersingular prime, which forces \(p\equiv11\pmod{12}\)
+(exhaustive for \(p<2000\); 22 vanishing traces below 3000, all in that class).
+Since \(\operatorname{Jac}(C_3)\sim E_1^2\), the whole \(m=3\) census is the
+coefficient sequence of the weight-two level-90 newform of that class, which
+replaces Weil-bound estimates by an exact modular law at \(m=3\).
+
+**The ladder ends at \(m=8\), on statistical evidence rather than proof.**
+Sato–Tate moments computed over roughly 975 good primes below 7703, against
+reference moments derived by Weyl integration, match \(USp(4)\) and nothing else
+for both isotypic abelian surfaces at \(m=8\), and match \(USp(8)\) for the
+standard part, which is therefore a simple fourfold rather than two copies of a
+surface. \(USp(4)\) forces trivial endomorphism ring, so the candidate uniform
+conjecture — every isotypic factor of \(\operatorname{Jac}(C_m)\) is of
+\(GL_2\)-type — is false at its first test beyond dimension one, and modularity
+of the tower is a low-\(m\) accident: elliptic at \(m=3,4\), split with elliptic
+factors at \(m=5,6,7\), generic from \(m=8\). This is a moment measurement, not a
+theorem, and the identification of the two \(m=8\) surfaces remains open. The
+level half of the conjecture does survive: conductors stay supported on the
+proved bad-prime law \(\{2\}\cup H(m)\cup M(m)\cup E(m)\) — harmonic point,
+collision locus, and a genuine double branch point, with no exception for
+\(m=2,\dots,12\) — and the sign-side conductor uses every odd bad prime at
+\(m=8,9,10\). Why the trivial side drops primes, and which, is unexplained.
+
+### The finite-field census
+
+Over \(\mathbf F_p\) the shadow of a four-point set is \(\chi(\Phi_{2m,4}(\lambda))\)
+for the quadratic character \(\chi\), and the census is the sum of that character
+over the \(\lambda\)-line.
+
+*Periodicity, proved from an identity over \(\mathbf Z\).* Writing \(r=2m\),
+\[
+ u^2\Phi_{2m,4}(\lambda)=G_r(\lambda)
+ =\bigl(1-\lambda^r-(1-\lambda)^r\bigr)^2-4\bigl(\lambda(1-\lambda)\bigr)^r,
+\]
+so the census depends on \(m\) only through \(2m\bmod(p-1)\). The census is a
+character sum pulled back along the \(m\)-th power map from one fixed curve, and
+it degenerates exactly when that pullback factors through a fixed curve of small
+genus — which is the mechanism behind every stratum below.
+
+*Master formula (proved; verified exactly on 308 parameter pairs,
+\(m=2,\dots,8\), odd \(p<200\)).* With \(e=(p-1)/\gcd(r,p-1)\), the census is a
+Plancherel pairing between a matrix of Jacobi sums of characters of order
+dividing \(e\) and the Fourier matrix of \(\chi(F)\) on the subgroup of
+\(r\)-th powers.
+
+*Classification of the constant strata.* Exactly fifteen classes occur, and they
+are of three provable kinds: two identically degenerate families (\(m\equiv0\) and
+\(m\equiv1\bmod p-1\)); three infinite power-residue families
+\(\lambda^m\in\mu_n\) for \(n\in\{3,4,8\}\), each infinite by Chebotarev under an
+explicit square-class condition on \(p\), with \(n\in\{5,7,9,10,11,12\}\) provably
+empty; and ten finite families, each closed by a Weil bound on one fixed curve
+plus exhaustive search. The classification is exhaustive and complete for
+\(5\le p<4000\) and every even \(r\). The stratum earlier recorded as the
+sporadic point \((p,r)=(47,30)\) is the reduction \(3m\equiv-1\bmod p-1\), under
+which the census becomes a character sum over the Fermat cubic
+\(\xi^3+\eta^3=1\); Weil closes that family at \(p\le889\) and exhaustive search
+gives exactly three members, \((17,6)\), \((17,10)\) and \((47,30)\). It is the
+last member of a finite family, not an accident and not the seed of an infinite
+one. What remains open is unconditional finiteness of the sporadic families in
+every parameter corner, as opposed to the ranges censused.
+
+*The non-split torus.* Setting \(\nu=1/u\) and \(\tau=\nu-2=z+z^{-1}\) makes the
+census a function of two exponentials, \(\nu^m\) on the split torus and \(z^m\) on
+the non-split one. On that side the census is a sum over the affine line
+\(\operatorname{Tr}\lambda=1\) in \(\mathbf F_{p^2}\) and its Plancherel dual is
+built from trace-one Gauss sums, the non-split analogue of Jacobi sums, whose
+magnitudes are exactly \(p\), \(\sqrt p\) or \(1\); every one of the roughly
+\(4.3\times10^6\) computed Fourier coefficients hits one of the three. The period
+in \(m\) is exactly \(\operatorname{lcm}(p-1,p+1)=(p^2-1)/2\) — proved, with
+minimality verified for \(5\le p<300\) — so the \(u\)-line sees the non-split
+torus while the \(\lambda\)-line sees only the split one. An exhaustive sweep of
+the full period window at every prime \(5\le p<300\) finds 319 constant non-split
+strata, all accounted for: two identically constant infinite families, of which
+\(m\equiv(p+1)/2\) is identically \(-1\) with closed-form census \(-(p-1)/2\);
+torus power-residue families, with the \(\mu_3\) row unconditionally infinite;
+fixed-exponent families closed by Weil bounds with complete member lists; and
+exactly one point resisting every torus description, \((p,i,j)=(19,7,3)\), whose
+family is proved finite with that single member. The classification is driven by
+the correlation \(z^{(p+1)/2}=\chi(\nu)\) between the two tori. The Fermat-cubic
+family has no torus mirror, verified exactly for \(p<400\), for the structural
+reason that one reduction cannot pin two independent exponentials.
+
+*Odd-bias theorem (proved).* The harmonic member has
+\(\Phi_{2m,4}(1/2)=16(1-4^{1-m})\), which makes the census bias odd, and therefore
+nonzero, at every prime not dividing \(4^{m-1}-1\). The excluded set is
+uncharacterized.
+
+### Reconstruction from the coloring
+
+The coloring assigns to an unordered four-subset of \(\mathbf P^1(\mathbf F_q)\)
+the square class of its Gram determinant. Its \(GL_2\)-weight is \(\det^{4d}\), a
+square, and its point-weight \(2d\) is even, so it is never twisted by
+\(\chi\circ\det\): it is \(PGL_2(\mathbf F_q)\)-invariant for every degree and
+every odd \(q\), and also \(\operatorname{Gal}(\mathbf F_q/\mathbf F_p)\)-invariant.
+The color of a four-set is \(\chi(G_r(\lambda))\) with \(r=2m\bmod(q-1)\), a
+function of the anharmonic orbit of the cross-ratio alone, so the coloring
+descends to the \(j\)-line.
+
+**Reconstruction dichotomy (proved).** For every odd prime power \(q\) and every
+\(m\), exactly one of two things happens: the coloring is constant and its
+automorphism group is the full symmetric group \(\operatorname{Sym}(q+1)\), a
+total loss of marking; or the coloring is nonconstant and its automorphism group
+is exactly \(P\Gamma L_2(\mathbf F_q)\), so the shadow recovers the entire
+projective structure. Nothing intermediate occurs. The proof combines
+3-transitivity, an odd \((q+1)\)-cycle, and the classification of 3-transitive
+groups; the boundary is that a census of 881 pairs \((m,q)\) with \(q\le121\)
+found zero partial collapses, so the absence of intermediate behaviour is proved
+in general while the exhaustive confirmation runs only to \(q\le121\). The
+exceptional set is exactly the strata on which the coloring is constant including
+its zeros, a proper subset of the constant-character strata classified above.
+
+**Marking fibre.** In the reconstructing case the fibre is
+\(P\Gamma L_2/PGL_2=\operatorname{Gal}(\mathbf F_q/\mathbf F_p)\), cyclic of order
+\(\log_pq\) and independent of \(m\): the marking is recovered exactly over a
+prime field, and over \(\mathbf F_{p^2}\) the residual ambiguity is one Frobenius
+torsor of order two. This is the family-level form of the residual two-element
+ambiguity in the fifth numbered paper.
+
+**The Baer stratum.** Over \(\mathbf F_{p^2}\) at \(r=p+1\) the coloring becomes
+the Baer-subline coloring: color zero exactly on the four-sets lying on a Baer
+subline, \(+1\) elsewhere, and \(-1\) never occurring. The zero blocks are the
+circles of the Miquelian inversive plane of order \(p\). This is the one place in
+the whole sweep where partition refinement fails and the only case needing an
+inversive-plane recognition theorem rather than refinement, and it is the only
+query-complexity jump. A second new stratum is a total collapse at \(r=2p^i\) over
+non-prime fields, a Frobenius twist of the known \(r=2\) collapse.
+Reconstruction needs at least \(\lceil(q-1)/4\rceil\) queries by a touching bound
+and \(\Theta(q\log q)\) by a counting bound, both proved, and
+\((q-2)(3q-7)/2=O(q^2)\) non-adaptive queries suffice at every nonconstant
+\((m,q)\) with \(q\le121\) except the Baer instances, where a quadratic query set
+provably does not suffice.
+
+**The \(q=11\) case of the first numbered paper is a corollary.** It is the point
+\((m,q)=(2,11)\): 165 positive four-sets forming a \(3\)-\((12,4,3)\) design on the
+harmonic orbit, with automorphism group of order \(1320=|PGL_2(11)|\). The
+exhaustive check over \(9!\) candidates that the paper performs is recovered from
+the dichotomy without search. The non-split torus does not disturb this: the
+cross-ratio of a four-subset of \(\mathbf P^1(\mathbf F_q)\) is \(\mathbf F_q\)-rational,
+and at \(q=p^2\), where \(\mathbf F_p\)-non-split values become rational, they carry
+color \(+1\) for every \(m\) because \(\Phi\) lands in \(\mathbf F_p^\times\),
+whose elements are squares in \(\mathbf F_{p^2}\); verified exhaustively over
+every prime power \(q=p^k\le1000\) with \(k\ge2\).
+
+### Three routes closed by measurement or proof
+
+*No second quadratic-form invariant.* Over every field of characteristic other
+than two and for every \(m\), the four-point pure-power Gram form is isometric to
+a hyperbolic plane together with \(\langle-2,2\Phi_{2m,4}\rangle\). Its complete
+isometry invariant is therefore the square class of \(\Phi_{2m,4}\), the coloring
+already censused, and there is no second coloring to census — not pointwise over
+\(\mathbf F_p\), not over \(\mathbf Q_p\) at rational \(\lambda\), not over
+\(\mathbf Q(\lambda)\). The principal-minor sequence is \((0,-1,2,\Delta\Phi)\)
+with the middle entries constant in both \(\lambda\) and \(m\), so the proposed
+restricted-signature stratification of real configuration space is vacuous; and
+the Hasse–Witt invariant is the quaternion class \((2,\Phi)(-1,-1)\), whose
+ramification over \(\mathbf Q(\lambda)\) is exactly the branch divisor of
+\(C_m\) and so carries nothing the cover does not. The replacement that does
+refine is not a quadratic-form invariant at all: it is the square-class vector of
+the four Fermat factors \(1+\varepsilon\lambda^m+\eta(1-\lambda)^m\), all sixteen
+of whose strata occur, and whose periodicity is \(m\bmod(p-1)\) against
+\(2m\bmod(p-1)\) for the discriminant — a doubling of the resolution of the
+exponent stratification.
+
+*No bridge to the second numbered paper.* That paper's quadratic-trade generator
+transforms by \(\chi\circ\det\), the sheet sign of \(PGL_2/PSL_2\), whereas every
+member of this family has even bracket weight and is a genuine \(PGL_2\)-invariant.
+A twisted member would need \(rd\) odd, forcing \(d\) and \(r\) both odd, and
+there \(G_{d,r}\) vanishes identically by the parity ceiling. So no member of the
+family can generate the trade, and the bridge closes as a measured negative with
+no verification item displaced. One exact identity survives as a by-product: the
+three four-endpoint switch constants satisfy the Plücker relation \(u-v+w=0\), and
+\(I=u^2-uv+v^2\), so the \(m=2\) color is the square class of the norm form of
+that switch triple.
+
+*No complex-multiplication route through Jacobi sums.* The hope that the four
+Fermat factors would decompose the bias into Jacobi sums with complex
+multiplication is refuted at \(m=3\), where the descent quotients are non-CM
+elliptic curves with \(\operatorname{Jac}(C_3)\sim E_1^2\).
+
+### Destination
+
+None of this is currently assigned to a manuscript. A split into two papers is
+under consideration — one on the coloring, its reconstruction dichotomy and its
+finite-field strata, one on the arithmetic of the tower \(\{C_m\}\) — with the
+classicality concession above written in from the start, so that the Wronskian
+isomorphism is cited as the mechanism and the norm identity appears as an
+organizing lemma rather than a headline.
+
 ## Status summary
 
 - ***Reconstructing the Clebsch code and its golden orientation from its
@@ -3647,11 +4281,22 @@ are vacuous because a natural number can encode the whole residual.
   and the complete \(k=12\), \(k=13\) and \(k=14\) layers are now impossible
   over every finite field. The exact remaining obstruction is an
   upper bound on the largest arc whose secants all avoid a fixed conic —
-  measured to be tight, so possibly false.
+  measured to be tight, so possibly false. The companion also gains the
+  all-field cubic tail: a six-arc has its uncovered locus on a curve of degree
+  at most three only for the Clebsch hexagon at \(q=11\), for every prime power
+  \(q\ge11\).
 - ***Quadratic trade rigidity and cubic orientation in conic matching
   quotients:*** complete theorem arc, with the one-factorization property
   derived rather than assumed and the completeness theorem naming the two
-  occurring configurations; public packaging remains.
+  occurring configurations; public packaging remains. On the matching-design
+  side a universal theorem has landed: over every field, every one-factorization
+  of \(K_{10}\) whose factors have collinear star points has its nine
+  transversals in a pencil, by an interpolation identity plus a three-line Hesse
+  tripod that replaces an earlier 396-class census. For the regular design this
+  forces the canonical one-factorization lines and hands the field boundary to
+  Nagy's Ree-unital embedding theorem; the publishable part would be the
+  automatic completion to the unital line structure, and the priority verdict
+  there is bounded and provisional.
 - ***Golden descent and operator realizations of the Clebsch cubic:*** two
   recognition theorems are proved and machine-checked but not yet in the
   manuscript — the golden conference switching class is characterized by nonzero
@@ -3775,7 +4420,14 @@ are vacuous because a natural number can encode the whole residual.
 - ***Arcs complete outside a conic:*** defect identity, zero-defect
   rigidity, and stability formally verified; six exact values of
   \(\rho_{\mathcal C}\); the \(q=16\) classification compressed to three
-  exceptional cases.
+  exceptional cases. A bounded-degree envelope for the ordinary uncovered locus
+  is now proved and routed into a forward version of this paper: containment in
+  a degree-\(d\) curve forces \(q\le\binom k2+d-2\) with an exact root window
+  and a parity-linear sharpening at low degree, the least vanishing degree is at
+  least \(q-\binom k2+2\), and component-splitting adds a line bound
+  \(|\mathcal U(A)\cap\ell|\le q-k+1\) in odd order. Its six-arc consequence —
+  low-degree containment happens only for the Clebsch hexagon at \(q=11\), over
+  every field — is routed to the first paper's computational companion instead.
 - ***Integral Secant Distributions and Improved Bounds for Complete
   \((k,n)\)-Arcs:*** an eighteen-page manuscript proves exact integer degree
   envelopes whose real relaxation is classical spectral mixing, ordered
@@ -3803,9 +4455,21 @@ are vacuous because a natural number can encode the whole residual.
   working implementation, *ergodis*, whose governing quotient theorem is proved
   and whose speedup over the strongest published comparison tool on that tool's
   own input list is measured, not projected; it is being prepared for release
-  under a dual licence. The symmetry-reduction result for exact quantum-code
-  distance computation is a measured consequence of the same principle and is
-  not assigned to a manuscript.
+  under a dual licence. The measurement layer has widened: the automaton
+  comparison now covers the full published list at 2.699x geometric mean with
+  158 wins of 169, the eight coding and storage workloads it was written for
+  give 104.16x cold and 81.48x warm geometric means against a
+  constraint-programming control, and on the certified-unsatisfiable rows of the
+  official VLSAT-2 list it beats a leading SAT solver by 381.13x where that
+  solver finishes, with its one satisfiable miss recorded rather than excluded
+  silently. Two earlier headline ratios were retracted when the protocol was
+  corrected. The symmetry-reduction result for exact quantum-code distance
+  computation is a measured consequence of the same principle and is not
+  assigned to a manuscript; it has since closed exact distances that published
+  sources left as upper bounds, including two lifted-product codes of length
+  1496 at distances 20 and 16 and three bivariate-bicycle codes up to
+  \([[784,24,24]]\), each an exhaustive enumeration with the attained witness
+  replayed by a second implementation and nothing machine-checked beyond that.
 - ***Local-Unitary Rigidity of Stabilizer AME States:*** rigidity proved for
   every stabilizer AME state, not only the MDS–CSS family, and stable under
   approximate equality with explicit constants; the \(m=2\) proof bridge is
@@ -3857,12 +4521,21 @@ are vacuous because a natural number can encode the whole residual.
 - **Unassigned adjacent results:** \(25\) of the \(30\) mod-\(3\)-compatible
   fixed common multiplier subgroups for Hadamard order \(668\) are impossible,
   by a nine-compression congruence and a shift-\(111\) orbit lock; five cases
-  remain, no matrix is constructed, and the order remains open. The query
+  remain and no matrix is constructed. Existence at \(668\) is settled
+  externally, and the announced payload has now been decoded, verified in exact
+  arithmetic by two implementations, formalized as an instance of a bordered
+  Goethals–Seidel theorem in Lean, and classified: a four-row border over four
+  circulants of length 166 with an extra inner shift, automorphism group of
+  order four, and no contact with the Legendre-pair route, so the length-\(333\)
+  Legendre-pair question is untouched and still open. The query
   complexity of reconstructing a two-graph from alignment tests is settled
   adaptively — the constant is exactly \(1/2\), so the coherence restriction is
   free to leading order — and bracketed nonadaptively between \(0.616\,n^2\) and
   \(\tfrac98n^2+O(n)\), with the evidence pointing at the floor rather than the
-  construction as the loose end. The exceptional
+  construction as the loose end. The eight-point attachment constant is closed
+  at \(g(8)=17\) by two verified refutations and a cross-implementation replay,
+  and the obstruction is known to couple three cut strata, which is the target
+  for replacing the certificate with a human proof. The exceptional
   code ladder from \(E_{10}\) down to \(E_6\) is proved and its three quantum and
   symmetry barriers are closed by proof, but the track is **pre-empted**: the
   level codes are Calderbank--Kantor two-weight codes, the fold is
@@ -3872,6 +4545,25 @@ are vacuous because a natural number can encode the whole residual.
   Clebsch-entry composition is a distinct research-only candidate: it retains
   the residue flag, computes the exact forgotten fibres, and has not yet passed
   the novelty gate needed for manuscript placement.
+- **The Gram–discriminant shadow of four points:** the factorization
+  \(G_{d,r}=\Delta\Phi_{d,r}\) is a classical-derived corollary of the Wronskian
+  isomorphism and is not claimed as new, and the quartic square-class case is
+  substantially pre-existing. What is claimed begins after it: an integrality
+  and content law, a modular nondegeneracy criterion, a parity ceiling that
+  confines the shadow to even Veronese degree, a proved Dickson closed form and
+  genus law for the four-point tower, a proved Chevalley–Weil isotypic
+  multiplicity \(a=b=\lfloor(m-2)/3\rfloor\), a fifteen-class classification of
+  the constant strata of the finite-field census with the former sporadic
+  \((47,30)\) closed as the last member of a three-member family, a matching
+  classification on the non-split torus, and a reconstruction dichotomy in which
+  a nonconstant coloring has automorphism group exactly \(P\Gamma L_2\) and
+  marking fibre exactly \(\operatorname{Gal}(\mathbf F_q/\mathbf F_p)\). Three
+  routes are closed by proof or measurement: no second quadratic-form invariant
+  exists, the bridge to the second numbered paper is blocked by a weight-parity
+  obstruction, and the Jacobi-sum complex-multiplication route is refuted. The
+  tower stops being modular at \(m=8\) on Sato–Tate moment evidence, which is a
+  measurement and not a theorem. Not assigned to a manuscript; a two-paper split
+  is under consideration.
 - **Open programmes:** square-root complete arcs and the odd-plane cap game,
   both with substantial partial results and explicitly no global claim. The cap
   game's causal-local route is falsified by an explicit \(\mathbb F_{11}\)
