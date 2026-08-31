@@ -36,6 +36,7 @@ pub mod projective;
 pub mod provenance;
 pub mod residual_hitting;
 pub mod root_execution;
+pub mod rpc;
 pub mod sat;
 pub mod scheduler;
 pub mod selector;

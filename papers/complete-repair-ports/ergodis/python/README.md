@@ -5,6 +5,27 @@ This directory contains transparent reference algorithms, differential-oracle
 fixtures, benchmark controls, and evidence generators used to audit ergodis.
 It is intentionally secondary to the Rust interface.
 
+The `ergodis` package is the typed Python 3.14+ API for exact Rust primitives.
+It owns one persistent `ergodis-rpc` worker, while domain objects hide the
+transport:
+
+```python
+from ergodis import CharacterSumQuery, Client, Polynomial
+
+with Client() as client:
+    chi = client.GF(5).quadratic_character
+    batch = chi.sum_many([
+        CharacterSumQuery("S", Polynomial([36, -108, 213, -246, 213, -108, 36])),
+        CharacterSumQuery("S2", Polynomial([36, -108, 105, -36]), twist=(1, -4)),
+    ])
+    assert (batch["S"].value, batch["S2"].value) == (2, 3)
+```
+
+`Polynomial.from_sympy()` accepts a SymPy polynomial without making SymPy a
+runtime dependency. `Client.call()` is the generic typed escape hatch for a
+newly registered RPC method; framing, process lifetime, large-integer encoding,
+errors, and locking stay shared.
+
 `ergodis_client.py` is the exception: it is the dependency-free reference
 binding for the optional, versioned local control protocol.  It sends bounded
 framed requests and streams run-relative evidence without buffering complete

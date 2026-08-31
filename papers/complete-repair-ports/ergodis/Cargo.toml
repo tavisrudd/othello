@@ -44,6 +44,10 @@ name = "ergodis"
 path = "src/bin/ergodis.rs"
 
 [[bin]]
+name = "ergodis-rpc"
+path = "src/bin/ergodis_rpc.rs"
+
+[[bin]]
 name = "ergodis-campaign"
 path = "src/bin/ergodis_campaign.rs"
 required-features = ["control-plane"]
