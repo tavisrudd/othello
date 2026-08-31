@@ -5,6 +5,7 @@ use serde_json::{json, Value};
 use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
+use std::mem::MaybeUninit;
 use std::path::Path;
 
 #[derive(Debug, Deserialize)]
@@ -637,6 +638,12 @@ fn fuse_field_constant_comparisons(ops: &[CompiledOp]) -> Vec<CompiledOp> {
     fused
 }
 
+#[inline(always)]
+unsafe fn read_plan_stack(stack: &[MaybeUninit<i64>; MAX_PLAN_STACK], index: usize) -> i64 {
+    // SAFETY: callers use only indices below the validated bytecode depth.
+    unsafe { stack[index].assume_init() }
+}
+
 #[derive(Clone, Debug)]
 pub struct CompiledPlan {
     pub name: String,
@@ -881,7 +888,7 @@ impl CompiledPlan {
         if !self.applies(row) {
             return Ok(0);
         }
-        let mut stack = [0i64; MAX_PLAN_STACK];
+        let mut stack = [MaybeUninit::<i64>::uninit(); MAX_PLAN_STACK];
         let mut depth = 0usize;
         let mut trace = trace;
         let ops = if TRACE { &self.ops } else { &self.fast_ops };
@@ -897,31 +904,38 @@ impl CompiledPlan {
                 OpCode::FieldGtConst => i64::from(row[op.field as usize] > op.value),
                 OpCode::FieldGeConst => i64::from(row[op.field as usize] >= op.value),
                 OpCode::Not => {
-                    stack[depth - 1] = i64::from(stack[depth - 1] == 0);
+                    // Compiled stack discipline proves this slot initialized.
+                    let result = i64::from(unsafe { read_plan_stack(&stack, depth - 1) } == 0);
+                    stack[depth - 1].write(result);
                     if TRACE {
                         trace
                             .as_deref_mut()
                             .expect("traced evaluator has a trace sink")
-                            .push(stack[depth - 1]);
+                            .push(result);
                     }
                     continue;
                 }
                 OpCode::Abs => {
-                    stack[depth - 1] = stack[depth - 1].checked_abs().ok_or_else(|| {
-                        ControlError::Invalid("arithmetic overflow in plan".into())
-                    })?;
+                    // Compiled stack discipline proves this slot initialized.
+                    let result = unsafe { read_plan_stack(&stack, depth - 1) }
+                        .checked_abs()
+                        .ok_or_else(|| {
+                            ControlError::Invalid("arithmetic overflow in plan".into())
+                        })?;
+                    stack[depth - 1].write(result);
                     if TRACE {
                         trace
                             .as_deref_mut()
                             .expect("traced evaluator has a trace sink")
-                            .push(stack[depth - 1]);
+                            .push(result);
                     }
                     continue;
                 }
                 OpCode::Select => {
-                    let otherwise = stack[depth - 1];
-                    let then = stack[depth - 2];
-                    let condition = stack[depth - 3];
+                    // Compiled stack discipline proves all three slots initialized.
+                    let otherwise = unsafe { read_plan_stack(&stack, depth - 1) };
+                    let then = unsafe { read_plan_stack(&stack, depth - 2) };
+                    let condition = unsafe { read_plan_stack(&stack, depth - 3) };
                     depth -= 3;
                     if condition != 0 {
                         then
@@ -930,8 +944,9 @@ impl CompiledPlan {
                     }
                 }
                 code => {
-                    let right = stack[depth - 1];
-                    let left = stack[depth - 2];
+                    // Compiled stack discipline proves both operand slots initialized.
+                    let right = unsafe { read_plan_stack(&stack, depth - 1) };
+                    let left = unsafe { read_plan_stack(&stack, depth - 2) };
                     depth -= 2;
                     match code {
                         OpCode::Add => left.checked_add(right).ok_or_else(|| {
@@ -968,7 +983,7 @@ impl CompiledPlan {
                     }
                 }
             };
-            stack[depth] = result;
+            stack[depth].write(result);
             depth += 1;
             if TRACE {
                 trace
@@ -979,7 +994,8 @@ impl CompiledPlan {
         }
         debug_assert_eq!(depth, 1);
         debug_assert!(self.stack_needed <= MAX_PLAN_STACK);
-        Ok(stack[0])
+        // A valid plan leaves exactly one initialized result.
+        Ok(unsafe { read_plan_stack(&stack, 0) })
     }
 }
 
@@ -1092,6 +1108,147 @@ pub(super) fn evaluate_plan_cascaded(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn compile_test_plan(program: Vec<PlanOp>, output: PlanOutput) -> CompiledPlan {
+        CompiledPlan::compile(
+            &PlanSpec {
+                schema: PLAN_SCHEMA.to_owned(),
+                name: "stack-safety-test".to_owned(),
+                role: PlanRole::Diagnostic,
+                output,
+                scope: None,
+                program,
+            },
+            &["x".to_owned()],
+        )
+        .unwrap()
+    }
+
+    fn assert_traced_untraced(
+        program: Vec<PlanOp>,
+        output: PlanOutput,
+        row: &[i64],
+        expected: i64,
+    ) {
+        let plan = compile_test_plan(program, output);
+        let mut trace = Vec::with_capacity(plan.ops.len());
+        assert_eq!(
+            plan.evaluate_value(row, Some(&mut trace)).unwrap(),
+            expected
+        );
+        assert_eq!(plan.evaluate_value_untraced(row).unwrap(), expected);
+        assert_eq!(trace.len(), plan.ops.len());
+    }
+
+    #[test]
+    fn fixed_stack_covers_every_opcode_shape() {
+        let integers = [
+            (PlanOp::Add, 10),
+            (PlanOp::Sub, 4),
+            (PlanOp::Mul, 21),
+            (PlanOp::Min, 3),
+            (PlanOp::Max, 7),
+        ];
+        for (op, expected) in integers {
+            assert_traced_untraced(
+                vec![PlanOp::Const { value: 7 }, PlanOp::Const { value: 3 }, op],
+                PlanOutput::Score,
+                &[11],
+                expected,
+            );
+        }
+
+        let comparisons = [
+            (PlanOp::Eq, 0),
+            (PlanOp::Ne, 1),
+            (PlanOp::Lt, 0),
+            (PlanOp::Le, 0),
+            (PlanOp::Gt, 1),
+            (PlanOp::Ge, 1),
+        ];
+        for (op, expected) in comparisons {
+            assert_traced_untraced(
+                vec![PlanOp::Const { value: 7 }, PlanOp::Const { value: 3 }, op],
+                PlanOutput::Predicate,
+                &[11],
+                expected,
+            );
+        }
+
+        for (op, expected) in [(PlanOp::And, 0), (PlanOp::Or, 1)] {
+            assert_traced_untraced(
+                vec![
+                    PlanOp::Bool { value: true },
+                    PlanOp::Bool { value: false },
+                    op,
+                ],
+                PlanOutput::Predicate,
+                &[11],
+                expected,
+            );
+        }
+        assert_traced_untraced(
+            vec![PlanOp::Bool { value: false }, PlanOp::Not],
+            PlanOutput::Predicate,
+            &[11],
+            1,
+        );
+        assert_traced_untraced(
+            vec![PlanOp::Const { value: -7 }, PlanOp::Abs],
+            PlanOutput::Score,
+            &[11],
+            7,
+        );
+        assert_traced_untraced(
+            vec![
+                PlanOp::Bool { value: true },
+                PlanOp::Field {
+                    name: "x".to_owned(),
+                },
+                PlanOp::Const { value: 3 },
+                PlanOp::Select,
+            ],
+            PlanOutput::Score,
+            &[11],
+            11,
+        );
+    }
+
+    #[test]
+    fn fixed_stack_reaches_the_validated_maximum_depth() {
+        let mut program = Vec::with_capacity(2 * MAX_PLAN_STACK - 1);
+        program.extend((0..MAX_PLAN_STACK).map(|_| PlanOp::Const { value: 1 }));
+        program.extend((1..MAX_PLAN_STACK).map(|_| PlanOp::Add));
+        let plan = compile_test_plan(program, PlanOutput::Score);
+        assert_eq!(plan.stack_needed, MAX_PLAN_STACK);
+        let mut trace = Vec::with_capacity(plan.ops.len());
+        assert_eq!(
+            plan.evaluate_value(&[0], Some(&mut trace)).unwrap(),
+            MAX_PLAN_STACK as i64
+        );
+        assert_eq!(
+            plan.evaluate_value_untraced(&[0]).unwrap(),
+            MAX_PLAN_STACK as i64
+        );
+        assert_eq!(trace.len(), 2 * MAX_PLAN_STACK - 1);
+    }
+
+    #[test]
+    fn fixed_stack_preserves_arithmetic_errors() {
+        for program in [
+            vec![
+                PlanOp::Const { value: i64::MAX },
+                PlanOp::Const { value: 1 },
+                PlanOp::Add,
+            ],
+            vec![PlanOp::Const { value: i64::MIN }, PlanOp::Abs],
+        ] {
+            let plan = compile_test_plan(program, PlanOutput::Score);
+            let mut trace = Vec::new();
+            assert!(plan.evaluate_value(&[0], Some(&mut trace)).is_err());
+            assert!(plan.evaluate_value_untraced(&[0]).is_err());
+        }
+    }
 
     #[test]
     fn fused_field_constant_comparisons_match_traced_programs() {

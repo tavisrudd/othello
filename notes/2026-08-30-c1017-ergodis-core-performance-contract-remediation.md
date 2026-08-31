@@ -630,6 +630,20 @@ remediation list. The initial census reports 30 passing, 22 open, and 14
 not-applicable cells. This is infrastructure progress, not C1017 closure: the
 census must expand and the 22 open cells must be repaired or justified.
 
+The plan evaluator's fixed stack is now initialized only as its validated
+bytecode reaches each slot. `CompiledPlan::compile` proves the stack discipline,
+the opcode arrays and their comparison-only fusion remain private, and the hot
+evaluator uses a 64-slot `MaybeUninit<i64>` array rather than clearing 512 bytes
+per feature row. Tests cover every opcode shape in traced and untraced modes,
+the exact maximum stack depth, and checked-arithmetic error paths. Fifteen
+rotated pairs remove 13.96% of instructions and 15.91% of branches at exact
+work/checksum parity. Because host-frequency states made the timing ratios
+bimodal, the accepted timing statement is the observed lower bound and median:
+all pairs improve wall time by at least 1.170x and the median is 1.187x. Nine
+quiet-core direct-residual pairs put the remaining interpreter gap at 8.852x
+cycles and 8.838x wall (`t=725.10/668.92`). Evidence is under
+`/home/tavis/.cache/ergodis-perf/c1017-plan-vm-stack`.
+
 ## Review findings for the pending C1016 Rust overlay
 
 The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its

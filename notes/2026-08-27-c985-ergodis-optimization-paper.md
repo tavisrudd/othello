@@ -245,6 +245,26 @@ as each coherent tranche lands.
    all-target/all-feature tests and strict clippy pass. Current next slice:
    continue the measured plan-VM Boolean/arithmetic fusion frontier or select a
    theorem kernel with an immediate application adapter.
+   The next VM slice removes a hidden fixed cost rather than adding another
+   domain opcode. The compiler already proves stack discipline and owns both
+   private opcode streams, so the evaluator now stores its 64 fixed slots as
+   `MaybeUninit<i64>` and initializes exactly the slots reached by the plan;
+   it no longer clears 512 bytes for every row. Exhaustive opcode-shape tests
+   compare traced and fused-untraced evaluation, reach the validated maximum
+   stack depth, and preserve checked-arithmetic failures. Across fifteen
+   rotated pairs of 98,304,000 exact row evaluations, the candidate removes
+   13.96% of instructions and 15.91% of branches at identical work and
+   checksum. Host frequency changes bifurcate cycle timing, so the retained
+   claim is deliberately conservative: every pair is at least 1.170x faster
+   in wall time and the median is 1.187x; no geometric-mean timing claim is
+   used. The remaining branchless-direct residual is 8.852x cycles and 8.838x
+   wall (`t=725.10/668.92`), down from 10.51x. Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-stack/final-ab-warmed` and
+   `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-stack/direct-residual`.
+   Current next slice: profile that residual by opcode mix, then choose a
+   bounded Boolean/arithmetic superinstruction family only if it generalizes
+   beyond the synthetic residual; otherwise move to the first application
+   adapter for an already-landed theorem kernel.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and
