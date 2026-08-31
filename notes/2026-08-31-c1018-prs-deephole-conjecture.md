@@ -957,14 +957,18 @@ successor task and it is the single highest-value follow-up this wave exposes.
 wave speaks to directly.
 
 * *"What happens below 43?  No bounded census or exceptional normal-form theorem
-  was attempted."*  Answered by exhaustive census over the range §4b reaches:
-  `X(8)` is exactly `{8, 9, 11}` there, and the one exceptional orbit with
-  cyclic symmetry — the size-264 orbit at `q = 11` — has the closed normal form
-  `XY(Y^5 + cX^5)`, `c` in two of the five fifth-power classes of `F_11^*`
-  (§5b).  The two regular orbits at `q = 11` still have no normal form.
+  was attempted."*  Answered completely for the non-regular class, and by census
+  over the range §4b reaches for the rest.  The exceptional deep holes with
+  nontrivial stabilizer occur at exactly `q ∈ {8,9,11}` across **all** prime
+  powers below 43 (§5d), and the one with cyclic symmetry — the size-264 orbit
+  at `q = 11` — has the closed normal form `XY(Y^5 + cX^5)`, `c` in two of the
+  five fifth-power classes of `F_11^*` (§5b).  The two regular orbits at
+  `q = 11` still have no normal form, and the regular class is now the entire
+  residual.
 * *"Is 43 sharp?"*  No, and by a wide margin: the persistent-only
   classification holds unbroken from `q = 13` upward across every field
-  censused.  The proved threshold is not merely non-sharp; §7 argues the true
+  censused, and for the non-regular class across every field below 43 without
+  exception.  The proved threshold is not merely non-sharp; §7 argues the true
   threshold should be a constant, while `Q*_r = 6r-16+⌊2√(6r-18)⌋` grows
   linearly, so the gap widens with `r` rather than closing.
 
@@ -972,8 +976,9 @@ The MDS fence of `notes/open-problems/plausible-bridges/mds.md` is respected
 exactly as on 2026-08-30 and this wave sharpens the same point.  Kaipa's
 deep-hole/MDS-extension dictionary is an equivalence only at covering radius
 `r`, and across every census cell in this wave the radius was `r-1` except the
-two classical even-field cases `k ∈ {2, q-2}` — `(r,q) = (3, q even)` and
-`(7,8)` — both already known.  Nothing here touches MDS length.
+classical even-field cases `k ∈ {2, q-2}` — `(r,q) = (3, q even)`, `(7,8)`, and
+now `(15,16)` found on a stratum (§5f) — all of which are the known
+Seroussi–Roth exception.  Nothing here touches MDS length.
 
 ## 8. Mystery ledger
 
