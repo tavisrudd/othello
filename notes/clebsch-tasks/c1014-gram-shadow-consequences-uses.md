@@ -67,10 +67,31 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
   (\(m=5,6\)) all split, though \(\operatorname{Aut}(D)=1\): the split comes
   from the anharmonic \(S_3\) acting on the square-class model of
   \(\Phi_{2m,4}\) (Theorem H, exact over \(\mathbf Q\));
-  \(H^0(\Omega)=a\cdot\mathrm{triv}+b\cdot\mathrm{sgn}+c\cdot\mathrm{std}\)
-  with measured \((a,b,c)=(0,0,1),(0,0,1),(1,1,2),(1,1,3)\) at
-  \(m=3,4,5,6\). Elliptic factors located: level 150 (\(m=5\), \(D_1\)),
-  level 1584 (\(m=6\), \(D_1\)).
+  \(H^0(\Omega)=a\cdot\mathrm{triv}+b\cdot\mathrm{sgn}+c\cdot\mathrm{std}\).
+  **Proved (2026-08-30 evening, two independent proofs — explicit character
+  computation on the basis \(\lambda^i d\lambda/y\), symbolic for
+  \(m\le40\), and equivariant Riemann–Hurwitz):**
+  \[a=b=\lfloor(m-2)/3\rfloor,\qquad c=(g-2a)/2,\qquad
+    g=2m-4-2[m\equiv1\bmod3].\]
+  Two structural corrections/upgrades from the proof: the honest \(S_3\) on
+  \(C_m\) is \(\langle\sigma,\iota\tau\rangle\) — \(\langle\sigma,\tau\rangle\)
+  is dihedral of order 12 with \((\sigma\tau)^3=\iota\) (Theorem H's
+  containment stands, its generator does not); and the exact product law
+  \(u^2\Phi_{2m,4}=\prod_{\varepsilon,\eta}(1+\varepsilon\lambda^m+
+  \eta(1-\lambda)^m)\) holds for all \(m\), giving
+  \(\lambda^{4m-6}\Phi(1/\lambda)=\Phi(\lambda)\) with constant 1. The
+  genus law is now a theorem (\(I\) is the only repeated root of \(\Phi\),
+  multiplicity exactly 2, exactly when \(m\equiv1\bmod3\)). Isotypic
+  growth: \(\dim A_{\mathrm{triv}}=\dim A_{\mathrm{sgn}}=a\to g/6\),
+  \(2\dim A_{\mathrm{std}}\to2g/3\); \(a\) jumps at \(m\equiv2\bmod3\).
+  Explicit \(S_3\)-quotient models via the syzygy \(V^2=4I^3-27W^2\),
+  \(J=I^3/W^2\): \(C_m/S_3:Y^2=R_m(J)\) and
+  \(C_m/S_3':Z^2=(4J-27)R_m(J)\), with conductors 150/2550 (\(m=5\)),
+  1584/2046 (\(m=6\)), 637/6370 (\(m=7\)), all \(a_p\)-matched to the
+  measured traces — the sign-side conductors sit above the earlier
+  level-1600 search bound, which is why that search found nothing.
+  Elliptic factors: level 150 (\(m=5\), \(D_1\)), level 1584 (\(m=6\),
+  \(D_1\)).
 - Exact bad-prime law (no exceptions, \(m=2..12\)):
   \(\{2\}\cup H(m)\cup M(m)\cup E(m)\) — harmonic point
   (\(p\mid4^{m-1}-1\), minus \(p=3\) when \(m\equiv1\bmod3\)), collision
@@ -84,11 +105,16 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
   \(I=\Phi_6(\lambda)\). Jacobi-sum decomposition **refuted**: at \(m=3\) the
   descent quotients are non-CM elliptic curves with
   \(\operatorname{Jac}(C_3)\sim E_1^2\).
-- Open items after the modular-structure pass: derive the \((a,b,c)\)
-  multiplicities (Riemann–Hurwitz for \(C_m\to C_m/S_3\), which would also
-  give the \(D_2\) conductors); the \(m=3\) bias \(\equiv1\bmod4\) rigidity;
-  and the newly isolated unexplained stratum \((p,r)=(47,30)\), which
-  replaces \((6,23)\) as the open sporadic point.
+- Open items after the Chevalley–Weil pass ((a,b,c) derivation is closed):
+  the \(m=3\) bias \(\equiv1\bmod4\) rigidity; the sporadic stratum
+  \((p,r)=(47,30)\); genus \(\equiv4\bmod6\) never occurs (the closed
+  form's third branch is unreachable, with no common cause identified); the
+  \(m=8\) abelian-surface isotypic factors are unidentified; the sign-side
+  quotient conductor uses all of \(\mathrm{Bad}(C_m)\) while the trivial
+  side drops primes in an unexplained pattern (measured \(m=5,6,7\) only;
+  \(m=7\) breaks the "largest harmonic prime" reading); and \(m=6\) is the
+  only row where the 2- and 3-adic conductor exponents differ between the
+  isotypic sides.
 - The
   \(m=3\) supersingular anomaly is **resolved** (2026-08-30, independent
   PARI recheck): the data are correct and extend (22 zeros of \(a_p\) below
@@ -111,6 +137,10 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
 
 ## Session reports
 
+- `../2026-08-30-c1014-chevalley-weil-multiplicities.md` — proved
+  \((a,b,c)\) closed form, dihedral-lift correction, product law for
+  \(u^2\Phi\), genus-law theorem, explicit \(S_3\)-quotient models and
+  conductors. Scripts: `c1014_chevalley_weil.py`, `c1014_cw_quotients.gp`.
 - `../2026-08-30-c1013-c1014-phi-family-arithmetic.md` — factorization
   verification, \(u\)-descent, genus/bias tables, Jacobi-sum decomposition.
 - `../2026-08-30-c1014-modular-structure-covers.md` — quotient curves and
