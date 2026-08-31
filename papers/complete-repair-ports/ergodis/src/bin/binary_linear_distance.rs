@@ -16,6 +16,9 @@ struct Args {
     /// Create one JSON evidence record. Existing files are never overwritten.
     #[arg(long)]
     evidence: Option<PathBuf>,
+    /// Refuse a larger exponential span unless the caller raises this bound.
+    #[arg(long, default_value_t = 30)]
+    maximum_rank: usize,
 }
 
 #[derive(Debug, Deserialize)]
@@ -64,6 +67,14 @@ fn main() -> Result<()> {
     let compile_start = Instant::now();
     let matrix = Matrix::new::<2>(code.generators.len(), columns, data)?;
     let compiled = CompiledBinaryLinearCode::compile(&matrix)?;
+    if compiled.rank() > args.maximum_rank {
+        bail!(
+            "compiled rank {} exceeds --maximum-rank {} ({} nonzero candidates)",
+            compiled.rank(),
+            args.maximum_rank,
+            (1u128 << compiled.rank()) - 1
+        );
+    }
     let compile_seconds = compile_start.elapsed().as_secs_f64();
     let search_start = Instant::now();
     let result = compiled.minimum_nonzero_weight();

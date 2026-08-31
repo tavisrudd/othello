@@ -244,7 +244,8 @@ bound procedure; exactness still comes from `css_distance_native` exhaustion.
 Its sparse JSON input contains `label`, `coordinate_count`, and `generators`;
 the output gives the minimum nonzero weight and a replayable support. It uses a
 canonical GF(2) basis and allocation-free packed Gray-code enumeration, and
-rejects rank above 63 rather than silently attempting an infeasible span.
+defaults to `--maximum-rank 30` rather than silently launching an infeasible
+span; informed callers may raise the budget up to the hard rank-63 limit.
 
 Inputs with 257--320 coordinates dispatch to a separately monomorphized wide
 backend. It preserves exact three-word syndromes, removes redundant check rows
