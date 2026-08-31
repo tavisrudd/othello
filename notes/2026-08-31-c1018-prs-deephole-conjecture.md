@@ -646,11 +646,26 @@ r = 9 :  q ∈ {9,…,53}          r = 10 : q ∈ {11,…,59}
 closes the non-regular class **at every prime power, with no residual field
 range** — a complete classification rather than a bounded verification.
 
-Redundancy eight is finished (§5d).  Redundancies nine and ten are finished as
-far as this wave's compute reached and are a straightforward unattended
-continuation, not a research problem: the sweep cost grows like `q^4` at both,
-so the remaining fields are roughly an hour and a half of wall clock apiece.
-The exact command is in §9; the exact reached range is in §6.
+Redundancies **eight and nine are both finished** (§5d and below).  Redundancy
+ten reached `q = 23`; its remaining fields are a straightforward unattended
+continuation, not a research problem — the sweep cost grows like `q^4` there, so
+`[25,59]` is a few hours of wall clock.  The exact command is in §9; the exact
+reached ranges are in §6.
+
+**Redundancy nine, closed.**  Swept at every prime power from 9 to 49 — the
+complete list below the companion theorem's threshold 53:
+
+| `q` | 9 | 11 | 13 | 16 | 17 | 19 | 23 | 25 | 27 | 29 | 31 | 32 | 37 | 41 | 43 | 47 | 49 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| deep found | 6,108 | 888 | 62 | 28 | 54 | 62 | 74 | 80 | 86 | 92 | 100 | 50 | 116 | 128 | 136 | 146 | 152 |
+| **exceptional** | 6,078 | 850 | **18** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+Total swept: 47,116,050 points, against `Σ_q |PG(8,q)| ≈ 8·10^{13}` for the
+corresponding censuses — a reduction of about `1.8·10^6`.  So, with the same
+gluing as at redundancy eight:
+
+> At redundancy nine, the exceptional deep holes whose `PGL_2(q)`-stabilizer is
+> nontrivial occur at exactly `q ∈ {9, 11, 13}`, and at no other field.
 
 ### 5f. The reduction immediately found something the census taxonomy had ruled out
 
@@ -946,7 +961,7 @@ theorem's threshold, so that no field is left over:
 | `r` | fields swept | proved threshold | exceptional at | status |
 |---:|---|---:|---|---|
 | 8  | 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32, 37, 41, 43 | 43 | 8, 9, 11 | **complete over all prime powers** |
-| 9  | <!-- R9FIXFIELDS --> | 53 | 9, 11, 13 | <!-- R9FIXSTATUS --> |
+| 9  | 9, 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32, 37, 41, 43, 47, 49 | 53 | 9, 11, 13 | **complete over all prime powers** |
 | 10 | 11, 13, 16, 17, 19, 23 | 59 | 11, 13 | partial; the sweep cost grows like `q^4` here, so `[25,59]` is an unattended continuation of a few hours, not a research problem |
 | 11 | 11, 13 | — | 11, 13 | partial; no field-ranged theorem exists above `r = 10`.  At `q = 13` the sweep finds 1,110 exceptional points across six loci, of which the 40 on the odd-index locus are exactly 2026-08-30 §5.3f's `m = 2` count |
 | 12 | 13 | — | 13 | partial; `k = 2` there, so the count is a boundary artifact |
@@ -955,7 +970,11 @@ Each row's "exceptional at" is exact over the fields swept: the sweep is
 exhaustive over the whole fixed locus, and by the lemma the fixed locus contains
 every point of every non-regular orbit.  The `r = 8` row is a complete
 classification because its swept list is the whole of `[8,43]` and the imported
-theorem covers `q ≥ 43`, leaving no field unaccounted for.
+theorem covers `q ≥ 43`, leaving no field unaccounted for; the `r = 9` row is
+complete for the same reason, with 49 and 53 in place of 41 and 43.  Redundancy
+ten would close the same way with a few more hours of sweeping.  No
+field-ranged theorem exists above `r = 10`, so redundancies 11 and up cannot be
+closed this way at all until one does.
 
 
 Carrier strata verified exhaustively (each a complete sweep of the named
@@ -975,9 +994,10 @@ with `m = 3, 4, 6, 12`.
 * `r = 9`: no census above `q = 19`; the band `[23, 52]` up to the proved
   threshold 53 is untested by census.  `|PG(8,23)| ≈ 8.2·10^{10}` is a 10.2 GB
   bitmap and roughly three quarters of an hour, so the next census cell is
-  reachable but was not run.  For the non-regular class the fixed-locus sweep
-  covers the range stated above, and the residue there is the regular class
-  plus whatever fields the sweep did not reach.
+  reachable but was not run.  The non-regular class is **closed at every prime
+  power** (§5e), so the entire residue at `r = 9` is the regular class at
+  `q ∈ {23,25,27,29,31,32,37,41,43,47,49}` — eleven fields, and only for orbits
+  of size exactly `q^3-q`.
 * `r = 10`: no census above `q = 13`.  The fixed-locus sweep reached the range
   stated above; everything from there to the proved threshold 59, plus the
   regular class throughout, is open.
@@ -1301,6 +1321,14 @@ python3 notes/2026-08-31-c1018-prs-certificate.py check $C \
 * The **fixed-locus lemma** and its implementation: a proved, complete search of
   every orbit with nontrivial stabilizer, at `O(q^{⌈(d+1)/2⌉-1})` instead of
   `O(q^d)`, validated zero-for-zero against ten census cells (§5d).
+* **Complete classifications** of the non-regular exceptional deep holes at
+  redundancies eight and nine, over *all* prime powers with no residual field
+  range: `X(8)` restricted to that class is `{8,9,11}` and `X(9)` is
+  `{9,11,13}` (§5d, §5e).
+* The first census at `(10,13)` — 11.5 billion points — which both confirms the
+  lemma's orbit exactly and rules out any regular exceptional orbit there,
+  falsifying 2026-08-30 Conjecture C's surviving prediction `X(10) ⊆ {11}`
+  (§4c, §5f).
 * The landed conjecture, in three statements with exact domains, exact
   boundaries and falsifiers (§6).
 
@@ -1310,8 +1338,8 @@ python3 notes/2026-08-31-c1018-prs-certificate.py check $C \
   decided up to `q = 29`, and the fields above that rest on the
   fixed-locus sweep plus C513's theorem, which together leave only the regular
   class open there.
-* Redundancy ten: two censuses (`q = 11, 13`) and a fixed-locus sweep to the
-  proved threshold; no census above `q = 13`.
+* Redundancy ten: two censuses (`q = 11, 13`) and a fixed-locus sweep reaching
+  `q = 23` of the 59 needed; the rest is unattended compute.
 * Redundancies 11 and above: fixed-locus sweeps only, and those run out of
   budget around `r = 13`, where the order-two locus is already `q^6` points.
 
