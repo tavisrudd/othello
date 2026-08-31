@@ -86,6 +86,9 @@ pub struct GroundTruth {
     /// Size of the smallest irreducible violating task set the generator knows about.
     #[serde(default)]
     pub minimal_certificate_size: Option<usize>,
+    /// Size of the maximum-deficiency set the generator expects before minimization.
+    #[serde(default)]
+    pub expected_raw_deficient: Option<usize>,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -992,6 +995,104 @@ impl Rng {
 
 const QUALIFICATIONS: [&str; 4] = ["general", "icu", "paediatric", "orthopaedic"];
 
+/// Append a planted violation whose unique irreducible certificate is known exactly, plus a
+/// forced alternating cascade of length `cascade` that inflates the *maximum*-deficiency set
+/// without joining the minimal one.
+///
+/// The block is `plant` scarce tasks eligible only to scarce resources of total capacity
+/// `plant - 2` together with one bridge resource of capacity 1. The bridge is pinned by a
+/// chain `chain_j ~ {bridge_j, bridge_{j+1}}` whose last link sees only `bridge_cascade`, so
+/// the chain's matching is forced from the far end inwards and the bridge is never free.
+///
+/// Consequences, both checked by the benchmark:
+/// * the unique irreducible certificate is exactly the `plant` scarce tasks (dropping any one
+///   leaves demand `plant - 1` against capacity `plant - 1`);
+/// * the alternating-reachable set `hall_core` returns has size `plant + cascade`, because
+///   reachability walks the whole chain.
+///
+/// With `plant < 3` there is no room for the bridge, so the block degenerates to scarce
+/// resources of total capacity `plant - 1` and no cascade.
+fn plant_block(
+    tasks: &mut Vec<Task>,
+    resources: &mut Vec<Resource>,
+    eligible: &mut Vec<(String, String)>,
+    scarce_task: &str,
+    scarce_resource: &str,
+    plant: usize,
+    cascade: usize,
+    ground_truth: &mut GroundTruth,
+) {
+    let use_bridge = plant >= 3 && cascade >= 1;
+    let scarce_total = if use_bridge {
+        plant as u32 - 2
+    } else {
+        plant as u32 - 1
+    };
+    let scarce_count = ((scarce_total as usize) / 2).max(1);
+    let mut capacities = vec![scarce_total / scarce_count as u32; scarce_count];
+    let mut allotted: u32 = capacities.iter().sum();
+    let mut cursor = 0;
+    while allotted < scarce_total {
+        capacities[cursor % scarce_count] += 1;
+        allotted += 1;
+        cursor += 1;
+    }
+    let mut scarce_ids = Vec::new();
+    for (index, &capacity) in capacities.iter().enumerate() {
+        let id = format!("{scarce_resource}_{index:02}");
+        resources.push(Resource {
+            id: id.clone(),
+            capacity,
+        });
+        scarce_ids.push(id);
+    }
+
+    let mut neighbourhood = scarce_ids.clone();
+    if use_bridge {
+        let bridge = format!("{scarce_resource}_bridge_00");
+        resources.push(Resource {
+            id: bridge.clone(),
+            capacity: 1,
+        });
+        neighbourhood.push(bridge);
+        for link in 1..cascade {
+            resources.push(Resource {
+                id: format!("{scarce_resource}_bridge_{link:02}"),
+                capacity: 1,
+            });
+        }
+        for link in 0..cascade {
+            let id = format!("{scarce_task}_chain_{link:02}");
+            tasks.push(Task {
+                id: id.clone(),
+                demand: 1,
+                distinct: false,
+            });
+            eligible.push((id.clone(), format!("{scarce_resource}_bridge_{link:02}")));
+            if link + 1 < cascade {
+                eligible.push((id, format!("{scarce_resource}_bridge_{:02}", link + 1)));
+            }
+        }
+    }
+
+    for index in 0..plant {
+        let id = format!("{scarce_task}_{index:02}");
+        tasks.push(Task {
+            id: id.clone(),
+            demand: 1,
+            distinct: false,
+        });
+        for resource in &neighbourhood {
+            eligible.push((id.clone(), resource.clone()));
+        }
+        ground_truth.planted_tasks.push(id);
+    }
+    ground_truth.feasible = false;
+    ground_truth.planted_resources = neighbourhood;
+    ground_truth.minimal_certificate_size = Some(plant);
+    ground_truth.expected_raw_deficient = Some(plant + if use_bridge { cascade } else { 0 });
+}
+
 /// Shift rostering with qualifications.
 ///
 /// The feasible core is built by drawing a valid assignment first and taking eligibility as
@@ -999,7 +1100,13 @@ const QUALIFICATIONS: [&str; 4] = ["general", "icu", "paediatric", "orthopaedic"
 /// block of `plant` shifts requiring a rare qualification whose holders have total capacity
 /// `plant - 1`; those holders are also generally qualified, so the alternating-reachable
 /// deficient set spreads well beyond the planted block.
-fn generate_roster(seed: u64, shifts: usize, nurses: usize, plant: usize) -> Instance {
+fn generate_roster(
+    seed: u64,
+    shifts: usize,
+    nurses: usize,
+    plant: usize,
+    cascade: usize,
+) -> Instance {
     let mut rng = Rng(seed);
     let mut tasks = Vec::new();
     let mut resources = Vec::new();
@@ -1075,65 +1182,25 @@ fn generate_roster(seed: u64, shifts: usize, nurses: usize, plant: usize) -> Ins
         planted_tasks: Vec::new(),
         planted_resources: Vec::new(),
         minimal_certificate_size: None,
+        expected_raw_deficient: None,
     };
 
     if plant > 0 {
-        // Rare qualification: `plant` night shifts, holders with total capacity plant - 1.
-        let holder_count = ((plant - 1) / 2).max(1);
-        let mut holder_capacity = vec![(plant as u32 - 1) / holder_count as u32; holder_count];
-        let mut assigned: u32 = holder_capacity.iter().sum();
-        let mut cursor = 0;
-        while assigned < plant as u32 - 1 {
-            holder_capacity[cursor % holder_count] += 1;
-            assigned += 1;
-            cursor += 1;
-        }
-        let mut holder_ids = Vec::new();
-        for (index, &capacity) in holder_capacity.iter().enumerate() {
-            let id = format!("nurse_perfusionist_{index:02}");
-            resources.push(Resource {
-                id: id.clone(),
-                capacity,
-            });
-            holder_ids.push(id);
-        }
-        for index in 0..plant {
-            let id = format!("shift_perfusion_{index:02}");
-            tasks.push(Task {
-                id: id.clone(),
-                demand: 1,
-                distinct: false,
-            });
-            for holder in &holder_ids {
-                eligible.push((id.clone(), holder.clone()));
-            }
-            ground_truth.planted_tasks.push(id);
-        }
-        // Entangle: the rare-qualification holders also cover ordinary general shifts, so
-        // the raw alternating-reachable set is much larger than the planted block.
-        let ordinary: Vec<String> = tasks
-            .iter()
-            .take(shifts)
-            .filter(|_| true)
-            .map(|t| t.id.clone())
-            .collect();
-        for holder in &holder_ids {
-            for _ in 0..6 {
-                if ordinary.is_empty() {
-                    break;
-                }
-                let pick = ordinary[rng.below(ordinary.len())].clone();
-                eligible.push((pick, holder.clone()));
-            }
-        }
-        ground_truth.feasible = false;
-        ground_truth.planted_resources = holder_ids;
-        ground_truth.minimal_certificate_size = Some(plant);
+        plant_block(
+            &mut tasks,
+            &mut resources,
+            &mut eligible,
+            "shift_perfusion",
+            "nurse_perfusionist",
+            plant,
+            cascade,
+            &mut ground_truth,
+        );
     }
 
     Instance {
         schema: INSTANCE_SCHEMA.into(),
-        name: format!("roster-s{seed}-t{shifts}-r{nurses}-plant{plant}"),
+        name: format!("roster-s{seed}-t{shifts}-r{nurses}-plant{plant}-cascade{cascade}"),
         tasks,
         resources,
         eligible,
@@ -1151,7 +1218,13 @@ const ACCELERATORS: [(&str, u32); 3] = [("a100", 40), ("h100", 80), ("l4", 24)];
 /// `plant - 1`. Minimal certificates therefore have size `plant`, but unlike the roster
 /// case they are *not* unique, because any `plant` of the pool works when the pool is
 /// larger.
-fn generate_placement(seed: u64, jobs: usize, hosts: usize, plant: usize) -> Instance {
+fn generate_placement(
+    seed: u64,
+    jobs: usize,
+    hosts: usize,
+    plant: usize,
+    cascade: usize,
+) -> Instance {
     let mut rng = Rng(seed);
     let mut tasks = Vec::new();
     let mut resources = Vec::new();
@@ -1209,59 +1282,25 @@ fn generate_placement(seed: u64, jobs: usize, hosts: usize, plant: usize) -> Ins
         planted_tasks: Vec::new(),
         planted_resources: Vec::new(),
         minimal_certificate_size: None,
+        expected_raw_deficient: None,
     };
 
     if plant > 0 {
-        // A scarce class: "h200" hosts with 141 GB, total capacity plant - 1.
-        let host_count = ((plant - 1) / 3).max(1);
-        let mut capacities = vec![(plant as u32 - 1) / host_count as u32; host_count];
-        let mut assigned: u32 = capacities.iter().sum();
-        let mut cursor = 0;
-        while assigned < plant as u32 - 1 {
-            capacities[cursor % host_count] += 1;
-            assigned += 1;
-            cursor += 1;
-        }
-        let mut scarce_ids = Vec::new();
-        for (index, &capacity) in capacities.iter().enumerate() {
-            let id = format!("host_h200_{index:02}");
-            resources.push(Resource {
-                id: id.clone(),
-                capacity,
-            });
-            scarce_ids.push(id);
-        }
-        for index in 0..plant {
-            let id = format!("job_h200_{index:03}");
-            tasks.push(Task {
-                id: id.clone(),
-                demand: 1,
-                distinct: false,
-            });
-            for host in &scarce_ids {
-                eligible.push((id.clone(), host.clone()));
-            }
-            ground_truth.planted_tasks.push(id);
-        }
-        // Entangle with the feasible core the same way as the roster generator.
-        let ordinary: Vec<String> = tasks.iter().take(jobs).map(|t| t.id.clone()).collect();
-        for host in &scarce_ids {
-            for _ in 0..8 {
-                if ordinary.is_empty() {
-                    break;
-                }
-                let pick = ordinary[rng.below(ordinary.len())].clone();
-                eligible.push((pick, host.clone()));
-            }
-        }
-        ground_truth.feasible = false;
-        ground_truth.planted_resources = scarce_ids;
-        ground_truth.minimal_certificate_size = Some(plant);
+        plant_block(
+            &mut tasks,
+            &mut resources,
+            &mut eligible,
+            "job_h200",
+            "host_h200",
+            plant,
+            cascade,
+            &mut ground_truth,
+        );
     }
 
     Instance {
         schema: INSTANCE_SCHEMA.into(),
-        name: format!("placement-s{seed}-t{jobs}-r{hosts}-plant{plant}"),
+        name: format!("placement-s{seed}-t{jobs}-r{hosts}-plant{plant}-cascade{cascade}"),
         tasks,
         resources,
         eligible,
@@ -1324,8 +1363,14 @@ fn generate_coupled(seed: u64, rows: usize, columns: usize) -> Instance {
 
 /// The most common real roster shape that this tool must refuse: every shift needs two
 /// *distinct* nurses. Hall's condition is necessary but not sufficient here.
-fn generate_distinct_roster(seed: u64, shifts: usize, nurses: usize, plant: usize) -> Instance {
-    let mut instance = generate_roster(seed, shifts, nurses, plant);
+fn generate_distinct_roster(
+    seed: u64,
+    shifts: usize,
+    nurses: usize,
+    plant: usize,
+    cascade: usize,
+) -> Instance {
+    let mut instance = generate_roster(seed, shifts, nurses, plant, cascade);
     instance.name = format!("distinct-{}", instance.name);
     for task in &mut instance.tasks {
         task.demand = 2;
@@ -1379,6 +1424,10 @@ struct GenerateArgs {
     /// Size of the planted violation; 0 leaves the instance feasible.
     #[arg(long, default_value_t = 0)]
     plant: usize,
+    /// Length of the forced alternating chain attached to the planted block. It inflates
+    /// the maximum-deficiency set without joining the minimal certificate.
+    #[arg(long, default_value_t = 0)]
+    cascade: usize,
     #[arg(long)]
     out: PathBuf,
 }
@@ -1440,11 +1489,19 @@ fn write_json<T: Serialize>(path: &Path, value: &T) -> anyhow::Result<()> {
 
 fn build(domain: Domain, args: &GenerateArgs) -> Instance {
     match domain {
-        Domain::Roster => generate_roster(args.seed, args.tasks, args.resources, args.plant),
-        Domain::Placement => generate_placement(args.seed, args.tasks, args.resources, args.plant),
-        Domain::DistinctRoster => {
-            generate_distinct_roster(args.seed, args.tasks, args.resources, args.plant)
+        Domain::Roster => {
+            generate_roster(args.seed, args.tasks, args.resources, args.plant, args.cascade)
         }
+        Domain::Placement => {
+            generate_placement(args.seed, args.tasks, args.resources, args.plant, args.cascade)
+        }
+        Domain::DistinctRoster => generate_distinct_roster(
+            args.seed,
+            args.tasks,
+            args.resources,
+            args.plant,
+            args.cascade,
+        ),
         Domain::Coupled => generate_coupled(args.seed, args.tasks, args.resources),
         Domain::ExactLoad => generate_exact_load(args.seed, args.tasks, args.resources),
     }
@@ -1512,13 +1569,16 @@ fn main() -> anyhow::Result<()> {
                     (Domain::Roster, 150usize, 45usize),
                     (Domain::Placement, 200, 50),
                 ] {
-                    for plant in [0usize, 4, 9, 17] {
+                    for (plant, cascade) in
+                        [(0usize, 0usize), (4, 0), (4, 40), (9, 40), (17, 120)]
+                    {
                         let args = GenerateArgs {
                             domain,
                             seed,
                             tasks,
                             resources,
                             plant,
+                            cascade,
                             out: PathBuf::new(),
                         };
                         let instance = build(domain, &args);
@@ -1539,6 +1599,7 @@ fn main() -> anyhow::Result<()> {
                     tasks,
                     resources,
                     plant: 0,
+                    cascade: 0,
                     out: PathBuf::new(),
                 };
                 let instance = build(domain, &args);
@@ -1627,11 +1688,52 @@ fn selftest() -> anyhow::Result<()> {
     }
     println!("selftest ok: {feasible_seen} feasible and {infeasible_seen} infeasible random instances, each cross-checked against exhaustive defect-Hall and independently verified");
 
+    // Generated instances must match their own planted ground truth exactly.
+    for (plant, cascade) in [(4usize, 0usize), (4, 40), (9, 40), (17, 120)] {
+        for seed in 1..=3u64 {
+            for instance in [
+                generate_roster(seed, 150, 45, plant, cascade),
+                generate_placement(seed, 200, 50, plant, cascade),
+            ] {
+                let truth = instance.ground_truth.clone().expect("planted ground truth");
+                let raw_bytes = serde_json::to_vec(&instance)?;
+                let report = solve(&instance, &raw_bytes)?;
+                let Verdict::Infeasible { certificate } = &report.verdict else {
+                    bail!("{} should be infeasible", instance.name);
+                };
+                anyhow::ensure!(
+                    certificate.tasks.len() == truth.minimal_certificate_size.unwrap(),
+                    "{}: certificate has {} tasks, planted minimum is {:?}",
+                    instance.name,
+                    certificate.tasks.len(),
+                    truth.minimal_certificate_size
+                );
+                anyhow::ensure!(
+                    certificate.tasks == truth.planted_tasks,
+                    "{}: certificate is not the planted task set",
+                    instance.name
+                );
+                anyhow::ensure!(
+                    certificate.raw_deficient_tasks == truth.expected_raw_deficient.unwrap(),
+                    "{}: maximum-deficiency set has {} tasks, expected {:?}",
+                    instance.name,
+                    certificate.raw_deficient_tasks,
+                    truth.expected_raw_deficient
+                );
+                verify(&instance, &raw_bytes, &report)?;
+            }
+        }
+    }
+    println!(
+        "selftest ok: every planted instance returns exactly its planted minimal certificate, \
+         with the expected pre-minimization maximum-deficiency set"
+    );
+
     // The classifier must decline on the non-matching shapes.
     for instance in [
         generate_coupled(3, 8, 8),
         generate_exact_load(3, 8, 8),
-        generate_distinct_roster(3, 40, 15, 0),
+        generate_distinct_roster(3, 40, 15, 0, 0),
     ] {
         let raw = serde_json::to_vec(&instance)?;
         let report = solve(&instance, &raw)?;
