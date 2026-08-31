@@ -56,6 +56,9 @@ pub mod transfer;
 pub mod witness;
 mod zdd;
 
+#[cfg(test)]
+mod test_alloc;
+
 #[cfg(feature = "control-plane")]
 pub use alignment::search_alignment_attachment_controlled;
 pub use alignment::{

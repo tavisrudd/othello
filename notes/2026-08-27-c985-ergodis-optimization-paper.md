@@ -38,9 +38,13 @@ as each coherent tranche lands.
    The first executable private registry now covers eleven principal public
    kernels across allocation, layout, correctness, single-/parallel counters,
    and contention; it verifies every referenced source/evidence path and fails
-   closed on 22 honestly open gates rather than omitting weak rows. Current
-   next slice is expanding that census and closing its highest-leverage open
-   allocation/layout rows.
+   closed rather than omitting weak rows. Its shared test-only allocator now
+   measures real worker-local regions without entering production builds. The
+   compact/wide CSS Rayon partitions and iterative QC trapping/stopping DFS
+   both report exactly zero allocation, reallocation, and deallocation; QC has
+   no frame record to pad because its state is scalar plus presized contiguous
+   slices. Current next slice is expanding that census and closing its
+   highest-leverage open allocation/layout rows.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

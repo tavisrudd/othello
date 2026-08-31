@@ -17,7 +17,11 @@ DFS with a presized iterative depth machine. Selection and frame capacity are
 fixed before enumeration; accepted witnesses no longer clone a vector in the
 terminal loop. Small QC codes are differentially checked against exhaustive
 subset enumeration, including stopping semantics and the exact zero-budget
-boundary.
+boundary. A crate-wide test-only counting allocator now brackets the actual
+iterative region through a thread-local guard; a nontrivial QC search records
+zero allocation, reallocation, and deallocation. This instrumentation is not
+compiled into production. The same harness retains the existing cross-thread
+zero-event proof for the compact and wide CSS Rayon partition loops.
 
 Retained-binary A/B on `application:qc:rust:13:6:1`, 1,000 solves per round,
 six interleaved order-reversed pairs, preserved the exact 106,260 candidates

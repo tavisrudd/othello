@@ -1323,6 +1323,8 @@ impl QcLdpcCode {
         examined: &mut u64,
         budget: u64,
     ) -> Result<Option<usize>, ApplicationError> {
+        #[cfg(test)]
+        let _allocation_guard = crate::test_alloc::HotLoopAllocationGuard::enter();
         debug_assert_eq!(selected.as_slice(), &[anchor]);
         debug_assert!(next_by_depth.len() > target_size);
         next_by_depth[1] = 0;
@@ -2084,6 +2086,32 @@ mod tests {
             code.search_trapping_set(1, 1, 0),
             Err(ApplicationError::Budget { budget: 0 })
         );
+    }
+
+    #[test]
+    fn iterative_qc_search_loop_allocates_nothing() {
+        let code = QcLdpcCode::new(
+            2,
+            5,
+            3,
+            vec![
+                Some(0),
+                Some(1),
+                Some(2),
+                None,
+                Some(0),
+                Some(2),
+                Some(0),
+                None,
+                Some(1),
+                Some(2),
+            ],
+        )
+        .unwrap();
+        let (result, events) =
+            crate::test_alloc::measure_allocations(|| code.search_trapping_set(4, 2, 1_000_000));
+        result.unwrap();
+        assert_eq!(events, Default::default());
     }
 
     #[test]
