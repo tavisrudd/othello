@@ -62,8 +62,8 @@
     {
       "id": "orbit-product-search",
       "source": "papers/complete-repair-ports/ergodis/src/orbit.rs",
-      "allocation": {"status": "open", "reason": "Presized memo pointer tests do not count every allocator event."},
-      "layout": {"status": "open", "reason": "The complete iterative frame and memo layout set is not registered."},
+      "allocation": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/orbit.rs"]},
+      "layout": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/orbit.rs"]},
       "correctness": {"status": "pass", "evidence": ["papers/complete-repair-ports/ergodis/src/orbit.rs"]},
       "single_thread_counters": {"status": "pass", "evidence": ["notes/2026-08-30-c1017-ergodis-core-performance-contract-remediation.md"]},
       "parallel_counters": {"status": "na", "reason": "The registered product kernel is single-threaded."},

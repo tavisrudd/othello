@@ -43,8 +43,11 @@ as each coherent tranche lands.
    compact/wide CSS Rayon partitions and iterative QC trapping/stopping DFS
    both report exactly zero allocation, reallocation, and deallocation; QC has
    no frame record to pad because its state is scalar plus presized contiguous
-   slices. Current next slice is expanding that census and closing its
-   highest-leverage open allocation/layout rows.
+   slices. The iterative orbit-product loop now passes the same real-loop gate
+   on a fully exhausted correlated-residue instance, including dead-memo
+   insertion; its option, family, residue, dead-memo, and traversal records all
+   have exact compile-time layout assertions. Current next slice is expanding
+   that census and closing its highest-leverage open allocation/layout rows.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

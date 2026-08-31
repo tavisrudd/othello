@@ -50,6 +50,14 @@ and 9,116 to 8,156 KiB peak RSS. The explicit traversal executes 2.8% more
 instructions but removes enough call-stack and unpredictable-return cost to
 win overall.
 
+The test-only allocator boundary now encloses `Search::run` itself. A fully
+exhausted correlated-residue instance exercises choice push/pop, iterative
+frames, and dead-memo insertion with exactly zero allocation, reallocation,
+or deallocation. The complete records read or written in that loop
+(`PackedOptionRecord`, `FamilyRecord`, `ResidueRecord`, `DeadRecord`, and
+`SearchFrame`) have explicit C representation plus exact compile-time size and
+alignment assertions.
+
 The meet-in-the-middle right enumeration and left lookup are now iterative
 odometers as well. The public reserved backend computes the exact right-product
 bound before enumeration, reserves every table/choice/key buffer once, and

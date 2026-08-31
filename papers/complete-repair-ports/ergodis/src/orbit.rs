@@ -4,6 +4,8 @@ use rustc_hash::{FxHashMap, FxHasher};
 use thiserror::Error;
 
 use crate::packed_ternary::{TernaryError, TritBlock, TritVec};
+#[cfg(test)]
+use crate::test_alloc::{measure_allocations, HotLoopAllocationGuard};
 
 const NONE: u32 = u32::MAX;
 
@@ -751,6 +753,8 @@ impl Search<'_> {
     }
 
     fn run<const CORRELATED: bool>(&mut self) -> Result<bool, OrbitError> {
+        #[cfg(test)]
+        let _allocation_guard = HotLoopAllocationGuard::enter();
         let mut frame = SearchFrame {
             family: 0,
             next_option: NO_OPTION,
@@ -1269,6 +1273,33 @@ mod tests {
         assert_eq!(answer.states_examined, FAMILIES as u64 + 1);
         assert_eq!(answer.choices.as_ref().unwrap().len(), FAMILIES);
         assert!(!answer.memo_saturated);
+    }
+
+    #[test]
+    fn iterative_product_loop_allocates_nothing() {
+        let families = (0..8)
+            .map(|family| {
+                vec![
+                    OrbitOption {
+                        label: 2 * family,
+                        residue: vec![0, 0].into_boxed_slice(),
+                        totals: Box::new([]),
+                    },
+                    OrbitOption {
+                        label: 2 * family + 1,
+                        residue: vec![1, 1].into_boxed_slice(),
+                        totals: Box::new([]),
+                    },
+                ]
+            })
+            .collect::<Vec<_>>();
+        let (result, events) =
+            measure_allocations(|| ternary_orbit_syndrome_search(&families, &[0, 1], &[]));
+        let answer = result.unwrap();
+        assert!(!answer.feasible());
+        assert!(answer.states_examined > families.len() as u64);
+        assert!(answer.memo_states > 0);
+        assert_eq!(events, Default::default());
     }
 
     #[test]
