@@ -742,7 +742,13 @@ imported theorem above the threshold.  The corresponding census claim —
 enumeration and about 24 GB of memory at `q = 41` alone; the residual there is
 now only the regular class.
 
-<!-- FIXSWEEP MORE -->
+**Redundancies nine, ten, eleven and twelve.**  The same sweep at the higher
+redundancies is summarised in the domain table of §6.  The pattern it shows is
+the one Conjecture PRS-1 asserts: exceptional points on the fixed loci at
+`q ∈ {9,11,13}` for `r = 9`, `{11,13}` for `r = 10`, `{11,13}` for `r = 11` and
+`{13}` for `r = 12` — never above 13 — with the `r = 11` and `r = 12` entries
+sitting at or near the degenerate boundary (`k = 3` and `k = 2`).
+
 
 **What this replaces, and what it does not.**  It replaces the census as the
 tool for the entire non-regular class, at every field, with a proof rather than
@@ -1276,7 +1282,7 @@ python3 notes/2026-08-31-c1018-prs-certificate.py check $C \
 **Partial.**
 
 * The redundancy-eight threshold band as a *census*: the regular class is
-  decided up to <!-- R8CENSUSTOP -->, and the fields above that rest on the
+  decided up to `q = 29`, and the fields above that rest on the
   fixed-locus sweep plus C513's theorem, which together leave only the regular
   class open there.
 * Redundancy ten: two censuses (`q = 11, 13`) and a fixed-locus sweep to the
