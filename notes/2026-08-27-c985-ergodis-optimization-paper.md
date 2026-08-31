@@ -38,8 +38,11 @@ as each coherent tranche lands.
    foundations now include table-backed runtime GF(p^h) arithmetic through
    order 256, static and runtime right-null-space APIs, allocation-free generic
    PG(d,q) rank/unrank, and bitmap-backed seeded generator closure that scans
-   only reachable points. Next: replace private campaign-local arithmetic with
-   these APIs and measure the orbit-closure wave. Keep tactical plane completion in
+   only reachable points. The private C1018 PRS driver now consumes the shared
+   field and projective index, deleting its duplicate irreducibility, table,
+   and PG indexing implementations; its q=8,r=3 census still returns the exact
+   9/63/1 weight histogram. Next: adapt and measure the orbit-closure wave.
+   Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
 4. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
    exact replay/parity, zero-allocation, bounded-memory, and deterministic

@@ -26,8 +26,9 @@ use std::fmt::Write as _;
 
 use anyhow::{bail, Context, Result};
 use clap::Parser;
-use ergodis::field::Prime;
+use ergodis::field::{Prime, SmallField};
 use ergodis::matrix::Matrix;
+use ergodis::projective::ProjectiveIndex;
 
 #[derive(Parser, Debug)]
 #[command(about = "Exact PRS deep-hole census via normal-rational-curve rank in PG(d,q)")]
@@ -68,73 +69,7 @@ struct Field {
     p: usize,
     h: usize,
     q: usize,
-    poly: Vec<usize>, // defining monic irreducible, low coefficients c_0..c_{h-1}
-    add: Vec<u8>,
-    mul: Vec<u8>,
-    inv: Vec<u8>,
-    neg: Vec<u8>,
-}
-
-fn poly_rem(a: &[usize], b: &[usize], p: usize) -> Vec<usize> {
-    // b monic
-    let mut a = a.to_vec();
-    let db = b.len() - 1;
-    while a.len() > db {
-        let da = a.len() - 1;
-        let c = a[da];
-        if c != 0 {
-            for i in 0..=db {
-                a[da - db + i] = (a[da - db + i] + p - (c * b[i]) % p) % p;
-            }
-        }
-        a.pop();
-    }
-    while a.len() > 1 && *a.last().unwrap() == 0 {
-        a.pop();
-    }
-    a
-}
-
-fn is_irreducible(f: &[usize], p: usize) -> bool {
-    let h = f.len() - 1;
-    for m in 1..=(h / 2) {
-        // enumerate monic polys of degree m
-        let count = p.pow(m as u32);
-        for code in 0..count {
-            let mut g = vec![0usize; m + 1];
-            g[m] = 1;
-            let mut c = code;
-            for item in g.iter_mut().take(m) {
-                *item = c % p;
-                c /= p;
-            }
-            let rem = poly_rem(f, &g, p);
-            if rem.len() == 1 && rem[0] == 0 {
-                return false;
-            }
-        }
-    }
-    true
-}
-
-fn find_irreducible(p: usize, h: usize) -> Vec<usize> {
-    if h == 1 {
-        return vec![0, 1];
-    }
-    let count = p.pow(h as u32);
-    for code in 0..count {
-        let mut f = vec![0usize; h + 1];
-        f[h] = 1;
-        let mut c = code;
-        for item in f.iter_mut().take(h) {
-            *item = c % p;
-            c /= p;
-        }
-        if is_irreducible(&f, p) {
-            return f;
-        }
-    }
-    unreachable!("no irreducible polynomial found")
+    inner: SmallField,
 }
 
 impl Field {
@@ -143,106 +78,25 @@ impl Field {
         if q > 251 {
             bail!("q must be at most 251 (u8 element encoding)");
         }
-        let f = find_irreducible(p, h);
-        let digits = |mut x: usize| -> Vec<usize> {
-            let mut v = vec![0usize; h];
-            for item in v.iter_mut() {
-                *item = x % p;
-                x /= p;
-            }
-            v
-        };
-        let pack = |v: &[usize]| -> usize {
-            let mut x = 0usize;
-            for i in (0..h).rev() {
-                x = x * p + v[i] % p;
-            }
-            x
-        };
-        let mut add = vec![0u8; q * q];
-        for a in 0..q {
-            let da = digits(a);
-            for b in 0..q {
-                let db = digits(b);
-                let s: Vec<usize> = (0..h).map(|i| (da[i] + db[i]) % p).collect();
-                add[a * q + b] = pack(&s) as u8;
-            }
-        }
-        let mut mul = vec![0u8; q * q];
-        for a in 0..q {
-            let da = digits(a);
-            for b in 0..q {
-                let db = digits(b);
-                let mut prod = vec![0usize; 2 * h];
-                for i in 0..h {
-                    if da[i] == 0 {
-                        continue;
-                    }
-                    for j in 0..h {
-                        prod[i + j] = (prod[i + j] + da[i] * db[j]) % p;
-                    }
-                }
-                while prod.len() > 1 && *prod.last().unwrap() == 0 {
-                    prod.pop();
-                }
-                let rem = poly_rem(&prod, &f, p);
-                let mut v = vec![0usize; h];
-                for (i, item) in rem.iter().enumerate() {
-                    if i < h {
-                        v[i] = *item;
-                    }
-                }
-                mul[a * q + b] = pack(&v) as u8;
-            }
-        }
-        let mut inv = vec![0u8; q];
-        for a in 1..q {
-            for b in 1..q {
-                if mul[a * q + b] == 1 {
-                    inv[a] = b as u8;
-                    break;
-                }
-            }
-            if inv[a] == 0 {
-                bail!("field construction failed: {a} has no inverse in GF({q})");
-            }
-        }
-        let mut neg = vec![0u8; q];
-        for a in 0..q {
-            for b in 0..q {
-                if add[a * q + b] == 0 {
-                    neg[a] = b as u8;
-                    break;
-                }
-            }
-        }
-        Ok(Self {
-            p,
-            h,
-            q,
-            poly: f,
-            add,
-            mul,
-            inv,
-            neg,
-        })
+        let inner = SmallField::new(p as u8, h as u8)?;
+        Ok(Self { p, h, q, inner })
     }
 
     #[inline(always)]
     fn a(&self, x: u8, y: u8) -> u8 {
-        self.add[x as usize * self.q + y as usize]
+        self.inner.add(x, y)
     }
     #[inline(always)]
     fn m(&self, x: u8, y: u8) -> u8 {
-        self.mul[x as usize * self.q + y as usize]
+        self.inner.mul(x, y)
     }
     #[inline(always)]
     fn n(&self, x: u8) -> u8 {
-        self.neg[x as usize]
+        self.inner.sub(0, x)
     }
     #[inline(always)]
     fn i(&self, x: u8) -> u8 {
-        self.inv[x as usize]
+        self.inner.inverse(x).expect("nonzero field element")
     }
     fn pow(&self, x: u8, e: usize) -> u8 {
         let mut acc = 1u8;
@@ -296,54 +150,6 @@ fn factor_prime_power(q: usize) -> Option<(usize, usize)> {
         Some((p, h))
     } else {
         None
-    }
-}
-
-// ---------------------------------------------------------------------------
-// PG(d,q) indexing
-// ---------------------------------------------------------------------------
-
-struct Proj {
-    q: usize,
-    d: usize,
-    base: Vec<usize>, // base[l] = offset of the block with leading 1 at coordinate l
-    n: usize,
-}
-
-impl Proj {
-    fn new(q: usize, d: usize) -> Self {
-        let mut base = vec![0usize; d + 2];
-        for l in 0..=d {
-            base[l + 1] = base[l] + q.pow((d - l) as u32);
-        }
-        let n = base[d + 1];
-        Self { q, d, base, n }
-    }
-
-    fn encode(&self, v: &[u8], f: &Field) -> usize {
-        let l = v.iter().position(|&x| x != 0).expect("nonzero vector");
-        let s = f.i(v[l]);
-        let mut idx = self.base[l];
-        for i in (l + 1)..=self.d {
-            idx += f.m(v[i], s) as usize * self.q.pow((self.d - i) as u32);
-        }
-        idx
-    }
-
-    fn decode(&self, mut idx: usize, out: &mut [u8]) {
-        let mut l = 0usize;
-        while idx >= self.base[l + 1] {
-            l += 1;
-        }
-        idx -= self.base[l];
-        for item in out.iter_mut().take(l) {
-            *item = 0;
-        }
-        out[l] = 1;
-        for i in ((l + 1)..=self.d).rev() {
-            out[i] = (idx % self.q) as u8;
-            idx /= self.q;
-        }
     }
 }
 
@@ -439,7 +245,6 @@ fn find_split_annihilator(
     s: &[u8],
     j: usize,
 ) -> Option<(Vec<usize>, Vec<u8>)> {
-    let q = f.q;
     for use_inf in [false, true] {
         if use_inf && j == 0 {
             continue;
@@ -816,7 +621,10 @@ fn main() -> Result<()> {
         bail!("need d <= q for the normal rational curve to be an arc");
     }
     let f = Field::new(q)?;
-    let proj = Proj::new(q, d);
+    let proj = ProjectiveIndex::new(
+        &f.inner,
+        u8::try_from(d).context("projective dimension exceeds u8")?,
+    )?;
     let k = q + 1 - r;
     if k < 1 {
         bail!("dimension k = q+1-r must be positive");
@@ -834,7 +642,7 @@ fn main() -> Result<()> {
     gens.push(sym_power(&f, d, 0, 1, 1, 0)); // a -> 1/a
     let frobenius = args.semilinear && f.h > 1;
 
-    let n = proj.n;
+    let n = usize::try_from(proj.point_count()).context("projective space exceeds usize")?;
     let mut weight = vec![0u8; n]; // 0 = unvisited
     let mut records: Vec<OrbitRecord> = Vec::new();
     let mut hist = vec![0usize; d + 2];
@@ -851,7 +659,7 @@ fn main() -> Result<()> {
         if weight[start] != 0 {
             continue;
         }
-        proj.decode(start, &mut buf);
+        proj.point(start as u64, &mut buf)?;
         let info = analyse(&f, d, &buf);
         if args.ergodis_crosscheck && f.h == 1 {
             for j in 1..=d {
@@ -877,10 +685,11 @@ fn main() -> Result<()> {
         weight[start] = wv;
         orbit.push(start);
         while let Some(cur) = queue.pop_front() {
-            proj.decode(cur, &mut buf);
+            proj.point(cur as u64, &mut buf)?;
             for gen in &gens {
                 apply(&f, gen, &buf, &mut img);
-                let idx = proj.encode(&img, &f);
+                let idx =
+                    usize::try_from(proj.index(&img)?).context("projective index exceeds usize")?;
                 if weight[idx] == 0 {
                     weight[idx] = wv;
                     orbit.push(idx);
@@ -891,7 +700,8 @@ fn main() -> Result<()> {
                 for i in 0..=d {
                     img[i] = f.pow(buf[i], f.p);
                 }
-                let idx = proj.encode(&img, &f);
+                let idx =
+                    usize::try_from(proj.index(&img)?).context("projective index exceeds usize")?;
                 if weight[idx] == 0 {
                     weight[idx] = wv;
                     orbit.push(idx);
@@ -900,7 +710,7 @@ fn main() -> Result<()> {
             }
         }
         hist[info.w] += orbit.len();
-        proj.decode(start, &mut buf);
+        proj.point(start as u64, &mut buf)?;
         records.push(OrbitRecord {
             weight: info.w,
             size: orbit.len(),
@@ -928,12 +738,16 @@ fn main() -> Result<()> {
         q,
         f.p,
         f.h,
-        f.poly,
+        f.inner.modulus(),
         q + 1,
         k,
         r,
         d,
-        if frobenius { "PGammaL(2,q)" } else { "PGL(2,q)" },
+        if frobenius {
+            "PGammaL(2,q)"
+        } else {
+            "PGL(2,q)"
+        },
         n,
         rho,
         if rho == r { "r" } else { "r-1" },
