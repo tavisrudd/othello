@@ -6,7 +6,7 @@
 transversal one-factorization of (K_{10}) is a pencil, over every field.
 For the regular matching design this forces every canonical
 one-factorization line, after which Nagy's theorem gives the exact field
-boundary. The nine-point extension and broader priority audit remain open;
+boundary. The nine-point extension and broader literature-priority audit remain open;
 the geometric closest-seed and graph-shadow bounded sweeps are closed. No
 manuscript, summary,
 mirror, formal, release, or Ergodis source edits are authorized.
@@ -18,7 +18,7 @@ Ramanjaneyulu--Jampala--Prasad; Allsop; and the arXiv version of Erskine--
 Griggs). Tohaneanu--Xie, Dinitz--Garnick--McKay, Gelling, Ziegler,
 Kiss--Korchmaros--Romaniello--Smaldore, and the later published Erskine--Griggs
 passage were read at the explicitly recorded partial depths below. The
-priority verdict remains bounded and provisional.
+literature-priority verdict remains bounded and provisional.
 
 ## Starting point
 
@@ -61,7 +61,7 @@ model; the count and intersection parameters are exact internal computation.
 
 Our realization hypothesis does not assume those nine-point sets collinear;
 it assumes only that each perfect matching is realized by concurrent secants.
-Thus the first priority question is now the **Ree bridge**:
+Thus the first literature-priority question is now the **Ree bridge**:
 
 > Does every rank-three realization of the regular `MATCH(10,5,1)` design, or
 > either of its nine-point deletions, force the nine centers in each canonical
@@ -959,7 +959,7 @@ with representative tables checked against page images; cache key
 `64614781270098af2f1086df5e5684f9a2e98bb3661be35bef1e90243cee93a4`.
 The computation here does not import either classification.
 
-The graph-theoretic audit changes the priority statement for the exceptional
+The graph-theoretic audit changes the literature-priority statement for the exceptional
 class but not for the new proof mechanism. Dinitz--Dukes--Stinson,
 _Sequentially Perfect and Uniform One-Factorizations of the Complete Graph_
 (Electron. J. Combin. 12 (2005), R1, DOI `10.37236/1898`), explicitly says in
@@ -1080,13 +1080,13 @@ Accordingly, the present bounded verdict is:
   code (2f), the no-leaves theorem for the Hamilton-pair graph, or the
   zero-or-three intersection theorem for two Hamilton partners.
 
-The last bullet is a provisional priority claim, suitable for planning and a
+The last bullet is a provisional literature-priority claim, suitable for planning and a
 carefully attributed literature paragraph but not yet for unqualified
 manuscript language. Semantic Scholar, OpenAlex, Crossref, and ordinary web
 search were covered. zbMATH's API returned an HTTP 502 proxy page;
 MathSciNet and Google Scholar were not covered.
 
-Nagy (2021) remains the exact priority ceiling after the pencil has been
+Nagy (2021) remains the exact literature-priority ceiling after the pencil has been
 produced: his theorem assumes the Ree-unital line structure rather than
 deriving it from the 63 matching concurrences. Read depth: `full text` for
 arXiv v3, all sections, cache key `arxiv:2007.10464`, SHA-256
@@ -1102,7 +1102,7 @@ Searches for `one-factorization star configuration projective plane`,
 but no statement of (1), (2), or the automatic-pencil consequence. The 2018
 JCTA full-text threat and its three-graph forward-citation set are now closed.
 This remains a bounded provisional novelty result rather than a categorical
-global priority verdict: MathSciNet and Google Scholar were not covered, and
+global literature-priority verdict: MathSciNet and Google Scholar were not covered, and
 the topical search was bounded rather than an exhaustive MSC sweep.
 Manuscript language such as "new" or "to our knowledge" is not yet authorized.
 
@@ -1143,7 +1143,7 @@ Manuscript language such as "new" or "to our knowledge" is not yet authorized.
   396-class certificate is an independent cross-check.
 - **Priority-judo — provisionally landed:** the universal (K_{10}) pencil
   theorem answers the order-ten instance of the geometric-transversal problem
-  at a level above the Ree field boundary. Final priority status awaits the
+  at a level above the Ree field boundary. Final literature-priority status awaits the
   broader topical closure; the exact Korchmaros--Pace--Sonnino seed, its
   forward citations, and the later 2024 linear-factorization theorem have now
   been checked convention by convention.
@@ -1279,7 +1279,7 @@ not needed for the order-ten theorem.
   forbidden Hamilton degrees uniformly. This could upgrade the order-ten
   invariant into an infinite-family theorem; no such derivation is yet in
   hand.
-- **Closest-seed priority — settled; global priority remains bounded.** The
+- **Closest-seed literature priority — settled; global literature priority remains bounded.** The
   Korchmaros--Pace--Sonnino full text and its largest three-graph citing set
   are cleared, including the 2024 characterization paper. MathSciNet and
   Google Scholar remain uncovered, and no exhaustive MSC sweep has been run.
@@ -1314,12 +1314,12 @@ not needed for the order-ten theorem.
 ## Publication decision after proof
 
 The universal (K_{10}) pencil theorem clears the threshold for a short
-standalone representation paper if the priority audit stays clean. Its spine
+standalone representation paper if the literature-priority audit stays clean. Its spine
 would be interpolation, the general odd-half Hamilton-pair theorem, the unique
 zero-Hamilton (K_{10}) residue, and the Hesse obstruction; Ree rigidity would
 be the marquee application.
 It also strengthens the arcs equality paper by replacing the regular
 characteristic-two coordinate classification with automatic Ree completion
 plus Nagy's theorem. The best integration decision should follow the
-nine-point completion attempt and priority audit, but the theorem no longer
+nine-point completion attempt and literature-priority audit, but the theorem no longer
 needs an infinite-family extension to justify standalone treatment.
