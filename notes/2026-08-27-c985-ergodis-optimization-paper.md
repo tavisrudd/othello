@@ -57,8 +57,8 @@ as each coherent tranche lands.
    layout contracts now also register character-sum census, dense/sparse
    successive selection, the campaign plan VM, and verified semantic-symmetry
    anchor evaluation. Current next slice is closing the remaining substantive
-   sparse-scheduler, ordered-front, and ZDD allocation/growth failures rather
-   than mistaking an incomplete registry for compliance.
+   ordered-front and ZDD allocation/growth failures rather than mistaking an
+   incomplete registry for compliance.
    Sparse scheduling has begun its substantive repair: because a layer's new
    witness nodes cannot yet have descendants, the solver now compacts exactly
    the nodes referenced by the Pareto-retained frontier before publishing the
@@ -67,8 +67,20 @@ as each coherent tranche lands.
    effectively unchanged RSS. Cycles were noisy on the shared host and no
    cycle-speedup claim is made. A side-predecessor representation that cut
    instructions further but raised RSS about 22% was measured and rejected.
-   Next: move layer storage into a reusable two-front workspace so allocation
-   is cold/planned rather than performed during live-front construction.
+   The sparse scheduler now owns a reusable two-front workspace and an
+   epoch-stamped eight-byte bucket directory. Its additive load fingerprint
+   replaces a full hash per transition with one addition while retaining exact
+   full-vector collision checks. Warm sequential and Rayon solve layers record
+   zero allocation, reallocation, and deallocation under a measurement-ID
+   allocator gate that is robust to concurrent tests. Seven paired rounds on
+   the 688,212-state fixture improve cycles 1.431x (`t=10.30`), instructions
+   1.051x, wall time 1.425x (`t=9.08`), and RSS 1.242x; three paired rounds on
+   the 4,144,127-state fixture improve cycles 1.164x (`t=6.93`), instructions
+   1.025x, wall time 1.171x (`t=7.52`), and RSS 1.350x, with identical exact
+   work, checksum, and witness. Sparse Pareto parallelism is result-stable
+   through 12 threads but time-neutral because serial expansion dominates, so
+   no parallel speedup is claimed. Next: frozen ordered-front storage, then
+   iterative pre-sized ZDD operations.
 3. **In progress — C1018 campaign-friction tranche.** Land deterministic CSS
    prefix shards first so multi-hour radii survive session boundaries and can
    be distributed without changing the proof obligation. The public API and

@@ -2186,6 +2186,8 @@ where
                 )
             })
             .collect::<Vec<_>>();
+        #[cfg(test)]
+        let allocation_measurement = crate::test_alloc::current_measurement();
         let mut search = || {
             partitions
                 .par_iter()
@@ -2193,7 +2195,8 @@ where
                 .zip(partials.par_iter_mut())
                 .for_each(|((partition, workspace), result)| {
                     #[cfg(test)]
-                    let _allocation_guard = HotLoopAllocationGuard::enter();
+                    let _allocation_guard =
+                        HotLoopAllocationGuard::enter_for(allocation_measurement);
                     if worker_pulse_interval == 0 {
                         *result = self.search_partition_unpulsed(
                             partition,
@@ -4166,6 +4169,8 @@ impl CompiledCssDistance {
                 )
             })
             .collect::<Vec<_>>();
+        #[cfg(test)]
+        let allocation_measurement = crate::test_alloc::current_measurement();
         let mut search = || {
             partitions
                 .par_iter()
@@ -4173,7 +4178,8 @@ impl CompiledCssDistance {
                 .zip(partials.par_iter_mut())
                 .for_each(|((partition, workspace), result)| {
                     #[cfg(test)]
-                    let _allocation_guard = HotLoopAllocationGuard::enter();
+                    let _allocation_guard =
+                        HotLoopAllocationGuard::enter_for(allocation_measurement);
                     if worker_pulse_interval == 0 {
                         *result = self.search_root_branch_partition::<false>(
                             partition,
@@ -5032,11 +5038,17 @@ mod tests {
             .unwrap();
 
         let ((compact_result, wide_result), events) = measure_allocations(|| {
+            let measurement = crate::test_alloc::current_measurement();
             let compact_result = pool
-                .install(|| compact.search_bounded_parallel_pulsed(&anchors, 4, 0))
+                .install(|| {
+                    measurement.scope(|| compact.search_bounded_parallel_pulsed(&anchors, 4, 0))
+                })
                 .unwrap();
             let wide_result = pool
-                .install(|| wide.search_bounded_syndrome_parallel_pulsed(&anchors, 4, 0))
+                .install(|| {
+                    measurement
+                        .scope(|| wide.search_bounded_syndrome_parallel_pulsed(&anchors, 4, 0))
+                })
                 .unwrap();
             (compact_result, wide_result)
         });

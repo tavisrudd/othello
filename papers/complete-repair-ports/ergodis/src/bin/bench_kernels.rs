@@ -1101,11 +1101,35 @@ fn main() {
     {
         let problem = scheduler_problem_with(resources, capacity, demands, options, seed);
         let planner_dense = problem.recommended_backend() == WeightedSchedulerBackend::DenseLattice;
+        let mut workspace = WeightedRepairWorkspace::new();
+        #[cfg(feature = "parallel")]
+        let parallel_pool = backend.strip_prefix("parallel-workspace-").map(|threads| {
+            rayon::ThreadPoolBuilder::new()
+                .num_threads(threads.parse::<usize>().expect("invalid thread count"))
+                .build()
+                .unwrap()
+        });
         for _ in 0..repetitions {
             let answer = match backend {
                 "flat" => problem.solve().unwrap(),
+                "flat-workspace" => problem.solve_sparse_with_workspace(&mut workspace).unwrap(),
                 "dense" => problem.solve_dense_lattice().unwrap(),
                 "adaptive" => problem.solve_adaptive().unwrap(),
+                backend if backend.starts_with("parallel-workspace-") => {
+                    #[cfg(feature = "parallel")]
+                    {
+                        parallel_pool
+                            .as_ref()
+                            .expect("parallel pool was compiled")
+                            .install(|| {
+                                problem
+                                    .solve_sparse_parallel_with_workspace(&mut workspace)
+                                    .unwrap()
+                            })
+                    }
+                    #[cfg(not(feature = "parallel"))]
+                    panic!("parallel benchmark requires the parallel feature")
+                }
                 _ => panic!("unknown scheduler grid backend"),
             };
             work += answer.transitions_examined;

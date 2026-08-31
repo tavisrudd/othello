@@ -280,6 +280,99 @@ pub struct WeightedRepairWorkspace {
     best_options: Vec<(u32, u32)>,
     repaired: Vec<bool>,
     total_loads: Vec<u64>,
+    sparse: SparseRepairStorage,
+}
+
+#[derive(Debug, Default)]
+struct SparseRepairStorage {
+    loads: Vec<u32>,
+    compact_loads: Vec<u32>,
+    witnesses: Vec<ScheduleWitnessNode>,
+    states: Vec<ScheduleState>,
+    updated: Vec<ScheduleState>,
+    scratch: Vec<u32>,
+    hash_weights: Vec<u64>,
+    option_hashes: Vec<u64>,
+    heads: EpochHeads,
+    keep: Vec<u8>,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default)]
+struct EpochHead {
+    head: u32,
+    epoch: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<EpochHead>() == 8);
+const _: () = assert!(std::mem::align_of::<EpochHead>() == 4);
+
+#[derive(Debug, Default)]
+struct EpochHeads {
+    buckets: Vec<EpochHead>,
+    mask: usize,
+    len: usize,
+    epoch: u32,
+}
+
+impl EpochHeads {
+    fn begin_epoch(&mut self) {
+        self.len = 0;
+        self.epoch = self.epoch.wrapping_add(1);
+        if self.epoch == 0 {
+            self.buckets.fill(EpochHead::default());
+            self.epoch = 1;
+        }
+    }
+
+    #[inline]
+    fn slot(&self, hash: u64) -> usize {
+        hash as usize & self.mask
+    }
+
+    #[inline]
+    fn get(&self, hash: u64) -> Option<u32> {
+        if self.buckets.is_empty() {
+            return None;
+        }
+        let bucket = self.buckets[self.slot(hash)];
+        (bucket.epoch == self.epoch).then_some(bucket.head)
+    }
+
+    #[inline]
+    fn insert(&mut self, hash: u64, head: u32) {
+        let epoch = self.epoch;
+        let slot = self.slot(hash);
+        self.buckets[slot] = EpochHead { head, epoch };
+        self.len += 1;
+    }
+
+    #[inline]
+    fn prepare_insert(
+        &mut self,
+        states: &mut [ScheduleState],
+        loads: &[u32],
+        hash_weights: &[u64],
+    ) {
+        if self.buckets.is_empty() || self.len == self.buckets.len() / 2 {
+            self.grow(states, loads, hash_weights);
+        }
+    }
+
+    #[cold]
+    fn grow(&mut self, states: &mut [ScheduleState], loads: &[u32], hash_weights: &[u64]) {
+        self.buckets = vec![EpochHead::default(); (self.mask + 1).saturating_mul(2).max(16)];
+        self.mask = self.buckets.len() - 1;
+        self.len = 0;
+        for (id, state) in states.iter_mut().enumerate() {
+            let hash = fingerprint_load(loads, state.load_start as usize, hash_weights);
+            state.aux = self.get(hash).unwrap_or(NONE);
+            self.insert(
+                hash,
+                u32::try_from(id).expect("directory state IDs were checked on insertion"),
+            );
+        }
+    }
 }
 
 impl WeightedRepairWorkspace {
@@ -301,6 +394,16 @@ impl WeightedRepairWorkspace {
         self.best_options.shrink_to_fit();
         self.repaired.shrink_to_fit();
         self.total_loads.shrink_to_fit();
+        self.sparse.loads.shrink_to_fit();
+        self.sparse.compact_loads.shrink_to_fit();
+        self.sparse.witnesses.shrink_to_fit();
+        self.sparse.states.shrink_to_fit();
+        self.sparse.updated.shrink_to_fit();
+        self.sparse.scratch.shrink_to_fit();
+        self.sparse.hash_weights.shrink_to_fit();
+        self.sparse.option_hashes.shrink_to_fit();
+        self.sparse.heads.buckets.shrink_to_fit();
+        self.sparse.keep.shrink_to_fit();
     }
 }
 
@@ -862,14 +965,260 @@ impl WeightedRepairProblem {
         })
     }
 
+    fn solve_sparse_with_storage<const MEASURE_ALLOCATIONS: bool>(
+        &self,
+        storage: &mut SparseRepairStorage,
+        parallel: bool,
+    ) -> Result<WeightedParallelRepairResult, SchedulerError> {
+        let width = self.capacities.len();
+        storage.loads.clear();
+        storage.loads.resize(width, 0);
+        storage.compact_loads.clear();
+        storage.witnesses.clear();
+        storage.states.clear();
+        storage.states.push(ScheduleState {
+            load_start: 0,
+            witness: NONE,
+            repairs: 0,
+            aux: 0,
+        });
+        storage.updated.clear();
+        storage.scratch.clear();
+        storage.scratch.resize(width, 0);
+        storage.hash_weights.clear();
+        storage
+            .hash_weights
+            .extend((0..width).map(load_hash_weight));
+        storage.option_hashes.clear();
+        for option in 0..self.option_count {
+            let mut hash = 0_u64;
+            for coordinate in 0..width {
+                hash = hash.wrapping_add(
+                    u64::from(self.option_load_coordinate(option, coordinate))
+                        .wrapping_mul(storage.hash_weights[coordinate]),
+                );
+            }
+            storage.option_hashes.push(hash);
+        }
+        storage.heads.begin_epoch();
+        storage.keep.clear();
+
+        let graded_antichain = self.positive_grading.is_some();
+        let mut transitions_examined = 0_u64;
+        let mut peak_pareto_states = 1_u32;
+
+        #[cfg(test)]
+        let _allocation_guard =
+            MEASURE_ALLOCATIONS.then(crate::test_alloc::HotLoopAllocationGuard::enter);
+
+        for (demand, family) in self.families.iter().copied().enumerate() {
+            let demand = u32::try_from(demand).map_err(|_| SchedulerError::TooLarge)?;
+            let layer_witness_start = storage.witnesses.len();
+            storage.updated.clear();
+            storage.heads.begin_epoch();
+            for state in &storage.states {
+                let mut copied = *state;
+                storage.heads.prepare_insert(
+                    &mut storage.updated,
+                    &storage.loads,
+                    &storage.hash_weights,
+                );
+                let id =
+                    u32::try_from(storage.updated.len()).map_err(|_| SchedulerError::TooLarge)?;
+                let hash = fingerprint_load(
+                    &storage.loads,
+                    copied.load_start as usize,
+                    &storage.hash_weights,
+                );
+                copied.aux = storage.heads.get(hash).unwrap_or(NONE);
+                storage.heads.insert(hash, id);
+                storage.updated.push(copied);
+            }
+
+            for state in &storage.states {
+                let used_start = state.load_start as usize;
+                let used_hash = fingerprint_load(&storage.loads, used_start, &storage.hash_weights);
+                let option_end = family.option_start + family.option_len;
+                for option in family.option_start..option_end {
+                    transitions_examined += 1;
+                    let mut feasible = true;
+                    for coordinate in 0..width {
+                        let Some(sum) = storage.loads[used_start + coordinate]
+                            .checked_add(self.option_load_coordinate(option, coordinate))
+                        else {
+                            feasible = false;
+                            break;
+                        };
+                        storage.scratch[coordinate] = sum;
+                        feasible &= sum <= self.capacities[coordinate];
+                    }
+                    if !feasible {
+                        continue;
+                    }
+                    let repairs = state.repairs + 1;
+                    let hash = used_hash.wrapping_add(storage.option_hashes[option as usize]);
+                    let mut cursor = storage.heads.get(hash).unwrap_or(NONE);
+                    let mut incumbent = NONE;
+                    while cursor != NONE {
+                        let candidate = storage.updated[cursor as usize];
+                        let start = candidate.load_start as usize;
+                        if storage.loads[start..start + width] == storage.scratch {
+                            incumbent = cursor;
+                            break;
+                        }
+                        cursor = candidate.aux;
+                    }
+                    if incumbent != NONE && storage.updated[incumbent as usize].repairs >= repairs {
+                        continue;
+                    }
+                    let witness = u32::try_from(storage.witnesses.len())
+                        .map_err(|_| SchedulerError::TooLarge)?;
+                    storage.witnesses.push(ScheduleWitnessNode {
+                        parent: state.witness,
+                        demand,
+                        option,
+                        repairs,
+                    });
+                    if incumbent != NONE {
+                        let record = &mut storage.updated[incumbent as usize];
+                        record.witness = witness;
+                        record.repairs = repairs;
+                        continue;
+                    }
+                    let load_start =
+                        u32::try_from(storage.loads.len()).map_err(|_| SchedulerError::TooLarge)?;
+                    storage.loads.extend_from_slice(&storage.scratch);
+                    storage.heads.prepare_insert(
+                        &mut storage.updated,
+                        &storage.loads,
+                        &storage.hash_weights,
+                    );
+                    let id = u32::try_from(storage.updated.len())
+                        .map_err(|_| SchedulerError::TooLarge)?;
+                    storage.updated.push(ScheduleState {
+                        load_start,
+                        witness,
+                        repairs,
+                        aux: storage.heads.get(hash).unwrap_or(NONE),
+                    });
+                    storage.heads.insert(hash, id);
+                }
+            }
+
+            if graded_antichain {
+                std::mem::swap(&mut storage.states, &mut storage.updated);
+            } else {
+                quadratic_pareto_keep_into(
+                    &storage.updated,
+                    &storage.loads,
+                    width,
+                    parallel,
+                    &mut storage.keep,
+                );
+                storage.states.clear();
+                for (index, &keep) in storage.keep.iter().enumerate() {
+                    if keep != 0 {
+                        storage.states.push(storage.updated[index]);
+                    }
+                }
+                storage.compact_loads.clear();
+                for state in &mut storage.states {
+                    let old_start = state.load_start as usize;
+                    state.load_start = u32::try_from(storage.compact_loads.len())
+                        .map_err(|_| SchedulerError::TooLarge)?;
+                    storage
+                        .compact_loads
+                        .extend_from_slice(&storage.loads[old_start..old_start + width]);
+                }
+                std::mem::swap(&mut storage.loads, &mut storage.compact_loads);
+            }
+
+            let mut next_witness = layer_witness_start;
+            for state in &mut storage.states {
+                let witness = state.witness as usize;
+                if state.witness == NONE || witness < layer_witness_start {
+                    continue;
+                }
+                storage.witnesses[next_witness] = storage.witnesses[witness];
+                state.witness =
+                    u32::try_from(next_witness).map_err(|_| SchedulerError::TooLarge)?;
+                next_witness += 1;
+            }
+            storage.witnesses.truncate(next_witness);
+            peak_pareto_states = peak_pareto_states
+                .max(u32::try_from(storage.states.len()).map_err(|_| SchedulerError::TooLarge)?);
+        }
+
+        #[cfg(test)]
+        drop(_allocation_guard);
+
+        let best_witness = select_best_witness(
+            storage
+                .states
+                .iter()
+                .map(|state| (state.repairs, state.witness)),
+            &storage.witnesses,
+        );
+        let chosen = witness_options(best_witness, &storage.witnesses);
+        let assignment: Vec<_> = chosen
+            .iter()
+            .map(|&(demand, option)| WeightedRepairChoice {
+                demand,
+                loads: self.option_load_box(option),
+            })
+            .collect();
+        let mut repaired = vec![false; self.families.len()];
+        for choice in &assignment {
+            repaired[choice.demand as usize] = true;
+        }
+        let unmatched_demands = repaired
+            .iter()
+            .enumerate()
+            .filter_map(|(demand, &done)| (!done).then_some(demand as u32))
+            .collect::<Vec<_>>()
+            .into_boxed_slice();
+        let mut total_loads = vec![0_u64; width];
+        for choice in &assignment {
+            for (total, &load) in total_loads.iter_mut().zip(&choice.loads) {
+                *total += u64::from(load);
+            }
+        }
+        Ok(WeightedParallelRepairResult {
+            assignment: assignment.into_boxed_slice(),
+            unmatched_demands,
+            total_loads: total_loads.into_boxed_slice(),
+            transitions_examined,
+            peak_pareto_states,
+        })
+    }
+
     pub fn solve(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
-        self.solve_impl::<false, false, false>(false)
+        let mut workspace = WeightedRepairWorkspace::new();
+        self.solve_sparse_with_storage::<false>(&mut workspace.sparse, false)
+    }
+
+    /// Solve with reusable sparse-front storage.
+    pub fn solve_sparse_with_workspace(
+        &self,
+        workspace: &mut WeightedRepairWorkspace,
+    ) -> Result<WeightedParallelRepairResult, SchedulerError> {
+        self.solve_sparse_with_storage::<true>(&mut workspace.sparse, false)
     }
 
     /// Solves with parallel Pareto kernels when the frontier is large enough.
     #[cfg(feature = "parallel")]
     pub fn solve_parallel(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
-        self.solve_impl::<false, false, false>(true)
+        let mut workspace = WeightedRepairWorkspace::new();
+        self.solve_sparse_with_storage::<false>(&mut workspace.sparse, true)
+    }
+
+    /// Parallel sparse solve with reusable worker-local front storage.
+    #[cfg(feature = "parallel")]
+    pub fn solve_sparse_parallel_with_workspace(
+        &self,
+        workspace: &mut WeightedRepairWorkspace,
+    ) -> Result<WeightedParallelRepairResult, SchedulerError> {
+        self.solve_sparse_with_storage::<true>(&mut workspace.sparse, true)
     }
 
     pub fn solve_adaptive(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
@@ -893,7 +1242,9 @@ impl WeightedRepairProblem {
         workspace: &mut WeightedRepairWorkspace,
     ) -> Result<WeightedParallelRepairResult, SchedulerError> {
         match self.recommended_backend() {
-            WeightedSchedulerBackend::SparsePareto => self.solve_parallel(),
+            WeightedSchedulerBackend::SparsePareto => {
+                self.solve_sparse_parallel_with_workspace(workspace)
+            }
             WeightedSchedulerBackend::DenseLattice => {
                 self.solve_dense_lattice_parallel_with_workspace(workspace)
             }
@@ -906,7 +1257,7 @@ impl WeightedRepairProblem {
         workspace: &mut WeightedRepairWorkspace,
     ) -> Result<WeightedParallelRepairResult, SchedulerError> {
         match self.recommended_backend() {
-            WeightedSchedulerBackend::SparsePareto => self.solve(),
+            WeightedSchedulerBackend::SparsePareto => self.solve_sparse_with_workspace(workspace),
             WeightedSchedulerBackend::DenseLattice => {
                 self.solve_dense_lattice_with_workspace(workspace)
             }
@@ -1107,6 +1458,7 @@ impl WeightedRepairProblem {
             best_options,
             repaired,
             total_loads,
+            ..
         } = workspace;
         strides.clear();
         if strides.capacity() < width {
@@ -1777,6 +2129,45 @@ fn quadratic_pareto_keep(
         .collect()
 }
 
+fn quadratic_pareto_keep_into(
+    states: &[ScheduleState],
+    loads: &[u32],
+    width: usize,
+    _parallel: bool,
+    keep: &mut Vec<u8>,
+) {
+    keep.clear();
+    keep.resize(states.len(), 0);
+    #[cfg(feature = "parallel")]
+    if _parallel
+        && states
+            .len()
+            .saturating_mul(states.len())
+            .saturating_mul(width)
+            >= PARALLEL_PARETO_WORK
+    {
+        #[cfg(test)]
+        let allocation_measurement = crate::test_alloc::current_measurement();
+        keep.par_iter_mut().enumerate().for_each_init(
+            || {
+                #[cfg(test)]
+                return crate::test_alloc::HotLoopAllocationGuard::enter_for(
+                    allocation_measurement,
+                );
+                #[cfg(not(test))]
+                {}
+            },
+            |_allocation_guard, (index, slot)| {
+                *slot = u8::from(state_is_pareto(states, loads, width, index, &states[index]));
+            },
+        );
+        return;
+    }
+    for (index, slot) in keep.iter_mut().enumerate() {
+        *slot = u8::from(state_is_pareto(states, loads, width, index, &states[index]));
+    }
+}
+
 fn state_is_pareto(
     states: &[ScheduleState],
     loads: &[u32],
@@ -1795,6 +2186,22 @@ fn state_is_pareto(
             .zip(&loads[state_start..state_start + width])
             .all(|(left, right)| left <= right)
     })
+}
+
+fn load_hash_weight(coordinate: usize) -> u64 {
+    let mut value = (coordinate as u64).wrapping_add(0x9e37_79b9_7f4a_7c15);
+    value = (value ^ (value >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+    value = (value ^ (value >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
+    value ^ (value >> 31)
+}
+
+fn fingerprint_load(loads: &[u32], start: usize, weights: &[u64]) -> u64 {
+    loads[start..start + weights.len()]
+        .iter()
+        .zip(weights)
+        .fold(0_u64, |hash, (&load, &weight)| {
+            hash.wrapping_add(u64::from(load).wrapping_mul(weight))
+        })
 }
 
 fn hash_slice(load: &[u32]) -> u64 {
@@ -2284,12 +2691,80 @@ mod tests {
     }
 
     #[test]
+    fn warm_sparse_workspace_allocates_nothing_in_solve_layers() {
+        let families = (0..6)
+            .map(|_| vec![vec![2, 0], vec![0, 1], vec![1, 2]])
+            .collect::<Vec<_>>();
+        let problem = WeightedRepairProblem::from_families(&[6, 6], &families).unwrap();
+        assert!(problem.positive_grading().is_none());
+        let mut workspace = WeightedRepairWorkspace::new();
+        let expected = problem.solve_sparse_with_workspace(&mut workspace).unwrap();
+        let (answer, events) = crate::test_alloc::measure_allocations(|| {
+            problem.solve_sparse_with_workspace(&mut workspace).unwrap()
+        });
+        assert_eq!(answer, expected);
+        assert_eq!(events, Default::default());
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn warm_parallel_sparse_workspace_allocates_nothing_in_solve_layers() {
+        let families = (0..8)
+            .map(|demand| {
+                (0..6)
+                    .map(|resource| {
+                        let mut loads = vec![0_u32; 6];
+                        loads[resource] = 1 + u32::from((demand + resource) % 3 == 0);
+                        loads
+                    })
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Vec<_>>();
+        let problem = WeightedRepairProblem::from_families(&[5; 6], &families).unwrap();
+        let pool = rayon::ThreadPoolBuilder::new()
+            .num_threads(3)
+            .build()
+            .unwrap();
+        let mut workspace = WeightedRepairWorkspace::new();
+        let expected = pool.install(|| {
+            problem
+                .solve_sparse_parallel_with_workspace(&mut workspace)
+                .unwrap()
+        });
+        let (answer, events) = crate::test_alloc::measure_allocations(|| {
+            let measurement = crate::test_alloc::current_measurement();
+            pool.install(|| {
+                measurement.scope(|| {
+                    problem
+                        .solve_sparse_parallel_with_workspace(&mut workspace)
+                        .unwrap()
+                })
+            })
+        });
+        assert_eq!(answer, expected);
+        assert_eq!(events, Default::default());
+    }
+
+    #[test]
     fn integer_ceil_sqrt_handles_square_boundaries() {
         assert_eq!(ceil_sqrt(0), 0);
         assert_eq!(ceil_sqrt(1), 1);
         assert_eq!(ceil_sqrt(15), 4);
         assert_eq!(ceil_sqrt(16), 4);
         assert_eq!(ceil_sqrt(17), 5);
+    }
+
+    #[test]
+    fn additive_load_fingerprint_matches_materialized_transition() {
+        let left = [3_u32, 1, 4, 1, 5, 9, 2, 6];
+        let right = [5_u32, 3, 5, 8, 9, 7, 9, 3];
+        let sum = std::array::from_fn::<_, 8, _>(|index| left[index] + right[index]);
+        let weights = (0..left.len()).map(load_hash_weight).collect::<Vec<_>>();
+        assert_eq!(
+            fingerprint_load(&sum, 0, &weights),
+            fingerprint_load(&left, 0, &weights)
+                .wrapping_add(fingerprint_load(&right, 0, &weights))
+        );
     }
 
     #[cfg(feature = "parallel")]
@@ -2348,10 +2823,9 @@ mod tests {
                 .chunks_exact(2)
                 .map(|family| family.iter().map(|loads| loads.to_vec()).collect())
                 .collect();
-            let answer = WeightedRepairProblem::from_families(&capacities, &families)
-                .unwrap()
-                .solve()
-                .unwrap();
+            let problem = WeightedRepairProblem::from_families(&capacities, &families).unwrap();
+            let canonical = problem.solve_impl::<false, false, false>(false).unwrap();
+            let answer = problem.solve().unwrap();
             let dense = WeightedRepairProblem::from_families(&capacities, &families)
                 .unwrap()
                 .solve_dense_lattice()
@@ -2386,6 +2860,7 @@ mod tests {
                 }
             }
             prop_assert_eq!(answer.repaired_count(), brute);
+            prop_assert_eq!(&answer, &canonical);
             prop_assert_eq!(dense.repaired_count(), brute);
             prop_assert_eq!(&dense.assignment, &answer.assignment);
             prop_assert_eq!(&adaptive.assignment, &answer.assignment);

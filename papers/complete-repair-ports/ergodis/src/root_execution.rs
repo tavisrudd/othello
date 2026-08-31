@@ -66,6 +66,8 @@ where
     #[cfg(feature = "parallel")]
     {
         use rayon::prelude::*;
+        #[cfg(test)]
+        let allocation_measurement = crate::test_alloc::current_measurement();
         let pool = rayon::ThreadPoolBuilder::new()
             .num_threads(threads)
             .build()
@@ -78,7 +80,8 @@ where
                     || kernel.create_worker(),
                     |worker, (ordinal, root)| {
                         #[cfg(test)]
-                        let _allocation_guard = HotLoopAllocationGuard::enter();
+                        let _allocation_guard =
+                            HotLoopAllocationGuard::enter_for(allocation_measurement);
                         kernel.evaluate(worker, RootOrdinal(ordinal as u32), root)
                     },
                 )

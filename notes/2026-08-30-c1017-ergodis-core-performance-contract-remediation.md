@@ -203,8 +203,46 @@ and 545 MiB respectively). The host was busy enough that cycle counts were not
 stable, so no wall or cycle speedup is claimed. An earlier packed predecessor
 side vector removed 3.41% of instructions but increased the 688k-state RSS
 from about 88 MiB to 107 MiB and was rejected. The outstanding scheduler gate
-is the reusable two-front/capacity plan needed to move all live-front
+was the reusable two-front/capacity plan needed to move all live-front
 allocation out of the solve region.
+
+That gate is now closed. `WeightedRepairWorkspace` owns both sparse fronts,
+both load arenas, witnesses, Pareto marks, scratch, and an epoch-stamped bucket
+directory. A completed warm solve performs zero allocations, reallocations,
+or deallocations inside the actual sequential or Rayon solve layers. The test
+allocator now tags each measurement with a unique ID and explicitly propagates
+that ID into participating Rayon workers; unrelated concurrently running tests
+cannot contaminate its global counters. The normal concurrent test harness,
+not only `--test-threads=1`, passes the gates.
+
+The directory uses an additive 64-bit load fingerprint. For a feasible
+transition, `fingerprint(load + option)` is computed as the existing load
+fingerprint plus one precomputed option fingerprint. Full load-vector equality
+is still checked down every bucket chain, so the fingerprint is only an
+accelerator and collisions cannot affect correctness. Generation tags make a
+new layer O(1) to clear. The hot bucket record is an asserted eight-byte
+`repr(C)` pair; the table grows only on a cold sizing pass and is reused across
+calls. The old flat solver remains a property-test oracle, including exact
+witness and counter equality, and a direct test fixes the additive identity.
+
+Seven alternating same-core counter rounds on the 688,212-state fixture retain
+exactly 10,383,904 transitions and the same checksum. Relative to the retained
+pre-workspace binary, the final solver is 1.431x lower in cycles (`t=10.30` on
+paired log ratios), 1.051x lower in instructions, 1.425x faster by process wall
+time (`t=9.08`), and 1.242x lower in peak RSS. Branch misses and cache misses
+fall by 1.146x and 1.175x. Three alternating rounds on the 4,144,127-state
+fixture retain exactly 79,449,511 transitions and the same checksum while
+improving cycles by 1.164x (`t=6.93`), instructions by 1.025x, wall time by
+1.171x (`t=7.52`), and peak RSS by 1.350x. A 75% bucket-load control was 1.042x
+faster on the smaller fixture but increased branches and misses and gave no
+large-front cycle or memory benefit; the retained 50% load is the more robust
+scaling choice.
+
+Parallel Pareto marking preserves exact work and output at 1, 2, 4, 8, and 12
+threads, but it does not materially accelerate these fixtures: the serial
+state-expansion/directory pass dominates. This is recorded as a negative
+scaling result, not a parallel speedup. The next allocation-remediation targets
+are the frozen ordered-resource front and growing ZDD operations.
 
 Do not probe at root boundaries or scan all slots from workers. The all-slot
 control added 5.37% instructions without reducing cycles. Flag-gated rings at
