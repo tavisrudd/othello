@@ -508,6 +508,8 @@ pub enum OrbitCompileError<E> {
     NotCanonical { orbit: u32 },
     #[error("generator-closure seed {point} is out of range")]
     Seed { point: u32 },
+    #[error("generator-closure workspace is smaller than the ambient point set")]
+    WorkspaceTooSmall,
 }
 
 #[derive(Debug, Error, PartialEq, Eq)]
@@ -548,6 +550,85 @@ pub struct GeneratorClosure {
     point_count: u32,
     membership: Box<[u64]>,
     discovery_order: Box<[u32]>,
+}
+
+/// Reusable allocation-free breadth-first generator-closure storage.
+#[derive(Clone, Debug)]
+pub struct GeneratorClosureWorkspace {
+    queue: Vec<u32>,
+    point_capacity: u32,
+}
+
+impl GeneratorClosureWorkspace {
+    pub fn new(point_capacity: u32) -> Self {
+        Self {
+            queue: Vec::with_capacity(point_capacity as usize),
+            point_capacity,
+        }
+    }
+
+    /// Visit one closure using caller-owned discovery state and transition
+    /// logic. `discover(point)` must return true exactly once for each point
+    /// admitted to this closure; it may simultaneously write a label, debt, or
+    /// orbit ID into an existing campaign array.
+    ///
+    /// The queue was fully reserved by [`Self::new`], so this method allocates
+    /// nothing. The two callbacks are monomorphized into the BFS loop.
+    pub fn visit_with<E>(
+        &mut self,
+        point_count: u32,
+        generator_count: u32,
+        seeds: &[u32],
+        mut discover: impl FnMut(u32) -> bool,
+        mut apply: impl FnMut(u32, u32) -> Result<u32, E>,
+    ) -> Result<&[u32], OrbitCompileError<E>> {
+        if point_count > self.point_capacity {
+            return Err(OrbitCompileError::WorkspaceTooSmall);
+        }
+        self.queue.clear();
+        for &point in seeds {
+            if point >= point_count {
+                return Err(OrbitCompileError::Seed { point });
+            }
+            if discover(point) {
+                self.queue.push(point);
+            }
+        }
+        let mut head = 0usize;
+        while head < self.queue.len() {
+            let point = self.queue[head];
+            head += 1;
+            for generator in 0..generator_count {
+                let target = apply(generator, point).map_err(OrbitCompileError::Adapter)?;
+                if target >= point_count {
+                    return Err(OrbitCompileError::Target {
+                        generator,
+                        point,
+                        target,
+                    });
+                }
+                if discover(target) {
+                    self.queue.push(target);
+                }
+            }
+        }
+        Ok(&self.queue)
+    }
+
+    pub fn visit<'a, A: FinitePermutationAction>(
+        &'a mut self,
+        action: &A,
+        seeds: &[u32],
+        discover: impl FnMut(u32) -> bool,
+    ) -> Result<&'a [u32], OrbitCompileError<A::Error>> {
+        self.visit_with(
+            action.point_count(),
+            action.generator_count(),
+            seeds,
+            discover,
+            |generator, point| action.apply(generator, point),
+        )
+    }
 }
 
 impl GeneratorClosure {
@@ -1235,6 +1316,21 @@ mod tests {
             compile_generator_closure(&action, &[6]).unwrap_err(),
             OrbitCompileError::Seed { point: 6 }
         );
+
+        let mut labels = [0u8; 6];
+        let mut workspace = GeneratorClosureWorkspace::new(6);
+        let visited = workspace
+            .visit(&action, &[4], |point| {
+                let label = &mut labels[point as usize];
+                if *label != 0 {
+                    return false;
+                }
+                *label = 7;
+                true
+            })
+            .unwrap();
+        assert_eq!(visited, &[4, 5]);
+        assert_eq!(labels, [0, 0, 0, 0, 7, 7]);
     }
 
     #[test]

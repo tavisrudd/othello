@@ -21,12 +21,12 @@
 //! Ergodis is used for the independent rank cross-check of the Hankel kernels
 //! over prime fields (`ergodis::matrix::Matrix::canonical_row_basis_field`).
 
-use std::collections::VecDeque;
 use std::fmt::Write as _;
 
 use anyhow::{bail, Context, Result};
 use clap::Parser;
 use ergodis::field::{Prime, SmallField};
+use ergodis::group_action::GeneratorClosureWorkspace;
 use ergodis::matrix::Matrix;
 use ergodis::projective::ProjectiveIndex;
 
@@ -649,8 +649,8 @@ fn main() -> Result<()> {
 
     let mut buf = vec![0u8; d + 1];
     let mut img = vec![0u8; d + 1];
-    let mut queue: VecDeque<usize> = VecDeque::new();
-    let mut orbit: Vec<usize> = Vec::new();
+    let point_count = u32::try_from(n).context("projective space exceeds u32")?;
+    let mut closure_workspace = GeneratorClosureWorkspace::new(point_count);
 
     let mut crosscheck_done = 0usize;
     let mut crosscheck_ok = true;
@@ -678,42 +678,39 @@ fn main() -> Result<()> {
             }
         }
         let wv = info.w as u8;
-        // BFS the orbit
-        orbit.clear();
-        queue.clear();
-        queue.push_back(start);
-        weight[start] = wv;
-        orbit.push(start);
-        while let Some(cur) = queue.pop_front() {
-            proj.point(cur as u64, &mut buf)?;
-            for gen in &gens {
-                apply(&f, gen, &buf, &mut img);
-                let idx =
-                    usize::try_from(proj.index(&img)?).context("projective index exceeds usize")?;
-                if weight[idx] == 0 {
-                    weight[idx] = wv;
-                    orbit.push(idx);
-                    queue.push_back(idx);
-                }
-            }
-            if frobenius {
-                for i in 0..=d {
-                    img[i] = f.pow(buf[i], f.p);
-                }
-                let idx =
-                    usize::try_from(proj.index(&img)?).context("projective index exceeds usize")?;
-                if weight[idx] == 0 {
-                    weight[idx] = wv;
-                    orbit.push(idx);
-                    queue.push_back(idx);
-                }
-            }
-        }
-        hist[info.w] += orbit.len();
+        let generator_count = gens.len() as u32 + u32::from(frobenius);
+        let orbit_size = closure_workspace
+            .visit_with(
+                point_count,
+                generator_count,
+                &[start as u32],
+                |point| {
+                    let label = &mut weight[point as usize];
+                    if *label != 0 {
+                        return false;
+                    }
+                    *label = wv;
+                    true
+                },
+                |generator, point| {
+                    proj.point(u64::from(point), &mut buf)?;
+                    if let Some(gen) = gens.get(generator as usize) {
+                        apply(&f, gen, &buf, &mut img);
+                    } else {
+                        debug_assert!(frobenius);
+                        for i in 0..=d {
+                            img[i] = f.pow(buf[i], f.p);
+                        }
+                    }
+                    Ok::<u32, ergodis::projective::ProjectiveError>(proj.index(&img)? as u32)
+                },
+            )?
+            .len();
+        hist[info.w] += orbit_size;
         proj.point(start as u64, &mut buf)?;
         records.push(OrbitRecord {
             weight: info.w,
-            size: orbit.len(),
+            size: orbit_size,
             rep: buf.clone(),
             rep_index: start,
             apolar_degree: info.apolar_degree,

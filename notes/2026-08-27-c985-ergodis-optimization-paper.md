@@ -41,7 +41,11 @@ as each coherent tranche lands.
    only reachable points. The private C1018 PRS driver now consumes the shared
    field and projective index, deleting its duplicate irreducibility, table,
    and PG indexing implementations; its q=8,r=3 census still returns the exact
-   9/63/1 weight histogram. Next: adapt and measure the orbit-closure wave.
+   9/63/1 weight histogram. The closure engine now also offers a reusable
+   pre-sized BFS workspace whose monomorphized callbacks reuse campaign-owned
+   label/debt arrays as discovery state; the C1018 orbit census has migrated to
+   it and remains byte-for-byte stable on the q=8,r=3 result shape. Next:
+   counter/profile a larger orbit-closure wave.
    Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
 4. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
