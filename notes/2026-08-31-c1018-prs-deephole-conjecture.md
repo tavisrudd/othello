@@ -247,6 +247,10 @@ decided by Gaussian rank — with no Hankel criterion and no orbit machinery:
 | `r=9, q=19` | 4 | 0 | 3,800 | 3,800 | `{2}` |
 | `r=8, q=16` | 2 | 0 | 2,312 | 2,312 | `{2}` |
 | `r=8, q=19` | 2 | 0 | 3,800 | 3,800 | `{2}` |
+| `r=8, q=23` | 2 | 0 | 6,624 | 6,624 | `{2}` |
+| `r=8, q=25` | 2 | 0 | 8,450 | 8,450 | `{2}` |
+| `r=8, q=27` | 5 | 0 | 10,584 | 10,584 | `{2}` |
+| `r=10, q=11` | 32 | 0 | (32 of 50,447 orbits emitted) | 66,390,456 | `{2,3}` |
 
 The `r=8, q=16` row is the cell that produced 30 spurious weight disagreements
 on 2026-08-30 through a field-model mismatch.  With both sides reading
