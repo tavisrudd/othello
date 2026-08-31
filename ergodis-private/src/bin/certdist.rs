@@ -805,11 +805,25 @@ fn external_upper(problem: &SparseProblem, command: &str, input: &Path) -> Resul
 // Job state on disk
 // ---------------------------------------------------------------------------
 
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq)]
+struct Toolchain {
+    /// SHA-256 of the `css_distance_native` binary that produced every shard
+    /// record in this job. Candidate counts drift across core revisions and the
+    /// compiled filter format is not forward compatible, so a job resumed under
+    /// a different enumerator would silently mix two searches.
+    #[serde(default)]
+    native_sha256: Option<String>,
+    #[serde(default)]
+    native_path: Option<String>,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct JobHeader {
     schema: String,
     code: CodeIdentity,
     input_file: String,
+    #[serde(default)]
+    toolchain: Toolchain,
 }
 
 fn job_paths(job: &Path, radius: u16, shards: u32) -> PathBuf {
@@ -1020,6 +1034,8 @@ struct Bracket {
 struct Certificate {
     schema: String,
     code: CodeIdentity,
+    #[serde(default)]
+    toolchain: Toolchain,
     parity_consequence: String,
     anchor_soundness: String,
     levels: Vec<LevelRecord>,
@@ -1274,6 +1290,7 @@ fn assemble_certificate(job: &Path) -> Result<Certificate> {
     Ok(Certificate {
         schema: "certdist-certificate-v1".to_string(),
         code: header.code,
+        toolchain: header.toolchain,
         parity_consequence,
         anchor_soundness,
         levels,
@@ -1435,7 +1452,11 @@ enum Job {
     },
 }
 
-fn ensure_job(job: &Path, input: &Path) -> Result<(SparseProblem, CodeIdentity, PathBuf)> {
+fn ensure_job(
+    job: &Path,
+    input: &Path,
+    native: &Path,
+) -> Result<(SparseProblem, CodeIdentity, PathBuf)> {
     fs::create_dir_all(job).with_context(|| format!("creating {}", job.display()))?;
     let (problem, raw) = load_problem(input)?;
     let code = CodeIdentity::derive(&problem, &raw);
@@ -1453,12 +1474,32 @@ fn ensure_job(job: &Path, input: &Path) -> Result<(SparseProblem, CodeIdentity, 
             );
         }
     }
+    let toolchain = Toolchain {
+        native_sha256: fs::read(native).ok().map(|bytes| hex_digest(&bytes)),
+        native_path: Some(native.display().to_string()),
+    };
+    let header_path = job.join("job.json");
+    if let Ok(bytes) = fs::read(&header_path) {
+        if let Ok(prior) = serde_json::from_slice::<JobHeader>(&bytes) {
+            if let (Some(before), Some(now)) =
+                (&prior.toolchain.native_sha256, &toolchain.native_sha256)
+            {
+                if before != now {
+                    bail!(
+                        "job {} was built with css_distance_native {before}, but {now} is on the command line. Candidate counts and the compiled filter format both move with the core, so shard records from two enumerators must not be mixed. Start a fresh job directory.",
+                        job.display()
+                    );
+                }
+            }
+        }
+    }
     let header = JobHeader {
         schema: "certdist-job-v1".to_string(),
         code: code.clone(),
         input_file: input.display().to_string(),
+        toolchain,
     };
-    write_atomic(&job.join("job.json"), &serde_json::to_vec_pretty(&header)?)?;
+    write_atomic(&header_path, &serde_json::to_vec_pretty(&header)?)?;
     Ok((problem, code, local))
 }
 
@@ -1511,9 +1552,9 @@ fn cmd_plan(
     pulse_interval: u64,
     binaries: Binaries,
 ) -> Result<()> {
-    let (_problem, code, local_input) = ensure_job(&job, &input)?;
-    print_identity(&code);
     let native = binaries.native();
+    let (_problem, code, local_input) = ensure_job(&job, &input, &native)?;
+    print_identity(&code);
     let compile_start = Instant::now();
     let (filter, filter_record, compile_seconds) =
         ensure_filter(&native, &local_input, &job, radius, threads)?;
@@ -1622,9 +1663,9 @@ fn cmd_run(
     binaries: Binaries,
 ) -> Result<()> {
     let job_start = Instant::now();
-    let (problem, code, local_input) = ensure_job(&job, &input)?;
-    print_identity(&code);
     let native = binaries.native();
+    let (problem, code, local_input) = ensure_job(&job, &input, &native)?;
+    print_identity(&code);
 
     // --- upper-bound pass -------------------------------------------------
     if upper != "none" {
@@ -1899,6 +1940,14 @@ fn cmd_verify(
     let parsed: Certificate = serde_json::from_slice(&bytes).context("parsing certificate")?;
     println!("certificate          {}", certificate.display());
     println!("certificate sha256   {}", hex_digest(&bytes));
+    println!(
+        "enumerator sha256    {}",
+        parsed
+            .toolchain
+            .native_sha256
+            .as_deref()
+            .unwrap_or("(not recorded)")
+    );
     let mut failures: Vec<String> = Vec::new();
     let mut checks = 0usize;
 
@@ -2053,6 +2102,14 @@ fn cmd_verify(
             bail!("no complete level to re-check");
         };
         let native = binaries.native();
+        let native_sha = fs::read(&native).ok().map(|bytes| hex_digest(&bytes));
+        if let (Some(recorded), Some(current)) = (&parsed.toolchain.native_sha256, &native_sha) {
+            if recorded != current {
+                println!(
+                    "[!!] the enumerator on the command line ({current}) is not the one that produced the certificate ({recorded}); candidate counts are not comparable across core revisions"
+                );
+            }
+        }
         let temp = job.join("recheck");
         fs::create_dir_all(&temp)?;
         let (filter, _, _) = ensure_filter(&native, &job.join("input.json"), &job, level.requested_radius, threads)?;

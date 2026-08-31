@@ -189,12 +189,161 @@ never silently assumed to generalise.
 
 ## 6. Verification cost
 
-*(filled in below)*
+### 6.1 The part that has to be said plainly
+
+A minimum-distance lower bound is a non-existence claim over an exponentially
+large set. There is no known succinct certificate for it, and this prototype
+does not invent one. So the commercial slogan "verification is dramatically
+cheaper than production" is **true for the upper bound and for integrity, and
+false for the lower bound**, and no arrangement of JSON changes that.
+
+What the certificate does change is the shape of the cost. Without it, a
+sceptical third party has exactly one option: re-run the whole search. With it,
+the same party has a dial:
+
+| what is checked | what it costs | what it actually establishes |
+|:---|:---|:---|
+| structural verification | milliseconds | the certificate is internally consistent, the code identity and parity gate are correct, the shard cover is complete, every witness is a genuine logical operator, and the bracket follows from the records |
+| `--recheck-shards K` | `K / N` of production | the enumerator reproduces `K` sampled shards' candidate, kernel-support and nontrivial-support counts exactly |
+| every shard | 100% of production | the lower bound, independently |
+
+The upper bound genuinely is cheap to verify, and that is not a technicality:
+the witness re-check is the only place where a claim in the certificate is
+re-derived from the code itself rather than cross-checked against other records.
+`certdist` performs it on every witness from every source, its own included, in
+both `run` and `verify`, and refuses a witness that fails.
+
+*(measurements below)*
 
 ## 7. Ergodis core interface requests
 
-*(filled in below)*
+Things this prototype wanted and could not have without editing the core. Listed
+in descending order of what they would be worth.
+
+1. **Carry verified automorphism generators in the input format, and check the
+   anchor set against them.** The anchor reduction is the largest cost lever in
+   the whole system — 42x to 60x on the abelian lifted products — and it is the
+   one load-bearing fact a certificate verifier cannot re-derive. Today `anchors`
+   is an unexplained list of coordinates produced by a per-family Python helper;
+   the core accepts it without question and so must every downstream verifier.
+   Requested: an optional `symmetry_generators` field holding coordinate
+   permutations, with the core verifying that each generator preserves the row
+   space of the physical checks and permutes the nonzero logical classes, that
+   the orbits are free and uniform, and that `anchors` is an orbit transversal —
+   and recording all three verdicts in the run record. That single change turns
+   the largest speedup in the system from a trusted input into a checked fact,
+   which is exactly what a commercial certificate needs.
+2. **A shard range, so one process can run several shards.** Every shard is a
+   fresh process that reloads the compiled filter. Measured at 0.22 s per shard
+   on a 1428-coordinate instance, which is 14% of that job's wall time at
+   32 shards and would be far worse at higher shard counts, which is precisely
+   where a service wants to be for fine resume granularity. Requested:
+   `--shard-range a..b`, or repeatable `--shard-index`, emitting one record per
+   shard from one artifact load.
+3. **Separate the prefix-expansion candidate count from the shard-owned count.**
+   Each shard repeats the prefix expansion and folds it into its own
+   `candidates`, so per-shard counts are not additive: the 32-shard total on
+   `R1Elite01`'s X side is 767,874,405 against the unsharded 764,931,405, an
+   inflation of 0.38%. Small here, but it means a sharded run has no reproducible
+   additive counter, and a counter is the only cheap consistency check a verifier
+   has. Requested: report `prefix_candidates` and `shard_candidates` separately.
+4. **Expose the branch list so a driver can balance the schedule.** Sharding is a
+   modular partition of a branch list the core has already built and whose
+   subtree sizes it could cheaply estimate. Measured spread on one job was 1.01 s
+   to 1.66 s per shard, so the modular partition is better balanced than expected
+   — but a service scheduling shards across machines needs the sizes, not luck.
+   Requested: a `--shard-plan` dry run that prints the branch count and, if
+   affordable, a per-branch cost proxy.
+5. **Make `large-css` a runtime capability rather than a feature of the
+   dependency.** `ergodis-private` declares `features = ["control-plane",
+   "parallel"]`; a binary inside that crate cannot link the large backends at
+   all, and under the constraint that its `Cargo.toml` is untouchable there is no
+   workaround except driving the core binary as a subprocess. That happens to be
+   the right architecture here, but the constraint is real and would bite any
+   downstream consumer. Requested: compile the large backends in by default and
+   select at runtime, or ship a default-on `full` feature.
+6. **Let the core state the bound it certifies, including the parity lift.** A
+   completed run reports `distance: null`, and every consumer has to know that
+   this means "no logical operator at or below `searched_maximum_weight`", then
+   separately re-derive the even-weight parity fact to gain the extra unit.
+   `certdist` recomputes the all-ones row-space membership itself rather than
+   trust `kernel_weights_even`, which is the right call for a verifier but is
+   duplicated work. Requested: a `certifies_lower_bound` field, with the parity
+   fact and its justification stated in the record.
+7. **Raise the `css_distance_random` OSD order cap, and add class breadth.**
+   The new bounded OSD accepts order 1 or 2 only. The 756-coordinate work found
+   that breadth over logical classes beats OSD depth on hard instances, so a mode
+   that decodes toward randomly chosen logical classes would help more than a
+   higher order. Both would be useful; either would be better than the current
+   cap.
+8. **Artifact format versioning** (carried over from the 756 report, still
+   true). The compiled filter's magic and version are not forward compatible and
+   the suggested filename does not encode them. `certdist` sidesteps this by
+   treating the artifact as job-local cache that is rebuilt whenever its recorded
+   radius does not match, and never as evidence — but that is a workaround for a
+   feature advertised as a checkpoint.
+9. **Minor, carried over:** `python/generate_bb_native.py --out` is create-only,
+   so a provenance re-check needs the previous file deleted first.
+10. **Positive.** The sharding contract is documented precisely where it matters
+    (the `CssSearchShard` doc comment states the completeness condition), and a
+    shard record self-labels as `result_scope: "partial-shard"` with its
+    `search_shard` identity attached. That is exactly the right shape: a partial
+    result cannot be mistaken for a global one by a careless consumer. Peak
+    resident set stayed flat and small throughout.
 
 ## 8. What this would take to become a real service
 
-*(filled in below)*
+### Missing
+
+- **A scheduler.** `certdist run` executes shards sequentially in one process.
+  The sharding contract already supports running them anywhere, so the missing
+  piece is a work queue, a worker pool, and a way to collect shard records from
+  several machines into one job directory. That is the difference between "a
+  radius is a scheduling problem" and "a radius is a long night".
+- **Input importers.** `certdist` consumes the Ergodis native sparse JSON. A
+  customer arrives with a stabilizer tableau, a `qecc`/`ldpc` Python object, a
+  Stim circuit, or a pair of protograph matrices. Every input in this report was
+  produced by a per-family Python helper that is not part of the service.
+- **Anchor derivation.** Related, and worse: the anchors are produced by that
+  same helper, from family-specific knowledge of the group action. A service
+  handed an arbitrary code either finds a verified automorphism group itself or
+  runs with every coordinate as an anchor and pays the 42x to 60x.
+- **A first-class two-sided job.** A CSS code has two sides and `certdist`
+  handles one input at a time; `certdist combine` folds two certificates into a
+  code-level bracket afterwards. That works but it is a bolt-on, and it means the
+  scheduler cannot balance work across the two sides of one code.
+- **Per-shard timeouts and retries.** A hung or crashed shard currently aborts
+  the job. Resume makes that survivable rather than fatal, but a service needs
+  the driver to notice and reschedule.
+
+### Fragile
+
+- **Job directories are bound to a core revision.** Candidate counts already
+  drift across core revisions and the compiled artifact format is not forward
+  compatible, so a job resumed after a core upgrade can silently mix records from
+  two enumerators. `certdist` records the SHA-256 of the `css_distance_native`
+  binary it used in every job and certificate and refuses to mix.
+- **Shard count is chosen up front and cannot change.** Records from a 32-shard
+  cover are useless to a 64-shard cover. A service that wants to add machines
+  mid-job cannot re-shard without discarding work.
+- **The upper-bound pass is not resumable.** It is a fixed trial budget in one
+  process; killing it loses everything except the best witness already written.
+
+### Does not generalise
+
+- **The anchor reduction.** 42x on `Z_3 x Z_14`, 60x on `Z_30 x Z_2`, 2x on the
+  dicyclic candidates, 378x on the `[[756,16,d]]` bivariate bicycle. It is a
+  property of the code's verified automorphism group and nothing else. `certdist`
+  prints it on every job with that caveat attached rather than folding it into a
+  runtime estimate silently.
+- **The even-weight parity gate.** Present on the four `Elite` candidates,
+  absent on the two `EliteP` ones, which is why the latter need one extra
+  enumeration radius. Recomputed per job, never assumed.
+- **"Shards are cheap."** The prefix expansion runs until it holds
+  `16 * shard_count` branches. At a deep radius with a small anchor set the
+  branch supply is finite, and a high shard count would either fail to reach the
+  target or push the expansion so deep that its repeated cost stops being a
+  rounding error. The 0.38% inflation measured here is not a constant.
+- **Verification cheapness.** Structural verification is cheap because it does
+  not re-run the search. See section 6 for exactly what that buys and what it
+  does not.
