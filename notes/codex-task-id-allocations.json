@@ -4013,8 +4013,26 @@
       "last": 1025,
       "purpose": "sparsity-aware Hankel rank routine, then attack Conjecture PRS-1 at the high-redundancy carrier cells its evidence never reached, starting with (r,m)=(17,7) at q=29",
       "sequence": 446
+    },
+    {
+      "count": 1,
+      "first": 1026,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 1026,
+      "purpose": "separate the field-size and dimension hypotheses in PRS-1: decide whether q>=16 and k>=4 are two shadows of one condition on the pair",
+      "sequence": 447
+    },
+    {
+      "count": 1,
+      "first": 1027,
+      "kind": "reservation",
+      "lane": "gem-mining",
+      "last": 1027,
+      "purpose": "read the current Ergodis state, then survey SAT/SMT/dynamic-programming state of the art and our specialized kernels for importable algorithmic and performance techniques",
+      "sequence": 448
     }
   ],
-  "next_id": 1026,
+  "next_id": 1028,
   "schema": "codex-task-id-allocations-v1"
 }
