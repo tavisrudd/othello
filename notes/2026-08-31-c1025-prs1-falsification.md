@@ -163,3 +163,30 @@ Against the 600 s timeout it previously hit.  **The cell is clean**: the two
 deep points are the persistent ones the stratum meets, and there is no
 exceptional deep hole at `q = 29`.
 
+### The `M = 3` family, exhaustively
+
+`(17,7)` at one field settles little, since the C1024 heuristic allows firing
+anywhere below `(r-3)^2/2`.  So every `M = 3` carrier was swept over its **whole
+admissible range** — every prime power `q ≤ 127` with `m | q-1`, `q ≥ d`, and
+`k = q+1-r ≥ 1`.  `M = 3` means `m = (r-3)/2`, which is the direction along
+which the heuristic threshold grows quadratically and is therefore where a
+constant threshold is most likely to break.
+
+```text
+111 cells.   redundancy r = 9 … 39.   fields q = 13 … 127.
+cells with an exceptional deep hole:  2
+    r=9,  m=3,  q=13    183 points,  6 deep,  4 exceptional
+    r=11, m=4,  q=13    183 points, 14 deep, 12 exceptional
+```
+
+Both are already-known cells at `q = 13`.  **Every one of the other 109 cells is
+clean**, including every field above 13 at every redundancy up to 39.
+
+This is the direct test C1024 asked for and it comes out **against** the
+sampling-artifact worry: the region that was previously unreachable — `m` up to
+18, `r` up to 39, `q` up to 127 — behaves exactly as Conjecture PRS-1 predicts.
+The heuristic `(r-3)^2/2`, which would have permitted firing at (say) `r = 31`
+for every `q` below 392, is not merely unproved but **empirically wrong as a
+description of where carriers fire**: nothing fires above 13 anywhere in the
+swept region.
+
