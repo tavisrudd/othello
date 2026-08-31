@@ -30,7 +30,7 @@ task-specific feature extractors remain private adapters.
 | C1011 | adaptive/nonadaptive query design over a finite incidence system | ceiling could show ambiguity but could not construct query strategies | landed flat adaptive/nonadaptive compilers, verifiers, and pair-query lower bound |
 | C1005/C1012 | coherent closure and fusion-primitivity | spectral sufficient condition was covered; Hadamard/common-neighbour closure was not | landed exact transpose/intersection-count coherent refinement |
 | C1013/C1014 | higher characters, Jacobi sums, cyclotomic cosets, curve-supported sums | quadratic characters only | landed exact higher-character, coset, Jacobi, and cyclotomic censuses; curve support remains |
-| C1015 | Hamilton-pair parity and shared-two-label closure | generic incidence/group kernels exist, but no typed linear-constraint closure engine | retain as a private fixture for a future interpolation/closure kernel |
+| C1015 | Hamilton-pair parity, exact-cover sums, and shared-two-label closure | row evaluation could stratify by a key but could not form permutation-invariant parent states | landed bounded multiset compilation; retain typed linear-constraint closure as the next kernel |
 
 ## Landed tranche
 
@@ -104,6 +104,25 @@ atomic record, and joins only on completion. It does not run in a search worker
 or add a search-path poll. Durable population/archive checkpoint-resume and
 successive-halving scorecards remain open.
 
+The C1015 Hamilton-gap diagnostic exposed a separate representation ceiling:
+its useful assertion is about the sum of seven residual matchings belonging to
+one exact cover, whereas the campaign VM saw only individual matching rows.
+The new `multiset` compiler canonicalizes arbitrarily ordered children by
+parent key and produces checked counts, sums, minima, and maxima under explicit
+row/group/cell bounds. `FeatureBatch::aggregate_uniform_groups` turns those
+summaries into ordinary dense parent rows; labels must agree within each
+group, every parent has unit weight, and the parent key is retained only as
+the evidence row identifier—not exposed as a learnable feature. This prevents
+the trivial key-memorization failure mode.
+
+The optional daemon now exposes `group-compile`, and `ergodisctl group-compile`
+streams the compiled parent campaign to a create-only run-relative JSONL file.
+The unchanged allocation-free VM, tree synthesizer, batch evaluator, and
+evolution worker can consume that file in a follow-on campaign. A synthetic
+seven-child regression recovers an exact sum threshold from 21 child rows;
+another round-trip regression writes, reloads, and verifies the parent data.
+No group operation enters a solve worker or a per-candidate cross-row loop.
+
 ## Highest-EV remaining kernels
 
 1. **Typed linear-constraint closure.** Compile small incidence/interpolation
@@ -155,3 +174,10 @@ At Rust 1.87.0, both landed commits passed `cargo test --all-features` and
 strict all-target/all-feature Clippy. The new product census passes the real
 allocator-counting harness with zero allocations. No solve hot loop or hot
 record changed, so a solver counter A/B was not triggered by this tranche.
+
+The bounded-multiset tranche additionally passes all 324 library tests and all
+all-feature/all-target integration and benchmark-style test targets at Rust
+1.87.0. Strict all-target Clippy passes with `control-plane` alone. That check
+also found and repaired the feature declaration: `control-plane` now enables
+its direct optional `libc` dependency instead of compiling only when the
+unrelated `parallel` feature happened to enable it.

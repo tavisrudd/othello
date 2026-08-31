@@ -3,6 +3,7 @@
 //! This module is feature-gated so ordinary solves retain no controller state,
 //! filesystem traffic, atomics, or hot-loop branches.
 
+use crate::multiset::{MultisetBounds, MultisetStatistic};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, VecDeque};
@@ -304,6 +305,7 @@ impl Campaign {
             "plan-get" => self.plan_get(&request.args),
             "agent-brief" => self.agent_brief(&request.args),
             "feature-ceiling" => self.feature_ceiling(),
+            "group-compile" => self.group_compile(&request.args),
             "scope-profile" => self.scope_profile(&request.args),
             "synthesize-tree" => self.synthesize_tree(&request.args),
             "candidate-try" => self.candidate_try(&request.args, false),
@@ -348,6 +350,7 @@ impl Campaign {
                 "capabilities", "status", "pulse", "watch-register",
                 "watch-unregister", "plan-get", "agent-brief",
                 "feature-ceiling", "scope-profile", "synthesize-tree",
+                "group-compile",
                 "candidate-try", "candidate-apply", "candidate-deactivate",
                 "candidate-batch",
                 "evolve-start", "evolve-status", "evolve-cancel",
@@ -633,6 +636,103 @@ impl Campaign {
             "optimal_weighted_correct": optimal_correct,
             "unavoidable_weighted_errors": weighted_rows.saturating_sub(optimal_correct),
             "first_collision": first_collision,
+        }))
+    }
+
+    fn group_compile(&mut self, args: &Value) -> Result<Value, ControlError> {
+        let group_name = required_str(args, "group_by")?;
+        let group_field = self
+            .batch
+            .fields
+            .iter()
+            .position(|field| field == group_name)
+            .ok_or_else(|| ControlError::Invalid("unknown group_by field".into()))?;
+        let evidence_name = required_str(args, "evidence_name")?;
+        if evidence_name.is_empty()
+            || evidence_name.len() > 64
+            || !evidence_name
+                .bytes()
+                .all(|byte| byte.is_ascii_alphanumeric() || matches!(byte, b'-' | b'_' | b'.'))
+        {
+            return Err(ControlError::Invalid(
+                "group-compile evidence_name is not a safe slug".into(),
+            ));
+        }
+        let mut statistics = Vec::new();
+        if args.get("count").and_then(Value::as_bool).unwrap_or(true) {
+            statistics.push(MultisetStatistic::Count);
+        }
+        for argument in ["sum", "minimum", "maximum"] {
+            let names = args
+                .get(argument)
+                .and_then(Value::as_array)
+                .map(Vec::as_slice)
+                .unwrap_or(&[]);
+            for name in names {
+                let name = name.as_str().ok_or_else(|| {
+                    ControlError::Invalid(format!("{argument} fields must be strings"))
+                })?;
+                let field = self
+                    .batch
+                    .fields
+                    .iter()
+                    .position(|candidate| candidate == name)
+                    .ok_or_else(|| {
+                        ControlError::Invalid(format!("unknown aggregate field {name:?}"))
+                    })?;
+                statistics.push(match argument {
+                    "sum" => MultisetStatistic::Sum { field },
+                    "minimum" => MultisetStatistic::Minimum { field },
+                    "maximum" => MultisetStatistic::Maximum { field },
+                    _ => unreachable!(),
+                });
+            }
+        }
+        if statistics.is_empty() {
+            return Err(ControlError::Invalid(
+                "group-compile requires at least one statistic".into(),
+            ));
+        }
+        let max_groups = args
+            .get("max_groups")
+            .and_then(Value::as_u64)
+            .unwrap_or(1_000_000)
+            .clamp(1, 1_000_000) as usize;
+        let max_output_cells = args
+            .get("max_output_cells")
+            .and_then(Value::as_u64)
+            .unwrap_or(200_000_000)
+            .clamp(1, 200_000_000) as usize;
+        let grouped = self.batch.aggregate_uniform_groups(
+            group_field,
+            &statistics,
+            MultisetBounds {
+                max_rows: self.batch.rows().max(1),
+                max_groups,
+                max_output_cells,
+            },
+        )?;
+        let relative = PathBuf::from("evidence").join(format!("{evidence_name}.data.jsonl"));
+        let file = OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .mode(0o600)
+            .open(self.manifest.run_dir.join(&relative))?;
+        let mut writer = BufWriter::new(file);
+        grouped.write_jsonl(&mut writer)?;
+        writer.flush()?;
+        let synopsis = format!(
+            "compiled {} child rows into {} parent groups",
+            self.batch.rows(),
+            grouped.rows()
+        );
+        self.record("group-compiled", &synopsis, None)?;
+        Ok(json!({
+            "path": relative,
+            "child_rows": self.batch.rows(),
+            "groups": grouped.rows(),
+            "fields": grouped.fields,
+            "generator": grouped.generator,
         }))
     }
 
@@ -1574,6 +1674,7 @@ fn write_response(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::multiset::{MultisetBounds, MultisetStatistic};
     use std::thread;
     use std::time::Duration;
 
@@ -1637,6 +1738,65 @@ mod tests {
         let plan = CompiledPlan::compile(&spec, &batch.fields).unwrap();
         let result = evaluate_plan(&batch, &plan).unwrap();
         assert_eq!(result.weighted_correct, 4);
+        assert_eq!(result.first_mismatch, None);
+    }
+
+    #[test]
+    fn grouped_compilation_exposes_a_multiset_sum_without_key_leakage() {
+        let mut values = Vec::new();
+        let mut row_ids = Vec::new();
+        let mut expected = 0_u64;
+        for (group, contributions, label) in [
+            (10_i64, [1_i64; 7], false),
+            (20, [2; 7], true),
+            (30, [1, 1, 2, 2, 2, 2, 2], true),
+        ] {
+            for contribution in contributions {
+                let row = row_ids.len();
+                row_ids.push(row as u64);
+                values.extend_from_slice(&[group, contribution]);
+                if label {
+                    expected |= 1_u64 << row;
+                }
+            }
+        }
+        let children = FeatureBatch {
+            presentation: "residual-children".into(),
+            problem: "group-relation".into(),
+            fields: vec!["parent".into(), "degree".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: row_ids.into_boxed_slice(),
+            weights: vec![1; 21].into_boxed_slice(),
+            expected: vec![expected].into_boxed_slice(),
+            values: values.into_boxed_slice(),
+        };
+        let parents = children
+            .aggregate_uniform_groups(
+                0,
+                &[
+                    MultisetStatistic::Count,
+                    MultisetStatistic::Sum { field: 1 },
+                    MultisetStatistic::Minimum { field: 1 },
+                ],
+                MultisetBounds {
+                    max_rows: 64,
+                    max_groups: 8,
+                    max_output_cells: 32,
+                },
+            )
+            .unwrap();
+        assert_eq!(
+            &*parents.fields,
+            &["group-count", "group-sum:degree", "group-min:degree"]
+        );
+        assert_eq!(parents.rows(), 3);
+        assert_eq!(parents.row(0), &[7, 7, 1]);
+        assert_eq!(parents.row(1), &[7, 14, 2]);
+        assert_eq!(parents.row(2), &[7, 12, 1]);
+        let (spec, _, _) = learn_decision_tree(&parents, 7, 3, None).unwrap();
+        let plan = CompiledPlan::compile(&spec, &parents.fields).unwrap();
+        let result = evaluate_plan(&parents, &plan).unwrap();
+        assert_eq!(result.weighted_correct, 3);
         assert_eq!(result.first_mismatch, None);
     }
 
@@ -1870,6 +2030,53 @@ mod tests {
         assert_eq!(combined["batch_observed_mask"], 65);
         assert_eq!(combined["live_observed_mask"], 1_u64 << 11);
         assert_eq!(combined["observed_mask"], 65 | (1_u64 << 11));
+    }
+
+    #[test]
+    fn group_compile_streams_a_reusable_parent_campaign() {
+        let temporary = tempfile::tempdir().unwrap();
+        let data = temporary.path().join("data.jsonl");
+        let children = FeatureBatch {
+            presentation: "children".into(),
+            problem: "fixture".into(),
+            fields: vec!["parent".into(), "value".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: vec![0, 1, 2, 3].into_boxed_slice(),
+            weights: vec![1; 4].into_boxed_slice(),
+            expected: vec![0b1100].into_boxed_slice(),
+            values: vec![4, 2, 4, 3, 9, 5, 9, 7].into_boxed_slice(),
+        };
+        children.write_jsonl(File::create(&data).unwrap()).unwrap();
+        let run = temporary.path().join("run");
+        let mut campaign = Campaign::create(
+            &data,
+            &run,
+            Some(temporary.path().join("control.sock")),
+            4096,
+            4096,
+            4096,
+        )
+        .unwrap();
+        let result = campaign
+            .group_compile(&json!({
+                "group_by": "parent",
+                "sum": ["value"],
+                "minimum": ["value"],
+                "evidence_name": "parents",
+            }))
+            .unwrap();
+        assert_eq!(result["child_rows"], 4);
+        assert_eq!(result["groups"], 2);
+        let grouped =
+            FeatureBatch::read_jsonl(&run.join(result["path"].as_str().unwrap()), 8, 32).unwrap();
+        assert_eq!(
+            &*grouped.fields,
+            &["group-count", "group-sum:value", "group-min:value"]
+        );
+        assert_eq!(grouped.row(0), &[2, 5, 2]);
+        assert_eq!(grouped.row(1), &[2, 12, 5]);
+        assert!(!grouped.expected(0));
+        assert!(grouped.expected(1));
     }
 
     #[test]

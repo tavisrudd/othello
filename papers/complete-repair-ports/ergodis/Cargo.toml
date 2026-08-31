@@ -16,7 +16,7 @@ exclude = ["AGENTS.md", "PERFORMANCE.md", "evidence/", "proptest-regressions/"]
 default = []
 parallel = ["dep:libc", "dep:multiversion", "dep:rayon"]
 large-css = []
-control-plane = []
+control-plane = ["dep:libc"]
 
 [dependencies]
 anyhow = "1"

@@ -1,9 +1,10 @@
 use super::{ControlError, DATA_SCHEMA, MAX_PLAN_OPS, MAX_PLAN_STACK, PLAN_SCHEMA};
+use crate::multiset::{compile_bounded_multiset_aggregates, MultisetBounds, MultisetStatistic};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::collections::BTreeMap;
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io::{BufRead, BufReader, Write};
 use std::path::Path;
 
 #[derive(Debug, Deserialize)]
@@ -140,6 +141,126 @@ impl FeatureBatch {
 
     pub fn rows(&self) -> usize {
         self.row_ids.len()
+    }
+
+    /// Stream this frozen batch in the stable campaign-data format.
+    pub fn write_jsonl(&self, mut output: impl Write) -> Result<(), ControlError> {
+        serde_json::to_writer(
+            &mut output,
+            &json!({
+                "schema": DATA_SCHEMA,
+                "presentation": self.presentation,
+                "problem": self.problem,
+                "fields": self.fields,
+                "rows": self.rows(),
+                "generator": self.generator,
+            }),
+        )?;
+        output.write_all(b"\n")?;
+        for row in 0..self.rows() {
+            serde_json::to_writer(
+                &mut output,
+                &json!({
+                    "id": self.row_ids[row],
+                    "weight": self.weights[row],
+                    "expected": self.expected(row),
+                    "values": self.row(row),
+                }),
+            )?;
+            output.write_all(b"\n")?;
+        }
+        Ok(())
+    }
+
+    /// Compile one permutation-invariant row per value of `group_field`.
+    ///
+    /// Labels must be uniform within each group.  Every resulting parent row
+    /// has weight one; child multiplicity is available explicitly through a
+    /// `Count` statistic.  This is a cold transformation, after which plans
+    /// use the unchanged allocation-free row evaluator.
+    pub fn aggregate_uniform_groups(
+        &self,
+        group_field: usize,
+        statistics: &[MultisetStatistic],
+        bounds: MultisetBounds,
+    ) -> Result<Self, ControlError> {
+        if group_field >= self.fields.len() {
+            return Err(ControlError::Invalid(
+                "unknown aggregate group field".into(),
+            ));
+        }
+        let group_keys = (0..self.rows())
+            .map(|row| self.row(row)[group_field])
+            .collect::<Vec<_>>();
+        let table = compile_bounded_multiset_aggregates(
+            &group_keys,
+            &self.values,
+            self.fields.len(),
+            statistics,
+            bounds,
+        )
+        .map_err(|error| ControlError::Invalid(error.to_string()))?;
+
+        let mut labels = BTreeMap::<i64, bool>::new();
+        for (row, &key) in group_keys.iter().enumerate() {
+            let expected = self.expected(row);
+            if labels
+                .insert(key, expected)
+                .is_some_and(|prior| prior != expected)
+            {
+                return Err(ControlError::Invalid(
+                    "aggregate groups require uniform expected labels".into(),
+                ));
+            }
+        }
+        let mut fields = Vec::with_capacity(statistics.len());
+        for statistic in statistics {
+            fields.push(match *statistic {
+                MultisetStatistic::Count => "group-count".into(),
+                MultisetStatistic::Sum { field } => format!("group-sum:{}", self.fields[field]),
+                MultisetStatistic::Minimum { field } => {
+                    format!("group-min:{}", self.fields[field])
+                }
+                MultisetStatistic::Maximum { field } => {
+                    format!("group-max:{}", self.fields[field])
+                }
+            });
+        }
+        let mut values = Vec::with_capacity(table.values().len());
+        let mut expected = vec![0_u64; table.groups().div_ceil(64)];
+        for group in 0..table.groups() {
+            let key = table.group_key(group);
+            values.extend_from_slice(table.row(group));
+            if labels[&key] {
+                expected[group / 64] |= 1_u64 << (group % 64);
+            }
+        }
+        let mut digest = blake3::Hasher::new();
+        for key in table.group_keys() {
+            digest.update(&key.to_le_bytes());
+        }
+        for value in table.values() {
+            digest.update(&value.to_le_bytes());
+        }
+        Ok(Self {
+            presentation: format!("{}:grouped", self.presentation),
+            problem: self.problem.clone(),
+            fields: fields.into_boxed_slice(),
+            generator: Some(FeatureGeneratorProvenance {
+                name: "ergodis-bounded-multiset".into(),
+                version: env!("CARGO_PKG_VERSION").into(),
+                digest: digest.finalize().to_hex().to_string(),
+            }),
+            row_ids: table
+                .group_keys()
+                .iter()
+                .map(|key| u64::from_le_bytes(key.to_le_bytes()))
+                .collect::<Vec<_>>()
+                .into_boxed_slice(),
+            weights: vec![1_u64; table.groups()].into_boxed_slice(),
+            expected: expected.into_boxed_slice(),
+            values: values.into_boxed_slice(),
+        })
     }
 
     pub(super) fn expected(&self, row: usize) -> bool {

@@ -31,6 +31,7 @@ pub mod integer_moments;
 pub mod interface;
 pub mod matrix;
 pub mod modular_power;
+pub mod multiset;
 pub mod observational;
 pub mod orbit;
 pub mod orbit_compile;
@@ -149,6 +150,10 @@ pub use matrix::{Matrix, MatrixError};
 pub use modular_power::{
     certify_integer_matrix_powers, verify_integer_matrix_powers, ModularPowerCertificate,
     ModularPowerError,
+};
+pub use multiset::{
+    compile_bounded_multiset_aggregates, MultisetAggregateError, MultisetAggregateTable,
+    MultisetBounds, MultisetStatistic,
 };
 #[doc(hidden)]
 pub use orbit::ternary_orbit_syndrome_meet_in_middle_unreserved;

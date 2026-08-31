@@ -65,6 +65,24 @@ enum Command {
     },
     /// Exact best possible classification using the current feature vectors.
     Ceiling,
+    /// Compile permutation-invariant parent rows for a follow-on campaign.
+    GroupCompile {
+        group_by: String,
+        #[arg(long, default_value_t = true)]
+        count: bool,
+        #[arg(long)]
+        sum: Vec<String>,
+        #[arg(long)]
+        minimum: Vec<String>,
+        #[arg(long)]
+        maximum: Vec<String>,
+        #[arg(long)]
+        evidence_name: String,
+        #[arg(long, default_value_t = 1_000_000)]
+        max_groups: u64,
+        #[arg(long, default_value_t = 200_000_000)]
+        max_output_cells: u64,
+    },
     /// Learn a bounded exact decision-tree attack and write its replayable plan.
     Synthesize {
         #[arg(long)]
@@ -290,6 +308,28 @@ fn main() -> Result<()> {
             json!({"plan": plan, "expect_epoch": expect_epoch}),
         ),
         Command::Ceiling => ("feature-ceiling", json!({})),
+        Command::GroupCompile {
+            group_by,
+            count,
+            sum,
+            minimum,
+            maximum,
+            evidence_name,
+            max_groups,
+            max_output_cells,
+        } => (
+            "group-compile",
+            json!({
+                "group_by": group_by,
+                "count": count,
+                "sum": sum,
+                "minimum": minimum,
+                "maximum": maximum,
+                "evidence_name": evidence_name,
+                "max_groups": max_groups,
+                "max_output_cells": max_output_cells,
+            }),
+        ),
         Command::Synthesize { .. } => unreachable!(),
         Command::AgentBrief { since, top } => ("agent-brief", json!({"since": since, "top": top})),
         Command::Try { plan, group_by } => (
