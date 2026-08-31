@@ -3941,8 +3941,17 @@
       "last": 1016,
       "purpose": "proof-carrying quotient synthesis for Hadamard search pilot",
       "sequence": 438
+    },
+    {
+      "count": 1,
+      "first": 1017,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1017,
+      "purpose": "Audit and remediate Ergodis core performance-contract compliance",
+      "sequence": 439
     }
   ],
-  "next_id": 1017,
+  "next_id": 1018,
   "schema": "codex-task-id-allocations-v1"
 }
