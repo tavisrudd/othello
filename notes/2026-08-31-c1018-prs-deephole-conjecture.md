@@ -237,6 +237,7 @@ decided by Gaussian rank — with no Hankel criterion and no orbit machinery:
 | `r=9, q=13` | 4 | 0 | 1,638 | 1,638 | `{2,3}` |
 | `r=9, q=16` | 3 | 0 | 2,312 | 2,312 | `{2}` |
 | `r=9, q=17` | 3 | 0 | 2,754 | 2,754 | `{2}` |
+| `r=9, q=19` | 4 | 0 | 3,800 | 3,800 | `{2}` |
 | `r=8, q=16` | 2 | 0 | 2,312 | 2,312 | `{2}` |
 | `r=8, q=19` | 2 | 0 | 3,800 | 3,800 | `{2}` |
 
@@ -708,6 +709,15 @@ python3 notes/2026-08-31-c1018-prs-certificate.py check $C \
 * **Not certified.**  Anything about a field or redundancy not listed.  A
   stratum sweep sees only orbits whose stabilizer contains the corresponding
   cyclic group; it cannot show `q ∉ X(r)`.
+* **No independent Python replay exists for the `r = 13` strata.**  The Python
+  verifier decides the coset weight by enumerating `j`-subsets of `PG(1,q)` and
+  taking Gaussian ranks; at `r = 13, q = 31` that is `Σ_{j≤12} C(32,j) ≈ 4.4·10^8`
+  rank computations *per stratum point*, over 993 points.  It is not a budget
+  question but an interpreted-language one, and no second implementation was
+  written.  What stands in its place for those cells is the `--rank-mode`
+  cross-check (kernel enumeration against subset enumeration, structurally the
+  2026-08-30 driver's algorithm) and, at `q = 16`, agreement with the 2026-08-30
+  driver itself, which shares no code with the census driver.
 * **Trusted boundary of the checker.**  The Ergodis core's `SmallField`
   (irreducibility test and arithmetic tables), `ProjectiveIndex` (rank/unrank of
   `PG(d,q)`), and the standard library's atomics.  The exact-rank criterion
@@ -715,4 +725,8 @@ python3 notes/2026-08-31-c1018-prs-certificate.py check $C \
   verifier does *not* assume: it decides `w(s)` from the definition, as the
   least number of parity-check columns whose `F_q`-span contains the syndrome,
   by Gaussian rank.
+
+## 10. Status
+
+<!-- STATUS -->
 
