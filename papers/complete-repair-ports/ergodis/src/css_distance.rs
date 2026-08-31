@@ -1411,6 +1411,7 @@ fn search_syndrome_branch_partition_impl<
 >(
     compiled: &CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>,
     branches: &[WideRootBranch<SUPPORT_WORDS, CHECK_WORDS>],
+    workspace: &mut WideBranchWorkspace<SUPPORT_WORDS, CHECK_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
@@ -1418,9 +1419,6 @@ fn search_syndrome_branch_partition_impl<
 where
     PackedSyndrome<CHECK_WORDS>: WideSyndrome,
 {
-    let mut workspace = WideBranchWorkspace::<SUPPORT_WORDS, CHECK_WORDS>::new(usize::from(
-        searched_maximum_weight,
-    ));
     let worker_index = rayon::current_thread_index().unwrap_or(0) % mailboxes.len();
     let mailbox = &mailboxes[worker_index];
     let mut pruning_bound = mailbox.inbound_bound.load(Ordering::Relaxed);
@@ -1545,6 +1543,7 @@ trait WidePartitionKernel<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> 
     fn search_partition(
         &self,
         branches: &[WideRootBranch<SUPPORT_WORDS, CHECK_WORDS>],
+        workspace: &mut WideBranchWorkspace<SUPPORT_WORDS, CHECK_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
         pulse_interval: u64,
@@ -1553,6 +1552,7 @@ trait WidePartitionKernel<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> 
     fn search_partition_unpulsed(
         &self,
         branches: &[WideRootBranch<SUPPORT_WORDS, CHECK_WORDS>],
+        workspace: &mut WideBranchWorkspace<SUPPORT_WORDS, CHECK_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
     ) -> CachePaddedWideBranchResult<SUPPORT_WORDS>;
@@ -1566,6 +1566,7 @@ trait WidePartitionKernel<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> 
 fn search_syndrome_branch_partition_wide(
     compiled: &CompiledWideCssDistance,
     branches: &[WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
@@ -1573,6 +1574,7 @@ fn search_syndrome_branch_partition_wide(
     search_syndrome_branch_partition_impl::<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1, true>(
         compiled,
         branches,
+        workspace,
         searched_maximum_weight,
         mailboxes,
         pulse_interval,
@@ -1587,6 +1589,7 @@ fn search_syndrome_branch_partition_wide(
 fn search_syndrome_branch_partition_extra_wide(
     compiled: &CompiledExtraWideCssDistance,
     branches: &[WideRootBranch<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
@@ -1594,6 +1597,7 @@ fn search_syndrome_branch_partition_extra_wide(
     search_syndrome_branch_partition_impl::<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1, true>(
         compiled,
         branches,
+        workspace,
         searched_maximum_weight,
         mailboxes,
         pulse_interval,
@@ -1609,6 +1613,7 @@ fn search_syndrome_branch_partition_extra_wide(
 fn search_syndrome_branch_partition_large(
     compiled: &CompiledLargeCssDistance,
     branches: &[WideRootBranch<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
@@ -1616,6 +1621,7 @@ fn search_syndrome_branch_partition_large(
     search_syndrome_branch_partition_impl::<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1, true>(
         compiled,
         branches,
+        workspace,
         searched_maximum_weight,
         mailboxes,
         pulse_interval,
@@ -1631,6 +1637,7 @@ fn search_syndrome_branch_partition_large(
 fn search_syndrome_branch_partition_huge(
     compiled: &CompiledHugeCssDistance,
     branches: &[WideRootBranch<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
@@ -1643,6 +1650,7 @@ fn search_syndrome_branch_partition_huge(
     >(
         compiled,
         branches,
+        workspace,
         searched_maximum_weight,
         mailboxes,
         pulse_interval,
@@ -1658,6 +1666,7 @@ fn search_syndrome_branch_partition_huge(
 fn search_syndrome_branch_partition_colossal(
     compiled: &CompiledColossalCssDistance,
     branches: &[WideRootBranch<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
     pulse_interval: u64,
@@ -1670,6 +1679,7 @@ fn search_syndrome_branch_partition_colossal(
     >(
         compiled,
         branches,
+        workspace,
         searched_maximum_weight,
         mailboxes,
         pulse_interval,
@@ -1684,12 +1694,14 @@ fn search_syndrome_branch_partition_colossal(
 fn search_syndrome_branch_partition_wide_unpulsed(
     compiled: &CompiledWideCssDistance,
     branches: &[WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
 ) -> CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS> {
     search_syndrome_branch_partition_impl::<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1, false>(
         compiled,
         branches,
+        workspace,
         searched_maximum_weight,
         mailboxes,
         0,
@@ -1704,12 +1716,14 @@ fn search_syndrome_branch_partition_wide_unpulsed(
 fn search_syndrome_branch_partition_extra_wide_unpulsed(
     compiled: &CompiledExtraWideCssDistance,
     branches: &[WideRootBranch<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
 ) -> CachePaddedWideBranchResult<EXTRA_WIDE_SUPPORT_WORDS> {
     search_syndrome_branch_partition_impl::<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS, 1, false>(
         compiled,
         branches,
+        workspace,
         searched_maximum_weight,
         mailboxes,
         0,
@@ -1725,12 +1739,14 @@ fn search_syndrome_branch_partition_extra_wide_unpulsed(
 fn search_syndrome_branch_partition_large_unpulsed(
     compiled: &CompiledLargeCssDistance,
     branches: &[WideRootBranch<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
 ) -> CachePaddedWideBranchResult<LARGE_SUPPORT_WORDS> {
     search_syndrome_branch_partition_impl::<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS, 1, false>(
         compiled,
         branches,
+        workspace,
         searched_maximum_weight,
         mailboxes,
         0,
@@ -1746,6 +1762,7 @@ fn search_syndrome_branch_partition_large_unpulsed(
 fn search_syndrome_branch_partition_huge_unpulsed(
     compiled: &CompiledHugeCssDistance,
     branches: &[WideRootBranch<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
 ) -> CachePaddedWideBranchResult<HUGE_SUPPORT_WORDS> {
@@ -1754,7 +1771,14 @@ fn search_syndrome_branch_partition_huge_unpulsed(
         HUGE_SYNDROME_WORDS,
         HUGE_LOGICAL_WORDS,
         false,
-    >(compiled, branches, searched_maximum_weight, mailboxes, 0)
+    >(
+        compiled,
+        branches,
+        workspace,
+        searched_maximum_weight,
+        mailboxes,
+        0,
+    )
 }
 
 #[cfg(feature = "parallel")]
@@ -1766,6 +1790,7 @@ fn search_syndrome_branch_partition_huge_unpulsed(
 fn search_syndrome_branch_partition_colossal_unpulsed(
     compiled: &CompiledColossalCssDistance,
     branches: &[WideRootBranch<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>],
+    workspace: &mut WideBranchWorkspace<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>,
     searched_maximum_weight: u16,
     mailboxes: &[BoundMailbox],
 ) -> CachePaddedWideBranchResult<COLOSSAL_SUPPORT_WORDS> {
@@ -1774,7 +1799,14 @@ fn search_syndrome_branch_partition_colossal_unpulsed(
         COLOSSAL_SYNDROME_WORDS,
         HUGE_LOGICAL_WORDS,
         false,
-    >(compiled, branches, searched_maximum_weight, mailboxes, 0)
+    >(
+        compiled,
+        branches,
+        workspace,
+        searched_maximum_weight,
+        mailboxes,
+        0,
+    )
 }
 
 #[cfg(feature = "parallel")]
@@ -1783,6 +1815,7 @@ impl WidePartitionKernel<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> for CompiledWi
     fn search_partition(
         &self,
         branches: &[WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
         pulse_interval: u64,
@@ -1790,6 +1823,7 @@ impl WidePartitionKernel<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> for CompiledWi
         search_syndrome_branch_partition_wide(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
             pulse_interval,
@@ -1800,12 +1834,14 @@ impl WidePartitionKernel<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS> for CompiledWi
     fn search_partition_unpulsed(
         &self,
         branches: &[WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
     ) -> CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS> {
         search_syndrome_branch_partition_wide_unpulsed(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
         )
@@ -1820,6 +1856,7 @@ impl WidePartitionKernel<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>
     fn search_partition(
         &self,
         branches: &[WideRootBranch<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
         pulse_interval: u64,
@@ -1827,6 +1864,7 @@ impl WidePartitionKernel<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>
         search_syndrome_branch_partition_extra_wide(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
             pulse_interval,
@@ -1837,12 +1875,14 @@ impl WidePartitionKernel<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>
     fn search_partition_unpulsed(
         &self,
         branches: &[WideRootBranch<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
     ) -> CachePaddedWideBranchResult<EXTRA_WIDE_SUPPORT_WORDS> {
         search_syndrome_branch_partition_extra_wide_unpulsed(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
         )
@@ -1856,6 +1896,7 @@ impl WidePartitionKernel<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS> for Compiled
     fn search_partition(
         &self,
         branches: &[WideRootBranch<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
         pulse_interval: u64,
@@ -1863,6 +1904,7 @@ impl WidePartitionKernel<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS> for Compiled
         search_syndrome_branch_partition_large(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
             pulse_interval,
@@ -1873,12 +1915,14 @@ impl WidePartitionKernel<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS> for Compiled
     fn search_partition_unpulsed(
         &self,
         branches: &[WideRootBranch<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
     ) -> CachePaddedWideBranchResult<LARGE_SUPPORT_WORDS> {
         search_syndrome_branch_partition_large_unpulsed(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
         )
@@ -1892,6 +1936,7 @@ impl WidePartitionKernel<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS> for CompiledHu
     fn search_partition(
         &self,
         branches: &[WideRootBranch<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
         pulse_interval: u64,
@@ -1899,6 +1944,7 @@ impl WidePartitionKernel<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS> for CompiledHu
         search_syndrome_branch_partition_huge(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
             pulse_interval,
@@ -1909,12 +1955,14 @@ impl WidePartitionKernel<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS> for CompiledHu
     fn search_partition_unpulsed(
         &self,
         branches: &[WideRootBranch<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
     ) -> CachePaddedWideBranchResult<HUGE_SUPPORT_WORDS> {
         search_syndrome_branch_partition_huge_unpulsed(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
         )
@@ -1930,6 +1978,7 @@ impl WidePartitionKernel<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>
     fn search_partition(
         &self,
         branches: &[WideRootBranch<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
         pulse_interval: u64,
@@ -1937,6 +1986,7 @@ impl WidePartitionKernel<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>
         search_syndrome_branch_partition_colossal(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
             pulse_interval,
@@ -1947,12 +1997,14 @@ impl WidePartitionKernel<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>
     fn search_partition_unpulsed(
         &self,
         branches: &[WideRootBranch<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>],
+        workspace: &mut WideBranchWorkspace<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
     ) -> CachePaddedWideBranchResult<COLOSSAL_SUPPORT_WORDS> {
         search_syndrome_branch_partition_colossal_unpulsed(
             self,
             branches,
+            workspace,
             searched_maximum_weight,
             mailboxes,
         )
@@ -2076,6 +2128,20 @@ where
         for (index, branch) in branches.into_iter().enumerate() {
             partitions[index % partition_count].push(branch);
         }
+        let mut workspaces = (0..partition_count)
+            .map(|_| {
+                WideBranchWorkspace::<SUPPORT_WORDS, CHECK_WORDS>::new(usize::from(
+                    searched_maximum_weight,
+                ))
+            })
+            .collect::<Vec<_>>();
+        let mut partials = (0..partition_count)
+            .map(|_| CachePaddedWideBranchResult {
+                best_weight: searched_maximum_weight.saturating_add(1),
+                best_support: PackedSupport::default(),
+                stats: ConnectedSearchStats::default(),
+            })
+            .collect::<Vec<_>>();
         let events = (pulse_interval != 0 && thread_count > 1)
             .then(|| BoundControllerEvents::new(thread_count))
             .flatten();
@@ -2090,28 +2156,31 @@ where
                 )
             })
             .collect::<Vec<_>>();
-        let search = || {
+        let mut search = || {
             partitions
                 .par_iter()
-                .map(|partition| {
+                .zip(workspaces.par_iter_mut())
+                .zip(partials.par_iter_mut())
+                .for_each(|((partition, workspace), result)| {
                     if worker_pulse_interval == 0 {
-                        self.search_partition_unpulsed(
+                        *result = self.search_partition_unpulsed(
                             partition,
+                            workspace,
                             searched_maximum_weight,
                             &mailboxes,
-                        )
+                        );
                     } else {
-                        self.search_partition(
+                        *result = self.search_partition(
                             partition,
+                            workspace,
                             searched_maximum_weight,
                             &mailboxes,
                             worker_pulse_interval,
-                        )
+                        );
                     }
-                })
-                .collect::<Vec<_>>()
+                });
         };
-        let partials = match &events {
+        match &events {
             Some(events) => with_bound_controller(&mailboxes, events, search),
             None => search(),
         };
@@ -3638,11 +3707,11 @@ impl CompiledCssDistance {
     fn search_root_branch_partition<const PULSE: bool>(
         &self,
         branches: &[RootBranch],
+        workspace: &mut BranchWorkspace,
         searched_maximum_weight: u16,
         mailboxes: &[BoundMailbox],
         pulse_interval: u64,
     ) -> CachePaddedBranchResult {
-        let mut workspace = BranchWorkspace::new(usize::from(searched_maximum_weight));
         let mut best_weight = searched_maximum_weight.saturating_add(1);
         let worker_index = rayon::current_thread_index().unwrap_or(0) % mailboxes.len();
         let mailbox = &mailboxes[worker_index];
@@ -3846,6 +3915,16 @@ impl CompiledCssDistance {
         for (index, branch) in branches.into_iter().enumerate() {
             partitions[index % partition_count].push(branch);
         }
+        let mut workspaces = (0..partition_count)
+            .map(|_| BranchWorkspace::new(usize::from(searched_maximum_weight)))
+            .collect::<Vec<_>>();
+        let mut partials = (0..partition_count)
+            .map(|_| CachePaddedBranchResult {
+                best_weight: searched_maximum_weight.saturating_add(1),
+                best_support: PackedSupport::default(),
+                stats: ConnectedSearchStats::default(),
+            })
+            .collect::<Vec<_>>();
         let thread_count = rayon::current_num_threads();
         let events = (pulse_interval != 0 && thread_count > 1)
             .then(|| BoundControllerEvents::new(thread_count))
@@ -3861,29 +3940,32 @@ impl CompiledCssDistance {
                 )
             })
             .collect::<Vec<_>>();
-        let search = || {
+        let mut search = || {
             partitions
                 .par_iter()
-                .map(|partition| {
+                .zip(workspaces.par_iter_mut())
+                .zip(partials.par_iter_mut())
+                .for_each(|((partition, workspace), result)| {
                     if worker_pulse_interval == 0 {
-                        self.search_root_branch_partition::<false>(
+                        *result = self.search_root_branch_partition::<false>(
                             partition,
+                            workspace,
                             searched_maximum_weight,
                             &mailboxes,
                             0,
-                        )
+                        );
                     } else {
-                        self.search_root_branch_partition::<true>(
+                        *result = self.search_root_branch_partition::<true>(
                             partition,
+                            workspace,
                             searched_maximum_weight,
                             &mailboxes,
                             worker_pulse_interval,
-                        )
+                        );
                     }
-                })
-                .collect::<Vec<_>>()
+                });
         };
-        let partials = match &events {
+        match &events {
             Some(events) => with_bound_controller(&mailboxes, events, search),
             None => search(),
         };

@@ -190,6 +190,22 @@ sub-1% clean-miss trade for sole ownership and contention freedom. Per-task
 workspace allocation and its zero-allocation regression remain open under work
 package 4; this controller result does not close C1017.
 
+The first workspace-ownership slice now constructs every wide-lane and compact
+worker workspace plus every padded result slot before the controller releases
+enumeration. Rayon tasks receive exclusive mutable slots and return by writing
+those slots; no workspace or result vector is allocated inside the parallel
+enumerator. Retaining the existing 16-lane-per-thread schedule is essential:
+the seemingly cleaner one-lane-per-thread control preserved exact work and
+reduced total cycles, but static imbalance made BB288 wall time 25.2% worse
+(`t=-25.312`). With 16 preallocated lanes, five BB288 counter pairs improve
+wall 1.014492x and cycles/candidate 1.011486x, but three deterministic BB360
+clean-miss pairs regress wall 2.20% and cycles/candidate 2.15%; flattening the
+borrowed workspaces to direct slices worsens cycles by another 4.2% and is
+rejected. The preallocation boundary is retained as correctness-contract
+progress, but its cross-thread allocation-count harness and the clean-miss
+codegen repair remain open; this is a checkpoint, not completion of work
+package 4.
+
 ## Review findings for the pending C1016 Rust overlay
 
 The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its

@@ -20,9 +20,12 @@ as each coherent tranche lands.
    controller fan-out, separate pulse/no-pulse kernels, exact coalescence
    controls, and retained-binary counter/RSS A/B are complete and accepted;
    the clean miss costs 0.50% cycles/candidate and 0.82% wall while removing
-   2.20% of instructions. Current next slice is worker-owned CSS workspaces
-   plus the real-loop zero-allocation gate, followed by the remaining Tiger
-   layouts and registry evidence.
+   2.20% of instructions. CSS workspaces/results are now preallocated in
+   exclusive 16x coarse lanes before enumeration; the one-lane-per-thread
+   imbalance and direct-slice codegen controls are rejected. Current next slice
+   is the cross-thread real-loop allocation-count gate and the measured 2.15%
+   clean-miss codegen repair, followed by the remaining Tiger layouts and
+   registry evidence.
 3. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
    exact replay/parity, zero-allocation, bounded-memory, and deterministic
    parallel evidence gates.
