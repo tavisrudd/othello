@@ -436,6 +436,101 @@ some involution `t ↦ μ/t` fixes `s`, i.e. when the carrier polynomial `G` is
 self-reciprocal up to the torus action.  That happens at `(9,13,3)` and not at
 the other two; it is a condition on `G`, not on the parity of `m`.
 
+## 5d. Structural reduction: the fixed-locus lemma
+
+Everything in §5 up to here is a sweep of one hand-picked family of subspaces —
+the arithmetic-progression strata — justified by the *observation* that the
+exceptional orbits found so far happen to live on them, with a standing scope
+note that the sweeps are "blind to everything else".  That observation can be
+replaced by a proof, and the proof turns the strata from a heuristic into a
+complete search with an explicit cost bound.
+
+**Lemma (fixed locus).**  Let `σ ∈ PGL_2(q)` have prime order `ℓ` and let `S_σ`
+be its `d`-th symmetric power acting on `PG(d,q)`.  Then
+
+```text
+Fix(S_σ)  =  ⋃_{λ ∈ F_q^*}  P( ker(S_σ - λ·I) ),
+```
+
+a finite union of linear subspaces, and a `PGL_2(q)`-orbit `O ⊆ PG(d,q)` has a
+stabilizer containing a conjugate of `σ` **iff** `O` meets `Fix(S_σ)`.
+
+*Proof.*  A projective point is fixed by `S_σ` exactly when it is an eigenvector,
+which is the displayed union.  If `g σ g^{-1} ∈ Stab(s)` then `g^{-1}s ∈
+Fix(S_σ)`, and conversely if `x ∈ O ∩ Fix(S_σ)` then `σ ∈ Stab(x)`, which is
+conjugate to `Stab(s)`. ∎
+
+**Corollary (complete search of the non-regular orbits).**  Every nontrivial
+subgroup of `PGL_2(q)` contains an element of prime order, and every element of
+prime order `ℓ` is conjugate to a power of one fixed representative: unipotent
+when `ℓ = p`, split-torus when `ℓ | q-1`, non-split-torus when `ℓ | q+1` — the
+three classes being distinguished by whether the element has one, two rational,
+or two Galois-conjugate fixed points on `P^1`.  Moreover `Fix(S_{σ^k}) =
+Fix(S_σ)` for `1 ≤ k < ℓ`, since `S_σ` and `S_{σ^k}` have the same
+eigenvectors.  Hence sweeping
+
+```text
+Fix(S_σ)   for one σ of each prime order  ℓ | p(q-1)(q+1)
+```
+
+visits **every point of every orbit with nontrivial stabilizer**.  The only
+orbits invisible to it are the regular ones.
+
+**Cost.**  For the split element `t ↦ ζ t` of order `ℓ`, `S_σ` is diagonal with
+entries `ζ^i`, so `ker(S_σ - ζ^a I)` is exactly the arithmetic-progression
+stratum `{ i ≡ a (mod ℓ) }` — which is why those strata kept working — of
+dimension `⌈(d+1)/ℓ⌉`.  The largest locus is `ℓ = 2`, of projective dimension
+about `(d-1)/2`, so the whole sweep is `O(q^{⌈(d+1)/2⌉ - 1})` points against the
+census's `O(q^d)`.  **That is a square-root saving in the exponent.**  Measured:
+
+| cell | census points | fixed-locus points | reduction |
+|---|---:|---:|---:|
+| `r=8, q=11`  |     21,435,888 |  2,979 |    7,196× |
+| `r=8, q=13`  |     67,977,560 |  5,155 |   13,187× |
+| `r=8, q=23`  |  3,559,590,240 | 25,473 |  139,739× |
+| `r=9, q=13`  |    883,708,281 | 67,193 |   13,151× |
+| `r=9, q=16`  |  4,581,298,449 | 70,794 |   64,713× |
+
+The implementation (`--fix-sweep`) uses none of the diagonal structure: it
+builds `S_σ` for a concrete `σ` — including a non-split generator found by
+searching companion matrices `[[0,b],[1,e]]` for an irreducible characteristic
+polynomial of full projective order `q+1` — and takes null spaces over `F_q`,
+so the split, non-split and unipotent cases run through one code path.
+
+**Validation against the censuses.**  The sweep must find a nonzero exceptional
+count exactly on the cells whose census has one, and zero on the cells whose
+census has none.  It does:
+
+| cell | census exceptional | fixed-locus exceptional | agrees |
+|---|---:|---:|:--|
+| `r=5, q=16` | 120 (modular carrier) | 9 | ✓ nonzero |
+| `r=8, q=9`  | 522,578 | 289 | ✓ nonzero |
+| `r=8, q=11` | 2,904 in 3 orbits, one non-regular | 4 | ✓ nonzero |
+| `r=8, q=13` | 0 | **0** | ✓ |
+| `r=8, q=16` | 0 | **0** | ✓ |
+| `r=8, q=17` | 0 | **0** | ✓ |
+| `r=8, q=19` | 0 | **0** | ✓ |
+| `r=8, q=23` | 0 | **0** | ✓ |
+| `r=9, q=13` | 364 in one orbit | 18 | ✓ nonzero |
+| `r=9, q=16` | 0 | **0** | ✓ |
+
+The counts differ because the sweep counts *points of one orbit lying in the
+fixed loci*, not orbit sizes: at `(9,13)` the single exceptional orbit of size
+364 meets the loci in 18 points (4 on the `m = 3` stratum, 14 on a non-split
+order-2 locus, consistent with its `S_3` stabilizer containing both a
+three-cycle and involutions).  What matters is the zero/nonzero agreement, and
+it is exact on all ten cells.
+
+**What this replaces, and what it does not.**  It replaces the census as the
+tool for the entire non-regular class, at every field, with a proof rather than
+an enumeration — the `r = 8` band cells that each cost minutes and gigabytes as
+censuses cost milliseconds and kilobytes here.  It does **not** touch the
+regular orbits, and that is now the precise residual: the two size-1320 orbits
+at `(8,11)`, and by §5b′ the whole `r = 5` exceptional band.  Stating the open
+problem as *"do exceptional deep holes with trivial stabilizer exist for
+`q ≥ 16`, `r ≥ 6`?"* is strictly sharper than stating it as `X(r) ⊆ {7,…,13}`,
+and it is what the lemma buys.
+
 ## 6. The landed conjecture (item 5)
 
 Notation.  `X(r) = { q : q ≥ r-1 a prime power, PRS_{q+1-r}(q) has a deep hole
