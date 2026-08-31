@@ -78,6 +78,15 @@ published, complete, computer-verified classification.** BSW §3:
 
 ## The Petersen echo — the strongest lead here
 
+> **RESOLVED 2026-08-31.** The echo is real: the q=31 configuration is the same figure as the q=11
+> Clebsch hexagon — six-arc plus its ten Brianchon points, Petersen chord graph, A₅ stabiliser —
+> differing only in that the Brianchon points are internal at q=11 and external at q=31, so the two
+> are one configuration at two completion levels. The null declared below is refuted
+> ([C1020 census](2026-08-31-c1020-brouwer-exceptional-census.md)). **But the figure is published**:
+> Dye 1991 gives the same-figure claim and states the discriminator as a congruence
+> ([C1022 audit](2026-08-31-c1022-q31-clebsch-recurrence-novelty-audit.md)). Only the bridge to
+> Brouwer's census survives as unpublished. Read both before building on anything below.
+
 BSW's **q=31** configuration: a 6-arc plus a 10-set, where the 6-arc's **15 2-secants** meet the
 10-set in **15 pairs forming a Petersen graph**.
 

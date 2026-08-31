@@ -282,3 +282,23 @@ finiteness lemma for exterior-set families, and does it predict which other fixe
 at all? That would convert a census observation into a structural bound and would apply to the
 mixed internal/external invariant this lane still owns.
 **Status**: open lead. Provisional — the whole gap-mining vet gate applies.
+
+### 2026-08-31 — two sources met while auditing, neither of which the audit went looking for
+
+**Was I looking for this?**: no — both surfaced inside the C1022 novelty audit while chasing a
+different question (whether the q=11/q=31 identification was pre-empted).
+**Expectation violated**: that Dye's conic-hexagon output was two papers (1988, 1991) plus an
+unlocated sequel. It is at least four, and one of them was sitting in a bibliography we had already
+read.
+**Observed**: (a) **Dye 1995**, "A plane sextic curve of genus 4 with `A_5` for collineation group",
+J. London Math. Soc. **52** (1995) 97-110, named in Braden-Disney-Hogg's bibliography — a further Dye
+paper on `A_5` collineation groups, unread, conditioning nothing yet. (b) **Storme-Van Maldeghem**,
+"Primitive arcs in PG(2,q)", Proposition 11: the ten Brianchon points form a 10-arc when
+`q = +/-1 (mod 10)`. That is a property of the same ten points this lane has been computing, stated
+in print, and it was not in any of our sweeps.
+**Strongest question**: (b) is the sharper lead. If the ten Brianchon points are always a 10-arc at
+`q = +/-1 mod 10`, then the completion-level argument has an arc-theoretic reading — the exterior set
+at q=31 is a 6-arc plus a 10-arc — and the natural question is whether the union's arc structure,
+not just its size, is what forces `(q+1)/2`. Read Storme-Van Maldeghem Prop 11 in full before
+building on this; it is currently partial depth.
+**Status**: open lead. Provisional - the gap-mining vet gate applies.
