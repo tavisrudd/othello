@@ -231,10 +231,12 @@ different machines, and survive session boundaries independently.
 The `parallel`-gated `css_distance_random` companion searches for an upper
 certificate by random information sets. It row-reduces the physical parity
 checks under deterministic random coordinate orders, inspects the induced
-systematic kernel basis, and retains only independently replayable logical
-supports. Worker matrices, permutations, pivot maps, and witness scratch are
-pre-sized; a trial allocates nothing unless it discovers a witness.
-`--seed`, `--trials`, and `--threads` are explicit, and `--evidence` writes one
+systematic kernel basis, and optionally combines pairs among the lightest rows
+with bounded order-2 OSD. Worker matrices, permutations, packed kernel rows,
+logical values, ordering arrays, pivot maps, and witness scratch are pre-sized;
+a trial allocates nothing unless it discovers a witness.
+`--seed`, `--trials`, `--threads`, `--osd-order`, and `--osd-window` are
+explicit, and `--evidence` writes one
 create-only, source-hashed JSON record. This is a witness finder, not a lower-
 bound procedure; exactness still comes from `css_distance_native` exhaustion.
 

@@ -52,6 +52,12 @@ as each coherent tranche lands.
    enumerator uses one-row Gray-code updates plus packed POPCNT, has a measured
    zero-allocation scan gate, and replaces the C1018 transversal driver's
    materialized `2^k` span when computing minimum nonzero check weight.
+   The random CSS upper-bound backend now adds pre-sized OSD-2 combinations.
+   On a diagnostic BB756 run at target 36, OSD-2 found an independently replayed
+   weight-36 logical support in 0.621 s after 1,406 completed trials; the same
+   seed/order-1 control exhausted 100,000 trials in 21.656 s without a hit.
+   This is diagnostic application evidence, not yet a multiround performance
+   claim or a replacement for BP reliability ordering.
 4. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
    exact replay/parity, zero-allocation, bounded-memory, and deterministic
    parallel evidence gates.
