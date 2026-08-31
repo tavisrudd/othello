@@ -22,12 +22,14 @@ pub mod cyclic_action;
 pub mod defect;
 pub mod family_response;
 pub mod field;
+pub mod graph_obstruction;
 pub mod group_action;
 pub mod hall;
 pub mod incidence;
 pub mod integer_moments;
 pub mod interface;
 pub mod matrix;
+pub mod modular_power;
 pub mod observational;
 pub mod orbit;
 pub mod orbit_compile;
@@ -110,6 +112,7 @@ pub use family_response::{
     FamilyResponseTable,
 };
 pub use field::{FieldError, FiniteField, Gf4, Prime};
+pub use graph_obstruction::{cluster_graph_census, ClusterGraphCensus, GraphObstructionError};
 pub use group_action::{
     compile_binary_gl_rref, compile_permutation_orbits,
     compile_permutation_orbits_with_deferred_verification, quotient_presentation_by_binary_gl_rref,
@@ -132,6 +135,10 @@ pub use interface::{
     VerifiedParetoWitnesses, WitnessedParetoPresentation,
 };
 pub use matrix::{Matrix, MatrixError};
+pub use modular_power::{
+    certify_integer_matrix_powers, verify_integer_matrix_powers, ModularPowerCertificate,
+    ModularPowerError,
+};
 #[doc(hidden)]
 pub use orbit::ternary_orbit_syndrome_meet_in_middle_unreserved;
 pub use orbit::{
@@ -173,6 +180,10 @@ pub use semantic_symmetry::{
     NonemptySupportOrbitCover, SemanticModelFingerprint, VerifiedExplicitBinarySupportProblem,
 };
 pub use span::{CanonicalTargetImage, GeneratedSpanTable, SpanAnswer, SpanError};
+pub use theorem_search::{
+    evolve_implications, evolve_implications_streaming, CandidateTrial, EvolutionConfig,
+    EvolutionError, EvolutionResult, EvolutionRunError, EvolutionSummary, ImplicationScore,
+};
 pub use transfer::{
     compile_binary_inner_dual, compile_binary_rank_one, compile_binary_target_subspace,
     BinaryRankOneProfile, BinaryTargetProfile, CoefficientWitness, MatrixCoefficientWitness,
