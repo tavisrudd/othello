@@ -104,3 +104,76 @@ with `182 + 546 + 546 = 1274 = q(q+1)^2/2` persistent and the exceptional orbit
 of size 364 exactly the witness `(1,0,1,2,4,12,4,3,6)` of 2026-08-30 §5.3c.
 Conjecture B stays falsified, on the new core, with the identical witness.
 
+## 3. The parallel census driver (what made items 2 and 4 reachable)
+
+The 2026-08-30 cells were blocked by two limits of `c1018_prs_deephole`, both
+recorded there: a `u32` point index with a one-byte-per-point weight array
+(`|PG(8,19)| = 1.79·10^10` needs 17.9 GB, above the machine's ceiling), and an
+exact-rank routine that enumerates every `j`-subset of `PG(1,q)` at every level
+`j = 1..d`.  `ergodis-private/src/bin/c1018_prs_census.rs` (new, task-owned)
+lifts both:
+
+1. **`u64` indices and a one-bit visited bitmap.**  The weight histogram is
+   accumulated per orbit at discovery, so no per-point weight storage exists;
+   memory is `N/8` bytes.  `|PG(8,19)|` costs 2.2 GB rather than 17.9 GB.
+2. **Lock-free parallel orbit enumeration** over `std::thread::scope`.  An
+   orbit is owned by whichever thread wins an atomic test-and-set on the bit of
+   the orbit's *minimum* point index.  That index is a property of the orbit,
+   not of the traversal, so ownership is single-valued under every interleaving
+   and a losing thread simply discards its traversal.  The run aborts unless the
+   weight histogram sums to exactly `N`.
+3. **Apolar-kernel exact rank.**  `w(s) ≤ j` needs a nonzero element of
+   `ker H^(j)_s`, so levels below the apolar degree `e(s)` are skipped instead
+   of being searched — the old routine enumerated `C(q+1,j)` subsets at levels
+   that provably contain no annihilator at all.  Above `e(s)` the search runs
+   over whichever set is smaller, the `(q^k-1)/(q-1)` projective points of the
+   kernel or the `C(q+1,j)` split squarefree forms.  Typically `k = 1` at
+   `j = e(s)`, so one candidate replaces `C(q+1,e)`.
+
+The two drivers share no code: different index type, different traversal,
+different orbit-ownership rule, different exact-rank algorithm.  Only the field,
+the projective indexing, and nothing else come from the same Ergodis core
+primitives, which is deliberate — it is what makes the field model identical and
+representative-level comparison meaningful.  Agreement on a cell is therefore an
+independent replay of that cell at the algorithmic level.
+
+**Cross-validation.**  Ten cells were run through both drivers and agreed on
+every reported quantity (`ρ`, deep count, deep orbit count, and — where the old
+driver emits them — the representatives): `r=5` at `q = 7, 8, 16`; `r=6` at
+`q=9`; `r=7` at `q = 8, 13`; `r=8` at `q = 8, 9, 11, 13`.  Eight more cells were
+run through the new driver and matched the 2026-08-30 tables: `r=8` at
+`q = 16, 17, 19`, `r=9` at `q = 9, 11, 13`, and the stratum sweeps
+`(9,13,m=3)`, `(11,13,m=4)`.  The measured cost of the redundancy-nine decider
+`(9,13)` fell from 396 s and 968 MB to 40 s and 139 MB.
+
+### 3b. What "exceptional" counts, and the characteristic caveat
+
+The driver reports a deep syndrome as **exceptional** exactly when its apolar
+degree is at least 3, i.e. when the consecutive three-row catalecticant
+`C^{(2)}_s` has rank 3 and the point is outside the persistent locus `P_r`.
+That is the criterion 2026-08-30 §5.3c used, and it is what the Python verifier
+recomputes independently as `cat2_rank`.
+
+`X(r)` is a strictly smaller set: deep outside `P_r ∪ M^max_{r,p}`, where
+`M^max_{r,p}` is the modular (Lucas) carrier `P⟨ e_i : C(d,i) ≡ 0 (mod p) ⟩`,
+which is nonempty only when `p ≤ d`.  So in a cell of characteristic `p ≤ d`
+the reported exceptional count may include modular-carrier points that do not
+witness `q ∈ X(r)`.  The distinction is visible and was checked:
+
+* `r = 5, q = 16` (`p = 2 ≤ d = 4`) has deep `= 2432 = q^2(q+3)/2` in four
+  orbits — `17 + 255` tangent (split in two because `p | r-1`), `2040`
+  conjugate-secant, and one further orbit of size 120 with apolar degree 3 and
+  representative `(0,1,1,8,0)`.  Since `C(4,i) ≡ 0 (mod 2)` exactly for
+  `i ∈ {1,2,3}`, that orbit lies in `M^max_{5,2} = P⟨e_1,e_2,e_3⟩`.  It is a
+  modular carrier, not a member of `X(5)`, which is why 2026-08-30 §5.1 records
+  this cell as having no sporadics.
+* `r = 8` has `d = 7` and `C(7,i)` odd for every `i`, so `M^max_{8,2} = ∅` —
+  this is C513's "no additional modular-nucleus family", and it means that at
+  redundancy eight in characteristic two the reported exceptional count *is*
+  the `X(8)` witness count.  For the other characteristics appearing in the
+  band, `M^max_{8,3} = P⟨e_2,e_5⟩` and `M^max_{8,5} = P⟨e_3,e_4⟩`.
+
+Every cell in this wave with a nonzero exceptional count had its
+representatives checked against the relevant `M^max_{r,p}` support condition
+before being read as an `X(r)` witness.
+

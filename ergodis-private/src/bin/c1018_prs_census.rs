@@ -767,6 +767,10 @@ fn stratum_sweep(
         u8::try_from(indices.len() - 1).context("stratum dimension exceeds u8")?,
     )?;
     let total = sub.point_count();
+    // A stratum can be far smaller than one census chunk (`{1,11}` at r=13 is
+    // only q+1 points), and a single point can cost seconds, so size the chunk
+    // to the sweep rather than using the census constant.
+    let chunk = (total / (threads as u64 * 4)).clamp(1, CHUNK);
     let cursor = AtomicU64::new(0);
     let failures = AtomicUsize::new(0);
     let mut hist = vec![0u64; d + 2];
@@ -784,11 +788,11 @@ fn stratum_sweep(
                 let mut full = vec![0u8; d + 1];
                 let mut sc = RankScratch::new(d);
                 loop {
-                    let lo = cursor.fetch_add(CHUNK, Ordering::Relaxed);
+                    let lo = cursor.fetch_add(chunk, Ordering::Relaxed);
                     if lo >= total {
                         break;
                     }
-                    let hi = (lo + CHUNK).min(total);
+                    let hi = (lo + chunk).min(total);
                     for idx in lo..hi {
                         if sub.point(idx, &mut small).is_err() {
                             failures.fetch_add(1, Ordering::Relaxed);

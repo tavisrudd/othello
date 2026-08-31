@@ -584,6 +584,12 @@ def cmd_verify(q, r, path):
     persistent = q * (q + 1) ** 2 // 2
     total = 0
     bad = []
+    # `c1018_prs_deephole` emits every retained representative under "orbits";
+    # `c1018_prs_census` emits only the deep ones, under "deep_orbits".
+    orbits = data.get("orbits")
+    if orbits is None:
+        orbits = data["deep_orbits"]
+    data["orbits"] = orbits
     for rec in data["orbits"]:
         s = tuple(rec["rep"])
         w, _ = coset_weight(gf, curve, s, d)
