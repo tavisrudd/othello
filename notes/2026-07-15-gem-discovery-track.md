@@ -264,3 +264,21 @@ both of the form `2^k·(large prime)` are the 668 class and need a symmetry-free
 the 892 class. `2092 = 4·523` is 892-class (`φ(523) = 2·3²·29`). — follow-on, gated on reopening the
 declined Part 2 of the Hadamard task.
 **Status**: open lead.
+### 2026-08-31 — a constant-size figure meeting a growing threshold explains the whole `A_5` coincidence
+
+**Was I looking for this?**: no — the pass was a novelty audit of C1020, and this fell out of the
+adjacent-crown extraction after the claim was found pre-empted.
+**Expectation violated**: that the twice-and-only-twice appearance of `A_5` in the exceptional
+exterior-set census needed a group-theoretic cause. It does not, and `A_5 <= PSL(2,q)` is not the
+mechanism — that subgroup also exists at `q = 19, 29`, where nothing occurs.
+**Observed**: the figure's sizes are fixed (six arc points, ten Brianchon points) while the
+completion size `(q+1)/2` grows with `q`. So `6 = (q+1)/2` has the unique solution `q = 11`, and
+`6 + 10 = (q+1)/2` has the unique solution `q = 31`. Dye 1991's congruence (Brianchon points external
+iff `q = 1 mod 3`, p. 282) then supplies the correct point type at each. Two equations, one solution
+each, hence exactly two census entries.
+**Strongest question**: the argument is generic — any constant-size configuration whose completion
+must equal `(q+1)/2` can occur at only finitely many `q`, one per admissible size. Is this a general
+finiteness lemma for exterior-set families, and does it predict which other fixed figures can appear
+at all? That would convert a census observation into a structural bound and would apply to the
+mixed internal/external invariant this lane still owns.
+**Status**: open lead. Provisional — the whole gap-mining vet gate applies.

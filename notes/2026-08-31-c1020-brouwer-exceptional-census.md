@@ -43,6 +43,19 @@ alone is not complete — the completion is precisely `6 + 10 = 16 = (q+1)/2`. S
 BSW entries are one configuration at two different completion levels, and Edge's "endowed ten times
 over with the Brianchon property" describes both.
 
+**Priority, added 2026-08-31 after the C1022 audit — most of the above is Dye's, not ours.**
+`notes/2026-08-31-c1022-q31-clebsch-recurrence-novelty-audit.md` finds the same-figure claim, the
+two-Brianchon-points-per-chord structure, the `A₅` stabiliser, and the internal-versus-external
+discriminator all already in R. H. Dye, "Hexagons, conics, `A₅` and `PSL₂(K)`", J. London Math. Soc.
+(2) **44** (1991) 270–286, read at full text from the page scans. Dye gives the discriminator as a
+congruence rather than a case split — italicised on p. 282, *the Brianchon points are external if
+`q ≡ 1 (mod 3)`*, with the vertex condition on p. 284 — and substituting `q = 11` and `q = 31`
+reproduces this section's finding exactly. **What survives with no located predecessor is only the
+bridge to Brouwer's census:** that BSW's `q = 31` exceptional complete exterior set *is* the Clebsch
+hexagon plus its ten Brianchon points, and that the two census entries are one figure at two
+completion levels. Dye and BSW never cite each other, and no work located across OpenAlex, Crossref
+and Semantic Scholar cites both. State the contribution as that bridge and cite Dye for the figure.
+
 **What the null got wrong, stated exactly.** C193's null was *"the 15-edge/10-vertex match is forced
 by any 6-arc and carries no content"*. It is not forced: over the 453 six-subset arcs inside the
 `q = 31` configuration the Brianchon count runs `0, 2, 3, 4, 6, 10` with multiplicities
@@ -287,19 +300,19 @@ work under the previous core would have needed a hand-written `GF(p^h)` in the d
 
 ## 8. Mystery ledger
 
-- **No mechanism explains why `A₅` appears exactly twice, and nothing rules out a third.** The
-  exceptional census contains `A₅` at `q = 11` and `q = 31` and nowhere else, and both are the same
-  six-arc-plus-Petersen configuration at different completion levels. `A₅ ≤ PSL(2,q)` requires
-  `q ≡ ±1 (mod 10)`, which also holds at `q = 19` and `q = 29`, where the configuration does not
-  occur — so the subgroup's existence is not the cause. **Open.** Evidence gap: no argument connects
-  the Brianchon count of an all-external six-arc to the completion size `(q+1)/2`. Owning successor:
-  unallocated.
-- **The sizes `6` and `6 + 10` land on `(q+1)/2` at exactly two `q`, and nothing says why.**
-  `(q+1)/2 = 6` at `q = 11` and `= 16` at `q = 31`. Reading the family as "the arc, then the arc plus
-  its Brianchon points" predicts nothing further, and BSW report no exceptional set for
-  `q = 43, …, 131`, so if the pattern continues it does so outside the searched range or not at all.
-  **Open**, and this is the first place a third member would be looked for. Evidence gap: the
-  searched domain stops at `q = 31` here and at `q = 131` in BSW.
+- **SETTLED 2026-08-31 by the C1022 extraction pass — why `A₅` appears exactly twice, and why the
+  sizes land where they do.** These two entries were recorded here as separate open mysteries; the
+  audit's adjacent-crown extraction derives both from one observation. The figure's sizes are
+  *constant* — six arc points, ten Brianchon points — while the completion size `(q+1)/2` grows with
+  `q`. So `6 = (q+1)/2` has the single solution `q = 11`, and `6 + 10 = (q+1)/2` has the single
+  solution `q = 31`; Dye's congruence (external Brianchon points iff `q ≡ 1 mod 3`, 1991 p. 282) then
+  delivers the correct point type at each. `A₅` occurs exactly twice in the census because those two
+  equations have exactly one solution each. This also explains why `q = 19` and `q = 29` carry no
+  configuration despite admitting `A₅ ≤ PSL(2,q)`: the subgroup's existence was never the cause.
+  **A third member at either completion level is arithmetically impossible**, which is stronger than
+  the "look outside the searched range" reading recorded before. Residual gap, genuinely open: this
+  rules out a third member of *this* family, not a different constant-size figure meeting `(q+1)/2`
+  at some other `q`. Owning successor: unallocated.
 - **Whether ten is the global maximum Brianchon count for a six-arc in `PG(2,q)` is unknown.**
   Settled by this pass only *within* the exceptional configurations: the spectrum tops out at ten,
   reached at `q = 11` and `q = 31` and never at `q = 19, 23, 27`. Not settled over all six-arcs, which
@@ -308,7 +321,10 @@ work under the previous core would have needed a hand-written `GF(p^h)` in the d
   same structure — they are. That C193's null holds — it does not. That "complete exterior set" can
   be read as maximal-under-inclusion — it cannot, because sub-maximum maximal sets exist from `q = 9`
   upward. That BSW's tangent-free `12 + 6` reading generalises along their list — it does not; it
-  fails already at `q = 31`, by 120 single-hit passants.
+  fails already at `q = 31`, by 120 single-hit passants. **Both of these are in print already**
+  (C1022): the size-pinned reading is BSW's own definition, p. 143, verified against the page image,
+  and Van de Voorde 2011 §3 states that `q = 7` and `q = 11` are the only tangent-free cases. Recorded
+  here as confirmation, not as findings.
 - **Not a mystery, recorded to stop it becoming one.** The matching-disjointness graph on the ten
   Brianchon points is *not* the Petersen graph at either `q`. C176's Petersen is a third object — the
   Kneser graph on pairs from the invariant synthematic total, where adjacency is disjointness of

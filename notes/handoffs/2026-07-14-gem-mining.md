@@ -90,7 +90,22 @@ hexagons, the A₅/A₆ stabilizers, the self-polar triangles, and the Brianchon
 
 **Do not route this into `clebsch`.** Another agent owns the manuscript's citations and priority
 footnote; this section records only what it means for *this* lane's frontiers. Dye also states a
-**sequel** exists ("the details will form a sequel") — unlocated.
+**sequel** exists ("the details will form a sequel"); it is now located bibliographically,
+DOI `10.1007/BF02940804` (1996), still unread — C1022.
+
+**Third pre-emption by Dye 1991 (2026-08-31, C1022).** C1020 computed that the `q = 31` exceptional
+exterior-set configuration is the same figure as the `q = 11` Clebsch hexagon — six-arc plus ten
+Brianchon points, Petersen chord graph, `A₅` stabiliser, distinguished only by internal-versus-external
+point type. All of that is in Dye 1991, which gives the discriminator as a congruence (external iff
+`q ≡ 1 mod 3`, p. 282). Only the bridge to Brouwer's census survives: that BSW's `q = 31` entry *is*
+that figure, and that the two entries are one configuration at two completion levels. Dye and BSW
+never cite each other. **Working rule for this lane: check Dye 1991 before claiming any conic-hexagon
+geometry as new** — it has now pre-empted us three times, and each time the claim looked safe first.
+The compensating gain is that the audit's extraction derived the mechanism the census could not:
+the figure's sizes are constant while `(q+1)/2` grows, so `6 = (q+1)/2` and `6+10 = (q+1)/2` each
+have one solution, which is why `A₅` occurs exactly twice and why no third member of the family can
+exist. → [audit](../2026-08-31-c1022-q31-clebsch-recurrence-novelty-audit.md),
+[census](../2026-08-31-c1020-brouwer-exceptional-census.md)
 
 ## Adversarial takeover map (2026-07-14)
 
