@@ -273,6 +273,27 @@ def distribution(values):
     return {str(key): value for key, value in sorted(Counter(values).items())}
 
 
+def ternary_potential_code():
+    edges = tuple(itertools.combinations(range(5), 2))
+    words = {
+        tuple((potentials[left] + potentials[right] + constant) % 3 for left, right in edges)
+        for potentials in itertools.product(range(3), repeat=5)
+        for constant in range(3)
+    }
+    weights = Counter(sum(value != 0 for value in word) for word in words)
+    assert len(words) == 3**5
+    assert weights == {0: 1, 4: 30, 6: 60, 7: 120, 9: 20, 10: 12}
+    return {
+        "field": 3,
+        "length": 10,
+        "dimension": 5,
+        "minimum_distance": 4,
+        "weight_distribution": distribution(
+            sum(value != 0 for value in word) for word in words
+        ),
+    }
+
+
 def build_certificate():
     multiplicities = signature_multiplicity_solutions()
     pattern_distribution = Counter(tuple(sorted(values)) for values in multiplicities)
@@ -339,6 +360,7 @@ def build_certificate():
                 for pattern, count in sorted(pattern_distribution.items())
             },
         },
+        "petersen_ternary_shadow_code": ternary_potential_code(),
         "star_pattern": {
             "rooted_exact_covers": len(star),
             "hamilton_pairs_away_from_base": distribution(star_hamilton.values()),

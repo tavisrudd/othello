@@ -254,13 +254,97 @@ four original graph edges between the two (F)-edges indexed by (e) give
 \]
 
 The nonnegative integral solutions with (\sum d_e=8) have only two
-(S_5)-orbits:
+(S_5)-orbits, and this needs no finite search. The disjointness graph on
+(E(K_5)) is the Petersen graph. Its adjacency operator (A) acts by (-2) on
+the four-dimensional standard module
+
+\[
+ (a_i)_{i=0}^4\longmapsto (a_i+a_j)_{ij},
+ \qquad \sum_i a_i=0,
+\]
+
+while it acts by (3) on constants. Hence all rational solutions of (2a) have
+the form
+
+\[
+ d_{ij}=\frac45+a_i+a_j=x_i+x_j,
+ \qquad \sum_i x_i=2.                              \tag{2b}
+\]
+
+Because every (x_i+x_j) is integral, all (x_i) have the same fractional
+part. Pair sums make that fractional part either (0) or (1/2), and the sum
+of five (x_i) rules out (1/2). Thus the (x_i) are integers. Nonnegativity of
+all pair sums rules out a negative entry: a unique negative entry would force
+the other four to be at least one and make their sum exceed two. Therefore
+the only partitions of two are
+
+\[
+ (2,0,0,0,0),\qquad (1,1,0,0,0),
+\]
+
+up to permutation. They give respectively:
 
 - the **star pattern**, with multiplicity two on the four edges through one
   vertex of (K_5) and zero elsewhere;
 - the **(3+2) pattern**, with multiplicity two on the edge inside the
   two-part, multiplicity one on the six crossing edges, and zero on the
   three edges inside the three-part.
+
+The same operator gives a more general census-free Hamilton-shadow formula.
+Suppose (F) has (h) Hamilton partners, and let (s_{ij}) count how many of
+their contracted five-cycles use edge (ij) of the (K_5). The remaining
+factors have signature multiplicities (d_{ij}), and edge coverage gives
+
+\[
+ (2I+A)d=4\mathbf1-s.                              \tag{2c}
+\]
+
+Every vertex of the weighted graph (s) has degree (2h). Hence (s) has no
+component in the (-2)-eigenspace of the Petersen adjacency operator: it is
+the sum of its constant component ((h/2)\mathbf1) and a vector in the
+(1)-eigenspace. Inverting (2I+A) on those two nonsingular summands gives the
+**Petersen potential formula**
+
+\[
+ d_{ij}=\frac{h+12}{15}-\frac{s_{ij}}3+a_i+a_j,
+ \qquad \sum_i a_i=0.                              \tag{2d}
+\]
+
+In particular, integrality of (d) forces the ternary quadrilateral law
+
+\[
+ s_{ij}+s_{k\ell}-s_{ik}-s_{j\ell}\equiv0\pmod3   \tag{2e}
+\]
+
+for all four distinct indices. No factor can therefore have exactly one
+Hamilton partner: a single contracted five-cycle, say
+(01,12,23,34,40), violates (2e) on indices (0,1,2,4), where the displayed
+alternating sum is (1). Thus the Hamilton-pair graph on the nine factors has
+no leaves. At (h=0), formula (2d) reduces to (2b), so the no-leaves theorem
+and the zero-degree classification are two specializations of one character
+formula rather than separate coincidences.
+
+Equivalently, the Hamilton shadow modulo three lies in the potential code
+
+\[
+ \mathcal C_5=
+ \{(r_i+r_j+c)_{ij}:r_i,c\in\mathbf F_3\}
+ \subseteq\mathbf F_3^{10}.                        \tag{2f}
+\]
+
+This is a ([10,5,4]_3) code with weight distribution
+
+\[
+ 1+30z^4+60z^6+120z^7+20z^9+12z^{10}.
+\]
+
+Thus (2f) packages more than the no-leaves statement. A single contracted
+five-cycle would have forbidden weight five. If (h=2), the shadow support is
+the union of the two contracted five-cycles. Two five-cycles in (K_5) meet in
+(0,2,3), or (5) edges, giving union weights (10,8,7), or (5); the code allows
+only (10) and (7). Hence the two cycles must meet in exactly zero or three
+edges. The rooted certificate independently enumerates all 243 potential-code
+words and checks the displayed weight distribution.
 
 This reduction has a direct rooted completion lemma. After fixing endpoint
 labels on the five edges of (F), the star pattern has 640 exact-cover
@@ -274,6 +358,9 @@ explicit ((S_3\times S_2)\ltimes C_2^5)-action; every completion has exactly
 zero-Hamilton case. The remaining star orbit is the affine (AG(2,3))
 factorization displayed above. Thus the finite residue is a five-pair
 endpoint chase, not an enumeration of one-factorizations of (K_{10}).
+More generally, this proves the rooted spectrum statement: if the
+Hamilton-pair graph has an isolated factor, then its total number of edges is
+one of (0,12,16,23). The zero case is exactly the affine factorization.
 
 There is a sharper local presentation of the 640-row star table. Form a graph
 on its four two-factor signature groups, joining two groups when all four
@@ -286,6 +373,22 @@ Thus the zero-Hamilton hypothesis produces a monochromatic (K_4), and its
 color is the common vertex of all 36 four-cycles. A direct bit-table proof of
 this **endpoint-closure lemma** is the remaining presentation compression;
 the exact rooted proof already verifies it without the global census.
+
+Once the common vertex (\infty) is known, recognition of the affine residue
+is entirely human. Label each factor (M_a) by the finite vertex paired with
+(\infty). For distinct (a,b), the unique four-cycle of (M_a\cup M_b) contains
+(\infty,a,b) and one further vertex (c). Its alternating edges give
+(bc\in M_a) and (ac\in M_b). Applying the same statement to
+(M_a,M_c) then gives (ab\in M_c). Thus (\{a,b,c\}) is symmetric in its
+three entries, and every pair of the nine finite vertices lies in exactly one
+such triple. These twelve triples form an (STS(9)), which is uniquely the
+affine plane (AG(2,3)). This identifies the remaining factorization with
+
+\[
+ M_a=\{\infty a\}\cup\{xy:x+y=-a\}
+\]
+
+without coordinates or an isomorphism computation.
 
 The independent 396-class census remains useful regression evidence. It is
 normalized by the classical totals 396 unlabelled classes and 1,225,566,720
@@ -417,7 +520,9 @@ It fixes one factor, independently derives all 15 labelled solutions of
 (2a), and exhausts exactly the 640 star-pattern and 192 (3+2)-pattern rooted
 exact covers. It quotients only by explicitly generated permutations of the
 five base edges and their endpoint flips; it uses no canonical-labelling or
-graph-isomorphism library. Two independent Hamilton tests agree on every
+graph-isomorphism library. It also independently enumerates the 243 words of
+the ternary potential code (2f) and checks its exact weight distribution. Two
+independent Hamilton tests agree on every
 factor pair: connected-component size ten and cycle type ((5,5)) for the
 product of the matching involutions. The existing full-census bundle below
 independently recovers the same unique zero-Hamilton class by a different
@@ -497,9 +602,9 @@ first canonical witness is the six-equation triangle displayed above.
 
 | Artifact | Bytes | SHA-256 |
 |---|---:|---|
-| `notes/c1015_zero_hamilton_rooted.py` | 14,069 | `69a12b09e9915c8aa4659cb91d9a8c87a76f89deb17242868bf114566222e052` |
-| `notes/c1015_zero_hamilton_rooted.json` | 3,823 | `26129e5f7d96f97d943badf9ee29445f8a196e2427ed69b40060554a3a426210` |
-| `notes/c1015_zero_hamilton_rooted.sha256` | 206 | `f4173e3cfc77e7ef5b2ed02e1d1e3076f3246d44fe7fa4b8db0f4571570e41fc` |
+| `notes/c1015_zero_hamilton_rooted.py` | 14,840 | `79d73b9a1b7d796e341bdbac2d8b498613dcd9f54a60ea1b43ac61a2a3bd30e7` |
+| `notes/c1015_zero_hamilton_rooted.json` | 4,070 | `17190516e63f4ac072c35185b33895f20de5466809eb46d8851d0512700190de` |
+| `notes/c1015_zero_hamilton_rooted.sha256` | 206 | `00abab945d9ef05469ec33b69557cfd742a5f1f919f9bab5e3216fe55a59d998` |
 | `notes/c1015_ree_bridge.py` | 10,728 | `7b60af8c3583a754db5ddc28d75cc065ca8d8906443e4b4f66903284e60fb123` |
 | `notes/c1015_ree_bridge.json` | 1,263 | `1545f49a4d66d33d5d90d0ee99d5eaf39640c0170c99db2a7b6e78697a279b50` |
 | `notes/c1015_ree_bridge.sha256` | 317 | `249bd54b32d954d1fd1c3751b99638219af40b905cbeedd7b85c0cc598fdd9b1` |
@@ -688,14 +793,30 @@ not needed for the order-ten theorem.
   not need a many-pair closure calculation. Since (K_{10}) has odd half-size
   five, one Hamilton pair forces all nine factors into its pencil.
 - **Why the unique zero-Hamilton class produces (AG(2,3)) — settled without
-  the global census.** The rooted signature equation has only star and (3+2)
-  patterns. Every (3+2) completion has 23 Hamilton pairs; the sixteen
+  the global census.** The rooted signature equation is the singular
+  Petersen-graph system (2a); its standard-module kernel rewrites every
+  solution as (d_{ij}=x_i+x_j), so the two partitions of two give exactly the
+  star and (3+2) patterns. Every (3+2) completion has 23 Hamilton pairs; the sixteen
   Hamilton-free star completions form one explicit-symmetry orbit and have a
-  common four-cycle vertex. This orbit is exactly the affine factorization
+  common four-cycle vertex. The fourth vertices of those cycles form the
+  unique (STS(9)), so this orbit is exactly the affine factorization
   (M_a=\{\infty a\}\cup\{xy:x+y=-a\}), with automorphism order 432; its
   twelve parity triples are the affine lines. A handwritten endpoint chase
   replacing the 640+192 rooted exact-cover table would be a presentation
   upgrade, not a logical or global-classification gap.
+- **Why the rooted completion counts are (640,192), and why their Hamilton
+  spectra are (0,12,16) and (23) — open but non-load-bearing.** The
+  endpoint-closure graph explains the sixteen zero-Hamilton completions, but
+  not yet the full numerical distributions. A closed orbit-stabilizer or
+  binary-cochain count would turn the remaining table into conceptual
+  enumeration; it is optional presentation extra juice, not a theorem gap.
+- **Why Hamilton degree one never occurs — settled.** A single contracted
+  Hamilton five-cycle violates the ternary quadrilateral law (2e) forced by
+  the Petersen potential formula. Hence the Hamilton-pair graph has no leaves
+  without any census input. More generally, (2d) controls every local
+  Hamilton shadow, not only degrees zero and one: modulo three it lies in the
+  ([10,5,4]) potential code (2f), whose missing weights also force the
+  zero-or-three intersection law for two Hamilton partners.
 - **Why the Hesse exception cannot lift — settled conceptually.** Three
   affine lines force (2u_\infty) into vector planes with zero total
   intersection. This kills every characteristic except two; the existing
@@ -717,6 +838,14 @@ not needed for the order-ten theorem.
 - **Higher affine round-robin family — open successor.** The evidence gap is
   a general parity-shadow closure/representation theorem for
   (K_{p^d+1}), beginning with the midpoint factorization above.
+- **Johnson-scheme shadow code — open successor.** For general (K_{2m}),
+  contraction by one factor records every other factor as a 2-regular
+  multigraph on (m) vertices. At (m=5), the Kneser/Petersen eigenspaces force
+  (2d)--(2f). The exact next question is whether the corresponding Johnson-
+  scheme decomposition for odd (m) produces modular potential codes and
+  forbidden Hamilton degrees uniformly. This could upgrade the order-ten
+  invariant into an infinite-family theorem; no such derivation is yet in
+  hand.
 - **Closest-seed priority — settled; global priority remains bounded.** The
   Korchmaros--Pace--Sonnino full text and its largest three-graph citing set
   are cleared, including the 2024 characterization paper. MathSciNet and

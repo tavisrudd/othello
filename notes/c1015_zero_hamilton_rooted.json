@@ -33,6 +33,20 @@
     ],
     "vertices": 10
   },
+  "petersen_ternary_shadow_code": {
+    "dimension": 5,
+    "field": 3,
+    "length": 10,
+    "minimum_distance": 4,
+    "weight_distribution": {
+      "0": 1,
+      "10": 12,
+      "4": 30,
+      "6": 60,
+      "7": 120,
+      "9": 20
+    }
+  },
   "schema": "c1015-zero-hamilton-rooted-v1",
   "signature_multiplicity_equation": "2*d_e + sum_{f disjoint e} d_f = 4",
   "signature_multiplicity_solutions": {
