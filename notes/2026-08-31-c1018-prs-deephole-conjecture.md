@@ -443,23 +443,42 @@ modular Lucas carrier `P⟨ e_i : C(r-1,i) ≡ 0 (mod p) ⟩`.
 
 Three statements, in decreasing order of how well the data pin them.
 
-### Conjecture PRS-1 (exceptional band).  `X(r) ⊆ {7,8,9,11,13}` for every `r ≥ 6`.
+### Conjecture PRS-1 (exceptional band).
 
-Equivalently: **for every redundancy `r ≥ 6` and every prime power `q ≥ 16` with
-`q ≥ r-1`, the deep holes of `PRS_{q+1-r}(q)` are exactly `P_r ∪ M^max_{r,p}`,
-of deep size `q(q+1)^2/2` plus the modular carrier's deep part.**  The
-exceptional set is contained in the prime powers of the interval `[7,13]`, and
-the threshold is the constant 16 rather than the linearly growing proved
-threshold `Q*_r = 6r-16+⌊2√(6r-18)⌋` (which is 29, 37, 43, 53, 59 at
-`r = 6,…,10`).
+**For every redundancy `r ≥ 6` and every prime power `q ≥ 16` with dimension
+`k = q+1-r ≥ 6`, the deep holes of `PRS_k(q)` are exactly `P_r ∪ M^max_{r,p}`,
+of deep size `q(q+1)^2/2` plus the modular carrier's deep part.**
 
-Redundancies 4 and 5 sit outside the statement and are the reason it starts at
-`r = 6`: `X(4) = ∅` and `X(5) = {7,8,9,11,13,17,19}`, the only redundancy known
-to have an exceptional field above 13.
+Equivalently, away from the near-degenerate boundary,
+`X(r) ⊆ {7,8,9,11,13}` for every `r ≥ 6`: the exceptional set is contained in
+the prime powers of the interval `[7,13]`, and the threshold is the **constant
+16** rather than the linearly growing proved threshold
+`Q*_r = 6r-16+⌊2√(6r-18)⌋` (which is 29, 37, 43, 53, 59 at `r = 6,…,10`).
+
+Three hypotheses, each doing work, each forced by data rather than caution.
+
+* **`r ≥ 6`.**  `X(4) = ∅` and `X(5) = {7,8,9,11,13,17,19}` — redundancy five is
+  the only one known to have an exceptional field above 13, and §5b′ shows its
+  band comes from orbits with no cyclic symmetry, not from a carrier.  It is
+  what forced Conjecture B′ to say 23 instead of 16.
+* **`q ≥ 16`.**  This is the sharpening.  `q_0(r) = 16, 13, 13, 16` at
+  `r = 6,7,8,9`, so 13 is the last exceptional field at every redundancy from
+  6 up.
+* **`k ≥ 6`.**  This excludes the near-degenerate boundary and is **not**
+  cosmetic: at `k ≤ 2` the exceptional excess is enormous and classical rather
+  than arithmetic, because `C(q+1, r-2)` is then too small for a split
+  squarefree annihilator of degree `r-2` to exist for most syndromes.  The cells
+  `(8,8)`, `(8,9)`, `(9,9)` and `(10,11)` all sit there, with `k = 1,2,1,2` and
+  exceptional excesses of `8.6·10^5`, `5.2·10^5`, `1.6·10^7` and `6.6·10^7`.
+  Without this hypothesis the conjecture would be false at, for instance,
+  `(r,q) = (16,16)`, which has `k = 1`.
+  Six is the smallest value the data support: every clean cell censused has
+  `k ≥ 6`, and no cell with `3 ≤ k ≤ 5` and `q ≥ 16` is within census reach
+  (they all need `r ≥ 12`, hence `|PG(r-1,q)| ≥ 16^{11} ≈ 2·10^{13}`).  So the
+  true boundary may well be `k ≥ 3`; the data cannot tell.
 
 This replaces Conjecture B′ of 2026-08-30 §5.3c (`q_0(r) ≤ 23` for every `r`),
-which it implies for `r ≥ 6` and sharpens from 23 to 16.  B′'s bound of 23 was
-set entirely by `r = 5`; every redundancy from 6 up has `q_0(r) ≤ 16`.
+which it implies for `r ≥ 6` and sharpens from 23 to 16.
 
 *Falsifier.*  One deep syndrome over a field of order at least 16, at any
 redundancy at least 6, with catalecticant rank at least 3 and support not
