@@ -916,7 +916,36 @@ evidence gap and its owner.
    item 3; C491 classifies the `r = 5` sporadics by branch divisor, so half the
    answer may already be committed.
 
-10. **Nothing anomalous in the validation layer.**  Twenty committed-certificate
+10. **Redundancy ten does have a carrier after all.**  *New this wave, and it
+    overturns a 2026-08-30 conclusion.*  §5.3f concluded "redundancy ten has no
+    cyclic-pullback carrier at all" from eight clean sweeps of the `m = 7`
+    stratum.  The fixed-locus lemma shows the search was incomplete: at
+    `(10,13)` there is a `C_4`-stabilized orbit of size 546 outside `P_10`,
+    with normal form `Y(Y^8 + cX^8)` and `c` running over one fourth-power class
+    of `F_13^*`.  It has shape `(a,b) = (0,1)`, which §5.3f's heuristic had
+    excluded.  Nothing is open about the orbit itself — it is verified from the
+    definition — but the taxonomy question is: **are `(1,1)` and `(0,1)` the
+    only shapes?**  The lemma makes this checkable rather than guessable, and
+    the sweeps at `r = 8, 9, 10, 11, 12` found no third shape.  Evidence gap:
+    the same at higher `r`, where the `ℓ = 2` locus grows like `q^{(d-1)/2}`
+    and the sweep runs out of budget around `r = 13`.
+
+11. **The residual is now exactly one class: regular orbits.**  *New this
+    wave.*  The fixed-locus lemma is a complete search of every orbit with
+    nontrivial stabilizer, so everything not settled by it has trivial
+    stabilizer and orbit size exactly `q^3-q`.  Known members of that class: the
+    two size-1320 orbits at `(8,11)`, and by §5b′ the entire `r = 5` band
+    including the fields 17 and 19 that set Conjecture B′'s bound.  This is a
+    much sharper statement of the open problem than "is the band bounded".
+    Evidence gap: no lemma, and no cheap search — a regular orbit meets no
+    proper fixed locus by definition.  The obvious next reduction is the Borel
+    normal form: for `p ∤ d` every orbit meeting `{s_0 ≠ 0}` has a
+    representative with `s_0 = 1, s_1 = 0`, and the residual torus normalises
+    one further coordinate, cutting the search from `q^d` to about `q^{d-2}`.
+    At `r = 8, q = 41` that is `1.2·10^8` instead of `2·10^{11}` — reachable if
+    the exact-rank cost per point can be held down.  Owner: a successor task.
+
+12. **Nothing anomalous in the validation layer.**  Twenty committed-certificate
     cells reproduced exactly on the new core, ten cells cross-run through two
     structurally different drivers, six cells re-derived in Python from the
     definition of the coset weight with zero disagreements, and every run
