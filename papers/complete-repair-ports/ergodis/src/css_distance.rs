@@ -3008,6 +3008,7 @@ fn strictly_sorted(values: &[u128]) -> bool {
     values.windows(2).all(|pair| pair[0] < pair[1])
 }
 
+#[repr(C)]
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize)]
 pub struct ConnectedSearchStats {
     pub candidates: u64,
@@ -3021,6 +3022,9 @@ pub struct ConnectedSearchStats {
     pub bound_improvements_published: u64,
     pub bound_pulses_observed: u64,
 }
+
+const _: () = assert!(std::mem::size_of::<ConnectedSearchStats>() == 80);
+const _: () = assert!(std::mem::align_of::<ConnectedSearchStats>() == 8);
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize)]
 pub struct BoundedCssDistanceResult {
@@ -3067,12 +3071,18 @@ impl CssSearchShard {
 }
 
 #[cfg(feature = "parallel")]
+#[repr(C)]
 #[derive(Clone, Copy)]
 struct RootBranch {
     root: u16,
     added: u16,
     remaining_root_candidates: PackedSupport,
 }
+
+#[cfg(feature = "parallel")]
+const _: () = assert!(std::mem::size_of::<RootBranch>() == 40);
+#[cfg(feature = "parallel")]
+const _: () = assert!(std::mem::align_of::<RootBranch>() == 8);
 
 #[cfg(feature = "parallel")]
 #[repr(C, align(128))]
@@ -3083,7 +3093,10 @@ struct CachePaddedBranchResult {
 }
 
 #[cfg(feature = "parallel")]
-const _: () = assert!(std::mem::align_of::<CachePaddedBranchResult>() == 128);
+const _: () = assert!(
+    std::mem::size_of::<CachePaddedBranchResult>() == 128
+        && std::mem::align_of::<CachePaddedBranchResult>() == 128
+);
 
 #[cfg(feature = "parallel")]
 #[repr(C, align(128))]
@@ -3325,6 +3338,7 @@ struct BranchWorkspace {
 }
 
 #[cfg(feature = "parallel")]
+#[repr(C)]
 #[derive(Clone, Copy)]
 struct WideRootBranch<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
     support: PackedSupport<SUPPORT_WORDS>,
@@ -3335,6 +3349,18 @@ struct WideRootBranch<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
 }
 
 #[cfg(feature = "parallel")]
+const _: () = assert!(
+    std::mem::size_of::<WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>>() == 120
+        && std::mem::align_of::<WideRootBranch<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>>() == 8
+        && std::mem::size_of::<WideRootBranch<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>>()
+            == 136
+        && std::mem::size_of::<WideRootBranch<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>>() == 272
+        && std::mem::size_of::<WideRootBranch<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>>() == 488
+        && std::mem::size_of::<WideRootBranch<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>>()
+            == 568
+);
+
+#[cfg(feature = "parallel")]
 #[repr(C, align(128))]
 struct CachePaddedWideBranchResult<const SUPPORT_WORDS: usize> {
     best_weight: u16,
@@ -3343,10 +3369,17 @@ struct CachePaddedWideBranchResult<const SUPPORT_WORDS: usize> {
 }
 
 #[cfg(feature = "parallel")]
-const _: () =
-    assert!(std::mem::align_of::<CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS>>() == 128);
+const _: () = assert!(
+    std::mem::size_of::<CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS>>() == 128
+        && std::mem::size_of::<CachePaddedWideBranchResult<EXTRA_WIDE_SUPPORT_WORDS>>() == 256
+        && std::mem::size_of::<CachePaddedWideBranchResult<LARGE_SUPPORT_WORDS>>() == 256
+        && std::mem::size_of::<CachePaddedWideBranchResult<HUGE_SUPPORT_WORDS>>() == 384
+        && std::mem::size_of::<CachePaddedWideBranchResult<COLOSSAL_SUPPORT_WORDS>>() == 384
+        && std::mem::align_of::<CachePaddedWideBranchResult<WIDE_SUPPORT_WORDS>>() == 128
+);
 
 #[cfg(feature = "parallel")]
+#[repr(C)]
 #[derive(Clone, Copy, Default)]
 struct WideBranchFrame<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
     support: PackedSupport<SUPPORT_WORDS>,
@@ -3356,6 +3389,18 @@ struct WideBranchFrame<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {
     syndrome: PackedSyndrome<CHECK_WORDS>,
     logical: u64,
 }
+
+#[cfg(feature = "parallel")]
+const _: () = assert!(
+    std::mem::size_of::<WideBranchFrame<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>>() == 192
+        && std::mem::align_of::<WideBranchFrame<WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>>() == 8
+        && std::mem::size_of::<WideBranchFrame<EXTRA_WIDE_SUPPORT_WORDS, WIDE_SYNDROME_WORDS>>()
+            == 224
+        && std::mem::size_of::<WideBranchFrame<LARGE_SUPPORT_WORDS, LARGE_SYNDROME_WORDS>>() == 472
+        && std::mem::size_of::<WideBranchFrame<HUGE_SUPPORT_WORDS, HUGE_SYNDROME_WORDS>>() == 864
+        && std::mem::size_of::<WideBranchFrame<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>>()
+            == 1008
+);
 
 #[cfg(feature = "parallel")]
 struct WideBranchWorkspace<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize> {

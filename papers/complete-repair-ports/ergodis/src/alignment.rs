@@ -787,6 +787,7 @@ impl AlignmentSearchControl for NoAlignmentControl {
     }
 }
 
+#[repr(C)]
 #[derive(Clone, Copy, Debug, Default)]
 struct SearchFrame {
     selected: u64,
@@ -794,6 +795,9 @@ struct SearchFrame {
     unresolved_cuts: [u64; 2],
     entered: bool,
 }
+
+const _: () = assert!(std::mem::size_of::<SearchFrame>() == 40);
+const _: () = assert!(std::mem::align_of::<SearchFrame>() == 8);
 
 #[derive(Debug)]
 pub struct AlignmentSearchWorkspace {

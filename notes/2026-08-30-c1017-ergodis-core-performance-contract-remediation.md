@@ -239,6 +239,19 @@ moving an owned workspace through the wrapper added about 2.1% instructions,
 and storing run configuration in the workspace added about 0.6% instructions.
 Neither survives in the source.
 
+The concrete Tiger-layout holes from the original audit are now mechanically
+closed. `SearchFrame`, `SparseTerm`, `SeparatorSearchNode`, compact and wide
+root branches, every supported wide frame specialization, both padded result
+families, and `ConnectedSearchStats` have explicit C/transparent layouts with
+compile-time size and alignment assertions. The assertions cover all five
+supported wide CSS widths, including the 1,008-byte colossal frame and the
+128/256/384-byte padded result strides. Against the boxed-workspace binary,
+three exact-work BB360 12T pairs are instruction- and branch-neutral to one
+part per million (cycles unresolved at 1.003862, `t=1.704`); three BB288 1T
+pairs are likewise instruction- and branch-neutral. Cache-event variation on
+the shared host is inconsistent between the 1T and 12T controls and does not
+coincide with a cycle regression.
+
 ## Review findings for the pending C1016 Rust overlay
 
 The 2026-08-30 overlay in `ergodis/src` is **not approved as submitted**. Its

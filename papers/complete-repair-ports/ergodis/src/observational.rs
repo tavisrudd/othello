@@ -6786,6 +6786,7 @@ fn visit_separators<E>(
     Ok(metrics)
 }
 
+#[repr(C)]
 #[derive(Clone, Copy)]
 struct SeparatorSearchNode {
     left: u32,
@@ -6793,6 +6794,9 @@ struct SeparatorSearchNode {
     parent: u32,
     generator: u32,
 }
+
+const _: () = assert!(std::mem::size_of::<SeparatorSearchNode>() == 16);
+const _: () = assert!(std::mem::align_of::<SeparatorSearchNode>() == 4);
 
 struct SeparatorSearch {
     nodes: Vec<SeparatorSearchNode>,

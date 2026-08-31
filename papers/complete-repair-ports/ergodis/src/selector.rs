@@ -63,8 +63,12 @@ pub struct DenseSelectorWorkspace {
 const SPARSE_INDEX_BITS: u32 = 56;
 const SPARSE_INDEX_MASK: u64 = (1_u64 << SPARSE_INDEX_BITS) - 1;
 
+#[repr(transparent)]
 #[derive(Clone, Copy, Debug, Default)]
 struct SparseTerm(u64);
+
+const _: () = assert!(std::mem::size_of::<SparseTerm>() == 8);
+const _: () = assert!(std::mem::align_of::<SparseTerm>() == 8);
 
 impl SparseTerm {
     #[inline(always)]
