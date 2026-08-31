@@ -52,7 +52,7 @@
     {"digits": [2, 2], "variables": 90, "rank": 90, "hom_dimension": 0, "minimum_generator_core_size": 3, "minimum_generator_core_count": 3, "certificate_replayed": true}
   ],
   "performance_medians": {
-    "compile_microseconds": 89,
+    "compile_microseconds": 73,
     "raw_rank_replay_nanoseconds": 6209,
     "core_rank_replay_nanoseconds": 1968,
     "rank_replay_speedup": 3.131739572736521,
@@ -74,6 +74,15 @@
     "focused_certificate_dense_payload_bytes": 870,
     "focused_payload_reduction": 3.076923076923077,
     "allocation_free_per_query": true
+  },
+  "mandatory_block_reduction": {
+    "rule": "positive full-rank loss on removal implies membership in every full-rank core",
+    "focused_rank_queries_before": 20,
+    "focused_rank_queries_after": 12,
+    "compile_microseconds_before": 89,
+    "compile_microseconds_after": 73,
+    "compile_speedup": 1.2191780821917808,
+    "verifier_remains_full_lattice": true
   },
   "hardware_counter_ab": {
     "protocol": "perf stat -r 5, pinned CPU 2, 500000 replays per process, user-space counters, approximately 83.3% event coverage",

@@ -94,7 +94,7 @@ outer runs with 2,000 rank replays per measurement gave:
 
 | measure | median |
 |---|---:|
-| semantic-core compilation | 89 us |
+| semantic-core compilation | 73 us |
 | raw 120-row rank replay | 6,209 ns |
 | compiled 29-row replay | 1,968 ns |
 | replay speedup | **3.132x** |
@@ -105,10 +105,18 @@ raw replay by 4.124x, and core replay by 3.643x.  The important result is not th
 sub-millisecond absolute time but that the mathematical certificate reduction
 produces an almost proportional replay reduction while preserving exact
 source-row witnesses.  Those arithmetic A/B ratios predate the adaptive
-workspace.  The latter independently lowers compiler median from 107 to 89 us
+workspace.  The latter independently lowered compiler median from 107 to 89 us
 and raw replay from 6,798 to 6,209 ns.  For the focused raw system its payload
 is 1,170 bytes rather than 3,600 bytes, a **3.077x** reduction; short
 certificate systems retain the faster dense path.
+
+Compilation also proves the single-block marginals first.  A positive rank
+loss on removing a block makes that block mandatory in every full-rank core,
+so the compiler contracts it and enumerates only the residual lattice.  The
+focused channel has mandatory Weyl: this reduces rank queries from 20 to 12
+and compiler median from 89 to 73 us (**1.219x**), or 1.466x cumulatively from
+the original 107 us.  Certificate verification intentionally still exhausts
+the uncontracted lattice.
 
 The census binary also has an isolated `--replay-kernel raw|core` counter mode.
 It performs no serialization or control-corpus work, allocates its workspace
@@ -143,10 +151,10 @@ metadata.  The compiled row certificate then changes subsequent exact replay
 from `R` source rows to exactly `rank` source rows.
 
 Minimum semantic-block discovery is exhaustive by design and currently caps
-the block count at 20.  Its next scaling step is not a wider blind mask scan:
-use marginal rank loss to identify mandatory blocks, contract them first, and
-enumerate only the residual antichain.  That preserves the exhaustive verifier
-while moving reusable theorem information ahead of enumeration.
+the block count at 20.  The compiler now contracts blocks proved mandatory by
+marginal rank loss and enumerates only the residual lattice, while the verifier
+exhausts the original lattice.  The next scaling step is incremental rank-state
+reuse across adjacent residual subsets rather than a wider blind mask scan.
 
 ## What this establishes
 

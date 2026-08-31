@@ -180,6 +180,19 @@ pub struct RankWorkspace<F: SmallField> {
 
 pub type Gf9RankWorkspace = RankWorkspace<Gf9>;
 
+fn deposit_subset_bits(mut packed: u64, mut positions: u64) -> u64 {
+    let mut result = 0;
+    while positions != 0 {
+        let position = positions & positions.wrapping_neg();
+        if packed & 1 != 0 {
+            result |= position;
+        }
+        packed >>= 1;
+        positions ^= position;
+    }
+    result
+}
+
 impl<F: SmallField> RankWorkspace<F> {
     #[must_use]
     pub fn new(capacity_rows: usize, columns: usize) -> Self {
@@ -385,23 +398,33 @@ pub fn compile_semantic_rank_core<F: SmallField>(system: &BlockSystem<F>) -> Sem
     let full_mask = (1_u64 << system.block_count()) - 1;
     let mut workspace = RankWorkspace::<F>::new(system.row_count(), system.columns);
     let rank = workspace.rank_blocks(system, full_mask);
+    let rank_loss_if_removed = (0..system.block_count())
+        .map(|block| rank - workspace.rank_blocks(system, full_mask ^ (1_u64 << block)))
+        .collect::<Vec<_>>()
+        .into_boxed_slice();
+    let mandatory_mask = rank_loss_if_removed
+        .iter()
+        .enumerate()
+        .fold(0_u64, |mask, (block, &loss)| {
+            mask | (u64::from(loss != 0) << block)
+        });
+    let residual_positions = full_mask ^ mandatory_mask;
+    let mandatory_count = mandatory_mask.count_ones() as usize;
+    let residual_count = residual_positions.count_ones() as usize;
     let mut minimum_block_masks = Vec::new();
     let mut minimum_block_size = 0;
-    for size in 0..=system.block_count() {
-        for_each_k_subset(system.block_count(), size, |mask| {
+    for residual_size in 0..=residual_count {
+        for_each_k_subset(residual_count, residual_size, |packed| {
+            let mask = mandatory_mask | deposit_subset_bits(packed, residual_positions);
             if workspace.rank_blocks(system, mask) == rank {
                 minimum_block_masks.push(mask);
             }
         });
         if !minimum_block_masks.is_empty() {
-            minimum_block_size = size;
+            minimum_block_size = mandatory_count + residual_size;
             break;
         }
     }
-    let rank_loss_if_removed = (0..system.block_count())
-        .map(|block| rank - workspace.rank_blocks(system, full_mask ^ (1_u64 << block)))
-        .collect::<Vec<_>>()
-        .into_boxed_slice();
 
     let mut basis = vec![0_u8; system.columns * system.columns];
     let mut occupied = vec![false; system.columns];
