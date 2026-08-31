@@ -28,9 +28,22 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
    Jacobi-sum-type character sums on Fermat-locus factors rather than opaque
    Frobenius traces. Verification and constants: see the dated arithmetic
    report listed below.
-3. **Real/local signature and Hasse refinements.** Sign of \(\Phi_{d,r}\) as
-   restricted-signature stratifier over \(\mathbf R\); Hasse/spinor
-   invariants as the next arithmetic shadows past the square class.
+3. **Real/local signature and Hasse refinements.** **Resolved negative
+   2026-08-30** (Hasse/Sato–Tate report below, proved): the 3×3 Gram block
+   on \((\infty,0,1)\) is constant, so the form is
+   \(H\perp\langle-2,2\det\rangle\) in every characteristic \(\ne2\) — the
+   square class of \(\Phi\) is a *complete* isometry invariant and no
+   second pointwise coloring exists; principal minors are constant
+   \((0,-1,2,\Delta\Phi)\), the signature stratification is vacuous, and
+   the Hasse–Witt class over \(\mathbf Q(\lambda)\) is
+   \((2,\Phi)(-1,-1)\) with ramification exactly the branch divisor of
+   \(C_m\). Working replacement with strictly more information: the
+   16-stratum coloring by the four Fermat-factor square classes (all 16
+   strata occur; period \(p-1\) in \(m\) versus \((p-1)/2\) for
+   \(\chi(\Phi)\); Ergodis-computed via 16 correlation censuses, exact
+   match with direct counts at all 225 tested pairs). Byproduct: the
+   \(I^2\) of the genus law sits in a single Fermat factor
+   (\(A_{++}\) for \(m\equiv4\), \(A_{--}\) for \(m\equiv1\bmod6\)).
 4. **Automorphism groups of the induced colorings** and excess-automorphism
    marking-loss obstructions, family-level (Paper V's mechanism for all
    \(m\)). **Largely closed 2026-08-30** (marking-reconstruction report
@@ -123,6 +136,19 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
   \(I=\Phi_6(\lambda)\). Jacobi-sum decomposition **refuted**: at \(m=3\) the
   descent quotients are non-CM elliptic curves with
   \(\operatorname{Jac}(C_3)\sim E_1^2\).
+- **The uniform \(\mathrm{GL}_2\)-type conjecture is FALSE** (Sato–Tate
+  moments over ~975 primes to 7703, reference moments derived by Weyl
+  integration): both \(m=8\) isotypic surfaces \(A_{\mathrm{triv}},
+  A_{\mathrm{sgn}}\) have \(\mathrm{ST}=\mathrm{USp}(4)\) and
+  \(\operatorname{End}=\mathbf Z\), and \(A_{\mathrm{std}}\) at \(m=8\) is
+  a **simple fourfold** (USp(8) moments; the degree-8-splits-as-twice-4
+  guess refuted; \(L\)-factor split \(L(D_i)=L(A)\cdot L_{\mathrm{std}}\)
+  verified at all 120 good \(p\le700\)). So modularity of the tower is a
+  low-\(m\) accident: elliptic at \(m=3,4\), split-with-elliptic-factors
+  at \(m=5,6,7\), generic from \(m=8\). The Chevalley–Weil level
+  prediction is nonetheless confirmed at \(m=8,9,10\) via an extended
+  \(R_m(J)\) recipe and genus2red (sign side uses every odd bad prime;
+  trivial side a proper divisor; the drop rule stays open).
 - Open items after the Chevalley–Weil pass ((a,b,c) derivation is closed):
   the \(m=3\) bias \(\equiv1\bmod4\) rigidity; the sporadic stratum
   \((p,r)=(47,30)\); the
@@ -179,6 +205,10 @@ boundary in `c1013-gram-discriminant-classicality-audit.md`).
 
 ## Session reports
 
+- `../2026-08-30-c1014-hasse-census-sato-tate.md` — no-second-invariant
+  theorem, Fermat-factor 16-stratum coloring, \(m=8\) Sato–Tate verdicts,
+  extended quotient recipe and level confirmation. Scripts:
+  `c1014_hasse_sato_tate.py`, `c1014_st_*.gp`.
 - `../2026-08-30-c1014-marking-reconstruction.md` — invariance, Aut
   dichotomy, uniform Galois fibre, Baer/Miquelian stratum, query bounds,
   novelty boundary ("to our knowledge", audit gaps apply). Script:
