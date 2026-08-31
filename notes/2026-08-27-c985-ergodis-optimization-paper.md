@@ -60,6 +60,14 @@ as each coherent tranche lands.
    seed/order-1 control exhausted 100,000 trials in 21.656 s without a hit.
    This is diagnostic application evidence, not yet a multiround performance
    claim or a replacement for BP reliability ordering.
+   The private tactical-completion spike has started in
+   `ergodis-private::tactical_completion`: it validates integral 2-design
+   parameters `(v,k,lambda,p)`, derives replication/block counts, generates the
+   level-2 residual-conjugacy representatives iteratively. The adapter check
+   against the pre-existing untracked plane/hyperoval driver passes, but that
+   foreign campaign file remains unstaged for its owner. Orbit-matrix equations and the iterative completion
+   stack remain private follow-on work; neither is being guessed into public
+   core from a single campaign.
 4. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
    exact replay/parity, zero-allocation, bounded-memory, and deterministic
    parallel evidence gates.
