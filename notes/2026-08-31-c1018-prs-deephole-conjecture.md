@@ -28,6 +28,13 @@ criterion, and the carrier strata are all defined there and are not restated.
    (`q = 23,25,27,29,31,32,37,41`).
 5. **State the landed conjecture** with exact verified domain, exact unverified
    boundary, and falsifiers.
+6. Added mid-wave: **structurally reduce what has landed and replace
+   certificates with lemmas.**  This produced the fixed-locus lemma of §5d,
+   which turns the hand-picked stratum sweeps into a proved complete search of
+   every orbit with nontrivial stabilizer at `O(q^{⌈(d+1)/2⌉-1})` instead of
+   `O(q^d)`, closes redundancy eight for that whole class over *all* prime
+   powers rather than a bounded range, and immediately exposed an exceptional
+   orbit at `(10,13)` that the previous taxonomy had ruled out.
 
 ## 1. What the new Ergodis core supplies, and what the driver now uses
 
