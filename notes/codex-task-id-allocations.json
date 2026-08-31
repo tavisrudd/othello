@@ -3932,8 +3932,17 @@
       "last": 1015,
       "purpose": "global matching-design obstruction beyond six-local admissibility",
       "sequence": 437
+    },
+    {
+      "count": 1,
+      "first": 1016,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1016,
+      "purpose": "proof-carrying quotient synthesis for Hadamard search pilot",
+      "sequence": 438
     }
   ],
-  "next_id": 1016,
+  "next_id": 1017,
   "schema": "codex-task-id-allocations-v1"
 }
