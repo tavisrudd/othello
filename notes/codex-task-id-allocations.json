@@ -4049,8 +4049,26 @@
       "last": 1029,
       "purpose": "instrument test: parametric residue-class certificates on a unit-fraction range extension, exercising the certificate shape covering infinitely many cases",
       "sequence": 450
+    },
+    {
+      "count": 1,
+      "first": 1030,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1030,
+      "purpose": "ergodis bug/footgun/scaling audit (4-sub parallel review, no code changes)",
+      "sequence": 451
+    },
+    {
+      "count": 1,
+      "first": 1031,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 1031,
+      "purpose": "ergodis campaign/cert/trace visualization dashboard exploration",
+      "sequence": 452
     }
   ],
-  "next_id": 1030,
+  "next_id": 1032,
   "schema": "codex-task-id-allocations-v1"
 }
