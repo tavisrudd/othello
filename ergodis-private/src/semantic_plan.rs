@@ -3,6 +3,7 @@
 pub mod affine_census;
 pub mod dataflow;
 pub mod execution;
+pub mod q9_rank_packet;
 pub mod theorem;
 
 use ergodis::control::{
