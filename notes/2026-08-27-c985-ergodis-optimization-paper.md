@@ -604,12 +604,31 @@ files are disposable and may be deleted at any time.
    and strict clippy pass in a clean disposable worktree.  This is all cold
    compile/control-plane work and changes no solve worker.
 
-   The remaining execution slice is argument-bearing operation signatures,
-   typed multi-input/fan-out edges, sinks and actual adapter dispatch.  Land it
-   first against the existing C973 affine census, then require the same engine
-   to express one C80 and one C896 packet before stabilizing or publishing the
-   private grammar.  Do not create a second mini-language.  The accepted
-   algebra and constraints remain
+   Commit `61af40c1f` adds the first prepared execution schedule.  It does not
+   expose a generic per-record iterator or trait object: an unbounded `match`
+   stream must feed exactly one immediately adjacent reducer and compiles into
+   one fused stage call.  Reducers and canonicalizers operate only on bounded
+   slots.  The runtime is prepared before execution, dispatch occurs once per
+   stage, stage records are fixed 32-byte `repr(C)` values, dead outputs are
+   rejected, and the execution loop itself contains no allocation or
+   serialization path.  Commit `d555048e0` exercises that boundary on the full
+   C973 affine-census shape with an independent fixed-array runtime: it exactly
+   reproduces all 4,686,825 nine-sets, the histogram
+   `0,0,0,0,2106,2070198,2393352,214812,6318,39`, the 2,106-cap minimum,
+   canonical representative, cap condition, and 2,106-object generator orbit.
+   Preparation owns the only vectors; match/reduce enumeration and iterative
+   canonicalization use fixed storage.  The combined module passes fifteen
+   focused tests and strict clippy in a clean worktree.  This is semantic and
+   resource-boundary parity, not a new performance claim: the acceptance
+   runtime is an independent scalar control rather than the retained optimized
+   C973 profiler.
+
+   Remaining execution work is argument-bearing signatures, typed multi-input
+   and fused fan-out, sinks, and durable registration of the optimized C973
+   adapter once its currently untracked private kernel module is landed.  Then
+   require the same engine to express one C80 and one C896 packet before
+   stabilizing or publishing the private grammar.  Do not create a second mini-
+   language.  The accepted algebra and constraints remain
    `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
 6. **In progress — daemon-owned evolve.** Retain bounded streamed evidence,
    lineage/outcome deduplication, and exact cascades; next add durable replay,
