@@ -884,6 +884,16 @@ files are disposable and may be deleted at any time.
    broad matrix workspaces should move only with their own representation and
    application gates.
 
+   Commit `dc6cf7700` closes the selector pair by applying the same typed
+   boundary to sparse-term combination, specialization, and replay without
+   changing the eight-byte packed term or either workspace. Seven interleaved
+   parent/candidate pairs over five million sparse solves preserve exactly 25
+   million partial tests and the checksum. Parent/candidate is 1.000000037x
+   instructions, 1.000000184x branches, 0.992257x cycles (`t=-0.90`), and
+   0.988392x wall (`t=-0.77`): again operationally identical, with timing
+   noise explicitly not interpreted as a regression. Raw pairs are tracked at
+   `ergodis-private/evidence/c985-sparse-selector-field-element-ab.tsv`.
+
    Commits `f69380676` and `aca704d3d` close finding 16's
    matrix-reinterpretation path without hashing or enlarging the cold matrix
    record. `FieldPresentation` packs the
