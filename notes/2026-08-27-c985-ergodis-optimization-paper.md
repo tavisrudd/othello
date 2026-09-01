@@ -111,9 +111,8 @@ as each coherent tranche lands.
    cycles 1.038x and wall 1.032x, but timing is noisy (`t=0.58/0.47`); branches
    and branch misses fall 1.055x and 1.060x. Eleven isolated deep RSS pairs
    measure 2,260 KiB baseline versus 2,616 KiB candidate: a 356 KiB text and
-   workspace cost, material proportionally but small in absolute terms. Raw
-   evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-zdd/generic-final-ab`.
+   workspace cost, material proportionally but small in absolute terms. The
+   durable implementation and recorded measurements are in commit `aec3b4abe`.
    The sparse scheduler's parallel gate is now resolved by a negative
    crossover result rather than a forced speedup. Its 688,212-state and
    4,144,127-state controls show no material 1-to-12-worker gain because serial
@@ -124,8 +123,8 @@ as each coherent tranche lands.
    edges. Seven standard old/new pairs are neutral to slightly favourable at
    both 1T and the 12T API; three large pairs have a noisy 2--3% candidate point
    cost (`t=-0.84/-1.17`) with identical work, instructions, branches, and
-   output. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-scheduler/final-serial-ab`. The private
+   output. The durable implementation and recorded measurements are in commit
+   `f71e32422`. The private
    observational refiner itself has no public parallel kernel: its split and
    multiway engines mutate one exact quotient/worklist in dependency order and
    create no worker-written state. Those two registry cells are therefore
@@ -135,22 +134,21 @@ as each coherent tranche lands.
    Gray updates and binary-subset recomputation both scan all 1,048,575
    nonzero words and return minimum weight 149. Nine rotated 20-scan pairs give
    recompute/Gray ratios of 13.542x cycles, 4.760x instructions, 11.989x
-   branches, and 13.462x wall, with exact candidate and answer parity. Raw
-   evidence is under `/home/tavis/.cache/ergodis-perf/c1017-linear/final-ab`.
+   branches, and 13.462x wall, with exact candidate and answer parity. The
+   durable benchmark and recorded measurements are in commit `514d43040`.
    The alignment controller now has its missing full-search counter control as
    well. Seven rotated budget-12 pairs traverse the identical 309,777-state
    rooted DFS with zero notifications; idle/baseline is 1.000965x cycles,
    1.000274x instructions, and 1.004963x counter-enabled time (`t=0.95`). This
    supports no measurable control-plane overhead at the complete search
-   boundary. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-alignment/full-search-ab`. The private
-   registry now records 61 pass, 7 open, and 34 not-applicable cells. Current
+   boundary. The durable benchmark and result are in commit `6a4468b10`. The
+   private registry now records 61 pass, 7 open, and 34 not-applicable cells. Current
    generic root executor now has a direct-loop control too. Nine rotated pairs
    over 105,906,176 lightweight root-rounds give generic/direct ratios of
    0.999616x cycles, 0.956716x instructions, and 0.998684x wall, with exact
    checksum and work parity; a 423,624,704-round heavier callback control is
-   also cycle/wall neutral. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-root`. The private registry now
+   also cycle/wall neutral. The durable benchmark and result are in commit
+   `f3596c37d`. The private registry now
    records 62 pass, 6 open, and 34 not-applicable cells. Current next slice:
    the Hall kernel now has a non-straw-man adjacency-list control using the
    same iterative augmenting-path algorithm. On 512,000 deterministic
@@ -158,8 +156,8 @@ as each coherent tranche lands.
    in cycles at 25% edge density despite more instructions, because branch and
    cache misses fall 1.764x and 64.4x. At 5% density adjacency lists are 1.065x
    faster, identifying a genuine representation crossover and a later hybrid
-   API opportunity. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-hall/final-ab`. The private registry
+   API opportunity. The durable benchmark and result are in commit
+   `5e5707ba5`. The private registry
    now records 63 pass, 5 open, and 34 not-applicable cells. The next two
    theorem kernels now have retained exact controls as well. On 1,000 solves
    of the degree-12 C1000-derived spectrum instance, convex moment envelopes
@@ -169,16 +167,16 @@ as each coherent tranche lands.
    field points, a precompiled finite-difference character recurrence preserves
    the Horner census checksum while improving cycles 3.502x (`t=380.69`),
    instructions 1.117x, and wall 3.479x (`t=307.39`). Median RSS is neutral in
-   both controls. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-moment-character/final-ab`. The
+   both controls. The durable benchmarks and results are in commit
+   `f34b15b5f`. The
    private registry now records 65 pass, 3 open, and 34 not-applicable cells.
    The selector representation crossover is now retained too. Across 500,000
    complete selections per arm, sparse terms beat the dense tensor by 33.931x
    cycles at 1.024% density, while the dense tensor beats sparse terms by
    1.521x cycles at 100% density. Both extremes preserve the exact assignment,
    five partial tests per solve, work, and checksum; nine rotated pairs have
-   `t=1801.52` and `t=174.45`. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-selector/final-ab`. The private
+   `t=1801.52` and `t=174.45`. The durable benchmark and result are in commit
+   `ae20d1f38`. The private
    registry now records 66 pass, 2 open, and 34 not-applicable cells. Current
    plan-VM gate is also closed with a concrete optimization. Moving the
    optional tracing decision outside the opcode loop and monomorphizing traced
@@ -186,8 +184,8 @@ as each coherent tranche lands.
    (`t=21.17`), 1.177x instructions, and 1.150x wall (`t=21.99`) across
    65,536,000 exact row evaluations. A branchless handwritten equivalent is
    still 16.87x cheaper in cycles, leaving fused superinstructions as a
-   measured successor rather than hiding interpreter overhead. Raw evidence is
-   under `/home/tavis/.cache/ergodis-perf/c1017-plan-vm/final-ab`. The private
+   measured successor rather than hiding interpreter overhead. The durable
+   benchmark and result are in commit `10e8e1ec5`. The private
    registry now records 67 pass, 1 open, and 34 not-applicable cells. Current
    semantic-symmetry gate is now closed too. On a verified 64-coordinate
    support model with four invariant 16-cycles, one scan per certified orbit
@@ -195,8 +193,8 @@ as each coherent tranche lands.
    work count, and checksum. Across nine rotated million-solve pairs,
    all-anchors/orbit-cover is 14.288x cycles (`t=486.69`), 16.747x
    instructions, and 14.288x wall (`t=491.99`), close to the theorem's ideal
-   16x reduction after fixed costs. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-semantic-anchor/final-ab`. The private
+   16x reduction after fixed costs. The durable benchmark and result are in
+   commit `50333cc19`. The private
    registry now records 68 pass, zero open, and 34 not-applicable cells.
    Current next slice: run the strict end-to-end registry audit, then use the
    measured 16.87x plan-VM fusion gap to select the next C985 optimization.
@@ -209,8 +207,8 @@ as each coherent tranche lands.
    and 1.789x wall (`t=13.66`) improvement at exact outcome parity. The
    branchless handwritten residual is 10.51x cycles, so the next measured
    optimization frontier is Boolean/arithmetic fusion or a bounded native-code
-   plan adapter, not more interpreter micro-tuning. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-fusion/final-ab`.
+   plan adapter, not more interpreter micro-tuning. The durable implementation
+   and result are in commit `165c0d2a1`.
    Application translation is now measured against the exact public-source
    snapshot in the standalone mirror: its `ergodis/src` tree matches monorepo
    commit `056acfcf` (2026-08-27). The first same-harness counter sweep exposed
@@ -239,9 +237,8 @@ as each coherent tranche lands.
    material application regression remains. A sweep using today's enlarged
    benchmark dispatcher had shown a false 2--3% suite loss; holding the harness
    byte-identical removes benchmark-only parser growth from the application
-   result. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/application-mirror-delta-056acfc` and
-   `/home/tavis/.cache/ergodis-perf/qc-outline/quiet-core-ab`. Full
+   result. The durable mirror comparison is commit `8a29e2417`; the QC
+   outlining correction is commit `cc52ab0a7`. Full
    all-target/all-feature tests and strict clippy pass. Current next slice:
    continue the measured plan-VM Boolean/arithmetic fusion frontier or select a
    theorem kernel with an immediate application adapter.
@@ -258,9 +255,8 @@ as each coherent tranche lands.
    claim is deliberately conservative: every pair is at least 1.170x faster
    in wall time and the median is 1.187x; no geometric-mean timing claim is
    used. The remaining branchless-direct residual is 8.852x cycles and 8.838x
-   wall (`t=725.10/668.92`), down from 10.51x. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-stack/final-ab-warmed` and
-   `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-stack/direct-residual`.
+   wall (`t=725.10/668.92`), down from 10.51x. The durable implementation and
+   recorded controls are in commit `56276678b`.
    Current next slice: profile that residual by opcode mix, then choose a
    bounded Boolean/arithmetic superinstruction family only if it generalizes
    beyond the synthetic residual; otherwise move to the first application
@@ -284,8 +280,8 @@ as each coherent tranche lands.
    5.603x wall (`t=169.59/132.10`). Exhaustive three-leaf values, every
    comparison and operand order, Boolean connectives, constant predicates,
    the six-leaf boundary, seven-leaf fallback, tracing, and the existing
-   allocation gate all pass. Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1017-plan-vm-truth-table`. Current next
+   allocation gate all pass. The durable implementation and recorded controls
+   are in commit `7ac28c4ac`. Current next
    slice: stop interpreter-only tuning and select an existing theorem kernel
    whose first real application adapter can turn a kernel win into an
    end-to-end application win.
@@ -341,9 +337,8 @@ as each coherent tranche lands.
    misses are statistically unresolved (0.990x, `t=-1.94`).  An earlier
    popcount-only dispatch changed Gray code generation and failed that gate; it
    was rejected before the full AVX2/BMI target restored and improved the
-   control.  Raw binaries and measurements are under
-   `/home/tavis/.cache/ergodis-perf/c985-bz/final-ab`; binaries are under that
-   tree and `/home/tavis/.cache/ergodis-target-c985-bz`.
+   control.  The implementation, benchmark fixture, and tests are commit
+   `0c86ef654`; the retained measurements are the tracked summary above.
    The random CSS upper-bound backend now adds pre-sized OSD-2 combinations.
    On a diagnostic BB756 run at target 36, OSD-2 found an independently replayed
    weight-36 logical support in 0.621 s after 1,406 completed trials; the same
@@ -391,8 +386,8 @@ as each coherent tranche lands.
    interleaved counter pairs for the accepted form show instruction ratios of
    0.999998x at 1T and 1.000029x at 12T versus the prior release code; timing
    moved noisily in opposite directions, so the hot implementation is accepted
-   as operationally neutral.  Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1027-parity-fix`.  Next is (e), a measured
+   as operationally neutral.  The accepted fix and recorded comparison are in
+   commit `c97892222`.  Next is (e), a measured
    campaign release profile with overflow checks rather than silently assuming
    its cost, followed by targeted pruning-predicate mutation controls.
    Premise certificates and independent statement-level re-derivations are the
@@ -456,8 +451,8 @@ as each coherent tranche lands.
    thus this remains an honest negative application gate, but a successful
    reusable algorithm-selection import. Next use counters to price the
    remaining gap and retain the example as a documented boundary/control, not
-   as an Ergodis application-speed claim. Raw suite and counter evidence is
-   under `/home/tavis/.cache/ergodis-perf/c985-rcsp-forward`.
+   as an Ergodis application-speed claim. The durable implementation and suite
+   result are in commit `ff963f318`.
 
    After that gate, import C1027's highest measured or cheapest exact items in
    this order: (a) CSS option-count histograms and an order-independence proof
@@ -502,8 +497,8 @@ as each coherent tranche lands.
    On the checked-in BB288 presentation, the two bivariate translation
    generators verify exactly two uniform 144-point orbits represented by
    anchors 0 and 144. Thus the 144x anchor reduction in that application is now
-   checked rather than asserted, with no change to the solve hot loop. Evidence
-   is under `/home/tavis/.cache/ergodis-perf/c1027-anchor-verification`.
+   checked rather than asserted, with no change to the solve hot loop. The
+   verifier and recorded application result are in commit `f26f076a8`.
 
    C1027's four missing general APIs are also now reconciled as already landed:
    runtime small prime-power fields, binary/runtime null spaces, generic
@@ -519,8 +514,7 @@ as each coherent tranche lands.
    finds an independently replayed weight-34 logical support after 75,944
    completed trials in 9.295 seconds on 12 workers, reproducing the published
    upper bound; a 500,000-trial target-32 run takes 84.736 seconds without a hit
-   and is only a heuristic miss.  The durable diagnostic record is under
-   `/home/tavis/.cache/ergodis-perf/c1027-upper-bound/results`.  This does not
+   and is only a heuristic miss.  This does not
    yet improve the mathematical bound, but it decisively justifies extracting
    the binary-local implementation into reusable upper-bound machinery.  The
    first extraction tranche also adds independent witness replay and an opt-in
@@ -534,9 +528,9 @@ as each coherent tranche lands.
    noisy).  Five wall/RSS pairs give 1.02002x at 1T (`t=6.51`, 2,328/2,344 KiB
    median RSS) and 1.01365x at 12T (`t=2.09`, 2,580/2,724 KiB).  Thus the
    contention removal is accepted; reusable library extraction of the still
-   binary-local engine remains the next code boundary.  Raw evidence is under
-   `/home/tavis/.cache/ergodis-perf/c1027-upper-bound/default-ab` and
-   `default-wall`.
+   binary-local engine remains the next code boundary.  The implementation,
+   durable evidence schema, and recorded comparisons are in commit
+   `ff987c3b3`.
 
    Revised next order after reconciling both 2026-08-31 inputs: (1) finish and
    measure the reusable upper-bound extraction, then compare BP reliability
@@ -728,7 +722,7 @@ the corrected optimized baseline.
 ```sh
 ERGODIS_ROUNDS=9 ERGODIS_CPU=2 \
   papers/complete-repair-ports/ergodis/scripts/layered-hierarchy-ab.sh \
-  /home/tavis/.cache/ergodis/nix-target/release/examples/observational_hierarchy_driver \
+  "${CARGO_TARGET_DIR:-target}/release/examples/observational_hierarchy_driver" \
   > papers/complete-repair-ports/ergodis/evidence/c985-layered-hierarchy-final.tsv
 papers/complete-repair-ports/ergodis/scripts/check-layered-hierarchy-evidence.sh
 ```
@@ -822,7 +816,7 @@ used 6.2 MiB versus 22.8 MiB peak RSS.
 ```sh
 ERGODIS_ROUNDS=9 ERGODIS_CPU=2 \
   papers/complete-repair-ports/ergodis/scripts/layered-certified-ab.sh \
-  /home/tavis/.cache/ergodis/nix-target/release/examples/observational_hierarchy_driver \
+  "${CARGO_TARGET_DIR:-target}/release/examples/observational_hierarchy_driver" \
   > papers/complete-repair-ports/ergodis/evidence/c985-layered-certified-final.tsv
 papers/complete-repair-ports/ergodis/scripts/check-layered-certified-evidence.sh
 papers/complete-repair-ports/ergodis/scripts/check-layered-audit-evidence.sh
@@ -922,7 +916,7 @@ order, not the minimum over all orders.
 ```sh
 ERGODIS_ROUNDS=9 ERGODIS_CPU=2 \
   papers/complete-repair-ports/ergodis/scripts/layered-dag-certified-ab.sh \
-  /home/tavis/.cache/ergodis/nix-target/release/examples/layered_dag_driver \
+  "${CARGO_TARGET_DIR:-target}/release/examples/layered_dag_driver" \
   > papers/complete-repair-ports/ergodis/evidence/c985-layered-dag-certified-final.tsv
 papers/complete-repair-ports/ergodis/scripts/check-layered-dag-evidence.sh
 ```
@@ -1105,14 +1099,8 @@ lower and compiler-added peak memory is approximately 15,832 -> 9,264 KiB,
 or 41.5% lower.  The range across the seven final full runs is only
 31,716--31,768 KiB.
 
-The raw evidence remains outside tmpfs under `/home/tavis/.cache/ergodis-sota`:
-
-- `c985-old-final-ab.tsv`, SHA-256
-  `27ccf2889508e46f9a8ccd23247fa23b834a77d0e9f84706320b874b5ab5d309`;
-- `c985-boa-streamlined.tsv`, SHA-256
-  `9d571f38c8f4d727861f075c254ca12859211a7f33de07c1bc41ee94f161b38e`;
-- `c985-hierarchy-memory-final.tsv`, SHA-256
-  `68932c319e33670ba8573640a9e390ce4d867f0b9961a2021583fd14f40e0287`.
+The durable implementation and checked-in benchmark/evidence tranche is commit
+`cd389f818`; the numerical summary above is retained in this tracked memo.
 
 All 144 library tests, five observational integration tests, the allocation
 regression, CLI tests, Python parity, doc tests, formatting, and strict
@@ -1975,12 +1963,11 @@ scripts/check-coupled-workflow.sh evidence/c985-coupled-workflow.tsv
 - coupled checker: `f85b6afd48267b8de80c610c05c85940dae87916a3246fce7633b4ad8697cc89`;
 - coupled evidence: `380f121e5dc4b9721919167117bc9451084889bda9c7ba4884b7c6f4c287e758`.
 
-The retained benchmark binary has SHA-256
-`030decec76cdf315a4d82e93e366f6e8f2fda8533f23175fabd8a05886053b5c`
-and was built from source commit `9ed395784` with Rust/Cargo 1.93.1 using:
+The benchmark source and evidence are retained in commit `9ed395784`; it was
+built with Rust/Cargo 1.93.1 using:
 
 ```sh
-CARGO_TARGET_DIR=/home/tavis/.cache/ergodis/nix-target cargo build --release \
+cargo build --release \
   --manifest-path papers/complete-repair-ports/ergodis/Cargo.toml \
   --example fork_join_cost_regular
 ```
