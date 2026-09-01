@@ -334,9 +334,31 @@ as each coherent tranche lands.
    foreign campaign file remains unstaged for its owner. Orbit-matrix equations and the iterative completion
    stack remain private follow-on work; neither is being guessed into public
    core from a single campaign.
-4. **Pending — robustness closure.** Complete malformed-input, feature-matrix,
-   exact replay/parity, zero-allocation, bounded-memory, and deterministic
-   parallel evidence gates.
+4. **Pending — robustness and negative-claim assurance.** Complete malformed-
+   input, feature-matrix, exact replay/parity, zero-allocation, bounded-memory,
+   and deterministic parallel evidence gates.  The proposed assurance ADR
+   `2026-08-31-ergodis-correctness-assurance-adr.md` is adopted here as a
+   prioritization input, not verbatim current-tree ground truth: its largest
+   stated symmetry gap has since been closed by the verified CSS anchor
+   transversal described in item 8, and runtime `SmallField`, null-space, and
+   generic projective/orbit APIs have also landed.  The remaining high-value
+   assurance order is: (a) a checked shard-coverage ledger keyed by input,
+   binary/schema, shard count/index, and completion status, with refusal to
+   promote an incomplete or mixed union; (b) planted logical witnesses in
+   randomized orbit positions plus reduced-instance agreement with and without
+   symmetry; (c) an independent cold validation of every parity functional and
+   exact candidate-count fingerprints whose drift must be attributed rather
+   than waived; (d) random small-instance differential agreement across
+   compact/wide, serial/parallel, and sharded/unsharded kernels, followed by
+   pruning-predicate mutation tests; and (e) a measured campaign release
+   profile with overflow checks rather than silently assuming its cost.
+   Premise certificates and independent statement-level re-derivations are the
+   near-term architecture.  SAT/PB/VIPR proof pipelines are reserved for
+   flagship frozen claims where their encoding is independently justified;
+   proof logging inside the allocation-free CSS loop and full functional
+   verification of the optimized Rust producer remain deferred.  Any future
+   certificate schema should preserve a path to compositional leaf-coverage or
+   VeriPB-style checking without imposing that cost on ordinary solves.
 5. **Pending — typed plan/theorem authoring language.** Replace hand-authored
    JSON AST/bytecode plans with a compact bounded textual language for recipes,
    steering plans, and injected theorem fragments. Text and JSON must share one
@@ -430,17 +452,57 @@ as each coherent tranche lands.
    survey entries remain useful provenance, but no duplicate implementation is
    planned.
 
-   Revised next order after these measurements: (1) make logical-class breadth
-   a measured cold/upper-bound experiment around the existing BP-OSD-first
-   campaign, not a solve-loop change; if positive, extract the current binary-
-   local OSD machinery into a reusable public upper-bound module; (2) implement
-   Brouwer--Zimmermann only in `linear_code` and gate dispatch by rank/rate,
-   retaining Gray enumeration as the small-rank control; (3) add capacitated
-   Hall only when a client accepts the corresponding min-cut certificate; and
-   (4) treat bit-sliced extension-field elimination as a profile-gated matrix
-   backend. Canonical augmentation remains private until its canonical-parent
-   theorem is proved, and the MRV result above raises that proof gate rather
-   than lowering it.
+   The upper-bound gate is now positive, with an important correction to the
+   survey's model.  The Rust systematic-kernel OSD trial already evaluates the
+   logical syndromes of every induced kernel basis row and admitted pair, so it
+   is intrinsically broad over nonzero logical classes rather than fixed to one
+   sampled class as the external BP-OSD driver was.  On BB756, order-2/window-96
+   finds an independently replayed weight-34 logical support after 75,944
+   completed trials in 9.295 seconds on 12 workers, reproducing the published
+   upper bound; a 500,000-trial target-32 run takes 84.736 seconds without a hit
+   and is only a heuristic miss.  The durable diagnostic record is under
+   `/home/tavis/.cache/ergodis-perf/c1027-upper-bound/results`.  This does not
+   yet improve the mathematical bound, but it decisively justifies extracting
+   the binary-local implementation into reusable upper-bound machinery.  The
+   first extraction tranche also adds independent witness replay and an opt-in
+   best-effort mode, and replaces the per-trial shared counter/winner mutex by
+   worker-local outcomes with cold deterministic reduction.  The run-constant
+   choice dispatches to separate const-generic loops; the real repeated trial
+   loop records zero allocations, reallocations, and deallocations.  Seven
+   interleaved no-hit counter pairs preserve exact requested/completed work and
+   result: baseline/candidate is 1.02683x instructions at both 1T and 12T,
+   1.01516x cycles at 1T (`t=11.60`), and 1.03928x cycles at 12T (`t=1.91`,
+   noisy).  Five wall/RSS pairs give 1.02002x at 1T (`t=6.51`, 2,328/2,344 KiB
+   median RSS) and 1.01365x at 12T (`t=2.09`, 2,580/2,724 KiB).  Thus the
+   contention removal is accepted; reusable library extraction of the still
+   binary-local engine remains the next code boundary.  Raw evidence is under
+   `/home/tavis/.cache/ergodis-perf/c1027-upper-bound/default-ab` and
+   `default-wall`.
+
+   Revised next order after reconciling both 2026-08-31 inputs: (1) finish and
+   measure the reusable upper-bound extraction, then compare BP reliability
+   ordering against random systematic OSD on identical class/trial budgets;
+   add a Stern/Dumer collision stage only if that profile says elimination is
+   no longer dominant; (2) land the negative-claim assurance floor above,
+   starting with the shard ledger and parity-functional premise check because
+   they protect every expensive lower-bound run without touching the hot loop;
+   (3) implement Brouwer--Zimmermann only in `linear_code`, with a rank/rate
+   crossover and Gray enumeration retained as the small-rank control; (4) take
+   the cheap fixed-depth syndrome-multiplicity histogram before considering a
+   bounded direct-mapped transposition cache, and reject the cache unless its
+   hit-rate/save-depth model clears the measured probe cost; (5) add
+   capacity-scaled Hall only when a real client accepts the corresponding
+   min-cut/deficiency certificate; and (6) profile extension-field elimination
+   before a bit-sliced `GF(2^e)` backend.  Look-ahead cubing remains behind the
+   already-landed incumbent fan-out because the measured shard imbalance caps
+   its upside near 1.6x.  Canonical augmentation remains private until its
+   canonical-parent theorem is proved.  A conflict-degree-sorted *single*
+   packing order is the only surviving cheap packing variant, but it is behind
+   the assurance and upper-bound work because both tested two-order variants
+   lost.  Full CDCL, generic MIP/CP replacement of certificate kernels,
+   expander-unfriendly treewidth/ZDD methods, block Wiedemann at current sizes,
+   and Hopcroft--Karp in the tiny in-loop Hall regime remain explicit
+   non-imports.
 
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
