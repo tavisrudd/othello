@@ -299,6 +299,15 @@ fn selector_spec(variant: &str) -> Option<(&str, usize)> {
     fields.next().is_none().then_some((backend, terms))
 }
 
+fn prime_arithmetic_spec(variant: &str) -> Option<&str> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "prime-arithmetic" {
+        return None;
+    }
+    let backend = fields.next()?;
+    fields.next().is_none().then_some(backend)
+}
+
 fn semantic_anchor_spec(variant: &str) -> Option<(&str, u32, u32)> {
     let mut fields = variant.split(':');
     if fields.next()? != "semantic-anchor" {
@@ -1105,6 +1114,30 @@ fn main() {
                 .wrapping_add(u64::from(census.zero()) << 42);
             black_box(census);
         }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
+    if let Some(backend) = prime_arithmetic_spec(&variant) {
+        assert_eq!(backend, "gf7");
+        let mut state = 0xC103_0000_0000_0017_u64;
+        let mut operands = [0_u8; 4096];
+        for operand in &mut operands {
+            *operand = (next_u32(&mut state) % 7) as u8;
+        }
+        let operands = black_box(&operands);
+        let mut value = black_box(1_u8);
+        for _ in 0..repetitions {
+            for &operand in operands {
+                value = Prime::<7>::add(Prime::<7>::mul(value, 3), operand);
+            }
+            checksum = checksum.wrapping_mul(17).wrapping_add(u64::from(value));
+        }
+        work = u64::from(repetitions) * operands.len() as u64;
+        black_box(value);
         let elapsed_ns = started.elapsed().as_nanos();
         println!(
             "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum}}}",
