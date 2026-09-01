@@ -808,8 +808,25 @@ files are disposable and may be deleted at any time.
    archives persist the aggregate scorecards; the stabilized byte count equals
    both file length and daemon status, and a too-small limit leaves an empty
    artifact.  Strict all-target/all-feature clippy and the complete
-   all-target/all-feature suite pass.  Do not import a learned proposer before
-   a bounded persistent semantic-niche/elite layer has an exact control.
+   all-target/all-feature suite pass.
+
+   Commit `f52050112` adds the first bounded semantic-niche layer.  Each
+   candidate is classified by its mutation family, complete
+   false-positive/false-negative error class, and base-two semantic-op-row cost
+   bucket; exact output classes remain an independent congruence.  Beam
+   selection first admits the globally best outcome-distinct candidate from
+   each niche, then fills unused positions by ordinary global rank.  The exact
+   control preserves a weaker second niche over a stronger duplicate niche and
+   separately verifies global fill when only one niche exists.  Niche identity
+   is durable in every evidence record and footer counters distinguish niche
+   from global elite slots.  The implementation deliberately does not
+   re-expand old elites: deterministic mutation would regenerate the same
+   prefix and recreate the repeat-work pathology.  Cross-generation elite
+   expansion therefore remains gated on a resumable mutation cursor, while
+   archive replay can consume the durable records without live duplication.
+   Strict all-target/all-feature clippy and the complete suite pass.  Do not
+   import a learned proposer before resumable niche replay or the bounded exact
+   hindsight/theorem-accumulation layer has an exact control.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
