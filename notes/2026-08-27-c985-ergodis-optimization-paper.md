@@ -802,6 +802,19 @@ files are disposable and may be deleted at any time.
    beyond its largest stored block. `PG(7,256)`, whose full point count fits in
    `u64`, now constructs and round-trips its terminal point, while `PG(8,256)`
    still fails closed; this resolves finding 12 without changing rank/unrank.
+   Commit `38f6fa673` closes the invalid-modulus half of finding 17 without a
+   runtime hot check: valid `Prime<P>` arithmetic references a compile-time
+   primality assertion, invalid arithmetic has a compile-fail control, and
+   `Prime::validate` remains usable for runtime dispatch. The retained benchmark
+   is `4f696b598`. Seven interleaved pairs over 409.6 million GF(7) updates per
+   arm give parent/candidate ratios 1.0000000x instructions (`t=-0.04`),
+   0.9999999x branches (`t=-0.30`), and 0.9999984x cycles (`t=-0.003`). A
+   broader dense-selector control moves by +0.0094% instructions and +0.0139%
+   branches with noisy cycles (`t=-0.76`), while its actual selector hot
+   function is byte-identical; the direct arithmetic gate is therefore
+   accepted as operationally neutral. The canonical-element contract and the
+   checked-versus-debug-checked `SmallField`/`BinarySmallField` boundary remain
+   open rather than being conflated with modulus validity.
 
    Treat C1016's “Public-core enhancement ledger” as a recurring evolve input,
    not as campaign authority.  Its three current reusable requests are a

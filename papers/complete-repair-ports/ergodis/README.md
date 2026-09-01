@@ -436,7 +436,10 @@ stopping sets, which forbid neighboring checks of degree one.
 - generated-span optimization for vector and subpacketized repair; and
 - orbit-, incidence-, and moment-structured finite-field searches.
 
-Prime fields are statically dispatched, and canonical polynomial-basis GF(4)
+Prime fields are statically dispatched; attempting to instantiate arithmetic
+for a composite or zero `Prime<P>` modulus is a compile-time error, while
+`Prime::validate` remains available to reject runtime-selected parameters.
+Canonical polynomial-basis GF(4)
 is supported by the public composition and transfer paths. Hot states use
 compact contiguous representations; minimizing lifts are stored separately
 from numerical labelled costs so witnesses can be propagated without bloating
