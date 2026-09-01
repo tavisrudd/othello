@@ -2185,6 +2185,20 @@ impl WidePartitionKernel<COLOSSAL_SUPPORT_WORDS, COLOSSAL_SYNDROME_WORDS>
     }
 }
 
+#[cfg(feature = "parallel")]
+#[inline]
+const fn wide_prefix_initial_bound(
+    searched_maximum_weight: u16,
+    incumbent: u16,
+    sharded: bool,
+) -> u16 {
+    if sharded {
+        searched_maximum_weight.saturating_add(1)
+    } else {
+        incumbent
+    }
+}
+
 #[allow(private_bounds)]
 impl<const SUPPORT_WORDS: usize, const CHECK_WORDS: usize, const LOGICAL_WORDS: usize>
     CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>
@@ -2221,7 +2235,15 @@ where
         let mut prefix_stats = ConnectedSearchStats::default();
         let mut prefix_best_weight = searched_maximum_weight.saturating_add(1);
         let mut prefix_best_support = PackedSupport::<SUPPORT_WORDS>::default();
-        let mut active_bound = initial_bound;
+        // A positional shard is sound only when every invocation partitions
+        // the same prefix frontier.  A shard-local incumbent may prune its
+        // assigned deep branches, but must not change or renumber that shared
+        // frontier across anchors.
+        let mut active_bound = wide_prefix_initial_bound(
+            searched_maximum_weight,
+            initial_bound,
+            shard.is_some(),
+        );
         while branches.len() < target_branches {
             let mut next = Vec::with_capacity(branches.len().saturating_mul(5));
             for branch in branches {
@@ -2335,10 +2357,11 @@ where
             .then(|| BoundControllerEvents::new(thread_count))
             .flatten();
         let worker_pulse_interval = if events.is_some() { pulse_interval } else { 0 };
+        let deep_initial_bound = initial_bound.min(prefix_best_weight);
         let mailboxes = (0..thread_count)
             .map(|worker| {
                 BoundMailbox::new(
-                    active_bound,
+                    deep_initial_bound,
                     events
                         .as_ref()
                         .map_or(-1, |events| events.worker_fd(worker)),
@@ -5419,6 +5442,17 @@ mod tests {
         });
         assert_eq!(compact_result.distance, wide_result.distance);
         assert_eq!(events, Default::default());
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn sharded_wide_prefix_bound_is_incumbent_independent() {
+        let searched = 12;
+        let expected = searched + 1;
+        for incumbent in 1..=expected {
+            assert_eq!(wide_prefix_initial_bound(searched, incumbent, true), expected);
+            assert_eq!(wide_prefix_initial_bound(searched, incumbent, false), incumbent);
+        }
     }
 
     #[cfg(feature = "parallel")]
