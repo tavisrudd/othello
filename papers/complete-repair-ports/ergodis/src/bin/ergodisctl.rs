@@ -148,6 +148,9 @@ enum Command {
         /// Features whose first-mismatch tuple defines an additional semantic niche.
         #[arg(long = "target-field")]
         target_fields: Vec<String>,
+        /// Bounded operational target graph used only for expansion priority.
+        #[arg(long)]
+        target_profile: Option<PathBuf>,
         #[arg(long)]
         max_evidence_bytes: Option<u64>,
     },
@@ -215,6 +218,18 @@ fn read_plan(path: &PathBuf) -> Result<PlanSpec> {
     }
 }
 
+fn read_json_value(path: &PathBuf) -> Result<Value> {
+    let file = File::open(path).with_context(|| format!("cannot open {}", path.display()))?;
+    let mut text = String::new();
+    file.take((MAX_PLAN_TEXT_BYTES + 1) as u64)
+        .read_to_string(&mut text)
+        .with_context(|| format!("cannot read {}", path.display()))?;
+    if text.len() > MAX_PLAN_TEXT_BYTES {
+        bail!("{} exceeds byte limit", path.display());
+    }
+    serde_json::from_str(&text).with_context(|| format!("invalid JSON in {}", path.display()))
+}
+
 fn main() -> Result<()> {
     let cli = Cli::parse();
     let manifest = read_manifest(&cli.run_dir).context("cannot read campaign manifest")?;
@@ -252,6 +267,7 @@ fn main() -> Result<()> {
         beam,
         max_candidates,
         target_fields,
+        target_profile,
         max_evidence_bytes,
     } = &cli.command
     {
@@ -260,6 +276,7 @@ fn main() -> Result<()> {
             .map(|path| read_plan_jsonl(path, 32))
             .transpose()?
             .unwrap_or_default();
+        let target_profile = target_profile.as_ref().map(read_json_value).transpose()?;
         let response = send_request(
             &manifest,
             "evolve-start",
@@ -271,6 +288,7 @@ fn main() -> Result<()> {
                 "beam": beam,
                 "max_candidates": max_candidates,
                 "target_fields": target_fields,
+                "target_profile": target_profile,
                 "max_evidence_bytes": max_evidence_bytes,
             }),
             cli.max_bytes,

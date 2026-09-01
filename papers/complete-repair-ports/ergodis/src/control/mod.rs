@@ -26,7 +26,7 @@ mod vm;
 pub use client::PlanArena;
 use evolution::{
     load_evolution_archive, run_evolution, EvolutionBounds, EvolutionIdentity, EvolutionProgress,
-    EvolutionSeed, MAX_EVOLUTION_TARGET_FIELDS,
+    EvolutionSeed, EvolutionTargetProfile, MAX_EVOLUTION_TARGET_FIELDS,
 };
 use synthesis::learn_decision_tree;
 pub use text::{
@@ -1173,6 +1173,18 @@ impl Campaign {
             .collect::<Result<Vec<_>, _>>()?;
         let target_field_name =
             (target_field_names.len() == 1).then(|| target_field_names[0].clone());
+        let target_profile = match args.get("target_profile") {
+            None | Some(Value::Null) => None,
+            Some(value) => Some(
+                serde_json::from_value::<EvolutionTargetProfile>(value.clone()).map_err(
+                    |error| {
+                        ControlError::Invalid(format!(
+                            "evolve-start target_profile is invalid: {error}"
+                        ))
+                    },
+                )?,
+            ),
+        };
         let identity = EvolutionIdentity {
             code_commit: self.manifest.code_commit.clone(),
             presentation_hash: self.manifest.presentation_hash.clone(),
@@ -1313,6 +1325,7 @@ impl Campaign {
             max_candidates,
             byte_limit,
             target_fields: target_fields.into_boxed_slice(),
+            target_profile,
         };
         let handle = thread::Builder::new()
             .name(format!("ergodis-evolve-{}", &id[..8]))
@@ -2421,6 +2434,11 @@ mod tests {
             .unwrap_err()
             .to_string()
             .contains("at most 4 target fields"));
+        assert!(campaign
+            .evolution_start(&json!({"seeds": [], "target_profile": {"unexpected": true}}))
+            .unwrap_err()
+            .to_string()
+            .contains("target_profile is invalid"));
         let seed = json!({
             "schema": PLAN_SCHEMA,
             "name": "threshold",
@@ -2451,6 +2469,17 @@ mod tests {
                 "beam": 2,
                 "max_candidates": 4,
                 "target_fields": ["x", "root"],
+                "target_profile": {
+                    "schema": "ergodis-evolution-target-profile-v0",
+                    "fields": ["x", "root"],
+                    "nodes": [
+                        {"values": [99, 1], "mass": 1, "unit_cost": 4},
+                        {"values": [0, 1], "mass": 10, "unit_cost": 2}
+                    ],
+                    "edges": [
+                        {"from": 0, "to": 1, "kind": "continuation"}
+                    ]
+                },
             }))
             .unwrap();
         assert_eq!(started["state"], "running");
@@ -2513,6 +2542,14 @@ mod tests {
         assert!(completed["summary"]["target_field"].is_null());
         assert_eq!(completed["summary"]["target_fields"], json!(["x", "root"]));
         assert_eq!(completed["summary"]["target_selection_overflow"], 0);
+        assert_eq!(completed["summary"]["target_profile"]["nodes"], 2);
+        assert_eq!(completed["summary"]["target_profile"]["edges"], 1);
+        assert_eq!(
+            completed["summary"]["target_profile"]["hash"]
+                .as_str()
+                .map(str::len),
+            Some(64)
+        );
         assert_eq!(completed["summary"]["target_selection_slots"], json!({}));
         assert!(completed["summary"]["target_selection_classes"]
             .as_array()
@@ -2538,6 +2575,10 @@ mod tests {
         assert_eq!(records[1]["semantic_niche"]["operator"], "seed");
         assert_eq!(records[1]["semantic_niche"]["failure"], "false-positive");
         assert_eq!(records[0]["target_fields"], json!(["x", "root"]));
+        assert_eq!(
+            records[0]["target_profile_hash"],
+            completed["summary"]["target_profile"]["hash"]
+        );
         assert_eq!(records[1]["target_values"], json!([99, 1]));
         assert!(records[1]["parent_hash"].is_null());
         assert_eq!(records[1]["failure_shape"]["kind"], "false-positive");

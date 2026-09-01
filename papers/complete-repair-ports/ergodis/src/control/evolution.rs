@@ -25,6 +25,9 @@ const MAX_HINDSIGHT_COMPOSITION_PROBES: usize = 64;
 const MAX_HINDSIGHT_COMPOSITION_PROBES_PER_GENERATION: usize = 16;
 const MAX_HINDSIGHT_COMPOSITIONS_PER_GENERATION: usize = 8;
 pub(super) const MAX_EVOLUTION_TARGET_FIELDS: usize = 4;
+const MAX_EVOLUTION_TARGET_NODES: usize = 64;
+const MAX_EVOLUTION_TARGET_EDGES: usize = 256;
+const EVOLUTION_TARGET_PROFILE_SCHEMA: &str = "ergodis-evolution-target-profile-v0";
 
 #[derive(Clone)]
 pub(super) struct EvolutionIdentity {
@@ -48,6 +51,8 @@ struct EvolutionEvidenceHeader {
     generator: Option<FeatureGeneratorProvenance>,
     #[serde(default, skip_serializing_if = "target_fields_empty")]
     target_fields: Box<[String]>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    target_profile_hash: Option<String>,
 }
 
 fn target_fields_empty(fields: &[String]) -> bool {
@@ -65,6 +70,7 @@ impl From<&EvolutionIdentity> for EvolutionEvidenceHeader {
             fields: identity.fields.clone(),
             generator: identity.generator.clone(),
             target_fields: Box::new([]),
+            target_profile_hash: None,
         }
     }
 }
@@ -145,6 +151,47 @@ pub(super) struct EvolutionBounds {
     pub max_candidates: usize,
     pub byte_limit: u64,
     pub target_fields: Box<[usize]>,
+    pub target_profile: Option<EvolutionTargetProfile>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(super) struct EvolutionTargetProfile {
+    schema: String,
+    fields: Box<[String]>,
+    nodes: Box<[EvolutionTargetNode]>,
+    #[serde(default)]
+    edges: Box<[EvolutionTargetEdge]>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct EvolutionTargetNode {
+    values: Box<[i64]>,
+    mass: u64,
+    unit_cost: u64,
+}
+
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+enum EvolutionTargetEdgeKind {
+    Dependency,
+    Continuation,
+}
+
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct EvolutionTargetEdge {
+    from: u16,
+    to: u16,
+    kind: EvolutionTargetEdgeKind,
+}
+
+struct CompiledTargetProfile {
+    hash: String,
+    class_priorities: Box<[u64]>,
+    nodes: usize,
+    edges: usize,
 }
 
 #[repr(C)]
@@ -173,6 +220,21 @@ impl TargetKey {
 
     fn values(&self) -> &[i64] {
         &self.values[..usize::from(self.len)]
+    }
+
+    fn from_values(values: &[i64], width: usize) -> Result<Self, ControlError> {
+        if values.len() != width || width > MAX_EVOLUTION_TARGET_FIELDS {
+            return Err(ControlError::Invalid(
+                "evolution target node has the wrong tuple width".into(),
+            ));
+        }
+        let mut key = Self {
+            values: [0; MAX_EVOLUTION_TARGET_FIELDS],
+            len: width as u8,
+            _pad: [0; 7],
+        };
+        key.values[..width].copy_from_slice(values);
+        Ok(key)
     }
 }
 
@@ -223,6 +285,110 @@ impl TargetClasses {
     fn footer_reserve(&self, target_fields: usize) -> u64 {
         let retained_classes = self.keys.len().min(64) as u64;
         BASE_EVOLUTION_FOOTER_BYTES + retained_classes * (64 + 24 * target_fields as u64)
+    }
+
+    fn compile_profile(
+        &self,
+        profile: &EvolutionTargetProfile,
+        expected_fields: &[&str],
+    ) -> Result<CompiledTargetProfile, ControlError> {
+        if profile.schema != EVOLUTION_TARGET_PROFILE_SCHEMA
+            || profile.fields.len() != expected_fields.len()
+            || !profile
+                .fields
+                .iter()
+                .zip(expected_fields)
+                .all(|(left, right)| left == right)
+            || profile.nodes.is_empty()
+            || profile.nodes.len() > MAX_EVOLUTION_TARGET_NODES
+            || profile.edges.len() > MAX_EVOLUTION_TARGET_EDGES
+        {
+            return Err(ControlError::Invalid(
+                "evolution target profile is incompatible or exceeds its bounds".into(),
+            ));
+        }
+        let mut node_by_key = BTreeMap::<TargetKey, usize>::new();
+        let mut direct_work = Vec::with_capacity(profile.nodes.len());
+        for (node, spec) in profile.nodes.iter().enumerate() {
+            let key = TargetKey::from_values(&spec.values, expected_fields.len())?;
+            if spec.mass == 0 || spec.unit_cost == 0 || node_by_key.insert(key, node).is_some() {
+                return Err(ControlError::Invalid(
+                    "evolution target nodes must be distinct with positive mass and cost".into(),
+                ));
+            }
+            direct_work.push(spec.mass.checked_mul(spec.unit_cost).ok_or_else(|| {
+                ControlError::Invalid("evolution target work overflows u64".into())
+            })?);
+        }
+        let mut node_classes = vec![None; profile.nodes.len()];
+        for (class, key) in self.keys.iter().enumerate() {
+            if let Some(&node) = node_by_key.get(key) {
+                node_classes[node] = Some(class);
+            }
+        }
+        if node_classes.iter().any(Option::is_none) {
+            return Err(ControlError::Invalid(
+                "evolution target profile names a tuple absent from the frozen batch".into(),
+            ));
+        }
+        let mut edge_set = BTreeSet::new();
+        let mut reach = (0..profile.nodes.len())
+            .map(|node| 1_u64 << node)
+            .collect::<Vec<_>>();
+        for edge in &profile.edges {
+            let from = usize::from(edge.from);
+            let to = usize::from(edge.to);
+            if from >= profile.nodes.len()
+                || to >= profile.nodes.len()
+                || from == to
+                || !edge_set.insert((edge.from, edge.to))
+            {
+                return Err(ControlError::Invalid(
+                    "evolution target profile has an invalid edge".into(),
+                ));
+            }
+            reach[from] |= 1_u64 << to;
+        }
+        loop {
+            let mut changed = false;
+            for node in 0..reach.len() {
+                let mut closure = reach[node];
+                let mut pending = closure;
+                while pending != 0 {
+                    let next = pending.trailing_zeros() as usize;
+                    pending &= pending - 1;
+                    closure |= reach[next];
+                }
+                changed |= closure != reach[node];
+                reach[node] = closure;
+            }
+            if !changed {
+                break;
+            }
+        }
+        let mut class_priorities = vec![0_u64; self.keys.len()];
+        for (node, class) in node_classes.into_iter().enumerate() {
+            let class = class.ok_or_else(|| {
+                ControlError::Invalid("evolution target profile lost its class binding".into())
+            })?;
+            let mut priority = 0_u64;
+            let mut reachable = reach[node];
+            while reachable != 0 {
+                let target = reachable.trailing_zeros() as usize;
+                reachable &= reachable - 1;
+                priority = priority.checked_add(direct_work[target]).ok_or_else(|| {
+                    ControlError::Invalid("evolution target priority overflows u64".into())
+                })?;
+            }
+            class_priorities[class] = priority;
+        }
+        let encoded = serde_json::to_vec(profile)?;
+        Ok(CompiledTargetProfile {
+            hash: blake3::hash(&encoded).to_hex().to_string(),
+            class_priorities: class_priorities.into_boxed_slice(),
+            nodes: profile.nodes.len(),
+            edges: profile.edges.len(),
+        })
     }
 }
 
@@ -563,6 +729,7 @@ struct ReplayExtraction {
 #[derive(Clone, Copy)]
 struct ParentSelectionProfile {
     score: CandidateScore,
+    target_priority: u64,
     correct_gain_numerator: u64,
     false_positive_reduction_numerator: u64,
     correct_gain_cost: u64,
@@ -725,6 +892,16 @@ fn parent_selection_cmp(
     )
     .then_with(|| {
         diminishing_ratio_cmp(
+            left.target_priority,
+            1,
+            left_quota,
+            right.target_priority,
+            1,
+            right_quota,
+        )
+    })
+    .then_with(|| {
+        diminishing_ratio_cmp(
             left.false_positive_reduction_numerator,
             left.false_positive_reduction_cost,
             left_quota,
@@ -762,6 +939,7 @@ fn maximum_oriented_quotas(
     parents: &[ExpansionParent],
     total: usize,
     scorecards: &BTreeMap<&'static str, OperatorScorecard>,
+    target_priorities: &[u64],
 ) -> Vec<usize> {
     if parents.is_empty() {
         return Vec::new();
@@ -773,7 +951,7 @@ fn maximum_oriented_quotas(
     if total == parents.len() {
         return vec![1; parents.len()];
     }
-    if !selection_has_signal(parents, scorecards) {
+    if !selection_has_signal(parents, scorecards, target_priorities) {
         return (0..parents.len())
             .map(|index| fair_share(total, index, parents.len()))
             .collect();
@@ -789,6 +967,11 @@ fn maximum_oriented_quotas(
                 quota: 1,
                 profile: ParentSelectionProfile {
                     score: parent.score,
+                    target_priority: parent
+                        .niche
+                        .target_class
+                        .and_then(|class| target_priorities.get(class as usize).copied())
+                        .unwrap_or(0),
                     correct_gain_numerator: scorecard
                         .map_or(0, |score| score.best_correct_gain_per_cost_numerator),
                     false_positive_reduction_numerator: scorecard.map_or(0, |score| {
@@ -823,11 +1006,17 @@ fn maximum_oriented_quotas(
 fn selection_has_signal(
     parents: &[ExpansionParent],
     scorecards: &BTreeMap<&'static str, OperatorScorecard>,
+    target_priorities: &[u64],
 ) -> bool {
     parents.iter().any(|parent| {
-        scorecards
-            .get(parent.operator)
-            .is_some_and(|score| score.compared_to_parent != 0)
+        parent
+            .niche
+            .target_class
+            .and_then(|class| target_priorities.get(class as usize))
+            .is_some_and(|&priority| priority != 0)
+            || scorecards
+                .get(parent.operator)
+                .is_some_and(|score| score.compared_to_parent != 0)
     })
 }
 
@@ -1514,6 +1703,19 @@ pub(super) fn run_evolution(
         ));
     }
     let target_classes = TargetClasses::compile(&batch, &bounds.target_fields)?;
+    let target_fields = bounds
+        .target_fields
+        .iter()
+        .map(|&field| batch.fields[field].as_str())
+        .collect::<Vec<_>>();
+    let target_profile = bounds
+        .target_profile
+        .as_ref()
+        .map(|profile| target_classes.compile_profile(profile, &target_fields))
+        .transpose()?;
+    let target_priorities = target_profile
+        .as_ref()
+        .map_or(&[][..], |profile| profile.class_priorities.as_ref());
     // SAFETY: setpriority has no pointer arguments; `who = 0` selects only the
     // calling Linux task. Failure is reported in the job summary.
     let low_priority = unsafe { libc::setpriority(libc::PRIO_PROCESS, 0, 10) } == 0;
@@ -1536,6 +1738,8 @@ pub(super) fn run_evolution(
         .iter()
         .map(|&field| batch.fields[field].clone())
         .collect();
+    evidence_header.target_profile_hash =
+        target_profile.as_ref().map(|profile| profile.hash.clone());
     let mut header = serde_json::to_vec(&evidence_header)?;
     header.push(b'\n');
     if header.len() as u64 > bounds.byte_limit {
@@ -1582,6 +1786,7 @@ pub(super) fn run_evolution(
     let mut hindsight_replay_rows = 0_u64;
     let mut target_selection_slots = BTreeMap::<u32, u64>::new();
     let mut target_selection_overflow = 0_u64;
+    let mut target_profile_surplus_slots = 0_u64;
     let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
     let mut retained_elites = Vec::<ExpansionParent>::new();
     let mut hindsight_semantics = BTreeSet::<String>::new();
@@ -2075,7 +2280,8 @@ pub(super) fn run_evolution(
                 checked_counter_add(&mut hindsight_compositions, 1, "hindsight composition")?;
             }
         }
-        let guided_selection = selection_has_signal(&parents, &operator_scorecards);
+        let guided_selection =
+            selection_has_signal(&parents, &operator_scorecards, target_priorities);
         checked_counter_add(
             &mut selection_exploration_slots,
             parents.len() as u64,
@@ -2090,7 +2296,26 @@ pub(super) fn run_evolution(
             expansion_capacity.saturating_sub(parents.len()) as u64,
             "selection surplus slot",
         )?;
-        let quotas = maximum_oriented_quotas(&parents, expansion_capacity, &operator_scorecards);
+        let quotas = maximum_oriented_quotas(
+            &parents,
+            expansion_capacity,
+            &operator_scorecards,
+            target_priorities,
+        );
+        for (parent, &quota) in parents.iter().zip(&quotas) {
+            let profiled = parent
+                .niche
+                .target_class
+                .and_then(|class| target_priorities.get(class as usize))
+                .is_some_and(|&priority| priority != 0);
+            if profiled {
+                checked_counter_add(
+                    &mut target_profile_surplus_slots,
+                    quota.saturating_sub(1) as u64,
+                    "target profile surplus slot",
+                )?;
+            }
+        }
         let mut next_parent_scores = BTreeMap::new();
         let mut next_retained_elites = Vec::with_capacity(parents.len());
         let mut carry = 0_usize;
@@ -2120,11 +2345,6 @@ pub(super) fn run_evolution(
         retained_elites = next_retained_elites;
     }
     let candidate_bytes = bytes;
-    let target_fields = bounds
-        .target_fields
-        .iter()
-        .map(|&field| batch.fields[field].as_str())
-        .collect::<Vec<_>>();
     let target_field = (target_fields.len() == 1).then(|| target_fields[0]);
     let target_selection_classes = target_selection_slots
         .iter()
@@ -2144,6 +2364,12 @@ pub(super) fn run_evolution(
     } else {
         BTreeMap::new()
     };
+    let target_profile_summary = json!({
+        "hash": target_profile.as_ref().map(|profile| profile.hash.as_str()),
+        "nodes": target_profile.as_ref().map_or(0, |profile| profile.nodes),
+        "edges": target_profile.as_ref().map_or(0, |profile| profile.edges),
+        "surplus_slots": target_profile_surplus_slots,
+    });
     let mut footer_summary = json!({
         "tested": tested,
         "perfect": perfect,
@@ -2175,6 +2401,7 @@ pub(super) fn run_evolution(
         "target_selection_slots": &target_selection_values,
         "target_selection_classes": &target_selection_classes,
         "target_selection_overflow": target_selection_overflow,
+        "target_profile": &target_profile_summary,
         "operator_scorecards": &operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
@@ -2212,49 +2439,18 @@ pub(super) fn run_evolution(
     bytes = candidate_bytes + footer.len() as u64;
     writer.flush()?;
     progress.done.store(true, Ordering::Release);
-    Ok(json!({
-        "tested": tested,
-        "perfect": perfect,
-        "outcome_classes": outcome_classes.len(),
-        "structural_rejections": structural_rejections,
-        "outcome_expansion_rejections": outcome_expansion_rejections,
-        "cascade_rejections": cascade_rejections,
-        "rows_evaluated": rows_evaluated,
-        "selection_exploration_slots": selection_exploration_slots,
-        "selection_guided_slots": selection_guided_slots,
-        "selection_balanced_slots": selection_balanced_slots,
-        "semantic_niche_slots": semantic_niche_slots,
-        "global_elite_slots": global_elite_slots,
-        "retained_elite_slots": retained_elite_slots,
-        "hindsight_fragments": hindsight_semantics.len(),
-        "hindsight_semantics_examined": hindsight_seen.len(),
-        "hindsight_probes": hindsight_probes,
-        "hindsight_rows_evaluated": hindsight_rows_evaluated,
-        "hindsight_false_positive_rejections": hindsight_false_positive_rejections,
-        "hindsight_byte_rejections": hindsight_byte_rejections,
-        "hindsight_composition_probes": hindsight_composition_probes,
-        "hindsight_composition_rows": hindsight_composition_rows,
-        "hindsight_compositions": hindsight_compositions,
-        "hindsight_replayed": hindsight_replayed,
-        "hindsight_replay_rejections": hindsight_replay_rejections,
-        "hindsight_replay_rows": hindsight_replay_rows,
-        "target_field": target_field,
-        "target_fields": target_fields,
-        "target_selection_slots": target_selection_values,
-        "target_selection_classes": target_selection_classes,
-        "target_selection_overflow": target_selection_overflow,
-        "operator_scorecards": operator_scorecards,
-        "bytes": bytes,
-        "truncated": truncated,
-        "cancelled": progress.cancelled.load(Ordering::Acquire),
-        "low_priority": low_priority,
-        "best": best.map(|(correct, false_positive, complexity, plan)| json!({
+    footer_summary["bytes"] = Value::from(bytes);
+    footer_summary["best"] = best
+        .map(|(correct, false_positive, complexity, plan)| {
+            json!({
             "weighted_correct": correct,
             "false_positive": false_positive,
             "complexity": complexity,
             "plan": plan,
-        })),
-    }))
+            })
+        })
+        .unwrap_or(Value::Null);
+    Ok(footer_summary)
 }
 
 fn failure_shape(
@@ -2842,6 +3038,91 @@ mod tests {
     }
 
     #[test]
+    fn target_profile_closure_guides_surplus_without_starvation() {
+        let batch = FeatureBatch {
+            presentation: "targets".into(),
+            problem: "profile".into(),
+            fields: vec!["root".into(), "debt".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: vec![0, 1].into_boxed_slice(),
+            weights: vec![1, 1].into_boxed_slice(),
+            expected: vec![0].into_boxed_slice(),
+            values: vec![1, 2, 1, 3].into_boxed_slice(),
+        };
+        let classes = TargetClasses::compile(&batch, &[0, 1]).unwrap();
+        let profile = EvolutionTargetProfile {
+            schema: EVOLUTION_TARGET_PROFILE_SCHEMA.into(),
+            fields: vec!["root".into(), "debt".into()].into_boxed_slice(),
+            nodes: vec![
+                EvolutionTargetNode {
+                    values: vec![1, 2].into_boxed_slice(),
+                    mass: 2,
+                    unit_cost: 1,
+                },
+                EvolutionTargetNode {
+                    values: vec![1, 3].into_boxed_slice(),
+                    mass: 5,
+                    unit_cost: 2,
+                },
+            ]
+            .into_boxed_slice(),
+            edges: vec![EvolutionTargetEdge {
+                from: 0,
+                to: 1,
+                kind: EvolutionTargetEdgeKind::Continuation,
+            }]
+            .into_boxed_slice(),
+        };
+        let compiled = classes
+            .compile_profile(&profile, &["root", "debt"])
+            .unwrap();
+        assert_eq!(compiled.class_priorities.as_ref(), &[12, 10]);
+
+        let mut low = selector_parent("low", "scope");
+        low.niche.target_class = Some(0);
+        let mut high = selector_parent("high", "scope");
+        high.niche.target_class = Some(1);
+        let quotas = maximum_oriented_quotas(&[low, high], 10, &BTreeMap::new(), &[1, 100]);
+        assert_eq!(quotas, [1, 9]);
+    }
+
+    #[test]
+    fn target_profile_rejects_absent_nodes_and_bad_edges() {
+        let batch = FeatureBatch {
+            presentation: "targets".into(),
+            problem: "hostile-profile".into(),
+            fields: vec!["root".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: vec![0].into_boxed_slice(),
+            weights: vec![1].into_boxed_slice(),
+            expected: vec![0].into_boxed_slice(),
+            values: vec![1].into_boxed_slice(),
+        };
+        let classes = TargetClasses::compile(&batch, &[0]).unwrap();
+        let mut profile = EvolutionTargetProfile {
+            schema: EVOLUTION_TARGET_PROFILE_SCHEMA.into(),
+            fields: vec!["root".into()].into_boxed_slice(),
+            nodes: vec![EvolutionTargetNode {
+                values: vec![2].into_boxed_slice(),
+                mass: 1,
+                unit_cost: 1,
+            }]
+            .into_boxed_slice(),
+            edges: Box::new([]),
+        };
+        assert!(classes.compile_profile(&profile, &["root"]).is_err());
+
+        profile.nodes[0].values[0] = 1;
+        profile.edges = vec![EvolutionTargetEdge {
+            from: 0,
+            to: 0,
+            kind: EvolutionTargetEdgeKind::Dependency,
+        }]
+        .into_boxed_slice();
+        assert!(classes.compile_profile(&profile, &["root"]).is_err());
+    }
+
+    #[test]
     fn mutation_cursor_resumes_without_duplicate_offspring() {
         let parent = PlanSpec {
             schema: String::new(),
@@ -3010,6 +3291,7 @@ mod tests {
                 max_candidates: 2,
                 byte_limit: 64 * 1024,
                 target_fields: Box::new([]),
+                target_profile: None,
             },
             Arc::new(EvolutionProgress::new()),
         )
@@ -3135,6 +3417,7 @@ mod tests {
                 max_candidates: 2,
                 byte_limit: 64 * 1024,
                 target_fields: Box::new([]),
+                target_profile: None,
             },
             Arc::new(EvolutionProgress::new()),
         )
@@ -3224,6 +3507,7 @@ mod tests {
                 max_candidates: 1,
                 byte_limit: 64 * 1024,
                 target_fields: Box::new([]),
+                target_profile: None,
             },
             Arc::new(EvolutionProgress::new()),
         )
@@ -3253,7 +3537,7 @@ mod tests {
         );
         let parents = [selector_parent("a", "fast"), selector_parent("b", "slow")];
         let empty = BTreeMap::new();
-        assert_eq!(maximum_oriented_quotas(&parents, 10, &empty), [5, 5]);
+        assert_eq!(maximum_oriented_quotas(&parents, 10, &empty, &[]), [5, 5]);
 
         let mut scorecards = BTreeMap::new();
         scorecards.insert(
@@ -3280,13 +3564,13 @@ mod tests {
                 ..OperatorScorecard::default()
             },
         );
-        let quotas = maximum_oriented_quotas(&parents, 10, &scorecards);
+        let quotas = maximum_oriented_quotas(&parents, 10, &scorecards, &[]);
         assert_eq!(quotas, [9, 1]);
 
         let many = (0..256)
             .map(|index| selector_parent(&format!("{index:064x}"), "fast"))
             .collect::<Vec<_>>();
-        let quotas = maximum_oriented_quotas(&many, 100_000, &scorecards);
+        let quotas = maximum_oriented_quotas(&many, 100_000, &scorecards, &[]);
         assert_eq!(quotas.iter().sum::<usize>(), 100_000);
         assert!(quotas.iter().all(|&quota| quota != 0));
         assert!(quotas.iter().max().unwrap() - quotas.iter().min().unwrap() <= 1);

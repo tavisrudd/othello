@@ -206,6 +206,34 @@ count. The former singular `target_field` request and summary fields remain a
 compatibility projection when exactly one target is present. Footer reservation
 scales with the frozen class bound. The feature is daemon-only and changes no
 solve-worker safe point.
+
+`evolve-start --target-profile FILE` optionally supplies a strict bounded
+operational graph:
+
+```json
+{
+  "schema": "ergodis-evolution-target-profile-v0",
+  "fields": ["root", "debt"],
+  "nodes": [
+    {"values": [3, 7], "mass": 1200, "unit_cost": 40},
+    {"values": [5, 2], "mass": 80, "unit_cost": 900}
+  ],
+  "edges": [{"from": 0, "to": 1, "kind": "continuation"}]
+}
+```
+
+The ordered fields must exactly match the requested target fields. There are
+at most 64 distinct nodes and 256 distinct non-self edges; every tuple must
+occur in the frozen batch, and mass, unit cost, products, and accumulated work
+must be positive and fit `u64`. `dependency` and `continuation` edges both
+contribute reachability. For each node, the daemon sums the direct
+`mass * unit_cost` of every reachable node exactly once and uses that priority
+with diminishing quota when assigning surplus expansion slots. Every parent
+still receives its exploration slot first, and candidate correctness,
+perfection, replay, and proof authority are unchanged. The canonical profile
+hash is bound in the evidence header; the summary reports its node/edge counts
+and profiled surplus slots. Thus measured profiles can guide discovery but can
+never suppress a semantic counterexample or authorize pruning.
 Every evidence record carries its niche and the summary counts niche and global
 elite positions.  A selected elite with an unconsumed deterministic mutation
 suffix carries a bounded ordinal cursor into the next generation.  Resumption
