@@ -181,16 +181,22 @@ A second campaign was created on the same corpus and seeded with the best plan o
 run's behaviour classes — its 32 highest-scoring representatives, scope stripped. It tested 99,948
 candidates and produced:
 
-- **3,798 further distinct behaviour classes**, against the first run's 3,595, so the behaviour space
-  on this corpus is nowhere near exhausted after 200,000 candidates;
+- **3,798 behaviour classes**, against the first run's 3,595;
 - a best score of **823 of 1,024** against the first run's 822, a gain of one object;
 - zero perfect classifiers, as before.
 
-The reading is that a second budget buys a comparable haul of new behaviours and almost nothing in
-score. On this corpus the search is not stuck for lack of budget; it is limited by what the feature
-set can express, which is the situation the exact `ceiling` response describes and the reason the
-behaviour-space ceiling belongs on screen next to the count. Both runs are published side by side so
-the two discovery curves can be compared directly.
+The raw class count overstates what the second budget bought, and the console now says so. Because
+outcome hashes are comparable across runs over the same input, the two archives can be intersected
+directly: they **share 2,921 classes**, the continuation found **877 that the parent never did**, the
+parent holds **674 the continuation never rediscovered**, and their union is **4,472**. So a second
+hundred thousand candidates delivered roughly a quarter of its classes as genuine novelty, and one
+extra correct object.
+
+The reading is that on this corpus the search is not stuck for lack of budget — new behaviours keep
+appearing — but it is limited in *score* by what the feature set can express, which is the situation
+the exact `ceiling` response describes and the reason the behaviour-space ceiling belongs on screen
+next to the count. It also shows that the search is not deterministic in coverage: two runs over the
+same objects each found several hundred classes the other missed.
 
 Reproduction is the ordinary cycle in the tooling README, with the seed file built from the parent
 run's lineage by taking the lowest `(−weighted_correct, false_positive, complexity)` plan per
