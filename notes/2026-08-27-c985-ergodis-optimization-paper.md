@@ -797,7 +797,11 @@ files are disposable and may be deleted at any time.
    remains open rather than being papered over by the public primitive. The
    next owned safeguard is a cold per-anchor shard-frontier commitment so a
    manifest can establish the cover it names without relying only on executable
-   identity.
+   identity.  The adjacent constructor-bound sweep has also started: commit
+   `f6ac64c4f` removes `ProjectiveIndex`'s unnecessary multiplication one power
+   beyond its largest stored block. `PG(7,256)`, whose full point count fits in
+   `u64`, now constructs and round-trips its terminal point, while `PG(8,256)`
+   still fails closed; this resolves finding 12 without changing rank/unrank.
 
    Treat C1016's “Public-core enhancement ledger” as a recurring evolve input,
    not as campaign authority.  Its three current reusable requests are a
