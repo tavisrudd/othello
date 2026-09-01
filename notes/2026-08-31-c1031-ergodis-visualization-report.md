@@ -199,6 +199,48 @@ Two findings in the search itself, worth their own attention:
   classifiers. A console that showed the perfect count without the exclusion share would read this
   degenerate run as the most successful of the five.
 
+## Screening all fourteen semantic corpora
+
+The corrected recommendation above was to find out how many of the C1016 banked semantic corpora
+carry a real signal, rather than to spend more candidates on one that does not. That screen was run.
+Each corpus got its own campaign, seeded mechanically with eight comparison predicates over its own
+field names, evolved to a 20,000-candidate budget over twelve generations at beam 64, and its best
+plan scored against the majority-class baseline on the training batch and on the held-out batch.
+
+**Three of fourteen carry a signal, and they are solved exactly. The other eleven show none.**
+
+| corpus | fields | baseline | held-out score | lift | classes found |
+|---|---|---|---|---|---|
+| corpus-00 | 21 | 66.6% | 100.0% | **+33.4** | 125 |
+| corpus-02 | 21 | 66.6% | 100.0% | **+33.4** | 92 |
+| corpus-03 | 21 | 66.6% | 100.0% | **+33.4** | 148 |
+| corpus-01, 04–12 | 36 | 75.0% | 74.8–75.1% | −0.2 to +0.1 | 230–298 |
+| corpus-13 | 55 | 80.0% | 80.0% | +0.0 | 521 |
+
+The pattern is structural rather than noise: **every 21-field corpus is solved exactly on both halves
+within a few thousand candidates, and no 36-field or 55-field corpus is solved at all**, with every
+one of the eleven falling inside ±0.2 points of its baseline on held-out data. The three successes
+are found early and cheaply — 2,638, 2,640 and 2,646 candidates — so this is not a budget question.
+
+Two readings are available and the screen does not separate them. Either the property is genuinely
+not expressible in the plan grammar over the wider feature sets, or it is expressible but unreachable
+by the available mutation operators from these seeds. The distinction matters and is testable: hand
+the 36-field corpora a seed that already encodes the shape which works at 21 fields and see whether
+the search can extend it.
+
+### The exact ceiling is not a measure of learnability
+
+Worth recording because it was the first screen attempted and it was uninformative. `ergodisctl
+ceiling` reports the best weighted-correct achievable by any function of the feature vectors, so it
+is 100% for all fourteen corpora — every one has 1,024 distinct feature vectors, and a lookup table
+over distinct vectors is trivially exact. The ceiling measures **label ambiguity**, meaning objects
+with identical features and different labels, and nothing else. On corpora with distinct rows it is
+vacuous, and a console that presented it as an attainable target would mislead. It earns its place
+only when `ambiguous_groups` is non-zero.
+
+The screening tool is `tools/c1031-viz/screen_corpora.py` on the `c1031-ergodis-viz` branch, and its
+result is `screen.json` beside the run directories.
+
 ## A continuation experiment, run with the console rather than shown by it
 
 The 55-feature semantic campaign stopped at 99,966 of a 100,000-candidate budget at generation 23 of
