@@ -321,8 +321,39 @@ files are disposable and may be deleted at any time.
    three-generator pack; private vocabulary remains outside core. The stamped
    orbit set is now size-gated and packed for large workspaces, and one-worker
    orbit publication no longer uses locked read-modify-write operations. The
-   current next target is a power-of-two/radix projective decoder, not another
-   generic inlining or hash-table specialization.
+   The first power-of-two action specialization is now accepted in commit
+   `91abb7d0b`.  The compiler recognizes an exact unit anti-diagonal matrix and
+   records an otherwise-invalid tape sentinel in the existing 16-byte action
+   record; the runner evaluates that generator by one byte swap and constant
+   shift instead of five lane-tape terms.  The generic action path and public
+   API are unchanged.  Exhaustive `PG(2,8)` comparison against the generic
+   matrix runner passes for every point, and the actual successor loop records
+   zero allocation events.  Against the commit `5318fae1b` byte-lane endpoint,
+   fifteen pinned kernel pairs over 29,970,000 exact transitions improve
+   cycles 1.151x (`t=3.71`), instructions 1.152x, branches 1.175x, and task
+   clock 1.145x (`t=4.27`) at identical work/checksum.  Seven q=64,r=5
+   application pairs improve one-thread cycles 1.082x (`t=9.04`), instructions
+   1.076x, branches 1.160x, and wall 1.100x (`t=3.11`).  At twelve threads the
+   instruction and branch reductions remain resolved (1.102x and 1.189x), but
+   the 1.047x cycle and 1.044x wall point improvements are unresolved
+   (`t=1.25/0.89`) and are not claimed as parallel speedups.  A fair immutable
+   q=32,r=5 control runs sixteen solves per arm with instruction and branch
+   ratios equal within one part per million and no resolved timing regression.
+   Median RSS changes from 8,648 to 8,960 KiB at one thread and 52,104 to
+   52,480 KiB at twelve; the kernel executable grows 1,528 bytes while the
+   measured application executable shrinks 18,120 bytes.  Fresh isolated
+   all-feature clippy, 423 library tests, all binary/integration tests, Python
+   parity, and doc tests pass.  Raw retained measurements are
+   `ergodis-private/evidence/c985-binary-lane-unit-reversal-kernel-ab.tsv`,
+   `c985-c1018-unit-reversal-q64-counters.tsv`,
+   `c985-c1018-unit-reversal-q64-wall.tsv`, and
+   `c985-c1018-unit-reversal-q32-control.tsv`.  The public kernel comparison is
+   the durable admission basis; the application runs use the explicitly
+   foreign private C1018 adapter only as end-to-end translation evidence.
+   Current next target is a fresh whole-worker profile of this endpoint,
+   followed by a reusable characteristic-two/Pascal action reduction if the
+   lower-triangular generator remains material; do not return to rejected
+   generic inlining or hash-table/container shortcuts.
    Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
    The smaller linear-code gap is also closed: a compiled binary row-space
