@@ -480,6 +480,15 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
         debug_assert!(coordinates
             .iter()
             .all(|&coordinate| u16::from(coordinate) < self.field.order()));
+        // A canonical leading one is already normalized in the first chart,
+        // whose offset is zero. Ranking is therefore just its radix suffix.
+        if coordinates[0] == 1 {
+            let mut suffix = 0_u64;
+            for &coordinate in &coordinates[1..] {
+                suffix = (suffix << H) | u64::from(coordinate);
+            }
+            return Ok(suffix);
+        }
         let pivot = coordinates
             .iter()
             .position(|&coordinate| coordinate != 0)
