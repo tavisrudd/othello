@@ -127,12 +127,15 @@ fn fixture(order: usize, rows: usize, cols: usize, mut seed: u64) -> [u8; MAX_CE
             seed = seed
                 .wrapping_mul(6_364_136_223_846_793_005)
                 .wrapping_add(1_442_695_040_888_963_407);
-            data[row * cols + col] = if col == row {
-                1
-            } else if col < rows {
+            let random = ((seed >> 32) as usize % order) as u8;
+            data[row * cols + col] = if col > row && col < rows {
                 0
+            } else if col <= row {
+                // A lower-triangular, nonzero-diagonal prefix guarantees full
+                // row rank while forcing normalization and row elimination.
+                1 + random % ((order - 1) as u8)
             } else {
-                ((seed >> 32) as usize % order) as u8
+                random
             };
         }
     }
@@ -223,5 +226,21 @@ mod tests {
         agrees::<6>();
         agrees::<7>();
         agrees::<8>();
+    }
+
+    #[test]
+    fn fixture_forces_real_elimination_work() {
+        let field = SmallField::new(2, 6).unwrap();
+        let tables = BinaryTables::new::<6>(&field);
+        for (rows, cols) in [(4, 5), (8, 9)] {
+            let original = fixture(64, rows, cols, 0);
+            let mut table = original;
+            let mut binary = original;
+            assert_eq!(rref_table(&field, rows, cols, &mut table), rows);
+            assert_eq!(rref_binary::<6>(&tables, rows, cols, &mut binary), rows);
+            assert_ne!(table, original);
+            assert_ne!(binary, original);
+            assert_eq!(table, binary);
+        }
     }
 }
