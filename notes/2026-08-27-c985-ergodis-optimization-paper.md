@@ -1104,8 +1104,26 @@ files are disposable and may be deleted at any time.
    `c985-c1018-dense-orbit-unchecked-index-rejected.tsv`. None of the three
    source designs remains. The next bitmap-adjacent experiment must remove a
    larger structural cost than a single bounds check or instruction
-   substitution; the profile-visible `Vec` append/capacity path is the next
-   candidate, conditional on an orbit-size proof and a presized fixed buffer.
+   substitution.
+
+   Two larger structural attempts also fail the admission gate. First,
+   orbit--stabilizer proves every orbit has size at most
+   `|PGL(2,q)| = q^3-q`, so a `q^3`-slot `Box<[MaybeUninit<u64>]>` can replace
+   `Vec<u64>` and omit every append-capacity check. The fixed buffer removes
+   6.0% of branches at 1T and 10.4% at 12T, but increases 1T instructions
+   1.9% and is cycle-neutral (`1.003987x`, `t=0.20`; `1.001157x`, `t=0.03`).
+   Second, monotone root enumeration proves that with one worker every
+   unvisited root is already its orbit minimum. A const-generic single-worker
+   specialization therefore removes the complete minimum scan and separates
+   non-atomic from parallel ownership at cold dispatch. It removes 5.9% of
+   branches at 1T and 4.7% at 12T, but increases instructions 1.1% and 3.6%;
+   its cycle points remain unresolved (`1.010133x`, `t=0.80`; `1.023061x`,
+   `t=0.97`). Exact output digests agree throughout. The raw controls are
+   `c985-c1018-bounded-orbit-buffer-rejected.tsv` and
+   `c985-c1018-typed-single-owner-rejected.tsv`; neither source design
+   remains. These results close local orbit-container and representative
+   shortcuts: continue from a new whole-worker profile rather than further
+   editing the bitmap/append cluster.
 
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
