@@ -830,6 +830,36 @@ files are disposable and may be deleted at any time.
    `c985-binary-projective-action-application-q64-wall.tsv`. The next profile
    should now target the remaining matrix multiply-add and rank-analysis
    clusters rather than the retired projective decoder.
+
+   The source-current profile showed that conclusion was premature: after the
+   fused specialization, projective unranking still owns the largest dependent
+   instruction cluster. Commit `44129f425` imports the elementary affine-chart
+   size theorem directly into the decoder. The leading chart of `PG(d,q)` has
+   `q^d` of `(q^(d+1)-1)/(q-1)` points, hence at least half of the space and
+   63/64 of `PG(d,64)`. A single biased comparison now selects that chart;
+   only the exceptional tail performs the old binary search. The public API,
+   storage, fallback ordering, allocation behavior, and exact index map are
+   unchanged.
+
+   Fifteen rotated public-kernel pairs with identical 29.97-million-transition
+   work and nonzero checksum improve parent/fast-chart cycles by 1.121833x
+   (`t=12.00`) and task-clock by 1.107719x (`t=10.43`). Instructions rise 1.49%
+   and branches 0.81%, demonstrating that the win is removal of a dependent
+   search chain rather than lower retired work. In the full `q=64,r=5` census,
+   fifteen 1T counter pairs improve cycles 1.130114x (`t=3.52`) and task-clock
+   1.142362x (`t=4.23`); seven wall pairs improve 1.241959x (`t=17.87`). At
+   12T, seven pairs improve cycles 1.068807x (`t=3.93`) and wall 1.080055x
+   (`t=4.82`). Median RSS moves 10,520 -> 10,992 KiB at 1T and 76,972 ->
+   77,268 KiB at 12T. The seven-pair q=32 control is instruction- and
+   branch-exact, with unresolved-to-positive cycles/task-clock
+   (`1.008980x`, `t=1.88`; `1.022745x`, `t=2.61`); q=8 and q=32 remain
+   byte-identical at 1T and 12T. Raw tables are
+   `c985-binary-projective-affine-chart-kernel-ab.tsv`,
+   `c985-binary-projective-affine-chart-q32-control.tsv`,
+   `c985-binary-projective-affine-chart-q64-counters.tsv`, and
+   `c985-binary-projective-affine-chart-q64-wall.tsv`. The next target must be
+   chosen from a new post-chart profile; fixed-dimension typing remains an
+   option only if dynamic shape work is still visible after this theorem.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
