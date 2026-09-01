@@ -153,13 +153,41 @@ What the real data changed, beyond the schema facts recorded in the data-model n
 - **A held-out check is now available and it is cheap.** The C1016 semantic corpora come in matched
   train and holdout halves over an identical field list, 1,024 objects each, and the campaigns were
   evolved against the train half only. Because the console already evaluates plans itself, running
-  the same evaluator over the disjoint half costs nothing extra and answers the question the C1016
-  negative control was about: whether a learned predicate describes the problem or was fitted to the
-  corpus. On the 55-feature corpus the best plan, `evolve-g7-c37533`, scores 822 of 1,024 on the
-  training half and 819 of 1,024 on the held-out half — a gap of 0.3 percentage points, so it
-  generalizes. The console also re-ranks the whole archive by held-out score and separately lists
-  the classes that fall furthest from their training score, which is the ordering an operator should
-  act on.
+  the same evaluator over the disjoint half costs nothing extra. The console re-ranks the whole
+  archive by held-out score and separately lists the classes that fall furthest from their training
+  score.
+
+### The accuracy figures were unreadable without a baseline, and one conclusion was wrong
+
+This corrects a claim made earlier in this task. The held-out check first showed the 55-feature
+corpus's best plan, `evolve-g7-c37533`, scoring 822 of 1,024 on training and 819 of 1,024 on
+held-out data, and that 0.3-point gap was read as evidence that the plan generalizes. It is not.
+
+**The corpus has 205 positives in 1,024 objects, so answering the same way for every object scores
+80.0%.** The plan's held-out score is 80.0%. Its lift over a constant answer is **zero**, and its own
+evaluation confirms the mechanism with a `weighted_true` of 3. The 0.3 points it held on training
+were the overfit, and they vanish on the held-out half. Across the entire 3,595-class archive nothing
+exceeds 0.2 points of lift, after 99,966 candidates. What generalizes is the constant answer.
+
+The sibling run is the control that shows the check works. On the 21-feature corpus the baseline is
+66.6% and `evolve-g0-c5` — a generation-zero seed, `f019 == f017` — is exact on both halves, a lift
+of **+33.4 points**. Two runs of the same shape over the same generator: raw accuracies of 100.0%
+and 80.3% separate them far less sharply than lifts of +33.4 and +0.0.
+
+This is the same failure mode the C1016 negative control described, and the same class of error as
+the missing behaviour-space ceiling: **a rate is unreadable without the rate that costs nothing to
+achieve.** The console now shows the majority-class baseline in the campaign panel and the lift
+beside every score — inspector, archive, and both halves of the held-out check, each computed on its
+own object set — and states plainly when a plan does not beat a constant answer. Credit for catching
+this goes to the terminal-interface work, which built the same panel and checked the class balance.
+
+The consequence for the research is a revised recommendation. The 55-feature campaign was earlier
+called budget-limited, with more candidates the suggested remedy. With the baseline on screen that is
+wrong: an archive of 3,595 behaviours that never beats a constant answer will not be rescued by more
+candidates over the same features. The open question is whether that feature set can express the
+property at all. The cheap next moves are scoring the remaining corpus pairs to see how many carry a
+real signal, and generating held-out corpora for the g=133 runs — one of which has a generation-zero
+seed at a perfect weighted score that has never been checked off its training set.
 
 Two findings in the search itself, worth their own attention:
 
