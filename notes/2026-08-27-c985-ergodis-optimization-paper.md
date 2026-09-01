@@ -637,8 +637,27 @@ files are disposable and may be deleted at any time.
    C973 census remains numerically unchanged.  All sixteen focused tests and
    strict clean-worktree clippy pass.
 
-   Remaining execution work is argument-bearing signatures, typed multi-input
-   joins, and durable registration of the optimized C973
+   Public commits `1c57ec92d` and `b7261da2f` add only the shared assignment
+   token and signed-literal parser needed for canonical function-style
+   arguments; the full all-target/all-feature suite and strict clippy remain
+   green, and no evaluator or solve path changes.  Private commits `7aff2ca95`
+   and `fdebf4b44` add typed operation parameter schemas.  Integer ranges,
+   finite name choices, and Booleans are checked against the registered
+   signature, then encoded once in signature order into a bounded `i64` pool.
+   Thus `affine_subspace(rank=2, metric=max_overlap)`,
+   `overlap_histogram(weighted=true)`, and
+   `affine_generators(count=4)` compile to `[2,0,1,4]` without recompilation or
+   string dispatch in feature loops.  Missing, duplicate, mistyped,
+   out-of-range, and unknown-choice arguments fail closed.  The same argument
+   syntax now binds theorem action declarations, so changing `count=4` to
+   `count=5` invalidates fragment emission.  Compiled recipes and prepared
+   runtimes also carry the exact canonical registry bytes: reordered signature
+   IDs or name-choice tables are rejected before the first stage call.  The
+   sixteen focused tests and strict clean-worktree clippy pass; the full C973
+   replay exercises the compiled arguments while retaining the exact census.
+
+   Remaining execution work is typed multi-input joins and durable registration
+   of the optimized C973
    adapter once its currently untracked private kernel module is landed.  Then
    require the same engine to express one C80 and one C896 packet before
    stabilizing or publishing the private grammar.  Do not create a second mini-
