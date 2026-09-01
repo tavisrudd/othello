@@ -627,6 +627,16 @@ files are disposable and may be deleted at any time.
    lowered bytecode, JSONL remains streaming/create-only, and no solver or
    daemon hot path changes. A focused expression/bytecode identity control plus
    the full all-target/all-feature suite, strict clippy, and doc tests pass.
+   Commit `1efc3c7d3` closes the associated historical synthesis-sort report.
+   The exact retained 4,096-row, 48-feature-vector campaign now synthesizes a
+   five-node, depth-two predicate and compiles/evaluates it at 4,096/4,096;
+   the former `plan result sort does not match its declared output` failure no
+   longer reproduces. A public neutral regression forces the same nested-
+   Boolean `select` boundary over a 4,096-row multiword truth table, while the
+   private replay and synthesized plan are retained in
+   `ergodis-private/evidence/c985-c1015-synthesis-replay.json`. The full public
+   suite and strict all-target/all-feature clippy pass; production code is
+   unchanged.
    Commit `aed0d7a89` exposes that parser's bounded lexer, token locations,
    name/literal contracts, and scalar expression parser/formatter as one
    domain-neutral cold control-plane substrate.  The complete public
