@@ -1034,9 +1034,25 @@ files are disposable and may be deleted at any time.
    protocol. The owned binary tests pass and direct `rustc -D warnings` is
    clean. Package-wide private clippy is temporarily blocked by unrelated
    in-flight exact-tablebase signature changes, which this tranche does not
-   touch. Next run balanced/routed paired campaigns on a frozen held-out
-   alignment corpus and compare perfect-hit candidate ordinal, semantic-op
-   rows, operator mix, and evidence bytes.
+   touch.
+
+   Commit `5e553fca0` lands the first paired routing-mechanism audit against the
+   frozen C880 live-ordering rows. The numeric-shaped control reaches its first
+   exact predicate at trial 2 / 20 semantic-op rows under numeric routing,
+   versus 6 / 60 balanced and 7 / 70 structural. The reciprocal
+   structural-shaped control reaches exactness at 7 / 70 under structural
+   routing, versus 13 / 130 balanced and 24 / 240 numeric. Thus the intended
+   route wins both symmetric controls: 3.0x fewer trials than balanced on the
+   numeric control, and 1.86x fewer than balanced (3.43x fewer than numeric) on
+   the structural control. Every route still finds an exact predicate within
+   the common 32-candidate finite set. The committed bundle retains the frozen
+   inputs, two seeds, six streamed evidence files, hashes, a create-only replay
+   harness, and a compact interpretation memo; ephemeral manifests and control
+   credentials are excluded. These deliberately shaped controls validate
+   routing, not end-to-end C880 or general synthesis speed. The remaining
+   application gate is a balanced/routed comparison on a frozen held-out
+   campaign corpus, measuring perfect-hit ordinal, semantic-op rows, operator
+   mix, and evidence bytes.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
