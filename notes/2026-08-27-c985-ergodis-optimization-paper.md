@@ -1030,6 +1030,62 @@ files are disposable and may be deleted at any time.
    commit-clean control is the replayable admission basis while the private
    application overlay remains diagnostic. The next target must come from a
    fresh post-rank profile.
+
+   Commit `c0836c2bc` resolves the dominant unit-tape cluster with a separate
+   opt-in representation for binary vector dimensions at most eight. Canonical
+   field elements occupy independent bytes of one `u64`. For each input
+   coordinate, the compiler collects all unit-coefficient output rows into a
+   byte-lane mask; multiplying the input byte by that mask broadcasts it into
+   every selected lane without carries, and XOR composes the exact
+   characteristic-two action. Nonunit coefficients remain explicit table
+   lookups shifted into their destination lanes. Projective point decoding,
+   action images, and ranking all stay packed, so the runner has no heap
+   workspace or scattered image writes.
+
+   `BinaryLaneProjectiveLinearActionPack<H,D,G>` validates `D <= 8`, exact
+   field presentation, matrix shape, and full rank before compiling. Its pack,
+   runner, compatibility workspace, action record, unit term, and weighted
+   term are respectively 88, 8, 0, 16, 16, and 4 bytes with asserted layouts.
+   The compatibility workspace lets a concrete existing worker use the same
+   interface without carrying runtime state. Exhaustive `PG(2,8)` comparison
+   covers both the original unit generators and a weighted diagonal/shear/
+   reversal family; singular matrices, mismatched dimensions, oversized lane
+   dimensions, and out-of-range points fail closed. The actual runner records
+   zero allocator events.
+
+   Seven rotated commit-clean public pairs perform 299.7 million transitions
+   per arm with identical work and nonzero checksum. Sparse/lane is 1.107298x
+   cycles (`t=5.58`) and 1.122911x task-clock (`t=5.60`). The lane form executes
+   3.4% more instructions and essentially the same branch count, but reduces
+   branch misses 1.599973x and replaces dependent scattered updates with
+   register-resident lane algebra. The long control is
+   `c985-binary-lane-action-kernel-long-ab.tsv`; its 15-pair short companion
+   independently gives 1.110933x cycles (`t=3.38`).
+
+   The private q=64 adapter retains sparse and lane builds as separate compile-
+   time features, so the default and smaller workers instantiate neither new
+   lane monomorph nor runtime dispatch. Seven exact-output application pairs
+   give sparse/lane 1T ratios of 1.546295x cycles (`t=12.61`), 1.545326x
+   task-clock (`t=12.38`), 1.333674x instructions, 1.528569x branches, and
+   1.482250x wall (`t=19.29`). At 12T the ratios are 1.419944x cycles
+   (`t=21.74`), 1.428074x task-clock (`t=19.55`), 1.336283x instructions,
+   1.533322x branches, and 1.369413x wall (`t=41.83`). Branch misses are
+   neutral in both modes. Median RSS rises only 8,916 -> 9,192 KiB at 1T and
+   52,308 -> 52,656 KiB at 12T. Seven 16-solve default q=32 pairs are
+   instruction-exact and branch-exact to one part per million; cycles and
+   task-clock are unresolved adverse points (`0.979924x`, `t=-0.89`;
+   `0.978972x`, `t=-0.91`) while branch misses improve 1.139286x.
+
+   Raw tables are `c985-binary-lane-action-kernel-ab.tsv`,
+   `c985-binary-lane-action-kernel-long-ab.tsv`,
+   `c985-c1018-lane-action-q64-counters.tsv`,
+   `c985-c1018-lane-action-q64-wall.tsv`, and
+   `c985-c1018-lane-action-q32-control.tsv`. All 422 public tests, strict
+   all-target/all-feature clippy, and default/sparse/lane private adapter tests
+   pass. The application builds still share the same explicit overlay of
+   another agent's uncommitted private support modules, so the commit-clean
+   public control remains the independent admission basis. The next target
+   must come from a fresh profile of the byte-lane endpoint.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
