@@ -117,19 +117,35 @@ whose best was strictly weaker than the actual theorem. Corpus perfection is not
 necessary conditions only. Drawing them identically erases the distinction the research programme is
 organized around.
 
-## The one gap worth closing in the core
+## Time: the gap is real in the core, and the harness already closes it in practice
 
-Neither ledger events nor the evolution progress record carries a timestamp, so nothing on disk says
-how long anything took. This blocks two things the user asked for: a completion estimate in units of
-time rather than candidates, and the scrubable recorded-trace replay in the manner of the sysdig
-explorer views.
+This revises an earlier reading in this note. Ergodis itself still records no time — no ledger event
+and no evolution progress record carries a timestamp — but that is not the end of the story.
 
-The fix is one monotonic clock reading per durable ledger event, on a path that already performs a
-file write and a flush, so the cost is negligible and it stays outside the solve hot path. Machine
-counters — CPU, resident set, cycles — should be sampled by the harness that launches a campaign
-rather than by the solver, which preserves the property that ordinary solves carry no
-instrumentation. That is a core change and therefore a separate task; it should not be folded into
-C1031.
+**A harness that launches a campaign can poll `evolve-status` with a wall clock, and that is enough.**
+The real campaigns generated for this task did exactly that, writing an `evolve-progress.jsonl`
+whose records carry `wall_clock` alongside `state`, `generation`, `tested`, and `perfect`, and whose
+terminal record additionally carries `final_tested`, `final_outcome_classes`, and all three rejection
+counters. The console consumes it: elapsed, sample count, the recent candidate rate, and a projected
+remaining time all come from that series, and when a run has no such series the console says so
+rather than inventing a figure. This is the arrangement the note already recommended for machine
+counters, and it turns out to be the right one for time as well — the sampling belongs to the
+launching harness, not to the solver, which preserves the property that ordinary solves carry no
+instrumentation.
+
+Two consequences worth stating plainly. First, **the time axis is a property of how a campaign was
+launched, not of the campaign**, so a run started without a polling harness is permanently untimed
+and no later analysis can recover it. Second, a per-event monotonic clock reading in the ledger
+would still be worth having, because it would time the events between evolutions — plan application,
+synthesis, trace capture — which no polling of `evolve-status` can see. That remains a core change
+and a separate task.
+
+**Launch bounds have the same shape of problem and no workaround.** The beam width, generation
+count, candidate budget, and evidence byte limit appear only in the `evolve-start` response and are
+written to no file in the run directory. A console that wants to show progress against a bound must
+therefore be given the saved response; without it the bound is genuinely unknown, and the display
+must say so rather than assume a default. Writing the launch bounds into the run
+directory would cost one small file and would make every run self-describing.
 
 ## Build estimate
 

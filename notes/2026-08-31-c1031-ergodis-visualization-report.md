@@ -113,6 +113,53 @@ the prototype's data layer survives into production rather than being thrown awa
 - **No genuine mystery remains in the visualization work itself.** Every view is driven by data whose
   provenance and meaning were checked against the source.
 
+## Second pass: real corpora
+
+The exploration above ran against a two-row smoke fixture, which the user correctly identified as
+dominating every figure on screen. Five campaigns were then generated on genuine research corpora
+and both interfaces rebuilt against them.
+
+| campaign | corpus | candidates | behaviour classes | perfect |
+|---|---|---|---|---|
+| g=133 order-2092 exact q2 cells, excluded label | 225 objects × 30 features | 9,638 | 233 | 4 |
+| g=133 exact q2 cells, survives label | 225 × 30 | 4,372 | 92 | 4 |
+| g=133 exact q3 cells, survives label | 325 × 30 | 2,992 | 97 | 1,173 |
+| C1016 banked semantic system, 55 features | 1,024 × 55 | 99,966 | 3,595 | 0 |
+| C1016 banked semantic system, 21 features | 1,024 × 21 | 4,562 | 589 | 6 |
+
+What the real data changed, beyond the schema facts recorded in the data-model note:
+
+- **The launch bounds were hardcoded and are now read from the run.** The console had a candidate
+  budget and generation count baked in from the fixture. Real runs use a beam of 128 or 256, up to
+  32 generations, and a 100,000-candidate budget. Those values live only in the `evolve-start`
+  response, so the console now reads them and reports the bound as unknown when the response was
+  not saved.
+- **A time axis exists after all, supplied by the launching harness.** The architecture note is
+  corrected accordingly. Elapsed time, sample count, recent candidate rate, and a projected
+  remaining time now come from a polled progress series with wall-clock stamps.
+- **Huge lineages are sampled to a structural skeleton.** The 99,966-candidate run cannot be drawn
+  or embedded whole. Expansion parents, the first candidate of every behaviour class, and the
+  ancestry closure of whatever is kept are all retained, so no drawn edge dangles and no generation
+  proportion is distorted; every aggregate is still computed over the full file, and the view states
+  how many of how many are drawn.
+- **The object space is now an independent check.** The console re-implements the plan stack machine
+  and evaluates the selected plan over every object. Its recomputed weighted-correct is compared
+  against the value the daemon recorded — two separate evaluators over the same objects — and the
+  match is displayed. On the g=133 excluded-cells run both give 15,724,800 exactly.
+- **Each run shows its own reduction.** The corpus generator's report carries weighted roots,
+  survivors, and exclusions, so the cascade view now leads with the loaded run's real reduction and
+  keeps the g=41 quotient compilation below it as a named worked reference.
+
+Two findings in the search itself, worth their own attention:
+
+- On the g=133 excluded-cells campaign the best plan is `evolve-g0-c6`, a **generation-zero seed**,
+  already perfect at 15,724,800 of 15,724,800. The campaign then tested 9,638 further candidates
+  without improving on it.
+- The g=133 **q3 filter excludes nothing**: its report records zero weighted exclusions against
+  15,724,800 roots, which is why that campaign's label is constant and why it reports 1,173 perfect
+  classifiers. A console that showed the perfect count without the exclusion share would read this
+  degenerate run as the most successful of the five.
+
 ## Recommended next move
 
 A production build is ordinary construction against interfaces that already exist, and it is not
