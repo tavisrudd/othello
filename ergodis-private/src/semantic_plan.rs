@@ -3,6 +3,7 @@
 pub mod affine_census;
 pub mod dataflow;
 pub mod execution;
+pub mod q11_hall_packet;
 pub mod q9_rank_packet;
 pub mod theorem;
 
