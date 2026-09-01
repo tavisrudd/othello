@@ -850,6 +850,24 @@ files are disposable and may be deleted at any time.
    Prime/Gf4 raw-element canonicality remains open, so finding 17 is not yet
    fully closed.
 
+   Commit `629ba88d4` adds the corresponding exact static-field migration
+   path. `FieldElement<F>` is a one-byte `repr(transparent)` value branded by
+   the complete sealed field type, so `Prime<5>`, `Prime<7>`, and `Gf4`
+   elements cannot mix at compile time. Raw construction validates the field
+   and canonical range once; `+`, `-`, `*`, and inversion thereafter carry no
+   runtime tag or repeated check. Exact all-element tests cover GF(2), GF(7),
+   GF(251), and GF(4); invalid `Prime<9>` and out-of-range bytes fail closed;
+   the measured typed arithmetic region allocates zero times.
+
+   Seven rotated GF(7) pairs over 409.6 million updates per arm preserve exact
+   work and checksum. Raw/typed is 1.000505x cycles (`t=3.43`) and 1.000068x
+   wall (`t=0.004`); instructions differ by 0.0012% and branches by 0.0043%.
+   This is admitted as operationally neutral, not as a speedup. Raw pairs are
+   tracked at `ergodis-private/evidence/c985-static-field-element-ab.tsv`.
+   Existing raw static arithmetic remains available and still relies on its
+   canonical-element contract, so finding 17 remains partially open until
+   public consumers migrate or that boundary becomes checked.
+
    Commits `f69380676` and `aca704d3d` close finding 16's
    matrix-reinterpretation path without hashing or enlarging the cold matrix
    record. `FieldPresentation` packs the
