@@ -831,6 +831,25 @@ files are disposable and may be deleted at any time.
    checked-versus-debug-checked `SmallField`/`BinarySmallField` boundary remain
    open rather than being conflated with modulus validity.
 
+   Commit `90ee59e48` closes the binary half without putting a check back in
+   the hot loop. `BinaryElement<H>` is a one-byte `repr(transparent)` value
+   whose private constructor makes canonical range a type invariant;
+   `BinarySmallField::element` validates raw bytes once, typed arithmetic is
+   XOR or one table lookup, and the public raw-byte operations remain checked.
+   The former public unsafe arithmetic escape hatch is gone. Typed projective
+   rank/unrank preserves that invariant end to end and can therefore omit the
+   full-coordinate range scan. Seven interleaved ten-million-round pairs give
+   parent/typed ratios 1.315225x wall (`t=8.15`), 1.343571x cycles
+   (`t=25.17`), 1.252109x instructions, and 1.064514x branches with identical
+   work, checksum, and final state. The rejected check-every-operation control
+   cost 10.57% instructions and 6.99% branches. Raw pairs are tracked in
+   `ergodis-private/evidence/c985-binary-field-typed-fastpath.tsv` and
+   `ergodis-private/evidence/c985-binary-field-checked-rejected.tsv`.
+   The degree phantom proves canonical range, not polynomial-basis identity;
+   exact presentation continues to travel at matrix/consumer boundaries.
+   Prime/Gf4 raw-element canonicality remains open, so finding 17 is not yet
+   fully closed.
+
    Commits `f69380676` and `aca704d3d` close finding 16's
    matrix-reinterpretation path without hashing or enlarging the cold matrix
    record. `FieldPresentation` packs the
@@ -885,6 +904,14 @@ files are disposable and may be deleted at any time.
    semantics plus independent witness reconstruction.  They enter core only as
    general contracts; C1016-specific quotient fields, targets, and conclusions
    remain private.
+
+   A disposable C1016-shaped side prototype identifies zero-sized validated
+   theorem-program witnesses as the highest-value next type-level kernel: a
+   sealed program marker can attest a cold-validated fixed Horn registry while
+   carrying zero bytes into repeated closure calls. An off-tree diagnostic was
+   strongly positive, but it is not retained evidence and no live C1016 source
+   was changed. The proper gate is a standalone private A/B against the real
+   closure API after the owning C1016 edit window closes.
 
 ## Gurobi boundary and semantic-symmetry spike, 2026-08-29
 
