@@ -1,0 +1,29 @@
+{
+  "schema": "ergodis-private-group-synthesize-report-v0",
+  "commit": "9f55e08f1",
+  "input": "notes/c1015_chord_pack_groups.jsonl",
+  "input_sha256": "01d22b75b4d4d72663ba4f14e3f24f906bc849b2e18b7e11f140c50786683d8c",
+  "group_by": "pack",
+  "statistics": [
+    "count",
+    "sum:bad-orbit-0",
+    "sum:bad-orbit-1",
+    "sum:bad-orbit-2",
+    "sum:bad-orbit-3",
+    "sum:complement-triangles"
+  ],
+  "child_rows": 36,
+  "grouped_rows": 9,
+  "grouped_data": "ergodis-private/evidence/c985-c1015-group-synthesize-data.jsonl",
+  "grouped_data_sha256": "f12cd60b3bd7626bcbcfb4da8ae6308beaef173f26f1af410bf59aa7159ca040",
+  "maximum_nodes": 31,
+  "maximum_depth": 8,
+  "result_nodes": 5,
+  "result_depth": 2,
+  "weighted_correct": 9,
+  "weighted_rows": 9,
+  "plan": "ergodis-private/evidence/c985-c1015-group-synthesize-plan.json",
+  "plan_sha256": "146348ef7672ee064e66c1afb6abd322095edadbffaa95f085c042c23051ef7d",
+  "command": "ergodisctl --run-dir RUN group-synthesize pack --sum bad-orbit-0 --sum bad-orbit-1 --sum bad-orbit-2 --sum bad-orbit-3 --sum complement-triangles --evidence-name grouped --output PLAN --max-nodes 31 --max-depth 8",
+  "conclusion": "One cold-path command deterministically compiles the bounded multiset parent campaign, retains it for replay, synthesizes a typed predicate, and independently evaluates that predicate exactly on all parent rows."
+}

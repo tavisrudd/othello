@@ -637,6 +637,18 @@ files are disposable and may be deleted at any time.
    `ergodis-private/evidence/c985-c1015-synthesis-replay.json`. The full public
    suite and strict all-target/all-feature clippy pass; production code is
    unchanged.
+   Commit `9f55e08f1` removes the remaining two-process aggregation friction.
+   The cold `group-synthesize` client composes the existing create-only
+   `group-compile` artifact with a new public bounded synthesis entry point,
+   reopens the exact grouped JSONL, type-checks and independently evaluates the
+   learned plan, and writes it create-only. On the retained 36-child grouped
+   campaign, one invocation produces nine parent rows and the same exact
+   five-node, depth-two rule at 9/9. Both grouped data and plan are retained;
+   the compact replay record is
+   `ergodis-private/evidence/c985-c1015-group-synthesize-report.json`. Argument
+   and output-path checks run before the state-changing request. This remains
+   entirely outside solve threads and carries no proof authority. The full
+   all-target/all-feature suite, strict clippy, and doc tests pass.
    Commit `aed0d7a89` exposes that parser's bounded lexer, token locations,
    name/literal contracts, and scalar expression parser/formatter as one
    domain-neutral cold control-plane substrate.  The complete public
