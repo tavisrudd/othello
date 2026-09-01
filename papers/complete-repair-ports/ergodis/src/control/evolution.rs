@@ -168,12 +168,48 @@ pub(super) struct EvolutionTargetProfile {
     edges: Box<[EvolutionTargetEdge]>,
 }
 
+#[derive(Clone, Copy, Debug, Default, Eq, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub(super) enum EvolutionTargetStrategy {
+    #[default]
+    Balanced,
+    Numeric,
+    Structural,
+}
+
+impl EvolutionTargetStrategy {
+    fn is_balanced(&self) -> bool {
+        *self == Self::Balanced
+    }
+
+    pub(super) fn parse(value: &str) -> Result<Self, ControlError> {
+        match value {
+            "balanced" => Ok(Self::Balanced),
+            "numeric" => Ok(Self::Numeric),
+            "structural" => Ok(Self::Structural),
+            _ => Err(ControlError::Invalid(
+                "target strategy must be balanced, numeric, or structural".into(),
+            )),
+        }
+    }
+
+    fn as_str(self) -> &'static str {
+        match self {
+            Self::Balanced => "balanced",
+            Self::Numeric => "numeric",
+            Self::Structural => "structural",
+        }
+    }
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct EvolutionTargetNode {
     values: Box<[i64]>,
     mass: u64,
     unit_cost: u64,
+    #[serde(default, skip_serializing_if = "EvolutionTargetStrategy::is_balanced")]
+    strategy: EvolutionTargetStrategy,
 }
 
 #[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
@@ -194,8 +230,18 @@ struct EvolutionTargetEdge {
 struct CompiledTargetProfile {
     hash: String,
     class_priorities: Box<[u64]>,
+    class_strategies: Box<[EvolutionTargetStrategy]>,
     nodes: usize,
     edges: usize,
+}
+
+impl CompiledTargetProfile {
+    fn strategy(&self, class: Option<u32>) -> EvolutionTargetStrategy {
+        class
+            .and_then(|class| self.class_strategies.get(class as usize))
+            .copied()
+            .unwrap_or_default()
+    }
 }
 
 fn target_profile_hash(profile: &EvolutionTargetProfile) -> Result<String, ControlError> {
@@ -376,6 +422,7 @@ impl TargetClasses {
             }
         }
         let mut class_priorities = vec![0_u64; self.keys.len()];
+        let mut class_strategies = vec![EvolutionTargetStrategy::Balanced; self.keys.len()];
         for (node, class) in node_classes.into_iter().enumerate() {
             let class = class.ok_or_else(|| {
                 ControlError::Invalid("evolution target profile lost its class binding".into())
@@ -390,10 +437,12 @@ impl TargetClasses {
                 })?;
             }
             class_priorities[class] = priority;
+            class_strategies[class] = profile.nodes[node].strategy;
         }
         Ok(CompiledTargetProfile {
             hash: target_profile_hash(profile)?,
             class_priorities: class_priorities.into_boxed_slice(),
+            class_strategies: class_strategies.into_boxed_slice(),
             nodes: profile.nodes.len(),
             edges: profile.edges.len(),
         })
@@ -402,7 +451,7 @@ impl TargetClasses {
 
 pub(super) struct EvolutionTargetAccumulator {
     fields: Box<[String]>,
-    nodes: BTreeMap<TargetKey, (u64, u64)>,
+    nodes: BTreeMap<TargetKey, (u64, u64, EvolutionTargetStrategy)>,
     edges: BTreeSet<(TargetKey, TargetKey, EvolutionTargetEdgeKind)>,
 }
 
@@ -428,6 +477,7 @@ impl EvolutionTargetAccumulator {
         values: &[i64],
         mass: u64,
         unit_cost: u64,
+        strategy: EvolutionTargetStrategy,
     ) -> Result<bool, ControlError> {
         let key = TargetKey::from_values(values, self.fields.len())?;
         if mass == 0 || unit_cost == 0 || mass.checked_mul(unit_cost).is_none() {
@@ -440,7 +490,10 @@ impl EvolutionTargetAccumulator {
                 "target profile node arena is full".into(),
             ));
         }
-        Ok(self.nodes.insert(key, (mass, unit_cost)) != Some((mass, unit_cost)))
+        Ok(
+            self.nodes.insert(key, (mass, unit_cost, strategy))
+                != Some((mass, unit_cost, strategy)),
+        )
     }
 
     pub(super) fn connect(
@@ -495,7 +548,7 @@ impl EvolutionTargetAccumulator {
         }
         let mut index = BTreeMap::<TargetKey, u16>::new();
         let mut nodes = Vec::with_capacity(self.nodes.len());
-        for (key, &(mass, unit_cost)) in &self.nodes {
+        for (key, &(mass, unit_cost, strategy)) in &self.nodes {
             let node = u16::try_from(nodes.len())
                 .map_err(|_| ControlError::Invalid("target node index overflow".into()))?;
             index.insert(*key, node);
@@ -503,6 +556,7 @@ impl EvolutionTargetAccumulator {
                 values: key.values().to_vec().into_boxed_slice(),
                 mass,
                 unit_cost,
+                strategy,
             });
         }
         let edges = self
@@ -602,6 +656,12 @@ struct FailureShape {
     probe_count: u8,
 }
 
+struct MutationRequest<'a> {
+    failure_shape: &'a FailureShape,
+    strategy: EvolutionTargetStrategy,
+    cursor: usize,
+}
+
 struct PendingCandidate {
     plan: PlanSpec,
     parent_hash: Option<String>,
@@ -620,6 +680,25 @@ struct ExpansionParent {
     operator: &'static str,
     niche: SemanticNiche,
     mutation_cursor: usize,
+}
+
+fn reset_changed_strategy_cursors(
+    parents: &mut [ExpansionParent],
+    previous: Option<&CompiledTargetProfile>,
+    refreshed: &CompiledTargetProfile,
+) -> usize {
+    let mut resets = 0;
+    for parent in parents {
+        let previous = previous.map_or_else(EvolutionTargetStrategy::default, |profile| {
+            profile.strategy(parent.niche.target_class)
+        });
+        if previous != refreshed.strategy(parent.niche.target_class) && parent.mutation_cursor != 0
+        {
+            parent.mutation_cursor = 0;
+            resets += 1;
+        }
+    }
+    resets
 }
 
 #[derive(Clone, Copy)]
@@ -1943,6 +2022,8 @@ pub(super) fn run_evolution(
     let mut target_selection_overflow = 0_u64;
     let mut target_profile_surplus_slots = 0_u64;
     let mut target_profile_refreshes = 0_u64;
+    let mut target_strategy_parents = BTreeMap::<&'static str, u64>::new();
+    let mut target_strategy_cursor_resets = 0_u64;
     let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
     let mut retained_elites = Vec::<ExpansionParent>::new();
     let mut hindsight_semantics = BTreeSet::<String>::new();
@@ -2044,6 +2125,18 @@ pub(super) fn run_evolution(
             }
             writer.write_all(&encoded)?;
             bytes += encoded.len() as u64;
+            let resets = reset_changed_strategy_cursors(
+                &mut retained_elites,
+                target_profile.as_ref(),
+                &compiled,
+            );
+            checked_counter_add(
+                &mut target_strategy_cursor_resets,
+                u64::try_from(resets).map_err(|_| {
+                    ControlError::Invalid("target strategy reset count overflows u64".into())
+                })?,
+                "target strategy cursor reset",
+            )?;
             target_profile = Some(compiled);
             checked_counter_add(&mut target_profile_refreshes, 1, "target profile refresh")?;
         }
@@ -2514,14 +2607,29 @@ pub(super) fn run_evolution(
             let limit = before.saturating_add(quota).min(expansion_capacity);
             let failure_shape =
                 failure_shape(&batch, &parent.plan, parent.first_mismatch, &field_index);
+            let strategy = target_profile
+                .as_ref()
+                .map_or_else(EvolutionTargetStrategy::default, |profile| {
+                    profile.strategy(parent.niche.target_class)
+                });
+            checked_counter_add(
+                target_strategy_parents
+                    .entry(strategy.as_str())
+                    .or_default(),
+                1,
+                "target strategy parent",
+            )?;
             let mutation = mutate_plan(
                 &parent.plan,
                 &parent.hash,
                 &mutation_context,
-                &failure_shape,
+                MutationRequest {
+                    failure_shape: &failure_shape,
+                    strategy,
+                    cursor: parent.mutation_cursor,
+                },
                 &mut current,
                 limit,
-                parent.mutation_cursor,
             );
             parent.mutation_cursor = mutation.next_cursor;
             if !mutation.exhausted {
@@ -2558,6 +2666,8 @@ pub(super) fn run_evolution(
         "edges": target_profile.as_ref().map_or(0, |profile| profile.edges),
         "surplus_slots": target_profile_surplus_slots,
         "refreshes": target_profile_refreshes,
+        "strategy_parents": target_strategy_parents,
+        "strategy_cursor_resets": target_strategy_cursor_resets,
     });
     let mut footer_summary = json!({
         "tested": tested,
@@ -2776,28 +2886,17 @@ fn push_scoped_child(
     })
 }
 
-fn mutate_plan(
+#[derive(Clone, Copy, Eq, PartialEq)]
+enum MutationFamily {
+    Numeric,
+    Structural,
+}
+
+fn mutate_scopes(
     parent: &PlanSpec,
-    parent_hash: &str,
     context: &MutationContext<'_>,
-    failure_shape: &FailureShape,
-    output: &mut Vec<PendingCandidate>,
-    limit: usize,
-    cursor: usize,
-) -> MutationBatch {
-    let mut emitter = MutationEmitter {
-        parent_hash,
-        output,
-        limit,
-        cursor,
-        ordinal: 0,
-    };
-    if mutate_thresholds_from_failure(parent, context.field_index, failure_shape, &mut emitter) {
-        return MutationBatch {
-            next_cursor: emitter.ordinal,
-            exhausted: false,
-        };
-    }
+    emitter: &mut MutationEmitter<'_>,
+) -> bool {
     for profile in context.scope_profiles {
         if parent
             .scope
@@ -2814,12 +2913,9 @@ fn mutate_plan(
                     &profile.field,
                     current_mask ^ bit,
                     "scope-toggle",
-                    &mut emitter,
+                    emitter,
                 ) {
-                    return MutationBatch {
-                        next_cursor: emitter.ordinal,
-                        exhausted: false,
-                    };
+                    return true;
                 }
             }
         } else {
@@ -2827,17 +2923,8 @@ fn mutate_plan(
             while bits != 0 {
                 let bit = bits & bits.wrapping_neg();
                 bits ^= bit;
-                if push_scoped_child(
-                    parent,
-                    &profile.field,
-                    bit,
-                    "scope-initialize",
-                    &mut emitter,
-                ) {
-                    return MutationBatch {
-                        next_cursor: emitter.ordinal,
-                        exhausted: false,
-                    };
+                if push_scoped_child(parent, &profile.field, bit, "scope-initialize", emitter) {
+                    return true;
                 }
             }
             if profile.positive_majority_mask != profile.observed_mask
@@ -2846,66 +2933,152 @@ fn mutate_plan(
                     &profile.field,
                     profile.positive_majority_mask,
                     "scope-majority",
-                    &mut emitter,
+                    emitter,
                 )
             {
-                return MutationBatch {
-                    next_cursor: emitter.ordinal,
-                    exhausted: false,
-                };
+                return true;
             }
         }
     }
+    false
+}
+
+fn mutate_program(
+    parent: &PlanSpec,
+    context: &MutationContext<'_>,
+    family_filter: Option<MutationFamily>,
+    emitter: &mut MutationEmitter<'_>,
+) -> bool {
     for (index, op) in parent.program.iter().enumerate() {
-        let (operator, replacements): (&'static str, Vec<PlanOp>) = match op {
-            PlanOp::Const { value } => (
-                "constant-shift",
-                [-8, -2, -1, 1, 2, 8]
-                    .into_iter()
-                    .filter_map(|delta| value.checked_add(delta))
-                    .map(|value| PlanOp::Const { value })
-                    .collect(),
-            ),
-            PlanOp::Field { name } => (
-                "field-substitute",
-                context
-                    .fields
-                    .iter()
-                    .filter(|field| *field != name)
-                    .map(|name| PlanOp::Field { name: name.clone() })
-                    .collect(),
-            ),
-            PlanOp::Eq | PlanOp::Ne | PlanOp::Lt | PlanOp::Le | PlanOp::Gt | PlanOp::Ge => (
-                "comparison-substitute",
-                vec![
+        let family = match op {
+            PlanOp::Const { .. }
+            | PlanOp::Eq
+            | PlanOp::Ne
+            | PlanOp::Lt
+            | PlanOp::Le
+            | PlanOp::Gt
+            | PlanOp::Ge => MutationFamily::Numeric,
+            PlanOp::Field { .. } | PlanOp::And | PlanOp::Or => MutationFamily::Structural,
+            _ => continue,
+        };
+        if family_filter.is_some_and(|filter| filter != family) {
+            continue;
+        }
+        match op {
+            PlanOp::Const { value } => {
+                for delta in [-8, -2, -1, 1, 2, 8] {
+                    let Some(value) = value.checked_add(delta) else {
+                        continue;
+                    };
+                    if emitter.emit("constant-shift", || {
+                        let mut child = parent.clone();
+                        child.program[index] = PlanOp::Const { value };
+                        child
+                    }) {
+                        return true;
+                    }
+                }
+            }
+            PlanOp::Field { name } => {
+                for replacement in context.fields.iter().filter(|field| *field != name) {
+                    if emitter.emit("field-substitute", || {
+                        let mut child = parent.clone();
+                        child.program[index] = PlanOp::Field {
+                            name: replacement.clone(),
+                        };
+                        child
+                    }) {
+                        return true;
+                    }
+                }
+            }
+            PlanOp::Eq | PlanOp::Ne | PlanOp::Lt | PlanOp::Le | PlanOp::Gt | PlanOp::Ge => {
+                for replacement in [
                     PlanOp::Eq,
                     PlanOp::Ne,
                     PlanOp::Lt,
                     PlanOp::Le,
                     PlanOp::Gt,
                     PlanOp::Ge,
-                ],
-            ),
-            PlanOp::And => ("boolean-flip", vec![PlanOp::Or]),
-            PlanOp::Or => ("boolean-flip", vec![PlanOp::And]),
-            _ => ("none", Vec::new()),
-        };
-        for replacement in replacements {
-            if emitter.emit(operator, || {
-                let mut child = parent.clone();
-                child.program[index] = replacement;
-                child
-            }) {
-                return MutationBatch {
-                    next_cursor: emitter.ordinal,
-                    exhausted: false,
-                };
+                ] {
+                    if emitter.emit("comparison-substitute", || {
+                        let mut child = parent.clone();
+                        child.program[index] = replacement;
+                        child
+                    }) {
+                        return true;
+                    }
+                }
             }
+            PlanOp::And | PlanOp::Or => {
+                let replacement = if matches!(op, PlanOp::And) {
+                    PlanOp::Or
+                } else {
+                    PlanOp::And
+                };
+                if emitter.emit("boolean-flip", || {
+                    let mut child = parent.clone();
+                    child.program[index] = replacement;
+                    child
+                }) {
+                    return true;
+                }
+            }
+            _ => unreachable!(),
         }
     }
+    false
+}
+
+fn mutate_plan(
+    parent: &PlanSpec,
+    parent_hash: &str,
+    context: &MutationContext<'_>,
+    request: MutationRequest<'_>,
+    output: &mut Vec<PendingCandidate>,
+    limit: usize,
+) -> MutationBatch {
+    let mut emitter = MutationEmitter {
+        parent_hash,
+        output,
+        limit,
+        cursor: request.cursor,
+        ordinal: 0,
+    };
+    let stopped = mutate_thresholds_from_failure(
+        parent,
+        context.field_index,
+        request.failure_shape,
+        &mut emitter,
+    ) || match request.strategy {
+        EvolutionTargetStrategy::Balanced => {
+            mutate_scopes(parent, context, &mut emitter)
+                || mutate_program(parent, context, None, &mut emitter)
+        }
+        EvolutionTargetStrategy::Numeric => {
+            mutate_program(parent, context, Some(MutationFamily::Numeric), &mut emitter)
+                || mutate_scopes(parent, context, &mut emitter)
+                || mutate_program(
+                    parent,
+                    context,
+                    Some(MutationFamily::Structural),
+                    &mut emitter,
+                )
+        }
+        EvolutionTargetStrategy::Structural => {
+            mutate_scopes(parent, context, &mut emitter)
+                || mutate_program(
+                    parent,
+                    context,
+                    Some(MutationFamily::Structural),
+                    &mut emitter,
+                )
+                || mutate_program(parent, context, Some(MutationFamily::Numeric), &mut emitter)
+        }
+    };
     MutationBatch {
         next_cursor: emitter.ordinal,
-        exhausted: true,
+        exhausted: !stopped,
     }
 }
 
@@ -3247,11 +3420,13 @@ mod tests {
                     values: vec![1, 2].into_boxed_slice(),
                     mass: 2,
                     unit_cost: 1,
+                    strategy: EvolutionTargetStrategy::Numeric,
                 },
                 EvolutionTargetNode {
                     values: vec![1, 3].into_boxed_slice(),
                     mass: 5,
                     unit_cost: 2,
+                    strategy: EvolutionTargetStrategy::Structural,
                 },
             ]
             .into_boxed_slice(),
@@ -3266,6 +3441,13 @@ mod tests {
             .compile_profile(&profile, &["root", "debt"])
             .unwrap();
         assert_eq!(compiled.class_priorities.as_ref(), &[12, 10]);
+        assert_eq!(
+            compiled.class_strategies.as_ref(),
+            &[
+                EvolutionTargetStrategy::Numeric,
+                EvolutionTargetStrategy::Structural,
+            ]
+        );
         let mut duplicate_edge = profile.clone();
         duplicate_edge.edges = vec![profile.edges[0], profile.edges[0]].into_boxed_slice();
         assert!(classes
@@ -3312,10 +3494,14 @@ mod tests {
                 values: vec![2].into_boxed_slice(),
                 mass: 1,
                 unit_cost: 1,
+                strategy: EvolutionTargetStrategy::Balanced,
             }]
             .into_boxed_slice(),
             edges: Box::new([]),
         };
+        assert!(!serde_json::to_string(&profile)
+            .unwrap()
+            .contains("strategy"));
         assert!(classes.compile_profile(&profile, &["root"]).is_err());
 
         profile.nodes[0].values[0] = 1;
@@ -3372,6 +3558,7 @@ mod tests {
                 values: vec![1].into_boxed_slice(),
                 mass: 7,
                 unit_cost: 11,
+                strategy: EvolutionTargetStrategy::Numeric,
             }]
             .into_boxed_slice(),
             edges: Box::new([]),
@@ -3396,7 +3583,7 @@ mod tests {
                 PlanOp::Field {
                     name: "root".into(),
                 },
-                PlanOp::Const { value: 0 },
+                PlanOp::Const { value: 2 },
                 PlanOp::Gt,
             ],
         };
@@ -3415,9 +3602,9 @@ mod tests {
             Vec::new(),
             File::create(&evidence_path).unwrap(),
             EvolutionBounds {
-                generations: 1,
+                generations: 2,
                 beam: 1,
-                max_candidates: 1,
+                max_candidates: 2,
                 byte_limit: 64 * 1024,
                 target_fields: vec![0].into_boxed_slice(),
                 target_profile: None,
@@ -3428,6 +3615,7 @@ mod tests {
         .unwrap();
         assert_eq!(summary["target_profile"]["refreshes"], 1);
         assert_eq!(summary["target_profile"]["hash"], expected_hash);
+        assert_eq!(summary["target_profile"]["strategy_parents"]["numeric"], 1);
         let records = std::fs::read_to_string(evidence_path)
             .unwrap()
             .lines()
@@ -3447,16 +3635,26 @@ mod tests {
     fn target_accumulator_is_idempotent_and_order_canonical() {
         let fields = vec!["root".into(), "debt".into()].into_boxed_slice();
         let mut left = EvolutionTargetAccumulator::new(fields.clone()).unwrap();
-        assert!(left.observe(&[2, 3], 7, 11).unwrap());
-        assert!(!left.observe(&[2, 3], 7, 11).unwrap());
-        assert!(left.observe(&[1, 4], 5, 13).unwrap());
+        assert!(left
+            .observe(&[2, 3], 7, 11, EvolutionTargetStrategy::Balanced)
+            .unwrap());
+        assert!(!left
+            .observe(&[2, 3], 7, 11, EvolutionTargetStrategy::Balanced)
+            .unwrap());
+        assert!(left
+            .observe(&[1, 4], 5, 13, EvolutionTargetStrategy::Structural)
+            .unwrap());
         assert!(left.connect(&[1, 4], &[2, 3], "dependency").unwrap());
         assert!(!left.connect(&[1, 4], &[2, 3], "dependency").unwrap());
         assert!(left.connect(&[1, 4], &[2, 3], "continuation").is_err());
 
         let mut right = EvolutionTargetAccumulator::new(fields).unwrap();
-        right.observe(&[1, 4], 5, 13).unwrap();
-        right.observe(&[2, 3], 7, 11).unwrap();
+        right
+            .observe(&[1, 4], 5, 13, EvolutionTargetStrategy::Structural)
+            .unwrap();
+        right
+            .observe(&[2, 3], 7, 11, EvolutionTargetStrategy::Balanced)
+            .unwrap();
         right.connect(&[1, 4], &[2, 3], "dependency").unwrap();
         let left = left.snapshot().unwrap();
         let right = right.snapshot().unwrap();
@@ -3523,10 +3721,13 @@ mod tests {
                 &parent,
                 "parent",
                 &context,
-                &failure,
+                MutationRequest {
+                    failure_shape: &failure,
+                    strategy: EvolutionTargetStrategy::Balanced,
+                    cursor,
+                },
                 &mut batch_output,
                 2,
-                cursor,
             );
             cursor = batch.next_cursor;
             exhaustion.push(batch.exhausted);
@@ -3542,10 +3743,13 @@ mod tests {
             &parent,
             "parent",
             &context,
-            &failure,
+            MutationRequest {
+                failure_shape: &failure,
+                strategy: EvolutionTargetStrategy::Balanced,
+                cursor,
+            },
             &mut exhausted_output,
             2,
-            cursor,
         );
         assert!(exhausted.exhausted);
         assert!(exhausted_output.is_empty());
@@ -3555,10 +3759,13 @@ mod tests {
             &parent,
             "parent",
             &context,
-            &failure,
+            MutationRequest {
+                failure_shape: &failure,
+                strategy: EvolutionTargetStrategy::Balanced,
+                cursor: 0,
+            },
             &mut complete,
             usize::MAX,
-            0,
         );
         assert!(complete_batch.exhausted);
         assert_eq!(resumed.len(), 6);
@@ -3572,6 +3779,141 @@ mod tests {
             )
             .unwrap()
         );
+    }
+
+    #[test]
+    fn target_strategy_reorders_but_does_not_prune_mutation_families() {
+        let parent = PlanSpec {
+            schema: String::new(),
+            name: "routed-parent".into(),
+            role: super::super::PlanRole::Diagnostic,
+            output: super::super::PlanOutput::Predicate,
+            scope: None,
+            program: vec![
+                PlanOp::Field { name: "x".into() },
+                PlanOp::Const { value: 0 },
+                PlanOp::Gt,
+            ],
+        };
+        let fields = vec!["x".into(), "y".into()];
+        let scopes = Vec::new();
+        let field_index = BTreeMap::new();
+        let context = MutationContext {
+            fields: &fields,
+            scope_profiles: &scopes,
+            field_index: &field_index,
+        };
+        let failure = FailureShape {
+            first_mismatch: None,
+            expected: None,
+            probes: [FailureProbe::default(); MAX_FAILURE_PROBES],
+            probe_count: 0,
+        };
+        let mut numeric_first = Vec::new();
+        mutate_plan(
+            &parent,
+            "parent",
+            &context,
+            MutationRequest {
+                failure_shape: &failure,
+                strategy: EvolutionTargetStrategy::Numeric,
+                cursor: 0,
+            },
+            &mut numeric_first,
+            1,
+        );
+        assert_eq!(numeric_first[0].operator, "constant-shift");
+        let mut structural_first = Vec::new();
+        mutate_plan(
+            &parent,
+            "parent",
+            &context,
+            MutationRequest {
+                failure_shape: &failure,
+                strategy: EvolutionTargetStrategy::Structural,
+                cursor: 0,
+            },
+            &mut structural_first,
+            1,
+        );
+        assert_eq!(structural_first[0].operator, "field-substitute");
+
+        let mut numeric = Vec::new();
+        let numeric_batch = mutate_plan(
+            &parent,
+            "parent",
+            &context,
+            MutationRequest {
+                failure_shape: &failure,
+                strategy: EvolutionTargetStrategy::Numeric,
+                cursor: 0,
+            },
+            &mut numeric,
+            usize::MAX,
+        );
+        let mut structural = Vec::new();
+        let structural_batch = mutate_plan(
+            &parent,
+            "parent",
+            &context,
+            MutationRequest {
+                failure_shape: &failure,
+                strategy: EvolutionTargetStrategy::Structural,
+                cursor: 0,
+            },
+            &mut structural,
+            usize::MAX,
+        );
+        assert!(numeric_batch.exhausted && structural_batch.exhausted);
+        let semantics = |candidates: Vec<PendingCandidate>| {
+            candidates
+                .into_iter()
+                .map(|candidate| format!("{:?}", candidate.plan.program))
+                .collect::<BTreeSet<_>>()
+        };
+        assert_eq!(semantics(numeric), semantics(structural));
+    }
+
+    #[test]
+    fn target_strategy_refresh_resets_only_changed_retained_cursors() {
+        let previous = CompiledTargetProfile {
+            hash: "previous".into(),
+            class_priorities: vec![1, 1].into_boxed_slice(),
+            class_strategies: vec![
+                EvolutionTargetStrategy::Balanced,
+                EvolutionTargetStrategy::Structural,
+            ]
+            .into_boxed_slice(),
+            nodes: 2,
+            edges: 0,
+        };
+        let refreshed = CompiledTargetProfile {
+            hash: "refreshed".into(),
+            class_priorities: vec![1, 1].into_boxed_slice(),
+            class_strategies: vec![
+                EvolutionTargetStrategy::Numeric,
+                EvolutionTargetStrategy::Structural,
+            ]
+            .into_boxed_slice(),
+            nodes: 2,
+            edges: 0,
+        };
+        let mut changed = selector_parent("changed", "scope");
+        changed.niche.target_class = Some(0);
+        changed.mutation_cursor = 7;
+        let mut unchanged = selector_parent("unchanged", "scope");
+        unchanged.niche.target_class = Some(1);
+        unchanged.mutation_cursor = 9;
+        let mut unprofiled = selector_parent("unprofiled", "scope");
+        unprofiled.mutation_cursor = 11;
+        let mut parents = [changed, unchanged, unprofiled];
+        assert_eq!(
+            reset_changed_strategy_cursors(&mut parents, Some(&previous), &refreshed),
+            1
+        );
+        assert_eq!(parents[0].mutation_cursor, 0);
+        assert_eq!(parents[1].mutation_cursor, 9);
+        assert_eq!(parents[2].mutation_cursor, 11);
     }
 
     #[test]

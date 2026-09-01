@@ -170,6 +170,9 @@ enum Command {
         mass: u64,
         #[arg(long)]
         unit_cost: u64,
+        /// Preferred finite mutation ordering for this target tuple.
+        #[arg(long, default_value = "balanced")]
+        strategy: String,
     },
     /// Add one dependency or continuation edge between existing target tuples.
     TargetProfileEdge {
@@ -426,9 +429,15 @@ fn main() -> Result<()> {
             values,
             mass,
             unit_cost,
+            strategy,
         } => (
             "target-profile-observe",
-            json!({"values": values, "mass": mass, "unit_cost": unit_cost}),
+            json!({
+                "values": values,
+                "mass": mass,
+                "unit_cost": unit_cost,
+                "strategy": strategy,
+            }),
         ),
         Command::TargetProfileEdge { from, to, kind } => (
             "target-profile-edge",

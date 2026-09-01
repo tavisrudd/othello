@@ -215,8 +215,10 @@ operational graph:
   "schema": "ergodis-evolution-target-profile-v0",
   "fields": ["root", "debt"],
   "nodes": [
-    {"values": [3, 7], "mass": 1200, "unit_cost": 40},
-    {"values": [5, 2], "mass": 80, "unit_cost": 900}
+    {"values": [3, 7], "mass": 1200, "unit_cost": 40,
+     "strategy": "structural"},
+    {"values": [5, 2], "mass": 80, "unit_cost": 900,
+     "strategy": "numeric"}
   ],
   "edges": [{"from": 0, "to": 1, "kind": "continuation"}]
 }
@@ -236,11 +238,21 @@ summary reports its node/edge counts and profiled surplus slots. Thus measured
 profiles can guide discovery but can never suppress a semantic counterexample
 or authorize pruning.
 
+Each node may also select `balanced` (the backward-compatible default),
+`numeric`, or `structural` mutation ordering. Numeric targets try constants and
+comparisons before scope, field, and Boolean changes; structural targets do the
+reverse. Failure-derived exact thresholds remain first, and every finite
+mutation family remains reachable under every strategy. A changed strategy
+resets only an affected retained parent's mutation cursor, preventing the new
+order from skipping an untried prefix. Strategy changes proposal order only;
+they do not prune, score, validate, or authorize candidates.
+
 The watcher may assemble the same profile incrementally without a temporary
 file. `target-profile-reset --field NAME ...` creates campaign-local storage;
 `target-profile-observe --value N ... --mass M --unit-cost C` sets one absolute
-observation; `target-profile-edge --from A,... --to B,... --kind KIND` adds one
-edge; and `target-profile-status` reports the bounded occupancy. Repeating an
+observation, with optional `--strategy balanced|numeric|structural`;
+`target-profile-edge --from A,... --to B,... --kind KIND` adds one edge; and
+`target-profile-status` reports the bounded occupancy. Repeating an
 identical observation or edge is idempotent. Nodes and edges canonicalize by
 their exact tuples, so message order does not change the snapshot bytes or
 hash. `evolve-start --target-profile-current` takes an owned snapshot before
@@ -252,9 +264,9 @@ before using it; if the bounded evidence file cannot hold that record, it
 truncates before applying the refresh. Cancellation observed at the boundary
 also stops before consuming it. `evolve-status` reports whether a refresh is
 pending. Campaigns on different socket/run paths share no profile state, and
-completed jobs reject refresh requests. Refreshes change only expansion
-priority: correctness, counterexamples, replay, and proof authority remain
-unchanged.
+completed jobs reject refresh requests. Refreshes change only bounded expansion
+priority and mutation ordering: correctness, counterexamples, replay, and proof
+authority remain unchanged.
 Every evidence record carries its niche and the summary counts niche and global
 elite positions.  A selected elite with an unconsumed deterministic mutation
 suffix carries a bounded ordinal cursor into the next generation.  Resumption

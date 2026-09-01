@@ -26,7 +26,8 @@ mod vm;
 pub use client::PlanArena;
 use evolution::{
     load_evolution_archive, run_evolution, EvolutionBounds, EvolutionIdentity, EvolutionProgress,
-    EvolutionSeed, EvolutionTargetAccumulator, EvolutionTargetProfile, MAX_EVOLUTION_TARGET_FIELDS,
+    EvolutionSeed, EvolutionTargetAccumulator, EvolutionTargetProfile, EvolutionTargetStrategy,
+    MAX_EVOLUTION_TARGET_FIELDS,
 };
 use synthesis::learn_decision_tree;
 pub use text::{
@@ -1144,11 +1145,20 @@ impl Campaign {
             .ok_or_else(|| {
                 ControlError::Invalid("target-profile-observe requires unit_cost".into())
             })?;
+        let strategy = match args.get("strategy") {
+            None => EvolutionTargetStrategy::Balanced,
+            Some(Value::String(strategy)) => EvolutionTargetStrategy::parse(strategy)?,
+            Some(_) => {
+                return Err(ControlError::Invalid(
+                    "target-profile-observe strategy must be a string".into(),
+                ));
+            }
+        };
         let profile = self
             .target_profile
             .as_mut()
             .ok_or_else(|| ControlError::Invalid("target profile has not been reset".into()))?;
-        let changed = profile.observe(&values, mass, unit_cost)?;
+        let changed = profile.observe(&values, mass, unit_cost, strategy)?;
         Ok(json!({
             "changed": changed,
             "nodes": profile.nodes(),
@@ -2632,6 +2642,22 @@ mod tests {
                 .unwrap()["nodes"],
             0
         );
+        assert!(campaign
+            .target_profile_observe(&json!({
+                "values": [99, 1], "mass": 1, "unit_cost": 4,
+                "strategy": 1
+            }))
+            .unwrap_err()
+            .to_string()
+            .contains("strategy must be a string"));
+        assert!(campaign
+            .target_profile_observe(&json!({
+                "values": [99, 1], "mass": 1, "unit_cost": 4,
+                "strategy": "unknown"
+            }))
+            .unwrap_err()
+            .to_string()
+            .contains("balanced, numeric, or structural"));
         assert!(campaign
             .target_profile_observe(&json!({
                 "values": [99, 1], "mass": 1, "unit_cost": 4
