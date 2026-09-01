@@ -111,7 +111,7 @@ impl<F: SmallField> BlockSystem<F> {
         rows: Vec<u8>,
         block_offsets: Vec<usize>,
     ) -> Result<Self, &'static str> {
-        if columns == 0 || rows.len() % columns != 0 {
+        if columns == 0 || !rows.len().is_multiple_of(columns) {
             return Err("rank system has an invalid row shape");
         }
         let row_count = rows.len() / columns;

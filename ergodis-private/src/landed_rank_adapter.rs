@@ -60,6 +60,9 @@ type Matrix = Vec<Vec<u8>>;
 fn sym_power(matrix: &[[u8; 2]; 2], degree: usize) -> Matrix {
     let [[a, b], [c, d]] = *matrix;
     let mut result = vec![vec![0; degree + 1]; degree + 1];
+    // `input` is a matrix column while `output` varies in the inner loops;
+    // iterating result rows here would obscure that layout and add aliasing.
+    #[allow(clippy::needless_range_loop)]
     for input in 0..=degree {
         for r in 0..=(degree - input) {
             for s in 0..=input {
