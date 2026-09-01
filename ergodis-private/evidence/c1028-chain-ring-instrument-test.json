@@ -1,0 +1,596 @@
+{
+  "computed": [
+    {
+      "GL3_order": 86016,
+      "hyperoval_code": {
+        "gray_is_f2_linear": false,
+        "gray_length": 14,
+        "gray_min_distance": 6,
+        "gray_words": 64,
+        "min_hamming_over_ring": 4,
+        "min_homogeneous_weight": 6,
+        "ring_length": 7,
+        "ring_words": 64
+      },
+      "line_sizes": [
+        6
+      ],
+      "lines": 28,
+      "m_n": [
+        0,
+        1,
+        7,
+        10,
+        16,
+        22,
+        28
+      ],
+      "maximum_arc_counts": [
+        1,
+        28,
+        256,
+        34272,
+        2135,
+        28,
+        1
+      ],
+      "neighbour_classes": 7,
+      "orbit_certificates_verified": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "orbit_line_spectra": [
+        [
+          [
+            28,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            22,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            7,
+            0,
+            21,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            2,
+            8,
+            2,
+            16,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            3,
+            9,
+            13,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            3,
+            9,
+            13,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            3,
+            9,
+            13,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            4,
+            7,
+            14,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            12,
+            12,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            6,
+            0,
+            18,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            6,
+            16,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            1,
+            0,
+            6,
+            0,
+            21,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            4,
+            0,
+            22,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            0,
+            24,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            1,
+            0,
+            0,
+            0,
+            3,
+            24,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            28,
+            0
+          ]
+        ]
+      ],
+      "orbits_under_GL3": [
+        1,
+        1,
+        1,
+        8,
+        3,
+        1,
+        1
+      ],
+      "points": 28,
+      "ring": "Z4"
+    },
+    {
+      "GL3_order": 86016,
+      "hyperoval_code": {
+        "gray_is_f2_linear": true,
+        "gray_length": 12,
+        "gray_min_distance": 4,
+        "gray_words": 64,
+        "min_hamming_over_ring": 3,
+        "min_homogeneous_weight": 4,
+        "ring_length": 6,
+        "ring_words": 64
+      },
+      "line_sizes": [
+        6
+      ],
+      "lines": 28,
+      "m_n": [
+        0,
+        1,
+        6,
+        10,
+        16,
+        22,
+        28
+      ],
+      "maximum_arc_counts": [
+        1,
+        28,
+        2016,
+        34272,
+        2135,
+        28,
+        1
+      ],
+      "neighbour_classes": 7,
+      "orbit_certificates_verified": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "orbit_line_spectra": [
+        [
+          [
+            28,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            22,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            7,
+            6,
+            15,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            2,
+            8,
+            2,
+            16,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            3,
+            9,
+            13,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            3,
+            9,
+            13,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            3,
+            9,
+            13,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            3,
+            4,
+            7,
+            14,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            12,
+            12,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            6,
+            0,
+            18,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            6,
+            16,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            1,
+            0,
+            6,
+            0,
+            21,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            4,
+            0,
+            22,
+            0,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0,
+            0,
+            24,
+            0,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            1,
+            0,
+            0,
+            0,
+            3,
+            24,
+            0,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            28,
+            0
+          ]
+        ]
+      ],
+      "orbits_under_GL3": [
+        1,
+        1,
+        2,
+        8,
+        3,
+        1,
+        1
+      ],
+      "points": 28,
+      "ring": "S2"
+    }
+  ],
+  "core_gap_specification": [
+    {
+      "Matrix_new_2_on_ring_entries": "matrix entries must be reduced modulo the field order",
+      "Matrix_new_4": "the modulus must be prime and lie in 2..=251",
+      "Prime_4_validate": "the modulus must be prime and lie in 2..=251",
+      "failure_mode": "no applicable entry point",
+      "kernel": "field::Prime / matrix::Matrix"
+    },
+    {
+      "failure_mode": "silent semantic substitution",
+      "kernel": "field::SmallField / field::Gf4",
+      "note": "SmallField::new(2,2) is GF(4); it is the only order-four arithmetic the core offers.",
+      "rings": [
+        {
+          "addition_cells_differing_from_GF4": 4,
+          "addition_witnesses": [
+            "1+1: GF4=0 Z4=2",
+            "1+3: GF4=2 Z4=0",
+            "3+1: GF4=2 Z4=0",
+            "3+3: GF4=0 Z4=2"
+          ],
+          "multiplication_cells_differing_from_GF4": 4,
+          "multiplication_witnesses": [
+            "2*2: GF4=3 Z4=0",
+            "2*3: GF4=1 Z4=2",
+            "3*2: GF4=1 Z4=2",
+            "3*3: GF4=2 Z4=1"
+          ],
+          "ring": "Z4",
+          "static_Gf4_matches_runtime_SmallField": true
+        },
+        {
+          "addition_cells_differing_from_GF4": 0,
+          "addition_witnesses": [],
+          "multiplication_cells_differing_from_GF4": 4,
+          "multiplication_witnesses": [
+            "2*2: GF4=3 S2=0",
+            "2*3: GF4=1 S2=2",
+            "3*2: GF4=1 S2=2",
+            "3*3: GF4=2 S2=1"
+          ],
+          "ring": "S2",
+          "static_Gf4_matches_runtime_SmallField": true
+        }
+      ]
+    },
+    {
+      "failure_mode": "silently wrong answer",
+      "kernel": "matrix::canonical_row_basis / row_space_contains",
+      "rings": [
+        {
+          "first_witness": "[[2,0],[0,0]]: Z4 row module has 2 elements, GF(4) rank 1 claims 4",
+          "matrices_tested": 256,
+          "membership_disagreements": 1098,
+          "membership_tests": 4096,
+          "reference_howell_module_mismatches": 0,
+          "ring": "Z4",
+          "row_module_size_mismatches": 117
+        },
+        {
+          "first_witness": "[[2,0],[0,0]]: S2 row module has 2 elements, GF(4) rank 1 claims 4",
+          "matrices_tested": 256,
+          "membership_disagreements": 1098,
+          "membership_tests": 4096,
+          "reference_howell_module_mismatches": 0,
+          "ring": "S2",
+          "row_module_size_mismatches": 117
+        }
+      ]
+    },
+    {
+      "failure_mode": "wrong object, silently",
+      "field_classes_merging_distinct_ring_points": 14,
+      "field_point_count_PG_2_4": 21,
+      "kernel": "projective::ProjectiveIndex",
+      "phantom_points_accepted": 7,
+      "ring": "Z4",
+      "ring_points_split_across_field_classes": 21,
+      "true_point_count_PHG_2_R": 28,
+      "unimodular_vectors_rejected": 0
+    },
+    {
+      "core_reported_min_weight": 4,
+      "f2_span_dimension": 9,
+      "f2_span_words": 512,
+      "failure_mode": "silently wrong answer via the nearest available path",
+      "gray_image_true_min_distance": 6,
+      "gray_image_words": 64,
+      "kernel": "linear_code::CompiledBinaryLinearCode",
+      "note": "the Gray image is not F2-linear, so the only distance kernel in the core has no correct input for it"
+    }
+  ],
+  "published_ground_truth": {
+    "hyperoval_gray_image": "(14, 2^6, 6) optimal nonlinear binary code",
+    "m_n_S2": [
+      0,
+      1,
+      6,
+      10,
+      16,
+      22,
+      28
+    ],
+    "m_n_Z4": [
+      0,
+      1,
+      7,
+      10,
+      16,
+      22,
+      28
+    ],
+    "octacode_gray_image": "(16, 256, 6) Nordstrom-Robinson code",
+    "sha256": "e000b315c711d754a7940f090ceab9e48d03e3457f172388450dda182ff6cdbd",
+    "source": "Honold, Kiermaier, Landjev, arXiv:2409.02099v1, Table 3"
+  },
+  "task": "C1028",
+  "title": "Chain-ring instrument test: Ergodis against PHG(2,R) and R-linear codes, |R| = 4"
+}
