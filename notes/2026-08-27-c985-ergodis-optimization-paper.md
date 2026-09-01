@@ -933,6 +933,30 @@ files are disposable and may be deleted at any time.
    the full public suite, and doc tests pass.  This remains entirely off the
    solve path.  Live profile ingestion and dependency/continuation edges—not
    target representation—are now the remaining target-graph work.
+
+   Commit `673bf4241` lands the first strict measured target graph.  An optional
+   bounded profile names at most 64 exact target tuples with positive observed
+   mass and unit cost plus at most 256 dependency/continuation edges.  Every
+   tuple must occur in the frozen batch.  The cold compiler computes a
+   cycle-safe transitive `u64` reachability closure and sums each reachable
+   node's checked `mass * unit_cost` once; compact class priorities then enter
+   the existing diminishing-quota heap after observed gain-per-cost.  Every
+   parent still receives one exploration slot, unprofiled classes cannot be
+   starved, and semantic scores, counterexamples, perfection, replay, and proof
+   authority are unchanged.  The canonical profile hash is bound into the
+   evidence header and its graph size/surplus use is footer-visible.
+
+   Exact controls, hardened in `461024171` and `91b0ea0b3`, prove downstream-
+   work closure (`12/10`), cyclic closure (`12/12`), a `1/100` priority split
+   yielding quotas `[1,9]`, no-profile fair-share parity, and rejection of
+   absent tuples, self/duplicate/out-of-range edges, schema drift, zero work,
+   and arithmetic overflow.  The daemon/CLI path loads the profile through a
+   bounded JSON reader and streams the same hash in evidence.  Strict all-
+   target/all-feature clippy, the full suite, and doc tests pass.  This is
+   daemon-only and adds no solver safe point.  Automatic watcher aggregation
+   from published root/debt/exceptional-state counters and mid-campaign profile
+   refresh remain open; the bounded graph compiler and selector are no longer
+   blockers.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a

@@ -233,15 +233,18 @@ first mismatching row, while row weights retain global impact priority. Tuples
 are interned once per row into compact class IDs and the daemon persists a
 bounded selected-class histogram with exact values. This directly supports
 precomputed combinations of root, debt, rank, and exceptional-state classes,
-but it does not yet ingest live solver profiles or dependency structure.
+and a strict bounded profile can now attach measured mass/unit cost and
+dependency/continuation edges. Its cycle-safe transitive closure sums reachable
+work once and guides only surplus expansion quota after the one-slot
+exploration floor. Semantic evaluation and authority do not consume profile
+weights. Automatic aggregation from live solver publications and mid-campaign
+refresh remain open.
 
-Aggregate existing root progress, debt ledgers, exceptional-state counts, and
-perf counters outside the search path into a weighted target graph. Nodes are
-root strata, primitive producers, theorem calls, and unresolved obligations;
-edges are dependency or continuation relations. Route proposal/evaluation
-budget to nodes with high measured state mass and plausible removable cost.
-Simple flat targets receive one-shot or numeric tuning; structural targets get
-full evolution.
+Next, aggregate existing root progress, debt ledgers, exceptional-state counts,
+and perf counters outside the search path into the landed graph schema rather
+than requiring a prepared profile file. Add watcher-owned snapshot/refresh and
+route operator family as well as expansion count: simple flat targets receive
+one-shot or numeric tuning, while structural targets get full evolution.
 
 ### P2 — learned proposer or test-time training
 
