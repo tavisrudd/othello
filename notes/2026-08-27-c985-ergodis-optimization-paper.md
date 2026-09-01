@@ -787,12 +787,17 @@ files are disposable and may be deleted at any time.
    6, 7, 22, 23, and 30 have tested working-tree repairs or honest scope
    changes, but their sources remain untracked or owned by another active
    session and therefore are not durable evidence.  Do not absorb that tree.
-   The next owned safeguard is a reusable bounded fibre aggregation primitive
-   whose type distinguishes a representative from an exhaustive fibre and
-   whose reductions are checked against a small exhaustive oracle; the private
-   mod-49 client may migrate only after its source chain is committed by its
-   owner.  The shard ledger still needs a cold per-anchor frontier commitment
-   before its manifest alone is a mathematical cover certificate.
+   Commit `51c6d3d7a` lands the owned capability safeguard: a bounded two-flat-
+   allocation CSR index retains every quotient preimage in source order,
+   distinct `FibreRepresentative` and `ExhaustiveFibre` types prevent the two
+   claims from sharing an API type, and an independent replay plus a bounded
+   exhaustive oracle check coverage, uniqueness, and key membership. Repeated
+   fibre queries are allocation-free. The private mod-49 client may migrate
+   only after its source chain is committed by its owner; until then finding 24
+   remains open rather than being papered over by the public primitive. The
+   next owned safeguard is a cold per-anchor shard-frontier commitment so a
+   manifest can establish the cover it names without relying only on executable
+   identity.
 
    Treat C1016's “Public-core enhancement ledger” as a recurring evolve input,
    not as campaign authority.  Its three current reusable requests are a
