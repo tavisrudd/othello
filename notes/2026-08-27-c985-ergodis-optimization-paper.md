@@ -418,11 +418,22 @@ files are disposable and may be deleted at any time.
    C1028 driver and ring-specific research in `ergodis-private`; only the
    algebra-neutral interfaces and independently verified kernels qualify for
    public core.
-5. **Pending — typed plan/theorem authoring language.** Replace hand-authored
-   JSON AST/bytecode plans with a compact bounded textual language for recipes,
-   steering plans, and injected theorem fragments. Text and JSON must share one
-   typed AST and lowering pass; JSON remains protocol/cache/debug syntax. The
-   accepted algebra and constraints are in
+5. **In progress — typed plan/theorem authoring language.** Commit `824a947a8`
+   lands the first complete vertical slice for scalar steering plans.  A
+   bounded textual parser accepts ordinary infix arithmetic, comparisons and
+   Boolean connectives plus `abs`, `min`, `max`, and `select`; it lowers through
+   the existing `ExpressionPlanSpec` typed AST and the existing VM compiler,
+   not a parallel evaluator.  Canonical formatting has parse/format/parse
+   identity, and equivalent expression JSON and text produce byte-identical
+   serialized lowered plans.  Input bytes, tokens, names, AST nodes, and depth
+   are bounded.  `ergodisctl try` and `apply` now sniff bounded text or JSON;
+   JSON/JSONL remain the protocol, persistence, bulk-batch, and diagnostic
+   representations.  Full all-feature tests, strict all-target/all-feature
+   clippy, formatting, and documentation pass, and no solve-loop code changed.
+   Next extend the same lexer, names, scalar expressions, scopes, canonical
+   formatter, and provenance syntax to `match / reduce / canonicalize` recipes
+   and injected theorem fragments.  Do not create a second mini-language.  The
+   accepted algebra and constraints remain
    `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
 6. **In progress — daemon-owned evolve.** Retain bounded streamed evidence,
    lineage/outcome deduplication, and exact cascades; next add durable replay,
