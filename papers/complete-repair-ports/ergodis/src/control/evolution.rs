@@ -615,6 +615,7 @@ struct MutationContext<'a> {
 
 struct MutationEmitter<'a> {
     parent_hash: &'a str,
+    source_target_class: Option<u32>,
     output: &'a mut Vec<PendingCandidate>,
     limit: usize,
     cursor: usize,
@@ -636,6 +637,7 @@ impl MutationEmitter<'_> {
             parent_hash: Some(self.parent_hash.into()),
             source_hash: None,
             source_evidence: None,
+            source_target_class: self.source_target_class,
             operator,
         });
         false
@@ -665,6 +667,7 @@ struct FailureShape {
 struct MutationRequest<'a> {
     failure_shape: &'a FailureShape,
     strategy: EvolutionTargetStrategy,
+    source_target_class: Option<u32>,
     cursor: usize,
 }
 
@@ -673,6 +676,7 @@ struct PendingCandidate {
     parent_hash: Option<String>,
     source_hash: Option<String>,
     source_evidence: Option<String>,
+    source_target_class: Option<u32>,
     operator: &'static str,
 }
 
@@ -2097,6 +2101,7 @@ pub(super) fn run_evolution(
             parent_hash: seed.parent_hash,
             source_hash: seed.source_hash,
             source_evidence: seed.source_evidence,
+            source_target_class: None,
             operator: seed.operator,
         })
         .collect::<Vec<_>>();
@@ -2201,6 +2206,9 @@ pub(super) fn run_evolution(
             let semantic_op_rows = examined
                 .checked_mul(compiled.op_count() as u64)
                 .ok_or_else(|| ControlError::Invalid("semantic operation count overflow".into()))?;
+            let source_target_values = pending
+                .source_target_class
+                .map(|class| target_classes.values(class));
             checked_counter_add(
                 &mut operator_scorecard.semantic_op_rows,
                 semantic_op_rows,
@@ -2217,6 +2225,7 @@ pub(super) fn run_evolution(
                     "parent_hash": pending.parent_hash,
                     "source_hash": pending.source_hash,
                     "source_evidence": pending.source_evidence,
+                    "source_target_values": source_target_values,
                     "operator": pending.operator,
                     "plan": &plan,
                     "hash": &compiled.hash,
@@ -2336,6 +2345,7 @@ pub(super) fn run_evolution(
                 "parent_hash": pending.parent_hash,
                 "source_hash": pending.source_hash,
                 "source_evidence": pending.source_evidence,
+                "source_target_values": source_target_values,
                 "operator": pending.operator,
                 "semantic_niche": niche,
                 "target_values": target_values,
@@ -2632,6 +2642,7 @@ pub(super) fn run_evolution(
                 MutationRequest {
                     failure_shape: &failure_shape,
                     strategy,
+                    source_target_class: parent.niche.target_class,
                     cursor: parent.mutation_cursor,
                 },
                 &mut current,
@@ -3046,6 +3057,7 @@ fn mutate_plan(
 ) -> MutationBatch {
     let mut emitter = MutationEmitter {
         parent_hash,
+        source_target_class: request.source_target_class,
         output,
         limit,
         cursor: request.cursor,
@@ -3635,6 +3647,13 @@ mod tests {
         assert_eq!(refreshes[0]["generation"], 0);
         assert_eq!(refreshes[0]["target_profile_hash"], expected_hash);
         assert_eq!(refreshes[0]["target_profile"], json!(profile));
+        let repaired = records
+            .iter()
+            .find(|record| !record["parent_hash"].is_null())
+            .unwrap();
+        assert_eq!(repaired["source_target_values"], json!([1]));
+        assert!(repaired["target_values"].is_null());
+        assert_eq!(repaired["evaluation"]["weighted_correct"], 2);
     }
 
     #[test]
@@ -3730,6 +3749,7 @@ mod tests {
                 MutationRequest {
                     failure_shape: &failure,
                     strategy: EvolutionTargetStrategy::Balanced,
+                    source_target_class: None,
                     cursor,
                 },
                 &mut batch_output,
@@ -3752,6 +3772,7 @@ mod tests {
             MutationRequest {
                 failure_shape: &failure,
                 strategy: EvolutionTargetStrategy::Balanced,
+                source_target_class: None,
                 cursor,
             },
             &mut exhausted_output,
@@ -3768,6 +3789,7 @@ mod tests {
             MutationRequest {
                 failure_shape: &failure,
                 strategy: EvolutionTargetStrategy::Balanced,
+                source_target_class: None,
                 cursor: 0,
             },
             &mut complete,
@@ -3823,6 +3845,7 @@ mod tests {
             MutationRequest {
                 failure_shape: &failure,
                 strategy: EvolutionTargetStrategy::Numeric,
+                source_target_class: None,
                 cursor: 0,
             },
             &mut numeric_first,
@@ -3837,6 +3860,7 @@ mod tests {
             MutationRequest {
                 failure_shape: &failure,
                 strategy: EvolutionTargetStrategy::Structural,
+                source_target_class: None,
                 cursor: 0,
             },
             &mut structural_first,
@@ -3852,6 +3876,7 @@ mod tests {
             MutationRequest {
                 failure_shape: &failure,
                 strategy: EvolutionTargetStrategy::Numeric,
+                source_target_class: None,
                 cursor: 0,
             },
             &mut numeric,
@@ -3865,6 +3890,7 @@ mod tests {
             MutationRequest {
                 failure_shape: &failure,
                 strategy: EvolutionTargetStrategy::Structural,
+                source_target_class: None,
                 cursor: 0,
             },
             &mut structural,
