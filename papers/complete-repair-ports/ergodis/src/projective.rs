@@ -42,11 +42,13 @@ impl<'a> ProjectiveIndex<'a> {
         offsets.push(0u64);
         let mut block = 1u64;
         let mut blocks = Vec::with_capacity(usize::from(vector_dimension));
-        for _ in 0..vector_dimension {
+        for index in 0..vector_dimension {
             blocks.push(block);
-            block = block
-                .checked_mul(u64::from(field.order()))
-                .ok_or(ProjectiveError::DimensionOverflow)?;
+            if index + 1 != vector_dimension {
+                block = block
+                    .checked_mul(u64::from(field.order()))
+                    .ok_or(ProjectiveError::DimensionOverflow)?;
+            }
         }
         let mut point_count = 0u64;
         for &block in blocks.iter().rev() {
@@ -464,6 +466,21 @@ mod tests {
         assert_eq!(indexer.point_count(), 16u64.pow(3) + 16u64.pow(2) + 16 + 1);
         let last = indexer.point_owned(indexer.point_count() - 1).unwrap();
         assert_eq!(&*last, &[0, 0, 0, 1]);
+    }
+
+    #[test]
+    fn generic_projective_index_accepts_the_largest_representable_binary_space() {
+        let field = SmallField::new(2, 8).unwrap();
+        let indexer = ProjectiveIndex::new(&field, 7).unwrap();
+        assert_eq!(indexer.point_count(), u64::MAX / 255);
+        let mut last = [0_u8; 8];
+        indexer.point(indexer.point_count() - 1, &mut last).unwrap();
+        assert_eq!(last, [0, 0, 0, 0, 0, 0, 0, 1]);
+        assert_eq!(indexer.index(&last).unwrap(), indexer.point_count() - 1);
+        assert!(matches!(
+            ProjectiveIndex::new(&field, 8),
+            Err(ProjectiveError::DimensionOverflow)
+        ));
     }
 
     fn binary_index_agrees<const H: u8>(limit: u64) {
