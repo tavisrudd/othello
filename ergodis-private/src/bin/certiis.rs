@@ -11,8 +11,10 @@
 //! no core or shared module is modified.
 
 use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
-use std::fs;
+use std::fs::{self, OpenOptions};
+use std::io::Write;
 use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::Instant;
 
 use anyhow::{bail, ensure, Context};
@@ -31,12 +33,12 @@ const MAX_EXPANDED_EDGES: usize = 40_000_000;
 // ---------------------------------------------------------------------------
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Task {
     pub id: String,
     /// Resource-units the task consumes. Units of one task may be supplied by the same
     /// resource more than once (a job taking three slots on one host). If the task instead
     /// needs `demand` *distinct* resources, set `distinct`; see the classifier.
-    #[serde(default = "one")]
     pub demand: u32,
     #[serde(default, skip_serializing_if = "is_false")]
     pub distinct: bool,
@@ -47,14 +49,10 @@ fn is_false(value: &bool) -> bool {
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Resource {
     pub id: String,
-    #[serde(default = "one")]
     pub capacity: u32,
-}
-
-fn one() -> u32 {
-    1
 }
 
 /// Extra structure beyond "task consumes units, resource supplies units".
@@ -62,7 +60,7 @@ fn one() -> u32 {
 /// Every variant here is a reason the instance may leave the matching regime; the
 /// classifier decides which.
 #[derive(Clone, Debug, Serialize, Deserialize)]
-#[serde(tag = "kind", rename_all = "snake_case")]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Coupling {
     /// Resource must be loaded to exactly this many task-units (a lower *and* upper bound).
     ResourceExactLoad { resource: String, load: u32 },
@@ -77,6 +75,7 @@ pub enum Coupling {
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct GroundTruth {
     pub feasible: bool,
     #[serde(default)]
@@ -98,13 +97,13 @@ pub struct GroundTruth {
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Instance {
     pub schema: String,
     pub name: String,
     pub tasks: Vec<Task>,
     pub resources: Vec<Resource>,
     pub eligible: Vec<(String, String)>,
-    #[serde(default)]
     pub couplings: Vec<Coupling>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ground_truth: Option<GroundTruth>,
@@ -505,8 +504,11 @@ pub struct Report {
     pub expanded_right: usize,
     #[serde(flatten)]
     pub verdict: Verdict,
+    #[serde(skip)]
     pub matching_micros: u128,
+    #[serde(skip)]
     pub minimization_micros: u128,
+    #[serde(skip)]
     pub total_micros: u128,
 }
 
@@ -1697,12 +1699,49 @@ fn read_instance(path: &Path) -> anyhow::Result<(Instance, Vec<u8>)> {
 }
 
 fn write_json<T: Serialize>(path: &Path, value: &T) -> anyhow::Result<()> {
+    static TEMP_NONCE: AtomicU64 = AtomicU64::new(1);
+
     if let Some(parent) = path.parent() {
-        fs::create_dir_all(parent).ok();
+        if !parent.as_os_str().is_empty() {
+            fs::create_dir_all(parent)
+                .with_context(|| format!("creating output directory {}", parent.display()))?;
+        }
     }
     let mut bytes = serde_json::to_vec_pretty(value)?;
     bytes.push(b'\n');
-    fs::write(path, bytes).with_context(|| format!("writing {}", path.display()))
+    let file_name = path
+        .file_name()
+        .context("output path has no file name")?
+        .to_string_lossy();
+    let (temporary, mut file) = loop {
+        let nonce = TEMP_NONCE.fetch_add(1, Ordering::Relaxed);
+        let candidate =
+            path.with_file_name(format!(".{file_name}.{}.{nonce}.tmp", std::process::id()));
+        match OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(&candidate)
+        {
+            Ok(file) => break (candidate, file),
+            Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => continue,
+            Err(error) => {
+                return Err(error)
+                    .with_context(|| format!("creating temporary output {}", candidate.display()));
+            }
+        }
+    };
+    let publish = (|| -> anyhow::Result<()> {
+        file.write_all(&bytes)
+            .with_context(|| format!("writing temporary output {}", temporary.display()))?;
+        file.sync_all()
+            .with_context(|| format!("syncing temporary output {}", temporary.display()))?;
+        fs::hard_link(&temporary, path)
+            .with_context(|| format!("publishing create-only output {}", path.display()))?;
+        Ok(())
+    })();
+    let cleanup = fs::remove_file(&temporary);
+    publish?;
+    cleanup.with_context(|| format!("removing temporary output {}", temporary.display()))
 }
 
 fn build(domain: Domain, args: &GenerateArgs) -> Instance {
@@ -2239,5 +2278,70 @@ mod tests {
             });
         }
         assert!(verify(&instance, &raw, &report).is_err());
+    }
+
+    #[test]
+    fn instance_schema_rejects_missing_load_bearing_and_unknown_fields() {
+        let instance = instance_from(&[("t", 1)], &[("r", 1)], &[("t", "r")]);
+        let mut value = serde_json::to_value(instance).unwrap();
+        value["tasks"][0].as_object_mut().unwrap().remove("demand");
+        assert!(serde_json::from_value::<Instance>(value).is_err());
+
+        let instance = instance_from(&[("t", 1)], &[("r", 1)], &[("t", "r")]);
+        let mut value = serde_json::to_value(instance).unwrap();
+        value["resources"][0]
+            .as_object_mut()
+            .unwrap()
+            .remove("capacity");
+        assert!(serde_json::from_value::<Instance>(value).is_err());
+
+        let instance = instance_from(&[("t", 1)], &[("r", 1)], &[("t", "r")]);
+        let mut value = serde_json::to_value(instance).unwrap();
+        value.as_object_mut().unwrap().remove("couplings");
+        assert!(serde_json::from_value::<Instance>(value).is_err());
+
+        let instance = instance_from(&[("t", 1)], &[("r", 1)], &[("t", "r")]);
+        let mut value = serde_json::to_value(instance).unwrap();
+        value["capcity"] = serde_json::json!(1);
+        assert!(serde_json::from_value::<Instance>(value).is_err());
+    }
+
+    #[test]
+    fn certificate_serialization_excludes_wall_clock_measurements() {
+        let instance = instance_from(&[("t", 1)], &[("r", 1)], &[("t", "r")]);
+        let raw = serde_json::to_vec(&instance).unwrap();
+        let report = solve(&instance, &raw).unwrap();
+        let encoded = serde_json::to_value(report).unwrap();
+        assert!(encoded.get("matching_micros").is_none());
+        assert!(encoded.get("minimization_micros").is_none());
+        assert!(encoded.get("total_micros").is_none());
+    }
+
+    #[test]
+    fn evidence_publication_is_create_only() {
+        static TEST_NONCE: AtomicU64 = AtomicU64::new(1);
+        let target = std::env::var_os("CARGO_TARGET_DIR")
+            .map(PathBuf::from)
+            .unwrap_or_else(|| PathBuf::from("target"));
+        let directory = loop {
+            let nonce = TEST_NONCE.fetch_add(1, Ordering::Relaxed);
+            let candidate = target.join(format!(
+                "certiis-publish-test-{}-{nonce}",
+                std::process::id()
+            ));
+            match fs::create_dir(&candidate) {
+                Ok(()) => break candidate,
+                Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => continue,
+                Err(error) => panic!("creating test directory: {error}"),
+            }
+        };
+        let path = directory.join("report.json");
+        write_json(&path, &serde_json::json!({"answer": 1})).unwrap();
+        let original = fs::read(&path).unwrap();
+        assert!(write_json(&path, &serde_json::json!({"answer": 2})).is_err());
+        assert_eq!(fs::read(&path).unwrap(), original);
+        assert_eq!(fs::read_dir(&directory).unwrap().count(), 1);
+        fs::remove_file(path).unwrap();
+        fs::remove_dir(directory).unwrap();
     }
 }
