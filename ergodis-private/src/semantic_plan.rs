@@ -1,5 +1,6 @@
 //! Typed, bounded `match / reduce / canonicalize` recipe contracts.
 
+pub mod dataflow;
 pub mod theorem;
 
 use ergodis::control::{
@@ -14,6 +15,7 @@ pub const SEMANTIC_RECIPE_SCHEMA: &str = "ergodis-semantic-recipe-v0";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize)]
 #[serde(rename_all = "kebab-case")]
+#[repr(u8)]
 pub enum OpKind {
     Match,
     Reduce,
@@ -43,16 +45,28 @@ pub struct CanonicalizationGate {
 pub enum RecipeStep {
     Match {
         adapter: String,
+        input: String,
         binding: String,
+        output_sort: String,
+        retention: u64,
+        memory_bytes: u64,
     },
     Reduce {
         reducer: String,
+        input: String,
         binding: String,
+        output_sort: String,
         retention: u64,
+        memory_bytes: u64,
     },
     Canonicalize {
         action: String,
+        input: String,
         binding: String,
+        output_sort: String,
+        retention: u64,
+        memory_bytes: u64,
+        streamed_partition: bool,
         gate: CanonicalizationGate,
     },
 }
@@ -74,6 +88,42 @@ impl RecipeStep {
             | Self::Canonicalize { binding, .. } => binding,
         }
     }
+
+    fn input(&self) -> &str {
+        match self {
+            Self::Match { input, .. }
+            | Self::Reduce { input, .. }
+            | Self::Canonicalize { input, .. } => input,
+        }
+    }
+
+    fn output_sort(&self) -> &str {
+        match self {
+            Self::Match { output_sort, .. }
+            | Self::Reduce { output_sort, .. }
+            | Self::Canonicalize { output_sort, .. } => output_sort,
+        }
+    }
+
+    fn resources(&self) -> (u64, u64) {
+        match self {
+            Self::Match {
+                retention,
+                memory_bytes,
+                ..
+            }
+            | Self::Reduce {
+                retention,
+                memory_bytes,
+                ..
+            }
+            | Self::Canonicalize {
+                retention,
+                memory_bytes,
+                ..
+            } => (*retention, *memory_bytes),
+        }
+    }
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -82,6 +132,8 @@ pub struct SemanticRecipe {
     pub schema: String,
     pub name: String,
     pub source: String,
+    pub source_binding: String,
+    pub source_sort: String,
     pub label: PlanExpr,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub scope: Option<PlanScope>,
@@ -97,6 +149,8 @@ impl SemanticRecipe {
         }
         validate_plan_name(&self.name)?;
         validate_plan_name(&self.source)?;
+        validate_plan_name(&self.source_binding)?;
+        validate_plan_name(&self.source_sort)?;
         validate_plan_name(&self.provenance)?;
         if let Some(scope) = &self.scope {
             validate_plan_name(&scope.field)?;
@@ -116,29 +170,40 @@ impl SemanticRecipe {
         if self.gates.is_empty() || self.gates.len() > MAX_PLAN_OPS {
             return invalid("semantic recipe has an invalid verification-gate count");
         }
-        let mut bindings = BTreeSet::new();
-        let mut reduced = false;
+        let mut bindings = BTreeSet::from([self.source_binding.as_str()]);
+        let mut reduced_bindings = BTreeSet::new();
         for step in &self.steps {
             let binding = step.binding();
+            let input = step.input();
             validate_plan_name(binding)?;
+            validate_plan_name(input)?;
+            validate_plan_name(step.output_sort())?;
+            if !bindings.contains(input) {
+                return invalid("semantic recipe step references an unknown input binding");
+            }
             if !bindings.insert(binding) {
                 return invalid("semantic recipe contains a duplicate binding");
             }
+            let (retention, memory_bytes) = step.resources();
+            if retention == 0 || memory_bytes == 0 {
+                return invalid("semantic operation requires positive retention and memory bounds");
+            }
             match step {
                 RecipeStep::Match { adapter, .. } => validate_plan_name(adapter)?,
-                RecipeStep::Reduce {
-                    reducer, retention, ..
-                } => {
+                RecipeStep::Reduce { reducer, .. } => {
                     validate_plan_name(reducer)?;
-                    if *retention == 0 {
-                        return invalid("semantic reducer must retain a bounded positive count");
-                    }
-                    reduced = true;
+                    reduced_bindings.insert(binding);
                 }
-                RecipeStep::Canonicalize { action, .. } => {
+                RecipeStep::Canonicalize {
+                    action,
+                    streamed_partition,
+                    ..
+                } => {
                     validate_plan_name(action)?;
-                    if !reduced {
-                        return invalid("canonicalization requires an earlier bounded reducer");
+                    if !reduced_bindings.contains(input) && !streamed_partition {
+                        return invalid(
+                            "canonicalization requires a reducer output or streamed partition",
+                        );
                     }
                 }
             }
@@ -163,8 +228,10 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
     recipe.validate()?;
     let mut text = format!("recipe {} {{\n", format_plan_name(&recipe.name)?);
     text.push_str(&format!(
-        "  source {};\n  label {};\n",
+        "  source {} as {} sort {};\n  label {};\n",
         format_plan_name(&recipe.source)?,
+        format_plan_name(&recipe.source_binding)?,
+        format_plan_name(&recipe.source_sort)?,
         format_plan_expression(&recipe.label)?
     ));
     if let Some(scope) = &recipe.scope {
@@ -180,31 +247,58 @@ pub fn format_semantic_recipe(recipe: &SemanticRecipe) -> Result<String, Control
     ));
     for step in &recipe.steps {
         match step {
-            RecipeStep::Match { adapter, binding } => text.push_str(&format!(
-                "  match {} as {};\n",
+            RecipeStep::Match {
+                adapter,
+                input,
+                binding,
+                output_sort,
+                retention,
+                memory_bytes,
+            } => text.push_str(&format!(
+                "  match {} from {} as {} sort {} retain {} memory {};\n",
                 format_plan_name(adapter)?,
-                format_plan_name(binding)?
+                format_plan_name(input)?,
+                format_plan_name(binding)?,
+                format_plan_name(output_sort)?,
+                retention,
+                memory_bytes
             )),
             RecipeStep::Reduce {
                 reducer,
+                input,
                 binding,
+                output_sort,
                 retention,
+                memory_bytes,
             } => text.push_str(&format!(
-                "  reduce {} as {} retain {};\n",
+                "  reduce {} from {} as {} sort {} retain {} memory {};\n",
                 format_plan_name(reducer)?,
+                format_plan_name(input)?,
                 format_plan_name(binding)?,
-                retention
+                format_plan_name(output_sort)?,
+                retention,
+                memory_bytes
             )),
             RecipeStep::Canonicalize {
                 action,
+                input,
                 binding,
+                output_sort,
+                retention,
+                memory_bytes,
+                streamed_partition,
                 gate,
             } => text.push_str(&format!(
-                "  canonicalize {} contract {} verified {} as {};\n",
+                "  canonicalize {} from {} as {} sort {} retain {} memory {} streamed {} contract {} verified {};\n",
                 format_plan_name(action)?,
+                format_plan_name(input)?,
+                format_plan_name(binding)?,
+                format_plan_name(output_sort)?,
+                retention,
+                memory_bytes,
+                streamed_partition,
                 contract_name(gate.label_contract),
-                gate.action_verified,
-                format_plan_name(binding)?
+                gate.action_verified
             )),
         }
     }
@@ -242,12 +336,19 @@ impl<'a> RecipeParser<'a> {
         self.expect_word("recipe")?;
         let name = self.name()?;
         self.expect(PlanTextTokenKind::LBrace)?;
-        let (mut source, mut label, mut scope, mut provenance) = (None, None, None, None);
+        let (mut source, mut source_binding, mut source_sort, mut label, mut scope, mut provenance) =
+            (None, None, None, None, None, None);
         let mut steps = Vec::new();
         let mut gates = Vec::new();
         while !self.consume(&PlanTextTokenKind::RBrace) {
             match self.word()?.as_str() {
-                "source" if source.is_none() => source = Some(self.name()?),
+                "source" if source.is_none() => {
+                    source = Some(self.name()?);
+                    self.expect_word("as")?;
+                    source_binding = Some(self.name()?);
+                    self.expect_word("sort")?;
+                    source_sort = Some(self.name()?);
+                }
                 "label" if label.is_none() => {
                     label = Some(self.expression_until_semicolon()?);
                     continue;
@@ -261,25 +362,62 @@ impl<'a> RecipeParser<'a> {
                 "provenance" if provenance.is_none() => provenance = Some(self.name()?),
                 "match" => {
                     let adapter = self.name()?;
+                    self.expect_word("from")?;
+                    let input = self.name()?;
                     self.expect_word("as")?;
+                    let binding = self.name()?;
+                    self.expect_word("sort")?;
+                    let output_sort = self.name()?;
+                    self.expect_word("retain")?;
+                    let retention = parse_plan_u64_literal(&self.number()?)?;
+                    self.expect_word("memory")?;
                     steps.push(RecipeStep::Match {
                         adapter,
-                        binding: self.name()?,
+                        input,
+                        binding,
+                        output_sort,
+                        retention,
+                        memory_bytes: parse_plan_u64_literal(&self.number()?)?,
                     });
                 }
                 "reduce" => {
                     let reducer = self.name()?;
+                    self.expect_word("from")?;
+                    let input = self.name()?;
                     self.expect_word("as")?;
                     let binding = self.name()?;
+                    self.expect_word("sort")?;
+                    let output_sort = self.name()?;
                     self.expect_word("retain")?;
+                    let retention = parse_plan_u64_literal(&self.number()?)?;
+                    self.expect_word("memory")?;
                     steps.push(RecipeStep::Reduce {
                         reducer,
+                        input,
                         binding,
-                        retention: parse_plan_u64_literal(&self.number()?)?,
+                        output_sort,
+                        retention,
+                        memory_bytes: parse_plan_u64_literal(&self.number()?)?,
                     });
                 }
                 "canonicalize" => {
                     let action = self.name()?;
+                    self.expect_word("from")?;
+                    let input = self.name()?;
+                    self.expect_word("as")?;
+                    let binding = self.name()?;
+                    self.expect_word("sort")?;
+                    let output_sort = self.name()?;
+                    self.expect_word("retain")?;
+                    let retention = parse_plan_u64_literal(&self.number()?)?;
+                    self.expect_word("memory")?;
+                    let memory_bytes = parse_plan_u64_literal(&self.number()?)?;
+                    self.expect_word("streamed")?;
+                    let streamed_partition = match self.word()?.as_str() {
+                        "true" => true,
+                        "false" => false,
+                        _ => return self.error("expected true or false"),
+                    };
                     self.expect_word("contract")?;
                     let label_contract = match self.word()?.as_str() {
                         "preserves" => LabelContract::Preserves,
@@ -293,10 +431,14 @@ impl<'a> RecipeParser<'a> {
                         "false" => false,
                         _ => return self.error("expected true or false"),
                     };
-                    self.expect_word("as")?;
                     steps.push(RecipeStep::Canonicalize {
                         action,
-                        binding: self.name()?,
+                        input,
+                        binding,
+                        output_sort,
+                        retention,
+                        memory_bytes,
+                        streamed_partition,
                         gate: CanonicalizationGate {
                             label_contract,
                             action_verified,
@@ -319,6 +461,11 @@ impl<'a> RecipeParser<'a> {
             name,
             source: source
                 .ok_or_else(|| ControlError::Invalid("semantic recipe omits source".into()))?,
+            source_binding: source_binding.ok_or_else(|| {
+                ControlError::Invalid("semantic recipe omits source binding".into())
+            })?,
+            source_sort: source_sort
+                .ok_or_else(|| ControlError::Invalid("semantic recipe omits source sort".into()))?,
             label: label
                 .ok_or_else(|| ControlError::Invalid("semantic recipe omits label".into()))?,
             scope,
@@ -446,13 +593,13 @@ mod tests {
 
     const TEXT: &str = r#"
 recipe affine_caps {
-  source split_nine_sets;
+  source split_nine_sets as objects sort nine_set_stream;
   label (g2 == 0) && (g3 == 0);
   scope root.kind 0x0000000000000005;
   provenance "sha256:fixture";
-  match affine_subspace as plane;
-  reduce overlap_histogram as extrema retain 2106;
-  canonicalize affine_generators contract diagnostic verified true as cap_orbit;
+  match affine_subspace from objects as plane sort feature_row retain 1 memory 4096;
+  reduce overlap_histogram from plane as extrema sort retained_set retain 2106 memory 131072;
+  canonicalize affine_generators from extrema as cap_orbit sort orbit_summary retain 2106 memory 65536 streamed false contract diagnostic verified true;
   verify replay_label;
   verify source_hash;
 }
@@ -509,19 +656,23 @@ recipe affine_caps {
     #[test]
     fn recipes_fail_closed_on_unbounded_or_unsafe_structure() {
         assert!(parse_semantic_recipe(
-            "recipe x { source s; label a == 1; provenance p; canonicalize g contract preserves verified true as q; verify replay; }"
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; canonicalize g from rows as q sort orbit retain 1 memory 1 streamed false contract preserves verified true; verify replay; }"
         )
         .is_err());
         assert!(parse_semantic_recipe(
-            "recipe x { source s; label a == 1; provenance p; match m as x; reduce r as x retain 1; verify replay; }"
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as x sort feature retain 1 memory 1; reduce r from x as x sort set retain 1 memory 1; verify replay; }"
         )
         .is_err());
         assert!(parse_semantic_recipe(
-            "recipe x { source s; label a == 1; provenance p; match m as y; reduce r as q retain 0; verify replay; }"
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as y sort feature retain 1 memory 1; reduce r from y as q sort set retain 0 memory 1; verify replay; }"
         )
         .is_err());
         assert!(parse_semantic_recipe(
-            "recipe x { source s; label a == 1; provenance p; match m as y; reduce r as q retain 1; }"
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from rows as y sort feature retain 1 memory 1; reduce r from y as q sort set retain 1 memory 1; }"
+        )
+        .is_err());
+        assert!(parse_semantic_recipe(
+            "recipe x { source s as rows sort stream; label a == 1; provenance p; match m from missing as y sort feature retain 1 memory 1; verify replay; }"
         )
         .is_err());
     }
