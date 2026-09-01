@@ -6,12 +6,12 @@
 **Scope**: tooling only. No Ergodis core edit, no manuscript or public-surface claim, no new
 evidence and no change to any existing evidence file.
 
-## Status of this session
+## Status
 
-A first session, roughly forty minutes. The DuckDB layer is implemented and run against the real
-private evidence tree. Jupyter and Sage are assessed and their entry points are pinned, but neither
-was built or executed here; everything said about them below is design and availability, not a
-measured result.
+Two sessions. The DuckDB layer and the Jupyter integration are both implemented and run
+end to end against the real private evidence tree and a real controlled search. Sage is
+assessed and its entry point pinned, but it was not built or executed; everything said
+about Sage below is design and availability, not a measured result.
 
 ## What was built: a SQL catalog over the private evidence tree
 
@@ -76,27 +76,89 @@ ledger is flushed per append, DuckDB can query a run *while it is still running*
 `run_ledger(dir)` macro is a live timeline query with no new instrumentation in the core. That is
 the same conclusion C1031 reached for its dashboard, arrived at from the analysis side.
 
-## Jupyter: assessed, not built
+## What was built: launching, watching, and steering a solve from Jupyter
 
-`python3Packages.jupyterlab` 4.4.5 and `python3Packages.duckdb` 1.4.3 are both in nixpkgs, and
-`evcxr` 0.21.1 provides a Rust kernel. Three distinct integrations are possible and they are not
-equally worthwhile:
+`ergodis-private/python/ergodis_notebook/` is a Python package that drives the native control
+plane, and `analysis/ergodis-notebook` opens JupyterLab with it importable. Dependencies come
+from `uv`, not from a nix shell or the system profile, so the first run resolves them into uv's
+cache and later runs start immediately.
 
-1. **A Python kernel holding the DuckDB catalog.** Cheapest and highest value: the notebook opens
-   an in-memory DuckDB, runs `ergodis_catalog.sql`, and every cell is a query against the same
-   views the shell uses. Plots come from the query results. Nothing is duplicated between the shell
-   and the notebook, so the catalog stays the single definition of what a paired ratio means.
-2. **A Rust kernel through evcxr, depending on the ergodis crate directly.** This gets a notebook
-   that can call compiled kernels and adapters, which the Python route cannot. It costs a compile
-   per cell block and it pulls the private crate into an interactive session, so it is worth it only
-   for interactive exploration of a live search, not for evidence analysis.
-3. **A notebook as a report artifact.** Rejected for anything paper-facing. The reproducibility
-   convention wants a committed script, a certificate, and an exact replay command; a notebook with
-   embedded output is a worse version of all three. Notebooks are for exploration here, and their
-   findings graduate into scripts.
+The package has five parts:
 
-The recommendation is (1) now, (2) only if a live-campaign exploration session actually needs
-compiled kernels, and never (3).
+* `control.py` reimplements the campaign socket protocol in pure Python. The wire format is a
+  Unix stream socket carrying a four-byte little-endian length followed by JSON, one request and
+  one response per connection, with a handshake on schema, request id, and run id. Doing this in
+  Python rather than shelling out to the `campaign_rpc` binary means a notebook session needs no
+  cargo build and every control op is a Python call.
+* `campaign.py` launches or attaches to a campaign, exposes the control ops as methods, and reads
+  the ledger incrementally. The campaign flushes on every append, so a byte offset is a sound
+  cursor and the ledger is readable while the run is live.
+* `solve.py` starts a search that attaches to a campaign and tails its progress file, and also
+  covers ordinary one-shot JSON workflows.
+* `plan.py` builds candidate plans and lowers the readable expression form to the bytecode the
+  socket actually accepts, with the same node and depth limits as the core.
+* `monitor.py` renders one updating notebook cell -- provenance header, campaign state, the latest
+  progress snapshot with each counter's change since the previous one, and the ledger tail -- and
+  keeps every snapshot it collected so the run is analyzable afterwards without re-reading
+  anything.
+
+### Verified end to end
+
+`analysis/notebooks/solve-monitor.ipynb` runs the whole path and was executed headlessly through
+`nbconvert`: it starts a campaign on the C880 live branch-ordering feature batch, runs the
+aligned-attachment search at `points=8, budget=10`, collects 64 progress snapshots over about a
+minute, activates an ordering plan while the search is still running, and reads the run back as
+SQL. `analysis/check_notebook_integration.py` is the same path as an assertion script; all
+eighteen of its checks pass.
+
+The steering result is the one worth stating plainly: **a plan activated from a notebook cell is
+picked up by the already-running search without restarting it.** Activation advances the
+campaign's epoch, the search notices at its next safe point and swaps in a preallocated arena, and
+the search's own progress snapshots show `notified_epoch` rising from 0 to 1 partway through the
+run, with the final result reporting one notification. The exact answer and state count are
+unchanged, which is the design: an ordering plan changes what is explored first and cannot change
+what is admitted.
+
+### Three things that bite, all now guarded or documented
+
+**Run directories must be short.** A controlled search binds its watcher datagram socket *inside*
+the run directory, and Unix socket paths are capped at 108 bytes. A run directory under a deep
+working path makes the search fail at startup with "the optional search controller rejected a
+safe-point operation", which says nothing about paths and cost real time to diagnose here.
+`Campaign.launch` now checks the length up front and says what to do, and the notebook launcher
+defaults the run root to `$XDG_RUNTIME_DIR`.
+
+**The control socket accepts bytecode plans only.** The core's `PlanDocument` accepts both the
+expression and bytecode surface forms, but `candidate-try` and `candidate-apply` deserialize
+`PlanSpec` directly, so an expression document is rejected with "unknown field `expr`". Lowering
+therefore has to happen client-side, which `plan.py` does.
+
+**Activation is a compare-and-swap.** `candidate-apply` and `candidate-deactivate` require an
+`expect_epoch` and refuse a stale one, so two steerers cannot both believe they installed the
+newest plan. The epoch is carried on the response envelope rather than in `status`, so
+`Campaign.epoch()` reads it from a `noop`.
+
+### The routes not taken
+
+A Rust kernel through `evcxr` 0.21.1 would let a notebook call compiled kernels directly, which the
+Python route cannot. It costs a compile per cell block and pulls the private crate into an
+interactive session, so it is worth it only if interactive exploration actually needs compiled
+kernels -- driving and watching a search does not.
+
+A notebook as a report artifact is rejected for anything paper-facing. The reproducibility
+convention wants a committed script, a certificate, and an exact replay command; a notebook with
+embedded output is a worse version of all three. Notebooks are for exploration, and their findings
+graduate into scripts -- which is why the notebook's path also exists as
+`check_notebook_integration.py`.
+
+### Where the browser WebAssembly slice fits
+
+C1032's prototype exposes one bounded sequential composition workflow through a narrow WebAssembly
+adapter in a Web Worker, and deliberately excludes the filesystem, control-plane, affinity, and
+parallel-search surfaces. So it is not a smaller version of this: the browser slice is the exact
+one-shot workflow surface, and the notebook is the control plane. What they share is the JSON
+request/response discipline, which is worth keeping aligned -- a payload accepted by `run_json`
+here is the payload the browser adapter takes.
 
 ## Sage: assessed, not built
 
@@ -126,24 +188,28 @@ a content hash, not a checked-in Parquet mirror.
 
 ## Next steps
 
-1. Build the notebook route: a `nix develop` shell or flake app with JupyterLab plus the DuckDB
-   Python package, and one notebook that loads `ergodis_catalog.sql` and reproduces the `ab_summary`
-   table. This is the step that turns the catalog into something usable interactively.
-2. Point `run_ledger` at a live campaign and confirm the live-timeline query works during a real
-   run rather than after it. The append-and-flush behavior says it will; that has not been observed.
-3. Measure the Sage closure build on this host, then write one multiplier-orbit oracle against a
-   reduction that already has an independent Python check, and confirm the two agree.
-4. Decide whether `certificate_index` should be widened. Only 6 of the 33 JSON documents in
+1. Measure the Sage closure build on this host, then write one multiplier-orbit oracle against a
+   reduction that already has an independent Python check, and confirm the two agree. This is the
+   only one of the three integrations still entirely on paper.
+2. Drive a real long campaign from the notebook rather than a half-minute control: the evolution
+   path (`evolve-start`, `evolve-status`) has a full parent-child lineage graph with labelled
+   mutation operators that nothing in the notebook currently renders, and lineage is the natural
+   next view.
+3. Decide whether `certificate_index` should be widened. Only 6 of the 33 JSON documents in
    `evidence/` share the exact-distance certificate shape; the rest are unrelated schemas, and the
    question is whether a second index view for the pilot/instrument documents earns its place.
+4. Raise with the core owner: the ledger synopsis for an activated **ordering** plan reads
+   "diagnostic plan activated". The event is correct and carries the plan name; only the wording is
+   wrong. Not touched here, since it is a core-side string.
 
 ## Vibe check
 
-Good. The DuckDB layer was cheaper than expected and immediately reveals that the evidence tree has
-one shape rather than a dozen, which is the reusable finding. The interleave-slot correction is the
-kind of thing that silently produces an empty result rather than a wrong one, so it cost time but no
-credibility. Jupyter and Sage are still on paper.
+Better than expected. Two of the three integrations are done and verified against real runs, and
+live steering from a notebook cell works on the first controlled search it was pointed at -- the
+control plane needed no changes, only a client. The three sharp edges found along the way (socket
+path length, bytecode-only plans, the epoch compare-and-swap) are all now either guarded in code or
+written down. Sage is the only part still on paper.
 
 ---
 
-`go C1033 complete-ports build the JupyterLab + DuckDB notebook shell and confirm the live campaign ledger query`
+`go C1033 complete-ports write the Sage oracle for a banked multiplier-orbit reduction and check it against the existing Python oracle`
