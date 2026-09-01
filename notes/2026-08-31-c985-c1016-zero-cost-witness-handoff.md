@@ -233,6 +233,26 @@ experiments:
   11% cycle regression despite fewer instructions and branches. Whole-record
   assignment removed that regression.
 
+### Why the typed prototype regressed cycles
+
+The zero-sized witness was not executed, loaded, or stored, so it was not the
+direct cost.  The prototype changed the surrounding construction pattern from
+one complete record value to sequential field assignments.  In the measured
+machine code, LLVM then emitted four differently sized stores (`8+4+2+1`
+bytes) where the control emitted two wide stores.  That can consume more store
+address/data bandwidth, constrain scheduling through a longer construction
+chain, and inhibit store coalescing even when the aggregate retired-instruction
+and branch counts fall.  Cycles therefore rose by about 11%.
+
+This is a code-generation diagnosis, not a claim that one specific execution
+port was proved to be the sole bottleneck: the decisive control is that keeping
+the type witness while restoring whole-record assignment removed the cycle
+regression.  The remaining ZST variant was cycle-neutral but still retired
+2.86% more instructions, so it had no performance case.  For every proposed
+typed wrapper, compare assembly/store shape and counters against a source-
+shape-matched control; do not attribute a result to the type parameter merely
+because that is the semantic change being tested.
+
 The useful lesson for C1016 is narrow: inspect generated code and counters for
 every typed representation. A zero-byte marker is free in layout, but the
 surrounding source shape can still worsen stores, scheduling, code size, or
