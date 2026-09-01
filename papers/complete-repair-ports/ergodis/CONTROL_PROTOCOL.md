@@ -80,6 +80,14 @@ used by `try` before sending one candidate at a time. This keeps the wire
 surface bytecode-only while avoiding a separate manual-lowering step for
 candidate populations.
 
+`ergodisctl group-synthesize` composes two existing cold-path contracts. The
+daemon first writes a create-only grouped parent campaign through
+`group-compile`; the client reopens that exact artifact, learns and type-checks
+a bounded decision tree locally, independently evaluates it over every parent
+row, and writes a create-only plan. The source campaign remains immutable, the
+grouped JSONL is retained for replay, and neither operation enters a solver
+thread or grants proof authority.
+
 ## Textual plan authoring
 
 Single plans passed to `ergodisctl try` and `ergodisctl apply` may use the

@@ -1,15 +1,16 @@
 use anyhow::{bail, Context, Result};
 use clap::{Parser, Subcommand};
 use ergodis::control::{
-    parse_and_lower_plan, read_manifest, send_request, PlanDocument, PlanOp, PlanOutput, PlanRole,
-    PlanScope, PlanSpec, MAX_PLAN_TEXT_BYTES,
+    evaluate_plan, parse_and_lower_plan, read_manifest, send_request, synthesize_decision_tree,
+    CompiledPlan, FeatureBatch, PlanDocument, PlanOp, PlanOutput, PlanRole, PlanScope, PlanSpec,
+    MAX_PLAN_TEXT_BYTES,
 };
 use serde_json::{json, Value};
 use std::collections::BTreeSet;
 use std::fs::{File, OpenOptions};
 use std::io::{BufRead, BufReader, BufWriter, Read, Write};
 use std::os::unix::fs::OpenOptionsExt;
-use std::path::PathBuf;
+use std::path::{Component, PathBuf};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -83,6 +84,34 @@ enum Command {
         max_groups: u64,
         #[arg(long, default_value_t = 200_000_000)]
         max_output_cells: u64,
+    },
+    /// Compile aggregate parent rows and immediately synthesize an exact tree.
+    GroupSynthesize {
+        group_by: String,
+        #[arg(long, default_value_t = true)]
+        count: bool,
+        #[arg(long)]
+        sum: Vec<String>,
+        #[arg(long)]
+        minimum: Vec<String>,
+        #[arg(long)]
+        maximum: Vec<String>,
+        #[arg(long)]
+        evidence_name: String,
+        #[arg(long)]
+        output: PathBuf,
+        #[arg(long, default_value_t = 1_000_000)]
+        max_groups: u64,
+        #[arg(long, default_value_t = 200_000_000)]
+        max_output_cells: u64,
+        #[arg(long, default_value_t = 31)]
+        max_nodes: usize,
+        #[arg(long, default_value_t = 8)]
+        max_depth: usize,
+        #[arg(long, requires = "train_value")]
+        train_field: Option<String>,
+        #[arg(long, requires = "train_field", allow_hyphen_values = true)]
+        train_value: Option<i64>,
     },
     /// Learn a bounded exact decision-tree attack and write its replayable plan.
     Synthesize {
@@ -380,6 +409,40 @@ fn main() -> Result<()> {
             cli.max_bytes,
         );
     }
+    if let Command::GroupSynthesize {
+        group_by,
+        count,
+        sum,
+        minimum,
+        maximum,
+        evidence_name,
+        output,
+        max_groups,
+        max_output_cells,
+        max_nodes,
+        max_depth,
+        train_field,
+        train_value,
+    } = &cli.command
+    {
+        return run_group_synthesize(
+            &manifest,
+            group_by,
+            *count,
+            sum,
+            minimum,
+            maximum,
+            evidence_name,
+            output,
+            *max_groups,
+            *max_output_cells,
+            *max_nodes,
+            *max_depth,
+            train_field.as_deref(),
+            *train_value,
+            cli.max_bytes,
+        );
+    }
     let (op, args) = match cli.command {
         Command::Capabilities => ("capabilities", json!({})),
         Command::Status => ("status", json!({})),
@@ -413,6 +476,7 @@ fn main() -> Result<()> {
                 "max_output_cells": max_output_cells,
             }),
         ),
+        Command::GroupSynthesize { .. } => unreachable!(),
         Command::Synthesize { .. } => unreachable!(),
         Command::AgentBrief { since, top } => ("agent-brief", json!({"since": since, "top": top})),
         Command::Try { plan, group_by } => (
@@ -736,6 +800,98 @@ fn run_synthesize(
         number(&response.result, "training_rows"),
         number(evaluation, "weighted_correct"),
         number(evaluation, "weighted_rows"),
+        output.display()
+    );
+    Ok(())
+}
+
+#[allow(clippy::too_many_arguments)]
+fn run_group_synthesize(
+    manifest: &ergodis::control::Manifest,
+    group_by: &str,
+    count: bool,
+    sum: &[String],
+    minimum: &[String],
+    maximum: &[String],
+    evidence_name: &str,
+    output: &PathBuf,
+    max_groups: u64,
+    max_output_cells: u64,
+    max_nodes: usize,
+    max_depth: usize,
+    train_field: Option<&str>,
+    train_value: Option<i64>,
+    max_bytes: usize,
+) -> Result<()> {
+    if output.try_exists()? {
+        bail!("refusing to overwrite {}", output.display());
+    }
+    if !(1..=41).contains(&max_nodes) || !(1..=16).contains(&max_depth) {
+        bail!("tree synthesis bounds are outside the public limits");
+    }
+    if train_field.is_some() != train_value.is_some() {
+        bail!("train_field and train_value must be supplied together");
+    }
+    let max_groups = max_groups.clamp(1, 1_000_000);
+    let max_output_cells = max_output_cells.clamp(1, 200_000_000);
+    let response = send_request(
+        manifest,
+        "group-compile",
+        json!({
+            "group_by": group_by,
+            "count": count,
+            "sum": sum,
+            "minimum": minimum,
+            "maximum": maximum,
+            "evidence_name": evidence_name,
+            "max_groups": max_groups,
+            "max_output_cells": max_output_cells,
+        }),
+        max_bytes,
+    )?;
+    if !response.ok {
+        bail!("group compilation rejected: {}", response.result);
+    }
+    let relative = PathBuf::from(text(&response.result, "path"));
+    if relative.as_os_str().is_empty()
+        || relative
+            .components()
+            .any(|component| !matches!(component, Component::Normal(_)))
+    {
+        bail!("group compilation returned an unsafe evidence path");
+    }
+    let grouped_path = manifest.run_dir.join(&relative);
+    let grouped = FeatureBatch::read_jsonl(
+        &grouped_path,
+        max_groups as usize,
+        max_output_cells as usize,
+    )
+    .with_context(|| format!("cannot replay grouped data {}", grouped_path.display()))?;
+    let training_stratum = match (train_field, train_value) {
+        (None, None) => None,
+        (Some(field), Some(value)) => Some((field, value)),
+        _ => bail!("train_field and train_value must be supplied together"),
+    };
+    let synthesis = synthesize_decision_tree(&grouped, max_nodes, max_depth, training_stratum)?;
+    let compiled = CompiledPlan::compile(&synthesis.plan, &grouped.fields)?;
+    let evaluation = evaluate_plan(&grouped, &compiled)?;
+    let mut file = OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .mode(0o600)
+        .open(output)
+        .with_context(|| format!("cannot create {}", output.display()))?;
+    serde_json::to_writer_pretty(&mut file, &synthesis.plan)?;
+    file.write_all(b"\n")?;
+    println!(
+        "groups={} nodes={} depth={} train={} correct={}/{} data={} plan={}",
+        grouped.rows(),
+        synthesis.nodes,
+        synthesis.depth,
+        synthesis.training_rows,
+        evaluation.weighted_correct,
+        evaluation.weighted_rows,
+        relative.display(),
         output.display()
     );
     Ok(())

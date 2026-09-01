@@ -56,6 +56,52 @@ const EVENT_RING: usize = 256;
 const MAX_WATCHERS: usize = 64;
 static NEXT_CLIENT_REQUEST_ID: AtomicU64 = AtomicU64::new(1);
 
+/// Exact bounded decision-tree synthesis result for one frozen feature batch.
+#[derive(Clone, Debug)]
+pub struct DecisionTreeSynthesis {
+    pub plan: PlanSpec,
+    pub nodes: usize,
+    pub depth: usize,
+    pub training_rows: usize,
+}
+
+/// Learn and type-check one bounded predicate tree outside every solve path.
+pub fn synthesize_decision_tree(
+    batch: &FeatureBatch,
+    max_nodes: usize,
+    max_depth: usize,
+    training_stratum: Option<(&str, i64)>,
+) -> Result<DecisionTreeSynthesis, ControlError> {
+    if !(1..=41).contains(&max_nodes) || !(1..=16).contains(&max_depth) {
+        return Err(ControlError::Invalid(
+            "tree synthesis bounds are outside the public limits".into(),
+        ));
+    }
+    let training_filter = training_stratum
+        .map(|(name, value)| {
+            batch
+                .fields
+                .iter()
+                .position(|field| field == name)
+                .map(|field| (field, value))
+                .ok_or_else(|| ControlError::Invalid("unknown training field".into()))
+        })
+        .transpose()?;
+    let training_rows = training_filter.map_or(batch.rows(), |(field, value)| {
+        (0..batch.rows())
+            .filter(|&row| batch.row(row)[field] == value)
+            .count()
+    });
+    let (plan, nodes, depth) = learn_decision_tree(batch, max_nodes, max_depth, training_filter)?;
+    CompiledPlan::compile(&plan, &batch.fields)?;
+    Ok(DecisionTreeSynthesis {
+        plan,
+        nodes,
+        depth,
+        training_rows,
+    })
+}
+
 #[derive(Debug, thiserror::Error)]
 pub enum ControlError {
     #[error("I/O failure: {0}")]
@@ -847,43 +893,36 @@ impl Campaign {
             .and_then(Value::as_u64)
             .unwrap_or(8)
             .clamp(1, 16) as usize;
-        let training_filter = match (
+        let training_stratum = match (
             args.get("train_field").and_then(Value::as_str),
             args.get("train_value").and_then(Value::as_i64),
         ) {
             (None, None) => None,
-            (Some(name), Some(value)) => Some((
-                self.batch
-                    .fields
-                    .iter()
-                    .position(|field| field == name)
-                    .ok_or_else(|| ControlError::Invalid("unknown training field".into()))?,
-                value,
-            )),
+            (Some(name), Some(value)) => Some((name, value)),
             _ => {
                 return Err(ControlError::Invalid(
                     "train_field and train_value must be supplied together".into(),
                 ))
             }
         };
-        let training_rows = training_filter.map_or(self.batch.rows(), |(field, value)| {
-            (0..self.batch.rows())
-                .filter(|&row| self.batch.row(row)[field] == value)
-                .count()
-        });
-        let (spec, nodes, depth) =
-            learn_decision_tree(&self.batch, max_nodes, max_depth, training_filter)?;
-        let plan = CompiledPlan::compile(&spec, &self.batch.fields)?;
+        let synthesis =
+            synthesize_decision_tree(&self.batch, max_nodes, max_depth, training_stratum)?;
+        let plan = CompiledPlan::compile(&synthesis.plan, &self.batch.fields)?;
         let evaluation = evaluate_plan(&self.batch, &plan)?;
         let synopsis = format!(
-            "tree {nodes} nodes, {} unavoidable errors",
+            "tree {} nodes, {} unavoidable errors",
+            synthesis.nodes,
             evaluation
                 .weighted_rows
                 .saturating_sub(evaluation.weighted_correct)
         );
-        self.record("tree-synthesized", &synopsis, Some(spec.name.clone()))?;
+        self.record(
+            "tree-synthesized",
+            &synopsis,
+            Some(synthesis.plan.name.clone()),
+        )?;
         Ok(
-            json!({"plan": spec, "nodes": nodes, "depth": depth, "training_rows": training_rows, "evaluation": evaluation}),
+            json!({"plan": synthesis.plan, "nodes": synthesis.nodes, "depth": synthesis.depth, "training_rows": synthesis.training_rows, "evaluation": evaluation}),
         )
     }
 
@@ -2150,10 +2189,10 @@ mod tests {
             expected: vec![0b1100].into_boxed_slice(),
             values: vec![0, 1, 2, 3].into_boxed_slice(),
         };
-        let (spec, nodes, _) = learn_decision_tree(&batch, 7, 3, None).unwrap();
-        assert!(nodes >= 3);
-        assert_eq!(spec.output, PlanOutput::Predicate);
-        let plan = CompiledPlan::compile(&spec, &batch.fields).unwrap();
+        let synthesis = synthesize_decision_tree(&batch, 7, 3, None).unwrap();
+        assert!(synthesis.nodes >= 3);
+        assert_eq!(synthesis.plan.output, PlanOutput::Predicate);
+        let plan = CompiledPlan::compile(&synthesis.plan, &batch.fields).unwrap();
         let result = evaluate_plan(&batch, &plan).unwrap();
         assert_eq!(result.weighted_correct, 4);
         assert_eq!(result.first_mismatch, None);
@@ -2183,11 +2222,11 @@ mod tests {
             expected: expected.into_boxed_slice(),
             values: values.into_boxed_slice(),
         };
-        let (spec, nodes, depth) = learn_decision_tree(&batch, 9, 3, None).unwrap();
-        assert!(nodes >= 5);
-        assert!(depth >= 2);
-        assert_eq!(spec.output, PlanOutput::Predicate);
-        let plan = CompiledPlan::compile(&spec, &batch.fields).unwrap();
+        let synthesis = synthesize_decision_tree(&batch, 9, 3, None).unwrap();
+        assert!(synthesis.nodes >= 5);
+        assert!(synthesis.depth >= 2);
+        assert_eq!(synthesis.plan.output, PlanOutput::Predicate);
+        let plan = CompiledPlan::compile(&synthesis.plan, &batch.fields).unwrap();
         let result = evaluate_plan(&batch, &plan).unwrap();
         assert_eq!(result.weighted_correct, ROWS as u64);
         assert_eq!(result.first_mismatch, None);

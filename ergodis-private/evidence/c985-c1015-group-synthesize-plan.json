@@ -1,0 +1,19 @@
+{
+  "schema": "ergodis-attack-plan-v0",
+  "name": "decision-tree-5-2",
+  "role": "diagnostic",
+  "output": "predicate",
+  "program": [
+    { "op": "field", "name": "group-sum:bad-orbit-0" },
+    { "op": "const", "value": 0 },
+    { "op": "le" },
+    { "op": "bool", "value": true },
+    { "op": "field", "name": "group-sum:complement-triangles" },
+    { "op": "const", "value": 0 },
+    { "op": "le" },
+    { "op": "bool", "value": true },
+    { "op": "bool", "value": false },
+    { "op": "select" },
+    { "op": "select" }
+  ]
+}
