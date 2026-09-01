@@ -538,8 +538,28 @@ files are disposable and may be deleted at any time.
    claim. Long negative-proof campaigns may choose that bounded premium;
    performance runs and ordinary applications remain on `release`. Compact
    raw pairs and hashes are in
-   `ergodis-private/evidence/c985-overflow-profile-bb288-report.json`. Next is
-   targeted pruning-predicate mutation under the checked profile.
+   `ergodis-private/evidence/c985-overflow-profile-bb288-report.json`.
+
+   Targeted pruning-predicate mutation is now closed for the first high-risk
+   theorem boundary. `cargo-mutants 25.3.1` generates 19 Boolean, comparison,
+   and arithmetic mutants for `completion_lower_bound_exceeds`. Under the
+   overflow-checked `campaign` profile, the prior 64-case brute-force
+   serial/parallel/shard oracle at commit `b6d697a6c` catches 8 and misses 11:
+   answer parity cannot detect safe weakening of a prune, and it also misses
+   several parity/cutoff changes on its sampled instances. Commit `595ba2fad`
+   adds a structurally distinct exhaustive reference over controlled parity,
+   degree, syndrome, and budget boundaries plus a separate exact subset-
+   completion oracle that proves every observed production prune safe. The
+   same 19-mutant campaign then catches 19/19 with zero misses, timeouts, or
+   unviables. All mutation builds use two jobs and executable disk-backed
+   scratch; `/tmp` is forbidden because it is tmpfs, and `/tmp/persistent` is
+   noexec. `--copy-target true` consumed 28 GiB without reducing ThinLTO cost
+   and is rejected from the replay protocol. The canonical mutant set,
+   before/after classifications, commands, hashes, and assurance boundary are
+   in `ergodis-private/evidence/c985-css-completion-mutation-report.json`.
+   Next extend the same two-layer mutation gate to the prefix/frontier and
+   terminal logical-nontriviality predicates before treating mutation testing
+   as a CSS-kernel-wide assurance floor.
    Premise certificates and independent statement-level re-derivations are the
    near-term architecture.  SAT/PB/VIPR proof pipelines are reserved for
    flagship frozen claims where their encoding is independently justified;

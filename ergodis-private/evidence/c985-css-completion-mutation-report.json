@@ -1,0 +1,41 @@
+{
+  "schema": "ergodis-private-css-completion-mutation-report-v0",
+  "tool": "cargo-mutants 25.3.1",
+  "target_regex": "completion_lower_bound_exceeds",
+  "mutants": 19,
+  "mutants_file": "ergodis-private/evidence/c985-css-completion-mutants.json",
+  "mutants_sha256": "973a688b7d30612eb81f84b182117e60627b198ca0dc50ab67345f1d843d4017",
+  "profile": "campaign",
+  "features": "all",
+  "jobs": 2,
+  "baseline": {
+    "commit": "b6d697a6c",
+    "test_filter": "randomized_small_serial_parallel_and_sharded_searches_match_brute_force",
+    "caught": 8,
+    "missed": 11,
+    "timeout": 0,
+    "unviable": 0,
+    "elapsed": "16m",
+    "caught_file": "ergodis-private/evidence/c985-css-completion-mutants-before-caught.txt",
+    "caught_sha256": "c493d874dc308b2c6312279dd58fbbf06f9660d9335cecd89104a6fe42ab5900",
+    "missed_file": "ergodis-private/evidence/c985-css-completion-mutants-before-missed.txt",
+    "missed_sha256": "0f47919fb2ac5fe2a7f81765447975b6c2981c0ad44da946db18a354b935dcde"
+  },
+  "candidate": {
+    "commit": "595ba2fad",
+    "test_filter": "completion_lower_bound_matches_reference_and_exact_oracle",
+    "caught": 19,
+    "missed": 0,
+    "timeout": 0,
+    "unviable": 0,
+    "elapsed": "18m 9s",
+    "caught_file": "ergodis-private/evidence/c985-css-completion-mutants-after-caught.txt",
+    "caught_sha256": "25d4db31a1f613c4e367562961a9cc72a979d5725d48d0fb837ee8b6b7972c34"
+  },
+  "replay": {
+    "scratch_requirement": "Use an executable disk-backed target-c985 scratch directory; /tmp is tmpfs and /tmp/persistent is noexec.",
+    "copy_target": false,
+    "command_template": "TMPDIR=<disk-backed-target-c985-scratch> nix shell nixpkgs#cargo-mutants --command cargo mutants --profile campaign --all-features --baseline skip --copy-target false -j 2 -F completion_lower_bound_exceeds -C=--lib -C=<test-filter> -o <output-dir>"
+  },
+  "assurance_boundary": "The reference table protects exact theorem-strength semantics, including safe weakening regressions; the independently enumerated subset-completion oracle separately checks that every production prune is sound. Mutation testing does not itself prove the mathematical lower-bound theorem."
+}
