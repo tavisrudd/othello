@@ -623,8 +623,22 @@ files are disposable and may be deleted at any time.
    runtime is an independent scalar control rather than the retained optimized
    C973 profiler.
 
+   Commit `6a7a56288` generalizes the fused stage from one reducer to a fixed
+   reducer bank.  An expensive matcher can now compute each feature row once
+   and update several bounded accumulators without row materialization or a
+   second corpus scan.  Each lane is a 24-byte `repr(C)` record carrying the
+   reducer signature, output slot, retention ceiling, and memory ceiling; the
+   runtime still dispatches once for the whole bank, never once per row or
+   lane.  Explicit sink bindings make secondary reducer products intentional.
+   Only reducer/canonicalizer outputs may be emitted or sunk, so neither a
+   source stream nor an unbounded match stream can silently become an evidence
+   buffer.  The two-reducer exact control computes independent sum-of-squares
+   and parity aggregates from one feature loop, while the single-reducer full
+   C973 census remains numerically unchanged.  All sixteen focused tests and
+   strict clean-worktree clippy pass.
+
    Remaining execution work is argument-bearing signatures, typed multi-input
-   and fused fan-out, sinks, and durable registration of the optimized C973
+   joins, and durable registration of the optimized C973
    adapter once its currently untracked private kernel module is landed.  Then
    require the same engine to express one C80 and one C896 packet before
    stabilizing or publishing the private grammar.  Do not create a second mini-
