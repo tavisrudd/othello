@@ -719,6 +719,21 @@ files are disposable and may be deleted at any time.
    `c985-projective-action-application-wall.tsv`. The next PRS frontier is now
    the stamped orbit set and visited-bit ownership path, selected only after a
    source-current profile.
+
+   That profile assigns 15.81% of one-thread samples to the out-of-line generic
+   point decoder, but the obvious validate-once inlining is rejected. An
+   internal runner-only decoder removes the redundant workspace-length check
+   and improves the isolated flat-action kernel by 1.011336x instructions and
+   1.007609x branches; its 5% timing point estimate remains unresolved. In the
+   complete q=64,r=5 worker, however, the larger inlined body worsens 1T
+   instructions by 1.68% and leaves cycles at 0.988773x (`t=-0.35`); 12T
+   cycles are unresolved at 1.015598x (`t=0.84`). The accepted decoder is
+   restored byte-for-byte. Raw negative controls are
+   `c985-projective-action-inline-kernel-rejected.tsv` and
+   `c985-projective-action-inline-application-rejected.tsv`. The next profile
+   must split the remaining worker by exact stage without perturbing code
+   generation; assembly already identifies the field multiply-add, stamped
+   set probe, and per-orbit atomic visited marking as the principal clusters.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
