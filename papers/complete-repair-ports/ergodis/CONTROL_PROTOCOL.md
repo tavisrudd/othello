@@ -225,6 +225,15 @@ within the shared 64-fragment ledger.  A `hindsight-composition` record names
 both semantic parents and the `or-zero-false-positive` derivation rule.  It
 remains untrusted pending its recorded replay obligation.
 
+`resume_evidence` also imports at most 64 distinct hindsight nodes across its
+bounded archive list.  Archive identity, semantic hash, compiled hash, output
+type, and plan compilation are checked before launch.  The daemon then replays
+every node on the current frozen batch before admitting it to the composition
+ledger; a new false positive or zero positive coverage rejects that node.
+Accepted nodes are streamed again as `hindsight-replay` records naming their
+source archive, and status/footer counters expose accepted nodes, rejected
+nodes, and exact replay rows.  Imported nodes never acquire proof authority.
+
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
 feature.  Controlled workers retain only the existing coarse safe-point flag;

@@ -25,7 +25,7 @@ mod vm;
 
 pub use client::PlanArena;
 use evolution::{
-    load_evolution_seeds, run_evolution, EvolutionBounds, EvolutionIdentity, EvolutionProgress,
+    load_evolution_archive, run_evolution, EvolutionBounds, EvolutionIdentity, EvolutionProgress,
     EvolutionSeed,
 };
 use synthesis::learn_decision_tree;
@@ -1144,15 +1144,27 @@ impl Campaign {
             })
             .collect::<Result<Vec<_>, _>>()?;
         let replay_capacity = 32_usize.saturating_sub(lowered.len());
-        if replay_capacity == 0 && !resume_paths.is_empty() {
-            return Err(ControlError::Invalid(
-                "evolve-start has no capacity for replay archives".into(),
-            ));
-        }
-        let mut replay_archives = resume_paths
+        let mut loaded_archives = resume_paths
             .iter()
-            .map(|path| load_evolution_seeds(path, &identity, replay_capacity).map(Vec::into_iter))
+            .map(|path| load_evolution_archive(path, &identity, replay_capacity, 64))
             .collect::<Result<Vec<_>, _>>()?;
+        let mut fragment_hashes = BTreeSet::new();
+        let mut replay_fragments = Vec::with_capacity(64);
+        for archive in &mut loaded_archives {
+            for fragment in archive.fragments.drain(..) {
+                if replay_fragments.len() == 64 {
+                    break;
+                }
+                if fragment_hashes.insert(fragment.semantic_hash.clone()) {
+                    replay_fragments.push(fragment);
+                }
+            }
+        }
+        let replayed_fragments = replay_fragments.len();
+        let mut replay_archives = loaded_archives
+            .into_iter()
+            .map(|archive| archive.seeds.into_iter())
+            .collect::<Vec<_>>();
         while lowered.len() < 32 {
             let mut observed = false;
             for archive in &mut replay_archives {
@@ -1244,7 +1256,15 @@ impl Campaign {
         let handle = thread::Builder::new()
             .name(format!("ergodis-evolve-{}", &id[..8]))
             .spawn(move || {
-                run_evolution(batch, identity, lowered, output, bounds, worker_progress)
+                run_evolution(
+                    batch,
+                    identity,
+                    lowered,
+                    replay_fragments,
+                    output,
+                    bounds,
+                    worker_progress,
+                )
             })?;
         self.evolution = Some(EvolutionJob {
             id: id.clone(),
@@ -1264,6 +1284,7 @@ impl Campaign {
             "max_evidence_bytes": byte_limit,
             "direct_seeds": direct_seeds,
             "replayed_seeds": replayed_seeds,
+            "replayed_fragments": replayed_fragments,
         }))
     }
 
