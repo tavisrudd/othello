@@ -5677,6 +5677,71 @@ mod tests {
         assert_eq!(&*result.witness, &[0]);
     }
 
+    #[cfg(all(feature = "large-css", feature = "parallel"))]
+    #[test]
+    fn terminal_and_prefix_predicates_match_independent_oracles() {
+        let physical = Matrix::new::<2>(1, 4, vec![0; 4]).unwrap();
+        let mut logical_data = vec![0; 194 * 4];
+        for (row, columns) in [
+            (0, &[0][..]),
+            (64, &[0, 1][..]),
+            (65, &[1][..]),
+            (127, &[2][..]),
+            (128, &[2, 3][..]),
+            (129, &[0, 2][..]),
+            (193, &[3][..]),
+        ] {
+            for &column in columns {
+                logical_data[row * 4 + column] = 1;
+            }
+        }
+        let logical = Matrix::new::<2>(194, 4, logical_data.clone()).unwrap();
+        let compiled = CompiledHugeCssDistance::compile(&physical, &logical).unwrap();
+
+        for mask in 0_u64..16 {
+            let mut support = PackedSupport::<HUGE_SUPPORT_WORDS>::default();
+            for coordinate in 0..4 {
+                if mask & (1_u64 << coordinate) != 0 {
+                    support.insert(coordinate);
+                }
+            }
+            let mut first_word = 0_u64;
+            let mut expected_nonzero = false;
+            for row in 0..194 {
+                let mut value = 0_u8;
+                for coordinate in 0..4 {
+                    if mask & (1_u64 << coordinate) != 0 {
+                        value ^= logical_data[row * 4 + coordinate];
+                    }
+                }
+                if value != 0 {
+                    expected_nonzero = true;
+                    if row < 64 {
+                        first_word |= 1_u64 << row;
+                    }
+                }
+            }
+            assert_eq!(
+                compiled.logical_is_nonzero(support, first_word),
+                expected_nonzero,
+                "support mask={mask}",
+            );
+        }
+
+        for searched in [0, 1, 12, u16::MAX] {
+            for incumbent in [0, 1, 7, u16::MAX] {
+                assert_eq!(
+                    wide_prefix_initial_bound(searched, incumbent, true),
+                    searched.saturating_add(1),
+                );
+                assert_eq!(
+                    wide_prefix_initial_bound(searched, incumbent, false),
+                    incumbent,
+                );
+            }
+        }
+    }
+
     #[test]
     fn wide_search_matches_compact_search_on_overlap_domain() {
         let (physical, logical) = artifact_problem();
