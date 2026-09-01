@@ -318,10 +318,24 @@ needs. Ran the `ej` plus `tt` closeout, which found and fixed two real defects, 
 pipeline generic against a second independently created run. Task report with the Mystery ledger is
 `notes/2026-08-31-c1031-ergodis-visualization-report.md`.
 
-**Next step on resume**: the exploration deliverables are complete. Remaining budget is best spent
-on whichever of these the user chooses — folding in the delegated terminal interface once it lands,
-or hardening the console against a larger feature batch than the two-object smoke fixture. Ask
-before starting a production build; it is not allocated.
+### 2026-09-01, fourth block, to 02:00 — roughly 3 hours 20 minutes of budget consumed in total
+
+The user set the standard that the console must be data-driven against real Ergodis problems rather
+than the two-row fixture, and asked for iteration until it is real. Five campaigns were generated on
+genuine research corpora by a delegated agent, and both interfaces were rebuilt against them; the
+terminal interface was iterated in parallel by its own agent. The console is now also served live
+from a run directory and controller socket rather than only as a snapshot.
+
+Both agents returned findings that corrected this task's notes, and those corrections are folded in:
+the scope mask is a membership bitset, the beam expands one representative per behaviour class, the
+rejection counters span three populations, and a time axis does exist by way of the launching
+harness. Details are in the report and the data-model note.
+
+**Next step on resume**: the exploration deliverables are complete and the console runs against real
+data at 10^5-candidate scale. Ask the user before starting a production build; it is not allocated.
+The two cheap core changes worth proposing are writing the launch bounds into the run directory so a
+run is self-describing, and a monotonic clock reading on each durable ledger event so the events
+between evolutions are timed.
 
 **Superseded next step from the first block**: build the vertical-slice viewer in the worktree against
 `/home/tavis/.cache/c1031-runs/run1`, starting with the lineage graph from the `evolve-start`
