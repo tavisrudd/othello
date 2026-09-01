@@ -169,7 +169,7 @@ fn run<const H: u8>(backend: &str, rows: usize, cols: usize, seed: u64, repetiti
     }
     let elapsed_ns = started.elapsed().as_nanos();
     println!(
-        "{{\"backend\":\"{backend}\",\"degree\":{H},\"rows\":{rows},\"cols\":{cols},\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"rank_sum\":{ranks},\"checksum\":{digest}}}"
+        "{{\"backend\":\"{backend}\",\"degree\":{H},\"rows\":{rows},\"cols\":{cols},\"seed\":{seed},\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"rank_sum\":{ranks},\"checksum\":{digest}}}"
     );
 }
 
