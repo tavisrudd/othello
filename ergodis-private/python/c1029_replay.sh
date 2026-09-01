@@ -40,10 +40,10 @@ GEN="${WORK}/build/target/release/c1029_parametric_cert"
 
 echo "--- byte-identity against the committed evidence ---"
 diff <(sed 's/witness_file .*/witness_file X/' "${WORK}/c1029-cert-replay.txt") \
-     <(sed 's/witness_file .*/witness_file X/' "${EV}/c1029-cert-n1e8.txt") \
-  && echo "certificate identical"
-diff "${WORK}/c1029-witnesses-replay.txt" "${EV}/c1029-witnesses-n1e8.txt" \
-  && echo "witness file identical"
+     <(sed 's/witness_file .*/witness_file X/' "${EV}/c1029-cert-n1e8.txt")
+echo "certificate identical"
+diff "${WORK}/c1029-witnesses-replay.txt" "${EV}/c1029-witnesses-n1e8.txt"
+echo "witness file identical"
 
 echo "--- independent checker on the committed certificate ---"
 uv run --with sympy --with numpy python3 "${REPO}/ergodis-private/python/c1029_check.py" \

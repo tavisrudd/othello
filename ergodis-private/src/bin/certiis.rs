@@ -1048,6 +1048,12 @@ fn verify(instance: &Instance, raw: &[u8], report: &Report) -> anyhow::Result<Ve
                     d > c,
                     "certificate does not violate Hall: demand {d} <= capacity {c}"
                 );
+                ensure!(
+                    certificate.deficit == d - c,
+                    "stated deficit {} disagrees with recomputed deficit {}",
+                    certificate.deficit,
+                    d - c
+                );
                 checks.push(format!(
                     "Hall violation recomputed independently: {} tasks demand {d} units, their {} \
                  eligible resources supply {c} (deficit {})",
@@ -2276,6 +2282,21 @@ mod tests {
                 capacity_after: 1,
                 still_violated: false,
             });
+        }
+        assert!(verify(&instance, &raw, &report).is_err());
+    }
+
+    #[test]
+    fn verification_rejects_only_a_tampered_deficit() {
+        let instance = instance_from(
+            &[("a", 1), ("b", 1)],
+            &[("x", 1)],
+            &[("a", "x"), ("b", "x")],
+        );
+        let raw = serde_json::to_vec(&instance).unwrap();
+        let mut report = solve(&instance, &raw).unwrap();
+        if let Verdict::Infeasible { certificates, .. } = &mut report.verdict {
+            certificates[0].deficit += 1;
         }
         assert!(verify(&instance, &raw, &report).is_err());
     }
