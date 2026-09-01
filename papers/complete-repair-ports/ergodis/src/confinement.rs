@@ -1,6 +1,6 @@
 use crate::arena::{FlatMatrixArena, MatrixId};
 use crate::composition::{CompositionError, CostTable};
-use crate::field::{FiniteField, Prime};
+use crate::field::{FieldElement, FiniteField, Prime};
 use crate::matrix::{Matrix, MatrixError};
 use rustc_hash::FxHashMap;
 use thiserror::Error;
@@ -508,9 +508,10 @@ fn evaluate_functional<F: FiniteField>(
                 continue;
             }
             for demand in 0..demand_cols {
-                let product = F::mul(factor, coefficients[functional * demand_cols + demand]);
+                let product = FieldElement::<F>::from_canonical(factor)
+                    * FieldElement::from_canonical(coefficients[functional * demand_cols + demand]);
                 let index = block_coordinate * demand_cols + demand;
-                output[index] = F::add(output[index], product);
+                output[index] = (FieldElement::from_canonical(output[index]) + product).value();
             }
         }
     }
