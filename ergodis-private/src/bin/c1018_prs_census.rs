@@ -700,9 +700,54 @@ impl PackedStampSet {
     }
 }
 
+#[repr(C)]
+struct DenseOrbitSet {
+    words: Box<[u64]>,
+}
+
+const _: () = assert!(std::mem::size_of::<DenseOrbitSet>() == 16);
+const _: () = assert!(std::mem::align_of::<DenseOrbitSet>() == 8);
+
+impl DenseOrbitSet {
+    fn new(universe: u64) -> Result<Self> {
+        let words = universe
+            .checked_add(63)
+            .context("dense orbit-set universe overflow")?
+            / 64;
+        let words = usize::try_from(words).context("dense orbit-set exceeds address space")?;
+        Ok(Self {
+            words: vec![0; words].into_boxed_slice(),
+        })
+    }
+
+    /// Clear exactly the points inserted during the preceding orbit.
+    #[inline]
+    fn clear_orbit(&mut self, orbit: &[u64]) {
+        for &point in orbit {
+            let word = (point >> 6) as usize;
+            self.words[word] &= !(1_u64 << (point & 63));
+        }
+    }
+
+    /// Returns true if `point` was newly inserted.
+    #[inline(always)]
+    fn insert(&mut self, point: u64) -> bool {
+        let word = (point >> 6) as usize;
+        debug_assert!(word < self.words.len());
+        let bit = 1_u64 << (point & 63);
+        let old = self.words[word];
+        if old & bit != 0 {
+            false
+        } else {
+            self.words[word] = old | bit;
+            true
+        }
+    }
+}
+
 #[cfg(test)]
 mod stamp_set_tests {
-    use super::{PackedStampSet, StampSet};
+    use super::{DenseOrbitSet, PackedStampSet, StampSet};
 
     #[test]
     fn packed_stamp_set_reuses_epochs_and_rejects_wide_keys() {
@@ -724,6 +769,21 @@ mod stamp_set_tests {
         wide.reset();
         assert!(wide.insert(u64::MAX));
         assert!(!wide.insert(u64::MAX));
+    }
+
+    #[test]
+    fn dense_orbit_set_clears_only_the_completed_orbit() {
+        let mut set = DenseOrbitSet::new(130).unwrap();
+        assert!(set.insert(0));
+        assert!(set.insert(64));
+        assert!(set.insert(129));
+        assert!(!set.insert(64));
+        assert!(set.insert(1));
+        set.clear_orbit(&[0, 64, 129]);
+        assert!(set.insert(0));
+        assert!(set.insert(64));
+        assert!(set.insert(129));
+        assert!(!set.insert(1));
     }
 }
 
@@ -942,9 +1002,9 @@ fn worker_packed(
 // the generic control under fat LTO.
 #[cold]
 #[inline(never)]
-#[unsafe(export_name = "ergodis_private_binary_packed_stamp_worker")]
+#[unsafe(export_name = "ergodis_private_binary_dense_orbit_worker")]
 #[allow(clippy::too_many_arguments)]
-fn worker_binary_packed(
+fn worker_binary_dense(
     f: &Field,
     d: usize,
     actions: &BinaryProjectiveLinearActionPack<'_, 6, 3>,
@@ -960,7 +1020,7 @@ fn worker_binary_packed(
     let mut records: Vec<OrbitRecord> = Vec::new();
     let mut buf = vec![0u8; d + 1];
     let mut orbit: Vec<u64> = Vec::with_capacity(max_orbit);
-    let mut seen = PackedStampSet::new(max_orbit.max(16), n.saturating_sub(1))?;
+    let mut seen = DenseOrbitSet::new(n)?;
     let mut sc = RankScratch::new(d);
     let mut action_workspace = actions.workspace();
     let mut action_runner = actions.runner(&mut action_workspace)?;
@@ -976,8 +1036,8 @@ fn worker_binary_packed(
             {
                 continue;
             }
+            seen.clear_orbit(&orbit);
             orbit.clear();
-            seen.reset();
             seen.insert(start);
             orbit.push(start);
             let mut head = 0usize;
@@ -1595,7 +1655,7 @@ fn main() -> Result<()> {
     let max_orbit = q * q * q; // |PGL(2,q)| = q^3 - q
     let packed_stamps =
         max_orbit >= PACKED_STAMP_THRESHOLD && n.saturating_sub(1) <= PackedStampSet::KEY_MASK;
-    let binary_packed_actions = packed_stamps && binary_actions.is_some();
+    let binary_dense_actions = packed_stamps && binary_actions.is_some();
     let failures = AtomicUsize::new(0);
 
     let mut hist = vec![0u64; d + 2];
@@ -1612,8 +1672,8 @@ fn main() -> Result<()> {
             let cursor = &cursor;
             let failures = &failures;
             handles.push(scope.spawn(move || {
-                let result = if binary_packed_actions {
-                    worker_binary_packed(
+                let result = if binary_dense_actions {
+                    worker_binary_dense(
                         f,
                         d,
                         binary_actions.as_ref().expect("binary action pack exists"),
