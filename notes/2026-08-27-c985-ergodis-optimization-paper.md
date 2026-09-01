@@ -887,10 +887,14 @@ files are disposable and may be deleted at any time.
    byte-identical at 1T and 12T. Raw tables are
    `c985-c1018-dense-orbit-q32-control.tsv`,
    `c985-c1018-dense-orbit-q64-counters.tsv`, and
-   `c985-c1018-dense-orbit-q64-wall.tsv`. The next micro gate is removing the
-   inherited `cold` annotation from the now-dominant large worker; its call is
-   cold, but its body contains the entire hot solve loop and must not be
-   optimized as cold without a counter-backed justification.
+   `c985-c1018-dense-orbit-q64-wall.tsv`. Removing the inherited `cold`
+   annotation from the large worker is measured and rejected rather than
+   assumed beneficial. Seven q=64 pairs leave 1T instructions and branches
+   bit-exact and cycles unresolved at 1.004673x (`t=0.37`); 12T cycles are
+   likewise unresolved at 1.016202x (`t=0.75`). The annotation is restored.
+   Raw negative evidence is
+   `c985-c1018-hot-worker-cold-annotation-rejected.tsv`. The next substantive
+   target must come from a fresh post-dense profile.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
