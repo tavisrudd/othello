@@ -894,6 +894,23 @@ files are disposable and may be deleted at any time.
    noise explicitly not interpreted as a regression. Raw pairs are tracked at
    `ergodis-private/evidence/c985-sparse-selector-field-element-ab.tsv`.
 
+   Commit `87e1234f2` carries the same exact field brand
+   through Jin--Fu confinement's generator-functional evaluation. Matrix
+   presentation checks and constructor validation already establish that the
+   coefficient, factor, and output bytes are canonical; the inner multiply-add
+   now reifies that invariant as `FieldElement<F>` without changing stored
+   matrices, workspaces, APIs, or loop shape. Seven rotated parent
+   `70711c2e3` / candidate pairs over 100 complete solves per arm preserve the
+   exact cost, 1,638,300 transitions, and checksum. Parent/candidate is
+   0.999999998x instructions, 0.999999928x branches, and 1.007322x branch
+   misses (`t=0.14`). Host-frequency bimodality makes cycles and wall
+   unresolved (`0.890035x`, `t=-1.41`; `0.908771x`, `t=-1.22`), so no timing
+   claim is made. The specialized function remains exactly 1,056 bytes and
+   the stable counters show no hot-path cost. Raw pairs are tracked at
+   `ergodis-private/evidence/c985-confinement-field-element-ab.tsv`; full
+   all-target/all-feature tests and strict clippy pass in an isolated target
+   directory.
+
    Commits `f69380676` and `aca704d3d` close finding 16's
    matrix-reinterpretation path without hashing or enlarging the cold matrix
    record. `FieldPresentation` packs the
