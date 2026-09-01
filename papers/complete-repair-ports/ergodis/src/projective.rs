@@ -915,6 +915,11 @@ struct BinaryLaneAction {
 const _: () = assert!(std::mem::size_of::<BinaryLaneAction>() == 16);
 const _: () = assert!(std::mem::align_of::<BinaryLaneAction>() == 4);
 
+// A unit anti-diagonal matrix reverses the packed coordinate bytes exactly.
+// Reserve an otherwise invalid tape start so the hot action record keeps its
+// compact 16-byte stride without adding a tag field.
+const BINARY_LANE_UNIT_REVERSAL: u32 = 1 << 31;
+
 #[repr(C)]
 #[derive(Clone, Copy, Debug)]
 struct BinaryLaneUnitTerm {
@@ -998,6 +1003,21 @@ impl<'a, const H: u8, const DIMENSION: usize, const GENERATORS: usize>
                 .rows();
             if rank != DIMENSION {
                 return Err(ProjectiveError::InvalidLinearAction);
+            }
+            let unit_reversal = (0..DIMENSION).all(|output| {
+                (0..DIMENSION).all(|input| {
+                    matrix.as_slice()[output * DIMENSION + input]
+                        == u8::from(input == DIMENSION - 1 - output)
+                })
+            });
+            if unit_reversal {
+                actions.push(BinaryLaneAction {
+                    unit_start: BINARY_LANE_UNIT_REVERSAL,
+                    unit_end: 0,
+                    weighted_start: 0,
+                    weighted_end: 0,
+                });
+                continue;
             }
             let unit_start =
                 u32::try_from(unit_terms.len()).map_err(|_| ProjectiveError::DimensionOverflow)?;
@@ -1153,19 +1173,25 @@ impl<'pack, 'field, const H: u8, const DIMENSION: usize, const GENERATORS: usize
         let field = self.pack.index.field;
         let mut successors = [0_u64; GENERATORS];
         for (action, successor) in self.pack.actions.iter().zip(successors.iter_mut()) {
-            let mut image = 0_u64;
-            for term in &self.pack.unit_terms[action.unit_start as usize..action.unit_end as usize]
-            {
-                let coordinate = (point >> term.input_shift) & 0xff;
-                image ^= coordinate * term.lane_mask;
-            }
-            for term in &self.pack.weighted_terms
-                [action.weighted_start as usize..action.weighted_end as usize]
-            {
-                let coordinate = ((point >> term.input_shift) & 0xff) as u8;
-                image ^= u64::from(field.mul_canonical(term.coefficient, coordinate))
-                    << term.output_shift;
-            }
+            let image = if action.unit_start == BINARY_LANE_UNIT_REVERSAL {
+                point.swap_bytes() >> (8 * (8 - DIMENSION))
+            } else {
+                let mut image = 0_u64;
+                for term in
+                    &self.pack.unit_terms[action.unit_start as usize..action.unit_end as usize]
+                {
+                    let coordinate = (point >> term.input_shift) & 0xff;
+                    image ^= coordinate * term.lane_mask;
+                }
+                for term in &self.pack.weighted_terms
+                    [action.weighted_start as usize..action.weighted_end as usize]
+                {
+                    let coordinate = ((point >> term.input_shift) & 0xff) as u8;
+                    image ^= u64::from(field.mul_canonical(term.coefficient, coordinate))
+                        << term.output_shift;
+                }
+                image
+            };
             *successor = self.packed_index(image);
         }
         Ok(successors)
@@ -1831,6 +1857,35 @@ mod tests {
             ),
             Err(ProjectiveError::InvalidLinearAction)
         ));
+    }
+
+    #[test]
+    fn lane_binary_unit_reversal_uses_exact_byte_permutation() {
+        let field = SmallField::new(2, 3).unwrap();
+        let reversal =
+            Matrix::new_with_field(&field, 3, 3, vec![0, 0, 1, 0, 1, 0, 1, 0, 0]).unwrap();
+        let generic = ProjectiveLinearActionPack::<1>::new(&field, 2, [reversal.clone()]).unwrap();
+        let lane =
+            BinaryLaneProjectiveLinearActionPack::<3, 3, 1>::new(&field, 2, [reversal]).unwrap();
+        assert_eq!(lane.actions[0].unit_start, BINARY_LANE_UNIT_REVERSAL);
+
+        let mut generic_workspace = generic.workspace();
+        let mut generic_runner = generic.runner(&mut generic_workspace).unwrap();
+        let mut lane_workspace = lane.workspace();
+        let mut lane_runner = lane.runner(&mut lane_workspace).unwrap();
+        let (checksum, events) = crate::test_alloc::measure_allocations(|| {
+            let _guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+            let mut checksum = 0_u64;
+            for point in 0..lane.point_count() {
+                let expected = generic_runner.successors(point).unwrap();
+                let actual = lane_runner.successors(point).unwrap();
+                assert_eq!(actual, expected);
+                checksum ^= actual[0].rotate_left((point & 63) as u32);
+            }
+            checksum
+        });
+        assert_ne!(checksum, 0);
+        assert_eq!(events, crate::test_alloc::AllocationEvents::default());
     }
 
     #[test]
