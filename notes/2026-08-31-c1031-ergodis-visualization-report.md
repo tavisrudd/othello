@@ -314,11 +314,29 @@ unsolved corpora are not hard, and their answers are not merely unlikely to be f
 archives: 3,595 distinct behaviours, all of them one of thirty shapes, is a search exploring the
 substitution space of its own seeds very thoroughly and the space of expressions not at all.
 
-Three remedies suggest themselves, and choosing among them belongs to whoever owns the search rather
-than to this task: a crossover operator combining two survivors under `and` or `or`; a growth
-operator that wraps a plan in a connective; or, cheapest and requiring no code at all, **seeding with
-compound shapes**, since a seed of the form `(a eq b) and (c eq d)` would put the whole eleven-corpus
-family inside reach of field substitution alone.
+### The cheapest remedy needs no code, and it works
+
+Three remedies suggest themselves: a crossover operator combining two survivors under a connective; a
+growth operator that wraps a plan in one; or simply **seeding with compound shapes**, since field
+substitution alone can then reach the whole family. The third was tested, because it costs nothing.
+
+A campaign on corpus-01 was seeded with three plans of the shape `(a eq b) and (c eq d)` over
+arbitrary adjacent fields — `f000/f001` with `f002/f003`, and so on — **none of which contains the
+answer's field pairs**. The search tested 59,998 candidates and returned
+`(f008 eq f007) and (f014 eq f031)` at **1,024 of 1,024**, with 38 perfect classifiers found. That
+expression is exact on the held-out batch too.
+
+So the same search, the same operators, and the same budget go from one object above baseline to an
+exact solution purely by being started from a seed of the right shape. It also confirms the
+diagnosis by construction: the search substitutes fields very effectively and cannot alter structure
+at all, so the seed shape is the entire hypothesis space.
+
+Two further points worth recording. The expression the search found is not the one the exhaustive
+probe found — `(f000 eq f020) and (f015 eq f026)` — and both are exact on both halves, so these
+corpora admit several exact representations. And a practical consequence for anyone running such a
+campaign: **the seed set does not merely start the search, it defines what the search can express**,
+which makes seed design the single highest-leverage decision in setting one up. That deserves to be
+said wherever campaigns are configured.
 
 ### The exact ceiling is not a measure of learnability
 
