@@ -957,6 +957,28 @@ files are disposable and may be deleted at any time.
    from published root/debt/exceptional-state counters and mid-campaign profile
    refresh remain open; the bounded graph compiler and selector are no longer
    blockers.
+
+   Commit `23b314007` removes the prepared-file requirement with a campaign-
+   local watcher accumulator and CLI. `target-profile-reset` fixes the ordered
+   field schema; absolute `observe` updates and typed dependency/continuation
+   edges fill the same bounded 64-node/256-edge graph; status reports occupancy;
+   and `evolve-start --target-profile-current` takes an owned snapshot. Repeated
+   identical messages are idempotent, changed absolute observations replace
+   rather than double-count, and exact tuple-key ordering makes snapshot bytes
+   and hashes independent of message arrival order. Different campaign run/
+   socket paths share no state, and later updates cannot mutate an active job.
+
+   The complete profile now travels in the evidence header beside its
+   independently recomputed canonical hash, so a watcher-built graph is
+   reproducible without a transient input file. Current loaders accept legacy
+   hash-only headers but reject a new full-profile/hash mismatch. Exact controls
+   cover message-order canonicalization, idempotence, conflicting edge kinds,
+   corrupt-profile replay, campaign isolation, bounded CLI input, and daemon
+   snapshot execution. Strict all-target/all-feature clippy, the full suite,
+   and doc tests pass. No solve worker or safe point changed. Domain adapters
+   still need to publish their root/debt/exceptional counters, and an explicit
+   between-generation refresh policy remains open; generic accumulation,
+   isolation, persistence, and snapshotting are landed.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a

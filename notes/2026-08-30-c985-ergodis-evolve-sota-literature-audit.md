@@ -238,13 +238,18 @@ dependency/continuation edges. Its cycle-safe transitive closure sums reachable
 work once and guides only surplus expansion quota after the one-slot
 exploration floor. Semantic evaluation and authority do not consume profile
 weights. Automatic aggregation from live solver publications and mid-campaign
-refresh remain open.
+refresh remain open. The generic watcher-side accumulator is now landed:
+campaign-local absolute observations and edges canonicalize independently of
+message order, snapshot directly into `evolve-start`, and persist the complete
+profile plus verified hash in evidence. Thus private/application producers no
+longer need to build a temporary graph file; they only need to publish their
+domain counters.
 
-Next, aggregate existing root progress, debt ledgers, exceptional-state counts,
-and perf counters outside the search path into the landed graph schema rather
-than requiring a prepared profile file. Add watcher-owned snapshot/refresh and
-route operator family as well as expansion count: simple flat targets receive
-one-shot or numeric tuning, while structural targets get full evolution.
+Next, connect existing root progress, debt ledgers, exceptional-state counts,
+and perf counters to the landed watcher accumulator. Add an explicit bounded
+between-generation refresh policy and route operator family as well as
+expansion count: simple flat targets receive one-shot or numeric tuning, while
+structural targets get full evolution.
 
 ### P2 — learned proposer or test-time training
 
