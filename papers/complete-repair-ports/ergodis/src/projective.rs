@@ -1,4 +1,4 @@
-use crate::field::{BinarySmallField, SmallField};
+use crate::field::{BinaryElement, BinarySmallField, SmallField};
 use thiserror::Error;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Error)]
@@ -205,9 +205,26 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
         let inverse = self.field.inverse_nonzero(coordinates[pivot]);
         let mut suffix = 0_u64;
         for &coordinate in &coordinates[pivot + 1..] {
-            // SAFETY: the full input slice was range-checked above, and the
-            // inverse table returns a canonical field element.
-            let normalized = unsafe { self.field.mul_unchecked(coordinate, inverse) };
+            let normalized = self.field.mul_canonical(coordinate, inverse);
+            suffix = (suffix << H) | u64::from(normalized);
+        }
+        Ok(self.offsets[pivot] + suffix)
+    }
+
+    /// Rank a nonzero vector whose canonical encoding was validated earlier.
+    #[inline(always)]
+    pub fn index_elements(&self, coordinates: &[BinaryElement<H>]) -> Result<u64, ProjectiveError> {
+        if coordinates.len() != usize::from(self.vector_dimension) {
+            return Err(ProjectiveError::InvalidPoint);
+        }
+        let pivot = coordinates
+            .iter()
+            .position(|coordinate| coordinate.value() != 0)
+            .ok_or(ProjectiveError::InvalidPoint)?;
+        let inverse = self.field.inverse_nonzero(coordinates[pivot].value());
+        let mut suffix = 0_u64;
+        for &coordinate in &coordinates[pivot + 1..] {
+            let normalized = self.field.mul_canonical(coordinate.value(), inverse);
             suffix = (suffix << H) | u64::from(normalized);
         }
         Ok(self.offsets[pivot] + suffix)
@@ -229,6 +246,28 @@ impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
             suffix >>= H;
         }
         debug_assert_eq!(suffix, 0);
+        Ok(())
+    }
+
+    /// Write a typed canonical representative into caller-owned storage.
+    #[inline(always)]
+    pub fn point_elements(
+        &self,
+        index: u64,
+        output: &mut [BinaryElement<H>],
+    ) -> Result<(), ProjectiveError> {
+        if index >= self.point_count || output.len() != usize::from(self.vector_dimension) {
+            return Err(ProjectiveError::PointOutOfRange);
+        }
+        output.fill(self.field.zero());
+        let pivot = self.offsets[1..].partition_point(|&end| end <= index);
+        output[pivot] = self.field.one();
+        let mut suffix = index - self.offsets[pivot];
+        let mask = (1_u64 << H) - 1;
+        for coordinate in output[pivot + 1..].iter_mut().rev() {
+            *coordinate = BinaryElement::from_canonical((suffix & mask) as u8);
+            suffix >>= H;
+        }
         Ok(())
     }
 }
@@ -490,14 +529,21 @@ mod tests {
         let field = SmallField::new(2, H).unwrap();
         let generic = ProjectiveIndex::new(&field, 4).unwrap();
         let binary = BinaryProjectiveIndex::<H>::new(&field, 4).unwrap();
+        let binary_field = field.binary_extension::<H>().unwrap();
         assert_eq!(generic.point_count(), binary.point_count());
         let mut generic_point = [0_u8; 5];
         let mut binary_point = [0_u8; 5];
+        let mut typed_point = [binary_field.zero(); 5];
         for index in 0..generic.point_count().min(limit) {
             generic.point(index, &mut generic_point).unwrap();
             binary.point(index, &mut binary_point).unwrap();
+            binary.point_elements(index, &mut typed_point).unwrap();
             assert_eq!(generic_point, binary_point);
             assert_eq!(binary.index(&binary_point).unwrap(), index);
+            assert_eq!(binary.index_elements(&typed_point).unwrap(), index);
+            for position in 0..typed_point.len() {
+                assert_eq!(typed_point[position].value(), binary_point[position]);
+            }
         }
     }
 
@@ -526,13 +572,17 @@ mod tests {
     fn binary_projective_hot_rank_and_unrank_allocate_nothing() {
         let field = SmallField::new(2, 6).unwrap();
         let binary = BinaryProjectiveIndex::<6>::new(&field, 4).unwrap();
+        let binary_field = field.binary_extension::<6>().unwrap();
         let mut point = [0_u8; 5];
+        let mut typed_point = [binary_field.zero(); 5];
         let (checksum, events) = crate::test_alloc::measure_allocations(|| {
             let _guard = crate::test_alloc::HotLoopAllocationGuard::enter();
             let mut checksum = 0_u64;
             for index in 0..10_000 {
                 binary.point(index, &mut point).unwrap();
                 checksum ^= binary.index(&point).unwrap();
+                binary.point_elements(index, &mut typed_point).unwrap();
+                checksum ^= binary.index_elements(&typed_point).unwrap();
             }
             checksum
         });

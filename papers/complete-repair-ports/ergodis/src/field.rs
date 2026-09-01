@@ -1,3 +1,5 @@
+use std::marker::PhantomData;
+
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
@@ -264,6 +266,37 @@ pub struct BinarySmallField<'a, const H: u8>(&'a SmallField);
 const _: () = assert!(std::mem::size_of::<BinarySmallField<'static, 1>>() == 8);
 const _: () = assert!(std::mem::align_of::<BinarySmallField<'static, 1>>() == 8);
 
+struct BinaryDegree<const H: u8>;
+
+/// Canonically encoded element of a binary extension field of degree `H`.
+///
+/// Construction is checked by [`BinarySmallField::element`]. The degree marker
+/// occupies no storage, so arrays and slices have the same layout as `u8`.
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct BinaryElement<const H: u8> {
+    value: u8,
+    _degree: PhantomData<BinaryDegree<H>>,
+}
+
+const _: () = assert!(std::mem::size_of::<BinaryElement<1>>() == 1);
+const _: () = assert!(std::mem::align_of::<BinaryElement<1>>() == 1);
+
+impl<const H: u8> BinaryElement<H> {
+    #[inline(always)]
+    pub const fn value(self) -> u8 {
+        self.value
+    }
+
+    #[inline(always)]
+    pub(crate) const fn from_canonical(value: u8) -> Self {
+        Self {
+            value,
+            _degree: PhantomData,
+        }
+    }
+}
+
 impl<'a, const H: u8> BinarySmallField<'a, H> {
     pub fn new(field: &'a SmallField) -> Result<Self, FieldError> {
         let expected_order = 1_u16
@@ -286,22 +319,45 @@ impl<'a, const H: u8> BinarySmallField<'a, H> {
         1_u16 << H
     }
 
+    #[inline]
+    pub fn element(self, value: u8) -> Result<BinaryElement<H>, FieldError> {
+        if u16::from(value) >= self.order() {
+            return Err(FieldError::InvalidElement);
+        }
+        Ok(BinaryElement::from_canonical(value))
+    }
+
+    #[inline(always)]
+    pub const fn zero(self) -> BinaryElement<H> {
+        BinaryElement::from_canonical(0)
+    }
+
+    #[inline(always)]
+    pub const fn one(self) -> BinaryElement<H> {
+        BinaryElement::from_canonical(1)
+    }
+
+    #[inline(always)]
+    pub fn add_element(self, left: BinaryElement<H>, right: BinaryElement<H>) -> BinaryElement<H> {
+        BinaryElement::from_canonical(left.value ^ right.value)
+    }
+
+    #[inline(always)]
+    pub fn sub_element(self, left: BinaryElement<H>, right: BinaryElement<H>) -> BinaryElement<H> {
+        self.add_element(left, right)
+    }
+
+    #[inline(always)]
+    pub fn mul_element(self, left: BinaryElement<H>, right: BinaryElement<H>) -> BinaryElement<H> {
+        BinaryElement::from_canonical(self.mul_canonical(left.value, right.value))
+    }
+
     #[inline(always)]
     pub fn add(self, left: u8, right: u8) -> u8 {
         assert!(
             u16::from(left) < self.order() && u16::from(right) < self.order(),
             "field element is not reduced"
         );
-        left ^ right
-    }
-
-    /// Add two canonical field encodings without checking their range.
-    ///
-    /// # Safety
-    /// Both operands must be strictly smaller than `self.order()`.
-    #[inline(always)]
-    pub unsafe fn add_unchecked(self, left: u8, right: u8) -> u8 {
-        debug_assert!(u16::from(left) < self.order() && u16::from(right) < self.order());
         left ^ right
     }
 
@@ -316,16 +372,11 @@ impl<'a, const H: u8> BinarySmallField<'a, H> {
             u16::from(left) < self.order() && u16::from(right) < self.order(),
             "field element is not reduced"
         );
-        // SAFETY: the range check immediately above establishes both operands.
-        unsafe { self.mul_unchecked(left, right) }
+        self.mul_canonical(left, right)
     }
 
-    /// Multiply two canonical field encodings without checking their range.
-    ///
-    /// # Safety
-    /// Both operands must be strictly smaller than `self.order()`.
     #[inline(always)]
-    pub unsafe fn mul_unchecked(self, left: u8, right: u8) -> u8 {
+    pub(crate) fn mul_canonical(self, left: u8, right: u8) -> u8 {
         debug_assert!(u16::from(left) < self.order() && u16::from(right) < self.order());
         self.0.multiply[(usize::from(left) << H) | usize::from(right)]
     }
@@ -753,13 +804,29 @@ mod tests {
         assert_eq!(binary.order(), field.order());
         for left in 0..field.order() {
             let left = left as u8;
+            let typed_left = binary.element(left).unwrap();
             assert_eq!(binary.inverse(left), field.inverse(left));
             for right in 0..field.order() {
                 let right = right as u8;
+                let typed_right = binary.element(right).unwrap();
                 assert_eq!(binary.add(left, right), field.add(left, right));
                 assert_eq!(binary.sub(left, right), field.sub(left, right));
                 assert_eq!(binary.mul(left, right), field.mul(left, right));
+                assert_eq!(
+                    binary.add_element(typed_left, typed_right).value(),
+                    field.add(left, right)
+                );
+                assert_eq!(
+                    binary.mul_element(typed_left, typed_right).value(),
+                    field.mul(left, right)
+                );
             }
+        }
+        if field.order() < 256 {
+            assert_eq!(
+                binary.element(field.order() as u8),
+                Err(FieldError::InvalidElement)
+            );
         }
     }
 
