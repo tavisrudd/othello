@@ -14,6 +14,7 @@ use std::sync::Arc;
 const EVOLUTION_EVIDENCE_SCHEMA: &str = "ergodis-evolution-evidence-v0";
 const MAX_EVOLUTION_IMPORT_BYTES: u64 = 16 * 1024 * 1024;
 const MAX_EVOLUTION_RECORD_BYTES: usize = 256 * 1024;
+const MAX_EVOLUTION_FOOTER_BYTES: u64 = 4 * 1024;
 const MAX_FAILURE_PROBES: usize = 8;
 const MAX_TARGETED_MUTATIONS: usize = 24;
 
@@ -157,6 +158,35 @@ struct ExpansionParent {
     hash: String,
     plan: PlanSpec,
     first_mismatch: Option<usize>,
+    score: CandidateScore,
+}
+
+#[derive(Clone, Copy)]
+struct CandidateScore {
+    correct: u64,
+    false_positive: u64,
+    complexity: usize,
+}
+
+#[derive(Serialize)]
+struct CandidateImpact {
+    improved: bool,
+    correct_gain: u64,
+    correct_loss: u64,
+    false_positive_reduction: u64,
+    false_positive_increase: u64,
+}
+
+#[derive(Default, Serialize)]
+struct OperatorScorecard {
+    trials: u64,
+    completed: u64,
+    compared_to_parent: u64,
+    cascade_rejected: u64,
+    improved: u64,
+    perfect: u64,
+    rows_evaluated: u64,
+    semantic_op_rows: u64,
 }
 
 type EvolutionRankKey = (std::cmp::Reverse<u64>, u64, usize);
@@ -183,6 +213,17 @@ fn can_enter_beam(
 fn fair_share(total: usize, index: usize, count: usize) -> usize {
     debug_assert!(count != 0 && index < count);
     total / count + usize::from(index < total % count)
+}
+
+fn candidate_impact(child: CandidateScore, parent: CandidateScore) -> CandidateImpact {
+    CandidateImpact {
+        improved: evolution_rank_key(child.correct, child.false_positive, child.complexity)
+            < evolution_rank_key(parent.correct, parent.false_positive, parent.complexity),
+        correct_gain: child.correct.saturating_sub(parent.correct),
+        correct_loss: parent.correct.saturating_sub(child.correct),
+        false_positive_reduction: parent.false_positive.saturating_sub(child.false_positive),
+        false_positive_increase: child.false_positive.saturating_sub(parent.false_positive),
+    }
 }
 
 fn imported_candidate_cmp(
@@ -309,6 +350,17 @@ fn required_u64(object: &serde_json::Map<String, Value>, field: &str) -> Result<
         .ok_or_else(|| ControlError::Invalid(format!("evolution score omits {field}")))
 }
 
+fn checked_counter_add(
+    counter: &mut u64,
+    delta: u64,
+    name: &'static str,
+) -> Result<(), ControlError> {
+    *counter = counter
+        .checked_add(delta)
+        .ok_or_else(|| ControlError::Invalid(format!("evolution {name} counter overflow")))?;
+    Ok(())
+}
+
 pub(super) fn run_evolution(
     batch: Arc<FeatureBatch>,
     identity: EvolutionIdentity,
@@ -340,8 +392,18 @@ pub(super) fn run_evolution(
             "evolution evidence limit cannot hold its identity header".into(),
         ));
     }
+    let header_bytes = header.len() as u64;
+    let candidate_byte_limit = bounds
+        .byte_limit
+        .checked_sub(MAX_EVOLUTION_FOOTER_BYTES)
+        .filter(|limit| *limit >= header_bytes)
+        .ok_or_else(|| {
+            ControlError::Invalid(
+                "evolution evidence limit cannot hold its header and summary reserve".into(),
+            )
+        })?;
     writer.write_all(&header)?;
-    let mut bytes = header.len() as u64;
+    let mut bytes = header_bytes;
     let mut structural = BTreeSet::new();
     let mut outcome_classes = BTreeMap::new();
     let mut tested = 0_usize;
@@ -350,6 +412,8 @@ pub(super) fn run_evolution(
     let mut outcome_expansion_rejections = 0_usize;
     let mut cascade_rejections = 0_usize;
     let mut rows_evaluated = 0_u64;
+    let mut prior_parent_scores = BTreeMap::<String, CandidateScore>::new();
+    let mut operator_scorecards = BTreeMap::<&'static str, OperatorScorecard>::new();
     let mut best: Option<(u64, u64, usize, PlanSpec)> = None;
     let mut truncated = false;
     let mut current = current
@@ -384,6 +448,17 @@ pub(super) fn run_evolution(
             }
             plan.name = format!("evolve-g{generation}-c{tested}");
             let compiled = CompiledPlan::compile(&plan, &batch.fields)?;
+            let parent_score = pending
+                .parent_hash
+                .as_ref()
+                .map(|hash| {
+                    prior_parent_scores.get(hash).copied().ok_or_else(|| {
+                        ControlError::Invalid(
+                            "evolution child does not resolve to an expanded parent".into(),
+                        )
+                    })
+                })
+                .transpose()?;
             let can_enter = |false_positive: u64, maximum_correct: u64| {
                 can_enter_beam(
                     &survivor_keys,
@@ -396,7 +471,29 @@ pub(super) fn run_evolution(
             let (evaluation, examined) =
                 evaluate_plan_cascaded(&batch, &compiled, Some(&can_enter))?;
             rows_evaluated = rows_evaluated.saturating_add(examined as u64);
+            let operator_scorecard = operator_scorecards.entry(pending.operator).or_default();
+            checked_counter_add(&mut operator_scorecard.trials, 1, "operator trial")?;
+            let examined = u64::try_from(examined)
+                .map_err(|_| ControlError::Invalid("row count does not fit u64".into()))?;
+            checked_counter_add(
+                &mut operator_scorecard.rows_evaluated,
+                examined,
+                "operator row",
+            )?;
+            let semantic_op_rows = examined
+                .checked_mul(compiled.op_count() as u64)
+                .ok_or_else(|| ControlError::Invalid("semantic operation count overflow".into()))?;
+            checked_counter_add(
+                &mut operator_scorecard.semantic_op_rows,
+                semantic_op_rows,
+                "operator semantic operation",
+            )?;
             let Some(evaluation) = evaluation else {
+                checked_counter_add(
+                    &mut operator_scorecard.cascade_rejected,
+                    1,
+                    "operator cascade rejection",
+                )?;
                 let record = json!({
                     "generation": generation,
                     "parent_hash": pending.parent_hash,
@@ -406,11 +503,17 @@ pub(super) fn run_evolution(
                     "plan": &plan,
                     "hash": &compiled.hash,
                     "evaluation": null,
+                    "impact": null,
+                    "cost": {
+                        "rows_evaluated": examined,
+                        "semantic_ops": compiled.op_count(),
+                        "semantic_op_rows": semantic_op_rows,
+                    },
                     "cascade": {"rejected": true, "rows_evaluated": examined},
                 });
                 let mut encoded = serde_json::to_vec(&record)?;
                 encoded.push(b'\n');
-                if bytes.saturating_add(encoded.len() as u64) > bounds.byte_limit {
+                if bytes.saturating_add(encoded.len() as u64) > candidate_byte_limit {
                     truncated = true;
                     break 'generations;
                 }
@@ -422,6 +525,30 @@ pub(super) fn run_evolution(
                 continue;
             };
             let equivalent_to = outcome_classes.get(&evaluation.outcome_hash).cloned();
+            let score = CandidateScore {
+                correct: evaluation.weighted_correct,
+                false_positive: evaluation.weighted_false_positive,
+                complexity: plan.program.len(),
+            };
+            let impact = parent_score.map(|parent| candidate_impact(score, parent));
+            checked_counter_add(&mut operator_scorecard.completed, 1, "operator completion")?;
+            if let Some(impact) = &impact {
+                checked_counter_add(
+                    &mut operator_scorecard.compared_to_parent,
+                    1,
+                    "operator parent comparison",
+                )?;
+                if impact.improved {
+                    checked_counter_add(
+                        &mut operator_scorecard.improved,
+                        1,
+                        "operator improvement",
+                    )?;
+                }
+            }
+            if evaluation.weighted_correct == evaluation.weighted_rows {
+                checked_counter_add(&mut operator_scorecard.perfect, 1, "operator perfect")?;
+            }
             let failure_shape =
                 failure_shape(&batch, &plan, evaluation.first_mismatch, &field_index);
             let failure_record = failure_shape_record(&batch, &failure_shape, &evaluation);
@@ -438,11 +565,17 @@ pub(super) fn run_evolution(
                 "hash": &compiled.hash,
                 "equivalent_to": equivalent_to,
                 "evaluation": &evaluation,
+                "impact": impact,
+                "cost": {
+                    "rows_evaluated": examined,
+                    "semantic_ops": compiled.op_count(),
+                    "semantic_op_rows": semantic_op_rows,
+                },
                 "failure_shape": failure_record,
             });
             let mut encoded = serde_json::to_vec(&record)?;
             encoded.push(b'\n');
-            if bytes.saturating_add(encoded.len() as u64) > bounds.byte_limit {
+            if bytes.saturating_add(encoded.len() as u64) > candidate_byte_limit {
                 truncated = true;
                 break 'generations;
             }
@@ -504,7 +637,16 @@ pub(super) fn run_evolution(
         let mut expanded_outcomes = BTreeSet::new();
         let expansion_capacity = bounds.max_candidates.saturating_sub(tested);
         let mut parents = Vec::with_capacity(bounds.beam.min(expansion_capacity));
-        for (_, _, _, outcome_hash, parent_hash, parent, first_mismatch) in ranked {
+        for (
+            correct,
+            false_positive,
+            complexity,
+            outcome_hash,
+            parent_hash,
+            parent,
+            first_mismatch,
+        ) in ranked
+        {
             if parents.len() == bounds.beam || parents.len() == expansion_capacity {
                 break;
             }
@@ -516,11 +658,18 @@ pub(super) fn run_evolution(
                 hash: parent_hash,
                 plan: parent,
                 first_mismatch,
+                score: CandidateScore {
+                    correct,
+                    false_positive,
+                    complexity,
+                },
             });
         }
         let parent_count = parents.len();
+        let mut next_parent_scores = BTreeMap::new();
         let mut carry = 0_usize;
         for (index, parent) in parents.into_iter().enumerate() {
+            next_parent_scores.insert(parent.hash.clone(), parent.score);
             let quota = fair_share(expansion_capacity, index, parent_count).saturating_add(carry);
             let before = current.len();
             let limit = before.saturating_add(quota).min(expansion_capacity);
@@ -536,7 +685,52 @@ pub(super) fn run_evolution(
             );
             carry = quota.saturating_sub(current.len().saturating_sub(before));
         }
+        prior_parent_scores = next_parent_scores;
     }
+    let candidate_bytes = bytes;
+    let mut footer_summary = json!({
+        "tested": tested,
+        "perfect": perfect,
+        "outcome_classes": outcome_classes.len(),
+        "structural_rejections": structural_rejections,
+        "outcome_expansion_rejections": outcome_expansion_rejections,
+        "cascade_rejections": cascade_rejections,
+        "rows_evaluated": rows_evaluated,
+        "operator_scorecards": &operator_scorecards,
+        "bytes": bytes,
+        "truncated": truncated,
+        "cancelled": progress.cancelled.load(Ordering::Acquire),
+        "low_priority": low_priority,
+    });
+    let mut footer = Vec::new();
+    let mut stable = false;
+    for _ in 0..4 {
+        footer = serde_json::to_vec(&json!({
+            "type": "summary",
+            "summary": &footer_summary,
+        }))?;
+        footer.push(b'\n');
+        let total_bytes = candidate_bytes
+            .checked_add(footer.len() as u64)
+            .ok_or_else(|| ControlError::Invalid("evolution evidence byte overflow".into()))?;
+        if footer_summary["bytes"].as_u64() == Some(total_bytes) {
+            stable = true;
+            break;
+        }
+        footer_summary["bytes"] = Value::from(total_bytes);
+    }
+    if !stable {
+        return Err(ControlError::Invalid(
+            "evolution summary byte count did not stabilize".into(),
+        ));
+    }
+    if footer.len() as u64 > MAX_EVOLUTION_FOOTER_BYTES {
+        return Err(ControlError::Invalid(
+            "evolution summary exceeds its reserved evidence bound".into(),
+        ));
+    }
+    writer.write_all(&footer)?;
+    bytes = candidate_bytes + footer.len() as u64;
     writer.flush()?;
     progress.done.store(true, Ordering::Release);
     Ok(json!({
@@ -547,6 +741,7 @@ pub(super) fn run_evolution(
         "outcome_expansion_rejections": outcome_expansion_rejections,
         "cascade_rejections": cascade_rejections,
         "rows_evaluated": rows_evaluated,
+        "operator_scorecards": operator_scorecards,
         "bytes": bytes,
         "truncated": truncated,
         "cancelled": progress.cancelled.load(Ordering::Acquire),
@@ -962,5 +1157,47 @@ mod tests {
                 assert!(shares.iter().max().unwrap() - shares.iter().min().unwrap() <= 1);
             }
         }
+    }
+
+    #[test]
+    fn candidate_impact_uses_the_exact_beam_order() {
+        let parent = CandidateScore {
+            correct: 8,
+            false_positive: 1,
+            complexity: 2,
+        };
+        let higher_recall = candidate_impact(
+            CandidateScore {
+                correct: 9,
+                false_positive: 3,
+                complexity: 4,
+            },
+            parent,
+        );
+        assert!(higher_recall.improved);
+        assert_eq!(higher_recall.correct_gain, 1);
+        assert_eq!(higher_recall.false_positive_increase, 2);
+
+        let simpler = candidate_impact(
+            CandidateScore {
+                correct: 8,
+                false_positive: 1,
+                complexity: 1,
+            },
+            parent,
+        );
+        assert!(simpler.improved);
+
+        let worse = candidate_impact(
+            CandidateScore {
+                correct: 7,
+                false_positive: 0,
+                complexity: 1,
+            },
+            parent,
+        );
+        assert!(!worse.improved);
+        assert_eq!(worse.correct_loss, 1);
+        assert_eq!(worse.false_positive_reduction, 1);
     }
 }

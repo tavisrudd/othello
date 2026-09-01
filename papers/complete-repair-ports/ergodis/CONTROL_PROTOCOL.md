@@ -160,6 +160,22 @@ when a parent has fewer mutations.  This preserves beam diversity without
 building a candidate list per parent or increasing the configured global
 candidate bound.
 
+Each evaluated child records its exact change from the selected parent under
+the same ordering used by the beam: weighted correctness first, then fewer
+false positives, then lower semantic complexity.  The record also carries the
+rows evaluated, semantic operation count, and their saturating product as a
+deterministic evaluation-cost proxy.  The completion summary aggregates
+trials, completed and cascade-rejected evaluations, parent comparisons,
+improvements, perfect candidates, rows, and semantic-operation rows by the
+finite built-in mutation operator label.  Direct and replay roots therefore do
+not dilute an operator's parent-relative improvement rate.  Only the previous
+generation's bounded expanded-parent scores are retained for lineage joins.
+The archive reserves 4 KiB before admitting candidate records and always ends
+with a compact summary footer, including on cancellation or candidate
+truncation.  Its recorded byte count includes the footer and equals the status
+response.  A limit too small for the identity header plus this reserve fails
+before writing a partial header.
+
 Socket I/O, JSON, evidence serialization, and plan compilation happen outside
 worker hot loops.  Uncontrolled solves compile without the control-plane
 feature.  Controlled workers retain only the existing coarse safe-point flag;

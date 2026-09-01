@@ -2346,9 +2346,35 @@ mod tests {
         assert_eq!(completed["state"], "complete");
         assert!(completed["summary"]["tested"].as_u64().unwrap() >= 2);
         assert!(completed["summary"]["perfect"].as_u64().unwrap() >= 1);
+        assert_eq!(
+            completed["summary"]["operator_scorecards"]["counterexample-threshold"]["trials"],
+            2
+        );
+        assert_eq!(
+            completed["summary"]["operator_scorecards"]["counterexample-threshold"]["improved"],
+            2
+        );
+        assert_eq!(
+            completed["summary"]["operator_scorecards"]["counterexample-threshold"]
+                ["compared_to_parent"],
+            2
+        );
+        assert_eq!(
+            completed["summary"]["operator_scorecards"]["counterexample-threshold"]["perfect"],
+            1
+        );
+        assert_eq!(
+            completed["summary"]["operator_scorecards"]["counterexample-threshold"]
+                ["semantic_op_rows"],
+            24
+        );
+        assert_eq!(
+            completed["summary"]["operator_scorecards"]["seed"]["compared_to_parent"],
+            0
+        );
         let relative = completed["path"].as_str().unwrap();
         let evidence = fs::read_to_string(campaign.manifest.run_dir.join(relative)).unwrap();
-        assert_eq!(evidence.lines().count(), 5);
+        assert_eq!(evidence.lines().count(), 6);
         let records = evidence
             .lines()
             .map(|line| serde_json::from_str::<Value>(line).unwrap())
@@ -2366,11 +2392,17 @@ mod tests {
             .into_iter()
             .map(|value| value.as_str().unwrap())
             .collect::<BTreeSet<_>>();
-        let parent_hashes = records[3..]
+        let parent_hashes = records[3..5]
             .iter()
             .map(|record| record["parent_hash"].as_str().unwrap())
             .collect::<BTreeSet<_>>();
         assert_eq!(parent_hashes, seed_hashes);
+        assert!(records[3..5]
+            .iter()
+            .all(|record| record["impact"]["improved"] == true));
+        assert!(records[3..5]
+            .iter()
+            .all(|record| record["cost"]["semantic_op_rows"] == 12));
         assert!(records
             .iter()
             .skip(3)
@@ -2379,6 +2411,44 @@ mod tests {
             .iter()
             .skip(3)
             .all(|record| record["operator"] != "seed"));
+        assert_eq!(records[5]["type"], "summary");
+        assert_eq!(records[5]["summary"]["bytes"], evidence.len() as u64);
+        assert_eq!(
+            records[5]["summary"]["bytes"],
+            completed["summary"]["bytes"]
+        );
+        assert_eq!(
+            records[5]["summary"]["operator_scorecards"],
+            completed["summary"]["operator_scorecards"]
+        );
+
+        let rejected = campaign
+            .evolution_start(&json!({
+                "seeds": [records[1]["plan"].clone()],
+                "evidence_name": "too-small",
+                "generations": 1,
+                "beam": 1,
+                "max_candidates": 1,
+                "max_evidence_bytes": 1024,
+            }))
+            .unwrap();
+        let rejected_path = campaign
+            .manifest
+            .run_dir
+            .join(rejected["path"].as_str().unwrap());
+        let rejected = loop {
+            let status = campaign.evolution_status().unwrap();
+            if status["state"] != "running" {
+                break status;
+            }
+            thread::yield_now();
+        };
+        assert_eq!(rejected["state"], "failed");
+        assert!(rejected["error"]
+            .as_str()
+            .unwrap()
+            .contains("summary reserve"));
+        assert_eq!(fs::metadata(rejected_path).unwrap().len(), 0);
     }
 
     #[test]
