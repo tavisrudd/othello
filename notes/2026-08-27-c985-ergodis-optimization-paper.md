@@ -852,9 +852,25 @@ files are disposable and may be deleted at any time.
    explicit compatible-batch replay obligation.  Evidence exhaustion rejects
    only the fragment rather than truncating candidate search, and all fragment
    and rejection work is footer-visible.  Strict all-target/all-feature clippy
-   and the complete suite pass.  Next add bounded type-compatible fragment
-   composition and counterexample-set replay; do not import a learned proposer
-   before that accumulation layer has an exact control.
+   and the complete suite pass.
+
+   Commit `357f7a7ca` adds the first typed theorem-DAG composition rule.
+   Zero-false-positive predicates with identical role, output type, and scope
+   may be joined by OR.  Coverage is retained as an adaptive sparse-index or
+   dense bitmap.  A wordwise union and exact weighted scan reject pairs that
+   add no positive mass before VM compilation; useful unions are then compiled
+   and replayed on every frozen-batch row, with any negative hit or
+   bitmap/weight disagreement failing closed.  The disjoint-support control
+   composes two one-row fragments into exact two-row coverage, and the
+   end-to-end archive contains the two semantic parent hashes and the
+   `or-zero-false-positive` derivation edge.  Attempts are bounded to 16 per
+   generation and 64 per campaign, acceptances to eight per generation inside
+   the shared 64-node ledger, and all counters are footer-visible.  The result
+   remains explicitly untrusted pending its compatible-batch replay
+   obligation.  Strict all-target/all-feature clippy and the complete suite
+   pass.  Next persist and replay the accumulated fragment DAG across
+   compatible campaigns, then add counterexample-separating premise selection;
+   do not import a learned proposer before those exact controls.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
