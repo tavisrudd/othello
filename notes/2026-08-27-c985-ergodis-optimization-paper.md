@@ -767,9 +767,20 @@ files are disposable and may be deleted at any time.
    100,000-candidate bound gains one word per ranked candidate rather than
    roughly 10 MB of retained failure records.  Strict all-target/all-feature
    clippy and the full all-target/all-feature suite pass.  This remains entirely
-   in the daemon thread.  Next fix mutation-parent fairness: the current eager
-   generator can let the first selected parent consume the remaining candidate
-   budget even when the beam contains several outcome-distinct parents.
+   in the daemon thread.
+
+   Commit `1277d783e` fixes mutation-parent fairness.  Expansion first selects
+   outcome-distinct parents, divides the remaining global candidate budget into
+   shares differing by at most one, and carries unused capacity forward.  An
+   earlier parent can no longer consume a later parent's reservation, and the
+   implementation retains one shared bounded candidate vector rather than a
+   population per parent.  The exact two-parent/two-slot control records one
+   child from each source hash; exhaustive small integer tests prove that the
+   share function covers the full budget without starvation.  Strict clippy and
+   the full all-target/all-feature suite pass.  The next evolve frontier is the
+   SOTA audit's P0 maximum-oriented selection: attach bounded cost/impact
+   scorecards to parent/operator pairs before importing semantic islands or any
+   learned proposer.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
