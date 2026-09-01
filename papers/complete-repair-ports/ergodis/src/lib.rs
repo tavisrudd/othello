@@ -23,6 +23,7 @@ pub mod css_distance;
 pub mod cyclic_action;
 pub mod defect;
 pub mod family_response;
+pub mod fibre;
 pub mod field;
 pub mod frozen_shortest_path;
 pub mod graph_obstruction;
@@ -135,6 +136,10 @@ pub use cyclic_action::{CyclicOrbitLockError, CyclicOrbitLocks};
 pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
     FamilyResponseTable,
+};
+pub use fibre::{
+    compile_dense_fibres, verify_dense_fibres, DenseFibreBounds, DenseFibreError, DenseFibreIndex,
+    ExhaustiveFibre, FibreRepresentative,
 };
 pub use field::{BinarySmallField, FieldError, FiniteField, Gf4, Prime, SmallField};
 pub use frozen_shortest_path::{

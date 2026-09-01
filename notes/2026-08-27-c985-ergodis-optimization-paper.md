@@ -765,6 +765,35 @@ files are disposable and may be deleted at any time.
    into them.  The accepted incremental safeguard architecture is recorded in
    `2026-08-31-c1030-ergodis-correctness-safeguards-adr.md`.
 
+   **Landed status.** The reusable binary-kernel extraction and specialization
+   gate are durable in `648b8e7e3` and `9abc56b0c`; the rank-deficient row-space
+   repair is `bf3d9e955`; the strict/reproducible certiis boundary is
+   `e88075134`; independent certdist statement replay is `9e7073401`; the
+   nonvacuous extension-field control is `8b7dc358f` plus `2b2b3e39d`; the
+   stable wide-shard frontier is `8d71c3b51`; consistent evolve ranking is
+   `77f8e915b`; mutation-sensitive evidence checks are `01b3a031b`; exact versus
+   partial metrics and capped-orbit evidence are `27781511c`, `b7c953ae9`, and
+   `9fb39c662`; C80's observed scope is bound in `f903727cf`; and the incremental
+   safeguard ADR is `92f6998e1`.  The two SEV1 claims were independently
+   re-evaluated in `ec64125d1`: finding 20 reverses the isolated microbenchmark
+   result but leaves the PRS application decision unchanged because elimination
+   is below the 0.01% profile threshold; finding 21 invalidates the old generic
+   cover rationale but not the witness-free BB288 result.  Commit `11ab6fbe8`
+   additionally scopes the v2 shard manifest to a consistent effective radius
+   and mutation-tests odd-radius normalization.
+
+   **Still open.** Finding 24's mod-49 compiler retains one arbitrary member of
+   a fibre even though exact q0 is not constant on that fibre.  Findings 4, 5,
+   6, 7, 22, 23, and 30 have tested working-tree repairs or honest scope
+   changes, but their sources remain untracked or owned by another active
+   session and therefore are not durable evidence.  Do not absorb that tree.
+   The next owned safeguard is a reusable bounded fibre aggregation primitive
+   whose type distinguishes a representative from an exhaustive fibre and
+   whose reductions are checked against a small exhaustive oracle; the private
+   mod-49 client may migrate only after its source chain is committed by its
+   owner.  The shard ledger still needs a cold per-anchor frontier commitment
+   before its manifest alone is a mathematical cover certificate.
+
    Treat C1016's “Public-core enhancement ledger” as a recurring evolve input,
    not as campaign authority.  Its three current reusable requests are a
    relational evolution grammar, provenance-bound counterexample-guided

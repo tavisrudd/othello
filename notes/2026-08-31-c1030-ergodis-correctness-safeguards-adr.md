@@ -150,6 +150,21 @@ and typed set-theorem templates with canonical semantics and independent
 witness reconstruction.  Campaign-specific fields and conclusions remain in
 `ergodis-private`.
 
+### 9. Quotients distinguish representatives from exhaustive fibres
+
+A coarse signature may replace its fibre by one representative only after a
+checked constancy theorem shows that every downstream predicate factors through
+that signature. Otherwise the compiler retains every preimage or refines the
+signature. Public code represents these cases with different types:
+`FibreRepresentative` is explicitly non-exhaustive, while `ExhaustiveFibre`
+supports an allocation-free scan over a bounded CSR `DenseFibreIndex`.
+Independent replay checks coverage, uniqueness, and source-key membership.
+
+This is the capability-level safeguard for findings 7 and 24. It does not by
+itself repair either private campaign: migration requires their source chain to
+be committed and their exact downstream predicates to be replayed over every
+retained member.
+
 ## Tactical adoption order
 
 1. Close confirmed SEV1/SEV2 defects with isolated commits and negative

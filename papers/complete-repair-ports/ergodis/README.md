@@ -358,6 +358,22 @@ field. A flattened base-field representation of a proper extension does not
 carry enough information to recover extension-field scalar multiplication; a
 future generalized API must receive that action explicitly.
 
+### Exact fibre indexing
+
+`compile_dense_fibres` builds a bounded CSR partition from one dense key per
+source member. It retains every member of every fibre in source order using two
+flat allocations; subsequent fibre scans are allocation-free. The API uses
+distinct `FibreRepresentative` and `ExhaustiveFibre` types so selecting one
+convenient preimage cannot be confused with establishing a predicate over the
+entire equivalence class. `verify_dense_fibres` independently replays coverage,
+uniqueness, and key membership against the source keys.
+
+This is appropriate when a coarse modular, orbit, or signature quotient is
+used to generate candidates but a later exact predicate is not proved constant
+on quotient classes. If constancy is proved, callers may explicitly use a
+representative; otherwise they must scan the exhaustive fibre or compile a
+separately verified sufficient refinement.
+
 ### Parallel execution
 
 `compose`, `transfer-tower`, and `schedule` accept `--parallel`. The worker
