@@ -105,18 +105,47 @@ seeded list; the task should extend it, not restart it.
   <https://arxiv.org/pdf/2209.05838>
 - **SATGraf** — visualizes how the community structure of a CNF formula evolves during solving.
 
+- **Optuna Dashboard** — the reference design for watching a long optimization run. Its Live Update
+  mode continuously refreshes the optimization-history plot, the hyperparameter-importance ranking,
+  and the analytics sections, so an operator can see convergence starting and intervene or stop
+  early. Its parallel-coordinates plot is the standard way to show high-dimensional configuration
+  space against an objective; there is an OptunaHub variant that draws the trajectories as monotonic
+  Pchip curves instead of straight lines specifically to cut visual clutter in high dimensions.
+  Worth copying: live-update semantics, importance ranking as a first-class panel, and
+  parallel coordinates as the campaign-configuration view.
+  <https://optuna.readthedocs.io/en/stable/tutorial/10_key_features/005_visualization.html>
+  and <https://hub.optuna.org/visualization/>
+- **Interactive graph library landscape, as of 2026.** The working rule from current comparisons is:
+  Cytoscape.js when graph algorithms and layouts are part of the product rather than setup code
+  (it is the richest all-in-one toolkit, ~500K weekly downloads); Sigma.js when the graph is large,
+  because it is a WebGL renderer over graphology and handles 100K+ nodes, at the cost of not being
+  batteries-included for analysis; vis-network for interactive diagrams; AntV G6 for small to
+  moderate graphs with rich styling; React Flow for node-based editor UIs, low-code workflow
+  builders, and diagram builders, but it is weak for large-scale exploratory graph analysis. The
+  comparisons also warn that published node-count limits are directional only — layout cost, edge
+  density, label rendering, and hit-testing dominate real perceived performance, so any choice has
+  to be tested on a representative Ergodis graph on the target machine.
+  <https://www.pkgpulse.com/guides/cytoscape-vs-vis-network-vs-sigma-graph-visualization-2026>
+  and <https://linkurious.com/blog/top-javascript-graph-libraries/>
+
+  Provisional read for this task, to be confirmed rather than assumed: an attack-plan DAG is small
+  and editor-shaped, which points at React Flow or Cytoscape.js; an evolution lineage graph over a
+  long campaign is large and exploratory, which points at Sigma.js. If both views are wanted, that
+  is an argument for two renderers rather than one compromise.
+
 ### Still to survey
 
-- **Experiment and campaign dashboards**: Optuna Dashboard, Weights & Biases, Aim, TensorBoard,
-  Ray Dashboard, MLflow. Take the interaction patterns for long-running jobs — live metric streams,
-  run comparison, parallel-coordinates over the configuration space, pruning/early-stop display.
+- **Remaining experiment-tracking dashboards**: Weights & Biases, Aim, TensorBoard, Ray Dashboard,
+  MLflow. Take the interaction patterns for long-running jobs — live metric streams, run comparison,
+  and pruning/early-stop display. The Optuna entry above already covers the core pattern; this is
+  for what the others add beyond it.
 - **Proof and certificate presentation**: the Lean infoview, Alectryon, Why3's IDE, Isabelle/jEdit,
   proof-object and dependency-graph browsers. The question to answer: how do these make a
   machine-checked object legible without asking the reader to read the whole object?
-- **Interactive DAG rendering, current generation**: Cytoscape.js, Sigma.js, AntV G6, React Flow,
-  d3-dag, and ELK / dagre / Sugiyama layout engines; plus GPU-accelerated large-graph options such
-  as Cosmograph or regl-based renderers. Determine the practical node/edge ceiling for each at
-  interactive frame rates, because campaign lineage graphs will get large.
+- **DAG layout engines**, which the library survey above did not settle: ELK, dagre, d3-dag, and
+  Sugiyama-style layered layout generally. Layout cost was named as a dominant performance factor,
+  so this is the open half of the rendering question. Also check GPU-accelerated large-graph
+  renderers such as Cosmograph.
 - **Provenance and workflow-DAG UIs**: Airflow, Prefect, Dagster, Nextflow Tower, and the W3C PROV
   visual conventions. These solve "show a large DAG of completed and running work to an operator"
   and their affordances are worth copying rather than reinventing.
@@ -190,8 +219,13 @@ Allocated C1031, inspected the Ergodis control plane and CLI surface to establis
 ran two of the planned state-of-the-art searches, and wrote this charter. The quota window ended
 minutes into the session, so the budget clock has not meaningfully started.
 
-**Next step on resume**: continue the state-of-the-art survey from the "Still to survey" list above,
-starting with OpenEvolve's `scripts/visualizer.py` (read the actual code) and the interactive-DAG
-rendering libraries, since those two decide the prototype's shape. Then read
+A second short window later the same day added the Optuna Dashboard and the 2026 graph-library
+comparison to the survey. A recurring in-session cron job was registered to re-enter this task
+whenever the REPL is idle and quota permits; it is session-only and expires after seven days, so a
+cold session must be resumed by hand from this file.
+
+**Next step on resume**: read OpenEvolve's `scripts/visualizer.py` as actual code — it is the
+closest existing thing to the evolve-campaign view and will either be adaptable or will show why
+not. Then settle the DAG layout-engine question left open above. Then read
 `ergodis/src/control/vm.rs` and `ergodis/src/bin/ergodisctl.rs` in full to fix the real data model
-before writing any UI code.
+before writing any UI code. Only after those three should the prototype be started.
