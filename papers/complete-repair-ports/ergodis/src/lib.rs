@@ -130,7 +130,7 @@ pub use family_response::{
     compile_minima_family_responses, FamilyResponseDictionary, FamilyResponseError,
     FamilyResponseTable,
 };
-pub use field::{FieldError, FiniteField, Gf4, Prime, SmallField};
+pub use field::{BinarySmallField, FieldError, FiniteField, Gf4, Prime, SmallField};
 pub use frozen_shortest_path::{
     FrozenShortestPathError, FrozenShortestPathMetrics, FrozenShortestPathPlan,
     FrozenShortestPathResult, FrozenShortestPathWorkspace, ValidatedFrozenShortestPathObjective,

@@ -1,9 +1,9 @@
-use crate::field::SmallField;
+use crate::field::{BinarySmallField, SmallField};
 use thiserror::Error;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Error)]
 pub enum ProjectiveError {
-    #[error("supported ternary field orders are 9 and 27")]
+    #[error("the requested field/order specialization is unsupported")]
     UnsupportedOrder,
     #[error("projective-plane incidence construction failed")]
     InvalidIncidence,
@@ -119,6 +119,112 @@ impl<'a> ProjectiveIndex<'a> {
         let mut point = vec![0; usize::from(self.vector_dimension)];
         self.point(index, &mut point)?;
         Ok(point.into_boxed_slice())
+    }
+}
+
+/// Allocation-free rank/unrank specialized for `PG(d, 2^H)`.
+///
+/// This is an exact representation specialization of [`ProjectiveIndex`].
+/// Base-`2^H` multiplication and digit extraction become shifts and masks,
+/// while normalized coordinate multiplication uses [`BinarySmallField`].
+/// Construction validates the runtime field once, outside client loops.
+#[repr(C)]
+#[derive(Clone, Debug)]
+pub struct BinaryProjectiveIndex<'a, const H: u8> {
+    offsets: Box<[u64]>,
+    field: BinarySmallField<'a, H>,
+    point_count: u64,
+    vector_dimension: u8,
+    _pad: [u8; 7],
+}
+
+const _: () = assert!(std::mem::size_of::<BinaryProjectiveIndex<'static, 1>>() == 40);
+const _: () = assert!(std::mem::align_of::<BinaryProjectiveIndex<'static, 1>>() == 8);
+
+impl<'a, const H: u8> BinaryProjectiveIndex<'a, H> {
+    pub fn new(field: &'a SmallField, projective_dimension: u8) -> Result<Self, ProjectiveError> {
+        let field = field
+            .binary_extension::<H>()
+            .map_err(|_| ProjectiveError::UnsupportedOrder)?;
+        let vector_dimension = projective_dimension
+            .checked_add(1)
+            .ok_or(ProjectiveError::DimensionOverflow)?;
+        let mut offsets = Vec::with_capacity(usize::from(vector_dimension) + 1);
+        offsets.push(0_u64);
+        let highest_shift = u32::from(H) * u32::from(vector_dimension - 1);
+        let mut block = 1_u64
+            .checked_shl(highest_shift)
+            .ok_or(ProjectiveError::DimensionOverflow)?;
+        let mut point_count = 0_u64;
+        for _ in 0..vector_dimension {
+            point_count = point_count
+                .checked_add(block)
+                .ok_or(ProjectiveError::DimensionOverflow)?;
+            offsets.push(point_count);
+            block >>= H;
+        }
+        Ok(Self {
+            offsets: offsets.into_boxed_slice(),
+            field,
+            point_count,
+            vector_dimension,
+            _pad: [0; 7],
+        })
+    }
+
+    #[inline]
+    pub const fn projective_dimension(&self) -> u8 {
+        self.vector_dimension - 1
+    }
+
+    #[inline]
+    pub const fn point_count(&self) -> u64 {
+        self.point_count
+    }
+
+    /// Rank a nonzero homogeneous vector with canonical `GF(2^H)` entries.
+    #[inline(always)]
+    pub fn index(&self, coordinates: &[u8]) -> Result<u64, ProjectiveError> {
+        if coordinates.len() != usize::from(self.vector_dimension) {
+            return Err(ProjectiveError::InvalidPoint);
+        }
+        let mut pivot = None;
+        let mut invalid = 0_u16;
+        for (position, &coordinate) in coordinates.iter().enumerate() {
+            invalid |= u16::from(coordinate) >> H;
+            if pivot.is_none() && coordinate != 0 {
+                pivot = Some(position);
+            }
+        }
+        if invalid != 0 {
+            return Err(ProjectiveError::InvalidPoint);
+        }
+        let pivot = pivot.ok_or(ProjectiveError::InvalidPoint)?;
+        let inverse = self.field.inverse_nonzero(coordinates[pivot]);
+        let mut suffix = 0_u64;
+        for &coordinate in &coordinates[pivot + 1..] {
+            suffix = (suffix << H) | u64::from(self.field.mul(coordinate, inverse));
+        }
+        Ok(self.offsets[pivot] + suffix)
+    }
+
+    /// Write the canonical representative for an index into caller storage.
+    #[inline(always)]
+    pub fn point(&self, index: u64, output: &mut [u8]) -> Result<(), ProjectiveError> {
+        if index >= self.point_count || output.len() != usize::from(self.vector_dimension) {
+            return Err(ProjectiveError::PointOutOfRange);
+        }
+        output.fill(0);
+        let pivot = self.offsets[1..].partition_point(|&end| end <= index);
+        output[pivot] = 1;
+        let mut suffix = index - self.offsets[pivot];
+        let mask = (1_u64 << H) - 1;
+        for coordinate in output[pivot + 1..].iter_mut().rev() {
+            *coordinate = (suffix & mask) as u8;
+            suffix >>= H;
+        }
+        debug_assert_eq!(suffix, 0);
+        Ok(())
     }
 }
 
@@ -358,6 +464,60 @@ mod tests {
         assert_eq!(indexer.point_count(), 16u64.pow(3) + 16u64.pow(2) + 16 + 1);
         let last = indexer.point_owned(indexer.point_count() - 1).unwrap();
         assert_eq!(&*last, &[0, 0, 0, 1]);
+    }
+
+    fn binary_index_agrees<const H: u8>(limit: u64) {
+        let field = SmallField::new(2, H).unwrap();
+        let generic = ProjectiveIndex::new(&field, 4).unwrap();
+        let binary = BinaryProjectiveIndex::<H>::new(&field, 4).unwrap();
+        assert_eq!(generic.point_count(), binary.point_count());
+        let mut generic_point = [0_u8; 5];
+        let mut binary_point = [0_u8; 5];
+        for index in 0..generic.point_count().min(limit) {
+            generic.point(index, &mut generic_point).unwrap();
+            binary.point(index, &mut binary_point).unwrap();
+            assert_eq!(generic_point, binary_point);
+            assert_eq!(binary.index(&binary_point).unwrap(), index);
+        }
+    }
+
+    #[test]
+    fn binary_projective_index_matches_generic_rank_and_unrank() {
+        binary_index_agrees::<3>(u64::MAX);
+        binary_index_agrees::<4>(10_000);
+        binary_index_agrees::<5>(10_000);
+        binary_index_agrees::<6>(10_000);
+        binary_index_agrees::<7>(10_000);
+        binary_index_agrees::<8>(10_000);
+
+        let field = SmallField::new(2, 6).unwrap();
+        assert!(matches!(
+            BinaryProjectiveIndex::<4>::new(&field, 4),
+            Err(ProjectiveError::UnsupportedOrder)
+        ));
+        let binary = BinaryProjectiveIndex::<6>::new(&field, 4).unwrap();
+        assert_eq!(
+            binary.index(&[1, 0, 64, 0, 0]),
+            Err(ProjectiveError::InvalidPoint)
+        );
+    }
+
+    #[test]
+    fn binary_projective_hot_rank_and_unrank_allocate_nothing() {
+        let field = SmallField::new(2, 6).unwrap();
+        let binary = BinaryProjectiveIndex::<6>::new(&field, 4).unwrap();
+        let mut point = [0_u8; 5];
+        let (checksum, events) = crate::test_alloc::measure_allocations(|| {
+            let _guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+            let mut checksum = 0_u64;
+            for index in 0..10_000 {
+                binary.point(index, &mut point).unwrap();
+                checksum ^= binary.index(&point).unwrap();
+            }
+            checksum
+        });
+        assert_eq!(checksum, 0);
+        assert_eq!(events, crate::test_alloc::AllocationEvents::default());
     }
 
     #[test]

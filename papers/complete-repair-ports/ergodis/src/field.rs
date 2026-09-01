@@ -12,6 +12,8 @@ pub enum FieldError {
     InvalidExtensionDegree,
     #[error("the modulus must be monic, reduced, and irreducible over the prime field")]
     InvalidExtensionModulus,
+    #[error("the field is not the requested binary extension GF(2^h)")]
+    BinaryExtensionMismatch,
 }
 
 mod private {
@@ -199,6 +201,77 @@ pub struct SmallField {
     inverse: Box<[u8]>,
 }
 
+/// Monomorphized arithmetic view of a validated runtime field `GF(2^H)`.
+///
+/// Construction checks the characteristic and order once.  Arithmetic then
+/// uses XOR for addition/subtraction and a shift-indexed multiplication table;
+/// no run-constant field-kind branch remains in client loops.  As with
+/// [`FiniteField`], arithmetic operands must use the canonical field encoding.
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug)]
+pub struct BinarySmallField<'a, const H: u8>(&'a SmallField);
+
+const _: () = assert!(std::mem::size_of::<BinarySmallField<'static, 1>>() == 8);
+const _: () = assert!(std::mem::align_of::<BinarySmallField<'static, 1>>() == 8);
+
+impl<'a, const H: u8> BinarySmallField<'a, H> {
+    pub fn new(field: &'a SmallField) -> Result<Self, FieldError> {
+        let expected_order = 1_u16
+            .checked_shl(u32::from(H))
+            .filter(|&order| H != 0 && order <= 256)
+            .ok_or(FieldError::BinaryExtensionMismatch)?;
+        if field.characteristic != 2 || field.order != expected_order {
+            return Err(FieldError::BinaryExtensionMismatch);
+        }
+        Ok(Self(field))
+    }
+
+    #[inline]
+    pub const fn degree(self) -> u8 {
+        H
+    }
+
+    #[inline]
+    pub const fn order(self) -> u16 {
+        1_u16 << H
+    }
+
+    #[inline(always)]
+    pub fn add(self, left: u8, right: u8) -> u8 {
+        debug_assert!(u16::from(left) < self.order() && u16::from(right) < self.order());
+        left ^ right
+    }
+
+    #[inline(always)]
+    pub fn sub(self, left: u8, right: u8) -> u8 {
+        self.add(left, right)
+    }
+
+    #[inline(always)]
+    pub fn mul(self, left: u8, right: u8) -> u8 {
+        debug_assert!(u16::from(left) < self.order() && u16::from(right) < self.order());
+        self.0.multiply[(usize::from(left) << H) | usize::from(right)]
+    }
+
+    #[inline]
+    pub fn inverse(self, value: u8) -> Result<u8, FieldError> {
+        if value == 0 {
+            return Err(FieldError::ZeroInverse);
+        }
+        self.0
+            .inverse
+            .get(usize::from(value))
+            .copied()
+            .ok_or(FieldError::InvalidElement)
+    }
+
+    #[inline(always)]
+    pub(crate) fn inverse_nonzero(self, value: u8) -> u8 {
+        debug_assert!(value != 0 && u16::from(value) < self.order());
+        self.0.inverse[usize::from(value)]
+    }
+}
+
 impl SmallField {
     /// Construct the canonical field using the lexicographically first monic
     /// irreducible polynomial in polynomial-basis encoding.
@@ -211,6 +284,11 @@ impl SmallField {
         let modulus =
             first_irreducible(characteristic, degree).ok_or(FieldError::InvalidExtensionModulus)?;
         Self::from_modulus(characteristic, &modulus[..=usize::from(degree)])
+    }
+
+    /// Validate once and borrow this runtime field as `GF(2^H)` arithmetic.
+    pub fn binary_extension<const H: u8>(&self) -> Result<BinarySmallField<'_, H>, FieldError> {
+        BinarySmallField::new(self)
     }
 
     /// Construct a field from low-to-high coefficients of a monic irreducible
@@ -576,6 +654,41 @@ mod tests {
                 }
             }
         }
+    }
+
+    fn binary_extension_agrees<const H: u8>() {
+        let field = SmallField::new(2, H).unwrap();
+        let binary = field.binary_extension::<H>().unwrap();
+        assert_eq!(binary.degree(), H);
+        assert_eq!(binary.order(), field.order());
+        for left in 0..field.order() {
+            let left = left as u8;
+            assert_eq!(binary.inverse(left), field.inverse(left));
+            for right in 0..field.order() {
+                let right = right as u8;
+                assert_eq!(binary.add(left, right), field.add(left, right));
+                assert_eq!(binary.sub(left, right), field.sub(left, right));
+                assert_eq!(binary.mul(left, right), field.mul(left, right));
+            }
+        }
+    }
+
+    #[test]
+    fn binary_extension_view_matches_runtime_tables() {
+        binary_extension_agrees::<3>();
+        binary_extension_agrees::<4>();
+        binary_extension_agrees::<5>();
+        binary_extension_agrees::<6>();
+        binary_extension_agrees::<7>();
+        binary_extension_agrees::<8>();
+        assert!(matches!(
+            SmallField::new(3, 2).unwrap().binary_extension::<3>(),
+            Err(FieldError::BinaryExtensionMismatch)
+        ));
+        assert!(matches!(
+            SmallField::new(2, 3).unwrap().binary_extension::<4>(),
+            Err(FieldError::BinaryExtensionMismatch)
+        ));
     }
 
     #[test]
