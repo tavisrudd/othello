@@ -44,15 +44,19 @@ use anyhow::{bail, Context, Result};
 use clap::{Parser, ValueEnum};
 use ergodis::field::SmallField;
 use ergodis::matrix::Matrix;
-#[cfg(not(feature = "c1018-sparse-action"))]
+#[cfg(feature = "c1018-lane-action")]
+use ergodis::projective::BinaryLaneProjectiveLinearActionPack;
+#[cfg(not(any(feature = "c1018-lane-action", feature = "c1018-sparse-action")))]
 use ergodis::projective::BinaryProjectiveLinearActionPack;
-#[cfg(feature = "c1018-sparse-action")]
+#[cfg(all(not(feature = "c1018-lane-action"), feature = "c1018-sparse-action"))]
 use ergodis::projective::BinarySparseProjectiveLinearActionPack;
 use ergodis::projective::{ProjectiveIndex, ProjectiveLinearActionPack};
 
-#[cfg(not(feature = "c1018-sparse-action"))]
+#[cfg(feature = "c1018-lane-action")]
+type BinaryActionPack<'a> = BinaryLaneProjectiveLinearActionPack<'a, 6, 5, 3>;
+#[cfg(not(any(feature = "c1018-lane-action", feature = "c1018-sparse-action")))]
 type BinaryActionPack<'a> = BinaryProjectiveLinearActionPack<'a, 6, 3>;
-#[cfg(feature = "c1018-sparse-action")]
+#[cfg(all(not(feature = "c1018-lane-action"), feature = "c1018-sparse-action"))]
 type BinaryActionPack<'a> = BinarySparseProjectiveLinearActionPack<'a, 6, 3>;
 
 const _: Option<DefaultHasher> = None;

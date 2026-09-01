@@ -904,6 +904,275 @@ impl<'pack, 'workspace, 'field, const H: u8, const GENERATORS: usize>
 }
 
 #[repr(C)]
+#[derive(Clone, Copy, Debug)]
+struct BinaryLaneAction {
+    unit_start: u32,
+    unit_end: u32,
+    weighted_start: u32,
+    weighted_end: u32,
+}
+
+const _: () = assert!(std::mem::size_of::<BinaryLaneAction>() == 16);
+const _: () = assert!(std::mem::align_of::<BinaryLaneAction>() == 4);
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug)]
+struct BinaryLaneUnitTerm {
+    lane_mask: u64,
+    input_shift: u8,
+    _pad: [u8; 7],
+}
+
+const _: () = assert!(std::mem::size_of::<BinaryLaneUnitTerm>() == 16);
+const _: () = assert!(std::mem::align_of::<BinaryLaneUnitTerm>() == 8);
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug)]
+struct BinaryLaneWeightedTerm {
+    input_shift: u8,
+    output_shift: u8,
+    coefficient: u8,
+    _pad: u8,
+}
+
+const _: () = assert!(std::mem::size_of::<BinaryLaneWeightedTerm>() == 4);
+const _: () = assert!(std::mem::align_of::<BinaryLaneWeightedTerm>() == 1);
+
+/// A validate-once byte-lane projective action pack over `GF(2^H)`.
+///
+/// For vector dimensions at most eight, canonical field bytes occupy disjoint
+/// lanes of one `u64`. Unit coefficients with the same input coordinate are
+/// compiled into a lane mask, so one integer multiplication broadcasts that
+/// coordinate to every selected output row without cross-lane carries.
+/// Nonunit coefficients remain exact multiplication-table terms. The runner
+/// keeps points and images packed through projective rank/unrank and allocates
+/// no workspace.
+#[repr(C)]
+#[derive(Clone, Debug)]
+pub struct BinaryLaneProjectiveLinearActionPack<
+    'a,
+    const H: u8,
+    const DIMENSION: usize,
+    const GENERATORS: usize,
+> {
+    index: BinaryProjectiveIndex<'a, H>,
+    actions: Box<[BinaryLaneAction]>,
+    unit_terms: Box<[BinaryLaneUnitTerm]>,
+    weighted_terms: Box<[BinaryLaneWeightedTerm]>,
+    _shape: PhantomData<([(); DIMENSION], [(); GENERATORS])>,
+}
+
+const _: () =
+    assert!(std::mem::size_of::<BinaryLaneProjectiveLinearActionPack<'static, 1, 1, 1>>() == 88);
+const _: () =
+    assert!(std::mem::align_of::<BinaryLaneProjectiveLinearActionPack<'static, 1, 1, 1>>() == 8);
+
+impl<'a, const H: u8, const DIMENSION: usize, const GENERATORS: usize>
+    BinaryLaneProjectiveLinearActionPack<'a, H, DIMENSION, GENERATORS>
+{
+    pub fn new(
+        field: &'a SmallField,
+        projective_dimension: u8,
+        matrices: [Matrix; GENERATORS],
+    ) -> Result<Self, ProjectiveError> {
+        if GENERATORS == 0 || DIMENSION == 0 || DIMENSION > 8 {
+            return Err(ProjectiveError::InvalidLinearAction);
+        }
+        if usize::from(projective_dimension) + 1 != DIMENSION {
+            return Err(ProjectiveError::InvalidLinearAction);
+        }
+        let index = BinaryProjectiveIndex::<H>::new(field, projective_dimension)?;
+        let mut actions = Vec::with_capacity(GENERATORS);
+        let mut unit_terms = Vec::new();
+        let mut weighted_terms = Vec::new();
+        for matrix in matrices {
+            if matrix.rows() != DIMENSION
+                || matrix.cols() != DIMENSION
+                || matrix.field_presentation() != field.presentation()
+            {
+                return Err(ProjectiveError::InvalidLinearAction);
+            }
+            let rank = matrix
+                .canonical_row_basis_with(field)
+                .map_err(|_| ProjectiveError::InvalidLinearAction)?
+                .rows();
+            if rank != DIMENSION {
+                return Err(ProjectiveError::InvalidLinearAction);
+            }
+            let unit_start =
+                u32::try_from(unit_terms.len()).map_err(|_| ProjectiveError::DimensionOverflow)?;
+            let weighted_start = u32::try_from(weighted_terms.len())
+                .map_err(|_| ProjectiveError::DimensionOverflow)?;
+            for input in 0..DIMENSION {
+                let mut lane_mask = 0_u64;
+                for output in 0..DIMENSION {
+                    let coefficient = matrix.as_slice()[output * DIMENSION + input];
+                    if coefficient == 1 {
+                        lane_mask |= 1_u64 << (8 * output);
+                    } else if coefficient != 0 {
+                        weighted_terms.push(BinaryLaneWeightedTerm {
+                            input_shift: (8 * input) as u8,
+                            output_shift: (8 * output) as u8,
+                            coefficient,
+                            _pad: 0,
+                        });
+                    }
+                }
+                if lane_mask != 0 {
+                    unit_terms.push(BinaryLaneUnitTerm {
+                        lane_mask,
+                        input_shift: (8 * input) as u8,
+                        _pad: [0; 7],
+                    });
+                }
+            }
+            actions.push(BinaryLaneAction {
+                unit_start,
+                unit_end: u32::try_from(unit_terms.len())
+                    .map_err(|_| ProjectiveError::DimensionOverflow)?,
+                weighted_start,
+                weighted_end: u32::try_from(weighted_terms.len())
+                    .map_err(|_| ProjectiveError::DimensionOverflow)?,
+            });
+        }
+        Ok(Self {
+            index,
+            actions: actions.into_boxed_slice(),
+            unit_terms: unit_terms.into_boxed_slice(),
+            weighted_terms: weighted_terms.into_boxed_slice(),
+            _shape: PhantomData,
+        })
+    }
+
+    #[inline]
+    pub const fn projective_dimension(&self) -> u8 {
+        self.index.projective_dimension()
+    }
+
+    #[inline]
+    pub const fn point_count(&self) -> u64 {
+        self.index.point_count()
+    }
+
+    #[inline(always)]
+    pub fn point(&self, index: u64, output: &mut [u8]) -> Result<(), ProjectiveError> {
+        self.index.point(index, output)
+    }
+
+    #[inline]
+    pub const fn workspace(&self) -> BinaryLaneProjectiveActionWorkspace {
+        BinaryLaneProjectiveActionWorkspace { _private: () }
+    }
+
+    #[inline]
+    pub fn runner(
+        &self,
+        _workspace: &mut BinaryLaneProjectiveActionWorkspace,
+    ) -> Result<BinaryLaneProjectiveActionRunner<'_, 'a, H, DIMENSION, GENERATORS>, ProjectiveError>
+    {
+        Ok(BinaryLaneProjectiveActionRunner { pack: self })
+    }
+}
+
+/// Zero-sized compatibility workspace for a byte-lane action runner.
+#[repr(C)]
+pub struct BinaryLaneProjectiveActionWorkspace {
+    _private: (),
+}
+
+const _: () = assert!(std::mem::size_of::<BinaryLaneProjectiveActionWorkspace>() == 0);
+const _: () = assert!(std::mem::align_of::<BinaryLaneProjectiveActionWorkspace>() == 1);
+
+/// Allocation-free runner for a validated byte-lane binary action pack.
+#[repr(transparent)]
+pub struct BinaryLaneProjectiveActionRunner<
+    'pack,
+    'field,
+    const H: u8,
+    const DIMENSION: usize,
+    const GENERATORS: usize,
+> {
+    pack: &'pack BinaryLaneProjectiveLinearActionPack<'field, H, DIMENSION, GENERATORS>,
+}
+
+const _: () = assert!(
+    std::mem::size_of::<BinaryLaneProjectiveActionRunner<'static, 'static, 1, 1, 1>>() == 8
+);
+const _: () = assert!(
+    std::mem::align_of::<BinaryLaneProjectiveActionRunner<'static, 'static, 1, 1, 1>>() == 8
+);
+
+impl<'pack, 'field, const H: u8, const DIMENSION: usize, const GENERATORS: usize>
+    BinaryLaneProjectiveActionRunner<'pack, 'field, H, DIMENSION, GENERATORS>
+{
+    #[inline(always)]
+    fn packed_point(&self, index: u64) -> u64 {
+        let pivot = self.pack.index.pivot_for_validated_index(index);
+        let mut point = 1_u64 << (8 * pivot);
+        let mut suffix = index - self.pack.index.offsets[pivot];
+        let mask = (1_u64 << H) - 1;
+        for output in (pivot + 1..DIMENSION).rev() {
+            point |= (suffix & mask) << (8 * output);
+            suffix >>= H;
+        }
+        debug_assert_eq!(suffix, 0);
+        point
+    }
+
+    #[inline(always)]
+    fn packed_index(&self, point: u64) -> u64 {
+        if point as u8 == 1 {
+            let mut suffix = 0_u64;
+            for input in 1..DIMENSION {
+                suffix = (suffix << H) | ((point >> (8 * input)) & 0xff);
+            }
+            return suffix;
+        }
+        let mut pivot = 0_usize;
+        while pivot < DIMENSION && ((point >> (8 * pivot)) & 0xff) == 0 {
+            pivot += 1;
+        }
+        debug_assert!(pivot < DIMENSION);
+        let leading = ((point >> (8 * pivot)) & 0xff) as u8;
+        let inverse = self.pack.index.field.inverse_nonzero(leading);
+        let mut suffix = 0_u64;
+        for input in pivot + 1..DIMENSION {
+            let coordinate = ((point >> (8 * input)) & 0xff) as u8;
+            suffix =
+                (suffix << H) | u64::from(self.pack.index.field.mul_canonical(coordinate, inverse));
+        }
+        self.pack.index.offsets[pivot] + suffix
+    }
+
+    #[inline(always)]
+    pub fn successors(&mut self, index: u64) -> Result<[u64; GENERATORS], ProjectiveError> {
+        if index >= self.pack.index.point_count {
+            return Err(ProjectiveError::PointOutOfRange);
+        }
+        let point = self.packed_point(index);
+        let field = self.pack.index.field;
+        let mut successors = [0_u64; GENERATORS];
+        for (action, successor) in self.pack.actions.iter().zip(successors.iter_mut()) {
+            let mut image = 0_u64;
+            for term in &self.pack.unit_terms[action.unit_start as usize..action.unit_end as usize]
+            {
+                let coordinate = (point >> term.input_shift) & 0xff;
+                image ^= coordinate * term.lane_mask;
+            }
+            for term in &self.pack.weighted_terms
+                [action.weighted_start as usize..action.weighted_end as usize]
+            {
+                let coordinate = ((point >> term.input_shift) & 0xff) as u8;
+                image ^= u64::from(field.mul_canonical(term.coefficient, coordinate))
+                    << term.output_shift;
+            }
+            *successor = self.packed_index(image);
+        }
+        Ok(successors)
+    }
+}
+
+#[repr(C)]
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct ProjectivePoint {
     pub coordinates: [u8; 3],
@@ -1244,6 +1513,24 @@ mod tests {
         })
     }
 
+    fn three_weighted_projective_generators(field: &SmallField) -> [Matrix; 3] {
+        let bytes = [
+            // Weighted diagonal.
+            1, 0, 0, 0, 2, 0, 0, 0, 3, // Weighted upper shear.
+            1, 2, 0, 0, 1, 0, 0, 0, 1, // Weighted reversal.
+            0, 0, 2, 0, 3, 0, 4, 0, 0,
+        ];
+        std::array::from_fn(|generator| {
+            Matrix::new_with_field(
+                field,
+                3,
+                3,
+                bytes[generator * 9..(generator + 1) * 9].to_vec(),
+            )
+            .unwrap()
+        })
+    }
+
     #[test]
     fn projective_action_pack_matches_independent_matrix_application() {
         let field = SmallField::new(2, 3).unwrap();
@@ -1401,20 +1688,32 @@ mod tests {
             three_projective_generators(&field),
         )
         .unwrap();
+        let lane = BinaryLaneProjectiveLinearActionPack::<3, 3, 3>::new(
+            &field,
+            2,
+            three_projective_generators(&field),
+        )
+        .unwrap();
         assert_eq!(dense.point_count(), sparse.point_count());
+        assert_eq!(dense.point_count(), lane.point_count());
         let mut dense_workspace = dense.workspace();
         let mut sparse_workspace = sparse.workspace();
+        let mut lane_workspace = lane.workspace();
         {
             let mut dense_runner = dense.runner(&mut dense_workspace).unwrap();
             let mut sparse_runner = sparse.runner(&mut sparse_workspace).unwrap();
+            let mut lane_runner = lane.runner(&mut lane_workspace).unwrap();
             for point in 0..dense.point_count() {
-                assert_eq!(
-                    dense_runner.successors(point).unwrap(),
-                    sparse_runner.successors(point).unwrap()
-                );
+                let dense_successors = dense_runner.successors(point).unwrap();
+                assert_eq!(dense_successors, sparse_runner.successors(point).unwrap());
+                assert_eq!(dense_successors, lane_runner.successors(point).unwrap());
             }
             assert_eq!(
                 sparse_runner.successors(sparse.point_count()),
+                Err(ProjectiveError::PointOutOfRange)
+            );
+            assert_eq!(
+                lane_runner.successors(lane.point_count()),
                 Err(ProjectiveError::PointOutOfRange)
             );
         }
@@ -1423,6 +1722,12 @@ mod tests {
             std::array::from_fn(|_| Matrix::new_with_field(&field, 3, 3, vec![0; 9]).unwrap());
         assert!(matches!(
             BinarySparseProjectiveLinearActionPack::<3, 3>::new(&field, 2, singular),
+            Err(ProjectiveError::InvalidLinearAction)
+        ));
+        let singular =
+            std::array::from_fn(|_| Matrix::new_with_field(&field, 3, 3, vec![0; 9]).unwrap());
+        assert!(matches!(
+            BinaryLaneProjectiveLinearActionPack::<3, 3, 3>::new(&field, 2, singular),
             Err(ProjectiveError::InvalidLinearAction)
         ));
 
@@ -1437,6 +1742,14 @@ mod tests {
         let mut wrong_workspace = smaller.workspace();
         assert!(matches!(
             sparse.runner(&mut wrong_workspace),
+            Err(ProjectiveError::InvalidLinearAction)
+        ));
+        assert!(matches!(
+            BinaryLaneProjectiveLinearActionPack::<3, 2, 3>::new(
+                &field,
+                1,
+                three_projective_generators(&field)
+            ),
             Err(ProjectiveError::InvalidLinearAction)
         ));
     }
@@ -1463,6 +1776,61 @@ mod tests {
         });
         assert_ne!(checksum, 0);
         assert_eq!(events, crate::test_alloc::AllocationEvents::default());
+
+        let lane = BinaryLaneProjectiveLinearActionPack::<3, 3, 3>::new(
+            &field,
+            2,
+            three_projective_generators(&field),
+        )
+        .unwrap();
+        let mut workspace = lane.workspace();
+        let mut runner = lane.runner(&mut workspace).unwrap();
+        let (checksum, events) = crate::test_alloc::measure_allocations(|| {
+            let _guard = crate::test_alloc::HotLoopAllocationGuard::enter();
+            let mut checksum = 0_u64;
+            for round in 0..10_000_u64 {
+                let successors = runner.successors(round % lane.point_count()).unwrap();
+                checksum ^= successors.into_iter().fold(0, u64::wrapping_add);
+            }
+            checksum
+        });
+        assert_ne!(checksum, 0);
+        assert_eq!(events, crate::test_alloc::AllocationEvents::default());
+    }
+
+    #[test]
+    fn lane_binary_projective_action_matches_weighted_sparse_pack() {
+        let field = SmallField::new(2, 3).unwrap();
+        let sparse = BinarySparseProjectiveLinearActionPack::<3, 3>::new(
+            &field,
+            2,
+            three_weighted_projective_generators(&field),
+        )
+        .unwrap();
+        let lane = BinaryLaneProjectiveLinearActionPack::<3, 3, 3>::new(
+            &field,
+            2,
+            three_weighted_projective_generators(&field),
+        )
+        .unwrap();
+        let mut sparse_workspace = sparse.workspace();
+        let mut lane_workspace = lane.workspace();
+        let mut sparse_runner = sparse.runner(&mut sparse_workspace).unwrap();
+        let mut lane_runner = lane.runner(&mut lane_workspace).unwrap();
+        for point in 0..sparse.point_count() {
+            assert_eq!(
+                sparse_runner.successors(point).unwrap(),
+                lane_runner.successors(point).unwrap()
+            );
+        }
+        assert!(matches!(
+            BinaryLaneProjectiveLinearActionPack::<3, 9, 3>::new(
+                &field,
+                8,
+                three_weighted_projective_generators(&field)
+            ),
+            Err(ProjectiveError::InvalidLinearAction)
+        ));
     }
 
     #[test]

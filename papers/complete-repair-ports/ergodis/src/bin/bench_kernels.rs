@@ -6,8 +6,8 @@ use std::time::Instant;
 use ergodis::control::{CompiledPlan, PlanOp, PlanOutput, PlanRole, PlanSpec, PLAN_SCHEMA};
 use ergodis::field::SmallField;
 use ergodis::projective::{
-    BinaryProjectiveLinearActionPack, BinarySparseProjectiveLinearActionPack, ProjectiveIndex,
-    ProjectiveLinearActionPack,
+    BinaryLaneProjectiveLinearActionPack, BinaryProjectiveLinearActionPack,
+    BinarySparseProjectiveLinearActionPack, ProjectiveIndex, ProjectiveLinearActionPack,
 };
 use ergodis::root_execution::{reduce_roots, RootKernel, RootOrdinal};
 use ergodis::{
@@ -1043,7 +1043,10 @@ fn main() {
     if let Some((backend, points)) = projective_action_spec(&variant) {
         let field = SmallField::new(2, 6).unwrap();
         let dimension = 5usize;
-        let matrices = if matches!(backend, "binary-flat-sparse-fixture" | "binary-sparse") {
+        let matrices = if matches!(
+            backend,
+            "binary-flat-sparse-fixture" | "binary-sparse" | "binary-lane"
+        ) {
             sparse_projective_generators(dimension)
         } else {
             dense_projective_generators(&field, dimension)
@@ -1154,6 +1157,36 @@ fn main() {
                     .unwrap()
                 });
                 let pack = BinarySparseProjectiveLinearActionPack::<6, 3>::new(
+                    &field,
+                    (dimension - 1) as u8,
+                    matrix_records,
+                )
+                .unwrap();
+                let mut workspace = pack.workspace();
+                let mut runner = pack.runner(&mut workspace).unwrap();
+                let started = Instant::now();
+                for _ in 0..repetitions {
+                    for point_index in 0..points as u64 {
+                        for successor in runner.successors(point_index).unwrap() {
+                            checksum = checksum.rotate_left(7) ^ successor;
+                            work += 1;
+                        }
+                    }
+                }
+                started.elapsed().as_nanos()
+            }
+            "binary-lane" => {
+                let matrix_len = dimension * dimension;
+                let matrix_records = std::array::from_fn(|generator| {
+                    Matrix::new_with_field(
+                        &field,
+                        dimension,
+                        dimension,
+                        matrices[generator * matrix_len..(generator + 1) * matrix_len].to_vec(),
+                    )
+                    .unwrap()
+                });
+                let pack = BinaryLaneProjectiveLinearActionPack::<6, 5, 3>::new(
                     &field,
                     (dimension - 1) as u8,
                     matrix_records,
