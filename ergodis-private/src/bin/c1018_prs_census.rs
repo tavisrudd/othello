@@ -634,6 +634,97 @@ impl StampSet {
     }
 }
 
+#[repr(C)]
+struct PackedStampSet {
+    entries: Box<[u64]>,
+    mask: usize,
+    generation: u16,
+    _pad: [u8; 6],
+}
+
+const _: () = assert!(std::mem::size_of::<PackedStampSet>() == 32);
+const _: () = assert!(std::mem::align_of::<PackedStampSet>() == 8);
+
+impl PackedStampSet {
+    const KEY_BITS: u32 = 48;
+    const KEY_MASK: u64 = (1_u64 << Self::KEY_BITS) - 1;
+
+    fn new(capacity: usize, maximum_key: u64) -> Result<Self> {
+        if maximum_key > Self::KEY_MASK {
+            bail!("orbit point index exceeds the packed stamp-set representation");
+        }
+        let minimum = capacity
+            .checked_mul(2)
+            .context("orbit stamp-set capacity overflow")?
+            .max(16);
+        let size = minimum
+            .checked_next_power_of_two()
+            .context("orbit stamp-set capacity overflow")?;
+        Ok(Self {
+            entries: vec![0; size].into_boxed_slice(),
+            mask: size - 1,
+            generation: 0,
+            _pad: [0; 6],
+        })
+    }
+
+    #[inline]
+    fn reset(&mut self) {
+        self.generation = self.generation.wrapping_add(1);
+        if self.generation == 0 {
+            self.entries.fill(0);
+            self.generation = 1;
+        }
+    }
+
+    /// Returns true if `value` was newly inserted.
+    #[inline]
+    fn insert(&mut self, value: u64) -> bool {
+        debug_assert!(value <= Self::KEY_MASK && self.generation != 0);
+        let generation = u64::from(self.generation);
+        let tagged = (generation << Self::KEY_BITS) | value;
+        let mut slot = (value.wrapping_mul(0x9E37_79B9_7F4A_7C15) >> 24) as usize & self.mask;
+        loop {
+            let entry = self.entries[slot];
+            if entry >> Self::KEY_BITS != generation {
+                self.entries[slot] = tagged;
+                return true;
+            }
+            if entry & Self::KEY_MASK == value {
+                return false;
+            }
+            slot = (slot + 1) & self.mask;
+        }
+    }
+}
+
+#[cfg(test)]
+mod stamp_set_tests {
+    use super::{PackedStampSet, StampSet};
+
+    #[test]
+    fn packed_stamp_set_reuses_epochs_and_rejects_wide_keys() {
+        let mut set = PackedStampSet::new(32, PackedStampSet::KEY_MASK).unwrap();
+        set.reset();
+        assert!(set.insert(7));
+        assert!(!set.insert(7));
+        assert!(set.insert(PackedStampSet::KEY_MASK));
+        set.reset();
+        assert!(set.insert(7));
+
+        set.generation = u16::MAX;
+        set.reset();
+        assert_eq!(set.generation, 1);
+        assert!(set.entries.iter().all(|&entry| entry == 0));
+        assert!(PackedStampSet::new(32, PackedStampSet::KEY_MASK + 1).is_err());
+
+        let mut wide = StampSet::new(32);
+        wide.reset();
+        assert!(wide.insert(u64::MAX));
+        assert!(!wide.insert(u64::MAX));
+    }
+}
+
 // ---------------------------------------------------------------------------
 
 #[derive(Clone)]
@@ -649,6 +740,10 @@ struct OrbitRecord {
 }
 
 const CHUNK: u64 = 8192;
+// The packed epoch/key table saves one independent memory stream, but its
+// extra bit work only paid for itself once the per-worker table reached the
+// q=64 scale in the C1018 census. Keep smaller solves on the original layout.
+const PACKED_STAMP_THRESHOLD: usize = 1 << 18;
 
 #[allow(clippy::too_many_arguments)]
 fn worker(
@@ -667,6 +762,97 @@ fn worker(
     let mut buf = vec![0u8; d + 1];
     let mut orbit: Vec<u64> = Vec::with_capacity(max_orbit);
     let mut seen = StampSet::new(max_orbit.max(16));
+    let mut sc = RankScratch::new(d);
+    let mut action_workspace = actions.workspace();
+    let mut action_runner = actions.runner(&mut action_workspace)?;
+
+    loop {
+        let lo = cursor.fetch_add(CHUNK, Ordering::Relaxed);
+        if lo >= n {
+            break;
+        }
+        let hi = (lo + CHUNK).min(n);
+        for start in lo..hi {
+            if visited[(start / 64) as usize].load(Ordering::Relaxed) & (1u64 << (start % 64)) != 0
+            {
+                continue;
+            }
+            orbit.clear();
+            seen.reset();
+            seen.insert(start);
+            orbit.push(start);
+            let mut head = 0usize;
+            while head < orbit.len() {
+                let cur = orbit[head];
+                head += 1;
+                for idx in action_runner.successors(cur)? {
+                    if seen.insert(idx) {
+                        orbit.push(idx);
+                    }
+                }
+            }
+            let owner = *orbit.iter().min().expect("orbit is nonempty");
+            let word = (owner / 64) as usize;
+            let bit = 1u64 << (owner % 64);
+            if visited[word].fetch_or(bit, Ordering::AcqRel) & bit != 0 {
+                continue; // another thread owns this orbit
+            }
+            for &pt in orbit.iter() {
+                let w = (pt / 64) as usize;
+                let b = 1u64 << (pt % 64);
+                visited[w].fetch_or(b, Ordering::Relaxed);
+            }
+            actions.point(owner, &mut buf)?;
+            let info = analyse(f, d, &buf, mode, &mut sc);
+            hist[info.w] += orbit.len() as u64;
+            total_orbits += 1;
+            // Only the top two weight classes can be the deep one: `w ≤ d+1`
+            // always, and every cell computed in this campaign has `ρ ≥ d`.
+            // The histogram is exact regardless of this filter; `main` bails if
+            // `ρ < d` so a missing representative list can never pass silently.
+            if info.w >= d {
+                records.push(OrbitRecord {
+                    weight: info.w,
+                    size: orbit.len() as u64,
+                    rep: buf.clone(),
+                    rep_index: owner,
+                    apolar_degree: info.apolar_degree,
+                    apolar_kernel_dim: info.apolar_kernel_dim,
+                    apolar_type: info.apolar_type,
+                    roots: info.roots,
+                });
+            }
+        }
+    }
+    Ok((hist, total_orbits, records))
+}
+
+// Keep this as a separate monomorph from `worker`: the packed table wins once
+// it removes a large stamp stream, while sharing a generic worker perturbs the
+// small-census kernel enough to lose its performance gate.
+#[cold]
+#[inline(never)]
+// Give fat LTO a stable external identity for this large-only monomorph. This
+// keeps it after the default worker instead of perturbing the small hot loop's
+// code placement merely because the large optimization is present.
+#[unsafe(export_name = "ergodis_private_packed_stamp_worker")]
+#[allow(clippy::too_many_arguments)]
+fn worker_packed(
+    f: &Field,
+    d: usize,
+    actions: &ProjectiveLinearActionPack<'_, 3>,
+    n: u64,
+    visited: &[AtomicU64],
+    cursor: &AtomicU64,
+    mode: RankMode,
+    max_orbit: usize,
+) -> Result<(Vec<u64>, u64, Vec<OrbitRecord>)> {
+    let mut hist = vec![0u64; d + 2];
+    let mut total_orbits = 0u64;
+    let mut records: Vec<OrbitRecord> = Vec::new();
+    let mut buf = vec![0u8; d + 1];
+    let mut orbit: Vec<u64> = Vec::with_capacity(max_orbit);
+    let mut seen = PackedStampSet::new(max_orbit.max(16), n.saturating_sub(1))?;
     let mut sc = RankScratch::new(d);
     let mut action_workspace = actions.workspace();
     let mut action_runner = actions.runner(&mut action_workspace)?;
@@ -1286,6 +1472,8 @@ fn main() -> Result<()> {
         .collect();
     let cursor = AtomicU64::new(0);
     let max_orbit = q * q * q; // |PGL(2,q)| = q^3 - q
+    let packed_stamps =
+        max_orbit >= PACKED_STAMP_THRESHOLD && n.saturating_sub(1) <= PackedStampSet::KEY_MASK;
     let failures = AtomicUsize::new(0);
 
     let mut hist = vec![0u64; d + 2];
@@ -1301,7 +1489,12 @@ fn main() -> Result<()> {
             let cursor = &cursor;
             let failures = &failures;
             handles.push(scope.spawn(move || {
-                match worker(f, d, actions, n, visited, cursor, args.rank_mode, max_orbit) {
+                let result = if packed_stamps {
+                    worker_packed(f, d, actions, n, visited, cursor, args.rank_mode, max_orbit)
+                } else {
+                    worker(f, d, actions, n, visited, cursor, args.rank_mode, max_orbit)
+                };
+                match result {
                     Ok(v) => v,
                     Err(_) => {
                         failures.fetch_add(1, Ordering::Relaxed);

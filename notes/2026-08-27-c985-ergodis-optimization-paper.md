@@ -318,9 +318,10 @@ files are disposable and may be deleted at any time.
    matrices, flattens them once, and creates a validate-once runner whose
    successor loop is allocation-free and uses canonical table arithmetic. The
    C1018 q=64,r=5 client replaces nested generator rows with the fixed
-   three-generator pack; private vocabulary remains outside core. The current
-   next profile is the residual orbit ownership/hash path, not another field or
-   rank/unrank specialization.
+   three-generator pack; private vocabulary remains outside core. The stamped
+   orbit set is now size-gated and packed for large workspaces; the current
+   next profile is the residual visited-bit ownership path, not another field,
+   rank/unrank, or hash-table specialization.
    Keep tactical plane completion in
    `ergodis-private`; do not specialize the public core for C1018.
    The smaller linear-code gap is also closed: a compiled binary row-space
@@ -734,6 +735,36 @@ files are disposable and may be deleted at any time.
    must split the remaining worker by exact stage without perturbing code
    generation; assembly already identifies the field multiply-add, stamped
    set probe, and per-orbit atomic visited marking as the principal clusters.
+
+   The stamped-set tranche is accepted with a solve-size crossover rather than
+   imposing its large-table tradeoff on every census. At orbit workspace sizes
+   below `2^18`, the original two-array `StampSet` and original worker remain a
+   separate, byte-for-byte source monomorph. At and above that threshold (and
+   only while point indices fit 48 bits), `PackedStampSet` combines a 48-bit key
+   and 16-bit epoch in one `u64`, cutting one allocation and one independent
+   probe stream. Epoch wrap clears the table outside the probe loop, admission
+   is checked once, and focused tests cover duplicate insertion, epoch reuse,
+   wrap, and the wide-key rejection boundary. The large worker has a unique
+   external identity so fat LTO cannot move or re-specialize the default worker
+   merely because the large-only monomorph exists.
+
+   The no-small-regression gate uses seven rotated pairs of 16 complete
+   q=32,r=5 one-thread solves per arm. Instructions and branches are unchanged
+   to one part per million; parent/candidate cycles are 1.006739x (`t=0.81`)
+   and task-clock 1.004471x (`t=0.47`), while branch misses improve 1.108025x
+   (`t=7.87`). A source-current single solve is byte-identical between arms.
+   On q=64,r=5, seven rotated pairs preserve byte-identical output at 1T and
+   12T. Parent/packed cycles are 1.033131x at 1T (`t=3.11`) and 1.191442x at
+   12T (`t=13.16`); 12T task-clock is 1.175397x (`t=15.78`). The packed path
+   spends about 3.6% more instructions but removes enough memory traffic to
+   reduce median RSS from 12,996 to 11,060 KiB at 1T and from 101,736 to 78,364
+   KiB at 12T. Wall samples crossed a large host-frequency step and are
+   unresolved (1.040407x, `t=0.97`; 1.033012x, `t=0.82`), so the admitted
+   speed claim rests on hardware work counters, not wall time. Raw tables are
+   `c985-c1018-packed-stamps-q32-control.tsv`,
+   `c985-c1018-packed-stamps-q64-counters.tsv`, and
+   `c985-c1018-packed-stamps-q64-wall.tsv`. The next exact-stage profile is the
+   per-orbit atomic visited publication/ownership path.
 9. **Done — bounded parametric certificate verifier.** C1029 demonstrated a
    genuine reach gap rather than a faster version of an existing kernel:
    Ergodis had no
