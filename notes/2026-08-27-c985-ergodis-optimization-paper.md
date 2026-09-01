@@ -899,6 +899,10 @@ files are disposable and may be deleted at any time.
    suite pass.  Next extend the exact target graph from frozen-row obligations
    to solver root/debt/exceptional-state profiles; a learned proposer remains
    gated on that measured operational bridge.
+   Commit `fe5a287bb` adds the hostile archive mutation gate: changing a
+   retained node's semantic hash is rejected before replay, and a saturated
+   semantic-attempt ledger skips pair scoring entirely.  The full strict suite
+   remains green.
 7. **Done for current tranche — SOTA audit.** The primary-source comparison and
    priority order are in
    `2026-08-30-c985-ergodis-evolve-sota-literature-audit.md`; refresh it when a
