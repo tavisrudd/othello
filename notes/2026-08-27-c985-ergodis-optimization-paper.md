@@ -575,15 +575,26 @@ files are disposable and may be deleted at any time.
    build is independently blocked by an in-flight G41 record-layout migration,
    so neither condition is attributed to this recipe tranche.
 
+   Commit `c0d321556` completes the corresponding private injected-fragment
+   authoring slice without a second lexer or predicate IR.  Parameters and
+   universally/existentially quantified variables carry declared sorts;
+   hypotheses and conclusions reuse the bounded scalar AST; exact/lower-bound/
+   diagnostic observable contracts, preservation/transport/diagnostic action
+   contracts, scope, dependencies, provenance, candidate/finite-certified/
+   proved status, and verifier references all have canonical text and JSON.
+   Validation rejects undeclared predicate fields, duplicate bindings,
+   hypotheses, observables, actions and dependencies, self-dependency, missing
+   verifier references, and any diagnostic or unverified action carrying
+   certified authority.  The combined recipe/fragment module passes all seven
+   focused tests and strict clippy in a clean disposable worktree.
+
    This is syntax and authority-contract plumbing, not yet the complete typed
    dataflow executor: function arguments, input/output sorts, explicit memory
-   budgets, streamed-partition exceptions, sinks, and dependency edges remain
-   open.  Next add injected theorem fragments using the same lexer, names,
-   scalar AST, scopes, formatter, and provenance representation, with
-   normalized quantifiers, hypotheses, conclusions, status, and certificate
-   references.  Then join recipes and fragments through one typed dataflow IR;
-   do not create a second mini-language.  The accepted algebra and constraints
-   remain `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
+   budgets, streamed-partition exceptions, sinks, and recipe dependency edges
+   remain open.  Next join recipes and fragments through one typed dataflow IR,
+   including exact operation signatures and resource contracts; do not create
+   a second mini-language.  The accepted algebra and constraints remain
+   `2026-08-30-ergodis-semantic-mining-engine-adr.md`.
 6. **In progress — daemon-owned evolve.** Retain bounded streamed evidence,
    lineage/outcome deduplication, and exact cascades; next add durable replay,
    selection, and cross-campaign learning without entering solve workers.
