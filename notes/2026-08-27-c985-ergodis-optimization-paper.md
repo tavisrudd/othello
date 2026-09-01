@@ -1813,6 +1813,30 @@ files are disposable and may be deleted at any time.
    arithmetic-boundary safeguard, not a solve-loop change; the raw-element
    canonicality split in finding 17 remains the next field-layer question.
 
+   Commit `67d79e05b` closes that public raw-element foot-gun without adding a
+   hot check. `FiniteField` is now a sealed marker/presentation trait whose raw
+   byte operations live in an unnameable private supertrait; the public
+   arithmetic surface is the one-byte `FieldElement<F>` brand. Prime/Gf4
+   inherent raw operations are crate-private, invalid `Prime<9>` typed
+   instantiation and external raw-trait arithmetic both have compile-fail
+   controls, and the generated-span compiler now consumes its matrix-validated
+   bytes through typed elements. Runtime `SmallField`/`BinarySmallField` raw
+   entry points retain their release-mode bounds checks; only crate-private
+   canonical helpers may elide them after a validated representation boundary.
+   Full strict public tests and doc tests pass.
+
+   Seven commit-pinned, rotated pairs compare parent `47c928c89` with the
+   accepted tree over 409.6 million typed GF(7) updates per arm. Exact work and
+   checksum agree; parent/candidate is 0.999999953x instructions and
+   0.999999454x branches, while cycles favour the candidate by 1.007677x
+   (`t=4.22`). The 1.0586x branch-miss increase is only about seven thousand
+   misses among 409.8 million branches and has no measured cycle cost; wall is
+   unresolved (`1.017317x`, `t=1.39`). This is admitted as a zero-cost safety
+   boundary, not a speedup. Raw evidence is
+   `ergodis-private/evidence/c985-private-field-ops-ab.tsv`. Finding 17 is now
+   closed; further typed consumer migration is defense in depth rather than a
+   public correctness gate.
+
    Commit `8bd0969a6` makes the generated-span compiler fail closed under explicit projective-
    column, state, retained-matrix-byte, and transition limits. Transition
    accounting is exact but occurs once per input column rather than in the
