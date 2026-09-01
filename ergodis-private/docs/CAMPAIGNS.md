@@ -89,6 +89,10 @@ preallocated state; it performs no serialization in the search path. Every
 controlled solve must then match an ordinary uncontrolled solve in answer and
 all search counters. The report also computes the exact observational ceiling
 obtained by quotienting rows with identical exposed feature vectors.
+`--capture-sized` instead waits for the first active root whose sizing pass has
+completed, producing target tuples and structural root features comparable to
+the once-per-second operational publisher without adding search-path
+serialization.
 
 `target_strategy_audit` runs matched balanced, numeric, and structural
 evolution jobs and reports both time-to-first-perfect and time-to-final-best,
@@ -102,6 +106,23 @@ learns a non-balanced route only after the configured number of matched audits
 show at least one win and no semantic-op-row regression. Otherwise it emits an
 explicit balanced/abstain decision. It does not run in the campaign daemon or
 solver.
+
+An accepted cold policy can be supplied explicitly to the private alignment
+adapter:
+
+```text
+alignment-controlled --run-dir RUN --points 8 --budget 8 \
+  --evolution-profile \
+  --routing-policy evidence/alignment-root-cost-routing-policy-3corpus.json
+```
+
+Only decisions marked learned with a numeric or structural route are loaded.
+Fields compile against the alignment publisher's three exact target fields;
+unknown, repeated, malformed, or duplicate selectors fail before search.
+Selectors match exact tuple coordinates and never generalize to an unseen
+target. Matching changed observations override the threshold fallback in the
+watcher, and final control JSON reports `profile_policy_matches`. This remains
+an initial cold policy: it does not learn or change routes during the job.
 
 When `--socket` is omitted, a private endpoint is derived under
 `$XDG_RUNTIME_DIR/ergodis/<uid>/`. There is no `/tmp` fallback. The durable

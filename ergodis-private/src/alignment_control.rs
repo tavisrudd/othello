@@ -3,7 +3,7 @@ use ergodis::{
     AlignmentBranchFeatures, AlignmentError, AlignmentSearchControl, AlignmentSearchPoint,
 };
 use serde_json::json;
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::fs::{self, OpenOptions};
 use std::io::{self, LineWriter, Write};
 use std::os::unix::fs::{OpenOptionsExt, PermissionsExt};
@@ -48,6 +48,7 @@ struct AlignmentTargetStats {
 struct AlignmentTargetPublisher {
     targets: BTreeMap<AlignmentTargetKey, AlignmentTargetStats>,
     policy: AlignmentProfilePolicy,
+    routing: Option<AlignmentRoutingPolicy>,
 }
 
 struct AlignmentTargetObservation {
@@ -55,6 +56,7 @@ struct AlignmentTargetObservation {
     mass: u64,
     unit_cost: u64,
     strategy: &'static str,
+    policy_routed: bool,
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -72,11 +74,150 @@ impl Default for AlignmentProfilePolicy {
     }
 }
 
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
+enum AlignmentRoute {
+    Numeric,
+    Structural,
+}
+
+impl AlignmentRoute {
+    fn as_str(self) -> &'static str {
+        match self {
+            Self::Numeric => "numeric",
+            Self::Structural => "structural",
+        }
+    }
+}
+
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+struct AlignmentRoutingRule {
+    indices: [u8; ALIGNMENT_TARGET_FIELDS.len()],
+    values: [i64; ALIGNMENT_TARGET_FIELDS.len()],
+    len: u8,
+    route: AlignmentRoute,
+}
+
+#[derive(Clone, Debug)]
+pub struct AlignmentRoutingPolicy {
+    rules: Box<[AlignmentRoutingRule]>,
+}
+
+impl AlignmentRoutingPolicy {
+    pub fn from_report(report: &serde_json::Value) -> Result<Self, String> {
+        if report["schema"] != "ergodis-private-routing-policy-v0" {
+            return Err("routing policy has the wrong schema".into());
+        }
+        let decisions = report["decisions"]
+            .as_array()
+            .ok_or_else(|| "routing policy omitted decisions".to_owned())?;
+        let mut rules = Vec::new();
+        let mut selectors = BTreeSet::new();
+        for decision in decisions {
+            if decision["learned"].as_bool() != Some(true) {
+                continue;
+            }
+            let route = match decision["recommended_strategy"].as_str() {
+                Some("numeric") => AlignmentRoute::Numeric,
+                Some("structural") => AlignmentRoute::Structural,
+                _ => return Err("learned routing policy has an invalid strategy".into()),
+            };
+            let fields = decision["target_fields"]
+                .as_array()
+                .ok_or_else(|| "routing decision omitted target fields".to_owned())?;
+            let values = decision["target_values"]
+                .as_array()
+                .ok_or_else(|| "routing decision omitted target values".to_owned())?;
+            if fields.is_empty()
+                || fields.len() != values.len()
+                || fields.len() > ALIGNMENT_TARGET_FIELDS.len()
+            {
+                return Err("routing decision has an invalid target tuple".into());
+            }
+            let mut pairs = Vec::with_capacity(fields.len());
+            for (field, value) in fields.iter().zip(values) {
+                let field = field
+                    .as_str()
+                    .ok_or_else(|| "routing target field must be a string".to_owned())?;
+                let index = ALIGNMENT_TARGET_FIELDS
+                    .iter()
+                    .position(|candidate| *candidate == field)
+                    .ok_or_else(|| format!("routing target field {field} is unavailable"))?;
+                let value = value
+                    .as_i64()
+                    .ok_or_else(|| "routing target value must be an integer".to_owned())?;
+                pairs.push((u8::try_from(index).unwrap(), value));
+            }
+            pairs.sort_unstable();
+            if pairs.windows(2).any(|pair| pair[0].0 == pair[1].0) {
+                return Err("routing decision repeats a target field".into());
+            }
+            let mut indices = [0_u8; ALIGNMENT_TARGET_FIELDS.len()];
+            let mut canonical_values = [0_i64; ALIGNMENT_TARGET_FIELDS.len()];
+            for (slot, &(index, value)) in pairs.iter().enumerate() {
+                indices[slot] = index;
+                canonical_values[slot] = value;
+            }
+            let len = u8::try_from(pairs.len()).unwrap();
+            if !selectors.insert((indices, canonical_values, len)) {
+                return Err("routing policy repeats a target selector".into());
+            }
+            rules.push(AlignmentRoutingRule {
+                indices,
+                values: canonical_values,
+                len,
+                route,
+            });
+        }
+        if rules.is_empty() {
+            return Err("routing policy contains no learned decisions".into());
+        }
+        for right in 1..rules.len() {
+            for left in 0..right {
+                if rules[left].len == rules[right].len
+                    && rules[left].route != rules[right].route
+                    && routing_rules_overlap(&rules[left], &rules[right])
+                {
+                    return Err("routing policy has ambiguous equal-specificity selectors".into());
+                }
+            }
+        }
+        rules.sort_by(|left, right| right.len.cmp(&left.len).then_with(|| left.cmp(right)));
+        Ok(Self {
+            rules: rules.into_boxed_slice(),
+        })
+    }
+
+    fn strategy(&self, values: &[i64; ALIGNMENT_TARGET_FIELDS.len()]) -> Option<&'static str> {
+        self.rules.iter().find_map(|rule| {
+            (0..usize::from(rule.len))
+                .all(|slot| values[usize::from(rule.indices[slot])] == rule.values[slot])
+                .then_some(rule.route.as_str())
+        })
+    }
+}
+
+fn routing_rules_overlap(left: &AlignmentRoutingRule, right: &AlignmentRoutingRule) -> bool {
+    for left_slot in 0..usize::from(left.len) {
+        for right_slot in 0..usize::from(right.len) {
+            if left.indices[left_slot] == right.indices[right_slot]
+                && left.values[left_slot] != right.values[right_slot]
+            {
+                return false;
+            }
+        }
+    }
+    true
+}
+
 impl AlignmentTargetPublisher {
-    fn new(policy: AlignmentProfilePolicy) -> Self {
+    fn new_with_routing(
+        policy: AlignmentProfilePolicy,
+        routing: Option<AlignmentRoutingPolicy>,
+    ) -> Self {
         Self {
             targets: BTreeMap::new(),
             policy,
+            routing,
         }
     }
 
@@ -91,7 +232,7 @@ impl AlignmentTargetPublisher {
             i64::try_from(root_initial_packing).ok()?,
             i64::from(root_sized),
         ]);
-        let strategy = if status["root_initial_branches"].as_u64()?
+        let fallback = if status["root_initial_branches"].as_u64()?
             >= self.policy.structural_branches
             || root_initial_packing >= self.policy.structural_packing
         {
@@ -99,6 +240,11 @@ impl AlignmentTargetPublisher {
         } else {
             "numeric"
         };
+        let learned = self
+            .routing
+            .as_ref()
+            .and_then(|routing| routing.strategy(&key.0));
+        let strategy = learned.unwrap_or(fallback);
         let target = self.targets.entry(key).or_default();
         target
             .root_states
@@ -117,6 +263,7 @@ impl AlignmentTargetPublisher {
             mass,
             unit_cost,
             strategy,
+            policy_routed: learned.is_some(),
         })
     }
 
@@ -275,6 +422,7 @@ struct SteeringWatcher {
     profile_updates: Arc<AtomicU64>,
     profile_rejections: Arc<AtomicU64>,
     profile_refreshes: Arc<AtomicU64>,
+    profile_policy_matches: Arc<AtomicU64>,
     applied_epoch: Arc<AtomicU64>,
     exchange: Arc<Mutex<PlanExchange>>,
     endpoint: PathBuf,
@@ -295,6 +443,7 @@ impl SteeringWatcher {
         progress_path: Option<PathBuf>,
         fields: Arc<[String]>,
         profile_policy: Option<AlignmentProfilePolicy>,
+        routing_policy: Option<AlignmentRoutingPolicy>,
     ) -> Result<Self, AlignmentError> {
         let publish_profile = profile_policy.is_some();
         let ready = Arc::new(PaddedFlag(AtomicBool::new(false)));
@@ -305,6 +454,7 @@ impl SteeringWatcher {
         let profile_updates = Arc::new(AtomicU64::new(0));
         let profile_rejections = Arc::new(AtomicU64::new(0));
         let profile_refreshes = Arc::new(AtomicU64::new(0));
+        let profile_policy_matches = Arc::new(AtomicU64::new(0));
         let applied_epoch = Arc::new(AtomicU64::new(0));
         let exchange = Arc::new(Mutex::new(PlanExchange {
             prepared: None,
@@ -397,6 +547,7 @@ impl SteeringWatcher {
         let thread_profile_updates = Arc::clone(&profile_updates);
         let thread_profile_rejections = Arc::clone(&profile_rejections);
         let thread_profile_refreshes = Arc::clone(&profile_refreshes);
+        let thread_profile_policy_matches = Arc::clone(&profile_policy_matches);
         let thread_heartbeat = Arc::clone(&heartbeat);
         let thread_applied_epoch = Arc::clone(&applied_epoch);
         let thread_exchange = Arc::clone(&exchange);
@@ -407,8 +558,10 @@ impl SteeringWatcher {
                 let mut epoch = [0_u8; 8];
                 let mut notified_epoch = registered_epoch;
                 let mut last_states = u64::MAX;
-                let mut profile_publisher =
-                    AlignmentTargetPublisher::new(profile_policy.unwrap_or_default());
+                let mut profile_publisher = AlignmentTargetPublisher::new_with_routing(
+                    profile_policy.unwrap_or_default(),
+                    routing_policy,
+                );
                 let start = Instant::now();
                 let mut initial_refresh = registered_epoch != 0;
                 loop {
@@ -450,6 +603,7 @@ impl SteeringWatcher {
                                     &thread_profile_updates,
                                     &thread_profile_rejections,
                                     &thread_profile_refreshes,
+                                    &thread_profile_policy_matches,
                                 );
                             }
                             thread_ready.0.store(true, Ordering::Release);
@@ -484,6 +638,7 @@ impl SteeringWatcher {
                                         &thread_profile_updates,
                                         &thread_profile_rejections,
                                         &thread_profile_refreshes,
+                                        &thread_profile_policy_matches,
                                     );
                                 }
                                 let record = json!({
@@ -523,6 +678,7 @@ impl SteeringWatcher {
             profile_updates,
             profile_rejections,
             profile_refreshes,
+            profile_policy_matches,
             applied_epoch,
             exchange,
             endpoint,
@@ -564,6 +720,7 @@ fn publish_target_observation(
     updates: &AtomicU64,
     rejections: &AtomicU64,
     refreshes: &AtomicU64,
+    policy_matches: &AtomicU64,
 ) {
     let Some(observation) = publisher.update(status) else {
         return;
@@ -589,6 +746,9 @@ fn publish_target_observation(
         return;
     }
     updates.fetch_add(1, Ordering::Relaxed);
+    if observation.policy_routed {
+        policy_matches.fetch_add(1, Ordering::Relaxed);
+    }
     if let Ok(refresh) = send_request(
         manifest,
         "evolve-profile-refresh",
@@ -641,7 +801,7 @@ impl AlignmentCampaignControl {
         response_limit: usize,
         progress_path: Option<PathBuf>,
     ) -> Result<Self, AlignmentError> {
-        Self::create(manifest, response_limit, progress_path, None)
+        Self::create(manifest, response_limit, progress_path, None, None)
     }
 
     pub fn new_profiled(
@@ -650,7 +810,23 @@ impl AlignmentCampaignControl {
         progress_path: Option<PathBuf>,
         policy: AlignmentProfilePolicy,
     ) -> Result<Self, AlignmentError> {
-        Self::create(manifest, response_limit, progress_path, Some(policy))
+        Self::create(manifest, response_limit, progress_path, Some(policy), None)
+    }
+
+    pub fn new_profiled_with_routing(
+        manifest: Manifest,
+        response_limit: usize,
+        progress_path: Option<PathBuf>,
+        policy: AlignmentProfilePolicy,
+        routing_policy: AlignmentRoutingPolicy,
+    ) -> Result<Self, AlignmentError> {
+        Self::create(
+            manifest,
+            response_limit,
+            progress_path,
+            Some(policy),
+            Some(routing_policy),
+        )
     }
 
     fn create(
@@ -658,6 +834,7 @@ impl AlignmentCampaignControl {
         response_limit: usize,
         progress_path: Option<PathBuf>,
         profile_policy: Option<AlignmentProfilePolicy>,
+        routing_policy: Option<AlignmentRoutingPolicy>,
     ) -> Result<Self, AlignmentError> {
         let fields: Arc<[String]> = Arc::from(
             ALIGNMENT_PLAN_FIELDS
@@ -671,6 +848,7 @@ impl AlignmentCampaignControl {
             progress_path,
             fields,
             profile_policy,
+            routing_policy,
         )?;
         Ok(Self {
             arena: PlanArena::new(response_limit),
@@ -697,6 +875,10 @@ impl AlignmentCampaignControl {
 
     pub fn profile_refreshes(&self) -> u64 {
         self.watcher.profile_refreshes.load(Ordering::Relaxed)
+    }
+
+    pub fn profile_policy_matches(&self) -> u64 {
+        self.watcher.profile_policy_matches.load(Ordering::Relaxed)
     }
 
     fn ordering_plan(&self) -> Option<&CompiledPlan> {
@@ -811,7 +993,8 @@ mod tests {
 
     #[test]
     fn target_publisher_is_absolute_idempotent_and_shape_routed() {
-        let mut publisher = AlignmentTargetPublisher::new(AlignmentProfilePolicy::default());
+        let mut publisher =
+            AlignmentTargetPublisher::new_with_routing(AlignmentProfilePolicy::default(), None);
         let first = publisher.update(&status(1, 10, 1, 4)).unwrap();
         assert_eq!(first.values, [3, 1, 1]);
         assert_eq!((first.mass, first.unit_cost), (1, 10));
@@ -828,6 +1011,63 @@ mod tests {
         let structural = publisher.update(&status(3, 7, 3, 2)).unwrap();
         assert_eq!(structural.values, [3, 3, 1]);
         assert_eq!(structural.strategy, "structural");
+    }
+
+    #[test]
+    fn learned_routing_policy_overrides_only_matching_targets() {
+        let report = json!({
+            "schema": "ergodis-private-routing-policy-v0",
+            "decisions": [{
+                "target_fields": ["root_sized"],
+                "target_values": [1],
+                "recommended_strategy": "structural",
+                "learned": true,
+            }],
+        });
+        let routing = AlignmentRoutingPolicy::from_report(&report).unwrap();
+        let mut publisher = AlignmentTargetPublisher::new_with_routing(
+            AlignmentProfilePolicy::default(),
+            Some(routing),
+        );
+        let observation = publisher.update(&status(1, 10, 1, 4)).unwrap();
+        assert_eq!(observation.strategy, "structural");
+        assert!(observation.policy_routed);
+    }
+
+    #[test]
+    fn learned_routing_policy_rejects_unavailable_fields() {
+        let report = json!({
+            "schema": "ergodis-private-routing-policy-v0",
+            "decisions": [{
+                "target_fields": ["unknown"],
+                "target_values": [1],
+                "recommended_strategy": "numeric",
+                "learned": true,
+            }],
+        });
+        assert!(AlignmentRoutingPolicy::from_report(&report).is_err());
+    }
+
+    #[test]
+    fn learned_routing_policy_rejects_ambiguous_equal_specificity() {
+        let report = json!({
+            "schema": "ergodis-private-routing-policy-v0",
+            "decisions": [
+                {
+                    "target_fields": ["root_sized"],
+                    "target_values": [1],
+                    "recommended_strategy": "numeric",
+                    "learned": true,
+                },
+                {
+                    "target_fields": ["root_initial_packing"],
+                    "target_values": [2],
+                    "recommended_strategy": "structural",
+                    "learned": true,
+                },
+            ],
+        });
+        assert!(AlignmentRoutingPolicy::from_report(&report).is_err());
     }
 
     #[test]
@@ -875,7 +1115,21 @@ mod tests {
         let updates = AtomicU64::new(0);
         let rejections = AtomicU64::new(0);
         let refreshes = AtomicU64::new(0);
-        let mut publisher = AlignmentTargetPublisher::new(AlignmentProfilePolicy::default());
+        let policy_matches = AtomicU64::new(0);
+        let routing = AlignmentRoutingPolicy::from_report(&json!({
+            "schema": "ergodis-private-routing-policy-v0",
+            "decisions": [{
+                "target_fields": ["root_sized"],
+                "target_values": [1],
+                "recommended_strategy": "numeric",
+                "learned": true,
+            }],
+        }))
+        .unwrap();
+        let mut publisher = AlignmentTargetPublisher::new_with_routing(
+            AlignmentProfilePolicy::default(),
+            Some(routing),
+        );
         publish_target_observation(
             &manifest,
             8_192,
@@ -884,10 +1138,12 @@ mod tests {
             &updates,
             &rejections,
             &refreshes,
+            &policy_matches,
         );
         assert_eq!(updates.load(Ordering::Relaxed), 1);
         assert_eq!(rejections.load(Ordering::Relaxed), 0);
         assert_eq!(refreshes.load(Ordering::Relaxed), 0);
+        assert_eq!(policy_matches.load(Ordering::Relaxed), 1);
         let profile = send_request(&manifest, "target-profile-status", json!({}), 8_192).unwrap();
         assert!(profile.ok, "{}", profile.result);
         assert_eq!(profile.result["nodes"], 1);

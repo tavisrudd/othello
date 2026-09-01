@@ -32,6 +32,9 @@ struct Args {
     budget: u32,
     #[arg(long, default_value_t = 1 << 22)]
     seen_capacity: usize,
+    /// Capture the first active root whose sizing pass has completed.
+    #[arg(long)]
+    capture_sized: bool,
     #[arg(long)]
     output: PathBuf,
     #[arg(long)]
@@ -48,15 +51,25 @@ struct RootSample {
     expected: bool,
 }
 
-#[derive(Default)]
 struct FirstPoint {
     point: Option<AlignmentSearchPoint>,
+    require_sized: bool,
 }
 
 impl FirstPoint {
+    fn new(require_sized: bool) -> Self {
+        Self {
+            point: None,
+            require_sized,
+        }
+    }
+
     #[inline]
     fn capture(&mut self, point: AlignmentSearchPoint) {
-        if self.point.is_none() && point.root_candidate.is_some() {
+        if self.point.is_none()
+            && point.root_candidate.is_some()
+            && (!self.require_sized || point.root_sized)
+        {
             self.point = Some(point);
         }
     }
@@ -151,7 +164,7 @@ fn main() -> Result<()> {
     let mut workspace = AlignmentSearchWorkspace::new(args.budget, args.seen_capacity)?;
     let mut samples = Vec::with_capacity(roots);
     for initial in 0..roots {
-        let mut control = FirstPoint::default();
+        let mut control = FirstPoint::new(args.capture_sized);
         let (answer, metrics) = search_alignment_attachment_controlled(
             &problem,
             args.budget,
@@ -198,7 +211,12 @@ fn main() -> Result<()> {
         &mut output,
         &json!({
             "schema": "ergodis-campaign-data-v0",
-            "presentation": format!("alignment-root-cost-p{}-b{}", args.points, args.budget),
+            "presentation": format!(
+                "alignment-root-cost-p{}-b{}{}",
+                args.points,
+                args.budget,
+                if args.capture_sized { "-sized" } else { "" },
+            ),
             "problem": "exact alignment root-cost classification",
             "fields": CORPUS_FIELDS,
             "rows": samples.len(),
@@ -223,6 +241,7 @@ fn main() -> Result<()> {
             "points": args.points,
             "budget": args.budget,
             "seen_capacity": args.seen_capacity,
+            "capture": if args.capture_sized { "first-sized-root" } else { "first-active-root" },
             "uncontrolled_baseline_verified": true,
             "fields": CORPUS_FIELDS,
             "median_states": median_states,

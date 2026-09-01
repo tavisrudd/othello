@@ -6,11 +6,12 @@ use ergodis::{
     search_alignment_attachment_from, AlignmentSearchWorkspace,
 };
 use serde_json::json;
+use std::fs::File;
 use std::path::PathBuf;
 
 #[path = "../alignment_control.rs"]
 mod alignment_control;
-use alignment_control::{AlignmentCampaignControl, AlignmentProfilePolicy};
+use alignment_control::{AlignmentCampaignControl, AlignmentProfilePolicy, AlignmentRoutingPolicy};
 
 #[derive(Debug, Parser)]
 #[command(about = "Opt-in alignment-attachment search with campaign safe points")]
@@ -37,6 +38,9 @@ struct Cli {
     profile_structural_branches: u64,
     #[arg(long, default_value_t = 3, requires = "evolution_profile")]
     profile_structural_packing: u64,
+    /// Apply a verified cold archive-trained policy to matching profile targets.
+    #[arg(long, requires = "evolution_profile", conflicts_with = "baseline")]
+    routing_policy: Option<PathBuf>,
     #[arg(long)]
     symmetry: bool,
     #[arg(long)]
@@ -48,6 +52,21 @@ struct Cli {
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
+    let routing_policy_path = cli
+        .routing_policy
+        .as_ref()
+        .map(|path| path.display().to_string());
+    let routing_policy = cli
+        .routing_policy
+        .as_ref()
+        .map(|path| -> Result<AlignmentRoutingPolicy> {
+            let report: serde_json::Value = serde_json::from_reader(
+                File::open(path)
+                    .with_context(|| format!("cannot open routing policy {}", path.display()))?,
+            )?;
+            AlignmentRoutingPolicy::from_report(&report).map_err(anyhow::Error::msg)
+        })
+        .transpose()?;
     let problem = compile_alignment_attachment(cli.points)?;
     let mut initial = 0_u64;
     for index in cli.initial {
@@ -72,15 +91,21 @@ fn main() -> Result<()> {
     } else {
         let manifest = read_manifest(&cli.run_dir).context("cannot read campaign manifest")?;
         let mut control = if cli.evolution_profile {
-            AlignmentCampaignControl::new_profiled(
-                manifest,
-                8192,
-                cli.progress_file,
-                AlignmentProfilePolicy {
-                    structural_branches: cli.profile_structural_branches,
-                    structural_packing: cli.profile_structural_packing,
-                },
-            )?
+            let policy = AlignmentProfilePolicy {
+                structural_branches: cli.profile_structural_branches,
+                structural_packing: cli.profile_structural_packing,
+            };
+            if let Some(routing_policy) = routing_policy {
+                AlignmentCampaignControl::new_profiled_with_routing(
+                    manifest,
+                    8192,
+                    cli.progress_file,
+                    policy,
+                    routing_policy,
+                )?
+            } else {
+                AlignmentCampaignControl::new_profiled(manifest, 8192, cli.progress_file, policy)?
+            }
         } else {
             AlignmentCampaignControl::new(manifest, 8192, cli.progress_file)?
         };
@@ -101,6 +126,8 @@ fn main() -> Result<()> {
                 "profile_updates": control.profile_updates(),
                 "profile_rejections": control.profile_rejections(),
                 "profile_refreshes": control.profile_refreshes(),
+                "profile_policy_matches": control.profile_policy_matches(),
+                "routing_policy": routing_policy_path,
                 "group": group,
             }),
         )
