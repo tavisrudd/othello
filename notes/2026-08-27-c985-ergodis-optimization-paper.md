@@ -586,6 +586,36 @@ as each coherent tranche lands.
    leverage is below the sampling resolution.  The next measured C1018
    frontier is orbit action plus projective rank/unrank on a larger closure
    wave, not linear elimination.
+
+   That next frontier is now resolved with a deliberately split admission
+   result.  Commit `e3d03395a` adds the reusable opt-in core only:
+   `BinarySmallField<H>` validates `GF(2^H)` once and removes the runtime radix
+   multiply from table lookup, while `BinaryProjectiveIndex<H>` replaces
+   base-`2^H` rank/unrank division with shifts and masks.  Degrees 3--8 agree
+   with the generic field tables and projective index, malformed field/order
+   pairings fail closed, the hot rank/unrank loop records zero allocator
+   events, and the 8-byte arithmetic view plus 40-byte read-only index have
+   asserted layouts.  Seven rotated `PG(4,64)` microkernel pairs, each with ten
+   million unrank/three-action/three-rank rounds, put generic/specialized at
+   1.156668x wall (`t=25.72`), 1.149073x cycles (`t=113.27`), 1.186957x
+   instructions, and 1.222742x branches with identical nonzero checksums.
+
+   The full application does **not** inherit that win.  The exact prototype is
+   retained as `ergodis-private/c985-binary-prs-adapter.patch` in the same
+   commit; it is not applied to the client.  On seven rotated one-thread
+   `q=64,r=5` census pairs, generic/specialized is 0.954067x wall
+   (`t=-24.36`) and 0.945398x cycles (`t=-46.56`) despite the specialized arm
+   having generic/specialized instruction and branch ratios of
+   1.184843x and 1.275831x.  Every arm
+   produces the same normalized result digest.  Worse, the generic-trait
+   adapter needed to host both arms changes default code generation: versus
+   retained commit `6fec8e9fa`, old/refactored-generic is 0.969355x cycles
+   (`t=-4.14`) and 0.957078x instructions.  The adapter refactor is therefore
+   rejected and the C1018 source restored byte-for-byte.  Existing clients
+   cannot regress; the public specialization is available only to a caller
+   whose own end-to-end gate wins.  The next PRS optimization must reduce the
+   orbit/hash critical path or compile a fused validated action without
+   perturbing the generic worker, not merely delete arithmetic instructions.
 9. **Queued — parametric certificate verifier.** C1029 demonstrates a genuine
    reach gap rather than a faster version of an existing kernel: Ergodis had no
    usable path for exact identities in `Z[t]`, finite congruence coverings, and
