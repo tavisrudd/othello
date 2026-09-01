@@ -1,4 +1,4 @@
-# C985 to C1016: type-driven hot-kernel optimization shortlist
+# C1016: type-based optimization experiments to try
 
 **Lane:** `complete-ports`
 
@@ -7,15 +7,23 @@
 **Scope:** advisory handoff only. No C1016 source, binary, report, or public
 Ergodis API was changed for this investigation.
 
-## Purpose
+## Purpose and recommendation
 
-This memo ranks the type-level representations C1016 should try to remove real
-work from its search and synthesis kernels. The common pattern is:
+This is an action memo for C1016, not a report on C985. It ranks the type-level
+representations C1016 should prototype to remove real work from its search and
+synthesis kernels. The common pattern is:
 
 `cold validation -> private typed witness -> branch-free fixed-shape kernel`.
 
-The marker may be zero-sized, but the objective is not clever typing by
-itself. A candidate is useful only when the invariant lets the hot kernel omit
+Start with `ResidualTuple<T, 7>` / `MatchingFamily<Spec>`, then
+`ShiftPack<MASK>`. Those are the two candidates most likely to speed the live
+solve because they can fuse repeated C1016 work. Try `PackedProfile<Layout>`
+and `ActivePrefix<N>` next. Use `ValidatedRegistry` for the lower-priority
+evolve/candidate-evaluation path, not as a replacement for already-specialized
+fixed adapters.
+
+The marker may be zero-sized, but the objective is not clever typing by itself.
+A candidate is useful only when the invariant lets the hot kernel omit
 validation, dynamic shape work, bounds checks, unpacking, or redundant theorem
 tests.
 
