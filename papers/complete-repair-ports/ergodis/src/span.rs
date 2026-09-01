@@ -117,6 +117,7 @@ impl GeneratedSpanTable {
             return Err(SpanError::InvalidLimits);
         }
         Prime::<P>::validate().map_err(MatrixError::from)?;
+        generator.ensure_field::<Prime<P>>()?;
         if generator.cols() > u32::MAX as usize {
             return Err(SpanError::CoordinateOverflow);
         }
@@ -405,5 +406,16 @@ mod tests {
         let answer = table.query::<3>(&target).unwrap().unwrap();
         assert_eq!(answer.cost, 1);
         assert_eq!(&*answer.support, &[0]);
+    }
+
+    #[test]
+    fn generated_span_rejects_cross_field_generator_bytes() {
+        use crate::field::Gf4;
+
+        let generator = Matrix::new_field::<Gf4>(1, 1, vec![1]).unwrap();
+        assert!(matches!(
+            GeneratedSpanTable::build::<2>(&generator),
+            Err(SpanError::Matrix(MatrixError::FieldMismatch))
+        ));
     }
 }

@@ -1,7 +1,7 @@
 //! Exact compilation of binary recovery data over characteristic-two fields.
 
 use crate::composition::{CompositionError, CostTable};
-use crate::field::FiniteField;
+use crate::field::{FiniteField, Prime};
 use crate::matrix::{Matrix, MatrixError};
 use rustc_hash::FxHashMap;
 use thiserror::Error;
@@ -224,6 +224,7 @@ pub fn compile_binary_target_subspace<F: FiniteField>(
     if target_normalization.rows() != target_coordinates.len() || target_normalization.cols() == 0 {
         return Err(TransferError::NormalizationShape);
     }
+    target_normalization.ensure_field::<Prime<2>>()?;
     if target_normalization
         .as_slice()
         .iter()
@@ -689,6 +690,15 @@ mod tests {
         assert!(matches!(
             compile_binary_target_subspace::<Gf4>(&[1, 2, 1, 2], &[0, 1], &normalization, 256, 16),
             Err(TransferError::DependentNormalization)
+        ));
+    }
+
+    #[test]
+    fn target_subspace_rejects_nonbinary_matrix_presentation() {
+        let normalization = Matrix::new_field::<Gf4>(1, 1, vec![1]).unwrap();
+        assert!(matches!(
+            compile_binary_target_subspace::<Gf4>(&[1, 1, 2], &[0], &normalization, 8, 4),
+            Err(TransferError::Matrix(MatrixError::FieldMismatch))
         ));
     }
 

@@ -1,5 +1,5 @@
 use crate::arena::{FlatMatrixArena, MatrixId};
-use crate::field::{FiniteField, Prime};
+use crate::field::{FieldPresentation, FiniteField, Prime};
 use crate::matrix::{Matrix, MatrixError};
 use rustc_hash::FxHashMap;
 use thiserror::Error;
@@ -54,6 +54,7 @@ const MAX_TOWER_DEPTH: usize = 256;
 #[derive(Clone, Debug)]
 pub struct CostTable {
     p: u8,
+    presentation: FieldPresentation,
     rows: u16,
     cols: u16,
     labels: FlatMatrixArena,
@@ -81,6 +82,7 @@ impl CostTable {
             if label.rows() != rows || label.cols() != cols {
                 return Err(CompositionError::Shape);
             }
+            label.ensure_field::<F>()?;
             best.entry(label.as_slice().into())
                 .and_modify(|old| *old = (*old).min(cost))
                 .or_insert(cost);
@@ -106,6 +108,7 @@ impl CostTable {
         }
         Ok(Self {
             p: F::ORDER,
+            presentation: F::PRESENTATION,
             rows: u16::try_from(rows).map_err(|_| CompositionError::Overflow)?,
             cols: u16::try_from(cols).map_err(|_| CompositionError::Overflow)?,
             labels,
@@ -123,7 +126,10 @@ impl CostTable {
     }
 
     pub fn cost(&self, label: &Matrix) -> Option<u32> {
-        if label.rows() != self.rows as usize || label.cols() != self.cols as usize {
+        if label.field_presentation() != self.presentation
+            || label.rows() != self.rows as usize
+            || label.cols() != self.cols as usize
+        {
             return None;
         }
         self.cost_slice(label.as_slice())
@@ -143,8 +149,8 @@ impl CostTable {
     }
 
     pub fn entries_field<F: FiniteField>(&self) -> Result<Vec<(Matrix, u32)>, CompositionError> {
-        if self.p != F::ORDER {
-            return Err(CompositionError::Shape);
+        if self.presentation != F::PRESENTATION {
+            return Err(MatrixError::FieldMismatch.into());
         }
         self.records
             .iter()
@@ -355,8 +361,16 @@ impl CompositionTable {
         let output_rows = first.rows();
         let inner_rows = inner.rows as usize;
         let demand_cols = inner.cols as usize;
-        if inner.p != F::ORDER
-            || first.cols() != inner_rows
+        if inner.presentation != F::PRESENTATION {
+            return Err(MatrixError::FieldMismatch.into());
+        }
+        if outer_blocks
+            .iter()
+            .any(|block| block.field_presentation() != F::PRESENTATION)
+        {
+            return Err(MatrixError::FieldMismatch.into());
+        }
+        if first.cols() != inner_rows
             || outer_blocks
                 .iter()
                 .any(|block| block.rows() != output_rows || block.cols() != inner_rows)
@@ -364,10 +378,10 @@ impl CompositionTable {
             return Err(CompositionError::Shape);
         }
         if let Some((target_table, target_block)) = target_inner {
-            if target_table.p != F::ORDER
-                || target_table.shape() != inner.shape()
-                || target_block >= outer_blocks.len()
-            {
+            if target_table.presentation != F::PRESENTATION {
+                return Err(MatrixError::FieldMismatch.into());
+            }
+            if target_table.shape() != inner.shape() || target_block >= outer_blocks.len() {
                 return Err(CompositionError::Shape);
             }
         }
@@ -537,10 +551,12 @@ impl CompositionTable {
         &self,
         label: &Matrix,
     ) -> Result<Option<CompositionAnswer>, CompositionError> {
-        if self.ordinary.p != F::ORDER
-            || label.rows() != self.rows as usize
-            || label.cols() != self.cols as usize
+        if self.ordinary.presentation != F::PRESENTATION
+            || label.field_presentation() != F::PRESENTATION
         {
+            return Err(MatrixError::FieldMismatch.into());
+        }
+        if label.rows() != self.rows as usize || label.cols() != self.cols as usize {
             return Err(CompositionError::Shape);
         }
         let Some(&position) = self.index.get(label.as_slice()) else {
@@ -570,8 +586,8 @@ impl CompositionTable {
     }
 
     pub fn cost_table_field<F: FiniteField>(&self) -> Result<CostTable, CompositionError> {
-        if self.ordinary.p != F::ORDER {
-            return Err(CompositionError::Shape);
+        if self.ordinary.presentation != F::PRESENTATION {
+            return Err(MatrixError::FieldMismatch.into());
         }
         let entries = self
             .records
@@ -747,10 +763,12 @@ impl CompositionTower {
         target_base: &CostTable,
     ) -> Result<(), CompositionError> {
         F::validate().map_err(MatrixError::from)?;
-        if ordinary_base.p != F::ORDER
-            || target_base.p != F::ORDER
-            || ordinary_base.shape() != target_base.shape()
+        if ordinary_base.presentation != F::PRESENTATION
+            || target_base.presentation != F::PRESENTATION
         {
+            return Err(MatrixError::FieldMismatch.into());
+        }
+        if ordinary_base.shape() != target_base.shape() {
             return Err(CompositionError::Shape);
         }
         Ok(())
@@ -1273,6 +1291,28 @@ mod tests {
         assert_eq!(answer.cost, 2);
         assert_eq!(answer.local_labels[0].as_slice(), &[1]);
         assert_eq!(answer.local_labels[1].as_slice(), &[1]);
+    }
+
+    #[test]
+    fn cost_and_composition_tables_reject_cross_field_labels() {
+        use crate::field::Gf4;
+
+        let quaternary = Matrix::new_field::<Gf4>(1, 1, vec![1]).unwrap();
+        let binary = Matrix::new::<2>(1, 1, vec![1]).unwrap();
+        let table = CostTable::from_entries_field::<Gf4>(1, 1, [(quaternary, 0)]).unwrap();
+        assert!(table.cost(&binary).is_none());
+        assert!(matches!(
+            table.entries::<2>(),
+            Err(CompositionError::Matrix(MatrixError::FieldMismatch))
+        ));
+        assert!(matches!(
+            CostTable::from_entries_field::<Gf4>(1, 1, [(binary.clone(), 0)]),
+            Err(CompositionError::Matrix(MatrixError::FieldMismatch))
+        ));
+        assert!(matches!(
+            CompositionTable::compose_field::<Gf4>(&[binary], &table),
+            Err(CompositionError::Matrix(MatrixError::FieldMismatch))
+        ));
     }
 
     #[test]

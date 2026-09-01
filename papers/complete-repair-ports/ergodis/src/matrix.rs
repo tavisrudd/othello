@@ -235,7 +235,7 @@ impl Matrix {
     }
 
     #[inline]
-    fn ensure_field<F: FiniteField>(&self) -> Result<(), MatrixError> {
+    pub(crate) fn ensure_field<F: FiniteField>(&self) -> Result<(), MatrixError> {
         if self.field != F::PRESENTATION {
             return Err(MatrixError::FieldMismatch);
         }
@@ -243,7 +243,7 @@ impl Matrix {
     }
 
     #[inline]
-    fn ensure_field_with(&self, field: &SmallField) -> Result<(), MatrixError> {
+    pub(crate) fn ensure_field_with(&self, field: &SmallField) -> Result<(), MatrixError> {
         if self.field != field.presentation() {
             return Err(MatrixError::FieldMismatch);
         }
