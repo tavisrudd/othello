@@ -5256,6 +5256,124 @@ mod tests {
         }
     }
 
+    #[allow(clippy::manual_div_ceil)] // Keep the oracle structurally distinct from production.
+    fn reference_completion_lower_bound_exceeds<
+        const SUPPORT_WORDS: usize,
+        const CHECK_WORDS: usize,
+        const LOGICAL_WORDS: usize,
+    >(
+        compiled: &CompiledWideCssDistanceImpl<SUPPORT_WORDS, CHECK_WORDS, LOGICAL_WORDS>,
+        syndrome: PackedSyndrome<CHECK_WORDS>,
+        budget: u16,
+    ) -> bool
+    where
+        PackedSyndrome<CHECK_WORDS>: WideSyndrome,
+    {
+        let syndrome_weight = syndrome.weight();
+        let required_parity = packed_dot_parity(syndrome, compiled.kernel_parity_functional);
+        let parity_mismatch =
+            compiled.kernel_weights_even && ((u32::from(budget) ^ required_parity) & 1 != 0);
+        let permitted = if parity_mismatch {
+            budget.checked_sub(1).map_or(u32::MAX, u32::from)
+        } else {
+            u32::from(budget)
+        };
+        let degree = u32::from(compiled.maximum_column_check_weight);
+        if degree == 0 {
+            return syndrome_weight != 0 && budget != u16::MAX;
+        }
+        let degree_bound = (syndrome_weight + degree - 1) / degree;
+        if degree_bound > permitted {
+            return true;
+        }
+        if degree_bound.saturating_add(SYNDROME_PACKING_ADMISSION_MARGIN) <= permitted {
+            return false;
+        }
+
+        let mut residual = syndrome;
+        let mut packed = 0_u32;
+        for word in 0..CHECK_WORDS {
+            while residual.words[word] != 0 {
+                let bit = residual.words[word].trailing_zeros() as usize;
+                packed += 1;
+                if packed > permitted {
+                    return true;
+                }
+                residual.difference_assign(compiled.check_conflicts[64 * word + bit].syndrome);
+            }
+        }
+        false
+    }
+
+    #[test]
+    fn completion_lower_bound_matches_reference_and_exact_oracle() {
+        let physical = Matrix::new::<2>(
+            3,
+            5,
+            vec![
+                1, 1, 0, 0, 0, //
+                0, 0, 1, 1, 1, //
+                1, 0, 1, 0, 0,
+            ],
+        )
+        .unwrap();
+        let logical = Matrix::new::<2>(1, 5, vec![1, 0, 0, 0, 0]).unwrap();
+        let original = CompiledWideCssDistance::compile(&physical, &logical).unwrap();
+
+        for kernel_weights_even in [false, true] {
+            for functional in [0_u64, 1, 5] {
+                for degree in 0..=3 {
+                    let mut compiled = original.clone();
+                    compiled.kernel_weights_even = kernel_weights_even;
+                    compiled.kernel_parity_functional = PackedSyndrome {
+                        words: [functional, 0, 0],
+                    };
+                    compiled.maximum_column_check_weight = degree;
+                    for mask in 0_u64..8 {
+                        let syndrome = PackedSyndrome {
+                            words: [mask, 0, 0],
+                        };
+                        for budget in [0, 1, 2, 3, 4, u16::MAX] {
+                            assert_eq!(
+                                compiled.completion_lower_bound_exceeds(syndrome, budget),
+                                reference_completion_lower_bound_exceeds(
+                                    &compiled, syndrome, budget,
+                                ),
+                                "even={kernel_weights_even} functional={functional} degree={degree} mask={mask} budget={budget}",
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        let mut minimum_completion = [u16::MAX; 8];
+        for support in 0_u64..1 << original.columns.len() {
+            let mut syndrome = PackedSyndrome::<3>::default();
+            for coordinate in 0..original.columns.len() {
+                if support & (1_u64 << coordinate) != 0 {
+                    syndrome.toggle(original.columns[coordinate].syndrome);
+                }
+            }
+            let weight = support.count_ones() as u16;
+            let slot = &mut minimum_completion[syndrome.words[0] as usize];
+            *slot = (*slot).min(weight);
+        }
+        for (mask, &minimum) in minimum_completion.iter().enumerate() {
+            let syndrome = PackedSyndrome {
+                words: [mask as u64, 0, 0],
+            };
+            for budget in 0..=5 {
+                if original.completion_lower_bound_exceeds(syndrome, budget) {
+                    assert!(
+                        minimum > budget,
+                        "mask={mask} budget={budget} minimum={minimum}"
+                    );
+                }
+            }
+        }
+    }
+
     #[test]
     fn multiplicity_capping_preserves_all_retained_completion_keys() {
         let keys = [1_u128, 1, 1, 1, 2, 2, 4];
