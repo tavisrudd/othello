@@ -1,0 +1,19 @@
+{
+  "name": "decision-tree-5-2",
+  "output": "predicate",
+  "program": [
+    { "name": "witness_slack", "op": "field" },
+    { "op": "const", "value": 0 },
+    { "op": "le" },
+    { "op": "bool", "value": false },
+    { "name": "direction_count", "op": "field" },
+    { "op": "const", "value": 1 },
+    { "op": "le" },
+    { "op": "bool", "value": false },
+    { "op": "bool", "value": true },
+    { "op": "select" },
+    { "op": "select" }
+  ],
+  "role": "diagnostic",
+  "schema": "ergodis-attack-plan-v0"
+}

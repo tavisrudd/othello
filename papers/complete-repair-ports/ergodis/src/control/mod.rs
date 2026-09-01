@@ -2160,6 +2160,40 @@ mod tests {
     }
 
     #[test]
+    fn synthesized_boolean_tree_compiles_over_multiword_truth_table() {
+        const ROWS: usize = 4_096;
+        let mut expected = vec![0_u64; ROWS.div_ceil(64)];
+        let mut values = Vec::with_capacity(ROWS * 3);
+        for row in 0..ROWS {
+            let a = (row & 1) as i64;
+            let b = ((row >> 1) & 1) as i64;
+            let c = ((row >> 2) & 1) as i64;
+            values.extend_from_slice(&[a, b, c]);
+            if (a != 0 || b != 0) && c != 0 {
+                expected[row / 64] |= 1_u64 << (row % 64);
+            }
+        }
+        let batch = FeatureBatch {
+            presentation: "truth-table".into(),
+            problem: "nested-boolean".into(),
+            fields: vec!["a".into(), "b".into(), "c".into()].into_boxed_slice(),
+            generator: None,
+            row_ids: (0..ROWS as u64).collect::<Vec<_>>().into_boxed_slice(),
+            weights: vec![1; ROWS].into_boxed_slice(),
+            expected: expected.into_boxed_slice(),
+            values: values.into_boxed_slice(),
+        };
+        let (spec, nodes, depth) = learn_decision_tree(&batch, 9, 3, None).unwrap();
+        assert!(nodes >= 5);
+        assert!(depth >= 2);
+        assert_eq!(spec.output, PlanOutput::Predicate);
+        let plan = CompiledPlan::compile(&spec, &batch.fields).unwrap();
+        let result = evaluate_plan(&batch, &plan).unwrap();
+        assert_eq!(result.weighted_correct, ROWS as u64);
+        assert_eq!(result.first_mismatch, None);
+    }
+
+    #[test]
     fn grouped_compilation_exposes_a_multiset_sum_without_key_leakage() {
         let mut values = Vec::new();
         let mut row_ids = Vec::new();
